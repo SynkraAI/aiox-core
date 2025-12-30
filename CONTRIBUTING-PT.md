@@ -1,247 +1,468 @@
 # Contribuindo para o Synkra AIOS
 
-> 🇺🇸 [English Version](CONTRIBUTING.md)
+> **[English Version](CONTRIBUTING.md)**
 
-Obrigado pelo seu interesse em contribuir para o Synkra AIOS! Este guia vai ajudá-lo a entender nosso fluxo de trabalho de desenvolvimento e processo de validação.
+Bem-vindo ao AIOS! Obrigado pelo seu interesse em contribuir. Este guia vai ajuda-lo a entender nosso fluxo de trabalho, processo de contribuicao e como submeter suas alteracoes.
 
-## 📋 Índice
+## Indice
 
-- [Começando](#começando)
-- [Fluxo de Trabalho de Desenvolvimento](#fluxo-de-trabalho-de-desenvolvimento)
-- [Sistema de Validação](#sistema-de-validação)
-- [Processo de Pull Request](#processo-de-pull-request)
-- [Padrões de Código](#padrões-de-código)
+- [Inicio Rapido](#inicio-rapido)
+- [Tipos de Contribuicoes](#tipos-de-contribuicoes)
+- [Fluxo de Desenvolvimento](#fluxo-de-desenvolvimento)
+- [Contribuindo Agents](#contribuindo-agents)
+- [Contribuindo Tasks](#contribuindo-tasks)
+- [Contribuindo Squads](#contribuindo-squads)
+- [Processo de Code Review](#processo-de-code-review)
+- [Sistema de Validacao](#sistema-de-validacao)
+- [Padroes de Codigo](#padroes-de-codigo)
 - [Requisitos de Testes](#requisitos-de-testes)
-- [Desenvolvimento Orientado por Stories](#desenvolvimento-orientado-por-stories)
+- [Perguntas Frequentes](#perguntas-frequentes)
+- [Obtendo Ajuda](#obtendo-ajuda)
 
-## Começando
+---
 
-### Pré-requisitos
+## Inicio Rapido
 
-- Node.js >=20.0.0
-- npm
-- GitHub CLI (`gh`)
-- Git
-
-### Configuração
-
-1. **Faça fork e clone o repositório**
+### 1. Fork e Clone
 
 ```bash
+# Faca fork via GitHub UI, depois clone seu fork
 git clone https://github.com/SEU_USUARIO/aios-core.git
 cd aios-core
+
+# Adicione o remote upstream
+git remote add upstream https://github.com/SynkraAI/aios-core.git
 ```
 
-2. **Instale as dependências**
+### 2. Configure o Ambiente de Desenvolvimento
+
+**Pre-requisitos:**
+
+- Node.js >= 20.0.0
+- npm
+- Git
+- GitHub CLI (`gh`) - opcional mas recomendado
 
 ```bash
+# Instale as dependencias
 npm install
-```
 
-3. **Verifique a configuração**
-
-```bash
-# Execute os testes
+# Verifique a configuracao
 npm test
-
-# Execute o linting
 npm run lint
-
-# Execute a verificação de tipos
 npm run typecheck
 ```
 
-## Fluxo de Trabalho de Desenvolvimento
-
-O Synkra AIOS usa uma abordagem de desenvolvimento orientada por stories com um sistema de validação em múltiplas camadas.
-
-### 1. Crie uma Branch de Feature
+### 3. Crie uma Branch
 
 ```bash
 git checkout -b feature/nome-da-sua-feature
 ```
 
-Convenções de nomenclatura de branches:
-- `feature/` - Novas funcionalidades
-- `bugfix/` - Correções de bugs
-- `docs/` - Atualizações de documentação
-- `refactor/` - Refatoração de código
-- `test/` - Adições/melhorias de testes
+**Convencoes de Nomenclatura:**
+| Prefixo | Uso |
+|---------|-----|
+| `feature/` | Novas funcionalidades, agents, tasks |
+| `fix/` | Correcoes de bugs |
+| `docs/` | Atualizacoes de documentacao |
+| `refactor/` | Refatoracao de codigo |
+| `test/` | Adicoes/melhorias de testes |
 
-### 2. Trabalhe em uma Story
+### 4. Faca Suas Alteracoes
 
-Todo desenvolvimento é orientado por stories em `docs/stories/`. Veja [Desenvolvimento Orientado por Stories](#desenvolvimento-orientado-por-stories) abaixo.
+Siga o guia relevante abaixo para seu tipo de contribuicao.
 
-### 3. Faça Commit das Alterações
-
-Commits disparam o **hook pre-commit** que valida:
-- ✅ ESLint (qualidade de código)
-- ✅ TypeScript (verificação de tipos)
+### 5. Execute a Validacao Local
 
 ```bash
-git add .
-git commit -m "feat: adicionar nova funcionalidade [Story X.X]"
+npm run lint      # Estilo de codigo
+npm run typecheck # Verificacao de tipos
+npm test          # Executar testes
+npm run build     # Verificar build
 ```
 
-**Formato da Mensagem de Commit:**
-```
-<tipo>: <descrição> [Story X.X]
-
-<corpo opcional>
-```
-
-Tipos: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
-
-### 4. Faça Push das Alterações
-
-O push dispara o **hook pre-push** que valida:
-- ✅ Conclusão das checkboxes da story
-- ✅ Consistência do status da story
+### 6. Push e Crie o PR
 
 ```bash
 git push origin feature/nome-da-sua-feature
 ```
 
-### 5. Crie um Pull Request
+Depois crie um Pull Request no GitHub apontando para a branch `main`.
 
-```bash
-gh pr create --title "feat: Adicionar nova funcionalidade" --body "Descrição das alterações"
+---
+
+## Tipos de Contribuicoes
+
+| Contribuicao          | Descricao                            | Dificuldade |
+| --------------------- | ------------------------------------ | ----------- |
+| **Documentacao**      | Corrigir erros, melhorar guias       | Facil       |
+| **Correcoes de Bugs** | Corrigir issues reportadas           | Facil-Medio |
+| **Tasks**             | Adicionar novos workflows de tarefas | Medio       |
+| **Agents**            | Criar novas personas de agentes IA   | Medio       |
+| **Squads**            | Pacote de agents + tasks + workflows | Avancado    |
+| **Core Features**     | Melhorias no framework               | Avancado    |
+
+---
+
+## Fluxo de Desenvolvimento
+
+### Convencoes de Commit
+
+Usamos [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+<tipo>: <descricao>
+
+<corpo opcional>
 ```
 
-O **pipeline de CI/CD** vai executar:
-- ✅ Validação ESLint
-- ✅ Verificação de tipos TypeScript
-- ✅ Testes Jest com cobertura
-- ✅ Validação de story
+**Tipos:** `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
 
-## Sistema de Validação
+**Exemplos:**
 
-O AIOS implementa uma estratégia de **Defesa em Profundidade** com 3 camadas de validação:
-
-### Camada 1: Pre-commit (Local - Rápida)
-
-**Propósito:** Capturar problemas antes de serem commitados
-**Performance:** <5s
-**Ferramentas:**
-- ESLint com cache
-- Compilação incremental TypeScript
-
-**O que verifica:**
-- Consistência de estilo de código
-- Erros de tipo
-- Erros de sintaxe
-- Problemas de import
-
-**Pular se necessário (NÃO recomendado):**
 ```bash
-git commit --no-verify
+git commit -m "feat(agent): adicionar agent security-auditor"
+git commit -m "fix: resolver memory leak no config loader"
+git commit -m "docs: atualizar guia de contribuicao"
 ```
 
-### Camada 2: Pre-push (Local - Validação de Stories)
+### Processo de Pull Request
 
-**Propósito:** Garantir consistência da story antes do push
-**Performance:** <2s
-**Ferramentas:**
-- Validador de checkboxes de story
+1. **Crie o PR** apontando para a branch `main`
+2. **Verificacoes automaticas** executam (lint, typecheck, test, build)
+3. **Review do CodeRabbit** fornece feedback automatizado
+4. **Review do maintainer** - minimo 1 aprovacao necessaria
+5. **Merge** apos todas as verificacoes passarem
 
-**O que verifica:**
-- Conclusão das checkboxes vs status
-- Seções obrigatórias presentes
-- Consistência de status
+---
 
-**Exemplo de validação:**
+## Contribuindo Agents
+
+Agents sao personas de IA com expertise e comandos especificos.
+
+### Localizacao do Arquivo
+
+```
+.aios-core/development/agents/seu-agent.md
+```
+
+### Estrutura Obrigatoria
+
 ```yaml
-status: "completed"
-acceptance_criteria:
-  - tasks:
-    - "[x] Tarefa 1"  # Deve estar marcada
-    - "[ ] Tarefa 2"  # ❌ Erro: incompleta mas status=completed
+agent:
+  name: NomeDoAgent
+  id: agent-id # kebab-case, unico
+  title: Titulo Descritivo
+  icon: emoji
+  whenToUse: 'Quando ativar este agent'
+
+persona_profile:
+  archetype: Builder | Analyst | Guardian | Operator | Strategist
+
+  communication:
+    tone: pragmatic | friendly | formal | analytical
+    emoji_frequency: none | low | medium | high
+
+    vocabulary:
+      - termo-dominio-1
+      - termo-dominio-2
+
+    greeting_levels:
+      minimal: 'Saudacao curta'
+      named: 'Saudacao com nome e personalidade'
+      archetypal: 'Saudacao arquetipal completa'
+
+    signature_closing: 'Frase de assinatura'
+
+persona:
+  role: 'Papel principal do agent'
+  style: 'Estilo de comunicacao'
+  identity: 'Descricao da identidade'
+  focus: 'No que o agent foca'
+
+  core_principles:
+    - Principio 1
+    - Principio 2
+
+commands:
+  - help: Mostrar comandos disponiveis
+  - comando-custom: Descricao do comando
+
+dependencies:
+  tasks:
+    - task-relacionada.md
+  tools:
+    - nome-ferramenta
 ```
 
-### Camada 3: CI/CD (Cloud - Obrigatório para Merge)
+### Checklist para Agents
 
-**Propósito:** Validação final antes do merge
-**Performance:** ~2-5 minutos
-**Plataforma:** GitHub Actions
+- [ ] ID do agent e unico e usa kebab-case
+- [ ] `persona_profile` esta completo com archetype e communication
+- [ ] Todos os comandos tem descricoes
+- [ ] Dependencies listam todas as tasks necessarias
+- [ ] Sem credenciais ou dados sensiveis hardcoded
+- [ ] Segue padroes existentes no codebase
 
-**O que verifica:**
-- Todos os erros de lint e tipo
-- Suite de testes passa
-- Cobertura de código ≥80%
-- Validação de story
-- Regras de proteção de branch
+### Template de PR para Agents
 
-## Processo de Pull Request
+Use o template **Agent Contribution** ao criar seu PR.
 
-### Antes de Criar o PR
+---
 
-1. ✅ Todos os testes passam localmente
-2. ✅ Checkboxes da story correspondem ao status
-3. ✅ Código segue o guia de estilo
-4. ✅ Documentação atualizada
+## Contribuindo Tasks
 
-### Requisitos do PR
+Tasks sao workflows executaveis que agents podem rodar.
 
-- **Título:** Título claro e descritivo seguindo convenções de commit
-- **Descrição:** Explicar o quê e por quê (não como)
-- **Referência à Story:** Link para o arquivo de story relacionado
-- **Testes:** Incluir testes para nova funcionalidade
-- **Documentação:** Atualizar docs relevantes
+### Localizacao do Arquivo
 
-### Processo de Revisão do PR
+```
+.aios-core/development/tasks/sua-task.md
+```
 
-1. **Verificações Automatizadas** - CI deve passar
-2. **Revisão de Código** - Pelo menos 1 aprovação necessária
-3. **Proteção de Branch** - Branch master é protegida
-4. **Estratégia de Merge** - Squash and merge (histórico linear)
+### Estrutura Obrigatoria
 
-## Padrões de Código
+```markdown
+# Nome da Task
+
+**Descricao:** O que esta task faz
+**Agent(s):** @dev, @qa, etc.
+**Elicit:** true | false
+
+---
+
+## Pre-requisitos
+
+- Pre-requisito 1
+- Pre-requisito 2
+
+## Passos
+
+### Passo 1: Primeiro Passo
+
+Descricao do que fazer.
+
+**Ponto de Elicitacao (se elicit: true):**
+
+- Pergunta para o usuario
+- Opcoes a apresentar
+
+### Passo 2: Segundo Passo
+
+Continue com mais passos...
+
+## Entregaveis
+
+- [ ] Entregavel 1
+- [ ] Entregavel 2
+
+## Tratamento de Erros
+
+Se X acontecer, faca Y.
+
+---
+
+## Dependencias
+
+- `dependencia-1.md`
+- `dependencia-2.md`
+```
+
+### Checklist para Tasks
+
+- [ ] Task tem descricao e proposito claros
+- [ ] Passos sao sequenciais e logicos
+- [ ] Pontos de elicitacao sao claros (se aplicavel)
+- [ ] Entregaveis estao bem definidos
+- [ ] Orientacao de tratamento de erros incluida
+- [ ] Dependencias existem no codebase
+
+### Template de PR para Tasks
+
+Use o template **Task Contribution** ao criar seu PR.
+
+---
+
+## Contribuindo Squads
+
+Squads sao pacotes de agents, tasks e workflows relacionados.
+
+### Estrutura de Squad
+
+```
+seu-squad/
+├── manifest.yaml       # Metadados do squad
+├── agents/
+│   └── seu-agent.md
+├── tasks/
+│   └── sua-task.md
+└── workflows/
+    └── seu-workflow.yaml
+```
+
+### Manifesto do Squad
+
+```yaml
+name: seu-squad
+version: 1.0.0
+description: O que este squad faz
+author: Seu Nome
+dependencies:
+  - base-squad (opcional)
+agents:
+  - seu-agent
+tasks:
+  - sua-task
+```
+
+### Recursos para Squads
+
+- [Guia de Squads](docs/guides/squads-guide.md) - Documentacao completa
+- [Template de Squad](templates/squad/) - Comece de um template funcional
+- [Discussoes de Squads](https://github.com/SynkraAI/aios-core/discussions/categories/ideas) - Compartilhe ideias
+
+---
+
+## Processo de Code Review
+
+### Verificacoes Automaticas
+
+Quando voce submete um PR, as seguintes verificacoes executam automaticamente:
+
+| Verificacao    | Descricao                    | Obrigatoria |
+| -------------- | ---------------------------- | ----------- |
+| **ESLint**     | Estilo e qualidade de codigo | Sim         |
+| **TypeScript** | Verificacao de tipos         | Sim         |
+| **Build**      | Verificacao de build         | Sim         |
+| **Tests**      | Suite de testes Jest         | Sim         |
+| **Coverage**   | Minimo 80% cobertura         | Sim         |
+
+### Review do CodeRabbit
+
+[CodeRabbit](https://coderabbit.ai) automaticamente revisa seu PR e fornece feedback sobre:
+
+- Qualidade de codigo e boas praticas
+- Preocupacoes de seguranca
+- Padroes especificos do AIOS (agents, tasks, workflows)
+- Problemas de performance
+
+**Niveis de Severidade:**
+
+| Nivel        | Acao Necessaria                                |
+| ------------ | ---------------------------------------------- |
+| **CRITICAL** | Deve corrigir antes do merge                   |
+| **HIGH**     | Fortemente recomendado corrigir                |
+| **MEDIUM**   | Considere corrigir ou documente como tech debt |
+| **LOW**      | Melhoria opcional                              |
+
+**Respondendo ao CodeRabbit:**
+
+- Enderece issues CRITICAL e HIGH antes de solicitar review
+- Issues MEDIUM podem ser documentadas para follow-up
+- Issues LOW sao informativas
+
+### Review do Maintainer
+
+Apos as verificacoes automaticas passarem, um maintainer ira:
+
+1. Verificar se as alteracoes atendem aos padroes do projeto
+2. Checar implicacoes de seguranca
+3. Garantir que a documentacao foi atualizada
+4. Aprovar ou solicitar alteracoes
+
+### Requisitos para Merge
+
+- [ ] Todas as verificacoes de CI passam
+- [ ] Pelo menos 1 aprovacao de maintainer
+- [ ] Todas as conversas resolvidas
+- [ ] Sem conflitos de merge
+- [ ] Branch atualizada com main
+
+---
+
+## Sistema de Validacao
+
+AIOS implementa uma estrategia de **Defesa em Profundidade** com 3 camadas de validacao:
+
+### Camada 1: Pre-commit (Local)
+
+**Performance:** < 5 segundos
+
+- ESLint com cache
+- Compilacao incremental TypeScript
+- IDE sync (auto-stage de arquivos de comando IDE)
+
+### Camada 2: Pre-push (Local)
+
+**Performance:** < 2 segundos
+
+- Validacao de checkboxes de story
+- Verificacoes de consistencia de status
+
+### Camada 3: CI/CD (Cloud)
+
+**Performance:** 2-5 minutos
+
+- Lint e verificacao de tipos completos
+- Suite de testes completa
+- Relatorio de cobertura
+- Validacao de story
+- Regras de protecao de branch
+
+---
+
+## Padroes de Codigo
 
 ### JavaScript/TypeScript
 
-- Use recursos ES2022
+- Recursos ES2022
 - Prefira `const` sobre `let`
 - Use async/await sobre promises
-- Adicione comentários JSDoc para APIs públicas
-- Siga o estilo de código existente
+- Adicione comentarios JSDoc para APIs publicas
+- Siga o estilo de codigo existente
 
-### Organização de Arquivos
+### Organizacao de Arquivos
 
 ```
 .aios-core/
-├── agents/       # Definições de agentes
-├── tasks/        # Workflows de tarefas
-├── workflows/    # Workflows multi-etapas
-├── utils/        # Funções utilitárias
-└── templates/    # Templates de arquivos
+├── development/
+│   ├── agents/      # Definicoes de agents
+│   ├── tasks/       # Workflows de tasks
+│   └── workflows/   # Workflows multi-etapas
+├── core/            # Utilitarios core
+└── product/
+    └── templates/   # Templates de documentos
 
 docs/
-├── stories/      # Stories de desenvolvimento
-├── prd/          # Requisitos de produto
-└── architecture/ # Arquitetura do sistema
+├── guides/          # Guias do usuario
+└── architecture/    # Arquitetura do sistema
 ```
 
-### Configuração ESLint
+### ESLint & TypeScript
 
 - Estende: `eslint:recommended`, `@typescript-eslint/recommended`
-- Cache habilitado (`.eslintcache`)
-- Sem console.log em código de produção (avisos)
-
-### Configuração TypeScript
-
 - Target: ES2022
 - Modo strict habilitado
-- Compilação incremental
-- Módulos CommonJS
+- Sem console.log em producao (avisos)
+
+---
 
 ## Requisitos de Testes
 
-### Cobertura de Testes
+### Requisitos de Cobertura
 
-- **Mínimo:** 80% de cobertura (branches, funções, linhas, statements)
-- **Testes Unitários:** Obrigatórios para todas as novas funções
-- **Testes de Integração:** Obrigatórios para workflows
-- **Arquivos de Teste:** `*.test.js` ou no diretório `tests/`
+- **Minimo:** 80% cobertura (branches, funcoes, linhas, statements)
+- **Testes Unitarios:** Obrigatorios para todas as novas funcoes
+- **Testes de Integracao:** Obrigatorios para workflows
+
+### Executando Testes
+
+```bash
+npm test                    # Executar todos os testes
+npm run test:coverage       # Com relatorio de cobertura
+npm run test:watch          # Modo watch
+npm test -- caminho/para/teste.js # Arquivo especifico
+```
 
 ### Escrevendo Testes
 
@@ -254,137 +475,67 @@ describe('MeuModulo', () => {
 });
 ```
 
-### Executando Testes
+---
+
+## Perguntas Frequentes
+
+### P: Quanto tempo demora o review?
+
+**R:** Nosso objetivo e o primeiro review em 24-48 horas. Alteracoes complexas podem demorar mais.
+
+### P: Posso contribuir sem testes?
+
+**R:** Testes sao fortemente encorajados. Para alteracoes apenas de documentacao, testes podem nao ser necessarios.
+
+### P: E se meu PR tiver conflitos?
+
+**R:** Faca rebase da sua branch na main mais recente:
 
 ```bash
-# Executar todos os testes
-npm test
-
-# Executar com cobertura
-npm run test:coverage
-
-# Modo watch
-npm run test:watch
-
-# Arquivo de teste específico
-npm test -- caminho/para/teste.js
+git fetch upstream
+git rebase upstream/main
+git push --force-with-lease
 ```
 
-## Desenvolvimento Orientado por Stories
+### P: Posso contribuir em portugues?
 
-### O que é uma Story?
+**R:** Sim! Aceitamos PRs em portugues. Voce esta lendo o guia certo!
 
-Stories são arquivos YAML em `docs/stories/` que definem:
-- Requisitos da feature
-- Critérios de aceitação
-- Tarefas de implementação
-- Detalhes técnicos
+### P: Como me torno um maintainer?
 
-### Estrutura da Story
+**R:** Contribuicoes consistentes e de alta qualidade ao longo do tempo. Comece com pequenas correcoes e avance para features maiores.
 
-```yaml
-id: "X.X"
-title: "Título da Story"
-status: "ready" | "in progress" | "Ready for Review" | "completed"
-acceptance_criteria:
-  - name: "Critério 1"
-    tasks:
-      - "[ ] Tarefa 1"
-      - "[x] Tarefa 2"  # Marque como concluída com [x]
-dev_agent_record:
-  agent_model: "claude-sonnet-4-5"
-  implementation_date: "2025-01-23"
-```
+### P: Minhas verificacoes de CI estao falhando. O que faco?
 
-### Trabalhando com Stories
+**R:** Verifique os logs do GitHub Actions:
 
-1. **Leia a story** - Entenda os requisitos
-2. **Atualize checkboxes** - Marque tarefas como concluídas `[x]`
-3. **Atualize status** - Mude o status quando apropriado
-4. **Atualize lista de arquivos** - Rastreie arquivos modificados
-5. **Adicione notas de conclusão** - Documente decisões
-
-### Fluxo de Status da Story
-
-```
-ready → in progress → Ready for Review → completed
-```
-
-**Regras:**
-- Status `ready`: Nenhuma tarefa deve estar marcada
-- Status `in progress`: Algumas tarefas marcadas
-- Status `completed`: Todas as tarefas devem estar marcadas
-
-## Problemas Comuns e Soluções
-
-### Hook Pre-commit Falha
-
-**Erros ESLint:**
 ```bash
-npm run lint -- --fix  # Auto-corrigir problemas
+gh pr checks  # Ver status das verificacoes do PR
 ```
 
-**Erros TypeScript:**
-```bash
-npm run typecheck  # Ver todos os erros
-```
+Correcoes comuns:
 
-### Hook Pre-push Falha
-
-**Erros de validação de story:**
-```bash
-node .aios-core/utils/aios-validator.js stories  # Verificar todas as stories
-```
-
-**Corrigir inconsistências de story:**
-- Garanta que checkboxes correspondam ao status
-- Adicione seções obrigatórias faltantes
-- Atualize dev_agent_record
-
-### CI Falha
-
-**Verificar logs do CI:**
-```bash
-gh pr checks  # Ver verificações do PR
-```
-
-**Correções comuns:**
-- Rebase no master mais recente
-- Corrigir falhas de teste localmente
-- Aumentar cobertura de teste
-- Atualizar validação de story
-
-## Criando Squads
-
-Quer estender o AIOS com nova funcionalidade?
-
-Veja nosso [Guia de Squads](docs/guides/squads-guide.md) para:
-- Estrutura de Squad e formato de manifesto
-- Criando agentes, tarefas e workflows
-- Testando e publicando seu Squad
-- Diretrizes de integração
-
-### Links Rápidos
-- [Template de Squad](templates/squad/) - Comece de um template funcional
-- [Exemplos de Squads](docs/guides/squad-examples/) - Aprenda com exemplos
-- [Discussões de Squads](https://github.com/SynkraAI/aios-core/discussions/categories/ideas) - Compartilhe suas ideias de Squad
-
-## Recursos Adicionais
-
-- 📖 [Guia da Comunidade](COMMUNITY-PT.md) - Como participar da comunidade AIOS
-- 📖 [Guia de Squads](docs/guides/squads-guide.md) - Crie e publique equipes de agentes IA
-- 📖 [Guia de Git Workflow](docs/git-workflow-guide.md) - Documentação detalhada do workflow
-- 📖 [Guia do Usuário](aios-core/user-guide.md) - Guia completo do usuário
-- 📖 [Arquitetura](docs/architecture.md) - Arquitetura do sistema
-- 🗺️ [Roadmap](ROADMAP-PT.md) - Veja o que está planejado e influencie nossa direção
-- 💬 [GitHub Discussions](https://github.com/SynkraAI/aios-core/discussions) - Hub da comunidade
-
-## Dúvidas?
-
-- Abra uma [issue](https://github.com/SynkraAI/aios-core/issues)
-- Inicie uma [discussão](https://github.com/SynkraAI/aios-core/discussions)
-- Leia o [Guia da Comunidade](COMMUNITY-PT.md)
+- Execute `npm run lint -- --fix` para problemas de estilo
+- Execute `npm run typecheck` para ver erros de tipo
+- Garanta que os testes passam localmente antes do push
 
 ---
 
-**Obrigado por contribuir para o Synkra AIOS!** 🚀
+## Obtendo Ajuda
+
+- **GitHub Issues:** [Abra uma issue](https://github.com/SynkraAI/aios-core/issues)
+- **Discussoes:** [Inicie uma discussao](https://github.com/SynkraAI/aios-core/discussions)
+- **Comunidade:** [COMMUNITY-PT.md](COMMUNITY-PT.md)
+
+---
+
+## Recursos Adicionais
+
+- [Guia da Comunidade](COMMUNITY-PT.md) - Como participar
+- [Guia de Squads](docs/guides/squads-guide.md) - Crie equipes de agents
+- [Arquitetura](docs/architecture/) - Design do sistema
+- [Roadmap](ROADMAP-PT.md) - Direcao do projeto
+
+---
+
+**Obrigado por contribuir para o Synkra AIOS!**
