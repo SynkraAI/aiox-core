@@ -123,7 +123,7 @@ async function validateFiles(fileContext = {}) {
       });
     }
 
-    // Validate .mcp.json (Story 1.5)
+    // Validate .mcp.json (Story 1.5) - Optional, only check if exists
     const mcpConfigPath = fileContext.mcpConfig || '.mcp.json';
     if (fs.existsSync(mcpConfigPath)) {
       results.checks.push({
@@ -132,18 +132,11 @@ async function validateFiles(fileContext = {}) {
         status: 'success',
         message: 'Created',
       });
-    } else {
-      // MCP config is optional - only warning if MCPs were selected
-      results.warnings.push({
-        severity: 'low',
-        message: '.mcp.json missing - MCPs may not have been installed',
-        file: mcpConfigPath,
-        code: 'MCP_CONFIG_MISSING',
-      });
     }
+    // Note: .mcp.json is optional, no warning if missing
 
-    // Validate directory structure
-    const requiredDirs = ['.aios-core', '.aios'];
+    // Validate directory structure - only .aios-core is required
+    const requiredDirs = ['.aios-core'];
     for (const dir of requiredDirs) {
       if (fs.existsSync(dir) && fs.statSync(dir).isDirectory()) {
         results.checks.push({
@@ -153,9 +146,9 @@ async function validateFiles(fileContext = {}) {
           message: 'Exists',
         });
       } else {
-        results.warnings.push({
-          severity: 'medium',
-          message: `Directory missing: ${dir}`,
+        results.errors.push({
+          severity: 'high',
+          message: `Required directory missing: ${dir}`,
           file: dir,
           code: 'DIRECTORY_MISSING',
         });

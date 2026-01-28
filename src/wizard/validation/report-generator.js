@@ -29,7 +29,7 @@ async function generateReport(validationResults) {
     lines.push(formatComponentSection('IDE Configuration', fileResults, 'IDE Config'));
     lines.push(formatComponentSection('Environment Configuration', fileResults, 'Environment'));
     lines.push(formatComponentSection('Core Configuration', fileResults, 'Core Config'));
-    if (fileResults.checks.some(c => c.component === 'MCP Config')) {
+    if (fileResults.checks.some((c) => c.component === 'MCP Config')) {
       lines.push(formatComponentSection('MCP Configuration', fileResults, 'MCP Config'));
     }
   }
@@ -50,11 +50,14 @@ async function generateReport(validationResults) {
   lines.push(formatOverallStatus(validationResults));
   lines.push(chalk.bold('═══════════════════════════════════════════════'));
 
-  // Warnings Section
-  if (validationResults.warnings.length > 0) {
+  // Warnings Section - only show high severity warnings
+  const importantWarnings = validationResults.warnings.filter(
+    (w) => w.severity === 'high' || w.severity === 'critical'
+  );
+  if (importantWarnings.length > 0) {
     lines.push('');
-    lines.push(chalk.bold.yellow(`⚠️  Warnings (${validationResults.warnings.length}):`));
-    validationResults.warnings.forEach(warning => {
+    lines.push(chalk.bold.yellow(`⚠️  Warnings (${importantWarnings.length}):`));
+    importantWarnings.forEach((warning) => {
       lines.push(chalk.yellow(`  - ${warning.message}`));
       if (warning.solution) {
         lines.push(chalk.dim(`    Solution: ${warning.solution}`));
@@ -66,7 +69,7 @@ async function generateReport(validationResults) {
   if (validationResults.errors.length > 0) {
     lines.push('');
     lines.push(chalk.bold.red(`❌ Errors (${validationResults.errors.length}):`));
-    validationResults.errors.forEach(error => {
+    validationResults.errors.forEach((error) => {
       lines.push(chalk.red(`  - ${error.message}`));
       if (error.solution) {
         lines.push(chalk.dim(`    Solution: ${error.solution}`));
@@ -74,26 +77,18 @@ async function generateReport(validationResults) {
     });
   }
 
-  // Next Steps
-  if (validationResults.overallStatus === 'success') {
-    lines.push('');
-    lines.push(chalk.bold.green('✅ Next Steps:'));
-    lines.push(chalk.green('  1. Configure API keys in .env (if skipped)'));
-    lines.push(chalk.green('  2. Run your first AIOS command: aios --help'));
-    lines.push(chalk.green('  3. Start coding! 🚀'));
-  } else if (validationResults.overallStatus === 'warning') {
-    lines.push('');
-    lines.push(chalk.bold.yellow('⚠️  Next Steps:'));
-    lines.push(chalk.yellow('  1. Review warnings above'));
-    lines.push(chalk.yellow('  2. Fix recommended issues'));
-    lines.push(chalk.yellow('  3. Re-run validation if needed'));
-  } else if (validationResults.overallStatus === 'partial' || validationResults.overallStatus === 'failed') {
+  // Next Steps - only show for errors
+  if (
+    validationResults.overallStatus === 'partial' ||
+    validationResults.overallStatus === 'failed'
+  ) {
     lines.push('');
     lines.push(chalk.bold.red('❌ Next Steps:'));
     lines.push(chalk.red('  1. Review errors above'));
     lines.push(chalk.red('  2. Fix critical issues'));
     lines.push(chalk.red('  3. Re-run installation: npx @SynkraAI/aios@latest init'));
   }
+  // Success cases show completion message in showCompletion()
 
   lines.push('');
 
@@ -105,22 +100,18 @@ async function generateReport(validationResults) {
  * @private
  */
 function formatComponentSection(title, componentResults, componentName) {
-  const checks = componentResults.checks.filter(c => c.component === componentName);
+  const checks = componentResults.checks.filter((c) => c.component === componentName);
 
   if (checks.length === 0) return '';
 
-  const allSuccess = checks.every(c => c.status === 'success');
+  const allSuccess = checks.every((c) => c.status === 'success');
   const icon = allSuccess ? chalk.green('✅') : chalk.yellow('⚠️');
 
-  const lines = [
-    `${icon} ${chalk.bold(title)}`,
-  ];
+  const lines = [`${icon} ${chalk.bold(title)}`];
 
-  checks.forEach(check => {
+  checks.forEach((check) => {
     const statusIcon = check.status === 'success' ? chalk.green('✓') : chalk.yellow('⚠');
-    const message = check.file
-      ? `${check.message} (${check.file})`
-      : check.message;
+    const message = check.file ? `${check.message} (${check.file})` : check.message;
     lines.push(`  ${statusIcon} ${message}`);
   });
 
@@ -141,21 +132,22 @@ function formatMCPSection(mcpResults) {
   }
 
   const totalMCPs = healthChecks.length;
-  const healthyMCPs = healthChecks.filter(h => h.status === 'success').length;
-  const warningMCPs = healthChecks.filter(h => h.status === 'warning').length;
-  const failedMCPs = healthChecks.filter(h => h.status === 'failed').length;
+  const healthyMCPs = healthChecks.filter((h) => h.status === 'success').length;
+  const warningMCPs = healthChecks.filter((h) => h.status === 'warning').length;
+  const failedMCPs = healthChecks.filter((h) => h.status === 'failed').length;
 
-  const icon = healthyMCPs === totalMCPs
-    ? chalk.green('✅')
-    : healthyMCPs > 0
-      ? chalk.yellow('⚠️')
-      : chalk.red('❌');
+  const icon =
+    healthyMCPs === totalMCPs
+      ? chalk.green('✅')
+      : healthyMCPs > 0
+        ? chalk.yellow('⚠️')
+        : chalk.red('❌');
 
   const lines = [
     `${icon} ${chalk.bold('MCP Installation')} (${healthyMCPs}/${totalMCPs} healthy${warningMCPs > 0 ? `, ${warningMCPs} warnings` : ''}${failedMCPs > 0 ? `, ${failedMCPs} failed` : ''})`,
   ];
 
-  healthChecks.forEach(health => {
+  healthChecks.forEach((health) => {
     let statusIcon, statusText;
 
     switch (health.status) {
@@ -180,9 +172,7 @@ function formatMCPSection(mcpResults) {
         statusText = health.message;
     }
 
-    const responseTime = health.responseTime
-      ? chalk.dim(` (${health.responseTime}ms)`)
-      : '';
+    const responseTime = health.responseTime ? chalk.dim(` (${health.responseTime}ms)`) : '';
 
     lines.push(`  ${statusIcon} ${health.mcp} - ${statusText}${responseTime}`);
   });
@@ -197,14 +187,14 @@ function formatMCPSection(mcpResults) {
  * @private
  */
 function formatDependenciesSection(depsResults) {
-  const allSuccess = depsResults.checks.every(c => c.status === 'success' || c.status === 'skipped');
+  const allSuccess = depsResults.checks.every(
+    (c) => c.status === 'success' || c.status === 'skipped'
+  );
   const icon = allSuccess ? chalk.green('✅') : chalk.yellow('⚠️');
 
-  const lines = [
-    `${icon} ${chalk.bold('Dependencies')}`,
-  ];
+  const lines = [`${icon} ${chalk.bold('Dependencies')}`];
 
-  depsResults.checks.forEach(check => {
+  depsResults.checks.forEach((check) => {
     let statusIcon, statusText;
 
     switch (check.status) {
@@ -236,27 +226,21 @@ function formatDependenciesSection(depsResults) {
 function formatOverallStatus(validationResults) {
   const status = validationResults.overallStatus;
   const errorCount = validationResults.errors.length;
-  const warningCount = validationResults.warnings.length;
 
   switch (status) {
     case 'success':
-      return chalk.bold.green(
-        `Overall Status: ✅ SUCCESS${warningCount > 0 ? ` (${warningCount} warning${warningCount !== 1 ? 's' : ''})` : ''}`,
-      );
-
     case 'warning':
-      return chalk.bold.yellow(
-        `Overall Status: ⚠️  SUCCESS WITH WARNINGS (${warningCount} warning${warningCount !== 1 ? 's' : ''})`,
-      );
+      // Treat warnings as success - they're just informational
+      return chalk.bold.green('Overall Status: ✅ All checks passed!');
 
     case 'partial':
       return chalk.bold.yellow(
-        `Overall Status: ⚠️  PARTIAL SUCCESS (${errorCount} error${errorCount !== 1 ? 's' : ''}, ${warningCount} warning${warningCount !== 1 ? 's' : ''})`,
+        `Overall Status: ⚠️  PARTIAL SUCCESS (${errorCount} issue${errorCount !== 1 ? 's' : ''} to review)`
       );
 
     case 'failed':
       return chalk.bold.red(
-        `Overall Status: ❌ FAILED (${errorCount} error${errorCount !== 1 ? 's' : ''})`,
+        `Overall Status: ❌ FAILED (${errorCount} error${errorCount !== 1 ? 's' : ''})`
       );
 
     default:

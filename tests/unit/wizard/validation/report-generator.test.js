@@ -18,9 +18,7 @@ describe('Report Generator', () => {
         components: {
           files: {
             success: true,
-            checks: [
-              { component: 'IDE Config', status: 'success', message: 'Created' },
-            ],
+            checks: [{ component: 'IDE Config', status: 'success', message: 'Created' }],
             errors: [],
             warnings: [],
           },
@@ -54,11 +52,11 @@ describe('Report Generator', () => {
       // Then
       expect(report).toContain('Installation Validation Report');
       expect(report).toContain('Overall Status');
-      expect(report).toContain('SUCCESS');
+      expect(report).toContain('All checks passed');
     });
 
-    it('should generate report with warnings', async () => {
-      // Given
+    it('should generate report with high severity warnings', async () => {
+      // Given - only high/critical severity warnings are shown
       const validationResults = {
         components: {
           files: { success: true, checks: [], errors: [], warnings: [] },
@@ -67,9 +65,7 @@ describe('Report Generator', () => {
           dependencies: { success: true, checks: [], errors: [], warnings: [] },
         },
         errors: [],
-        warnings: [
-          { component: 'mcps', severity: 'medium', message: 'MCP health check timeout' },
-        ],
+        warnings: [{ component: 'mcps', severity: 'high', message: 'MCP health check timeout' }],
         overallStatus: 'warning',
       };
 
@@ -90,9 +86,7 @@ describe('Report Generator', () => {
           mcps: { success: true, healthChecks: [], errors: [], warnings: [] },
           dependencies: { success: true, checks: [], errors: [], warnings: [] },
         },
-        errors: [
-          { component: 'files', severity: 'critical', message: '.env file missing' },
-        ],
+        errors: [{ component: 'files', severity: 'critical', message: '.env file missing' }],
         warnings: [],
         overallStatus: 'failed',
       };
@@ -115,12 +109,8 @@ describe('Report Generator', () => {
           mcps: { success: true, healthChecks: [], errors: [], warnings: [] },
           dependencies: { success: true, checks: [], errors: [], warnings: [] },
         },
-        errors: [
-          { component: 'configs', severity: 'high', message: 'YAML parse error' },
-        ],
-        warnings: [
-          { component: 'dependencies', severity: 'low', message: '3 vulnerabilities' },
-        ],
+        errors: [{ component: 'configs', severity: 'high', message: 'YAML parse error' }],
+        warnings: [{ component: 'dependencies', severity: 'high', message: '3 vulnerabilities' }],
         overallStatus: 'partial',
       };
 
@@ -141,7 +131,12 @@ describe('Report Generator', () => {
           files: {
             success: true,
             checks: [
-              { component: 'IDE Config', file: '.cursor/settings.json', status: 'success', message: 'Created' },
+              {
+                component: 'IDE Config',
+                file: '.cursor/settings.json',
+                status: 'success',
+                message: 'Created',
+              },
               { component: 'Environment', file: '.env', status: 'success', message: 'Created' },
             ],
             errors: [],
@@ -173,8 +168,18 @@ describe('Report Generator', () => {
           files: {
             success: true,
             checks: [
-              { component: 'Environment', file: '.env', status: 'success', message: 'Validated (5 variables)' },
-              { component: 'Core Config', file: 'core-config.yaml', status: 'success', message: 'Valid YAML' },
+              {
+                component: 'Environment',
+                file: '.env',
+                status: 'success',
+                message: 'Validated (5 variables)',
+              },
+              {
+                component: 'Core Config',
+                file: 'core-config.yaml',
+                status: 'success',
+                message: 'Valid YAML',
+              },
             ],
             errors: [],
             warnings: [],
@@ -260,35 +265,50 @@ describe('Report Generator', () => {
       expect(report).toContain('247 packages');
     });
 
-    it('should display overall status (success/warning/partial/failed)', async () => {
-      // Given - Test each status
-      const statuses = ['success', 'warning', 'partial', 'failed'];
+    it('should display overall status correctly for each state', async () => {
+      // Given - Test success and warning (both show "All checks passed!")
+      const successResults = {
+        components: {
+          files: { success: true, checks: [], errors: [], warnings: [] },
+          configs: { success: true, checks: [], errors: [], warnings: [] },
+          mcps: { success: true, healthChecks: [], errors: [], warnings: [] },
+          dependencies: { success: true, checks: [], errors: [], warnings: [] },
+        },
+        errors: [],
+        warnings: [],
+        overallStatus: 'success',
+      };
+      let report = await generateReport(successResults);
+      expect(report).toContain('Overall Status');
+      expect(report).toContain('All checks passed');
 
-      for (const status of statuses) {
-        const validationResults = {
-          components: {
-            files: { success: true, checks: [], errors: [], warnings: [] },
-            configs: { success: true, checks: [], errors: [], warnings: [] },
-            mcps: { success: true, healthChecks: [], errors: [], warnings: [] },
-            dependencies: { success: true, checks: [], errors: [], warnings: [] },
-          },
-          errors: [],
-          warnings: [],
-          overallStatus: status,
-        };
+      // Test warning (also shows "All checks passed!")
+      successResults.overallStatus = 'warning';
+      report = await generateReport(successResults);
+      expect(report).toContain('All checks passed');
 
-        // When
-        const report = await generateReport(validationResults);
+      // Test partial
+      const partialResults = {
+        ...successResults,
+        errors: [{ message: 'test' }],
+        overallStatus: 'partial',
+      };
+      report = await generateReport(partialResults);
+      expect(report).toContain('PARTIAL');
 
-        // Then
-        expect(report).toContain('Overall Status');
-        expect(report.toLowerCase()).toContain(status.toLowerCase());
-      }
+      // Test failed
+      const failedResults = {
+        ...successResults,
+        errors: [{ message: 'test' }],
+        overallStatus: 'failed',
+      };
+      report = await generateReport(failedResults);
+      expect(report).toContain('FAILED');
     });
 
-    it('should list warnings section when warnings present', async () => {
-      // Given
-      const validationResults = {
+    it('should list warnings section only for high/critical severity warnings', async () => {
+      // Given - low severity warnings (should NOT be shown)
+      const lowSeverityResults = {
         components: {
           files: { success: true, checks: [], errors: [], warnings: [] },
           configs: { success: true, checks: [], errors: [], warnings: [] },
@@ -297,19 +317,29 @@ describe('Report Generator', () => {
         },
         errors: [],
         warnings: [
-          { component: 'mcps', severity: 'low', message: 'Warning 1' },
-          { component: 'deps', severity: 'medium', message: 'Warning 2' },
+          { component: 'mcps', severity: 'low', message: 'Low Warning' },
+          { component: 'deps', severity: 'medium', message: 'Medium Warning' },
         ],
         overallStatus: 'warning',
       };
 
-      // When
-      const report = await generateReport(validationResults);
+      let report = await generateReport(lowSeverityResults);
+      expect(report).not.toContain('Warnings');
+      expect(report).not.toContain('Low Warning');
 
-      // Then
+      // Given - high severity warnings (SHOULD be shown)
+      const highSeverityResults = {
+        ...lowSeverityResults,
+        warnings: [
+          { component: 'mcps', severity: 'high', message: 'High Warning 1' },
+          { component: 'deps', severity: 'critical', message: 'Critical Warning 2' },
+        ],
+      };
+
+      report = await generateReport(highSeverityResults);
       expect(report).toContain('Warnings');
-      expect(report).toContain('Warning 1');
-      expect(report).toContain('Warning 2');
+      expect(report).toContain('High Warning 1');
+      expect(report).toContain('Critical Warning 2');
     });
 
     it('should list errors section when errors present', async () => {
@@ -338,9 +368,9 @@ describe('Report Generator', () => {
       expect(report).toContain('Error 2');
     });
 
-    it('should display next steps section', async () => {
-      // Given
-      const validationResults = {
+    it('should display next steps section only for errors', async () => {
+      // Given - success case (no next steps shown)
+      const successResults = {
         components: {
           files: { success: true, checks: [], errors: [], warnings: [] },
           configs: { success: true, checks: [], errors: [], warnings: [] },
@@ -352,11 +382,19 @@ describe('Report Generator', () => {
         overallStatus: 'success',
       };
 
-      // When
-      const report = await generateReport(validationResults);
+      const successReport = await generateReport(successResults);
+      expect(successReport).not.toContain('Next Steps');
+      expect(successReport).toContain('All checks passed');
 
-      // Then
-      expect(report).toContain('Next Steps');
+      // Given - error case (next steps shown)
+      const errorResults = {
+        ...successResults,
+        errors: [{ message: 'Test error', severity: 'high' }],
+        overallStatus: 'failed',
+      };
+
+      const errorReport = await generateReport(errorResults);
+      expect(errorReport).toContain('Next Steps');
     });
 
     it('should handle empty validation results', async () => {
