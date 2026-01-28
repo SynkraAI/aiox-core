@@ -165,6 +165,9 @@ commands:
   - remove-mcp: Remove MCP server from Docker MCP Toolkit
   - setup-mcp-docker: Initial Docker MCP Toolkit configuration [Story 5.11]
 
+  # Documentation Quality
+  - check-docs: Verify documentation links integrity (broken, incorrect markings)
+
   # Utilities
   - session-info: Show current session details (agent history, commands)
   - guide: Show comprehensive usage guide for this agent
@@ -184,6 +187,8 @@ dependencies:
     - search-mcp.md
     - add-mcp.md
     - setup-mcp-docker.md
+    # Documentation Quality
+    - check-docs-links.md
   templates:
     - github-pr-template.md
     - github-actions-ci.yml
