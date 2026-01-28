@@ -39,6 +39,42 @@ The MCP Global System allows you to configure MCP servers once and share them ac
     └── .gitignore            # Prevents accidental commits
 ```
 
+### Recommended Architecture
+
+Based on production configurations, the recommended MCP setup uses two layers:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    ~/.claude.json                            │
+│                   (User MCPs - Direct)                       │
+├─────────────────────────────────────────────────────────────┤
+│  desktop-commander  │ Persistent sessions, REPL, fuzzy edit │
+│  docker-gateway     │ Gateway for containerized MCPs        │
+│  playwright         │ Browser automation                    │
+│  n8n-mcp           │ Workflow automation (optional)         │
+└─────────────────────────────────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│              docker-gateway (58+ tools)                      │
+│            (MCPs inside Docker - No token cost)              │
+├─────────────────────────────────────────────────────────────┤
+│  Apify        │ Web scraping, social media extraction       │
+│  Context7     │ Library documentation lookup                │
+│  EXA          │ Web search and research                     │
+│  + others     │ Any MCP that runs in containers             │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Why this architecture?**
+
+| MCP Location                 | Token Cost        | Use Case                                     |
+| ---------------------------- | ----------------- | -------------------------------------------- |
+| **Direct in ~/.claude.json** | Normal            | MCPs that need host access (files, terminal) |
+| **Inside docker-gateway**    | **No extra cost** | MCPs that don't need host access (APIs, web) |
+
+MCPs running inside docker-gateway are encapsulated in containers, so their tool definitions don't add overhead to the Claude conversation context.
+
 ---
 
 ## Platform-Specific Paths

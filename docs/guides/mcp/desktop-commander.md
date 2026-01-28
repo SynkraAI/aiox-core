@@ -15,42 +15,6 @@ Guide for using Desktop Commander MCP server with Claude Code for advanced termi
 
 Desktop Commander is an MCP server that extends Claude Code with advanced capabilities for local environment management. It provides features that Claude Code's native tools cannot do, making it essential for certain workflows.
 
-### Recommended MCP Architecture
-
-Based on production configurations, the recommended MCP setup is:
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                    ~/.claude.json                            │
-│                   (User MCPs - Direct)                       │
-├─────────────────────────────────────────────────────────────┤
-│  desktop-commander  │ Persistent sessions, REPL, fuzzy edit │
-│  docker-gateway     │ Gateway for containerized MCPs        │
-│  playwright         │ Browser automation                    │
-│  n8n-mcp           │ Workflow automation (optional)         │
-└─────────────────────────────────────────────────────────────┘
-                              │
-                              ▼
-┌─────────────────────────────────────────────────────────────┐
-│              docker-gateway (58+ tools)                      │
-│            (MCPs inside Docker - No token cost)              │
-├─────────────────────────────────────────────────────────────┤
-│  Apify        │ Web scraping, social media extraction       │
-│  Context7     │ Library documentation lookup                │
-│  EXA          │ Web search and research                     │
-│  + others     │ Any MCP that runs in containers             │
-└─────────────────────────────────────────────────────────────┘
-```
-
-**Why this architecture?**
-
-| MCP Location                 | Token Cost        | Use Case                                     |
-| ---------------------------- | ----------------- | -------------------------------------------- |
-| **Direct in ~/.claude.json** | Normal            | MCPs that need host access (files, terminal) |
-| **Inside docker-gateway**    | **No extra cost** | MCPs that don't need host access (APIs, web) |
-
-**Key insight from Pedro Valério:** "Apify eu tenho no docker-gateway pq não consome tokens" - MCPs running inside docker-gateway are encapsulated in containers, so their tool definitions don't add overhead to the Claude conversation context.
-
 ### When to Use Desktop Commander
 
 | Use Case                            | Native Claude Code | Desktop Commander |
