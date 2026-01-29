@@ -11,24 +11,29 @@ const describeOnWindows = isWindows ? describe : describe.skip;
 describeOnWindows('Windows 10 Installation', () => {
   const testTimeout = 5 * 60 * 1000; // 5 minutes
 
-  it('should complete installation in < 5 minutes', async () => {
-    const startTime = Date.now();
+  it(
+    'should complete installation in < 5 minutes',
+    async () => {
+      const startTime = Date.now();
 
-    // Note: This test requires running npx @allfluence/aios@latest init
-    // in a fresh directory. Run manually for end-to-end validation.
+      // Note: This test requires running npx @synkraai/aios@latest init
+      // in a fresh directory. Run manually for end-to-end validation.
 
-    // For CI/CD, verify installer exists and is executable
-    const installerPath = path.join(__dirname, '../../../bin/aios-init.js');
-    const installerExists = await fs.access(installerPath)
-      .then(() => true)
-      .catch(() => false);
+      // For CI/CD, verify installer exists and is executable
+      const installerPath = path.join(__dirname, '../../../bin/aios-init.js');
+      const installerExists = await fs
+        .access(installerPath)
+        .then(() => true)
+        .catch(() => false);
 
-    expect(installerExists).toBe(true);
+      expect(installerExists).toBe(true);
 
-    // Measure time (placeholder for actual install)
-    const duration = (Date.now() - startTime) / 1000 / 60;
-    expect(duration).toBeLessThan(5);
-  }, testTimeout);
+      // Measure time (placeholder for actual install)
+      const duration = (Date.now() - startTime) / 1000 / 60;
+      expect(duration).toBeLessThan(5);
+    },
+    testTimeout
+  );
 
   it('should handle backslash paths correctly', async () => {
     // Test path.join() usage in installer
@@ -46,7 +51,10 @@ describeOnWindows('Windows 10 Installation', () => {
 
   it('should work with PowerShell 5.1', async () => {
     // Verify PowerShell execution policy documentation exists
-    const storyPath = path.join(__dirname, '../../../docs/stories/v2.1/sprint-1/story-1.10a-windows-testing.md');
+    const storyPath = path.join(
+      __dirname,
+      '../../../docs/stories/v2.1/sprint-1/story-1.10a-windows-testing.md'
+    );
     const storyContent = await fs.readFile(storyPath, 'utf-8');
 
     // Check for PowerShell execution policy documentation
@@ -57,7 +65,8 @@ describeOnWindows('Windows 10 Installation', () => {
   it('should verify CRLF line ending configuration', async () => {
     // Check .gitattributes exists
     const gitattributesPath = path.join(__dirname, '../../../.gitattributes');
-    const gitattributesExists = await fs.access(gitattributesPath)
+    const gitattributesExists = await fs
+      .access(gitattributesPath)
       .then(() => true)
       .catch(() => false);
 

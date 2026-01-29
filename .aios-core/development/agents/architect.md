@@ -270,8 +270,8 @@ dependencies:
 
     workflow: |
       When reviewing architectural changes:
-      1. Run: wsl bash -c 'cd /mnt/c/Users/AllFluence-User/Workspaces/AIOS/AIOS-V4/@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted' (for ongoing work)
-      2. Or: wsl bash -c 'cd /mnt/c/Users/AllFluence-User/Workspaces/AIOS/AIOS-V4/@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only --base main' (for feature branches)
+      1. Run: wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted' (for ongoing work)
+      2. Or: wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only --base main' (for feature branches)
       3. Focus on issues that impact:
          - System scalability
          - Security posture

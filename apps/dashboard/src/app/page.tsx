@@ -11,6 +11,7 @@ import { GitHubPanel } from '@/components/github';
 import { RoadmapView } from '@/components/roadmap';
 import { InsightsPanel } from '@/components/insights';
 import { ContextPanel } from '@/components/context';
+import { MonitorPanel } from '@/components/monitor';
 import { FAB, HelpFAB } from '@/components/ui/fab';
 import { useStories } from '@/hooks/use-stories';
 import type { Story, SidebarView } from '@/types';
@@ -102,6 +103,9 @@ function ViewContent({ view, onStoryClick, onRefresh, isLoading }: ViewContentPr
 
     case 'context':
       return <ContextPanel />;
+
+    case 'monitor':
+      return <MonitorPanel className="h-full" />;
 
     default:
       return <PlaceholderView title={view} description="Coming soon" />;

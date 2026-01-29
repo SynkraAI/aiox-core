@@ -315,7 +315,7 @@ coderabbit_integration:
 
   workflow: |
     When reviewing database changes:
-    1. BEFORE migration: Run wsl bash -c 'cd /mnt/c/Users/AllFluence-User/Workspaces/AIOS/AIOS-V4/@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted' on migration files
+    1. BEFORE migration: Run wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted' on migration files
     2. Focus review on:
        - Security: SQL injection, RLS bypass, data exposure
        - Performance: Missing indexes, inefficient queries

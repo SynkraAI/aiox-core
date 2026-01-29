@@ -15,6 +15,7 @@ Synkra AIOS is released under the **MIT License**. See the [LICENSE](LICENSE) fi
 ### Summary of MIT License Rights
 
 You **MAY**:
+
 - ✅ Use the Software for personal or commercial projects
 - ✅ Modify the Software to suit your needs
 - ✅ Distribute copies of the Software
@@ -23,16 +24,18 @@ You **MAY**:
 - ✅ Sublicense the Software
 
 You **MUST**:
+
 - ✅ Include the original copyright notice in all copies
 - ✅ Include the license text in all substantial portions
 
 ## Restrictions
 
 You may **NOT**:
+
 - ❌ Remove or alter copyright notices from the Software
-- ❌ Use AllFluence Inc. trademarks without written permission
+- ❌ Use SynkraAI Inc. trademarks without written permission
 - ❌ Hold the authors or copyright holders liable for any damages
-- ❌ Claim authorship or endorsement by AllFluence Inc.
+- ❌ Claim authorship or endorsement by SynkraAI Inc.
 - ❌ Use the project name in a way that implies official endorsement
 
 ## Disclaimer of Warranties
@@ -48,11 +51,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ## Limitation of Liability
 
-IN NO EVENT SHALL THE AUTHORS, COPYRIGHT HOLDERS, OR ALLFLUENCE INC. BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+IN NO EVENT SHALL THE AUTHORS, COPYRIGHT HOLDERS, OR SYNKRAAI INC. BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ### Scope of Limitation
 
 This limitation applies to:
+
 - Direct, indirect, incidental, or consequential damages
 - Loss of profits, data, or business opportunities
 - Service interruptions or data breaches
@@ -71,7 +75,8 @@ For detailed contribution guidelines, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Trademarks
 
-The following are trademarks or registered trademarks of AllFluence Inc.:
+The following are trademarks or registered trademarks of SynkraAI Inc.:
+
 - "AIOS"
 - "Synkra AIOS"
 - "Synkra"
@@ -80,11 +85,13 @@ The following are trademarks or registered trademarks of AllFluence Inc.:
 ### Trademark Usage Guidelines
 
 You **MAY**:
+
 - Refer to the project by name for identification purposes
 - Use the name in documentation when describing compatibility
 - Use the name in blog posts, articles, or reviews
 
 You may **NOT**:
+
 - Use trademarks in product names without permission
 - Modify or alter the logos
 - Use trademarks in a way suggesting endorsement
@@ -125,6 +132,7 @@ Any disputes arising from these terms will be resolved through:
 ## Changes to Terms
 
 We reserve the right to modify these terms at any time. Changes will be:
+
 - Effective immediately upon posting
 - Documented in the [CHANGELOG](CHANGELOG.md)
 - Communicated through release notes
@@ -137,7 +145,7 @@ If any provision of these terms is found to be unenforceable, the remaining prov
 
 ## Entire Agreement
 
-These Terms of Use, together with the [LICENSE](LICENSE), [Privacy Policy](PRIVACY.md), and [Code of Conduct](CODE_OF_CONDUCT.md), constitute the entire agreement between you and AllFluence Inc. regarding use of Synkra AIOS.
+These Terms of Use, together with the [LICENSE](LICENSE), [Privacy Policy](PRIVACY.md), and [Code of Conduct](CODE_OF_CONDUCT.md), constitute the entire agreement between you and SynkraAI Inc. regarding use of Synkra AIOS.
 
 ## Contact
 
@@ -149,4 +157,4 @@ For questions about these terms:
 
 ---
 
-**Copyright (c) 2025 AllFluence Inc. All rights reserved.**
+**Copyright (c) 2025 SynkraAI Inc. All rights reserved.**

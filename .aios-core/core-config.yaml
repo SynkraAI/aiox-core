@@ -323,7 +323,7 @@ coderabbit_integration:
   wsl_config:
     distribution: Ubuntu
     installation_path: ~/.local/bin/coderabbit
-    working_directory: /mnt/c/Users/AllFluence-User/Workspaces/AIOS/SynkraAI/aios-core
+    working_directory: ${PROJECT_ROOT}
 
   # Self-healing configuration
   self_healing:
@@ -347,9 +347,9 @@ coderabbit_integration:
   # CLI commands (WSL wrapper for Windows)
   commands:
     qa_pre_review_uncommitted: |
-      wsl bash -c 'cd /mnt/c/Users/AllFluence-User/Workspaces/AIOS/SynkraAI/aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
+      wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
     qa_story_review_committed: |
-      wsl bash -c 'cd /mnt/c/Users/AllFluence-User/Workspaces/AIOS/SynkraAI/aios-core && ~/.local/bin/coderabbit --prompt-only -t committed --base main'
+      wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t committed --base main'
 
   report_location: docs/qa/coderabbit-reports/
 

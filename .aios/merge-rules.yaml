@@ -1,0 +1,270 @@
+# AIOS Merge Rules Configuration
+# Project-specific rules that override default SemanticMergeEngine behavior
+#
+# Usage: Place this file at .aios/merge-rules.yaml in your project root
+# The SemanticMergeEngine will automatically load and merge these rules
+# with the defaults, giving precedence to project-specific settings.
+#
+# Version: 1.0.0
+
+# ============================================================================
+# COMPATIBILITY RULES
+# ============================================================================
+# Define which change type combinations are compatible (can auto-merge)
+# or incompatible (need AI/human resolution)
+
+compatibility:
+  # Custom rules for this project
+  # Format: changeTypeA:changeTypeB
+  rules:
+    # Example: Allow auto-merge of function modifications in specific patterns
+    # function_modified:function_modified:
+    #   compatible: false
+    #   strategy: ai_required
+    #   severity: medium
+    #   reason: "Same function modified by multiple tasks"
+
+    # Example: Mark import conflicts as low priority for this project
+    # import_removed:import_modified:
+    #   compatible: false
+    #   strategy: take_newer
+    #   severity: low
+    #   reason: "Import changes are managed by tooling"
+
+# ============================================================================
+# FILE PATTERNS
+# ============================================================================
+# Define file patterns for special handling
+
+file_patterns:
+  # Files to skip during merge (never process)
+  skip:
+    - "node_modules/**"
+    - ".git/**"
+    - "package-lock.json"
+    - "yarn.lock"
+    - "pnpm-lock.yaml"
+    - "*.log"
+    - "*.min.*"
+    - "dist/**"
+    - "build/**"
+    - "coverage/**"
+    - ".next/**"
+    - ".nuxt/**"
+
+  # Files to always auto-merge (low risk)
+  auto_merge:
+    - "*.md"
+    - "*.txt"
+    - ".gitignore"
+    - "*.yaml"
+    - "*.yml"
+
+  # Files requiring human review (high risk)
+  human_review:
+    - "package.json"
+    - "tsconfig.json"
+    - "*.config.js"
+    - "*.config.ts"
+    - ".env*"
+    - "Dockerfile*"
+    - "docker-compose*.yml"
+
+  # Files where AI resolution is preferred
+  ai_preferred:
+    - "src/**/*.ts"
+    - "src/**/*.tsx"
+    - "src/**/*.js"
+    - "src/**/*.jsx"
+
+# ============================================================================
+# LANGUAGE-SPECIFIC RULES
+# ============================================================================
+# Override default behavior for specific languages
+
+languages:
+  javascript:
+    # Patterns to extract for semantic analysis
+    patterns:
+      imports: true
+      functions: true
+      classes: true
+      variables: true
+      jsx: true
+
+    # Import handling
+    imports:
+      # Automatically deduplicate imports
+      deduplicate: true
+      # Sort imports alphabetically
+      sort: true
+      # Group imports by type (external, internal, relative)
+      group: true
+
+  typescript:
+    patterns:
+      imports: true
+      functions: true
+      classes: true
+      variables: true
+      jsx: true
+      types: true
+      interfaces: true
+
+    imports:
+      deduplicate: true
+      sort: true
+      group: true
+
+  python:
+    patterns:
+      imports: true
+      functions: true
+      classes: true
+
+    imports:
+      deduplicate: true
+      sort: true
+
+  css:
+    patterns:
+      selectors: true
+      properties: true
+
+    # CSS-specific: prefer later declarations
+    conflict_resolution: take_newer
+
+# ============================================================================
+# MERGE STRATEGIES
+# ============================================================================
+# Define custom merge strategies
+
+strategies:
+  # Default strategy for unknown combinations
+  default: ai_required
+
+  # Strategy for specific scenarios
+  scenarios:
+    # Both tasks add different functions
+    parallel_additions:
+      strategy: combine
+      order: alphabetical
+
+    # Both tasks modify same function
+    concurrent_modifications:
+      strategy: ai_required
+      prompt_template: |
+        Analyze the intent of each modification and create a merged version
+        that preserves the functionality from both tasks. Consider:
+        1. What was the original function doing?
+        2. What does Task A's version add/change?
+        3. What does Task B's version add/change?
+        4. Can both changes coexist?
+
+    # One task removes what another modifies
+    remove_vs_modify:
+      strategy: human_required
+      reason: "Conflicting intent - one task removes, another modifies"
+
+# ============================================================================
+# AI CONFIGURATION
+# ============================================================================
+# Configure AI-assisted merge resolution
+
+ai:
+  # Enable/disable AI resolution
+  enabled: true
+
+  # Maximum context tokens for AI calls
+  max_context_tokens: 4000
+
+  # Confidence threshold (0.0-1.0)
+  confidence_threshold: 0.7
+
+  # Maximum AI calls per merge operation
+  max_calls_per_merge: 10
+
+  # Custom system prompt additions
+  system_prompt_additions: |
+    Additional context for this project:
+    - This is an AIOS Framework project
+    - Follow AIOS coding conventions
+    - Preserve existing patterns and styles
+
+# ============================================================================
+# CONFLICT SEVERITY THRESHOLDS
+# ============================================================================
+# Define severity levels based on project needs
+
+severity:
+  # Lines changed threshold for severity escalation
+  lines_threshold:
+    low: 10
+    medium: 50
+    high: 100
+    critical: 200
+
+  # Function count threshold
+  functions_threshold:
+    low: 1
+    medium: 3
+    high: 5
+    critical: 10
+
+  # Auto-escalate to human review if severity >= threshold
+  human_review_threshold: high
+
+# ============================================================================
+# HOOKS
+# ============================================================================
+# Custom hooks for merge events
+
+hooks:
+  # Run before merge starts
+  pre_merge: null
+  # Example: pre_merge: "npm run lint"
+
+  # Run after successful merge
+  post_merge: null
+  # Example: post_merge: "npm run test"
+
+  # Run when conflict is detected
+  on_conflict: null
+  # Example: on_conflict: "npm run conflict-handler"
+
+  # Run when human review is needed
+  on_human_review: null
+  # Example: on_human_review: "npm run notify-reviewer"
+
+# ============================================================================
+# NOTIFICATIONS
+# ============================================================================
+# Configure merge notifications
+
+notifications:
+  # Notify on merge completion
+  on_complete: true
+
+  # Notify on conflicts requiring attention
+  on_conflict: true
+
+  # Channels (future: slack, email, etc.)
+  channels: []
+
+# ============================================================================
+# METADATA
+# ============================================================================
+# Project-specific metadata
+
+metadata:
+  # Project name
+  project: "aios-core"
+
+  # Rules version
+  version: "1.0.0"
+
+  # Last updated
+  updated: "2026-01-29"
+
+  # Maintainer
+  maintainer: "AIOS Team"

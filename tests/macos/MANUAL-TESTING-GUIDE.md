@@ -1,4 +1,5 @@
 # Manual Testing Guide for macOS
+
 **Story 1.10b - macOS Testing & Validation**
 
 This guide provides step-by-step instructions for manually testing AIOS on macOS (Intel and Apple Silicon).
@@ -27,12 +28,14 @@ This guide provides step-by-step instructions for manually testing AIOS on macOS
 ## Prerequisites
 
 ### Required Software
+
 - **macOS Version:** 10.15 (Catalina) or newer
 - **Node.js:** Version 18 or higher
 - **npm:** Included with Node.js
 - **Terminal:** Built-in Terminal.app or iTerm2
 
 ### Optional Software
+
 - **Homebrew:** Package manager for macOS
 - **Git:** Version control (usually pre-installed)
 
@@ -94,10 +97,11 @@ uname -m
 #### 2. Run Installer
 
 ```bash
-npx @allfluence/aios@latest init
+npx @synkraai/aios@latest init
 ```
 
 **Follow the wizard prompts:**
+
 - Accept default settings unless specific configuration is needed
 - Note any errors or warnings
 - Record installation time
@@ -117,6 +121,7 @@ aios health
 ```
 
 **Expected Health Check Output:**
+
 ```
 ✓ Browser - Healthy
 ✓ Context7 - Healthy
@@ -132,6 +137,7 @@ file $(which node)
 ```
 
 ### ✅ Pass Criteria
+
 - [ ] Installation completes without errors
 - [ ] All 4 MCPs show as healthy
 - [ ] `aios` command works
@@ -161,7 +167,7 @@ sysctl -n machdep.cpu.brand_string
 #### 2. Run Installer
 
 ```bash
-npx @allfluence/aios@latest init
+npx @synkraai/aios@latest init
 ```
 
 #### 3. Verify Native ARM Execution
@@ -173,6 +179,7 @@ file $(which node)
 ```
 
 If running under Rosetta:
+
 ```bash
 # This is acceptable but not optimal
 # Recommend installing native ARM Node.js
@@ -192,6 +199,7 @@ aios health
 ```
 
 ### ✅ Pass Criteria
+
 - [ ] Installation completes without errors
 - [ ] All 4 MCPs show as healthy
 - [ ] Node.js runs natively on ARM (preferred)
@@ -248,6 +256,7 @@ exit
 ```
 
 ### ✅ Pass Criteria
+
 - [ ] Works in zsh
 - [ ] Works in bash
 - [ ] PATH persists across sessions
@@ -289,6 +298,7 @@ ls -la $(which aios)
 ```
 
 ### ✅ Pass Criteria
+
 - [ ] All paths use forward slashes
 - [ ] Tilde (~/) expands correctly
 - [ ] Symlinks work properly
@@ -323,6 +333,7 @@ git config --get core.autocrlf
 ```
 
 ### ✅ Pass Criteria
+
 - [ ] All files use LF endings (not CRLF)
 - [ ] No `^M` characters in files
 - [ ] Git configured correctly
@@ -369,6 +380,7 @@ npm list -g --depth=0
 ```
 
 ### ✅ Pass Criteria
+
 - [ ] Scripts are executable
 - [ ] Config files have correct permissions
 - [ ] User owns all AIOS files
@@ -420,6 +432,7 @@ pnpm --version
 ```
 
 ### ✅ Pass Criteria
+
 - [ ] Homebrew detected (if installed)
 - [ ] Correct prefix for architecture
 - [ ] npm works without sudo
@@ -438,12 +451,13 @@ pnpm --version
 
 ```bash
 # Time the full installation
-time npx @allfluence/aios@latest init
+time npx @synkraai/aios@latest init
 # Target: < 5 minutes (300 seconds)
 ```
 
 **Record the time:**
-- real: ______ seconds
+
+- real: **\_\_** seconds
 - Pass if < 300s
 
 #### 2. Measure Health Check Time
@@ -478,6 +492,7 @@ df -h ~
 ```
 
 ### ✅ Pass Criteria
+
 - [ ] Installation < 5 minutes
 - [ ] Health check < 10 seconds
 - [ ] CLI responds instantly
@@ -507,6 +522,7 @@ csrutil status
 #### 2. Verify No Security Prompts
 
 During installation and normal use, verify:
+
 - [ ] No unexpected security prompts
 - [ ] No "unidentified developer" warnings for AIOS
 - [ ] No permission requests beyond expected
@@ -520,6 +536,7 @@ codesign -v $(which node)
 ```
 
 ### ✅ Pass Criteria
+
 - [ ] Gatekeeper compatibility confirmed
 - [ ] No unexpected security prompts
 - [ ] SIP enabled (if desired)
@@ -555,27 +572,30 @@ aios health
 
 ```bash
 # Interrupt installation (Ctrl+C mid-install)
-npx @allfluence/aios@latest init
+npx @synkraai/aios@latest init
 # Press Ctrl+C after a few seconds
 
 # Re-run installation
-npx @allfluence/aios@latest init
+npx @synkraai/aios@latest init
 # Should detect partial state and resume/cleanup
 ```
 
 #### 3. Verify Error Messages
 
 Intentionally trigger errors:
+
 - Missing Node.js: Uninstall Node temporarily
 - Permission denied: `chmod 000 ~/.aios`
 - Network timeout: Disconnect internet
 
 **Check that error messages are:**
+
 - [ ] Clear and actionable
 - [ ] Include system information
 - [ ] Suggest recovery steps
 
 ### ✅ Pass Criteria
+
 - [ ] Rollback works correctly
 - [ ] Can recover from partial installation
 - [ ] Error messages are helpful
@@ -592,6 +612,7 @@ Intentionally trigger errors:
 **Symptom:** Installation exits with error
 
 **Solution:**
+
 ```bash
 # Check Node.js version
 node --version  # Should be 18+
@@ -600,7 +621,7 @@ node --version  # Should be 18+
 npm ping
 
 # Try with verbose logging
-npx @allfluence/aios@latest init --verbose
+npx @synkraai/aios@latest init --verbose
 ```
 
 #### Command Not Found
@@ -608,6 +629,7 @@ npx @allfluence/aios@latest init --verbose
 **Symptom:** `bash: aios: command not found`
 
 **Solution:**
+
 ```bash
 # Check if installed
 ls -la ~/.aios
@@ -627,6 +649,7 @@ export PATH="$HOME/.aios/bin:$PATH"
 **Symptom:** Cannot execute scripts or commands
 
 **Solution:**
+
 ```bash
 # Fix script permissions
 chmod +x ~/.aios/bin/*.sh
@@ -644,6 +667,7 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 **Symptom:** `aios health` shows unhealthy MCPs
 
 **Solution:**
+
 ```bash
 # Reinstall specific MCP
 aios mcp reinstall <mcp-name>
@@ -664,6 +688,7 @@ ping npmjs.com
 When reporting test failures, include:
 
 1. **System Information:**
+
    ```bash
    sw_vers > system-info.txt
    uname -a >> system-info.txt
@@ -686,6 +711,7 @@ When reporting test failures, include:
 ### Submitting Reports
 
 Create an issue in the project repository with:
+
 - Title: `[Story 1.10b] Test Failure: <AC#> - <Description>`
 - Label: `testing`, `macos`
 - Include all information above

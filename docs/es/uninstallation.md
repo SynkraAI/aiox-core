@@ -29,6 +29,7 @@ Esta guía proporciona instrucciones completas para desinstalar Synkra AIOS de s
 ### Consideraciones Importantes
 
 ⚠️ **Advertencia**: Desinstalar Synkra AIOS:
+
 - Eliminará todos los archivos del framework
 - Borrará configuraciones de agentes (a menos que se preserven)
 - Limpiará datos de la capa de memoria (a menos que se respalden)
@@ -86,6 +87,7 @@ npx @synkra/aios-core uninstall --interactive
 ```
 
 Esto le preguntará:
+
 - Qué mantener/eliminar
 - Opciones de respaldo
 - Confirmación para cada paso
@@ -141,6 +143,7 @@ npm cache clean --force
 ### Paso 5: Limpiar Archivos del Sistema
 
 #### Windows
+
 ```powershell
 # Eliminar archivos de AppData
 Remove-Item -Recurse -Force "$env:APPDATA\@synkra/aios-core"
@@ -153,6 +156,7 @@ Remove-Item -Path "HKCU:\Software\Synkra AIOS" -Recurse
 ```
 
 #### macOS/Linux
+
 ```bash
 # Eliminar archivos de configuración
 rm -rf ~/.aios
@@ -203,12 +207,14 @@ rm -rf templates/custom/
 Antes de desinstalar, identifique lo que desea preservar:
 
 1. **Agentes Personalizados**
+
    ```bash
    # Copiar agentes personalizados
    cp -r agents/custom/ ~/aios-backup/agents/
    ```
 
 2. **Flujos de Trabajo y Tareas**
+
    ```bash
    # Copiar flujos de trabajo
    cp -r workflows/ ~/aios-backup/workflows/
@@ -216,6 +222,7 @@ Antes de desinstalar, identifique lo que desea preservar:
    ```
 
 3. **Datos de Memoria**
+
    ```bash
    # Exportar base de datos de memoria
    *memory export --format sqlite \
@@ -223,6 +230,7 @@ Antes de desinstalar, identifique lo que desea preservar:
    ```
 
 4. **Configuraciones**
+
    ```bash
    # Copiar todos los archivos de configuración
    cp .aios/config.json ~/aios-backup/
@@ -347,6 +355,7 @@ Write-Host "Registry cleanup complete!"
 ### Problemas Comunes
 
 #### 1. Permiso Denegado
+
 ```bash
 # Linux/macOS
 sudo npx @synkra/aios-core uninstall --complete
@@ -356,6 +365,7 @@ npx @synkra/aios-core uninstall --complete
 ```
 
 #### 2. Proceso Todavía en Ejecución
+
 ```bash
 # Forzar detención de todos los procesos
 # Linux/macOS
@@ -368,6 +378,7 @@ taskkill /F /IM @synkra/aios-core.exe
 ```
 
 #### 3. Archivos Bloqueados
+
 ```bash
 # Encontrar procesos usando archivos
 # Linux/macOS
@@ -378,6 +389,7 @@ Get-Process | Where-Object {$_.Path -like "*aios*"}
 ```
 
 #### 4. Eliminación Incompleta
+
 ```bash
 # Limpieza manual
 find . -name "*aios*" -type d -exec rm -rf {} +
@@ -472,12 +484,14 @@ git commit -m "Remove Synkra AIOS"
 Si desea reinstalar Synkra AIOS:
 
 1. **Esperar la limpieza**
+
    ```bash
    # Asegurar que todos los procesos se detuvieron
    sleep 5
    ```
 
 2. **Limpiar cache de npm**
+
    ```bash
    npm cache clean --force
    ```
@@ -524,8 +538,8 @@ cp -r ~/aios-backup/agents/* ./agents/
 Si encuentra problemas durante la desinstalación:
 
 1. **Consultar Documentación**
-   - [FAQ](https://docs.@synkra/aios-core.com/faq#uninstall)
-   - [Solución de Problemas](https://docs.@synkra/aios-core.com/troubleshooting)
+   - [FAQ](https://github.com/SynkraAI/aios-core/wiki/faq#uninstall)
+   - [Solución de Problemas](https://github.com/SynkraAI/aios-core/wiki/troubleshooting)
 
 2. **Soporte de la Comunidad**
    - Discord: #uninstall-help

@@ -15,7 +15,11 @@ const ContextDetector = require('../../core/session/context-detector');
 const GitConfigDetector = require('../../infrastructure/scripts/git-config-detector');
 const WorkflowNavigator = require('./workflow-navigator');
 const GreetingPreferenceManager = require('./greeting-preference-manager');
-const { loadProjectStatus, formatStatusDisplay } = require('../../infrastructure/scripts/project-status-loader');
+const {
+  loadProjectStatus,
+  formatStatusDisplay,
+} = require('../../infrastructure/scripts/project-status-loader');
+const { PermissionMode } = require('../../core/permissions');
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
@@ -57,7 +61,7 @@ class GreetingBuilder {
       // Use session-aware logic (Story 6.1.2.5)
       const greetingPromise = this._buildContextualGreeting(agent, context);
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Greeting timeout')), GREETING_TIMEOUT),
+        setTimeout(() => reject(new Error('Greeting timeout')), GREETING_TIMEOUT)
       );
 
       return await Promise.race([greetingPromise, timeoutPromise]);
@@ -76,20 +80,19 @@ class GreetingBuilder {
    */
   async _buildContextualGreeting(agent, context) {
     // Use pre-loaded values if available, otherwise load
-    const sessionType = context.sessionType || 
-      await this._safeDetectSessionType(context);
-    
-    const projectStatus = context.projectStatus || 
-      await this._safeLoadProjectStatus();
-    
+    const sessionType = context.sessionType || (await this._safeDetectSessionType(context));
+
+    const projectStatus = context.projectStatus || (await this._safeLoadProjectStatus());
+
     // gitConfig always loads (fast, cached)
     const gitConfig = await this._safeCheckGitConfig();
 
     // Build greeting sections based on session type
     const sections = [];
 
-    // 1. Presentation (always)
-    sections.push(this.buildPresentation(agent, sessionType));
+    // 1. Presentation with permission mode badge (always)
+    const permissionBadge = await this._safeGetPermissionBadge();
+    sections.push(this.buildPresentation(agent, sessionType, permissionBadge));
 
     // 2. Role description (new session only)
     if (sessionType === 'new') {
@@ -109,10 +112,9 @@ class GreetingBuilder {
 
     // 5. Workflow suggestions (if workflow session and no context section)
     if (sessionType === 'workflow' && context.lastCommands && !contextSection) {
-      const suggestions = this.workflowNavigator.getNextSteps(
-        context.lastCommands,
-        { agentId: agent.id },
-      );
+      const suggestions = this.workflowNavigator.getNextSteps(context.lastCommands, {
+        agentId: agent.id,
+      });
       if (suggestions && suggestions.length > 0) {
         sections.push(this.buildWorkflowSuggestions(suggestions));
       }
@@ -151,7 +153,9 @@ class GreetingBuilder {
         greetingText = profile.greeting_levels.named || `${agent.icon} ${agent.name} ready`;
         break;
       case 'archetypal':
-        greetingText = profile.greeting_levels.archetypal || `${agent.icon} ${agent.name} the ${profile.archetype} ready`;
+        greetingText =
+          profile.greeting_levels.archetypal ||
+          `${agent.icon} ${agent.name} the ${profile.archetype} ready`;
         break;
       default:
         greetingText = profile.greeting_levels.named || `${agent.icon} ${agent.name} ready`;
@@ -166,7 +170,9 @@ class GreetingBuilder {
    * @returns {string} Simple greeting
    */
   buildSimpleGreeting(agent) {
-    const greetingLevels = agent.persona_profile?.communication?.greeting_levels || agent.persona_profile?.greeting_levels;
+    const greetingLevels =
+      agent.persona_profile?.communication?.greeting_levels ||
+      agent.persona_profile?.greeting_levels;
     const greeting = greetingLevels?.named || `${agent.icon} ${agent.name} ready`;
     return `${greeting}\n\nType \`*help\` to see available commands.`;
   }
@@ -175,24 +181,26 @@ class GreetingBuilder {
    * Build presentation section
    * @param {Object} agent - Agent definition
    * @param {string} sessionType - Session type
+   * @param {string} permissionBadge - Permission mode badge (optional)
    * @returns {string} Presentation text
    */
-  buildPresentation(agent, sessionType) {
+  buildPresentation(agent, sessionType, permissionBadge = '') {
     const profile = agent.persona_profile;
 
     // Try greeting_levels from communication first, then fall back to top level
     const greetingLevels = profile?.communication?.greeting_levels || profile?.greeting_levels;
 
     if (!greetingLevels) {
-      return `${agent.icon} ${agent.name} ready`;
+      const base = `${agent.icon} ${agent.name} ready`;
+      return permissionBadge ? `${base} ${permissionBadge}` : base;
     }
 
     // Always use archetypal greeting for richer presentation
-    const archetypeGreeting = greetingLevels.archetypal || 
-                              greetingLevels.named || 
-                              `${agent.icon} ${agent.name} ready`;
-    
-    return archetypeGreeting;
+    const archetypeGreeting =
+      greetingLevels.archetypal || greetingLevels.named || `${agent.icon} ${agent.name} ready`;
+
+    // Append permission badge if available
+    return permissionBadge ? `${archetypeGreeting} ${permissionBadge}` : archetypeGreeting;
   }
 
   /**
@@ -296,10 +304,10 @@ class GreetingBuilder {
     }
 
     const parts = [];
-    
+
     // Build intelligent context narrative
     const contextNarrative = this._buildContextNarrative(agent, context, projectStatus);
-    
+
     if (contextNarrative.description) {
       parts.push(`💡 **Context:** ${contextNarrative.description}`);
     }
@@ -319,92 +327,102 @@ class GreetingBuilder {
   _buildContextNarrative(agent, context, projectStatus) {
     const prevAgentId = this._getPreviousAgentId(context);
     const prevAgentName = this._getPreviousAgentName(context);
-    
+
     // Priority 1: Agent transition + Story + Modified files (richest context)
     if (prevAgentId && projectStatus?.modifiedFiles) {
       // Use session story if available (more accurate), otherwise use git story
       const sessionStory = context.sessionStory || projectStatus.currentStory;
-      const storyContext = this._analyzeStoryContext({ ...projectStatus, currentStory: sessionStory });
+      const storyContext = this._analyzeStoryContext({
+        ...projectStatus,
+        currentStory: sessionStory,
+      });
       const fileContext = this._analyzeModifiedFiles(projectStatus.modifiedFiles, sessionStory);
-      
+
       let description = `Vejo que @${prevAgentName} finalizou os ajustes`;
-      
+
       if (fileContext.keyFiles.length > 0) {
         description += ` ${fileContext.summary}`;
       }
-      
+
       if (storyContext.storyFile) {
         description += ` no **\`${storyContext.storyFile}\`**`;
       }
-      
+
       description += `. Agora podemos ${this._getAgentAction(agent.id, storyContext)}`;
-      
+
       const recommendedCommand = this._suggestCommand(agent.id, prevAgentId, storyContext);
-      
+
       return { description, recommendedCommand };
     }
-    
+
     // Priority 2: Agent transition + Story (no file details)
-    if (prevAgentId && projectStatus?.currentStory && projectStatus.currentStory !== 'EPIC-SPLIT-IMPLEMENTATION-COMPLETE') {
+    if (
+      prevAgentId &&
+      projectStatus?.currentStory &&
+      projectStatus.currentStory !== 'EPIC-SPLIT-IMPLEMENTATION-COMPLETE'
+    ) {
       const storyContext = this._analyzeStoryContext(projectStatus);
       const description = `Continuando do trabalho de @${prevAgentName} em ${projectStatus.currentStory}. ${this._getAgentAction(agent.id, storyContext)}`;
       const recommendedCommand = this._suggestCommand(agent.id, prevAgentId, storyContext);
-      
+
       return { description, recommendedCommand };
     }
-    
+
     // Priority 3: Just agent transition
     if (prevAgentId) {
       const description = `Continuing from @${prevAgentName}`;
       const recommendedCommand = this._suggestCommand(agent.id, prevAgentId, {});
-      
+
       return { description, recommendedCommand };
     }
-    
+
     // Priority 4: Story-based context
-    if (projectStatus?.currentStory && projectStatus.currentStory !== 'EPIC-SPLIT-IMPLEMENTATION-COMPLETE') {
+    if (
+      projectStatus?.currentStory &&
+      projectStatus.currentStory !== 'EPIC-SPLIT-IMPLEMENTATION-COMPLETE'
+    ) {
       const storyContext = this._analyzeStoryContext(projectStatus);
       const description = `Working on ${projectStatus.currentStory}`;
       const recommendedCommand = this._suggestCommand(agent.id, null, storyContext);
-      
+
       return { description, recommendedCommand };
     }
-    
+
     // Priority 5: Last command context
     if (context.lastCommands && context.lastCommands.length > 0) {
       const lastCmd = context.lastCommands[context.lastCommands.length - 1];
       const cmdName = typeof lastCmd === 'object' ? lastCmd.command : lastCmd;
       const description = `Last action: *${cmdName}`;
-      
+
       return { description, recommendedCommand: null };
     }
-    
+
     // Priority 6: Session message
     if (context.sessionMessage) {
       return { description: context.sessionMessage, recommendedCommand: null };
     }
-    
+
     return { description: null, recommendedCommand: null };
   }
 
   _getPreviousAgentId(context) {
     if (!context.previousAgent) return null;
-    return typeof context.previousAgent === 'string' 
-      ? context.previousAgent 
+    return typeof context.previousAgent === 'string'
+      ? context.previousAgent
       : context.previousAgent.agentId;
   }
 
   _getPreviousAgentName(context) {
     if (!context.previousAgent) return null;
-    return typeof context.previousAgent === 'string' 
-      ? context.previousAgent 
-      : (context.previousAgent.agentName || context.previousAgent.agentId);
+    return typeof context.previousAgent === 'string'
+      ? context.previousAgent
+      : context.previousAgent.agentName || context.previousAgent.agentId;
   }
 
   _analyzeStoryContext(projectStatus) {
     const currentStory = projectStatus.currentStory || '';
     const storyFile = currentStory ? `${currentStory}.md` : null;
-    
+
     return {
       storyId: currentStory,
       storyFile: storyFile,
@@ -419,20 +437,51 @@ class GreetingBuilder {
 
     const keyFiles = [];
     const patterns = [
-      { regex: /greeting-builder\.js/, priority: 1, desc: 'do **`.aios-core/scripts/greeting-builder.js`**', category: 'script' },
-      { regex: /agent-config-loader\.js/, priority: 1, desc: 'do **`agent-config-loader.js`**', category: 'script' },
-      { regex: /generate-greeting\.js/, priority: 1, desc: 'do **`generate-greeting.js`**', category: 'script' },
-      { regex: /session-context-loader\.js/, priority: 1, desc: 'do **`session-context-loader.js`**', category: 'script' },
-      { regex: /agents\/.*\.md/, priority: 1, desc: 'das definições de agentes', category: 'agent' },
+      {
+        regex: /greeting-builder\.js/,
+        priority: 1,
+        desc: 'do **`.aios-core/scripts/greeting-builder.js`**',
+        category: 'script',
+      },
+      {
+        regex: /agent-config-loader\.js/,
+        priority: 1,
+        desc: 'do **`agent-config-loader.js`**',
+        category: 'script',
+      },
+      {
+        regex: /generate-greeting\.js/,
+        priority: 1,
+        desc: 'do **`generate-greeting.js`**',
+        category: 'script',
+      },
+      {
+        regex: /session-context-loader\.js/,
+        priority: 1,
+        desc: 'do **`session-context-loader.js`**',
+        category: 'script',
+      },
+      {
+        regex: /agents\/.*\.md/,
+        priority: 1,
+        desc: 'das definições de agentes',
+        category: 'agent',
+      },
       { regex: /\.md$/, priority: 2, desc: 'dos arquivos de documentação', category: 'doc' },
     ];
 
     // Find matching key files (avoid duplicates)
     const seenCategories = new Set();
-    for (const file of modifiedFiles.slice(0, 5)) { // Check first 5 files
+    for (const file of modifiedFiles.slice(0, 5)) {
+      // Check first 5 files
       for (const pattern of patterns) {
         if (pattern.regex.test(file) && !seenCategories.has(pattern.category)) {
-          keyFiles.push({ file, desc: pattern.desc, priority: pattern.priority, category: pattern.category });
+          keyFiles.push({
+            file,
+            desc: pattern.desc,
+            priority: pattern.priority,
+            category: pattern.category,
+          });
           seenCategories.add(pattern.category);
           break;
         }
@@ -451,21 +500,21 @@ class GreetingBuilder {
       return { keyFiles: topFiles, summary: topFiles[0].desc };
     }
 
-    return { 
-      keyFiles: topFiles, 
-      summary: `${topFiles[0].desc} e ${topFiles[1].desc}`, 
+    return {
+      keyFiles: topFiles,
+      summary: `${topFiles[0].desc} e ${topFiles[1].desc}`,
     };
   }
 
   _getAgentAction(agentId, storyContext) {
     const actions = {
-      'qa': 'revisar a qualidade dessa implementação',
-      'dev': 'implementar as funcionalidades',
-      'pm': 'sincronizar o progresso',
-      'po': 'validar os requisitos',
-      'sm': 'coordenar o desenvolvimento',
+      qa: 'revisar a qualidade dessa implementação',
+      dev: 'implementar as funcionalidades',
+      pm: 'sincronizar o progresso',
+      po: 'validar os requisitos',
+      sm: 'coordenar o desenvolvimento',
     };
-    
+
     return actions[agentId] || 'continuar o trabalho';
   }
 
@@ -474,28 +523,28 @@ class GreetingBuilder {
     if (prevAgentId === 'dev' && agentId === 'qa') {
       return storyContext.storyFile ? `*review ${storyContext.storyFile}` : '*review';
     }
-    
+
     if (prevAgentId === 'qa' && agentId === 'dev') {
       return '*apply-qa-fixes';
     }
-    
+
     if (prevAgentId === 'po' && agentId === 'dev') {
       return '*develop-yolo';
     }
-    
+
     // Role-based commands when no previous agent
     if (agentId === 'qa' && storyContext.storyFile) {
       return `*review ${storyContext.storyFile}`;
     }
-    
+
     if (agentId === 'dev' && storyContext.hasStory) {
       return '*develop-yolo docs/stories/[story-path].md';
     }
-    
+
     if (agentId === 'pm' && storyContext.storyId) {
       return `*sync-story ${storyContext.storyId}`;
     }
-    
+
     return null;
   }
 
@@ -566,7 +615,11 @@ class GreetingBuilder {
         const storyId = storyMatch ? storyMatch[1] : null;
 
         // QA agent: suggest validation if story is ready
-        if (agentId === 'qa' && projectStatus.recentCommits && projectStatus.recentCommits.length > 0) {
+        if (
+          agentId === 'qa' &&
+          projectStatus.recentCommits &&
+          projectStatus.recentCommits.length > 0
+        ) {
           const recentCommit = projectStatus.recentCommits[0].message;
           if (recentCommit.includes('complete') || recentCommit.includes('implement')) {
             if (storyId) {
@@ -604,7 +657,7 @@ class GreetingBuilder {
       // Analyze recent work
       if (projectStatus.recentCommits && projectStatus.recentCommits.length > 0) {
         const lastCommit = projectStatus.recentCommits[0].message;
-        
+
         // If last commit was a test, suggest review
         if (lastCommit.includes('test') && agentId === 'qa') {
           suggestions.push('*run-tests');
@@ -625,11 +678,10 @@ class GreetingBuilder {
       const contextSummary = this._buildContextSummary(projectStatus);
       const commandsList = suggestions
         .slice(0, 2) // Limit to 2 suggestions
-        .map(cmd => `   - \`${cmd}\``)
+        .map((cmd) => `   - \`${cmd}\``)
         .join('\n');
 
       return `💡 **Context:** ${contextSummary}\n\n**Suggested Next Steps:**\n${commandsList}`;
-
     } catch (error) {
       console.warn('[GreetingBuilder] Contextual suggestions failed:', error.message);
       return null;
@@ -676,7 +728,7 @@ class GreetingBuilder {
     const header = this._getCommandsHeader(sessionType);
     const commandList = commands
       .slice(0, 12) // Max 12 commands
-      .map(cmd => {
+      .map((cmd) => {
         // Handle both object format and string format
         if (typeof cmd === 'string') {
           return `   - \`*${cmd}\``;
@@ -689,7 +741,7 @@ class GreetingBuilder {
         // Fallback for unexpected formats
         return `   - \`*${String(cmd)}\``;
       })
-      .filter(cmd => !cmd.includes('[object Object]')) // Filter out malformed commands
+      .filter((cmd) => !cmd.includes('[object Object]')) // Filter out malformed commands
       .join('\n');
 
     return `**${header}:**\n${commandList}`;
@@ -721,14 +773,18 @@ class GreetingBuilder {
    */
   buildFooter(agent) {
     const parts = ['Type `*guide` for comprehensive usage instructions.'];
-    
+
     // Add agent signature if available
-    if (agent && agent.persona_profile && agent.persona_profile.communication && 
-        agent.persona_profile.communication.signature_closing) {
+    if (
+      agent &&
+      agent.persona_profile &&
+      agent.persona_profile.communication &&
+      agent.persona_profile.communication.signature_closing
+    ) {
       parts.push('');
       parts.push(agent.persona_profile.communication.signature_closing);
     }
-    
+
     return parts.join('\n');
   }
 
@@ -754,7 +810,7 @@ class GreetingBuilder {
     const visibilityFilter = this._getVisibilityFilter(sessionType);
 
     // Filter commands with visibility metadata
-    const commandsWithMetadata = agent.commands.filter(cmd => {
+    const commandsWithMetadata = agent.commands.filter((cmd) => {
       if (!cmd.visibility || !Array.isArray(cmd.visibility)) {
         return false; // No metadata, exclude from filtered list
       }
@@ -831,6 +887,22 @@ class GreetingBuilder {
     } catch (error) {
       console.warn('[GreetingBuilder] Project status load failed:', error.message);
       return null;
+    }
+  }
+
+  /**
+   * Safe permission badge retrieval with fallback
+   * @private
+   * @returns {Promise<string>} Permission mode badge or empty string
+   */
+  async _safeGetPermissionBadge() {
+    try {
+      const mode = new PermissionMode();
+      await mode.load();
+      return mode.getBadge();
+    } catch (error) {
+      console.warn('[GreetingBuilder] Permission mode load failed:', error.message);
+      return '';
     }
   }
 

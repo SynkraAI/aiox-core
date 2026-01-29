@@ -64,9 +64,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `self-critique-checklist.md` - Mandatory self-critique for developers
 
 - **Documentation**:
-  - [ADE Complete Guide](docs/guides/ade-guide.md) - Full tutorial
-  - [Epic 1-7 Handoffs](docs/architecture/ADE-EPIC*.md) - Technical handoffs
-  - [Agent Changes](docs/architecture/ADE-AGENT-CHANGES.md) - All agent modifications with capability matrix
+  - [ADE Complete Guide](guides/ade-guide.md) - Full tutorial
+  - [Epic 1-7 Handoffs](architecture/) - Technical handoffs (ADE-EPIC-1 through ADE-EPIC-7)
+  - [Agent Changes](architecture/ADE-AGENT-CHANGES.md) - All agent modifications with capability matrix
 
 ### Changed
 

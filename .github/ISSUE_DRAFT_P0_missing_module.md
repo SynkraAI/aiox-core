@@ -22,14 +22,16 @@ The AIOS installer fails immediately on Linux systems with a module not found er
 ## 🐛 Error Details
 
 ### Error Message
+
 ```
 Error: Cannot find AIOS Core module: utils/repository-detector
-Searched: /mnt/c/Users/AllFluence-User/Workspaces/AIOS/AIOS-V4/@synkra/aios-core/.aios-core/utils/repository-detector
+Searched: ${PROJECT_ROOT}/.aios-core/utils/repository-detector
 Please ensure @synkra/aios-core is installed correctly.
-    at loadAIOSCore (/mnt/c/Users/AllFluence-User/Workspaces/AIOS/AIOS-V4/@synkra/aios-core/bin/aios-init.js:43:11)
+    at loadAIOSCore (${PROJECT_ROOT}/bin/aios-init.js:43:11)
 ```
 
 ### Stack Trace Location
+
 - **File:** `bin/aios-init.js`
 - **Line:** 43
 - **Function:** `loadAIOSCore`
@@ -39,32 +41,38 @@ Please ensure @synkra/aios-core is installed correctly.
 ## 🔬 Reproduction Steps
 
 ### Prerequisites
+
 - Ubuntu 24.04 LTS (WSL) or native Linux
 - Node.js v18.20.8+
 - AIOS-Fullstack repository cloned
 
 ### Steps to Reproduce
+
 1. Open WSL Ubuntu terminal or native Linux shell
 2. Create test directory:
+
    ```bash
    mkdir -p /tmp/aios-test-install
    cd /tmp/aios-test-install
    ```
 
 3. Execute installer:
+
    ```bash
-   node /mnt/c/Users/AllFluence-User/Workspaces/AIOS/AIOS-V4/@synkra/aios-core/bin/aios-init.js --help
+   node ${PROJECT_ROOT}/bin/aios-init.js --help
    ```
 
 4. **Observe:** Installation fails with module not found error
 
 ### Expected Behavior
+
 - Installer should locate AIOS Core module successfully
 - Help text should display (with `--help` flag)
 - Installation wizard should launch (without flags)
 - Installation should proceed normally
 
 ### Actual Behavior
+
 - Installation crashes immediately on module import
 - Error points to missing `utils/repository-detector` module
 - No installation wizard launched
@@ -75,12 +83,14 @@ Please ensure @synkra/aios-core is installed correctly.
 ## 🎯 Impact Assessment
 
 ### User Impact
+
 - **Installation:** ❌ Completely blocked on Linux platforms
 - **Testing:** ❌ Cannot validate installer functionality
 - **Story 1.10c:** ⛔ Blocked - 0% test completion
 - **Sprint 1:** ⚠️ At risk if not resolved immediately
 
 ### Affected Platforms
+
 - ✅ **Windows:** Unknown (not tested in this context)
 - ✅ **macOS:** Unknown (not tested in this context)
 - ❌ **Linux (Ubuntu):** FAILS - Module not found
@@ -88,6 +98,7 @@ Please ensure @synkra/aios-core is installed correctly.
 - ❌ **Linux (Fedora):** Likely fails (untested due to P0)
 
 ### Test Coverage Impact
+
 - **Planned Test Scenarios:** 14
 - **Executed:** 1 (7%)
 - **Blocked:** 13 (93%)
@@ -115,6 +126,7 @@ Please ensure @synkra/aios-core is installed correctly.
    - Missing path normalization before module require
 
 ### Investigation Needed
+
 - [ ] Verify `.aios-core/utils/repository-detector.js` exists in repo
 - [ ] Check `bin/aios-init.js:43` for path construction logic
 - [ ] Review recent commits for module renames/moves
@@ -128,11 +140,13 @@ Please ensure @synkra/aios-core is installed correctly.
 ### Short-Term (Immediate Fix)
 
 1. **Verify module exists:**
+
    ```bash
    ls -la .aios-core/utils/repository-detector.js
    ```
 
 2. **Fix path resolution in `bin/aios-init.js:43`:**
+
    ```javascript
    // Before (suspected):
    const detector = require('./.aios-core/utils/repository-detector');
@@ -144,6 +158,7 @@ Please ensure @synkra/aios-core is installed correctly.
    ```
 
 3. **Add file existence check:**
+
    ```javascript
    const fs = require('fs');
    if (!fs.existsSync(detectorPath + '.js')) {
@@ -180,6 +195,7 @@ Please ensure @synkra/aios-core is installed correctly.
 ## 🧪 Test Environment
 
 ### Working Configuration
+
 - **OS:** Ubuntu 24.04.2 LTS (WSL2)
 - **Kernel:** 5.15.167.4-microsoft-standard-WSL2
 - **Node.js:** v18.20.8
@@ -187,13 +203,14 @@ Please ensure @synkra/aios-core is installed correctly.
 - **npm:** 10.8.2
 
 ### Prerequisites Verified
-| Requirement | Status |
-|-------------|--------|
+
+| Requirement   | Status            |
+| ------------- | ----------------- |
 | Ubuntu 22.04+ | ✅ PASS (24.04.2) |
-| Node.js 18+ | ✅ PASS (18.20.8) |
-| Git | ✅ PASS (2.43.0) |
-| npm | ✅ PASS (10.8.2) |
-| Internet | ✅ Connected |
+| Node.js 18+   | ✅ PASS (18.20.8) |
+| Git           | ✅ PASS (2.43.0)  |
+| npm           | ✅ PASS (10.8.2)  |
+| Internet      | ✅ Connected      |
 
 **All prerequisites met** - issue is in installer code, not environment.
 
@@ -202,15 +219,18 @@ Please ensure @synkra/aios-core is installed correctly.
 ## 📎 Related Resources
 
 ### Documentation
+
 - **Test Report:** [docs/testing/1.10c-linux-test-report.md](../docs/testing/1.10c-linux-test-report.md)
 - **Story 1.10c:** [docs/stories/v2.1/sprint-1/story-1.10c-linux-testing.md](../docs/stories/v2.1/sprint-1/story-1.10c-linux-testing.md)
 - **Parent Story:** [docs/stories/v2.1/sprint-1/story-1.10-cross-platform-CONSOLIDATED.md](../docs/stories/v2.1/sprint-1/story-1.10-cross-platform-CONSOLIDATED.md)
 
 ### Code References
+
 - **Installer:** `bin/aios-init.js:43` (error location)
 - **Missing Module:** `.aios-core/utils/repository-detector` (expected location)
 
 ### Related Stories
+
 - Story 1.10a - Windows Testing (parallel story)
 - Story 1.10b - macOS Testing (parallel story)
 - Stories 1.1-1.9 - Installer dependencies
@@ -246,18 +266,21 @@ Fix is DONE when:
 ## 🚨 Escalation & Communication
 
 ### Notifications Sent
+
 - ✅ QA (@qa - Quinn): Test report created
 - 🔄 Dev Lead (@dev - Dex): GitHub Issue created (this)
 - ⏳ Product Owner (@po - Pax): Story blocked notification pending
 - ⏳ Scrum Master (@sm - River): Sprint timeline impact pending
 
 ### Expected Response Time
+
 - **Initial Acknowledgment:** < 2 hours
 - **Fix Development:** < 4 hours (P0 priority)
 - **Fix Deployment:** < 6 hours total
 - **QA Retest:** < 2 hours after deployment
 
 ### Success Metrics
+
 - ⏱️ **Time to Fix:** Target < 6 hours
 - ✅ **QA Validation:** Must pass all installation tests
 - 📊 **Test Coverage:** Unblock 13 remaining test scenarios
@@ -280,6 +303,7 @@ Fix is DONE when:
 
 **Assigned To:** @dev (Dex) - Development Lead
 **Watchers:**
+
 - @qa (Quinn) - QA Test Architect (reporter)
 - @po (Pax) - Product Owner
 - @sm (River) - Scrum Master
@@ -293,4 +317,4 @@ Fix is DONE when:
 
 ---
 
-*This issue was discovered during Story 1.10c Linux platform testing and blocks all further testing. Immediate fix required to avoid Sprint 1 timeline impact.*
+_This issue was discovered during Story 1.10c Linux platform testing and blocks all further testing. Immediate fix required to avoid Sprint 1 timeline impact._

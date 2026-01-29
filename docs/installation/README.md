@@ -15,10 +15,21 @@ This directory contains comprehensive installation and setup documentation for S
 
 ## Documentation Index
 
-| Document | Description | Audience |
-|----------|-------------|----------|
-| [Troubleshooting](./troubleshooting.md) | Common issues and solutions | All users |
-| [FAQ](./faq.md) | Frequently asked questions | All users |
+### Platform-Specific Guides
+
+| Platform       | Guide                                      | Status      |
+| -------------- | ------------------------------------------ | ----------- |
+| 🍎 **macOS**   | [macOS Installation Guide](./macos.md)     | ✅ Complete |
+| 🐧 **Linux**   | [Linux Installation Guide](./linux.md)     | ✅ Complete |
+| 🪟 **Windows** | [Windows Installation Guide](./windows.md) | ✅ Complete |
+
+### General Documentation
+
+| Document                                    | Description                 | Audience  |
+| ------------------------------------------- | --------------------------- | --------- |
+| [Quick Start (v2.1)](./v2.1-quick-start.md) | Fast setup for new users    | Beginners |
+| [Troubleshooting](./troubleshooting.md)     | Common issues and solutions | All users |
+| [FAQ](./faq.md)                             | Frequently asked questions  | All users |
 
 ---
 
@@ -30,13 +41,11 @@ This directory contains comprehensive installation and setup documentation for S
 npx @synkra/aios-core install
 ```
 
-
 ### Upgrading
 
 ```bash
 npx @synkra/aios-core install --force-upgrade
 ```
-
 
 ### Having Issues?
 
@@ -56,27 +65,27 @@ npx @synkra/aios-core install --force-upgrade
 
 ## Supported Platforms
 
-| Platform | Status |
-|----------|--------|
+| Platform      | Status       |
+| ------------- | ------------ |
 | Windows 10/11 | Full Support |
-| macOS 12+ | Full Support |
+| macOS 12+     | Full Support |
 | Ubuntu 20.04+ | Full Support |
-| Debian 11+ | Full Support |
+| Debian 11+    | Full Support |
 
 ---
 
 ## Supported IDEs
 
-| IDE | Agent Activation |
-|-----|------------------|
-| Claude Code | `/dev`, `/qa`, etc. |
-| Cursor | `@dev`, `@qa`, etc. |
-| Windsurf | `@dev`, `@qa`, etc. |
-| Trae | `@dev`, `@qa`, etc. |
-| Roo Code | Mode selector |
-| Cline | `@dev`, `@qa`, etc. |
-| Gemini CLI | Mention in prompt |
-| GitHub Copilot | Chat modes |
+| IDE            | Agent Activation    |
+| -------------- | ------------------- |
+| Claude Code    | `/dev`, `/qa`, etc. |
+| Cursor         | `@dev`, `@qa`, etc. |
+| Windsurf       | `@dev`, `@qa`, etc. |
+| Trae           | `@dev`, `@qa`, etc. |
+| Roo Code       | Mode selector       |
+| Cline          | `@dev`, `@qa`, etc. |
+| Gemini CLI     | Mention in prompt   |
+| GitHub Copilot | Chat modes          |
 
 ---
 

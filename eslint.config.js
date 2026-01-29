@@ -47,6 +47,8 @@ module.exports = [
       'tools/health-dashboard/**',
       // Apps with their own ESLint configs
       'apps/dashboard/**',
+      // Bun-based apps (different runtime, different globals)
+      'apps/monitor-server/**',
     ],
   },
 

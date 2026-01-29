@@ -23,10 +23,21 @@ Este diretório contém documentação abrangente de instalação e configuraç�
 
 ## Índice de Documentação
 
-| Documento | Descrição | Público-alvo |
-|----------|-------------|----------|
-| [Solução de Problemas](./troubleshooting.md) | Problemas comuns e soluções | Todos os usuários |
-| [FAQ](./faq.md) | Perguntas frequentes | Todos os usuários |
+### Guias por Plataforma
+
+| Plataforma     | Guia                                       | Status      |
+| -------------- | ------------------------------------------ | ----------- |
+| 🍎 **macOS**   | [Guia de Instalação macOS](./macos.md)     | ✅ Completo |
+| 🐧 **Linux**   | [Guia de Instalação Linux](./linux.md)     | ✅ Completo |
+| 🪟 **Windows** | [Guia de Instalação Windows](./windows.md) | ✅ Completo |
+
+### Documentação Geral
+
+| Documento                                    | Descrição                               | Público-alvo      |
+| -------------------------------------------- | --------------------------------------- | ----------------- |
+| [Quick Start (v2.1)](./v2.1-quick-start.md)  | Configuração rápida para novos usuários | Iniciantes        |
+| [Solução de Problemas](./troubleshooting.md) | Problemas comuns e soluções             | Todos os usuários |
+| [FAQ](./faq.md)                              | Perguntas frequentes                    | Todos os usuários |
 
 ---
 
@@ -38,13 +49,11 @@ Este diretório contém documentação abrangente de instalação e configuraç�
 npx @synkra/aios-core install
 ```
 
-
 ### Atualização
 
 ```bash
 npx @synkra/aios-core install --force-upgrade
 ```
-
 
 ### Está com Problemas?
 
@@ -64,27 +73,27 @@ npx @synkra/aios-core install --force-upgrade
 
 ## Plataformas Suportadas
 
-| Plataforma | Status |
-|----------|--------|
+| Plataforma    | Status           |
+| ------------- | ---------------- |
 | Windows 10/11 | Suporte Completo |
-| macOS 12+ | Suporte Completo |
+| macOS 12+     | Suporte Completo |
 | Ubuntu 20.04+ | Suporte Completo |
-| Debian 11+ | Suporte Completo |
+| Debian 11+    | Suporte Completo |
 
 ---
 
 ## IDEs Suportadas
 
-| IDE | Ativação de Agentes |
-|-----|------------------|
-| Claude Code | `/dev`, `/qa`, etc. |
-| Cursor | `@dev`, `@qa`, etc. |
-| Windsurf | `@dev`, `@qa`, etc. |
-| Trae | `@dev`, `@qa`, etc. |
-| Roo Code | Seletor de modo |
-| Cline | `@dev`, `@qa`, etc. |
-| Gemini CLI | Menção no prompt |
-| GitHub Copilot | Modos de chat |
+| IDE            | Ativação de Agentes |
+| -------------- | ------------------- |
+| Claude Code    | `/dev`, `/qa`, etc. |
+| Cursor         | `@dev`, `@qa`, etc. |
+| Windsurf       | `@dev`, `@qa`, etc. |
+| Trae           | `@dev`, `@qa`, etc. |
+| Roo Code       | Seletor de modo     |
+| Cline          | `@dev`, `@qa`, etc. |
+| Gemini CLI     | Menção no prompt    |
+| GitHub Copilot | Modos de chat       |
 
 ---
 

@@ -94,11 +94,11 @@ test_clean_installation() {
     fi
 
     # Run installer
-    log_info "Running: npx @allfluence/aios@latest init"
+    log_info "Running: npx @synkraai/aios@latest init"
 
     # Note: This will require manual interaction for now
     # In automated CI, we'll need to provide inputs programmatically
-    if npx @allfluence/aios@latest init; then
+    if npx @synkraai/aios@latest init; then
         pass_test "Installation completed without errors"
     else
         fail_test "Installation failed with exit code $?"

@@ -21,11 +21,13 @@ import {
   Circle,
   CircleDot,
   CheckCircle2,
+  Check,
   XCircle,
   AlertCircle,
   AlertTriangle,
   Clock,
   Loader2,
+  Square,
 
   // Actions
   Play,
@@ -42,10 +44,12 @@ import {
 
   // Content
   FileText,
+  FilePlus,
   FolderOpen,
   GitBranch,
   GitPullRequest,
   GitCommit,
+  Archive,
 
   // Agents & Roles
   Bot,
@@ -68,6 +72,13 @@ import {
   GripVertical,
   MoreHorizontal,
   Info,
+  Bell,
+  MessageSquare,
+
+  // Network & Connectivity
+  Wifi,
+  WifiOff,
+  Globe,
 
   // GitHub
   Github,
@@ -86,91 +97,101 @@ import {
   Layers,
   BookOpen,
   FileCode,
-
   type LucideIcon,
 } from 'lucide-react';
 
 // Icon name to component mapping
 export const iconMap = {
   // Navigation
-  'dashboard': LayoutDashboard,
-  'kanban': Kanban,
-  'terminal': Terminal,
-  'settings': Settings,
-  'menu': Menu,
-  'close': X,
+  dashboard: LayoutDashboard,
+  kanban: Kanban,
+  terminal: Terminal,
+  settings: Settings,
+  menu: Menu,
+  close: X,
   'chevron-down': ChevronDown,
   'chevron-right': ChevronRight,
   'chevron-left': ChevronLeft,
   'chevron-up': ChevronUp,
 
   // Status
-  'circle': Circle,
+  circle: Circle,
   'circle-dot': CircleDot,
   'check-circle': CheckCircle2,
+  check: Check,
   'x-circle': XCircle,
   'alert-circle': AlertCircle,
   'alert-triangle': AlertTriangle,
-  'clock': Clock,
-  'loader': Loader2,
+  clock: Clock,
+  loader: Loader2,
+  square: Square,
 
   // Actions
-  'play': Play,
-  'pause': Pause,
-  'refresh': RefreshCw,
-  'search': Search,
-  'copy': Copy,
+  play: Play,
+  pause: Pause,
+  refresh: RefreshCw,
+  search: Search,
+  copy: Copy,
   'external-link': ExternalLink,
-  'plus': Plus,
-  'minus': Minus,
-  'trash': Trash2,
-  'edit': Edit,
-  'save': Save,
+  plus: Plus,
+  minus: Minus,
+  trash: Trash2,
+  edit: Edit,
+  save: Save,
 
   // Content
   'file-text': FileText,
-  'folder': FolderOpen,
+  'file-plus': FilePlus,
+  folder: FolderOpen,
   'git-branch': GitBranch,
   'git-pull-request': GitPullRequest,
   'git-commit': GitCommit,
+  archive: Archive,
 
   // Agents
-  'bot': Bot,
-  'user': User,
-  'users': Users,
-  'code': Code,
+  bot: Bot,
+  user: User,
+  users: Users,
+  code: Code,
   'test-tube': TestTube,
-  'building': Building2,
+  building: Building2,
   'bar-chart': BarChart3,
-  'target': Target,
+  target: Target,
   'line-chart': LineChart,
-  'wrench': Wrench,
+  wrench: Wrench,
 
   // UI
-  'sun': Sun,
-  'moon': Moon,
-  'monitor': Monitor,
+  sun: Sun,
+  moon: Moon,
+  monitor: Monitor,
   'arrow-down': ArrowDown,
   'arrow-up': ArrowUp,
   'grip-vertical': GripVertical,
   'more-horizontal': MoreHorizontal,
-  'info': Info,
+  info: Info,
+  bell: Bell,
+  message: MessageSquare,
+
+  // Network
+  wifi: Wifi,
+  'wifi-off': WifiOff,
+  globe: Globe,
 
   // GitHub
-  'github': Github,
+  github: Github,
 
   // Maps
-  'map': Map,
+  map: Map,
 
   // Analytics/Insights
   'trending-up': TrendingUp,
-  'activity': Activity,
+  activity: Activity,
   'pie-chart': PieChart,
-  'zap': Zap,
+  zap: Zap,
 
   // Context/Brain
-  'brain': Brain,
-  'layers': Layers,
+  brain: Brain,
+  layers: Layers,
   'book-open': BookOpen,
   'file-code': FileCode,
 } as const;
@@ -203,11 +224,13 @@ export {
   Circle,
   CircleDot,
   CheckCircle2,
+  Check,
   XCircle,
   AlertCircle,
   AlertTriangle,
   Clock,
   Loader2,
+  Square,
   Play,
   Pause,
   RefreshCw,
@@ -220,10 +243,12 @@ export {
   Edit,
   Save,
   FileText,
+  FilePlus,
   FolderOpen,
   GitBranch,
   GitPullRequest,
   GitCommit,
+  Archive,
   Bot,
   User,
   Users,
@@ -242,6 +267,11 @@ export {
   GripVertical,
   MoreHorizontal,
   Info,
+  Bell,
+  MessageSquare,
+  Wifi,
+  WifiOff,
+  Globe,
   Github,
   Map,
   TrendingUp,

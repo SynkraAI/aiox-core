@@ -34,7 +34,7 @@ layer2:
   enabled: true
   coderabbit:
     enabled: true
-    command: "wsl bash -c 'cd /mnt/c/Users/AllFluence-User/Workspaces/AIOS/AIOS-V4/@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
+    command: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
     timeout: 900000  # 15 minutes
     blockOn:
       - CRITICAL

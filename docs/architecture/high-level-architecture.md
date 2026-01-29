@@ -29,15 +29,15 @@
 
 ### Key Capabilities v2.1
 
-| Capability | Description |
-|------------|-------------|
+| Capability                | Description                                                                |
+| ------------------------- | -------------------------------------------------------------------------- |
 | **11 Specialized Agents** | Dev, QA, Architect, PM, PO, SM, Analyst, Data Engineer, DevOps, UX, Master |
-| **115+ Executable Tasks** | Story creation, code generation, testing, deployment, documentation |
-| **52+ Templates** | PRDs, stories, architecture docs, IDE rules, quality gates |
-| **4 Module Architecture** | Core, Development, Product, Infrastructure |
-| **3 Quality Gate Layers** | Pre-commit, PR Automation, Human Review |
-| **Multi-Repo Strategy** | 3 public + 2 private repositories |
-| **Squad System** | Modular AI agent teams (ETL, Creator, MMOS) |
+| **115+ Executable Tasks** | Story creation, code generation, testing, deployment, documentation        |
+| **52+ Templates**         | PRDs, stories, architecture docs, IDE rules, quality gates                 |
+| **4 Module Architecture** | Core, Development, Product, Infrastructure                                 |
+| **3 Quality Gate Layers** | Pre-commit, PR Automation, Human Review                                    |
+| **Multi-Repo Strategy**   | 3 public + 2 private repositories                                          |
+| **Squad System**          | Modular AI agent teams (ETL, Creator, MMOS)                                |
 
 ---
 
@@ -142,7 +142,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                    ALLFLUENCE ORGANIZATION                              │
+│                    SYNKRA ORGANIZATION                                  │
 │                                                                         │
 │   PUBLIC REPOSITORIES                                                   │
 │   ═══════════════════                                                   │
@@ -186,27 +186,27 @@
 
 ### npm Package Scoping
 
-| Package | Registry | License |
-|---------|----------|---------|
-| `@aios/core` | npm public | Commons Clause |
-| `@aios/squad-etl` | npm public | MIT |
-| `@aios/squad-creator` | npm public | MIT |
-| `@aios/squad-mmos` | npm public | MIT |
-| `@aios/mcp-presets` | npm public | Apache 2.0 |
+| Package               | Registry   | License        |
+| --------------------- | ---------- | -------------- |
+| `@aios/core`          | npm public | Commons Clause |
+| `@aios/squad-etl`     | npm public | MIT            |
+| `@aios/squad-creator` | npm public | MIT            |
+| `@aios/squad-mmos`    | npm public | MIT            |
+| `@aios/mcp-presets`   | npm public | Apache 2.0     |
 
 ---
 
 ## Technology Stack
 
-| Category | Technology | Version | Notes |
-|----------|------------|---------|-------|
-| Runtime | Node.js | ≥18.0.0 | Platform for all scripts |
-| Language | TypeScript/JavaScript | ES2022 | Primary development |
-| Definition | Markdown + YAML | N/A | Agents, tasks, templates |
-| Package Manager | npm | ≥9.0.0 | Dependency management |
-| Quality Gates | Husky + lint-staged | Latest | Pre-commit hooks |
-| Code Review | CodeRabbit | Latest | AI-powered review |
-| CI/CD | GitHub Actions | N/A | Automation workflows |
+| Category        | Technology            | Version | Notes                    |
+| --------------- | --------------------- | ------- | ------------------------ |
+| Runtime         | Node.js               | ≥18.0.0 | Platform for all scripts |
+| Language        | TypeScript/JavaScript | ES2022  | Primary development      |
+| Definition      | Markdown + YAML       | N/A     | Agents, tasks, templates |
+| Package Manager | npm                   | ≥9.0.0  | Dependency management    |
+| Quality Gates   | Husky + lint-staged   | Latest  | Pre-commit hooks         |
+| Code Review     | CodeRabbit            | Latest  | AI-powered review        |
+| CI/CD           | GitHub Actions        | N/A     | Automation workflows     |
 
 ---
 
@@ -267,28 +267,28 @@
 
 ### Modules Overview
 
-| Module | Path | Purpose | Key Contents |
-|--------|------|---------|--------------|
-| **Core** | `.aios-core/core/` | Framework foundation | Config, Registry, QG, MCP, Session |
-| **Development** | `.aios-core/development/` | Dev artifacts | Agents, Tasks, Workflows, Scripts |
-| **Product** | `.aios-core/product/` | PM artifacts | Templates, Checklists, Data |
-| **Infrastructure** | `.aios-core/infrastructure/` | System config | Scripts, Tools, Integrations |
+| Module             | Path                         | Purpose              | Key Contents                       |
+| ------------------ | ---------------------------- | -------------------- | ---------------------------------- |
+| **Core**           | `.aios-core/core/`           | Framework foundation | Config, Registry, QG, MCP, Session |
+| **Development**    | `.aios-core/development/`    | Dev artifacts        | Agents, Tasks, Workflows, Scripts  |
+| **Product**        | `.aios-core/product/`        | PM artifacts         | Templates, Checklists, Data        |
+| **Infrastructure** | `.aios-core/infrastructure/` | System config        | Scripts, Tools, Integrations       |
 
 ### Agent System
 
-| Agent | ID | Archetype | Responsibility |
-|-------|-----|-----------|----------------|
-| Dex | `dev` | Builder | Code implementation |
-| Quinn | `qa` | Guardian | Quality assurance |
-| Aria | `architect` | Architect | Technical architecture |
-| Nova | `po` | Visionary | Product backlog |
-| Kai | `pm` | Balancer | Product strategy |
-| River | `sm` | Facilitator | Process facilitation |
-| Zara | `analyst` | Explorer | Business analysis |
-| Dara | `data-engineer` | Architect | Data engineering |
-| Felix | `devops` | Optimizer | CI/CD and operations |
-| Uma | `ux-expert` | Creator | User experience |
-| Pax | `aios-master` | Orchestrator | Framework orchestration |
+| Agent | ID              | Archetype    | Responsibility          |
+| ----- | --------------- | ------------ | ----------------------- |
+| Dex   | `dev`           | Builder      | Code implementation     |
+| Quinn | `qa`            | Guardian     | Quality assurance       |
+| Aria  | `architect`     | Architect    | Technical architecture  |
+| Nova  | `po`            | Visionary    | Product backlog         |
+| Kai   | `pm`            | Balancer     | Product strategy        |
+| River | `sm`            | Facilitator  | Process facilitation    |
+| Zara  | `analyst`       | Explorer     | Business analysis       |
+| Dara  | `data-engineer` | Architect    | Data engineering        |
+| Felix | `devops`        | Optimizer    | CI/CD and operations    |
+| Uma   | `ux-expert`     | Creator      | User experience         |
+| Pax   | `aios-master`   | Orchestrator | Framework orchestration |
 
 ---
 

@@ -1,0 +1,14 @@
+{
+  "name": "@aios/monitor-server",
+  "version": "1.0.0",
+  "description": "Real-time event server for monitoring Claude Code activity in AIOS",
+  "type": "module",
+  "scripts": {
+    "start": "bun run server/server.ts",
+    "dev": "bun --watch run server/server.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}

@@ -144,7 +144,7 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                    ORGANIZACIÓN ALLFLUENCE                              │
+│                    ORGANIZACIÓN SYNKRA                                  │
 │                                                                         │
 │   REPOSITORIOS PÚBLICOS                                                 │
 │   ═════════════════════                                                 │

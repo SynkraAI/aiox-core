@@ -173,7 +173,7 @@ dependencies:
     wsl_config:
       distribution: Ubuntu
       installation_path: ~/.local/bin/coderabbit
-      working_directory: /mnt/c/Users/AllFluence-User/Workspaces/AIOS/AIOS-V4/@synkra/aios-core
+      working_directory: ${PROJECT_ROOT}
     usage:
       - Pre-review automated scanning before human QA analysis
       - Security vulnerability detection (SQL injection, XSS, hardcoded secrets)
@@ -235,8 +235,8 @@ dependencies:
         - HALT and require human intervention
 
     commands:
-      qa_pre_review_uncommitted: "wsl bash -c 'cd /mnt/c/Users/AllFluence-User/Workspaces/AIOS/AIOS-V4/@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
-      qa_story_review_committed: "wsl bash -c 'cd /mnt/c/Users/AllFluence-User/Workspaces/AIOS/AIOS-V4/@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only -t committed --base main'"
+      qa_pre_review_uncommitted: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
+      qa_story_review_committed: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t committed --base main'"
     execution_guidelines: |
       CRITICAL: CodeRabbit CLI is installed in WSL, not Windows.
 

@@ -73,13 +73,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/allfluenceinc/aios-fullstack.git",
-    "directory": "aios-core"
+    "url": "git+https://github.com/SynkraAI/aios-core.git"
   },
   "bugs": {
-    "url": "https://github.com/allfluenceinc/aios-fullstack/issues"
+    "url": "https://github.com/SynkraAI/aios-core/issues"
   },
-  "homepage": "https://github.com/allfluenceinc/aios-fullstack/tree/main/aios-core#readme",
+  "homepage": "https://github.com/SynkraAI/aios-core#readme",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"

@@ -153,6 +153,7 @@ export type SidebarView =
   | 'kanban'
   | 'agents'
   | 'terminals'
+  | 'monitor'
   | 'roadmap'
   | 'context'
   | 'ideas'
@@ -212,6 +213,7 @@ export const SIDEBAR_ITEMS: SidebarItem[] = [
   { id: 'kanban', label: 'Kanban', icon: 'kanban', href: '/kanban', shortcut: 'K' },
   { id: 'agents', label: 'Agents', icon: 'bot', href: '/agents', shortcut: 'A' },
   { id: 'terminals', label: 'Terminals', icon: 'terminal', href: '/terminals', shortcut: 'T' },
+  { id: 'monitor', label: 'Monitor', icon: 'activity', href: '/monitor', shortcut: 'M' },
   { id: 'insights', label: 'Insights', icon: 'trending-up', href: '/insights', shortcut: 'I' },
   { id: 'context', label: 'Context', icon: 'brain', href: '/context', shortcut: 'C' },
   { id: 'roadmap', label: 'Roadmap', icon: 'map', href: '/roadmap', shortcut: 'R' },

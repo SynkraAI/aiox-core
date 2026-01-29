@@ -297,7 +297,7 @@ dependencies:
     wsl_config:
       distribution: Ubuntu
       installation_path: ~/.local/bin/coderabbit
-      working_directory: /mnt/c/Users/AllFluence-User/Workspaces/AIOS/AIOS-V4/@synkra/aios-core
+      working_directory: ${PROJECT_ROOT}
     usage:
       - Pre-commit quality check - run before marking story complete
       - Catch issues early - find bugs, security issues, code smells during development
@@ -345,7 +345,7 @@ dependencies:
         - DO NOT mark story complete
 
     commands:
-      dev_pre_commit_uncommitted: "wsl bash -c 'cd /mnt/c/Users/AllFluence-User/Workspaces/AIOS/AIOS-V4/@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
+      dev_pre_commit_uncommitted: "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
     execution_guidelines: |
       CRITICAL: CodeRabbit CLI is installed in WSL, not Windows.
 

@@ -12,19 +12,19 @@ Comprometemo-nos a agir e interagir de maneiras que contribuam para uma comunida
 
 Exemplos de comportamentos que contribuem para um ambiente positivo em nossa comunidade incluem:
 
-* Usar linguagem acolhedora e inclusiva
-* Respeitar pontos de vista e experiências diferentes
-* Aceitar críticas construtivas com elegância
-* Focar no que é melhor para a comunidade
-* Demonstrar empatia com outros membros da comunidade
+- Usar linguagem acolhedora e inclusiva
+- Respeitar pontos de vista e experiências diferentes
+- Aceitar críticas construtivas com elegância
+- Focar no que é melhor para a comunidade
+- Demonstrar empatia com outros membros da comunidade
 
 Exemplos de comportamentos inaceitáveis incluem:
 
-* Uso de linguagem ou imagens sexualizadas e atenção ou avanços sexuais de qualquer tipo
-* Trolling, comentários insultuosos ou depreciativos e ataques pessoais ou políticos
-* Assédio público ou privado
-* Publicar informações privadas de outros, como endereço físico ou de e-mail, sem sua permissão explícita
-* Outras condutas que poderiam ser razoavelmente consideradas inapropriadas em um ambiente profissional
+- Uso de linguagem ou imagens sexualizadas e atenção ou avanços sexuais de qualquer tipo
+- Trolling, comentários insultuosos ou depreciativos e ataques pessoais ou políticos
+- Assédio público ou privado
+- Publicar informações privadas de outros, como endereço físico ou de e-mail, sem sua permissão explícita
+- Outras condutas que poderiam ser razoavelmente consideradas inapropriadas em um ambiente profissional
 
 ## Responsabilidades de Aplicação
 
@@ -85,4 +85,4 @@ Para respostas a perguntas comuns sobre este código de conduta, consulte [https
 
 ---
 
-**Copyright (c) 2025 AllFluence Inc.**
+**Copyright (c) 2025 SynkraAI Inc.**

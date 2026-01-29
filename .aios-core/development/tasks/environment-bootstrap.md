@@ -21,16 +21,19 @@ Complete environment bootstrap for new AIOS projects. Verifies and installs all 
 **Choose your execution mode:**
 
 ### 1. YOLO Mode - Fast, Autonomous (0-1 prompts)
+
 - Autonomous decision making with logging
 - Skips optional tools, installs only essential
 - **Best for:** Experienced developers, quick setup
 
 ### 2. Interactive Mode - Balanced, Educational (5-10 prompts) **[DEFAULT]**
+
 - Explicit decision checkpoints
 - Educational explanations for each tool
 - **Best for:** Learning, first-time setup, team onboarding
 
 ### 3. Pre-Flight Planning - Comprehensive Upfront Planning
+
 - Full analysis phase before any installation
 - Zero ambiguity execution
 - **Best for:** Enterprise environments, strict policies
@@ -246,6 +249,7 @@ token_usage: ~500-1,000 tokens (for guidance only)
 ```
 
 **Optimization Notes:**
+
 - Parallel CLI checks to reduce total time
 - Cache detection results in .aios/environment-report.yaml
 - Skip already-installed tools
@@ -284,10 +288,10 @@ changelog:
 ```yaml
 elicit: true
 interaction_points:
-  - project_name: "What is the project name?"
-  - github_org: "GitHub organization or username for repository?"
-  - optional_tools: "Which optional tools do you want to install?"
-  - git_provider: "Git provider preference (GitHub/GitLab/Bitbucket)?"
+  - project_name: 'What is the project name?'
+  - github_org: 'GitHub organization or username for repository?'
+  - optional_tools: 'Which optional tools do you want to install?'
+  - git_provider: 'Git provider preference (GitHub/GitLab/Bitbucket)?'
 ```
 
 ---
@@ -301,6 +305,7 @@ interaction_points:
 **IMPORTANT:** The agent executing this task should detect the OS using native commands appropriate for the current shell. Do NOT mix PowerShell and bash syntax.
 
 **For Windows (PowerShell):**
+
 ```powershell
 # Windows PowerShell detection - use in PowerShell context only
 Write-Host "Detecting operating system..."
@@ -316,6 +321,7 @@ Write-Host "Package managers: $($pkgMgrs -join ', ')"
 ```
 
 **For macOS/Linux (bash):**
+
 ```bash
 # Unix bash detection - use in bash/zsh context only
 echo "Detecting operating system..."
@@ -336,6 +342,7 @@ fi
 ```
 
 **Agent Guidance:**
+
 - On Windows: Use PowerShell commands directly (no bash wrapper needed)
 - On macOS/Linux: Use bash commands directly
 - NEVER mix syntax (e.g., don't use `${}` bash variables in PowerShell context)
@@ -397,27 +404,27 @@ Would you like to update outdated tools? (Y/n): _
 ```yaml
 update_checks:
   supabase:
-    check_latest: "npm view supabase version"
+    check_latest: 'npm view supabase version'
     update:
-      npm: "npm update -g supabase"
-      scoop: "scoop update supabase"
-      brew: "brew upgrade supabase"
+      npm: 'npm update -g supabase'
+      scoop: 'scoop update supabase'
+      brew: 'brew upgrade supabase'
 
   gh:
-    check_latest: "gh api repos/cli/cli/releases/latest --jq .tag_name"
+    check_latest: 'gh api repos/cli/cli/releases/latest --jq .tag_name'
     update:
-      windows: "winget upgrade GitHub.cli"
-      macos: "brew upgrade gh"
-      linux: "gh upgrade"
+      windows: 'winget upgrade GitHub.cli'
+      macos: 'brew upgrade gh'
+      linux: 'gh upgrade'
 
   node:
-    note: "Consider using nvm/fnm for Node.js version management"
-    check_latest: "npm view node version"
+    note: 'Consider using nvm/fnm for Node.js version management'
+    check_latest: 'npm view node version'
 
   railway:
-    check_latest: "npm view @railway/cli version"
+    check_latest: 'npm view @railway/cli version'
     update:
-      npm: "npm update -g @railway/cli"
+      npm: 'npm update -g @railway/cli'
 ```
 
 **CLI Check Commands:**
@@ -426,61 +433,61 @@ update_checks:
 cli_checks:
   essential:
     git:
-      check: "git --version"
-      expected: "git version 2.x"
+      check: 'git --version'
+      expected: 'git version 2.x'
       install:
-        windows: "winget install --id Git.Git"
-        macos: "xcode-select --install"
-        linux: "sudo apt install git"
+        windows: 'winget install --id Git.Git'
+        macos: 'xcode-select --install'
+        linux: 'sudo apt install git'
 
     gh:
-      check: "gh --version"
-      expected: "gh version 2.x"
+      check: 'gh --version'
+      expected: 'gh version 2.x'
       install:
-        windows: "winget install --id GitHub.cli"
-        macos: "brew install gh"
-        linux: "sudo apt install gh"
-      post_install: "gh auth login"
+        windows: 'winget install --id GitHub.cli'
+        macos: 'brew install gh'
+        linux: 'sudo apt install gh'
+      post_install: 'gh auth login'
 
     node:
-      check: "node --version"
-      expected: "v18.x or v20.x"
+      check: 'node --version'
+      expected: 'v18.x or v20.x'
       install:
-        windows: "winget install --id OpenJS.NodeJS.LTS"
-        macos: "brew install node@20"
-        linux: "curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt install nodejs"
+        windows: 'winget install --id OpenJS.NodeJS.LTS'
+        macos: 'brew install node@20'
+        linux: 'curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - && sudo apt install nodejs'
 
     npm:
-      check: "npm --version"
-      expected: "10.x"
-      note: "Installed with Node.js"
+      check: 'npm --version'
+      expected: '10.x'
+      note: 'Installed with Node.js'
 
   infrastructure:
     supabase:
-      check: "supabase --version"
-      expected: "1.x"
+      check: 'supabase --version'
+      expected: '1.x'
       install:
-        npm: "npm install -g supabase"
-        scoop: "scoop bucket add supabase https://github.com/supabase/scoop-bucket.git && scoop install supabase"
-        brew: "brew install supabase/tap/supabase"
-      post_install: "supabase login"
+        npm: 'npm install -g supabase'
+        scoop: 'scoop bucket add supabase https://github.com/supabase/scoop-bucket.git && scoop install supabase'
+        brew: 'brew install supabase/tap/supabase'
+      post_install: 'supabase login'
 
     railway:
-      check: "railway --version"
-      expected: "3.x"
+      check: 'railway --version'
+      expected: '3.x'
       install:
-        npm: "npm install -g @railway/cli"
-        brew: "brew install railway"
-      post_install: "railway login"
+        npm: 'npm install -g @railway/cli'
+        brew: 'brew install railway'
+      post_install: 'railway login'
 
     docker:
-      check: "docker --version"
-      expected: "24.x or 25.x"
+      check: 'docker --version'
+      expected: '24.x or 25.x'
       install:
-        windows: "winget install --id Docker.DockerDesktop"
-        macos: "brew install --cask docker"
-        linux: "See https://docs.docker.com/engine/install/"
-      note: "Required for local Supabase development"
+        windows: 'winget install --id Docker.DockerDesktop'
+        macos: 'brew install --cask docker'
+        linux: 'See https://docs.docker.com/engine/install/'
+      note: 'Required for local Supabase development'
 
   quality:
     coderabbit:
@@ -503,7 +510,7 @@ cli_checks:
         else
           echo "NOT_INSTALLED"
         fi
-      expected: "0.8.x or higher"
+      expected: '0.8.x or higher'
       install:
         windows_wsl: |
           # 1. Ensure WSL is installed: wsl --install
@@ -511,8 +518,8 @@ cli_checks:
           curl -fsSL https://coderabbit.ai/install.sh | bash
           # 3. Authenticate:
           ~/.local/bin/coderabbit auth login
-        macos: "curl -fsSL https://coderabbit.ai/install.sh | bash"
-        linux: "curl -fsSL https://coderabbit.ai/install.sh | bash"
+        macos: 'curl -fsSL https://coderabbit.ai/install.sh | bash'
+        linux: 'curl -fsSL https://coderabbit.ai/install.sh | bash'
       note: |
         WINDOWS USERS: CodeRabbit CLI runs in WSL, not native Windows.
         - Requires WSL with Ubuntu/Debian distribution
@@ -521,23 +528,23 @@ cli_checks:
         - See: docs/guides/coderabbit/README.md for full setup guide
       verification:
         windows: "wsl bash -c '~/.local/bin/coderabbit --version'"
-        unix: "coderabbit --version"
+        unix: 'coderabbit --version'
 
   optional:
     pnpm:
-      check: "pnpm --version"
-      expected: "8.x"
+      check: 'pnpm --version'
+      expected: '8.x'
       install:
-        npm: "npm install -g pnpm"
-      note: "Faster alternative to npm"
+        npm: 'npm install -g pnpm'
+      note: 'Faster alternative to npm'
 
     bun:
-      check: "bun --version"
-      expected: "1.x"
+      check: 'bun --version'
+      expected: '1.x'
       install:
-        windows: "powershell -c \"irm bun.sh/install.ps1 | iex\""
-        unix: "curl -fsSL https://bun.sh/install | bash"
-      note: "Ultra-fast JavaScript runtime"
+        windows: 'powershell -c "irm bun.sh/install.ps1 | iex"'
+        unix: 'curl -fsSL https://bun.sh/install | bash'
+      note: 'Ultra-fast JavaScript runtime'
 ```
 
 ---
@@ -721,7 +728,7 @@ Visibility:
   2. Private (recommended)
 
 GitHub Organization/Username:
-  Found organizations: SynkraAI, AllFluence
+  Found organizations: SynkraAI
   Or use personal account: your-username
 
 Select owner: _
@@ -1066,6 +1073,7 @@ Write-Host "══════════════════════�
 ```
 
 **Skip Conditions:**
+
 - Docker not installed or not running
 - Docker MCP Toolkit not available
 - User selected SKIP option
@@ -1245,6 +1253,7 @@ Environment bootstrap completed in 8m 32s
 **Error:** `winget: The term 'winget' is not recognized`
 
 **Fix:**
+
 1. Update Windows to latest version (winget requires Windows 10 1809+)
 2. Or install App Installer from Microsoft Store
 3. Or use alternative: `choco install gh` or `scoop install gh`
@@ -1254,6 +1263,7 @@ Environment bootstrap completed in 8m 32s
 **Error:** `error connecting to api.github.com`
 
 **Fix:**
+
 1. Check internet connection
 2. Check if behind corporate proxy: `gh config set http_proxy http://proxy:port`
 3. Try token-based auth: `gh auth login --with-token`
@@ -1263,6 +1273,7 @@ Environment bootstrap completed in 8m 32s
 **Error:** `Resource not accessible by personal access token`
 
 **Fix:**
+
 1. Re-authenticate with correct scopes: `gh auth login --scopes repo,workflow`
 2. Check if organization requires SSO: `gh auth login --hostname github.com`
 
@@ -1271,6 +1282,7 @@ Environment bootstrap completed in 8m 32s
 **Error:** `Cannot connect to Docker daemon`
 
 **Fix:**
+
 1. Windows: Ensure Docker Desktop is running
 2. macOS: Open Docker.app
 3. Linux: `sudo systemctl start docker`

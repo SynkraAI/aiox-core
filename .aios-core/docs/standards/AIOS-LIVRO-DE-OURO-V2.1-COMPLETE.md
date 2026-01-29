@@ -11,7 +11,7 @@
 ---
 
 > **"Structure is Sacred. Tone is Flexible."**
-> *— Fundamento filosófico do AIOS*
+> _— Fundamento filosófico do AIOS_
 
 ---
 
@@ -24,9 +24,10 @@ Este documento é a **versão consolidada v2.1** que incorpora todas as mudança
 - ✅ **Multi-Repo Strategy** (3 repositórios públicos + 2 privados)
 - ✅ **Quality Gates 3 Layers** (Pre-commit, PR Automation, Human Review)
 - ✅ **Story Template v2.0** (Cross-Story Decisions, CodeRabbit Integration)
-- ✅ **npm Package Scoping** (@aios/core, @aios/squad-*, @aios/mcp-presets)
+- ✅ **npm Package Scoping** (@aios/core, @aios/squad-\*, @aios/mcp-presets)
 
 **Referências Legadas:**
+
 - `AIOS-LIVRO-DE-OURO.md` - Base v2.0.0 (Jan 2025)
 - `AIOS-LIVRO-DE-OURO-V2.1.md` - Delta parcial
 - `AIOS-LIVRO-DE-OURO-V2.1-SUMMARY.md` - Resumo de mudanças
@@ -39,20 +40,20 @@ Este documento é a **versão consolidada v2.1** que incorpora todas as mudança
 
 **IMPORTANTE: v2.1 alterou fundamentalmente o business model!**
 
-| Componente | v2.0 | v2.1 | Rationale |
-|------------|------|------|-----------|
-| **11 Agents** | ✅ Open | ✅ Open | Core functionality |
-| **Workers (97+)** | ❌ Closed | ✅ **OPEN** | Commodity, network effects |
-| **Service Discovery** | ❌ None | ✅ **BUILT-IN** | Community needs it |
-| **Task-First Arch** | ⚠️ Implicit | ✅ **EXPLICIT** | Architecture clarity |
-| **Clones (DNA Mental™)** | 🔒 Closed | 🔒 **CLOSED** | True moat (IP) |
-| **Expansion Packs** | 🔒 Closed | 🔒 **CLOSED** | Domain expertise |
+| Componente               | v2.0        | v2.1            | Rationale                  |
+| ------------------------ | ----------- | --------------- | -------------------------- |
+| **11 Agents**            | ✅ Open     | ✅ Open         | Core functionality         |
+| **Workers (97+)**        | ❌ Closed   | ✅ **OPEN**     | Commodity, network effects |
+| **Service Discovery**    | ❌ None     | ✅ **BUILT-IN** | Community needs it         |
+| **Task-First Arch**      | ⚠️ Implicit | ✅ **EXPLICIT** | Architecture clarity       |
+| **Clones (DNA Mental™)** | 🔒 Closed   | 🔒 **CLOSED**   | True moat (IP)             |
+| **Expansion Packs**      | 🔒 Closed   | 🔒 **CLOSED**   | Domain expertise           |
 
 ### Repositório Multi-Repo Structure
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                     ALLFLUENCE ORGANIZATION                             │
+│                     SYNKRA ORGANIZATION                                 │
 │                                                                         │
 │   PUBLIC REPOSITORIES (3)                                               │
 │   ═══════════════════════                                               │
@@ -100,12 +101,12 @@ Este documento é a **versão consolidada v2.1** que incorpora todas as mudança
 
 ### Competitive Positioning
 
-| Framework | Open-Source Completeness | Unique Differentiator |
-|-----------|-------------------------|----------------------|
-| LangChain | ✅ Complete | ❌ None (commodity) |
-| CrewAI | ✅ Complete | ❌ None (commodity) |
-| AutoGen | ✅ Complete | ❌ None (commodity) |
-| **AIOS v2.1** | ✅ **Complete** | ✅ **Clones (DNA Mental™)** ⭐ |
+| Framework     | Open-Source Completeness | Unique Differentiator          |
+| ------------- | ------------------------ | ------------------------------ |
+| LangChain     | ✅ Complete              | ❌ None (commodity)            |
+| CrewAI        | ✅ Complete              | ❌ None (commodity)            |
+| AutoGen       | ✅ Complete              | ❌ None (commodity)            |
+| **AIOS v2.1** | ✅ **Complete**          | ✅ **Clones (DNA Mental™)** ⭐ |
 
 **Analogia:** Linux é open source, mas Red Hat Enterprise Linux adiciona suporte e otimizações. Ambos são Linux, mas o valor agregado varia. AIOS funciona igual.
 
@@ -132,14 +133,14 @@ Este não é um documento para ser lido do início ao fim. É um **sistema de ap
 
 ### Learning Tracks Disponíveis
 
-| Track | Tempo | Melhor Para |
-|-------|-------|-------------|
-| **Track 1: Quick Start** | 15-30 min | Exploradores curiosos, decisores rápidos |
-| **Track 2: Deep Dive** | 1.5-2h | Builders ativos com dores reais |
-| **Track 3: Mastery Path** | Semanas | Framework developers, power users |
-| **Track 4: Decision Maker** | 30-45 min | Líderes avaliando adoção |
-| **Track 5: Targeted** | Variável | Precisa de algo específico |
-| **Track 6: v2.0 Upgrade** | 45-60 min | Usuários v2.0 migrando |
+| Track                       | Tempo     | Melhor Para                              |
+| --------------------------- | --------- | ---------------------------------------- |
+| **Track 1: Quick Start**    | 15-30 min | Exploradores curiosos, decisores rápidos |
+| **Track 2: Deep Dive**      | 1.5-2h    | Builders ativos com dores reais          |
+| **Track 3: Mastery Path**   | Semanas   | Framework developers, power users        |
+| **Track 4: Decision Maker** | 30-45 min | Líderes avaliando adoção                 |
+| **Track 5: Targeted**       | Variável  | Precisa de algo específico               |
+| **Track 6: v2.0 Upgrade**   | 45-60 min | Usuários v2.0 migrando                   |
 
 ---
 
@@ -150,6 +151,7 @@ Este não é um documento para ser lido do início ao fim. É um **sistema de ap
 ### O Problema
 
 Desenvolvimento com AI agents hoje é **caótico**:
+
 - Agents sem coordenação
 - Resultados inconsistentes
 - Sem quality gates
@@ -159,6 +161,7 @@ Desenvolvimento com AI agents hoje é **caótico**:
 ### A Solução
 
 AIOS fornece **orquestração estruturada**:
+
 - 11 agents especializados com personalidades
 - Workflows multi-agent coordenados
 - Quality Gates em 3 camadas
@@ -172,6 +175,7 @@ AIOS fornece **orquestração estruturada**:
 > "Quando as informações estão sempre nas mesmas posições, nosso cérebro sabe onde buscar rápido."
 
 **FIXO (Structure):**
+
 - Posições de template
 - Ordem de seções
 - Formatos de métricas
@@ -179,6 +183,7 @@ AIOS fornece **orquestração estruturada**:
 - Workflows de task
 
 **FLEXÍVEL (Tone):**
+
 - Mensagens de status
 - Escolhas de vocabulário
 - Uso de emoji
@@ -209,19 +214,19 @@ AIOS fornece **orquestração estruturada**:
 
 ### Os 11 Agents v2.1
 
-| Agent | ID | Archetype | Responsabilidade |
-|-------|-----|-----------|------------------|
-| **Dex** | `dev` | Builder | Code implementation |
-| **Quinn** | `qa` | Guardian | Quality assurance |
-| **Aria** | `architect` | Architect | Technical architecture |
-| **Nova** | `po` | Visionary | Product backlog |
-| **Kai** | `pm` | Balancer | Product strategy |
-| **River** | `sm` | Facilitator | Process facilitation |
-| **Zara** | `analyst` | Explorer | Business analysis |
-| **Dara** | `data-engineer` | Architect | Data engineering |
-| **Felix** | `devops` | Optimizer | CI/CD and operations |
-| **Uma** | `ux-expert` | Creator | User experience |
-| **Pax** | `aios-master` | Orchestrator | Framework orchestration |
+| Agent     | ID              | Archetype    | Responsabilidade        |
+| --------- | --------------- | ------------ | ----------------------- |
+| **Dex**   | `dev`           | Builder      | Code implementation     |
+| **Quinn** | `qa`            | Guardian     | Quality assurance       |
+| **Aria**  | `architect`     | Architect    | Technical architecture  |
+| **Nova**  | `po`            | Visionary    | Product backlog         |
+| **Kai**   | `pm`            | Balancer     | Product strategy        |
+| **River** | `sm`            | Facilitator  | Process facilitation    |
+| **Zara**  | `analyst`       | Explorer     | Business analysis       |
+| **Dara**  | `data-engineer` | Architect    | Data engineering        |
+| **Felix** | `devops`        | Optimizer    | CI/CD and operations    |
+| **Uma**   | `ux-expert`     | Creator      | User experience         |
+| **Pax**   | `aios-master`   | Orchestrator | Framework orchestration |
 
 ### Agent Activation
 
@@ -249,6 +254,7 @@ AIOS fornece **orquestração estruturada**:
 ### O Que Isso Significa
 
 **Tradicional (Task-per-Executor):**
+
 ```yaml
 # 2 implementações separadas para a mesma task
 agent_task.md:
@@ -259,6 +265,7 @@ worker_task.js:
 ```
 
 **Task-First (Universal Task):**
+
 ```yaml
 # UMA definição de task
 task: analyzeMarket()
@@ -339,12 +346,12 @@ Regras:
 
 ### Terminologia
 
-| Termo Antigo | Termo Novo | Descrição |
-|--------------|------------|-----------|
-| Expansion Pack | **Squad** | Modular AI agent teams |
-| Squads/ | **squads/** | Diretório de Squads |
-| pack.yaml | **squad.yaml** | Manifesto do Squad |
-| @expansion/* | **@aios/squad-*** | npm scope |
+| Termo Antigo   | Termo Novo         | Descrição              |
+| -------------- | ------------------ | ---------------------- |
+| Expansion Pack | **Squad**          | Modular AI agent teams |
+| Squads/        | **squads/**        | Diretório de Squads    |
+| pack.yaml      | **squad.yaml**     | Manifesto do Squad     |
+| @expansion/\*  | **@aios/squad-\*** | npm scope              |
 
 ### Estrutura de Squad
 
@@ -372,7 +379,7 @@ description: Data pipeline and ETL automation squad
 license: MIT
 
 peerDependencies:
-  "@aios/core": "^2.1.0"
+  '@aios/core': '^2.1.0'
 
 agents:
   - id: etl-orchestrator
@@ -436,6 +443,7 @@ exports:
 ### Configuração
 
 **Layer 1 - Pre-commit (.husky/pre-commit):**
+
 ```bash
 #!/bin/sh
 npx lint-staged
@@ -444,6 +452,7 @@ npm test -- --onlyChanged
 ```
 
 **Layer 2 - GitHub Actions (.github/workflows/quality-gates-pr.yml):**
+
 ```yaml
 name: Quality Gates PR
 on: [pull_request]
@@ -460,6 +469,7 @@ jobs:
 ```
 
 **Layer 3 - CODEOWNERS:**
+
 ```
 # Layer 3: Human review requirements
 *.md @architecture-team
@@ -473,7 +483,7 @@ jobs:
 
 ### Estrutura Completa
 
-```markdown
+````markdown
 # Story X.X: [Title]
 
 **Epic:** [Parent Epic]
@@ -488,8 +498,8 @@ jobs:
 
 ## 🔀 Cross-Story Decisions
 
-| Decision | Source | Impact on This Story |
-|----------|--------|----------------------|
+| Decision        | Source     | Impact on This Story        |
+| --------------- | ---------- | --------------------------- |
 | [Decision Name] | [Story ID] | [How it affects this story] |
 
 ---
@@ -518,40 +528,46 @@ GIVEN [context]
 WHEN [action]
 THEN [expected result]
 ```
+````
 
 ---
 
 ## 🤖 CodeRabbit Integration
 
 ### Story Type Analysis
-| Attribute | Value | Rationale |
-|-----------|-------|-----------|
-| Type | [Type] | [Why] |
-| Complexity | [Low/Medium/High] | [Why] |
-| Test Requirements | [Type] | [Why] |
+
+| Attribute         | Value             | Rationale |
+| ----------------- | ----------------- | --------- |
+| Type              | [Type]            | [Why]     |
+| Complexity        | [Low/Medium/High] | [Why]     |
+| Test Requirements | [Type]            | [Why]     |
 
 ### Agent Assignment
-| Role | Agent | Responsibility |
-|------|-------|----------------|
-| Primary | @dev | [Task] |
-| Secondary | @qa | [Task] |
+
+| Role      | Agent | Responsibility |
+| --------- | ----- | -------------- |
+| Primary   | @dev  | [Task]         |
+| Secondary | @qa   | [Task]         |
 
 ---
 
 ## 🧑‍💻 Dev Agent Record
 
 ### Execution Log
+
 | Timestamp | Phase | Action | Result |
-|-----------|-------|--------|--------|
+| --------- | ----- | ------ | ------ |
 
 ---
 
 ## 🧪 QA Results
 
 ### Test Execution Summary
+
 | Check | Status | Notes |
-|-------|--------|-------|
-```
+| ----- | ------ | ----- |
+
+````
 
 ---
 
@@ -578,7 +594,7 @@ npm install @aios/squad-etl
 
 # MCP presets (independent)
 npm install @aios/mcp-presets
-```
+````
 
 ---
 
@@ -662,13 +678,13 @@ $ aios workers use json-parser --task my-task
 
 ### Available Workflows
 
-| Workflow | Use Case | Agents Involved |
-|----------|----------|-----------------|
-| `greenfield-fullstack` | New full-stack project | All agents |
-| `brownfield-integration` | Add AIOS to existing | dev, architect |
-| `fork-join` | Parallel task execution | Multiple |
-| `organizer-worker` | Delegated execution | po, dev |
-| `data-pipeline` | ETL workflows | data-engineer, qa |
+| Workflow                 | Use Case                | Agents Involved   |
+| ------------------------ | ----------------------- | ----------------- |
+| `greenfield-fullstack`   | New full-stack project  | All agents        |
+| `brownfield-integration` | Add AIOS to existing    | dev, architect    |
+| `fork-join`              | Parallel task execution | Multiple          |
+| `organizer-worker`       | Delegated execution     | po, dev           |
+| `data-pipeline`          | ETL workflows           | data-engineer, qa |
 
 ### Executing Workflows
 
@@ -769,36 +785,36 @@ $ aios workflow brownfield-integration --target=./existing-project
 
 ### Installation
 
-| Metric | v2.0 | v2.1 | Improvement |
-|--------|------|------|-------------|
-| Time to install | 2-4 hours | 5 minutes | **96% faster** |
-| Steps required | 15+ manual | 1 command | **93% simpler** |
-| Success rate | 60% | 98% | **+38%** |
+| Metric          | v2.0       | v2.1      | Improvement     |
+| --------------- | ---------- | --------- | --------------- |
+| Time to install | 2-4 hours  | 5 minutes | **96% faster**  |
+| Steps required  | 15+ manual | 1 command | **93% simpler** |
+| Success rate    | 60%        | 98%       | **+38%**        |
 
 ### Development Speed
 
-| Metric | v2.0 | v2.1 | Improvement |
-|--------|------|------|-------------|
-| Find reusable Worker | N/A | 30 seconds | **∞** |
-| Quality issues caught | 20% | 80% | **4x** |
-| Executor migration | 2-4 days | 2 seconds | **99.99% faster** |
+| Metric                | v2.0     | v2.1       | Improvement       |
+| --------------------- | -------- | ---------- | ----------------- |
+| Find reusable Worker  | N/A      | 30 seconds | **∞**             |
+| Quality issues caught | 20%      | 80%        | **4x**            |
+| Executor migration    | 2-4 days | 2 seconds  | **99.99% faster** |
 
 ### Quality
 
-| Metric | v2.0 | v2.1 |
-|--------|------|------|
+| Metric              | v2.0       | v2.1          |
+| ------------------- | ---------- | ------------- |
 | Quality Gate Layers | 1 (manual) | 3 (automated) |
-| Auto-caught issues | 0% | 80% |
-| Human review time | 2-4h/PR | 30min/PR |
+| Auto-caught issues  | 0%         | 80%           |
+| Human review time   | 2-4h/PR    | 30min/PR      |
 
 ---
 
 ## Version History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 2.0.0 | 2025-01-19 | Initial v2.0 release |
-| 2.1.0 | 2025-12-09 | Modular arch, Squads, Multi-repo, QG3, Story v2.0 |
+| Version | Date       | Changes                                           |
+| ------- | ---------- | ------------------------------------------------- |
+| 2.0.0   | 2025-01-19 | Initial v2.0 release                              |
+| 2.1.0   | 2025-12-09 | Modular arch, Squads, Multi-repo, QG3, Story v2.0 |
 
 ---
 
@@ -818,4 +834,4 @@ $ aios workflow brownfield-integration --target=./existing-project
 
 ---
 
-*Este documento consolida AIOS-LIVRO-DE-OURO.md (v2.0) + deltas v2.1 em um único documento completo.*
+_Este documento consolida AIOS-LIVRO-DE-OURO.md (v2.0) + deltas v2.1 em um único documento completo._

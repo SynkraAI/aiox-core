@@ -6,7 +6,7 @@
 
 # Guía de Selección de Agentes
 
-> [EN](../../guides/agent-selection-guide.md) | [PT](../pt/guides/agent-selection-guide.md) | **ES**
+> [EN](../../guides/agent-selection-guide.md) | [PT](../../pt/guides/agent-selection-guide.md) | **ES**
 
 ---
 
