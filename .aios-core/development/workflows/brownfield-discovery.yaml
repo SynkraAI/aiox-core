@@ -1,17 +1,11 @@
 workflow:
   id: brownfield-discovery
   name: Brownfield Discovery - Complete Technical Debt Assessment
-  version: "3.1"
+  version: "2.0"
   description: >-
     Comprehensive multi-agent discovery workflow for existing projects.
     Includes specialist validation cycles and executive awareness report.
     Designed for projects migrating from Lovable, v0.dev, or legacy codebases.
-
-    VERSION 3.0 CHANGES:
-    - Uses WorkflowOrchestrator for real subagent dispatch
-    - Each phase references REAL TASK files (no generic prompts)
-    - Deterministic code for file operations (mkdir, validation)
-    - Checklist-based quality validation
   type: brownfield
   project_types:
     - technical-debt-resolution
@@ -20,87 +14,9 @@ workflow:
     - codebase-audit
     - lovable-migration
 
-  # ═══════════════════════════════════════════════════════════════════════════════════════
-  #                              PRE-FLIGHT CONFIGURATION (V3.1)
-  # ═══════════════════════════════════════════════════════════════════════════════════════
-
-  pre_flight:
-    # Enable pre-flight tech stack detection
-    enabled: true
-
-    # Use TechStackDetector for detection
-    detector: TechStackDetector
-
-    # Continue workflow even if no stack detected
-    abort_on_empty: false
-
-    # Log detection results to console
-    log_results: true
-
-    # Detection includes:
-    #   - hasDatabase (Supabase, PostgreSQL, MongoDB, etc.)
-    #   - hasFrontend (React, Vue, Angular, etc.)
-    #   - hasBackend (Express, Fastify, Edge Functions, etc.)
-    #   - hasTypeScript
-    #   - hasTests
-
-  # Condition aliases for workflow phases
-  condition_aliases:
-    project_has_database: 'techStackProfile.hasDatabase'
-    project_has_frontend: 'techStackProfile.hasFrontend'
-    project_has_backend: 'techStackProfile.hasBackend'
-    supabase_configured: 'techStackProfile.database.type === "supabase"'
-    qa_review_approved: 'phaseOutputs.7.approved === true'
-
-  # ═══════════════════════════════════════════════════════════════════════════════════════
-  #                              ORCHESTRATION CONFIGURATION
-  # ═══════════════════════════════════════════════════════════════════════════════════════
-
-  orchestration:
-    # Phases that can run in parallel (no dependencies between them)
-    parallel_phases: [1, 2, 3]
-
-    # Use real subagents with persona transformation
-    subagent_mode: true
-
-    # V3.1: Dispatch mode - 'skill' uses AIOS Skills, 'task' uses Task tool
-    dispatch_mode: skill
-
-    # Maximum concurrent subagent executions
-    max_concurrency: 3
-
-    # V3.1: Early exit configuration
-    early_exit:
-      enabled: true
-      log_skipped: true
-      save_skip_reason: true
-
-    # Directory structure created BEFORE any phase (via code, not AI)
-    setup_directories:
-      - docs/architecture
-      - docs/frontend
-      - docs/prd
-      - docs/reviews
-      - docs/reports
-      - docs/stories
-      - supabase/docs
-      - .aios/workflow-state
-
-  # ═══════════════════════════════════════════════════════════════════════════════════════
-  #                              STARTUP CONFIGURATION
-  # ═══════════════════════════════════════════════════════════════════════════════════════
-
-  startup:
-    mode: single_option
-    default_action: yolo
-    options:
-      - id: yolo
-        label: "🚀 Iniciar Discovery (YOLO Mode)"
-        description: "Executa todas as fases automaticamente com mínima interação"
-        sets_yolo: true
-    # Não mostrar tabela de fases nem múltiplas opções
-    show_phases_table: false
-    show_detailed_menu: false
+  metadata:
+    elicit: true
+    confirmation_required: true
 
   # ═══════════════════════════════════════════════════════════════════════════════════════
   #                              WORKFLOW SEQUENCE
@@ -117,47 +33,28 @@ workflow:
       phase_name: "Coleta: Sistema"
       agent: architect
       action: document-project
-
-      # TASK FILE - Real task definition (not generic prompt)
-      task: document-project.md
-
-      # CHECKLIST - Validation after completion
-      checklist: architect-checklist.md
-
-      # TEMPLATE - Output format
-      template: brownfield-architecture-tmpl.yaml
-
       creates: docs/architecture/system-architecture.md
       elicit: true
       duration_estimate: "30-60 min"
-
-      # PRE-ACTIONS - Deterministic code operations BEFORE subagent
-      preActions:
-        - type: mkdir
-          path: docs/architecture
-        - type: check_tool
-          tool: exa
-          blocking: false
-        - type: check_tool
-          tool: github-cli
-          blocking: false
-
-      # POST-ACTIONS - Deterministic validation AFTER subagent
-      postActions:
-        - type: file_exists
-          path: docs/architecture/system-architecture.md
-        - type: min_file_size
-          path: docs/architecture/system-architecture.md
-          minKb: 5
-        - type: run_checklist
-          checklist: architect-checklist.md
-
       notes: |
-        @architect analisa e documenta o sistema completo.
+        @architect analisa e documenta o sistema completo:
 
-        TASK: document-project.md (arquivo completo carregado)
-        CHECKLIST: architect-checklist.md (validação pós-execução)
-        TEMPLATE: brownfield-architecture-tmpl.yaml
+        ANÁLISE:
+        - Stack tecnológico (React, Vite, Tailwind, etc.)
+        - Estrutura de pastas e componentes
+        - Dependências e versões
+        - Padrões de código existentes
+        - Pontos de integração
+        - Configurações (env, build, deploy)
+
+        DÉBITOS IDENTIFICADOS (nível sistema):
+        - Dependências desatualizadas
+        - Código duplicado
+        - Falta de testes
+        - Configurações hardcoded
+        - Acoplamento excessivo
+
+        COMANDO: @architect → *document-project
 
         OUTPUT: docs/architecture/system-architecture.md
 
@@ -165,52 +62,37 @@ workflow:
       phase: 2
       phase_name: "Coleta: Database"
       agent: data-engineer
-      action: schema-audit
-
-      # V3.1: Skill reference for dispatch
-      skill: 'AIOS:agents:data-engineer'
-
-      # TASK FILES - Real task definitions
-      task: db-schema-audit.md
-
-      # CHECKLIST - Validation after completion
-      checklist: database-design-checklist.md
-
+      action: load-schema + security-audit
       creates:
         - supabase/docs/SCHEMA.md
         - supabase/docs/DB-AUDIT.md
       condition: project_has_database
       elicit: true
       duration_estimate: "20-40 min"
-
-      # V3.1: Early exit behavior when condition is false
-      on_condition_false:
-        action: skip
-        log: 'No database detected - skipping database documentation phase'
-        save_to_context: true
-
-      # PRE-ACTIONS - Deterministic code operations
-      preActions:
-        - type: mkdir
-          path: supabase/docs
-        - type: check_env
-          vars: [SUPABASE_URL, SUPABASE_KEY]
-          blocking: false
-
-      # POST-ACTIONS - Deterministic validation
-      postActions:
-        - type: file_exists
-          path: supabase/docs/SCHEMA.md
-        - type: run_checklist
-          checklist: database-design-checklist.md
-
       notes: |
-        @data-engineer analisa o banco de dados.
+        @data-engineer analisa o banco de dados:
 
-        TASK: db-schema-audit.md + db-rls-audit.md
-        CHECKLIST: database-design-checklist.md
+        ANÁLISE:
+        - Schema completo (tabelas, colunas, tipos)
+        - Relacionamentos e foreign keys
+        - Índices existentes e faltantes
+        - RLS policies (cobertura e qualidade)
+        - Views e functions
+        - Performance (queries lentas conhecidas)
 
-        Se não houver banco, esta fase é PULADA automaticamente.
+        DÉBITOS IDENTIFICADOS (nível dados):
+        - Tabelas sem RLS
+        - Índices faltantes
+        - Normalização inadequada
+        - Constraints ausentes
+        - Migrations não versionadas
+        - Dados órfãos
+
+        COMANDOS:
+        @data-engineer → *load-schema
+        @data-engineer → *security-audit
+
+        Se não houver banco, pular para FASE 3.
 
         OUTPUT:
         - supabase/docs/SCHEMA.md
@@ -220,42 +102,33 @@ workflow:
       phase: 3
       phase_name: "Coleta: Frontend/UX"
       agent: ux-design-expert
-      action: audit-codebase
-
-      # TASK FILE - Real task definition
-      task: audit-codebase.md
-
-      # CHECKLIST - Validation after completion
-      checklist: component-quality-checklist.md
-
-      # TEMPLATE - Output format
-      template: front-end-spec-tmpl.yaml
-
+      action: create-front-end-spec
       creates: docs/frontend/frontend-spec.md
       elicit: true
       duration_estimate: "30-45 min"
-
-      # PRE-ACTIONS - Deterministic code operations
-      preActions:
-        - type: mkdir
-          path: docs/frontend
-
-      # POST-ACTIONS - Deterministic validation
-      postActions:
-        - type: file_exists
-          path: docs/frontend/frontend-spec.md
-        - type: min_file_size
-          path: docs/frontend/frontend-spec.md
-          minKb: 3
-        - type: run_checklist
-          checklist: component-quality-checklist.md
-
       notes: |
-        @ux-design-expert analisa o frontend.
+        @ux-design-expert analisa o frontend:
 
-        TASK: audit-codebase.md
-        CHECKLIST: component-quality-checklist.md
-        TEMPLATE: front-end-spec-tmpl.yaml
+        ANÁLISE:
+        - Componentes UI existentes
+        - Design system/tokens utilizados
+        - Padrões de layout
+        - Fluxos de usuário
+        - Responsividade
+        - Acessibilidade (a11y)
+        - Consistência visual
+        - Performance percebida
+
+        DÉBITOS IDENTIFICADOS (nível UX/UI):
+        - Inconsistências visuais
+        - Componentes duplicados
+        - Falta de design system
+        - Problemas de acessibilidade
+        - Mobile não otimizado
+        - Estados de loading/error faltando
+        - Feedback de usuário ausente
+
+        COMANDO: @ux-design-expert → *create-front-end-spec
 
         OUTPUT: docs/frontend/frontend-spec.md
 
@@ -293,7 +166,7 @@ workflow:
 
         ### 3. Débitos de Frontend/UX
         [Lista do frontend-spec.md]
-        ⚠️ PENDENTE: Revisão do @ux-expert
+        ⚠️ PENDENTE: Revisão do @ux-design-expert
 
         ### 4. Matriz Preliminar
         | ID | Débito | Área | Impacto | Esforço | Prioridade |
@@ -301,7 +174,7 @@ workflow:
 
         ### 5. Perguntas para Especialistas
         - @data-engineer: [perguntas sobre DB]
-        - @ux-expert: [perguntas sobre UX]
+        - @ux-design-expert: [perguntas sobre UX]
         ```
 
         COMANDO: @architect (prompt manual)
@@ -316,7 +189,7 @@ workflow:
 
         Crie um DRAFT consolidando todos os débitos técnicos.
         Marque claramente as seções que precisam de revisão dos especialistas.
-        Adicione perguntas específicas para @data-engineer e @ux-expert.
+        Adicione perguntas específicas para @data-engineer e @ux-design-expert.
 
         Salve em: docs/prd/technical-debt-DRAFT.md
         ```
@@ -403,7 +276,7 @@ workflow:
       elicit: true
       duration_estimate: "20-30 min"
       notes: |
-        @ux-expert revisa a seção de Frontend/UX do DRAFT:
+        @ux-design-expert revisa a seção de Frontend/UX do DRAFT:
 
         RESPONSABILIDADES:
         1. VALIDAR débitos identificados
@@ -425,7 +298,7 @@ workflow:
            - Responde perguntas do @architect
            - Sugere soluções de design
 
-        COMANDO: @ux-expert (prompt manual)
+        COMANDO: @ux-design-expert (prompt manual)
 
         PROMPT:
         ```
@@ -467,7 +340,7 @@ workflow:
       creates: docs/reviews/qa-review.md
       requires:
         - docs/prd/technical-debt-DRAFT.md
-        - docs/reviews/db-specialist-review.md (if exists)  # Phase 5 may be skipped if no database
+        - docs/reviews/db-specialist-review.md
         - docs/reviews/ux-specialist-review.md
       elicit: true
       duration_estimate: "30-45 min"
@@ -564,7 +437,7 @@ workflow:
 
         CONSOLIDAÇÃO FINAL:
         1. Incorpora ajustes do @data-engineer
-        2. Incorpora ajustes do @ux-expert
+        2. Incorpora ajustes do @ux-design-expert
         3. Endereça gaps do @qa
         4. Recalcula prioridades com inputs dos especialistas
         5. Define ordem final de resolução
@@ -586,7 +459,7 @@ workflow:
         ### Database (validado por @data-engineer)
         | ID | Débito | Severidade | Horas | Prioridade |
 
-        ### Frontend/UX (validado por @ux-expert)
+        ### Frontend/UX (validado por @ux-design-expert)
         | ID | Débito | Severidade | Horas | Prioridade |
 
         ## Matriz de Priorização Final
@@ -830,7 +703,7 @@ workflow:
     # WORKFLOW COMPLETE
     # ═════════════════════════════════════════════════════════════════════════════════════
 
-    - workflow_end:
+    - meta: end
       action: discovery_complete
       notes: |
         ✅ DISCOVERY COMPLETO!
@@ -868,6 +741,59 @@ workflow:
         3. Iniciar desenvolvimento: @dev → story-1.1
 
         TEMPO TOTAL ESTIMADO: 4-6 horas
+
+  # ═══════════════════════════════════════════════════════════════════════════════════════
+  #                              FLOW DIAGRAM
+  # ═══════════════════════════════════════════════════════════════════════════════════════
+
+  flow_diagram: |
+    ```mermaid
+    graph TD
+        subgraph PHASE_1_3["PHASES 1-3: Data Collection"]
+            A[Start: Brownfield Discovery] --> B[architect: system documentation]
+            B --> C{Project has database?}
+            C -->|Yes| D[data-engineer: schema + audit]
+            C -->|No| E[ux-design-expert: frontend spec]
+            D --> E
+        end
+
+        subgraph PHASE_4["PHASE 4: Initial Consolidation"]
+            E --> F[architect: consolidate DRAFT]
+        end
+
+        subgraph PHASE_5_7["PHASES 5-7: Specialist Validation"]
+            F --> G[data-engineer: validate DB section]
+            G --> H[ux-design-expert: validate UX section]
+            H --> I[qa: quality gate review]
+            I --> J{QA Gate?}
+            J -->|NEEDS WORK| K[Return to consolidation]
+            K --> F
+        end
+
+        subgraph PHASE_8_9["PHASES 8-9: Final Reports"]
+            J -->|APPROVED| L[architect: final assessment]
+            L --> M[analyst: executive report]
+        end
+
+        subgraph PHASE_10["PHASE 10: Planning"]
+            M --> N[pm: create epic]
+            N --> O[pm: create stories]
+            O --> P[Discovery Complete]
+        end
+
+        style P fill:#90EE90
+        style B fill:#FFE4B5
+        style D fill:#FFE4B5
+        style E fill:#FFE4B5
+        style F fill:#ADD8E6
+        style L fill:#ADD8E6
+        style G fill:#F0E68C
+        style H fill:#F0E68C
+        style I fill:#F0E68C
+        style M fill:#DDA0DD
+        style N fill:#DDA0DD
+        style O fill:#DDA0DD
+    ```
 
   # ═══════════════════════════════════════════════════════════════════════════════════════
   #                              QUICK REFERENCE
@@ -948,6 +874,11 @@ workflow:
       - Assessment antes de investimento
       - Onboarding em projeto legado
       - Due diligence técnica
+    when_not_to_use:
+      - New project development from scratch (use greenfield-* workflows)
+      - Small enhancement to existing project (use brownfield-* workflows)
+      - Single story fix or bug (use brownfield-create-story task directly)
+      - Project already has comprehensive documentation (skip to brownfield-* workflow)
 
   handoff_prompts:
     coleta_complete: |
@@ -963,7 +894,7 @@ workflow:
 
       Próximo: Validação dos especialistas (FASES 5-7)
       - @data-engineer: revisar seção de Database
-      - @ux-expert: revisar seção de Frontend
+      - @ux-design-expert: revisar seção de Frontend
       - @qa: review geral
 
     validation_complete: |

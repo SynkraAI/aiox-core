@@ -129,6 +129,12 @@ commands:
     description: 'Propose framework modifications'
   - name: undo-last
     description: 'Undo last framework modification'
+  - name: validate-workflow
+    args: '{name|path} [--strict] [--all]'
+    description: 'Validate workflow YAML structure, agents, artifacts, and logic'
+  - name: run-workflow
+    args: '{name} [start|continue|status|skip|abort]'
+    description: 'Guided workflow execution with state tracking across sessions'
   - name: analyze-framework
     description: 'Analyze framework structure and patterns'
   - name: list-components
@@ -229,6 +235,8 @@ dependencies:
     - shard-doc.md
     - undo-last.md
     - update-manifest.md
+    - validate-workflow.md
+    - run-workflow.md
   # Delegated tasks (Story 6.1.2.3):
   #   brownfield-create-epic.md → @pm
   #   brownfield-create-story.md → @pm
@@ -261,6 +269,7 @@ dependencies:
     - workflow-management.md
     - yaml-validator.js
   workflows:
+    - brownfield-discovery.yaml
     - brownfield-fullstack.yaml
     - brownfield-service.yaml
     - brownfield-ui.yaml
@@ -276,21 +285,6 @@ dependencies:
     - po-master-checklist.md
     - story-dod-checklist.md
     - story-draft-checklist.md
-
-autoClaude:
-  version: '3.0'
-  migratedAt: '2026-01-29T02:24:08.199Z'
-  specPipeline:
-    canGather: true
-    canAssess: true
-    canResearch: true
-    canWrite: true
-    canCritique: true
-  execution:
-    canCreatePlan: true
-    canCreateContext: true
-    canExecute: false
-    canVerify: false
 ```
 
 ---

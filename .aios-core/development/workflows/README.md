@@ -5,12 +5,13 @@ This directory contains workflow definitions for the Synkra AIOS framework. Work
 ## Available Workflows
 
 ### Development Workflows
-- **brownfield-fullstack.md** - Workflow for existing full-stack projects
-- **brownfield-service.md** - Workflow for existing service/backend projects
-- **brownfield-ui.md** - Workflow for existing UI/frontend projects
-- **greenfield-fullstack.md** - Workflow for new full-stack projects
-- **greenfield-service.md** - Workflow for new service/backend projects
-- **greenfield-ui.md** - Workflow for new UI/frontend projects
+- **brownfield-discovery.yaml** - Comprehensive technical debt assessment for existing projects
+- **brownfield-fullstack.yaml** - Workflow for existing full-stack projects
+- **brownfield-service.yaml** - Workflow for existing service/backend projects
+- **brownfield-ui.yaml** - Workflow for existing UI/frontend projects
+- **greenfield-fullstack.yaml** - Workflow for new full-stack projects
+- **greenfield-service.yaml** - Workflow for new service/backend projects
+- **greenfield-ui.yaml** - Workflow for new UI/frontend projects
 
 ### Configuration Workflows
 - **setup-environment.yaml** - Configure IDE (Windsurf/Cursor/Claude Code) with AIOS development rules

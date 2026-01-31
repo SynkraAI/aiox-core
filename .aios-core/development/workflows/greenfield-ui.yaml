@@ -5,6 +5,7 @@ workflow:
     Agent workflow for building frontend applications from concept to development.
     Supports both comprehensive planning for complex UIs and rapid prototyping for simple interfaces.
   type: greenfield
+  version: "1.0"
   project_types:
     - spa
     - mobile-app
@@ -13,33 +14,51 @@ workflow:
     - ui-prototype
     - simple-interface
 
+  metadata:
+    elicit: true
+    confirmation_required: true
+
+  phases:
+    - phase_1: Discovery & Planning
+    - phase_2: Document Sharding
+    - phase_3: Development Cycle
+
   sequence:
-    - agent: analyst
+    - phase: 1
+      name: Discovery & Planning
+      description: "Create all planning artifacts (project brief, PRD, frontend spec, architecture)"
+
+    - id: analyst-project-brief
+      agent: analyst
       creates: project-brief.md
       optional_steps:
         - brainstorming_session
         - market_research_prompt
       notes: "Can do brainstorming first, then optional deep research before creating project brief. SAVE OUTPUT: Copy final project-brief.md to your project's docs/ folder."
 
-    - agent: pm
+    - id: pm-create-prd
+      agent: pm
       creates: prd.md
       requires: project-brief.md
       notes: "Creates PRD from project brief using prd-tmpl, focused on UI/frontend requirements. SAVE OUTPUT: Copy final prd.md to your project's docs/ folder."
 
-    - agent: ux-expert
+    - id: ux-create-frontend-spec
+      agent: ux-design-expert
       creates: front-end-spec.md
       requires: prd.md
       optional_steps:
         - user_research_prompt
       notes: "Creates UI/UX specification using front-end-spec-tmpl. SAVE OUTPUT: Copy final front-end-spec.md to your project's docs/ folder."
 
-    - agent: ux-expert
+    - id: ux-generate-v0-prompt
+      agent: ux-design-expert
       creates: v0_prompt (optional)
       requires: front-end-spec.md
       condition: user_wants_ai_generation
       notes: "OPTIONAL BUT RECOMMENDED: Generate AI UI prompt for tools like v0, Lovable, etc. Use the generate-ai-frontend-prompt task. User can then generate UI in external tool and download project structure."
 
-    - agent: architect
+    - id: architect-create-architecture
+      agent: architect
       creates: front-end-architecture.md
       requires: front-end-spec.md
       optional_steps:
@@ -47,28 +66,39 @@ workflow:
         - review_generated_ui_structure
       notes: "Creates frontend architecture using front-end-architecture-tmpl. If user generated UI with v0/Lovable, can incorporate the project structure into architecture. May suggest changes to PRD stories or new stories. SAVE OUTPUT: Copy final front-end-architecture.md to your project's docs/ folder."
 
-    - agent: pm
-      updates: prd.md (if needed)
+    - id: pm-update-prd
+      agent: pm
+      updates: prd.md
       requires: front-end-architecture.md
       condition: architecture_suggests_prd_changes
       notes: "If architect suggests story changes, update PRD and re-export the complete unredacted prd.md to docs/ folder."
 
-    - agent: po
+    - id: po-validate-artifacts
+      agent: po
       validates: all_artifacts
       uses: po-master-checklist
       notes: "Validates all documents for consistency and completeness. May require updates to any document."
 
-    - agent: various
+    - id: po-delegate-fixes
+      agent: po
+      action: delegate_fixes
+      delegates_to: [analyst, pm, ux-design-expert, architect]
       updates: any_flagged_documents
       condition: po_checklist_issues
-      notes: "If PO finds issues, return to relevant agent to fix and re-export updated documents to docs/ folder."
+      notes: "If PO finds issues, PO delegates fixes to the relevant agent and re-validates updated documents in docs/ folder."
 
-    - project_setup_guidance:
+    - meta: guidance
+      id: project-setup-guidance
       action: guide_project_structure
       condition: user_has_generated_ui
       notes: "If user generated UI with v0/Lovable: For polyrepo setup, place downloaded project in separate frontend repo. For monorepo, place in apps/web or frontend/ directory. Review architecture document for specific guidance."
 
-    - agent: po
+    - phase: 2
+      name: Document Sharding
+      description: "Break down PRD and architecture into development-ready chunks"
+
+    - id: po-shard-documents
+      agent: po
       action: shard_documents
       creates: sharded_docs
       requires: all_artifacts_in_project
@@ -78,7 +108,12 @@ workflow:
         - Option B: Manual: Drag shard-doc task + docs/prd.md into chat
         - Creates docs/prd/ and docs/architecture/ folders with sharded content
 
-    - agent: sm
+    - phase: 3
+      name: Development Cycle
+      description: "Iterative story implementation with QA review"
+
+    - id: sm-create-story
+      agent: sm
       action: create_story
       creates: story.md
       requires: sharded_docs
@@ -89,7 +124,9 @@ workflow:
         - Creates next story from sharded docs
         - Story starts in "Draft" status
 
-    - agent: analyst/pm
+    - id: pm-review-draft-story
+      agent: pm
+      alternative_agent: analyst
       action: review_draft_story
       updates: story.md
       requires: story.md
@@ -101,7 +138,8 @@ workflow:
         - Review story completeness and alignment
         - Update story status: Draft → Approved
 
-    - agent: dev
+    - id: dev-implement-story
+      agent: dev
       action: implement_story
       creates: implementation_files
       requires: story.md
@@ -111,7 +149,8 @@ workflow:
         - Updates File List with all changes
         - Marks story as "Review" when complete
 
-    - agent: qa
+    - id: qa-review-implementation
+      agent: qa
       action: review_implementation
       updates: implementation_files
       requires: implementation_files
@@ -123,7 +162,8 @@ workflow:
         - Leaves checklist for remaining items
         - Updates story status (Review → Done or stays Review)
 
-    - agent: dev
+    - id: dev-address-qa-feedback
+      agent: dev
       action: address_qa_feedback
       updates: implementation_files
       condition: qa_left_unchecked_items
@@ -132,13 +172,15 @@ workflow:
         - Dev Agent (New Chat): Address remaining items
         - Return to QA for final approval
 
-    - repeat_development_cycle:
-      action: continue_for_all_stories
+    - meta: repeat
+      target_steps: [sm-create-story, dev-implement-story, qa-review-implementation]
+      condition: stories_remaining
       notes: |
         Repeat story cycle (SM → Dev → QA) for all epic stories
         Continue until all stories in PRD are complete
 
-    - agent: po
+    - id: po-epic-retrospective
+      agent: po
       action: epic_retrospective
       creates: epic-retrospective.md
       condition: epic_complete
@@ -149,12 +191,12 @@ workflow:
         - Validate epic was completed correctly
         - Document learnings and improvements
 
-    - workflow_end:
+    - meta: end
       action: project_complete
       notes: |
         All stories implemented and reviewed!
         Project development phase complete.
-        
+
         Reference: .aios-core/data/aios-kb.md#IDE Development Workflow
 
   flow_diagram: |
@@ -162,9 +204,9 @@ workflow:
     graph TD
         A[Start: UI Development] --> B[analyst: project-brief.md]
         B --> C[pm: prd.md]
-        C --> D[ux-expert: front-end-spec.md]
+        C --> D[ux-design-expert: front-end-spec.md]
         D --> D2{Generate v0 prompt?}
-        D2 -->|Yes| D3[ux-expert: create v0 prompt]
+        D2 -->|Yes| D3[ux-design-expert: create v0 prompt]
         D2 -->|No| E[architect: front-end-architecture.md]
         D3 --> D4[User: generate UI in v0/Lovable]
         D4 --> E
@@ -173,13 +215,13 @@ workflow:
         F -->|No| H[po: validate all artifacts]
         G --> H
         H --> I{PO finds issues?}
-        I -->|Yes| J[Return to relevant agent for fixes]
+        I -->|Yes| J[po: delegate fixes to relevant agent]
         I -->|No| K[po: shard documents]
         J --> H
-        
+
         K --> L[sm: create story]
         L --> M{Review draft story?}
-        M -->|Yes| N[analyst/pm: review & approve story]
+        M -->|Yes| N[pm: review & approve story]
         M -->|No| O[dev: implement story]
         N --> O
         O --> P{QA review?}
@@ -223,6 +265,11 @@ workflow:
       - Multiple team members will be involved
       - Long-term maintenance expected
       - Customer-facing applications
+    when_not_to_use:
+      - Full-stack application with backend needs (use greenfield-fullstack)
+      - API-only service without frontend (use greenfield-service)
+      - Enhancing existing frontend (use brownfield-ui)
+      - Technical debt assessment on existing project (use brownfield-discovery)
 
   handoff_prompts:
     analyst_to_pm: "Project brief is complete. Save it as docs/project-brief.md in your project, then create the PRD."

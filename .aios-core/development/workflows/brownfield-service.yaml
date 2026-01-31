@@ -5,6 +5,7 @@ workflow:
     Agent workflow for enhancing existing backend services and APIs with new features,
     modernization, or performance improvements. Handles existing system analysis and safe integration.
   type: brownfield
+  version: "1.0"
   project_types:
     - service-modernization
     - api-enhancement
@@ -12,36 +13,61 @@ workflow:
     - performance-optimization
     - integration-enhancement
 
+  metadata:
+    elicit: true
+    confirmation_required: true
+
+  phases:
+    - phase_1: Service Analysis & Planning
+    - phase_2: Document Sharding
+    - phase_3: Development Cycle
+
   sequence:
-    - step: service_analysis
+    - phase: 1
+      name: Service Analysis & Planning
+      description: "Analyze existing service and create planning artifacts"
+
+    - id: architect-service-analysis
+      step: service_analysis
       agent: architect
       action: analyze existing project and use task document-project
       creates: multiple documents per the document-project template
       notes: "Review existing service documentation, codebase, performance metrics, and identify integration dependencies."
 
-    - agent: pm
+    - id: pm-create-prd
+      agent: pm
       creates: prd.md
       uses: brownfield-prd-tmpl
       requires: existing_service_analysis
       notes: "Creates comprehensive PRD focused on service enhancement with existing system analysis. SAVE OUTPUT: Copy final prd.md to your project's docs/ folder."
 
-    - agent: architect
+    - id: architect-create-architecture
+      agent: architect
       creates: architecture.md
       uses: brownfield-architecture-tmpl
       requires: prd.md
       notes: "Creates architecture with service integration strategy and API evolution planning. SAVE OUTPUT: Copy final architecture.md to your project's docs/ folder."
 
-    - agent: po
+    - id: po-validate-artifacts
+      agent: po
       validates: all_artifacts
       uses: po-master-checklist
       notes: "Validates all documents for service integration safety and API compatibility. May require updates to any document."
 
-    - agent: various
+    - id: po-delegate-fixes
+      agent: po
+      action: delegate_fixes
+      delegates_to: [analyst, pm, architect]
       updates: any_flagged_documents
       condition: po_checklist_issues
-      notes: "If PO finds issues, return to relevant agent to fix and re-export updated documents to docs/ folder."
+      notes: "If PO finds issues, PO delegates fixes to the relevant agent and re-validates updated documents in docs/ folder."
 
-    - agent: po
+    - phase: 2
+      name: Document Sharding
+      description: "Break down PRD and architecture into development-ready chunks"
+
+    - id: po-shard-documents
+      agent: po
       action: shard_documents
       creates: sharded_docs
       requires: all_artifacts_in_project
@@ -51,7 +77,12 @@ workflow:
         - Option B: Manual: Drag shard-doc task + docs/prd.md into chat
         - Creates docs/prd/ and docs/architecture/ folders with sharded content
 
-    - agent: sm
+    - phase: 3
+      name: Development Cycle
+      description: "Iterative story implementation with QA review"
+
+    - id: sm-create-story
+      agent: sm
       action: create_story
       creates: story.md
       requires: sharded_docs
@@ -62,7 +93,9 @@ workflow:
         - Creates next story from sharded docs
         - Story starts in "Draft" status
 
-    - agent: analyst/pm
+    - id: pm-review-draft-story
+      agent: pm
+      alternative_agent: analyst
       action: review_draft_story
       updates: story.md
       requires: story.md
@@ -74,7 +107,8 @@ workflow:
         - Review story completeness and alignment
         - Update story status: Draft → Approved
 
-    - agent: dev
+    - id: dev-implement-story
+      agent: dev
       action: implement_story
       creates: implementation_files
       requires: story.md
@@ -84,7 +118,8 @@ workflow:
         - Updates File List with all changes
         - Marks story as "Review" when complete
 
-    - agent: qa
+    - id: qa-review-implementation
+      agent: qa
       action: review_implementation
       updates: implementation_files
       requires: implementation_files
@@ -96,7 +131,8 @@ workflow:
         - Leaves checklist for remaining items
         - Updates story status (Review → Done or stays Review)
 
-    - agent: dev
+    - id: dev-address-qa-feedback
+      agent: dev
       action: address_qa_feedback
       updates: implementation_files
       condition: qa_left_unchecked_items
@@ -105,13 +141,15 @@ workflow:
         - Dev Agent (New Chat): Address remaining items
         - Return to QA for final approval
 
-    - repeat_development_cycle:
-      action: continue_for_all_stories
+    - meta: repeat
+      target_steps: [sm-create-story, pm-review-draft-story, dev-implement-story, qa-review-implementation, dev-address-qa-feedback]
+      condition: stories_remaining
       notes: |
         Repeat story cycle (SM → Dev → QA) for all epic stories
         Continue until all stories in PRD are complete
 
-    - agent: po
+    - id: po-epic-retrospective
+      agent: po
       action: epic_retrospective
       creates: epic-retrospective.md
       condition: epic_complete
@@ -122,29 +160,29 @@ workflow:
         - Validate epic was completed correctly
         - Document learnings and improvements
 
-    - workflow_end:
+    - meta: end
       action: project_complete
       notes: |
         All stories implemented and reviewed!
         Project development phase complete.
-        
+
         Reference: .aios-core/data/aios-kb.md#IDE Development Workflow
 
   flow_diagram: |
     ```mermaid
     graph TD
-        A[Start: Service Enhancement] --> B[analyst: analyze existing service]
+        A[Start: Service Enhancement] --> B[architect: analyze existing service]
         B --> C[pm: prd.md]
         C --> D[architect: architecture.md]
         D --> E[po: validate with po-master-checklist]
         E --> F{PO finds issues?}
-        F -->|Yes| G[Return to relevant agent for fixes]
+        F -->|Yes| G[po: delegate fixes to relevant agent]
         F -->|No| H[po: shard documents]
         G --> E
-        
+
         H --> I[sm: create story]
         I --> J{Review draft story?}
-        J -->|Yes| K[analyst/pm: review & approve story]
+        J -->|Yes| K[pm: review & approve story]
         J -->|No| L[dev: implement story]
         K --> L
         L --> M{QA review?}
@@ -178,6 +216,11 @@ workflow:
       - Database schema changes required
       - Performance or scalability improvements needed
       - Multiple integration points affected
+    when_not_to_use:
+      - New service from scratch (use greenfield-service)
+      - Frontend enhancement (use brownfield-ui)
+      - Full-stack enhancement (use brownfield-fullstack)
+      - Comprehensive technical debt audit (use brownfield-discovery)
 
   handoff_prompts:
     analyst_to_pm: "Service analysis complete. Create comprehensive PRD with service integration strategy."
