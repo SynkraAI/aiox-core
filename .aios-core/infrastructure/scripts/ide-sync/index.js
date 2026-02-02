@@ -67,7 +67,7 @@ function loadConfig(projectRoot) {
         format: 'condensed-rules',
       },
       windsurf: {
-        enabled: true,
+        enabled: false, // Disabled - consolidating to core IDEs (v3.10.0)
         path: '.windsurf/rules/agents',
         format: 'xml-tagged-markdown',
       },

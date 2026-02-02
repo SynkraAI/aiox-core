@@ -1,7 +1,7 @@
 <!--
   Tradução: PT-BR
-  Original: /docs/en/installation/README.md
-  Última sincronização: 2026-01-26
+  Original: /docs/installation/README.md
+  Última sincronização: 2026-02-01
 -->
 
 # Documentação de Instalação do Synkra AIOS
@@ -10,8 +10,8 @@
 
 ---
 
-**Versão:** 2.1.0
-**Última Atualização:** 2025-01-24
+**Versão:** 2.1.1
+**Última Atualização:** 2026-02-01
 
 ---
 

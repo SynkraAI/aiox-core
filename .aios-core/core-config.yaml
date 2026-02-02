@@ -466,7 +466,7 @@ ideSync:
       path: .cursor/rules/agents
       format: condensed-rules
     windsurf:
-      enabled: true
+      enabled: false  # Disabled v3.10.0 - consolidating to core IDEs
       path: .windsurf/rules/agents
       format: xml-tagged-markdown
     antigravity:

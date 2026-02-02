@@ -58,8 +58,10 @@ Esta abordagem de duas fases elimina tanto a **inconsistência de planejamento**
 **Guias específicos por plataforma:**
 
 - 📖 [Guia de Instalação para macOS](docs/installation/macos.md)
-- 📖 Guia de Instalação para Windows (suporte integrado)
-- 📖 Guia de Instalação para Linux (suporte integrado)
+- 📖 [Guia de Instalação para Windows](docs/installation/windows.md)
+- 📖 [Guia de Instalação para Linux](docs/installation/linux.md)
+
+**Documentação multilíngue disponível:** [Português](docs/pt/installation/) | [Español](docs/es/installation/)
 
 ## Navegação Rápida
 

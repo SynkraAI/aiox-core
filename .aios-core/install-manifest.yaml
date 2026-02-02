@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 3.10.0
-generated_at: "2026-02-02T02:33:14.373Z"
+generated_at: "2026-02-02T03:05:35.521Z"
 generator: scripts/generate-install-manifest.js
 file_count: 836
 files:
@@ -169,9 +169,9 @@ files:
     type: cli
     size: 5907
   - path: core-config.yaml
-    hash: sha256:110b5b3c7bf8737044d393997ba7dcc39ce8d121d1d0aaa406f8fbdc700729bb
+    hash: sha256:931f58371092ca2ab08b7272bbac84a0c6dfeae62c27ebc5c420a9d66326039e
     type: config
-    size: 15889
+    size: 15939
   - path: core/config/config-cache.js
     hash: sha256:527a788cbe650aa6b13d1101ebc16419489bfef20b2ee93042f6eb6a51e898e9
     type: core
@@ -2117,9 +2117,9 @@ files:
     type: script
     size: 8846
   - path: infrastructure/scripts/ide-sync/index.js
-    hash: sha256:f6e067e802e1af03871f6b24830a070711ebb0123817408e78a96930f8972dc2
+    hash: sha256:42d6b1ebfcffdd4d31200682e8de1268bda51cd2729c57ac6081f4b3c19627ae
     type: script
-    size: 13216
+    size: 13268
   - path: infrastructure/scripts/ide-sync/README.md
     hash: sha256:5f4dc76346bd650dfaad07223add0b765aeff53efdabd8ab97899047d4d9682c
     type: script
