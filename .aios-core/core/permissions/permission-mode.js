@@ -90,7 +90,7 @@ class PermissionMode {
         console.warn(`Invalid mode "${this.currentMode}" in config, defaulting to "ask"`);
         this.currentMode = 'ask';
       }
-    } catch (_error) {
+    } catch (error) {
       // Config doesn't exist or is invalid, use default
       this.currentMode = 'ask';
     }

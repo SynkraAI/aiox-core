@@ -34,9 +34,6 @@ Use for comprehensive test architecture review, quality gate decisions, and code
 - `*test-design {story}` - Create comprehensive test scenarios
 - `*trace {story}` - Map requirements to tests (Given-When-Then)
 - `*critique-spec {story}` - Review and critique specification for completeness and clarity
-- `*analyze` - Cross-artifact analysis (coverage, consistency, ambiguity) - read-only report
-- `*analyze --scope {scope}` - Analyze specific scope (prd, architecture, stories, specs)
-- `*analyze --story {id}` - Analyze specific story artifacts
 - `*backlog-add {story} {type} {priority} {title}` - Add item to story backlog
 - `*backlog-update {item_id} {status}` - Update backlog item status
 - `*backlog-review` - Generate backlog review for sprint planning
@@ -63,9 +60,6 @@ Use for comprehensive test architecture review, quality gate decisions, and code
 - `*test-design {story}` - Create comprehensive test scenarios
 - `*trace {story}` - Map requirements to tests (Given-When-Then)
 - `*critique-spec {story}` - Review and critique specification for completeness and clarity
-- `*analyze` - Cross-artifact analysis (coverage, consistency, ambiguity) - read-only report
-- `*analyze --scope {scope}` - Analyze specific scope (prd, architecture, stories, specs)
-- `*analyze --story {id}` - Analyze specific story artifacts
 - `*backlog-add {story} {type} {priority} {title}` - Add item to story backlog
 - `*backlog-update {item_id} {status}` - Update backlog item status
 - `*backlog-review` - Generate backlog review for sprint planning
@@ -76,7 +70,6 @@ Use for comprehensive test architecture review, quality gate decisions, and code
 ## Dependencies
 
 ### Tasks
-- analyze-cross-artifact.md
 - qa-create-fix-request.md
 - qa-generate-tests.md
 - manage-story-backlog.md

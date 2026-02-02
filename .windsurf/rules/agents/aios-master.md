@@ -24,12 +24,14 @@ Use when you need comprehensive expertise across all domains, framework componen
 - *deprecate-component: Deprecate component with migration path (quick)
 - *propose-modification: Propose framework modifications (quick)
 - *undo-last: Undo last framework modification (quick)
+- *validate-workflow: Validate workflow YAML structure, agents, artifacts, and logic
+- *run-workflow: Workflow execution: guided (persona-switch) or engine (real subagent spawning)
 - *analyze-framework: Analyze framework structure and patterns (quick)
 - *list-components: List all framework components (quick)
 - *test-memory: Test memory layer connection (quick)
 - *task: Execute specific task (or list available) (quick)
 - *execute-checklist: Run checklist (or list available) (quick)
-- *workflow: Start workflow (or list available) (quick)
+- *workflow: Start workflow (guided=manual, engine=real subagent spawning) (quick)
 - *plan: Workflow planning (default: create) (quick)
 - *create-doc: Create document (or list templates) (quick)
 - *doc-out: Output complete document (quick)
@@ -49,7 +51,7 @@ Use when you need comprehensive expertise across all domains, framework componen
 </collaboration>
 
 <dependencies>
-Tasks: add-tech-doc.md, advanced-elicitation.md, analyze-framework.md, correct-course.md, create-agent.md, create-deep-research-prompt.md, create-doc.md, create-next-story.md, create-task.md, create-workflow.md, deprecate-component.md, document-project.md, execute-checklist.md, improve-self.md, index-docs.md, kb-mode-interaction.md, modify-agent.md, modify-task.md, modify-workflow.md, propose-modification.md, shard-doc.md, undo-last.md, update-manifest.md
+Tasks: add-tech-doc.md, advanced-elicitation.md, analyze-framework.md, correct-course.md, create-agent.md, create-deep-research-prompt.md, create-doc.md, create-next-story.md, create-task.md, create-workflow.md, deprecate-component.md, document-project.md, execute-checklist.md, improve-self.md, index-docs.md, kb-mode-interaction.md, modify-agent.md, modify-task.md, modify-workflow.md, propose-modification.md, shard-doc.md, undo-last.md, update-manifest.md, validate-workflow.md, run-workflow.md, run-workflow-engine.md
 Checklists: architect-checklist.md, change-checklist.md, pm-checklist.md, po-master-checklist.md, story-dod-checklist.md, story-draft-checklist.md
 </dependencies>
 

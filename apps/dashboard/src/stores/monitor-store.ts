@@ -16,15 +16,7 @@ export type EventType =
   | 'SubagentStop'
   | 'Notification'
   | 'PreCompact'
-  | 'SessionStart'
-  // High-level AIOS events
-  | 'AgentActivated'
-  | 'AgentDeactivated'
-  | 'CommandStart'
-  | 'CommandComplete'
-  | 'CommandError'
-  | 'StoryStatusChange'
-  | 'SessionEnd';
+  | 'SessionStart';
 
 export interface MonitorEvent {
   id: string;
@@ -68,20 +60,6 @@ export interface MonitorStats {
   sessions_active: number;
 }
 
-export interface CurrentCommand {
-  name: string;
-  startedAt: number;
-  status: 'running' | 'complete' | 'error';
-  agentId?: string;
-}
-
-export interface ActiveAgent {
-  id: string;
-  name: string;
-  persona?: string;
-  activatedAt: number;
-}
-
 interface MonitorState {
   // Connection state
   connected: boolean;
@@ -92,10 +70,6 @@ interface MonitorState {
   events: MonitorEvent[];
   sessions: MonitorSession[];
   stats: MonitorStats | null;
-
-  // High-level tracking
-  currentCommand: CurrentCommand | null;
-  activeAgent: ActiveAgent | null;
 
   // Filters
   selectedSessionId: string | null;
@@ -110,8 +84,6 @@ interface MonitorState {
   setEvents: (events: MonitorEvent[]) => void;
   setSessions: (sessions: MonitorSession[]) => void;
   setStats: (stats: MonitorStats) => void;
-  setCurrentCommand: (command: CurrentCommand | null) => void;
-  setActiveAgent: (agent: ActiveAgent | null) => void;
   setSelectedSessionId: (id: string | null) => void;
   setEventTypeFilter: (type: EventType | null) => void;
   setToolFilter: (tool: string | null) => void;
@@ -128,8 +100,6 @@ export const useMonitorStore = create<MonitorState>((set) => ({
   events: [],
   sessions: [],
   stats: null,
-  currentCommand: null,
-  activeAgent: null,
   selectedSessionId: null,
   eventTypeFilter: null,
   toolFilter: null,
@@ -163,12 +133,10 @@ export const useMonitorStore = create<MonitorState>((set) => ({
     }),
   setSessions: (sessions) => set({ sessions }),
   setStats: (stats) => set({ stats }),
-  setCurrentCommand: (currentCommand) => set({ currentCommand }),
-  setActiveAgent: (activeAgent) => set({ activeAgent }),
   setSelectedSessionId: (selectedSessionId) => set({ selectedSessionId }),
   setEventTypeFilter: (eventTypeFilter) => set({ eventTypeFilter }),
   setToolFilter: (toolFilter) => set({ toolFilter }),
-  clearEvents: () => set({ events: [], currentCommand: null }),
+  clearEvents: () => set({ events: [] }),
 }));
 
 // Selectors
@@ -212,18 +180,4 @@ export const selectCurrentTool = (state: MonitorState): MonitorEvent | undefined
   }
 
   return undefined;
-};
-
-export const selectCurrentCommand = (state: MonitorState): CurrentCommand | null => {
-  return state.currentCommand;
-};
-
-export const selectActiveAgent = (state: MonitorState): ActiveAgent | null => {
-  return state.activeAgent;
-};
-
-export const selectHighLevelEvents = (state: MonitorState): MonitorEvent[] => {
-  return state.events.filter((e) =>
-    ['AgentActivated', 'AgentDeactivated', 'CommandStart', 'CommandComplete', 'CommandError', 'StoryStatusChange'].includes(e.type)
-  );
 };

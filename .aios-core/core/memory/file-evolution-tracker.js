@@ -419,20 +419,20 @@ class FileEvolutionTracker {
 
     if (analysis.overallSeverity === DriftSeverity.CRITICAL) {
       recommendations.push(
-        'CRITICAL: Multiple tasks modified the same functions/classes. Manual review required.',
+        'CRITICAL: Multiple tasks modified the same functions/classes. Manual review required.'
       );
       recommendations.push('Consider rebasing one task onto the other before merging.');
     }
 
     if (analysis.overallSeverity === DriftSeverity.HIGH) {
       recommendations.push(
-        'HIGH: Overlapping changes detected. Use Semantic Merge Engine for AI-assisted resolution.',
+        'HIGH: Overlapping changes detected. Use Semantic Merge Engine for AI-assisted resolution.'
       );
     }
 
     if (analysis.overallSeverity === DriftSeverity.MEDIUM) {
       recommendations.push(
-        'MEDIUM: Same files modified but different sections. Auto-merge likely to succeed.',
+        'MEDIUM: Same files modified but different sections. Auto-merge likely to succeed.'
       );
     }
 
@@ -443,7 +443,7 @@ class FileEvolutionTracker {
         conflict.severity === DriftSeverity.CRITICAL
       ) {
         recommendations.push(
-          `Review ${conflict.filePath}: ${conflict.tasks.join(', ')} both modified this file.`,
+          `Review ${conflict.filePath}: ${conflict.tasks.join(', ')} both modified this file.`
         );
       }
     }
@@ -832,7 +832,6 @@ class FileEvolutionTracker {
 
   /**
    * Compute diff summary between two versions
-   * Uses the actual commit/hash for the diff instead of hardcoded HEAD~1
    * @private
    */
   _computeDiffSummary(filePath, oldHash, newHash) {
@@ -841,24 +840,12 @@ class FileEvolutionTracker {
     }
 
     try {
-      // Try to get diff stats from git using the actual base reference
-      // Use oldHash if it's a valid commit reference, otherwise fall back to working tree diff
-      let diffOutput;
-      if (oldHash && oldHash.length >= 7) {
-        // oldHash looks like a commit hash, use it as base
-        diffOutput = execSync(`git diff --stat ${oldHash} -- "${filePath}"`, {
-          cwd: this.rootPath,
-          encoding: 'utf-8',
-          stdio: ['pipe', 'pipe', 'pipe'],
-        });
-      } else {
-        // Fall back to unstaged diff (current working tree vs index)
-        diffOutput = execSync(`git diff --stat -- "${filePath}"`, {
-          cwd: this.rootPath,
-          encoding: 'utf-8',
-          stdio: ['pipe', 'pipe', 'pipe'],
-        });
-      }
+      // Try to get diff stats from git
+      const diffOutput = execSync(`git diff --stat HEAD~1 -- "${filePath}"`, {
+        cwd: this.rootPath,
+        encoding: 'utf-8',
+        stdio: ['pipe', 'pipe', 'pipe'],
+      });
 
       // Parse diff output
       const match = diffOutput.match(/(\d+) insertion.+?(\d+) deletion/);

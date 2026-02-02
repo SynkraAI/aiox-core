@@ -222,7 +222,7 @@ class TimelineManager {
    * Parse build log entry
    * @private
    */
-  _parseLogEntry(logLine, _storyId) {
+  _parseLogEntry(logLine, storyId) {
     // Format: [timestamp] [storyId] [subtaskId] action: {json}
     const match = logLine.match(/\[(.*?)\] \[(.*?)\] \[(.*?)\] (\w+): (.*)/);
     if (!match) return null;
@@ -471,7 +471,7 @@ class TimelineManager {
 
     // Activity patterns
     const peakHour = analysis.activityHeatmap.byHour.indexOf(
-      Math.max(...analysis.activityHeatmap.byHour),
+      Math.max(...analysis.activityHeatmap.byHour)
     );
     insights.push({
       type: 'activity_pattern',
@@ -483,7 +483,7 @@ class TimelineManager {
     // Failure rate (if we have build events)
     const failures = timeline.filter((e) => e.eventType === 'failure').length;
     const totalBuildEvents = timeline.filter(
-      (e) => e.source === TimelineEventSource.BUILD_STATE,
+      (e) => e.source === TimelineEventSource.BUILD_STATE
     ).length;
     if (totalBuildEvents > 0) {
       const failureRate = ((failures / totalBuildEvents) * 100).toFixed(1);
@@ -575,7 +575,7 @@ class TimelineManager {
           entries: timeline,
         },
         null,
-        2,
+        2
       );
     } else if (format === 'csv') {
       const headers = ['timestamp', 'source', 'eventType', 'taskId', 'filePath', 'summary'];

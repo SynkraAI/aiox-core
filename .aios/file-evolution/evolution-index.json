@@ -1,0 +1,307 @@
+{
+  "version": "1.0.0",
+  "createdAt": "2026-01-29T13:31:04.684Z",
+  "updatedAt": "2026-02-01T23:43:32.381Z",
+  "records": [
+    {
+      "id": "evo-mkzhsoks-6049f241",
+      "filePath": "test-file.js",
+      "taskId": "task-1",
+      "timestamp": "2026-01-29T13:31:04.526Z",
+      "eventType": "file_deleted",
+      "exists": false,
+      "hash": null,
+      "size": 0,
+      "lineCount": 0,
+      "git": {
+        "branch": "feat/aios-dashboard",
+        "commit": "2c61590b7437f3d0d9155ba793ef9fb87508e09e",
+        "isStaged": false,
+        "isModified": false,
+        "lastCommitForFile": "",
+        "commitsAhead": 43
+      },
+      "context": {
+        "storyId": null,
+        "subtaskId": null,
+        "agent": null,
+        "intent": null
+      },
+      "diff": null,
+      "metadata": {
+        "version": "1.0.0",
+        "trackedAt": "2026-01-29T13:31:04.526Z"
+      }
+    },
+    {
+      "id": "evo-mkzhsoo1-152257c5",
+      "filePath": "test-file.js",
+      "taskId": "task-1",
+      "timestamp": "2026-01-29T13:31:04.696Z",
+      "eventType": "file_modified",
+      "exists": false,
+      "hash": null,
+      "size": 0,
+      "lineCount": 0,
+      "git": {
+        "branch": "feat/aios-dashboard",
+        "commit": "2c61590b7437f3d0d9155ba793ef9fb87508e09e",
+        "isStaged": false,
+        "isModified": false,
+        "lastCommitForFile": "",
+        "commitsAhead": 43
+      },
+      "context": {
+        "storyId": null,
+        "subtaskId": null,
+        "agent": null,
+        "intent": null
+      },
+      "diff": null,
+      "metadata": {
+        "version": "1.0.0",
+        "trackedAt": "2026-01-29T13:31:04.696Z"
+      }
+    },
+    {
+      "id": "evo-mkzhud66-2a462990",
+      "filePath": "test-file.js",
+      "taskId": "task-1",
+      "timestamp": "2026-01-29T13:32:23.113Z",
+      "eventType": "file_modified",
+      "exists": false,
+      "hash": null,
+      "size": 0,
+      "lineCount": 0,
+      "git": {
+        "branch": "feat/aios-dashboard",
+        "commit": "2c61590b7437f3d0d9155ba793ef9fb87508e09e",
+        "isStaged": false,
+        "isModified": false,
+        "lastCommitForFile": "",
+        "commitsAhead": 43
+      },
+      "context": {
+        "storyId": null,
+        "subtaskId": null,
+        "agent": null,
+        "intent": null
+      },
+      "diff": null,
+      "metadata": {
+        "version": "1.0.0",
+        "trackedAt": "2026-01-29T13:32:23.113Z"
+      }
+    },
+    {
+      "id": "evo-mkzhud9f-38256d1b",
+      "filePath": "test-file.js",
+      "taskId": "task-1",
+      "timestamp": "2026-01-29T13:32:23.226Z",
+      "eventType": "file_modified",
+      "exists": false,
+      "hash": null,
+      "size": 0,
+      "lineCount": 0,
+      "git": {
+        "branch": "feat/aios-dashboard",
+        "commit": "2c61590b7437f3d0d9155ba793ef9fb87508e09e",
+        "isStaged": false,
+        "isModified": false,
+        "lastCommitForFile": "",
+        "commitsAhead": 43
+      },
+      "context": {
+        "storyId": null,
+        "subtaskId": null,
+        "agent": null,
+        "intent": null
+      },
+      "diff": null,
+      "metadata": {
+        "version": "1.0.0",
+        "trackedAt": "2026-01-29T13:32:23.226Z"
+      }
+    },
+    {
+      "id": "evo-mkzhyha0-9c95b0b5",
+      "filePath": "test-file.js",
+      "taskId": "task-1",
+      "timestamp": "2026-01-29T13:35:34.545Z",
+      "eventType": "file_modified",
+      "exists": false,
+      "hash": null,
+      "size": 0,
+      "lineCount": 0,
+      "git": {
+        "branch": "feat/aios-dashboard",
+        "commit": "a7c047c9949a74ef9c49e27af243583fa4bb6fef",
+        "isStaged": false,
+        "isModified": false,
+        "lastCommitForFile": "",
+        "commitsAhead": 44
+      },
+      "context": {
+        "storyId": null,
+        "subtaskId": null,
+        "agent": null,
+        "intent": null
+      },
+      "diff": null,
+      "metadata": {
+        "version": "1.0.0",
+        "trackedAt": "2026-01-29T13:35:34.545Z"
+      }
+    },
+    {
+      "id": "evo-mkzhyhy9-ed97b9b2",
+      "filePath": "test-file.js",
+      "taskId": "task-1",
+      "timestamp": "2026-01-29T13:35:35.220Z",
+      "eventType": "file_modified",
+      "exists": false,
+      "hash": null,
+      "size": 0,
+      "lineCount": 0,
+      "git": {
+        "branch": "feat/aios-dashboard",
+        "commit": "a7c047c9949a74ef9c49e27af243583fa4bb6fef",
+        "isStaged": false,
+        "isModified": false,
+        "lastCommitForFile": "",
+        "commitsAhead": 44
+      },
+      "context": {
+        "storyId": null,
+        "subtaskId": null,
+        "agent": null,
+        "intent": null
+      },
+      "diff": null,
+      "metadata": {
+        "version": "1.0.0",
+        "trackedAt": "2026-01-29T13:35:35.220Z"
+      }
+    },
+    {
+      "id": "evo-mkzli0hr-9399135b",
+      "filePath": "test-file.js",
+      "taskId": "task-1",
+      "timestamp": "2026-01-29T15:14:45.170Z",
+      "eventType": "file_modified",
+      "exists": false,
+      "hash": null,
+      "size": 0,
+      "lineCount": 0,
+      "git": {
+        "branch": "feat/aios-dashboard",
+        "commit": "58fa4cfc4db6eb69a2535383277d2719b96f381e",
+        "isStaged": false,
+        "isModified": false,
+        "lastCommitForFile": "",
+        "commitsAhead": 47
+      },
+      "context": {
+        "storyId": null,
+        "subtaskId": null,
+        "agent": null,
+        "intent": null
+      },
+      "diff": null,
+      "metadata": {
+        "version": "1.0.0",
+        "trackedAt": "2026-01-29T15:14:45.170Z"
+      }
+    },
+    {
+      "id": "evo-mkzli0le-0080a7af",
+      "filePath": "test-file.js",
+      "taskId": "task-1",
+      "timestamp": "2026-01-29T15:14:45.393Z",
+      "eventType": "file_modified",
+      "exists": false,
+      "hash": null,
+      "size": 0,
+      "lineCount": 0,
+      "git": {
+        "branch": "feat/aios-dashboard",
+        "commit": "58fa4cfc4db6eb69a2535383277d2719b96f381e",
+        "isStaged": false,
+        "isModified": false,
+        "lastCommitForFile": "",
+        "commitsAhead": 47
+      },
+      "context": {
+        "storyId": null,
+        "subtaskId": null,
+        "agent": null,
+        "intent": null
+      },
+      "diff": null,
+      "metadata": {
+        "version": "1.0.0",
+        "trackedAt": "2026-01-29T15:14:45.393Z"
+      }
+    },
+    {
+      "id": "evo-ml4dzv80-c2349e74",
+      "filePath": "test-file.js",
+      "taskId": "task-1",
+      "timestamp": "2026-02-01T23:43:32.091Z",
+      "eventType": "file_modified",
+      "exists": false,
+      "hash": null,
+      "size": 0,
+      "lineCount": 0,
+      "git": {
+        "branch": "HEAD",
+        "commit": "b8b4bf0b3539fce22871c7cb3fc97be6ea42506a",
+        "isStaged": false,
+        "isModified": false,
+        "lastCommitForFile": "",
+        "commitsAhead": 42
+      },
+      "context": {
+        "storyId": null,
+        "subtaskId": null,
+        "agent": null,
+        "intent": null
+      },
+      "diff": null,
+      "metadata": {
+        "version": "1.0.0",
+        "trackedAt": "2026-02-01T23:43:32.091Z"
+      }
+    },
+    {
+      "id": "evo-ml4dzva5-1c6031ac",
+      "filePath": "test-file.js",
+      "taskId": "task-1",
+      "timestamp": "2026-02-01T23:43:32.320Z",
+      "eventType": "file_modified",
+      "exists": false,
+      "hash": null,
+      "size": 0,
+      "lineCount": 0,
+      "git": {
+        "branch": "HEAD",
+        "commit": "6bc50a86393fee99cd986f1b62ce1b095abce48e",
+        "isStaged": false,
+        "isModified": false,
+        "lastCommitForFile": "",
+        "commitsAhead": 42
+      },
+      "context": {
+        "storyId": null,
+        "subtaskId": null,
+        "agent": null,
+        "intent": null
+      },
+      "diff": null,
+      "metadata": {
+        "version": "1.0.0",
+        "trackedAt": "2026-02-01T23:43:32.320Z"
+      }
+    }
+  ]
+}

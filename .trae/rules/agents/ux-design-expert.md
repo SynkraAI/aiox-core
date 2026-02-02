@@ -38,6 +38,7 @@ Complete design workflow - user research, wireframes, design systems, token extr
 - generate-documentation.md
 - calculate-roi.md
 - ux-ds-scan-artifact.md
+- run-design-system-pipeline.md
 - integrate-Squad.md
 - execute-checklist.md
 

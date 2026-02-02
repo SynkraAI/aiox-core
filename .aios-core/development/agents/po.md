@@ -115,12 +115,10 @@ commands:
     description: 'Regenerate story index from docs/stories/'
 
   # Story Management
-  - name: create-epic
-    visibility: [full]
-    description: 'Create epic for brownfield projects'
-  - name: create-story
-    visibility: [full, quick]
-    description: 'Create user story from requirements'
+  # NOTE: create-epic and create-story removed - delegated to @pm and @sm respectively
+  # See: docs/architecture/command-authority-matrix.md
+  # For epic creation → Delegate to @pm using *create-epic
+  # For story creation → Delegate to @sm using *draft
   - name: validate-story-draft
     visibility: [full, quick, key]
     description: 'Validate story quality and completeness'

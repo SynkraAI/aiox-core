@@ -54,7 +54,6 @@ import {
   // Agents & Roles
   Bot,
   User,
-  UserMinus,
   Users,
   Code,
   TestTube,
@@ -152,7 +151,6 @@ export const iconMap = {
   // Agents
   bot: Bot,
   user: User,
-  'user-minus': UserMinus,
   users: Users,
   code: Code,
   'test-tube': TestTube,
@@ -253,7 +251,6 @@ export {
   Archive,
   Bot,
   User,
-  UserMinus,
   Users,
   Code,
   TestTube,

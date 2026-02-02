@@ -153,31 +153,48 @@ export function getSession(id: string): Session | null {
 }
 
 export function upsertSession(session_id: string, event: Event): void {
-  // Use atomic UPSERT to prevent TOCTOU race conditions
-  // INSERT ... ON CONFLICT ... DO UPDATE is atomic in SQLite
-  db.prepare(
+  const existing = db
+    .prepare('SELECT * FROM sessions WHERE id = ?')
+    .get(session_id) as Session | null;
+
+  if (existing) {
+    db.prepare(
+      `
+      UPDATE sessions SET
+        last_activity = ?,
+        event_count = event_count + 1,
+        tool_calls = tool_calls + ?,
+        errors = errors + ?,
+        aios_agent = COALESCE(?, aios_agent),
+        aios_story_id = COALESCE(?, aios_story_id)
+      WHERE id = ?
     `
-    INSERT INTO sessions (id, project, cwd, start_time, last_activity, event_count, tool_calls, errors, aios_agent, aios_story_id)
-    VALUES (?, ?, ?, ?, ?, 1, ?, ?, ?, ?)
-    ON CONFLICT(id) DO UPDATE SET
-      last_activity = excluded.last_activity,
-      event_count = sessions.event_count + 1,
-      tool_calls = sessions.tool_calls + excluded.tool_calls,
-      errors = sessions.errors + excluded.errors,
-      aios_agent = COALESCE(sessions.aios_agent, excluded.aios_agent),
-      aios_story_id = COALESCE(sessions.aios_story_id, excluded.aios_story_id)
-  `
-  ).run(
-    session_id,
-    event.project || 'unknown',
-    event.cwd || '',
-    event.timestamp,
-    event.timestamp,
-    event.type === 'PostToolUse' ? 1 : 0,
-    event.is_error ? 1 : 0,
-    event.aios_agent,
-    event.aios_story_id
-  );
+    ).run(
+      event.timestamp,
+      event.type === 'PostToolUse' ? 1 : 0,
+      event.is_error ? 1 : 0,
+      event.aios_agent,
+      event.aios_story_id,
+      session_id
+    );
+  } else {
+    db.prepare(
+      `
+      INSERT INTO sessions (id, project, cwd, start_time, last_activity, event_count, tool_calls, errors, aios_agent, aios_story_id)
+      VALUES (?, ?, ?, ?, ?, 1, ?, ?, ?, ?)
+    `
+    ).run(
+      session_id,
+      event.project || 'unknown',
+      event.cwd || '',
+      event.timestamp,
+      event.timestamp,
+      event.type === 'PostToolUse' ? 1 : 0,
+      event.is_error ? 1 : 0,
+      event.aios_agent,
+      event.aios_story_id
+    );
+  }
 }
 
 export function getStats(): Stats {

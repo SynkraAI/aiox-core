@@ -11,7 +11,6 @@
 - `*backlog-review` - Generate backlog review for sprint planning
 - `*backlog-summary` - Quick backlog status summary
 - `*stories-index` - Regenerate story index from docs/stories/
-- `*create-story` - Create user story from requirements
 - `*validate-story-draft` - Validate story quality and completeness
 - `*execute-checklist-po` - Run PO master checklist
 - `*correct-course` - Analyze and correct process deviations
@@ -31,8 +30,6 @@
 - `*backlog-prioritize` - Re-prioritize backlog item
 - `*backlog-schedule` - Assign item to sprint
 - `*stories-index` - Regenerate story index from docs/stories/
-- `*create-epic` - Create epic for brownfield projects
-- `*create-story` - Create user story from requirements
 - `*validate-story-draft` - Validate story quality and completeness
 - `*sync-story` - Sync story to PM tool (ClickUp, GitHub, Jira, local)
 - `*pull-story` - Pull story updates from PM tool

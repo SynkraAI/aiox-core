@@ -1,0 +1,71 @@
+{
+  "version": "1.1.0",
+  "updatedAt": "2026-02-01T23:43:31.769Z",
+  "totalFeedback": 4,
+  "feedback": [
+    {
+      "id": "fb-mkzhud9h-46n3cj",
+      "timestamp": "2026-01-29T13:32:23.333Z",
+      "issueId": null,
+      "gotchaId": "test-gotcha-1",
+      "type": "not_helpful",
+      "wasCorrect": true,
+      "userComment": null,
+      "taskId": null,
+      "improvedWorkaround": null,
+      "context": {
+        "category": null,
+        "severity": null,
+        "agent": null
+      }
+    },
+    {
+      "id": "fb-mkzhyhzx-5959mu",
+      "timestamp": "2026-01-29T13:35:36.093Z",
+      "issueId": null,
+      "gotchaId": "test-gotcha-1",
+      "type": "not_helpful",
+      "wasCorrect": true,
+      "userComment": null,
+      "taskId": null,
+      "improvedWorkaround": null,
+      "context": {
+        "category": null,
+        "severity": null,
+        "agent": null
+      }
+    },
+    {
+      "id": "fb-mkzli0ll-91u1ql",
+      "timestamp": "2026-01-29T15:14:45.513Z",
+      "issueId": null,
+      "gotchaId": "test-gotcha-1",
+      "type": "not_helpful",
+      "wasCorrect": true,
+      "userComment": null,
+      "taskId": null,
+      "improvedWorkaround": null,
+      "context": {
+        "category": null,
+        "severity": null,
+        "agent": null
+      }
+    },
+    {
+      "id": "fb-ml4dzusz-fei8hj",
+      "timestamp": "2026-02-01T23:43:31.763Z",
+      "issueId": null,
+      "gotchaId": "test-gotcha-1",
+      "type": "not_helpful",
+      "wasCorrect": true,
+      "userComment": null,
+      "taskId": null,
+      "improvedWorkaround": null,
+      "context": {
+        "category": null,
+        "severity": null,
+        "agent": null
+      }
+    }
+  ]
+}

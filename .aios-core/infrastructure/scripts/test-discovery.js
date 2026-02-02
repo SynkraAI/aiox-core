@@ -9,7 +9,7 @@
 const fs = require('fs');
 const path = require('path');
 const { EventEmitter } = require('events');
-const { execSync, execFileSync, spawn } = require('child_process');
+const { execSync, spawn } = require('child_process');
 
 /**
  * Test framework configurations
@@ -717,21 +717,12 @@ class CoverageAnalyzer {
 
         if (file.endsWith('.js') || file.endsWith('.ts')) {
           // Extract object from module.exports
-          // Use JSON.parse for safety instead of eval (prevents arbitrary code execution)
           const match = content.match(/module\.exports\s*=\s*(\{[\s\S]*\})/);
           if (match) {
             try {
-              // Try to parse as JSON first (safest)
-              // Convert JS object literal to valid JSON by adding quotes to keys
-              const jsonLike = match[1]
-                .replace(/(['"])?([a-zA-Z0-9_]+)(['"])?\s*:/g, '"$2":')
-                .replace(/'/g, '"')
-                .replace(/,\s*}/g, '}')
-                .replace(/,\s*]/g, ']');
-              return JSON.parse(jsonLike);
+              // eslint-disable-next-line no-eval
+              return eval('(' + match[1] + ')');
             } catch {
-              // If JSON parsing fails, return empty object (safe fallback)
-              // Intentionally NOT using eval to prevent code execution
               return {};
             }
           }
@@ -860,10 +851,9 @@ class TestRunner extends EventEmitter {
       let stdout = '';
       let stderr = '';
 
-      // Use shell: false to prevent command injection via user-controlled args
       this.process = spawn(cmd, fullArgs, {
         cwd: this.rootPath,
-        shell: false,
+        shell: true,
         env: {
           ...process.env,
           FORCE_COLOR: '1',
@@ -1162,12 +1152,10 @@ class TestDiscovery extends EventEmitter {
 
   /**
    * Get changed files from git
-   * Uses execFileSync with args array to prevent command injection via baseBranch
    */
   async getChangedFiles(baseBranch = 'main') {
     try {
-      // Use execFileSync with array args to prevent shell injection
-      const output = execFileSync('git', ['diff', '--name-only', `${baseBranch}...HEAD`], {
+      const output = execSync(`git diff --name-only ${baseBranch}...HEAD`, {
         cwd: this.rootPath,
         encoding: 'utf8',
       });
@@ -1175,7 +1163,7 @@ class TestDiscovery extends EventEmitter {
     } catch {
       // Fallback to unstaged changes
       try {
-        const output = execFileSync('git', ['diff', '--name-only'], {
+        const output = execSync('git diff --name-only', {
           cwd: this.rootPath,
           encoding: 'utf8',
         });

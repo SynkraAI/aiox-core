@@ -18,13 +18,8 @@ from lib.enrich import enrich_event
 
 
 def main():
-    # Read event from stdin with error handling for malformed/empty input
-    try:
-        data = json.load(sys.stdin)
-    except (json.JSONDecodeError, ValueError, OSError) as e:
-        # Non-blocking: silently exit on parse errors to avoid blocking the hook
-        # This can happen if stdin is empty or contains invalid JSON
-        return
+    # Read event from stdin
+    data = json.load(sys.stdin)
 
     # Truncate large fields to avoid memory issues
     if "tool_input" in data:

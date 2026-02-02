@@ -40,7 +40,7 @@ describe('PermissionMode', () => {
     it('should load mode from config file', async () => {
       await fs.writeFile(
         path.join(tempDir, '.aios', 'config.yaml'),
-        'permissions:\n  mode: auto\n',
+        'permissions:\n  mode: auto\n'
       );
 
       const result = await mode.load();
@@ -50,7 +50,7 @@ describe('PermissionMode', () => {
     it('should fallback to "ask" for invalid mode in config', async () => {
       await fs.writeFile(
         path.join(tempDir, '.aios', 'config.yaml'),
-        'permissions:\n  mode: invalid_mode\n',
+        'permissions:\n  mode: invalid_mode\n'
       );
 
       const result = await mode.load();

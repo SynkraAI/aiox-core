@@ -24,7 +24,7 @@
 - `*test-memory` - Test memory layer connection
 - `*task` - Execute specific task (or list available)
 - `*execute-checklist` - Run checklist (or list available)
-- `*workflow` - Start workflow (or list available)
+- `*workflow` - Start workflow (guided=manual, engine=real subagent spawning)
 - `*plan` - Workflow planning (default: create)
 - `*create-doc` - Create document (or list templates)
 - `*doc-out` - Output complete document

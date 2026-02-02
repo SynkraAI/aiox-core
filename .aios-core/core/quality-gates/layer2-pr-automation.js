@@ -75,7 +75,7 @@ class Layer2PRAutomation extends BaseLayer {
       const summary = this.getSummary();
       const icon = summary.pass ? '✅' : '⚠️';
       console.log(
-        `\n${icon} Layer 2 ${summary.pass ? 'PASSED' : 'HAS ISSUES'} (${this.formatDuration(summary.duration)})`,
+        `\n${icon} Layer 2 ${summary.pass ? 'PASSED' : 'HAS ISSUES'} (${this.formatDuration(summary.duration)})`
       );
     }
 
@@ -97,11 +97,9 @@ class Layer2PRAutomation extends BaseLayer {
 
     try {
       // Check if CodeRabbit is available
-      // Resolve PROJECT_ROOT from environment or use cwd (prevents shell injection)
-      const projectRoot = process.env.AIOS_PROJECT_ROOT || process.env.PROJECT_ROOT || process.cwd();
       const command =
         this.coderabbit.command ||
-        `wsl bash -c 'cd ${projectRoot} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'`;
+        "wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'";
 
       const result = await this.runCommand(command, timeout);
 
@@ -139,7 +137,7 @@ class Layer2PRAutomation extends BaseLayer {
       if (verbose) {
         const icon = pass ? '✓' : '⚠️';
         console.log(
-          `  ${icon} CodeRabbit: ${criticalCount} CRITICAL, ${highCount} HIGH, ${mediumCount} MEDIUM`,
+          `  ${icon} CodeRabbit: ${criticalCount} CRITICAL, ${highCount} HIGH, ${mediumCount} MEDIUM`
         );
       }
 
@@ -215,7 +213,7 @@ class Layer2PRAutomation extends BaseLayer {
       const suggestions = await this.generateQuinnSuggestions(context);
 
       const blockingSuggestions = suggestions.filter((s) =>
-        this.quinn.severity?.block?.includes(s.severity),
+        this.quinn.severity?.block?.includes(s.severity)
       );
 
       const pass = blockingSuggestions.length === 0;
@@ -234,7 +232,7 @@ class Layer2PRAutomation extends BaseLayer {
       if (verbose) {
         const icon = pass ? '✓' : '⚠️';
         console.log(
-          `  ${icon} Quinn: ${suggestions.length} suggestions, ${blockingSuggestions.length} blocking`,
+          `  ${icon} Quinn: ${suggestions.length} suggestions, ${blockingSuggestions.length} blocking`
         );
       }
 
@@ -255,7 +253,7 @@ class Layer2PRAutomation extends BaseLayer {
    * @param {Object} context - Execution context
    * @returns {Promise<Array>} Suggestions
    */
-  async generateQuinnSuggestions(_context = {}) {
+  async generateQuinnSuggestions(context = {}) {
     // This would integrate with the QA agent for automated review
     // For now, return empty suggestions - full integration in Story 2.11
     return [];

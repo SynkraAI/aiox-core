@@ -17,6 +17,7 @@ const WorkflowNavigator = require('./workflow-navigator');
 const GreetingPreferenceManager = require('./greeting-preference-manager');
 const {
   loadProjectStatus,
+  formatStatusDisplay,
 } = require('../../infrastructure/scripts/project-status-loader');
 const { PermissionMode } = require('../../core/permissions');
 const fs = require('fs');
@@ -60,7 +61,7 @@ class GreetingBuilder {
       // Use session-aware logic (Story 6.1.2.5)
       const greetingPromise = this._buildContextualGreeting(agent, context);
       const timeoutPromise = new Promise((_, reject) =>
-        setTimeout(() => reject(new Error('Greeting timeout')), GREETING_TIMEOUT),
+        setTimeout(() => reject(new Error('Greeting timeout')), GREETING_TIMEOUT)
       );
 
       return await Promise.race([greetingPromise, timeoutPromise]);
@@ -429,7 +430,7 @@ class GreetingBuilder {
     };
   }
 
-  _analyzeModifiedFiles(modifiedFiles, _currentStory) {
+  _analyzeModifiedFiles(modifiedFiles, currentStory) {
     if (!modifiedFiles || modifiedFiles.length === 0) {
       return { keyFiles: [], summary: '' };
     }
@@ -505,7 +506,7 @@ class GreetingBuilder {
     };
   }
 
-  _getAgentAction(agentId, _storyContext) {
+  _getAgentAction(agentId, storyContext) {
     const actions = {
       qa: 'revisar a qualidade dessa implementação',
       dev: 'implementar as funcionalidades',
@@ -603,7 +604,7 @@ class GreetingBuilder {
    * @param {string} sessionType - Session type
    * @returns {string|null} Contextual suggestions or null
    */
-  buildContextualSuggestions(agent, projectStatus, _sessionType) {
+  buildContextualSuggestions(agent, projectStatus, sessionType) {
     try {
       const suggestions = [];
       const agentId = agent.id;
@@ -928,7 +929,7 @@ class GreetingBuilder {
       const configPath = path.join(process.cwd(), '.aios-core', 'core-config.yaml');
       const content = fs.readFileSync(configPath, 'utf8');
       return yaml.load(content);
-    } catch (_error) {
+    } catch (error) {
       return null;
     }
   }

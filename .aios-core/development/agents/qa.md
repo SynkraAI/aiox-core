@@ -123,11 +123,6 @@ commands:
   # Spec Pipeline (Epic 3 - ADE)
   - 'critique-spec {story}': Review and critique specification for completeness and clarity
 
-  # Cross-Artifact Analysis (SDD Adoption)
-  - analyze: Cross-artifact analysis (coverage, consistency, ambiguity) - read-only report
-  - 'analyze --scope {scope}': Analyze specific scope (prd, architecture, stories, specs)
-  - 'analyze --story {id}': Analyze specific story artifacts
-
   # Backlog Management
   - 'backlog-add {story} {type} {priority} {title}': Add item to story backlog
   - 'backlog-update {item_id} {status}': Update backlog item status
@@ -141,7 +136,6 @@ dependencies:
   data:
     - technical-preferences.md
   tasks:
-    - analyze-cross-artifact.md
     - qa-create-fix-request.md
     - qa-generate-tests.md
     - manage-story-backlog.md

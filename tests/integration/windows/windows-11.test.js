@@ -32,14 +32,14 @@ describeOnWindows('Windows 11 Installation', () => {
       const duration = (Date.now() - startTime) / 1000 / 60;
       expect(duration).toBeLessThan(5);
     },
-    testTimeout,
+    testTimeout
   );
 
   it('should work with PowerShell 7.x', async () => {
     // Verify PowerShell execution policy documentation exists
     const storyPath = path.join(
       __dirname,
-      '../../../docs/stories/v2.1/sprint-1/story-1.10a-windows-testing.md',
+      '../../../docs/stories/v2.1/sprint-1/story-1.10a-windows-testing.md'
     );
     const storyContent = await fs.readFile(storyPath, 'utf-8');
 
@@ -52,7 +52,7 @@ describeOnWindows('Windows 11 Installation', () => {
     // Verify backward compatibility with PowerShell 5.1 is documented
     const storyPath = path.join(
       __dirname,
-      '../../../docs/stories/v2.1/sprint-1/story-1.10a-windows-testing.md',
+      '../../../docs/stories/v2.1/sprint-1/story-1.10a-windows-testing.md'
     );
     const storyContent = await fs.readFile(storyPath, 'utf-8');
 

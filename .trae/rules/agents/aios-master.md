@@ -35,7 +35,7 @@ Use when you need comprehensive expertise across all domains, framework componen
 - `*test-memory` - Test memory layer connection
 - `*task` - Execute specific task (or list available)
 - `*execute-checklist` - Run checklist (or list available)
-- `*workflow` - Start workflow (or list available)
+- `*workflow` - Start workflow (guided=manual, engine=real subagent spawning)
 - `*plan` - Workflow planning (default: create)
 - `*create-doc` - Create document (or list templates)
 - `*doc-out` - Output complete document
@@ -64,12 +64,14 @@ Use when you need comprehensive expertise across all domains, framework componen
 - `*deprecate-component` - Deprecate component with migration path
 - `*propose-modification` - Propose framework modifications
 - `*undo-last` - Undo last framework modification
+- `*validate-workflow` - Validate workflow YAML structure, agents, artifacts, and logic
+- `*run-workflow` - Workflow execution: guided (persona-switch) or engine (real subagent spawning)
 - `*analyze-framework` - Analyze framework structure and patterns
 - `*list-components` - List all framework components
 - `*test-memory` - Test memory layer connection
 - `*task` - Execute specific task (or list available)
 - `*execute-checklist` - Run checklist (or list available)
-- `*workflow` - Start workflow (or list available)
+- `*workflow` - Start workflow (guided=manual, engine=real subagent spawning)
 - `*plan` - Workflow planning (default: create)
 - `*create-doc` - Create document (or list templates)
 - `*doc-out` - Output complete document
@@ -109,6 +111,9 @@ Use when you need comprehensive expertise across all domains, framework componen
 - shard-doc.md
 - undo-last.md
 - update-manifest.md
+- validate-workflow.md
+- run-workflow.md
+- run-workflow-engine.md
 
 ---
 *AIOS Agent - Synced from .aios-core/development/agents/aios-master.md*

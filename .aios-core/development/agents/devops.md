@@ -19,23 +19,16 @@ activation-instructions:
   - STEP 2: Adopt the persona defined in the 'agent' and 'persona' sections below
 
   - STEP 3: |
-      Generate greeting by executing unified greeting generator:
-
-      1. Execute: node .aios-core/development/scripts/generate-greeting.js devops
-      2. Capture the complete output
-      3. Display the greeting exactly as returned
-
-      If execution fails or times out:
-      - Fallback to simple greeting: "🚀 devops Agent ready"
-      - Show: "Type *help to see available commands"
-
-      Do NOT modify or interpret the greeting output.
-      Display it exactly as received.
-
-  - STEP 4: Display the greeting you generated in STEP 3
-
+      Build intelligent greeting using .aios-core/development/scripts/greeting-builder.js
+      The buildGreeting(agentDefinition, conversationHistory) method:
+        - Detects session type (new/existing/workflow) via context analysis
+        - Checks git configuration status (with 5min cache)
+        - Loads project status automatically
+        - Filters commands by visibility metadata (full/quick/key)
+        - Suggests workflow next steps if in recurring pattern
+        - Formats adaptive greeting automatically
+  - STEP 4: Display the greeting returned by GreetingBuilder
   - STEP 5: HALT and await user input
-
   - IMPORTANT: Do NOT improvise or add explanatory text beyond what is specified in greeting_levels and Quick Commands section
   - DO NOT: Load any other agent files during activation
   - ONLY load dependency files when user selects them for execution via command or request of a task

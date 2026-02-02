@@ -120,27 +120,30 @@
       "type": "array",
       "description": "Available commands for this agent",
       "items": {
-        "oneOf": [
-          {
-            "type": "object",
-            "required": ["name"],
-            "properties": {
-              "name": { "type": "string" },
-              "visibility": {
-                "type": "array",
-                "items": {
-                  "type": "string",
-                  "enum": ["full", "quick", "key"]
-                }
-              },
-              "description": { "type": "string" }
+        "type": "object",
+        "required": ["name", "description"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Command name without * prefix"
+          },
+          "visibility": {
+            "type": "array",
+            "description": "When to show: full (all), quick (essential), key (critical)",
+            "items": {
+              "type": "string",
+              "enum": ["full", "quick", "key"]
             }
           },
-          {
+          "args": {
             "type": "string",
-            "description": "Simple command format: 'command-name: description'"
+            "description": "Command arguments, e.g., '{story}' or '{topic}'"
+          },
+          "description": {
+            "type": "string",
+            "description": "What this command does"
           }
-        ]
+        }
       }
     },
     "dependencies": {

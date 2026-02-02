@@ -11,7 +11,6 @@
 - `*backlog-review` - Generate backlog review for sprint planning
 - `*backlog-summary` - Quick backlog status summary
 - `*stories-index` - Regenerate story index from docs/stories/
-- `*create-story` - Create user story from requirements
 - `*validate-story-draft` - Validate story quality and completeness
 - `*execute-checklist-po` - Run PO master checklist
 - `*correct-course` - Analyze and correct process deviations

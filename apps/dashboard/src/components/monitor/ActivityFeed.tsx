@@ -20,14 +20,6 @@ const EVENT_STYLES: Record<EventType, { icon: string; color: string; bg: string 
   Notification: { icon: 'bell', color: 'var(--status-warning)', bg: 'rgba(234, 179, 8, 0.1)' },
   PreCompact: { icon: 'archive', color: 'var(--text-tertiary)', bg: 'var(--bg-hover)' },
   SessionStart: { icon: 'zap', color: 'var(--status-success)', bg: 'rgba(34, 197, 94, 0.1)' },
-  // High-level AIOS events
-  AgentActivated: { icon: 'user', color: 'rgb(147, 51, 234)', bg: 'rgba(147, 51, 234, 0.1)' },
-  AgentDeactivated: { icon: 'user-minus', color: 'var(--text-muted)', bg: 'var(--bg-hover)' },
-  CommandStart: { icon: 'terminal', color: 'var(--accent-blue)', bg: 'rgba(59, 130, 246, 0.1)' },
-  CommandComplete: { icon: 'check-circle', color: 'var(--status-success)', bg: 'rgba(34, 197, 94, 0.1)' },
-  CommandError: { icon: 'x-circle', color: 'var(--status-error)', bg: 'rgba(239, 68, 68, 0.1)' },
-  StoryStatusChange: { icon: 'git-branch', color: 'var(--accent-gold)', bg: 'var(--accent-gold-bg)' },
-  SessionEnd: { icon: 'square', color: 'var(--text-muted)', bg: 'var(--bg-hover)' },
 };
 
 // Tool name abbreviations for common tools
@@ -86,20 +78,6 @@ const EventItem = memo(function EventItem({ event }: { event: MonitorEvent }) {
   } else if (event.type === 'UserPromptSubmit') {
     const prompt = event.data?.user_prompt || '';
     summary = String(prompt).slice(0, 50);
-  } else if (event.type === 'AgentActivated') {
-    const agentId = event.data?.agentId || '';
-    const agentName = event.data?.agentName || '';
-    summary = `@${agentId}${agentName ? ` (${agentName})` : ''}`;
-  } else if (event.type === 'AgentDeactivated') {
-    const agentId = event.data?.agentId || '';
-    summary = `@${agentId} deactivated`;
-  } else if (event.type === 'CommandStart' || event.type === 'CommandComplete' || event.type === 'CommandError') {
-    const command = event.data?.command || '';
-    summary = String(command).slice(0, 40);
-  } else if (event.type === 'StoryStatusChange') {
-    const storyId = event.data?.storyId || '';
-    const newStatus = event.data?.newStatus || '';
-    summary = `${storyId}: ${newStatus}`;
   }
 
   return (
