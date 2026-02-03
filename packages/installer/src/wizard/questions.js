@@ -195,6 +195,37 @@ function getExpansionPackQuestions() {
 }
 
 /**
+ * Get Tech Preset selection question
+ *
+ * Tech presets provide pre-configured architecture patterns and standards
+ * for different technology stacks.
+ *
+ * @returns {Object[]} Array of inquirer question objects
+ */
+function getTechPresetQuestion() {
+  return [
+    {
+      type: 'list',
+      name: 'selectedTechPreset',
+      message: colors.primary('Select a Tech Preset for architecture patterns:'),
+      choices: [
+        {
+          name:
+            colors.highlight('nextjs-react') +
+            colors.dim(' - Next.js 14+, React, TypeScript, Tailwind, Zustand'),
+          value: 'nextjs-react',
+        },
+        {
+          name: 'None' + colors.dim(' - Let AIOS decide based on project'),
+          value: 'none',
+        },
+      ],
+      default: 0,
+    },
+  ];
+}
+
+/**
  * Build complete question sequence
  * Allows conditional questions based on previous answers
  *
@@ -221,6 +252,9 @@ function buildQuestionSequence(_context = {}) {
   // Expansion Pack Selection (v2.1) - DISABLED: Squads replaced expansion-packs (OSR-8)
   // TODO: Remove entirely in future version
   // questions.push(...getExpansionPackQuestions());
+
+  // Tech Preset Selection
+  questions.push(...getTechPresetQuestion());
 
   // Story 1.7: Package Manager - Auto-detected (no question needed)
   // The wizard will auto-detect and use the appropriate package manager
@@ -258,6 +292,7 @@ module.exports = {
   getIDEQuestions,
   getMCPQuestions,
   getExpansionPackQuestions,
+  getTechPresetQuestion,
   getEnvironmentQuestions,
   getPackageManagerQuestion,
   buildQuestionSequence,

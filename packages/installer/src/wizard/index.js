@@ -8,7 +8,14 @@
  */
 
 const inquirer = require('inquirer');
-const { getLanguageQuestion, getProjectTypeQuestion, getIDEQuestions } = require('./questions');
+const path = require('path');
+const fse = require('fs-extra');
+const {
+  getLanguageQuestion,
+  getProjectTypeQuestion,
+  getIDEQuestions,
+  getTechPresetQuestion,
+} = require('./questions');
 const { setLanguage } = require('./i18n');
 const { showWelcome, showCompletion, showCancellation } = require('./feedback');
 const { generateIDEConfigs, showSuccessSummary } = require('./ide-config-generator');
@@ -136,7 +143,11 @@ async function runWizard() {
     setLanguage(languageAnswer.language);
 
     // Phase 2: Build remaining questions with i18n applied
-    const remainingQuestions = [getProjectTypeQuestion(), ...getIDEQuestions()];
+    const remainingQuestions = [
+      getProjectTypeQuestion(),
+      ...getIDEQuestions(),
+      ...getTechPresetQuestion(),
+    ];
 
     // Performance tracking (AC: < 100ms per question)
     const startTime = Date.now();
@@ -187,6 +198,92 @@ async function runWizard() {
     } catch (error) {
       console.error('\n⚠️  AIOS core installation failed:', error.message);
       answers.aiosCoreInstalled = false;
+    }
+
+    // Install Tech Preset if selected
+    if (answers.selectedTechPreset && answers.selectedTechPreset !== 'none') {
+      console.log('\n📐 Configuring Tech Preset...');
+
+      try {
+        // Find tech-presets source directory
+        const possiblePresetDirs = [
+          path.join(__dirname, '..', '..', '.aios-core', 'data', 'tech-presets'),
+          path.join(process.cwd(), '.aios-core', 'data', 'tech-presets'),
+        ];
+
+        let sourcePresetDir = null;
+        for (const dir of possiblePresetDirs) {
+          if (fse.existsSync(dir)) {
+            sourcePresetDir = dir;
+            break;
+          }
+        }
+
+        if (sourcePresetDir) {
+          const presetFile = path.join(sourcePresetDir, `${answers.selectedTechPreset}.md`);
+
+          if (fse.existsSync(presetFile)) {
+            // Copy preset to project's .aios-core/data/tech-presets/
+            const targetPresetDir = path.join(process.cwd(), '.aios-core', 'data', 'tech-presets');
+            await fse.ensureDir(targetPresetDir);
+
+            // Copy the selected preset
+            await fse.copy(
+              presetFile,
+              path.join(targetPresetDir, `${answers.selectedTechPreset}.md`)
+            );
+
+            // Copy the template too
+            const templateFile = path.join(sourcePresetDir, '_template.md');
+            if (fse.existsSync(templateFile)) {
+              await fse.copy(templateFile, path.join(targetPresetDir, '_template.md'));
+            }
+
+            // Update technical-preferences.md to mark the selected preset
+            const techPrefsFile = path.join(
+              process.cwd(),
+              '.aios-core',
+              'data',
+              'technical-preferences.md'
+            );
+            const techPrefsSource = path.join(sourcePresetDir, '..', 'technical-preferences.md');
+
+            if (fse.existsSync(techPrefsSource)) {
+              let techPrefsContent = await fse.readFile(techPrefsSource, 'utf8');
+
+              // Add active preset marker
+              const activePresetSection = `\n## Active Preset\n\n**Selected:** \`${answers.selectedTechPreset}\`\n\nThis preset was selected during installation. The @architect and @dev agents will use these patterns by default.\n`;
+
+              // Insert after the first heading
+              techPrefsContent = techPrefsContent.replace(
+                '# User-Defined Preferred Patterns and Preferences',
+                '# User-Defined Preferred Patterns and Preferences' + activePresetSection
+              );
+
+              await fse.writeFile(techPrefsFile, techPrefsContent, 'utf8');
+            }
+
+            console.log(`   ✅ Tech Preset: ${answers.selectedTechPreset}`);
+            console.log(
+              `   📁 Location: .aios-core/data/tech-presets/${answers.selectedTechPreset}.md`
+            );
+            answers.techPresetInstalled = true;
+            answers.techPresetResult = { preset: answers.selectedTechPreset, success: true };
+          } else {
+            console.log(`   ⚠️  Preset file not found: ${answers.selectedTechPreset}`);
+            answers.techPresetInstalled = false;
+          }
+        } else {
+          console.log('   ⚠️  Tech presets directory not found');
+          answers.techPresetInstalled = false;
+        }
+      } catch (error) {
+        console.error(`   ⚠️  Tech Preset error: ${error.message}`);
+        answers.techPresetInstalled = false;
+      }
+    } else {
+      answers.techPresetInstalled = false;
+      answers.techPresetResult = { preset: 'none', success: true };
     }
 
     // DISABLED: Squads replaced expansion-packs (OSR-8)
