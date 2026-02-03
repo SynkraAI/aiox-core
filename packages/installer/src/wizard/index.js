@@ -230,7 +230,7 @@ async function runWizard() {
             // Copy the selected preset
             await fse.copy(
               presetFile,
-              path.join(targetPresetDir, `${answers.selectedTechPreset}.md`)
+              path.join(targetPresetDir, `${answers.selectedTechPreset}.md`),
             );
 
             // Copy the template too
@@ -244,7 +244,7 @@ async function runWizard() {
               process.cwd(),
               '.aios-core',
               'data',
-              'technical-preferences.md'
+              'technical-preferences.md',
             );
             const techPrefsSource = path.join(sourcePresetDir, '..', 'technical-preferences.md');
 
@@ -257,7 +257,7 @@ async function runWizard() {
               // Insert after the first heading
               techPrefsContent = techPrefsContent.replace(
                 '# User-Defined Preferred Patterns and Preferences',
-                '# User-Defined Preferred Patterns and Preferences' + activePresetSection
+                '# User-Defined Preferred Patterns and Preferences' + activePresetSection,
               );
 
               await fse.writeFile(techPrefsFile, techPrefsContent, 'utf8');
@@ -265,7 +265,7 @@ async function runWizard() {
 
             console.log(`   ✅ Tech Preset: ${answers.selectedTechPreset}`);
             console.log(
-              `   📁 Location: .aios-core/data/tech-presets/${answers.selectedTechPreset}.md`
+              `   📁 Location: .aios-core/data/tech-presets/${answers.selectedTechPreset}.md`,
             );
             answers.techPresetInstalled = true;
             answers.techPresetResult = { preset: answers.selectedTechPreset, success: true };

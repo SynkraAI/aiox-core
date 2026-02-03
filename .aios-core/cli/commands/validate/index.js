@@ -35,7 +35,7 @@ const ExitCode = {
 };
 
 // Resolve validator module path
-const validatorPath = path.resolve(__dirname, '../../../../src/installer/post-install-validator');
+const validatorPath = path.resolve(__dirname, '../../../../packages/installer/src/installer/post-install-validator');
 let PostInstallValidator, formatReport;
 
 let validatorLoadError = null;

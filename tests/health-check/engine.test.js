@@ -315,7 +315,7 @@ describe('HealthCheckEngine', () => {
         // - Warning (partial execution)
         // All are acceptable outcomes for this timing-sensitive test
         expect([CheckStatus.SKIPPED, CheckStatus.WARNING, CheckStatus.PASS]).toContain(
-          secondResult.status
+          secondResult.status,
         );
       }
       // If no second result, that's also acceptable (not added to results)

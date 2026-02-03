@@ -203,8 +203,8 @@ async function runValidate() {
     const { createValidateCommand } = require('../.aios-core/cli/commands/validate/index.js');
     const validateCmd = createValidateCommand();
 
-    // Parse and execute
-    await validateCmd.parseAsync(['node', 'aios', 'validate', ...validateArgs]);
+    // Parse and execute (Note: don't include 'validate' as it's the command name, not an argument)
+    await validateCmd.parseAsync(['node', 'aios', ...validateArgs]);
   } catch (_error) {
     // Fallback: Run quick validation inline
     console.log('Running installation validation...\n');
@@ -368,46 +368,126 @@ function runDoctor() {
 }
 
 // Helper: Create new project
-async function initProject(projectName) {
-  if (!projectName) {
-    console.error('❌ Project name is required');
-    console.log('\nUsage: npx @synkra/aios-core@latest init <project-name>');
+// Helper: Show init help
+function showInitHelp() {
+  console.log(`
+Usage: npx aios-core init <project-name> [options]
+
+Create a new AIOS project with the specified name.
+
+Options:
+  --force              Force creation in non-empty directory
+  --skip-install       Skip npm dependency installation
+  --template <name>    Use specific template (default: default)
+  -t <name>            Shorthand for --template
+  -h, --help           Show this help message
+
+Available Templates:
+  default     Full installation with all agents, tasks, and workflows
+  minimal     Essential files only (dev agent + basic tasks)
+  enterprise  Everything + dashboards + team integrations
+
+Examples:
+  npx aios-core init my-project
+  npx aios-core init my-project --template minimal
+  npx aios-core init my-project --force --skip-install
+  npx aios-core init . --template enterprise
+`);
+}
+
+async function initProject() {
+  // 1. Parse ALL args after 'init'
+  const initArgs = args.slice(1);
+
+  // 2. Handle --help FIRST (before creating any directories)
+  if (initArgs.includes('--help') || initArgs.includes('-h')) {
+    showInitHelp();
+    return;
+  }
+
+  // 3. Parse flags
+  const isForce = initArgs.includes('--force');
+  const skipInstall = initArgs.includes('--skip-install');
+
+  // Template with argument
+  const templateIndex = initArgs.findIndex((a) => a === '--template' || a === '-t');
+  let template = 'default';
+  if (templateIndex !== -1) {
+    template = initArgs[templateIndex + 1];
+    if (!template || template.startsWith('-')) {
+      console.error('❌ --template requires a template name');
+      console.error('Available templates: default, minimal, enterprise');
+      process.exit(1);
+    }
+  }
+
+  // Validate template
+  const validTemplates = ['default', 'minimal', 'enterprise'];
+  if (!validTemplates.includes(template)) {
+    console.error(`❌ Unknown template: ${template}`);
+    console.error(`Available templates: ${validTemplates.join(', ')}`);
     process.exit(1);
   }
 
-  // Handle "." to install in current directory
+  // 4. Extract project name (anything that doesn't start with - and isn't a template value)
+  const projectName = initArgs.find((arg, i) => {
+    if (arg.startsWith('-')) return false;
+    // Skip if it's the value after --template
+    const prevArg = initArgs[i - 1];
+    if (prevArg === '--template' || prevArg === '-t') return false;
+    return true;
+  });
+
+  if (!projectName) {
+    console.error('❌ Project name is required');
+    console.log('\nUsage: npx aios-core init <project-name> [options]');
+    console.log('Run with --help for more information.');
+    process.exit(1);
+  }
+
+  // 5. Handle "." to install in current directory
   const isCurrentDir = projectName === '.';
   const targetPath = isCurrentDir ? process.cwd() : path.join(process.cwd(), projectName);
   const displayName = isCurrentDir ? path.basename(process.cwd()) : projectName;
 
-  console.log(`Creating new AIOS project: ${displayName}\n`);
-
-  // Check if directory exists
-  if (fs.existsSync(targetPath)) {
-    // Allow if directory is empty or only has hidden files
+  // 6. Check if directory exists
+  if (fs.existsSync(targetPath) && !isCurrentDir) {
     const contents = fs.readdirSync(targetPath).filter((f) => !f.startsWith('.'));
-    if (contents.length > 0 && !isCurrentDir) {
+    if (contents.length > 0 && !isForce) {
       console.error(`❌ Directory already exists and is not empty: ${projectName}`);
-      console.log('Use a different name or remove the existing directory.');
+      console.error('Use --force to overwrite.');
       process.exit(1);
     }
-    // Directory exists but is empty or is current dir - proceed
-    if (!isCurrentDir) {
+    if (contents.length > 0 && isForce) {
+      console.log(`⚠️  Using --force: overwriting existing directory: ${projectName}`);
+    } else {
       console.log(`✓ Using existing empty directory: ${projectName}`);
     }
-  } else {
-    // Create project directory
+  } else if (!fs.existsSync(targetPath)) {
     fs.mkdirSync(targetPath, { recursive: true });
     console.log(`✓ Created directory: ${projectName}`);
   }
 
-  // Change to project directory (if not already there)
+  console.log(`Creating new AIOS project: ${displayName}`);
+  if (template !== 'default') {
+    console.log(`Template: ${template}`);
+  }
+  if (skipInstall) {
+    console.log(`Skip install: enabled`);
+  }
+  console.log('');
+
+  // 7. Change to project directory (if not already there)
   if (!isCurrentDir) {
     process.chdir(targetPath);
   }
 
-  // Run the initialization wizard
-  await runWizard();
+  // 8. Run the initialization wizard with options
+  await runWizard({
+    template,
+    skipInstall,
+    force: isForce,
+  });
 }
 
 // Command routing (async main function)
@@ -431,9 +511,8 @@ async function main() {
       break;
 
     case 'init': {
-      // Create new project
-      const projectName = args[1];
-      await initProject(projectName);
+      // Create new project (flags parsed inside initProject)
+      await initProject();
       break;
     }
 
