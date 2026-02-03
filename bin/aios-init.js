@@ -5,7 +5,7 @@
  * Based on the original beautiful visual design with ASCII art
  * Version: 2.1.0
  *
- * ⚠️ DEPRECATION NOTICE (v3.11.2):
+ * ⚠️ DEPRECATION NOTICE (v3.11.3):
  * This file is the LEGACY installer and will be removed in v4.0.0.
  * The new modular wizard is located at: packages/installer/src/wizard/index.js
  *

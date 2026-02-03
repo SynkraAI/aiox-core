@@ -1,6 +1,6 @@
 {
   "name": "aios-core",
-  "version": "3.11.2",
+  "version": "3.11.3",
   "description": "Synkra AIOS: AI-Orchestrated System for Full Stack Development - Core Framework",
   "bin": {
     "aios": "bin/aios.js",
