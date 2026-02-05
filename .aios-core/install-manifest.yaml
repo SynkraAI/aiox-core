@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 3.11.3
-generated_at: "2026-02-05T23:30:13.921Z"
+generated_at: "2026-02-05T23:56:15.432Z"
 generator: scripts/generate-install-manifest.js
-file_count: 889
+file_count: 898
 files:
   - path: cli/commands/config/index.js
     hash: sha256:ebcad2ce3807eda29dcddff76d7a95ddc9b7fa160df21fd608f94b802237e862
@@ -100,6 +100,10 @@ files:
     hash: sha256:3cd6ad959b93be7572c78c29015ae8a9724949b72ccdd15feb7971584c84d2ae
     type: cli
     size: 12322
+  - path: cli/commands/pro/index.js
+    hash: sha256:d686da33f3a9ac2a77dd590ef0cd6ae27734898a2023781134f54fee38abf4a8
+    type: cli
+    size: 21790
   - path: cli/commands/qa/index.js
     hash: sha256:ff9c3669e31319d5e7be9b42a45f8ef7b9525ed2094e320000bc06cdd0625ca7
     type: cli
@@ -928,10 +932,26 @@ files:
     hash: sha256:60ef84102a934c3eb06428f8d005ff2a1eae497286d616adcaefca17dc26dda2
     type: agent
     size: 17985
+  - path: development/checklists/agent-quality-gate.md
+    hash: sha256:04d1bf12dd4b0b3d10de04c1825efab742e6475087d3ac9d5c86ca7ff8ec9057
+    type: checklist
+    size: 16148
   - path: development/checklists/self-critique-checklist.md
     hash: sha256:869fbc8fbc333ac8eea4eca3ea4ab9ca79917fa5e53735b70d634c85ac6420c8
     type: checklist
     size: 9184
+  - path: development/data/decision-heuristics-framework.md
+    hash: sha256:4aef9a7efc9673cc284ac819d7276fc58c5f954a1a41e092df97b9a05d2c092f
+    type: data
+    size: 16853
+  - path: development/data/quality-dimensions-framework.md
+    hash: sha256:df9fe53c4920e27ee34efafcfda9d9b16d42be509d598a686ea65cfc85d82ea8
+    type: data
+    size: 8759
+  - path: development/data/tier-system-framework.md
+    hash: sha256:0f2dded0302d12331c785c4c0a022786647beca7e0b07da469071c2d8286063e
+    type: data
+    size: 11110
   - path: development/README.md
     hash: sha256:66c7cc2510c1100c13aa176502428e7b1396fcd88af748a966f9ad3e2d0773b3
     type: development
@@ -1213,9 +1233,9 @@ files:
     type: task
     size: 11646
   - path: development/tasks/create-agent.md
-    hash: sha256:33dd541b75c5a87d54c981e03a6ff8be06dcc4161263962bd00290728d6add84
+    hash: sha256:56b73cf0c70cb8c0ea57663cf62ff9a9efa64bde5ef27dcd7cff085568a979ef
     type: task
-    size: 8355
+    size: 31564
   - path: development/tasks/create-brownfield-story.md
     hash: sha256:18d9b53040134007a5b5ebd5dab3607c54eb1720640fa750ad05e532fd964115
     type: task
@@ -1568,6 +1588,10 @@ files:
     hash: sha256:56f48bdae2572ee632bd782ada47804018cc0ba660f7711df73e34ab667d1e40
     type: task
     size: 23884
+  - path: development/tasks/qa-after-creation.md
+    hash: sha256:e9f6ceff7a0bc00d4fc035e890b7f1178c6ea43f447d135774b46a00713450e6
+    type: task
+    size: 13994
   - path: development/tasks/qa-backlog-add-followup.md
     hash: sha256:227b99fc562ec3bb4791b748dbeae5b32ce42b6516371bbccdd022c7c5bca1b6
     type: task
@@ -1804,6 +1828,10 @@ files:
     hash: sha256:e99b5aed1331dbedcd3ef771fa8cf43b59725eee7c222a21f32183baedc7a432
     type: task
     size: 7649
+  - path: development/tasks/update-aios.md
+    hash: sha256:c570ab41fdfff5cb31dd7626fb8a4423c9d7629a082896d6fdc2b552e2cea477
+    type: task
+    size: 4190
   - path: development/tasks/update-manifest.md
     hash: sha256:0f3fbe1a4bad652851e5b59332b4d4a39daadc0af2764913fce534a3e2d5968e
     type: task
@@ -1844,6 +1872,10 @@ files:
     hash: sha256:755abbb43aacb901a07dd2b66574f7d5a0750bf4f18e59f58fe52c35e61de8c1
     type: template
     size: 8230
+  - path: development/templates/research-prompt-tmpl.md
+    hash: sha256:000676982a6f1a22559a673102949604d6b97354356ab1891815ba18e0e72c30
+    type: template
+    size: 13371
   - path: development/templates/service-template/__tests__/index.test.ts.hbs
     hash: sha256:04090b95bc0b606448c161d8e698fcf4d5c7da2517a5ac65663554a54c5acf91
     type: template
@@ -2057,9 +2089,9 @@ files:
     type: elicitation
     size: 9677
   - path: index.esm.js
-    hash: sha256:71a1eb8108d1b231e16b408b2a06d47eb641e78f3488f16dc3f92344093da762
+    hash: sha256:ca3c48caaaf0f2488f5d72a51a20e9bd169381f06cce2e55cd08fb4bb90183ba
     type: code
-    size: 533
+    size: 629
   - path: index.js
     hash: sha256:e46e4b86e48e22a6f0b7ccb91e7e901bfc779479d4ebc7e776fca6dd4de5b30b
     type: code
@@ -3476,6 +3508,10 @@ files:
     hash: sha256:87465ac02b079166479b9d50fe6e12a101bcaa81d47f1aace9b346e264c04712
     type: script
     size: 26029
+  - path: scripts/update-aios.sh
+    hash: sha256:01c2f2d2bfb568a721f1940fe9877a4a8f874934caba087b6dcbef9e3cee7801
+    type: script
+    size: 6083
   - path: scripts/validate-phase1.ps1
     hash: sha256:2f694151ae90af1a9cb8fe890037a51e60115ff8edf636704e8f11e7ac23b23a
     type: script
