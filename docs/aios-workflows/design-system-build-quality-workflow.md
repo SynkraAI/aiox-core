@@ -62,7 +62,7 @@ flowchart TD
         B3 --> B4
     end
 
-    subgraph DECISION1["❓ Decisao Build"]
+    subgraph DECISION1["❓ Decisão Build"]
         C{Build OK?}
         E[🔴 Corrigir erros de build]
     end
@@ -80,9 +80,9 @@ flowchart TD
         D3 --> D4
     end
 
-    subgraph DECISION2["❓ Decisao Docs"]
+    subgraph DECISION2["❓ Decisão Docs"]
         F{Docs completas?}
-        H[🔴 Completar documentacao]
+        H[🔴 Completar documentação]
     end
 
     subgraph PHASE3["♿ FASE 3: Quality Assurance"]
@@ -100,18 +100,18 @@ flowchart TD
         G4 --> G5
     end
 
-    subgraph DECISION3["❓ Decisao A11y"]
+    subgraph DECISION3["❓ Decisão A11y"]
         I{A11y aprovado?}
-        K[🔴 Remediar violacoes]
+        K[🔴 Remediar violações]
     end
 
     subgraph PHASE4["💰 FASE 4: ROI Analysis"]
         J[ux-design-expert:<br/>Calcular ROI e savings]
         J1[Tempo dev economizado]
-        J2[Reducao de inconsistencias]
+        J2[Redução de inconsistências]
         J3[Velocidade de entrega]
-        J4[Custo manutencao reduzido]
-        J5[Metricas de reuso]
+        J4[Custo manutenção reduzido]
+        J5[Métricas de reuso]
 
         J --> J1
         J1 --> J2
@@ -124,7 +124,7 @@ flowchart TD
         L[Pipeline Completo]
         L1[📊 Build report + bundle]
         L2[📖 Pattern Library docs]
-        L3[♿ Relatorio WCAG AA]
+        L3[♿ Relatório WCAG AA]
         L4[💵 Dashboard de ROI]
 
         L --> L1
@@ -136,17 +136,17 @@ flowchart TD
     A --> B
     B4 --> C
     C -->|Sim| D
-    C -->|Nao| E
+    C -->|Não| E
     E --> B
 
     D4 --> F
     F -->|Sim| G
-    F -->|Nao| H
+    F -->|Não| H
     H --> D
 
     G5 --> I
     I -->|Sim| J
-    I -->|Nao| K
+    I -->|Não| K
     K --> G
 
     J5 --> L
@@ -172,14 +172,14 @@ graph LR
         A11Y --> ROI["💰 ROI"]
     end
 
-    START((Inicio)) --> BUILD
+    START((Início)) --> BUILD
     ROI --> FINISH((Fim))
 
     style START fill:#87CEEB
     style FINISH fill:#90EE90
 ```
 
-### Fluxo de Dependências
+#### Fluxo de Dependências
 
 ```mermaid
 graph TD
@@ -259,7 +259,7 @@ Executa o build dos componentes do Design System, compilando tokens e gerando os
 | **Ação** | Gerar documentação do Pattern Library |
 | **Dependências** | `build` (Step 1) |
 
-#### Descricao
+#### Descrição
 
 Gera documentação completa do Pattern Library, incluindo API de componentes, exemplos e guias de estilo.
 
@@ -296,14 +296,14 @@ Gera documentação completa do Pattern Library, incluindo API de componentes, e
 | **Ação** | Auditoria de acessibilidade (WCAG AA) |
 | **Dependências** | `document` (Step 2) |
 
-#### Descricao
+#### Descrição
 
-Executa auditoria de acessibilidade conforme WCAG 2.1 AA, validando contraste, navegacao e compatibilidade com tecnologias assistivas.
+Executa auditoria de acessibilidade conforme WCAG 2.1 AA, validando contraste, navegação e compatibilidade com tecnologias assistivas.
 
 #### Atividades Executadas
 
 1. **Verifica contraste de cores** - 4.5:1 texto, 3:1 UI
-2. **Valida navegacao por teclado**
+2. **Valida navegação por teclado**
 3. **Checa atributos ARIA e roles**
 4. **Testa com screen readers**
 5. **Verifica focus states e indicadores visuais**
