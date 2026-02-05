@@ -15,7 +15,6 @@ const Epic3Executor = require('./epic-3-executor');
 const Epic4Executor = require('./epic-4-executor');
 const Epic5Executor = require('./epic-5-executor');
 const Epic6Executor = require('./epic-6-executor');
-const Epic7Executor = require('./epic-7-executor');
 
 const { ExecutionStatus } = EpicExecutor;
 const { RecoveryStrategy } = Epic5Executor;
@@ -29,12 +28,11 @@ const EXECUTOR_MAP = {
   4: Epic4Executor,
   5: Epic5Executor,
   6: Epic6Executor,
-  7: Epic7Executor,
 };
 
 /**
  * Create an executor for the given epic number
- * @param {number} epicNum - Epic number (3-7)
+ * @param {number} epicNum - Epic number (3-6)
  * @param {Object} orchestrator - Parent orchestrator instance
  * @returns {EpicExecutor} Executor instance
  */
@@ -74,7 +72,6 @@ module.exports = {
   Epic4Executor,
   Epic5Executor,
   Epic6Executor,
-  Epic7Executor,
 
   // Enums
   ExecutionStatus,

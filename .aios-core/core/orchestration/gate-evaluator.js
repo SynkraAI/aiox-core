@@ -56,12 +56,6 @@ const DEFAULT_GATE_CONFIG = {
     minTestCoverage: 0,
     checks: ['plan_complete', 'implementation_exists', 'no_critical_errors'],
   },
-  // Epic 6 -> Epic 7 gate
-  epic6_to_epic7: {
-    blocking: false,
-    allowMinorIssues: true,
-    checks: ['qa_report_exists', 'verdict_generated'],
-  },
 };
 
 // ═══════════════════════════════════════════════════════════════════════════════════

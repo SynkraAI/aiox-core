@@ -145,14 +145,6 @@ commands:
     visibility: [full, quick]
     description: 'Complete autonomous build: worktree → plan → execute → verify → merge (*build {story-id})'
 
-  # Memory Layer (Epic 7 - ADE)
-  - name: capture-insights
-    visibility: [full, quick]
-    description: 'Capture session insights (discoveries, patterns, gotchas, decisions)'
-  - name: list-gotchas
-    visibility: [full, quick]
-    description: 'List known gotchas from .aios/gotchas.md'
-
   # Gotchas Memory (Epic 9 - Story 9.4)
   - name: gotcha
     visibility: [full, quick]
@@ -252,8 +244,6 @@ dependencies:
     - sync-documentation.md
     - validate-next-story.md
     - waves.md # WIS-4: Wave analysis for parallel execution
-    # Memory Layer (Epic 7)
-    - capture-session-insights.md
     # Build Recovery (Epic 8 - Story 8.4)
     - build-resume.md
     - build-status.md

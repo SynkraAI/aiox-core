@@ -550,6 +550,14 @@ All agents enforce:
 
 ---
 
+## Detailed Agent Documentation
+
+For complete system documentation for each agent, including detailed flows, decision trees, and implementation details, see:
+
+- [AIOS Agent Flows](./aios-agent-flows/README.md) - Complete system documentation for each agent
+
+---
+
 ## Version History
 
 | Version | Date       | Changes                                                                    | Story |

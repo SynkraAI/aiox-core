@@ -564,10 +564,6 @@ files:
     hash: sha256:aea7548d18b81bc99c203418dbe56ab355b0f644d092e82588bcc079dbfd2e90
     type: core
     size: 6780
-  - path: core/orchestration/executors/epic-7-executor.js
-    hash: sha256:47afa467642d2ddf59c752e147c53d99d4b5dc43d12e878531d6d7c7b8a459e7
-    type: core
-    size: 9555
   - path: core/orchestration/executors/epic-executor.js
     hash: sha256:f2b20cd8cc4f3473bfcc7afdc0bc20e21665bab92274433ede58eabc4691a6b9
     type: core

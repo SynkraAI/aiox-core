@@ -20,7 +20,6 @@ const {
   Epic4Executor,
   Epic5Executor,
   Epic6Executor,
-  Epic7Executor,
   ExecutionStatus,
   RecoveryStrategy,
   QAVerdict,
@@ -287,51 +286,6 @@ describe('Epic Executors (Story 0.3)', () => {
     });
   });
 
-  describe('Epic7Executor - Memory Layer (AC6)', () => {
-    let executor;
-
-    beforeEach(() => {
-      executor = new Epic7Executor(mockOrchestrator);
-    });
-
-    it('should create instance with epic number 7', () => {
-      expect(executor.epicNum).toBe(7);
-    });
-
-    it('should execute and capture patterns', async () => {
-      const result = await executor.execute({
-        storyId: 'TEST-001',
-        qaReport: { passed: true, verdict: 'approved' },
-        sessionInsights: { duration: 5000, errorsEncountered: 0 },
-      });
-
-      expect(result.success).toBe(true);
-      expect(result.patternsCaptures).toBeGreaterThan(0);
-    });
-
-    it('should create session summary', async () => {
-      const result = await executor.execute({
-        storyId: 'TEST-001',
-        qaReport: { passed: true },
-        sessionInsights: {},
-      });
-
-      expect(result.summaryPath).toBeDefined();
-      expect(await fs.pathExists(result.summaryPath)).toBe(true);
-    });
-
-    it('should generate suggestions', async () => {
-      const result = await executor.execute({
-        storyId: 'TEST-001',
-        qaReport: { passed: false },
-        sessionInsights: { errorsEncountered: 3 },
-      });
-
-      expect(result.suggestions).toBeDefined();
-      expect(result.suggestions.length).toBeGreaterThan(0);
-    });
-  });
-
   describe('Factory Functions', () => {
     it('should create executor with createExecutor()', () => {
       const executor = createExecutor(3, mockOrchestrator);
@@ -346,7 +300,7 @@ describe('Epic Executors (Story 0.3)', () => {
 
     it('should check executor existence with hasExecutor()', () => {
       expect(hasExecutor(3)).toBe(true);
-      expect(hasExecutor(7)).toBe(true);
+      expect(hasExecutor(6)).toBe(true);
       expect(hasExecutor(99)).toBe(false);
     });
 
@@ -357,7 +311,6 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(epics).toContain(4);
       expect(epics).toContain(5);
       expect(epics).toContain(6);
-      expect(epics).toContain(7);
     });
   });
 
@@ -387,7 +340,6 @@ describe('Epic Executors (Story 0.3)', () => {
       expect(EXECUTOR_MAP[4]).toBe(Epic4Executor);
       expect(EXECUTOR_MAP[5]).toBe(Epic5Executor);
       expect(EXECUTOR_MAP[6]).toBe(Epic6Executor);
-      expect(EXECUTOR_MAP[7]).toBe(Epic7Executor);
     });
   });
 });
@@ -417,7 +369,6 @@ describe('Standardized Results (AC7)', () => {
       new Epic4Executor(mockOrchestrator),
       new Epic5Executor(mockOrchestrator),
       new Epic6Executor(mockOrchestrator),
-      new Epic7Executor(mockOrchestrator),
     ];
 
     const contexts = [
@@ -425,7 +376,6 @@ describe('Standardized Results (AC7)', () => {
       { storyId: 'TEST-001', specPath: '/path' },
       { storyId: 'TEST-001', failedEpic: 3, error: 'test', attempts: 0 },
       { storyId: 'TEST-001', buildResult: {} },
-      { storyId: 'TEST-001', qaReport: {}, sessionInsights: {} },
     ];
 
     for (let i = 0; i < executors.length; i++) {

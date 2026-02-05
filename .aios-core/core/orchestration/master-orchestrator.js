@@ -3,13 +3,13 @@
  *
  * Story: 0.1 - Master Orchestrator Core
  *
- * Central orchestrator that connects all ADE epics (3→4→5→6→7) in a unified
+ * Central orchestrator that connects all ADE epics (3→4→5→6) in a unified
  * execution pipeline for truly autonomous development.
  *
  * Features:
  * - AC1: Located in `.aios-core/core/orchestration/`
  * - AC2: constructor(projectRoot, options) with storyId, maxRetries, autoRecovery
- * - AC3: executeFullPipeline() runs Epics 3→4→5→6→7
+ * - AC3: executeFullPipeline() runs Epics 3→4→5→6
  * - AC4: executeEpic(epicNum, options) for individual epic execution
  * - AC5: resumeFromEpic(epicNum) to continue from specific point
  * - AC6: State machine: INITIALIZED, READY, IN_PROGRESS, BLOCKED, COMPLETE
@@ -121,12 +121,6 @@ const EPIC_CONFIG = {
     description: 'Quality assurance and validation',
     executor: 'Epic6Executor',
     icon: '🔍',
-  },
-  7: {
-    name: 'Memory Layer',
-    description: 'Pattern learning and workflow intelligence',
-    executor: 'Epic7Executor',
-    icon: '🧠',
   },
 };
 
@@ -439,9 +433,9 @@ class MasterOrchestrator extends EventEmitter {
     this._inFullPipeline = true;
 
     try {
-      // Execute epics in sequence: 3 → 4 → 6 → 7
+      // Execute epics in sequence: 3 → 4 → 6
       // Note: Epic 5 (Recovery) is triggered on-demand, not sequentially
-      const epicSequence = [3, 4, 6, 7];
+      const epicSequence = [3, 4, 6];
 
       for (const epicNum of epicSequence) {
         // Check if already completed (for resume scenarios)

@@ -24,6 +24,8 @@ docs/
 ├── architecture/              # English
 ├── framework/                 # English
 ├── platforms/                 # English
+├── aios-agent-flows/          # Detailed agent documentation
+├── aios-workflows/            # Detailed workflow documentation
 │
 ├── pt/                        # Português (translations)
 │   ├── getting-started.md
@@ -48,6 +50,8 @@ docs/
 - [Installation Guide](./installation/README.md)
 - [Architecture Overview](./architecture/ARCHITECTURE-INDEX.md)
 - [Agent Reference](./agent-reference-guide.md)
+- [Agent System Documentation](./aios-agent-flows/README.md)
+- [Workflow Documentation](./aios-workflows/README.md)
 - [Troubleshooting](./troubleshooting.md)
 
 ### Português
@@ -56,6 +60,8 @@ docs/
 - [Guia de Instalação](./pt/installation/README.md)
 - [Visão Geral da Arquitetura](./pt/architecture/ARCHITECTURE-INDEX.md)
 - [Referência de Agentes](./pt/agent-reference-guide.md)
+- [Documentação do Sistema de Agentes](./pt/aios-agent-flows/README.md)
+- [Documentação de Workflows](./pt/aios-workflows/README.md)
 - [Solução de Problemas](./pt/troubleshooting.md)
 
 ### Español
@@ -64,6 +70,8 @@ docs/
 - [Guía de Instalación](./es/installation/README.md)
 - [Visión General de la Arquitectura](./es/architecture/ARCHITECTURE-INDEX.md)
 - [Referencia de Agentes](./es/agent-reference-guide.md)
+- [Documentación del Sistema de Agentes](./es/aios-agent-flows/README.md)
+- [Documentación de Workflows](./es/aios-workflows/README.md)
 - [Solución de Problemas](./es/troubleshooting.md)
 
 ---

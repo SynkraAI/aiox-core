@@ -389,6 +389,14 @@ cat .aios-core/development/workflows/{name}.yaml
 
 ---
 
+## Detailed Workflow Documentation
+
+For complete documentation for each workflow, including detailed step-by-step guides, flowcharts, and implementation details, see:
+
+- [AIOS Workflows](../aios-workflows/README.md) - Complete documentation for each workflow
+
+---
+
 ## Related Documentation
 
 - [HybridOps Workflow Diagram](./hybridOps/workflow-diagram.md) - Human-agent collaboration patterns

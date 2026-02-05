@@ -74,11 +74,11 @@ describe('MasterOrchestrator', () => {
       expect(orchestrator.executionState).toBeDefined();
       expect(orchestrator.executionState.storyId).toBe('TEST-001');
       expect(orchestrator.executionState.epics).toBeDefined();
-      expect(Object.keys(orchestrator.executionState.epics)).toHaveLength(5);
+      expect(Object.keys(orchestrator.executionState.epics)).toHaveLength(4);
     });
 
     it('should have all epics in pending state initially', () => {
-      for (const epicNum of [3, 4, 5, 6, 7]) {
+      for (const epicNum of [3, 4, 5, 6]) {
         expect(orchestrator.executionState.epics[epicNum]).toBeDefined();
         expect(orchestrator.executionState.epics[epicNum].status).toBe(EpicStatus.PENDING);
       }
@@ -182,18 +182,17 @@ describe('MasterOrchestrator', () => {
       await orchestrator.initialize();
     });
 
-    it('should execute epics in sequence 3→4→6→7', async () => {
+    it('should execute epics in sequence 3→4→6', async () => {
       const executedEpics = [];
       orchestrator.on('epicStart', (e) => executedEpics.push(e.epicNum));
 
       const result = await orchestrator.executeFullPipeline();
 
       // Epic 5 (Recovery) is on-demand, not in sequence
-      expect(executedEpics).toEqual([3, 4, 6, 7]);
+      expect(executedEpics).toEqual([3, 4, 6]);
       expect(result.epics.executed).toContain(3);
       expect(result.epics.executed).toContain(4);
       expect(result.epics.executed).toContain(6);
-      expect(result.epics.executed).toContain(7);
     });
 
     it('should transition to COMPLETE on success', async () => {
@@ -239,10 +238,9 @@ describe('MasterOrchestrator', () => {
 
       await orchestrator.resumeFromEpic(6);
 
-      // Should only execute 6 and 7 since 3,4 were already done
+      // Should only execute 6 since 3,4 were already done
       // and reset happens for epics >= fromEpic
       expect(executedEpics).toContain(6);
-      expect(executedEpics).toContain(7);
     });
   });
 
@@ -411,7 +409,7 @@ describe('MasterOrchestrator', () => {
         const states = await orchestrator.listSavedStates();
         const testState = states.find((s) => s.storyId === 'TEST-001');
 
-        expect(testState.progress).toBe(50); // 2 of 4 epics
+        expect(testState.progress).toBe(67); // 2 of 3 epics
       });
     });
   });
@@ -423,10 +421,10 @@ describe('MasterOrchestrator', () => {
       expect(orchestrator.getProgressPercentage()).toBe(0);
 
       await orchestrator.executeEpic(3);
-      expect(orchestrator.getProgressPercentage()).toBe(25); // 1 of 4 non-on-demand epics
+      expect(orchestrator.getProgressPercentage()).toBe(33); // 1 of 3 non-on-demand epics
 
       await orchestrator.executeEpic(4);
-      expect(orchestrator.getProgressPercentage()).toBe(50); // 2 of 4
+      expect(orchestrator.getProgressPercentage()).toBe(67); // 2 of 3
     });
 
     it('should return status summary', async () => {
@@ -437,7 +435,7 @@ describe('MasterOrchestrator', () => {
 
       expect(status.state).toBe(OrchestratorState.READY);
       expect(status.storyId).toBe('TEST-001');
-      expect(status.progress).toBe(25);
+      expect(status.progress).toBe(33);
       expect(status.epics['3'].status).toBe(EpicStatus.COMPLETED);
     });
   });
@@ -448,7 +446,6 @@ describe('MasterOrchestrator', () => {
       expect(EPIC_CONFIG[4]).toBeDefined();
       expect(EPIC_CONFIG[5]).toBeDefined();
       expect(EPIC_CONFIG[6]).toBeDefined();
-      expect(EPIC_CONFIG[7]).toBeDefined();
     });
 
     it('should mark Epic 5 as on-demand', () => {
@@ -461,7 +458,6 @@ describe('MasterOrchestrator', () => {
       expect(EPIC_CONFIG[4].name).toBe('Execution Engine');
       expect(EPIC_CONFIG[5].name).toBe('Recovery System');
       expect(EPIC_CONFIG[6].name).toBe('QA Loop');
-      expect(EPIC_CONFIG[7].name).toBe('Memory Layer');
     });
   });
 
@@ -560,26 +556,6 @@ describe('MasterOrchestrator', () => {
       expect(context.codeChanges).toContain('/src/file.js');
     });
 
-    // AC6: Epic 7 recebe: qaReport, patterns, sessionInsights
-    it('AC6: Epic 7 should receive qaReport, patterns, sessionInsights', async () => {
-      // Simulate Epic 6 completion
-      orchestrator.executionState.epics[6] = {
-        status: EpicStatus.COMPLETED,
-        result: {
-          verdict: 'approved',
-          passed: true,
-        },
-      };
-      orchestrator.executionState.insights = [{ type: 'pattern', data: 'test' }];
-
-      const context = orchestrator._buildContextForEpic(7);
-
-      expect(context.qaReport).toBeDefined();
-      expect(context.qaReport.verdict).toBe('approved');
-      expect(context.patterns).toHaveLength(1);
-      expect(context.sessionInsights).toBeDefined();
-      expect(typeof context.sessionInsights.duration).toBe('number');
-    });
 
     // AC7: TechStackProfile injected em todos os contextos
     it('AC7: TechStackProfile should be injected in all contexts', async () => {
