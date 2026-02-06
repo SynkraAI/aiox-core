@@ -1,0 +1,209 @@
+WEBVTT
+
+00:00:00.620 --> 00:00:07.420
+Lendário, nessa aula você vai aprender
+uma dica, se você está usando o Mac, que
+
+00:00:07.420 --> 00:00:10.540
+já deu dor de cabeça para muita gente.
+
+00:00:10.980 --> 00:00:17.200
+Por não entender um pouco uma dinâmica
+aqui, passaram um apuro aí, inclusive,
+
+00:00:17.240 --> 00:00:22.640
+quando estava usando o Obsidian, estava
+para fazer uma apresentação e não
+
+00:00:22.640 --> 00:00:28.900
+conseguiu acessar seus arquivos, outros
+reclamaram de travamento, bug na
+
+00:00:28.900 --> 00:00:35.900
+ferramenta, perder arquivo, duplicar
+arquivo, olha só, não existe bug na
+
+00:00:35.900 --> 00:00:41.980
+ferramenta, não existe nada de errado
+com ela, você não precisa se preocupar
+
+00:00:41.980 --> 00:00:48.220
+em perder arquivo, duplicar coisas,
+travar, não tem nada disso.
+
+00:00:48.400 --> 00:00:53.160
+O que acontece, se você está usando o
+Mac, olha essa dica de ouro aqui, você
+
+00:00:53.160 --> 00:01:00.100
+vai ir lá, nas configurações, e você tem
+que saber o seguinte, aqui em
+
+00:01:00.100 --> 00:01:08.040
+armazenamento, em storage, você vai ter
+aqui, o que cada coisa está ocupando aí,
+
+00:01:08.080 --> 00:01:12.100
+de espaço no seu Mac, e o que você
+precisa saber?
+
+00:01:12.820 --> 00:01:18.360
+Você vai primeiro ver que versão está o
+seu Mac aí, então você vai vir aqui na
+
+00:01:18.360 --> 00:01:23.100
+maçãzinha, About this Mac, e você vai
+ver aí a versão do Mac OS.
+
+00:01:23.100 --> 00:01:33.380
+No meu caso aqui, está a Sequoia 15 .1
+.1, essa versão Sequoia 15 para cima,
+
+00:01:33.600 --> 00:01:41.400
+você vai ter que fazer o seguinte, você
+pode vir aqui, e ver que tem uma opção
+
+00:01:41.400 --> 00:01:49.160
+aqui, de otimização de espaço, acontece
+que o seguinte, se você tem anterior a
+
+00:01:49.160 --> 00:01:56.200
+Sequoia, vai ter aqui uma chavinha, para
+você, habilitar ou não, a otimização de
+
+00:01:56.200 --> 00:02:05.180
+espaço, está diferente dessa opção aqui,
+de otimizar, simplesmente filmes e tudo
+
+00:02:05.180 --> 00:02:05.380
+mais.
+
+00:02:05.620 --> 00:02:11.460
+Então olha só, o que vai acontecer, se
+você habilitou essa otimização de
+
+00:02:11.460 --> 00:02:17.840
+espaço, se está habilitada aí, e a
+versão do seu Mac OS, é diferente de
+
+00:02:17.840 --> 00:02:24.780
+Sequoia, é anterior a 15 aí, você tem
+que desabilitar, porque, o que pode
+
+00:02:24.780 --> 00:02:30.820
+acontecer, o que faz essa otimização de
+armazenamento, isso para versões
+
+00:02:30.820 --> 00:02:32.060
+anteriores a Sequoia.
+
+00:02:33.460 --> 00:02:39.280
+Se você habilitar, o Mac vai
+automaticamente verificar se você não
+
+00:02:39.280 --> 00:02:44.380
+está usando determinados arquivos, e ele
+vai então, tirar esse arquivo do seu
+
+00:02:44.380 --> 00:02:50.100
+disco, da sua opção local, e mandar
+somente para a nuvem.
+
+00:02:50.180 --> 00:02:51.380
+O que vai acontecer?
+
+00:02:53.080 --> 00:03:00.800
+Obsidian trabalha com arquivos locais,
+se você estiver, usando Obsidian, e ele
+
+00:03:00.800 --> 00:03:04.960
+fizer isso , na hora que você abre o
+Obsidian primeiro, ele não vai conseguir
+
+00:03:04.960 --> 00:03:09.100
+achar os arquivos, vai dar a impressão
+que está travando, na verdade ele está
+
+00:03:09.100 --> 00:03:14.840
+baixando os arquivos, vai ter também,
+sintomas de você abrir um arquivo e não
+
+00:03:14.840 --> 00:03:17.360
+ter conteúdo lá dentro, você vai pensar,
+perdi tudo.
+
+00:03:17.580 --> 00:03:24.840
+Não, ele está baixando, né, vai
+acontecer de você, Acabar criando de
+
+00:03:24.840 --> 00:03:31.460
+novo uma nota Vai estar duplicando Tudo
+por conta disso Então assim, não dá Para
+
+00:03:31.460 --> 00:03:36.960
+ter essa opção de otimização De
+armazenamento Com obsidia, porque senão
+
+00:03:36.960 --> 00:03:45.920
+Vai ter esse problema A partir da versão
+15 A partir da versão Do Sequoia O que
+
+00:03:45.920 --> 00:03:55.780
+você pode fazer Deve fazer A sua pasta
+aqui Do iCloud Que tem o obsidian Você
+
+00:03:55.780 --> 00:04:05.660
+vai Clicar com o botão Aqui direito E
+vai Selecionar essa opção aqui Keep
+
+00:04:05.660 --> 00:04:12.220
+downloaded Significa que se você Mesmo
+tendo otimização Agora você pode
+
+00:04:12.220 --> 00:04:18.540
+selecionar uma pasta Que você quer ela
+ali Direto no seu disco Sem ter essa
+
+00:04:18.540 --> 00:04:25.240
+opção de armazenar Tirar os arquivos E
+mandar para a nuvem Isso vai evitar Toda
+
+00:04:25.240 --> 00:04:30.200
+essa dor de cabeça que eu falei Então
+você tem que fazer isso Para evitar
+
+00:04:30.200 --> 00:04:37.380
+esses problemas Então vamos lá
+recapitular Anterior a 15 Desabilita a
+
+00:04:37.380 --> 00:04:43.560
+otimização Superior a 15 Versão Sequoia
+Você vai lá na pasta obsidian E clica
+
+00:04:43.560 --> 00:04:50.120
+aqui, keep downloaded Ou seja, mantém
+essa pasta Sempre aqui No meu disco
+
+00:04:50.120 --> 00:04:51.180
+local Então você vai lá na pasta
+obsidian e clica aqui, keep downloaded E
+
+00:04:51.180 --> 00:04:56.940
+isso vai fazer com que você não tenha
+Problemas Vai estar aqui, esse símbolo
+
+00:04:56.940 --> 00:05:03.720
+aqui Que sempre vai estar No seu disco
+Não vai estar na nuvem Não vai pegar
+
+00:05:03.720 --> 00:05:05.760
+nenhum arquivo e mandar para a nuvem
+Legal?
+
+00:05:05.840 --> 00:05:11.980
+Só isso já salvou muitas horas De
+problemas que você poderia ter Até a
+
+00:05:11.980 --> 00:05:17.660
+próxima aula Nós vamos continuar vendo
+sobre A otimização do obsidian No Mac

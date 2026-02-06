@@ -1,0 +1,352 @@
+template:
+  id: squad-config-template-v1
+  name: Squad Configuration
+  version: 1.0
+  output:
+    format: yaml
+    filename: config.yaml
+    title: "{{pack_name}} Configuration"
+
+workflow:
+  mode: interactive
+  elicitation: basic-elicitation
+
+sections:
+  - id: initial-setup
+    instruction: |
+      Initial Setup for Squad Configuration
+
+      This template generates the config.yaml file for a new AIOS squad.
+
+      Gather the following information from the user:
+      - Pack name (kebab-case, e.g., 'legal-assistant')
+      - Short title (human-readable, e.g., 'Legal Assistant')
+      - Description (brief explanation of pack purpose)
+      - Author (person or organization)
+      - Slash prefix (camelCase for commands, e.g., 'legalAssistant')
+
+      Output file location: `squads/{{pack_name}}/config.yaml`
+
+  - id: pack-metadata
+    title: Squad Metadata
+    instruction: |
+      Elicit pack metadata from user. Ensure pack_name uses kebab-case and slash_prefix uses camelCase.
+    elicit: true
+    template: |
+      pack:
+        name: {{pack_name}}
+        version: {{version}}
+        short-title: {{short_title}}
+        description: >-
+          {{description}}
+        author: {{author}}
+        icon: {{icon}}
+        slashPrefix: {{slash_prefix}}
+    examples:
+      - |
+        pack:
+          name: legal-assistant
+          version: 1.0.0
+          short-title: Legal Assistant Pack
+          description: >-
+            This squad provides specialized agents, tasks, and templates
+            for legal professionals. It automates document drafting, case analysis,
+            legal research, and compliance workflows.
+          author: AIOS Community
+          icon: "⚖️"
+          slashPrefix: legalAssistant
+
+  - id: pattern-library
+    title: Pattern Library
+    instruction: |
+      Define the Pattern Library for reusable patterns.
+
+      The prefix should be 2-3 uppercase letters that uniquely identify this squad.
+      Categories define the types of patterns this squad will use.
+
+      Standard categories:
+      - TP: Task Patterns
+      - EP: Executor Patterns
+      - PP: Process Patterns
+      - IP: Integration Patterns
+      - AP: Automation Patterns
+      - DP: Documentation Patterns
+
+      Pattern naming convention: {PREFIX}-{CATEGORY}-{NUMBER}
+      Example: LA-TP-001 (Legal Assistant Task Pattern 001)
+    elicit: true
+    template: |
+      # Pattern Library (HO-xxx inspired)
+      pattern_library:
+        prefix: {{pattern_prefix}}  # 2-3 uppercase letters
+        naming_convention:
+          format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+          example: "{{pattern_prefix}}-TP-001"
+        categories:
+          - id: TP
+            name: "Task Patterns"
+            description: "Patterns for task structure and execution"
+          - id: EP
+            name: "Executor Patterns"
+            description: "Patterns for executor types and selection"
+          - id: PP
+            name: "Process Patterns"
+            description: "Patterns for workflow processes"
+          - id: IP
+            name: "Integration Patterns"
+            description: "Patterns for external integrations"
+          - id: AP
+            name: "Automation Patterns"
+            description: "Patterns for automation logic"
+          - id: DP
+            name: "Documentation Patterns"
+            description: "Patterns for documentation structure"
+        patterns: []  # Populated as patterns are created
+    examples:
+      - |
+        pattern_library:
+          prefix: LA
+          naming_convention:
+            format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+            example: "LA-TP-001"
+          categories:
+            - id: TP
+              name: "Task Patterns"
+              description: "Patterns for legal task structure"
+            - id: EP
+              name: "Executor Patterns"
+              description: "Patterns for legal executor selection"
+          patterns:
+            - id: LA-TP-001
+              name: "Contract Review Task"
+              description: "Standard pattern for contract review tasks"
+
+  - id: task-standards
+    title: Task Standards
+    instruction: |
+      Define the Task Anatomy Standard (HO-TP-001 inspired).
+
+      Every task in this squad MUST have these 8 required fields:
+      1. task_name - Format: "Verb + Object"
+      2. status - Enum: pending|in_progress|completed
+      3. responsible_executor - Who executes
+      4. execution_type - Enum: Human|Agent|Hybrid|Worker
+      5. estimated_time - Format: "Xh" or "X-Yh"
+      6. input - Array of required inputs
+      7. output - Array of produced outputs
+      8. action_items - Execution steps
+      9. acceptance_criteria - Acceptance criteria
+
+      This eliminates ambiguity, enables automation validation, facilitates handoffs,
+      and makes tasks auditable.
+    elicit: true
+    template: |
+      # Task Standards (HO-TP-001 inspired)
+      task_standards:
+        enforce_anatomy: true
+        validator: "{{pattern_prefix}}-TP-001"
+        required_fields:
+          - task_name          # Format: "Verb + Object"
+          - status             # Enum: pending|in_progress|completed
+          - responsible_executor  # Who executes
+          - execution_type     # Enum: Human|Agent|Hybrid|Worker
+          - input              # Array of required inputs
+          - output             # Array of produced outputs
+          - action_items       # Execution steps
+          - acceptance_criteria # Acceptance criteria
+        optional_fields:
+          - estimated_time     # Format: "Xh" or "X-Yh"
+          - dependencies       # Array of dependent tasks
+          - templates          # Templates used
+          - quality_gate       # Associated quality gate
+          - handoff            # Handoff configuration
+    examples:
+      - |
+        task_standards:
+          enforce_anatomy: true
+          validator: "LA-TP-001"
+          required_fields:
+            - task_name
+            - status
+            - responsible_executor
+            - execution_type
+            - input
+            - output
+            - action_items
+            - acceptance_criteria
+          optional_fields:
+            - estimated_time
+            - dependencies
+            - templates
+            - quality_gate
+
+  - id: executor-types
+    title: Executor Types
+    instruction: |
+      Define the Executor Matrix (HO-EP-xxx inspired).
+
+      Four executor types classify WHO executes each task:
+
+      | Type   | ID     | Characteristics | Cost | Speed | When to Use |
+      |--------|--------|-----------------|------|-------|-------------|
+      | Human  | EP-001 | Judgment, creativity, relationships | $$$ | Slow | Critical decisions, negotiations |
+      | Agent  | EP-002 | Analysis, generation, pattern recognition | $$$$ | Fast | Data analysis, content generation |
+      | Hybrid | EP-003 | AI assists, human validates | $$ | Moderate | Reviews, assisted approvals |
+      | Worker | EP-004 | Deterministic, APIs, file ops | $ | Very fast | Automations, integrations |
+
+      Selection criteria:
+      - requires_creativity: Human
+      - requires_judgment: Human | Hybrid
+      - requires_speed: Agent | Worker
+      - requires_consistency: Worker
+      - requires_validation: Hybrid
+      - requires_learning: Agent
+    elicit: true
+    template: |
+      # Executor Types (HO-EP-xxx inspired)
+      executor_types:
+        human:
+          id: "{{pattern_prefix}}-EP-001"
+          name: "Human Executor"
+          characteristics:
+            - judgment
+            - creativity
+            - relationships
+          cost: "$$$"
+          speed: slow
+          use_for:
+            - "Critical decisions"
+            - "Negotiations"
+            - "Stakeholder management"
+        agent:
+          id: "{{pattern_prefix}}-EP-002"
+          name: "Agent Executor (AI)"
+          characteristics:
+            - analysis
+            - generation
+            - pattern_recognition
+          cost: "$$$$"
+          speed: fast
+          use_for:
+            - "Data analysis"
+            - "Content generation"
+            - "Pattern detection"
+        hybrid:
+          id: "{{pattern_prefix}}-EP-003"
+          name: "Hybrid Executor"
+          characteristics:
+            - ai_assisted
+            - human_validated
+          cost: "$$"
+          speed: moderate
+          use_for:
+            - "Assisted validation"
+            - "Reviews"
+            - "Quality assurance"
+        worker:
+          id: "{{pattern_prefix}}-EP-004"
+          name: "Worker Executor"
+          characteristics:
+            - deterministic
+            - api_integration
+            - file_operations
+          cost: "$"
+          speed: very_fast
+          use_for:
+            - "Automation"
+            - "Integration"
+            - "File operations"
+
+      executor_selection:
+        requires_creativity: human
+        requires_judgment: [human, hybrid]
+        requires_speed: [agent, worker]
+        requires_consistency: worker
+        requires_validation: hybrid
+        requires_learning: agent
+    examples:
+      - |
+        executor_types:
+          human:
+            id: "LA-EP-001"
+            use_for: ["Legal judgment", "Client negotiations"]
+          agent:
+            id: "LA-EP-002"
+            use_for: ["Contract analysis", "Legal research"]
+          hybrid:
+            id: "LA-EP-003"
+            use_for: ["Document review", "Compliance check"]
+          worker:
+            id: "LA-EP-004"
+            use_for: ["Document automation", "Filing"]
+
+  - id: workflow-config
+    title: Workflow Configuration
+    instruction: |
+      Define the Workflow Configuration with checkpoint policy.
+
+      Checkpoint policies determine how quality gates are enforced:
+      - always_active: Every checkpoint MUST pass (recommended)
+      - skip_on_override: Can skip with manual approval
+      - advisory: Only alerts, doesn't block
+
+      Additional settings:
+      - fail_fast: Stop at first error (recommended: true)
+      - allow_manual_override: Allow bypassing gates (recommended: false)
+    elicit: true
+    template: |
+      # Workflow Configuration
+      workflow_config:
+        checkpoint_policy: {{checkpoint_policy}}  # always_active | skip_on_override | advisory
+        checkpoint_modes:
+          always_active: "Every checkpoint MUST pass"
+          skip_on_override: "Can skip with manual approval"
+          advisory: "Only alerts, doesn't block"
+        fail_fast: {{fail_fast}}  # true | false
+        allow_manual_override: {{allow_manual_override}}  # true | false
+    examples:
+      - |
+        workflow_config:
+          checkpoint_policy: always_active
+          checkpoint_modes:
+            always_active: "Every checkpoint MUST pass"
+            skip_on_override: "Can skip with manual approval"
+            advisory: "Only alerts, doesn't block"
+          fail_fast: true
+          allow_manual_override: false
+
+  - id: optional-config
+    title: Optional Configuration
+    instruction: |
+      Ask user if they want to add optional configuration:
+      - Dependencies on other squads
+      - Required AIOS core version
+      - Custom installation hooks
+      - Environment variables
+
+      Only include if user confirms need for these options.
+    condition: User requests optional config
+    template: |
+
+      # Optional: Dependencies on other squads
+      dependencies:
+        {{dependencies}}
+
+      # Optional: Minimum AIOS version required
+      requires:
+        aios-version: {{min_version}}
+
+      # Optional: Installation hooks
+      hooks:
+        post-install: {{post_install_script}}
+        pre-uninstall: {{pre_uninstall_script}}
+
+  - id: validation
+    instruction: |
+      Validate the generated config.yaml:
+      - Ensure all required fields are present
+      - Verify YAML syntax is correct
+      - Check that pack_name matches directory name
+      - Confirm slash_prefix is unique
+
+      If validation fails, prompt user to correct issues.

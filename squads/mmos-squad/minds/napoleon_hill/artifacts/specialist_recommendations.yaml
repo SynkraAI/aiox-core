@@ -1,0 +1,312 @@
+specialist_recommendations:
+  mind_name: "Napoleon Hill"
+  generalista_baseline: "expansion-packs/mmos/minds/napoleon_hill/synthesis/"
+  analysis_date: "2025-10-18"
+  methodology: "Cognitive architecture analysis + market demand assessment"
+
+  analysis_framework:
+    factors_considered:
+      - "Domain breadth (Hill covers multiple areas)"
+      - "Framework depth (which are detailed enough for specialization)"
+      - "Market demand (who needs specialized Napoleon Hill?)"
+      - "Differentiation value (vs. generalista)"
+      - "Implementation effort (adaptation requirements)"
+
+  recommended_specialists:
+
+    - specialist: "Napoleon Hill: Success Coach"
+      priority: HIGH
+      viability: 95%
+
+      use_case: "Personal success coaching, goal achievement, mindset transformation"
+      target_audience: "Individuals seeking to achieve specific personal/professional goals"
+
+      differentiation:
+        focus_domain: "Personal achievement and goal-setting"
+        frameworks_included:
+          - "Six Steps to Riches (complete)"
+          - "Definiteness of Purpose"
+          - "Autosuggestion/Subconscious Programming"
+          - "Faith and Visualization"
+          - "Persistence vs Futility"
+        knowledge_scope: "Narrower than generalista (excludes business strategy, deep Master Mind implementation)"
+        emphasis: "Individual transformation, not organizational"
+
+      adaptation_requirements:
+        additional_sources: []  # Sufficient with existing
+        specialized_frameworks: []  # Use existing, just emphasize differently
+        context_tuning:
+          - "Emphasize personal goals over business goals"
+          - "Focus on individual psychology (autosuggestion, faith)"
+          - "De-emphasize Master Mind (less relevant for individual coaching)"
+          - "Increase Layer 8 Paradox 3 (Patient Urgency for personal transformation)"
+
+      effort_estimate:
+        time: "10-15 hours"
+        complexity: "Low (mainly emphasis shifts, not new content)"
+
+      value_proposition:
+        differentiation: "Focused personal coaching vs. broad philosophy"
+        market_fit: "High demand for goal achievement coaching"
+        pricing_potential: "$50-200/session (vs. generalista free/low-cost access)"
+
+      implementation_notes:
+        - "System prompt: Emphasize 'You are a personal success coach...'"
+        - "RAG: Weight chunks on desire, faith, autosuggestion, definiteness higher"
+        - "De-weight: Master Mind, business strategy, organizational frameworks"
+        - "Paradox emphasis: Spiritual Materialism + Patient Urgency (personal transformation focus)"
+
+    - specialist: "Napoleon Hill: Business Strategist"
+      priority: HIGH
+      viability: 90%
+
+      use_case: "Strategic business consulting, wealth-building strategies, entrepreneurship"
+      target_audience: "Entrepreneurs, business owners, executives building enterprises"
+
+      differentiation:
+        focus_domain: "Business strategy and wealth creation"
+        frameworks_included:
+          - "Master Mind Principle (deep emphasis)"
+          - "Organized Planning"
+          - "Value Exchange Principle"
+          - "Specialized Knowledge acquisition"
+          - "First Principles via Exemplars"
+          - "Cause-and-Effect Success Formula"
+        knowledge_scope: "Business-focused (excludes personal mindset deep-dives)"
+        emphasis: "Organizational success, not individual psychology"
+
+      adaptation_requirements:
+        additional_sources:
+          - "Law of Success (business chapters)"
+          - "Carnegie business examples (deeper analysis)"
+        specialized_frameworks:
+          - "Master Mind assembly for business (detailed process)"
+          - "Business planning integration with 13 Principles"
+        context_tuning:
+          - "Emphasize business outcomes (revenue, profit, market share)"
+          - "Focus on Master Mind as core differentiator"
+          - "Increase Carnegie, Ford, Edison business examples"
+          - "De-emphasize autosuggestion/visualization (still present, less central)"
+
+      effort_estimate:
+        time: "20-30 hours"
+        complexity: "Medium (requires additional source analysis + framework development)"
+
+      value_proposition:
+        differentiation: "Strategic business consulting vs. general success philosophy"
+        market_fit: "High demand for business strategy (B2B market)"
+        pricing_potential: "$200-500/hour consulting (premium positioning)"
+
+      implementation_notes:
+        - "System prompt: 'You are a business strategist using Napoleon Hill's principles...'"
+        - "RAG: Weight Master Mind, organized planning, value exchange chunks highest"
+        - "Add business case studies (Carnegie steel, Ford auto, Edison innovation)"
+        - "Paradox emphasis: Rigid Flexibility (business pivots) + Selfless Ambition (value creation)"
+
+    - specialist: "Napoleon Hill: Mindset Trainer"
+      priority: MEDIUM-HIGH
+      viability: 85%
+
+      use_case: "Subconscious reprogramming, limiting belief transformation, mental conditioning"
+      target_audience: "Individuals with mindset blocks, limiting beliefs, fear-based thinking"
+
+      differentiation:
+        focus_domain: "Mental programming and belief systems"
+        frameworks_included:
+          - "Subconscious Programming Model (deep focus)"
+          - "Autosuggestion (complete methodology)"
+          - "Faith development"
+          - "Six Ghosts of Fear (elimination)"
+          - "Success Consciousness cultivation"
+        knowledge_scope: "Narrow psychology focus (excludes business, strategy)"
+        emphasis: "Internal transformation, not external achievement"
+
+      adaptation_requirements:
+        additional_sources:
+          - "Outwitting the Devil (fear and mental programming)"
+          - "Think and Grow Rich (Chapters 3, 4, 11 - deep analysis)"
+        specialized_frameworks:
+          - "30-day autosuggestion program (structured)"
+          - "Fear elimination protocol"
+          - "Belief system audit and reconstruction"
+        context_tuning:
+          - "Extreme emphasis on Layers 5-8 (mental models, values, obsessions, paradoxes)"
+          - "Spiritual Materialism paradox central (mind controls reality)"
+          - "De-emphasize tactical/practical (still present, but secondary)"
+
+      effort_estimate:
+        time: "25-35 hours"
+        complexity: "Medium-High (requires synthesizing scattered mindset content)"
+
+      value_proposition:
+        differentiation: "Deep mindset work vs. surface success tips"
+        market_fit: "Medium-High (growing market for mindset coaching)"
+        pricing_potential: "$100-300/session or $1000+ program"
+
+      implementation_notes:
+        - "System prompt: 'You are a mindset trainer specializing in subconscious reprogramming...'"
+        - "RAG: Weight autosuggestion, faith, subconscious chunks exclusively"
+        - "Add Outwitting the Devil content (fear, mental blocks)"
+        - "Paradox emphasis: Spiritual Materialism (thoughts create reality) - absolutely central"
+
+    - specialist: "Napoleon Hill: Failure Analyst"
+      priority: MEDIUM
+      viability: 75%
+
+      use_case: "Diagnosing why ventures fail, identifying missing success components"
+      target_audience: "People experiencing repeated failure, businesses in crisis"
+
+      differentiation:
+        focus_domain: "Failure diagnosis and correction"
+        frameworks_included:
+          - "30 Major Causes of Failure (complete diagnostic)"
+          - "Cause-and-Effect Success Formula (reverse engineering)"
+          - "13 Principles Checklist (what's missing)"
+          - "Persistence vs Futility distinction"
+        knowledge_scope: "Diagnostic focus (analysis-heavy, prescription-light)"
+        emphasis: "Problem identification, not long-term coaching"
+
+      adaptation_requirements:
+        additional_sources:
+          - "Law of Success (failure analysis chapters)"
+          - "Personal Hill correspondence (failure diagnoses)"
+        specialized_frameworks:
+          - "Complete failure diagnostic protocol"
+          - "13 Principles gap analysis"
+          - "Primary vs secondary cause identification"
+        context_tuning:
+          - "Diagnostic language (clinical, analytical)"
+          - "Focus on WHAT'S MISSING (not what to do long-term)"
+          - "Quick turnaround (diagnostic session, not ongoing coaching)"
+
+      effort_estimate:
+        time: "15-20 hours"
+        complexity: "Low-Medium (mainly reframing existing content)"
+
+      value_proposition:
+        differentiation: "Diagnostic specialist vs. generalist success teacher"
+        market_fit: "Medium (niche but valuable for crisis intervention)"
+        pricing_potential: "$150-400/diagnostic session"
+
+      implementation_notes:
+        - "System prompt: 'You are a failure analyst using Hill's 30 causes framework...'"
+        - "RAG: Weight failure diagnosis chunks, 30 causes, formula components"
+        - "Output format: Diagnostic report (missing principles, primary cause, prescription)"
+        - "Paradox emphasis: Lower priority (diagnostic mode is more mechanical)"
+
+    - specialist: "Napoleon Hill: Sales Coach"
+      priority: MEDIUM
+      viability: 70%
+
+      use_case: "Sales mindset, persuasion, closing deals using Hill's principles"
+      target_audience: "Salespeople, entrepreneurs needing to sell, persuaders"
+
+      differentiation:
+        focus_domain: "Sales psychology and persuasion"
+        frameworks_included:
+          - "Definiteness of Purpose (applied to sales targets)"
+          - "Persistence (overcoming objections/rejections)"
+          - "Going the Extra Mile (over-delivering)"
+          - "Value Exchange (sales as service)"
+          - "Autosuggestion (self-confidence in selling)"
+        knowledge_scope: "Sales-specific application of general principles"
+        emphasis: "Persuasion and deal-closing"
+
+      adaptation_requirements:
+        additional_sources:
+          - "Hill's sales training materials (if available)"
+          - "Insurance sales examples (Hill's early career)"
+        specialized_frameworks:
+          - "Sales cycle mapped to 13 Principles"
+          - "Objection handling via paradoxes"
+          - "Closing framework (decision + persistence)"
+        context_tuning:
+          - "Reframe principles for sales context"
+          - "Emphasize: Persistence (rejection tolerance), Value Exchange (ethical selling)"
+          - "De-emphasize: Metaphysical elements (less relevant to sales tactics)"
+
+      effort_estimate:
+        time: "20-25 hours"
+        complexity: "Medium (requires sales-specific examples and reframing)"
+
+      value_proposition:
+        differentiation: "Hill's principles for sales vs. generic sales training"
+        market_fit: "Medium (competitive market, but unique angle)"
+        pricing_potential: "$75-200/session or corporate training $2000+/day"
+
+      implementation_notes:
+        - "System prompt: 'You are a sales coach using Napoleon Hill's principles...'"
+        - "RAG: Weight persistence, value exchange, going extra mile"
+        - "Add sales-specific scenarios and rebuttals"
+        - "Paradox emphasis: Selfless Ambition (sell by serving), Rigid Flexibility (closing tactics)"
+
+  not_recommended:
+
+    - specialist: "Napoleon Hill: Relationship Coach"
+      reason: "Insufficient depth - relationships are Shadow Value #7 (taught importance, sacrificed in practice). Hill's own relationship patterns don't support specialist credibility. Low confidence (70%) in this domain."
+
+    - specialist: "Napoleon Hill: Health & Wellness Coach"
+      reason: "Out of scope - health/wellness not covered in Hill's philosophy beyond 'sound health' as general requirement. Would require entirely new content. Viability: <40%."
+
+    - specialist: "Napoleon Hill: Spiritual Guide"
+      reason: "Paradox violation - isolating 'spiritual' side of Spiritual Materialism paradox breaks core identity. Hill is INTEGRATED (spiritual + material), not purely spiritual. Would create 30% fidelity caricature."
+
+  implementation_priority:
+    1:
+      specialist: "Success Coach"
+      rationale: "Highest value, lowest effort, broadest market appeal. Core Hill content already optimized for this. Build first."
+
+    2:
+      specialist: "Business Strategist"
+      rationale: "High value, premium pricing, clear differentiation. Requires moderate effort but high ROI. Build second."
+
+    3:
+      specialist: "Mindset Trainer"
+      rationale: "Strong differentiation, growing market, leverages Hill's unique metaphysical angle. Build third."
+
+    4:
+      specialist: "Failure Analyst"
+      rationale: "Niche but valuable. Lower priority due to smaller market. Build if demand emerges."
+
+    5:
+      specialist: "Sales Coach"
+      rationale: "Competitive market, requires significant adaptation. Build only if specific demand or partnership opportunity."
+
+  total_effort_if_all_built:
+    time: "90-125 hours"
+    cost_equivalent: "$9,000-$18,750 (at $100-150/hr consulting rate)"
+    recommended_sequence: "Build incrementally (Success Coach → validate market → Business Strategist → validate → Mindset Trainer → evaluate further)"
+
+  generalista_vs_specialists:
+    generalista:
+      use_case: "Comprehensive Napoleon Hill assistant (all domains)"
+      audience: "General public, Hill enthusiasts, researchers"
+      pricing: "Free or low-cost (democratize success knowledge - Hill's Value #1)"
+      fidelity: "94% (full 8-layer cognitive architecture)"
+
+    specialists:
+      use_case: "Targeted, high-value applications in specific domains"
+      audience: "Paying clients with specific needs"
+      pricing: "$50-500/session (premium specialized expertise)"
+      fidelity: "85-90% (narrowed scope, but deep in domain)"
+
+    strategy: "Build generalista FIRST (foundation), then extract specialists as market demands"
+
+  market_validation_approach:
+    1: "Launch generalista (free/low-cost)"
+    2: "Gather usage data (which domains most requested?)"
+    3: "Identify highest-demand specialist (likely Success Coach or Business Strategist)"
+    4: "Build and validate ONE specialist first"
+    5: "If successful, build next priority specialist"
+    6: "Do NOT build all 5 upfront (risk of low ROI on lower-priority ones)"
+
+  notes:
+    - "All specialists leverage existing cognitive architecture (no new Layer 8 analysis needed)"
+    - "Effort is in emphasis shifting, not new content creation"
+    - "Paradoxes must be maintained in ALL specialists (non-negotiable for authenticity)"
+    - "Generalista remains foundation (specialists are derivatives, not replacements)"
+    - "Market demand should drive build priority (not just viability scores)"
+
+status: "COMPLETE - Specialist recommendations analyzed and prioritized"
+confidence: "90%"
+ready_for: "Specialist development (pending market validation)"

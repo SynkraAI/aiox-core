@@ -1,0 +1,637 @@
+WEBVTT
+
+00:00:00.240 --> 00:00:05.940
+E aí, lendário, agora se você chegou
+nessa aula, é porque nós vamos usar
+
+00:00:05.940 --> 00:00:13.400
+agora, depois das instalações em Mac,
+Windows, Android, iPhone, nós vamos
+
+00:00:13.400 --> 00:00:17.020
+agora começar a usar verdadeiramente a
+ferramenta.
+
+00:00:17.940 --> 00:00:25.720
+Eu quero que você entenda, que você use
+a ferramenta como um hábito, como algo
+
+00:00:25.720 --> 00:00:29.780
+que você não vai deixar de usar no dia a
+dia.
+
+00:00:30.800 --> 00:00:37.880
+Muitos alunos começam a estudar, fica
+muita teoria, e aí então, acaba não
+
+00:00:37.880 --> 00:00:38.120
+usando.
+
+00:00:38.680 --> 00:00:43.760
+Fica complicado, fica tedioso, acha que
+também é o seguinte, futuramente eu vou
+
+00:00:43.760 --> 00:00:48.440
+ter conhecimento para de uma vez só
+começar a usar tudo.
+
+00:00:48.640 --> 00:00:50.280
+Não, você já tem que começar a usar.
+
+00:00:50.460 --> 00:00:55.120
+Por isso, eu quero trazer conceitos,
+esses conceitos já serem aplicáveis, e
+
+00:00:55.120 --> 00:00:59.840
+são conceitos que eu estou trazendo
+depois de muitos atendimentos, ajudando
+
+00:00:59.840 --> 00:01:00.100
+pessoas.
+
+00:01:00.240 --> 00:01:03.080
+Com obsidia, e entendendo qual é a
+dificuldade.
+
+00:01:03.400 --> 00:01:08.100
+Uma delas é o objetivo dessa aula agora,
+que é você entender o conceito de cofre.
+
+00:01:08.220 --> 00:01:10.800
+Eu estou aqui com o obsidia, tá ok?
+
+00:01:11.100 --> 00:01:19.080
+Então, nós vamos pegar aqui o obsidia, e
+eu vou trazer para vocês aqui, aquela
+
+00:01:19.080 --> 00:01:24.300
+mesma interface que nós já começamos a
+utilizar, mas eu vou explicar ela ainda,
+
+00:01:24.460 --> 00:01:28.000
+só que agora, nesse momento, eu quero
+explicar esse conceito, só esse
+
+00:01:28.000 --> 00:01:30.220
+conceito, para você entender o que é
+obsidia.
+
+00:01:30.240 --> 00:01:30.740
+O que é um cofre?
+
+00:01:30.820 --> 00:01:36.900
+Porque se você não entender, né, cofre
+em português, né, vault em inglês, eu
+
+00:01:36.900 --> 00:01:42.120
+costumeiramente uso o inglês, então,
+você vai ver sempre a palavra
+
+00:01:42.120 --> 00:01:42.640
+vault.
+
+00:01:44.800 --> 00:01:50.900
+Ele é um container, né, é uma pasta onde
+as notas vão ser salvas.
+
+00:01:51.000 --> 00:01:55.600
+É onde você vai organizar a unidade do
+segundo cérebro, que são notas, tá?
+
+00:01:56.140 --> 00:01:59.980
+E você escolhe uma pasta na sua máquina,
+porque...
+
+00:02:00.240 --> 00:02:05.760
+Aqui você tem, né, arquivos locais, que
+vão ser sincronizados para nuvem sim,
+
+00:02:05.840 --> 00:02:11.100
+mas o conceito de cofre, ele fica aqui,
+dentro da sua máquina, tá?
+
+00:02:11.960 --> 00:02:16.820
+Eu tenho aqui, ó, aqui embaixo, no canto
+inferior esquerdo, eu tenho o
+
+00:02:16.820 --> 00:02:21.980
+repositório de cofres, né, e ele me
+mostra aqui quais os cofres que eu tenho
+
+00:02:21.980 --> 00:02:22.520
+criado.
+
+00:02:22.560 --> 00:02:26.120
+Isso aqui, em versões novas agora, né,
+do obsidia, antes não tinha.
+
+00:02:26.660 --> 00:02:29.800
+E eu tenho aqui a opção manage vaults,
+tá?
+
+00:02:30.440 --> 00:02:35.100
+Onde ele abre aquela tela, que você viu
+na instalação, onde você pode criar um
+
+00:02:35.100 --> 00:02:41.120
+novo cofre, abrir uma pasta, né, e
+transformar ela num cofre, e também tem
+
+00:02:41.120 --> 00:02:46.000
+a opção aqui do obsidian sync, que é a
+opção paga que você não precisa.
+
+00:02:46.260 --> 00:02:51.360
+Tem aqui a questão da escolha do idioma,
+ou seja, o idioma, ele é por cofre, por
+
+00:02:51.360 --> 00:02:51.700
+vault.
+
+00:02:51.900 --> 00:02:55.060
+Então, você pode deixar um em inglês ou
+tem português.
+
+00:02:55.260 --> 00:03:02.220
+Aqui no meu lado esquerdo, olha, tem os
+vaults, ou os cofres, que eu já criei,
+
+00:03:02.240 --> 00:03:02.840
+tá?
+
+00:03:03.080 --> 00:03:07.900
+Um detalhe que eu quero chamar a sua
+atenção agora, tá?
+
+00:03:08.040 --> 00:03:15.260
+Quero que você entenda comigo o seguinte
+conceito, que eu quero mostrar pra você.
+
+00:03:15.660 --> 00:03:24.960
+Se você vai pegar e vai colocar
+informação pessoal, cria um cofre, né, e
+
+00:03:24.960 --> 00:03:29.500
+aí a pergunta que vem é, posso misturar
+as coisas também de projetos, do
+
+00:03:29.500 --> 00:03:39.660
+trabalho, tal, o conceito é o seguinte,
+por que não, nesse conceito de pessoal e
+
+00:03:39.660 --> 00:03:42.320
+trabalho, não encarar ideias?
+
+00:03:42.820 --> 00:03:49.400
+O que a gente precisa ver aqui, né, o
+que a gente precisa entender, é que
+
+00:03:49.400 --> 00:03:58.380
+quando você tá falando aí de pessoal,
+trabalho, as ideias não se conectam.
+
+00:03:58.420 --> 00:03:59.420
+Não se conectam.
+
+00:03:59.500 --> 00:03:59.560
+Não se conectam.
+
+00:03:59.560 --> 00:03:59.840
+Não se conectam.
+
+00:03:59.840 --> 00:03:59.880
+Não se conectam.
+
+00:03:59.900 --> 00:04:04.180
+pessoais e de trabalho e elas não estão
+linkadas, pra mim faz todo sentido
+
+00:04:04.180 --> 00:04:09.580
+linkar, eu uso um cofre um vaunt para
+coisas pessoais, autoconhecimento
+
+00:04:09.580 --> 00:04:17.000
+desenvolvimento, os vídeos que eu vejo
+palestras tudo, tudo, tudo e também
+
+00:04:17.000 --> 00:04:23.320
+coisas de projeto, de trabalho eu acesso
+no mesmo no mesmo cofre
+
+00:04:23.320 --> 00:04:34.390
+bom, quando é que você vai usar quando é
+que você vai usar um cofre diferente eu
+
+00:04:34.390 --> 00:04:40.290
+costumo usar quando eu vou fazer clones,
+tá, eu vou fazer clones de pessoas de
+
+00:04:40.290 --> 00:04:45.550
+cérebros, de conteúdos de pessoas, então
+eu não quero que aquele conteúdo, assim
+
+00:04:45.550 --> 00:04:51.170
+como o Alan disponibilizou do Alex
+Hormozzi, do Naval, eu não quero
+
+00:04:51.170 --> 00:04:56.390
+misturar as ideias deles com as minhas,
+eu crio o vaunt separado vaunts para
+
+00:04:56.390 --> 00:05:01.690
+testes vaunts para instalar algum plugin
+para testar, eu não quero instalar na
+
+00:05:01.690 --> 00:05:05.410
+minha base oficial, então você vai
+instalando outros, mas o meu segundo
+
+00:05:05.410 --> 00:05:10.810
+cérebro está tudo no mesmo lugar tá, eu
+sei que isso gera muita pergunta, então
+
+00:05:10.810 --> 00:05:17.550
+eu já estou trazendo pra você aqui a
+dica faça num único lugar, tá bom então
+
+00:05:17.550 --> 00:05:25.850
+vamos lá, vamos voltar aqui pro Obsidia,
+então eu tenho na tela esse lugar aqui
+
+00:05:25.850 --> 00:05:31.470
+que eu posso criar um novo vaunt e abrir
+a pasta como um vaunt, o vaunt ele é uma
+
+00:05:31.470 --> 00:05:35.910
+pasta eu quero trazer aqui o finder pra
+você eu quero mostrar aqui no meu iCloud
+
+00:05:35.910 --> 00:05:42.010
+no meu iCloud aqui, deixa eu botar como
+lista aqui no meu iCloud eu tenho uma
+
+00:05:42.010 --> 00:05:48.490
+pasta chamada Obsidia, e aqui estão as
+minhas pastas de cofre, eu tenho aqui o
+
+00:05:48.490 --> 00:05:53.810
+meu segundo cérebro, que é o oficial e
+tenho aqui um cofre teste aula, que é
+
+00:05:53.810 --> 00:05:59.670
+uma pasta que nós criamos lá na
+descrição, né, do iPhone se eu abrir
+
+00:05:59.670 --> 00:06:04.990
+essa pasta, você vai ver que tem aqui,
+ó, um arquivo oculto, no Mac no caso
+
+00:06:04.990 --> 00:06:13.370
+aqui, né, é comand shift ponto ele
+oculta ou mostra os arquivos ocultos, no
+
+00:06:13.370 --> 00:06:16.510
+Windows a mesma coisa, você tem uma
+opção lá de mostrar arquivos ocultos na
+
+00:06:16.510 --> 00:06:21.170
+pasta, tá, não que você precisará
+acessar esses arquivos, não eu só estou
+
+00:06:21.170 --> 00:06:25.630
+mostrando aqui, ele já cria aqui, já
+salva coisas do segundo cérebro aqui
+
+00:06:25.630 --> 00:06:31.690
+dentro, e vai também instalar coisas de
+plugins, né, em pastas ocultas aí, tá
+
+00:06:31.690 --> 00:06:34.890
+legal então o que que é um vault ou um
+cofre?
+
+00:06:35.010 --> 00:06:39.710
+É uma pasta, no seu sistema de arquivo
+ele é visto como uma pasta tanto é, que
+
+00:06:39.710 --> 00:06:45.690
+olha uma coisa que aconteceu bastante
+com alunos, e pode acontecer com você
+
+00:06:45.690 --> 00:06:49.690
+também, que é quando você veio pra esse
+curso mas você já tinha instalado
+
+00:06:49.690 --> 00:06:53.130
+Obsidian, já tinha ouvido falar, já
+criou um segundo cérebro mas agora você
+
+00:06:53.130 --> 00:06:57.130
+tem criado o zero de novo começar, e aí
+você fala assim poxa, mas eu vou criar
+
+00:06:57.130 --> 00:07:01.730
+um outro um outro vault, um outro cofre
+e aquele que eu tinha?
+
+00:07:02.610 --> 00:07:07.010
+você precisa entender o seguinte, olha
+se eu criar um novo vault aqui ó, vamos
+
+00:07:07.010 --> 00:07:12.490
+fazer um teste pra você ver criar um
+novo vault e eu vou colocar aqui ó um
+
+00:07:14.210 --> 00:07:17.890
+nome aqui ó, separado o que que é o
+separado?
+
+00:07:17.990 --> 00:07:21.650
+É o nome de um vault, de um cofre, que
+eu quero colocar ele numa pasta, que não
+
+00:07:21.650 --> 00:07:26.130
+vai estar nem no iCloud nem no OneDrive
+nem no Google Drive, porque é uma coisa
+
+00:07:26.130 --> 00:07:29.190
+que você pode estar se perguntando,
+nossa eu criei um vault, eu não estou
+
+00:07:29.190 --> 00:07:33.270
+sincronizando e está numa pasta X lá, o
+que que eu faço com ele agora?
+
+00:07:33.550 --> 00:07:39.810
+Veja só, é o que eu vou fazer aqui ó, eu
+vou criar agora, dentro de uma pasta
+
+00:07:39.810 --> 00:07:46.270
+minha, aqui ó minhas coisas, aqui gente
+eu vou criar esse separado, aqui dentro
+
+00:07:46.270 --> 00:07:51.110
+do minhas coisas, não está no iCloud,
+não está no Google Drive não está no
+
+00:07:51.110 --> 00:07:55.350
+OneDrive, não está em lugar nenhum está
+somente na minha máquina ó, eu vou
+
+00:07:55.350 --> 00:07:56.290
+criar, tá?
+
+00:07:56.570 --> 00:08:02.770
+criou, ele já abriu aqui ó os cofres são
+mostrados em separado, eu consigo ver
+
+00:08:02.770 --> 00:08:10.050
+aquele cofre teste aula e ao mesmo tempo
+eu tenho acesso ao separado, que está
+
+00:08:10.050 --> 00:08:11.050
+aqui tá?
+
+00:08:11.150 --> 00:08:18.010
+Você viu que eu alterno aqui entre eles,
+e olha só aqui você tem o seu cofre aqui
+
+00:08:18.010 --> 00:08:23.690
+sendo visto aqui, o nome dele é
+separado, ele tem uma nota inicial se eu
+
+00:08:23.690 --> 00:08:25.290
+vier aqui né?
+
+00:08:25.510 --> 00:08:32.090
+Nesse momento e observar lá na minha, no
+meu sistema de arquivos aqui ó, né?
+
+00:08:32.170 --> 00:08:39.330
+Do do minhas coisas, óbvio separado é
+uma pasta tá?
+
+00:08:39.430 --> 00:08:43.550
+É uma pasta do seu sistema de arquivos,
+o que que eu precisaria fazer pra
+
+00:08:43.550 --> 00:08:52.110
+colocar esse cofre no iCloud ou por
+exemplo, no OneDrive ou mover ele de
+
+00:08:52.110 --> 00:08:55.370
+algum lugar primeira coisa que você tem
+dentro do próprio
+
+00:08:55.370 --> 00:09:32.530
+é se eu pegar, vou fechar aqui o o
+separado, eu vou fechar pronto, ó, tá
+
+00:09:32.530 --> 00:09:39.610
+fechadinho é, vou fechar essa tela aqui
+também ó, só tô com o cofre teste aula
+
+00:09:39.610 --> 00:09:45.070
+aqui se eu for lá na pasta eu vou fazer
+isso de propósito pra você entender que
+
+00:09:45.070 --> 00:09:51.290
+vaunt e cofre é isso, nada mais do que
+um repositório em pasta se eu vier aqui
+
+00:09:51.290 --> 00:09:54.470
+nas minhas coisas, pegar esse cara, tá?
+
+00:09:54.670 --> 00:10:01.550
+e eu trazer ele pra dentro do meu iCloud
+ó, tô arrastando ele aqui passei ele pra
+
+00:10:01.550 --> 00:10:02.030
+cá, né?
+
+00:10:02.090 --> 00:10:07.910
+ele veio aqui, mas eu vou jogar ele
+dentro da pasta Obsidian ó, o que que eu
+
+00:10:07.910 --> 00:10:08.050
+fiz?
+
+00:10:08.210 --> 00:10:14.290
+eu só movi, só movi ele de lugar, tá
+aqui, separado o que que vai acontecer?
+
+00:10:14.530 --> 00:10:24.350
+eu posso vir aqui no Obsidian selecionar
+o gerenciador de vaunts, o que que vai
+
+00:10:24.350 --> 00:10:26.170
+acontecer se eu tentar abrir o separado?
+
+00:10:26.570 --> 00:10:35.550
+não vai abrir ó, não achou a pasta então
+você pode vir aqui remover da vista e eu
+
+00:10:35.550 --> 00:10:40.650
+tenho agora a pasta que tá em outro
+lugar Adriano, seria mais fácil você
+
+00:10:40.650 --> 00:10:45.610
+selecionar aqui e mover sim, é isso que
+você vai fazer mas o que eu tô querendo
+
+00:10:45.610 --> 00:10:51.830
+mostrar é que o vaunt ou cofre é uma
+pasta se você tem ele em outro lugar
+
+00:10:51.830 --> 00:10:56.710
+agora eu posso vir aqui, ó, open folder
+as vaunt, ou seja, abrir uma pasta e
+
+00:10:56.710 --> 00:11:04.230
+considerar ela como um cofre eu vou vir
+aqui vou pegar aqui no meu no meu iCloud
+
+00:11:04.230 --> 00:11:13.450
+na pasta Obsidian separado, tá aqui
+pronto, abriu essa pasta e agora é um
+
+00:11:13.450 --> 00:11:20.010
+cofre que tá aqui dentro se eu abrir o
+gerenciador opa, abri errado aqui se eu
+
+00:11:20.010 --> 00:11:26.010
+abrir o gerenciador de vaunts de cofres,
+tá lá, o separado é um dos dos cofres
+
+00:11:26.010 --> 00:11:31.670
+aqui tá, então eu fiz questão de fazer
+isso com pasta mesmo, né ah, Adriano,
+
+00:11:31.710 --> 00:11:37.850
+agora tem um outro caso, eu tenho
+arquivos dentro de um cofre e eu quero
+
+00:11:38.630 --> 00:11:44.790
+copiar pro outro, porque é um é um cofre
+que eu já comecei a criar e agora eu
+
+00:11:44.790 --> 00:11:49.830
+quero só aproveitar uma nota que tá ali
+mas eu vou começar do zero de novo ou
+
+00:11:49.830 --> 00:11:55.570
+seja o que são notas, né que vai ser o
+motivo da próxima aula né, notas são
+
+00:11:55.570 --> 00:12:01.450
+arquivos dentro dessa pasta que é um
+vaunt se você arrastar do finder né, o,
+
+00:12:01.590 --> 00:12:07.570
+o, por exemplo separado aqui, ó, tem
+aquele welcome, md, né se você pegar
+
+00:12:07.570 --> 00:12:12.170
+esse arquivo e arrastar ele pra dentro
+de outro cofre, você vai mover ele pra
+
+00:12:12.170 --> 00:12:16.950
+lá ele vai ser inserido ali dentro agora
+nessas versões do Obsidian é possível
+
+00:12:16.950 --> 00:12:23.350
+fazer isso da mesma forma, se eu pegar
+aqui dentro do meu cofre esse arquivo e
+
+00:12:23.350 --> 00:12:26.370
+mover ele para a pasta, você tá movendo
+para a pasta, você tá movendo para
+
+00:12:26.370 --> 00:12:32.290
+dentro do cofre ou seja, se eu pegar
+aqui, ó olha só como é que funciona se
+
+00:12:32.290 --> 00:12:38.370
+eu pegar aqui no meu iCloud se eu pegar
+aqui do meu cofre mesmo, né vou pegar
+
+00:12:38.370 --> 00:12:44.670
+aqui, ó tem uma nota aqui chamada meu
+nome, né eu vou pegar esse arquivo aqui,
+
+00:12:44.770 --> 00:12:53.930
+eu vou, por exemplo copiar ele e jogar
+para dentro da pasta do separado ó, vou
+
+00:12:53.930 --> 00:12:58.930
+colar aqui olha o que aconteceu já aqui
+no meu cofre já apareceu a nota vocês
+
+00:12:58.930 --> 00:12:59.490
+entenderam?
+
+00:12:59.490 --> 00:13:05.450
+então, é pasta com arquivo arquivos são
+armazenados ali dentro você pode mover,
+
+00:13:05.690 --> 00:13:11.730
+você pode copiar arquivos passar isso de
+um cofre pra outro talvez essa não seja
+
+00:13:11.730 --> 00:13:17.470
+prática como eu falei, você vai ter um
+segundo cérebro um cofre, um vault e não
+
+00:13:17.470 --> 00:13:22.350
+vai, talvez, precisar fazer essas
+trocas, né mas agora, no início do curso
+
+00:13:22.350 --> 00:13:27.770
+talvez em termos de manutenção e
+remanejamento das coisas, você precise
+
+00:13:27.770 --> 00:13:32.930
+disso então, adiantando isso nessa aula
+eu sei que eu já estou evitando um monte
+
+00:13:32.930 --> 00:13:37.330
+de perguntas um monte de suporte
+necessário em cima desse assunto e você
+
+00:13:37.330 --> 00:13:42.490
+está saindo dessa aula entendendo o que
+é um cofre ou vault agora, na próxima
+
+00:13:42.490 --> 00:13:49.510
+aula nós vamos aprender sobre as notas
+em si o que são as notas, tá bom?
+
+00:13:49.610 --> 00:13:54.350
+então, te vejo na próxima vamos aí, que
+eu quero você já usando cria o seu
+
+00:13:54.350 --> 00:13:57.810
+segundo cérebro já cria e aí, você vai
+ter um cofre ou um vault o seu cofre ou
+
+00:13:57.810 --> 00:14:02.470
+se você já tem, passa ele pra pasta
+definitiva agora, dá manutenção nele
+
+00:14:02.470 --> 00:14:07.990
+como você viu eu fazer aqui pra já
+começar com o uso não espere chegar com
+
+00:14:07.990 --> 00:14:12.050
+a informação completa, ou aprender mais
+coisa ou aprender tudo de uma vez pra
+
+00:14:12.050 --> 00:14:16.710
+daí você vir praticando, não já cria o
+seu segundo cérebro aí e vamos pôr a mão
+
+00:14:16.710 --> 00:14:17.310
+na massa, beleza?
+
+00:14:17.530 --> 00:14:19.530
+até a próxima, lendário até a próxima,

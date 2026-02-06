@@ -1,0 +1,698 @@
+WEBVTT
+
+00:00:00.370 --> 00:00:06.490
+Fala lendário, bem -vindo a uma nova
+aula e nessa aula você vai aprender,
+
+00:00:06.810 --> 00:00:13.270
+agora você vai se tornar uma máquina,
+você vai aprender sobre atalhos no
+
+00:00:13.270 --> 00:00:13.770
+Obsidian.
+
+00:00:14.030 --> 00:00:19.570
+Se você quer praticidade, se você quer
+velocidade, muitas vezes você não quer
+
+00:00:19.570 --> 00:00:25.330
+ficar procurando o menu, clicando,
+usando o mouse, então você pode, para
+
+00:00:25.330 --> 00:00:31.170
+tudo, para quase tudo, tudo, tudo que
+existe no Obsidian, você ter um atalho
+
+00:00:31.170 --> 00:00:34.830
+que leve rapidamente você até uma
+função.
+
+00:00:35.190 --> 00:00:36.910
+O que você vai precisar saber?
+
+00:00:37.490 --> 00:00:45.150
+Você vai primeiro pegar, vir aqui na
+engrenagem de configuração, que na
+
+00:00:45.150 --> 00:00:48.230
+verdade já existe um atalho para isso
+também, você vai ver agora.
+
+00:00:48.890 --> 00:00:52.750
+Quando você clicar aqui na configuração,
+nos settings, né?
+
+00:00:52.750 --> 00:00:57.330
+Você vem aqui e vai ter uma opção de
+atalho ou hotkeys.
+
+00:00:58.090 --> 00:01:03.370
+Com essa opção de hotkeys, a primeira
+coisa que você vai ter já é o
+
+00:01:03.370 --> 00:01:06.370
+aprendizado de muita coisa que já tem de
+atalho, tá?
+
+00:01:07.850 --> 00:01:12.290
+Lembra, por exemplo, que a gente viu na
+aula de propriedade que tinha um atalho
+
+00:01:12.290 --> 00:01:13.470
+para adicionar propriedade?
+
+00:01:13.550 --> 00:01:13.990
+Tá aqui, ó.
+
+00:01:14.070 --> 00:01:17.790
+No meu caso, é command ponto e vírgula,
+né?
+
+00:01:17.890 --> 00:01:20.490
+No seu aí vai estar, control ponto e
+vírgula, né?
+
+00:01:21.550 --> 00:01:22.730
+Se você estiver usando...
+
+00:01:22.750 --> 00:01:23.090
+Ah, no Windows.
+
+00:01:23.470 --> 00:01:26.250
+E aí, você vai descer, quando...
+
+00:01:26.250 --> 00:01:27.790
+Aqui tem os comandos, né?
+
+00:01:27.830 --> 00:01:28.890
+Todos os comandos.
+
+00:01:29.050 --> 00:01:30.990
+Quando aqui está em branco, né?
+
+00:01:31.030 --> 00:01:33.510
+Blank, é porque não tem atalho ainda.
+
+00:01:33.730 --> 00:01:38.250
+Senão, você já vai ver aqui o atalho e
+que você vai ver um xizinho que você
+
+00:01:38.250 --> 00:01:43.670
+pode remover ele caso queira substituir.
+
+00:01:43.790 --> 00:01:48.330
+Você tem um sinalzinho de mais caso
+queira adicionar um outro atalho, mais
+
+00:01:48.330 --> 00:01:50.070
+de um atalho para o mesmo comando.
+
+00:01:50.270 --> 00:01:52.550
+Olha, se a gente descer aqui, você vai
+ver...
+
+00:01:52.750 --> 00:01:57.350
+Que tem vários comandos já pré
+-configurados.
+
+00:01:57.690 --> 00:02:00.830
+Por exemplo, fechar a tab, né?
+
+00:02:00.930 --> 00:02:05.590
+A aba lá em cima que está atual, você
+fechar.
+
+00:02:05.750 --> 00:02:08.350
+É o comando, no meu caso, o comando de
+W, né?
+
+00:02:10.030 --> 00:02:15.770
+Fechar a janela inteira é o W, mas aí
+com o shift junto.
+
+00:02:16.990 --> 00:02:19.370
+Comando de public, que é aquilo que eu
+falei para vocês, ó.
+
+00:02:19.450 --> 00:02:20.670
+Comando de P, tá vendo?
+
+00:02:20.970 --> 00:02:22.730
+É o, no caso aqui, o comando de P.
+
+00:02:22.730 --> 00:02:26.070
+Que faz, no seu caso, o ctrl P, né?
+
+00:02:26.490 --> 00:02:30.150
+No Windows, vai fazer a abertura daquela
+paleta de comando.
+
+00:02:30.230 --> 00:02:31.930
+Criar uma nova nota, olha aí.
+
+00:02:32.310 --> 00:02:33.970
+Comando de N, tá?
+
+00:02:35.350 --> 00:02:37.370
+Criar uma nova nota para a direita.
+
+00:02:37.450 --> 00:02:38.890
+Adicente o shift aí, né?
+
+00:02:40.130 --> 00:02:41.390
+Comando de shift N.
+
+00:02:41.990 --> 00:02:43.530
+E por aí vai, tá?
+
+00:02:43.770 --> 00:02:44.990
+O DB está parado.
+
+00:02:44.990 --> 00:02:46.910
+Você vai ver que tem tudo aqui, gente.
+
+00:02:46.970 --> 00:02:48.890
+Tem tudo, tudo, tudo, tudo.
+
+00:02:49.130 --> 00:02:49.910
+Olha só.
+
+00:02:50.630 --> 00:02:52.550
+Navegar nas abas.
+
+00:02:52.730 --> 00:02:55.510
+Se você colocar ctrl ou command, né?
+
+00:02:55.570 --> 00:02:56.550
+E o número, né?
+
+00:02:56.590 --> 00:02:57.430
+1, 2, 3 e tal.
+
+00:02:57.490 --> 00:02:59.330
+Você vai para a abinha, né?
+
+00:03:00.550 --> 00:03:03.950
+Navegando entre elas ali, sem precisar
+ir lá com o mouse e clicar.
+
+00:03:04.790 --> 00:03:05.890
+O que mais?
+
+00:03:06.210 --> 00:03:07.410
+Olha aqui o gráfico.
+
+00:03:07.750 --> 00:03:10.650
+O gráfico que a gente viu na aula
+passada.
+
+00:03:11.670 --> 00:03:13.850
+Command G ou ctrl G, né?
+
+00:03:14.330 --> 00:03:15.770
+Olha o local graph.
+
+00:03:16.150 --> 00:03:17.310
+Local graph não tem.
+
+00:03:17.670 --> 00:03:19.170
+Vou te explicar como é que você cria.
+
+00:03:19.250 --> 00:03:21.590
+Então, vamos criar um atalho aqui para
+você ver como é que funciona.
+
+00:03:21.590 --> 00:03:23.430
+E, meu, aí vai, ó.
+
+00:03:23.530 --> 00:03:24.850
+Tem muita coisa aqui.
+
+00:03:24.970 --> 00:03:26.890
+Muita coisa aqui que já tem atalho.
+
+00:03:27.190 --> 00:03:28.290
+O help, ó.
+
+00:03:28.370 --> 00:03:28.850
+F1.
+
+00:03:30.170 --> 00:03:32.290
+O que mais aqui que é interessante?
+
+00:03:32.670 --> 00:03:32.990
+Você vai...
+
+00:03:32.990 --> 00:03:39.770
+Na verdade, você olhar isso aqui já é
+uma aula de quais são os atalhos já
+
+00:03:39.770 --> 00:03:44.550
+existentes e quais que você pode aí
+mudar e colocar.
+
+00:03:44.910 --> 00:03:46.170
+Por exemplo, olha.
+
+00:03:46.330 --> 00:03:48.210
+Transformar um texto em negrito.
+
+00:03:48.430 --> 00:03:49.510
+Você lembra do Markdown?
+
+00:03:49.750 --> 00:03:51.330
+O Markdown tem lá, né?
+
+00:03:51.390 --> 00:03:51.570
+Você pode...
+
+00:03:51.570 --> 00:03:54.470
+Você põe lá o asterisco, o asterisco,
+né?
+
+00:03:54.530 --> 00:03:56.650
+Para deixar o texto em negrito.
+
+00:03:56.890 --> 00:03:59.810
+Mas você pode selecionar o texto e ter
+um atalho também.
+
+00:04:00.050 --> 00:04:01.390
+No caso aqui, ó.
+
+00:04:01.450 --> 00:04:02.090
+Command B.
+
+00:04:02.490 --> 00:04:04.890
+O ctrl B vai estar no seu aí.
+
+00:04:05.030 --> 00:04:06.330
+Ele faz a mesma coisa.
+
+00:04:06.650 --> 00:04:07.110
+Tá?
+
+00:04:07.350 --> 00:04:10.750
+Ou seja, é bem simples.
+
+00:04:12.030 --> 00:04:12.830
+Colocar comentários.
+
+00:04:13.470 --> 00:04:14.330
+O que mais?
+
+00:04:14.610 --> 00:04:15.590
+Ó, e atalho que eu tenho?
+
+00:04:15.670 --> 00:04:15.850
+O I.
+
+00:04:19.130 --> 00:04:20.890
+Navegar entre as opções, né?
+
+00:04:20.970 --> 00:04:21.450
+Enfim.
+
+00:04:21.570 --> 00:04:22.830
+Cara, muita coisa.
+
+00:04:23.090 --> 00:04:26.630
+Aí você tem aqui em cima a opção de
+filtro.
+
+00:04:27.070 --> 00:04:30.430
+Onde, por exemplo, você pode filtrar de
+duas formas.
+
+00:04:30.650 --> 00:04:35.230
+Eu quero ver qual é o atalho para abrir
+o gráfico.
+
+00:04:35.270 --> 00:04:36.910
+No meu caso, como está em inglês, graph.
+
+00:04:37.210 --> 00:04:38.290
+Vai mostrar, ó.
+
+00:04:38.450 --> 00:04:42.730
+Você tem graph, porque tem no meio da
+palavra...
+
+00:04:42.730 --> 00:04:46.510
+Tem ali, apareceu o delete do parágrafo.
+
+00:04:46.550 --> 00:04:48.150
+Aí tem lá o graph view, ó.
+
+00:04:48.750 --> 00:04:50.670
+Você tem abrir o gráfico.
+
+00:04:50.670 --> 00:04:51.550
+Abrir o gráfico.
+
+00:04:51.550 --> 00:04:54.790
+Abrir o gráfico local e abrir aquela
+animação do gráfico.
+
+00:04:54.790 --> 00:04:56.170
+Só tem atalho aqui, ó.
+
+00:04:56.310 --> 00:05:00.550
+O command G para abrir o gráfico.
+
+00:05:00.610 --> 00:05:04.670
+Para abrir o gráfico local, não tem.
+
+00:05:04.810 --> 00:05:06.430
+Nós vamos incluir aqui agora, então.
+
+00:05:06.870 --> 00:05:10.430
+Você pode também filtrar duas de outra
+forma.
+
+00:05:10.710 --> 00:05:13.170
+Você vai ver que tem um tecladinho aqui,
+ó.
+
+00:05:13.190 --> 00:05:19.670
+Se você clicar nele, em vez de você
+pesquisar pelo que você quer abrir, você
+
+00:05:19.670 --> 00:05:20.890
+já pesquisa aqui o seguinte.
+
+00:05:21.050 --> 00:05:21.530
+Se você clicar nele, você vai ver que
+tem um tecladinho aqui, ó.
+
+00:05:21.550 --> 00:05:25.170
+Será que tem algum atalho que seja o
+command G ou o control G?
+
+00:05:25.410 --> 00:05:27.470
+Aí você digita esse atalho e abre.
+
+00:05:28.250 --> 00:05:35.130
+Óbvio, já está sendo usado o command G
+na abertura de gráfico.
+
+00:05:35.150 --> 00:05:35.490
+Legal?
+
+00:05:36.110 --> 00:05:39.350
+Aí vamos pegar, então, agora e vamos...
+
+00:05:39.350 --> 00:05:41.310
+Aqui você tira o filtro, tá?
+
+00:05:41.390 --> 00:05:44.010
+No lado esquerdo aqui, você tira o
+filtro que você fez.
+
+00:05:44.390 --> 00:05:48.850
+Vamos pegar agora aquela coisa que eu
+falei para vocês ali do gráfico, né?
+
+00:05:48.970 --> 00:05:49.490
+Ó.
+
+00:05:50.350 --> 00:05:51.530
+Abrir gráfico local.
+
+00:05:51.550 --> 00:05:53.130
+Vamos dizer o seguinte.
+
+00:05:54.090 --> 00:05:56.410
+Command G abre o gráfico geral.
+
+00:05:56.930 --> 00:06:03.930
+Vamos criar um atalho, né, para abrir o
+gráfico local, que seja command shift G.
+
+00:06:04.350 --> 00:06:05.330
+Vamos fazer isso.
+
+00:06:05.490 --> 00:06:07.790
+Mas antes, vamos fazer o seguinte, ó.
+
+00:06:07.850 --> 00:06:14.390
+No gráfico local, eu vou clicar aqui em
+mais e vou selecionar aqui command G.
+
+00:06:15.290 --> 00:06:16.390
+Olha o que vai acontecer.
+
+00:06:17.750 --> 00:06:20.670
+Quando você tentar setar um atalho...
+
+00:06:21.550 --> 00:06:23.370
+E ele já está sendo usado, vai ficar em
+vermelho.
+
+00:06:24.170 --> 00:06:25.990
+Vai entrar em conflito, tá?
+
+00:06:26.510 --> 00:06:27.510
+Dizendo o seguinte, ó.
+
+00:06:27.550 --> 00:06:30.590
+Esse atalho já está sendo usado.
+
+00:06:30.930 --> 00:06:33.530
+Vai aparecer aqui em cima, inclusive, a
+frase ali, ó.
+
+00:06:33.550 --> 00:06:36.150
+Já está sendo usado o G.
+
+00:06:36.430 --> 00:06:40.150
+E aí você pode pesquisar em cima, como
+eu mostrei, para ver quem é que está
+
+00:06:40.150 --> 00:06:40.470
+usando.
+
+00:06:41.210 --> 00:06:42.410
+Então, eu vou clicar aqui.
+
+00:06:42.450 --> 00:06:43.630
+Não vai dar para usar esse.
+
+00:06:43.770 --> 00:06:46.710
+Vou colocar aqui, command shift G.
+
+00:06:47.270 --> 00:06:47.670
+Aí.
+
+00:06:48.550 --> 00:06:49.030
+Beleza, ó.
+
+00:06:49.310 --> 00:06:51.430
+Agora, para abrir o gráfico.
+
+00:06:51.550 --> 00:06:52.270
+Vou colocar uma nota.
+
+00:06:52.670 --> 00:06:55.290
+É só eu vir aqui, né?
+
+00:06:55.490 --> 00:06:57.850
+Quando eu tiver aqui uma nota.
+
+00:06:58.310 --> 00:06:59.570
+Command shift G.
+
+00:07:00.230 --> 00:07:00.790
+Bum!
+
+00:07:00.790 --> 00:07:01.830
+Já abriu lá.
+
+00:07:02.030 --> 00:07:02.530
+Olha que legal.
+
+00:07:02.710 --> 00:07:09.210
+Então, você pode criar atalhos para
+tudo, tudo, tudo que você for fazer aí,
+
+00:07:09.270 --> 00:07:09.570
+tá bom?
+
+00:07:10.070 --> 00:07:15.550
+Essa parte de atalhos, então, é muito
+simples, mas ela é muito poderosa, né?
+
+00:07:15.610 --> 00:07:19.290
+O Obsidian permite aí você criar atalho
+para tudo.
+
+00:07:19.330 --> 00:07:21.430
+Então, você consegue muita
+produtividade.
+
+00:07:21.550 --> 00:07:23.330
+O que você precisa ver?
+
+00:07:23.530 --> 00:07:24.750
+Como exercício.
+
+00:07:25.150 --> 00:07:28.890
+Você vai, primeiro, entender os atalhos
+já existentes.
+
+00:07:29.090 --> 00:07:32.050
+E aí, com o uso da ferramenta, pensa aí.
+
+00:07:32.150 --> 00:07:33.790
+O que você fez até agora?
+
+00:07:34.010 --> 00:07:35.490
+Vai olhando no seu uso aí.
+
+00:07:35.550 --> 00:07:43.470
+O que você está usando constantemente e
+está usando a todo tempo usando o mouse
+
+00:07:43.470 --> 00:07:44.250
+e fazendo...
+
+00:07:44.750 --> 00:07:46.150
+Já existe um atalho para isso?
+
+00:07:46.510 --> 00:07:48.190
+Se não, vamos criar um atalho?
+
+00:07:48.450 --> 00:07:51.530
+Então, você vai, à medida da
+necessidade...
+
+00:07:52.070 --> 00:07:54.050
+Criar os atalhos e começar a usar.
+
+00:07:54.610 --> 00:07:58.770
+Não recomendo que você entre aqui agora
+e crie 50 atalhos diferentes.
+
+00:07:58.970 --> 00:07:59.490
+Por quê?
+
+00:07:59.550 --> 00:08:02.230
+Porque daí, se você não está usando,
+você não vai lembrar.
+
+00:08:02.390 --> 00:08:07.810
+Você vai ter que toda hora estar vindo
+aqui na tela de configurações para
+
+00:08:07.810 --> 00:08:08.530
+relembrar.
+
+00:08:08.690 --> 00:08:10.630
+Então, vai de acordo com a necessidade.
+
+00:08:11.470 --> 00:08:12.850
+Aqui, o command...
+
+00:08:14.110 --> 00:08:15.310
+Acho que é vírgula, né?
+
+00:08:15.350 --> 00:08:15.530
+É.
+
+00:08:15.690 --> 00:08:16.890
+Command vírgula aqui.
+
+00:08:16.950 --> 00:08:20.170
+Ele abre a telinha de configurações.
+
+00:08:20.470 --> 00:08:21.470
+Aí, você vai...
+
+00:08:21.470 --> 00:08:26.290
+Aí, cria os atalhos e já começa a
+praticar, porque você vai estar aí com a
+
+00:08:26.290 --> 00:08:27.570
+necessidade.
+
+00:08:27.910 --> 00:08:32.850
+Então, vai ser muito mais usual você
+criar atalhos e utilizar logo em seguida
+
+00:08:32.850 --> 00:08:36.150
+em coisas que você está vendo realmente
+que faz sentido.
+
+00:08:36.390 --> 00:08:36.690
+Tá bom?
+
+00:08:37.530 --> 00:08:40.490
+Agora, se você pensa que é só isso,
+meu...
+
+00:08:41.070 --> 00:08:43.090
+Essa aula, você está dominando atalhos.
+
+00:08:43.210 --> 00:08:48.290
+Na próxima aula, você vai dominar uma
+coisa que vai facilitar a tua vida
+
+00:08:48.290 --> 00:08:49.670
+absurdamente.
+
+00:08:49.970 --> 00:08:51.110
+Só que é só um pouquinho.
+
+00:08:51.110 --> 00:08:53.270
+Porque depois nós vamos evoluir ela
+ainda mais.
+
+00:08:53.430 --> 00:08:54.610
+Nós vamos falar sobre templates.
+
+00:08:54.970 --> 00:09:03.670
+Como você criar notas que vão ser
+modelos para que você não precise, em
+
+00:09:03.670 --> 00:09:08.630
+coisas repetitivas, ficar criando aquele
+modelo sempre, sempre, sempre do mesmo
+
+00:09:08.630 --> 00:09:10.430
+jeito ali, ctrl -c, ctrl -v.
+
+00:09:10.510 --> 00:09:10.630
+Não.
+
+00:09:10.670 --> 00:09:16.590
+Você cria um template e o template já
+vai abrir para você uma nota atualizada.
+
+00:09:16.590 --> 00:09:18.670
+Vai ser muito bom para a tua
+produtividade.
+
+00:09:19.070 --> 00:09:20.890
+Então, até a próxima aula, lendário.
+
+00:09:21.110 --> 00:09:24.270
+Você está evoluindo muito, muito, muito,
+muito.
+
+00:09:24.410 --> 00:09:26.530
+Parabéns por chegar até aqui nesse
+curso.
+
+00:09:26.750 --> 00:09:32.750
+Tem muito pela frente ainda, mas não é
+uma informação que vai ser goela abaixo.
+
+00:09:32.750 --> 00:09:38.030
+Você vai vendo que tem muito benefício
+conhecer essa ferramenta e novas
+
+00:09:38.030 --> 00:09:40.410
+metodologias de gestão de conhecimento.
+
+00:09:40.650 --> 00:09:41.610
+Até a próxima, lendário.

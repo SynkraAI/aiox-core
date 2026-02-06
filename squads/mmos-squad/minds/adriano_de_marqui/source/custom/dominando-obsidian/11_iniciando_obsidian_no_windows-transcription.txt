@@ -1,0 +1,520 @@
+WEBVTT
+
+00:00:00.820 --> 00:00:06.180
+E aí, lendário, continuando aqui, se
+você veio para essa aula, é porque você
+
+00:00:06.180 --> 00:00:08.760
+está instalando Obsidian no Windows, tá?
+
+00:00:09.200 --> 00:00:15.160
+Bom, você pode ter aí as opções de você
+ter vindo da aula do iPhone, onde você
+
+00:00:15.160 --> 00:00:21.740
+criou um cofre já no iPhone para criar
+aquela pasta no iCloud, tá?
+
+00:00:21.740 --> 00:00:30.020
+Ou você, então, está vindo de uma aula
+do Android, onde você só instalou a aula
+
+00:00:30.020 --> 00:00:34.720
+no Android e veio direto para essa aula
+aqui do Windows, ou você não vai usar
+
+00:00:34.720 --> 00:00:39.380
+nenhuma opção mobile agora e você tem o
+sistema operacional Windows e você está
+
+00:00:39.380 --> 00:00:39.800
+vindo aqui.
+
+00:00:40.280 --> 00:00:48.220
+Chegamos na instalação dessa tela aqui,
+onde nós abrimos o Obsidian, e aqui,
+
+00:00:48.260 --> 00:00:51.720
+então, é onde você gerencia os seus
+Valves.
+
+00:00:51.740 --> 00:00:56.620
+Ou os seus cofres, que eu vou explicar
+com detalhes em próximas aulas, que, na
+
+00:00:56.620 --> 00:00:57.560
+verdade, é o local.
+
+00:00:57.900 --> 00:01:01.580
+Nada mais do que uma pasta onde é
+armazenado o seu segundo cérebro, tá?
+
+00:01:02.120 --> 00:01:09.540
+Aqui, nós podemos criar um novo Vault,
+abrir uma pasta já existente como Vault,
+
+00:01:09.800 --> 00:01:12.560
+e também a opção do Obsidian Sync.
+
+00:01:12.600 --> 00:01:16.200
+Mas a opção do Obsidian Sync é aquela
+paga que você não precisa ter, tá?
+
+00:01:16.680 --> 00:01:20.440
+Aqui nós temos a escolha do idioma.
+
+00:01:20.800 --> 00:01:21.720
+Tem inglês.
+
+00:01:21.740 --> 00:01:22.940
+Tem português do Brasil.
+
+00:01:23.160 --> 00:01:27.100
+Eu, particularmente, gosto de deixar em
+inglês, tá?
+
+00:01:27.460 --> 00:01:28.740
+Vou deixar eu aqui.
+
+00:01:28.780 --> 00:01:32.120
+Você pode, de acordo com a sua
+preferência aí.
+
+00:01:33.220 --> 00:01:39.020
+Bom, se você veio da aula de iPhone,
+você criou aquela pasta no iCloud.
+
+00:01:39.260 --> 00:01:40.900
+Então, o que você pode fazer agora?
+
+00:01:41.400 --> 00:01:44.220
+Open Folder as Vault.
+
+00:01:44.520 --> 00:01:47.900
+Ou seja, abrir uma pasta com o cofre,
+né?
+
+00:01:48.920 --> 00:01:51.720
+Se você criou ela no iPhone, ela já está
+automatizada.
+
+00:01:51.740 --> 00:01:53.140
+Ela já está automaticamente criada lá no
+seu iCloud.
+
+00:01:53.420 --> 00:02:00.900
+Se você está no Windows, você vai
+instalar o iCloud no Windows.
+
+00:02:01.460 --> 00:02:06.240
+É a melhor opção se você tem o iPhone,
+tá?
+
+00:02:06.620 --> 00:02:08.240
+É a mais fácil, né?
+
+00:02:08.380 --> 00:02:14.560
+E, assim, para não ter dor de cabeça,
+você instala o iCloud no Windows, que
+
+00:02:14.560 --> 00:02:16.000
+vai ser a melhor opção.
+
+00:02:16.060 --> 00:02:20.200
+Se você está vindo do Android ou nenhuma
+opção mobile, eu vou te dar aqui quais
+
+00:02:20.200 --> 00:02:20.860
+são as opções.
+
+00:02:20.860 --> 00:02:21.360
+Já falei.
+
+00:02:21.740 --> 00:02:24.320
+Eu já falei naquela aula sobre as opções
+de sincronização, né?
+
+00:02:24.400 --> 00:02:25.320
+Mas, olha só.
+
+00:02:25.640 --> 00:02:30.940
+Eu, imaginando que você tenha vindo do
+iPhone, depois nós vamos ver para quem
+
+00:02:30.940 --> 00:02:31.280
+não veio.
+
+00:02:31.480 --> 00:02:35.400
+Mas, se você veio lá do iPhone, você vai
+clicar em Open.
+
+00:02:36.520 --> 00:02:44.880
+E, aqui no Windows, você vai ter o seu
+iCloud em algum lugar aqui.
+
+00:02:44.960 --> 00:02:46.900
+Aqui, por exemplo, eu estou no meu
+iCloud.
+
+00:02:47.180 --> 00:02:51.720
+E vai ter a pasta chamada Obsidian, que
+até já tem.
+
+00:02:51.740 --> 00:02:53.780
+Ó, o ícone do Obsidian.
+
+00:02:54.040 --> 00:02:57.380
+Então, aqui você vai clicar e você vai
+ter aquela pasta.
+
+00:02:57.580 --> 00:03:00.380
+Nós criamos lá no iPhone, né?
+
+00:03:00.480 --> 00:03:02.160
+Um novo cofre lá só para teste.
+
+00:03:02.300 --> 00:03:05.000
+Vai ter o cofre aqui com o seu nome, tá?
+
+00:03:05.100 --> 00:03:06.480
+A sua pasta aqui com o nome.
+
+00:03:06.600 --> 00:03:10.120
+Eu, no caso, vou selecionar aqui, cofre
+teste aula.
+
+00:03:10.580 --> 00:03:11.020
+Tá?
+
+00:03:11.140 --> 00:03:12.080
+E o que vai acontecer?
+
+00:03:12.340 --> 00:03:13.460
+Vou selecionar essa pasta.
+
+00:03:14.700 --> 00:03:15.140
+Pronto.
+
+00:03:15.140 --> 00:03:21.020
+Ele já abriu para mim o Obsidian aqui em
+uma tela, né?
+
+00:03:21.740 --> 00:03:25.100
+O cofre, nós não criamos nada, nenhuma
+nota lá no iPhone.
+
+00:03:25.400 --> 00:03:28.820
+Ele já abriu aqui para mim essa opção
+aqui, né?
+
+00:03:28.840 --> 00:03:33.340
+Que eu tenho de começar a usar a
+ferramenta.
+
+00:03:33.460 --> 00:03:37.560
+Aqui embaixo, eu tenho um gerenciador
+dos vaults do cofre.
+
+00:03:37.660 --> 00:03:41.380
+Eu vou clicar aqui e vou selecionar
+Manage Vaults.
+
+00:03:41.380 --> 00:03:43.000
+Vou gerenciar os cofres aqui.
+
+00:03:43.100 --> 00:03:45.300
+Vai cair de novo naquela tela.
+
+00:03:45.320 --> 00:03:49.860
+Vai abrir aquela tela de novo, que é a
+tela de instalação que nós chegamos ali.
+
+00:03:50.020 --> 00:03:51.640
+A única diferença é que aqui...
+
+00:03:51.640 --> 00:03:54.880
+Aqui do lado esquerdo tem aquele cofre
+que nós criamos, né?
+
+00:03:55.040 --> 00:03:57.480
+Mas você volta aqui com aquelas opções.
+
+00:03:57.820 --> 00:04:02.800
+Se você não vai usar mobile ou se você
+está usando Android, você vai vir aqui,
+
+00:04:02.940 --> 00:04:05.320
+ó, e Create, né?
+
+00:04:05.460 --> 00:04:06.140
+O New Vault.
+
+00:04:06.540 --> 00:04:09.100
+Você vai criar um novo cofre, né?
+
+00:04:09.140 --> 00:04:10.880
+Você vai dar o nome que você quer aqui.
+
+00:04:11.000 --> 00:04:14.180
+Por exemplo, aqui, teste...
+
+00:04:14.180 --> 00:04:16.680
+Eu vou dar aqui, teste Windows, tá?
+
+00:04:16.740 --> 00:04:17.280
+Teste Win.
+
+00:04:18.520 --> 00:04:20.360
+Bom, é o nome que você quiser.
+
+00:04:20.480 --> 00:04:21.320
+Aqui, notas.
+
+00:04:21.640 --> 00:04:23.140
+Adriano, segundo cérebro.
+
+00:04:23.960 --> 00:04:25.060
+Adriano, que é o meu nome.
+
+00:04:25.140 --> 00:04:27.180
+Você vai poder colocar o seu nome.
+
+00:04:27.320 --> 00:04:29.180
+Segundo cérebro, né?
+
+00:04:29.260 --> 00:04:31.260
+Alguma coisa assim que você vai colocar.
+
+00:04:31.360 --> 00:04:39.140
+E você vai selecionar a pasta que você
+vai criar esse cofre.
+
+00:04:39.300 --> 00:04:47.200
+Bom, se você vai usar uma opção de
+sincronização, você aqui, nesse momento,
+
+00:04:47.380 --> 00:04:51.100
+tem que ter escolhido já OneDrive ou...
+
+00:04:51.640 --> 00:04:52.960
+O Google Drive, né?
+
+00:04:53.020 --> 00:04:54.240
+Vamos pegar as duas aí.
+
+00:04:54.340 --> 00:04:56.020
+Você pode ter N outras, né?
+
+00:04:56.040 --> 00:04:58.240
+Mas vamos pegar as duas aí mais
+populares, né?
+
+00:04:58.740 --> 00:05:06.220
+E aí, quando você tem o OneDrive e o
+Google Drive, você vai ter ele aqui
+
+00:05:06.220 --> 00:05:06.880
+também, né?
+
+00:05:06.940 --> 00:05:09.020
+No seu Windows aqui, ó.
+
+00:05:09.340 --> 00:05:14.440
+Você vai ter a opção de selecionar qual
+é o drive que você quer.
+
+00:05:14.960 --> 00:05:18.780
+Então, você pode ter aqui, por exemplo,
+eu tenho o Google Drive e eu tenho o
+
+00:05:18.780 --> 00:05:20.800
+OneDrive aqui, ó, aqui em cima.
+
+00:05:20.820 --> 00:05:21.260
+Adriano.
+
+00:05:21.260 --> 00:05:22.000
+Meu OneDrive.
+
+00:05:22.440 --> 00:05:27.780
+O certo é você pegar o seu OneDrive ou o
+Google Drive e criar uma pasta chamada
+
+00:05:27.780 --> 00:05:28.560
+Obsidian.
+
+00:05:28.760 --> 00:05:32.700
+E dentro dela, você coloque, então, os
+seus cofres.
+
+00:05:32.880 --> 00:05:37.840
+Então, por exemplo, se eu pegar aqui o
+meu OneDrive, eu tenho uma pasta
+
+00:05:37.840 --> 00:05:39.100
+chamada, né?
+
+00:05:39.120 --> 00:05:41.060
+Criei aqui a pasta chamada Obsidian.
+
+00:05:41.300 --> 00:05:43.920
+E aí, eu tenho os meus cofres aqui, tá?
+
+00:05:44.640 --> 00:05:47.360
+Mesma coisa no Google Drive, tá?
+
+00:05:47.460 --> 00:05:48.780
+Eu tenho o Google Drive aqui.
+
+00:05:48.880 --> 00:05:50.920
+Se eu vou pegar e...
+
+00:05:51.260 --> 00:05:56.620
+criar o meu segundo cérebro aqui nele,
+eu vou criar uma pasta chamada Obsidian
+
+00:05:56.620 --> 00:05:58.580
+e tenho a opção de deixar ele aqui.
+
+00:05:59.000 --> 00:06:04.840
+Se você não vai usar a sincronização,
+beleza, você pode criar a sua pasta de
+
+00:06:04.840 --> 00:06:09.940
+segundo cérebro na pasta que você quiser
+aí, no diretório que você quiser, tá
+
+00:06:09.940 --> 00:06:10.120
+bom?
+
+00:06:10.400 --> 00:06:14.600
+Depois eu vou ensinar também, eu explico
+como você migrar de um lugar para outro.
+
+00:06:14.740 --> 00:06:16.000
+É muito simples, gente.
+
+00:06:16.200 --> 00:06:22.280
+Mas, atendendo aí centenas de alunos, eu
+já sei que muitas vezes pode dar dor de
+
+00:06:22.280 --> 00:06:23.420
+cabeça, né?
+
+00:06:23.500 --> 00:06:26.760
+Então, eu quero que você entenda a
+dinâmica correta, né?
+
+00:06:26.820 --> 00:06:33.220
+Essa aula é para isso, é para você saber
+dominar isso daí, a instalação e esse
+
+00:06:33.220 --> 00:06:34.640
+início de configuração, tá?
+
+00:06:34.800 --> 00:06:39.900
+Então, aqui, ó, eu vou criar, por
+exemplo, aqui no meu Google Drive, né?
+
+00:06:41.100 --> 00:06:44.300
+Nessa pasta e vou dar OK aqui.
+
+00:06:45.220 --> 00:06:45.700
+Create.
+
+00:06:47.020 --> 00:06:49.080
+Pronto, ele vai abrir para mim.
+
+00:06:49.760 --> 00:06:52.520
+Ó, tá abrindo aqui para mim, abriu aqui
+o cofre.
+
+00:06:52.580 --> 00:06:55.280
+Eu posso abrir mais de um cofre ao mesmo
+tempo, tá?
+
+00:06:56.960 --> 00:06:59.240
+E isso aqui é o repositório que eu
+criei.
+
+00:06:59.340 --> 00:07:04.400
+Se eu for lá no Windows Explorer, o que
+vai acontecer?
+
+00:07:05.440 --> 00:07:09.740
+Dentro da minha pasta, no caso, eu
+selecionei o Google Drive, né?
+
+00:07:09.960 --> 00:07:16.480
+Se eu pegar aqui meu Drive e pasta
+Obsidian, eu vou ver que agora tem
+
+00:07:16.480 --> 00:07:19.260
+aquela pasta TestWin, que é o nome do
+seu certificado.
+
+00:07:19.280 --> 00:07:21.300
+O nome que você vai dar aí, tá?
+
+00:07:21.420 --> 00:07:24.460
+E aqui, ó, tá aqui dentro, né?
+
+00:07:24.540 --> 00:07:25.620
+A pasta do Obsidian.
+
+00:07:26.340 --> 00:07:29.840
+É uma pasta mesmo ali no sistema
+operacional.
+
+00:07:32.580 --> 00:07:36.240
+Então, aconteceria o mesmo se fosse no
+OneDrive, tá?
+
+00:07:36.640 --> 00:07:40.200
+Tem alguns detalhes que são muito
+importantes e eu vou explicar numa
+
+00:07:40.200 --> 00:07:43.660
+próxima aula aí, que são as
+configurações, tanto para OneDrive,
+
+00:07:43.820 --> 00:07:49.080
+quanto para Google Drive, para que você
+não tenha problemas, tá?
+
+00:07:50.100 --> 00:07:53.720
+Muita gente, muita gente teve problema
+por causa da opção de sincronização.
+
+00:07:54.060 --> 00:07:58.800
+Você precisa aprender, você vai
+economizar muitas horas aqui, tá?
+
+00:07:58.880 --> 00:08:03.660
+Então, a gente vai se ver agora, na
+próxima aula, que você vai selecionar
+
+00:08:03.660 --> 00:08:09.760
+aí, de acordo com a opção de mobile, o
+sistema operacional, você vai ver aí nas
+
+00:08:09.760 --> 00:08:12.660
+próximas aulas qual é a sequência que
+você vai usar.
+
+00:08:12.820 --> 00:08:18.420
+Se você não vai usar sincronização, você
+pode pular as etapas aí de
+
+00:08:18.420 --> 00:08:20.200
+sincronização, que eu vou explicar, tá
+bom?
+
+00:08:20.280 --> 00:08:22.780
+Por essa aula, é isso.
+
+00:08:22.980 --> 00:08:24.200
+Objetivo concluído.
+
+00:08:24.400 --> 00:08:26.000
+Você está no caminho certo.

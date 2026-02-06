@@ -1,0 +1,663 @@
+WEBVTT
+
+00:00:00.370 --> 00:00:06.770
+Bem -vindo, lendário, a essa aula onde
+nós vamos agora ver sobre formatação
+
+00:00:06.770 --> 00:00:12.570
+Todo o conteúdo que você viu
+anteriormente sobre Markdown que era
+
+00:00:12.570 --> 00:00:18.130
+necessário Não tinha como você não
+conhecer Markdown Isso vai evoluir muito
+
+00:00:18.130 --> 00:00:25.810
+suas habilidades Tem algumas coisas que
+podem ser feitas de maneira visual Mas
+
+00:00:25.810 --> 00:00:32.230
+se você não conhece Markdown, você vai
+acabar se perdendo, não entendendo E vai
+
+00:00:32.230 --> 00:00:36.170
+se confundir muitas vezes Então eu
+precisava trazer esse conteúdo de
+
+00:00:36.170 --> 00:00:41.750
+Markdown Para que você agora veja como
+que a ferramenta, o Obsidian Tem
+
+00:00:41.750 --> 00:00:49.570
+evoluído para trazer novas ferramentas
+Para agilizar ainda mais a sua inserção
+
+00:00:49.570 --> 00:00:55.370
+de conteúdo Eu quero pegar aqui com você
+Eu vou trazer para o Obsidian O
+
+00:00:55.370 --> 00:01:01.370
+Obsidian, as ferramentas, as formas de
+usar Eu quero que você perceba o quanto
+
+00:01:01.370 --> 00:01:09.090
+você está evoluindo Nesse caminho que
+nós estamos aí trilhando Em relação a
+
+00:01:09.090 --> 00:01:14.830
+como você anota as coisas Provavelmente
+você só ia para uma ferramenta e
+
+00:01:14.830 --> 00:01:20.810
+digitava o texto E formatava através dos
+botões de formatação E não tinha muito
+
+00:01:20.810 --> 00:01:21.770
+além disso, né?
+
+00:01:22.070 --> 00:01:28.290
+Agora você está vendo o quanto de poder
+A ferramenta tem Olha só, aqui eu estou
+
+00:01:28.290 --> 00:01:35.690
+com o Obsidian O mesmo cofre lá que a
+gente estava usando Imagina que você nos
+
+00:01:35.690 --> 00:01:40.350
+exercícios Você foi trazendo notas
+Pegando uma coisa aqui e outra ali Para
+
+00:01:40.350 --> 00:01:44.630
+começar o uso do segundo cérebro
+Conforme eu tenho falado nas aulas Para
+
+00:01:44.630 --> 00:01:47.050
+você fazer na prática as coisas, né?
+
+00:01:47.330 --> 00:01:52.690
+Nessa aula, imagina aqui que eu estou
+com um texto Que você trouxe de outros
+
+00:01:52.690 --> 00:01:55.090
+lugares Outras notas, né?
+
+00:01:55.170 --> 00:02:01.070
+Outras fontes E você chegou aqui e está
+com um texto Você não conhecia a
+
+00:02:01.070 --> 00:02:06.010
+Markdown ainda e está sem formatar Ou
+pode ser que você vai incluir Começar a
+
+00:02:06.010 --> 00:02:11.390
+incluir texto novo agora Qual é a opção
+visual que a ferramenta me dá?
+
+00:02:12.070 --> 00:02:14.650
+É o botão direito aqui em cima da nota,
+né?
+
+00:02:14.670 --> 00:02:21.530
+Dentro da nota você tem todo um menu Que
+permite o trabalho, a manutenção de
+
+00:02:21.530 --> 00:02:26.290
+texto Então, por exemplo, eu tenho aqui
+um título Você já aprendeu em Markdown
+
+00:02:26.290 --> 00:02:30.450
+Que você vai digitar a hashtag aqui Mas
+se eu vir aqui e selecionar o texto
+
+00:02:30.450 --> 00:02:37.410
+Botão direito, parágrafo Eu tenho aqui
+os Os readings, né?
+
+00:02:37.510 --> 00:02:42.490
+Então, por exemplo, eu tenho o 1 Ele já
+vai jogar o hashtag para mim Formatou,
+
+00:02:42.530 --> 00:02:42.970
+tá vendo?
+
+00:02:43.710 --> 00:02:49.950
+Ele já fez isso para mim Imagina aqui
+nos itens Eu quero criar aqui uma lista
+
+00:02:51.190 --> 00:02:55.150
+Aqui são itens São uma lista numerada
+Então, eu vou criar aqui uma lista
+
+00:02:55.150 --> 00:02:57.650
+numerada Então, aqui, ó Lista numerada,
+beleza?
+
+00:02:58.010 --> 00:03:07.150
+Aqui nas sugestões Eu tenho um bullet
+list Com as bolinhas ali Então,
+
+00:03:07.210 --> 00:03:07.770
+percebeu?
+
+00:03:07.770 --> 00:03:11.650
+Você pode dar manutenção no texto De
+forma muito mais rápida, tá?
+
+00:03:13.050 --> 00:03:16.550
+Mas, repito, se você clicar aqui Vier
+aqui nos textos, né?
+
+00:03:16.590 --> 00:03:22.670
+E você vier para a edição Você vai ver a
+mesma coisa que O Markdown está
+
+00:03:22.670 --> 00:03:23.950
+mostrando ali, né?
+
+00:03:24.010 --> 00:03:27.190
+Então, a lista aqui Ela não deixa de ser
+lá Um tracinho, tá?
+
+00:03:28.150 --> 00:03:30.430
+Quais as opções que eu tenho aqui nesse
+menu?
+
+00:03:30.590 --> 00:03:35.330
+Então, vamos lá O parágrafo é adicionar
+a lista, né?
+
+00:03:35.370 --> 00:03:40.390
+O bullet Lista numerada Test list eu vou
+mostrar agora para você ali embaixo
+
+00:03:42.110 --> 00:03:45.070
+Todos os níveis aqui de readings, né?
+
+00:03:45.090 --> 00:03:46.970
+Do tamanho, do 1 até o 6, né?
+
+00:03:47.270 --> 00:03:52.810
+Aqui é o próprio corpo Aqui é citação
+Então, olha lá Vamos fazer a inserção de
+
+00:03:52.810 --> 00:03:56.010
+Nós já vimos alguns aqui Vamos fazer a
+inserção de Vamos pegar, por exemplo,
+
+00:03:56.110 --> 00:04:00.130
+esse test list aqui, ó Como que é o
+test?
+
+00:04:00.390 --> 00:04:01.470
+Como que você cria uma test?
+
+00:04:01.650 --> 00:04:05.990
+Então, vamos lá lembrar quando era só
+Markdown Markdown, para você criar uma
+
+00:04:05.990 --> 00:04:07.670
+lista, né?
+
+00:04:07.690 --> 00:04:13.010
+De test Aquele que tem lá o checkbox
+Onde você pode colocar Tá feito ou não
+
+00:04:13.010 --> 00:04:13.210
+tá?
+
+00:04:13.570 --> 00:04:21.030
+Você tem que digitar tracinho Espaço
+Colchete Espaço Aí você vai, depois do
+
+00:04:21.030 --> 00:04:29.530
+último colchete Dá um espaço Olha lá Aí
+você coloca Aqui Tarefa 1 Aí, claro,
+
+00:04:29.630 --> 00:04:32.170
+você dá um enter E já vai trazendo
+outras tarefas, né?
+
+00:04:32.850 --> 00:04:40.890
+Tarefa 2 E se você vem aqui, ó Você
+consegue clicar E colocar Que completou
+
+00:04:40.890 --> 00:04:43.690
+a tarefa Como que isso é armazenado no
+Markdown?
+
+00:04:44.250 --> 00:04:45.430
+Vamos lá, vamos ver?
+
+00:04:45.570 --> 00:04:50.210
+Olha lá Ele colocou um X dentro do
+colchete Para dizer que tá feito, né?
+
+00:04:51.070 --> 00:04:54.430
+Então, é dessa forma que é armazenado
+ali no texto Então, é dessa forma que é
+
+00:04:54.430 --> 00:04:58.330
+armazenado ali no texto Bom, tem um menu
+visual também para fazer isso Então, se
+
+00:04:58.330 --> 00:05:04.050
+eu vier aqui Test list Ele já vai
+adicionar o primeiro ali Aí eu vou dando
+
+00:05:04.050 --> 00:05:08.170
+enter Uma forma visual também de fazer,
+tá?
+
+00:05:08.370 --> 00:05:10.470
+O que mais que tem aqui no parágrafo?
+
+00:05:10.470 --> 00:05:13.490
+Os readings O quote, né?
+
+00:05:13.530 --> 00:05:21.150
+É aquela citação Então, aqui, ó Exemplo
+Citação De texto, né?
+
+00:05:22.070 --> 00:05:28.670
+E aí, ó Dão enter E aí, ó Tá a citação
+Se eu vier aqui e alterar E dar pra
+
+00:05:28.670 --> 00:05:32.450
+próxima linha Eu continuo dentro da
+citação Se eu colocar um outro
+
+00:05:32.450 --> 00:05:39.990
+sinalzinho de maior Opa, eu tô indo para
+um outro Uma citação dentro da citação
+
+00:05:39.990 --> 00:05:45.750
+Por exemplo, como se fosse aqui o nome
+de um livro Nome do livro Olha lá
+
+00:05:46.770 --> 00:05:47.250
+Entenderam?
+
+00:05:47.250 --> 00:05:48.790
+Você cria níveis, né?
+
+00:05:48.850 --> 00:05:52.030
+Na citação Itens e sub -itens, né?
+
+00:05:52.030 --> 00:05:54.610
+Vamos pensar assim Então, isso é uma
+coisa que a gente tem que fazer Que você
+
+00:05:54.610 --> 00:06:00.150
+faz aqui também Então, acho que o menu
+parágrafo é isso Formatação O que você
+
+00:06:00.150 --> 00:06:00.370
+tem?
+
+00:06:01.750 --> 00:06:09.530
+Negrito, itálico Aquela questão do
+taxado Highlight no texto Você pode
+
+00:06:09.530 --> 00:06:11.970
+criar um código Mas é uma linha daí, né?
+
+00:06:12.050 --> 00:06:17.770
+E também é uma coisa matemática De uma
+linha também Ou o impacto da formatação
+
+00:06:17.770 --> 00:06:26.270
+Então, ó Eu posso chegar aqui no texto
+Vira aqui Negrito Olha lá Dois
+
+00:06:26.270 --> 00:06:30.670
+asterísticos Que é o Markdown Mas ele já
+fez isso para mim Então, eu posso pegar
+
+00:06:30.670 --> 00:06:36.870
+uma porção de texto Quero que esse texto
+seja itálico Beleza?
+
+00:06:36.890 --> 00:06:38.250
+Tá lá, ó Tá?
+
+00:06:38.430 --> 00:06:44.990
+Então, a formatação aí me faz isso E aí
+eu tenho um outro que facilita ainda
+
+00:06:44.990 --> 00:06:48.530
+mais Que é o menu Insert Porque lembra
+da tabela?
+
+00:06:48.590 --> 00:06:50.930
+Vocês viram aí Markdown como que é a
+tabela, né?
+
+00:06:51.110 --> 00:06:54.910
+Olha aqui a tabela Eu venho aqui Table
+Tá?
+
+00:06:55.050 --> 00:07:02.190
+E ele vai inserir a tabela É que a visão
+escura aqui da coisa Não dá pra...
+
+00:07:02.190 --> 00:07:04.390
+Deixa eu ver A tabela não tá muito...
+
+00:07:05.210 --> 00:07:07.690
+Ah, dá pra ver Mas você tá vendo aí, né?
+
+00:07:07.790 --> 00:07:10.930
+Então, aqui tem o cabeçalho, né?
+
+00:07:11.810 --> 00:07:13.290
+Do reader aqui, né?
+
+00:07:13.310 --> 00:07:16.550
+Então, vamos imaginar que aqui tem um
+reader Aqui tem outro, né?
+
+00:07:16.590 --> 00:07:21.690
+Um cabeçalho da tabela E você tem aqui o
+item da tabela, né?
+
+00:07:22.230 --> 00:07:24.410
+Item e item Olha Isso aqui é o item da
+tabela, né?
+
+00:07:24.430 --> 00:07:28.650
+Isso aqui é Markdown Tá armazenado
+daquele jeito que eu já mostrei Vou
+
+00:07:28.650 --> 00:07:31.350
+pegar aqui o Search Mode Olha lá, tá
+vendo?
+
+00:07:31.650 --> 00:07:38.910
+Só que a ferramenta trouxe muitos itens
+Que facilitam a inserção Por exemplo, se
+
+00:07:38.910 --> 00:07:43.650
+eu vier aqui Eu seleciono a coluna Se eu
+vier aqui Eu seleciono a linha inteira
+
+00:07:43.650 --> 00:07:51.050
+Se eu vier aqui Eu adiciono mais uma
+coluna Se eu vier aqui Eu adiciono mais
+
+00:07:51.050 --> 00:07:58.670
+uma linha Outra coisa ainda Se você vier
+aqui E selecionar Clicar várias vezes na
+
+00:07:58.670 --> 00:08:05.850
+célula E selecionar a tabela inteira
+Você consegue Com o botão direito Olha,
+
+00:08:05.990 --> 00:08:12.010
+dentro da célula Você pode adicionar Uma
+linha Você pode, antes e depois
+
+00:08:12.010 --> 00:08:20.390
+Adicionar linha antes e depois Mover a
+linha pra baixo Duplicar Excluir Coluna,
+
+00:08:20.470 --> 00:08:28.010
+mesma coisa Olha quanta coisa, coisa de
+alinhamento Duplicação Tudo, tudo, tudo
+
+00:08:28.010 --> 00:08:34.670
+Que você quiser mexer na tabela Como se
+fosse num Num Notion, num Excel Você
+
+00:08:34.670 --> 00:08:38.770
+pode ter aqui Você pode ordenar Então de
+repente você digitou uma tabela Tem
+
+00:08:38.770 --> 00:08:43.390
+dados dentro de uma tabela Você pode
+ordenar a tabela Pela coluna minha Se
+
+00:08:43.390 --> 00:08:49.190
+você clicar na célula tem opções Uma vez
+que você está selecionado a tabela
+
+00:08:49.190 --> 00:08:55.870
+inteira Outras opções, formatação Da
+tabela inteira O alinhamento Limpar
+
+00:08:55.870 --> 00:08:57.730
+todas as células Tá percebendo?
+
+00:08:57.770 --> 00:09:03.130
+Isso facilita bastante Então pra inserir
+tabelas aqui Forma visual, tá?
+
+00:09:03.410 --> 00:09:15.750
+Então é claro, é lógico Que você pegar A
+tabela toda aqui E selecionar E E por
+
+00:09:15.750 --> 00:09:19.850
+exemplo colocar aqui O alinhamento, tudo
+Nunca vai deixar de ser o que?
+
+00:09:19.850 --> 00:09:24.330
+Nunca vai deixar de ser Markdown Tá
+ligado?
+
+00:09:25.830 --> 00:09:30.410
+Alinhamento Ele configura dessa forma
+Você não vai ter que ficar lembrando
+
+00:09:30.410 --> 00:09:37.790
+disso Então você vem aqui e Consegue
+trabalhar com tabela De forma visual O
+
+00:09:37.790 --> 00:09:39.370
+que mais você tem aqui no insert?
+
+00:09:40.030 --> 00:09:47.490
+Aqueles callouts que a gente viu Então
+você insere Ele já transforma E o mais
+
+00:09:47.490 --> 00:09:53.710
+legal ainda É o seguinte, se você clicar
+aqui no No callout E mudar o tipo Você
+
+00:09:53.710 --> 00:09:58.750
+pode mudar o tipo aqui Diretamente aqui
+Sem precisar ficar lembrando daquelas
+
+00:09:58.750 --> 00:10:06.350
+palavrinhas Que mudam o ícone E a cor Aí
+é claro, eu venho aqui E digito o que eu
+
+00:10:06.350 --> 00:10:15.870
+quero Título e aqui O texto que eu vou
+digitar Então Legal E ainda mais você
+
+00:10:15.870 --> 00:10:24.690
+pode Pegar, selecionar um bloco de texto
+E transformar O bloco de texto Em um
+
+00:10:24.690 --> 00:10:26.310
+callout Entendeu?
+
+00:10:26.370 --> 00:10:37.470
+E pode mudar ele aqui também Pode editar
+E pode Mudar ele direto aqui Olha que
+
+00:10:37.470 --> 00:10:41.470
+legal E olha quanto tipo de callout tem
+Aqui você não precisa ficar lembrando
+
+00:10:41.470 --> 00:10:46.930
+das palavras Ou saber qual existe Você
+tem muitos aqui Tem muitas cores e
+
+00:10:46.930 --> 00:10:53.790
+muitos tipos Você vem aqui no other,
+outros E aí você tem Vários tipos aí
+
+00:10:53.790 --> 00:10:58.710
+Legal Então isso aqui você tem no menu
+inserir também Que mais?
+
+00:10:59.450 --> 00:11:06.670
+Bloco de código Já insere para você
+Aquilo lá Você tem também
+
+00:11:07.390 --> 00:11:18.100
+Ah Aqui eu tinha a linha horizontal Já
+insere Tem aqueles três tracinhos Ele já
+
+00:11:18.100 --> 00:11:27.080
+tem aqui também Ah O link externo Que é
+lá Ele já insere para mim Deixa eu pegar
+
+00:11:27.080 --> 00:11:34.720
+aqui Link externo Ele já cria o colchete
+Depois o parentes para eu digitar Tanto
+
+00:11:34.720 --> 00:11:41.460
+o site Como também O texto que eu quero
+Tá legal?
+
+00:11:41.780 --> 00:11:51.680
+É claro gente Se você vier aqui E você
+copiar uma URL Então por exemplo Aqui no
+
+00:11:51.680 --> 00:11:57.460
+Google Eu vou copiar a URL do Google Eu
+venho aqui dentro da ferramenta E colo
+
+00:11:57.460 --> 00:12:03.860
+Ele já vai inserir para mim O link aqui
+Só que com markdown Está inserindo o
+
+00:12:03.860 --> 00:12:10.940
+link direto Tem uma opção ali Nas
+configurações Que você ao colar o link
+
+00:12:10.940 --> 00:12:17.080
+Você configura para ele colocar O modelo
+de markdown Para que você possa mudar A
+
+00:12:17.080 --> 00:12:31.720
+forma Então É Aqui você claro pode Ter O
+link que vai funcionar Não está no
+
+00:12:31.720 --> 00:12:34.900
+modelo Do markdown Tá bom?
+
+00:12:35.400 --> 00:12:43.160
+Mas assim o melhor mesmo É você pegar o
+link Que você copiou E você vai vir aqui
+
+00:12:43.160 --> 00:12:46.940
+Ad external link Ele vai jogar para você
+Você
+
+00:12:46.940 --> 00:12:55.960
+coloca O texto que você quer Então por
+exemplo aqui é o Google E aí ele
+
+00:12:55.960 --> 00:13:00.760
+já Salva para você Legal?
+
+00:13:01.140 --> 00:13:08.380
+Olha lá Já fica naquele formatinho Do
+markdown Vamos ver o que mais tem aqui
+
+00:13:08.380 --> 00:13:14.600
+Então tem o external link O link aqui é
+o link interno Mas nós vamos ter uma
+
+00:13:14.600 --> 00:13:20.520
+aula Em especial sobre esses links
+Internos E aí a gente chegando nela
+
+00:13:21.480 --> 00:13:24.480
+Vamos trabalhar com isso O que eu queria
+aqui então era mostrar Essa
+
+00:13:24.480 --> 00:13:30.700
+possibilidade Desse menu sempre está
+trabalhando De forma visual E você
+
+00:13:30.700 --> 00:13:34.460
+também tem isso agora na ferramenta E
+está sempre evoluindo Primeiro evoluiu
+
+00:13:34.460 --> 00:13:39.660
+com a tabela Depois algumas versões
+foram evoluindo Alguns outros itens E
+
+00:13:39.660 --> 00:13:48.000
+por aí vai E cada texto que você Coloca
+Ele vai habilitando opções diferentes No
+
+00:13:48.000 --> 00:13:57.340
+menu Você vai encontrar inclusive Em
+lugares diferentes O mesmo menu Fazendo
+
+00:13:57.340 --> 00:14:02.900
+a mesma coisa Porque tem vários menus de
+contexto aqui Então ferramenta visual
+
+00:14:03.480 --> 00:14:09.300
+Temos também Obsidian tem melhorado isso
+E é fantástico para agilizar ainda mais
+
+00:14:09.300 --> 00:14:15.680
+E você focar no conteúdo Mas olha só
+Aqui sempre armazenando Tudo, tudo, tudo
+
+00:14:15.680 --> 00:14:22.580
+markdown Essa é a preciosidade A cereja
+do bolo dessa ferramenta Que vai
+
+00:14:22.580 --> 00:14:29.460
+permitir Nós termos isso Uma formatação
+Mas termos tudo Como texto para fazer O
+
+00:14:29.460 --> 00:14:35.360
+que bem entender com isso aqui Legal
+então Na próxima aula agora Eu quero
+
+00:14:35.360 --> 00:14:39.740
+trabalhar um pouco com você Como você
+pode melhorar Como você pode fazer agora
+
+00:14:39.740 --> 00:14:44.320
+Para importar notas de outros lugares
+Para dentro do Obsidian Você está
+
+00:14:44.320 --> 00:14:51.400
+perdido aí Você tem um monte de nota
+Você tem um monte de De texto Em
+
+00:14:51.400 --> 00:14:57.040
+diversos lugares diferentes Eu quero te
+mostrar Como você vai agora Trazer tudo
+
+00:14:57.040 --> 00:15:03.320
+para cá Eu tinha mais de 1000 notas Acho
+que cerca de 1500 notas Em outra
+
+00:15:03.320 --> 00:15:09.040
+ferramenta No meu caso era o Evernote E
+eu trouxe tudo para dentro do Obsidian
+
+00:15:09.040 --> 00:15:13.760
+Eu quero te mostrar Como você pode fazer
+isso Para que você use tudo em um lugar
+
+00:15:13.760 --> 00:15:18.160
+só Você tem um monte de ferramenta Um
+monte de lugar separado Um monte de
+
+00:15:18.160 --> 00:15:21.300
+caderno E você pode trazer tudo para
+dentro do Obsidian Tá bom?
+
+00:15:21.500 --> 00:15:23.540
+Até a próxima aula A gente se vê lá Até

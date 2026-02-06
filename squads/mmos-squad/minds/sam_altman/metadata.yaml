@@ -1,0 +1,13 @@
+mind:
+  id: sam_altman
+  display_name: Sam Altman
+  status: completed
+  version: v1.0.0
+  apex_score: 0.0
+  icp_match: medium
+  created_at: '2025-10-12T18:13:56.764001Z'
+  updated_at: '2025-10-12T18:13:54Z'
+  flags:
+    needs_review:
+    - apex_score
+    - icp_match

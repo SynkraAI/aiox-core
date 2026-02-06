@@ -1,0 +1,1790 @@
+WEBVTT
+
+00:00:00.940 --> 00:00:02.020
+Fala, lendário!
+
+00:00:02.120 --> 00:00:07.220
+Nós estamos aqui para mais uma aula e
+nessa aula você vai aprender tudo sobre
+
+00:00:07.220 --> 00:00:08.600
+o gráfico do Obsidia.
+
+00:00:08.780 --> 00:00:15.960
+Ele tem uma ferramenta poderosa que te
+dá acesso a informações visuais.
+
+00:00:16.080 --> 00:00:21.140
+Você vê o seu segundo cérebro sendo
+construído, como que ele foi sendo
+
+00:00:21.140 --> 00:00:22.080
+construído, né?
+
+00:00:22.100 --> 00:00:23.760
+Você tem até uma animação para isso.
+
+00:00:23.980 --> 00:00:28.480
+Mas além dele ser um gráfico para você
+tirar um print e postar nas redes, ele
+
+00:00:28.480 --> 00:00:29.140
+tem recursos.
+
+00:00:29.140 --> 00:00:33.860
+Você pode filtrar, você pode
+incrementar, você pode tomar insights
+
+00:00:33.860 --> 00:00:37.280
+vendo as suas notas visualmente, tá?
+
+00:00:37.440 --> 00:00:42.460
+E nós queremos aqui nessa aula te
+mostrar as melhores práticas e aquilo
+
+00:00:42.460 --> 00:00:49.880
+que dá para fazer com o gráfico sem você
+precisar ficar pesquisando e procurando
+
+00:00:49.880 --> 00:00:53.840
+fontes aí que não vão te trazer, não vão
+te levar a lugar nenhum, né?
+
+00:00:53.980 --> 00:00:56.000
+Então vamos lá pegar o nosso Obsidia.
+
+00:00:56.060 --> 00:00:58.080
+Eu estou aqui com aquele cofre nosso.
+
+00:00:58.080 --> 00:01:02.520
+E o que eu fiz aqui para você usando
+esse mesmo cofre, aquele exercício que
+
+00:01:02.520 --> 00:01:08.060
+você está fazendo aí com as suas notas,
+nesse ponto aqui, você deve ter criado
+
+00:01:08.060 --> 00:01:12.960
+notas, criado tags, propriedades com
+metadados, enfim, você tem evoluído
+
+00:01:12.960 --> 00:01:15.280
+bastante naquilo que você tem feito.
+
+00:01:15.440 --> 00:01:19.640
+E eu joguei aqui dentro desse cofre, e
+vou deixar disponível também aqui na
+
+00:01:19.640 --> 00:01:23.880
+aula, os episódios da vida lendária do
+Alan Nicholas.
+
+00:01:24.180 --> 00:01:27.600
+Então eu peguei os episódios aqui, vou
+até depois conferir.
+
+00:01:28.080 --> 00:01:30.420
+Vê se estão todos aqui mesmo, tá?
+
+00:01:30.640 --> 00:01:40.120
+Eles estão aqui, e com isso o Alan já
+criou alguns links entre as aulas.
+
+00:01:40.590 --> 00:01:48.580
+E eu joguei aqui para não ficar aquele
+cofre nosso sem informações para a gente
+
+00:01:48.580 --> 00:01:49.420
+ver visualmente.
+
+00:01:49.760 --> 00:01:57.180
+Então olha só, agora eu vou pegar aqui o
+nosso gráfico, a ferramenta de gráfico,
+
+00:01:57.180 --> 00:01:59.020
+para você ver como é que estão essas
+informações.
+
+00:01:59.920 --> 00:02:01.680
+Como que eu posso fazer isso?
+
+00:02:01.860 --> 00:02:09.500
+Vamos pegar aqui o Obsidian, ele está
+com o sidebar aqui da minha esquerda,
+
+00:02:09.500 --> 00:02:09.720
+né?
+
+00:02:10.380 --> 00:02:17.180
+Eu tenho a parte aqui dos arquivos, dos
+bookmarks, do filtro, e tenho a barrinha
+
+00:02:17.180 --> 00:02:18.640
+de ícones, lembram?
+
+00:02:18.780 --> 00:02:25.900
+E aqui você tem Open Graph View, que
+você pode acessar também por menus, você
+
+00:02:25.900 --> 00:02:27.160
+pode acessar pelo...
+
+00:02:27.180 --> 00:02:30.820
+Ctrl P ou Cmd P aí na nossa paleta de
+comandos, tá legal?
+
+00:02:31.100 --> 00:02:37.700
+Bom, vou selecionar aqui, ó, e virar
+para a tela o gráfico das nossas notas.
+
+00:02:37.740 --> 00:02:38.980
+Eu vou esconder aqui, né?
+
+00:02:39.020 --> 00:02:47.860
+Vou colocar a lateral aqui, você está
+vendo aí o gráfico com as notas, tá
+
+00:02:47.860 --> 00:02:48.120
+legal?
+
+00:02:48.300 --> 00:02:55.080
+E agora, você vai ver aí, quando você
+clicar no seu, a evolução do seu segundo
+
+00:02:55.080 --> 00:02:57.000
+cérebro, como que as notas estão...
+
+00:02:57.820 --> 00:02:59.460
+se ligando, linkando, né?
+
+00:02:59.480 --> 00:03:03.120
+Isso aqui parece realmente um cérebro,
+as sinapses, né, de um cérebro.
+
+00:03:03.380 --> 00:03:06.740
+Você pode, com o mouse, ó, mexer aqui no
+zoom, né?
+
+00:03:06.940 --> 00:03:11.400
+Você pode também mexer nele aqui, onde
+ele está.
+
+00:03:11.460 --> 00:03:16.760
+Você pode selecionar aqui, ó, uma nota e
+ver as ligações, né?
+
+00:03:16.860 --> 00:03:19.060
+Você pode selecionar qualquer uma aqui,
+tá?
+
+00:03:19.580 --> 00:03:26.980
+Se você selecionar, é, se você apenas
+clicar, né, você vai acessar a nota, tá?
+
+00:03:27.000 --> 00:03:27.120
+Tá legal?
+
+00:03:27.340 --> 00:03:32.000
+Então, se você apenas clicar aqui em
+qualquer uma, você já acessa diretamente
+
+00:03:32.000 --> 00:03:33.360
+a nota, tá bom?
+
+00:03:33.560 --> 00:03:40.280
+Mas, no gráfico aqui, se você, é, é,
+selecionar um nó, né, que é uma nota e
+
+00:03:40.280 --> 00:03:44.420
+você arrastar, você pode movimentar ele,
+tá legal?
+
+00:03:44.760 --> 00:03:51.700
+Então, aqui você vê o gráfico e nós
+temos aqui, né, duas coisas.
+
+00:03:52.000 --> 00:03:54.940
+Você tem a engrenagem que mostra as
+configurações.
+
+00:03:55.300 --> 00:03:56.980
+Vou abrir ela aqui para você ver.
+
+00:03:57.000 --> 00:04:01.220
+Você vê o que a gente consegue fazer com
+o gráfico.
+
+00:04:01.460 --> 00:04:09.500
+Você tem algumas opções, né, que é, é,
+filtro, agrupamento, display e force.
+
+00:04:09.720 --> 00:04:12.520
+Ou seja, tem quatro grupos de
+propriedades aqui.
+
+00:04:12.900 --> 00:04:16.840
+A gente pode pegar aqui a primeira, de
+filtros, né?
+
+00:04:17.400 --> 00:04:23.700
+Deixa eu, deixa eu aumentar um pouquinho
+aqui, ó, deixa eu pegar aqui, aumentei,
+
+00:04:23.700 --> 00:04:26.920
+quando eu digo aumentar, eu aumentei
+aqui na tela.
+
+00:04:27.000 --> 00:04:27.300
+Tá bom?
+
+00:04:29.580 --> 00:04:30.440
+Espera um pouquinho.
+
+00:04:32.040 --> 00:04:36.220
+Vou fechar aqui, abrir de novo, que por
+causa de eu aumentar a tela, ele ficou
+
+00:04:36.220 --> 00:04:36.640
+doidão.
+
+00:04:36.820 --> 00:04:37.560
+Aí, beleza.
+
+00:04:37.840 --> 00:04:38.100
+Aqui.
+
+00:04:38.660 --> 00:04:40.600
+Ó, tá aqui o gráfico.
+
+00:04:41.600 --> 00:04:42.340
+Veja só.
+
+00:04:43.900 --> 00:04:44.400
+Tags.
+
+00:04:44.400 --> 00:04:49.280
+Você pode mostrar aqui no gráfico quais
+são as tags.
+
+00:04:49.440 --> 00:04:56.980
+Se eu colocar, ele vai mostrar, ó, tags
+que estão existentes dentro, é, do meu
+
+00:04:56.980 --> 00:04:56.980
+gráfico.
+
+00:04:57.000 --> 00:04:59.100
+Do meu vault, do meu cofre.
+
+00:04:59.380 --> 00:05:02.400
+Aqui eu mostro, é, arquivos, né?
+
+00:05:02.560 --> 00:05:09.900
+Aqueles, aquelas imagens e, e todo tipo
+de, de coisa que você acrescentar de
+
+00:05:09.900 --> 00:05:10.660
+recurso PDF.
+
+00:05:11.960 --> 00:05:13.940
+Ele mostra no gráfico também.
+
+00:05:15.620 --> 00:05:19.820
+É, aqui é se eu quero mostrar só o que
+tem arquivo, né?
+
+00:05:20.740 --> 00:05:25.000
+Não, geralmente eu não seleciono, porque
+senão eu vou tá vendo apenas notas que
+
+00:05:25.000 --> 00:05:26.280
+possuem arquivos, né?
+
+00:05:26.360 --> 00:05:27.240
+Tá vendo?
+
+00:05:28.140 --> 00:05:32.160
+Ah, e aqui me mostra também órfãos,
+notas que não tem link.
+
+00:05:32.700 --> 00:05:33.260
+Tá?
+
+00:05:33.380 --> 00:05:36.840
+Se eu desmarcar, ele tira aquelas notas
+que não possuem nenhum link.
+
+00:05:37.800 --> 00:05:43.280
+Então essa parte é a parte do que eu
+quero mostrar ou não.
+
+00:05:43.720 --> 00:05:44.280
+Legal?
+
+00:05:46.420 --> 00:05:46.980
+Grupos.
+
+00:05:47.080 --> 00:05:52.640
+Você pode ter, é, divisões separadas.
+
+00:05:52.720 --> 00:05:53.920
+Cores diferentes.
+
+00:05:53.920 --> 00:05:57.900
+Para o seu gráfico, dependendo do que
+você quiser ver.
+
+00:05:58.020 --> 00:06:00.940
+Vou rapidamente mostrar o que que é
+isso.
+
+00:06:01.300 --> 00:06:03.080
+Você coloca aqui, New Group.
+
+00:06:03.320 --> 00:06:04.480
+Ele abre, né?
+
+00:06:04.580 --> 00:06:08.260
+Um, uma caixinha, que é como se fosse
+até uma caixinha de pesquisa.
+
+00:06:08.580 --> 00:06:10.140
+E o que você pode fazer aqui?
+
+00:06:10.220 --> 00:06:16.340
+Quando você clicar aqui em cima, você já
+vai ver que você pode, olha, é, mostrar
+
+00:06:16.340 --> 00:06:20.300
+naquele gráfico com a cor que tá aqui,
+ó, vermelho.
+
+00:06:20.320 --> 00:06:21.680
+Você pode personalizar essa cor.
+
+00:06:21.720 --> 00:06:22.840
+É só clicar aqui em cima, ó.
+
+00:06:22.840 --> 00:06:23.480
+Você escolhe a cor.
+
+00:06:23.740 --> 00:06:23.780
+Tá?
+
+00:06:23.920 --> 00:06:26.600
+Mas eles sempre já sugerem uma cor ali.
+
+00:06:26.980 --> 00:06:31.460
+E você pode escolher uma cor para
+representar os nós ali, que são as
+
+00:06:31.460 --> 00:06:32.220
+notas, né?
+
+00:06:32.240 --> 00:06:32.900
+No gráfico.
+
+00:06:33.960 --> 00:06:42.460
+Você pode, é, criar um grupo e dar uma
+cor específica para, é, um caminho, né?
+
+00:06:42.580 --> 00:06:45.060
+De arquivo, ou seja, uma pasta
+específica.
+
+00:06:46.300 --> 00:06:51.260
+Você pode, é, arquivos que tenham
+determinada coisa no nome, né?
+
+00:06:51.260 --> 00:06:54.000
+Dar uma cor específica para eles.
+
+00:06:54.520 --> 00:06:57.460
+Você pode dar uma cor específica para
+tags.
+
+00:06:57.920 --> 00:07:00.900
+Ou seja, sabe aquelas tags que você
+aprendeu naquela outra aula?
+
+00:07:01.080 --> 00:07:04.000
+Eu quero só ver as notas que são resumos
+de livro.
+
+00:07:04.260 --> 00:07:07.920
+Você vai lá e coloca tudo que é resumo
+de livro na cor vermelha.
+
+00:07:08.580 --> 00:07:10.820
+Ele vai apenas dar aquela cor.
+
+00:07:10.900 --> 00:07:14.780
+Ele não vai excluir as outras notas, tá
+bom?
+
+00:07:14.880 --> 00:07:18.260
+Você não tá fazendo aqui uma pesquisa e
+mostrando só arquivo, tá bom?
+
+00:07:18.260 --> 00:07:21.340
+Line é uma palavra mesmo.
+
+00:07:21.580 --> 00:07:25.900
+Olha, quero todas as notas que possuem
+uma frase aqui, uma palavra, né?
+
+00:07:26.160 --> 00:07:31.100
+Na, na, na, palavras chaves dentro das
+notas, né?
+
+00:07:31.400 --> 00:07:38.440
+E você pode também, é, também sessões
+que são headlines, né?
+
+00:07:38.500 --> 00:07:45.520
+Que são, aí, aquelas sessões onde você
+colocou o hashtag que tem um cabeçalho,
+
+00:07:45.620 --> 00:07:45.800
+né?
+
+00:07:45.920 --> 00:07:48.180
+Então, você pode pegar essas sessões.
+
+00:07:48.180 --> 00:07:52.120
+Palavras chaves que façam parte desses
+readings, né?
+
+00:07:52.600 --> 00:07:55.860
+E também property que você aprendeu em
+outras aulas passadas.
+
+00:07:55.880 --> 00:08:00.420
+Você pode também mostrar com uma cor
+específica notas que tem uma determinada
+
+00:08:00.420 --> 00:08:01.060
+propriedade.
+
+00:08:01.220 --> 00:08:01.840
+Percebeu?
+
+00:08:01.880 --> 00:08:04.740
+Você tem uma gama de possibilidades
+aqui.
+
+00:08:04.960 --> 00:08:08.880
+Então, agora nós temos aqui as notas do
+Vida Vendária.
+
+00:08:09.020 --> 00:08:13.440
+Nós vamos criar alguns filtros aqui pra
+vocês verem essas cores diferentes.
+
+00:08:14.480 --> 00:08:16.280
+Vamos pegar, por exemplo, ó.
+
+00:08:16.280 --> 00:08:17.480
+Vou selecionar Line.
+
+00:08:18.400 --> 00:08:20.060
+Deixa eu deixar o gráfico aqui, ó.
+
+00:08:20.300 --> 00:08:23.640
+Vamos pegar, ele já posicionou do jeito
+que eu tenho que escrever ali.
+
+00:08:23.760 --> 00:08:29.700
+Vamos pegar notas que o Alan tenha
+colocado e falado sobre filosofia.
+
+00:08:29.760 --> 00:08:32.040
+Ó, já ficou a cor diferente ali, ó.
+
+00:08:32.060 --> 00:08:32.320
+Tá vendo?
+
+00:08:34.240 --> 00:08:43.460
+Agora, é, vamos pegar e vamos usar,
+vamos ver se o Alan falou, utilizou a
+
+00:08:43.460 --> 00:08:45.860
+palavra decisões.
+
+00:08:47.440 --> 00:08:49.040
+Nós temos que tomar decisões.
+
+00:08:49.120 --> 00:08:51.060
+Ah lá, já ficou amarelo algumas notas,
+olha só.
+
+00:08:51.980 --> 00:08:57.360
+Vamos, por exemplo, pegar notas que ele
+tenha falado alguma coisa sobre mente.
+
+00:08:58.120 --> 00:08:59.520
+Né, vai ficar a cor verdinha.
+
+00:08:59.580 --> 00:09:01.060
+Ah lá, já ficou umas notas ali, ó.
+
+00:09:01.100 --> 00:09:01.360
+Tá vendo?
+
+00:09:02.380 --> 00:09:05.220
+Isso será que eu escutei os podcasts ou
+não, hein?
+
+00:09:05.320 --> 00:09:07.740
+Já sei de cada palavra que o Alan fala
+ali.
+
+00:09:08.140 --> 00:09:10.040
+Então, olha só, já ficou com as cores
+diferentes.
+
+00:09:10.160 --> 00:09:12.960
+Você pode fazer isso com agrupamentos,
+tá legal?
+
+00:09:13.120 --> 00:09:15.600
+Então, grupo é toda essa possibilidade
+que você tem.
+
+00:09:15.600 --> 00:09:24.220
+Display e Forces é como esse gráfico vai
+aparecer pra você, tá legal?
+
+00:09:25.260 --> 00:09:31.120
+Primeiramente aqui, é sobre a parte de
+visualização, não comportamento,
+
+00:09:31.140 --> 00:09:31.760
+visualização.
+
+00:09:32.700 --> 00:09:39.920
+Aqui é o quanto as suas notas você vai
+ter que aproximar pra ver o nome das
+
+00:09:39.920 --> 00:09:40.440
+notas.
+
+00:09:40.480 --> 00:09:46.120
+Ó, aqui ó, se eu diminuo o zoom, ele vai
+ficando só nó.
+
+00:09:46.700 --> 00:09:55.960
+Se eu mexer nisso aqui, ó, ele vai, né,
+mostrando o nome da nota, ou seja, aqui
+
+00:09:55.960 --> 00:09:57.980
+eu já consigo ver os nomes das notas, tá
+vendo?
+
+00:09:59.220 --> 00:10:04.640
+Se eu quiser precisar dar um zoom maior
+pra ver o nome das notas, ó, tá vendo?
+
+00:10:05.040 --> 00:10:07.100
+Eu vou mexendo nisso aqui, ó.
+
+00:10:07.140 --> 00:10:11.440
+E aí, ó, ó, eu preciso aproximar muito
+pra ver o nome das notas.
+
+00:10:11.780 --> 00:10:12.180
+Tá?
+
+00:10:12.180 --> 00:10:19.200
+Então, aqui você vai conseguindo mexer
+nessa parte que vai mostrar o nome das
+
+00:10:19.200 --> 00:10:19.700
+notas.
+
+00:10:19.740 --> 00:10:20.420
+Então, olha só.
+
+00:10:20.660 --> 00:10:22.240
+Olha só como é que ficou aqui, ó.
+
+00:10:23.180 --> 00:10:23.580
+Tá?
+
+00:10:24.940 --> 00:10:26.320
+Ah, vamos lá.
+
+00:10:26.460 --> 00:10:27.200
+Que mais?
+
+00:10:28.600 --> 00:10:35.300
+Note Size é aquele nozinho ali, aquele
+redondinho da nota.
+
+00:10:35.520 --> 00:10:39.040
+Ó, ele vai ficar grande ou pequeno.
+
+00:10:39.240 --> 00:10:41.240
+Você pode escolher o tamanho aqui, ó.
+
+00:10:42.180 --> 00:10:43.560
+E o legal é que ele salva isso aqui, tá?
+
+00:10:43.620 --> 00:10:46.860
+Então, você vai ficar com as
+configurações toda vez que você abrir o
+
+00:10:46.860 --> 00:10:48.640
+gráfico, vai mostrar isso pra você.
+
+00:10:49.680 --> 00:11:01.280
+Ah, aqui, a terceira opção é o quanto
+aquele traçado, né, do link, ele é forte
+
+00:11:01.280 --> 00:11:02.020
+ou não.
+
+00:11:02.220 --> 00:11:02.760
+Olha só.
+
+00:11:03.020 --> 00:11:04.680
+Se quer mais forte, deixa aqui.
+
+00:11:05.120 --> 00:11:08.500
+Se quer mais fraco, vai deixando aqui,
+mais ou menos.
+
+00:11:08.580 --> 00:11:09.460
+Ó, aqui fica legal, ó.
+
+00:11:10.440 --> 00:11:10.860
+Tá?
+
+00:11:10.860 --> 00:11:11.520
+Olha só.
+
+00:11:12.820 --> 00:11:19.360
+E ele tem também, né, aqui em cima, ó,
+na parte de seta, ele mostra a setinha
+
+00:11:19.360 --> 00:11:24.380
+de onde tá partindo o link, né?
+
+00:11:24.460 --> 00:11:27.320
+Então, por exemplo, ó, vocês viram que
+aqui a setinha, ó, tá aqui.
+
+00:11:28.000 --> 00:11:32.020
+Então, o link é de lá pra cá, pra essa
+nota aqui, entendeu?
+
+00:11:32.340 --> 00:11:35.460
+Então, é mais ou menos isso que ele
+tenta mostrar ali, ó.
+
+00:11:35.580 --> 00:11:37.000
+Estão todos com as setinhas aqui.
+
+00:11:38.280 --> 00:11:41.020
+Eu, sinceramente, gosto só de ver o
+traçadinho.
+
+00:11:41.020 --> 00:11:43.440
+Isso não polui demais ali a setinha.
+
+00:11:44.000 --> 00:11:44.640
+Beleza?
+
+00:11:44.700 --> 00:11:51.440
+Então, isso é a parte de visualização
+ali do quanto você quer ver o nome das
+
+00:11:51.440 --> 00:11:53.660
+notas ou não, esse tipo de coisa.
+
+00:11:54.500 --> 00:12:02.100
+Agora, você tem a última camada aqui de
+opções, né, que aí vai dizer o
+
+00:12:02.100 --> 00:12:05.600
+comportamento desse gráfico em relação
+ao seguinte, olha.
+
+00:12:05.840 --> 00:12:13.560
+O quanto isso aqui, ó, esse center
+force, o quanto ele vai aproximar, vai
+
+00:12:13.560 --> 00:12:19.400
+criar um gráfico mais compacto, redondo,
+circular, ou não.
+
+00:12:19.480 --> 00:12:21.340
+Ele vai separar, ó, né?
+
+00:12:21.420 --> 00:12:29.660
+Ele vai ter essa força de mandar pra
+longe do centro, tá?
+
+00:12:30.000 --> 00:12:35.860
+Quanto maior aqui, mais circular, ó,
+mais homogêneo ali, ó.
+
+00:12:36.940 --> 00:12:39.500
+Mas olha só, você não percebe.
+
+00:12:39.500 --> 00:12:44.560
+Muito bem a divisão dos grupos de notas
+ali.
+
+00:12:44.640 --> 00:12:48.080
+Então, você vai ver que aqui, ó, eu já
+começo a separar, entendeu?
+
+00:12:48.280 --> 00:12:54.200
+Você vai vendo, né, você consegue ver
+visualmente grupos, né, em redor de uma
+
+00:12:54.200 --> 00:12:55.740
+determinada ideia.
+
+00:12:58.500 --> 00:13:06.000
+Aqui, o segundo, né, na minha versão
+aqui em inglês, né, o repel force, ou
+
+00:13:06.000 --> 00:13:15.260
+força de repulsão, é o quanto um nó
+manda outros nós longe dele, tá?
+
+00:13:15.380 --> 00:13:19.920
+Então, você vê que aqui, ó, os nós, eles
+se distanciam, tá?
+
+00:13:20.060 --> 00:13:28.420
+Então, você vai ver ainda mais, ó, essa
+questão de ideias, notas longes umas das
+
+00:13:28.420 --> 00:13:29.240
+outras, tá?
+
+00:13:29.540 --> 00:13:36.170
+Então, é basicamente isso daí, uma força
+de repulsão ou proximidade, óbvio.
+
+00:13:36.170 --> 00:13:40.530
+Os nós, eles ficam mais próximos uns dos
+outros.
+
+00:13:40.770 --> 00:13:43.810
+E aqui, separa, ó.
+
+00:13:44.610 --> 00:13:50.390
+Então, ele vai trabalhar muito com o
+centro de força lá, né, o compacto ou
+
+00:13:50.390 --> 00:13:50.630
+não.
+
+00:13:50.730 --> 00:13:56.990
+E esse de separar os nós também, pra
+você ver as ideias, né, flutuando ao
+
+00:13:56.990 --> 00:13:57.930
+redor uma da outra.
+
+00:13:59.190 --> 00:14:04.330
+Link force é como se fosse, tá, um
+elástico.
+
+00:14:04.950 --> 00:14:06.150
+E, ó, aqui, ó.
+
+00:14:06.150 --> 00:14:10.130
+Aqui, você tem um elástico, ou ele tá
+bem esticado, ou ele tá bem curto.
+
+00:14:10.290 --> 00:14:12.170
+Olha lá as ideias, ó.
+
+00:14:12.690 --> 00:14:14.310
+Por exemplo, pega aqui, ó.
+
+00:14:14.490 --> 00:14:21.410
+Você pega as ideias e você mexe, você
+vai ver ele se distanciar, ou ele ficar
+
+00:14:21.410 --> 00:14:26.210
+mais próximo, né, esse elástico, ele ser
+esticado ou não.
+
+00:14:26.850 --> 00:14:29.490
+Aqui, eu entrei numa nota, né, vou
+voltar aqui.
+
+00:14:30.530 --> 00:14:31.390
+Então, olha só.
+
+00:14:32.670 --> 00:14:36.130
+E aí, você tem o último, que é a
+distância.
+
+00:14:36.150 --> 00:14:38.490
+A distância do link, o comprimento do
+link, tá.
+
+00:14:38.770 --> 00:14:45.090
+Então, aí, você pode vir aqui, ó, de um
+link mais curto até um link grandão.
+
+00:14:45.390 --> 00:14:52.550
+E com a combinação dessas configurações,
+ó, com a combinação delas, é que você
+
+00:14:52.550 --> 00:15:01.390
+vai formar o seu gráfico bonitão, aí,
+para visualizar e poder ter insights ou
+
+00:15:01.390 --> 00:15:06.030
+não, de acordo, aí, com o movimento, aí,
+da sua...
+
+00:15:06.030 --> 00:15:10.370
+das suas notas, né, de todos os links,
+aí, tá legal?
+
+00:15:10.830 --> 00:15:13.090
+E isso daqui, gente, sabe o que é
+importante?
+
+00:15:13.350 --> 00:15:14.770
+Sabe o que é legal?
+
+00:15:15.450 --> 00:15:22.350
+Aqui, ó, baseado, né, em todas essas
+possibilidades, você ainda tem aqui,
+
+00:15:22.490 --> 00:15:24.530
+também, a pesquisa.
+
+00:15:24.530 --> 00:15:32.010
+Que, então, você pode ver, né, notas,
+também daquele jeito que você cria
+
+00:15:32.010 --> 00:15:36.010
+grupos, você pode também pesquisar e
+filtrar nesse gráfico.
+
+00:15:36.010 --> 00:15:42.750
+Olha, eu quero ver somente, né, no meu
+gráfico, determinadas notas.
+
+00:15:42.790 --> 00:15:48.250
+Ou eu quero excluir do meu gráfico
+determinadas notas.
+
+00:15:48.310 --> 00:15:50.230
+Eu posso excluir também, né.
+
+00:15:50.530 --> 00:15:52.030
+Querem ver um exemplo?
+
+00:15:52.710 --> 00:15:54.930
+Vou mostrar para vocês aqui na prática.
+
+00:15:55.070 --> 00:16:03.170
+Olha, a gente selecionando aqui, ó, tem
+aquela menu aqui, né, a parte de pastas,
+
+00:16:03.190 --> 00:16:08.050
+onde eu tenho aqui, eu tenho anexos, os
+episódios da vida lendária, eu joguei
+
+00:16:08.050 --> 00:16:13.470
+tudo em uma pasta, eu tenho aqui
+palestras, e eu tenho outras notas que a
+
+00:16:13.470 --> 00:16:14.210
+gente foi criando.
+
+00:16:14.530 --> 00:16:19.410
+Aqui, eu posso dizer o seguinte, olha,
+eu quero arquivos que só tenham o nome
+
+00:16:19.410 --> 00:16:27.570
+tal, a tag, enfim, notas que tenham
+determinadas palavras, propriedades,
+
+00:16:27.990 --> 00:16:33.210
+headlines, mas vou pegar aqui, por
+exemplo, path, que são as pastas.
+
+00:16:34.290 --> 00:16:36.330
+Ele vai pedir para que eu escolha, ó.
+
+00:16:36.350 --> 00:16:39.310
+Ele vai mostrar todas as pastas que você
+tem no seu cofre.
+
+00:16:39.510 --> 00:16:44.410
+Eu vou dizer aqui que eu quero ver só a
+pasta episódios vida lendária.
+
+00:16:44.610 --> 00:16:45.530
+Ó, ele trouxe.
+
+00:16:46.230 --> 00:16:47.830
+Agora, olha um segredo.
+
+00:16:47.850 --> 00:16:56.030
+Imagine que você tem uma pasta, e é uma
+pasta de coisas que estão poluindo o seu
+
+00:16:56.030 --> 00:16:56.450
+gráfico.
+
+00:16:57.470 --> 00:17:01.590
+Você vai ver, por exemplo, uma pasta que
+você guardou lá um monte de coisa, mas
+
+00:17:01.590 --> 00:17:06.110
+ela está poluindo o gráfico, e aí você
+quer excluir.
+
+00:17:06.230 --> 00:17:11.530
+Você simplesmente faz aqui a pesquisa,
+ó, mostra, está mostrando só a pasta
+
+00:17:11.530 --> 00:17:12.210
+vida lendária.
+
+00:17:12.370 --> 00:17:18.190
+Se eu vier aqui antes do path, vou botar
+um sinal de menos, ó, o que ele está
+
+00:17:18.190 --> 00:17:18.550
+fazendo?
+
+00:17:18.730 --> 00:17:23.750
+Ele está dizendo que mostra no gráfico
+tudo menos essa pasta.
+
+00:17:23.990 --> 00:17:26.090
+Aí ele mostrou só aquelas notas minhas,
+estão vendo?
+
+00:17:26.470 --> 00:17:29.470
+Aquelas notas que a gente tinha criado
+aqui nesse cofre de teste.
+
+00:17:30.150 --> 00:17:30.890
+Olha só.
+
+00:17:30.890 --> 00:17:32.070
+Isso aqui é salvo.
+
+00:17:32.090 --> 00:17:35.330
+Se você salvar, quando você abrir de
+novo, vai estar desse jeito.
+
+00:17:35.530 --> 00:17:37.750
+E você pode acrescentar mais, tá?
+
+00:17:39.810 --> 00:17:40.890
+Mais filtros aqui.
+
+00:17:41.130 --> 00:17:46.010
+Então, você pode compor aí um filtro
+múltiplo aí, que vai ajudar bastante.
+
+00:17:46.290 --> 00:17:47.130
+Então, vou excluir aqui.
+
+00:17:48.150 --> 00:17:50.270
+Voltou a mostrar tudo, tá bom?
+
+00:17:50.750 --> 00:17:56.790
+Essa questão do menos aí, o sinalzinho
+de menos no gráfico, é algo que...
+
+00:17:56.790 --> 00:17:58.350
+Nossa, sempre pergunto.
+
+00:17:58.350 --> 00:18:01.790
+Então, aqui na aula você já está matando
+essa dúvida aí, tá bom?
+
+00:18:02.710 --> 00:18:04.990
+O que é legal aqui você perceber também?
+
+00:18:05.130 --> 00:18:08.930
+Você vai perceber que, se você pega uma
+determinada nota...
+
+00:18:08.930 --> 00:18:11.670
+Vamos abrir, por exemplo, essa nota
+aqui, ó.
+
+00:18:12.530 --> 00:18:18.170
+O vida lendária que o Alan fala sobre o
+efeito composto, né?
+
+00:18:18.650 --> 00:18:20.810
+O que vai acontecer?
+
+00:18:21.030 --> 00:18:27.710
+Você pode estar em uma nota e querer ver
+o gráfico só dessa nota.
+
+00:18:27.710 --> 00:18:30.350
+E aí, você tem a opção de fazer isso
+como?
+
+00:18:30.530 --> 00:18:33.970
+Você tem a opção de vir aqui, ó, nos
+três pontinhos aqui da nota.
+
+00:18:34.330 --> 00:18:42.330
+Vai ter aqui, Open Linked View, Open
+Local Graph, tá?
+
+00:18:43.430 --> 00:18:47.530
+Ou você pode, então, estando lá ainda no
+gráfico, né?
+
+00:18:47.670 --> 00:18:51.830
+Vamos imaginar que você pegou aquela
+determinada nota.
+
+00:18:52.170 --> 00:18:53.850
+Vamos pegar essa aqui, ó, a beira do
+abismo.
+
+00:18:54.050 --> 00:18:56.790
+Quero ver o gráfico local dessa nota.
+
+00:18:56.790 --> 00:18:59.190
+Você pode vir também com o botão
+direito.
+
+00:19:00.050 --> 00:19:02.970
+E aqui também vai ter, nessa própria
+nota, né?
+
+00:19:03.350 --> 00:19:05.430
+Open Local Graph.
+
+00:19:05.710 --> 00:19:07.550
+Ó, o gráfico local, né?
+
+00:19:07.690 --> 00:19:08.730
+O que vai acontecer?
+
+00:19:08.970 --> 00:19:09.770
+Ele vai vir aqui.
+
+00:19:10.530 --> 00:19:11.750
+Olha o que ele vai fazer.
+
+00:19:11.930 --> 00:19:12.350
+Vamos lá.
+
+00:19:12.450 --> 00:19:16.810
+Vou explicar para você aqui o que você
+pode fazer em qualquer nota, tá?
+
+00:19:17.510 --> 00:19:21.770
+Ele vai abrir, aqui do meu lado
+esquerdo, a nota que eu estou.
+
+00:19:21.990 --> 00:19:26.090
+E do lado direito, o gráfico dessa nota.
+
+00:19:26.090 --> 00:19:26.890
+Tá legal?
+
+00:19:27.490 --> 00:19:30.250
+Então, o que que vai acontecer, né?
+
+00:19:30.330 --> 00:19:31.210
+O que que vai acontecer?
+
+00:19:31.430 --> 00:19:35.550
+Deixa eu mandar mais para cá, para você
+ver o gráfico aqui.
+
+00:19:37.030 --> 00:19:38.350
+O que que vai acontecer?
+
+00:19:38.550 --> 00:19:41.690
+Ele vai mostrar aqui os links, né?
+
+00:19:42.290 --> 00:19:46.170
+Dessa nota da beira do abismo com as
+outras notas.
+
+00:19:46.210 --> 00:19:48.810
+E o que que vai ter de opção aqui, ó?
+
+00:19:48.890 --> 00:19:53.430
+Você vai ter de opção aqui nessa
+engrenagem os mesmos critérios.
+
+00:19:53.430 --> 00:19:54.830
+Você vai ter filtros.
+
+00:19:55.530 --> 00:19:57.910
+Então, você pode filtrar, né?
+
+00:19:57.950 --> 00:20:00.710
+Tudo aquilo que eu já mostrei para você
+ali na outra aula.
+
+00:20:00.850 --> 00:20:02.450
+Ver os links, né?
+
+00:20:02.510 --> 00:20:06.870
+Sejam links que vem e que saem dessa
+nota, tá?
+
+00:20:08.610 --> 00:20:10.890
+Você pode ver tags, tudo mais.
+
+00:20:11.270 --> 00:20:15.310
+Aqui tem uma questão de profundidade.
+
+00:20:15.450 --> 00:20:16.730
+O que que significa isso?
+
+00:20:16.990 --> 00:20:22.530
+Aqui ele está mostrando somente os links
+que estão nessa nota.
+
+00:20:23.830 --> 00:20:24.510
+Agora...
+
+00:20:24.510 --> 00:20:29.750
+Quando você avança na profundidade, por
+exemplo, a profundidade 2, eu vou dizer
+
+00:20:29.750 --> 00:20:30.150
+o seguinte.
+
+00:20:30.310 --> 00:20:35.910
+Eu quero ver notas que estão linkadas a
+essa nota.
+
+00:20:36.090 --> 00:20:43.050
+E eu quero também ver os links que estão
+nas notas que estão linkadas com essa
+
+00:20:43.050 --> 00:20:43.350
+nota.
+
+00:20:43.530 --> 00:20:46.730
+Ou seja, eu quero ver, por exemplo, se
+essa nota aqui de destino, ó.
+
+00:20:46.810 --> 00:20:48.190
+Essa aqui, tem algum link.
+
+00:20:48.410 --> 00:20:50.650
+Então, eu vou para a profundidade 2.
+
+00:20:50.890 --> 00:20:52.030
+Olha lá o que aconteceu.
+
+00:20:52.030 --> 00:20:57.830
+Ele trouxe as notas que se linkam com as
+notas, né?
+
+00:20:57.910 --> 00:20:59.750
+Que estão linkadas aqui, ó.
+
+00:20:59.770 --> 00:21:02.210
+Então, por exemplo, tem essa nota aqui,
+ó.
+
+00:21:02.250 --> 00:21:03.670
+Que se linka, né?
+
+00:21:03.770 --> 00:21:04.850
+Entre elas aqui, ó.
+
+00:21:05.030 --> 00:21:07.150
+E aí você avança na profundidade.
+
+00:21:07.890 --> 00:21:12.870
+Geralmente a profundidade 2 já é legal
+para você ver onde que essa ideia está
+
+00:21:12.870 --> 00:21:13.670
+linkando ali.
+
+00:21:13.730 --> 00:21:17.030
+Você pode criar os agrupamentos aqui
+também.
+
+00:21:17.210 --> 00:21:19.010
+Quando você vai aumentando a
+profundidade, ó.
+
+00:21:19.070 --> 00:21:20.090
+Aí já aumenta muito, ó.
+
+00:21:20.350 --> 00:21:21.990
+O 3, por exemplo, ó.
+
+00:21:22.030 --> 00:21:22.530
+Ó.
+
+00:21:22.690 --> 00:21:24.430
+Já está muito grande, entendeu?
+
+00:21:24.830 --> 00:21:27.830
+Geralmente gráfico local, profundidade 2
+é bem legal.
+
+00:21:28.010 --> 00:21:30.410
+Já dá para você trabalhar um monte de
+coisa.
+
+00:21:30.790 --> 00:21:32.970
+E aí você pode ter aqui, ó.
+
+00:21:33.050 --> 00:21:34.110
+Depois de filtro, né?
+
+00:21:34.210 --> 00:21:36.150
+Os agrupamentos, normal.
+
+00:21:37.210 --> 00:21:40.970
+Você pode ter a parte de display igual.
+
+00:21:41.830 --> 00:21:44.510
+O mesmo tipo de configuração.
+
+00:21:44.950 --> 00:21:51.330
+E aqui aquele mesmo tipo de configuração
+também de como você quer ver o gráfico,
+
+00:21:51.330 --> 00:21:51.470
+tá?
+
+00:21:51.470 --> 00:21:53.150
+Ó, você quer ver aqui a proximidade.
+
+00:21:53.610 --> 00:21:57.350
+Você quer ver a coisa homogênea aqui.
+
+00:21:57.470 --> 00:21:59.330
+Ou quer ver o distanciamento.
+
+00:21:59.930 --> 00:22:01.930
+Então ele vai te ajudando, né?
+
+00:22:01.970 --> 00:22:03.290
+A verificar isso.
+
+00:22:03.810 --> 00:22:04.290
+Tá?
+
+00:22:05.110 --> 00:22:07.590
+Isso aqui que eu falei para vocês que
+tem um autor.
+
+00:22:07.850 --> 00:22:13.590
+Que ele pega as notas e ele coloca tags
+nas notas, né?
+
+00:22:13.630 --> 00:22:16.410
+Ele coloca lá, por exemplo, problema e
+desejo.
+
+00:22:16.510 --> 00:22:19.450
+E aí ele pega uma nota aqui que tem...
+
+00:22:20.490 --> 00:22:21.790
+Falando de um problema.
+
+00:22:22.030 --> 00:22:28.330
+E ele consegue ver aquela nota de
+problema com quais notas que são desejo
+
+00:22:28.330 --> 00:22:29.750
+elas se relacionam.
+
+00:22:29.830 --> 00:22:34.670
+Então quando ele bate o olho aqui e vê o
+link das notas.
+
+00:22:34.670 --> 00:22:39.470
+Ele consegue gerar insights na cabeça
+dele simplesmente com isso, tá?
+
+00:22:39.550 --> 00:22:43.390
+Então não é só um gráfico aí bonito de
+tirar print.
+
+00:22:43.950 --> 00:22:49.330
+E é viciante essa coisa de você ver esse
+gráfico aqui sendo montado.
+
+00:22:49.330 --> 00:22:50.610
+Se você pegar, né?
+
+00:22:50.690 --> 00:22:53.650
+Vamos tirar aqui, por exemplo, do
+gráfico local, né?
+
+00:22:53.990 --> 00:22:57.370
+Vamos trazer de novo aqui o gráfico
+geral.
+
+00:22:57.750 --> 00:22:59.010
+Quando você vem aqui.
+
+00:23:00.350 --> 00:23:03.370
+Aqui naquela parte de...
+
+00:23:03.990 --> 00:23:04.510
+É...
+
+00:23:05.450 --> 00:23:06.850
+Aqui eu estou em filtro, né?
+
+00:23:06.990 --> 00:23:09.190
+Vou pegar aqui, agrupamento não.
+
+00:23:09.330 --> 00:23:09.750
+Display.
+
+00:23:10.310 --> 00:23:14.250
+Se você vier aqui no display e der
+animate, né?
+
+00:23:14.350 --> 00:23:14.970
+Uma animação.
+
+00:23:15.010 --> 00:23:17.790
+Ele vai mostrar para você essa animação
+aí, ó.
+
+00:23:18.770 --> 00:23:22.610
+Como o seu segundo cérebro foi sendo
+construído.
+
+00:23:22.970 --> 00:23:25.210
+Isso aí que o Allan várias vezes, né?
+
+00:23:25.510 --> 00:23:26.930
+Postou e fez a galera pirar.
+
+00:23:27.410 --> 00:23:29.090
+Que é como as ideias dele, né?
+
+00:23:29.670 --> 00:23:30.670
+Foram se linkando.
+
+00:23:30.830 --> 00:23:31.630
+E você vai fazer o mesmo.
+
+00:23:31.810 --> 00:23:33.390
+Você vai pegar aqui suas ideias.
+
+00:23:33.390 --> 00:23:35.990
+Vai mostrar como é que o seu segundo
+cérebro...
+
+00:23:35.990 --> 00:23:36.590
+Você vai postar lá.
+
+00:23:36.650 --> 00:23:39.050
+Como que o meu segundo cérebro está
+sendo construído.
+
+00:23:39.230 --> 00:23:40.930
+E aí você posta um gráfico desse.
+
+00:23:41.070 --> 00:23:42.070
+O pessoal pira, né, meu?
+
+00:23:42.110 --> 00:23:43.610
+Como assim o segundo cérebro?
+
+00:23:43.730 --> 00:23:46.930
+Parecem realmente neurônios e sinapses.
+
+00:23:46.930 --> 00:23:48.670
+O pessoal não acredita, né?
+
+00:23:48.730 --> 00:23:51.110
+E não entende como isso daí vai
+acontecendo.
+
+00:23:51.430 --> 00:23:52.650
+Então, olha só que legal.
+
+00:23:52.850 --> 00:23:56.230
+Isso aqui é muito importante você também
+dominar.
+
+00:23:56.450 --> 00:24:00.150
+Para que você consiga a todo momento,
+né?
+
+00:24:00.290 --> 00:24:01.690
+Ver o seu gráfico.
+
+00:24:01.770 --> 00:24:02.290
+Eu...
+
+00:24:02.290 --> 00:24:05.750
+Só falta eu comentar aqui que se você
+vier aqui, né?
+
+00:24:05.830 --> 00:24:10.890
+Na barrinha, no sidebar da sua direita,
+tá?
+
+00:24:11.090 --> 00:24:14.170
+E você arrastar o gráfico aqui.
+
+00:24:14.370 --> 00:24:16.910
+Você pode ter o gráfico aqui.
+
+00:24:16.910 --> 00:24:19.110
+No seu sidebar direito, tá?
+
+00:24:19.210 --> 00:24:20.350
+A mesma coisa.
+
+00:24:20.510 --> 00:24:23.470
+Mas daí já vai acontecer naturalmente,
+né?
+
+00:24:23.510 --> 00:24:24.150
+Deixa eu fechar aqui.
+
+00:24:24.250 --> 00:24:24.810
+Eu vou tirar daqui.
+
+00:24:25.930 --> 00:24:30.770
+Já vai acontecer naturalmente se você
+selecionar um arquivo, né?
+
+00:24:31.530 --> 00:24:36.350
+E você selecionar o gráfico local dele.
+
+00:24:37.030 --> 00:24:40.390
+Já vai vir, claro, para a sua esquerda,
+né?
+
+00:24:40.570 --> 00:24:46.630
+Então significa que você pode sempre
+trabalhar com o gráfico aqui.
+
+00:24:47.230 --> 00:24:47.770
+Ó.
+
+00:24:48.290 --> 00:24:51.130
+Você pode deixar o gráfico fixo aqui.
+
+00:24:51.710 --> 00:24:53.650
+E trabalhar com as suas notas.
+
+00:24:53.650 --> 00:24:57.630
+E para cada nota ele já vai mostrar o
+gráfico ali.
+
+00:24:57.830 --> 00:24:58.370
+Olha que legal.
+
+00:24:58.650 --> 00:24:59.070
+Tá?
+
+00:25:00.070 --> 00:25:04.030
+Mas a gente tem muita coisa ainda para
+evoluir.
+
+00:25:04.130 --> 00:25:09.530
+Eu quero que você agora pegue esse
+conceito.
+
+00:25:10.130 --> 00:25:11.470
+Veja nas suas notas.
+
+00:25:11.470 --> 00:25:13.610
+No seu cofre que você está construindo
+aí.
+
+00:25:13.710 --> 00:25:14.230
+Vai lá.
+
+00:25:14.310 --> 00:25:15.430
+Faz a animação acontecer.
+
+00:25:16.330 --> 00:25:18.530
+Veja como que essas notas estão
+linkadas.
+
+00:25:18.830 --> 00:25:25.850
+Faz o experimento de pegar cada um
+desses aqui que você viu eu usar na
+
+00:25:25.850 --> 00:25:26.130
+aula.
+
+00:25:26.910 --> 00:25:27.570
+Experimenta ele.
+
+00:25:28.070 --> 00:25:28.590
+Configura.
+
+00:25:28.670 --> 00:25:29.650
+Bota tags.
+
+00:25:30.150 --> 00:25:31.290
+Vai mostrando.
+
+00:25:31.310 --> 00:25:34.030
+Cria agrupamento diferente com as suas
+notas.
+
+00:25:34.530 --> 00:25:38.270
+Dá uma boa utilizada nessa ferramenta.
+
+00:25:38.330 --> 00:25:41.550
+Para que você, além de ver aqui na aula
+do que é possível.
+
+00:25:42.790 --> 00:25:44.410
+Você consiga já utilizar.
+
+00:25:44.410 --> 00:25:46.350
+Ver benefício.
+
+00:25:46.390 --> 00:25:49.170
+E praticar para conhecer todo esse menu
+aqui.
+
+00:25:49.250 --> 00:25:51.770
+Dominar a ferramenta como ninguém.
+
+00:25:52.230 --> 00:25:52.350
+Tá?
+
+00:25:52.470 --> 00:25:53.190
+Vamos fazer isso?
+
+00:25:54.430 --> 00:25:58.090
+Isso aqui é o suficiente para você
+dominar essa ferramenta.
+
+00:25:58.090 --> 00:26:00.050
+Dominar essa questão do gráfico como
+ninguém.
+
+00:26:00.310 --> 00:26:00.590
+Tá?
+
+00:26:00.790 --> 00:26:03.390
+E agora eu vou na próxima aula.
+
+00:26:03.510 --> 00:26:07.030
+Fazer com que você que já está
+construindo o segundo cérebro.
+
+00:26:07.130 --> 00:26:09.290
+Que já está construindo tudo na
+ferramenta.
+
+00:26:09.430 --> 00:26:12.410
+Você tenha muita produtividade.
+
+00:26:12.410 --> 00:26:15.390
+Muita produtividade na ferramenta.
+
+00:26:15.390 --> 00:26:17.190
+Você tenha realmente produtividade.
+
+00:26:17.350 --> 00:26:21.670
+Coisas que vão fazer você acelerar essa
+parte de tirar notas.
+
+00:26:21.670 --> 00:26:22.470
+Pegar notas.
+
+00:26:22.470 --> 00:26:23.550
+Criar notas.
+
+00:26:23.550 --> 00:26:24.610
+Relacionar notas.
+
+00:26:24.650 --> 00:26:25.890
+Você tenha produtividade.
+
+00:26:26.170 --> 00:26:28.770
+Você está com uma ferramenta que
+justamente é para você ganhar
+
+00:26:28.770 --> 00:26:30.310
+produtividade.
+
+00:26:30.490 --> 00:26:33.630
+Eu vou aos poucos aumentar o conceito.
+
+00:26:33.810 --> 00:26:35.190
+Aumentar a consciência.
+
+00:26:35.370 --> 00:26:39.350
+Porque o segundo cérebro.
+
+00:26:39.470 --> 00:26:41.150
+Gestão de conhecimento.
+
+00:26:41.150 --> 00:26:42.710
+É um mundo.
+
+00:26:42.890 --> 00:26:43.930
+É um universo.
+
+00:26:44.390 --> 00:26:45.430
+É um mundo a parte.
+
+00:26:45.590 --> 00:26:51.410
+Tem coisas que nós vamos poder ficar
+evoluindo aqui muito e muito tempo.
+
+00:26:51.670 --> 00:26:54.450
+E você daí vai de acordo com o seu
+nível.
+
+00:26:54.550 --> 00:26:55.410
+A sua necessidade.
+
+00:26:55.930 --> 00:26:58.050
+Avançando conforme a gente for avançar
+aqui.
+
+00:26:58.250 --> 00:27:00.610
+Mas o importante é que você aqui.
+
+00:27:00.790 --> 00:27:01.730
+Nesse curso.
+
+00:27:01.870 --> 00:27:02.450
+Nessas aulas.
+
+00:27:02.470 --> 00:27:04.550
+Vai poder ir do básico.
+
+00:27:04.590 --> 00:27:06.470
+Que você já está dominando inclusive.
+
+00:27:06.830 --> 00:27:10.750
+Já está fazendo aí muito mais do que
+muita gente que começa a aprender.
+
+00:27:10.750 --> 00:27:13.150
+A conhecer sobre o segundo cérebro.
+
+00:27:13.250 --> 00:27:14.910
+Só que você vai aqui avançar.
+
+00:27:15.290 --> 00:27:16.370
+Para realmente.
+
+00:27:17.230 --> 00:27:19.150
+Muito e muito muito conhecimento.
+
+00:27:19.150 --> 00:27:20.470
+Que vai fazer com que você.
+
+00:27:21.770 --> 00:27:22.330
+Utilize.
+
+00:27:22.470 --> 00:27:24.150
+Na sua área de aprendizado.
+
+00:27:24.150 --> 00:27:25.290
+Na sua profissão.
+
+00:27:25.750 --> 00:27:28.130
+Com as inteligências artificiais.
+
+00:27:28.190 --> 00:27:29.770
+Nós vamos potencializar isso.
+
+00:27:30.810 --> 00:27:31.610
+Assim gente.
+
+00:27:31.830 --> 00:27:32.670
+Tem aqui material.
+
+00:27:33.050 --> 00:27:34.970
+Que não é exagero.
+
+00:27:34.990 --> 00:27:35.950
+Quando eu falo que.
+
+00:27:36.170 --> 00:27:37.950
+Você vai em questão.
+
+00:27:38.310 --> 00:27:40.070
+De horas.
+
+00:27:40.070 --> 00:27:41.850
+Que você está fazendo esse curso aqui.
+
+00:27:42.590 --> 00:27:43.110
+Evoluir.
+
+00:27:43.110 --> 00:27:44.730
+O que seria necessário.
+
+00:27:44.830 --> 00:27:45.350
+Anos.
+
+00:27:45.530 --> 00:27:47.010
+Caso você fosse aprender.
+
+00:27:47.450 --> 00:27:48.230
+Na marra.
+
+00:27:48.610 --> 00:27:49.210
+Na unha.
+
+00:27:49.290 --> 00:27:49.630
+Tá bom.
+
+00:27:49.890 --> 00:27:51.330
+Então até a próxima aula.
+
+00:27:51.390 --> 00:27:52.230
+Que nós vamos aí.
+
+00:27:52.450 --> 00:27:54.450
+Entrar nesse mundo de produtividade.
+
+00:27:54.970 --> 00:27:55.770
+Para que você.
+
+00:27:56.750 --> 00:27:58.090
+Não perca tempo.
+
+00:27:58.310 --> 00:27:58.570
+Você.
+
+00:27:59.470 --> 00:28:00.670
+Invista realmente tempo.
+
+00:28:00.790 --> 00:28:02.010
+Que vai ser aproveitado.
+
+00:28:02.050 --> 00:28:03.130
+E aproveitado muito bem.
+
+00:28:03.250 --> 00:28:04.490
+Até a próxima aula lendário.
+
+00:28:04.650 --> 00:28:04.730
+Até a próxima aula lendário.

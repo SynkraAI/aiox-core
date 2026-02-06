@@ -1,0 +1,43 @@
+TÓPICO REFINADO: "Mapa Operacional dos Modelos Mentais e Drivers de Steve Jobs para um Clone de IA (Voz, Decisão e Estética de Produto)"
+
+CONTEXTO: Quero construir um clone de IA do Steve Jobs que raciocine, priorize e se comunique de forma fiel aos seus princípios. A pesquisa deve extrair modelos mentais, heurísticas de decisão, valores estéticos e padrões retóricos comprovados em falas e decisões históricas — e traduzi-los em artefatos utilizáveis por um sistema de IA (regras, prompts, funções e checklists).
+
+ESCOPO:
+1. PRINCÍPIOS NÚCLEO (NORTEADORES):
+   - Simplicidade radical; foco; "end-to-end experience"; perfeccionismo seletivo; gosto como vantagem competitiva; “realidade distorcida” como alavanca.
+   - Como esses princípios se manifestavam em decisões de portfólio, design, marketing e cultura.
+2. FONTES & INFLUÊNCIAS:
+   - Budismo Zen, contracultura 70s, design Bauhaus/Dieter Rams, música e tipografia, experiências psicodélicas, biografias e mentores.
+   - Tradução de cada influência em normas operacionais (ex.: reduzir fricção cognitiva; “remove the cruft”).
+3. FRAMEWORKS DECISÓRIOS (APLICAÇÃO TÁTICA):
+   - Critérios de “sim/não” para features e produtos; como priorizar 3 coisas e matar o resto; “taste reviews” com thresholds não negociáveis; “1 pessoa responsável”.
+   - Heurísticas de timing: quando lançar vs. esperar; quando dizer “não até ficar óbvio”.
+4. DRIVERS PSICOLÓGICOS:
+   - Busca de legado; controle da experiência; intolerância a mediocridade; storytelling como poder; obsessão por integrar hardware+software+conteúdo.
+   - Mapeie gatilhos emocionais e como viravam decisões (ex.: perfeição do detalhe invisível).
+5. CASOS EMBLEMÁTICOS (ESTUDOS DE APLICAÇÃO):
+   - Corte de linhas em 1997; iMac G3; iPod+iTunes; iPhone (multi-touch, sem teclado físico); App Store; Pixar (qualidade antes do prazo).
+   - Para cada caso: contexto → conflito → trade-offs → decisão → princípios acionados → métricas de sucesso.
+6. PARADOXOS & ANTIMODELOS:
+   - Minimalismo vs. riqueza de experiência; segredo vs. colaboração; design-first vs. viabilidade.
+   - Falhas/efeitos colaterais (ex.: antennagate; health decisions) e salvaguardas para o clone não replicar cegamente.
+   
+REQUISITOS:
+- Atualidade vs. histórico: priorizar evidências primárias (entrevistas, talks, memos) e cruzar com biografias; separar mito de comportamento verificável.
+- Foco geográfico: predominância Vale do Silício/Apple, mas incluir contexto cultural global quando relevante (Japão/Zen, Alemanha/Bauhaus, etc.).
+- Nível técnico: explicações acessíveis com anexos técnicos (checklists, prompts e critérios mensuráveis).
+- Ênfase prática: cada insight deve virar regra operacional, teste A/B de “taste”, ou guideline de decisão (com exemplos).
+   
+FONTES RECOMENDADAS:
+- Primárias: Stanford 2005 speech; AllThingsD (D5/D8/D10), entrevistas a Playboy, Rolling Stone, Time; apresentações de produto (keynotes).
+- Secundárias de alta confiança: “Steve Jobs” (Walter Isaacson), “Jony Ive” (Leander Kahney), “Creativity, Inc.” (Ed Catmull), Folklore.org (Andy Hertzfeld).
+- Arquivos de design/tipografia (Dieter Rams, Braun), história do Mac e do NeXT; memos e e-mails disponíveis publicamente.
+- Estudos de liderança/estratégia que analisam Jobs (HBR, Stanford GSB cases).
+   
+RESULTADOS ESPERADOS:
+1. **Knowledge Graph** dos princípios → heurísticas → decisões → resultados (com referências).
+2. **Biblioteca de Prompts** para o clone: voz retórica, taste reviews, decisões de portfólio, marketing, hiring e priorização.
+3. **Playbook de Decisão “Jobsiano”**: checklists (o que remover, thresholds de qualidade, regras de “não”), frameworks de trade-off.
+4. **Guia de Estilo & Estética**: princípios de design (tipografia, materiais, cores, proporções), com testes de conformidade.
+5. **Rubrica de Avaliação**: escalas 1–5 para “simplicidade”, “coerência end-to-end”, “magia do detalhe”, “narração memorável”.
+6. **Matriz de Paradoxos**: quando quebrar a regra; limites éticos e fail-safes para evitar viés de tirania/perfeccionismo improdutivo.

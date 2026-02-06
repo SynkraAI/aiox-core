@@ -1,0 +1,50 @@
+---
+mind:
+  name: "José Amorim"
+  slug: "jose_amorim"
+  type: "greenfield"
+  status: "blocked"
+  created_at: "2025-10-15"
+
+special_case:
+  type: "private_individual"
+  reason: "Non-public person - requires interview-based workflow"
+  standard_mmos_applicable: false
+  blocking_issue: "No public sources available"
+  requires_new_workflow: true
+
+archetype:
+  primary: "private_individual"
+  note: "New archetype - not in standard taxonomy"
+
+pipeline:
+  version: "3.0"
+  methodology: "DNA Mental™ (modified for private individuals)"
+  workflow_status: "awaiting_po_design"
+
+phases:
+  viability:
+    status: "blocked"
+    apex_score: null
+    icp_match: null
+    note: "Standard APEX not applicable - needs private individual criteria"
+  research:
+    status: "blocked"
+    sources_collected: 0
+    note: "Cannot use web scraping - needs interview protocol"
+  analysis:
+    status: "pending"
+    confidence: null
+  synthesis:
+    status: "pending"
+  implementation:
+    status: "pending"
+  testing:
+    status: "pending"
+    note: "Will require direct person validation"
+
+next_actions:
+  - "Schedule PO meeting to design private individual workflow"
+  - "Create interview protocol templates"
+  - "Define modified viability criteria"
+  - "Document privacy & consent requirements"

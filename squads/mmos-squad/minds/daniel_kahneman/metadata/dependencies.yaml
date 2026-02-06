@@ -1,0 +1,414 @@
+# Dependencies Map - Daniel Kahneman Clone
+# Generated: 2025-10-07
+# Purpose: Map all dependencies for MMOS pipeline execution
+
+mind_name: Daniel Kahneman
+pipeline_mode: greenfield
+created_at: 2025-10-07
+
+# ============================================
+# FRAMEWORK DEPENDENCIES
+# ============================================
+
+mmos_framework:
+  version: "3.0"
+  methodology: "DNA Mental™ 8-Layer"
+  required_phases:
+    - viability_assessment
+    - research_collection
+    - cognitive_analysis
+    - synthesis_compilation
+    - system_prompt_creation
+    - mind_validation
+
+  human_checkpoints: 6
+  checkpoint_phases:
+    - viability (Phase 1) - ✅ COMPLETE
+    - layer_6_validation (Phase 3)
+    - layer_7_validation (Phase 3)
+    - layer_8_validation (Phase 3)
+    - system_prompt_review (Phase 5)
+    - production_approval (Phase 6)
+
+# ============================================
+# LLM TARGET DEPENDENCIES
+# ============================================
+
+llm_target:
+  primary: "Claude (Anthropic)"
+  model: "claude-sonnet-4.5 or higher"
+  context_window: "200K tokens (minimum)"
+
+  required_capabilities:
+    - long_context_understanding
+    - nuanced_personality_encoding
+    - paradox_navigation (Layer 8 support)
+    - style_fidelity_preservation
+    - research_synthesis
+
+  optimal_for:
+    - Complex personality clones
+    - Multi-layer cognitive architecture
+    - Behavioral economics domain
+    - Academic rigor + accessibility balance
+
+  fallback_options:
+    - GPT-4 (OpenAI) - solid alternative
+    - Gemini Pro (Google) - experimental
+
+# ============================================
+# SOURCE DEPENDENCIES
+# ============================================
+
+source_dependencies:
+
+  critical_sources:
+    tier_1_books:
+      - title: "Thinking, Fast and Slow"
+        author: "Daniel Kahneman"
+        year: 2011
+        status: required
+        priority: HIGHEST
+        reason: "Primary source - comprehensive worldview"
+        format: "Book (500+ pages)"
+        availability: widely_available
+
+      - title: "Noise: A Flaw in Human Judgment"
+        author: "Daniel Kahneman, Olivier Sibony, Cass R. Sunstein"
+        year: 2021
+        status: required
+        priority: HIGH
+        reason: "Recent framework, late-career insights"
+        format: "Book"
+        availability: widely_available
+
+      - title: "Judgment under Uncertainty: Heuristics and Biases"
+        editor: "Daniel Kahneman, Paul Slovic, Amos Tversky"
+        year: 1982
+        status: required
+        priority: HIGH
+        reason: "Foundational research compilation"
+        format: "Academic anthology"
+        availability: library_or_purchase
+
+    tier_1_papers:
+      - title: "Prospect Theory: An Analysis of Decision Under Risk"
+        authors: "Daniel Kahneman, Amos Tversky"
+        year: 1979
+        journal: "Econometrica"
+        status: required
+        priority: HIGHEST
+        reason: "Nobel Prize-winning work"
+        availability: open_access
+
+      - title: "Judgment under Uncertainty: Heuristics and Biases"
+        authors: "Amos Tversky, Daniel Kahneman"
+        year: 1974
+        journal: "Science"
+        status: required
+        priority: HIGH
+        reason: "Foundational heuristics paper"
+        availability: open_access
+
+  nice_to_have:
+    tier_2_interviews:
+      - "The Knowledge Project (Farnam Street) - Episode #68"
+      - "Conversations with Tyler - Episode 56"
+      - "Hidden Brain (NPR) - Think Fast interview"
+      - "Masters in Business (Barry Ritholtz)"
+      - "On Being (Krista Tippett)"
+      - "Additional 12+ podcast appearances"
+
+    tier_2_books:
+      - "Choices, Values, and Frames (2000, with Tversky)"
+      - "Well-Being: Foundations of Hedonic Psychology (1999)"
+
+    tier_3_validation:
+      - "Nobel Prize lecture and biography"
+      - "TED Talks and conference videos"
+      - "Princeton obituary and tributes"
+      - "Academic CV and publication list"
+
+  minimum_requirements:
+    total_sources: 15
+    high_confidence_sources: 5
+    source_type_diversity: 3
+    temporal_coverage: "1970s-2024"
+
+    status: ✅ EXCEEDED
+    actual:
+      total_sources: "50+"
+      high_confidence: "5+ books + Nobel papers"
+      types: "books, interviews, papers, videos (4 types)"
+      temporal: "1969-2024 (55 years)"
+
+# ============================================
+# TECHNICAL DEPENDENCIES
+# ============================================
+
+technical_dependencies:
+
+  required_tools:
+    - name: "MMOS Mind Mapper framework"
+      version: "3.0"
+      purpose: "Pipeline orchestration"
+
+    - name: "Claude Code or equivalent LLM interface"
+      purpose: "Content processing and synthesis"
+
+    - name: "Text processing tools"
+      purpose: "PDF extraction, transcript generation"
+      libraries:
+        - pypdf2 (book processing)
+        - whisper (audio transcription if needed)
+        - markdown processors
+
+    - name: "YAML/Markdown processors"
+      purpose: "Artifact generation and storage"
+
+  optional_tools:
+    - name: "RAG system"
+      purpose: "Knowledge base integration"
+      status: optional
+
+    - name: "Fine-tuning infrastructure"
+      purpose: "If deploying as fine-tuned model"
+      status: optional
+
+  apis:
+    required: []
+    optional:
+      - "Podcast API (for transcript retrieval)"
+      - "Academic paper API (JSTOR, Google Scholar)"
+
+  storage_requirements:
+    source_files: "~2GB (books, transcripts, papers)"
+    artifacts: "~100MB (YAML, Markdown outputs)"
+    system_prompts: "~50KB per variant"
+    total_estimated: "~2.2GB"
+
+# ============================================
+# HUMAN DEPENDENCIES
+# ============================================
+
+human_dependencies:
+
+  subject_matter_expert:
+    required: no
+    reason: "Kahneman's work is well-documented and self-contained"
+    optional: "Behavioral economics expert for validation (Phase 6)"
+
+  domain_reviewer:
+    required: no
+    reason: "Strong source material allows self-validation"
+    optional: "Cognitive psychology professor for Layer 6-8 validation"
+
+  testing_participants:
+    required: yes
+    count: "3-5 testers"
+    profiles:
+      - "Behavioral economics student (knowledge test)"
+      - "General audience member (accessibility test)"
+      - "Kahneman reader (fidelity test)"
+    purpose: "Blind testing for fidelity validation (Phase 6)"
+
+  stakeholder_approvals:
+    - role: "User (GO/NO-GO decisions at checkpoints)"
+      required: yes
+      checkpoints: 6
+      status: "1/6 complete (viability approved)"
+
+# ============================================
+# TIMELINE DEPENDENCIES
+# ============================================
+
+timeline_dependencies:
+
+  blocking_phases:
+    - phase: "Phase 2 (Research)"
+      blocks: ["Phase 3 (Analysis)"]
+      reason: "Cannot analyze sources before collecting them"
+
+    - phase: "Phase 3 (Analysis)"
+      blocks: ["Phase 4 (Synthesis)"]
+      reason: "Cannot synthesize cognitive architecture before extracting layers"
+
+    - phase: "Phase 4 (Synthesis)"
+      blocks: ["Phase 5 (Implementation)"]
+      reason: "Cannot compile system prompt before synthesizing frameworks"
+
+    - phase: "Phase 5 (Implementation)"
+      blocks: ["Phase 6 (Validation)"]
+      reason: "Cannot test system prompt before creating it"
+
+  parallel_opportunities:
+    research_phase:
+      - "Book processing can run parallel across multiple books"
+      - "Interview transcription can run parallel across podcasts"
+      - "Paper extraction can run parallel with books"
+
+    analysis_phase:
+      - "Layers 1-4 (observable) can extract in parallel"
+      - "Layer 5 (mental models) can start during Layers 1-4"
+
+    synthesis_phase:
+      - "Framework extraction parallel with KB chunking"
+      - "Communication templates parallel with signature phrase mining"
+
+    validation_phase:
+      - "Personality, knowledge, style tests can run parallel"
+
+  estimated_timeline:
+    phase_1_viability: "1 hour (✅ COMPLETE)"
+    phase_2_research: "2-3 hours"
+    phase_3_analysis: "3-4 hours"
+    phase_4_synthesis: "1-2 hours"
+    phase_5_implementation: "1-2 hours"
+    phase_6_validation: "1 hour"
+    total_wall_time: "8-12 hours (with parallelization)"
+
+    without_parallelization: "15-20 hours"
+    parallelization_savings: "40-50%"
+
+# ============================================
+# INTEGRATION POINTS
+# ============================================
+
+integration_points:
+
+  memory_layer:
+    enabled: optional
+    use_case: "Store viability assessments for comparative analysis"
+    collection: "mmos_viability"
+    benefits:
+      - "Query similar minds for pattern reuse"
+      - "Track pipeline performance over time"
+      - "Build knowledge base of successful patterns"
+
+  rag_system:
+    enabled: optional
+    use_case: "Deploy KB chunks for context retrieval"
+    vector_db: "Pinecone, Weaviate, or similar"
+    chunk_strategy: "Semantic chunking by topic"
+    benefits:
+      - "Dynamic context injection based on user query"
+      - "Scalable knowledge retrieval"
+      - "Supports longer knowledge bases"
+
+  fine_tuning:
+    enabled: optional
+    use_case: "Create dedicated Kahneman model"
+    approach: "LoRA fine-tuning on synthesized dataset"
+    benefits:
+      - "Deeper personality encoding"
+      - "Lower inference costs"
+      - "Offline deployment option"
+
+    challenges:
+      - "Requires training infrastructure"
+      - "Less flexible than prompt-based approach"
+      - "Version updates more complex"
+
+# ============================================
+# RISK DEPENDENCIES
+# ============================================
+
+risk_dependencies:
+
+  source_availability:
+    risk: "Books or papers unavailable"
+    probability: LOW
+    mitigation: "All critical sources widely available (bestsellers, open-access papers)"
+
+  processing_capacity:
+    risk: "Token limits exceeded during processing"
+    probability: LOW
+    mitigation: "Chunking strategy, batched processing, 200K context window"
+
+  fidelity_achievement:
+    risk: "Cannot reach 94% fidelity target"
+    probability: LOW
+    mitigation: "Exceptional source quality, rigorous validation, Layer 8 paradoxes"
+
+  human_checkpoint_delays:
+    risk: "User unavailable for checkpoints"
+    probability: MEDIUM
+    mitigation: "Clear checkpoint scheduling, async workflow, pause/resume capability"
+
+  complexity_management:
+    risk: "Academic depth overwhelming casual users"
+    probability: MEDIUM
+    mitigation: "Synthesis phase creates accessible templates, progressive complexity"
+
+# ============================================
+# SUCCESS DEPENDENCIES
+# ============================================
+
+success_dependencies:
+
+  must_have:
+    - "Thinking, Fast and Slow processed completely"
+    - "All 8 layers extracted with triangulation"
+    - "Layer 6, 7, 8 human validation passed"
+    - "System prompt compiled with all layers integrated"
+    - "Fidelity ≥94% achieved"
+    - "All 6 human checkpoints completed"
+
+  should_have:
+    - "Noise framework integrated"
+    - "Prospect Theory paper processed"
+    - "Key interviews transcribed"
+    - "Specialist recommendations generated"
+    - "Operational manual created"
+
+  nice_to_have:
+    - "All 17+ interviews processed"
+    - "Secondary books included"
+    - "TED talks and videos analyzed"
+    - "Specialist variants implemented"
+    - "RAG system deployed"
+
+# ============================================
+# RESOURCE DEPENDENCIES
+# ============================================
+
+resource_dependencies:
+
+  compute_resources:
+    llm_api_access: "Claude Sonnet 4.5 or higher"
+    context_window: "200K tokens minimum"
+    estimated_api_cost: "$20-30 USD"
+
+  time_resources:
+    analyst_time: "8-12 hours (wall time)"
+    user_time: "2-3 hours (checkpoint decisions)"
+    total_project_time: "10-15 hours"
+
+  knowledge_resources:
+    domain_expertise: "Not required (self-contained sources)"
+    technical_expertise: "MMOS framework familiarity"
+    validation_expertise: "Optional (behavioral economics expert for review)"
+
+# ============================================
+# NOTES
+# ============================================
+
+notes:
+  - "Deceased status (March 2024) means no new primary content, but existing material is exceptional"
+  - "Layer 8 (Paradoxes) is critical - differentiates authentic clone from robotic consistency"
+  - "Triangulation mandatory for Layers 5-8 to ensure accuracy"
+  - "Clear AI disclosure required - respectful legacy handling"
+  - "Thinking, Fast and Slow is the anchor source - process first and thoroughly"
+  - "Collaboration with Tversky must be properly credited throughout"
+  - "Target 94% fidelity is achievable given source quality"
+  - "Parallel processing opportunities can reduce wall time by 40-50%"
+
+# ============================================
+# VERSION HISTORY
+# ============================================
+
+version_history:
+  - version: "1.0"
+    date: "2025-10-07"
+    changes: "Initial dependencies map generated post-viability GO decision"
+    status: "Active"

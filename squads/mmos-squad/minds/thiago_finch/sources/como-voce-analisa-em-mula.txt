@@ -1,0 +1,2 @@
+QUESTION: """Como você analisa em mulambo ou outlier? como vai analisar meu estilo? como vai saber o estilo?"""
+ANSWER: """Envie uma imagem e darei o veredito se é um mulambo ou outlier."""

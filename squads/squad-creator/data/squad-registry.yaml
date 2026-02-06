@@ -1,0 +1,127 @@
+# Squad Registry
+# Purpose: Central registry of all squads in the AIOS ecosystem
+# Usage: Load on squad-creator activation to check for duplicates and understand ecosystem
+# Updated: 2026-02-01
+
+metadata:
+  version: "2.0.0"
+  last_updated: "2026-02-01"
+  maintainer: "squad-creator"
+  description: "Registry for squads installed in this AIOS instance"
+  # Totals (updated by *refresh-registry)
+  total_squads: 1
+  total_agents: 2
+  total_tasks: 12
+  total_checklists: 8
+  total_workflows: 3
+  total_templates: 10
+
+# ============================================================================
+# SQUADS BY DOMAIN
+# ============================================================================
+
+squads:
+  # --------------------------------------------------------------------------
+  # META & FRAMEWORKS
+  # --------------------------------------------------------------------------
+  squad-creator:
+    path: "squads/squad-creator/"
+    domain: "meta"
+    purpose: "Create new squads for any domain"
+    keywords: ["squad", "create", "new", "domain", "expansion"]
+    agents: 2
+    tasks: 12
+    workflows: 3
+    checklists: 8
+    highlights:
+      - "Mind research loop"
+      - "Validation system"
+      - "Quality gates"
+    example_use: "Create a finance squad"
+    is_meta: true
+
+# ============================================================================
+# DOMAIN INDEX (for quick lookup)
+# ============================================================================
+
+domain_index:
+  squad_creation: "squad-creator"
+  new_squad: "squad-creator"
+  meta: "squad-creator"
+
+# ============================================================================
+# GAP ANALYSIS (domains without squads)
+# ============================================================================
+
+gaps:
+  - domain: "copywriting"
+    keywords: ["copywriting", "sales", "ads", "email", "landing page"]
+    potential_minds: ["Gary Halbert", "Eugene Schwartz", "David Ogilvy"]
+    priority: "high"
+
+  - domain: "finance"
+    keywords: ["finance", "investment", "trading", "portfolio", "stocks"]
+    potential_minds: ["Warren Buffett", "Ray Dalio", "Howard Marks"]
+    priority: "high"
+
+  - domain: "health"
+    keywords: ["health", "medical", "wellness", "fitness", "nutrition"]
+    potential_minds: ["Andrew Huberman", "Peter Attia", "Rhonda Patrick"]
+    priority: "medium"
+
+  - domain: "sales"
+    keywords: ["sales", "negotiation", "closing", "B2B", "enterprise"]
+    potential_minds: ["Zig Ziglar", "Grant Cardone", "Jeb Blount"]
+    priority: "high"
+
+  - domain: "legal"
+    keywords: ["legal", "law", "contract", "compliance", "tax"]
+    potential_minds: []
+    priority: "medium"
+
+  - domain: "databases"
+    keywords: ["database", "SQL", "migration", "schema", "postgres"]
+    potential_minds: []
+    priority: "medium"
+
+  - domain: "security"
+    keywords: ["security", "cybersecurity", "pentest", "audit", "OWASP"]
+    potential_minds: []
+    priority: "medium"
+
+# ============================================================================
+# QUALITY REFERENCES (patterns to follow)
+# ============================================================================
+
+quality_references:
+  - pattern: "mind_clone_agents"
+    description: "Agents based on real experts with documented frameworks"
+    requirements:
+      - "inspiration_sources with primary works"
+      - "vocabulary.always_use verified in output_examples"
+      - "Real framework references"
+
+  - pattern: "multi_phase_pipeline"
+    description: "Complex workflows with multiple phases and checkpoints"
+    requirements:
+      - "Human checkpoints for validation"
+      - "State management between phases"
+      - "Comprehensive troubleshooting docs"
+
+  - pattern: "safety_first_technical"
+    description: "Technical squads with safety-first approach"
+    requirements:
+      - "Backup procedures"
+      - "Dry-run capabilities"
+      - "Rollback mechanisms"
+
+# ============================================================================
+# NAMING CONVENTIONS
+# ============================================================================
+
+conventions:
+  squad_folder: "kebab-case"  # e.g., squad-creator, db-sage
+  agent_files: "kebab-case.md"  # e.g., gary-halbert.md
+  task_files: "kebab-case.md"  # e.g., create-sales-page.md
+  config_name: "must match folder"  # config.yaml name = folder name
+  slashPrefix: "camelCase"  # e.g., squadCreator, dbSage

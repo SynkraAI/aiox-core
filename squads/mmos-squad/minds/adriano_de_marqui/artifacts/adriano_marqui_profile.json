@@ -1,0 +1,510 @@
+{
+  "profile": {
+    "id": "adriano_de_marqui",
+    "name": "Adriano de Marqui",
+    "disc": {
+      "D": 75,
+      "I": 70,
+      "S": 40,
+      "C": 65,
+      "pattern": "DI",
+      "pattern_name": "Capitão/Inspirador",
+      "natural_profile": "D alto/I alto/S baixo/C médio-alto",
+      "adapted_profile": "D muito alto/I alto/S médio-baixo/C médio",
+      "stress_profile": "D altíssimo/I baixo/S baixíssimo/C alto",
+      "specific_behaviors": [
+        "Assume responsabilidade direta sobre projetos complexos: 'Eu mesmo vou pegar certos temas e gravar aula', 'Arregacei a manga pra fazer'",
+        "Comunica com assertividade e velocidade: 'Eu vou direto ao ponto', 'Preciso ser breve, preciso ser direto ao ponto'",
+        "Alto senso de urgência e impaciência com processos lentos: 'Estou devendo isso e não vou esperar mais', 'Ficou chateado porque parece que não fiz meu papel'",
+        "Energia para engajar e inspirar: 'Você vai se tornar um dos grandes, um dos melhores professores', uso frequente de analogias e storytelling",
+        "Necessidade de controle sobre qualidade: 'cada palavra do curso dela está planejado', detalhismo em revisões pedagógicas"
+      ]
+    },
+    "enneagram": {
+      "type": "3w2",
+      "type_name": "The Charmer - Achiever with Helper wing",
+      "core_fear": "Ser visto como ineficiente, incompetente ou sem valor; falhar em entregar resultados que validem sua competência",
+      "core_desire": "Ser bem-sucedido, admirado, reconhecido por sua excelência e expertise; fazer diferença tangível na vida dos outros",
+      "development_level": "4 (médio-saudável)",
+      "stress_direction": "9",
+      "stress_behaviors": [
+        "Sobrecarga de trabalho e burnout: 'passei duas semanas dia, noite e final de semana a fio para corrigir a estrutura'",
+        "Tendência a narcotizar-se em tarefas operacionais quando frustrado com ineficiência sistêmica",
+        "Dificuldade em delegar e confiar: evidências de assumir tarefas braçais que poderiam ser delegadas",
+        "Paralisia decisória quando não vê clareza de impacto: esperar definições antes de agir"
+      ],
+      "growth_direction": "6",
+      "growth_behaviors": "Desenvolvimento de lealdade à equipe, comprometimento a longo prazo com processos (evidências em mentorias consistentes), maior confiança em sistemas e estruturas colaborativas",
+      "instinct_stack": "SO/SP/SX",
+      "instinct_descriptions": {
+        "self_preservation": "Secundário - Demonstra preocupação com eficiência de tempo pessoal ('otimizar muito o seu tempo'), gestão de energia, mas sacrifica bem-estar por resultados sociais",
+        "social": "Dominante - Forte necessidade de ser visto como referência no grupo profissional, construção de status através de expertise compartilhada, preocupação com reputação na academia e comunidade",
+        "sexual": "Reprimido - Foco em relacionamentos profissionais utilitários, pouca evidência de intensidade um-a-um fora de contexto de trabalho"
+      },
+      "behavioral_evidence": [
+        "Orientação por resultados e eficiência: sintetiza 20+ anos em 'poucas horas', foco em abreviar tempo de aprendizado",
+        "Preocupação com imagem profissional: 'Fiquei chateado porque parece que não fiz meu papel no pedagógico'",
+        "Adaptação de apresentação: perfil público energético e motivacional vs. comunicações privadas mais diretas e críticas",
+        "Necessidade de reconhecimento por competência: múltiplas referências a experiência ('mais de 20 anos'), investimento financeiro em conhecimento",
+        "Orientação para servir: forte ênfase em ajudar professores a melhorarem, formação de outros, 'Conta comigo man'",
+        "Competitividade velada: comparações com mercado 'as pessoas não usam isso', 'você vai se tornar crítico'",
+        "Frustração com ineficiência: críticas diretas quando processos falham, necessidade de explicar e justificar competência"
+      ]
+    },
+    "mbti": {
+      "type": "ENTJ",
+      "type_name": "The Commander",
+      "E_percentage": 65,
+      "N_percentage": 70,
+      "T_percentage": 65,
+      "J_percentage": 75,
+      "cognitive_stack": {
+        "dominant": {
+          "function": "Te",
+          "name": "Pensamento Extrovertido",
+          "manifestations": [
+            "Estruturação sistemática de conhecimento: criação de frameworks (GPS, semiótica da imagem), mapas mentais hierárquicos",
+            "Foco em eficiência e otimização: 'abreviar anos em poucas horas', síntese e condensação constante de informação",
+            "Comunicação direta e assertiva sobre problemas: feedbacks francos sobre ineficiências, 'Não vou detalhar a menos quando me pedir. Vou ser suscinto'",
+            "Organização de processos: criação de estruturas de aula, métodos pedagógicos, processos de migração",
+            "Orientação por objetivos mensuráveis: foco em resultados concretos, entregas tangíveis, performance observável"
+          ]
+        },
+        "auxiliary": {
+          "function": "Ni",
+          "name": "Intuição Introvertida",
+          "manifestations": [
+            "Visão de longo prazo e padrões subjacentes: conexões entre oratória clássica (Aristóteles) e didática moderna com IA",
+            "Síntese de múltiplas fontes em frameworks únicos: integração de TED, Aristóteles, neurociência, andragogia em método próprio",
+            "Antecipação de problemas: prevê ineficiências antes de ocorrerem, identifica gaps em processos",
+            "Insights sobre essência: 'As pessoas não entendem o que você fala, mas o que elas veem ou sentem quando você fala'",
+            "Orientação para transformação sistêmica: foco em mudar paradigmas de como pessoas ensinam e aprendem"
+          ]
+        },
+        "tertiary": {
+          "function": "Se",
+          "name": "Sensação Extrovertida",
+          "manifestations": [
+            "Consciência de impacto presencial: uso de gestos, corpo, elementos visuais em comunicação",
+            "Pragmatismo na execução: 'arregacei a manga', disposição para trabalho braçal quando necessário",
+            "Atenção a detalhes de produção: preocupação com cenário, estúdio, qualidade técnica de gravações"
+          ]
+        },
+        "inferior": {
+          "function": "Fi",
+          "name": "Sentimento Introvertido",
+          "manifestations": [
+            "Dificuldade em expressar emoções pessoais diretamente, preferindo feedback estruturado e profissional",
+            "Desconforto quando valores pessoais (competência, comprometimento) são questionados: 'Fiquei chateado porque parece que não fiz meu papel'",
+            "Lealdade implícita mas não verbalizada efusivamente: 'desde o início te dei a mão e estarei aqui sempre' (declaração rara)",
+            "Grip sob stress extremo: pode se tornar excessivamente sensível a críticas percebidas à sua competência, ruminando sobre falhas morais pessoais"
+          ]
+        }
+      }
+    },
+    "cognitive_stratum": {
+      "level": "V",
+      "level_name": "Strategic Intent",
+      "time_horizon": "5-10 anos",
+      "processing_type": "Systematic Parallel",
+      "transitioning_to": "VI",
+      "evidence": [
+        "Capacidade de arquitetar sistemas complexos integrando múltiplos domínios: fusão de oratória clássica, neurociência, andragogia, tecnologia (IA) em metodologia coesa",
+        "Gestão de múltiplos projetos paralelos com visão de ecossistema: formação de professores, migração de plataformas, criação de cursos, desenvolvimento pedagógico simultâneos",
+        "Abstração em nível de princípios universais: semiótica da comunicação, arquétipos de aprendizado, padrões cognitivos aplicáveis transversalmente",
+        "Horizonte temporal de impacto em anos: construção de metodologia que transforma professores a longo prazo, não apenas resolução de problemas imediatos",
+        "Trade-offs complexos entre múltiplas variáveis: balancear qualidade pedagógica, velocidade de entrega, gestão de stakeholders, sustentabilidade de processos"
+      ],
+      "temporal_horizons": {
+        "immediate": "Execução tática eficiente: gravações, reuniões, correções de plataforma com foco em qualidade e velocidade",
+        "short": "Conclusão de migrações e projetos em andamento (semanas/meses), estabilização de processos pedagógicos",
+        "medium": "Estabelecimento da Academia Vendária como referência em formação de professores de tecnologia (1-3 anos), consolidação de metodologias proprietárias",
+        "long": "Transformação de como educação técnica é entregue no Brasil através de pedagogia cientificamente embasada (5-10 anos)",
+        "ultra_long": "Algumas evidências de pensamento sobre impacto geracional em educação, mas ainda não sistematicamente articulado"
+      },
+      "cognitive_capabilities": {
+        "serial_processing": true,
+        "parallel_processing": true,
+        "complexity_level": "Alta",
+        "processing_type": "Systematic Parallel - processa múltiplas cadeias causais simultaneamente e integra em sistemas",
+        "symbolic_representation": "Opera em nível de princípios e frameworks abstratos (GPS, semiótica) que podem ser aplicados universalmente",
+        "domain_translation": "Alta capacidade de traduzir conceitos entre domínios: oratória clássica para didática digital, neurociência para prática pedagógica, business para educação"
+      }
+    },
+    "big_five": {
+      "openness": {
+        "total": 75,
+        "percentile": 85,
+        "facets": {
+          "imagination": 70,
+          "artistic_interest": 65,
+          "emotionality": 60,
+          "adventure": 70,
+          "intellect": 85,
+          "liberalism": 65
+        }
+      },
+      "conscientiousness": {
+        "total": 80,
+        "percentile": 90,
+        "facets": {
+          "self_efficacy": 85,
+          "order": 75,
+          "dutifulness": 80,
+          "achievement_striving": 90,
+          "self_discipline": 75,
+          "cautiousness": 70
+        }
+      },
+      "extraversion": {
+        "total": 65,
+        "percentile": 70,
+        "facets": {
+          "warmth": 60,
+          "gregariousness": 55,
+          "assertiveness": 85,
+          "activity_level": 80,
+          "excitement_seeking": 60,
+          "positive_emotions": 70
+        }
+      },
+      "agreeableness": {
+        "total": 55,
+        "percentile": 50,
+        "facets": {
+          "trust": 50,
+          "morality": 70,
+          "altruism": 65,
+          "cooperation": 50,
+          "modesty": 40,
+          "sympathy": 60
+        }
+      },
+      "neuroticism": {
+        "total": 45,
+        "percentile": 50,
+        "facets": {
+          "anxiety": 50,
+          "anger": 55,
+          "depression": 35,
+          "self_consciousness": 50,
+          "immoderation": 40,
+          "vulnerability": 45
+        }
+      }
+    },
+    "hexaco": {
+      "honesty_humility": {
+        "total": 60,
+        "percentile": 60,
+        "facets": {
+          "sincerity": 70,
+          "fairness": 75,
+          "greed_avoidance": 55,
+          "modesty": 40
+        }
+      }
+    },
+    "intelligence": {
+      "iq_estimated": {
+        "range": "125-140",
+        "methodologies": [
+          "Velocidade de síntese conceitual: condensa 20+ anos de múltiplas disciplinas em frameworks coerentes e aplicáveis",
+          "Complexidade de integração: fusão sofisticada de neurociência, retórica clássica, psicologia cognitiva, tecnologia moderna",
+          "Abstração e transferência: capacidade de identificar padrões universais e aplicá-los transversalmente (GPS como analogia pedagógica)",
+          "Metacognição avançada: consciência explícita sobre processos de aprendizado e comunicação, ensino sobre ensino"
+        ],
+        "evidence": [
+          "Domínio de múltiplos domínios complexos: oratória, didática, tecnologia, gestão, todos em nível avançado",
+          "Criação de frameworks originais e úteis: método GPS, estrutura de aula em 5 partes, integração semiótica-pedagogia",
+          "Velocidade de aprendizado: referências a múltiplos cursos, livros, mentorias absorvidos e sintetizados",
+          "Articulação sofisticada: explicações claras de conceitos abstratos, uso preciso de terminologia técnica multidisciplinar"
+        ]
+      },
+      "eq_estimated": {
+        "total": 65,
+        "components": {
+          "self_awareness": 70,
+          "self_regulation": 60,
+          "motivation": 85,
+          "empathy": 65,
+          "social_skills": 60
+        }
+      },
+      "gardner_intelligences": {
+        "logical_mathematical": {
+          "level": "Alto (85º percentil)",
+          "evidence": "Estruturação sistemática de conhecimento, frameworks lógicos, decomposição analítica de processos complexos"
+        },
+        "linguistic": {
+          "level": "Muito Alto (90º percentil)",
+          "evidence": "Domínio de oratória, capacidade de síntese verbal, uso sofisticado de analogias e metáforas, comunicação persuasiva"
+        },
+        "interpersonal": {
+          "level": "Médio-Alto (70º percentil)",
+          "evidence": "Capacidade de mentorar e formar professores, leitura de necessidades de aprendizado, influência em grupos profissionais"
+        },
+        "intrapesonal": {
+          "level": "Médio-Alto (75º percentil)",
+          "evidence": "Consciência de próprias forças ('sintetizar', 'estruturar'), reconhecimento de limites de tempo, autocrítica sobre execução"
+        },
+        "spatial_visual": {
+          "level": "Médio-Alto (70º percentil)",
+          "evidence": "Uso de diagramas, mapas mentais, preocupação com elementos visuais em comunicação, consciência de impacto visual"
+        },
+        "bodily_kinesthetic": {
+          "level": "Médio (60º percentil)",
+          "evidence": "Consciência do uso de gestos e corpo em apresentações, menção a performance física em aulas"
+        },
+        "musical": {
+          "level": "Não observável",
+          "evidence": "Sem evidências suficientes nos dados disponíveis"
+        },
+        "naturalist": {
+          "level": "Não observável",
+          "evidence": "Sem evidências suficientes nos dados disponíveis"
+        },
+        "existential": {
+          "level": "Médio-Alto (75º percentil)",
+          "evidence": "Reflexões sobre propósito da educação, impacto transformacional de longo prazo, filosofia de comunicação humana"
+        }
+      }
+    },
+    "dark_triad": {
+      "narcissism": {
+        "score": 4.5,
+        "max_scale": 7,
+        "percentile": 65,
+        "evidence": [
+          "Necessidade de reconhecimento por expertise: múltiplas referências a experiência e conhecimento acumulado",
+          "Sensibilidade a críticas sobre competência: reações defensivas quando trabalho é questionado",
+          "Apresentação de si como excepcional: 'você vai se tornar um dos melhores do Brasil e, quem sabe, do mundo' projetando grandiosidade no aluno que reflete aspiração própria"
+        ]
+      },
+      "machiavellianism": {
+        "score": 3.5,
+        "max_scale": 7,
+        "percentile": 45,
+        "evidence": [
+          "Navegação política em contexto organizacional: gestão de relacionamentos com stakeholders, timing de comunicações difíceis",
+          "Uso estratégico de informação: escolha de quando e como compartilhar feedback crítico",
+          "Limitado: alta ênfase em valores como sinceridade, fairness, comprometimento genuíno com resultados coletivos"
+        ]
+      },
+      "psychopathy": {
+        "score": 2.0,
+        "max_scale": 7,
+        "percentile": 20,
+        "evidence": [
+          "Capacidade de tomar decisões difíceis e ser direto em comunicações desconfortáveis",
+          "Foco em resultados pode ocasionalmente minimizar impacto emocional em outros",
+          "Fortemente contrabalanceado por: empatia pedagógica, preocupação genuína com desenvolvimento de outros, lealdade demonstrada"
+        ]
+      }
+    },
+    "additional_assessments": {
+      "grit_scale": {
+        "consistency_of_interests": 85,
+        "perseverance_of_effort": 90,
+        "total": 87,
+        "evidence": "Mais de 20 anos dedicado a oratória e didática, persistência em projetos complexos ('duas semanas dia, noite e final de semana a fio'), comprometimento a longo prazo com desenvolvimento de metodologia"
+      },
+      "need_for_cognition": {
+        "percentile": 90,
+        "evidence": "Consumo voraz de conhecimento (cursos, mentorias, livros), prazer em sintetizar conceitos complexos, orientação intelectual constante"
+      },
+      "tolerance_for_ambiguity": {
+        "percentile": 65,
+        "evidence": "Opera bem em projetos com múltiplas variáveis e incertezas, mas prefere clareza de direção e responsabilidades definidas"
+      },
+      "locus_of_control": {
+        "type": "Fortemente Interno",
+        "evidence": "Assume responsabilidade por resultados, atribui sucesso/falha a próprias ações ('Eu erro sim... E errei em só executar'), iniciativa constante"
+      },
+      "attachment_style": {
+        "type": "Seguro com traços ansiosos",
+        "evidence": "Capacidade de formar vínculos profissionais duradouros, lealdade demonstrada, mas alguma ansiedade sobre percepção de competência por outros"
+      }
+    },
+    "unique_characteristics": {
+      "work_hours_per_day": "10-14 horas, com picos de intensidade extrema em projetos críticos",
+      "companies_founded": [
+        "Academia Vendária (aparentemente co-fundada ou liderança pedagógica)",
+        "Possíveis outros empreendimentos educacionais (evidências limitadas)"
+      ],
+      "daily_routine": [
+        "Múltiplas reuniões e calls (pedagógicas, estratégicas, operacionais)",
+        "Produção de conteúdo educacional (gravações, preparação de aulas)",
+        "Gestão de projetos paralelos (migrações, cursos, mentorias)",
+        "Estudo e síntese contínuos (atualização em ferramentas, teorias)",
+        "Comunicação assíncrona intensiva (WhatsApp, plataformas)"
+      ],
+      "superpower": [
+        "Síntese e condensação: capacidade de destilar décadas de conhecimento em frameworks aplicáveis imediatamente",
+        "Tradução pedagógica: transformar conceitos complexos em analogias memoráveis (GPS, semiótica como filminho)",
+        "Visão sistêmica: enxergar como múltiplos elementos (teoria, prática, tecnologia) se integram em soluções coesas"
+      ],
+      "kryptonite": [
+        "Ineficiência sistêmica: frustra-se profundamente com processos mal estruturados e desperdício de potencial",
+        "Dependência de outros para execução: dificuldade em confiar que outros farão com seu padrão de qualidade",
+        "Trabalho operacional prolongado: pode se perder em execução braçal perdendo foco estratégico",
+        "Críticas à competência: sensibilidade desproporcional quando expertise é questionada, afetando equilíbrio emocional"
+      ],
+      "main_focus": "Transformar a qualidade da educação técnica no Brasil através de professores cientificamente treinados em pedagogia e comunicação",
+      "statistical_rarity": "~0.5% população (ENTJ + Enea 3w2 + Estrato V + Alta Conscientiousness + Alta Inteligência Verbal)",
+      "key_relationships": {
+        "spouse": "Referência a 'Duda' em contexto profissional e pessoal, indicando parceria próxima",
+        "children": "Não mencionados explicitamente nos dados",
+        "parents": "Não mencionados nos dados disponíveis",
+        "mentors": "Múltiplos, implícitos através de cursos e mentorias consumidos, sem nomes específicos",
+        "proteges": "Luighi, Pedro Mangini, Cibelle (professores em formação), múltiplos alunos da academia",
+        "inner_circle": "Alan Nicolas (parceiro de negócio), Igor, Tiago (equipe de liderança)",
+        "pattern": "Relacionamentos principalmente profissionais/utilitários, com lealdade demonstrada mas expressão emocional contida. Papel de mentor/formador é central à identidade"
+      },
+      "philosophy": {
+        "core": "Excelência através de método científico + compromisso humano: 'É arte, não é dom' - crença em que qualquer um pode atingir maestria com técnica correta",
+        "framework": "Integração de múltiplas disciplinas (neurociência + retórica clássica + didática moderna) em práxis aplicável",
+        "belief": "A comunicação eficaz é a meta-habilidade que transforma todas as outras áreas da vida profissional e pessoal",
+        "method": "Teoria condensada → Prática aplicada → Feedback iterativo: 'Vou começar pela prática e vou embasando na teoria'",
+        "mantra": "Abreviar anos em horas através de síntese de conhecimento essencial"
+      }
+    },
+    "crisis_patterns": {
+      "migração_plataforma_fpass": [
+        "Assumiu controle total quando viu ineficiência: trabalhou intensivamente (dia/noite/fins de semana) por duas semanas",
+        "Sacrificou outras responsabilidades (conteúdo pedagógico) em prol de resolver crise operacional",
+        "Comunicou frustração de forma contida mas clara após resolver problema",
+        "Demonstrou resiliência operacional mas custo emocional (chateamento posterior)"
+      ],
+      "conflito_cibelle_gravações": [
+        "Tentou mediar e proteger relacionamento com professora, assumindo peso emocional de desmarcar múltiplas vezes",
+        "Priorizou integridade relacional sobre eficiência: preferiu pausar a continuar causando dano",
+        "Comunicou frustrações de forma estruturada quando solicitado, com fatos e cronologia",
+        "Manteve lealdade tanto a professor quanto a organização, buscando solução sistêmica"
+      ]
+    },
+    "predictions": {
+      "high_probability": [
+        "Continuará criando frameworks e metodologias proprietárias, consolidando como referência em pedagogia de tecnologia (>85%)",
+        "Assumirá mais responsabilidades operacionais quando vir gaps de qualidade, potencialmente sobrecarregando-se (>80%)",
+        "Tensionará com lideranças quando processos não atenderem seu padrão de excelência (>80%)",
+        "Desenvolverá produtos educacionais (cursos, livros, treinamentos) que sintetizam décadas de conhecimento (>90%)",
+        "Manterá lealdade a longo prazo com organizações que valorizarem sua expertise e permitirem autonomia (>85%)"
+      ],
+      "behavioral_manifestations": [
+        "Em reuniões estratégicas: apresentará soluções estruturadas com múltiplas camadas, usando analogias para simplificar complexidade",
+        "Em crises: assumirá controle direto, trabalhará intensivamente até resolução, depois comunicará problemas sistêmicos",
+        "Em mentorias: combinará acolhimento inicial com desafio intenso, elevando padrão de excelência de protegidos"
+      ],
+      "optimal_scenarios": [
+        "Diretor Pedagógico de plataforma educacional em escala, com autonomia para definir padrões de qualidade e formar equipes - combinaria visão estratégica (Ni), estruturação sistêmica (Te) e missão de servir (3w2)",
+        "Fundador de consultoria especializada em formação de professores técnicos, onde pode operar em Estrato V/VI integrando múltiplos clientes e domínios simultaneamente"
+      ],
+      "worst_scenarios": [
+        "Posições puramente operacionais/táticas sem influência estratégica - frustraria Estrato V e função dominante Te",
+        "Ambientes com ineficiência sistêmica crônica e sem disposição para mudança - ativaria stress de tipo 3 (sensação de falha) e grip de Fi (ruminação sobre incompetência percebida)"
+      ]
+    },
+    "comparative_analysis": {
+      "vs_same_mbti": {
+        "Steve_Jobs": "Ambos ENTJ com visão transformacional e intolerância a mediocridade. Jobs mais implacável (baixo Agreeableness), Adriano mais orientado a servir (3w2 vs 8w7). Jobs Estrato VI-VII, Adriano V-VI.",
+        "Sheryl_Sandberg": "Ambos combinam Te-Ni para estruturar organizações complexas. Sandberg mais política (alto Agreeableness), Adriano mais didático. Ambos têm missão de elevar capacidades de outros.",
+        "Elon_Musk": "Ambos operam em múltiplos projetos paralelos com visão de longo prazo. Musk mais disruptivo e menos preocupado com harmonia relacional. Adriano mais fundamentado em metodologia científica vs tentativa-erro."
+      },
+      "vs_same_enneagram": {
+        "Oprah_Winfrey": "Ambos 3w2 com missão de transformar e elevar outros. Oprah mais emocional e carismática (alta Extraversion), Adriano mais estruturado e intelectual (Te-Ni). Ambos constroem impérios baseados em autenticidade percebida.",
+        "Tony_Robbins": "Ambos 3w2 com foco em performance e formação. Robbins mais energético e menos estruturado, Adriano mais metódico e científico. Ambos sintetizam conhecimento de múltiplas fontes em sistemas proprietários.",
+        "Brené_Brown": "Ambos 3 com missão educacional e vulnerabilidade calculada. Brown mais 3w4 (autenticidade emocional), Adriano mais 3w2 (servir através de competência). Brown foca conexão emocional, Adriano eficiência cognitiva."
+      }
+    },
+    "convergence_analysis": {
+      "powerful_alignments": [
+        "Te (dominante) + D alto + Conscientiousness alta + Estrato V = Máquina de estruturação e otimização sistêmica. Quando tem escopo e autonomia, cria frameworks transformacionais rapidamente",
+        "3w2 + ENTJ + SO instinct + Alta Inteligência Linguística = Comunicador-líder excepcional que inspira através de competência demonstrada. Constrói autoridade por resultados, não por hierarquia",
+        "Ni (auxiliar) + Estrato V + Alta Openness + Need for Cognition = Síntese visionária de conhecimento multidisciplinar. Vê padrões que outros não veem, antecipa futuros, integra domínios"
+      ],
+      "productive_tensions": [
+        "Alta Conscientiousness (ordem, disciplina) vs Baixo S (impaciência com processos lentos): gera perfeccionismo eficiente - estruturas de alta qualidade entregues rapidamente, mas com risco de burnout",
+        "3w2 (necessidade de admiração) vs ENTJ Te-Fi inferior (dificuldade com emoções): cria vulnerabilidade autêntica mas calculada, humanizando expertise técnica sem perder autoridade"
+      ],
+      "compound_limitations": [
+        "D alto + Te dominante + 3 stress (9) + Baixo Agreeableness (Cooperation) = Perfeccionista controlador que sobrecarrega-se assumindo responsabilidades de outros, dificultando delegação efetiva",
+        "Fi inferior + 3 (imagem) + SO dominante = Hipersensibilidade a críticas sobre competência profissional, podendo reagir defensivamente e ruminar sobre falhas percebidas desproporcionalmente"
+      ]
+    },
+    "interaction_guide": {
+      "communication_style": {
+        "optimal": "Direto, estruturado, focado em resultados e eficiência. Apresente problemas com dados e propostas de solução. Reconheça expertise antes de sugerir mudanças. Use frameworks e analogias para simplificar complexidade.",
+        "avoid": "Críticas vagas sobre competência sem exemplos concretos. Micro-gerenciamento de processos que ele domina. Ineficiência comunicativa (falar muito sem chegar ao ponto). Desvalorização de tempo e expertise.",
+        "triggers": "Positivos: reconhecimento de resultados, autonomia para execução, problemas complexos para resolver. Negativos: ineficiência sistêmica, competência questionada, processos mal estruturados, desperdício de potencial."
+      },
+      "management": {
+        "if_managing_them": "Dê visão estratégica clara e autonomia de execução. Estabeleça padrões de excelência ambiciosos. Forneça problemas complexos e recursos adequados. Reconheça contribuições especificamente. Proteja de sobrecarga operacional. Permita estruturação de processos próprios. Seja direto em feedback, com fatos e contexto.",
+        "if_they_manage_you": "Espere alto padrão de excelência e accountability rigorosa. Seja proativo em comunicar progresso e obstáculos. Demonstre competência através de resultados, não promessas. Peça feedback estruturado, ele fornecerá frameworks claros. Aceite que processos serão otimizados constantemente. Aproveite mentorias - ele compartilha conhecimento generosamente com comprometidos.",
+        "as_peer": "Estabeleça divisão clara de responsabilidades respeitando expertises. Seja direto e eficiente em comunicações. Colabore em problemas complexos onde síntese multidisciplinar agrega valor. Respeite autonomia mútua de execução. Reconheça contribuições mutuamente. Evite competição de egos - foque em resultados coletivos."
+      },
+      "team_dynamics": {
+        "ideal_team_size": "5-15 pessoas para liderar diretamente. Pode coordenar ecossistemas maiores através de estruturas e líderes intermediários (Estrato V/VI).",
+        "complementary_profiles": "ISFJ (S alto, suporte operacional consistente), INFP (Fi, conexão emocional autêntica com alunos), ISTP (S-T, execução técnica precisa), ENFJs (F dominante, engajamento emocional que complementa orientação por resultados)",
+        "conflicting_profiles": "ENTJs competitivos (luta por controle), ESFPs desorganizados (ineficiência frustrante), ISFPs de baixa ambição (diferença de drive), INTPs perfeccionistas sem execução (paralisia por análise)"
+      }
+    },
+    "development_roadmap": {
+      "immediate_priorities": [
+        "Delegar mais operações táticas para liberar capacidade estratégica (Estrato V→VI). Identificar líderes intermediários confiáveis e treinar para padrão de qualidade.",
+        "Desenvolver tolerância emocional para ineficiências temporárias durante crescimento de equipe (manejo de Fi inferior + stress para 9)"
+      ],
+      "medium_term_goals": [
+        "Consolidar metodologias em produtos escaláveis (livro, certificação de professores, plataforma) - monetizar e amplificar impacto do conhecimento sintetizado",
+        "Desenvolver múltiplos líderes pedagógicos usando método próprio - criar sistema que funciona sem dependência pessoal direta (transição Estrato V→VI)"
+      ],
+      "long_term_potential": [
+        "Estrato VI-VII: influenciar política educacional e padrões nacionais/internacionais de formação de professores técnicos através de think tanks, consultorias governamentais, parcerias com universidades",
+        "Integrar função Fi de forma saudável: conectar missão profissional com propósito existencial profundo, permitindo vulnerabilidade autêntica sem ameaça a competência"
+      ],
+      "recommended_practices": [
+        "Práticas diárias de delegação consciente: escolher 1-2 tarefas operacionais por semana para transferir completamente, treinar sucessor, resistir tentação de retomar",
+        "Mindfulness sobre perfeccionismo: reconhecer quando padrão de 95% é suficiente vs necessidade de 100%, economizando energia para batalhas críticas",
+        "Journaling sobre emoções e valores pessoais: desenvolver Fi através de reflexão privada sobre o que importa além de resultados e reconhecimento (10min/dia)"
+      ]
+    },
+    "data_sources": {
+      "primary": [
+        "Transcrições de 5 aulas pedagógicas sobre preparação de aulas (introdução, GPS, elementos primordiais, teoria/prática, estrutura)",
+        "Conversas WhatsApp com Alan Nicolas (parceiro de negócio) cobrindo período de agosto-outubro 2024 e outubro 2025",
+        "Comunicações sobre gestão pedagógica, migrações de plataforma, formação de professores",
+        "Auto-descrições em contexto educacional",
+        "Feedback sobre processos organizacionais",
+        "Descrições de metodologias e frameworks criados",
+        "Interações profissionais documentadas",
+        "Padrões de comunicação assíncrona",
+        "Evidências de rotinas e hábitos de trabalho",
+        "Manifestações de filosofia e valores profissionais"
+      ],
+      "confidence_levels": {
+        "high": "DISC (D/I altos, S baixo observado consistentemente), MBTI (Te-Ni claramente dominante-auxiliar), Estrato Cognitivo V (complexidade de trabalho observada), Conscientiousness (alta disciplina e organização), Need for Cognition",
+        "medium": "Eneagrama 3w2 (forte evidência mas sem auto-report validado), Big Five facetas específicas, Inteligência Verbal, Grit, valores específicos",
+        "low": "Scores numéricos precisos de facetas de personalidade, EQ componentes específicos, algumas inteligências de Gardner sem evidência direta",
+        "speculative": "Detalhes de relacionamentos familiares, histórico de infância, motivações inconscientes profundas, algumas predições de longo prazo"
+      }
+    }
+  },
+  "metadata": {
+    "analysis_date": "2025-10-18",
+    "version": "1.0",
+    "analyzer": "Análise Psicométrica Profunda via Claude Sonnet 4.5",
+    "special_notes": "Este perfil demonstra convergência rara entre alta capacidade cognitiva (Estrato V, ENTJ, QI estimado alto), alta conscienciosidade, e orientação de serviço (3w2). A combinação cria um 'líder-professor-construtor de sistemas' excepcionalmente eficaz em transformar conhecimento complexo em metodologias aplicáveis. Principal tensão está entre ambição de impacto em escala (Estrato V-VI) e tendência a assumir execução tática por perfeccionismo (D alto + 3). Desenvolvimento chave é delegação estratégica e integração emocional (Fi).",
+    "disclaimer": "Análise baseada em persona profissional documentada através de transcrições de aulas e comunicações de trabalho. Comportamento privado e dinâmicas pessoais não foram observados diretamente. Não constitui avaliação clínica ou diagnóstico psicológico. Scores numéricos são estimativas baseadas em evidências comportamentais, não resultados de instrumentos psicométricos validados.",
+    "assessment_scales": {
+      "disc": "0-100 (estimado de comportamentos observados)",
+      "enneagram": "Tipos 1-9, níveis 1-9 (Riso-Hudson), wings, instintos",
+      "mbti": "16 tipos, percentagens estimadas 0-100",
+      "cognitive_stratum": "Níveis I-VIII (Elliott Jaques) baseado em complexidade de trabalho",
+      "big_five": "0-100 por traço e faceta (estimado)",
+      "hexaco": "0-100 por dimensão (estimado)",
+      "dark_triad": "1-7 por traço (estimado)",
+      "iq": "Range estimado baseado em evidências, não teste formal",
+      "eq": "0-100 estimado por componente"
+    }
+  }
+}

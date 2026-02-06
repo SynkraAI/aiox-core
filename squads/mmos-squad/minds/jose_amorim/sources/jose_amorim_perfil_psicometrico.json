@@ -1,0 +1,519 @@
+{
+  "profile": {
+    "id": "jose_amorim",
+    "name": "José Amorim",
+    "disc": {
+      "D": 75,
+      "I": 85,
+      "S": 30,
+      "C": 45,
+      "pattern": "ID",
+      "pattern_name": "Influenciador Dominante",
+      "natural_profile": "D 75/I 85/S 30/C 45",
+      "adapted_profile": "D 70/I 90/S 25/C 40",
+      "stress_profile": "D 90/I 60/S 15/C 35",
+      "specific_behaviors": [
+        "Na aula, interrompe frequentemente o fluxo para verificar se os alunos estão acompanhando ('Vocês estão entendendo até aqui?'), demonstrando alta necessidade de influência e engajamento social",
+        "Admite abertamente suas limitações técnicas ('Eu não sou Dev, não sou desenvolvedor, eu sou nexialista') com confiança, mostrando baixa defensividade e alta assertividade do D",
+        "Usa linguagem extremamente informal e acessível ('rapaz', 'cara', 'bacana', 'bugzinho') para criar conexão, típico de I alto",
+        "Demonstra baixa paciência com processos lineares: 'Eu demorei muito tempo para entender' e cria seus próprios sistemas visuais e metáforas para acelerar aprendizado",
+        "Na aula ao vivo, adapta-se rapidamente aos problemas técnicos dos alunos sem perder o ritmo, demonstrando flexibilidade (baixo S) e foco em resultados (alto D)"
+      ]
+    },
+    "enneagram": {
+      "type": "7w8",
+      "type_name": "The Enthusiast with The Challenger wing",
+      "core_fear": "Ser limitado, aprisionado em dor ou tédio; perder oportunidades e experiências",
+      "core_desire": "Ser feliz, satisfeito, experimentar plenitude e variedade",
+      "development_level": "4 (médio-saudável)",
+      "stress_direction": "1",
+      "stress_behaviors": [
+        "Quando em stress, pode se tornar crítico e perfeccionista ('eu não consigo aprender as coisas se eu não visualizar')",
+        "Tende a criar sistemas rígidos quando ansioso (criou framework visual elaborado para entender HTML/CSS/JavaScript)",
+        "Pode se irritar com limitações técnicas ou burocráticas ('eu tive tanto problema para criar o meu DNS que eu desisti')",
+        "Sob pressão extrema, demonstra impaciência com detalhes ('eu ficaria umas meia hora aqui mas é isso')"
+      ],
+      "growth_direction": "5",
+      "growth_behaviors": "Em crescimento, José demonstra capacidade de aprofundamento intelectual (escreveu livro completo sobre Nexialismo), pensamento sistêmico mais maduro (criou framework de ensino progressivo), e capacidade de estruturar conhecimento disperso em algo coerente",
+      "instinct_stack": "SO/SX/SP",
+      "instinct_descriptions": {
+        "self_preservation": "Reprimido - Demonstra pouca preocupação com segurança financeira ou estabilidade ('R$ 10.000 por 4 horas'), admite pagar outras pessoas para tarefas técnicas que acha tediosas",
+        "social": "Dominante - Altamente focado em pertencimento e contribuição social, criou conceito de 'nexialista' como identidade de grupo, preocupado em 'formar comunidade', linguagem inclusiva constante ('a gente', 'nós')",
+        "sexual": "Secundário - Busca intensidade nas experiências ('imersão', não 'aula'), cria conexões profundas rapidamente, usa linguagem carregada de energia e paixão"
+      },
+      "behavioral_evidence": [
+        "Redefine conceitos complexos com analogias criativas (frontend como 'construção da casa', JavaScript como 'ligar a luz') - típico de 7 buscando tornar tudo acessível e prazeroso",
+        "Múltiplos projetos simultâneos evidentes: escreveu livro, dá aulas, desenvolve produtos, consultorias - padrão clássico de 7 evitando monotonia",
+        "Ala 8 evidente na assertividade e confiança ('deixa eu logo apresentar as minhas certificações'), não se intimida em admitir o que não sabe",
+        "Linguagem de 'possibilidades infinitas' e otimismo contagiante permeia todo o livro Nexialismo",
+        "Admite abertamente suas dificuldades técnicas mas transforma em força de conexão ('eu sou muito visual então eu não consigo aprender se não visualizar')",
+        "Cria sistemas próprios quando os existentes não servem (desenvolvedor 'Duck Stack' em vez de Full Stack)",
+        "Tendência a simplificar o complexo e tornar acessível, mas pode perder profundidade técnica no processo"
+      ]
+    },
+    "mbti": {
+      "type": "ENFP",
+      "type_name": "The Campaigner",
+      "E_percentage": 78,
+      "N_percentage": 85,
+      "T_percentage": 35,
+      "J_percentage": 25,
+      "cognitive_stack": {
+        "dominant": {
+          "function": "Ne",
+          "name": "Intuição Extrovertida",
+          "manifestations": [
+            "Vê conexões entre domínios não relacionados constantemente (casa = frontend, sistema elétrico = backend, disjuntor = lógica)",
+            "Geração rápida de metáforas e analogias criativas durante a aula ('pato que nada, anda e voa' para Duck Stack developer)",
+            "No livro, explora múltiplas possibilidades simultâneas do conceito de nexialismo através de diversos ângulos",
+            "Cria neologismos e conceitos novos naturalmente ('nexialista', 'vibe coding', 'desenvolvedor Duck Stack')",
+            "Durante a aula, pula entre tópicos mantendo fio condutor invisível mas coerente"
+          ]
+        },
+        "auxiliary": {
+          "function": "Fi",
+          "name": "Sentimento Introvertido",
+          "manifestations": [
+            "Valores centrais claros sobre autenticidade ('Você não vai ler este livro pelo conteúdo... você está tentando lembrar como é estar vivo')",
+            "Forte identificação pessoal com pessoas que 'não se encaixam' (tema central do livro Nexialismo)",
+            "Tom empático e inclusivo constante ('pessoas mais Humildes poderão entender também')",
+            "Decisões baseadas em significado pessoal e conexão mais que eficiência",
+            "Expressa vulnerabilidade como forma de conexão ('eu confesso que eu não sabia nada nem que que era frontend')"
+          ]
+        },
+        "tertiary": {
+          "function": "Te",
+          "name": "Pensamento Extrovertido",
+          "manifestations": [
+            "Cria sistemas visuais organizados quando necessário (framework visual HTML/CSS/JavaScript)",
+            "Na aula, estabelece estrutura clara por níveis (Nível 1, 2, 3) para progressão",
+            "Busca eficiência através de IA e automação ('a gente não vai construir nenhuma dessas pastas na mão')"
+          ]
+        },
+        "inferior": {
+          "function": "Si",
+          "name": "Sensação Introvertida",
+          "manifestations": [
+            "Admite dificuldade com processos detalhados e sequenciais ('eu teria que ficar umas meia hora aqui mas é isso')",
+            "Evita tarefas técnicas repetitivas ('eu pago para o pessoal fazer para mim')",
+            "Pode ter problemas com follow-through em detalhes ('eu não sei explicar tão bem a ponto de me sentir firme')",
+            "Grip sob stress: quando sistemas técnicos falham repetidamente, desiste e delega (DNS, domínios)"
+          ]
+        }
+      }
+    },
+    "cognitive_stratum": {
+      "level": "V",
+      "level_name": "Strategic Intent",
+      "time_horizon": "5-10 anos",
+      "processing_type": "Parallel/Systematic com tendência ao Parallel",
+      "transitioning_to": "VI",
+      "evidence": [
+        "Criou conceito abrangente de 'Nexialismo' como movimento cultural/educacional com implicações de longo prazo para transformação de paradigma educacional",
+        "No livro, trabalha com múltiplos sistemas paralelos (psicologia, educação, tecnologia, filosofia) simultaneamente mantendo coerência",
+        "Desenvolveu produto educacional completo (livro + cursos + comunidade) pensando em ecossistema, não apenas conteúdo isolado",
+        "Horizonte temporal de 5-10 anos evidente: 'O futuro vai precisar de gente como você' - pensa em mudanças societais de médio prazo",
+        "Capaz de abstrair e nomear padrões que outros vivem mas não identificam ('você sempre captou conexões que outros ignoravam')"
+      ],
+      "temporal_horizons": {
+        "immediate": "Adapta-se instantaneamente a problemas técnicos na aula ao vivo, resolve bugs em tempo real com iterações rápidas",
+        "short": "Planeja aulas e iterações de produtos em ciclos semanais/mensais, testa diferentes abordagens de ensino",
+        "medium": "Desenvolveu livro e sistema de cursos pensando em 1-3 anos para estabelecer marca 'Nexialismo' e comunidade",
+        "long": "Visão de 5-10 anos: transformar como pessoas multipotenciais são vistas e educadas, criar movimento cultural",
+        "ultra_long": "Implícito no livro: mudança geracional na forma como inteligência e educação são conceituadas (10-20 anos)"
+      },
+      "cognitive_capabilities": {
+        "serial_processing": false,
+        "parallel_processing": true,
+        "complexity_level": "Alta",
+        "processing_type": "Parallel com integração Systematic",
+        "symbolic_representation": "Opera confortavelmente com metáforas complexas e múltiplas camadas de significado",
+        "domain_translation": "Capacidade excepcional de traduzir entre domínios (programação = construção de casa = conceitos filosóficos)"
+      }
+    },
+    "big_five": {
+      "openness": {
+        "total": 92,
+        "percentile": 98,
+        "facets": {
+          "imagination": 95,
+          "artistic_interest": 85,
+          "emotionality": 80,
+          "adventure": 90,
+          "intellect": 95,
+          "liberalism": 88
+        }
+      },
+      "conscientiousness": {
+        "total": 52,
+        "percentile": 50,
+        "facets": {
+          "self_efficacy": 75,
+          "order": 35,
+          "dutifulness": 50,
+          "achievement_striving": 70,
+          "self_discipline": 45,
+          "cautiousness": 35
+        }
+      },
+      "extraversion": {
+        "total": 78,
+        "percentile": 85,
+        "facets": {
+          "warmth": 85,
+          "gregariousness": 75,
+          "assertiveness": 80,
+          "activity_level": 85,
+          "excitement_seeking": 80,
+          "positive_emotions": 90
+        }
+      },
+      "agreeableness": {
+        "total": 68,
+        "percentile": 70,
+        "facets": {
+          "trust": 65,
+          "morality": 75,
+          "altruism": 80,
+          "cooperation": 70,
+          "modesty": 40,
+          "sympathy": 85
+        }
+      },
+      "neuroticism": {
+        "total": 45,
+        "percentile": 45,
+        "facets": {
+          "anxiety": 50,
+          "anger": 35,
+          "depression": 30,
+          "self_consciousness": 40,
+          "immoderation": 60,
+          "vulnerability": 45
+        }
+      }
+    },
+    "hexaco": {
+      "honesty_humility": {
+        "total": 65,
+        "percentile": 65,
+        "facets": {
+          "sincerity": 85,
+          "fairness": 70,
+          "greed_avoidance": 50,
+          "modesty": 40
+        }
+      }
+    },
+    "intelligence": {
+      "iq_estimated": {
+        "range": "125-135",
+        "methodologies": [
+          "Capacidade de abstração e criação de frameworks conceituais complexos (livro Nexialismo demonstra pensamento sistêmico sofisticado)",
+          "Velocidade de aprendizado em domínio técnico novo (dominou suficiente de programação em meses para ensinar)",
+          "Habilidade metacognitiva de identificar e nomear padrões de pensamento ('você não era distraído, era hiperconectivo')",
+          "Tradução fluente entre múltiplos domínios de conhecimento com criação de analogias não-óbvias"
+        ],
+        "evidence": [
+          "Aprendeu stack completo de desenvolvimento web em meses sem background técnico formal",
+          "Criou framework educacional completo (Nexialismo) integrando psicologia, pedagogia, tecnologia e filosofia",
+          "Demonstra clareza conceitual mesmo em áreas onde admite limitação técnica ('eu não manjo mas eu sei onde tá o erro')",
+          "Capacidade de simplificar complexidade sem perder nuance essencial (casa = frontend é analogia sofisticada, não simplista)"
+        ]
+      },
+      "eq_estimated": {
+        "total": 78,
+        "components": {
+          "self_awareness": 85,
+          "self_regulation": 65,
+          "motivation": 90,
+          "empathy": 82,
+          "social_skills": 88
+        }
+      },
+      "gardner_intelligences": {
+        "logical_mathematical": {
+          "level": "75º percentil",
+          "evidence": "Capaz de entender lógica de programação conceitualmente, cria sistemas organizacionais, mas evita detalhes matemáticos/técnicos profundos"
+        },
+        "linguistic": {
+          "level": "92º percentil",
+          "evidence": "Escreveu livro completo articulado e coerente, cria metáforas ricas, comunica-se com clareza excepcional mesmo sobre tópicos complexos, inventa neologismos que 'pegam'"
+        },
+        "interpersonal": {
+          "level": "88º percentil",
+          "evidence": "Lê estado emocional dos alunos em tempo real, ajusta abordagem dinamicamente, cria senso de comunidade rapidamente, linguagem inclusiva natural"
+        },
+        "intrapersonal": {
+          "level": "82º percentil",
+          "evidence": "Alto nível de autoconsciência sobre suas limitações e forças, processo de auto-descoberta documentado no livro, compreende próprias motivações profundamente"
+        },
+        "spatial_visual": {
+          "level": "85º percentil",
+          "evidence": "Afirma ser 'muito visual', criou sistema visual completo para entender programação, usa diagramas e metáforas espaciais constantemente"
+        },
+        "bodily_kinesthetic": {
+          "level": "Percentil médio",
+          "evidence": "Não há evidências significativas de desenvolvimento nesta área"
+        },
+        "musical": {
+          "level": "Percentil médio",
+          "evidence": "Não observável nos materiais disponíveis"
+        },
+        "naturalist": {
+          "level": "Percentil médio",
+          "evidence": "Não observável nos materiais disponíveis"
+        },
+        "existential": {
+          "level": "90º percentil",
+          "evidence": "Livro inteiro dedicado a questões sobre natureza da inteligência humana, propósito, e lugar no mundo. Capítulos sobre presença, propósito, e 'parar de esperar' demonstram pensamento existencial profundo"
+        }
+      }
+    },
+    "dark_triad": {
+      "narcissism": {
+        "score": 3.8,
+        "max_scale": 7,
+        "percentile": 55,
+        "evidence": [
+          "Confiança pública alta ('deixa eu logo apresentar as minhas certificações') mas combinada com vulnerabilidade genuína",
+          "Cria conceito próprio (Nexialismo) e se posiciona como autoridade, mas com propósito de ajudar outros, não apenas auto-engrandecimento",
+          "Admite limitações abertamente, o que modera narcisismo"
+        ]
+      },
+      "machiavellianism": {
+        "score": 2.5,
+        "max_scale": 7,
+        "percentile": 30,
+        "evidence": [
+          "Demonstra autenticidade consistente, não manipulação",
+          "Estratégico em posicionamento de produto (R$ 10.000 por 4 horas) mas não de forma cínica",
+          "Transparente sobre processos e conhecimentos, não esconde informação para manter poder"
+        ]
+      },
+      "psychopathy": {
+        "score": 1.8,
+        "max_scale": 7,
+        "percentile": 20,
+        "evidence": [
+          "Alta empatia evidente em toda comunicação",
+          "Preocupação genuína com experiência e compreensão dos alunos",
+          "Emocionalidade presente e apropriada, não superficial"
+        ]
+      }
+    },
+    "additional_assessments": {
+      "grit_scale": {
+        "consistency_of_interests": 65,
+        "perseverance_of_effort": 82,
+        "total": 73.5,
+        "evidence": "Alta perseverança quando alinhado com interesse (escreveu livro completo, dominou programação), mas pode abandonar projetos que perdem significado ou se tornam tediosos (admite pagar outros para tarefas técnicas chatas)"
+      },
+      "need_for_cognition": {
+        "percentile": 88,
+        "evidence": "Prazer evidente em pensar, conectar ideias, explorar conceitos. Livro inteiro é celebração do pensamento complexo. Porém, prefere cognição criativa/conectiva a analítica/detalhista"
+      },
+      "tolerance_for_ambiguity": {
+        "percentile": 92,
+        "evidence": "Confortável operando em zonas de incerteza ('eu não sei mas vou fazer'), aceita contradições produtivas, celebra complexidade no livro Nexialismo"
+      },
+      "locus_of_control": {
+        "type": "Predominantemente Interno",
+        "evidence": "Atribui sucesso e fracasso a si mesmo ('eu que sou bestalhado mesmo'), toma responsabilidade por aprendizado, cria próprios sistemas quando externos não servem. Porém, reconhece limitações externas realistas (bugs de IA, limitações técnicas)"
+      },
+      "attachment_style": {
+        "type": "Predominantemente Seguro com nuances Ansioso",
+        "evidence": "Busca conexão autêntica, confortável com vulnerabilidade, mas alta necessidade de validação social (checa constantemente se alunos estão acompanhando). Tom geral de segurança mas com momentos de necessidade de reasseguramento"
+      }
+    },
+    "unique_characteristics": {
+      "work_hours_per_day": "8-12 horas, mas de forma não-linear e project-based",
+      "companies_founded": [
+        "Formação Lendária (inferido do contexto)",
+        "Produtos/serviços relacionados a IA e educação",
+        "Projetos de consultoria em IA"
+      ],
+      "daily_routine": [
+        "Rotina provavelmente não-estruturada e adaptativa",
+        "Múltiplos projetos simultâneos (aulas, escrita, desenvolvimento)",
+        "Alta dependência de ferramentas de IA para produtividade",
+        "Períodos de imersão profunda alternados com interação social",
+        "Trabalho baseado em energia e interesse, não horário fixo"
+      ],
+      "superpower": [
+        "Tradução entre domínios - capacidade excepcional de tornar complexo acessível através de analogias não-óbvias mas precisas",
+        "Criação de senso de comunidade e pertencimento rapidamente - pessoas se sentem vistas e compreendidas",
+        "Identificação e nomeação de padrões invisíveis - vê o que outros vivem mas não conseguem articular (essência do Nexialismo)"
+      ],
+      "kryptonite": [
+        "Detalhes técnicos sequenciais e repetitivos - admite dificuldade com DNS, configurações, processos burocráticos",
+        "Necessidade de validação social pode gerar ansiedade quando feedback é negativo ou ausente",
+        "Risco de dispersão excessiva - tantos interesses que pode não aprofundar suficientemente",
+        "Follow-through em projetos que perderam novidade ou significado emocional"
+      ],
+      "main_focus": "Transformar como multipotenciais/nexialistas são vistos e educados; democratizar acesso a IA e tecnologia através de ensino acessível",
+      "statistical_rarity": "~2-5% população (ENFP + Enneagram 7w8 + Estrato V + Alta Openness + Baixa-Média Conscientiousness + Alta capacidade de abstração verbal combinada)",
+      "key_relationships": {
+        "spouse": "Dados insuficientes",
+        "children": "Dados insuficientes",
+        "parents": "Dados insuficientes",
+        "mentors": "Implicitamente: figuras que validaram multipotencialidade vs especialização",
+        "proteges": "Alunos da Formação Lendária, comunidade Nexialista",
+        "inner_circle": "Provavelmente composto por outros multipotenciais e creators",
+        "pattern": "Busca relacionamentos baseados em autenticidade e crescimento mútuo, valoriza comunidade sobre hierarquia, líder que lidera através de vulnerabilidade e exemplo"
+      },
+      "philosophy": {
+        "core": "A complexidade é feature, não bug - pessoas que não se encaixam em caixas não são problemas a resolver, são a próxima evolução",
+        "framework": "Nexialismo - inteligência conectiva que integra múltiplos domínios através de síntese criativa",
+        "belief": "O futuro pertence a quem consegue navegar complexidade mantendo humanidade e presença",
+        "method": "Aprender através de metáforas, ensinar através de vulnerabilidade, criar através de iteração rápida",
+        "mantra": "'Você não é raro porque é especial. É raro porque está adiantado.'"
+      }
+    },
+    "crisis_patterns": {
+      "frustração_técnica": [
+        "Quando sistemas técnicos não cooperam repetidamente, tende a delegar ou buscar alternativas em vez de persistir (DNS, configurações complexas)",
+        "Pode expressar frustração verbalmente mas mantém humor ('Rapaz', 'Oxe')",
+        "Busca workarounds criativos em vez de soluções convencionais",
+        "Não personaliza falhas técnicas, mantém objetividade"
+      ],
+      "questionamento_de_valor": [
+        "Provavelmente busca reasseguramento através de feedback social imediato",
+        "Pode se retirar para reflexão e escrita (processo que gerou o livro)",
+        "Reframe de crise como oportunidade de aprendizado e ensino",
+        "Uso de comunidade como espelho e validação"
+      ]
+    },
+    "predictions": {
+      "high_probability": [
+        "Continuará criando novos conceitos, frameworks e neologismos - é impulso natural de Ne dominante + Estrato V (>85%)",
+        "Expandirá ecossistema Nexialista para incluir mais produtos, cursos, comunidade - consistente com visão de 5-10 anos (>80%)",
+        "Terá múltiplos projetos simultâneos, alguns incompletos - padrão ENFP + Eneagrama 7 (>90%)",
+        "Continuará sendo early adopter de tecnologia e IA - alinhado com Alta Openness + Need for Cognition (>85%)",
+        "Enfrentará desafios com scaling e sistemas quando crescimento exigir mais estrutura - limitação de baixa Conscientiousness (>75%)"
+      ],
+      "behavioral_manifestations": [
+        "Em 2-3 anos, provavelmente terá delegado muito da operação técnica/administrativa para focar em criação de conteúdo e visão",
+        "Pode criar múltiplas sub-marcas ou linhas de produto ao invés de aprofundar uma única",
+        "Provável que escreva mais livros ou conteúdos longos - é forma natural de processar e estruturar pensamento Ne-Fi"
+      ],
+      "optimal_scenarios": [
+        "Ambientes que valorizam síntese criativa sobre especialização técnica - conferências, consultorias estratégicas, educação transformacional",
+        "Projetos de 3-18 meses com autonomia para definir abordagem e liberdade para iteração rápida",
+        "Trabalho com early adopters e pessoas abertas a novos paradigmas que fornecem feedback entusiasmado",
+        "Situações que exigem tradução entre mundos (tech para não-tech, conceitual para prático, futuro para presente)"
+      ],
+      "worst_scenarios": [
+        "Ambientes corporativos tradicionais com hierarquia rígida e processos burocráticos lentos - sufocaria Ne + baixo S",
+        "Trabalho técnico repetitivo que exige atenção sustentada a detalhes sem variação - grip de Si inferior",
+        "Situações que exigem especialização profunda e estreita sem permissão para explorar conexões laterais",
+        "Contextos que penalizam vulnerabilidade ou exigem persona inautêntica - conflito com Fi auxiliar forte"
+      ]
+    },
+    "comparative_analysis": {
+      "vs_same_mbti": {
+        "Tim Ferriss (ENFP)": "Ambos têm curiosidade voraz e capacidade de aprendizado rápido multi-domínio. José mais focado em comunidade e educação (SO dominante), Tim mais em otimização pessoal (SP dominante). José mais vulnerável e pessoal, Tim mais estruturado e metódico.",
+        "Russell Brand (ENFP)": "Ambos usam linguagem criativa e metáforas para transmitir ideias complexas, alta energia e carisma. Russell mais filosófico-espiritual, José mais prático-tecnológico. Ambos criam movimento/comunidade ao redor de ideias.",
+        "Elizabeth Gilbert (ENFP)": "Ambos exploram temas de criatividade, autenticidade e não-conformidade. Elizabeth mais introspectiva e literária, José mais educacional e orientado a ação. Ambos validam experiências não-lineares."
+      },
+      "vs_same_enneagram": {
+        "Richard Branson (7w8)": "Ambos empreendedores multi-projeto com aversão a monotonia. Branson mais focado em escala e império, José em transformação educacional. Ambos combinam otimismo 7 com assertividade 8.",
+        "Robin Williams (7w8)": "Ambos têm energia contagiante e capacidade de fazer conexões rápidas não-óbvias. Williams mais performático, José mais educacional. Ambos vulneráveis apesar de energia externa.",
+        "Tim Ferriss (provavelmente 7w8)": "Múltiplos interesses, early adoption, criação de conceitos próprios. Ferriss mais sistemático e orientado a métricas, José mais intuitivo e orientado a significado."
+      }
+    },
+    "convergence_analysis": {
+      "powerful_alignments": [
+        "ENFP + 7w8 + Alto I (DISC) = Comunicador carismático natural que torna aprendizado prazeroso e acessível - força multiplicadora em educação",
+        "Ne dominante + Estrato V + Alta Openness = Capacidade rara de ver padrões sistêmicos e criar frameworks conceituais que outros podem usar - essência do Nexialismo",
+        "Fi auxiliar + SO dominante + Alta Empatia = Líder autêntico que cria comunidades baseadas em valores compartilhados, não apenas interesse compartilhado"
+      ],
+      "productive_tensions": [
+        "Alto D + Alta Agreeableness = Assertivo mas empático - consegue desafiar ideias mantendo segurança psicológica",
+        "Alta Openness + Estrato V + Baixa Conscientiousness = Gera ideias revolucionárias mas precisa de sistemas/equipe para execução - força para inovar, limitação para escalar"
+      ],
+      "compound_limitations": [
+        "Baixo S (DISC) + Baixo J (MBTI) + Baixa Conscientiousness = Tripla dificuldade com follow-through, detalhes e processos estruturados - risco significativo em scaling",
+        "Alta necessidade de validação (I alto + 7w8 + Attachment ansioso) + Trabalho público = Vulnerabilidade a burnout por sobre-exposição ou crítica pública"
+      ]
+    },
+    "interaction_guide": {
+      "communication_style": {
+        "optimal": "Seja direto mas caloroso, use metáforas e analogias, dê feedback positivo frequente, permita tangentes criativas mas traga de volta ao ponto, faça perguntas abertas que convidem exploração",
+        "avoid": "Comunicação puramente técnica sem contexto, crítica sem reconhecimento de esforço, rigidez excessiva com processos, linguagem corporativa fria, excesso de detalhes sem big picture",
+        "triggers": "Positivos: reconhecimento de ideias únicas, feedback entusiasmado, convites para colaboração. Negativos: ser tratado como 'não-técnico' em tom condescendente, burocracias sem explicação, invalidação de multipotencialidade"
+      },
+      "management": {
+        "if_managing_them": "Dê autonomia máxima com check-ins frequentes de alinhamento (não controle). Celebre inovações e permita exploração. Forneça estrutura através de deadlines e milestones, não processos detalhados. Delegue execução técnica detalhada. Use como gerador de ideias e visionário, não executor. Proteja de excesso de compromissos.",
+        "if_they_manage_you": "Espere direção clara mas métodos flexíveis. Não espere microgerenciamento - tome iniciativa. Forneça updates regulares sem precisar ser perguntado. Seja proativo em identificar problemas estruturais e propor soluções. Tolere mudanças de direção - não é indecisão, é otimização contínua.",
+        "as_peer": "Colabore em brainstorms e ideação - força máxima. Complemente com follow-through e atenção a detalhes. Não compita - celebre sucessos mútuos. Seja autêntico - ele valoriza vulnerabilidade. Ofereça para pegar tarefas técnicas/administrativas chatas em troca de visão estratégica."
+      },
+      "team_dynamics": {
+        "ideal_team_size": "3-8 pessoas - grande o suficiente para diversidade, pequeno o suficiente para conexão pessoal",
+        "complementary_profiles": "ISTJs ou ESTJs (estrutura e execução), INTPs ou INTJs (profundidade técnica), ISFJs (suporte e follow-through), perfis com alta Conscientiousness e conforto com detalhes",
+        "conflicting_profiles": "Outros ENFPs ou 7s (competição por atenção, falta de complementaridade), perfis muito críticos/cínicos que drenam energia, microgerenciadores que limitam autonomia, especialistas puristas que desprezam generalistas"
+      }
+    },
+    "development_roadmap": {
+      "immediate_priorities": [
+        "Desenvolver sistemas de delegação efetiva para tarefas operacionais - crítico para scaling",
+        "Criar processos mínimos viáveis para follow-through em projetos - usar IA e automação"
+      ],
+      "medium_term_goals": [
+        "Aprofundar em 1-2 áreas técnicas específicas para credibilidade aumentada sem perder amplitude",
+        "Construir equipe complementar que ama estrutura e detalhes",
+        "Desenvolver resiliência emocional a crítica mantendo abertura a feedback"
+      ],
+      "long_term_potential": [
+        "Transição para Estrato VI - capacidade está presente, precisa de contexto que force expansão de horizonte temporal (global vs local)",
+        "Tornar-se referência internacional em educação não-linear/multipotencial",
+        "Desenvolver Si inferior para maior consistência sem perder espontaneidade"
+      ],
+      "recommended_practices": [
+        "Journaling regular para processar velocidade de ideias e manter clareza (Fi auxiliar precisa de espaço)",
+        "Blocos de tempo para 'deep dive' técnico trimestral - desenvolver Te terciário",
+        "Ritual semanal de revisão e priorização - compensar baixo J",
+        "Exercício físico regular para aterramento - balancear intensidade mental",
+        "Retiros periódicos de silêncio/desconexão - prevenir burnout de extroversão"
+      ]
+    },
+    "data_sources": {
+      "primary": [
+        "Livro 'Nexialismo - A Última Inteligência' (173 páginas, análise completa de estilo, conteúdo, estrutura)",
+        "Transcrição completa de aula 'Vibe Coding' (2814 linhas, 1h42min de fala espontânea)",
+        "Padrões de comunicação direta observados em tempo real durante aula ao vivo",
+        "Escolhas linguísticas, metáforas e neologismos criados",
+        "Reações a problemas técnicos e desafios em tempo real",
+        "Estrutura e organização do material didático",
+        "Tom emocional e energia sustentada durante ensino",
+        "Admissões explícitas sobre limitações e forças",
+        "Valores implícitos e explícitos no livro e na comunicação",
+        "Padrões de iteração e adaptação observados"
+      ],
+      "confidence_levels": {
+        "high": "MBTI (ENFP), Eneagrama (7w8), DISC (ID), Big Five Openness e Extraversion, Estrato Cognitivo V, Gardner Linguistic e Existential - múltiplas evidências convergentes",
+        "medium": "Big Five Conscientiousness e Agreeableness, EQ componentes, Gardner Interpersonal e Intrapersonal - evidências consistentes mas contexto limitado",
+        "low": "Aspectos específicos de relacionamentos pessoais, rotina detalhada, história familiar - dados insuficientes",
+        "speculative": "Transição exata para Estrato VI, desenvolvimento a longo prazo, detalhes de background educacional formal - inferências baseadas em padrões"
+      }
+    }
+  },
+  "metadata": {
+    "analysis_date": "2025-10-19",
+    "version": "1.0",
+    "analyzer": "Análise Psicométrica Profunda",
+    "special_notes": "José Amorim representa um caso fascinante de 'self-made thought leader' na era da IA. Sua jornada de não-técnico para educador de IA em meses demonstra a tese central de seu livro: algumas pessoas possuem arquitetura cognitiva para síntese rápida multi-domínio. O Nexialismo não é apenas conceito que ele ensina, é descrição autobiográfica de como sua própria mente funciona. Autenticidade é sua marca - vulnerabilidade sobre limitações cria conexão mais profunda que expertise técnica pura. Risco principal: dispersão excessiva e dificuldade de scaling sem sistemas. Força principal: capacidade de tornar o complexo não apenas simples, mas inspirador.",
+    "disclaimer": "Análise baseada em obra publicada (livro Nexialismo) e transcrição de aula pública. Comportamento privado pode diferir significativamente. Não constitui avaliação clínica ou diagnóstico psicológico. José Amorim não foi entrevistado diretamente nem completou avaliações formais. Esta análise é inferencial baseada em padrões comportamentais observáveis em contexto público.",
+    "assessment_scales": {
+      "disc": "0-100 (baseado em evidências comportamentais, não teste formal)",
+      "enneagram": "Tipos 1-9, níveis 1-9 (Riso-Hudson), instintos SP/SO/SX",
+      "mbti": "16 tipos, percentagens 0-100 (baseado em funções cognitivas observáveis)",
+      "cognitive_stratum": "Níveis I-VIII (Elliott Jaques - baseado em horizonte temporal e complexidade demonstrada)",
+      "big_five": "0-100 por traço e faceta (estimado de comportamentos, não NEO-PI-R formal)",
+      "hexaco": "0-100 por dimensão (adição de Honesty-Humility ao Big Five)",
+      "dark_triad": "1-7 por traço (estimativa conservadora baseada em evidências)",
+      "iq": "Estimativa de range baseada em evidências de abstração, não teste psicométrico formal",
+      "eq": "0-100 estimado (Goleman framework - observação comportamental)"
+    }
+  }
+}

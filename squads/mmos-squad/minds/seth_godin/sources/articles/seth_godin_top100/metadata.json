@@ -1,0 +1,1003 @@
+{
+  "source": "Seth Godin Blog - Popular & Top 100",
+  "source_urls": [
+    "https://seths.blog/popular/",
+    "https://seths.blog/top-100/"
+  ],
+  "download_date": "2025-09-21T12:44:20.365843",
+  "total_posts": 124,
+  "posts": [
+    {
+      "index": 1,
+      "title": "Don’t Shave That Yak!",
+      "url": "https://seths.blog/2005/03/dont_shave_that/",
+      "date": "2005-03",
+      "filename": "001_dont_shave_that_yak.md",
+      "content_length": 1596
+    },
+    {
+      "index": 2,
+      "title": "Ode: How to tell a great story",
+      "url": "https://seths.blog/2006/04/ode_how_to_tell/",
+      "date": "2006-04",
+      "filename": "002_ode_how_to_tell_a_great_story.md",
+      "content_length": 2769
+    },
+    {
+      "index": 3,
+      "title": "Advice for authors",
+      "url": "https://seths.blog/2006/08/advice_for_auth/",
+      "date": "2006-08",
+      "filename": "003_advice_for_authors.md",
+      "content_length": 416
+    },
+    {
+      "index": 4,
+      "title": "How to be remarkable",
+      "url": "https://seths.blog/2007/01/how_to_be_remar/",
+      "date": "2007-01",
+      "filename": "004_how_to_be_remarkable.md",
+      "content_length": 2532
+    },
+    {
+      "index": 5,
+      "title": "Really Bad Powerpoint",
+      "url": "https://seths.blog/2007/01/really_bad_powe/",
+      "date": "2007-01",
+      "filename": "005_really_bad_powerpoint.md",
+      "content_length": 5153
+    },
+    {
+      "index": 6,
+      "title": "You should write an ebook",
+      "url": "https://seths.blog/2007/03/you_should_writ/",
+      "date": "2007-03",
+      "filename": "006_you_should_write_an_ebook.md",
+      "content_length": 2315
+    },
+    {
+      "index": 7,
+      "title": "Permission Marketing",
+      "url": "https://seths.blog/2008/01/permission-mark/",
+      "date": "2008-01",
+      "filename": "007_permission_marketing.md",
+      "content_length": 3639
+    },
+    {
+      "index": 8,
+      "title": "1000 true fans",
+      "url": "https://seths.blog/2008/03/1000-true-fans/",
+      "date": "2008-03",
+      "filename": "008_1000_true_fans.md",
+      "content_length": 410
+    },
+    {
+      "index": 9,
+      "title": "Email checklist",
+      "url": "https://seths.blog/2008/06/email-checklist/",
+      "date": "2008-06",
+      "filename": "009_email_checklist.md",
+      "content_length": 164
+    },
+    {
+      "index": 10,
+      "title": "First, ten",
+      "url": "https://seths.blog/2009/04/first-ten/",
+      "date": "2009-04",
+      "filename": "010_first_ten.md",
+      "content_length": 1283
+    },
+    {
+      "index": 11,
+      "title": "Ignore sunk costs",
+      "url": "https://seths.blog/2009/05/ignore-sunk-costs/",
+      "date": "2009-05",
+      "filename": "011_ignore_sunk_costs.md",
+      "content_length": 1749
+    },
+    {
+      "index": 12,
+      "title": "Understanding business development",
+      "url": "https://seths.blog/2009/09/understanding-business-development/",
+      "date": "2009-09",
+      "filename": "012_understanding_business_development.md",
+      "content_length": 1866
+    },
+    {
+      "index": 13,
+      "title": "define: Brand",
+      "url": "https://seths.blog/2009/12/define-brand/",
+      "date": "2009-12",
+      "filename": "013_define_brand.md",
+      "content_length": 1564
+    },
+    {
+      "index": 14,
+      "title": "Quieting the lizard brain",
+      "url": "https://seths.blog/2010/01/quieting-the-lizard-brain/",
+      "date": "2010-01",
+      "filename": "014_quieting_the_lizard_brain.md",
+      "content_length": 2420
+    },
+    {
+      "index": 15,
+      "title": "The modern business plan",
+      "url": "https://seths.blog/2010/05/the-modern-business-plan/",
+      "date": "2010-05",
+      "filename": "015_the_modern_business_plan.md",
+      "content_length": 2377
+    },
+    {
+      "index": 16,
+      "title": "Deliberately uninformed, relentlessly so [a rant]",
+      "url": "https://seths.blog/2010/10/deliberately-uninformed-relentlessly-so/",
+      "date": "2010-10",
+      "filename": "016_deliberately_uninformed_relentlessly_so_a_rant.md",
+      "content_length": 2921
+    },
+    {
+      "index": 17,
+      "title": "The world’s worst boss",
+      "url": "https://seths.blog/2010/12/the-worlds-worst-boss/",
+      "date": "2010-12",
+      "filename": "017_the_worlds_worst_boss.md",
+      "content_length": 1424
+    },
+    {
+      "index": 18,
+      "title": "Are you making something?",
+      "url": "https://seths.blog/2011/03/are-you-making-something/",
+      "date": "2011-03",
+      "filename": "018_are_you_making_something.md",
+      "content_length": 2331
+    },
+    {
+      "index": 19,
+      "title": "Reject the tyranny of being picked: pick yourself",
+      "url": "https://seths.blog/2011/03/reject-the-tyranny-of-being-picked-pick-yourself/",
+      "date": "2011-03",
+      "filename": "019_reject_the_tyranny_of_being_picked_pick_yourself.md",
+      "content_length": 1344
+    },
+    {
+      "index": 20,
+      "title": "Hard work vs. Long work",
+      "url": "https://seths.blog/2011/05/hard-work-vs-long-work/",
+      "date": "2011-05",
+      "filename": "020_hard_work_vs_long_work.md",
+      "content_length": 1192
+    },
+    {
+      "index": 21,
+      "title": "The future of the library",
+      "url": "https://seths.blog/2011/05/the-future-of-the-library/",
+      "date": "2011-05",
+      "filename": "021_the_future_of_the_library.md",
+      "content_length": 5554
+    },
+    {
+      "index": 22,
+      "title": "What’s high school for?",
+      "url": "https://seths.blog/2011/05/whats-high-school-for/",
+      "date": "2011-05",
+      "filename": "022_whats_high_school_for.md",
+      "content_length": 129
+    },
+    {
+      "index": 23,
+      "title": "Back to (the wrong) school",
+      "url": "https://seths.blog/2011/09/back-to-the-wrong-school/",
+      "date": "2011-09",
+      "filename": "023_back_to_the_wrong_school.md",
+      "content_length": 3122
+    },
+    {
+      "index": 24,
+      "title": "Talker’s block",
+      "url": "https://seths.blog/2011/09/talkers-block/",
+      "date": "2011-09",
+      "filename": "024_talkers_block.md",
+      "content_length": 1815
+    },
+    {
+      "index": 25,
+      "title": "The forever recession (and the coming revolution)",
+      "url": "https://seths.blog/2011/09/the-forever-recession/",
+      "date": "2011-09",
+      "filename": "025_the_forever_recession_and_the_coming_revolution.md",
+      "content_length": 4654
+    },
+    {
+      "index": 26,
+      "title": "The difference between management and leadership",
+      "url": "https://seths.blog/2011/10/the-difference-between-management-and-leadership/",
+      "date": "2011-10",
+      "filename": "026_the_difference_between_management_and_leadership.md",
+      "content_length": 556
+    },
+    {
+      "index": 27,
+      "title": "You will be judged (or you will be ignored)",
+      "url": "https://seths.blog/2012/05/you-will-be-judged-or-you-will-be-ignored/",
+      "date": "2012-05",
+      "filename": "027_you_will_be_judged_or_you_will_be_ignored.md",
+      "content_length": 388
+    },
+    {
+      "index": 28,
+      "title": "Seven marketing sins",
+      "url": "https://seths.blog/2012/06/seven-marketing-sins/",
+      "date": "2012-06",
+      "filename": "028_seven_marketing_sins.md",
+      "content_length": 1332
+    },
+    {
+      "index": 29,
+      "title": "The circles of marketing",
+      "url": "https://seths.blog/2012/07/the-circles-of-marketing/",
+      "date": "2012-07",
+      "filename": "029_the_circles_of_marketing.md",
+      "content_length": 1860
+    },
+    {
+      "index": 30,
+      "title": "Corporations are not people",
+      "url": "https://seths.blog/2012/08/corporations-are-not-people/",
+      "date": "2012-08",
+      "filename": "030_corporations_are_not_people.md",
+      "content_length": 2445
+    },
+    {
+      "index": 31,
+      "title": "True professionals don’t fear amateurs",
+      "url": "https://seths.blog/2012/12/true-professionals-dont-fear-amateurs/",
+      "date": "2012-12",
+      "filename": "031_true_professionals_dont_fear_amateurs.md",
+      "content_length": 1500
+    },
+    {
+      "index": 32,
+      "title": "Should you work for free?",
+      "url": "https://seths.blog/2013/02/should-you-work-for-free/",
+      "date": "2013-02",
+      "filename": "032_should_you_work_for_free.md",
+      "content_length": 5422
+    },
+    {
+      "index": 33,
+      "title": "Thinking about money",
+      "url": "https://seths.blog/2013/06/thinking-about-money/",
+      "date": "2013-06",
+      "filename": "033_thinking_about_money.md",
+      "content_length": 455
+    },
+    {
+      "index": 34,
+      "title": "“People like us do things like this”",
+      "url": "https://seths.blog/2013/07/people-like-us-do-stuff-like-this/",
+      "date": "2013-07",
+      "filename": "034_people_like_us_do_things_like_this.md",
+      "content_length": 420
+    },
+    {
+      "index": 35,
+      "title": "Understanding luxury goods",
+      "url": "https://seths.blog/2013/10/understanding-luxury-goods/",
+      "date": "2013-10",
+      "filename": "035_understanding_luxury_goods.md",
+      "content_length": 4154
+    },
+    {
+      "index": 36,
+      "title": "The four horsemen of mediocrity",
+      "url": "https://seths.blog/2014/01/the-four-horsemen-of-mediocrity/",
+      "date": "2014-01",
+      "filename": "036_the_four_horsemen_of_mediocrity.md",
+      "content_length": 549
+    },
+    {
+      "index": 37,
+      "title": "Not even one note",
+      "url": "https://seths.blog/2014/03/not-even-one-note/",
+      "date": "2014-03",
+      "filename": "037_not_even_one_note.md",
+      "content_length": 2173
+    },
+    {
+      "index": 39,
+      "title": "Forty years of projects",
+      "url": "https://seths.blog/2014/07/thirty-years-of-projects/",
+      "date": "2014-07",
+      "filename": "039_forty_years_of_projects.md",
+      "content_length": 15767
+    },
+    {
+      "index": 40,
+      "title": "The wasteful fraud of sorting for youth meritocracy: Stop Stealing Dreams",
+      "url": "https://seths.blog/2014/09/the-shameful-fraud-of-sorting-for-youth-meritocracy/",
+      "date": "2014-09",
+      "filename": "040_the_wasteful_fraud_of_sorting_for_youth_meritocracy_stop_ste.md",
+      "content_length": 4023
+    },
+    {
+      "index": 41,
+      "title": "A Thanksgiving Reader",
+      "url": "https://seths.blog/2015/11/a-thanksgiving-reader/",
+      "date": "2015-11",
+      "filename": "041_a_thanksgiving_reader.md",
+      "content_length": 2716
+    },
+    {
+      "index": 42,
+      "title": "A manifesto for small teams doing important work",
+      "url": "https://seths.blog/2016/02/a-manifesto-for-small-teams-doing-important-work/",
+      "date": "2016-02",
+      "filename": "042_a_manifesto_for_small_teams_doing_important_work.md",
+      "content_length": 1348
+    },
+    {
+      "index": 43,
+      "title": "Freedom and responsibility",
+      "url": "https://seths.blog/2016/03/freedom-and-responsibility/",
+      "date": "2016-03",
+      "filename": "043_freedom_and_responsibility.md",
+      "content_length": 911
+    },
+    {
+      "index": 44,
+      "title": "The short run and the long run",
+      "url": "https://seths.blog/2016/05/the-short-run-and-the-long-run/",
+      "date": "2016-05",
+      "filename": "044_the_short_run_and_the_long_run.md",
+      "content_length": 1213
+    },
+    {
+      "index": 45,
+      "title": "A dollar more (vs. a dollar less)",
+      "url": "https://seths.blog/2016/06/a-dollar-more-vs-a-dollar-less/",
+      "date": "2016-06",
+      "filename": "045_a_dollar_more_vs_a_dollar_less.md",
+      "content_length": 1374
+    },
+    {
+      "index": 46,
+      "title": "The problem with complaining about the system",
+      "url": "https://seths.blog/2016/06/the-problem-with-complaining-about-the-system/",
+      "date": "2016-06",
+      "filename": "046_the_problem_with_complaining_about_the_system.md",
+      "content_length": 579
+    },
+    {
+      "index": 47,
+      "title": "Uninformed dissent",
+      "url": "https://seths.blog/2016/06/uninformed-dissent/",
+      "date": "2016-06",
+      "filename": "047_uninformed_dissent.md",
+      "content_length": 757
+    },
+    {
+      "index": 48,
+      "title": "Your job vs. your project",
+      "url": "https://seths.blog/2016/06/your-job-vs-your-project/",
+      "date": "2016-06",
+      "filename": "048_your_job_vs_your_project.md",
+      "content_length": 963
+    },
+    {
+      "index": 49,
+      "title": "Empathy is difficult",
+      "url": "https://seths.blog/2016/07/empathy-is-difficult/",
+      "date": "2016-07",
+      "filename": "049_empathy_is_difficult.md",
+      "content_length": 338
+    },
+    {
+      "index": 50,
+      "title": "Just because you’re right…",
+      "url": "https://seths.blog/2016/07/just-because-youre-right/",
+      "date": "2016-07",
+      "filename": "050_just_because_youre_right.md",
+      "content_length": 293
+    },
+    {
+      "index": 51,
+      "title": "No one is unreasonable",
+      "url": "https://seths.blog/2016/07/no-one-is-unreasonable/",
+      "date": "2016-07",
+      "filename": "051_no_one_is_unreasonable.md",
+      "content_length": 2141
+    },
+    {
+      "index": 52,
+      "title": "We are all home schooled",
+      "url": "https://seths.blog/2016/07/we-are-all-home-schooled/",
+      "date": "2016-07",
+      "filename": "052_we_are_all_home_schooled.md",
+      "content_length": 636
+    },
+    {
+      "index": 53,
+      "title": "Marketing in four steps",
+      "url": "https://seths.blog/2016/08/marketing-in-four-steps/",
+      "date": "2016-08",
+      "filename": "053_marketing_in_four_steps.md",
+      "content_length": 625
+    },
+    {
+      "index": 54,
+      "title": "Temperament is a skill",
+      "url": "https://seths.blog/2016/08/temperament-is-a-skill/",
+      "date": "2016-08",
+      "filename": "054_temperament_is_a_skill.md",
+      "content_length": 931
+    },
+    {
+      "index": 55,
+      "title": "The lottery winners (a secret of unhappiness)",
+      "url": "https://seths.blog/2016/08/the-lottery-winners-a-secret-of-unhappiness/",
+      "date": "2016-08",
+      "filename": "055_the_lottery_winners_a_secret_of_unhappiness.md",
+      "content_length": 244
+    },
+    {
+      "index": 56,
+      "title": "Anxiety loves company",
+      "url": "https://seths.blog/2016/09/anxiety-loves-company/",
+      "date": "2016-09",
+      "filename": "056_anxiety_loves_company.md",
+      "content_length": 816
+    },
+    {
+      "index": 57,
+      "title": "Dropping the narrative",
+      "url": "https://seths.blog/2016/09/dropping-the-narrative/",
+      "date": "2016-09",
+      "filename": "057_dropping_the_narrative.md",
+      "content_length": 795
+    },
+    {
+      "index": 58,
+      "title": "The paradox of the flawless record",
+      "url": "https://seths.blog/2016/09/the-paradox-of-the-flawless-record/",
+      "date": "2016-09",
+      "filename": "058_the_paradox_of_the_flawless_record.md",
+      "content_length": 672
+    },
+    {
+      "index": 59,
+      "title": "The professional pushes back",
+      "url": "https://seths.blog/2016/09/the-professional-pushes-back/",
+      "date": "2016-09",
+      "filename": "059_the_professional_pushes_back.md",
+      "content_length": 1013
+    },
+    {
+      "index": 60,
+      "title": "Wedding syndrome",
+      "url": "https://seths.blog/2016/09/wedding-syndrome/",
+      "date": "2016-09",
+      "filename": "060_wedding_syndrome.md",
+      "content_length": 626
+    },
+    {
+      "index": 61,
+      "title": "Ketchup and the third-party problem",
+      "url": "https://seths.blog/2016/10/ketchup-and-the-third-party-problem/",
+      "date": "2016-10",
+      "filename": "061_ketchup_and_the_third_party_problem.md",
+      "content_length": 3279
+    },
+    {
+      "index": 62,
+      "title": "Your discomfort zone",
+      "url": "https://seths.blog/2016/10/your-discomfort-zone/",
+      "date": "2016-10",
+      "filename": "062_your_discomfort_zone.md",
+      "content_length": 1650
+    },
+    {
+      "index": 63,
+      "title": "Plenty of room on the island",
+      "url": "https://seths.blog/2016/11/plenty-of-room-on-the-island/",
+      "date": "2016-11",
+      "filename": "063_plenty_of_room_on_the_island.md",
+      "content_length": 1082
+    },
+    {
+      "index": 64,
+      "title": "Resilience",
+      "url": "https://seths.blog/2016/11/resilience/",
+      "date": "2016-11",
+      "filename": "064_resilience.md",
+      "content_length": 400
+    },
+    {
+      "index": 65,
+      "title": "The confusion about enough",
+      "url": "https://seths.blog/2016/11/the-confusion-about-enough/",
+      "date": "2016-11",
+      "filename": "065_the_confusion_about_enough.md",
+      "content_length": 305
+    },
+    {
+      "index": 66,
+      "title": "The memories we rehearse are the ones we live with",
+      "url": "https://seths.blog/2016/11/the-memories-we-rehearse-are-the-ones-we-live-with/",
+      "date": "2016-11",
+      "filename": "066_the_memories_we_rehearse_are_the_ones_we_live_with.md",
+      "content_length": 1210
+    },
+    {
+      "index": 67,
+      "title": "Is it a note worth playing?",
+      "url": "https://seths.blog/2016/12/is-it-a-note-worth-playing/",
+      "date": "2016-12",
+      "filename": "067_is_it_a_note_worth_playing.md",
+      "content_length": 199
+    },
+    {
+      "index": 68,
+      "title": "No one knows anything",
+      "url": "https://seths.blog/2016/12/no-one-knows-anything/",
+      "date": "2016-12",
+      "filename": "068_no_one_knows_anything.md",
+      "content_length": 1210
+    },
+    {
+      "index": 69,
+      "title": "The best way to stand for something",
+      "url": "https://seths.blog/2016/12/the-best-way-to-stand-for-something/",
+      "date": "2016-12",
+      "filename": "069_the_best_way_to_stand_for_something.md",
+      "content_length": 677
+    },
+    {
+      "index": 70,
+      "title": "The myth of quick",
+      "url": "https://seths.blog/2016/12/the-myth-of-quick/",
+      "date": "2016-12",
+      "filename": "070_the_myth_of_quick.md",
+      "content_length": 1207
+    },
+    {
+      "index": 71,
+      "title": "… and it bends toward justice",
+      "url": "https://seths.blog/2017/01/and-it-bends-toward-justice/",
+      "date": "2017-01",
+      "filename": "071__and_it_bends_toward_justice.md",
+      "content_length": 1951
+    },
+    {
+      "index": 72,
+      "title": "Entitlement is optional",
+      "url": "https://seths.blog/2017/01/entitlement-is-a-choice/",
+      "date": "2017-01",
+      "filename": "072_entitlement_is_optional.md",
+      "content_length": 1666
+    },
+    {
+      "index": 73,
+      "title": "Everyone is better than you are…",
+      "url": "https://seths.blog/2017/01/everyone-is-better-than-you-are/",
+      "date": "2017-01",
+      "filename": "073_everyone_is_better_than_you_are.md",
+      "content_length": 352
+    },
+    {
+      "index": 74,
+      "title": "The candy diet",
+      "url": "https://seths.blog/2017/01/the-candy-diet/",
+      "date": "2017-01",
+      "filename": "074_the_candy_diet.md",
+      "content_length": 3913
+    },
+    {
+      "index": 75,
+      "title": "Maybe your customer isn’t trying to save money",
+      "url": "https://seths.blog/2017/02/maybe-your-customer-isnt-trying-to-save-money/",
+      "date": "2017-02",
+      "filename": "075_maybe_your_customer_isnt_trying_to_save_money.md",
+      "content_length": 525
+    },
+    {
+      "index": 77,
+      "title": "Working for free (but working for yourself)",
+      "url": "https://seths.blog/2017/02/working-for-free-but-working-for-yourself/",
+      "date": "2017-02",
+      "filename": "077_working_for_free_but_working_for_yourself.md",
+      "content_length": 1729
+    },
+    {
+      "index": 78,
+      "title": "Fear, failure and shame, oh my",
+      "url": "https://seths.blog/2017/03/fear-failure-and-shame-oh-my/",
+      "date": "2017-03",
+      "filename": "078_fear_failure_and_shame_oh_my.md",
+      "content_length": 901
+    },
+    {
+      "index": 79,
+      "title": "Three simple and difficult steps",
+      "url": "https://seths.blog/2017/03/three-simple-and-difficult-steps/",
+      "date": "2017-03",
+      "filename": "079_three_simple_and_difficult_steps.md",
+      "content_length": 669
+    },
+    {
+      "index": 80,
+      "title": "Being wrong until you are right",
+      "url": "https://seths.blog/2017/04/being-wrong-until-you-are-right/",
+      "date": "2017-04",
+      "filename": "080_being_wrong_until_you_are_right.md",
+      "content_length": 129
+    },
+    {
+      "index": 81,
+      "title": "Like riding a bike",
+      "url": "https://seths.blog/2017/04/like-riding-a-bike/",
+      "date": "2017-04",
+      "filename": "081_like_riding_a_bike.md",
+      "content_length": 474
+    },
+    {
+      "index": 82,
+      "title": "‘Sort by price’ is lazy",
+      "url": "https://seths.blog/2017/04/sort-by-price-is-lazy/",
+      "date": "2017-04",
+      "filename": "082_sort_by_price_is_lazy.md",
+      "content_length": 2274
+    },
+    {
+      "index": 83,
+      "title": "The bingo method",
+      "url": "https://seths.blog/2017/04/the-bingo-method/",
+      "date": "2017-04",
+      "filename": "083_the_bingo_method.md",
+      "content_length": 1136
+    },
+    {
+      "index": 84,
+      "title": "Choosing your fuel",
+      "url": "https://seths.blog/2017/05/choosing-your-fuel/",
+      "date": "2017-05",
+      "filename": "084_choosing_your_fuel.md",
+      "content_length": 944
+    },
+    {
+      "index": 85,
+      "title": "Emotional labor",
+      "url": "https://seths.blog/2017/05/emotional-labor/",
+      "date": "2017-05",
+      "filename": "085_emotional_labor.md",
+      "content_length": 741
+    },
+    {
+      "index": 86,
+      "title": "Facts are not the antidote for doubt",
+      "url": "https://seths.blog/2017/05/facts-are-not-the-opposite-of-doubt/",
+      "date": "2017-05",
+      "filename": "086_facts_are_not_the_antidote_for_doubt.md",
+      "content_length": 1225
+    },
+    {
+      "index": 87,
+      "title": "The self-healing letter of complaint",
+      "url": "https://seths.blog/2017/05/the-self-healing-letter-of-complaint/",
+      "date": "2017-05",
+      "filename": "087_the_self_healing_letter_of_complaint.md",
+      "content_length": 1966
+    },
+    {
+      "index": 88,
+      "title": "What Henry Ford understood about wages",
+      "url": "https://seths.blog/2017/05/what-henry-ford-understood-about-wages/",
+      "date": "2017-05",
+      "filename": "088_what_henry_ford_understood_about_wages.md",
+      "content_length": 525
+    },
+    {
+      "index": 89,
+      "title": "Mental load and the worry cache",
+      "url": "https://seths.blog/2017/06/mental-load-and-the-worry-cache/",
+      "date": "2017-06",
+      "filename": "089_mental_load_and_the_worry_cache.md",
+      "content_length": 1743
+    },
+    {
+      "index": 90,
+      "title": "Off the hook with Milton Friedman",
+      "url": "https://seths.blog/2017/06/off-the-hook-with-milton-friedman/",
+      "date": "2017-06",
+      "filename": "090_off_the_hook_with_milton_friedman.md",
+      "content_length": 4175
+    },
+    {
+      "index": 91,
+      "title": "The right effort of generosity",
+      "url": "https://seths.blog/2017/06/the-right-effort-of-generosity/",
+      "date": "2017-06",
+      "filename": "091_the_right_effort_of_generosity.md",
+      "content_length": 436
+    },
+    {
+      "index": 92,
+      "title": "What 99% looks like",
+      "url": "https://seths.blog/2017/06/what-99-looks-like/",
+      "date": "2017-06",
+      "filename": "092_what_99_looks_like.md",
+      "content_length": 792
+    },
+    {
+      "index": 93,
+      "title": "You are more powerful than you think",
+      "url": "https://seths.blog/2017/06/you-are-more-powerful-than-you-think/",
+      "date": "2017-06",
+      "filename": "093_you_are_more_powerful_than_you_think.md",
+      "content_length": 764
+    },
+    {
+      "index": 94,
+      "title": "In search of the minimum viable audience",
+      "url": "https://seths.blog/2017/07/in-search-of-the-minimum-viable-audience/",
+      "date": "2017-07",
+      "filename": "094_in_search_of_the_minimum_viable_audience.md",
+      "content_length": 1371
+    },
+    {
+      "index": 95,
+      "title": "On beating yourself up",
+      "url": "https://seths.blog/2017/08/on-beating-yourself-up/",
+      "date": "2017-08",
+      "filename": "095_on_beating_yourself_up.md",
+      "content_length": 329
+    },
+    {
+      "index": 96,
+      "title": "The crisp meeting",
+      "url": "https://seths.blog/2017/09/the-crisp-meeting/",
+      "date": "2017-09",
+      "filename": "096_the_crisp_meeting.md",
+      "content_length": 1725
+    },
+    {
+      "index": 97,
+      "title": "Defining authenticity",
+      "url": "https://seths.blog/2017/10/defining-authenticity/",
+      "date": "2017-10",
+      "filename": "097_defining_authenticity.md",
+      "content_length": 590
+    },
+    {
+      "index": 98,
+      "title": "Money for nothing",
+      "url": "https://seths.blog/2017/10/money-for-nothing/",
+      "date": "2017-10",
+      "filename": "098_money_for_nothing.md",
+      "content_length": 928
+    },
+    {
+      "index": 99,
+      "title": "What will you do with your surplus?",
+      "url": "https://seths.blog/2017/10/what-will-you-do-with-your-surplus/",
+      "date": "2017-10",
+      "filename": "099_what_will_you_do_with_your_surplus.md",
+      "content_length": 490
+    },
+    {
+      "index": 100,
+      "title": "Two kinds of practice",
+      "url": "https://seths.blog/2017/11/two-kinds-of-practice/",
+      "date": "2017-11",
+      "filename": "100_two_kinds_of_practice.md",
+      "content_length": 1004
+    },
+    {
+      "index": 101,
+      "title": "Yelling upstairs",
+      "url": "https://seths.blog/2017/11/yelling-upstairs/",
+      "date": "2017-11",
+      "filename": "101_yelling_upstairs.md",
+      "content_length": 621
+    },
+    {
+      "index": 102,
+      "title": "Are you day trading?",
+      "url": "https://seths.blog/2017/12/are-you-day-trading/",
+      "date": "2017-12",
+      "filename": "102_are_you_day_trading.md",
+      "content_length": 836
+    },
+    {
+      "index": 103,
+      "title": "Different people hear differently",
+      "url": "https://seths.blog/2017/12/different-people-hear-differently/",
+      "date": "2017-12",
+      "filename": "103_different_people_hear_differently.md",
+      "content_length": 515
+    },
+    {
+      "index": 104,
+      "title": "Rules for working in a studio",
+      "url": "https://seths.blog/2017/12/rules-for-working-in-a-studio/",
+      "date": "2017-12",
+      "filename": "104_rules_for_working_in_a_studio.md",
+      "content_length": 309
+    },
+    {
+      "index": 105,
+      "title": "Start small, start now",
+      "url": "https://seths.blog/2017/12/start-small-start-now/",
+      "date": "2017-12",
+      "filename": "105_start_small_start_now.md",
+      "content_length": 176
+    },
+    {
+      "index": 106,
+      "title": "Beginning is underrated",
+      "url": "https://seths.blog/2018/01/beginning-is-underrated/",
+      "date": "2018-01",
+      "filename": "106_beginning_is_underrated.md",
+      "content_length": 321
+    },
+    {
+      "index": 108,
+      "title": "Why we don’t have nice things",
+      "url": "https://seths.blog/2018/01/why-we-dont-have-nice-things/",
+      "date": "2018-01",
+      "filename": "108_why_we_dont_have_nice_things.md",
+      "content_length": 1886
+    },
+    {
+      "index": 109,
+      "title": "A changemaker’s triangle",
+      "url": "https://seths.blog/2018/02/a-changemakers-triangle/",
+      "date": "2018-02",
+      "filename": "109_a_changemakers_triangle.md",
+      "content_length": 843
+    },
+    {
+      "index": 110,
+      "title": "About that tantrum",
+      "url": "https://seths.blog/2018/04/about-your-tantrum/",
+      "date": "2018-04",
+      "filename": "110_about_that_tantrum.md",
+      "content_length": 1198
+    },
+    {
+      "index": 111,
+      "title": "Entrepreneurship is not a job",
+      "url": "https://seths.blog/2018/04/entrepreneurship-is-not-a-job/",
+      "date": "2018-04",
+      "filename": "111_entrepreneurship_is_not_a_job.md",
+      "content_length": 616
+    },
+    {
+      "index": 112,
+      "title": "How to give a five-minute presentation",
+      "url": "https://seths.blog/2018/04/how-to-give-a-five-minute-presentation/",
+      "date": "2018-04",
+      "filename": "112_how_to_give_a_five_minute_presentation.md",
+      "content_length": 577
+    },
+    {
+      "index": 113,
+      "title": "Why even bother to think about strategy?",
+      "url": "https://seths.blog/2018/04/why-even-bother-to-think-about-strategy/",
+      "date": "2018-04",
+      "filename": "113_why_even_bother_to_think_about_strategy.md",
+      "content_length": 1131
+    },
+    {
+      "index": 114,
+      "title": "Five ways to make your presentation better",
+      "url": "https://seths.blog/2018/07/generous-assertions/",
+      "date": "2018-07",
+      "filename": "114_five_ways_to_make_your_presentation_better.md",
+      "content_length": 357
+    },
+    {
+      "index": 115,
+      "title": "Zoom & Skype call tips (the secrets of video conferences)",
+      "url": "https://seths.blog/2018/09/how-to-be-on-a-zoom-or-skype-call-the-secrets-of-video-conferences/",
+      "date": "2018-09",
+      "filename": "115_zoom_skype_call_tips_the_secrets_of_video_conferences.md",
+      "content_length": 354
+    },
+    {
+      "index": 116,
+      "title": "Social media is a symptom, not a tactic",
+      "url": "https://seths.blog/2018/10/social-media-is-a-symptom-not-a-tactic/",
+      "date": "2018-10",
+      "filename": "116_social_media_is_a_symptom_not_a_tactic.md",
+      "content_length": 1081
+    },
+    {
+      "index": 117,
+      "title": "Quality and effort",
+      "url": "https://seths.blog/2018/11/quality-and-effort/",
+      "date": "2018-11",
+      "filename": "117_quality_and_effort.md",
+      "content_length": 2349
+    },
+    {
+      "index": 118,
+      "title": "The top 5%",
+      "url": "https://seths.blog/2019/01/the-top-5/",
+      "date": "2019-01",
+      "filename": "118_the_top_5.md",
+      "content_length": 1454
+    },
+    {
+      "index": 119,
+      "title": "Busy is not the point",
+      "url": "https://seths.blog/2019/03/busy-is-not-the-point/",
+      "date": "2019-03",
+      "filename": "119_busy_is_not_the_point.md",
+      "content_length": 362
+    },
+    {
+      "index": 120,
+      "title": "The elegance of nothing",
+      "url": "https://seths.blog/2019/04/the-elegance-of-nothing/",
+      "date": "2019-04",
+      "filename": "120_the_elegance_of_nothing.md",
+      "content_length": 4671
+    },
+    {
+      "index": 121,
+      "title": "Defective apologies",
+      "url": "https://seths.blog/2019/05/defective-apologies/",
+      "date": "2019-05",
+      "filename": "121_defective_apologies.md",
+      "content_length": 6169
+    },
+    {
+      "index": 122,
+      "title": "NFTs are a dangerous trap",
+      "url": "https://seths.blog/2021/03/nfts-are-a-dangerous-trap/",
+      "date": "2021-03",
+      "filename": "122_nfts_are_a_dangerous_trap.md",
+      "content_length": 5237
+    },
+    {
+      "index": 123,
+      "title": "Fixing Zoom calls: Looking better and feeling better",
+      "url": "https://seths.blog/2021/04/fixing-zoom-calls-looking-better-and-feeling-better/",
+      "date": "2021-04",
+      "filename": "123_fixing_zoom_calls_looking_better_and_feeling_better.md",
+      "content_length": 4489
+    },
+    {
+      "index": 124,
+      "title": "The modern curriculum",
+      "url": "https://seths.blog/2021/09/the-modern-curriculum/",
+      "date": "2021-09",
+      "filename": "124_the_modern_curriculum.md",
+      "content_length": 3833
+    },
+    {
+      "index": 125,
+      "title": "Don’t waste the good days",
+      "url": "https://seths.blog/2021/12/dont-waste-the-good-days/",
+      "date": "2021-12",
+      "filename": "125_dont_waste_the_good_days.md",
+      "content_length": 294
+    },
+    {
+      "index": 126,
+      "title": "The leaf blower parable",
+      "url": "https://seths.blog/2022/11/the-leaf-blower-parable/",
+      "date": "2022-11",
+      "filename": "126_the_leaf_blower_parable.md",
+      "content_length": 723
+    },
+    {
+      "index": 127,
+      "title": "(Without the bad parts)",
+      "url": "https://seths.blog/2023/07/without-the-bad-parts/",
+      "date": "2023-07",
+      "filename": "127_without_the_bad_parts.md",
+      "content_length": 1366
+    }
+  ]
+}

@@ -1,0 +1,2154 @@
+WEBVTT
+
+00:00:00.750 --> 00:00:03.590
+E aí, lendários, seja bem -vindo a mais
+uma aula.
+
+00:00:03.710 --> 00:00:10.330
+E agora nós vamos tratar de algo que vai
+evoluir sua capacidade de tomar notas e
+
+00:00:10.330 --> 00:00:11.650
+notas inteligentes.
+
+00:00:11.930 --> 00:00:17.610
+Nós vamos trazer aqui, o objetivo dessa
+aula é que você escreva de forma a
+
+00:00:17.610 --> 00:00:26.290
+contribuir para que o seu texto seja bem
+montado, você foque no conteúdo, mas
+
+00:00:26.290 --> 00:00:31.150
+aproveite o poder da ferramenta do
+Obsidian.
+
+00:00:31.370 --> 00:00:37.090
+E também, aproveitando o poder do
+Obsidian através da sua escrita, você já
+
+00:00:37.090 --> 00:00:43.310
+vai evoluir também para um modo de
+escrita que está presente hoje em muitas
+
+00:00:43.310 --> 00:00:50.970
+ferramentas e também em todas as IAs,
+que você vai conversar no chat, criar um
+
+00:00:50.970 --> 00:00:52.810
+prompt, fazer uma documentação.
+
+00:00:53.530 --> 00:00:59.030
+Você vai usar a mesma coisa sobre a qual
+eu estou falando aqui nessa aula.
+
+00:00:59.150 --> 00:01:01.570
+Nós estamos falando do Markdown.
+
+00:01:01.850 --> 00:01:05.720
+O Obsidian é uma ferramenta, um editor
+Markdown.
+
+00:01:06.290 --> 00:01:12.670
+E você vai aprender hoje o que é
+necessário para você já começar a usar,
+
+00:01:12.810 --> 00:01:13.750
+colocar em prática.
+
+00:01:14.010 --> 00:01:19.230
+Eu vou pegar aqui e vou mostrar para
+você a minha tela, que nós vamos ver
+
+00:01:19.230 --> 00:01:20.310
+sobre Markdown.
+
+00:01:20.510 --> 00:01:22.290
+Nós vamos ver aqui.
+
+00:01:22.290 --> 00:01:24.370
+O que é isso?
+
+00:01:25.870 --> 00:01:33.270
+Markdown é uma linguagem, uma forma de
+marcação que você vai fazer no texto.
+
+00:01:33.710 --> 00:01:39.430
+Ela foi criada em 2004, ou seja, estamos
+aí com o Markdown há 20 anos.
+
+00:01:40.090 --> 00:01:45.890
+E é uma linguagem de marcação que você
+já viu em uma outra aula, eu te falei.
+
+00:01:46.090 --> 00:01:52.170
+Eu mostrei a mim no sistema de arquivo
+que os arquivos do Obsidian são salvos,
+
+00:01:52.290 --> 00:01:56.750
+no formato, na extensão .md, que é o
+arquivo de Markdown.
+
+00:01:57.210 --> 00:02:01.490
+Geralmente, ou é .md ou .markdown mesmo.
+
+00:02:01.930 --> 00:02:04.210
+Por que nós temos o Markdown?
+
+00:02:04.310 --> 00:02:10.870
+O Markdown existe porque ele torna o
+arquivo muito leve e o editor não
+
+00:02:10.870 --> 00:02:12.930
+precisa de processamento pesado.
+
+00:02:13.070 --> 00:02:17.610
+Você não vai ter que ter um monte de
+botão para customizar a formatação do
+
+00:02:17.610 --> 00:02:22.270
+texto e também não vai precisar de
+arquivo.
+
+00:02:22.290 --> 00:02:27.170
+Você não vai ter algo ali a todo momento
+trabalhando com o seu arquivo,
+
+00:02:27.170 --> 00:02:29.410
+armazenando no formato proprietário.
+
+00:02:29.510 --> 00:02:35.110
+Não, o Markdown é uma linguagem, é um
+texto que vai ser armazenado no arquivo
+
+00:02:35.110 --> 00:02:38.890
+.md e ele vai estar legível, mesmo sem
+processamento.
+
+00:02:39.010 --> 00:02:40.170
+É texto, entendeu?
+
+00:02:40.390 --> 00:02:41.150
+É texto puro.
+
+00:02:41.470 --> 00:02:44.910
+Então, isso já vai trazer inúmeros
+benefícios, tá?
+
+00:02:45.030 --> 00:02:51.550
+Além de ter um objetivo de fazer você
+focar no conteúdo, tem essa parte também
+
+00:02:51.550 --> 00:02:52.270
+de toda a linguagem.
+
+00:02:52.270 --> 00:02:56.590
+Todo o benefício do arquivo, da parte de
+processamento, a parte de ficar legível.
+
+00:02:56.970 --> 00:03:04.850
+Mas também permite que você aproveite
+esse texto em várias outras ferramentas.
+
+00:03:04.850 --> 00:03:09.050
+Se você quiser exportar, você vai
+exportar para diversos formatos.
+
+00:03:09.290 --> 00:03:14.370
+Você pode exportar para PDF, para .dot,
+enfim, um monte de coisa, porque o
+
+00:03:14.370 --> 00:03:17.930
+Markdown é entendido pela maioria das
+ferramentas.
+
+00:03:19.030 --> 00:03:20.930
+Então, o que é o Markdown mesmo?
+
+00:03:22.270 --> 00:03:28.010
+É uma forma de você escrever e você vai
+utilizando os próprios caracteres do
+
+00:03:28.010 --> 00:03:35.630
+teclado para marcar o texto e ele já ir
+sendo formatado e sendo organizado, tá?
+
+00:03:35.750 --> 00:03:40.850
+Então, o Markdown, talvez você não
+saiba, mas ele está na maioria dos
+
+00:03:40.850 --> 00:03:41.170
+sites.
+
+00:03:41.570 --> 00:03:42.270
+Olha aqui, ó.
+
+00:03:42.390 --> 00:03:47.790
+Eu estou aqui mostrando para você
+algumas coisas que usam o Markdown.
+
+00:03:48.350 --> 00:03:52.250
+Documentação técnica, tudo que é API,
+você vai ver.
+
+00:03:52.270 --> 00:03:56.550
+Você vai ver sobre API, né, o envio e
+recepção de dados.
+
+00:03:57.710 --> 00:04:04.090
+Usam Markdown, blogs usam Markdown,
+fóruns, sites, por exemplo, como Git,
+
+00:04:04.310 --> 00:04:08.110
+Slack, WhatsApp aceita Markdown,
+entendeu?
+
+00:04:08.850 --> 00:04:11.350
+Você pode ter aí a criação de notas.
+
+00:04:11.390 --> 00:04:17.150
+E hoje, se você aprender Markdown, você
+está dando um passo também na evolução
+
+00:04:17.150 --> 00:04:22.930
+de conhecimento das suas habilidades
+para as IAs, montagens de prompt,
+
+00:04:23.290 --> 00:04:30.270
+montagens de estrutura, uma linguagem
+ali que é texto, mas um texto formatado
+
+00:04:30.270 --> 00:04:33.890
+com um objetivo específico ali, né?
+
+00:04:34.590 --> 00:04:38.650
+Então, você já pode também imaginar,
+você vai ver mais à frente em algumas
+
+00:04:38.650 --> 00:04:45.950
+aulas, que nós vamos ter, com a
+utilização apenas de arquivos que são
+
+00:04:45.950 --> 00:04:51.790
+textos, a possibilidade das IAs
+conversarem com esses textos.
+
+00:04:53.030 --> 00:04:58.770
+Todas as suas notas, que antes você
+salvava em alguma outra ferramenta, que
+
+00:04:58.770 --> 00:05:04.670
+você salvava em caderno, ou você usava
+no celular, eles eram arquivos isolados,
+
+00:05:04.670 --> 00:05:07.270
+que eles eram independentes.
+
+00:05:08.170 --> 00:05:13.150
+E eles ficavam ali e não tinham um
+objetivo a não ser a anotação em si.
+
+00:05:13.290 --> 00:05:19.650
+Só que agora, como você tem uma tipagem,
+uma marcação, você tem só texto, eles se
+
+00:05:19.650 --> 00:05:23.450
+tornam um banco de dados que você vai
+poder usar, para muita coisa, tá?
+
+00:05:23.850 --> 00:05:28.650
+Então, você já vai, em aulas avançadas,
+aprender, por exemplo, que tem plugins,
+
+00:05:29.050 --> 00:05:35.450
+e esses plugins vão trabalhar com esse
+seu texto como se fosse um banco de
+
+00:05:35.450 --> 00:05:40.170
+dados, e você vai poder fazer consultas
+sobre os seus textos.
+
+00:05:40.630 --> 00:05:47.430
+Então, você está evoluindo, né, num
+aprendizado, em uma habilidade, que é
+
+00:05:47.430 --> 00:05:52.210
+algo que vai mudar, com certeza,
+drasticamente, a sua forma de
+
+00:05:52.210 --> 00:05:56.250
+aprendizado, a sua inteligência em tomar
+notas.
+
+00:05:56.410 --> 00:06:01.050
+Eu quero que você entenda, eu trouxe um
+desenho aqui, só para você entender bem,
+
+00:06:01.190 --> 00:06:04.150
+né, o que é o Markdown e como que ele
+funciona.
+
+00:06:04.510 --> 00:06:09.370
+Você tem o arquivo Markdown, como eu já
+falei, você tem aqui um MD, né?
+
+00:06:09.870 --> 00:06:13.910
+E ele é usado num Markdown app.
+
+00:06:14.550 --> 00:06:17.810
+Nós estamos usando, no caso, o Obsidia.
+
+00:06:17.850 --> 00:06:23.470
+O Obsidia, como eu já falei, a própria
+comunidade, chama a ferramenta de um
+
+00:06:23.470 --> 00:06:29.130
+sistema operacional Markdown, de tanta
+coisa que ele faz, não é só salvar
+
+00:06:29.130 --> 00:06:32.550
+Markdown, ele trabalha com todos esses
+arquivos,
+
+00:06:32.650 --> 00:06:32.750
+né?
+
+00:06:35.250 --> 00:06:42.410
+Esse aplicativo, ele pega o Markdown que
+você colocou em texto, marcou em texto,
+
+00:06:42.630 --> 00:06:51.810
+né, e transforma em HTML, e vai
+renderizar para que você veja a tela, na
+
+00:06:51.810 --> 00:06:53.230
+formatação que você quer.
+
+00:06:53.290 --> 00:06:56.390
+No caso do Obsidia, ele faz praticamente
+isso.
+
+00:06:56.530 --> 00:07:00.730
+Ele transforma ali, claro que o
+resultado é um XHTML, mas é quase a
+
+00:07:00.730 --> 00:07:02.790
+mesma coisa, e ele mostra.
+
+00:07:02.970 --> 00:07:08.090
+Então, o Obsidia, ele tem a capacidade
+de marcar, de você criar o Markdown, né,
+
+00:07:08.150 --> 00:07:12.870
+e ele mostrar formatado, né, o texto
+para você.
+
+00:07:13.470 --> 00:07:18.250
+Só que agora, ainda nas últimas versões,
+temos ainda mais benefícios.
+
+00:07:18.370 --> 00:07:24.690
+O Obsidia, ele está trazendo muitos
+menus, de contexto, para você conseguir
+
+00:07:24.690 --> 00:07:31.570
+fazer formatação de modo mais fácil,
+criar coisas de modo mais fácil, podendo
+
+00:07:31.570 --> 00:07:37.290
+não só otimizar o teclado, mas atalhos,
+né, para você criar e formatar as
+
+00:07:37.290 --> 00:07:37.630
+coisas.
+
+00:07:38.310 --> 00:07:42.910
+Só que o armazenamento continua sendo
+Markdown, ou seja, a gente vai tendo o
+
+00:07:42.910 --> 00:07:44.630
+melhor dos dois mundos, sabe?
+
+00:07:44.750 --> 00:07:48.070
+A gente vai tendo uma ferramenta
+completa.
+
+00:07:48.490 --> 00:07:50.110
+Então, o que eu vou fazer, né?
+
+00:07:50.150 --> 00:07:50.590
+Eu vou...
+
+00:07:50.590 --> 00:07:55.050
+Eu vou mostrar para você, aqui no nosso
+Obsidia, tá?
+
+00:07:55.310 --> 00:08:00.350
+Vamos pegar o Obsidia aqui, e eu vou
+mostrar na prática, realmente, o que é o
+
+00:08:00.350 --> 00:08:00.750
+Markdown.
+
+00:08:01.690 --> 00:08:04.610
+Você está vendo, quando você cria uma
+nota, então, preste atenção.
+
+00:08:04.890 --> 00:08:08.730
+Nós estamos vindo de uma sequência de
+aula, que você configurou a ferramenta,
+
+00:08:08.730 --> 00:08:14.330
+a sincronização, criou o cofre,
+configurou coisas indispensáveis, viu o
+
+00:08:14.330 --> 00:08:19.490
+que é uma nota, viu o que é um cofre,
+viu os tipos de nota, né, atômica,
+
+00:08:19.490 --> 00:08:27.450
+atômica X, Lego, Tetris, e agora, você
+vai aprender a escrever notas, e apenas
+
+00:08:27.450 --> 00:08:34.150
+o essencial, e de maneira aqui certeira,
+que você não vai gastar tempo estudando,
+
+00:08:34.270 --> 00:08:36.790
+e eu vou dar ainda um presente para você
+nessa aula.
+
+00:08:37.130 --> 00:08:38.430
+O que é o Markdown?
+
+00:08:38.510 --> 00:08:44.510
+O Markdown é o seguinte, eu estou aqui
+com o cabeçalho, tem toda a parte aqui
+
+00:08:44.510 --> 00:08:48.030
+de, né, poder digitar e editar uma nota.
+
+00:08:48.430 --> 00:08:49.830
+Então, vamos imaginar...
+
+00:08:50.590 --> 00:08:52.990
+que aqui eu vou colocar um título, né.
+
+00:08:53.650 --> 00:08:58.730
+Se eu digitar simplesmente, e o objetivo
+da ferramenta é isso, que você foque em
+
+00:08:58.730 --> 00:09:02.350
+conteúdo, não se preocupe com outra
+coisa a não ser conteúdo.
+
+00:09:02.770 --> 00:09:06.810
+Se eu venho e só digito texto, é como
+você está vendo aí na tela.
+
+00:09:07.250 --> 00:09:11.510
+E aí, você imagina, você está digitando
+em outras ferramentas, você tem que
+
+00:09:11.510 --> 00:09:16.130
+clicar naqueles botões lá, de deixar um
+texto negrito, itálico, tudo mais.
+
+00:09:16.550 --> 00:09:17.630
+Aqui, o que acontece?
+
+00:09:18.090 --> 00:09:20.570
+Você pode, enquanto está...
+
+00:09:20.590 --> 00:09:23.530
+digitando um texto, já formatá -lo.
+
+00:09:24.270 --> 00:09:25.490
+Isso é o Markdown.
+
+00:09:25.710 --> 00:09:30.810
+Então, olha só, eu vou digitar aqui, por
+exemplo, hashtag, né, e eu vou colocar
+
+00:09:30.810 --> 00:09:32.490
+aqui, título.
+
+00:09:32.850 --> 00:09:37.430
+Você percebeu que o texto, ele já se
+formatou para um título?
+
+00:09:37.870 --> 00:09:40.410
+Ah, mas Adriano, vai ficar aparecendo um
+hashtag ali?
+
+00:09:40.490 --> 00:09:42.870
+Não, a partir do momento que eu dou
+enter, ele já formatou.
+
+00:09:43.690 --> 00:09:45.830
+Então, por que que eu mostrei aquele
+desenho para você?
+
+00:09:45.890 --> 00:09:48.210
+Para você entender a dinâmica da coisa.
+
+00:09:48.470 --> 00:09:50.570
+Olha como que, pedagogicamente, você
+pode fazer isso.
+
+00:09:50.570 --> 00:09:52.590
+Pedagogicamente, didaticamente, você vai
+aprendendo as coisas.
+
+00:09:54.090 --> 00:09:59.050
+Eu digitei um Markdown, que é aquele
+hashtag, que o hashtag é quando eu quero
+
+00:09:59.050 --> 00:10:03.370
+criar cabeçalho, as headlines.
+
+00:10:03.850 --> 00:10:07.850
+E eu tenho vários níveis, né, no
+Markdown, se eu não me engano, são seis.
+
+00:10:08.670 --> 00:10:13.470
+Então, eu posso ter um título, ó, se eu
+venho aqui no texto, ele mostra de novo
+
+00:10:13.470 --> 00:10:15.750
+o Markdown, porque eu estou editando.
+
+00:10:16.570 --> 00:10:21.450
+Eu saio da linha, ele faz essa
+renderização, de pegar o Markdown e
+
+00:10:21.450 --> 00:10:25.730
+mostrar para mim só o título formatado,
+né.
+
+00:10:26.370 --> 00:10:36.370
+Se eu vier aqui e digitar dois hashtags,
+aí eu vou ter um subtítulo, tá.
+
+00:10:36.490 --> 00:10:39.230
+Olha lá, ele é um pouquinho menor.
+
+00:10:40.510 --> 00:10:44.190
+E aí, por diante, né, se eu for digitar
+aqui quatro,
+
+00:10:44.490 --> 00:10:50.780
+ele vai digitar como, né, e aqui eu
+digito o texto, enfim.
+
+00:10:52.160 --> 00:10:57.540
+Isso é aquilo que eu mostrei naquele
+desenho do processamento que acontece.
+
+00:10:57.880 --> 00:11:03.220
+Só que como que isso que eu estou
+escrevendo está sendo armazenado, né.
+
+00:11:03.580 --> 00:11:07.480
+Como que isso é armazenado no texto lá,
+no arquivo .md.
+
+00:11:07.660 --> 00:11:12.220
+Tem como eu ver isso aqui agora na
+edição?
+
+00:11:12.280 --> 00:11:12.620
+Tem.
+
+00:11:12.800 --> 00:11:17.540
+Além de, claro, você está vendo, quando
+você seleciona um texto, você vê o
+
+00:11:17.540 --> 00:11:24.380
+Markdown que foi criado, ele tem também,
+aí olha só que legal, tá.
+
+00:11:25.300 --> 00:11:30.300
+Além da ferramenta criar o Markdown, ela
+cria recursos, né, como por exemplo, eu
+
+00:11:30.300 --> 00:11:36.420
+criei o título e digitei textos abaixo,
+né, subtítulos, outro, né, subtítulo
+
+00:11:36.420 --> 00:11:37.140
+aqui, texto.
+
+00:11:37.320 --> 00:11:40.280
+Ele tem um sinalzinho aqui, ó, uma
+setinha.
+
+00:11:40.380 --> 00:11:42.240
+Se eu clicar, ele agrupa o texto.
+
+00:11:42.540 --> 00:11:44.700
+Então olha só o que a ferramenta permite
+eu fazer.
+
+00:11:45.120 --> 00:11:51.100
+Ela permite organizar o texto, só que
+isso está acontecendo na tela do
+
+00:11:51.100 --> 00:11:51.680
+Obsidia.
+
+00:11:52.380 --> 00:11:58.400
+Por trás, background, é aquele texto
+formatado que é o Markdown.
+
+00:11:58.920 --> 00:12:00.500
+Eu cliquei aqui, vai abrir.
+
+00:12:01.280 --> 00:12:05.260
+Só que eu quero que você entenda, não é
+só para o Obsidia.
+
+00:12:05.340 --> 00:12:07.500
+Você está aprendendo Markdown para tudo.
+
+00:12:07.760 --> 00:12:11.440
+Você está aprendendo Markdown para, como
+eu te falei, muita coisa.
+
+00:12:11.660 --> 00:12:14.940
+Você vai, cada vez mais o Markdown vai
+ser necessário.
+
+00:12:15.020 --> 00:12:21.440
+Cada vez mais não tem como ignorar de
+usar Markdown se você pretende,
+
+00:12:21.460 --> 00:12:22.140
+aprendendo Markdown.
+
+00:12:22.140 --> 00:12:22.140
+Se você pretende, aprendendo Markdown.
+
+00:12:22.140 --> 00:12:24.660
+Se você pretende inteligência
+artificial, desenvolver novas
+
+00:12:24.660 --> 00:12:25.160
+habilidades.
+
+00:12:25.460 --> 00:12:28.040
+Então é muito importante que você saiba
+isso.
+
+00:12:28.400 --> 00:12:31.680
+Mas como eu estava falando, quero ver o
+texto raiz.
+
+00:12:31.940 --> 00:12:35.620
+O que está sendo feito por trás ali com
+o Markdown.
+
+00:12:35.820 --> 00:12:39.620
+Você pode vir aqui, ó, nos três
+pontinhos da nota, tá, olha aqui.
+
+00:12:40.260 --> 00:12:44.400
+E aqui ele tem search mode, tá.
+
+00:12:45.080 --> 00:12:48.440
+Porque você lembra o seguinte, ó, aqui
+está aberto o livrinho, né.
+
+00:12:48.540 --> 00:12:50.800
+Você pode mudar para o modo leitura.
+
+00:12:50.800 --> 00:12:58.340
+Então, ó, ele vai formatar a tela de um
+modo de leitura, não vou editar, né,
+
+00:12:58.340 --> 00:12:58.860
+nesse momento.
+
+00:12:59.160 --> 00:13:01.980
+Ele pega todo o Markdown, vai esconder
+também.
+
+00:13:02.460 --> 00:13:08.300
+Aqui eu estou no modo de edição, então
+ele coloca, né, o texto e permite eu ver
+
+00:13:08.300 --> 00:13:09.020
+o Markdown ali.
+
+00:13:09.200 --> 00:13:16.080
+Só que aqui, nesses três pontinhos aqui,
+no menu da nota, eu tenho search mode.
+
+00:13:16.960 --> 00:13:19.240
+Onde aí, o que ele vai mostrar para mim?
+
+00:13:19.240 --> 00:13:22.140
+O texto em Markdown.
+
+00:13:22.780 --> 00:13:29.660
+O texto é exatamente como foi digitado,
+né, a formatação, sem a renderização da
+
+00:13:29.660 --> 00:13:30.740
+ferramenta, tá.
+
+00:13:33.280 --> 00:13:38.780
+Sem renderização eu digo que nem tanto,
+porque assim, se você olhar o arquivo MD
+
+00:13:38.780 --> 00:13:44.860
+mesmo, quando você tem ali hashtag
+título, é um título, o texto está
+
+00:13:44.860 --> 00:13:45.560
+normal, né.
+
+00:13:45.640 --> 00:13:48.660
+É um texto escrito e visto.
+
+00:13:49.240 --> 00:13:51.520
+É, de forma natural.
+
+00:13:51.660 --> 00:13:55.220
+Só que a ferramenta aqui, ela está
+mostrando o que foi digitado de
+
+00:13:55.220 --> 00:14:00.220
+Markdown, mas ao mesmo tempo está
+mostrando os tamanhos dos textos, né,
+
+00:14:00.320 --> 00:14:01.520
+renderizados.
+
+00:14:01.700 --> 00:14:04.940
+Mas eu consigo ver o original, né, do
+Markdown.
+
+00:14:05.080 --> 00:14:08.400
+Então eu vou tirar aqui, ó, e pronto,
+né.
+
+00:14:09.160 --> 00:14:16.260
+Se eu pegar o meu finder, vamos pegar
+aqui o meu cofre.
+
+00:14:16.700 --> 00:14:18.280
+E eu vou pegar aqui.
+
+00:14:19.820 --> 00:14:22.360
+Ah, nota, deixa eu ver, é isso mesmo?
+
+00:14:22.560 --> 00:14:24.620
+Estou mexendo na nota aula 1, beleza.
+
+00:14:26.060 --> 00:14:27.300
+Estou no finder aqui.
+
+00:14:28.120 --> 00:14:31.600
+Ah, deixa eu ver se eu tenho alguma
+coisa associada para abrir esse arquivo
+
+00:14:31.600 --> 00:14:31.780
+aqui.
+
+00:14:32.220 --> 00:14:33.300
+Tenho, está aqui, ó.
+
+00:14:33.340 --> 00:14:35.840
+Ah, ele abriu no meu caso com VS Code,
+tá.
+
+00:14:37.420 --> 00:14:43.260
+É, mas é, eu queria abrir com text edit,
+mas olha só, aqui dá para mostrar, ó.
+
+00:14:44.040 --> 00:14:45.740
+É texto, tá.
+
+00:14:45.840 --> 00:14:48.360
+É isso que armazena o arquivo MD, tá
+legal?
+
+00:14:49.240 --> 00:14:51.820
+Só que aqui a gente está vendo dessa
+forma.
+
+00:14:52.940 --> 00:14:55.360
+Bom, o que você vai ter que fazer?
+
+00:14:56.580 --> 00:14:59.040
+Você tem que usar isso no dia a dia, tá.
+
+00:14:59.140 --> 00:15:07.580
+Eu acho que assim, a coisa, a
+memorização por apenas querer, aprender
+
+00:15:07.580 --> 00:15:12.120
+e depois começar a usar no final, não
+vai funcionar, já tenho repetido isso.
+
+00:15:12.440 --> 00:15:16.100
+Primeiro vou estudar tudo, quando eu
+tiver toda a informação eu vou usar.
+
+00:15:16.800 --> 00:15:17.280
+Não.
+
+00:15:17.280 --> 00:15:19.640
+Legal é você já usar.
+
+00:15:19.780 --> 00:15:22.580
+Então, o que que agora eu vou trazer
+para você?
+
+00:15:22.800 --> 00:15:28.940
+Eu vou trazer para você várias coisas
+que funcionam em Markdown, que são
+
+00:15:28.940 --> 00:15:35.480
+Markdown, que no final da aula você vai
+ter um conhecimento absurdo e uma
+
+00:15:35.480 --> 00:15:42.260
+habilidade fantástica para entender
+notas e depois você usar isso em
+
+00:15:42.260 --> 00:15:43.660
+benefício do segundo cérebro.
+
+00:15:44.320 --> 00:15:44.960
+Repito.
+
+00:15:44.960 --> 00:15:53.240
+Você vai, a partir dessa aula, ter um
+conteúdo fantástico de conhecimento que
+
+00:15:53.240 --> 00:15:59.180
+vai colocar você, já falei isso e vou
+repetir, à frente de muita gente, à
+
+00:15:59.180 --> 00:16:00.380
+frente de muitas pessoas.
+
+00:16:01.280 --> 00:16:02.100
+Vamos lá.
+
+00:16:02.200 --> 00:16:06.740
+Eu conheço gente que inclusive usa isso
+aqui para escrever livro, para escrever
+
+00:16:06.740 --> 00:16:09.000
+artigos, para escrever...
+
+00:16:09.000 --> 00:16:11.180
+Cara, é fantástico, é fantástico,
+fantástico.
+
+00:16:11.360 --> 00:16:12.000
+E...
+
+00:16:12.000 --> 00:16:16.420
+Você tem uma ferramenta nas mãos que é
+muito poderosa.
+
+00:16:16.500 --> 00:16:19.840
+O que que eu vou dar de presente para
+você, para você agora ter esse
+
+00:16:19.840 --> 00:16:21.080
+conhecimento que eu estou falando?
+
+00:16:22.200 --> 00:16:29.860
+Você vai receber nessa aula, você vai
+baixar aí, este arquivo aqui ó, Markdown
+
+00:16:29.860 --> 00:16:31.460
+Obsidian, tá?
+
+00:16:32.640 --> 00:16:36.660
+Esse arquivo Markdown Obsidian, eu fiz o
+que?
+
+00:16:36.760 --> 00:16:40.740
+Eu peguei o essencial, eu peguei o que
+você precisa começar a usar e praticar
+
+00:16:40.740 --> 00:16:45.180
+hoje, e você já vai fazer no final dessa
+aula um exercício, você vai começar a
+
+00:16:45.180 --> 00:16:49.040
+pegar aquelas notas que você já jogou aí
+no segundo cérebro e vai começar a mexer
+
+00:16:49.040 --> 00:16:49.720
+com o Markdown.
+
+00:16:51.080 --> 00:16:57.140
+Aqui eu trago o principal do Markdown de
+duas formas.
+
+00:16:57.460 --> 00:17:00.420
+Eu vou explicar o que é, né?
+
+00:17:00.520 --> 00:17:03.320
+Então, por exemplo, títulos, que é o
+arquivo que a gente usou nas notas.
+
+00:17:03.400 --> 00:17:07.200
+Você pode criar títulos usando
+diferentes níveis de cabeçalho.
+
+00:17:07.380 --> 00:17:10.960
+Para isso, utilize um ou mais símbolos,
+hashtag, né?
+
+00:17:12.380 --> 00:17:14.200
+Seguidos pelo texto do título.
+
+00:17:14.360 --> 00:17:15.660
+Por exemplo, hashtag.
+
+00:17:16.480 --> 00:17:17.840
+Título 1, 2, 3.
+
+00:17:18.020 --> 00:17:23.960
+Então, eu coloco, olha só, aqui dentro
+dessa nota, você vai ver que tem um
+
+00:17:23.960 --> 00:17:25.240
+quadro aqui, ó.
+
+00:17:25.540 --> 00:17:29.540
+Ele está, aqui no escuro aí, ele está
+bem sutil.
+
+00:17:29.820 --> 00:17:33.120
+Mas você está percebendo aí, ó, que tem
+até um botão de copiar aqui.
+
+00:17:33.800 --> 00:17:38.540
+Ele tem um quadro, que quando eu entro
+nele, como ele mostra o Markdown, né?
+
+00:17:38.540 --> 00:17:43.720
+Ele está aqui com três sinaizinhos, né?
+
+00:17:44.080 --> 00:17:46.400
+De acentuação ao contrário aqui.
+
+00:17:46.560 --> 00:17:47.860
+O clase, né?
+
+00:17:47.920 --> 00:17:49.880
+E ele abriu um bloco.
+
+00:17:51.280 --> 00:17:58.200
+Então, aqui, eu estou mostrando o texto
+como é escrito em Markdown.
+
+00:17:58.420 --> 00:18:03.740
+E embaixo, esse mesmo texto, sem esse
+bloco, né?
+
+00:18:03.760 --> 00:18:06.680
+Porque aqui, quando eu estou no bloco,
+ele não vai formatar Markdown.
+
+00:18:06.680 --> 00:18:11.520
+Ele vai deixar o texto tal qual eu
+digitei.
+
+00:18:11.660 --> 00:18:12.880
+Então, aqui, ó, pode ver.
+
+00:18:13.060 --> 00:18:15.320
+Hashtag, ele não mudou nada do tamanho
+do texto.
+
+00:18:15.320 --> 00:18:16.080
+Aqui também não.
+
+00:18:16.300 --> 00:18:20.300
+Só que eu pego esse texto, copio aqui
+embaixo, fora do bloco.
+
+00:18:20.400 --> 00:18:20.780
+Olha lá, ó.
+
+00:18:20.820 --> 00:18:22.540
+1, 2, 3.
+
+00:18:22.820 --> 00:18:29.360
+Então, aqui você tem o original, que é
+como você digita, e como a ferramenta
+
+00:18:29.360 --> 00:18:29.860
+vai deixar.
+
+00:18:31.000 --> 00:18:31.740
+Olha só.
+
+00:18:31.940 --> 00:18:37.540
+Você vai poder, então, guardar esse
+arquivo no seu segundo cérebro, e assim
+
+00:18:37.540 --> 00:18:41.160
+como eu fiz lá o tipo de nota, que eu
+dei para você guardar no seu segundo
+
+00:18:41.160 --> 00:18:43.560
+cérebro, você vai pegar esse e também
+colocar.
+
+00:18:43.740 --> 00:18:44.120
+Por quê?
+
+00:18:44.180 --> 00:18:46.500
+Porque daí você volta, agora no início,
+né?
+
+00:18:46.520 --> 00:18:47.320
+Quando você está aprendendo.
+
+00:18:47.400 --> 00:18:53.580
+Você volta no arquivo para referenciar,
+para relembrar, até isso ficar natural,
+
+00:18:53.860 --> 00:18:54.140
+tá?
+
+00:18:54.740 --> 00:18:56.320
+Então, aqui tem os títulos.
+
+00:18:57.500 --> 00:18:58.580
+Linhas horizontais, né?
+
+00:18:58.640 --> 00:18:59.480
+Essa linha aqui, ó.
+
+00:18:59.500 --> 00:18:59.900
+Está vendo aqui?
+
+00:19:00.200 --> 00:19:01.380
+Eu já estou usando, ó.
+
+00:19:01.380 --> 00:19:03.360
+Uma linha que separa, né?
+
+00:19:03.380 --> 00:19:05.020
+Uma linha horizontal para separar a
+nota.
+
+00:19:05.020 --> 00:19:06.920
+Como que eu crio uma linha horizontal?
+
+00:19:08.960 --> 00:19:16.060
+Três tracinhos, sinalzinho, é,
+underline, ou três asterísticos.
+
+00:19:16.380 --> 00:19:17.880
+Exemplo prático está aqui, ó.
+
+00:19:18.120 --> 00:19:20.320
+Ó, quando eu clico na linha, o que que a
+linha
+
+00:19:20.320 --> 00:19:20.580
+é?
+
+00:19:22.600 --> 00:19:25.020
+Três sinalzinho de menos, né?
+
+00:19:25.640 --> 00:19:26.440
+Três tracinhos.
+
+00:19:26.720 --> 00:19:28.540
+Ou seja, se eu vier aqui, ó.
+
+00:19:29.640 --> 00:19:30.260
+Olha só.
+
+00:19:30.720 --> 00:19:31.840
+1, 2, 3.
+
+00:19:32.560 --> 00:19:32.960
+Enter.
+
+00:19:33.160 --> 00:19:33.480
+Olha lá.
+
+00:19:33.480 --> 00:19:34.080
+É uma linha.
+
+00:19:34.540 --> 00:19:35.020
+Entendeu?
+
+00:19:35.180 --> 00:19:36.260
+Ele acrescenta.
+
+00:19:36.360 --> 00:19:37.340
+Olha como é simples.
+
+00:19:39.580 --> 00:19:45.100
+Só que, claro, espera aí que eu vou
+mostrar para você como você pode,
+
+00:19:45.180 --> 00:19:47.280
+através de atalhos, também fazer isso,
+tá?
+
+00:19:47.700 --> 00:19:49.700
+Mas eu quero que você entenda o
+seguinte.
+
+00:19:51.040 --> 00:19:52.300
+Aprenda Markdown primeiro.
+
+00:19:52.520 --> 00:19:54.780
+Depois nós vamos para os atalhos que vão
+facilitar.
+
+00:19:54.960 --> 00:19:59.880
+Senão você acaba usando só o menu e não
+sabe do que se trata.
+
+00:20:00.140 --> 00:20:01.260
+O que que faz?
+
+00:20:01.400 --> 00:20:02.160
+O que está por trás?
+
+00:20:02.160 --> 00:20:05.500
+Você está entendendo a engenharia da
+coisa, a dinâmica da coisa.
+
+00:20:06.040 --> 00:20:11.920
+Muita gente que usa Markdown hoje não
+sabe, às vezes, esses detalhes de como
+
+00:20:11.920 --> 00:20:15.100
+funciona, igual você está recebendo
+aqui, tá bom?
+
+00:20:16.320 --> 00:20:17.380
+Ênfase no texto.
+
+00:20:17.820 --> 00:20:20.140
+Então, por exemplo, eu quero deixar um
+texto negrito.
+
+00:20:20.500 --> 00:20:21.640
+Dois asterísticos.
+
+00:20:23.260 --> 00:20:23.740
+Itálico.
+
+00:20:23.740 --> 00:20:24.600
+Um asterístico.
+
+00:20:25.120 --> 00:20:26.640
+O texto taxado.
+
+00:20:26.760 --> 00:20:28.260
+É dois, né?
+
+00:20:28.920 --> 00:20:31.780
+É duas acentuações lá de...
+
+00:20:34.640 --> 00:20:37.400
+Oh, meu Deus, fugiu agora o nome desse
+acento.
+
+00:20:38.060 --> 00:20:39.280
+Dois til, né?
+
+00:20:40.800 --> 00:20:42.100
+É o texto taxado.
+
+00:20:42.400 --> 00:20:44.340
+Então, olha só, como sempre estou
+mostrando.
+
+00:20:44.580 --> 00:20:47.500
+Está aqui o texto, do jeito que você vai
+digitar.
+
+00:20:47.760 --> 00:20:49.760
+E o texto, do jeito que vai ficar.
+
+00:20:49.860 --> 00:20:51.940
+Olha aqui, o texto fita em negrito.
+
+00:20:53.220 --> 00:20:54.500
+Texto em itálico.
+
+00:20:54.980 --> 00:20:55.780
+Texto taxado.
+
+00:20:55.820 --> 00:20:56.740
+Então, o que você teve que usar?
+
+00:20:58.820 --> 00:21:00.480
+Dois asterísticos aí, tá?
+
+00:21:01.740 --> 00:21:02.640
+Citações em bloco.
+
+00:21:02.780 --> 00:21:03.120
+O que é?
+
+00:21:03.240 --> 00:21:05.020
+Você põe esse sinalzinho aqui de maior.
+
+00:21:06.600 --> 00:21:07.820
+Essa é uma citação.
+
+00:21:07.820 --> 00:21:08.940
+Depois você coloca dois.
+
+00:21:09.240 --> 00:21:10.060
+O que ele vai fazer?
+
+00:21:10.160 --> 00:21:10.900
+Ele vai fazer isso aqui.
+
+00:21:11.440 --> 00:21:13.720
+Ele vai colocar o texto desse jeito
+aqui.
+
+00:21:14.100 --> 00:21:14.460
+Entendeu?
+
+00:21:15.100 --> 00:21:17.000
+Então, agora eu vou passar quais são.
+
+00:21:17.340 --> 00:21:19.820
+Mas, veja, você vai ter que praticar.
+
+00:21:19.860 --> 00:21:22.980
+Você vai pegar e vai fazer uns
+exercícios aí para usar isso aqui.
+
+00:21:23.520 --> 00:21:24.560
+Está usando a nota?
+
+00:21:24.580 --> 00:21:26.340
+Está fazendo a nota ali no dia a dia?
+
+00:21:26.600 --> 00:21:28.760
+Poxa, como é que é mesmo que eu faço uma
+citação?
+
+00:21:28.760 --> 00:21:31.460
+Esse arquivo você deixa já nos seus
+favoritos.
+
+00:21:31.460 --> 00:21:32.340
+Você volta a ver.
+
+00:21:32.600 --> 00:21:34.280
+Vai lá e aplica.
+
+00:21:34.480 --> 00:21:35.560
+Vai chegar uma hora.
+
+00:21:36.340 --> 00:21:38.280
+Isso vai ser natural para você, tá?
+
+00:21:39.840 --> 00:21:40.360
+Listas.
+
+00:21:40.540 --> 00:21:42.860
+O que eu preciso para fazer as listas?
+
+00:21:43.140 --> 00:21:45.100
+Você pode usar aqui, olha.
+
+00:21:45.920 --> 00:21:47.300
+O tracinho espaço.
+
+00:21:47.820 --> 00:21:50.440
+Ele já vai começar a fazer a lista.
+
+00:21:50.620 --> 00:21:53.300
+E sub -item, você dá o tab, né?
+
+00:21:54.900 --> 00:21:56.160
+Os espaços ali.
+
+00:21:56.160 --> 00:21:58.820
+E ele cria sub -item aí na lista.
+
+00:21:59.000 --> 00:22:03.320
+Você pode fazer isso com o tracinho, com
+o asterisco espaço, né?
+
+00:22:04.040 --> 00:22:07.680
+E lista numerada é você colocar os
+números, né?
+
+00:22:07.700 --> 00:22:09.260
+Um ponto e o espaço.
+
+00:22:09.460 --> 00:22:10.620
+Ele vai numerar.
+
+00:22:10.640 --> 00:22:11.340
+Que jeito que fica?
+
+00:22:11.420 --> 00:22:11.760
+Aqui, olha.
+
+00:22:11.840 --> 00:22:12.760
+Lista numerada.
+
+00:22:14.180 --> 00:22:15.780
+Lista bullet point, né?
+
+00:22:16.760 --> 00:22:18.780
+Aqui também item e sub -item.
+
+00:22:19.020 --> 00:22:21.480
+Pode ver que o asterisco tem o mesmo
+efeito.
+
+00:22:22.280 --> 00:22:23.920
+E lista numerada.
+
+00:22:24.140 --> 00:22:26.080
+Só usar lá o número.
+
+00:22:26.080 --> 00:22:27.240
+Número e ponto.
+
+00:22:27.440 --> 00:22:30.860
+Quando você vai dando enter, ele
+acrescenta novos itens.
+
+00:22:31.020 --> 00:22:31.260
+Está vendo?
+
+00:22:31.400 --> 00:22:33.040
+Número 3 já entrou ali, olha.
+
+00:22:33.240 --> 00:22:33.500
+Tá?
+
+00:22:35.540 --> 00:22:36.040
+Beleza?
+
+00:22:36.420 --> 00:22:37.320
+Então é isso.
+
+00:22:37.980 --> 00:22:41.400
+Ah, mas Adriano, como é que eu faço
+para...
+
+00:22:41.400 --> 00:22:43.620
+Às vezes as pessoas perguntam também,
+né?
+
+00:22:43.680 --> 00:22:46.420
+Como é que eu faço para, por exemplo, eu
+quero digitar um
+
+00:22:46.420 --> 00:22:46.740
+texto.
+
+00:22:48.840 --> 00:22:50.260
+Vou colocar aqui, olha.
+
+00:22:51.200 --> 00:22:51.700
+Exemplo.
+
+00:22:52.160 --> 00:22:53.560
+E eu tenho aqui, olha.
+
+00:22:54.160 --> 00:22:55.500
+Um asterisco aqui.
+
+00:22:55.500 --> 00:22:57.060
+Um asterisco aqui, né?
+
+00:22:57.420 --> 00:22:58.580
+O que ele faz mesmo?
+
+00:22:59.840 --> 00:23:01.300
+Deixa itábico, né?
+
+00:23:01.620 --> 00:23:02.620
+Não, não, Adriano.
+
+00:23:02.640 --> 00:23:03.440
+Eu não quero isso.
+
+00:23:03.600 --> 00:23:04.400
+Eu não quero itábico.
+
+00:23:04.640 --> 00:23:12.000
+Ou qualquer outra coisa que você queira
+digitar e que seja esses caracteres
+
+00:23:12.000 --> 00:23:12.780
+markdown, né?
+
+00:23:12.840 --> 00:23:14.600
+Mas você fala assim, não, não, não.
+
+00:23:14.640 --> 00:23:17.480
+Eu não quero o texto em itábico.
+
+00:23:17.520 --> 00:23:19.940
+Eu quero que ele tenha o asterisco mesmo
+no texto.
+
+00:23:20.140 --> 00:23:20.920
+É muito fácil.
+
+00:23:21.020 --> 00:23:24.500
+Você vai colocar a barra invertida, né?
+
+00:23:26.100 --> 00:23:27.640
+Antes do carácter.
+
+00:23:28.500 --> 00:23:33.840
+E quando você der enter, ele sabe que se
+você colocou a barra invertida, você não
+
+00:23:33.840 --> 00:23:35.820
+está querendo formatar.
+
+00:23:35.820 --> 00:23:39.400
+Você está querendo usar mesmo aquele
+símbolo, o asterisco.
+
+00:23:39.620 --> 00:23:41.120
+Isso é válido para tudo, tá?
+
+00:23:41.220 --> 00:23:46.560
+Para tudo que você encontrar de markdown
+é o mesmo exemplo aí, tá bom?
+
+00:23:47.900 --> 00:23:49.060
+Vamos fazer isso aqui.
+
+00:23:50.060 --> 00:23:50.580
+Beleza?
+
+00:23:50.660 --> 00:23:51.000
+Tá.
+
+00:23:51.460 --> 00:23:52.320
+Outra coisa.
+
+00:23:52.520 --> 00:23:53.000
+Olha isso aqui.
+
+00:23:53.000 --> 00:23:55.180
+Isso aqui é a parte de código.
+
+00:23:55.620 --> 00:23:57.180
+Você vai usar muito isso aqui.
+
+00:23:57.280 --> 00:23:57.780
+Sabe para quê?
+
+00:23:58.100 --> 00:24:04.120
+Você vai guardar, por exemplo, prompts
+de inteligência artificial, né?
+
+00:24:04.180 --> 00:24:06.340
+Das suas IA generativas aí.
+
+00:24:06.400 --> 00:24:09.980
+Você vai criar notas para guardar os
+prompts aí e tal.
+
+00:24:10.600 --> 00:24:12.560
+Você pode usar isso aqui, tá?
+
+00:24:12.920 --> 00:24:18.020
+O código, ele pode ser feito tanto em
+uma linha.
+
+00:24:18.260 --> 00:24:19.800
+Ó, código na linha.
+
+00:24:20.140 --> 00:24:22.020
+É um tracinho, né?
+
+00:24:22.020 --> 00:24:27.200
+O classe aqui, o acento invertido dentro
+da linha.
+
+00:24:27.980 --> 00:24:33.620
+Se você quer criar um bloco aí, são três
+tracinhos, tá?
+
+00:24:33.900 --> 00:24:35.040
+Três acentos, né?
+
+00:24:35.140 --> 00:24:35.440
+Digo.
+
+00:24:35.880 --> 00:24:37.460
+Por exemplo, aí aqui, ó.
+
+00:24:37.580 --> 00:24:40.460
+Então, ele está dando um exemplo de
+código JavaScript.
+
+00:24:41.720 --> 00:24:43.420
+E coloca o código ali.
+
+00:24:43.540 --> 00:24:44.660
+Vamos para o exemplo prático.
+
+00:24:44.740 --> 00:24:45.120
+Aqui, ó.
+
+00:24:45.160 --> 00:24:46.840
+Código na linha é quando...
+
+00:24:46.840 --> 00:24:47.240
+Olha lá, ó.
+
+00:24:47.300 --> 00:24:52.320
+Você só coloca um acento e ele já...
+
+00:24:52.320 --> 00:24:53.120
+Se você percebeu.
+
+00:24:53.120 --> 00:24:55.580
+Quando você sai da linha, ele formata de
+um jeito diferente.
+
+00:24:56.280 --> 00:24:57.200
+Dizendo assim, ó.
+
+00:24:57.220 --> 00:24:58.740
+Essa linha aqui não é um texto.
+
+00:24:59.220 --> 00:25:01.080
+Essa linha aqui é um código, né?
+
+00:25:01.360 --> 00:25:06.360
+É um código de programação, de
+instrução.
+
+00:25:06.920 --> 00:25:09.560
+Alguma coisa assim que você não quer
+formatar.
+
+00:25:09.740 --> 00:25:10.320
+Tá legal?
+
+00:25:10.960 --> 00:25:12.580
+Já aqui embaixo, ó.
+
+00:25:12.960 --> 00:25:13.920
+Três tracinhos.
+
+00:25:14.280 --> 00:25:18.000
+E você pode ter três tracinhos sem nada.
+
+00:25:18.400 --> 00:25:21.480
+Porque ele vai separar aquela porção de
+código ali dentro.
+
+00:25:21.480 --> 00:25:28.800
+Só que se você colocar a linguagem do
+que aquele código representa.
+
+00:25:30.020 --> 00:25:33.540
+Ele vai formatar em cor o código.
+
+00:25:34.380 --> 00:25:36.580
+Então, aqui foi dito, né?
+
+00:25:36.620 --> 00:25:37.960
+Que tem três tracinhos.
+
+00:25:37.980 --> 00:25:38.940
+É um bloco de código.
+
+00:25:39.200 --> 00:25:40.900
+E é um código JavaScript.
+
+00:25:41.520 --> 00:25:42.340
+O que vai acontecer?
+
+00:25:42.500 --> 00:25:44.180
+Quando você sai do texto aqui, ó.
+
+00:25:44.280 --> 00:25:45.400
+Ele tem aqui, ó.
+
+00:25:45.460 --> 00:25:46.000
+JavaScript.
+
+00:25:47.040 --> 00:25:49.040
+Dizendo que esse texto aqui, né?
+
+00:25:49.120 --> 00:25:49.880
+Essa porção.
+
+00:25:50.160 --> 00:25:51.460
+É um bloco de código.
+
+00:25:51.460 --> 00:25:52.080
+JavaScript.
+
+00:25:52.700 --> 00:25:57.220
+Então, ele coloca na cor que é a
+formatação dele ali.
+
+00:25:57.340 --> 00:25:59.160
+Se você clicar aqui em JavaScript, ó.
+
+00:25:59.180 --> 00:26:02.280
+Ele copia todo o bloco de código.
+
+00:26:02.640 --> 00:26:05.500
+Então, se você vier aqui, né?
+
+00:26:05.560 --> 00:26:06.340
+Vamos pegar aqui, ó.
+
+00:26:06.920 --> 00:26:10.060
+E digitar o acento.
+
+00:26:10.900 --> 00:26:11.380
+Ó.
+
+00:26:11.740 --> 00:26:12.460
+Coloquei aqui.
+
+00:26:13.660 --> 00:26:14.780
+E fechei aqui.
+
+00:26:15.360 --> 00:26:15.840
+Beleza?
+
+00:26:16.220 --> 00:26:16.700
+Olha lá.
+
+00:26:16.740 --> 00:26:17.560
+Criou um bloco, ó.
+
+00:26:17.600 --> 00:26:19.080
+Tudo que eu escrevi aqui dentro.
+
+00:26:19.200 --> 00:26:21.440
+Ele não é formatado como uma linguagem.
+
+00:26:21.440 --> 00:26:22.080
+Ele é um Markdown, né?
+
+00:26:22.180 --> 00:26:24.400
+Ele sabe que eu estou escrevendo uma
+porção de código.
+
+00:26:24.640 --> 00:26:25.740
+Se eu saio aqui, ó.
+
+00:26:25.740 --> 00:26:26.880
+Ele tem o botão copiar também.
+
+00:26:27.060 --> 00:26:28.400
+Mas é um texto genérico.
+
+00:26:28.680 --> 00:26:30.860
+Agora, se eu venho aqui e coloco que é
+JavaScript.
+
+00:26:31.160 --> 00:26:34.280
+Se eu venho aqui e coloco que é um SQL,
+né?
+
+00:26:34.300 --> 00:26:35.760
+Uma consulta de banco de dados.
+
+00:26:36.100 --> 00:26:37.540
+Ele vai formatar.
+
+00:26:37.760 --> 00:26:38.200
+Né?
+
+00:26:38.260 --> 00:26:39.260
+Por exemplo, aqui, ó.
+
+00:26:43.020 --> 00:26:43.900
+Select from.
+
+00:26:44.980 --> 00:26:45.420
+Entendeu?
+
+00:26:45.520 --> 00:26:50.320
+Ele vai formatar de acordo com uma
+especificação de linguagem aí.
+
+00:26:50.320 --> 00:26:52.560
+E aqui você pode jogar um prompt também.
+
+00:26:52.920 --> 00:26:53.400
+Tá?
+
+00:26:54.440 --> 00:26:57.140
+E aí você cria esses blocos de código
+aí.
+
+00:26:57.240 --> 00:27:01.240
+E ele vai ficar desse jeito aqui, ó.
+
+00:27:01.280 --> 00:27:01.520
+Legal?
+
+00:27:02.600 --> 00:27:03.160
+Tabela.
+
+00:27:03.200 --> 00:27:03.660
+Olha.
+
+00:27:03.820 --> 00:27:06.700
+Tabela no Markdown é desse jeito aqui,
+ó.
+
+00:27:07.180 --> 00:27:08.440
+Você tem o...
+
+00:27:09.260 --> 00:27:10.120
+Aqui, né?
+
+00:27:10.180 --> 00:27:11.400
+O tracinho vertical.
+
+00:27:11.820 --> 00:27:12.300
+Né?
+
+00:27:12.380 --> 00:27:13.180
+O pipe.
+
+00:27:13.340 --> 00:27:14.300
+É chamado pipe, né?
+
+00:27:14.520 --> 00:27:16.480
+Você tem o tracinho vertical.
+
+00:27:16.700 --> 00:27:19.780
+E você tem os nomes.
+
+00:27:19.780 --> 00:27:20.840
+E tracinho.
+
+00:27:21.120 --> 00:27:22.320
+Só que calma.
+
+00:27:23.120 --> 00:27:23.620
+Tabela.
+
+00:27:24.040 --> 00:27:24.540
+Ele...
+
+00:27:24.540 --> 00:27:24.780
+O...
+
+00:27:24.780 --> 00:27:25.720
+O Obsidian.
+
+00:27:25.840 --> 00:27:28.180
+O Sandro Miranda desde a versão 1 .3.
+
+00:27:29.400 --> 00:27:29.900
+É...
+
+00:27:29.900 --> 00:27:30.520
+Ela...
+
+00:27:30.520 --> 00:27:30.980
+Ela...
+
+00:27:30.980 --> 00:27:32.460
+O Obsidian...
+
+00:27:33.180 --> 00:27:36.280
+Depois de uma versão aí, ele já liberou
+a tabela.
+
+00:27:36.280 --> 00:27:37.440
+A criação de tabela.
+
+00:27:37.520 --> 00:27:37.820
+É...
+
+00:27:37.820 --> 00:27:38.760
+Com o botão direito.
+
+00:27:39.120 --> 00:27:42.220
+Que você vai lá e pode criar visualmente
+a tabela.
+
+00:27:42.240 --> 00:27:42.640
+Então...
+
+00:27:42.640 --> 00:27:43.480
+Beleza.
+
+00:27:43.500 --> 00:27:44.620
+Vai ficar mais fácil de criar.
+
+00:27:45.100 --> 00:27:45.600
+Porém...
+
+00:27:45.600 --> 00:27:46.540
+Saiba que...
+
+00:27:46.540 --> 00:27:48.180
+Como que vai ser armazenada a tabela?
+
+00:27:48.240 --> 00:27:49.120
+Nós vamos criar uma aqui.
+
+00:27:49.120 --> 00:27:50.180
+Pra você ver como é que é.
+
+00:27:50.220 --> 00:27:51.260
+É desse jeito aqui.
+
+00:27:51.620 --> 00:27:53.240
+Markdown e armazena a tabela.
+
+00:27:54.060 --> 00:27:55.120
+Nessa configuração aqui.
+
+00:27:55.260 --> 00:27:55.880
+Então, olha só.
+
+00:27:55.920 --> 00:27:57.880
+Se você copia isso aqui e joga.
+
+00:27:58.160 --> 00:27:59.620
+É isso aqui que ele vai mostrar.
+
+00:27:59.780 --> 00:28:00.880
+Ele vai criar...
+
+00:28:01.380 --> 00:28:01.780
+Tabela.
+
+00:28:02.420 --> 00:28:02.820
+Legal?
+
+00:28:04.780 --> 00:28:05.180
+Beleza?
+
+00:28:05.220 --> 00:28:05.900
+Então, aqui ó.
+
+00:28:05.980 --> 00:28:06.180
+Tem...
+
+00:28:06.180 --> 00:28:06.960
+Temos tabela.
+
+00:28:07.400 --> 00:28:07.800
+E...
+
+00:28:09.820 --> 00:28:11.060
+Se eu vier aqui ó.
+
+00:28:12.000 --> 00:28:13.260
+Eu tenho um botão.
+
+00:28:15.820 --> 00:28:16.780
+Ou melhor, gente.
+
+00:28:17.020 --> 00:28:19.360
+Vou mostrar a parte que é visual.
+
+00:28:19.620 --> 00:28:19.820
+Né?
+
+00:28:19.860 --> 00:28:21.080
+Dos botões aí e tal.
+
+00:28:21.100 --> 00:28:21.620
+Da interface.
+
+00:28:21.940 --> 00:28:22.680
+Pra criar a sua tabela.
+
+00:28:22.680 --> 00:28:22.960
+As coisas.
+
+00:28:23.040 --> 00:28:23.420
+Depois.
+
+00:28:23.900 --> 00:28:25.340
+Aqui vamos focar no seguinte.
+
+00:28:25.520 --> 00:28:27.220
+Como que você quer armazenar no
+Markdown.
+
+00:28:27.280 --> 00:28:28.840
+E como que você cria via Markdown.
+
+00:28:28.980 --> 00:28:29.800
+É desse jeito.
+
+00:28:30.100 --> 00:28:30.500
+Tá?
+
+00:28:30.900 --> 00:28:31.360
+Então...
+
+00:28:31.360 --> 00:28:33.140
+Se você digita...
+
+00:28:33.140 --> 00:28:33.800
+Isso aqui.
+
+00:28:33.860 --> 00:28:34.840
+Se você entrar aqui ó.
+
+00:28:35.060 --> 00:28:35.440
+Né?
+
+00:28:35.500 --> 00:28:36.900
+Se você vier aqui no...
+
+00:28:37.540 --> 00:28:38.000
+Source...
+
+00:28:38.000 --> 00:28:38.700
+Source mode.
+
+00:28:39.000 --> 00:28:39.280
+Olha lá.
+
+00:28:40.480 --> 00:28:41.300
+Perceberam que...
+
+00:28:41.300 --> 00:28:44.100
+Isso aqui que você viu visual como
+tabela.
+
+00:28:44.100 --> 00:28:45.140
+É o mesmo que tá aqui ó.
+
+00:28:45.320 --> 00:28:46.640
+Então é assim que ele salva.
+
+00:28:46.760 --> 00:28:47.640
+É assim que é feito.
+
+00:28:47.960 --> 00:28:48.400
+Tá?
+
+00:28:48.980 --> 00:28:50.660
+Claro que você vai fazer uma tabela
+grande.
+
+00:28:51.060 --> 00:28:52.660
+Imagina você fazer toda em Markdown.
+
+00:28:52.680 --> 00:28:54.040
+Dá um trabalhinho.
+
+00:28:54.180 --> 00:28:54.200
+Né?
+
+00:28:54.240 --> 00:28:57.820
+Então por isso que a ferramenta já tá
+possibilitando aí criar de forma visual.
+
+00:28:58.300 --> 00:28:58.720
+Legal?
+
+00:28:59.640 --> 00:29:00.060
+Beleza?
+
+00:29:00.340 --> 00:29:00.760
+Bom.
+
+00:29:00.880 --> 00:29:01.280
+É...
+
+00:29:01.280 --> 00:29:02.620
+Eu acho que...
+
+00:29:02.620 --> 00:29:04.520
+Essa aula tá ficando um pouco longa.
+
+00:29:04.580 --> 00:29:05.400
+Eu queria...
+
+00:29:05.400 --> 00:29:06.420
+Dividir ela.
+
+00:29:06.480 --> 00:29:07.320
+Então quebrar ela.
+
+00:29:07.520 --> 00:29:09.080
+Eu quero que você...
+
+00:29:09.080 --> 00:29:09.920
+É...
+
+00:29:09.920 --> 00:29:10.620
+Pegue.
+
+00:29:10.660 --> 00:29:12.180
+Baixe já esse arquivo aí.
+
+00:29:13.180 --> 00:29:13.600
+Mas...
+
+00:29:13.600 --> 00:29:14.020
+É...
+
+00:29:14.020 --> 00:29:15.320
+Nós vamos ter que praticar isso.
+
+00:29:15.400 --> 00:29:16.260
+Fazer exercício.
+
+00:29:16.600 --> 00:29:19.320
+Eu vou quebrar essa aula aqui pra não
+ficar tão cansativo.
+
+00:29:19.380 --> 00:29:20.540
+Eu vou parar aqui em tabelas.
+
+00:29:20.640 --> 00:29:22.140
+E a gente volta já...
+
+00:29:22.140 --> 00:29:22.660
+Pra...
+
+00:29:22.680 --> 00:29:23.100
+Pra ver...
+
+00:29:23.100 --> 00:29:24.140
+Algumas outras coisas.
+
+00:29:24.280 --> 00:29:24.520
+Como...
+
+00:29:24.520 --> 00:29:25.020
+É...
+
+00:29:25.540 --> 00:29:26.060
+Links...
+
+00:29:26.060 --> 00:29:26.820
+Né?
+
+00:29:27.840 --> 00:29:28.360
+Imagens...
+
+00:29:28.360 --> 00:29:29.400
+E os...
+
+00:29:29.400 --> 00:29:30.160
+Callouts.
+
+00:29:30.360 --> 00:29:30.700
+Aqui.
+
+00:29:30.900 --> 00:29:31.300
+Tá legal?
+
+00:29:31.500 --> 00:29:32.480
+Então a gente...
+
+00:29:32.480 --> 00:29:32.820
+É...
+
+00:29:32.820 --> 00:29:34.020
+Eu vou quebrar essa aula em duas.
+
+00:29:34.120 --> 00:29:35.000
+Pra na próxima...
+
+00:29:35.000 --> 00:29:37.080
+A gente ver aí a continuação...
+
+00:29:37.080 --> 00:29:38.020
+De Markdown.
+
+00:29:38.060 --> 00:29:40.160
+Porque os links que a gente vai entrar
+agora...
+
+00:29:40.160 --> 00:29:43.640
+É algo muito importante que eu quero dar
+um tempo aí...
+
+00:29:43.640 --> 00:29:44.540
+Específico.
+
+00:29:44.540 --> 00:29:45.140
+Pra você aprender.
+
+00:29:45.300 --> 00:29:47.560
+Porque é uma das coisas principais...
+
+00:29:47.560 --> 00:29:50.120
+Que o Obsidian permite fazer...
+
+00:29:50.680 --> 00:29:51.080
+Para...
+
+00:29:51.080 --> 00:29:52.840
+A tua instituição de segundo cérebro.
+
+00:29:52.920 --> 00:29:55.420
+Então a gente se vê na próxima aula
+aí...
+
+00:29:55.420 --> 00:29:57.040
+Vai tomar uma água...
+
+00:29:57.040 --> 00:29:57.640
+Vai...
+
+00:29:57.640 --> 00:29:58.560
+É...
+
+00:29:58.560 --> 00:29:58.760
+É...
+
+00:29:58.760 --> 00:29:59.320
+Tirar um...
+
+00:29:59.320 --> 00:30:00.260
+Um intervalo...
+
+00:30:00.260 --> 00:30:01.920
+E aí a gente já volta...
+
+00:30:01.920 --> 00:30:02.880
+Na próxima aula...
+
+00:30:02.880 --> 00:30:03.940
+Com a continuação...
+
+00:30:03.940 --> 00:30:04.740
+Do Markdown.
+
+00:30:04.820 --> 00:30:05.240
+Beleza?
+
+00:30:05.280 --> 00:30:06.200
+Até a próxima aí...
+
+00:30:06.200 --> 00:30:06.440
+Vendário.

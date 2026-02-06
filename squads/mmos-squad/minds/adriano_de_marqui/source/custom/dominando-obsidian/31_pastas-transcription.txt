@@ -1,0 +1,716 @@
+WEBVTT
+
+00:00:00.620 --> 00:00:03.560
+Seja bem -vindo, Dário, para mais essa
+aula.
+
+00:00:03.720 --> 00:00:10.760
+Eu quero te mostrar agora como você pode
+usar as pastas para que você possa
+
+00:00:10.760 --> 00:00:12.380
+também organizar a informação.
+
+00:00:12.640 --> 00:00:15.420
+E quando é que você não vai usar pastas?
+
+00:00:15.880 --> 00:00:21.920
+Se você estiver procurando na internet
+sobre o conjunto de tudo isso,
+
+00:00:22.000 --> 00:00:27.400
+propriedades, tags, pastas, arquivos,
+links, qual a melhor forma de trabalhar
+
+00:00:27.400 --> 00:00:34.140
+com isso, você vai se perder em meio às
+informações que se contradizem.
+
+00:00:34.180 --> 00:00:36.400
+Por que eu estou te dizendo isso?
+
+00:00:36.500 --> 00:00:42.180
+Porque aqui, nesse curso, você tem o
+melhor de todas as ferramentas e o
+
+00:00:42.180 --> 00:00:45.860
+melhor de todas as metodologias te dado
+num passo certo.
+
+00:00:46.120 --> 00:00:52.000
+Então, nessa aula, eu vou te contar os
+segredos de como e quando é que você usa
+
+00:00:52.000 --> 00:00:53.140
+cada um dos recursos.
+
+00:00:53.740 --> 00:00:58.040
+Vem comigo aqui para essa apresentação,
+aqui no...
+
+00:00:58.060 --> 00:01:01.000
+O Canva, que eu quero te falar sobre
+pastas.
+
+00:01:01.000 --> 00:01:01.340
+Tá legal?
+
+00:01:01.860 --> 00:01:03.780
+Bom, as pastas...
+
+00:01:04.780 --> 00:01:13.980
+Você vai usar pasta no Obsidian quando
+você tem a necessidade de uma
+
+00:01:13.980 --> 00:01:17.800
+organização clássica, hierárquica...
+
+00:01:17.800 --> 00:01:20.760
+Quando eu estou falando pasta, gente,
+deixa eu trazer aqui para você.
+
+00:01:20.960 --> 00:01:22.780
+Vamos pegar aqui no Obsidian.
+
+00:01:24.480 --> 00:01:29.060
+Quando eu estou falando pasta, eu estou
+falando aqui, nesse canto, superior
+
+00:01:29.060 --> 00:01:34.100
+esquerdo aqui, que você tem as pastinhas
+que você vai criando dentro do seu
+
+00:01:34.100 --> 00:01:40.560
+segundo cérebro, do seu VAUNT, e essas
+pastas são também pastas físicas, lá no
+
+00:01:40.560 --> 00:01:44.680
+seu sistema de arquivo, onde os arquivos
+são colocados.
+
+00:01:44.740 --> 00:01:45.880
+Então, é uma gaveta.
+
+00:01:45.980 --> 00:01:47.720
+Pensa na pasta como uma gaveta.
+
+00:01:48.260 --> 00:01:55.320
+Por exemplo, nós criamos aqui a pasta
+palestras, e onde nós podemos ter, por
+
+00:01:55.320 --> 00:02:01.840
+exemplo, várias palestras que você pode
+criar, e você assistiu e quis fazer as
+
+00:02:01.840 --> 00:02:08.660
+anotações, e você quer jogar todas essas
+anotações dentro de uma pasta chamada
+
+00:02:08.660 --> 00:02:09.980
+palestras.
+
+00:02:10.080 --> 00:02:15.080
+Mas deixa eu te falar uma coisa, que é
+muito importante.
+
+00:02:16.320 --> 00:02:23.960
+Você pode ter a organização de acordo
+com o seu perfil.
+
+00:02:24.020 --> 00:02:25.680
+Primeira coisa, primeiro ponto.
+
+00:02:26.000 --> 00:02:29.480
+Antes de eu falar ali, e voltar para a
+apresentação e falar sobre pastas.
+
+00:02:29.700 --> 00:02:34.900
+Você pode ter um perfil que, inclusive
+tem um curso gringo que ele faz isso.
+
+00:02:35.080 --> 00:02:37.840
+Ele faz um teste para ver qual é o seu
+perfil de anotador.
+
+00:02:38.060 --> 00:02:42.500
+Pode ser que você seja um anotador
+chamado bibliotecário.
+
+00:02:42.660 --> 00:02:45.760
+É aquele que guarda as coisas nas
+gavetas certas.
+
+00:02:46.060 --> 00:02:53.020
+Então, você vai precisar, você necessita
+de pastas para fazer essa organização.
+
+00:02:53.820 --> 00:02:59.960
+Então, esse é um primeiro, um primeiro
+motivo de usar
+
+00:02:59.960 --> 00:03:00.700
+pastas.
+
+00:03:03.030 --> 00:03:06.730
+Só que, tem pessoas que não suportam
+pastas.
+
+00:03:06.730 --> 00:03:10.730
+Já não gostam, por exemplo, na
+ferramenta de anotação, usar, ter que se
+
+00:03:10.730 --> 00:03:13.610
+preocupar com que pasta jogar a nota.
+
+00:03:13.970 --> 00:03:15.570
+Então, esse é um outro ponto.
+
+00:03:15.930 --> 00:03:17.110
+Então, espera aí.
+
+00:03:17.390 --> 00:03:22.530
+Vai também do perfil da pessoa, sim, vai
+do perfil da pessoa, e eu estou trazendo
+
+00:03:22.530 --> 00:03:26.130
+aqui na apresentação, essas
+possibilidades.
+
+00:03:26.130 --> 00:03:29.470
+Então, por exemplo, quando você precisa
+de uma organização, uma organização
+
+00:03:29.470 --> 00:03:32.550
+clássica e hierárquica, você precisa de
+uma pasta, tá?
+
+00:03:33.290 --> 00:03:38.890
+Quando você tem projetos específicos,
+você está documentando um projeto, e aí
+
+00:03:38.890 --> 00:03:41.570
+você tem uma pasta daquele projeto.
+
+00:03:42.050 --> 00:03:46.990
+É lógico e mais claro, mais
+transparente, e ficar todas as notas
+
+00:03:46.990 --> 00:03:48.070
+dentro dessa pasta.
+
+00:03:48.230 --> 00:03:51.370
+Você pode querer organizar dentro de uma
+pasta, sim, né?
+
+00:03:51.550 --> 00:04:00.370
+E quando você precisa e gosta, e você
+tem facilidade de navegação, olhando
+
+00:04:00.370 --> 00:04:04.870
+cada coisa ali nas suas pastinhas, e
+vendo, por exemplo, palestras, né?
+
+00:04:04.910 --> 00:04:11.850
+Como eu falei, e você quer ver todas as
+palestras que você anotou ali, se bem
+
+00:04:11.850 --> 00:04:12.830
+que você já viu, né?
+
+00:04:12.870 --> 00:04:13.630
+Todas as possibilidades.
+
+00:04:14.070 --> 00:04:18.450
+Você tem, com a tag, com as
+propriedades, a opção de ver tudo o que
+
+00:04:18.450 --> 00:04:19.190
+é palestra.
+
+00:04:19.230 --> 00:04:23.750
+Por exemplo, hashtag palestra, uma tag
+palestra, vai filtrar tudo para você.
+
+00:04:23.890 --> 00:04:28.490
+Mas mesmo assim, você quer ter o
+conteúdo de palestras dentro de uma
+
+00:04:28.490 --> 00:04:30.430
+pasta e organizar certinho.
+
+00:04:30.510 --> 00:04:33.830
+Pode ser do seu perfil, pode ser
+necessário, pode ser que você goste.
+
+00:04:33.870 --> 00:04:37.310
+Então, você vai usar as pastas, sim,
+dessa forma.
+
+00:04:37.650 --> 00:04:41.250
+Você pensa que aquele irmão Zetelkasten,
+né?
+
+00:04:41.290 --> 00:04:45.850
+Quando ele criou o método de segundo
+cérebro, que ele linkava as notas uma
+
+00:04:45.850 --> 00:04:50.450
+com as outras, ele armazenava as notas
+em gavetas.
+
+00:04:51.470 --> 00:04:54.050
+Então, vamos imaginar aqui que o Ullman,
+né?
+
+00:04:54.110 --> 00:05:00.930
+Ele colocava os cartões, e com as
+referências de outras notas, dentro de
+
+00:05:00.930 --> 00:05:01.370
+gavetas.
+
+00:05:01.530 --> 00:05:02.470
+Mas pense comigo.
+
+00:05:03.570 --> 00:05:07.550
+Essas gavetas, para ele, pouco
+importavam, né?
+
+00:05:07.590 --> 00:05:08.510
+Muitas vezes.
+
+00:05:08.670 --> 00:05:13.410
+Porque ele pegava um cartão numa gaveta,
+e aquele cartão, ele tinha uma
+
+00:05:13.410 --> 00:05:20.170
+referência, uma indicação de um outro
+cartão, de uma outra informação, que
+
+00:05:20.170 --> 00:05:21.490
+estava numa outra gaveta.
+
+00:05:21.650 --> 00:05:26.990
+Então, se você pensar assim, a gaveta
+auxiliava na organização, mas, ao mesmo
+
+00:05:26.990 --> 00:05:31.930
+tempo, não era indicativo de que estava
+tudo junto a informação, né?
+
+00:05:32.050 --> 00:05:39.910
+Então, perceba como isso daí é muito,
+assim, é tênue essa linha de quando usar
+
+00:05:39.910 --> 00:05:41.670
+ou não as pastas.
+
+00:05:42.010 --> 00:05:46.710
+Tem, inclusive, o método do Tiago Forte,
+né?
+
+00:05:46.750 --> 00:05:48.510
+Que ele chama de PARA, né?
+
+00:05:48.530 --> 00:05:54.410
+De Projetos, Área, Recurso e Arquivos.
+
+00:05:54.410 --> 00:05:57.110
+É um jeito dele, né?
+
+00:05:57.150 --> 00:06:00.670
+De organizar a informação, tá?
+
+00:06:01.530 --> 00:06:03.970
+E o que significava isso para ele, né?
+
+00:06:04.030 --> 00:06:04.810
+O PARA.
+
+00:06:06.110 --> 00:06:09.070
+Projetos são projetos que estão em
+andamento, né?
+
+00:06:09.070 --> 00:06:11.750
+Isso, veja, isso na visão do Tiago
+Forte.
+
+00:06:12.050 --> 00:06:16.470
+Ele cria, então, pastas nessa
+metodologia dele para isso, para esse
+
+00:06:16.470 --> 00:06:16.810
+método.
+
+00:06:16.850 --> 00:06:18.490
+Então, você tem pasta de projeto.
+
+00:06:18.830 --> 00:06:21.050
+Você tem os projetos que estão em
+andamento.
+
+00:06:22.230 --> 00:06:23.390
+Área, né?
+
+00:06:23.390 --> 00:06:26.390
+As áreas são coisas constantes.
+
+00:06:26.910 --> 00:06:28.670
+Não dependem de projeto.
+
+00:06:29.070 --> 00:06:32.450
+São coisas que a todo tempo estão sendo
+desenvolvidas.
+
+00:06:33.630 --> 00:06:34.270
+Recursos.
+
+00:06:34.590 --> 00:06:36.210
+São meios, né?
+
+00:06:36.350 --> 00:06:42.470
+Para tanto o projeto quanto aquilo que
+está dentro de áreas, que são coisas
+
+00:06:42.470 --> 00:06:47.250
+constantes em desenvolvimento, você tem
+recursos ali que são consumidos, que são
+
+00:06:47.250 --> 00:06:50.850
+pesquisados, que são consultados para a
+execução dos outros.
+
+00:06:51.090 --> 00:06:57.530
+E arquivos são coisas que já não estão
+mais em utilização, em andamento, mas
+
+00:06:57.530 --> 00:06:58.770
+precisam ser mantidos.
+
+00:06:59.250 --> 00:07:00.230
+Então, veja só.
+
+00:07:00.290 --> 00:07:01.490
+É um conceito?
+
+00:07:01.510 --> 00:07:02.190
+É o melhor?
+
+00:07:02.570 --> 00:07:02.770
+Não.
+
+00:07:03.130 --> 00:07:04.990
+Não existe regra.
+
+00:07:05.250 --> 00:07:09.310
+Você vai ver que, por exemplo, olha aqui
+do meu lado direito aqui da minha
+
+00:07:09.310 --> 00:07:10.350
+apresentação.
+
+00:07:10.470 --> 00:07:13.370
+Eu trouxe aqui o seguinte conceito.
+
+00:07:13.410 --> 00:07:16.570
+Se você tem uma...
+
+00:07:17.130 --> 00:07:23.990
+Assim, é mais valorizado para você
+flexibilidade e conexões, eu peguei, por
+
+00:07:23.990 --> 00:07:29.870
+exemplo, nas monitorias de obsidia,
+muitas pessoas que tinham algum trauma
+
+00:07:29.870 --> 00:07:35.970
+com pastas, não queriam pastas de jeito
+nenhum.
+
+00:07:36.070 --> 00:07:37.050
+Eu quero jogar nota.
+
+00:07:37.350 --> 00:07:38.610
+Eu quero criar notas.
+
+00:07:39.050 --> 00:07:42.750
+Independente do que eu estou criando, eu
+quero saber que, em algum momento,
+
+00:07:42.930 --> 00:07:44.770
+quando eu precisar, ela vai estar lá.
+
+00:07:44.950 --> 00:07:46.830
+Eu não preciso navegar por pastas.
+
+00:07:46.850 --> 00:07:48.070
+Ela quer flexibilidade.
+
+00:07:48.250 --> 00:07:51.290
+E ela sabe que ela está investindo em...
+
+00:07:52.410 --> 00:07:56.090
+propriedades e tags para que isso
+funcione bem.
+
+00:07:56.210 --> 00:08:04.090
+Então, se a nota está bem organizada com
+propriedades e tags e links, você vai
+
+00:08:04.090 --> 00:08:11.230
+conseguir fazer o seu segundo cérebro
+funcionar de maneira muito legal, muito
+
+00:08:11.230 --> 00:08:17.010
+eficaz, sem precisar estar ali envolvido
+com pastas.
+
+00:08:17.190 --> 00:08:22.690
+Então, se você tem esse valor
+prioritário, flexibilidade e conexão,
+
+00:08:23.110 --> 00:08:24.230
+não precisa de pasta.
+
+00:08:24.830 --> 00:08:31.610
+Para sistemas de segundo cérebro, onde
+você visa isso, que são conexões, como
+
+00:08:31.610 --> 00:08:36.790
+se fossem sinapses acontecendo entre
+notas, jogadas ali para todo canto.
+
+00:08:37.250 --> 00:08:43.190
+Então, você também pode, muitas vezes,
+não necessitar de pastas.
+
+00:08:43.750 --> 00:08:48.990
+E, muitas vezes, se você usa as
+propriedades e as tags de maneira
+
+00:08:48.990 --> 00:08:52.410
+correta, as pastas vão ser redundantes.
+
+00:08:52.710 --> 00:08:58.970
+Vai ser uma organização redundante que
+vai exigir um engessamento ali.
+
+00:08:59.670 --> 00:09:02.070
+E o objetivo é que seja fácil.
+
+00:09:02.850 --> 00:09:08.210
+Então, gente, o que eu quero dizer para
+você a respeito de pastas na otimização
+
+00:09:08.210 --> 00:09:09.290
+do conjunto todo.
+
+00:09:10.230 --> 00:09:20.090
+Eu quero dizer para você que você vai
+ter aí um ambiente onde o melhor dos
+
+00:09:20.090 --> 00:09:22.970
+dois mundos é o que vai funcionar para
+você.
+
+00:09:23.250 --> 00:09:27.330
+Vão ter notas que você vai jogar, que
+você vai colocar dentro do segundo
+
+00:09:27.330 --> 00:09:28.030
+cérebro.
+
+00:09:28.170 --> 00:09:31.050
+E elas não necessitam estar dentro de
+uma pasta.
+
+00:09:31.370 --> 00:09:35.850
+Outras, você vai querer colocar dentro
+de uma pasta, por organização.
+
+00:09:36.150 --> 00:09:43.110
+Mas o que eu quero que você entenda é
+que não existe essa regra absoluta de
+
+00:09:43.110 --> 00:09:46.190
+que precisa ser feito dessa forma ou de
+outra.
+
+00:09:47.070 --> 00:09:51.630
+Então, muitas vezes, muita gente teve
+dificuldade de pegar, por exemplo, um
+
+00:09:51.630 --> 00:09:53.430
+modelo de segundo cérebro.
+
+00:09:54.130 --> 00:09:59.270
+O Alan, ele compartilhou alguns modelos
+e nós vamos colocar também aqui nesse
+
+00:09:59.270 --> 00:09:59.610
+curso.
+
+00:10:00.370 --> 00:10:05.350
+Modelos de segundo cérebro que já estão
+prontos com plugins instalados e tudo
+
+00:10:05.350 --> 00:10:05.590
+mais.
+
+00:10:06.050 --> 00:10:12.130
+Só que eu acompanhei muita gente
+instalando esse modelo e depois não
+
+00:10:12.130 --> 00:10:13.970
+conseguindo se enquadrar nele.
+
+00:10:14.190 --> 00:10:17.710
+Não saber como organizar as coisas ali
+dentro.
+
+00:10:17.990 --> 00:10:23.210
+Então, aqui nesse curso eu vou
+disponibilizar esses modelos de segundo
+
+00:10:23.210 --> 00:10:23.710
+cérebro.
+
+00:10:23.850 --> 00:10:29.870
+Claro, mas no modelo que você está
+fazendo de você ir personalizando, de
+
+00:10:29.870 --> 00:10:34.610
+você ir conseguindo trabalhar suas
+notas, criando pastas como você prefere,
+
+00:10:34.670 --> 00:10:39.210
+sabendo quando você vai usar, sabendo
+usar propriedade, sabendo usar TED, é a
+
+00:10:39.210 --> 00:10:39.670
+melhor coisa.
+
+00:10:39.790 --> 00:10:40.490
+É a melhor opção.
+
+00:10:40.990 --> 00:10:45.250
+Isso é o melhor do segundo cérebro.
+
+00:10:45.370 --> 00:10:47.310
+E o melhor das metodologias.
+
+00:10:47.610 --> 00:10:48.510
+Acredita em mim.
+
+00:10:48.670 --> 00:10:54.210
+Estudando todas as metodologias,
+estudando tudo, tudo, tudo que existe a
+
+00:10:54.210 --> 00:10:57.450
+respeito do segundo cérebro, eu posso
+dizer isso com tranquilidade.
+
+00:10:57.790 --> 00:11:02.790
+Se eu estivesse ditando uma regra aqui,
+que para o segundo cérebro ser melhor,
+
+00:11:02.910 --> 00:11:07.930
+precisa ter pasta desse jeito, pasta
+daquele outro jeito, TED assim, eu
+
+00:11:07.930 --> 00:11:13.490
+estaria indo contra a flexibilidade que
+o segundo cérebro necessita e
+
+00:11:13.490 --> 00:11:21.150
+a facilidade com que você vai tornar
+isso um hábito, e vai estar praticando e
+
+00:11:21.150 --> 00:11:21.370
+fazendo.
+
+00:11:21.770 --> 00:11:26.290
+Então, relaxa e cria um modelo que você
+quer.
+
+00:11:26.430 --> 00:11:29.190
+Nesse momento do exercício eu vou pedir
+para você fazer o que?
+
+00:11:29.290 --> 00:11:33.570
+Para que você vá agora, nas suas notas
+que você está criando para o segundo
+
+00:11:33.570 --> 00:11:37.330
+cérebro, que importou, que está fazendo
+exercício, que está pegando as anotações
+
+00:11:37.330 --> 00:11:41.010
+do curso, e veja lá, como elas estão
+organizadas.
+
+00:11:41.170 --> 00:11:46.890
+Se você sente necessidade de colocar uma
+pasta, de criar uma pasta para, por
+
+00:11:46.890 --> 00:11:51.710
+exemplo, separar as anotações sobre o
+segundo cérebro, sobre o curso do
+
+00:11:51.710 --> 00:11:58.490
+Obsidian que você está fazendo, sobre um
+curso de IA, sobre palestras e vídeos,
+
+00:11:58.770 --> 00:12:04.990
+você sente essa necessidade de criar
+pastas e mesmo utilizando propriedades e
+
+00:12:04.990 --> 00:12:09.690
+TEDs, você acha que a pasta está te
+ajudando, facilitou na visualização, e
+
+00:12:09.690 --> 00:12:18.350
+cria desse jeito com a sua preferência e
+discute aqui na aula e também discute
+
+00:12:18.350 --> 00:12:22.970
+nos grupos lá, como que você tem usado,
+se ficou alguma dúvida, para que você
+
+00:12:22.970 --> 00:12:28.590
+possa realmente não gastar tempo e
+energia à toa, para depois ficar tendo
+
+00:12:28.590 --> 00:12:33.310
+que realocar as coisas aí dentro do seu
+segundo cérebro, tá bom?
+
+00:12:33.650 --> 00:12:38.070
+Então, na próxima aula, nós vamos falar
+sobre, olha, nós vimos sobre
+
+00:12:38.070 --> 00:12:43.690
+propriedade, sobre TEDs, sobre pastas,
+agora nós vamos ver sobre links e os
+
+00:12:43.690 --> 00:12:46.390
+gráficos de tudo isso sendo construído,
+tá bom?
+
+00:12:46.650 --> 00:12:53.430
+Então, legal, vamos lá, que nós estamos
+aí para finalizar essa parte que é a
+
+00:12:53.430 --> 00:12:58.890
+parte de categorização, de classificação
+das notas, de criar um sistema
+
+00:12:58.890 --> 00:13:03.070
+inteligente de tudo isso daí que você
+está colocando dentro do seu segundo
+
+00:13:03.070 --> 00:13:03.750
+cérebro, tá bom?
+
+00:13:03.950 --> 00:13:05.390
+Até a próxima aula, lendário!

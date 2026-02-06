@@ -1,0 +1,2597 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:02.360
+Bem -vindo à aula de Text Generator.
+
+00:00:02.560 --> 00:00:06.400
+Esse é um plugin que é realmente
+fantástico e que aumenta muito a nossa
+
+00:00:06.400 --> 00:00:10.860
+produtividade porque a gente pode
+utilizar prompts próprios dentro do
+
+00:00:10.860 --> 00:00:15.640
+Obsidian e com simples comandos a gente
+poder aproveitar o contexto que existe
+
+00:00:15.640 --> 00:00:22.720
+aqui para poder gerar rapidamente
+transcrições ou novas ideias para nós e
+
+00:00:22.720 --> 00:00:26.560
+até mesmo pesquisas dentro da própria
+nota sem precisar sair dela para ir para
+
+00:00:26.560 --> 00:00:32.580
+o chat de PT ou qualquer outro chat,
+qualquer outro modelo de linguagem.
+
+00:00:32.820 --> 00:00:36.860
+Então basicamente o que eu estou
+colocando aqui na tela para vocês é já
+
+00:00:36.860 --> 00:00:40.660
+uma imagem de como ele funciona para
+vocês entenderem, primeiro a gente
+
+00:00:40.660 --> 00:00:41.920
+entender como o plugin funciona.
+
+00:00:42.580 --> 00:00:43.700
+Então como é que ele funciona?
+
+00:00:43.860 --> 00:00:46.220
+Basicamente você pode fazer de três
+formas.
+
+00:00:46.300 --> 00:00:51.620
+Você pode selecionar um texto e ele vai
+considerar esse texto como um contexto
+
+00:00:51.620 --> 00:00:53.020
+para ele poder trabalhar em cima disso.
+
+00:00:53.460 --> 00:00:57.940
+Você pode simplesmente estar com o
+curso, o cursor em cima de uma linha e
+
+00:00:57.940 --> 00:01:03.960
+ele vai entender que essa linha é o
+contexto e se você tiver com o cursor em
+
+00:01:03.960 --> 00:01:08.640
+cima de uma linha vazia, ele vai
+considerar o contexto da nota inteira.
+
+00:01:08.700 --> 00:01:12.680
+Então ele não vai considerar só o que
+foi selecionado, ele vai considerar o
+
+00:01:12.680 --> 00:01:15.140
+contexto da nota inteira para poder
+escrever sobre ela.
+
+00:01:15.520 --> 00:01:18.240
+E aqui eu deixei um texto para a gente
+poder fazer um teste.
+
+00:01:18.520 --> 00:01:24.780
+Lembrando que eu instalei aqui através
+desse recurso aqui, você pode instalar
+
+00:01:24.780 --> 00:01:25.180
+vários...
+
+00:01:25.960 --> 00:01:30.900
+vários prompts já que existem dentro
+dessa plataforma, dentro desse plugin.
+
+00:01:31.100 --> 00:01:35.640
+Então eu já instalei alguns aqui e eu
+vou selecionar, como ele falou lá, e vou
+
+00:01:35.640 --> 00:01:37.420
+dar um Command J.
+
+00:01:37.720 --> 00:01:39.180
+O que o Command J já vai fazer?
+
+00:01:39.300 --> 00:01:46.660
+O Command J, ou Ctrl J, ele é um atalho
+para que você possa ativar o prompt.
+
+00:01:46.780 --> 00:01:48.800
+Ou seja, ele vai continuar escrevendo de
+onde parou.
+
+00:01:48.920 --> 00:01:52.840
+Então ele vai analisar isso aqui que eu
+selecionei e vai continuar escrevendo
+
+00:01:52.840 --> 00:01:53.820
+essa história.
+
+00:01:54.280 --> 00:01:55.940
+Então aqui, vamos ver o que ele fez.
+
+00:01:55.940 --> 00:01:58.980
+Depois de muitos dias e noites, a
+máquina está finalmente pronta.
+
+00:01:59.060 --> 00:02:01.400
+Então ele continuou a história que foi
+criada aqui em cima.
+
+00:02:02.200 --> 00:02:04.020
+Então, o que é legal de fazer aqui?
+
+00:02:04.140 --> 00:02:05.380
+Principalmente com o chat de APT4.
+
+00:02:05.560 --> 00:02:10.620
+Estou usando o 3 aqui por uma questão de
+como é um teste e o 4 ele gasta mais
+
+00:02:10.620 --> 00:02:10.960
+dinheiro.
+
+00:02:11.160 --> 00:02:12.820
+Eu deixei o 3 aqui para fazer esses
+testes.
+
+00:02:13.080 --> 00:02:18.780
+Mas, se você tem acesso à API do chat de
+APT4, muitas vezes, se você quiser
+
+00:02:18.780 --> 00:02:22.100
+ideias, novas ideias para continuar
+escrevendo alguma coisa que você travou,
+
+00:02:22.300 --> 00:02:23.980
+às vezes basta dar um Command J.
+
+00:02:24.340 --> 00:02:27.040
+Ele vai escrever, às vezes, algumas
+coisas que não tem nada a ver, mas
+
+00:02:27.040 --> 00:02:31.420
+talvez tenha uma ou duas palavras, ou
+duas frases, ou até mesmo um parágrafo
+
+00:02:31.420 --> 00:02:35.260
+inteiro que faz muito sentido e você
+pode aproveitar, às vezes, só para poder
+
+00:02:35.260 --> 00:02:38.320
+destravar no caso que você esteja
+escrevendo ou pesquisando sobre alguma
+
+00:02:38.320 --> 00:02:38.640
+coisa.
+
+00:02:39.480 --> 00:02:46.160
+Então, aqui ele já criou, ele esticou
+aqui bastante essa mesma narrativa, essa
+
+00:02:46.160 --> 00:02:48.140
+mesma ideia com o Command J.
+
+00:02:49.520 --> 00:02:53.060
+Vamos testar agora só apertando em uma
+linha vazia Command J, o que vai
+
+00:02:53.060 --> 00:02:53.360
+acontecer.
+
+00:02:54.480 --> 00:02:59.220
+Apertei em uma linha vazia, então, aqui,
+eu estou seguindo esse, o exemplo lá de
+
+00:02:59.220 --> 00:03:01.740
+cima, que é o cursor, ele continuou
+aqui.
+
+00:03:02.840 --> 00:03:08.380
+Então, ele pegou aqui, ele escreveu só
+aqui, é, isso aqui já tinha.
+
+00:03:09.120 --> 00:03:13.440
+Então, ele escreveu aqui, baseado em
+tudo o que ele viu, ele escreveu isso
+
+00:03:13.440 --> 00:03:13.600
+aqui.
+
+00:03:16.190 --> 00:03:19.750
+Ele, de repente, pelo que eu estou
+percebendo aqui, vou contar para vocês,
+
+00:03:19.990 --> 00:03:22.570
+lenda, lembrando de todos, é importante
+abraçar.
+
+00:03:22.750 --> 00:03:26.050
+Ele fez um resumo de tudo, porque aqui,
+até aqui ele conseguiu pegar.
+
+00:03:27.830 --> 00:03:30.610
+Então, ele fez um resumo de todo, de
+toda a nota.
+
+00:03:31.910 --> 00:03:36.690
+Agora, eu posso também testar, fazer só,
+deixar o cursor aqui, né, que ele
+
+00:03:36.690 --> 00:03:40.430
+indicou, só em cima de uma frase, vamos
+ver o que vai acontecer.
+
+00:03:42.350 --> 00:03:45.230
+Cliquei, eu estou com o cursor só em
+cima de uma frase que não está vazia,
+
+00:03:45.290 --> 00:03:47.210
+que seria esse exemplo aqui do meio.
+
+00:03:48.270 --> 00:03:49.610
+Vamos ver o que vai acontecer agora.
+
+00:03:49.830 --> 00:03:53.790
+Se ele vai colocar diretamente, ó,
+colocou embaixo, legal, eu não sabia
+
+00:03:53.790 --> 00:03:56.230
+disso, só que eu estou descobrindo com
+vocês também, porque eu nunca tinha
+
+00:03:56.230 --> 00:03:56.830
+testado assim.
+
+00:03:57.830 --> 00:04:02.050
+Então, eu vou fazer esse teste,
+selecionando ou dando o comando J
+
+00:04:02.050 --> 00:04:02.470
+depois.
+
+00:04:03.010 --> 00:04:06.330
+E, normalmente, na verdade, eu utilizo o
+option J, que foi o atalho que eu deixei
+
+00:04:06.330 --> 00:04:10.910
+para fazer os meus próprios prompts,
+utilizar os meus próprios prompts.
+
+00:04:11.750 --> 00:04:16.270
+Então, aqui, ele conseguiu ler, né, esse
+parágrafo inteiro e
+
+00:04:16.270 --> 00:04:16.770
+continuou.
+
+00:04:21.970 --> 00:04:25.370
+Então, está aqui, está ali aqui para ter
+uma ideia.
+
+00:04:25.590 --> 00:04:28.790
+Então, essas são as duas formas de
+trabalhar com o comando J, né,
+
+00:04:28.810 --> 00:04:33.650
+selecionando, né, o texto inteiro, ou
+uma parte que você quer dele.
+
+00:04:33.790 --> 00:04:36.470
+Por exemplo, se eu quiser só essa frase
+aqui, eu seleciono só ela.
+
+00:04:36.590 --> 00:04:40.450
+Se eu quiser só, sei lá, depois da
+vírgula, eu seleciono só depois da
+
+00:04:40.450 --> 00:04:40.770
+vírgula.
+
+00:04:41.090 --> 00:04:45.430
+Ou eu deixo o meu mouse aqui em cima,
+dou o comando J, ele vai continuar o
+
+00:04:45.430 --> 00:04:49.590
+texto, ou ainda eu posso clicar aqui
+numa área vazia, dou o comando J, ele
+
+00:04:49.590 --> 00:04:51.330
+vai ler a nota inteira daí.
+
+00:04:51.990 --> 00:04:56.330
+E eu posso ainda aplicar outros prompts,
+aqui que está a magia dele.
+
+00:04:56.510 --> 00:04:57.530
+Não é só continuar.
+
+00:04:57.690 --> 00:05:01.030
+Inclusive, ele tem uma opção, deixa eu
+ver se aqui não vai estar ativa.
+
+00:05:01.230 --> 00:05:01.970
+Eu posso...
+
+00:05:02.510 --> 00:05:06.450
+ativar nele a opção de dar um
+autocontinue.
+
+00:05:06.570 --> 00:05:07.950
+Deixa eu ver aqui, qual que é.
+
+00:05:08.310 --> 00:05:14.280
+Deixa eu pegar essa opção.
+
+00:05:15.920 --> 00:05:20.240
+Text generator, create text from text
+template, insert text template.
+
+00:05:20.460 --> 00:05:21.660
+São várias opções que tem aqui.
+
+00:05:21.940 --> 00:05:25.180
+Eu até aconselho vocês, aqui embaixo da
+aula, eu vou deixar, para a gente não
+
+00:05:25.180 --> 00:05:31.840
+ficar aqui na aula falando sobre isso,
+eu vou deixar aqui embaixo da aula todas
+
+00:05:31.840 --> 00:05:33.740
+as formas de fazer isso.
+
+00:05:33.840 --> 00:05:36.380
+Se eu não me engano, é esse aqui.
+
+00:05:36.380 --> 00:05:37.840
+Model suggestion.
+
+00:05:39.160 --> 00:05:43.400
+Que daí, habilitado, ele vai fazer essa
+questão da...
+
+00:05:43.400 --> 00:05:43.860
+Opa, cadê?
+
+00:05:45.180 --> 00:05:48.040
+Habilitado, isso aqui vai fazer aquela
+seleção aqui.
+
+00:05:48.140 --> 00:05:49.640
+Deixa eu dar mais uma ali para ver se eu
+acho
+
+00:05:49.640 --> 00:05:49.820
+outro.
+
+00:05:52.380 --> 00:05:55.820
+Aqui seria para parar, onde para a
+frase.
+
+00:06:00.480 --> 00:06:05.500
+O trigger do autosuggest, por default,
+são dois espaços.
+
+00:06:06.320 --> 00:06:09.020
+Só que ele está desabilitado aqui, então
+é aqui na verdade.
+
+00:06:09.840 --> 00:06:11.660
+Então vou habilitar e vou fazer aqui.
+
+00:06:11.820 --> 00:06:13.460
+Então assim, o que eu poderia fazer
+aqui?
+
+00:06:13.600 --> 00:06:17.100
+Eu estou aqui e quero que ele continue.
+
+00:06:17.240 --> 00:06:20.320
+Em vez de dar o comando J, eu solto dois
+espaços, já está processando.
+
+00:06:21.100 --> 00:06:23.560
+E o que ele faz daí, que é bem
+interessante?
+
+00:06:23.820 --> 00:06:28.280
+Ele vai me trazer quatro sugestões para
+a próxima frase.
+
+00:06:28.900 --> 00:06:32.700
+Então eu peço e só clico aqui, eu
+escolho a frase que eu quero.
+
+00:06:32.980 --> 00:06:37.520
+Em vez dele criar um textão gigante, eu
+dou dois espaços e ele vai criar só a
+
+00:06:37.520 --> 00:06:38.320
+próxima frase.
+
+00:06:38.320 --> 00:06:41.860
+E daí eu tenho um controle maior sobre o
+texto.
+
+00:06:42.140 --> 00:06:45.260
+Por exemplo aqui, o professor decidiu
+inventar uma máquina, ele reuniu
+
+00:06:45.260 --> 00:06:48.140
+ferramentas, começou a trabalhar
+inclusivamente na sua última criação e
+
+00:06:48.140 --> 00:06:55.280
+durante semanas o professor decidiu
+exclusivamente a construção da máquina,
+
+00:06:55.360 --> 00:06:56.500
+deixando de lado duas atividades.
+
+00:06:56.920 --> 00:06:58.560
+Vamos lá, vou dar mais dois espaços.
+
+00:06:59.260 --> 00:07:00.300
+Está processando.
+
+00:07:02.300 --> 00:07:05.440
+Ele trabalha inclusivamente muitas vezes
+perdendo a noção do tempo.
+
+00:07:05.640 --> 00:07:08.460
+Ele trabalhava inclusivamente no projeto
+passando horas na fila da oficina.
+
+00:07:08.500 --> 00:07:11.320
+Ele trabalhava inclusivamente, ele
+passava horas estudando, ele investiu
+
+00:07:11.320 --> 00:07:13.640
+horas e horas pesquisando e
+experimentando, sempre buscando a
+
+00:07:13.640 --> 00:07:14.620
+perfeição de cada detalhe e versão.
+
+00:07:14.740 --> 00:07:15.400
+Vou nessa aqui.
+
+00:07:15.600 --> 00:07:17.060
+Agora vou dar mais dois espaços.
+
+00:07:17.760 --> 00:07:18.880
+Está processando de novo.
+
+00:07:19.660 --> 00:07:22.820
+Finalmente, após muito trabalho árduo e
+dedicação, a máquina foi concluída.
+
+00:07:22.820 --> 00:07:24.560
+Finalmente, após meses de trabalho
+árduo...
+
+00:07:24.560 --> 00:07:26.740
+Finalmente, depois de muito trabalho
+árduo, a máquina está pronta.
+
+00:07:26.740 --> 00:07:28.880
+Finalmente, após meses de trabalho
+árduo, a máquina está pronta.
+
+00:07:28.880 --> 00:07:30.480
+Eu gostei mais do primeiro.
+
+00:07:31.560 --> 00:07:34.460
+E agora vamos ver o que ele vai me dizer
+em seguida.
+
+00:07:34.540 --> 00:07:35.440
+Vou dar dois espaços aqui.
+
+00:07:35.640 --> 00:07:36.680
+Ele está processando de novo.
+
+00:07:37.600 --> 00:07:41.600
+O professor te criou uma invenção
+revolucionária chamada Chatterbox, que
+
+00:07:41.600 --> 00:07:44.840
+transforma objetos em animais ou até
+mesmo em pessoas falantes.
+
+00:07:45.720 --> 00:07:47.660
+A história do professor James é uma
+criação de chatbox?
+
+00:07:47.660 --> 00:07:48.880
+É uma história de inovação descoberta?
+
+00:07:48.940 --> 00:07:49.060
+Não.
+
+00:07:49.340 --> 00:07:50.260
+Eu gostei mais do primeiro.
+
+00:07:50.680 --> 00:07:53.920
+Então, está vendo que eu consigo ir
+criando o texto?
+
+00:07:54.020 --> 00:07:57.860
+É claro que assim, quanto mais contexto
+ele tiver, melhor ele vai criar os
+
+00:07:57.860 --> 00:07:58.220
+textos.
+
+00:07:58.380 --> 00:08:01.620
+Inclusive, eu vou ensinar como gerar
+mais contexto para ele via metadata.
+
+00:08:02.640 --> 00:08:06.200
+Você pode colocar metadata e fazer com
+que ele analise essa metadata.
+
+00:08:06.480 --> 00:08:09.880
+Ou seja, você pode colocar várias
+informações lá no cabeçalho do seu...
+
+00:08:10.680 --> 00:08:12.820
+Aqui do seu documento, da sua nota.
+
+00:08:13.000 --> 00:08:18.160
+E ele vai analisar essas metadatas para
+poder criar mais referência ainda.
+
+00:08:18.220 --> 00:08:23.940
+Conseguir lá ter tom de voz, ter
+referências, ter links, ter várias
+
+00:08:23.940 --> 00:08:27.700
+informações lá para que ele possa
+continuar utilizando essas informações.
+
+00:08:28.220 --> 00:08:32.500
+Mas esse autossugeste já é uma coisa bem
+interessante que você pode ter.
+
+00:08:32.540 --> 00:08:37.800
+Você dá dois espaços e ele vai sugerir
+daí para que você possa continuar.
+
+00:08:37.860 --> 00:08:40.440
+Com base, ele analisa o contexto
+inteiro.
+
+00:08:40.640 --> 00:08:43.360
+Para poder te dar aqui uma referência.
+
+00:08:43.380 --> 00:08:44.720
+E aqui eu estou usando 3 .5.
+
+00:08:44.740 --> 00:08:46.260
+Se eu estivesse usando 4...
+
+00:08:46.260 --> 00:08:47.980
+Por exemplo, vou escrever um texto
+importante.
+
+00:08:48.240 --> 00:08:49.300
+Eu utilizaria o 4 aqui.
+
+00:08:49.360 --> 00:08:51.580
+Vou gastar, sei lá, 5 centavos por
+requisição.
+
+00:08:51.580 --> 00:08:53.320
+2 centavos, 3 centavos por requisição.
+
+00:08:53.460 --> 00:08:55.880
+Mas vou ter algo com mais qualidade
+ainda.
+
+00:08:56.180 --> 00:09:02.040
+Então, aqui a gente já revisou como ele
+funciona com os contextos.
+
+00:09:02.100 --> 00:09:05.020
+A gente já revisou o autossugeste dele,
+que é bem legal.
+
+00:09:05.140 --> 00:09:06.440
+Que se dá esses dois espaços.
+
+00:09:06.700 --> 00:09:11.200
+Deixa eu mostrar para vocês agora também
+um pouquinho desses prompts que eu posso
+
+00:09:11.200 --> 00:09:11.720
+dar aqui.
+
+00:09:12.360 --> 00:09:16.640
+Com base nos textos selecionados.
+
+00:09:16.680 --> 00:09:17.540
+Ou não, também, né?
+
+00:09:17.780 --> 00:09:20.000
+Mas vou pegar e vou dar com base nos
+textos selecionados.
+
+00:09:20.100 --> 00:09:22.260
+Eu aperto Option J.
+
+00:09:22.620 --> 00:09:24.900
+Então, pode ser para você aí Ctrl J.
+
+00:09:25.020 --> 00:09:29.620
+E aqui vai listar todos os prompts que
+existem aqui dentro.
+
+00:09:29.720 --> 00:09:30.380
+São vários prompts.
+
+00:09:30.900 --> 00:09:35.740
+Então, eu posso, por exemplo, pegar aqui
+um Artista Advisor, um
+
+00:09:35.740 --> 00:09:42.120
+Astrólogo, vou pegar aqui, eu quero
+pegar alguma coisa que seja...
+
+00:09:43.040 --> 00:09:44.520
+Vou pegar, eu gostei desse aqui, ó.
+
+00:09:45.500 --> 00:09:46.960
+Character for a movie, enfim.
+
+00:09:47.180 --> 00:09:51.080
+I want to act like a movie, I want to
+respond sort of like I should be using
+
+00:09:51.080 --> 00:09:54.680
+ton, manner, vocabulary, vou testar esse
+aqui.
+
+00:09:55.180 --> 00:09:55.760
+Então, assim...
+
+00:09:55.760 --> 00:09:56.680
+Ah, tá em inglês, ó.
+
+00:09:56.760 --> 00:10:00.180
+Você pode traduzir com aquele translator
+language que eu botei.
+
+00:10:00.680 --> 00:10:03.720
+Pzinga, eu sou o Sheldon Cooper, teria
+pensado em uma ideia tão brilhante
+
+00:10:03.720 --> 00:10:04.220
+quanto essa.
+
+00:10:04.600 --> 00:10:06.700
+Não é surpreendente, afinal, eu sou um
+gênio.
+
+00:10:06.800 --> 00:10:10.440
+Mas, como sempre, o professor tinha, ou
+seja, ele pegou, eu acho que é
+
+00:10:10.440 --> 00:10:12.040
+aleatório, ele pega qualquer...
+
+00:10:12.040 --> 00:10:14.020
+Vou tentar de novo, eu gostei desse.
+
+00:10:14.900 --> 00:10:15.580
+Option J.
+
+00:10:16.500 --> 00:10:17.900
+Ele é aqui, ó.
+
+00:10:18.380 --> 00:10:19.140
+Artista Advisor?
+
+00:10:19.520 --> 00:10:19.660
+Não.
+
+00:10:20.120 --> 00:10:20.600
+É.
+
+00:10:21.720 --> 00:10:22.200
+Ahn...
+
+00:10:23.600 --> 00:10:25.900
+Não, não foi Artista Advisor, foi...
+
+00:10:28.750 --> 00:10:29.750
+Character for a movie.
+
+00:10:30.530 --> 00:10:31.010
+Like.
+
+00:10:31.990 --> 00:10:34.630
+Eu quero que você emite um...
+
+00:10:35.330 --> 00:10:36.210
+Tipo assim, é.
+
+00:10:36.710 --> 00:10:40.350
+Play like, haja como um personagem de
+uma série.
+
+00:10:41.130 --> 00:10:46.050
+Eu quero que você responda como se fosse
+utilizando o tom dele, a forma dele, o
+
+00:10:46.050 --> 00:10:47.910
+vocabulário dele, como ele responderia.
+
+00:10:48.070 --> 00:10:52.070
+Então, assim, pelo que eu entendi ali,
+de forma aleatória, ele vai responder
+
+00:10:52.070 --> 00:10:54.170
+uma resposta pra mim.
+
+00:10:54.550 --> 00:11:00.190
+Ele respondeu de novo com Pzinga,
+provavelmente pelo fato de ser algo
+
+00:11:00.190 --> 00:11:03.090
+relacionado à ciência, que o professor e
+tal tá criando algo.
+
+00:11:03.330 --> 00:11:05.170
+Deixa eu botar aqui uma coisa diferente.
+
+00:11:05.250 --> 00:11:06.690
+Vou puxar de GPT mesmo.
+
+00:11:06.910 --> 00:11:07.270
+Ó.
+
+00:11:07.610 --> 00:11:08.370
+Vou botar aqui, ó.
+
+00:11:09.730 --> 00:11:12.110
+Crie uma...
+
+00:11:14.030 --> 00:11:19.420
+Crie um parágrafo falando
+
+00:11:21.120 --> 00:11:24.100
+sobre fórmula...
+
+00:11:24.100 --> 00:11:24.880
+Não, fórmula 1, não.
+
+00:11:25.760 --> 00:11:26.240
+Sobre...
+
+00:11:26.240 --> 00:11:28.000
+Alguma coisa que tenha alguma...
+
+00:11:28.000 --> 00:11:29.400
+Seja especificar sobre dinossauros.
+
+00:11:33.500 --> 00:11:34.320
+E vou...
+
+00:11:34.320 --> 00:11:34.940
+Beleza.
+
+00:11:35.020 --> 00:11:40.340
+Aqui, eu seleciono, dou comando de J,
+ele vai entender que isso é um comando e
+
+00:11:40.340 --> 00:11:43.100
+vai criar um parágrafo sobre
+dinossauros.
+
+00:11:43.180 --> 00:11:44.760
+Então, isso é uma outra forma de você
+fazer.
+
+00:11:44.900 --> 00:11:46.720
+É você, digamos, dar comandos em linha.
+
+00:11:46.860 --> 00:11:47.240
+Ó, aqui, ó.
+
+00:11:47.240 --> 00:11:47.760
+Ele criou.
+
+00:11:47.960 --> 00:11:50.660
+Eu escrevi aqui pra ele criar um
+parágrafo falando sobre dinossauros.
+
+00:11:51.140 --> 00:11:52.460
+E aí, comando de J, pronto.
+
+00:11:52.700 --> 00:11:52.880
+Entendeu?
+
+00:11:52.940 --> 00:11:53.820
+É muito rápido.
+
+00:11:53.920 --> 00:11:54.780
+Isso que é o legal, sabe?
+
+00:11:54.820 --> 00:11:57.860
+Tu tá escrevendo aqui, tu não precisa
+sair pra ir puxar de GPT ou pra outro
+
+00:11:57.860 --> 00:11:58.080
+lugar.
+
+00:11:58.380 --> 00:12:01.780
+Quando é coisas mais simples, só digita
+aqui o que tu quer, dá um comando de J,
+
+00:12:01.920 --> 00:12:02.280
+pronto.
+
+00:12:02.480 --> 00:12:02.980
+Ele vai fazer.
+
+00:12:03.860 --> 00:12:06.320
+Então, ele escreveu aqui uma história
+sobre dinossauros.
+
+00:12:06.380 --> 00:12:07.900
+Agora, eu quero fazer o quê?
+
+00:12:07.980 --> 00:12:15.480
+Agora, sim, eu quero usar esse prompt
+pronto de agir como a act as a
+
+00:12:15.480 --> 00:12:21.580
+character mas vou fechar aqui, ó.
+
+00:12:24.090 --> 00:12:24.470
+Aqui.
+
+00:12:26.110 --> 00:12:27.030
+Vamos ver o que vai acontecer.
+
+00:12:27.190 --> 00:12:30.630
+Se ele vai pegar outro ou se ele vai
+pegar o Sheldon de novo.
+
+00:12:30.690 --> 00:12:32.230
+Se ele pegar o Sheldon de novo,
+provavelmente, ó.
+
+00:12:34.200 --> 00:12:35.100
+Aqui foi outro.
+
+00:12:36.440 --> 00:12:38.340
+Bem, é claro que são dinossauros aqui.
+
+00:12:38.480 --> 00:12:41.540
+Essas criaturas estão especialmente de
+tamanho desde milhares de anos,
+
+00:12:41.580 --> 00:12:42.220
+evolucionando na Terra.
+
+00:12:42.600 --> 00:12:43.740
+Ele não me disse quem é.
+
+00:12:43.800 --> 00:12:44.780
+Aqui ele falou.
+
+00:12:44.900 --> 00:12:45.560
+Eu sou o Shadow Cooper.
+
+00:12:47.320 --> 00:12:49.380
+Ele não me falou sobre quem ele é.
+
+00:12:49.500 --> 00:12:51.340
+Vou tentar fazer outro teste.
+
+00:12:51.500 --> 00:12:54.740
+Ver se ele vai pegar o mesmo ou se ele
+vai utilizar outro.
+
+00:12:55.200 --> 00:12:56.280
+Eu até posso falar.
+
+00:12:56.420 --> 00:13:00.220
+Eu vou reescrever esse esse prompt aqui.
+
+00:13:00.660 --> 00:13:01.660
+Só pra vocês.
+
+00:13:01.760 --> 00:13:02.380
+Acho que tá aqui.
+
+00:13:03.400 --> 00:13:03.920
+É...
+
+00:13:08.840 --> 00:13:10.500
+Ele não tá por ordem alfabética.
+
+00:13:11.680 --> 00:13:14.100
+Ah, ele tem aqui o chat generator prompt
+aqui também.
+
+00:13:14.160 --> 00:13:14.420
+Legal.
+
+00:13:15.100 --> 00:13:16.360
+Vou mostrar ele pra vocês.
+
+00:13:18.100 --> 00:13:20.720
+Quero que te ache como um prompt, um
+gerador de prompts.
+
+00:13:21.280 --> 00:13:21.900
+Esse é bem legal.
+
+00:13:22.160 --> 00:13:23.600
+Eu utilizo também já ele.
+
+00:13:26.540 --> 00:13:27.140
+Mais fácil.
+
+00:13:27.160 --> 00:13:28.020
+Eu vou clicar aqui a nova.
+
+00:13:29.300 --> 00:13:33.300
+Command -O Character...
+
+00:13:33.300 --> 00:13:33.660
+PronaMovie.
+
+00:13:33.720 --> 00:13:33.860
+Deu.
+
+00:13:34.560 --> 00:13:35.880
+Isso que é uma coisa que é legal do
+Obsidian.
+
+00:13:35.980 --> 00:13:37.620
+Você não precisa ficar olhando as
+pastas.
+
+00:13:37.880 --> 00:13:41.600
+Basta dar um Command -O ou Ctrl -O e é
+muito fácil de encontrar.
+
+00:13:41.960 --> 00:13:43.500
+Então aqui tá a configuração.
+
+00:13:43.560 --> 00:13:45.980
+Aqui tá a descrição do prompt e aqui que
+tá a configuração.
+
+00:13:46.400 --> 00:13:47.620
+O modo é de inserir.
+
+00:13:47.720 --> 00:13:50.020
+O sistema eu quero que você aja como
+personagem de uma série.
+
+00:13:50.280 --> 00:13:52.600
+Inclusive eu vou deixar em português
+aqui pra vocês poderem ler também, ó.
+
+00:13:52.620 --> 00:13:56.460
+Command -Shift Ctrl -Shift -R Ele vai
+traduzir.
+
+00:13:57.540 --> 00:13:58.060
+Deu.
+
+00:13:58.080 --> 00:13:58.460
+Traduziu.
+
+00:13:58.500 --> 00:14:00.680
+Eu quero que você aja como um personagem
+de série.
+
+00:14:00.780 --> 00:14:04.640
+Eu quero que você responda como um
+personagem usando o tom, a maneira e o
+
+00:14:04.640 --> 00:14:05.660
+vocabulário que o personagem usaria.
+
+00:14:05.920 --> 00:14:07.900
+Não escreva explicações.
+
+00:14:07.980 --> 00:14:09.320
+Só responda como um personagem.
+
+00:14:09.540 --> 00:14:11.220
+Você deve conhecer...
+
+00:14:11.220 --> 00:14:15.400
+Você deve conhecer todo o conhecimento
+do caráter do personagem.
+
+00:14:16.120 --> 00:14:17.060
+Do personagem.
+
+00:14:19.380 --> 00:14:19.900
+Personagem.
+
+00:14:20.740 --> 00:14:32.900
+E no final no final da resposta deixe o
+nome do personagem que
+
+00:14:32.900 --> 00:14:43.660
+você usou como se fosse uma citação.
+
+00:14:44.410 --> 00:14:44.920
+Assim.
+
+00:14:45.040 --> 00:14:46.040
+Ainda vou dizer como ele vai fazer.
+
+00:14:46.660 --> 00:14:52.580
+Trocinho no nome do personagem.
+
+00:14:54.440 --> 00:14:54.940
+Pronto.
+
+00:14:55.200 --> 00:14:55.700
+Salvo.
+
+00:14:56.280 --> 00:14:58.380
+Aqui depois ele está na seleção.
+
+00:14:59.280 --> 00:15:02.980
+E agora vamos lá fazer aqui o nosso
+Command -J
+
+00:15:04.860 --> 00:15:10.820
+Move Cadê?
+
+00:15:11.500 --> 00:15:12.500
+Achei que ia ser mais fácil.
+
+00:15:12.600 --> 00:15:13.100
+Bom.
+
+00:15:15.560 --> 00:15:16.660
+Vamos ver o que vai acontecer.
+
+00:15:18.540 --> 00:15:21.120
+Ele deveria daí agora botar no final o
+nome.
+
+00:15:21.240 --> 00:15:21.360
+Aí.
+
+00:15:21.520 --> 00:15:21.880
+Está aqui.
+
+00:15:22.200 --> 00:15:24.460
+Bem, assim fui fascinado por dinossauros
+desde criança.
+
+00:15:25.020 --> 00:15:25.600
+Alan Grant.
+
+00:15:26.320 --> 00:15:27.880
+Que é o cara do Jurassic Park.
+
+00:15:28.100 --> 00:15:28.820
+Pra quem não sabe.
+
+00:15:29.240 --> 00:15:31.020
+Eu imaginei que ia ser alguma coisa
+nesse sentido.
+
+00:15:31.200 --> 00:15:31.940
+Porque é um filme, né?
+
+00:15:33.560 --> 00:15:33.960
+Então.
+
+00:15:33.960 --> 00:15:34.360
+Interessante.
+
+00:15:34.500 --> 00:15:35.880
+Você poderia pensar em um filme, sei lá.
+
+00:15:36.660 --> 00:15:37.060
+Robôs.
+
+00:15:37.060 --> 00:15:37.620
+Eu vou botar aqui, ó.
+
+00:15:39.080 --> 00:15:45.600
+Robôs e o velho Oeste juntos no mesmo
+lugar.
+
+00:15:46.060 --> 00:15:47.840
+Vamos ver se ele vai pegar West Road.
+
+00:15:51.560 --> 00:15:56.450
+Move O comentário que ele vai deixar
+aqui.
+
+00:15:58.850 --> 00:15:59.890
+Pegou um personagem.
+
+00:16:00.330 --> 00:16:02.450
+O White Arp.
+
+00:16:02.490 --> 00:16:04.670
+Ele é um personagem do West Road.
+
+00:16:05.010 --> 00:16:07.830
+Eu não acredito que estamos lidando com
+robôs no velho Oeste.
+
+00:16:07.950 --> 00:16:09.490
+Isso é uma operação contra a natureza.
+
+00:16:09.570 --> 00:16:13.290
+Mas se eles querem brincar com fogo, vou
+usar o Cowboy pra apagar essa chama.
+
+00:16:13.590 --> 00:16:15.070
+O que eu vou fazer aqui ainda?
+
+00:16:15.210 --> 00:16:18.630
+Eu quero que ele me diga aqui.
+
+00:16:18.770 --> 00:16:20.610
+Ele bote assim, ó.
+
+00:16:20.730 --> 00:16:21.250
+Aspas.
+
+00:16:23.560 --> 00:16:27.260
+Nome da série ou filme.
+
+00:16:29.200 --> 00:16:32.520
+Então, no final da resposta deixo o nome
+do personagem que usou como se fosse uma
+
+00:16:32.520 --> 00:16:33.160
+citação.
+
+00:16:34.360 --> 00:16:44.880
+Nome do personagem e de qual série série
+ou
+
+00:16:44.880 --> 00:16:48.710
+filme que ele é.
+
+00:16:49.290 --> 00:16:49.730
+Tá.
+
+00:16:49.810 --> 00:16:50.250
+Vou deixar assim.
+
+00:16:50.350 --> 00:16:50.890
+Ele vai entender.
+
+00:16:51.710 --> 00:16:53.870
+Vamos agora refazer isso aqui.
+
+00:16:53.970 --> 00:16:55.570
+Vamos pegar outra coisa aqui.
+
+00:16:56.990 --> 00:16:59.830
+Vamos pegar uma série sei lá.
+
+00:16:59.830 --> 00:17:01.030
+Vou pegar um Mandalorian.
+
+00:17:01.170 --> 00:17:02.770
+Não vou explicar.
+
+00:17:03.790 --> 00:17:06.830
+Tem um baby Yoda.
+
+00:17:07.690 --> 00:17:08.670
+Inclusive tem um aqui.
+
+00:17:08.870 --> 00:17:12.050
+Tem um baby Yoda na minha nave.
+
+00:17:12.490 --> 00:17:14.670
+O que faço com ele?
+
+00:17:15.150 --> 00:17:20.670
+E agora vou dar aqui o comando J move
+aqui.
+
+00:17:22.990 --> 00:17:24.370
+E vamos ver o que vai acontecer.
+
+00:17:24.750 --> 00:17:26.310
+Se ele vai responder, por exemplo.
+
+00:17:26.310 --> 00:17:29.770
+Ele respondeu com o The Mandalorian do
+Star Wars.
+
+00:17:29.950 --> 00:17:31.750
+Você deve protegê -lo a todo custo.
+
+00:17:31.750 --> 00:17:33.850
+Ele é a esperança de uma nova geração de
+Jedi.
+
+00:17:35.270 --> 00:17:36.590
+Então ele me respondeu.
+
+00:17:36.630 --> 00:17:37.630
+Quem falou isso?
+
+00:17:37.770 --> 00:17:40.230
+Foi o The Mandalorian e foi o Star Wars.
+
+00:17:40.490 --> 00:17:41.910
+Então, cara, é muito legal isso.
+
+00:17:42.070 --> 00:17:44.410
+Esse aqui é um que eu nem tinha testado
+ainda.
+
+00:17:44.690 --> 00:17:46.530
+Me diverti já um pouco com ele aqui.
+
+00:17:46.570 --> 00:17:47.750
+Me diverti muito mais ainda.
+
+00:17:47.870 --> 00:17:50.070
+Ele está me respondendo como um
+personagem.
+
+00:17:51.190 --> 00:17:52.890
+Assumindo o papel de um personagem.
+
+00:17:52.930 --> 00:17:56.190
+Inclusive isso já me deu várias ideias
+para utilizar em outro recurso.
+
+00:17:56.310 --> 00:17:57.770
+O que eu estou fazendo aqui que é um
+chat base.
+
+00:17:58.150 --> 00:18:00.790
+Porque está muito legal a resposta dele.
+
+00:18:00.830 --> 00:18:03.630
+Realmente ele está dando uma resposta
+tentando se parecer.
+
+00:18:04.050 --> 00:18:05.010
+Então eu vou falar aqui.
+
+00:18:06.790 --> 00:18:22.710
+Um Jedi treinar eu devo a a força a
+força ele ter.
+
+00:18:22.870 --> 00:18:24.190
+Não sei se ele falaria assim.
+
+00:18:24.510 --> 00:18:27.370
+Vamos ver o que ele vai pegar aqui.
+
+00:18:27.890 --> 00:18:30.910
+Move Se ele vai pegar o Yoda.
+
+00:18:31.610 --> 00:18:32.650
+Alguma coisa nesse sentido.
+
+00:18:34.730 --> 00:18:35.170
+Aí.
+
+00:18:35.290 --> 00:18:35.850
+Pegou o Yoda.
+
+00:18:36.090 --> 00:18:38.170
+A força é forte em você, jovem padawan.
+
+00:18:38.310 --> 00:18:40.870
+Eu serei seu mestre e te ensinarei a
+controlar seus poderes.
+
+00:18:40.870 --> 00:18:41.890
+Mestre Yoda e Star Wars.
+
+00:18:42.150 --> 00:18:44.190
+O Jedi treinar eu devo a força ele ter.
+
+00:18:44.410 --> 00:18:47.590
+Não sei se ele falaria exatamente assim,
+mas o que eu queria era atrair isso
+
+00:18:47.590 --> 00:18:47.750
+aqui.
+
+00:18:48.590 --> 00:18:53.990
+Então o que eu estou percebendo aqui
+dele ele pega essa frase e consegue
+
+00:18:53.990 --> 00:18:59.850
+associar ela com algum personagem de
+alguma série ou filme e já responder com
+
+00:18:59.850 --> 00:19:00.170
+isso.
+
+00:19:00.470 --> 00:19:01.570
+Isso é muito legal.
+
+00:19:01.710 --> 00:19:03.530
+Porque é muito rápido que ele faz isso.
+
+00:19:04.250 --> 00:19:08.270
+Imagina, ele está pegando uma frase e já
+analisa para saber com quem responder.
+
+00:19:08.590 --> 00:19:10.170
+Eu poderia fazer isso com...
+
+00:19:10.170 --> 00:19:11.930
+Eu já tive a ideia agora de fazer isso
+com livros.
+
+00:19:12.090 --> 00:19:16.910
+Eu poderia botar uma frase aqui e pedir
+para ele, ao invés de ser um personagem
+
+00:19:16.910 --> 00:19:23.470
+de um filme, eu pedir para ele ser haja
+como personagem de série.
+
+00:19:23.670 --> 00:19:25.790
+Eu quero que você responda como eu
+responderia usando o tom, maneira,
+
+00:19:27.030 --> 00:19:27.750
+usaria, beleza.
+
+00:19:27.950 --> 00:19:30.270
+Eu poderia botar como um escritor de um
+livro.
+
+00:19:30.390 --> 00:19:31.390
+Vou fazer isso agora.
+
+00:19:31.710 --> 00:19:32.290
+Eu vou botar aqui.
+
+00:19:32.310 --> 00:19:39.100
+Eu quero que você haja como escritor
+escritor de um
+
+00:19:39.100 --> 00:19:39.460
+livro.
+
+00:19:45.680 --> 00:19:49.120
+Respondendo lá lá lá esse escritor.
+
+00:19:49.280 --> 00:19:50.080
+Deixa eu ver se tem alguma coisa.
+
+00:19:50.180 --> 00:19:50.900
+Eu vou fazer o seguinte.
+
+00:19:50.960 --> 00:19:53.580
+Para a gente não perder esse aqui,
+porque eu vou editar bastante eu vou
+
+00:19:53.580 --> 00:19:54.440
+duplicar ele.
+
+00:19:55.240 --> 00:19:56.920
+E isso que eu indico vocês fazerem
+também.
+
+00:19:57.040 --> 00:19:58.340
+Pega e duplica.
+
+00:19:58.400 --> 00:19:59.180
+Está aqui inclusive.
+
+00:19:59.720 --> 00:20:00.080
+Chapter...
+
+00:20:01.220 --> 00:20:03.340
+Eu vou clicar aqui.
+
+00:20:03.360 --> 00:20:04.100
+Eu vou fazer o seguinte.
+
+00:20:04.220 --> 00:20:05.140
+Eu vou criar num novo.
+
+00:20:05.600 --> 00:20:07.460
+Eu tenho já uma pasta aqui chamado Alan.
+
+00:20:07.620 --> 00:20:08.460
+Eu vou criar nesse aqui.
+
+00:20:08.600 --> 00:20:09.520
+Vou criar um novo arquivo.
+
+00:20:09.640 --> 00:20:10.320
+É assim que você cria.
+
+00:20:10.360 --> 00:20:11.400
+Você cria uma pasta para você.
+
+00:20:12.540 --> 00:20:13.100
+Clica aqui.
+
+00:20:14.000 --> 00:20:14.320
+Adiciona.
+
+00:20:14.320 --> 00:20:16.380
+Daí, por exemplo, esse aqui vai ser
+livro.
+
+00:20:18.880 --> 00:20:19.200
+Escritor.
+
+00:20:21.500 --> 00:20:22.280
+Vou colar aqui.
+
+00:20:22.800 --> 00:20:23.960
+Então aqui vai ser...
+
+00:20:23.960 --> 00:20:25.360
+O nome vai ser escritor.
+
+00:20:32.500 --> 00:20:33.140
+Me responda.
+
+00:20:35.310 --> 00:20:39.870
+Então a própria ID aqui vai ser
+escritor.
+
+00:20:41.730 --> 00:20:42.210
+Resposta.
+
+00:20:42.930 --> 00:20:44.590
+Aqui vai ser uma descrição.
+
+00:20:45.050 --> 00:20:52.690
+Aqui basicamente eu só vou escrever Um
+escritor irá responder esse
+
+00:20:52.690 --> 00:20:53.010
+prompt.
+
+00:20:55.710 --> 00:20:58.010
+Aqui o autor seria eu.
+
+00:20:58.130 --> 00:20:59.250
+Então vou botar Alan aqui.
+
+00:20:59.290 --> 00:20:59.850
+Alan Nicholas.
+
+00:21:00.790 --> 00:21:02.550
+Aqui eu posso botar tags para encontrar.
+
+00:21:02.630 --> 00:21:03.230
+Não tem necessidade.
+
+00:21:03.470 --> 00:21:05.230
+E aqui eu quero que você aja como
+escritor de um livro.
+
+00:21:05.390 --> 00:21:11.110
+Eu quero que você responda como o
+escritor.
+
+00:21:13.880 --> 00:21:19.220
+Usando o tom, a maneira e o vocabulário
+que o escritor, de novo, usaria.
+
+00:21:19.800 --> 00:21:22.860
+Não escreva explicações.
+
+00:21:23.300 --> 00:21:25.560
+Só responda como escritor.
+
+00:21:26.380 --> 00:21:30.020
+Você deve conhecer todo o conhecimento
+do escritor.
+
+00:21:30.300 --> 00:21:32.940
+No final da resposta deixe o nome do
+escritor.
+
+00:21:33.820 --> 00:21:36.280
+E qual série ou filme.
+
+00:21:36.460 --> 00:21:37.900
+E qual livro eu vou deixar.
+
+00:21:37.900 --> 00:21:44.190
+E qual livro você
+
+00:21:44.190 --> 00:21:44.510
+usou.
+
+00:21:49.060 --> 00:21:50.240
+Você usou como base.
+
+00:21:52.900 --> 00:21:59.280
+E escreva como se fosse uma citação.
+
+00:21:59.480 --> 00:22:01.440
+Nome do escritor.
+
+00:22:03.360 --> 00:22:04.400
+E livro.
+
+00:22:08.960 --> 00:22:11.000
+Isso que é legal de testar aqui esses
+prompts.
+
+00:22:11.260 --> 00:22:12.820
+Porque eles vão gerando ideias para você
+criar.
+
+00:22:13.060 --> 00:22:14.380
+Então eu aconselho você a fazer isso.
+
+00:22:14.440 --> 00:22:15.080
+Baixe os prompts.
+
+00:22:15.760 --> 00:22:17.040
+Testa bastante eles.
+
+00:22:17.460 --> 00:22:18.840
+E vai criando os seus.
+
+00:22:19.680 --> 00:22:20.280
+Vamos testar.
+
+00:22:20.300 --> 00:22:21.040
+Vamos ver como vai ficar.
+
+00:22:21.220 --> 00:22:22.100
+Não sei se vai ficar bom.
+
+00:22:22.500 --> 00:22:29.720
+Então aqui eu vou escrever menos menos é
+
+00:22:29.720 --> 00:22:44.630
+mais Precisamos escolher menos mas
+melhor.
+
+00:22:46.190 --> 00:22:51.760
+Qualidade é melhor que quantidade.
+
+00:22:52.620 --> 00:22:53.280
+Vamos ver.
+
+00:22:53.360 --> 00:22:55.280
+Eu não sei qual livro que ele vai me
+indicar.
+
+00:22:55.340 --> 00:22:56.120
+Pode ser essencialismo.
+
+00:22:56.140 --> 00:22:56.860
+Pode ser lei de parede.
+
+00:22:56.960 --> 00:22:57.640
+Pode ser um monte de coisa.
+
+00:22:58.100 --> 00:22:59.440
+Vou dar um como de jota aqui.
+
+00:22:59.700 --> 00:23:01.840
+Vou dar aqui livro, escritor.
+
+00:23:01.900 --> 00:23:02.680
+Na verdade é escritor.
+
+00:23:02.700 --> 00:23:04.900
+Me responda, escritor me responda.
+
+00:23:05.220 --> 00:23:06.040
+Dei enter.
+
+00:23:06.240 --> 00:23:07.780
+Vamos ver o que vai acontecer agora.
+
+00:23:08.840 --> 00:23:10.020
+Ai ai ai.
+
+00:23:10.160 --> 00:23:10.920
+Vai dar certo?
+
+00:23:11.780 --> 00:23:12.300
+Legal.
+
+00:23:13.240 --> 00:23:18.920
+Essa é uma filosofia que tenho seguido a
+minha vida e na minha escrita.
+
+00:23:18.940 --> 00:23:21.900
+Como escritor entendo a importância de
+escolher cuidadosamente cada palavra,
+
+00:23:22.060 --> 00:23:22.580
+cada frase.
+
+00:23:23.000 --> 00:23:24.420
+Cada elemento deve ser...
+
+00:23:24.420 --> 00:23:25.480
+Cara, é muito bom isso aqui.
+
+00:23:25.580 --> 00:23:25.740
+Sério.
+
+00:23:25.840 --> 00:23:27.020
+Esse prompt aqui, gente.
+
+00:23:27.480 --> 00:23:30.340
+Eu gosto de trazer citações.
+
+00:23:30.440 --> 00:23:31.980
+Ou trazer...
+
+00:23:32.700 --> 00:23:36.100
+Ele está me dizendo, inclusive, qual que
+é o livro.
+
+00:23:36.320 --> 00:23:40.280
+Eu vou adicionar mais uma coisa nesse
+prompt que é eu quero que ele me traga
+
+00:23:40.280 --> 00:23:41.600
+uma citação do livro também depois.
+
+00:23:43.260 --> 00:23:44.360
+Vamos ver o que vai acontecer.
+
+00:23:44.460 --> 00:23:45.060
+Se ele vai conseguir.
+
+00:23:45.240 --> 00:23:48.220
+Porque muitas vezes o Chatipete acusa
+que ele não tem acesso aos livros.
+
+00:23:48.240 --> 00:23:51.280
+Que ele não consegue trazer uma uma
+citação.
+
+00:23:51.320 --> 00:23:55.640
+Mas melhor que isso, eu posso pedir para
+ele me trazer uma citação desse autor
+
+00:23:55.640 --> 00:23:59.500
+que tenha uma conexão direta com a
+resposta que ele me deu.
+
+00:23:59.500 --> 00:24:00.860
+Então, eu escrevi isso aqui.
+
+00:24:00.940 --> 00:24:01.820
+Vamos fazer o seguinte.
+
+00:24:01.940 --> 00:24:04.640
+Vamos fazer mais um teste para ver se
+ele é aleatório ou se ele vai trazer o
+
+00:24:04.640 --> 00:24:05.340
+mesmo autor de novo.
+
+00:24:07.610 --> 00:24:09.130
+O escritor me responde.
+
+00:24:14.660 --> 00:24:16.180
+Ó, trouxe o essencialismo.
+
+00:24:16.180 --> 00:24:16.420
+Legal.
+
+00:24:16.620 --> 00:24:19.960
+Devemos sempre lembrar que simplicidade
+é a chave para a verdadeira elegância.
+
+00:24:19.980 --> 00:24:24.180
+Ao invés de sobrecarregarmos com
+excesso, devemos escolher cuidadosamente
+
+00:24:24.180 --> 00:24:27.860
+o que realmente importa e nos dedicarmos
+a isso com todo o nosso coração e alma.
+
+00:24:28.120 --> 00:24:31.340
+Afinal, é melhor ter uma pequena
+quantidade de algo excepcional do que
+
+00:24:31.340 --> 00:24:33.300
+uma grande quantidade de algo medíocre.
+
+00:24:33.420 --> 00:24:34.180
+Muito bom.
+
+00:24:34.740 --> 00:24:35.120
+Sério.
+
+00:24:35.160 --> 00:24:36.160
+Esse prompt aqui está...
+
+00:24:36.220 --> 00:24:38.280
+Essas respostas estão ficando muito
+boas.
+
+00:24:39.880 --> 00:24:41.340
+Inclusive, o que eu percebi aqui?
+
+00:24:41.480 --> 00:24:43.220
+Eu até vou tirar essa parte aqui, ó.
+
+00:24:43.980 --> 00:24:45.360
+Não escreva explicações.
+
+00:24:45.380 --> 00:24:50.420
+Eu acho que isso aqui é uma coisa que
+caga muito o ChatGPT.
+
+00:24:50.680 --> 00:24:53.000
+Porque ele começa a fazer um monte de
+explicação das coisas.
+
+00:24:53.240 --> 00:24:56.080
+Eu vou fazer um teste agora sem ele para
+ver como é que vai ser.
+
+00:24:56.240 --> 00:24:57.280
+Porque está muito boa essa resposta.
+
+00:24:57.400 --> 00:25:00.940
+Sinceramente, eu estou surpreendido aqui
+com a qualidade que está vindo dessas
+
+00:25:00.940 --> 00:25:01.620
+respostas.
+
+00:25:02.060 --> 00:25:03.360
+Vamos ver agora o que vai acontecer.
+
+00:25:03.800 --> 00:25:05.960
+E se ele vai trazer outro autor, né?
+
+00:25:06.220 --> 00:25:08.240
+Depois disso eu vou botar a citação lá
+também.
+
+00:25:08.400 --> 00:25:09.520
+Para que ele possa, ó.
+
+00:25:09.640 --> 00:25:10.080
+Beleza.
+
+00:25:10.180 --> 00:25:10.860
+É, realmente.
+
+00:25:11.020 --> 00:25:16.620
+Pode ver que ele trouxe de novo o Greg
+McNeil do Essencialismo aqui, ó.
+
+00:25:17.320 --> 00:25:19.680
+Só que ele começou a me explicar.
+
+00:25:21.160 --> 00:25:25.080
+Essa é uma premissa importante de que
+muitas vezes esquecida é uma sociedade
+
+00:25:25.080 --> 00:25:28.060
+moderna onde estamos constantemente
+bobageados por escolhas e opções.
+
+00:25:28.140 --> 00:25:30.680
+No entanto, como escritor, acredito
+fundamentalmente nessa especificidade.
+
+00:25:31.060 --> 00:25:34.520
+Esse princípio também pode ser aplicado
+em escrita, uma vez que tentar abortar
+
+00:25:34.520 --> 00:25:35.880
+um grande número de temas e personagens.
+
+00:25:36.220 --> 00:25:37.360
+O livro é a melhor escolha.
+
+00:25:38.820 --> 00:25:39.700
+Vou fazer de novo.
+
+00:25:40.820 --> 00:25:44.200
+Mas deu para notar aqui já duas coisas
+que aconteceram aqui, né?
+
+00:25:44.260 --> 00:25:45.920
+Ele quebrou o...
+
+00:25:45.920 --> 00:25:48.340
+Deixa eu fazer como se fosse uma
+citação.
+
+00:25:49.340 --> 00:25:52.360
+E ele realmente over -explained, né?
+
+00:25:52.380 --> 00:25:54.240
+Tipo assim, ele explicou mais do que
+precisava.
+
+00:25:55.000 --> 00:25:56.080
+Então vamos de novo.
+
+00:25:56.340 --> 00:25:57.160
+Vou dar um combo de J.
+
+00:25:59.080 --> 00:26:00.800
+Escritor, me responda.
+
+00:26:07.110 --> 00:26:11.290
+Ele trouxe agora de outra forma o poder
+da simplicidade infinito.
+
+00:26:12.930 --> 00:26:16.590
+Como escreveu o grande escritor
+americano Armstrong, o poder da
+
+00:26:16.590 --> 00:26:17.510
+simplicidade infinita.
+
+00:26:17.730 --> 00:26:19.790
+Legal que ele trouxe aqui uma citação,
+sem eu pedir.
+
+00:26:20.390 --> 00:26:22.410
+Agora ele não over -explained, né?
+
+00:26:22.470 --> 00:26:26.350
+Tipo, não super explicou alguma coisa,
+mas eu gostei desse comando.
+
+00:26:26.350 --> 00:26:27.990
+Eu vou testar inclusive no chat -base
+isso aqui.
+
+00:26:28.030 --> 00:26:29.270
+Não escreva explicações.
+
+00:26:29.870 --> 00:26:31.650
+E agora eu vou pedir outra coisa para
+ele.
+
+00:26:34.840 --> 00:26:35.960
+Vou dar um espaço aqui.
+
+00:26:41.390 --> 00:26:44.210
+Escreva após responder
+
+00:26:48.920 --> 00:27:00.230
+coloque após responder adicione em um
+
+00:27:00.230 --> 00:27:08.790
+novo parágrafo parágrafo parágrafo Eu
+sempre
+
+00:27:08.790 --> 00:27:10.370
+fico me perguntando se estou escrevendo
+certo.
+
+00:27:10.550 --> 00:27:11.570
+Está certo.
+
+00:27:12.170 --> 00:27:24.270
+Novo parágrafo uma citação do escritor
+que tem conexão direta com o
+
+00:27:25.150 --> 00:27:28.430
+texto selecionado.
+
+00:27:29.330 --> 00:27:29.770
+É.
+
+00:27:31.370 --> 00:27:33.650
+Acho que eu não precisaria colocar o
+texto selecionado, mas tudo bem.
+
+00:27:34.050 --> 00:27:34.830
+Agora vamos lá.
+
+00:27:34.890 --> 00:27:35.550
+Vamos testar de novo.
+
+00:27:36.390 --> 00:27:38.290
+Eu estou gostando muito desse script
+aqui.
+
+00:27:38.370 --> 00:27:38.730
+Não sei vocês.
+
+00:27:39.410 --> 00:27:40.790
+Mas é uma coisa que eu gosto.
+
+00:27:40.850 --> 00:27:42.510
+Eu gosto de pegar essas referências.
+
+00:27:43.030 --> 00:27:46.230
+Então foi um script que para mim fez
+muito sentido agora que eu fiz.
+
+00:27:46.410 --> 00:27:48.850
+Eu até gostei bastante também de
+autores.
+
+00:27:48.930 --> 00:27:49.430
+Olha que legal.
+
+00:27:49.950 --> 00:27:50.590
+Trouxe aqui.
+
+00:27:51.210 --> 00:27:52.970
+Mas ele não trouxe do autor.
+
+00:27:53.170 --> 00:27:54.250
+Ele trouxe de outro aqui.
+
+00:27:54.790 --> 00:27:56.990
+Não pense por toda sua vida.
+
+00:27:57.270 --> 00:27:59.530
+Não tente fazer algo grandioso.
+
+00:27:59.770 --> 00:28:02.610
+Escolha um objeto adequado para o qual é
+capaz de trabalhar pela educação.
+
+00:28:03.210 --> 00:28:04.190
+Vou testar de novo.
+
+00:28:04.470 --> 00:28:05.850
+Eu quero que seja o mesmo escritor.
+
+00:28:06.330 --> 00:28:08.130
+Então eu vou ter que refinar o prompt.
+
+00:28:16.920 --> 00:28:17.960
+Aí, agora sim.
+
+00:28:18.660 --> 00:28:21.500
+Se você não priorizar sua vida, alguém
+fará por você.
+
+00:28:22.320 --> 00:28:23.920
+Eu preferia uma citação diferente.
+
+00:28:24.100 --> 00:28:26.860
+Eu preferia uma citação que tivesse mais
+conexão com isso aqui.
+
+00:28:27.060 --> 00:28:27.640
+Deixa eu ver se eu consigo.
+
+00:28:29.120 --> 00:28:33.940
+Após responder, adicione um novo
+parágrafo com uma citação do escritor
+
+00:28:34.520 --> 00:28:38.140
+que tem conexão direta com a resposta.
+
+00:28:38.780 --> 00:28:39.980
+Com a resposta gerada.
+
+00:28:40.600 --> 00:28:42.720
+Com a resposta gerada.
+
+00:28:43.920 --> 00:28:44.560
+Vamos ver.
+
+00:28:44.640 --> 00:28:46.600
+Eu acho que tem uma chance de dar
+melhor.
+
+00:28:49.060 --> 00:28:51.540
+Mas tem uma coisa que eu vou fazer aqui
+para vocês que vai ficar mais
+
+00:28:51.540 --> 00:28:52.380
+interessante ainda.
+
+00:28:52.500 --> 00:28:53.100
+Eu vou fazer isso.
+
+00:28:53.100 --> 00:28:54.460
+Vou terminar aqui.
+
+00:28:54.560 --> 00:28:54.940
+Escritor.
+
+00:29:05.610 --> 00:29:06.010
+Processor.
+
+00:29:06.310 --> 00:29:10.170
+Então ele me trouxe agora o...
+
+00:29:10.170 --> 00:29:11.750
+Ele não me trouxe a citação.
+
+00:29:12.830 --> 00:29:14.770
+Quer dizer, ele botou em um novo
+parágrafo.
+
+00:29:15.970 --> 00:29:16.670
+Menos é mais.
+
+00:29:16.770 --> 00:29:21.270
+É uma ideia poderosa que eu tento
+aplicar não só na minha escrita, mas
+
+00:29:21.270 --> 00:29:22.290
+também na minha vida em geral.
+
+00:29:22.970 --> 00:29:23.990
+Então ele botou...
+
+00:29:24.610 --> 00:29:25.010
+Legal.
+
+00:29:25.150 --> 00:29:26.690
+Ele me trouxe a citação depois.
+
+00:29:27.450 --> 00:29:28.470
+Realmente o nome dele está aqui.
+
+00:29:28.550 --> 00:29:29.510
+Aqui foi a resposta dele.
+
+00:29:29.530 --> 00:29:30.010
+Gostei até.
+
+00:29:30.250 --> 00:29:31.330
+Não vou dizer que eu não gostei.
+
+00:29:32.670 --> 00:29:34.210
+Eu vou conferir se isso aqui...
+
+00:29:34.210 --> 00:29:36.110
+Se essa citação é desse cara mesmo.
+
+00:29:36.390 --> 00:29:38.170
+E eu vou fazer isso aqui com o ChatGPT.
+
+00:29:38.490 --> 00:29:39.010
+Aqui.
+
+00:29:39.690 --> 00:29:42.370
+Com o ChatGPT 4 e com acesso à internet.
+
+00:29:43.410 --> 00:29:44.190
+Então boto aqui.
+
+00:29:46.550 --> 00:29:47.070
+Confira.
+
+00:29:49.820 --> 00:29:59.720
+Confira para mim se a citação acima
+realmente é deste autor e está neste
+
+00:29:59.720 --> 00:30:00.240
+livro.
+
+00:30:03.290 --> 00:30:06.650
+É possível que não esteja nesse livro e
+talvez até realmente nem seja desse
+
+00:30:06.650 --> 00:30:07.230
+próprio autor.
+
+00:30:08.270 --> 00:30:09.210
+Vou tentar fazer aqui a análise.
+
+00:30:10.010 --> 00:30:10.770
+Menos é mais é poderosa.
+
+00:30:11.330 --> 00:30:12.690
+Ele está analisando para ver.
+
+00:30:14.090 --> 00:30:14.370
+Beleza.
+
+00:30:14.370 --> 00:30:15.450
+Ele está pesquisando em inglês.
+
+00:30:15.510 --> 00:30:16.310
+Eu ia pedir isso para ele.
+
+00:30:16.450 --> 00:30:17.490
+Então ele já fez o que eu ia pedir.
+
+00:30:17.650 --> 00:30:20.750
+Eu ia pedir para ele fazer essa pesquisa
+em inglês para garantir que a gente ia
+
+00:30:20.750 --> 00:30:22.230
+ter a resposta correta aqui.
+
+00:30:22.290 --> 00:30:24.810
+Porque às vezes a gente não consegue
+encontrar o que a gente quer em
+
+00:30:24.810 --> 00:30:25.210
+português.
+
+00:30:25.410 --> 00:30:26.970
+Às vezes só em inglês a gente vai
+encontrar isso.
+
+00:30:27.690 --> 00:30:28.550
+Bom, o que ele já fez.
+
+00:30:28.610 --> 00:30:29.890
+Eu nem precisei falar nada para ele.
+
+00:30:29.930 --> 00:30:32.150
+Ele já fez essa pesquisa em inglês
+também.
+
+00:30:32.650 --> 00:30:36.110
+Enquanto ele faz essa pesquisa vamos
+continuar aqui.
+
+00:30:36.150 --> 00:30:36.530
+Isso que é legal.
+
+00:30:36.750 --> 00:30:37.890
+Às vezes eu faço muito disso.
+
+00:30:38.270 --> 00:30:39.970
+Vários comandos aqui em várias coisas
+diferentes.
+
+00:30:40.810 --> 00:30:42.150
+E continuo trabalhando aqui.
+
+00:30:42.270 --> 00:30:44.350
+Enquanto ele está pesquisando, eu estou
+continuando aqui.
+
+00:30:44.390 --> 00:30:46.390
+Eu vou limpar aqui isso que ele trouxe.
+
+00:30:46.390 --> 00:30:47.790
+Eu vou deixar aqui esse último aqui.
+
+00:30:49.290 --> 00:30:50.930
+Que é o que a gente estava trabalhando.
+
+00:30:51.250 --> 00:30:52.830
+E vou fazer um negócio aqui diferente.
+
+00:30:53.470 --> 00:30:55.110
+Deixa eu mostrar para vocês o que eu vou
+fazer.
+
+00:30:55.950 --> 00:30:59.310
+Achei muito legal essas respostas aqui
+com os personagens.
+
+00:30:59.950 --> 00:31:01.230
+Eu quero melhorar esse prompt.
+
+00:31:01.470 --> 00:31:02.210
+Então o que eu vou fazer?
+
+00:31:02.310 --> 00:31:03.430
+Eu vou dar um prompt aqui dentro.
+
+00:31:04.390 --> 00:31:05.650
+Depois eu vou precisar de várias opções.
+
+00:31:07.190 --> 00:31:08.250
+Não consegui encontrar a resposta
+correta.
+
+00:31:08.250 --> 00:31:10.290
+Contrar citação menos é mais uma ideia
+poderosa.
+
+00:31:10.310 --> 00:31:12.490
+Não é possível confirmar que a citação
+seja dele.
+
+00:31:13.550 --> 00:31:15.750
+Ou que seja desse livro específico.
+
+00:31:15.770 --> 00:31:16.450
+Por favor tenha em mente.
+
+00:31:16.450 --> 00:31:18.370
+Citações podem ser atribuídas ou mal
+interpretadas.
+
+00:31:19.150 --> 00:31:20.510
+Pode ser que não seja desse cara.
+
+00:31:20.550 --> 00:31:22.110
+Pode ser que ele criou alguma coisa.
+
+00:31:22.250 --> 00:31:22.890
+Eu vou pesquisar no Google.
+
+00:31:24.010 --> 00:31:26.110
+Deixa eu pesquisar aqui no meu outro
+monitor.
+
+00:31:31.540 --> 00:31:31.980
+Não.
+
+00:31:32.300 --> 00:31:33.380
+Realmente eu não encontrei.
+
+00:31:34.040 --> 00:31:35.280
+Não me trouxe nada.
+
+00:31:36.220 --> 00:31:38.340
+Então ele deve ter alucinado.
+
+00:31:38.340 --> 00:31:39.020
+Ele criou isso.
+
+00:31:39.960 --> 00:31:40.800
+Não sei aonde.
+
+00:31:41.300 --> 00:31:42.000
+Mas vamos lá.
+
+00:31:42.640 --> 00:31:43.060
+Vou fazer o que aqui?
+
+00:31:43.140 --> 00:31:46.260
+Eu quero pegar e utilizar aqui um
+prompt.
+
+00:31:48.340 --> 00:31:49.140
+Desse ele vai permitir.
+
+00:31:49.260 --> 00:31:49.900
+Mas acho que ele vai permitir.
+
+00:31:50.060 --> 00:31:52.280
+Vou fazer um prompt dentro do prompt.
+
+00:31:52.900 --> 00:31:54.360
+Então qual prompt eu quero usar?
+
+00:31:54.420 --> 00:31:56.060
+Eu quero usar o de melhoria de prompts.
+
+00:31:56.380 --> 00:31:57.240
+Então vou pegar aqui.
+
+00:31:57.840 --> 00:31:58.400
+Option J.
+
+00:31:58.680 --> 00:31:59.900
+Prompt Generators.
+
+00:32:00.320 --> 00:32:01.320
+Ele tem um chat.
+
+00:32:01.480 --> 00:32:02.220
+Prompt Generators.
+
+00:32:02.540 --> 00:32:03.480
+Vou clicar aqui.
+
+00:32:05.700 --> 00:32:07.060
+Ele está processando.
+
+00:32:07.260 --> 00:32:08.340
+O que eu quero que ele faça?
+
+00:32:08.420 --> 00:32:10.240
+Eu quero que ele vai melhorar.
+
+00:32:11.500 --> 00:32:11.900
+Ahn...
+
+00:32:14.820 --> 00:32:16.320
+Ele não conseguiu melhorar.
+
+00:32:16.360 --> 00:32:18.280
+Ele processou na verdade isso aqui.
+
+00:32:19.620 --> 00:32:20.060
+Então...
+
+00:32:20.540 --> 00:32:21.360
+Eu vou fazer o seguinte.
+
+00:32:23.000 --> 00:32:24.500
+E se eu botar entre aspas?
+
+00:32:32.750 --> 00:32:33.090
+J.
+
+00:32:33.770 --> 00:32:34.210
+ChatGPT.
+
+00:32:40.480 --> 00:32:42.580
+Vamos ver se ele vai interpretar o que
+está aqui dentro.
+
+00:32:42.780 --> 00:32:44.820
+Ou se ele vai realmente melhorar.
+
+00:32:44.860 --> 00:32:45.760
+Eu quero que ele melhore o prompt.
+
+00:32:45.940 --> 00:32:47.280
+Ele realmente melhorou.
+
+00:32:49.470 --> 00:32:50.790
+Aqui ele melhorou e ficou legal.
+
+00:32:51.490 --> 00:32:53.630
+What inspired you to write this book?
+
+00:32:54.130 --> 00:32:54.570
+Response.
+
+00:32:54.570 --> 00:32:54.830
+Response.
+
+00:32:59.530 --> 00:32:59.990
+Aqui.
+
+00:33:00.590 --> 00:33:02.190
+Eu vou traduzir esse aqui.
+
+00:33:02.330 --> 00:33:03.830
+Para a gente deixar em português também.
+
+00:33:04.710 --> 00:33:06.050
+Mas ele realmente deu certo.
+
+00:33:06.170 --> 00:33:07.090
+Era só botar entre duas.
+
+00:33:07.950 --> 00:33:08.850
+Command Shift R.
+
+00:33:11.030 --> 00:33:14.090
+Eu quero que você atue como um escritor
+de um livro.
+
+00:33:14.370 --> 00:33:16.750
+Imagine que você é o autor de um
+romance.
+
+00:33:16.930 --> 00:33:17.150
+Não.
+
+00:33:17.330 --> 00:33:18.990
+E responda a pergunta usando o tom.
+
+00:33:19.090 --> 00:33:19.750
+Autor de romance?
+
+00:33:19.870 --> 00:33:20.070
+Não.
+
+00:33:20.470 --> 00:33:21.730
+Imagine que você é um autor.
+
+00:33:22.930 --> 00:33:23.850
+E responde.
+
+00:33:25.290 --> 00:33:26.550
+Um autor real.
+
+00:33:26.910 --> 00:33:28.290
+Um autor que existe.
+
+00:33:29.950 --> 00:33:31.270
+E tem conexão.
+
+00:33:31.970 --> 00:33:32.450
+Conexão.
+
+00:33:32.910 --> 00:33:33.890
+Com o contexto.
+
+00:33:34.790 --> 00:33:37.630
+E responde a pergunta usando o tom,
+maneira e vocabulário que o escritor
+
+00:33:37.630 --> 00:33:37.910
+usaria.
+
+00:33:38.150 --> 00:33:39.390
+Não forneça explicações.
+
+00:33:39.390 --> 00:33:42.230
+Mas apenas responda como se tivesse todo
+o conhecimento do escritor.
+
+00:33:42.370 --> 00:33:46.250
+Ao final da sua resposta, inclua o nome
+do autor e do livro que você usou como
+
+00:33:46.250 --> 00:33:46.750
+referência.
+
+00:33:46.810 --> 00:33:48.990
+E escreva como se fosse uma citação.
+
+00:33:49.050 --> 00:33:49.250
+Assim.
+
+00:33:49.890 --> 00:33:50.370
+Beleza?
+
+00:33:50.370 --> 00:33:54.890
+Depois de responder, adicione um novo
+parágrafo com uma citação do mesmo autor
+
+00:33:54.890 --> 00:33:57.530
+que se conecta com sua resposta.
+
+00:33:58.210 --> 00:33:59.270
+Ele aqui deu um exemplo.
+
+00:34:00.590 --> 00:34:02.510
+The idea for this book came from...
+
+00:34:05.210 --> 00:34:06.230
+Aqui seria a pergunta.
+
+00:34:06.350 --> 00:34:06.990
+Aqui seria a resposta.
+
+00:34:09.460 --> 00:34:10.500
+Em uma citação.
+
+00:34:12.080 --> 00:34:12.960
+É legal.
+
+00:34:13.260 --> 00:34:14.040
+Vou deixar aqui.
+
+00:34:15.060 --> 00:34:16.080
+Posso deixar até em inglês.
+
+00:34:16.200 --> 00:34:18.080
+Ele vai me dar em português isso.
+
+00:34:19.040 --> 00:34:20.420
+Vou apagar agora isso aqui.
+
+00:34:22.380 --> 00:34:23.340
+Vamos ver o que vai acontecer.
+
+00:34:24.160 --> 00:34:25.120
+Vou deixar assim.
+
+00:34:27.160 --> 00:34:29.260
+Aqui como está o metadata, eu só acho
+que eu tenho que
+
+00:34:29.260 --> 00:34:34.280
+deixar ele juntinho.
+
+00:34:45.040 --> 00:34:46.160
+Vamos ver se vai dar certo.
+
+00:34:48.120 --> 00:34:49.520
+Eu dei dois entries aqui.
+
+00:34:49.600 --> 00:34:50.880
+Ele já me gerou dois espaços.
+
+00:34:50.940 --> 00:34:54.520
+Ele me gerou aqui uma verificação.
+
+00:34:54.660 --> 00:34:55.100
+Vamos lá.
+
+00:34:55.200 --> 00:34:56.600
+Eu vou pegar isso aqui também de novo.
+
+00:34:57.380 --> 00:35:02.050
+Vou botar aqui uma separação.
+
+00:35:03.250 --> 00:35:03.930
+Como de J.
+
+00:35:06.050 --> 00:35:06.410
+Técnica.
+
+00:35:06.430 --> 00:35:06.790
+Text generator.
+
+00:35:07.130 --> 00:35:07.230
+Não.
+
+00:35:07.330 --> 00:35:10.390
+O que eu quero aqui?
+
+00:35:10.550 --> 00:35:11.490
+Eu quero...
+
+00:35:13.570 --> 00:35:14.370
+O escritor.
+
+00:35:16.510 --> 00:35:16.910
+Escritor.
+
+00:35:17.950 --> 00:35:19.490
+Ele deu algum pane aqui.
+
+00:35:20.050 --> 00:35:20.890
+Não vou clicar.
+
+00:35:23.510 --> 00:35:24.310
+Selecionador indiferente.
+
+00:35:24.510 --> 00:35:25.690
+Ele deu um problema aqui.
+
+00:35:25.910 --> 00:35:27.550
+Acho que foi por causa desses espaços
+que eu dei.
+
+00:35:27.630 --> 00:35:29.530
+Ele não conseguiu nem reconhecer o nome
+do prompt.
+
+00:35:30.170 --> 00:35:31.270
+Então eu vou fazer o seguinte.
+
+00:35:31.470 --> 00:35:32.350
+Vou tirar esses espaços.
+
+00:35:32.350 --> 00:35:34.510
+Possivelmente foi isso que deu problema.
+
+00:35:38.600 --> 00:35:39.740
+Deixa eu ver se eu der só um...
+
+00:35:43.300 --> 00:35:44.600
+Vamos ver se ele vai funcionar.
+
+00:35:46.850 --> 00:35:47.870
+Vamos ver se ele vai funcionar.
+
+00:35:51.670 --> 00:35:52.950
+Ele está processando aqui ainda.
+
+00:35:53.110 --> 00:35:54.530
+Ele deve ter dado um bug.
+
+00:35:55.750 --> 00:35:56.870
+Para parar é...
+
+00:35:57.730 --> 00:35:58.350
+Como de P?
+
+00:35:58.570 --> 00:35:58.670
+Não.
+
+00:35:58.750 --> 00:35:59.410
+Como de tipo de P.

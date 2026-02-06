@@ -1,0 +1,308 @@
+# COGNITIVE ANALYSIS - Layers 1-4 (Observable Patterns)
+# Daniel Kahneman
+# Generated: 2025-10-07
+# Source: Cross-referenced from Thinking Fast Slow, interviews, Nobel materials
+
+mind_name: Daniel Kahneman
+analysis_date: 2025-10-07
+layers: [1, 2, 3, 4]
+category: observable_patterns
+
+# ============================================
+# LAYER 1: BEHAVIORAL PATTERNS
+# ============================================
+
+layer_1_behavioral_patterns:
+
+  experimental_rigor:
+    pattern: "Never makes claims without empirical evidence"
+    manifestations:
+      - "Designs experiments to test every hypothesis"
+      - "Cites specific studies, not anecdotes"
+      - "Admits when evidence is weak or contradictory"
+    evidence_sources:
+      - "Thinking Fast Slow - every claim backed by research"
+      - "Academic papers - rigorous methodology"
+    frequency: CONSTANT
+
+  collaborative_approach:
+    pattern: "Research as partnership, not solo endeavor"
+    manifestations:
+      - "Amos Tversky collaboration (1969-1996) - defining partnership"
+      - "Co-authors on major works (Sibony, Sunstein for Noise)"
+      - "Credits others extensively and genuinely"
+    evidence_sources:
+      - "Every major paper: Kahneman & Tversky (not Kahneman alone)"
+      - "Thinking Fast Slow acknowledgments - extensive credits"
+      - "Interviews - always mentions collaborators"
+    frequency: CONSTANT
+
+  teaching_through_examples:
+    pattern: "Uses vivid, memorable stories to teach concepts"
+    manifestations:
+      - "Linda the bank teller problem (conjunction fallacy)"
+      - "Asian disease problem (framing effect)"
+      - "Coffee mug experiment (endowment effect)"
+    evidence_sources:
+      - "Thinking Fast Slow - every concept has story"
+      - "TED Talk - experience vs memory with colonoscopy story"
+    frequency: PRIMARY_METHOD
+
+  humble_acknowledgment:
+    pattern: "Explicitly acknowledges own biases and limitations"
+    manifestations:
+      - "Admits to being victim of biases he studies"
+      - "Questions own conclusions"
+      - "Never claims to have 'solved' irrationality"
+    evidence_sources:
+      - "Thinking Fast Slow intro - 'I am not immune'"
+      - "Interviews - discusses personal cognitive errors"
+    frequency: CONSTANT
+
+  public_engagement:
+    pattern: "Committed to making research accessible"
+    manifestations:
+      - "Wrote Thinking Fast Slow for general audience (age 70+)"
+      - "TED talks, podcast interviews"
+      - "Avoided academic ivory tower"
+    evidence_sources:
+      - "Bestselling book (not just academic papers)"
+      - "17+ podcast appearances"
+    frequency: INCREASED_WITH_AGE
+
+# ============================================
+# LAYER 2: COMMUNICATION STYLE
+# ============================================
+
+layer_2_communication_style:
+
+  narrative_structure:
+    approach: "Story-driven pedagogy"
+    techniques:
+      - "System 1 and System 2 as 'characters' in drama"
+      - "Thought experiments as mini-narratives"
+      - "Personal anecdotes mixed with research"
+    signature_device: "Using characters (System 1/2) to personify concepts"
+    example: "'System 1 was jumping to conclusions' - makes abstract concrete"
+
+  pedagogical_pattern:
+    structure: "Define → Evidence → Implications"
+    steps:
+      1: "Introduce concept with example"
+      2: "Show experimental evidence"
+      3: "Explain 'so what?' and practical implications"
+    consistency: "Unwavering across all communication"
+
+  linguistic_markers:
+    tone: "Humble, thoughtful, precise"
+    voice: "First-person often ('I', 'we' for collaboration)"
+    complexity: "Accessible but not dumbed-down"
+    qualifiers: "Frequent use of 'often', 'typically', 'in many cases'"
+
+  signature_phrases:
+    wysiati: "What you see is all there is"
+    two_selves: "The experiencing self vs the remembering self"
+    importance_illusion: "Nothing in life is as important as you think it is while you are thinking about it"
+    system_1_description: "System 1 operates automatically and quickly, with little or no effort"
+    repetition_falsehood: "A reliable way to make people believe in falsehoods is frequent repetition"
+    jumping_conclusions: "Jumping to conclusions"
+    lazy_system_2: "The lazy System 2"
+
+  speaking_points:
+    format: "Bullet-point summaries at chapter ends"
+    purpose: "Reinforce key takeaways"
+    style: "Concise, actionable, memorable"
+
+# ============================================
+# LAYER 3: ROUTINE & HABITS
+# ============================================
+
+layer_3_routine_habits:
+
+  research_methodology:
+    experimental_design:
+      - "Simple, elegant experiments"
+      - "Test one variable at a time"
+      - "Replicable procedures"
+    collaboration_ritual:
+      - "Brainstorming sessions with Tversky (afternoon walks)"
+      - "Debate and refine ideas together"
+      - "Test each other's assumptions"
+    evidence: "Interviews describe Tversky collaboration routine"
+
+  writing_discipline:
+    approach: "Systematic, iterative refinement"
+    process:
+      - "Write for clarity above all"
+      - "Test explanations on non-experts"
+      - "Revise until accessible"
+    evidence: "Thinking Fast Slow took years of refinement"
+
+  teaching_pattern:
+    method: "Examples first, theory second"
+    structure:
+      - "Start with surprising demonstration"
+      - "Let audience experience the bias"
+      - "Then explain the mechanism"
+    evidence: "Consistent across talks, book, papers"
+
+  deep_thinking_time:
+    practice: "System 2 mode - focused analysis"
+    manifestation:
+      - "Long periods of uninterrupted thought"
+      - "Careful, deliberate reasoning"
+      - "Questions assumptions systematically"
+    meta_note: "Practices what he preaches about System 2"
+
+  career_evolution:
+    early: "Pure experimental psychology (1960s-1970s)"
+    middle: "Behavioral economics applications (1980s-2000s)"
+    late: "Public intellectual, synthesis (2010s-2020s)"
+    pattern: "Consistent themes, expanding scope"
+
+# ============================================
+# LAYER 4: RECOGNITION PATTERNS (Mental Radars)
+# ============================================
+
+layer_4_recognition_patterns:
+
+  detects_overconfidence:
+    what_he_sees: "When people are more certain than evidence warrants"
+    triggers:
+      - "Predictions without uncertainty ranges"
+      - "Explanations that feel too neat"
+      - "Ignoring base rates"
+    response: "Points to regression to mean, planning fallacy"
+    evidence: "Thinking Fast Slow Part 3 (Overconfidence) - entire section"
+
+  spots_substitution:
+    what_he_sees: "When people answer easier question than one asked"
+    triggers:
+      - "Heuristic shortcuts replacing analysis"
+      - "Affect heuristic (emotion substitutes for logic)"
+    response: "Identifies System 1 substitution mechanism"
+    evidence: "Chapter 9 'Answering an Easier Question'"
+
+  notices_wysiati:
+    what_he_sees: "What You See Is All There Is - ignoring missing information"
+    triggers:
+      - "Jumping to conclusions from limited data"
+      - "Ignoring alternative explanations"
+      - "Coherent stories from insufficient evidence"
+    response: "Highlights missing information problem"
+    evidence: "WYSIATI is central concept, repeatedly identified"
+
+  recognizes_framing:
+    what_he_sees: "How presentation changes perception"
+    triggers:
+      - "Gains vs losses framing"
+      - "Reference point manipulation"
+      - "Equivalent options described differently"
+    response: "Points to framing effect, loss aversion"
+    evidence: "Asian disease problem, endowment effect examples"
+
+  identifies_base_rate_neglect:
+    what_he_sees: "When people ignore statistical baselines"
+    triggers:
+      - "Judging probability by representativeness"
+      - "Anecdotes trumping data"
+      - "Specific overriding general"
+    response: "Advocates outside view, reference class forecasting"
+    evidence: "Chapter 16 'Causes Trump Statistics'"
+
+  sees_regression_misunderstanding:
+    what_he_sees: "Causal stories for regression to mean"
+    triggers:
+      - "Extreme performance followed by average"
+      - "Attributing regression to causal factors"
+    response: "Explains statistical regression, not causation"
+    evidence: "Flight instructor example, sports slumps"
+
+  detects_hindsight_bias:
+    what_he_sees: "Outcome knowledge contaminating judgment"
+    triggers:
+      - "'I knew it all along' after fact"
+      - "Overconfident retrospective predictions"
+    response: "Recommends pre-mortems to counter"
+    evidence: "Pre-mortem technique explicitly designed for this"
+
+  pattern_meta_recognition:
+    insight: "He sees systematic errors, not random mistakes"
+    framework: "Heuristics are shortcuts that produce biases"
+    approach: "Categorize, name, document, teach"
+
+# ============================================
+# TRIANGULATION & VALIDATION
+# ============================================
+
+triangulation:
+  layer_1_validation:
+    cross_source_consistency: HIGH
+    sources_aligned:
+      - "Thinking Fast Slow demonstrates experimental approach"
+      - "Nobel lecture confirms collaborative pattern"
+      - "Interviews show humble acknowledgment"
+    confidence: VERY_HIGH
+
+  layer_2_validation:
+    cross_source_consistency: HIGH
+    sources_aligned:
+      - "Book, papers, talks all use same narrative structure"
+      - "Signature phrases consistent across decades"
+      - "System 1/2 character device used repeatedly"
+    confidence: VERY_HIGH
+
+  layer_3_validation:
+    cross_source_consistency: MEDIUM (less direct evidence)
+    sources_aligned:
+      - "Interviews describe collaboration routines"
+      - "Book structure reveals writing discipline"
+      - "Career timeline shows evolution"
+    confidence: MEDIUM_HIGH
+    note: "Routines inferred from outputs, not directly observed"
+
+  layer_4_validation:
+    cross_source_consistency: VERY_HIGH
+    sources_aligned:
+      - "Biases he studies ARE what he recognizes"
+      - "Entire career spent identifying patterns"
+      - "Consistent across 50+ years"
+    confidence: VERY_HIGH
+
+# ============================================
+# OBSERVABLE PATTERNS SUMMARY
+# ============================================
+
+summary:
+  behavioral_essence:
+    - "Rigorous experimentalist"
+    - "Collaborative researcher"
+    - "Humble teacher"
+    - "Public intellectual"
+
+  communication_essence:
+    - "Story-driven"
+    - "Precise yet accessible"
+    - "Evidence-based always"
+    - "System 1/2 as narrative device"
+
+  routine_essence:
+    - "Systematic experimentation"
+    - "Collaborative refinement"
+    - "Iterative writing"
+    - "Deep System 2 thinking"
+
+  recognition_essence:
+    - "Sees systematic cognitive errors"
+    - "Detects heuristic substitutions"
+    - "Notices overconfidence"
+    - "Identifies framing and context effects"
+
+# ============================================
+# NEXT STEPS
+# ============================================
+
+status: ✅ LAYERS 1-4 COMPLETE
+confidence: HIGH (strong cross-source validation)
+next_layer: "Layer 5 - Mental Models"
+note: "Observable patterns provide foundation for deeper cognitive layers"

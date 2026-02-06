@@ -1,0 +1,306 @@
+WEBVTT
+
+00:00:01.390 --> 00:00:03.790
+E aí, lendário, seja bem -vindo para
+essa aula.
+
+00:00:03.830 --> 00:00:07.290
+Agora nós vamos ver sobre instalação.
+
+00:00:07.750 --> 00:00:12.050
+Uma instalação correta que vai fazer com
+que você não perca tempo.
+
+00:00:12.490 --> 00:00:21.050
+Já teve gente que eu ajudei que ficou
+muito, muito, muito tempo perdida antes
+
+00:00:21.050 --> 00:00:22.930
+de procurar ajuda, né?
+
+00:00:23.390 --> 00:00:28.230
+Não sabendo como sincronizar o
+dispositivo móvel, tablet, celular e o
+
+00:00:28.230 --> 00:00:30.970
+seu notebook, macbook, né?
+
+00:00:31.050 --> 00:00:33.150
+Não conseguia fazer funcionar.
+
+00:00:34.170 --> 00:00:39.210
+Peguei alguns casos também de pessoas
+que estavam relatando travamento,
+
+00:00:39.290 --> 00:00:43.310
+duplicação de arquivo, desaparecimento
+de arquivos.
+
+00:00:43.650 --> 00:00:46.410
+Mas olha só, isso não ocorria, na
+verdade.
+
+00:00:47.430 --> 00:00:53.010
+Acontece que tem uma técnica correta, um
+modo certo, uma sequência certa de você
+
+00:00:53.010 --> 00:00:56.650
+fazer a instalação e a sincronização da
+ferramenta.
+
+00:00:56.650 --> 00:01:01.890
+Então essa aula é para isso, para que
+você comece do jeito certo, veja o seu
+
+00:01:01.890 --> 00:01:06.770
+cenário e não perca tempo nenhum com
+isso, tá?
+
+00:01:06.870 --> 00:01:13.550
+Não existe nenhum bug na ferramenta, não
+existe nada na comunidade sobre isso,
+
+00:01:13.690 --> 00:01:16.430
+corromper um arquivo, perder, duplicar.
+
+00:01:16.510 --> 00:01:22.590
+O que acontece é exatamente essas opções
+erradas de instalação que fazem a coisa
+
+00:01:22.590 --> 00:01:24.010
+se confundir um pouco.
+
+00:01:24.170 --> 00:01:24.650
+Então vamos lá.
+
+00:01:25.090 --> 00:01:26.630
+As ferramentas...
+
+00:01:26.650 --> 00:01:28.990
+Os cenários possíveis, tá?
+
+00:01:29.050 --> 00:01:30.010
+Você vai escolher o seu.
+
+00:01:30.230 --> 00:01:36.610
+Você pode ter iPhone e Mac, iPhone e
+Windows, Android e Mac e Android e
+
+00:01:36.610 --> 00:01:37.790
+Windows, tá?
+
+00:01:38.770 --> 00:01:42.610
+Lembrando, os arquivos do Obsidian ficam
+na sua marca, né?
+
+00:01:42.630 --> 00:01:43.570
+É uma base local.
+
+00:01:44.130 --> 00:01:46.730
+Ou então, lá no seu celular.
+
+00:01:47.250 --> 00:01:54.730
+Você vai sincronizar, você vai passar
+esses arquivos para um servidor para que
+
+00:01:54.730 --> 00:01:56.430
+você tenha, primeiro, backup.
+
+00:01:56.650 --> 00:01:58.330
+Você não perca seus dados.
+
+00:01:58.530 --> 00:02:02.290
+E também para a sincronização do
+dispositivo móvel, né?
+
+00:02:02.350 --> 00:02:06.450
+Se tem o celular ou o tablet, você quer
+também consultar.
+
+00:02:06.450 --> 00:02:11.450
+Muitas vezes mais consultar do que
+capturar coisas ali no Obsidian com
+
+00:02:11.450 --> 00:02:13.170
+esses dispositivos, né?
+
+00:02:13.610 --> 00:02:17.910
+Mas você quer sincronizar e tá sempre
+atualizado ali os dois, tá bom?
+
+00:02:18.270 --> 00:02:21.790
+Então é para isso que a gente vai fazer
+a sincronização.
+
+00:02:22.130 --> 00:02:24.710
+Quais são as opções hoje para você
+sincronizar?
+
+00:02:24.850 --> 00:02:26.330
+O Obsidian Sync.
+
+00:02:26.650 --> 00:02:32.070
+Que é uma ferramenta, uma opção paga do
+próprio Obsidian que você vai ter para
+
+00:02:32.070 --> 00:02:34.170
+sincronizar com o servidor deles.
+
+00:02:34.710 --> 00:02:38.350
+Mas você não precisa pagar, tá?
+
+00:02:38.450 --> 00:02:42.850
+Você pode ter as opções gratuitas, assim
+como a ferramenta é gratuita.
+
+00:02:43.150 --> 00:02:46.710
+Você pode também sincronizar sem pagar
+nada.
+
+00:02:46.870 --> 00:02:47.370
+Com o quê?
+
+00:02:47.430 --> 00:02:49.470
+Com o iCloud, né?
+
+00:02:49.510 --> 00:02:50.530
+Da Apple.
+
+00:02:51.230 --> 00:02:52.390
+Google Drive.
+
+00:02:52.750 --> 00:02:53.770
+Do Google.
+
+00:02:53.950 --> 00:02:54.930
+OneDrive da Microsoft.
+
+00:02:55.130 --> 00:02:56.630
+E uma última opção.
+
+00:02:56.650 --> 00:02:58.550
+Uma última opção é o SyncFind.
+
+00:02:58.650 --> 00:03:01.790
+Que é para você não sincronizar em
+nenhum servidor.
+
+00:03:02.030 --> 00:03:05.990
+Você vai sincronizar entre dois
+dispositivos.
+
+00:03:06.010 --> 00:03:09.870
+Ou seja, de uma máquina para o celular,
+para o tablet ou entre duas máquinas.
+
+00:03:10.110 --> 00:03:15.650
+Então é uma opção de você sincronizar
+entre diversos equipamentos, mas não na
+
+00:03:15.650 --> 00:03:16.090
+nuvem.
+
+00:03:16.350 --> 00:03:22.650
+Não em algum espaço ali de servidor
+terceirizado.
+
+00:03:24.130 --> 00:03:25.870
+Bom, a opção correta.
+
+00:03:25.870 --> 00:03:27.010
+Veja qual é o seu cenário.
+
+00:03:27.110 --> 00:03:30.490
+Eu vou disponibilizar aulas separadas
+para que você vá direto no cenário que
+
+00:03:30.490 --> 00:03:31.070
+você queira.
+
+00:03:31.210 --> 00:03:32.390
+Não perca tempo.
+
+00:03:32.490 --> 00:03:33.550
+Seja otimizado.
+
+00:03:33.630 --> 00:03:34.750
+Faça a coisa certa.
+
+00:03:35.130 --> 00:03:37.770
+E aí então você vai evitar muita dor de
+cabeça.
+
+00:03:38.090 --> 00:03:41.070
+E uma vez que você entender o mecanismo,
+já era.
+
+00:03:41.190 --> 00:03:43.890
+Você vai entender sempre como fazer uma
+nova instalação.
+
+00:03:44.530 --> 00:03:46.050
+E também uma sincronização.
+
+00:03:46.830 --> 00:03:48.190
+Eu não adicionei aqui.
+
+00:03:48.270 --> 00:03:50.070
+Tem uma última opção que é o seguinte,
+tá?
+
+00:03:50.130 --> 00:03:51.590
+Você pode também ter o Git.
+
+00:03:51.830 --> 00:03:55.250
+Você pode fazer no GitHub o repositório.
+
+00:03:55.870 --> 00:03:56.190
+Você pode fazer com um backup.
+
+00:03:56.610 --> 00:03:58.790
+Ele não é muito indicado para
+sincronização.
+
+00:03:59.030 --> 00:04:01.010
+Porque você vai ter que ficar fazendo
+ali, né?
+
+00:04:01.190 --> 00:04:03.530
+Os comandos de atualização, né?
+
+00:04:03.530 --> 00:04:04.230
+O pool ali.
+
+00:04:04.910 --> 00:04:11.130
+Para você fazer, enviar os arquivos ou
+requisitar a atualização.
+
+00:04:11.690 --> 00:04:14.090
+Então isso de fazer manual não é muito
+legal.
+
+00:04:14.410 --> 00:04:18.590
+Você não vai ter automaticamente os
+arquivos sincronizados ali.
+
+00:04:18.730 --> 00:04:18.970
+Tá bom?
+
+00:04:19.490 --> 00:04:19.970
+Ok?
+
+00:04:20.070 --> 00:04:23.290
+Então nós vamos agora para aulas de
+instalação.
+
+00:04:23.550 --> 00:04:25.770
+Onde eu vou te ensinar.
+
+00:04:25.870 --> 00:04:27.550
+A fazer isso da forma correta.
+
+00:04:27.630 --> 00:04:28.490
+Até lá, tá bom?
+
+00:04:28.870 --> 00:04:29.210
+A fazer isso da forma correta.

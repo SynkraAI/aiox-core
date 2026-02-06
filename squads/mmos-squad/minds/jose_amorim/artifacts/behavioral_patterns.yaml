@@ -1,0 +1,560 @@
+---
+# Layer 1: Behavioral Patterns - José Carlos Amorim
+# DNA Mental™ 8-Layer Analysis
+# Created: 2025-10-19
+# Sources: 4 (geral.md, entrevista.md, livro Nexialismo, aula transcrita)
+# Confidence: HIGH (sources são análises pré-compiladas muito densas)
+
+mind: "jose_amorim"
+layer: 1
+layer_name: "Behavioral Patterns"
+extraction_date: "2025-10-19"
+source_count: 4
+confidence_level: "high"
+
+---
+
+## DECISION-MAKING BEHAVIOR
+
+### Pattern: Three-Question Filter (Core Decision Framework)
+frequency: Consistent - reportado como framework explícito
+context: Decisões importantes de carreira, projetos, investimentos
+description: |
+  José filtra decisões através de 3 perguntas sequenciais:
+  1. "Vai gerar impacto real?"
+  2. "Está alinhado com o que quero construir?"
+  3. "Vou me orgulhar disso daqui a 10 anos?"
+
+  Apenas decisões que passam pelos 3 filtros são executadas.
+
+evidence:
+  - source: entrevista.md
+    quote: "1. Vai gerar impacto real? 2. Está alinhado com o que quero construir? 3. Vou me orgulhar disso daqui a 10 anos?"
+    section: "Tomada de Decisão"
+
+### Pattern: Fast-to-Ideate, Slow-to-Execute
+frequency: Consistent across multiple sources
+context: Novos projetos, oportunidades, mudanças de direção
+description: |
+  José gera ideias rapidamente (TDAH + pensamento nexialista), mas pondera
+  execução. Não é impulsivo na ação, apenas na geração de possibilidades.
+
+evidence:
+  - source: entrevista.md
+    quote: "Rápido para ideias, ponderado para execução"
+  - source: geral.md
+    quote: "Hiperconexão semântica - cérebro TDAH não filtra associações"
+
+### Pattern: Paralysis by Abundance (Contradiction Pattern)
+frequency: Recurrent - identificado como padrão problemático
+context: Múltiplas oportunidades simultâneas, excesso de possibilidades
+description: |
+  Paralisa quando há:
+  - Ambiguidade de prioridade (não sabe qual escolher)
+  - Medo de desperdiçar potencial (escolher errado)
+  - Excesso de possibilidades (custo de oportunidade alto)
+
+evidence:
+  - source: entrevista.md
+    quote: "Paralisa com: ambiguidade de prioridade, medo de desperdiçar potencial, excesso de possibilidades"
+  - source: geral.md
+    quote: "Sabe aquele momento que você tá pensando em mil coisas ao mesmo tempo e não sai do lugar? É tipo ter 50 abas abertas no navegador e nenhuma carregando."
+
+### Pattern: Reversible vs Irreversible Decision Bias
+frequency: Implicit - inferido de comportamentos
+context: Decisões de baixo vs alto custo de reversão
+description: |
+  Aplica framework "Type 1 vs Type 2 decisions" (Jeff Bezos):
+  - Decisões reversíveis: rápidas, experimentais, "você pode voltar atrás"
+  - Decisões irreversíveis: agoniza, pondera profundamente
+
+  Exemplo: migrou de 7 cursos universitários (reversível na mente dele),
+  mas recuou de separação conjugal ao ver impacto emocional (irreversível).
+
+evidence:
+  - source: entrevista.md
+    quote: "Experimentou 7 cursos universitários (2 períodos cada)"
+  - source: entrevista.md
+    quote: "Quase pediu separação por 'paixão avassaladora', recuou ao ver esposa chorar"
+
+---
+
+## WORK PATTERNS
+
+### Pattern: Deep Work Blocks (90-Minute Sprints)
+frequency: Daily routine - sistema estruturado
+context: Trabalho criativo, desenvolvimento, escrita
+description: |
+  Blocos de deep work de 90 minutos como unidade fundamental.
+  Usa Pomodoros de 45min trabalho / 10min pausa dentro dos blocos.
+
+evidence:
+  - source: entrevista.md
+    quote: "Estilo: intenso e flexível, blocos de 90min deep work"
+  - source: entrevista.md
+    quote: "Pomodoros de 45min trabalho / 10min pausa"
+
+### Pattern: Nocturnal Peak Performance
+frequency: Consistent - padrão cronobiológico
+context: Trabalho criativo, escrita, desenvolvimento de conceitos complexos
+description: |
+  Coruja noturna extrema. Pico de performance cognitiva: 22h às 2h da manhã.
+  Planeja trabalho pesado para essa janela.
+
+evidence:
+  - source: entrevista.md
+    quote: "Coruja noturna: pico 22h-2h da manhã"
+  - source: entrevista.md
+    quote: "Janela de foco ideal: 22h às 2h da manhã"
+
+### Pattern: System Abandonment Cycle
+frequency: Recurrent - padrão problemático auto-reconhecido
+context: Sistemas organizacionais, ferramentas de produtividade, rotinas
+description: |
+  Cria sistemas elaborados (Notions complexos, frameworks, rotinas),
+  funciona bem por semanas/meses, depois abandona quando "fica chato".
+  Ciclo: Criação entusiasmada → Uso disciplinado → Tédio → Abandono → Nova criação.
+
+evidence:
+  - source: entrevista.md
+    quote: "Fracasso recorrente: abandono de sistemas quando 'ficam chatos'"
+  - source: entrevista.md
+    quote: "Discurso: organização é fraqueza / Ação: cria Notions elaborados repetidamente"
+
+### Pattern: Performance Under Controlled Pressure
+frequency: Consistent
+context: Prazos claros, desafios intelectuais, improviso ao vivo
+description: |
+  Alta performance quando há:
+  - Pressão leve (não esmagadora)
+  - Liberdade de método
+  - Sentido claro da tarefa
+
+  Exemplo: 10 anos em TV ao vivo, milhares de reportagens improvisadas.
+
+evidence:
+  - source: entrevista.md
+    quote: "Sob pressão: alta performance em improviso, paralisia em sobrecarga"
+  - source: entrevista.md
+    quote: "5 mil horas ao vivo em telejornal e mais de 3 mil reportagens feitas"
+
+### Pattern: Solo vs Collaborative Mode
+frequency: Context-dependent
+context: Tipo de trabalho (criativo vs execução, novo vs rotina)
+description: |
+  - Solo: Trabalho criativo, escrita, desenvolvimento de conceitos
+  - Colaborativo: Ensino, masterminds, validação de ideias
+
+  Não é introvertido - é que criação profunda requer solidão (TDAH + foco).
+
+evidence:
+  - source: entrevista.md
+    quote: "Liderança transformacional (65%), caloroso mas evita conflitos necessários"
+  - source: geral.md
+    quote: "O VISIONÁRIO INQUIETO (Modo Comunidade/Peers) - Tom: Cúmplice + Exploratório"
+
+---
+
+## LEARNING BEHAVIOR
+
+### Pattern: Visual-Spatial Learning Primacy
+frequency: Lifelong - origem na infância
+context: Todo tipo de aprendizado, especialmente conceitos complexos
+description: |
+  Aprendizado primário através de visualização, não texto.
+  História fundacional: aprendeu esquistossomose aos 7 anos
+  através de IMAGENS no canal Discovery, não leitura.
+
+  Cria diagramas, mapas mentais, fluxogramas para tudo.
+
+evidence:
+  - source: entrevista.md
+    quote: "Pensamento visual-espacial (aprendeu por curiosidade desde criança)"
+  - source: geral.md
+    quote: "Você aprendeu esquistossomose aos 7 anos POR IMAGENS. Isso vaza em tudo que você cria"
+  - source: aula_vibe_coding
+    quote: "eu sou muito visual então eu não consigo aprender as coisas se eu não não visualizar"
+
+### Pattern: Nexialist Learning (Cross-Domain Synthesis)
+frequency: Dominant learning mode - identidade profissional
+context: Qualquer domínio novo - IA, neurociência, negócios, filosofia
+description: |
+  Não aprende domínios isoladamente. Sempre conecta:
+  - IA + neurociência
+  - Storytelling + filosofia
+  - Negócios + psicologia
+
+  Não é "aprender tudo superficialmente" - é SINTETIZAR através de conexões.
+
+evidence:
+  - source: entrevista.md
+    quote: "Nexialismo: conecta domínios distintos para insights criativos"
+  - source: geral.md
+    quote: "Você conecta IA + neurociência + storytelling + filosofia + negócios em UMA frase"
+  - source: livro_nexialismo
+    quote: "O nexialista não é quem sabe muito. É quem sabe se perder em territórios novos… e criar pontes de volta."
+
+### Pattern: Curiosity-Driven Deep Dives
+frequency: Episodic - quando algo captura interesse
+context: Novos domínios, problemas complexos, tecnologias emergentes
+description: |
+  Quando algo captura interesse, mergulha obsessivamente por semanas/meses.
+  Exemplos:
+  - IA generativa (2023-2024): mudou carreira completamente
+  - League of Legends (2015-2023): jogou por 8 anos, parou instantaneamente ao descobrir IA
+
+  Padrão: 100% in → domínio → próximo interesse.
+
+evidence:
+  - source: entrevista.md
+    quote: "Abandonou: jogos vitalícios (League of Legends 2015-2023) instantaneamente ao descobrir IA"
+  - source: entrevista.md
+    quote: "Evolução radical: descobriu IA generativa 2023-2024, mudou completamente de carreira"
+
+### Pattern: Early Adopter + Tool Migration
+frequency: Continuous - tech behavior
+context: Novas ferramentas, plataformas, tecnologias
+description: |
+  Early adopter extremo que experimenta TUDO novo.
+  Migra de ferramentas frequentemente por:
+  1. Tédio (sistema ficou rotineiro)
+  2. Promessa de "solução perfeita"
+  3. Novidade dopaminérgica (TDAH)
+
+evidence:
+  - source: entrevista.md
+    quote: "Early adopter extremo: migrou de dezenas de ferramentas por tédio ou promessa de solução perfeita"
+  - source: entrevista.md
+    quote: "Tech stack: Claude AI, GPT-4o, Gemini, ElevenLabs, Bolt, n8n, Notion, Whimsical, Miro"
+
+---
+
+## RELATIONSHIP PATTERNS
+
+### Pattern: Intimacy Acceleration (Code-Switching Social)
+frequency: Consistent - estilo comunicativo dominante
+context: Networking, ensino, comunidade, clientes
+description: |
+  Quebra distância formal rapidamente. Usa:
+  - Confessionalidade estratégica (compartilha vulnerabilidades)
+  - Linguagem coloquial imediata
+  - Perguntas pessoais que criam conexão
+
+  "Como se já fossem velhos amigos pensando junto"
+
+evidence:
+  - source: geral.md
+    quote: "Intimidade Imediata → Quebra distância formal rapidamente, como se já fossem velhos amigos pensando junto"
+  - source: geral.md
+    quote: "Conectores de Intimidade: 'Olha só...' / 'Vem comigo...' / 'Te pergunto...'"
+
+### Pattern: Transformational Leadership Style
+frequency: Professional identity
+context: Ensino, mentorias, comunidade, liderança de equipe
+description: |
+  Liderança transformacional (65% no assessment).
+  Foca em:
+  - Despertar potencial (não dar respostas prontas)
+  - Provocação socrática
+  - Empoderamento através de frameworks
+
+  Mas: evita conflitos necessários (fraqueza reconhecida).
+
+evidence:
+  - source: entrevista.md
+    quote: "Liderança transformacional (65%), caloroso mas evita conflitos necessários"
+  - source: geral.md
+    quote: "O PROFESSOR SOCRÁTICO - Objetivo: Fazer o aluno DESCOBRIR, não receber pronto"
+
+### Pattern: Empathetic Validation + Strategic Framework
+frequency: Consistent em interações 1-on-1
+context: Consultorias, mentorias, aconselhamento
+description: |
+  Padrão em 2 etapas:
+  1. Validação emocional profunda ("Você não tá louco, isso é real")
+  2. Framework estratégico claro ("Agora, como trabalhamos COM isso?")
+
+  DISC Comunicador (35%) + Planejador (32%) = empatia + estrutura.
+
+evidence:
+  - source: geral.md
+    quote: "O CONSELHEIRO EMPÁTICO - Tom: Caloroso + Estratégico - Objetivo: ANCORAR a pessoa no próprio potencial"
+  - source: geral.md
+    quote: "Validadores Empáticos: 'Faz todo sentido...' / 'Te entendo completamente...' / 'Você não tá louco(a)...'"
+
+### Pattern: Audience Adaptation (Multiple Personas)
+frequency: Automatic - professional skill
+context: Different audiences (iniciantes, pares, clientes, comunidade)
+description: |
+  4 personas situacionais identificadas:
+  1. Professor Socrático (didático + provocador) → iniciantes
+  2. Visionário Inquieto (cúmplice + exploratório) → pares
+  3. Conselheiro Empático (validador + estratégico) → 1-on-1
+  4. Estrategista Direto (assertivo + pragmático) → negócios
+
+  Muda linguagem, ritmo, densidade sem perder essência.
+
+evidence:
+  - source: geral.md
+    quote: "CÓDIGO-SWITCHING SOCIAL - Você adapta linguagem conforme audiência sem perder essência"
+  - source: geral.md
+    section: "PERSONAS SITUACIONAIS (Code-Switching)" - 4 personas detalhadas
+
+---
+
+## RISK BEHAVIOR
+
+### Pattern: Calculated Creative Risks (vs Zero Execution Risks)
+frequency: Career-defining moments
+context: Mudanças de carreira, grandes decisões, saltos profissionais
+description: |
+  Toma riscos GRANDES em:
+  - Criatividade (experimentar, explorar, mudar completamente)
+  - Carreira (saiu de 10 anos em TV para IA full-time)
+
+  Mas evita riscos de execução repetitiva/burocrática.
+
+  Exemplos:
+  - Abandonou carreira consolidada em mídia (abril 2025)
+  - Experimentou 7 cursos universitários
+  - Investiu em masterminds caros (R$ 88k)
+
+evidence:
+  - source: entrevista.md
+    quote: "Saída em abril 2025, migração full-time para IA em maio 2025"
+  - source: entrevista.md
+    quote: "Experimentou 7 cursos universitários (2 períodos cada)"
+  - source: entrevista.md
+    quote: "Mastermind R$ 88k, mentorias high-ticket"
+
+### Pattern: Fast Pivots on Evidence
+frequency: When confronted with undeniable data/impact
+context: Beliefs, strategies, tools, methods
+description: |
+  Muda de opinião/direção rapidamente quando:
+  - Dados são irrefutáveis
+  - Impacto é evidente
+  - Nova possibilidade é claramente superior
+
+  Não tem apego emocional a decisões passadas.
+  Exemplo: política (direita → pluralista), jogos → IA (instant switch).
+
+evidence:
+  - source: entrevista.md
+    quote: "Muda de opinião: quando dados são irrefutáveis ou impacto é evidente"
+  - source: entrevista.md
+    quote: "Evolução Política: Mudança de direita (apoiador Bolsonaro) → postura pluralista"
+
+### Pattern: Emotional Risk Aversion
+frequency: Personal relationships - contrasts with professional risk-taking
+context: Relacionamentos íntimos, família, vulnerabilidade emocional
+description: |
+  Contraste: toma riscos profissionais enormes, mas é conservador emocionalmente.
+
+  Exemplo crítico: "paixão avassaladora" (Instagram) → quase pediu separação
+  → recuou ao ver esposa chorar → não concretizou.
+
+  Medo central: abandono (trauma de infância).
+
+evidence:
+  - source: entrevista.md
+    quote: "Quase pediu separação por 'paixão avassaladora' (Instagram), recuou ao ver esposa chorar"
+  - source: entrevista.md
+    quote: "Medos centrais: irrelevância, perda de autonomia, ser mal interpretado, repetir abandono"
+
+---
+
+## RESOURCE ALLOCATION
+
+### Pattern: Time Blocking with Ritualized Review
+frequency: Daily/weekly - structured system
+context: Gestão de tempo, produtividade, alinhamento
+description: |
+  Sistema de revisão em 3 níveis:
+  - Diário: Triade Diária (manhã) + Revisão Inbox (17:30)
+  - Semanal: Revisão domingo 21:00
+
+  Aloca tempo para PLANEJAMENTO, não só execução.
+
+evidence:
+  - source: entrevista.md
+    quote: "Gestão de tempo: Triade Diária (manhã), Revisão Inbox 17:30, Revisão semanal domingo 21:00"
+
+### Pattern: Delegation of Repetitive Tasks
+frequency: Consistent - strategic choice
+context: Tarefas que não exigem criatividade/nexialismo
+description: |
+  Delega:
+  - Tarefas repetitivas (administrativo, operacional)
+  - Análises técnicas detalhadas (não-criativas)
+
+  Mantém: concepção, estratégia, síntese, ensino.
+
+evidence:
+  - source: entrevista.md
+    quote: "Delega: tarefas repetitivas e análises técnicas detalhadas"
+
+### Pattern: Energy-Based Task Classification
+frequency: Daily planning approach
+context: Decidir o que fazer quando
+description: |
+  Classifica tarefas por energia_required (low/med/high).
+  Aloca tarefas pesadas para janela noturna (22h-2h).
+  Tarefas leves/administrativas para períodos de baixa energia.
+
+evidence:
+  - source: entrevista.md
+    quote: "Classifica tarefas por energia_required (low/med/high)"
+  - source: entrevista.md
+    quote: "Janela de foco ideal: 22h às 2h da manhã"
+
+### Pattern: Subjective Progress Metrics ("Confidence Level")
+frequency: Primary success measurement
+context: Avaliar se está no caminho certo
+description: |
+  Não usa métricas tradicionais (horas, tarefas completas, revenue).
+  Mede progresso por:
+  - "Nível de confiança" subjetivo
+  - Impacto transformador relatado (depoimentos)
+
+  Métricas qualitativas > quantitativas.
+
+evidence:
+  - source: entrevista.md
+    quote: "Mede progresso: subjetivamente por 'nível de confiança' e impacto transformador relatado"
+  - source: entrevista.md
+    quote: "Mede 'nível de confiança' como KPI pessoal"
+
+### Pattern: Micro-Isolations for Recovery
+frequency: When overwhelmed/anxious
+context: Gestão de crises emocionais, burnout, TAG triggers
+description: |
+  Quando sobrecarregado, cria micro-isolamentos criativos:
+  - Música (playlists estratégicas)
+  - Escrita (journaling, drafts de conceitos)
+  - Caminhadas solitárias
+
+  Não socialização - reclusão criativa temporária.
+
+evidence:
+  - source: entrevista.md
+    quote: "Padrão: racionalização + ressignificação + microisolamentos criativos (música, escrita)"
+  - source: entrevista.md
+    quote: "Modo 'Não Perturbe', cancelar abas irrelevantes, playlists de ruído branco"
+
+---
+
+## TEMPORAL EVOLUTION
+
+### Early Career (2014-2023): Media Professional
+behaviors:
+  - Alta disciplina em rotinas de TV (ao vivo exige)
+  - Progressão linear: repórter → produtor → apresentador → gerente
+  - Aprendizado: comunicação, storytelling, improviso sob pressão
+  - Frustração crescente: "potencial desperdiçado em notícias que não importam"
+
+evidence:
+  - source: entrevista.md
+    quote: "Entrada na Rede Amazônica em 2014, 10+ anos na emissora. Progressão: repórter → produtor → apresentador Jornal do Amazonas e Globo Esporte → gerente CBN Amazônia"
+
+### Mid Career (2023-2024): IA Discovery + Pivot
+behaviors:
+  - Descoberta obsessiva de IA generativa
+  - Abandono instantâneo de hobbies antigos (League of Legends 8 anos)
+  - Investimentos pesados em educação (Harvard, IBM, Anthropic)
+  - Planejamento de saída da mídia
+
+evidence:
+  - source: entrevista.md
+    quote: "Evolução radical: descobriu IA generativa 2023-2024, mudou completamente de carreira"
+  - source: entrevista.md
+    quote: "Formado em Leaders of Learning - Harvard, cursos de especialização em AI for Business IBM, AI Fluency - Anthropic"
+
+### Current (2025): Full-Time Nexialist/IA Educator
+behaviors:
+  - Migração completa para IA (maio 2025)
+  - Construção de produtos educacionais (masterminds, cursos)
+  - Escrita do livro "Nexialismo: A Última Inteligência"
+  - Consolidação de identidade profissional única
+
+evidence:
+  - source: entrevista.md
+    quote: "Saída em abril 2025, migração full-time para IA em maio 2025"
+  - source: entrevista.md
+    quote: "Metas atuais: livro 'Nexialismo: A Última Inteligência', curso/comunidade IA, 'Agência IA'"
+
+### Evolution Pattern
+description: |
+  Progressão NÃO-LINEAR mas COERENTE:
+  - Fase 1: Expertise em comunicação (fundação)
+  - Fase 2: Descoberta de propósito verdadeiro (IA + Nexialismo)
+  - Fase 3: Alinhamento total carreira ↔ identidade
+
+  Cada fase abandona métodos da anterior, mas acumula ESSÊNCIA.
+
+---
+
+## OUTLIER BEHAVIORS
+
+### Outlier 1: Instant Game Abandonment
+context: Jogou League of Legends por 8 anos (2015-2023), parou instantaneamente
+frequency: One-time but revealing
+significance: |
+  Mostra capacidade de abandonar hábitos profundamente enraizados quando
+  nova possibilidade é claramente superior. Não tem apego sentimental.
+
+evidence:
+  - source: entrevista.md
+    quote: "Abandonou: jogos vitalícios (League of Legends 2015-2023) instantaneamente ao descobrir IA"
+
+### Outlier 2: Near-Separation Incident
+context: "Paixão avassaladora" por pessoa no Instagram, quase pediu separação
+frequency: One-time crisis
+significance: |
+  Revela vulnerabilidade emocional profunda (abandono na infância).
+  Contrasta com imagem de racionalidade. Mostra que emoções intensas
+  podem byppassar frameworks lógicos temporariamente.
+
+evidence:
+  - source: entrevista.md
+    quote: "Maior crise pessoal: quase pediu separação por 'paixão avassaladora' (Instagram), recuou ao ver esposa chorar"
+
+### Outlier 3: 7 University Course Experiments
+context: Tentou 7 cursos diferentes, 2 períodos cada, abandonou todos exceto 1
+frequency: Early adulthood pattern
+significance: |
+  Não era "indecisão" - era busca por fit cognitivo.
+  Cada curso ensinava algo, mas estrutura universitária conflitava com TDAH.
+  Administração Pública (único que conclui) porque permitia nexialismo.
+
+evidence:
+  - source: entrevista.md
+    quote: "Experimentou 7 cursos universitários (2 períodos cada), concluindo apenas Administração Pública (previsão 01/2026)"
+
+---
+
+## CONFIDENCE & LIMITATIONS
+
+**Confidence Level:** HIGH
+**Source Quality:** Excellent (2 análises pré-compiladas muito densas)
+**Triangulation:** Limited (4 sources, mas 2 são sintéticas)
+
+**Strengths:**
+- Behavioral patterns extremamente bem documentados
+- Múltiplas evidências convergentes
+- Análises neuropsicológicas (DISC, Eneagrama, TDAH) enriquecem contexto
+
+**Limitations:**
+- Maioria dos dados vem de auto-relato (entrevista estruturada)
+- Poucos exemplos de comportamento observado por terceiros
+- Viés: sources focam em aspectos positivos/profissionais
+
+**Gaps Identificados:**
+- Comportamentos em conflito real (não apenas "evita conflitos")
+- Padrões em fracasso (além de "abandono de sistemas")
+- Interações com pessoas que discordam dele
+- Comportamento sob pressão EXTREMA (não só leve)
+
+---
+
+**Next Step:** Layer 2 (Communication Style)

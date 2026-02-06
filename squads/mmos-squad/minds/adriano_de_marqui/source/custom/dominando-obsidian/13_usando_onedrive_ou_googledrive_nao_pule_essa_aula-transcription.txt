@@ -1,0 +1,495 @@
+WEBVTT
+
+00:00:01.070 --> 00:00:02.910
+Bom, vamos lá, continuando aqui.
+
+00:00:03.010 --> 00:00:10.230
+Se você está nessa aula, você vai usar,
+provavelmente, o OneDrive ou o Google
+
+00:00:10.230 --> 00:00:13.490
+Drive para sincronizar os seus arquivos
+do segundo cérebro.
+
+00:00:13.710 --> 00:00:18.990
+Você pode, então, estar usando o
+Windows, ou você pode estar usando o Mac
+
+00:00:18.990 --> 00:00:25.350
+e Android do outro lado, e você escolher
+uma dessas opções aí para sincronização.
+
+00:00:25.350 --> 00:00:31.070
+Legal, eu preciso te passar algumas
+coisas que serão importantes para você
+
+00:00:31.070 --> 00:00:34.450
+não ter dor de cabeça com essas opções
+de sincronização.
+
+00:00:34.730 --> 00:00:40.570
+Então, o objetivo dessa aula é que, ao
+final dela, você nunca passe por nenhum
+
+00:00:40.570 --> 00:00:45.010
+problema de sincronização com essas duas
+opções.
+
+00:00:45.110 --> 00:00:51.050
+Então, eu vou mostrar para você aqui,
+primeiro aqui no Windows, se você está
+
+00:00:51.050 --> 00:00:55.330
+usando o OneDrive e o Google Drive, e eu
+tenho aqui todos os...
+
+00:00:55.350 --> 00:00:56.510
+Ambientes, né?
+
+00:00:56.550 --> 00:01:01.630
+Eu tenho o OneDrive, eu tenho o iCloud
+aqui, que eu já mostrei em outra aula
+
+00:01:01.630 --> 00:01:02.570
+para quem vai usar, né?
+
+00:01:02.810 --> 00:01:03.870
+O que é importante.
+
+00:01:04.490 --> 00:01:07.850
+E eu tenho também o Google Drive, tá?
+
+00:01:08.050 --> 00:01:10.270
+Está aqui, ó, meu Google Drive.
+
+00:01:10.690 --> 00:01:17.670
+E quando eu venho aqui no ícone da
+bandeja, eu também tenho aqui no Windows
+
+00:01:17.670 --> 00:01:19.370
+o ícone dos dois, né?
+
+00:01:19.430 --> 00:01:21.430
+Do OneDrive, do Google Drive.
+
+00:01:21.610 --> 00:01:23.510
+E o que eu posso verificar?
+
+00:01:23.710 --> 00:01:25.330
+Por exemplo, se eu pegar aqui o
+Google...
+
+00:01:25.350 --> 00:01:29.770
+Quando você abre o aplicativo, né?
+
+00:01:29.850 --> 00:01:32.990
+Você vem aqui e você tem as contas, tá?
+
+00:01:33.150 --> 00:01:34.850
+Que você tem do Google Drive.
+
+00:01:35.370 --> 00:01:37.270
+Então, eu estou selecionado para a minha
+conta.
+
+00:01:37.710 --> 00:01:39.310
+Quando você instala, né?
+
+00:01:39.310 --> 00:01:41.410
+O aplicativo do Google Drive aí no
+Windows.
+
+00:01:41.770 --> 00:01:43.670
+E você vem aqui, ó, Google Drive.
+
+00:01:44.850 --> 00:01:48.250
+Existem duas formas de você sincronizar
+os arquivos.
+
+00:01:48.490 --> 00:01:51.950
+Você pode sincronizar por streaming.
+
+00:01:52.710 --> 00:01:55.150
+Isso aqui eu estou falando do Google
+Drive geral, tá?
+
+00:01:55.350 --> 00:01:59.570
+No Google Drive aí, não só para o
+Obsidia, mas no contexto geral.
+
+00:01:59.790 --> 00:02:01.990
+Você pode ter o streaming que é...
+
+00:02:02.690 --> 00:02:06.570
+Os arquivos ficam na nuvem, não na sua
+pasta no disco local.
+
+00:02:07.350 --> 00:02:07.810
+Tá bom?
+
+00:02:07.890 --> 00:02:13.830
+Ou, espelhamento de arquivos, o arquivo
+fica localmente na sua máquina.
+
+00:02:14.190 --> 00:02:14.670
+Tá?
+
+00:02:14.890 --> 00:02:17.930
+Ele fica armazenado localmente na sua
+máquina.
+
+00:02:18.230 --> 00:02:22.010
+E aí, tudo que você altera, reflete na
+nuvem.
+
+00:02:22.130 --> 00:02:25.230
+No streaming, quando você vai ter que
+alterar um arquivo...
+
+00:02:25.350 --> 00:02:27.470
+Ele baixa esse arquivo, você altera.
+
+00:02:28.410 --> 00:02:31.830
+Depois, ele fica só lá na nuvem de novo,
+né?
+
+00:02:31.950 --> 00:02:37.830
+É mais ou menos como a otimização de
+armazenamento que acontece no MacBook
+
+00:02:37.830 --> 00:02:40.090
+que eu comentei aí na aula de Mac.
+
+00:02:40.610 --> 00:02:42.990
+E por que é importante você saber disso,
+né?
+
+00:02:43.050 --> 00:02:43.550
+Por que é legal?
+
+00:02:43.790 --> 00:02:50.050
+Porque você daí não vai passar por
+apuros quando você entende a dinâmica da
+
+00:02:50.050 --> 00:02:50.290
+coisa.
+
+00:02:50.610 --> 00:02:53.350
+Se aqui no Google Drive está desse
+jeito, né?
+
+00:02:53.450 --> 00:02:54.390
+Por o streaming...
+
+00:02:54.390 --> 00:02:55.290
+Por o espelhamento...
+
+00:02:55.350 --> 00:02:56.630
+O espelhamento vai acontecer o seguinte.
+
+00:02:56.870 --> 00:02:58.490
+A pasta já está no seu disco.
+
+00:02:58.650 --> 00:03:01.350
+E o Obsidian trabalha com arquivos
+locais.
+
+00:03:01.890 --> 00:03:03.330
+Ele tem que estar na sua máquina.
+
+00:03:03.530 --> 00:03:08.530
+Então, o arquivo, para abrir no Obsidian
+e não ter problema de sincronização, de
+
+00:03:08.530 --> 00:03:09.990
+abertura de arquivo, nada...
+
+00:03:09.990 --> 00:03:12.290
+Ele precisa estar localmente ali.
+
+00:03:12.490 --> 00:03:16.350
+E se ele vai estar localmente ali, tá?
+
+00:03:17.510 --> 00:03:21.290
+Vai funcionar perfeito, vai abrir, tudo
+funcionando certinho.
+
+00:03:21.470 --> 00:03:24.070
+Se está por streaming, o que você
+precisa?
+
+00:03:24.070 --> 00:03:27.270
+Você precisa pegar na pasta do seu
+Google Drive.
+
+00:03:27.430 --> 00:03:28.670
+Você vai lá na sua pasta.
+
+00:03:29.090 --> 00:03:34.350
+Você vai lá pegar, achar a pasta onde
+você criou o Obsidian.
+
+00:03:34.510 --> 00:03:37.890
+O cofre do Obsidian, como eu falei nas
+aulas anteriores aí.
+
+00:03:38.850 --> 00:03:41.470
+E nessa pasta Obsidian, né?
+
+00:03:41.530 --> 00:03:43.070
+Que você vai armazenar seus cofres.
+
+00:03:43.150 --> 00:03:46.310
+Você precisa clicar com o botão direito,
+tá?
+
+00:03:47.370 --> 00:03:50.010
+Botão direito do mouse.
+
+00:03:51.090 --> 00:03:53.350
+Eu vou ver aqui todas as...
+
+00:03:56.410 --> 00:04:08.210
+E verificar que aqui no Google Drive,
+ele não possibilita armazenar todo o
+
+00:04:08.210 --> 00:04:11.250
+conteúdo da pasta no offline.
+
+00:04:11.630 --> 00:04:16.410
+Você precisa vir aqui e selecionar
+disponível offline.
+
+00:04:17.010 --> 00:04:18.950
+E aí o que vai acontecer?
+
+00:04:19.490 --> 00:04:23.010
+Toda essa pasta vai ser baixada para a
+sua máquina.
+
+00:04:24.290 --> 00:04:25.810
+Significando que eu estou por streaming.
+
+00:04:26.030 --> 00:04:30.290
+Ele copia tudo para a nuvem.
+
+00:04:30.550 --> 00:04:37.050
+Porém, essa pasta em específico, eu
+quero que ela seja mantida aqui na minha
+
+00:04:37.050 --> 00:04:37.910
+máquina.
+
+00:04:37.970 --> 00:04:39.650
+E fique o arquivo local.
+
+00:04:39.910 --> 00:04:41.610
+Porque senão, o que vai acontecer?
+
+00:04:42.190 --> 00:04:44.550
+Esse arquivo vai sumir daí, né?
+
+00:04:44.570 --> 00:04:45.010
+Do disco.
+
+00:04:45.190 --> 00:04:46.610
+Você vai abrir o Obsidian.
+
+00:04:46.790 --> 00:04:48.970
+Ele vai tentar achar o arquivo, não vai
+achar.
+
+00:04:49.030 --> 00:04:50.790
+Você vai achar que está travado.
+
+00:04:50.850 --> 00:04:53.330
+Você vai achar que perdeu o arquivo, que
+perdeu a anotação.
+
+00:04:53.330 --> 00:04:59.990
+Sendo que aqui agora, quando você vem no
+ícone do Google Drive, você vai perceber
+
+00:04:59.990 --> 00:05:06.390
+que todos os arquivos da minha pasta,
+eles estão sendo sincronizados.
+
+00:05:06.430 --> 00:05:07.190
+Por quê?
+
+00:05:07.390 --> 00:05:11.290
+Porque eu, nesse momento, disse que eu
+quero essa pasta offline.
+
+00:05:11.830 --> 00:05:16.330
+Então, se você vai usar Google Drive,
+isso é importantíssimo.
+
+00:05:17.790 --> 00:05:18.890
+Outra coisa agora.
+
+00:05:19.070 --> 00:05:19.950
+Vamos para o OneDrive.
+
+00:05:20.210 --> 00:05:22.050
+O OneDrive você instalou...
+
+00:05:23.710 --> 00:05:25.570
+E está usando aí na sua máquina.
+
+00:05:26.490 --> 00:05:28.150
+O que você precisa fazer?
+
+00:05:28.570 --> 00:05:29.390
+Mesma coisa.
+
+00:05:29.470 --> 00:05:33.170
+Se você está aqui com o OneDrive
+instalado, você vai vir aqui na pasta
+
+00:05:33.170 --> 00:05:36.430
+que você criou, selecionou para ser a
+pasta do Obsidian.
+
+00:05:36.590 --> 00:05:43.490
+E você vai clicar com o botão direito e
+selecionar manter sempre neste
+
+00:05:43.490 --> 00:05:44.910
+dispositivo.
+
+00:05:44.970 --> 00:05:45.390
+Ok?
+
+00:05:46.170 --> 00:05:48.430
+Manter sempre este dispositivo.
+
+00:05:48.430 --> 00:05:49.370
+Olha o que o Auto vai fazer.
+
+00:05:49.410 --> 00:05:53.310
+Vai começar a sincronizar todos os
+arquivos para a minha máquina.
+
+00:05:54.110 --> 00:05:54.750
+Entenderam?
+
+00:05:54.750 --> 00:05:58.970
+Então, é necessário que para os arquivos
+do Obsidian, você tenha o arquivo
+
+00:05:58.970 --> 00:05:59.510
+localmente.
+
+00:05:59.590 --> 00:06:02.870
+Por isso, é necessário fazer este
+procedimento.
+
+00:06:03.250 --> 00:06:09.790
+Se você estiver no Mac, então imagine
+que você está aqui no Finder.
+
+00:06:09.910 --> 00:06:15.230
+Você vai ter também o OneDrive e você
+vai ter o Google Drive.
+
+00:06:15.530 --> 00:06:16.450
+É a mesma coisa.
+
+00:06:16.530 --> 00:06:20.910
+No OneDrive você vai vir e você pode
+selecionar
+
+00:06:20.910 --> 00:06:21.130
+aqui.
+
+00:06:23.580 --> 00:06:24.680
+All Skip.
+
+00:06:24.680 --> 00:06:25.700
+Keep on this device.
+
+00:06:26.060 --> 00:06:28.480
+Ou seja, manter sempre neste
+dispositivo.
+
+00:06:28.480 --> 00:06:29.660
+É como eu estou aqui em inglês.
+
+00:06:30.140 --> 00:06:32.200
+Também eu tenho que selecionar isso
+daqui.
+
+00:06:32.480 --> 00:06:34.240
+Ou no Google Drive.
+
+00:06:35.000 --> 00:06:35.320
+Tá?
+
+00:06:36.720 --> 00:06:37.880
+No Google Drive.
+
+00:06:39.680 --> 00:06:40.740
+Tá aqui.
+
+00:06:42.200 --> 00:06:46.020
+Eu vou selecionar a pasta Obsidian
+também.
+
+00:06:48.260 --> 00:06:51.700
+E vou fazer este procedimento.
+
+00:06:52.580 --> 00:06:54.720
+Make Available Offline.
+
+00:06:54.960 --> 00:06:56.160
+Ou seja, manter disponível.
+
+00:06:56.180 --> 00:07:00.200
+Gente, tem que fazer isso e você não vai
+ter problema.
+
+00:07:00.660 --> 00:07:06.360
+Teve gente que já, assim, bateu cabeça
+com isso.
+
+00:07:06.460 --> 00:07:08.520
+Muito, muito, muito, muito, muito.
+
+00:07:09.720 --> 00:07:11.400
+Não vai ser o seu caso.
+
+00:07:11.920 --> 00:07:18.120
+Porque você está fazendo esse curso,
+essa aula, vai economizar muito, muito,
+
+00:07:18.200 --> 00:07:19.380
+muito tempo seu.
+
+00:07:19.560 --> 00:07:23.240
+Então, você está fazendo aí a coisa da
+forma correta, tá?
+
+00:07:23.320 --> 00:07:25.280
+É importantíssimo isso.
+
+00:07:25.500 --> 00:07:26.060
+Tá?
+
+00:07:26.060 --> 00:07:31.740
+A gente vai, então, se ver na próxima
+aula, onde a gente vai aprender agora.
+
+00:07:31.780 --> 00:07:36.880
+Se você usa Android, você vai aprender a
+como sincronizar isso com o seu Android.
+
+00:07:37.800 --> 00:07:41.520
+Jeito rápido, fácil, certeiro, para
+também não ter problemas.
+
+00:07:41.780 --> 00:07:42.060
+Tá bom?
+
+00:07:42.120 --> 00:07:44.000
+Então, a gente se vê na próxima aula aí,

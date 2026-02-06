@@ -1,0 +1,843 @@
+WEBVTT
+
+00:00:00.430 --> 00:00:02.690
+Vamos lá, lendário, seja bem -vindo.
+
+00:00:03.110 --> 00:00:09.810
+Agora você vai aprender tudo sobre tag,
+o que é uma tag, como potencializar
+
+00:00:09.810 --> 00:00:13.990
+nossas notas com essa informação, ok?
+
+00:00:15.270 --> 00:00:21.390
+Você tem percebido que tudo vai sendo
+colocado aos poucos para que você possa
+
+00:00:21.390 --> 00:00:25.470
+implementar, fazer já uso nas suas
+notas, né?
+
+00:00:25.470 --> 00:00:31.150
+E, didaticamente, ir entendendo cada uma
+das coisas, cada um dos recursos.
+
+00:00:31.570 --> 00:00:37.350
+Depois, futuramente, como as aulas estão
+divididas dentro de cada tópico, o nome
+
+00:00:37.350 --> 00:00:42.770
+da aula é o tópico, você pode rever aí
+alguma informação que você deseja, tá
+
+00:00:42.770 --> 00:00:42.910
+bom?
+
+00:00:43.110 --> 00:00:47.510
+Então, olha só, nós vamos voltar aqui
+para o obsídio, mas antes deixa eu
+
+00:00:47.510 --> 00:00:50.390
+colocar para você o que é uma tag.
+
+00:00:50.630 --> 00:00:54.150
+Pense em tag como etiqueta.
+
+00:00:54.250 --> 00:00:55.450
+Vamos lá, vamos falar.
+
+00:00:55.470 --> 00:00:58.530
+Fazer aquelas comparações, aquelas
+analogias que nos ajudam.
+
+00:00:58.570 --> 00:01:04.490
+Você viu que propriedade tem todos
+aqueles elementos sobre os dados, né?
+
+00:01:04.570 --> 00:01:10.510
+São os metadados, as informações
+coerentes em relação àquilo que vai
+
+00:01:10.510 --> 00:01:11.110
+conter a nota.
+
+00:01:11.790 --> 00:01:18.430
+Tag é uma etiqueta que você coloca um
+rótulo para voltar rapidamente naquilo,
+
+00:01:18.570 --> 00:01:26.110
+para pesquisar rapidamente aquilo, para
+também classificar um objetivo, e também
+
+00:01:26.110 --> 00:01:31.710
+você pode utilizar isso em inúmeros plug
+-ins e também no gráfico.
+
+00:01:31.710 --> 00:01:36.010
+A gente vai ver que existe até uma opção
+do gráfico do segundo cérebro para que
+
+00:01:36.010 --> 00:01:43.150
+você veja as tags em cores diferentes
+para você ver as suas notas, né?
+
+00:01:43.230 --> 00:01:49.990
+Como é que elas estão ali juntas nesse
+ecossistema ali do segundo cérebro.
+
+00:01:50.830 --> 00:01:52.090
+Olha os exemplos.
+
+00:01:52.090 --> 00:01:52.930
+Mala de viagem.
+
+00:01:53.130 --> 00:01:55.310
+Você tem um rótulo, uma etiqueta.
+
+00:01:55.470 --> 00:01:56.650
+Numa mala para identificar.
+
+00:01:56.790 --> 00:01:58.170
+Olha, essa mala é minha.
+
+00:01:58.910 --> 00:02:02.210
+Pense em hashtags de rede social.
+
+00:02:02.710 --> 00:02:07.290
+Quando você, por exemplo, vai no
+Instagram e coloca uma hashtag qualquer,
+
+00:02:07.860 --> 00:02:12.410
+por exemplo, hashtag aprendizado.
+
+00:02:13.340 --> 00:02:14.290
+O que vai aparecer?
+
+00:02:14.450 --> 00:02:19.950
+Vai rapidamente aparecer conteúdo que
+tenha aquela etiqueta, aquela marca
+
+00:02:19.950 --> 00:02:23.690
+colocada sobre o post, né?
+
+00:02:23.790 --> 00:02:25.190
+Ou seja, o reel.
+
+00:02:25.470 --> 00:02:25.670
+O feed.
+
+00:02:27.230 --> 00:02:28.210
+Marcador de livro.
+
+00:02:28.410 --> 00:02:29.430
+O que é o marcador de livro?
+
+00:02:29.710 --> 00:02:37.230
+Nada mais é também do que uma marcação
+para que você volte rapidamente a algum
+
+00:02:37.230 --> 00:02:39.790
+lugar em que você já esteve, tá?
+
+00:02:40.990 --> 00:02:42.070
+Classificação de e -mail.
+
+00:02:42.130 --> 00:02:44.530
+Pensa num e -mail que você bota lá uma
+etiqueta.
+
+00:02:44.630 --> 00:02:51.030
+Esse e -mail é de trabalho, esse e -mail
+é pessoal, esse e -mail é urgente.
+
+00:02:51.210 --> 00:02:55.190
+E aí você quer, num certo momento,
+também filtrar e verificar.
+
+00:02:55.190 --> 00:02:58.970
+Aquelas informações que dizem respeito
+àquilo.
+
+00:02:59.030 --> 00:03:03.070
+Quero só ver o e -mail pessoal, quero só
+ver urgente.
+
+00:03:03.130 --> 00:03:08.250
+Deixa eu ver quanto de e -mail eu tenho
+pessoal, de trabalho, quantos são
+
+00:03:08.250 --> 00:03:09.690
+urgentes, quantos não são.
+
+00:03:10.110 --> 00:03:11.790
+Então, tag é isso.
+
+00:03:11.930 --> 00:03:15.150
+Você tem que pensar em tag como uma
+etiqueta.
+
+00:03:15.270 --> 00:03:20.410
+E aí depois a gente vai ver também a
+utilização de todos esses elementos, né?
+
+00:03:20.470 --> 00:03:20.990
+Em conjunto.
+
+00:03:21.270 --> 00:03:23.090
+As propriedades com tags.
+
+00:03:23.290 --> 00:03:25.170
+E assim por diante.
+
+00:03:25.190 --> 00:03:28.150
+E assim por diante conforme você vai vir
+aí nas aulas, tá bom?
+
+00:03:28.610 --> 00:03:34.250
+Vamos lá, agora então nós vamos pegar
+aqui o Obsidian e nós vamos ver como que
+
+00:03:34.250 --> 00:03:36.750
+é a aplicação de uma tag.
+
+00:03:37.310 --> 00:03:42.890
+Veja só, aqui nós voltamos naquela nota
+que tem os dados de anotações de um
+
+00:03:42.890 --> 00:03:43.130
+livro.
+
+00:03:43.370 --> 00:03:47.310
+Então eu estou aqui com um livro, eu vou
+colocar o resumo aqui do livro, mas
+
+00:03:47.310 --> 00:03:51.530
+imagine que antes do resumo do livro eu
+queira colocar uma tag.
+
+00:03:52.690 --> 00:03:55.170
+Existe a forma tradicional de você
+colocar uma tag.
+
+00:03:55.170 --> 00:04:00.150
+Você pode colocar a tag em qualquer
+elemento do seu texto, que é você
+
+00:04:00.150 --> 00:04:05.490
+digitar a hashtag e colocar aqui, por
+exemplo, vamos imaginar, isso aqui é uma
+
+00:04:05.490 --> 00:04:12.010
+anotação de livro, eu vou colocar uma
+tag chamada resumo livros.
+
+00:04:12.790 --> 00:04:18.090
+Onde eu sei que tudo que tiver essa tag
+são resumos de livro, tá?
+
+00:04:19.290 --> 00:04:24.450
+Eu poderia fazer isso dessa forma, como
+eu fiz aqui, digitando o hashtag.
+
+00:04:25.170 --> 00:04:26.930
+Qualquer posição da nota.
+
+00:04:27.470 --> 00:04:34.570
+Mas agora eu posso também, você lembra
+que aqui eu falei para vocês que uma das
+
+00:04:34.570 --> 00:04:38.250
+propriedades que vem por padrão, né?
+
+00:04:38.330 --> 00:04:40.950
+Aqui é a propriedade chamada tags.
+
+00:04:41.230 --> 00:04:45.970
+Quando você seleciona aqui tags, aqui
+você pode colocar a sua
+
+00:04:45.970 --> 00:04:46.250
+tag.
+
+00:04:49.510 --> 00:04:50.630
+Resumo livros.
+
+00:04:51.290 --> 00:04:52.530
+Pronto, você deu enter.
+
+00:04:52.730 --> 00:04:54.110
+Olha lá, já fica a cor diferente.
+
+00:04:55.170 --> 00:04:57.850
+Coloca também aquele x, porque então é
+uma lista.
+
+00:04:58.410 --> 00:05:00.930
+Tags, a propriedade tags é uma lista.
+
+00:05:01.470 --> 00:05:03.610
+Então veja, você pode adicionar várias.
+
+00:05:03.870 --> 00:05:08.370
+Resumo livros ou livros, tá?
+
+00:05:08.470 --> 00:05:10.270
+Olha só, então é mais uma tag.
+
+00:05:10.770 --> 00:05:12.110
+As tags, né?
+
+00:05:12.170 --> 00:05:17.370
+Essa etiqueta, esse rótulo que você está
+colocando na nota, você vai poder fazer
+
+00:05:17.370 --> 00:05:19.790
+isso daí que eu te falei, de pesquisar,
+né?
+
+00:05:20.230 --> 00:05:26.810
+E você tem ferramentas também que vão
+possibilitar, você enxergar quais são
+
+00:05:26.810 --> 00:05:31.850
+todas as tags que estão presentes no seu
+vault, no seu cofre, né?
+
+00:05:31.870 --> 00:05:35.910
+E rapidamente olhar quantas notas tem
+aquela tag.
+
+00:05:36.150 --> 00:05:38.070
+Você vem aqui no menuzinho, ó.
+
+00:05:38.190 --> 00:05:40.390
+Estou pegando aqui na parte superior,
+né?
+
+00:05:41.050 --> 00:05:42.430
+Lá na minha direita.
+
+00:05:42.850 --> 00:05:46.850
+Aquele botão ícone que abre o sidebar.
+
+00:05:47.030 --> 00:05:51.970
+E aqui eu tenho, olha, esse símbolo de
+etiqueta aqui, ó.
+
+00:05:52.250 --> 00:05:52.810
+Tags.
+
+00:05:52.850 --> 00:05:55.150
+E o tags vai mostrar...
+
+00:05:56.150 --> 00:05:58.910
+Quantas notas eu tenho determinada tag.
+
+00:05:59.170 --> 00:05:59.910
+Tá legal?
+
+00:06:00.430 --> 00:06:03.870
+Então isso é uma coisa que eu consigo já
+ver aqui.
+
+00:06:04.330 --> 00:06:07.010
+Isso é uma coisa que eu consigo ordenar.
+
+00:06:07.230 --> 00:06:10.950
+Eu posso ordenar em questão de
+frequência, né?
+
+00:06:10.970 --> 00:06:12.750
+Do número ou por nome, né?
+
+00:06:13.110 --> 00:06:16.010
+Eu posso ordenar elas e aqui eu posso
+também...
+
+00:06:16.570 --> 00:06:20.490
+Vou mostrar aqui uma tag aninhada ou
+não, tá?
+
+00:06:20.690 --> 00:06:22.130
+Que eu vou mostrar já já.
+
+00:06:23.070 --> 00:06:23.630
+Pesquisa.
+
+00:06:23.690 --> 00:06:25.150
+Se você vier em pesquisa...
+
+00:06:25.170 --> 00:06:26.010
+Você vai ver, ó.
+
+00:06:26.030 --> 00:06:28.050
+Aqui na lupinha aqui, ó.
+
+00:06:28.070 --> 00:06:30.390
+É a pesquisa do Obsidian.
+
+00:06:30.570 --> 00:06:33.310
+E se você vier na pesquisa, você vai ver
+que...
+
+00:06:33.310 --> 00:06:35.830
+Você tem também um item.
+
+00:06:35.850 --> 00:06:36.670
+Nós vimos aqui, ó.
+
+00:06:36.810 --> 00:06:38.350
+Que tem a property.
+
+00:06:38.790 --> 00:06:40.390
+E nós vimos aqui...
+
+00:06:40.390 --> 00:06:42.350
+Nós vemos aqui agora também que tem tag.
+
+00:06:42.530 --> 00:06:44.250
+Onde eu posso selecionar...
+
+00:06:44.250 --> 00:06:45.470
+Pesquisar por tag.
+
+00:06:45.630 --> 00:06:47.590
+Na hora que você seleciona a tag...
+
+00:06:47.590 --> 00:06:52.950
+Ele já vai trazer todas as tags
+existentes no cofre.
+
+00:06:53.090 --> 00:06:55.130
+Então, por exemplo, resumo livros, né?
+
+00:06:55.170 --> 00:07:01.670
+Já vai trazer aqui quais são as notas
+que eu tenho trazendo pra mim, né?
+
+00:07:01.970 --> 00:07:07.530
+E eu posso ordenar, posso colapsar,
+posso mostrar o conteúdo ou não.
+
+00:07:09.370 --> 00:07:10.150
+Enfim, né?
+
+00:07:10.190 --> 00:07:12.870
+Posso trazer várias informações aqui das
+tags.
+
+00:07:13.090 --> 00:07:18.110
+Se você clicar, inclusive, aqui no
+sidebar da direita, tá?
+
+00:07:18.290 --> 00:07:21.090
+O sidebar da esquerda é onde tem aqui a
+pesquisa.
+
+00:07:21.530 --> 00:07:23.730
+Aqui no sidebar da direita...
+
+00:07:23.730 --> 00:07:24.590
+Se você...
+
+00:07:24.590 --> 00:07:25.150
+Se você...
+
+00:07:25.150 --> 00:07:29.030
+Se você quiser selecionar uma tag, ele
+já automaticamente...
+
+00:07:29.030 --> 00:07:32.350
+Olha o que ele faz lá no sidebar da
+esquerda.
+
+00:07:32.390 --> 00:07:35.290
+Ele posiciona a pesquisa, tá legal?
+
+00:07:35.550 --> 00:07:40.990
+Então, você pode vir aqui e ele vai
+trazer todas as notas que possuem aquela
+
+00:07:40.990 --> 00:07:41.410
+tag.
+
+00:07:41.750 --> 00:07:48.250
+Então, isso aqui é uma coisa
+interessante, importante pra você fazer
+
+00:07:48.250 --> 00:07:48.930
+aí, né?
+
+00:07:48.970 --> 00:07:52.490
+A localização, pesquisa, rotular...
+
+00:07:52.490 --> 00:07:55.010
+E ver, inclusive, como que essas...
+
+00:07:55.970 --> 00:07:57.870
+Informações se relacionam, né?
+
+00:07:57.890 --> 00:08:01.370
+Eu falei pra vocês de um autor que a
+gente pegou o curso dele, né?
+
+00:08:01.390 --> 00:08:06.330
+Um curso de um gringo, né?
+
+00:08:06.790 --> 00:08:08.770
+E o que que ele fazia?
+
+00:08:08.850 --> 00:08:14.210
+Ele pegava várias notas e ele coloca as
+tags, né?
+
+00:08:14.310 --> 00:08:20.350
+Por exemplo, ele pega uma nota lá e ele
+observa um dia um determinado problema,
+
+00:08:20.610 --> 00:08:20.770
+né?
+
+00:08:21.330 --> 00:08:23.490
+E ele pega aquele problema e ele anota.
+
+00:08:23.530 --> 00:08:24.450
+Ele cria uma nota atômica.
+
+00:08:25.150 --> 00:08:26.730
+Sobre aquele problema, tá?
+
+00:08:27.270 --> 00:08:32.310
+Então, ele coloca lá a nota, descreve
+rapidamente ali o que ele encontrou de
+
+00:08:32.310 --> 00:08:32.510
+problema.
+
+00:08:33.090 --> 00:08:37.350
+E aí, ele coloca uma hashtag lá,
+problema.
+
+00:08:39.530 --> 00:08:41.510
+Ou oportunidade, né?
+
+00:08:42.070 --> 00:08:46.490
+E aí, ele vai observando as coisas e vai
+vendo tal.
+
+00:08:46.550 --> 00:08:54.650
+E num determinado momento, ele vê,
+descobre uma ferramenta, um recurso.
+
+00:08:55.850 --> 00:08:56.710
+Teve uma ideia.
+
+00:08:57.230 --> 00:09:01.070
+E aí, ele vai lá, anota essa ideia
+rapidamente e ele coloca lá uma hashtag,
+
+00:09:01.350 --> 00:09:01.990
+solução.
+
+00:09:03.290 --> 00:09:05.230
+Eu tô, assim, sendo bem...
+
+00:09:07.670 --> 00:09:08.670
+Assim, exagerado, né?
+
+00:09:08.690 --> 00:09:09.310
+Na coisa.
+
+00:09:09.610 --> 00:09:11.310
+Mas é mais ou menos isso que ele faz.
+
+00:09:11.830 --> 00:09:14.970
+E aí, então, quando ele olha o gráfico,
+né?
+
+00:09:15.030 --> 00:09:16.770
+De notas, de...
+
+00:09:17.330 --> 00:09:19.330
+E você vai aprender isso nas próximas
+aulas.
+
+00:09:19.490 --> 00:09:22.290
+Ele consegue visualmente, né?
+
+00:09:23.010 --> 00:09:23.450
+Com...
+
+00:09:23.450 --> 00:09:24.110
+Com...
+
+00:09:24.110 --> 00:09:24.190
+Com...
+
+00:09:24.650 --> 00:09:25.090
+Olhando...
+
+00:09:25.090 --> 00:09:27.150
+Olhando o gráfico local, às vezes, de
+uma nota.
+
+00:09:27.250 --> 00:09:28.850
+Ou um pouco mais profundo.
+
+00:09:29.010 --> 00:09:33.750
+Ele consegue observar problemas e
+soluções que podem se conectar ali.
+
+00:09:34.670 --> 00:09:35.810
+Visualmente no gráfico.
+
+00:09:35.990 --> 00:09:38.690
+Perceba, sem nem ler as notas, né?
+
+00:09:38.770 --> 00:09:40.030
+Só com os nomes...
+
+00:09:40.030 --> 00:09:45.650
+O nome das notas e a hashtag, ele
+consegue um recurso desse.
+
+00:09:45.990 --> 00:09:46.970
+Então, isso é...
+
+00:09:46.970 --> 00:09:48.270
+Isso é muito legal, tá?
+
+00:09:48.830 --> 00:09:49.750
+Então, vamos lá.
+
+00:09:49.830 --> 00:09:52.010
+A nota, a tag, tá aqui.
+
+00:09:52.090 --> 00:09:54.750
+E é assim que a gente pode utilizar.
+
+00:09:55.090 --> 00:09:58.130
+Você pode ter também notas, né?
+
+00:09:58.250 --> 00:09:59.730
+Que, por exemplo, é...
+
+00:10:00.230 --> 00:10:00.770
+Tags, né?
+
+00:10:00.850 --> 00:10:02.970
+Que você pode fazer isso aqui, ó.
+
+00:10:03.030 --> 00:10:03.990
+Eu vou ter tag...
+
+00:10:04.770 --> 00:10:05.210
+Livros...
+
+00:10:06.470 --> 00:10:06.910
+Barra...
+
+00:10:08.150 --> 00:10:08.590
+Ficção.
+
+00:10:12.940 --> 00:10:14.180
+Então, o que que eu tenho?
+
+00:10:14.280 --> 00:10:16.280
+Olha, aqui mesmo já mostrou, ó.
+
+00:10:16.320 --> 00:10:18.860
+Que eu tenho livros e...
+
+00:10:18.860 --> 00:10:20.000
+Livros e...
+
+00:10:20.820 --> 00:10:22.340
+Intercalado aqui o ficção.
+
+00:10:23.080 --> 00:10:25.620
+Então, eu consigo até mesmo pesquisar
+isso, ó.
+
+00:10:25.640 --> 00:10:27.040
+Na pesquisa lá, eu consigo pegar.
+
+00:10:27.220 --> 00:10:28.420
+Quais são os livros...
+
+00:10:28.640 --> 00:10:28.980
+Ficção.
+
+00:10:29.400 --> 00:10:30.280
+Então, olha só.
+
+00:10:30.340 --> 00:10:31.580
+Você pode aninhar, né?
+
+00:10:31.760 --> 00:10:36.980
+As tags também, pra que você faça a
+pesquisa e rotule corretamente as
+
+00:10:36.980 --> 00:10:37.600
+coisas.
+
+00:10:37.920 --> 00:10:38.760
+Então, olha.
+
+00:10:38.800 --> 00:10:45.340
+Eu quero ver rapidamente notas que se
+referem a oportunidades.
+
+00:10:45.920 --> 00:10:47.940
+Notas que se referem a vendas.
+
+00:10:48.220 --> 00:10:50.080
+Notas que se referem a marketing.
+
+00:10:50.500 --> 00:10:53.920
+Então, o uso de tags é bastante, né?
+
+00:10:53.960 --> 00:10:54.460
+Pra isso.
+
+00:10:54.580 --> 00:10:57.540
+Pra essa rotulagem, classificação das
+notas.
+
+00:10:58.640 --> 00:10:59.440
+Lembrando que...
+
+00:10:59.440 --> 00:11:02.560
+Deixa eu mostrar pra vocês aqui como que
+a...
+
+00:11:04.140 --> 00:11:04.700
+Esse...
+
+00:11:04.700 --> 00:11:05.080
+Esse...
+
+00:11:05.080 --> 00:11:06.960
+Metadata aqui, né?
+
+00:11:07.040 --> 00:11:10.300
+De metadado aqui de tag armazenado.
+
+00:11:10.360 --> 00:11:11.620
+Vamos lá no Search Mode.
+
+00:11:11.900 --> 00:11:12.600
+Olha lá.
+
+00:11:13.000 --> 00:11:18.160
+No formato YAML, eu tenho lá tags, né?
+
+00:11:18.360 --> 00:11:21.140
+E resumo livros e livros lá, ó.
+
+00:11:21.140 --> 00:11:21.820
+Como uma lista.
+
+00:11:22.140 --> 00:11:22.700
+Entenderam?
+
+00:11:22.760 --> 00:11:24.340
+É assim que é armazenado.
+
+00:11:24.600 --> 00:11:25.620
+Vou voltar aqui.
+
+00:11:26.420 --> 00:11:28.160
+E tá lá a propriedade tags.
+
+00:11:28.640 --> 00:11:32.460
+E também aqui desse jeito aqui é
+armazenado assim mesmo, né?
+
+00:11:32.960 --> 00:11:37.340
+Melhor na próxima aula agora nós vamos
+falar um pouco sobre pastas.
+
+00:11:37.380 --> 00:11:41.680
+Você tá vendo que a informação tá sendo
+propriedades, metadata, né?
+
+00:11:42.000 --> 00:11:43.720
+Você tem aí as tags.
+
+00:11:43.900 --> 00:11:48.680
+Mais uma coisa poderosa pra alimentar o
+seu segundo cérebro.
+
+00:11:48.740 --> 00:11:50.540
+E como organizar isso, né?
+
+00:11:50.780 --> 00:11:54.440
+Talvez você tenha feito anotações em
+várias ferramentas.
+
+00:11:54.440 --> 00:11:55.940
+Nunca usou recurso assim, né?
+
+00:11:56.060 --> 00:11:58.260
+E você tá falando, nossa, pra que tanta
+coisa?
+
+00:11:58.640 --> 00:12:03.500
+Mas, vai por mim, você vai perceber o
+uso de tudo isso aqui junto, de todo
+
+00:12:03.500 --> 00:12:06.280
+esse conjunto de ferramentas, né?
+
+00:12:06.400 --> 00:12:08.640
+E lembra dos quatro passos do
+aprendizado.
+
+00:12:08.880 --> 00:12:13.300
+Vai se tornar tão natural pra você que
+vai ser viciante, que vai ser um hábito,
+
+00:12:13.320 --> 00:12:20.600
+que vai ser uma coisa assim muito
+virtuosa de você poder criar o seu
+
+00:12:20.600 --> 00:12:23.180
+segundo cérebro e se beneficiar com
+isso, tá?
+
+00:12:23.320 --> 00:12:27.180
+Então, na próxima aula nós vamos dar
+mais um passo que é, e aí?
+
+00:12:27.280 --> 00:12:28.600
+Eu armazeno minhas notas.
+
+00:12:28.600 --> 00:12:29.440
+Notas em pastas?
+
+00:12:29.500 --> 00:12:29.740
+Não?
+
+00:12:30.260 --> 00:12:31.820
+Pra que servem as pastas?
+
+00:12:31.840 --> 00:12:32.760
+E agora, né?
+
+00:12:33.560 --> 00:12:39.120
+Como que eu organizo as notas dentro
+desse conceito mais assim, físico, vamos
+
+00:12:39.120 --> 00:12:41.120
+dizer, de onde é armazenado, né?
+
+00:12:41.580 --> 00:12:43.640
+Então, na próxima aula a gente vai ver
+sobre isso.
+
+00:12:43.720 --> 00:12:45.240
+Um grande abraço, Mendar.
+
+00:12:45.300 --> 00:12:46.160
+Até a próxima aula.

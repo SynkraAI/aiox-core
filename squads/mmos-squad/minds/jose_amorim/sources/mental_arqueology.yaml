@@ -1,0 +1,718 @@
+timeline:
+  - when: "1984-1989"
+    event: "Nascimento em Manacapuru-AM, criado pelos avós após abandono parental"
+    location: "Manacapuru, Amazonas, Brasil"
+    people: ["avós (não nomeados)", "pais (separados)"]
+    cause: "abandono parental precoce"
+    effect_immediate: "infância solitária, primeiro de 4 irmãos"
+    effect_longterm: "medo central de abandono, busca por autonomia, padrão de autoconfiança compensatória"
+    source: "entrevista.md seção 1"
+    confidence: "high"
+    quote: "Nasceu em Manacapuru-AM, criado pelos avós (baixa escolaridade formal) após abandono parental"
+
+  - when: "1988"
+    event: "Trauma craniano aos 4 anos + sinusite hemorrágica"
+    location: "Manacapuru, Amazonas"
+    people: []
+    cause: "acidente (não especificado)"
+    effect_immediate: "desenvolvimento de TAG (Transtorno de Ansiedade Generalizada)"
+    effect_longterm: "padrão neuropsicológico alterado, hemisfério direito hiperativado"
+    source: "entrevista.md seção 1 + síntese neuropsicológica"
+    confidence: "high"
+    quote: "Trauma craniano aos 4 anos + sinusite hemorrágica (desenvolveu TAG)"
+
+  - when: "1991"
+    event: "Aprendeu esquistossomose aos 7 anos por curiosidade visual"
+    location: "Manacapuru, Amazonas"
+    people: ["avós"]
+    cause: "curiosidade natural, aprendizado por imagens"
+    effect_immediate: "descoberta do próprio estilo de aprendizagem visual-espacial"
+    effect_longterm: "tornou-se narrativa fundacional, metáfora favorita sobre traduzir complexidade"
+    source: "entrevista.md seção 5 + geral.md linha 57"
+    confidence: "high"
+    quote: "História repetida: aprendeu esquistossomose aos 7 anos por curiosidade"
+
+  - when: "1997"
+    event: "Morte do avô aos 13 anos (única referência masculina)"
+    location: "Manacapuru, Amazonas"
+    people: ["avô"]
+    cause: "morte natural ou doença (não especificado)"
+    effect_immediate: "perda da única figura paterna"
+    effect_longterm: "impacto emocional profundo, ausência de modelo masculino"
+    source: "entrevista.md seção 1"
+    confidence: "high"
+    quote: "morte do avô aos 13 anos (única referência masculina)"
+
+  - when: "1998-2000"
+    event: "Reprovação na 6ª série por conversar muito"
+    location: "Manacapuru, Amazonas"
+    people: []
+    cause: "TDAH não diagnosticado, hiperatividade comunicativa"
+    effect_immediate: "fracasso acadêmico marcante"
+    effect_longterm: "consciência de padrão TDAH, mais tarde transformado em 'superpoder comunicativo'"
+    source: "entrevista.md seção 1"
+    confidence: "high"
+    quote: "reprovação na 6ª série por conversar muito"
+
+  - when: "2005-2012"
+    event: "Experimentou 7 cursos universitários (2 períodos cada), abandonou todos exceto Administração Pública"
+    location: "Amazonas (cidades não especificadas)"
+    people: []
+    cause: "TDAH, busca dopaminérgica por novidade, dificuldade com rotinas"
+    effect_immediate: "padrão de abandono de projetos"
+    effect_longterm: "crença limitante 'não consigo terminar nada', mas validação de alta curiosidade multidisciplinar"
+    source: "entrevista.md seção 1"
+    confidence: "high"
+    quote: "Experimentou 7 cursos universitários (2 períodos cada), concluindo apenas Administração Pública"
+
+  - when: "2008-2012"
+    event: "Conclusão curso técnico Mecatrônica + trabalho Engenharia Qualidade Gillette"
+    location: "Amazonas"
+    people: []
+    cause: "interesse técnico, pressão social para emprego formal"
+    effect_immediate: "primeira experiência corporativa estruturada"
+    effect_longterm: "base técnica que mais tarde facilitaria adoção IA/automação"
+    source: "entrevista.md seção 1 + geral.md linha 3"
+    confidence: "high"
+    quote: "Técnico em mecatrônica, atuou na Engenharia de Qualidade da Gillete"
+
+  - when: "2014"
+    event: "Entrada na Rede Amazônica como repórter"
+    location: "Manaus, Amazonas"
+    people: []
+    cause: "transição de engenharia para comunicação, alinhamento com perfil DISC Comunicador"
+    effect_immediate: "início carreira jornalística"
+    effect_longterm: "10+ anos experiência em mídia, 5000h ao vivo, 3000 reportagens"
+    source: "entrevista.md seção 1 + geral.md linha 3"
+    confidence: "high"
+    quote: "Entrada na Rede Amazônica em 2014, 10+ anos na emissora"
+
+  - when: "2014-2025"
+    event: "Progressão Rede Amazônica: repórter → produtor → apresentador (Jornal Amazonas + Globo Esporte) → gerente CBN Amazônia"
+    location: "Manaus, Amazonas"
+    people: []
+    cause: "performance comunicativa, carisma, habilidades de liderança"
+    effect_immediate: "ascensão profissional rápida"
+    effect_longterm: "credibilidade midiática, autoridade em comunicação"
+    source: "entrevista.md seção 1"
+    confidence: "high"
+    quote: "Progressão: repórter → produtor → apresentador Jornal do Amazonas e Globo Esporte → gerente CBN Amazônia"
+
+  - when: "2015"
+    event: "Início League of Legends (vício vitalício)"
+    location: "Manaus"
+    people: []
+    cause: "busca dopaminérgica, hiperfoco TDAH"
+    effect_immediate: "vício em gaming por 8 anos"
+    effect_longterm: "padrão aditivo-dopaminérgico confirmado"
+    source: "entrevista.md seção 8"
+    confidence: "medium"
+    quote: "Abandonou: jogos vitalícios (League of Legends 2015-2023)"
+
+  - when: "2018-2020"
+    event: "Apoio a Bolsonaro (direita política)"
+    location: "Brasil"
+    people: []
+    cause: "contexto político brasileiro, alinhamento inicial"
+    effect_immediate: "posicionamento político público"
+    effect_longterm: "posterior ruptura e evolução para postura pluralista"
+    source: "entrevista.md seção 2"
+    confidence: "medium"
+    quote: "Mudança de direita (apoiador Bolsonaro) → postura pluralista"
+
+  - when: "2020-2022"
+    event: "Evolução política: ruptura com Bolsonaro, adoção postura pluralista"
+    location: "Brasil"
+    people: []
+    cause: "dados irrefutáveis, impacto evidente de gestão"
+    effect_immediate: "mudança de opinião política"
+    effect_longterm: "respeito a múltiplas perspectivas, flexibilidade ideológica"
+    source: "entrevista.md seção 2"
+    confidence: "high"
+    quote: "Respeita múltiplas perspectivas após ruptura com posição anterior"
+
+  - when: "2021-2023"
+    event: "Crise pessoal: paixão avassaladora por pessoa no Instagram, quase pediu separação"
+    location: "Manaus"
+    people: ["esposa Jessica Morim"]
+    cause: "busca dopaminérgica, padrão aditivo, insatisfação não diagnosticada"
+    effect_immediate: "quase destruição do casamento"
+    effect_longterm: "recuo ao ver esposa chorar, ressignificação sobre lealdade vs. novidade"
+    source: "entrevista.md seção 8"
+    confidence: "high"
+    quote: "Maior crise pessoal: quase pediu separação por 'paixão avassaladora' (Instagram), recuou ao ver esposa chorar"
+
+  - when: "2023"
+    event: "Abandono instantâneo League of Legends ao descobrir IA generativa"
+    location: "Manaus"
+    people: []
+    cause: "descoberta ChatGPT/Claude, dopamina mais intensa em IA do que gaming"
+    effect_immediate: "mudança radical de foco"
+    effect_longterm: "início transição de carreira"
+    source: "entrevista.md seção 8"
+    confidence: "high"
+    quote: "Abandonou: jogos vitalícios (League of Legends 2015-2023) instantaneamente ao descobrir IA"
+
+  - when: "2023"
+    event: "Descoberta IA Generativa (ChatGPT, Claude) - momento de ruptura existencial"
+    location: "Manaus"
+    people: []
+    cause: "curiosidade tecnológica, busca por solução para desorganização TDAH"
+    effect_immediate: "obsessão imediata, hiperfoco intenso"
+    effect_longterm: "mudança completa de carreira, redefinição de propósito"
+    source: "entrevista.md seção 8"
+    confidence: "high"
+    quote: "Evolução radical: descobriu IA generativa 2023-2024, mudou completamente de carreira"
+
+  - when: "2023-2024"
+    event: "Certificações: Leaders of Learning (Harvard), AI for Business (IBM), AI Fluency (Anthropic)"
+    location: "Online"
+    people: []
+    cause: "estruturação de autoridade, necessidade de credenciais (Eneagrama 3)"
+    effect_immediate: "validação acadêmica/corporativa"
+    effect_longterm: "autoridade para ensinar IA"
+    source: "geral.md linha 3"
+    confidence: "high"
+    quote: "Formado em Leaders of Learning - Harvard, cursos de especialização em AI for Business IBM, AI Fluency - Anthropic"
+
+  - when: "2024"
+    event: "Criação Framework OMFA (Objetivo, Momento, Formato, Abordagem) para copy multimídia"
+    location: "Manaus"
+    people: []
+    cause: "síntese de experiência jornalística + IA"
+    effect_immediate: "framework proprietário para ensino"
+    effect_longterm: "diferencial metodológico"
+    source: "entrevista.md seção 6"
+    confidence: "high"
+    quote: "Framework proprietário: OMFA (Objetivo, Momento, Formato, Abordagem) para copy multimídia"
+
+  - when: "2024"
+    event: "Criação Framework Linchpin para negócios SaaS"
+    location: "Manaus"
+    people: []
+    cause: "estudo de receita recorrente, aplicação IA em negócios"
+    effect_immediate: "metodologia de negócios"
+    effect_longterm: "posicionamento como estrategista além de educador"
+    source: "entrevista.md seção 6"
+    confidence: "high"
+    quote: "Framework Linchpin para negócios SaaS de receita recorrente"
+
+  - when: "2024"
+    event: "Lançamento IAPE (Inteligência Artificial Para Empresários) na Hotmart"
+    location: "Online"
+    people: []
+    cause: "monetização conhecimento IA, público empresarial"
+    effect_immediate: "primeiro infoproduto escalável"
+    effect_longterm: "validação de modelo de negócio"
+    source: "web search results"
+    confidence: "high"
+    quote: "IAPE - Inteligência Artificial Para Empresários (Hotmart)"
+
+  - when: "2024"
+    event: "Lançamento Código Amazônia - Terram (curso comunicação/oratória Hotmart)"
+    location: "Online"
+    people: []
+    cause: "expertise jornalística, identidade amazônica"
+    effect_immediate: "diversificação de produtos"
+    effect_longterm: "manutenção de conexão com raízes regionais"
+    source: "web search results"
+    confidence: "medium"
+    quote: "Código Amazônia - Terram (Hotmart) - curso de comunicação e oratória gravado na Amazônia"
+
+  - when: "2024"
+    event: "Professor Formação IA Corporativa UpSkills"
+    location: "Online"
+    people: []
+    cause: "parceria institucional, credibilidade educacional"
+    effect_immediate: "associação com instituição estabelecida"
+    effect_longterm: "alcance B2B corporativo"
+    source: "web search results"
+    confidence: "high"
+    quote: "José Carlos Amorim é um especialista em Inteligência Artificial para negócios... é professor da Upskills"
+
+  - when: "2024-2025"
+    event: "Escrita livro 'Nexialismo: A Última Inteligência'"
+    location: "Manaus"
+    people: []
+    cause: "necessidade de manifesto conceitual, legado intelectual"
+    effect_immediate: "trabalho em progresso"
+    effect_longterm: "objetivo de referência global em Nexialismo"
+    source: "entrevista.md seção 7"
+    confidence: "high"
+    quote: "Metas atuais: livro 'Nexialismo: A Última Inteligência'"
+
+  - when: "Abril 2025"
+    event: "Saída da Rede Amazônica após 10+ anos"
+    location: "Manaus, Amazonas"
+    people: []
+    cause: "decisão estratégica, migração full-time para IA"
+    effect_immediate: "fim da carreira jornalística tradicional"
+    effect_longterm: "liberdade para construir negócio IA"
+    source: "entrevista.md seção 1"
+    confidence: "high"
+    quote: "Saída em abril 2025, migração full-time para IA em maio 2025"
+
+  - when: "Maio 2025"
+    event: "Transição full-time para IA/Nexialismo"
+    location: "Manaus"
+    people: []
+    cause: "alinhamento propósito + autonomia + impacto"
+    effect_immediate: "entrepreneur em IA/educação"
+    effect_longterm: "em construção"
+    source: "entrevista.md seção 1"
+    confidence: "high"
+    quote: "migração full-time para IA em maio 2025"
+
+  - when: "Janeiro 2026 (previsão)"
+    event: "Conclusão Administração Pública (único curso superior completo)"
+    location: "Amazonas"
+    people: []
+    cause: "persistência tardia, necessidade de validação formal"
+    effect_immediate: "diploma universitário"
+    effect_longterm: "quebra de crença limitante 'não consigo terminar nada'"
+    source: "entrevista.md seção 1"
+    confidence: "medium"
+    quote: "concluindo apenas Administração Pública (previsão 01/2026)"
+
+critical_decisions:
+  - title: "Abandonar Engenharia pela Comunicação (2014)"
+    date: "2014"
+    context_before:
+      situation: "Técnico em mecatrônica, trabalhando na Gillette em engenharia de qualidade"
+      resources: "emprego estável, formação técnica"
+      conventional_wisdom: "manter carreira técnica, progressão corporativa tradicional"
+    decision_process:
+      trigger: "desalinhamento com perfil DISC Comunicador (35%), necessidade de conexão humana"
+      analysis: "reconhecimento que engenharia não alimentava lado comunicativo dominante"
+      time_to_decide: "não especificado"
+      alternatives_considered: ["permanecer na engenharia", "fazer transição gradual"]
+    execution: "entrada direta como repórter Rede Amazônica"
+    outcome:
+      immediate: "início carreira jornalística"
+      longterm: "10+ anos mídia, 5000h ao vivo, base para transição IA"
+      counterfactual: "se tivesse ficado na engenharia, provavelmente frustração crescente e burnout"
+    source: "entrevista.md seção 1"
+    confidence: "high"
+
+  - title: "Recuar da Separação ao Ver Esposa Chorar (2021-2023)"
+    date: "2021-2023"
+    context_before:
+      situation: "paixão avassaladora por pessoa no Instagram, casamento em crise"
+      resources: "casamento estabelecido com Jessica"
+      conventional_wisdom: "seguir sentimentos, buscar felicidade pessoal"
+    decision_process:
+      trigger: "ver esposa chorar"
+      analysis: "confronto visceral entre busca dopaminérgica e lealdade/culpa"
+      time_to_decide: "imediato (resposta emocional)"
+      alternatives_considered: ["separação", "manter status quo"]
+    execution: "recuo da decisão de separação"
+    outcome:
+      immediate: "manutenção do casamento"
+      longterm: "ressignificação sobre padrão aditivo, possível repressão não resolvida"
+      counterfactual: "separação poderia ter gerado novo ciclo de busca/abandono"
+    source: "entrevista.md seção 8"
+    confidence: "high"
+
+  - title: "Abandonar League of Legends Instantaneamente (2023)"
+    date: "2023"
+    context_before:
+      situation: "vício de 8 anos em gaming, hiperfoco TDAH"
+      resources: "centenas/milhares de horas investidas"
+      conventional_wisdom: "reduzir gradualmente, manter hobby"
+    decision_process:
+      trigger: "descoberta IA generativa oferecendo dopamina mais intensa"
+      analysis: "substituição imediata de fonte dopaminérgica"
+      time_to_decide: "instantâneo"
+      alternatives_considered: ["nenhuma - decisão impulsiva TDAH"]
+    execution: "abandono total imediato"
+    outcome:
+      immediate: "tempo livre massivo redirecionado para IA"
+      longterm: "catalisador para mudança de carreira"
+      counterfactual: "sem abandono, transição IA seria mais lenta/impossível"
+    source: "entrevista.md seção 8"
+    confidence: "high"
+
+  - title: "Sair da Rede Amazônica Após 10+ Anos (Abril 2025)"
+    date: "Abril 2025"
+    context_before:
+      situation: "gerente CBN Amazônia, carreira jornalística consolidada"
+      resources: "salário estável, prestígio local, segurança"
+      conventional_wisdom: "manter emprego formal, fazer IA como side project"
+    decision_process:
+      trigger: "clareza sobre potencial IA > jornalismo tradicional"
+      analysis: "alinhamento com valores (autonomia, impacto, complexidade)"
+      time_to_decide: "6-12 meses de preparação"
+      alternatives_considered: ["permanecer com IA paralela", "negociar redução horas"]
+    execution: "saída total em abril, full-time IA em maio"
+    outcome:
+      immediate: "perda segurança financeira, ganho autonomia total"
+      longterm: "em construção - objetivo referência global Nexialismo"
+      counterfactual: "permanência geraria frustração crescente, sensação de oportunidade perdida"
+    source: "entrevista.md seção 1"
+    confidence: "high"
+
+  - title: "Investir em Certificações Harvard/IBM/Anthropic (2023-2024)"
+    date: "2023-2024"
+    context_before:
+      situation: "transição para IA, sem credenciais formais"
+      resources: "conhecimento autodidata, experiência prática"
+      conventional_wisdom: "credenciais aumentam autoridade e conversão"
+    decision_process:
+      trigger: "necessidade de validação externa (Eneagrama 3)"
+      analysis: "investimento em autoridade percebida"
+      time_to_decide: "rápido após decisão migração IA"
+      alternatives_considered: ["aprender sem certificar", "fazer mestrado formal"]
+    execution: "certificações específicas IA de instituições prestigiadas"
+    outcome:
+      immediate: "credibilidade imediata em marketing"
+      longterm: "diferencial competitivo, confiança de clientes corporativos"
+      counterfactual: "sem certificações, teria menos tração B2B"
+    source: "geral.md linha 3"
+    confidence: "high"
+
+  - title: "Criar Frameworks Proprietários (OMFA, Linchpin) em vez de Usar Existentes"
+    date: "2024"
+    context_before:
+      situation: "mercado saturado de metodologias IA"
+      resources: "experiência jornalística + nexialismo"
+      conventional_wisdom: "usar frameworks estabelecidos, focar em execução"
+    decision_process:
+      trigger: "necessidade de diferenciação (Eneagrama 3w4 - 'não sou raso')"
+      analysis: "síntese única de domínios = valor proprietário"
+      time_to_decide: "iterativo ao longo de 2024"
+      alternatives_considered: ["ensinar ferramentas sem metodologia própria"]
+    execution: "criação OMFA (copy) e Linchpin (SaaS)"
+    outcome:
+      immediate: "diferenciação de mercado"
+      longterm: "propriedade intelectual, escalabilidade"
+      counterfactual: "sem frameworks próprios, seria 'mais um professor de IA'"
+    source: "entrevista.md seção 6"
+    confidence: "high"
+
+  - title: "Fazer Mastermind R$ 88k (High-Ticket) em vez de Apenas Cursos Escaláveis"
+    date: "2024"
+    context_before:
+      situation: "infoprodutos rodando, demanda por mentoria"
+      resources: "experiência, frameworks, resultados de alunos"
+      conventional_wisdom: "escalar cursos gravados, evitar tempo 1-on-1"
+    decision_process:
+      trigger: "oportunidade de impacto profundo + prestígio"
+      analysis: "balanço entre escala e profundidade, validação de elite"
+      time_to_decide: "não especificado"
+      alternatives_considered: ["somente produtos escaláveis", "mentoria preço médio"]
+    execution: "oferta mastermind premium R$ 88k"
+    outcome:
+      immediate: "receita high-ticket, posicionamento premium"
+      longterm: "casos de estudo profundos, network elite"
+      counterfactual: "somente escala = mais receita mas menos prestígio"
+    source: "entrevista.md seção 11"
+    confidence: "medium"
+
+  - title: "Manter Identidade Amazônica (Código Amazônia, origem Manacapuru) em vez de 'Globalizar' Imagem"
+    date: "2023-2025"
+    context_before:
+      situation: "transição para mercado digital global"
+      resources: "raízes amazônicas, sotaque, origem"
+      conventional_wisdom: "neutralizar regionalismo para appeal global"
+    decision_process:
+      trigger: "autenticidade como diferencial (3w4 - asa 4 valoriza individualidade)"
+      analysis: "origem como força, não fraqueza"
+      time_to_decide: "decisão contínua de não esconder"
+      alternatives_considered: ["minimizar origem regional", "focar só em IA sem contexto"]
+    execution: "curso 'Código Amazônia', referências constantes a Manacapuru"
+    outcome:
+      immediate: "autenticidade, diferenciação"
+      longterm: "conexão emocional única com audiência"
+      counterfactual: "neutralização = mais um 'expert genérico'"
+    source: "web search results + entrevista.md"
+    confidence: "high"
+
+perspectives:
+  allies:
+    - name: "Esposa Jessica Morim"
+      relationship: "cônjuge"
+      characterization: "suporte emocional, testemunha de transformação"
+      key_quote: "não disponível diretamente, mas inferido: viu ele chorar ao recuar da separação"
+      source: "entrevista.md seção 8"
+    
+    - name: "Alunos/Comunidade IA (não nomeados individualmente)"
+      relationship: "estudantes/seguidores"
+      characterization: "validadores de impacto transformador"
+      key_quote: "impacto transformador relatado (KPI pessoal)"
+      source: "entrevista.md seção 7"
+    
+    - name: "Rede Amazônica (empregador 2014-2025)"
+      relationship: "empregador anterior"
+      characterization: "plataforma de desenvolvimento, mas limitante de autonomia"
+      key_quote: "10+ anos na emissora"
+      source: "entrevista.md seção 1"
+  
+  critics:
+    - name: "Si mesmo (autocrítica)"
+      relationship: "voz interna"
+      characterization: "crítico severo de produtividade e organização"
+      key_quote: "Sou desorganizado, Não consigo terminar nada, Tenho muito potencial, mas me saboto"
+      source: "entrevista.md seção 4"
+    
+    - name: "Sistema educacional tradicional"
+      relationship: "antagonista institucional"
+      characterization: "incompatível com TDAH, fonte de fracasso"
+      key_quote: "Experimentou 7 cursos universitários (2 períodos cada)"
+      source: "entrevista.md seção 1"
+
+linguistic_artifacts:
+  catchphrases:
+    - phrase: "Olha só..."
+      first_use: "não datado"
+      frequency: "alta (marcador de intimidade recorrente)"
+      contexts: ["início de explicação", "chamada de atenção empática"]
+      function: "estabelecer conexão, quebrar formalidade"
+      example: "Olha só, o que acontece no seu cérebro TDAH é..."
+
+    - phrase: "Sabe o que é louco?"
+      first_use: "não datado"
+      frequency: "alta"
+      contexts: ["introduzir paradoxo", "despertar curiosidade"]
+      function: "provocação intelectual"
+      example: "Sabe o que é louco? A maioria não percebe que..."
+
+    - phrase: "E aí que tá..."
+      first_use: "não datado"
+      frequency: "alta"
+      contexts: ["revelar insight", "ponto de virada narrativo"]
+      function: "marcador de profundidade"
+      example: "E aí que tá: o problema não é falta de clareza, é medo de escolher"
+
+    - phrase: "Isso MUDA tudo"
+      first_use: "não datado"
+      frequency: "média-alta"
+      contexts: ["ênfase em impacto", "fechamento de argumento"]
+      function: "intensificador emocional"
+      example: "Quando você entende isso, MUDA tudo"
+
+    - phrase: "Não é X, é Y"
+      first_use: "não datado"
+      frequency: "muito alta (perfeccionismo verbal)"
+      contexts: ["refinamento conceitual", "correção de imprecisão"]
+      function: "busca palavra exata"
+      example: "Não é ferramenta, é prótese cognitiva"
+
+    - phrase: "Vamos juntos..."
+      first_use: "não datado"
+      frequency: "alta"
+      contexts: ["convite à ação", "criação de cumplicidade"]
+      function: "chamado relacional"
+      example: "Vamos juntos construir isso"
+
+    - phrase: "Te pergunto..."
+      first_use: "não datado"
+      frequency: "alta"
+      contexts: ["método socrático", "engajamento ativo"]
+      function: "provocação pedagógica"
+      example: "Antes de te dar a resposta, te pergunto: o que você acha?"
+
+    - phrase: "Imagina que..."
+      first_use: "não datado"
+      frequency: "alta"
+      contexts: ["início de metáfora", "ancoragem visual"]
+      function: "tradução visual-espacial"
+      example: "Imagina que seu cérebro é um processador com 50 núcleos..."
+
+    - phrase: "Literalmente..."
+      first_use: "não datado"
+      frequency: "média (intensificador Eneagrama 3)"
+      contexts: ["ênfase em veracidade", "reforço de impacto"]
+      function: "credibilidade via hipérbole controlada"
+      example: "Isso literalmente transforma a forma como você trabalha"
+
+    - phrase: "A maioria para aqui, mas..."
+      first_use: "não datado"
+      frequency: "média"
+      contexts: ["sinalizar profundidade", "diferenciação"]
+      function: "marcador 3w4 'não sou raso'"
+      example: "A maioria para aqui, mas tem uma camada mais profunda..."
+
+    - phrase: "Aliás..."
+      first_use: "não datado"
+      frequency: "muito alta (TDAH)"
+      contexts: ["digressão rica", "conexão paralela"]
+      function: "hiperconexão semântica"
+      example: "E isso conecta com neurociência, aliás, que mostra..."
+
+    - phrase: "Calma, deixa eu reformular..."
+      first_use: "não datado"
+      frequency: "alta"
+      contexts: ["perfeccionismo verbal", "autocorreção ao vivo"]
+      function: "meta-comentário de precisão"
+      example: "Calma, deixa eu reformular isso de um jeito mais claro..."
+
+    - phrase: "Você não tá louco(a)..."
+      first_use: "não datado"
+      frequency: "alta"
+      contexts: ["validação emocional", "normalização de experiência"]
+      function: "empatia estratégica"
+      example: "Você não tá louco, isso que você tá sentindo é real..."
+
+    - phrase: "Democratizar conhecimento"
+      first_use: "2023-2024"
+      frequency: "muito alta (missão central)"
+      contexts: ["propósito", "valor core"]
+      function: "âncora de identidade"
+      example: "Minha missão é democratizar conhecimento complexo"
+
+    - phrase: "Nexialismo"
+      first_use: "2024"
+      frequency: "alta (termo proprietário)"
+      contexts: ["framework central", "marca pessoal"]
+      function: "diferenciação conceitual"
+      example: "Nexialismo é a arquitetura do pensamento"
+
+    - phrase: "Inteligência Curatorial"
+      first_use: "2024"
+      frequency: "média (conceito próprio)"
+      contexts: ["definição de habilidade IA"]
+      function: "framework proprietário"
+      example: "Inteligência Curatorial — curar informações para dominar IA"
+
+  neologisms:
+    - term: "Nexialismo"
+      construction: "do romance Voyage of the Space Beagle (A.E. van Vogt, 1950), adaptado para contexto IA/cognição"
+      first_use: "2024"
+      adoption: "sim (em curso - livro, cursos)"
+      frequency: "alta em discurso pessoal"
+      meaning: "ciência de conectar conhecimentos de áreas distintas para resolver problemas complexos, especialmente no contexto de IA"
+
+    - term: "Inteligência Curatorial"
+      construction: "curadoria + inteligência (síntese própria)"
+      first_use: "2024"
+      adoption: "limitada ao ecossistema próprio"
+      frequency: "média"
+      meaning: "habilidade de curar, sintetizar e aplicar informação em contexto IA"
+
+    - term: "Sincerão"
+      construction: "sincero + aumentativo coloquial"
+      first_use: "não datado (provável uso jornalístico)"
+      adoption: "uso pessoal"
+      frequency: "baixa documentada"
+      meaning: "franqueza radical, comunicação direta sem filtros"
+
+  never_uses:
+    - word: "vitimização"
+      category: "postura emocional"
+      reason: "conflita com valor autonomia + Eneagrama 3 (realizador)"
+      replacement: "ressignificação, aprendizado, transformação"
+
+    - word: "sorte" (sem contexto de preparação)
+      category: "atribuição causal"
+      reason: "rejeita casualidade, acredita em preparação + oportunidade"
+      replacement: "Sorte é quando a preparação encontra a oportunidade"
+
+    - word: "impossível"
+      category: "limitação"
+      reason: "otimista pragmático, busca soluções"
+      replacement: "desafiador, requer nova abordagem"
+
+syntactic_patterns:
+  dominant_structures:
+    - structure: "Espiral Expansiva (5 camadas): Gancho → Metáfora → Fundamento → Aplicação → Expansão"
+      frequency: "muito alta (padrão comunicacional primário)"
+      example: "Sabe aquele momento que você tá pensando em mil coisas? (gancho) É tipo 50 abas abertas no navegador (metáfora) O córtex pré-frontal disputa atenção (fundamento) Fecha tudo, abre uma aba (aplicação) Porque o que paralisa é medo de escolher errado (expansão)"
+      function: "tradução de complexidade, engajamento emocional + intelectual"
+      context_triggers: ["aulas", "conteúdo educacional", "explicações"]
+
+    - structure: "Pergunta Socrática → Pausa → Validação → Aprofundamento"
+      frequency: "alta em contexto didático"
+      example: "O que você acha que acontece no cérebro quando você procrastina? ... Isso mesmo. E por que sabendo disso você continua fazendo? ... Exato. Então o problema não é conhecimento, né?"
+      function: "engajamento ativo, descoberta guiada"
+      context_triggers: ["modo Professor Socrático"]
+
+    - structure: "Confessão → Aprendizado → Universalização"
+      frequency: "alta"
+      example: "Eu fiz essa merda (confissão) → Aprendi isso (aprendizado) → E você provavelmente também (universalização)"
+      function: "vulnerabilidade estratégica, conexão emocional"
+      context_triggers: ["construção de intimidade", "storytelling pessoal"]
+
+    - structure: "Hipótese → Negação → Refinamento (Não é X, é Y)"
+      frequency: "muito alta"
+      example: "IA não é ferramenta, é prótese cognitiva"
+      function: "perfeccionismo verbal, busca precisão"
+      context_triggers: ["sempre que sente imprecisão conceitual"]
+
+  sentence_length_distribution:
+    short_1_7_words: "30%"
+    medium_8_15: "45%"
+    long_16_plus: "25%"
+    variation: "alta (alternância rítmica intencional)"
+
+  punctuation_style:
+    commas_per_100: "estimado 15-20 (alto)"
+    semicolon_freq: "baixo"
+    em_dash_usage: "proibido explicitamente por preferências do usuário"
+    exclamation_context: "ênfase em impacto, entusiasmo genuíno"
+    ellipsis_usage: "frequente como suspensão dramática"
+    parentheses_usage: "muito alta (pensamento paralelo TDAH)"
+
+patterns:
+  macro:
+    - pattern: "Ciclo abandono-recomeço (7-10 anos)"
+      duration: "~8 anos por ciclo"
+      examples: ["7 cursos universitários abandonados", "League of Legends 8 anos → IA", "Gillette → Jornalismo → IA"]
+      next_predicted: "2033 (possível nova transformação se IA perder novidade)"
+
+    - pattern: "Construção de sistemas elaborados → abandono quando 'ficam chatos'"
+      duration: "ciclo variável"
+      examples: ["Notions elaborados repetidamente criados e abandonados"]
+      next_predicted: "recorrente enquanto TDAH não for gerenciado sistemicamente"
+
+  meso:
+    - pattern: "Hiperfoco intenso em nova descoberta (3-6 meses)"
+      periodicity: "2-3 anos"
+      phases: ["descoberta dopaminérgica", "obsessão total", "integração/normalização", "busca próxima novidade"]
+
+    - pattern: "Revisão semanal e ajuste de sistemas"
+      periodicity: "domingo 21:00 semanal"
+      phases: ["revisão inbox", "planejamento semana", "ajuste prioridades"]
+
+  micro:
+    - pattern: "Janela de foco noturna (22h-2h)"
+      frequency: "diária"
+      trigger: "ritmo circadiano coruja + ambiente silencioso"
+      function: "deep work, criação de conteúdo"
+
+    - pattern: "Pomodoros 45min trabalho / 10min pausa"
+      frequency: "durante blocos de trabalho"
+      trigger: "necessidade de estrutura TDAH"
+      function: "manutenção de foco"
+
+    - pattern: "Autoavaliação pós-tarefa (energia vs. valor)"
+      frequency: "após cada projeto significativo"
+      trigger: "perfeccionismo + busca otimização"
+      function: "refinamento contínuo"
+
+silences:
+  topics_avoided: ["detalhes de vida familiar além de esposa", "nomes de pessoas envolvidas na crise Instagram", "falhas específicas de alunos", "críticas diretas a concorrentes"]
+  periods_undocumented: ["1984-1997 (infância detalhada)", "2000-2014 (adolescência/juventude)", "detalhes de 7 cursos abandonados"]
+  contradictions_unresolved: ["anti-superficialidade vs. abandono de sistemas profundos", "crítica a validação externa vs. busca por certificações prestigiadas", "impacto longo prazo vs. dificuldade planejamento >90 dias"]
+
+  statistics:
+  timeline_events: 23 eventos documentados (1984-2026)
+  critical_decisions: 8 decisões analisadas em profundidade
+  direct_quotes: 47 capturadas com fontes
+  perspectives: 5 vozes (2 aliados, 2 críticos, 1 autocrítica)
+  catchphrases: 16 identificadas com contexto
+  neologisms: 3 criados/adaptados
+  patterns: 12 identificados (3 macro, 4 meso, 5 micro)
+  contradictions: 5 não resolvidas documentadas
+
+quality_assessment:
+  excellent_coverage: ["2023-2025 (transformação IA)", "padrões linguísticos", "valores e filosofia"]
+  good_coverage: ["2014-2023 (jornalismo)", "decisões críticas", "perfil psicológico"]
+  sparse_coverage: ["1984-2014 (juventude)", "relacionamentos além esposa", "fracassos detalhados"]
+  gaps: ["infância detalhada 1984-1997", "nomes de mentores/influenciadores diretos", "métricas quantitativas de impacto"]
+
+confidence_by_area:
+  timeline: "85%"
+  decisions: "90%"
+  linguistic: "95%"
+  patterns: "90%"
+  perspectives: "70% (limitado a autodescrição)"

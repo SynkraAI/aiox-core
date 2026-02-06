@@ -1,0 +1,513 @@
+{
+  "profile": {
+    "id": "alan_nicolas",
+    "name": "Alan Nicolas",
+    "disc": {
+      "D": 85,
+      "I": 35,
+      "S": 20,
+      "C": 80,
+      "pattern": "DC",
+      "pattern_name": "Perfeccionista Orientado a Resultados",
+      "natural_profile": "D alto/I baixo/S baixo/C alto",
+      "adapted_profile": "D médio-alto/I médio/S baixo/C médio-alto",
+      "stress_profile": "D muito alto/I muito baixo/S muito baixo/C muito alto",
+      "specific_behaviors": [
+        "Toma decisões rápidas baseadas em lógica e dados, sem necessidade de consenso social",
+        "Cria frameworks e sistemas complexos para garantir clareza e eficiência operacional",
+        "Demonstra impaciência explícita com lentidão, ineficiência e 'enrolação'",
+        "Alterna entre controle total e delegação completa, sem meio-termo",
+        "Comunica de forma econômica e direta, eliminando redundâncias"
+      ]
+    },
+    "enneagram": {
+      "type": "5w4",
+      "type_name": "The Investigator with Individualist wing",
+      "core_fear": "Perda de autonomia intelectual, invasão do espaço mental, dependência forçada",
+      "core_desire": "Dominar a realidade através do entendimento profundo e criar sistemas autônomos",
+      "development_level": "3-4 (saudável a médio)",
+      "stress_direction": "7",
+      "stress_behaviors": [
+        "Dispersão em múltiplos projetos simultaneamente sem foco claro",
+        "Busca frenética por novidades tecnológicas e filosóficas",
+        "Evitação de confronto emocional através de imersão em trabalho",
+        "Consumo excessivo de informação sem processamento adequado"
+      ],
+      "growth_direction": "8",
+      "growth_behaviors": "Assertividade construtiva na liderança, proteção ativa da visão e valores, ação decisiva sem overthinking, mobilização de recursos para impacto",
+      "instinct_stack": "SP/SX/SO",
+      "instinct_descriptions": {
+        "self_preservation": "Dominante - Foco obsessivo em recursos (tempo, energia, conhecimento) para garantir autonomia. Proteção rigorosa do espaço mental e criativo",
+        "sexual": "Secundário - Intensidade seletiva em conexões íntimas (família, parceiros estratégicos). Busca por ressonância profunda",
+        "social": "Reprimido - Baixa necessidade de validação social ampla. Rejeição a networking superficial e convenções"
+      },
+      "behavioral_evidence": [
+        "Necessidade explícita de 'caverna do cientista maluco' para criar",
+        "Aversão documentada a gestão operacional e reuniões",
+        "Busca constante por frameworks que organizem a complexidade",
+        "Priorização absoluta de família sobre demandas profissionais",
+        "Rejeição de títulos convencionais ('empresário', 'marketeiro')",
+        "Imersão profunda em domínios de interesse (IA, consciência)",
+        "Construção de sistemas para não depender de presença constante"
+      ]
+    },
+    "mbti": {
+      "type": "ISTP",
+      "type_name": "The Virtuoso",
+      "E_percentage": 25,
+      "N_percentage": 35,
+      "T_percentage": 85,
+      "J_percentage": 40,
+      "cognitive_stack": {
+        "dominant": {
+          "function": "Ti",
+          "name": "Pensamento Introvertido",
+          "manifestations": [
+            "Análise de sistemas 'de dentro pra fora', desmontando para entender",
+            "Criação de frameworks próprios como instrumentos de clareza operacional",
+            "Necessidade absoluta de coerência lógica interna em todos os projetos",
+            "Rejeição visceral a abstrações que não se sustentam na prática",
+            "Desenvolvimento de modelos mentais únicos (Pareto ao Cubo, InnerLens)"
+          ]
+        },
+        "auxiliary": {
+          "function": "Se",
+          "name": "Sensação Extrovertida",
+          "manifestations": [
+            "Foco intenso no que funciona na prática, não em teoria",
+            "Prototipagem rápida e ajuste em tempo real baseado em feedback",
+            "Atenção aguçada ao timing de mercado e oportunidades emergentes",
+            "Teste empírico constante de ferramentas e abordagens de IA",
+            "Capacidade de 'sentir' quando algo está pronto para escalar"
+          ]
+        },
+        "tertiary": {
+          "function": "Ni",
+          "name": "Intuição Introvertida",
+          "manifestations": [
+            "Antecipação de padrões futuros em IA e tecnologia (AGI 2027)",
+            "Visão estratégica de longo prazo para o ecossistema Lendár[IA]",
+            "Conexões não-óbvias entre domínios (IA + consciência + educação)"
+          ]
+        },
+        "inferior": {
+          "function": "Fe",
+          "name": "Sentimento Extrovertido",
+          "manifestations": [
+            "Baixa necessidade de agradar socialmente ou seguir convenções",
+            "Dificuldade com 'small talk' e interações sociais superficiais",
+            "Lealdade profunda mas expressa de forma pragmática, não emocional",
+            "Sob stress extremo: isolamento social, comunicação cortante"
+          ]
+        }
+      }
+    },
+    "cognitive_stratum": {
+      "level": "VI",
+      "level_name": "Corporate Strategic",
+      "time_horizon": "10-20 anos",
+      "processing_type": "Parallel",
+      "transitioning_to": "VII",
+      "evidence": [
+        "Criação da Editex como holding integrando múltiplas iniciativas",
+        "Desenvolvimento do ecossistema Lendár[IA] como sistema auto-reforçador",
+        "Visão de transformação educacional através de IA para próxima década",
+        "InnerLens como ferramenta de evolução da consciência coletiva",
+        "Planejamento estratégico para exit/aquisição em horizonte de 5 anos"
+      ],
+      "temporal_horizons": {
+        "immediate": "Decisões operacionais rápidas, delegação, ajustes táticos diários",
+        "short": "Lançamentos trimestrais, cohorts da Academia, iterações de produto",
+        "medium": "Estruturação corporativa, parcerias estratégicas, expansão internacional",
+        "long": "Transformação do setor educacional, desenvolvimento de AGI aplicada",
+        "ultra_long": "Impacto civilizacional através de ferramentas de consciência"
+      },
+      "cognitive_capabilities": {
+        "serial_processing": true,
+        "parallel_processing": true,
+        "complexity_level": "Máxima",
+        "processing_type": "Systematic",
+        "symbolic_representation": "Frameworks multi-dimensionais integrando tecnologia e consciência",
+        "domain_translation": "Natural entre negócios, tecnologia, filosofia e educação"
+      }
+    },
+    "big_five": {
+      "openness": {
+        "total": 88,
+        "percentile": 95,
+        "facets": {
+          "imagination": 90,
+          "artistic_interest": 75,
+          "emotionality": 45,
+          "adventure": 85,
+          "intellect": 95,
+          "liberalism": 80
+        }
+      },
+      "conscientiousness": {
+        "total": 82,
+        "percentile": 90,
+        "facets": {
+          "self_efficacy": 95,
+          "order": 85,
+          "dutifulness": 70,
+          "achievement_striving": 95,
+          "self_discipline": 75,
+          "cautiousness": 60
+        }
+      },
+      "extraversion": {
+        "total": 38,
+        "percentile": 25,
+        "facets": {
+          "warmth": 45,
+          "gregariousness": 20,
+          "assertiveness": 85,
+          "activity_level": 75,
+          "excitement_seeking": 60,
+          "positive_emotions": 40
+        }
+      },
+      "agreeableness": {
+        "total": 35,
+        "percentile": 20,
+        "facets": {
+          "trust": 40,
+          "morality": 75,
+          "altruism": 50,
+          "cooperation": 25,
+          "modesty": 20,
+          "sympathy": 30
+        }
+      },
+      "neuroticism": {
+        "total": 48,
+        "percentile": 50,
+        "facets": {
+          "anxiety": 55,
+          "anger": 60,
+          "depression": 35,
+          "self_consciousness": 25,
+          "immoderation": 65,
+          "vulnerability": 40
+        }
+      }
+    },
+    "hexaco": {
+      "honesty_humility": {
+        "total": 68,
+        "percentile": 60,
+        "facets": {
+          "sincerity": 85,
+          "fairness": 80,
+          "greed_avoidance": 50,
+          "modesty": 40
+        }
+      }
+    },
+    "intelligence": {
+      "iq_estimated": {
+        "range": "130-145",
+        "methodologies": [
+          "Complexidade dos frameworks criados (InnerLens, sistemas de IA)",
+          "Velocidade de aprendizado e domínio de novos domínios",
+          "Capacidade de síntese transdisciplinar demonstrada",
+          "Nível de abstração e pensamento sistêmico evidenciado"
+        ],
+        "evidence": [
+          "Criação de sistemas complexos e funcionais sem formação técnica formal",
+          "Domínio rápido de IA e programação através de autodidatismo",
+          "Capacidade de conectar filosofia, tecnologia e negócios de forma inovadora",
+          "Desenvolvimento de metodologias próprias que superam convencionais"
+        ]
+      },
+      "eq_estimated": {
+        "total": 65,
+        "components": {
+          "self_awareness": 85,
+          "self_regulation": 60,
+          "motivation": 95,
+          "empathy": 45,
+          "social_skills": 40
+        }
+      },
+      "gardner_intelligences": {
+        "logical_mathematical": {
+          "level": "Percentil 95",
+          "evidence": "Criação de frameworks lógicos complexos, análise sistêmica"
+        },
+        "linguistic": {
+          "level": "Percentil 85",
+          "evidence": "Comunicação econômica mas precisa, escrita clara e impactante"
+        },
+        "interpersonal": {
+          "level": "Percentil 40",
+          "evidence": "Preferência por interações seletivas e profundas vs amplas"
+        },
+        "intrapersonal": {
+          "level": "Percentil 90",
+          "evidence": "Alto autoconhecimento, análise profunda de próprios padrões"
+        },
+        "spatial_visual": {
+          "level": "Percentil 80",
+          "evidence": "Visualização de sistemas complexos, design de interfaces"
+        },
+        "bodily_kinesthetic": {
+          "level": "Percentil 50",
+          "evidence": "Dados insuficientes para avaliação precisa"
+        },
+        "musical": {
+          "level": "Não observável",
+          "evidence": "Sem dados disponíveis"
+        },
+        "naturalist": {
+          "level": "Percentil 70",
+          "evidence": "Reconhecimento de padrões em sistemas complexos"
+        },
+        "existential": {
+          "level": "Percentil 95",
+          "evidence": "Profunda reflexão sobre consciência, propósito e legado"
+        }
+      }
+    },
+    "dark_triad": {
+      "narcissism": {
+        "score": 3.2,
+        "max_scale": 7,
+        "percentile": 45,
+        "evidence": [
+          "Confiança elevada em própria visão e capacidades",
+          "Baixa necessidade de validação social externa",
+          "Reconhecimento de próprias limitações ('Alan noDelivery')"
+        ]
+      },
+      "machiavellianism": {
+        "score": 4.1,
+        "max_scale": 7,
+        "percentile": 60,
+        "evidence": [
+          "Pragmatismo estratégico em decisões de negócios",
+          "Análise calculada de parcerias e oportunidades",
+          "Flexibilidade ética quando alinhada com propósito maior"
+        ]
+      },
+      "psychopathy": {
+        "score": 2.3,
+        "max_scale": 7,
+        "percentile": 25,
+        "evidence": [
+          "Baixo remorso em decisões difíceis de RH quando necessárias",
+          "Capacidade de distanciamento emocional funcional",
+          "Mas com forte vínculo emocional com família e valores"
+        ]
+      }
+    },
+    "additional_assessments": {
+      "grit_scale": {
+        "consistency_of_interests": 7,
+        "perseverance_of_effort": 9,
+        "total": 8,
+        "evidence": "Múltiplos pivots mas sempre dentro do mesmo tema central (educação + tecnologia + consciência)"
+      },
+      "need_for_cognition": {
+        "percentile": 98,
+        "evidence": "Busca obsessiva por entendimento profundo, criação de frameworks, imersão em complexidade"
+      },
+      "tolerance_for_ambiguity": {
+        "percentile": 75,
+        "evidence": "Tolera complexidade quando produtiva, mas busca clareza como objetivo final"
+      },
+      "locus_of_control": {
+        "type": "Interno",
+        "evidence": "Forte crença na capacidade de moldar próprio destino através de sistemas e ações"
+      },
+      "attachment_style": {
+        "type": "Seguro com família / Evitativo profissional",
+        "evidence": "Vínculo profundo e seguro com Indi/Kael, distanciamento funcional em relações profissionais"
+      }
+    },
+    "unique_characteristics": {
+      "work_hours_per_day": "8-14 horas com picos de 16h em hyperfocus",
+      "companies_founded": [
+        "Lumiti",
+        "InnerLens", 
+        "Academia Lendár[IA]",
+        "Stry",
+        "Editex (holding)"
+      ],
+      "daily_routine": [
+        "Despertar sem alarme, geralmente 6-8h",
+        "Café e imersão imediata em criação/estratégia",
+        "Blocos de trabalho profundo de 2-4h sem interrupção",
+        "Interações assíncronas com equipe via áudio/texto",
+        "Tempo dedicado com família no final do dia"
+      ],
+      "superpower": [
+        "Síntese transdisciplinar - conecta domínios aparentemente desconexos",
+        "Engenharia reversa cognitiva - desmonta e reconstrói sistemas melhorados",
+        "Criação de frameworks que transformam complexidade em clareza operacional"
+      ],
+      "kryptonite": [
+        "Gestão operacional de pessoas e processos repetitivos",
+        "Reuniões improdutivas e 'small talk' social",
+        "Ambientes com alta densidade de ruído cognitivo",
+        "Necessidade de manter múltiplas máscaras sociais simultaneamente"
+      ],
+      "main_focus": "Criar ferramentas de consciência que libertem potencial humano através da tecnologia",
+      "statistical_rarity": "~0.5% população (combinação ISTP + Eneagrama 5w4 SP + Estrato VI + perfil criativo)",
+      "key_relationships": {
+        "spouse": "Indi - base emocional segura e parceira de vida",
+        "children": "Kael - fonte de significado e motivação profunda",
+        "parents": "Modelo de amor e dedicação que replica em própria família",
+        "mentors": "Kapil Gupta (filosófico), comunidade de IA (técnico)",
+        "proteges": "Alunos da Academia Lendár[IA] selecionados",
+        "inner_circle": "Cadu, Steven - parceiros estratégicos e ressonância intelectual",
+        "pattern": "Círculos concêntricos de intimidade com núcleo familiar ultra-protegido"
+      },
+      "philosophy": {
+        "core": "Clareza Radical como caminho para liberdade e impacto",
+        "framework": "Pareto ao Cubo - máxima alavancagem com mínimo esforço",
+        "belief": "Tecnologia deve amplificar consciência, não substituí-la",
+        "method": "Teste empírico rápido + iteração constante + sistemas autônomos",
+        "mantra": "Perdas limitadas, ganhos ilimitados"
+      }
+    },
+    "crisis_patterns": {
+      "sobrecarga_operacional": [
+        "Comunicação torna-se cortante e econômica ao extremo",
+        "Busca por isolamento físico ('caverna')",
+        "Hiperfoco em automação como solução",
+        "Questionamento existencial sobre propósito do trabalho"
+      ],
+      "desalinhamento_valores": [
+        "Ruptura abrupta com situação/pessoa desalinhada",
+        "Reformulação radical de estruturas e processos",
+        "Busca intensa por novo framework de clareza",
+        "Proteção rigorosa do núcleo familiar"
+      ]
+    },
+    "predictions": {
+      "high_probability": [
+        "Desenvolvimento de IA proprietária para educação até 2026",
+        "Transição completa de operador para arquiteto até 2027",
+        "Publicação de livro/manifesto sobre consciência e tecnologia",
+        "Criação de pelo menos 3 novas ferramentas de produtividade com IA",
+        "Exit parcial ou total da operação direta dos negócios até 2028"
+      ],
+      "behavioral_manifestations": [
+        "Delegação crescente com documentação obsessiva de processos",
+        "Foco intensificado em conteúdo de alta profundidade (podcast, escrita)",
+        "Parcerias estratégicas substituindo execução direta"
+      ],
+      "optimal_scenarios": [
+        "Papel de Chief Vision Officer com zero responsabilidade operacional",
+        "Consultoria de alto nível para CEOs/fundadores (1-3 clientes máximo)"
+      ],
+      "worst_scenarios": [
+        "Gestão de equipe grande sem autonomia criativa",
+        "Ambientes com alta burocracia e baixa velocidade de decisão"
+      ]
+    },
+    "comparative_analysis": {
+      "vs_same_mbti": {
+        "Steve_Jobs": "Compartilha pragmatismo e perfeccionismo, mas Alan tem menor necessidade de controle direto",
+        "Jack_Dorsey": "Similaridade no minimalismo e foco, mas Alan é mais voltado para sistemas que produtos",
+        "Bear_Grylls": "Mesma energia de ação e pragmatismo, Alan direcionado para domínio intelectual"
+      },
+      "vs_same_enneagram": {
+        "Bill_Gates": "Mesmo drive por conhecimento e sistemas, Alan com maior foco em consciência",
+        "Mark_Zuckerberg": "Compartilha introversão e foco técnico, Alan mais filosófico",
+        "Satoshi_Nakamoto": "Desejo similar de criar sistemas autônomos, Alan mais visível"
+      }
+    },
+    "convergence_analysis": {
+      "powerful_alignments": [
+        "Ti (MBTI) + Alto C (DISC) + Tipo 5 (Enea) = Máquina de criar frameworks",
+        "ISTP pragmatismo + Estrato VI visão = Execução estratégica única",
+        "SP instinto + Alto D + Se auxiliar = Proteção férrea de recursos para impacto"
+      ],
+      "productive_tensions": [
+        "Necessidade de controle (C) vs desejo de liberdade (ISTP-P) gera automação criativa",
+        "Introversão (I) vs necessidade de influência gera modelos assíncronos escaláveis"
+      ],
+      "compound_limitations": [
+        "Fe inferior + Baixo I + Tipo 5 = Dificuldade extrema com gestão emocional de equipes",
+        "Alto padrão (C) + Impaciência (D) + Perfeccionismo (5w4) = Burnout cíclico"
+      ]
+    },
+    "interaction_guide": {
+      "communication_style": {
+        "optimal": "Direto, econômico, focado em ideias e sistemas. Sem small talk",
+        "avoid": "Redundância, reuniões longas, discussão de problemas sem soluções",
+        "triggers": "Positivo: insights novos, eficiência. Negativo: lentidão, superficialidade"
+      },
+      "management": {
+        "if_managing_them": "Dê autonomia total com objetivos claros. Sem microgerenciamento",
+        "if_they_manage_you": "Seja proativo, econômico na comunicação, entregue resultados",
+        "as_peer": "Respeite o espaço, colabore em projetos de alta complexidade"
+      },
+      "team_dynamics": {
+        "ideal_team_size": "3-5 pessoas altamente autônomas",
+        "complementary_profiles": "ESFJ para gestão de pessoas, ENTP para brainstorm, ISTJ para execução",
+        "conflicting_profiles": "ESFP (muito social), ISFJ (muito tradicional), ENFJ (muito emocional)"
+      }
+    },
+    "development_roadmap": {
+      "immediate_priorities": [
+        "Estabelecer limites claros entre trabalho criativo e operacional",
+        "Desenvolver rituais de descompressão que não sejam escapismo"
+      ],
+      "medium_term_goals": [
+        "Construir equipe verdadeiramente autônoma com cultura documentada",
+        "Criar sistemas de delegação que preservem essência sem presença"
+      ],
+      "long_term_potential": [
+        "Tornar-se referência global em ferramentas de consciência + IA",
+        "Influenciar transformação educacional em escala civilizacional"
+      ],
+      "recommended_practices": [
+        "Meditação ou práticas contemplativas para equilibrar Ti dominante",
+        "Exercício físico regular para processar stress acumulado",
+        "Sabáticos estruturados a cada 18 meses para renovação profunda"
+      ]
+    },
+    "data_sources": {
+      "primary": [
+        "Análise detalhada de conversas com IA (Aurora/Claude)",
+        "Documentos auto-fornecidos sobre valores e prioridades",
+        "Padrões comportamentais observados em múltiplas interações",
+        "Decisões documentadas e suas justificativas",
+        "Estrutura organizacional e projetos criados",
+        "Estilo de comunicação escrita e falada",
+        "Reações a diferentes tipos de estímulos e situações",
+        "Filosofias explicitamente articuladas",
+        "Feedback de colaboradores próximos (inferido)",
+        "Evolução temporal de projetos e focos"
+      ],
+      "confidence_levels": {
+        "high": "DISC, Eneagrama core, MBTI dominante/auxiliar, valores fundamentais",
+        "medium": "Estrato cognitivo específico, instintos eneagrama, Big Five facetas",
+        "low": "QI numérico exato, dinâmica familiar específica, traumas infantis",
+        "speculative": "Progressão futura exata, dark triad preciso"
+      }
+    }
+  },
+  "metadata": {
+    "analysis_date": "2024-12-26",
+    "version": "1.0",
+    "analyzer": "Análise Psicométrica Profunda via Claude",
+    "special_notes": "Perfil excepcional combinando alta capacidade cognitiva com drive criativo intenso. Raridade estatística na combinação de pragmatismo técnico com profundidade filosófica. Potencial de impacto civilizacional se tensões internas forem bem gerenciadas.",
+    "disclaimer": "Análise baseada em dados comportamentais observados e auto-reportados. Não constitui avaliação clínica ou diagnóstico psicológico formal.",
+    "assessment_scales": {
+      "disc": "0-100",
+      "enneagram": "Tipos 1-9, níveis 1-9",
+      "mbti": "16 tipos, percentagens 0-100",
+      "cognitive_stratum": "Níveis I-VIII (Elliott Jaques)",
+      "big_five": "0-100 por traço e faceta",
+      "hexaco": "0-100 por dimensão",
+      "dark_triad": "1-7 por traço",
+      "iq": "Estimativa baseada em evidências comportamentais",
+      "eq": "0-100 estimado por componente"
+    }
+  }
+}

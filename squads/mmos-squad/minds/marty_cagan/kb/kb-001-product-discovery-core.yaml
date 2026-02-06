@@ -1,0 +1,62 @@
+---
+id: "kb-001"
+title: "Product Discovery - Core Concept"
+category: "discovery"
+subcategory: "fundamentals"
+tags: ["discovery", "validation", "risk-mitigation", "core-concept"]
+priority: "high"
+sources: ["Product Discovery (SVPG)", "INSPIRED book", "Inconvenient Truth"]
+---
+
+# Product Discovery - Core Concept
+
+## Definition
+
+Product discovery is the creative phase where teams validate both market opportunity and product solutions before engineering builds for production. It's fundamentally "more art than science"—creative and unpredictable, rather than a scheduled, predictable phase.
+
+## Two Critical Discoveries
+
+1. **Market Opportunity**: Validate that real customers want the product
+2. **Solution Validation**: Design a solution that is usable, useful, and feasible
+
+## Core Philosophy
+
+> "You need to discover whether there are real users out there that want this product."
+
+The process acknowledges **inherent uncertainty**—there's no guarantee of success or predictable timelines, similar to pharmaceutical research.
+
+## Discovery vs. Delivery
+
+| Discovery | Delivery |
+|-----------|----------|
+| Creative, unpredictable | Engineered, scheduled |
+| Small prototyping teams | Full engineering resources |
+| Validates before building | Builds validated solutions |
+| May reveal "nothing to show" | Always ships something |
+
+## Key Terminology
+
+- **Product Discovery**: Preferred over "requirements and design" to emphasize learning
+- **Prototype**: Low-fidelity validation tool, not production software
+- **Usable, Useful, Feasible**: The three attributes success requires (expanded to four with viability)
+
+## When to Apply
+
+- Before committing significant engineering resources
+- When exploring new product opportunities
+- During feature planning and ideation
+- Continuously throughout product lifecycle
+
+## Common Mistakes
+
+**Sequential Trap**: Organizations schedule discovery like construction projects, expecting predictable outcomes. When prototypes reveal problems, teams ignore findings and proceed anyway.
+
+**Resource Misallocation**: Management deploys full engineering teams to build prototypes through multiple release cycles—wasting resources and delaying viable products by 12-24 months.
+
+## Success Indicators
+
+- Teams tackle risks early (especially value and viability)
+- Rapid iteration cycles (days, not months)
+- Comfortable discarding ideas that don't validate
+- Customer insights inform decisions
+- Engineering engaged in discovery, not just delivery

@@ -1,0 +1,226 @@
+WEBVTT
+
+00:00:00.500 --> 00:00:05.440
+Vamos lá, continuando aqui, agora a
+gente vai aprender a instalar no
+
+00:00:05.440 --> 00:00:05.920
+desktop.
+
+00:00:06.960 --> 00:00:16.060
+Nessa aula você vai economizar muitos e
+muitos e muitos desafios que você teria
+
+00:00:16.060 --> 00:00:17.280
+de fazer sozinho, tá?
+
+00:00:17.400 --> 00:00:18.420
+Começa por aí.
+
+00:00:18.760 --> 00:00:23.660
+Então você vai aprender o que fazer,
+como fazer, na sequência certa.
+
+00:00:23.660 --> 00:00:29.640
+Você vai, ao final dessa aula, saber
+exatamente um ambiente perfeito de
+
+00:00:29.640 --> 00:00:30.440
+instalação.
+
+00:00:30.500 --> 00:00:33.120
+Nós viemos da aula de iPhone e Android.
+
+00:00:33.520 --> 00:00:38.320
+No iPhone a gente deu um passo de criar
+um cofre para criar a pasta no iCloud.
+
+00:00:38.520 --> 00:00:41.140
+E no Android a gente simplesmente
+instalou.
+
+00:00:41.400 --> 00:00:44.500
+Então agora, o que eu tenho aqui comigo,
+tá?
+
+00:00:44.600 --> 00:00:50.840
+Eu tenho a página aberta do Obsidian,
+que é obsidian .md.
+
+00:00:51.020 --> 00:00:53.640
+Tanto no meu Macbook, como também...
+
+00:00:53.660 --> 00:00:56.760
+Também eu estou acessando uma máquina
+aqui, o Windows, tá?
+
+00:00:56.900 --> 00:01:02.320
+E nessa máquina, o Windows, você vai ver
+como que faz a instalação.
+
+00:01:02.640 --> 00:01:08.400
+Nós vamos chegar com a instalação, nas
+duas, no mesmo lugar, na mesma tela.
+
+00:01:08.660 --> 00:01:12.260
+E é nessa tela que nós vamos fazer a
+mágica acontecer.
+
+00:01:12.880 --> 00:01:18.040
+Então olha só, nós vamos pegar aqui e
+colocar para baixar, tanto aqui no
+
+00:01:18.040 --> 00:01:19.640
+Windows, tá?
+
+00:01:19.920 --> 00:01:22.720
+Muito simples a instalação.
+
+00:01:22.740 --> 00:01:23.640
+Bom, ele está baixando.
+
+00:01:23.660 --> 00:01:28.480
+E eu vou colocar aqui também para baixar
+no Macbook.
+
+00:01:28.660 --> 00:01:29.840
+O que vai acontecer?
+
+00:01:30.100 --> 00:01:32.420
+Vai começar a fazer o download ali.
+
+00:01:33.060 --> 00:01:40.220
+E aí nós vamos fazer então o processo de
+instalação dos dois, tá?
+
+00:01:40.920 --> 00:01:45.900
+Para a gente poder ver o que acontece.
+
+00:01:46.640 --> 00:01:49.720
+Bom, já baixou aqui no Windows, vamos
+instalar então primeiro nele aqui.
+
+00:01:50.800 --> 00:01:51.680
+Baixou aqui.
+
+00:01:51.780 --> 00:01:52.380
+E...
+
+00:01:52.380 --> 00:01:57.340
+Vou dizer que eu vou instalar para todos
+dessa máquina, né?
+
+00:01:59.160 --> 00:02:01.280
+Vai pedir permissão aqui para instalar.
+
+00:02:02.040 --> 00:02:04.240
+Vou mandar instalar na pasta padrão.
+
+00:02:06.050 --> 00:02:06.770
+Legal.
+
+00:02:07.410 --> 00:02:08.850
+E vou executar o Obsidian.
+
+00:02:10.370 --> 00:02:12.090
+Pronto, chegou nessa tela.
+
+00:02:12.510 --> 00:02:17.030
+Que é a tela inicial onde nós vamos
+dizer o que vai acontecer.
+
+00:02:17.990 --> 00:02:23.230
+Agora nós vamos também para fazer a
+instalação.
+
+00:02:23.230 --> 00:02:26.210
+A instalação ali no Macbook.
+
+00:02:26.390 --> 00:02:27.290
+Então eu estou aqui, ó.
+
+00:02:28.410 --> 00:02:28.890
+Baixou.
+
+00:02:31.040 --> 00:02:36.680
+Vou passar aqui para a minha pasta de
+aplicações, né?
+
+00:02:37.460 --> 00:02:39.980
+O que vai acontecer com isso?
+
+00:02:40.240 --> 00:02:42.480
+Eu já tenho aqui, ó.
+
+00:02:42.540 --> 00:02:44.440
+Um ícone do Obsidian.
+
+00:02:46.940 --> 00:02:48.720
+Bom, instalação muito parecida.
+
+00:02:51.140 --> 00:02:53.120
+Vai perguntar se eu posso abrir.
+
+00:02:55.460 --> 00:02:58.480
+Beleza, chegamos na mesma tela, ok?
+
+00:02:59.380 --> 00:03:07.940
+Se você usa o Windows ou você usa o Mac,
+você vai para a próxima aula
+
+00:03:07.940 --> 00:03:11.680
+especificamente no sistema que você vai
+usar, tá bom?
+
+00:03:11.780 --> 00:03:13.520
+Porque nós chegamos nessa mesma tela.
+
+00:03:13.760 --> 00:03:19.300
+Só que eu vou mostrar como criar um
+primeiro cofre, no caso do Windows.
+
+00:03:19.480 --> 00:03:24.740
+E no Macbook, como abrir aquela pasta do
+cofre que veio lá do...
+
+00:03:24.860 --> 00:03:25.460
+iPhone.
+
+00:03:25.580 --> 00:03:29.780
+Ou se você não vai usar nem o iPhone,
+nem o Android, tudo bem.
+
+00:03:30.020 --> 00:03:34.920
+Pode ir para a aula diretamente aí do
+seu sistema operacional, tá bom?
+
+00:03:35.020 --> 00:03:40.280
+E aí a gente se vê nessa próxima aula,
+onde nós vamos então começar a
+
+00:03:40.280 --> 00:03:43.260
+configurar o nosso cofre, o repositório
+de notas.
+
+00:03:43.380 --> 00:03:43.420
+E aí a gente se vê nessa próxima aula,
+onde nós vamos então começar a
+
+00:03:43.420 --> 00:03:43.420
+configurar o nosso cofre, o repositório
+de notas.
+
+00:03:43.420 --> 00:03:43.620
+E aí a gente se vê nessa próxima aula,
+onde nós vamos então começar a
+
+00:03:43.620 --> 00:03:43.620
+configurar o nosso cofre, o repositório
+de notas.
+
+00:03:43.620 --> 00:03:43.700
+E aí a gente se vê nessa próxima aula,
+onde nós vamos então começar a
+
+00:03:43.700 --> 00:03:43.700
+configurar o nosso cofre, o repositório

@@ -1,0 +1,234 @@
+{
+  "source": "Seth Godin Blog - Popular Posts",
+  "source_url": "https://seths.blog/popular/",
+  "download_date": "2025-09-21T15:46:36.224340",
+  "total_posts": 25,
+  "description": "The 25 most popular posts from Seth Godin's blog",
+  "posts": [
+    {
+      "index": 1,
+      "title": "Quality and effort",
+      "url": "https://seths.blog/2018/11/quality-and-effort/",
+      "date": "2018-11",
+      "filename": "01_quality_and_effort.md",
+      "content_length": 2349,
+      "rank": 1
+    },
+    {
+      "index": 2,
+      "title": "NFTs are a dangerous trap",
+      "url": "https://seths.blog/2021/03/nfts-are-a-dangerous-trap/",
+      "date": "2021-03",
+      "filename": "02_nfts_are_a_dangerous_trap.md",
+      "content_length": 5237,
+      "rank": 2
+    },
+    {
+      "index": 3,
+      "title": "Don’t Shave That Yak!",
+      "url": "https://seths.blog/2005/03/dont_shave_that/",
+      "date": "2005-03",
+      "filename": "03_dont_shave_that_yak.md",
+      "content_length": 1596,
+      "rank": 3
+    },
+    {
+      "index": 4,
+      "title": "Ode: How to tell a great story",
+      "url": "https://seths.blog/2006/04/ode_how_to_tell/",
+      "date": "2006-04",
+      "filename": "04_ode_how_to_tell_a_great_story.md",
+      "content_length": 2769,
+      "rank": 4
+    },
+    {
+      "index": 5,
+      "title": "The world’s worst boss",
+      "url": "https://seths.blog/2010/12/the-worlds-worst-boss/",
+      "date": "2010-12",
+      "filename": "05_the_worlds_worst_boss.md",
+      "content_length": 1424,
+      "rank": 5
+    },
+    {
+      "index": 6,
+      "title": "Zoom & Skype call tips (the secrets of video conferences)",
+      "url": "https://seths.blog/2018/09/how-to-be-on-a-zoom-or-skype-call-the-secrets-of-video-conferences/",
+      "date": "2018-09",
+      "filename": "06_zoom_skype_call_tips_the_secrets_of_video_conferences.md",
+      "content_length": 354,
+      "rank": 6
+    },
+    {
+      "index": 7,
+      "title": "The leaf blower parable",
+      "url": "https://seths.blog/2022/11/the-leaf-blower-parable/",
+      "date": "2022-11",
+      "filename": "07_the_leaf_blower_parable.md",
+      "content_length": 723,
+      "rank": 7
+    },
+    {
+      "index": 8,
+      "title": "The elegance of nothing",
+      "url": "https://seths.blog/2019/04/the-elegance-of-nothing/",
+      "date": "2019-04",
+      "filename": "08_the_elegance_of_nothing.md",
+      "content_length": 4671,
+      "rank": 8
+    },
+    {
+      "index": 9,
+      "title": "Don’t waste the good days",
+      "url": "https://seths.blog/2021/12/dont-waste-the-good-days/",
+      "date": "2021-12",
+      "filename": "09_dont_waste_the_good_days.md",
+      "content_length": 294,
+      "rank": 9
+    },
+    {
+      "index": 10,
+      "title": "The wasteful fraud of sorting for youth meritocracy: Stop Stealing Dreams",
+      "url": "https://seths.blog/2014/09/the-shameful-fraud-of-sorting-for-youth-meritocracy/",
+      "date": "2014-09",
+      "filename": "10_the_wasteful_fraud_of_sorting_for_youth_meritocracy_stop_ste.md",
+      "content_length": 4023,
+      "rank": 10
+    },
+    {
+      "index": 11,
+      "title": "How to be remarkable",
+      "url": "https://seths.blog/2007/01/how_to_be_remar/",
+      "date": "2007-01",
+      "filename": "11_how_to_be_remarkable.md",
+      "content_length": 2532,
+      "rank": 11
+    },
+    {
+      "index": 12,
+      "title": "Busy is not the point",
+      "url": "https://seths.blog/2019/03/busy-is-not-the-point/",
+      "date": "2019-03",
+      "filename": "12_busy_is_not_the_point.md",
+      "content_length": 362,
+      "rank": 12
+    },
+    {
+      "index": 13,
+      "title": "Freedom and responsibility",
+      "url": "https://seths.blog/2016/03/freedom-and-responsibility/",
+      "date": "2016-03",
+      "filename": "13_freedom_and_responsibility.md",
+      "content_length": 911,
+      "rank": 13
+    },
+    {
+      "index": 14,
+      "title": "Forty years of projects",
+      "url": "https://seths.blog/2014/07/thirty-years-of-projects/",
+      "date": "2014-07",
+      "filename": "14_forty_years_of_projects.md",
+      "content_length": 15767,
+      "rank": 14
+    },
+    {
+      "index": 15,
+      "title": "Fixing Zoom calls: Looking better and feeling better",
+      "url": "https://seths.blog/2021/04/fixing-zoom-calls-looking-better-and-feeling-better/",
+      "date": "2021-04",
+      "filename": "15_fixing_zoom_calls_looking_better_and_feeling_better.md",
+      "content_length": 4489,
+      "rank": 15
+    },
+    {
+      "index": 16,
+      "title": "First, ten",
+      "url": "https://seths.blog/2009/04/first-ten/",
+      "date": "2009-04",
+      "filename": "16_first_ten.md",
+      "content_length": 1283,
+      "rank": 16
+    },
+    {
+      "index": 17,
+      "title": "Social media is a symptom, not a tactic",
+      "url": "https://seths.blog/2018/10/social-media-is-a-symptom-not-a-tactic/",
+      "date": "2018-10",
+      "filename": "17_social_media_is_a_symptom_not_a_tactic.md",
+      "content_length": 1081,
+      "rank": 17
+    },
+    {
+      "index": 18,
+      "title": "A Thanksgiving Reader",
+      "url": "https://seths.blog/2015/11/a-thanksgiving-reader/",
+      "date": "2015-11",
+      "filename": "18_a_thanksgiving_reader.md",
+      "content_length": 2716,
+      "rank": 18
+    },
+    {
+      "index": 19,
+      "title": "Five ways to make your presentation better",
+      "url": "https://seths.blog/2018/07/generous-assertions/",
+      "date": "2018-07",
+      "filename": "19_five_ways_to_make_your_presentation_better.md",
+      "content_length": 357,
+      "rank": 19
+    },
+    {
+      "index": 20,
+      "title": "The modern curriculum",
+      "url": "https://seths.blog/2021/09/the-modern-curriculum/",
+      "date": "2021-09",
+      "filename": "20_the_modern_curriculum.md",
+      "content_length": 3833,
+      "rank": 20
+    },
+    {
+      "index": 21,
+      "title": "(Without the bad parts)",
+      "url": "https://seths.blog/2023/07/without-the-bad-parts/",
+      "date": "2023-07",
+      "filename": "21_without_the_bad_parts.md",
+      "content_length": 1366,
+      "rank": 21
+    },
+    {
+      "index": 22,
+      "title": "Quieting the lizard brain",
+      "url": "https://seths.blog/2010/01/quieting-the-lizard-brain/",
+      "date": "2010-01",
+      "filename": "22_quieting_the_lizard_brain.md",
+      "content_length": 2420,
+      "rank": 22
+    },
+    {
+      "index": 23,
+      "title": "The top 5%",
+      "url": "https://seths.blog/2019/01/the-top-5/",
+      "date": "2019-01",
+      "filename": "23_the_top_5.md",
+      "content_length": 1454,
+      "rank": 23
+    },
+    {
+      "index": 24,
+      "title": "Really Bad Powerpoint",
+      "url": "https://seths.blog/2007/01/really_bad_powe/",
+      "date": "2007-01",
+      "filename": "24_really_bad_powerpoint.md",
+      "content_length": 5153,
+      "rank": 24
+    },
+    {
+      "index": 25,
+      "title": "Permission Marketing",
+      "url": "https://seths.blog/2008/01/permission-mark/",
+      "date": "2008-01",
+      "filename": "25_permission_marketing.md",
+      "content_length": 3639,
+      "rank": 25
+    }
+  ]
+}

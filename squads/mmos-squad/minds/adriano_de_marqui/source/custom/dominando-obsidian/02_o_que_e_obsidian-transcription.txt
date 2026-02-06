@@ -1,0 +1,401 @@
+WEBVTT
+
+00:00:00.940 --> 00:00:08.000
+Vamos lá, deixa eu te perguntar, você já
+se sentiu sobrecarregado de tanta
+
+00:00:08.000 --> 00:00:09.760
+informação nos dias de hoje?
+
+00:00:10.400 --> 00:00:15.880
+Ou você já tentou acessar uma
+informação, você já tentou criar alguma
+
+00:00:15.880 --> 00:00:23.480
+coisa e você lembrou, puxa, eu já vi
+algo a respeito disso e você saiu
+
+00:00:23.480 --> 00:00:27.640
+procurando, tentando encontrar onde foi
+que você anotou?
+
+00:00:27.640 --> 00:00:34.680
+Ou você já foi para algum evento e
+ganhou aquele caderninho e começou a
+
+00:00:34.680 --> 00:00:42.140
+anotar as coisas ali daquela palestra,
+das palestras que você ouviu e você
+
+00:00:42.140 --> 00:00:48.940
+depois pensou, puxa, eu preciso voltar e
+recapitular tudo isso, fazer um plano de
+
+00:00:48.940 --> 00:00:53.520
+ação, colocar em prática e na verdade
+nada disso aconteceu.
+
+00:00:53.840 --> 00:00:57.620
+Pois é, você pode estar até hoje com uma
+sensação...
+
+00:00:57.640 --> 00:00:59.640
+Uma sensação de também fomo, né?
+
+00:00:59.740 --> 00:01:02.800
+Que é aquela sensação de que, puxa, eu
+estou perdendo alguma coisa.
+
+00:01:03.180 --> 00:01:08.540
+Essa aula é para te dizer o seguinte, o
+que é o Obsidian?
+
+00:01:08.680 --> 00:01:14.660
+O Obsidian é uma ferramenta que vai
+fazer a gestão de tudo isso para você.
+
+00:01:15.160 --> 00:01:20.880
+Você com o seu cérebro biológico não
+está conseguindo organizar tudo, tá?
+
+00:01:20.980 --> 00:01:23.940
+E ela se sente até sobrecarregada, né?
+
+00:01:24.000 --> 00:01:25.940
+Seu cérebro se sente até sobrecarregado.
+
+00:01:26.020 --> 00:01:27.480
+De ter que lembrar...
+
+00:01:27.480 --> 00:01:28.240
+De ter que lembrar de tanta coisa.
+
+00:01:28.460 --> 00:01:30.580
+Ou de recapitular tanta coisa.
+
+00:01:30.940 --> 00:01:34.500
+Pois é, é isso que significa uma
+ferramenta PKM.
+
+00:01:34.620 --> 00:01:40.540
+A ferramenta PKM de uma gestão de
+conhecimento é para que você possa ter
+
+00:01:40.540 --> 00:01:47.680
+uma ferramenta como se fosse um segundo
+cérebro, que eu vou explicar para vocês
+
+00:01:47.680 --> 00:01:49.100
+o conceito na próxima aula.
+
+00:01:49.300 --> 00:01:54.360
+Mas nessa aula eu quero que você
+entenda, que você saia no final dela
+
+00:01:54.360 --> 00:01:57.240
+sabendo o que é o Obsidian.
+
+00:01:57.480 --> 00:02:01.400
+Eu nunca escutei, porque eu nunca
+escutei, porque que os meus amigos não
+
+00:02:01.400 --> 00:02:06.760
+usam, não é tão famosa como as outras.
+
+00:02:07.020 --> 00:02:10.980
+Então eu vou explicar para você aqui no
+final da aula, você tem que ter certeza
+
+00:02:10.980 --> 00:02:17.620
+de que eu sei o que é, para que serve e
+porque eu devo usá -la, né?
+
+00:02:17.940 --> 00:02:21.120
+Então olha só, eu quero mostrar para
+você aqui, tá?
+
+00:02:21.240 --> 00:02:23.400
+O site do Obsidian.
+
+00:02:23.600 --> 00:02:27.380
+O site do Obsidian é esse aqui, obsidian
+.com .br.
+
+00:02:27.480 --> 00:02:30.740
+Se escreve Obsidian, né?
+
+00:02:31.300 --> 00:02:35.620
+E você vai ter nele os downloads, né,
+para fazer.
+
+00:02:35.740 --> 00:02:42.400
+Você vai ter aqui o Obsidian para o Mac,
+você vai ter o Obsidian para o Windows,
+
+00:02:42.780 --> 00:02:45.220
+para Linux.
+
+00:02:45.340 --> 00:02:53.800
+E você também vai ter essas versões, né,
+nas lojas de aplicativo mobile, né,
+
+00:02:53.840 --> 00:02:55.340
+Android ou iOS.
+
+00:02:55.720 --> 00:02:56.560
+Você vai ter.
+
+00:02:57.480 --> 00:03:02.020
+O download para fazer lá também no
+mobile dessa ferramenta aqui.
+
+00:03:02.120 --> 00:03:08.440
+Então olha só, essa ferramenta é uma
+ferramenta que ela vai trazer para você
+
+00:03:08.440 --> 00:03:10.500
+o poder de gestão de conhecimento.
+
+00:03:10.740 --> 00:03:14.040
+Você vai ver aqui na primeira imagem que
+eu vou estar mostrando aqui para você,
+
+00:03:14.140 --> 00:03:19.620
+né, que existe todo um ambiente que
+mostra o gráfico aqui de conexão das
+
+00:03:19.620 --> 00:03:20.120
+notas.
+
+00:03:20.140 --> 00:03:27.300
+Isso aqui é como se fossem sinapses de
+uma, de um cérebro estar ali ligando.
+
+00:03:27.480 --> 00:03:28.860
+Vincando ideias, né?
+
+00:03:29.000 --> 00:03:35.020
+Você vai ver aqui que na versão mobile
+você vai ter a mesma, a mesma coisa, a
+
+00:03:35.020 --> 00:03:35.840
+mesma ferramenta.
+
+00:03:36.260 --> 00:03:45.980
+E aí você vai conseguir colocar todo o
+seu conhecimento num lugar, visualizar
+
+00:03:45.980 --> 00:03:51.480
+como se fosse, né, aqui as sinapses
+interligando as ideias.
+
+00:03:51.620 --> 00:03:52.840
+Você vai ter os links.
+
+00:03:53.100 --> 00:03:56.680
+Você vai ter construção gráfica, você
+vai ter plugins.
+
+00:03:57.480 --> 00:04:01.700
+Você tem tudo aqui, né, e tem também
+aquilo que fala sobre a questão de
+
+00:04:01.700 --> 00:04:02.260
+sincronização.
+
+00:04:02.680 --> 00:04:08.600
+A ferramenta tem uma opção paga que você
+pode sincronizar os dados com os
+
+00:04:08.600 --> 00:04:10.520
+servidores deles, né, do Obsidian.
+
+00:04:10.720 --> 00:04:15.400
+Mas você não precisa pagar por isso
+porque nós vamos aqui ensinar de forma
+
+00:04:15.400 --> 00:04:20.660
+rápida e certeira para você como é que
+você sincroniza tanto o ambiente iOS
+
+00:04:20.660 --> 00:04:25.240
+como o ambiente Android, Windows, MacOS.
+
+00:04:25.300 --> 00:04:27.260
+Você vai conseguir fazer tudo.
+
+00:04:28.100 --> 00:04:32.640
+Aqui também tem uma outra opção paga que
+é uma opção de publicação, ou seja, você
+
+00:04:32.640 --> 00:04:36.720
+pegar o que está dentro do seu Obsidian
+e publicar, né, muito conhecido também
+
+00:04:36.720 --> 00:04:41.600
+essas opções, agora tem no Notch também,
+né, mas aqui você também não vai
+
+00:04:41.600 --> 00:04:46.840
+precisar pagar porque nós vamos mostrar
+como que você pode, né, ainda nesse
+
+00:04:46.840 --> 00:04:51.500
+curso, publicar suas notas, né, fazer
+com que o seu, a sua gestão de
+
+00:04:51.500 --> 00:04:55.940
+conhecimento esteja disponível para
+alguém, caso você queira, tá?
+
+00:04:56.260 --> 00:04:57.080
+Ela tem...
+
+00:04:57.080 --> 00:05:04.420
+É personalizável também com temas, né, e
+aqui ele vai trazer também a opção de
+
+00:05:04.420 --> 00:05:10.900
+documentação, grupo no Discord, fórum de
+discussão, então você vai ter tudo isso
+
+00:05:10.900 --> 00:05:15.820
+aqui nessa página aqui e você vai
+conseguir fazer o download para
+
+00:05:15.820 --> 00:05:16.440
+instalar.
+
+00:05:16.740 --> 00:05:19.680
+Calma que eu vou aqui no curso instalar
+com você.
+
+00:05:19.780 --> 00:05:23.960
+Eu quero que você comece da maneira
+certa, então eu vou trazer para você
+
+00:05:23.960 --> 00:05:27.060
+como você deve instalar e o que você
+deve instalar.
+
+00:05:27.080 --> 00:05:31.380
+Eu vou começar lá primeiro, nós vamos
+começar a ver a questão mobile e como
+
+00:05:31.380 --> 00:05:36.360
+que se cria a opção de sincronização,
+então muita calma que eu vou explicar
+
+00:05:36.360 --> 00:05:40.400
+para você como se organiza tudo dentro
+da ferramenta, porque ela não é
+
+00:05:40.400 --> 00:05:43.060
+simplesmente uma ferramenta de notas,
+então vamos lá.
+
+00:05:43.180 --> 00:05:50.840
+Eu falei para você que eu quero que você
+entenda, né, aqui nessa aula.
+
+00:05:51.780 --> 00:05:56.240
+Por que que eu vou usar Obsidian para
+anotar se eu tenho tantas...
+
+00:05:57.080 --> 00:05:58.820
+As ferramentas de anotação.
+
+00:05:58.880 --> 00:06:02.260
+Veja, não estamos falando de uma
+ferramenta simplesmente para anotar.
+
+00:06:02.740 --> 00:06:07.980
+Anotar por anotar, você pode anotar no
+Apple Notes, no Notepad, você pode
+
+00:06:07.980 --> 00:06:12.600
+anotar em qualquer lugar, mas o Obsidian
+é uma ferramenta de gestão de
+
+00:06:12.600 --> 00:06:17.600
+conhecimento que podemos criar
+fortemente o segundo cérebro, tá?
+
+00:06:17.720 --> 00:06:21.580
+Então é isso que eu quero que você
+entenda e saiba nessa aula, que você vai
+
+00:06:21.580 --> 00:06:26.860
+aprender algo que é algo a mais além de
+simplesmente notas.
+
+00:06:27.080 --> 00:06:31.820
+Tenha essa mentalidade, porque senão,
+quando você agora começar a olhar para a
+
+00:06:31.820 --> 00:06:40.980
+ferramenta, você vai achar que é algo um
+pouco diferente e por que não você pode
+
+00:06:40.980 --> 00:06:44.820
+pensar numa primeira olhada, porque
+muita gente já foi lá para conhecer o
+
+00:06:44.820 --> 00:06:50.760
+Obsidian, começou a usar e aí pensou
+assim, pensou assim, nossa, é uma
+
+00:06:50.760 --> 00:06:54.300
+ferramenta muito diferente, eu só quero
+anotar algumas coisas, eu achei
+
+00:06:54.300 --> 00:06:56.500
+complicado, claro, porque olhou...
+
+00:06:57.080 --> 00:07:02.060
+A mentalidade, né, olhou com a
+mentalidade de ferramenta de anotação e
+
+00:07:02.060 --> 00:07:02.780
+não é isso, tá?
+
+00:07:02.860 --> 00:07:06.380
+Então eu já quero que você mude a sua
+mentalidade para entender que o Obsidian
+
+00:07:06.380 --> 00:07:09.320
+não é isso e a gente vai evoluir um
+passo a mais.
+
+00:07:09.480 --> 00:07:14.620
+Então na próxima aula, primeira coisa,
+eu quero te dar os conceitos básicos
+
+00:07:14.620 --> 00:07:21.420
+iniciais de segundo cérebro, para você
+entender o potencial disso e colocar na
+
+00:07:21.420 --> 00:07:25.660
+tua cabeça uma pergunta, como eu vivi
+até hoje sem isso, tá?
+
+00:07:25.800 --> 00:07:27.060
+Como que eu estudei?
+
+00:07:27.080 --> 00:07:28.060
+Como eu estudei até hoje sem isso?
+
+00:07:28.180 --> 00:07:35.060
+É algo que vai mudar realmente o seu
+pensamento, o seu entendimento sobre
+
+00:07:35.060 --> 00:07:36.140
+aprendizado, tá bom?
+
+00:07:36.360 --> 00:07:39.720
+Então na próxima aula, vamos conhecer o
+que é um segundo cérebro.
+
+00:07:39.780 --> 00:07:40.000
+Vamos conhecer o que é um segundo
+cérebro.

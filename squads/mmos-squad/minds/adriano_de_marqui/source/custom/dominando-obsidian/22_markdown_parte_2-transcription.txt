@@ -1,0 +1,1128 @@
+WEBVTT
+
+00:00:00.500 --> 00:00:03.480
+Vamos continuar com Markdown.
+
+00:00:04.090 --> 00:00:08.260
+Nós vimos o arquivo aqui, que eu
+coloquei na última aula para você.
+
+00:00:08.580 --> 00:00:10.180
+Paramos em tabelas, né?
+
+00:00:10.320 --> 00:00:12.260
+E aí eu estou aqui com os links.
+
+00:00:12.480 --> 00:00:21.960
+Os links são essenciais, muito
+importantes para a construção de um
+
+00:00:21.960 --> 00:00:23.280
+segundo cérebro.
+
+00:00:24.040 --> 00:00:29.920
+Nós temos links internos e links
+externos.
+
+00:00:30.500 --> 00:00:37.600
+No exemplo do arquivo aqui, a gente
+explica como colocar links via Markdown.
+
+00:00:37.740 --> 00:00:45.040
+E, na verdade, o link interno é algo do
+Obsidian, que é a possibilidade de você
+
+00:00:45.040 --> 00:00:47.580
+fazer um link de uma nota com outra.
+
+00:00:48.800 --> 00:00:50.980
+Isso é muito legal, muito importante.
+
+00:00:51.520 --> 00:00:58.880
+Você vai ver as conexões como se fossem
+uma rede neural, uma sinapse do cérebro
+
+00:00:58.880 --> 00:00:59.120
+acontecendo.
+
+00:01:00.500 --> 00:01:05.120
+Bom, vamos ver aqui como primeiro eu
+acrescento links externos.
+
+00:01:05.140 --> 00:01:07.620
+Links para alguma outra coisa.
+
+00:01:09.000 --> 00:01:12.920
+Olha aqui, por exemplo, o formato.
+
+00:01:12.920 --> 00:01:16.760
+O formato é aqui o colchetes, né?
+
+00:01:17.220 --> 00:01:18.320
+Dizendo o texto.
+
+00:01:18.840 --> 00:01:21.360
+Então, lembrando, está aqui, eu estou
+dentro do bloco.
+
+00:01:21.380 --> 00:01:22.540
+Então, é o texto original.
+
+00:01:22.720 --> 00:01:25.140
+Ele não vai formatar isso aqui como
+Markdown.
+
+00:01:25.380 --> 00:01:30.880
+Para que eu possa trazer para você e
+você visualmente conseguir, e olhar para
+
+00:01:30.880 --> 00:01:33.240
+o arquivo e já ver como te escreve e
+como é que fica.
+
+00:01:33.460 --> 00:01:37.140
+Então, aqui é a parte de cima como
+escreve, a parte de baixo como fica.
+
+00:01:37.820 --> 00:01:43.140
+Então, olha só, é colchetes, tendo
+dentro dele o texto que você quer que
+
+00:01:43.140 --> 00:01:43.740
+apareça.
+
+00:01:43.780 --> 00:01:46.800
+Então, olha aqui, dentro do texto está
+escrito Google.
+
+00:01:47.220 --> 00:01:50.140
+Aqui está aparecendo a palavra Google.
+
+00:01:51.500 --> 00:01:53.820
+Obsidian, aqui está aparecendo a palavra
+Obsidian.
+
+00:01:54.320 --> 00:01:58.880
+E aí, depois do colchete, você coloca
+entre parênteses o link.
+
+00:01:59.680 --> 00:02:00.300
+Está legal?
+
+00:02:00.500 --> 00:02:09.800
+Então, você coloca o link para que
+apareça aí qual é o site que vai ser
+
+00:02:09.800 --> 00:02:10.380
+acessado.
+
+00:02:10.560 --> 00:02:13.480
+Se eu entrar aqui no link, você vai
+perceber.
+
+00:02:14.280 --> 00:02:18.320
+Se eu vier na linha aqui, ele já abre e
+traz para mim o Markdown.
+
+00:02:18.500 --> 00:02:20.680
+Você vai ver a mesma coisa que estava em
+cima.
+
+00:02:21.040 --> 00:02:24.060
+Lá em cima e aqui embaixo também.
+
+00:02:24.880 --> 00:02:25.400
+Tá?
+
+00:02:26.680 --> 00:02:29.240
+Então, aí se eu clicar, né?
+
+00:02:29.340 --> 00:02:30.220
+Num desses...
+
+00:02:30.500 --> 00:02:32.060
+Links, ele vai abrir para mim.
+
+00:02:32.180 --> 00:02:33.500
+Olha lá, a ferramenta.
+
+00:02:34.200 --> 00:02:34.800
+Legal?
+
+00:02:36.220 --> 00:02:42.880
+Então, eu posso ali chegar e colocar o
+link.
+
+00:02:43.240 --> 00:02:45.040
+Então, vamos lá, recapitulando.
+
+00:02:47.640 --> 00:02:54.200
+Colchetes, o texto que eu quero, o texto
+que vai aparecer.
+
+00:02:55.440 --> 00:03:00.760
+Aí eu venho aqui, entre parênteses, o
+site.
+
+00:03:01.400 --> 00:03:02.000
+Tá?
+
+00:03:02.320 --> 00:03:07.260
+Você coloca o link do site aqui que você
+vai acessar.
+
+00:03:07.740 --> 00:03:08.440
+Tá bom?
+
+00:03:08.620 --> 00:03:12.460
+Você vai ver que também tem uma forma
+rápida de fazer isso daí.
+
+00:03:12.620 --> 00:03:16.220
+Mas é importante que você saiba, tá?
+
+00:03:16.640 --> 00:03:24.720
+Como que você coloca link e quando você
+vê link nas ferramentas, ou mesmo quando
+
+00:03:24.720 --> 00:03:29.280
+você inserir através de menus, você
+saber como que aquilo ali está sendo
+
+00:03:29.280 --> 00:03:32.040
+armazenado, como é que você faz na mão
+numa edição rápida.
+
+00:03:32.320 --> 00:03:38.000
+Até mesmo para você mudar parâmetros,
+você vai aprender aqui através do link.
+
+00:03:38.600 --> 00:03:39.080
+Legal?
+
+00:03:39.580 --> 00:03:41.560
+Por exemplo, olha, aqui...
+
+00:03:43.380 --> 00:03:48.200
+Eu tenho, logo abaixo do link, a
+possibilidade que ele está me dando
+
+00:03:48.200 --> 00:03:52.620
+aqui, de como que eu insiro imagens.
+
+00:03:52.740 --> 00:03:53.160
+Tá?
+
+00:03:53.540 --> 00:03:56.200
+Para exibir imagens, utiliza sintaxe.
+
+00:03:56.320 --> 00:03:59.740
+Você vai ver que é a mesma de link.
+
+00:04:02.320 --> 00:04:02.600
+Tá?
+
+00:04:02.760 --> 00:04:04.860
+Que é o colchete e o parênteses.
+
+00:04:04.900 --> 00:04:07.160
+A diferença é que tem o sinal de
+exclamação antes.
+
+00:04:08.380 --> 00:04:09.560
+O que vai acontecer?
+
+00:04:09.780 --> 00:04:14.060
+Quando você tem o sinal de exclamação
+antes, ele está dizendo o seguinte.
+
+00:04:15.120 --> 00:04:19.640
+Traz dentro da nota, incorpora dentro da
+nota, embeda, né?
+
+00:04:19.780 --> 00:04:24.760
+É o processo de embedar, de colocar
+dentro da nota, incluir e trazer para
+
+00:04:24.760 --> 00:04:27.360
+visualização aquilo que está sendo
+inserido.
+
+00:04:27.600 --> 00:04:27.820
+Tá?
+
+00:04:28.760 --> 00:04:30.880
+Então, aqui ele está fazendo o quê, por
+exemplo?
+
+00:04:31.120 --> 00:04:31.560
+Ó.
+
+00:04:31.560 --> 00:04:31.640
+Ó.
+
+00:04:31.900 --> 00:04:33.300
+Aqui eu tenho uma imagem.
+
+00:04:34.280 --> 00:04:35.260
+Qual é essa imagem?
+
+00:04:35.460 --> 00:04:37.060
+Aquilo que está em cima lá do texto lá.
+
+00:04:37.180 --> 00:04:40.280
+Ele tem um link aqui de uma imagem que
+está na web.
+
+00:04:40.740 --> 00:04:43.400
+Está num certo GitHub lá, ó.
+
+00:04:43.720 --> 00:04:47.040
+E ele pegou essa imagem, tá?
+
+00:04:47.300 --> 00:04:52.280
+E pegou essa imagem e colocou como texto
+alternativo aqui, né?
+
+00:04:52.320 --> 00:04:54.080
+Se não puder carregar a imagem ou...
+
+00:04:55.460 --> 00:05:00.120
+Um texto simplesmente para aparecer ali
+quando está carregando.
+
+00:05:00.240 --> 00:05:01.540
+Que a gente nem vê.
+
+00:05:01.560 --> 00:05:03.960
+É o texto aqui que ele colocou como
+Minion.
+
+00:05:04.020 --> 00:05:06.760
+E aqui é o link, é o site que está a
+imagem.
+
+00:05:07.120 --> 00:05:08.840
+Mas, Adriano, e se a imagem estiver
+local?
+
+00:05:09.300 --> 00:05:11.300
+Ele vai colocar a imagem?
+
+00:05:12.520 --> 00:05:13.980
+Você lembra o que acontece?
+
+00:05:14.080 --> 00:05:15.560
+Nas aulas anteriores, você viu.
+
+00:05:15.720 --> 00:05:21.260
+Se eu pegar essa imagem aqui e eu
+colocar dentro do cofre, o que vai
+
+00:05:21.260 --> 00:05:21.680
+acontecer?
+
+00:05:22.460 --> 00:05:23.880
+Vamos ver se você lembra.
+
+00:05:24.020 --> 00:05:26.500
+Eu peguei essa imagem, né?
+
+00:05:26.700 --> 00:05:29.420
+Eu peguei essa imagem aqui, que está lá
+na internet.
+
+00:05:30.040 --> 00:05:30.560
+E...
+
+00:05:30.560 --> 00:05:30.820
+E...
+
+00:05:31.680 --> 00:05:32.760
+Salvei ela, né?
+
+00:05:32.820 --> 00:05:35.440
+Vamos imaginar que eu tenha feito isso,
+né?
+
+00:05:35.480 --> 00:05:36.040
+Eu tenha...
+
+00:05:36.040 --> 00:05:38.320
+Ó, pego essa imagem da internet.
+
+00:05:39.000 --> 00:05:40.800
+Vou salvar ela aqui.
+
+00:05:41.680 --> 00:05:44.720
+Vou salvar ela aqui no meu Downloads.
+
+00:05:44.740 --> 00:05:45.480
+Olha só.
+
+00:05:46.280 --> 00:05:46.820
+Salvei.
+
+00:05:47.040 --> 00:05:47.580
+Legal?
+
+00:05:48.600 --> 00:05:51.880
+Então, essa imagem, eu salvei ela aqui.
+
+00:05:52.800 --> 00:05:54.940
+Ela está aqui no meu Downloads.
+
+00:05:54.980 --> 00:05:56.660
+Deixa eu ver se ela aqui...
+
+00:05:57.540 --> 00:05:58.080
+Tarará!
+
+00:06:01.570 --> 00:06:02.110
+Exatamente.
+
+00:06:02.130 --> 00:06:03.190
+É ela aqui, ó.
+
+00:06:03.510 --> 00:06:03.570
+Tá?
+
+00:06:03.830 --> 00:06:05.610
+O que vai acontecer, então?
+
+00:06:06.130 --> 00:06:07.370
+Estou com a imagem aqui.
+
+00:06:07.790 --> 00:06:16.510
+Se eu colocar essa imagem dentro do meu
+Obsidian, seja eu copiando ela aqui e
+
+00:06:16.510 --> 00:06:21.770
+jogando na pasta do cofre, ou, como eu
+falei para você, você pode ter aqui, ó,
+
+00:06:23.190 --> 00:06:26.790
+uma imagem, um arquivo.
+
+00:06:27.130 --> 00:06:28.910
+Deixa eu pegar a minha nota aqui, ó.
+
+00:06:29.610 --> 00:06:32.210
+Eu vou pegar aqui antes...
+
+00:06:33.510 --> 00:06:34.470
+Não, vamos pegar aqui, ó.
+
+00:06:34.470 --> 00:06:37.010
+Depois do exemplo prático, eu vou criar
+umas linhas aqui, ó.
+
+00:06:37.950 --> 00:06:43.850
+E eu vou pegar a imagem e vou jogar ela
+aqui
+
+00:06:43.850 --> 00:06:44.230
+dentro.
+
+00:06:46.800 --> 00:06:48.820
+E -T -T -T, não é essa.
+
+00:06:49.440 --> 00:06:50.220
+Cadê a imagem?
+
+00:06:50.360 --> 00:06:50.500
+Cadê?
+
+00:06:50.800 --> 00:06:51.240
+Minion.
+
+00:06:52.240 --> 00:06:54.400
+Essa imagem aqui tem nada a ver.
+
+00:06:56.220 --> 00:06:56.840
+Vamos lá.
+
+00:06:57.000 --> 00:06:58.700
+É a imagem da minha filha ali.
+
+00:07:00.640 --> 00:07:02.060
+Vamos pegar aqui, ó.
+
+00:07:02.340 --> 00:07:02.780
+Minion.
+
+00:07:03.520 --> 00:07:03.960
+Minion.
+
+00:07:04.380 --> 00:07:05.340
+Joguei a imagem aqui.
+
+00:07:06.160 --> 00:07:06.840
+Então, o que acontece?
+
+00:07:08.600 --> 00:07:11.240
+Aqui está o arquivo, né?
+
+00:07:11.540 --> 00:07:18.880
+Minion .png que está no meu cofre, em
+anexos.
+
+00:07:19.840 --> 00:07:20.600
+Por quê?
+
+00:07:20.640 --> 00:07:27.040
+Porque lembra que eu configurei que toda
+a imagem cairia aqui dentro, né?
+
+00:07:27.100 --> 00:07:29.840
+Do meu cofre e iria para uma pasta
+anexos?
+
+00:07:30.000 --> 00:07:30.860
+Então, é isso.
+
+00:07:31.580 --> 00:07:32.820
+Então, olha só que legal.
+
+00:07:33.400 --> 00:07:36.000
+Ele já joga aqui como se fosse o
+mesmo...
+
+00:07:36.000 --> 00:07:36.820
+Ó, eu não tenho texto aqui.
+
+00:07:36.820 --> 00:07:37.680
+Eu tenho um texto alternativo, né?
+
+00:07:37.740 --> 00:07:39.100
+Tem um sinal de exclamação e tal.
+
+00:07:39.180 --> 00:07:41.140
+E tem o Minion .png.
+
+00:07:41.340 --> 00:07:45.520
+Só que aqui, na verdade, esse Minion
+.png, ele está nesse caminho específico.
+
+00:07:45.540 --> 00:07:50.880
+Ele não está mostrando aqui o caminho
+inteiro de onde está a imagem.
+
+00:07:51.220 --> 00:07:57.940
+Mas eu posso ir lá nas configurações do
+meu cofre e mexer para que isso aconteça
+
+00:07:57.940 --> 00:07:58.160
+aqui.
+
+00:07:58.280 --> 00:07:58.720
+Quer ver só?
+
+00:08:00.320 --> 00:08:00.940
+Olha só.
+
+00:08:01.060 --> 00:08:01.940
+Tirei aqui, ó.
+
+00:08:02.880 --> 00:08:04.300
+O Minion, né?
+
+00:08:04.360 --> 00:08:05.340
+Que eu joguei como imagem.
+
+00:08:05.900 --> 00:08:06.800
+Você viu que o Bicompo...
+
+00:08:06.800 --> 00:08:09.180
+Colocou como link ali da imagem?
+
+00:08:10.760 --> 00:08:11.820
+Simplesmente o nome da imagem.
+
+00:08:12.040 --> 00:08:14.700
+Porque ele armazena internamente onde
+está aquela imagem, né?
+
+00:08:15.060 --> 00:08:17.680
+Lá na pasta aqui.
+
+00:08:17.860 --> 00:08:19.360
+Só que aqui eu vou chegar, ó.
+
+00:08:19.440 --> 00:08:22.540
+Vou deletar o Minion que eu joguei.
+
+00:08:24.700 --> 00:08:25.220
+Tá?
+
+00:08:26.220 --> 00:08:26.740
+Beleza.
+
+00:08:27.240 --> 00:08:30.920
+Eu vou pegar agora e vou entrar nas
+configurações.
+
+00:08:30.920 --> 00:08:33.340
+Eu quero que você venha aqui, ó.
+
+00:08:33.440 --> 00:08:36.400
+Em Files and Links.
+
+00:08:37.780 --> 00:08:40.020
+New Link Format.
+
+00:08:40.020 --> 00:08:41.440
+Ou seja, o formato do link.
+
+00:08:41.720 --> 00:08:46.420
+O que você quer que aconteça no formato
+do link quando você joga um arquivo?
+
+00:08:46.700 --> 00:08:47.100
+Você...
+
+00:08:47.100 --> 00:08:49.100
+Aqui está selecionado por padrão, ó.
+
+00:08:49.140 --> 00:08:50.140
+O menor possível.
+
+00:08:50.860 --> 00:08:56.900
+Só que você pode ter um caminho relativo
+ou caminho absoluto no Vault.
+
+00:08:57.820 --> 00:08:58.340
+Tá?
+
+00:08:58.440 --> 00:09:02.280
+Eu vou trocar para colocar esse caminho
+absoluto aqui que vai mostrar o caminho
+
+00:09:02.280 --> 00:09:03.860
+inteirinho de onde está a imagem.
+
+00:09:04.380 --> 00:09:05.780
+Olha o que isso...
+
+00:09:05.780 --> 00:09:08.280
+Como que isso vai se refletir aqui
+naquele link.
+
+00:09:08.300 --> 00:09:09.560
+Quando eu jogar uma imagem.
+
+00:09:10.580 --> 00:09:12.500
+Vou pegar o Minion e jogar aqui.
+
+00:09:12.980 --> 00:09:13.500
+Beleza?
+
+00:09:14.180 --> 00:09:14.700
+Joguei.
+
+00:09:14.720 --> 00:09:17.460
+O Minion entrou na pasta Netsus.
+
+00:09:18.180 --> 00:09:18.700
+Maravilha.
+
+00:09:18.940 --> 00:09:22.160
+Só que agora se eu venho aqui olha como
+que ficou o link.
+
+00:09:23.780 --> 00:09:25.860
+Anetsus barra e o nome do arquivo.
+
+00:09:26.300 --> 00:09:31.200
+É também uma preferência, um gosto de
+você saber onde está o arquivo e ele
+
+00:09:31.200 --> 00:09:32.160
+jogar o link ali.
+
+00:09:32.500 --> 00:09:33.020
+Perfeito?
+
+00:09:33.160 --> 00:09:36.140
+Então, é assim que funciona.
+
+00:09:36.540 --> 00:09:39.980
+Então o link pode ser para coisa interna
+como para coisa externa.
+
+00:09:40.060 --> 00:09:43.500
+Se eu simplesmente tiro aquele...
+
+00:09:44.140 --> 00:09:44.600
+É...
+
+00:09:48.420 --> 00:09:49.660
+Aquele sinalzinho, né?
+
+00:09:49.700 --> 00:09:50.740
+De exclamação ali.
+
+00:09:50.840 --> 00:09:52.900
+Eu estou dizendo que é apenas um link.
+
+00:09:53.060 --> 00:09:55.120
+Daí eu quero clicar aqui e ele abrir a
+imagem.
+
+00:09:55.980 --> 00:09:56.440
+Beleza?
+
+00:09:56.820 --> 00:10:01.080
+Mas se eu quero que a imagem ela venha,
+né?
+
+00:10:01.140 --> 00:10:01.800
+Para cá, ó.
+
+00:10:01.840 --> 00:10:03.020
+Eu tenho que fazer aquilo, tá?
+
+00:10:03.440 --> 00:10:07.260
+Eu tenho que criar o link desse jeito.
+
+00:10:07.260 --> 00:10:08.120
+Colocar o sinal de sinal.
+
+00:10:08.120 --> 00:10:08.860
+Colocar a exclamação ali.
+
+00:10:09.520 --> 00:10:10.100
+Maravilha?
+
+00:10:10.160 --> 00:10:13.600
+É isso aqui que eu queria que você
+entendesse como que funciona.
+
+00:10:13.800 --> 00:10:14.860
+Ó, aqui a mesma coisa.
+
+00:10:15.490 --> 00:10:19.320
+Ele tem uma outra imagem no outro site,
+né?
+
+00:10:19.800 --> 00:10:20.380
+Maravilha.
+
+00:10:22.100 --> 00:10:26.180
+Então, link é assim que funciona, tá?
+
+00:10:26.640 --> 00:10:32.660
+Link externo e link também do arquivo
+interno que vem para cá.
+
+00:10:33.340 --> 00:10:36.600
+Perceba também já uma característica que
+é o seguinte, tá?
+
+00:10:36.600 --> 00:10:41.980
+Quando eu adiciono um arquivo, um anexo,
+um PDF, uma imagem, qualquer outra coisa
+
+00:10:41.980 --> 00:10:50.240
+que eu jogue aqui, se eu vou lá na nota
+e apago o link da imagem aqui que eu
+
+00:10:50.240 --> 00:10:55.260
+joguei, eu apago o arquivo que foi feito
+aqui na nota, não apago o arquivo, tá?
+
+00:10:55.380 --> 00:10:56.840
+Ó, o Minion continua lá.
+
+00:10:58.380 --> 00:11:05.560
+Isso é até proposital pelo seguinte,
+imagine que você tenha em várias notas
+
+00:11:05.560 --> 00:11:09.500
+um link para aquela imagem, para aquele
+desenho, para aquele gráfico, enfim.
+
+00:11:09.940 --> 00:11:15.240
+E você não quer que, de repente, em uma
+nota você apague e apague de todas as
+
+00:11:15.240 --> 00:11:15.900
+outras, né?
+
+00:11:16.680 --> 00:11:20.200
+Então, ele mantém o arquivo lá na sua
+pasta anexos.
+
+00:11:20.560 --> 00:11:24.080
+Eu prefiro dessa forma, armazenando numa
+página única, por isso.
+
+00:11:24.160 --> 00:11:28.080
+Eu sei que tudo que é anexo está aqui,
+eu posso dar uma varrida ali, olhar os
+
+00:11:28.080 --> 00:11:30.540
+arquivos, tal, ver se não tem lixo,
+alguma coisa.
+
+00:11:31.380 --> 00:11:35.460
+Mas tem aquela opção de você deixar no
+vault, que eu acho daí muito bagunçado,
+
+00:11:35.460 --> 00:11:38.260
+ou deixar na pasta que você está.
+
+00:11:38.340 --> 00:11:41.280
+Então, por exemplo, se eu estou
+colocando aqui numa nota que está dentro
+
+00:11:41.280 --> 00:11:46.920
+de palestras, vai criar uma anexos
+dentro de palestras, então, isso aqui é
+
+00:11:46.920 --> 00:11:50.620
+a forma do Markdown funcionar e trazer
+link para cá.
+
+00:11:52.020 --> 00:11:56.240
+Você está vendo que tem sempre aqui uma
+linha horizontal, né?
+
+00:11:56.920 --> 00:12:04.520
+Aqui nós temos os chamados call out, que
+é uma chamada de atenção.
+
+00:12:04.520 --> 00:12:07.040
+Como que isso funciona no Markdown?
+
+00:12:07.160 --> 00:12:07.900
+É isso aqui, ó.
+
+00:12:08.040 --> 00:12:17.080
+Você tem o sinalzinho de citação, porém,
+entre colchetes, você tem palavras,
+
+00:12:17.360 --> 00:12:21.720
+nomes que indicam que tipo de call out
+tem ali.
+
+00:12:22.240 --> 00:12:25.160
+Então, você coloca o sinalzinho, né?
+
+00:12:26.500 --> 00:12:29.680
+Vamos criar aqui, ó, vou até criar aqui
+um bloco.
+
+00:12:30.600 --> 00:12:33.260
+Ó, vou abrir um bloco de código aqui.
+
+00:12:34.520 --> 00:12:37.500
+Para a gente colocar também o call out
+aqui, ó.
+
+00:12:37.500 --> 00:12:41.700
+Vou pegar esse cara aqui, porque daí
+você vai conseguir também olhar para o
+
+00:12:41.700 --> 00:12:48.800
+arquivo e rapidamente visualizar como é
+que escreve.
+
+00:12:49.120 --> 00:12:50.040
+Pronto, está aqui, ó.
+
+00:12:50.100 --> 00:12:54.600
+Então, aqui, ó, primeiro call out, o de
+title aqui, ó.
+
+00:12:54.720 --> 00:13:00.560
+Você tem o tipo question e texto que vai
+estar escrito
+
+00:13:00.560 --> 00:13:04.640
+aqui e conteúdo.
+
+00:13:05.900 --> 00:13:09.560
+Que você vai digitar de texto em todo o
+bloco aqui.
+
+00:13:09.800 --> 00:13:12.180
+Então, ó, esse aqui é question.
+
+00:13:12.580 --> 00:13:15.220
+Percebeu que tem um sinal de exclamação
+aqui?
+
+00:13:15.320 --> 00:13:15.740
+Por quê?
+
+00:13:16.500 --> 00:13:20.400
+Porque aqui ele está dizendo, ó, eu
+quero que você traga visualmente, traga
+
+00:13:20.400 --> 00:13:24.080
+para dentro o símbolo, né?
+
+00:13:24.140 --> 00:13:24.600
+Question.
+
+00:13:24.800 --> 00:13:33.240
+Então, você tem de question, você tem
+important, você tem tip, de dica, né?
+
+00:13:33.900 --> 00:13:34.940
+Você tem...
+
+00:13:35.900 --> 00:13:36.200
+Success.
+
+00:13:36.880 --> 00:13:37.900
+Você tem...
+
+00:13:37.900 --> 00:13:39.660
+Ah, o question repetido aqui.
+
+00:13:39.820 --> 00:13:40.700
+Ah, está repetindo aqui.
+
+00:13:41.020 --> 00:13:41.760
+Não, não.
+
+00:13:41.840 --> 00:13:42.500
+Aqui é warning.
+
+00:13:43.840 --> 00:13:44.840
+Aqui é example.
+
+00:13:46.600 --> 00:13:47.240
+Quote.
+
+00:13:48.440 --> 00:13:49.480
+E danger.
+
+00:13:50.240 --> 00:13:55.500
+São call outs diferentes, cores
+diferentes, com símbolos, né?
+
+00:13:55.840 --> 00:13:58.620
+O gráfico aqui diferente.
+
+00:13:59.480 --> 00:14:04.220
+Mas você vai ver que tem como criar isso
+também de forma visual.
+
+00:14:04.480 --> 00:14:05.280
+Então, olha aqui.
+
+00:14:05.280 --> 00:14:07.340
+Markdown para call out.
+
+00:14:07.460 --> 00:14:08.500
+É assim que você faz.
+
+00:14:08.940 --> 00:14:09.380
+Perfeito?
+
+00:14:09.960 --> 00:14:10.400
+Tranquilo?
+
+00:14:10.760 --> 00:14:11.480
+Por quê?
+
+00:14:12.000 --> 00:14:16.960
+Se você usa simplesmente o visual e não
+sabe como é que armazena, puxa, puxa,
+
+00:14:16.980 --> 00:14:17.260
+puxa.
+
+00:14:17.400 --> 00:14:20.280
+Lá vai você precisar alterar um texto.
+
+00:14:20.340 --> 00:14:21.540
+Você vai clicar na...
+
+00:14:22.060 --> 00:14:25.840
+Na hora que você vai clicar ali para
+alterar alguma coisa, você não sabe.
+
+00:14:25.900 --> 00:14:27.380
+Nossa, onde eu mexo, onde eu não mexo.
+
+00:14:27.420 --> 00:14:28.960
+Onde eu posso mexer, onde eu não posso
+mexer.
+
+00:14:29.120 --> 00:14:32.740
+Aqui, então, vendo isso aqui, você
+está...
+
+00:14:32.740 --> 00:14:33.400
+É...
+
+00:14:34.280 --> 00:14:34.720
+Aprendendo...
+
+00:14:34.720 --> 00:14:37.360
+Como que funciona, qual é a dinâmica da
+coisa.
+
+00:14:37.560 --> 00:14:37.820
+Tá bom?
+
+00:14:38.260 --> 00:14:38.980
+Então, legal.
+
+00:14:39.080 --> 00:14:43.120
+Aqui eu termino esse arquivo, que eu
+acho que é o essencial para você começar
+
+00:14:43.120 --> 00:14:43.500
+aí.
+
+00:14:45.640 --> 00:14:47.420
+Estudar, saber o que é Markdown.
+
+00:14:48.940 --> 00:14:51.320
+Praticar, se tornar mais produtivo.
+
+00:14:51.560 --> 00:14:52.540
+Não é o contrário.
+
+00:14:52.560 --> 00:14:54.300
+Talvez agora na tua mente fique aí.
+
+00:14:54.380 --> 00:14:55.980
+Puxa vida, mas que chato.
+
+00:14:56.020 --> 00:14:57.740
+Eu vou ter que lembrar isso, fazer isso.
+
+00:14:58.300 --> 00:15:03.280
+É o primeiro obstáculo mental, talvez
+aí, de que eu estou...
+
+00:15:04.040 --> 00:15:04.700
+Tendo que aprender.
+
+00:15:04.700 --> 00:15:05.660
+Tendo que aprender algo a mais.
+
+00:15:05.820 --> 00:15:07.060
+Mas não, isso vai ficar natural.
+
+00:15:07.460 --> 00:15:09.640
+Isso aqui vai ficar muito mais
+produtivo.
+
+00:15:09.720 --> 00:15:13.940
+Você vai ver que é muito mais foco em
+conteúdo, do que ficar formatando texto,
+
+00:15:14.220 --> 00:15:14.440
+entendeu?
+
+00:15:14.740 --> 00:15:17.920
+E são ferramentas que vão permitir para
+você...
+
+00:15:17.920 --> 00:15:22.820
+Eu acho que com o que está nesse arquivo
+aqui, já é suficiente para você, assim,
+
+00:15:22.900 --> 00:15:26.020
+pegar suas notas agora e fazer muita
+coisa.
+
+00:15:26.100 --> 00:15:29.360
+Muita formatação, muita coisa visual.
+
+00:15:29.800 --> 00:15:32.060
+Então, qual que é o exercício para esse
+final de aula?
+
+00:15:32.400 --> 00:15:34.580
+Você vai pegar as notas que você já
+foi...
+
+00:15:34.580 --> 00:15:36.160
+incluindo no seu segundo cérebro.
+
+00:15:36.320 --> 00:15:41.920
+Aquelas que você começou a pegar e
+tornar uso, para se tornar um hábito
+
+00:15:41.920 --> 00:15:44.140
+natural, construir o segundo cérebro.
+
+00:15:44.940 --> 00:15:48.220
+E agora você vai dar um tapa nelas aí,
+usando esses recursos.
+
+00:15:48.800 --> 00:15:53.080
+Pega esse arquivo do Mark Dowd Obsidian,
+que você vai baixar, que é um arquivo
+
+00:15:53.080 --> 00:15:53.280
+MD.
+
+00:15:55.120 --> 00:16:04.100
+Copia para dentro do seu cofre, VAUNT, e
+começa a usar ele como referência.
+
+00:16:04.100 --> 00:16:05.900
+Para você saber o que escrever.
+
+00:16:06.080 --> 00:16:12.740
+Você pode pegar aqui, abrir uma nota,
+igual eu fiz aqui, e pegar ela e coloca
+
+00:16:12.740 --> 00:16:14.840
+aqui, por exemplo, a sua direita.
+
+00:16:15.480 --> 00:16:17.880
+E você abre a referência aqui.
+
+00:16:18.040 --> 00:16:25.780
+E você vai pegando aqui e vai praticando
+e vai exercitando para você fazer aí um
+
+00:16:25.780 --> 00:16:30.240
+bom uso inicial, só para entender como a
+coisa funciona.
+
+00:16:30.620 --> 00:16:37.060
+Na próxima aula, eu vou trazer essas
+coisas, de Mark Dowd, mas como você faz
+
+00:16:37.060 --> 00:16:38.120
+visualmente.
+
+00:16:38.340 --> 00:16:42.780
+Quais são os recursos que a ferramenta
+traz hoje, para você fazer tudo isso,
+
+00:16:42.860 --> 00:16:45.900
+mas não digitando com o teclado.
+
+00:16:45.940 --> 00:16:50.560
+Mas coisas que o próprio Obsidian
+trabalhou em cima do Mark Dowd, para
+
+00:16:50.560 --> 00:16:53.380
+tornar mais fácil e visual de você
+utilizar.
+
+00:16:53.760 --> 00:16:59.040
+Então, na próxima aula, a gente dá
+continuidade a esses elementos, que vão
+
+00:16:59.040 --> 00:17:05.480
+facilitar e tornar você uma pessoa muito
+produtiva, na criação de nota e
+
+00:17:05.480 --> 00:17:06.500
+digitação de texto.
+
+00:17:06.660 --> 00:17:06.860
+Tá bom?

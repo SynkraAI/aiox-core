@@ -11,7 +11,8 @@
 - `*backlog-review` - Generate backlog review for sprint planning
 - `*backlog-summary` - Quick backlog status summary
 - `*stories-index` - Regenerate story index from docs/stories/
-- `*validate-story-draft` - Validate story quality and completeness
+- `*validate-story-draft` - Validate story quality and completeness (START of story lifecycle)
+- `*close-story` - Close completed story, update epic/backlog, suggest next (END of story lifecycle)
 - `*execute-checklist-po` - Run PO master checklist
 - `*guide` - Show comprehensive usage guide for this agent
 
@@ -24,7 +25,8 @@
 - `*backlog-prioritize` - Re-prioritize backlog item
 - `*backlog-schedule` - Assign item to sprint
 - `*stories-index` - Regenerate story index from docs/stories/
-- `*validate-story-draft` - Validate story quality and completeness
+- `*validate-story-draft` - Validate story quality and completeness (START of story lifecycle)
+- `*close-story` - Close completed story, update epic/backlog, suggest next (END of story lifecycle)
 - `*sync-story` - Sync story to PM tool (ClickUp, GitHub, Jira, local)
 - `*pull-story` - Pull story updates from PM tool
 - `*execute-checklist-po` - Run PO master checklist

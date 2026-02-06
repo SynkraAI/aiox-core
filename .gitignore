@@ -307,4 +307,17 @@ npm-recovery-codes.txt
 C:Users*
 *temp-catalog.txt
 .eslintcache
-.eslintcache
+
+# ============================================
+# MMOS IMPORT (TEMPORARY - Story MMOS-Sync)
+# Remove entries after validation
+# ============================================
+scripts/glue/
+.claude/skills/
+.claude/hooks/
+.claude/templates/
+.claude/agents/
+.claude/agent-memory/
+.claude/setup/
+docs/guides/aios-workflows/
+docs/guides/glue-script-guide.md

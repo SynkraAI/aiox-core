@@ -1,0 +1,522 @@
+---
+# MMOS DNA Mental™ - Cognitive Specification
+# Source: DATASHEET_ENTIDADE_LOZANO_v2.0.md
+# Converted: 2025-10-16
+# Quality: ⭐⭐⭐⭐⭐ Exceptional (complete psychometric + cognitive mapping)
+
+meta:
+  mind_name: "João Gabriel Lozano"
+  slug: "joao_lozano"
+  version: "2.0-MMOS"
+  source_file: "DATASHEET_ENTIDADE_LOZANO_v2.0.md"
+  source_quality: "exceptional"
+  preservation_note: "Original depth preserved - mapped to MMOS cognitive framework"
+
+# ============================================================================
+# I. FUNDAMENTAL DATA
+# ============================================================================
+
+biographical:
+  full_name: "João Gabriel Casagrande Simonelli Lozano"
+  age: 26
+  birth_date: "1998-07-06"
+  birth_time: "22:30"
+  birth_place: "Brazil"
+  zodiac:
+    sun: "Cancer"
+    ascendant: "Pisces"
+  nationality: "Brazilian"
+  education:
+    degree: "Publicidade e Propaganda"
+    institution: "Faculdade Cásper Líbero"
+    period: "2016-2019"
+  current_location: "São Paulo, SP"
+  occupation:
+    primary: "Especialista em IA, CEO da AIdeas Lab Solutions"
+    secondary: "Professor e Fundador da Comunidade d.IA.logo"
+  professional_identity: "Arquiteto Cognitivo & Alquimista Neural"
+
+# ============================================================================
+# II. PERSONALITY FRAMEWORKS (Psychometric Foundation)
+# ============================================================================
+
+psychometrics:
+
+  # DISC Profile
+  disc:
+    type: "DI"
+    dimensions:
+      dominant_d:
+        score: "High"
+        traits:
+          - "Preferência por desafios"
+          - "Tomada de decisões rápidas"
+          - "Liderança natural"
+        professional_implication: |
+          Manifesta-se como capacidade de **arquitetar soluções** de forma decisiva
+          e liderar projetos de IA com visão clara.
+
+      influential_i:
+        score: "High"
+        traits:
+          - "Trabalho em equipe criativo"
+          - "Comunicação entusiástica"
+          - "Inspiração e persuasão"
+        professional_implication: |
+          Base do **estilo de comunicação** cativante e habilidade de "traduzir
+          complexidade" de forma inspiradora e compreensível.
+
+  # Enneagram
+  enneagram:
+    core_type: "3"
+    type_name: "O Realizador"
+    wing: "2"
+    wing_name: "O Ajudante"
+    integration: "3w2"
+
+    type_3_traits:
+      - "Orientação para resultados"
+      - "Adaptabilidade contextual"
+      - "Busca por reconhecimento e sucesso"
+
+    professional_implication_type_3: |
+      Impulsiona busca pela **excelência e maestria técnica**, criando sistemas
+      de IA que não são apenas inovadores, mas que geram impacto e resultados tangíveis.
+
+    wing_2_traits:
+      - "Empatia profunda"
+      - "Desejo de ajudar e contribuir"
+      - "Orientação relacional"
+
+    professional_implication_wing_2: |
+      Fundamenta missão de **humanizar a IA** e o propósito de mentor/educador,
+      garantindo que soluções sejam úteis e catalisadoras para outros.
+
+  # MBTI (estimated)
+  mbti:
+    type: "ENFP"
+    type_name: "O Campeão"
+    estimation: true
+    dimensions:
+      extroversion_e:
+        trait: "Comunicação energética, pensamento em voz alta"
+      intuition_n:
+        trait: "Pensamento conectivo e não-linear, visão de padrões"
+      feeling_f:
+        trait: "Tomada de decisão baseada em valores e impacto humano"
+      perception_p:
+        trait: "Flexibilidade e adaptabilidade em ambientes caóticos"
+
+    professional_implication: |
+      Combinação explica **pensamento conectivo não-linear (N)**, comunicação
+      energética (E), decisão baseada em valores (F) e **flexibilidade em caos (P)**.
+
+  # Big Five (estimated)
+  big_five:
+    estimation: true
+    dimensions:
+
+      openness:
+        score: 95
+        percentile: "90-95%"
+        level: "Extremely High"
+        cognitive_implication: |
+          Fonte da **inovação ousada**, curiosidade insaciável e capacidade de
+          explorar fronteiras não convencionais na IA.
+        traits:
+          - "Curiosidade intelectual extrema"
+          - "Exploração de fronteiras"
+          - "Pensamento original e divergente"
+
+      conscientiousness:
+        score: 42
+        percentile: "40-45%"
+        level: "Medium-Low"
+        focal_challenge: true
+        cognitive_implication: |
+          Raiz do desafio com **completude de ciclos e disciplina sustentável**.
+          Exige criação de sistemas e estruturas externas para compensar.
+        traits:
+          - "Dificuldade com rotinas rígidas"
+          - "Desafio com completude de projetos"
+          - "Necessita sistemas externos de organização"
+        mitigation_strategy: |
+          Criar estruturas e frameworks que compensem baixa conscienciosidade.
+          Usar sistemas de accountability externos.
+
+      extroversion:
+        score: 77
+        percentile: "75-80%"
+        level: "High"
+        cognitive_implication: |
+          Facilita liderança, comunicação e "pensamento em voz alta".
+        traits:
+          - "Energizado por interações sociais"
+          - "Comunicação expressiva"
+          - "Liderança natural em grupos"
+
+      agreeableness:
+        score: 67
+        percentile: "65-70%"
+        level: "Medium-High"
+        cognitive_implication: |
+          Alinha-se com asa 2 do Eneagrama, fortalecendo **colaboração sinérgica**
+          e desejo de contribuir.
+        traits:
+          - "Colaborativo e empático"
+          - "Desejo de contribuir para outros"
+          - "Orientação relacional"
+
+      neuroticism:
+        score: 62
+        percentile: "60-65%"
+        level: "Medium-High"
+        cognitive_implication: |
+          Fonte de **intensidade emocional** que, quando canalizada, torna-se
+          combustível para expressão criativa e resiliência (transmutação da dor).
+        traits:
+          - "Intensidade emocional elevada"
+          - "Sensibilidade a estressores"
+          - "Capacidade de transmutação criativa"
+        transmutation_mechanism: "Converte intensidade em criatividade e expressão"
+
+  # Integrated Profile
+  integrated_archetype:
+    name: "O Realizador Criativo Adaptativo"
+    synthesis: |
+      Indivíduo orientado para inovação e impacto, com extraordinária capacidade
+      de adaptação contextual e expressão autêntica. Fusão de ambição (Tipo 3)
+      com sensibilidade e desejo de contribuição (Asa 2).
+
+# ============================================================================
+# III. COGNITIVE FUNCTIONING (How the Mind Works)
+# ============================================================================
+
+cognitive_structure:
+
+  # Primary Thinking Style
+  primary_style:
+    type: "Intuitivo-Associativo"
+    linearity: "Non-linear"
+    processing_mode: "Holístico, integrador de polaridades"
+    learning_style: "Multimodal (Cinestésica-Visual-Auditiva)"
+    learning_optimization:
+      - "Aprender fazendo (kinesthetic)"
+      - "Aprender ensinando (pedagogical)"
+
+  # Distinctive Cognitive Patterns
+  patterns:
+
+    1_connective_thinking:
+      name: "Pensamento Conectivo"
+      description: |
+        Habilidade de estabelecer conexões entre domínios aparentemente não relacionados.
+      professional_mapping: |
+        Origem da **Alquimia Neural** - capacidade de fundir marketing, psicologia,
+        design e tecnologia em metodologia coesa.
+      examples:
+        - "Marketing + IA"
+        - "Psicologia + Engenharia de Prompts"
+        - "Design + Arquitetura Cognitiva"
+
+    2_metacognitive_structuring:
+      name: "Metacognição Estruturante"
+      description: |
+        Necessidade de criar mapas conceituais e workflows para organizar caos interno.
+      professional_mapping: |
+        Habilidade que o torna **Arquiteto Cognitivo**. Ele projeta para outros
+        as estruturas que precisa para si mesmo.
+      manifestations:
+        - "Criação de frameworks visuais"
+        - "Design de workflows cognitivos"
+        - "Mapas conceituais complexos"
+
+    3_informational_transmutation:
+      name: "Transmutação Informacional"
+      description: |
+        Transformar conhecimento complexo em estruturas acessíveis.
+      professional_mapping: "Função de **Tradutor de Complexidade**"
+      process:
+        input: "Conceito técnico complexo"
+        transformation: "Identificar essência, criar metáforas, simplificar estrutura"
+        output: "Comunicação acessível sem perda de profundidade"
+
+    4_systemic_thinking:
+      name: "Pensamento Sistêmico"
+      description: |
+        Ver todos os componentes como partes interconectadas de um sistema maior.
+      professional_mapping: |
+        Base da capacidade de **arquitetura de sistemas cognitivos complexos**.
+
+    5_visual_processing:
+      name: "Processamento Visual"
+      description: |
+        Forte componente visual no pensamento e comunicação.
+      manifestations:
+        - "Diagramas e mapas mentais"
+        - "Metáforas visuais"
+        - "Canvas e frameworks gráficos"
+
+    6_analytical_synthesis:
+      name: "Síntese Analítica"
+      description: |
+        Capacidade de decompor complexidade (análise) e reintegrar em novo todo (síntese).
+      professional_mapping: |
+        Processo central da **Neural Flow Methodology**.
+
+    7_abductive_reasoning:
+      name: "Raciocínio Abdutivo"
+      description: |
+        Gerar hipóteses criativas a partir de padrões incompletos.
+      professional_mapping: |
+        Permite **inovação ousada** e criação de soluções não óbvias.
+
+  # Cognitive Challenges
+  challenges:
+
+    primary_challenge:
+      name: "Ciclo de Dispersão Atencional"
+      description: |
+        Dificuldade em completar projetos devido a novas ideias estimulantes.
+      pseudocode: |
+        function ciclo_projeto_lozano() {
+            let ideia_nova = gerar_ideia_brilhante();
+            iniciar_projeto_com_hiperfoco(ideia_nova);
+
+            while (projeto.status != 'concluido') {
+                if (get_nova_ideia_estimulante()) {
+                    // Risco de dispersão atencional
+                    pausar_projeto_atual();
+                    ciclo_projeto_lozano(); // Chamada recursiva perigosa
+                    break;
+                } else {
+                    // Risco de paralisia por excesso de possibilidades
+                    analisar_infinitas_otimizacoes();
+                }
+            }
+            // [DESAFIO_FOCAL]: Atingir este 'return' é o objetivo principal
+            return projeto.finalizado;
+        }
+
+      focal_challenge: "Completude de ciclos"
+      mitigation_strategies:
+        - "Sistemas de accountability externos"
+        - "Frameworks de decisão pré-definidos"
+        - "Deadlines rígidos e públicos"
+        - "Foco consciente e disciplina construída"
+
+    secondary_challenges:
+      paralysis_by_analysis:
+        description: "Excesso de otimizações possíveis gera paralisia decisória"
+        mitigation: "Princípios de 'good enough' e 'ship it'"
+
+      low_conscientiousness_impact:
+        description: "Dificuldade com rotinas e estruturas rígidas"
+        mitigation: "Criar sistemas personalizados que trabalham COM sua natureza"
+
+# ============================================================================
+# IV. EMOTIONAL PROFILE (Emotional Dynamics & Regulation)
+# ============================================================================
+
+emotional_dynamics:
+
+  # Emotional Experience
+  experience:
+    intensity: "Extremely High"
+    awareness: "Alta sensibilidade"
+    categorization_challenge: "Desafio na categorização de emoções complexas"
+    expression:
+      style: "Autêntica"
+      context_dependency: "Seletiva a contextos de confiança"
+
+  # Regulation Mechanisms
+  regulation:
+
+    adaptive_mechanisms:
+
+      creative_transmutation:
+        name: "Transmutação Criativa"
+        description: |
+          Converter experiências intensas (positivas ou negativas) em expressão.
+        outputs:
+          - "Poesia"
+          - "Prompts elaborados"
+          - "Sistemas cognitivos"
+          - "Frameworks visuais"
+        effectiveness: "High"
+
+      spiritual_reframing:
+        name: "Ressignificação Espiritual"
+        description: |
+          Encontrar propósito e crescimento em adversidades.
+        mechanism: "Transformar dor em significado e aprendizado"
+        effectiveness: "High"
+
+    challenging_mechanisms:
+
+      external_regulators:
+        name: "Dependência de Reguladores Externos"
+        description: |
+          Uso de substâncias (cannabis, tabaco) para modular estados internos.
+        focal_challenge: true
+        mitigation_goal: |
+          Substituir por sistemas de autorregulação internos e disciplina consciente.
+
+  # Resilience & Recovery
+  resilience:
+    level: "Exceptional"
+    pattern: "Regenerativo-Transformador"
+    description: |
+      A entidade não apenas se recupera, mas usa energia do impacto para evoluir.
+
+    traumatic_reframing:
+      capability: "Highly developed"
+      professional_mapping: |
+        Base da resiliência em projetos de alta pressão e capacidade de pivotar
+        estrategicamente após falhas, extraindo aprendizado valioso.
+
+# ============================================================================
+# V. FORMATIVE HISTORY (Transformative Experiences)
+# ============================================================================
+
+formative_experiences:
+
+  # Crucible Events (Crisol)
+  crucible_events:
+
+    1_confrontation_with_mortality:
+      event: "Tentativa de suicídio próprio; testemunho do suicídio da ex-namorada"
+      age_period: "Adolescence/Early Adulthood"
+      transmutation: |
+        Forjou profunda ressignificação espiritual e busca por impacto significativo
+        e legado duradouro.
+      impact:
+        - "Busca por significado profundo"
+        - "Consciência da mortalidade como motivador"
+        - "Urgência em deixar legado"
+
+    2_instability_and_adaptation:
+      event: "8-9 mudanças residenciais durante desenvolvimento"
+      age_period: "Childhood/Adolescence"
+      transmutation: |
+        Desenvolveu **adaptabilidade contextual extrema** ("camaleônica").
+      impact:
+        - "Capacidade de se adaptar a múltiplos contextos"
+        - "Flexibilidade em diferentes culturas organizacionais"
+        - "Habilidade de navegar domínios distintos"
+
+    3_professional_rupture:
+      event: "Largar tudo para imersão completa em IA"
+      age_period: "Mid-20s"
+      transmutation: |
+        Demonstra **inovação ousada** e capacidade de assumir riscos calculados
+        em busca de maestria e relevância.
+      impact:
+        - "Coragem para pivotar completamente"
+        - "Foco intenso quando alinhado com propósito"
+        - "Disposição para recomeçar do zero"
+
+# ============================================================================
+# VI. META-PATTERN (Core Algorithm)
+# ============================================================================
+
+meta_pattern:
+  name: "Síntese Transmutacional Criativa"
+
+  definition: |
+    Capacidade inata de absorver polaridades e contradições, processá-las através
+    de intensa experiência interna, e transformá-las em novas sínteses que
+    transcendem as partes originais.
+
+  manifestations:
+
+    cognitive:
+      polarities: ["Marketing", "IA"]
+      synthesis: "Alquimia Neural - fusão de domínios aparentemente distintos"
+
+    emotional:
+      polarities: ["Trauma", "Dor"]
+      synthesis: "Propósito e crescimento - transformação do sofrimento"
+
+    behavioral:
+      polarities: ["Malandro", "Business"]
+      synthesis: "Navegação fluida entre contextos sociais distintos"
+
+    professional:
+      polarities: ["Arte", "Tecnologia"]
+      synthesis: "Arquiteturas Cognitivas - sistemas que unem técnica e humanidade"
+
+  core_algorithm:
+    input: "Polaridades, contradições, complexidade"
+    process: |
+      1. Absorver profundamente ambas perspectivas
+      2. Processar através de experiência emocional intensa
+      3. Integrar via metacognição estruturante
+      4. Expressar através de transmutação criativa
+    output: "Nova síntese que transcende partes originais"
+
+# ============================================================================
+# MMOS ADDITIONS (Standardized Components)
+# ============================================================================
+
+mmos_enhancements:
+
+  decision_thresholds:
+    confidence_required: 80
+    minimum_information: "70% clarity on outcomes"
+    maximum_analysis_time: "Don't let perfect be enemy of good"
+
+  stress_responses:
+    under_pressure:
+      positive: "Hyperfocus and rapid synthesis"
+      negative: "Risk of burnout and substance use"
+    recovery_protocol:
+      - "Creative expression (poetry, systems)"
+      - "Spiritual practices"
+      - "Nature immersion"
+      - "Teaching/mentoring (energizing)"
+
+  communication_optimization:
+    energy_levels:
+      peak: "When teaching, creating, or synthesizing"
+      low: "During routine execution tasks"
+    optimal_contexts:
+      - "Collaborative brainstorming"
+      - "Visual explanation sessions"
+      - "Strategic planning"
+      - "System design workshops"
+
+  learning_acceleration:
+    best_methods:
+      - "Learn by doing (hands-on projects)"
+      - "Learn by teaching (pedagogical loop)"
+      - "Learn by synthesizing (create frameworks)"
+    avoid:
+      - "Passive consumption only"
+      - "Rote memorization"
+      - "Context-free theory"
+
+# ============================================================================
+# INTEGRATION NOTES
+# ============================================================================
+
+integration:
+  preservation_quality: "100%"
+  mmos_compatibility: "Full"
+  unique_innovations:
+    - "Pseudo-code representation of cognitive challenges"
+    - "Explicit transmutation mapping (event → impact)"
+    - "Meta-pattern as core algorithm"
+
+  next_artifacts:
+    - "synthesis/frameworks.md (BIBLIOTECA - 28 techniques)"
+    - "synthesis/communication-style.md (GUIA_DE_REPLICAÇÃO)"
+    - "synthesis/decision-framework.md (ARSENAL_METODOLOGICO)"
+    - "synthesis/worldview.md (DECLARAÇÃO_FILOSÓFICA)"
+    - "implementation/tools.md (PLATAFORMA - Canvas)"
+
+---
+# Document Complete: cognitive-spec.yaml
+# Status: ✅ CONVERTED - Ready for validation
+# Quality: ⭐⭐⭐⭐⭐ (Exceptional depth preserved)
+# Conversion: DATASHEET → MMOS YAML (100% content retention)

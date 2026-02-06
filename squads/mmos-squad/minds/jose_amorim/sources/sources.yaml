@@ -1,0 +1,38 @@
+---
+# José Amorim - Sources Inventory
+# Status: Empty - Awaiting Phase 1 (Research Collection)
+
+mind: "jose_amorim"
+created_at: "2025-10-15"
+status: "initialized"
+
+sources:
+  # Add sources here during Phase 1: Research Collection
+  # Example format:
+  #
+  # - id: example-source-1
+  #   type: blog|youtube|interview|pdf|book
+  #   tier: 1|2|3
+  #   url: "https://..."
+  #   title: "Source Title"
+  #   description: "Brief description"
+  #   metadata:
+  #     author: "José Amorim"
+  #     year: "2024"
+  #     category: "domain-specific"
+  #     priority: 1
+
+statistics:
+  total_sources: 0
+  by_tier:
+    tier_1: 0
+    tier_2: 0
+    tier_3: 0
+  by_type:
+    blog: 0
+    youtube: 0
+    interview: 0
+    pdf: 0
+    book: 0
+    article: 0
+    video: 0

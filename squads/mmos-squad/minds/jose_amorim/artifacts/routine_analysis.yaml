@@ -1,0 +1,360 @@
+---
+# Layer 3: Routine & Habits (Temporal Patterns) - José Carlos Amorim
+# DNA Mental™ 8-Layer Analysis
+# Created: 2025-10-19
+# Sources: 2 (entrevista.md [SYNTHETIC], geral.md [SYNTHETIC])
+# Confidence: MEDIUM (baseado em auto-relato, sem observação direta)
+
+mind: "jose_amorim"
+layer: 3
+layer_name: "Routine & Habits (Temporal Patterns)"
+extraction_date: "2025-10-19"
+source_count: 2
+primary_sources: 0
+confidence_level: "medium"
+
+---
+
+## DAILY STRUCTURE
+
+### Morning Routine: Triade Diária
+time: "Manhã (hora não especificada)"
+components:
+  - "Revisão de objetivos do dia"
+  - "Priorização de tarefas (energy-based)"
+  - "Alinhamento com metas maiores"
+
+ritual_name: "Triade Diária"
+consistency: "Diária (reportada como sistema estruturado)"
+
+evidence:
+  - source: entrevista.md
+    quote: "Gestão de tempo: Triade Diária (manhã), Revisão Inbox 17:30, Revisão semanal domingo 21:00"
+
+### Afternoon: Inbox Zero Protocol
+time: "17:30"
+activity: "Revisão completa de inbox (e-mails, mensagens, notificações)"
+purpose: "Fechar loops abertos antes da noite"
+consistency: "Diária"
+
+evidence:
+  - source: entrevista.md
+    quote: "Revisão Inbox 17:30"
+
+### Evening: Deep Work Prime Time
+time: "22h - 2h da manhã"
+description: |
+  Janela de pico cognitivo. José é coruja noturna extrema.
+  Reserva trabalho criativo/complexo para esse período.
+
+activities:
+  - "Escrita (livros, conteúdos)"
+  - "Desenvolvimento de frameworks"
+  - "Estudo profundo (IA, neurociência)"
+  - "Criação de produtos educacionais"
+
+energy_level: "MÁXIMO"
+consistency: "Padrão cronobiológico constante"
+
+evidence:
+  - source: entrevista.md
+    quotes:
+      - "Coruja noturna: pico 22h-2h da manhã"
+      - "Janela de foco ideal: 22h às 2h da manhã"
+
+### Weekly: Sunday Night Review
+time: "Domingo 21:00"
+activity: "Revisão semanal completa"
+components:
+  - "O que funcionou na semana"
+  - "O que não funcionou"
+  - "Ajustes para próxima semana"
+  - "Alinhamento com metas mensais"
+
+consistency: "Semanal (reportada)"
+
+evidence:
+  - source: entrevista.md
+    quote: "Revisão semanal domingo 21:00"
+
+---
+
+## PRODUCTIVITY PATTERNS
+
+### Work Blocks: Modified Pomodoro
+structure: "Blocos de 90 minutos com Pomodoros internos"
+breakdown:
+  - "45 min trabalho → 10 min pausa"
+  - "45 min trabalho → 10 min pausa"
+  - "(Total: 90min + pausas)"
+
+rationale: |
+  90 minutos = ciclo ultradian rhythm (natural)
+  Pomodoros de 45min = adaptação para TDAH (não 25min tradicional)
+
+evidence:
+  - source: entrevista.md
+    quotes:
+      - "Estilo: intenso e flexível, blocos de 90min deep work"
+      - "Pomodoros de 45min trabalho / 10min pausa"
+
+### Digital Hygiene Practices
+morning:
+  - "Jejum digital matinal (hora não especificada)"
+  - "Não checar redes sociais ao acordar"
+
+during_work:
+  - "Modo 'Não Perturbe' ativado"
+  - "Cancelar abas irrelevantes"
+  - "Playlists de ruído branco/música estratégica"
+
+purpose: |
+  Controlar estimulação dopaminérgica (TDAH)
+  Preservar janela de foco para trabalho profundo
+
+evidence:
+  - source: entrevista.md
+    quotes:
+      - "Jejum digital matinal + música estratégica"
+      - "Modo 'Não Perturbe', cancelar abas irrelevantes, playlists de ruído branco"
+
+---
+
+## CREATIVE PROCESS
+
+### Ideation
+when: "Noturno (22h-2h), durante caminhadas, micro-isolamentos"
+method: "Livre associação, nexialismo, journaling"
+triggers: "Leitura, conversas estimulantes, problemas complexos"
+
+### Execution
+when: "Blocos de 90min durante janelas de alta energia"
+method: "Deep work, IA como co-criador, prototipagem rápida"
+cycle: "Ideia → Protótipo → Teste → Abandono ou Refinamento"
+
+### Review
+when: "Revisão Inbox (17:30), Revisão Semanal (domingo 21:00)"
+method: "Autoavaliação pós-tarefa (energia gasta vs. valor gerado)"
+metrics: "Nível de confiança subjetivo, impacto relatado por outros"
+
+evidence:
+  - source: entrevista.md
+    quotes:
+      - "Autoavaliação pós-tarefa (energia gasta vs. valor gerado)"
+      - "Mede progresso: subjetivamente por 'nível de confiança' e impacto transformador relatado"
+
+---
+
+## HEALTH HABITS
+
+### Sleep Patterns
+type: "Coruja noturna (delayed sleep phase)"
+sleep_time: "~3h-4h da manhã (inferido)"
+wake_time: "10h-11h da manhã (inferido)"
+quality: "Monitorado via diário de sono"
+
+notes: |
+  Padrão cronobiológico TDAH clássico.
+  Tenta forçar rotina matinal cedo resulta em performance baixa.
+
+evidence:
+  - source: entrevista.md
+    quotes:
+      - "Coruja noturna: pico 22h-2h da manhã"
+      - "Diário de sono e alimentação (busca correlacionar padrões)"
+
+### Nutrition
+tracking: "Diário de alimentação"
+purpose: "Correlacionar alimentação com energia/foco"
+specifics: "Não especificado nos sources"
+
+evidence:
+  - source: entrevista.md
+    quote: "Diário de sono e alimentação (busca correlacionar padrões)"
+
+### Exercise
+specifics: "Não especificado nos sources"
+gap: "ALTO - sem dados sobre prática de exercícios"
+
+### Stress Management
+methods:
+  - "Micro-isolamentos criativos"
+  - "Música (playlists estratégicas)"
+  - "Escrita (journaling, drafts de conceitos)"
+  - "Caminhadas solitárias (inferido)"
+
+pattern: "Reclusão temporária, não socialização"
+trigger: "Sobrecarga, TAG, burnout criativo"
+
+evidence:
+  - source: entrevista.md
+    quotes:
+      - "Padrão: racionalização + ressignificação + microisolamentos criativos (música, escrita)"
+      - "Modo 'Não Perturbe', cancelar abas irrelevantes, playlists de ruído branco"
+
+---
+
+## LEARNING CADENCE
+
+### Reading
+when: "Noturno, fins de semana"
+what: "IA, neurociência, psicologia, filosofia, negócios"
+method: "Não-linear (pula capítulos, busca conexões, não lê capa-a-capa)"
+
+### Skill Development
+approach: "Obsessive deep dives quando algo captura interesse"
+examples:
+  - "IA generativa (2023-2024): mudou carreira"
+  - "Prompt Engineering avançado"
+  - "No-code/low-code tools"
+
+pattern: "100% in por semanas/meses → domínio → próximo interesse"
+
+evidence:
+  - source: entrevista.md
+    quotes:
+      - "Evolução radical: descobriu IA generativa 2023-2024, mudou completamente de carreira"
+      - "Especialidade: Prompt Engineering avançado, automação n8n, Second Brain"
+
+### Reflection Practices
+daily: "Autoavaliação pós-tarefa"
+weekly: "Revisão semanal domingo 21:00"
+method: "Journaling, meditation on 'nível de confiança'"
+
+evidence:
+  - source: entrevista.md
+    quotes:
+      - "Autoavaliação pós-tarefa (energia gasta vs. valor gerado)"
+      - "Mede 'nível de confiança' como KPI pessoal"
+
+---
+
+## SOCIAL RHYTHMS
+
+### Collaboration Time
+when: "Dias úteis, fora da janela de deep work noturna"
+format: "Masterminds, mentorias 1-on-1, aulas ao vivo"
+energy_requirement: "Alto (DISC Comunicador precisa de interação)"
+
+### Solo Time
+when: "Madrugada (22h-2h), micro-isolamentos diurnos"
+purpose: "Criação profunda, escrita, desenvolvimento de frameworks"
+necessity: "CRÍTICA para performance criativa (TDAH + Introversão criativa)"
+
+### Networking
+approach: "Intimidade acelerada, não networking superficial"
+frequency: "Eventos seletivos, masterminds de alto nível"
+investment: "Alto valor (R$ 88k em masterminds)"
+
+evidence:
+  - source: entrevista.md
+    quotes:
+      - "Mastermind R$ 88k, mentorias high-ticket"
+      - "Liderança transformacional (65%), caloroso"
+
+---
+
+## TOOL & SYSTEM USAGE
+
+### Productivity Tools
+current_stack:
+  - "Notion (Second Brain)"
+  - "Triade Diária (framework próprio)"
+  - "Pomodoro modificado (45min/10min)"
+
+pattern: "Cria sistemas elaborados → usa por meses → abandona quando 'fica chato' → cria novo"
+
+evidence:
+  - source: entrevista.md
+    quotes:
+      - "Fracasso recorrente: abandono de sistemas quando 'ficam chatos'"
+      - "Discurso: organização é fraqueza / Ação: cria Notions elaborados repetidamente"
+
+### Tech Stack
+ai_tools:
+  - "Claude AI (preferred)"
+  - "GPT-4o"
+  - "Gemini"
+
+automation:
+  - "n8n (workflow automation)"
+  - "Bolt (no-code development)"
+
+knowledge_management:
+  - "Notion (Second Brain)"
+  - "Whimsical (visual mapping)"
+  - "Miro (collaboration)"
+
+creativity:
+  - "ElevenLabs (voice synthesis)"
+
+evidence:
+  - source: entrevista.md
+    quote: "Tech stack: Claude AI, GPT-4o, Gemini, ElevenLabs, Bolt, n8n, Notion, Whimsical, Miro"
+
+---
+
+## TEMPORAL EVOLUTION OF HABITS
+
+### Media Years (2014-2023)
+routines:
+  - "TV schedule-driven (ao vivo exige disciplina externa)"
+  - "Wake early for morning shows"
+  - "Repetitive daily structure"
+
+notes: "Rotinas impostas externamente, não intrinsecamente motivadas"
+
+### IA Discovery (2023-2024)
+routines:
+  - "Obsessive learning (horas/dia em IA)"
+  - "Abandono instantâneo de hobbies antigos (League of Legends 8 anos)"
+  - "Investimento pesado em cursos (Harvard, IBM, Anthropic)"
+
+notes: "Rotinas motivadas por novidade dopaminérgica + propósito alinhado"
+
+### Current (2025)
+routines:
+  - "Autonomia total (sem horários externos)"
+  - "Triade Diária + Revisões"
+  - "Deep work noturno (otimizado para cronobiologia)"
+  - "Masterminds e mentorias (escolhidas, não impostas)"
+
+notes: "Rotinas desenhadas para TDAH, não contra"
+
+evidence:
+  - source: entrevista.md
+    quote: "Saída em abril 2025, migração full-time para IA em maio 2025"
+
+---
+
+## CONFIDENCE & LIMITATIONS
+
+**Confidence Level:** MEDIUM
+**Source Quality:** Good (entrevista estruturada, mas auto-relato)
+**Triangulation:** None (apenas 1 source primária sobre rotinas)
+
+**Strengths:**
+- Sistemas estruturados bem documentados (Triade, Revisões)
+- Padrão cronobiológico claro (coruja noturna)
+- Consistência entre discurso (sistemas) e realidade (abandono)
+
+**Limitations:**
+- ZERO observação direta de rotinas
+- Possível viés de desirabilidade social (reportar sistema ideal vs. real)
+- Gap ENORME: exercício físico, alimentação específica, relacionamentos
+- Sem dados de como rotinas se adaptam em viagens, crises, mudanças
+
+**Gaps Críticos:**
+- Como mantém rotinas quando viajando?
+- Rotinas conjugais/familiares?
+- Exercício físico (sim ou não? qual?)
+- Como lida com interrupções externas?
+- Rotina financeira (pagamentos, investimentos)?
+
+**Recomendação para Clone:**
+- Implementar Triade Diária + Revisões como framework
+- Respeitar janela noturna (22h-2h) como prime time
+- Incluir "abandono de sistemas" como feature, não bug
+- Task classification por energia_required (low/med/high)
+
+**Next Step:** Layer 4 (Recognition Patterns)

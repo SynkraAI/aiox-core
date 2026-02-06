@@ -1,0 +1,1010 @@
+WEBVTT
+
+00:00:00.430 --> 00:00:02.630
+Vamos lá, lendário, continuando aqui.
+
+00:00:02.750 --> 00:00:07.390
+O objetivo dessa aula agora é que você,
+ao final dela, saiba tudo o que é
+
+00:00:07.390 --> 00:00:09.710
+necessário sobre configuração da
+ferramenta.
+
+00:00:11.210 --> 00:00:16.050
+Olha, algo também que eu não vi, o
+pessoal falando muito, você não vê na
+
+00:00:16.050 --> 00:00:21.090
+internet, você começa a usar o seu
+segundo cérebro e só depois é que você
+
+00:00:21.090 --> 00:00:25.250
+vai se tocar que existem algumas coisas
+importantíssimas de configuração que
+
+00:00:25.250 --> 00:00:26.010
+você precisa fazer.
+
+00:00:26.010 --> 00:00:30.370
+Então, eu já quero matar isso já nessa
+aula, para que você já comece do jeito
+
+00:00:30.370 --> 00:00:31.930
+certo e vá fazer toda a diferença.
+
+00:00:32.850 --> 00:00:35.210
+Eu estou falando de configurações
+básicas.
+
+00:00:35.250 --> 00:00:42.270
+O menu de configuração, ele está aqui,
+no meu inferior esquerdo, tem aqui a
+
+00:00:42.270 --> 00:00:42.910
+engrenagem.
+
+00:00:43.010 --> 00:00:47.330
+Tem aqui, você aprendeu na aula passada
+sobre as configurações do cofre, e aqui
+
+00:00:47.330 --> 00:00:50.710
+você tem a engrenagem que abre essa tela
+de configurações.
+
+00:00:51.110 --> 00:00:53.770
+Bom, nessa tela de configuração, o que
+você tem?
+
+00:00:53.910 --> 00:00:55.990
+Você tem a versão...
+
+00:00:56.010 --> 00:01:01.370
+A versão da ferramenta, que você pode
+checar se tem updates e tal, mas se você
+
+00:01:01.370 --> 00:01:06.750
+selecionar aqui embaixo um update
+automático, já está excelente, porque
+
+00:01:06.750 --> 00:01:11.430
+daí vai mostrar uma tela, já vai
+atualizar sozinho, você vai entrar na
+
+00:01:11.430 --> 00:01:12.930
+ferramenta e ela já vai estar
+atualizada.
+
+00:01:13.870 --> 00:01:21.730
+A linguagem, que você pode clicar aqui e
+passar toda a interface dela em
+
+00:01:21.730 --> 00:01:29.750
+português, ele habilita um botão aqui,
+para que você recarregue a ferramenta,
+
+00:01:29.810 --> 00:01:33.690
+aqui tem o help, você pode abrir o help
+aqui dentro.
+
+00:01:34.170 --> 00:01:40.850
+Aqui, esse negócio de conta, gente, de
+account, se você for usar as opções
+
+00:01:40.850 --> 00:01:49.210
+pagas, que são Obsidian Sync, Obsidian
+Publish, que não precisa ser feito, tá
+
+00:01:49.210 --> 00:01:49.390
+bom?
+
+00:01:50.210 --> 00:01:53.830
+Aqui, nada comercial também seja
+necessário, legal.
+
+00:01:54.590 --> 00:01:55.990
+Na parte de editores...
+
+00:01:56.010 --> 00:01:56.410
+Na parte de editor, tá?
+
+00:01:56.770 --> 00:02:03.310
+Na parte de editor, você vai ver aqui,
+que tem algumas coisas que você pode
+
+00:02:03.310 --> 00:02:04.150
+habilitar ou não.
+
+00:02:04.210 --> 00:02:07.510
+Por exemplo, você quer ver o número de
+linhas, né?
+
+00:02:07.550 --> 00:02:11.530
+Eu, particularmente, eu não sou fã disso
+aqui, não gosto, tá?
+
+00:02:11.650 --> 00:02:14.930
+De ver o número das linhas no editor.
+
+00:02:15.690 --> 00:02:16.450
+Tá legal?
+
+00:02:18.710 --> 00:02:22.430
+Correção, né, de dicionário, o que mais?
+
+00:02:23.630 --> 00:02:25.650
+Tamanho das coisas, o tamanho da...
+
+00:02:26.010 --> 00:02:28.590
+Da aba, ali em cima, legal?
+
+00:02:29.350 --> 00:02:31.610
+Agora, esse aqui tem coisa importante,
+né?
+
+00:02:31.730 --> 00:02:34.090
+O files and links, né?
+
+00:02:34.130 --> 00:02:34.910
+Arquivos e links.
+
+00:02:36.410 --> 00:02:37.490
+Primeiro, vamos lá.
+
+00:02:39.130 --> 00:02:40.830
+Confirmar a devessão de um arquivo.
+
+00:02:41.010 --> 00:02:42.910
+Então, aqui tá habilitado por padrão.
+
+00:02:42.970 --> 00:02:45.990
+Se você vai apagar um arquivo, ele faz
+uma pergunta antes.
+
+00:02:46.070 --> 00:02:47.270
+Você quer apagar mesmo, tá?
+
+00:02:47.390 --> 00:02:47.970
+Por quê?
+
+00:02:48.030 --> 00:02:51.750
+Porque acontece, se você deixar
+desmarcado, você deu um del ali, já era,
+
+00:02:51.870 --> 00:02:52.070
+né?
+
+00:02:52.350 --> 00:02:54.510
+Bom, mas aí, Adriano, apaguei e anoto.
+
+00:02:54.550 --> 00:02:55.450
+O que que vai acontecer?
+
+00:02:55.450 --> 00:02:59.090
+Aqui, essa opção aqui é importante, tá?
+
+00:02:59.630 --> 00:03:00.910
+Deleted files, né?
+
+00:03:00.990 --> 00:03:05.270
+O que que vai acontecer quando você
+apagar um arquivo do seu vaunt, do seu
+
+00:03:05.270 --> 00:03:05.670
+cofre?
+
+00:03:06.130 --> 00:03:08.630
+Aqui, no caso, o que que tá acontecendo?
+
+00:03:08.970 --> 00:03:14.930
+Ele tá movendo direto para a lixeira do
+sistema, tá?
+
+00:03:15.230 --> 00:03:19.310
+Só que o seu sistema operacional, a
+lixeira, vai funcionar de acordo com a
+
+00:03:19.310 --> 00:03:20.970
+configuração do seu sistema operacional.
+
+00:03:21.030 --> 00:03:21.930
+Tem alguns, né?
+
+00:03:21.970 --> 00:03:23.930
+A pessoa vai lá, configura, vai apagar.
+
+00:03:24.030 --> 00:03:25.430
+Depois de um...
+
+00:03:25.430 --> 00:03:26.590
+Um certo tempo, tal.
+
+00:03:27.570 --> 00:03:32.070
+Outro, já configura para que caiu na
+lixeira, já era, já apaga de uma vez.
+
+00:03:32.590 --> 00:03:34.010
+Então, são configurações.
+
+00:03:34.270 --> 00:03:36.250
+Então, o que que eu gosto de deixar
+aqui?
+
+00:03:36.850 --> 00:03:37.250
+É...
+
+00:03:37.250 --> 00:03:39.990
+Aqui, por exemplo, tem uma opção, a
+última aqui, ó.
+
+00:03:40.030 --> 00:03:41.630
+Que é apagar definitivamente.
+
+00:03:41.650 --> 00:03:45.190
+Ou seja, se apagou alguma coisa no
+Obsidian, já era.
+
+00:03:45.370 --> 00:03:46.830
+Você não tem mais como recuperar.
+
+00:03:47.090 --> 00:03:49.010
+Eu gosto dessa opção aqui, ó.
+
+00:03:50.030 --> 00:03:53.330
+Mover para Obsidian Trash.
+
+00:03:53.330 --> 00:04:00.530
+Que é uma pastinha oculta de lixeira que
+vai ser colocada dentro do seu segundo
+
+00:04:00.530 --> 00:04:01.010
+cofre.
+
+00:04:01.090 --> 00:04:02.470
+Do seu segundo cérebro, né?
+
+00:04:02.850 --> 00:04:03.410
+É...
+
+00:04:03.410 --> 00:04:04.570
+Então, o que que vai acontecer?
+
+00:04:04.670 --> 00:04:08.610
+Se apagou, todos os arquivos apagados
+vão para uma mesma pasta.
+
+00:04:08.770 --> 00:04:11.290
+Que é uma pasta de lixeira dentro do
+Obsidian.
+
+00:04:11.890 --> 00:04:16.690
+Ou seja, muito mais fácil de você, se
+precisar recuperar alguma coisa, você
+
+00:04:16.690 --> 00:04:17.410
+recuperar, tá?
+
+00:04:17.510 --> 00:04:20.410
+Eu gosto muito dessa opção aqui, tá
+legal?
+
+00:04:20.410 --> 00:04:22.330
+Uma outra opção aqui, ó.
+
+00:04:22.950 --> 00:04:23.550
+É...
+
+00:04:24.670 --> 00:04:25.870
+Novas notas.
+
+00:04:25.910 --> 00:04:32.010
+Quando você vai lá e dá Ctrl N, ou
+ícone, ou a paleta de comando que eu vou
+
+00:04:32.010 --> 00:04:32.330
+ensinar.
+
+00:04:32.550 --> 00:04:33.150
+É...
+
+00:04:33.150 --> 00:04:34.650
+Quando você vai criar uma nova nota.
+
+00:04:34.830 --> 00:04:36.210
+Para onde deve ir?
+
+00:04:37.170 --> 00:04:39.330
+Aqui, você tem as opções, tá?
+
+00:04:40.150 --> 00:04:40.750
+É...
+
+00:04:40.750 --> 00:04:43.390
+Vai direto para o raiz, né?
+
+00:04:43.490 --> 00:04:44.450
+Do VAUNT.
+
+00:04:45.030 --> 00:04:50.390
+Você quer criar na mesma pasta do
+arquivo que está servindo.
+
+00:04:50.390 --> 00:04:52.070
+Então, por exemplo, você está...
+
+00:04:52.590 --> 00:04:57.070
+Você está aberto um arquivo lá de
+anotação de palestras, que está dentro
+
+00:04:57.070 --> 00:04:58.730
+de uma pasta chamada palestras.
+
+00:04:58.810 --> 00:05:01.890
+Você dá Ctrl N, ou clica lá para criar
+uma nova nota.
+
+00:05:02.110 --> 00:05:05.190
+Ele cria uma nova nota dentro da pasta
+palestras.
+
+00:05:05.390 --> 00:05:05.570
+Tá?
+
+00:05:06.490 --> 00:05:07.010
+É...
+
+00:05:08.170 --> 00:05:14.410
+Ou você pode criar uma nota e todas as
+novas notas vão para uma pasta que você
+
+00:05:14.410 --> 00:05:15.510
+vai especificar aqui, ó.
+
+00:05:15.590 --> 00:05:15.910
+Tá vendo?
+
+00:05:16.870 --> 00:05:20.270
+Então, você cria uma pasta para novas
+notas.
+
+00:05:20.270 --> 00:05:21.970
+Esse caso aqui seria assim.
+
+00:05:22.030 --> 00:05:23.290
+Eu vou criar novas notas.
+
+00:05:23.290 --> 00:05:26.510
+E quando eu criar novas, eu deixo numa
+mesma pasta.
+
+00:05:26.650 --> 00:05:31.870
+Porque daí eu gosto de pegar essa pasta
+e eu mover ela para o lugar certo.
+
+00:05:32.170 --> 00:05:32.870
+Você está entendendo?
+
+00:05:32.970 --> 00:05:33.910
+Então, você cria uma nota.
+
+00:05:33.990 --> 00:05:34.990
+Você faz anotações.
+
+00:05:35.030 --> 00:05:40.610
+E você se preocupa com ela depois de
+onde que você quer colocar ela.
+
+00:05:40.830 --> 00:05:40.930
+Tá?
+
+00:05:41.090 --> 00:05:41.850
+Então, gente.
+
+00:05:41.970 --> 00:05:46.010
+Aí é o gosto, a preferência de cada um.
+
+00:05:46.170 --> 00:05:46.510
+Tá?
+
+00:05:46.530 --> 00:05:47.530
+Eu coloco...
+
+00:05:47.530 --> 00:05:50.290
+O meu, por exemplo, ele está aqui sempre
+em Vault Folder.
+
+00:05:50.290 --> 00:05:51.650
+Que daí eu já teria no raiz.
+
+00:05:52.130 --> 00:05:54.730
+E aí eu faço o que quero com elas, né?
+
+00:05:56.270 --> 00:05:57.770
+Vamos lá, vamos lá, vamos lá.
+
+00:05:57.910 --> 00:06:03.750
+Eu quero pegar aqui as coisas mais
+importantíssimas.
+
+00:06:05.750 --> 00:06:06.370
+Aqui, ó.
+
+00:06:08.610 --> 00:06:10.790
+Default Location for New Attachments.
+
+00:06:10.930 --> 00:06:15.830
+Ou local para arquivos de anexo.
+
+00:06:15.890 --> 00:06:16.710
+Então, imagine o seguinte.
+
+00:06:16.710 --> 00:06:21.230
+A sua nota tenha um PDF.
+
+00:06:21.370 --> 00:06:23.370
+A sua nota tenha uma imagem.
+
+00:06:23.770 --> 00:06:31.030
+Aqui você escolhe onde que esses
+arquivos de imagem e de anexo, eles são
+
+00:06:31.030 --> 00:06:31.630
+colocados.
+
+00:06:31.970 --> 00:06:32.870
+Então, olha só.
+
+00:06:32.950 --> 00:06:33.510
+Aqui está.
+
+00:06:33.630 --> 00:06:34.810
+Vault Folder.
+
+00:06:34.810 --> 00:06:37.950
+Ou seja, a pasta do cofre raiz.
+
+00:06:38.390 --> 00:06:41.570
+Então, se você colocar numa nota 10
+imagens.
+
+00:06:41.570 --> 00:06:45.090
+Se você for no raiz do Vault, tem
+aquelas 10 imagens.
+
+00:06:45.970 --> 00:06:47.390
+Quais as outras opções?
+
+00:06:48.610 --> 00:06:50.950
+Na pasta especificada abaixo.
+
+00:06:50.950 --> 00:06:52.550
+Ou seja, você seleciona aqui.
+
+00:06:52.750 --> 00:06:54.730
+E cria uma pasta.
+
+00:06:54.850 --> 00:06:56.530
+Ele até sugere aqui um nome, ó.
+
+00:06:57.070 --> 00:06:57.410
+É...
+
+00:06:57.970 --> 00:06:58.530
+Attachments.
+
+00:06:58.530 --> 00:06:58.850
+Tá?
+
+00:06:58.990 --> 00:06:59.970
+É só uma sugestão dele.
+
+00:07:00.170 --> 00:07:04.330
+Ou você coloca aqui qualquer coisa que
+você queira.
+
+00:07:04.390 --> 00:07:04.790
+Tá?
+
+00:07:05.250 --> 00:07:07.910
+Ou dê um nome para uma pasta que você
+queira.
+
+00:07:08.770 --> 00:07:09.330
+É...
+
+00:07:09.330 --> 00:07:11.850
+Na mesma pasta onde está o arquivo.
+
+00:07:11.850 --> 00:07:14.790
+Então, se eu estou numa pasta chamada
+palestras.
+
+00:07:14.790 --> 00:07:18.350
+Eu estou criando uma nota e eu jogo
+imagens dentro dessa pasta.
+
+00:07:19.270 --> 00:07:20.230
+Dentro dessa nota.
+
+00:07:20.590 --> 00:07:24.790
+As imagens, anexos, vão estar dentro da
+pasta palestras.
+
+00:07:25.130 --> 00:07:25.430
+Tá?
+
+00:07:25.550 --> 00:07:26.670
+Uma outra opção.
+
+00:07:27.370 --> 00:07:28.290
+O que mais?
+
+00:07:29.370 --> 00:07:29.890
+É...
+
+00:07:32.430 --> 00:07:32.990
+Subfolder.
+
+00:07:33.330 --> 00:07:34.430
+Undercurrent Folder.
+
+00:07:34.450 --> 00:07:40.430
+Ou seja, você está dando um nome aí de
+subpasta.
+
+00:07:40.510 --> 00:07:43.690
+Para jogar os anexos.
+
+00:07:44.890 --> 00:07:45.910
+Dentro de cada pasta.
+
+00:07:46.230 --> 00:07:47.490
+Então, imagina aqui o seguinte.
+
+00:07:47.830 --> 00:07:48.710
+Eu vou colocar aqui.
+
+00:07:50.290 --> 00:07:50.690
+É...
+
+00:07:51.770 --> 00:07:53.370
+Por exemplo, anexos.
+
+00:07:53.970 --> 00:07:55.130
+O que vai acontecer?
+
+00:07:55.390 --> 00:07:56.930
+Se eu estou dentro de palestras.
+
+00:07:57.030 --> 00:07:58.210
+E eu jogo uma imagem.
+
+00:07:59.030 --> 00:08:02.050
+Dentro de palestras vai ter uma pasta
+chamada anexos.
+
+00:08:02.150 --> 00:08:04.690
+Que vai armazenar todos os anexos.
+
+00:08:05.790 --> 00:08:08.070
+Todas as imagens, PDF, tudo mais que
+você jogar.
+
+00:08:08.850 --> 00:08:09.650
+Dentro dessa...
+
+00:08:10.330 --> 00:08:12.310
+Desse anexos que está dentro de
+palestras.
+
+00:08:12.530 --> 00:08:13.550
+Então, olha só a diferença.
+
+00:08:13.550 --> 00:08:14.390
+A primeira.
+
+00:08:15.330 --> 00:08:17.470
+Aquela ali onde você seleciona uma
+pasta.
+
+00:08:17.690 --> 00:08:19.510
+É uma pasta dentro do seu vault.
+
+00:08:19.710 --> 00:08:22.270
+Você vai ter dentro do seu cofre uma
+pasta anexos.
+
+00:08:22.310 --> 00:08:23.470
+E tudo vai estar lá.
+
+00:08:24.150 --> 00:08:26.130
+Já a outra opção.
+
+00:08:26.690 --> 00:08:28.070
+Essa última aqui.
+
+00:08:28.150 --> 00:08:30.030
+É uma subpasta.
+
+00:08:30.090 --> 00:08:32.270
+Uma anexos dentro de cada pastinha.
+
+00:08:32.530 --> 00:08:33.090
+Entendeu?
+
+00:08:33.990 --> 00:08:37.550
+Também aí é questão de preferência.
+
+00:08:38.230 --> 00:08:38.510
+Tá bom?
+
+00:08:38.750 --> 00:08:39.610
+Eu, né?
+
+00:08:39.670 --> 00:08:40.450
+No meu caso.
+
+00:08:40.830 --> 00:08:41.610
+No meu cofre.
+
+00:08:41.650 --> 00:08:42.450
+Eu selecionei.
+
+00:08:42.450 --> 00:08:43.610
+Isso aqui.
+
+00:08:43.710 --> 00:08:44.650
+Eu coloquei.
+
+00:08:44.690 --> 00:08:45.550
+Numa pasta.
+
+00:08:47.650 --> 00:08:48.130
+Única.
+
+00:08:49.390 --> 00:08:50.350
+Chamada anexos.
+
+00:08:50.790 --> 00:08:50.970
+Tá?
+
+00:08:51.150 --> 00:08:51.950
+Ou seja.
+
+00:08:51.970 --> 00:08:53.450
+Tudo que eu jogo de arquivo.
+
+00:08:53.510 --> 00:08:55.510
+Está dentro de anexos.
+
+00:08:55.570 --> 00:08:58.310
+Se você pretende colocar.
+
+00:09:01.690 --> 00:09:03.230
+Dentro da pastinha.
+
+00:09:03.650 --> 00:09:05.770
+Aí é preferência de cada um.
+
+00:09:05.890 --> 00:09:06.130
+Tá legal?
+
+00:09:07.450 --> 00:09:08.830
+Que mais, que mais, que mais.
+
+00:09:08.890 --> 00:09:09.490
+Eu acho que aqui.
+
+00:09:09.570 --> 00:09:11.250
+A importância é isso.
+
+00:09:11.250 --> 00:09:12.330
+De configuração.
+
+00:09:12.390 --> 00:09:12.750
+Olha.
+
+00:09:13.130 --> 00:09:14.170
+Isso aqui, gente.
+
+00:09:14.430 --> 00:09:15.450
+É uma mão na roda.
+
+00:09:15.590 --> 00:09:17.190
+Você vai começar do jeito certo.
+
+00:09:17.590 --> 00:09:19.050
+Porque pensa você depois.
+
+00:09:21.070 --> 00:09:23.190
+Você começar a usar o seu segundo
+cérebro.
+
+00:09:23.270 --> 00:09:24.070
+Começou a jogar imagem.
+
+00:09:24.470 --> 00:09:24.950
+Começou a jogar.
+
+00:09:25.070 --> 00:09:25.790
+Aí quando você vê.
+
+00:09:25.870 --> 00:09:26.950
+Está tudo lá no raiz.
+
+00:09:27.250 --> 00:09:28.610
+E aí você fala assim.
+
+00:09:28.730 --> 00:09:29.910
+Ah, eu vou mudar isso agora.
+
+00:09:30.210 --> 00:09:30.410
+Eu quero.
+
+00:09:30.750 --> 00:09:31.150
+Gente.
+
+00:09:31.210 --> 00:09:32.070
+Olha o retrabalho.
+
+00:09:32.330 --> 00:09:34.250
+Você começa a ter que mudar um monte de
+coisa.
+
+00:09:35.170 --> 00:09:35.570
+Copia.
+
+00:09:35.570 --> 00:09:35.850
+Cola.
+
+00:09:36.070 --> 00:09:37.910
+Aí você criou o link para alguma coisa.
+
+00:09:38.030 --> 00:09:38.710
+Já não funciona.
+
+00:09:39.010 --> 00:09:39.190
+Então.
+
+00:09:39.190 --> 00:09:39.370
+Assim.
+
+00:09:40.030 --> 00:09:41.190
+Saber isso agora.
+
+00:09:41.270 --> 00:09:43.050
+Nesse momento inicial dessa aula aqui.
+
+00:09:43.070 --> 00:09:43.930
+É imprescindível.
+
+00:09:44.090 --> 00:09:45.970
+Você vai evitar também retrabalho.
+
+00:09:46.030 --> 00:09:47.510
+Você vai me agradecer muito depois.
+
+00:09:48.830 --> 00:09:49.450
+Aparência.
+
+00:09:49.530 --> 00:09:51.470
+Aqui você tem como colocar temas.
+
+00:09:51.910 --> 00:09:55.290
+Você tem como escolher o sistema de
+cores.
+
+00:09:55.900 --> 00:09:58.790
+Se você quer o obsidian escuro.
+
+00:09:58.830 --> 00:10:00.370
+Ou claro.
+
+00:10:01.070 --> 00:10:03.050
+Você pode mexer com a fonte.
+
+00:10:03.050 --> 00:10:04.090
+Os textos.
+
+00:10:04.270 --> 00:10:05.610
+Tamanho de fonte.
+
+00:10:07.250 --> 00:10:07.870
+Aqui.
+
+00:10:07.870 --> 00:10:09.290
+Essa abinha aqui.
+
+00:10:09.410 --> 00:10:09.630
+Está vendo.
+
+00:10:09.750 --> 00:10:11.830
+Aqui vocês vão conhecer daqui a pouco os
+plugins.
+
+00:10:12.110 --> 00:10:13.830
+E aqui vai aparecer os ícones dos
+plugins.
+
+00:10:14.070 --> 00:10:16.010
+Você pode exibir ou não.
+
+00:10:16.390 --> 00:10:17.430
+Eu aconselho deixar.
+
+00:10:17.870 --> 00:10:21.170
+Você pode escolher quais são os ícones
+que você quer mostrar.
+
+00:10:21.290 --> 00:10:24.010
+Tudo que envolve realmente aparência.
+
+00:10:24.230 --> 00:10:24.710
+O zoom.
+
+00:10:27.170 --> 00:10:28.230
+O que mais.
+
+00:10:28.710 --> 00:10:29.310
+Olha.
+
+00:10:29.350 --> 00:10:33.470
+Várias coisas relacionadas a aparência.
+
+00:10:33.710 --> 00:10:35.010
+Depois aqui os snippets.
+
+00:10:35.110 --> 00:10:36.310
+CSS snippets.
+
+00:10:36.430 --> 00:10:37.610
+Numa certa aula.
+
+00:10:37.610 --> 00:10:38.730
+Eu vou tratar disso aqui também.
+
+00:10:38.990 --> 00:10:39.630
+Está legal.
+
+00:10:40.250 --> 00:10:41.710
+Isso é muito importante.
+
+00:10:41.730 --> 00:10:45.250
+Eu acho que são essas configurações aqui
+que são básicas.
+
+00:10:45.350 --> 00:10:46.550
+E que eu trouxe para você.
+
+00:10:46.590 --> 00:10:47.950
+Porque vai ajudar muito.
+
+00:10:48.190 --> 00:10:50.010
+As principais como você viu.
+
+00:10:50.150 --> 00:10:51.710
+Estão aqui em files.
+
+00:10:52.010 --> 00:10:52.870
+E links.
+
+00:10:53.310 --> 00:10:54.570
+Isso aqui é muito importante.
+
+00:10:54.950 --> 00:10:55.550
+Então agora.
+
+00:10:55.810 --> 00:10:56.230
+Olha só.
+
+00:10:56.330 --> 00:10:57.190
+Vai lá no seu.
+
+00:10:57.830 --> 00:10:58.930
+Vai nessa opção.
+
+00:10:59.050 --> 00:10:59.530
+Files.
+
+00:10:59.530 --> 00:11:00.490
+E links.
+
+00:11:01.690 --> 00:11:02.510
+Arquivos e links.
+
+00:11:03.190 --> 00:11:04.490
+Configura a sua preferência.
+
+00:11:04.630 --> 00:11:05.590
+Já configura.
+
+00:11:05.590 --> 00:11:06.890
+Dá um nome para a pasta.
+
+00:11:06.890 --> 00:11:09.210
+De anexos que você vai ter.
+
+00:11:09.290 --> 00:11:11.670
+O que vai acontecer quando você debetar
+um arquivo.
+
+00:11:12.110 --> 00:11:14.090
+Se você quer jogar para uma certa pasta.
+
+00:11:14.230 --> 00:11:17.690
+Se você quer mover para a bicheira.
+
+00:11:17.710 --> 00:11:18.870
+Do obsidian.
+
+00:11:19.130 --> 00:11:19.570
+E enfim.
+
+00:11:19.750 --> 00:11:21.230
+Tudo que você quer fazer aí.
+
+00:11:22.210 --> 00:11:25.130
+Configura isso no seu obsidian.
+
+00:11:25.310 --> 00:11:26.550
+Já agora.
+
+00:11:26.730 --> 00:11:27.370
+Está bom.
+
+00:11:27.870 --> 00:11:28.530
+Está legal.
+
+00:11:28.650 --> 00:11:30.630
+Isso é muito importante.
+
+00:11:31.410 --> 00:11:32.590
+Isso é muito importante.
+
+00:11:32.630 --> 00:11:33.870
+Eu quero que você faça isso.
+
+00:11:34.170 --> 00:11:35.110
+Nesse momento.
+
+00:11:35.210 --> 00:11:35.590
+Já agora.
+
+00:11:35.590 --> 00:11:37.170
+Para começar do jeito certo.
+
+00:11:37.310 --> 00:11:37.790
+Mas como.
+
+00:11:38.210 --> 00:11:38.990
+Estou te falando.
+
+00:11:39.230 --> 00:11:39.710
+Prática.
+
+00:11:39.950 --> 00:11:41.110
+Vai lá e faz isso agora.
+
+00:11:41.490 --> 00:11:43.910
+Nós nos vemos na próxima aula.
+
+00:11:43.970 --> 00:11:44.390
+Onde aí.
+
+00:11:44.450 --> 00:11:46.090
+Nós vamos começar a explorar.
+
+00:11:46.270 --> 00:11:47.050
+Ainda mais.
+
+00:11:47.470 --> 00:11:48.870
+A questão das notas.
+
+00:11:48.870 --> 00:11:49.070
+Está bom.
+
+00:11:49.730 --> 00:11:50.570
+Até a próxima.
+
+00:11:50.610 --> 00:11:51.030
+Alendário.

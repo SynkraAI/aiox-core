@@ -1,0 +1,493 @@
+sources_inventory:
+  total_sources: 208
+  primary_sources: 208
+  secondary_sources: 0
+
+  metadata:
+    last_updated: "2025-10-16"
+    total_words_estimated: 2224574  # 2.2M words
+    total_reading_hours_estimated: 185.0  # ~300 words/min
+    total_video_hours: 17.5
+    version: "2.0"
+    viability_status: "GO_APPROVED"
+    apex_score: 81
+    icp_match: 87
+    fidelity_target: "93-97%"
+
+  by_category:
+    cursos:
+      count: 78
+      description: "Course materials covering IA, Obsidian, Crew AI, Dify, Marketing, Clones IA, ETL"
+      priority: "high"
+      persona: "Both (IA Expert + Vida Lendária)"
+      tier: "Tier 1-2"
+      includes:
+        - "Fundamentos em IA (19 files)"
+        - "Clones IA (7 files)"
+        - "Crew AI (6 files)"
+        - "Dominando Obsidian (7 files)"
+        - "Introdução ao Dify (6 files)"
+        - "Marketing com IA (13 files)"
+        - "ETL (6 files)"
+        - "Mente Lendária (6 files)"
+        - "Aumente seu QI (1 file)"
+        - "Q&A 80/20 (1 file)"
+        - "Plus additional course materials and summaries"
+
+    newsletter:
+      count: 56
+      description: "Newsletter content (likely Vida Lendária editions)"
+      priority: "high"
+      persona: "Vida Lendária"
+      tier: "Tier 2"
+      estimated_words: 400000
+      notes: "Contains philosophical and personal development content"
+
+    podcast:
+      count: 36
+      description: "Podcast appearances as guest + own podcast episodes"
+      priority: "high"
+      persona: "Both"
+      tier: "Tier 2"
+      includes:
+        - "Podcast Alan Convidado (guest appearances)"
+        - "Own podcast episodes"
+
+    self_analysis:
+      count: 13
+      description: "CROWN JEWELS - Deep self-analysis materials"
+      priority: "critical"
+      persona: "Foundation (Both)"
+      tier: "Tier 1"
+      estimated_words: 48885
+      includes:
+        - "modelo-do-eu.md (51KB - Layers 6-8 pre-validated)"
+        - "Q&A.md (173KB - extensive personal Q&A)"
+        - "Plus 11 other self-analysis documents"
+      notes: "Contains pre-validated DNA Mental™ Layers 6-8 (Values, Obsessions, Paradoxes)"
+
+    videos:
+      count: 12
+      description: "Video transcripts (.srt) from podcast/interview appearances"
+      priority: "high"
+      persona: "IA Expert"
+      tier: "Tier 1-2"
+      duration_hours: 17.5
+      includes:
+        - "Plugado #170"
+        - "Podcast EAG #287"
+        - "Segredos Da Escala #026 & #070"
+        - "Lutz Podcast #241"
+        - "And 7 more major interviews"
+
+    interviews:
+      count: 10
+      description: "Interview transcripts and materials"
+      priority: "medium"
+      persona: "Both"
+      tier: "Tier 2"
+
+    articles:
+      count: 2
+      description: "Standalone articles"
+      priority: "medium"
+      persona: "IA Expert"
+      tier: "Tier 2-3"
+      includes:
+        - "manifesto-academia.md"
+        - "marketing.md"
+
+    profiles:
+      count: 1
+      description: "Psychometric profile (JSON)"
+      priority: "critical"
+      persona: "Foundation (Both)"
+      tier: "Tier 1"
+      file: "alan-nicolas-profile.json"
+      includes:
+        - "DISC Profile (DC pattern, D85 C80)"
+        - "Enneagram Type 5w4 SP/SX/SO"
+        - "MBTI ISTP-A (The Virtuoso)"
+        - "Cognitive Stratum VI (Corporate Strategic)"
+        - "Big Five (O88 C82 E38 A35 N48)"
+        - "HEXACO (H68)"
+        - "Dark Triad (N3.2 M4.1 P2.3)"
+        - "Intelligence Estimates (IQ 130-145, EQ 65)"
+        - "Attachment, Grit, Locus of Control"
+
+  # CRITICAL: Source Tier Classification for DNA Mental™ Extraction
+  source_tier_matrix:
+    tier_1_critical:
+      priority: 1
+      usage: "Primary extraction for all 8 DNA Mental™ Layers"
+      sources:
+        - category: "self_analysis"
+          files:
+            - "modelo-do-eu.md"
+            - "Q&A.md"
+          reason: "Pre-validated Layers 6-8, direct self-reflection"
+
+        - category: "profiles"
+          file: "alan-nicolas-profile.json"
+          reason: "Psychometric foundation for personality architecture"
+
+        - category: "videos"
+          files:
+            - "Segredos Da Escala #026 (171 min)"
+            - "Lutz Podcast #241 (149 min)"
+            - "IA: Se Tornando Perigosa (187 min)"
+          reason: "Long-form, unscripted, authentic communication style"
+
+        - category: "cursos"
+          files:
+            - "Mente Lendária (all modules)"
+            - "Clones IA (all modules)"
+            - "Fundamentos em IA (all modules)"
+          reason: "Core teaching methodology and expertise demonstration"
+
+    tier_2_validation:
+      priority: 2
+      usage: "Cross-validation, communication style refinement"
+      sources:
+        - category: "newsletter"
+          count: 56
+          reason: "Written communication style, consistent philosophical voice"
+
+        - category: "podcast"
+          count: 36
+          reason: "Conversational patterns, spontaneous reasoning"
+
+        - category: "cursos"
+          remaining_courses: true
+          reason: "Breadth of expertise, framework application examples"
+
+        - category: "videos"
+          remaining: true
+          reason: "Additional communication patterns, media adaptation"
+
+    tier_3_supporting:
+      priority: 3
+      usage: "Supporting evidence, edge case patterns"
+      sources:
+        - category: "interviews"
+          count: 10
+          reason: "Contextual adaptation, audience awareness"
+
+        - category: "articles"
+          count: 2
+          reason: "Additional written samples"
+
+        - category: "self_analysis"
+          remaining: true
+          reason: "Supplementary introspection materials"
+
+  # Temporal coverage analysis
+  temporal_coverage:
+    earliest: "2023"
+    latest: "2025"
+    coverage_quality: "Mature period - established expertise and voice"
+    gaps:
+      - period: "Pre-2023"
+        impact: "Low - mature thinking already documented"
+        mitigation: "Self-analysis materials cover personal history"
+
+  # Dual Persona Architecture (CRITICAL for Clone Design)
+  persona_distribution:
+    vida_legendaria:
+      description: "Philosophical, personal development, life optimization"
+      primary_sources:
+        - "self_analysis (100%)"
+        - "newsletter (90%)"
+        - "cursos/Mente Lendária (100%)"
+        - "cursos/Aumente seu QI (100%)"
+      estimated_content_percentage: 40
+      voice_characteristics:
+        - "Introspective and contemplative"
+        - "First principles thinking"
+        - "Stoicism and philosophy integration"
+        - "Question-driven exploration"
+
+    ia_expert:
+      description: "Technical AI expertise, business applications, future trends"
+      primary_sources:
+        - "videos (90%)"
+        - "podcast (70%)"
+        - "cursos/Fundamentos IA (100%)"
+        - "cursos/Clones IA (100%)"
+        - "cursos/Crew AI (100%)"
+        - "cursos/Dify (100%)"
+        - "cursos/Marketing com IA (100%)"
+      estimated_content_percentage: 45
+      voice_characteristics:
+        - "Clear and pedagogical"
+        - "Framework-oriented"
+        - "Practical and actionable"
+        - "Visionary yet grounded"
+
+    overlap_integration:
+      description: "Where both personas merge"
+      sources:
+        - "cursos/ETL"
+        - "interviews (contextual)"
+        - "Some newsletter editions"
+      estimated_content_percentage: 15
+      characteristics:
+        - "AI as tool for personal transformation"
+        - "Philosophy of technological evolution"
+        - "Mental models applied to AI adoption"
+
+  # Quality metrics for MMOS Pipeline
+  quality_assessment:
+    availability_score: 19/20  # 95%
+    reasons:
+      - "2.2M words = 10-15 book equivalents"
+      - "Pre-validated Layers 6-8 in modelo-do-eu.md"
+      - "Comprehensive psychometric foundation"
+      - "56 newsletters + 78 course files"
+      - "17.5 hours of video content"
+
+    depth_score: 14/20  # 70%
+    reasons:
+      - "Multiple long-form content (3h interviews)"
+      - "Course materials demonstrate teaching depth"
+      - "Self-analysis shows introspective capacity"
+      - "Dual expertise domains (philosophy + AI)"
+
+    value_density: 11/15  # 73%
+    reasons:
+      - "High signal-to-noise in self-analysis"
+      - "Course materials are structured and refined"
+      - "Newsletter maintains consistent quality"
+
+  # DNA Mental™ Layer Coverage Prediction
+  layer_coverage:
+    layer_1_behavioral_patterns:
+      coverage: 95
+      primary_sources:
+        - "Q&A.md"
+        - "Videos (unscripted moments)"
+        - "Podcast appearances"
+      extraction_difficulty: "Easy"
+
+    layer_2_communication_style:
+      coverage: 98
+      primary_sources:
+        - "All written content"
+        - "All video/audio transcripts"
+        - "Newsletter (56 editions)"
+      extraction_difficulty: "Easy"
+
+    layer_3_routines:
+      coverage: 75
+      primary_sources:
+        - "Self-analysis materials"
+        - "Q&A.md"
+      extraction_difficulty: "Medium"
+      notes: "Self-cloning allows direct elicitation if gaps exist"
+
+    layer_4_recognition_patterns:
+      coverage: 90
+      primary_sources:
+        - "Course materials (pattern teaching)"
+        - "modelo-do-eu.md (meta-cognition)"
+      extraction_difficulty: "Medium"
+
+    layer_5_mental_models:
+      coverage: 95
+      primary_sources:
+        - "All course materials"
+        - "modelo-do-eu.md (Section V: Núcleo Cognitivo)"
+        - "Newsletter (framework application)"
+      extraction_difficulty: "Medium"
+
+    layer_6_values_hierarchy:
+      coverage: 100
+      primary_sources:
+        - "modelo-do-eu.md (Section I: Núcleo Essencial)"
+        - "Q&A.md (values in action)"
+      extraction_difficulty: "Easy"
+      notes: "PRE-VALIDATED - Direct extraction available"
+
+    layer_7_core_obsessions:
+      coverage: 100
+      primary_sources:
+        - "modelo-do-eu.md (Sections II, V, VI)"
+        - "Course creation patterns (obsessions manifest)"
+      extraction_difficulty: "Easy"
+      notes: "PRE-VALIDATED - Explicitly documented"
+
+    layer_8_productive_paradoxes:
+      coverage: 95
+      primary_sources:
+        - "modelo-do-eu.md"
+        - "Psychometric profile (ISTP + teacher paradox)"
+      extraction_difficulty: "Medium"
+      notes: "PRE-VALIDATED - Introspective + technical paradox well-documented"
+
+# Reading priority queue for Phase 2-3
+reading_priority_queue:
+  immediate_priority:
+    - file: "self-analysis/modelo-do-eu.md"
+      tier: 1
+      reason: "CROWN JEWEL - Layers 6-8 pre-validated"
+      estimated_time: "2h"
+
+    - file: "self-analysis/Q&A.md"
+      tier: 1
+      reason: "Comprehensive behavioral + values evidence"
+      estimated_time: "3h"
+
+    - file: "alan-nicolas-profile.json"
+      tier: 1
+      reason: "Psychometric foundation"
+      estimated_time: "30min"
+
+    - file: "cursos/Mente Lendária/"
+      tier: 1
+      reason: "Core philosophical framework"
+      estimated_time: "4h"
+
+    - file: "cursos/Clones IA/"
+      tier: 1
+      reason: "Meta-awareness of cloning process"
+      estimated_time: "3h"
+
+  secondary_priority:
+    - category: "newsletter/"
+      tier: 2
+      reason: "Communication style + values consistency"
+      estimated_time: "12h"
+      sampling_strategy: "Read first 10 + last 10 + random sample of 10"
+
+    - category: "videos/"
+      tier: 1-2
+      reason: "Unscripted communication patterns"
+      estimated_time: "10h"
+      sampling_strategy: "Focus on longest interviews (3h Segredos Da Escala)"
+
+    - category: "podcast/"
+      tier: 2
+      reason: "Conversational patterns"
+      estimated_time: "8h"
+      sampling_strategy: "Sample guest appearances + own episodes"
+
+  tertiary_priority:
+    - category: "cursos/Fundamentos IA, Crew AI, Dify, Marketing"
+      tier: 2
+      reason: "Breadth of expertise, framework examples"
+      estimated_time: "8h"
+      sampling_strategy: "Focus on Q&A sections and module summaries"
+
+    - category: "interviews/"
+      tier: 3
+      reason: "Additional context"
+      estimated_time: "4h"
+      sampling_strategy: "Sample 50%"
+
+# Gap analysis
+identified_gaps:
+  layer_3_routines:
+    gap: "Daily/weekly routines partially documented"
+    severity: "Low"
+    mitigation: "Self-cloning allows direct elicitation"
+
+  layer_4_blind_spots:
+    gap: "Blind spots and failure modes"
+    severity: "Medium"
+    mitigation: "Can be directly elicited + inferred from paradoxes"
+
+  temporal_early_period:
+    gap: "Pre-2023 content limited"
+    severity: "Low"
+    mitigation: "Self-analysis covers personal history, mature period well-documented"
+
+# Self-cloning advantages
+self_cloning_advantages:
+  - advantage: "Zero gatekeeping"
+    impact: "Instant validation, no waiting for approvals"
+
+  - advantage: "Direct Layer 6-8 access"
+    impact: "modelo-do-eu.md eliminates 4-8 hours of extraction work"
+
+  - advantage: "Gap filling on demand"
+    impact: "Missing Layer 3 routines can be directly elicited"
+
+  - advantage: "Validation bandwidth"
+    impact: "Unlimited validation cycles, immediate feedback"
+
+  - advantage: "Material access"
+    impact: "Can add private materials not publicly available"
+
+  - advantage: "Iteration velocity"
+    impact: "Can test and refine clone in real-time"
+
+# Next actions (aligned with TODO.md)
+next_actions:
+  phase_2_completion:
+    - action: "Classify all 208 sources into Tier 1/2/3 (detailed)"
+      status: "Partially complete (high-level done)"
+      time_estimate: "2h"
+
+    - action: "Generate reading priority queue with specific files"
+      status: "Complete (documented above)"
+      time_estimate: "0h"
+
+    - action: "Identify remaining gaps"
+      status: "Complete (documented above)"
+      time_estimate: "0h"
+
+  phase_3_readiness:
+    - "Tier 1 sources identified and prioritized"
+    - "DNA Mental™ layer coverage mapped"
+    - "Self-cloning advantages documented"
+    - "Extraction strategy defined"
+    status: "READY TO BEGIN PHASE 3"
+
+# Notes System (AIOS-inspired)
+dev_notes:
+  - date: "2025-10-05"
+    note: "Initial inventory with 34 sources"
+
+  - date: "2025-10-16"
+    note: "Comprehensive re-inventory reveals 208 sources, 2.2M words"
+
+  - date: "2025-10-16"
+    note: "Self-cloning context discovered - changes viability from 79% to 84%"
+
+  - date: "2025-10-16"
+    note: "modelo-do-eu.md identified as CROWN JEWEL - Layers 6-8 pre-validated"
+
+  - date: "2025-10-16"
+    note: "Dual persona architecture documented: Vida Lendária (40%) + IA Expert (45%) + Overlap (15%)"
+
+analyst_notes:
+  - date: "2025-10-16"
+    note: "2.2M words = 12-15 book equivalents, unprecedented source density"
+
+  - date: "2025-10-16"
+    note: "Self-analysis category contains pre-validated DNA Mental™ Layers 6-8"
+
+  - date: "2025-10-16"
+    note: "Psychometric profile (alan-nicolas-profile.json) is statistical rarity"
+
+  - date: "2025-10-16"
+    note: "Course materials (78 files) demonstrate both teaching ability and expertise depth"
+
+  - date: "2025-10-16"
+    note: "Newsletter (56 editions) provides consistent philosophical voice samples"
+
+  - date: "2025-10-16"
+    note: "Fidelity target increased to 93-97% (Elite Tier) based on source quality + self-cloning advantages"
+
+qa_notes:
+  - date: "2025-10-16"
+    note: "Total source count: 208 files across 8 categories"
+
+  - date: "2025-10-16"
+    note: "All 8 DNA Mental™ layers have 75%+ coverage prediction"
+
+  - date: "2025-10-16"
+    note: "Tier 1 sources include: modelo-do-eu.md, Q&A.md, profile, top videos, core courses"
+
+  - date: "2025-10-16"
+    note: "Phase 2 (Research Collection) assessed at 95% complete - ready for Phase 3"

@@ -1,0 +1,34 @@
+{
+  "description": "Sample sources configuration for MMOS testing",
+  "sources": [
+    {
+      "type": "youtube",
+      "id": "dQw4w9WgXcQ",
+      "options": {
+        "lang": "en",
+        "includeMetadata": true
+      }
+    },
+    {
+      "type": "blog",
+      "url": "https://example.com/blog/article",
+      "options": {
+        "timeout": 30000
+      }
+    },
+    {
+      "type": "document",
+      "path": "/path/to/document.pdf",
+      "format": "pdf"
+    },
+    {
+      "type": "document",
+      "path": "/path/to/spreadsheet.xlsx",
+      "format": "excel"
+    }
+  ],
+  "options": {
+    "concurrency": 2,
+    "continueOnError": true
+  }
+}

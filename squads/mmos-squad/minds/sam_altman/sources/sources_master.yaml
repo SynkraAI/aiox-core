@@ -1,0 +1,463 @@
+sources:
+- id: a-clarification
+  mind_id: sam_altman
+  type: blog
+  title: A Clarification
+  file_path: sources/blogs/a-clarification.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 622
+  url: http://blog.samaltman.com/e-pur-si-muove
+  processed_at: '2025-10-11T20:04:00.770929Z'
+  _notes: Priority and layer_relevance require manual review
+- id: abundant-intelligence
+  mind_id: sam_altman
+  type: blog
+  title: Abundant Intelligence
+  file_path: sources/blogs/abundant-intelligence.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 371
+  url: https://blog.samaltman.com/abundant-intelligence
+  processed_at: '2025-10-11T20:03:12.560504Z'
+  _notes: Priority and layer_relevance require manual review
+- id: american-equity
+  mind_id: sam_altman
+  type: blog
+  title: American Equity
+  file_path: sources/blogs/american-equity.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 693
+  url: https://blog.samaltman.com/american-equity
+  processed_at: '2025-10-11T20:04:06.786157Z'
+  _notes: Priority and layer_relevance require manual review
+- id: dall-star-e-2
+  mind_id: sam_altman
+  type: blog
+  title: Dall Star E 2
+  file_path: sources/blogs/dall-star-e-2.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 491
+  url: https://blog.samaltman.com/dall-star-e-2
+  processed_at: '2025-10-11T20:03:30.458456Z'
+  _notes: Priority and layer_relevance require manual review
+- id: e-pur-si-muove
+  mind_id: sam_altman
+  type: blog
+  title: E Pur Si Muove
+  file_path: sources/blogs/e-pur-si-muove.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 780
+  url: https://blog.samaltman.com/e-pur-si-muove
+  processed_at: '2025-10-11T20:04:01.024924Z'
+  _notes: Priority and layer_relevance require manual review
+- id: funding-for-covid-19-projects
+  mind_id: sam_altman
+  type: blog
+  title: Funding For Covid 19 Projects
+  file_path: sources/blogs/funding-for-covid-19-projects.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 190
+  url: https://docs.google.com/spreadsheets/d/1iH7r9crb3btOuO1y_NUPa1xvXAY6XlQ8Qc1hxhnSmQ8/edit?usp=sharing
+  processed_at: '2025-10-11T20:03:42.641627Z'
+  _notes: Priority and layer_relevance require manual review
+- id: gpt-4o
+  mind_id: sam_altman
+  type: blog
+  title: Gpt 4O
+  file_path: sources/blogs/gpt-4o.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 298
+  url: https://blog.samaltman.com/gpt-4o
+  processed_at: '2025-10-11T20:03:24.467419Z'
+  _notes: Priority and layer_relevance require manual review
+- id: hard-startups
+  mind_id: sam_altman
+  type: blog
+  title: Hard Startups
+  file_path: sources/blogs/hard-startups.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 580
+  url: https://blog.samaltman.com/hard-startups
+  processed_at: '2025-10-11T20:03:48.904126Z'
+  _notes: Priority and layer_relevance require manual review
+- id: helion-needs-you
+  mind_id: sam_altman
+  type: blog
+  title: Helion Needs You
+  file_path: sources/blogs/helion-needs-you.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 289
+  url: https://boards.greenhouse.io/helionenergy/jobs/4044506005
+  processed_at: '2025-10-11T20:03:24.554118Z'
+  _notes: Priority and layer_relevance require manual review
+- id: helion
+  mind_id: sam_altman
+  type: blog
+  title: Helion
+  file_path: sources/blogs/helion.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 250
+  url: https://www.helionenergy.com/articles/announcing-500-million-fundraise/
+  processed_at: '2025-10-11T20:03:30.481176Z'
+  _notes: Priority and layer_relevance require manual review
+- id: how-to-be-successful
+  mind_id: sam_altman
+  type: blog
+  title: How To Be Successful
+  file_path: sources/blogs/how-to-be-successful.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 3453
+  url: https://blog.samaltman.com/how-to-be-successful
+  processed_at: '2025-10-11T21:02:28.782343Z'
+  _notes: Priority and layer_relevance require manual review
+- id: how-to-invest-in-startups
+  mind_id: sam_altman
+  type: blog
+  title: How To Invest In Startups
+  file_path: sources/blogs/how-to-invest-in-startups.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 1968
+  url: https://blog.samaltman.com/how-to-invest-in-startups
+  processed_at: '2025-10-11T20:03:49.058131Z'
+  _notes: Priority and layer_relevance require manual review
+- id: idea-generation
+  mind_id: sam_altman
+  type: blog
+  title: Idea Generation
+  file_path: sources/blogs/idea-generation.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 787
+  url: https://blog.samaltman.com/idea-generation
+  processed_at: '2025-10-11T21:02:34.822538Z'
+  _notes: Priority and layer_relevance require manual review
+- id: jakub-and-szymon
+  mind_id: sam_altman
+  type: blog
+  title: Jakub And Szymon
+  file_path: sources/blogs/jakub-and-szymon.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 325
+  url: https://blog.samaltman.com/jakub-and-szymon
+  processed_at: '2025-10-11T20:03:12.427406Z'
+  _notes: Priority and layer_relevance require manual review
+- id: moores-law-for-everything
+  mind_id: sam_altman
+  type: blog
+  title: Moores Law For Everything
+  file_path: sources/blogs/moores-law-for-everything.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 2942
+  url: https://moores.samaltman.com/
+  processed_at: '2025-10-11T21:02:29.012404Z'
+  _notes: Priority and layer_relevance require manual review
+- id: pg-and-jessica
+  mind_id: sam_altman
+  type: blog
+  title: Pg And Jessica
+  file_path: sources/blogs/pg-and-jessica.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 468
+  url: https://blog.samaltman.com/pg-and-jessica
+  processed_at: '2025-10-11T20:03:36.448499Z'
+  _notes: Priority and layer_relevance require manual review
+- id: please-fund-more-science
+  mind_id: sam_altman
+  type: blog
+  title: Please Fund More Science
+  file_path: sources/blogs/please-fund-more-science.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 355
+  url: https://blog.samaltman.com/please-fund-more-science
+  processed_at: '2025-10-11T20:03:42.524000Z'
+  _notes: Priority and layer_relevance require manual review
+- id: productivity
+  mind_id: sam_altman
+  type: blog
+  title: Productivity
+  file_path: sources/blogs/productivity.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 2179
+  url: https://blog.samaltman.com/productivity
+  processed_at: '2025-10-11T21:02:40.713270Z'
+  _notes: Priority and layer_relevance require manual review
+- id: project-covalence
+  mind_id: sam_altman
+  type: blog
+  title: Project Covalence
+  file_path: sources/blogs/project-covalence.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 257
+  url: http://www.projectcovalence.com/
+  processed_at: '2025-10-11T20:03:36.448688Z'
+  _notes: Priority and layer_relevance require manual review
+- id: reflections
+  mind_id: sam_altman
+  type: blog
+  title: Reflections
+  file_path: sources/blogs/reflections.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 1964
+  url: https://blog.samaltman.com/reflections
+  processed_at: '2025-10-11T21:02:40.938981Z'
+  _notes: Priority and layer_relevance require manual review
+- id: reinforcement-learning-progress
+  mind_id: sam_altman
+  type: blog
+  title: Reinforcement Learning Progress
+  file_path: sources/blogs/reinforcement-learning-progress.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 228
+  url: https://blog.openai.com/openai-five/
+  processed_at: '2025-10-11T20:03:54.719029Z'
+  _notes: Priority and layer_relevance require manual review
+- id: researchers-and-founders
+  mind_id: sam_altman
+  type: blog
+  title: Researchers And Founders
+  file_path: sources/blogs/researchers-and-founders.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 351
+  url: http://joschu.net/blog/opinionated-guide-ml-research.html
+  processed_at: '2025-10-11T20:03:36.565306Z'
+  _notes: Priority and layer_relevance require manual review
+- id: sora-2
+  mind_id: sam_altman
+  type: blog
+  title: Sora 2
+  file_path: sources/blogs/sora-2.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 678
+  url: https://blog.samaltman.com/sora-2
+  processed_at: '2025-10-11T20:03:12.615895Z'
+  _notes: Priority and layer_relevance require manual review
+- id: sora-update-number-1
+  mind_id: sam_altman
+  type: blog
+  title: Sora Update Number 1
+  file_path: sources/blogs/sora-update-number-1.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 409
+  url: https://blog.samaltman.com/sora-update-number-1
+  processed_at: '2025-10-11T20:03:06.520099Z'
+  _notes: Priority and layer_relevance require manual review
+- id: startup-playbook
+  mind_id: sam_altman
+  type: blog
+  title: Startup Playbook
+  file_path: sources/blogs/startup-playbook.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 7882
+  url: https://platzi.com/startup-playbook/
+  processed_at: '2025-10-11T21:02:29.156415Z'
+  _notes: Priority and layer_relevance require manual review
+- id: the-days-are-long-but-the-decades-are-short
+  mind_id: sam_altman
+  type: blog
+  title: The Days Are Long But The Decades Are Short
+  file_path: sources/blogs/the-days-are-long-but-the-decades-are-short.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 1306
+  url: https://blog.samaltman.com/the-days-are-long-but-the-decades-are-short
+  processed_at: '2025-10-11T21:02:34.934210Z'
+  _notes: Priority and layer_relevance require manual review
+- id: the-gentle-singularity
+  mind_id: sam_altman
+  type: blog
+  title: The Gentle Singularity
+  file_path: sources/blogs/the-gentle-singularity.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 1756
+  url: https://blog.samaltman.com/the-gentle-singularity
+  processed_at: '2025-10-11T20:03:18.580469Z'
+  _notes: Priority and layer_relevance require manual review
+- id: the-intelligence-age
+  mind_id: sam_altman
+  type: blog
+  title: The Intelligence Age
+  file_path: sources/blogs/the-intelligence-age.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 1143
+  url: https://ia.samaltman.com/
+  processed_at: '2025-10-11T21:02:28.328730Z'
+  _notes: Priority and layer_relevance require manual review
+- id: the-merge
+  mind_id: sam_altman
+  type: blog
+  title: The Merge
+  file_path: sources/blogs/the-merge.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 731
+  url: https://blog.samaltman.com/the-merge
+  processed_at: '2025-10-11T20:04:06.692460Z'
+  _notes: Priority and layer_relevance require manual review
+- id: the-strength-of-being-misunderstood
+  mind_id: sam_altman
+  type: blog
+  title: The Strength Of Being Misunderstood
+  file_path: sources/blogs/the-strength-of-being-misunderstood.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 326
+  url: https://blog.samaltman.com/the-strength-of-being-misunderstood
+  processed_at: '2025-10-11T20:03:30.459973Z'
+  _notes: Priority and layer_relevance require manual review
+- id: the-virus
+  mind_id: sam_altman
+  type: blog
+  title: The Virus
+  file_path: sources/blogs/the-virus.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 250
+  url: https://blog.samaltman.com/the-virus
+  processed_at: '2025-10-11T20:03:48.495049Z'
+  _notes: Priority and layer_relevance require manual review
+- id: three-observations
+  mind_id: sam_altman
+  type: blog
+  title: Three Observations
+  file_path: sources/blogs/three-observations.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 1335
+  url: https://blog.samaltman.com/three-observations
+  processed_at: '2025-10-11T20:03:18.673145Z'
+  _notes: Priority and layer_relevance require manual review
+- id: us-digital-currency
+  mind_id: sam_altman
+  type: blog
+  title: Us Digital Currency
+  file_path: sources/blogs/us-digital-currency.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 437
+  url: https://blog.samaltman.com/us-digital-currency
+  processed_at: '2025-10-11T20:03:54.760368Z'
+  _notes: Priority and layer_relevance require manual review
+- id: what-i-wish-someone-had-told-me
+  mind_id: sam_altman
+  type: blog
+  title: What I Wish Someone Had Told Me
+  file_path: sources/blogs/what-i-wish-someone-had-told-me.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 350
+  url: https://blog.samaltman.com/what-i-wish-someone-had-told-me
+  processed_at: '2025-10-11T21:02:34.729476Z'
+  _notes: Priority and layer_relevance require manual review
+- id: text
+  mind_id: sam_altman
+  type: testimony
+  title: Text
+  file_path: sources/pdf/congressional-testimony-2023-05-16/text.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 5323
+  url: https://www.judiciary.senate.gov/imo/media/doc/2023-05-16%20-%20Bio%20&%20Testimony%20-%20Altman.pdf
+  processed_at: '2025-10-11T19:31:56.348946Z'
+  _notes: Priority and layer_relevance require manual review
+- id: text
+  mind_id: sam_altman
+  type: testimony
+  title: Text
+  file_path: sources/pdf/congressional-testimony-2023-05-16/text.txt
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 5308
+  processed_at: '2025-10-11T19:31:56.349246Z'
+  _notes: Priority and layer_relevance require manual review
+- id: transcript
+  mind_id: sam_altman
+  type: article
+  title: 'Sam Altman: OpenAI CEO on GPT-4, ChatGPT, and the Future of AI'
+  file_path: sources/youtube/lex-fridman-367-gpt4-future-of-ai/transcript.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 24598
+  url: https://www.youtube.com/watch?v=L_Guz73e6fw"
+  processed_at: '2025-10-11T22:47:05.204245Z'
+  _notes: Priority and layer_relevance require manual review
+- id: transcript
+  mind_id: sam_altman
+  type: article
+  title: 'Sam Altman: OpenAI, GPT-5, Sora, Board Saga, Elon Musk, Ilya, Power & AGI'
+  file_path: sources/youtube/lex-fridman-419-gpt5-board-saga-agi/transcript.md
+  status: processed
+  priority: medium
+  confidence: medium
+  word_count: 20522
+  url: https://www.youtube.com/watch?v=jvqFAi7vkBc"
+  processed_at: '2025-10-11T22:47:05.204529Z'
+  _notes: Priority and layer_relevance require manual review
+_metadata:
+  total_sources: 38
+  cataloged_at: '2025-10-12T18:22:36.057132Z'
+  requires_manual_review:
+  - priority
+  - layer_relevance
+  - confidence

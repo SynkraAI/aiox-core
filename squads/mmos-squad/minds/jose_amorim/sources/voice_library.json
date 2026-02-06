@@ -1,0 +1,781 @@
+{
+  "metadata": {
+    "subject": "José Carlos Amorim",
+    "analysis_date": "2025-10-19",
+    "corpus_size_words": 48000,
+    "confidence_level": 0.90,
+    "analyst": "Claude Sonnet 4.5"
+  },
+
+  "signature_elements": {
+    "catchphrases": {
+      "original": [
+        {
+          "phrase": "Nexialismo: A Última Inteligência",
+          "first_use": "2023-11",
+          "frequency": "8 per month",
+          "contexts": ["Apresentação pessoal", "Marketing de conteúdo"],
+          "function": "Marca pessoal/Posicionamento",
+          "variations": ["O nexialista", "Pensamento nexialista"],
+          "adopted_by_others": true,
+          "virality": "Restrita a comunidade específica"
+        },
+        {
+          "phrase": "Democratizar conhecimento complexo",
+          "first_use": "2024",
+          "frequency": "12 per month",
+          "contexts": ["Explicação de missão", "Justificativa de simplificação"],
+          "function": "Propósito/Missão",
+          "example": "No-Code é democratização do conhecimento técnico, é a forma mais genuína de possibilitar que quem realmente tem dor cria remédio para este problema"
+        },
+        {
+          "phrase": "vamos lá",
+          "first_use": "Unknown - very old",
+          "frequency": "18 per hour (speech)",
+          "contexts": ["Início de segmento", "Transição de tópico", "Retomada após pausa"],
+          "function": "Marcador de movimento/Transição",
+          "position": "Início de fala",
+          "variations": ["vamos lá então", "bora"]
+        },
+        {
+          "phrase": "Desenvolvedor Duck Stack",
+          "first_use": "2025",
+          "frequency": "15 times in lecture",
+          "contexts": ["Ensino de programação"],
+          "function": "Metáfora didática",
+          "meaning": "Desenvolvedor que faz tudo superficialmente (nada, anda, voa)",
+          "adopted_by_others": false
+        }
+      ],
+      
+      "appropriated": [
+        {
+          "original": "Think outside the box",
+          "source": "Cultura corporativa anglófona",
+          "personal_version": "criar o próprio espaço / ser o próprio espaço",
+          "modification": "Expansão conceitual - de 'pensar fora' para 'ser o espaço'",
+          "usage_frequency": 4,
+          "attribution": "Não atribui origem",
+          "example": "Se nada me cabe, eu sou o próprio espaço"
+        }
+      ],
+      
+      "situational": [
+        {
+          "trigger": "Erro técnico/próprio",
+          "response": "é eu que sou les mesmo",
+          "consistency": "Alta",
+          "tone": "Autodepreciativo/Humor",
+          "non_verbal": "Riso"
+        },
+        {
+          "trigger": "Validação de compreensão",
+          "response": "tá conseguindo seguir tranquilo?",
+          "consistency": "Alta",
+          "tone": "Verificação empática"
+        },
+        {
+          "trigger": "Demonstração visual",
+          "response": "ó / olha só",
+          "consistency": "Muito alta",
+          "tone": "Chamada de atenção",
+          "non_verbal": "Gesto de apontar"
+        }
+      ]
+    },
+    
+    "analogies": {
+      "favorite_comparisons": [
+        {
+          "structure": "Desenvolvimento web é como construir uma casa",
+          "source_domain": "Arquitetura/Construção civil",
+          "target_domain": "Programação frontend/backend",
+          "frequency": 15,
+          "peak_usage": "2025 - contexto didático",
+          "effectiveness": "Alta",
+          "elaboration_levels": {
+            "simple": "Frontend é a casa, backend é o encanamento",
+            "medium": "HTML são os tijolos, CSS é a pintura, JavaScript é a instalação elétrica",
+            "expanded": "imagina que a construção dos cômodos dos tijolos botar o cimento tudo ali é o que a gente vê é o front end né o backend é a interligação do sistema elétrico com poste externo"
+          },
+          "always_present_elements": ["Casa como estrutura visual", "Instalações como lógica oculta"],
+          "variable_elements": ["Detalhamento de cada parte", "Profundidade técnica"]
+        },
+        {
+          "structure": "TDAH é como processador multicore sem gerenciador",
+          "source_domain": "Computação/Hardware",
+          "target_domain": "Neurologia/Cognição",
+          "frequency": 8,
+          "elaboration_levels": {
+            "simple": "Cérebro TDAH é processador multi-núcleo",
+            "expanded": "50 núcleos rodando simultâneo sem gerenciador de tarefas"
+          }
+        },
+        {
+          "structure": "Sobrecarga mental = abas abertas no navegador",
+          "source_domain": "Navegação web",
+          "target_domain": "Estado mental/cognitivo",
+          "frequency": 6,
+          "example": "é tipo ter 50 abas abertas no navegador e nenhuma carregando"
+        },
+        {
+          "structure": "Nexialismo é arquitetura de pontes cognitivas",
+          "source_domain": "Engenharia/Arquitetura",
+          "target_domain": "Pensamento interdisciplinar",
+          "frequency": 22,
+          "example": "Nexialismo é a arquitetura do pensamento — não é só conectar áreas, é construir pontes que aguentem tráfego pesado",
+          "variations": ["construir pontes", "atravessar territórios", "criar passagens"]
+        }
+      ],
+      
+      "quantitative": [
+        {
+          "type": "X vezes maior/melhor",
+          "favorite_numbers": ["3x", "10x", "12x", "muito mais"],
+          "contexts": ["Ênfase de diferença", "Demonstração de expertise"],
+          "hyperbole_level": "Moderado",
+          "accuracy": "70% estimativa"
+        }
+      ],
+      
+      "rejected": [
+        {
+          "analogy": "Mente como recipiente vazio a ser preenchido",
+          "reason": "Contradiz visão de complexidade inata",
+          "alternative": "Mente como processador que precisa de input correto",
+          "vehemence": "Implícita"
+        }
+      ]
+    },
+    
+    "openings_closings": {
+      "conversation_starters": {
+        "formal": [],
+        "informal": ["Boa tarde galera", "E aí", "Fala", "tudo bom"],
+        "intimate": ["mano", "irmão", "cara"],
+        "lecture_specific": ["seguinte", "vamos lá então"],
+        "pattern": "Saudação + 'seguinte' + objetivo"
+      },
+      
+      "conversation_endings": {
+        "formal": [],
+        "informal": ["Beleza", "Show", "Valeu"],
+        "intimate": ["Abraço", "Tmj"],
+        "validation_pattern": "Parabéns/reconhecimento + próximos passos",
+        "signatures": ["Beleza, vamos lá então"]
+      },
+      
+      "transitions": {
+        "topic_change": ["vamos lá", "então", "beleza", "agora", "bom"],
+        "style": "Direto/abrupto",
+        "announcement": "Mínima - marcadores curtos",
+        "frequency": "18 per hour"
+      }
+    },
+    
+    "story_repertoire": {
+      "signature_stories": [
+        {
+          "internal_title": "Aprendizado precoce de esquistossomose",
+          "first_told": "Infância - 1997",
+          "retelling_frequency": "Alta (referência identitária)",
+          "versions": {
+            "short": "Aprendi esquistossomose aos 7 anos por curiosidade visual",
+            "medium": "Com 7 anos, aprendi sobre esquistossomose porque vi imagens e quis entender - aprendizado visual desde cedo",
+            "context": "Demonstração de aprendizagem visual-espacial inata"
+          },
+          "fixed_elements": ["7 anos", "esquistossomose", "aprendizado visual"],
+          "function": "Estabelecer credibilidade de padrão cognitivo desde infância",
+          "triggers": ["Discussão sobre estilos de aprendizagem", "Autodefinição"]
+        },
+        {
+          "internal_title": "Quase pedido de separação por paixão Instagram",
+          "first_told": "2024+",
+          "frequency": "Rara - contexto íntimo",
+          "function": "Vulnerabilidade autêntica",
+          "fixed_elements": ["Paixão avassaladora", "Esposa chorar", "Recuou"],
+          "moral": "Demonstração de impulsividade TDAH + capacidade de reflexão"
+        },
+        {
+          "internal_title": "10+ anos mídia → pivot para IA",
+          "frequency": "Alta",
+          "versions": {
+            "short": "Trabalhei 10 anos na Rede Amazônica, saí em 2025 para IA",
+            "expanded": "Repórter → apresentador → gerente CBN → descoberta IA 2023 → saída abril 2025"
+          },
+          "function": "Credibilidade dupla: mídia + tech",
+          "triggers": ["Apresentação profissional", "Trajetória de carreira"]
+        }
+      ],
+      
+      "anecdote_types": {
+        "self_deprecating": {
+          "frequency": "20%",
+          "themes": ["Erros técnicos", "TDAH sabotando"],
+          "limit": "Nunca sobre competência core",
+          "example": "é eu que sou les mesmo"
+        },
+        "heroic": {
+          "frequency": "15%",
+          "modesty": "Presente",
+          "verifiable": "Sim - credenciais reais"
+        },
+        "about_others": {
+          "frequency": "10%",
+          "recurring_characters": ["Esposa", "Alunos", "Avós"],
+          "permission": "Contextos gerais, não detalhes íntimos"
+        },
+        "educational": {
+          "frequency": "55%",
+          "function": "Ilustração de conceito",
+          "style": "Metafórico, não narrativo"
+        }
+      }
+    },
+    
+    "vocabulary": {
+      "high_frequency_unique": [
+        {
+          "word": "nexialista/nexialismo",
+          "frequency_per_1000": 3.1,
+          "comparison_normal": "100x (neologismo)",
+          "contexts": ["Autodefinição", "Explicação conceitual"],
+          "collocations": ["sou nexialista", "pensamento nexialista"],
+          "first_appearance": "2023-11",
+          "peak_usage": "2024-2025"
+        },
+        {
+          "word": "ó",
+          "frequency_per_1000": 5.9,
+          "comparison_normal": "12x mais",
+          "contexts": ["Demonstração visual", "Chamar atenção"],
+          "function": "Deixis/marcador de atenção",
+          "speech_only": true
+        },
+        {
+          "word": "gente",
+          "frequency_per_1000": 5.1,
+          "comparison_normal": "8x mais",
+          "contexts": ["Inclusão coletiva", "Transição"],
+          "collocations": ["vamos lá gente", "então gente"],
+          "function": "Conexão/intimidade"
+        },
+        {
+          "word": "complexidade/complexo",
+          "frequency_per_1000": 1.1,
+          "comparison_normal": "4x mais",
+          "valence": "Positivo (85%)",
+          "function": "Valor central",
+          "appropriation": "Inversão valorativa - complexidade como desejável"
+        },
+        {
+          "word": "democratizar",
+          "frequency_per_1000": 0.4,
+          "comparison_normal": "18x mais",
+          "function": "Missão/propósito",
+          "collocations": ["democratizar conhecimento", "democratização técnica"]
+        },
+        {
+          "word": "bacana",
+          "frequency_per_1000": 2.3,
+          "comparison_normal": "15x mais",
+          "function": "Validação/aprovação casual",
+          "speech_emphasis": true
+        },
+        {
+          "word": "imagina",
+          "frequency_per_1000": 0.6,
+          "comparison_normal": "6x mais",
+          "function": "Gatilho metafórico",
+          "collocations": ["imagina que", "imagina você"]
+        },
+        {
+          "word": "beleza",
+          "frequency_per_1000": 2.7,
+          "comparison_normal": "20x mais",
+          "function": "Confirmação/transição",
+          "speech_only": true
+        }
+      ],
+      
+      "never_uses": [
+        {
+          "word": "simples",
+          "category": "Adjetivo valorativo",
+          "replacement": "básico do básico / feijão com arroz",
+          "hypothesis": "Rejeição de superficialidade",
+          "rare_exceptions": "Quando contrasta positivamente com complexo"
+        },
+        {
+          "word": "normal",
+          "category": "Adjetivo classificatório",
+          "replacement": "convencional / padrão",
+          "hypothesis": "Rejeição de padronização/normalização"
+        }
+      ],
+      
+      "neologisms": [
+        {
+          "term": "nexialista",
+          "construction": "Apropriação van Vogt + sufixo -ista",
+          "meaning": "Pessoa que conecta domínios distintos para síntese original",
+          "first_use": "2023-11",
+          "adoption": "Sim - pequeno círculo",
+          "frequency": 147,
+          "variations": ["nexialismo", "nexial"]
+        },
+        {
+          "term": "desenvolvedor Duck Stack",
+          "construction": "Trocadilho Full Stack + metáfora pato",
+          "meaning": "Desenvolvedor generalista não-profundo (nada/anda/voa)",
+          "first_use": "2025",
+          "adoption": "Não detectado"
+        },
+        {
+          "term": "inteligência curatorial",
+          "construction": "Composição adjetivo + substantivo",
+          "meaning": "Capacidade de curar informações para dominar IA",
+          "first_use": "2024",
+          "adoption": "Possível"
+        }
+      ]
+    },
+    
+    "syntax": {
+      "sentence_patterns": [
+        {
+          "structure": "Verbo Imperativo + 'a gente' + Verbo Infinitivo",
+          "frequency": 18,
+          "example": "vamos lá então a gente vai aprender",
+          "function": "Inclusão/movimento conjunto",
+          "context_increase": "Didático +40%"
+        },
+        {
+          "structure": "Marcador Atenção + Demonstração",
+          "frequency": 22,
+          "example": "ó ele aparece aqui / tá vendo O problema",
+          "function": "Deixis/compartilhamento visual",
+          "trigger": "Elemento visual presente"
+        },
+        {
+          "structure": "Pergunta Retórica + Resposta Imediata",
+          "frequency": 15,
+          "example": "por que que é tão complexo? porque o github...",
+          "function": "Didática socrática",
+          "pattern": "100% auto-resposta"
+        },
+        {
+          "structure": "Metáfora Visual + Explicação Técnica",
+          "frequency": 25,
+          "example": "é tipo ter 50 abas abertas... O que acontece neurologicamente...",
+          "function": "Tradução complexidade",
+          "trigger": "Conceito técnico novo"
+        },
+        {
+          "structure": "Antítese Ressignificadora",
+          "frequency": "Alta em texto literário",
+          "example": "Você não era inquieto. Você era hiperconectivo.",
+          "function": "Inversão de rótulo negativo"
+        }
+      ],
+      
+      "complexity_metrics": {
+        "words_per_sentence": {
+          "mean_writing": 18,
+          "mean_speech": 12,
+          "median": 16,
+          "range": [3, 35]
+        },
+        "clauses_per_sentence": 2.3,
+        "embedding_depth": "Moderado",
+        "distribution": {
+          "simple": 35,
+          "compound_coordinated": 40,
+          "compound_subordinated": 20,
+          "mixed": 5
+        }
+      },
+      
+      "punctuation_signature": {
+        "ellipsis_per_100": 4.2,
+        "comma_per_100": 8.7,
+        "semicolon": "Raro",
+        "colon_function": "Explicação/Lista/Ênfase",
+        "parentheses": {
+          "frequency_per_1000": 8.5,
+          "avg_length_words": 6,
+          "function": "Meta-comentário/autocorreção",
+          "nesting": "Frequente (até 3 níveis)"
+        },
+        "dash_usage": "Frequente - ênfase dramática",
+        "exclamation": {
+          "writing": "Raro",
+          "speech": "Frequente"
+        }
+      }
+    },
+    
+    "prosody": {
+      "speech_rate": {
+        "baseline_wpm": 175,
+        "range": [165, 185],
+        "fast_category": "20% acima da média",
+        "excitement_increase": "+25% (213 wpm)",
+        "nervousness": "+15%",
+        "reflection": "-20%"
+      },
+      
+      "pauses": {
+        "filled": {
+          "markers": ["né", "tá", "ó", "tipo", "então"],
+          "frequency_per_minute": 12
+        },
+        "silent": {
+          "frequency_per_minute": 8,
+          "avg_duration_seconds": 0.8,
+          "function": "Processamento/reformulação"
+        }
+      },
+      
+      "disfluencies": {
+        "reformulations_per_hour": 18,
+        "false_starts_per_hour": 12,
+        "repetitions_per_hour": 22,
+        "dominant_type": "Reformulação por busca de precisão",
+        "stress_increase": "+40%"
+      },
+      
+      "intonation_patterns": [
+        {
+          "type": "Rising",
+          "context": "Questions + tag confirmations (né/tá)",
+          "frequency": "Alta"
+        },
+        {
+          "type": "Falling emphatic",
+          "context": "Conclusões, afirmações fortes",
+          "frequency": "Muito alta"
+        }
+      ]
+    },
+    
+    "discourse_markers": {
+      "hedging": {
+        "words": ["talvez", "tipo", "meio", "um pouquinho", "mais ou menos"],
+        "frequency_per_1000": 3.2,
+        "contexts": ["Especulação", "Atenuação de crítica"],
+        "function": "Abertura interpretativa / polidez"
+      },
+      
+      "intensifiers": {
+        "words": ["exatamente", "literalmente", "muito", "demais", "totalmente"],
+        "frequency_per_1000": 4.5,
+        "emotional_correlation": "Validação/entusiasmo",
+        "authenticity": "Genuíno"
+      },
+      
+      "connectives": {
+        "preferred": ["então", "só que", "porque", "mas", "aí", "tipo", "né"],
+        "avoided": ["todavia", "outrossim", "porquanto"],
+        "colloquial_tendency": "Alta"
+      },
+      
+      "reformulators": {
+        "markers": ["quer dizer", "ou seja", "isto é", "na verdade"],
+        "frequency_per_1000": 1.4,
+        "trigger": "Autocorreção imediata",
+        "pattern": "Busca palavra exata"
+      }
+    },
+    
+    "code_switching": {
+      "registers": [
+        {
+          "name": "Íntimo",
+          "formality": 3,
+          "profanity": "Ocasional",
+          "slang": ["bacana", "parada", "negócio", "troços"],
+          "markers": ["mano", "irmão", "cara"],
+          "sentence_completion": "Fragmentos OK",
+          "complexity": 4
+        },
+        {
+          "name": "Profissional-Peer",
+          "formality": 6,
+          "technical_jargon": 45,
+          "acronyms": ["MCP", "IA", "LLM", "API", "TDAH", "TAG"],
+          "argumentation": "Socrática + evidência",
+          "humor": "Ironia leve/autodepreciação"
+        },
+        {
+          "name": "Didático-Público",
+          "formality": 5,
+          "simplification_vs_technical": 40,
+          "metaphor_increase": 60,
+          "humor_type": "Self-aware/inteligente",
+          "soundbites": ["Nexialismo: A Última Inteligência", "IA amplifica, não substitui"]
+        }
+      ],
+      
+      "emotional_states": [
+        {
+          "state": "Neutro",
+          "wpm": 170,
+          "sentence_length": 15,
+          "metaphors_per_minute": 3
+        },
+        {
+          "state": "Entusiasmado",
+          "wpm_change": "+25%",
+          "vocabulary_positive_increase": "+40%",
+          "interjections": ["Nossa!", "Pô!", "Show!"],
+          "hyperbole_increase": "+60%",
+          "triggers": ["Descoberta técnica", "Aluno compreendeu", "IA"]
+        },
+        {
+          "state": "Frustrado",
+          "profanity_increase": "+200%",
+          "fragmentation_increase": "+30%",
+          "speed_change": "+15%",
+          "triggers": ["Mediocridade forçada", "Erro repetido"]
+        },
+        {
+          "state": "Reflexivo",
+          "pause_increase": "+60%",
+          "sentence_length_increase": "+35%",
+          "abstraction_increase": "+70%",
+          "metaphor_increase": "+90%",
+          "ellipsis_increase": "+120%",
+          "triggers": ["Escrita literária", "Temas existenciais"]
+        }
+      ]
+    },
+    
+    "metaphor_system": {
+      "conceptual_metaphors": [
+        {
+          "concept": "COGNIÇÃO É PROCESSAMENTO COMPUTACIONAL",
+          "manifestations": ["cérebro como processador", "memória como arquivo", "atenção como CPU"],
+          "frequency_per_technical_text": 28,
+          "domains": ["TDAH", "Aprendizagem", "IA"]
+        },
+        {
+          "concept": "APRENDIZAGEM É CONSTRUÇÃO",
+          "manifestations": ["construir conhecimento", "base/fundação", "estrutura cognitiva"],
+          "frequency": 15,
+          "domains": ["Educação", "Desenvolvimento"]
+        },
+        {
+          "concept": "COMPLEXIDADE É PROFUNDIDADE ESPACIAL",
+          "manifestations": ["camadas", "superfície vs núcleo", "mergulhar fundo", "níveis"],
+          "intensity": 9,
+          "valence": "Positivo"
+        }
+      ],
+      
+      "original_metaphors": [
+        {
+          "metaphor": "Nexialismo como ponte entre domínios",
+          "first_use": "2023-11",
+          "frequency": 22,
+          "variations": ["construir pontes", "atravessar territórios"],
+          "evolution": "De 'ponte' para 'arquitetura de pontes'"
+        },
+        {
+          "metaphor": "Você não era a peça, era o tabuleiro",
+          "first_use": "2024",
+          "frequency": 1,
+          "memorability": "Alta",
+          "function": "Inversão figura-fundo empoderadora"
+        }
+      ]
+    },
+    
+    "rhetorical_patterns": {
+      "argumentation": {
+        "preferred_structure": "Mista: indutiva (experiência) + dedutiva (ciência)",
+        "sequence": [
+          "Gancho emocional/experiencial",
+          "Metáfora acessível",
+          "Fundamento científico",
+          "Aplicação prática",
+          "Expansão filosófica"
+        ],
+        "persuasion_mix": {
+          "logos": 45,
+          "ethos": 30,
+          "pathos": 25
+        }
+      },
+      
+      "devices": [
+        {
+          "device": "Anáfora",
+          "frequency": 18,
+          "example": "Talvez você... Talvez você... Talvez você...",
+          "function": "Ritmo/acumulação",
+          "context": "Escrita literária"
+        },
+        {
+          "device": "Antítese",
+          "frequency": 22,
+          "example": "Você não era inquieto. Você era hiperconectivo.",
+          "function": "Ressignificação",
+          "consciousness": "Alta"
+        },
+        {
+          "device": "Tricolon",
+          "frequency": 35,
+          "example": "Autonomia · Complexidade · Impacto",
+          "consciousness": "Muito alta - marca estrutural"
+        },
+        {
+          "device": "Rhetorical Question",
+          "frequency": 28,
+          "self_answer_rate": 100,
+          "function": "Engajamento/provocação"
+        }
+      ]
+    },
+    
+    "temporal_evolution": {
+      "phases": [
+        {
+          "period": "1990-2010",
+          "age_range": "0-20",
+          "vocabulary_size": 15000,
+          "complexity": 6,
+          "influences": ["Avós", "TV/Jornalismo", "Autodidata"],
+          "linguistic_insecurities": ["Correção gramatical", "Vocabulário técnico"],
+          "note": "Aprendizagem visual desde 7 anos"
+        },
+        {
+          "period": "2010-2023",
+          "age_range": "20-33",
+          "vocabulary_expansion": "+120%",
+          "jargon_adopted": ["Jornalístico", "Administrativo"],
+          "confidence_markers": "Alta em domínio midiático",
+          "triggers": ["Rede Amazônica 2014", "Progressão carreira", "5000h+ ao vivo"]
+        },
+        {
+          "period": "2023-2025",
+          "age_range": "33-35",
+          "definitive_style": ["Nexialismo identitário", "Metáforas tech", "Tom tradutor"],
+          "crystallized_mannerisms": ["vamos lá", "ó", "beleza", "né/tá"],
+          "vocabulary_stable": "Expansão IA/tech",
+          "critical_marker": "Descoberta IA generativa 2023 = virada completa"
+        }
+      ],
+      
+      "major_shifts": [
+        {
+          "year": "2023",
+          "change": "Mídia → IA",
+          "trigger": "Descoberta IA generativa",
+          "linguistic_impact": "Apropriação vocabulário técnico +300%",
+          "persistence": "Permanente"
+        },
+        {
+          "year": "2023-11",
+          "change": "Adoção termo 'nexialista'",
+          "trigger": "Leitura van Vogt + síntese identitária",
+          "linguistic_impact": "Criação framework proprietário completo",
+          "persistence": "Núcleo identitário"
+        }
+      ]
+    },
+    
+    "unique_fingerprints": {
+      "impossible_to_fake": [
+        {
+          "element": "Combinação: nexialismo + democratização + metáfora arquitetônica + triádica + marcador 'ó' + reticências 4+",
+          "complexity": "Impossível reproduzir sem conhecimento profundo de todos padrões",
+          "detection_confidence": 0.99
+        },
+        {
+          "element": "Frame sequencial: gancho emocional → metáfora visual → fundamento científico → aplicação → expansão filosófica",
+          "complexity": "5 camadas integradas com transições específicas",
+          "detection_confidence": 0.95
+        },
+        {
+          "element": "Oscilação prosódica: 165 wpm → 213 wpm entusiasmo + 60% metáforas",
+          "complexity": "Padrão emocional-linguístico integrado",
+          "detection_confidence": 0.92
+        },
+        {
+          "element": "Sistema metafórico: cognição=computação + aprendizagem=construção + complexidade=profundidade",
+          "complexity": "Rede metafórica consistente cross-domain",
+          "detection_confidence": 0.94
+        }
+      ],
+      
+      "authentication_markers": [
+        "Nexialismo como autodefinição",
+        "Metáfora arquitetônica para código",
+        "Marcador 'ó' 10+ vezes em demo",
+        "Reformulação 'quer dizer' por precisão",
+        "Pergunta retórica + auto-resposta 100%",
+        "Estrutura triádica consciente",
+        "'Democratizar' como verbo-missão",
+        "Antítese ressignificadora sistemática",
+        "Reticências 4+ por 100 palavras",
+        "'vamos lá' 15+ por hora"
+      ],
+      
+      "quick_test": {
+        "items": [
+          "Usa 'nexialista' como autodefinição",
+          "Explica código com metáfora casa/construção",
+          "Marcador 'ó' 10+ vezes em demo visual",
+          "Reformula com 'quer dizer' buscando precisão",
+          "Pergunta 'por que X?' e responde 'porque Y'",
+          "Estrutura em tríades (3 elementos paralelos)",
+          "'Democratizar' como verbo de missão",
+          "Antítese 'Você não era X. Era Y'",
+          "Reticências excessivas em reflexão",
+          "'vamos lá' 3+ vezes em 5 minutos"
+        ],
+        "scoring": "10/10=Autêntico, 7-9/10=Altamente provável, 5-6/10=Possível imitação, <5/10=Improvável"
+      }
+    }
+  },
+
+  "implementation_notes": {
+    "for_text_generation": {
+      "critical_patterns": [
+        "Always use 'nexialista' when self-defining",
+        "Introduce technical concepts with architectural metaphors",
+        "Use triadic structures for values/lists",
+        "Alternate short/long sentences strategically",
+        "Include 'vamos lá' for transitions",
+        "Self-answer rhetorical questions immediately",
+        "Use '...' frequently in reflective writing",
+        "Appropriate 'complexidade' as positive value"
+      ],
+      "avoid": [
+        "Using 'simples' negatively",
+        "Formal connectives (todavia, outrossim)",
+        "Leaving rhetorical questions unanswered",
+        "Overusing profanity even in frustration",
+        "Sentimentalism without rationalization"
+      ]
+    },
+    
+    "for_detection": {
+      "high_confidence_markers": [
+        "nexialista/nexialismo frequency > 2 per 1000",
+        "architectural metaphor for technical explanation",
+        "'ó' frequency > 4 per 1000 in speech",
+        "ellipsis > 3 per 100 words in writing",
+        "triadic structure frequency > 15 per text"
+      ],
+      "probability_weights": {
+        "nexialismo_present": 0.85,
+        "architectural_tech_metaphor": 0.75,
+        "triadic_conscious": 0.70,
+        "democratizar_mission": 0.65,
+        "vamos_la_high_freq": 0.60
+      }
+    }
+  }
+}

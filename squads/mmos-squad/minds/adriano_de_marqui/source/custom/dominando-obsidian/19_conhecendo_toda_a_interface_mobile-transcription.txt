@@ -1,0 +1,455 @@
+WEBVTT
+
+00:00:00.820 --> 00:00:04.780
+Bom, Endaro, agora nós vamos olhar aqui
+a interface no...
+
+00:00:05.300 --> 00:00:07.360
+Aqui eu estou olhando no iPhone, tá?
+
+00:00:07.480 --> 00:00:12.180
+Depois eu só coloco aí no Android, só
+para ver que é a mesma coisa, tá?
+
+00:00:12.560 --> 00:00:13.440
+Mas vamos lá.
+
+00:00:13.500 --> 00:00:16.540
+Aqui eu tenho a interface da ferramenta
+inicial.
+
+00:00:16.720 --> 00:00:18.940
+Eu vou selecionar o meu cofre aqui, né?
+
+00:00:20.580 --> 00:00:22.540
+Eu vou entrar no Vault.
+
+00:00:23.580 --> 00:00:26.960
+E vai começar a sincronização.
+
+00:00:27.200 --> 00:00:28.860
+Posso pular essa mensagem aqui.
+
+00:00:28.860 --> 00:00:29.760
+Aqui, tal.
+
+00:00:29.940 --> 00:00:31.260
+Bom, abriu aqui, ó.
+
+00:00:31.360 --> 00:00:33.540
+E aí eu tenho, né?
+
+00:00:34.920 --> 00:00:41.660
+Veja só que aqui na lateral, eu tenho
+aquele quadrinho que lá no desktop
+
+00:00:41.660 --> 00:00:43.000
+abria, né?
+
+00:00:43.040 --> 00:00:43.840
+A barra lateral.
+
+00:00:44.020 --> 00:00:47.840
+Aqui ele abre também para selecionar os
+arquivos.
+
+00:00:47.860 --> 00:00:51.040
+Eu tenho os arquivos, palestras,
+primeira nota, segunda nota.
+
+00:00:51.160 --> 00:00:54.560
+Então eu clico numa nota e ele abre aqui
+para mim, tá?
+
+00:00:55.180 --> 00:00:58.700
+Ó, tem aquele ícone de edição e
+visualização.
+
+00:00:59.500 --> 00:01:02.500
+Três pontinhos aqui que abrem o menu
+aqui embaixo.
+
+00:01:02.780 --> 00:01:06.340
+Pode ver que com muito menos opções, né?
+
+00:01:06.900 --> 00:01:08.480
+Mas ele abre aqui embaixo.
+
+00:01:08.700 --> 00:01:13.580
+Ó, tem bookmark, tem mover o arquivo, a
+textão de procura, tal.
+
+00:01:13.800 --> 00:01:17.700
+E algumas outras que vocês vão aprender
+nas próximas aulas aí.
+
+00:01:17.780 --> 00:01:21.240
+Não adianta eu explicar todas elas
+agora, porque você não está usando
+
+00:01:21.240 --> 00:01:21.480
+ainda.
+
+00:01:21.540 --> 00:01:27.100
+Eu quero que você vá usando e vendo aqui
+na teoria e já aplicando, tá?
+
+00:01:28.000 --> 00:01:28.840
+Quando eu clico aqui, eu vou abrir o
+menu.
+
+00:01:28.840 --> 00:01:30.540
+Quando eu clico aqui, ó, que é
+interessante.
+
+00:01:30.860 --> 00:01:34.480
+Você tem o botão de configurações aqui,
+ó.
+
+00:01:34.980 --> 00:01:37.680
+Ó, é aquelas configurações que a gente
+viu no desktop.
+
+00:01:38.000 --> 00:01:43.280
+Claro que aplicada no layout aqui, no
+modelo 1, né?
+
+00:01:43.320 --> 00:01:45.040
+Dos, do celular.
+
+00:01:46.020 --> 00:01:51.460
+Aqui embaixo eu tenho um botão para
+criar uma nova nota, criar uma pasta,
+
+00:01:51.700 --> 00:01:53.680
+ordenar e...
+
+00:01:54.680 --> 00:01:56.520
+Vamos dizer, colapsar, né?
+
+00:01:56.580 --> 00:01:58.780
+Colocar, agrupar todas as...
+
+00:01:58.840 --> 00:01:59.760
+Os arquivos aqui.
+
+00:02:00.080 --> 00:02:02.000
+Então, olha, eu tenho, né?
+
+00:02:02.020 --> 00:02:02.780
+Tudo aqui.
+
+00:02:02.940 --> 00:02:04.080
+Aqui eu tenho...
+
+00:02:04.580 --> 00:02:05.060
+É...
+
+00:02:05.900 --> 00:02:07.540
+Nessa opção onde está, files.
+
+00:02:07.880 --> 00:02:14.380
+Você lembra que lá no desktop eu tinha
+as opções de ver os arquivos, ver a
+
+00:02:14.380 --> 00:02:15.700
+barra de pesquisa, né?
+
+00:02:15.760 --> 00:02:16.140
+E tudo mais.
+
+00:02:16.580 --> 00:02:18.300
+Aqui, ele tem...
+
+00:02:18.300 --> 00:02:20.340
+Você tem que clicar aqui, ó, em files,
+né?
+
+00:02:20.620 --> 00:02:21.620
+Daí eu vejo, ó.
+
+00:02:21.620 --> 00:02:23.500
+Agora eu quero ver, fazer uma pesquisa.
+
+00:02:24.120 --> 00:02:28.080
+Agora eu quero ver, pesquisar por tags,
+né?
+
+00:02:28.120 --> 00:02:28.660
+Ver as tags.
+
+00:02:28.660 --> 00:02:29.360
+Ver os tags que eu estou usando.
+
+00:02:29.520 --> 00:02:31.020
+Você vai aprender o que é isso aí.
+
+00:02:31.620 --> 00:02:33.100
+Bookmarks, que é aqueles favoritos.
+
+00:02:33.180 --> 00:02:33.740
+Você vai ver aqui.
+
+00:02:34.500 --> 00:02:38.780
+E aqui você vê a relação dos arquivos,
+tá bom?
+
+00:02:39.500 --> 00:02:39.900
+Legal.
+
+00:02:40.060 --> 00:02:41.040
+Aí eu venho para cá.
+
+00:02:41.320 --> 00:02:43.320
+Bom, aqui a gente já viu tudo.
+
+00:02:43.480 --> 00:02:45.340
+Se eu estou editando uma nota, tá?
+
+00:02:45.500 --> 00:02:52.580
+Se você está num texto aqui, ele abre lá
+embaixo uma barra que é de formatação,
+
+00:02:52.600 --> 00:02:52.880
+né?
+
+00:02:52.940 --> 00:02:55.440
+Eu consigo aqui ver uma barra de
+formatação.
+
+00:02:55.460 --> 00:02:56.780
+Você consegue com o dedo ali...
+
+00:02:57.500 --> 00:02:57.900
+É...
+
+00:02:58.620 --> 00:03:01.980
+Grifar, colocar como negrito, enfim.
+
+00:03:02.200 --> 00:03:05.600
+Várias e várias e várias opções ali, tá
+bom?
+
+00:03:06.000 --> 00:03:14.360
+E aí você tem aqui o sinalzinho de mais,
+que é para abrir a pesquisa aqui, tá?
+
+00:03:14.700 --> 00:03:16.700
+Você pode pesquisar por aqui também.
+
+00:03:17.240 --> 00:03:17.760
+Legal?
+
+00:03:18.460 --> 00:03:19.300
+Que mais?
+
+00:03:19.640 --> 00:03:20.120
+Que mais?
+
+00:03:20.160 --> 00:03:20.520
+Que mais?
+
+00:03:20.560 --> 00:03:26.920
+Aqui a gente vai ter também a
+alternância entre as notas abertas.
+
+00:03:27.900 --> 00:03:29.140
+Aí tem um botãozinho ali, ó.
+
+00:03:29.820 --> 00:03:38.140
+Onde tem um, você pode abrir várias
+notas e ter a alternância entre as notas
+
+00:03:38.140 --> 00:03:38.320
+aqui.
+
+00:03:38.820 --> 00:03:39.300
+Tá legal?
+
+00:03:39.440 --> 00:03:43.040
+Você pode colocar aqui uma nova aba.
+
+00:03:43.280 --> 00:03:44.980
+Tem novas abas aqui.
+
+00:03:45.760 --> 00:03:47.720
+Colocar aqui, por exemplo, né?
+
+00:03:47.840 --> 00:03:48.580
+Nova abinha.
+
+00:03:48.960 --> 00:03:50.260
+Selecionar a segunda nota.
+
+00:03:50.500 --> 00:03:51.540
+E aqui, ó.
+
+00:03:51.880 --> 00:03:53.460
+Eu posso navegar.
+
+00:03:53.640 --> 00:03:57.360
+Primeira nota, segunda nota e por aí
+vai.
+
+00:03:57.900 --> 00:03:58.040
+Tá legal?
+
+00:03:58.900 --> 00:03:59.660
+Que mais?
+
+00:04:00.180 --> 00:04:06.960
+Aqui eu tenho um outro menu, que é para
+abrir aquela opção de gráfico e outras
+
+00:04:06.960 --> 00:04:08.040
+coisas mais.
+
+00:04:08.360 --> 00:04:09.200
+E aqui, ó.
+
+00:04:09.260 --> 00:04:10.220
+Tem até opção.
+
+00:04:10.300 --> 00:04:12.260
+Algumas outras eu vou explicar em outras
+aulas.
+
+00:04:12.300 --> 00:04:14.600
+E aqui tem aquela opção também da paleta
+de comando.
+
+00:04:14.780 --> 00:04:17.480
+Até mesmo na opção do mobile.
+
+00:04:17.640 --> 00:04:18.140
+Olha só.
+
+00:04:18.480 --> 00:04:19.700
+Então é isso, tá?
+
+00:04:19.780 --> 00:04:25.700
+A opção mobile aqui do iPhone é
+basicamente essa.
+
+00:04:25.860 --> 00:04:27.620
+Um pouco mais limitada que a desktop.
+
+00:04:27.900 --> 00:04:29.880
+Mas é isso que você precisa conhecer.
+
+00:04:30.220 --> 00:04:34.440
+Deixa eu dar uma olhada agora se no
+Android tem alguma diferença.
+
+00:04:35.580 --> 00:04:37.380
+Bom, tô com a opção aqui do Android.
+
+00:04:37.680 --> 00:04:38.840
+Agora eu mudei aqui para o Android.
+
+00:04:39.100 --> 00:04:41.440
+E basicamente a mesma coisa, gente.
+
+00:04:41.880 --> 00:04:44.300
+Eu não lembrava se tinha alguma
+diferença aí.
+
+00:04:44.320 --> 00:04:44.580
+Mas, ó.
+
+00:04:44.660 --> 00:04:45.380
+Aqui em cima.
+
+00:04:45.760 --> 00:04:48.540
+Você tem o gerenciador de cofres.
+
+00:04:48.940 --> 00:04:53.120
+Você seleciona se quer arquivo,
+pesquisa, tags, bookmarks.
+
+00:04:53.400 --> 00:04:55.240
+Tem um botão de configuração em cima.
+
+00:04:56.020 --> 00:04:57.320
+Você tem aí embaixo.
+
+00:04:57.900 --> 00:04:59.460
+A opção de criar uma nova nota.
+
+00:04:59.960 --> 00:05:02.920
+Uma pasta, ordenar, colapsar.
+
+00:05:05.200 --> 00:05:07.940
+E acho que é a mesma coisa, gente.
+
+00:05:08.280 --> 00:05:09.580
+Criar nota aqui, ó.
+
+00:05:09.660 --> 00:05:11.020
+Você tem a edição da nota.
+
+00:05:11.440 --> 00:05:17.320
+Tem a barra de personalização embaixo lá
+de texto.
+
+00:05:17.400 --> 00:05:18.960
+Das coisas que você pode fazer.
+
+00:05:18.980 --> 00:05:21.020
+É bem, bastante extensa ali e tal.
+
+00:05:21.580 --> 00:05:22.100
+Menus.
+
+00:05:22.760 --> 00:05:25.880
+É a mesma interface, tá bom?
+
+00:05:26.120 --> 00:05:27.560
+Nós vamos aí.
+
+00:05:27.560 --> 00:05:28.760
+Agora, né.
+
+00:05:28.880 --> 00:05:30.240
+Na próxima aula.
+
+00:05:31.340 --> 00:05:34.900
+Aprender de verdade como usar as notas
+agora.
+
+00:05:35.120 --> 00:05:40.620
+Agora você vai entrar na nota e fazer a
+coisa com uma metodologia que vai
+
+00:05:40.620 --> 00:05:46.480
+permitir a partir de agora você usar
+realmente o Obsidian.
+
+00:05:46.500 --> 00:05:50.500
+Não tem mais desculpa para você começar
+a construir o seu segundo cérebro ou
+
+00:05:50.500 --> 00:05:52.560
+alimentar ele se você já usa o Obsidian.
+
+00:05:52.720 --> 00:05:57.540
+Você vai agora fazer a coisa com uma
+metodologia que vai permitir você usar o
+
+00:05:57.540 --> 00:05:57.540
+Obsidian.
+
+00:05:57.540 --> 00:06:02.340
+Você estar muito, muito à frente de
+tantas pessoas, tá?
+
+00:06:02.720 --> 00:06:07.400
+Então, a gente se vê na próxima aula
+para fazer utilização das notas.
+
+00:06:07.420 --> 00:06:11.400
+Você está se tornando mestre em
+Obsidian, ok?
+
+00:06:12.700 --> 00:06:14.220
+Até a próxima, lendário.

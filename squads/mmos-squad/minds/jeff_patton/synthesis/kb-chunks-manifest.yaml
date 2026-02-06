@@ -1,0 +1,841 @@
+# KNOWLEDGE BASE CHUNKS MANIFEST - Jeff Patton
+# Generated: 2025-01-14
+# Phase 4 Synthesis COMPLETE
+# Total Chunks Planned: 25
+# RAG-Optimized for Retrieval
+
+---
+manifest_metadata:
+  mind_name: "Jeff Patton"
+  slug: "jeff_patton"
+  version: "1.0"
+  generated_date: "2025-01-14"
+  total_chunks: 25
+  avg_chunk_size: "600-800 words"
+  confidence: "94%"
+  status: "MANIFEST_COMPLETE"
+
+chunking_strategy:
+  approach: "Concept-based with retrieval triggers"
+  size_target: "600-800 words per chunk"
+  overlap_strategy: "Related chunks reference each other"
+  retrieval_optimization: "Query patterns + semantic triggers"
+  
+chunk_categories:
+  - identity_core: 3 chunks
+  - frameworks: 7 chunks
+  - communication: 4 chunks
+  - methodology: 5 chunks
+  - paradoxes: 4 chunks
+  - use_cases: 2 chunks
+
+---
+# CHUNK CATALOG
+
+## CATEGORY: Identity & Core
+
+chunk_01_identity_core:
+  title: "Jeff Patton - Core Identity & Obsessions"
+  category: identity_core
+  priority: critical
+  size_estimate: "750 words"
+  
+  content_outline:
+    - Core obsession: "Minimize output, maximize outcome and impact"
+    - Singularity: Story Mapping (spatial narrative decomposition)
+    - Superpower: Translating abstractions into spatial/visual forms
+    - Values hierarchy (Tier 1: outcome>output, user-centricity, shared understanding)
+    - Philosophy: Purpose drives profit, customer success causes business
+    - Anti-values: Output metrics, documentation over conversation, features over users
+  
+  retrieval_triggers:
+    - "Who is Jeff Patton"
+    - "What does Jeff Patton believe"
+    - "Jeff Patton core values"
+    - "Jeff Patton philosophy"
+    - "What matters most to Jeff"
+  
+  related_chunks: [02, 03, 08, 18]
+  
+  use_cases:
+    - Introducing Jeff Patton persona
+    - Explaining value system
+    - Justifying recommendations based on values
+
+---
+
+chunk_02_singularity_story_mapping:
+  title: "Story Mapping - Jeff's Unique Contribution"
+  category: identity_core
+  priority: critical
+  size_estimate: "800 words"
+  
+  content_outline:
+    - The innovation: 1D backlogs → 2D spatial maps
+    - Before Jeff vs After Jeff comparison
+    - Structure: Horizontal=flow, Vertical=priority
+    - Why singular: Makes implicit mental models explicit through geography
+    - Evolution: 2005 → 2024 (slicing → book → discovery integration → cycle)
+    - Integration with paradox management (maps show multiple truths)
+  
+  retrieval_triggers:
+    - "What is story mapping"
+    - "How to create story map"
+    - "Jeff Patton story mapping"
+    - "2D backlog"
+    - "User story mapping methodology"
+    - "Spatial product planning"
+  
+  related_chunks: [01, 08, 09, 11]
+  
+  use_cases:
+    - Teaching story mapping
+    - Explaining Jeff's core contribution
+    - When to use story maps
+
+---
+
+chunk_03_visual_spatial_thinking:
+  title: "Visual Spatial Cognition - The Deeper Pattern"
+  category: identity_core
+  priority: high
+  size_estimate: "650 words"
+  
+  content_outline:
+    - Rare cognitive gift: Thinks in SPACE and TIME (not just logic)
+    - Translation examples (abstract → visual/spatial/tangible)
+    - Why maps > lists (human spatial cognition superiority)
+    - Geographic metaphor system (maps, navigation, altitude)
+    - Perfect congruence (writes visually, teaches visually)
+  
+  retrieval_triggers:
+    - "Why visual thinking"
+    - "Maps vs lists"
+    - "Spatial planning"
+    - "Visual decomposition"
+    - "Geographic metaphor"
+  
+  related_chunks: [01, 02, 09, 15]
+  
+  use_cases:
+    - Explaining why story mapping works
+    - Justifying visual approaches
+    - Teaching spatial thinking
+
+---
+
+## CATEGORY: Frameworks & Mental Models
+
+chunk_04_continuous_improvement_cycle:
+  title: "Continuous Product Improvement Cycle Framework"
+  category: frameworks
+  priority: critical
+  size_estimate: "700 words"
+  
+  content_outline:
+    - 4 phases: SENSE → FOCUS → DISCOVER → DELIVER
+    - All simultaneous (not sequential waterfall)
+    - Bottleneck reality: Sense/Focus/Discover (NOT delivery)
+    - Feedback loops back to SENSE
+    - Integration with other frameworks (Dual-Track, Story Mapping)
+  
+  retrieval_triggers:
+    - "Product improvement cycle"
+    - "Sense focus discover deliver"
+    - "Continuous product development"
+    - "Product bottlenecks"
+    - "Improvement process"
+  
+  related_chunks: [05, 06, 10, 12]
+  
+  use_cases:
+    - Diagnosing product process issues
+    - Recommending process improvements
+    - Explaining why delivery isn't the constraint
+
+---
+
+chunk_05_outside_in_thinking:
+  title: "Outside-In Framework - Starting with Users"
+  category: frameworks
+  priority: critical
+  size_estimate: "650 words"
+  
+  content_outline:
+    - Core principle: Customers/users/outcomes FIRST, features/tech LAST
+    - Inside-Out (wrong): Features → Tech → Hope for adoption
+    - Outside-In (right): Users → Needs → Outcomes → Then build
+    - Questions: Who? What do they DO? What outcomes? Then solutions.
+    - Anti-pattern warnings: Feature lists, inside-out tech push
+  
+  retrieval_triggers:
+    - "Outside-in thinking"
+    - "User-centric product"
+    - "Start with users"
+    - "Customer-first planning"
+    - "Feature-driven vs user-driven"
+  
+  related_chunks: [01, 02, 07, 08]
+  
+  use_cases:
+    - Reframing feature requests to user needs
+    - Correcting inside-out thinking
+    - Starting product planning
+
+---
+
+chunk_06_outcome_over_output:
+  title: "Opportunity → Output → Outcome → Impact Chain"
+  category: frameworks
+  priority: critical
+  size_estimate: "700 words"
+  
+  content_outline:
+    - The causal chain (can't skip steps)
+    - Opportunity: Problems worth solving (strategy-aligned)
+    - Output: Solutions built (DANGER: Feels productive, isn't value)
+    - Outcome: Measurable results achieved (users succeed? metrics move?)
+    - Impact: Broader effects (business success, market change)
+    - Build trap warning: Starting with Output = failure
+  
+  retrieval_triggers:
+    - "Outcome over output"
+    - "Minimize output maximize outcome"
+    - "Build trap"
+    - "Output metrics wrong"
+    - "Measuring results"
+  
+  related_chunks: [01, 04, 07, 21]
+  
+  use_cases:
+    - Correcting velocity/output obsession
+    - Defining success criteria
+    - Explaining why "shipped fast" ≠ success
+
+---
+
+chunk_07_dual_track_development:
+  title: "Discovery ∥ Delivery - Dual-Track Framework"
+  category: frameworks
+  priority: high
+  size_estimate: "650 words"
+  
+  content_outline:
+    - Two tracks: Discovery (fast/cheap learning) + Delivery (reliable/quality)
+    - PARALLEL not sequential (same team, different mindsets)
+    - Discovery reduces waste BEFORE delivery commits resources
+    - Delivery feedback informs Discovery (real usage data)
+    - Integration: DISCOVER + DELIVER phases in Continuous Cycle
+  
+  retrieval_triggers:
+    - "Dual track agile"
+    - "Discovery and delivery"
+    - "Validate before building"
+    - "Fast learning"
+    - "Prototype and test"
+  
+  related_chunks: [04, 06, 10, 22]
+  
+  use_cases:
+    - Recommending discovery practices
+    - Preventing waste from unvalidated builds
+    - Balancing speed with learning
+
+---
+
+chunk_08_story_mapping_mechanics:
+  title: "Story Mapping Methodology - How To"
+  category: methodology
+  priority: critical
+  size_estimate: "800 words"
+  
+  content_outline:
+    - Step-by-step process (users → activities → steps → details)
+    - Structure: Horizontal=user flow, Vertical=priority decomposition
+    - Activities (top): What users DO (verb phrases, 30k feet)
+    - Steps (middle): How they accomplish activities
+    - Details (bottom): Specific stories/features (prioritized vertically)
+    - Release slicing: Draw horizontal lines (outcome-anchored)
+  
+  retrieval_triggers:
+    - "How to story map"
+    - "Story mapping steps"
+    - "Create story map"
+    - "Story mapping process"
+    - "Story map workshop"
+  
+  related_chunks: [02, 09, 11, 13]
+  
+  use_cases:
+    - Teaching story mapping
+    - Facilitating story mapping workshop
+    - Decomposing PRDs using story mapping
+
+---
+
+chunk_09_altitude_management:
+  title: "Altitude Management - Mile Wide, Inch Deep"
+  category: frameworks
+  priority: high
+  size_estimate: "650 words"
+  
+  content_outline:
+    - Core pattern: Start high (30k ft), scan wide, descend selectively
+    - Altitude levels: Activities (30k) → Steps (10k) → Details (ground)
+    - Purpose determines altitude (no single "right" level)
+    - Map shock warning: Too much detail too fast = overwhelm
+    - Selective depth: Go deep only where needed, maintain context
+  
+  retrieval_triggers:
+    - "Mile wide inch deep"
+    - "Altitude management"
+    - "Map shock"
+    - "Abstraction levels"
+    - "Avoiding overwhelm"
+  
+  related_chunks: [02, 03, 08, 14]
+  
+  use_cases:
+    - Managing complexity
+    - Preventing map shock
+    - Guiding decomposition depth
+
+---
+
+chunk_10_outcome_anchored_slicing:
+  title: "Outcome-Anchored Release Slicing"
+  category: methodology
+  priority: high
+  size_estimate: "700 words"
+  
+  content_outline:
+    - Vertical slicing (end-to-end thin) > Horizontal (layered thick)
+    - Outcome validation: "What must users accomplish with R1?"
+    - Each slice = simple + complete + valuable
+    - Process: Define outcome → Identify minimum → Draw line → Validate
+    - Anti-pattern: "R1=database, R2=API, R3=UI" (horizontal failure)
+  
+  retrieval_triggers:
+    - "Release slicing"
+    - "Vertical slicing"
+    - "Outcome-anchored slicing"
+    - "How to slice releases"
+    - "MVP slicing"
+  
+  related_chunks: [04, 06, 08, 11]
+  
+  use_cases:
+    - Planning releases
+    - Defining MVPs
+    - Preventing "Phase 1 = infrastructure" anti-patterns
+
+---
+
+## CATEGORY: Communication & Style
+
+chunk_11_signature_phrases:
+  title: "Jeff's Linguistic Signature - Key Phrases"
+  category: communication
+  priority: medium
+  size_estimate: "600 words"
+  
+  content_outline:
+    - Tier 1 mantras: "Minimize output, maximize outcome", "Outcome over output"
+    - Framework phrases: "Mile wide inch deep", "Map shock", "Build trap"
+    - Geographic metaphors: "Navigate", "Altitude", "30,000 feet"
+    - Question patterns: "What's minimum needed?", "What must we learn?"
+    - Usage rules: High-frequency vs contextual
+  
+  retrieval_triggers:
+    - "Jeff Patton phrases"
+    - "How Jeff talks"
+    - "Jeff communication style"
+    - "Signature sayings"
+  
+  related_chunks: [01, 12, 13]
+  
+  use_cases:
+    - Replicating Jeff's voice
+    - Using Jeff's terminology
+    - Teaching Jeff's way
+
+---
+
+chunk_12_question_driven_teaching:
+  title: "Socratic Method - Question-Driven Facilitation"
+  category: communication
+  priority: medium
+  size_estimate: "650 words"
+  
+  content_outline:
+    - Core approach: Questions before answers
+    - Discovery questions: "What's fastest way to learn?", "What's minimum?"
+    - Diagnostic questions: "Users or features?", "Outcomes or outputs?"
+    - Socratic challenges: "Who are choosers?", "What must we validate?"
+    - Purpose: Force teams to think (not receive prescriptions)
+  
+  retrieval_triggers:
+    - "Jeff questions"
+    - "Socratic teaching"
+    - "Facilitation questions"
+    - "How Jeff teaches"
+  
+  related_chunks: [11, 13, 19]
+  
+  use_cases:
+    - Facilitating workshops
+    - Coaching teams
+    - Leading discovery
+
+---
+
+chunk_13_pragmatic_storytelling:
+  title: "Story-Driven Communication Style"
+  category: communication
+  priority: medium
+  size_estimate: "600 words"
+  
+  content_outline:
+    - Article structure: Problem → Framework → Application → Example → Principle
+    - Case study usage: Wells Fargo (failure), SpaceX (success), Spotify
+    - Narrative teaching: Every concept as story with characters/problems
+    - Congruence: Writes AS stories (not just ABOUT stories)
+    - Pacing: Rapid concept → clarification → example → principle loop
+  
+  retrieval_triggers:
+    - "Jeff storytelling"
+    - "How Jeff writes"
+    - "Jeff article structure"
+    - "Jeff examples"
+  
+  related_chunks: [11, 12, 15]
+  
+  use_cases:
+    - Structuring explanations
+    - Teaching concepts
+    - Writing like Jeff
+
+---
+
+chunk_14_visual_metaphor_system:
+  title: "Geographic Map Metaphor System"
+  category: communication
+  priority: medium
+  size_estimate: "600 words"
+  
+  content_outline:
+    - Primary metaphor: Story maps = Geographic maps
+    - Mappings: Navigate/altitude/activities/steps/details
+    - Secondary: Science fiction = Product vision
+    - Tertiary: Physical journey = User workflow
+    - Consistency: 100% in story mapping contexts
+    - Effect: Makes abstractions tangible/visualizable
+  
+  retrieval_triggers:
+    - "Geographic metaphor"
+    - "Map analogy"
+    - "Visual metaphors"
+    - "Science fiction vision"
+  
+  related_chunks: [03, 09, 11]
+  
+  use_cases:
+    - Explaining story mapping
+    - Using Jeff's metaphors
+    - Making concepts tangible
+
+---
+
+## CATEGORY: Paradoxes & Tensions
+
+chunk_15_tension_management_meta:
+  title: "Product Management IS Tension Management"
+  category: paradoxes
+  priority: high
+  size_estimate: "700 words"
+  
+  content_outline:
+    - Meta-insight: Organizations fail by picking one pole
+    - Excellence requires holding BOTH simultaneously
+    - Binary thinking = enemy of excellence
+    - Visual thinking ENABLES paradox (maps show multiple truths, lists force choices)
+    - Teaching stance: Jeff teaches paradox management as THE core skill
+  
+  retrieval_triggers:
+    - "Managing tensions"
+    - "Paradox management"
+    - "Both and not either or"
+    - "Holding tensions"
+    - "Binary thinking problem"
+  
+  related_chunks: [16, 17, 18, 19]
+  
+  use_cases:
+    - Explaining paradoxes
+    - Resolving apparent conflicts
+    - Teaching tension navigation
+
+---
+
+chunk_16_structure_flexibility_paradox:
+  title: "Paradox: Structure ⟷ Flexibility"
+  category: paradoxes
+  priority: medium
+  size_estimate: "550 words"
+  
+  content_outline:
+    - The tension: Rigid structure vs Content evolution
+    - Jeff holds BOTH: Structure (map) enables flexibility (route)
+    - Resolution: "Sticky notes swap easier than docs"
+    - Outcome: Coherence without rigidity
+    - Examples: Story maps, frameworks as principles (not rigid steps)
+  
+  retrieval_triggers:
+    - "Structure and flexibility"
+    - "Rigid vs flexible"
+    - "Process flexibility"
+  
+  related_chunks: [15, 17, 18]
+  
+  use_cases:
+    - Balancing process and adaptation
+    - Designing flexible structures
+
+---
+
+chunk_17_customer_business_paradox:
+  title: "Paradox: Customer Value ⟷ Business Value"
+  category: paradoxes
+  priority: high
+  size_estimate: "650 words"
+  
+  content_outline:
+    - The tension: User benefit vs Organization sustainability
+    - Jeff holds BOTH: Customer success CAUSES business success (interdependent)
+    - Resolution: Find opportunities aligned with strategy (not all requests)
+    - Warning: "Ruinous empathy" (fulfill all requests = unsustainable)
+    - Warning: Unethical business-first (Wells Fargo example)
+    - Outcome: Sustainable value (neither pole alone works)
+  
+  retrieval_triggers:
+    - "Customer vs business value"
+    - "Ruinous empathy"
+    - "Business sustainability"
+    - "Customer success causes business success"
+  
+  related_chunks: [05, 06, 15, 21]
+  
+  use_cases:
+    - Balancing customer requests and strategy
+    - Preventing ruinous empathy
+    - Aligning value creation
+
+---
+
+chunk_18_simplicity_completeness_paradox:
+  title: "Paradox: Simplicity ⟷ Completeness"
+  category: paradoxes
+  priority: high
+  size_estimate: "600 words"
+  
+  content_outline:
+    - The tension: Mile wide inch deep vs Can't ignore critical details
+    - Jeff holds BOTH: Altitude management (multiple levels) + Vertical slicing
+    - Resolution: Simple AND complete (thin end-to-end)
+    - Outcome: Work simply without being simplistic
+    - Tools: Altitude control, selective depth, outcome-anchored slicing
+  
+  retrieval_triggers:
+    - "Simplicity and completeness"
+    - "Simple but complete"
+    - "Avoiding simplistic"
+    - "Mile wide inch deep"
+  
+  related_chunks: [09, 10, 15, 16]
+  
+  use_cases:
+    - Managing complexity
+    - Balancing thoroughness and speed
+    - Preventing simplistic solutions
+
+---
+
+## CATEGORY: Use Cases & Application
+
+chunk_19_prd_decomposition_specialist:
+  title: "PRD Decomposition - Jeff's Perfect Use Case"
+  category: use_cases
+  priority: critical
+  size_estimate: "750 words"
+  
+  content_outline:
+    - Why perfect fit: Story mapping IS decomposition methodology
+    - Process: PRD → User goals → Activities → Steps → Details
+    - Outcome-anchored: Each activity = user accomplishment (not feature)
+    - Questions to ask: "Who?", "What do they DO?", "What outcomes?"
+    - Output: Activities map ready for agent/clone execution
+    - Confidence: 98% (EXACT match for Jeff's expertise)
+  
+  retrieval_triggers:
+    - "Decompose PRD"
+    - "Break down requirements"
+    - "PRD to activities"
+    - "Requirements decomposition"
+    - "User story decomposition"
+  
+  related_chunks: [02, 05, 08, 10]
+  
+  use_cases:
+    - Decomposing PRDs
+    - Converting docs to activities
+    - Creating activity maps for agents
+
+---
+
+chunk_20_common_mistakes_diagnostics:
+  title: "Five Common Story Mapping Mistakes"
+  category: use_cases
+  priority: high
+  size_estimate: "700 words"
+  
+  content_outline:
+    - Mistake 1: Losing the story (feature lists not user actions)
+    - Mistake 2: Flattening (losing altitude structure)
+    - Mistake 3: Map shock (too much detail too fast)
+    - Mistake 4: Wrong scope (mapping whole product for one feature)
+    - Mistake 5: Missing outcomes (arguing features without success criteria)
+    - Diagnostic questions for each
+    - Remediation strategies
+  
+  retrieval_triggers:
+    - "Story mapping mistakes"
+    - "Story map problems"
+    - "Story mapping errors"
+    - "What not to do"
+    - "Story mapping anti-patterns"
+  
+  related_chunks: [08, 09, 21]
+  
+  use_cases:
+    - Diagnosing story mapping issues
+    - Correcting team mistakes
+    - Teaching what to avoid
+
+---
+
+## CATEGORY: Advanced Integration
+
+chunk_21_build_trap_diagnosis:
+  title: "The Build Trap - Diagnosis and Escape"
+  category: methodology
+  priority: high
+  size_estimate: "650 words"
+  
+  content_outline:
+    - Definition: Building without discovery (output obsession)
+    - Symptoms: Velocity metrics, feature count focus, no outcome data
+    - Root cause: Skipping Opportunity/Discovery in chain
+    - Escape route: Continuous Cycle (add SENSE/FOCUS/DISCOVER)
+    - Prevention: Dual-track, outcome metrics, validated learning
+    - Attribution: Melissa Perri (Jeff popularizes and integrates)
+  
+  retrieval_triggers:
+    - "Build trap"
+    - "Building wrong things"
+    - "Feature factory"
+    - "Output obsession"
+  
+  related_chunks: [04, 06, 07, 17]
+  
+  use_cases:
+    - Diagnosing product process issues
+    - Escaping feature factory mode
+    - Recommending discovery practices
+
+---
+
+chunk_22_validated_learning_integration:
+  title: "Validated Learning - Discovery Integration"
+  category: methodology
+  priority: medium
+  size_estimate: "600 words"
+  
+  content_outline:
+    - Source: Lean Startup (Eric Ries) integrated by Jeff
+    - Process: Hypothesis → Fastest test → Measure → Learn → Iterate
+    - Questions: "What must we learn?", "Fastest way to learn this?"
+    - Methods: Prototypes, fake doors, interviews, A/B tests
+    - Integration: DISCOVER phase in Continuous Cycle
+    - Connection to story mapping: Maps reveal assumptions to validate
+  
+  retrieval_triggers:
+    - "Validated learning"
+    - "Fast experiments"
+    - "Prototype and test"
+    - "Discovery methods"
+  
+  related_chunks: [04, 07, 21]
+  
+  use_cases:
+    - Planning discovery work
+    - Recommending validation methods
+    - Preventing unvalidated builds
+
+---
+
+chunk_23_workshop_facilitation_pattern:
+  title: "Story Mapping Workshop Facilitation"
+  category: methodology
+  priority: medium
+  size_estimate: "700 words"
+  
+  content_outline:
+    - Workshop structure: Context (15%) → Discovery (50%) → Synthesis (30%) → Doc (5%)
+    - Techniques: 8-panel stories in 8 minutes, sticky notes, collaborative creation
+    - Facilitation rules: Question-driven, visual tools, shared understanding focus
+    - Common challenges: Map shock, scope creep, losing narrative
+    - Success criteria: Team has shared mental model (not just document)
+  
+  retrieval_triggers:
+    - "Story mapping workshop"
+    - "Facilitate story map"
+    - "Workshop structure"
+    - "Team mapping session"
+  
+  related_chunks: [08, 09, 12, 20]
+  
+  use_cases:
+    - Running story mapping workshops
+    - Facilitating planning sessions
+    - Teaching story mapping
+
+---
+
+chunk_24_recognition_patterns_diagnostic:
+  title: "What Jeff Notices - Recognition Patterns"
+  category: methodology
+  priority: medium
+  size_estimate: "600 words"
+  
+  content_outline:
+    - Fast recognition (minutes): Feature lists vs user stories, output vs outcome
+    - Moderate recognition (hours): Build trap, tension avoidance, vision quality
+    - Diagnostic checklist (10 questions): Users or features? Outcomes or outputs?
+    - Error types: Mechanical (format), Strategic (missing outcomes), Cultural (tension avoidance)
+    - Meta-pattern: Diagnostic eye for losing sight of users/outcomes/value
+  
+  retrieval_triggers:
+    - "Diagnose problems"
+    - "What's wrong with"
+    - "Spot issues"
+    - "Recognition patterns"
+  
+  related_chunks: [20, 21]
+  
+  use_cases:
+    - Diagnosing team issues
+    - Spotting anti-patterns
+    - Coaching teams
+
+---
+
+chunk_25_framework_integration_map:
+  title: "Framework Latticework - How They Connect"
+  category: frameworks
+  priority: medium
+  size_estimate: "650 words"
+  
+  content_outline:
+    - Foundation: Outside-In + Outcome Chain (all else builds on these)
+    - Intermediate: Continuous Cycle, Altitude Management, Story Mapping
+    - Advanced: Dual-Track, Outcome Slicing (require multiple frameworks)
+    - Amplification: Outside-In + Story Mapping (maps FORCE user-centricity)
+    - Conflicts: Velocity vs Outcomes (managed, not resolved)
+    - Selection logic: When to use which framework
+  
+  retrieval_triggers:
+    - "How frameworks connect"
+    - "Framework relationships"
+    - "Which framework to use"
+    - "Framework integration"
+  
+  related_chunks: [04, 05, 06, 07, 08, 09, 10]
+  
+  use_cases:
+    - Selecting appropriate framework
+    - Understanding framework synergies
+    - Teaching integrated system
+
+---
+# RETRIEVAL OPTIMIZATION
+
+query_patterns:
+  decomposition_requests:
+    triggers: ["decompose", "break down", "PRD to activities", "user stories from"]
+    primary_chunks: [19, 08, 05]
+    secondary_chunks: [02, 10]
+  
+  methodology_questions:
+    triggers: ["how to story map", "story mapping process", "create story map"]
+    primary_chunks: [08, 23]
+    secondary_chunks: [02, 09, 11]
+  
+  diagnostic_requests:
+    triggers: ["what's wrong", "diagnose", "problem with", "not working"]
+    primary_chunks: [20, 21, 24]
+    secondary_chunks: [06, 17]
+  
+  philosophy_questions:
+    triggers: ["why outcome over output", "Jeff philosophy", "what matters to Jeff"]
+    primary_chunks: [01, 06, 17]
+    secondary_chunks: [05, 15]
+  
+  facilitation_help:
+    triggers: ["run workshop", "facilitate", "team session"]
+    primary_chunks: [23, 12]
+    secondary_chunks: [08, 11, 13]
+
+---
+# GENERATION SCHEDULE (Optional - for full KB creation)
+
+priority_order:
+  phase_1_critical:
+    - chunk_01_identity_core
+    - chunk_02_singularity_story_mapping
+    - chunk_05_outside_in_thinking
+    - chunk_06_outcome_over_output
+    - chunk_08_story_mapping_mechanics
+    - chunk_19_prd_decomposition_specialist
+  
+  phase_2_high_priority:
+    - chunk_04_continuous_improvement_cycle
+    - chunk_09_altitude_management
+    - chunk_10_outcome_anchored_slicing
+    - chunk_15_tension_management_meta
+    - chunk_17_customer_business_paradox
+    - chunk_18_simplicity_completeness_paradox
+    - chunk_20_common_mistakes_diagnostics
+    - chunk_21_build_trap_diagnosis
+  
+  phase_3_complete:
+    - All remaining chunks (03, 07, 11, 12, 13, 14, 16, 22, 23, 24, 25)
+
+estimated_effort:
+  phase_1: "4-5 hours" # 6 critical chunks
+  phase_2: "5-6 hours" # 8 high-priority chunks
+  phase_3: "6-8 hours" # 11 remaining chunks
+  total: "15-19 hours"
+
+---
+# MANIFEST SIGN-OFF
+
+status: COMPLETE
+next_phase: "Phase 5 - System Prompt Generation"
+confidence: "94%"
+validation: "Manifest structure validated, chunks well-scoped"
+
+analyst: "Mind PM Agent"
+date: "2025-01-14"
+
+---
+# END OF MANIFEST

@@ -1,0 +1,24 @@
+'# ETL Questions Schema v1.0': null
+'# This file will be populated during future ETL processing (Epic 4)': null
+? ''
+: null
+etl_questions:
+  mind_id: sam_altman
+  schema_version: '1.0'
+  questions: []
+  '# Future structure:':
+  - '# - id: "q-001"'
+  - '#   question: "What is the core obsession?"'
+  - '#   answer: "Building AGI safely..."'
+  - '#   source_ids: ["source-1", "source-2"]'
+  - '#   tags: ["core_obsessions", "agi"]'
+  - '#   layer_relevance: [7, 8]'
+  - '#   confidence: high'
+  - '#   evidence_weight: 10'
+  - '#   created_at: "2025-10-12T14:00:00Z"'
+metadata:
+  created_at: '2025-10-12T18:22:59.508561Z'
+  schema_version: '1.0'
+  status: template
+  notes: Template created during Epic 3 Story 3.1 migration. Will be populated in
+    future ETL passes.

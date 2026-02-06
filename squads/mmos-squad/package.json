@@ -1,0 +1,37 @@
+{
+  "name": "@aios/mmos-squad",
+  "version": "3.0.0",
+  "description": "Mind Mapper OS - Cognitive Architecture Cloning System",
+  "author": "oalanicolas",
+  "license": "MIT",
+  "main": "adapters/index.js",
+  "scripts": {
+    "test": "node scripts/python-wrapper.js --test",
+    "validate": "node scripts/validate-squad.js"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "mmos",
+    "cognitive-cloning",
+    "dna-mental",
+    "persona-mapping",
+    "ai-agents"
+  ],
+  "aios": {
+    "minVersion": "2.1.0",
+    "type": "squad"
+  },
+  "python": {
+    "required": true,
+    "minVersion": "3.9",
+    "scripts": [
+      "lib/debate_engine.py",
+      "lib/map_mind.py",
+      "lib/workflow_orchestrator.py"
+    ]
+  }
+}

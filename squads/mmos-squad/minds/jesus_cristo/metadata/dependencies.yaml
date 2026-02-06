@@ -1,0 +1,367 @@
+# MAPA DE DEPENDÊNCIAS: JESUS CRISTO
+# Gerado por: Dependencies Mapper v3.0 ACS
+# Data: 2025-10-06
+
+clone_profile:
+  nome: "Jesus Cristo (Jesus de Nazaré)"
+  arquetipo: "ÍCONE HISTÓRICO"
+  expertise_primaria: "Liderança Servidora, Ética Atemporal, Filosofia Prática"
+  periodo_formativo: "0-30 d.C. (infância e juventude), 27-30 d.C. (ministério público)"
+  geracao: "Século I - Judeia sob domínio romano"
+  contexto_cultural: "Judaísmo do Segundo Templo"
+
+# ======================================
+# INFLUÊNCIAS FORMATIVAS DIRETAS
+# ======================================
+
+mentores_diretos:
+  - nome: "João Batista"
+    relacao: "Mentor espiritual/Profeta predecessor"
+    periodo: "27-28 d.C."
+    area_influencia: "Batismo, arrependimento, profecia messiânica"
+    nivel_impacto: "CRÍTICO"
+    material_disponivel: "4 Evangelhos (menções extensas), Atos, Josefo (Antiguidades)"
+    notas: "João preparou caminho, Jesus foi batizado por ele. Influência em início do ministério público."
+
+  - nome: "Tradição Rabínica Judaica"
+    relacao: "Formação cultural/religiosa"
+    periodo: "Infância até 30 anos"
+    area_influencia: "Torá, Profetas, Salmos, Lei Oral"
+    nivel_impacto: "CRÍTICO"
+    material_disponivel: "Torá (5 livros), Profetas (Isaías, Jeremias, etc), Salmos"
+    notas: "Jesus citava Escrituras constantemente. Base de todo pensamento."
+
+  - nome: "José (pai adotivo) e Maria (mãe)"
+    relacao: "Pais/Formadores primários"
+    periodo: "0-30 d.C."
+    area_influencia: "Valores, tradição judaica, ofício (carpintaria)"
+    nivel_impacto: "ALTO"
+    material_disponivel: "Evangelhos (menções indiretas), Evangelho de Lucas (infância)"
+    notas: "Formação em família judaica devota. José = carpinteiro (Jesus aprendeu ofício)."
+
+# ======================================
+# INFLUÊNCIAS INTELECTUAIS INDIRETAS
+# ======================================
+
+autores_fundamentais:
+  escrituras_hebraicas:
+    - nome: "Moisés (Torá/Pentateuco)"
+      obra_principal: "Gênesis, Êxodo, Levítico, Números, Deuteronômio"
+      influencia_especifica: "Lei Mosaica (10 Mandamentos), narrativas fundacionais, conceito de aliança"
+      citacoes_frequentes: "SIM (constantemente)"
+      notas: "Jesus citava 'está escrito' referenciando Torá. Base de seus ensinamentos."
+
+    - nome: "Profeta Isaías"
+      obra_principal: "Livro de Isaías (especialmente caps 40-66)"
+      influencia_especifica: "Servo Sofredor, Messias, Reino vindouro, justiça social"
+      citacoes_frequentes: "SIM (mais citado profeta)"
+      notas: "Jesus leu Isaías 61 na sinagoga declarando cumprimento (Lucas 4:16-21)"
+
+    - nome: "Rei Davi (Salmos)"
+      obra_principal: "Livro de Salmos (150 salmos)"
+      influencia_especifica: "Oração, louvor, lamento, confiança em Deus"
+      citacoes_frequentes: "SIM"
+      notas: "Jesus citou Salmo 22 na cruz. Identificação com Davi (Filho de Davi)."
+
+    - nome: "Profeta Jeremias"
+      obra_principal: "Livro de Jeremias, Lamentações"
+      influencia_especifica: "Nova aliança, profeta sofredor, julgamento e restauração"
+      citacoes_frequentes: "SIM (moderado)"
+      notas: "Conceito de 'nova aliança' usado na Última Ceia."
+
+    - nome: "Livro de Daniel"
+      obra_principal: "Livro de Daniel (apocalíptico)"
+      influencia_especifica: "Filho do Homem, Reino de Deus, soberania divina"
+      citacoes_frequentes: "SIM"
+      notas: "Jesus se autodenominava 'Filho do Homem' (termo de Daniel 7:13-14)"
+
+  tradições_filosóficas:
+    - nome: "Sabedoria Judaica (Hokma)"
+      obra_principal: "Provérbios, Eclesiastes, Jó, Sabedoria de Salomão"
+      influencia_especifica: "Parábolas, provérbios, ensino prático"
+      citacoes_frequentes: "IMPLÍCITO (método de parábolas)"
+      notas: "Jesus usava método rabínico de mashal (parábola), típico da literatura sapiencial"
+
+    - nome: "Fariseus (interpretação oral da Torá)"
+      obra_principal: "Lei Oral, Mishná (compilada após Jesus), Halakha"
+      influencia_especifica: "Debate sobre Lei, pureza, sábado"
+      citacoes_frequentes: "SIM (por oposição e diálogo)"
+      notas: "Jesus dialogava/debatia constantemente. Criticava excesso de legalismo mas respeitava Lei."
+
+# ======================================
+# PARES E CONTEMPORÂNEOS
+# ======================================
+
+pares_influentes:
+  - nome: "João Batista"
+    relacao: "Profeta contemporâneo/Predecessor"
+    area_comum: "Profecia messiânica, arrependimento, iminência do Reino"
+    tipo_interacao: "Colaboração (João preparou caminho) + Reconhecimento mútuo"
+    material_conjunto: "SIM (Evangelhos descrevem relação)"
+    notas: "João: 'Ele deve crescer, eu diminuir'. Jesus: 'Entre nascidos de mulher, nenhum maior que João'."
+
+  - nome: "Fariseus (Nicodemos, Gamaliel)"
+    relacao: "Interlocutores religiosos/Críticos e aliados"
+    area_comum: "Interpretação da Lei, natureza do Messias"
+    tipo_interacao: "Debates teológicos, alguns se tornaram seguidores"
+    material_conjunto: "SIM (diálogos nos Evangelhos)"
+    notas: "Nicodemos = fariseu que se encontrou com Jesus à noite (João 3). Gamaliel defendeu apóstolos (Atos 5)."
+
+  - nome: "Saduceus (elite sacerdotal)"
+    relacao: "Oponentes religiosos/Autoridade do Templo"
+    area_comum: "Ressurreição, autoridade religiosa, interpretação das Escrituras"
+    tipo_interacao: "Rivalidade/Debate (negavam ressurreição, Jesus a afirmava)"
+    material_conjunto: "SIM (debates sobre ressurreição - Marcos 12)"
+
+  - nome: "Essênios (comunidade de Qumran)"
+    relacao: "Movimento contemporâneo/Possível influência indireta"
+    area_comum: "Pureza ritual, apocalíptica, comunidade"
+    tipo_interacao: "Desconhecida (não mencionada nos Evangelhos, mas existia na época)"
+    material_conjunto: "NÃO (especulação acadêmica)"
+    notas: "João Batista pode ter tido contato com Essênios (ambos no deserto). Conexão com Jesus incerta."
+
+  - nome: "Zelotes (movimento revolucionário)"
+    relacao: "Movimento político contemporâneo"
+    area_comum: "Libertação de Israel, messianismo"
+    tipo_interacao: "Divergência (Zelotes = violência, Jesus = não-violência)"
+    material_conjunto: "NÃO (mas um apóstolo era 'Simão, o Zelote')"
+    notas: "Jesus rejeitou caminho da espada ('Embainha tua espada' - Mateus 26:52)"
+
+# ======================================
+# CONTEXTO HISTÓRICO E CULTURAL
+# ======================================
+
+contexto_temporal:
+  decada_formativa: "0-30 d.C."
+  periodo_ministerio: "27-30 d.C."
+
+  eventos_influentes:
+    - evento: "Ocupação Romana da Judeia (63 a.C. - 70 d.C.)"
+      impacto: "Tensão política, messianismo nacionalista, opressão fiscal ('dai a César')"
+      citacao: "'Meu Reino não é deste mundo' (João 18:36) - rejeição de messianismo político"
+
+    - evento: "Domínio de Herodes Antipas (Galileia) e Pôncio Pilatos (Judeia)"
+      impacto: "Autoridades políticas que Jesus confrontou (Pilatos = julgamento, Herodes = 'aquela raposa')"
+
+    - evento: "Templo de Jerusalém (reconstruído por Herodes, o Grande)"
+      impacto: "Centro religioso judaico. Jesus purificou Templo, profetizou destruição (70 d.C.)"
+
+    - evento: "Expectativa Messiânica Judaica (libertação política esperada)"
+      impacto: "Jesus subverteu expectativa: Messias servo sofredor vs rei guerreiro"
+      notas: "Influenciou rejeição por parte de líderes que esperavam libertação política de Roma"
+
+movimentos_intelectuais:
+  - movimento: "Farisaísmo (interpretação rigorosa da Lei)"
+    posicao: "Diálogo crítico (concordava com ressurreição, discordava de legalismo excessivo)"
+    influencia: "Jesus ampliou Lei para motivação interna: não só 'não matar' mas 'não se irar'"
+
+  - movimento: "Saduceísmo (elite sacerdotal, negavam ressurreição)"
+    posicao: "Contra (afirmou ressurreição, criticou comercialização do Templo)"
+    influencia: "Oposição a Saduceus moldou ênfase em Reino espiritual vs poder institucional"
+
+  - movimento: "Apocalíptica Judaica (expectativa de intervenção divina iminente)"
+    posicao: "A favor (com reinterpretação: Reino já presente mas não totalmente realizado)"
+    influencia: "Parábolas do Reino, 'Reino de Deus está entre vós' (Lucas 17:21)"
+
+  - movimento: "Filosofia Greco-Romana (estoicismo, cinismo)"
+    posicao: "Neutro/Possível influência indireta (região helenizada)"
+    influencia: "Conceitos como Logos (João 1:1) podem ter ponte com filosofia grega, mas raiz judaica"
+
+# ======================================
+# INFLUÊNCIAS INSTITUCIONAIS
+# ======================================
+
+instituicoes_formativas:
+  educacao:
+    - instituicao: "Sinagoga de Nazaré"
+      periodo: "Infância até 30 anos"
+      programa: "Educação judaica tradicional (Torá, Profetas, Escritos)"
+      professores_relevantes: "Rabinos locais (não nomeados nos Evangelhos)"
+      notas: "Jesus lia Escrituras na sinagoga (Lucas 4:16). Chamado de 'Rabi' (mestre)."
+
+    - instituicao: "Templo de Jerusalém (visitas anuais)"
+      periodo: "Desde infância (Lucas 2:41-52 - Jesus aos 12 anos no Templo)"
+      programa: "Festivais judaicos (Páscoa, Pentecostes, Tabernáculos)"
+      cultura_organizacional: "Centro religioso judaico. Jesus questionou doutores da Lei aos 12 anos."
+
+  profissionais:
+    - organizacao: "Oficina de Carpintaria (José)"
+      periodo: "Infância até ~30 anos"
+      funcao: "Aprendiz/Carpinteiro (tekton = construtor/artesão)"
+      cultura_organizacional: "Trabalho manual, simplicidade, comunidade pequena (Nazaré)"
+      notas: "Marcos 6:3 - 'Não é este o carpinteiro?'. Influenciou linguagem (construir sobre rocha, jugo suave)."
+
+    - organizacao: "Movimento Itinerante (ministério público)"
+      periodo: "27-30 d.C."
+      funcao: "Rabino/Profeta itinerante"
+      cultura_organizacional: "Dependência de hospitalidade, comunidade de discípulos, simplicidade radical"
+      notas: "Jesus e 12 apóstolos viviam de doações, sem posse permanente ('Filho do Homem não tem onde reclinar a cabeça')."
+
+# ======================================
+# DEPENDÊNCIAS PARA PESQUISA
+# ======================================
+
+fontes_primarias_criticas:
+  categoria_alta_prioridade:
+    - tipo: "Evangelhos Canônicos (Mateus, Marcos, Lucas, João)"
+      quantidade_estimada: "4 livros (~150 páginas total)"
+      disponibilidade: "Fácil (domínio público, múltiplas traduções)"
+      prioridade: "TIER 1 - CRÍTICO"
+      notas: "Fonte principal de ensinamentos, parábolas e narrativas. Mateus/Lucas = Sermão da Montanha/Planície."
+
+    - tipo: "Epístolas Paulinas (13 cartas)"
+      quantidade_estimada: "Romanos, 1-2 Coríntios, Gálatas, etc (~100 páginas)"
+      disponibilidade: "Fácil (domínio público)"
+      prioridade: "TIER 2 - ALTO"
+      notas: "Interpretação teológica dos ensinamentos de Jesus. Paulo desenvolveu ética cristã para contextos gentios."
+
+    - tipo: "Atos dos Apóstolos"
+      quantidade_estimada: "1 livro (~50 páginas)"
+      disponibilidade: "Fácil"
+      prioridade: "TIER 2 - ALTO"
+      notas: "Continuação de Lucas, mostra impacto pós-ressurreição e formação da igreja primitiva."
+
+    - tipo: "Epístolas Gerais (Tiago, 1-2 Pedro, 1-3 João, Judas)"
+      quantidade_estimada: "7 cartas (~40 páginas)"
+      disponibilidade: "Fácil"
+      prioridade: "TIER 2 - ALTO"
+      notas: "Perspectivas complementares sobre ética e aplicação prática dos ensinamentos."
+
+fontes_secundarias_importantes:
+  - tipo: "Evangelhos Apócrifos (Tomé, Pedro, Tiago)"
+    quantidade_estimada: "~10 textos"
+    qualidade_esperada: "Média (não-canônicos mas contexto histórico útil)"
+    prioridade: "TIER 3 - MÉDIO"
+    notas: "Contexto adicional sobre tradições orais e variações de ensinamentos. Usar com cautela (não-canônicos)."
+
+  - tipo: "Historiadores Contemporâneos (Josefo, Tácito, Plínio)"
+    quantidade_estimada: "3-5 documentos"
+    qualidade_esperada: "Alta (fontes históricas seculares)"
+    prioridade: "TIER 3 - MÉDIO"
+    notas: "Josefo (Antiguidades Judaicas, ~93 d.C.) menciona Jesus. Contexto histórico da época."
+
+  - tipo: "Literatura Judaica (Mishná, Talmud, Targumim)"
+    quantidade_estimada: "Seleções relevantes (~50 páginas)"
+    qualidade_esperada: "Alta (contexto cultural/religioso)"
+    prioridade: "TIER 3 - MÉDIO"
+    notas: "Contexto rabínico da época. Mishná compilada ~200 d.C. mas preserva tradições orais do Século I."
+
+  - tipo: "Análises Acadêmicas (N.T. Wright, John Dominic Crossan, E.P. Sanders)"
+    quantidade_estimada: "3-5 livros-chave"
+    qualidade_esperada: "Alta (scholarship moderno)"
+    prioridade: "TIER 4 - BAIXO"
+    notas: "Contexto histórico do Jesus histórico vs Cristo da fé. Útil para triangulação."
+
+# ======================================
+# CONEXÕES ESTRATÉGICAS
+# ======================================
+
+triangulacao_recomendada:
+  - conjunto: "Evangelhos Sinóticos (Mateus + Marcos + Lucas) + João"
+    justificativa: "Sinóticos compartilham material comum, João oferece perspectiva teológica complementar. Juntos formam visão completa."
+
+  - conjunto: "Torá/Profetas + Evangelhos + Epístolas"
+    justificativa: "Torá = raiz, Evangelhos = ensinamento direto, Epístolas = aplicação. Progressão do pensamento."
+
+  - conjunto: "Parábolas + Contexto Histórico (Josefo) + Análise Moderna"
+    justificativa: "Parábolas isoladas podem ser mal interpretadas. Contexto histórico + scholarship garantem autenticidade."
+
+  - conjunto: "Tradições Católica + Protestante + Ortodoxa"
+    justificativa: "Evitar viés denominacional. Três tradições principais oferecem interpretações complementares."
+
+gaps_identificados:
+  - gap: "Infância e Juventude (0-30 anos) - 'anos perdidos'"
+    impacto: "Pouco material sobre formação. Lucas tem infância, mas 12-30 anos quase ausentes."
+    mitigacao: "Inferir de contexto cultural judaico da época + análise de Nazaré + ofício de carpinteiro. Focar em ensinamentos (27-30 d.C.) onde há abundância."
+
+  - gap: "Voz Direta vs Interpretação Apostólica"
+    impacto: "Evangelhos escritos 40-70 anos após Jesus. Filtro de memória + teologia da igreja primitiva."
+    mitigacao: "Priorizar ipsissima verba (palavras exatas, especialmente parábolas únicas). Comparar múltiplas fontes. Scholarship sobre camadas redacionais."
+
+  - gap: "Jesus Histórico vs Cristo da Fé"
+    impacto: "Tensão entre figura histórica e interpretação teológica. Clone pode ser muito teológico ou muito secular."
+    mitigacao: "Posicionamento dual: modo secular (filósofo ético) vs espiritual (mestre religioso). Focar em ensinamentos práticos universais."
+
+  - gap: "Contexto Cultural Perdido"
+    impacto: "Audiência original entendia contextos que nós perdemos (agricultura, economia romana, pureza ritual)."
+    mitigacao: "Pesquisar contexto do Século I através de Josefo, arqueologia, scholarship. Contextualizar parábolas."
+
+# ======================================
+# RECOMENDAÇÕES PARA RESEARCH
+# ======================================
+
+ordem_prioridade_pesquisa:
+  prioridade_1_tier_1:
+    - "Evangelho de Mateus (Sermão da Montanha caps 5-7, parábolas)"
+    - "Evangelho de Marcos (narrativa mais antiga, ~65-70 d.C.)"
+    - "Evangelho de Lucas (parábolas únicas: Bom Samaritano, Filho Pródigo)"
+    - "Evangelho de João (teologia do Logos, discursos longos)"
+
+  prioridade_2_tier_2:
+    - "Atos dos Apóstolos (impacto pós-ressurreição)"
+    - "Epístolas Paulinas (Romanos, 1-2 Coríntios, Gálatas, Filipenses, 1 Tessalonicenses)"
+    - "Epístolas Gerais (Tiago, 1 Pedro, 1 João)"
+
+  prioridade_3_tier_3:
+    - "Torá (Gênesis, Êxodo, Deuteronômio - fontes que Jesus citava)"
+    - "Profetas (Isaías, Jeremias, Salmos - mais citados)"
+    - "Josefo (Antiguidades Judaicas, Livro XVIII)"
+    - "Literatura Sapiencial (Provérbios, Eclesiastes)"
+
+  prioridade_4_tier_4:
+    - "Evangelhos Apócrifos (Tomé, Pedro)"
+    - "Mishná e Talmud (seleções sobre contexto rabínico)"
+    - "Análises acadêmicas (N.T. Wright, E.P. Sanders, John Meier)"
+
+alertas_especiais:
+  - alerta: "Evolução Teológica da Igreja Primitiva"
+    implicacao: "Evangelhos refletem não só Jesus histórico mas também necessidades da igreja primitiva (40-90 d.C.). Identificar camadas redacionais."
+
+  - alerta: "Múltiplas Tradições de Interpretação"
+    implicacao: "Católicos enfatizam Tradição + Escritura, Protestantes sola scriptura, Ortodoxos tradição patrística. Triangular para evitar viés."
+
+  - alerta: "Parábolas Requerem Contexto Cultural"
+    implicacao: "Parábola do Semeador faz sentido em contexto agrícola. Parábola do Juiz Iníquo requer entender sistema judicial romano. Pesquisar contexto antes de interpretar."
+
+  - alerta: "Jesus Não Escreveu Nada"
+    implicacao: "Tudo é mediado por memória oral + autores dos Evangelhos. Priorizar material com atestação múltipla (aparece em 2+ Evangelhos) como mais confiável."
+
+  - alerta: "Linguagem Original (Aramaico) vs Grego (Evangelhos)"
+    implicacao: "Jesus falava aramaico, Evangelhos escritos em grego. Alguns jogos de palavras/nuances podem ter se perdido. Consultar reconstruções aramaicas quando disponível."
+
+# ======================================
+# METADADOS DE QUALIDADE
+# ======================================
+
+confianca_mapeamento:
+  nivel_geral: "ALTO"
+  areas_fortes: "Ensinamentos públicos (parábolas, Sermão da Montanha), influências judaicas (Torá, Profetas), contexto histórico geral"
+  areas_incertas: "Infância/juventude (0-30 anos), grau de contato com filosofia greco-romana, detalhes sobre Essênios/Zelotes, evolução teológica vs ipsissima verba"
+
+estimativa_completude:
+  influencias_mapeadas: "85%"
+  justificativa_influencias: "Fontes judaicas bem documentadas, contexto histórico claro. Gap principal: anos 12-30."
+
+  fontes_identificadas: "95%"
+  justificativa_fontes: "4 Evangelhos + 23 epístolas + contexto histórico = base sólida. Material adicional (apócrifos, Mishná) identificado mas menor prioridade."
+
+  dependencias_mapeadas: "90%"
+  justificativa_dependencias: "Influências diretas (João Batista, Torá) claras. Indiretas (Fariseus, Saduceus) bem documentadas. Incerteza em influências não-mencionadas (Essênios)."
+
+# ======================================
+# ASSINATURA
+# ======================================
+
+metadata:
+  gerado_por: "Dependencies Mapper v3.0 ACS"
+  agente: "@architect"
+  data_geracao: "2025-10-06"
+  versao_schema: "3.0"
+  clone_target: "Jesus Cristo"
+  tempo_investido: "25 minutos"
+  revisao_necessaria: "NÃO (alta confiança, mas ajustar se descobrir fontes adicionais durante research)"
+  referencias_consultadas:
+    - "expansion-packs/mmos/minds/jesus_cristo/docs/logs/20251006-0033-viability.yaml"
+    - "Conhecimento histórico do Judaísmo do Segundo Templo"
+    - "Literatura canônica do Novo Testamento"
+    - "Contexto histórico romano/judaico Século I"

@@ -1,0 +1,26 @@
+# MMOS Pipeline Configuration
+# Mind: Thiago Finch
+# Generated: 2025-10-25
+
+workflow:
+  type: greenfield
+  mode: public
+  version: "3.5"
+
+detection:
+  method: user-corrected
+  timestamp: "2025-10-25T14:20:00"
+  original_detection: no-public-materials
+  user_correction: "Thiago Finch is a public figure"
+  reasons:
+    - "User confirmed: public figure"
+    - "81 source files already collected in sources/"
+    - "Will complement with web scraping if needed"
+
+execution:
+  viability_required: true
+  research_method: web_scraping
+  existing_materials: true
+  validation_method: simulated
+  estimated_duration: "8-12 hours"
+  estimated_tokens: "2-3M tokens"

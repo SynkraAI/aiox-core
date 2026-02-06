@@ -1,0 +1,8088 @@
+WEBVTT
+
+00:00:00.050 --> 00:00:05.750
+Agora é a vez da estrela aqui, quando a
+gente fala de IA para Obsidian.
+
+00:00:05.870 --> 00:00:07.290
+Por que é a estrela?
+
+00:00:07.350 --> 00:00:11.970
+Porque é esse plugin que permite, assim,
+dá até uma dó no coração falar plugin,
+
+00:00:12.130 --> 00:00:13.650
+porque ele é muito mais do que isso.
+
+00:00:13.770 --> 00:00:17.990
+Eu diria que ele é o coração de um
+segundo cérebro potencializado com IA.
+
+00:00:18.150 --> 00:00:18.830
+Por quê?
+
+00:00:18.990 --> 00:00:23.850
+Porque é esse cara aqui que permite que
+vocês possam conversar com o segundo
+
+00:00:23.850 --> 00:00:24.670
+cérebro de vocês.
+
+00:00:24.670 --> 00:00:25.650
+Quer ver?
+
+00:00:25.770 --> 00:00:28.930
+Eu vou mostrar um exemplo no comecinho
+da aula, antes de entrar aqui um
+
+00:00:28.930 --> 00:00:31.950
+pouquinho mais nas configurações dele,
+para vocês já terem um gostinho.
+
+00:00:32.030 --> 00:00:36.650
+Olha só, vou ler aqui uma pergunta que
+eu tinha feito agora há pouco.
+
+00:00:36.810 --> 00:00:40.730
+Baseado nas minhas notas, quais são os
+assuntos que mais me interessam?
+
+00:00:42.590 --> 00:00:44.610
+Então, como é que ele vai conseguir
+responder isso?
+
+00:00:44.710 --> 00:00:49.350
+Porque ele tem acesso, ele indexou todas
+as minhas notas.
+
+00:00:49.490 --> 00:00:54.650
+Ele escreveu aqui, inclusive em
+português, os meus 12 para português.
+
+00:00:54.670 --> 00:00:56.830
+12 tópicos favoritos, né?
+
+00:00:56.890 --> 00:00:57.630
+Ele escreveu aqui, ó.
+
+00:00:57.970 --> 00:01:01.610
+Mentalidade, consciência, IA, segundo
+cérebro, filosofia, verdade,
+
+00:01:02.010 --> 00:01:06.470
+comportamento humano, o passado e o
+futuro da humanidade, livros,
+
+00:01:06.470 --> 00:01:10.570
+criatividade, genialidade e clareza.
+
+00:01:11.030 --> 00:01:15.650
+Agora, deixa eu perguntar para ele quais
+são os meus valores, porque eu tenho um
+
+00:01:15.650 --> 00:01:16.870
+documento aqui que tem os meus valores.
+
+00:01:17.570 --> 00:01:19.910
+Baseado nas minhas notas, quais são os
+meus
+
+00:01:19.910 --> 00:01:27.740
+valores pessoais?
+
+00:01:31.480 --> 00:01:33.320
+Me responda em português.
+
+00:01:44.360 --> 00:01:47.420
+Com base nessas notas, não há uma lista
+clara desses valores pessoais.
+
+00:01:47.440 --> 00:01:50.980
+Há uma lista de valores admirados em
+outras pessoas, mas não há uma lista
+
+00:01:50.980 --> 00:01:52.000
+desses valores próprios.
+
+00:01:52.060 --> 00:01:55.600
+Talvez seja interessante refletir sobre
+quais são esses valores pessoais e anotá
+
+00:01:55.600 --> 00:02:00.520
+-los para ter mais clareza sobre o que é
+importante para você.
+
+00:02:00.640 --> 00:02:04.480
+Eu tenho aqui um valor, eu não sei se eu
+defini exatamente assim eles.
+
+00:02:06.120 --> 00:02:07.960
+Eu até vou abrir aqui para a gente ver
+juntos.
+
+00:02:10.180 --> 00:02:14.660
+Eu tenho aqui, dentro de vida lendária.
+
+00:02:15.960 --> 00:02:21.300
+Eu tenho autorealização, eu tenho aqui
+essência do Alan, onde eu tenho meus dez
+
+00:02:21.300 --> 00:02:22.100
+valores aqui.
+
+00:02:27.270 --> 00:02:30.190
+Bom, talvez ele não tenha pego esses
+arquivos, não sei.
+
+00:02:30.330 --> 00:02:32.910
+Aqui, quais são os meus dez valores?
+
+00:02:33.170 --> 00:02:40.110
+Deixa eu ver aqui, eu preciso botar,
+basear, se eu digitar quais são os meus
+
+00:02:40.110 --> 00:02:40.990
+dez valores?
+
+00:02:45.710 --> 00:02:46.630
+É, o que acontece?
+
+00:02:46.710 --> 00:02:50.070
+Eu preciso botar baseado nas minhas
+notas para ele entender que eu preciso
+
+00:02:50.070 --> 00:02:50.690
+buscar lá.
+
+00:02:50.790 --> 00:02:51.730
+Você pode começar pensando, tá.
+
+00:02:53.910 --> 00:02:59.830
+Baseado nas minhas notas, quais são os
+meus dez valores?
+
+00:03:01.690 --> 00:03:02.910
+Vamos ver se ele vai encontrar.
+
+00:03:09.410 --> 00:03:11.370
+Notas aqui são os dez possíveis valores.
+
+00:03:11.790 --> 00:03:13.290
+Aqui ele pegou de forma geral, né.
+
+00:03:13.310 --> 00:03:15.230
+Autenticidade, aprendizado contínuo,
+sim.
+
+00:03:15.370 --> 00:03:16.270
+Honestidade, sim.
+
+00:03:16.330 --> 00:03:16.970
+Integridade, sim.
+
+00:03:17.010 --> 00:03:17.630
+Respeito, sim.
+
+00:03:18.150 --> 00:03:20.690
+Empatia, sim, mas não é o meu forte.
+
+00:03:21.870 --> 00:03:22.670
+Responsabilidade, sim.
+
+00:03:22.970 --> 00:03:24.070
+Justiça, também não.
+
+00:03:25.150 --> 00:03:26.150
+Equilíbrio entre vida pessoal.
+
+00:03:26.150 --> 00:03:29.990
+Pessoal, não diria, são três horas da
+manhã que eu estou gravando essa aula
+
+00:03:29.990 --> 00:03:30.390
+para vocês.
+
+00:03:31.450 --> 00:03:33.990
+Então, não é, a vida não é equilibrada.
+
+00:03:34.610 --> 00:03:37.630
+Então, assim, ele não buscou aqui
+realmente, aqui.
+
+00:03:39.350 --> 00:03:43.130
+Sinceramente, ele tem aqui também um
+dado que eu consigo buscar, que é saber
+
+00:03:43.130 --> 00:03:48.330
+como é que ele interage entre o peso das
+coisas, né.
+
+00:03:48.330 --> 00:03:53.150
+Então, aqui está, ó, os dez assuntos
+preferidos, ele conseguiu trazer em
+
+00:03:53.150 --> 00:03:53.870
+relação a isso.
+
+00:03:55.190 --> 00:03:56.130
+Então, aqui ele consegue...
+
+00:03:56.150 --> 00:03:57.770
+Ele consegue fazer uma correlação de
+várias coisas.
+
+00:03:58.150 --> 00:04:01.990
+Mas o que é bacana dele aqui, eu posso,
+por exemplo, pegar a minha pasta de
+
+00:04:01.990 --> 00:04:02.790
+calendário aqui.
+
+00:04:02.850 --> 00:04:04.530
+Então, eu vou pedir aqui para ele...
+
+00:04:04.530 --> 00:04:08.190
+Posso pedir para ele sumorizar, né, para
+ele resumir uma nota para mim.
+
+00:04:09.370 --> 00:04:12.430
+Posso pedir para ele analisar as
+atividades importantes em uma
+
+00:04:12.430 --> 00:04:13.310
+determinada pasta.
+
+00:04:13.590 --> 00:04:18.650
+Assim, as aplicações são praticamente
+ilimitadas do que a gente pode fazer com
+
+00:04:18.650 --> 00:04:18.850
+ele.
+
+00:04:18.970 --> 00:04:20.850
+Deixa eu ver aqui o que é esse botão
+aqui.
+
+00:04:22.330 --> 00:04:25.110
+Esse botão aqui, esse aqui eu consigo
+salvar ele.
+
+00:04:25.210 --> 00:04:26.050
+Vou salvar o chat.
+
+00:04:28.470 --> 00:04:32.490
+Esse aqui eu consigo botar no histórico
+das conversas que eu já tive.
+
+00:04:32.510 --> 00:04:33.290
+Aqui eu crio o chat novo.
+
+00:04:33.810 --> 00:04:35.410
+Então, basicamente, o menu dele é isso
+aqui.
+
+00:04:36.290 --> 00:04:41.990
+E aqui eu vou pedir para ele, com base,
+com base na pasta.
+
+00:04:42.530 --> 00:04:43.930
+Aqui eu vou botar a nome da pasta.
+
+00:04:44.070 --> 00:04:47.990
+Eu vou botar Vida Lendária, episódios.
+
+00:04:48.130 --> 00:04:50.330
+Eu poderia ter botado essa pasta aqui,
+Vida Lendária.
+
+00:04:51.090 --> 00:04:55.490
+Vida Lendária, me diga quais são os meus
+dez valores.
+
+00:04:56.750 --> 00:04:58.210
+Vou ver se ele vai conseguir encontrar.
+
+00:05:08.080 --> 00:05:09.160
+Vamos ver se eu buguei.
+
+00:05:09.320 --> 00:05:10.540
+Com base na nota, aqui.
+
+00:05:10.780 --> 00:05:12.300
+Conseguiu trazer daí essas informações.
+
+00:05:12.980 --> 00:05:15.240
+Então, eu não precisaria estar com a
+pasta aberta, né.
+
+00:05:15.300 --> 00:05:18.560
+Com o documento aberto, ele trouxe a
+lista certinha das coisas.
+
+00:05:18.880 --> 00:05:23.280
+Agora, com base nessa pasta também, eu
+quero que ele me diga quais são os
+
+00:05:23.280 --> 00:05:27.400
+possíveis novos episódios baseado nos
+episódios de Vida Lendária.
+
+00:05:28.840 --> 00:05:35.570
+Com base, base, nas notas.
+
+00:05:36.690 --> 00:05:37.270
+Com base.
+
+00:05:37.290 --> 00:05:38.330
+Ele não sabe o que é um episódio, né.
+
+00:05:38.390 --> 00:05:39.770
+Ele sabe, é aqui, ó.
+
+00:05:41.850 --> 00:05:49.470
+Quais seriam os títulos possíveis para
+futuras notas como
+
+00:05:49.470 --> 00:05:50.110
+essas?
+
+00:05:52.350 --> 00:05:55.830
+Seguindo a mesma linha de pensamento.
+
+00:05:56.330 --> 00:05:58.510
+Vamos ver o que ele vai nos dizer aqui,
+né.
+
+00:06:01.590 --> 00:06:08.630
+Lembrando que aqui eu estou usando o
+chat de GPT 3 .5 com 4K tokens.
+
+00:06:08.810 --> 00:06:11.030
+Ou seja, ele...
+
+00:06:11.190 --> 00:06:14.370
+Ele não tem uma capacidade de
+compreensão tão profunda assim e nem
+
+00:06:14.370 --> 00:06:16.030
+também de leitura de muita informação.
+
+00:06:16.990 --> 00:06:19.970
+E até vou explicar para vocês como é que
+funciona aqui o...
+
+00:06:20.430 --> 00:06:22.910
+Como é que ele consegue acessar essas
+informações?
+
+00:06:23.190 --> 00:06:26.610
+Porque, assim, não é possível ele ler
+todo o número de tokens que existe
+
+00:06:26.610 --> 00:06:27.710
+dentro de todos os arquivos.
+
+00:06:27.870 --> 00:06:31.010
+Só que dentro eu tenho quase um milhão
+de caracteres.
+
+00:06:31.010 --> 00:06:32.250
+Se eu for pegar daqui até aqui.
+
+00:06:32.490 --> 00:06:34.170
+Então, não vai dar para...
+
+00:06:34.170 --> 00:06:35.370
+Não vai ser esse...
+
+00:06:36.790 --> 00:06:39.090
+Ele não vai conseguir ler um milhão de
+caracteres.
+
+00:06:39.150 --> 00:06:40.610
+Isso daria muitos tokens.
+
+00:06:40.610 --> 00:06:42.430
+Cada quatro caracteres mais ou menos dão
+um token.
+
+00:06:42.630 --> 00:06:44.310
+Então, seria 250 mil tokens.
+
+00:06:44.750 --> 00:06:46.270
+Eu estou falando de 250 mil tokens.
+
+00:06:46.550 --> 00:06:47.670
+Ele permite 4 mil tokens.
+
+00:06:48.190 --> 00:06:50.670
+Então, ele não consegue ler 250 mil
+tokens.
+
+00:06:51.730 --> 00:06:53.230
+Então, como é que ele consegue ler?
+
+00:06:53.290 --> 00:06:54.250
+Ele vetoriza isso aqui.
+
+00:06:54.330 --> 00:06:56.650
+Ele quebra as informações em pequenos
+grupos.
+
+00:06:57.550 --> 00:07:00.730
+Armazena isso como se fosse um banco de
+dados interno aqui dentro do Obsidian.
+
+00:07:00.950 --> 00:07:02.670
+E daí ele consegue fazer uma leitura.
+
+00:07:02.910 --> 00:07:05.690
+Então, aqui ele já me trouxe opções.
+
+00:07:06.170 --> 00:07:07.590
+Cara, gostei das opções.
+
+00:07:08.070 --> 00:07:09.910
+The Great Era of Life.
+
+00:07:10.610 --> 00:07:11.530
+A Área Cinzenta da Vida.
+
+00:07:11.550 --> 00:07:12.990
+O Poder das Pequenas Decisões.
+
+00:07:13.030 --> 00:07:13.390
+Gostei.
+
+00:07:13.690 --> 00:07:15.910
+A Jornada do Herói.
+
+00:07:15.970 --> 00:07:17.490
+Um Clichê ou a Realidade.
+
+00:07:18.210 --> 00:07:21.070
+A Importância da Reflexão do
+Desenvolvimento Pessoal.
+
+00:07:22.630 --> 00:07:23.230
+Legal.
+
+00:07:23.470 --> 00:07:25.670
+Lições da Infância.
+
+00:07:26.390 --> 00:07:27.730
+Separando o Bom do Mal.
+
+00:07:28.370 --> 00:07:31.370
+O Mito do Herói Perfeito.
+
+00:07:32.810 --> 00:07:34.130
+Gostei muito desse aqui.
+
+00:07:34.190 --> 00:07:36.430
+Os Perigos dos Rótulos.
+
+00:07:36.610 --> 00:07:37.490
+Bom versus Mal.
+
+00:07:37.670 --> 00:07:40.470
+E a Complexidade da Natureza.
+
+00:07:40.470 --> 00:07:40.970
+A Complexidade da Natureza Humana.
+
+00:07:41.150 --> 00:07:42.290
+Gostei dos títulos.
+
+00:07:42.430 --> 00:07:43.210
+Faz sentido.
+
+00:07:43.710 --> 00:07:46.430
+Eu posso pedir para ele resumir,
+inclusive, um dos episódios.
+
+00:07:46.470 --> 00:07:47.510
+Eu vou pegar aqui, por exemplo.
+
+00:07:47.690 --> 00:07:49.750
+Vou pedir para ele criar.
+
+00:07:49.990 --> 00:07:52.810
+Aqui no meu ruído, no 22.
+
+00:07:53.890 --> 00:07:54.750
+Elimino o ruído.
+
+00:07:54.970 --> 00:08:09.880
+Me diga quais são os pontos -chave
+executáveis que posso aplicar no meu dia
+
+00:08:09.880 --> 00:08:10.740
+a dia.
+
+00:08:10.820 --> 00:08:11.820
+É baseado.
+
+00:08:15.180 --> 00:08:15.600
+Pronto.
+
+00:08:16.960 --> 00:08:17.380
+Deu.
+
+00:08:18.200 --> 00:08:21.220
+Eu vou ver aqui o console de erro, para
+ver o que erro que foi esse que
+
+00:08:21.220 --> 00:08:21.400
+deu.
+
+00:08:25.870 --> 00:08:26.290
+Bom.
+
+00:08:27.730 --> 00:08:30.290
+O Resource Status 400.
+
+00:08:31.470 --> 00:08:35.690
+O 400, normalmente, ele é um erro da API
+aqui,
+
+00:08:35.750 --> 00:08:35.790
+ó.
+
+00:08:41.200 --> 00:08:43.980
+Eu acho que foi muita informação
+enviada.
+
+00:08:44.120 --> 00:08:44.700
+Eu vou fazer o seguinte.
+
+00:08:44.780 --> 00:08:45.580
+Eu vou tentar de novo.
+
+00:08:49.150 --> 00:08:49.430
+Ó.
+
+00:08:49.470 --> 00:08:50.150
+Deu um erro de novo.
+
+00:08:50.410 --> 00:08:51.890
+Eu vou tentar fazer na pasta.
+
+00:08:52.170 --> 00:08:52.430
+Ó.
+
+00:08:52.490 --> 00:08:52.950
+Me diga.
+
+00:08:56.380 --> 00:08:57.640
+Novamente, eu vou abrir aqui a pasta.
+
+00:08:57.760 --> 00:08:58.540
+Vida lendária.
+
+00:08:59.340 --> 00:08:59.700
+Episódios.
+
+00:09:00.500 --> 00:09:02.680
+E vou pedir para ele, baseado nisso.
+
+00:09:04.380 --> 00:09:05.660
+Me diga quais são os pontos.
+
+00:09:06.500 --> 00:09:07.920
+Vamos ver se ele vai dar algum erro.
+
+00:09:12.050 --> 00:09:12.910
+Está processando ali.
+
+00:09:12.990 --> 00:09:13.850
+A princípio, não vai dar erro.
+
+00:09:14.070 --> 00:09:14.250
+Ó.
+
+00:09:14.330 --> 00:09:14.690
+Conseguiu.
+
+00:09:15.030 --> 00:09:15.650
+Virou o token.
+
+00:09:16.170 --> 00:09:17.230
+Legal daqui que eu também consigo.
+
+00:09:17.490 --> 00:09:20.030
+Desculpe, mas a nota fornecida não
+contém informações específicas sobre
+
+00:09:20.030 --> 00:09:21.730
+pontos -chave executivos.
+
+00:09:21.850 --> 00:09:25.170
+Ela se concentra, principalmente, no
+poder de fazer perguntas e como isso
+
+00:09:25.170 --> 00:09:26.270
+pode afetar a qualidade da sua vida.
+
+00:09:26.310 --> 00:09:28.330
+Ele pegou uma nota específica agora para
+me dizer isso, né?
+
+00:09:28.370 --> 00:09:28.690
+É uma nota específica.
+
+00:09:30.030 --> 00:09:32.790
+E até uma coisa que eu poderia fazer,
+sabe, quais são as 20
+
+00:09:32.790 --> 00:09:33.630
+perguntas.
+
+00:09:37.670 --> 00:09:38.710
+Vida lendária.
+
+00:09:41.160 --> 00:09:49.910
+Quais são as 20 perguntas das notas...
+
+00:09:49.910 --> 00:09:52.290
+Vou escrever o número aqui das notas 011
+e
+
+00:09:52.290 --> 00:09:56.290
+012.
+
+00:09:59.070 --> 00:10:00.210
+Vamos ver se ele vai conseguir.
+
+00:10:02.800 --> 00:10:04.940
+Aqui ele já me disse quantos tokens
+utilizou.
+
+00:10:04.960 --> 00:10:05.680
+2000 tokens.
+
+00:10:05.960 --> 00:10:06.120
+Ó.
+
+00:10:07.000 --> 00:10:07.480
+Conseguiu.
+
+00:10:08.040 --> 00:10:12.700
+Desculpe, mas a nota não contém
+informações específicas sobre pontos
+
+00:10:12.700 --> 00:10:13.100
+-chave executivos.
+
+00:10:13.280 --> 00:10:13.680
+É.
+
+00:10:14.220 --> 00:10:16.240
+Episódios 11 e 12 do Vida Lendária.
+
+00:10:16.520 --> 00:10:18.240
+Por favor, dê mais contexto e
+informações.
+
+00:10:18.420 --> 00:10:19.760
+Desculpe, mas não entendo você.
+
+00:10:20.460 --> 00:10:22.560
+Deixa eu ver aqui se eu consigo fazer
+assim,
+
+00:10:22.700 --> 00:10:22.900
+então.
+
+00:10:25.370 --> 00:10:25.770
+012.
+
+00:10:29.540 --> 00:10:34.600
+List as 20 perguntas para mim.
+
+00:10:37.800 --> 00:10:38.200
+Ó.
+
+00:10:38.340 --> 00:10:39.340
+Aqui ele deu um erro.
+
+00:10:40.980 --> 00:10:42.400
+Vamos ver se eu consigo descobrir que
+erro
+
+00:10:42.400 --> 00:10:42.640
+foi.
+
+00:10:45.350 --> 00:10:50.050
+Ele está dando um erro quando eu venho
+pegar algum desses arquivos.
+
+00:10:50.170 --> 00:10:51.170
+O que está acontecendo aqui?
+
+00:10:51.710 --> 00:10:56.350
+Possivelmente, esses arquivos estão com
+algum carácter.
+
+00:10:57.130 --> 00:10:58.290
+Aqui tem uma mensagem.
+
+00:10:59.190 --> 00:11:00.950
+Vamos ver se eu consigo ler essa
+mensagem.
+
+00:11:01.130 --> 00:11:06.390
+Mas já aconteceu comigo de, às vezes, eu
+subir isso aqui de algum outro lugar e
+
+00:11:06.390 --> 00:11:08.090
+ele trazer algum erro.
+
+00:11:10.790 --> 00:11:13.230
+É menor que o mínimo de tokens.
+
+00:11:14.070 --> 00:11:16.610
+Então, tipo assim, está dando um
+parâmetro inválido que ele está
+
+00:11:16.610 --> 00:11:17.630
+exigindo.
+
+00:11:17.670 --> 00:11:18.050
+Aqui, ó.
+
+00:11:18.050 --> 00:11:22.330
+Ele está exigindo menos 126.
+
+00:11:22.410 --> 00:11:25.550
+Daí, eu não sei se ele está, tipo, está
+ultrapassando o número de tokens dele.
+
+00:11:26.130 --> 00:11:30.990
+E deixa eu testar aqui se eu consigo
+atualizar ele para 16 mil tokens.
+
+00:11:32.950 --> 00:11:33.750
+Smart Connections.
+
+00:11:35.370 --> 00:11:35.970
+Aqui, ó.
+
+00:11:35.970 --> 00:11:37.630
+Estou utilizando o que tem 4 mil tokens.
+
+00:11:38.570 --> 00:11:39.270
+Eu consigo.
+
+00:11:39.590 --> 00:11:40.570
+Vamos ver se eu consigo.
+
+00:11:42.010 --> 00:11:42.410
+Aqui.
+
+00:11:42.410 --> 00:11:43.250
+Usar o de 16.
+
+00:11:43.630 --> 00:11:44.170
+Se eu conseguir.
+
+00:11:44.370 --> 00:11:46.350
+Ele ainda não tem a versão portuguesa
+aqui.
+
+00:11:46.870 --> 00:11:48.910
+O que eu gostaria de fazer aqui, né?
+
+00:11:49.610 --> 00:11:50.310
+Aqui, deixa eu ver.
+
+00:11:50.570 --> 00:11:52.650
+A princípio, já está tudo sincronizado
+as notas.
+
+00:11:53.790 --> 00:11:54.150
+Aqui.
+
+00:11:56.250 --> 00:11:57.470
+Eu não estou com...
+
+00:11:58.210 --> 00:11:58.810
+Cadê minha...
+
+00:11:58.810 --> 00:12:00.450
+Ah, eu reinstalei ele aqui.
+
+00:12:00.570 --> 00:12:01.610
+Como é que ele está fazendo isso?
+
+00:12:02.990 --> 00:12:03.870
+Não, o API está aqui.
+
+00:12:03.950 --> 00:12:04.030
+Não.
+
+00:12:04.550 --> 00:12:05.190
+Estou viajando.
+
+00:12:05.270 --> 00:12:05.690
+O API está aqui.
+
+00:12:06.870 --> 00:12:08.650
+Aqui, sim, que nota seria outra coisa
+também.
+
+00:12:09.490 --> 00:12:10.350
+Aqui, testar API.
+
+00:12:10.750 --> 00:12:11.910
+Está funcionando certinho.
+
+00:12:16.130 --> 00:12:16.570
+Beleza.
+
+00:12:16.630 --> 00:12:18.290
+Aqui, eu posso salvar de forma manual.
+
+00:12:18.850 --> 00:12:20.330
+Aqui, não tem necessidade de fazer isso
+aqui.
+
+00:12:20.410 --> 00:12:25.150
+Você ia reenviar os arquivos que não
+tiveram algum erro sendo enviados.
+
+00:12:25.330 --> 00:12:28.090
+Aqui, eu posso começar a criar logs de
+erros para poder visualizar.
+
+00:12:28.090 --> 00:12:33.630
+Inclusive, eu vou mostrar para vocês
+aqui todas as opções aqui de alterações
+
+00:12:33.630 --> 00:12:34.590
+que a gente consegue fazer.
+
+00:12:34.990 --> 00:12:40.390
+O que eu gostaria de fazer aqui nele,
+que eu até conseguiria fazer, só que eu
+
+00:12:40.390 --> 00:12:47.510
+teria que fazer via código, é alterar
+aqui a linguagem dele, que ele não tem
+
+00:12:47.510 --> 00:12:48.130
+em português.
+
+00:12:48.190 --> 00:12:51.170
+Ele tem francês, espanhol, francês,
+alemão e italiano.
+
+00:12:52.250 --> 00:12:53.090
+Eu quero...
+
+00:12:53.090 --> 00:12:55.930
+Inclusive, eu já solicitei para eles
+adicionarem em português, o que seria
+
+00:12:55.930 --> 00:12:56.310
+interessante.
+
+00:12:56.990 --> 00:12:58.350
+Tem muita gente que fala português.
+
+00:12:58.610 --> 00:12:59.290
+Mas, beleza.
+
+00:12:59.450 --> 00:13:00.270
+Simplesmente, é fácil.
+
+00:13:00.390 --> 00:13:06.610
+É simplesmente pedir para ele escrever
+em português, me responder em português.
+
+00:13:07.250 --> 00:13:08.310
+Então, basicamente, aqui.
+
+00:13:08.310 --> 00:13:09.310
+Eu vou enviar de novo.
+
+00:13:09.450 --> 00:13:10.790
+Vou ver se foi uma questão de token.
+
+00:13:10.910 --> 00:13:12.630
+Agora, eu estou com 16 mil tokens.
+
+00:13:12.970 --> 00:13:14.350
+Então, não é para dar um problema.
+
+00:13:14.830 --> 00:13:15.910
+Aí, era isso mesmo.
+
+00:13:16.170 --> 00:13:18.270
+Era uma limitação de tokens que estava
+acontecendo.
+
+00:13:18.310 --> 00:13:19.850
+Eu botei agora com 16k.
+
+00:13:20.270 --> 00:13:22.410
+Ele conseguiu encontrar as 20 perguntas.
+
+00:13:23.550 --> 00:13:26.950
+Então, agora ele vai ter que conseguir
+trabalhar com muito mais dados.
+
+00:13:27.090 --> 00:13:29.070
+Então, 4 vezes 5.
+
+00:13:29.450 --> 00:13:34.610
+Então, são 5 vezes mais tokens do que a
+gente tinha antes para poder trabalhar.
+
+00:13:35.510 --> 00:13:37.310
+Então, está muito legal isso aqui.
+
+00:13:37.310 --> 00:13:38.470
+Agora, sim.
+
+00:13:38.570 --> 00:13:40.110
+Ele trouxe as 20 perguntas para mim.
+
+00:13:40.210 --> 00:13:42.450
+Esses erros de API que estavam
+acontecendo.
+
+00:13:42.550 --> 00:13:45.330
+Inclusive, algumas pessoas me falaram
+que estavam vendo esses erros aqui.
+
+00:13:46.490 --> 00:13:48.310
+Era direcionado sempre a essa...
+
+00:13:49.070 --> 00:13:52.430
+Todas as vezes que eu fui ver, era
+porque faltava token.
+
+00:13:52.810 --> 00:13:55.670
+Então, agora vocês já sabem também como
+resolver esse problema.
+
+00:13:55.890 --> 00:14:00.030
+Se deu um erro de API e foi que o token
+ficou menor aqui...
+
+00:14:00.030 --> 00:14:00.830
+Até porque aqui.
+
+00:14:00.930 --> 00:14:01.450
+Está aqui, né?
+
+00:14:01.530 --> 00:14:02.030
+Ali, olha.
+
+00:14:05.170 --> 00:14:06.050
+4 .163.
+
+00:14:07.030 --> 00:14:10.230
+E o máximo de tokens que estava
+configurado era 13 .000.
+
+00:14:10.630 --> 00:14:14.910
+Então, realmente estava faltando 1 .173
+tokens para ele conseguir rodar.
+
+00:14:15.290 --> 00:14:18.610
+Se eu for ver aqui, se tem alguma
+limitação que foi inserida.
+
+00:14:18.690 --> 00:14:20.250
+Não tem limitação aqui que foi inserida.
+
+00:14:20.730 --> 00:14:22.650
+Então, agora ele tem uma limitação.
+
+00:14:22.790 --> 00:14:23.850
+Vamos ver o que foi aqui.
+
+00:14:24.190 --> 00:14:26.490
+O máximo total de tokens é 12 .000.
+
+00:14:26.510 --> 00:14:28.010
+Eu, sinceramente, não sei porque ele
+reduz.
+
+00:14:28.190 --> 00:14:29.250
+Porque aqui está dizendo 16 .000.
+
+00:14:29.770 --> 00:14:31.270
+Aqui ele está dizendo 12 .000.
+
+00:14:31.690 --> 00:14:34.770
+E eu utilizei 1 .520.
+
+00:14:35.950 --> 00:14:39.970
+Então, sobrou ainda 10 .480 tokens aqui
+para ele poder trabalhar.
+
+00:14:40.410 --> 00:14:44.690
+Então, agora com 16 .000 eu vou ter,
+pelo que eu estou vendo aqui, tokens
+
+00:14:44.690 --> 00:14:47.190
+mais do que suficiente para poder
+trabalhar.
+
+00:14:47.410 --> 00:14:51.510
+Então, agora, inclusive, eu vou fazer
+perguntas um pouquinho mais avançadas
+
+00:14:51.510 --> 00:14:52.270
+para ele.
+
+00:14:54.130 --> 00:14:55.770
+Baseado nas minhas notas...
+
+00:14:59.510 --> 00:15:00.790
+Deixa eu ver o que eu posso perguntar
+aqui.
+
+00:15:01.410 --> 00:15:02.750
+Ou eu posso até perguntar aqui.
+
+00:15:04.890 --> 00:15:06.130
+Baseado nas minhas notas...
+
+00:15:06.130 --> 00:15:10.030
+Vamos ver uma pergunta que eu possa
+fazer para todas as notações que eu fiz
+
+00:15:10.030 --> 00:15:10.330
+aqui.
+
+00:15:11.990 --> 00:15:14.670
+Qual é a solução...
+
+00:15:15.650 --> 00:15:17.230
+Deixa eu pensar aqui.
+
+00:15:17.670 --> 00:15:19.310
+O que eu tenho aqui de anotações?
+
+00:15:19.510 --> 00:15:21.330
+Eu tenho alguns livros notados.
+
+00:15:21.490 --> 00:15:23.230
+Eu tenho várias anotações de ideias.
+
+00:15:23.250 --> 00:15:25.490
+Eu tenho anotações também do Nietzsche.
+
+00:15:27.030 --> 00:15:37.500
+Baseado nas minhas notas, quais
+filósofos eu tenho mais materiais sobre?
+
+00:15:37.500 --> 00:15:41.660
+E quais livros me interessam?
+
+00:15:46.260 --> 00:15:47.720
+Vou botar uma pergunta aqui.
+
+00:15:56.110 --> 00:15:57.590
+Normalmente ele está me respondendo em
+inglês.
+
+00:15:57.870 --> 00:16:03.290
+Mas o legal daqui agora é que ele está
+em 12 .000 tokens.
+
+00:16:04.030 --> 00:16:04.890
+Olha só.
+
+00:16:05.790 --> 00:16:09.610
+Eu usei para responder isso aqui mais de
+8 .000 tokens.
+
+00:16:09.930 --> 00:16:13.210
+Então, não teria como ele responder isso
+antes para mim.
+
+00:16:13.750 --> 00:16:15.750
+Porque ele não teria tokens o
+suficiente.
+
+00:16:16.130 --> 00:16:17.810
+Então, a resolução aqui foi isso.
+
+00:16:17.930 --> 00:16:20.430
+Então, aqui ele está me respondendo em
+inglês.
+
+00:16:20.470 --> 00:16:25.130
+Mas, basicamente, ele está me dizendo
+que, com base nas notas, Nietzsche é
+
+00:16:25.130 --> 00:16:26.230
+esse filósofo.
+
+00:16:26.270 --> 00:16:28.850
+É o filósofo que eu tenho mais materiais
+sobre.
+
+00:16:28.990 --> 00:16:32.030
+Realmente, Nietzsche foi quem eu fiz a
+primeira nota grande aqui.
+
+00:16:32.070 --> 00:16:35.490
+Não porque ele realmente é o filósofo
+que eu mais estudo.
+
+00:16:37.350 --> 00:16:39.630
+Mas, ele foi quem eu desenvolvi as
+notas.
+
+00:16:39.650 --> 00:16:42.770
+A verdade é que o meu cérebro, por mais
+que o gráfico dele está muito grande.
+
+00:16:43.030 --> 00:16:43.570
+Está bem grande.
+
+00:16:44.870 --> 00:16:47.850
+Desde que eu lancei aqui a mente
+lendária e a comunidade.
+
+00:16:47.850 --> 00:16:48.650
+Vida lendária.
+
+00:16:48.810 --> 00:16:52.490
+Eu tenho ficado mais tempo aqui fazendo
+aulas para vocês.
+
+00:16:52.590 --> 00:16:53.810
+Ou ajudando vocês.
+
+00:16:53.850 --> 00:16:56.790
+Do que, realmente, cuidando do meu
+jardim.
+
+00:16:56.810 --> 00:16:59.130
+Que é esse meu segundo cérebro.
+
+00:16:59.250 --> 00:17:01.010
+Então, assim, não coloquei nem...
+
+00:17:01.010 --> 00:17:05.650
+Assim, literalmente, eu não botei 1 % do
+que eu tenho ainda para botar.
+
+00:17:05.910 --> 00:17:08.970
+Ou seja, eu não estou falando isso de
+forma figurativa.
+
+00:17:09.150 --> 00:17:11.890
+Não é que, assim, eu já botei 10%, 20%.
+
+00:17:11.890 --> 00:17:15.410
+Literalmente, eu não botei nem 1 % do
+que eu vou botar de informações aqui
+
+00:17:15.410 --> 00:17:15.710
+dentro.
+
+00:17:16.810 --> 00:17:17.770
+Então, imagina.
+
+00:17:17.770 --> 00:17:19.990
+Só em livros, eu já li mais de 500
+livros.
+
+00:17:20.050 --> 00:17:21.730
+Então, eu tenho resumo de dois só aqui.
+
+00:17:22.150 --> 00:17:24.450
+Então, assim, tem muita coisa para eu
+colocar aqui dentro ainda.
+
+00:17:24.910 --> 00:17:25.510
+Muita informação.
+
+00:17:27.050 --> 00:17:29.010
+Então, assim, isso vai, com certeza,
+mudar.
+
+00:17:29.230 --> 00:17:31.050
+Mas, o legal é que ele já me trouxe
+aqui.
+
+00:17:31.610 --> 00:17:33.650
+Baseado, realmente, no Nietzsche aqui.
+
+00:17:34.350 --> 00:17:35.150
+Ele falou...
+
+00:17:38.190 --> 00:17:40.610
+Eu tenho, realmente, informações desses
+caras.
+
+00:17:40.850 --> 00:17:42.110
+Em termos de livros.
+
+00:17:42.230 --> 00:17:43.970
+A lista de livros que você...
+
+00:17:45.230 --> 00:17:46.770
+O método socrático.
+
+00:17:47.770 --> 00:17:48.190
+Philips.
+
+00:17:49.190 --> 00:17:50.690
+O discurso do método.
+
+00:17:51.130 --> 00:17:52.310
+Como pensarmos lá.
+
+00:17:53.710 --> 00:17:56.410
+It seems like you have material
+information about Nietzsche.
+
+00:17:56.470 --> 00:17:56.930
+É assim.
+
+00:17:56.990 --> 00:17:59.090
+Ele trouxe bastante coisa de Nietzsche
+em si.
+
+00:17:59.190 --> 00:18:02.790
+Então, toda essa escrita aqui foi
+baseada em Nietzsche.
+
+00:18:02.890 --> 00:18:04.750
+Eu consigo até olhar...
+
+00:18:04.750 --> 00:18:05.450
+Deixa eu ver se é aqui.
+
+00:18:05.710 --> 00:18:06.090
+Não.
+
+00:18:06.130 --> 00:18:07.990
+Esse aqui, ele pega e só faz um...
+
+00:18:07.990 --> 00:18:09.630
+Smart connections use our dropping.
+
+00:18:10.030 --> 00:18:11.430
+Ele só analisa isso aqui.
+
+00:18:12.870 --> 00:18:14.790
+Que foi onde ele vai buscar as
+informações.
+
+00:18:15.050 --> 00:18:17.270
+É aquele ali que está buscando essas
+informações no que eu estou aberto.
+
+00:18:17.270 --> 00:18:18.730
+Se eu mudar aqui, ele muda.
+
+00:18:21.230 --> 00:18:23.730
+Mas, eu queria ver também onde é que ele
+buscou essas informações.
+
+00:18:23.930 --> 00:18:25.730
+Isso seria uma informação legal de ter
+aqui.
+
+00:18:25.770 --> 00:18:27.010
+Que, a princípio, não tem.
+
+00:18:27.090 --> 00:18:28.010
+Eu tenho lá no short base.
+
+00:18:28.290 --> 00:18:28.910
+Mas, beleza.
+
+00:18:29.170 --> 00:18:31.470
+Foi legal já esses experimentos que a
+gente fez.
+
+00:18:31.970 --> 00:18:35.890
+Mas, deixa eu voltar aqui para explicar
+para vocês como essa ferramenta
+
+00:18:35.890 --> 00:18:36.830
+funciona.
+
+00:18:38.690 --> 00:18:41.710
+Basicamente, o Obsidian já é uma
+ferramenta incrível para poder encontrar
+
+00:18:41.710 --> 00:18:42.290
+informações.
+
+00:18:42.870 --> 00:18:44.490
+Só que, com ela, você não precisa...
+
+00:18:44.490 --> 00:18:45.150
+Assim.
+
+00:18:46.010 --> 00:18:47.430
+Eu prezo por uma organização.
+
+00:18:47.470 --> 00:18:49.270
+Mas, eu nem precisaria prezar por essa
+organização.
+
+00:18:49.310 --> 00:18:51.390
+Porque, ele vai conseguir encontrar
+todas as informações para mim aqui.
+
+00:18:51.770 --> 00:18:53.330
+Se eu quero perguntar para ele, por
+exemplo.
+
+00:18:54.310 --> 00:18:55.170
+Vou perguntar para ele.
+
+00:18:55.230 --> 00:18:57.470
+Eu sei que está dentro da pasta.
+
+00:18:57.530 --> 00:18:58.350
+Por exemplo, vida lendária.
+
+00:18:59.430 --> 00:19:00.070
+Vida lendária.
+
+00:19:00.210 --> 00:19:00.890
+Eu sei que tem episódio.
+
+00:19:01.430 --> 00:19:04.410
+Eu quero perguntar para ele alguma coisa
+muito específica.
+
+00:19:04.410 --> 00:19:08.240
+Que é, por exemplo.
+
+00:19:08.460 --> 00:19:09.960
+O que é o efeito composto?
+
+00:19:10.000 --> 00:19:12.300
+O que é o efeito composto?
+
+00:19:12.320 --> 00:19:15.120
+Eu não sei se eu tenho que sempre
+escrever baseado.
+
+00:19:15.120 --> 00:19:17.220
+Vamos ver se ele vai conseguir fazer
+aqui.
+
+00:19:17.400 --> 00:19:18.320
+Eu acredito que sim.
+
+00:19:21.220 --> 00:19:22.120
+Baseado nas suas notas.
+
+00:19:22.160 --> 00:19:22.980
+O efeito composto.
+
+00:19:22.980 --> 00:19:24.860
+Também conhecido em português.
+
+00:19:25.080 --> 00:19:27.020
+É um princípio muito importante.
+
+00:19:27.280 --> 00:19:29.080
+Só que, eu vou achar uma forma de a
+gente deixar.
+
+00:19:29.180 --> 00:19:30.640
+Não ter que escrever sempre assim.
+
+00:19:31.060 --> 00:19:31.980
+Escreva em português.
+
+00:19:32.160 --> 00:19:33.420
+Porque, ele está me respondendo sempre
+em inglês.
+
+00:19:34.900 --> 00:19:38.360
+Mas, é uma forma aqui de fazer
+perguntas.
+
+00:19:38.360 --> 00:19:39.860
+Eu simplesmente fiz a pergunta para uma
+pasta.
+
+00:19:40.180 --> 00:19:42.660
+E, ele me respondeu com base nessa nota.
+
+00:19:42.660 --> 00:19:45.460
+O que é o efeito composto.
+
+00:19:45.480 --> 00:19:46.040
+Se eu perguntar.
+
+00:19:46.060 --> 00:19:46.520
+Digamos aqui.
+
+00:19:47.240 --> 00:19:51.020
+O que é o efeito baseado.
+
+00:19:51.940 --> 00:19:53.320
+Em minhas notas.
+
+00:19:53.340 --> 00:19:54.780
+O que é o efeito.
+
+00:20:03.380 --> 00:20:04.560
+Com base nessas notas.
+
+00:20:04.560 --> 00:20:06.940
+Dá uma informação específica sobre o
+conceito efeito composto.
+
+00:20:07.000 --> 00:20:07.820
+Se você tiver mais informações.
+
+00:20:08.180 --> 00:20:08.760
+Então, assim.
+
+00:20:08.820 --> 00:20:10.460
+Como meu cofre é bem grande.
+
+00:20:10.660 --> 00:20:12.520
+Se eu não der pelo menos uma referência
+para ele.
+
+00:20:12.560 --> 00:20:13.020
+De pasta.
+
+00:20:13.220 --> 00:20:14.420
+Dá para ver que ele já se perde.
+
+00:20:15.060 --> 00:20:18.420
+Porque, se eu tivesse marcado aqui.
+
+00:20:18.800 --> 00:20:19.620
+A pasta.
+
+00:20:19.620 --> 00:20:22.820
+A fita lendária.
+
+00:20:24.500 --> 00:20:25.700
+Baseado nas minhas notas.
+
+00:20:25.700 --> 00:20:27.360
+O que é o efeito composto.
+
+00:20:28.100 --> 00:20:28.500
+Responda.
+
+00:20:29.860 --> 00:20:30.660
+Em português.
+
+00:20:33.720 --> 00:20:34.680
+Então, se você souber.
+
+00:20:34.700 --> 00:20:36.200
+Em que pasta está os arquivos.
+
+00:20:36.280 --> 00:20:37.520
+Você já consegue ter respostas.
+
+00:20:37.560 --> 00:20:37.880
+Olha só.
+
+00:20:38.080 --> 00:20:38.780
+O efeito composto.
+
+00:20:38.920 --> 00:20:40.280
+É um princípio que descreve.
+
+00:20:40.280 --> 00:20:41.340
+Como pequenas ações realizadas.
+
+00:20:41.380 --> 00:20:41.740
+De forma constante.
+
+00:20:41.840 --> 00:20:42.180
+Ao longo do tempo.
+
+00:20:42.260 --> 00:20:43.240
+Então, eu estou trazendo já.
+
+00:20:43.320 --> 00:20:44.000
+Um conteúdo.
+
+00:20:44.480 --> 00:20:45.400
+Do meu episódio.
+
+00:20:45.840 --> 00:20:47.200
+Que é o episódio 16.
+
+00:20:47.780 --> 00:20:49.040
+Que é o efeito composto.
+
+00:20:49.060 --> 00:20:49.280
+Então.
+
+00:20:49.460 --> 00:20:50.520
+Eu até posso perguntar.
+
+00:20:51.060 --> 00:20:52.440
+Vou ver se ele vai me responder.
+
+00:20:53.280 --> 00:20:53.700
+O que é o efeito composto.
+
+00:20:53.700 --> 00:20:53.900
+Onde.
+
+00:20:54.340 --> 00:20:55.200
+Em qual nota.
+
+00:20:55.940 --> 00:20:56.840
+Em qual nota.
+
+00:20:58.120 --> 00:20:58.480
+Você.
+
+00:20:59.620 --> 00:20:59.980
+Encontrou.
+
+00:21:00.820 --> 00:21:01.180
+Essa.
+
+00:21:03.660 --> 00:21:04.020
+Informação.
+
+00:21:09.690 --> 00:21:10.410
+As desculpas.
+
+00:21:10.430 --> 00:21:11.050
+Do equívoco anterior.
+
+00:21:11.190 --> 00:21:12.250
+Com base nas minhas.
+
+00:21:12.350 --> 00:21:13.210
+Capacidades de linguagem.
+
+00:21:13.250 --> 00:21:14.330
+Não tenho acesso direto.
+
+00:21:14.670 --> 00:21:15.730
+As notas.
+
+00:21:15.730 --> 00:21:16.590
+Ou informações pessoais.
+
+00:21:16.650 --> 00:21:16.830
+Por exemplo.
+
+00:21:16.870 --> 00:21:17.590
+Não posso oferecer.
+
+00:21:17.650 --> 00:21:18.350
+Informações específicas.
+
+00:21:18.370 --> 00:21:18.550
+Sobre.
+
+00:21:18.750 --> 00:21:19.650
+O efeito composto.
+
+00:21:19.670 --> 00:21:20.350
+Com base nas suas notas.
+
+00:21:20.370 --> 00:21:20.830
+Minhas respostas.
+
+00:21:20.930 --> 00:21:21.290
+São geradas.
+
+00:21:21.310 --> 00:21:22.050
+Com base no amplo.
+
+00:21:22.050 --> 00:21:22.610
+Conjunto de dados.
+
+00:21:22.670 --> 00:21:23.390
+Conhecimentos gerais.
+
+00:21:23.750 --> 00:21:24.110
+Então.
+
+00:21:24.170 --> 00:21:24.510
+O que acontece.
+
+00:21:24.770 --> 00:21:24.830
+O que.
+
+00:21:24.970 --> 00:21:25.210
+Como é que.
+
+00:21:25.290 --> 00:21:25.650
+Inclusive.
+
+00:21:28.530 --> 00:21:28.550
+Ele vai explicar.
+
+00:21:28.550 --> 00:21:29.010
+Como ele funciona.
+
+00:21:29.450 --> 00:21:30.110
+Ele não funciona.
+
+00:21:30.110 --> 00:21:30.830
+Que ele leu a nota.
+
+00:21:30.990 --> 00:21:31.390
+Ele funciona.
+
+00:21:31.430 --> 00:21:31.790
+Que ele.
+
+00:21:32.130 --> 00:21:32.870
+Pegou o vetor.
+
+00:21:32.910 --> 00:21:33.750
+Que basicamente.
+
+00:21:33.890 --> 00:21:34.410
+Ele tem.
+
+00:21:34.730 --> 00:21:35.030
+Vários.
+
+00:21:35.970 --> 00:21:36.570
+Vários conteúdos.
+
+00:21:36.810 --> 00:21:37.110
+Quebrados.
+
+00:21:37.170 --> 00:21:37.550
+Que são.
+
+00:21:38.150 --> 00:21:38.450
+Linkados.
+
+00:21:38.490 --> 00:21:38.970
+Para essa pasta.
+
+00:21:39.470 --> 00:21:39.770
+Então.
+
+00:21:39.810 --> 00:21:40.030
+Por isso.
+
+00:21:40.070 --> 00:21:40.510
+Que ele nem consegue.
+
+00:21:40.770 --> 00:21:41.070
+Identificar.
+
+00:21:41.210 --> 00:21:41.470
+Aqui.
+
+00:21:41.830 --> 00:21:42.570
+Qual que é.
+
+00:21:43.370 --> 00:21:43.950
+Qual que é.
+
+00:21:44.010 --> 00:21:44.410
+O arquivo.
+
+00:21:44.490 --> 00:21:45.010
+Que tem a pasta.
+
+00:21:45.130 --> 00:21:45.230
+Então.
+
+00:21:45.270 --> 00:21:45.690
+Deixa eu explicar.
+
+00:21:45.830 --> 00:21:46.130
+Inclusive.
+
+00:21:46.170 --> 00:21:46.470
+Para vocês.
+
+00:21:46.530 --> 00:21:46.750
+Agora.
+
+00:21:47.710 --> 00:21:48.010
+Tecnicamente.
+
+00:21:58.590 --> 00:21:58.950
+Aqui.
+
+00:21:59.130 --> 00:21:59.510
+Tem um pouquinho.
+
+00:21:59.590 --> 00:22:00.290
+Das limitações.
+
+00:22:00.290 --> 00:22:00.970
+Que ele vai ter.
+
+00:22:01.350 --> 00:22:01.710
+Aqui.
+
+00:22:01.770 --> 00:22:02.130
+Basicamente.
+
+00:22:02.150 --> 00:22:03.030
+A documentação dele.
+
+00:22:03.230 --> 00:22:03.410
+Eu.
+
+00:22:03.470 --> 00:22:04.270
+Leio toda ela.
+
+00:22:04.450 --> 00:22:05.410
+Eu separei.
+
+00:22:05.710 --> 00:22:06.330
+Dentro dela.
+
+00:22:06.570 --> 00:22:06.930
+Aquilo.
+
+00:22:07.010 --> 00:22:07.710
+Que faz mais sentido.
+
+00:22:07.830 --> 00:22:08.530
+Apresentar para vocês.
+
+00:22:08.650 --> 00:22:08.850
+Então.
+
+00:22:08.890 --> 00:22:09.150
+Aqui.
+
+00:22:09.470 --> 00:22:10.490
+Eu já peguei.
+
+00:22:10.850 --> 00:22:11.210
+Traduzi.
+
+00:22:11.370 --> 00:22:12.330
+E adaptei.
+
+00:22:12.490 --> 00:22:14.090
+A documentação dele.
+
+00:22:14.230 --> 00:22:15.090
+Que é bem mais ampla.
+
+00:22:15.490 --> 00:22:16.070
+Só com.
+
+00:22:16.190 --> 00:22:16.510
+O que é.
+
+00:22:16.750 --> 00:22:17.110
+Necessário.
+
+00:22:17.210 --> 00:22:17.390
+Digamos.
+
+00:22:17.450 --> 00:22:17.670
+Assim.
+
+00:22:17.710 --> 00:22:18.230
+Que faz sentido.
+
+00:22:18.450 --> 00:22:19.070
+Que eu vejo.
+
+00:22:19.110 --> 00:22:19.490
+Para vocês.
+
+00:22:19.490 --> 00:22:19.670
+Então.
+
+00:22:19.790 --> 00:22:20.150
+Tem muita coisa.
+
+00:22:20.250 --> 00:22:20.930
+Que é muito técnica.
+
+00:22:21.090 --> 00:22:21.270
+Lá.
+
+00:22:21.510 --> 00:22:22.030
+Que eu acho.
+
+00:22:22.090 --> 00:22:22.450
+Que não tem.
+
+00:22:22.530 --> 00:22:22.990
+Por que.
+
+00:22:23.110 --> 00:22:23.390
+Vocês.
+
+00:22:24.230 --> 00:22:24.510
+Perderem.
+
+00:22:24.630 --> 00:22:24.910
+Digamos.
+
+00:22:24.970 --> 00:22:25.330
+O tempo.
+
+00:22:25.350 --> 00:22:25.630
+De vocês.
+
+00:22:25.670 --> 00:22:26.070
+Com isso.
+
+00:22:26.510 --> 00:22:26.790
+Então.
+
+00:22:26.830 --> 00:22:27.070
+Aqui.
+
+00:22:27.290 --> 00:22:27.570
+Eu.
+
+00:22:28.130 --> 00:22:28.410
+Separei.
+
+00:22:28.470 --> 00:22:28.750
+Basicamente.
+
+00:22:29.250 --> 00:22:30.030
+O que faz sentido.
+
+00:22:30.390 --> 00:22:31.110
+Até tem um pouquinho.
+
+00:22:31.270 --> 00:22:31.570
+Isso aqui.
+
+00:22:31.650 --> 00:22:32.050
+Já envolve.
+
+00:22:32.070 --> 00:22:32.270
+Um pouquinho.
+
+00:22:32.330 --> 00:22:33.030
+Mais avançado.
+
+00:22:33.130 --> 00:22:33.290
+Que está.
+
+00:22:33.330 --> 00:22:33.470
+Fazendo.
+
+00:22:33.550 --> 00:22:33.630
+Algumas.
+
+00:22:33.750 --> 00:22:33.770
+Coisas.
+
+00:22:33.870 --> 00:22:34.350
+Bem legais.
+
+00:22:34.830 --> 00:22:35.150
+Dá.
+
+00:22:35.310 --> 00:22:35.530
+Para criar.
+
+00:22:36.010 --> 00:22:36.330
+Conexões.
+
+00:22:36.410 --> 00:22:36.710
+Com uma.
+
+00:22:36.730 --> 00:22:37.030
+Nota.
+
+00:22:37.030 --> 00:22:37.750
+De conexões.
+
+00:22:37.990 --> 00:22:38.450
+Para que.
+
+00:22:38.510 --> 00:22:38.770
+Ele possa.
+
+00:22:38.850 --> 00:22:39.130
+Entender.
+
+00:22:39.210 --> 00:22:39.490
+Melhor.
+
+00:22:39.530 --> 00:22:39.790
+Alguns.
+
+00:22:40.010 --> 00:22:40.330
+Assuntos.
+
+00:22:40.510 --> 00:22:40.830
+Então.
+
+00:22:40.890 --> 00:22:40.990
+Você.
+
+00:22:41.030 --> 00:22:41.230
+Pode.
+
+00:22:41.370 --> 00:22:41.690
+Criar.
+
+00:22:41.770 --> 00:22:42.050
+Aqui.
+
+00:22:42.970 --> 00:22:43.290
+Uma.
+
+00:22:43.730 --> 00:22:44.050
+Um.
+
+00:22:44.170 --> 00:22:44.470
+Arquivo.
+
+00:22:45.210 --> 00:22:45.530
+E.
+
+00:22:45.610 --> 00:22:45.930
+Botar.
+
+00:22:45.950 --> 00:22:46.170
+Aqui.
+
+00:22:46.770 --> 00:22:47.090
+Códigos.
+
+00:22:47.310 --> 00:22:47.630
+Dinâmicos.
+
+00:22:47.690 --> 00:22:47.850
+Para.
+
+00:22:47.910 --> 00:22:47.970
+Ele.
+
+00:22:47.970 --> 00:22:48.210
+Poder.
+
+00:22:48.210 --> 00:22:48.430
+Fazer.
+
+00:22:48.430 --> 00:22:48.530
+Um.
+
+00:22:48.710 --> 00:22:48.910
+Tem.
+
+00:22:48.950 --> 00:22:49.150
+Um.
+
+00:22:49.270 --> 00:22:49.470
+Entendimento.
+
+00:22:49.830 --> 00:22:50.030
+Melhor.
+
+00:22:50.690 --> 00:22:50.890
+Sobre.
+
+00:22:50.970 --> 00:22:51.030
+O.
+
+00:22:51.190 --> 00:22:51.210
+Está.
+
+00:22:51.390 --> 00:22:51.590
+Sendo.
+
+00:22:51.810 --> 00:22:52.010
+Feito.
+
+00:22:52.270 --> 00:22:52.470
+Então.
+
+00:22:57.280 --> 00:22:57.480
+Vamos.
+
+00:22:57.560 --> 00:22:57.720
+Vamos.
+
+00:22:57.800 --> 00:22:58.000
+Vamos.
+
+00:22:58.140 --> 00:22:58.340
+Vamos.
+
+00:22:58.560 --> 00:22:58.680
+Começar.
+
+00:22:58.720 --> 00:22:58.800
+Do.
+
+00:22:58.940 --> 00:22:59.140
+Começo.
+
+00:22:59.160 --> 00:22:59.320
+Aqui.
+
+00:23:01.140 --> 00:23:01.340
+Qual.
+
+00:23:01.680 --> 00:23:01.880
+Que.
+
+00:23:01.900 --> 00:23:01.940
+A.
+
+00:23:02.000 --> 00:23:02.200
+Função.
+
+00:23:02.220 --> 00:23:02.360
+Aqui.
+
+00:23:02.420 --> 00:23:02.500
+Tem.
+
+00:23:02.520 --> 00:23:02.580
+Um.
+
+00:23:02.600 --> 00:23:02.780
+Textinho.
+
+00:23:02.860 --> 00:23:02.960
+Que.
+
+00:23:02.960 --> 00:23:02.980
+Vocês.
+
+00:23:03.060 --> 00:23:03.240
+Podem.
+
+00:23:03.280 --> 00:23:03.440
+Ler.
+
+00:23:03.480 --> 00:23:03.600
+Aqui.
+
+00:23:03.660 --> 00:23:03.720
+Que.
+
+00:23:03.740 --> 00:23:03.800
+Eu.
+
+00:23:03.880 --> 00:23:04.120
+Escrevi.
+
+00:23:05.000 --> 00:23:05.240
+Que.
+
+00:23:05.400 --> 00:23:05.640
+Basicamente.
+
+00:23:05.820 --> 00:23:06.060
+É.
+
+00:23:06.300 --> 00:23:06.540
+Sobre.
+
+00:23:06.960 --> 00:23:07.200
+Essa.
+
+00:23:07.460 --> 00:23:07.700
+Questão.
+
+00:23:07.700 --> 00:23:07.860
+Das.
+
+00:23:08.060 --> 00:23:08.300
+Notas.
+
+00:23:08.340 --> 00:23:08.580
+Quando.
+
+00:23:08.720 --> 00:23:08.940
+Você.
+
+00:23:09.060 --> 00:23:09.300
+Tem.
+
+00:23:09.820 --> 00:23:10.060
+Muitos.
+
+00:23:10.580 --> 00:23:10.820
+Muitas.
+
+00:23:10.880 --> 00:23:11.120
+Tem.
+
+00:23:11.420 --> 00:23:11.660
+Muitas.
+
+00:23:11.960 --> 00:23:12.200
+Notas.
+
+00:23:12.600 --> 00:23:12.840
+As.
+
+00:23:12.940 --> 00:23:13.080
+Vezes.
+
+00:23:13.220 --> 00:23:13.460
+Fica.
+
+00:23:13.500 --> 00:23:13.600
+Mais.
+
+00:23:13.700 --> 00:23:13.940
+Difícil.
+
+00:23:13.960 --> 00:23:14.080
+De.
+
+00:23:14.080 --> 00:23:14.400
+Encontrar.
+
+00:23:14.420 --> 00:23:14.560
+Por.
+
+00:23:14.620 --> 00:23:14.720
+Mais.
+
+00:23:14.760 --> 00:23:14.860
+Que.
+
+00:23:15.040 --> 00:23:15.260
+Obsidiano.
+
+00:23:15.320 --> 00:23:15.480
+Tem.
+
+00:23:15.560 --> 00:23:15.680
+A.
+
+00:23:16.020 --> 00:23:16.240
+Linkagem.
+
+00:23:16.540 --> 00:23:16.760
+Tem.
+
+00:23:16.820 --> 00:23:16.860
+A.
+
+00:23:16.940 --> 00:23:17.100
+Opção.
+
+00:23:17.200 --> 00:23:17.320
+Do.
+
+00:23:17.420 --> 00:23:17.640
+Como.
+
+00:23:18.060 --> 00:23:18.280
+A.
+
+00:23:19.040 --> 00:23:19.260
+Pesquisa.
+
+00:23:19.340 --> 00:23:19.480
+Fica.
+
+00:23:19.540 --> 00:23:19.700
+Muito.
+
+00:23:20.020 --> 00:23:20.240
+Fácil.
+
+00:23:20.720 --> 00:23:20.940
+As.
+
+00:23:21.100 --> 00:23:21.320
+Vezes.
+
+00:23:22.680 --> 00:23:22.900
+Como.
+
+00:23:23.020 --> 00:23:23.180
+A.
+
+00:23:23.280 --> 00:23:23.360
+Vezes.
+
+00:23:23.440 --> 00:23:23.500
+Que.
+
+00:23:23.580 --> 00:23:23.600
+Vai.
+
+00:23:23.740 --> 00:23:23.960
+Começar.
+
+00:23:24.040 --> 00:23:24.160
+Na.
+
+00:23:24.200 --> 00:23:24.420
+Crescer.
+
+00:23:24.440 --> 00:23:24.580
+Fica.
+
+00:23:24.580 --> 00:23:24.640
+Mais.
+
+00:23:24.840 --> 00:23:25.060
+Difícil.
+
+00:23:25.500 --> 00:23:25.720
+Inclusive.
+
+00:23:25.800 --> 00:23:25.960
+De.
+
+00:23:26.840 --> 00:23:27.060
+Correlacionar.
+
+00:23:27.060 --> 00:23:27.160
+As.
+
+00:23:27.240 --> 00:23:27.460
+Vezes.
+
+00:23:27.480 --> 00:23:27.540
+E.
+
+00:23:27.620 --> 00:23:27.800
+Conectar.
+
+00:23:28.060 --> 00:23:28.280
+Elas.
+
+00:23:28.760 --> 00:23:28.980
+E.
+
+00:23:29.240 --> 00:23:29.460
+Esse.
+
+00:23:29.600 --> 00:23:29.820
+Plugin.
+
+00:23:29.920 --> 00:23:30.080
+Ele.
+
+00:23:30.720 --> 00:23:30.940
+Basicamente.
+
+00:23:31.160 --> 00:23:31.380
+Resolve.
+
+00:23:31.420 --> 00:23:31.540
+Esse.
+
+00:23:31.780 --> 00:23:32.000
+Problema.
+
+00:23:32.240 --> 00:23:32.460
+Ele.
+
+00:23:33.060 --> 00:23:33.280
+Potencializa.
+
+00:23:33.740 --> 00:23:33.960
+Essa.
+
+00:23:34.080 --> 00:23:34.300
+Nossa.
+
+00:23:34.420 --> 00:23:34.640
+Base.
+
+00:23:34.740 --> 00:23:34.820
+De.
+
+00:23:34.860 --> 00:23:35.040
+Dados.
+
+00:23:35.080 --> 00:23:35.200
+Para.
+
+00:23:35.260 --> 00:23:35.440
+Se tornar.
+
+00:23:35.560 --> 00:23:35.660
+Um.
+
+00:23:35.720 --> 00:23:35.840
+Segundo.
+
+00:23:35.840 --> 00:23:36.220
+Cérebro.
+
+00:23:36.280 --> 00:23:36.500
+A gente.
+
+00:23:36.580 --> 00:23:36.620
+Pode.
+
+00:23:36.740 --> 00:23:36.980
+Fazer.
+
+00:23:37.840 --> 00:23:38.080
+Perguntas.
+
+00:23:38.080 --> 00:23:38.300
+Como.
+
+00:23:38.360 --> 00:23:38.540
+Vocês.
+
+00:23:38.620 --> 00:23:38.860
+Viram.
+
+00:23:38.880 --> 00:23:39.040
+Aqui.
+
+00:23:39.380 --> 00:23:39.620
+Diretamente.
+
+00:23:39.740 --> 00:23:39.860
+Para.
+
+00:23:40.300 --> 00:23:40.540
+Pastas.
+
+00:23:40.540 --> 00:23:40.700
+Ou.
+
+00:23:40.780 --> 00:23:41.020
+Para.
+
+00:23:41.520 --> 00:23:41.760
+Para.
+
+00:23:41.780 --> 00:23:42.020
+Para.
+
+00:23:42.360 --> 00:23:42.600
+Inteira.
+
+00:23:42.660 --> 00:23:42.720
+E.
+
+00:23:42.760 --> 00:23:42.820
+Ele.
+
+00:23:42.860 --> 00:23:43.100
+Consegue.
+
+00:23:43.280 --> 00:23:43.520
+Responder.
+
+00:23:44.100 --> 00:23:44.340
+Em.
+
+00:23:44.400 --> 00:23:44.620
+Grande.
+
+00:23:44.840 --> 00:23:45.080
+Parte.
+
+00:23:45.460 --> 00:23:45.700
+O.
+
+00:23:45.740 --> 00:23:45.760
+Que.
+
+00:23:45.860 --> 00:23:45.920
+A gente.
+
+00:23:46.000 --> 00:23:46.220
+Quiser.
+
+00:23:46.220 --> 00:23:46.380
+Eu.
+
+00:23:46.620 --> 00:23:46.820
+Fiz.
+
+00:23:46.900 --> 00:23:47.100
+Festas.
+
+00:23:47.160 --> 00:23:47.240
+Bem.
+
+00:23:47.540 --> 00:23:47.740
+Avançados.
+
+00:23:47.960 --> 00:23:48.160
+Comparando.
+
+00:23:48.220 --> 00:23:48.360
+Uma.
+
+00:23:48.480 --> 00:23:48.680
+Nota.
+
+00:23:48.720 --> 00:23:48.800
+Com.
+
+00:23:48.960 --> 00:23:49.160
+Outra.
+
+00:23:49.180 --> 00:23:49.380
+Aqui.
+
+00:23:49.720 --> 00:23:49.920
+E.
+
+00:23:50.280 --> 00:23:50.480
+Incrível.
+
+00:23:50.540 --> 00:23:50.620
+O.
+
+00:23:50.740 --> 00:23:50.940
+Resultado.
+
+00:23:50.980 --> 00:23:51.080
+Que.
+
+00:23:51.120 --> 00:23:51.140
+Eu.
+
+00:23:51.180 --> 00:23:51.380
+Consegui.
+
+00:23:51.420 --> 00:23:51.520
+Ter.
+
+00:23:51.580 --> 00:23:51.700
+Com.
+
+00:23:51.740 --> 00:23:51.920
+Ele.
+
+00:23:52.340 --> 00:23:52.420
+Então.
+
+00:23:52.540 --> 00:23:52.720
+Assim.
+
+00:23:52.980 --> 00:23:53.180
+É.
+
+00:23:53.280 --> 00:23:53.300
+Uma.
+
+00:23:53.480 --> 00:23:53.680
+Ferramenta.
+
+00:23:54.360 --> 00:23:54.560
+Que.
+
+00:23:55.660 --> 00:23:55.860
+Muda.
+
+00:23:56.100 --> 00:23:56.340
+Completamente.
+
+00:23:56.340 --> 00:23:56.500
+O.
+
+00:23:56.560 --> 00:23:56.660
+Jogo.
+
+00:23:57.160 --> 00:23:57.400
+Nosso.
+
+00:23:57.460 --> 00:23:57.620
+Dentro.
+
+00:23:57.720 --> 00:23:57.800
+Do.
+
+00:23:57.880 --> 00:23:58.120
+Obsídio.
+
+00:23:59.060 --> 00:23:59.300
+E.
+
+00:23:59.380 --> 00:23:59.580
+Aqui.
+
+00:23:59.640 --> 00:23:59.760
+O.
+
+00:23:59.820 --> 00:23:59.840
+Que.
+
+00:23:59.920 --> 00:24:00.060
+Eu.
+
+00:24:00.160 --> 00:24:00.400
+Quero.
+
+00:24:00.780 --> 00:24:01.020
+Mostrar.
+
+00:24:01.060 --> 00:24:01.160
+Para.
+
+00:24:01.240 --> 00:24:01.480
+Vocês.
+
+00:24:01.720 --> 00:24:01.960
+É.
+
+00:24:02.000 --> 00:24:02.160
+Que.
+
+00:24:03.400 --> 00:24:03.640
+Com.
+
+00:24:03.760 --> 00:24:04.000
+Ele.
+
+00:24:04.720 --> 00:24:04.960
+Utilizando.
+
+00:24:05.000 --> 00:24:05.080
+Esse.
+
+00:24:05.160 --> 00:24:05.400
+Potencial.
+
+00:24:05.640 --> 00:24:05.880
+Dele.
+
+00:24:06.180 --> 00:24:06.420
+A.
+
+00:24:06.900 --> 00:24:07.140
+Capacidade.
+
+00:24:07.260 --> 00:24:07.320
+De.
+
+00:24:21.560 --> 00:24:21.800
+Conversar.
+
+00:24:22.840 --> 00:24:23.080
+Com.
+
+00:24:23.080 --> 00:24:23.160
+Ele.
+
+00:24:36.150 --> 00:24:36.430
+Tem.
+
+00:24:37.550 --> 00:24:37.830
+Porque.
+
+00:24:37.830 --> 00:24:37.930
+Se.
+
+00:24:37.990 --> 00:24:38.270
+Que.
+
+00:24:38.270 --> 00:24:38.290
+Que.
+
+00:24:38.430 --> 00:24:38.710
+Faz.
+
+00:24:38.930 --> 00:24:39.210
+Né.
+
+00:24:39.650 --> 00:24:39.930
+Funciona.
+
+00:24:39.930 --> 00:24:40.170
+O.
+
+00:24:41.430 --> 00:24:41.710
+Obsídio.
+
+00:24:41.850 --> 00:24:41.990
+Em.
+
+00:24:41.990 --> 00:24:42.110
+Si.
+
+00:24:42.130 --> 00:24:42.270
+Como.
+
+00:24:42.330 --> 00:24:42.390
+É.
+
+00:24:42.390 --> 00:24:42.610
+Funciona.
+
+00:24:42.670 --> 00:24:42.930
+O.
+
+00:24:43.030 --> 00:24:43.110
+Smart.
+
+00:24:43.530 --> 00:24:43.810
+Connections.
+
+00:24:44.690 --> 00:24:44.970
+O.
+
+00:24:44.970 --> 00:24:45.190
+Que.
+
+00:24:45.250 --> 00:24:45.310
+Ele.
+
+00:24:45.310 --> 00:24:45.430
+Faz.
+
+00:24:45.570 --> 00:24:45.670
+É.
+
+00:24:45.690 --> 00:24:45.770
+Quando.
+
+00:24:45.870 --> 00:24:46.050
+Você.
+
+00:24:46.250 --> 00:24:46.450
+Instala.
+
+00:24:46.590 --> 00:24:46.790
+Ele.
+
+00:24:47.210 --> 00:24:47.410
+O.
+
+00:24:47.630 --> 00:24:47.830
+Processo.
+
+00:24:48.010 --> 00:24:48.210
+Inicial.
+
+00:24:48.310 --> 00:24:48.510
+Dele.
+
+00:24:48.550 --> 00:24:48.650
+Tá.
+
+00:24:48.670 --> 00:24:48.810
+Aqui.
+
+00:24:49.970 --> 00:24:50.170
+Ele.
+
+00:24:50.790 --> 00:24:50.930
+Vai.
+
+00:24:51.150 --> 00:24:51.350
+Pegar.
+
+00:24:51.530 --> 00:24:51.730
+Todas.
+
+00:24:51.770 --> 00:24:51.930
+Suas.
+
+00:24:52.090 --> 00:24:52.290
+Notas.
+
+00:24:52.330 --> 00:24:52.530
+Vai.
+
+00:24:52.710 --> 00:24:52.910
+Ler.
+
+00:24:53.030 --> 00:24:53.230
+Todas.
+
+00:24:53.250 --> 00:24:53.450
+Suas.
+
+00:24:53.670 --> 00:24:53.870
+Notas.
+
+00:24:54.070 --> 00:24:54.270
+Ele.
+
+00:24:54.370 --> 00:24:54.430
+Vai.
+
+00:24:54.550 --> 00:24:54.750
+Quebrar.
+
+00:24:54.810 --> 00:24:54.890
+Em.
+
+00:24:55.010 --> 00:24:55.210
+Pequenos.
+
+00:24:55.630 --> 00:24:55.830
+Pedacinhos.
+
+00:24:56.190 --> 00:24:56.390
+Eu.
+
+00:24:56.630 --> 00:24:56.830
+Falei.
+
+00:24:56.890 --> 00:24:57.070
+Sobre.
+
+00:24:57.250 --> 00:24:57.450
+Isso.
+
+00:24:58.210 --> 00:24:58.410
+Eu.
+
+00:24:59.770 --> 00:24:59.970
+Acredito.
+
+00:24:59.970 --> 00:25:00.130
+Não.
+
+00:25:00.170 --> 00:25:00.270
+Foi.
+
+00:25:00.370 --> 00:25:00.570
+Na.
+
+00:25:00.710 --> 00:25:00.830
+Aula.
+
+00:25:00.850 --> 00:25:00.910
+De.
+
+00:25:01.150 --> 00:25:01.350
+Base.
+
+00:25:01.470 --> 00:25:01.570
+Eu.
+
+00:25:01.650 --> 00:25:01.750
+Falei.
+
+00:25:01.810 --> 00:25:01.970
+Sobre.
+
+00:25:02.010 --> 00:25:02.150
+Isso.
+
+00:25:02.190 --> 00:25:02.290
+Deixa.
+
+00:25:02.370 --> 00:25:02.450
+Ver.
+
+00:25:02.510 --> 00:25:02.570
+Se.
+
+00:25:02.630 --> 00:25:02.670
+Eu.
+
+00:25:02.670 --> 00:25:02.730
+Tenho.
+
+00:25:02.790 --> 00:25:02.830
+Essa.
+
+00:25:02.930 --> 00:25:03.030
+Aula.
+
+00:25:03.130 --> 00:25:03.290
+Aqui.
+
+00:25:04.530 --> 00:25:04.730
+Escrita.
+
+00:25:06.750 --> 00:25:06.950
+Eu.
+
+00:25:07.210 --> 00:25:07.410
+Posso.
+
+00:25:07.410 --> 00:25:07.690
+Mostrar.
+
+00:25:07.750 --> 00:25:07.870
+Pra.
+
+00:25:08.010 --> 00:25:08.330
+Vocês.
+
+00:25:08.650 --> 00:25:08.970
+Ah.
+
+00:25:09.050 --> 00:25:09.210
+Tá.
+
+00:25:09.230 --> 00:25:09.290
+No.
+
+00:25:09.430 --> 00:25:09.650
+Outro.
+
+00:25:10.250 --> 00:25:10.570
+Cofre.
+
+00:25:10.630 --> 00:25:10.830
+Aqui.
+
+00:25:10.890 --> 00:25:11.190
+Peraí.
+
+00:25:11.250 --> 00:25:11.410
+Vou.
+
+00:25:11.550 --> 00:25:11.870
+Mostrar.
+
+00:25:12.190 --> 00:25:12.510
+Eu.
+
+00:25:12.670 --> 00:25:12.730
+Que.
+
+00:25:12.750 --> 00:25:12.810
+É.
+
+00:25:12.830 --> 00:25:12.870
+Bem.
+
+00:25:13.050 --> 00:25:13.370
+Interessante.
+
+00:25:13.450 --> 00:25:13.610
+Vocês.
+
+00:25:13.870 --> 00:25:14.190
+Entenderem.
+
+00:25:14.250 --> 00:25:14.510
+Isso.
+
+00:25:15.690 --> 00:25:16.010
+Sua.
+
+00:25:16.110 --> 00:25:16.270
+Mente.
+
+00:25:16.370 --> 00:25:16.690
+Lendária.
+
+00:25:18.950 --> 00:25:19.270
+Tá.
+
+00:25:19.830 --> 00:25:20.150
+Chat.
+
+00:25:20.210 --> 00:25:20.530
+Base.
+
+00:25:23.980 --> 00:25:24.300
+Esse.
+
+00:25:24.460 --> 00:25:24.620
+Aqui.
+
+00:25:24.620 --> 00:25:24.680
+Tem.
+
+00:25:24.840 --> 00:25:25.020
+Alguma.
+
+00:25:25.240 --> 00:25:25.440
+Coisa.
+
+00:25:25.720 --> 00:25:25.920
+Smart.
+
+00:25:26.540 --> 00:25:26.740
+Connections.
+
+00:25:35.530 --> 00:25:35.730
+Deixa.
+
+00:25:35.810 --> 00:25:35.910
+Ver.
+
+00:25:35.930 --> 00:25:35.990
+Se.
+
+00:25:36.010 --> 00:25:36.090
+Eu.
+
+00:25:36.110 --> 00:25:36.170
+Tenho.
+
+00:25:36.230 --> 00:25:36.390
+Aqui.
+
+00:25:38.830 --> 00:25:39.030
+Chat.
+
+00:25:39.250 --> 00:25:39.450
+Base.
+
+00:25:42.090 --> 00:25:42.290
+Tá.
+
+00:25:42.370 --> 00:25:42.570
+Aqui.
+
+00:25:43.710 --> 00:25:43.910
+Aqui.
+
+00:25:44.050 --> 00:25:44.070
+Eu.
+
+00:25:44.150 --> 00:25:44.290
+Tenho.
+
+00:25:44.350 --> 00:25:44.430
+A.
+
+00:25:44.630 --> 00:25:44.830
+Documentação.
+
+00:25:44.870 --> 00:25:44.970
+Para.
+
+00:25:45.250 --> 00:25:45.450
+Entendem.
+
+00:25:45.530 --> 00:25:45.730
+Essa.
+
+00:25:46.010 --> 00:25:46.210
+Documentação.
+
+00:25:46.350 --> 00:25:46.550
+Queria.
+
+00:25:46.630 --> 00:25:46.790
+Que.
+
+00:25:47.130 --> 00:25:47.330
+Abrir.
+
+00:25:47.890 --> 00:25:48.090
+É.
+
+00:25:48.130 --> 00:25:48.210
+Que.
+
+00:25:48.310 --> 00:25:48.470
+Consigo.
+
+00:25:48.530 --> 00:25:48.730
+Mostrar.
+
+00:25:48.810 --> 00:25:48.870
+Para.
+
+00:25:48.950 --> 00:25:49.150
+Vocês.
+
+00:25:51.210 --> 00:25:51.410
+Então.
+
+00:25:51.510 --> 00:25:51.710
+Aqui.
+
+00:25:51.750 --> 00:25:51.810
+O.
+
+00:25:51.990 --> 00:25:52.190
+É.
+
+00:25:52.330 --> 00:25:52.530
+Exatamente.
+
+00:25:52.610 --> 00:25:52.770
+Só.
+
+00:25:52.770 --> 00:25:52.870
+Que.
+
+00:25:52.910 --> 00:25:53.030
+Ele.
+
+00:25:53.130 --> 00:25:53.190
+Faz.
+
+00:25:54.150 --> 00:25:54.350
+Ele.
+
+00:25:54.490 --> 00:25:54.650
+Pega.
+
+00:25:54.710 --> 00:25:54.790
+Os.
+
+00:25:55.010 --> 00:25:55.210
+Documentos.
+
+00:25:55.250 --> 00:25:55.370
+Que.
+
+00:25:55.410 --> 00:25:55.430
+São.
+
+00:25:55.490 --> 00:25:55.570
+As.
+
+00:25:55.730 --> 00:25:55.930
+Notas.
+
+00:25:56.950 --> 00:25:57.150
+Ele.
+
+00:25:57.230 --> 00:25:57.350
+Vai.
+
+00:25:57.610 --> 00:25:57.810
+Lista.
+
+00:25:58.010 --> 00:25:58.210
+Eles.
+
+00:25:58.690 --> 00:25:58.890
+Vai.
+
+00:25:59.170 --> 00:25:59.370
+Quebrar.
+
+00:25:59.370 --> 00:25:59.570
+Eles.
+
+00:25:59.690 --> 00:25:59.850
+Em.
+
+00:26:00.150 --> 00:26:00.390
+Pedacinhos.
+
+00:26:01.110 --> 00:26:01.350
+E.
+
+00:26:01.390 --> 00:26:01.490
+Vai.
+
+00:26:01.690 --> 00:26:01.930
+Salvar.
+
+00:26:02.050 --> 00:26:02.290
+Isso.
+
+00:26:03.130 --> 00:26:03.370
+Localmente.
+
+00:26:03.890 --> 00:26:04.130
+Uma.
+
+00:26:04.230 --> 00:26:04.370
+Coisa.
+
+00:26:04.470 --> 00:26:04.690
+Chamada.
+
+00:26:05.110 --> 00:26:05.350
+Vetor.
+
+00:26:05.470 --> 00:26:05.690
+Ou.
+
+00:26:05.790 --> 00:26:05.930
+Seja.
+
+00:26:05.950 --> 00:26:06.050
+Um.
+
+00:26:06.370 --> 00:26:06.610
+Banco.
+
+00:26:06.690 --> 00:26:06.750
+De.
+
+00:26:06.810 --> 00:26:07.010
+Dados.
+
+00:26:07.030 --> 00:26:07.270
+Local.
+
+00:26:07.750 --> 00:26:07.990
+Então.
+
+00:26:08.010 --> 00:26:08.090
+É.
+
+00:26:08.110 --> 00:26:08.270
+Basicamente.
+
+00:26:08.410 --> 00:26:08.650
+Isso.
+
+00:26:09.690 --> 00:26:09.930
+Que.
+
+00:26:09.930 --> 00:26:09.950
+Eu.
+
+00:26:10.030 --> 00:26:10.210
+Tinha.
+
+00:26:10.230 --> 00:26:10.290
+Um.
+
+00:26:10.310 --> 00:26:10.430
+Print.
+
+00:26:10.550 --> 00:26:10.710
+Disso.
+
+00:26:10.710 --> 00:26:10.850
+Aqui.
+
+00:26:11.430 --> 00:26:11.670
+Pra.
+
+00:26:11.850 --> 00:26:12.090
+Deixar.
+
+00:26:12.490 --> 00:26:12.730
+Junto.
+
+00:26:13.290 --> 00:26:13.530
+Da.
+
+00:26:13.790 --> 00:26:14.030
+Nota.
+
+00:26:14.870 --> 00:26:15.110
+Pra.
+
+00:26:15.230 --> 00:26:15.290
+Ficar.
+
+00:26:15.330 --> 00:26:15.430
+Mais.
+
+00:26:15.570 --> 00:26:15.810
+Fácil.
+
+00:26:15.850 --> 00:26:15.990
+Quando.
+
+00:26:16.070 --> 00:26:16.110
+Eu.
+
+00:26:16.210 --> 00:26:16.410
+Subir.
+
+00:26:16.530 --> 00:26:16.770
+Isso.
+
+00:26:16.870 --> 00:26:16.970
+Que.
+
+00:26:17.030 --> 00:26:17.130
+Como.
+
+00:26:17.230 --> 00:26:17.390
+Uma.
+
+00:26:17.490 --> 00:26:17.670
+Aula.
+
+00:26:17.730 --> 00:26:17.850
+Pra.
+
+00:26:17.930 --> 00:26:18.170
+Vocês.
+
+00:26:19.570 --> 00:26:19.810
+Não.
+
+00:26:19.850 --> 00:26:19.970
+Só.
+
+00:26:20.010 --> 00:26:20.230
+Olha.
+
+00:26:20.290 --> 00:26:20.530
+Aqui.
+
+00:26:20.750 --> 00:26:20.990
+Não.
+
+00:26:21.830 --> 00:26:22.070
+Perder.
+
+00:26:26.700 --> 00:26:26.940
+Vou.
+
+00:26:27.120 --> 00:26:27.360
+Colocar.
+
+00:26:27.400 --> 00:26:27.620
+Aqui.
+
+00:26:27.620 --> 00:26:27.820
+Pra.
+
+00:26:27.960 --> 00:26:28.020
+Ficar.
+
+00:26:28.100 --> 00:26:28.160
+Mais.
+
+00:26:28.220 --> 00:26:28.380
+Fácil.
+
+00:26:28.460 --> 00:26:28.520
+De.
+
+00:26:28.640 --> 00:26:28.800
+Entender.
+
+00:26:32.720 --> 00:26:32.880
+Agora.
+
+00:26:32.980 --> 00:26:33.140
+Tem.
+
+00:26:33.180 --> 00:26:33.240
+Essa.
+
+00:26:33.540 --> 00:26:33.700
+Fotinha.
+
+00:26:33.760 --> 00:26:33.860
+Aqui.
+
+00:26:33.900 --> 00:26:34.000
+Pra.
+
+00:26:34.060 --> 00:26:34.220
+Ficar.
+
+00:26:34.260 --> 00:26:34.360
+Mais.
+
+00:26:34.780 --> 00:26:34.940
+Ilustrado.
+
+00:26:37.160 --> 00:26:37.320
+Então.
+
+00:26:37.380 --> 00:26:37.440
+O.
+
+00:26:37.520 --> 00:26:37.640
+Ele.
+
+00:26:37.740 --> 00:26:37.900
+Faz.
+
+00:26:38.020 --> 00:26:38.180
+Né.
+
+00:26:38.800 --> 00:26:38.960
+Ele.
+
+00:26:39.080 --> 00:26:39.240
+Vai.
+
+00:26:39.540 --> 00:26:39.700
+Processar.
+
+00:26:39.980 --> 00:26:40.140
+Todas.
+
+00:26:40.520 --> 00:26:40.680
+Elas.
+
+00:26:40.880 --> 00:26:41.040
+Ele.
+
+00:26:41.120 --> 00:26:41.200
+Vai.
+
+00:26:41.540 --> 00:26:41.780
+Criar.
+
+00:26:41.800 --> 00:26:41.940
+Uma.
+
+00:26:42.060 --> 00:26:42.300
+Pasta.
+
+00:26:42.620 --> 00:26:42.860
+Chamada.
+
+00:26:42.960 --> 00:26:43.200
+Smart.
+
+00:26:43.660 --> 00:26:43.900
+Connections.
+
+00:26:44.200 --> 00:26:44.440
+Um.
+
+00:26:44.620 --> 00:26:44.860
+Arquivo.
+
+00:26:45.020 --> 00:26:45.260
+Chamada.
+
+00:26:45.500 --> 00:26:45.740
+Embedding.
+
+00:26:45.920 --> 00:26:46.160
+Ponto.
+
+00:26:46.220 --> 00:26:46.460
+Jason.
+
+00:26:47.040 --> 00:26:47.280
+Esse.
+
+00:26:47.580 --> 00:26:47.820
+Arquivo.
+
+00:26:47.960 --> 00:26:48.200
+Inclusive.
+
+00:26:48.340 --> 00:26:48.580
+Ele.
+
+00:26:48.640 --> 00:26:48.780
+Pode.
+
+00:26:48.880 --> 00:26:48.960
+Ficar.
+
+00:26:49.020 --> 00:26:49.100
+Um.
+
+00:26:49.180 --> 00:26:49.220
+Pouco.
+
+00:26:49.520 --> 00:26:49.760
+Pesado.
+
+00:26:49.820 --> 00:26:49.940
+Então.
+
+00:26:50.000 --> 00:26:50.100
+Eles.
+
+00:26:50.460 --> 00:26:50.700
+Aconselham.
+
+00:26:50.820 --> 00:26:51.060
+A.
+
+00:26:51.900 --> 00:26:52.140
+Desvincular.
+
+00:26:52.180 --> 00:26:52.400
+Ele.
+
+00:26:52.440 --> 00:26:52.520
+Da.
+
+00:26:52.660 --> 00:26:52.900
+Sincronização.
+
+00:26:52.900 --> 00:26:53.140
+Com.
+
+00:26:53.280 --> 00:26:53.480
+O.
+
+00:26:53.480 --> 00:26:53.580
+Celular.
+
+00:26:53.700 --> 00:26:53.760
+Que.
+
+00:26:53.840 --> 00:26:53.920
+Isso.
+
+00:26:53.960 --> 00:26:54.060
+Pode.
+
+00:26:54.220 --> 00:26:54.420
+Travar.
+
+00:26:54.840 --> 00:26:55.040
+O.
+
+00:26:55.360 --> 00:26:55.560
+Obsidiano.
+
+00:26:55.600 --> 00:26:55.740
+O.
+
+00:26:55.800 --> 00:26:56.000
+Celular.
+
+00:26:56.900 --> 00:26:57.100
+Então.
+
+00:26:57.920 --> 00:26:58.120
+Pra.
+
+00:26:58.200 --> 00:26:58.300
+Quem.
+
+00:26:58.340 --> 00:26:58.400
+Tá.
+
+00:26:58.620 --> 00:26:58.820
+Utilizando.
+
+00:26:58.900 --> 00:26:58.960
+O.
+
+00:26:59.000 --> 00:26:59.100
+Smart.
+
+00:26:59.480 --> 00:26:59.680
+Connection.
+
+00:26:59.720 --> 00:26:59.920
+Já.
+
+00:27:00.300 --> 00:27:00.500
+E.
+
+00:27:00.560 --> 00:27:00.660
+Tá.
+
+00:27:00.700 --> 00:27:00.800
+Com.
+
+00:27:00.880 --> 00:27:00.900
+O.
+
+00:27:00.940 --> 00:27:01.060
+Celular.
+
+00:27:01.420 --> 00:27:01.620
+Travando.
+
+00:27:01.780 --> 00:27:01.980
+Já.
+
+00:27:02.100 --> 00:27:02.300
+Aconteceu.
+
+00:27:02.340 --> 00:27:02.440
+Com.
+
+00:27:02.760 --> 00:27:03.020
+Esse.
+
+00:27:03.700 --> 00:27:03.880
+Arquivo.
+
+00:27:04.340 --> 00:27:04.600
+Você.
+
+00:27:04.740 --> 00:27:04.840
+Tem.
+
+00:27:04.900 --> 00:27:05.160
+Muitas.
+
+00:27:05.160 --> 00:27:05.380
+Notas.
+
+00:27:05.400 --> 00:27:05.540
+Ele.
+
+00:27:05.580 --> 00:27:05.660
+Fica.
+
+00:27:05.800 --> 00:27:06.060
+Pesado.
+
+00:27:06.100 --> 00:27:06.180
+Com.
+
+00:27:06.200 --> 00:27:06.260
+O.
+
+00:27:06.580 --> 00:27:06.820
+Celular.
+
+00:27:06.820 --> 00:27:07.020
+Então.
+
+00:27:07.820 --> 00:27:08.080
+Recomendado.
+
+00:27:08.100 --> 00:27:08.200
+Que.
+
+00:27:08.220 --> 00:27:08.480
+Você.
+
+00:27:09.720 --> 00:27:09.980
+É.
+
+00:27:10.300 --> 00:27:10.560
+Pegar.
+
+00:27:10.600 --> 00:27:10.740
+Isso.
+
+00:27:10.760 --> 00:27:10.980
+Aqui.
+
+00:27:11.980 --> 00:27:12.240
+Esse.
+
+00:27:12.540 --> 00:27:12.800
+Esse.
+
+00:27:12.920 --> 00:27:13.060
+Nome.
+
+00:27:13.160 --> 00:27:13.300
+Aqui.
+
+00:27:13.700 --> 00:27:13.960
+Na.
+
+00:27:14.100 --> 00:27:14.180
+Hora.
+
+00:27:14.260 --> 00:27:14.300
+De.
+
+00:27:14.300 --> 00:27:17.900
+sincronização lá, marcar para que ele
+não suba.
+
+00:27:17.920 --> 00:27:19.060
+Então é só fazer isso.
+
+00:27:19.200 --> 00:27:21.420
+Eu posso mostrar para vocês em outro
+vídeo sobre isso.
+
+00:27:21.720 --> 00:27:26.420
+O processo inicial aqui, ele às vezes
+demora um pouco, baseado no número de
+
+00:27:26.420 --> 00:27:29.520
+notas que você tem, porque ele
+basicamente vai fazer esse processo
+
+00:27:29.520 --> 00:27:29.880
+inteiro.
+
+00:27:30.100 --> 00:27:33.620
+Então não que você não vai poder
+utilizar o Obsidian enquanto isso, mas o
+
+00:27:33.620 --> 00:27:37.480
+Smart Connection ele vai ficar
+carregando e fazendo todo esse trabalho.
+
+00:27:37.780 --> 00:27:38.860
+E esse trabalho tem um custo.
+
+00:27:38.860 --> 00:27:43.700
+Ele vai utilizar a tua API para poder
+fazer isso, porque ele vai usar o chat
+
+00:27:43.700 --> 00:27:48.580
+GPT, ele vai enviar as informações para
+o chat GPT para ele quebrar isso, ou
+
+00:27:48.580 --> 00:27:54.940
+seja, para ele quebrar isso e organizar
+esses vetores e salvar tudo isso no seu
+
+00:27:54.940 --> 00:27:55.360
+computador.
+
+00:27:55.720 --> 00:28:00.400
+Então isso vai ter, vai exigir um
+cálculo via API.
+
+00:28:00.960 --> 00:28:04.940
+Só que é assim, esse cálculo aqui,
+estimado, por exemplo, para 100 mil
+
+00:28:04.940 --> 00:28:09.360
+caracteres, em 2021 era estimado para
+ser, custar em média de um dólar.
+
+00:28:09.600 --> 00:28:13.320
+Eu fiz pedir para o chat GPT fazer os
+cálculos de novo aqui, atualizado agora,
+
+00:28:15.280 --> 00:28:21.860
+no finalzinho do mês agora, do mês 6 de
+2023, e custa menos de 10 centavos para
+
+00:28:21.860 --> 00:28:22.360
+fazer isso.
+
+00:28:22.800 --> 00:28:26.160
+Então, menos de aqui, menos de 5
+centavos.
+
+00:28:26.520 --> 00:28:30.460
+Então assim, é bem barato para fazer
+esse processo de enviar as notas.
+
+00:28:30.460 --> 00:28:33.920
+É uma coisa que eu tinha uma preocupação
+quando eu fui instalar o Smart
+
+00:28:33.920 --> 00:28:35.500
+Connections com o cérebro naval.
+
+00:28:35.980 --> 00:28:37.920
+Eu tive esse medo.
+
+00:28:38.160 --> 00:28:40.660
+Então eu vou fazer isso aqui com vocês,
+para vocês verem.
+
+00:28:41.360 --> 00:28:43.840
+Eu fiquei com um pouco de medo, com um
+certo receio, assim, do que quanto
+
+00:28:43.840 --> 00:28:47.640
+custaria para poder fazer esse trabalho.
+
+00:28:47.840 --> 00:28:53.120
+Inclusive, vou mostrar para vocês aqui
+agora os custos.
+
+00:28:53.180 --> 00:28:54.660
+Eu fiz vários, não foi só isso aí.
+
+00:28:54.720 --> 00:29:00.700
+Eu fiz vários testes hoje com o chat
+GPT, aqui, e custou até agora 28
+
+00:29:00.700 --> 00:29:01.340
+centavos.
+
+00:29:02.440 --> 00:29:07.520
+Então, são 16 da manhã, eu já gravei 3
+aulas para vocês, fiz vários testes
+
+00:29:07.520 --> 00:29:09.280
+antes das aulas também.
+
+00:29:10.820 --> 00:29:13.360
+Então, basicamente, vocês têm aqui...
+
+00:29:13.980 --> 00:29:14.880
+Não gasta muito.
+
+00:29:14.980 --> 00:29:19.160
+Um dia que eu usei bastante, foi 75
+centavos, sendo que eu usei muito também
+
+00:29:19.160 --> 00:29:23.380
+o chat GPT -4 aqui, que ele é 20 ou 30
+vezes mais caro.
+
+00:29:24.140 --> 00:29:25.700
+Então eu vou perguntar para ele aqui.
+
+00:29:26.020 --> 00:29:27.380
+Vou perguntar para o chat GPT.
+
+00:29:27.800 --> 00:29:29.020
+Vou abrir aqui, ó.
+
+00:29:32.920 --> 00:29:46.040
+Pesquise na internet e me diga quantas
+vezes é mais caro fazer uma pesquisa com
+
+00:29:46.040 --> 00:29:55.880
+o chat GPT -4 via API do que é com o 3
+.5 Turbo.
+
+00:29:57.260 --> 00:29:59.540
+Turbo 4K.
+
+00:30:00.880 --> 00:30:13.840
+Faça essa comparação também com o 3 .5
+Turbo 16K com o chat GPT
+
+00:30:13.840 --> 00:30:14.200
+-4.
+
+00:30:21.340 --> 00:30:22.680
+Então vamos ver o que ele vai pesquisar.
+
+00:30:22.720 --> 00:30:25.580
+Enquanto isso, a gente vai analisando e
+conversando aqui.
+
+00:30:26.320 --> 00:30:29.480
+Então, assim, aqui, mais ou menos é isso
+o custo que vai ter.
+
+00:30:29.540 --> 00:30:30.640
+Até vou fazer com vocês.
+
+00:30:32.120 --> 00:30:33.940
+Eu vou pegar ali quanto é que foi.
+
+00:30:34.500 --> 00:30:36.180
+Eu vou pegar a minha API que está aqui.
+
+00:30:37.020 --> 00:30:38.040
+Vamos ver aqui, ó.
+
+00:30:38.560 --> 00:30:39.920
+É 20 vezes mais caro.
+
+00:30:41.960 --> 00:30:44.000
+O chat GPT -4 tem um contexto de 8K.
+
+00:30:45.720 --> 00:30:48.100
+E agora vamos comparar com o de 32K.
+
+00:30:48.980 --> 00:30:49.540
+16K, né?
+
+00:30:49.540 --> 00:30:54.020
+Ó, o chat GPT -4 32K.
+
+00:30:55.620 --> 00:31:01.580
+Não, mas eu queria comparar com o chat
+GPT ele é 20 vezes mais caro também do
+
+00:31:01.580 --> 00:31:02.240
+que o 16.
+
+00:31:02.760 --> 00:31:08.620
+Eu quero que ele compare o 16K com o
+chat
+
+00:31:08.620 --> 00:31:09.080
+GPT.
+
+00:31:12.180 --> 00:31:22.340
+Compare o 3 .5 16K com o chat GPT -4 com
+o 8K.
+
+00:31:23.400 --> 00:31:24.640
+Quero essa comparação aqui.
+
+00:31:32.000 --> 00:31:33.040
+É 10 vezes mais caro, claro.
+
+00:31:33.780 --> 00:31:36.020
+É o horário, gente.
+
+00:31:37.060 --> 00:31:38.600
+É 10 vezes mais caro.
+
+00:31:39.000 --> 00:31:40.880
+Então, assim, é o que está dizendo,
+inclusive, né?
+
+00:31:41.040 --> 00:31:43.940
+Então, assim, por exemplo, se custou 1
+centavo vai me custar 10 centavos fazer
+
+00:31:43.940 --> 00:31:48.600
+uma pergunta para o chat GPT entre o 3 e
+o 4.
+
+00:31:49.380 --> 00:31:52.240
+Então, assim, 20 vezes mais caro é
+coisa.
+
+00:31:52.380 --> 00:31:56.440
+10 vezes mais caro é coisa, mas também,
+assim, você vai ter uma resposta que é
+
+00:31:56.440 --> 00:31:58.400
+muito, muito, muito melhor.
+
+00:31:59.160 --> 00:32:02.280
+É claro que, assim, se você for botar,
+assim, fazer uma pergunta boba, não
+
+00:32:02.280 --> 00:32:07.980
+adianta também daí se for um prompt
+pequeno com a pergunta boba, não vai
+
+00:32:07.980 --> 00:32:09.260
+fazer muita diferença entre um e o
+outro.
+
+00:32:09.620 --> 00:32:12.140
+Essa pergunta, por exemplo, poderia ter
+feito para o 3 .5.
+
+00:32:12.660 --> 00:32:14.460
+Só que o 3 .5 não tem acesso à internet.
+
+00:32:15.280 --> 00:32:17.180
+Então, é uma pergunta boba essa que eu
+fiz.
+
+00:32:17.520 --> 00:32:19.040
+Só que o 3 .5 não tem internet.
+
+00:32:19.280 --> 00:32:22.020
+Então, eu acabo utilizando o 4 por conta
+disso aqui.
+
+00:32:22.620 --> 00:32:23.280
+Mas vamos lá.
+
+00:32:23.300 --> 00:32:27.100
+Vamos voltar aqui, então, para o nosso
+documento onde tem algumas informações.
+
+00:32:27.560 --> 00:32:28.720
+O que eu quero fazer aqui?
+
+00:32:28.720 --> 00:32:32.260
+Aqui, eu vou subir, porque como aqui
+esse meu cérebro já foi subido, digamos,
+
+00:32:32.380 --> 00:32:35.620
+essas notas já foram subidas, vamos
+comparar qual vai ser o preço que vai
+
+00:32:35.620 --> 00:32:39.680
+custar para fazer o envio do cérebro do
+naval.
+
+00:32:40.840 --> 00:32:42.280
+Está custando 28 centavos.
+
+00:32:42.340 --> 00:32:43.380
+Eu tenho 28 centavos.
+
+00:32:43.620 --> 00:32:45.220
+Então, eu vou anotar para não esquecer.
+
+00:32:46.480 --> 00:32:48.680
+Aqui, no meu banco de dados, vou anotar
+aqui.
+
+00:32:48.900 --> 00:32:49.440
+Vamos ver.
+
+00:32:49.540 --> 00:32:50.680
+Aqui, custos.
+
+00:32:51.560 --> 00:32:51.960
+Aqui.
+
+00:32:54.280 --> 00:32:54.680
+Atual.
+
+00:32:56.930 --> 00:32:57.830
+Agora, o ponto 28.
+
+00:32:59.730 --> 00:33:01.410
+Agora, vamos subir o cérebro do naval.
+
+00:33:01.790 --> 00:33:04.650
+Vamos ver quanto vai custar fazer isso.
+
+00:33:04.690 --> 00:33:08.670
+Depois, eu vou subir o do hormose também
+e a gente vê quanto vai custar.
+
+00:33:09.010 --> 00:33:11.550
+Deixa eu ver se eu tenho aqui um banco
+só do naval.
+
+00:33:12.150 --> 00:33:13.030
+Eu acho que não.
+
+00:33:13.050 --> 00:33:16.430
+Eu tenho aqui um brains que eu tenho
+naval e hormose juntos.
+
+00:33:17.490 --> 00:33:21.010
+Eu tenho isso aqui que é naval e
+hormose.
+
+00:33:21.010 --> 00:33:22.230
+Eu não quero naval e hormose.
+
+00:33:22.310 --> 00:33:26.450
+Eu quero um separado para naval e um
+separado para hormose para eu poder
+
+00:33:26.450 --> 00:33:27.970
+fazer perguntas separadas para eles.
+
+00:33:28.890 --> 00:33:30.390
+Então, o que acontece?
+
+00:33:30.650 --> 00:33:33.290
+Eu poderia ter os dois, aqui, dentro do
+meu próprio cofre.
+
+00:33:33.750 --> 00:33:40.370
+Só que eu quero fazer perguntas para mim
+quando eu for utilizar o meu estilo de
+
+00:33:40.370 --> 00:33:41.350
+anotação e tudo mais.
+
+00:33:41.650 --> 00:33:43.350
+É por isso que eu prefiro separar.
+
+00:33:43.370 --> 00:33:46.530
+Essa é uma pergunta que as pessoas me
+fazem muito aqui na comunidade e também
+
+00:33:46.530 --> 00:33:51.570
+no curso Mente Lendária, que é como
+utilizar os cérebros das outras pessoas.
+
+00:33:52.550 --> 00:33:54.930
+Eu gosto de separar para não ter...
+
+00:33:54.930 --> 00:33:56.250
+Inclusive, aqui, eu vou separar agora.
+
+00:33:56.510 --> 00:33:57.090
+Eu vou pegar.
+
+00:33:57.730 --> 00:33:59.670
+Vou ver se eu consigo criar um cofre
+dentro de um cofre.
+
+00:33:59.730 --> 00:34:01.370
+Eu acho que ele não vai me permitir, mas
+vou tentar.
+
+00:34:01.910 --> 00:34:02.730
+Criar um cofre.
+
+00:34:02.830 --> 00:34:04.150
+Abrir a parte de um cofre.
+
+00:34:04.190 --> 00:34:05.010
+Como um cofre.
+
+00:34:05.090 --> 00:34:05.550
+Vou fazer isso aqui.
+
+00:34:06.350 --> 00:34:07.310
+Vou abrir aqui.
+
+00:34:07.930 --> 00:34:09.190
+Os meus cofres.
+
+00:34:09.290 --> 00:34:10.290
+Deixa eu ver se eles estão aqui.
+
+00:34:10.430 --> 00:34:10.850
+Estão aqui.
+
+00:34:11.410 --> 00:34:13.790
+Vou tentar abrir aqui o naval como um
+cofre.
+
+00:34:14.590 --> 00:34:15.030
+Abriu.
+
+00:34:15.030 --> 00:34:15.470
+Beleza.
+
+00:34:16.050 --> 00:34:16.910
+Então, está ótimo.
+
+00:34:16.910 --> 00:34:17.230
+Está aqui.
+
+00:34:18.530 --> 00:34:19.950
+Aqui está o meu cofre do naval.
+
+00:34:21.270 --> 00:34:25.950
+Deixa eu mudar para escuro, porque está
+ofuscando esse branco aqui.
+
+00:34:26.750 --> 00:34:27.870
+Vou adaptar o sistema.
+
+00:34:28.170 --> 00:34:28.610
+Pronto.
+
+00:34:29.410 --> 00:34:30.430
+Agora, vamos instalar.
+
+00:34:30.430 --> 00:34:31.630
+Vou instalar.
+
+00:34:32.270 --> 00:34:32.910
+Ligar plugins.
+
+00:34:33.710 --> 00:34:34.110
+Procurar.
+
+00:34:34.970 --> 00:34:35.770
+Smart connections.
+
+00:34:38.850 --> 00:34:39.250
+Connections.
+
+00:34:40.150 --> 00:34:40.550
+Aqui.
+
+00:34:41.970 --> 00:34:42.370
+Instalar.
+
+00:34:45.020 --> 00:34:45.420
+Ativar.
+
+00:34:47.280 --> 00:34:47.680
+Configurar.
+
+00:34:48.060 --> 00:34:49.880
+E aqui eu vou botar a minha API.
+
+00:34:50.380 --> 00:34:52.720
+E aqui eu já vou deixar configurado para
+16K mesmo.
+
+00:34:52.960 --> 00:34:57.040
+Por mais que o 16K, pelo que eu vi, é 10
+vezes mais caro que o 3 .5.
+
+00:34:57.080 --> 00:34:58.880
+Essa é outra pergunta que eu poderia
+fazer para ele.
+
+00:34:58.960 --> 00:35:01.420
+Mas eu acredito que sim, pelos cálculos
+que ele mostrou ali.
+
+00:35:02.200 --> 00:35:02.600
+Ah...
+
+00:35:03.620 --> 00:35:15.600
+Quanto mais caro é usar o 3 .5 4K para o
+3 .5 16K?
+
+00:35:15.640 --> 00:35:17.620
+Pelo que eu vi, vai ser 10 vezes mais
+caro.
+
+00:35:25.750 --> 00:35:26.790
+É, duas vezes mais caro.
+
+00:35:27.910 --> 00:35:28.750
+Então, é quase nada.
+
+00:35:29.930 --> 00:35:30.570
+Então, vamos lá.
+
+00:35:34.500 --> 00:35:34.860
+Beleza.
+
+00:35:36.440 --> 00:35:38.900
+Vamos fazer o upload da mente do naval.
+
+00:35:39.040 --> 00:35:40.760
+Eu vou pegar aqui a minha API que eu já
+tenho aqui.
+
+00:35:40.760 --> 00:35:42.500
+Então, eu vou copiar ela.
+
+00:35:43.800 --> 00:35:44.880
+E vou colar lá.
+
+00:35:45.480 --> 00:35:47.580
+Então, eu vou colar aqui no outro
+cérebro.
+
+00:35:48.660 --> 00:35:49.700
+No outro obsidian.
+
+00:35:52.340 --> 00:35:53.020
+Cadê ele?
+
+00:35:53.400 --> 00:35:54.800
+Ah, o MZ.
+
+00:35:55.880 --> 00:35:56.860
+Então, eu vou vir aqui.
+
+00:35:56.980 --> 00:35:57.700
+Não, não é esse.
+
+00:35:58.020 --> 00:36:03.840
+Vou achar ele agora aqui.
+
+00:36:06.490 --> 00:36:07.010
+Ah, ele está aqui.
+
+00:36:07.150 --> 00:36:09.930
+Vou botar aqui.
+
+00:36:11.530 --> 00:36:12.190
+Aqui, API.
+
+00:36:12.470 --> 00:36:13.270
+Vou testar.
+
+00:36:15.310 --> 00:36:16.190
+API válida.
+
+00:36:17.130 --> 00:36:18.010
+Fecho aqui.
+
+00:36:21.690 --> 00:36:23.350
+E vou fazer isso aqui agora.
+
+00:36:23.790 --> 00:36:24.730
+Vou criar o embedding.
+
+00:36:24.830 --> 00:36:26.010
+Aqui, ele vai me dar a opção.
+
+00:36:26.130 --> 00:36:27.050
+Vou criar o embedding.
+
+00:36:30.250 --> 00:36:30.570
+Beleza.
+
+00:36:32.170 --> 00:36:32.490
+Criando.
+
+00:36:34.880 --> 00:36:35.620
+Esse é o processo.
+
+00:36:36.040 --> 00:36:37.220
+Vamos ver quanto é que vai custar.
+
+00:36:38.280 --> 00:36:39.720
+Daí, eu vou fazer isso com hormose
+também.
+
+00:36:39.820 --> 00:36:42.120
+Mas eu já montei uma base aí para vocês
+quando forem fazer também.
+
+00:36:43.740 --> 00:36:44.780
+Fazer essa conexão.
+
+00:36:45.260 --> 00:36:46.180
+Quanto vai custar.
+
+00:36:48.610 --> 00:36:48.930
+Beleza.
+
+00:36:48.950 --> 00:36:49.590
+Deixa eu ver aqui.
+
+00:36:49.750 --> 00:36:54.630
+Inclusive, eu quero olhar o ferramenta
+de developer.
+
+00:36:54.910 --> 00:36:56.370
+Pode ver que não tem nenhum erro.
+
+00:36:57.050 --> 00:36:58.090
+Então, tudo deu certo aqui.
+
+00:36:58.150 --> 00:36:59.390
+Está carregando os arquivos.
+
+00:36:59.730 --> 00:37:01.570
+E aqui que ele fala que pode demorar um
+pouquinho.
+
+00:37:01.710 --> 00:37:03.370
+Enquanto isso, você pode fazer outras
+coisas aqui.
+
+00:37:03.470 --> 00:37:04.610
+Você pode navegar e tudo mais.
+
+00:37:05.090 --> 00:37:08.210
+Mas você não vai conseguir conversar
+ainda com elas, provavelmente.
+
+00:37:08.770 --> 00:37:10.170
+Porque ele ainda está carregando.
+
+00:37:10.850 --> 00:37:12.330
+Ele ainda está fazendo as conexões.
+
+00:37:13.430 --> 00:37:16.210
+Por exemplo, se eu abrir aqui uma nota
+do naval.
+
+00:37:16.390 --> 00:37:17.970
+Vou pegar uma nota de felicidade aqui.
+
+00:37:19.230 --> 00:37:22.510
+Ele ainda não está conseguindo fazer a
+leitura do documento.
+
+00:37:22.510 --> 00:37:24.990
+E como isso aqui se correlaciona.
+
+00:37:25.450 --> 00:37:26.130
+Agora foi.
+
+00:37:27.050 --> 00:37:27.350
+Ele fez.
+
+00:37:27.750 --> 00:37:29.430
+Pelo menos esse aqui, ele já fez.
+
+00:37:29.770 --> 00:37:31.190
+Deixa eu clicar em outra para ver.
+
+00:37:34.540 --> 00:37:35.460
+Pum, já fez.
+
+00:37:35.800 --> 00:37:36.740
+Então, ele está fazendo a medida.
+
+00:37:37.000 --> 00:37:40.440
+Olha, quantas notas ele está fazendo.
+
+00:37:40.500 --> 00:37:41.900
+120, 130 e poucas.
+
+00:37:42.300 --> 00:37:45.920
+Vamos ver quanto é que está custando já
+lá no site.
+
+00:37:46.500 --> 00:37:48.580
+Já teve alguma alteração lá na...
+
+00:37:49.500 --> 00:37:49.960
+aqui.
+
+00:37:50.900 --> 00:37:52.440
+Estava a 28 centavos.
+
+00:37:53.920 --> 00:37:54.380
+29.
+
+00:37:54.660 --> 00:37:56.400
+Até agora custou 1 centavo só.
+
+00:37:56.400 --> 00:37:58.600
+E ele ainda está processando.
+
+00:37:59.800 --> 00:38:00.400
+Aqui, olha.
+
+00:38:01.120 --> 00:38:02.700
+A princípio ele parou de processar.
+
+00:38:03.180 --> 00:38:06.900
+Então, gente, custou muito caro subir o
+cérebro do naval.
+
+00:38:07.100 --> 00:38:08.240
+Custou 1 centavo.
+
+00:38:09.360 --> 00:38:11.020
+Vou até atualizar de novo aqui.
+
+00:38:12.880 --> 00:38:14.720
+Custou 1 centavo subir o cérebro do
+naval.
+
+00:38:14.940 --> 00:38:16.240
+Nossa, que caro, né?
+
+00:38:16.760 --> 00:38:18.740
+Agora vamos fazer perguntas para o naval
+aqui.
+
+00:38:23.730 --> 00:38:26.250
+Então, baseados nas notas, o que é a
+felicidade?
+
+00:38:26.790 --> 00:38:35.200
+Baseado baseado nas notas, o que é
+felicidade?
+
+00:38:38.840 --> 00:38:41.620
+Felicidade é um estado de espírito
+positivo e satisfatório, caracterizado
+
+00:38:41.620 --> 00:38:44.760
+por uma situação de contentamento,
+alegria e bem -estar.
+
+00:38:44.860 --> 00:38:47.840
+É um sentimento subjetivo e pessoal que
+varia de pessoa para pessoa.
+
+00:38:47.980 --> 00:38:50.600
+A felicidade pode ser alcançada através
+de diferentes aspectos da vida, como
+
+00:38:50.600 --> 00:38:54.160
+relacionamento saudável, saúde, física e
+mental, entre outros.
+
+00:38:54.540 --> 00:38:57.940
+Deporto de acertar que a felicidade não
+é medida apenas pelas notas ou
+
+00:38:57.940 --> 00:38:59.060
+conquistas materiais, mas...
+
+00:38:59.060 --> 00:38:59.560
+legal.
+
+00:39:00.540 --> 00:39:05.840
+Realmente ele se baseou aqui no que o no
+que o naval fala sobre
+
+00:39:05.840 --> 00:39:06.480
+felicidade.
+
+00:39:06.620 --> 00:39:07.220
+Eu achei legal.
+
+00:39:08.080 --> 00:39:09.660
+O que quer dizer...
+
+00:39:11.100 --> 00:39:12.700
+Eu quero escrever aqui.
+
+00:39:12.800 --> 00:39:19.600
+O que quer dizer que felicidade é paz em
+movimento?
+
+00:39:21.960 --> 00:39:23.500
+Eu vou escrever primeiro sem.
+
+00:39:23.640 --> 00:39:38.450
+O que significa que paz é que felicidade
+é paz em movimento baseado nas
+
+00:39:38.450 --> 00:39:38.870
+notas.
+
+00:39:42.350 --> 00:39:44.490
+E se baseado nas notas eu vou tentar
+tirar isso aqui.
+
+00:39:44.570 --> 00:39:46.330
+Eu quero que ele sempre faça isso.
+
+00:39:46.850 --> 00:39:50.490
+A expressão felicidade, paz e movimento
+pode ser interpretada de diferentes
+
+00:39:50.490 --> 00:39:54.190
+maneiras, mas baseado nas notas podemos
+entender que se refere à ideia de que
+
+00:39:54.190 --> 00:39:57.750
+felicidade não é um estado estático, mas
+sim um processo contínuo de busca de
+
+00:39:57.750 --> 00:39:58.270
+crescimento pessoal.
+
+00:39:59.510 --> 00:40:03.990
+Beleza, nesse sentido a felicidade é
+vista como um estado de paz interior,
+
+00:40:03.990 --> 00:40:07.490
+constante movimento, evolução, assim a
+felicidade é entendida.
+
+00:40:07.550 --> 00:40:07.830
+Legal.
+
+00:40:08.030 --> 00:40:10.870
+Eu vou, baseado nas notas, quais são os
+tipos de sorte que existem?
+
+00:40:12.430 --> 00:40:21.500
+Baseado nas notas, quais são os tipos de
+sorte que existem?
+
+00:40:23.380 --> 00:40:26.240
+Depois eu vou fazer, eu vou trocar para
+achar tipo T4 aqui.
+
+00:40:27.000 --> 00:40:27.540
+Legal.
+
+00:40:27.640 --> 00:40:30.980
+Ele me trouxe certinho as quatro sortes
+que o naval fala.
+
+00:40:31.860 --> 00:40:32.640
+Bem legal.
+
+00:40:33.140 --> 00:40:35.120
+Ficou sorte, desforço, eferência.
+
+00:40:35.280 --> 00:40:35.580
+Beleza.
+
+00:40:35.940 --> 00:40:38.960
+Eu vou fazer essa mesma pergunta para
+achar tipo T4 e vou pedir para ele
+
+00:40:38.960 --> 00:40:40.780
+escrever como se ele fosse naval.
+
+00:40:41.320 --> 00:40:43.900
+Então eu vou pegar aqui, vou pegar o
+prompt que eu tenho lá.
+
+00:40:45.200 --> 00:40:46.160
+Deixa eu pegar aqui.
+
+00:40:47.420 --> 00:40:48.960
+Eu vou mudar aqui para o 4.
+
+00:40:50.760 --> 00:40:56.160
+Como o 4 ele está com 8K, mas eu acho
+que as minhas perguntas vão ser...
+
+00:40:56.160 --> 00:40:57.500
+Vamos ver quanto deu.
+
+00:40:57.640 --> 00:40:58.800
+Eu fiz basicamente aqui.
+
+00:40:59.220 --> 00:41:02.300
+Eu fiz três perguntas.
+
+00:41:02.340 --> 00:41:03.500
+Vamos ver quanto custou.
+
+00:41:03.720 --> 00:41:05.840
+Legal vocês entenderem também esse...
+
+00:41:05.940 --> 00:41:07.640
+essa parte de custos.
+
+00:41:09.000 --> 00:41:10.000
+Estava em 29 centavos.
+
+00:41:11.840 --> 00:41:16.240
+Continua em 29, ou seja, custou menos de
+um centavo fazer essas três perguntas.
+
+00:41:16.240 --> 00:41:18.680
+Agora vamos ver quanto vai custar fazer
+uma só pergunta.
+
+00:41:19.000 --> 00:41:20.900
+Mas antes eu quero pegar o chatbase.
+
+00:41:22.020 --> 00:41:25.220
+Eu quero pegar a minha configuração que
+eu fiz para naval.
+
+00:41:26.160 --> 00:41:27.400
+Eu vou colar já aqui.
+
+00:41:27.520 --> 00:41:28.200
+A pergunta está ali.
+
+00:41:28.440 --> 00:41:31.640
+Eu vou pegar aqui o dashboard.
+
+00:41:32.200 --> 00:41:34.000
+Até a gente pode fazer inclusive um
+teste aqui.
+
+00:41:34.880 --> 00:41:39.340
+Quais são os tipos de felicidades e
+sortes que existem para o chatbase aqui
+
+00:41:39.900 --> 00:41:40.440
+para o naval.
+
+00:41:40.660 --> 00:41:42.700
+Ele está no 3 .5 também.
+
+00:41:45.430 --> 00:41:46.750
+Vou mandar aqui para ele.
+
+00:41:53.580 --> 00:41:55.920
+Ele me trouxe aqui aquilo também.
+
+00:41:56.160 --> 00:41:57.220
+Sorte aleatória.
+
+00:41:57.280 --> 00:41:58.520
+Está com outro nome só.
+
+00:42:00.450 --> 00:42:01.550
+Mas é a mesma coisa.
+
+00:42:03.570 --> 00:42:06.510
+Aqui estão as fontes que ele utilizou
+para fazer essa
+
+00:42:06.510 --> 00:42:06.830
+busca.
+
+00:42:08.980 --> 00:42:11.840
+Primeiro aquela sorte que simplesmente é
+uma sorte porque algo completamente fora
+
+00:42:11.840 --> 00:42:12.460
+do nosso controle acontece.
+
+00:42:13.320 --> 00:42:14.500
+Aleatória é exatamente essa.
+
+00:42:15.180 --> 00:42:15.700
+Imprevisível.
+
+00:42:16.260 --> 00:42:17.580
+Através da persistência.
+
+00:42:17.680 --> 00:42:18.200
+Oportunidade.
+
+00:42:18.240 --> 00:42:18.620
+Através da sorte.
+
+00:42:18.640 --> 00:42:20.880
+Quando você está no lugar certo, na hora
+certa, e se depara com uma oportunidade
+
+00:42:20.880 --> 00:42:21.400
+favorável.
+
+00:42:21.680 --> 00:42:23.640
+A terceira que é a habilidade.
+
+00:42:24.480 --> 00:42:27.020
+Então assim, aqui ele chama de esforço.
+
+00:42:28.140 --> 00:42:29.160
+Resultado do trabalho árduo.
+
+00:42:29.200 --> 00:42:30.120
+Dedicação e perseverança.
+
+00:42:30.600 --> 00:42:34.080
+Aqui ele tem depois a sorte através da
+ação única e singular.
+
+00:42:34.800 --> 00:42:35.960
+Através da perspectiva.
+
+00:42:36.540 --> 00:42:39.540
+Quando há uma atitude positiva e uma
+mentalidade aberta para reconhecer e
+
+00:42:39.540 --> 00:42:40.860
+aproveitar oportunidades que surgem.
+
+00:42:41.220 --> 00:42:43.600
+Aqui agora chega esse tipo de sorte que
+é o único.
+
+00:42:43.700 --> 00:42:46.520
+Para cada típico não há clichê comum que
+é o correspondente singular.
+
+00:42:46.840 --> 00:42:48.620
+Essa sorte vem de agir de uma maneira
+única.
+
+00:42:48.640 --> 00:42:50.920
+Especial que reflete nosso carácter e
+personalidade.
+
+00:42:51.300 --> 00:42:55.420
+É uma sorte que surge da maneira como
+nós nos comportamos e agimos.
+
+00:42:57.400 --> 00:42:58.280
+Perspectiva otimista.
+
+00:42:58.320 --> 00:42:59.360
+Exposição para o lado bom.
+
+00:42:59.480 --> 00:42:59.700
+Não.
+
+00:42:59.880 --> 00:43:02.560
+Achei ruim a resposta aqui dentro dele.
+
+00:43:02.740 --> 00:43:03.800
+Porque assim, ele está com base.
+
+00:43:04.220 --> 00:43:06.980
+Esse JTPT aqui tem a mesma base que esse
+cara aqui tem.
+
+00:43:07.900 --> 00:43:09.620
+Então era para ele ter me dado resposta.
+
+00:43:10.280 --> 00:43:11.420
+Uma resposta melhor.
+
+00:43:11.500 --> 00:43:12.700
+Se eu for buscar aqui por.
+
+00:43:13.160 --> 00:43:14.360
+Vou fazer uma busca aqui.
+
+00:43:17.720 --> 00:43:32.710
+Look Key Kind of luck Qualquer coisa
+
+00:43:32.710 --> 00:43:32.950
+assim.
+
+00:43:42.970 --> 00:43:46.230
+Looks Vamos ver aqui.
+
+00:43:46.490 --> 00:43:50.070
+O que eu consigo achar.
+
+00:43:57.750 --> 00:43:58.510
+Vou olhar aqui.
+
+00:43:58.730 --> 00:44:02.870
+Blind luck Then for the kind of luck.
+
+00:44:03.610 --> 00:44:04.910
+Vou procurar por isso.
+
+00:44:05.150 --> 00:44:16.880
+Vou fazer uma busca aqui por contexto.
+
+00:44:17.700 --> 00:44:18.620
+Aqui por linha.
+
+00:44:18.760 --> 00:44:20.160
+Pesquisar por palavra na mesma linha.
+
+00:44:20.380 --> 00:44:21.960
+Pesquisar por palavra sobre o mesmo
+título.
+
+00:44:22.260 --> 00:44:25.420
+Ele não encontrou.
+
+00:44:25.540 --> 00:44:26.540
+E talvez não tenha.
+
+00:44:29.880 --> 00:44:32.080
+Caminho Linha.
+
+00:44:32.080 --> 00:44:38.320
+Deixa eu só pegar aqui.
+
+00:44:38.440 --> 00:44:39.060
+Então blind luck.
+
+00:44:40.000 --> 00:44:41.560
+Ver se eu acho alguma coisa assim.
+
+00:44:51.020 --> 00:44:51.820
+Mostrar contexto.
+
+00:44:54.890 --> 00:44:55.450
+Beleza.
+
+00:44:56.390 --> 00:44:57.610
+Opções da busca.
+
+00:44:58.870 --> 00:45:00.890
+Talvez seja a palavra sobre o mesmo
+título.
+
+00:45:02.270 --> 00:45:03.310
+Seria sobre a linha.
+
+00:45:03.910 --> 00:45:04.470
+Aqui.
+
+00:45:04.630 --> 00:45:05.170
+Vamos ver.
+
+00:45:05.430 --> 00:45:05.990
+Aqui.
+
+00:45:06.890 --> 00:45:08.130
+Então about luck.
+
+00:45:13.340 --> 00:45:13.900
+Aqui.
+
+00:45:13.980 --> 00:45:14.660
+Aqui está.
+
+00:45:15.220 --> 00:45:16.380
+Seria o que ele falaria.
+
+00:45:16.880 --> 00:45:18.360
+Blind luck.
+
+00:45:18.540 --> 00:45:20.120
+Seria uma sorte cega.
+
+00:45:23.820 --> 00:45:25.540
+Então ele tem aqui a informação.
+
+00:45:25.940 --> 00:45:27.480
+Mas ele não me trouxe uma resposta boa.
+
+00:45:27.740 --> 00:45:29.840
+Ele não me trouxe a resposta que aqui me
+trouxe.
+
+00:45:30.040 --> 00:45:30.860
+Então aqui eu vou fazer.
+
+00:45:31.000 --> 00:45:32.700
+Eu disse que eu vou fazer um teste que é
+o seguinte.
+
+00:45:33.200 --> 00:45:34.340
+Eu vou pegar aqui.
+
+00:45:34.420 --> 00:45:35.960
+O prompt que eu utilizei aqui.
+
+00:45:36.260 --> 00:45:37.240
+Vou jogar aqui.
+
+00:45:39.740 --> 00:45:40.660
+E aí eu vou chamar.
+
+00:45:40.700 --> 00:45:41.120
+Ah.
+
+00:45:42.140 --> 00:45:43.540
+Esqueci que aqui o shift e enter.
+
+00:45:47.440 --> 00:45:49.820
+Só que eu acho que ele não mantém a
+mesma conversa.
+
+00:45:49.820 --> 00:45:50.060
+Vamos ver.
+
+00:45:50.160 --> 00:45:51.300
+Ele deu aqui.
+
+00:45:56.100 --> 00:45:56.540
+Beleza.
+
+00:45:56.540 --> 00:45:57.160
+Então vou chamar.
+
+00:45:57.160 --> 00:45:57.640
+Rapaziada.
+
+00:45:58.520 --> 00:46:00.060
+Nas minhas notas.
+
+00:46:02.660 --> 00:46:03.560
+Mesma pergunta.
+
+00:46:06.000 --> 00:46:06.480
+Aqui.
+
+00:46:06.680 --> 00:46:07.720
+Só vou pegar e colar.
+
+00:46:07.920 --> 00:46:09.420
+Vamos ver se vai ter alguma diferença.
+
+00:46:09.460 --> 00:46:11.480
+Por eu ter passado esse prompt para ele.
+
+00:46:11.980 --> 00:46:12.460
+Antes.
+
+00:46:21.960 --> 00:46:23.980
+Ele me trouxe a mesma coisa aqui.
+
+00:46:24.300 --> 00:46:25.560
+A vida aleatória.
+
+00:46:25.680 --> 00:46:27.720
+Deixa eu ver se a resposta dele
+melhorou.
+
+00:46:28.780 --> 00:46:29.440
+Porque assim.
+
+00:46:29.600 --> 00:46:31.680
+A tradução que ele está me trazendo
+aqui.
+
+00:46:32.900 --> 00:46:34.120
+Vamos dizer que ele está me trazendo 4.
+
+00:46:34.420 --> 00:46:35.160
+Isso já é certo.
+
+00:46:36.200 --> 00:46:37.340
+Mas não está legal.
+
+00:46:38.640 --> 00:46:38.880
+Não tem sentido.
+
+00:46:39.080 --> 00:46:40.740
+Inclusive eu quero ver que pasta que ele
+está.
+
+00:46:40.960 --> 00:46:42.400
+Está dentro da pasta.
+
+00:46:42.760 --> 00:46:43.740
+How to get rich.
+
+00:46:44.080 --> 00:46:45.620
+Eu vou fazer uma pesquisa dentro da
+pasta.
+
+00:46:45.760 --> 00:46:47.620
+Para ver se isso vai ter alguma
+influência
+
+00:46:47.620 --> 00:46:47.900
+também.
+
+00:46:54.240 --> 00:46:55.940
+Eu acho que ele me deu a mesma resposta.
+
+00:46:57.000 --> 00:46:58.160
+Quero fazer mais alguns testes.
+
+00:46:58.180 --> 00:46:59.600
+Isso é bem importante vocês fazerem.
+
+00:47:01.280 --> 00:47:03.440
+Analisem todas essas aulas que eu tenho
+feito aqui para vocês.
+
+00:47:03.780 --> 00:47:07.060
+E pensem em como eu faço as coisas aqui.
+
+00:47:07.180 --> 00:47:09.660
+Como é que eu fico testando e usando de
+novo.
+
+00:47:10.020 --> 00:47:11.380
+Porque se vocês conseguirem.
+
+00:47:11.380 --> 00:47:13.580
+Pegar a forma como eu.
+
+00:47:13.820 --> 00:47:15.400
+Faço testes e executo.
+
+00:47:15.400 --> 00:47:17.600
+Vocês também vão poder depois aplicar
+isso para vocês.
+
+00:47:18.420 --> 00:47:19.800
+Então essa curiosidade minha.
+
+00:47:20.020 --> 00:47:21.280
+E também a insistência.
+
+00:47:21.380 --> 00:47:22.900
+Eu continuo testando.
+
+00:47:23.020 --> 00:47:23.660
+Eu vou para fórum.
+
+00:47:24.220 --> 00:47:25.040
+Ai cara.
+
+00:47:27.460 --> 00:47:29.240
+Ele não aceita shift.
+
+00:47:30.300 --> 00:47:32.220
+Vou colar um texto atrás do outro.
+
+00:47:32.360 --> 00:47:32.840
+Eu aperto shift.
+
+00:47:33.340 --> 00:47:35.120
+Ele simplesmente começa.
+
+00:47:35.620 --> 00:47:36.540
+A enviar.
+
+00:47:37.100 --> 00:47:37.880
+Agora sim.
+
+00:47:46.550 --> 00:47:48.070
+Mesma coisa pelo que eu estou vendo
+aqui.
+
+00:47:48.150 --> 00:47:49.070
+Ele não mudou.
+
+00:47:49.170 --> 00:47:50.870
+Então a gente vai testar no 4 agora.
+
+00:47:52.050 --> 00:47:53.610
+Primeiro antes de testar no 4.
+
+00:47:53.810 --> 00:47:54.650
+Eu até vou parar aqui já.
+
+00:47:54.990 --> 00:47:56.630
+Eu quero testar na pasta.
+
+00:47:57.670 --> 00:47:58.810
+Então eu vou fazer isso aqui.
+
+00:47:59.270 --> 00:48:01.130
+Só que em vez de ser baseado.
+
+00:48:01.490 --> 00:48:02.290
+Na nota.
+
+00:48:03.710 --> 00:48:04.990
+Vou colocar aqui a pasta.
+
+00:48:06.690 --> 00:48:07.130
+Agora.
+
+00:48:08.030 --> 00:48:08.470
+Confira.
+
+00:48:09.230 --> 00:48:10.110
+A pasta.
+
+00:48:10.470 --> 00:48:11.430
+Que é essa aqui.
+
+00:48:13.190 --> 00:48:14.830
+How to get rich.
+
+00:48:15.910 --> 00:48:17.430
+E me diga.
+
+00:48:20.170 --> 00:48:24.080
+Os 4 tipos de sorte.
+
+00:48:34.130 --> 00:48:35.890
+Ah deu um erro aqui.
+
+00:48:38.280 --> 00:48:39.520
+Post language.
+
+00:48:40.140 --> 00:48:43.940
+Vou testar de novo.
+
+00:48:44.080 --> 00:48:44.720
+Ah não ele foi.
+
+00:48:45.240 --> 00:48:47.920
+Agora sim.
+
+00:48:49.200 --> 00:48:50.360
+Será que ele estava.
+
+00:48:50.740 --> 00:48:51.680
+Será que.
+
+00:48:54.240 --> 00:48:55.820
+Minha pergunta aqui.
+
+00:48:55.940 --> 00:48:56.740
+Minha questão.
+
+00:48:58.820 --> 00:48:59.440
+Será.
+
+00:48:59.880 --> 00:49:02.040
+Que ele está pegando de outro lugar.
+
+00:49:02.200 --> 00:49:04.130
+Essas informações da sorte aleatória.
+
+00:49:04.600 --> 00:49:04.780
+E tal.
+
+00:49:05.880 --> 00:49:07.000
+Porque como é que agora.
+
+00:49:07.100 --> 00:49:08.260
+Ele está trazendo certinho.
+
+00:49:09.680 --> 00:49:10.980
+Seu caráter único.
+
+00:49:13.130 --> 00:49:13.690
+Exatamente.
+
+00:49:13.810 --> 00:49:15.050
+Ele trouxe perfeito agora.
+
+00:49:15.350 --> 00:49:17.650
+Porque eu direcionei a pasta onde
+estava.
+
+00:49:18.050 --> 00:49:20.010
+Será que ele não está trazendo de outro
+lugar.
+
+00:49:20.110 --> 00:49:21.470
+Esse sorte aleatória.
+
+00:49:21.830 --> 00:49:24.290
+Então vou procurar aqui por random look.
+
+00:49:25.530 --> 00:49:26.090
+Random.
+
+00:49:26.810 --> 00:49:27.370
+Look.
+
+00:49:32.000 --> 00:49:33.480
+Vamos ver se tem alguma coisa aqui.
+
+00:49:35.180 --> 00:49:36.340
+Look look random.
+
+00:49:38.220 --> 00:49:38.780
+Não.
+
+00:49:39.540 --> 00:49:41.220
+Vou procurar só por.
+
+00:49:41.300 --> 00:49:42.480
+Só por sorte.
+
+00:49:45.880 --> 00:49:46.600
+Então aqui.
+
+00:49:47.280 --> 00:49:47.920
+Aqui.
+
+00:49:49.280 --> 00:49:49.920
+Não.
+
+00:49:52.160 --> 00:49:52.980
+Quero entender.
+
+00:49:53.120 --> 00:49:54.100
+Da onde ele está tirando esses.
+
+00:49:54.600 --> 00:49:56.580
+Ele identificou que são 4.
+
+00:49:57.060 --> 00:49:59.580
+Mas porque ele está me gerando aquelas.
+
+00:50:00.280 --> 00:50:01.420
+Aquelas ali.
+
+00:50:01.520 --> 00:50:02.320
+Que não tem nada a ver.
+
+00:50:03.580 --> 00:50:04.220
+Não.
+
+00:50:04.740 --> 00:50:05.780
+Tem bastante.
+
+00:50:07.220 --> 00:50:07.860
+Aqui.
+
+00:50:08.800 --> 00:50:09.600
+Mesma coisa.
+
+00:50:11.700 --> 00:50:12.040
+Que é tipo.
+
+00:50:12.500 --> 00:50:13.200
+Não é.
+
+00:50:13.640 --> 00:50:14.980
+Não deveria ser esse aqui.
+
+00:50:16.840 --> 00:50:17.940
+Mostra quanto look aqui.
+
+00:50:19.440 --> 00:50:19.920
+Aqui.
+
+00:50:20.000 --> 00:50:20.500
+Dumb look.
+
+00:50:20.860 --> 00:50:21.600
+Blind look.
+
+00:50:22.220 --> 00:50:22.640
+Mas aqui.
+
+00:50:22.760 --> 00:50:23.120
+Novamente.
+
+00:50:23.240 --> 00:50:23.560
+Cega.
+
+00:50:24.220 --> 00:50:25.860
+E a terceira.
+
+00:50:31.320 --> 00:50:31.800
+Clichê.
+
+00:50:33.700 --> 00:50:35.800
+Characterized with interesting raps.
+
+00:50:36.020 --> 00:50:36.980
+Deixa eu ver o que ele fala aqui.
+
+00:50:41.400 --> 00:50:41.880
+Não.
+
+00:50:50.080 --> 00:50:50.260
+Porque assim.
+
+00:50:50.540 --> 00:50:52.620
+Aqui dentro a princípio não tem nada
+disso.
+
+00:50:53.400 --> 00:50:54.980
+Então eu sinceramente não sei.
+
+00:50:55.200 --> 00:50:56.140
+O que eu vou fazer agora.
+
+00:50:56.340 --> 00:51:00.280
+Eu vou botar o ChatGPT 4 aqui para
+funcionar.
+
+00:51:00.380 --> 00:51:01.680
+Para ver se ele vai conseguir.
+
+00:51:03.100 --> 00:51:03.920
+Dar essa resposta.
+
+00:51:04.240 --> 00:51:04.640
+Melhor.
+
+00:51:06.380 --> 00:51:07.420
+Eu já estava com 4.
+
+00:51:08.900 --> 00:51:10.120
+Vamos ver quanto é que custou.
+
+00:51:10.140 --> 00:51:11.100
+Essas brincadeiras então.
+
+00:51:11.660 --> 00:51:13.200
+Eu já estava com 4 aqui.
+
+00:51:13.340 --> 00:51:14.320
+Eu já tinha configurado para o 4.
+
+00:51:15.340 --> 00:51:15.900
+Vamos ver.
+
+00:51:15.900 --> 00:51:17.080
+Vamos ver quanto é que custou.
+
+00:51:17.100 --> 00:51:17.840
+A brincadeira.
+
+00:51:19.660 --> 00:51:21.900
+E eu sinceramente não vi nenhuma
+diferença do 4.
+
+00:51:22.480 --> 00:51:22.880
+Aqui.
+
+00:51:23.340 --> 00:51:26.320
+Aqui já deu para ver que a brincadeira
+já mudou de patamar.
+
+00:51:26.940 --> 00:51:27.340
+Assim.
+
+00:51:27.940 --> 00:51:29.180
+Foram duas perguntas.
+
+00:51:29.180 --> 00:51:30.360
+Cada pergunta custou.
+
+00:51:30.380 --> 00:51:31.220
+Se eu fosse ver aqui.
+
+00:51:31.420 --> 00:51:32.760
+Claro que não funciona dessa forma.
+
+00:51:32.820 --> 00:51:33.320
+Não é uma pergunta.
+
+00:51:33.340 --> 00:51:33.760
+É por token.
+
+00:51:34.260 --> 00:51:36.880
+Mas cada pergunta custou uns 5 centavos
+de dólar.
+
+00:51:36.900 --> 00:51:37.240
+Que seria.
+
+00:51:39.580 --> 00:51:40.740
+30 centavos de reais.
+
+00:51:45.900 --> 00:51:46.820
+Eu não vi diferença alguma.
+
+00:51:47.120 --> 00:51:49.080
+Se eu até botasse aqui o ChatGPT 4.
+
+00:51:49.320 --> 00:51:50.640
+Eu vou fazer a mesma pergunta aqui.
+
+00:51:51.520 --> 00:51:52.360
+Essa última.
+
+00:51:53.320 --> 00:51:54.420
+A mesma pergunta.
+
+00:51:56.080 --> 00:51:57.580
+Deixa eu limpar aqui também.
+
+00:51:58.240 --> 00:51:58.720
+Essa.
+
+00:52:00.000 --> 00:52:01.120
+Estou vendo a barra de outro.
+
+00:52:01.960 --> 00:52:02.880
+Estou com vários.
+
+00:52:04.000 --> 00:52:04.700
+Abertos aqui.
+
+00:52:08.110 --> 00:52:09.090
+Deixa eu abrir.
+
+00:52:11.360 --> 00:52:12.100
+Então aqui.
+
+00:52:12.320 --> 00:52:16.040
+Eu quero ver qual vai ser o número de
+tokens que ele vai precisar usar.
+
+00:52:16.440 --> 00:52:17.480
+Para fazer isso aqui.
+
+00:52:18.180 --> 00:52:18.940
+E vei.
+
+00:52:20.000 --> 00:52:22.100
+Só que agora com 3 .5 com 4k.
+
+00:52:22.260 --> 00:52:22.880
+De tokens.
+
+00:52:23.520 --> 00:52:24.120
+Então aqui.
+
+00:52:24.220 --> 00:52:25.660
+Ele realmente usou pouco token.
+
+00:52:25.860 --> 00:52:27.740
+Ele usou 500 e poucos tokens.
+
+00:52:27.940 --> 00:52:29.440
+Sobrou ainda 2000 e poucos.
+
+00:52:30.020 --> 00:52:30.420
+Aqui.
+
+00:52:33.940 --> 00:52:34.560
+Sobrou 500.
+
+00:52:34.740 --> 00:52:35.080
+É isso aí.
+
+00:52:35.220 --> 00:52:36.660
+Sobrou 507 tokens.
+
+00:52:40.230 --> 00:52:41.510
+Vamos ver se ele vai mudar.
+
+00:52:41.630 --> 00:52:41.950
+Mas assim.
+
+00:52:42.010 --> 00:52:42.950
+Não tem muito o que ele mudar.
+
+00:52:44.270 --> 00:52:45.070
+A resposta.
+
+00:52:45.070 --> 00:52:46.090
+De deixar lá.
+
+00:52:46.270 --> 00:52:48.810
+Porque basicamente ele está me trazendo
+o que tem dentro do banco de dados.
+
+00:52:49.770 --> 00:52:51.390
+E vai custar muito mais barato.
+
+00:52:51.490 --> 00:52:52.570
+Custou 5 centavos.
+
+00:52:52.570 --> 00:52:54.210
+Isso aqui vai custar menos de 1 centavo
+de dólar.
+
+00:52:54.250 --> 00:52:55.670
+Para fazer essa mesma.
+
+00:52:56.270 --> 00:52:57.730
+E ele deu um erro aqui.
+
+00:53:03.280 --> 00:53:04.500
+Provavelmente foi alguma questão.
+
+00:53:05.740 --> 00:53:07.200
+De token que faltou.
+
+00:53:07.360 --> 00:53:08.340
+Eu vou fazer o seguinte.
+
+00:53:09.360 --> 00:53:10.860
+Vou deixar ele então no.
+
+00:53:11.620 --> 00:53:12.040
+16k.
+
+00:53:13.640 --> 00:53:14.060
+Pronto.
+
+00:53:15.280 --> 00:53:16.120
+E vamos lá.
+
+00:53:17.280 --> 00:53:19.200
+Eu não sei se também sei como eu copiei
+e colei.
+
+00:53:19.760 --> 00:53:20.840
+Pode ter sido isso.
+
+00:53:20.960 --> 00:53:23.400
+Pode ser que ele não identificou a
+pasta.
+
+00:53:23.560 --> 00:53:24.660
+Como eu copiei e colei.
+
+00:53:24.820 --> 00:53:25.460
+Vou fazer o seguinte.
+
+00:53:25.780 --> 00:53:26.480
+Vou vir aqui.
+
+00:53:27.840 --> 00:53:29.360
+E vou botar a pasta de novo.
+
+00:53:33.140 --> 00:53:34.020
+Esse aqui mesmo.
+
+00:53:35.600 --> 00:53:36.900
+E vou dar um enter.
+
+00:53:39.800 --> 00:53:41.080
+Agora quando eu quero dar enter.
+
+00:53:41.540 --> 00:53:42.160
+Paro aqui.
+
+00:53:44.080 --> 00:53:45.140
+Vamos ver aqui.
+
+00:53:45.380 --> 00:53:45.920
+Deu certo.
+
+00:53:46.200 --> 00:53:47.280
+Está sobrando agora aqui.
+
+00:53:47.800 --> 00:53:49.240
+Ele já conseguiu fazer aquela leitura.
+
+00:53:49.340 --> 00:53:49.660
+Foi isso.
+
+00:53:49.740 --> 00:53:50.240
+Faltou token.
+
+00:53:55.020 --> 00:53:55.600
+De token mesmo.
+
+00:53:57.020 --> 00:53:57.800
+Então aqui.
+
+00:53:57.900 --> 00:53:59.060
+Se for a gente for pegar aqui.
+
+00:53:59.120 --> 00:54:00.500
+Custou muito mais barato utilizar.
+
+00:54:01.520 --> 00:54:03.160
+20 vezes mais barato utilizar.
+
+00:54:03.560 --> 00:54:03.980
+Não 20 não.
+
+00:54:04.040 --> 00:54:05.000
+10 vezes mais barato utilizar.
+
+00:54:05.540 --> 00:54:08.780
+O 16 do que o ChatGPT4 com 8k.
+
+00:54:09.420 --> 00:54:09.940
+E.
+
+00:54:10.300 --> 00:54:12.000
+Ele me trouxe a mesma resposta.
+
+00:54:12.400 --> 00:54:12.800
+A mesma.
+
+00:54:13.300 --> 00:54:15.600
+Com base nessas notas posso dizer que.
+
+00:54:15.720 --> 00:54:16.580
+Sorte cega.
+
+00:54:16.720 --> 00:54:17.240
+Proveniente.
+
+00:54:17.720 --> 00:54:20.260
+E novamente eu vou testar aqui.
+
+00:54:20.540 --> 00:54:21.740
+Fazer essa mesma pergunta.
+
+00:54:21.740 --> 00:54:24.020
+Só que sem direcionar a pasta.
+
+00:54:24.180 --> 00:54:25.880
+Para a gente ver se ele vai de novo
+responder.
+
+00:54:26.600 --> 00:54:28.000
+Aquilo que ele respondeu antes.
+
+00:54:28.300 --> 00:54:29.500
+Só para a gente tirar.
+
+00:54:29.600 --> 00:54:30.920
+Essa pulga atrás da orelha.
+
+00:54:33.380 --> 00:54:34.380
+Então eu tiro aqui a pasta.
+
+00:54:40.220 --> 00:54:42.120
+Me diga os 4 tipos de sorte.
+
+00:54:46.160 --> 00:54:46.640
+Baseado.
+
+00:54:48.920 --> 00:54:49.880
+Nas notas.
+
+00:54:50.840 --> 00:54:52.500
+Vamos tentar ajudar ele aqui.
+
+00:54:52.660 --> 00:54:53.760
+Baseado nas notas.
+
+00:54:53.920 --> 00:54:54.400
+Sobre.
+
+00:54:57.680 --> 00:54:58.160
+Sobre.
+
+00:54:59.820 --> 00:55:00.300
+Construção.
+
+00:55:00.780 --> 00:55:01.260
+De.
+
+00:55:01.980 --> 00:55:02.500
+Riqueza.
+
+00:55:03.280 --> 00:55:05.180
+Me diga os 4 tipos de sorte.
+
+00:55:06.660 --> 00:55:07.960
+Agora está aceitando o enter.
+
+00:55:08.160 --> 00:55:08.680
+Então.
+
+00:55:09.580 --> 00:55:11.020
+Enter ele aceita.
+
+00:55:11.980 --> 00:55:13.480
+Shift Enter ele manda.
+
+00:55:13.760 --> 00:55:13.940
+Bom.
+
+00:55:14.700 --> 00:55:15.900
+Para que fazer as coisas.
+
+00:55:17.580 --> 00:55:19.080
+Não fazer as coisas contrárias.
+
+00:55:21.820 --> 00:55:22.340
+Legal.
+
+00:55:22.980 --> 00:55:23.500
+Funcionou.
+
+00:55:23.580 --> 00:55:24.760
+Sem eu precisar pasta.
+
+00:55:25.840 --> 00:55:27.280
+Então acredito que na verdade.
+
+00:55:27.300 --> 00:55:28.700
+Os erros que a gente está tendo aqui.
+
+00:55:28.800 --> 00:55:31.860
+De não ter tanta assertividade.
+
+00:55:32.400 --> 00:55:33.020
+É porque.
+
+00:55:33.840 --> 00:55:35.820
+O prompt mesmo não estava sendo tão
+específico.
+
+00:55:35.820 --> 00:55:36.060
+Pode ver.
+
+00:55:36.360 --> 00:55:37.720
+Eu não falei a pasta.
+
+00:55:37.960 --> 00:55:38.900
+Eu só falei que.
+
+00:55:39.800 --> 00:55:42.740
+Baseado nas notas sobre construção de
+riqueza.
+
+00:55:43.380 --> 00:55:45.360
+Nem falei construção aqui de riqueza.
+
+00:55:45.420 --> 00:55:47.660
+Baseado nas notas sobre construção.
+
+00:55:47.720 --> 00:55:48.580
+Me diga.
+
+00:55:48.620 --> 00:55:49.560
+Porque tem building aqui.
+
+00:55:49.960 --> 00:55:52.380
+Me diga os 4 tipos de sorte.
+
+00:55:52.980 --> 00:55:53.500
+Então.
+
+00:55:54.360 --> 00:55:55.940
+É basicamente o prompt.
+
+00:55:56.100 --> 00:55:57.740
+Para a gente ter certeza disso.
+
+00:55:58.000 --> 00:55:59.480
+Eu vou pegar outro aqui.
+
+00:55:59.480 --> 00:56:01.460
+Eu vou pegar esse aqui.
+
+00:56:01.540 --> 00:56:02.700
+Achando a paz de mente.
+
+00:56:02.860 --> 00:56:04.260
+Vou pegar alguma coisa que eu quero
+perguntar.
+
+00:56:05.040 --> 00:56:06.760
+A sociedade moderna.
+
+00:56:07.260 --> 00:56:08.360
+É mais segura.
+
+00:56:09.400 --> 00:56:10.420
+Be careful.
+
+00:56:10.600 --> 00:56:13.460
+Não vai ter tanta coisa.
+
+00:56:13.800 --> 00:56:14.180
+Aqui.
+
+00:56:16.420 --> 00:56:18.660
+A paz é felicidade.
+
+00:56:19.760 --> 00:56:20.400
+Descansando.
+
+00:56:21.500 --> 00:56:22.680
+Felicidade é a paz.
+
+00:56:22.920 --> 00:56:24.640
+Essa frase eu acho fantástica.
+
+00:56:25.260 --> 00:56:26.500
+Vou pedir aqui.
+
+00:56:26.620 --> 00:56:27.520
+Baseado nas notas.
+
+00:56:27.520 --> 00:56:29.900
+Vou botar o mesmo prompt.
+
+00:56:30.100 --> 00:56:30.780
+Eu quero que ele emite.
+
+00:56:30.920 --> 00:56:32.100
+Se bem que ele não emitou na Val.
+
+00:56:32.440 --> 00:56:33.060
+Mas tudo bem.
+
+00:56:35.360 --> 00:56:36.260
+Baseado nas notas.
+
+00:56:38.140 --> 00:56:38.860
+Sobre paz.
+
+00:56:43.070 --> 00:56:43.790
+Me diga.
+
+00:56:46.390 --> 00:56:48.470
+A diferença entre.
+
+00:56:49.870 --> 00:56:50.790
+Paz e felicidade.
+
+00:56:53.370 --> 00:56:53.730
+Felicidade.
+
+00:56:54.790 --> 00:56:56.770
+Na sua opinião.
+
+00:56:58.350 --> 00:57:00.690
+Vamos ver se ele vai aceitar a sua
+opinião.
+
+00:57:00.750 --> 00:57:01.530
+Ou ele vai achar que eu estou falando.
+
+00:57:02.890 --> 00:57:03.390
+Ou já te repetei.
+
+00:57:03.410 --> 00:57:04.390
+Não pode dar opinião.
+
+00:57:05.590 --> 00:57:07.190
+Com base nas notas oferecidas.
+
+00:57:07.210 --> 00:57:09.290
+Posso dizer que na opinião de Naval
+Ravacanti.
+
+00:57:09.430 --> 00:57:11.610
+A paz e a felicidade.
+
+00:57:12.850 --> 00:57:14.470
+São conceitos interconectados.
+
+00:57:14.470 --> 00:57:14.950
+Mas distintos.
+
+00:57:15.710 --> 00:57:18.490
+Enquanto a felicidade é frequentemente
+associada a sentimentos de alegria e
+
+00:57:18.490 --> 00:57:18.830
+prazer.
+
+00:57:18.930 --> 00:57:20.830
+A paz é mais sobre um estado de
+tranquilidade.
+
+00:57:20.830 --> 00:57:22.230
+E ausência de conflito interno.
+
+00:57:22.510 --> 00:57:24.310
+Naval acredita que a paz é o estado.
+
+00:57:24.510 --> 00:57:26.690
+Em que nos sentimos completamente
+satisfeitos.
+
+00:57:27.170 --> 00:57:27.570
+Perfeito.
+
+00:57:27.730 --> 00:57:28.270
+Ficou perfeito.
+
+00:57:28.350 --> 00:57:29.410
+Eu não preciso deixar de repetir 4.
+
+00:57:29.630 --> 00:57:30.550
+Eu posso usar o 3 aqui.
+
+00:57:30.850 --> 00:57:32.250
+Ele é muito mais barato.
+
+00:57:32.890 --> 00:57:34.310
+Vamos dar uma olhadinha aqui nos preços.
+
+00:57:34.570 --> 00:57:36.190
+Do que a gente utilizou.
+
+00:57:41.400 --> 00:57:41.880
+55.
+
+00:57:42.260 --> 00:57:43.220
+Não lembro agora.
+
+00:57:43.320 --> 00:57:44.160
+Acho que estava em 38.
+
+00:57:45.520 --> 00:57:47.020
+Então eu gastei.
+
+00:57:47.120 --> 00:57:48.020
+Eu tinha feito mais uma pergunta.
+
+00:57:48.400 --> 00:57:48.980
+Vou fazer mais uma.
+
+00:57:50.260 --> 00:57:51.280
+Vou fazer essa mesma.
+
+00:57:51.700 --> 00:57:55.120
+Ele vai gastar o mesmo de prompt.
+
+00:57:56.760 --> 00:57:57.900
+Lembrando que eu estou usando aqui.
+
+00:57:58.000 --> 00:57:58.920
+Vamos só conferir.
+
+00:57:59.480 --> 00:58:01.260
+Eu estou usando o 16k.
+
+00:58:03.580 --> 00:58:04.640
+Fazer a mesma pergunta.
+
+00:58:05.680 --> 00:58:06.160
+Enviar.
+
+00:58:10.670 --> 00:58:11.370
+Porque é um pouco mais.
+
+00:58:13.270 --> 00:58:14.030
+Mais parrudo.
+
+00:58:14.170 --> 00:58:14.610
+Mas assim.
+
+00:58:14.670 --> 00:58:15.490
+Também não é nada demais.
+
+00:58:18.010 --> 00:58:18.410
+Beleza.
+
+00:58:18.450 --> 00:58:19.630
+Vamos ver aqui quanto custou.
+
+00:58:23.200 --> 00:58:23.600
+Custou.
+
+00:58:23.880 --> 00:58:24.560
+Estava 50.
+
+00:58:26.120 --> 00:58:26.520
+Caraca.
+
+00:58:26.520 --> 00:58:27.380
+Eu esqueci quanto estava.
+
+00:58:27.620 --> 00:58:28.560
+56 agora.
+
+00:58:28.920 --> 00:58:29.920
+Vou mandar de novo.
+
+00:58:31.080 --> 00:58:31.740
+E aqui.
+
+00:58:31.900 --> 00:58:33.580
+Eu poderia calcular inclusive por aqui.
+
+00:58:33.660 --> 00:58:34.940
+Porque ele me diz quantos tokens ele
+está
+
+00:58:34.940 --> 00:58:35.440
+utilizando.
+
+00:58:38.550 --> 00:58:38.950
+Beleza.
+
+00:58:38.950 --> 00:58:39.990
+Estava 56.
+
+00:58:40.970 --> 00:58:41.370
+Agora.
+
+00:58:42.590 --> 00:58:43.190
+Foi para.
+
+00:58:43.810 --> 00:58:44.250
+Eita.
+
+00:58:45.670 --> 00:58:46.110
+74.
+
+00:58:47.610 --> 00:58:48.410
+Foi alguma coisa.
+
+00:58:48.510 --> 00:58:50.050
+Não estava 56.
+
+00:58:50.530 --> 00:58:50.970
+Mas.
+
+00:58:52.710 --> 00:58:53.830
+Gastei um dinheirinho aqui.
+
+00:58:56.870 --> 00:58:57.990
+Gastei um dinheirinho aqui.
+
+00:58:58.930 --> 00:58:59.930
+Não sei o que foi.
+
+00:59:01.150 --> 00:59:01.710
+Será que.
+
+00:59:01.790 --> 00:59:03.570
+Se eu mudar para o 3 .5.
+
+00:59:03.610 --> 00:59:04.510
+Se ele vai dar erro também.
+
+00:59:05.310 --> 00:59:08.510
+O jeito é usar o 3 .16 mesmo.
+
+00:59:08.770 --> 00:59:09.170
+Vamos ver.
+
+00:59:13.440 --> 00:59:14.320
+A princípio.
+
+00:59:15.840 --> 00:59:16.900
+Estou utilizando o token o suficiente.
+
+00:59:17.800 --> 00:59:18.400
+Sobrou 5.
+
+00:59:18.580 --> 00:59:19.920
+Daria para usar o 3 .5.
+
+00:59:20.960 --> 00:59:22.100
+Com mais ou menos notas.
+
+00:59:22.100 --> 00:59:23.820
+Vou dizer que pass e fixidade são
+conceitos distintos.
+
+00:59:24.740 --> 00:59:26.160
+O que tem de diferença aqui.
+
+00:59:27.960 --> 00:59:28.400
+Claro.
+
+00:59:28.420 --> 00:59:31.040
+Ele conseguiu me trazer mais
+informações.
+
+00:59:31.580 --> 00:59:32.020
+Sobre.
+
+00:59:33.080 --> 00:59:33.840
+Com mais ou menos notas.
+
+00:59:33.880 --> 00:59:36.000
+Esse aqui.
+
+00:59:36.440 --> 00:59:37.820
+Vou copiar e colar.
+
+00:59:38.240 --> 00:59:40.380
+Vou separar.
+
+00:59:40.400 --> 00:59:41.240
+Vou deixar na aula.
+
+00:59:41.240 --> 00:59:42.960
+A mesma pergunta.
+
+00:59:43.180 --> 00:59:44.000
+Que eu fiz.
+
+00:59:46.760 --> 00:59:47.900
+Respondida pelos 3.
+
+00:59:48.260 --> 00:59:49.560
+Para vocês poderem comparar.
+
+00:59:49.740 --> 00:59:50.520
+Vou copiar aqui.
+
+00:59:53.960 --> 00:59:55.020
+Vou colar aqui.
+
+00:59:56.420 --> 00:59:58.600
+Vou criar uma nota nova.
+
+00:59:58.720 --> 00:59:59.620
+Depois eu só copio e colo.
+
+01:00:00.280 --> 01:00:00.760
+Então.
+
+01:00:02.320 --> 01:00:02.800
+Smart.
+
+01:00:05.140 --> 01:00:06.880
+Aqui deu para ver que ele já está ali.
+
+01:00:07.020 --> 01:00:08.860
+Ele está fazendo o embedding desse aqui
+também.
+
+01:00:10.720 --> 01:00:11.200
+Connections.
+
+01:00:11.920 --> 01:00:12.900
+Vou botar aqui.
+
+01:00:12.900 --> 01:00:13.980
+Aqui é o prompt.
+
+01:00:23.880 --> 01:00:25.020
+O que é legal aqui do prompt.
+
+01:00:25.120 --> 01:00:25.680
+Se eu botar aqui.
+
+01:00:36.170 --> 01:00:37.630
+Ele vai ficar aqui bonitinho.
+
+01:00:38.530 --> 01:00:40.090
+Se eu clicar aqui eu copio já.
+
+01:00:40.190 --> 01:00:41.610
+Ele copia para a área de transferência.
+
+01:00:42.390 --> 01:00:43.310
+Então aqui está o prompt.
+
+01:00:43.490 --> 01:00:44.710
+Aqui vai estar a resposta.
+
+01:00:45.630 --> 01:00:46.430
+Chat GPT.
+
+01:00:47.810 --> 01:00:49.190
+Vocês sabem o que é o Chat GPT.
+
+01:00:49.270 --> 01:00:52.050
+Vou botar o 4 .8k.
+
+01:00:53.830 --> 01:00:55.090
+Fica bonitinho o Chat GPT.
+
+01:00:55.210 --> 01:00:57.150
+Chat GPT 4 .8k.
+
+01:01:00.340 --> 01:01:01.860
+Com base nas nas oferecidas.
+
+01:01:01.920 --> 01:01:02.420
+Foi esse aqui.
+
+01:01:04.500 --> 01:01:04.940
+Inclusive eu posso.
+
+01:01:05.180 --> 01:01:06.300
+Deixa eu ver o que ele faz.
+
+01:01:06.480 --> 01:01:06.860
+Ele cria.
+
+01:01:09.360 --> 01:01:10.340
+Copia para o prompt.
+
+01:01:12.260 --> 01:01:14.040
+Copia a mensagem.
+
+01:01:14.760 --> 01:01:16.100
+Aqui copia o prompt.
+
+01:01:16.520 --> 01:01:18.660
+Deixa eu ver o que ele copiou aqui.
+
+01:01:19.440 --> 01:01:20.280
+Ele copiou tudo.
+
+01:01:21.200 --> 01:01:21.680
+Está aí.
+
+01:01:22.180 --> 01:01:23.160
+Eu não quero tudo.
+
+01:01:24.280 --> 01:01:28.230
+Agora esse aqui eu tenho.
+
+01:01:29.410 --> 01:01:31.030
+Vamos pegar o 3 .5.
+
+01:01:32.290 --> 01:01:33.210
+Chat GPT.
+
+01:01:33.370 --> 01:01:34.710
+3 .5.
+
+01:01:35.370 --> 01:01:35.830
+16k.
+
+01:01:40.770 --> 01:01:40.970
+Esse aqui.
+
+01:01:42.150 --> 01:01:44.210
+E agora vamos pegar o Chat GPT.
+
+01:01:46.130 --> 01:01:47.010
+3 .5.
+
+01:01:49.560 --> 01:01:50.000
+4k.
+
+01:01:52.780 --> 01:01:54.400
+Que foi esse aqui.
+
+01:01:54.580 --> 01:01:55.220
+Esse último.
+
+01:01:55.760 --> 01:01:56.640
+Dá para ver que assim.
+
+01:01:56.980 --> 01:01:59.580
+Reduziu já a quantidade de palavras.
+
+01:01:59.640 --> 01:02:00.440
+De um para o outro.
+
+01:02:01.040 --> 01:02:02.340
+Esse aqui está bem menor já.
+
+01:02:02.740 --> 01:02:03.880
+Mas ele ainda está bom.
+
+01:02:04.300 --> 01:02:06.000
+Posso dizer que a felicidade.
+
+01:02:06.660 --> 01:02:08.400
+Posso dizer que na opinião de Nahal.
+
+01:02:09.060 --> 01:02:10.860
+Felicidade são conceitos conectados mas
+distintos.
+
+01:02:11.220 --> 01:02:12.600
+Pode ser que a felicidade são conceitos
+distintos.
+
+01:02:13.900 --> 01:02:14.760
+Continua a mesma coisa.
+
+01:02:16.340 --> 01:02:17.800
+Paz e felicidade são conceitos
+interconectados.
+
+01:02:19.060 --> 01:02:19.660
+Mas distintos.
+
+01:02:20.280 --> 01:02:22.400
+Enquanto felicidade é frequentemente
+associado a sentimentos.
+
+01:02:22.420 --> 01:02:23.000
+Vamos ver o que está aqui.
+
+01:02:24.120 --> 01:02:25.420
+Embora sejam correlacionados.
+
+01:02:25.480 --> 01:02:27.220
+A felicidade é frequentemente associada
+a emoções positivas.
+
+01:02:27.240 --> 01:02:27.900
+Como a alegria a fazer.
+
+01:02:28.600 --> 01:02:31.120
+Enquanto a paz é sobre o estado de
+tranquilidade e calma interior.
+
+01:02:32.240 --> 01:02:33.420
+Meio de circunstâncias.
+
+01:02:33.420 --> 01:02:36.240
+A felicidade pode ser o subproduto da
+paz.
+
+01:02:36.400 --> 01:02:37.720
+Mas não é necessariamente o objetivo
+final.
+
+01:02:38.300 --> 01:02:39.280
+Como é que ele fala aqui.
+
+01:02:40.200 --> 01:02:40.920
+Em resumo.
+
+01:02:40.920 --> 01:02:42.980
+Uma paz é o estado de interno
+equilíbrio.
+
+01:02:43.140 --> 01:02:43.680
+Então assim.
+
+01:02:43.740 --> 01:02:45.880
+Realmente a qualidade da resposta.
+
+01:02:46.300 --> 01:02:47.620
+Ela não está ruim no 3 .5.
+
+01:02:48.260 --> 01:02:48.860
+Só que.
+
+01:02:50.140 --> 01:02:50.840
+Ela cai.
+
+01:02:51.300 --> 01:02:52.920
+Ela não mantém a mesma qualidade.
+
+01:02:53.500 --> 01:02:55.420
+Isso eu vou botar aqui na nossa aula
+também.
+
+01:02:55.540 --> 01:02:56.880
+Eu vou copiar isso aqui e vou botar.
+
+01:02:57.180 --> 01:02:59.700
+Porque é legal que vocês tenham a
+diferença.
+
+01:03:00.000 --> 01:03:02.560
+Mas também eu queria poder calcular
+certinho.
+
+01:03:02.640 --> 01:03:03.480
+Se eu colocar.
+
+01:03:04.220 --> 01:03:05.140
+Se eu colocar.
+
+01:03:06.640 --> 01:03:07.520
+O prompt.
+
+01:03:09.240 --> 01:03:09.840
+Vamos ver.
+
+01:03:10.920 --> 01:03:11.940
+Se eu tivesse todo o histórico aqui.
+
+01:03:12.080 --> 01:03:14.500
+Eu saberia o máximo de tokens que ele
+utilizou.
+
+01:03:15.300 --> 01:03:16.820
+Ele utilizou aqui por exemplo.
+
+01:03:17.820 --> 01:03:21.120
+2 .498 Então.
+
+01:03:22.060 --> 01:03:23.940
+Vamos ver quanto é que custou lá a
+diferença.
+
+01:03:25.120 --> 01:03:26.380
+É legal saber isso.
+
+01:03:26.460 --> 01:03:27.540
+Porque a gente tem uma média também.
+
+01:03:27.700 --> 01:03:28.720
+De quanto custa.
+
+01:03:28.820 --> 01:03:29.800
+Está em 0 ,74.
+
+01:03:31.060 --> 01:03:32.260
+Vou atualizar aqui.
+
+01:03:33.100 --> 01:03:34.620
+Foi para 0 ,76.
+
+01:03:34.920 --> 01:03:36.700
+Então ele custou 0 ,02.
+
+01:03:38.080 --> 01:03:39.560
+Estranho estar custando 0 ,02.
+
+01:03:40.920 --> 01:03:41.500
+0 ,05 porque.
+
+01:03:43.280 --> 01:03:45.280
+Normalmente ele é bem barato.
+
+01:03:45.360 --> 01:03:46.240
+Bem barato mesmo.
+
+01:03:46.380 --> 01:03:47.140
+Menos de 1 centavo.
+
+01:03:47.580 --> 01:03:49.260
+Mas beleza custou então.
+
+01:03:49.880 --> 01:03:50.980
+2 centavos.
+
+01:03:52.680 --> 01:03:52.960
+Cadê.
+
+01:03:56.060 --> 01:03:59.920
+Esse aqui custou 2 centavos.
+
+01:04:00.200 --> 01:04:01.640
+Esse aqui custou o dobro.
+
+01:04:01.880 --> 01:04:03.880
+Era para ter custado 4 centavos.
+
+01:04:04.260 --> 01:04:05.160
+Esse aqui.
+
+01:04:06.700 --> 01:04:08.200
+O dobro desse aqui.
+
+01:04:08.980 --> 01:04:10.060
+Ou melhor.
+
+01:04:10.220 --> 01:04:11.240
+Ele é 20 vezes mais caro.
+
+01:04:11.240 --> 01:04:12.000
+Esse aqui custou.
+
+01:04:12.080 --> 01:04:13.100
+Se a gente souber.
+
+01:04:13.100 --> 01:04:15.360
+Como a gente sabe que esse aqui custou 2
+centavos.
+
+01:04:17.200 --> 01:04:19.100
+0 ,02 centavos.
+
+01:04:19.440 --> 01:04:22.180
+A gente sabe que o outro custou 20 vezes
+mais.
+
+01:04:22.780 --> 01:04:23.260
+Então.
+
+01:04:23.320 --> 01:04:25.060
+Esse aqui custou 40 centavos.
+
+01:04:29.240 --> 01:04:30.760
+E esse aqui é o dobro desse.
+
+01:04:31.280 --> 01:04:37.280
+Então esse aqui custou 20 centavos.
+
+01:04:37.640 --> 01:04:38.800
+Então está aqui a resposta.
+
+01:04:39.100 --> 01:04:39.860
+De vocês.
+
+01:04:42.220 --> 01:04:43.620
+Esse é o dobro desse aqui.
+
+01:04:44.640 --> 01:04:45.120
+Então.
+
+01:04:45.120 --> 01:04:45.840
+É para ser isso.
+
+01:04:45.840 --> 01:04:47.620
+Esse aqui custou 20.
+
+01:04:48.360 --> 01:04:49.000
+Esse aqui.
+
+01:04:49.420 --> 01:04:50.640
+Eu vou botar aqui a pergunta.
+
+01:04:50.740 --> 01:04:53.600
+Eu teria que usar daí de novo.
+
+01:04:53.920 --> 01:04:54.680
+Deixa eu abrir lá.
+
+01:05:02.650 --> 01:05:03.570
+Eu quero abrir esse aqui.
+
+01:05:08.080 --> 01:05:09.720
+Se a mesma.
+
+01:05:11.700 --> 01:05:12.140
+Requisição.
+
+01:05:14.990 --> 01:05:15.430
+Utilizou.
+
+01:05:16.110 --> 01:05:16.550
+Assim.
+
+01:05:16.570 --> 01:05:18.530
+Ele devolveu mais também caracteres de
+output.
+
+01:05:18.850 --> 01:05:21.270
+Não sei se foi o mesmo prompt.
+
+01:05:21.410 --> 01:05:22.450
+Vamos dizer que foi a mesma coisa.
+
+01:05:22.850 --> 01:05:25.050
+Se a mesma requisição utilizou.
+
+01:05:25.710 --> 01:05:26.590
+O mesmo.
+
+01:05:27.650 --> 01:05:28.470
+Número de tokens.
+
+01:05:29.260 --> 01:05:31.470
+E no chat GPT.
+
+01:05:31.690 --> 01:05:33.190
+3 .5.
+
+01:05:33.770 --> 01:05:34.870
+4k.
+
+01:05:35.500 --> 01:05:36.810
+Ele custou.
+
+01:05:36.810 --> 01:05:38.910
+2 centavos de dólar.
+
+01:05:39.630 --> 01:05:41.630
+Quanto sairia.
+
+01:05:41.630 --> 01:05:43.410
+A mesma requisição.
+
+01:05:43.590 --> 01:05:44.690
+No.
+
+01:05:45.640 --> 01:05:46.850
+3 .5.
+
+01:05:47.600 --> 01:05:48.150
+16k.
+
+01:05:48.330 --> 01:05:50.890
+E no chat.
+
+01:05:51.360 --> 01:05:53.030
+GPT 4k.
+
+01:05:53.230 --> 01:05:54.130
+Com.
+
+01:05:54.430 --> 01:05:56.070
+4 8k.
+
+01:06:07.860 --> 01:06:08.900
+Então seria.
+
+01:06:10.680 --> 01:06:11.800
+4 centavos.
+
+01:06:12.160 --> 01:06:13.220
+E no outro.
+
+01:06:14.180 --> 01:06:16.060
+Que é 20 vezes mais caro.
+
+01:06:16.480 --> 01:06:17.900
+15 vezes mais caro.
+
+01:06:17.900 --> 01:06:18.860
+Que o 3 .5.
+
+01:06:19.140 --> 01:06:20.560
+Custaria 25 centavos de dólar.
+
+01:06:20.660 --> 01:06:21.500
+Então está aqui nossa resposta.
+
+01:06:23.160 --> 01:06:25.200
+4 centavos e 25 centavos.
+
+01:06:25.200 --> 01:06:26.700
+Deixa eu alterar lá.
+
+01:06:28.420 --> 01:06:28.980
+Aqui.
+
+01:06:30.120 --> 01:06:31.200
+Então custou.
+
+01:06:31.500 --> 01:06:32.960
+4 centavos aqui.
+
+01:06:33.660 --> 01:06:34.220
+E.
+
+01:06:35.880 --> 01:06:36.780
+Custou aqui.
+
+01:06:37.860 --> 01:06:38.300
+5 centavos.
+
+01:06:39.500 --> 01:06:40.620
+Então assim.
+
+01:06:42.120 --> 01:06:43.560
+Se a gente vai comparar.
+
+01:06:43.560 --> 01:06:44.440
+Esse com esse.
+
+01:06:44.920 --> 01:06:47.340
+O 4 com.
+
+01:06:47.600 --> 01:06:48.840
+O 3 .5 4.
+
+01:06:49.360 --> 01:06:50.980
+Com o 3 .5 16.
+
+01:06:52.040 --> 01:06:52.720
+Sinceramente.
+
+01:06:52.960 --> 01:06:55.340
+Por pagar o dobro.
+
+01:06:55.360 --> 01:06:56.800
+Eu prefiro utilizar o 16.
+
+01:06:57.380 --> 01:07:00.020
+Agora pagar 20 vezes mais.
+
+01:07:00.460 --> 01:07:01.620
+Ou mais de 20 vezes.
+
+01:07:02.220 --> 01:07:03.700
+15 vezes mais.
+
+01:07:03.820 --> 01:07:04.140
+Aqui.
+
+01:07:06.480 --> 01:07:07.160
+Não.
+
+01:07:07.860 --> 01:07:08.560
+Eu não utilizaria.
+
+01:07:09.740 --> 01:07:10.660
+O 8.
+
+01:07:10.920 --> 01:07:12.840
+Eu não acho que vale a pena utilizar o
+8.
+
+01:07:13.060 --> 01:07:13.400
+Eu acho que.
+
+01:07:13.480 --> 01:07:16.000
+Até porque o 8 tem uma limitação também
+de tokens.
+
+01:07:16.500 --> 01:07:18.100
+Aqui eu tenho o dobro de tokens.
+
+01:07:18.220 --> 01:07:18.920
+Que o 4.
+
+01:07:19.440 --> 01:07:22.060
+E se eu for comparar essas duas
+respostas aqui.
+
+01:07:23.120 --> 01:07:23.580
+Semanticamente.
+
+01:07:24.820 --> 01:07:26.420
+Está melhor respondido de cima.
+
+01:07:26.640 --> 01:07:28.060
+Assim com pontuações.
+
+01:07:28.060 --> 01:07:29.420
+Com formas de falar.
+
+01:07:29.840 --> 01:07:33.000
+Mas está muito boa a resposta do 3 .5
+16k também.
+
+01:07:33.080 --> 01:07:33.780
+Então eu aconselho vocês.
+
+01:07:33.780 --> 01:07:36.400
+A deixarem a configuração aqui.
+
+01:07:36.740 --> 01:07:37.520
+No 16.
+
+01:07:37.680 --> 01:07:39.780
+Até para não terem nenhum risco de
+problema.
+
+01:07:41.280 --> 01:07:41.720
+Com.
+
+01:07:43.280 --> 01:07:43.720
+Limitações.
+
+01:07:43.940 --> 01:07:44.700
+Que está aquele.
+
+01:07:45.980 --> 01:07:46.500
+Aquele teste.
+
+01:07:46.820 --> 01:07:48.380
+API error.
+
+01:07:48.920 --> 01:07:50.400
+Vocês não vão ter esse problema.
+
+01:07:50.780 --> 01:07:53.260
+Então esse aqui eu também vou deixar
+essa comparação aqui.
+
+01:07:53.440 --> 01:07:54.400
+Ali na nossa aula.
+
+01:07:54.460 --> 01:07:55.960
+Que eu acho que é legal ter essa
+comparação.
+
+01:07:56.320 --> 01:07:57.260
+E bom.
+
+01:07:57.840 --> 01:07:58.840
+Lá dentro da aula.
+
+01:07:58.840 --> 01:08:00.420
+Aqui embaixo da aula na verdade.
+
+01:08:00.700 --> 01:08:01.680
+A gente vai ter.
+
+01:08:01.820 --> 01:08:03.340
+Eu vou ter bastante outras informações.
+
+01:08:03.380 --> 01:08:04.800
+Sobre essa ferramenta aqui.
+
+01:08:05.400 --> 01:08:06.340
+Deixa eu pegar ela aqui.
+
+01:08:08.820 --> 01:08:11.100
+Então o que faltou de informações.
+
+01:08:11.300 --> 01:08:12.440
+Assim que você achar.
+
+01:08:12.520 --> 01:08:14.500
+Que você gostaria de ter mais
+informações.
+
+01:08:15.400 --> 01:08:17.060
+Sobre o chat base.
+
+01:08:17.140 --> 01:08:18.120
+De configurações.
+
+01:08:19.320 --> 01:08:22.060
+Para que serve cada coisa aqui.
+
+01:08:22.140 --> 01:08:23.460
+Tem tudo escrito aqui embaixo.
+
+01:08:23.820 --> 01:08:24.740
+Eu já escrevi.
+
+01:08:24.900 --> 01:08:27.160
+Para cada área aqui.
+
+01:08:27.160 --> 01:08:28.320
+Como é que vocês podem utilizar.
+
+01:08:28.460 --> 01:08:30.600
+Para fazer exclusões de pastas.
+
+01:08:30.600 --> 01:08:31.920
+Está tudo bem descrito aqui.
+
+01:08:32.620 --> 01:08:34.680
+Basicamente o que vocês vão trabalhar
+muito bem.
+
+01:08:34.720 --> 01:08:36.220
+Vai ser essa parte do chat aqui.
+
+01:08:36.320 --> 01:08:38.800
+E aqui é uma questão de aprimoramento.
+
+01:08:38.840 --> 01:08:39.820
+De ficar fazendo testes.
+
+01:08:39.840 --> 01:08:41.340
+Como eu fiquei fazendo aqui com vocês
+agora.
+
+01:08:41.660 --> 01:08:42.900
+Fui fazendo vários testes.
+
+01:08:43.060 --> 01:08:45.180
+Eu já tinha feito muito teste dentro
+dele.
+
+01:08:45.760 --> 01:08:47.900
+Mas inclusive nessa aula eu consegui
+fazer outros testes.
+
+01:08:47.960 --> 01:08:50.900
+Eu não tinha feito ainda o teste de
+análise de 16K.
+
+01:08:51.280 --> 01:08:52.760
+Só tinha feito o teste com o 4.
+
+01:08:52.920 --> 01:08:54.300
+E com o 3 .5.
+
+01:08:54.400 --> 01:08:55.420
+Eu já tinha visto muita diferença.
+
+01:08:57.160 --> 01:08:58.820
+Com o 3 .5 com o 4K.
+
+01:08:59.040 --> 01:09:00.240
+E agora com o 16.
+
+01:09:00.400 --> 01:09:02.700
+Eu vou te dizer que eu utilizaria só o
+16.
+
+01:09:02.960 --> 01:09:05.000
+Não utilizaria o chat de PT4.
+
+01:09:05.300 --> 01:09:06.960
+Porque ele ainda está muito caro.
+
+01:09:07.260 --> 01:09:08.720
+E o 3 .5.
+
+01:09:08.720 --> 01:09:10.840
+Eles estão cada vez conseguindo reduzir
+mais o custo.
+
+01:09:10.920 --> 01:09:13.900
+Então eu prefiro ficar ainda com o 3 .5.
+
+01:09:14.160 --> 01:09:16.060
+A não ser para fazer prompts aqui.
+
+01:09:16.220 --> 01:09:17.240
+Com o text generator.
+
+01:09:17.660 --> 01:09:18.820
+Eu utilizaria.
+
+01:09:18.940 --> 01:09:20.480
+Mas com ele não.
+
+01:09:20.740 --> 01:09:22.360
+A gente ainda tem outro plugin aqui.
+
+01:09:22.460 --> 01:09:24.100
+Que é o copilot.
+
+01:09:24.320 --> 01:09:25.980
+Basicamente ele tem a mesma função.
+
+01:09:27.160 --> 01:09:28.240
+Que é o obsidian.
+
+01:09:28.380 --> 01:09:31.480
+Então aqui eu posso pedir para ele
+conversar.
+
+01:09:31.500 --> 01:09:32.780
+Por exemplo com essa minha nota.
+
+01:09:33.400 --> 01:09:35.160
+E eu posso perguntar para ele.
+
+01:09:35.240 --> 01:09:35.860
+Por exemplo.
+
+01:09:39.480 --> 01:09:40.040
+Quais.
+
+01:09:42.180 --> 01:09:43.300
+As principais.
+
+01:09:44.260 --> 01:09:44.820
+Funcionalidades.
+
+01:09:44.820 --> 01:09:46.280
+Do smart.
+
+01:09:54.180 --> 01:09:55.660
+Essa é uma função.
+
+01:09:55.740 --> 01:09:56.220
+Por exemplo.
+
+01:09:56.220 --> 01:09:57.800
+Que ainda não tem.
+
+01:10:01.260 --> 01:10:01.820
+Específica.
+
+01:10:01.820 --> 01:10:02.680
+De eu marcar aqui a nota.
+
+01:10:02.680 --> 01:10:04.040
+Para poder fazer pergunta para ela.
+
+01:10:04.120 --> 01:10:05.600
+Eu posso fazer uma pergunta para a nota.
+
+01:10:05.700 --> 01:10:06.700
+Marcando a nota lá.
+
+01:10:07.000 --> 01:10:09.680
+Dentro do smart connections.
+
+01:10:10.540 --> 01:10:11.980
+Basicamente o copilot.
+
+01:10:12.200 --> 01:10:13.740
+Ele é um smart connections.
+
+01:10:13.900 --> 01:10:14.920
+Porque ele faz o mesmo sistema.
+
+01:10:15.040 --> 01:10:15.740
+Ele faz o embedding.
+
+01:10:15.780 --> 01:10:16.980
+Igual faz o smart connections.
+
+01:10:18.380 --> 01:10:20.320
+Só que ele tem alguns recursos a mais.
+
+01:10:20.520 --> 01:10:21.380
+Assim como esse aqui.
+
+01:10:21.680 --> 01:10:25.320
+Ele tem a possibilidade.
+
+01:10:25.420 --> 01:10:27.620
+De eu reconstruir aqui ativamente a
+nota.
+
+01:10:28.900 --> 01:10:30.640
+E ele tem mais funções.
+
+01:10:30.640 --> 01:10:32.520
+Então aqui eu posso botar o azure por
+exemplo.
+
+01:10:32.820 --> 01:10:34.140
+Ele tem mais funções também.
+
+01:10:34.160 --> 01:10:35.280
+Nas configurações dele.
+
+01:10:36.320 --> 01:10:38.120
+Então aqui eu posso por exemplo.
+
+01:10:38.180 --> 01:10:39.920
+Não utilizar só o OpenAI.
+
+01:10:40.120 --> 01:10:42.540
+Eu posso utilizar outras APIs.
+
+01:10:42.800 --> 01:10:43.580
+Como o Hug and Face.
+
+01:10:44.140 --> 01:10:45.100
+Como o coherent.
+
+01:10:45.380 --> 01:10:47.220
+Para poder fazer o envio.
+
+01:10:47.240 --> 01:10:50.000
+Do meu embedding para lá também.
+
+01:10:50.600 --> 01:10:52.500
+Então assim eu posso utilizar.
+
+01:10:52.740 --> 01:10:53.820
+Isso aqui é uma coisa que eu queria
+muito.
+
+01:10:54.340 --> 01:10:54.860
+No.
+
+01:10:56.140 --> 01:10:56.960
+Lá dentro.
+
+01:10:57.820 --> 01:10:58.340
+Do.
+
+01:11:02.080 --> 01:11:03.000
+Então eu vou fazer o seguinte.
+
+01:11:06.870 --> 01:11:08.230
+O smart connections.
+
+01:11:08.290 --> 01:11:09.890
+Eu não posso configurar nele.
+
+01:11:10.490 --> 01:11:11.230
+Um prompt.
+
+01:11:12.050 --> 01:11:13.130
+Isso que eu acho ruim.
+
+01:11:13.890 --> 01:11:15.930
+É uma funcionalidade que eu já vi na
+documentação.
+
+01:11:16.030 --> 01:11:16.710
+Que está para vir.
+
+01:11:16.990 --> 01:11:19.450
+Mas eu teria que toda hora ficar
+copiando e colando.
+
+01:11:19.530 --> 01:11:20.350
+Como vocês viram.
+
+01:11:20.950 --> 01:11:21.930
+O emit naval.
+
+01:11:23.310 --> 01:11:24.770
+Só que qual é a diferença aqui.
+
+01:11:26.590 --> 01:11:27.430
+No copilot.
+
+01:11:27.590 --> 01:11:28.750
+Eu não preciso fazer isso.
+
+01:11:29.030 --> 01:11:31.130
+No copilot eu posso configurar.
+
+01:11:31.210 --> 01:11:32.970
+Eu vou baixar aqui o copilot.
+
+01:11:34.030 --> 01:11:34.170
+Vamos jogar juntos.
+
+01:11:36.070 --> 01:11:36.630
+Copilot.
+
+01:11:38.810 --> 01:11:39.370
+Instalar.
+
+01:11:42.860 --> 01:11:43.420
+Ativar.
+
+01:11:44.000 --> 01:11:44.560
+Configurar.
+
+01:11:45.100 --> 01:11:46.640
+Eu vou botar agora aqui.
+
+01:11:46.820 --> 01:11:48.560
+Vou pegar minha API que está aqui.
+
+01:11:50.120 --> 01:11:51.980
+E vou colocar aqui no copilot.
+
+01:11:52.520 --> 01:11:54.040
+Eu vou deixar 16k mesmo.
+
+01:11:54.140 --> 01:11:54.880
+Eu quero 16k.
+
+01:11:55.160 --> 01:11:57.020
+E aqui eu posso utilizar.
+
+01:11:57.980 --> 01:12:00.940
+Um prompt do assistente.
+
+01:12:01.260 --> 01:12:02.680
+O que isso quer dizer.
+
+01:12:02.920 --> 01:12:03.880
+Consegue utilizar um prompt.
+
+01:12:03.880 --> 01:12:04.720
+Então eu posso vir aqui.
+
+01:12:05.500 --> 01:12:06.420
+Pegar esse prompt.
+
+01:12:06.540 --> 01:12:08.840
+E definir que ele vai sempre imitar a
+fala de naval.
+
+01:12:09.240 --> 01:12:11.990
+Vou vir aqui agora.
+
+01:12:19.090 --> 01:12:19.570
+Pronto.
+
+01:12:19.870 --> 01:12:20.570
+Então agora.
+
+01:12:20.790 --> 01:12:21.890
+Então eu vou botar o modo debug.
+
+01:12:22.170 --> 01:12:24.230
+Se der algum problema eu quero saber o
+que está acontecendo.
+
+01:12:26.090 --> 01:12:28.950
+Will log out API first from prompt do
+console.
+
+01:12:29.190 --> 01:12:29.750
+É isso que eu quero.
+
+01:12:29.930 --> 01:12:31.210
+Que apareça aqui no console.
+
+01:12:31.490 --> 01:12:32.770
+Se gerar algum erro.
+
+01:12:33.550 --> 01:12:35.190
+A API já está configurada.
+
+01:12:35.250 --> 01:12:36.970
+Está em 16k.
+
+01:12:36.970 --> 01:12:38.170
+É isso que eu quero mesmo.
+
+01:12:38.810 --> 01:12:40.650
+Ver se tem mais alguma coisa que eu
+tenho que configurar aqui.
+
+01:12:40.790 --> 01:12:42.310
+Aqui se eu fosse usar o Azure.
+
+01:12:42.510 --> 01:12:43.230
+Mas não vou usar.
+
+01:12:43.450 --> 01:12:44.130
+Aqui a temperatura.
+
+01:12:45.110 --> 01:12:46.110
+Legal aqui também.
+
+01:12:46.230 --> 01:12:47.890
+Aqui eu posso definir o máximo de
+tokens.
+
+01:12:48.050 --> 01:12:48.630
+Está em 1000.
+
+01:12:48.790 --> 01:12:49.570
+Vou deixar no máximo.
+
+01:12:50.730 --> 01:12:51.350
+Default 1000.
+
+01:12:51.570 --> 01:12:52.290
+This number plus.
+
+01:12:52.830 --> 01:12:55.170
+Probably must be smaller than the
+context window.
+
+01:12:55.830 --> 01:12:56.230
+Entendi.
+
+01:12:56.570 --> 01:12:58.550
+Então esse aqui eu vou deixar um
+pouquinho menor.
+
+01:12:59.890 --> 01:13:01.270
+Temperatura aqui seria o quanto ele
+consegue
+
+01:13:01.270 --> 01:13:01.790
+variar.
+
+01:13:07.170 --> 01:13:07.890
+Muito doidão.
+
+01:13:07.970 --> 01:13:09.210
+Vamos inclusive testar esses dois.
+
+01:13:09.270 --> 01:13:10.170
+Eu vou deixar em 0 primeiro.
+
+01:13:10.710 --> 01:13:13.070
+Ou seja, eu quero que ele me responda só
+com base no texto.
+
+01:13:13.170 --> 01:13:14.030
+Realmente que tem aqui.
+
+01:13:14.470 --> 01:13:16.850
+E vou clicar aqui que eu quero conversar
+com ele.
+
+01:13:17.150 --> 01:13:17.830
+Aqui está ele.
+
+01:13:18.350 --> 01:13:21.830
+Eu quero conversar com ele de forma
+geral.
+
+01:13:22.050 --> 01:13:22.490
+Então assim.
+
+01:13:22.550 --> 01:13:24.390
+Primeiro eu vou mandar uma pergunta para
+ele.
+
+01:13:26.070 --> 01:13:27.330
+Deixa eu ver se ele já fez.
+
+01:13:27.530 --> 01:13:27.810
+Aqui.
+
+01:13:33.100 --> 01:13:34.200
+Ele me deu um erro aqui.
+
+01:13:34.220 --> 01:13:35.440
+Mas eu vou testar de qualquer forma.
+
+01:13:35.980 --> 01:13:37.980
+O que é Naval?
+
+01:13:44.480 --> 01:13:44.880
+Debug.
+
+01:13:44.920 --> 01:13:45.720
+Ele está dando um erro aqui.
+
+01:13:47.640 --> 01:13:48.040
+5.
+
+01:13:49.200 --> 01:13:50.100
+Máximo de tokens 1000.
+
+01:13:51.740 --> 01:13:52.520
+Deixa eu ver.
+
+01:13:59.950 --> 01:14:01.650
+Uma coisa que esse cara aqui.
+
+01:14:01.690 --> 01:14:02.790
+Como ele é mais recente.
+
+01:14:02.970 --> 01:14:04.230
+Ele está sendo atualizado agora.
+
+01:14:05.450 --> 01:14:06.850
+Ele tem vários bugzinhos.
+
+01:14:07.050 --> 01:14:09.150
+Que é uma coisa que eu já falei para
+vocês lá na aula.
+
+01:14:11.110 --> 01:14:11.910
+De geral.
+
+01:14:12.090 --> 01:14:12.510
+Então aqui.
+
+01:14:13.170 --> 01:14:14.690
+Normalmente tem que ligar e desligar
+ele.
+
+01:14:14.690 --> 01:14:16.170
+A princípio agora foi.
+
+01:14:16.890 --> 01:14:17.330
+Então.
+
+01:14:18.150 --> 01:14:20.410
+O que é felicidade.
+
+01:14:21.890 --> 01:14:22.550
+Deu que foi.
+
+01:14:22.730 --> 01:14:23.830
+Então é só fazer isso.
+
+01:14:23.930 --> 01:14:24.590
+Deu um bugzinho nele.
+
+01:14:24.710 --> 01:14:26.070
+Vai lá desliga e liga ele que ele
+funciona.
+
+01:14:26.750 --> 01:14:27.810
+Bem estar e satisfação.
+
+01:14:27.970 --> 01:14:30.590
+A estação de contato, tratamento,
+alegria e realização.
+
+01:14:30.650 --> 01:14:32.590
+A felicidade pode ser experimentada de
+diferentes maneiras.
+
+01:14:33.510 --> 01:14:34.390
+Sua necessidade.
+
+01:14:34.590 --> 01:14:35.310
+Dá uma bosta.
+
+01:14:35.410 --> 01:14:37.090
+Essa é a resposta dele aqui.
+
+01:14:37.810 --> 01:14:39.290
+Ele não está utilizando.
+
+01:14:40.850 --> 01:14:42.430
+A base que a gente tem aqui.
+
+01:14:42.430 --> 01:14:43.990
+Do naval em si.
+
+01:14:44.570 --> 01:14:45.750
+Então deixa eu ver aqui.
+
+01:14:45.850 --> 01:14:47.690
+Se eu botar aqui esse aqui.
+
+01:14:48.510 --> 01:14:50.110
+E pedir para ele me dar.
+
+01:14:50.370 --> 01:14:51.510
+Conversar comigo em contexto.
+
+01:14:53.430 --> 01:14:54.830
+Foi criado o vetor.
+
+01:14:55.690 --> 01:14:56.770
+O que é felicidade.
+
+01:14:57.170 --> 01:15:05.300
+Deixa eu pegar aqui o outro.
+
+01:15:07.020 --> 01:15:08.020
+Eu queria que ele tivesse.
+
+01:15:08.260 --> 01:15:10.300
+Eu não sei se ele tem essa possibilidade
+de criar.
+
+01:15:11.040 --> 01:15:12.500
+De marcar pastas aqui.
+
+01:15:13.800 --> 01:15:20.690
+Felicidade, tratamento, alegria.
+
+01:15:20.710 --> 01:15:22.210
+Não é isso que eu quero.
+
+01:15:22.610 --> 01:15:23.550
+Vou ver aqui.
+
+01:15:24.610 --> 01:15:25.770
+Se ele está aqui.
+
+01:15:28.070 --> 01:15:28.990
+Peace and happiness.
+
+01:15:30.170 --> 01:15:32.090
+Deixa eu perguntar para ele o que é.
+
+01:15:32.650 --> 01:15:33.810
+Qual a diferença.
+
+01:15:37.750 --> 01:15:38.250
+Entre.
+
+01:15:39.670 --> 01:15:40.170
+Felicidade.
+
+01:15:43.690 --> 01:15:44.690
+Em descanso.
+
+01:15:45.710 --> 01:15:46.710
+E felicidade.
+
+01:15:47.030 --> 01:15:47.850
+Em movimento.
+
+01:16:01.210 --> 01:16:01.710
+Não.
+
+01:16:01.990 --> 01:16:04.530
+Ele está me respondendo coisas que o
+ChatPT me responderia.
+
+01:16:04.570 --> 01:16:04.730
+Quer ver.
+
+01:16:05.110 --> 01:16:06.310
+Vou pegar isso aqui.
+
+01:16:06.310 --> 01:16:08.010
+E vou botar.
+
+01:16:08.290 --> 01:16:09.230
+Lá no meu outro.
+
+01:16:09.370 --> 01:16:10.470
+Que eu estou com o ChatPT aberto.
+
+01:16:11.290 --> 01:16:18.380
+Vou botar ainda o 3 .5.
+
+01:16:29.990 --> 01:16:32.170
+Então ele me respondeu basicamente a
+mesma coisa.
+
+01:16:33.570 --> 01:16:34.710
+Deixa eu ver como é que está aqui.
+
+01:16:35.330 --> 01:16:36.190
+A diferença.
+
+01:16:37.490 --> 01:16:40.520
+De 4 centavos.
+
+01:16:45.000 --> 01:16:46.500
+Deixa eu perguntar para o ChatPT.
+
+01:16:47.080 --> 01:16:48.280
+Para o ChatBase.
+
+01:16:49.240 --> 01:16:50.800
+Ele está com 3 .5.
+
+01:16:51.260 --> 01:16:52.400
+Vou perguntar.
+
+01:16:53.480 --> 01:16:54.420
+Fazer a mesma pergunta.
+
+01:16:54.740 --> 01:16:55.500
+Qual a diferença.
+
+01:16:55.500 --> 01:16:56.640
+Está correndo o português e tudo.
+
+01:17:04.840 --> 01:17:05.200
+Descanso.
+
+01:17:05.700 --> 01:17:06.060
+Estamos.
+
+01:17:07.900 --> 01:17:08.260
+Bom.
+
+01:17:17.990 --> 01:17:19.370
+Ele me trouxe algo parecido.
+
+01:17:19.370 --> 01:17:19.810
+Lá dentro.
+
+01:17:21.010 --> 01:17:21.370
+Aqui.
+
+01:17:23.670 --> 01:17:24.770
+Essas são as referências.
+
+01:17:25.390 --> 01:17:26.890
+Realmente ele me trouxe algo parecido.
+
+01:17:26.890 --> 01:17:29.030
+Lá dentro desse aqui.
+
+01:17:33.800 --> 01:17:34.680
+Nós estamos envolvidos.
+
+01:17:34.980 --> 01:17:35.340
+Beleza.
+
+01:17:35.360 --> 01:17:37.720
+Então eu vou aceitar o que ele me disse.
+
+01:17:37.800 --> 01:17:38.480
+Mas eu vou fazer o seguinte.
+
+01:17:38.640 --> 01:17:39.340
+Eu quero perguntar para ele.
+
+01:17:44.040 --> 01:17:45.240
+Deixa eu voltar aqui.
+
+01:17:45.380 --> 01:17:46.000
+Essa aqui.
+
+01:17:47.540 --> 01:17:49.620
+Baseado nas suas notas.
+
+01:17:50.640 --> 01:17:51.660
+Qual a diferença.
+
+01:17:52.040 --> 01:17:52.400
+Me diga.
+
+01:17:53.300 --> 01:17:54.360
+Paz e felicidade.
+
+01:18:07.620 --> 01:18:08.220
+Bom.
+
+01:18:08.240 --> 01:18:08.680
+Enviei.
+
+01:18:11.760 --> 01:18:13.800
+Na minha opinião a paz e a felicidade.
+
+01:18:13.800 --> 01:18:14.700
+São conceitos distintos.
+
+01:18:15.880 --> 01:18:16.480
+Gostei.
+
+01:18:16.580 --> 01:18:18.800
+Ele realmente leu as informações.
+
+01:18:19.960 --> 01:18:21.880
+A paz no estado tranquilo interior.
+
+01:18:22.280 --> 01:18:23.260
+Sessão de calma e harmonia.
+
+01:18:23.320 --> 01:18:23.980
+Gostei gente.
+
+01:18:24.680 --> 01:18:26.800
+Ele realmente está funcionando.
+
+01:18:27.660 --> 01:18:29.320
+O co -pilot aqui é outra opção para quem
+quiser.
+
+01:18:30.040 --> 01:18:30.160
+Ele.
+
+01:18:31.780 --> 01:18:32.380
+Funcionou bem.
+
+01:18:32.480 --> 01:18:33.700
+O que é bacana do co -pilot.
+
+01:18:34.360 --> 01:18:35.440
+É essa opção.
+
+01:18:36.940 --> 01:18:39.040
+Fazer ele que responda sempre em
+português.
+
+01:18:40.120 --> 01:18:40.520
+E.
+
+01:18:41.060 --> 01:18:42.940
+Eu posso deixar aqui o script que eu
+quero.
+
+01:18:43.060 --> 01:18:44.240
+Então você pode botar assim.
+
+01:18:44.640 --> 01:18:46.380
+Fale como eu falo.
+
+01:18:46.380 --> 01:18:47.540
+E nesses tons etc.
+
+01:18:48.260 --> 01:18:51.220
+Então esse aqui é um prompt.
+
+01:18:51.380 --> 01:18:52.920
+Que eu vou disponibilizar aqui embaixo
+da aula.
+
+01:18:53.020 --> 01:18:54.180
+Você vai poder copiar ele.
+
+01:18:54.260 --> 01:18:56.240
+E transformar no seu aqui.
+
+01:18:57.660 --> 01:18:57.840
+De qualquer jeito.
+
+01:18:58.200 --> 01:18:59.020
+Foi bem legal.
+
+01:18:59.140 --> 01:19:00.240
+Conseguiu responder muito bem.
+
+01:19:00.520 --> 01:19:02.480
+Eu vou perguntar para ele sobre os
+quatro tipos de sorte.
+
+01:19:03.200 --> 01:19:07.680
+Quais são os quatro tipos de sorte que
+existem.
+
+01:19:18.180 --> 01:19:18.620
+Olha.
+
+01:19:18.620 --> 01:19:20.360
+Ele me trouxe aqueles tipos.
+
+01:19:20.440 --> 01:19:21.700
+Eu não sei de onde ele tira essa sorte.
+
+01:19:21.940 --> 01:19:24.420
+Mas ele não me trouxe a sorte cega.
+
+01:19:24.600 --> 01:19:25.860
+Que eu gostaria que ele trouxesse.
+
+01:19:26.360 --> 01:19:28.000
+Então eu vou fazer aquela pergunta.
+
+01:19:29.520 --> 01:19:29.960
+Baseada.
+
+01:19:32.440 --> 01:19:32.880
+Baseado.
+
+01:19:34.220 --> 01:19:34.980
+Na nota.
+
+01:19:34.980 --> 01:19:36.780
+Que é a pergunta que eu tenho aqui.
+
+01:19:38.120 --> 01:19:39.840
+Deixa eu ver se eu tenho essa pergunta
+aqui.
+
+01:19:48.820 --> 01:19:49.220
+Aqui.
+
+01:19:50.140 --> 01:19:51.940
+Baseado nas notas sobre construção.
+
+01:19:52.060 --> 01:19:53.220
+Eu vou pegar exatamente isso aqui.
+
+01:19:54.480 --> 01:19:55.560
+Exatamente a mesma coisa.
+
+01:19:55.860 --> 01:19:56.680
+Vou ver se eu consigo.
+
+01:19:57.240 --> 01:19:58.440
+Provocar a mesma resposta.
+
+01:20:00.080 --> 01:20:00.940
+E é legal daqui.
+
+01:20:01.020 --> 01:20:02.300
+Que eu não preciso ficar repetindo o
+prompt.
+
+01:20:02.500 --> 01:20:02.980
+Aquele prompt.
+
+01:20:03.100 --> 01:20:03.780
+Porque já está lá.
+
+01:20:04.000 --> 01:20:05.300
+Já está respondendo daquela forma.
+
+01:20:07.640 --> 01:20:08.520
+Pelo que eu teria olhado.
+
+01:20:08.520 --> 01:20:10.100
+Na verdade não existe categorias fixas.
+
+01:20:10.620 --> 01:20:11.500
+De sorte.
+
+01:20:11.580 --> 01:20:13.020
+A sorte é um conceito subjetivo.
+
+01:20:13.240 --> 01:20:13.580
+Não.
+
+01:20:15.990 --> 01:20:18.630
+Baseado nas notas sobre construção de
+riqueza.
+
+01:20:20.740 --> 01:20:23.120
+Me diga os quatro tipos de sorte.
+
+01:20:23.640 --> 01:20:25.520
+Que Naval explica.
+
+01:20:32.260 --> 01:20:33.420
+O que eu não sei.
+
+01:20:33.500 --> 01:20:35.180
+É se ele fez o vetor de tudo.
+
+01:20:35.620 --> 01:20:37.040
+Ou se ele só faz o vetor.
+
+01:20:37.660 --> 01:20:38.140
+Não.
+
+01:20:42.120 --> 01:20:43.720
+Ele viajou na batatinha de novo.
+
+01:20:44.160 --> 01:20:45.180
+Deixa eu ver como é que está.
+
+01:20:45.500 --> 01:20:47.520
+Eu deixei em zero a temperatura.
+
+01:20:47.920 --> 01:20:49.200
+Eu vou botar ela em alta.
+
+01:20:51.000 --> 01:20:52.680
+Como ele faria agora.
+
+01:20:53.780 --> 01:20:54.840
+Eu vou pegar aqui.
+
+01:20:54.940 --> 01:20:57.000
+Baseando as notas sobre o passo.
+
+01:20:57.300 --> 01:20:57.780
+O que é passo.
+
+01:21:05.710 --> 01:21:07.690
+Ele conseguiu trazer aqui as coisas.
+
+01:21:09.630 --> 01:21:10.110
+Bem.
+
+01:21:10.250 --> 01:21:10.690
+Mas assim.
+
+01:21:10.970 --> 01:21:12.570
+Na temperatura máxima.
+
+01:21:13.550 --> 01:21:14.730
+É exatamente isso aqui.
+
+01:21:14.830 --> 01:21:16.110
+Ele viaja na batatinha.
+
+01:21:16.710 --> 01:21:18.850
+Faz umas coisas a dar ver.
+
+01:21:19.230 --> 01:21:20.690
+Eu vou perguntar de novo agora.
+
+01:21:20.970 --> 01:21:26.080
+Com a temperatura no máximo.
+
+01:21:27.160 --> 01:21:28.760
+Ele me trouxe de novo a mesma coisa.
+
+01:21:29.080 --> 01:21:30.240
+Não fez diferença nenhuma.
+
+01:21:31.140 --> 01:21:32.280
+Está em zero.
+
+01:21:32.480 --> 01:21:35.340
+Ele teria que me trazer só.
+
+01:21:35.660 --> 01:21:36.820
+Basicamente o que está.
+
+01:21:37.240 --> 01:21:38.400
+Dentro do texto.
+
+01:21:38.580 --> 01:21:40.920
+Sem ter nada muito dinâmico.
+
+01:21:41.920 --> 01:21:43.660
+Aqui tem a limitação de tokens.
+
+01:21:44.100 --> 01:21:44.680
+Conversa.
+
+01:21:45.740 --> 01:21:46.320
+Contexto.
+
+01:21:48.500 --> 01:21:49.080
+Contexto.
+
+01:21:50.200 --> 01:21:50.780
+Beleza.
+
+01:21:50.780 --> 01:21:51.400
+Está em três.
+
+01:21:52.340 --> 01:21:54.940
+Quantas mensagens se ele consegue manter
+o contexto.
+
+01:21:55.700 --> 01:21:56.440
+Está bom.
+
+01:21:56.500 --> 01:21:56.880
+Três.
+
+01:21:58.720 --> 01:21:59.300
+Bom.
+
+01:21:59.300 --> 01:22:03.960
+Não gostei da resposta que ele me deu
+aqui.
+
+01:22:04.280 --> 01:22:05.200
+Sobre a sorte.
+
+01:22:05.600 --> 01:22:06.440
+Eu não sei.
+
+01:22:06.700 --> 01:22:07.820
+Eu preciso clicar aqui.
+
+01:22:09.740 --> 01:22:10.700
+Em riqueza.
+
+01:22:11.720 --> 01:22:12.560
+E vim aqui.
+
+01:22:12.640 --> 01:22:13.740
+Deixa eu fazer aquela pesquisa.
+
+01:22:13.860 --> 01:22:14.340
+Aqui.
+
+01:22:29.760 --> 01:22:31.280
+Se eu pedir aqui para ele.
+
+01:22:33.660 --> 01:22:34.140
+Indexar.
+
+01:22:34.320 --> 01:22:34.800
+Beleza.
+
+01:22:34.800 --> 01:22:36.500
+Ele criou agora um index desse aqui.
+
+01:22:36.900 --> 01:22:37.980
+How to make money.
+
+01:22:38.760 --> 01:22:39.920
+Eu posso agora.
+
+01:22:40.160 --> 01:22:40.860
+Vir aqui.
+
+01:22:40.860 --> 01:22:43.200
+E fazer uma pergunta direto para ele.
+
+01:22:44.500 --> 01:22:45.120
+Mas assim.
+
+01:22:45.200 --> 01:22:46.160
+Não é o que eu queria.
+
+01:22:46.400 --> 01:22:46.800
+Claro.
+
+01:22:46.880 --> 01:22:48.820
+Às vezes você pode conversar com uma
+nota mais extensa.
+
+01:22:49.060 --> 01:22:50.240
+Fazer perguntas para ela.
+
+01:22:51.860 --> 01:22:53.060
+Mas o que eu queria aqui.
+
+01:22:53.100 --> 01:22:53.960
+Realmente era conseguir.
+
+01:22:55.340 --> 01:22:56.840
+Agora ele trouxe certinho as
+informações.
+
+01:22:57.460 --> 01:22:58.120
+Eu acho que.
+
+01:22:58.280 --> 01:22:59.740
+Talvez ele não estava no vetor dele.
+
+01:22:59.840 --> 01:23:00.460
+Agora eu vou fazer o seguinte.
+
+01:23:02.020 --> 01:23:03.580
+Quero voltar para uma conversa normal.
+
+01:23:05.400 --> 01:23:06.900
+Vou limpar a conversa.
+
+01:23:07.760 --> 01:23:08.560
+Nova conversa.
+
+01:23:08.660 --> 01:23:09.880
+Eu vou perder essa conversa.
+
+01:23:12.260 --> 01:23:12.700
+Então.
+
+01:23:12.920 --> 01:23:13.960
+É uma conversa nova.
+
+01:23:14.400 --> 01:23:15.500
+E eu vou fazer essa mesma pergunta.
+
+01:23:18.760 --> 01:23:20.340
+Ele já viajou da batatinha de novo.
+
+01:23:21.680 --> 01:23:22.880
+Se eu marcar aqui.
+
+01:23:24.000 --> 01:23:24.440
+Reconstruir.
+
+01:23:26.140 --> 01:23:27.680
+Agora eu consigo conversar.
+
+01:23:27.680 --> 01:23:28.460
+Diretamente com ele.
+
+01:23:32.560 --> 01:23:34.060
+Novamente ele está viajando da
+batatinha.
+
+01:23:34.200 --> 01:23:35.900
+Então se eu conversar com a nota.
+
+01:23:36.100 --> 01:23:37.040
+Com a nota ativa.
+
+01:23:45.480 --> 01:23:47.180
+Então ele consegue me trazer daí.
+
+01:23:47.240 --> 01:23:48.360
+O que eu realmente quero saber.
+
+01:23:48.720 --> 01:23:49.760
+E se eu vou lá.
+
+01:23:49.760 --> 01:23:51.320
+Para o ChatGPT.
+
+01:23:51.380 --> 01:23:52.460
+Para o ChatBase.
+
+01:23:53.800 --> 01:23:54.840
+Deixa eu ver se eu tenho.
+
+01:23:55.220 --> 01:23:56.300
+Vou colocar aqui.
+
+01:23:57.300 --> 01:23:58.300
+Quais são os tipos.
+
+01:23:58.580 --> 01:24:00.020
+Me diga os quatro tipos de sort.
+
+01:24:09.120 --> 01:24:11.000
+Ele me trouxe uma contextualização.
+
+01:24:11.020 --> 01:24:12.300
+Melhor aqui no ChatBase.
+
+01:24:12.460 --> 01:24:13.340
+Do que aqui com.
+
+01:24:14.540 --> 01:24:15.020
+O.
+
+01:24:16.460 --> 01:24:17.380
+Co -Pilot.
+
+01:24:17.640 --> 01:24:18.120
+Então assim.
+
+01:24:19.980 --> 01:24:21.740
+O Co -Pilot ele é interessante.
+
+01:24:22.360 --> 01:24:23.560
+Até trouxe aqui para vocês.
+
+01:24:23.560 --> 01:24:25.820
+Para vocês terem essa segunda
+alternativa.
+
+01:24:26.400 --> 01:24:27.060
+Do que.
+
+01:24:27.320 --> 01:24:29.680
+O Smart Connections.
+
+01:24:30.200 --> 01:24:30.560
+Mas.
+
+01:24:31.600 --> 01:24:33.700
+Dá para notar que ele ainda está com
+alguns problemas.
+
+01:24:33.840 --> 01:24:34.540
+Alguns erros.
+
+01:24:35.360 --> 01:24:36.080
+Aqui mesmo.
+
+01:24:36.220 --> 01:24:37.740
+Deixa eu ver se ele tem o botão de
+forçar.
+
+01:24:38.640 --> 01:24:40.740
+Não ele não tem o botão de forçar a
+indexação.
+
+01:24:41.160 --> 01:24:42.040
+O que eu acho?
+
+01:24:42.140 --> 01:24:43.480
+Eu acho que ele não indexou.
+
+01:24:44.760 --> 01:24:45.520
+Todas as informações.
+
+01:24:46.260 --> 01:24:48.600
+E ele não tem o botão aqui de indexar
+todas as informações.
+
+01:24:48.840 --> 01:24:50.720
+Então ele tem só essa opção mesmo.
+
+01:24:50.740 --> 01:24:52.020
+De conversar com as notas.
+
+01:24:52.040 --> 01:24:52.800
+O Co -Pilot.
+
+01:24:53.560 --> 01:24:55.040
+Ele realmente indexa tudo.
+
+01:24:55.520 --> 01:24:57.500
+Então o Smart Connections eu acho
+realmente.
+
+01:24:57.860 --> 01:24:59.840
+A solução mais completa.
+
+01:24:59.860 --> 01:25:01.200
+E melhor do mercado hoje.
+
+01:25:01.520 --> 01:25:03.340
+Bem disparado do que o Co -Pilot.
+
+01:25:04.420 --> 01:25:05.480
+Só você precisa.
+
+01:25:05.560 --> 01:25:06.780
+Dar contextos melhores.
+
+01:25:07.000 --> 01:25:08.800
+Para ele poder encontrar as suas notas.
+
+01:25:08.800 --> 01:25:10.060
+Que faz parte.
+
+01:25:11.500 --> 01:25:13.380
+Encontre nesse tipo de conteúdo.
+
+01:25:13.660 --> 01:25:14.500
+Essas informações.
+
+01:25:15.060 --> 01:25:16.160
+Mas é uma ferramenta sensacional.
+
+01:25:16.680 --> 01:25:17.680
+Novamente aqui embaixo.
+
+01:25:17.940 --> 01:25:21.060
+Vai ter todas as explicações que você
+precisa.
+
+01:25:21.180 --> 01:25:22.500
+E os prompts que eu utilizei.
+
+01:25:23.560 --> 01:25:24.820
+Então por aqui eu espero que ela tenha
+sido.
+
+01:25:25.240 --> 01:25:27.320
+Por mais que tenha sido um pouco mais
+longa.
+
+01:25:27.440 --> 01:25:29.300
+Ela tenha sido bem fácil.
+
+01:25:29.480 --> 01:25:30.760
+De fazer essa compreensão.
+
+01:25:30.760 --> 01:25:33.340
+E entender o quão mágico.
+
+01:25:33.400 --> 01:25:34.640
+É isso aqui que a gente está
+presenciando.
+
+01:25:34.760 --> 01:25:36.360
+Porque basicamente a gente consegue.
+
+01:25:37.420 --> 01:25:38.480
+Conversar com as nossas ideias.
+
+01:25:38.580 --> 01:25:40.840
+Então você pode expor suas ideias aqui
+de uma forma estruturada.
+
+01:25:40.880 --> 01:25:41.340
+Dentro do Obsidian.
+
+01:25:41.540 --> 01:25:44.440
+E depois conversar e organizar elas.
+
+01:25:44.620 --> 01:25:46.160
+De uma forma extremamente inteligente.
+
+01:25:46.300 --> 01:25:47.740
+Então vou ficando por aqui.
+
+01:25:47.820 --> 01:25:49.620
+Se você tiver alguma dúvida, algum
+comentário.
+
+01:25:49.620 --> 01:25:50.660
+Não esqueça.
+
+01:25:50.680 --> 01:25:52.140
+De deixar aqui ou lá.
+
+01:25:52.240 --> 01:25:53.520
+Na nossa biblioteca de Obsidian.
+
+01:25:54.260 --> 01:25:55.600
+Como você está utilizando.
+
+01:25:55.620 --> 01:25:56.460
+E como você está aplicando.
+
+01:25:56.700 --> 01:25:57.600
+Esses conhecimentos.
+
+01:25:57.780 --> 01:25:58.220
+Até mais.

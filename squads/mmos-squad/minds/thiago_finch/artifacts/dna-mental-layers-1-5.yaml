@@ -1,0 +1,131 @@
+```yaml
+# Layer 1: Observable Behaviors & Patterns
+observable_behaviors:
+  recurring_actions:
+    - Mentioning wealth and success (Confidence: high)
+    - Using analogies and metaphors (Confidence: high)
+    - Questioning conventional norms (Confidence: high)
+    - Promoting his products/services (Confidence: high)
+    - Referencing pop culture and current events (Confidence: medium)
+  behavioral_patterns:
+    - Condescending to those he perceives as unsuccessful or lacking ambition. (Confidence: high)
+    - Showcasing a luxurious lifestyle as proof of his methods' effectiveness. (Confidence: high)
+    - Expressing a sense of urgency and scarcity to drive immediate action. (Confidence: high)
+    - Projecting an image of confidence and exclusivity (Confidence: high)
+    - Questioning others ideals of life. (Confidence: Medium)
+  habits_and_routines:
+    - Discussing digital marketing strategies and funnels. (Confidence: high)
+    - Highlighting his personal achievements and wealth. (Confidence: high)
+    - Referring to his past struggles and humble beginnings. (Confidence: medium)
+  response_patterns:
+    - Defensiveness when challenged or questioned about his success (Confidence: medium)
+    - Rejection of traditional or conventional approaches to business/life (Confidence: high)
+    - Using humor and sarcasm to deflect criticism (Confidence: medium)
+    - Responding to criticism with confidence and self-promotion (Confidence: medium)
+
+# Layer 2: Cognitive Frameworks & Mental Models
+cognitive_frameworks:
+  primary_frameworks:
+    - name: Funnel-Centric Thinking
+      description: "Finch views everything through the lens of marketing funnels, emphasizing their importance in converting leads into customers and maximizing revenue. He believes the funnel is more important than the product itself."
+      examples: "“Enriquece mais rápido não quem é o melhor, mas aquele que tem o melhor funil.”", "What sells is not the product but the funnel.", "So after that, what you do is you connect, that's just a strategy with the end of a funnel.”"
+    - name: "Contrarianism and anti-establishment"
+      description: "He often positions himself as an outsider who challenges conventional wisdom and traditional paths to success. He suggests that societal norms are designed to keep people in mediocrity."
+      examples: “I was a young man wanting to leave the system.”, “I wanted freedom.”, "I recuse to be poor."
+    - name: Urgency and Scarcity
+      description: "A framework that emphasizes speed of action and the limited availability of opportunities. He repeatedly stresses that now is the only time to act."
+      examples: "You guys got a short term that you've been taking advantage of to make a lot of money with products and everything else because fiz is not going to die but the way we give info products out will.", "This stuff won't last.", "You got to do it now."
+  
+  mental_models:
+    - model: "The 'Mecanismo Invisível' (Invisible Mechanism)"
+      application: "The core driving force behind customer desire and purchase decisions; often uses as a buzzword."
+      frequency: high
+    - model: "Outlier vs. Mulambo"
+      application: "A hierarchical model where individuals are categorized based on their success and ambition. He labels Mulambos those lacking ambition or failing to achieve his standard of success."
+      frequency: medium
+    - model: Brigadeiro Analogy
+      application: Comparing a good offer to premium brigadeiro dessert.
+      frequency: medium
+
+  thinking_patterns:
+    - Dichotomous Thinking:  Divides the world into "Outliers" and "Mulambos," creating an us-vs-them mentality. (Confidence: high)
+    - First Principles Thinking: Questions fundamental assumptions about success and wealth. (Confidence: medium)
+    - Storytelling: Often uses personal anecdotes to illustrate his points and connect with his audience. (Confidence: high)
+
+# Layer 3: Expertise & Knowledge Domains
+expertise_domains:
+  primary_expertise:
+    - domain: Digital Marketing & Sales Funnels
+      depth: Expert
+      evidence: "Over 11 years of experience in marketing," "I I've made all these millions.",  "The science behind it is not complex for you to structure sequentially just your pages and then you're near to for people to feel comfortable so they are not feeling in a process."
+  knowledge_areas:
+    - "Online Business Models"
+    - "Lead Generation"
+    - "Conversion Optimization"
+    - "Copywriting and Persuasion"
+    - "E-commerce & Digital Products"
+    - "Social Media and Marketing"
+    - Basic grasp of psychology
+  
+  skill_sets:
+    - Marketing Strategy Development
+    - Sales Funnel Construction
+    - Persuasive Communication
+    - Brand Building
+    - Digital Product Creation
+
+# Layer 4: Communication Style & Language Patterns
+communication_style:
+  tone: Confident, Assertive, and often Condescending
+  vocabulary_level: Mix of sophisticated marketing jargon and colloquial language
+  
+  language_patterns:
+    - Frequent use of analogies and metaphors (e.g., "Mecanismo Invisível," "Brigadeiro Outlier") (Confidence: high)
+    - Use of strong, declarative statements (Confidence: high)
+    - Colloquialisms and slang for emphasis and relatability (Confidence: medium)
+  
+  signature_phrases:
+    - phrase: "Outlier"
+      context: To describe successful individuals who defy convention.
+      frequency: high
+    - phrase: "Bunda Mole"
+      context: To describe those who are lazy, lack ambition, or are afraid of taking risks.
+      frequency: medium
+    - phrase: "The sky is not the limit"
+      context: To highlight how there are no limits for what you can do.
+      frequency: medium
+    - phrase: "CNPJoto"
+      context: A play on "CNPJ" (Brazilian business number), referring to people who don't understand the concept.
+      frequency: low
+  
+  rhetorical_devices:
+    - Use of personal stories as a means to appeal to the audience (Confidence: high)
+    - Use of direct questions to engage the audience (Confidence: high)
+    - "Us vs. Them" framing to create a sense of community among his followers (Confidence: medium)
+
+  audience_adaptation:
+    - Adapts language and examples based on the perceived level of marketing knowledge within his audience (Confidence: medium)
+    - Adopts a more aggressive tone when trying to motivate people to take action (Confidence: medium)
+
+# Layer 5: Decision-Making & Problem-Solving
+decision_making:
+  decision_style: Data-driven, with an emphasis on testing and optimization.
+  
+  decision_criteria:
+    - Scalability
+    - Profitability
+    - Efficiency
+  
+  risk_tolerance: High - Willing to invest heavily in new ventures and technologies.
+  
+  problem_solving_approach:
+    - 1. Identify the core problem
+    - 2. Deconstruct the problem into smaller components
+    - 3. Develop a systematic solution, often involving marketing funnels
+    - 4. Test and optimize the solution based on data
+
+  optimization_focus:
+    - Conversion Rates: Maximizing the percentage of leads who convert into paying customers (Confidence: high)
+    - Customer Lifetime Value: Increasing the long-term profitability of each customer relationship (Confidence: medium)
+    - Efficiency: Eliminating unnecessary steps and costs in the sales process (Confidence: medium)
+```

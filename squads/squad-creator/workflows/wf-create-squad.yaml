@@ -1,0 +1,705 @@
+# wf-create-squad.yaml
+# Master Workflow: Complete Squad Creation Orchestration
+# Version: 1.0
+# Last Updated: 2026-02-01
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflow:
+  id: wf-create-squad
+  name: "Create Complete Squad"
+  version: "1.0"
+  purpose: "Orchestrate the complete creation of an AIOS squad from research to validation"
+  orchestrator: "@squad-architect"
+  mode: "incremental"  # or "yolo"
+
+  quality_standard:
+    agents: "300+ lines, voice_dna, output_examples"
+    workflows: "500+ lines, 3+ phases, checkpoints"
+    tasks: "500+ lines complex, 300+ simple, Task Anatomy (8 fields)"
+    overall_score: ">= 7.0"
+
+  frameworks_used:
+    - id: "tier-system-framework"
+      file: "data/tier-system-framework.md"
+      applied_in: ["phase_2", "phase_3"]
+
+    - id: "quality-dimensions-framework"
+      file: "data/quality-dimensions-framework.md"
+      applied_in: ["phase_1", "phase_5"]
+
+    - id: "decision-heuristics-framework"
+      file: "data/decision-heuristics-framework.md"
+      applied_in: ["phase_0", "phase_1", "phase_3", "phase_5"]
+
+    - id: "executor-matrix-framework"
+      file: "data/executor-matrix-framework.md"
+      applied_in: ["phase_3"]
+
+  estimated_duration:
+    incremental: "60-90 minutes"
+    yolo: "30-45 minutes"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# INPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+inputs:
+  required:
+    - name: domain
+      type: string
+      description: "Domain expertise area (e.g., 'copywriting', 'legal', 'data')"
+      example: "copywriting"
+
+    - name: purpose
+      type: string
+      description: "What the squad should accomplish"
+      example: "Create high-converting sales pages and marketing copy"
+
+    - name: target_user
+      type: string
+      description: "Who will use this squad"
+      example: "Marketing teams at SaaS companies"
+
+    - name: use_cases
+      type: list
+      description: "3-5 key use cases"
+      example:
+        - "Sales pages"
+        - "Email sequences"
+        - "Ad copy"
+        - "Landing pages"
+
+  optional:
+    - name: mode
+      type: enum
+      values: ["incremental", "yolo"]
+      default: "incremental"
+      description: "Workflow execution mode"
+
+    - name: pack_name
+      type: string
+      description: "Override default pack name (kebab-case)"
+      example: "copy"
+
+    - name: existing_research
+      type: path
+      description: "Path to existing research if available"
+      example: "docs/research/copywriting-research.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PRECONDITIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+preconditions:
+  system:
+    - "squad-architect agent is active"
+    - "WebSearch tool available for research"
+    - "Write permissions for squads/ directory"
+    - "All 4 frameworks loaded and accessible"
+
+  user:
+    - "Clear domain understanding"
+    - "Defined use cases (3-5)"
+    - "Available for checkpoints (incremental mode)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 0: DISCOVERY
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: phase_0
+    name: "DISCOVERY"
+    purpose: "Validate domain viability and define pack structure"
+    duration: "5-10 minutes"
+    mode: "interactive"
+
+    steps:
+      - id: step_0_1
+        name: "Validate Domain Viability"
+        action: "Assess if domain has sufficient documented frameworks"
+        heuristic:
+          id: SC_DSC_001
+          name: "Discovery Complete"
+          blocking: true
+        criteria:
+          documented_methodologies: ">= 2"
+          elite_practitioners: ">= 3"
+          validation_possible: true
+        output:
+          viability_score: "0-10"
+          recommendation: "proceed | limited_scope | abort"
+
+      - id: step_0_2
+        name: "Check Existing Squads"
+        action: "Search for similar squads that might overlap"
+        search_paths:
+          - "squads/*"
+          - ".claude/commands/*"
+        decision:
+          if_80_percent_overlap: "suggest extend existing"
+          if_partial_overlap: "warn about integration"
+          if_no_overlap: "proceed"
+
+      - id: step_0_3
+        name: "Define Pack Structure"
+        action: "Elicit pack metadata"
+        elicit:
+          - pack_name: "kebab-case identifier"
+          - pack_title: "Human-readable title"
+          - version: "1.0.0"
+          - slash_prefix: "camelCase"
+          - pattern_prefix: "2-letter code"
+        output:
+          pack_config: "Initial config.yaml content"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Discovery Complete"
+      blocking: true
+      criteria:
+        - viability_score: ">= 6"
+        - pack_name: "defined"
+        - no_duplicate: true
+      on_fail:
+        action: "Present issues, suggest alternatives"
+      approval:
+        incremental: "Human approval required"
+        yolo: "Auto-approve if criteria met"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 1: RESEARCH
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: phase_1
+    name: "RESEARCH"
+    purpose: "Identify elite minds with documented frameworks"
+    duration: "15-30 minutes"
+    mode: "autonomous"
+    depends_on: ["phase_0"]
+
+    steps:
+      - id: step_1_1
+        name: "Execute Mind Research Loop"
+        action: "Run iterative research workflow"
+        execute:
+          workflow: "workflows/mind-research-loop.md"
+          inputs:
+            domain: "{domain}"
+            min_minds: 5
+            max_minds: 10
+            iterations: "3-5"
+        output:
+          minds_list: "Curated list of elite minds"
+          frameworks_per_mind: "Documented frameworks"
+          tier_preliminary: "Initial tier classification"
+
+      - id: step_1_2
+        name: "Validate Research Quality"
+        action: "Apply quality dimensions to research output"
+        framework: "quality-dimensions-framework"
+        dimensions:
+          - accuracy: "Minds are real with verifiable work"
+          - coherence: "Frameworks complement each other"
+          - strategic_alignment: "Cover the use cases"
+        heuristic:
+          id: SC_RES_001
+          name: "Research Quality Gate"
+          blocking: true
+          threshold: 7.0
+          veto_conditions:
+            - minds_count: "< 3"
+            - no_tier_0: true
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Research Complete"
+      blocking: true
+      criteria:
+        - minds_found: ">= 5"
+        - all_have_frameworks: true
+        - tier_0_covered: true
+        - use_cases_coverage: ">= 80%"
+      output:
+        minds_table: |
+          | Mind | Tier | Frameworks | Use Cases |
+          |------|------|------------|-----------|
+          | ... | ... | ... | ... |
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 2: ARCHITECTURE
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: phase_2
+    name: "ARCHITECTURE"
+    purpose: "Design squad structure and relationships"
+    duration: "10-20 minutes"
+    mode:
+      incremental: "interactive"
+      yolo: "autonomous"
+    depends_on: ["phase_1"]
+
+    steps:
+      - id: step_2_1
+        name: "Define Tier Structure"
+        action: "Assign minds to tiers using tier-system-framework"
+        framework: "tier-system-framework"
+        structure:
+          orchestrator:
+            required: true
+            purpose: "Coordinates all tiers, routes requests"
+          tier_0:
+            required: true
+            purpose: "Diagnosis, analysis, classification"
+          tier_1:
+            purpose: "Masters with proven results"
+          tier_2:
+            purpose: "Systematizers, framework creators"
+          tier_3:
+            purpose: "Format/channel specialists"
+          tools:
+            purpose: "Validation, checklists, calculators"
+
+      - id: step_2_2
+        name: "Plan Agent Relationships"
+        action: "Define handoffs and synergies"
+        define:
+          handoff_map: "Who hands off to whom"
+          synergies: "Agents that work well together"
+          conflicts: "Agents that shouldn't be combined"
+
+      - id: step_2_3
+        name: "Design Quality Gates"
+        action: "Define validation points between phases"
+        template:
+          - id: "QG-001"
+            transition: "Input → Tier 0"
+            type: "routing"
+          - id: "QG-002"
+            transition: "Tier 0 → Tier 1"
+            type: "blocking"
+          - id: "QG-003"
+            transition: "Execution → Output"
+            type: "blocking"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Architecture Approved"
+      blocking: true
+      criteria:
+        - tier_0_defined: true
+        - orchestrator_planned: true
+        - quality_gates: ">= 3"
+        - handoff_map: "complete"
+      approval:
+        incremental: "Human review architecture"
+        yolo: "Auto-approve if criteria met"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 3: CREATION
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: phase_3
+    name: "CREATION"
+    purpose: "Create all squad components"
+    duration: "30-60 minutes"
+    mode: "autonomous"
+    depends_on: ["phase_2"]
+
+    steps:
+      - id: step_3_1
+        name: "Create Directory Structure"
+        action: "Initialize pack directories"
+        create:
+          base: "squads/{pack_name}/"
+          subdirs:
+            - agents/
+            - tasks/
+            - workflows/
+            - templates/
+            - checklists/
+            - data/
+            - docs/
+          files:
+            - config.yaml
+            - README.md
+
+      - id: step_3_2
+        name: "Create Agents"
+        action: "Create agent for each researched mind"
+        execute:
+          workflow: "workflows/research-then-create-agent.md"
+          for_each: "minds_list"
+          quality_gate:
+            id: SC_AGT_001
+            blocking: true
+            retry_on_fail: true
+
+      - id: step_3_3
+        name: "Create Orchestrator"
+        action: "Create squad orchestrator agent"
+        template: "templates/agent-tmpl.md"
+        special:
+          tier: "orchestrator"
+          capabilities:
+            - "Route requests to appropriate tier"
+            - "Manage multi-agent workflows"
+            - "Track context across handoffs"
+
+      - id: step_3_4
+        name: "Create Workflows"
+        action: "Create multi-phase workflows"
+        criteria:
+          - spans_multiple_agents: true
+          - has_checkpoints: true
+        execute:
+          task: "tasks/create-workflow.md"
+        quality:
+          min_lines: 500
+          min_phases: 3
+
+      - id: step_3_5
+        name: "Create Tasks"
+        action: "Create atomic tasks with Task Anatomy"
+        framework: "executor-matrix-framework"
+        execute:
+          task: "tasks/create-task.md"
+        quality:
+          simple: "300+ lines"
+          complex: "500+ lines"
+          anatomy_fields: 8
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Creation Complete"
+      blocking: true
+      criteria:
+        - orchestrator_created: true
+        - tier_0_agents: ">= 1"
+        - all_agents_pass_quality: true
+        - workflows_have_checkpoints: true
+      metrics:
+        agents_created: "count"
+        total_lines: "sum"
+        quality_scores: "average"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 4: INTEGRATION
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: phase_4
+    name: "INTEGRATION"
+    purpose: "Wire components and generate documentation"
+    duration: "10-15 minutes"
+    mode: "autonomous"
+    depends_on: ["phase_3"]
+
+    steps:
+      - id: step_4_1
+        name: "Wire Dependencies"
+        action: "Verify and link all component dependencies"
+        for_each_agent:
+          - verify_tasks_exist: true
+          - verify_templates_exist: true
+          - verify_checklists_exist: true
+          - update_dependencies: true
+        create_missing:
+          action: "Create stubs with TODO"
+
+      - id: step_4_2
+        name: "Create Knowledge Base"
+        action: "Generate domain knowledge documentation"
+        output:
+          file: "data/{pack_name}-kb.md"
+          sections:
+            - domain_overview
+            - key_concepts
+            - best_practices
+            - common_patterns
+            - anti_patterns
+
+      - id: step_4_3
+        name: "Generate README"
+        action: "Create comprehensive documentation"
+        template: "templates/readme-tmpl.md"
+        sections:
+          - overview
+          - installation
+          - quick_start
+          - agents_list
+          - workflows_list
+          - tasks_list
+          - usage_examples
+
+      - id: step_4_4
+        name: "Finalize config.yaml"
+        action: "Complete pack configuration"
+        validate:
+          - yaml_syntax: true
+          - all_components_listed: true
+          - version_correct: true
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Integration Complete"
+      blocking: false  # Non-blocking, warnings only
+      criteria:
+        - all_dependencies_wired: true
+        - readme_complete: true
+        - config_valid: true
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 5: VALIDATION
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: phase_5
+    name: "VALIDATION"
+    purpose: "Validate squad meets quality standards"
+    duration: "5-10 minutes"
+    mode: "autonomous"
+    depends_on: ["phase_4"]
+
+    steps:
+      - id: step_5_1
+        name: "Run Squad Checklist"
+        action: "Execute comprehensive validation"
+        checklist: "checklists/squad-checklist.md"
+        categories:
+          - structure
+          - agents
+          - workflows
+          - tasks
+          - documentation
+          - integration
+
+      - id: step_5_2
+        name: "Quality Dimensions Scoring"
+        action: "Score squad against quality dimensions"
+        framework: "quality-dimensions-framework"
+        dimensions:
+          accuracy:
+            weight: 0.20
+            check: "Agents based on real minds"
+          coherence:
+            weight: 0.20
+            check: "Components work together"
+          strategic_alignment:
+            weight: 0.15
+            check: "Squad serves stated purpose"
+          operational_excellence:
+            weight: 0.20
+            check: "Squad is usable"
+          innovation_capacity:
+            weight: 0.10
+            check: "Squad can grow"
+          risk_management:
+            weight: 0.15
+            check: "Guardrails in place"
+        threshold: 7.0
+        veto_if_below_5:
+          - accuracy
+          - coherence
+          - operational_excellence
+
+      - id: step_5_3
+        name: "Fix Blocking Issues"
+        action: "Resolve any blocking validation failures"
+        for_each_failure:
+          - identify_root_cause: true
+          - determine_fix: true
+          - execute_fix: true
+          - revalidate: true
+        max_iterations: 3
+        on_max_exceeded:
+          action: "Report remaining issues to human"
+
+    checkpoint:
+      id: CP_PHASE_5
+      name: "Squad Validated"
+      blocking: true
+      criteria:
+        - checklist_pass: true
+        - quality_score: ">= 7.0"
+        - no_blocking_issues: true
+      output:
+        final_score: "X/10"
+        status: "PASS | FAIL"
+        issues_remaining: "count"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 6: HANDOFF
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: phase_6
+    name: "HANDOFF"
+    purpose: "Present squad and document next steps"
+    duration: "2-5 minutes"
+    mode: "interactive"
+    depends_on: ["phase_5"]
+
+    steps:
+      - id: step_6_1
+        name: "Present Squad Summary"
+        action: "Display final creation summary"
+        present:
+          created:
+            - agents: "count"
+            - workflows: "count"
+            - tasks: "count"
+            - templates: "count"
+            - checklists: "count"
+          quality:
+            - overall_score: "X/10"
+            - research_foundation: "X elite minds"
+            - tier_coverage: "Full/Partial"
+          activation:
+            - install: "npm run install:squad {pack_name}"
+            - activate: "@{pack_name}"
+
+      - id: step_6_2
+        name: "Document Next Steps"
+        action: "Provide recommendations for squad usage"
+        recommendations:
+          immediate:
+            - "Test squad with sample request"
+            - "Activate orchestrator and verify routing"
+          optional:
+            - "Add more Tier 3 specialists"
+            - "Create additional templates"
+            - "Add integration tests"
+
+    output:
+      squad_path: "squads/{pack_name}/"
+      activation_command: "@{pack_name}"
+      quality_score: "X/10"
+      agents_created: "count"
+      status: "COMPLETE"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  primary:
+    - name: "Squad Directory"
+      location: "squads/{pack_name}/"
+      description: "Complete squad structure"
+
+    - name: "Agents"
+      location: "squads/{pack_name}/agents/"
+      description: "All agent definitions"
+
+    - name: "Workflows"
+      location: "squads/{pack_name}/workflows/"
+      description: "Multi-phase workflows"
+
+    - name: "Tasks"
+      location: "squads/{pack_name}/tasks/"
+      description: "Atomic tasks"
+
+    - name: "Documentation"
+      location: "squads/{pack_name}/README.md"
+      description: "Usage documentation"
+
+  secondary:
+    - name: "Research Files"
+      location: "docs/research/{domain}-*.md"
+      description: "Research documentation"
+
+    - name: "Session Report"
+      location: "squads/{pack_name}/docs/creation-report.md"
+      description: "Creation session documentation"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# HEURISTICS REFERENCE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+heuristics:
+  - id: SC_DSC_001
+    name: "Discovery Complete"
+    phase: "phase_0"
+    blocking: true
+
+  - id: SC_RES_001
+    name: "Research Quality Gate"
+    phase: "phase_1"
+    blocking: true
+
+  - id: SC_ARC_001
+    name: "Architecture Approved"
+    phase: "phase_2"
+    blocking: true
+
+  - id: SC_AGT_001
+    name: "Agent Quality Gate"
+    phase: "phase_3"
+    blocking: true
+
+  - id: SC_CRT_001
+    name: "Creation Quality"
+    phase: "phase_3"
+    blocking: true
+
+  - id: SC_INT_001
+    name: "Integration Complete"
+    phase: "phase_4"
+    blocking: false
+
+  - id: SC_VAL_001
+    name: "Squad Validated"
+    phase: "phase_5"
+    blocking: true
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  research_fails:
+    - action: "Retry with different queries"
+    - if_still_fails: "Abort with explanation"
+
+  agent_creation_fails:
+    - action: "Identify missing research"
+    - action: "Supplement research"
+    - action: "Retry creation"
+    - if_still_fails: "Create simpler agent, note for improvement"
+
+  validation_fails:
+    - action: "Log specific failures"
+    - action: "Attempt automated fix"
+    - if_cannot_fix: "Report to human for decision"
+
+  checkpoint_fails:
+    - blocking_checkpoint:
+        action: "Halt and report"
+        require: "Human intervention or fix"
+    - non_blocking_checkpoint:
+        action: "Log warning"
+        proceed: true
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METRICS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metrics:
+  track:
+    - duration_per_phase: "minutes"
+    - agents_created: "count"
+    - total_lines_generated: "sum"
+    - quality_scores: "per component"
+    - checkpoint_passes: "count"
+    - issues_fixed: "count"
+
+  report_at_end: true
+  save_to: "squads/{pack_name}/docs/metrics.yaml"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW VERSION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0"
+  created: "2026-02-01"
+  last_updated: "2026-02-01"
+  author: "squad-architect"
+  lines: "500+"

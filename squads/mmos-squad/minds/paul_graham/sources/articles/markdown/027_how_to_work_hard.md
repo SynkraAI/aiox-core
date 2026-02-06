@@ -1,0 +1,15 @@
+# How to Work Hard
+
+[1](#f1n)
+[2](#f2n)
+[3](#f3n)
+[4](#f4n)
+[5](#f5n)
+[6](#f6n)
+[7](#f7n)
+[deep interest](genius.html)
+[8](#f8n)
+[illusion](disc.html)
+[9](#f9n)
+[shower](top.html)
+[Arabic Translation](https://world.hey.com/amna/post-09ff9372)

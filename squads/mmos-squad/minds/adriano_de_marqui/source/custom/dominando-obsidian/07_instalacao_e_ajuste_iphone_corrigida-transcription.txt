@@ -1,0 +1,407 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.280
+Vamos lá lendário, agora nós vamos
+começar a jornada de instalação.
+
+00:00:05.380 --> 00:00:09.740
+Você vai aprender aqui um jeito certo e
+rápido que não vai trazer dor de cabeça.
+
+00:00:09.840 --> 00:00:14.700
+Se você tem iPhone, a primeira coisa que
+você tem que fazer é instalar o
+
+00:00:14.800 --> 00:00:21.580
+aplicativo no iPhone e nós vamos criar a
+pasta dentro do iCloud que vai servir
+
+00:00:21.680 --> 00:00:24.940
+para guardar os seus arquivos.
+
+00:00:25.040 --> 00:00:29.540
+Então, primeiramente, nós vamos entrar
+lá na Apple Store.
+
+00:00:29.640 --> 00:00:34.760
+Nós vamos procurar aqui por Obsidian.
+
+00:00:34.860 --> 00:00:38.840
+Vamos achar o download aqui.
+
+00:00:38.940 --> 00:00:47.200
+Obsidian, aqui embaixo, vou baixar e vai
+instalar no meu iPhone.
+
+00:00:47.300 --> 00:00:48.500
+Pronto, já instalou.
+
+00:00:48.600 --> 00:00:51.740
+Você vai abrir a instalação.
+
+00:00:51.840 --> 00:00:58.560
+No meu caso, eu estou instalando aqui no
+iPhone e eu já tenho dentro da minha
+
+00:00:58.660 --> 00:01:03.100
+pasta de iCloud alguns cofres do
+Obsidian.
+
+00:01:03.200 --> 00:01:07.720
+O conceito de cofre você vai entender
+perfeitamente nas próximas aulas.
+
+00:01:07.820 --> 00:01:13.220
+O cofre é um repositório onde vão ficar
+todos os seus arquivos, todas as suas
+
+00:01:13.320 --> 00:01:15.000
+notas.
+
+00:01:15.100 --> 00:01:21.840
+Esta é a unidade de armazenamento que a
+gente tem dentro do Obsidian.
+
+00:01:21.940 --> 00:01:28.100
+Você vai, na primeira vez que instalar,
+criar um cofre, porque com esse
+
+00:01:28.200 --> 00:01:37.920
+cofre, o aplicativo vai criar
+automaticamente uma pasta no seu iCloud
+
+00:01:38.020 --> 00:01:38.820
+chamada Obsidian.
+
+00:01:38.920 --> 00:01:44.260
+E dentro dessa pasta Obsidian, vai
+colocar o seu cofre que você está
+
+00:01:44.360 --> 00:01:45.160
+criando ali.
+
+00:01:45.260 --> 00:01:48.260
+Então, olha só, o que você tem que fazer
+nesse primeiro momento?
+
+00:01:48.360 --> 00:01:52.780
+No seu aí, com certeza, só estão
+aparecendo essas duas opções.
+
+00:01:52.880 --> 00:01:58.960
+Você vai vir aqui e vai criar um new
+Vaunt, que é esse conceito de cofre.
+
+00:01:59.060 --> 00:02:01.480
+Cofre é o Vaunt.
+
+00:02:01.580 --> 00:02:04.980
+Pode estar em inglês, pode estar em
+português.
+
+00:02:05.080 --> 00:02:08.740
+Vaunt é um nome que Obsidian dá para o
+cofre.
+
+00:02:08.840 --> 00:02:13.180
+Toda vez que você ver documentação,
+internet, alguma coisa, você vai saber
+
+00:02:13.280 --> 00:02:14.020
+disso.
+
+00:02:14.120 --> 00:02:17.700
+Vaunt é o seu cofre, o seu repositório
+de arquivos.
+
+00:02:17.800 --> 00:02:25.060
+Você vai clicar em Create New Vaunt e
+vai dar um nome aqui para o seu cofre.
+
+00:02:25.160 --> 00:02:26.640
+Vamos imaginar que você vai dar.
+
+00:02:26.740 --> 00:02:35.580
+Eu daria, por exemplo, cofre principal
+Adriano, Adriano Obsidian, minhas notas
+
+00:02:35.680 --> 00:02:36.880
+e aí por diante.
+
+00:02:36.980 --> 00:02:39.200
+Segundo cérebro Adriano.
+
+00:02:39.300 --> 00:02:41.380
+Você vai dar o nome que você quiser aí.
+
+00:02:41.480 --> 00:02:53.260
+Para fim didático, eu vou colocar aqui,
+cofre teste
+
+00:02:53.360 --> 00:02:57.340
+aula.
+
+00:02:57.440 --> 00:03:00.200
+E aí você não pode esquecer disso aqui.
+
+00:03:00.300 --> 00:03:04.600
+Essa opção Store in iCloud.
+
+00:03:04.700 --> 00:03:05.100
+Por que?
+
+00:03:05.200 --> 00:03:07.600
+Porque é isso aqui que vai fazer o
+seguinte.
+
+00:03:07.700 --> 00:03:13.780
+Dizer por aplicativo, cria a pasta
+Obsidian no meu iCloud e guarde esse
+
+00:03:13.880 --> 00:03:14.700
+cofre lá dentro.
+
+00:03:14.800 --> 00:03:20.140
+Então, você vai clicar aqui, ele vai
+começar a criação.
+
+00:03:20.240 --> 00:03:23.320
+Vai ter uma mensagem aqui dizendo que é
+a primeira vez, tal, tal, tal.
+
+00:03:23.420 --> 00:03:25.120
+Então pode demorar um pouquinho.
+
+00:03:25.220 --> 00:03:29.140
+Pode dar um skip aqui, já foi rapidão,
+já criou.
+
+00:03:29.240 --> 00:03:32.920
+A interface a gente vai, daqui a
+pouquinho, dar uma olhada também.
+
+00:03:33.020 --> 00:03:34.040
+Nas próximas aulas.
+
+00:03:34.140 --> 00:03:37.500
+Porém, aqui eu quero que você faça isso.
+
+00:03:37.600 --> 00:03:43.480
+Porque é isso aqui o necessário para que
+você agora consiga ter uma pasta dentro
+
+00:03:43.580 --> 00:03:44.140
+do iCloud.
+
+00:03:44.240 --> 00:03:46.680
+E acessar isso lá no Windows ou no Mac.
+
+00:03:46.780 --> 00:03:47.300
+Então, olha só.
+
+00:03:47.400 --> 00:03:52.060
+Aqui eu tenho a configuração, cofre
+teste aula.
+
+00:03:52.160 --> 00:03:55.180
+Cliquei aqui, no canto superior
+esquerdo.
+
+00:03:55.280 --> 00:04:00.380
+Ele abre essa tela onde mostra o meu
+cofre atual do Obsidian.
+
+00:04:00.480 --> 00:04:04.980
+E aí eu posso selecionar aqui outros
+cofres.
+
+00:04:05.080 --> 00:04:08.200
+Já, já você vai entender o conceito de
+cofre.
+
+00:04:08.300 --> 00:04:10.620
+Aqui o que precisa ser feito é isso.
+
+00:04:10.720 --> 00:04:14.960
+Se você, inclusive, vai agora para o
+Finder.
+
+00:04:15.060 --> 00:04:17.660
+Ou se você for lá no Windows.
+
+00:04:17.760 --> 00:04:21.820
+Você pode instalar o iCloud para o
+Windows, caso você tenha um Windows.
+
+00:04:21.920 --> 00:04:24.940
+Mas o que vai acontecer, independente do
+sistema operacional.
+
+00:04:25.040 --> 00:04:29.260
+É que você vai ver aqui uma pasta
+chamada Obsidian.
+
+00:04:29.360 --> 00:04:34.180
+Que foi criada pelo aplicativo lá no
+iPhone.
+
+00:04:34.280 --> 00:04:40.420
+É essa pasta que vai conter, que vai
+armazenar todos os vouches ou os cofres.
+
+00:04:40.520 --> 00:04:43.560
+Que estão sincronizados com o iCloud.
+
+00:04:43.660 --> 00:04:45.520
+Então, aqui eu estou no meu iCloud.
+
+00:04:45.620 --> 00:04:47.660
+Então, se você estiver no Mac.
+
+00:04:47.760 --> 00:04:50.160
+Você vai lá no Finder e vai encontrar
+essa pasta.
+
+00:04:50.260 --> 00:04:54.400
+Se você estiver no Windows e fizer o
+mesmo procedimento ali no celular.
+
+00:04:54.500 --> 00:04:59.280
+Você vai ter dentro do iCloud do Windows
+também essa pasta criada.
+
+00:04:59.380 --> 00:05:04.420
+Eu criei ali um cofre chamado Cofre Test
+Hour.
+
+00:05:04.520 --> 00:05:08.640
+Eu vou ter aqui a pasta do meu cofre.
+
+00:05:08.740 --> 00:05:11.440
+Então, automaticamente, se você fez
+isso.
+
+00:05:11.540 --> 00:05:16.820
+Nesse momento, lá no iPhone você
+executou o procedimento.
+
+00:05:16.920 --> 00:05:19.740
+Ali no iCloud você já vai ter essa pasta
+Obsidian.
+
+00:05:19.840 --> 00:05:22.240
+Então, muita gente teve dificuldade,
+teve problema.
+
+00:05:22.340 --> 00:05:28.080
+Quando pegou essa configuração errada.
+
+00:05:28.180 --> 00:05:30.760
+Fez primeiro no Windows ou no Mac.
+
+00:05:30.860 --> 00:05:32.580
+Depois foi tentar sincronizar com o
+iPhone.
+
+00:05:32.680 --> 00:05:34.320
+Sem saber desse detalhe.
+
+00:05:34.420 --> 00:05:37.200
+Acabou perdendo muito tempo, batendo
+cabeça.
+
+00:05:37.300 --> 00:05:42.380
+Mas, você está percebendo, você está
+entendendo como funciona a dinâmica.
+
+00:05:42.480 --> 00:05:46.200
+Uma vez entendido que no iPhone já criou
+essa pasta.
+
+00:05:46.300 --> 00:05:48.240
+Agora tudo fica mais simples, mais
+tranquilo.
+
+00:05:48.340 --> 00:05:52.320
+Se você tem outro cofre que você estava
+usando.
+
+00:05:52.420 --> 00:05:54.300
+E você quer sincronizar com o iPhone.
+
+00:05:54.400 --> 00:05:57.820
+Você vai perder tudo, vai perder
+arquivos.
+
+00:05:57.920 --> 00:05:59.340
+Vai ter que começar do zero.
+
+00:05:59.440 --> 00:06:00.320
+Não.
+
+00:06:00.420 --> 00:06:04.420
+Basta você ir lá onde está a pasta do
+seu cofre.
+
+00:06:04.520 --> 00:06:06.840
+Que você está usando agora.
+
+00:06:06.940 --> 00:06:12.480
+E você vai, então, copiar para dentro
+dessa pasta aqui Obsidian.
+
+00:06:12.580 --> 00:06:17.100
+Você vai perceber que quando fechar o
+aplicativo Obsidian do iPhone.
+
+00:06:17.200 --> 00:06:18.280
+E abrir de novo.
+
+00:06:18.380 --> 00:06:20.580
+Vai ter a opção de você selecionar esse
+cofre.
+
+00:06:20.680 --> 00:06:21.460
+Tá legal?
+
+00:06:21.560 --> 00:06:24.300
+Então, está feito aí a sincronização.
+
+00:06:24.400 --> 00:06:27.800
+E agora é só sucesso.
+
+00:06:27.900 --> 00:06:29.940
+Então é isso.
+
+00:06:30.040 --> 00:06:32.780
+Esse momento aqui é só para instalação
+do iPhone.
+
+00:06:32.880 --> 00:06:34.960
+Nós vamos nas outras aulas agora.
+
+00:06:35.060 --> 00:06:37.700
+Você vai de acordo com o seu sistema
+operacional.
+
+00:06:37.800 --> 00:06:40.360
+Windows ou Mac.
+
+00:06:40.460 --> 00:06:44.700
+Nós vamos ver aí como dar sequência na
+instalação agora no desktop.
+
+00:06:44.800 --> 00:06:45.680
+Tá bom?
+
+00:06:45.780 --> 00:06:46.040
+Beleza?
+
+00:06:46.140 --> 00:06:47.480
+Então ficamos aqui.
+
+00:06:47.580 --> 00:06:49.060
+Você já começou do jeito certo.
+
+00:06:49.160 --> 00:06:49.420
+Até a próxima.

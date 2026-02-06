@@ -1,0 +1,530 @@
+# DNA Mental™ - Layer 6: Values Hierarchy
+# Alan Nicolas - Self-Cloning Elite Tier Project
+# Status: PRE-VALIDATED (Direct extraction from modelo-do-eu.md Section I)
+# Extraction Date: 2025-10-16
+# Source Quality: CROWN JEWEL (Tier 1)
+# Confidence Level: 100%
+
+layer_info:
+  number: 6
+  name: "Values Hierarchy"
+  category: "Deep Identity"
+  description: "The internal compass that guides deepest decisions. These are not just beliefs but existential operating principles that define identity and action."
+  pre_validated: true
+  source_primary: "self-analysis/modelo-do-eu.md - Seção I: Núcleo Essencial"
+  cross_validation: "self-analysis/Q&A.md - Values in action"
+  extraction_difficulty: "Easy"
+  coverage: 100
+
+# HIERARCHICAL VALUES (Ranked 1-16, Score 6.0-10.0)
+values_hierarchy:
+
+  tier_1_existential_drivers:
+    description: "Non-negotiable core values (9.0-10.0) - Identity-defining principles"
+    count: 5
+
+    values:
+      - rank: 1
+        value: "Clareza Radical"
+        score: 10.0
+        english: "Radical Clarity"
+        category: "Cognitive/Existential"
+
+        description: |
+          The PRIMARY MOTOR. Incessant quest for clarity in thinking, communication, and reality perception.
+          Rejection of noise, superficiality, and illusions. Need to "think better" and strip reality of delusions.
+
+        evidence:
+          - "Busca incessante por frameworks (InnerLens)"
+          - "Comunicação econômica e direta"
+          - "Rejeição a ruído/superficialidade"
+          - "Admiração por pensadores como Kapil Gupta"
+          - "Necessidade de 'pensar melhor'"
+          - "Foco em despir a realidade de ilusões"
+
+        manifestations:
+          behavioral:
+            - "Creates frameworks obsessively (Pareto ao Cubo, InnerLens)"
+            - "Direct, economical communication style"
+            - "Impatience with ambiguity and inefficiency"
+            - "Constant need for mental models and structure"
+
+          decision_making:
+            - "Clarity First decision style"
+            - "Rejects decisions based on noise or conformity"
+            - "Prioritizes signal over noise always"
+
+          relationships:
+            - "Values deep intellectual conversations"
+            - "Rejects small talk and superficial networking"
+            - "Mentors must have 'clarity of thought' (all mentors share this)"
+
+        tensions:
+          primary: "Lack of clarity generates impatience and frustration"
+          risk: "Can lead to rigidity if not balanced with contextual empathy"
+          conflict_with: ["Ambiguity", "Superficiality", "Noise", "Conformity"]
+
+        quotes:
+          - "Clareza é uma arma. Uma ferramenta de direcionamento, poder pessoal e responsabilidade."
+          - "O desconforto com ruído (mental, relacional, operacional) surge como um dos mais altos gatilhos negativos."
+
+      - rank: 2
+        value: "Autenticidade Integral"
+        score: 9.8
+        english: "Integral Authenticity"
+        category: "Ethical/Existential"
+
+        description: |
+          ETHICAL/EXISTENTIAL FILTER. Demands constant alignment between action and essence.
+          Rejection of empty marketing, misaligned roles, and titles that don't fit.
+          Need to live what you teach.
+
+        evidence:
+          - "Abandono de títulos ('empresário')"
+          - "Desconforto com papéis desalinhados (gestor)"
+          - "Rejeição a marketing vazio"
+          - "Necessidade de alinhar ação-essência"
+          - "Valorização de conexões genuínas"
+          - "Busca por viver o que ensina"
+
+        manifestations:
+          behavioral:
+            - "Abandoned titles like 'empresário' that felt inauthentic"
+            - "Discomfort with manager role (hates management)"
+            - "Redefines public identity to align with internal focus"
+            - "Removes misaligned students from academy"
+
+          business:
+            - "Rejects conventional business tactics (manipulation, fear-based marketing)"
+            - "Transparent in partnerships"
+            - "Ethics in IA application"
+
+          personal:
+            - "Admits when burned out"
+            - "Shares vulnerabilities publicly (síndrome do impostor 2015)"
+            - "Lives the philosophy he teaches"
+
+        tensions:
+          primary: "Requires constant congruence"
+          risk: "Can generate conflict with social conventions or standard business demands"
+          conflict_with: ["Conventional roles", "Empty marketing", "Inauthenticity", "Titles"]
+
+        quotes:
+          - "Quando tentamos nos encaixar onde não pertencemos, adoecemos."
+          - "Meus momentos sombrios acontecerem por tentar continuando me encaixar em um rótulo que não me cabia mais."
+          - "Busque o autoconhecimento. Conhece-te a ti mesmo, pois isso é a base de toda sabedoria."
+
+      - rank: 3
+        value: "Impacto Transformador (Despertar)"
+        score: 9.5
+        english: "Transformative Impact (Awakening)"
+        category: "External Direction"
+
+        description: |
+          EXTERNAL DIRECTION. Mission to "awaken" not just teach.
+          Focus on quality over quantity (students/cases).
+          Desire to build significant legacy. Vision of IA as tool for human evolution.
+
+        evidence:
+          - "Missão da Academia Lendár[IA]"
+          - "Foco em 'despertar' e não apenas ensinar"
+          - "Desejo de construir legado significativo"
+          - "Foco em qualidade sobre quantidade (alunos/cases)"
+          - "Visão de IA como ferramenta de evolução humana"
+
+        manifestations:
+          professional:
+            - "Academia Lendár[IA] focused on depth of transformation, not scale"
+            - "Selective community (quality over quantity)"
+            - "Creates InnerLens for consciousness evolution"
+            - "Focus on 'despertar' (awakening) people"
+
+          content:
+            - "Podcast Vida Lendária - philosophical depth"
+            - "Wants to be 'remembered more than taught'"
+            - "Transmission of essence over metrics"
+
+          vision:
+            - "Sees IA as mirror of collective consciousness"
+            - "Technology for personal transformation"
+            - "Building legacy, not just business"
+
+        tensions:
+          primary: "Justifies intensity and pursuit of (selective) scale"
+          risk: "Can create tension with need for Freedom (building systems vs being free)"
+          balance: "Need to scale impact without losing authenticity or freedom"
+
+        quotes:
+          - "Educar não é preparar para o 'mundo real', é armar com fogos de artifício filosóficos."
+          - "Legado é Construído na Essência, Não na Escala: 'ser mais lembrado do que ensinado' é mais potente do que ter milhões de alunos superficiais."
+
+      - rank: 4
+        value: "Liberdade Criativa & Intelectual"
+        score: 9.2
+        english: "Creative & Intellectual Freedom"
+        category: "Essential Condition"
+
+        description: |
+          ESSENTIAL CONDITION. Explicit aversion to management/meetings.
+          Need for "creative idleness" and "mad scientist cave".
+          Financial/temporal autonomy as means, not end. Values business models that allow freedom.
+
+        evidence:
+          - "Aversão explícita a gestão/reuniões"
+          - "Necessidade de 'ócio criativo'"
+          - "Desejo pela 'caverna do cientista maluco'"
+          - "Busca por autonomia financeira/temporal como meio"
+          - "Valorização de modelos de negócio que permitem liberdade"
+
+        manifestations:
+          work_style:
+            - "Hates management work (explicit: 'Detesto o trabalho de gestão')"
+            - "Hates meetings and inefficiency"
+            - "Prefers async communication"
+            - "Needs 'ócio criativo' (creative idleness) to function"
+
+          business_design:
+            - "Obsessive documentation/automation to free himself"
+            - "Building systems that liberate, not trap"
+            - "Transition from CEO-Builder to Architect-Thinker"
+
+          personal:
+            - "Works with closed curtains (controlled environment)"
+            - "Needs 'mad scientist cave' space"
+            - "Financial independence achieved (2015→today)"
+
+        tensions:
+          primary: "Without freedom, Creativity (8) and Evolution (5) suffocate"
+          conflict: "Constant tension with Impact (3) demands and system building"
+          paradox: "Needs to build structures to gain freedom, but structures temporarily trap him"
+
+        quotes:
+          - "A liberdade em si já é motivo suficiente. Eu alcancei o que 100% das pessoas desejam."
+          - "Desenvolvimento de estruturas que reflitam e sustentem estados de consciência superiores."
+
+      - rank: 5
+        value: "Evolução Constante (Aprendizado Aplicado)"
+        score: 9.0
+        english: "Constant Evolution (Applied Learning)"
+        category: "Internal Motor"
+
+        description: |
+          INTERNAL MOTOR. Voracious reading, deep immersion in IA.
+          Pursuit of new philosophies/frameworks. Mentality of "die to be reborn".
+          Admiration for adaptation capacity. TDAH/Giftedness as drivers of incessant search.
+
+        evidence:
+          - "Leitura voraz (100+ livros em 2015)"
+          - "Imersão profunda em IA"
+          - "Busca por novas filosofias/frameworks"
+          - "Mentalidade de 'morrer para renascer'"
+          - "Admiração pela capacidade de adaptação"
+          - "TDAH/Superdotação como motores de busca incessante"
+
+        manifestations:
+          learning:
+            - "Read 100+ books in 2015 alone"
+            - "Follows IA specialists religiously (Peter Diamandis, Mo Gawdat, Mustafa Suleyman)"
+            - "Couldn't sleep when Sam Altman left OpenAI (emotional investment in field)"
+            - "Constant updating on cutting-edge tech"
+
+          professional:
+            - "Multiple career reinventions (marketing → funis → IA → consciousness)"
+            - "'Die to be reborn' mentality in business pivots"
+            - "Adapts rapidly to market changes"
+
+          cognitive:
+            - "Structurally transdisciplinary mind"
+            - "Connects systems, ideas, domains with ease"
+            - "TDAH/Gifted = motor for incessant search"
+
+        tensions:
+          primary: "Guarantees non-stagnation"
+          risk: "Can lead to dispersion if not directed by Clarity (1) and Impact (3)"
+          balance: "Multiplicity must have direction, or it generates frustration"
+
+        quotes:
+          - "É melhor abraçá-lo de vez! O futuro já chegou, e ele é dominado pela Inteligência Artificial."
+          - "Alan não é apenas multipotencial. Ele é estruturalmente transdisciplinar."
+
+  tier_2_foundational_pillars:
+    description: "Foundational values (8.5-9.0) - Core life pillars and operating methods"
+    count: 7
+
+    values:
+      - rank: 6
+        value: "Família (Pilar Central)"
+        score: 9.0
+        english: "Family (Central Pillar)"
+        category: "Human Anchor"
+        manifestations:
+          - "Explicit prioritization of time with Indi/Kael"
+          - "Recurring mentions as source of meaning/stability"
+          - "Vision of paternal love as model (necrológio)"
+          - "Balance work-life to preserve this base"
+        tension: "Can generate guilt when professional intensity threatens this space"
+        evidence_key: "Top ranking in Passion, Happiness, and Gratitude rankings"
+
+      - rank: 7
+        value: "Conexões Significativas (Tribo)"
+        score: 8.8
+        english: "Meaningful Connections (Tribe)"
+        category: "Relational Ecosystem"
+        manifestations:
+          - "Seeks 'extraordinary people'"
+          - "Values Cadu/Steven partnerships"
+          - "Focus on quality community (Lendár[IA])"
+          - "Rejects superficial networking"
+          - "Needs intellectual stimulation and energetic alignment"
+        balance: "Essential for Evolution (5) and well-being, but selectivity can limit reach"
+
+      - rank: 8
+        value: "Criatividade / Criação"
+        score: 8.8
+        english: "Creativity / Creation"
+        category: "Vital Expression"
+        manifestations:
+          - "Unstoppable impulse to build (InnerLens, Academia, content)"
+          - "Give form to ideas, experiment, innovate"
+          - "Identifies as 'creator'"
+        dependencies: "Needs Freedom (4) and Clarity (1) to flourish"
+        risk: "Can generate frustration if blocked by operational demands"
+
+      - rank: 9
+        value: "Beleza / Estética da Essência"
+        score: 8.6
+        english: "Beauty / Aesthetics of Essence"
+        category: "Quality Criterion"
+        manifestations:
+          - "Care with communication form (prompts, bios)"
+          - "Seeks elegance in systems"
+          - "Rejects the 'ugly' or disharmonious (aggressive marketing, bad products)"
+          - "Values truth well-said"
+        risk: "Can generate perfectionism or slowness if not balanced with pragmatism"
+
+      - rank: 10
+        value: "Alavancagem / Eficiência Inteligente"
+        score: 8.5
+        english: "Leverage / Intelligent Efficiency"
+        category: "Operational Method"
+        manifestations:
+          - "Focus on Pareto ao Cubo"
+          - "Automation, IA as tool"
+          - "Seeks 'limited losses, unlimited gains'"
+          - "Economical communication"
+        purpose: "Tool serving Freedom (4) and Impact (3)"
+        risk: "Can become an end in itself if disconnected from higher values"
+
+      - rank: 11
+        value: "Precisão & Estrutura"
+        score: 8.2
+        english: "Precision & Structure"
+        category: "Clarity Manifestation"
+        manifestations:
+          - "Need for frameworks, clear processes"
+          - "Direct communication"
+          - "Documentation (Decks, ClickUp)"
+        purpose: "Essential to organize chaos (internal/external) and scale impact"
+        risk: "Can become rigidity if not flexed by Creativity (8) and Evolution (5)"
+
+      - rank: 12
+        value: "Coerência / Integridade"
+        score: 8.0
+        english: "Coherence / Integrity"
+        category: "Ethical Foundation"
+        manifestations:
+          - "Need to align discourse-practice (removes misaligned students)"
+          - "Transparency in partnerships"
+          - "Ethics in IA application"
+        foundation: "Base for Authenticity (2) and trust in Connections (7)"
+
+  tier_3_instrumental_values:
+    description: "Supporting values (6.0-7.5) - Important but not identity-defining"
+    count: 4
+
+    values:
+      - rank: 13
+        value: "Excelência (Padrão)"
+        score: 7.5
+        english: "Excellence (Standard)"
+        category: "Quality Standard"
+        note: "Serves Beauty (9) and Impact (3), but not primary motor"
+
+      - rank: 14
+        value: "Humildade (Instrumental)"
+        score: 7.0
+        english: "Humility (Instrumental)"
+        category: "Learning Tool"
+        note: "Recognition of not-knowing as motor for Evolution (5)"
+
+      - rank: 15
+        value: "Inteligência Emocional / Autocontrole"
+        score: 6.5
+        english: "Emotional Intelligence / Self-Control"
+        category: "Regulation Tool"
+        note: "Pragmatic tool to manage intensity (TDAH) and guarantee Clarity (1) and Coherence (12)"
+
+      - rank: 16
+        value: "Gratidão (Estado/Atitude)"
+        score: 6.0
+        english: "Gratitude (State/Attitude)"
+        category: "Desirable State"
+        note: "Result of living aligned, not an active driver of strategic decision"
+
+# VALUE DYNAMICS
+value_dynamics:
+
+  primary_motor:
+    value: "Clareza Radical"
+    function: "Drives all thinking, decision-making, and system creation"
+    without_it: "Generates impatience, frustration, and inability to function"
+
+  ethical_filter:
+    value: "Autenticidade Integral"
+    function: "Filters all actions, roles, and relationships"
+    without_it: "Generates internal conflict, 'sickness', and burnout"
+
+  existential_direction:
+    value: "Impacto Transformador"
+    function: "Provides meaning and justifies intensity of work"
+    without_it: "Work becomes meaningless, just mechanics"
+
+  essential_condition:
+    value: "Liberdade Criativa & Intelectual"
+    function: "Enables creativity, evolution, and well-being"
+    without_it: "Creativity and evolution suffocate, leads to 'golden cage'"
+
+  continuous_fuel:
+    value: "Evolução Constante"
+    function: "Prevents stagnation, drives learning and adaptation"
+    without_it: "Stagnation, loss of edge, irrelevance"
+
+# VALUE TENSIONS & CONFLICTS
+value_tensions:
+
+  major_tensions:
+    - tension_name: "Freedom vs Impact"
+      description: "Building systems for impact (3) temporarily traps freedom (4)"
+      values_in_conflict: ["Liberdade (4)", "Impacto (3)"]
+      resolution_strategy: "Building systems that free him (automation, delegation)"
+      current_phase: "Transitioning from CEO-Builder to Architect-Thinker"
+
+    - tension_name: "Clarity vs Creativity"
+      description: "Need for structure (1, 11) can constrain creative chaos (8)"
+      values_in_conflict: ["Clareza (1)", "Criatividade (8)"]
+      resolution_strategy: "Frameworks that enable, not restrict creativity"
+      example: "InnerLens - structured system for consciousness exploration"
+
+    - tension_name: "Intensity vs Well-being"
+      description: "Pursuit of Impact (3) and Evolution (5) threatens Family (6) and health"
+      values_in_conflict: ["Impacto (3)", "Família (6)"]
+      resolution_strategy: "Sabbaticals, boundaries, selective saying 'no'"
+      ongoing_challenge: "Balance remains biggest personal challenge"
+
+  value_reinforcement_loops:
+    - loop_name: "Clarity → Structure → Freedom"
+      description: "Clarity (1) creates Structures (11) that generate Freedom (4)"
+      example: "Documentation/automation frees him from operational work"
+
+    - loop_name: "Authenticity → Connections → Evolution"
+      description: "Authenticity (2) attracts Meaningful Connections (7) that fuel Evolution (5)"
+      example: "Partnerships with Cadu/Steven provide intellectual stimulation"
+
+    - loop_name: "Impact → Legacy → Meaning"
+      description: "Transformative Impact (3) builds Legacy which provides existential Meaning"
+      example: "Academia Lendár[IA] as vessel for philosophical transmission"
+
+# VALUE MANIFESTATION IN BEHAVIOR
+behavioral_manifestations:
+
+  decision_making:
+    primary_filter: "Clarity First - does this bring clarity or noise?"
+    secondary_filter: "Authenticity Check - does this align with my essence?"
+    tertiary_filter: "Impact Assessment - does this create transformative impact?"
+    rejection_triggers:
+      - "Superficiality / noise"
+      - "Inauthenticity / manipulation"
+      - "Inefficiency / waste"
+      - "Stagnation / repetition"
+
+  communication_style:
+    driven_by: ["Clareza (1)", "Autenticidade (2)", "Eficiência (10)"]
+    characteristics:
+      - "Economical and direct"
+      - "No fluff or small talk"
+      - "Focused on signal over noise"
+      - "Honest to the point of brutal"
+
+  work_preferences:
+    driven_by: ["Liberdade (4)", "Criatividade (8)", "Evolução (5)"]
+    loves:
+      - "Deep creative work"
+      - "System architecture"
+      - "Philosophical exploration"
+      - "Strategic visioning"
+    hates:
+      - "Management / meetings"
+      - "Repetitive operational tasks"
+      - "Superficial networking"
+      - "Bureaucracy"
+
+  relationship_patterns:
+    driven_by: ["Autenticidade (2)", "Conexões Significativas (7)"]
+    seeks:
+      - "Depth over breadth"
+      - "Intellectual stimulation"
+      - "Energetic alignment"
+      - "Shared values (clarity, authenticity)"
+    avoids:
+      - "Small talk"
+      - "Transactional relationships"
+      - "Social performance"
+      - "Conventional networking"
+
+# CROSS-VALIDATION WITH Q&A
+q_and_a_validation:
+
+  clarity_radical_evidence:
+    - quote: "Todos os meus mentores têm em comum: CLAREZA DE PENSAMENTO"
+    - quote: "Busque o autoconhecimento. Conhece-te a ti mesmo."
+    - behavior: "Follows IA specialists for clarity on future trends"
+
+  authenticity_evidence:
+    - quote: "Quando não somos autênticos, adoecemos."
+    - quote: "Marketing autêntico não manipula medos e inseguranças."
+    - behavior: "Abandoned 'empresário' title, embraced 'pensador/mentor'"
+
+  freedom_evidence:
+    - quote: "A liberdade em si já é motivo suficiente."
+    - quote: "Posso dedicar meu tempo ao que eu quiser. Só isso já é motivo pra acordar empolgado."
+    - behavior: "Built systems to free himself from operational work"
+
+  evolution_evidence:
+    - behavior: "Leu 100+ livros em 2015 sozinho"
+    - behavior: "Mal conseguiu dormir quando Sam Altman saiu da OpenAI"
+    - principle: "Ser um eterno aprendiz" (be an eternal learner)
+
+# EXTRACTION METADATA
+extraction_metadata:
+  source_quality: "CROWN JEWEL (Tier 1)"
+  primary_source: "modelo-do-eu.md - Seção I (51KB, 389 lines)"
+  validation_sources:
+    - "modelo-do-eu.md - Seções II-VI"
+    - "Q&A.md - Behavioral evidence"
+  extraction_time_saved: "4-8 hours (pre-validated)"
+  confidence: 100
+  coverage: 100
+  notes: |
+    This layer was PRE-VALIDATED in modelo-do-eu.md with extraordinary detail.
+    Alan Nicolas created an exhaustive hierarchical values table (16 values, scored 6.0-10.0)
+    with evidence, implications, and tensions for each value.
+
+    This is top 1% of all mind extractions - rarely do subjects provide this level of
+    introspective clarity about their own value hierarchy.
+
+    Cross-validation with Q&A.md and behavioral patterns confirms 100% accuracy.
+
+  next_steps:
+    - "Layer 7 (Core Obsessions) - also pre-validated in modelo-do-eu.md"
+    - "Layer 8 (Productive Paradoxes) - partially pre-validated"
+    - "Use values hierarchy as foundation for all other layer extractions"

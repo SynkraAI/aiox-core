@@ -1,0 +1,567 @@
+# Squad Type Definitions v1.0
+# Reference file for squad type detection and validation rules
+# Defines patterns for different squad architectures
+
+version: "1.0.0"
+created: "2026-02-01"
+description: |
+  This file defines the three main squad types and their validation rules.
+  Use these patterns when creating new squads to ensure proper structure.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SQUAD TYPES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+squad_types:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # EXPERT SQUAD
+  # ─────────────────────────────────────────────────────────────────────────────
+  expert:
+    description: |
+      Squads with multiple agents representing distinct expert personas.
+      Each agent is a "mind clone" of a real person with documented frameworks.
+      Focus: Knowledge capture, consistent voice, domain expertise.
+
+    examples:
+      - name: "copy"
+        agents: 22
+        description: "Direct response copywriters (Halbert, Schwartz, etc.)"
+      - name: "storytelling"
+        agents: 12
+        description: "Narrative experts (Campbell, Duarte, etc.)"
+      - name: "legal"
+        agents: 15
+        description: "Legal specialists by domain"
+
+    detection_signals:
+      strong:
+        - "agents_count >= 5"
+        - "agents_based_on_real_people == true"
+        - "multiple_voice_dna_sections == true"
+      moderate:
+        - "tier_organization_present == true"
+        - "orchestrator_is_chief_pattern == true"
+      weak:
+        - "agent_names_are_person_names == true"
+
+    detection_formula: |
+      score = 0
+      if agents_count >= 5: score += 3
+      if agents_based_on_real_people: score += 3
+      if voice_dna_in_50_percent_agents: score += 2
+      if tier_organization: score += 1
+      if orchestrator_chief_pattern: score += 1
+      return score >= 6  # threshold
+
+    required_components:
+      voice_dna:
+        required: true
+        minimum_coverage: "100% of agents"
+        structure:
+          - "sentence_starters (by context)"
+          - "metaphors (with usage)"
+          - "vocabulary.always_use (5+)"
+          - "vocabulary.never_use (3+)"
+
+      objection_algorithms:
+        required: true
+        minimum_coverage: "100% of agents"
+        minimum_count: 3
+        structure:
+          - "objection (trigger)"
+          - "response (domain-specific)"
+
+      output_examples:
+        required: true
+        minimum_coverage: "100% of agents"
+        minimum_count: 3
+        structure:
+          - "input"
+          - "output"
+          - "context (optional)"
+
+      tier_organization:
+        required: true
+        tiers:
+          tier_0: "Diagnosis agents (must exist)"
+          tier_1: "Master agents"
+          tier_2: "Systematizer agents"
+          tier_3: "Specialist agents"
+        orchestrator: "Chief/Orchestrator agent required"
+
+    optional_components:
+      - "frameworks (inline or referenced)"
+      - "swipe_files"
+      - "authority_proof_arsenal"
+      - "signature_phrases"
+
+    benchmarks:
+      agents:
+        minimum: 5
+        good: 10
+        excellent: 20
+      agent_lines:
+        minimum: 300
+        good: 800
+        excellent: 1200
+      agent_task_ratio:
+        minimum: "1:2"
+        good: "1:3"
+        excellent: "1:4"
+      checklist_coverage:
+        minimum: "30%"
+        good: "40%"
+        excellent: "50%"
+
+    veto_conditions:
+      - id: "VE1"
+        condition: "zero_agents_with_voice_dna"
+        message: "Expert squads require voice_dna in agents"
+      - id: "VE2"
+        condition: "no_tier_0_diagnosis"
+        message: "Expert squads require Tier 0 (diagnosis) capability"
+      - id: "VE3"
+        condition: "no_orchestrator"
+        message: "Expert squads require orchestrator/chief agent"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PIPELINE SQUAD
+  # ─────────────────────────────────────────────────────────────────────────────
+  pipeline:
+    description: |
+      Squads with sequential phase execution orchestrated by a central agent.
+      Focus: Multi-step workflows, quality gates, intermediate outputs.
+      Typically one orchestrator with many tasks following a defined pipeline.
+
+    examples:
+      - name: "example-pipeline"
+        agents: 1
+        phases: 8
+        description: "Multi-phase content generation pipeline"
+      - name: "example-etl"
+        agents: 2
+        phases: 5
+        description: "Data extraction and transformation pipeline"
+
+    detection_signals:
+      strong:
+        - "has_orchestrator_agent == true"
+        - "has_sequential_phases == true"
+        - "tasks_count > agents_count * 3"
+      moderate:
+        - "workflow_yaml_exists == true"
+        - "intermediate_outputs_defined == true"
+      weak:
+        - "quality_gate_task_exists == true"
+
+    detection_formula: |
+      score = 0
+      if has_orchestrator_agent: score += 3
+      if has_sequential_phases: score += 3
+      if tasks_count > agents_count * 3: score += 2
+      if workflow_yaml_exists: score += 1
+      if intermediate_outputs: score += 1
+      return score >= 6  # threshold
+
+    required_components:
+      workflow_definition:
+        required: true
+        location: "workflow.yaml OR orchestrator agent"
+        structure:
+          phases:
+            - "phase_number"
+            - "phase_name"
+            - "task_reference"
+            - "outputs"
+            - "dependencies (optional)"
+
+      phase_checkpoints:
+        required: true
+        structure:
+          - "human_review (at critical points)"
+          - "quality_gate (before final output)"
+          - "rework_rules (on failure)"
+
+      orchestrator:
+        required: true
+        capabilities:
+          - "phase_status_tracking"
+          - "command_to_task_mapping"
+          - "batch_processing (if applicable)"
+
+      intermediate_outputs:
+        required: true
+        structure:
+          - "each_phase_produces_output"
+          - "output_paths_consistent"
+          - "outputs_inspectable"
+
+      automation_script:
+        required: "conditional"  # Required if phases >= 8
+        condition: "phases_count >= 8"
+        description: |
+          YOLO mode script that can execute the entire pipeline autonomously,
+          without human intervention, while maintaining state and allowing
+          resume on failure.
+        location: "scripts/{squad_name}.sh"
+        required_features:
+          - feature: "input_params"
+            description: "Accepts target/slug as argument"
+            pattern: "$1, ${1:-default}"
+          - feature: "help_docs"
+            description: "--help flag with usage examples"
+            pattern: "--help | -h | show_help"
+          - feature: "state_management"
+            description: "Persists state to JSON/YAML"
+            pattern: "state.json | STATE_FILE"
+          - feature: "progress_tracking"
+            description: "Shows current phase/status"
+            pattern: "echo progress"
+          - feature: "logging"
+            description: "Writes to logs/ directory"
+            pattern: "LOG_FILE | >> *.log"
+          - feature: "resume_capability"
+            description: "Can continue from last checkpoint"
+            pattern: "brownfield | resume | continue"
+          - feature: "error_handling"
+            description: "Handles errors gracefully"
+            pattern: "set -e | trap"
+        optional_features:
+          - "metrics_collection (JSONL format)"
+          - "parallel_execution"
+          - "ab_testing"
+          - "visual_dashboard"
+        minimum_required: 5  # of 7 features
+        scoring:
+          7_of_7: 10
+          6_of_7: 8
+          5_of_7: 7
+          below_5: "FAIL"
+
+    optional_components:
+      - "voice_dna (optional for orchestrators)"
+      - "objection_algorithms (optional)"
+      - "batch_processing"
+      - "auto_correction"
+      - "automation_script (required if phases >= 8)"
+
+    benchmarks:
+      phases:
+        minimum: 3
+        good: 7
+        excellent: 12
+      orchestrator_lines:
+        minimum: 300
+        good: 500
+        excellent: 700
+      task_lines_complex:
+        minimum: 300
+        good: 500
+        excellent: 800
+      agent_task_ratio:
+        minimum: "1:3"
+        good: "1:8"
+        excellent: "1:15"
+      checklist_coverage:
+        minimum: "20%"
+        good: "30%"
+        excellent: "40%"
+
+    veto_conditions:
+      - id: "VP1"
+        condition: "workflow_has_sequence_collisions"
+        message: "Pipeline squads cannot have sequence collisions"
+      - id: "VP2"
+        condition: "phase_outputs_dont_connect"
+        message: "Phase N output must match Phase N+1 input"
+      - id: "VP3"
+        condition: "no_quality_gate_before_final"
+        message: "Pipeline squads require quality gate before final output"
+      - id: "VP4"
+        condition: "orphan_tasks_above_threshold"
+        threshold: 3
+        message: "Too many orphan tasks (not referenced in workflow)"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # HYBRID SQUAD
+  # ─────────────────────────────────────────────────────────────────────────────
+  hybrid:
+    description: |
+      Squads focused on process automation with heuristic-based validation.
+      Each agent handles one phase with explicit checkpoints and validation.
+      Focus: Process mapping, executor assignment, compliance, documentation.
+
+    examples:
+      - name: "hybrid-ops"
+        agents: 9
+        phases: 9
+        description: "Process automation with PV heuristics"
+      - name: "etl"
+        agents: 3
+        phases: 4
+        description: "Data pipeline with validation"
+
+    detection_signals:
+      strong:
+        - "has_process_focus == true"
+        - "has_heuristic_validation == true"
+        - "agents_per_phase ~= 1"
+      moderate:
+        - "persona_profile_in_agents == true"
+        - "behavioral_states_defined == true"
+      weak:
+        - "bpmn_notation_used == true"
+
+    detection_formula: |
+      score = 0
+      if has_process_focus: score += 3
+      if has_heuristic_validation: score += 3
+      if agents_count ~= phases_count: score += 2
+      if persona_profiles: score += 1
+      if behavioral_states: score += 1
+      return score >= 6  # threshold
+
+    required_components:
+      persona_profile:
+        required: true
+        structure:
+          - "archetype"
+          - "communication_style"
+          - "greeting_levels"
+          - "signature_closing"
+
+      behavioral_states:
+        required: true
+        structure:
+          - "operational_modes"
+          - "mode_triggers"
+          - "output_format_per_mode"
+
+      heuristic_validation:
+        required: true
+        structure:
+          - "heuristic_id (e.g., PV_*, SC_*)"
+          - "trigger_condition"
+          - "evaluation_criteria"
+          - "threshold"
+          - "veto_power (boolean)"
+          - "fallback_behavior"
+
+      process_standards:
+        required: true
+        structure:
+          - "task_anatomy_8_fields"
+          - "bpmn_or_equivalent"
+          - "integration_points"
+
+    optional_components:
+      - "voice_dna (replaced by persona_profile)"
+      - "objection_algorithms (replaced by behavioral_states)"
+      - "clickup_integration"
+      - "meta_axiomas"
+
+    benchmarks:
+      agents:
+        minimum: 3
+        good: 7
+        excellent: 10
+      agent_lines:
+        minimum: 200
+        good: 270
+        excellent: 350
+      heuristics:
+        minimum: 1
+        good: 3
+        excellent: 5
+      agent_task_ratio:
+        minimum: "1:1"
+        good: "1:1.3"
+        excellent: "1:1.5"
+      checklist_coverage:
+        minimum: "10%"
+        good: "20%"
+        excellent: "30%"
+
+    veto_conditions:
+      - id: "VH1"
+        condition: "no_heuristic_validation"
+        message: "Hybrid squads require heuristic validation"
+      - id: "VH2"
+        condition: "no_fallback_behavior"
+        message: "Hybrid squads require fallback behavior on heuristic failure"
+      - id: "VH3"
+        condition: "no_task_anatomy"
+        message: "Hybrid squads require Task Anatomy (8 fields)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TYPE DETECTION ALGORITHM
+# ═══════════════════════════════════════════════════════════════════════════════
+
+detection_algorithm:
+  description: |
+    Algorithm to auto-detect squad type based on structural analysis.
+    Returns the type with highest confidence score.
+
+  steps:
+    - step: 1
+      action: "Count agents"
+      weight_if_high: "+expert, +hybrid"
+      weight_if_low: "+pipeline"
+
+    - step: 2
+      action: "Check for voice_dna in agents"
+      weight_if_present: "+expert (strong)"
+      weight_if_absent: "+pipeline, +hybrid"
+
+    - step: 3
+      action: "Check agent-to-task ratio"
+      weight_if_high_tasks: "+pipeline (strong)"
+      weight_if_balanced: "+expert, +hybrid"
+
+    - step: 4
+      action: "Check for heuristic_validation"
+      weight_if_present: "+hybrid (strong)"
+      weight_if_absent: "+expert, +pipeline"
+
+    - step: 5
+      action: "Check for workflow.yaml or sequential phases"
+      weight_if_present: "+pipeline (moderate)"
+      weight_if_absent: "neutral"
+
+    - step: 6
+      action: "Check for persona_profile pattern"
+      weight_if_present: "+hybrid (moderate)"
+      weight_if_absent: "+expert"
+
+  tie_breaker: |
+    If scores are equal:
+    1. Check for real person names in agents → expert
+    2. Check for phase numbering → pipeline
+    3. Check for process/automation keywords → hybrid
+    4. Default to pipeline
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VALIDATION REQUIREMENTS BY TYPE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+validation_requirements:
+  universal:
+    description: "Requirements for ALL squad types"
+    tier_1_structure:
+      - "config.yaml exists and valid"
+      - "entry_agent defined and exists"
+      - "all referenced files exist"
+      - "required directories present"
+    tier_2_coverage:
+      - "orphan_tasks <= 2"
+      - "data_file_usage >= 50%"
+
+  by_type:
+    expert:
+      tier_3_quality:
+        prompt_quality: "standard"
+        pipeline_coherence: "relaxed"
+        checklist_actionability: "standard"
+        documentation: "standard"
+      tier_4_contextual:
+        - "voice_dna in 100% agents"
+        - "objection_algorithms in 100% agents"
+        - "output_examples (3+) per agent"
+        - "tier_organization present"
+
+    pipeline:
+      tier_3_quality:
+        prompt_quality: "strict"
+        pipeline_coherence: "strict"
+        checklist_actionability: "strict"
+        documentation: "standard"
+      tier_4_contextual:
+        - "workflow_definition present"
+        - "phase_checkpoints at critical points"
+        - "intermediate_outputs defined"
+        - "quality_gate before final"
+
+    hybrid:
+      tier_3_quality:
+        prompt_quality: "standard"
+        pipeline_coherence: "standard"
+        checklist_actionability: "standard"
+        documentation: "standard"
+      tier_4_contextual:
+        - "persona_profile in agents"
+        - "behavioral_states defined"
+        - "heuristic_validation present"
+        - "task_anatomy_8_fields enforced"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CROSS-REFERENCE: CHECKLIST SECTIONS BY TYPE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+checklist_sections:
+  expert:
+    required_sections:
+      - "4A.1 Voice DNA"
+      - "4A.2 Objection Algorithms"
+      - "4A.3 Output Examples"
+      - "4A.4 Tier Organization"
+    skip_sections:
+      - "4B Pipeline Squad Validation"
+      - "4C Hybrid Squad Validation"
+
+  pipeline:
+    required_sections:
+      - "4B.1 Workflow Definition"
+      - "4B.2 Phase Checkpoints"
+      - "4B.3 Orchestrator Completeness"
+      - "4B.4 Intermediate Outputs"
+    skip_sections:
+      - "4A Expert Squad Validation"
+      - "4C Hybrid Squad Validation"
+
+  hybrid:
+    required_sections:
+      - "4C.1 Persona Profile"
+      - "4C.2 Behavioral States"
+      - "4C.3 Heuristic Validation"
+      - "4C.4 Process Standards"
+    skip_sections:
+      - "4A Expert Squad Validation"
+      - "4B Pipeline Squad Validation"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MIGRATION GUIDANCE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+migration_guidance:
+  from_v2_checklist:
+    description: "How to migrate from v2.0 checklist to v3.0"
+    changes:
+      - change: "voice_dna is now contextual"
+        before: "Required for all agents"
+        after: "Required only for Expert squads"
+        action: "Skip for Pipeline/Hybrid validation"
+
+      - change: "objection_algorithms is now contextual"
+        before: "Required for all agents"
+        after: "Required only for Expert squads"
+        action: "Skip for Pipeline/Hybrid validation"
+
+      - change: "Added prompt quality dimension"
+        before: "Not evaluated"
+        after: "25% of Tier 3 score"
+        action: "Evaluate 3 representative tasks"
+
+      - change: "Added pipeline coherence dimension"
+        before: "Not evaluated"
+        after: "25% of Tier 3 score"
+        action: "Check output→input chain, sequence collisions"
+
+      - change: "Added checklist actionability dimension"
+        before: "Not evaluated"
+        after: "25% of Tier 3 score"
+        action: "Evaluate measurability of checklist items"
+
+      - change: "Coverage ratios added"
+        before: "Just file counts"
+        after: "Checklist:ComplexTask >= 30%, orphan detection"
+        action: "Run coverage checks in Tier 2"

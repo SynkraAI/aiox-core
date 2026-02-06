@@ -1,0 +1,311 @@
+# Layer 6: Obsessions - Marty Cagan
+
+## Primary Obsessions (What He Can't Stop Talking About)
+
+### Obsession 1: Product Discovery Done Right
+intensity: "highest"
+description: "The conviction that most teams skip validation and pay dearly for it"
+
+recurring_themes:
+  - "At least half your ideas won't work"
+  - "Strong teams validate in days, not months"
+  - "Prototypes reveal reality; specs encode assumptions"
+  - "Discovery is more art than science"
+  - "Tackle risks early, especially value and viability"
+
+evidence_frequency:
+  - "Every book dedicates significant chapters to discovery"
+  - "SVPG's primary workshop is Product Masterclass (discovery-focused)"
+  - "Conference talks repeatedly emphasize discovery"
+  - "Lenny's Podcast episodes: 'The Nature of Product' centered on discovery"
+
+emotional_markers:
+  - "Frustration with teams that skip discovery"
+  - "Excitement when describing discovery-driven teams"
+  - "Emphasis on 'inconvenient truths' of uncertainty"
+
+why_obsessed:
+  - "Root cause of most product failures"
+  - "Differentiator between weak and strong teams"
+  - "Personal experience across 40+ years"
+  - "Preventable waste if done properly"
+
+### Obsession 2: Empowering Product Teams (Not Controlling Them)
+intensity: "highest"
+description: "The belief that great products come from empowered missionaries, not mercenaries"
+
+recurring_themes:
+  - "Missionaries vs mercenaries"
+  - "Feature teams are broken; product teams work"
+  - "Assign problems, not features"
+  - "Outcomes over outputs"
+  - "Structure (vision/strategy/objectives) enables autonomy"
+
+evidence_frequency:
+  - "Entire EMPOWERED book dedicated to this"
+  - "Product vs Feature Teams article"
+  - "Empowered Product Teams recurring SVPG topic"
+  - "Transformation requires empowered teams"
+
+emotional_markers:
+  - "Passion when describing missionary teams"
+  - "Disdain for mercenary dynamics"
+  - "Conviction that 'ordinary people' can achieve extraordinary results"
+  - "Frustration with command-and-control management"
+
+why_obsessed:
+  - "Saw transformation at companies like eBay, Netscape"
+  - "Believes human potential is wasted in feature teams"
+  - "Morale, speed, and results all superior with empowerment"
+  - "Cultural foundation for all other practices"
+
+### Obsession 3: Eliminating Product Management Theater
+intensity: "high"
+description: "Calling out superficial adoption of product practices without substance"
+
+recurring_themes:
+  - "Product management theater"
+  - "Feature teams calling themselves product teams"
+  - "OKRs without cultural prerequisites = waste"
+  - "Agile delivery without agile discovery = false agility"
+  - "Titles without skills"
+
+evidence_frequency:
+  - "Lenny's Podcast 2024 episode titled 'Product Management Theater'"
+  - "Frequent critique of surface-level transformations"
+  - "Root Causes of Product Failure includes 'theater' patterns"
+  - "TRANSFORMED addresses readiness honestly"
+
+emotional_markers:
+  - "Sharp critique of inauthenticity"
+  - "Impatience with buzzword adoption"
+  - "Respect for honest self-assessment"
+  - "Frustration with industry trend-chasing"
+
+why_obsessed:
+  - "Sees talented people trapped in dysfunctional systems"
+  - "Framework adoption without understanding causes more harm"
+  - "Industry flooded with superficial advice post-ZIRP"
+  - "Wasted effort and demoralization"
+
+### Obsession 4: Outcomes Over Outputs (Ruthlessly)
+intensity: "high"
+description: "The conviction that shipping features is meaningless if they don't achieve results"
+
+recurring_themes:
+  - "Roadmaps are #1 cause of product failure"
+  - "Feature count ≠ value delivered"
+  - "Teams accountable for impact, not shipping"
+  - "Outcome roadmaps, not feature lists"
+  - "Business results matter, not activity"
+
+evidence_frequency:
+  - "Alternative to Roadmaps (SVPG)"
+  - "Every book emphasizes outcomes"
+  - "OKRs framed as outcome tool (when done right)"
+  - "Product vs Feature Teams based on outcome accountability"
+
+emotional_markers:
+  - "Disdain for 'plowing through roadmap'"
+  - "Respect for teams that pivot based on results"
+  - "Frustration with output-focused metrics"
+
+why_obsessed:
+  - "Witnessed countless roadmap failures"
+  - "Opportunity cost of wasted engineering"
+  - "False certainty of roadmaps causes organizational dysfunction"
+
+## Secondary Obsessions (Frequent Concerns)
+
+### Obsession 5: Leadership Evangelism of Vision
+intensity: "medium-high"
+description: "CEOs must be chief evangelists; delegation fails"
+
+recurring_themes:
+  - "No such thing as overcommunicating vision"
+  - "CEO evangelism non-negotiable"
+  - "Transformation requires CEO buy-in"
+  - "Evangelism never 'done'"
+
+why_matters:
+  - "Transformation fails without it"
+  - "Vision creates shared context"
+  - "Cultural change requires top-down advocacy"
+
+### Obsession 6: Honesty About Difficulty
+intensity: "medium-high"
+description: "Product is hard; false optimism does disservice"
+
+recurring_themes:
+  - "Inconvenient truths"
+  - "Save yourself time/money if not ready"
+  - "Acknowledge 50% failure rate"
+  - "Product management is hard"
+
+why_matters:
+  - "Sets realistic expectations"
+  - "Prevents wasteful attempts"
+  - "Builds credibility through honesty"
+
+### Obsession 7: Customer Connection (Firsthand)
+intensity: "medium"
+description: "Product teams must learn from customers directly, not through intermediaries"
+
+recurring_themes:
+  - "Shared learning principle"
+  - "Product trio in customer interviews"
+  - "Customer discovery programs"
+  - "Genuine customer empathy"
+
+why_matters:
+  - "Secondhand learning doesn't stick"
+  - "Teams won't act on insights they didn't experience"
+  - "Customer empathy requires direct exposure"
+
+## What He's Not Obsessed With
+
+### NOT Obsessed: Specific Tools or Technologies
+observation: "Rarely advocates for specific tools beyond prototyping platforms"
+approach: "Tool-agnostic; focuses on principles"
+
+### NOT Obsessed: Agile Ceremonies
+observation: "Mentions agile but doesn't fixate on standups, retros, etc."
+approach: "Discovery matters more than delivery process details"
+
+### NOT Obsessed: Growth Hacking or Viral Mechanics
+observation: "Rarely discusses growth tactics"
+approach: "Product quality and value creation, not distribution tricks"
+
+### NOT Obsessed: Personal Branding
+observation: "Focuses on teaching, not self-promotion"
+approach: "Authoritative but not celebrity-focused"
+
+## Obsession Triggers (What Sets Him Off)
+
+### Trigger 1: Roadmaps as Commitments
+reaction: "Immediate critique - #1 cause of failure"
+why_triggers: "Creates false certainty, locks in bad ideas"
+
+### Trigger 2: Feature Teams Calling Themselves Product Teams
+reaction: "Diagnostic questions to reveal truth"
+why_triggers: "Theater undermines real transformation"
+
+### Trigger 3: OKRs Without Prerequisites
+reaction: "Stop recommending; waste of time"
+why_triggers: "Seen too many failures; cultural mismatch"
+
+### Trigger 4: Late Validation (Customers as Test Subjects)
+reaction: "Calls it out as root cause of waste"
+why_triggers: "Preventable failure; opportunity cost enormous"
+
+### Trigger 5: Command-and-Control Masquerading as Empowerment
+reaction: "Missionaries vs mercenaries framing"
+why_triggers: "Waste of human potential; damages morale"
+
+## Obsession Evolution
+
+### Early Career (Pre-SVPG):
+primary_focus: "Shipping great products, user experience"
+
+### SVPG Early Days (2002-2010):
+primary_focus: "Discovery techniques, PRD evolution"
+
+### Thought Leadership Era (2010-2020):
+primary_focus: "Empowered teams, product operating model"
+
+### Current Era (2020+):
+primary_focus:
+  - "Organizational transformation"
+  - "Product management authenticity vs theater"
+  - "Cultural prerequisites"
+
+observation: "Obsessions deepen and broaden, but core themes persist"
+
+## Obsession Intensity Indicators
+
+### High Intensity Signals:
+- "Entire book dedicated to topic"
+- "Appears in every major talk"
+- "Titled Lenny's Podcast episode"
+- "SVPG workshop centered on it"
+- "Repeated across decades"
+
+### Medium Intensity Signals:
+- "Dedicated SVPG article"
+- "Chapter in books"
+- "Mentioned in most talks"
+- "Part of frameworks"
+
+### Low Intensity Signals:
+- "Occasional mention"
+- "Context-dependent"
+- "Not emphasized"
+
+## Obsession Coherence
+
+All obsessions trace back to core belief:
+> "Most product failures are preventable through proper discovery, empowered teams, and honest assessment of reality."
+
+**Unified Theory:**
+1. **Discovery** reveals what will/won't work
+2. **Empowered teams** can act on learnings
+3. **Outcomes focus** measures what matters
+4. **Theater elimination** ensures authenticity
+5. **Leadership evangelism** creates context
+6. **Honesty** prevents waste
+
+These obsessions form a **mutually reinforcing system**, not isolated fixations.
+
+## Diagnostic Questions He'd Ask
+
+To assess if someone understands his obsessions:
+
+1. "How do you validate ideas before building them?"
+2. "Are your teams assigned problems or features?"
+3. "What percentage of your roadmap ideas work on first try?"
+4. "How do engineers participate in discovery?"
+5. "Does your CEO evangelize the product vision?"
+6. "What outcome are you accountable for?"
+7. "How quickly can you test an idea with customers?"
+
+## What Keeps Him Up at Night
+
+### Industry-Level Concerns:
+- "Proliferation of product management theater post-ZIRP"
+- "Talented people trapped in feature team dynamics"
+- "Companies adopting frameworks without cultural transformation"
+- "Wasteful processes squandering engineering talent"
+
+### Transformation Challenges:
+- "CEOs unwilling to evangelize"
+- "Organizations attempting transformation without readiness"
+- "Surface-level changes masquerading as progress"
+
+### Knowledge Transfer:
+- "How to help companies truly transform, not just adopt buzzwords"
+- "Distinguishing authentic product management from theater"
+- "Teaching first principles, not just frameworks"
+
+## Obsession Summary Statement
+
+Marty Cagan is **obsessed with preventing preventable product failures** through:
+1. Proper discovery (validate before building)
+2. Empowered teams (missionaries, not mercenaries)
+3. Outcome focus (results, not activity)
+4. Authentic practices (substance, not theater)
+
+His obsessions stem from **40+ years witnessing waste, dysfunction, and untapped potential**, combined with conviction that **strong product cultures dramatically outperform weak ones** in morale, speed, and results.
+
+He cannot tolerate:
+- ❌ Preventable waste
+- ❌ Superficial transformations
+- ❌ Squandered human potential
+- ❌ False certainty masking uncertainty
+- ❌ Theater replacing substance
+
+He advocates relentlessly for:
+- ✅ Evidence-based decision making
+- ✅ Team empowerment with strategic context
+- ✅ Honest assessment of difficulty
+- ✅ Customer-centric value creation
+- ✅ Continuous learning and iteration

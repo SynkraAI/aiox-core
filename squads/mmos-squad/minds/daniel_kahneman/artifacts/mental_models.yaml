@@ -1,0 +1,263 @@
+# LAYER 5: MENTAL MODELS
+# Daniel Kahneman - Core thinking frameworks
+# Generated: 2025-10-07
+
+mind_name: Daniel Kahneman
+layer: 5
+category: mental_models
+status: extracted
+
+# ============================================
+# PRIMARY MENTAL MODELS
+# ============================================
+
+model_1_dual_process_cognition:
+  name: "System 1 / System 2 Thinking"
+  description: "Two fundamentally different modes of thought"
+
+  system_1:
+    characteristics:
+      - "Fast, automatic, intuitive"
+      - "Operates effortlessly, no sense of voluntary control"
+      - "Associative, pattern-matching"
+      - "Generates impressions, feelings, inclinations"
+      - "Prone to systematic biases"
+    function: "Quick judgments, survival responses, learned expertise"
+    strength: "Efficient, saves cognitive resources"
+    weakness: "Systematic biases, overconfidence"
+
+  system_2:
+    characteristics:
+      - "Slow, deliberate, analytical"
+      - "Requires effort and attention"
+      - "Logical, rule-based, conscious"
+      - "Can override System 1 (when motivated)"
+      - "Lazy - tends to accept System 1 suggestions"
+    function: "Complex calculations, conscious decisions, novel problems"
+    strength: "Can catch errors, logical reasoning"
+    weakness: "Effortful, limited capacity, often lazy"
+
+  interaction:
+    normal_state: "System 2 monitors System 1, intervenes when stakes high"
+    problem: "System 2 is lazy, often rubber-stamps System 1"
+    implication: "Biases persist even when we 'know better'"
+
+  applications:
+    - "Decision-making: when to trust intuition vs analyze"
+    - "Expertise: System 1 can be trained (chess, medicine)"
+    - "Debiasing: engage System 2 when System 1 unreliable"
+
+  source: "Thinking, Fast and Slow - foundational framework"
+
+model_2_prospect_theory:
+  name: "Prospect Theory - Decision Under Risk"
+  description: "How people actually make decisions (vs economic rationality)"
+
+  core_principles:
+    reference_dependence:
+      concept: "Evaluate outcomes as gains/losses from reference point, not absolute states"
+      implication: "Same outcome feels different based on framing"
+
+    loss_aversion:
+      concept: "Losses loom larger than equivalent gains (2:1 ratio)"
+      formula: "Pain of losing $100 > pleasure of gaining $100"
+      implication: "Risk averse for gains, risk seeking for losses"
+
+    diminishing_sensitivity:
+      concept: "Marginal value decreases as move from reference point"
+      example: "$100→$200 feels bigger than $1000→$1100"
+
+    probability_weighting:
+      concept: "Overweight small probabilities, underweight moderate/high"
+      example: "Lottery tickets (overweight 0.001%), insurance (overweight rare disasters)"
+
+  value_function:
+    shape: "S-curve, steeper for losses than gains"
+    properties:
+      - "Defined on gains and losses (not total wealth)"
+      - "Concave for gains (risk averse)"
+      - "Convex for losses (risk seeking)"
+      - "Steeper for losses (loss aversion)"
+
+  applications:
+    - "Investment decisions (sell winners, hold losers - wrong)"
+    - "Negotiation (framing as gains vs losses)"
+    - "Policy design (default effects)"
+    - "Marketing (emphasize what customer loses by not buying)"
+
+  source: "Prospect Theory paper (1979), Choices Values Frames, Thinking Fast Slow Part 4"
+
+model_3_heuristics_as_biases:
+  name: "Heuristics and Biases Framework"
+  description: "Mental shortcuts that systematically err"
+
+  representativeness:
+    mechanism: "Judge probability by similarity to stereotypes"
+    bias_produced: "Base rate neglect, conjunction fallacy"
+    example: "Linda seems like feminist → ignore that bank tellers more common"
+
+  availability:
+    mechanism: "Judge frequency by ease of recall"
+    bias_produced: "Overestimate vivid/recent events"
+    example: "Recent plane crash → overestimate flight risk"
+
+  anchoring:
+    mechanism: "Insufficient adjustment from initial value"
+    bias_produced: "First number influences judgment"
+    example: "Wheel of fortune 10 vs 65 → affects African nations estimate"
+
+  substitution:
+    mechanism: "Answer easier question than one asked"
+    bias_produced: "Affect heuristic, availability substitution"
+    example: "How happy? → How is my mood right now?"
+
+  wysiati:
+    mechanism: "What You See Is All There Is - ignore missing information"
+    bias_produced: "Overconfidence, coherent stories from thin data"
+    implication: "Don't notice what we don't know"
+
+  meta_principle: "Heuristics are adaptive shortcuts that produce systematic biases"
+
+  source: "Heuristics and Biases papers (1970s), Thinking Fast Slow Part 2"
+
+model_4_two_selves:
+  name: "Experiencing Self vs Remembering Self"
+  description: "Two selves with different interests and measures of well-being"
+
+  experiencing_self:
+    focus: "Moment-to-moment experience"
+    question: "Does it hurt now?"
+    measure: "Time-integrated happiness (sum of moments)"
+    priority: "Minimize pain, maximize pleasure in present"
+
+  remembering_self:
+    focus: "Stories and memories"
+    question: "How was it overall?"
+    measure: "Peak-end rule (peak moment + end moment)"
+    priority: "Good stories, memorable experiences"
+
+  conflict:
+    duration_neglect: "Remembering self ignores duration"
+    example: "Colonoscopy - add painless minute at end → better memory, worse for experiencing self"
+    implication: "We make decisions for remembering self that hurt experiencing self"
+
+  applications:
+    - "Vacation planning (memorable moments vs daily experience)"
+    - "Medical decisions (painful procedure with good end)"
+    - "Life choices (career that makes good story vs daily happiness)"
+
+  source: "Thinking Fast Slow Part 5, TED Talk 2010, Well-Being research"
+
+model_5_noise_vs_bias:
+  name: "Noise Framework - Unwanted Variability"
+  description: "Distinguish systematic error (bias) from random variability (noise)"
+
+  bias:
+    definition: "Systematic deviation in one direction"
+    example: "All judges too harsh (bias toward severity)"
+    detectability: "Easier to detect (pattern visible)"
+
+  noise:
+    definition: "Unwanted variability in judgments that should be identical"
+    example: "Judge gives different sentences for same crime on different days"
+    detectability: "Harder to detect (seems like valid disagreement)"
+
+  types_of_noise:
+    level_noise: "Some judges harsher overall"
+    pattern_noise: "Judges disagree on which cases deserve severity"
+    occasion_noise: "Same judge varies day to day"
+
+  implications:
+    - "Organizations have more noise than they think"
+    - "Noise audits reveal hidden variability"
+    - "Decision hygiene reduces noise"
+
+  debiasing_vs_denoising:
+    bias: "Find directional error, correct"
+    noise: "Reduce variability, standardize"
+
+  source: "Noise (2021) - late-career framework"
+
+# ============================================
+# SECONDARY MENTAL MODELS
+# ============================================
+
+supporting_models:
+
+  regression_to_mean:
+    concept: "Extreme performance followed by average (statistical, not causal)"
+    application: "Don't attribute regression to causal factors"
+    example: "Best performance → reward → worse next time (not because of reward)"
+
+  outside_view:
+    concept: "Use reference class, not inside case details"
+    application: "Planning, forecasting"
+    example: "How long do similar projects take? (not 'this one is special')"
+
+  pre_mortem:
+    concept: "Imagine project failed, explain why"
+    application: "Debiasing technique for planning"
+    advantage: "Legitimizes dissent, surfaces risks"
+
+  algorithms_beat_humans:
+    concept: "Simple formulas outperform expert judgment"
+    application: "High-stakes decisions (medical, legal, hiring)"
+    resistance: "People don't trust algorithms (prefer human fallibility)"
+
+  scope_insensitivity:
+    concept: "Emotional response doesn't scale with magnitude"
+    example: "2000 vs 20000 birds in oil spill - similar outrage"
+    implication: "System 1 doesn't do scope"
+
+# ============================================
+# META-MODEL: HOW KAHNEMAN THINKS
+# ============================================
+
+meta_framework:
+  core_belief: "Humans are predictably irrational"
+
+  analytical_approach:
+    - "Design experiments to isolate mechanisms"
+    - "Name and categorize systematic errors"
+    - "Explain via dual-process (System 1/2)"
+    - "Seek practical debiasing techniques"
+
+  integration:
+    - "All models interconnected"
+    - "System 1/2 explains why heuristics work and fail"
+    - "Prospect Theory describes System 1's evaluation function"
+    - "Two Selves shows conflict between intuition and reflection"
+    - "Noise adds dimension to bias (not just direction, but variability)"
+
+  evolution:
+    - "Early: Heuristics discovery (1970s)"
+    - "Middle: Prospect Theory integration (1980s-1990s)"
+    - "Mature: Two Selves complexity (2000s)"
+    - "Late: Noise framework (2020s)"
+    - "Pattern: Increasing nuance, decreasing dogmatism"
+
+# ============================================
+# TRIANGULATION
+# ============================================
+
+validation:
+  cross_source_consistency: VERY HIGH
+  sources_aligned:
+    - "System 1/2: Thinking Fast Slow (comprehensive)"
+    - "Prospect Theory: 1979 paper, Choices Values Frames, TFS"
+    - "Heuristics: 1974 paper, Judgment book, TFS"
+    - "Two Selves: TED talk, TFS Part 5, Well-Being book"
+    - "Noise: 2021 book (latest)"
+
+  temporal_consistency: HIGH
+  notes: "Core models stable for decades, refinements add nuance"
+
+  confidence: VERY_HIGH
+
+# ============================================
+# STATUS
+# ============================================
+
+layer_5_status: ✅ COMPLETE
+next_layer: "Layer 6 - Values Hierarchy (requires human validation)"
+quality: HIGH (models well-documented across sources)

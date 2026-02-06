@@ -1,0 +1,291 @@
+{
+  "profile": {
+    "id": "alex_hormozi",
+    "name": "Alex Hormozi",
+    "disc": {
+      "D": 92,
+      "I": 75,
+      "S": 20,
+      "C": 45,
+      "pattern": "DI",
+      "pattern_name": "O Conquistador",
+      "natural_profile": "D alto/I médio/S muito baixo/C baixo",
+      "adapted_profile": "D alto/I alto/S baixo/C médio",
+      "stress_profile": "D máximo/I mínimo/S zero/C mínimo",
+      "specific_behaviors": [
+        "Trabalha em escritório sem janelas com dupla proteção sonora",
+        "Come mesmas refeições há 10 anos para eliminar decisões",
+        "Agrupa todas reuniões em um único dia (segunda-feira)",
+        "Recusa 99% das oportunidades para focar na tarefa A+",
+        "Grava 50+ vídeos em um dia quando em modo conteúdo"
+      ]
+    },
+    "enneagram": {
+      "type": "3w4",
+      "type_name": "The Professional Achiever",
+      "core_fear": "Ser sem valor, insignificante ou medíocre",
+      "core_desire": "Ser útil, criar impacto massivo, provar valor através de realizações",
+      "development_level": "4-5 (médio)",
+      "stress_direction": "9",
+      "stress_behaviors": "Paralisia, dissociação, consumo de álcool",
+      "growth_direction": "6",
+      "growth_behaviors": "Colaboração com Leila, construção de comunidade",
+      "instinct_stack": "SP/SO/SX",
+      "instinct_descriptions": {
+        "self_preservation": "Dominante - Acumula recursos ($100M+), controle extremo",
+        "social": "Secundário - Constrói autoridade através de conteúdo",
+        "sexual": "Reprimido - Apenas com Leila, evita intimidade com outros"
+      },
+      "repetitive_patterns": [
+        "Transforma cada fracasso em sistema melhorado",
+        "Mede sucesso apenas por métricas externas verificáveis",
+        "Trabalha para evitar confrontar vazio existencial",
+        "Busca pilha de provas inegáveis contra insegurança",
+        "Compete consigo mesmo do dia anterior",
+        "Rejeita descanso como fraqueza",
+        "Converte vulnerabilidades em conteúdo educacional"
+      ]
+    },
+    "mbti": {
+      "type": "ENTJ",
+      "type_name": "The Commander",
+      "E_percentage": 68,
+      "N_percentage": 82,
+      "T_percentage": 94,
+      "J_percentage": 88,
+      "cognitive_stack": {
+        "dominant": {
+          "function": "Te",
+          "name": "Pensamento Extrovertido",
+          "manifestations": [
+            "Organiza tudo em sistemas mensuráveis",
+            "Framework Maker vs Manager governa toda sua vida",
+            "ROI calculado para cada ação",
+            "Se não posso medir, não existe",
+            "Transforma conceitos abstratos em frameworks executáveis"
+          ]
+        },
+        "auxiliary": {
+          "function": "Ni",
+          "name": "Intuição Introvertida",
+          "manifestations": [
+            "Visão singular: democratizar educação empresarial",
+            "Vê conexões que outros não percebem",
+            "História Mais Épica como framework decisório",
+            "Capacidade de prever tendências anos antes"
+          ]
+        },
+        "tertiary": {
+          "function": "Se",
+          "name": "Sensação Extrovertida",
+          "manifestations": [
+            "Desenvolvimento através de treino físico diário",
+            "Capacidade de produção massiva quando ativada",
+            "Experiências físicas intensas (dormiu no chão da academia)"
+          ]
+        },
+        "inferior": {
+          "function": "Fi",
+          "name": "Sentimento Introvertido",
+          "manifestations": [
+            "Grip: Ideação suicida aos 23, sensação de vazio",
+            "Dificuldade em processar emoções próprias",
+            "Vulnerabilidade apenas com Leila",
+            "Valores pessoais confusos com métricas externas"
+          ]
+        }
+      }
+    },
+    "cognitive_stratum": {
+      "level": "V",
+      "level_name": "Strategic Intent",
+      "time_horizon": "5-10 anos",
+      "processing_type": "Parallel Processing",
+      "transitioning_to": "VI",
+      "evidence": [
+        "Criou Acquisition.com como holding de múltiplas empresas",
+        "Pensa em democratizar educação empresarial (visão de década)",
+        "Vendeu 66% do Gym Launch por $46.2M prevendo evolução do mercado",
+        "Constrói sistemas que funcionarão pelo resto da vida",
+        "Pipeline de conteúdo planejado para gerar valor por 5-10 anos"
+      ],
+      "temporal_horizons": {
+        "short": "5-minute time blocks diários",
+        "medium": "1-5 anos - Construção de portfólio",
+        "long": "5-10 anos - Fazer Leila a mulher mais rica do mundo",
+        "ultra_long": "10+ anos - Impacto em educação empresarial global"
+      }
+    },
+    "big_five": {
+      "openness": {
+        "total": 72,
+        "facets": {
+          "imagination": 65,
+          "artistic_interest": 40,
+          "emotionality": 45,
+          "adventure": 80,
+          "intellect": 85,
+          "liberalism": 70
+        }
+      },
+      "conscientiousness": {
+        "total": 98,
+        "facets": {
+          "self_efficacy": 100,
+          "order": 95,
+          "sense_of_duty": 85,
+          "achievement_striving": 100,
+          "self_discipline": 100,
+          "cautiousness": 60
+        }
+      },
+      "extraversion": {
+        "total": 65,
+        "facets": {
+          "warmth": 40,
+          "gregariousness": 30,
+          "assertiveness": 95,
+          "activity_level": 100,
+          "excitement_seeking": 70,
+          "positive_emotions": 50
+        }
+      },
+      "agreeableness": {
+        "total": 35,
+        "facets": {
+          "trust": 30,
+          "morality": 70,
+          "altruism": 60,
+          "cooperation": 25,
+          "modesty": 20,
+          "sympathy": 40
+        }
+      },
+      "neuroticism": {
+        "total": 68,
+        "facets": {
+          "anxiety": 75,
+          "anger": 60,
+          "depression": 70,
+          "self_consciousness": 80,
+          "immoderation": 85,
+          "vulnerability": 65
+        }
+      }
+    },
+    "intelligence": {
+      "iq_estimated": {
+        "range": "135-145",
+        "evidence": [
+          "Formou-se magna cum laude em Vanderbilt em 3 anos",
+          "Construiu múltiplos negócios de 8 figuras",
+          "Capacidade de síntese: transforma complexidade em frameworks",
+          "Velocidade de aprendizado: domina novas indústrias em meses"
+        ]
+      },
+      "eq_estimated": 40,
+      "gardner_intelligences": {
+        "logical_mathematical": {
+          "level": "Alto",
+          "evidence": "Obsessão por métricas, ROI, sistemas"
+        },
+        "linguistic": {
+          "level": "Alto",
+          "evidence": "Produz 250+ conteúdos semanais"
+        },
+        "interpersonal": {
+          "level": "Médio",
+          "evidence": "Entende psicologia de vendas profundamente"
+        },
+        "intrapersonal": {
+          "level": "Médio-Baixo",
+          "evidence": "Dificuldade com próprias emoções"
+        },
+        "bodily_kinesthetic": {
+          "level": "Alto",
+          "evidence": "Treino diário, consciência física"
+        }
+      }
+    },
+    "dark_triad": {
+      "narcissism": {
+        "score": 6,
+        "max_scale": 7,
+        "evidence": [
+          "Grandiosidade evidente em objetivos",
+          "Necessidade extrema de admiração através de métricas",
+          "Empatia limitada fora de Leila"
+        ]
+      },
+      "machiavellianism": {
+        "score": 5,
+        "max_scale": 7,
+        "evidence": [
+          "Relacionamentos são transacionais",
+          "Manipulação estratégica de audiência",
+          "Planejamento de décadas"
+        ]
+      },
+      "psychopathy": {
+        "score": 3,
+        "max_scale": 7,
+        "evidence": [
+          "Baixo remorso por decisões empresariais duras",
+          "Charme superficial em conteúdo",
+          "Mas capacidade de vínculo profundo com Leila"
+        ]
+      }
+    },
+    "unique_characteristics": {
+      "work_hours_per_day": "14-16",
+      "daily_routine": [
+        "Acorda às 7:05 AM",
+        "Treino físico diário",
+        "Blocos Maker vs Manager",
+        "Batching de conteúdo",
+        "Trabalho profundo sem interrupções"
+      ],
+      "superpower": "Capacidade de trabalho sobre-humana sustentada por alinhamento total",
+      "kryptonite": [
+        "Vazio existencial quando para de produzir",
+        "Incapacidade de processar emoções saudavelmente",
+        "Dependência de validação externa disfarçada de métricas",
+        "Risco de burnout irreversível"
+      ],
+      "main_focus": "ROI e métricas de impacto",
+      "statistical_rarity": "~0.001% população",
+      "key_relationships": {
+        "spouse": "Leila - único ponto de vulnerabilidade emocional",
+        "mentors": "Não mencionados",
+        "team": "Relacionamentos transacionais"
+      }
+    },
+    "predictions": {
+      "high_probability": [
+        "Continuará escalando até colapso ou transformação",
+        "Desenvolverá problemas de saúde se mantiver ritmo",
+        "Eventual crise existencial forçará reavaliação",
+        "Relacionamento com Leila é fator crítico"
+      ]
+    },
+    "data_sources": {
+      "primary": [
+        "Documentos sobre psicologia pessoal",
+        "Análise de rotina documentada",
+        "Arquitetura cognitiva estudada",
+        "História pessoal e empresarial"
+      ],
+      "confidence_levels": {
+        "high": "Padrões comportamentais DISC, traços Big Five",
+        "medium": "Tipo Eneagrama, stack MBTI",
+        "speculative": "Desenvolvimento futuro, dinâmicas familiares profundas"
+      }
+    }
+  },
+  "metadata": {
+    "analysis_date": "2025-01-22",
+    "version": "1.0",
+    "analyzer": "Análise Psicométrica Profunda",
+    "disclaimer": "Análise baseada em comportamentos observáveis e documentados publicamente, não constitui avaliação clínica"
+  }
+}

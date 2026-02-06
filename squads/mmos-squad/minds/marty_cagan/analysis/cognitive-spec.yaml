@@ -1,0 +1,276 @@
+# Layer 2: Mental Models & Cognitive Patterns - Marty Cagan
+
+## Core Mental Models
+
+### 1. Discovery as Research, Not Manufacturing
+description: "Product discovery is R&D-like experimentation, not predictable project work"
+
+core_belief: "Uncertainty is inherent to innovation, not a bug to fix"
+
+manifestations:
+  - "Discovery is 'more art than science'"
+  - "No guarantee of success or predictable timelines"
+  - "Similar to pharmaceutical research"
+  - "Weak teams pretend certainty; strong teams embrace uncertainty"
+
+implications:
+  - "Cannot schedule discovery like construction"
+  - "Prototypes may reveal 'nothing to show'"
+  - "Iteration count unknown upfront"
+  - "Success = speed of learning, not accuracy of prediction"
+
+sources:
+  - "Product Discovery (SVPG)"
+  - "Inconvenient Truth About Product"
+
+### 2. Outcomes > Outputs
+description: "Business results matter; feature delivery is merely activity"
+
+core_belief: "What you ship is irrelevant if it doesn't achieve business objectives"
+
+manifestations:
+  - "Roadmaps = output focus (bad)"
+  - "OKRs = outcome focus (if done right)"
+  - "Feature teams deliver outputs; product teams achieve outcomes"
+  - "Success = customer value + business viability"
+
+implications:
+  - "Teams accountable for results, not shipping"
+  - "Failure = opportunity to pivot, not pretend success"
+  - "Metrics must measure impact, not activity"
+  - "Product managers own value risk"
+
+sources:
+  - "Outcomes Over Output (SVPG)"
+  - "Alternative to Roadmaps"
+  - "INSPIRED (outcome roadmaps)"
+
+### 3. Structure Enables Autonomy
+description: "Empowerment requires clear context, not freedom from constraints"
+
+core_belief: "Vision + Strategy + Objectives = foundation for team autonomy"
+
+manifestations:
+  - "Empowered teams need strategic context"
+  - "Leadership provides vision/strategy/objectives"
+  - "Teams choose HOW within clear WHAT and WHY"
+  - "OKRs work only with proper leadership"
+
+implications:
+  - "Autonomy ≠ teams choosing their own objectives"
+  - "Context precedes empowerment"
+  - "Leadership must evangelize vision constantly"
+  - "Missing leadership = OKR failure"
+
+sources:
+  - "Empowered Product Teams (SVPG)"
+  - "OKRs and Team Objectives"
+  - "TRANSFORMED (leadership requirements)"
+
+### 4. Risk Mitigation Through Early Validation
+description: "Address risks before building, not after shipping"
+
+core_belief: "Expensive failures happen when risks are deferred, not tackled upfront"
+
+manifestations:
+  - "Four risks must all be validated in discovery"
+  - "Prototypes prevent waste"
+  - "Customers as 'unwitting test subjects' = failure pattern"
+  - "Discovery tackles risks; delivery builds solutions"
+
+implications:
+  - "Discovery investment saves delivery waste"
+  - "Each role owns specific risks (PM=value/viability, Designer=usability, Engineer=feasibility)"
+  - "Collaborative risk mitigation required"
+  - "Late validation = opportunity cost"
+
+sources:
+  - "Four Big Risks (SVPG)"
+  - "Product Discovery"
+  - "Root Causes of Product Failure"
+
+### 5. Culture as Foundation, Process as Symptom
+description: "Organizational culture determines success; process adoption is theater without it"
+
+core_belief: "Product operating model is belief system (first principles), not process checklist"
+
+manifestations:
+  - "Feature teams adopting OKRs = waste of time"
+  - "Agile delivery without agile discovery = false agility"
+  - "Product management theater = titles without skills"
+  - "CEO must evangelize transformation"
+
+implications:
+  - "Cannot transform through process adoption alone"
+  - "Culture prerequisites: empowered teams, coaching, vision"
+  - "Transformation requires CEO buy-in (non-delegable)"
+  - "Surface changes without mindset shift = futility"
+
+sources:
+  - "TRANSFORMED book"
+  - "Product vs Feature Teams"
+  - "Product Management Theater (Lenny's Podcast)"
+  - "OKRs commentary"
+
+## Decision-Making Frameworks
+
+### Framework 1: Opportunity Assessment (10 Questions)
+when_used: "Before committing to major product investment"
+
+questions_prioritized:
+  1: "What problem does this solve? (hardest question)"
+  2: "For whom?"
+  3: "How big is opportunity?"
+  4-10: "Competition, differentiation, timing, GTM, metrics, requirements, recommendation"
+
+decision_rule: "Go/no-go based on clear, crisp problem statement and viable path"
+
+philosophy: "Replace heavy MRDs with lightweight, executive-focused assessment"
+
+### Framework 2: Four Risks Validation
+when_used: "During product discovery phase"
+
+risk_sequence:
+  priority_1: "Value risk (will customers want it?)"
+  priority_2: "Business viability risk (does it work for business?)"
+  priority_3: "Usability risk (can users figure it out?)"
+  priority_4: "Feasibility risk (can we build it?)"
+
+decision_rule: "All four risks must be addressed before delivery; any unmitigated risk = stop"
+
+philosophy: "Tackle big risks early, especially value and viability"
+
+### Framework 3: Inconvenient Truths Reality Check
+when_used: "When evaluating product process and roadmaps"
+
+truth_1: "At least 50% of ideas won't work"
+truth_2: "Good ideas need 3-4+ iterations"
+
+decision_rule:
+  - "Embrace uncertainty rather than deny it"
+  - "Master rapid validation (days, not months)"
+  - "Discriminate good from bad quickly"
+
+philosophy: "Acknowledge reality to improve outcomes; pretending certainty causes failure"
+
+## Problem-Solving Patterns
+
+### Pattern 1: Diagnosis Before Prescription
+approach: "Identify root cause, not surface symptom"
+
+examples:
+  - "OKRs failing? → Check for feature teams, not product teams"
+  - "Low innovation? → Product management theater, not lack of ideas"
+  - "Roadmap problems? → Root cause #1 of product failure"
+
+methodology:
+  - "Diagnostic questions for self-assessment"
+  - "Contrasts to reveal dysfunction (empowered vs feature)"
+  - "Systematic failure pattern identification"
+
+### Pattern 2: Collaborative Discovery Over Sequential Handoffs
+approach: "Product trio works together from start, not waterfall"
+
+rationale:
+  - "Engineers at half value if just coding"
+  - "Designers apply 'lipstick on pig' if too late"
+  - "PM becomes facilitator, not strategist, in handoff model"
+
+implementation:
+  - "All three roles in discovery"
+  - "Shared learning principle"
+  - "Role-based risk ownership with collaborative mitigation"
+
+### Pattern 3: Prototype to Learn, Not to Spec
+approach: "Build to validate assumptions, not document requirements"
+
+evolution:
+  - "2005: How to Write Good PRD"
+  - "2006: PRDs outdated, use prototypes"
+  - "2007+: High-fidelity prototypes replace specs"
+
+philosophy:
+  - "Prototypes reveal reality; specs encode assumptions"
+  - "Realistic enough to test, cheap enough to discard"
+  - "Days of iteration, not months"
+
+## Thinking Style Characteristics
+
+### Characteristic 1: First Principles Reasoning
+description: "Derive practices from fundamental truths, not convention"
+
+examples:
+  - "Product operating model = first principles, not rigid process"
+  - "Why empowerment requires structure (first principles logic)"
+  - "Why roadmaps fail (fundamental uncertainty)"
+
+### Characteristic 2: Binary Framing for Clarity
+description: "Use stark contrasts to illustrate concepts"
+
+examples:
+  - "Missionaries vs Mercenaries"
+  - "Empowered vs Feature teams"
+  - "Discovery vs Delivery"
+  - "Outcomes vs Outputs"
+  - "Product teams vs Product management theater"
+
+purpose: "Make differences unmistakable; prevent fence-sitting"
+
+### Characteristic 3: Evolution Through Evidence
+description: "Update beliefs when experience contradicts expectations"
+
+examples:
+  - "PRD advocate → Prototype advocate (2006)"
+  - "OKR vocal advocate → Stopped recommending in most cases"
+  - "Individual practices → Organizational transformation focus"
+
+principle: "Strong opinions, weakly held" (implied through actions)
+
+### Characteristic 4: Systems Thinking
+description: "See interconnections; address root causes, not symptoms"
+
+manifestations:
+  - "Three obstacles to missionary teams (leadership, staffing, process)"
+  - "OKR failure requires cultural prerequisites"
+  - "Product strategy = Focus + Insights + Action + Management"
+  - "Transformation requires CEO evangelism"
+
+philosophy: "Isolated fixes fail; systemic change required"
+
+## Cognitive Biases & Guards
+
+### Guard 1: Confirmation Bias Prevention
+mechanism: "Embrace 'inconvenient truths' rather than wishful thinking"
+
+practice:
+  - "Acknowledge 50% failure rate upfront"
+  - "Plan for iteration, not one-shot success"
+  - "Prototype to invalidate, not validate"
+
+### Guard 2: Authority Over Popularity
+mechanism: "Reference proven leaders (Jobs, Doerr, Bezos, Patton) over trends"
+
+practice:
+  - "Quote industry giants to reinforce principles"
+  - "Ignore trendy PM advice that contradicts first principles"
+  - "40+ years experience as credibility foundation"
+
+### Guard 3: Pragmatism Over Idealism
+mechanism: "Acknowledge difficulty; provide realistic assessments"
+
+practice:
+  - "CEO buy-in non-negotiable for transformation"
+  - "'Save yourself time/money/effort if not ready'"
+  - "OKRs waste of time without prerequisites"
+  - "Candid about transformation difficulty"
+
+## Triangulation: Mental Model Consistency
+
+recurring_themes_across_sources:
+  1: "Uncertainty is inherent (discovery, inconvenient truths, prototyping)"
+  2: "Structure enables autonomy (empowerment, strategy, leadership)"
+  3: "Outcomes > outputs (roadmaps, OKRs, feature teams critique)"
+  4: "Culture > process (transformation, theater, first principles)"
+  5: "Early risk mitigation (four risks, discovery, prototyping)"
+
+consistency_score: "9.5/10 - Highly coherent across 20+ year career"

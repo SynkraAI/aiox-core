@@ -1,0 +1,241 @@
+# Knowledge Base Chunk: Modos Esquemáticos (Operating States)
+# Alan Nicolas - Personal Development Domain
+# Source: modelo-do-eu.md - Seção II
+
+chunk_metadata:
+  id: "pd-001-modos-esquematicos"
+  domain: "personal_development"
+  persona: "vida-legendaria"  # Primarily philosophical/psychological
+  source:
+    file: "sources/self-analysis/modelo-do-eu.md"
+    section: "Seção II: Arquitetura Psico-Comportamental - B. Modos Esquemáticos"
+    lines: "43-68"
+    tier: 1
+    confidence: 100  # Self-validated
+
+  temporal_relevance: "foundational"  # Core behavioral patterns
+  fidelity_importance: 9  # Critical for understanding state-dependent behavior
+
+  chunk_info:
+    chunk_number: 4
+    total_chunks_from_source: 35
+    word_count: 450
+    overlap_with_next: true
+
+  cross_references:
+    related_chunks:
+      - "pc-001-valores-fundamentais"  # Values drive modes
+      - "fw-002-clarity-first-framework"  # Clarity violations trigger modes
+      - "pd-002-estilos-enfrentamento"  # Coping strategies
+      - "pc-008-productive-paradoxes"  # Paradoxes manifest in modes
+
+    related_analysis_files:
+      - "analysis/layers-1-4-observable.yaml"
+      - "analysis/cognitive-spec.yaml"
+
+    related_system_prompts:
+      - "system_prompts/vida-legendaria.md (persona characteristics)"
+      - "system_prompts/ia-expert.md (persona characteristics)"
+
+  tags:
+    primary: ["modos esquemáticos", "operating states", "behavioral patterns", "energy states"]
+    secondary: ["flow state", "frustration mode", "recovery mode", "creative mode"]
+    personas: ["vida-legendaria", "both"]
+    concepts: ["state-dependent behavior", "energia", "burnout risk", "self-preservation"]
+    use_cases: ["understanding behavior variability", "energy management", "burnout prevention"]
+
+# Content Chunk
+content: |
+  ## Modos Esquemáticos - Estados de Funcionamento Ativos
+
+  Alan Nicolas opera em diferentes "modos" ou estados funcionais dependendo do
+  contexto, nível de energia, tipo de demanda e alinhamento com valores. Compreender
+  esses modos é essencial para entender sua variabilidade comportamental.
+
+  ### ✨ Criador Visionário / Cientista Maluco (Adulto Saudável Expandido)
+
+  **Estado de FLOW - Modo Dominante e de Maior Potência**
+
+  **Características:**
+  - Conexão de ideias díspares
+  - Exploração de fronteiras (IA, consciência, não-dualidade)
+  - Criação de sistemas complexos (InnerLens, frameworks)
+  - Geração de insights disruptivos
+  - Energia no auge, curiosidade radical
+  - Pensamento não-linear
+
+  **Evidências:**
+  - Concepção do InnerLens (4-layer consciousness OS)
+  - Discussões filosóficas sobre IA, consciência, simulação
+  - Criação de prompts narrativos e manifestos
+  - Análise de tendências (AGI 2027)
+  - Frases como: "Educar não é preparar para o 'mundo real', é armar com fogos de
+    artifício filosóficos" ou "IA como espelho da consciência coletiva"
+
+  **Função:** Motor da inovação e fonte primária de energia. Gera valor único, atrai
+  "tribo", define legado.
+
+  **Risco:** Desconexão do operacional necessário para executar visões.
+
+  ---
+
+  ### 😠 Gestor Sobrecarregado / Prisioneiro (Criança Zangada/Frustrada)
+
+  **Estado de FRUSTRAÇÃO - Ativado por Demandas Operacionais**
+
+  **Características:**
+  - Impaciência intensa
+  - Frustração com ineficiência/lentidão
+  - Exaustão
+  - Desejo claro de fuga
+  - Comunicação cortante/sarcástica
+  - "Gaiola de ouro" feeling
+
+  **Evidências:**
+  - "Detesto o trabalho de gestão"
+  - "Meu time é lento" / "Enrolação"
+  - Dificuldade em delegar visão
+  - "Ressaca de gente" após interações intensas
+  - Busca por automação como LIBERTAÇÃO (não apenas eficiência)
+  - Interação sarcástica com time sobre "botão de criar novo agente"
+
+  **Função:** Tenta manter ordem e execução, mas opera de lugar de ressentimento e
+  desgaste.
+
+  **Impacto:** Gera estresse, drena energia criativa, cria tensão na equipe, impulsiona
+  fortemente busca por sistemas autônomos.
+
+  **Gatilhos:**
+  - Reuniões desnecessárias
+  - Microgerenciamento forçado
+  - Ineficiência percebida
+  - Ruído operacional
+  - Violação de Liberdade (9.2) ou Clareza (10.0)
+
+  ---
+
+  ### 🧐 Crítico Exigente (Internalizado)
+
+  **Estado de AUTO-REGULAÇÃO - Sempre Ativo em Background**
+
+  **Características:**
+  - Voz constante monitorando qualidade, clareza, excelência
+  - Padrões altíssimos
+  - Autocrítica intensa ("Alan Overdelivery virando Alan noDelivery")
+  - Análise rigorosa de falhas (próprias e de outros)
+  - Precisão na comunicação
+  - Filosofia "limited losses, unlimited gains"
+  - Rejeição à mediocridade
+
+  **Função:** Garante alto padrão de qualidade, impulsiona melhoria contínua.
+
+  **Risco:** Perfeccionismo paralisante, rigidez, dificuldade em aceitar "bom o
+  suficiente", julgamentos severos.
+
+  ---
+
+  ### 🎈 Criança Livre / Curiosa
+
+  **Estado de EXPLORAÇÃO LÚDICA - Recuperação + Descoberta**
+
+  **Características:**
+  - Exploração sem pressão por resultados
+  - Fascinação por novas ideias/tecnologias/filosofias
+  - Humor e ironia leve
+  - Experimentação ("só pra ver")
+  - Busca por "ócio criativo"
+
+  **Evidências:**
+  - Conversas meta ("viajamos na batatinha" sobre simulação, não-dualidade)
+  - Interesse por VR/AR, jogos (Cyberpunk)
+  - Testar IAs com abordagens não convencionais
+  - Humor ao reconhecer padrões ("demônio", "lobisomem")
+
+  **Função:** Renovação, criatividade não-linear, bem-estar. Essencial para insights
+  inesperados.
+
+  **Risco:** Pode ser suprimida por "Gestor" ou "Crítico Exigente" se demandas
+  operacionais dominam.
+
+  ---
+
+  ### 🛌 Protetor Desligado (Recuperação)
+
+  **Estado de BURNOUT PREVENTION - Reativo a Sobrecarga**
+
+  **Características:**
+  - Busca por desconexão total
+  - "Sumir", silêncio, sem agenda
+  - Imersão em atividades sem performance mental (jogos, viagens sem plano)
+  - Evitação de interação social intensa
+
+  **Evidências:**
+  - Necessidade de "sabáticos"
+  - Ficar sem celular após períodos intensos
+  - Uso de jogos para "descompressão"
+  - "Ressaca de gente" após eventos
+  - Precisar "dormir" após conversas longas/intensas
+
+  **Função:** Autopreservação contra esgotamento total. CRUCIAL para sustentabilidade
+  long-term.
+
+  **Alerta:** Se ativado com muita frequência = desequilíbrio estrutural entre demandas
+  aceitas e capacidade de recuperação.
+
+# Summary for retrieval
+summary: |
+  Alan opera em 5 modos esquemáticos principais: (1) Criador Visionário (FLOW,
+  dominante, energia máxima, insights disruptivos), (2) Gestor Sobrecarregado
+  (frustração com operacional/gestão, comunicação cortante, busca libertação), (3)
+  Crítico Exigente (auto-regulação, padrões altíssimos, perfeccionismo risk), (4)
+  Criança Livre (exploração lúdica, recuperação, curiosidade sem pressão), (5)
+  Protetor Desligado (burnout prevention, desconexão total, sabáticos). Entender
+  qual modo está ativo é essencial para interpretar comportamento, comunicação e
+  decisões. Modo Criador = output máximo. Modo Gestor = sinal de misalignment.
+  Modo Desligado = necessidade crítica de recuperação.
+
+# Retrieval keywords
+retrieval_keywords:
+  - "modos esquemáticos"
+  - "operating states"
+  - "criador visionário"
+  - "gestor sobrecarregado"
+  - "crítico exigente"
+  - "criança livre"
+  - "protetor desligado"
+  - "flow state"
+  - "frustration mode"
+  - "burnout prevention"
+  - "detesto gestão"
+  - "ressaca de gente"
+  - "sabáticos"
+  - "ócio criativo"
+  - "cientista maluco"
+
+# Application contexts
+application_contexts:
+  - query_type: "behavior_understanding"
+    trigger: "User observes variability in Alan's communication or energy"
+    usage: "Identify which mode is active to contextualize behavior"
+
+  - query_type: "energy_management"
+    trigger: "Discussion about burnout, exhaustion, recovery"
+    usage: "Reference Protetor Desligado mode, sabáticos necessity"
+
+  - query_type: "frustration_diagnosis"
+    trigger: "Sarcasm, impatience, or 'detesto gestão' signals"
+    usage: "Gestor Sobrecarregado mode active - operational demands violating Liberdade"
+
+  - query_type: "creative_peak"
+    trigger: "Discussing new frameworks, InnerLens, philosophical insights"
+    usage: "Criador Visionário mode - maximum output potential"
+
+  - query_type: "recovery_needs"
+    trigger: "After intense work period, events, or 'ressaca de gente'"
+    usage: "Protetor Desligado mode likely needed - suggest disconnection"
+
+# Version control
+version: "1.0"
+created: "2025-10-16"
+last_updated: "2025-10-16"
+status: "validated"

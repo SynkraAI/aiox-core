@@ -1,0 +1,171 @@
+# Knowledge Base Chunks - Pedro Valério Lopez
+# Manifest & Retrieval Index
+
+generated: 2025-10-19
+status: ✅ COMPLETE (26/26 chunks)
+total_chunks: 26
+chunking_strategy: Semantic + Topic-based
+average_chunk_size: ~500-800 words
+retrieval_optimization: RAG-ready with metadata
+completion_date: 2025-10-19T22:15:00
+
+---
+
+# CHUNK CATEGORIES
+
+## 1. IDENTITY & CORE VALUES (Chunks 01-05)
+- chunk-01-identity-core.md
+- chunk-02-values-principles.md
+- chunk-03-psychometric-profile.md
+- chunk-04-neurodivergence-systems.md
+- chunk-05-differentiation-factors.md
+
+## 2. FRAMEWORKS & METHODOLOGY (Chunks 06-12)
+- chunk-06-clickup-operating-system.md
+- chunk-07-process-absolutism.md
+- chunk-08-communication-standards.md
+- chunk-09-automation-philosophy.md
+- chunk-10-task-architecture.md
+- chunk-11-documentation-pedagogy.md
+- chunk-12-anti-mediocridade.md
+
+## 3. COMMUNICATION STYLE (Chunks 13-17)
+- chunk-13-linguistic-signature.md
+- chunk-14-communication-templates.md
+- chunk-15-tone-precision.md
+- chunk-16-visual-communication.md
+- chunk-17-rhetorical-devices.md
+
+## 4. OPERATIONAL EXCELLENCE (Chunks 18-22)
+- chunk-18-time-management.md
+- chunk-19-hiring-firing-principles.md
+- chunk-20-quality-standards.md
+- chunk-21-productivity-systems.md
+- chunk-22-meta-40-anos.md
+
+## 5. PROFESSIONAL EXPERTISE (Chunks 23-26)
+- chunk-23-clickup-mastery.md
+- chunk-24-systems-architecture.md
+- chunk-25-process-engineering.md
+- chunk-26-allfluence-creator-os.md
+
+---
+
+# RETRIEVAL PATTERNS
+
+## By Use Case:
+
+**Process/Systems Query:**
+→ Retrieve: Chunks 06, 07, 09, 10, 24
+
+**ClickUp Guidance:**
+→ Retrieve: Chunks 06, 10, 23
+
+**Communication/Standards:**
+→ Retrieve: Chunks 08, 13, 14, 15
+
+**Hiring/Team Management:**
+→ Retrieve: Chunks 19, 20
+
+**Personal Productivity:**
+→ Retrieve: Chunks 18, 21, 22
+
+**Identity Questions:**
+→ Retrieve: Chunks 01, 02, 03, 05
+
+**Philosophy/Methodology:**
+→ Retrieve: Chunks 04, 07, 09, 12
+
+---
+
+# METADATA SCHEMA
+
+Each chunk contains:
+```yaml
+chunk_id: XX
+title: [Descriptive Title]
+category: [Identity|Frameworks|Communication|Operations|Expertise]
+tags: [relevant, semantic, tags]
+priority: [high|medium|low] # for retrieval ranking
+related_chunks: [XX, YY, ZZ] # for chain retrieval
+confidence: [90-98%]
+source_layers: [v1.6 artifacts]
+```
+
+---
+
+# CHAIN RETRIEVAL PATTERNS
+
+**Chain 1: Complete ClickUp Implementation**
+06 (ClickUp OS) → 10 (Task Architecture) → 23 (ClickUp Mastery) → 08 (Standards)
+
+**Chain 2: Systems Philosophy**
+04 (Neurodivergence) → 07 (Process Absolutism) → 09 (Automation) → 24 (Architecture)
+
+**Chain 3: Identity + Method**
+01 (Identity) → 02 (Values) → 04 (Neurodivergence) → 12 (Anti-Mediocridade)
+
+**Chain 4: Communication Mastery**
+15 (Tone) → 13 (Signature) → 14 (Templates) → 16 (Visual)
+
+**Chain 5: Operational Excellence**
+18 (Time Management) → 21 (Productivity) → 20 (Quality) → 19 (Hiring)
+
+---
+
+# SEARCH OPTIMIZATION
+
+## High-Frequency Keywords (Auto-trigger retrieval):
+
+**"clickup"** → Chunks 06, 10, 23
+**"processo"** → Chunks 07, 24, 25
+**"sistema"** → Chunks 04, 06, 09, 24
+**"comunicação"** → Chunks 08, 13, 14, 15
+**"automação"** → Chunks 09, 21
+**"clareza"** → Chunks 02, 08, 15
+**"verdade"** → Chunks 02, 20
+**"mentira"** → Chunks 02, 19, 20
+**"mediocridade"** → Chunk 12
+**"demonstrar"** → Chunks 11, 13, 16
+**"task"** → Chunks 06, 10, 21
+**"documentação"** → Chunks 08, 11
+**"anti-mediocridade"** → Chunk 12
+**"legislador"** → Chunks 01, 07
+
+---
+
+# CHUNK SIZE DISTRIBUTION
+
+**Small (300-500 words):** Chunks 14, 17 (quick reference)
+**Medium (500-800 words):** Chunks 01-13, 15-16, 18-26 (main content)
+**Large (800-1200 words):** None (optimized for RAG context window)
+
+**Rationale:** Chunks sized for optimal retrieval without context overflow
+
+---
+
+# VERSION CONTROL
+
+**Version:** 1.0
+**Last Updated:** 2025-10-19
+**Source Analysis:** v1.6 artifacts (11,061 lines)
+**Human Validation:** Pending
+
+**Source Artifacts:**
+- ANÁLISE_PSICOMÉTRICA_DEFINITIVA_PEDRO_VALÉRIO_LOPEZ.md
+- 5H_EXTRAÇÃO_COGNITIVA_COMPLETA_PEDRO_VALÉRIO_LOPEZ.md
+- ANÁLISE_LINGUÍSTICA_CARIOCA_PEDRO_VALÉRIO_LOPEZ.md
+- Sistema_Imunológico_Cognitivo_Pedro_Valério_Lopez.md
+- + 25 additional detailed analyses
+
+**Future Updates:**
+- Add chunks as new source material emerges
+- Refine based on clone performance testing
+- Update priority rankings based on actual retrieval patterns
+
+---
+
+**Status:** ✅ KB COMPLETE (26/26 chunks)
+**Total Size:** ~150KB of RAG-optimized knowledge
+**Quality:** All chunks based on original sources with direct quotations
+**Ready for:** System prompt creation and implementation

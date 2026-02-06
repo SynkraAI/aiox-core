@@ -206,6 +206,34 @@ function showInfo() {
   } else {
     console.log('\n⚠️  AIOS Core not found');
   }
+
+  // Check AIOS Pro status (Task 5.1)
+  const proDir = path.join(__dirname, '..', 'pro');
+  if (fs.existsSync(proDir)) {
+    console.log('\n✓ AIOS Pro installed');
+
+    try {
+      const { featureGate } = require(path.join(proDir, 'license', 'feature-gate'));
+      const state = featureGate.getLicenseState();
+      const info = featureGate.getLicenseInfo();
+
+      const stateEmoji = {
+        'Active': '✅',
+        'Grace': '⚠️',
+        'Expired': '❌',
+        'Not Activated': '➖',
+      };
+
+      console.log(`  - License: ${stateEmoji[state] || ''} ${state}`);
+
+      if (info && info.features) {
+        const availableCount = featureGate.listAvailable().length;
+        console.log(`  - Features: ${availableCount} available`);
+      }
+    } catch {
+      console.log('  - License: Unable to check status');
+    }
+  }
 }
 
 // Helper: Run installation validation
@@ -458,6 +486,37 @@ Examples:
     hasErrors = true;
     console.log('✗ AIOS Core not installed');
     console.log('  Run: npx @synkra/aios-core@latest');
+  }
+
+  // Check 5: AIOS Pro license status (Task 5.1)
+  const proDir = path.join(__dirname, '..', 'pro');
+  if (fs.existsSync(proDir)) {
+    try {
+      const { featureGate } = require(path.join(proDir, 'license', 'feature-gate'));
+      const state = featureGate.getLicenseState();
+
+      const stateEmoji = {
+        'Active': '✔',
+        'Grace': '⚠️',
+        'Expired': '✗',
+        'Not Activated': '➖',
+      };
+
+      if (state === 'Active') {
+        console.log(`${stateEmoji[state]} AIOS Pro: License active`);
+      } else if (state === 'Grace') {
+        console.log(`${stateEmoji[state]} AIOS Pro: License in grace period`);
+        console.log('  Run: aios pro validate');
+      } else if (state === 'Expired') {
+        console.log(`${stateEmoji[state]} AIOS Pro: License expired`);
+        console.log('  Run: aios pro activate --key <KEY>');
+      } else {
+        console.log(`${stateEmoji[state]} AIOS Pro: Not activated`);
+        console.log('  Run: aios pro activate --key <KEY>');
+      }
+    } catch {
+      console.log('⚠️  AIOS Pro: Unable to check license status');
+    }
   }
 
   // Apply fixes if --fix
@@ -962,6 +1021,17 @@ async function main() {
         await run(process.argv);
       } catch (error) {
         console.error(`❌ Config command error: ${error.message}`);
+        process.exit(1);
+      }
+      break;
+
+    case 'pro':
+      // AIOS Pro License Management - Story PRO-6
+      try {
+        const { run } = require('../.aios-core/cli/index.js');
+        await run(process.argv);
+      } catch (error) {
+        console.error(`❌ Pro command error: ${error.message}`);
         process.exit(1);
       }
       break;

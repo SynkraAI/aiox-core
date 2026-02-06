@@ -1,0 +1,394 @@
+# Workflow Template (AIOS Quality Standard)
+# Version: 1.0.0
+# Standard: AIOS multi-phase workflow pattern
+# Min Lines: 500+
+
+template:
+  id: squad-workflow-template
+  name: Squad Workflow
+  quality_standard: "aios-workflow-v2"
+  min_lines: 500
+
+  output:
+    format: yaml
+    filename: "workflows/wf-{{workflow_id}}.yaml"
+
+  architecture: |
+    Workflows orchestrate multiple tasks in a phased sequence.
+    They are the STANDARD for complex operations - always prefer
+    workflows over standalone tasks when the operation has:
+    - Multiple phases/stages
+    - Dependencies between steps
+    - Checkpoints for validation
+    - Multiple agents involved
+
+# ============================================================================
+# WORKFLOW STRUCTURE (AIOS Standard)
+# ============================================================================
+# Multi-phase workflows with checkpoints, agent assignments, and quality gates
+# ============================================================================
+
+workflow_anatomy:
+  required_sections:
+    - header           # ID, name, duration, description
+    - best_for         # When to use this workflow
+    - decision_matrix  # Awareness/sophistication fit
+    - phases           # PHASE-1 through PHASE-N
+    - completion_signals
+    - outputs          # Artifacts produced
+    - agents_by_phase  # Agent assignments
+    - quality_checklist # Final validation
+    - metadata
+
+  phase_requirements:
+    - id               # PHASE-1, PHASE-2, etc.
+    - name             # Human-readable name
+    - days             # Timing estimate (e.g., "1-2")
+    - tier             # 0=foundation, 1=core, 2=advanced, 3=polish
+    - description      # What happens in this phase
+    - tasks            # Array of task references
+    - checkpoint       # Validation criteria + human_review flag
+
+# ============================================================================
+# TEMPLATE STRUCTURE
+# ============================================================================
+
+sections:
+  - id: workflow-header
+    title: Workflow Header
+    instruction: |
+      Define the workflow identity and high-level description.
+      This section is always visible and helps users understand the purpose.
+    template: |
+      # WF-{{workflow_number}}: {{workflow_name}}
+      # Duration: {{duration}}
+      # Best for: {{best_for_summary}}
+      # Key Agents: {{key_agents}}
+
+      workflow:
+        id: wf-{{workflow_id}}
+        name: "{{workflow_name}}"
+        duration: "{{duration}}"
+        description: |
+          {{workflow_description}}
+
+          This workflow produces:
+          {{#each main_outputs}}
+          - {{this}}
+          {{/each}}
+
+        best_for:
+          {{#each best_for_items}}
+          - "{{this}}"
+          {{/each}}
+
+        decision_matrix_fit:
+          awareness: "{{awareness_level}}"
+          sophistication: "{{sophistication_stage}}"
+          price_point: "{{price_point}}"
+          traffic_temp: "{{traffic_temperature}}"
+          primary_output: "{{primary_output}}"
+
+        clone_combinations:
+          primary: "{{primary_agents}}"
+          secondary:
+            {{#each secondary_agents}}
+            - "{{this}}"
+            {{/each}}
+
+  - id: phases
+    title: Workflow Phases
+    instruction: |
+      Define each phase of the workflow.
+      Each phase must have:
+      - Clear scope and deliverables
+      - Specific tasks to execute
+      - Checkpoint criteria
+      - Agent assignments
+
+      CRITICAL: Always include checkpoints with human_review: true
+      for phases that produce important decisions.
+
+    template: |
+      # ═══════════════════════════════════════════════════════════════════════════════
+      # PHASE {{phase_number}}: {{phase_name}} (Days {{phase_days}})
+      # ═══════════════════════════════════════════════════════════════════════════════
+      phases:
+        - id: PHASE-{{phase_number}}
+          name: "{{phase_name}}"
+          days: "{{phase_days}}"
+          tier: {{phase_tier}}
+          description: |
+            {{phase_description}}
+
+          tasks:
+            {{#each phase_tasks}}
+            - task_file: {{task_file}}
+              agent: {{agent_id}}
+              required: {{required}}
+              description: "{{task_description}}"
+              output: "{{output_file}}"
+              {{#if notes}}
+              notes: |
+                {{notes}}
+              {{/if}}
+            {{/each}}
+
+          {{#if inline_structure}}
+          # Inline structure (like sos_structure in Copy workflows)
+          {{inline_structure_name}}:
+            {{inline_structure_content}}
+          {{/if}}
+
+          checkpoint:
+            criteria:
+              {{#each checkpoint_criteria}}
+              - "{{this}}"
+              {{/each}}
+            human_review: {{human_review}}
+            message: "{{checkpoint_message}}"
+
+  - id: error-handling
+    title: Error Handling
+    instruction: |
+      Define error handling patterns for phase failures.
+    template: |
+      # ═══════════════════════════════════════════════════════════════════════════════
+      # ERROR HANDLING
+      # ═══════════════════════════════════════════════════════════════════════════════
+      error_handling:
+        on_phase_failure:
+          - log_error: true
+          - notify_stakeholders: true
+          - create_remediation_task: true
+          - halt_workflow: {{halt_on_failure}}
+
+        on_checkpoint_failure:
+          - log_failure_reason: true
+          - return_to_previous_phase: {{return_on_fail}}
+          - max_retries: {{max_retries}}
+
+  - id: checkpoint-config
+    title: Checkpoint Configuration
+    condition: Has checkpoints with heuristics
+    instruction: |
+      Define formal checkpoint configurations with veto conditions.
+    template: |
+      # ═══════════════════════════════════════════════════════════════════════════════
+      # CHECKPOINT CONFIGURATION
+      # ═══════════════════════════════════════════════════════════════════════════════
+      checkpoint_config:
+        {{#each checkpoints}}
+        - phase: {{phase}}
+          heuristic: "{{heuristic_id}}"
+          criteria: "{{criteria}}"
+          veto_condition: "{{veto_condition}}"
+        {{/each}}
+
+  - id: completion-signals
+    title: Completion Signals
+    instruction: Define signals for workflow state communication.
+    template: |
+      # ═══════════════════════════════════════════════════════════════════════════════
+      # COMPLETION SIGNALS
+      # ═══════════════════════════════════════════════════════════════════════════════
+      completion_signal: "<promise>COMPLETE</promise>"
+      checkpoint_signal: "<promise>CHECKPOINT:PHASE-X</promise>"
+      blocked_signal: "<promise>BLOCKED:T-X.Y</promise>"
+
+  - id: outputs
+    title: Output Artifacts
+    instruction: |
+      Document all artifacts produced by the workflow.
+      Group by phase or category for clarity.
+    template: |
+      # ═══════════════════════════════════════════════════════════════════════════════
+      # OUTPUT ARTIFACTS
+      # ═══════════════════════════════════════════════════════════════════════════════
+      outputs:
+        {{#each output_categories}}
+        {{category_name}}:
+          {{#each artifacts}}
+          - "{{this}}"
+          {{/each}}
+        {{/each}}
+
+  - id: agents-by-phase
+    title: Agent Assignments
+    instruction: |
+      Document which agents are responsible for each phase.
+      Distinguish primary (lead) from secondary (supporting) agents.
+    template: |
+      # ═══════════════════════════════════════════════════════════════════════════════
+      # AGENT ASSIGNMENTS BY PHASE
+      # ═══════════════════════════════════════════════════════════════════════════════
+      agents_by_phase:
+        {{#each phases}}
+        {{phase_id}}:
+          primary:
+            {{#each primary_agents}}
+            - "{{this}}"
+            {{/each}}
+          secondary:
+            {{#each secondary_agents}}
+            - "{{this}}"
+            {{/each}}
+        {{/each}}
+
+  - id: quality-checklist
+    title: Quality Checklist
+    instruction: |
+      Define the final quality validation checklist.
+      Each phase should have specific validation criteria.
+    template: |
+      # ═══════════════════════════════════════════════════════════════════════════════
+      # QUALITY CHECKLIST
+      # ═══════════════════════════════════════════════════════════════════════════════
+      quality_checklist:
+        {{#each phases}}
+        {{phase_name}}:
+          {{#each criteria}}
+          - "[ ] {{this}}"
+          {{/each}}
+        {{/each}}
+
+  - id: metadata
+    title: Metadata
+    instruction: Document workflow metadata for tracking and versioning.
+    template: |
+      # ═══════════════════════════════════════════════════════════════════════════════
+      # METADATA
+      # ═══════════════════════════════════════════════════════════════════════════════
+      metadata:
+        version: "{{version}}"
+        framework: "{{framework}}"
+        created: "{{created_date}}"
+        story_id: "{{story_id}}"
+        primary_use_case: "{{primary_use_case}}"
+        {{#if key_difference}}
+        key_difference: |
+          {{key_difference}}
+        {{/if}}
+
+# ============================================================================
+# INLINE STRUCTURE EXAMPLES
+# ============================================================================
+# Domain-specific structures that provide detailed guidance within a phase:
+
+inline_structure_examples:
+  sos_structure_high_ticket:
+    description: "Email sequence structure with cliffhangers"
+    usage: "Within acquisition phase for email sequences"
+    pattern: |
+      email_1:
+        name: "Set the Stage"
+        purpose: "Introduce story, establish credibility"
+        elements:
+          - "Origin story opening"
+          - "Establish relatability"
+          - "Hint at transformation"
+        cliffhanger: "What happened next changed everything..."
+
+  webinar_structure:
+    description: "Webinar script structure with timing"
+    usage: "Within acquisition phase for webinar creation"
+    pattern: |
+      introduction:
+        duration: "5-10 min"
+        elements:
+          - "Hook: Big promise"
+          - "Quick credibility"
+          - "Agenda: What they'll learn"
+
+  call_script_structure:
+    description: "Sales call structure with objection handling"
+    usage: "Within conversion phase for call scripts"
+    pattern: |
+      phase_1_rapport:
+        duration: "5 minutes"
+        purpose: "Build connection + set frame"
+        script_elements:
+          - "Warm greeting"
+          - "Set call expectations"
+          - "Establish selectivity"
+
+# ============================================================================
+# QUALITY GATE VALIDATION
+# ============================================================================
+
+quality_gate:
+  blocking_requirements:
+    - "Workflow has at least 3 phases"
+    - "Each phase has id, name, days, tier, description"
+    - "Each phase has at least 1 task"
+    - "Each phase has checkpoint with criteria"
+    - "outputs section documents all artifacts"
+    - "agents_by_phase assigns agents to all phases"
+    - "quality_checklist has criteria for all phases"
+    - "metadata section is complete"
+
+  recommended_requirements:
+    - "Total workflow file exceeds 500 lines"
+    - "At least one phase has inline_structure"
+    - "error_handling section is defined"
+    - "checkpoint_config defines veto conditions"
+    - "decision_matrix_fit is documented"
+    - "clone_combinations defines agent synergies"
+
+  domain_specific:
+    marketing_workflows:
+      - "sequence_structure or email_structure defined"
+      - "presentation_structure defined if presentation phase exists"
+      - "script_structure defined if call/meeting phase exists"
+
+    operations_workflows:
+      - "checkpoint_config with validation IDs"
+      - "executor_matrix referenced"
+      - "compliance validation phase exists"
+
+# ============================================================================
+# USAGE INSTRUCTIONS
+# ============================================================================
+
+usage:
+  when_to_create_workflow: |
+    Create a WORKFLOW (not just tasks) when:
+    - Operation has 3+ distinct phases
+    - Multiple agents are involved
+    - Checkpoints/validation are needed between phases
+    - Output from one phase feeds into the next
+    - Duration spans multiple days/sessions
+
+  when_to_create_task: |
+    Create a standalone TASK when:
+    - Operation is atomic (single responsibility)
+    - Can be completed in one session
+    - Single agent is sufficient
+    - No intermediate checkpoints needed
+
+  relationship: |
+    Workflows ORCHESTRATE tasks.
+    Tasks EXECUTE atomic operations.
+
+    Workflow → Phase → Tasks → Outputs
+                 ↓
+            Checkpoint (human_review)
+                 ↓
+            Next Phase
+
+# ============================================================================
+# QUALITY INDICATORS
+# ============================================================================
+
+quality_indicators:
+  workflow_completeness:
+    - "500+ lines indicates comprehensive coverage"
+    - "3+ phases with clear separation of concerns"
+    - "Inline structures for domain-specific guidance"
+    - "Checkpoints with human_review for critical decisions"
+
+  structural_integrity:
+    - "All phases have id, name, days, tier, description"
+    - "All tasks reference actual files"
+    - "All agents assigned to phases"
+    - "Quality checklist covers all phases"

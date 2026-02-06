@@ -22,6 +22,7 @@ const { createMigrateCommand } = require('./commands/migrate');
 const { createGenerateCommand } = require('./commands/generate');
 const { createMetricsCommand } = require('./commands/metrics');
 const { createConfigCommand } = require('./commands/config');
+const { createProCommand } = require('./commands/pro');
 
 // Read package.json for version
 const packageJsonPath = path.join(__dirname, '..', '..', 'package.json');
@@ -51,6 +52,7 @@ Commands:
   qa                Quality Gate Manager (run, status)
   metrics           Quality Gate Metrics (record, show, seed, cleanup)
   config            Manage layered configuration (show, diff, migrate, validate)
+  pro               AIOS Pro license management (activate, status, deactivate, features)
   mcp               Manage global MCP configuration
   migrate           Migrate from v2.0 to v2.1 structure
   generate          Generate documents from templates (prd, adr, pmdr, etc.)
@@ -86,6 +88,11 @@ Examples:
   $ aios config migrate --dry-run
   $ aios config validate
   $ aios config init-local
+  $ aios pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
+  $ aios pro status
+  $ aios pro deactivate
+  $ aios pro features
+  $ aios pro validate
   $ aios install
   $ aios doctor
 `);
@@ -113,6 +120,9 @@ Examples:
 
   // Add config command (Story PRO-4)
   program.addCommand(createConfigCommand());
+
+  // Add pro command (Story PRO-6)
+  program.addCommand(createProCommand());
 
   return program;
 }

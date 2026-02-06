@@ -1,0 +1,1807 @@
+WEBVTT
+
+00:00:00.690 --> 00:00:06.110
+E aí, lendário, se você chegou aqui é
+porque você vai usar opções de
+
+00:00:06.110 --> 00:00:08.290
+sincronização que não são iCloud.
+
+00:00:08.430 --> 00:00:13.490
+É OneDrive da Microsoft ou Google Drive
+do Google.
+
+00:00:13.750 --> 00:00:16.690
+E vai servir o que eu vou ensinar aqui
+para outras também, tá?
+
+00:00:17.370 --> 00:00:21.170
+O objetivo dessa aula é que você não
+tenha dor de cabeça, não tenha problema
+
+00:00:21.170 --> 00:00:22.210
+na hora de sincronizar.
+
+00:00:23.170 --> 00:00:29.170
+Olha, muita gente gasta horas e mais
+horas batendo cabeça para tentar
+
+00:00:29.170 --> 00:00:32.150
+sincronizar e é muito simples, tá?
+
+00:00:32.250 --> 00:00:37.390
+Então, nessa aula, o objetivo dela é que
+você saia já com tudo sincronizado, sem
+
+00:00:37.390 --> 00:00:38.570
+nenhum problema.
+
+00:00:38.750 --> 00:00:43.230
+Eu vou fazer junto com você e você
+entendendo a dinâmica da coisa, já era.
+
+00:00:43.310 --> 00:00:47.710
+Você vai aprender com qualquer outro
+aplicativo, não é o único meio que eu
+
+00:00:47.710 --> 00:00:48.670
+estou mostrando aqui, tá?
+
+00:00:48.690 --> 00:00:52.110
+Já deixo claro, mas você vai entender a
+dinâmica de como funciona.
+
+00:00:52.210 --> 00:00:55.130
+E vai conseguir fazer com outras opções.
+
+00:00:55.390 --> 00:01:00.550
+No meu Google Drive, tanto no Google
+Drive quanto no
+
+00:01:00.550 --> 00:01:29.550
+OneDrive, remembrando, como é que está
+então?
+
+00:01:29.870 --> 00:01:36.450
+Eu tenho uma pasta chamada Cofre
+OneDrive e Cofre Google Drive.
+
+00:01:36.730 --> 00:01:40.430
+Agora, eu vou pegar o meu aparelho aqui,
+Google Drive, e vou mostrar para você
+
+00:01:40.430 --> 00:01:43.030
+como é que a gente faz para sincronizar.
+
+00:01:43.210 --> 00:01:47.530
+Vou selecionar aqui e vou procurar esse
+aplicativo aqui, ó.
+
+00:01:47.650 --> 00:01:48.330
+Folder.
+
+00:01:49.330 --> 00:01:51.130
+Folder Sync, tá?
+
+00:01:51.390 --> 00:01:52.290
+Folder Sync.
+
+00:01:52.290 --> 00:01:55.070
+Primeiro que aparece ali, Folder Sync.
+
+00:01:56.700 --> 00:01:58.420
+Olha aí, mas isso é leve.
+
+00:01:58.860 --> 00:02:00.800
+Instalar, tá?
+
+00:02:01.320 --> 00:02:03.560
+Vou baixar esse aplicativo aqui.
+
+00:02:03.860 --> 00:02:05.140
+Adriano, preciso disso?
+
+00:02:05.400 --> 00:02:11.240
+Não tem como eu simplesmente instalar o
+Google Drive e o OneDrive no meu celular
+
+00:02:11.240 --> 00:02:11.980
+e pronto?
+
+00:02:13.440 --> 00:02:15.040
+Veja, não tem como, tá?
+
+00:02:17.900 --> 00:02:19.640
+Você vai ter...
+
+00:02:19.660 --> 00:02:22.000
+Tem que instalar o qual você usa.
+
+00:02:22.160 --> 00:02:27.340
+Então, veja, no meu celular eu tenho o
+Google Drive e o OneDrive já instalado.
+
+00:02:27.440 --> 00:02:30.600
+Então, você vai ter já isso aqui
+instalado.
+
+00:02:30.620 --> 00:02:34.020
+Tem que ter já isso aqui instalado e
+logado na sua conta.
+
+00:02:34.180 --> 00:02:38.540
+O Google Drive está aqui na minha conta,
+tá?
+
+00:02:38.920 --> 00:02:48.040
+O OneDrive também tem que fazer login e
+já está configurado na minha conta.
+
+00:02:48.160 --> 00:02:48.640
+Olha lá, ó.
+
+00:02:49.100 --> 00:02:49.460
+Tá?
+
+00:02:49.660 --> 00:02:51.680
+Minhas pastas no OneDrive.
+
+00:02:52.160 --> 00:02:52.860
+Então, legal.
+
+00:02:53.020 --> 00:02:55.380
+Está logado os dois, né?
+
+00:02:56.880 --> 00:03:00.420
+E eu já instalei o BZID aqui conforme na
+aula lá de Android.
+
+00:03:00.880 --> 00:03:03.800
+E aí eu já instalei também o Folder
+Sync.
+
+00:03:03.840 --> 00:03:05.080
+Está aqui, ó, o símbolo dele.
+
+00:03:05.560 --> 00:03:06.040
+Tá?
+
+00:03:06.280 --> 00:03:07.340
+Vou abrir ele.
+
+00:03:08.940 --> 00:03:12.980
+Ele vai pedir para concordar com os
+termos.
+
+00:03:13.480 --> 00:03:15.280
+Você desce aqui essa telinha, ó.
+
+00:03:15.320 --> 00:03:17.040
+Tem aceitar os termos aqui também.
+
+00:03:17.820 --> 00:03:19.420
+Vai vir para essa tela de...
+
+00:03:19.420 --> 00:03:20.220
+Permissões.
+
+00:03:20.660 --> 00:03:22.900
+Você tem a permissão principal que é...
+
+00:03:22.900 --> 00:03:24.340
+Precisa gerenciar arquivo.
+
+00:03:24.480 --> 00:03:26.740
+Então, nós temos que clicar nela aqui.
+
+00:03:26.880 --> 00:03:29.580
+Vai abrir e vai mostrar o nome do
+aplicativo aqui, ó.
+
+00:03:29.580 --> 00:03:30.300
+Folder Sync.
+
+00:03:30.420 --> 00:03:32.180
+Eu preciso habilitar.
+
+00:03:32.620 --> 00:03:33.140
+Legal?
+
+00:03:33.520 --> 00:03:38.120
+Aí a gente volta e tem as outras
+permissões.
+
+00:03:38.300 --> 00:03:44.120
+Mas que é opção de localização, opção de
+quando está com a bateria desativada,
+
+00:03:44.160 --> 00:03:45.580
+opção de notificações.
+
+00:03:45.580 --> 00:03:48.000
+Eu não gosto de habilitar notificações,
+por exemplo.
+
+00:03:48.000 --> 00:03:50.280
+Nem localização.
+
+00:03:50.480 --> 00:03:52.180
+Então, vou deixar padrão aí.
+
+00:03:52.380 --> 00:03:53.700
+E vou dar o concluir.
+
+00:03:54.080 --> 00:03:57.900
+Ele já vem para uma tela que dá os
+primeiros passos, ensinando você como
+
+00:03:57.900 --> 00:03:58.840
+você deve proceder.
+
+00:03:59.000 --> 00:04:01.460
+E dá também o link de um help, né?
+
+00:04:01.540 --> 00:04:02.800
+Esse Folder Sync tem um help.
+
+00:04:03.400 --> 00:04:06.740
+E o botão que está ali é o de adicionar
+conta.
+
+00:04:07.140 --> 00:04:09.100
+Eu não vou dar o adicionar conta já.
+
+00:04:09.160 --> 00:04:09.920
+Vou dar ok aqui.
+
+00:04:10.500 --> 00:04:12.320
+Para você ver a tela do aplicativo.
+
+00:04:12.400 --> 00:04:17.380
+Você já vai ver que ele tem uma opção aí
+de cobrança, né?
+
+00:04:17.440 --> 00:04:17.980
+Mas você não pode adicionar conta.
+
+00:04:17.980 --> 00:04:18.420
+Não precisa apagar.
+
+00:04:18.580 --> 00:04:20.780
+É uma opção para não mostrar propaganda.
+
+00:04:21.200 --> 00:04:22.380
+Igual você está vendo aí, ó.
+
+00:04:22.940 --> 00:04:25.540
+E aí você tem os ícones lá embaixo.
+
+00:04:25.800 --> 00:04:26.040
+Está vendo?
+
+00:04:26.420 --> 00:04:27.820
+Primeira, é essa tela geral.
+
+00:04:29.200 --> 00:04:32.020
+Segundo, é uma tela de criar pastas, né?
+
+00:04:33.040 --> 00:04:34.380
+Par de pastas.
+
+00:04:35.600 --> 00:04:37.880
+E terceiro, é o de adicionar conta.
+
+00:04:39.520 --> 00:04:42.220
+Quarto, as pastas do seu celular.
+
+00:04:43.680 --> 00:04:47.540
+E o último, um menuzinho aqui de
+configuração.
+
+00:04:47.980 --> 00:04:49.480
+E tudo mais.
+
+00:04:49.560 --> 00:04:51.780
+Volta para aquela tela de permissão,
+enfim.
+
+00:04:52.020 --> 00:04:54.260
+Nós vamos clicar nesse ícone do meio.
+
+00:04:54.400 --> 00:04:57.840
+Que é o ícone aí que vai adicionar
+conta.
+
+00:04:58.200 --> 00:05:02.540
+E quando você clicar em adicionar conta,
+o que vai acontecer?
+
+00:05:03.120 --> 00:05:08.500
+Nesse momento vai abrir todas as opções
+com as quais esse aplicativo funciona.
+
+00:05:08.860 --> 00:05:13.500
+Então você vai ver aí que tem Amazon
+Bots, Pcloud, Cloud, Mi Drop Bots,
+
+00:05:13.780 --> 00:05:15.200
+Google Drive, OneDrive.
+
+00:05:15.260 --> 00:05:16.480
+Tem vários aí, tá?
+
+00:05:16.640 --> 00:05:17.960
+Você vai poder selecionar.
+
+00:05:17.980 --> 00:05:21.120
+Eu vou mostrar para você aqui dois
+deles, né?
+
+00:05:21.200 --> 00:05:22.760
+Que é o Google Drive e o OneDrive.
+
+00:05:23.480 --> 00:05:26.280
+E funciona da mesma forma, tá?
+
+00:05:26.340 --> 00:05:26.880
+Todos eles.
+
+00:05:27.400 --> 00:05:30.560
+Então, por exemplo, vou selecionar aqui
+Google Drive.
+
+00:05:30.820 --> 00:05:31.740
+O que vai acontecer?
+
+00:05:32.020 --> 00:05:33.040
+Ele vai abrir essa tela.
+
+00:05:33.240 --> 00:05:35.140
+Pode ser que no seu caso abra o quê?
+
+00:05:35.220 --> 00:05:36.520
+Uma propaganda também.
+
+00:05:37.400 --> 00:05:38.980
+Fecha a propaganda, dá o fechar.
+
+00:05:39.160 --> 00:05:40.580
+Vai voltar para essa tela.
+
+00:05:41.000 --> 00:05:43.240
+Então ele já adicionou aqui Google
+Drive.
+
+00:05:43.340 --> 00:05:44.840
+Só que o que você precisa fazer?
+
+00:05:45.640 --> 00:05:47.960
+Entrar na sua conta do Google Drive.
+
+00:05:47.980 --> 00:05:52.520
+E dizer, olha, o Folder Sim que pode
+acessar.
+
+00:05:52.620 --> 00:05:56.320
+Porque ele vai ter que acessar os seus
+arquivos para fazer essa sincronização.
+
+00:05:56.720 --> 00:06:00.240
+Então esse botão aí embaixo, entrar com
+o Google, é para isso.
+
+00:06:00.780 --> 00:06:01.860
+Entrar com o Google.
+
+00:06:02.120 --> 00:06:04.740
+Ele vai abrir aqui essa tela.
+
+00:06:05.060 --> 00:06:08.520
+Vai perguntar qual é a conta do Google
+que você quer usar.
+
+00:06:08.900 --> 00:06:11.640
+Se você tiver mais de uma aí no seu
+Android.
+
+00:06:12.240 --> 00:06:14.640
+No caso, eu vou selecionar a minha conta
+aqui.
+
+00:06:16.020 --> 00:06:17.640
+Ele vai dizer, olha, o...
+
+00:06:17.980 --> 00:06:21.000
+O App Folder Sim quer acessar.
+
+00:06:21.140 --> 00:06:21.660
+Beleza?
+
+00:06:21.680 --> 00:06:22.080
+É isso mesmo?
+
+00:06:22.320 --> 00:06:23.960
+Vou dar um continuar aqui.
+
+00:06:24.400 --> 00:06:24.920
+Legal?
+
+00:06:25.660 --> 00:06:27.040
+E aí o que vai acontecer?
+
+00:06:28.060 --> 00:06:29.100
+Ele entrou.
+
+00:06:29.620 --> 00:06:30.140
+Tá?
+
+00:06:31.240 --> 00:06:33.680
+Pode ocorrer de você...
+
+00:06:34.140 --> 00:06:34.660
+Olha só.
+
+00:06:35.780 --> 00:06:38.180
+Ó, deu um alerta de segurança, vital.
+
+00:06:38.560 --> 00:06:43.980
+Pode acontecer de antes de vir essa tela
+aqui, pedir a sua senha do Google.
+
+00:06:44.340 --> 00:06:44.800
+Tá bom?
+
+00:06:45.520 --> 00:06:46.040
+Beleza.
+
+00:06:46.160 --> 00:06:46.820
+Então, ó.
+
+00:06:47.140 --> 00:06:47.820
+Adicionei aqui.
+
+00:06:47.980 --> 00:06:49.580
+Aqui a conta do Google.
+
+00:06:49.780 --> 00:06:52.020
+O OneDrive vai ser a mesma coisa.
+
+00:06:52.340 --> 00:06:52.640
+Tá vendo?
+
+00:06:53.020 --> 00:06:57.080
+Bom, adicionada a conta, o que que
+acontece?
+
+00:06:57.660 --> 00:06:57.980
+Tá?
+
+00:06:58.740 --> 00:07:04.360
+Ele vai ter aqui a opção até de você uma
+outra hora desvincular a conta, tudo
+
+00:07:04.360 --> 00:07:04.600
+mais.
+
+00:07:04.940 --> 00:07:06.540
+Só que o que acontece, olha.
+
+00:07:07.060 --> 00:07:10.440
+Agora, você tem o seguinte cenário.
+
+00:07:10.790 --> 00:07:13.540
+Você tem o Google Drive como nuvem.
+
+00:07:14.300 --> 00:07:17.080
+Você tem o seu Obsidian lá na sua
+máquina.
+
+00:07:17.100 --> 00:07:17.840
+Que tá...
+
+00:07:17.980 --> 00:07:20.160
+Usando a pasta do Google Drive.
+
+00:07:20.360 --> 00:07:22.300
+Vamos imaginar primeiro o cenário do
+Google Drive.
+
+00:07:22.560 --> 00:07:27.380
+Então, quando você altera um arquivo no
+Obsidian, ele altera no Google Drive.
+
+00:07:27.780 --> 00:07:28.840
+Sincroniza pra nuvem.
+
+00:07:29.180 --> 00:07:33.060
+O Google Drive é esse app da nuvem.
+
+00:07:33.080 --> 00:07:36.060
+Que você pode selecionar uma pasta e
+baixar um arquivo.
+
+00:07:36.140 --> 00:07:42.220
+Mas ele não tá sincronizando o Google
+Drive com o Android ali localmente, numa
+
+00:07:42.220 --> 00:07:42.560
+pasta.
+
+00:07:42.980 --> 00:07:45.400
+E você lembra de umas aulas anteriores
+que eu já falei.
+
+00:07:45.760 --> 00:07:47.960
+O Obsidian trabalha com arquivos.
+
+00:07:47.980 --> 00:07:49.060
+Com arquivos locais.
+
+00:07:49.060 --> 00:07:54.500
+Então, ele precisa ter o arquivo do
+segundo cérebro no disco do celular.
+
+00:07:54.720 --> 00:07:56.860
+No HD do celular.
+
+00:07:57.080 --> 00:07:58.980
+Então, ele precisa sincronizar.
+
+00:07:59.720 --> 00:08:04.160
+A hora que você altera um arquivo no
+Obsidian, ele sobe pra nuvem.
+
+00:08:05.380 --> 00:08:12.220
+Esse folder sim que vai ver que
+atualizou, vai sincronizar na pasta do
+
+00:08:12.220 --> 00:08:12.540
+celular.
+
+00:08:12.920 --> 00:08:13.500
+Tá?
+
+00:08:13.660 --> 00:08:17.800
+E quando você alterar também algo no
+celular, ele vai...
+
+00:08:18.620 --> 00:08:20.680
+Sincronizar e mandar lá pro Google
+Drive.
+
+00:08:21.060 --> 00:08:25.900
+Logo, como o seu Obsidian tá no
+computador usando o Google Drive, vai tá
+
+00:08:25.900 --> 00:08:26.580
+sincronizado.
+
+00:08:26.840 --> 00:08:27.180
+Tá bom?
+
+00:08:27.460 --> 00:08:28.740
+E como que você faz isso?
+
+00:08:28.880 --> 00:08:29.960
+Par de pastas.
+
+00:08:30.260 --> 00:08:31.460
+Então, olha só que legal.
+
+00:08:31.660 --> 00:08:32.540
+O que você vai ter que fazer?
+
+00:08:34.100 --> 00:08:37.300
+Você simplesmente vai abrir aqui, né?
+
+00:08:37.400 --> 00:08:38.320
+Ó, deixa eu voltar aqui.
+
+00:08:38.380 --> 00:08:39.080
+Onde eu entrei, ó.
+
+00:08:39.140 --> 00:08:40.560
+Par de pastas.
+
+00:08:40.940 --> 00:08:44.020
+Se você sair dessa tela, gente, fica
+tranquilo, ó.
+
+00:08:44.140 --> 00:08:47.960
+Você vai voltar e aqui no meio, onde tem
+Google Drive...
+
+00:08:47.980 --> 00:08:49.300
+Tem lá o botão.
+
+00:08:49.300 --> 00:08:50.580
+Par de pastas.
+
+00:08:51.360 --> 00:08:53.740
+Bom, nós vamos dar um nome aqui, né?
+
+00:08:54.320 --> 00:08:56.080
+Eu vou dar aqui, cofre...
+
+00:08:57.220 --> 00:08:57.700
+É...
+
+00:08:58.260 --> 00:08:58.740
+Google.
+
+00:09:00.240 --> 00:09:01.500
+E o que que vai acontecer?
+
+00:09:02.060 --> 00:09:04.500
+Ou o cofre Google, ou o segundo cérebro,
+vá?
+
+00:09:04.780 --> 00:09:05.200
+É...
+
+00:09:05.200 --> 00:09:06.420
+Pra identificar bem.
+
+00:09:07.420 --> 00:09:07.900
+Segundo...
+
+00:09:09.160 --> 00:09:09.640
+Cérebro.
+
+00:09:12.060 --> 00:09:15.840
+Eu vou dizer que é bidirecional, ou
+seja, eu quero que atualize dos dois
+
+00:09:15.840 --> 00:09:16.180
+lados.
+
+00:09:16.460 --> 00:09:16.840
+Tá?
+
+00:09:17.740 --> 00:09:19.980
+E aí, olha só o que você tem que fazer.
+
+00:09:19.980 --> 00:09:20.720
+O que você tem aqui, tá?
+
+00:09:20.860 --> 00:09:22.420
+Deixa eu até diminuir o teclado aqui pra
+mostrar.
+
+00:09:22.720 --> 00:09:25.140
+Você tem de um lado, ó...
+
+00:09:25.140 --> 00:09:27.280
+Aqui, de um lado, você tem...
+
+00:09:27.280 --> 00:09:28.440
+O...
+
+00:09:28.440 --> 00:09:30.100
+Selecionar pasta...
+
+00:09:30.100 --> 00:09:32.880
+Que está no celular...
+
+00:09:32.880 --> 00:09:34.760
+E do outro lado...
+
+00:09:35.280 --> 00:09:36.640
+Selecionar pasta...
+
+00:09:36.640 --> 00:09:38.100
+Que está...
+
+00:09:39.040 --> 00:09:40.040
+No Google Drive.
+
+00:09:40.260 --> 00:09:42.100
+Então, eu vou agora...
+
+00:09:42.100 --> 00:09:44.180
+Selecionar do meu lado esquerdo...
+
+00:09:44.180 --> 00:09:47.300
+Aquele botão embaixo ali que tá escrito
+assim...
+
+00:09:48.020 --> 00:09:48.840
+Selecionar pasta.
+
+00:09:48.840 --> 00:09:49.540
+Tá?
+
+00:09:49.680 --> 00:09:50.860
+Esse botão aqui, ó...
+
+00:09:50.860 --> 00:09:51.640
+Pera aí...
+
+00:09:51.640 --> 00:09:54.060
+Só um minutinho, só um minutinho aqui...
+
+00:09:54.060 --> 00:09:56.080
+Parou de espelhar a tela aqui...
+
+00:09:56.080 --> 00:09:58.200
+Só um minutinho pra ver o que tá
+acontecendo...
+
+00:10:00.340 --> 00:10:01.300
+Voltou aqui...
+
+00:10:01.300 --> 00:10:03.460
+Vamo lá, vamo lá, vamo lá...
+
+00:10:03.460 --> 00:10:04.460
+Então, olha só...
+
+00:10:04.460 --> 00:10:06.380
+Aqui, agora, eu tô com o Android...
+
+00:10:06.380 --> 00:10:07.160
+Né?
+
+00:10:07.320 --> 00:10:10.160
+E eu vou lá, então, voltar no par de
+pastas.
+
+00:10:10.180 --> 00:10:10.620
+Então, ó lá...
+
+00:10:10.620 --> 00:10:11.580
+Bidirecional...
+
+00:10:11.580 --> 00:10:13.160
+E aqui embaixo, ó...
+
+00:10:14.460 --> 00:10:16.200
+Selecionar pasta dos dois lados.
+
+00:10:16.320 --> 00:10:16.600
+Tá vendo?
+
+00:10:17.540 --> 00:10:18.500
+Selecionar pasta...
+
+00:10:18.500 --> 00:10:18.820
+Isso aqui...
+
+00:10:18.840 --> 00:10:20.040
+Isso tá aqui, tá bom, ó...
+
+00:10:20.040 --> 00:10:21.940
+Deixa eu mostrar pra você...
+
+00:10:21.940 --> 00:10:23.900
+Deixa eu puxar pra cá, ó...
+
+00:10:23.900 --> 00:10:25.000
+Aqui, ó...
+
+00:10:25.000 --> 00:10:26.640
+Meu mouse tá mostrando aqui, ó...
+
+00:10:26.640 --> 00:10:30.040
+Esse botão aqui é pra selecionar a pasta
+do celular...
+
+00:10:30.040 --> 00:10:31.760
+E esse lado direito...
+
+00:10:31.760 --> 00:10:34.520
+Selecionar qual pasta do Google Drive...
+
+00:10:34.520 --> 00:10:37.120
+Deve ser sincronizada com...
+
+00:10:37.120 --> 00:10:38.660
+Essa pasta do celular.
+
+00:10:38.980 --> 00:10:39.460
+Tá legal?
+
+00:10:40.540 --> 00:10:41.120
+Lembrando...
+
+00:10:41.120 --> 00:10:42.380
+Lá no meu Google Drive...
+
+00:10:42.380 --> 00:10:44.320
+Existe uma pasta do segundo cérebro...
+
+00:10:44.320 --> 00:10:45.180
+Chamada...
+
+00:10:45.180 --> 00:10:46.160
+É...
+
+00:10:46.160 --> 00:10:47.960
+Cofre Google Drive.
+
+00:10:47.960 --> 00:10:48.460
+Tá?
+
+00:10:48.600 --> 00:10:50.980
+Então, eu vou, primeiro, selecionar
+aqui, ó...
+
+00:10:50.980 --> 00:10:52.660
+Do meu lado direito...
+
+00:10:52.660 --> 00:10:53.980
+Selecionar pasta.
+
+00:10:55.760 --> 00:10:56.320
+Ora...
+
+00:10:56.320 --> 00:10:57.520
+Que pasta eu vou selecionar?
+
+00:10:57.720 --> 00:10:59.020
+Esse é o meu Google Drive.
+
+00:10:59.300 --> 00:11:01.040
+Eu vou lá no Obsidian...
+
+00:11:02.240 --> 00:11:02.800
+Cofre...
+
+00:11:02.800 --> 00:11:04.380
+Google Drive...
+
+00:11:05.920 --> 00:11:06.480
+Selecionar.
+
+00:11:08.200 --> 00:11:09.100
+Olha lá...
+
+00:11:09.100 --> 00:11:10.140
+Aqui embaixo...
+
+00:11:10.140 --> 00:11:11.420
+Apareceu o nome, ó...
+
+00:11:11.420 --> 00:11:12.440
+Obsidian...
+
+00:11:12.440 --> 00:11:13.360
+Cofre...
+
+00:11:13.360 --> 00:11:14.080
+Google Drive.
+
+00:11:14.360 --> 00:11:16.960
+Agora, eu vou clicar nesse botão à
+esquerda...
+
+00:11:16.960 --> 00:11:17.600
+Que é...
+
+00:11:18.620 --> 00:11:19.740
+Uma pasta...
+
+00:11:19.740 --> 00:11:20.400
+Né?
+
+00:11:21.040 --> 00:11:21.600
+Do...
+
+00:11:21.600 --> 00:11:22.440
+Meu...
+
+00:11:22.960 --> 00:11:23.520
+Celular.
+
+00:11:23.700 --> 00:11:24.340
+Do meu Android.
+
+00:11:24.700 --> 00:11:26.440
+O que que eu aconselho você...
+
+00:11:26.440 --> 00:11:27.280
+Que você pode fazer?
+
+00:11:27.400 --> 00:11:28.800
+Que é uma pasta que...
+
+00:11:28.800 --> 00:11:29.600
+É...
+
+00:11:29.600 --> 00:11:30.540
+Geralmente...
+
+00:11:30.540 --> 00:11:32.140
+Aparece sugerida, né?
+
+00:11:32.700 --> 00:11:34.380
+Você pode selecionar a pasta...
+
+00:11:34.960 --> 00:11:35.400
+Documents.
+
+00:11:35.620 --> 00:11:36.980
+Você pode criar uma nova pasta.
+
+00:11:37.140 --> 00:11:37.220
+Ó...
+
+00:11:37.220 --> 00:11:38.180
+Tem um botãozinho aqui...
+
+00:11:38.180 --> 00:11:39.340
+Para criar uma nova pasta.
+
+00:11:39.620 --> 00:11:39.980
+Tá?
+
+00:11:40.640 --> 00:11:42.640
+Você pode criar aqui uma pasta...
+
+00:11:42.640 --> 00:11:43.740
+Específica...
+
+00:11:43.740 --> 00:11:45.180
+Dentro do seu celular Android...
+
+00:11:45.180 --> 00:11:45.740
+Para...
+
+00:11:45.740 --> 00:11:46.840
+O seu segundo cérebro.
+
+00:11:46.980 --> 00:11:48.100
+Eu, geralmente...
+
+00:11:48.100 --> 00:11:49.000
+Eu venho aqui nessa pasta...
+
+00:11:49.980 --> 00:11:50.540
+Documents...
+
+00:11:50.540 --> 00:11:50.860
+Ó...
+
+00:11:51.480 --> 00:11:52.040
+Documents...
+
+00:11:52.040 --> 00:11:52.620
+Tá?
+
+00:11:53.000 --> 00:11:54.580
+E nessa pasta...
+
+00:11:55.280 --> 00:11:55.840
+Documents...
+
+00:11:55.840 --> 00:11:56.260
+Né?
+
+00:11:56.840 --> 00:11:57.400
+Eu...
+
+00:11:58.840 --> 00:11:59.820
+Seleciono ela...
+
+00:11:59.820 --> 00:12:00.880
+Aqui...
+
+00:12:00.880 --> 00:12:04.830
+Quer dizer...
+
+00:12:04.830 --> 00:12:05.990
+Eu vou criar uma pasta...
+
+00:12:05.990 --> 00:12:06.490
+Aqui, ó...
+
+00:12:08.440 --> 00:12:09.920
+Vou criar uma pasta...
+
+00:12:09.920 --> 00:12:10.860
+E chamar ela também de...
+
+00:12:10.860 --> 00:12:11.560
+Cofre...
+
+00:12:13.540 --> 00:12:14.100
+Obsidian...
+
+00:12:14.100 --> 00:12:14.420
+Ou...
+
+00:12:14.420 --> 00:12:16.080
+Você pode usar o mesmo nome...
+
+00:12:16.080 --> 00:12:16.220
+Tá?
+
+00:12:16.680 --> 00:12:17.680
+Por exemplo...
+
+00:12:18.500 --> 00:12:19.060
+Cofre...
+
+00:12:19.060 --> 00:12:20.080
+Google...
+
+00:12:20.080 --> 00:12:20.260
+Cofre...
+
+00:12:21.760 --> 00:12:22.460
+Drive...
+
+00:12:22.460 --> 00:12:24.120
+Você pode usar o mesmo nome...
+
+00:12:24.120 --> 00:12:25.060
+Porque se você, depois...
+
+00:12:25.060 --> 00:12:27.400
+Tiver mais de um segundo cérebro...
+
+00:12:28.160 --> 00:12:30.400
+Vai sincronizar certinho aí...
+
+00:12:30.400 --> 00:12:30.640
+Tá?
+
+00:12:30.780 --> 00:12:31.580
+Então, tá aqui...
+
+00:12:31.580 --> 00:12:32.720
+Selecionar...
+
+00:12:32.720 --> 00:12:33.500
+Então, olha lá...
+
+00:12:33.500 --> 00:12:34.720
+Tá mostrando...
+
+00:12:34.720 --> 00:12:37.360
+Que a minha pasta...
+
+00:12:37.360 --> 00:12:38.120
+Do...
+
+00:12:38.120 --> 00:12:40.140
+Google Drive...
+
+00:12:40.140 --> 00:12:40.400
+Né?
+
+00:12:40.960 --> 00:12:41.660
+Obsidian...
+
+00:12:41.660 --> 00:12:42.320
+Cofre...
+
+00:12:42.320 --> 00:12:43.300
+Google Drive...
+
+00:12:43.300 --> 00:12:45.820
+Vai sincronizar com uma pasta do meu
+celular...
+
+00:12:45.820 --> 00:12:46.460
+Chamada...
+
+00:12:46.460 --> 00:12:47.420
+Cofre...
+
+00:12:47.420 --> 00:12:48.140
+Google Drive...
+
+00:12:48.140 --> 00:12:48.920
+Dentro de...
+
+00:12:48.920 --> 00:12:49.720
+Documents...
+
+00:12:49.720 --> 00:12:50.260
+Cofre...
+
+00:12:50.280 --> 00:12:50.600
+Tá legal?
+
+00:12:50.800 --> 00:12:51.640
+Eu vou...
+
+00:12:52.740 --> 00:12:53.240
+Salvar...
+
+00:12:53.980 --> 00:12:54.480
+Opa!
+
+00:12:54.600 --> 00:12:55.520
+Tá pedindo um nome...
+
+00:12:55.520 --> 00:12:55.620
+Ah!
+
+00:12:55.680 --> 00:12:56.100
+Aqui...
+
+00:12:56.100 --> 00:12:58.020
+Aqui eu preciso digitar um nome...
+
+00:12:58.020 --> 00:12:59.100
+Achei que tinha digitado...
+
+00:12:59.100 --> 00:12:59.940
+Mas daí eu voltei...
+
+00:12:59.940 --> 00:13:00.040
+Né?
+
+00:13:00.340 --> 00:13:01.120
+Então, aqui...
+
+00:13:01.120 --> 00:13:01.860
+Eu vou colocar aqui...
+
+00:13:01.860 --> 00:13:03.400
+Só um nome que vai identificar...
+
+00:13:03.400 --> 00:13:04.060
+Dentro...
+
+00:13:05.620 --> 00:13:06.120
+Do...
+
+00:13:07.640 --> 00:13:08.140
+Aplicativo...
+
+00:13:08.140 --> 00:13:08.500
+Só...
+
+00:13:08.500 --> 00:13:09.040
+Tá?
+
+00:13:09.620 --> 00:13:10.120
+Cofre...
+
+00:13:10.120 --> 00:13:11.320
+Google Drive...
+
+00:13:11.940 --> 00:13:12.440
+Salvar...
+
+00:13:12.440 --> 00:13:15.060
+Olha o que tá acontecendo agora...
+
+00:13:15.060 --> 00:13:17.220
+Você criou um par de pastas...
+
+00:13:17.220 --> 00:13:18.680
+E aí você tem aqui o botão...
+
+00:13:19.400 --> 00:13:20.080
+Sincronizar...
+
+00:13:20.080 --> 00:13:21.700
+Que você vai poder...
+
+00:13:21.700 --> 00:13:22.580
+Clicar nele...
+
+00:13:22.580 --> 00:13:22.920
+Olha lá...
+
+00:13:22.920 --> 00:13:23.720
+Ficou verdinho...
+
+00:13:23.720 --> 00:13:24.660
+O que que tá acontecendo?
+
+00:13:25.200 --> 00:13:28.220
+A partir deste momento...
+
+00:13:28.220 --> 00:13:29.660
+O que você...
+
+00:13:30.760 --> 00:13:31.440
+Alterar...
+
+00:13:31.440 --> 00:13:32.680
+Na máquina...
+
+00:13:32.680 --> 00:13:33.620
+Reflete...
+
+00:13:33.620 --> 00:13:34.760
+Aqui no Android...
+
+00:13:34.760 --> 00:13:35.880
+Tá sincronizado...
+
+00:13:35.880 --> 00:13:37.840
+As duas pastas...
+
+00:13:37.840 --> 00:13:38.360
+É...
+
+00:13:38.360 --> 00:13:39.100
+Seguindo...
+
+00:13:39.100 --> 00:13:40.040
+Exatamente...
+
+00:13:40.040 --> 00:13:40.680
+Esse...
+
+00:13:40.680 --> 00:13:42.080
+Esse parâmetro...
+
+00:13:42.080 --> 00:13:42.300
+Né?
+
+00:13:42.560 --> 00:13:43.240
+De...
+
+00:13:43.240 --> 00:13:44.320
+De sincronização...
+
+00:13:44.320 --> 00:13:45.380
+Usando o Google Drive...
+
+00:13:45.380 --> 00:13:47.640
+E aí você acha que é diferente para o
+One Drive?
+
+00:13:47.840 --> 00:13:48.080
+Não...
+
+00:13:48.080 --> 00:13:48.660
+É a mesma coisa...
+
+00:13:48.680 --> 00:13:50.900
+Lembra que no adicionar conta...
+
+00:13:50.900 --> 00:13:52.900
+Se eu adicionar uma conta agora...
+
+00:13:52.900 --> 00:13:54.060
+E pegar aqui...
+
+00:13:54.060 --> 00:13:55.740
+O One Drive...
+
+00:13:55.740 --> 00:13:56.760
+O que que vai acontecer?
+
+00:13:58.220 --> 00:13:59.260
+Vai habilitar...
+
+00:13:59.260 --> 00:13:59.500
+Né?
+
+00:13:59.540 --> 00:14:00.880
+Vai ter o botão aí embaixo...
+
+00:14:01.200 --> 00:14:03.260
+Aquela hora tava entrar com o Google...
+
+00:14:03.260 --> 00:14:04.900
+Agora aqui do One Drive...
+
+00:14:04.900 --> 00:14:05.540
+Vai pedir o que?
+
+00:14:05.620 --> 00:14:07.960
+Para eu autenticar a conta...
+
+00:14:08.560 --> 00:14:09.080
+No...
+
+00:14:10.780 --> 00:14:11.820
+One Drive...
+
+00:14:11.820 --> 00:14:14.020
+No caso aqui é a conta da Microsoft...
+
+00:14:14.020 --> 00:14:15.720
+Eu vou entrar com a minha conta aqui...
+
+00:14:16.520 --> 00:14:18.300
+Você vai colocar a sua conta...
+
+00:14:18.300 --> 00:14:19.020
+A sua senha...
+
+00:14:19.020 --> 00:14:21.320
+E daí você vai perceber que...
+
+00:14:21.320 --> 00:14:23.800
+Eu vou voltar aqui na tela já com o meu
+login...
+
+00:14:23.800 --> 00:14:24.500
+Feito...
+
+00:14:24.500 --> 00:14:24.760
+Tá bom?
+
+00:14:26.520 --> 00:14:27.480
+Olha só...
+
+00:14:28.100 --> 00:14:28.580
+Agora...
+
+00:14:28.580 --> 00:14:29.960
+Já fiz o login...
+
+00:14:29.960 --> 00:14:30.280
+Né?
+
+00:14:30.340 --> 00:14:32.240
+Você vai digitar o seu usuário e
+senha...
+
+00:14:32.240 --> 00:14:33.520
+Vou dar aceitar...
+
+00:14:34.240 --> 00:14:35.520
+E aí quando eu dou aceitar...
+
+00:14:35.940 --> 00:14:36.760
+O que que vai acontecer?
+
+00:14:37.060 --> 00:14:37.260
+Né?
+
+00:14:37.780 --> 00:14:40.040
+Mesma coisa que aconteceu no Google
+Drive...
+
+00:14:40.040 --> 00:14:41.580
+E o que aconteceu...
+
+00:14:41.580 --> 00:14:42.160
+Né?
+
+00:14:42.200 --> 00:14:43.540
+Na hora do Google Drive...
+
+00:14:43.540 --> 00:14:44.440
+Depois disso aqui...
+
+00:14:45.000 --> 00:14:46.480
+Selecionei par de pastas...
+
+00:14:46.480 --> 00:14:48.160
+Vou dar aqui ó...
+
+00:14:49.620 --> 00:14:50.180
+Cofre...
+
+00:14:51.600 --> 00:14:52.720
+One Drive...
+
+00:14:52.720 --> 00:14:56.860
+Claro que eu não ia estar fazendo isso
+aqui...
+
+00:14:56.860 --> 00:14:56.880
+Né?
+
+00:14:57.440 --> 00:14:58.920
+Sincronizando com os dois...
+
+00:14:58.920 --> 00:14:59.040
+Né?
+
+00:14:59.080 --> 00:14:59.880
+Eu ia...
+
+00:14:59.880 --> 00:15:01.760
+Estar usando ou o One Drive...
+
+00:15:01.760 --> 00:15:02.660
+Ou o Google Drive...
+
+00:15:02.660 --> 00:15:02.740
+Né?
+
+00:15:02.920 --> 00:15:04.840
+E se você estiver usando qualquer
+outra...
+
+00:15:04.840 --> 00:15:05.460
+É a mesma coisa...
+
+00:15:05.460 --> 00:15:05.580
+Tá?
+
+00:15:05.840 --> 00:15:06.760
+Então aqui ó...
+
+00:15:06.760 --> 00:15:07.740
+Bidirecional...
+
+00:15:08.540 --> 00:15:10.080
+Mesma coisa que ó...
+
+00:15:10.080 --> 00:15:11.480
+Botão dos dois lados...
+
+00:15:11.480 --> 00:15:13.160
+Seleciona a pasta...
+
+00:15:13.160 --> 00:15:13.760
+Né?
+
+00:15:14.020 --> 00:15:14.580
+Aqui...
+
+00:15:14.580 --> 00:15:16.200
+A minha esquerda...
+
+00:15:16.200 --> 00:15:18.060
+Eu seleciono a pasta do meu celular...
+
+00:15:18.420 --> 00:15:19.840
+Na minha direita...
+
+00:15:19.840 --> 00:15:21.620
+Eu vou selecionar a pasta do meu...
+
+00:15:21.620 --> 00:15:22.720
+One Drive...
+
+00:15:22.720 --> 00:15:24.200
+Então se eu selecionar aqui ó...
+
+00:15:24.200 --> 00:15:25.160
+Botão direito...
+
+00:15:26.500 --> 00:15:27.860
+Vai abrir...
+
+00:15:27.860 --> 00:15:29.560
+As pastas do meu...
+
+00:15:29.560 --> 00:15:30.460
+One Drive...
+
+00:15:30.460 --> 00:15:32.800
+E aqui eu vou selecionar...
+
+00:15:32.800 --> 00:15:33.580
+Né?
+
+00:15:33.620 --> 00:15:34.540
+A pasta...
+
+00:15:34.540 --> 00:15:36.180
+Obsidian...
+
+00:15:37.180 --> 00:15:38.020
+Cofre...
+
+00:15:38.020 --> 00:15:39.680
+One Drive...
+
+00:15:39.680 --> 00:15:40.560
+Legal?
+
+00:15:41.700 --> 00:15:42.120
+Selecionar...
+
+00:15:42.720 --> 00:15:43.140
+Beleza...
+
+00:15:43.560 --> 00:15:44.360
+Aí...
+
+00:15:44.360 --> 00:15:45.460
+Pasta do meu...
+
+00:15:46.520 --> 00:15:46.940
+Celular...
+
+00:15:47.360 --> 00:15:48.780
+No caso aqui...
+
+00:15:48.780 --> 00:15:49.520
+Eu vou pegar...
+
+00:15:49.840 --> 00:15:50.440
+Documents...
+
+00:15:50.440 --> 00:15:51.380
+Só que ó...
+
+00:15:51.380 --> 00:15:52.260
+Tem cofre...
+
+00:15:52.260 --> 00:15:53.420
+Google Drive...
+
+00:15:53.420 --> 00:15:53.560
+Né?
+
+00:15:53.600 --> 00:15:55.300
+Eu vou criar uma pasta...
+
+00:15:55.840 --> 00:15:56.680
+Cofre...
+
+00:15:57.990 --> 00:15:59.290
+One...
+
+00:15:59.290 --> 00:16:00.150
+Drive...
+
+00:16:00.790 --> 00:16:01.290
+E...
+
+00:16:02.270 --> 00:16:04.250
+Vou selecionar agora...
+
+00:16:04.250 --> 00:16:05.330
+A pasta do One Drive...
+
+00:16:05.330 --> 00:16:06.310
+Selecionar...
+
+00:16:06.310 --> 00:16:07.790
+Beleza?
+
+00:16:08.690 --> 00:16:09.690
+Salvar...
+
+00:16:09.690 --> 00:16:10.570
+Pronto...
+
+00:16:10.570 --> 00:16:13.110
+Agora tá sincronizando...
+
+00:16:13.110 --> 00:16:14.590
+Vamos ver...
+
+00:16:14.590 --> 00:16:15.510
+Pronto...
+
+00:16:15.510 --> 00:16:17.430
+Sincronizando com o meu...
+
+00:16:17.430 --> 00:16:18.230
+One Drive...
+
+00:16:18.230 --> 00:16:19.270
+Gente...
+
+00:16:19.270 --> 00:16:20.150
+É isso...
+
+00:16:20.150 --> 00:16:20.870
+Que precisa...
+
+00:16:20.870 --> 00:16:20.910
+Fazer...
+
+00:16:20.910 --> 00:16:21.090
+Que precisa...
+
+00:16:21.090 --> 00:16:21.130
+Fazer...
+
+00:16:21.130 --> 00:16:22.110
+Ser feito...
+
+00:16:22.110 --> 00:16:23.050
+Pra ter...
+
+00:16:23.050 --> 00:16:24.130
+A sincronização...
+
+00:16:24.850 --> 00:16:26.710
+A partir desse momento...
+
+00:16:26.710 --> 00:16:28.450
+Quando você abre o Obsidian...
+
+00:16:28.450 --> 00:16:30.550
+E você alterar no celular...
+
+00:16:30.550 --> 00:16:32.330
+Ou alterar no computador...
+
+00:16:33.210 --> 00:16:33.970
+Existe...
+
+00:16:33.970 --> 00:16:34.370
+Um...
+
+00:16:34.370 --> 00:16:34.710
+Um...
+
+00:16:34.710 --> 00:16:35.650
+Pequeno delay...
+
+00:16:35.650 --> 00:16:35.870
+Ali...
+
+00:16:35.870 --> 00:16:36.350
+Que é...
+
+00:16:36.350 --> 00:16:37.610
+Dessa sincronização...
+
+00:16:37.610 --> 00:16:38.370
+Acontecer...
+
+00:16:38.370 --> 00:16:39.170
+Desse aplicativo...
+
+00:16:39.170 --> 00:16:39.790
+Tá rodando...
+
+00:16:39.790 --> 00:16:39.970
+Ali...
+
+00:16:39.970 --> 00:16:40.850
+Em segundo plano...
+
+00:16:40.850 --> 00:16:42.490
+E sincronizar isso...
+
+00:16:42.490 --> 00:16:43.510
+Mas tá feito...
+
+00:16:43.510 --> 00:16:44.290
+Tá feito aí...
+
+00:16:44.290 --> 00:16:45.050
+A sincronização...
+
+00:16:45.050 --> 00:16:45.470
+Tá?
+
+00:16:45.570 --> 00:16:46.670
+Então nós vimos...
+
+00:16:46.670 --> 00:16:47.290
+Praticamente...
+
+00:16:47.290 --> 00:16:48.270
+Como sincronizar...
+
+00:16:48.270 --> 00:16:48.870
+Quando é...
+
+00:16:48.870 --> 00:16:49.410
+iPhone...
+
+00:16:49.410 --> 00:16:49.770
+Com...
+
+00:16:50.410 --> 00:16:50.770
+iCloud...
+
+00:16:50.770 --> 00:16:51.270
+Né?
+
+00:16:51.270 --> 00:16:52.730
+Seja Mac ou Windows...
+
+00:16:53.410 --> 00:16:54.710
+Nós vimos também...
+
+00:16:54.710 --> 00:16:55.530
+One Drive...
+
+00:16:55.530 --> 00:16:56.430
+E...
+
+00:16:56.430 --> 00:16:58.050
+Google Drive...
+
+00:16:58.050 --> 00:16:59.830
+Sendo Mac ou Windows...
+
+00:16:59.830 --> 00:17:00.190
+Também...
+
+00:17:00.190 --> 00:17:00.510
+Tá legal?
+
+00:17:00.730 --> 00:17:01.210
+Então...
+
+00:17:01.210 --> 00:17:02.070
+Nessa aula...
+
+00:17:02.070 --> 00:17:02.970
+A gente aprendeu...
+
+00:17:02.970 --> 00:17:04.910
+Sem dor de cabeça...
+
+00:17:04.910 --> 00:17:05.750
+Como fazer isso...
+
+00:17:05.750 --> 00:17:06.570
+E...
+
+00:17:06.570 --> 00:17:07.490
+Você vai ver aí...
+
+00:17:07.490 --> 00:17:08.070
+Na internet...
+
+00:17:08.070 --> 00:17:08.570
+Muita gente...
+
+00:17:08.570 --> 00:17:09.590
+Batendo cabeça...
+
+00:17:09.590 --> 00:17:10.990
+Com grandes problemas...
+
+00:17:10.990 --> 00:17:11.590
+Com isso...
+
+00:17:11.590 --> 00:17:12.630
+E é muito fácil...
+
+00:17:12.630 --> 00:17:14.150
+Você tá no lugar certo...
+
+00:17:14.150 --> 00:17:15.250
+Tá no caminho certo...
+
+00:17:15.250 --> 00:17:16.030
+E espero...
+
+00:17:16.030 --> 00:17:16.670
+Que você tenha...
+
+00:17:16.670 --> 00:17:17.690
+Conseguido fazer isso...
+
+00:17:17.690 --> 00:17:18.250
+Tudo certinho...
+
+00:17:19.410 --> 00:17:19.670
+Dúvida...
+
+00:17:19.670 --> 00:17:20.990
+Ou chama a gente lá...
+
+00:17:20.990 --> 00:17:21.850
+No suporte...
+
+00:17:21.850 --> 00:17:22.290
+Que a gente...
+
+00:17:22.290 --> 00:17:23.930
+Dá uma auxílio aí...
+
+00:17:23.930 --> 00:17:24.230
+Tá bom?
+
+00:17:24.410 --> 00:17:25.350
+Por hoje é só...
+
+00:17:25.350 --> 00:17:26.510
+Agora nós vamos avançar aí...
+
+00:17:26.510 --> 00:17:27.030
+No uso...
+
+00:17:27.030 --> 00:17:27.450
+Do...
+
+00:17:27.450 --> 00:17:28.150
+Obsidia...
+
+00:17:28.150 --> 00:17:28.390
+Tá legal?
+
+00:17:28.590 --> 00:17:29.450
+Até a próxima...
+
+00:17:29.450 --> 00:17:29.910
+Alendário...

@@ -1,0 +1,260 @@
+WEBVTT
+
+00:00:00.940 --> 00:00:02.100
+Olá, Vendário!
+
+00:00:02.340 --> 00:00:05.000
+Seja bem -vindo ao curso Dominando
+Obsídia.
+
+00:00:05.340 --> 00:00:09.700
+Eu sou Adriano de Marque e vou
+acompanhar você nessa jornada.
+
+00:00:09.960 --> 00:00:15.740
+Nesse primeiro vídeo, eu fiz questão de
+que você entrasse, comece aqui, para
+
+00:00:15.740 --> 00:00:21.560
+explicar como é que está estruturado
+esse curso e a importância dele.
+
+00:00:22.180 --> 00:00:31.060
+Eu acho que você pode mudar a forma como
+você sempre aprendeu, sempre anotou
+
+00:00:31.060 --> 00:00:38.420
+coisas e você vai conseguir agora usar
+teu conhecimento potencializado com
+
+00:00:38.420 --> 00:00:41.800
+inteligência artificial, criando o
+segundo cérebro.
+
+00:00:42.220 --> 00:00:47.960
+Então, assim, é algo inovador, é algo
+muito legal que você vai aprender.
+
+00:00:48.100 --> 00:00:54.300
+Então, ao final dele, você vai ter uma
+experiência de aprendizado rápido,
+
+00:00:54.500 --> 00:01:00.020
+acelerado, como nunca você teve, talvez
+naturalmente.
+
+00:01:00.040 --> 00:01:04.740
+Então, como que eu vou estruturar esse
+curso?
+
+00:01:04.920 --> 00:01:11.820
+Vamos lá para entender como nós vamos
+trabalhar aqui com ele.
+
+00:01:12.600 --> 00:01:15.360
+Nós estamos aí no curso Dominando
+Obsídia.
+
+00:01:16.140 --> 00:01:19.920
+Nós vamos ter aulas curtas.
+
+00:01:20.540 --> 00:01:22.760
+Então, elas vão ser curtas por quê?
+
+00:01:22.820 --> 00:01:29.200
+Para, didaticamente, você aprender em
+espaços, né?
+
+00:01:30.100 --> 00:01:36.660
+Mais fáceis de aprendizado, onde você
+vai poder ter cada aula com um nome que
+
+00:01:36.660 --> 00:01:42.040
+vai ficar fácil de você localizar o
+conteúdo que você está procurando depois
+
+00:01:42.040 --> 00:01:44.820
+que você já fizer esse curso, né?
+
+00:01:44.860 --> 00:01:47.620
+Então, ah, eu quero voltar em alguma
+parte de Markdown.
+
+00:01:47.720 --> 00:01:52.520
+Vai ter o nome dessa aula que você vai
+rapidamente localizar, tá?
+
+00:01:52.600 --> 00:01:53.640
+E assim por diante.
+
+00:01:54.100 --> 00:01:58.020
+Nós vamos ter sempre teoria e prática,
+então é algo que você vai conseguir
+
+00:01:58.020 --> 00:02:03.420
+aplicar já, no dia a dia, cada aula, o
+objetivo vai ser esse, você já sair
+
+00:02:03.420 --> 00:02:04.440
+aplicando, tá?
+
+00:02:04.580 --> 00:02:10.140
+Ele tem início, meio e fim, então você
+vai ter um curso onde você sabe onde vai
+
+00:02:10.140 --> 00:02:16.300
+terminar, porém, eu quero garantir para
+você que sempre vai ter conteúdo novo,
+
+00:02:16.660 --> 00:02:22.800
+vão ter aulas complementares, porque é
+algo muito dinâmico, é um assunto muito
+
+00:02:22.800 --> 00:02:28.300
+rico, um assunto muito vasto, o que nós
+vamos tratar aqui e você sempre vai
+
+00:02:28.300 --> 00:02:34.600
+conseguir, evoluir a construção do seu
+segundo cérebro diante da ferramenta
+
+00:02:34.600 --> 00:02:36.980
+Obsidian e também nos seus plugins, tá?
+
+00:02:37.160 --> 00:02:39.740
+Quais são os módulos que nós vamos ter
+nesse curso?
+
+00:02:40.100 --> 00:02:45.040
+Nós vamos pegar a parte de introdução,
+onde a conselho não pule, mesmo que você
+
+00:02:45.040 --> 00:02:48.900
+já tenha visto alguma coisa sobre
+Obsidian, porque aqui nós vamos entender
+
+00:02:48.900 --> 00:02:54.200
+toda a dinâmica da ferramenta, a
+importância de cada coisa e como evoluir
+
+00:02:54.200 --> 00:02:55.400
+nisso daí, tá?
+
+00:02:56.040 --> 00:02:57.480
+Nós vamos também...
+
+00:02:58.780 --> 00:03:02.700
+ir com a ferramenta para além de notas,
+tá?
+
+00:03:02.860 --> 00:03:06.400
+Não é uma ferramenta simplesmente de
+anotação, não é uma ferramenta
+
+00:03:06.400 --> 00:03:09.620
+simplesmente de você criar notas, você
+vai entender isso.
+
+00:03:10.020 --> 00:03:14.580
+Nós vamos partir para a produtividade na
+ferramenta, o quanto você vai ganhar de
+
+00:03:14.580 --> 00:03:19.060
+tempo, o quanto você vai ganhar de
+inteligência de aprendizado.
+
+00:03:19.360 --> 00:03:25.900
+Nós vamos instalar plugins e depois nós
+vamos ainda potencializar esse segundo
+
+00:03:25.900 --> 00:03:29.900
+cérebro com esses plugins, e também com
+inteligência artificial.
+
+00:03:30.460 --> 00:03:35.940
+Então você vai ter aí um segundo cérebro
+potencializado, tá?
+
+00:03:36.040 --> 00:03:40.700
+E nós vamos ver também em plugins que
+você vai usar no dia a dia, para você
+
+00:03:40.700 --> 00:03:48.820
+perceber que não é algo que simplesmente
+anotações e acaba por aí.
+
+00:03:48.920 --> 00:03:53.820
+Você vai conseguir usar isso no dia a
+dia e você não vai conseguir viver mais
+
+00:03:53.820 --> 00:03:57.860
+sem, a partir do momento que você
+começar a ver o quanto ele traz...
+
+00:03:57.880 --> 00:03:59.840
+de benefício para você, tá?
+
+00:03:59.920 --> 00:04:05.500
+Então aqui foi só para te mostrar como
+que a gente está organizando esse curso,
+
+00:04:05.660 --> 00:04:05.780
+tá?
+
+00:04:05.860 --> 00:04:10.680
+Nós vamos fazer algo muito, muito focado
+na prática.
+
+00:04:10.800 --> 00:04:17.120
+Então eu espero que você aproveite,
+aproveite mesmo esse curso e tudo que
+
+00:04:17.120 --> 00:04:19.400
+você vai ver aqui, para evoluir na sua
+vida.
+
+00:04:20.020 --> 00:04:22.740
+Eu creio que você deve fazer esse curso
+primeiro, né?
+
+00:04:22.780 --> 00:04:27.100
+Se você não está fazendo, mas faça ele
+antes de todos os outros conteúdos,
+
+00:04:27.100 --> 00:04:31.440
+porque ele vai ser essencial para que
+você aprenda mais rápido e evite,
+
+00:04:31.440 --> 00:04:36.080
+inclusive, aquela sensação de que,
+nossa, eu estou perdendo muita coisa, eu
+
+00:04:36.080 --> 00:04:42.700
+estou perdendo conteúdo, eu estou
+perdendo, no excesso de informação, no
+
+00:04:42.700 --> 00:04:45.880
+excesso de ruído, eu estou perdendo de
+aprender um monte de coisa.
+
+00:04:46.180 --> 00:04:51.080
+Com a ferramenta Obsidian, Construindo o
+Seu Segundo Cérebro, você vai evitar
+
+00:04:51.080 --> 00:04:51.440
+isso.
+
+00:04:51.600 --> 00:04:58.960
+Então, fica comigo aí que eu quero que
+você aprenda e possa demonstrar para
+
+00:04:58.960 --> 00:05:04.680
+todo mundo o quanto você pode, em um
+curso de poucas horas, evoluir anos na
+
+00:05:04.680 --> 00:05:05.640
+sua vida, tá bom?
+
+00:05:06.640 --> 00:05:10.400
+Legal, até a próxima aula que eu vou
+começar já a mostrar para você porque

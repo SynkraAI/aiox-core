@@ -1,0 +1,61 @@
+{
+  "description": "Sample extraction results for MMOS testing",
+  "extractions": [
+    {
+      "source": {
+        "type": "youtube",
+        "id": "dQw4w9WgXcQ"
+      },
+      "success": true,
+      "result": {
+        "transcript": "Hello everyone, welcome to this video. Today we're going to discuss important topics about cognitive psychology and decision making frameworks.",
+        "metadata": {
+          "title": "Understanding Cognitive Psychology",
+          "duration": 1234,
+          "channel": "Test Channel",
+          "uploadDate": "2024-01-15"
+        },
+        "segments": [
+          { "start": 0, "end": 30, "text": "Hello everyone, welcome to this video." },
+          { "start": 30, "end": 60, "text": "Today we're going to discuss important topics." },
+          { "start": 60, "end": 90, "text": "About cognitive psychology and decision making frameworks." }
+        ]
+      }
+    },
+    {
+      "source": {
+        "type": "blog",
+        "url": "https://example.com/blog/article"
+      },
+      "success": true,
+      "result": {
+        "content": "This is a sample blog post about mental models and how they shape our understanding of the world. Mental models are simplified representations of reality that help us make decisions.",
+        "title": "Understanding Mental Models",
+        "author": "Test Author",
+        "publishDate": "2024-02-20",
+        "url": "https://example.com/blog/article"
+      }
+    },
+    {
+      "source": {
+        "type": "document",
+        "path": "/path/to/document.pdf"
+      },
+      "success": true,
+      "result": {
+        "text": "Sample PDF content extracted from the document. Contains valuable insights about cognitive frameworks and decision-making processes.",
+        "pages": 15,
+        "metadata": {
+          "title": "Cognitive Frameworks Guide",
+          "author": "Academic Author",
+          "creationDate": "2023-06-10"
+        }
+      }
+    }
+  ],
+  "summary": {
+    "total": 3,
+    "successful": 3,
+    "failed": 0
+  }
+}

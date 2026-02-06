@@ -1,0 +1,334 @@
+# SOURCE REFERENCE: Thinking, Fast and Slow
+# Daniel Kahneman (2011)
+# PRIMARY SOURCE - ANCHOR FOR ENTIRE CLONE
+
+id: source_001
+title: "Thinking, Fast and Slow"
+author: "Daniel Kahneman"
+year: 2011
+type: book
+tier: 1
+priority: HIGHEST (1)
+
+# ============================================
+# BIBLIOGRAPHIC INFO
+# ============================================
+
+isbn: "978-0374533557"
+publisher: "Farrar, Straus and Giroux"
+pages: 499
+language: English
+
+availability:
+  status: "Widely available"
+  sources:
+    - "Amazon (print, Kindle, audiobook)"
+    - "Public libraries"
+    - "Bookstores"
+    - "Audible audiobook (20h 2min)"
+
+# ============================================
+# CONTENT STRUCTURE
+# ============================================
+
+structure:
+  part_1: "Two Systems"
+  part_2: "Heuristics and Biases"
+  part_3: "Overconfidence"
+  part_4: "Choices"
+  part_5: "Two Selves"
+
+chapters: 38
+key_sections:
+  - "Introduction to System 1 and System 2"
+  - "The characters of the story (Fast/Slow thinking)"
+  - "Attention and effort"
+  - "The lazy controller"
+  - "The associative machine"
+  - "Cognitive ease"
+  - "Norms, surprises, and causes"
+  - "A machine for jumping to conclusions"
+  - "How judgments happen"
+  - "Answering an easier question"
+  - "The law of small numbers"
+  - "Anchors"
+  - "The science of availability"
+  - "Availability, emotion, and risk"
+  - "Linda: Less is more"
+  - "Causes trump statistics"
+  - "Regression to the mean"
+  - "Taming intuitive predictions"
+  - "The illusion of understanding"
+  - "The illusion of validity"
+  - "Intuitions vs formulas"
+  - "Expert intuition: When can we trust it?"
+  - "The outside view"
+  - "The engine of capitalism (optimism bias)"
+  - "Bernoulli's errors"
+  - "Prospect theory"
+  - "The endowment effect"
+  - "Bad events (loss aversion)"
+  - "The fourfold pattern"
+  - "Rare events"
+  - "Risk policies"
+  - "Keeping score"
+  - "Reversals"
+  - "Frames and reality"
+  - "Two selves (experiencing vs remembering)"
+  - "Life as a story"
+  - "Experienced well-being"
+  - "Thinking about life"
+
+# ============================================
+# KEY FRAMEWORKS TO EXTRACT
+# ============================================
+
+frameworks:
+  system_1_system_2:
+    description: "Dual-process model of cognition"
+    system_1:
+      - "Fast, automatic, intuitive"
+      - "Operates effortlessly"
+      - "Associative, pattern-matching"
+      - "Emotional responses"
+      - "Prone to biases"
+    system_2:
+      - "Slow, deliberate, analytical"
+      - "Requires effort and attention"
+      - "Logical, rule-based"
+      - "Can override System 1"
+      - "Lazy (tends to defer to System 1)"
+
+  cognitive_biases_catalog:
+    - "Anchoring effect"
+    - "Availability heuristic"
+    - "Representativeness heuristic"
+    - "Confirmation bias"
+    - "Hindsight bias"
+    - "Overconfidence effect"
+    - "Planning fallacy"
+    - "Sunk cost fallacy"
+    - "Endowment effect"
+    - "Loss aversion"
+    - "Framing effect"
+    - "Base rate neglect"
+    - "Conjunction fallacy"
+    - "Regression to the mean (misunderstanding)"
+    - "Halo effect"
+    - "WYSIATI (What You See Is All There Is)"
+    - "Substitution (answering easier question)"
+
+  prospect_theory_applications:
+    - "Reference dependence"
+    - "Loss aversion principle"
+    - "Diminishing sensitivity"
+    - "Probability weighting"
+    - "Certainty effect"
+    - "Reflection effect"
+
+  experiencing_vs_remembering_self:
+    - "Two selves with different interests"
+    - "Peak-end rule"
+    - "Duration neglect"
+    - "Memory vs experience divergence"
+
+# ============================================
+# SIGNATURE EXAMPLES & STORIES
+# ============================================
+
+signature_examples:
+  linda_problem:
+    description: "Conjunction fallacy demonstration"
+    setup: "Linda is 31, single, outspoken, philosophy major, concerned with discrimination and social justice"
+    question: "Which is more probable: (A) Linda is a bank teller, or (B) Linda is a bank teller and active in the feminist movement?"
+    insight: "People choose B (conjunction) even though it's logically impossible to be more probable"
+    bias_illustrated: "Representativeness over logic"
+
+  asian_disease_problem:
+    description: "Framing effect demonstration"
+    setup: "Program to combat disease killing 600 people"
+    framing_positive: "Program A saves 200 people (certain) vs Program B saves 600 (33% chance)"
+    framing_negative: "Program A kills 400 (certain) vs Program B kills nobody (33% chance)"
+    insight: "Same options, different frames → opposite preferences"
+    bias_illustrated: "Loss aversion and framing"
+
+  endowment_effect_mugs:
+    description: "Loss aversion in action"
+    setup: "Students given coffee mugs"
+    finding: "Owners demand 2x more to sell than non-owners willing to pay"
+    insight: "Ownership changes value perception (loss aversion)"
+
+  regression_to_mean_pilots:
+    description: "Misunderstanding regression"
+    setup: "Flight instructors notice praise → worse performance, criticism → better performance"
+    insight: "Regression to mean, not causal relationship"
+    lesson: "System 1 sees causation where there's only statistics"
+
+# ============================================
+# COMMUNICATION STYLE ELEMENTS
+# ============================================
+
+style_markers:
+  narrative_approach:
+    - "Uses characters (System 1 and System 2 as protagonists)"
+    - "Story-driven explanations"
+    - "Vivid, memorable examples"
+    - "Thought experiments"
+
+  pedagogical_structure:
+    - "Define concept → Show evidence → Explain implications"
+    - "Build complexity progressively"
+    - "Frequent summaries and reviews"
+    - "Speaking Points sections (key takeaways)"
+
+  tone_characteristics:
+    - "Humble and self-aware"
+    - "Acknowledges own biases"
+    - "Credits collaborators (especially Tversky)"
+    - "Careful, nuanced claims"
+    - "Academic rigor with accessibility"
+
+  signature_phrases:
+    - "What you see is all there is" (WYSIATI)
+    - "The experiencing self vs the remembering self"
+    - "Nothing in life is as important as you think it is while you are thinking about it"
+    - "System 1 operates automatically and quickly, with little or no effort"
+    - "A reliable way to make people believe in falsehoods is frequent repetition"
+    - "Jumping to conclusions"
+    - "The illusion of understanding"
+    - "The lazy System 2"
+
+# ============================================
+# EXTRACTION PRIORITIES (8-LAYER DNA MENTAL)
+# ============================================
+
+layer_extraction_guide:
+  layer_1_behavioral:
+    focus:
+      - "Experimental approach to every claim"
+      - "Collaborative research patterns"
+      - "Teaching through examples"
+    key_sections: "Entire book demonstrates behavior"
+
+  layer_2_communication:
+    focus:
+      - "Story-driven pedagogy"
+      - "System 1/2 as character device"
+      - "Accessible science writing"
+    key_sections: "All chapters - analyze structure and voice"
+
+  layer_3_routine:
+    focus:
+      - "Research methodology described"
+      - "Experimental design patterns"
+    key_sections: "Part 2 (Heuristics), methodology notes"
+
+  layer_4_recognition:
+    focus:
+      - "What Kahneman notices (biases, errors, patterns)"
+      - "Mental radars for irrationality"
+    key_sections: "All bias descriptions reveal what he sees"
+
+  layer_5_mental_models:
+    focus:
+      - "System 1/System 2 framework"
+      - "Prospect Theory"
+      - "WYSIATI principle"
+      - "Experiencing/Remembering selves"
+    key_sections: "Part 1, Part 4, Part 5"
+
+  layer_6_values:
+    focus:
+      - "Intellectual honesty (admits limitations)"
+      - "Empirical rigor (evidence-based)"
+      - "Collaborative credit (Tversky throughout)"
+    key_sections: "Introduction, acknowledgments, Tversky references"
+
+  layer_7_obsessions:
+    focus:
+      - "Why do humans make systematic errors?"
+      - "When can we trust intuition?"
+      - "How to improve decisions?"
+    key_sections: "Entire book is driven by these questions"
+
+  layer_8_paradoxes:
+    focus:
+      - "Intuition is flawed YET valid in expertise"
+      - "We're irrational YET have adaptive heuristics"
+      - "System 2 is powerful YET lazy"
+    key_sections: "Part 3 (Overconfidence), Chapter 22 (Expert Intuition)"
+
+# ============================================
+# COLLECTION INSTRUCTIONS
+# ============================================
+
+collection_method:
+  if_digital:
+    - "Download eBook or PDF"
+    - "Extract full text with formatting"
+    - "Preserve chapter structure"
+    - "Note page numbers for citations"
+
+  if_audiobook:
+    - "Use Audible version (20h 2min)"
+    - "Transcribe key sections"
+    - "Note timestamps for reference"
+
+  if_physical_only:
+    - "Scan key chapters"
+    - "OCR for text extraction"
+    - "Manual transcription of critical passages"
+
+  minimum_extraction:
+    - "Full table of contents"
+    - "Introduction and conclusion"
+    - "All 'Speaking Points' summary boxes"
+    - "All signature examples (Linda, Asian disease, etc.)"
+    - "Chapters 1-2 (System 1/2 foundation)"
+    - "Chapters 26-29 (Prospect Theory)"
+    - "Chapters 35-38 (Two Selves)"
+
+processing_priority: CRITICAL - Process first and most thoroughly
+
+estimated_processing_time:
+  full_read: "10-15 hours"
+  extraction: "3-5 hours"
+  analysis: "2-3 hours"
+  total: "15-23 hours (but highest value per hour)"
+
+# ============================================
+# EXPECTED OUTPUTS
+# ============================================
+
+outputs_from_this_source:
+  artifacts:
+    - "Layer 1: Behavioral patterns (experimental rigor)"
+    - "Layer 2: Complete communication style map"
+    - "Layer 5: All core mental models"
+    - "Layer 6: Values (intellectual honesty, empirical rigor)"
+    - "Layer 7: Core obsessions (clear throughout book)"
+    - "Layer 8: Multiple paradoxes identified"
+
+  frameworks:
+    - "System 1 / System 2 comprehensive guide"
+    - "Cognitive biases catalog (20+ biases)"
+    - "Prospect Theory applications"
+    - "Decision improvement techniques"
+
+  kb_chunks:
+    - "30-40 knowledge base chunks (by topic)"
+    - "Signature phrases library"
+    - "Example stories database"
+
+value_assessment: |
+  This single source provides 70-80% of what's needed for a high-fidelity clone.
+  It's the anchor - everything else validates and expands what's here.
+  Allocate maximum time to this source.
+
+# ============================================
+# STATUS
+# ============================================
+
+collection_status: PENDING
+ready_for_processing: NO (awaiting collection)
+next_step: "Download/acquire book, begin extraction"

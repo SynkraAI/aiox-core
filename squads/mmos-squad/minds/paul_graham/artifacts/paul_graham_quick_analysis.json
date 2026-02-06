@@ -1,0 +1,167 @@
+{
+  "metadata": {
+    "generated_at": "2025-09-21 02:04:22",
+    "essays_analyzed": 50,
+    "total_words": 126144
+  },
+  "core_values": [
+    [
+      "pragmatism",
+      750
+    ],
+    [
+      "growth",
+      394
+    ],
+    [
+      "truth_seeking",
+      170
+    ],
+    [
+      "simplicity",
+      41
+    ],
+    [
+      "independence",
+      21
+    ]
+  ],
+  "topic_preferences": [
+    [
+      "creativity",
+      1563
+    ],
+    [
+      "startups",
+      1215
+    ],
+    [
+      "society",
+      648
+    ],
+    [
+      "education",
+      369
+    ],
+    [
+      "technology",
+      270
+    ],
+    [
+      "business",
+      214
+    ]
+  ],
+  "thinking_patterns": [
+    {
+      "essay": "Do Things that Don't Scale",
+      "pattern": "Marketplaces are\nso hard to get rolling that you should expect to take heroic measures\nat first"
+    },
+    {
+      "essay": "Do Things that Don't Scale",
+      "pattern": "## [\n\n## 5\n\n## ]\n\n## Delight\n\nYou should take extraordinary measures not just to acquire users,\nbut also to make them happy"
+    },
+    {
+      "essay": "Do Things that Don't Scale",
+      "pattern": "Your first users should feel that\nsigning up with you was one of the best choices they ever made"
+    },
+    {
+      "essay": "Do Things that Don't Scale",
+      "pattern": "And you in turn should be racking your brains to think of new ways\nto delight them"
+    },
+    {
+      "essay": "Do Things that Don't Scale",
+      "pattern": "\" He meant it more literally — that one should focus\non quality of execution to a degree that in everyday life would be\nconsidered pathological"
+    },
+    {
+      "essay": "Do Things that Don't Scale",
+      "pattern": "He meant the Mac (and its documentation and even\npackaging — such is the nature of obsession) should be insanely\nwell designed and manufactured"
+    },
+    {
+      "essay": "Do Things that Don't Scale",
+      "pattern": "It's not the product that should be insanely great,\nbut the experience of being your user"
+    },
+    {
+      "essay": "Do Things that Don't Scale",
+      "pattern": "Can, perhaps, but should"
+    },
+    {
+      "essay": "Do Things that Don't Scale",
+      "pattern": "## Big\n\nI should mention one sort of initial tactic that usually doesn't\nwork: the Big Launch"
+    },
+    {
+      "essay": "Do Things that Don't Scale",
+      "pattern": "But should you even be working on\nsuch an idea"
+    },
+    {
+      "essay": "Do Things that Don't Scale",
+      "pattern": "\" Actually it's\nbetter to embrace the fact that you're small and use whatever\nadvantages that brings"
+    },
+    {
+      "essay": "The Trouble with the Segway",
+      "pattern": "Instead they had enough to work in secret"
+    },
+    {
+      "essay": "Schlep Blindness",
+      "pattern": "And schleps should be dealt with the same way\nyou'd deal with a cold swimming pool: just jump in"
+    },
+    {
+      "essay": "Schlep Blindness",
+      "pattern": "Which is not\nto say you should seek out unpleasant work per se, but that you\nshould never shrink from it if it's on the path to something great"
+    },
+    {
+      "essay": "Schlep Blindness",
+      "pattern": "Probably no one who applied to Y Combinator to work on a recipe\nsite began by asking \"should we fix payments, or build a recipe\nsite"
+    }
+  ],
+  "communication_style": {
+    "questions": 7.8,
+    "exclamations": 0.2,
+    "parentheticals": 6.2,
+    "direct_statements": 0.8,
+    "qualifiers": 3.4
+  },
+  "key_insights": [
+    {
+      "essay": "Hackers and Painters",
+      "insight": "But the key to flexibility, I think, is to make the language\nvery\n\n## abstract"
+    },
+    {
+      "essay": "Hackers and Painters",
+      "insight": "It turns out that looking at things from\nother people's point of view is practically the secret of\nsuccess"
+    },
+    {
+      "essay": "What I Worked On",
+      "insight": "The foundation means the classes that everyone has to take in fundamental subjects like drawing, color, and design"
+    },
+    {
+      "essay": "What I Worked On",
+      "insight": "It helped to have studied art, because the main goal of an online store builder is to make users look legit, and the key to looking legit is high production values"
+    },
+    {
+      "essay": "How to Make Wealth",
+      "insight": "You do tend to get a\ncertain\nbulk discount if you buy the economy-size pain,\nbut you can't evade the fundamental conservation law"
+    },
+    {
+      "essay": "How to Make Wealth",
+      "insight": "Wealth is the fundamental thing"
+    },
+    {
+      "essay": "How to Make Wealth",
+      "insight": "Someone graduating from college thinks, and is told, that he needs\nto get a job, as if the important thing were becoming a member of\nan institution"
+    },
+    {
+      "essay": "How to Make Wealth",
+      "insight": "As anyone\nwho has tried to optimize software knows, the key is measurement"
+    }
+  ],
+  "summary": {
+    "top_value": "pragmatism",
+    "top_topic": "creativity",
+    "signature_traits": [
+      "Highly pragmatism",
+      "Focuses on creativity",
+      "Direct communication style"
+    ]
+  }
+}

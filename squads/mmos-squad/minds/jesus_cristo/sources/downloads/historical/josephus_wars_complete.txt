@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="client-nojs" lang="en" dir="ltr">
+<head>
+ <meta charset="UTF-8" >
+
+<title>404 | Project Gutenberg</title>
+ <link rel="stylesheet" href="/gutenberg/style2.css?v=1.8">
+ <link rel="stylesheet" href="/gutenberg/collapsible.css?1.3">
+ <link rel="stylesheet" href="/gutenberg/new_nav.css?v=1.6">
+ <link rel="stylesheet" href="/gutenberg/pg-desktop-one.css?v=1.1">
+
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="keywords" content="books, ebooks, free, kindle, android, iphone, ipad">
+ <meta name="google-site-verification" content="wucOEvSnj5kP3Ts_36OfP64laakK-1mVTg-ptrGC9io">
+ <meta name="alexaVerifyID" content="4WNaCljsE-A82vP_ih2H_UqXZvM">
+ 
+ <link rel="copyright" href="https://www.gnu.org/copyleft/fdl.html">
+ <link rel="icon" type="image/png" href="/gutenberg/favicon.ico" sizes="16x16" >
+ 
+ <meta property="og:title"        content="Project Gutenberg" >
+ <meta property="og:type"         content="website" >
+ <meta property="og:url"          content="https://www.gutenberg.org/" >
+ <meta property="og:description"  content="Project Gutenberg is a library of free eBooks." >
+ <meta property="fb:admins"       content="615269807" >
+ <meta property="fb:app_id"       content="115319388529183" >
+ <meta property="og:site_name"    content="Project Gutenberg" >
+ <meta property="og:image"        content="https://www.gutenberg.org/gutenberg/pg-logo-144x144.png" >
+ </head>
+<body>
+  <div class="container"><!-- start body --><header>
+  <input type="radio" name="toggle" id="search-toggle" style="display: none" >
+  <input type="radio" name="toggle" id="search-close" style="display: none" >
+  <input type="checkbox" id="about-toggle" style="display: none" >
+  <div class="logo-container">
+    <a id="main_logo" href="/" class="no-hover">
+      <img src="/gutenberg/pg-logo-129x80.png" alt="Project Gutenberg" draggable="false" >
+    </a>
+  </div>
+
+  <div class="top-header">
+    <form
+      class="search-form"
+      method="get"
+      action="/ebooks/search/"
+      accept-charset="utf-8"
+    >
+      <label
+        for="search-toggle"
+        class="search-icon-btn"
+        aria-label="Open Search"
+      >
+        <svg
+          class="search-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          width="1em"
+          height="1em"
+        >
+          <path
+            d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"
+          />
+          <path d="M0 0h24v24H0z" fill="none" />
+        </svg>
+      </label>
+      <label for="search-close" class="search-close-btn" aria-label="Close Search">X</label>
+      <input
+        type="text"
+        class="search-input"
+        name="query"
+        placeholder="Quick search"
+        aria-label="Search books"
+      >
+      <button type="submit" class="search-button">Go!</button>
+    </form>
+
+    <div class="donate-container">
+      <form
+        class="donatelink"
+        action="https://www.paypal.com/cgi-bin/webscr"
+        method="post"
+        target="new"
+      >
+        <input type="hidden" name="cmd" value="_s-xclick" >
+        <input
+          type="hidden"
+          name="hosted_button_id"
+          value="XKAL6BZL3YPSN"
+        >
+        <input
+          class="donbtn"
+          type="image"
+          src="/pics/en_US.gif"
+          name="submit"
+          alt="Donate via PayPal"
+        >
+      </form>
+      <a href="/donate/" class="donate-link"> Donate </a>
+    </div>
+  </div>
+
+  <label for="about-toggle" class="dropdown-overlay"></label>
+  <div class="lower-header">
+    <div class="dropdown" tabindex="0">
+      <label for="about-toggle" class="dropdown-button" aria-haspopup="true">About<span aria-hidden="true" class="dropdown-icon">▼</span></label>
+      <div class="dropdown-content">
+        <a href="/about/">About Project Gutenberg </a>
+        <a href="/about/contact_information.html">Contact Us</a>
+        <a href="/about/background/">History &amp; Philosophy</a>
+        <a href="/help/mobile.html">Kindle &amp; eReaders</a>
+        <a href="/help/">Help Pages</a>
+        <a href="/ebooks/offline_catalogs.html">Offline Catalogs</a>
+        <a href="/donate/">Donate</a>
+      </div>
+    </div>
+
+    <div class="main-links">
+      <a href="/browse/scores/top" class="link-freq-downloaded"
+        >Frequently Downloaded</a
+      >
+      <a href="/ebooks/categories" class="link-main-categories"
+        >Main Categories</a
+      >
+      <a href="/ebooks/bookshelf/" class="link-reading-lists"
+        >Reading Lists</a
+      >
+      <a href="/ebooks/" class="link-advanced-search">Search Options</a>
+    </div>
+  </div>
+
+  <div class="tertiary-header">
+    <a href="/browse/scores/top" class="tertiary-link link-freq-downloaded"
+      >Frequently Downloaded</a
+    >
+    <a href="/ebooks/categories" class="tertiary-link link-main-categories"
+      >Main Categories</a
+    >
+  </div>
+</header>
+<div class="page_content"><!-- start content -->
+
+        <h1 id="error-404">Error 404</h1>
+
+<p>Sorry, but our website does not have the page you requested.</p>
+
+<p>Maybe you have just a wrong url. Go to <a href="/">www.gutenberg.org</a> to see whether the error persists.</p>
+
+<p>If you think something is broken, follow the “Contact Information” link at the bottom of this page if you would like to report it.</p>
+
+
+   </div><!--content ending-->
+  </div><!-- body ending -->
+   <div class="footer"><!-- start footer -->  <ul>
+      <li>
+        <a href="/about/">About Project Gutenberg</a>
+      </li>
+      <li>
+        <a href="/policy/privacy_policy.html">Privacy policy</a>
+      </li>
+      <li>
+        <a href="/policy/permission.html" title="Permissions, Licensing and other Common Requests">Permissions</a>
+      </li>
+      <li>
+        <a href="/policy/terms_of_use.html">Terms of Use</a>
+      </li>
+      <li>
+        <a href="/about/contact_information.html" title="How to contact Project Gutenberg">Contact Us</a>
+      </li>
+      <li><a href="/help/" title="Help, How-To, Procedures, Guidance and Information">Help</a></li>
+  </ul>
+
+  <a href="https://www.ibiblio.org/" title="Project Gutenberg is hosted by ibiblio">
+   <img src="/gutenberg/ibiblio-logo.png" alt="ibiblio" width="110" height="32">
+  </a>
+</div><!-- footer ending-->
+
+ </body>
+</html>

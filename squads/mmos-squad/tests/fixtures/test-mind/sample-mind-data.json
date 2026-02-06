@@ -1,0 +1,66 @@
+{
+  "description": "Sample mind mapping data for MMOS testing",
+  "subject": {
+    "name": "Test Subject",
+    "description": "A test subject for cognitive architecture cloning",
+    "createdAt": "2024-03-15T10:00:00Z"
+  },
+  "sources": [
+    "youtube:dQw4w9WgXcQ",
+    "blog:https://example.com/blog/article",
+    "pdf:/path/to/document.pdf"
+  ],
+  "patterns": [
+    {
+      "name": "Decision Framework",
+      "frequency": 15,
+      "sourceCount": 3,
+      "examples": [
+        "uses mental models for decision making",
+        "applies frameworks systematically",
+        "considers multiple perspectives"
+      ],
+      "category": "cognitive"
+    },
+    {
+      "name": "Learning Style",
+      "frequency": 12,
+      "sourceCount": 2,
+      "examples": [
+        "prefers hands-on learning",
+        "uses analogies frequently",
+        "builds on existing knowledge"
+      ],
+      "category": "learning"
+    },
+    {
+      "name": "Communication Pattern",
+      "frequency": 8,
+      "sourceCount": 2,
+      "examples": [
+        "structures arguments logically",
+        "uses storytelling techniques",
+        "provides concrete examples"
+      ],
+      "category": "communication"
+    }
+  ],
+  "mentalModels": [
+    {
+      "name": "First Principles Thinking",
+      "description": "Breaking down complex problems into fundamental components",
+      "usage": "high"
+    },
+    {
+      "name": "Inversion",
+      "description": "Thinking about problems in reverse to find solutions",
+      "usage": "medium"
+    }
+  ],
+  "synthesis": {
+    "totalSources": 3,
+    "patternsFound": 3,
+    "mentalModelsIdentified": 2,
+    "confidenceScore": 0.85
+  }
+}

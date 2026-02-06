@@ -1,0 +1,174 @@
+# Fidelity Benchmarks
+# Purpose: Expected fidelity levels and targets for cognitive clones
+# Used by: emulator agent (test-fidelity.md task)
+
+# Rating System
+rating_system:
+  excellent:
+    range: [94, 100]
+    description: "Indistinguishable from original - DNA Mental™ complete"
+    requirements:
+      - "All 8 layers documented and validated"
+      - "Blind test passed with 94%+ accuracy"
+      - "At least 10 sources triangulated"
+    production_ready: true
+
+  good:
+    range: [85, 93]
+    description: "High quality with minor gaps"
+    requirements:
+      - "Layers 1-6 complete, 7-8 partially documented"
+      - "Standard test passed"
+      - "At least 5 sources"
+    production_ready: true
+
+  acceptable:
+    range: [70, 84]
+    description: "Functional but needs improvement"
+    requirements:
+      - "Layers 1-4 complete"
+      - "Quick test passed"
+      - "Basic source coverage"
+    production_ready: false
+
+  poor:
+    range: [0, 69]
+    description: "Not ready for use"
+    requirements:
+      - "Incomplete layer documentation"
+      - "Failed basic tests"
+    production_ready: false
+
+# Category Weights
+category_weights:
+  personality_alignment: 0.25
+  knowledge_accuracy: 0.25
+  communication_style: 0.20
+  framework_application: 0.20
+  edge_case_handling: 0.10
+
+# Test Protocol Thresholds
+protocol_thresholds:
+  quick:
+    questions: 5
+    duration_minutes: 5
+    pass_threshold: 70
+    use_case: "Rapid iteration during development"
+
+  standard:
+    questions: 15
+    duration_minutes: 10
+    pass_threshold: 85
+    use_case: "Production readiness validation"
+
+  comprehensive:
+    questions: 30
+    duration_minutes: 15
+    pass_threshold: 90
+    use_case: "High-stakes or regulated deployments"
+
+  blind:
+    questions: "variable"
+    duration_minutes: "variable"
+    pass_threshold: 94
+    use_case: "Gold standard - indistinguishability test"
+
+# Layer Contribution to Fidelity
+layer_fidelity_contribution:
+  layer_1_facts:
+    weight: 0.10
+    description: "Biographical accuracy"
+    impact: "Base foundation - errors here undermine everything"
+
+  layer_2_communication:
+    weight: 0.15
+    description: "Voice and style authenticity"
+    impact: "First thing users notice - critical for immersion"
+
+  layer_3_frameworks:
+    weight: 0.20
+    description: "Mental model accuracy"
+    impact: "Core value proposition - thinking like the original"
+
+  layer_4_values:
+    weight: 0.15
+    description: "Values and priorities"
+    impact: "Decision-making authenticity"
+
+  layer_5_decisions:
+    weight: 0.10
+    description: "Decision architecture"
+    impact: "How they approach problems"
+
+  layer_6_obsessions:
+    weight: 0.15
+    description: "Core drives and obsessions"
+    impact: "What makes them unique - the 'soul'"
+
+  layer_7_singularity:
+    weight: 0.10
+    description: "Unique perspective"
+    impact: "Irreplaceable insight"
+
+  layer_8_paradoxes:
+    weight: 0.05
+    description: "Productive contradictions"
+    impact: "Humanity and nuance"
+
+# Mind-Specific Benchmarks
+mind_benchmarks:
+  # Template for each mind - fill in after testing
+  nassim_taleb:
+    current_fidelity: null
+    target_fidelity: 94
+    last_tested: null
+    test_protocol: null
+    notes: "Strong frameworks, excellent voice"
+
+  naval_ravikant:
+    current_fidelity: null
+    target_fidelity: 94
+    last_tested: null
+    test_protocol: null
+    notes: "Clear communication style"
+
+  sam_altman:
+    current_fidelity: null
+    target_fidelity: 94
+    last_tested: null
+    test_protocol: null
+    notes: "Contemporary - frequent updates needed"
+
+  # Add more minds as created
+
+# Improvement Targets
+improvement_targets:
+  per_iteration:
+    minimum: 2  # Percentage points
+    expected: 5
+    maximum: 10  # Diminishing returns beyond this
+
+  time_to_excellent:
+    from_poor: "3-5 iterations"
+    from_acceptable: "2-3 iterations"
+    from_good: "1-2 iterations"
+
+# Warning Thresholds
+warning_thresholds:
+  fidelity_regression:
+    trigger: -5  # Alert if drops 5+ points
+    action: "Review recent changes"
+
+  stale_validation:
+    days: 30  # Alert if not tested in 30 days
+    action: "Schedule retest"
+
+  low_layer_completion:
+    layers: [6, 7, 8]  # These are often incomplete
+    threshold: "incomplete"
+    action: "Prioritize deep layer work"
+
+# Benchmark Version
+version: "1.0.0"
+created: "2026-01-09"
+updated: "2026-01-09"

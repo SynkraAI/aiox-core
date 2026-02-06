@@ -1,0 +1,106 @@
+---
+# MMOS Mind Metadata - Jeff Patton
+# Generated: 2025-10-30
+# Pipeline: Greenfield (Public)
+
+person_name: "Jeff Patton"
+slug: "jeff_patton"
+workflow_type: "greenfield"
+mode: "public"
+
+# Pipeline Status
+pipeline_status: "analysis_complete"
+created_at: "2025-10-30T19:42:00Z"
+started_at: "2025-10-30T19:42:00Z"
+analysis_completed_at: "2025-10-30T23:30:00Z"
+current_phase: "ready_for_system_prompts"
+
+# Viability Assessment (Pre-approved)
+viability:
+  score_final: 8.4
+  classification: "APROVADO"
+  priority: "P1 — Alta Prioridade"
+  apex_score: 8.0
+  icp_match: 9.0
+  combined_score: 8.7
+  estimated_hours: 80
+  roi_expected: 9
+  approved: true
+  approved_at: "2025-10-30T19:42:00Z"
+
+# Use Case
+use_case: "Decomposição de PRDs e documentações em atividades menores para agentes/clones executarem"
+archetype: "Especialista de Nicho"
+super_ability: "Decomposição Visual e User Story Mapping"
+
+# Target Fidelity
+target_fidelity: 0.94
+target_layer_depth: 8  # Layer 8: Productive Paradoxes
+
+# Phases Completed
+phases_completed:
+  - phase: "Phase 0: Viability Assessment"
+    completed_at: "2025-10-30T19:42:00Z"
+    status: "APPROVED"
+  - phase: "Phase 1: Research Collection"
+    completed_at: "2025-10-30T21:00:00Z"
+    status: "COMPLETE"
+    sources_collected: 15
+  - phase: "Phase 2: DNA Mental Analysis"
+    completed_at: "2025-10-30T23:30:00Z"
+    status: "COMPLETE"
+    layers_analyzed: 8
+    checkpoints_approved: 2
+
+# Source Information
+sources:
+  method: "WebFetch (Claude Code tool)"
+  sources_collected: 15
+  word_count: 7483
+  primary_source: "User Story Mapping: Discover the Whole Story, Build the Right Product (O'Reilly, 2014)"
+  website: "jpattonassociates.com"
+  target_count: 25
+  minimum_required: 15
+  actual_collected: 15
+  collection_status: "COMPLETE"
+
+# DNA Mental Layers Status
+dna_mental_layers:
+  layer_1_behavioral_patterns: "COMPLETE (confidence: 92%)"
+  layer_2_communication_style: "COMPLETE (confidence: 98%)"
+  layer_3_routines_habits: "COMPLETE (confidence: 85%)"
+  layer_4_recognition_patterns: "COMPLETE (confidence: 94%)"
+  layer_5_mental_models: "COMPLETE (confidence: 97%)"
+  layer_6_values_obsessions: "COMPLETE (confidence: 96%)"
+  layer_7_singularity: "COMPLETE (confidence: 100%)"
+  layer_8_productive_paradoxes: "COMPLETE (confidence: 90%)"
+  overall_fidelity: "94.25%"
+
+# Human Checkpoints
+checkpoints:
+  checkpoint_1_layers_5_6: "APPROVED (2025-10-30T22:30:00Z)"
+  checkpoint_2_layers_7_8: "APPROVED (2025-10-30T23:15:00Z)"
+  checkpoint_3_system_prompt: "pending"
+  checkpoint_4_fidelity_test: "pending"
+
+# Expected Deliverables
+deliverables:
+  identity_core: "expansion-packs/mmos/minds/jeff_patton/analysis/identity-core.yaml"
+  cognitive_spec: "expansion-packs/mmos/minds/jeff_patton/analysis/cognitive-spec.yaml"
+  system_prompt_generalista: "expansion-packs/mmos/minds/jeff_patton/system_prompts/system-prompt-generalista.md"
+  system_prompt_specialist: "expansion-packs/mmos/minds/jeff_patton/system_prompts/system-prompt-prd-decomposer.md"
+  knowledge_base: "expansion-packs/mmos/minds/jeff_patton/kb/"
+  validation_report: "expansion-packs/mmos/minds/jeff_patton/docs/validation-report.yaml"
+
+# Notes
+notes: |
+  Jeff Patton is the creator of User Story Mapping methodology, a visual approach to
+  breaking down complex product requirements into manageable user-centric tasks. His
+  methodology is perfect for decomposing PRDs and documentation into smaller activities.
+
+  Key characteristics:
+  - Visual thinker (story mapping is inherently visual)
+  - User-centric focus (always starts with users, not features)
+  - Iterative/incremental approach (build slice by slice)
+  - Strong UX background (combines Agile + UX thinking)
+  - Pragmatic communicator (practical, not theoretical)

@@ -1,0 +1,589 @@
+# =============================================================================
+# Quality Gate Template
+# =============================================================================
+# Pattern: HO-PP-003 (Quality Gate Pattern)
+# Version: 1.0.0
+# Author: AIOS Team / Squad-Creator
+#
+# Purpose: Template for creating formal Quality Gates between workflow phases.
+#          Quality Gates ensure checkpoints are met before progression.
+#
+# Usage:
+#   1. Copy this template to your squad's qa-gates/ or gates/ folder
+#   2. Replace all {placeholder} values with actual values
+#   3. Adjust criteria, thresholds, and actions to your workflow needs
+#   4. Reference the gate in your workflow-definition.yaml
+#
+# Reference: AIOS Quality Gate Standard
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Template Metadata
+# -----------------------------------------------------------------------------
+_template:
+  name: "quality-gate-tmpl"
+  version: "1.0.0"
+  description: "Template for creating Quality Gates"
+  author: "AIOS Team"
+  pattern: "HO-PP-003"
+  created_at: "2026-01-24"
+
+  # Instructions for template usage
+  instructions:
+    - "Replace all {placeholder} values"
+    - "Choose appropriate gate type (manual|automated|hybrid|external)"
+    - "Define at least one criterion"
+    - "Set thresholds based on acceptable quality levels"
+    - "Define both pass_action and fail_action"
+
+  # Valid enums for reference
+  enums:
+    placement: ["entry", "transition", "exit"]
+    type: ["manual", "automated", "hybrid", "external"]
+    severity: ["blocking", "warning", "info"]
+    criteria_type: ["threshold", "presence", "enum", "count"]
+    operator: [">=", "<=", ">", "<", "==", "!=", "contains", "not_contains", "matches"]
+
+# =============================================================================
+# QUALITY GATE DEFINITION
+# =============================================================================
+
+quality_gate:
+  # ---------------------------------------------------------------------------
+  # Required Fields
+  # ---------------------------------------------------------------------------
+
+  # Unique identifier - Format: QG-{phase}.{sequence}
+  # Examples: QG-1.1, QG-2.3A, QG-ENTRY-001
+  id: "QG-{phase}.{sequence}"
+
+  # Human-readable name
+  name: "{Gate Name}"
+
+  # Description of what this gate validates
+  description: "{What this gate validates and why it exists}"
+
+  # Workflow phase number (1-based)
+  phase: 1
+
+  # Where in the phase this gate is placed
+  # - entry: At the beginning of a phase (validates prerequisites)
+  # - transition: Between tasks within a phase
+  # - exit: At the end of a phase (validates phase completion)
+  placement: "transition"
+
+  # Gate execution type
+  # - manual: Human-only validation
+  # - automated: AI/script validation only
+  # - hybrid: AI analyzes, human validates
+  # - external: Third-party system validation (webhook, API)
+  type: "hybrid"
+
+  # Severity level
+  # - blocking: Must pass to proceed (workflow halts if failed)
+  # - warning: Alerts but allows progression
+  # - info: Informational only, no impact on flow
+  severity: "blocking"
+
+  # ---------------------------------------------------------------------------
+  # Criteria Definition
+  # ---------------------------------------------------------------------------
+  # At least one criterion is required. Each criterion defines what to check.
+
+  criteria:
+    # --- THRESHOLD TYPE ---
+    # Used for numeric comparisons (scores, percentages, counts)
+    - check: "{Description of what is being checked}"
+      type: "threshold"
+      field: "{field_name}"           # Field/metric to evaluate
+      value: 60                        # Target value
+      operator: ">="                   # Comparison operator
+      weight: 0.4                      # Weight in final score (0.0-1.0)
+      required: true                   # If true, must pass regardless of weight
+
+    # --- PRESENCE TYPE ---
+    # Used to verify something exists (file, field, artifact)
+    - check: "{Description of presence check}"
+      type: "presence"
+      field: "{field_or_artifact}"    # What must be present
+      must_exist: true                 # true = must exist, false = must NOT exist
+      weight: 0.2
+
+    # --- ENUM TYPE ---
+    # Used to verify a value is one of allowed options
+    - check: "{Description of enum validation}"
+      type: "enum"
+      field: "{field_name}"
+      allowed_values:                  # List of valid values
+        - "APPROVED"
+        - "REVIEWED"
+        - "VALIDATED"
+      weight: 0.2
+
+    # --- COUNT TYPE ---
+    # Used for counting items (array length, file count, etc.)
+    - check: "{Description of count check}"
+      type: "count"
+      field: "{array_or_collection}"
+      min_count: 1                     # Minimum items required
+      max_count: null                  # Maximum items allowed (null = unlimited)
+      weight: 0.2
+
+  # ---------------------------------------------------------------------------
+  # Thresholds Configuration
+  # ---------------------------------------------------------------------------
+  # Defines score boundaries for pass/review/fail decisions
+  # Weighted criteria scores are summed and compared to these thresholds
+
+  thresholds:
+    # Score >= pass threshold = PASS (proceed immediately)
+    pass: 0.70
+
+    # Score >= review threshold AND < pass = REVIEW (human review required)
+    review: 0.50
+
+    # Score < fail threshold = FAIL (blocked, action required)
+    # Note: Anything >= fail but < review is also REVIEW
+    fail: 0.50
+
+  # ---------------------------------------------------------------------------
+  # Executor Configuration
+  # ---------------------------------------------------------------------------
+  # Defines who/what executes this quality gate
+
+  executor:
+    # Same as gate type (manual|automated|hybrid|external)
+    type: "hybrid"
+
+    # For automated/hybrid: AI agent that performs analysis
+    ai_agent: "{agent_name}"
+
+    # For manual/hybrid: Human role responsible for review
+    human_review: "{Role Name}"
+
+    # For external: Webhook/API endpoint for validation
+    webhook_url: null
+
+    # Timeout for gate execution (in minutes)
+    timeout_minutes: 60
+
+    # Maximum retry attempts on failure
+    max_retries: 3
+
+  # ---------------------------------------------------------------------------
+  # Actions on Pass
+  # ---------------------------------------------------------------------------
+  # Actions executed when the gate passes
+
+  pass_action:
+    - "{Primary action when gate passes}"
+    - "{Secondary action - e.g., Status update}"
+    - "{Notification action - e.g., Notify stakeholders}"
+
+  # Structured pass actions (alternative format)
+  pass_actions_detailed:
+    - action: "update_status"
+      params:
+        new_status: "{Next Status}"
+
+    - action: "notify"
+      params:
+        channel: "slack"
+        recipients: ["@{role}"]
+        message: "Gate {id} passed - proceeding to next phase"
+
+    - action: "trigger_next"
+      params:
+        task_id: "{next_task_id}"
+
+  # ---------------------------------------------------------------------------
+  # Actions on Fail
+  # ---------------------------------------------------------------------------
+  # Actions executed when the gate fails
+
+  fail_action:
+    - "{Primary action when gate fails}"
+    - "{Blocking action - e.g., Status -> Blocked}"
+    - "{Remediation action - e.g., Generate issues list}"
+
+  # Structured fail actions (alternative format)
+  fail_actions_detailed:
+    - action: "update_status"
+      params:
+        new_status: "Bloqueado - {Reason}"
+
+    - action: "notify"
+      params:
+        channel: "slack"
+        recipients: ["@{role}", "@{escalation_role}"]
+        message: "Gate {id} FAILED - action required"
+        priority: "high"
+
+    - action: "create_task"
+      params:
+        task_name: "Resolve {Gate Name} failure"
+        assignee: "{responsible}"
+        due_in_hours: 24
+
+    - action: "log_failure"
+      params:
+        severity: "blocking"
+        include_criteria_details: true
+
+  # ---------------------------------------------------------------------------
+  # Optional: SLA Configuration
+  # ---------------------------------------------------------------------------
+  # Service Level Agreement for gate resolution
+
+  sla:
+    enabled: true
+
+    # Maximum time to resolve a failed gate
+    resolution_deadline_hours: 24
+
+    # Escalation chain for overdue gates
+    escalation:
+      - level: 1
+        after_hours: 4
+        notify: ["@{team_lead}"]
+
+      - level: 2
+        after_hours: 12
+        notify: ["@{manager}"]
+
+      - level: 3
+        after_hours: 24
+        notify: ["@{director}"]
+        action: "auto_escalate_to_leadership"
+
+    # Metrics tracking
+    track_metrics:
+      - "time_to_pass"
+      - "retry_count"
+      - "escalation_count"
+      - "failure_reasons"
+
+  # ---------------------------------------------------------------------------
+  # Optional: Dependencies
+  # ---------------------------------------------------------------------------
+  # Other gates or tasks that must complete before this gate runs
+
+  dependencies:
+    gates: []                          # Other gates that must pass first
+    tasks: []                          # Tasks that must complete first
+    artifacts: []                      # Artifacts that must exist
+
+  # ---------------------------------------------------------------------------
+  # Optional: Metadata
+  # ---------------------------------------------------------------------------
+
+  metadata:
+    created_at: "{creation_date}"
+    created_by: "{author}"
+    last_modified: "{modification_date}"
+    pattern_compliance:
+      - "HO-PP-003"                    # Quality Gate Pattern
+    tags:
+      - "{tag1}"
+      - "{tag2}"
+
+# =============================================================================
+# EXAMPLES BY TYPE
+# =============================================================================
+
+_examples:
+
+  # ---------------------------------------------------------------------------
+  # Example 1: MANUAL Gate
+  # ---------------------------------------------------------------------------
+  # Human-only validation, typically for approvals and sign-offs
+
+  manual_gate_example:
+    id: "QG-3.1"
+    name: "Stakeholder Approval Gate"
+    description: "Final approval from stakeholder before production deployment"
+    phase: 3
+    placement: "exit"
+    type: "manual"
+    severity: "blocking"
+
+    criteria:
+      - check: "Stakeholder has reviewed deliverables"
+        type: "presence"
+        field: "stakeholder_review_completed"
+        must_exist: true
+        weight: 0.5
+
+      - check: "Approval status is APPROVED"
+        type: "enum"
+        field: "approval_status"
+        allowed_values: ["APPROVED"]
+        weight: 0.5
+
+    thresholds:
+      pass: 1.0                        # Both criteria must pass
+      review: 0.5
+      fail: 0.5
+
+    executor:
+      type: "manual"
+      human_review: "Product Owner"
+      timeout_minutes: 1440            # 24 hours
+
+    pass_action:
+      - "Status -> Approved for Production"
+      - "Notify deployment team"
+      - "Create deployment ticket"
+
+    fail_action:
+      - "Status -> Revision Requested"
+      - "Create revision task with feedback"
+      - "Notify development team"
+
+  # ---------------------------------------------------------------------------
+  # Example 2: AUTOMATED Gate
+  # ---------------------------------------------------------------------------
+  # AI/script-only validation, no human intervention
+
+  automated_gate_example:
+    id: "QG-1.1"
+    name: "Data Validation Gate"
+    description: "Automated validation of input data completeness and format"
+    phase: 1
+    placement: "entry"
+    type: "automated"
+    severity: "blocking"
+
+    criteria:
+      - check: "Required fields present"
+        type: "count"
+        field: "required_fields_filled"
+        min_count: 8
+        weight: 0.4
+
+      - check: "Email format valid"
+        type: "threshold"
+        field: "email_validation_score"
+        value: 1.0
+        operator: "=="
+        weight: 0.3
+
+      - check: "No duplicate entries"
+        type: "count"
+        field: "duplicate_entries"
+        min_count: 0
+        max_count: 0
+        weight: 0.3
+
+    thresholds:
+      pass: 0.90
+      review: 0.70
+      fail: 0.70
+
+    executor:
+      type: "automated"
+      ai_agent: "data-validator"
+      timeout_minutes: 5
+      max_retries: 3
+
+    pass_action:
+      - "Log validation success"
+      - "Proceed to data processing"
+
+    fail_action:
+      - "Status -> Validation Failed"
+      - "Generate error report with specific issues"
+      - "Notify data entry team"
+
+  # ---------------------------------------------------------------------------
+  # Example 3: HYBRID Gate
+  # ---------------------------------------------------------------------------
+  # AI analyzes and provides recommendation, human makes final decision
+
+  hybrid_gate_example:
+    id: "QG-1.1B"
+    name: "Briefing Completeness Gate"
+    description: "AI analyzes briefing completeness, human validates before kick-off"
+    phase: 1
+    placement: "transition"
+    type: "hybrid"
+    severity: "blocking"
+
+    criteria:
+      - check: "Overall completeness score"
+        type: "threshold"
+        field: "completude_percentual"
+        value: 60
+        operator: ">="
+        weight: 0.4
+
+      - check: "Critical sections completeness"
+        type: "threshold"
+        field: "critical_sections_score"
+        value: 50
+        operator: ">="
+        weight: 0.3
+
+      - check: "No critical information missing"
+        type: "count"
+        field: "critical_missing_items"
+        min_count: 0
+        max_count: 0
+        weight: 0.3
+
+    thresholds:
+      pass: 0.60
+      review: 0.40
+      fail: 0.40
+
+    executor:
+      type: "hybrid"
+      ai_agent: "briefing-analyzer"
+      human_review: "Account Manager"
+      timeout_minutes: 120
+
+    pass_action:
+      - "Status -> Kick-off Agendado"
+      - "Notify AM to schedule kick-off"
+      - "Generate kick-off agenda"
+
+    fail_action:
+      - "Status -> Bloqueado - Briefing Incompleto"
+      - "Generate client questions email template"
+      - "Create follow-up task for AM"
+      - "Set SLA reminder for 48h"
+
+  # ---------------------------------------------------------------------------
+  # Example 4: EXTERNAL Gate
+  # ---------------------------------------------------------------------------
+  # Validation from external system (third-party API, webhook)
+
+  external_gate_example:
+    id: "QG-5.1"
+    name: "Payment Verification Gate"
+    description: "External payment gateway verification before order processing"
+    phase: 5
+    placement: "entry"
+    type: "external"
+    severity: "blocking"
+
+    criteria:
+      - check: "Payment status confirmed"
+        type: "enum"
+        field: "payment_gateway_status"
+        allowed_values: ["CONFIRMED", "SETTLED"]
+        weight: 0.6
+
+      - check: "Transaction amount matches"
+        type: "threshold"
+        field: "amount_match_score"
+        value: 1.0
+        operator: "=="
+        weight: 0.4
+
+    thresholds:
+      pass: 1.0
+      review: 0.6
+      fail: 0.6
+
+    executor:
+      type: "external"
+      webhook_url: "https://api.payment-gateway.com/verify"
+      timeout_minutes: 15
+      max_retries: 5
+
+    pass_action:
+      - "Status -> Payment Confirmed"
+      - "Release order for fulfillment"
+      - "Send payment confirmation to customer"
+
+    fail_action:
+      - "Status -> Payment Pending"
+      - "Notify finance team"
+      - "Send payment reminder to customer"
+      - "Schedule retry in 24h"
+
+    sla:
+      enabled: true
+      resolution_deadline_hours: 72
+      escalation:
+        - level: 1
+          after_hours: 24
+          notify: ["@finance_team"]
+        - level: 2
+          after_hours: 48
+          notify: ["@finance_manager"]
+        - level: 3
+          after_hours: 72
+          notify: ["@cfo"]
+          action: "cancel_order"
+
+# =============================================================================
+# CRITERIA TYPE REFERENCE
+# =============================================================================
+
+_criteria_reference:
+
+  threshold:
+    description: "Numeric comparison against a target value"
+    fields:
+      type: "threshold"
+      field: "The metric/field name to evaluate"
+      value: "Target numeric value"
+      operator: "Comparison operator (>=, <=, >, <, ==, !=)"
+      weight: "Importance weight 0.0-1.0"
+    examples:
+      - "Score >= 60%"
+      - "Error count < 5"
+      - "Completion rate > 80%"
+
+  presence:
+    description: "Verify existence or absence of something"
+    fields:
+      type: "presence"
+      field: "The artifact/field to check"
+      must_exist: "true (must exist) or false (must NOT exist)"
+      weight: "Importance weight 0.0-1.0"
+    examples:
+      - "Document must exist"
+      - "Error log must NOT exist"
+      - "Approval signature present"
+
+  enum:
+    description: "Value must be one of allowed options"
+    fields:
+      type: "enum"
+      field: "The field containing the value"
+      allowed_values: "Array of valid values"
+      weight: "Importance weight 0.0-1.0"
+    examples:
+      - "Status in [APPROVED, REVIEWED]"
+      - "Priority is HIGH or CRITICAL"
+      - "Type matches expected category"
+
+  count:
+    description: "Count items in a collection"
+    fields:
+      type: "count"
+      field: "The array/collection to count"
+      min_count: "Minimum required items"
+      max_count: "Maximum allowed items (null = unlimited)"
+      weight: "Importance weight 0.0-1.0"
+    examples:
+      - "At least 3 reviewers"
+      - "No more than 2 blockers"
+      - "Exactly 5 required documents"
+
+# =============================================================================
+# USAGE NOTES
+# =============================================================================
+
+_usage_notes:
+  - note: "Gate ID format should be consistent across the squad (QG-X.Y or QG-NAME-NNN)"
+  - note: "Weights should sum to 1.0 for predictable scoring"
+  - note: "Set 'required: true' on criteria that must pass regardless of score"
+  - note: "Hybrid gates are recommended for critical decisions"
+  - note: "Always define both pass_action and fail_action"
+  - note: "SLA configuration is optional but recommended for blocking gates"
+  - note: "External gates should have higher max_retries for network resilience"
+  - note: "Document the rationale for threshold values in the description"

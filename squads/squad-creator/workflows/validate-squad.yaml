@@ -1,0 +1,582 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# VALIDATE-SQUAD WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+# Version: 1.0.0
+# Purpose: Orchestrate squad validation through defined phases
+# Script: scripts/validate-squad.sh (deterministic execution)
+# Task: tasks/validate-squad.md (detailed documentation)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflow:
+  id: validate-squad
+  name: "Squad Validation Workflow"
+  version: "1.0.0"
+  description: |
+    Tiered, context-aware validation of AIOS squads.
+    Combines deterministic script checks with AI-powered quality assessment.
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # INPUTS
+  # ─────────────────────────────────────────────────────────────────────────────
+  inputs:
+    squad_name:
+      type: string
+      required: true
+      description: "Name of squad to validate"
+      examples: ["squad-creator", "my-new-squad"]
+
+    squad_path:
+      type: string
+      required: false
+      description: "Override path (default: squads/{squad_name})"
+
+    type_override:
+      type: enum
+      required: false
+      values: ["expert", "pipeline", "hybrid"]
+      description: "Force squad type detection"
+
+    verbose:
+      type: boolean
+      default: false
+      description: "Show all checks, not just failures"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # OUTPUTS
+  # ─────────────────────────────────────────────────────────────────────────────
+  outputs:
+    result:
+      type: enum
+      values: ["PASS", "CONDITIONAL", "FAIL"]
+      description: "Validation result"
+
+    score:
+      type: number
+      range: [0, 10]
+      description: "Quality score"
+
+    squad_type:
+      type: enum
+      values: ["expert", "pipeline", "hybrid"]
+      description: "Detected or overridden squad type"
+
+    report_path:
+      type: string
+      description: "Path to detailed validation report"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # EXECUTION MODE
+  # ─────────────────────────────────────────────────────────────────────────────
+  execution:
+    mode: "hybrid"  # Script + AI
+    script: "scripts/validate-squad.sh"
+    task: "tasks/validate-squad.md"
+
+    strategy: |
+      1. Script runs deterministic checks (Tier 1, Security, Cross-refs)
+      2. AI evaluates qualitative dimensions (Tier 3, Tier 4)
+      3. Combined score determines result
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASES
+  # ─────────────────────────────────────────────────────────────────────────────
+  phases:
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 0: TYPE DETECTION
+    # ═══════════════════════════════════════════════════════════════════════════
+    - phase: 0
+      name: "Type Detection"
+      description: "Detect squad type (Expert/Pipeline/Hybrid)"
+      executor: "script"
+      duration: "< 5 seconds"
+      blocking: false
+
+      actions:
+        - action: "Count agents"
+          command: "find {squad_path}/agents -name '*.md' | wc -l"
+
+        - action: "Check voice_dna presence"
+          command: "grep -r 'voice_dna' {squad_path}/agents | wc -l"
+
+        - action: "Check workflow presence"
+          command: "find {squad_path}/workflows -name '*.yaml' | wc -l"
+
+        - action: "Check heuristics presence"
+          command: "grep -rE '(PV_|SC_|heuristic)' {squad_path} | wc -l"
+
+      output:
+        field: "squad_type"
+        logic: |
+          expert_score = agents >= 5 ? 2 : 0 + voice_dna > 0 ? 3 : 0
+          pipeline_score = workflows > 0 ? 3 : 0 + tasks > agents*3 ? 2 : 0
+          hybrid_score = heuristics > 0 ? 3 : 0
+          return max(expert, pipeline, hybrid)
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 1: STRUCTURE (TIER 1)
+    # ═══════════════════════════════════════════════════════════════════════════
+    - phase: 1
+      name: "Structure Validation"
+      description: "Validate basic structure and configuration"
+      executor: "script"
+      duration: "< 30 seconds"
+      blocking: true
+
+      checks:
+        - id: "T1-CFG-001"
+          name: "config.yaml exists"
+          command: "test -f {squad_path}/config.yaml"
+          severity: "BLOCKING"
+
+        - id: "T1-CFG-002"
+          name: "config.yaml valid YAML"
+          command: "python3 -c \"import yaml; yaml.safe_load(open('{squad_path}/config.yaml'))\""
+          severity: "BLOCKING"
+
+        - id: "T1-CFG-003"
+          name: "Required fields present"
+          command: "Check name, version, description, entry_agent"
+          severity: "BLOCKING"
+
+        - id: "T1-ENT-001"
+          name: "Entry agent exists"
+          command: "test -f {squad_path}/agents/{entry_agent}.md"
+          severity: "BLOCKING"
+
+        - id: "T1-ENT-002"
+          name: "Entry agent activatable"
+          command: "grep -q 'activation-instructions' {entry_agent_path}"
+          severity: "BLOCKING"
+
+        - id: "T1-DIR-001"
+          name: "agents/ directory exists"
+          command: "test -d {squad_path}/agents"
+          severity: "BLOCKING"
+
+      gate:
+        id: "GATE-T1"
+        name: "Structure Gate"
+        type: "automated"
+        severity: "blocking"
+        pass_condition: "all checks pass"
+        fail_action: "ABORT validation"
+
+      output:
+        tier1_pass: "count of passed checks"
+        tier1_fail: "count of failed checks"
+        blocking_issues: "list of failures"
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 2: SECURITY SCAN
+    # ═══════════════════════════════════════════════════════════════════════════
+    - phase: 2
+      name: "Security Scan"
+      description: "Scan for secrets, credentials, and vulnerabilities"
+      executor: "script"
+      duration: "< 30 seconds"
+      blocking: true
+
+      categories:
+        - category: "API Keys & Tokens"
+          checks: ["SEC-001", "SEC-002", "SEC-003", "SEC-004"]
+          severity: "BLOCKING"
+
+        - category: "Cloud Credentials"
+          checks: ["SEC-005", "SEC-006", "SEC-007", "SEC-008"]
+          severity: "BLOCKING"
+
+        - category: "Private Keys"
+          checks: ["SEC-009", "SEC-010"]
+          severity: "BLOCKING"
+
+        - category: "Database URLs"
+          checks: ["SEC-011", "SEC-012"]
+          severity: "BLOCKING"
+
+        - category: "Sensitive Files"
+          checks: ["SEC-013", "SEC-014", "SEC-015"]
+          severity: "BLOCKING"
+
+        - category: "Code Vulnerabilities"
+          checks: ["SEC-016", "SEC-017", "SEC-018"]
+          severity: "WARNING"
+
+      gate:
+        id: "GATE-SEC"
+        name: "Security Gate"
+        type: "automated"
+        severity: "blocking"
+        pass_condition: "0 HIGH severity findings"
+        fail_action: "VETO (V5)"
+
+      output:
+        security_pass: "count"
+        security_fail: "count"
+        security_findings: "list"
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 3: COVERAGE (TIER 2)
+    # ═══════════════════════════════════════════════════════════════════════════
+    - phase: 3
+      name: "Coverage Analysis"
+      description: "Analyze coverage ratios and detect orphans"
+      executor: "script"
+      duration: "< 30 seconds"
+      blocking: false
+
+      checks:
+        - id: "T2-COV-001"
+          name: "Checklist coverage"
+          metric: "checklists / complex_tasks"
+          threshold: ">= 0.30"
+          severity: "WARNING"
+
+        - id: "T2-ORP-001"
+          name: "Orphan tasks"
+          metric: "unreferenced tasks"
+          threshold: "<= 2"
+          severity: "WARNING"
+
+        - id: "T2-DAT-001"
+          name: "Data file usage"
+          metric: "referenced / total data files"
+          threshold: ">= 0.50"
+          severity: "WARNING"
+
+      output:
+        tier2_pass: "count"
+        tier2_warn: "count"
+        coverage_metrics:
+          checklist_coverage: "percentage"
+          orphan_count: "number"
+          data_usage: "percentage"
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 4: CROSS-REFERENCE VALIDATION
+    # ═══════════════════════════════════════════════════════════════════════════
+    - phase: 4
+      name: "Cross-Reference Validation"
+      description: "Validate internal references and dependencies"
+      executor: "script"
+      duration: "< 30 seconds"
+      blocking: true
+
+      checks:
+        - id: "XREF-001"
+          name: "Handoff targets exist"
+          severity: "BLOCKING"
+
+        - id: "XREF-002"
+          name: "Task references valid"
+          severity: "BLOCKING"
+
+        - id: "XREF-003"
+          name: "Template references valid"
+          severity: "WARNING"
+
+        - id: "XREF-004"
+          name: "Checklist references valid"
+          severity: "WARNING"
+
+        - id: "XREF-005"
+          name: "Data file references valid"
+          severity: "WARNING"
+
+      gate:
+        id: "GATE-XREF"
+        name: "Cross-Reference Gate"
+        type: "automated"
+        severity: "blocking"
+        pass_condition: "no broken BLOCKING references"
+        fail_action: "VETO (V6)"
+
+      output:
+        xref_pass: "count"
+        xref_fail: "count"
+        broken_references: "list"
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 5: QUALITY ASSESSMENT (TIER 3)
+    # ═══════════════════════════════════════════════════════════════════════════
+    - phase: 5
+      name: "Quality Assessment"
+      description: "AI-powered quality evaluation"
+      executor: "ai"
+      duration: "< 2 minutes"
+      blocking: false
+
+      dimensions:
+        - dimension: "Prompt Quality"
+          weight: 0.25
+          evaluator: "ai"
+          criteria:
+            - "Explicit input/output examples"
+            - "Anti-patterns documented"
+            - "Measurable success criteria"
+            - "Step-by-step instructions"
+            - "No vague language"
+
+        - dimension: "Pipeline Coherence"
+          weight: 0.25
+          evaluator: "ai"
+          criteria:
+            - "Output→Input chain valid"
+            - "No sequence collisions"
+            - "Checkpoints at critical points"
+            - "Failure handling defined"
+            - "Dependencies explicit"
+
+        - dimension: "Checklist Actionability"
+          weight: 0.25
+          evaluator: "ai"
+          criteria:
+            - "Items measurable"
+            - "Scoring system present"
+            - "Pass/fail thresholds"
+            - "Auto-correction guidance"
+            - "Edge cases covered"
+
+        - dimension: "Documentation"
+          weight: 0.25
+          evaluator: "ai"
+          criteria:
+            - "README explains purpose"
+            - "Getting started guide"
+            - "Command examples"
+            - "Changelog maintained"
+
+      output:
+        tier3_score: "0-10"
+        dimension_scores:
+          prompt_quality: "0-10"
+          pipeline_coherence: "0-10"
+          checklist_actionability: "0-10"
+          documentation: "0-10"
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 6: CONTEXTUAL VALIDATION (TIER 4)
+    # ═══════════════════════════════════════════════════════════════════════════
+    - phase: 6
+      name: "Contextual Validation"
+      description: "Type-specific validation based on detected squad type"
+      executor: "ai"
+      duration: "< 1 minute"
+      blocking: false
+
+      conditional_checks:
+        expert:
+          - check: "voice_dna in all agents"
+            required: true
+          - check: "objection_algorithms present"
+            required: true
+          - check: "output_examples (3+)"
+            required: true
+          - check: "tier_organization"
+            required: true
+
+        pipeline:
+          - check: "workflow_definition"
+            required: true
+          - check: "phase_checkpoints"
+            required: true
+          - check: "orchestrator_completeness"
+            required: true
+          - check: "automation_script (if 8+ phases)"
+            required: "conditional"
+
+        hybrid:
+          - check: "persona_profile"
+            required: true
+          - check: "behavioral_states"
+            required: true
+          - check: "heuristic_validation"
+            required: true
+          - check: "task_anatomy_8_fields"
+            required: true
+
+      output:
+        tier4_score: "0-10"
+        type_specific_checks: "list"
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 7: VETO CHECK
+    # ═══════════════════════════════════════════════════════════════════════════
+    - phase: 7
+      name: "Veto Check"
+      description: "Check for veto conditions that override scores"
+      executor: "script"
+      duration: "< 5 seconds"
+      blocking: true
+
+      veto_conditions:
+        universal:
+          - id: "V1"
+            condition: "No entry agent defined"
+          - id: "V2"
+            condition: "Entry agent cannot activate"
+          - id: "V3"
+            condition: ">20% missing references"
+          - id: "V4"
+            condition: "config.yaml invalid"
+          - id: "V5"
+            condition: "Security issue detected"
+          - id: "V6"
+            condition: "Critical cross-reference broken"
+
+        expert:
+          - id: "VE1"
+            condition: "Zero agents with voice_dna"
+          - id: "VE2"
+            condition: "No Tier 0 diagnosis"
+
+        pipeline:
+          - id: "VP1"
+            condition: "Sequence collisions"
+          - id: "VP2"
+            condition: "Broken output chain"
+          - id: "VP3"
+            condition: "No quality gate"
+
+        hybrid:
+          - id: "VH1"
+            condition: "No heuristic validation"
+          - id: "VH2"
+            condition: "No fallback behavior"
+
+      output:
+        veto_triggered: "boolean"
+        veto_id: "string or null"
+        veto_message: "string or null"
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 8: SCORE CALCULATION & REPORT
+    # ═══════════════════════════════════════════════════════════════════════════
+    - phase: 8
+      name: "Score Calculation & Report"
+      description: "Calculate final score and generate report"
+      executor: "script"
+      duration: "< 10 seconds"
+      blocking: false
+
+      calculation:
+        formula: "(tier3_score × 0.80) + (tier4_score × 0.20)"
+        adjustments:
+          - "Deduct 1.5 per blocking failure"
+          - "Deduct 0.3 per warning"
+          - "Clamp to 0-10 range"
+
+      thresholds:
+        pass: 7.0
+        conditional: 5.0
+        fail: 5.0
+
+      result_determination:
+        - condition: "veto_triggered == true"
+          result: "FAIL"
+        - condition: "score >= 7.0 AND blocking_issues == 0"
+          result: "PASS"
+        - condition: "score >= 5.0 AND blocking_issues == 0"
+          result: "CONDITIONAL"
+        - condition: "default"
+          result: "FAIL"
+
+      output:
+        final_score: "0-10"
+        result: "PASS | CONDITIONAL | FAIL"
+        report_path: "{squad_path}/docs/validation-report-{date}.md"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # CHECKPOINTS
+  # ─────────────────────────────────────────────────────────────────────────────
+  checkpoints:
+    - checkpoint: "After Phase 1"
+      gate: "GATE-T1"
+      action_on_fail: "ABORT"
+      message: "Structure validation failed"
+
+    - checkpoint: "After Phase 2"
+      gate: "GATE-SEC"
+      action_on_fail: "ABORT"
+      message: "Security scan failed"
+
+    - checkpoint: "After Phase 4"
+      gate: "GATE-XREF"
+      action_on_fail: "ABORT"
+      message: "Cross-reference validation failed"
+
+    - checkpoint: "After Phase 7"
+      gate: "VETO-CHECK"
+      action_on_fail: "FAIL"
+      message: "Veto condition triggered"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # FAILURE HANDLING
+  # ─────────────────────────────────────────────────────────────────────────────
+  failure_handling:
+    on_blocking_failure:
+      - "Log failure with details"
+      - "Generate partial report"
+      - "Exit with code 1"
+
+    on_veto:
+      - "Log veto condition"
+      - "Override any passing score"
+      - "Generate report with veto explanation"
+      - "Exit with code 1"
+
+    on_script_error:
+      - "Log error"
+      - "Exit with code 2"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # USAGE
+  # ─────────────────────────────────────────────────────────────────────────────
+  usage:
+    cli:
+      - command: "./scripts/validate-squad.sh squad-creator"
+        description: "Run deterministic checks"
+
+      - command: "./scripts/validate-squad.sh squad-creator --verbose"
+        description: "Verbose output"
+
+      - command: "./scripts/validate-squad.sh squad-creator --json"
+        description: "JSON output for CI/CD"
+
+    claude:
+      - command: "*validate-squad squad-creator"
+        description: "Full validation with AI assessment"
+
+      - command: "*validate-squad squad-creator --type=expert"
+        description: "Force expert type validation"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # INTEGRATION
+  # ─────────────────────────────────────────────────────────────────────────────
+  integration:
+    triggered_by:
+      - task: "qa-after-creation"
+        auto: true
+      - task: "create-squad"
+        auto: true
+      - command: "*validate-squad"
+        manual: true
+
+    triggers:
+      on_pass:
+        - "Mark squad as validated"
+        - "Update squad-registry.yaml"
+
+      on_fail:
+        - "Notify of issues"
+        - "Offer fix-issues task"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # METADATA
+  # ─────────────────────────────────────────────────────────────────────────────
+  metadata:
+    created: "2026-02-01"
+    author: "squad-creator"
+    references:
+      - "tasks/validate-squad.md"
+      - "checklists/squad-checklist.md"
+      - "data/squad-type-definitions.yaml"

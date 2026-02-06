@@ -1,0 +1,25 @@
+{
+  "title": "Congressional Testimony - May 16, 2023",
+  "url": "https://www.judiciary.senate.gov/imo/media/doc/2023-05-16%20-%20Bio%20&%20Testimony%20-%20Altman.pdf",
+  "author": null,
+  "creator": null,
+  "created_at": null,
+  "modified_at": null,
+  "language": "en",
+  "tags": [],
+  "source_type": "pdf",
+  "ocr_performed": false,
+  "quality": {
+    "score": null,
+    "acceptable": false,
+    "density_per_page": null,
+    "ocr_performed": false
+  },
+  "chapters": [
+    {
+      "title": "Introduction",
+      "index": 1,
+      "length": 479
+    }
+  ]
+}

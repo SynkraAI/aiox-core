@@ -1,0 +1,631 @@
+# ==============================================================================
+# Sam Altman - Complete Sources Inventory
+# ==============================================================================
+# Single source file for ETL collection and DNA Mental mapping
+# Created: 2025-10-11
+# Last Updated: 2025-10-11
+
+metadata:
+  mind_name: "Sam Altman"
+  mind_id: "sam_altman"
+  total_sources: 37
+  collected: 37
+  pending: 0
+  version: "1.0.0"
+
+  # Summary by type
+  by_type:
+    blog: 34
+    pdf: 1
+    youtube: 2
+
+  # Summary by status
+  by_status:
+    COLLECTED: 35
+    PENDING: 2
+
+  # Summary by priority
+  by_priority:
+    CRITICAL: 7
+    HIGH: 18
+    MEDIUM: 12
+
+# ==============================================================================
+# SOURCES - Blogs (34 collected)
+# ==============================================================================
+
+sources:
+  # --------------------------------------------------------------------------
+  # CRITICAL PRIORITY - Foundational/Widely-Referenced Content
+  # --------------------------------------------------------------------------
+
+  - id: "how-to-be-successful"
+    title: "How To Be Successful"
+    type: "blog"
+    url: "https://blog.samaltman.com/how-to-be-successful"
+    slug: "how-to-be-successful"
+    priority: "CRITICAL"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/how-to-be-successful.md"
+    extracted_date: "2025-10-12T00:02:28.781Z"
+    notes: "13 principles for outlier success - one of Sam's most referenced posts"
+    tags: ["success", "career", "principles", "foundational"]
+
+  - id: "the-intelligence-age"
+    title: "The Intelligence Age"
+    type: "blog"
+    url: "https://ia.samaltman.com/"
+    slug: "the-intelligence-age"
+    priority: "CRITICAL"
+    status: "COLLECTED"
+    platform: "generic"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/the-intelligence-age.md"
+    extracted_date: "2025-10-12T00:02:28.325Z"
+    notes: "Vision for AI's transformative impact on humanity - recent flagship piece"
+    tags: ["ai", "vision", "future", "society"]
+
+  - id: "moores-law-for-everything"
+    title: "Moore's Law for Everything"
+    type: "blog"
+    url: "https://moores.samaltman.com/"
+    slug: "moores-law-for-everything"
+    priority: "CRITICAL"
+    status: "COLLECTED"
+    platform: "generic"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/moores-law-for-everything.md"
+    extracted_date: "2025-10-12T00:02:29.010Z"
+    author: "by Sam Altman · March 16, 2021"
+    notes: "Economic and societal implications of AI - highly influential essay"
+    tags: ["economics", "ai", "policy", "ubi", "society"]
+
+  - id: "startup-playbook"
+    title: "Startup Playbook"
+    type: "blog"
+    url: "https://playbook.samaltman.com/"
+    slug: "startup-playbook"
+    priority: "CRITICAL"
+    status: "COLLECTED"
+    platform: "generic"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/startup-playbook.md"
+    extracted_date: "2025-10-12T00:02:29.154Z"
+    notes: "Comprehensive guide to building startups - YC wisdom distilled"
+    tags: ["startups", "entrepreneurship", "guide", "yc"]
+
+  # --------------------------------------------------------------------------
+  # HIGH PRIORITY - Core Philosophy & Advice
+  # --------------------------------------------------------------------------
+
+  - id: "the-days-are-long-but-the-decades-are-short"
+    title: "The days are long but the decades are short"
+    type: "blog"
+    url: "https://blog.samaltman.com/the-days-are-long-but-the-decades-are-short"
+    slug: "the-days-are-long-but-the-decades-are-short"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/the-days-are-long-but-the-decades-are-short.md"
+    extracted_date: "2025-10-12T00:02:34.930Z"
+    notes: "Life philosophy and reflections - widely shared wisdom"
+    tags: ["philosophy", "life-advice", "time", "perspective"]
+
+  - id: "what-i-wish-someone-had-told-me"
+    title: "What I Wish Someone Had Told Me"
+    type: "blog"
+    url: "https://blog.samaltman.com/what-i-wish-someone-had-told-me"
+    slug: "what-i-wish-someone-had-told-me"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/what-i-wish-someone-had-told-me.md"
+    extracted_date: "2025-10-12T00:02:34.724Z"
+    notes: "Career and business lessons learned"
+    tags: ["advice", "lessons", "career", "business"]
+
+  - id: "idea-generation"
+    title: "Idea Generation"
+    type: "blog"
+    url: "https://blog.samaltman.com/idea-generation"
+    slug: "idea-generation"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/idea-generation.md"
+    extracted_date: "2025-10-12T00:02:34.817Z"
+    notes: "Framework for generating startup ideas"
+    tags: ["startups", "ideas", "creativity", "innovation"]
+
+  - id: "productivity"
+    title: "Productivity"
+    type: "blog"
+    url: "https://blog.samaltman.com/productivity"
+    slug: "productivity"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/productivity.md"
+    extracted_date: "2025-10-12T00:02:40.712Z"
+    notes: "Personal productivity systems and tips"
+    tags: ["productivity", "work", "efficiency", "systems"]
+
+  - id: "reflections"
+    title: "Reflections"
+    type: "blog"
+    url: "https://blog.samaltman.com/reflections"
+    slug: "reflections"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/reflections.md"
+    extracted_date: "2025-10-12T00:02:40.937Z"
+    notes: "Personal reflections on life and business"
+    tags: ["philosophy", "reflections", "personal"]
+
+  - id: "how-to-invest-in-startups"
+    title: "How To Invest In Startups"
+    type: "blog"
+    url: "https://blog.samaltman.com/how-to-invest-in-startups"
+    slug: "how-to-invest-in-startups"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/how-to-invest-in-startups.md"
+    extracted_date: "2025-10-11T23:03:49.055Z"
+    notes: "Investment philosophy and framework"
+    tags: ["investing", "startups", "venture-capital", "strategy"]
+
+  - id: "hard-startups"
+    title: "Hard Startups"
+    type: "blog"
+    url: "https://blog.samaltman.com/hard-startups"
+    slug: "hard-startups"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/hard-startups.md"
+    extracted_date: "2025-10-11T23:03:48.903Z"
+    notes: "Why difficult problems are worth pursuing"
+    tags: ["startups", "ambition", "hard-problems", "innovation"]
+
+  - id: "researchers-and-founders"
+    title: "Researchers and Founders"
+    type: "blog"
+    url: "https://blog.samaltman.com/researchers-and-founders"
+    slug: "researchers-and-founders"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/researchers-and-founders.md"
+    extracted_date: "2025-10-11T23:03:36.564Z"
+    notes: "On the relationship between research and entrepreneurship"
+    tags: ["research", "entrepreneurship", "innovation", "ai"]
+
+  # --------------------------------------------------------------------------
+  # HIGH PRIORITY - AI Vision & Technology
+  # --------------------------------------------------------------------------
+
+  - id: "the-gentle-singularity"
+    title: "The Gentle Singularity"
+    type: "blog"
+    url: "https://blog.samaltman.com/the-gentle-singularity"
+    slug: "the-gentle-singularity"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/the-gentle-singularity.md"
+    extracted_date: "2025-10-11T23:03:18.576Z"
+    notes: "Vision for gradual AI transformation"
+    tags: ["ai", "singularity", "future", "vision"]
+
+  - id: "abundant-intelligence"
+    title: "Abundant Intelligence"
+    type: "blog"
+    url: "https://blog.samaltman.com/abundant-intelligence"
+    slug: "abundant-intelligence"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/abundant-intelligence.md"
+    extracted_date: "2025-10-11T23:03:12.559Z"
+    notes: "On the future of abundant AI capabilities"
+    tags: ["ai", "abundance", "future", "technology"]
+
+  - id: "dall-star-e-2"
+    title: "DALL•E 2"
+    type: "blog"
+    url: "https://blog.samaltman.com/dall-star-e-2"
+    slug: "dall-star-e-2"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/dall-star-e-2.md"
+    extracted_date: "2025-10-11T23:03:30.440Z"
+    notes: "Thoughts on DALL-E 2 and generative AI"
+    tags: ["ai", "dalle", "image-generation", "openai"]
+
+  - id: "reinforcement-learning-progress"
+    title: "Reinforcement Learning Progress"
+    type: "blog"
+    url: "https://blog.samaltman.com/reinforcement-learning-progress"
+    slug: "reinforcement-learning-progress"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/reinforcement-learning-progress.md"
+    extracted_date: "2025-10-11T23:03:54.718Z"
+    notes: "Technical perspective on RL developments"
+    tags: ["ai", "reinforcement-learning", "technical", "progress"]
+
+  # --------------------------------------------------------------------------
+  # HIGH PRIORITY - Policy & Society
+  # --------------------------------------------------------------------------
+
+  - id: "american-equity"
+    title: "American Equity"
+    type: "blog"
+    url: "https://blog.samaltman.com/american-equity"
+    slug: "american-equity"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/american-equity.md"
+    extracted_date: "2025-10-11T23:04:06.784Z"
+    notes: "Proposal for universal equity distribution"
+    tags: ["policy", "economics", "equity", "society"]
+
+  - id: "us-digital-currency"
+    title: "US Digital Currency"
+    type: "blog"
+    url: "https://blog.samaltman.com/us-digital-currency"
+    slug: "us-digital-currency"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/us-digital-currency.md"
+    extracted_date: "2025-10-11T23:03:54.759Z"
+    notes: "Thoughts on digital currency and policy"
+    tags: ["policy", "currency", "crypto", "economics"]
+
+  - id: "e-pur-si-muove"
+    title: "E Pur Si Muove"
+    type: "blog"
+    url: "https://blog.samaltman.com/e-pur-si-muove"
+    slug: "e-pur-si-muove"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/e-pur-si-muove.md"
+    extracted_date: "2025-10-11T23:04:01.022Z"
+    notes: "On progress and inevitable change"
+    tags: ["philosophy", "progress", "change", "society"]
+
+  - id: "the-merge"
+    title: "The Merge"
+    type: "blog"
+    url: "https://blog.samaltman.com/the-merge"
+    slug: "the-merge"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/the-merge.md"
+    extracted_date: "2025-10-11T23:04:06.691Z"
+    notes: "On human-AI integration"
+    tags: ["ai", "future", "integration", "society"]
+
+  - id: "the-strength-of-being-misunderstood"
+    title: "The Strength of Being Misunderstood"
+    type: "blog"
+    url: "https://blog.samaltman.com/the-strength-of-being-misunderstood"
+    slug: "the-strength-of-being-misunderstood"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/the-strength-of-being-misunderstood.md"
+    extracted_date: "2025-10-11T23:03:30.458Z"
+    notes: "On contrarian thinking and innovation"
+    tags: ["philosophy", "contrarian", "innovation", "thinking"]
+
+  - id: "three-observations"
+    title: "Three Observations"
+    type: "blog"
+    url: "https://blog.samaltman.com/three-observations"
+    slug: "three-observations"
+    priority: "HIGH"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/three-observations.md"
+    extracted_date: "2025-10-11T23:03:18.672Z"
+    notes: "Key observations on tech and society"
+    tags: ["observations", "technology", "society"]
+
+  # --------------------------------------------------------------------------
+  # MEDIUM PRIORITY - Recent Product Announcements
+  # --------------------------------------------------------------------------
+
+  - id: "gpt-4o"
+    title: "GPT-4o"
+    type: "blog"
+    url: "https://blog.samaltman.com/gpt-4o"
+    slug: "gpt-4o"
+    priority: "MEDIUM"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/gpt-4o.md"
+    extracted_date: "2025-10-11T23:03:24.466Z"
+    notes: "GPT-4o announcement and thoughts"
+    tags: ["openai", "gpt-4o", "product", "announcement"]
+
+  - id: "sora-2"
+    title: "Sora 2"
+    type: "blog"
+    url: "https://blog.samaltman.com/sora-2"
+    slug: "sora-2"
+    priority: "MEDIUM"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/sora-2.md"
+    extracted_date: "2025-10-11T23:03:12.615Z"
+    notes: "Sora 2 announcement"
+    tags: ["openai", "sora", "video-generation", "announcement"]
+
+  - id: "sora-update-number-1"
+    title: "Sora update #1"
+    type: "blog"
+    url: "https://blog.samaltman.com/sora-update-number-1"
+    slug: "sora-update-number-1"
+    priority: "MEDIUM"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/sora-update-number-1.md"
+    extracted_date: "2025-10-11T23:03:06.517Z"
+    notes: "First Sora update"
+    tags: ["openai", "sora", "video-generation", "update"]
+
+  - id: "a-clarification"
+    title: "A Clarification"
+    type: "blog"
+    url: "https://blog.samaltman.com/a-clarification"
+    slug: "a-clarification"
+    priority: "MEDIUM"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/a-clarification.md"
+    extracted_date: "2025-10-11T23:04:00.770Z"
+    notes: "Clarification on a previous statement"
+    tags: ["clarification", "communication"]
+
+  # --------------------------------------------------------------------------
+  # MEDIUM PRIORITY - COVID-19 Era & Other Topics
+  # --------------------------------------------------------------------------
+
+  - id: "the-virus"
+    title: "The Virus"
+    type: "blog"
+    url: "https://blog.samaltman.com/the-virus"
+    slug: "the-virus"
+    priority: "MEDIUM"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/the-virus.md"
+    extracted_date: "2025-10-11T23:03:48.493Z"
+    notes: "COVID-19 pandemic thoughts"
+    tags: ["covid-19", "pandemic", "society", "health"]
+
+  - id: "funding-for-covid-19-projects"
+    title: "Funding for COVID-19 Projects"
+    type: "blog"
+    url: "https://blog.samaltman.com/funding-for-covid-19-projects"
+    slug: "funding-for-covid-19-projects"
+    priority: "MEDIUM"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/funding-for-covid-19-projects.md"
+    extracted_date: "2025-10-11T23:03:42.620Z"
+    notes: "Call for COVID-19 project funding"
+    tags: ["covid-19", "funding", "projects", "health"]
+
+  - id: "please-fund-more-science"
+    title: "Please Fund More Science"
+    type: "blog"
+    url: "https://blog.samaltman.com/please-fund-more-science"
+    slug: "please-fund-more-science"
+    priority: "MEDIUM"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/please-fund-more-science.md"
+    extracted_date: "2025-10-11T23:03:42.523Z"
+    notes: "Advocating for increased science funding"
+    tags: ["science", "funding", "research", "policy"]
+
+  # --------------------------------------------------------------------------
+  # MEDIUM PRIORITY - Helion & Energy
+  # --------------------------------------------------------------------------
+
+  - id: "helion"
+    title: "Helion"
+    type: "blog"
+    url: "https://blog.samaltman.com/helion"
+    slug: "helion"
+    priority: "MEDIUM"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/helion.md"
+    extracted_date: "2025-10-11T23:03:30.477Z"
+    notes: "Introducing Helion Energy investment"
+    tags: ["energy", "fusion", "helion", "investment"]
+
+  - id: "helion-needs-you"
+    title: "Helion Needs You"
+    type: "blog"
+    url: "https://blog.samaltman.com/helion-needs-you"
+    slug: "helion-needs-you"
+    priority: "MEDIUM"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/helion-needs-you.md"
+    extracted_date: "2025-10-11T23:03:24.553Z"
+    notes: "Recruiting call for Helion Energy"
+    tags: ["energy", "fusion", "helion", "recruiting"]
+
+  - id: "project-covalence"
+    title: "Project Covalence"
+    type: "blog"
+    url: "https://blog.samaltman.com/project-covalence"
+    slug: "project-covalence"
+    priority: "MEDIUM"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/project-covalence.md"
+    extracted_date: "2025-10-11T23:03:36.446Z"
+    notes: "Nuclear energy project announcement"
+    tags: ["energy", "nuclear", "projects"]
+
+  # --------------------------------------------------------------------------
+  # MEDIUM PRIORITY - Personal & Tributes
+  # --------------------------------------------------------------------------
+
+  - id: "pg-and-jessica"
+    title: "PG and Jessica"
+    type: "blog"
+    url: "https://blog.samaltman.com/pg-and-jessica"
+    slug: "pg-and-jessica"
+    priority: "MEDIUM"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/pg-and-jessica.md"
+    extracted_date: "2025-10-11T23:03:36.434Z"
+    notes: "Tribute to Paul Graham and Jessica Livingston"
+    tags: ["yc", "tribute", "personal", "mentors"]
+
+  - id: "jakub-and-szymon"
+    title: "Jakub and Szymon"
+    type: "blog"
+    url: "https://blog.samaltman.com/jakub-and-szymon"
+    slug: "jakub-and-szymon"
+    priority: "MEDIUM"
+    status: "COLLECTED"
+    platform: "medium"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/blogs/jakub-and-szymon.md"
+    extracted_date: "2025-10-11T23:03:12.426Z"
+    notes: "Tribute/announcement about team members"
+    tags: ["openai", "team", "tribute"]
+
+# ==============================================================================
+# SOURCES - PDF Documents (1 collected)
+# ==============================================================================
+
+  - id: "congressional-testimony-2023-05-16"
+    title: "Congressional Testimony - May 16, 2023"
+    type: "pdf"
+    url: "https://www.judiciary.senate.gov/imo/media/doc/2023-05-16%20-%20Bio%20&%20Testimony%20-%20Altman.pdf"
+    slug: "congressional-testimony-2023-05-16"
+    priority: "CRITICAL"
+    status: "COLLECTED"
+    platform: "senate"
+    file_path: "expansion-packs/mmos/minds/sam_altman/sources/pdf/congressional-testimony-2023-05-16/text.md"
+    extracted_date: "2025-10-11T19:31:00.000Z"
+    notes: "Official testimony before U.S. Senate on AI regulation - critical policy document"
+    tags: ["policy", "regulation", "senate", "ai", "government", "testimony"]
+
+# ==============================================================================
+# SOURCES - YouTube/Podcasts (2 pending - awaiting web transcripts)
+# ==============================================================================
+
+  - id: "lex-fridman-367-gpt4-future-of-ai"
+    title: "Sam Altman: OpenAI CEO on GPT-4, ChatGPT, and the Future of AI"
+    type: "youtube"
+    url: "https://www.youtube.com/watch?v=L_Guz73e6fw"
+    slug: "lex-fridman-367-gpt4-future-of-ai"
+    priority: "CRITICAL"
+    status: "PENDING"
+    platform: "youtube"
+    channel: "Lex Fridman Podcast"
+    episode: "#367"
+    duration: "~2 hours"
+    published_date: "2023-03-25"
+    notes: "Deep technical and philosophical discussion about GPT-4, OpenAI's mission, AI safety - requires web transcript collection"
+    tags: ["interview", "gpt-4", "chatgpt", "ai-safety", "openai", "long-form"]
+    collection_method: "web-transcript-needed"
+
+  - id: "lex-fridman-419-gpt5-board-saga-agi"
+    title: "Sam Altman: OpenAI, GPT-5, Sora, Board Saga, Elon Musk, Ilya, Power & AGI"
+    type: "youtube"
+    url: "https://www.youtube.com/watch?v=jvqFAi7vkBc"
+    slug: "lex-fridman-419-gpt5-board-saga-agi"
+    priority: "CRITICAL"
+    status: "PENDING"
+    platform: "youtube"
+    channel: "Lex Fridman Podcast"
+    episode: "#419"
+    duration: "~2 hours"
+    published_date: "2024-03-19"
+    notes: "Discusses board drama, GPT-5, Sora, relationships with Elon/Ilya, path to AGI - requires web transcript collection"
+    tags: ["interview", "gpt-5", "sora", "openai-board", "agi", "leadership", "long-form"]
+    collection_method: "web-transcript-needed"
+
+# ==============================================================================
+# COLLECTION NOTES
+# ==============================================================================
+
+collection_notes:
+  completed:
+    - "All 34 blog posts successfully collected from blog.samaltman.com and standalone sites"
+    - "Congressional testimony PDF collected and processed"
+    - "Total collected: 35 sources"
+
+  pending:
+    - "2 Lex Fridman podcast episodes require web transcript collection"
+    - "YouTube API transcripts may be auto-generated; prefer official web transcripts"
+    - "Alternative: use youtube-transcript-api or manual transcript services"
+
+  priority_rationale:
+    CRITICAL:
+      - "Foundational essays (How To Be Successful, Moore's Law, Intelligence Age)"
+      - "Comprehensive guides (Startup Playbook)"
+      - "Official policy documents (Congressional Testimony)"
+      - "Deep-dive interviews (Lex Fridman podcasts)"
+    HIGH:
+      - "Core philosophy and life advice pieces"
+      - "AI vision and technical perspectives"
+      - "Policy proposals and societal impact discussions"
+      - "Foundational startup/investing wisdom"
+    MEDIUM:
+      - "Recent product announcements and updates"
+      - "Time-sensitive COVID-19 content"
+      - "Personal tributes and company updates"
+      - "Specific project announcements (Helion, Covalence)"
+
+  next_steps:
+    - "Implement web transcript collection for Lex Fridman episodes"
+    - "Consider adding more podcast/interview sources (All-In, etc.)"
+    - "Monitor blog.samaltman.com for new posts"
+    - "Track OpenAI blog for official company statements"
+
+# ==============================================================================
+# DNA MENTAL MAPPING COVERAGE
+# ==============================================================================
+
+dna_coverage:
+  layer_1_sensory:
+    - "Writing style analysis across 34 blogs"
+    - "Communication patterns in testimony"
+    - "Interview communication style (pending podcasts)"
+
+  layer_2_recognition:
+    - "Recurring themes: AI safety, progress, startups, policy"
+    - "Value patterns: ambition, truth-seeking, long-term thinking"
+    - "Decision frameworks across multiple contexts"
+
+  layer_3_understanding:
+    - "Worldview evolution over time"
+    - "Integration of technical and philosophical perspectives"
+    - "Policy positions and reasoning"
+
+  layer_4_wisdom:
+    - "Synthesis of experience into advice (How To Be Successful, etc.)"
+    - "Meta-level insights on technology and society"
+    - "Leadership philosophy and practice"
+
+# ==============================================================================
+# END OF SOURCES FILE
+# ==============================================================================

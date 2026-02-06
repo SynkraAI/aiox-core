@@ -1,0 +1,305 @@
+# LIFE TIMELINE - Jesus Cristo
+# 3 Years of Public Ministry (27-30 AD)
+# Consolidated from temporal_context.yaml
+
+fases_vida:
+  fase_1_preparacao:
+    periodo: "27 AD (3 meses)"
+    local: "Judeia (Rio Jordão, Deserto)"
+    eventos_chave:
+      - "Batismo por João Batista (comissão divina: 'Este é meu Filho amado')"
+      - "Tentação no deserto (rejeição de messianismo político/material)"
+      - "Primeiros discípulos (João, André, Pedro, Filipe, Natanael)"
+    ensinamentos_fase: "Identidade divina revelada (privada), método messiânico definido (não força/poder)"
+    oposicao: "Nenhuma"
+    revelacao: "Filho de Deus (voz divina), não messias político (tentações)"
+
+  fase_2_galileia_inicial:
+    periodo: "27-28 AD (6-8 meses)"
+    local: "Galileia (base Cafarnaum), breve Jerusalém"
+    eventos_chave:
+      - "Primeiro milagre (Caná - água em vinho, nova aliança)"
+      - "Purificação Templo (confronto inicial autoridades)"
+      - "Nicodemos ('nascer de novo', João 3:16)"
+      - "Samaritana (água viva, adoração em espírito, revelação messiânica)"
+      - "Estabelecimento Cafarnaum ('Reino de Deus está próximo')"
+    ensinamentos_fase: "Reino presente e espiritual, inclusão marginalizados, nova aliança"
+    oposicao: "Curiosidade inicial, suspeita fariseus"
+    revelacao: "Sinais iniciais, diálogos pessoais (Nicodemos, samaritana)"
+
+  fase_3_galileia_plena:
+    periodo: "28-29 AD (12-15 meses)"
+    local: "Galileia (60% itinerante), viagens Jerusalém (festas)"
+    eventos_chave:
+      - "Chamado 12 Apóstolos (novo Israel, núcleo movimento)"
+      - "Sermão da Montanha (manifesto do Reino - Beatitudes, Pai Nosso, ética radical)"
+      - "Parábolas do Reino (Semeador, Joio, Mostarda, Fermento, Tesouro)"
+      - "Milagres autoridade (tempestade, leprosos, paralítico, Gadareno, filha Jairo)"
+      - "Controvérsias fariseus (sábado, pureza ritual, jejum)"
+      - "Alimentação 5000 (único milagre em 4 Evangelhos)"
+      - "Discurso Pão da Vida ('Eu sou o pão da vida' - crise discipulado)"
+      - "CONFISSÃO PEDRO: 'Tu és o Cristo, Filho do Deus vivo' (Cesareia Filipe)"
+      - "Primeira Predição Paixão (Messias sofredor, não triunfante)"
+      - "TRANSFIGURAÇÃO (confirmação divina, Moisés+Elias, glória futura)"
+    ensinamentos_fase: "Parábolas Reino (já/ainda não), identidade messiânica revelada aos 12, sofrimento vindouro"
+    oposicao: "Crescente - fariseus conspiram matar (Marcos 3:6), deserção discípulos (João 6)"
+    revelacao: "Pública (parábolas enigmáticas), privada (Messias sofredor aos 12)"
+    turning_point: "Cesareia Filipe - identidade messiânica confessada + predição Paixão"
+    progressao: "Popularidade máxima → crise (Pão da Vida) → confissão → caminho cruz"
+
+  fase_4_ministerio_tardio:
+    periodo: "29-30 AD (6-8 meses)"
+    local: "Jornada para Jerusalém (Pereia, Judeia, 'fixou o rosto')"
+    eventos_chave:
+      - "Segunda e Terceira Predições Paixão (detalhes crescentes)"
+      - "Envio 70 discípulos (missão expandida, 'vi Satanás cair como relâmpago')"
+      - "Parábolas Misericórdia (Bom Samaritano, Filho Pródigo, Ovelha/Moeda Perdida)"
+      - "Parábolas Inversão (Rico e Lázaro - advertência ricos indiferentes)"
+      - "Maria e Marta (contemplação > ativismo)"
+      - "RESSURREIÇÃO LÁZARO (7º sinal João, maior milagre, 'Eu sou a ressurreição e a vida')"
+      - "Ensinos radicais (divórcio, crianças, jovem rico - camelo agulha)"
+    ensinamentos_fase: "Preparação discípulos para Paixão, misericórdia divina, vida eterna"
+    oposicao: "Decisão formal matar Jesus (João 11:53 - Caifás: 'convém que um homem morra')"
+    revelacao: "Messias sofredor (3 predições explícitas), poder sobre morte (Lázaro)"
+    turning_point: "Ressurreição Lázaro - precipita conspiração final"
+    progressao: "Urgência crescente → Lázaro → decisão matar → jornada Jerusalém"
+
+  fase_5_semana_final:
+    periodo: "30 AD - Nisã 10-17 (8 dias)"
+    local: "Jerusalém exclusivo (Betânia, Monte Oliveiras)"
+    eventos_cronologicos:
+      domingo_palmas:
+        data: "Nisã 10 (seleção cordeiro pascal)"
+        evento: "ENTRADA TRIUNFAL (aclamação messiânica pública, 'Hosana, Bendito o que vem!')"
+        significado: "Cumprimento Zacarias 9:9 (rei humilde, jumento), desafio autoridades"
+      segunda:
+        - "Figueira amaldiçoada (Israel sem frutos, julgamento profético)"
+        - "Purificação Templo ('casa de oração → covil salteadores')"
+      terca:
+        - "Debates autoridades (autoridade Jesus, tributo César, ressurreição, maior mandamento)"
+        - "Parábolas confrontação (Lavradores maus - pedra rejeitada)"
+        - "Denúncia escribas/fariseus (7 ais, sepulcros caiados)"
+        - "Óbolo viúva (tudo que tinha)"
+        - "Discurso Oliveiras (escatologia - 70 AD, fim dos tempos, vigilância)"
+      quarta:
+        - "Judas negocia traição (30 moedas prata)"
+      quinta:
+        - "ÚLTIMA CEIA (nova aliança em sangue, Eucaristia, lavar pés)"
+        - "Novo mandamento ('amai-vos como eu vos amei')"
+        - "Discursos despedida (João 14-16: Consolador, videira, venci mundo)"
+        - "Oração Sacerdotal (João 17: glória mútua, santificação, unidade futuros crentes)"
+        - "GETSÊMANI (agonia, 'afasta cálice... tua vontade', suor sangue)"
+        - "Prisão (beijo Judas, Pedro corta orelha, discípulos fogem)"
+      sexta:
+        madrugada:
+          - "Julgamentos religiosos (Anás, Caifás/Sinédrio: 'És o Cristo?' → 'Eu sou' → blasfêmia)"
+          - "Negação Pedro (3x, galo canta, chora amargamente)"
+        manha:
+          - "Julgamentos civis (Pilatos 'não acho crime', Herodes silêncio, Pilatos flagelação)"
+          - "Ecce homo, 'Crucifica!', Barrabás solto, 'Não temos rei senão César'"
+          - "Judas enforca-se"
+        9h:
+          - "VIA CRUCIS (Simão Cireneu, 'filhas Jerusalém não choreis')"
+          - "CRUCIFICAÇÃO Gólgota (pregado mãos/pés, 'INRI', sorteio vestes)"
+        9h_15h:
+          - "7 Palavras da Cruz ('Pai perdoa', Paraíso ladrão, Maria/João, 'Por que me abandonaste?', 'Tenho sede', 'Está consumado', 'Entrego espírito')"
+          - "Escárnio (principais sacerdotes, ladrão)"
+        15h:
+          - "MORTE (grande voz, entrega espírito, 3h trevas)"
+          - "Sinais (véu templo rasgado, terremoto, santos ressuscitam, centurião 'Filho de Deus')"
+          - "Lança lado (sangue+água, osso não quebrado)"
+        tarde:
+          - "Sepultamento (José Arimateia, Nicodemos 33kg especiarias, túmulo novo, pedra rolada)"
+          - "Guarda selada (fariseus temem ressurreição)"
+      sabado:
+        - "Repouso túmulo (descida Hades, silêncio Evangelhos)"
+      domingo:
+        - "RESSURREIÇÃO (madrugada, anjo remove pedra, túmulo vazio)"
+        - "Aparições (Maria Madalena 'Raboni!', outras mulheres, Pedro, Emaús, 11 apóstolos 'Paz!')"
+        - "Comissão inicial ('Como Pai me enviou...', sopro Espírito Santo)"
+    ensinamentos_fase: "Amor mútuo (novo padrão: sacrificial até morte), nova aliança (sangue), Reino futuro"
+    oposicao: "Execução completa (líderes religiosos via Roma, povo manipulado)"
+    revelacao: "Completa - 'Eu sou' (nome divino), Filho de Deus (julgamento), cruz (substituição penal), ressurreição (validação)"
+    cristologia: "Mais alta - preexistência (João 17:5), igualdade Pai (João 10:30), 'Meu Senhor e meu Deus' (Tomé)"
+    significado_teologico: "Cordeiro pascal (14 Nisã), expiação substitutiva, vitória sobre morte/pecado/Satanás"
+
+  fase_6_pos_ressurreicao:
+    periodo: "30 AD (40 dias)"
+    local: "Jerusalém e Galileia"
+    eventos_chave:
+      - "Tomé (8 dias depois: 'Meu Senhor e meu Deus!', bem-aventurança fé sem visão)"
+      - "Pesca miraculosa Galileia (153 peixes, restauração Pedro 3x 'amas-me?', martírio predito)"
+      - "Monte Galileia (500+ irmãos, GRANDE COMISSÃO: 'Ide, fazei discípulos de todas nações')"
+      - "Tiago (irmão Jesus - conversão família)"
+      - "Múltiplas aparições ('muitas provas incontestáveis', ensino Reino)"
+      - "Ordem esperar ('revestidos de poder do alto', Espírito Santo)"
+      - "ASCENSÃO (Monte Oliveiras, nuvem recebe, anjos prometem retorno)"
+    ensinamentos_fase: "Missão universal (todas nações), promessa Espírito Santo, esperança parousia (2ª vinda)"
+    oposicao: "Tentativa supressão (guardas subornados: 'discípulos roubaram corpo')"
+    revelacao: "Ressurreição corpórea real (come, toca), autoridade cósmica ('céu e terra')"
+    turning_point: "Grande Comissão - de Israel a todas nações"
+    progressao: "Comprovação físicas → instrução Reino → comissão universal → ascensão → aguardar Pentecostes"
+    significado: "Validação final, exaltação sessão direita Deus, nascimento igreja, era gentílica"
+
+turning_points:
+  - evento: "Batismo"
+    data: "27 AD"
+    local: "Rio Jordão"
+    significado: "Comissão oficial, voz divina 'Este é meu Filho amado', descida Espírito"
+    impacto: "Início ministério público, identidade revelada (privada)"
+
+  - evento: "Confissão de Pedro"
+    data: "28-29 AD"
+    local: "Cesareia de Filipe (extremo norte Galileia)"
+    significado: "Identidade messiânica revelada e confessada ('Tu és o Cristo, Filho do Deus vivo')"
+    impacto: "Divisor de águas - após: foco preparar discípulos para Paixão, predições sofrimento"
+    sequencia: "Imediatamente segue 1ª Predição Paixão (Messias sofredor vs triunfante)"
+
+  - evento: "Transfiguração"
+    data: "28-29 AD (6 dias após confissão)"
+    local: "Monte alto (Tabor ou Hermon)"
+    significado: "Confirmação divina identidade ('Este é meu Filho amado, ouvi-o'), cumprimento Lei+Profetas (Moisés+Elias)"
+    impacto: "Fortalecimento fé 3 discípulos (Pedro, Tiago, João), prefiguração glória futura"
+
+  - evento: "Ressurreição de Lázaro"
+    data: "29-30 AD"
+    local: "Betânia (3 km Jerusalém)"
+    significado: "Maior sinal (7º João), 'Eu sou a ressurreição e a vida', poder sobre morte"
+    impacto: "Precipita decisão final matar Jesus (Caifás: 'convém um homem morrer'), catalisa Paixão"
+
+  - evento: "Entrada Triunfal"
+    data: "30 AD - Nisã 10 (domingo)"
+    local: "Jerusalém (Monte Oliveiras)"
+    significado: "Aclamação messiânica pública ('Hosana, Bendito que vem!'), cumprimento Zacarias 9:9 (rei humilde)"
+    impacto: "Desafio direto autoridades, Jesus aceita adoração, ironia (rei sem poder político)"
+
+  - evento: "Última Ceia"
+    data: "30 AD - Nisã 14 (quinta, anoitecer)"
+    local: "Cenáculo Jerusalém"
+    significado: "Nova aliança em sangue (Eucaristia), novo mandamento (amor mútuo padrão Cristo), lavar pés (liderança servidora)"
+    impacto: "Institui memorial perpétuo, redefine comunidade (amor > Lei), prepara Paixão"
+    discursos: "João 14-17 (Consolador, videira, oração sacerdotal - clímax teológico)"
+
+  - evento: "Ressurreição"
+    data: "30 AD - Nisã 17 (domingo, madrugada)"
+    local: "Túmulo José Arimateia, Jerusalém"
+    significado: "Validação final identidade, vitória sobre morte, primícias futura ressurreição geral"
+    impacto: "Prova Filho de Deus (Romanos 1:4), fundamento fé cristã (1 Cor 15:14), nascimento igreja"
+    aparicoes: "Maria Madalena, mulheres, Pedro, Emaús, 11 apóstolos, 500+, Tiago, Paulo"
+
+evolucao_ensinamentos:
+  fase_inicial_preparacao:
+    periodo: "27 AD (Preparação, 3 meses)"
+    temas: "Identidade Filho de Deus (privada), rejeição messianismo político (tentações)"
+    metodo: "Eventos fundacionais (batismo, tentações), primeiros contatos"
+
+  fase_inicial_galileia:
+    periodo: "27-28 AD (Galileia inicial, 6-8 meses)"
+    temas: "Reino de Deus presente e espiritual (não político), nascer de novo, água viva, adoração em espírito"
+    metodo: "Diálogos pessoais (Nicodemos, samaritana), sinais iniciais (Caná)"
+    inclusao: "Samaritanos, marginalizados"
+
+  fase_plena_galileia:
+    periodo: "28-29 AD (Galileia plena, 12-15 meses)"
+    temas: "Ética radical Reino (Sermão Montanha), parábolas crescimento (Semeador, Fermento), identidade Messias ('Eu sou pão da vida')"
+    metodo: "Parábolas públicas (enigmáticas), explicações privadas (12), milagres autoridade"
+    cristologia: "Revelação progressiva - 'Tu és o Cristo' → predição Paixão (Messias sofredor)"
+
+  fase_tardia:
+    periodo: "29-30 AD (Jornada Jerusalém, 6-8 meses)"
+    temas: "Preparação discípulos Paixão (3 predições), misericórdia divina (Filho Pródigo), ressurreição/vida eterna (Lázaro)"
+    metodo: "Parábolas misericórdia/julgamento, sinal maior (Lázaro)"
+    cristologia: "'Eu sou a ressurreição e a vida', sofrimento vicário ('grão de trigo morre')"
+
+  fase_final_jerusalem:
+    periodo: "30 AD (Semana Final, 8 dias)"
+    temas: "Amor mútuo (novo mandamento padrão Cristo), unidade (João 17), nova aliança (sangue), Reino futuro (Oliveiras)"
+    metodo: "Debates autoridades (confronto), discursos escatológicos, Última Ceia, Paixão/Ressurreição"
+    cristologia: "Mais alta - 'Eu sou' (nome divino YHWH), preexistência ('glória antes mundo'), 'Meu Senhor e meu Deus'"
+    soteriologia: "Expiação substitutiva ('sangue derramado por muitos - remissão'), vitória sobre morte"
+
+  fase_pos_ressurreicao:
+    periodo: "30 AD (40 dias)"
+    temas: "Reino de Deus (ensinado 40 dias), missão universal (todas nações), promessa Espírito Santo (poder)"
+    metodo: "Aparições físicas (come, toca), abertura Escrituras (Emaús), comissionamento"
+    eclesiologia: "Grande Comissão, batismo trinitário, presença perpétua ('todos os dias até consumação')"
+
+progressao_geografica:
+  movimento_geral: "Periferia (Galileia) → Centro (Jerusalém) → Mundo (Grande Comissão)"
+
+  fase_a_fase:
+    preparacao: "Judeia (Rio Jordão, Deserto) - 3 meses"
+    inicial: "Galileia (Cafarnaum base 70%) + breve Jerusalém - 6-8 meses"
+    plena: "Galileia (itinerante 80%) + Jerusalém (festas) - 12-15 meses"
+    tardia: "Galileia diminui → Pereia → Judeia → rumo Jerusalém - 6-8 meses"
+    final: "Jerusalém exclusivo (Betânia, Oliveiras) - 8 dias"
+    pos: "Jerusalém + Galileia → Jerusalém (Ascensão) - 40 dias"
+
+  simbolismo:
+    galileia: "Periferia desprezada ('Galileia dos gentios'), base ministerial, terra natal"
+    jerusalem: "Centro religioso/político, confrontação autoridades, Paixão/Ressurreição"
+    mundo: "Grande Comissão ('confins da terra') - de particularismo a universalismo"
+
+  citacao_isaias: "Isaías 9:1-2 - 'Terra de Zebulom e Naftali... povo assentado em trevas viu grande luz'"
+  progressao_missao: "Jerusalém → Judeia → Samaria → confins da terra (Atos 1:8)"
+
+progressao_revelacao:
+  modelo: "Segredo messiânico (Marcos) → revelação progressiva → proclamação pública → validação divina"
+
+  cronologia:
+    preparacao: "Filho amado (batismo voz celeste), não político (tentações rejeitadas)"
+    inicial: "Sinais iniciais (Caná), nova aliança (água → vinho superior), nascer de novo (Nicodemos)"
+    plena: "Parábolas Reino, 'Eu sou pão da vida', 'Tu és o Cristo' (confessão Pedro), Messias sofredor (1ª predição)"
+    tardia: "3 predições Paixão (detalhes crescentes), 'Eu sou ressurreição e vida' (Lázaro)"
+    final: "'Eu sou' ego eimi (nome divino YHWH, João 18:6), 'Filho de Deus' (julgamento Caifás), cruz+ressurreição"
+    pos: "'Toda autoridade céu e terra' (Grande Comissão), sessão direita Deus (Ascensão)"
+
+progressao_oposicao:
+  paradoxo: "Quanto mais revela identidade divina, maior oposição → culmina morte → validação ressurreição"
+
+  cronologia:
+    preparacao: "Nenhuma oposição"
+    inicial: "Curiosidade inicial → suspeita fariseus (autoridade questionada)"
+    plena: "Questionamentos Lei (sábado, pureza) → conspiração matar (Marcos 3:6), deserção discípulos (João 6)"
+    tardia: "Decisão formal Sinédrio matar (João 11:53 - Caifás após Lázaro)"
+    final: "Execução completa (líderes religiosos via Roma, povo 'Crucifica!', Pilatos cede)"
+    pos: "Tentativa supressão (guardas subornados, história 'discípulos roubaram corpo')"
+
+metadata:
+  periodo_total: "27-30 AD (~3 anos ministério público)"
+  fases_vida: 6
+  turning_points: 7
+  distribuicao_temporal:
+    preparacao: "3 meses (27 AD)"
+    galileia_inicial: "6-8 meses (27-28 AD)"
+    galileia_plena: "12-15 meses (28-29 AD) - fase mais longa"
+    ministerio_tardio: "6-8 meses (29-30 AD)"
+    semana_final: "8 dias (30 AD Nisã 10-17)"
+    pos_ressurreicao: "40 dias (30 AD)"
+  local_principal: "Galileia 60% (base ministerial), Jerusalém 25% (confronto/Paixão), transições 15%"
+
+  fontes_primarias:
+    - "4 Evangelhos canônicos (Mateus, Marcos, Lucas, João)"
+    - "Atos dos Apóstolos (pós-ressurreição, Ascensão)"
+    - "1 Coríntios 15:3-8 (aparições ressurreição, tradição primitiva)"
+  fontes_externas:
+    - "Flávio Josefo (Antiguidades 18.3.3 - Testimonium Flavianum)"
+    - "Tácito (Anais 15.44 - Cristo executado sob Pilatos)"
+    - "Plínio o Jovem (Cartas 10.96 - culto a Cristo)"
+
+  cronologia_referencia:
+    inicio: "27 AD - 15º ano Tibério César (Lucas 3:1), batismo João Batista"
+    fim: "30 AD - Páscoa (crucificação Nisã 14/15)"
+    duracao: "~3 anos (João: 3 Páscoas mencionadas - mais confiável cronologicamente)"
+
+  debates_academicos:
+    purificacao_templo: "João (início), Sinóticos (fim) - dupla purificação ou redação teológica?"
+    ultima_ceia: "João (antes Páscoa - 14 Nisã), Sinóticos (durante - 15 Nisã)"
+    ipsissima_verba: "Consenso teológico, redação específica debatida (João vs Sinóticos)"
+
+  progressao_geral: "Revelação gradual → Popularidade → Crise → Confrontação → Paixão → Ressurreição → Comissionamento universal"
+
+  fonte_consolidacao: "metadata/temporal_context.yaml"
+  executor: "@analyst"
+  task: "TASK-A03: Timeline Mapping"
+  data: "2025-10-06"

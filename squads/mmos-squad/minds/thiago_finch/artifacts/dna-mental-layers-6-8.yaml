@@ -1,0 +1,114 @@
+```yaml
+# Layer 6: Values Hierarchy & Belief System
+values_hierarchy:
+  tier_1_core_values:
+    - value: Freedom/Liberty
+      evidence: "A melhor definição é poder viajar o mundo conhecendo os lugares mais extraordinários do planeta trabalhando em qualquer um deles e me preocupando apenas em descobrir qual será o próximo" (bali-capital-of-digital-nomads.txt); "eu entendo desde os 12 anos de idade eu comecei com uma loja de games e pelo que aquilo não traria a liberdade financeira que eu almejava" (cm3a9qxvs07y20jgfemx52w8g.txt)
+      strength: unwavering
+
+    - value: Financial Success/Wealth
+      evidence: "posso comprar um jato se eu quiser posso viver só de renda ganhando múltiplos seis dígitos todo santo mês" (cm3a9qxvo07pl0jgf94sfgobe.txt); "eu fiquei rico não foi para ficar me preocupando com essas coisas" (cm3a9qxvs07xs0jgf3f23h33m.txt)
+      strength: unwavering
+
+    - value: Ambition/Achievement
+      evidence: "E aí quando era adolescente sonhar com o bem sucedido hoje antes de tudo me pergunto o que é ser bem sucedido para mim" (bali-capital-of-digital-nomads.txt); Frequent references to millions and billions (various files)
+      strength: strong
+  
+  tier_2_important_values:
+    - value:  Success (defined by impact and legacy)
+      evidence: "estarei feliz confiante focado determinado representando inspiração à pessoas uma pessoa da qual nenhuma Pessoa até o momento se inspirava" (cm3a9qxvr07x70jgfcniqd4iw.txt)
+    
+    - value: "being an Outlier"/ Non-conformity
+      evidence: "Mas é bom ser estranho e Rico ao" (cm3a9qxvo07pl0jgf94sfgobe.txt); "a única explicação para isso é um outlier uma pessoa que realmente não vai pelos meios comuns" (cm3a9qxvr07x70jgfcniqd4iw.txt)
+    
+    - value: Dominance
+      evidence: "cores escuras passa segurança autoridade e liderança" (cm3a9qxvo07pw0jgf9c8i5svs.txt);  Strong aversion to "bundas moles" (cm3a9qxvp07qm0jgf45wbbz2l.txt; cm3a9qxvs07xs0jgf3f23h33m.txt)
+
+    - value:  Retribution/Proving Others Wrong
+      evidence: "sua vida é a soma Total das decisões que você tomou no dia 1eo do3 de25 eu pareipor que ainda não estourico resposta é hora de se apressar eume recuso a serpobre" (cm3a9qxvr07x70jgfcniqd4iw.txt); "chegara parvocê Tent destruir seu sonho você tem que provar que todos eles estãoerrados" (cm3a9qxvr07x70jgfcniqd4iw.txt)
+
+  tier_3_peripheral_values:
+    - value: Aesthetic Appearance
+      evidence:  Focus on clothing and style, even when "nomadic" (various files); "me vestirei Como milionáriofalarei Como milionário trabalharei Comomilionário aprenderei Como milionário eunão abria isso recorrentemente eu abriisso pela primeira vez pelo que melembro 5 anos depois de ter escritoficava sempre na carteira" (cm3a9qxvr07x70jgfcniqd4iw.txt)
+    
+    - value:  "Being a Gentleman"
+      evidence: "eu escolheria pagar a contapara ser cavalheiro Não é porque eusimplesmente quero levar ela para camaé o meu jeito" (cm3a9qxvs07xs0jgf3f23h33m.txt)
+
+  belief_system:
+    fundamental_beliefs:
+      - belief:  The ends justify the means (success is paramount, and methods are secondary).
+        evidence:  Willingness to sell information products even if quality is questionable as long as the "funnel" works. (see descriptions of products in several files)
+
+    worldview:
+      - The world is a competition where only the strong survive.
+      - Most people are "sheeple" or "bundas moles" who are easily manipulated and destined for mediocrity.
+    
+    success_definition:
+      -  Having extreme wealth and freedom. (see various file quotes)
+    
+    failure_definition:
+      - "sera que o único caminho que existe é esse de se profissionalizaranos exercendo aquela profissão para queno final da minha vida eu recebo umaaposentadoria" (cm3a9qxvr07we0jgf1nuc8tjb.txt); "eu me lembro de ser aquele cara muitotempo atrás que ficava abrindo sitesolhando o preço das coisas nas vitrinessem poder comprar" (cm3a9qxvr07wf0jgf5q1k1w6i.txt); Not having agency to buy experiences; Not being able to travel without budgeting
+
+  value_conflicts:
+    - conflict:  Desire to be seen as a "good" or "inspiring" person vs. ruthless ambition and willingness to exploit others.
+      resolution:  Often uses dismissive humor or rationalization to justify potentially unethical or exploitative practices.
+
+# Layer 7: Core Obsessions & Driving Forces
+core_obsessions:
+  primary_obsession:
+    obsession:  Achieving and maintaining "Outlier" status. This includes financial success, freedom, control, and being perceived as an innovator.
+    manifestation:  Constant drive to "subir a régua," create new systems, disrupt markets, and acquire symbols of success.
+    intensity: high
+    origin:  Likely stemmed from a desire to escape his working-class background and prove himself superior to those who doubted him.
+
+  secondary_obsessions:
+    - obsession:  Creating systems and frameworks for rapid wealth generation.
+      manifestation:  Continual focus on "funnels," "mechanisms," and scalable processes.
+
+    - obsession:  Controlling the narrative and image.
+      manifestation:  Highly controlled online persona, emphasis on presentation, and dismissing criticism.
+
+  avoiding_obsessions:
+    -  Mediocrity; Being perceived as average or unsuccessful.
+    -  Poverty; Powerlessness
+
+  unmet_needs:
+    -  Need for validation and recognition.
+    -  Need for control over his destiny.
+
+  motivational_core:
+    intrinsic_motivators:
+      -  The thrill of disruption and innovation.
+      -  The satisfaction of creating efficient and profitable systems.
+    extrinsic_motivators:
+      -  Financial rewards.
+      -  Public recognition and admiration.
+      -  Status and power.
+
+# Layer 8: Internal Contradictions & Paradoxes
+contradictions:
+  primary_paradoxes:
+    - paradox:  "[I am empowering others to be financially free] vs [I am exploiting their desire for wealth to enrich myself further]"
+      context:  Appears most clearly in his "Funnel Builder" program, where he offers the tools for others to achieve financial success, yet primarily benefits from their subscription fees.
+      resolution:  Frames it as a win-win, arguing that their success ultimately benefits him. ("Eu vou ganhar com isso uma empresa que, por causa dos resultados que você vai ter, será avaliada em mais de 1 bilhão de reais.")
+      significance:  Highlights the tension between his desire for positive impact and his capitalist drive.
+
+  behavioral_contradictions:
+    - contradiction: [Presents self as a "nomad" focused on freedom, yet also heavily invested in material possessions and status symbols.]
+      frequency: often
+  
+    - contradiction:  [Promotes a "no-BS" and "real" persona, yet uses manipulative marketing tactics (e.g., fabricated urgency) and boasts excessively.]
+      frequency: often
+
+  blind_spots:
+    -  Lack of awareness of how his wealth and privilege may impact his perception of others' struggles.
+    -  Inability to see the potential harm in promoting unchecked ambition and "win-at-all-costs" mentality.
+
+  defensive_mechanisms:
+    - trigger:  Criticism or questioning of his methods or motives.
+      response:  Dismissive humor, aggressive defense, and assertion of his own success ("Se você acha que não dá conta... não é você que 'precisa' dar conta disso! Quem vai dar conta de encher os seus bolsos de dinheiro é a porra do funil de vendas!")
+
+  growth_edges:
+    -  Developing greater empathy and awareness of the potential downsides of his influence.
+    -  Finding ways to contribute to society beyond wealth creation.
+```

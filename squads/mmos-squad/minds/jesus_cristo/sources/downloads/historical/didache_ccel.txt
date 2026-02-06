@@ -1,0 +1,387 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.1//EN"
+    "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-2.dtd">
+<html xmlns=   "http://www.w3.org/1999/xhtml"
+      lang=    "en"
+      xml:lang="en"
+      xmlns:dc="http://purl.org/dc/terms/">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name='uid'       value='0' />
+        <meta name='uname'     value='[not logged in]' />
+        <meta name='umail'     value='[none]' />
+        <meta name='isAdmin'   value='0' />
+        <meta name='debug'     value='0' />
+        <meta name="csrf-token" content="3soNrVzYkm9w9I0KjoWsAfW0cJkRY5PgykCXkXuV" />
+        <meta name="pageType"  value='' />
+                
+        <title>
+                Page Not Found
+        -
+        Christian Classics Ethereal Library
+</title>
+
+
+<meta charset="UTF-8" />
+<meta http-equiv="content-type"
+    content="application/xhtml+xml; charset=utf-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="search" type="application/opensearchdescription+xml"
+    title="CCEL" href="/ccelsearch.xml" />
+
+<link rel="shortcut icon" type="image/x-icon"
+    href="/img/favicon.ico" />
+<link rel="apple-touch-icon"
+    href="https://ccel.org/img/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="114x114"
+    href="https://ccel.org/img/apple-touch-icon@2x.png" />
+<link rel="apple-touch-icon" sizes="72x72"
+    href="https://ccel.org/img/apple-touch-icon_ipad.png" />
+<link rel="apple-touch-icon" sizes="144x144"
+    href="https://ccel.org/img/apple-touch-icon_ipad@2x.png" />
+
+
+
+
+<link rel="stylesheet" type="text/css" 
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" id="bootstrap_css"/>
+
+<link rel="stylesheet" type="text/css" 
+    href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/css/bootstrap4-toggle.min.css" />
+
+<link rel="stylesheet" type="text/css" 
+    href="https://ccel.org/css/chartist.css" />
+
+<link rel="stylesheet" type="text/css" 
+    href="https://ccel.org/css/style.css" />
+
+<link rel="stylesheet" type="text/css" 
+    href="https://ccel.org/css/books.css" />
+
+<link rel="stylesheet" type="text/css" 
+    href="https://ccel.org/css/responsive.css" />
+
+<link rel="stylesheet" type="text/css" 
+    href="https://ccel.org/css/layout.css" />
+
+<link rel="stylesheet" type="text/css" 
+    href="https://ccel.org/css/layout-popup.css" />
+
+<link rel="stylesheet" type="text/css" 
+    href="https://ccel.org/css/home.css" />
+
+<link rel="stylesheet" type="text/css" 
+    href="https://ccel.org/css/page-front.css" />
+
+<link rel="stylesheet" type="text/css" 
+    href="https://ccel.org/css/readmore.css" />
+
+<link rel="stylesheet" type="text/css" 
+    href="https://staticccel.org/fa/v6/css/all.css" />
+
+<link rel="stylesheet" type="text/css" 
+    href="https://ccel.org/css/mainMenuBar.css" />
+
+<link rel="stylesheet" type="text/css" media="only print"
+    href="https://ccel.org/css/print.css" />
+
+
+<script type="text/javascript">
+	// UserUtils::makeJSPrefs()
+	preferences = {};  // User preferences
+
+</script>
+
+<!-- IMMEDIATE -->
+
+<script type="text/javascript"
+	src="https://ccel.org/js/libraries/jquery-versions/jquery-2.2.4.js"></script>
+<!-- IMMEDIATE -->
+
+<script type="text/javascript"
+	src="https://ccel.org/js/libraries/jquery-mobile/jquery-mobile-configuration.js"></script>
+<!-- IMMEDIATE -->
+
+<script type="text/javascript"
+	src="https://ccel.org/js/libraries/jquery-mobile/jquery.mobile-1.4.5.js"></script>
+<!-- IMMEDIATE -->
+
+<script type="text/javascript"
+	src="https://ccel.org/js/libraries/jquery-ui/jquery-ui.js"></script>
+
+<!-- ccel_issue_js(), 21 items. -->
+
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/parallax/parallax.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/minify/ccel-book.js"></script>
+
+
+<script type="text/javascript"
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>
+
+
+<script type="text/javascript">
+
+          //console.log("setting jq144");
+          jq144 = jQuery;
+          // Setting the following breaks a lot....
+          //jQuery.noConflict( true ); // Make jQuery stay out of global scope
+          //$( function () { FastClick.attach(document.body) } );
+        
+</script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/minify/CCELStartup.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/minify/ccel-util.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/libraries/jquery.scrollTo/jquery.scrollTo-min.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/libraries/jquery.localScroll/jquery.localscroll-min.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/minify/ccel-book-shared.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/minify/home.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/minify/advanced_search.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/minify/popup.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/minify/toolbar.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/minify/xlinker.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/dev.js"></script>
+
+
+<script type="text/javascript">
+function initNote(t) { return true; }
+
+</script>
+
+
+<script type="text/javascript">
+var annotate_url = 'https://ccel.org/annotate';
+</script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/minify/drupalStuff.js"></script>
+
+
+<script type="text/javascript"
+	src="https://ccel.org/js/FastClick.min.js"></script>
+
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<script async src=
+	"https://www.googletagmanager.com/gtag/js?id=UA-609536-1">
+</script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N8CECQX6CR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-N8CECQX6CR');
+</script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag()
+	{
+		dataLayer.push( arguments );
+	}
+	gtag( 'js', new Date() );
+	gtag( 'config', 'UA-609536-1' );
+</script>
+<script type="text/javascript">
+    $(function()
+    {
+        if ($.fn.superfish !== undefined)
+        {
+            $('#nav-top > ul').superfish({ dropShadows: false });
+            /* Disable the CSS :hover-based menu */
+            $('body').removeClass('no-superfish');
+        }
+
+        
+        /* unhide elements requiring JS to run. */
+        $('.noscript-hide').removeClass('noscript-hide');
+    });   
+</script>
+
+<script type="text/javascript">
+    /*alert("Doing ajaxSetup: " +
+            $('meta[name="csrf-token"]').attr('content')); */
+    setTimeout( function() {
+	        $.ajaxSetup({
+	        headers: {
+	            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        }});
+        }, 1000 );
+</script>
+
+    </head>
+
+    <body class=" body " onload="javascript:CCELStartup();">
+        <div id="fatness">
+            <div id="main-content">
+                                <nav class="mainMenuBar navbar navbar-expand-lg navbar-dark bg-ccel-red fixed-top hideOnLoad">
+  <a class="navbar-brand" href="https://ccel.org">
+    <img id="banner-site-name" src="https://ccel.org/img/logo.svg" alt="Christian Classics Ethereal Library"/>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsMain" aria-controls="navbarsMain" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsMain">
+    <ul class="navbar-nav ml-auto d-inline-flex flex-wrap flex-row">
+      <li class="nav-item dropdown active">
+        <button class="btn btn-sm caret-off dropdown-toggle pl-0 pr-0" type="button" data-toggle="collapse"
+            data-target="#dd_browse" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link prevent-default" href="#">Browse <i class="fas fa-caret-down"></i></a>
+        </button>
+        <div id="dd_browse" class="dropdown-menu click-collapse collapse position-absolute bg-secondary">
+          <a class='dropdown-item' href="/index/title/A">Titles</a>
+<a class='dropdown-item' href="/index/author/A">Authors</a>
+<a class='dropdown-item' href="/index/language">Language</a>
+<a class='dropdown-item' href="/index/genre">Genre</a>
+<a class='dropdown-item' href="/index/topic">Topic</a>
+<a class='dropdown-item' href="/index/format">Format</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown active">
+        <button class="btn btn-sm pl-0 pr-0" type="button">
+          <a class="nav-link" href="/fathers">Early Church Fathers</a>
+        </button>
+      </li>
+      <li class="nav-item dropdown active">
+        <button class="btn btn-sm pl-0 pr-0" type="button">
+          <a class="nav-link" href="/meditate">Daily Meditations</a>
+        </button>
+      </li>
+      <li class="nav-item dropdown active">
+        <button class="btn btn-sm pl-0 pr-0" type="button">
+          <a class="nav-link" href="https://life.ccel.org">Blog</a>
+        </button>
+      </li>
+      <li class="nav-item dropdown active">
+        <button class="btn btn-sm pl-0 pr-0" type="button">
+          <a class="nav-link" href="/study">Study Bible</a>
+        </button>
+      </li>
+          <li class="nav-item"><button class="btn btn-sm pl-0 pr-0"><a class="nav-link" href="/login">Log In</a></button></li>
+      <li class="nav-item"><button class="btn btn-sm pl-0 pr-0"><a class="nav-link" href="/register">Register</a></button></li>
+        </ul>
+  </div>
+</nav>
+                                        <div><p class="shrinkOnLoad mb-4 pb-5">&nbsp;</p></div>
+                                                    <div id="main" role="main" class="container pl-3 pr-3">
+                    
+                    <div id="content">
+                        
+                        
+                        
+                        	<div id="content">
+		<h1 id="title">Page Not Found</h1>
+		<h2>Looking for something?</h2>
+		<p>We're sorry. The page you requested does not exist.</p>
+		<p>If you reached this page by clicking on a hyperlink, please
+			<a href="/info/email.html?url=%2Ferror">notify us</a>
+			about the broken link. Be sure to include the URL of the page that contains the bad link.
+		</p>
+		<p>You may wish to try these pages:</p>
+		<ul>
+		  <li><a href="/">CCEL Home Page</a></li>
+		  <li><a href="/index/author/a">Browse Library</a></li>
+		  <li><a href="/study">Bible &amp; Commentary Browser</a></li>
+		</ul>
+		<p>Confused? Have questions or comments? Please <a href="/info/email.html">contact us</a>.</p>
+	</div>
+
+                        <span style="display:none;">VIEWNAME is 
+                            <q>    404
+ </q></span>
+
+                        
+                        <script type="text/javascript"
+                            src="https://ccel.org/js/dru_themes_ccel2010/navbarMenu.js">
+                        </script>
+                        
+                        <div id="content-foot" class="content-foot">
+                            
+                            
+                        </div>
+
+                        
+                    </div>
+
+                    <br clear="both">
+                </div>
+            </div>
+
+                        <div id="footer">
+                
+                <div class="content">
+                                            <div class="footer-links hideOnLoad" id="footer">
+        <a href="/login">Log in</a>
+    | <a href="/register">Register</a>
+        | <a href="/index/author/A">Browse</a>
+    | <a href="/study">Bibles</a>
+    | <a href="/about">About</a>
+    | <a href="/about/copyright.html">Copyright</a>
+    | <a href="/info/privacy.html">Privacy</a>
+    | <a href="/info/email.html">Contact</a>
+    | <a href="https://give.calvin.edu/give/583548/#!/donation/checkout">Give</a>
+    
+        <div class="footer-ruler">
+        <hr id="footer-rule">
+    </div>
+    <div id="footer-logos">
+        <a href="http://www.calvin.edu/">
+            Hosted on the campus of <img src="https://hymnary.org/sites/hymnary.org/themes/newhymn/calvin-university.svg" alt="Calvin University" width="200px" class="nospace">
+        </a>
+        <br />
+    </div>
+</div>
+                    
+                </div>
+                            </div>
+                    </div>
+    </body>
+</html>

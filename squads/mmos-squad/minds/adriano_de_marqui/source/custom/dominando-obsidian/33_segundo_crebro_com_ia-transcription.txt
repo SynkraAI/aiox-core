@@ -1,0 +1,1589 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:05.040
+Agora chegou a hora de você criar o seu
+segundo cérebro.
+
+00:00:05.400 --> 00:00:09.860
+Eu vou te mostrar como esse negócio
+funciona e também que não é de outro
+
+00:00:09.860 --> 00:00:11.140
+mundo e como vai te ajudar.
+
+00:00:11.680 --> 00:00:17.360
+Como você pode ver aqui na minha tela,
+eu já deixei aberto um pedacinho do meu
+
+00:00:17.360 --> 00:00:17.880
+segundo cérebro.
+
+00:00:17.980 --> 00:00:18.580
+Por que um pedacinho?
+
+00:00:19.120 --> 00:00:22.240
+Porque eu separei o meu cérebro de I .A.
+
+00:00:22.280 --> 00:00:23.760
+e o cérebro de anotações pessoais.
+
+00:00:23.900 --> 00:00:25.400
+Esse aqui é o meu de anotações pessoais.
+
+00:00:26.120 --> 00:00:27.320
+Você está vendo se formar.
+
+00:00:27.320 --> 00:00:29.800
+Alan, como é que esse negócio funciona?
+
+00:00:29.960 --> 00:00:32.940
+Estou vendo aí um monte de coisa, um
+monte de nota crescendo e tal.
+
+00:00:33.340 --> 00:00:37.300
+Pois é, cada anotação que você faz, você
+pode linkar com outras ideias e essas
+
+00:00:37.300 --> 00:00:40.800
+ideias com outras ideias e tudo vai se
+linkando de uma maneira que você possa
+
+00:00:40.800 --> 00:00:42.180
+se encontrar mais facilmente.
+
+00:00:42.280 --> 00:00:45.840
+Então, para quem tem um pensamento que
+não é tão linear, que é um pensamento
+
+00:00:45.840 --> 00:00:49.240
+que funciona mais como uma árvore.
+
+00:00:49.440 --> 00:00:52.300
+Cada ideia que você tem gera mais
+outras, que geram mais outras.
+
+00:00:52.880 --> 00:00:57.260
+É uma excelente forma de se organizar,
+mesmo se você acreditar que tem uma
+
+00:00:57.260 --> 00:00:57.860
+mente caótica.
+
+00:00:57.940 --> 00:01:02.720
+Então, se você sempre sentiu dificuldade
+de organizar em outras ferramentas, essa
+
+00:01:02.720 --> 00:01:05.800
+aqui é uma que com certeza é bem
+provável que vai te atender.
+
+00:01:06.380 --> 00:01:12.180
+Agora, a questão aqui é que, mesmo se
+você já usou o Notion e você gosta de
+
+00:01:12.180 --> 00:01:14.600
+Notion ou outra ferramenta, Evernote,
+etc.
+
+00:01:15.220 --> 00:01:18.240
+Eu vou te mostrar que existem vantagens
+aqui sobre qualquer outra ferramenta.
+
+00:01:18.400 --> 00:01:21.020
+Primeiro, essa ferramenta é 100 %
+gratuita.
+
+00:01:21.020 --> 00:01:23.720
+E essas notas são suas notas.
+
+00:01:23.900 --> 00:01:29.660
+Eu, por exemplo, quando vou pegar um voo
+que não tem internet, eu muitas vezes
+
+00:01:29.660 --> 00:01:33.260
+fico refém de arquivos lá no Notion do
+meu time, que eu não consigo ler, porque
+
+00:01:33.260 --> 00:01:34.340
+não foi sincronizado.
+
+00:01:34.820 --> 00:01:37.100
+Aqui não, essas notas estão todas no meu
+computador.
+
+00:01:37.240 --> 00:01:42.200
+Ou seja, eu consigo replicar elas no
+celular, no iPad e também estar no
+
+00:01:42.200 --> 00:01:42.680
+computador.
+
+00:01:43.200 --> 00:01:47.900
+E assim, eu nunca preciso ficar online
+para poder ler as minhas informações.
+
+00:01:47.900 --> 00:01:49.700
+Ah, mas que ferramenta é essa?
+
+00:01:49.860 --> 00:01:53.440
+Então, eu já quero que você faça aí o
+download dela.
+
+00:01:54.460 --> 00:01:56.960
+Essa ferramenta aqui, ela...
+
+00:01:56.960 --> 00:01:57.800
+deixa eu te mostrar aqui.
+
+00:01:58.900 --> 00:02:05.400
+Você pode baixá -la gratuitamente aqui
+no site, o site é obsidian .md e ela
+
+00:02:05.400 --> 00:02:08.620
+permite, inclusive, que você possa
+conectar IA nela de forma gratuita
+
+00:02:08.620 --> 00:02:08.840
+também.
+
+00:02:09.340 --> 00:02:10.640
+Então, é exatamente isso que eu quero te
+mostrar.
+
+00:02:11.340 --> 00:02:11.880
+Como usar?
+
+00:02:12.680 --> 00:02:13.400
+Por que usar?
+
+00:02:14.140 --> 00:02:16.220
+Como a gente consegue implementar IA
+nisso?
+
+00:02:16.220 --> 00:02:19.380
+E como você pode começar a fazer um bom
+uso dela?
+
+00:02:20.000 --> 00:02:22.440
+Meu desafio aqui é fazer isso tudo num
+vídeo só.
+
+00:02:22.780 --> 00:02:25.820
+Eu cheguei a gravar um vídeo com 20
+aulas, um curso com 20 aulas, só sobre
+
+00:02:25.820 --> 00:02:30.260
+esse tema aqui, só sobre como ensinar,
+utilizar todas as nuances da ferramenta
+
+00:02:30.260 --> 00:02:32.020
+de uma forma que seja produtiva.
+
+00:02:33.720 --> 00:02:37.420
+Ou seja, é uma ferramenta que ela é
+simples, mas ela também pode ser
+
+00:02:37.420 --> 00:02:40.480
+complexa no sentido de você adicionar
+novas sensualidades da forma como você
+
+00:02:40.480 --> 00:02:40.780
+quiser.
+
+00:02:41.260 --> 00:02:45.420
+Aqui eu vou tentar manter o mais simples
+possível essa aula, para que você possa
+
+00:02:45.420 --> 00:02:46.820
+dar os primeiros passos.
+
+00:02:47.380 --> 00:02:51.540
+Se você já utiliza obsidian no dia a
+dia, se você já está utilizando ele como
+
+00:02:51.540 --> 00:02:55.480
+IA e gratuita ainda por cima, então você
+pode pular essa aula para a próxima.
+
+00:02:55.540 --> 00:02:59.220
+Se você ainda não tem um segundo cérebro
+que você confia, que você gostaria que
+
+00:02:59.220 --> 00:03:02.100
+tivesse como IA, então fica, porque a
+gente vai criar.
+
+00:03:02.540 --> 00:03:05.240
+Qual que é a ideia aqui de ter um
+segundo cérebro?
+
+00:03:05.640 --> 00:03:07.180
+É melhorar a forma como você pensa.
+
+00:03:07.380 --> 00:03:10.400
+É você ter um local onde você confia,
+que você sabe que vai encontrar as
+
+00:03:10.400 --> 00:03:12.980
+informações como se fosse um botão
+pausar.
+
+00:03:12.980 --> 00:03:16.800
+Ou seja, você está jogando um videogame
+ali, alguém te chamou, você pode pausar,
+
+00:03:16.820 --> 00:03:18.420
+se não for uma partida online ou alguma
+coisa assim.
+
+00:03:18.840 --> 00:03:21.220
+A mesma coisa é aqui no segundo cérebro.
+
+00:03:21.420 --> 00:03:24.340
+Uma maneira como você estiver fazendo
+anotações, você pode parar daquele jeito
+
+00:03:24.340 --> 00:03:28.200
+ali e voltar, porque as coisas vão ficar
+exatamente como sua mente estava
+
+00:03:28.200 --> 00:03:29.080
+conectando as ideias.
+
+00:03:29.460 --> 00:03:34.400
+Então, é só clicar aqui, clica aqui em
+baixar, instala e você vai vir para essa
+
+00:03:34.400 --> 00:03:38.940
+tela que eu estava vendo antes aqui, que
+é a tela do obsidian, que é essa aqui.
+
+00:03:39.300 --> 00:03:41.620
+Claro que não vai estar aparecendo assim
+para você, esse aqui é o meu que já está
+
+00:03:41.620 --> 00:03:43.460
+criado, ela vai fazer mais ou menos
+assim.
+
+00:03:43.620 --> 00:03:46.540
+Deixa eu clicar aqui em novo, abrir um
+novo
+
+00:03:46.540 --> 00:03:47.100
+cofre.
+
+00:03:50.120 --> 00:03:52.320
+Então, o obsidian funciona com cofres.
+
+00:03:53.520 --> 00:03:54.920
+O que seria um cofre?
+
+00:03:55.100 --> 00:04:00.500
+Seria quase como, digamos assim, o seu
+fichário, onde você pode tirar anotações
+
+00:04:00.500 --> 00:04:03.960
+ali, uma folha de anotações e, sei lá,
+dar para outra pessoa, colocar em outro
+
+00:04:03.960 --> 00:04:08.000
+fichário, porque esses arquivos você
+consegue jogar de um cofre para o outro,
+
+00:04:08.000 --> 00:04:10.840
+mas eles ficam ali dentro dessa
+pastinha.
+
+00:04:11.560 --> 00:04:14.360
+Basicamente, esse cofre é uma pasta no
+seu computador, como se fosse um
+
+00:04:14.360 --> 00:04:19.500
+fichário, onde você vai ter ali as
+anotações com esse arquivo chamado .md,
+
+00:04:19.920 --> 00:04:21.080
+que é o arquivo de Markdown.
+
+00:04:21.300 --> 00:04:23.640
+Markdown é uma linguagem de marcação.
+
+00:04:23.820 --> 00:04:26.680
+É igual você faz no WhatsApp, por
+exemplo, para deixar em negrito, deixar
+
+00:04:26.680 --> 00:04:31.440
+em itálico, é basicamente, não é nada de
+programação, é uma linguagem de
+
+00:04:31.440 --> 00:04:36.540
+marcação, ou seja, você vai simplesmente
+botar alguns símbolos ali, quando
+
+00:04:36.540 --> 00:04:40.480
+precisar, e se quiser também, porque
+você pode colocar plugins aqui que fazem
+
+00:04:40.480 --> 00:04:44.960
+isso para você, e basicamente você vai
+ter tudo o que precisa ali.
+
+00:04:45.320 --> 00:04:46.840
+Então, eu vou criar um novo cofre aqui.
+
+00:04:47.820 --> 00:04:48.560
+Você vai criar um novo.
+
+00:04:49.500 --> 00:04:50.400
+O que eu gosto aqui?
+
+00:04:50.500 --> 00:04:56.940
+Eu gosto de colocar dentro de uma pasta
+do meu iCloud, ou do meu Google Drive,
+
+00:04:57.060 --> 00:04:58.080
+ou do meu Dropbox.
+
+00:04:58.520 --> 00:04:58.820
+Por quê?
+
+00:04:58.920 --> 00:05:03.000
+Porque daí eu sincronizo essa mesma
+pasta com o meu iPad, com o meu celular,
+
+00:05:03.180 --> 00:05:03.700
+com o meu iPhone.
+
+00:05:03.700 --> 00:05:07.080
+Se você usa Samsung, Android, a mesma
+coisa.
+
+00:05:07.180 --> 00:05:11.260
+Utilize, por exemplo, o Google Drive e
+coloque na pasta lá dentro.
+
+00:05:11.500 --> 00:05:11.780
+Beleza?
+
+00:05:12.080 --> 00:05:15.380
+Então, aqui eu vou colocar a aula meu.
+
+00:05:16.380 --> 00:05:20.120
+Vou botar aqui, ó, Cérebro com IA.
+
+00:05:22.360 --> 00:05:27.120
+Então, você pode colocar o seu nome
+aqui, você pode colocar o nome do curso
+
+00:05:27.120 --> 00:05:32.540
+que você vai fazer, ou eu gosto, na
+verdade, de ter um segundo cérebro meu,
+
+00:05:32.540 --> 00:05:37.360
+que é o Allen Estudos, que basicamente
+todos os cursos que eu faço estão lá.
+
+00:05:37.500 --> 00:05:39.980
+Então, eu tenho no lugar todas as
+palestras que eu vou, todos os cursos
+
+00:05:39.980 --> 00:05:40.440
+que eu faço.
+
+00:05:40.500 --> 00:05:43.200
+Então, eu não aconselho a criar um cofre
+para cada coisa que você vai fazer.
+
+00:05:43.780 --> 00:05:49.800
+Cria um, talvez, por um trabalho, vida
+pessoal, ou um com seu nome que vai ser
+
+00:05:49.800 --> 00:05:52.340
+para tudo que você vai fazer, como a
+maioria das pessoas, eu acredito, que
+
+00:05:52.340 --> 00:05:52.580
+fazem.
+
+00:05:53.300 --> 00:05:56.340
+Destino aqui, como eu falei, escolha
+aqui o iCloud.
+
+00:05:56.520 --> 00:05:59.280
+Eu já tenho uma pastinha chamada
+Obsidian aqui, que é onde eu coloco os
+
+00:05:59.280 --> 00:05:59.860
+meus cofres.
+
+00:06:00.080 --> 00:06:00.420
+Pronto.
+
+00:06:01.200 --> 00:06:01.560
+Criar.
+
+00:06:01.560 --> 00:06:02.880
+E está pronto.
+
+00:06:03.280 --> 00:06:08.520
+A gente criou aqui o novo cofre, o meu
+novo local onde eu vou ter as minhas
+
+00:06:08.520 --> 00:06:09.220
+informações.
+
+00:06:10.020 --> 00:06:12.460
+Agora, deixa eu dar um zoom aqui para
+ficar mais fácil para vocês.
+
+00:06:14.260 --> 00:06:18.380
+Então, está vendo que aqui, deixa eu
+botar aqui a minha câmera do outro lado,
+
+00:06:19.960 --> 00:06:22.020
+aqui, são as notas se linkando.
+
+00:06:22.160 --> 00:06:22.360
+Está vendo?
+
+00:06:23.380 --> 00:06:25.860
+Essa nota aqui está linkada com essa
+aqui.
+
+00:06:26.780 --> 00:06:27.600
+Como é que funciona?
+
+00:06:27.740 --> 00:06:28.820
+Como é que eu faço isso aqui acontecer?
+
+00:06:28.820 --> 00:06:33.640
+Por exemplo, isso aqui é de bem -vindo,
+então aqui é um teste.
+
+00:06:34.320 --> 00:06:38.580
+Vou falar, Obsidian com IA.
+
+00:06:40.380 --> 00:06:50.120
+Aqui eu vou mostrar como é, como
+funciona esse lance de segundo
+
+00:06:50.120 --> 00:06:50.820
+cérebro.
+
+00:06:53.140 --> 00:06:57.520
+Bom, basicamente, o segundo cérebro é
+qualquer local.
+
+00:06:57.520 --> 00:07:01.980
+Se a gente for pegar, toda extensão da
+tua mente é um segundo cérebro.
+
+00:07:02.640 --> 00:07:05.660
+Se a gente for para a parte de estudo
+sobre isso, a gente tem vários livros.
+
+00:07:06.080 --> 00:07:09.860
+Tem um livro que eu gosto muito, que é
+The Extended Mind, que fala sobre como a
+
+00:07:09.860 --> 00:07:14.940
+gente estende a nossa mente ao celular,
+até as outras pessoas que funcionam como
+
+00:07:14.940 --> 00:07:16.100
+espaço de armazenamento nosso.
+
+00:07:16.180 --> 00:07:18.820
+Quando você pede assim, pode me lembrar
+tal coisa amanhã?
+
+00:07:19.180 --> 00:07:22.680
+Basicamente, você está ocupando a
+memória de outra pessoa com algo que é
+
+00:07:22.680 --> 00:07:23.040
+para você.
+
+00:07:23.180 --> 00:07:25.040
+Então, você está estendendo a sua mente
+para outra pessoa.
+
+00:07:25.040 --> 00:07:26.780
+E de várias formas você pode fazer isso.
+
+00:07:27.080 --> 00:07:29.700
+Aqui a gente está fazendo isso através
+de uma ferramenta de notação, que vai
+
+00:07:29.700 --> 00:07:33.740
+permitir a linkagem de ideias e também a
+inserção e a interação com o IA.
+
+00:07:34.840 --> 00:07:36.820
+Ah, mas como é que eu linko a outra
+ideia?
+
+00:07:37.400 --> 00:07:39.240
+Lembra que eu acabei de falar sobre um
+livro aqui agora?
+
+00:07:40.440 --> 00:07:47.160
+Uma dessas ideias vem do livro The
+Extended Mind.
+
+00:07:47.920 --> 00:07:48.600
+E daí o que eu faço?
+
+00:07:48.960 --> 00:07:59.180
+Posso agora selecionar isso aqui e dou
+duas vezes o colchetes e a gente abriu
+
+00:07:59.180 --> 00:08:02.060
+aqui o Brax, a caixinha.
+
+00:08:02.540 --> 00:08:03.540
+Beleza, agora a gente tem aqui.
+
+00:08:03.880 --> 00:08:06.120
+Se eu clicar aqui, eu tenho outra nota.
+
+00:08:07.020 --> 00:08:10.520
+Aqui eu posso fazer um resumo do livro,
+por
+
+00:08:10.520 --> 00:08:10.800
+exemplo.
+
+00:08:13.640 --> 00:08:18.960
+E dessa forma, digamos que esse livro
+aqui me remete ao livro Segundo
+
+00:08:18.960 --> 00:08:19.580
+Cérebro.
+
+00:08:23.020 --> 00:08:25.040
+Do Thiago Forte.
+
+00:08:26.800 --> 00:08:28.220
+E eu marco aqui também esse livro.
+
+00:08:28.320 --> 00:08:29.520
+Ah, mas por que você fica linkando as
+coisas?
+
+00:08:29.600 --> 00:08:32.640
+Porque quando eu vou estudar sobre uma
+coisa, estou estudando sobre obsidia.
+
+00:08:32.780 --> 00:08:33.960
+Eu quero também botar aqui o link.
+
+00:08:35.140 --> 00:08:37.920
+Baixar obsidia no...
+
+00:08:37.920 --> 00:08:39.420
+Eu vou botar aqui o site.
+
+00:08:40.980 --> 00:08:43.480
+Eu venho aqui, pego o site, link do
+site, coloco aqui
+
+00:08:43.480 --> 00:08:43.800
+também.
+
+00:08:49.040 --> 00:08:50.560
+Deixa eu abrir aqui o meu cofre que eu
+estava
+
+00:08:50.560 --> 00:08:50.940
+antes.
+
+00:08:53.360 --> 00:08:55.240
+Eu posso botar aqui o link do site.
+
+00:08:56.100 --> 00:08:57.100
+E aqui eu vou linkando as coisas.
+
+00:08:58.000 --> 00:08:59.420
+Mas o que é interessante aqui?
+
+00:08:59.860 --> 00:09:02.640
+Se eu for te mostrar por exemplo no meu
+cofre, é claro que esse aqui é um cofre
+
+00:09:02.640 --> 00:09:03.920
+pequeno, a gente está recém começando.
+
+00:09:04.240 --> 00:09:06.280
+Eu vou te mostrar como eu comecei.
+
+00:09:06.400 --> 00:09:07.040
+Aqui no meu.
+
+00:09:07.980 --> 00:09:08.760
+Para você entender.
+
+00:09:08.920 --> 00:09:13.360
+Porque o meu já está com IA, o meu já
+está há um tempo já quase um ano e meio
+
+00:09:13.360 --> 00:09:14.340
+por aí que eu já uso.
+
+00:09:15.380 --> 00:09:17.600
+Então, aqui por exemplo, eu separo essas
+pastinhas.
+
+00:09:17.860 --> 00:09:20.580
+Você pode separar as pastinhas que faz
+mais sentido para você.
+
+00:09:20.580 --> 00:09:22.340
+Aqui tem os cursos que eu faço e tudo
+mais.
+
+00:09:23.000 --> 00:09:24.240
+E aqui tem as minhas anotações.
+
+00:09:24.500 --> 00:09:25.420
+Eu fiz uma anotação por exemplo.
+
+00:09:25.880 --> 00:09:29.560
+Aluno, mas o que é essa anotação que
+está cheia de ideias linkadas?
+
+00:09:30.000 --> 00:09:31.520
+É um episódio do meu podcast.
+
+00:09:31.740 --> 00:09:33.760
+Por exemplo, esse aqui é chamado 17.
+
+00:09:33.860 --> 00:09:34.760
+Por que procrastinamos?
+
+00:09:35.160 --> 00:09:37.240
+Então, eu escrevi aqui e eu fui
+linkando.
+
+00:09:37.320 --> 00:09:40.260
+Por exemplo, eu quero saber mais sobre a
+única coisa.
+
+00:09:40.580 --> 00:09:43.080
+Pode ver aqui que eu tenho um resumo do
+livro A Única Coisa.
+
+00:09:43.840 --> 00:09:46.680
+Porque eu lembrei que eu tinha lido e eu
+fui lá fazer o resumo do livro.
+
+00:09:47.320 --> 00:09:48.580
+Cada coisinha que eu vou...
+
+00:09:48.580 --> 00:09:51.260
+Quando eu quero me aprofundar, quando eu
+estou escrevendo sobre algo eu marco o
+
+00:09:51.260 --> 00:09:51.840
+link para ela.
+
+00:09:52.180 --> 00:09:54.360
+Para que eu possa entrar lá e depois...
+
+00:09:54.360 --> 00:09:56.040
+Racionalização, criei aqui.
+
+00:09:56.500 --> 00:09:57.700
+Essa aqui eu não cheguei a escrever
+sobre.
+
+00:09:58.140 --> 00:10:01.520
+Mas a maioria das ideias que eu linko,
+eu linko para depois criar e escrever
+
+00:10:01.520 --> 00:10:02.100
+sobre ela.
+
+00:10:02.520 --> 00:10:06.060
+Então, para produção de conteúdo, ATDH,
+entrei aqui.
+
+00:10:06.620 --> 00:10:08.360
+Aqui é transtorno do suspeito autista.
+
+00:10:08.480 --> 00:10:09.720
+Eu entro aqui e tem outra coisa.
+
+00:10:09.920 --> 00:10:10.760
+Tem nível de desenvolvimento.
+
+00:10:10.860 --> 00:10:14.640
+Eu vou entrando cada um numa e eu vou
+conseguindo navegar aqui como se fosse
+
+00:10:14.640 --> 00:10:16.080
+um wiki pessoal.
+
+00:10:17.800 --> 00:10:18.240
+E...
+
+00:10:18.240 --> 00:10:21.140
+Sinceramente, quando eu comecei a fazer
+isso aqui, eu não imaginava que teria
+
+00:10:21.140 --> 00:10:22.080
+tanta...
+
+00:10:24.800 --> 00:10:27.700
+Tantos benefícios e tanta necessidade,
+inclusive.
+
+00:10:27.800 --> 00:10:28.060
+Por quê?
+
+00:10:28.440 --> 00:10:32.960
+Porque agora no mundo da IA, quanto mais
+informações linkadas você tiver que vem
+
+00:10:32.960 --> 00:10:36.480
+da sua cabeça, melhor você consegue
+treinar as IAs.
+
+00:10:36.680 --> 00:10:39.980
+Então, se você quiser treinar uma IA
+para depois fazer algo, a melhor coisa
+
+00:10:39.980 --> 00:10:43.340
+que você pode fazer é criar um segundo
+cérebro com ideias linkadas.
+
+00:10:43.440 --> 00:10:47.840
+Porque a gente coloca a IA aqui para que
+ela possa depois criar processos para
+
+00:10:47.840 --> 00:10:48.100
+você.
+
+00:10:48.260 --> 00:10:49.600
+E talvez você vai estar...
+
+00:10:49.600 --> 00:10:52.400
+Mas como é que eu posso usar a IA agora
+escrevendo?
+
+00:10:52.840 --> 00:10:55.880
+Por exemplo, dependendo do modelo que
+você colocar aqui, você pode
+
+00:10:55.880 --> 00:11:01.660
+simplesmente dar um comando simples aqui
+e a IA vai criar para ti.
+
+00:11:01.780 --> 00:11:04.660
+Vou botar aqui a paleta da Text
+Generator que é o
+
+00:11:04.660 --> 00:11:05.060
+plugin.
+
+00:11:08.440 --> 00:11:10.480
+Nesse aqui não está instalado.
+
+00:11:10.600 --> 00:11:13.940
+Deixa eu mostrar para vocês, instalando
+já de vocês e mostrar como funciona.
+
+00:11:14.900 --> 00:11:15.820
+Deixa eu pegar esse aqui.
+
+00:11:16.340 --> 00:11:21.280
+Esse aqui é um modelo que eu vou mostrar
+agora para você colocar IA.
+
+00:11:21.460 --> 00:11:22.260
+Aqui tem já.
+
+00:11:22.860 --> 00:11:25.580
+Deixa eu mostrar aqui nesse aqui.
+
+00:11:27.980 --> 00:11:31.500
+Esse aqui é outro cofre meu, de testes,
+que eu faço normalmente.
+
+00:11:32.180 --> 00:11:36.380
+E esse novo modelo do plugin, o que é o
+bacana aqui?
+
+00:11:36.640 --> 00:11:42.060
+Você pode colocar plugins e talvez agora
+ficou tudo claro, né?
+
+00:11:42.160 --> 00:11:42.780
+Deixa eu mostrar aqui.
+
+00:11:43.620 --> 00:11:46.160
+Assim como eu não gosto de ficar tão
+claro as coisas.
+
+00:11:46.780 --> 00:11:47.080
+Pronto.
+
+00:11:47.540 --> 00:11:50.600
+Você pode mudar o tema, você pode mudar
+as fontes, você pode mudar tudo.
+
+00:11:50.900 --> 00:11:53.980
+Aqui não vem o caso, eu tenho vídeos
+meus, inclusive no YouTube ensinando
+
+00:11:53.980 --> 00:11:54.740
+isso.
+
+00:11:54.940 --> 00:11:57.380
+Aqui eu quero te mostrar a importância
+do segundo cérebro e como você pode
+
+00:11:57.380 --> 00:11:58.020
+começar ele.
+
+00:11:59.580 --> 00:12:02.940
+O bacana aqui são os plugins não
+oficiais, ou seja, a gente tem uma
+
+00:12:02.940 --> 00:12:08.700
+comunidade inteira de pessoas, de
+comunidades aqui, que você pode baixar
+
+00:12:08.700 --> 00:12:10.900
+aqui vários plugins maravilhosos.
+
+00:12:11.300 --> 00:12:13.900
+Esse aqui é um deles que eu gosto muito,
+que é o Text Generator.
+
+00:12:14.060 --> 00:12:14.980
+O que ele faz basicamente?
+
+00:12:15.100 --> 00:12:19.660
+Você consegue colocar IA para conversar
+no meio dos seus textos.
+
+00:12:20.320 --> 00:12:25.100
+Então, se eu criar, que nem eu estava
+criando ali um sobre o segundo cérebro,
+
+00:12:25.600 --> 00:12:26.660
+teoria de sistema.
+
+00:12:27.300 --> 00:12:28.260
+O que eu vou fazer aqui?
+
+00:12:28.280 --> 00:12:29.160
+Teoria de sistema.
+
+00:12:29.400 --> 00:12:31.560
+Uma coisa que, sei lá, é avançado, né?
+
+00:12:33.020 --> 00:12:35.600
+Se eu pegar aqui, vou criar uma nota de
+novo.
+
+00:12:36.060 --> 00:12:38.600
+Segundo cérebro.
+
+00:12:41.700 --> 00:12:42.140
+Livros.
+
+00:12:45.020 --> 00:12:48.240
+Livros que falam sobre segundo cérebro.
+
+00:12:48.320 --> 00:12:51.940
+Se eu botar só isso, deixa eu lembrar
+qual atalho eu configurei para cá, acho
+
+00:12:51.940 --> 00:12:52.540
+que foi comand J.
+
+00:12:53.460 --> 00:12:57.880
+Comand J, eu aperto comand J que é o meu
+atalho para que a IA continue escrevendo
+
+00:12:57.880 --> 00:12:58.240
+para mim.
+
+00:12:59.000 --> 00:13:02.320
+O título do segundo cérebro pode ser
+referido em vários tópicos e tal, e foi
+
+00:13:02.320 --> 00:13:03.940
+me trazendo aqui ideias, né?
+
+00:13:04.240 --> 00:13:07.220
+Aqui ele pegou a ideia do segundo
+cérebro sendo uma parte do corpo, como
+
+00:13:07.220 --> 00:13:07.880
+um intestino.
+
+00:13:08.260 --> 00:13:08.820
+Deixa eu botar aqui.
+
+00:13:09.280 --> 00:13:17.200
+Livros que falam sobre o segundo cérebro
+como um recurso para melhorar a
+
+00:13:17.200 --> 00:13:23.120
+produtividade e a criatividade com
+ferramentas
+
+00:13:23.120 --> 00:13:23.840
+digitais.
+
+00:13:27.120 --> 00:13:28.600
+E aqui eu vou dar um comand J de novo.
+
+00:13:29.380 --> 00:13:31.800
+Essa IA que eu integrei aqui é uma IA
+que é de graça.
+
+00:13:32.800 --> 00:13:35.700
+Agora ele me trouxe, olha, segundo
+cérebro forte, getting things done,
+
+00:13:36.020 --> 00:13:36.800
+poder do hábito.
+
+00:13:37.320 --> 00:13:39.600
+Esses livros oferecem uma visão geral e
+eu posso estudar.
+
+00:13:40.240 --> 00:13:42.640
+Agora me traga livros
+
+00:13:45.840 --> 00:13:53.240
+que esses autores recomendam em comum.
+
+00:13:59.060 --> 00:13:59.460
+Pronto.
+
+00:14:00.540 --> 00:14:02.380
+Livros que esses autores citam, né?
+
+00:14:02.680 --> 00:14:06.540
+A arte da guerra, o poder do agora, sete
+habilidades do Stephen Coy, o cérebro
+
+00:14:06.540 --> 00:14:08.580
+que você tem, a arte de pensar.
+
+00:14:08.740 --> 00:14:12.180
+Então são livros que oferecem uma visão
+geral e tudo mais sobre esses.
+
+00:14:12.320 --> 00:14:15.500
+Então, imagina que você está lá, está no
+flow, está escrevendo, né, sobre uma
+
+00:14:15.500 --> 00:14:21.040
+ideia para um vídeo, uma ideia, por
+exemplo, para escrever um conteúdo,
+
+00:14:21.800 --> 00:14:25.860
+alguma ideia que você está tendo sobre
+um negócio novo que você vai criar e
+
+00:14:25.860 --> 00:14:31.620
+você muitas vezes, né, fica refém ali de
+não conseguir avançar porque você não
+
+00:14:31.620 --> 00:14:33.020
+tem um repertório, você não sabe.
+
+00:14:33.740 --> 00:14:35.500
+Nunca mais você vai ter com isso.
+
+00:14:35.780 --> 00:14:39.700
+Você simplesmente configura de graça
+essa IA dentro do seu segundo cérebro.
+
+00:14:40.160 --> 00:14:43.080
+Essa é uma delas, tem várias, tem uma
+que consegue ler todas as notas e
+
+00:14:43.080 --> 00:14:44.820
+consegue conversar com as suas notas.
+
+00:14:45.380 --> 00:14:48.800
+Essa aqui, ela serve principalmente para
+você criar prompts aqui dentro e você
+
+00:14:48.800 --> 00:14:53.140
+também dar comandos rápidos, como eu
+acabei de dar, que ele vai ler toda a
+
+00:14:53.140 --> 00:14:56.920
+tua nota e vai dar continuidade de onde
+parou, inclusive, se tu quiser,
+
+00:14:57.080 --> 00:14:58.800
+mimetizando a forma como tu escreve.
+
+00:14:59.360 --> 00:15:00.880
+Alan, como é que tu fez isso?
+
+00:15:00.940 --> 00:15:03.180
+Como é que tu colocou essa IA de graça
+no Obsidian?
+
+00:15:03.320 --> 00:15:05.140
+É exatamente isso que eu vou te mostrar
+agora.
+
+00:15:05.440 --> 00:15:12.020
+Então, vamos abrir lá o teu cofre, teu
+cofre novo, porque é um cofre que ainda
+
+00:15:12.020 --> 00:15:17.060
+não está configurado, né, então vamos
+fazer essa configuração.
+
+00:15:17.060 --> 00:15:18.160
+Bota aqui ele.
+
+00:15:19.200 --> 00:15:20.500
+O que a gente tem que fazer então?
+
+00:15:20.660 --> 00:15:26.080
+Você vai clicar aqui nas chavezinhas ali
+embaixo, você vai vir aqui em plug -ins
+
+00:15:26.080 --> 00:15:31.000
+noficiais, você vai ligar os plug -ins
+noficiais, talvez vai aparecer um pop
+
+00:15:31.000 --> 00:15:35.960
+-up aí para permitir a ação, permite
+essa ação, e aqui você vai digitar text
+
+00:15:37.260 --> 00:15:37.740
+generators.
+
+00:15:40.300 --> 00:15:41.420
+Vamos instalar.
+
+00:15:45.120 --> 00:15:47.220
+Pronto, ativar e configurar.
+
+00:15:47.880 --> 00:15:49.320
+Beleza, o que você vai fazer aqui agora?
+
+00:15:49.400 --> 00:15:52.840
+Agora a gente precisa de uma chave API,
+não se preocupa que você não precisa nem
+
+00:15:52.840 --> 00:15:56.340
+saber o que é API, eu vou te mostrar
+basicamente copiar um códigozinho e
+
+00:15:56.340 --> 00:15:57.220
+colar aqui.
+
+00:15:57.900 --> 00:15:58.540
+O que acontece?
+
+00:15:58.720 --> 00:16:01.360
+A gente vai configurar com uma IA de
+graça.
+
+00:16:01.720 --> 00:16:03.560
+Lembra que eu falei que a gente ia
+configurar com uma IA de graça?
+
+00:16:04.380 --> 00:16:05.780
+E qual que é essa IA de graça?
+
+00:16:06.360 --> 00:16:07.260
+Ela é o Grok.
+
+00:16:07.780 --> 00:16:11.680
+Então, para que se você tiver já
+ensinando a usar o GPT, se você já tem a
+
+00:16:11.680 --> 00:16:15.320
+chave API dele, você gosta de trabalhar
+com o GPT 4 .0, você gosta de trabalhar
+
+00:16:15.320 --> 00:16:19.100
+com outros modelos, o Gemini, o Cloud,
+etc, tudo bem, fique à vontade.
+
+00:16:19.600 --> 00:16:21.560
+Aqui eu vou te ensinar uma forma
+gratuita de fazer isso.
+
+00:16:21.940 --> 00:16:23.360
+Como é que a gente faz isso de forma
+gratuita?
+
+00:16:23.420 --> 00:16:27.720
+Você vai acessar esse link aqui, esse
+link vai estar aqui abaixo da aula
+
+00:16:27.720 --> 00:16:36.360
+também, ou você simplesmente digita aí,
+grok .com logo vai entrar aqui no
+
+00:16:36.360 --> 00:16:45.740
+painel, ou digita console .grok .com
+barra keys, barra K E Y S Você vai cair
+
+00:16:45.740 --> 00:16:48.280
+aqui, não precisa colocar cartão de
+crédito, não precisa fazer nada, é
+
+00:16:48.280 --> 00:16:52.080
+gratuito, vai clicar aqui em criar uma
+nova chave e aqui eu vou chamar aqui,
+
+00:16:52.340 --> 00:17:01.360
+aqui é o segundo cérebro, segundo cunha,
+cérebro
+
+00:17:01.360 --> 00:17:05.800
+cunha, cunha, cunha, pronto.
+
+00:17:06.360 --> 00:17:09.980
+Vai gerar um texto aqui, um código,
+copie esse código e a gente vai colocar
+
+00:17:09.980 --> 00:17:15.860
+esse código lá no seu Obsidian, no seu
+segundo cérebro, então vou abrir aqui
+
+00:17:15.860 --> 00:17:23.960
+ele, pronto, esse cara aqui, agora eu
+vou vir aqui, tem que ser custom, porque
+
+00:17:23.960 --> 00:17:27.220
+não tem aqui, tá vendo que não tem grok
+aqui, então tem que ser customizado.
+
+00:17:28.620 --> 00:17:33.400
+A chave aqui, API key, a gente coloca
+aqui, cola, verifica que tá certinho,
+
+00:17:34.240 --> 00:17:36.760
+aqui não vai ser essa URL, tá vendo?
+
+00:17:37.180 --> 00:17:40.140
+Essa aqui é uma URL da OpenAI, é uma URL
+diferente.
+
+00:17:41.020 --> 00:17:42.120
+Ah, onde é que eu pego essa URL?
+
+00:17:42.460 --> 00:17:46.900
+Eu tive que ir lá, olhar, dar uma lida
+na documentação, a URL é essa aqui, tá
+
+00:17:46.900 --> 00:17:47.040
+vendo?
+
+00:17:47.120 --> 00:17:51.940
+API, vou copiar aqui, eu vou deixar
+também, vou pedir pro pessoal aqui que
+
+00:17:51.940 --> 00:17:55.660
+for cadastrar a aula pra você, pra eles
+colocarem esses links pra ficar mais
+
+00:17:55.660 --> 00:17:57.300
+fácil, pra você só copiar e colar.
+
+00:17:57.300 --> 00:18:02.440
+Então, beleza, esse aqui é o link, deixa
+eu voltar ali, esse
+
+00:18:02.440 --> 00:18:09.960
+aqui, esse aqui é o link, então
+modifiquei o link, modifiquei aqui a
+
+00:18:09.960 --> 00:18:15.020
+API, e agora vou colocar no modo
+avançado aqui, porque aqui eu preciso
+
+00:18:15.020 --> 00:18:19.040
+mexer aqui, no modelo e na temperatura.
+
+00:18:19.920 --> 00:18:24.000
+Então, esses aqui, aqui tá o modelo, na
+verdade eu posso botar aqui mesmo,
+
+00:18:24.020 --> 00:18:28.940
+acredito, o modelo, nessa variável aqui,
+deixa eu ver se ele vai fechar, é, vou
+
+00:18:28.940 --> 00:18:32.340
+vir aqui e vou alterar o modelo, por
+quê?
+
+00:18:32.460 --> 00:18:36.540
+Porque não vai ser esse aqui, não vai
+ser o ChatPay 3 .5 Turbo, vai ser o
+
+00:18:36.540 --> 00:18:42.300
+seguinte, vai ser esse cara aqui,
+modelos, você pode copiar um deles, qual
+
+00:18:42.300 --> 00:18:43.420
+que eu indico você copiar?
+
+00:18:43.860 --> 00:18:54.000
+Eu indico você copiar esse aqui, 70B,
+80B, esse aqui, 3 .1, 70B, então vou
+
+00:18:54.000 --> 00:19:00.160
+copiar ele, copio aqui, ó, o que que tá
+escrito aqui ó,
+
+00:19:00.280 --> 00:19:03.180
+janela de contexto de 128 mil tokens, na
+próxima aula a gente vai falar sobre
+
+00:19:03.180 --> 00:19:09.040
+isso, e máximo de limite de tokens por
+conversa, 8 mil tokens, vou pegar esse
+
+00:19:09.040 --> 00:19:15.720
+cara, vou levar pra cá, pronto, deixa eu
+ver se o limit
+
+00:19:15.720 --> 00:19:18.640
+aqui, o stop, max tokens, onde é que tá
+configurado o max
+
+00:19:18.640 --> 00:19:26.540
+tokens, parâmetros padrões, aqui ó, 500
+tokens, tudo bem, então beleza, só, ah
+
+00:19:26.540 --> 00:19:29.620
+não, mas o que que é isso, o que é
+token, o que é API, não se preocupa, só
+
+00:19:29.620 --> 00:19:35.020
+copia e cola, beleza, tá certo, já tá
+tudo configurado, vamos testar agora,
+
+00:19:36.520 --> 00:19:40.380
+inclusive tem um botãozinho ali, deixa
+eu ver aqui, normalmente eles tem um
+
+00:19:40.380 --> 00:19:45.700
+botãozinho de testar API, deixa eu ver
+aqui, não, esse aqui não tem, deixa eu
+
+00:19:45.700 --> 00:19:51.500
+agora dar um comando aqui, comando p,
+text generators, e eu quero que ele, ah,
+
+00:19:51.540 --> 00:19:56.240
+comando j, ele comece, vamos ver se vai
+funcionar, funcionou, então aqui ó, tava
+
+00:19:56.240 --> 00:19:59.140
+escrevendo sobre baixar obsidian e tal,
+pra começar você vai precisar baixar
+
+00:19:59.140 --> 00:20:02.420
+obsidian no site oficial, obsidian é uma
+ferramenta de notas de conhecimento,
+
+00:20:02.840 --> 00:20:06.000
+como funciona obsidian, conclusão, o
+cara fez tudo praticamente uma aula aqui
+
+00:20:06.000 --> 00:20:10.940
+pra mim, sobre obsidian, então foi só
+isso, o que que eu fiz aqui, novamente,
+
+00:20:11.540 --> 00:20:18.640
+eu vim aqui, opa, eu vim aqui, baixei,
+instalei esse text generator, botei em
+
+00:20:18.640 --> 00:20:22.760
+custom, coloquei essa URL, coloquei o
+código que você recebeu ali, eu vim aqui
+
+00:20:22.760 --> 00:20:28.020
+em avançado, mudei pra esse modelo aqui,
+tá, esse modelo você vai utilizar, que é
+
+00:20:28.020 --> 00:20:33.020
+o melhor de graça que tem, e daí o resto
+é resto, o resto assim, depois você vai
+
+00:20:33.020 --> 00:20:36.720
+trabalhando, você vai ver como
+modificando etc, porque a ideia aqui é
+
+00:20:36.720 --> 00:20:40.060
+dar uma introdução pra você nesse
+universo, como eu falei, só o curso
+
+00:20:40.060 --> 00:20:44.220
+dominando obsidian, que é um curso que
+eu criei completo, sobre essa
+
+00:20:44.220 --> 00:20:47.800
+ferramenta, tem acho que mais de 30
+aulas, então são muitas coisas, você não
+
+00:20:47.800 --> 00:20:50.260
+precisa comprar nenhum curso se você não
+quiser, você pode simplesmente aprender
+
+00:20:50.260 --> 00:20:56.000
+tudo mexendo aqui, fazendo aqui
+alterações, e existe muito conteúdo
+
+00:20:56.000 --> 00:20:58.980
+também de graça na internet sobre isso,
+se você assistir alguns vídeos no
+
+00:20:58.980 --> 00:21:04.120
+YouTube, o que eu aconselho você, é você
+agora testar pra ver se é pra você ou
+
+00:21:04.120 --> 00:21:08.180
+não, o que que eu gosto de fazer, como é
+que eu utilizo, eu utilizo pra escrever
+
+00:21:08.180 --> 00:21:12.420
+sobre o que eu estou estudando, onde eu
+consigo colocar uma IA aqui pra
+
+00:21:12.420 --> 00:21:16.240
+conversar com ela sobre todas as minhas
+ideias que eu tenho dentro do meu
+
+00:21:16.240 --> 00:21:21.240
+segundo cérebro, onde eu consigo marcar
+aqui as atividades que eu preciso fazer
+
+00:21:21.240 --> 00:21:25.300
+e a IA ao mesmo tempo já me trazer
+ideias, me trazer soluções, me trazer
+
+00:21:25.300 --> 00:21:28.800
+notas que eu já escrevi que resolvem
+esse problema, então ela acaba sendo uma
+
+00:21:28.800 --> 00:21:34.020
+solução multitarefa, você pode integrar
+ela com o Google por exemplo, pra poder
+
+00:21:34.020 --> 00:21:37.740
+fazer pesquisas em tempo real, ela lê
+PDFs, ou seja, você pode colocar cópias
+
+00:21:37.740 --> 00:21:44.960
+ou materiais de outros vídeos, outros
+sites aqui dentro e escrever com base
+
+00:21:44.960 --> 00:21:48.860
+nesse conteúdo, existem inúmeras
+possibilidades, o segundo cérebro é uma
+
+00:21:48.860 --> 00:21:52.560
+caixinha de Pandora, que eu espero que
+você tenha gostado que eu abri pra você
+
+00:21:52.560 --> 00:21:58.120
+aqui, que é pra você conseguir
+basicamente construir e fazer o que
+
+00:21:58.120 --> 00:21:59.020
+quiser aqui dentro.
+
+00:21:59.860 --> 00:22:05.120
+Então, nessa aula, você viu aqui um
+pouquinho sobre o que que é esse segundo
+
+00:22:05.120 --> 00:22:10.220
+cérebro, como ele funciona e como você
+pode implementar inclusive IA nele.
+
+00:22:11.120 --> 00:22:16.000
+O que eu quero que você possa fazer
+agora é antes de continuar aqui as
+
+00:22:16.000 --> 00:22:21.880
+aulas, se você só assistiu e não baixou,
+baixe aí o Obsidian, instale ele, comece
+
+00:22:21.880 --> 00:22:25.540
+a usar, crie algumas notas, link uma
+coisa com a outra, anote o que você está
+
+00:22:25.540 --> 00:22:31.100
+estudando aqui, anote os nomes, por
+exemplo, que eu falo aqui e aperte Ctrl
+
+00:22:31.100 --> 00:22:35.260
+J ou Command J depois de escrever o que
+eu falei, o que é a API, o que é uma
+
+00:22:35.260 --> 00:22:40.760
+API, por exemplo, ainda vou compartilhar
+minha tela aqui e vou mostrar como é que
+
+00:22:40.760 --> 00:22:43.540
+eu uso pra estudar inclusive, então aqui
+está falando sobre o segundo cérebro e
+
+00:22:43.540 --> 00:22:48.500
+tal, digamos que eu quero falar sobre
+APIs, o que é uma
+
+00:22:48.500 --> 00:23:03.260
+API como API das IAs, das LLMs funciona
+por
+
+00:23:03.260 --> 00:23:07.380
+exemplo, estou com o Command J aqui ele
+vai ler isso aqui, esse documento e já
+
+00:23:07.380 --> 00:23:11.660
+vai me responder aqui mesmo a API das
+LLMs tem um funcionamento API é uma
+
+00:23:11.660 --> 00:23:14.440
+interface de programação que permite os
+desenvolvedores criarem aplicativos
+
+00:23:14.440 --> 00:23:18.580
+arquitetura básica e aqui vai ou seja,
+qualquer coisa que você estiver com
+
+00:23:18.580 --> 00:23:21.680
+dúvida no meio de um texto, e isso que é
+legal porque o que acontece, você fica
+
+00:23:21.680 --> 00:23:25.660
+abrindo, por exemplo, um chat de IPT
+fica abrindo uma outra ferramenta lá, às
+
+00:23:25.660 --> 00:23:28.740
+vezes você se perde aqui quando eu quero
+concentração total, eu simplesmente
+
+00:23:28.740 --> 00:23:34.440
+estou aqui dentro do meu documento, do
+meu segundo cérebro escrevendo, e eu só
+
+00:23:34.440 --> 00:23:39.300
+vou dando comandos além disso, você pode
+instalar pacotes aqui, de comandos então
+
+00:23:39.300 --> 00:23:40.960
+olha só, se eu instalar esse pacote aqui
+de
+
+00:23:40.960 --> 00:23:48.300
+comandos vou instalar dois deles, vou
+instalar esse que é muito bom, e vou
+
+00:23:48.300 --> 00:23:57.760
+instalar esse aqui então agora eu tenho
+um monte de comandos prontos aqui como
+
+00:23:57.760 --> 00:24:03.580
+assim, olha, comandos prontos deixa eu
+mostrar modelos text
+
+00:24:03.580 --> 00:24:15.000
+generator show model from template
+daqui, olha esse aqui, então aqui eu
+
+00:24:15.000 --> 00:24:18.680
+posso botar um atalho, né, pra ele, pra
+chamar ele, toda vez que eu quiser, por
+
+00:24:18.680 --> 00:24:23.880
+exemplo sei lá, um resumo uma revisão,
+que tem um monte né, recrutadores,
+
+00:24:24.000 --> 00:24:28.940
+estatística eu quero que você haja como
+um ajudante de livros de autoajuda
+
+00:24:29.940 --> 00:24:34.480
+conselheiro de viagem, socrático né,
+vamos pegar esse socrático aqui, que ele
+
+00:24:34.480 --> 00:24:39.360
+vai fazer provavelmente perguntas sobre
+o que eu escrevi até agora claro, esse
+
+00:24:39.360 --> 00:24:42.060
+prompt está em inglês, então ele me
+trouxe perguntas sobre o que eu escrevi
+
+00:24:42.060 --> 00:24:48.360
+em inglês mas, você pode então ter todos
+os prompts que você utiliza, né, ah, mas
+
+00:24:48.360 --> 00:24:51.680
+onde é que fica isso, tá vendo que ele
+criou uma pastinha aqui aqui tem todos
+
+00:24:51.680 --> 00:24:58.080
+os prompts então eu clico aqui, altero o
+prompt aqui, ó e daí, beleza, eu tenho
+
+00:24:58.080 --> 00:25:01.280
+novos prompts aqui, que eu posso usar
+pra copy, pra criação de conteúdo, pra
+
+00:25:01.280 --> 00:25:05.140
+definição de problemas e tudo mais,
+então como você pode ver, como eu falei,
+
+00:25:05.260 --> 00:25:09.520
+é uma caixinha de Pandora né,
+basicamente você fica você ganha poderes
+
+00:25:09.520 --> 00:25:12.400
+limitados quando você tem um segundo
+cérebro, porque você pode colocar tudo
+
+00:25:12.400 --> 00:25:17.180
+aqui, configurar tudo aqui nele e
+utilizar tudo aqui dentro e, como eu
+
+00:25:17.180 --> 00:25:22.560
+mostrei aqui hoje 100 % de graça o
+Obsidian é de graça o Grok, que tem o
+
+00:25:22.560 --> 00:25:29.080
+LLAMA 3 .1 70B também é de graça Alan, o
+LLAMA 3 .1 é a melhor pra fazer isso,
+
+00:25:29.200 --> 00:25:30.700
+pra poder ter ideias, insights?
+
+00:25:31.360 --> 00:25:35.840
+Nem sempre é por isso que na próxima
+aula agora, eu vou te mostrar quais são
+
+00:25:35.840 --> 00:25:39.580
+as LLMs que eu uso no meu dia a dia e
+como é que eu utilizo cada uma como é
+
+00:25:39.580 --> 00:25:43.500
+que eu utilizo cada um desses modelos e
+pra que que servem eles, como você pode
+
+00:25:43.500 --> 00:25:45.860
+desfrutar ao máximo deles te vejo na

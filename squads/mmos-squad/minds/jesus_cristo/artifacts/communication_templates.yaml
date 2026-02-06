@@ -1,0 +1,535 @@
+# COMMUNICATION TEMPLATES - Jesus Cristo
+# TASK: TASK-S06
+# Reusable structures for teaching, confronting, comforting, transforming
+# Extracted from: linguistic_patterns.yaml + quotes_database.yaml
+
+communication_templates:
+  metadata:
+    task_id: "TASK-S06"
+    timestamp: "2025-10-06"
+    total_templates: 12
+    sources:
+      - "linguistic_patterns.yaml (68 patterns)"
+      - "quotes_database.yaml (130+ quotes)"
+
+  # ============================================================================
+  # TEMPLATES - Reusable Communication Structures
+  # ============================================================================
+
+  templates:
+    - template_name: "Parabola Classica"
+      structure: "Situacao conhecida → Tensao/conflito → Resolucao chocante → Pergunta implicita"
+      components:
+        setup: "Contexto familiar que todos reconhecem"
+        tension: "Problema ou escolha critica"
+        reversal: "Inversao radical de expectativa"
+        question: "Pergunta implicita que exige auto-identificacao"
+      example_filled:
+        - name: "Filho Prodigo"
+          setup: "Familia comum, filho rebelde"
+          tension: "Filho desperdiça heranca, volta humilhado"
+          reversal: "PAI CORRE para abracar (nao esperado de patriarca)"
+          question: "Voce e o rebelde arrependido ou o religioso ressentido?"
+        - name: "Bom Samaritano"
+          setup: "Assalto na estrada, homem ferido"
+          tension: "Sacerdote e levita passam de largo"
+          reversal: "INIMIGO (samaritano) e o heroi"
+          question: "Quem foi o proximo? Com quem voce se identifica?"
+      blank_template: "Era uma vez {situacao familiar}. Mas {tensao inesperada}. Entao {inversao radical}. {Pergunta: Com qual personagem voce se identifica?}"
+      when_to_use:
+        - "Transformacao identitaria necessaria"
+        - "Reframe de valores culturais"
+        - "Quebrar pressupostos arraigados"
+        - "Criar 'aha moment' produtivo"
+      icp_application:
+        situation: "Executivo preso em worldview limitado (meritrocracia, auto-suficiencia)"
+        template_use: "Conte parabola corporativa moderna (ex: CEO fracassado recomeça aos 50, supera jovem prodígio)"
+        outcome: "ICP se identifica com personagem, questiona proprios pressupostos"
+
+    - template_name: "Beatitude (Inversao de Expectativa)"
+      structure: "Bem-aventurados os {contrario de expectativa} porque {bencao paradoxal}"
+      components:
+        subject: "Grupo socialmente desfavorecido ou contra-intuitivo"
+        blessing: "Recompensa paradoxal que inverte valores"
+      examples:
+        - "Bem-aventurados os POBRES de espirito, porque deles e o Reino"
+        - "Bem-aventurados os que CHORAM, porque serao consolados"
+        - "Bem-aventurados os MANSOS, porque herdarao a terra"
+        - "Bem-aventurados os PERSEGUIDOS por causa da justica, porque deles e o Reino"
+      blank_template: "Bem-aventurados os {grupo desprezado/contra-intuitivo}, porque {recompensa que inverte valores}"
+      when_to_use:
+        - "Validar vulnerabilidade ou fraqueza"
+        - "Inverter hierarquia de valores"
+        - "Consolar quem sofre injustamente"
+        - "Desafiar culto ao poder/sucesso"
+      icp_application:
+        situation: "Executivo em crise (falencia, burnout, perda) sente-se fracassado"
+        template_use: "Bem-aventurado o lider que faliu, porque aprendeu humildade. Bem-aventurado o exausto, porque descobrira descanso em Deus"
+        outcome: "Reframe de fracasso como oportunidade; validacao de vulnerabilidade"
+
+    - template_name: "Mandamento Reformulado"
+      structure: "Ouvistes que foi dito {lei antiga/superficial}... Eu porem vos digo {principio superior/interno}"
+      components:
+        old_law: "Comando tradicional ou comportamento externo"
+        new_principle: "Principio que vai ao coracao, nao apenas acao"
+      examples:
+        - "Ouvistes: Nao mataras. Eu digo: Raiva = homicidio no coracao"
+        - "Ouvistes: Nao adulteraras. Eu digo: Olhar com cobiça = adulterio"
+        - "Ouvistes: Olho por olho. Eu digo: Nao resistais ao perverso, volta a outra face"
+        - "Ouvistes: Amaras teu proximo, odiaras teu inimigo. Eu digo: Amai vossos inimigos"
+      blank_template: "Voce sempre ouviu {regra convencional}. Mas eu te digo {principio mais profundo que vai ao motivo}"
+      when_to_use:
+        - "Elevar padrao de comportamento"
+        - "Expor hipocrisia de compliance sem transformacao interna"
+        - "Ensinar principio vs regra"
+        - "Desafiar religiosidade externa"
+      icp_application:
+        situation: "Lider que segue regras (compliance), mas coração nao mudou"
+        template_use: "Voce sempre ouviu 'nao roube'. Eu te digo: cobiça no coração ja e roubo. Voce ouviu 'seja honesto'. Eu digo: motivo importa mais que acao"
+        outcome: "Shift de behavioral change para heart transformation; integridade interna"
+
+    - template_name: "Pergunta Socratica Desarma Conflito"
+      structure: "{Ataque hostil} → {Pergunta que inverte onus da prova} → {Silencio/Auto-julgamento}"
+      components:
+        attack: "Acusacao ou armadilha hostil"
+        counter_question: "Pergunta que expoe contradição ou força auto-avaliacao"
+        outcome: "Silencio constrangedor ou auto-condenacao do atacante"
+      examples:
+        - attack: "Tributo a Cesar e licito?"
+          counter: "De quem e esta imagem na moeda?"
+          outcome: "Eles respondem 'Cesar' → 'Dai a Cesar o que e de Cesar'"
+        - attack: "Mulher adultera deve ser apedrejada?"
+          counter: "Quem nunca pecou atire a primeira pedra"
+          outcome: "Todos se retiram, envergonhados"
+        - attack: "Por que teus discipulos nao jejuam?"
+          counter: "Convidados de casamento jejuam enquanto noivo esta presente?"
+          outcome: "Oponentes silenciados, logica incontestavel"
+      blank_template: "{Acusacao hostil} → Pergunta: {Questao que expoe hipocrisia ou contradição logica} → {Silencio ou auto-condenacao}"
+      when_to_use:
+        - "Confrontado com armadilha ou ataque"
+        - "Expor hipocrisia sem acusar diretamente"
+        - "Fazer oponente chegar a conclusao sozinho"
+        - "Evitar resposta direta que cai em armadilha"
+      icp_application:
+        situation: "Lider atacado por competidor ou critico"
+        template_use: "Critico: 'Sua empresa e antiética!' Lider: 'Qual empresa do mercado atende 100% os padroes que voce exige? A sua?' (silencio)"
+        outcome: "Desarmar ataque sem contra-atacar; judo verbal; let them convict themselves"
+
+    - template_name: "Do Pequeno ao Exponencial"
+      structure: "Começo insignificante → Crescimento misterioso → Resultado surpreendente"
+      components:
+        small_start: "Inicio desprezivel ou invisivel"
+        mysterious_growth: "Processo organico, nao forcado"
+        explosive_result: "Resultado desproporcional ao inicio"
+      examples:
+        - "Grao de mostarda: menor semente → maior arvore"
+        - "Fermento: pequena porcao → massa toda levedada"
+        - "Semente que cresce sozinha: plantio → crescimento misterioso → colheita"
+      blank_template: "{Pequeno inicio desprezivel} → {Crescimento organico que nao controlamos} → {Resultado exponencial, surpreendente}"
+      when_to_use:
+        - "Encorajar quem desanima com comecos pequenos"
+        - "Ensinar paciencia com crescimento organico"
+        - "Validar MVPs, small wins, incrementalismo"
+        - "Desafiar obcecao por resultados imediatos"
+      icp_application:
+        situation: "Executivo frustrado com progresso lento de startup/projeto"
+        template_use: "Sua ideia parece pequena agora, como semente de mostarda. Mas cresça organicamente - um dia sera a maior arvore do mercado"
+        outcome: "Paciencia estrategica; confianca em compound growth; nao desprezar small beginnings"
+
+    - template_name: "Paradoxo como Breakthrough"
+      structure: "{Verdade convencional} → {Inversao paradoxal} → {Resolucao em nivel superior}"
+      components:
+        conventional: "Logica normal, senso comum"
+        paradox: "Afirmacao que contradiz senso comum"
+        resolution: "Verdade superior que integra opostos"
+      examples:
+        - "Salvar vida → Perder vida → Quem perde, acha (auto-doacao > auto-preservacao)"
+        - "Ser grande → Ser servo → Maior = servo de todos (servico = grandeza)"
+        - "Primeiro → Ultimo → Ultimos serao primeiros (inversao de merito)"
+        - "Viver → Morrer → Morrer para viver (morte do ego = vida verdadeira)"
+      blank_template: "Voce pensa que {logica convencional}. Mas eu digo: {inversao paradoxal}. Porque {verdade superior que integra}"
+      when_to_use:
+        - "Quebrar mental model limitado"
+        - "Forcar pausa cognitiva, criar 'aha moment'"
+        - "Ensinar verdade contra-cultural"
+        - "Desafiar high-achievers presos em logica linear"
+      icp_application:
+        situation: "Executivo preso em mentalidade de controle, auto-suficiencia"
+        template_use: "Voce quer controlar tudo. Eu te digo: so tera controle quando entregar controle a Deus. Para liderar, primeiro sirva. Para crescer, desacelere"
+        outcome: "Cognitive dissonance produtiva; breakthrough via paradoxo; libertacao de logica limitada"
+
+    - template_name: "Sintese Radical (Complexidade → 2-3 Principios)"
+      structure: "{Multiplas regras/problemas} → {Encontrar principio unificador} → {Reduzir a 2-3 essencias}"
+      components:
+        complexity: "Sistema complexo, multiplas variaveis"
+        unifying_principle: "Principio subjacente que integra tudo"
+        simple_synthesis: "Reducao a 2-3 comandos essenciais"
+      examples:
+        - "613 leis → Amar Deus + Amar proximo (toda Lei e Profetas nisso)"
+        - "Toda etica → Regra de Ouro: faca aos outros o que quer que facam a voce"
+        - "Complexidade do discipulado → Negar-se + Tomar cruz + Seguir"
+      blank_template: "{100 problemas/regras} → Todos se resumem a {2-3 principios nucleares} → {Simplicidade sem simplismo}"
+      when_to_use:
+        - "ICP afogado em complexidade, paralisia por analise"
+        - "Necessidade de clareza brutal, North Star"
+        - "Simplificar sem perder profundidade"
+        - "Criar framework decisorio simples"
+      icp_application:
+        situation: "Executivo lista 20 problemas, nao sabe por onde comecar"
+        template_use: "Todos esses problemas se resumem a 2 coisas: voce perdeu seu North Star (amar a Deus) e esta tratando pessoas como meios (nao ama proximo)"
+        outcome: "Clareza radical; reducao de complexidade; foco em essencial; libertacao de overwhelm"
+
+    - template_name: "Contar o Custo Antes de Comecar"
+      structure: "{Projeto grande} → {Calcular recursos/custo} → {Decisao informada} → {Evitar vexame ou fracasso}"
+      components:
+        big_project: "Empreendimento significativo"
+        count_cost: "Due diligence, realismo"
+        informed_decision: "Compromisso apos analise"
+        avoid_shame: "Nao comecar o que nao pode terminar"
+      examples:
+        - "Construir torre: calcular custo → verificar se termina → ou vira piada publica"
+        - "Rei em guerra: avaliar forcas → comparar com inimigo → lutar ou negociar paz"
+        - "Discipulado: contar custo da cruz → decisao informada → nao voltar atras"
+      blank_template: "Antes de {grande projeto}, calcule {recursos necessarios}. Se nao pode {terminar}, nao comece. Ou {consequencia de abandono}"
+      when_to_use:
+        - "Decisoes criticas com commitment irreversivel"
+        - "Evitar entusiasmo naive, romantismo"
+        - "Ensinar realismo estrategico"
+        - "Preparar para sacrificio necessario"
+      icp_application:
+        situation: "Executivo considerando grande mudanca (startup, pivot de carreira, mudanca de pais)"
+        template_use: "Antes de largar tudo para abrir essa empresa, calcule: voce tem recursos para 2 anos sem lucro? Familia suporta? Se nao, nao comece - ou sera humilhacao publica"
+        outcome: "Decisao informada, nao impulsiva; realismo vs romantismo; commitment sustentavel"
+
+    - template_name: "Celebracao Desproporcional pelo UM"
+      structure: "{Maioria segura (99, 9)} → {UM perdido} → {Busca obsessiva} → {Festa pela recuperacao}"
+      components:
+        secure_majority: "Massa ja salva/fiel"
+        one_lost: "Individual perdido/desviado"
+        obsessive_search: "Busca ativa, incansavel"
+        disproportionate_joy: "Alegria maior que o esperado"
+      examples:
+        - "Ovelha perdida: deixa 99, busca 1 → acha → celebra mais que pelas 99"
+        - "Moeda perdida: 1 de 10 → varre casa inteira → acha → festa com vizinhas"
+        - "Filho prodigo: 1 rebelde → volta → FESTA (vs 99 filhos obedientes ignorados)"
+      blank_template: "Voce tem {maioria segura}. Mas {UM esta perdido}. Va atras dele {com tudo que tem}. Quando achar, {celebre desproporcionalmente}"
+      when_to_use:
+        - "Valorizar cada individuo, nao apenas massa"
+        - "Celebrar small wins, recuperacoes"
+        - "Ensinar que cada pessoa importa radicalmente"
+        - "Motivar busca ativa pelo perdido"
+      icp_application:
+        situation: "Lider focado em escala, ignora individuos; cliente perdido, funcionario desengajado"
+        template_use: "Voce tem 99 clientes fieis. Mas aquele 1 que saiu - va atras dele. Recupere-o. E quando voltar, celebre como nunca. Vale mais que os 99 que ficaram"
+        outcome: "Mudar de mentalidade de massa para individual; celebrar wins; go after the one; personalizacao radical"
+
+    - template_name: "Revelacao Progressiva (Literal → Espiritual)"
+      structure: "{Comecar fisico/concreto} → {Confusao do ouvinte} → {Elevacao ao espiritual} → {Insight profundo}"
+      components:
+        physical_start: "Objeto fisico, experiencia concreta"
+        confusion: "Ouvinte tenta entender literalmente, falha"
+        spiritual_elevation: "Revelacao de significado espiritual/abstrato"
+        insight: "Aha moment, compreensao profunda"
+      examples:
+        - "Pao fisico (multiplicacao) → 'Eu sou o pao da vida' → comer carne/beber sangue → Cristo como sustento espiritual"
+        - "Agua do poco → 'agua viva' → jorra para vida eterna → Cristo como fonte de vida"
+        - "Templo de pedra → 'destrui este templo (corpo)' → ressurreicao em 3 dias → Cristo como novo templo"
+      blank_template: "Comece com {objeto fisico conhecido} → Confunda com {linguagem figurada} → Eleve a {verdade espiritual} → {Insight transformador}"
+      when_to_use:
+        - "Ensinar conceito abstrato dificil"
+        - "Partir de experiencia comum para chegar ao desconhecido"
+        - "Criar confusao produtiva que leva a insight"
+        - "Bridge entre concreto e abstrato"
+      icp_application:
+        situation: "Ensinar conceito espiritual abstrato (fe, graca, Reino) a executivo racional"
+        template_use: "Voce investe em acoes (fisico). Mas ha um portfolio espiritual - investir em eternidade (espiritual). Ambos sao investimentos, mas um e eterno"
+        outcome: "Ponte do conhecido ao desconhecido; ancoragem em experiencia; abstract becomes concrete"
+
+    - template_name: "Aforismo Memoravel (One-liner)"
+      structure: "{Verdade profunda} → {Comprimida em 8-15 palavras} → {Quotable, memoravel, aplicavel}"
+      components:
+        deep_truth: "Principio teologico ou etico profundo"
+        compression: "Reduzir a frase curta sem perder essencia"
+        quotability: "Facil de lembrar, repetir, aplicar"
+      examples:
+        - "Onde esta teu tesouro, la esta teu coracao (12 palavras)"
+        - "Pelos seus frutos os conhecereis (5 palavras)"
+        - "Dai a Cesar o que e de Cesar, a Deus o que e de Deus (15 palavras)"
+        - "Verdade vos libertara (3 palavras)"
+        - "Perder vida para acha-la (5 palavras)"
+      blank_template: "{Verdade complexa} → Comprima em {8-15 palavras maximo} → {Memoravel, aplicavel}"
+      when_to_use:
+        - "Terminar sessao de coaching com takeaway"
+        - "Criar soundbite para lideranca"
+        - "Wisdom condensada para busy executives"
+        - "Algo que ICP repetira para equipe"
+      icp_application:
+        situation: "Final de sessao de coaching, ICP precisa de takeaway concreto"
+        template_use: "Executivo com 20 problemas → Aforismo: 'Onde investe seu tempo, la esta seu deus. Audite sua agenda' (14 palavras)"
+        outcome: "Wisdom quotable; ICP lembra semanas depois; aplica imediatamente; compartilha com equipe"
+
+    - template_name: "Pergunta Existencial (Sem Resposta Facil)"
+      structure: "{Situacao de vida} → {Pergunta que forca reavaliacao radical} → {Silencio reflexivo} → {Auto-descoberta}"
+      components:
+        life_situation: "Contexto real do ICP"
+        penetrating_question: "Pergunta que nao tem resposta rapida"
+        silence: "Pausa longa, permitir processamento"
+        self_discovery: "ICP chega a propria conclusao"
+      examples:
+        - "Que adianta ganhar o mundo inteiro e perder sua alma?"
+        - "Que daria um homem em troca de sua alma?"
+        - "Amaras o Senhor teu Deus... voce ama?"
+        - "Quem dizeis que EU sou? (nao 'eles', mas VOCE)"
+      blank_template: "{Contexto de vida} → Pergunta: {Questao que nao tem resposta facil, forca reflexao profunda} → {30-60s silencio} → {ICP responde a si mesmo}"
+      when_to_use:
+        - "ICP precisa de auto-descoberta, nao resposta pronta"
+        - "Breakthrough via reflexao profunda"
+        - "Forcar decisao pessoal, nao opiniao generica"
+        - "Coaching socrático, nao consultoria"
+      icp_application:
+        situation: "Executivo em busca de significado, preso em hamster wheel"
+        template_use: "Voce ganha $500k/ano. Trabalha 80h/semana. Nao ve filhos. Pergunta: Se morresse amanha, o que seus filhos diriam de voce? (silencio 60s)"
+        outcome: "Cognitive jolt; auto-avaliacao forçada; nao ha resposta facil; ICP processa sozinho; transformacao interna"
+
+  # ============================================================================
+  # TEMPLATE DECISION TREE - Quando Usar Cada Template
+  # ============================================================================
+
+  template_decision_tree:
+    - situation: "ICP busca transformacao identitaria (quem sou eu?)"
+      recommended_template: "Parabola Classica"
+      rationale: "Parabola com inversao forca identificacao com personagem; questiona pressupostos de identidade"
+      example: "Executivo workaholic → Parabola Filho Prodigo (filho mais velho = voce?)"
+
+    - situation: "ICP em crise, sente-se fracassado ou vulneravel"
+      recommended_template: "Beatitude (Inversao de Expectativa)"
+      rationale: "Validar vulnerabilidade; reframe fracasso como oportunidade; inversao de valores"
+      example: "Lider falido → Bem-aventurado o que faliu, porque aprendeu humildade"
+
+    - situation: "ICP tem comportamento correto, mas coracao nao mudou"
+      recommended_template: "Mandamento Reformulado"
+      rationale: "Elevar de compliance externa para transformacao interna; expor hipocrisia gentil"
+      example: "CEO honesto mas ganancioso → Nao basta nao roubar; cobiça no coracao ja e roubo"
+
+    - situation: "ICP atacado ou em conflito, precisa desarmar oposicao"
+      recommended_template: "Pergunta Socratica Desarma Conflito"
+      rationale: "Judo verbal; fazer atacante se condenar; evitar armadilhas"
+      example: "Competidor ataca reputacao → 'Qual empresa no mercado e 100% etica? A sua?'"
+
+    - situation: "ICP desanimado com progresso lento, quer resultados imediatos"
+      recommended_template: "Do Pequeno ao Exponencial"
+      rationale: "Encorajar paciencia; validar small beginnings; confianca em compound growth"
+      example: "Startup com tracao lenta → Grao de mostarda: menor semente, maior arvore"
+
+    - situation: "ICP preso em logica linear, mentalidade de controle"
+      recommended_template: "Paradoxo como Breakthrough"
+      rationale: "Quebrar mental model; cognitive dissonance produtiva; verdade contra-cultural"
+      example: "Executivo control freak → Voce so tera controle quando entregar controle a Deus"
+
+    - situation: "ICP afogado em complexidade, paralisia por analise"
+      recommended_template: "Sintese Radical"
+      rationale: "Clareza brutal; reduzir 100 problemas a 2-3 principios; North Star"
+      example: "20 problemas listados → Todos se resumem a: perdeu North Star + trata pessoas como meios"
+
+    - situation: "ICP considerando grande mudanca, decisao irreversivel"
+      recommended_template: "Contar o Custo Antes de Comecar"
+      rationale: "Realismo vs romantismo; due diligence espiritual; commitment informado"
+      example: "Largar emprego para startup → Calcule: 2 anos sem lucro? Familia suporta?"
+
+    - situation: "ICP focado em escala, ignora individuos"
+      recommended_template: "Celebracao Desproporcional pelo UM"
+      rationale: "Shift para individual; celebrar wins; go after the one; personalizacao"
+      example: "CEO ignora cliente perdido → Va atras do 1; recupere; celebre como nunca"
+
+    - situation: "ICP precisa entender conceito abstrato (fe, graca, Reino)"
+      recommended_template: "Revelacao Progressiva"
+      rationale: "Ponte de fisico para espiritual; ancorar abstrato em experiencia concreta"
+      example: "Ensinar 'investir em eternidade' → Analogia com portfolio de acoes"
+
+    - situation: "Final de sessao, ICP precisa de takeaway memoravel"
+      recommended_template: "Aforismo Memoravel"
+      rationale: "Wisdom condensada; quotable; aplica imediatamente; lembra semanas depois"
+      example: "Sessao sobre prioridades → 'Onde investe tempo, la esta seu deus. Audite agenda'"
+
+    - situation: "ICP precisa de breakthrough via auto-descoberta"
+      recommended_template: "Pergunta Existencial"
+      rationale: "Coaching socratico; nao dar resposta, fazer pensar; transformacao interna"
+      example: "Workaholic → Se morresse amanha, o que filhos diriam de voce? (silencio 60s)"
+
+  # ============================================================================
+  # ICP SYNTHESIS - Top Templates for Comunidade Lendaria Executives
+  # ============================================================================
+
+  icp_synthesis:
+
+    top_5_templates_for_coaching:
+      1:
+        template: "Pergunta Existencial (Sem Resposta Facil)"
+        why_top: "Executivos 45+ exaustos de respostas prontas; querem descobrir verdades proprias; auto-descoberta > consultoria"
+        frequency_use: "Toda sessao de coaching (minimo 2-3 perguntas existenciais)"
+
+      2:
+        template: "Parabola Classica"
+        why_top: "Valida recomecos, late bloomers, pivots de carreira; story > sermao; identificacao com personagens"
+        frequency_use: "1x por sessao quando transformacao identitaria necessaria"
+
+      3:
+        template: "Paradoxo como Breakthrough"
+        why_top: "High-achievers presos em logica linear; paradoxo quebra mental, cria insight; contra-cultural"
+        frequency_use: "Quando ICP preso em mental model limitado (controle, merito, auto-suficiencia)"
+
+      4:
+        template: "Sintese Radical (Complexidade → 2-3 Principios)"
+        why_top: "Executivos afogados em complexidade; precisam de clareza brutal; North Star"
+        frequency_use: "Quando ICP lista 10+ problemas, paralisia por analise"
+
+      5:
+        template: "Aforismo Memoravel (One-liner)"
+        why_top: "Busy executives sem tempo; wisdom condensada, quotable, aplicavel; lembram semanas depois"
+        frequency_use: "Final de toda sessao - 1 aforismo customizado como takeaway"
+
+    template_combinations:
+      scenario_1:
+        icp_situation: "Executivo workaholic, burnout, busca significado"
+        template_sequence:
+          1: "Pergunta Existencial: 'Que adianta ganhar mundo, perder alma?' (abrir)"
+          2: "Parabola: Filho Prodigo - filho mais velho (workaholic religioso ressentido)"
+          3: "Paradoxo: 'Para descansar, precisa parar de trabalhar tanto' (breakthrough)"
+          4: "Aforismo: 'Onde investe tempo, la esta seu coracao' (fechar)"
+        outcome: "Auto-descoberta → Identificacao → Breakthrough → Takeaway actionable"
+
+      scenario_2:
+        icp_situation: "Lider em crise, falencia, sente-se fracassado"
+        template_sequence:
+          1: "Beatitude: 'Bem-aventurado o que faliu, porque aprendeu humildade'"
+          2: "Do Pequeno ao Exponencial: 'Recomeço e semente de mostarda'"
+          3: "Celebracao pelo UM: 'Deus celebra seu retorno mais que 99 que nao cairam'"
+          4: "Aforismo: 'Fracasso nao e final; e fertilizante para proximo sucesso'"
+        outcome: "Validacao → Esperanca → Alegria → Actionable hope"
+
+      scenario_3:
+        icp_situation: "Executivo focado em escala, ignora pessoas individualmente"
+        template_sequence:
+          1: "Pergunta Existencial: 'Se tivesse que escolher: salvar empresa ou salvar alma de 1 funcionario?'"
+          2: "Celebracao pelo UM: Parabola ovelha perdida - deixa 99, busca 1"
+          3: "Mandamento Reformulado: 'Nao basta nao explorar; ame cada um como a si mesmo'"
+          4: "Aforismo: 'Pessoas nao sao meios; sao fins. Cada um importa radicalmente'"
+        outcome: "Questionamento → Story → Elevacao etica → Takeaway aplicavel"
+
+    usage_guidelines_for_icp:
+      - guideline: "Sempre comece com Pergunta Existencial ou Parabola (nunca aforismo)"
+        rationale: "Abrir com pergunta ou story engaja; aforismo e para fechar"
+
+      - guideline: "Use Paradoxo quando ICP verbaliza logica limitada ('Preciso controlar tudo')"
+        rationale: "Paradoxo quebra mental model no momento exato; timing critical"
+
+      - guideline: "Sintese Radical quando ICP lista 5+ problemas"
+        rationale: "Executivos adoram frameworks; reducao de complexidade alivia overwhelm"
+
+      - guideline: "Sempre termine sessao com Aforismo customizado"
+        rationale: "Aforismo e takeaway memoravel; ICP cita semanas depois; aplicacao imediata"
+
+      - guideline: "Revelacao Progressiva quando ensinar conceito abstrato (fe, graca, Reino)"
+        rationale: "Executivos sao racionais; precisam de ponte de fisico para espiritual"
+
+      - guideline: "Pergunta Socratica quando ICP enfrenta conflito ou ataque"
+        rationale: "Judo verbal desarma; ensina resposta criativa vs reativa"
+
+  # ============================================================================
+  # IMPLEMENTATION NOTES
+  # ============================================================================
+
+  implementation_notes:
+
+    voice_calibration:
+      - "Templates devem ser customizados ao contexto ICP; nao usar verbatim"
+      - "Linguagem corporativa moderna, nao jargao biblico do seculo I"
+      - "Manter estrutura, atualizar conteudo (Samaritano → Competidor; Fariseu → Religioso hipocrita)"
+
+    pacing:
+      - "Parabola: 3-5 minutos para contar (nao apressar)"
+      - "Pergunta Existencial: 30-60s de silencio apos perguntar (desconfortavel, mas necessario)"
+      - "Aforismo: maximo 15 palavras (se mais longo, nao e aforismo)"
+
+    sequencing:
+      - "Ordem importa: Pergunta → Story → Paradoxo → Aforismo (funil de engajamento a aplicacao)"
+      - "Nunca 2 Paradoxos seguidos (cognitive overload)"
+      - "Sempre 1 Aforismo ao final (never skip takeaway)"
+
+    adaptation:
+      - "Templates sao estruturas, nao scripts; adapte ao ICP"
+      - "Conheca historia do ICP antes de escolher template"
+      - "Personalize aforismo final ao contexto exato da sessao"
+
+    delivery:
+      - "Parabola: contar como story, nao ler; eye contact"
+      - "Pergunta Existencial: fazer, silenciar, esperar (nao preencher silencio)"
+      - "Paradoxo: dizer devagar, pausar apos frase paradoxal (let it sink in)"
+      - "Aforismo: dizer 2x (primeira vez pensam, segunda vez gravam)"
+
+  # ============================================================================
+  # SUCCESS METRICS
+  # ============================================================================
+
+  success_criteria:
+    - metric: "ICP sai com UMA pergunta que nao consegue parar de pensar"
+      template_responsible: "Pergunta Existencial"
+
+    - metric: "ICP identifica-se com personagem de parabola (auto-awareness)"
+      template_responsible: "Parabola Classica"
+
+    - metric: "ICP articula proprio North Star (nao imposto, descoberto)"
+      template_responsible: "Sintese Radical"
+
+    - metric: "ICP experimenta paradoxo como breakthrough (nao confusao)"
+      template_responsible: "Paradoxo como Breakthrough"
+
+    - metric: "ICP cita aforismo da sessao semanas depois (memoravel)"
+      template_responsible: "Aforismo Memoravel"
+
+    - metric: "ICP aplica template em propria vida/lideranca (transferencia)"
+      template_responsible: "Qualquer template, mas especialmente Pergunta Socratica e Mandamento Reformulado"
+
+# ==============================================================================
+# METADATA FINAL
+# ==============================================================================
+
+metadata_final:
+  total_templates_extracted: 12
+
+  template_categories:
+    storytelling: ["Parabola Classica", "Revelacao Progressiva"]
+    questioning: ["Pergunta Socratica", "Pergunta Existencial"]
+    paradox: ["Beatitude", "Paradoxo como Breakthrough"]
+    synthesis: ["Sintese Radical", "Aforismo Memoravel", "Mandamento Reformulado"]
+    encouragement: ["Do Pequeno ao Exponencial", "Celebracao pelo UM"]
+    strategic: ["Contar o Custo"]
+
+  most_versatile_templates:
+    1: "Pergunta Existencial (usa em 80% das sessoes)"
+    2: "Aforismo Memoravel (100% das sessoes - sempre fechar com aforismo)"
+    3: "Parabola Classica (50% das sessoes - quando transformacao identitaria)"
+
+  most_powerful_for_transformation:
+    1: "Paradoxo como Breakthrough (quebra mental model)"
+    2: "Pergunta Existencial (auto-descoberta forçada)"
+    3: "Parabola Classica (identificacao com personagem)"
+
+  easiest_to_implement:
+    1: "Aforismo Memoravel (simples, rapido, sempre aplicavel)"
+    2: "Do Pequeno ao Exponencial (encouraging, low-risk)"
+    3: "Beatitude (validacao, nao confronta)"
+
+  highest_risk_highest_reward:
+    1: "Paradoxo como Breakthrough (pode confundir ou transformar)"
+    2: "Pergunta Existencial (pode criar desconforto produtivo ou defensividade)"
+    3: "Mandamento Reformulado (pode ser percebido como julgamento)"
+
+version: "1.0"
+status: "Complete - Ready for Integration"
+next_steps:
+  - "Integrate templates into conversational AI prompts"
+  - "Create template-matching algorithm (ICP situation → recommended template)"
+  - "Develop aforismo generator for session conclusions"
+  - "Build library of modern parables (corporate contexts)"
+  - "Train coaches on template sequencing and delivery"

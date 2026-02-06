@@ -1,0 +1,1251 @@
+WEBVTT
+
+00:00:00.760 --> 00:00:02.180
+Fala lendário!
+
+00:00:02.580 --> 00:00:08.240
+Seja bem -vindo para essa aula e hoje
+você vai aprender aqui sobre templates.
+
+00:00:08.720 --> 00:00:14.520
+Os templates são modelos prontos para
+alguma coisa que você vai criar dentro
+
+00:00:14.520 --> 00:00:15.980
+do seu segundo cérebro.
+
+00:00:16.220 --> 00:00:20.060
+Vamos imaginar aqui que você faz sempre
+resumo de livros.
+
+00:00:20.800 --> 00:00:25.860
+Imagine então que você tem sempre os
+mesmos dados que você gosta de anotar
+
+00:00:25.860 --> 00:00:27.720
+sobre os livros.
+
+00:00:27.720 --> 00:00:29.020
+Tudo bem até aí?
+
+00:00:29.380 --> 00:00:33.580
+Então agora vamos pensar no seguinte.
+
+00:00:34.760 --> 00:00:36.700
+Como que eu posso reaproveitar?
+
+00:00:36.960 --> 00:00:43.840
+Eu vou criar um documento que eu vou
+fazer os dados principais, os metadados,
+
+00:00:44.540 --> 00:00:48.160
+as hashtags, que são as tags.
+
+00:00:48.960 --> 00:00:52.920
+Tudo eu vou criar e aí eu quero deixar o
+modelinho pronto.
+
+00:00:53.160 --> 00:00:55.460
+Todo o resumo de livro eu vou deixar
+dessa forma.
+
+00:00:56.260 --> 00:01:00.160
+Ou lembra que você já fez na aula de
+nota sobre os tipos de nota?
+
+00:01:00.740 --> 00:01:07.340
+Por exemplo a nota atômica ou a nota
+atômica x que mostra de onde vem o
+
+00:01:07.340 --> 00:01:08.860
+contrário, o similar.
+
+00:01:09.440 --> 00:01:14.760
+E você quer criar um modelo, não ter
+que, sabe, ctrl c, ctrl v, procurar e
+
+00:01:14.760 --> 00:01:16.680
+recriar aquilo.
+
+00:01:17.500 --> 00:01:21.420
+Como também você pode ter um arquivo de
+diário.
+
+00:01:21.680 --> 00:01:26.480
+Você faz um journaling e você quer todos
+os dias anotar as mesmas coisas.
+
+00:01:27.260 --> 00:01:28.900
+Como que eu faço isso no Obsidian?
+
+00:01:29.040 --> 00:01:32.400
+Para economizar tempo, para ganhar
+produtividade.
+
+00:01:32.520 --> 00:01:34.540
+Você vai aprender aqui sobre os
+templates.
+
+00:01:35.260 --> 00:01:41.560
+Primeiro nós vamos aprender sobre o
+nativo, o plugin nativo de templates do
+
+00:01:41.560 --> 00:01:42.000
+Obsidian.
+
+00:01:42.200 --> 00:01:46.160
+Então daí você vai entender o que é o
+conceito de template, como se faz.
+
+00:01:47.120 --> 00:01:52.660
+Depois nós vamos ter aulas onde você vai
+aprender templates avançados, com muitas
+
+00:01:52.660 --> 00:01:57.160
+variáveis, com muitas opções, até mesmo
+com programação dentro deles.
+
+00:01:57.320 --> 00:02:01.020
+Você pode ter javascript dentro dos
+templates, executando coisas.
+
+00:02:01.480 --> 00:02:05.500
+Então é um modo avançado que nós vamos
+trazer para você também.
+
+00:02:05.720 --> 00:02:07.880
+Então isso é possível também no
+Obsidian.
+
+00:02:08.700 --> 00:02:09.560
+Então vamos lá?
+
+00:02:09.880 --> 00:02:16.620
+Eu trouxe aqui para você algumas coisas
+prontas para facilitar o tempo que você
+
+00:02:16.620 --> 00:02:18.360
+vai investir aqui nessa aula.
+
+00:02:18.820 --> 00:02:24.840
+Senão eu iria ter que criar isso aqui
+manualmente, do zero, aqui durante a
+
+00:02:24.840 --> 00:02:25.140
+aula.
+
+00:02:25.940 --> 00:02:30.280
+E eu acho que são conceitos que você já
+viu nas aulas anteriores, então não vai
+
+00:02:30.280 --> 00:02:33.420
+ter problema você aqui já ver o
+documento pronto.
+
+00:02:33.780 --> 00:02:35.960
+Eu criei um exemplo de resumo de livro.
+
+00:02:35.960 --> 00:02:45.640
+Está aqui o resumo do livro tal, e aqui
+eu tenho os metadados, metadados, e aí
+
+00:02:45.640 --> 00:02:49.260
+eu posso ter autor, gênero, avaliação,
+editora.
+
+00:02:49.700 --> 00:02:53.560
+Aqui tem um exemplo legal, eu vou deixar
+esses arquivos aqui na aula para você
+
+00:02:53.560 --> 00:02:54.100
+baixar.
+
+00:02:54.820 --> 00:03:03.040
+Você tem aqui criado em, onde você tem
+chaves duplas, e você tem aqui date,
+
+00:03:03.540 --> 00:03:09.100
+onde você coloca o formato que você quer
+a data, e também o horário, qual o
+
+00:03:09.100 --> 00:03:12.860
+horário, e tem o formato do horário
+aqui, que é o nosso, que a gente está
+
+00:03:12.860 --> 00:03:15.500
+acostumado, porque senão ele pega do
+sistema operacional.
+
+00:03:16.000 --> 00:03:19.460
+Então eu fiz questão de mostrar aqui,
+deixar no exemplo, como que você
+
+00:03:19.460 --> 00:03:20.760
+configura.
+
+00:03:21.080 --> 00:03:22.240
+O que eu estou dizendo aqui?
+
+00:03:22.340 --> 00:03:27.560
+Quando tem chaves duplas, são variáveis,
+significa que quando eu aplicar esse
+
+00:03:27.560 --> 00:03:36.680
+template, o que ele deve fazer é o ele
+vai colocar a data atual e a hora atual,
+
+00:03:37.420 --> 00:03:44.440
+e aqui esses campos que estão vazios,
+eles vão servir para você, na hora da
+
+00:03:44.440 --> 00:03:47.440
+avaliação do seu livro, do resumo do seu
+livro, você preencher.
+
+00:03:48.020 --> 00:03:53.200
+E aqui já está prontinho, autor é texto,
+gênero é texto, avaliação é número, você
+
+00:03:53.200 --> 00:03:56.240
+vai dar uma nota aqui, editora é texto
+normal.
+
+00:03:57.160 --> 00:04:03.080
+Aqui eu coloquei ideia principal do, e
+aí eu coloquei mais uma variável, que na
+
+00:04:03.080 --> 00:04:06.900
+verdade, aqui eu já estou trazendo tudo
+que existe também de variável para você
+
+00:04:06.900 --> 00:04:14.300
+dentro de template, que as variáveis são
+esses textos que serão substituídos.
+
+00:04:15.000 --> 00:04:19.000
+Depois, os templates avançados, aí você
+vai ver que tem muito mais variável,
+
+00:04:19.120 --> 00:04:20.260
+muito mais possibilidades.
+
+00:04:21.400 --> 00:04:26.860
+Então aqui, entre as chaves aqui, tem o
+title, significa o que?
+
+00:04:26.940 --> 00:04:33.300
+O título da nota, então o título que
+você colocar numa nota, ele vai pegar
+
+00:04:33.300 --> 00:04:38.000
+esse título e colocar aqui, no lugar
+dessa variável, o título que você
+
+00:04:38.000 --> 00:04:38.860
+colocou na nota.
+
+00:04:39.500 --> 00:04:45.620
+Eu coloquei aqui, ideias principais do,
+ou seja, você vai colocar no título da
+
+00:04:45.620 --> 00:04:48.820
+nota que você vai criar, o nome do
+livro.
+
+00:04:49.740 --> 00:04:53.280
+Por exemplo, vamos imaginar aqui, o
+livro Essencialismo.
+
+00:04:53.800 --> 00:04:58.880
+Eu vou criar uma nota de resumo do livro
+Essencialismo, então, na hora que eu
+
+00:04:58.880 --> 00:05:02.780
+aplicar o template, ele vai pegar o
+título da nota, que é o livro
+
+00:05:03.300 --> 00:05:08.000
+Essencialismo, e ele vai completar aqui
+embaixo, trazendo ideia principal do
+
+00:05:08.000 --> 00:05:11.240
+livro Essencialismo, porque é o título
+da nota que eu dei.
+
+00:05:11.820 --> 00:05:17.660
+Aqui eu posso colocar citações e eu
+posso colocar também ideias práticas, eu
+
+00:05:17.660 --> 00:05:19.420
+posso trazer textos aqui, colocar.
+
+00:05:19.980 --> 00:05:26.160
+Eu quis, assim, fazer um template
+simples, para que você possa entender o
+
+00:05:26.160 --> 00:05:28.080
+que é e como que aplica o template.
+
+00:05:28.280 --> 00:05:32.000
+Daí você pode brincar com isso aqui,
+executar e fazer muitas e muitas
+
+00:05:32.000 --> 00:05:35.680
+receitas diferentes aí da coisa, tá?
+
+00:05:36.460 --> 00:05:39.860
+Mas fica tranquilo que eu vou mostrar
+isso na prática, vou mostrar pra você
+
+00:05:39.860 --> 00:05:40.500
+funcionando.
+
+00:05:40.840 --> 00:05:44.780
+Aqui eu só estou mostrando o arquivo que
+eu criei de template, que é pra você
+
+00:05:44.780 --> 00:05:46.080
+saber como você cria um.
+
+00:05:46.500 --> 00:05:50.200
+Vou deixar eles no modelo também e vou
+mostrar agora como é que você configura
+
+00:05:50.200 --> 00:05:54.200
+o obsidian todinho, pra fazer o template
+ser aplicado.
+
+00:05:54.920 --> 00:06:01.280
+Porque, assim, eu acho que se eu trouxer
+uma aula com os templates mais avançados
+
+00:06:01.280 --> 00:06:07.620
+possíveis, com N coisas, eu vi que
+muita, muita, muita gente acabou não
+
+00:06:07.620 --> 00:06:09.860
+usando, porque é muito complexo.
+
+00:06:09.960 --> 00:06:13.940
+Então eu gosto de trazer o básico
+simples, o arroz com feijão, porque daí
+
+00:06:13.940 --> 00:06:18.940
+depois a pessoa entendeu a dinâmica,
+entendeu o conceito, né, daquilo que
+
+00:06:18.940 --> 00:06:21.380
+está sendo feito, ele consegue evoluir.
+
+00:06:21.820 --> 00:06:24.680
+E aí a gente vai sim para a aula do
+avançado, tá legal?
+
+00:06:25.400 --> 00:06:29.300
+Olha uma outra coisa que eu fiz, eu
+trouxe uma outra, um outro template que
+
+00:06:29.300 --> 00:06:30.800
+eu fiz aqui, ó, rapidamente.
+
+00:06:31.940 --> 00:06:33.460
+O que eu quis fazer aqui?
+
+00:06:33.840 --> 00:06:38.640
+Imagine que aqui vai ser um template, um
+modelo, para quando eu quiser criar uma
+
+00:06:38.640 --> 00:06:42.740
+nota, e essa nota é uma nota atômica X.
+
+00:06:43.620 --> 00:06:46.860
+Aí você pensa assim, puxa, vou criar uma
+nota atômica X.
+
+00:06:47.140 --> 00:06:49.740
+Como que é mesmo uma nota atômica X?
+
+00:06:50.360 --> 00:06:54.520
+É uma nota que eu tenho que responder
+algumas perguntas.
+
+00:06:54.640 --> 00:06:55.740
+Quais são elas mesmo?
+
+00:06:56.060 --> 00:07:00.260
+E aqui eu já trouxe resumido pra você,
+ó, de onde veio, pra que serve, o que é
+
+00:07:00.260 --> 00:07:01.720
+similar, o que é oposto.
+
+00:07:03.040 --> 00:07:06.600
+Você viu isso aqui na aula de tipos de
+notas, né?
+
+00:07:08.200 --> 00:07:13.840
+Então, aqui, esse template é pra você
+criar um título qualquer, né, e você vai
+
+00:07:13.840 --> 00:07:18.980
+colocar a ideia central dessa nota, de
+onde, e aqui você pode colocar o texto,
+
+00:07:19.120 --> 00:07:22.980
+né, você vai digitar o texto, no caso,
+na hora que você for criar a mesma nota,
+
+00:07:23.520 --> 00:07:29.160
+e vai ter aqui já as quatro perguntinhas
+que você precisa responder, linkar aqui,
+
+00:07:29.240 --> 00:07:31.660
+ou escrever sobre a nota atômica X.
+
+00:07:31.960 --> 00:07:35.760
+E pode perceber que eu coloquei aqui uma
+hashtag processar.
+
+00:07:36.920 --> 00:07:37.120
+Por quê?
+
+00:07:37.500 --> 00:07:40.620
+Aqui eu já tô dando também um outro
+insight pra você, que é o seguinte,
+
+00:07:40.980 --> 00:07:47.720
+imagina que você tá ali numa tarefa, e
+rapidamente surge uma ideia, e você
+
+00:07:47.720 --> 00:07:52.600
+fala, puxa, preciso jogar isso pro meu
+segundo cérebro, e depois, com o tempo,
+
+00:07:53.140 --> 00:07:59.720
+eu vou processar isso, eu vou atualizar
+isso, eu vou deixar uma nota, vou fazer
+
+00:07:59.720 --> 00:08:01.260
+uma nota oficial disso.
+
+00:08:01.680 --> 00:08:02.180
+O que acontece?
+
+00:08:02.540 --> 00:08:10.440
+Com o modo de pesquisa do Obsidia, você
+vai conseguir filtrar por tag, né, e vai
+
+00:08:10.440 --> 00:08:15.940
+trazer pra você, né, olha, eu quero
+filtrar por tags processar, ou seja,
+
+00:08:16.040 --> 00:08:20.520
+quais são as notas que eu ainda preciso
+processar e tornar elas oficiais, né,
+
+00:08:20.680 --> 00:08:22.000
+foi só um rascunho meu.
+
+00:08:22.480 --> 00:08:26.600
+Então, eu trouxe já aqui também, que
+você pode aplicar esse template
+
+00:08:26.600 --> 00:08:31.460
+processar, rapidamente, já vai estar com
+a hashtag pra você, né, com a tag, pra
+
+00:08:31.460 --> 00:08:35.980
+que você possa depois voltar nela e
+processar.
+
+00:08:36.200 --> 00:08:38.900
+Então, olha só, já é um caminho aí de
+produtividade também.
+
+00:08:39.860 --> 00:08:45.380
+Criei também um outro template, uma
+outra nota aqui, que também vou deixar
+
+00:08:45.380 --> 00:08:51.440
+aqui pra você baixar, que é um diário,
+que é um journey, né, de você preencher
+
+00:08:51.440 --> 00:08:57.940
+aqui, óbvio, ele traz aqui o tipo, né,
+de título, mas é o título do template
+
+00:08:57.940 --> 00:09:03.100
+aqui, né, eu coloquei aqui no meu
+diário, aí eu coloquei aqui, manhã, após
+
+00:09:03.100 --> 00:09:10.620
+acordar, coloquei aqui, claro, com um
+cabeçável, né, do tipo dois aqui, duas
+
+00:09:10.620 --> 00:09:16.040
+hashtags aqui, pra ficar maior o
+cabeçável, e eu criei um modelinho de
+
+00:09:16.040 --> 00:09:18.740
+template, olha, toda manhã, o que eu vou
+fazer nesse meu diário?
+
+00:09:18.800 --> 00:09:24.620
+Eu vou dizer, eu sou grato por, o que
+faria meu dia perfeito, e a afirmação
+
+00:09:24.620 --> 00:09:28.840
+diária, você vai dizer aqui, eu sou, né,
+e você vai colocar uma afirmação
+
+00:09:28.840 --> 00:09:33.900
+positiva aí, depois à noite, você vai lá
+no obsidia, no seu segundo cérebro,
+
+00:09:34.120 --> 00:09:39.100
+noite, antes de dormir, coisas incríveis
+que aconteceram hoje, o que podia ser
+
+00:09:39.100 --> 00:09:44.620
+feito, o que podia ter feito, né, e não
+fiz hoje, então já imaginou, você pegar
+
+00:09:44.620 --> 00:09:49.800
+e fazer o seu diário, e todos os dias,
+você ter que ir na nota de ontem, copiar
+
+00:09:49.800 --> 00:09:53.420
+e colar na nota de hoje, pra fazer as
+mesmas coisas, não, você já tem um
+
+00:09:53.420 --> 00:09:59.660
+template, e eu vou te mostrar como criar
+o resumo do livro, uma nota atômica, e
+
+00:09:59.660 --> 00:10:06.360
+como fazer um template, de, e como usar
+o diário aqui, usando também um outro
+
+00:10:06.360 --> 00:10:09.840
+plugin do obsidian, que é pra você
+justamente criar isso, são notas
+
+00:10:09.840 --> 00:10:11.160
+diárias, legal?
+
+00:10:11.300 --> 00:10:15.200
+Então até esse momento, eu tô mostrando
+quais são os arquivos que eu criei de
+
+00:10:15.200 --> 00:10:21.120
+template, vamos agora configurar pra
+usar templates no obsidian, o que que
+
+00:10:21.120 --> 00:10:22.080
+você vai ter que fazer?
+
+00:10:23.320 --> 00:10:28.840
+A engrenagem aqui, né, de configurações,
+vou acessar configurações, e aí você
+
+00:10:28.840 --> 00:10:35.240
+lembra que tem aqui, ó, core plugins e
+community plugins, numa outra aula a
+
+00:10:35.240 --> 00:10:39.880
+gente já adentrou, né, o que é isso, né,
+esse assunto aqui, e aí você tem aqui em
+
+00:10:39.880 --> 00:10:44.560
+core plugins, várias coisas, várias
+opções, algumas marcadas e algumas
+
+00:10:44.560 --> 00:10:53.640
+desmarcadas, e uma delas que já vem por
+padrão marcada, é a templates, templates
+
+00:10:53.640 --> 00:10:58.960
+tá aqui, ó, ela já tá marcada, então se
+não tiver aí no seu, você marca, né,
+
+00:10:58.980 --> 00:11:03.020
+esse templates aqui, e o que que
+acontece, você pode entrar na
+
+00:11:03.020 --> 00:11:08.120
+configuração já pela engrenagem, ou você
+pode vir aqui embaixo, ó, no nosso cofre
+
+00:11:08.120 --> 00:11:13.100
+aqui, onde a gente tá criando junto, né,
+tem aqui templates, vai tá a última
+
+00:11:13.100 --> 00:11:18.440
+opção lá, e a última opção vai abrir
+isso aqui, essas três opções aqui
+
+00:11:18.440 --> 00:11:26.580
+básicas para eu usar template, qual é a
+pasta que estão os templates, o formato
+
+00:11:26.580 --> 00:11:32.240
+de data que você quer para o template,
+mas você viu que eu pude lá naquele
+
+00:11:32.240 --> 00:11:41.380
+template meu, eu personalizar a data,
+né, mas você pode também deixar padrão e
+
+00:11:41.380 --> 00:11:45.920
+ele vai usar sempre que envolve alguma
+coisa, você colocar entre entre chaves,
+
+00:11:46.180 --> 00:11:51.000
+né, date, ele vai pegar esse formato
+aqui, e time a mesma coisa, ele pega o
+
+00:11:51.000 --> 00:11:55.480
+formato que você colocar aqui, se você
+não especificar, eu fiz questão de
+
+00:11:55.480 --> 00:12:00.000
+mostrar ali para ficar mais didático
+você saber como que usa caso você queira
+
+00:12:00.000 --> 00:12:05.460
+personalizar, bom, o que nós vamos fazer
+então, ele me pede aqui que eu díja para
+
+00:12:05.460 --> 00:12:13.520
+ele, qual é a pasta do seu obsidia que
+tem templates, você precisa ter uma
+
+00:12:13.520 --> 00:12:18.380
+pasta no seu obsidia somente para os
+templates, você vai jogar tudo que é
+
+00:12:18.380 --> 00:12:23.260
+modelo, tudo que é template ali dentro,
+então, olha o que eu vou fazer, mostrei
+
+00:12:23.260 --> 00:12:26.560
+para você, né, como que é a
+configuração, mostrei para você os
+
+00:12:26.560 --> 00:12:30.880
+templates que eu criei, onde estão os
+meus templates, olha aqui ó, resumo do
+
+00:12:30.880 --> 00:12:39.060
+livro, processar e meu diário estão no
+meu raiz, aqui ó, no meu vault, né, na
+
+00:12:39.060 --> 00:12:45.540
+pasta padrão, o que eu vou fazer aqui,
+eu vou clicar nessa, nessa figurinha
+
+00:12:45.540 --> 00:12:52.240
+aqui ó, de new folder, ou seja, eu vou
+criar uma nova pasta e aqui eu vou criar
+
+00:12:52.240 --> 00:12:57.400
+uma pasta, onde eu vou dar um nome de,
+qualquer nome que você queira, mas eu
+
+00:12:57.400 --> 00:13:05.440
+vou criar aqui templates, tá, poderia
+ser modelos, mas templates já é bem o
+
+00:13:05.440 --> 00:13:11.680
+padrão mesmo, assim, do que é, já vai
+vir para você e você vai ver no manual,
+
+00:13:12.020 --> 00:13:17.780
+na internet, sempre se falar desse nome
+de templates, né, então eu vou pegar
+
+00:13:17.780 --> 00:13:23.220
+agora as minhas notas que eu criei para
+serem templates e vou jogar aqui dentro,
+
+00:13:24.100 --> 00:13:29.280
+então olha só, vou pegar o resumo do
+livro, vou arrastar para aqui dentro da
+
+00:13:29.280 --> 00:13:35.720
+pasta templates, vou pegar a minha nota
+processar, que é também um outro
+
+00:13:35.720 --> 00:13:41.220
+template e vou pegar meu diário e vou
+jogar aqui dentro, então olha só,
+
+00:13:41.480 --> 00:13:45.160
+aqueles três, esses três arquivos aqui
+que eu criei de template, estão aqui
+
+00:13:45.160 --> 00:13:50.180
+dentro dessa pasta, ó, posso abrir e
+fechar, tá os três arquivos aqui, tá
+
+00:13:50.180 --> 00:13:58.240
+legal, então eu criei uma pasta, onde
+estão os três arquivos, né, de template
+
+00:13:58.240 --> 00:14:04.540
+para mim, você pode também, né, clicar
+na nota e dar um move file to, e aí você
+
+00:14:04.540 --> 00:14:09.480
+escolhe aonde você quer mover, lembra
+que o Obsidian te oferece várias
+
+00:14:09.480 --> 00:14:15.640
+maneiras de fazer a mesma coisa, né,
+você, você tem uma flexibilidade muito
+
+00:14:15.640 --> 00:14:20.980
+grande, então, ó, vou fechar aqui os
+meus templates, eles estão nas pastas
+
+00:14:20.980 --> 00:14:26.740
+certinhas, agora eu vou voltar lá na
+configuração, lembra, porque eu fiz
+
+00:14:26.740 --> 00:14:30.500
+questão de mostrar para você a criação
+dessa pasta e que você tem que jogar o
+
+00:14:30.500 --> 00:14:34.560
+template lá dentro, isso é importante,
+agora eu vou pegar a engrenagem, vou
+
+00:14:34.560 --> 00:14:39.860
+pegar aqui lá no meu templates, ó, aqui
+embaixo, nos plugins nativos, templates,
+
+00:14:40.140 --> 00:14:45.700
+vou chegar aqui e vou dizer qual é a
+pasta que tem os meus templates, a pasta
+
+00:14:45.700 --> 00:14:54.200
+chamada templates, feito isso, já posso
+usar os meus templates, olha que
+
+00:14:54.200 --> 00:14:59.720
+maravilha, você pode fechar isso aqui,
+já está configurado, imagina aqui que eu
+
+00:14:59.720 --> 00:15:04.540
+vou criar uma nota agora, vou criar uma
+nova nota, o que nós vamos fazer, vamos
+
+00:15:04.540 --> 00:15:10.680
+começar com um resumo de livro, né, vou
+marcar aqui, eu vou criar uma nota
+
+00:15:10.680 --> 00:15:17.700
+chamada livro essencialismo, então, aqui
+agora você vai ver na prática como é que
+
+00:15:17.700 --> 00:15:22.940
+usa, livro essencialismo, o que eu teria
+que fazer, puxa, o que mesmo eu gravo, o
+
+00:15:22.940 --> 00:15:28.200
+que eu marco, o que eu anoto sempre dos
+meus livros, deixa eu pegar um outro, um
+
+00:15:28.200 --> 00:15:33.960
+outro rascunho, um outro resumo, dar um
+ctrl c, ctrl v, apagar o que tem de
+
+00:15:33.960 --> 00:15:37.720
+conteúdo e fitar, não, nada disso, você
+já tem um template, você já tem um
+
+00:15:37.720 --> 00:15:43.540
+modelo para usar, então, aqui, agora,
+você tem duas formas de fazer isso, você
+
+00:15:43.540 --> 00:15:50.360
+tem, quando está habilitado lá o plugin
+nativo templates, tem um ícone aqui na
+
+00:15:50.360 --> 00:15:57.740
+barrinha lateral chamado insert
+template, ou você pode também, com o
+
+00:15:57.740 --> 00:16:03.600
+comand p, com a barra, paleta de
+comando, comand ou ctrl p, se você
+
+00:16:03.600 --> 00:16:10.220
+digitar template, começou a digitar ali,
+já vai aparecer, insert template, as
+
+00:16:10.220 --> 00:16:17.260
+outras opções são inserir data, inserir
+horário, né, mas olha só, eu vou dar
+
+00:16:17.260 --> 00:16:22.080
+insert template, das duas formas vai,
+vai, vai acontecer a mesma coisa, tanto
+
+00:16:22.080 --> 00:16:26.960
+aqui no, na palitinha de comando, como
+também lá naquele ícone, então, insert
+
+00:16:26.960 --> 00:16:31.240
+template, qual template você quer usar,
+nesse aqui, o que eu estou fazendo
+
+00:16:31.240 --> 00:16:35.920
+mesmo, um resumo de livro, então, vou
+clicar aqui, pum, olha o que aconteceu,
+
+00:16:37.000 --> 00:16:41.880
+qual o título da minha nota, livro
+essencialismo, ele jogou todos os campos
+
+00:16:41.880 --> 00:16:48.660
+que eu criei, atualizou para a data e
+horário atual, aqui lembra que tinha uma
+
+00:16:48.660 --> 00:16:53.620
+variável também chamada título, ele
+substituiu a variável pelo título da
+
+00:16:53.620 --> 00:16:59.580
+nota, então, ideia principal do livro
+essencialismo, citações e ideias
+
+00:16:59.580 --> 00:17:05.380
+práticas, então, agora eu tenho uma
+nota, onde eu apliquei um template,
+
+00:17:05.980 --> 00:17:11.700
+rodei um template e eu posso criar
+outras notas, fazendo a mesma coisa,
+
+00:17:11.880 --> 00:17:17.780
+então, ctrl p, comand p, insert
+template, ou então, íconezinho aqui,
+
+00:17:18.060 --> 00:17:24.560
+insert template, vamos agora criar uma
+outra nota, vamos lá, ctrl n, comand n e
+
+00:17:24.560 --> 00:17:30.800
+agora eu vou criar uma nota, rascunho
+aqui, que eu vou fazer uma nota atômica
+
+00:17:30.800 --> 00:17:35.580
+x, ou uma nota atômica, ou qualquer
+outro tipo de nota, mas vamos imaginar
+
+00:17:35.580 --> 00:17:40.240
+que eu criei um template para nota
+atômica, eu quero, aqui nesse momento,
+
+00:17:40.700 --> 00:17:43.880
+fazer uma anotação, fazer alguma
+anotação sobre o que?
+
+00:17:44.320 --> 00:17:55.020
+Uma anotação sobre segundo cérebro no
+obsidian, beleza?
+
+00:17:55.580 --> 00:17:58.580
+Isso aqui vai ser uma nota atômica,
+lembra que eu tenho um template para
+
+00:17:58.580 --> 00:17:58.900
+isso?
+
+00:17:59.100 --> 00:17:59.940
+Então, o que eu vou fazer?
+
+00:18:00.940 --> 00:18:05.860
+Ctrl p, insert template, ou, aquela hora
+eu fiz com o ctrl p, com o comando p,
+
+00:18:06.000 --> 00:18:10.220
+com a paleta de comando, vou fazer agora
+aqui, clicando no ícone, vou usar um
+
+00:18:10.220 --> 00:18:10.920
+template, qual?
+
+00:18:11.200 --> 00:18:17.500
+O processar, que é uma nota que eu estou
+criando aqui, para depois eu voltar nela
+
+00:18:17.500 --> 00:18:24.860
+e configurar, pronto, olha lá, segundo
+cérebro no obsidian, já vem a hashtag,
+
+00:18:25.020 --> 00:18:26.220
+qual é a ideia principal?
+
+00:18:26.680 --> 00:18:33.160
+Aquelas perguntinhas que eu preciso
+responder sobre a nota que eu estou
+
+00:18:33.160 --> 00:18:35.500
+criando aqui, o segundo cérebro no
+obsidian, né?
+
+00:18:36.020 --> 00:18:45.280
+E depois, se eu vier aqui na pesquisa, e
+eu filtrar por TED, o que vai acontecer?
+
+00:18:46.000 --> 00:18:47.540
+Aqui já tinha uma pesquisa minha, né?
+
+00:18:48.220 --> 00:18:51.540
+Mas eu estou aqui, ó, pesquisando por
+TED, qual TED?
+
+00:18:51.940 --> 00:19:01.260
+Processar, ele vai me trazer quais são
+as notas onde tem isso daí para que eu
+
+00:19:01.260 --> 00:19:03.960
+processe, para que eu volte na nota,
+entendeu?
+
+00:19:04.100 --> 00:19:08.040
+Então fica fácil, vai ficar muito fácil
+de você depois passar limpo com suas
+
+00:19:08.040 --> 00:19:09.060
+notas, legal?
+
+00:19:10.640 --> 00:19:13.300
+Beleza, qual era o outro template que a
+gente tinha?
+
+00:19:13.920 --> 00:19:18.780
+A gente tinha um template de diário, né?
+
+00:19:18.840 --> 00:19:23.380
+O journey, e olha só, você pode estar
+olhando aí e falando assim, poxa, como é
+
+00:19:23.380 --> 00:19:28.780
+simples usar template, mas gente, quanta
+gente eu atendi quebrando a cabeça de
+
+00:19:28.780 --> 00:19:30.680
+como usar template, mas por quê?
+
+00:19:30.760 --> 00:19:39.060
+Pegando templates muito elaborados, com
+vários componentes, usando coisas assim,
+
+00:19:39.380 --> 00:19:43.900
+já mais avançadas, data view, e aí
+passou um apuro, mas por que passou
+
+00:19:43.900 --> 00:19:44.260
+apuro?
+
+00:19:44.380 --> 00:19:48.200
+Porque não entendia o básico primeiro de
+como fazer funcionar.
+
+00:19:48.640 --> 00:19:51.880
+Você está chegando aqui, você está
+aprendendo tudo que vai ser necessário
+
+00:19:51.880 --> 00:19:53.860
+para você depois usar os avançados, tá
+bom?
+
+00:19:55.240 --> 00:20:01.060
+Diário, eu posso fazer a mesma coisa,
+criar uma nota aqui e aplicar o template
+
+00:20:01.060 --> 00:20:10.820
+para diário, só que tem um outro plugin
+que já é o plugin nativo de diário, você
+
+00:20:10.820 --> 00:20:18.540
+criar uma nota diária, se você for aqui
+na engrenagem, core plugins, vai ter
+
+00:20:18.540 --> 00:20:28.320
+aqui um plugin chamado daily notes, esse
+daily notes precisa estar habilitado,
+
+00:20:28.580 --> 00:20:35.140
+veja aí do seu se está habilitado ou
+não, o daily notes, e você vai habilitar
+
+00:20:35.140 --> 00:20:40.140
+ele, ele vai habilitar aqui embaixo
+igual o template, as configurações,
+
+00:20:41.280 --> 00:20:47.040
+depois vai ter uma outra aula que também
+vou trazer para você um template de
+
+00:20:47.040 --> 00:20:55.740
+diário avançado, usando outros plugins,
+tem assim alguns fantásticos que criam
+
+00:20:55.740 --> 00:21:01.700
+muitas e muitas coisas, você vai ver
+que, mas tem que aprender esse aqui para
+
+00:21:01.700 --> 00:21:03.940
+usar depois esses avançados, tá bom?
+
+00:21:04.940 --> 00:21:10.880
+Vai ter a mesma coisa de data, o formato
+de data, por quê?
+
+00:21:10.980 --> 00:21:14.160
+Porque se é um diário, um journeyman, o
+que esse plugin faz?
+
+00:21:14.680 --> 00:21:22.080
+Ele cria uma nota diária com a data,
+dia, mês, ano, pronto, se você clicar
+
+00:21:22.080 --> 00:21:25.960
+mais vezes no botão de criar nota
+diária, não vai criar, já existe lá, só
+
+00:21:25.960 --> 00:21:30.860
+se você apagar o seu diário, daí vai
+criar de novo, tá?
+
+00:21:31.560 --> 00:21:40.600
+Aqui ele está perguntando onde você vai
+guardar essas notas de diário, onde
+
+00:21:40.600 --> 00:21:48.360
+estão os templates, para ele achar qual
+é o template do seu journeyman, do seu
+
+00:21:48.360 --> 00:21:54.920
+diário, e se você quer já que quando
+abrir o obsidian, automaticamente ele já
+
+00:21:54.920 --> 00:22:00.540
+cria essa nota, ele já cria uma nota
+daquele dia que ele está abrindo, e se
+
+00:22:00.540 --> 00:22:04.680
+você abrir várias vezes durante o dia,
+ele não vai criar de novo, eu falei, ele
+
+00:22:04.680 --> 00:22:08.880
+só cria uma data, um arquivo de
+journeyman diário por dia.
+
+00:22:09.820 --> 00:22:18.060
+Bom, vamos lá, eu sei onde está o meu
+template de diário, ele está dentro de,
+
+00:22:18.340 --> 00:22:26.220
+vamos lá, templates -meu -diário, lembra
+que
+
+00:22:26.220 --> 00:22:31.440
+eu criei um template, template -meu
+-diário, então eu já vou jogar aqui, o
+
+00:22:31.440 --> 00:22:37.680
+meu modelo de nota diária é o meu
+templates -meu -diário, aqui está
+
+00:22:37.680 --> 00:22:46.280
+perguntando onde você vai guardar, onde
+que ele deve salvar esse arquivo de
+
+00:22:46.280 --> 00:22:49.100
+diário, não quis criar antes, tá?
+
+00:22:49.560 --> 00:22:55.120
+Vamos fazer juntos, vou fechar aqui a
+configuração, vou ir aqui em cima, olha
+
+00:22:55.120 --> 00:23:02.080
+lá, nas pastinhas, os files, e vou criar
+uma pasta de novo aqui, New Folder, e
+
+00:23:02.080 --> 00:23:08.440
+aqui eu vou dar o nome de diários, olha
+lá, criou uma pastinha, beleza?
+
+00:23:09.440 --> 00:23:11.360
+Fiz testão da gente fazer junto isso,
+tá?
+
+00:23:11.720 --> 00:23:16.500
+Aí eu venho aqui na engrenagem, venho
+aqui em New File Location, ou seja, o
+
+00:23:16.500 --> 00:23:23.080
+local dos novos arquivos, e vou dizer
+que é diários, olha lá, configurei o
+
+00:23:23.080 --> 00:23:28.980
+local onde vai salvar os diários, e onde
+está o template -meu -diário,
+
+00:23:29.600 --> 00:23:36.440
+configurado, tudo pronto, agora você
+pode vir aqui, vai ter um ícone aqui,
+
+00:23:36.880 --> 00:23:42.120
+olha lá, vai ter um ícone aqui também,
+que vai estar chamando o que?
+
+00:23:42.700 --> 00:23:46.420
+Abrir a sua nota diária de hoje, tá?
+
+00:23:46.820 --> 00:23:49.840
+É um símbolo, um ícone do calendário,
+né?
+
+00:23:50.360 --> 00:23:57.480
+O que vai acontecer se você tiver aqui,
+no seu vault, no seu cofre, e clicar
+
+00:23:57.480 --> 00:24:04.800
+nesse botão, pronto, olha lá o seu
+template de diário, dia 15 de 1 de 2025,
+
+00:24:05.040 --> 00:24:11.940
+manhã que eu vou fazer, noite, e assim
+por todos os dias, você vai clicar e vai
+
+00:24:11.940 --> 00:24:17.000
+abrir, se você mudar lá o seu template,
+ele vai mudar os novos, né?
+
+00:24:17.360 --> 00:24:22.540
+Que você for criar, e se você clicar no
+botão, ó, mais uma vez, não vai criar
+
+00:24:22.540 --> 00:24:23.200
+outro, né?
+
+00:24:23.420 --> 00:24:25.200
+E olha onde foi jogado, né?
+
+00:24:25.300 --> 00:24:27.900
+Onde que essa nota está localizada?
+
+00:24:28.160 --> 00:24:32.940
+Dentro da pastinha lá, ou seja, você tem
+uma pasta chamada diários, tá?
+
+00:24:33.320 --> 00:24:39.340
+É muito bom você deixar numa única
+pasta, porque, com isso, você vai,
+
+00:24:40.600 --> 00:24:45.020
+depois, poder filtrar, você pode
+eliminar do seu gráfico, seus diários,
+
+00:24:45.460 --> 00:24:47.900
+você vai poder eliminar de alguns
+componentes, né?
+
+00:24:47.940 --> 00:24:53.100
+De ficar pesquisando coisas dentro dessa
+pasta, porque é uma pasta que você usa
+
+00:24:53.100 --> 00:24:57.300
+para escrever essas coisas suas, essas
+inspirações, talvez você não queira
+
+00:24:57.300 --> 00:25:03.600
+visualizar em certos momentos, então é
+legal deixar numa mesma pasta, ou até
+
+00:25:03.600 --> 00:25:05.060
+mesmo, o contrário, né?
+
+00:25:05.100 --> 00:25:10.900
+Você quer pesquisar dentro dos seus
+diários, as coisas que você quer
+
+00:25:10.900 --> 00:25:13.020
+conversar com o seu diário, né?
+
+00:25:13.700 --> 00:25:17.340
+Com uma IA, depois, você vai ver que a
+gente pode fazer isso, então, isso é
+
+00:25:17.340 --> 00:25:18.520
+muito interessante, legal?
+
+00:25:19.080 --> 00:25:25.660
+Então, aqui, olha só, você aprendeu tudo
+que é necessário para usar templates e,
+
+00:25:26.080 --> 00:25:31.480
+creia, creia, creia, você sabe tudo
+agora de templates, você deu um grande
+
+00:25:31.480 --> 00:25:36.720
+passo, talvez você esteja vendo essa
+aula na velocidade 2, você aprendeu mais
+
+00:25:36.720 --> 00:25:39.400
+rápido ainda, mas eu quero aqui, né?
+
+00:25:39.840 --> 00:25:43.620
+Que você entenda, você precisa saber
+esse básico, esse princípio, para depois
+
+00:25:43.620 --> 00:25:47.720
+usar os avançados, eu vou trazer muita
+coisa avançada aqui para vocês também,
+
+00:25:47.840 --> 00:25:48.120
+tá bom?
+
+00:25:48.120 --> 00:25:53.300
+Então, agora, na próxima aula, a gente
+vai ver como que você dá uma dinamizada
+
+00:25:53.300 --> 00:25:59.640
+nessas notas aí e com coisas mais
+gráficas, as suas ideias tomarem forma
+
+00:26:00.220 --> 00:26:01.020
+graficamente, né?
+
+00:26:01.060 --> 00:26:05.760
+Eu vou te apresentar um plugin, vou te
+apresentar uma coisa que é fantástica
+
+00:26:05.760 --> 00:26:10.580
+para você também centralizar suas notas
+no Obsidian, tá bom?
+
+00:26:11.740 --> 00:26:16.320
+Até mais, lendário, parabéns por você
+ter cheiro aqui, você está dando um
+
+00:26:16.320 --> 00:26:21.700
+grande passo na sua evolução e você tem
+um segundo cérebro muito bem organizado,
+
+00:26:22.340 --> 00:26:26.500
+sinta -se feliz por isso, porque você
+faz parte de um grupo seleto de pessoas,
+
+00:26:26.860 --> 00:26:31.460
+um grupo lendário que tem segundo
+cérebro e vai ter um segundo cérebro
+
+00:26:31.460 --> 00:26:32.940
+potencializado com o IA.

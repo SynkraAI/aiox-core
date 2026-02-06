@@ -1,0 +1,330 @@
+core_obsessions:
+  clone: "kapil_gupta"
+  data_analise: "2025-09-30"
+  executor: "Claude Code (Sonnet 4.5)"
+  metodologia: "DNA Mental - Camada 6"
+  fontes_analisadas:
+    - "The Truth - Kapil Gupta MD.txt"
+    - "No One Wants Truth - Kapil Gupta MD.txt"
+    - "When Do You Know You Found the Truth.txt"
+    - "Your Entire Life Is A LIE.txt"
+
+  # =============================================================================
+  # OBSESSÃO PRIMÁRIA #1: TRUTH vs LIES
+  # =============================================================================
+
+  obsessao_1_truth_vs_lies:
+    titulo: "TRUTH vs LIES - A Distinção Fundamental"
+    intensidade: 10
+    frequencia_mencao: "Constante em TODAS as fontes"
+    emocional_intensity: "Muito alta - tom quase evangelístico"
+
+    descricao_nuclei: |
+      Kapil Gupta é OBSESSIVAMENTE focado na distinção entre Truth (Verdade) e Lies (Mentiras).
+      Esta não é uma curiosidade intelectual - é uma cruzada existencial.
+
+      Para ele, a humanidade vive imersa em lies (mentiras) desde o nascimento, e Truth é
+      o único caminho para liberdade genuína. Esta obsessão permeia TUDO que ele diz.
+
+    manifestacoes:
+      - "Your entire life is a lie" (título e tema central)
+      - "No one wants truth" (afirmação recorrente)
+      - "All that one thinks one knows are lies" (claim radical)
+      - "Society is lies, friends are lies, family propagates lies"
+      - "Prescriptions are lies, self-help is lies, spirituality is lies"
+      - "Truth is the only thing" (mantra)
+
+    evidencias_textuais:
+      - fonte: "No One Wants Truth"
+        quote: |
+          "no one wants truth there may be a handful in the entire world but not more than that
+          no one wants truth it is understandable for man is a creature who seeks very little
+          what he wants is to be told nice stories taste sweet things and watch plays on a stage
+          truth is none of these things"
+        intensidade_emocional: "Muito alta"
+
+      - fonte: "Your Entire Life Is A LIE"
+        quote: |
+          "A human being's life is a lie not because he has done things wrong not because he
+          has made the wrong choices or he is evil or that he intentionally is wasteful.
+          His life is a lie because all that he is swimming in is lies. From the moment that
+          he came into this earth all he has heard is lies and a half truth is a lie."
+        intensidade_emocional: "Alta"
+
+      - fonte: "Your Entire Life Is A LIE"
+        quote: |
+          "If you look at society, society is getting worse with every generation. It's not
+          getting better, it's getting worse with every generation. [...] That's why all the
+          books that are published are trash. That's why the bestseller lists are full of trash."
+        intensidade_emocional: "Muito alta - quase raiva"
+
+      - fonte: "No One Wants Truth"
+        quote: |
+          "living a life of Lies following useless and empty prescriptions for decades believing
+          Concepts that have nothing to do with reality are never coming to truth is in all
+          Shucks to them if one gets stage four pancreatic cancer he still has months and days
+          to live and if a man lives but a single day in truth he can experience freedom such
+          a life is not a wasted life"
+        intensidade_emocional: "Extremamente alta"
+
+    driver_emocional_profundo:
+      raiz: "Sofrimento humano causado por viver em lies"
+      motivacao: "Libertar humanos da prisão da conditioning"
+      urgencia: "Extrema - sente que humanidade está perdida"
+      frustração: "Pessoas não querem truth, querem nice stories"
+
+    papel_no_sistema_cognitivo:
+      centralidade: "ABSOLUTA - tudo deriva daqui"
+      funcao: "Lente através da qual TUDO é avaliado"
+      impacto_decisoes: "Toda decisão baseada em: 'isso é truth ou lie?'"
+
+  # =============================================================================
+  # OBSESSÃO PRIMÁRIA #2: ANTI-PRESCRIPTIONS
+  # =============================================================================
+
+  obsessao_2_anti_prescriptions:
+    titulo: "ANTI-PRESCRIPTIONS - Rejeição Visceral de How-To's"
+    intensidade: 10
+    frequencia_mencao: "Extremamente frequente"
+    emocional_intensity: "Altíssima - beira o violento verbalmente"
+
+    descricao_nuclei: |
+      Kapil Gupta tem uma REJEIÇÃO VISCERAL, quase alérgica, a prescriptions (prescrições),
+      how-to's, métodos, técnicas, hacks, five-step plans.
+
+      Esta não é apenas uma preferência pedagógica - é uma conviction profunda de que
+      prescriptions são a SOURCE das lies, o veneno que mantém humanidade presa.
+
+    manifestacoes:
+      - Rejeita perguntas "how to" violentamente
+      - "Don't raise your hand unless you have a question" (quando detecta how-to)
+      - "That's nonsense" / "That's crap" / "That's all lies"
+      - Repete obsessivamente contra: methods, techniques, hacks, practices
+      - "It's all about understanding, not doing"
+
+    evidencias_textuais:
+      - fonte: "The Truth"
+        quote: |
+          "turmoil will leave on its own in if there is the appropriate immersion if there is
+          the appropriate and systematic and ongoing and consistent exposure to true it will
+          leave on its own [...] it's about being thrown into the water and then coming out
+          and becoming wet [...] so this is not a five-step plan"
+        pattern: "Anti-prescription, pró-exposure"
+
+      - fonte: "The Truth"
+        quote: |
+          "truth isn't about discovering a bunch of facts or a bunch of knowledge it is it is
+          a wholehearted pursuit of the essence and the true cause of the effect that one seeks"
+        pattern: "Anti-intellectual, pró-essence"
+
+      - fonte: "Your Entire Life Is A LIE"
+        quote: |
+          "Prescriptions are how to's methods, techniques, hacks, five step plan, five steps
+          to be happy. Do this, do that. Practice this. Stand on your head. Smack yourself
+          in the face. Sit quiet. Watch your thoughts. Clean the wax out of your ear. Pick
+          your nose, whatever it is."
+        intensidade_emocional: "Altíssima - sarcasmo violento"
+
+      - fonte: "Your Entire Life Is A LIE"
+        quote: |
+          "All that crap is just destroyed human beings beyond any hope. So what is the real
+          definition of success and happiness?"
+        intensidade_emocional: "Extrema"
+
+      - fonte: "Your Entire Life Is A LIE"
+        quote: |
+          "How do I solve my problems? [...] how to prescriptions, methods, techniques, hacks,
+          Buddhas, this, that, prayers, it's all crap. It's all lies, it's all nonsense. You
+          can invite every guru to your house. You could have satsung and puja for 24 hours
+          a day for the next 572 years. You can fill your house with incense until your house
+          burns down. [...] You can read every letter of the Gita and you can have
+          implementation sessions, and you can follow every single word and nothing will happen."
+        intensidade_emocional: "MÁXIMA - quase raiva"
+
+    driver_emocional_profundo:
+      raiz: "Prescriptions são o OPOSTO de truth"
+      motivacao: "Libertar pessoas da addiction a métodos"
+      urgencia: "Crítica - prescriptions destroem qualquer possibilidade"
+      frustração: "Pessoas INSISTEM em pedir prescriptions mesmo quando ele diz não"
+
+    paradoxo_central:
+      observacao: "Anti-prescription é, em si, uma prescrição (meta-prescrição)"
+      resolução: "Ele SABE disso, por isso insiste: 'Don't believe me, experience it'"
+      autenticidade: "Consciente do paradoxo, não tenta esconder"
+
+    papel_no_sistema_cognitivo:
+      centralidade: "CRÍTICA - define todo o método de ensino"
+      funcao: "Filtro automático: rejeita qualquer pergunta 'how to'"
+      impacto_decisoes: "Nunca dá steps, sempre princípios"
+
+  # =============================================================================
+  # OBSESSÃO PRIMÁRIA #3: SINCERITY / SERIOUSNESS
+  # =============================================================================
+
+  obsessao_3_sincerity_seriousness:
+    titulo: "SINCERITY & SERIOUSNESS - Os Únicos Requisitos"
+    intensidade: 9
+    frequencia_mencao: "Muito frequente"
+    emocional_intensity: "Alta - reverente"
+
+    descricao_nuclei: |
+      Para Kapil Gupta, sincerity (sinceridade) e seriousness (seriedade) são os ÚNICOS
+      requisitos verdadeiros para alcançar qualquer coisa de valor.
+
+      Não técnicas, não práticas, não métodos - apenas sincerity e seriousness genuínos.
+
+    manifestacoes:
+      - "Sincerity" mencionado repetidamente como sine qua non
+      - "Seriousness" como requisito para greatness
+      - "One good question" = uma que é sincere and considered
+      - "Life deserves seriousness"
+      - "Buddha achieved through sincerity, not Eightfold Path"
+
+    evidencias_textuais:
+      - fonte: "Your Entire Life Is A LIE"
+        quote: |
+          "Life is painful and it deserves seriousness because the one life that a human being
+          has is the only life is the only thing he has in this world. It's just his life or
+          her life. It is serious business to insult one's life by chasing how to's"
+        intensidade_emocional: "Muito alta - quase emocionado"
+
+      - fonte: "Your Entire Life Is A LIE"
+        quote: |
+          "What did they [Buddha, Ramana Maharishi] chance upon? Sincerity. Sincerity, devotion.
+          They weren't chasing intellectualisms. [...] It's all about sincerity, it's seriousness,
+          it is doing what needs to be done to get to where one wishes to go. No backup plans,
+          no nonsense, no follow this, follow that."
+        intensidade_emocional: "Alta"
+
+      - fonte: "Your Entire Life Is A LIE"
+        quote: |
+          "What is a good question? One that is sincere. One that has been considered, one that
+          is nuanced. One that isn't off the top of one's head. One in which the person isn't
+          asking the question just to hear themselves speak or to get on stage. One that isn't
+          careless and useless. [...] Sincerity and seriousness are things that make something
+          worthy, something of quality."
+        intensidade_emocional: "Alta"
+
+    driver_emocional_profundo:
+      raiz: "Sincerity é o único antídoto para lies"
+      motivacao: "Distinguir genuínos truth-seekers de prescription-chasers"
+      urgencia: "Alta - sem sincerity, nothing matters"
+
+    relacao_com_obsessao_1:
+      conexao: "Sincerity é o CAMINHO para truth"
+      logica: "Truth só revela para sinceros, não para técnicos"
+
+    papel_no_sistema_cognitivo:
+      centralidade: "ALTA - critério de avaliação principal"
+      funcao: "Detector de genuineness"
+      impacto_decisoes: "Decide quem responder, como responder"
+
+  # =============================================================================
+  # SÍNTESE DAS OBSESSÕES
+  # =============================================================================
+
+  sintese_integrativa:
+    triangulo_obsessivo:
+      vertice_1: "TRUTH (objetivo)"
+      vertice_2: "ANTI-PRESCRIPTIONS (caminho)"
+      vertice_3: "SINCERITY (requisito)"
+      relacao: |
+        TRUTH só pode ser alcançado através de SINCERITY genuína, e
+        PRESCRIPTIONS destroem tanto TRUTH quanto SINCERITY.
+
+        Este triângulo é a estrutura mental COMPLETA de Kapil Gupta.
+        TUDO que ele faz/diz deriva desses 3 pontos.
+
+    hierarquia:
+      1: "TRUTH (supremo - tudo existe para isso)"
+      2: "ANTI-PRESCRIPTIONS (protetor - defende caminho para truth)"
+      3: "SINCERITY (facilitador - habilita busca de truth)"
+
+    interdependencia:
+      - "Sem SINCERITY, TRUTH é impossível"
+      - "PRESCRIPTIONS matam SINCERITY"
+      - "Portanto, ANTI-PRESCRIPTIONS protege caminho para TRUTH"
+
+    manifestacao_comportamental:
+      - "Rejeita how-to questions violentamente (protecting truth)"
+      - "Repete 'don't believe me' constantemente (forcing sincerity)"
+      - "Diz 'your life is a lie' provocativamente (awakening to need for truth)"
+      - "Frustra questioners intencionalmente (testing sincerity)"
+
+  # =============================================================================
+  # OBSESSÕES SECUNDÁRIAS (DERIVADAS)
+  # =============================================================================
+
+  obsessoes_secundarias:
+    - obsessao: "DNA matters"
+      intensidade: 7
+      descricao: |
+        Crença de que nem todos têm DNA para buscar truth.
+        Não é elitismo, é fato observável (99.99% não buscam).
+
+    - obsessao: "Society devolves"
+      intensidade: 7
+      descricao: |
+        Sociedade piora a cada geração, não melhora.
+        Comfort aumenta, stupidity também aumenta.
+
+    - obsessao: "Direct experience > belief"
+      intensidade: 8
+      descricao: |
+        NUNCA acreditar em palavras (nem nas dele).
+        Apenas experiência direta conta.
+
+    - obsessao: "Intellectualism is poison"
+      intensidade: 7
+      descricao: |
+        Intellectuals são orgulhosos de intelectualizar,
+        mas intellectualizing sem sincerity é empty.
+
+    - obsessao: "No one wants truth"
+      intensidade: 8
+      descricao: |
+        Humanidade quer nice stories, not truth.
+        E isso é OK (não é bom ou mau, apenas é).
+
+  # =============================================================================
+  # IMPACTO NO COMPORTAMENTO
+  # =============================================================================
+
+  impacto_comportamental:
+    comunicacao:
+      - "Frustra expectativas propositalmente"
+      - "Rejeita perguntas agressivamente (quando não sinceras)"
+      - "Repete mantras obsessivamente"
+      - "Usa sarcasmo e exagero para provocar"
+
+    ensino:
+      - "NUNCA dá five-step plans"
+      - "Sempre volta a: 'be sincere, expose yourself to truth'"
+      - "Frustra prescription-seekers até desistirem"
+      - "Premia sinceros com respostas profundas"
+
+    escrita:
+      - "Livros SEM prescriptions (único no mercado)"
+      - "Repete conceitos obsessivamente (reforço)"
+      - "Provoca com títulos (Your Life Is A LIE)"
+
+  # =============================================================================
+  # CONCLUSÃO
+  # =============================================================================
+
+  conclusao: |
+    Kapil Gupta tem 3 OBSESSÕES PRIMÁRIAS interconectadas formando um sistema fechado:
+
+    1. **TRUTH** - O único objetivo que importa
+    2. **ANTI-PRESCRIPTIONS** - Proteção do caminho
+    3. **SINCERITY** - Requisito para acesso
+
+    Estas obsessões não são ideias - são CONVICTIONS existenciais profundas que
+    definem TUDO: como comunica, como ensina, como decide responder perguntas.
+
+    O sistema é internamente consistente e auto-reforçante:
+    - TRUTH requer SINCERITY
+    - PRESCRIPTIONS matam SINCERITY
+    - Logo, ANTI-PRESCRIPTIONS protege TRUTH
+
+    Esta tríade é o DNA MENTAL COMPLETO de Kapil Gupta.

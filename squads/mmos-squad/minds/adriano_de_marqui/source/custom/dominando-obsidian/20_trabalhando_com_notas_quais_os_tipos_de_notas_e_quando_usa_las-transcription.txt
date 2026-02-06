@@ -1,0 +1,1317 @@
+WEBVTT
+
+00:00:00.690 --> 00:00:06.190
+Bom, vamos lá, lendário, que agora nós
+vamos entender como criar notas
+
+00:00:06.190 --> 00:00:07.090
+inteligentes.
+
+00:00:07.170 --> 00:00:13.210
+Como criar notas que vão fazer com que
+eu tenha aquele efeito de geração de
+
+00:00:13.210 --> 00:00:19.730
+insights, conteúdo, que seja algo
+realmente produtivo e de forma a quebrar
+
+00:00:19.730 --> 00:00:25.490
+o paradigma de como eu faço anotações e
+como eu uso ferramentas de anotação até
+
+00:00:25.490 --> 00:00:25.770
+hoje.
+
+00:00:25.770 --> 00:00:33.890
+Então, exige essa quebra de como nós
+fazemos anotações, porque o segundo
+
+00:00:33.890 --> 00:00:37.710
+cérebro não é simplesmente, como eu já
+falei, só anotar.
+
+00:00:38.240 --> 00:00:44.570
+Então, eu quero trazer aqui algo que são
+boas práticas e algo que vai fazer com
+
+00:00:44.570 --> 00:00:51.310
+que você use metodologias certeiras,
+baseadas em estudo de várias e várias
+
+00:00:51.310 --> 00:00:58.510
+metodologias que a academia lendária
+pega, de tudo que existe de segundo
+
+00:00:58.510 --> 00:01:02.610
+cérebro aqui no Brasil, fora,
+principalmente fora, né?
+
+00:01:03.870 --> 00:01:11.250
+E nós vamos pegar a essência daquilo que
+você precisa para já começar a usar.
+
+00:01:11.570 --> 00:01:16.670
+Então, o objetivo dessa aula é que você
+saiba fazer notas de forma eficiente,
+
+00:01:16.870 --> 00:01:23.790
+eficaz, e você vai, no final dela, saber
+o que é necessário para já praticar, já
+
+00:01:23.790 --> 00:01:29.250
+fazer, já sair, aí, mudando toda a forma
+como você tem feito a anotação.
+
+00:01:29.310 --> 00:01:34.650
+Você configurou a ferramenta, você
+chegou até aqui, você já usou as
+
+00:01:34.650 --> 00:01:41.250
+configurações, você criou algumas notas,
+você já acertou a sincronização que você
+
+00:01:41.250 --> 00:01:41.670
+vai usar.
+
+00:01:41.870 --> 00:01:48.370
+Agora, é o momento de você tornar o
+segundo cérebro algo que realmente faz
+
+00:01:48.370 --> 00:01:53.290
+parte do seu dia a dia, dos seus
+estudos, do seu trabalho, e vai trazer
+
+00:01:53.290 --> 00:01:54.170
+muito benefício.
+
+00:01:54.170 --> 00:01:56.230
+A gente tem que colocar à frente de
+muita, muita gente.
+
+00:01:56.390 --> 00:02:01.370
+O fato de você chegar até aqui já faz
+com que você esteja à frente de muita
+
+00:02:01.370 --> 00:02:01.670
+gente.
+
+00:02:01.930 --> 00:02:06.510
+Agora, olha só, eu quero pegar aqui o
+Obsidian e quero mostrar para vocês um
+
+00:02:06.510 --> 00:02:11.250
+documento que eu criei especificamente
+para vocês, para resumir, para que você
+
+00:02:11.250 --> 00:02:13.210
+tenha ele no seu segundo cérebro.
+
+00:02:13.290 --> 00:02:18.370
+Vou deixar disponível aqui na aula,
+porque aí você vai poder retornar sempre
+
+00:02:18.370 --> 00:02:22.470
+que quiser para relembrar esse conceito
+agora no início.
+
+00:02:22.750 --> 00:02:24.150
+Depois, é claro, isso vai se
+transformar.
+
+00:02:24.170 --> 00:02:25.430
+Isso vai se tornar natural para você.
+
+00:02:26.650 --> 00:02:33.070
+Primeira coisa, nós vamos ver aqui
+quatro tipos de nota que você vai
+
+00:02:33.070 --> 00:02:33.430
+aprender.
+
+00:02:33.730 --> 00:02:35.950
+E isso aqui vai resumir tudo.
+
+00:02:36.170 --> 00:02:41.810
+Tudo que você possa imaginar de estudo
+que você vai ter que fazer e demoraria
+
+00:02:41.810 --> 00:02:45.910
+meses, anos, para estudar tudo que é
+metodologia, eu vou trazer mastigado
+
+00:02:45.910 --> 00:02:46.330
+para você.
+
+00:02:46.490 --> 00:02:50.190
+Eu já vou trazer aqui de forma direta
+nessa aula.
+
+00:02:50.590 --> 00:02:53.630
+Então, nós vamos falar aqui da primeira
+nota.
+
+00:02:54.170 --> 00:03:01.490
+Que a gente vai mudar nesse processo de
+paradigma de anotação.
+
+00:03:01.490 --> 00:03:05.410
+Anotar de qualquer jeito, apenas anotar
+como um resumão.
+
+00:03:05.850 --> 00:03:09.310
+Enfim, a primeira nota é a nota atômica.
+
+00:03:10.410 --> 00:03:11.870
+São quatro tipos, tá?
+
+00:03:11.990 --> 00:03:13.510
+A primeira é a atômica.
+
+00:03:13.550 --> 00:03:15.190
+O que é uma nota atômica?
+
+00:03:15.370 --> 00:03:18.090
+É uma anotação curta, né?
+
+00:03:18.170 --> 00:03:22.010
+Está aqui no texto, vou deixar para
+vocês depois para relembrarem o que é
+
+00:03:22.010 --> 00:03:22.430
+cada uma.
+
+00:03:22.430 --> 00:03:27.610
+Com apenas uma ou duas frases explicando
+um conceito ou uma ideia, tá?
+
+00:03:27.810 --> 00:03:33.890
+Então, a nota atômica, ela vai contra
+aquele princípio, talvez, de você achar
+
+00:03:33.890 --> 00:03:37.410
+que a anotação é um texto longo, um
+resumão, um livro.
+
+00:03:38.150 --> 00:03:46.190
+Uma nota com uma frase ou duas frases é
+uma nota atômica que tem como precedente
+
+00:03:46.190 --> 00:03:50.790
+aí as anotações no modelo Zetelkasten,
+né?
+
+00:03:50.810 --> 00:03:51.590
+Daquele alemão.
+
+00:03:52.430 --> 00:03:54.770
+Que começou a juntar, né?
+
+00:03:54.770 --> 00:04:00.190
+Colocar essas ideias em pequenos cartões
+e com essas ideias ali nos cartões, ele
+
+00:04:00.190 --> 00:04:03.730
+começou a vincar um com o outro e isso
+fez ali, né?
+
+00:04:03.750 --> 00:04:13.930
+Deu para ele uma profunda experiência de
+criação de conteúdo na época que nem ele
+
+00:04:13.930 --> 00:04:16.510
+tinha acesso ali à tecnologia.
+
+00:04:16.770 --> 00:04:18.310
+Foi feito com cartão.
+
+00:04:18.850 --> 00:04:22.030
+Então, sim, nós podemos ter notas
+onde...
+
+00:04:22.510 --> 00:04:25.590
+Simplesmente traz a definição de algo.
+
+00:04:25.770 --> 00:04:27.730
+Aqui eu trouxe exemplo para você, tá?
+
+00:04:28.590 --> 00:04:31.270
+Olha aqui esse texto de duas frases
+aqui.
+
+00:04:31.810 --> 00:04:37.150
+A lei de Pareto estabelece que 80 % dos
+resultados vêm de 20 % das causas.
+
+00:04:37.310 --> 00:04:42.810
+É um princípio que se aplica em diversos
+contextos, desde produtividade até
+
+00:04:42.810 --> 00:04:43.390
+economia.
+
+00:04:43.690 --> 00:04:48.470
+Esse é um texto, uma frase curta, mas
+Adriano, isso aqui vai se tornar uma
+
+00:04:48.470 --> 00:04:48.790
+nota?
+
+00:04:48.990 --> 00:04:49.950
+Sim, uma nota.
+
+00:04:50.150 --> 00:04:51.790
+E aí você vai ter essa nota?
+
+00:04:52.430 --> 00:04:56.110
+Podendo trazer para você muitos
+insights.
+
+00:04:56.570 --> 00:05:01.190
+E isso aqui está explicando, na verdade,
+o conceito de Pareto, a lei de Pareto,
+
+00:05:01.310 --> 00:05:01.410
+né?
+
+00:05:01.490 --> 00:05:03.290
+Por que ela é uma nota atômica?
+
+00:05:03.310 --> 00:05:07.310
+Ela é curta, está aqui também a
+explicação, para que você depois possa
+
+00:05:07.310 --> 00:05:10.750
+ficar atento.
+
+00:05:11.590 --> 00:05:15.530
+Explica um conceito claro, é direta e
+autocontida.
+
+00:05:15.910 --> 00:05:21.910
+Transmite uma ideia completa, de forma
+concisa, sobre o conteúdo que ela...
+
+00:05:22.430 --> 00:05:24.130
+Está, né, explicando.
+
+00:05:24.750 --> 00:05:28.570
+Então, esse texto aqui seria uma nota
+atômica.
+
+00:05:28.930 --> 00:05:36.890
+Daí, depois, né, num outro modelo, nós
+vamos tratar da nota atômica X.
+
+00:05:37.450 --> 00:05:39.110
+O que é a nota atômica X?
+
+00:05:39.270 --> 00:05:43.270
+Lembra, a nota atômica, uma frase, né?
+
+00:05:43.350 --> 00:05:45.830
+Um conceito, uma coisa explicada
+rapidamente.
+
+00:05:46.270 --> 00:05:50.710
+A atômica X, lembra aí, você vai ter que
+lembrar aí do X, né?
+
+00:05:50.790 --> 00:05:52.410
+Que o X tem quatro pontas.
+
+00:05:52.430 --> 00:05:52.910
+Correto?
+
+00:05:53.750 --> 00:05:58.790
+Você vai explicar um conceito, vai usar
+uma nota que pode se parecer com a
+
+00:05:58.790 --> 00:06:04.250
+atômica, mas, nessa nota, você vai
+responder também algumas outras coisas.
+
+00:06:04.470 --> 00:06:10.910
+De onde veio, para que serve, o que é
+similar, né, o que é igual e o que é
+
+00:06:10.910 --> 00:06:11.470
+oposto.
+
+00:06:12.210 --> 00:06:18.510
+Então, você tem essas quatro pontas que
+você vai ou explicar dentro dessa nota,
+
+00:06:18.710 --> 00:06:21.730
+ou essas pontas vão ser outras notas.
+
+00:06:22.430 --> 00:06:25.470
+Que você vai linkar, depois você vai
+aprender a linkar notas, né?
+
+00:06:25.550 --> 00:06:30.370
+E você vai poder linkar e vai dar essa
+teia, né, de conexões.
+
+00:06:31.380 --> 00:06:33.030
+Eu trouxe aqui a definição, óbvio.
+
+00:06:33.590 --> 00:06:40.850
+A nota atômica X é semelhante à anotação
+atômica, porém, né, tem essas respostas
+
+00:06:40.850 --> 00:06:45.050
+aí que você vai trazer aí para o texto.
+
+00:06:45.870 --> 00:06:46.810
+Olha um exemplo.
+
+00:06:47.070 --> 00:06:49.330
+Trouxe dois exemplos aqui de nota...
+
+00:06:49.330 --> 00:06:51.290
+Deixa eu ver se é aqui...
+
+00:06:51.290 --> 00:06:51.490
+Sim.
+
+00:06:52.430 --> 00:06:55.830
+Aqui eu trouxe dois exemplos de atômica
+X.
+
+00:06:56.550 --> 00:06:57.410
+Primeiro exemplo.
+
+00:06:57.650 --> 00:06:59.650
+A frase, né, que seria a nota.
+
+00:07:00.310 --> 00:07:05.910
+Método Pomodoro é uma técnica de gestão
+de tempo que divide o trabalho em blocos
+
+00:07:05.910 --> 00:07:11.150
+de 25 minutos focados, seguidos por
+pausas curtas.
+
+00:07:11.560 --> 00:07:16.470
+Aqui você tem a definição do que é
+Pomodoro, né, o método Pomodoro.
+
+00:07:16.650 --> 00:07:17.590
+De onde veio?
+
+00:07:18.070 --> 00:07:21.890
+Aí, tem a resposta aqui, que veio lá,
+né, do...
+
+00:07:22.430 --> 00:07:27.710
+Criador, na década de 80, usando o timer
+de cozinha que parecia um tomate.
+
+00:07:28.510 --> 00:07:29.070
+Beleza.
+
+00:07:29.170 --> 00:07:30.050
+Para que serve?
+
+00:07:30.650 --> 00:07:35.190
+Aumentar foco e produtividade, reduzir a
+fadiga mental, melhorar gerenciamento do
+
+00:07:35.190 --> 00:07:35.530
+tempo.
+
+00:07:35.850 --> 00:07:36.410
+Legal.
+
+00:07:37.470 --> 00:07:38.470
+É similar ao quê?
+
+00:07:38.610 --> 00:07:39.410
+O que que...
+
+00:07:39.410 --> 00:07:42.750
+Quais são as outras ideias que são
+parecidas com isso?
+
+00:07:42.970 --> 00:07:48.730
+Tem uma outra técnica, né, a 5217, só
+muda a relação de tempo aí, mas é uma
+
+00:07:48.730 --> 00:07:52.190
+técnica existente, né, que alguém criou.
+
+00:07:52.430 --> 00:07:57.090
+E o método Flowtime, que é um outro
+método também, que é baseado na energia,
+
+00:07:57.170 --> 00:08:01.810
+dos momentos que você tem energia,
+momentos que você tem menos energia, e
+
+00:08:01.810 --> 00:08:05.190
+aí você aproveita para fazer pausas,
+enfim, é igual a isso.
+
+00:08:05.410 --> 00:08:13.910
+O oposto do método Pomodoro é você
+trabalhar multitarefa, né, é você fazer
+
+00:08:13.910 --> 00:08:20.910
+muitas coisas ao mesmo tempo, né, sem
+pausas programadas, períodos longos e de
+
+00:08:20.910 --> 00:08:22.330
+interruptos, enfim.
+
+00:08:22.430 --> 00:08:26.190
+E aqui tem um, tem um, ó, deixa eu
+criar, tem um número aqui que não tem
+
+00:08:26.190 --> 00:08:26.650
+nada a ver.
+
+00:08:26.890 --> 00:08:31.610
+É, multitarefa, trabalhos sem pausas
+programadas e períodos longos.
+
+00:08:32.450 --> 00:08:39.130
+Perceba que isso aqui é como se fossem
+conexões sinapses, conexões cerebrais.
+
+00:08:39.310 --> 00:08:43.570
+Você pensa numa coisa, você sabe o que é
+ao contrário, você sabe o que se parece,
+
+00:08:43.990 --> 00:08:47.790
+você sabe para que serve, você sabe de
+onde surgiu isso daí.
+
+00:08:48.310 --> 00:08:50.490
+Então, a Atômica X é para isso.
+
+00:08:51.110 --> 00:08:51.950
+Aqui nessa...
+
+00:08:51.950 --> 00:08:56.110
+Nessa Atômica X, ó, vocês podem ver aqui
+o seguinte, que de onde veio, poderia
+
+00:08:56.110 --> 00:09:01.730
+esse texto aqui não estar dentro dessa
+nota Atômica X, mas poderia ser o link
+
+00:09:01.730 --> 00:09:03.090
+para uma outra nota.
+
+00:09:04.130 --> 00:09:09.110
+Aqui, por exemplo, para que serve
+aumentar foco e produtividade.
+
+00:09:09.230 --> 00:09:14.870
+Você poderia ter uma outra nota, onde
+essa nota seria, né, o nome dela,
+
+00:09:14.910 --> 00:09:18.010
+produtividade, ou alguma coisa
+relacionada à produtividade.
+
+00:09:18.030 --> 00:09:21.930
+E você vai linkar, né, o Pomodoro com...
+
+00:09:21.950 --> 00:09:22.490
+Com produtividade.
+
+00:09:23.410 --> 00:09:29.990
+Similar, você poderia ter uma nota, né,
+explicando o método Flowtime.
+
+00:09:30.450 --> 00:09:36.750
+E você poderia ter aqui no oposto, uma
+outra nota falando sobre multitarefa,
+
+00:09:36.850 --> 00:09:40.930
+falando sobre pausas no trabalho.
+
+00:09:41.770 --> 00:09:47.650
+Então, é isso que eu quero que você
+entenda, né, a nota em si, parecida com
+
+00:09:47.650 --> 00:09:51.470
+a Atômica, e daí você tem essas pernas
+que fazem esses links.
+
+00:09:52.230 --> 00:09:53.810
+Adriano, como é que faz esses links?
+
+00:09:53.990 --> 00:09:56.070
+Calma, eu vou mostrar para você sobre os
+links.
+
+00:09:56.250 --> 00:10:00.530
+Eu quero agora que você entenda quais os
+tipos de nota existem.
+
+00:10:01.270 --> 00:10:07.570
+O Atômica X, eu trouxe ainda um outro
+exemplo, né, igual o primeiro, só
+
+00:10:07.570 --> 00:10:09.210
+tratando de outro assunto.
+
+00:10:09.470 --> 00:10:09.990
+Então, olha lá.
+
+00:10:10.690 --> 00:10:15.110
+Mindfulness é uma prática de atenção
+plena que consiste em focar
+
+00:10:15.110 --> 00:10:18.590
+conscientemente no momento presente, sem
+julgamentos.
+
+00:10:19.130 --> 00:10:19.650
+Beleza?
+
+00:10:19.650 --> 00:10:20.590
+Expliquei o que é.
+
+00:10:21.110 --> 00:10:21.930
+Expliquei o conceito.
+
+00:10:21.950 --> 00:10:24.810
+Expliquei o conceito, aí vamos de novo
+às respostas.
+
+00:10:24.810 --> 00:10:25.430
+De onde veio?
+
+00:10:25.670 --> 00:10:30.470
+Aí fala da origem, poderia ter o texto
+aqui, poderia ser uma nota.
+
+00:10:30.890 --> 00:10:31.970
+Para que serve?
+
+00:10:32.130 --> 00:10:35.550
+Reduzir ansiedade, estresse, melhorar
+concentração, desenvolver
+
+00:10:35.550 --> 00:10:38.270
+autoconhecimento, regular emoções.
+
+00:10:38.670 --> 00:10:44.310
+Então, você poderia aqui, nesse item
+aqui, para que serve, ter o texto, ou
+
+00:10:44.310 --> 00:10:48.750
+você poderia ter cada um desses itens
+sendo notas diferentes, né.
+
+00:10:49.110 --> 00:10:51.430
+Por exemplo, uma nota falando sobre
+estresse.
+
+00:10:51.430 --> 00:10:53.230
+Uma nota falando sobre concentração.
+
+00:10:54.250 --> 00:10:55.830
+Isso daí é similar ao que?
+
+00:10:56.410 --> 00:11:00.930
+Meditação guiada, ioga, técnicas de
+respiração consciente.
+
+00:11:01.050 --> 00:11:04.350
+E é o oposto, né, do que?
+
+00:11:04.730 --> 00:11:10.190
+Do piloto automático, de você fazer as
+coisas no automático, não percebe, não
+
+00:11:10.190 --> 00:11:11.090
+tem consciência.
+
+00:11:11.390 --> 00:11:13.750
+Volta aqui de novo o assunto do
+multitarefa.
+
+00:11:13.950 --> 00:11:16.910
+O pensamento ruminante, né, o pensamento
+que...
+
+00:11:16.910 --> 00:11:18.050
+O pensamento que...
+
+00:11:18.050 --> 00:11:18.730
+O pensamento que...
+
+00:11:18.730 --> 00:11:18.950
+O pensamento que...
+
+00:11:18.950 --> 00:11:20.190
+O pensamento que...
+
+00:11:20.190 --> 00:11:25.710
+Para viver no automático também, né, não
+tem aquela opção deliberada de pensar.
+
+00:11:26.210 --> 00:11:32.630
+Então, tudo isso é para exemplificar
+mesmo o que seria uma nota atômica X.
+
+00:11:33.110 --> 00:11:33.950
+Então, vamos lá.
+
+00:11:34.050 --> 00:11:35.090
+Nota atômica.
+
+00:11:35.670 --> 00:11:37.590
+Atômica X com as pontas.
+
+00:11:37.870 --> 00:11:40.370
+A próxima é a nota Lego.
+
+00:11:40.670 --> 00:11:42.290
+O que é uma nota Lego?
+
+00:11:42.470 --> 00:11:43.390
+Pensa no Lego.
+
+00:11:43.710 --> 00:11:46.530
+Pensa na pecinha pequena.
+
+00:11:46.770 --> 00:11:50.090
+Pensa que aquela pecinha você vai
+juntar.
+
+00:11:50.190 --> 00:11:51.490
+Você vai juntar e montar algo maior, né?
+
+00:11:51.790 --> 00:11:58.470
+Então, a nota Lego é uma nota também
+curta, parece com a nota atômica.
+
+00:11:58.790 --> 00:12:02.930
+Só que a diferença, né, aqui, é que ela
+é reaproveitável.
+
+00:12:03.110 --> 00:12:08.370
+É aquele texto, é aquela menção, é
+aquilo que você diversas vezes, com
+
+00:12:08.370 --> 00:12:13.190
+certeza, vai usar em outras notas, né?
+
+00:12:13.350 --> 00:12:18.310
+Então, em vez de você ter um CTRL -C,
+CTRL -V em várias notas da mesma coisa,
+
+00:12:18.550 --> 00:12:20.170
+você tem uma nota...
+
+00:12:20.190 --> 00:12:22.410
+Você tem uma nota que você vai poder
+reutilizar ela, né?
+
+00:12:22.490 --> 00:12:26.410
+Ou mostrar um pouco dela, mostrar o
+texto dela em vários lugares.
+
+00:12:26.710 --> 00:12:31.290
+De forma que, se você mexer no original,
+todos os outros lugares vão refletir,
+
+00:12:31.290 --> 00:12:33.230
+né, aquela alteração.
+
+00:12:34.330 --> 00:12:35.270
+Então, olha só.
+
+00:12:35.450 --> 00:12:39.070
+Sua principal característica é ser uma
+anotação curta, facilmente
+
+00:12:39.070 --> 00:12:44.470
+reaproveitável em diversos contextos,
+podendo, inclusive, ser também atômica
+
+00:12:44.470 --> 00:12:45.130
+ou atômica X.
+
+00:12:45.870 --> 00:12:46.390
+Entendeu?
+
+00:12:46.410 --> 00:12:48.550
+Então, a diferença aqui não é que
+existe...
+
+00:12:50.310 --> 00:12:52.710
+Algum critério que diferencie ela das
+outras.
+
+00:12:52.810 --> 00:12:55.870
+Não, é o fato de reaproveitar ela várias
+vezes, né?
+
+00:12:56.270 --> 00:12:58.610
+Então, ela precisa ser autoexplicativa.
+
+00:12:59.490 --> 00:13:00.010
+Autoexplicativa.
+
+00:13:00.010 --> 00:13:05.070
+E ser possível citar em qualquer
+contexto que exija uma explicação sobre
+
+00:13:05.070 --> 00:13:07.170
+do que se trata aquele termo.
+
+00:13:07.550 --> 00:13:11.230
+O que define uma anotação légua é sua
+capacidade de ser reaproveitada.
+
+00:13:11.270 --> 00:13:12.310
+Já falei pra vocês aí.
+
+00:13:12.650 --> 00:13:13.570
+Então, olha só.
+
+00:13:13.670 --> 00:13:18.690
+Aqui, eu trouxe um texto, né, que é
+referente...
+
+00:13:20.190 --> 00:13:22.530
+Um texto -exemplo aqui do que seria uma
+anota légua.
+
+00:13:23.830 --> 00:13:28.030
+Dopamina é um neurotransmissor
+responsável pela sensação de prazer e
+
+00:13:28.030 --> 00:13:29.510
+recompensa no cérebro.
+
+00:13:30.170 --> 00:13:34.750
+Ela é liberada durante experiências
+prazerosas e também na antecipação
+
+00:13:34.750 --> 00:13:38.210
+delas, sendo crucial para a motivação e
+formação de hábitos.
+
+00:13:38.550 --> 00:13:41.150
+Como um sistema de recompensa interna do
+corpo.
+
+00:13:41.370 --> 00:13:44.750
+Ele nos faz repetir comportamentos que
+nos deram prazer no passado.
+
+00:13:45.290 --> 00:13:47.270
+Beleza, expliquei o que é dopamina.
+
+00:13:47.310 --> 00:13:50.010
+Tá aqui uma nota onde eu vou...
+
+00:13:50.190 --> 00:13:51.590
+Explicar o que é dopamina.
+
+00:13:51.690 --> 00:13:56.930
+Bom, imagine se você é um psicólogo, ou
+se você gosta de comportamento humano,
+
+00:13:57.090 --> 00:13:58.310
+estudar a mente, estudar...
+
+00:13:58.310 --> 00:14:04.050
+Você, em diversos textos, diversas
+vezes, vai ver a necessidade de citar ou
+
+00:14:04.050 --> 00:14:05.350
+de falar sobre dopamina.
+
+00:14:05.450 --> 00:14:12.350
+E você, então, em vez de escrever de
+novo, CTRL -C, CTRL -V, você vai usar
+
+00:14:12.350 --> 00:14:16.170
+esse texto já escrito naquela outra
+nota.
+
+00:14:17.090 --> 00:14:19.270
+Por que é uma nota légua?
+
+00:14:20.190 --> 00:14:21.130
+Tem toda a explicação, tá?
+
+00:14:21.210 --> 00:14:28.230
+É versátil, ela explica, ela discute,
+ela aborda, é autocontida, é concisa,
+
+00:14:28.950 --> 00:14:33.850
+pode ser facilmente incorporada em notas
+maiores, sobre psicologia, saúde,
+
+00:14:33.990 --> 00:14:35.870
+comportamento humano, neurociência.
+
+00:14:36.110 --> 00:14:41.390
+E ali tem o nome, Tetris, que é a
+próxima nota.
+
+00:14:41.730 --> 00:14:42.290
+Vamos lá?
+
+00:14:43.050 --> 00:14:43.690
+Atômica.
+
+00:14:44.050 --> 00:14:44.830
+Atômica X.
+
+00:14:46.190 --> 00:14:46.830
+Légua.
+
+00:14:47.190 --> 00:14:49.430
+E agora, a Tetris.
+
+00:14:49.430 --> 00:14:51.570
+O que é a nota Tetris?
+
+00:14:51.630 --> 00:14:53.650
+É uma nota longa.
+
+00:14:53.870 --> 00:14:56.850
+Pode conter várias notas légua.
+
+00:14:58.830 --> 00:15:01.610
+Então, aqui seria o texto, textão mesmo.
+
+00:15:01.730 --> 00:15:08.650
+Aqui seria a explicação, com o resumo,
+com uma síntese que foi feita, e aí o
+
+00:15:08.650 --> 00:15:10.270
+texto é maior, né?
+
+00:15:10.530 --> 00:15:12.370
+Então, olha aqui pra você ver um
+exemplo.
+
+00:15:13.010 --> 00:15:14.710
+A descrição, primeiro aqui.
+
+00:15:14.830 --> 00:15:19.510
+Uma nota Tetris é uma nota extensa que
+pode ser feita, tanto como objetivo, de
+
+00:15:19.510 --> 00:15:24.490
+gerar outras notas légua, quanto como
+objetivo de usar notas légua para
+
+00:15:24.490 --> 00:15:25.570
+complementar o conteúdo.
+
+00:15:25.890 --> 00:15:31.390
+Você pode construir uma inteira usando
+suas próprias palavras, somente com
+
+00:15:31.390 --> 00:15:32.690
+citações de nota légua.
+
+00:15:32.810 --> 00:15:34.370
+Ou seja, olha o exemplo aqui.
+
+00:15:34.470 --> 00:15:36.170
+Melhor de tudo é o exemplo, né?
+
+00:15:37.170 --> 00:15:38.990
+É um textão, olha essa nota.
+
+00:15:39.310 --> 00:15:40.390
+Tudo está aqui, ó.
+
+00:15:40.510 --> 00:15:41.450
+É um textão.
+
+00:15:41.750 --> 00:15:44.390
+Então, olha como é um texto longo.
+
+00:15:45.030 --> 00:15:47.230
+Como desenvolver hábitos duradouros.
+
+00:15:47.250 --> 00:15:51.050
+Eu não vou ler aqui pra você, né, tudo,
+Mas aqui é um texto falando sobre como
+
+00:15:51.050 --> 00:15:54.770
+criar hábitos duradouros.
+
+00:15:54.870 --> 00:15:57.090
+O que vai acontecer no meio desse texto?
+
+00:15:57.350 --> 00:16:00.810
+No meio desse texto, falando sobre
+hábitos, eu posso ter...
+
+00:16:01.630 --> 00:16:07.150
+Aqui eu não criei link, porque a nota
+nesse segundo cérebro aqui não foi
+
+00:16:07.150 --> 00:16:07.590
+criada.
+
+00:16:07.690 --> 00:16:08.950
+Eu vou explicar ainda sobre link.
+
+00:16:09.010 --> 00:16:12.090
+O que eu quero, só coloquei aqui para
+mudar a cor, para você entender.
+
+00:16:12.630 --> 00:16:15.410
+Aqui entraria a nota lego.
+
+00:16:15.410 --> 00:16:24.370
+Então, é só para mencionar aqui, que
+aqui entraria o link ou a visualização
+
+00:16:24.370 --> 00:16:26.290
+daquilo que se fala sobre dopamina.
+
+00:16:26.330 --> 00:16:27.230
+Nós vimos lá em cima.
+
+00:16:27.550 --> 00:16:29.710
+Você continua explicando, tal, tal, tal.
+
+00:16:29.810 --> 00:16:35.090
+Aí aqui entra a nota atômica X, do
+método Pomodoro, que é um método também
+
+00:16:35.090 --> 00:16:38.490
+para criar e formar hábitos, tal, tal,
+tal.
+
+00:16:38.550 --> 00:16:42.710
+E ele continua, vai falando dos
+gratírios, novo hábito, tal.
+
+00:16:42.830 --> 00:16:44.970
+E aí, no final, ele ainda cita...
+
+00:16:45.410 --> 00:16:53.170
+Que uma prática para ter mais
+consciência e fazer, ajudar no processo
+
+00:16:53.170 --> 00:16:56.570
+da formação de hábito, é a meditação.
+
+00:16:56.770 --> 00:16:59.710
+A mindfulness, que a gente viu lá em
+cima.
+
+00:17:00.690 --> 00:17:01.570
+Então, olha só.
+
+00:17:01.730 --> 00:17:07.490
+Num texto, eu tenho menção, menções de
+vários outros textos que eu posso
+
+00:17:07.490 --> 00:17:09.470
+reutilizar aqui e aí por diante.
+
+00:17:10.170 --> 00:17:13.470
+Então, aqui eu tenho um resumo da nota
+Tetris.
+
+00:17:13.610 --> 00:17:15.270
+Ela é uma nota longa.
+
+00:17:15.410 --> 00:17:16.090
+E abrangente.
+
+00:17:16.350 --> 00:17:17.930
+Incorpora outras notas.
+
+00:17:18.010 --> 00:17:20.490
+Expande o tema principal com subtópicos.
+
+00:17:21.210 --> 00:17:22.870
+Mantenha uma estrutura coerente.
+
+00:17:23.170 --> 00:17:28.750
+E pode gerar novas notas Lego a partir
+de seus componentes.
+
+00:17:28.810 --> 00:17:32.770
+Ou seja, você pode pegar partes aqui,
+que você vê aqui o seguinte.
+
+00:17:32.990 --> 00:17:34.730
+Caramba, esse texto aqui, né?
+
+00:17:34.890 --> 00:17:36.530
+Que eu estou explicando uma coisa.
+
+00:17:36.770 --> 00:17:41.290
+Isso merece estar numa nota separada,
+porque eu vou reutilizar em outros
+
+00:17:41.290 --> 00:17:41.650
+lugares.
+
+00:17:42.150 --> 00:17:43.370
+Então, perceba.
+
+00:17:43.650 --> 00:17:45.170
+Quando eu estou falando aqui...
+
+00:17:45.410 --> 00:17:51.350
+Desses três tipos, quatro tipos de nota,
+eu estou mudando o paradigma, eu estou
+
+00:17:51.350 --> 00:17:54.830
+mudando a forma de entender como anotar
+as coisas.
+
+00:17:55.150 --> 00:17:57.770
+Você pode ter anotado a vida toda.
+
+00:17:57.990 --> 00:18:01.150
+Você pode ter anotado todo...
+
+00:18:01.150 --> 00:18:04.750
+Não sei quantos anos você tem aí, mas a
+vida toda você anotou de um jeito.
+
+00:18:04.770 --> 00:18:13.770
+E agora, você está tendo talvez essa
+exemplificação aqui de como seria melhor
+
+00:18:13.770 --> 00:18:14.310
+para...
+
+00:18:14.310 --> 00:18:19.010
+Criando um segundo cérebro, eu fazer, eu
+tomar notas inteligentes.
+
+00:18:20.110 --> 00:18:23.630
+Bom, isso aqui, como eu falei, resumo de
+vários estudos.
+
+00:18:23.890 --> 00:18:29.810
+E creio que não vai ser de uma hora para
+outra, ou natural, que você vai começar
+
+00:18:29.810 --> 00:18:31.150
+a anotar.
+
+00:18:31.230 --> 00:18:32.710
+Mas o que é importante?
+
+00:18:33.470 --> 00:18:35.130
+Eu vou dar esse arquivo para você.
+
+00:18:35.250 --> 00:18:36.730
+Você vai entender isso aqui.
+
+00:18:36.830 --> 00:18:38.050
+Você vai ruminar isso aqui.
+
+00:18:38.130 --> 00:18:40.910
+Você vai pegar e vai, de novo, estudar.
+
+00:18:40.990 --> 00:18:42.210
+E aí, o que nós vamos fazer?
+
+00:18:43.010 --> 00:18:44.050
+Você vai agora...
+
+00:18:44.310 --> 00:18:45.030
+Vai parar, né?
+
+00:18:45.070 --> 00:18:47.110
+Depois do final desse vídeo, dessa aula.
+
+00:18:47.270 --> 00:18:51.170
+Vai pegar o seu segundo cérebro, que a
+gente está fazendo desde o início do
+
+00:18:51.170 --> 00:18:51.710
+curso aí.
+
+00:18:52.050 --> 00:18:56.750
+Você vai pegar notas que você já começou
+a fazer aí, do exercício das outras.
+
+00:18:57.010 --> 00:18:59.430
+Você vai pegar anotações também que você
+tem aí.
+
+00:18:59.650 --> 00:19:01.750
+E vai praticar.
+
+00:19:01.970 --> 00:19:09.910
+Você vai, nos casos reais, seu, de
+anotações suas, usar esses quatro tipos.
+
+00:19:10.170 --> 00:19:11.430
+Você vai criar uma nota atômica.
+
+00:19:11.430 --> 00:19:13.030
+Você vai criar uma nota atômica X.
+
+00:19:13.230 --> 00:19:14.290
+Uma nota lenta.
+
+00:19:14.310 --> 00:19:15.530
+E uma nota tétris.
+
+00:19:15.590 --> 00:19:19.910
+Você vai criar elas aí para que você
+comece a usar.
+
+00:19:20.310 --> 00:19:25.590
+E, a partir de todas as suas anotações,
+todo momento agora que você for usar o
+
+00:19:25.590 --> 00:19:29.310
+seu segundo cérebro, você vai colocar a
+nota desse jeito.
+
+00:19:29.610 --> 00:19:30.450
+É só isso?
+
+00:19:30.650 --> 00:19:30.890
+Não.
+
+00:19:30.950 --> 00:19:35.870
+Tem algumas coisas que ainda vão ajudar
+e potencializar mais a questão de
+
+00:19:35.870 --> 00:19:41.530
+anotações e a geração de coisas que vão
+ser produzidas através disso.
+
+00:19:41.730 --> 00:19:44.290
+Mas, o que é necessário para esse
+momento...
+
+00:19:44.310 --> 00:19:46.950
+E que vai fazer você mudar o jogo.
+
+00:19:47.110 --> 00:19:50.370
+Vai ser mudança de jogo mesmo para você.
+
+00:19:50.490 --> 00:19:52.970
+É você utilizar isso na prática.
+
+00:19:53.010 --> 00:19:54.010
+E você vai fazer isso agora.
+
+00:19:54.230 --> 00:19:54.610
+Tá bom?
+
+00:19:54.790 --> 00:20:00.350
+Então, eu quero que você, agora, nesse
+momento, faça esse exercício.
+
+00:20:00.410 --> 00:20:05.370
+Você vai pegar o seu segundo cérebro e
+vai criar uma, duas, três de cada um
+
+00:20:05.370 --> 00:20:06.690
+desses quatro tipos aqui.
+
+00:20:07.030 --> 00:20:10.770
+Baixa o arquivo aí na aula e faz esse
+exercício para valer.
+
+00:20:10.810 --> 00:20:11.070
+Tá bom?
+
+00:20:11.170 --> 00:20:12.010
+Tá bom.
+
+00:20:12.430 --> 00:20:14.290
+Bom, aí, na próxima aula...
+
+00:20:14.310 --> 00:20:17.150
+Na próxima aula, nós vamos aprender
+sobre um método de escrita.
+
+00:20:17.290 --> 00:20:20.830
+Eu vou contar a história desse método e
+por quê.
+
+00:20:20.870 --> 00:20:23.450
+Por que você vai sair na frente também
+de aprender, né?
+
+00:20:23.590 --> 00:20:29.490
+Dessa forma, como funcionam as notas
+aqui no Obsidia com Markdown.
+
+00:20:30.070 --> 00:20:36.490
+E você, de novo, vai cada vez mais estar
+com nível de consciência, uma evolução
+
+00:20:36.490 --> 00:20:37.770
+de aprendizado.
+
+00:20:38.010 --> 00:20:41.270
+Que, uma vez, o Alan usou uma frase que
+eu...
+
+00:20:41.270 --> 00:20:42.790
+Nossa, isso me impactou.
+
+00:20:42.830 --> 00:20:43.530
+É a...
+
+00:20:44.370 --> 00:20:46.190
+Motratização da genialidade.
+
+00:20:46.550 --> 00:20:49.790
+Meu, você, com uma ferramenta dessa,
+você pode chegar longe.
+
+00:20:49.850 --> 00:20:51.450
+Você pode aprender muito mais.
+
+00:20:51.510 --> 00:20:58.410
+Você pode vencer vícios, vencer aquela
+incapacidade, aquela procrastinação, o
+
+00:20:58.410 --> 00:20:59.050
+TDAH.
+
+00:20:59.090 --> 00:21:06.230
+Enfim, tanta coisa que o segundo cérebro
+ajuda a evoluir e a diminuir tempo e a
+
+00:21:06.230 --> 00:21:09.110
+produzir mais e a aliviar a mente.
+
+00:21:09.170 --> 00:21:10.930
+Como tudo, coisas que a gente já falou.
+
+00:21:11.230 --> 00:21:13.950
+Então, eu espero você para a próxima
+aula.
+
+00:21:13.950 --> 00:21:17.670
+Que a gente vai fazer aí esse processo
+de aprender Markdown.
+
+00:21:17.810 --> 00:21:20.670
+Mas antes, termina esse vídeo.
+
+00:21:20.830 --> 00:21:26.210
+Não vai para a próxima aula sem colocar
+isso em prática com exercício, tá bom?
+
+00:21:26.410 --> 00:21:28.230
+E aí a gente se vê na próxima aula.
+
+00:21:28.650 --> 00:21:29.790
+Até mais, lendário.

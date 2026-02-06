@@ -1,0 +1,16 @@
+# How People Get Rich Now
+
+[1](#f1n)
+[2](#f2n)
+[3](#f3n)
+[4](#f4n)
+[consolidation](re.html)
+[5](#f5n)
+[6](#f6n)
+[7](#f7n)
+[8](#f8n)
+[9](#f9n)
+[grow](growth.html)
+[confused](https://www.inc.com/magazine/201505/leigh-buchanan/the-vanishing-startups-in-decline.html)
+[safety](inequality.html)
+[retro](https://books.google.com/ngrams/graph?content=high+tech&year_start=1900&year_end=2019&corpus=en-2019&smoothing=3)

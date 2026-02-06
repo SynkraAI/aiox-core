@@ -1,0 +1,503 @@
+WEBVTT
+
+00:00:01.010 --> 00:00:02.130
+Fala, lendário!
+
+00:00:02.250 --> 00:00:08.730
+Agora, nessa aula, nós vamos aprender
+sobre por que usar obsidia.
+
+00:00:08.790 --> 00:00:12.490
+Talvez você possa se perguntar, será que
+eu vou começar a usar mais uma
+
+00:00:12.490 --> 00:00:13.270
+ferramenta?
+
+00:00:13.530 --> 00:00:18.370
+E daqui a pouco eu vou ter que trocar, e
+aí eu vou ter, eu já tenho minhas notas,
+
+00:00:18.370 --> 00:00:23.830
+minhas anotações em tantos lugares
+diferentes, e aí eu vou começar a usar
+
+00:00:23.830 --> 00:00:24.850
+mais uma agora?
+
+00:00:24.850 --> 00:00:31.150
+Então eu quero mostrar para você o
+porquê a escúvia para construção de
+
+00:00:31.150 --> 00:00:36.350
+segundo cérebro, nós vamos utilizar a
+ferramenta obsidia.
+
+00:00:36.430 --> 00:00:43.150
+Eu quero mostrar para você o quanto, o
+porquê ela é a melhor escúvia.
+
+00:00:43.370 --> 00:00:50.710
+Você poderia gastar um bom tempo aí,
+quando eu estou falando tempo, tempo
+
+00:00:50.710 --> 00:00:54.770
+mesmo, testando cada uma das...
+
+00:00:55.590 --> 00:01:02.210
+ferramentas, mas você imagina só, cada
+uma das ferramentas, você conhecer todas
+
+00:01:02.210 --> 00:01:08.690
+as funcionalidades, todas as coisas que
+elas fazem, e aí você me tira um juízo
+
+00:01:08.690 --> 00:01:09.710
+de qual é melhor, né?
+
+00:01:10.210 --> 00:01:12.030
+Quanto tempo você gastaria?
+
+00:01:12.230 --> 00:01:14.210
+Nós da academia fizemos o que?
+
+00:01:14.290 --> 00:01:19.250
+Vamos olhar todas as ferramentas, vamos
+testar, vamos pegar todas as
+
+00:01:19.250 --> 00:01:24.830
+metodologias de segundo cérebro, e nós
+vamos ver quais se adequam...
+
+00:01:24.850 --> 00:01:30.430
+até com os melhores critérios ali, para
+uma ferramenta de segundo cérebro, tá?
+
+00:01:30.710 --> 00:01:36.490
+Então o que eu quero mostrar aqui para
+você, vamos lá, eu vou mostrar aqui,
+
+00:01:36.590 --> 00:01:38.590
+porquê usar obsidia.
+
+00:01:39.750 --> 00:01:42.370
+Olha aqui uma lista, eu estou pegando
+poucas, tá?
+
+00:01:42.510 --> 00:01:50.130
+De ferramentas que são destinadas a PKM,
+que é a sigla em inglês, para gestão de
+
+00:01:50.130 --> 00:01:51.130
+conhecimento pessoal.
+
+00:01:51.610 --> 00:01:54.830
+Então a gente não está falando só de
+nota, a gente está falando de gestão de
+
+00:01:54.830 --> 00:01:54.830
+conhecimento pessoal.
+
+00:01:54.830 --> 00:01:55.650
+Então a gente não está falando só de
+nota, a gente está falando de gestão de
+
+00:01:55.650 --> 00:01:57.050
+conhecimento.
+
+00:01:58.030 --> 00:02:01.730
+Algumas dessas você já deve ter usado ou
+deve conhecer.
+
+00:02:02.150 --> 00:02:10.170
+Evernote, Rowan, Notion, OneNote, Apple
+Notes, Google Keep, Tana, e nós vamos
+
+00:02:10.170 --> 00:02:11.150
+falar aqui de Obsidia.
+
+00:02:11.350 --> 00:02:12.050
+E nós vamos falar aqui de Obsidia.
+
+00:02:12.050 --> 00:02:20.090
+Fora isso, eu creio que você já deve ter
+usado muito caderno, muita anotação em
+
+00:02:20.090 --> 00:02:23.330
+agenda e fóbias avulsas...
+
+00:02:24.570 --> 00:02:24.810
+Or 어디?
+
+00:02:24.810 --> 00:02:30.670
+muitos lugares de anotação e que você
+hoje já não tem mais acesso ou estava
+
+00:02:30.670 --> 00:02:35.530
+aguardado para anestesiar a sua
+consciência dizendo um dia eu vou
+
+00:02:35.530 --> 00:02:36.170
+acessar aquilo.
+
+00:02:36.370 --> 00:02:38.170
+A gente sabe que não vai acessar, né?
+
+00:02:38.210 --> 00:02:43.230
+A gente sabe que vai acabar ficando a
+informação perdida.
+
+00:02:43.330 --> 00:02:49.270
+Ou se então você anotou em todas essas
+ferramentas, em todos os cadernos e você
+
+00:02:49.270 --> 00:02:54.750
+decidir hoje revisitar todas as
+informações, quando você chegar em
+
+00:02:54.750 --> 00:03:00.230
+alguma que você anotou e ir até a
+última, quando chegar na última, você já
+
+00:03:00.230 --> 00:03:05.350
+vai ter gasto um tempo absurdo, não vai
+nem lembrar da primeira.
+
+00:03:05.850 --> 00:03:10.250
+E a pergunta que fica é como eu vou
+conectar todas essas coisas, né?
+
+00:03:10.510 --> 00:03:17.450
+Então olha só, nós estamos aí pegando
+das melhores ferramentas e a gente
+
+00:03:17.450 --> 00:03:18.550
+escolheu o Obsidia.
+
+00:03:18.590 --> 00:03:19.270
+Por quê?
+
+00:03:20.030 --> 00:03:26.310
+Então olha só, todo aquele tempo que eu
+falava, que você poderia gastar testando
+
+00:03:26.310 --> 00:03:27.130
+cada ferramenta.
+
+00:03:28.550 --> 00:03:33.090
+Fora que você precisaria conhecer todas
+as metodologias para daí ver se a
+
+00:03:33.090 --> 00:03:40.450
+metodologia de você construir um segundo
+cérebro, ela se adequa à ferramenta.
+
+00:03:40.750 --> 00:03:44.090
+Então a gente está falando aí de talvez
+anos de estudos, né?
+
+00:03:44.590 --> 00:03:48.630
+Meses ou anos, dependendo do quanto você
+vai estudar para isso.
+
+00:03:48.910 --> 00:03:53.410
+Só que aqui a gente vai dar para você,
+nesse curso de poucas horas, horas, tudo
+
+00:03:53.410 --> 00:03:54.570
+que você precisa saber.
+
+00:03:55.070 --> 00:04:00.490
+Então quando a gente está falando aqui
+do melhor das metodologias, do melhor da
+
+00:04:00.490 --> 00:04:05.250
+ferramenta, é para você saber que você
+vai conhecer algo em poucos minutos e
+
+00:04:05.250 --> 00:04:08.970
+horas que abrevia um ano de estudo, né?
+
+00:04:09.030 --> 00:04:10.470
+Meses, anos de estudo.
+
+00:04:10.610 --> 00:04:16.390
+É esse o poder, esse o objetivo da
+academia lendária e aqui o objetivo
+
+00:04:16.390 --> 00:04:18.190
+desse curso Dominando Obsidia.
+
+00:04:18.270 --> 00:04:21.570
+Você vai saber tudo o que é necessário,
+né?
+
+00:04:21.690 --> 00:04:22.430
+80 vezes.
+
+00:04:22.450 --> 00:04:27.170
+20, aquilo que você precisa saber mesmo
+para aplicar, para sair usando um
+
+00:04:27.170 --> 00:04:32.750
+segundo cérebro sem ficar procurando
+vídeos na internet, no YouTube, artigos.
+
+00:04:32.870 --> 00:04:34.730
+Aqui você já tem tudo, tá?
+
+00:04:34.910 --> 00:04:40.170
+Porque nós estudamos muitas, muitas,
+muitas ferramentas, muitas metodologias.
+
+00:04:40.590 --> 00:04:41.990
+A maioria delas, né?
+
+00:04:42.170 --> 00:04:48.810
+Todas em inglês, em outras línguas,
+porque muito pouca coisa aqui no Brasil,
+
+00:04:48.930 --> 00:04:49.030
+né?
+
+00:04:49.230 --> 00:04:52.430
+Então a gente fez tudo isso para você,
+para que você tenha esse conhecimento.
+
+00:04:52.450 --> 00:04:55.610
+Para que você tenha esse ganho de
+produtividade, ganho de tempo e possa ir
+
+00:04:55.610 --> 00:04:57.150
+direto, mão na massa.
+
+00:04:57.330 --> 00:05:02.230
+E com isso você vai estar à frente de
+muita, muita, muita, muita gente que vai
+
+00:05:02.230 --> 00:05:04.530
+estar ali garimpando coisas na internet,
+tá?
+
+00:05:05.550 --> 00:05:06.850
+Por que o Obsidia?
+
+00:05:06.870 --> 00:05:08.810
+Primeiro, ele tem uma grande comunidade.
+
+00:05:08.950 --> 00:05:13.990
+Então, assim, nós temos uma ferramenta
+que ela tem em torno dela, uma grande
+
+00:05:13.990 --> 00:05:18.750
+comunidade construindo coisas,
+discutindo sobre ela, evoluindo a
+
+00:05:18.750 --> 00:05:19.450
+ferramenta.
+
+00:05:19.570 --> 00:05:21.490
+Então é uma ferramenta gratuita.
+
+00:05:22.450 --> 00:05:27.110
+Que você não vai pagar aquelas
+mensalidades para você usar a ferramenta
+
+00:05:27.110 --> 00:05:29.370
+e aí você fica naquele dilema, né?
+
+00:05:29.410 --> 00:05:32.230
+Se eu parar de pagar agora, e as minhas
+notas, né?
+
+00:05:32.270 --> 00:05:34.750
+E todas as minhas anotações, né?
+
+00:05:36.350 --> 00:05:41.730
+Dados são locais, ou seja, se você
+contratar uma daquelas ferramentas que
+
+00:05:41.730 --> 00:05:44.690
+eu citei anteriormente, você vai ter
+ali, né?
+
+00:05:45.030 --> 00:05:49.870
+Toda uma preocupação de onde estão os
+meus dados?
+
+00:05:50.390 --> 00:05:52.430
+Estão lá nos servidores daquelas
+ferramentas.
+
+00:05:52.450 --> 00:05:58.470
+Com o Obsidia, os dados estão na sua
+máquina, mas você tem a opção de
+
+00:05:58.470 --> 00:06:00.350
+sincronizá -los com uma nuvem, né?
+
+00:06:00.710 --> 00:06:03.650
+Então você tem propriedade dos seus
+dados.
+
+00:06:03.990 --> 00:06:07.550
+Os seus dados vão ser salvos em
+Markdown.
+
+00:06:07.890 --> 00:06:09.450
+Markdown é uma linguagem, né?
+
+00:06:09.590 --> 00:06:15.450
+Um método de formatação de escrita que
+completou aí esse ano 20 anos.
+
+00:06:16.150 --> 00:06:20.410
+E ela é a base para muitas das
+ferramentas também de inteligência
+
+00:06:20.410 --> 00:06:21.310
+artificial hoje.
+
+00:06:21.510 --> 00:06:22.430
+Então você já vai ter uma ferramenta.
+
+00:06:22.430 --> 00:06:25.270
+Você vai estar aprendendo algo essencial
+para os dias de hoje, né?
+
+00:06:25.350 --> 00:06:31.130
+E esses dados estarem salvos em Markdown
+significa que você tem ali propriedade
+
+00:06:31.130 --> 00:06:35.750
+dos dados num formato que você vai poder
+fazer o que quiser com eles, né?
+
+00:06:35.830 --> 00:06:40.330
+Você vai tanto poder ler esses dados,
+trabalhar com eles, como também vai
+
+00:06:40.330 --> 00:06:43.190
+poder exportar para qualquer outro
+lugar, se você, né?
+
+00:06:43.290 --> 00:06:43.610
+Quiser.
+
+00:06:44.190 --> 00:06:47.790
+Você tem nessa ferramenta link entre as
+notas.
+
+00:06:48.190 --> 00:06:54.050
+Você pode, linkando as notas, e vendo
+isso de uma maneira gráfica, visual, do
+
+00:06:54.050 --> 00:06:54.890
+segundo cérebro.
+
+00:06:55.070 --> 00:06:59.050
+Claro que a ferramenta de segundo
+cérebro não precisa somente de links,
+
+00:06:59.310 --> 00:06:59.430
+né?
+
+00:06:59.530 --> 00:07:03.510
+É o último item que eu anotei aí, que
+são critérios para construção de um
+
+00:07:03.510 --> 00:07:04.390
+segundo cérebro.
+
+00:07:04.650 --> 00:07:09.110
+Se a gente for estudar todas as
+metodologias e ver o que é necessário
+
+00:07:09.110 --> 00:07:14.950
+para construir um segundo cérebro,
+Obsidian é a ferramenta que tem todos
+
+00:07:14.950 --> 00:07:16.750
+esses critérios, todas essas coisas.
+
+00:07:17.050 --> 00:07:23.770
+Então a gente consegue, com Obsidian,
+ter ferramentas poderosas de busca de
+
+00:07:23.770 --> 00:07:30.690
+metadados, consigo ter classificação,
+tags, como eu falei, a ferramenta de
+
+00:07:30.690 --> 00:07:33.630
+busca é poderosa de várias formas.
+
+00:07:34.470 --> 00:07:38.830
+Eu tenho instalação de plugins e uma
+comunidade desenvolvendo plugins o tempo
+
+00:07:38.830 --> 00:07:40.970
+todo para potencializar a ferramenta.
+
+00:07:41.110 --> 00:07:44.130
+Então é por isso que nós escolhemos aí,
+né?
+
+00:07:44.210 --> 00:07:47.490
+A ferramenta Obsidian, tá?
+
+00:07:47.630 --> 00:07:49.770
+Então a gente quer trazer para vocês,
+né?
+
+00:07:49.770 --> 00:07:54.890
+E essa aula aqui, o objetivo dela é você
+começar a usar tendo certeza.
+
+00:07:54.990 --> 00:08:00.550
+Eu vou usar uma coisa que eu posso aí
+ter a convicção de que é definitiva.
+
+00:08:00.850 --> 00:08:05.510
+Eu vou pegar todas as minhas notas das
+outras ferramentas, dos meus cadernos,
+
+00:08:05.510 --> 00:08:09.890
+eu vou trazer para cá e provavelmente
+não vou ter motivos para trocar de
+
+00:08:09.890 --> 00:08:10.730
+ferramenta, tá?
+
+00:08:11.250 --> 00:08:15.750
+Então aí agora, na próxima aula, eu
+quero que você entenda o que é o
+
+00:08:15.750 --> 00:08:17.450
+Obsidian de verdade, tá?
+
+00:08:17.450 --> 00:08:19.970
+Aqui eu estou falando porque que a gente
+vai usar ele.
+
+00:08:20.150 --> 00:08:26.650
+Mas na próxima, a gente vai falar aí o
+que é o Obsidian realmente, tá?
+
+00:08:26.990 --> 00:08:31.310
+Então eu espero você na próxima aula
+porque a gente vai trazer um conteúdo
+
+00:08:31.310 --> 00:08:37.090
+agora para que você vai conhecer o 80
+-20 do Obsidian como ninguém, tá?
+
+00:08:37.630 --> 00:08:40.670
+Chega de procurar coisas por aí, vídeos
+da internet.
+
+00:08:40.730 --> 00:08:43.610
+Aqui nós vamos trazer a informação
+correta para você.
+
+00:08:43.930 --> 00:08:45.150
+Até a próxima aula.

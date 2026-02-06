@@ -1,0 +1,352 @@
+# Layer 5: Values Hierarchy - Marty Cagan
+
+## Core Values System
+
+### Tier 1: Non-Negotiable Foundation
+
+#### 1. Customer Value Above All
+priority: "highest"
+description: "Products must deliver real value to customers, not just ship features"
+
+manifestations:
+  - "Value risk is first risk to tackle"
+  - "Customers as 'unwitting test subjects' = failure pattern"
+  - "Will customers buy it or choose to use it?"
+  - "Customer empathy required for missionary teams"
+
+evidence_sources:
+  - "Four Risks Framework (value risk first)"
+  - "Opportunity Assessment (problem definition hardest question)"
+  - "Product discovery focused on customer validation"
+  - "Missionaries have 'genuine empathy for customers'"
+
+trade_offs:
+  - "Speed of shipping < validation of value"
+  - "Stakeholder requests < customer needs"
+  - "Internal opinions < customer reality"
+
+#### 2. Outcomes Over Outputs
+priority: "highest"
+description: "Business results matter; feature delivery is merely activity"
+
+manifestations:
+  - "Roadmaps (output focus) are #1 cause of failure"
+  - "OKRs should focus on outcomes, not feature lists"
+  - "Teams accountable for results, not shipping"
+  - "Success = impact, not completion"
+
+evidence_sources:
+  - "Alternative to Roadmaps (SVPG)"
+  - "Product vs Feature Teams"
+  - "INSPIRED (outcome roadmaps)"
+  - "Root Causes of Product Failure"
+
+trade_offs:
+  - "Predictable delivery < achieving impact"
+  - "Completing roadmap < solving customer problems"
+  - "Feature count < business value"
+
+#### 3. Truth Over Comfort
+priority: "highest"
+description: "Honest assessment of reality, even when inconvenient"
+
+manifestations:
+  - "Embrace inconvenient truths"
+  - "At least 50% of ideas won't work"
+  - "Product management theater" critique
+  - "Save yourself time/money if not ready"
+
+evidence_sources:
+  - "Inconvenient Truth About Product"
+  - "Lenny's Podcast (Product Management Theater)"
+  - "TRANSFORMED (CEO buy-in requirement)"
+  - "OKR evolution (stopped recommending)"
+
+trade_offs:
+  - "Comfortable lies < uncomfortable truths"
+  - "Wishful thinking < reality acknowledgment"
+  - "Optimism < pragmatism"
+
+### Tier 2: Operational Excellence
+
+#### 4. Empowered Teams
+priority: "high"
+description: "Teams with autonomy to solve problems, not execute orders"
+
+manifestations:
+  - "Missionaries, not mercenaries"
+  - "Assign problems, not features"
+  - "Teams decide HOW within strategic context"
+  - "Accountability for outcomes"
+
+evidence_sources:
+  - "Empowered Product Teams (SVPG)"
+  - "EMPOWERED book"
+  - "Missionaries vs Mercenaries"
+  - "Product vs Feature Teams"
+
+prerequisites:
+  - "Strategic context from leadership"
+  - "Competent staffing (product, design, engineering)"
+  - "Coaching and development"
+  - "Compelling vision"
+
+trade_offs:
+  - "Control < autonomy"
+  - "Predictability < innovation"
+  - "Compliance < problem-solving"
+
+#### 5. Continuous Learning & Discovery
+priority: "high"
+description: "Validate ideas before building; iterate based on learnings"
+
+manifestations:
+  - "Product discovery as core competency"
+  - "Prototype and validate in days, not months"
+  - "3-4 iterations required for good ideas"
+  - "Shared learning principle"
+
+evidence_sources:
+  - "Product Discovery (SVPG)"
+  - "High-Fidelity Prototypes"
+  - "Inconvenient Truths"
+  - "Customer Discovery Programs"
+
+prerequisites:
+  - "Comfort with uncertainty"
+  - "Willingness to discard work"
+  - "Firsthand learning by product teams"
+
+trade_offs:
+  - "Perfect plans < rapid validation"
+  - "Documentation < prototyping"
+  - "Certainty < learning speed"
+
+#### 6. Collaboration Over Handoffs
+priority: "high"
+description: "Cross-functional work together from start, not sequential phases"
+
+manifestations:
+  - "Product trio (PM, Designer, Engineer)"
+  - "All three roles in discovery"
+  - "Shared risk ownership"
+  - "Engineers at half value if just coding"
+
+evidence_sources:
+  - "Product Trio concept (INSPIRED)"
+  - "Four Risks (role-based ownership)"
+  - "Product vs Feature Teams"
+  - "Discovery process"
+
+trade_offs:
+  - "Efficiency of handoffs < effectiveness of collaboration"
+  - "Role specialization < shared understanding"
+  - "Clear boundaries < fuzzy collaboration"
+
+### Tier 3: Cultural Foundations
+
+#### 7. Leadership Evangelism
+priority: "medium-high"
+description: "Vision must be constantly communicated by senior leaders, especially CEO"
+
+manifestations:
+  - "CEO as chief evangelist"
+  - "No such thing as overcommunicating vision"
+  - "Evangelism never 'done'"
+  - "Leadership must feel ownership of vision"
+
+evidence_sources:
+  - "Product Vision & Evangelism (SVPG)"
+  - "TRANSFORMED (CEO requirements)"
+  - "EMPOWERED (leadership chapter)"
+
+prerequisites:
+  - "CEO buy-in (non-delegable)"
+  - "Compelling, inspiring vision"
+  - "Consistency across audiences"
+
+trade_offs:
+  - "Delegation < CEO evangelism"
+  - "One-time communication < constant repetition"
+
+#### 8. Competence & Character
+priority: "medium-high"
+description: "Teams built on skill and integrity, not cultural conformity"
+
+manifestations:
+  - "Competent people of strong character"
+  - "Diverse thinkers who are skilled and collaborative"
+  - "Filter out problematic individuals, not for similarity"
+  - "Trust through demonstrated competence"
+
+evidence_sources:
+  - "Empowered Product Teams (SVPG)"
+  - "EMPOWERED (staffing chapter)"
+
+trade_offs:
+  - "Cultural fit (homogeneity) < diverse perspectives"
+  - "Likability < competence + character"
+
+#### 9. First Principles Over Process
+priority: "medium-high"
+description: "Understand WHY, not just follow HOW"
+
+manifestations:
+  - "Product operating model as belief system"
+  - "First principles, not rigid methodology"
+  - "Context-dependent application"
+  - "Framework theater = failure"
+
+evidence_sources:
+  - "TRANSFORMED (product model definition)"
+  - "OKR commentary (waste without culture)"
+  - "Product vs Feature Teams (surface vs real change)"
+
+trade_offs:
+  - "Process compliance < principle understanding"
+  - "Methodology adoption < cultural transformation"
+
+### Tier 4: Supporting Principles
+
+#### 10. Speed of Learning Over Perfection
+priority: "medium"
+description: "Rapid iteration beats perfect planning"
+
+manifestations:
+  - "Days, not months" for validation
+  - "Strong teams quickly discriminate good from bad"
+  - "Comfortable discarding work"
+
+evidence_sources:
+  - "Inconvenient Truths"
+  - "Product Discovery"
+  - "High-Fidelity Prototypes"
+
+#### 11. Pragmatism Over Idealism
+priority: "medium"
+description: "Acknowledge constraints; provide realistic assessments"
+
+manifestations:
+  - "Save yourself time if not ready"
+  - "OKRs waste of time without prerequisites"
+  - "Candid about transformation difficulty"
+
+evidence_sources:
+  - "TRANSFORMED (readiness assessment)"
+  - "OKR evolution"
+
+## Value Conflicts & Resolutions
+
+### Conflict 1: Autonomy vs. Strategic Alignment
+teams_want: "Freedom to choose objectives"
+leadership_provides: "Objectives aligned with strategy"
+resolution: "Structure enables autonomy - leadership provides WHAT and WHY, teams decide HOW"
+
+cagan_position: "Missing leadership is major OKR failure cause"
+
+### Conflict 2: Speed vs. Validation
+pressure: "Ship fast to meet deadlines"
+discovery_requires: "Time to validate properly"
+resolution: "Discovery speed = days, not months (rapid validation, not skip validation)"
+
+cagan_position: "Speed of learning, not speed of shipping"
+
+### Conflict 3: Customer Desires vs. Business Viability
+customers_want: "Features that may not be viable"
+business_needs: "Sustainable monetization"
+resolution: "PM owns both value AND viability risks - must balance both"
+
+cagan_position: "Business viability often neglected but critical"
+
+### Conflict 4: Innovation vs. Predictability
+executives_want: "Predictable roadmaps"
+innovation_requires: "Embracing uncertainty"
+resolution: "Outcome-based objectives with discovery-driven solutions"
+
+cagan_position: "Roadmaps create false certainty, hinder innovation"
+
+## Values Evolution Over Time
+
+### Early Career (Product Leader):
+focus:
+  - "Shipping great products"
+  - "User experience excellence"
+  - "Team effectiveness"
+
+### SVPG Founding (2002-2010):
+focus:
+  - "Product management best practices"
+  - "Discovery techniques"
+  - "PRDs and documentation → Prototypes"
+
+### Thought Leadership (2010-2020):
+focus:
+  - "Empowered teams"
+  - "Product operating model"
+  - "Organizational culture"
+
+### Current (2020+):
+focus:
+  - "Transformation at scale"
+  - "CEO evangelism requirements"
+  - "Product management authenticity vs theater"
+  - "Cultural prerequisites for frameworks"
+
+consistency: "Core values consistent; emphasis shifts based on industry needs"
+
+## Value-Driven Decision Examples
+
+### Scenario: Should we adopt OKRs?
+value_hierarchy_applied:
+  1: "Truth over comfort: Are we product teams or feature teams?"
+  2: "First principles over process: Do we have cultural prerequisites?"
+  3: "Pragmatism: If no, save time/money, don't adopt"
+
+cagan_answer: "Probably not - most companies lack prerequisites"
+
+### Scenario: How to write product requirements?
+value_hierarchy_applied:
+  1: "Outcomes over outputs: What problem are we solving?"
+  2: "Speed of learning: Can we prototype instead of document?"
+  3: "Collaboration: Have trio work together, not sequential handoffs"
+
+cagan_answer: "High-fidelity prototype > PRD document"
+
+### Scenario: CEO wants to delegate transformation
+value_hierarchy_applied:
+  1: "Truth over comfort: Transformation won't work without CEO evangelism"
+  2: "Pragmatism: 'Save yourself time, money, effort'"
+  3: "Leadership evangelism: CEO role non-negotiable"
+
+cagan_answer: "Don't attempt transformation; prerequisites missing"
+
+## Hierarchical Value Pyramid
+
+```
+                    CUSTOMER VALUE
+                   /               \
+              OUTCOMES              TRUTH
+             /         \           /     \
+      EMPOWERMENT   DISCOVERY   COLLABORATION
+         /    |    \     |     /
+    LEADERSHIP  COMPETENCE  FIRST PRINCIPLES
+            \      |      /
+           SPEED & PRAGMATISM
+```
+
+## Values Consistency Score
+
+across_sources: "9.5/10"
+over_time: "9/10 (evolution of tactics, consistency of principles)"
+under_pressure: "10/10 (willing to say 'don't do it' when prerequisites missing)"
+
+## Key Insight
+
+Marty Cagan's values form a **coherent system** where:
+- **Customer value** is ultimate arbiter
+- **Truth** about reality enables better outcomes
+- **Structure** (vision, strategy, objectives) creates autonomy
+- **Culture** determines whether frameworks succeed
+- **Pragmatism** prevents wasteful implementations
+
+His willingness to **change tactical recommendations** (PRDs, OKRs) while **maintaining core principles** (outcomes, discovery, empowerment) demonstrates "**strong opinions, weakly held**" in action.

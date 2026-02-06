@@ -1,0 +1,1023 @@
+WEBVTT
+
+00:00:00.620 --> 00:00:06.260
+Bem, Dário, agora nós vamos para uma
+aula conhecer toda a interface da
+
+00:00:06.260 --> 00:00:07.880
+ferramenta aqui no desktop.
+
+00:00:08.260 --> 00:00:14.220
+Depois nós vamos pegar toda a interface
+ali nos ambientes mobile, tá?
+
+00:00:14.540 --> 00:00:21.320
+Mas olha só, a interface aqui no desktop
+é muito importante você conhecer porque
+
+00:00:21.320 --> 00:00:23.500
+você vai começar a usar a ferramenta.
+
+00:00:23.540 --> 00:00:27.660
+Já começou a criar umas notas, já
+começou a configurar da forma correta.
+
+00:00:27.760 --> 00:00:30.280
+Agora é muito importante você saber se
+localizar.
+
+00:00:30.620 --> 00:00:34.080
+Porque daí ela vai se tornar mais
+intuitiva, ela vai se tornar mais fácil
+
+00:00:34.080 --> 00:00:39.860
+de aprender a utilizar e você saber onde
+localizar cada coisa, o que aconteceu
+
+00:00:39.860 --> 00:00:46.400
+aqui, me perdi, enfim, tanto e tanta
+coisa que às vezes quem está começando
+
+00:00:46.400 --> 00:00:54.220
+acaba passando por, sabe, não conhecer o
+que é cada função da ferramenta aqui.
+
+00:00:54.540 --> 00:00:59.260
+Vamos começar pelo seguinte, nós temos
+aqui então, vamos começar da esquerda
+
+00:00:59.260 --> 00:01:04.880
+para a direita, nós temos uma barra, né,
+onde eu estou aqui com o mouse, a barra
+
+00:01:04.880 --> 00:01:08.000
+de ícones, né, de algumas funções, tá?
+
+00:01:08.120 --> 00:01:15.400
+Então é um modo de você conseguir
+rapidamente acesso a algumas funções.
+
+00:01:16.180 --> 00:01:21.560
+Tudo que eu vou explicar aqui é a
+localização de onde estão cada coisa,
+
+00:01:21.700 --> 00:01:26.500
+porque tem recursos que vocês vão
+aprender a usar, nós vamos falar sobre
+
+00:01:26.500 --> 00:01:29.000
+eles durante as aulas, tá?
+
+00:01:29.080 --> 00:01:30.380
+Então eu não vou explicar...
+
+00:01:30.620 --> 00:01:35.720
+Eu não vou explicar cada uma das coisas
+que estão aqui na interface, mas a
+
+00:01:35.720 --> 00:01:39.080
+localização de cada uma delas e qual é o
+objetivo, tá bom?
+
+00:01:39.180 --> 00:01:44.480
+Para que você já comece a usar também
+com um conhecimento, um nível de
+
+00:01:44.480 --> 00:01:46.340
+consciência já mais elevado.
+
+00:01:46.660 --> 00:01:49.280
+Aí depois nas aulas a gente vai ver as
+funcionalidades.
+
+00:01:49.400 --> 00:01:53.320
+Então, por exemplo, aqui, botão de abrir
+o gráfico.
+
+00:01:53.320 --> 00:01:56.720
+Vai ter uma aula que eu vou falar, a
+gente vai falar só sobre gráfico, né?
+
+00:01:56.860 --> 00:01:59.900
+Então o que eu quero aqui colocar é
+que...
+
+00:02:00.620 --> 00:02:06.880
+Nós temos acesso rápido a funções do
+Obsidian e de plugins, que conforme você
+
+00:02:06.880 --> 00:02:08.800
+vai utilizando, vai acrescentando aqui.
+
+00:02:08.860 --> 00:02:12.900
+Você vai ver, conforme estava plugin,
+nós vamos ver essa barra crescendo aqui
+
+00:02:12.900 --> 00:02:14.760
+de quantidade de ícones, tá?
+
+00:02:15.920 --> 00:02:20.480
+Eu tenho o menu, então aqui, ó, eu tenho
+o menu do Obsidian, tá?
+
+00:02:20.600 --> 00:02:27.800
+Que tem a mesma função de abrir, né, as
+telas, né?
+
+00:02:27.900 --> 00:02:29.840
+Tem aqui arquivo, olha...
+
+00:02:29.840 --> 00:02:32.180
+Até aqui no menu tem também New Note.
+
+00:02:32.200 --> 00:02:35.740
+É muito lugar para fazer a mesma coisa,
+entendeu?
+
+00:02:35.840 --> 00:02:39.220
+Então você tem várias e várias opções.
+
+00:02:40.360 --> 00:02:46.400
+Aqui você tem menu de edição, que você
+vai ter também, acaba tendo, né, com o
+
+00:02:46.400 --> 00:02:48.620
+botão direito, tá?
+
+00:02:50.660 --> 00:02:52.020
+O que mais?
+
+00:02:52.400 --> 00:02:55.980
+Menu de inserir coisas, vai ter com o
+botão direito aqui nas notas também.
+
+00:02:57.880 --> 00:02:59.160
+Formatação vai ter também.
+
+00:03:01.040 --> 00:03:02.080
+Visualização, é...
+
+00:03:02.080 --> 00:03:05.600
+sabe, aquela opção de zoom, de divisão.
+
+00:03:06.060 --> 00:03:10.700
+Então você tem os menus aqui também para
+te ajudar, tá?
+
+00:03:10.840 --> 00:03:13.940
+Ó, mover, centralizar, preencher.
+
+00:03:14.800 --> 00:03:18.880
+Aqui você navegar entre as notas e abrir
+determinada nota por aqui.
+
+00:03:19.260 --> 00:03:21.140
+Então você tem o menu ali em cima.
+
+00:03:23.020 --> 00:03:27.480
+Aqui, do lado aqui onde nós temos os
+ícones, né, tem...
+
+00:03:27.480 --> 00:03:29.820
+Você percebe que aqui é todo mundo.
+
+00:03:29.820 --> 00:03:35.180
+Um menu lateral, né, uma barra lateral,
+né, desculpe, uma barra lateral onde
+
+00:03:35.180 --> 00:03:38.420
+você pode mostrar ou esconder ela aqui,
+ó, tá?
+
+00:03:38.520 --> 00:03:43.700
+Tem esse quadradinho aqui que diminui ou
+não essa barra.
+
+00:03:43.760 --> 00:03:49.640
+E nessa barra nós temos aqui a opção de
+files, né, que então é onde estão as
+
+00:03:49.640 --> 00:03:50.360
+suas notas.
+
+00:03:50.740 --> 00:03:56.320
+Uma lupa de pesquisa, que já vai mostrar
+para você aqui, ó, várias opções de
+
+00:03:56.320 --> 00:03:56.880
+pesquisa.
+
+00:03:56.920 --> 00:03:57.320
+Por quê?
+
+00:03:57.400 --> 00:03:59.520
+Porque uma ferramenta de segundo...
+
+00:03:59.820 --> 00:04:05.660
+No cérebro, ela precisa te dar
+inteligência a mais do que simplesmente
+
+00:04:05.660 --> 00:04:10.900
+uma pesquisa onde eu vou digitar uma
+porção de texto, né?
+
+00:04:11.000 --> 00:04:16.540
+E muitas ferramentas de anotação você
+vai ter somente digitação de uma porção
+
+00:04:16.540 --> 00:04:17.480
+de texto ali, qualquer.
+
+00:04:17.940 --> 00:04:18.780
+Mas aqui não.
+
+00:04:18.840 --> 00:04:23.620
+Aqui, o que nós estamos buscando, né, o
+que nós estamos vendo aqui, é a
+
+00:04:23.620 --> 00:04:27.500
+possibilidade de pesquisar por diversos
+critérios.
+
+00:04:27.520 --> 00:04:28.940
+E nós vamos aprender isso também.
+
+00:04:29.820 --> 00:04:33.560
+Certa aula aí, onde a gente já vai ter
+visto, por exemplo, todos esses
+
+00:04:33.560 --> 00:04:35.860
+parâmetros, esses critérios aqui, ó, tá?
+
+00:04:36.640 --> 00:04:41.060
+Aqui nós temos um ícone de bookmark, que
+é o quê?
+
+00:04:41.100 --> 00:04:45.520
+Você vai pegar certas notas e você vai
+salvar em favoritos, né?
+
+00:04:45.560 --> 00:04:50.020
+Ou seja, eu quero sempre clicar aqui
+nesse ícone e ver notas que vão ser
+
+00:04:50.020 --> 00:04:51.160
+favoritas.
+
+00:04:51.180 --> 00:04:53.060
+Eu estou abrindo constantemente elas.
+
+00:04:53.480 --> 00:04:57.920
+Agora, no início, pode parecer muito
+óbvio, né, abrir uma nota ou outra.
+
+00:04:58.000 --> 00:04:59.500
+Mas quando você tiver mais...
+
+00:04:59.820 --> 00:05:03.000
+Se você já abriu notas, pensa o quanto
+isso aqui vai ser útil para você
+
+00:05:03.000 --> 00:05:06.500
+enxergar, né, alguma nota, tá?
+
+00:05:06.820 --> 00:05:09.200
+Aqui tem alguns ícones para facilitar,
+ó.
+
+00:05:09.240 --> 00:05:17.220
+Tem grupo de bookmark, ou seja, você
+pode fazer com que tenha pastinhas de
+
+00:05:17.220 --> 00:05:18.120
+favoritos, né?
+
+00:05:19.060 --> 00:05:23.960
+E aqui você pode acrescentar a aba atual
+como bookmark, né?
+
+00:05:24.020 --> 00:05:29.140
+Se eu clicar aqui, ó, eu vou dar um
+título para esse bookmark, né?
+
+00:05:29.200 --> 00:05:29.680
+E ele vai...
+
+00:05:29.820 --> 00:05:32.160
+Ele vai salvar essa primeira nota aqui,
+tá legal?
+
+00:05:32.940 --> 00:05:38.500
+A mesma coisa vocês vão ver já já aqui
+mesmo na aba também tem a mesma opção.
+
+00:05:38.940 --> 00:05:39.540
+Legal?
+
+00:05:40.140 --> 00:05:45.600
+Depois que você começa a otimizar, eu
+vou mostrar aqui também que você tem um
+
+00:05:45.600 --> 00:05:49.200
+ícone de ver os arquivos alterados
+recentemente.
+
+00:05:50.100 --> 00:05:57.300
+Aqui você tem daí, depois desse painel
+aqui na esquerda, você tem todo o painel
+
+00:05:57.300 --> 00:05:59.360
+de nota, de edição de nota.
+
+00:05:59.820 --> 00:06:00.200
+Tá legal?
+
+00:06:00.420 --> 00:06:08.800
+E lá no canto direito, né, você tem um
+outro ícone desse aqui, ó, de barra, né,
+
+00:06:08.860 --> 00:06:13.240
+de lateral, que abre uma outra lateral
+aqui.
+
+00:06:13.760 --> 00:06:14.340
+Tudo bem?
+
+00:06:14.820 --> 00:06:20.760
+Então, essa interface de ferramenta é
+uma interface que você vai estar usando
+
+00:06:20.760 --> 00:06:21.680
+constantemente.
+
+00:06:22.220 --> 00:06:26.260
+Aqui na esquerda, tudo que se refere aos
+arquivos.
+
+00:06:26.320 --> 00:06:29.800
+Aqui no centro, a edição das notas.
+
+00:06:29.820 --> 00:06:37.180
+Aqui à direita, tudo que se refere a
+complemento, seja plugins ou algo
+
+00:06:37.180 --> 00:06:41.040
+referente à nota que você está
+selecionado aqui, tá?
+
+00:06:41.480 --> 00:06:44.980
+Vamos aprender a usar bastante isso
+aqui.
+
+00:06:45.180 --> 00:06:52.640
+Aqui embaixo, olha, aqui embaixo, né, no
+inferior direito, tem uma barrinha
+
+00:06:52.640 --> 00:06:57.420
+também mostrando quantos caracteres,
+quantas palavras e algumas outras
+
+00:06:57.420 --> 00:06:59.160
+cositas mais que nós vamos ver.
+
+00:06:59.160 --> 00:07:01.520
+Vê em determinadas aulas aí.
+
+00:07:02.140 --> 00:07:06.060
+Então, a interface é isso, né?
+
+00:07:06.160 --> 00:07:07.280
+Você pode diminuir.
+
+00:07:07.660 --> 00:07:10.920
+Pode fazer acontecer do jeito...
+
+00:07:10.920 --> 00:07:13.500
+Deixar configurado aqui do jeito que
+você quiser.
+
+00:07:13.760 --> 00:07:18.340
+Do jeito que você deixa que você fecha
+ferramenta, quando se abre, ela volta na
+
+00:07:18.340 --> 00:07:19.260
+mesma configuração.
+
+00:07:19.420 --> 00:07:25.720
+Aqui embaixo, você tem, então a gente já
+viu os cofres, o gerenciador de cofres.
+
+00:07:25.860 --> 00:07:31.860
+E aqui, a engrenagem que abre as
+configurações que nós vimos na aula
+
+00:07:31.860 --> 00:07:32.740
+passada, inclusive.
+
+00:07:33.280 --> 00:07:33.800
+Tá legal?
+
+00:07:34.440 --> 00:07:41.360
+Você vai perceber que em todo lugar,
+seja aqui, você tem o botão direito do
+
+00:07:41.360 --> 00:07:47.760
+mouse com algumas opções, você na nota,
+dentro da nota, você tem o botão direito
+
+00:07:47.760 --> 00:07:54.420
+com outras opções, opções de formatação,
+de parágrafo, de inserção de coisas,
+
+00:07:55.480 --> 00:08:02.700
+copy -paste, selecionar tudo, adicionar
+um link, link externo.
+
+00:08:02.860 --> 00:08:07.620
+Então, assim, você vai aprender que é
+uma ferramenta de Markdown que tem
+
+00:08:07.620 --> 00:08:12.760
+formatação enquanto você escreve para
+uma alta produtividade e também você vai
+
+00:08:12.760 --> 00:08:17.060
+perceber que Markdown vai te auxiliar em
+um monte de outras coisas, mas ao mesmo
+
+00:08:17.060 --> 00:08:22.460
+tempo que a versão vai evoluindo da
+ferramenta, eles vão inserindo aqui
+
+00:08:22.460 --> 00:08:24.400
+novas opções.
+
+00:08:24.420 --> 00:08:29.440
+Opções de parágrafo, de inserção de
+coisas que antes você só conseguia fazer
+
+00:08:29.440 --> 00:08:30.100
+com Markdown.
+
+00:08:30.200 --> 00:08:32.180
+Por exemplo, tabela, uma table.
+
+00:08:32.500 --> 00:08:38.920
+Uma tabela só era possível nas primeiras
+versões você inserir via Markdown.
+
+00:08:39.060 --> 00:08:43.540
+Agora não, você tem aqui insert table e
+ele vai inserir uma tabela dentro da
+
+00:08:43.540 --> 00:08:45.740
+ferramenta.
+
+00:08:45.880 --> 00:08:51.020
+Então, é muito fácil de usar.
+
+00:08:51.280 --> 00:08:56.060
+Se eu vier na aba, eu vou ter um outro
+botão, um botão direito com N outras
+
+00:08:56.060 --> 00:09:09.560
+opções e eu tenho também três pontinhos
+aqui na edição de nota que é também um
+
+00:09:09.560 --> 00:09:11.080
+outro menu de opções.
+
+00:09:12.980 --> 00:09:17.360
+Esse livrinho que você está vendo aqui
+do lado dos três pontinhos é para
+
+00:09:17.360 --> 00:09:22.880
+alternar entre modo de edição e modo de
+leitura.
+
+00:09:24.420 --> 00:09:28.720
+Então, o modo de leitura mostra o texto
+e não te deixa alterar.
+
+00:09:28.820 --> 00:09:30.620
+Você não consegue fazer edição.
+
+00:09:30.740 --> 00:09:36.840
+Se você clicar no modo de edição, aí
+você já tem o cursor que pode editar.
+
+00:09:37.140 --> 00:09:42.820
+Você vai perceber que existe também
+nesse layout, deixa eu esconder aqui
+
+00:09:42.820 --> 00:09:48.300
+esse menu da direita, essa barra da
+direita, você vai perceber também existe
+
+00:09:48.300 --> 00:09:54.320
+a forma de você acessar várias notas ao
+mesmo tempo.
+
+00:09:54.320 --> 00:09:54.720
+Por exemplo, na tela.
+
+00:09:54.860 --> 00:09:57.780
+Então, por exemplo, eu tenho a primeira
+nota, tenho a segunda nota aqui.
+
+00:09:57.860 --> 00:09:58.180
+Está vendo?
+
+00:09:58.540 --> 00:09:59.720
+Primeira e segunda.
+
+00:10:00.840 --> 00:10:06.880
+E se eu fechar aqui, isso é melhor
+também você já compreender, eu estou na
+
+00:10:06.880 --> 00:10:07.520
+primeira nota.
+
+00:10:07.780 --> 00:10:11.200
+Se eu clicar na segunda nota, ele abre
+aqui na mesma janela.
+
+00:10:11.260 --> 00:10:16.740
+E você tem, claro, aqui um navegador de
+setas para ir entre uma nota e outra.
+
+00:10:18.440 --> 00:10:23.680
+Se você quer deixar a primeira aqui
+aberta e abrir a outra em uma outra aba,
+
+00:10:23.760 --> 00:10:24.080
+você tem.
+
+00:10:24.080 --> 00:10:26.640
+Você tem botão direito, Open New Tab.
+
+00:10:27.340 --> 00:10:27.820
+Legal?
+
+00:10:28.800 --> 00:10:33.100
+Ou eu poderia fazer o seguinte, eu venho
+aqui, tá?
+
+00:10:33.280 --> 00:10:38.120
+E vou abrir a direita, ou numa nova
+janela.
+
+00:10:38.280 --> 00:10:39.940
+A direita, o que você vai fazer?
+
+00:10:40.120 --> 00:10:41.260
+Vai abrir aqui, ó.
+
+00:10:41.700 --> 00:10:42.180
+Entenderam?
+
+00:10:42.340 --> 00:10:44.880
+Então, eu vou ter uma, eu tenho aqui,
+por exemplo, ó.
+
+00:10:44.900 --> 00:10:47.840
+Vamos imaginar que eu tenho aqui a
+primeira nota e a segunda nota aqui, ó.
+
+00:10:48.060 --> 00:10:48.540
+Tá?
+
+00:10:48.960 --> 00:10:53.020
+Então, eu tenho o modo de dividir tela
+dessa forma.
+
+00:10:53.180 --> 00:10:54.060
+E eu posso...
+
+00:10:54.060 --> 00:10:58.480
+Eu posso ter, ó, da mesma forma que eu
+fiz isso ali, eu posso ter aqui, ó, a
+
+00:10:58.480 --> 00:10:59.920
+segunda nota, botão direito.
+
+00:11:00.460 --> 00:11:01.120
+Tá legal?
+
+00:11:02.000 --> 00:11:06.400
+E aqui eu posso colocar ela, a minha
+direita, ou para baixo.
+
+00:11:06.620 --> 00:11:07.560
+Então, ó, direita.
+
+00:11:08.180 --> 00:11:08.880
+Tá aqui.
+
+00:11:10.780 --> 00:11:11.880
+Quero ver ela lá embaixo.
+
+00:11:12.680 --> 00:11:13.120
+Down.
+
+00:11:13.220 --> 00:11:13.760
+Aqui, ó.
+
+00:11:14.060 --> 00:11:15.740
+Então, eu consigo ver, né?
+
+00:11:15.840 --> 00:11:19.820
+No caso, eu fecharia ela aqui e veria
+várias notas, né?
+
+00:11:19.940 --> 00:11:20.920
+Ao mesmo tempo.
+
+00:11:21.960 --> 00:11:24.040
+Em vários formatos aí da tela.
+
+00:11:24.060 --> 00:11:27.540
+Se eu colocar ela aqui para abrir, né?
+
+00:11:28.080 --> 00:11:30.020
+Ou mover para uma nova janela.
+
+00:11:30.020 --> 00:11:32.100
+Aqui, mover para uma nova janela.
+
+00:11:32.120 --> 00:11:33.820
+Ou aqui, então, eu...
+
+00:11:33.820 --> 00:11:36.180
+Open new window, o que que vai
+acontecer?
+
+00:11:36.380 --> 00:11:38.440
+Ele abre uma nova janela só para que ela
+anota.
+
+00:11:38.720 --> 00:11:39.400
+Tá legal?
+
+00:11:40.160 --> 00:11:42.780
+Forma de visualização também.
+
+00:11:43.580 --> 00:11:45.860
+O que mais que aqui nós podemos falar?
+
+00:11:45.960 --> 00:11:47.760
+Da interface, né?
+
+00:11:47.940 --> 00:11:54.040
+Tem muita coisa que a gente vai ver,
+claro, nas opções aí.
+
+00:11:54.040 --> 00:11:56.180
+De outras aulas.
+
+00:11:56.260 --> 00:12:01.180
+Aqui eu quero só fazer uma aula mais
+curta para mostrar para você quais são
+
+00:12:01.180 --> 00:12:03.020
+as opções da interface, tá?
+
+00:12:03.920 --> 00:12:07.220
+Você precisa estar familiarizado com
+ela.
+
+00:12:07.700 --> 00:12:10.620
+Muita gente vai pegar a interface da
+ferramenta, né?
+
+00:12:10.660 --> 00:12:13.600
+E não consegue evoluir.
+
+00:12:13.620 --> 00:12:15.580
+Ou acha muito complicado ou não
+intuitiva.
+
+00:12:15.580 --> 00:12:17.900
+Porque quer comparar com um bloco de
+notas, tá?
+
+00:12:18.020 --> 00:12:19.360
+Você não está num bloco de notas.
+
+00:12:19.380 --> 00:12:21.300
+Você está numa ferramenta de segundo
+cérebro.
+
+00:12:21.440 --> 00:12:23.880
+E que vai evoluir o seu nível de
+consciência.
+
+00:12:23.880 --> 00:12:24.820
+De edição.
+
+00:12:24.820 --> 00:12:25.820
+De aprendizado.
+
+00:12:26.060 --> 00:12:27.460
+De tomada de notas.
+
+00:12:27.780 --> 00:12:31.880
+Que é praticamente, gente, uma arte.
+
+00:12:32.800 --> 00:12:34.760
+Então, tem metodologia para isso.
+
+00:12:34.780 --> 00:12:35.120
+Tem tudo.
+
+00:12:35.220 --> 00:12:36.940
+Então, você vai crescer muito.
+
+00:12:37.880 --> 00:12:41.820
+E as pessoas vão se espantar com uma
+forma que você vai aprender coisas.
+
+00:12:41.920 --> 00:12:42.700
+E anotar coisas.
+
+00:12:42.860 --> 00:12:43.740
+E revisitar coisas.
+
+00:12:43.980 --> 00:12:47.700
+A partir do momento que você começa a
+usar uma ferramenta dessa, tá?
+
+00:12:48.700 --> 00:12:49.180
+Gratuita.
+
+00:12:49.900 --> 00:12:50.840
+Código aberto.
+
+00:12:51.400 --> 00:12:53.440
+Pode ser potencializada com plugins.
+
+00:12:53.880 --> 00:12:55.540
+Pode ser potencializada com IA.
+
+00:12:55.680 --> 00:12:57.160
+Você vai aprender tudo isso aqui.
+
+00:12:57.300 --> 00:12:58.900
+Então, não tem porquê, né?
+
+00:12:58.920 --> 00:13:00.000
+Você não utilizar.
+
+00:13:01.380 --> 00:13:04.640
+Então, lembrando que também você tem,
+né?
+
+00:13:04.680 --> 00:13:06.200
+Nessa interface de ferramenta.
+
+00:13:06.300 --> 00:13:10.280
+Tudo que você tem de funcionalidade aqui
+com o mouse.
+
+00:13:10.500 --> 00:13:12.980
+Você tem através de teclado também.
+
+00:13:13.220 --> 00:13:13.800
+Tá, melhor?
+
+00:13:14.000 --> 00:13:16.120
+E você tem na ferramenta.
+
+00:13:17.020 --> 00:13:19.460
+Um Cmd P ou Ctrl P.
+
+00:13:19.560 --> 00:13:22.360
+Que abre essa paleta de comando.
+
+00:13:22.480 --> 00:13:23.860
+E que você tem na ferramenta.
+
+00:13:23.860 --> 00:13:25.160
+Tudo que você faz.
+
+00:13:25.360 --> 00:13:26.880
+No mouse ou teclado.
+
+00:13:26.940 --> 00:13:28.880
+Você pode dar aqui como comando.
+
+00:13:29.100 --> 00:13:29.620
+Mas assim.
+
+00:13:29.860 --> 00:13:32.420
+É legal você consultar ela.
+
+00:13:32.520 --> 00:13:34.680
+Porque você acaba descobrindo também.
+
+00:13:34.940 --> 00:13:36.540
+Eu vou mostrar em uma outra aula.
+
+00:13:36.600 --> 00:13:37.960
+Que são as teclas de atalho.
+
+00:13:38.320 --> 00:13:41.380
+Você pode personalizar e criar teclas de
+atalho.
+
+00:13:41.540 --> 00:13:42.140
+A seu gosto.
+
+00:13:42.480 --> 00:13:43.320
+Mas por exemplo.
+
+00:13:43.320 --> 00:13:46.840
+Aqui você já começa a aprender.
+
+00:13:47.080 --> 00:13:48.340
+Até mesmo algumas.
+
+00:13:48.780 --> 00:13:49.580
+Por exemplo.
+
+00:13:49.580 --> 00:13:52.280
+Eu estou na aba 1 aqui.
+
+00:13:52.660 --> 00:13:54.440
+O que eu faço para ir nela?
+
+00:13:54.580 --> 00:13:55.720
+Através do teclado.
+
+00:13:55.760 --> 00:13:56.500
+No meu caso.
+
+00:13:57.140 --> 00:13:57.820
+Cmd 1.
+
+00:13:58.100 --> 00:13:59.020
+Ou no seu caso.
+
+00:13:59.140 --> 00:14:00.520
+Se você estiver usando o Windows.
+
+00:14:00.640 --> 00:14:01.180
+Ctrl 1.
+
+00:14:01.640 --> 00:14:02.360
+Para 2.
+
+00:14:02.800 --> 00:14:03.840
+E assim por diante.
+
+00:14:04.120 --> 00:14:05.620
+Para ir para a última.
+
+00:14:05.760 --> 00:14:06.820
+9, por exemplo.
+
+00:14:08.780 --> 00:14:09.500
+Então assim.
+
+00:14:10.160 --> 00:14:11.920
+Você começa até mesmo a aprender.
+
+00:14:13.440 --> 00:14:14.380
+Renomear um arquivo.
+
+00:14:14.380 --> 00:14:14.860
+F2.
+
+00:14:15.020 --> 00:14:15.900
+Já é meio padrão.
+
+00:14:16.360 --> 00:14:18.200
+O que mais para a gente ver aqui.
+
+00:14:18.380 --> 00:14:19.480
+Fechar uma janela.
+
+00:14:21.080 --> 00:14:21.600
+Cmd.
+
+00:14:22.940 --> 00:14:23.460
+Ctrl.
+
+00:14:23.980 --> 00:14:24.500
+W.
+
+00:14:25.420 --> 00:14:25.940
+Enfim.
+
+00:14:25.940 --> 00:14:28.560
+Você vai vendo aqui algumas outras
+coisas.
+
+00:14:28.880 --> 00:14:29.780
+Abrir o help é 1.
+
+00:14:30.240 --> 00:14:31.140
+E por aí vai.
+
+00:14:31.420 --> 00:14:32.440
+Criar nova nota.
+
+00:14:33.020 --> 00:14:33.540
+N.
+
+00:14:33.880 --> 00:14:35.460
+Mas você conseguiria.
+
+00:14:35.460 --> 00:14:35.860
+Por exemplo.
+
+00:14:41.920 --> 00:14:42.200
+Você pode criar.
+
+00:14:42.540 --> 00:14:43.720
+Create new note.
+
+00:14:43.960 --> 00:14:46.020
+Você pode vir por essa paleta também.
+
+00:14:46.260 --> 00:14:48.600
+E você viu que eu acessei com Cmd P.
+
+00:14:48.800 --> 00:14:49.500
+Ou Ctrl P.
+
+00:14:49.720 --> 00:14:52.740
+E ainda tem um ícone aqui.
+
+00:14:53.300 --> 00:14:54.680
+Open Cmd Palette.
+
+00:14:55.160 --> 00:14:56.160
+Ou seja gente.
+
+00:14:56.220 --> 00:14:57.700
+Uma ferramenta que visa assim.
+
+00:14:57.860 --> 00:14:59.480
+Você tem muita, muita opção.
+
+00:14:59.780 --> 00:15:02.380
+Você trabalhar com ela do jeito que você
+quiser.
+
+00:15:02.460 --> 00:15:03.660
+E de uma forma produtiva.
+
+00:15:03.820 --> 00:15:05.820
+Não há desculpa para dizer assim.
+
+00:15:05.900 --> 00:15:06.500
+Eu não consigo.
+
+00:15:06.720 --> 00:15:10.040
+É trabalhoso acessar um recurso x ou y.
+
+00:15:11.920 --> 00:15:12.800
+Muito, muito recurso.
+
+00:15:13.200 --> 00:15:14.740
+Bom essa aula está ficando longa.
+
+00:15:14.800 --> 00:15:17.320
+Eu vou agora explorar com você na
+próxima aula.
+
+00:15:17.500 --> 00:15:19.700
+Eu espero que você tenha conhecido a
+interface aqui.
+
+00:15:19.820 --> 00:15:21.400
+E aprenda a usar a fúcia aí.
+
+00:15:21.680 --> 00:15:23.460
+No seu segundo cérebro.
+
+00:15:23.620 --> 00:15:24.300
+E agora.
+
+00:15:24.500 --> 00:15:26.240
+Eu vou explorar um pouco.
+
+00:15:26.580 --> 00:15:27.720
+O layout mobile.
+
+00:15:27.860 --> 00:15:30.320
+Que é um pouco mais limitado.
+
+00:15:30.440 --> 00:15:33.500
+Mas é interessante a gente dar uma
+repassada por ele.
+
+00:15:33.640 --> 00:15:33.820
+Tá bom.
+
+00:15:33.980 --> 00:15:35.160
+Então até a próxima aula.
+
+00:15:35.220 --> 00:15:36.320
+Para a gente ver o ambiente mobile.

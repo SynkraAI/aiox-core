@@ -1,0 +1,717 @@
+WEBVTT
+
+00:00:00.370 --> 00:00:01.610
+Fala, lendário!
+
+00:00:01.730 --> 00:00:04.270
+Nós estamos aqui para avançar.
+
+00:00:04.290 --> 00:00:11.930
+Nessa aula, nós vamos evoluir um pouco
+mais o nosso caminho ao segundo cérebro
+
+00:00:11.930 --> 00:00:13.770
+que nós estamos criando.
+
+00:00:14.510 --> 00:00:19.370
+Nessa aula, nós vamos falar sobre os
+links internos.
+
+00:00:19.830 --> 00:00:25.730
+Nós vimos aqui, você aprendeu como fazer
+o Markdown, o que é, como você faz isso
+
+00:00:25.730 --> 00:00:26.890
+através de Atabios.
+
+00:00:26.890 --> 00:00:32.610
+Você viu a necessidade, a importância e
+que ferramenta poderosa o Obsidian se
+
+00:00:32.610 --> 00:00:36.550
+torna com essa linguagem de marcação.
+
+00:00:37.370 --> 00:00:44.510
+Veja só, eu tratei ali do link externo,
+que é como você coloca uma imagem, por
+
+00:00:44.510 --> 00:00:47.110
+exemplo, um site dentro da sua nota.
+
+00:00:47.810 --> 00:00:52.530
+Você aprendeu a fazer isso tanto
+digitando como também por Atabios.
+
+00:00:52.970 --> 00:00:56.870
+E agora, eu vou te explicar como que
+essa magia...
+
+00:00:56.890 --> 00:01:03.350
+De você linkar uma nota com outra e elas
+irem fazendo conexões.
+
+00:01:03.350 --> 00:01:12.050
+E você ter um ambiente como se fosse ali
+uma coleção de sinapses, de conexões que
+
+00:01:12.050 --> 00:01:14.790
+vão acontecendo entre as suas ideias.
+
+00:01:14.910 --> 00:01:23.810
+E entre aqueles tipos de nota, que são
+as notas Tetris, Lego, Atômica, Atômica
+
+00:01:23.810 --> 00:01:23.950
+X.
+
+00:01:24.230 --> 00:01:26.590
+Então, é importante agora você...
+
+00:01:27.210 --> 00:01:32.310
+Entender o conceito de link, que é o
+link interno das notas.
+
+00:01:32.650 --> 00:01:34.950
+Isso aqui vai fazer toda a diferença.
+
+00:01:35.250 --> 00:01:40.110
+Isso aqui vai permitir todo aquele
+conceito, aquela ideia, o que você tem
+
+00:01:40.110 --> 00:01:42.170
+ouvido falar aí sobre...
+
+00:01:43.250 --> 00:01:50.150
+Criar novos insights, os dados, tudo que
+você colocar de informação nas notas,
+
+00:01:50.150 --> 00:01:53.230
+trabalhar para você, você poder
+conversar com as notas.
+
+00:01:53.630 --> 00:01:55.450
+Potencializar o segundo cérebro com o
+IA.
+
+00:01:55.650 --> 00:01:56.810
+Tudo isso vai...
+
+00:01:56.810 --> 00:01:56.870
+Tudo isso vai...
+
+00:01:56.890 --> 00:02:01.830
+Ser potencializado, ajudado com esse
+link que você vai fazer aqui, que você
+
+00:02:01.830 --> 00:02:02.230
+vai criar.
+
+00:02:03.250 --> 00:02:04.090
+Bom, nós...
+
+00:02:04.090 --> 00:02:07.690
+Eu quero te dar a informação necessária.
+
+00:02:08.570 --> 00:02:09.410
+Como eu...
+
+00:02:10.290 --> 00:02:11.450
+Relembro aqui, já te falei.
+
+00:02:11.970 --> 00:02:18.030
+Eu quero que você crie o segundo cérebro
+e não estude um monte de coisas, de
+
+00:02:18.030 --> 00:02:19.830
+teoria, para daí você falar...
+
+00:02:19.830 --> 00:02:22.150
+Agora eu estou pronto, vou começar a
+usar.
+
+00:02:22.330 --> 00:02:24.150
+E aí, meu, a coisa se mistura.
+
+00:02:24.170 --> 00:02:25.710
+Eu quero que você vá praticando.
+
+00:02:25.790 --> 00:02:26.590
+Eu quero que você vá...
+
+00:02:26.890 --> 00:02:28.270
+Usando isso, tá?
+
+00:02:28.570 --> 00:02:31.950
+Então, eu vou te dar agora o que é
+necessário sobre link.
+
+00:02:32.470 --> 00:02:40.130
+E todo mais que depois a gente vai usar
+e ver a questão, por exemplo, do gráfico
+
+00:02:40.130 --> 00:02:41.250
+que mostra esses links.
+
+00:02:41.890 --> 00:02:44.710
+Nós vamos ver à medida que a gente vai
+avançando.
+
+00:02:44.810 --> 00:02:47.710
+Agora eu quero que você entenda o que é
+o link.
+
+00:02:47.930 --> 00:02:48.430
+Então, olha lá.
+
+00:02:48.490 --> 00:02:49.510
+No meu obsidian, eu estou aqui.
+
+00:02:49.670 --> 00:02:55.910
+Eu vou pegar e dar um command N, ou
+control N.
+
+00:02:57.530 --> 00:02:59.730
+Tantas outras formas de você criar uma
+nota.
+
+00:02:59.950 --> 00:03:08.190
+Eu vou criar aqui, por exemplo, uma nota
+e vou dar o nome de exemplo link 1.
+
+00:03:08.990 --> 00:03:09.350
+Tá?
+
+00:03:09.830 --> 00:03:10.890
+Essa é uma nota.
+
+00:03:11.610 --> 00:03:17.150
+Vou digitar aqui o texto da nota exemplo
+1.
+
+00:03:17.390 --> 00:03:21.370
+Por que eu uso um cofre vazio, com pouca
+informação?
+
+00:03:21.810 --> 00:03:24.270
+Porque eu não quero que você misture.
+
+00:03:24.410 --> 00:03:25.870
+Que você...
+
+00:03:26.890 --> 00:03:34.910
+Move um cofre já pronto, uma estrutura,
+uma maneira que eu faço, ou com um monte
+
+00:03:34.910 --> 00:03:36.550
+de coisa já linkadas.
+
+00:03:36.650 --> 00:03:38.310
+E aí, isso polua.
+
+00:03:38.750 --> 00:03:39.970
+Complica para você entender.
+
+00:03:40.250 --> 00:03:43.090
+Eu quero que você realmente pegue aqui a
+essência.
+
+00:03:43.270 --> 00:03:46.530
+Se eu estou mostrando o link, eu vou
+mostrar só o exemplo do link.
+
+00:03:46.810 --> 00:03:53.130
+E isso vai facilitar e vai sendo
+complementado depois, com muita coisa.
+
+00:03:53.890 --> 00:03:55.950
+Vou clicar aqui no maisinho.
+
+00:03:55.970 --> 00:03:56.630
+Vou dar um create.
+
+00:03:56.890 --> 00:03:57.330
+New note.
+
+00:03:57.330 --> 00:04:02.010
+Para criar a mesma coisa que eu fiz
+naquela hora, de um outro jeito.
+
+00:04:02.250 --> 00:04:05.750
+Tem várias formas de você criar uma
+nota.
+
+00:04:06.410 --> 00:04:08.390
+Exemplo link 2.
+
+00:04:08.970 --> 00:04:16.690
+E aqui eu vou ter o texto do exemplo 2.
+
+00:04:18.390 --> 00:04:19.370
+Então, olha só.
+
+00:04:19.430 --> 00:04:21.470
+Eu tenho duas notas.
+
+00:04:22.790 --> 00:04:24.130
+Duas notas aqui.
+
+00:04:26.260 --> 00:04:28.500
+E eu quero fazer...
+
+00:04:28.520 --> 00:04:29.720
+Eu quero fazer um link entre elas.
+
+00:04:29.860 --> 00:04:35.460
+Imagine que eu tenho uma nota Lego,
+Tetris, ou Atômica, Atômica X.
+
+00:04:36.040 --> 00:04:37.720
+E eu quero fazer os links.
+
+00:04:37.960 --> 00:04:39.500
+Isso aqui tem a ver com aquilo.
+
+00:04:40.000 --> 00:04:43.440
+Com uma outra coisa que eu já citei.
+
+00:04:43.780 --> 00:04:51.600
+No exemplo que eu dei, até naquele
+arquivo dos tipos de nota, a gente falou
+
+00:04:51.600 --> 00:04:56.220
+sobre a nota Atômica X, que faz link com
+outras coisas.
+
+00:04:56.780 --> 00:04:57.380
+Respondem.
+
+00:04:58.520 --> 00:05:01.480
+A nota tem aquele D para, né?
+
+00:05:02.000 --> 00:05:04.200
+Então, o oposto, o igual.
+
+00:05:05.280 --> 00:05:06.900
+E você pode linkar.
+
+00:05:07.040 --> 00:05:07.840
+É isso.
+
+00:05:08.060 --> 00:05:08.900
+Linkar é isso.
+
+00:05:08.980 --> 00:05:13.440
+É você pegar algo e quer referenciar na
+outra nota.
+
+00:05:15.040 --> 00:05:17.140
+Poderia ser aquele exemplo também, né?
+
+00:05:17.200 --> 00:05:20.640
+Que eu falei da nota Atômica, da nota
+Lego.
+
+00:05:20.880 --> 00:05:23.480
+Que você tem uma ideia que se repete
+muito.
+
+00:05:23.540 --> 00:05:25.780
+Você quer reaproveitar através do link.
+
+00:05:26.060 --> 00:05:27.740
+É isso aqui que você vai aprender agora.
+
+00:05:27.740 --> 00:05:29.100
+E, gente, é muito simples.
+
+00:05:29.280 --> 00:05:31.980
+Aqui eu estou na nota, exemplo, link 1.
+
+00:05:32.180 --> 00:05:38.160
+Se eu quero linkar com a nota 2, é
+simplesmente digitar colchetes,
+
+00:05:38.160 --> 00:05:38.880
+colchetes.
+
+00:05:38.880 --> 00:05:45.140
+E ele já, o Obsidian, vai preencher com
+colchetes final.
+
+00:05:45.660 --> 00:05:48.480
+Para que você não esqueça de preencher.
+
+00:05:48.620 --> 00:05:54.960
+E ele abre a lista colocando aqui quais
+são as notas que eu tenho no meu cofre.
+
+00:05:55.040 --> 00:05:57.040
+E você pode digitar aqui.
+
+00:05:57.040 --> 00:06:00.100
+Porque daí ele vai trazer que nota você
+quer linkar.
+
+00:06:00.300 --> 00:06:05.300
+Então, por exemplo, eu quero linkar na
+minha nota 1 aqui de exemplo, a nota 2.
+
+00:06:05.440 --> 00:06:07.180
+Eu vou dar um Enter, né?
+
+00:06:07.280 --> 00:06:10.020
+Se eu dou um outro Enter, ele já insere.
+
+00:06:10.760 --> 00:06:22.900
+Você viu aqui que o que ele mostra é um
+texto e também a nota que está sendo
+
+00:06:22.900 --> 00:06:23.680
+referenciada.
+
+00:06:23.680 --> 00:06:24.700
+O arquivo MD, né?
+
+00:06:25.180 --> 00:06:26.920
+Então, aqui no jeito que eu escolho.
+
+00:06:26.920 --> 00:06:28.480
+O link foi naquela outra aula, né?
+
+00:06:28.500 --> 00:06:31.640
+Para como mostrar o link, ele vai
+mostrar desse jeito.
+
+00:06:31.720 --> 00:06:41.020
+Se eu escolho mostrar o link do jeito
+curto, ele vai só mostrar o nome da nota
+
+00:06:41.020 --> 00:06:41.440
+ali, né?
+
+00:06:41.640 --> 00:06:42.960
+Então, está aqui, ó.
+
+00:06:43.340 --> 00:06:49.520
+Se eu vier aqui e clicar nesse link, ele
+já vai abrir a nota 2.
+
+00:06:50.460 --> 00:06:53.220
+Vou voltar aqui, ó, na setinha.
+
+00:06:53.260 --> 00:06:56.180
+Porque ele abriu dentro da nota que eu
+estava, né?
+
+00:06:56.240 --> 00:06:56.900
+Que era a nota 1.
+
+00:06:56.920 --> 00:06:57.900
+A nota 1, ele abre a nota 2.
+
+00:06:58.080 --> 00:07:04.480
+Se eu quiser, eu posso vir aqui, ó,
+funciona como um link, clicar e Open in
+
+00:07:04.480 --> 00:07:05.880
+New Tab.
+
+00:07:06.160 --> 00:07:09.240
+Ele vai abrir em uma outra aba, né?
+
+00:07:09.360 --> 00:07:10.260
+Ative meu link.
+
+00:07:10.680 --> 00:07:15.400
+Se eu vier aqui agora, na nota 2, que eu
+estou, ó, eu estou referenciando aqui,
+
+00:07:15.500 --> 00:07:15.660
+né?
+
+00:07:15.820 --> 00:07:19.780
+Na nota 2, está aqui a nota normal.
+
+00:07:19.800 --> 00:07:24.200
+Aqui embaixo, eu vejo que já está
+apontando que existe um link para essa
+
+00:07:24.200 --> 00:07:24.840
+nota, né?
+
+00:07:25.940 --> 00:07:26.900
+E aqui...
+
+00:07:26.920 --> 00:07:29.500
+Aqui, eu posso fazer a mesma coisa, tá?
+
+00:07:29.580 --> 00:07:30.780
+Colchetes, colchetes.
+
+00:07:30.800 --> 00:07:34.240
+Eu vou linkar na nota 2 a nota 1.
+
+00:07:34.320 --> 00:07:37.200
+Ou seja, eu vou fazer um link
+bidirecional.
+
+00:07:37.960 --> 00:07:38.600
+Tá?
+
+00:07:38.720 --> 00:07:42.920
+Eu estou fazendo um link bidirecional aí
+na minha nota.
+
+00:07:43.500 --> 00:07:48.120
+Então, com isso, eu estou apontando uma
+para a outra.
+
+00:07:48.680 --> 00:07:49.180
+Tá legal?
+
+00:07:49.420 --> 00:07:54.000
+Estou apontando uma nota para a outra
+ali nesse momento.
+
+00:07:54.320 --> 00:07:55.760
+É isso que...
+
+00:07:55.760 --> 00:07:56.460
+É...
+
+00:07:56.920 --> 00:07:59.040
+É o linkar notas, tá?
+
+00:07:59.220 --> 00:08:03.520
+É exatamente isso aqui que nós falamos.
+
+00:08:03.640 --> 00:08:05.440
+E é tão simples, gente, né?
+
+00:08:05.580 --> 00:08:08.400
+E isso aqui vai dar tanto poder à
+ferramenta.
+
+00:08:08.540 --> 00:08:13.480
+Se eu vier aqui, ó, e colocar Add Link
+com o menu, né?
+
+00:08:13.480 --> 00:08:16.520
+Botão direito na nota, vai fazer a mesma
+coisa, tá?
+
+00:08:16.600 --> 00:08:16.840
+Olha lá.
+
+00:08:16.880 --> 00:08:21.220
+Vai habilitar os dois colchetes ali.
+
+00:08:21.440 --> 00:08:25.440
+E eu posso linkar outra nota aqui
+dentro.
+
+00:08:25.860 --> 00:08:26.360
+Legal?
+
+00:08:26.920 --> 00:08:28.280
+Então, eu estou fazendo os links, ó.
+
+00:08:28.300 --> 00:08:32.880
+Isso é muito, muito, muito legal na
+ferramenta, tá bom?
+
+00:08:33.840 --> 00:08:35.760
+Bom, Adriano, como é que eu uso isso
+aqui?
+
+00:08:35.920 --> 00:08:36.860
+Para que que eu uso?
+
+00:08:36.980 --> 00:08:37.540
+Como que eu faço?
+
+00:08:37.840 --> 00:08:42.260
+Bom, agora você vai pegar primeiramente
+no seu exercício, no seu segundo
+
+00:08:42.260 --> 00:08:44.380
+cérebro, o arquivo que você está
+praticando e fazendo.
+
+00:08:44.780 --> 00:08:49.060
+E você vai, agora, nesse momento, criar
+alguns links.
+
+00:08:49.900 --> 00:08:52.320
+Pegar notas e anotações que você já fez.
+
+00:08:52.660 --> 00:08:55.240
+E linkar, né?
+
+00:08:55.360 --> 00:08:55.760
+Um...
+
+00:08:55.760 --> 00:08:56.140
+Um...
+
+00:08:56.140 --> 00:08:57.720
+Uma nota na outra.
+
+00:08:58.440 --> 00:09:01.860
+Ou, se for necessário, até separar
+conceitos, né?
+
+00:09:01.880 --> 00:09:05.500
+Na nota que é, por exemplo, atômica, uma
+nota Lego.
+
+00:09:05.880 --> 00:09:12.620
+Ou se você criou na outra aula uma nota
+atômica X, você pode, nesse momento,
+
+00:09:12.700 --> 00:09:15.760
+naquela resposta, né?
+
+00:09:15.840 --> 00:09:17.700
+Dos tipos de nota aqui, ó.
+
+00:09:17.700 --> 00:09:19.360
+Aproveitar que eu estou com ela,
+inclusive, aqui.
+
+00:09:19.560 --> 00:09:22.840
+Quando você está lá na nota atômica X,
+você responde.
+
+00:09:22.880 --> 00:09:23.860
+De onde veio?
+
+00:09:24.040 --> 00:09:24.820
+Para que serve?
+
+00:09:24.960 --> 00:09:25.660
+O que é similar?
+
+00:09:25.860 --> 00:09:26.120
+O que é diferente?
+
+00:09:26.120 --> 00:09:26.800
+O que é oposto?
+
+00:09:27.100 --> 00:09:31.640
+Vai nessa nota, agora, que você criou
+atômica, atômica X.
+
+00:09:32.540 --> 00:09:35.700
+E nela, você pega e cria.
+
+00:09:35.840 --> 00:09:40.220
+No de onde veio, você pega o conteúdo
+que está aqui como resposta, ó.
+
+00:09:40.280 --> 00:09:43.240
+E você cria uma nota com esse conteúdo.
+
+00:09:43.600 --> 00:09:51.700
+E, em vez de você, aqui, ter o texto,
+você vai ter o link para essa nota que
+
+00:09:51.700 --> 00:09:54.240
+vai ter esse conteúdo aqui.
+
+00:09:54.440 --> 00:09:54.960
+Legal?
+
+00:09:55.140 --> 00:09:55.980
+E aí...
+
+00:09:55.980 --> 00:10:01.240
+E, na próxima aula, você vai entender
+por que que eu já expliquei o link aqui.
+
+00:10:01.540 --> 00:10:05.920
+Nós vamos ainda ver muita coisa sobre o
+link, como ver, o gráfico, tudo.
+
+00:10:06.140 --> 00:10:11.720
+Só que, agora, nesse momento, eu estou
+imaginando que você está fazendo a aula,
+
+00:10:11.740 --> 00:10:17.860
+está fazendo os exercícios, está
+acompanhando, e aí você tem notas em
+
+00:10:17.860 --> 00:10:19.020
+outras ferramentas.
+
+00:10:19.040 --> 00:10:21.380
+Você tem notas, é...
+
+00:10:22.600 --> 00:10:24.840
+Notion, Evernote, enfim...
+
+00:10:24.840 --> 00:10:25.620
+OneNote.
+
+00:10:27.480 --> 00:10:33.700
+Apple Notes, alguma ferramenta ali, se
+você tiver Android, no Android, está
+
+00:10:33.700 --> 00:10:34.680
+sincronizando.
+
+00:10:34.800 --> 00:10:38.980
+E você quer trazer notas para o Obsidio,
+para construir esse segundo cérebro.
+
+00:10:40.100 --> 00:10:43.240
+Você vai, na próxima aula, saber como é
+que eu faço isso.
+
+00:10:43.420 --> 00:10:45.300
+Como facilitar esse processo.
+
+00:10:45.740 --> 00:10:51.260
+E eu vou te dar dicas preciosas aí de
+como, agora, você, aprendendo todos
+
+00:10:51.260 --> 00:10:55.880
+esses recursos, você já começar a jogar
+muito mais coisa aí dentro.
+
+00:10:56.480 --> 00:11:01.220
+Então, por isso que eu estou nessa ordem
+lógica, explicando esses conceitos, que
+
+00:11:01.220 --> 00:11:07.240
+você faça os exercícios, e na próxima
+aula, vão aprender como é que você traz,
+
+00:11:07.320 --> 00:11:12.540
+né, as coisas aqui para dentro desse
+segundo cérebro.
+
+00:11:12.740 --> 00:11:17.600
+Para isso, tem um conceito muito legal,
+né, que é o plugin.
+
+00:11:17.820 --> 00:11:20.000
+Eu tenho um plugin para facilitar isso.
+
+00:11:20.140 --> 00:11:25.460
+Então, antes de tudo, vou explicar o que
+é plugin, quais são os plugins básicos e
+
+00:11:25.460 --> 00:11:30.840
+nativos, e aí nós já vamos ver um plugin
+que vai facilitar você trazer as coisas
+
+00:11:30.840 --> 00:11:32.520
+aqui para o seu segundo cérebro, tá bom?
+
+00:11:32.680 --> 00:11:37.280
+Então, ficamos nessa aula aqui, até a
+próxima, e a gente vai avançando cada
+
+00:11:37.280 --> 00:11:37.820
+vez mais.

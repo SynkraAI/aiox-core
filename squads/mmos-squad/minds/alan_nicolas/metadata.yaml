@@ -1,0 +1,256 @@
+---
+mind:
+  name: "Alan Nicolas"
+  slug: "alan_nicolas"
+  type: "greenfield"
+  status: "in_progress"
+  created_at: "2025-10-15"
+  updated_at: "2025-10-16"
+  current_phase: "research_collection"
+  progress_percentage: 15
+
+special_case:
+  type: "self_cloning"
+  subtype: "elite_tier"
+  reason: "Subject creating own AI clone - unprecedented advantages"
+  standard_mmos_applicable: true
+  blocking_issue: null
+  requires_new_workflow: false
+  advantages:
+    - "Zero gatekeeping - instant validation"
+    - "Direct Layer 6-8 access (modelo-do-eu.md pre-validated)"
+    - "Gap filling on demand"
+    - "Unlimited validation bandwidth"
+    - "Private materials access"
+    - "Real-time iteration velocity"
+
+archetype:
+  primary: "self_cloning_elite"
+  secondary: "dual_persona"
+  note: "Vida Lendária (40%) + IA Expert (45%) + Overlap (15%)"
+
+pipeline:
+  version: "3.0"
+  methodology: "DNA Mental™ (full 8-layer framework)"
+  workflow_status: "executing"
+  fidelity_target: "93-97%"
+  estimated_timeline: "10-20 days"
+  estimated_hours: "68-104 hours"
+
+viability_assessment:
+  date: "2025-10-16"
+  status: "GO_APPROVED"
+  confidence_level: 75
+
+  apex_score:
+    total: 81
+    percentage: 81
+    tier: "auto_approve"
+    breakdown:
+      availability: 19  # /20 (95%)
+      public_persona: 10  # /15 (67%)
+      expertise_depth: 14  # /20 (70%)
+      x_factor: 12  # /15 (80%)
+      temporal_relevance: 15  # /15 (100%)
+      value_density: 11  # /15 (73%)
+
+  icp_match:
+    total: 87
+    percentage: 87
+    tier: "good_match"
+    use_case: "Self-cloning + Creator-OS integration"
+
+  overall_viability:
+    percentage: 84
+    decision: "GO"
+    tier: "elite"
+    confidence: "high"
+
+  unique_factors:
+    - factor: "Self-cloning context"
+      impact: "+5% viability boost"
+    - factor: "Pre-validated Layers 6-8 (modelo-do-eu.md)"
+      impact: "4-8 hour time savings"
+    - factor: "2.2M words (12-15 book equivalents)"
+      impact: "Top 1% source density"
+    - factor: "Dual expertise domains"
+      impact: "Higher complexity, higher value"
+
+phases:
+  viability:
+    status: "complete"
+    completed_at: "2025-10-16"
+    duration_hours: 6
+    note: "APEX 81/100, ICP 87%, Overall 84% - GO APPROVED"
+    deliverables:
+      - "docs/logs/20251016-viability-full.yaml"
+      - "docs/logs/20251016-viability-report.md"
+      - "PRD.md"
+      - "TODO.md"
+      - "DEPENDENCIES.md"
+
+  research:
+    status: "complete"
+    progress_percentage: 100
+    sources_collected: 205
+    total_words: 3607397
+    note: "208 sources across 8 categories, Tier 1/2/3 classification complete"
+    categories:
+      cursos: 78
+      newsletter: 56
+      podcast: 36
+      self_analysis: 13
+      videos: 12
+      interviews: 10
+      articles: 2
+      profiles: 1
+    deliverables:
+      - "sources/sources_master.yaml (v2.0)"
+      - "Reading priority queue"
+      - "Gap analysis"
+
+  analysis:
+    status: "ready_to_begin"
+    estimated_hours: "20-30"
+    confidence: "high"
+    note: "Tier 1 sources identified, Layer 6-8 pre-validated"
+    target_deliverables:
+      - "analysis/layer-1-behavioral-patterns.yaml"
+      - "analysis/layer-2-communication-style.yaml"
+      - "analysis/layer-3-routines.yaml"
+      - "analysis/layer-4-recognition-patterns.yaml"
+      - "analysis/layer-5-mental-models.yaml"
+      - "analysis/layer-6-values-hierarchy.yaml"
+      - "analysis/layer-7-core-obsessions.yaml"
+      - "analysis/layer-8-paradoxes.yaml"
+      - "analysis/identity-core.yaml"
+      - "analysis/cognitive-spec.yaml"
+
+  synthesis:
+    status: "pending"
+    estimated_hours: "12-16"
+    target_deliverables:
+      - "synthesis/frameworks.md"
+      - "synthesis/communication-style.md"
+      - "synthesis/decision-matrix.yaml"
+      - "kb/ (structured knowledge chunks)"
+
+  implementation:
+    status: "pending"
+    estimated_hours: "16-24"
+    target_deliverables:
+      - "system_prompts/generalista.md"
+      - "system_prompts/vida-legendaria.md"
+      - "system_prompts/ia-expert.md"
+      - "implementation/tools.md"
+      - "implementation/memory-system.yaml"
+
+  validation:
+    status: "pending"
+    estimated_hours: "12-20"
+    fidelity_target: "93-97%"
+    note: "Self-validation advantage - instant feedback cycles"
+    target_deliverables:
+      - "validation/test-scenarios.yaml (50 scenarios)"
+      - "validation/fidelity-report.md"
+      - "validation/iteration-log.md"
+
+  finalization:
+    status: "pending"
+    estimated_hours: "4-6"
+    target_deliverables:
+      - "docs/user-guide.md"
+      - "docs/maintenance.md"
+      - "deployment/ package"
+
+source_quality:
+  tier_1_critical:
+    count: 25
+    note: "modelo-do-eu.md, Q&A.md, profile, top videos, core courses"
+  tier_2_validation:
+    count: 150
+    note: "Newsletter, podcast, remaining courses"
+  tier_3_supporting:
+    count: 33
+    note: "Interviews, articles, supplementary materials"
+
+dna_mental_coverage:
+  layer_1_behavioral: 95
+  layer_2_communication: 98
+  layer_3_routines: 75
+  layer_4_recognition: 90
+  layer_5_mental_models: 95
+  layer_6_values: 100  # PRE-VALIDATED
+  layer_7_obsessions: 100  # PRE-VALIDATED
+  layer_8_paradoxes: 95  # PRE-VALIDATED
+  average_coverage: 94
+
+next_actions:
+  immediate:
+    - "✅ Phase 2: Complete sources_master.yaml update"
+    - "✅ Phase 2: Generate TODO.md backlog"
+    - "✅ Phase 2: Generate DEPENDENCIES.md map"
+    - "➡️ Phase 3: Begin analysis - Read modelo-do-eu.md (2h)"
+    - "Phase 3: Read Q&A.md (3h)"
+    - "Phase 3: Extract Layers 6-8 from modelo-do-eu.md"
+    - "Phase 3: Begin Layers 1-5 extraction from Tier 1 sources"
+
+  medium_term:
+    - "Phase 4: Synthesize frameworks and communication style"
+    - "Phase 5: Engineer system prompts for 3 personas"
+    - "Phase 6: Create 50 test scenarios and validate fidelity"
+
+  long_term:
+    - "Phase 7: Finalize documentation and deployment package"
+    - "PRODUCTION: Deploy Clone IA Alan Nicolas"
+
+timeline:
+  start_date: "2025-10-15"
+  viability_complete: "2025-10-16"
+  estimated_analysis_complete: "2025-10-22"
+  estimated_mvp: "2025-10-25"
+  estimated_production: "2025-11-01"
+
+documentation:
+  prd: "PRD.md"
+  todo: "TODO.md"
+  dependencies: "DEPENDENCIES.md"
+  viability_report: "docs/logs/20251016-viability-report.md"
+  viability_data: "docs/logs/20251016-viability-full.yaml"
+  sources_inventory: "sources/sources_master.yaml"
+
+success_metrics:
+  milestone_1_mvp:
+    target_fidelity: "80-85%"
+    target_date: "2025-10-25"
+
+  milestone_2_beta:
+    target_fidelity: "90-93%"
+    target_date: "2025-10-28"
+
+  milestone_3_production:
+    target_fidelity: "93-97%"
+    target_date: "2025-11-01"
+
+  milestone_4_scale:
+    target: "Sustained 93-97% fidelity"
+    target_date: "2025-11-05"
+
+notes:
+  - date: "2025-10-15"
+    note: "Mind created, awaiting materials"
+
+  - date: "2025-10-16"
+    note: "Viability assessment reveals 205 sources, 3.6M words already collected (18 book equivalents)"
+
+  - date: "2025-10-16"
+    note: "Self-cloning context discovered - changes strategy from private_individual to elite_tier"
+
+  - date: "2025-10-16"
+    note: "modelo-do-eu.md identified as CROWN JEWEL - Layers 6-8 pre-validated"
+
+  - date: "2025-10-16"
+    note: "APEX 81/100, ICP 87%, Overall Viability 84% - GO APPROVED for Elite Tier (93-97% fidelity)"
+
+  - date: "2025-10-16"
+    note: "Phase 2 (Research Collection) 95% complete, ready to begin Phase 3 (Analysis)"

@@ -1,0 +1,340 @@
+# Knowledge Base Master Index
+# Alan Nicolas - AI Clone Knowledge Chunks
+# Last Updated: 2025-10-16
+# Status: Phase 4 - Structure Complete, Chunking In Progress
+
+metadata:
+  total_sources: 208
+  total_words: "~2.2M"
+  total_chunks_target: "800-1200"
+  total_chunks_created: 20  # Updated 2025-10-16: Session 3 in progress (+2 chunks: pd-009, pd-010)
+  confidence_avg: 100  # All 20 chunks from Tier 1 (modelo-do-eu, synthesis docs, tools.md)
+  coverage: "2.0% complete (20/1000 avg)"
+
+# =============================================================================
+# CHUNK STATISTICS (To be populated)
+# =============================================================================
+
+chunk_statistics:
+  by_domain:
+    ia_expertise: 0  # Target: 250-350
+    philosophy_consciousness: 4  # Target: 150-200 (pc-001, pc-007, pc-008, pc-009)
+    business_strategy: 0  # Target: 100-150
+    frameworks_mental_models: 3  # Target: 80-120 (fw-001, fw-002, dm-001)
+    personal_development: 12  # Target: 80-120 (pd-001 through pd-010 + pd-009 cognitive + pd-010 behavioral)
+    case_studies_examples: 1  # Target: 140-260 (case-001-innerlens)
+
+  by_source_tier:
+    tier_1_crown_jewels: 20  # Target: 180-200 (20 chunks from modelo-do-eu + synthesis + tools.md)
+    tier_2_core: 0  # Target: 500-800 (courses, content)
+    tier_3_supporting: 0  # Target: 120-200 (business docs)
+
+  by_persona:
+    ia_expert: 0  # Target: ~360 chunks (45%)
+    vida_legendaria: 5  # Target: ~320 chunks (40%) (pc-001, pc-007, pc-008, pd-001, pd-004)
+    overlap_alquimista: 3  # Target: ~120 chunks (15%) (fw-001, fw-002 both, case-001 overlap)
+
+  by_temporal_era:
+    foundational: 7  # Timeless principles (pc-001, pc-007, pc-008, fw-001, fw-002, pd-001, pd-004 partial)
+    2015_2019_marketing: 0  # El Funileiro era
+    2019_2023_ia_transition: 0  # Transformation period
+    2023_present_consciousness: 1  # Current focus (case-001-innerlens)
+
+# =============================================================================
+# SOURCE MAPPING
+# =============================================================================
+
+source_files:
+
+  tier_1_crown_jewels:
+    modelo_do_eu:
+      path: "sources/self-analysis/modelo-do-eu.md"
+      size: "51KB"
+      lines: 389
+      confidence: 100
+      chunks_target: 35
+      status: "pending"
+      domains: ["philosophy-consciousness", "frameworks-mental-models", "personal-development"]
+
+    q_and_a:
+      path: "sources/self-analysis/Q&A.md"
+      size: "173KB"
+      lines: 4000+
+      confidence: 95
+      chunks_target: 120
+      status: "pending"
+      domains: ["all"]  # Covers all domains
+
+    psychometric_profile:
+      path: "sources/alan-nicolas-profile.json"
+      size: "513 lines"
+      confidence: 100
+      chunks_target: 10
+      status: "pending"
+      domains: ["personal-development"]
+
+  tier_2_core:
+    courses:
+      path: "sources/courses/"
+      file_count: 78
+      total_size: "~2M words"
+      confidence: 85
+      chunks_target: 600
+      status: "pending"
+      domains: ["ia-expertise", "business-strategy", "frameworks-mental-models"]
+
+    vida_legendaria_content:
+      path: "sources/content/vida-legendaria/"
+      confidence: 90
+      chunks_target: 40
+      status: "pending"
+      domains: ["philosophy-consciousness"]
+
+    ia_expert_content:
+      path: "sources/content/ia-expert/"
+      confidence: 90
+      chunks_target: 40
+      status: "pending"
+      domains: ["ia-expertise"]
+
+  tier_3_supporting:
+    business_documents:
+      path: "sources/business/"
+      confidence: 75
+      chunks_target: 80
+      status: "pending"
+      domains: ["business-strategy", "case-studies-examples"]
+
+# =============================================================================
+# DOMAIN INDEX
+# =============================================================================
+
+domains:
+
+  ia_expertise:
+    description: "IA tools, automation, agents, prompts, future trends"
+    primary_persona: "ia-expert"
+    chunk_prefix: "ia"
+    chunks: []  # To be populated with chunk IDs
+
+  philosophy_consciousness:
+    description: "Existential philosophy, consciousness, non-duality, awakening"
+    primary_persona: "vida-legendaria"
+    chunk_prefix: "pc"
+    chunks: ["pc-001-valores-fundamentais", "pc-007-core-obsessions", "pc-008-productive-paradoxes", "pc-009-vida-legendaria-persona"]
+
+  business_strategy:
+    description: "Marketing, business models, authentic marketing, scaling"
+    primary_persona: "ia-expert"
+    chunk_prefix: "biz"
+    chunks: []
+
+  frameworks_mental_models:
+    description: "Pareto Cubo, Clarity First, mental models, decision frameworks"
+    primary_persona: "both"
+    chunk_prefix: "fw"
+    chunks: ["fw-001-pareto-ao-cubo", "fw-002-clarity-first-framework", "dm-001-decision-frameworks"]
+
+  personal_development:
+    description: "Identity transformations, burnout recovery, evolution stories, psychometrics, communication"
+    primary_persona: "vida-legendaria"
+    chunk_prefix: "pd"
+    chunks: ["pd-001-modos-esquematicos", "pd-002-mbti-istp-profile", "pd-003-enneagram-5w4w6", "pd-004-evolutionary-journey", "pd-005-disc-dc-profile", "pd-006-communication-style-foundation", "pd-007-linguistic-patterns", "pd-008-ia-expert-persona", "pd-009-cognitive-core-traits", "pd-010-behavioral-patterns"]
+
+  case_studies_examples:
+    description: "InnerLens, Academia, real implementations, tool tests"
+    primary_persona: "both"
+    chunk_prefix: "case"
+    chunks: ["case-001-innerlens-consciousness-os"]
+
+# =============================================================================
+# TEMPORAL INDEX
+# =============================================================================
+
+temporal_eras:
+
+  foundational:
+    period: "Timeless"
+    description: "Core values, obsessions, paradoxes - unchanging principles"
+    relevance: "permanent"
+    chunks: ["pc-001-valores-fundamentais", "pc-007-core-obsessions", "pc-008-productive-paradoxes", "fw-001-pareto-ao-cubo", "fw-002-clarity-first-framework", "pd-001-modos-esquematicos", "pd-004-evolutionary-journey"]
+
+  2015_2019_marketing:
+    period: "2015-2019"
+    description: "El Funileiro era, funnel mastery, scaling, marketing dominance"
+    relevance: "historical"
+    chunks: []
+
+  2019_2023_ia_transition:
+    period: "2019-2023"
+    description: "IA adoption, transformation, burnout, identity crisis, pivot"
+    relevance: "transitional"
+    chunks: []
+
+  2023_present_consciousness:
+    period: "2023-Present"
+    description: "InnerLens, consciousness OS, awakening, current philosophy"
+    relevance: "current"
+    chunks: ["case-001-innerlens-consciousness-os"]
+
+# =============================================================================
+# TAG TAXONOMY
+# =============================================================================
+
+tag_taxonomy:
+
+  # Mental Models
+  mental_models:
+    - pareto-ao-cubo
+    - clarity-first
+    - first-principles
+    - systems-thinking
+    - limited-losses-unlimited-gains
+    - otimismo-racional
+    - frameworks-as-liberation
+    - efficiency-automation
+    - compound-effect
+    - heraclitos-river
+
+  # Values (Top 10)
+  values:
+    - clareza-radical
+    - autenticidade-integral
+    - impacto-transformador
+    - liberdade-criativa
+    - evolucao-constante
+    - familia
+    - conexoes-significativas
+    - criatividade
+    - beleza-estetica
+    - alavancagem-eficiencia
+
+  # Obsessions
+  obsessions:
+    - clareza-compreensao
+    - liberdade-autonomia
+    - evolucao-transcendencia
+    - impacto-legado
+    - consciencia-despertar
+    - eficiencia-alavancagem
+    - autenticidade-integridade
+
+  # Paradoxes
+  paradoxes:
+    - introverted-teacher
+    - freedom-through-structure
+    - cold-analyst-warm-philosopher
+    - manager-hates-managing
+    - clarity-from-chaos
+    - humble-expert
+    - elitist-egalitarian
+    - practical-visionary
+
+  # Technical
+  technical:
+    - ia-tools
+    - automation
+    - agents
+    - prompts
+    - workflows
+    - frameworks
+    - systems
+    - processes
+
+  # Philosophical
+  philosophical:
+    - consciousness
+    - non-duality
+    - awakening
+    - self-knowledge
+    - clarity
+    - authenticity
+    - evolution
+    - transcendence
+
+# =============================================================================
+# RETRIEVAL CONFIGURATION
+# =============================================================================
+
+retrieval_config:
+
+  embedding_model:
+    name: "text-embedding-3-large"
+    dimensions: 3072
+    provider: "openai"
+
+  vector_db:
+    type: "to-be-determined"  # Pinecone | Qdrant | Chroma
+    index_name: "alan-nicolas-kb"
+    similarity_metric: "cosine"
+
+  search_parameters:
+    default_top_k: 10
+    persona_boost:
+      ia_expert: 1.2  # Boost IA Expert chunks when persona detected
+      vida_legendaria: 1.2
+      overlap: 1.5  # Highest boost for unique positioning
+    relevance_boost:
+      current: 1.3
+      foundational: 1.2
+      transitional: 1.0
+      historical: 0.8
+    confidence_threshold: 85  # Minimum confidence to return
+
+  cross_reference_expansion:
+    enabled: true
+    max_depth: 2  # Follow cross-refs up to 2 levels deep
+    max_additional_chunks: 5
+
+# =============================================================================
+# PROCESSING STATUS
+# =============================================================================
+
+processing_status:
+
+  phase_4_synthesis:
+    status: "in_progress"
+    tasks:
+      - task: "Define kb/ structure"
+        status: "complete"
+      - task: "Create index.yaml"
+        status: "complete"
+      - task: "Create sample chunks"
+        status: "in_progress"
+      - task: "Process Tier 1 sources"
+        status: "pending"
+      - task: "Process Tier 2 sources"
+        status: "pending"
+
+  next_phases:
+    phase_5_implementation:
+      tasks:
+        - "Integrate kb/ with memory system"
+        - "Implement retrieval in system prompt"
+        - "Test retrieval accuracy"
+
+    phase_6_validation:
+      tasks:
+        - "Coverage testing"
+        - "Retrieval precision testing"
+        - "Fidelity impact assessment"
+
+# =============================================================================
+# VERSION & MAINTENANCE
+# =============================================================================
+
+version_control:
+  index_version: "1.0"
+  last_updated: "2025-10-16"
+  next_review: "Phase 5 - After system prompt implementation"
+  maintenance_frequency: "Monthly (as Alan evolves)"
+
+notes: |
+  This index tracks all knowledge chunks extracted from Alan Nicolas's 208 source files
+  (2.2M words). Chunks are organized by domain, source tier, persona, and temporal era
+  for multi-path retrieval.
+
+  Processing is in Phase 4 (Synthesis). Full chunking will happen alongside Phase 5
+  (Implementation) to align with memory system architecture.
+
+  Priority: Tier 1 sources (modelo-do-eu, Q&A, profile) → highest fidelity, process first.

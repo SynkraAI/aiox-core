@@ -74,7 +74,7 @@ describe('IDE Config Generator', () => {
     });
 
     it('should throw error for invalid YAML', () => {
-      const content = 'key: [invalid unclosed';
+      const content = 'key: {invalid unclosed';
       expect(() => validateConfigContent(content, 'yaml')).toThrow('Invalid YAML');
     });
 

@@ -1,0 +1,117 @@
+name: mmos-squad
+version: 3.0.1
+description: |
+  Mind Mapper OS - Cognitive Architecture Cloning System.
+  Creates high-fidelity digital clones of thought leaders using
+  DNA Mental 8-layer analysis methodology.
+author: oalanicolas
+license: MIT
+slashPrefix: mmos
+documentation: README.md
+pythonDependencies: requirements.txt
+
+aios:
+  minVersion: "2.1.0"
+  type: squad
+
+# Mind Clones Location (migrated in STORY-10.7)
+mindsLocation: minds/
+mindsCount: 27
+mindsManifest: minds/MIGRATION_MANIFEST.yaml
+
+components:
+  agents:
+    # 10 agents from official oalanicolas/mmos repository
+    - charlie-synthesis-expert.md
+    - cognitive-analyst.md
+    - data-importer.md
+    - debate.md
+    - emulator.md
+    - identity-analyst.md
+    - mind-mapper.md
+    - mind-pm.md
+    - research-specialist.md
+    - system-prompt-architect.md
+  # NOTE: Tasks, templates, checklists will be added in future stories:
+  # - STORY-10.3: Task Migration
+  # - STORY-10.4: Template Migration
+  # - STORY-10.5: Checklist Migration
+  scripts:
+    - python-wrapper.js
+
+dependencies:
+  node: []
+  python:
+    - debate_engine.py
+    - map_mind.py
+    - gemini_analyzer.py
+    - metadata_manager.py
+    - workflow_detector.py
+    - workflow_orchestrator.py
+    - workflow_preprocessor.py
+    - db_persister.py
+    - sources_importer.py
+  squads: []
+
+# Infrastructure Service Integrations (USE, don't duplicate!)
+integrations:
+  clickup:
+    module: ".aios-core/infrastructure/services/clickup"
+    usage: "mind-pm agent - project tracking, status updates"
+  file-service:
+    module: ".aios-core/infrastructure/services/file-service"
+    usage: "Document parsing (PDF, DOCX, Excel) for research-specialist"
+  google-drive:
+    module: ".aios-core/infrastructure/services/google-drive"
+    usage: "Storage for brownfield-update, source backup"
+  tiktok:
+    module: ".aios-core/infrastructure/services/tiktok"
+    usage: "Social content collection"
+
+# Python dependencies (via subprocess wrapper)
+python:
+  lib:
+    - debate_engine.py
+    - map_mind.py
+    - gemini_analyzer.py
+    - metadata_manager.py
+    - workflow_detector.py
+    - workflow_orchestrator.py
+    - workflow_preprocessor.py
+    - db_persister.py
+    - sources_importer.py
+  scripts:
+    - emulator.py
+    - import_sources_cli.py
+  wrapper: scripts/python-wrapper.js
+
+# Workflow states (for reference - tasks will be added in STORY-10.3)
+workflow:
+  states:
+    - name: VIABILITY
+      description: "APEX scoring and GO/NO-GO decision"
+      next: RESEARCH
+    - name: RESEARCH
+      description: "Source collection and organization"
+      next: ANALYSIS
+    - name: ANALYSIS
+      description: "DNA Mental 8-layer cognitive analysis"
+      next: SYNTHESIS
+    - name: SYNTHESIS
+      description: "Knowledge base compilation"
+      next: PROMPT
+    - name: PROMPT
+      description: "System prompt generation"
+      next: TESTING
+    - name: TESTING
+      description: "Fidelity testing and validation"
+      next: DONE
+    - name: DONE
+      description: "Clone ready for activation"
+
+tags:
+  - cognitive-cloning
+  - identity-synthesis
+  - dna-mental
+  - persona-mapping
+  - mmos

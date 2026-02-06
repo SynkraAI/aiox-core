@@ -1,0 +1,82 @@
+pipeline_progress:
+  mind_id: sam_altman
+  current_phase: analysis
+  phases:
+    viability:
+      status: completed
+      completion_date: '2025-10-11T19:06:32.724997Z'
+      artifacts:
+      - docs/PRD.md
+      - docs/logs/2025-10-11T21-35-viability.yaml
+    research:
+      status: completed
+      completion_date: '2025-10-12T18:22:36.173615Z'
+      artifacts:
+      - kb/qa_dataset.md
+      - sources/blogs/a-clarification.md
+      - sources/blogs/abundant-intelligence.md
+      - sources/blogs/american-equity.md
+      - sources/blogs/dall-star-e-2.md
+      - sources/blogs/e-pur-si-muove.md
+      - sources/blogs/funding-for-covid-19-projects.md
+      - sources/blogs/gpt-4o.md
+      - sources/blogs/hard-startups.md
+      - sources/blogs/helion-needs-you.md
+      - sources/blogs/helion.md
+      - sources/blogs/how-to-be-successful.md
+      - sources/blogs/how-to-invest-in-startups.md
+      - sources/blogs/idea-generation.md
+      - sources/blogs/jakub-and-szymon.md
+      - sources/blogs/moores-law-for-everything.md
+      - sources/blogs/pg-and-jessica.md
+      - sources/blogs/please-fund-more-science.md
+      - sources/blogs/productivity.md
+      - sources/blogs/project-covalence.md
+      - sources/blogs/reflections.md
+      - sources/blogs/reinforcement-learning-progress.md
+      - sources/blogs/researchers-and-founders.md
+      - sources/blogs/sora-2.md
+      - sources/blogs/sora-update-number-1.md
+      - sources/blogs/startup-playbook.md
+      - sources/blogs/the-days-are-long-but-the-decades-are-short.md
+      - sources/blogs/the-gentle-singularity.md
+      - sources/blogs/the-intelligence-age.md
+      - sources/blogs/the-merge.md
+      - sources/blogs/the-strength-of-being-misunderstood.md
+      - sources/blogs/the-virus.md
+      - sources/blogs/three-observations.md
+      - sources/blogs/us-digital-currency.md
+      - sources/blogs/what-i-wish-someone-had-told-me.md
+      - sources/pdf/congressional-testimony-2023-05-16/text.md
+      - sources/sources_master.yaml
+      - sources/youtube/lex-fridman-367-gpt4-future-of-ai/transcript.md
+      - sources/youtube/lex-fridman-419-gpt5-board-saga-agi/transcript.md
+    analysis:
+      status: in_progress
+      completion_date: null
+      artifacts:
+      - analysis/cognitive-spec.yaml
+    synthesis:
+      status: completed
+      completion_date: '2025-10-11T23:44:11.027160Z'
+      artifacts:
+      - synthesis/SYNTHESIS_SUMMARY.md
+      - synthesis/decision-playbooks.md
+      - synthesis/frameworks.md
+    implementation:
+      status: completed
+      completion_date: '2025-10-12T00:55:15.314132Z'
+      artifacts:
+      - system_prompts/CHANGELOG.md
+      - system_prompts/VALIDATION_REPORT.md
+      - system_prompts/system-gemini.md
+      - system_prompts/system-prompt-agi-strategist.md
+      - system_prompts/system-prompt-generalista.md
+      - system_prompts/system-prompt-startup-advisor.md
+    testing:
+      status: pending
+      completion_date: null
+      artifacts: []
+  _metadata:
+    inferred_at: '2025-10-12T18:22:54.134383Z'
+    note: Progress inferred from existing artifacts. Manual verification recommended.

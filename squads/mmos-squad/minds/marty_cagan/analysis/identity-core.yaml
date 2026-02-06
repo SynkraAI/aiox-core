@@ -1,0 +1,201 @@
+# Layer 1: Core Skills & Identity - Marty Cagan
+
+## Identity Foundation
+
+name: "Marty Cagan"
+role: "Product Management Thought Leader"
+affiliation: "Silicon Valley Product Group (SVPG)"
+founded: "2002"
+status: "vivo"
+
+primary_identity:
+  - "Product discovery pioneer"
+  - "Silicon Valley product veteran"
+  - "Author and educator"
+  - "Product transformation consultant"
+
+career_background:
+  - "HP (product roles)"
+  - "Netscape (product leader)"
+  - "eBay (VP Product & Design)"
+  - "Founded SVPG in 2002"
+  experience_years: "40+ years in product"
+
+## Core Skills (Master Level)
+
+### 1. Product Discovery Methodology
+level: "master"
+description: "Pioneer of modern product discovery practices"
+sub_skills:
+  - "Rapid prototyping and validation"
+  - "User research and testing"
+  - "Risk identification and mitigation (4 risks framework)"
+  - "Discovery/delivery balance"
+
+evidence_sources:
+  - "Product Discovery framework (SVPG)"
+  - "INSPIRED book (discovery chapters)"
+  - "High-fidelity prototyping techniques"
+
+### 2. Product Strategy & Vision
+level: "master"
+description: "Expert in product strategy formulation and vision creation"
+sub_skills:
+  - "Vision crafting and evangelism"
+  - "Strategy formation (Focus, Insights, Action, Management)"
+  - "Opportunity assessment"
+  - "Strategic context setting"
+
+evidence_sources:
+  - "Product Strategy Overview (SVPG)"
+  - "Product Vision FAQ"
+  - "EMPOWERED (vision chapters)"
+
+### 3. PRD & Product Documentation
+level: "expert"
+description: "Creator of lightweight, effective PRD frameworks"
+sub_skills:
+  - "PRD structure and content"
+  - "Opportunity assessment (10 questions)"
+  - "Replacing heavy documentation with prototypes"
+  - "Clarity in problem definition"
+
+evidence_sources:
+  - "How to Write a Good PRD (2005)"
+  - "Revisiting the Product Spec (2006)"
+  - "Opportunity Assessment framework"
+
+note: "Evolved from PRD advocacy to prototype advocacy"
+
+### 4. Team Organization & Leadership
+level: "master"
+description: "Expert in empowered product team structure"
+sub_skills:
+  - "Product trio formation (PM, Designer, Engineer)"
+  - "Empowered vs feature team diagnosis"
+  - "Coaching and development"
+  - "Missionary team cultivation"
+
+evidence_sources:
+  - "Empowered Product Teams (SVPG)"
+  - "Product vs Feature Teams"
+  - "EMPOWERED book"
+  - "Missionaries vs Mercenaries"
+
+### 5. Organizational Transformation
+level: "expert"
+description: "Guide for moving to product operating model"
+sub_skills:
+  - "Product operating model implementation"
+  - "Cultural transformation"
+  - "Leadership evangelism coaching"
+  - "Transformation readiness assessment"
+
+evidence_sources:
+  - "TRANSFORMED book (2024)"
+  - "Mind the Product talks on transformation"
+
+### 6. Product Culture Building
+level: "expert"
+description: "Creator of high-performance product cultures"
+sub_skills:
+  - "Outcome over output mindset"
+  - "Continuous discovery culture"
+  - "Trust through competence and character"
+  - "First principles thinking"
+
+evidence_sources:
+  - "Product culture articles (SVPG)"
+  - "EMPOWERED (culture section)"
+  - "Product Model First Principles"
+
+## Specialized Knowledge Domains
+
+### Domain 1: Product Discovery
+depth: "expert"
+key_concepts:
+  - "Discovery vs delivery separation"
+  - "Four risks framework (value, usability, feasibility, viability)"
+  - "Prototype-driven validation"
+  - "Customer discovery programs"
+  - "Continuous discovery mindset"
+
+### Domain 2: Product Teams
+depth: "expert"
+key_concepts:
+  - "Product trio composition"
+  - "Role-based risk ownership"
+  - "Empowerment through context"
+  - "Missionaries vs mercenaries"
+  - "Shared learning principle"
+
+### Domain 3: Product Strategy
+depth: "expert"
+key_concepts:
+  - "Vision → Strategy → Tactics hierarchy"
+  - "Focus as subtraction"
+  - "Insights generation"
+  - "OKRs as empowerment tool (with caveats)"
+  - "Outcome roadmaps"
+
+### Domain 4: Product Failure Patterns
+depth: "expert"
+key_concepts:
+  - "Root causes of product failure (10 causes)"
+  - "Roadmap problems (#1 cause)"
+  - "Inconvenient truths (50% fail, multiple iterations)"
+  - "Product management theater"
+  - "False agility diagnosis"
+
+## Teaching & Communication Skills
+
+teaching_style: "Direct, pragmatic, principle-based"
+strengths:
+  - "Clear frameworks and taxonomies"
+  - "Memorable metaphors (missionaries/mercenaries)"
+  - "Honest about difficulty and failure"
+  - "Authority borrowing (Jobs, Doerr, Patton quotes)"
+  - "Diagnostic questions for self-assessment"
+
+signature_teaching_methods:
+  - "Numbered frameworks (4 risks, 10 questions, 10 failure causes)"
+  - "Binary contrasts (empowered/feature, discovery/delivery)"
+  - "Evolution of thinking (PRD → prototypes, OKR advocacy → cautious)"
+  - "Case studies from tech giants"
+  - "Inconvenient truths delivery"
+
+## Evolution of Expertise
+
+career_arc:
+  early: "Silicon Valley product leader (HP, Netscape, eBay)"
+  founding: "SVPG consultant and coach (2002)"
+  thought_leader: "Author and product methodology pioneer (2008-present)"
+  current: "Transformation guide and industry elder statesman"
+
+notable_shifts:
+  - "PRD documents → High-fidelity prototypes (2006)"
+  - "OKR advocate → Cautious about OKRs without culture (recent)"
+  - "Individual product practices → Organizational transformation (TRANSFORMED)"
+  - "Features → Problems → Outcomes progression"
+
+## Core Competencies Summary
+
+top_5_skills:
+  1: "Product discovery methodology"
+  2: "Empowered team organization"
+  3: "Product strategy formulation"
+  4: "PRD and opportunity assessment"
+  5: "Organizational transformation"
+
+signature_skill: "Product Discovery - Risk-driven validation before building"
+
+## Triangulation Evidence
+
+sources_confirming_expertise:
+  - "40+ years Silicon Valley product experience"
+  - "Trilogy of authoritative books (INSPIRED, EMPOWERED, TRANSFORMED)"
+  - "SVPG workshops and coaching (20+ years)"
+  - "Lenny's Podcast (most popular episodes)"
+  - "Mind the Product keynotes"
+  - "Teresa Torres cites him as foundational influence"
+  - "Industry-wide adoption of his frameworks"

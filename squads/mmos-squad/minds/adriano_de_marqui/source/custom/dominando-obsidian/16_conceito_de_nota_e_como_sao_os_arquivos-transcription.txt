@@ -1,0 +1,788 @@
+WEBVTT
+
+00:00:00.430 --> 00:00:06.150
+Bom, agora a gente está aqui no cofre,
+já que você criou para o seu segundo
+
+00:00:06.150 --> 00:00:13.050
+cérebro, e agora eu vou convidar você a
+começar a explorar, nós vamos explorar a
+
+00:00:13.050 --> 00:00:16.730
+interface já daqui a pouco, mas antes
+até mesmo da interface, porque senão
+
+00:00:16.730 --> 00:00:21.150
+você não vai acabar entendendo algumas
+coisas que eu vou mostrar, é preciso eu
+
+00:00:21.150 --> 00:00:22.410
+te falar sobre nota.
+
+00:00:22.730 --> 00:00:24.090
+Então, o que você vai aprender aqui?
+
+00:00:24.450 --> 00:00:27.390
+Tudo o que você precisa sobre o que é
+uma nota.
+
+00:00:27.670 --> 00:00:29.090
+Nós vamos explorar tudo?
+
+00:00:29.270 --> 00:00:29.430
+Não.
+
+00:00:29.430 --> 00:00:33.670
+Só o conceito, o que é uma nota, e você
+vai criar suas primeiras notas.
+
+00:00:34.110 --> 00:00:39.530
+Nós não vamos criar nada ainda dentro
+dela, de todo o arsenal de coisas que
+
+00:00:39.530 --> 00:00:43.830
+nós podemos fazer, mas eu preciso que
+você entenda o conceito do que é uma
+
+00:00:43.830 --> 00:00:44.350
+nota.
+
+00:00:44.570 --> 00:00:50.630
+A nota é a unidade básica, a menor
+unidade das coisas que nós precisamos, e
+
+00:00:50.630 --> 00:00:55.110
+você só criar notas não é o objetivo
+aqui, tá?
+
+00:00:55.930 --> 00:00:57.910
+Nós temos uma metodologia.
+
+00:00:57.910 --> 00:01:03.070
+Aqui na comunidade, nós temos também o
+curso Mente Humendária.
+
+00:01:03.170 --> 00:01:08.410
+O Mente Humendária é baseado em vários e
+vários e vários conceitos sobre como
+
+00:01:08.410 --> 00:01:10.350
+tomar notas de forma inteligente.
+
+00:01:10.750 --> 00:01:13.050
+Pegamos todas as metodologias, né?
+
+00:01:13.150 --> 00:01:22.350
+O Alan aí pegou tudo que existe, tanto
+no Brasil como fora, e uma junção de
+
+00:01:22.350 --> 00:01:27.630
+metodologias se chegou ao Mente
+Humendária, que mostra...
+
+00:01:27.910 --> 00:01:33.890
+como que você pode fazer para aprender
+de modo acelerado, como que você pode
+
+00:01:33.890 --> 00:01:40.590
+aprender de forma rápida, um ultra
+aprendizado, né?
+
+00:01:40.630 --> 00:01:46.430
+Como tem aí a metodologia do Scott
+Young, ultra aprendizado.
+
+00:01:46.650 --> 00:01:49.690
+Como que você vai tomar notas, tem um
+livro também com esse título.
+
+00:01:49.830 --> 00:01:53.950
+Como que você vai montar um segundo
+cérebro, segundo o Tiago Forte.
+
+00:01:54.450 --> 00:01:57.590
+Link or Finch também tem, né?
+
+00:01:58.190 --> 00:02:00.510
+Falei para vocês ali já, um pouco antes,
+né?
+
+00:02:00.610 --> 00:02:01.610
+Método de Aro, enfim.
+
+00:02:03.190 --> 00:02:04.730
+Somente notas não é o objetivo.
+
+00:02:05.110 --> 00:02:08.810
+Você ir criando notas e ir salvando em
+um aplicativo, você teria outros
+
+00:02:08.810 --> 00:02:10.330
+aplicativos para fazer isso.
+
+00:02:10.490 --> 00:02:11.410
+E não é o caso.
+
+00:02:11.490 --> 00:02:12.190
+Aqui nós estamos...
+
+00:02:12.190 --> 00:02:14.230
+a gente está criando um segundo cérebro.
+
+00:02:14.350 --> 00:02:19.630
+E que você vai ver um poder, um
+potencial que vai te surpreender, porque
+
+00:02:19.630 --> 00:02:20.930
+você nunca viu algo parecido.
+
+00:02:21.130 --> 00:02:23.930
+É diferente de simplesmente uma
+anotação, tá bom?
+
+00:02:24.430 --> 00:02:27.430
+Então, mas todo o que nós vamos...
+
+00:02:27.590 --> 00:02:32.150
+construir, tudo que nós vamos construir
+precisa dessa unidade que é a nota.
+
+00:02:32.230 --> 00:02:35.070
+E eu vou ensinar a você como fazer
+também notas inteligentes.
+
+00:02:35.150 --> 00:02:36.890
+Porém, vamos entender.
+
+00:02:37.190 --> 00:02:39.150
+Se eu tenho aqui a ferramenta, ó.
+
+00:02:39.250 --> 00:02:42.230
+Eu estou agora naquele cofre teste
+-aula, né?
+
+00:02:42.310 --> 00:02:44.890
+Um dos cofres que a gente está criando
+aqui para o curso.
+
+00:02:45.030 --> 00:02:48.390
+E a gente começou a criar e você está no
+seu segundo cérebro aí.
+
+00:02:48.470 --> 00:02:53.910
+A gente está criando e vendo que a
+ferramenta oferece teclas de atalho,
+
+00:02:54.010 --> 00:02:54.610
+como eu vou trazer.
+
+00:02:54.610 --> 00:02:59.770
+Ela oferece uma paleta de comando, que
+você digita comandos.
+
+00:02:59.870 --> 00:03:02.070
+Você pode usar, então, o mouse.
+
+00:03:02.410 --> 00:03:03.890
+Você pode usar o teclado.
+
+00:03:03.890 --> 00:03:06.910
+Tem várias formas diferentes de fazer a
+mesma coisa.
+
+00:03:07.070 --> 00:03:08.090
+Por exemplo, criar nota.
+
+00:03:08.370 --> 00:03:10.990
+Eu tenho aqui esse link, que eu posso
+clicar.
+
+00:03:11.670 --> 00:03:15.150
+Ou posso ter aqui, no meu caso, o
+Command N.
+
+00:03:15.470 --> 00:03:17.530
+Ou você pode ter o Control N, né?
+
+00:03:17.590 --> 00:03:18.430
+Que vai fazer o quê?
+
+00:03:18.470 --> 00:03:19.870
+Vai abrir uma nova nota.
+
+00:03:20.110 --> 00:03:23.530
+Então, ela já vem posicionada com o
+título, tá?
+
+00:03:23.530 --> 00:03:25.710
+Então, aqui, eu vou colocar aqui.
+
+00:03:25.910 --> 00:03:27.430
+Primeira nota.
+
+00:03:27.850 --> 00:03:33.490
+Esse é o título e aqui eu começo a
+edição da minha nota, tá?
+
+00:03:33.790 --> 00:03:36.650
+Isso aqui é salvo dentro daquela pasta
+do VAUNT.
+
+00:03:36.790 --> 00:03:39.030
+E de que forma que isso aqui é salvo?
+
+00:03:39.130 --> 00:03:40.090
+Vamos lá no Finder.
+
+00:03:40.110 --> 00:03:45.830
+Eu quero mostrar, porque daí você vai
+entender tudo, tudo, tudo sobre o
+
+00:03:45.830 --> 00:03:48.310
+Obsidian e a forma de trabalho.
+
+00:03:48.610 --> 00:03:49.170
+Então, olha só.
+
+00:03:49.290 --> 00:03:50.990
+Eu estou aqui no cofre teste -aula.
+
+00:03:51.370 --> 00:03:51.890
+É...
+
+00:03:51.890 --> 00:03:53.690
+Primeiro, a nota .md.
+
+00:03:53.810 --> 00:03:58.350
+Então, os arquivos, as notas que vão ser
+salvas dentro do Obsidian, todas elas
+
+00:03:58.350 --> 00:04:02.170
+possuem a extensão .md, que é Markdown.
+
+00:04:02.230 --> 00:04:07.090
+Que você vai entender já também o que é
+isso daqui a pouco, tá?
+
+00:04:07.930 --> 00:04:09.390
+Nas próximas aulas aí.
+
+00:04:09.630 --> 00:04:12.630
+Então, eu quero que você entenda que
+existe aqui, né?
+
+00:04:13.750 --> 00:04:17.250
+O lugar, o local para salvar essas
+notas.
+
+00:04:17.350 --> 00:04:22.450
+E aqui dentro do Obsidian, você começa a
+editar as notas, né?
+
+00:04:23.490 --> 00:04:25.490
+Editar as notas.
+
+00:04:25.690 --> 00:04:32.490
+Claro que aqui você vai aprender todo um
+conjunto de ferramental que vai te
+
+00:04:32.490 --> 00:04:34.730
+mostrar do que a ferramenta é capaz, tá?
+
+00:04:35.530 --> 00:04:42.810
+A comunidade Obsidian, inclusive chama o
+Obsidian não de uma ferramenta PKM, né?
+
+00:04:42.870 --> 00:04:46.830
+Que é uma, traduzindo a sigla, uma
+ferramenta de gerenciamento de
+
+00:04:46.830 --> 00:04:47.730
+conhecimento.
+
+00:04:47.730 --> 00:04:51.990
+Mas considera ela como um Sistema
+Operacional Markdown.
+
+00:04:52.090 --> 00:04:53.550
+Olha só o nome que eles dão.
+
+00:04:53.810 --> 00:04:55.090
+Devido a tanta...
+
+00:04:56.110 --> 00:04:57.870
+A tanta coisa, né?
+
+00:04:58.230 --> 00:04:59.790
+Que ela é capaz.
+
+00:05:00.450 --> 00:05:05.150
+Bom, aqui eu tenho a nota e conforme eu
+vou criando notas...
+
+00:05:05.910 --> 00:05:07.990
+Ó, eu vou dar aqui Command N.
+
+00:05:08.290 --> 00:05:09.970
+Ele já criou aqui do meu lado.
+
+00:05:10.170 --> 00:05:12.370
+Esse aqui eu vou colocar segunda nota.
+
+00:05:12.870 --> 00:05:13.410
+Tá?
+
+00:05:14.150 --> 00:05:16.310
+Mais uma nota aqui que eu estou
+editando.
+
+00:05:16.990 --> 00:05:19.850
+Perceba que está criando aqui no meu
+menuzinho aqui, ó.
+
+00:05:19.910 --> 00:05:22.270
+Em cima aqui eu tenho files ou arquivos,
+né?
+
+00:05:22.390 --> 00:05:24.490
+E ele está criando as notas aqui.
+
+00:05:24.790 --> 00:05:28.710
+E você tem aqui a possibilidade, né?
+
+00:05:28.770 --> 00:05:31.490
+De também criar uma nova nota pelo ícone
+aqui, ó.
+
+00:05:31.550 --> 00:05:33.350
+E criar pastas.
+
+00:05:33.510 --> 00:05:38.330
+Ó, aqui você tem a divisão que você pode
+criar, né?
+
+00:05:38.570 --> 00:05:40.070
+De pastas.
+
+00:05:40.070 --> 00:05:41.750
+E aqui vamos mudar aqui, ó.
+
+00:05:41.790 --> 00:05:43.410
+O nome de uma pasta aqui, ó.
+
+00:05:44.310 --> 00:05:45.110
+Pasta Geral.
+
+00:05:45.790 --> 00:05:46.230
+Geral.
+
+00:05:48.420 --> 00:05:51.460
+Eu posso ter os arquivos, né?
+
+00:05:51.540 --> 00:05:54.220
+Criar os arquivos dentro da pasta.
+
+00:05:54.460 --> 00:05:56.560
+Então, se eu estou com a pasta
+selecionada aqui, né?
+
+00:05:56.600 --> 00:05:58.820
+Uma nova nota, eu posso criar dentro da
+pasta.
+
+00:05:59.580 --> 00:06:00.020
+Ou...
+
+00:06:01.000 --> 00:06:02.580
+Botão direito, New Note.
+
+00:06:02.840 --> 00:06:05.500
+Olha quanta forma de fazer a mesma
+coisa, entenderam?
+
+00:06:05.900 --> 00:06:07.780
+Botão direito aqui, ó, tem New Note.
+
+00:06:07.920 --> 00:06:12.920
+Se eu vier aqui também e arrastar a
+nota, por exemplo, primeira nota.
+
+00:06:13.240 --> 00:06:15.120
+E jogar aqui dentro da pasta, ó.
+
+00:06:15.120 --> 00:06:17.520
+Ela já entra para dentro da pasta o
+arquivo.
+
+00:06:17.600 --> 00:06:18.180
+Está vendo?
+
+00:06:18.500 --> 00:06:24.300
+E aí o que vai acontecendo lá dentro do
+sistema de arquivos.
+
+00:06:24.420 --> 00:06:24.920
+Olha lá, ó.
+
+00:06:24.940 --> 00:06:25.480
+Pasta Geral.
+
+00:06:26.480 --> 00:06:27.240
+Primeira nota.
+
+00:06:27.360 --> 00:06:28.000
+Segunda nota.
+
+00:06:28.400 --> 00:06:31.520
+Me desculpa se essa aula está parecendo
+algo tão óbvio.
+
+00:06:32.040 --> 00:06:35.160
+Mas é algo que se você não entende desde
+o início...
+
+00:06:35.160 --> 00:06:40.340
+Eu estou falando algo que gerou muita
+dúvida e muito atendimento.
+
+00:06:40.460 --> 00:06:43.460
+De às vezes as pessoas não entenderem
+esse básico.
+
+00:06:43.460 --> 00:06:49.580
+Que é onde vai dar permissão e vai
+potencializar ela a entender todo o
+
+00:06:49.580 --> 00:06:51.000
+conjunto da ferramenta, tá?
+
+00:06:51.400 --> 00:06:53.580
+Bom, mas aí o que eu quero trazer para
+você.
+
+00:06:53.740 --> 00:06:55.280
+A nota está aqui.
+
+00:06:55.520 --> 00:06:58.700
+Existe também então esse recurso de
+pasta.
+
+00:06:59.400 --> 00:07:02.820
+Aí nós vamos começar a entrar na questão
+que é...
+
+00:07:02.820 --> 00:07:06.120
+Como eu organizo coisas dentro do
+Obsidian?
+
+00:07:06.340 --> 00:07:10.520
+Como que é a forma correta de eu
+organizar notas?
+
+00:07:10.660 --> 00:07:13.440
+E me baseando no conceito de...
+
+00:07:13.440 --> 00:07:19.080
+Que eu quero que você comece a usar
+antes de querer aprender tudo, né?
+
+00:07:19.160 --> 00:07:20.820
+Eu quero que você coloque a mão na
+massa.
+
+00:07:20.980 --> 00:07:23.420
+Eu quero que você crie as primeiras
+notas.
+
+00:07:23.420 --> 00:07:26.260
+Ou você pegue algo que você tenha aí de
+anotação em algum lugar.
+
+00:07:26.500 --> 00:07:28.540
+E nessa aula você vai fazer o quê?
+
+00:07:28.660 --> 00:07:31.220
+Você vai começar a criar notas.
+
+00:07:31.220 --> 00:07:35.080
+E começar a jogar essas notas dentro das
+pastas que você quiser criar.
+
+00:07:35.280 --> 00:07:38.040
+Por exemplo, eu poderia ter aqui, né?
+
+00:07:38.540 --> 00:07:41.840
+Essa pasta aqui chamada de...
+
+00:07:41.840 --> 00:07:42.880
+Ó, vou dar um rename aqui.
+
+00:07:44.040 --> 00:07:44.580
+Palestras.
+
+00:07:46.340 --> 00:07:47.100
+Tá bom?
+
+00:07:47.380 --> 00:07:49.680
+Só que eu já quero adiantar para você
+uma coisa.
+
+00:07:50.100 --> 00:07:54.540
+Já quero adiantar para você uma coisa
+que é importante você entender.
+
+00:07:54.880 --> 00:07:56.340
+Você vai me perguntar assim.
+
+00:07:56.400 --> 00:08:01.780
+Adriano, eu preciso ter essa organização
+de pastas.
+
+00:08:01.780 --> 00:08:05.860
+E eu preciso ter essa organização de
+classificar as coisas.
+
+00:08:06.520 --> 00:08:07.560
+Não é regra.
+
+00:08:07.780 --> 00:08:08.680
+Deixa eu te falar.
+
+00:08:09.500 --> 00:08:10.940
+Existe um livro, tá?
+
+00:08:10.940 --> 00:08:13.560
+Que é o livro do Tiago Forte.
+
+00:08:13.580 --> 00:08:15.060
+E ele tem um curso também, né?
+
+00:08:15.260 --> 00:08:18.260
+Que não tem em português, mas ele tem um
+curso.
+
+00:08:18.400 --> 00:08:23.880
+Que inclusive no final dele, ele vai
+falar sobre o tipo...
+
+00:08:23.880 --> 00:08:27.260
+Ele faz um teste e classifica as pessoas
+em tipos de anotadores.
+
+00:08:29.000 --> 00:08:31.500
+Tudo que eu ensinar lá, você vai ter
+aqui nesse curso, tá?
+
+00:08:31.600 --> 00:08:32.940
+Então, fica tranquilo.
+
+00:08:33.000 --> 00:08:34.180
+Mas o que eu quero dizer é...
+
+00:08:35.080 --> 00:08:38.480
+Tem pessoas que gostam de organizar o
+conhecimento.
+
+00:08:38.480 --> 00:08:42.780
+E gostam de organizar o conhecimento com
+pastas.
+
+00:08:43.280 --> 00:08:50.200
+Tem pessoas que gostam de organizar com
+classificações dentro do arquivo.
+
+00:08:50.220 --> 00:08:53.080
+Dentro do arquivo vai colocando
+informações para que depois ele
+
+00:08:53.080 --> 00:08:53.680
+localize.
+
+00:08:53.840 --> 00:09:01.800
+Tem pessoas que já gostam mais de
+encontrar coisas a partir do texto que
+
+00:09:01.800 --> 00:09:02.800
+digitou dentro da nota.
+
+00:09:03.240 --> 00:09:03.960
+Enfim.
+
+00:09:03.960 --> 00:09:05.560
+E tem gente, né?
+
+00:09:05.680 --> 00:09:06.680
+Tem pessoas.
+
+00:09:06.680 --> 00:09:08.680
+Eu encontrei muitos alunos, né?
+
+00:09:08.700 --> 00:09:10.460
+Principalmente aqueles que...
+
+00:09:10.460 --> 00:09:13.040
+Nossa, eu não gosto de organização.
+
+00:09:13.080 --> 00:09:14.020
+Eu tenho TDAH.
+
+00:09:14.060 --> 00:09:15.900
+Eu não quero saber onde coloquei os
+arquivos.
+
+00:09:16.140 --> 00:09:20.360
+Eu quero colocar o arquivo lá e eu sei
+que eu vou achar aquilo no momento
+
+00:09:20.360 --> 00:09:20.740
+certo.
+
+00:09:21.300 --> 00:09:21.740
+Exato.
+
+00:09:21.800 --> 00:09:26.480
+É isso que uma ferramenta de segundo
+cérebro possibilita.
+
+00:09:26.860 --> 00:09:28.380
+Então, não é uma regra.
+
+00:09:28.420 --> 00:09:34.260
+Então, eu quero que você aqui tire a sua
+pressão mental de que existe uma regra e
+
+00:09:34.260 --> 00:09:34.880
+um jeito certo.
+
+00:09:35.140 --> 00:09:36.660
+Eu vou te ensinar uma metodologia.
+
+00:09:36.660 --> 00:09:37.980
+Para você não fazer errado.
+
+00:09:38.500 --> 00:09:43.840
+Porque também fazer a coisa de forma
+errada depois é um retrabalho.
+
+00:09:43.900 --> 00:09:49.000
+E é você não conseguir localizar as
+coisas, classificar, otimizar, criar
+
+00:09:49.000 --> 00:09:49.300
+insights.
+
+00:09:49.900 --> 00:09:55.100
+Então, isso eu não vou permitir que você
+aprenda errado.
+
+00:09:55.280 --> 00:10:00.660
+Mas eu quero te dizer que o modo de
+classificação, nesse curso você vai
+
+00:10:00.660 --> 00:10:04.120
+começar a entender como fazer as coisas.
+
+00:10:04.120 --> 00:10:07.420
+Mas eu quero que agora você pegue
+algumas anotações que você tem em outra
+
+00:10:07.420 --> 00:10:08.080
+ferramenta.
+
+00:10:08.100 --> 00:10:10.660
+Que você pegue anotações em caderno.
+
+00:10:10.680 --> 00:10:14.760
+Que você pegue alguma outra coisa, pouca
+coisa que você tem em algum outro lugar.
+
+00:10:14.860 --> 00:10:17.100
+E comece a criar notas no Obsidian já.
+
+00:10:18.040 --> 00:10:20.200
+Mas Adriano, eu preciso aprender
+primeiro...
+
+00:10:20.200 --> 00:10:20.500
+Não.
+
+00:10:20.620 --> 00:10:25.300
+Eu quero que você aprenda a primeiro
+criar notas, a usar a ferramenta.
+
+00:10:25.380 --> 00:10:29.280
+Porque vai ser muito mais fácil,
+pedagógico, didático, você fazer dessa
+
+00:10:29.280 --> 00:10:29.680
+forma.
+
+00:10:29.820 --> 00:10:33.280
+Do que chegar lá no final do curso e
+você falar, puxa, por onde eu começo?
+
+00:10:33.280 --> 00:10:34.160
+Por quê?
+
+00:10:34.180 --> 00:10:39.180
+Porque vai estar com tanta informação e
+não vai estar colocando no dia a dia.
+
+00:10:39.300 --> 00:10:39.760
+Beleza?
+
+00:10:40.160 --> 00:10:46.800
+Então, agora nós vamos pegar isso que
+você já aprendeu, vai começar a criar
+
+00:10:46.800 --> 00:10:47.500
+essas notas.
+
+00:10:47.500 --> 00:10:51.060
+E como você já vai começar a criar notas
+agora, que eu confio que você vai fazer
+
+00:10:51.060 --> 00:10:52.140
+isso no modo prático.
+
+00:10:52.240 --> 00:10:56.740
+Eu vou para a próxima aula que vai ser
+algumas coisas ali de configuração.
+
+00:10:56.900 --> 00:11:01.460
+Que antes que você comece a mexer no seu
+cofre, eu já quero que você aprenda e
+
+00:11:01.460 --> 00:11:03.020
+saiba porque também, meu.
+
+00:11:03.280 --> 00:11:06.180
+Vai ser muito, essencial.
+
+00:11:06.320 --> 00:11:10.740
+E, pasme, você não acha isso em muito
+lugar aí da internet.
+
+00:11:10.980 --> 00:11:13.980
+Muito vídeo falando sobre isso e as
+pessoas ficam perdidas depois.
+
+00:11:14.380 --> 00:11:18.380
+Então, faz esse exercício, bota a mão na
+massa.
+
+00:11:18.460 --> 00:11:23.540
+Que você venha para a próxima aula com
+algumas notas já dentro do seu segundo
+
+00:11:23.540 --> 00:11:24.300
+cérebro, tá bom?
+
+00:11:24.400 --> 00:11:24.820
+Legal?
+
+00:11:25.320 --> 00:11:26.720
+A gente se vê na próxima.
+
+00:11:26.800 --> 00:11:27.740
+Até mais, lendário.

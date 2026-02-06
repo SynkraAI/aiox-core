@@ -1,0 +1,165 @@
+# Squad Creator Configuration
+# Pattern: SC-CF-001 (Squad Configuration Standard)
+# Version: 1.0.0
+
+squad_config:
+  name: squad-creator
+  version: 1.0.0
+  description: Tools and agents to create custom AIOS squads
+
+  # =========================================
+  # Data Sources Configuration
+  # Pattern: SC-DS-001 (Data Source Abstraction)
+  # =========================================
+  data_sources:
+
+    # -----------------------------------------
+    # Transcript Sources (for SOP extraction)
+    # -----------------------------------------
+    transcripts:
+      active_source: supabase
+
+      sources:
+        supabase:
+          type: database
+          description: "Fetch transcripts from Supabase"
+          connection:
+            url_env: SUPABASE_URL
+            key_env: SUPABASE_SERVICE_KEY
+          query:
+            table: transcripts
+            select: [id, content, source_type, source_url, duration_seconds, participants, created_at, metadata]
+            filters:
+              - field: status
+                operator: eq
+                value: ready
+            order_by: created_at
+            order_direction: desc
+          field_mapping:
+            transcript_id: id
+            transcript_content: content
+            transcript_source: source_type
+            transcript_url: source_url
+            transcript_duration: duration_seconds
+            transcript_participants: participants
+            transcript_date: created_at
+            transcript_metadata: metadata
+
+        local_file:
+          type: file
+          description: "Read transcript from local file"
+          config:
+            base_path: "inputs/transcripts/"
+            supported_formats: [txt, md, json, vtt, srt]
+            encoding: utf-8
+          json_content_field: transcript
+
+        api:
+          type: http
+          description: "Fetch transcript from external API"
+          connection:
+            base_url_env: TRANSCRIPT_API_URL
+            auth_type: bearer
+            token_env: TRANSCRIPT_API_TOKEN
+          endpoints:
+            list: "/transcripts"
+            get: "/transcripts/{id}"
+          response:
+            data_path: "data"
+            content_field: "content"
+
+        direct:
+          type: inline
+          description: "Direct transcript input as parameter"
+
+      # Standard schema for normalized transcript
+      schema:
+        required: [transcript_id, transcript_content]
+        optional: [transcript_source, transcript_url, transcript_duration, transcript_participants, transcript_date, transcript_language, transcript_metadata]
+
+    # -----------------------------------------
+    # Output Destinations (for extracted SOPs)
+    # -----------------------------------------
+    outputs:
+      active_destination: local_file
+
+      destinations:
+        local_file:
+          type: file
+          base_path: "outputs/sops/"
+          filename_pattern: "{process_code}_{timestamp}.md"
+
+        supabase:
+          type: database
+          table: sops
+          fields: [process_code, process_name, content, squad_blueprint, automation_analysis, gaps, metadata, created_at]
+
+  # =========================================
+  # Processing Configuration
+  # =========================================
+  processing:
+    chunking:
+      enabled: true
+      max_tokens_per_chunk: 8000
+      overlap_tokens: 500
+
+    language:
+      auto_detect: true
+      default: "en"
+      supported: ["en", "pt", "es"]
+
+    speaker_detection:
+      enabled: true
+      patterns:
+        - "^\\[([^\\]]+)\\]:"     # [Speaker]:
+        - "^([A-Z][a-z]+):"        # Name:
+        - "^Speaker (\\d+):"       # Speaker 1:
+
+  # =========================================
+  # Validation Configuration
+  # =========================================
+  validation:
+    task_anatomy:
+      enabled: true
+      required_fields: 8
+      pattern: HO-TP-001
+
+    axioma:
+      enabled: true
+      dimensions: 10
+      overall_threshold: 7.0
+      dimension_threshold: 6.0
+
+    automation_analysis:
+      enabled: true
+      heuristic: PV_PM_001
+      frequency_threshold: 2  # per month
+      require_guardrails: true
+
+  # =========================================
+  # Service Integration
+  # =========================================
+  services:
+    supabase:
+      enabled: true
+      status: optional
+      connection:
+        url_env: SUPABASE_URL
+        key_env: SUPABASE_SERVICE_KEY
+
+    document:
+      enabled: true
+      status: ready
+      config:
+        templates_dir: ../templates
+        output_dir: outputs/sops
+
+  # =========================================
+  # Logging
+  # =========================================
+  logging:
+    enabled: true
+    level: info
+    debug_mode:
+      environment_variable: SQUAD_CREATOR_DEBUG
+      default: false

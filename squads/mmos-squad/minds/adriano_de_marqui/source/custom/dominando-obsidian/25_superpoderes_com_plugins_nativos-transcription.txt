@@ -1,0 +1,972 @@
+WEBVTT
+
+00:00:00.940 --> 00:00:07.240
+Bom, já estamos aqui nessa aula onde nós
+vamos evoluir, após essa aula você vai
+
+00:00:07.240 --> 00:00:13.000
+saber ainda um pouco mais de coisas que
+muita gente que se aventura no Obsidian
+
+00:00:13.000 --> 00:00:18.680
+desconhece, não sabe, então ao final da
+aula você vai ali estar conhecendo
+
+00:00:18.680 --> 00:00:20.880
+recursos muito legais.
+
+00:00:20.880 --> 00:00:29.840
+E essa aula é proposital para que você
+consiga usar depois um plugin que você
+
+00:00:29.840 --> 00:00:34.520
+possa importar notas aqui para dentro do
+Obsidian, de outros lugares.
+
+00:00:34.980 --> 00:00:41.580
+Eu quando comecei a usar o Obsidian eu
+tinha mais de 1500 notas no Evernote, eu
+
+00:00:41.580 --> 00:00:46.980
+trouxe tudo de uma vez para dentro do
+Obsidian, mas claro que eu tive que
+
+00:00:46.980 --> 00:00:50.100
+processar as notas, fazer com que
+elas...
+
+00:00:51.880 --> 00:00:58.040
+Muitas vezes foram assim jogadas,
+simplesmente como uma anotação, trazer
+
+00:00:58.040 --> 00:01:02.520
+aqui para dentro como realmente uma
+informação útil, tá?
+
+00:01:02.660 --> 00:01:07.820
+Mas eu quero te dar todas as dicas aí
+nesse aprendizado para que você percorra
+
+00:01:07.820 --> 00:01:09.980
+um caminho mais fácil, tá viral?
+
+00:01:10.820 --> 00:01:16.180
+Eu vou falar sobre plugins e os plugins
+são superpoderes que você vai
+
+00:01:16.180 --> 00:01:17.660
+acrescentando ao Obsidian.
+
+00:01:18.780 --> 00:01:20.780
+Você tem ferramentas por aí?
+
+00:01:20.880 --> 00:01:26.040
+Que são lançadas pelos seus
+fornecedores, por exemplo o Evernote, o
+
+00:01:26.040 --> 00:01:33.300
+Notion, o Onote, onde eles vão ali
+desenvolvendo features e recursos e vão
+
+00:01:33.300 --> 00:01:35.540
+lançando de tempos em tempos, né?
+
+00:01:36.310 --> 00:01:43.120
+E o Obsidian ele tem em torno de si,
+tendo uma ferramenta gratuita, uma
+
+00:01:43.120 --> 00:01:49.620
+ferramenta aberta, você tem
+desenvolvedores, você tem pessoas ao
+
+00:01:49.620 --> 00:01:54.500
+redor ali na comunidade, o tempo todo
+desenvolvendo recursos para a
+
+00:01:54.500 --> 00:01:55.100
+ferramenta.
+
+00:01:55.700 --> 00:01:58.480
+Então, esses recursos são chamados de
+plugins.
+
+00:01:58.700 --> 00:02:01.020
+Você tem um plugin que é uma...
+
+00:02:01.340 --> 00:02:03.280
+Você tem um plugin que é uma...
+
+00:02:03.900 --> 00:02:06.080
+Esse superpoder, esse recurso, né?
+
+00:02:06.120 --> 00:02:09.240
+Essa funcionalidade que vai ser
+acrescida na ferramenta.
+
+00:02:09.720 --> 00:02:13.180
+E você tem aí, né?
+
+00:02:13.300 --> 00:02:23.440
+Com esse superpoder, capacidade de até
+mesmo você ou eu vendo algo que é
+
+00:02:23.440 --> 00:02:28.660
+necessário na ferramenta, desenvolver,
+submeter isso à comunidade do Obsidian,
+
+00:02:28.760 --> 00:02:35.600
+eles aprovarem, testarem os habilidades,
+segurança, o funcionamento e tudo mais,
+
+00:02:35.800 --> 00:02:37.860
+e aí eles liberam para todo mundo.
+
+00:02:38.080 --> 00:02:39.440
+É isso que acontece, tá?
+
+00:02:39.920 --> 00:02:45.320
+Então eu vou tratar nessa aula primeiro
+de plugins que são nativos, ou seja,
+
+00:02:45.360 --> 00:02:48.840
+você instalou o Obsidian e eles já estão
+ali.
+
+00:02:48.940 --> 00:02:51.180
+Já estão nativos na ferramenta.
+
+00:02:51.200 --> 00:02:51.800
+E...
+
+00:02:52.300 --> 00:02:59.920
+Quais são esses poderes que esses
+plugins nativos dão ao Obsidian, né?
+
+00:02:59.940 --> 00:03:02.080
+Vamos tratar disso daqui primeiro, tá
+bom?
+
+00:03:03.560 --> 00:03:05.680
+Para acessá -los, o que a gente vai
+precisar?
+
+00:03:05.940 --> 00:03:09.480
+Eu venho aqui na engrenagem, no
+Obsidian, tá?
+
+00:03:11.020 --> 00:03:11.440
+E...
+
+00:03:12.800 --> 00:03:15.200
+Venho aqui nas opções de configuração,
+né?
+
+00:03:15.240 --> 00:03:20.260
+Eu tenho o menu lateral esquerdo aqui,
+que tem todas as coisas, né?
+
+00:03:20.340 --> 00:03:21.000
+Um menuzinho.
+
+00:03:21.280 --> 00:03:22.280
+E eu tenho aqui...
+
+00:03:22.300 --> 00:03:25.880
+Aqui, nessa parte quase que do meio
+aqui, ó.
+
+00:03:26.120 --> 00:03:29.000
+Core plugins e community plugins.
+
+00:03:30.180 --> 00:03:34.780
+Core plugins, ou plugins nativos e
+plugins da comunidade.
+
+00:03:35.280 --> 00:03:37.200
+Vamos pegar essa lista aqui, ó.
+
+00:03:37.240 --> 00:03:41.000
+De core plugins, que são os plugins
+nativos.
+
+00:03:41.500 --> 00:03:45.620
+Você vai ver que tem muitos já
+habilitados.
+
+00:03:45.720 --> 00:03:48.880
+Se tiver alguma coisa diferente do meu,
+não se preocupe.
+
+00:03:48.900 --> 00:03:51.780
+Talvez eu tenha habilitado uma coisa ou
+outra que vem default.
+
+00:03:52.300 --> 00:03:55.560
+E não estava habilitado, e eu daí
+habilitei.
+
+00:03:56.620 --> 00:04:00.100
+E você tem, já aqui embaixo, ó.
+
+00:04:00.220 --> 00:04:01.920
+Nessa parte aqui, nessa lista, né?
+
+00:04:02.080 --> 00:04:07.760
+Você tem a lista de core plugins que
+possuem configuração.
+
+00:04:08.540 --> 00:04:09.220
+Então, ó.
+
+00:04:09.280 --> 00:04:09.960
+A gente vai ver aqui.
+
+00:04:10.020 --> 00:04:13.900
+Tem vários plugins aqui que são
+superpoderes.
+
+00:04:14.720 --> 00:04:16.880
+Que você acrescenta a ferramenta.
+
+00:04:17.140 --> 00:04:19.460
+Vamos tratar aqui de alguns, né?
+
+00:04:19.500 --> 00:04:21.100
+Alguns que tem, por exemplo...
+
+00:04:22.500 --> 00:04:23.120
+Configuração, tá?
+
+00:04:24.340 --> 00:04:25.660
+Você tem aqui o primeiro, ó.
+
+00:04:25.780 --> 00:04:27.180
+Tô nessa lista aqui embaixo, aqui, ó.
+
+00:04:27.640 --> 00:04:28.880
+Back links, né?
+
+00:04:28.940 --> 00:04:31.820
+É a habilidade de você estar em uma
+nota.
+
+00:04:32.160 --> 00:04:38.280
+E você ver quais são os links que estão
+apontando pra aquela nota.
+
+00:04:38.560 --> 00:04:38.960
+Tá?
+
+00:04:39.260 --> 00:04:43.660
+Na aula passada, eu mostrei como que
+você faz um link interno na nota.
+
+00:04:44.000 --> 00:04:46.620
+Isso aqui tá habilitado e você vê lá,
+né?
+
+00:04:46.680 --> 00:04:49.240
+Como que aparece o link.
+
+00:04:49.560 --> 00:04:51.880
+É um recurso também disponível na
+ferramenta.
+
+00:04:52.860 --> 00:04:53.620
+Canvas.
+
+00:04:53.860 --> 00:04:58.640
+Canvas é uma parte dentro do Obsidian
+onde você pode desenhar.
+
+00:04:58.700 --> 00:05:05.020
+Criar coisas ali onde você coloca texto
+e mais ali.
+
+00:05:05.140 --> 00:05:07.320
+Por exemplo, quero criar um fluxograma.
+
+00:05:07.320 --> 00:05:12.200
+Quero criar uma apresentação percorrendo
+esse fluxograma.
+
+00:05:12.240 --> 00:05:19.980
+Eu quero também fazer um design de
+alguma coisa ali que vai exemplificar
+
+00:05:19.980 --> 00:05:21.040
+melhor a minha ideia.
+
+00:05:21.360 --> 00:05:22.180
+Quero colocar...
+
+00:05:22.180 --> 00:05:23.980
+Quero colocar dentro desse Canva, né?
+
+00:05:24.080 --> 00:05:27.620
+Os quadradinhos ali, os círculos, setas
+e...
+
+00:05:28.000 --> 00:05:29.260
+Cada uma dessas...
+
+00:05:29.260 --> 00:05:33.220
+Em cada um desses locais, eu quero
+colocar um link pra uma nota.
+
+00:05:33.480 --> 00:05:38.160
+Então, eu quero mostrar a coisa gráfica
+ali e quero clicar e ver a nota.
+
+00:05:38.460 --> 00:05:39.680
+Dá pra fazer também.
+
+00:05:40.500 --> 00:05:41.980
+Então, é o Canvas, tá?
+
+00:05:42.200 --> 00:05:44.200
+Ele habilita já isso aqui pra você.
+
+00:05:44.860 --> 00:05:50.620
+Command Palette é o poder de você vir
+aqui na ferramenta, no Obsidian.
+
+00:05:51.080 --> 00:05:51.640
+É...
+
+00:05:52.280 --> 00:05:53.080
+Teclar, né?
+
+00:05:53.140 --> 00:05:54.760
+Command P ou Control P.
+
+00:05:54.840 --> 00:05:58.620
+E ele abre uma paleta que você pode dar
+comandos.
+
+00:05:58.620 --> 00:06:03.340
+Em vez de você pegar com o mouse, clicar
+ou acessar o menu.
+
+00:06:03.720 --> 00:06:05.200
+Command P, Control P.
+
+00:06:05.240 --> 00:06:07.920
+Você vai lá e seleciona, digita o que
+você quer.
+
+00:06:07.980 --> 00:06:09.300
+Muita gente gosta mais, né?
+
+00:06:10.200 --> 00:06:14.940
+Prefere fazer tudo mais ali no teclado
+do que usar o
+
+00:06:14.940 --> 00:06:15.160
+mouse.
+
+00:06:17.400 --> 00:06:18.620
+Notas diárias, né?
+
+00:06:18.740 --> 00:06:19.360
+Day or Notes.
+
+00:06:19.680 --> 00:06:21.620
+É pra você clicar...
+
+00:06:21.640 --> 00:06:27.220
+Ele habilita um botãozinho ali do lado,
+onde você pode clicar e ele vai abrir
+
+00:06:27.220 --> 00:06:29.240
+uma nota única no dia.
+
+00:06:29.920 --> 00:06:33.420
+Colocando ali dia, mês, ano e ela não se
+repete.
+
+00:06:33.540 --> 00:06:36.200
+Então, só vai ter uma nota dessa ali no
+cofre.
+
+00:06:36.660 --> 00:06:38.880
+E você pode, inclusive, né?
+
+00:06:40.120 --> 00:06:45.220
+Selecionar aqui que quando você abrir o
+Obsidian, essa nota já é criada.
+
+00:06:45.620 --> 00:06:48.620
+É uma opção aí de você fazer um
+journaling, né?
+
+00:06:48.680 --> 00:06:50.200
+Um diário ali.
+
+00:06:50.200 --> 00:06:56.140
+Porém, tem esse nativo aqui do Obsidian,
+de você criar o diário.
+
+00:06:57.100 --> 00:07:02.720
+Em partes mais avançadas, vou mostrar
+notas aí mais avançadas pra você fazer
+
+00:07:02.720 --> 00:07:03.560
+isso daí, tá bom?
+
+00:07:04.200 --> 00:07:07.620
+Nós vamos aqui nesse curso do básico ao
+avançado.
+
+00:07:08.480 --> 00:07:09.540
+File Recovery.
+
+00:07:09.940 --> 00:07:17.080
+File Recovery, você pega os arquivos e
+você consegue ver fotografias do arquivo
+
+00:07:17.080 --> 00:07:17.920
+em vários momentos.
+
+00:07:18.700 --> 00:07:20.180
+Vários momentos de alteração.
+
+00:07:20.200 --> 00:07:21.600
+São os snapshots.
+
+00:07:21.680 --> 00:07:25.120
+Então, por exemplo, se eu pego aqui, ó,
+snapshots e eu dou aqui, view.
+
+00:07:26.040 --> 00:07:27.780
+Eu seleciono um arquivo, né?
+
+00:07:27.820 --> 00:07:29.480
+Vamos pegar aqui a...
+
+00:07:30.640 --> 00:07:31.520
+Ó, exemplo.
+
+00:07:32.320 --> 00:07:33.680
+Primeira nota, segunda nota.
+
+00:07:33.880 --> 00:07:35.700
+Eu peguei notas aqui que eu tinha
+criado, ó.
+
+00:07:36.760 --> 00:07:41.860
+Você consegue ver os horários e o que
+foi sendo acrescido da nota.
+
+00:07:42.220 --> 00:07:44.220
+Puxa, essa nota tinha muito pouca coisa,
+né?
+
+00:07:44.400 --> 00:07:45.860
+Vamos pegar aqui...
+
+00:07:47.240 --> 00:07:48.560
+Deixa eu ver se essa nota...
+
+00:07:48.560 --> 00:07:49.680
+Não, essa aqui é que eu peguei, né?
+
+00:07:50.200 --> 00:07:52.200
+Vamos pegar aqui e ver...
+
+00:07:56.080 --> 00:07:57.740
+Esses exemplos de link, né?
+
+00:07:57.780 --> 00:08:00.400
+Que eu dei exemplo, link 1, link 2.
+
+00:08:00.780 --> 00:08:03.200
+Ó, foi acrescentando coisa na nota, ó.
+
+00:08:03.420 --> 00:08:04.820
+Ele mostra, né?
+
+00:08:05.620 --> 00:08:09.500
+E ele pode mostrar só...
+
+00:08:10.340 --> 00:08:12.680
+Mostrar aqui, ó, show changes, né?
+
+00:08:12.760 --> 00:08:13.580
+Mostrar alterações.
+
+00:08:13.860 --> 00:08:16.960
+Ele mostra o que alterou de uma versão
+pra outra.
+
+00:08:17.100 --> 00:08:18.240
+Ó, aqui só tinha o texto.
+
+00:08:19.060 --> 00:08:19.560
+Aqui...
+
+00:08:20.200 --> 00:08:21.780
+Foi acrescentado isso aqui, ó.
+
+00:08:22.420 --> 00:08:22.880
+Tá?
+
+00:08:23.160 --> 00:08:25.440
+Então é muito legal isso aqui, tá?
+
+00:08:25.500 --> 00:08:33.860
+Pra você ver os snapshots aí das suas
+notas e poder recuperar, de repente, ter
+
+00:08:33.860 --> 00:08:34.720
+um histórico, né?
+
+00:08:34.800 --> 00:08:37.260
+Pra você poder recuperar alguma coisa
+que você tenha feito
+
+00:08:37.260 --> 00:08:37.500
+aí.
+
+00:08:40.260 --> 00:08:46.040
+Note Composer é pra você poder juntar
+uma nota com outra, né?
+
+00:08:46.100 --> 00:08:48.600
+Você pega aqui, cria uma tecla de atalho
+pra isso aqui.
+
+00:08:48.600 --> 00:08:54.080
+E você pode, de repente, pegar um texto
+que você tá extraindo, né?
+
+00:08:54.140 --> 00:08:58.580
+Você tem uma nota lá grande, você
+seleciona uma parte do texto, tem um
+
+00:08:58.580 --> 00:09:00.180
+botão direito lá, extrair.
+
+00:09:00.700 --> 00:09:02.820
+O que que você quer fazer com esse
+extrair?
+
+00:09:02.900 --> 00:09:03.860
+Quer já apontar?
+
+00:09:03.960 --> 00:09:09.760
+Quer já pegar esse texto que você
+selecionou e tá mandando extrair e já
+
+00:09:09.760 --> 00:09:11.060
+criar uma nova nota?
+
+00:09:11.500 --> 00:09:13.440
+Então é pra isso que serve, tá?
+
+00:09:14.560 --> 00:09:18.580
+Page Preview é pra simplesmente você
+poder pegar...
+
+00:09:18.580 --> 00:09:23.420
+E no link, quando você passa o mouse no
+link de uma nota, que você aprendeu a
+
+00:09:23.420 --> 00:09:24.740
+criar na aula passada.
+
+00:09:24.800 --> 00:09:26.420
+Você tem um link pra uma nota.
+
+00:09:26.620 --> 00:09:30.580
+Você passa o mouse em cima, você
+consegue ter um preview daquilo,
+
+00:09:30.740 --> 00:09:31.200
+entendeu?
+
+00:09:31.380 --> 00:09:32.800
+Do que tá na outra nota.
+
+00:09:33.520 --> 00:09:34.260
+Tá legal?
+
+00:09:34.400 --> 00:09:42.420
+E Quick Switcher é de você poder pegar e
+rapidamente...
+
+00:09:43.220 --> 00:09:46.080
+Você tem uma tecla de atalho que você
+aperta, né?
+
+00:09:46.140 --> 00:09:48.080
+E seleciona, acho que é...
+
+00:09:48.580 --> 00:09:49.280
+Command -O, no caso.
+
+00:09:49.540 --> 00:09:56.400
+Esse Quick Switcher, ele abre uma tela
+onde você pode ir de uma nota pra outra
+
+00:09:56.400 --> 00:09:57.300
+mais rapidamente.
+
+00:09:57.820 --> 00:09:58.940
+Simplesmente é isso, né?
+
+00:09:59.140 --> 00:10:02.880
+É uma ferramenta pra facilitar aí você
+ir de uma nota pra outra
+
+00:10:02.880 --> 00:10:03.480
+rapidamente.
+
+00:10:05.920 --> 00:10:06.440
+Templates.
+
+00:10:06.580 --> 00:10:07.740
+Puxa, isso é muito legal.
+
+00:10:07.980 --> 00:10:16.460
+Isso aqui, o template, você cria um
+modelo de nota e você vai usar bastante.
+
+00:10:16.820 --> 00:10:18.040
+O journaling, por exemplo.
+
+00:10:18.040 --> 00:10:18.760
+É um deles.
+
+00:10:19.020 --> 00:10:22.000
+Imagina que você montou um diário e você
+fala...
+
+00:10:22.000 --> 00:10:27.420
+Caramba, eu quero que todo dia eu tenha
+essa nota criada aqui pra ser um diário.
+
+00:10:27.540 --> 00:10:28.400
+Isso é um template.
+
+00:10:28.700 --> 00:10:29.300
+Isso é um modelo.
+
+00:10:29.580 --> 00:10:34.840
+Então você define uma pasta onde vão
+estar os seus modelos, tá?
+
+00:10:34.980 --> 00:10:41.220
+E você tem aqui como que você quer criar
+o nome desses modelos.
+
+00:10:41.280 --> 00:10:43.640
+Só que assim, eu tô passando por essas
+opções...
+
+00:10:43.640 --> 00:10:45.680
+Você tá vendo que eu tô passando
+rapidamente.
+
+00:10:46.180 --> 00:10:47.520
+Mas é porque...
+
+00:10:47.520 --> 00:10:49.460
+Porque nós vamos ter aulas disso tudo.
+
+00:10:49.620 --> 00:10:50.840
+Você vai ter uma aula de templates.
+
+00:10:51.160 --> 00:10:56.640
+Onde vai ter mais coisas e você vai ter
+ainda templates de modo mais avançado.
+
+00:10:58.140 --> 00:11:02.000
+Então, não é que eu tô pulando e
+passando rapidamente superficialmente.
+
+00:11:02.160 --> 00:11:06.240
+É que nessa aula eu tô falando sobre
+plugins e eu tô explicando o que é um
+
+00:11:06.240 --> 00:11:07.200
+plugin nativo.
+
+00:11:08.240 --> 00:11:08.720
+Pronto.
+
+00:11:09.000 --> 00:11:11.440
+E nas próximas aulas, né?
+
+00:11:11.560 --> 00:11:12.020
+Quando...
+
+00:11:12.020 --> 00:11:14.560
+Ah, eu quero avançar sobre templates.
+
+00:11:14.900 --> 00:11:17.220
+Aí você vai na aula específica de
+templates.
+
+00:11:17.520 --> 00:11:18.540
+E vai avançar lá.
+
+00:11:18.660 --> 00:11:22.820
+Você entendeu como que eu quero pegar e
+fazer a parte prática com você?
+
+00:11:22.880 --> 00:11:24.160
+Eu quero que você não perca tempo.
+
+00:11:24.320 --> 00:11:26.740
+Eu quero que você não veja conteúdo que
+você não tá usando agora.
+
+00:11:27.160 --> 00:11:32.320
+Então, eu tô falando sobre plugin porque
+nós vamos usar uma coisa agora que vai
+
+00:11:32.320 --> 00:11:32.940
+envolver plugin.
+
+00:11:33.160 --> 00:11:38.020
+Então é isso que é necessário pra você
+didaticamente, pedagogicamente aprender
+
+00:11:38.020 --> 00:11:38.380
+agora.
+
+00:11:38.660 --> 00:11:38.980
+Tá legal?
+
+00:11:39.440 --> 00:11:40.620
+Isso são os plugins.
+
+00:11:40.880 --> 00:11:42.400
+Isso são plugins nativos.
+
+00:11:42.520 --> 00:11:45.100
+Você vai ver que além desses, tem outros
+aqui, ó.
+
+00:11:45.800 --> 00:11:47.500
+Por exemplo, AudioHackers.
+
+00:11:47.520 --> 00:11:48.840
+Você pode habilitar.
+
+00:11:49.080 --> 00:11:49.860
+O que que é?
+
+00:11:49.960 --> 00:11:51.720
+Ó, se você observar aqui, ó.
+
+00:11:51.740 --> 00:11:52.920
+Nesse meu lado aqui, ó.
+
+00:11:52.920 --> 00:11:53.560
+Vai surgir.
+
+00:11:53.560 --> 00:11:55.320
+Quando eu habilitar, vai surgir um
+botão.
+
+00:11:55.480 --> 00:11:55.920
+Ó.
+
+00:11:56.880 --> 00:11:58.760
+Vai surgir um botãozinho aqui, ó.
+
+00:11:58.780 --> 00:11:59.160
+Um ícone.
+
+00:11:59.240 --> 00:12:00.640
+Que é de você gravar um áudio.
+
+00:12:00.720 --> 00:12:04.960
+E esse áudio, ele é colocado dentro da
+nota que tá ativa ali.
+
+00:12:05.120 --> 00:12:05.460
+Tá?
+
+00:12:05.860 --> 00:12:11.040
+Ó, bookmarks é você poder salvar o
+arquivo, como eu expliquei na aula do
+
+00:12:11.040 --> 00:12:11.300
+layout.
+
+00:12:11.960 --> 00:12:13.580
+Canvas, como eu já expliquei.
+
+00:12:14.460 --> 00:12:15.340
+Notas diárias.
+
+00:12:15.620 --> 00:12:16.060
+Tarará.
+
+00:12:16.340 --> 00:12:17.000
+Que mais?
+
+00:12:17.000 --> 00:12:18.100
+Que mais temos aqui, hein?
+
+00:12:18.960 --> 00:12:20.980
+Publish é quando você vai usar o...
+
+00:12:21.600 --> 00:12:23.660
+Até a opção paga dele de publicar.
+
+00:12:23.740 --> 00:12:25.160
+Você não precisa usar isso aqui.
+
+00:12:25.700 --> 00:12:28.300
+Sync é pra você usar a sincronização
+paga.
+
+00:12:28.400 --> 00:12:30.320
+Você já viu nas aulas anteriores que não
+precisa.
+
+00:12:32.380 --> 00:12:35.340
+Slides é pra você poder pegar, criar uma
+nota.
+
+00:12:35.600 --> 00:12:38.060
+Você separa com traço, traço, traço.
+
+00:12:38.100 --> 00:12:39.780
+Que é a linha vertical.
+
+00:12:40.200 --> 00:12:43.560
+E cada parte da nota se torna uma
+apresentação.
+
+00:12:43.720 --> 00:12:45.300
+Eu acho que se eu habilitar...
+
+00:12:46.040 --> 00:12:46.820
+Ele cria...
+
+00:12:46.820 --> 00:12:47.280
+Ele cria ali também.
+
+00:12:48.320 --> 00:12:49.620
+Não, não cria um botão.
+
+00:12:49.620 --> 00:12:51.000
+Deve ter só o comando P.
+
+00:12:51.180 --> 00:12:55.520
+O modo de você apresentar como se fosse
+um PowerPoint.
+
+00:12:56.580 --> 00:13:01.680
+Porém, você vai ter uma aula onde eu vou
+explicar sobre uma apresentação mais
+
+00:13:01.680 --> 00:13:02.420
+elaborada.
+
+00:13:02.780 --> 00:13:02.920
+Tá?
+
+00:13:03.160 --> 00:13:06.000
+Você pode usar o Obsidia, inclusive, pra
+apresentar.
+
+00:13:06.020 --> 00:13:11.080
+Você tem uma nota e você quer apresentar
+e não quer usar o Canva, usar o
+
+00:13:11.080 --> 00:13:11.500
+PowerPoint.
+
+00:13:11.620 --> 00:13:15.160
+Porque é uma apresentação ali, não uma
+palestra.
+
+00:13:15.200 --> 00:13:16.280
+Uma coisa que você quer...
+
+00:13:17.000 --> 00:13:18.620
+Não perder tempo.
+
+00:13:18.860 --> 00:13:20.540
+Você já pode usar o próprio Obsidian.
+
+00:13:20.680 --> 00:13:23.500
+Então, assim, dá pra usar o Obsidian pra
+tudo, tá bom?
+
+00:13:24.600 --> 00:13:30.120
+Então, isso é o necessário pra você
+aprender e saber o que é plugin.
+
+00:13:30.400 --> 00:13:35.320
+Que muita gente instala, muita gente tá
+vendo coisa e não sabe o que é.
+
+00:13:35.720 --> 00:13:37.560
+Agora você já tem consciência.
+
+00:13:37.660 --> 00:13:44.160
+E na próxima aula, aí sim eu vou falar
+de um plugin que é interessante e é
+
+00:13:44.160 --> 00:13:46.560
+necessário para nós...
+
+00:13:46.820 --> 00:13:51.120
+Trazermos notas para o Obsidian, tá bom?
+
+00:13:51.220 --> 00:13:53.460
+Só que ele é um plugin, tá?
+
+00:13:53.560 --> 00:13:54.720
+Da comunidade.
+
+00:13:54.820 --> 00:13:58.240
+E aí, deixa eu ver se já não passaram
+pra cá internamente.
+
+00:13:58.480 --> 00:13:59.460
+Não, não passaram não.
+
+00:13:59.560 --> 00:14:01.360
+Então, é um plugin da comunidade ainda.
+
+00:14:01.540 --> 00:14:06.680
+Eu até achei que eles fossem trazer para
+dentro do próprio Obsidian.
+
+00:14:07.400 --> 00:14:08.480
+Mas é aqui, ó.
+
+00:14:08.600 --> 00:14:12.560
+Nós vamos pegar aqui depois, na próxima
+aula, e vamos entrar em Community
+
+00:14:12.560 --> 00:14:13.220
+Plugins.
+
+00:14:13.440 --> 00:14:15.240
+Que são os plugins da comunidade.
+
+00:14:15.240 --> 00:14:16.600
+Pra pegar e habilitar.
+
+00:14:16.600 --> 00:14:17.100
+Traz esse plugin.
+
+00:14:18.040 --> 00:14:23.320
+Que nós vamos fazer importação de notas
+dentro do Obsidian, tá bom?
+
+00:14:23.740 --> 00:14:25.960
+Então, por hoje, ficamos aqui nessa
+aula.
+
+00:14:26.680 --> 00:14:28.000
+Até a próxima.

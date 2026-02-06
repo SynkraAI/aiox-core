@@ -1,0 +1,640 @@
+WEBVTT
+
+00:00:01.140 --> 00:00:05.360
+Seja bem -vindo, Vendário, a essa aula
+que nós vamos falar sobre o segundo
+
+00:00:05.360 --> 00:00:07.560
+cérebro, agora dentro do obsídia.
+
+00:00:07.820 --> 00:00:14.200
+Você sabia que a maioria das pessoas
+ouve falar da ferramenta, ouve falar do
+
+00:00:14.200 --> 00:00:15.440
+conceito do segundo cérebro?
+
+00:00:15.860 --> 00:00:21.040
+Quando chega no site, baixa a
+ferramenta, vai para a interface e olha,
+
+00:00:21.320 --> 00:00:26.600
+não gosta do que vê e desiste, tá?
+
+00:00:26.600 --> 00:00:32.200
+E alguns ouvem falar sobre o segundo
+cérebro, também de maneira muito
+
+00:00:32.200 --> 00:00:41.000
+superficial, e ainda acabam que não
+conseguem usar nada, nem levar isso à
+
+00:00:41.000 --> 00:00:41.500
+prática.
+
+00:00:42.500 --> 00:00:45.080
+Por isso que você está aqui e eu vou te
+falar.
+
+00:00:45.380 --> 00:00:52.280
+Nós temos um método, e você já começou
+do jeito certo, você está ouvindo falar
+
+00:00:52.280 --> 00:00:58.500
+sobre os conceitos, sobre aquilo que é
+necessário, que já dá um aumento de
+
+00:00:58.500 --> 00:01:04.180
+consciência muito, muito, muito, muito
+grande para você.
+
+00:01:04.380 --> 00:01:06.660
+Então, vamos lá.
+
+00:01:06.760 --> 00:01:11.540
+Eu vou mostrar para você o que é o
+obsídia, mas eu não quero que você fique
+
+00:01:11.540 --> 00:01:12.220
+preocupado.
+
+00:01:12.320 --> 00:01:17.960
+Nós vamos fazer a instalação dele de
+forma certa.
+
+00:01:18.420 --> 00:01:23.780
+Muita gente pede essa ferramenta, não
+consegue sincronizar com um aparelho
+
+00:01:23.780 --> 00:01:24.020
+mobile.
+
+00:01:25.360 --> 00:01:26.520
+Começa a instalar.
+
+00:01:26.600 --> 00:01:34.060
+E não sabe onde colocou os arquivos, não
+sabe encontrar os arquivos, onde está
+
+00:01:34.060 --> 00:01:35.540
+organizado esses arquivos.
+
+00:01:35.640 --> 00:01:42.080
+Então, aqui você vai ver que vai
+eliminar horas, horas, horas e horas de
+
+00:01:42.080 --> 00:01:47.900
+vídeos da internet, procura,
+configuração, batida de cabeça, nada
+
+00:01:47.900 --> 00:01:48.180
+disso.
+
+00:01:48.320 --> 00:01:52.780
+Você está indo no caminho certo, você
+está vendo que com aulas pequenas,
+
+00:01:52.780 --> 00:01:59.100
+curtas, e que a gente vai colocando o
+conhecimento, aos poucos, você vai
+
+00:01:59.100 --> 00:02:00.140
+entendendo o que é.
+
+00:02:00.440 --> 00:02:02.980
+Eu tenho aqui o obsídia.
+
+00:02:03.560 --> 00:02:08.000
+Eu estou com ele aqui e um cofre vazio.
+
+00:02:08.020 --> 00:02:12.480
+Você vai entender o que é um cofre, mas
+aqui eu quero mostrar a cara da
+
+00:02:12.480 --> 00:02:13.460
+ferramenta para vocês.
+
+00:02:14.960 --> 00:02:20.620
+Explicado o que é o segundo cérebro, que
+é essa forma de coletar informação, de
+
+00:02:20.620 --> 00:02:29.440
+pegar informação e gerir ela, você tem,
+então, a ideia que você vai ter notas,
+
+00:02:29.440 --> 00:02:35.060
+que você vai ter anotações, que você vai
+ter outras coisas que você vai inserir
+
+00:02:35.060 --> 00:02:42.100
+ali, que você insere nas anotações,
+links, imagens, arquivos, PDF, enfim,
+
+00:02:42.220 --> 00:02:46.120
+tem tudo aquilo ali que você
+costumeiramente está tendo e vê nas
+
+00:02:46.120 --> 00:02:49.220
+ferramentas tradicionais, tem aquelas
+que eu mostrei para você lá, né,
+
+00:02:49.300 --> 00:02:52.400
+Evernote, Notion, enfim, várias outras.
+
+00:02:53.380 --> 00:02:57.480
+Quando você chega no obsídia e instala,
+ele vai ter essa cara aqui, ele tem um
+
+00:02:57.480 --> 00:03:03.440
+painel, né, ele tem ícones aqui, você
+vai perceber que ele tem pastas,
+
+00:03:03.440 --> 00:03:08.360
+arquivos, você pode criar notas aqui,
+né.
+
+00:03:09.820 --> 00:03:16.640
+Quando você insere isso, né, quando você
+abre a ferramenta e você percebe que é
+
+00:03:16.640 --> 00:03:21.120
+assim, você pode achar, não é tão
+intuitiva quanto uma ferramenta de
+
+00:03:21.120 --> 00:03:25.380
+anotação, mas agora você está entendendo
+que não é simplesmente uma ferramenta de
+
+00:03:25.380 --> 00:03:25.960
+anotação.
+
+00:03:26.020 --> 00:03:31.940
+Por isso você não pode parar e olhar
+para ela e achar que é uma ferramenta
+
+00:03:31.940 --> 00:03:37.800
+simplesmente como as outras e que tem a
+mesma funcionalidade.
+
+00:03:38.300 --> 00:03:39.380
+Não é, tá?
+
+00:03:39.460 --> 00:03:44.360
+Eu vou te explicar, vou te falar e você
+com certeza vai se aproveitar disso.
+
+00:03:44.620 --> 00:03:49.740
+Nós temos aqui os arquivos, né, eu criei
+aqui um cofre com arquivos de teste
+
+00:03:49.740 --> 00:03:51.700
+aqui, porque eu não quero misturar.
+
+00:03:51.720 --> 00:03:57.340
+Eu não quero mostrar de cara para vocês
+o meu segundo cérebro, a minha base,
+
+00:03:57.420 --> 00:04:02.080
+para não misturar o que eu faço do jeito
+que eu faço com a ferramenta.
+
+00:04:02.120 --> 00:04:05.460
+Eu quero que você tenha a noção aqui da
+interface da ferramenta primeiro, que eu
+
+00:04:05.460 --> 00:04:08.160
+vou ainda mostrar em detalhes na próxima
+aula.
+
+00:04:08.280 --> 00:04:12.780
+Mas aqui, o objetivo, a minha missão
+nessa aula é que você saia dessa aula
+
+00:04:12.780 --> 00:04:17.980
+entendendo, puxa, realmente, não posso
+chegar diante da ferramenta e
+
+00:04:17.980 --> 00:04:20.320
+simplesmente achar que...
+
+00:04:22.740 --> 00:04:28.260
+É mais bonita a outra, é mais fácil,
+enfim, você está aqui numa mudança de
+
+00:04:28.260 --> 00:04:33.180
+mentalidade sobre a forma de
+aprendizado, a forma de criar conteúdo,
+
+00:04:33.560 --> 00:04:38.460
+a forma de criar novos insights, de você
+clonar um cérebro, de você pegar
+
+00:04:38.460 --> 00:04:40.720
+conhecimento de alguém, usar a seu
+favor.
+
+00:04:40.820 --> 00:04:45.780
+Então, é outra pegada que nós estamos
+fazendo aqui, tá?
+
+00:04:46.740 --> 00:04:50.900
+Você tem abas aqui na ferramenta, você
+tem um menu lateral aqui, ó.
+
+00:04:50.900 --> 00:04:57.080
+E o segundo cérebro, você sabe que, você
+já deve ter visto aquelas conexões
+
+00:04:57.080 --> 00:04:58.040
+neurais, né?
+
+00:04:58.440 --> 00:05:02.780
+As sinapses acontecendo, você já deve
+ter visto alguma imagem dessa por aí.
+
+00:05:02.940 --> 00:05:07.360
+Eu aqui tenho uma base de arquivos
+interconectados, só para você imaginar
+
+00:05:07.360 --> 00:05:15.080
+que aqui seriam suas notas, seriam seus
+arquivos de anotação, que precisam estar
+
+00:05:15.080 --> 00:05:18.320
+numa metodologia correta, que eu vou
+também te ensinar.
+
+00:05:18.560 --> 00:05:20.880
+Mas o que seria o segundo cérebro no
+observador?
+
+00:05:20.900 --> 00:05:23.800
+O segundo cérebro no obsídio é isso
+aqui, ó.
+
+00:05:24.040 --> 00:05:28.060
+Olha aqui, eu quero mostrar para você,
+para você ter uma ideia do que é isso
+
+00:05:28.060 --> 00:05:28.260
+aqui.
+
+00:05:28.380 --> 00:05:29.880
+Sabe aqueles arquivos que eu mostrei?
+
+00:05:30.140 --> 00:05:33.900
+Eles estão aqui, interconectados, né?
+
+00:05:34.260 --> 00:05:37.940
+Aqui eu tenho arquivos num segundo
+cérebro, tá?
+
+00:05:38.140 --> 00:05:41.660
+Que eles estão conectados, deixa eu
+mostrar aqui para vocês, por exemplo.
+
+00:05:42.420 --> 00:05:46.000
+Eu tenho grupos aqui, ó, de cores, né,
+nesse gráfico.
+
+00:05:46.500 --> 00:05:48.860
+E aqui eu tenho também, eu posso
+mostrar,
+
+00:05:48.900 --> 00:05:49.120
+né?
+
+00:05:52.240 --> 00:05:59.000
+Que esses arquivos, eles estão, ó lá, um
+interligado com o outro.
+
+00:05:59.400 --> 00:06:02.160
+E eu posso também mudar aqui a forma, ó.
+
+00:06:02.220 --> 00:06:08.500
+Aqui vai ficar mais fácil de você ver,
+ó, como eles estão ligados, né?
+
+00:06:08.520 --> 00:06:09.900
+Uma informação na outra.
+
+00:06:11.040 --> 00:06:12.940
+Aqui, deixa eu dar um zoom, olha aqui,
+ó.
+
+00:06:13.340 --> 00:06:18.100
+Você tem arquivos, olha aqui.
+
+00:06:19.380 --> 00:06:20.880
+Arquivos se conectados.
+
+00:06:20.900 --> 00:06:23.080
+Cortando, ó, um com os outros.
+
+00:06:24.200 --> 00:06:27.620
+Alguns mais, outros menos, ó.
+
+00:06:28.480 --> 00:06:35.140
+Isso aqui é uma ideia, né, uma anotação
+conectada com outra.
+
+00:06:36.000 --> 00:06:45.580
+E isso aqui, esse arquivo, é como que o
+seu segundo cérebro, ele vai, deixa eu
+
+00:06:45.580 --> 00:06:46.840
+reforçar um pouco aqui, ó.
+
+00:06:47.260 --> 00:06:49.520
+Ele vai ser para você, ó.
+
+00:06:50.000 --> 00:06:50.560
+Ele vai...
+
+00:06:51.620 --> 00:06:56.340
+Apresentar para você as suas informações
+conectadas.
+
+00:06:56.980 --> 00:07:01.640
+Quando você começar a criar o seu
+segundo cérebro e juntar informações
+
+00:07:01.640 --> 00:07:07.660
+desse jeito, você vai ver, inclusive, o
+seu segundo cérebro crescendo, ó.
+
+00:07:08.540 --> 00:07:10.720
+Ó, você consegue ter isso aqui, ó.
+
+00:07:11.080 --> 00:07:19.620
+Você consegue ter uma visualização de
+como que as suas informações, ele anima
+
+00:07:19.620 --> 00:07:20.880
+para você, como é que o seu segundo
+cérebro...
+
+00:07:20.900 --> 00:07:22.060
+O cérebro vai crescendo.
+
+00:07:23.040 --> 00:07:26.480
+Aí você vai olhar e falar assim, nossa,
+mas para que isso, né?
+
+00:07:26.520 --> 00:07:30.660
+É simplesmente uma ferramenta visual,
+uma ferramenta que eu vou juntar as
+
+00:07:30.660 --> 00:07:32.140
+informações e para ter isso aqui?
+
+00:07:32.840 --> 00:07:33.280
+Não.
+
+00:07:33.860 --> 00:07:39.200
+Isso aqui eu só estou demonstrando que
+não é uma ferramenta qualquer, mas é uma
+
+00:07:39.200 --> 00:07:46.320
+ferramenta que ela tem um funcionamento
+como esse cérebro biológico tem, de você
+
+00:07:46.320 --> 00:07:47.680
+criar as conexões.
+
+00:07:48.140 --> 00:07:51.960
+Muita gente, quando começa a usar da
+forma certa, o segundo cérebro no
+
+00:07:51.960 --> 00:07:55.080
+obsídia, perceba o que eu vou falar
+agora.
+
+00:07:55.320 --> 00:07:57.200
+Elas viciam nisso aqui.
+
+00:07:57.380 --> 00:07:58.040
+Por quê?
+
+00:07:58.080 --> 00:08:02.200
+Porque elas começam a ver as informações
+se juntarem, elas começam a perceber uma
+
+00:08:02.200 --> 00:08:04.200
+maneira nova de vincar informações.
+
+00:08:04.620 --> 00:08:09.120
+Parece que muda o comportamento, o jeito
+de você pensar.
+
+00:08:09.300 --> 00:08:13.100
+Você vai começar a pensar de forma
+diferente, de forma concatenada, de
+
+00:08:13.100 --> 00:08:15.280
+forma a vincar informações, a juntar
+informações.
+
+00:08:15.840 --> 00:08:21.100
+Parece que o seu cérebro biológico
+também aprende a juntar, a juntar
+
+00:08:21.100 --> 00:08:24.280
+informações e a fazer a coisa da forma
+correta, como você está vendo aqui nesse
+
+00:08:24.280 --> 00:08:24.560
+vídeo.
+
+00:08:25.060 --> 00:08:28.740
+Então, ele vai trazendo para você uma
+nova dinâmica.
+
+00:08:29.080 --> 00:08:33.460
+Tem um daqueles autores que eu falei,
+que é o Matt Jaro, que ele, por exemplo,
+
+00:08:33.660 --> 00:08:38.180
+quando ele pega esse gráfico aqui, ele
+usa uma metodologia, eu posso trazer
+
+00:08:38.180 --> 00:08:41.780
+isso depois de uma aula, ele usa uma
+metodologia lá que ele pega, por
+
+00:08:41.780 --> 00:08:47.440
+exemplo, os grupos de tags, que eu vou
+ensinar a vocês o que é, cada corzinha
+
+00:08:47.440 --> 00:08:50.780
+diferente que você está vendo aqui, é
+uma tag diferente.
+
+00:08:50.900 --> 00:08:57.920
+Eu lembro que ele cria, nas notas dele,
+ele cria, por exemplo, uma tag chamada
+
+00:08:57.920 --> 00:08:59.000
+Problema.
+
+00:08:59.360 --> 00:09:02.840
+Numa outra, ele cria uma tag chamada
+Solução.
+
+00:09:03.020 --> 00:09:05.680
+Estou dando um exemplo bem simples.
+
+00:09:06.380 --> 00:09:12.680
+Quando ele mostra o gráfico, ele olha o
+gráfico, ele consegue enxergar as notas
+
+00:09:12.680 --> 00:09:19.260
+de Problema e Solução se conectando, ele
+consegue, olhando para o gráfico, vendo
+
+00:09:19.260 --> 00:09:20.900
+o nome das notas, ele consegue ver as
+notas de Problema e Solução, ele
+
+00:09:20.900 --> 00:09:21.880
+consegue criar conteúdo.
+
+00:09:22.280 --> 00:09:23.660
+Para você ter uma ideia de que coisa
+doida.
+
+00:09:23.820 --> 00:09:29.340
+Os insights no cérebro biológico
+acontecem com ele olhando os insights,
+
+00:09:30.420 --> 00:09:37.020
+as conexões, vamos falar, entre aspas,
+as sinapses do cérebro, do segundo
+
+00:09:37.020 --> 00:09:38.200
+cérebro na ferramenta.
+
+00:09:38.300 --> 00:09:43.560
+Então, é isso que eu vou ensinar você a
+criar e que vai fazer você entrar num
+
+00:09:43.560 --> 00:09:49.680
+outro patamar e que vai fazer com que, a
+partir de agora, você não sofra mais com
+
+00:09:49.680 --> 00:09:56.980
+excesso de conteúdo, você vai aprender,
+você vai capturar, você vai conectar as
+
+00:09:56.980 --> 00:09:58.080
+coisas de maneira certa.
+
+00:09:58.240 --> 00:10:02.600
+E, óbvio, é que eu estou falando para
+você o seguinte, de você só inserir
+
+00:10:02.600 --> 00:10:07.740
+coisa na mão aqui na ferramenta, mas
+isso aqui ainda vai envolver você
+
+00:10:07.740 --> 00:10:13.160
+inserir informação a partir de sites, a
+partir de vídeos, a partir de
+
+00:10:13.160 --> 00:10:17.560
+inteligência artificial que vai
+potencializar, você vai poder, com
+
+00:10:17.560 --> 00:10:21.980
+inteligência artificial, por exemplo,
+chegar aqui nesse segundo cérebro e
+
+00:10:21.980 --> 00:10:29.640
+dizer o seguinte, olha, baseado nas
+minhas notas que eu criei sobre saúde,
+
+00:10:30.120 --> 00:10:37.040
+ó, essas notas aqui, diga para mim qual
+é um plano de ação que eu devo fazer.
+
+00:10:37.360 --> 00:10:41.580
+Olha só, você vai conseguir conversar
+com o seu cérebro, conversar com os seus
+
+00:10:41.580 --> 00:10:48.060
+insights, conversar com os seus
+pensamentos, conversar com tudo que você
+
+00:10:48.060 --> 00:10:53.960
+captou, de tudo que é lugar, e isso, ele
+ser dado para você de maneira resumida,
+
+00:10:53.960 --> 00:11:01.720
+prática, e muito mais fácil, e rápida, e
+produtiva do que você depender somente
+
+00:11:01.720 --> 00:11:03.640
+do seu cérebro biológico.
+
+00:11:03.780 --> 00:11:09.740
+E aí você vai dizer, mas peraí, com isso
+eu não estou limitando o meu cérebro
+
+00:11:09.740 --> 00:11:10.420
+biológico?
+
+00:11:10.540 --> 00:11:15.020
+Não, você está aproveitando melhor ele,
+você está aliviando ele para que o
+
+00:11:15.020 --> 00:11:19.240
+cérebro biológico consiga fazer aquilo
+que você tem que fazer, criar.
+
+00:11:20.020 --> 00:11:25.220
+Brincar, brincar, é produzir, fazer com
+que as coisas que podem ser
+
+00:11:25.220 --> 00:11:31.160
+automatizadas sejam feitas e você possa
+aproveitar o verdadeiro potencial seu
+
+00:11:31.160 --> 00:11:32.860
+para criar coisas, ok?
+
+00:11:34.220 --> 00:11:38.540
+Agora, eu acho que a gente pode começar
+da maneira certa, vou começar na próxima
+
+00:11:38.540 --> 00:11:46.340
+aula, a instalação de um jeito certo e
+matador que não vai fazer você perder
+
+00:11:46.340 --> 00:11:47.160
+tempo, tá?
+
+00:11:47.260 --> 00:11:48.960
+Não vai fazer você perder tempo.
+
+00:11:49.600 --> 00:11:53.500
+Direto ao ponto, você vai conseguir
+instalar, sincronizar com os seus
+
+00:11:53.500 --> 00:11:59.700
+aplicativos mobile, com o seu celular,
+com o seu tablet, sem perder horas e
+
+00:11:59.700 --> 00:12:04.280
+horas e horas, como tantos alunos eu
+ajudei no processo de instalação,
+
+00:12:04.360 --> 00:12:07.560
+começaram da forma errada, e aí dá um
+trabalho danado.
+
+00:12:07.680 --> 00:12:09.420
+Você vai começar do jeito certo, tá?
+
+00:12:09.520 --> 00:12:14.780
+A instalação de um jeito correto para
+você economizar tempo.

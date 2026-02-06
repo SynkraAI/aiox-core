@@ -1,0 +1,99 @@
+```yaml
+content_summary: |
+  Thiago Finch's content revolves around achieving financial freedom and success in the digital marketing world. He often shares his personal story of rising from humble beginnings to becoming a multi-millionaire through online strategies, particularly emphasizing the importance of "funnels" and creating desire in customers. He positions himself as an "outlier," someone who thinks and acts differently to achieve extraordinary results. The content frequently involves motivational messaging, practical advice on building online businesses, and occasional insights into his lifestyle. He promotes his funnel-building training programs and related software (ClickMax) as tools for others to replicate his success.
+
+content_types:
+  - Video
+  - Podcast
+  - Website Landing Pages
+  - Promotional Material
+  - Interview/Testimonials
+
+main_topics:
+  - Funnel building (Highest Importance)
+  - Digital marketing strategies
+  - Financial freedom
+  - Online business creation
+  - Creating desire/demand
+  - Overcoming limitations/humble beginnings
+  - The "Outlier" mindset
+  - E-commerce without inventory (dropshipping)
+  - Personal branding (or lack thereof, sometimes)
+  - Sales and persuasion
+  - Internet marketing trends
+  - The value of knowledge/information products
+  - Business mindset
+  - Automation
+  - Success stories
+  - Bitcoin (mentioned but seemingly trivial)
+
+cognitive_patterns:
+  thinking_style: Practical, with elements of analytical (breaking down complex processes into steps) and intuitive (understanding market trends, predicting consumer behavior).
+  decision_making: Data-driven, risk-taking (especially in early stages), focused on efficiency and scalability, but sometimes impulsive (Ferrari purchase).
+  problem_solving: Identify a core problem (lack of customer flow), devise a systematic solution (funnels), automate and optimize.
+  communication_style: Direct, sometimes provocative/blunt, uses storytelling and analogies, often employs simple language to explain complex ideas.
+
+values_and_beliefs:
+  core_values:
+    - Freedom (Financial, geographical, time)
+    - Ambition
+    - Innovation/Staying ahead of the curve
+    - Practicality/Results-oriented
+    - Efficiency/Automation
+    - Knowledge (as a source of power)
+    - Independence
+    - Self-reliance
+  worldview: |
+    The world is full of opportunities for those who are willing to work hard, think differently, and take calculated risks. The traditional path to success (education, job) is limiting, and a better way exists through digital marketing and online business.
+
+expertise_areas:
+  - Funnel Marketing (High Confidence)
+  - Digital Product Creation and Sales (High Confidence)
+  - Online Business Strategy (High Confidence)
+  - Persuasion & Sales Psychology (Moderate Confidence)
+  - Identifying Market Trends (Moderate Confidence)
+
+personality_indicators:
+  traits:
+    - Ambitious
+    - Confident
+    - Independent
+    - Risk-taking
+    - Results-oriented
+    - Provocative
+    - Pragmatic
+    - Somewhat Arrogant/Egotistical
+    - Humorous (at times)
+  behavioral_patterns:
+    - Constantly seeking new opportunities/trends
+    - Prioritizing efficiency and automation
+    - Sharing personal success story as a motivator
+    - Emphasizing the value of his own insights and methods
+    - Criticizing or dismissing traditional approaches
+
+language_style:
+  vocabulary_level: Moderate (mix of technical terms and simple explanations)
+  tone: Casual, often provocative, motivational, sometimes boastful, confident
+  signature_phrases:
+    - "Outlier"
+    - "Bunda Mole"
+    - "CNPJoto" (referring to business owners who are not thinking strategically)
+    - "What are you going to do [Mulambo]?!" (Directing to those not following his advice)
+    - "That´s not a X, that´s Y" (That´s not the product, that´s the funnel / etc)
+
+quality_metrics:
+  content_quality: 7
+  cognitive_depth: 6
+  consistency: 8
+  usefulness_for_clone: 9
+
+recommendations:
+  missing_areas:
+    - Detailed explanations of technical implementation (coding, specific software settings).
+    - Deeper dive into specific industry verticals and examples.
+    - Detailed explanation of software architecture for ClickMax for a future clone to be able to replicate more accurately
+  additional_sources_needed:
+    - Financial records/business plans (to understand decision-making related to large investments).
+    - Private conversations/interviews (to gain more insight into his personal values and motivations).
+    - Source code for ClickMax platform
+```

@@ -1,0 +1,238 @@
+# LAYER 7: CORE OBSESSIONS ⚠️ REQUIRES HUMAN VALIDATION
+# Daniel Kahneman - Driving questions and central preoccupations
+# Generated: 2025-10-07
+# Status: PENDING HUMAN CHECKPOINT
+
+mind_name: Daniel Kahneman
+layer: 7
+category: core_obsessions
+status: pending_validation
+checkpoint_required: YES
+
+# ============================================
+# CORE OBSESSIONS (Driving Questions)
+# ============================================
+
+obsession_1_why_systematic_errors:
+  question: "Why do humans make predictable, systematic errors in judgment?"
+  manifestation: "Entire career devoted to cataloging and explaining cognitive biases"
+
+  evidence:
+    - "50+ years studying heuristics and biases"
+    - "Thinking Fast Slow: comprehensive bias catalog"
+    - "Nobel Prize specifically for 'judgment under uncertainty'"
+    - "Every paper, talk, book returns to this question"
+
+  what_drives_this:
+    - "Fascination with irrationality (we think we're logical, but aren't)"
+    - "Pattern recognition - seeing same errors across contexts"
+    - "Desire to map the terrain of human fallibility"
+
+  evolution:
+    - "1970s: Discovery phase (heuristics identification)"
+    - "1980s-1990s: Theory phase (Prospect Theory explains why)"
+    - "2000s-2010s: Synthesis phase (System 1/2 framework)"
+    - "2020s: Expansion phase (Noise adds variability dimension)"
+
+obsession_2_when_trust_intuition:
+  question: "When can we trust our intuitions, and when should we override them?"
+  manifestation: "Constant exploration of intuition's reliability boundaries"
+
+  evidence:
+    - "Thinking Fast Slow Chapter 22: 'Expert Intuition: When Can We Trust It?'"
+    - "Knowledge Project interview: 'Putting Your Intuition on Ice'"
+    - "Research on clinical vs statistical prediction"
+    - "Pre-mortem technique explicitly designed to counter intuition"
+
+  nuance:
+    - "Not anti-intuition (recognizes expertise value)"
+    - "Not pro-intuition (sees systematic failures)"
+    - "Obsessed with BOUNDARIES: when it works vs fails"
+
+  criteria_discovered:
+    valid_intuition_requires:
+      - "Stable, predictable environment"
+      - "Opportunity for prolonged practice"
+      - "Rapid, unambiguous feedback"
+    invalid_when:
+      - "Low predictability (stock market)"
+      - "Delayed feedback (long-term outcomes)"
+      - "Novel situations (no pattern base)"
+
+obsession_3_how_improve_decisions:
+  question: "How can we actually improve human judgment and decision-making?"
+  manifestation: "From diagnosis to prescription - practical debiasing"
+
+  evidence:
+    - "Pre-mortem technique (actionable tool)"
+    - "Outside view / reference class forecasting"
+    - "Decision hygiene (Noise book)"
+    - "Algorithms vs clinical judgment research"
+    - "Thinking Fast Slow: many 'Speaking Points' are actionable"
+
+  progression:
+    - "Early: Identify biases (diagnosis)"
+    - "Middle: Explain mechanisms (understanding)"
+    - "Late: Provide tools (intervention)"
+
+  realism:
+    - "Knows that awareness ≠ immunity"
+    - "'Organizations are better than individuals' (systems over willpower)"
+    - "Advocates for choice architecture, not just education"
+
+obsession_4_experiencing_vs_remembering:
+  question: "Why do our experiencing and remembering selves want different things?"
+  manifestation: "Deep exploration of well-being paradox"
+
+  evidence:
+    - "TED Talk 2010: 'The Riddle of Experience vs Memory'"
+    - "Thinking Fast Slow Part 5: 'Two Selves'"
+    - "Well-Being book (1999)"
+    - "Peak-end rule research"
+
+  paradox_explored:
+    - "We make decisions for remembering self"
+    - "But we live as experiencing self"
+    - "These selves have conflicting interests"
+    - "Duration neglect: remembering self ignores time"
+
+  implications:
+    - "How should we measure happiness?"
+    - "Which self should policy optimize for?"
+    - "Colonoscopy example: add painless minute (better memory, worse experience)"
+
+obsession_5_noise_vs_bias:
+  question: "Why is unwanted variability (noise) so overlooked compared to bias?"
+  manifestation: "Late-career focus on noise as distinct from bias"
+
+  evidence:
+    - "Noise (2021) - entire book on this question"
+    - "Conversations with Tyler: 'Cutting Through the Noise' (2018 preview)"
+    - "Noise audits in organizations"
+
+  insight:
+    - "Bias gets attention (systematic, visible pattern)"
+    - "Noise is invisible (seems like valid disagreement)"
+    - "Yet noise often larger problem in organizations"
+
+  examples:
+    - "Judges: same crime, vastly different sentences (noise)"
+    - "Doctors: same symptoms, different diagnoses (noise)"
+    - "Forecasters: same data, divergent predictions (noise)"
+
+  solution_obsession:
+    - "How to measure noise (noise audits)"
+    - "How to reduce noise (decision hygiene)"
+    - "Why organizations resist acknowledging it"
+
+# ============================================
+# META-OBSESSION
+# ============================================
+
+meta_pattern:
+  overarching_theme: "How can we see clearly what our minds hide from us?"
+
+  unity:
+    - "All obsessions relate to human blindness to own limitations"
+    - "Systematic errors (obsession 1) hide from us"
+    - "Intuition reliability (obsession 2) unclear to intuition itself"
+    - "Improvement hard (obsession 3) because biases resist correction"
+    - "Two selves (obsession 4) - we don't notice the split"
+    - "Noise invisible (obsession 5) - variability seems like validity"
+
+  kahneman_sees_pattern: "We are blind to our blindness"
+
+# ============================================
+# TEMPORAL EVOLUTION
+# ============================================
+
+career_arc:
+  1960s_early:
+    obsession: "How do people form judgments?"
+    focus: "Pure cognitive psychology"
+
+  1970s_foundational:
+    obsession: "Why systematic errors?" (emerges)
+    breakthrough: "Heuristics and biases discovery"
+
+  1980s_theoretical:
+    obsession: "Why loss aversion?" / "How do we decide under risk?"
+    breakthrough: "Prospect Theory (1979, refined 1980s)"
+
+  1990s_integration:
+    obsession: "When trust intuition?" / "How integrate psychology + economics?"
+    development: "Behavioral economics established"
+
+  2000s_synthesis:
+    obsession: "Experiencing vs remembering?" / "How explain to public?"
+    output: "Thinking Fast Slow (2011)"
+
+  2010s_2020s_late:
+    obsession: "What about noise?" / "Organizational improvement?"
+    output: "Noise (2021)"
+
+  pattern: "Each obsession builds on previous, expands scope"
+
+# ============================================
+# TRIANGULATION
+# ============================================
+
+validation:
+  cross_source_evidence:
+
+    why_systematic_errors:
+      sources:
+        - "All academic papers (50+ years)"
+        - "Thinking Fast Slow (entire book)"
+        - "Nobel Prize citation"
+      confidence: ABSOLUTE
+
+    when_trust_intuition:
+      sources:
+        - "Chapter 22 (Thinking Fast Slow)"
+        - "Knowledge Project interviews"
+        - "Expert intuition research"
+      confidence: VERY_HIGH
+
+    how_improve_decisions:
+      sources:
+        - "Pre-mortem papers"
+        - "Thinking Fast Slow 'Speaking Points'"
+        - "Noise book (decision hygiene)"
+      confidence: VERY_HIGH
+
+    experiencing_vs_remembering:
+      sources:
+        - "TED Talk 2010"
+        - "Thinking Fast Slow Part 5"
+        - "Well-Being research"
+      confidence: HIGH
+
+    noise_vs_bias:
+      sources:
+        - "Noise (2021)"
+        - "Conversations with Tyler (2018)"
+      confidence: HIGH (recent focus, well-documented)
+
+  overall_confidence: VERY_HIGH
+
+# ============================================
+# ⚠️ HUMAN VALIDATION CHECKPOINT
+# ============================================
+
+checkpoint_questions:
+  - "Do these obsessions accurately capture what drives Kahneman's work?"
+  - "Any missing central questions that consumed his attention?"
+  - "Is the progression/evolution accurate?"
+  - "Does meta-pattern ('blind to blindness') ring true?"
+
+validation_criteria:
+  - "Obsessions must be evident across career (not one-off interests)"
+  - "Must explain major research programs and publications"
+  - "Must be triangulated across multiple sources"
+  - "Must differentiate him from other behavioral researchers"
+
+status: ⏳ PENDING HUMAN VALIDATION
+confidence: HIGH (but checkpoint required)
+
+next_step: "Present to user for APPROVE / REVISE / RE-ANALYZE decision"

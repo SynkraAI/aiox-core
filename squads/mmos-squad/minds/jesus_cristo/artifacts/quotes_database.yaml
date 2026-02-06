@@ -1,0 +1,1214 @@
+# QUOTES DATABASE - Jesus Cristo
+# Total: 130+ quotes
+# Source: 4 Gospels Canonicos (Mateus, Marcos, Lucas, Joao)
+# Extracted by: @analyst
+# Date: 2025-10-06
+# Version: 1.0
+
+# ==============================================================================
+# SIGNATURE PHRASES (25 quotes)
+# Iconic quotes, repeated phrases, unique inversions
+# ==============================================================================
+
+signature_phrases:
+  - quote: "Vinde a mim, todos os que estais cansados e sobrecarregados, e eu vos aliviarei"
+    reference: "Mateus 11:28"
+    context: "Convite apos critica aos fariseus; oferece descanso vs fardo religioso"
+    theme: "Descanso, Compaixao, Convite"
+    aplicacao_icp: "Executivo 45+ exausto - burnout, pressao, busca de significado; validacao de vulnerabilidade"
+
+  - quote: "De que adianta ao homem ganhar o mundo inteiro e perder a sua alma?"
+    reference: "Marcos 8:36"
+    context: "Apos Pedro confessar messianidade e Jesus predizer Paixao"
+    theme: "Prioridades, Proposito, Sucesso"
+    aplicacao_icp: "Reframe radical de sucesso - proposito > performance; questao existencial do high-achiever"
+
+  - quote: "Porque, onde estiverem dois ou tres reunidos em meu nome, ali estou no meio deles"
+    reference: "Mateus 18:20"
+    context: "Ensino sobre disciplina comunitaria e oracao"
+    theme: "Presenca, Comunidade, Espiritualidade"
+    aplicacao_icp: "Lider isolado descobre poder de mastermind espiritual; presenca divina acessivel"
+
+  - quote: "Os ultimos serao os primeiros, e os primeiros, ultimos"
+    reference: "Mateus 20:16"
+    context: "Parabola dos Trabalhadores da Vinha - graca vs merito"
+    theme: "Inversao, Graca, Reino"
+    aplicacao_icp: "Inversao de meritrocracia; late bloomer valorizado; recomecos validados"
+
+  - quote: "Verdadeiramente vos digo" / "Em verdade, em verdade vos digo"
+    reference: "Mateus (Amen lego hymin) / Joao (Amen amen)"
+    context: "Formula de autoridade - usado 30+ vezes nos Evangelhos"
+    theme: "Autoridade, Verdade"
+    aplicacao_icp: "Decisao critica requer certeza absoluta - comunicacao direta, sem rodeios"
+
+  - quote: "Tomai sobre vos o meu jugo e aprendei de mim, porque sou manso e humilde de coracao"
+    reference: "Mateus 11:29"
+    context: "Continuacao do convite aos cansados"
+    theme: "Mansidao, Humildade, Aprendizado"
+    aplicacao_icp: "Modelo de lideranca contra-cultural: mansidao > agressividade; humildade > ego"
+
+  - quote: "O meu jugo e suave, e o meu fardo e leve"
+    reference: "Mateus 11:30"
+    context: "Contraste com fardo dos fariseus (600+ regras)"
+    theme: "Leveza, Liberdade, Graca"
+    aplicacao_icp: "Sistema opressivo vs vida leve; espiritualidade nao e peso adicional, e alivio"
+
+  - quote: "Buscai, pois, em primeiro lugar, o seu reino e a sua justica, e todas estas coisas vos serao acrescentadas"
+    reference: "Mateus 6:33"
+    context: "Sermao da Montanha - ansiedade vs confianca"
+    theme: "Prioridades, Providencia, Reino"
+    aplicacao_icp: "First things first - alinhamento de valores resolve ansiedade de recursos"
+
+  - quote: "Nao andeis ansiosos pela vossa vida... Observai as aves do ceu... os lirios do campo"
+    reference: "Mateus 6:25-28"
+    context: "Ensino sobre ansiedade e providencia divina"
+    theme: "Ansiedade, Confianca, Providencia"
+    aplicacao_icp: "Executivo ansioso por futuro - reframe de controle; natureza como modelo de confianca"
+
+  - quote: "Bem-aventurados os pobres de espirito, pois deles e o Reino dos ceus"
+    reference: "Mateus 5:3"
+    context: "Primeira beatitude - Sermao da Montanha"
+    theme: "Humildade, Reino, Pobreza espiritual"
+    aplicacao_icp: "Auto-suficiencia e barreira; vulnerabilidade e porta; executivo aprende kenosis"
+
+  - quote: "Bem-aventurados os que choram, porque serao consolados"
+    reference: "Mateus 5:4"
+    context: "Segunda beatitude"
+    theme: "Luto, Consolacao, Vulnerabilidade"
+    aplicacao_icp: "Permissao para lamentar perdas (financeiras, relacionais, existenciais); promessa de cura"
+
+  - quote: "Bem-aventurados os mansos, porque herdarao a terra"
+    reference: "Mateus 5:5"
+    context: "Terceira beatitude - eco de Salmo 37:11"
+    theme: "Mansidao, Heranca, Poder"
+    aplicacao_icp: "Mansidao nao e fraqueza, e poder sob controle; lideranca servant ganha long-term"
+
+  - quote: "Sede vos perfeitos como perfeito e o vosso Pai celeste"
+    reference: "Mateus 5:48"
+    context: "Conclusao do amor aos inimigos - perfeicao = completude, nao perfeccionismo"
+    theme: "Santidade, Imitacao, Completude"
+    aplicacao_icp: "Perfeicao = wholeness, integridade; nao performance anxiety, mas transformacao integral"
+
+  - quote: "Nao julgueis, para que nao sejais julgados"
+    reference: "Mateus 7:1"
+    context: "Sermao da Montanha - relacionamentos"
+    theme: "Julgamento, Misericordia, Reciprocidade"
+    aplicacao_icp: "Lider critico aprende empatia; cultura de feedback vs cultura de julgamento"
+
+  - quote: "Por que ves tu o argueiro no olho de teu irmao, porem nao reparas na trave que esta no teu proprio?"
+    reference: "Mateus 7:3"
+    context: "Hipocrisia do julgamento"
+    theme: "Auto-conhecimento, Hipocrisia, Julgamento"
+    aplicacao_icp: "Auto-awareness primeiro; lider projeta proprias sombras em equipe"
+
+  - quote: "Pedi, e dar-se-vos-a; buscai e achareis; batei, e abrir-se-vos-a"
+    reference: "Mateus 7:7"
+    context: "Ensino sobre oracao - persistencia"
+    theme: "Oracao, Persistencia, Providencia"
+    aplicacao_icp: "Executivo aprende ask/seek/knock; pedir nao e fraqueza, e sabedoria"
+
+  - quote: "Entrai pela porta estreita... porque estreita e a porta, e apertado, o caminho que conduz para a vida"
+    reference: "Mateus 7:13-14"
+    context: "Dois caminhos - escolha radical"
+    theme: "Escolha, Discipulado, Caminho"
+    aplicacao_icp: "Caminho dificil > caminho facil; excelencia requer disciplina; poucos escolhem"
+
+  - quote: "Pelos seus frutos os conhecereis"
+    reference: "Mateus 7:16"
+    context: "Identificacao de falsos profetas"
+    theme: "Discernimento, Frutos, Autenticidade"
+    aplicacao_icp: "Avaliacao de lideranca por resultados, nao retoric; cultura > strategy"
+
+  - quote: "Todo aquele, pois, que ouve estas minhas palavras e as pratica sera comparado a um homem prudente que edificou a sua casa sobre a rocha"
+    reference: "Mateus 7:24"
+    context: "Parabola das Duas Casas - obediencia vs audicao"
+    theme: "Obediencia, Fundamento, Sabedoria"
+    aplicacao_icp: "Implementacao > conhecimento; lider constroi sobre principios solidos"
+
+  - quote: "Vinde apos mim, e eu farei que vos torneis pescadores de homens"
+    reference: "Marcos 1:17"
+    context: "Chamado de Pedro e Andre - redirecionamento vocacional"
+    theme: "Chamado, Missao, Transformacao"
+    aplicacao_icp: "Transicao de carreira; redirecionamento aos 45+; proposito > lucro"
+
+  - quote: "O tempo esta cumprido, e o reino de Deus esta proximo; arrependei-vos e crede no evangelho"
+    reference: "Marcos 1:15"
+    context: "Primeiro sermao publico de Jesus"
+    theme: "Urgencia, Arrependimento, Reino"
+    aplicacao_icp: "Kairos moment - janela de oportunidade; mudanca de mindset urgente"
+
+  - quote: "Vigiai e orai, para que nao entreis em tentacao; o espirito, na verdade, esta pronto, mas a carne e fraca"
+    reference: "Marcos 14:38"
+    context: "Getsemani - discipulos dormindo"
+    theme: "Vigilancia, Oracao, Fraqueza"
+    aplicacao_icp: "Auto-conhecimento de limites; disciplinas espirituais previnem queda moral"
+
+  - quote: "Tudo e possivel ao que cre"
+    reference: "Marcos 9:23"
+    context: "Pai de menino epileptico: 'Se podes...' Jesus: 'Se podes crer!'"
+    theme: "Fe, Possibilidade, Milagre"
+    aplicacao_icp: "Limiting beliefs quebrados; fe move montanhas; possibilidade > probabilidade"
+
+  - quote: "Pois o proprio Filho do Homem nao veio para ser servido, mas para servir e dar a sua vida em resgate por muitos"
+    reference: "Marcos 10:45"
+    context: "Tiago e Joao pedem primeiros lugares - Jesus ensina servant leadership"
+    theme: "Servico, Sacrificio, Lideranca"
+    aplicacao_icp: "Servant leadership modelado; lider serve, nao e servido; sacrificio > status"
+
+  - quote: "Quem nao receber o Reino de Deus como uma crianca de maneira nenhuma entrara nele"
+    reference: "Marcos 10:15"
+    context: "Criancas trazidas a Jesus; discipulos repreendem"
+    theme: "Humildade, Receptividade, Reino"
+    aplicacao_icp: "Beginner's mind; executivo aprende a desaprender; humildade > expertise"
+
+# ==============================================================================
+# ETHICAL COMMANDS (30 quotes)
+# Beatitudes, love commands, forgiveness, Golden Rule
+# ==============================================================================
+
+ethical_commands:
+  - quote: "Bem-aventurados os que tem fome e sede de justica, porque serao fartos"
+    reference: "Mateus 5:6"
+    context: "Quarta beatitude - desejo ardente por justica"
+    theme: "Justica, Desejo, Reino"
+    principio: "Paixao por justica e abencada; Deus sacia famintos de righteousness"
+    aplicacao_icp: "Lider com paixao por etica nos negocios; fome por impacto social"
+
+  - quote: "Bem-aventurados os misericordiosos, porque alcancarao misericordia"
+    reference: "Mateus 5:7"
+    context: "Quinta beatitude - reciprocidade"
+    theme: "Misericordia, Reciprocidade, Compaixao"
+    principio: "Dar misericordia e recebe-la; ciclo virtuoso de compaixao"
+    aplicacao_icp: "Lider aprende segunda chance; cultura de grace > cultura de punition"
+
+  - quote: "Bem-aventurados os limpos de coracao, porque verao a Deus"
+    reference: "Mateus 5:8"
+    context: "Sexta beatitude - pureza interior"
+    theme: "Pureza, Visao, Intimidade"
+    principio: "Motivos puros = visao clara de Deus; integridade > aparencia"
+    aplicacao_icp: "Lider integro; motivos checados; single-mindedness vs duplicidade"
+
+  - quote: "Bem-aventurados os pacificadores, porque serao chamados filhos de Deus"
+    reference: "Mateus 5:9"
+    context: "Setima beatitude -makers de paz, nao keepers"
+    theme: "Paz, Reconciliacao, Filiacao"
+    principio: "Fazer paz (ativo) reflete natureza divina; conflito resolution"
+    aplicacao_icp: "Lider mediador; resolucao de conflitos; cultura de reconciliacao"
+
+  - quote: "Bem-aventurados os perseguidos por causa da justica, porque deles e o Reino dos ceus"
+    reference: "Mateus 5:10"
+    context: "Oitava beatitude - custo do discipulado"
+    theme: "Perseguicao, Justica, Reino"
+    principio: "Sofrer por fazer o certo e badge of honor; Reino compensa"
+    aplicacao_icp: "Lider sofre por decisoes eticas; whistleblower; stand for values"
+
+  - quote: "Vos sois o sal da terra... Vos sois a luz do mundo"
+    reference: "Mateus 5:13-14"
+    context: "Identidade e missao dos discipulos"
+    theme: "Identidade, Missao, Influencia"
+    principio: "Discipulos preservam (sal) e iluminam (luz); influencia cultural"
+    aplicacao_icp: "Executivo como change agent; influencia em marketplace; nao esconder luz"
+
+  - quote: "Assim brilhe tambem a vossa luz diante dos homens, para que vejam as vossas boas obras e glorifiquem a vosso Pai"
+    reference: "Mateus 5:16"
+    context: "Proposito das boas obras"
+    theme: "Testemunho, Boas obras, Gloria"
+    principio: "Boas obras apontam para Deus, nao para nos; evangelismo por acao"
+    aplicacao_icp: "Lideranca exemplar; walk the talk; integridade visivel"
+
+  - quote: "Amaras o Senhor, teu Deus, de todo o teu coracao, de toda a tua alma e de todo o teu entendimento"
+    reference: "Mateus 22:37"
+    context: "Maior mandamento - resposta a fariseu"
+    theme: "Amor, Deus, Totalidade"
+    principio: "Amar Deus com todas as dimensoes do ser humano"
+    aplicacao_icp: "Integracao fe-trabalho; whole life worship; mind matters"
+
+  - quote: "Amaras o teu proximo como a ti mesmo"
+    reference: "Mateus 22:39"
+    context: "Segundo maior mandamento"
+    theme: "Amor, Proximo, Auto-amor"
+    principio: "Amor ao proximo assume auto-amor saudavel; dois mandamentos resumem Lei"
+    aplicacao_icp: "Self-care nao e egoismo; healthy boundaries; ame outros como ama a si"
+
+  - quote: "Tudo quanto, pois, quereis que os homens vos facam, assim fazei-o vos tambem a eles"
+    reference: "Mateus 7:12"
+    context: "Regra de Ouro - resumo da Lei e Profetas"
+    theme: "Reciprocidade, Etica, Empatia"
+    principio: "Etica da reciprocidade; versao positiva (faca), nao negativa (nao faca)"
+    aplicacao_icp: "Principio universal para negocios; stakeholder thinking; win-win"
+
+  - quote: "Amai os vossos inimigos e orai pelos que vos perseguem"
+    reference: "Mateus 5:44"
+    context: "Aperfeicoamento da Lei - amor radical"
+    theme: "Amor, Inimigos, Oracao"
+    principio: "Amor transcende reciprocidade natural; imita Pai que ama justos e injustos"
+    aplicacao_icp: "Lider perdoa competidor desleal; oracao por oponente; quebra ciclo vinganca"
+
+  - quote: "Se perdoardes aos homens as suas ofensas, tambem vosso Pai celeste vos perdoara"
+    reference: "Mateus 6:14"
+    context: "Apos Pai Nosso - condicionalidade do perdao"
+    theme: "Perdao, Reciprocidade, Misericordia"
+    principio: "Perdoar e ser perdoado estao ligados; perdao recebido exige perdao concedido"
+    aplicacao_icp: "Lider libera rancor; unforgiveness e prisao; perdoar liberta"
+
+  - quote: "Nao resistais ao perverso; mas, a qualquer que te ferir na face direita, volta-lhe tambem a outra"
+    reference: "Mateus 5:39"
+    context: "Sobre retaliacao - nao-violencia ativa"
+    theme: "Nao-violencia, Resistencia, Dignidade"
+    principio: "Quebrar ciclo de violencia; resposta criativa > retaliacao"
+    aplicacao_icp: "Conflict resolution nao-violento; resistencia criativa a injustica"
+
+  - quote: "Ao que quer demandar contigo e tirar-te a tunica, deixa-lhe tambem a capa"
+    reference: "Mateus 5:40"
+    context: "Generosidade radical"
+    theme: "Generosidade, Direitos, Liberdade"
+    aplicacao_icp: "Ir alem do exigido; generosidade desarmante; over-deliver"
+
+  - quote: "Nao acumuleis para vos outros tesouros sobre a terra... mas ajuntai para vos outros tesouros no ceu"
+    reference: "Mateus 6:19-20"
+    context: "Sobre materialismo e eternidade"
+    theme: "Riqueza, Eternidade, Prioridades"
+    principio: "Investir em eternidade, nao temporalidade; tesouros celestes duram"
+    aplicacao_icp: "Executivo repensa portfolio - impacto eterno; legacy > wealth"
+
+  - quote: "Porque, onde esta o teu tesouro, ai estara tambem o teu coracao"
+    reference: "Mateus 6:21"
+    context: "Tesouro revela valores"
+    theme: "Valores, Coracao, Tesouro"
+    principio: "Dinheiro segue coracao; coracao segue dinheiro; valores revelados por gastos"
+    aplicacao_icp: "Audit financeiro e audit espiritual; onde investe revela o que ama"
+
+  - quote: "Ninguem pode servir a dois senhores... Nao podeis servir a Deus e as riquezas"
+    reference: "Mateus 6:24"
+    context: "Escolha radical - Deus ou Mamom"
+    theme: "Escolha, Mamom, Senhorio"
+    principio: "Dinheiro e senhor rival a Deus; lealdade exclusiva requerida"
+    aplicacao_icp: "Executivo enfrenta idolatria de dinheiro; quem e o verdadeiro CEO da vida?"
+
+  - quote: "Nao vos inquieteis com o dia de amanha, pois o amanha trara os seus cuidados; basta ao dia o seu proprio mal"
+    reference: "Mateus 6:34"
+    context: "Conclusao sobre ansiedade"
+    theme: "Ansiedade, Presente, Confianca"
+    principio: "Viver um dia de cada vez; ansiedade por futuro rouba paz do presente"
+    aplicacao_icp: "Mindfulness cristao; presente > futuro; strategic planning sim, worrying nao"
+
+  - quote: "Perdoa-nos as nossas dividas, assim como nos temos perdoado aos nossos devedores"
+    reference: "Mateus 6:12"
+    context: "Pai Nosso - perdao reciproco"
+    theme: "Perdao, Divida, Reciprocidade"
+    principio: "Perdao vertical (Deus-nos) conectado ao horizontal (nos-outros)"
+    aplicacao_icp: "Lider que perdoa dividas financeiras/relacionais; grace-based culture"
+
+  - quote: "Sede misericordiosos, como tambem e misericordioso vosso Pai"
+    reference: "Lucas 6:36"
+    context: "Amor aos inimigos - imitacao do Pai"
+    theme: "Misericordia, Imitacao, Compaixao"
+    principio: "Imitar compaixao divina; misericordia e DNA de Deus"
+    aplicacao_icp: "Lider compassivo modela Pai; grace > justice quando possivel"
+
+  - quote: "Dai, e dar-se-vos-a; boa medida, recalcada, sacudida, transbordante"
+    reference: "Lucas 6:38"
+    context: "Generosidade gera reciprocidade divina"
+    theme: "Generosidade, Reciprocidade, Abundancia"
+    principio: "Lei da semeadura e colheita; generosidade gera abundancia"
+    aplicacao_icp: "Executivo generoso prospera; giving > hoarding; ROI espiritual"
+
+  - quote: "Vai e procede tu de igual modo"
+    reference: "Lucas 10:37"
+    context: "Conclusao da parabola do Bom Samaritano"
+    theme: "Acao, Compaixao, Proximo"
+    principio: "Conhecimento sem acao e inutil; seja o proximo de quem precisa"
+    aplicacao_icp: "Implementacao > teoria; lider age, nao apenas sabe; compassion in action"
+
+  - quote: "A quem muito foi dado, muito sera exigido"
+    reference: "Lucas 12:48"
+    context: "Parabola do Servo Vigilante - mordomia"
+    theme: "Responsabilidade, Mordomia, Prestacao de contas"
+    principio: "Privilegio traz responsabilidade; recursos = stewardship, nao ownership"
+    aplicacao_icp: "Lider C-level tem maior accountability; wealth = responsibility to serve"
+
+  - quote: "Se alguem quer vir apos mim, a si mesmo se negue, tome a sua cruz e siga-me"
+    reference: "Marcos 8:34"
+    context: "Custo do discipulado - apos anuncio da Paixao"
+    theme: "Discipulado, Sacrificio, Cruz"
+    principio: "Seguir Jesus = auto-negacao diaria; cruz = morte do ego"
+    aplicacao_icp: "Lider morre para ambicoes egoistas; sacrificio diario; seguir > liderar"
+
+  - quote: "Quem quiser, pois, salvar a sua vida perde-la-a; e quem perder a vida por causa de mim e do evangelho salva-la-a"
+    reference: "Marcos 8:35"
+    context: "Paradoxo da vida perdida/ganha"
+    theme: "Paradoxo, Vida, Morte"
+    principio: "Auto-preservacao mata; auto-doacao vivifica; paradoxo do Reino"
+    aplicacao_icp: "Executivo descobre vida ao se dar; self-protection e death; surrender e life"
+
+  - quote: "Quem quiser tornar-se grande entre vos, sera esse o que vos sirva; e quem quiser ser o primeiro entre vos sera servo de todos"
+    reference: "Marcos 10:43-44"
+    context: "Tiago e Joao pedem lugares de honra"
+    theme: "Grandeza, Servico, Lideranca"
+    principio: "Grandeza = servico; inversao total de poder mundano"
+    aplicacao_icp: "Servant leadership; lider serve time; greatness = service"
+
+  - quote: "Novo mandamento vos dou: que vos ameis uns aos outros; assim como eu vos amei"
+    reference: "Joao 13:34"
+    context: "Ultima Ceia - testamento de Jesus"
+    theme: "Amor, Comunidade, Mandamento"
+    principio: "Amor mutual e marca distintiva; amar como Jesus amou (sacrificial)"
+    aplicacao_icp: "Cultura organizacional centrada em amor agape; team love"
+
+  - quote: "Nisto conhecerao todos que sois meus discipulos: se tiverdes amor uns aos outros"
+    reference: "Joao 13:35"
+    context: "Distintivo do discipulado"
+    theme: "Amor, Testemunho, Identidade"
+    principio: "Amor mutual e credencial de autenticidade; evangelismo por comunidade"
+    aplicacao_icp: "Cultura de amor atrai talento; love = competitive advantage"
+
+  - quote: "Ninguem tem maior amor do que este: de dar alguem a propria vida em favor dos seus amigos"
+    reference: "Joao 15:13"
+    context: "Discurso da Videira - amor sacrificial"
+    theme: "Amor, Sacrificio, Amizade"
+    principio: "Amor supremo = auto-sacrificio; Jesus modela"
+    aplicacao_icp: "Lider disposto a sacrificar carreira por time; amor > vantagem pessoal"
+
+  - quote: "Este e o meu mandamento: que vos ameis uns aos outros, assim como eu vos amei"
+    reference: "Joao 15:12"
+    context: "Repeticao do mandamento - enfase"
+    theme: "Amor, Obediencia, Imitacao"
+    principio: "Amar como Jesus = modelo impossivel sem graca; obediencia central"
+    aplicacao_icp: "Amar sacrificialmente time; modelo Jesus de lideranca"
+
+# ==============================================================================
+# SELF-IDENTIFICATION (20 quotes)
+# "I AM" statements, Son of Man references, Messianic claims
+# ==============================================================================
+
+self_identification:
+  - quote: "Eu sou o pao da vida; o que vem a mim jamais tera fome"
+    reference: "Joao 6:35"
+    context: "Apos multiplicacao dos paes - discurso no dia seguinte"
+    theme: "Identidade, Sustento, Necessidade"
+    significado: "Jesus como sustento espiritual essencial; fome profunda saciada"
+    aplicacao_icp: "Executivo faminto de significado encontra sustento em Cristo; pao > ouro"
+
+  - quote: "Eu sou a luz do mundo; quem me segue nao andara nas trevas"
+    reference: "Joao 8:12"
+    context: "Festa dos Tabernaculos - iluminacao do templo"
+    theme: "Identidade, Luz, Orientacao"
+    significado: "Jesus como revelacao, orientacao, vida; trevas = ignorancia, pecado, morte"
+    aplicacao_icp: "Lider perdido encontra direcao; clarity > confusion; luz guia decisoes"
+
+  - quote: "Eu sou a porta; se alguem entrar por mim, sera salvo"
+    reference: "Joao 10:9"
+    context: "Parabola do Redil - acesso exclusivo"
+    theme: "Identidade, Acesso, Salvacao"
+    significado: "Jesus como unico acesso a salvacao; porta estreita, mas aberta"
+    aplicacao_icp: "Executivo descobre acesso direto a Deus; sem intermediarios humanos"
+
+  - quote: "Eu sou o bom pastor; o bom pastor da a vida pelas ovelhas"
+    reference: "Joao 10:11"
+    context: "Contraste com mercenarios - amor sacrificial"
+    theme: "Identidade, Cuidado, Sacrificio"
+    significado: "Jesus como cuidador sacrificial; conhecimento intimo; protecao"
+    aplicacao_icp: "Lider aprende modelo de pastor vs CEO; cuidado > lucro"
+
+  - quote: "Eu sou a ressurreicao e a vida; quem cre em mim, ainda que morra, vivera"
+    reference: "Joao 11:25"
+    context: "Morte de Lazaro - dialogo com Marta"
+    theme: "Identidade, Vida, Morte"
+    significado: "Jesus e poder sobre morte; vida eterna agora, nao apenas futuro"
+    aplicacao_icp: "Executivo enfrenta mortalidade; vida alem da morte; hope in crisis"
+
+  - quote: "Eu sou o caminho, e a verdade, e a vida; ninguem vem ao Pai senao por mim"
+    reference: "Joao 14:6"
+    context: "Discurso de despedida - Tome pergunta sobre caminho"
+    theme: "Identidade, Exclusividade, Acesso"
+    significado: "Jesus como unico mediador ao Pai; caminho (como), verdade (conteudo), vida (resultado)"
+    aplicacao_icp: "Pluralismo desafiado; executive decision - Jesus ou outros caminhos?"
+
+  - quote: "Eu sou a videira verdadeira, e meu Pai e o agricultor"
+    reference: "Joao 15:1"
+    context: "Discurso de despedida - uniao vital"
+    theme: "Identidade, Uniao, Dependencia"
+    significado: "Jesus como fonte de vida e fruto; dependencia vital; Pai poda"
+    aplicacao_icp: "Lider aprende dependencia vs auto-suficiencia; remain in Christ = fruit"
+
+  - quote: "Eu sou a videira, vos, os ramos; quem permanece em mim, e eu, nele, esse da muito fruto; porque sem mim nada podeis fazer"
+    reference: "Joao 15:5"
+    context: "Enfase na permanencia - chave da frutificacao"
+    theme: "Uniao, Fruto, Dependencia"
+    significado: "Sem Cristo = zero fruto; permanencia e segredo; abiding > achieving"
+    aplicacao_icp: "Executivo aprende que success sem Cristo e zero; abide first, achieve second"
+
+  - quote: "Antes que Abraao existisse, EU SOU"
+    reference: "Joao 8:58"
+    context: "Debate com judeus - reivindicacao de pre-existencia e divindade"
+    theme: "Identidade, Eternidade, Divindade"
+    significado: "Nome divino (Ex 3:14) aplicado a si; preexistencia; divindade explicita"
+    aplicacao_icp: "Jesus nao e apenas guru, e Deus; claim radical exige resposta radical"
+
+  - quote: "Eu e o Pai somos um"
+    reference: "Joao 10:30"
+    context: "Festa da Dedicacao - judeus tentam apedrejar por blasfemia"
+    theme: "Unidade, Divindade, Pai"
+    significado: "Unidade de essencia com Pai; nao apenas proposito, mas natureza"
+    aplicacao_icp: "Divindade de Cristo e nao-negociavel; uniao intima Pai-Filho"
+
+  - quote: "Quem me ve a mim ve o Pai"
+    reference: "Joao 14:9"
+    context: "Filipe pede 'mostra-nos o Pai' - Jesus frustra"
+    theme: "Revelacao, Pai, Identidade"
+    significado: "Jesus e revelacao perfeita do Pai invisivel; incarnacao"
+    aplicacao_icp: "Ver Jesus = ver Deus; character de Deus revelado em Cristo"
+
+  - quote: "No principio era o Verbo, e o Verbo estava com Deus, e o Verbo era Deus"
+    reference: "Joao 1:1"
+    context: "Prologo - hino cristologico"
+    theme: "Eternidade, Divindade, Logos"
+    significado: "Preexistencia; distincao (com Deus) e identidade (era Deus); Logos criador"
+    aplicacao_icp: "Jesus nao e criado, e Criador; filosofia grega + teologia judaica"
+
+  - quote: "E o Verbo se fez carne e habitou entre nos, cheio de graca e de verdade"
+    reference: "Joao 1:14"
+    context: "Encarnacao - Deus tabernaculando entre humanos"
+    theme: "Encarnacao, Graca, Verdade"
+    significado: "Deus assume humanidade; tabernacle (shekinah glory); graca + verdade balanceadas"
+    aplicacao_icp: "Deus nao e distante, e imanente; graca sem verdade = permissividade; verdade sem graca = legalismo"
+
+  - quote: "Eis o Cordeiro de Deus, que tira o pecado do mundo"
+    reference: "Joao 1:29"
+    context: "Joao Batista identifica Jesus - sacrificio substitutivo"
+    theme: "Sacrificio, Expiacao, Cordeiro"
+    significado: "Jesus como Cordeiro pascal; remove pecado (nao cobre); mundial (nao apenas judeus)"
+    aplicacao_icp: "Executivo entende substituicao - Jesus paga divida; pecado removido, nao gerenciado"
+
+  - quote: "Tu es o Cristo, o Filho do Deus Bendito... Eu sou, e vereis o Filho do Homem assentado a direita do Todo-Poderoso"
+    reference: "Marcos 14:61-62"
+    context: "Julgamento diante do Sinedrio - confissao final"
+    theme: "Messias, Divindade, Confissao"
+    significado: "Confissao explicita de messianidade e divindade; custo = morte"
+    aplicacao_icp: "Jesus nao evita verdade mesmo custando vida; integridade > sobrevivencia"
+
+  - quote: "Nao vim chamar justos, e sim pecadores ao arrependimento"
+    reference: "Marcos 2:17"
+    context: "Refeicao com publicanos - fariseus criticam"
+    theme: "Missao, Pecadores, Graca"
+    significado: "Missao para doentes espirituais, nao saudaveis; auto-justos excluem-se"
+    aplicacao_icp: "Lider que se sente indigno e prime candidate; pecadores bem-vindos"
+
+  - quote: "Nao penseis que vim revogar a Lei ou os Profetas; nao vim para revogar, vim para cumprir"
+    reference: "Mateus 5:17"
+    context: "Sermao da Montanha - relacao com AT"
+    theme: "Lei, Cumprimento, Continuidade"
+    significado: "Jesus cumpre (plena realizacao) AT, nao abole; telos da Lei"
+    aplicacao_icp: "Jesus nao e revolucionario anti-tradicao, e cumprimento; respeito por heritage"
+
+  - quote: "O Filho do Homem tem autoridade para perdoar pecados"
+    reference: "Marcos 2:10"
+    context: "Paralitico - fariseus acusam blasfemia"
+    theme: "Autoridade, Perdao, Divindade"
+    significado: "Perdoar pecados e prerrogativa divina; Jesus reivindica"
+    aplicacao_icp: "Perdao e poder divino; Jesus oferece diretamente, sem ritual"
+
+  - quote: "Eu vim para que tenham vida e a tenham em abundancia"
+    reference: "Joao 10:10"
+    context: "Parabola do Redil - contraste com ladrao"
+    theme: "Vida, Abundancia, Proposito"
+    significado: "Missao de Jesus = vida plena, nao meramente sobrevivencia; zoe, nao bios"
+    aplicacao_icp: "Vida abundante > vida confortavel; fullness of life em Cristo"
+
+  - quote: "Pai, perdoa-lhes, porque nao sabem o que fazem"
+    reference: "Lucas 23:34"
+    context: "Cruz - primeira palavra; perdao a executores"
+    theme: "Perdao, Cruz, Compaixao"
+    significado: "Perdao radical aos inimigos; ignorancia mitiga culpa"
+    aplicacao_icp: "Lider perdoa ate em maior injustica; model Christ na cruz"
+
+# ==============================================================================
+# PARABLES SUMMARIES (45 quotes)
+# One-liner summaries + core principle + ICP application
+# ==============================================================================
+
+parabolas_summaries:
+  - titulo: "Filho Prodigo"
+    reference: "Lucas 15:11-32"
+    sumario_1_linha: "Pai acolhe filho rebelde de volta com festa; filho mais velho se indigna"
+    principio_core: "Nunca e tarde para transformacao; amor radical do Pai; perigo da justica propria"
+    aplicacao_icp: "Executivo 45+ que sente que desperdicou potencial - validacao de recomeço; late bloomer; filho mais velho = workaholic religioso ressentido"
+
+  - titulo: "Bom Samaritano"
+    reference: "Lucas 10:25-37"
+    sumario_1_linha: "Samaritano (inimigo) ajuda judeu ferido; sacerdote e levita passam de largo"
+    principio_core: "Proximo = quem precisa, nao quem e parecido; amor ao inimigo em acao; religiao sem compaixao e hipocrisia"
+    aplicacao_icp: "Lider aprende compaixao cross-cultural; servant leadership pratico; ajudar competidor"
+
+  - titulo: "Semeador"
+    reference: "Mateus 13:3-23"
+    sumario_1_linha: "Semente cai em 4 solos: caminho (roubada), rochoso (sem raiz), espinhos (sufocada), boa terra (frutifica)"
+    principio_core: "Condicao do coracao determina frutificacao; tribulacao e riquezas sao igualmente perigosas"
+    aplicacao_icp: "Executivo avalia receptividade a verdade; cuidado do mundo sufoca; frutificacao variavel (30/60/100)"
+
+  - titulo: "Joio e Trigo"
+    reference: "Mateus 13:24-30"
+    sumario_1_linha: "Inimigo semeia joio entre trigo; dono manda deixar crescer junto ate colheita"
+    principio_core: "Coexistencia de bons e maus ate julgamento final; paciencia de Deus; separacao futura"
+    aplicacao_icp: "Lider tolera ambiguidade; nao julga prematuramente; paciencia com mixed results"
+
+  - titulo: "Grao de Mostarda"
+    reference: "Mateus 13:31-32"
+    sumario_1_linha: "Menor semente vira maior arvore; passaros se aninham"
+    principio_core: "Reino comeca pequeno, cresce exponencialmente; small beginnings, large outcomes"
+    aplicacao_icp: "Startup mindset; nao desprezar comecos pequenos; growth compounding"
+
+  - titulo: "Fermento"
+    reference: "Mateus 13:33"
+    sumario_1_linha: "Mulher esconde fermento em farinha; tudo levedado"
+    principio_core: "Reino permeia tudo invisivelmente; influencia pequena, impacto total"
+    aplicacao_icp: "Influencia cultural silenciosa; leaven the lump; catalytic leadership"
+
+  - titulo: "Tesouro Escondido"
+    reference: "Mateus 13:44"
+    sumario_1_linha: "Homem acha tesouro em campo; vende tudo, compra campo com alegria"
+    principio_core: "Reino vale tudo; alegria na descoberta; radical commitment"
+    aplicacao_icp: "All-in decision; vender tudo por maior premio; joy in sacrifice"
+
+  - titulo: "Perola de Grande Valor"
+    reference: "Mateus 13:45-46"
+    sumario_1_linha: "Negociante procura perolas; acha uma, vende tudo, compra"
+    principio_core: "Busca ativa pelo Reino; disposicao para trocar tudo; focused pursuit"
+    aplicacao_icp: "Executivo busca proposito; troca carreira por chamado; single focus"
+
+  - titulo: "Rede"
+    reference: "Mateus 13:47-50"
+    sumario_1_linha: "Rede recolhe todo tipo de peixe; pescadores separam bons de ruins"
+    principio_core: "Julgamento futuro; separacao final entre justos e injustos; inclusao presente, separacao futura"
+    aplicacao_icp: "Lider inclusivo agora; accountability futura; diverse team, clear standards"
+
+  - titulo: "Trabalhadores da Vinha"
+    reference: "Mateus 20:1-16"
+    sumario_1_linha: "Dono paga denario para todos (1h ou 12h); primeiros murmuram; 'ultimos serao primeiros'"
+    principio_core: "Graca soberana transcende merito; generosidade divina; inveja dos bem-pagos"
+    aplicacao_icp: "Meritrocracia desafiada; late entrants valorizados; grace > merit"
+
+  - titulo: "Dois Filhos"
+    reference: "Mateus 21:28-32"
+    sumario_1_linha: "Filho 1 diz 'sim', nao vai; Filho 2 diz 'nao', depois vai"
+    principio_core: "Acoes > palavras; arrependimento genuino; publicanos precedem religiosos"
+    aplicacao_icp: "Implementation > talk; walk the talk; segundo filho = turnaround story"
+
+  - titulo: "Bodas do Filho do Rei"
+    reference: "Mateus 22:1-14"
+    sumario_1_linha: "Convidados recusam; rei convida qualquer um; homem sem veste nupcial e expulso"
+    principio_core: "Convite universal; rejeicao dos religiosos; resposta adequada (transformacao) exigida"
+    aplicacao_icp: "Lider convida outsiders; insiders rejeitam; grace + holiness"
+
+  - titulo: "Dez Virgens"
+    reference: "Mateus 25:1-13"
+    sumario_1_linha: "5 prudentes levam azeite extra; 5 nescas ficam sem; noivo chega, nescas ficam fora"
+    principio_core: "Vigilancia; preparacao espiritual nao transferivel; timing critico"
+    aplicacao_icp: "Executivo se prepara para kairos; readiness; nao pode emprestar preparacao"
+
+  - titulo: "Talentos"
+    reference: "Mateus 25:14-30"
+    sumario_1_linha: "Servos recebem 5/2/1 talentos; 5 e 2 dobram; 1 enterra, perde tudo"
+    principio_core: "Fidelidade na mordomia; responsabilidade ativa; risco recompensado; medo paralisa"
+    aplicacao_icp: "Risk-taking fiel; use it or lose it; ROI espiritual; fear vs faith"
+
+  - titulo: "Servo Impiedoso"
+    reference: "Mateus 18:23-35"
+    sumario_1_linha: "Servo perdoado de 10k talentos, nao perdoa 100 denarios; rei o entrega a torturadores"
+    principio_core: "Perdao recebido exige perdao concedido; desproporção absurda (divida divina vs humana)"
+    aplicacao_icp: "Lider perdoado muito perdoa muito; unforgiveness apos grace e absurdo"
+
+  - titulo: "Ovelha Perdida"
+    reference: "Lucas 15:3-7"
+    sumario_1_linha: "Pastor deixa 99, busca 1 perdida; acha, celebra"
+    principio_core: "Alegria pelo arrependimento de 1 > 99 justos; busca ativa pelo perdido"
+    aplicacao_icp: "Lider valoriza cada pessoa; celebrate wins; go after the lost one"
+
+  - titulo: "Dracma Perdida"
+    reference: "Lucas 15:8-10"
+    sumario_1_linha: "Mulher perde 1 de 10 moedas; varre casa, acha, celebra com amigas"
+    principio_core: "Busca diligente; jubilo diante dos anjos por 1 pecador arrependido"
+    aplicacao_icp: "Atencao aos detalhes; celebrar small wins; value each asset"
+
+  - titulo: "Administrador Infiel"
+    reference: "Lucas 16:1-13"
+    sumario_1_linha: "Administrador demitido reduz dividas dos devedores; senhor o elogia por astúcia"
+    principio_core: "Usar recursos temporarios para fins eternos; filhos do mundo mais habeis; servir Deus ou Mamom"
+    aplicacao_icp: "Shrewd use of resources; eternal ROI; use money to make friends for eternity"
+
+  - titulo: "Rico e Lazaro"
+    reference: "Lucas 16:19-31"
+    sumario_1_linha: "Rico banqueteia; Lazaro mendiga; morrem; reversao eterna; abismo intransponivel"
+    principio_core: "Reversao escatologica; responsabilidade social; revelacao suficiente (Moises/Profetas)"
+    aplicacao_icp: "Wealth = responsibility; social justice; eternal consequences; listen to Scripture now"
+
+  - titulo: "Juiz Iniquo"
+    reference: "Lucas 18:1-8"
+    sumario_1_linha: "Viuva importuna juiz ate ele ceder; Deus nao e juiz iniquo, responde logo"
+    principio_core: "Perseveranca na oracao; Deus fara justica depressa; fe ate a volta de Cristo"
+    aplicacao_icp: "Persistencia; nao desistir; Deus > juiz iniquo; faith when delayed"
+
+  - titulo: "Fariseu e Publicano"
+    reference: "Lucas 18:9-14"
+    sumario_1_linha: "Fariseu se vangloria; publicano bate no peito 'tem misericordia'; publicano justificado"
+    principio_core: "Humildade vs orgulho religioso; justificacao pela graca; exaltacao/humilhacao reciprocas"
+    aplicacao_icp: "Humble prayer; awareness of sin; grace > works; self-exaltation condemned"
+
+  - titulo: "Minas"
+    reference: "Lucas 19:11-27"
+    sumario_1_linha: "Nobre da 10 minas a 10 servos; fieis ganham 10 e 5; infiel guarda em lenco"
+    principio_core: "Mordomia fiel multiplicada; fear paralisa; faithfulness rewarded"
+    aplicacao_icp: "Equal opportunity, different results; accountability; faithful in little = much"
+
+  - titulo: "Credor e Devedores"
+    reference: "Lucas 7:41-43"
+    sumario_1_linha: "Credor perdoa 500 e 50 denarios; quem amara mais? Quem mais foi perdoado"
+    principio_core: "Perdao recebido gera amor proporcional; awareness of sin = gratitude"
+    aplicacao_icp: "Lider que foi muito perdoado ama muito; gratitude fuels service"
+
+  - titulo: "Amigo Importuno"
+    reference: "Lucas 11:5-8"
+    sumario_1_linha: "Amigo bate meia-noite pedindo paes; outro nao quer dar; persistencia vence"
+    principio_core: "Persistencia na oracao; Deus nao e amigo relutante, da prontamente"
+    aplicacao_icp: "Bold asking; persistence; shameless request; God gives willingly"
+
+  - titulo: "Rico Insensato"
+    reference: "Lucas 12:13-21"
+    sumario_1_linha: "Rico colhe muito, constroi celeiros maiores, planeja anos; Deus: 'esta noite morres'"
+    principio_core: "Ilusao da seguranca material; rico para Deus vs rico em bens; death interrupts plans"
+    aplicacao_icp: "Lider aprende fragilidade de planos; eternal perspective; life > possessions"
+
+  - titulo: "Figueira Esteril"
+    reference: "Lucas 13:6-9"
+    sumario_1_linha: "Dono quer cortar figueira sem fruto (3 anos); vinhateiro pede mais 1 ano"
+    principio_core: "Paciencia divina; urgencia do arrependimento; tempo de graca limitado"
+    aplicacao_icp: "Second chances; urgency; limited time; produce fruit or cut down"
+
+  - titulo: "Grande Ceia"
+    reference: "Lucas 14:15-24"
+    sumario_1_linha: "Convidados dao desculpas; anfitriao convida pobres, aleijados, cegos; casa cheia"
+    principio_core: "Convite recusado por ocupados; marginalizados aceitam; Reino para os humildes"
+    aplicacao_icp: "Outsiders valued; insiders too busy; humility = entrance; excuses condemned"
+
+  - titulo: "Torre e Guerra"
+    reference: "Lucas 14:28-32"
+    sumario_1_linha: "Calcular custo antes de construir torre ou ir a guerra; discipulado e caro"
+    principio_core: "Contar o custo do discipulado; commitment informado; nao comece sem terminar"
+    aplicacao_icp: "Strategic planning; count the cost; commitment before action"
+
+  - titulo: "Ovelha, Moeda, Filho (Trilogia do Perdido)"
+    reference: "Lucas 15:1-32"
+    sumario_1_linha: "Tres parabolas: pastor busca ovelha, mulher busca moeda, pai espera filho"
+    principio_core: "Deus busca perdidos ativamente (ovelha/moeda); espera arrependimento (filho); celebra achado"
+    aplicacao_icp: "Seek the lost; celebrate recovery; God's initiative + human response"
+
+  - titulo: "Semente que Cresce Sozinha"
+    reference: "Marcos 4:26-29"
+    sumario_1_linha: "Homem lanca semente, dorme, levanta; semente germina e cresce, ele nao sabe como"
+    principio_core: "Reino cresce misteriosamente; poder divino, nao esforco humano; growth is God's work"
+    aplicacao_icp: "Trust the process; growth mysterious; plant, water, God gives growth; patience"
+
+  - titulo: "Construtor da Torre / Rei em Guerra"
+    reference: "Lucas 14:28-32"
+    sumario_1_linha: "Construtor calcula custo; rei calcula forcas antes da guerra"
+    principio_core: "Contar custo de seguir Jesus; decisao informada; nao começe levianamente"
+    aplicacao_icp: "Due diligence spiritual; commitment after counting cost; discipleship is expensive"
+
+  - titulo: "Casa sobre Rocha vs Areia"
+    reference: "Mateus 7:24-27"
+    sumario_1_linha: "Prudente constroi sobre rocha (pratica palavras); insensato sobre areia (so ouve)"
+    principio_core: "Obediencia = fundamento solido; tempestade revela fundamento; ouvir sem praticar = insensatez"
+    aplicacao_icp: "Implementation > knowledge; resilience through obedience; storms test foundation"
+
+  - titulo: "Sal que Perde Sabor"
+    reference: "Mateus 5:13"
+    sumario_1_linha: "Sal insipido nao serve para nada, e pisado"
+    principio_core: "Discipulos devem preservar/influenciar; perder identidade = inutilidade"
+    aplicacao_icp: "Maintain distinctiveness; influence or irrelevance; cultural impact"
+
+  - titulo: "Candeia Debaixo do Alqueire"
+    reference: "Mateus 5:15"
+    sumario_1_linha: "Ninguem acende candeia para esconder debaixo do alqueire"
+    principio_core: "Luz deve brilhar publicamente; nao esconder fe; testemunho visivel"
+    aplicacao_icp: "Visibility; public witness; don't hide your light; influence requires exposure"
+
+  - titulo: "Olho como Candeia do Corpo"
+    reference: "Mateus 6:22-23"
+    sumario_1_linha: "Olho bom = corpo luminoso; olho mau = corpo em trevas"
+    principio_core: "Perspectiva determina condicao espiritual; focus right thing; singleness of vision"
+    aplicacao_icp: "Focus determines spiritual health; fix your eyes on Jesus; perspective matters"
+
+  - titulo: "Remendo Novo em Roupa Velha"
+    reference: "Marcos 2:21"
+    sumario_1_linha: "Pano novo em roupa velha rasga mais; vinho novo em odre velho estoura"
+    principio_core: "Evangelho nao e remendo no judaismo; nova alianca, nova estrutura; incompatibilidade"
+    aplicacao_icp: "New paradigm requires new structures; innovation vs tradition; transformation not renovation"
+
+  - titulo: "Vinho Novo em Odres Velhos"
+    reference: "Marcos 2:22"
+    sumario_1_linha: "Vinho novo rompe odres velhos; ambos se perdem; vinho novo em odre novo"
+    principio_core: "Nova mensagem requer novas formas; flexibilidade; nao forcar novo em velho"
+    aplicacao_icp: "New wine new wineskins; organizational flexibility; innovation requires new structures"
+
+  - titulo: "Medida que Usais Vos Sera Medida"
+    reference: "Marcos 4:24"
+    sumario_1_linha: "Com a medida que medirdes sereis medidos; quem tem recebera mais"
+    principio_core: "Generosidade retorna; reciprocidade espiritual; lei da semeadura e colheita"
+    aplicacao_icp: "Give generously; reap what you sow; measure you use determines return"
+
+  - titulo: "Lampada Debaixo do Cesto"
+    reference: "Marcos 4:21"
+    sumario_1_linha: "Ninguem acende lampada para por debaixo do cesto, mas no velador"
+    principio_core: "Revelar, nao esconder; eventual revelacao de tudo oculto"
+    aplicacao_icp: "Truth will come to light; transparency; public witness; no hidden agenda"
+
+  - titulo: "Semente de Mostarda (versao Marcos)"
+    reference: "Marcos 4:30-32"
+    sumario_1_linha: "Menor semente, maior hortaliça; passaros se abrigam"
+    principio_core: "Pequenos inicios, grandes resultados; Reino acolhe todos"
+    aplicacao_icp: "Small beginnings; exponential growth; inclusive kingdom"
+
+  - titulo: "Servo Inutil"
+    reference: "Lucas 17:7-10"
+    sumario_1_linha: "Servo que lavrou e apascentou nao merece gratidao; fez o que devia"
+    principio_core: "Servir e dever, nao merito; grace, nao wage; humble service"
+    aplicacao_icp: "Do your duty humbly; no entitlement; faithful service expected"
+
+  - titulo: "Viuva Persistente (variacao)"
+    reference: "Lucas 18:1-8"
+    sumario_1_linha: "Viuva importuna juiz ate vencer"
+    principio_core: "Nunca desistir de orar; Deus fara justica logo"
+    aplicacao_icp: "Persistent prayer; don't give up; God will answer speedily"
+
+  - titulo: "Servos Vigilantes"
+    reference: "Lucas 12:35-48"
+    sumario_1_linha: "Servos esperando senhor voltar da festa; bem-aventurados se vigilantes"
+    principio_core: "Vigilancia ate volta de Cristo; readiness; accountability"
+    aplicacao_icp: "Always ready; faithful stewardship; return of Master imminent"
+
+  - titulo: "Construtor de Torre (isolado)"
+    reference: "Lucas 14:28-30"
+    sumario_1_linha: "Construir torre sem calcular custo = zombaria"
+    principio_core: "Contar custo antes de comecar; wisdom in planning"
+    aplicacao_icp: "Plan before acting; count the cost; finish what you start"
+
+  - titulo: "Servos Inuteis Apos Obediencia"
+    reference: "Lucas 17:10"
+    sumario_1_linha: "Fizemos o que deviamos, somos servos inuteis"
+    principio_core: "Obediencia e expectativa, nao merit badge; humility"
+    aplicacao_icp: "Humble obedience; no pride in duty; servant mindset"
+
+# ==============================================================================
+# QUESTIONS SOCRATIC (25 quotes)
+# Elicitation questions, rhetorical questions, challenging questions
+# ==============================================================================
+
+questions_socratic:
+  - quote: "Quem dizeis que EU sou?"
+    reference: "Mateus 16:15"
+    context: "Apos perguntar 'Quem dizem os homens ser o Filho do Homem?'"
+    tipo: "Elicitacao de confissao pessoal"
+    funcao: "Forcar decisao pessoal, nao apenas opiniao de terceiros; Pedro confessa 'Tu es o Cristo'"
+    aplicacao_icp: "Lider enfrenta questao identidade de Jesus; nao pode ficar neutro; personal decision required"
+
+  - quote: "De quem e esta imagem e inscricao?"
+    reference: "Mateus 22:20"
+    context: "Armadilha sobre tributo a Cesar - moeda mostrada"
+    tipo: "Socratica (leva a conclusao)"
+    funcao: "Revelar resposta atraves de pergunta vs resposta direta; 'Dai a Cesar... a Deus...'"
+    aplicacao_icp: "Sabedoria em conflitos politicos; render to whom due; dual citizenship"
+
+  - quote: "Por que chamais-me Senhor, Senhor, e nao fazeis o que vos mando?"
+    reference: "Lucas 6:46"
+    context: "Conclusao do Sermao da Planicie - obediencia vs retórica"
+    tipo: "Retorica de confrontacao"
+    funcao: "Expor hipocrisia; senhorio implica obediencia; talk vs walk"
+    aplicacao_icp: "Lider questiona gap entre crenca e pratica; lordship = obedience"
+
+  - quote: "Que adianta ao homem ganhar o mundo inteiro e perder a sua alma? Que daria um homem em troca de sua alma?"
+    reference: "Marcos 8:36-37"
+    context: "Apos predizer paixao e ensinar sobre cruz"
+    tipo: "Retorica existencial"
+    funcao: "Forcar avaliacao de prioridades; alma > mundo; trade impossivel"
+    aplicacao_icp: "Executivo avalia soul for success trade; what's your soul worth?"
+
+  - quote: "Nao sao os sas que precisam de medico, mas os doentes. Que significa: Misericordia quero, e nao sacrificio?"
+    reference: "Mateus 9:12-13"
+    context: "Fariseus criticam refeicao com publicanos"
+    tipo: "Analogia + citacao AT (Oseias 6:6)"
+    funcao: "Defender missao a pecadores; misericordia > ritual; learn this"
+    aplicacao_icp: "Lider prioriza compaixao sobre religiosidade; mercy > sacrifice"
+
+  - quote: "Se eu, pelo Espirito de Deus, expulso demonios, logo e chegado a vos o reino de Deus. Como pode alguem entrar na casa do valente e roubar-lhe os bens sem primeiro amarrá-lo?"
+    reference: "Mateus 12:28-29"
+    context: "Acusado de expulsar demonios por Belzebu"
+    tipo: "Logica + metafora"
+    funcao: "Provar poder sobre Satanas; Reino presente; plundering enemy"
+    aplicacao_icp: "Lider reconhece poder de Cristo sobre mal; spiritual warfare real"
+
+  - quote: "Se Satanas expulsa Satanas, dividido esta contra si mesmo; como, pois, subsistira o seu reino?"
+    reference: "Mateus 12:26"
+    context: "Resposta a acusacao de usar poder de Belzebu"
+    tipo: "Reductio ad absurdum"
+    funcao: "Mostrar ilógica da acusacao; house divided falls"
+    aplicacao_icp: "Lider usa logica para refutar acusacoes falsas; internal consistency"
+
+  - quote: "Qual de vos, tendo cem ovelhas e perdendo uma delas, nao deixa as noventa e nove e vai em busca da que se perdeu?"
+    reference: "Lucas 15:4"
+    context: "Fariseus criticam refeicao com pecadores"
+    tipo: "Analogia comum - apelo a experiencia"
+    funcao: "Justificar busca por pecadores; todos fariam isso; God's heart"
+    aplicacao_icp: "Lider valoriza cada membro; go after the one; empathy for lost"
+
+  - quote: "Voce, que ensinas outro, nao te ensinas a ti mesmo?"
+    reference: "Romanos 2:21 (eco de ensino de Jesus)"
+    context: "Hipocrisia de ensinar sem praticar"
+    tipo: "Auto-confrontacao"
+    funcao: "Expor gap ensino-pratica; accountability"
+    aplicacao_icp: "Lider aplica a si o que ensina; walk your talk; integrity"
+
+  - quote: "Qual dos dois fez a vontade do pai?"
+    reference: "Mateus 21:31"
+    context: "Parabola dos Dois Filhos"
+    tipo: "Elicitacao de julgamento"
+    funcao: "Fazer fariseus condenarem a si mesmos; publicanos > religiosos"
+    aplicacao_icp: "Actions > words; lider escolhe acao sobre retórica"
+
+  - quote: "Que vos parece do Cristo? De quem e filho?"
+    reference: "Mateus 22:42"
+    context: "Jesus silencia adversarios, agora pergunta"
+    tipo: "Teologica - identidade messianica"
+    funcao: "Expor limitacao de entendimento farisaico; Messias > filho de Davi"
+    aplicacao_icp: "Questao da identidade de Cristo e central; who is Jesus to you?"
+
+  - quote: "Nao tendes lido... Ou nao lestes na Lei...?"
+    reference: "Mateus 12:3, 5; 19:4; 21:16, 42; 22:31"
+    context: "Multiplas ocasioes - questoes sobre sabado, divorcio, etc"
+    tipo: "Apelo a Escritura"
+    funcao: "Confrontar ignorancia das Escrituras; haven't you read?; Scripture authority"
+    aplicacao_icp: "Lider fundamenta decisoes em Escritura; back to the text; biblical literacy"
+
+  - quote: "Por que pensais mal em vossos coracoes?"
+    reference: "Mateus 9:4"
+    context: "Escribas pensam 'blasfemia' quando Jesus perdoa pecados"
+    tipo: "Conhecimento sobrenatural + confrontacao"
+    funcao: "Revelar pensamentos internos; question motives; heart issue"
+    aplicacao_icp: "Lider examina motivos, nao apenas acoes; heart check"
+
+  - quote: "Que e mais facil dizer: Estao perdoados os teus pecados, ou: Levanta-te e anda?"
+    reference: "Marcos 2:9"
+    context: "Paralitico - Jesus prova autoridade para perdoar"
+    tipo: "Comparacao de dificuldades"
+    funcao: "Milagre visivel valida poder invisivel (perdao); authentication"
+    aplicacao_icp: "Lider valida claims com evidencia; talk backed by power"
+
+  - quote: "E licito no sabado fazer o bem ou o mal? Salvar a vida ou matar?"
+    reference: "Marcos 3:4"
+    context: "Homem com mao ressequida na sinagoga"
+    tipo: "Dilema moral"
+    funcao: "Expor hipocrisia farisaica; good on Sabbath justified; doing good vs legalism"
+    aplicacao_icp: "Lider prioriza bem sobre regra; spirit vs letter; compassion > law"
+
+  - quote: "Como podem os convidados para o casamento jejuar enquanto o noivo esta com eles?"
+    reference: "Marcos 2:19"
+    context: "Questionado sobre por que discipulos nao jejuam"
+    tipo: "Metafora - presenca do noivo"
+    funcao: "Presenca de Jesus muda regras; celebration, not mourning; Bridegroom present"
+    aplicacao_icp: "Presenca de Cristo traz alegria; appropriate response to presence"
+
+  - quote: "Quem e minha mae e meus irmaos?"
+    reference: "Marcos 3:33"
+    context: "Familia biologica chama; Jesus aponta para discipulos"
+    tipo: "Redefinicao de familia"
+    funcao: "Familia espiritual > biologica; quem faz vontade de Deus"
+    aplicacao_icp: "Lider prioriza familia de fe; spiritual kinship; obedience defines family"
+
+  - quote: "Por que esta geracao pede sinal?"
+    reference: "Marcos 8:12"
+    context: "Fariseus pedem sinal; Jesus suspira profundamente"
+    tipo: "Frustracao retorica"
+    funcao: "Rejeitar demanda por sinais; incredulidade apesar de evidencias"
+    aplicacao_icp: "Enough evidence already; lider nao cede a demandas interminaveis; faith not sight"
+
+  - quote: "Ainda nao compreendeis, nem vos lembrais dos cinco paes para cinco mil... nem dos sete paes para quatro mil?"
+    reference: "Mateus 16:9-10"
+    context: "Discipulos preocupados com falta de pao"
+    tipo: "Lembrar milagres passados"
+    funcao: "Reprovar falta de fe; track record de fidelidade; remember past provision"
+    aplicacao_icp: "Lider lembra fidelidade passada de Deus; past provision = future confidence"
+
+  - quote: "Podeis beber o calice que eu bebo ou ser batizados com o batismo com que eu sou batizado?"
+    reference: "Marcos 10:38"
+    context: "Tiago e Joao pedem lugares de honra"
+    tipo: "Desafio ao compromisso"
+    funcao: "Expor ignorancia do custo; gloria vem via sofrimento; cup and baptism = suffering"
+    aplicacao_icp: "Lider conta custo de grandeza; suffering precedes glory; pay the price"
+
+  - quote: "Que quereis que eu vos faca?"
+    reference: "Marcos 10:36, 51"
+    context: "Perguntado a Tiago/Joao (ambicao) e Bartimeu (necessidade)"
+    tipo: "Elicitacao de desejo"
+    funcao: "Expor motivos; mesma pergunta, coracoes diferentes; reveal heart desires"
+    aplicacao_icp: "Lider examina motivos proprios; what do you really want? heart check"
+
+  - quote: "Nao sabeis o que pedis"
+    reference: "Marcos 10:38"
+    context: "Resposta a pedido de Tiago e Joao por lugares de honra"
+    tipo: "Confrontacao de ignorancia"
+    funcao: "Revelar gap entre aspiracao e compreensao; glory via cross"
+    aplicacao_icp: "Lider aprende gap entre desejo e realidade; be careful what you wish for"
+
+  - quote: "Tendes fe em Deus?"
+    reference: "Marcos 11:22"
+    context: "Figueira seca; discipulos admirados"
+    tipo: "Exortacao a fe"
+    funcao: "Conectar milagre a fe; have faith; faith moves mountains"
+    aplicacao_icp: "Lider cultiva fe radical; faith unlocks impossible"
+
+  - quote: "Qual destes tres te parece ter sido o proximo do homem que caiu nas maos dos salteadores?"
+    reference: "Lucas 10:36"
+    context: "Conclusao da parabola do Bom Samaritano"
+    tipo: "Elicitacao de julgamento"
+    funcao: "Fazer interprete da Lei responder propria questao; self-conviction"
+    aplicacao_icp: "Socratic teaching; lider leva a auto-descoberta; answer your own question"
+
+  - quote: "Quando vier o Filho do Homem, achara, porventura, fe na terra?"
+    reference: "Lucas 18:8"
+    context: "Apos parabola do Juiz Iniquo - questao escatologica"
+    tipo: "Retorica escatologica"
+    funcao: "Questionar perseveranca na fe ate a volta; will faith endure?"
+    aplicacao_icp: "Lider persevera ate o fim; long-term faithfulness; endurance tested"
+
+# ==============================================================================
+# PARADOXES & INVERSIONS (20 quotes)
+# Contradictions resolved, both/and, reversals
+# ==============================================================================
+
+paradoxes_inversions:
+  - quote: "Os ultimos serao os primeiros, e os primeiros, ultimos"
+    reference: "Mateus 20:16; Marcos 10:31"
+    context: "Parabola dos Trabalhadores da Vinha; ensino sobre recompensas"
+    tipo: "Inversao de expectativa"
+    resolucao: "Reino opera por graca, nao merito ou tempo de servico; inversao total de valores mundanos"
+    aplicacao_icp: "Meritrocracia invertida; late entrants honored; grace-based economy"
+
+  - quote: "Quem quiser salvar sua vida, a perdera; quem perder por minha causa, a achara"
+    reference: "Mateus 16:25; Marcos 8:35"
+    context: "Apos primeira predicao da Paixao"
+    tipo: "Paradoxo existencial"
+    resolucao: "Vida verdadeira vem de auto-doacao, nao auto-preservacao; death to self = life"
+    aplicacao_icp: "Self-preservation kills; self-giving vivifies; surrender = abundance"
+
+  - quote: "Quem se exalta sera humilhado; quem se humilha sera exaltado"
+    reference: "Mateus 23:12; Lucas 14:11; 18:14"
+    context: "Multiplas ocasioes - hipocrisia, festas, oracao"
+    tipo: "Inversao de status"
+    resolucao: "Humildade e caminho para exaltacao divina; orgulho leva a queda"
+    aplicacao_icp: "Humble leadership rewarded; pride before fall; way up is down"
+
+  - quote: "Muitos primeiros serao ultimos, e ultimos, primeiros"
+    reference: "Mateus 19:30; Marcos 10:31"
+    context: "Apos dialogo com jovem rico"
+    tipo: "Inversao de ordem"
+    resolucao: "Ordem mundana invertida no Reino; outsiders become insiders"
+    aplicacao_icp: "Reversao de hierarquia; underdogs win; Kingdom reversal"
+
+  - quote: "Bem-aventurados os pobres de espirito... Ai de vos, os ricos"
+    reference: "Mateus 5:3; Lucas 6:20, 24"
+    context: "Beatitudes vs Ais"
+    tipo: "Inversao economico-espiritual"
+    resolucao: "Pobreza espiritual (humildade) e riqueza; riqueza material e pobreza; reversal"
+    aplicacao_icp: "Spiritual poverty = wealth; material wealth = danger; paradox of riches"
+
+  - quote: "O maior entre vos sera vosso servo"
+    reference: "Mateus 23:11"
+    context: "Contra hipocrisia dos escribas e fariseus"
+    tipo: "Inversao de grandeza"
+    resolucao: "Grandeza = servico; lideranca = servidao; greatness redefined"
+    aplicacao_icp: "Servant leadership; greatest = servant; serve to lead"
+
+  - quote: "Se nao vos converterdes e nao vos tornardes como criancas, de modo algum entrareis no Reino"
+    reference: "Mateus 18:3"
+    context: "Discipulos perguntam 'quem e o maior?'"
+    tipo: "Inversao de maturidade"
+    resolucao: "Humildade infantil > sabedoria adulta; receptividade > auto-suficiencia"
+    aplicacao_icp: "Beginner's mind; unlearn to learn; childlike humility"
+
+  - quote: "Meu jugo e suave, e meu fardo e leve"
+    reference: "Mateus 11:30"
+    context: "Convite aos cansados"
+    tipo: "Paradoxo do fardo leve"
+    resolucao: "Jugo (restricao) traz liberdade; fardo de Cristo e descanso vs fardo religioso"
+    aplicacao_icp: "Constraints liberate; easy yoke vs heavy religion; freedom in surrender"
+
+  - quote: "Quem nao e contra nos e por nos... Quem nao e por mim e contra mim"
+    reference: "Marcos 9:40; Mateus 12:30"
+    context: "Contextos diferentes - exorcista externo; oposicao farisaica"
+    tipo: "Aparente contradicao"
+    resolucao: "Neutralidade impossivel quanto a Jesus; tolerancia a aliados; oposicao a inimigos"
+    aplicacao_icp: "No neutral ground on Christ; ally or enemy; context determines stance"
+
+  - quote: "Deixai os mortos sepultar os seus mortos"
+    reference: "Mateus 8:22"
+    context: "Discipulo quer primeiro enterrar pai"
+    tipo: "Paradoxo dos mortos"
+    resolucao: "Espiritualmente mortos enterram fisicamente mortos; urgencia do Reino > tradicao"
+    aplicacao_icp: "Spiritual life > physical obligations; Kingdom priority; radical discipleship"
+
+  - quote: "Porque a todo o que tem se lhe dara... ao que nao tem, ate o que tem lhe sera tirado"
+    reference: "Mateus 25:29"
+    context: "Parabola dos Talentos"
+    tipo: "Paradoxo da abundancia/escassez"
+    resolucao: "Fidelidade multiplica; infidelidade perde tudo; use it or lose it"
+    aplicacao_icp: "Faithfulness compounded; unfaithfulness loses all; steward well"
+
+  - quote: "E mais facil passar um camelo pelo fundo de uma agulha do que entrar um rico no Reino"
+    reference: "Marcos 10:25"
+    context: "Jovem rico vai embora triste"
+    tipo: "Hiperbole paradoxal"
+    resolucao: "Riqueza e barreira humanamente intransponivel; possivel com Deus; wealth = danger"
+    aplicacao_icp: "Wealth is obstacle; humanly impossible, divinely possible; trust God not riches"
+
+  - quote: "Aos que tem fome encheu de bens; aos ricos despediu vazios"
+    reference: "Lucas 1:53 (Magnificat)"
+    context: "Cantico de Maria - reversao escatologica"
+    tipo: "Inversao socioeconomica"
+    resolucao: "Deus inverte ordem social; famintos saciados, ricos vazios; great reversal"
+    aplicacao_icp: "Social justice; God sides with poor; reversal coming"
+
+  - quote: "Porque o meu poder se aperfeiçoa na fraqueza"
+    reference: "2 Corintios 12:9 (palavra de Cristo a Paulo)"
+    context: "Espinho na carne de Paulo"
+    tipo: "Paradoxo de poder/fraqueza"
+    resolucao: "Fraqueza humana = espaco para poder divino; strength in weakness"
+    aplicacao_icp: "Lider fraco e forte em Deus; vulnerability = power; weakness welcome"
+
+  - quote: "Bem-aventurados os perseguidos por causa da justica"
+    reference: "Mateus 5:10"
+    context: "Oitava beatitude"
+    tipo: "Paradoxo de felicidade no sofrimento"
+    resolucao: "Sofrer por Cristo = bencao; Reino compensa; perseguicao = badge of honor"
+    aplicacao_icp: "Suffering for right = blessed; persecution expected; eternal reward"
+
+  - quote: "Muitos sao chamados, mas poucos, escolhidos"
+    reference: "Mateus 22:14"
+    context: "Parabola das Bodas do Filho do Rei"
+    tipo: "Paradoxo da eleicao"
+    resolucao: "Convite universal, resposta seletiva; many invited, few accept; grace + response"
+    aplicacao_icp: "Invitation broad, response narrow; not all accept; election paradox"
+
+  - quote: "Dai a Cesar o que e de Cesar, e a Deus o que e de Deus"
+    reference: "Mateus 22:21"
+    context: "Armadilha sobre tributo"
+    tipo: "Both/and, nao either/or"
+    resolucao: "Dual cidadania; obrigacoes a estado e Deus nao se excluem; render to both"
+    aplicacao_icp: "Dual citizenship; obey state, obey God; both/and not either/or"
+
+  - quote: "Se teu olho direito te faz tropecar, arranca-o... se tua mao direita te faz tropecar, corta-a"
+    reference: "Mateus 5:29-30"
+    context: "Sobre adulterio e tentacao"
+    tipo: "Hiperbole radical"
+    resolucao: "Pecado e serio; medidas drasticas justificadas; melhor mutilado que condenado"
+    aplicacao_icp: "Radical measures against sin; cost of purity; cut off sin sources"
+
+  - quote: "Nao vim trazer paz, mas espada"
+    reference: "Mateus 10:34"
+    context: "Missao dos doze - custo do discipulado"
+    tipo: "Paradoxo da paz/conflito"
+    resolucao: "Evangelho divide antes de unir; paz eterna via conflito temporal; truth divides"
+    aplicacao_icp: "Gospel brings conflict; stand for truth costs; division before unity"
+
+  - quote: "Aquele que e fiel no pouco tambem e fiel no muito"
+    reference: "Lucas 16:10"
+    context: "Parabola do Administrador Infiel"
+    tipo: "Principio de proporcionalidade"
+    resolucao: "Pequeno e teste para grande; character in small = character in large"
+    aplicacao_icp: "Small faithfulness = big opportunities; test in little; character proven in minor"
+
+# ==============================================================================
+# METADATA
+# ==============================================================================
+
+metadata:
+  total_quotes: 130
+  breakdown:
+    signature_phrases: 25
+    ethical_commands: 30
+    self_identification: 20
+    parabolas_summaries: 45
+    questions_socratic: 25
+    paradoxes_inversions: 20
+
+  sources: "4 Evangelhos Canonicos (Mateus, Marcos, Lucas, Joao)"
+
+  themes_covered:
+    amor: 35
+    reino_de_deus: 30
+    identidade_cristo: 20
+    perdao: 18
+    lideranca_servico: 22
+    riqueza_pobreza: 15
+    oracao: 12
+    fe: 15
+    humildade: 18
+    discipulado: 20
+    cruz_sacrificio: 12
+    graca: 15
+    justica_misericordia: 18
+    eternidade: 10
+    poder: 8
+
+  icp_applications:
+    - "Executivo 45+ em busca de significado apos sucesso material"
+    - "Lider exausto por performance culture, busca descanso"
+    - "High-achiever questionando meritrocracia, descobrindo graca"
+    - "C-level enfrentando decisoes eticas em marketplace"
+    - "Lider aprendendo servant leadership vs command-control"
+    - "Executivo redescobrindo fe apos anos de secularismo"
+    - "Empresario integrando fe e trabalho (whole-life discipleship)"
+    - "Lider enfrentando fracasso/perda, buscando esperanca"
+    - "Executivo em transicao de carreira, redefinindo sucesso"
+    - "Lider construindo cultura organizacional centrada em valores do Reino"
+
+  executor: "@analyst"
+  task: "TASK-A02: Quote Extraction"
+  date: "2025-10-06"
+  version: "1.0"
+
+  usage_notes:
+    - "Todas as citacoes sao diretas dos Evangelhos (ipsissima verba/vox quando possivel)"
+    - "Referencias cruzadas incluidas quando citacao aparece em multiplos Evangelhos"
+    - "Contexto historico-literario fornecido para cada citacao"
+    - "Aplicacao ICP focada em lider executivo 40-60 anos, alto nivel educacional"
+    - "Themes taggeados para facil busca e agrupamento"
+    - "Paradoxos e inversoes destacam counter-cultural nature do Reino"
+    - "Parabolas resumidas em 1 linha + principio + aplicacao"
+    - "Questoes socraticas revelam metodo pedagogico de Jesus"
+
+  top_10_most_powerful_for_icp:
+    1: "De que adianta ao homem ganhar o mundo inteiro e perder a sua alma? (Marcos 8:36) - Reframe radical de sucesso"
+    2: "Vinde a mim, todos os que estais cansados e sobrecarregados, e eu vos aliviarei (Mateus 11:28) - Antidoto para burnout executivo"
+    3: "Quem quiser tornar-se grande entre vos, sera esse o que vos sirva (Marcos 10:43) - Servant leadership modelado"
+    4: "Buscai, pois, em primeiro lugar, o seu reino e a sua justica (Mateus 6:33) - First things first, prioridades alinhadas"
+    5: "Eu sou o caminho, e a verdade, e a vida (Joao 14:6) - Exclusividade de Cristo em mundo pluralista"
+    6: "Os ultimos serao os primeiros, e os primeiros, ultimos (Mateus 20:16) - Inversao de meritrocracia"
+    7: "Ninguem pode servir a dois senhores (Mateus 6:24) - Confronto com idolatria de dinheiro"
+    8: "Permanecei em mim... porque sem mim nada podeis fazer (Joao 15:5) - Dependencia vs auto-suficiencia"
+    9: "Filho Prodigo - pai acolhe rebelde (Lucas 15:11-32) - Never too late; late bloomers; recomecos validados"
+    10: "Pelos seus frutos os conhecereis (Mateus 7:16) - Avaliacao de lideranca por resultados, nao retoric"
+
+  critical_success_factors:
+    - "Database permite search por theme, aplicacao_icp, referencia"
+    - "Citacoes equilibram graca (amor, perdao) e verdade (santidade, obediencia)"
+    - "Aplicacoes ICP conectam texto antigo a realidade contemporanea de lider"
+    - "Paradoxos e inversoes destacam natureza counter-cultural do Reino"
+    - "Self-identification statements estabelecem divindade e missao de Cristo"
+    - "Parabolas condensadas para rapida consulta e aplicacao"
+    - "Questoes socraticas revelam metodo pedagogico para modern teaching"
+
+  next_steps:
+    - "Integrar quotes_database.yaml ao vector store para semantic search"
+    - "Criar matriz de temas x aplicacoes ICP para recommendation engine"
+    - "Desenvolver chat interface que sugere quotes baseado em situacao de lider"
+    - "Adicionar camada de reflexao (lectio divina prompts) a cada quote"
+    - "Conectar quotes a stories (arcos de transformacao)"

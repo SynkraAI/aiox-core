@@ -1,0 +1,1520 @@
+WEBVTT
+
+00:00:00.430 --> 00:00:06.470
+Bem -vindo, lendário, agora você vai
+aprender tanta coisa que vai
+
+00:00:06.470 --> 00:00:08.270
+potencializar suas notas.
+
+00:00:08.270 --> 00:00:16.150
+Nós vamos começar agora a ver quais são
+os esteroides que a gente pode
+
+00:00:16.150 --> 00:00:21.070
+acrescentar na nossa nota que vão tornar
+o trabalho muito mais fácil, muito mais
+
+00:00:21.070 --> 00:00:23.770
+divertido, muito mais poderoso.
+
+00:00:23.930 --> 00:00:28.590
+E ele envolve, essas coisas que você vai
+aprender nessa aula e nas próximas, elas
+
+00:00:28.590 --> 00:00:34.010
+envolvem coisas que você vai usar no seu
+dia a dia para o seu benefício, quanto
+
+00:00:34.010 --> 00:00:39.710
+também para utilizar outros plugins que
+são aqueles superpoderes que podem ser
+
+00:00:39.710 --> 00:00:42.070
+acrescentados na ferramenta.
+
+00:00:42.570 --> 00:00:48.030
+Então a primeira das coisas que nós
+vamos começar agora é com propriedades.
+
+00:00:48.210 --> 00:00:53.610
+Você vai, ao final dessa aula, saber
+como usar propriedades, o que são
+
+00:00:53.610 --> 00:00:57.650
+propriedades, e a partir de agora eu
+tenho certeza que você não vai deixar
+
+00:00:57.650 --> 00:01:03.190
+uma nota, sem usar, após ver os
+benefícios do que isso traz para você,
+
+00:01:03.270 --> 00:01:03.510
+tá bom?
+
+00:01:03.770 --> 00:01:08.950
+Nós vamos ver aí conceitos que,
+procurando por aí, ou procurando em
+
+00:01:08.950 --> 00:01:12.590
+livros, em materiais, você levaria
+também muito tempo para conseguir,
+
+00:01:12.790 --> 00:01:15.270
+distinguir, saber a melhor forma de
+usar.
+
+00:01:15.450 --> 00:01:20.730
+Aqui não, você já vai direto ao ponto,
+num conteúdo já bem explicativo, muito
+
+00:01:20.730 --> 00:01:25.990
+fácil de compreender, e quando é que
+você precisa usar ou não isso daí, tá
+
+00:01:25.990 --> 00:01:26.170
+bom?
+
+00:01:26.210 --> 00:01:26.890
+Então nós vamos lá.
+
+00:01:28.410 --> 00:01:33.010
+Aqui para você a explicação do que são
+propriedades, né?
+
+00:01:33.070 --> 00:01:36.950
+Antes da gente ver o Anobisidian, antes
+da gente utilizar, eu vou pegar aqui
+
+00:01:36.950 --> 00:01:38.630
+propriedades, metadados, né?
+
+00:01:40.650 --> 00:01:43.130
+E eu quero deixar claro para você o que
+é.
+
+00:01:43.250 --> 00:01:44.250
+O que são propriedades?
+
+00:01:44.410 --> 00:01:51.090
+Você imagina aqui comigo alguma coisa de
+identificação, seja um documento, seja
+
+00:01:51.090 --> 00:01:52.750
+um crachá.
+
+00:01:52.790 --> 00:01:53.690
+O que ele tem?
+
+00:01:53.830 --> 00:01:57.730
+Ele tem nome, RG, CPF, nascimento.
+
+00:01:58.410 --> 00:01:59.930
+Isso são propriedades, tá?
+
+00:02:00.070 --> 00:02:07.150
+São metadados, são dados sobre os dados
+daquela pessoa que vão ser analisados,
+
+00:02:07.250 --> 00:02:07.370
+né?
+
+00:02:08.230 --> 00:02:09.650
+Identificação de um livro, por exemplo.
+
+00:02:09.670 --> 00:02:13.290
+Quando você tem um livro, ah, você tem
+propriedades daquele livro.
+
+00:02:13.390 --> 00:02:15.450
+Você tem o título, o autor, o SBN.
+
+00:02:16.470 --> 00:02:19.010
+Então são metadados, né?
+
+00:02:19.050 --> 00:02:20.750
+Dados sobre o livro.
+
+00:02:21.810 --> 00:02:22.710
+Etiqueta de produto.
+
+00:02:22.990 --> 00:02:24.390
+O que você tem numa etiqueta de produto?
+
+00:02:24.790 --> 00:02:28.310
+Preço, validade, o fabricante,
+propriedades.
+
+00:02:28.930 --> 00:02:30.190
+Você tem uma música.
+
+00:02:30.330 --> 00:02:31.510
+O que você tem sobre a música?
+
+00:02:31.630 --> 00:02:34.290
+Você tem artista, álbum, gênero.
+
+00:02:34.670 --> 00:02:40.750
+Então todos esses exemplos é para que
+você entenda que você tem uma nota, as
+
+00:02:40.750 --> 00:02:45.970
+propriedades são dados sobre o que
+contém aquela nota.
+
+00:02:46.930 --> 00:02:49.730
+Então você imagina uma nota aqui, vamos
+juntar a informação.
+
+00:02:49.970 --> 00:02:52.250
+Eu tenho aqui identificação de um livro,
+né?
+
+00:02:52.470 --> 00:02:57.370
+Imagina que você leu um livro e você vai
+adicionar uma nota sobre aquele livro
+
+00:02:57.370 --> 00:02:58.050
+que você leu.
+
+00:02:58.930 --> 00:03:03.230
+Quais são as propriedades que poderiam
+estar ali nessa nota?
+
+00:03:03.730 --> 00:03:05.470
+Propriedades da anotação de um livro.
+
+00:03:05.550 --> 00:03:11.130
+Ou seja, as anotações sobre o que você
+gostou daquele livro, que você deu
+
+00:03:11.130 --> 00:03:13.450
+aquela marcação, grifou, fez um
+highlight.
+
+00:03:13.970 --> 00:03:17.130
+O que vai ser os dados?
+
+00:03:17.270 --> 00:03:18.930
+Os dados são as anotações do livro.
+
+00:03:19.090 --> 00:03:20.890
+Mas qual é o metadado?
+
+00:03:21.050 --> 00:03:24.470
+Os dados sobre aquele livro que foi ali
+utilizado.
+
+00:03:24.530 --> 00:03:28.390
+O título do livro, o autor, a nota que
+você deu para o livro.
+
+00:03:28.410 --> 00:03:29.970
+Está entendendo?
+
+00:03:30.090 --> 00:03:34.350
+Então é isso que nós vamos fazer e poder
+fazer com propriedades.
+
+00:03:34.350 --> 00:03:38.550
+Então quando você vê no material, quando
+você vê no site, quando você vê em algum
+
+00:03:38.550 --> 00:03:43.750
+lugar alguém falar sobre um metadado,
+você vai entender.
+
+00:03:43.830 --> 00:03:44.890
+São propriedades.
+
+00:03:45.250 --> 00:03:50.810
+São coisas que remetem à categorização,
+classificação da informação.
+
+00:03:51.430 --> 00:03:51.850
+Tá bom?
+
+00:03:54.170 --> 00:03:56.290
+Como que isso é armazenado em Markdown?
+
+00:03:56.550 --> 00:03:57.870
+Através do YAML.
+
+00:03:58.410 --> 00:04:01.690
+Olha só, essa palavrinha aí se pronuncia
+YAML.
+
+00:04:02.690 --> 00:04:07.790
+Traduzindo ela, o acrônimo aí é Yet
+Another Markup Language.
+
+00:04:08.190 --> 00:04:11.950
+Um outro tipo de linguagem Markdown.
+
+00:04:12.170 --> 00:04:13.570
+Mas para que ela serve?
+
+00:04:13.690 --> 00:04:21.630
+Ela serve para arquivos onde está se
+configurando alguma coisa e aquilo
+
+00:04:21.630 --> 00:04:28.230
+precisa ser lido visivelmente, legível,
+da forma mais...
+
+00:04:28.410 --> 00:04:28.850
+Mais fácil possível.
+
+00:04:29.250 --> 00:04:33.350
+Então, por exemplo, se a gente fosse
+comparar o que é um YAML, você pode
+
+00:04:33.350 --> 00:04:39.390
+comparar com XML, que é um tipo de
+arquivo que traz dados estruturados.
+
+00:04:39.890 --> 00:04:41.130
+JSON, né?
+
+00:04:41.210 --> 00:04:46.650
+São arquivos hoje bem utilizados aí para
+quando há trotas de informações e as
+
+00:04:46.650 --> 00:04:50.010
+informações precisam estar organizadas,
+tá?
+
+00:04:50.570 --> 00:04:51.910
+E por aí vai.
+
+00:04:52.010 --> 00:04:56.710
+Tinha antes arquivo INI, que eram
+arquivos com configurações ali.
+
+00:04:56.930 --> 00:04:58.250
+Então são esses tipos.
+
+00:04:58.410 --> 00:04:59.730
+São arquivos de arquivo, né?
+
+00:04:59.850 --> 00:05:06.230
+Que se usam aí dados que precisam ser
+editados e trocados de uma forma
+
+00:05:06.230 --> 00:05:06.690
+legível.
+
+00:05:06.870 --> 00:05:10.270
+Só que o YAML é ainda mais legível, né?
+
+00:05:10.910 --> 00:05:16.550
+Só que, veja só, a ferramenta, o
+Obsidia, vai trazer esses dados para a
+
+00:05:16.550 --> 00:05:20.530
+gente sem a gente precisar estruturar
+ele de forma difícil ali.
+
+00:05:20.630 --> 00:05:20.970
+Por quê?
+
+00:05:21.030 --> 00:05:25.190
+Porque no Obsidia nós temos properties
+dessa forma aqui, visível.
+
+00:05:25.350 --> 00:05:30.390
+A ferramenta já trouxe para a gente uma
+forma visível, de a gente poder acessar
+
+00:05:30.390 --> 00:05:35.110
+esses metadados, essas propriedades.
+
+00:05:35.170 --> 00:05:40.330
+Eu vou explicar para você o que são, vou
+explicar como usar, vou explicar quais
+
+00:05:40.330 --> 00:05:48.250
+são aí as propriedades padrão da
+ferramenta, como você pode inserir as
+
+00:05:48.250 --> 00:05:49.090
+propriedades, tá bom?
+
+00:05:49.130 --> 00:05:55.170
+Então vamos lá para o Obsidia, que nós
+vamos agora aprender a como fazer isso
+
+00:05:55.170 --> 00:05:56.230
+na ferramenta, verão?
+
+00:05:57.470 --> 00:05:58.310
+Primeira coisa.
+
+00:05:58.410 --> 00:06:01.850
+A gente já precisa entender que existem
+várias formas de
+
+00:06:01.850 --> 00:06:06.430
+você inserir propriedades na ferramenta.
+
+00:06:06.490 --> 00:06:11.390
+Uma delas, vamos para várias aí, como
+você já viu, você pode inserir e fazer
+
+00:06:11.390 --> 00:06:16.290
+as coisas, seja por teclado, por mouse,
+por menu, por command palette, que é
+
+00:06:16.290 --> 00:06:18.070
+aquela paleta de comando.
+
+00:06:18.130 --> 00:06:21.850
+Então, meu, são diversas formas de fazer
+a mesma coisa.
+
+00:06:22.110 --> 00:06:22.890
+Então vamos lá.
+
+00:06:22.990 --> 00:06:27.150
+Uma primeira forma de você acrescentar
+propriedade, você pode dar o command P,
+
+00:06:27.270 --> 00:06:33.050
+que é a paleta de comando, e se você
+digitar property, você já vai ver, ou
+
+00:06:33.050 --> 00:06:38.690
+propriedade, se eu tiver aí em inglês,
+add file property, ele já vai abrir a
+
+00:06:38.690 --> 00:06:43.490
+possibilidade, você já pode perceber que
+ali ele já traz uma tecla de atalho, que
+
+00:06:43.490 --> 00:06:48.490
+é para mim, no meu caso, o command e o
+ponto e vírgula.
+
+00:06:48.830 --> 00:06:53.530
+No seu caso aí pode ser contra o ponto e
+vírgula, mas eu vou dar enter aqui na
+
+00:06:53.530 --> 00:06:55.330
+paleta de comando.
+
+00:06:55.350 --> 00:07:05.430
+Então, pronto, ele já trouxe para mim
+aqui, que esse sentido aqui é o que ele
+
+00:07:05.430 --> 00:07:13.670
+diz, no caso, você corre em vigodiação,
+e agora qualquer coisa que a genteÕs
+
+00:07:13.670 --> 00:07:19.550
+aguardar, o meu próximo vídeo vai dar
+os..., é, olha só como que funciona
+
+00:07:19.550 --> 00:07:22.850
+gente, porque ,完了 ilumina tudo.
+
+00:07:22.850 --> 00:07:25.270
+seu uso de expandir, gente, é uma Unless
+você treinar estes arquivos, para você
+
+00:07:25.270 --> 00:07:28.290
+Metro, para você investir no seu time,
+para vocêutter cagando lá em cima,
+
+00:07:28.290 --> 00:07:29.030
+porque não, se está aqui a gente vira,
+vou dar enter, né?
+
+00:07:29.030 --> 00:07:29.630
+Nem precisa dar enter.
+
+00:07:29.790 --> 00:07:30.810
+Só que veja, tá?
+
+00:07:30.970 --> 00:07:38.310
+Isso só vai acontecer, isso só vai
+acontecer se for a primeira linha do meu
+
+00:07:38.310 --> 00:07:38.770
+arquivo.
+
+00:07:38.930 --> 00:07:41.830
+Muita gente, às vezes, pergunta ó, eu
+vou lá pra segunda, né?
+
+00:07:41.930 --> 00:07:44.050
+Segunda linha do meu, da minha nota.
+
+00:07:44.330 --> 00:07:45.590
+Traço, traço, traço.
+
+00:07:45.750 --> 00:07:46.530
+Não acontece.
+
+00:07:46.950 --> 00:07:50.470
+Quando eu dou enter, ele vai colocar uma
+barra, né?
+
+00:07:50.570 --> 00:07:51.190
+Na horizontal.
+
+00:07:51.650 --> 00:07:57.130
+Só vai inserir propriedade com traço,
+traço, traço, se for a primeira linha da
+
+00:07:57.130 --> 00:07:57.370
+nota.
+
+00:07:57.710 --> 00:07:58.190
+Pronto.
+
+00:07:58.390 --> 00:07:58.630
+Ah lá.
+
+00:07:59.230 --> 00:07:59.710
+Propriedades.
+
+00:07:59.990 --> 00:08:03.670
+O que você tá vendo aí é que ele abriu
+três propriedades, tá?
+
+00:08:03.830 --> 00:08:06.030
+Que são default pra ferramenta.
+
+00:08:06.550 --> 00:08:10.110
+Elas são propriedades que você não pode,
+né?
+
+00:08:10.830 --> 00:08:12.990
+Criar outra com esse nome, porque ela já
+existe.
+
+00:08:13.310 --> 00:08:17.770
+E eu vou explicar o que cada uma delas
+faz, mas antes disso, né?
+
+00:08:17.850 --> 00:08:23.350
+Nós vamos aqui criar os exemplos com as
+nossas propriedades, tá?
+
+00:08:24.290 --> 00:08:27.670
+Tem uma outra forma ainda de acrescentar
+propriedades.
+
+00:08:27.690 --> 00:08:32.910
+Olha, se eu venho aqui, nesses três
+pontinhos, eu aqui vou encontrar também,
+
+00:08:33.090 --> 00:08:34.670
+add file properties.
+
+00:08:35.150 --> 00:08:38.270
+Ó, tudo faz a mesma coisa.
+
+00:08:38.390 --> 00:08:42.170
+Ou seja, várias maneiras de fazer a
+mesma coisa, tudo bem?
+
+00:08:43.070 --> 00:08:44.770
+Agora, você imagina o seguinte.
+
+00:08:45.110 --> 00:08:51.270
+Vamos imaginar que essa nota é pra
+anotações de um livro que eu li.
+
+00:08:51.430 --> 00:08:55.990
+Então, uma das propriedades que eu posso
+criar aqui é, autor.
+
+00:08:56.290 --> 00:08:56.850
+Tá legal?
+
+00:08:57.410 --> 00:09:03.230
+Veja só, ó, autor é um texto, eu posso
+ter letras e números, tá?
+
+00:09:03.550 --> 00:09:08.310
+Mas eu preciso ter uma letra, não pode
+ser só número, ou a minha propriedade.
+
+00:09:08.590 --> 00:09:11.290
+Também não pode ter espaço, tá?
+
+00:09:12.310 --> 00:09:15.890
+Propriedade não pode ter nada markdown,
+né?
+
+00:09:15.910 --> 00:09:19.890
+Ou seja, negrito e tal, que aquelas
+coisas não se usa, né?
+
+00:09:19.890 --> 00:09:21.350
+Só texto mesmo, tudo bem?
+
+00:09:21.570 --> 00:09:28.110
+Você pode usar complementos, como por
+exemplo o underline, tracinho e por aí,
+
+00:09:28.250 --> 00:09:29.190
+aí por diante, tá?
+
+00:09:29.890 --> 00:09:33.910
+Também propriedade não é case sensitive,
+tá?
+
+00:09:33.930 --> 00:09:36.430
+Então, assim, maiúsculo e minúsculo é da
+mesma.
+
+00:09:36.770 --> 00:09:41.730
+Então, autor com A maiúsculo e autor com
+tudo minúsculo ou tudo maiúsculo é a
+
+00:09:41.730 --> 00:09:42.830
+mesma coisa, tá bom?
+
+00:09:43.190 --> 00:09:44.990
+Então, eu vou criar aqui, ó, autor.
+
+00:09:46.070 --> 00:09:48.590
+Aqui é onde eu coloco o nome do autor,
+né?
+
+00:09:48.610 --> 00:09:53.030
+Pra classificar as informações sobre o
+livro, né?
+
+00:09:53.190 --> 00:09:54.870
+Mas você pode vir aqui, né?
+
+00:09:54.930 --> 00:10:03.350
+Na propriedade, ó, e você clicando aqui,
+ó, nessa nessa, nesses tracinhos aqui da
+
+00:10:03.350 --> 00:10:08.590
+propriedade, você pode escolher o tipo
+da propriedade.
+
+00:10:08.730 --> 00:10:15.190
+Ela vai armazenar texto, uma lista, ou
+seja, várias opções de alguma coisa, vai
+
+00:10:15.190 --> 00:10:21.130
+armazenar número, vai ser um checkbox
+que salva ou não, né?
+
+00:10:21.130 --> 00:10:24.110
+Você checka ou não, se confirma ou não,
+né?
+
+00:10:24.750 --> 00:10:27.630
+Data e data e horário.
+
+00:10:28.370 --> 00:10:32.950
+A data e data e horário vai pegar a
+configuração de data e horário do seu
+
+00:10:32.950 --> 00:10:33.610
+sistema, tá?
+
+00:10:33.730 --> 00:10:36.410
+Seja o Mac ou o Windows, ele vai
+respeitar isso.
+
+00:10:36.610 --> 00:10:38.570
+Então, aqui eu seleciono o tipo.
+
+00:10:38.830 --> 00:10:40.990
+Bom, autor é texto, né?
+
+00:10:41.030 --> 00:10:43.230
+Então, eu vou colocar aqui um texto.
+
+00:10:43.610 --> 00:10:45.190
+Vou adicionar propriedade.
+
+00:10:45.190 --> 00:10:48.770
+Gente, aí também diversas formas de
+fazer, tá?
+
+00:10:49.010 --> 00:10:53.330
+Por tecla de atalho e um monte de outras
+possibilidades.
+
+00:10:53.330 --> 00:10:57.690
+Aqui eu tenho um botão add property e
+ele vai colocar, por exemplo, eu vou
+
+00:10:57.690 --> 00:10:59.830
+colocar aqui por exemplo, título, tá?
+
+00:11:01.010 --> 00:11:06.110
+E também o título vai ser o padrão ali,
+que é texto, né?
+
+00:11:06.350 --> 00:11:09.310
+Aqui eu vou colocar a nota que eu vou
+dar para o livro.
+
+00:11:09.570 --> 00:11:14.790
+E imagine que aqui a nota, eu quero
+colocar number, né?
+
+00:11:14.830 --> 00:11:16.750
+Eu vou dar de 1 a 10, por exemplo.
+
+00:11:18.110 --> 00:11:22.250
+Então, veja, eu coloquei, você lembra
+dos exemplos que eu dei lá, o cartão de
+
+00:11:22.250 --> 00:11:27.890
+identificação, a lista de produto, a
+etiqueta de produto, enfim, as
+
+00:11:27.890 --> 00:11:29.470
+informações, as informações do livro, da
+música.
+
+00:11:29.870 --> 00:11:35.050
+Então, aqui eu estou categorizando a
+minha nota.
+
+00:11:35.290 --> 00:11:37.750
+Estou colocando propriedades para a
+minha nota.
+
+00:11:38.530 --> 00:11:43.230
+Adriano, como que isso é armazenado lá
+dentro do Markdown, né?
+
+00:11:43.510 --> 00:11:46.210
+O que é aquele YAML que você falou, né?
+
+00:11:46.250 --> 00:11:49.690
+Que é o formato de você organizar as
+coisas.
+
+00:11:49.970 --> 00:11:50.790
+É isso aqui, ó.
+
+00:11:50.850 --> 00:11:54.310
+Eu vou pegar aqui, vou colocar o...
+
+00:11:55.890 --> 00:11:57.630
+clicar aqui nos três pontinhos, né?
+
+00:11:58.250 --> 00:12:00.450
+E vou selecionar aqui, lembra daquela
+opção?
+
+00:12:00.870 --> 00:12:01.730
+Search Mode.
+
+00:12:01.990 --> 00:12:06.550
+Porque aí, com o Search Mode, ele vai me
+mostrar o que ele está armazenando lá
+
+00:12:06.550 --> 00:12:07.250
+dentro.
+
+00:12:07.710 --> 00:12:08.630
+Então, olha aí.
+
+00:12:08.690 --> 00:12:10.210
+Ele está armazenando isso aqui, ó.
+
+00:12:10.870 --> 00:12:12.810
+Então, eu não coloquei os dados, né?
+
+00:12:12.890 --> 00:12:14.010
+Mas vamos colocar aqui?
+
+00:12:14.210 --> 00:12:17.550
+Vou colocar aqui, por exemplo, Naval.
+
+00:12:18.470 --> 00:12:21.670
+O título é o almanac, né?
+
+00:12:21.730 --> 00:12:22.330
+De Naval.
+
+00:12:24.370 --> 00:12:24.850
+Aqui.
+
+00:12:26.950 --> 00:12:27.430
+Naval.
+
+00:12:30.360 --> 00:12:33.240
+Eu dei nota 10 para esse livro.
+
+00:12:33.340 --> 00:12:33.840
+Beleza.
+
+00:12:33.860 --> 00:12:34.260
+Então, ó.
+
+00:12:34.300 --> 00:12:38.220
+Armazenei as propriedades aqui e vou vir
+aqui, Search Mode.
+
+00:12:38.520 --> 00:12:42.780
+Ó, isso aqui é o YAML, né?
+
+00:12:42.920 --> 00:12:50.480
+Que é a forma como é armazenado pra daí
+tanto ficar visível e disponível para os
+
+00:12:50.480 --> 00:12:55.220
+plugins, como também para a sua
+organização.
+
+00:12:55.380 --> 00:13:01.600
+Bom, aí existe uma coisa de configuração
+que eu já quero abordar aqui com você,
+
+00:13:01.720 --> 00:13:02.380
+tá?
+
+00:13:04.700 --> 00:13:10.040
+Como você deseja ver as propriedades na
+sua nota.
+
+00:13:10.480 --> 00:13:17.980
+Você pode ver a propriedade na sua nota
+dessa forma, ou seja, toda a sua nota
+
+00:13:17.980 --> 00:13:19.380
+vai começar aqui embaixo, né?
+
+00:13:19.460 --> 00:13:24.060
+Você vai ter aqui o resumo do livro.
+
+00:13:24.500 --> 00:13:28.800
+Você tem os dados aqui embaixo da sua
+nota, você vai começar a descrever sua
+
+00:13:28.800 --> 00:13:33.940
+nota sobre, né, aquilo que você viu
+aqui.
+
+00:13:34.100 --> 00:13:38.500
+E aí, então, você pode decidir o
+seguinte, eu quero ver as propriedades
+
+00:13:38.500 --> 00:13:41.260
+da minha nota desse jeito que tá aí.
+
+00:13:41.880 --> 00:13:45.020
+Não, eu não quero ver as propriedades
+aí.
+
+00:13:45.140 --> 00:13:48.900
+Eu quero ver as propriedades de outra
+forma.
+
+00:13:48.940 --> 00:13:50.180
+Eu quero ver em outro lugar.
+
+00:13:50.760 --> 00:13:56.220
+Eu não quero que fique aparecendo os
+metadados dos arquivos atrapalhando o
+
+00:13:56.220 --> 00:13:58.240
+texto, né, da minha nota.
+
+00:13:58.340 --> 00:13:59.220
+Vamos supor assim.
+
+00:14:00.020 --> 00:14:01.500
+Então, o que você pode fazer?
+
+00:14:01.680 --> 00:14:06.060
+Eu, particularmente, gosto de ver as
+propriedades, né, os metadados, desse
+
+00:14:06.060 --> 00:14:07.740
+jeito aqui que vem por default.
+
+00:14:08.000 --> 00:14:13.200
+Mas eu vou te ensinar agora como fazer
+isso acontecer de forma diferente, tá
+
+00:14:13.200 --> 00:14:13.360
+bom?
+
+00:14:14.540 --> 00:14:19.360
+Bom, pra isso, olha só, lembra que eu
+falei que as informações vão sendo dadas
+
+00:14:19.360 --> 00:14:20.360
+aos poucos?
+
+00:14:20.520 --> 00:14:26.160
+Que tinham coisa nos menus que eu não ia
+tá passando de uma vez só porque não faz
+
+00:14:26.160 --> 00:14:26.600
+sentido.
+
+00:14:27.120 --> 00:14:31.600
+Agora eu quero, voltar com você no menu
+de configuração, que aqui, ó, você
+
+00:14:31.600 --> 00:14:36.620
+acessa pela engrenagem ali embaixo, né,
+no inferior à esquerda, e você vai para
+
+00:14:36.620 --> 00:14:39.020
+a opção do editor, tá?
+
+00:14:39.120 --> 00:14:39.640
+Editor.
+
+00:14:40.060 --> 00:14:47.240
+E aí, você vai procurar aqui, nesta
+parte do editor, propriedades no
+
+00:14:47.240 --> 00:14:49.460
+documento, ou properties in document.
+
+00:14:50.000 --> 00:14:57.340
+E vai ter aqui uma listinha que mostra
+visible, hiding, ou source, né?
+
+00:14:58.700 --> 00:15:01.980
+Visível, né, escondido, ou source.
+
+00:15:02.140 --> 00:15:06.300
+E isso diz respeito a essas propriedades
+lá em cima da nota.
+
+00:15:06.700 --> 00:15:08.660
+Então, visible, que que ele vai fazer?
+
+00:15:08.760 --> 00:15:10.440
+Vai deixar isso aqui, ó, tá?
+
+00:15:10.980 --> 00:15:17.860
+Agora, se eu seleciono, né, venho aqui e
+coloco hiding, que que vai acontecer?
+
+00:15:18.500 --> 00:15:19.980
+Não mostra o metadata.
+
+00:15:21.120 --> 00:15:21.560
+Apagou?
+
+00:15:21.660 --> 00:15:23.640
+Não, ele só não está exibindo.
+
+00:15:24.300 --> 00:15:24.920
+Tá legal?
+
+00:15:25.160 --> 00:15:30.360
+E eu vou mostrar como daí que você vê se
+você esconder desse jeito aqui da sua
+
+00:15:30.360 --> 00:15:30.620
+nota.
+
+00:15:30.700 --> 00:15:31.980
+Na minha nota, eu quero só texto.
+
+00:15:32.240 --> 00:15:33.240
+Quero deixar hiding.
+
+00:15:33.620 --> 00:15:34.060
+Beleza.
+
+00:15:34.220 --> 00:15:35.300
+Qual a outra opção?
+
+00:15:35.920 --> 00:15:39.340
+A outra opção é source.
+
+00:15:39.740 --> 00:15:41.120
+Que que faz o source?
+
+00:15:42.520 --> 00:15:46.960
+Ele traz o metadata na opção de YAML,
+né?
+
+00:15:47.040 --> 00:15:49.260
+Que é essa daí, ó, que a gente está
+usando.
+
+00:15:49.780 --> 00:15:51.340
+Tá vendo aí agora, tá?
+
+00:15:51.760 --> 00:15:57.880
+Ou seja, aquele formato visível, fonte,
+né, da coisa, e não aquele formato
+
+00:15:57.880 --> 00:15:58.260
+visual.
+
+00:15:58.540 --> 00:16:05.000
+Só que aqui você perde aquela coisa de,
+né, toda a facilidade visual de você
+
+00:16:05.000 --> 00:16:08.360
+poder manusear, né, as propriedades.
+
+00:16:08.600 --> 00:16:13.480
+Então, particularmente, né, eu prefiro
+deixar o meu visible, tá bom?
+
+00:16:13.860 --> 00:16:16.160
+Então, ó, recapitulando aqui.
+
+00:16:16.300 --> 00:16:17.280
+Editor, tá?
+
+00:16:17.420 --> 00:16:25.260
+Nas configurações aqui, editor,
+properties in documents, visible, ou a
+
+00:16:25.260 --> 00:16:26.300
+opção que você escolher.
+
+00:16:26.480 --> 00:16:30.920
+Adriano, vamos imaginar que eu escolhi a
+opção de esconder as propriedades.
+
+00:16:30.980 --> 00:16:34.420
+Que que eu posso fazer pra ver as
+propriedades daí?
+
+00:16:34.520 --> 00:16:36.980
+Então, eu vou fazer, vou simular com
+você isso daí, tá?
+
+00:16:37.180 --> 00:16:40.380
+Vamos imaginar que eu deixei aqui no
+meu, é...
+
+00:16:40.380 --> 00:16:45.180
+na minha propriedade no documento, eu
+deixei aqui, ó, escondido.
+
+00:16:45.620 --> 00:16:48.140
+Como que eu faço pra ver as
+propriedades, Adriano?
+
+00:16:48.440 --> 00:16:52.280
+Ou, mesmo que você deixe visível, você
+pode habilitar esse recurso que eu vou
+
+00:16:52.280 --> 00:16:52.960
+mostrar agora.
+
+00:16:53.760 --> 00:16:58.420
+No menu de configuração aqui, ó, você
+vai em...
+
+00:16:59.210 --> 00:16:59.980
+core plugins.
+
+00:17:00.280 --> 00:17:04.440
+Lembra dos plugins nativos que a gente
+viu aí nas aulas anteriores?
+
+00:17:04.580 --> 00:17:10.640
+Você vai aqui no plugin nativo e você
+vai descer a lista aqui em properties
+
+00:17:10.640 --> 00:17:11.920
+view, né?
+
+00:17:12.060 --> 00:17:14.440
+Ou visualização de propriedades.
+
+00:17:14.480 --> 00:17:15.520
+E o que que você vai fazer?
+
+00:17:15.760 --> 00:17:19.420
+Você vai pegar isso aqui e marcar.
+
+00:17:19.760 --> 00:17:22.460
+Ou seja, olha o que ele tá falando aqui.
+
+00:17:22.560 --> 00:17:23.380
+Que que isso aqui faz?
+
+00:17:23.640 --> 00:17:25.620
+Quando você habilita isso aqui, que que
+ele faz?
+
+00:17:26.280 --> 00:17:29.960
+Ele mostra os metadados, né?
+
+00:17:30.060 --> 00:17:33.200
+Dos seus arquivos no sidebar.
+
+00:17:33.320 --> 00:17:35.480
+Sidebar é aquela barra lateral.
+
+00:17:35.680 --> 00:17:37.100
+Então, olha o que vai acontecer.
+
+00:17:38.100 --> 00:17:45.800
+Quando você agora não tem a propriedade
+no arquivo, você pode vir aqui, na
+
+00:17:45.800 --> 00:17:47.660
+primeira vez só que você vai fazer isso
+aqui, ó.
+
+00:17:47.740 --> 00:17:52.420
+Você vai dar o command palette e vai
+digitar properties.
+
+00:17:53.360 --> 00:17:56.800
+Habilitou duas novas opções aqui de
+properties.
+
+00:17:57.340 --> 00:18:02.700
+Que é property view show all properties
+que ele vai mostrar as propriedades
+
+00:18:02.700 --> 00:18:06.820
+existentes no seu vault, no seu cofre
+inteirinho.
+
+00:18:06.920 --> 00:18:12.960
+Você pode localizar por propriedade onde
+estão notas usando até uma mesma
+
+00:18:12.960 --> 00:18:13.980
+informação, tá?
+
+00:18:14.080 --> 00:18:15.560
+Você pode fazer pesquisa.
+
+00:18:16.240 --> 00:18:18.640
+Depois a barra de pesquisa é uma coisa a
+parte.
+
+00:18:18.660 --> 00:18:19.660
+Nós vamos ter uma aula aí.
+
+00:18:19.840 --> 00:18:22.640
+Agora você pega, por exemplo, show file
+properties.
+
+00:18:22.780 --> 00:18:25.700
+Ou seja, eu quero ver as propriedades
+deste meu arquivo.
+
+00:18:26.140 --> 00:18:27.000
+Olha o que que acontece.
+
+00:18:27.340 --> 00:18:28.300
+Ele mostra aqui do lado.
+
+00:18:28.540 --> 00:18:32.200
+Agora, sempre que você tiver uma nota e
+você fechar aqui, ó.
+
+00:18:32.280 --> 00:18:37.300
+Quando você tiver uma nota e abrir a
+barra ele vai ter essa opção aqui, ó.
+
+00:18:37.420 --> 00:18:38.800
+De file properties.
+
+00:18:39.060 --> 00:18:44.200
+Ou seja, eu tenho autor, título e nota
+desse livro e posso adicionar novas
+
+00:18:44.200 --> 00:18:44.780
+propriedades.
+
+00:18:44.920 --> 00:18:50.620
+Ou seja, as propriedades vão ficar aqui
+na lateral e não junto com a sua nota.
+
+00:18:50.940 --> 00:18:59.060
+Porém, nada impede de lá no editor eu
+ter a opção visible também aqui na nota
+
+00:18:59.060 --> 00:19:00.840
+e ver aqui, né?
+
+00:19:01.200 --> 00:19:04.820
+Ele já habilitou também aqui do lado, ó,
+all properties.
+
+00:19:05.040 --> 00:19:07.960
+Ou seja, ele vai ver todas as
+propriedades.
+
+00:19:07.960 --> 00:19:13.160
+Vai mostrar pra você todas as
+propriedades sendo usadas no seu vault
+
+00:19:13.160 --> 00:19:14.500
+inteirinho, tá legal?
+
+00:19:15.140 --> 00:19:16.500
+Então, vamos lá.
+
+00:19:16.600 --> 00:19:21.820
+Quero recapitular com você aqui a
+importância do metadata e das
+
+00:19:21.820 --> 00:19:23.100
+propriedades, tá?
+
+00:19:23.420 --> 00:19:28.900
+Agora você tá vendo como usar isso para
+a sua nota.
+
+00:19:29.360 --> 00:19:34.000
+Porém, você vai mais a frente perceber
+que isso aqui também é usual e você vai
+
+00:19:34.000 --> 00:19:35.440
+precisar para plugins.
+
+00:19:35.980 --> 00:19:39.400
+Então, plugins vão trabalhar muito com
+metadata, tá?
+
+00:19:39.500 --> 00:19:43.940
+Pra saber como trabalhar as informações
+das suas notas, como organizar como
+
+00:19:43.940 --> 00:19:46.020
+evoluir suas notas, tá bom?
+
+00:19:46.320 --> 00:19:56.100
+Bom, você vai ver que aqui nós temos as
+propriedades que são default aqui já
+
+00:19:56.100 --> 00:19:57.760
+quando você adiciona as propriedades.
+
+00:19:58.260 --> 00:20:01.680
+Eu vou tratar de uma delas, que é essa
+aqui.
+
+00:20:01.780 --> 00:20:02.100
+Por quê?
+
+00:20:02.180 --> 00:20:06.680
+Porque a CSS Classes já seria uma aula
+avançada que nós vamos ter mais a
+
+00:20:06.680 --> 00:20:06.980
+frente.
+
+00:20:07.120 --> 00:20:08.720
+Vamos precisar usar ela, tá bom?
+
+00:20:09.500 --> 00:20:11.660
+Tags é a próxima aula.
+
+00:20:11.760 --> 00:20:13.800
+Próxima aula eu vou falar sobre tags,
+né?
+
+00:20:13.820 --> 00:20:17.380
+Como você trabalha com tags e o que são
+tags nas suas notas.
+
+00:20:17.600 --> 00:20:23.160
+Então, primeiramente, eu quero trabalhar
+aqui essa que agora faz parte do
+
+00:20:23.160 --> 00:20:27.180
+Obsidian das propriedades que são os
+aliases.
+
+00:20:27.340 --> 00:20:32.740
+Antigamente, versões anteriores do
+Obsidian era simplesmente alias, mas
+
+00:20:32.740 --> 00:20:36.580
+agora ele aqui possui aliases.
+
+00:20:36.620 --> 00:20:40.900
+Você pode ter vários aliases para a
+nota.
+
+00:20:41.000 --> 00:20:41.940
+O que são aliases?
+
+00:20:42.080 --> 00:20:43.480
+São apelidos.
+
+00:20:43.800 --> 00:20:48.880
+Você tem aqui a nota que eu chamei de
+evoluindo para além de notas.
+
+00:20:48.880 --> 00:20:50.100
+Esse é o nome da minha nota.
+
+00:20:52.080 --> 00:20:57.020
+Significando que se eu for fazer link
+para essa nota numa outra nota, eu vou
+
+00:20:57.340 --> 00:21:00.900
+digitar aquele colchete colchete
+evoluindo para além das notas.
+
+00:21:00.900 --> 00:21:02.680
+Então, eu vou criar uma nova nota aqui,
+ó.
+
+00:21:03.160 --> 00:21:05.340
+E eu vou aqui nessa nota, né?
+
+00:21:06.440 --> 00:21:07.180
+Aqui, ó.
+
+00:21:07.260 --> 00:21:07.940
+Outra nota.
+
+00:21:08.580 --> 00:21:15.720
+Eu vou chamar aqui aquela outra nota lá,
+digitando colchete colchete e, ah lá,
+
+00:21:15.780 --> 00:21:16.820
+aparece pra mim o que?
+
+00:21:17.360 --> 00:21:19.140
+Evoluindo para além de outras notas.
+
+00:21:19.580 --> 00:21:22.740
+Vamos imaginar que o nome do seu arquivo
+seja complicado, né?
+
+00:21:22.820 --> 00:21:26.380
+Você não queira tratar dessa forma.
+
+00:21:27.340 --> 00:21:28.140
+Você pode fazer o que?
+
+00:21:28.440 --> 00:21:29.580
+Vamos voltar lá.
+
+00:21:30.260 --> 00:21:33.360
+Eu posso criar um alias, um apelido.
+
+00:21:33.440 --> 00:21:34.860
+E esse apelido vai ser
+
+00:21:38.080 --> 00:21:41.320
+evoluindo notas.
+
+00:21:42.840 --> 00:21:43.540
+Tá legal?
+
+00:21:43.780 --> 00:21:44.080
+Ah, lá.
+
+00:21:44.200 --> 00:21:52.960
+Ele clicou um xizinho aí porque ele
+pode, você pode ter mais de uma mais um
+
+00:21:52.960 --> 00:21:54.020
+apelido para a mesma nota.
+
+00:21:54.440 --> 00:21:56.080
+O que que acontece aqui, gente?
+
+00:21:56.080 --> 00:22:00.980
+Quando eu dei um alias, um apelido,
+quando eu for aqui agora e eu digitar
+
+00:22:00.980 --> 00:22:06.100
+colchete colchete, além de evoluindo
+para além de notas, olha lá o que me
+
+00:22:06.100 --> 00:22:08.060
+apareceu, evoluindo notas.
+
+00:22:08.140 --> 00:22:10.080
+Eu tenho um apelido pra minha nota.
+
+00:22:10.240 --> 00:22:11.380
+É a mesma nota, tá?
+
+00:22:12.140 --> 00:22:14.240
+Porém, aqui, né?
+
+00:22:14.300 --> 00:22:17.300
+Eu tenho um apelido pra ela.
+
+00:22:17.480 --> 00:22:17.820
+Tá?
+
+00:22:17.920 --> 00:22:22.560
+Então isso é uma coisa legal aí que foi
+acrescentado aqui nas propriedades.
+
+00:22:23.100 --> 00:22:26.520
+Nós vamos ver mais sobre propriedades,
+tá?
+
+00:22:26.600 --> 00:22:31.000
+Você vai aprender a como pesquisar com
+propriedades, como evoluir isso daí.
+
+00:22:31.360 --> 00:22:35.940
+A parte de TED, já falei, quando eu
+estiver explicando TED eu vou explicar
+
+00:22:35.940 --> 00:22:38.780
+propriedade TED também, né?
+
+00:22:39.760 --> 00:22:44.080
+Mas eu acho que aqui já dá pra você ter
+uma noção legal do que que é que dá pra
+
+00:22:44.080 --> 00:22:49.020
+você fazer, categorizar as suas
+informações pra que você tenha a coisa
+
+00:22:49.020 --> 00:22:49.500
+mais fácil.
+
+00:22:49.660 --> 00:22:51.980
+Então, eu só queria aqui, ó, pra
+finalizar.
+
+00:22:52.160 --> 00:22:54.340
+Você tem uma barra de pesquisa no
+Obsidian.
+
+00:22:54.760 --> 00:23:00.020
+Saiba que você pode pesquisar
+diretamente por propriedade.
+
+00:23:00.080 --> 00:23:02.280
+Então, se você é...
+
+00:23:03.340 --> 00:23:07.820
+tem a propriedade e você tem aqui a
+lista das propriedades eu quero
+
+00:23:07.820 --> 00:23:08.860
+pesquisar por autor.
+
+00:23:09.120 --> 00:23:15.280
+Você pode pesquisar todas as notas que
+são do NAVAL, que tem a propriedade
+
+00:23:15.280 --> 00:23:18.800
+autor como NAVAL, ou seja, quais são
+todos os livros do NAVAL?
+
+00:23:18.860 --> 00:23:20.740
+Já apareceria aqui na pesquisa.
+
+00:23:20.820 --> 00:23:26.480
+Então você, aqui já consegue perceber um
+benefício das propriedades é que você
+
+00:23:26.480 --> 00:23:28.880
+pode ter uma pesquisa muito mais...
+
+00:23:28.880 --> 00:23:31.460
+muito otimizada, tá?
+
+00:23:31.560 --> 00:23:35.920
+Com essa classificação categorização das
+suas notas, tá?
+
+00:23:36.340 --> 00:23:41.780
+Muito, muito, muito mais fácil do que se
+tivesse o NAVAL dentro do texto ali, né?
+
+00:23:41.820 --> 00:23:46.880
+Quantas e quantas notas poderiam ter a
+palavra NAVAL, mas você quer
+
+00:23:46.880 --> 00:23:48.400
+simplesmente aqueles que...
+
+00:23:48.400 --> 00:23:52.340
+aquelas notas onde tem uma propriedade
+chamada autor e o autor é NAVAL.
+
+00:23:52.800 --> 00:23:53.880
+Basicamente é isso.
+
+00:23:53.980 --> 00:23:57.880
+Então isso é muito legal, um poder muito
+grande aí para as notas.
+
+00:23:57.880 --> 00:24:01.580
+Eu quero que agora você volte para as
+suas notas, que você já começou a criar,
+
+00:24:01.660 --> 00:24:05.060
+começou a importar e olhe para elas.
+
+00:24:05.240 --> 00:24:08.180
+Nota Atômica, Lego, Tetris, Atômica X.
+
+00:24:08.900 --> 00:24:12.760
+Veja quais são as propriedades que você
+pode adicionar nessa nota.
+
+00:24:12.960 --> 00:24:14.980
+E já comece a usar as propriedades.
+
+00:24:15.380 --> 00:24:20.540
+Veja lá então, entre na primeira linha
+do arquivo, já entre nos menus, no
+
+00:24:20.540 --> 00:24:23.340
+command -pay e control -p, né?
+
+00:24:23.440 --> 00:24:28.360
+O command -pay e control -p aí e digita
+para você já começar a usar a metadata.
+
+00:24:28.660 --> 00:24:32.420
+Esse é o exercício para essa aula, para
+que a gente possa agora evoluir na
+
+00:24:32.420 --> 00:24:35.100
+próxima aula através de tags, tá?
+
+00:24:35.180 --> 00:24:40.300
+Que você vai aprender a usar tags para
+como também fazer uma classificação de
+
+00:24:40.300 --> 00:24:41.640
+informação muito legal, tá bom?
+
+00:24:42.560 --> 00:24:46.500
+Até próxima lendária, essa aula ficou
+meio longa, porque propriedades exige um
+
+00:24:46.500 --> 00:24:47.500
+pouco dessa explicação.
+
+00:24:47.720 --> 00:24:48.320
+Metadados, né?
+
+00:24:48.380 --> 00:24:50.080
+Vai ser usado em grandes...
+
+00:24:50.980 --> 00:24:54.340
+em grande maioria das próximas aulas aí.
+
+00:24:55.280 --> 00:25:00.820
+Mas aí com isso você já pega também um
+conteúdo legal, profundo e as próximas
+
+00:25:00.820 --> 00:25:02.780
+com certeza vão ser mais curtas aí, tá
+bom?

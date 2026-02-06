@@ -1,0 +1,1379 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:01.540
+Vamos lá, lendários.
+
+00:00:01.660 --> 00:00:07.660
+Seja bem -vindo a essa aula que vai
+transformar a sua forma de ver o segundo
+
+00:00:07.660 --> 00:00:08.320
+cérebro.
+
+00:00:08.460 --> 00:00:08.960
+Por quê?
+
+00:00:09.080 --> 00:00:14.480
+Porque nós vamos falar de uma ferramenta
+que vai dar a possibilidade, é um
+
+00:00:14.480 --> 00:00:20.940
+plugin, ele vai dar a possibilidade de
+você enxergar, ver as suas ideias de
+
+00:00:20.940 --> 00:00:22.200
+forma gráfica.
+
+00:00:22.440 --> 00:00:25.760
+Você enxergar notas de um outro jeito.
+
+00:00:25.760 --> 00:00:34.100
+Você vai conseguir mapear, criar
+flutuogramas, muitas formas de diagramas
+
+00:00:34.100 --> 00:00:41.400
+e linkar as notas e tantos outros
+artefatos dentro do segundo cérebro.
+
+00:00:41.520 --> 00:00:46.160
+Isso é fantástico, é uma ferramenta
+muito, muito, muito legal.
+
+00:00:46.740 --> 00:00:51.180
+Vamos aqui para o nosso Obsidian, sem
+mais delongas, porque eu estou falando
+
+00:00:51.180 --> 00:00:57.360
+de um componente, de um plugin, que nós
+vamos acessar aqui na engrenagem, nas
+
+00:00:57.360 --> 00:01:06.020
+configurações do nosso segundo cérebro,
+do nosso cofre, e ele está aqui, já por
+
+00:01:06.020 --> 00:01:11.500
+padrão, aqui nos meus plugins nativos.
+
+00:01:11.700 --> 00:01:16.480
+Mas vamos lá, vamos acessar aqui o menu
+Core Plugins, vai que o seu não esteja
+
+00:01:16.480 --> 00:01:16.840
+ativo.
+
+00:01:16.840 --> 00:01:19.120
+Ele está aqui, o nome dele é Canvas.
+
+00:01:20.380 --> 00:01:23.820
+Nós vamos ver então esse plugin para que
+ele serve.
+
+00:01:24.220 --> 00:01:29.660
+O meu está habilitado, então você
+habilita aí também.
+
+00:01:30.180 --> 00:01:32.860
+Ele vai ter aqui algumas configurações.
+
+00:01:33.020 --> 00:01:37.200
+Se eu vou aqui embaixo para a parte de
+plugins nativos, tem algumas
+
+00:01:37.200 --> 00:01:41.960
+configurações e você vai descobrir aqui
+para que eles servem.
+
+00:01:41.960 --> 00:01:49.280
+Basicamente é a questão de você alternar
+se você quer, por padrão, ver o zoom ou
+
+00:01:49.280 --> 00:01:52.260
+ver a ferramenta de mover.
+
+00:01:53.000 --> 00:01:55.220
+Isso, tranquilo, você vai dominar.
+
+00:01:55.560 --> 00:02:02.540
+O que eu quero salientar aqui é sobre
+essa opção aqui, a primeira, de onde vão
+
+00:02:02.540 --> 00:02:08.580
+ser salvos seus arquivos que você vai
+criar desses gráficos, os Canvas.
+
+00:02:09.200 --> 00:02:18.080
+Então, olha só, eu estou deixando aqui
+no meu Vaunt, ou posso deixar aonde eu
+
+00:02:18.080 --> 00:02:24.060
+tenha um arquivo aberto ali dentro do
+meu segundo cérebro.
+
+00:02:24.140 --> 00:02:29.360
+Estou mexendo nele e eu vou criar um
+Canvas, ele vai criar na mesma pasta, ou
+
+00:02:29.360 --> 00:02:31.180
+eu posso especificar uma pasta.
+
+00:02:31.360 --> 00:02:36.780
+Olha, eu quero salvar todos os meus
+arquivos Canvas dentro de uma pasta
+
+00:02:36.780 --> 00:02:37.360
+específica.
+
+00:02:37.360 --> 00:02:39.240
+Eu posso dar um nome, por exemplo,
+Canvas.
+
+00:02:40.520 --> 00:02:45.740
+Então, vou deixar aqui padrão dentro do
+meu próprio cofre, o meu Vaunt.
+
+00:02:46.220 --> 00:02:50.800
+Claro que se eu vier aqui em alguma
+pasta, se eu selecionar aqui, por
+
+00:02:50.800 --> 00:02:57.700
+exemplo, a pasta palestras, e dentro
+dela clicar aqui New Canvas, vai criar
+
+00:02:57.700 --> 00:02:59.360
+dentro daquela pasta para mim.
+
+00:02:59.820 --> 00:03:04.300
+E aí você tem as diversas formas de
+criar um Canvas.
+
+00:03:04.300 --> 00:03:10.700
+Você pode criar com o ctrl comand p, que
+daí se você já digitar aqui Canvas, vai
+
+00:03:10.700 --> 00:03:17.540
+aparecer Create New Canvas, ou também
+aqui você vai ver que tem um ícone aqui
+
+00:03:17.540 --> 00:03:24.080
+com um símbolo de alguns quadrados e
+retângulos, Create New Canvas.
+
+00:03:25.380 --> 00:03:30.820
+Vamos selecionar, clicar e aqui ele
+abriu então essa ferramenta maravilhosa
+
+00:03:30.820 --> 00:03:31.360
+para a gente.
+
+00:03:32.880 --> 00:03:38.300
+Perceba que aqui embaixo, onde eu não
+dei um nome para o meu arquivo ainda,
+
+00:03:38.760 --> 00:03:43.420
+ele está com esse nome aqui, eu vou
+chamar aqui, vamos colocar aqui esse
+
+00:03:43.420 --> 00:03:55.320
+nome de exemplo, Canvas, e aqui ele vai
+salvar o arquivo e você vai ver que ele
+
+00:03:55.320 --> 00:03:58.360
+tem uma palavrinha aqui na frente
+chamado Canvas.
+
+00:03:59.100 --> 00:04:05.700
+Ou seja, não é um arquivo .md, ele é um
+arquivo Canvas e eu vou mostrar como que
+
+00:04:05.700 --> 00:04:06.280
+ele é salvo.
+
+00:04:06.460 --> 00:04:10.900
+Daqui a pouco, quando a gente estiver
+configurando aqui algumas coisas,
+
+00:04:11.100 --> 00:04:16.620
+estiver utilizando, a gente já vai
+aprender como que ele salva.
+
+00:04:17.620 --> 00:04:22.540
+Bom, nós temos aqui ferramentas na parte
+de baixo, que é para você adicionar um
+
+00:04:22.540 --> 00:04:26.580
+card, para você adicionar uma nota, para
+você adicionar um arquivo de mídia.
+
+00:04:26.580 --> 00:04:31.760
+Aqui do lado, aqui na parte superior,
+lateral, nós temos um menu de
+
+00:04:31.760 --> 00:04:36.840
+configuração, nós temos três pontinhos
+aqui com algumas opções, nós temos aqui
+
+00:04:36.840 --> 00:04:45.380
+uma ferramenta de zoom, aqui dá um reset
+no zoom, enquadrar, dar menos zoom, aqui
+
+00:04:45.380 --> 00:04:51.400
+uma ferramenta de voltar, o nosso ctrl
+comand Z, ou refazer.
+
+00:04:51.400 --> 00:04:57.580
+E aqui eu tenho também um símbolo de
+help, porque ele vai dar os atavios.
+
+00:04:57.760 --> 00:05:00.560
+Puxa vida, eu não lembro quais são os
+atavios disponíveis.
+
+00:05:00.940 --> 00:05:05.120
+Estou começando agora a usar o Canvas,
+você clicou ali naquele sinal de
+
+00:05:05.120 --> 00:05:10.880
+interrogação, vai trazer tudo para você
+aqui, todos os atavios que nós vamos
+
+00:05:10.880 --> 00:05:15.080
+utilizar aqui agora, alguns deles na
+ferramenta.
+
+00:05:15.080 --> 00:05:22.060
+O que você está vendo aqui é uma grande
+ferramenta de você poder desenhar
+
+00:05:22.060 --> 00:05:23.260
+graficamente as coisas.
+
+00:05:23.560 --> 00:05:28.660
+A primeira delas é o card, que é você
+adicionar um cartão aqui, seja aqui
+
+00:05:28.660 --> 00:05:36.680
+clicando ou arrastando, ou clicando duas
+vezes aqui na própria área de desenho, e
+
+00:05:36.680 --> 00:05:40.560
+aí ele já abre a opção de você digitar
+alguma coisa.
+
+00:05:41.480 --> 00:05:48.500
+Cartão ou card 1, vamos colocar card,
+nome oficial, card 1.
+
+00:05:49.040 --> 00:05:57.220
+E eu posso aqui digitar o meu texto, e
+ele aqui também é markdown, então card
+
+00:05:57.220 --> 00:05:58.160
+1.
+
+00:05:58.900 --> 00:06:03.360
+Então aqui eu digito, digito o meu
+texto, está legal?
+
+00:06:03.720 --> 00:06:09.200
+Se eu clicar aqui duas vezes, ele já
+aumenta para mim, pode ver que aqui ele
+
+00:06:09.200 --> 00:06:14.360
+vai ter a opção de eu dimensionar, de eu
+mexer, se eu clicar em cima eu vou
+
+00:06:14.360 --> 00:06:21.080
+mover, se eu colocar espaço, você vai
+ver uma outra coisa que eu vou mostrar
+
+00:06:21.080 --> 00:06:24.700
+aqui, alguns atavios, que fica
+interessante também de navegar com eles
+
+00:06:24.700 --> 00:06:26.360
+conforme eu vou criando.
+
+00:06:27.380 --> 00:06:31.480
+Aqui eu posso excluir, aqui eu posso
+mudar a cor, então eu posso dar a cor
+
+00:06:31.480 --> 00:06:33.640
+que eu quiser para o meu card.
+
+00:06:33.640 --> 00:06:39.760
+Olha que legal, aqui eu posso
+centralizar, mexer no zoom, eu quero ver
+
+00:06:39.760 --> 00:06:46.320
+aqui como é que centraliza e mostra para
+mim um zoom do panorama geral.
+
+00:06:46.620 --> 00:06:52.160
+Aqui eu tenho um botãozinho de editar,
+aqui sempre eu vou ter
+
+00:06:52.160 --> 00:06:56.620
+botãozinho direito também que é o
+editar, posso remover, depois tem uma
+
+00:06:56.620 --> 00:06:58.220
+outra opção que eu vou mostrar aqui para
+você.
+
+00:06:58.220 --> 00:07:02.460
+Então olha só, estou fazendo um card
+aqui, vou criar um outro
+
+00:07:02.460 --> 00:07:14.040
+aqui, card 2, vou adicionar uma outra
+cor aqui, um verde, e aí eu posso mexer
+
+00:07:14.040 --> 00:07:19.220
+neles, eu posso aninhá -los, posso
+também
+
+00:07:19.220 --> 00:07:27.760
+aqui, linká -los, eu posso clicar aqui e
+selecionar outra ponta, se eu clicar
+
+00:07:27.760 --> 00:07:31.000
+aqui e arrastar, eu tenho um link.
+
+00:07:31.320 --> 00:07:36.240
+Olha só que legal, movimenta, já desenha
+aqui para mim, posso clicar aqui e setar
+
+00:07:36.240 --> 00:07:45.420
+uma cor também para essa conexão, para
+esse link, eu posso também excluir se é
+
+00:07:45.420 --> 00:07:49.080
+não direcional, unidirecional,
+bidirecional, que é a setinha que me
+
+00:07:49.080 --> 00:07:49.600
+mostra aqui.
+
+00:07:49.880 --> 00:07:55.100
+Eu posso colocar texto aqui na conexão,
+então aqui vai um
+
+00:07:55.100 --> 00:08:09.560
+texto, aqui como já falei para você,
+opção de zoom, "-1", centraliza aí para
+
+00:08:09.560 --> 00:08:13.900
+mim, dá um reset no zoom e aí vai.
+
+00:08:13.900 --> 00:08:20.200
+Aqui percebe que o mouse, a opção dele
+padrão é a de seleção, então eu posso
+
+00:08:20.200 --> 00:08:27.960
+vir aqui e selecionar, por exemplo,
+todos eles, mexer todo mundo aqui, mas
+
+00:08:27.960 --> 00:08:35.540
+se eu apertar o espaço, olha lá o
+símbolo do mouse, ele se transforma em
+
+00:08:35.540 --> 00:08:43.300
+uma mão, então assim como eu posso
+selecionar, se eu apertar o espaço, aí
+
+00:08:43.300 --> 00:08:45.740
+eu vou mover, está vendo?
+
+00:08:46.200 --> 00:08:48.440
+Vou mover o meu painel, o meu desenho.
+
+00:08:49.140 --> 00:08:54.900
+Da mesma forma que a bolinha do mouse,
+se eu colocar aqui, vai movimentar, está
+
+00:08:54.900 --> 00:08:55.180
+vendo?
+
+00:08:55.580 --> 00:08:59.540
+Eu movimento aqui com o mouse, para a
+esquerda, para a direita, para cima e
+
+00:08:59.540 --> 00:09:00.020
+para baixo.
+
+00:09:01.160 --> 00:09:09.120
+Se eu apertar a tecla de espaço, a barra
+de espaço no teclado e eu movimentar
+
+00:09:09.120 --> 00:09:10.240
+agora, o que ele faz?
+
+00:09:10.700 --> 00:09:10.960
+Zoom.
+
+00:09:11.760 --> 00:09:15.860
+Movimentando a bolinha do mouse, eu
+tenho o zoom.
+
+00:09:16.340 --> 00:09:18.500
+Então, isso aqui é a coisa que você vai
+dominando.
+
+00:09:18.880 --> 00:09:19.380
+Esqueci!
+
+00:09:20.240 --> 00:09:25.440
+A interrogação vai lembrar para você
+todas as teclas de atalho aqui e
+
+00:09:25.440 --> 00:09:29.440
+conforme você vai usando, vai decorando.
+
+00:09:30.020 --> 00:09:33.600
+O que você consegue adicionar aqui?
+
+00:09:33.600 --> 00:09:37.680
+Então, você consegue aqui também
+adicionar notas.
+
+00:09:38.260 --> 00:09:40.740
+Você pode pegar uma nota já existente.
+
+00:09:41.180 --> 00:09:42.760
+Vamos pegar aqui...
+
+00:09:42.760 --> 00:09:47.340
+A gente tinha algumas notas virais aqui.
+
+00:09:47.700 --> 00:09:50.980
+Segundo o cérebro nobsídia, não lembro
+se a gente tinha...
+
+00:09:50.980 --> 00:09:55.120
+É, aqui é uma nota atômica que a gente
+tinha criado.
+
+00:09:56.120 --> 00:09:58.680
+Vamos pegar esse aqui e vou indo para
+além de notas.
+
+00:09:58.680 --> 00:10:06.380
+Se eu arrastar aqui dentro do Canva, ele
+vai criar para mim a nota.
+
+00:10:06.860 --> 00:10:08.280
+A representação da nota aqui.
+
+00:10:08.440 --> 00:10:14.460
+Se eu mexer dentro da minha nota,
+automaticamente reflete aqui.
+
+00:10:14.920 --> 00:10:18.780
+Ele vai mostrar para mim aqui porque
+aqui ele está representando a nota.
+
+00:10:18.940 --> 00:10:19.340
+Então, olha só.
+
+00:10:19.780 --> 00:10:22.740
+Eu tenho aqui evoluindo para além das
+notas, resumo do livro.
+
+00:10:23.120 --> 00:10:26.400
+Eu vou abrir essa nota aqui do lado.
+
+00:10:27.180 --> 00:10:29.600
+Eu vou digitar alguma coisa aqui.
+
+00:10:29.820 --> 00:10:34.360
+Se eu volto lá para o Canva, você vai
+ver que aqui é uma representação da
+
+00:10:34.360 --> 00:10:35.020
+minha nota.
+
+00:10:35.900 --> 00:10:37.680
+Então, eu posso colocar aqui.
+
+00:10:38.920 --> 00:10:40.480
+Posso vir aqui, vir cá.
+
+00:10:41.440 --> 00:10:41.680
+Legal.
+
+00:10:44.060 --> 00:10:45.120
+O que mais?
+
+00:10:46.020 --> 00:10:46.300
+Opa!
+
+00:10:48.260 --> 00:10:52.260
+Aqui eu posso também selecionar a mesma
+cor.
+
+00:10:52.900 --> 00:10:53.360
+Legal.
+
+00:10:53.360 --> 00:10:54.120
+Então, olha só.
+
+00:10:54.200 --> 00:10:59.120
+Você vai dando possibilidade visual das
+suas notas.
+
+00:10:59.300 --> 00:11:01.340
+Você pode jogar aqui dentro também.
+
+00:11:02.000 --> 00:11:02.620
+O que mais?
+
+00:11:03.140 --> 00:11:10.080
+Vamos imaginar que eu peguei o site
+aqui.
+
+00:11:10.300 --> 00:11:12.180
+Estou vendo um vídeo do Allan Nicholas.
+
+00:11:12.780 --> 00:11:17.020
+Puxou aqui e faz menção a esse vídeo
+aqui do Allan Nicholas.
+
+00:11:17.500 --> 00:11:18.840
+Posso colocar aqui dentro?
+
+00:11:19.260 --> 00:11:19.780
+Opa!
+
+00:11:20.160 --> 00:11:21.020
+O que vai acontecer?
+
+00:11:21.020 --> 00:11:27.440
+Ele vai jogar o meu vídeo aqui dentro.
+
+00:11:28.800 --> 00:11:32.740
+Então, eu posso também fazer o que?
+
+00:11:32.940 --> 00:11:33.720
+Vim cá aqui.
+
+00:11:34.420 --> 00:11:35.120
+Tá legal?
+
+00:11:35.600 --> 00:11:38.940
+Vou dar uma cor diferente aqui porque
+ele está vincando para o vídeo.
+
+00:11:40.060 --> 00:11:41.380
+Estão percebendo?
+
+00:11:41.520 --> 00:11:50.260
+Então, eu estou fazendo aqui um diagrama
+que eu possa juntar as informações.
+
+00:11:50.260 --> 00:11:52.460
+Adriano, posso jogar uma página web?
+
+00:11:52.600 --> 00:11:56.320
+Se você clicar já aqui, você já vai ver
+que aqui tem as opções.
+
+00:11:57.240 --> 00:11:59.600
+Você pode adicionar o card.
+
+00:12:00.140 --> 00:12:02.460
+Pode adicionar uma nota do seu voucher.
+
+00:12:02.760 --> 00:12:05.280
+Pode adicionar uma mídia.
+
+00:12:05.380 --> 00:12:08.760
+Então, por exemplo, esse mídia aqui é a
+mesma coisa daqui embaixo.
+
+00:12:09.140 --> 00:12:11.580
+Aqui embaixo tem um simbolozinho de
+adicionar mídia.
+
+00:12:11.920 --> 00:12:13.580
+Então, você pode jogar aqui.
+
+00:12:14.300 --> 00:12:16.880
+Ele vai pegar já o que tem de arquivo,
+não nota.
+
+00:12:17.240 --> 00:12:18.860
+Então, lembra que tem um arquivo aqui
+meu?
+
+00:12:18.860 --> 00:12:21.160
+Opa, cliquei duas vezes aqui.
+
+00:12:21.540 --> 00:12:25.500
+Tem um arquivo de nota aqui, de mídia.
+
+00:12:25.940 --> 00:12:27.400
+Vou jogar ela aqui.
+
+00:12:28.860 --> 00:12:32.960
+Posso ou não jogar as conexões aqui, se
+eu quiser ou não.
+
+00:12:33.580 --> 00:12:33.740
+Legal?
+
+00:12:35.360 --> 00:12:37.360
+E aí, eu estava falando da página web.
+
+00:12:37.500 --> 00:12:39.140
+Posso jogar uma página web aqui?
+
+00:12:39.300 --> 00:12:40.640
+Pode jogar uma página web.
+
+00:12:41.720 --> 00:12:43.340
+Adicionar web page.
+
+00:12:43.680 --> 00:12:44.560
+Ele vai abrir aqui.
+
+00:12:44.560 --> 00:12:46.120
+Eu vou colocar aqui.
+
+00:12:52.180 --> 00:12:55.560
+Obsidian .md A página do Obsidian.
+
+00:12:55.700 --> 00:12:56.160
+Está lá.
+
+00:12:56.660 --> 00:12:57.000
+Legal?
+
+00:12:59.180 --> 00:13:00.400
+Muito bem.
+
+00:13:00.860 --> 00:13:02.240
+Muito bem, muito bem.
+
+00:13:02.800 --> 00:13:03.960
+Vou criando aqui.
+
+00:13:04.100 --> 00:13:10.240
+Você já está percebendo o quanto vai
+ficando legal visual a coisa aqui.
+
+00:13:10.620 --> 00:13:13.340
+Você navega na página aqui.
+
+00:13:13.340 --> 00:13:14.140
+Aqui, olha.
+
+00:13:18.440 --> 00:13:20.760
+Você consegue ver o vídeo aqui.
+
+00:13:21.020 --> 00:13:22.640
+Assistir o vídeo aqui dentro.
+
+00:13:23.780 --> 00:13:26.420
+O que mais a gente consegue fazer?
+
+00:13:26.700 --> 00:13:27.340
+Vamos lá.
+
+00:13:28.440 --> 00:13:32.840
+Então, tenho aqui as coisas se mincando.
+
+00:13:33.120 --> 00:13:34.600
+Ou, se eu quiser, eu não minco.
+
+00:13:35.160 --> 00:13:37.480
+Posso usar tranquilamente isso aqui.
+
+00:13:38.260 --> 00:13:39.840
+Vamos jogar um card aqui.
+
+00:13:40.080 --> 00:13:41.780
+Vou mostrar para vocês uma outra coisa.
+
+00:13:42.800 --> 00:13:46.700
+Vamos falar aqui sobre a comunidade
+vendária.
+
+00:13:49.080 --> 00:13:50.880
+A comunidade vendária.
+
+00:13:50.960 --> 00:13:52.260
+O que é a comunidade vendária?
+
+00:13:52.440 --> 00:13:53.180
+Vamos pôr aqui.
+
+00:13:53.440 --> 00:13:55.860
+Eu tenho um título aqui.
+
+00:13:57.040 --> 00:13:59.900
+E eu vou abrir uma nota aqui onde eu vou
+falar.
+
+00:14:00.800 --> 00:14:05.620
+A comunidade vendária é
+
+00:14:05.620 --> 00:14:16.100
+onde encontramos pessoas
+extraordinárias.
+
+00:14:17.020 --> 00:14:17.880
+Assim como você.
+
+00:14:18.700 --> 00:14:21.920
+E aqui vamos criar um outro cabeçável.
+
+00:14:25.300 --> 00:14:27.280
+Quem faz parte?
+
+00:14:29.280 --> 00:14:31.560
+E aqui vamos colocar um outro texto
+aqui.
+
+00:14:31.560 --> 00:14:39.780
+E vamos pegar aqui Pessoas que buscam
+evolução.
+
+00:14:41.420 --> 00:14:42.780
+Bom, criei um texto legal.
+
+00:14:42.920 --> 00:14:45.100
+Aí você fala, Puxa vida, que legal,
+Adriano.
+
+00:14:45.200 --> 00:14:46.880
+Eu criei um texto aqui dentro.
+
+00:14:47.560 --> 00:14:49.700
+O que eu posso fazer agora com esse
+texto?
+
+00:14:50.140 --> 00:14:53.340
+Puxa, isso aqui é muito legal, mas ele
+está só aqui dentro do meu arquivo
+
+00:14:53.340 --> 00:14:53.800
+canvas.
+
+00:14:54.020 --> 00:14:54.820
+Eu posso clicar aqui.
+
+00:14:56.680 --> 00:14:58.120
+Convert to file.
+
+00:14:58.380 --> 00:14:59.340
+O que vai acontecer?
+
+00:14:59.340 --> 00:15:02.020
+Ele vai transformar isso em uma nota no
+meu segundo cérebro.
+
+00:15:02.940 --> 00:15:03.940
+Então eu vou clicar aqui.
+
+00:15:04.200 --> 00:15:06.360
+Comunidade vendária.
+
+00:15:09.340 --> 00:15:10.320
+E vou salvar.
+
+00:15:10.860 --> 00:15:11.180
+Olha lá.
+
+00:15:12.080 --> 00:15:15.140
+Permanece aqui a informação, mas o que é
+isso aqui agora?
+
+00:15:15.220 --> 00:15:16.700
+Isso aqui é uma nota que foi criada.
+
+00:15:16.740 --> 00:15:17.340
+Olha aqui do lado.
+
+00:15:17.740 --> 00:15:21.540
+Comunidade vendária agora foi criada
+aqui dentro.
+
+00:15:22.220 --> 00:15:27.300
+E aí eu tenho aqui toda a minha nota
+representada.
+
+00:15:28.320 --> 00:15:30.380
+Vamos dar um aqui.
+
+00:15:30.640 --> 00:15:32.000
+Estou com a minha nota aqui.
+
+00:15:32.880 --> 00:15:34.960
+E ela está representada aqui dentro.
+
+00:15:35.460 --> 00:15:37.500
+Adriano, mas eu não quero...
+
+00:15:38.300 --> 00:15:40.080
+Veja só, o que tem aqui dentro?
+
+00:15:40.400 --> 00:15:42.260
+Aqui dentro tem um íntro para a minha
+nota.
+
+00:15:43.360 --> 00:15:48.180
+Mas eu não quero toda a minha nota aqui
+dentro.
+
+00:15:48.660 --> 00:15:51.340
+Eu quero somente uma parte dela.
+
+00:15:51.880 --> 00:15:53.780
+Tem como fazer isso?
+
+00:15:54.200 --> 00:15:55.820
+Tem, tem como fazer isso.
+
+00:15:55.820 --> 00:15:59.080
+Se eu tivesse, por exemplo, agora...
+
+00:15:59.080 --> 00:16:00.980
+Já transformei isso aqui em uma nota.
+
+00:16:01.300 --> 00:16:04.000
+Mas vamos imaginar que você já tivesse a
+nota pronta.
+
+00:16:04.520 --> 00:16:07.740
+E eu quero adicionar só uma parte
+daquela nota que eu tenho ali.
+
+00:16:07.960 --> 00:16:09.580
+Eu vou adicionar um link interno aqui.
+
+00:16:09.820 --> 00:16:12.900
+Porque eu quero mostrar para você também
+que aqui aceita o link interno.
+
+00:16:13.840 --> 00:16:17.580
+Então aqui eu quero adicionar o
+comunidade vendária.
+
+00:16:18.000 --> 00:16:20.020
+Se eu adicionar o link, o que vai
+acontecer?
+
+00:16:20.660 --> 00:16:25.240
+Eu vou adicionar aqui dentro o link da
+minha nota.
+
+00:16:25.240 --> 00:16:28.140
+Eu vou clicar aqui e ele vai navegar até
+a minha nota.
+
+00:16:28.260 --> 00:16:29.720
+Ele mostra um preview da nota.
+
+00:16:30.700 --> 00:16:34.120
+E se eu clicar aqui, eu vou navegar para
+a nota.
+
+00:16:35.060 --> 00:16:35.340
+Legal?
+
+00:16:36.120 --> 00:16:39.300
+Só que, Adriano, eu não quero mostrar a
+nota inteira.
+
+00:16:40.140 --> 00:16:42.800
+Primeiro, eu não quero o link, eu quero
+a nota aqui.
+
+00:16:43.140 --> 00:16:48.500
+Você lembra que para a gente fazer um
+embedding, incorporar a nota dentro, eu
+
+00:16:48.500 --> 00:16:50.020
+uso o sinal de exclamação.
+
+00:16:50.740 --> 00:16:52.260
+E aí, pronto.
+
+00:16:54.920 --> 00:16:56.360
+Usei o sinal de exclamação.
+
+00:16:56.560 --> 00:16:58.040
+Ou seja, o que ele vai fazer?
+
+00:16:58.560 --> 00:17:02.740
+Ele vai incorporar a nota aqui dentro.
+
+00:17:02.960 --> 00:17:03.460
+Olha só.
+
+00:17:03.840 --> 00:17:04.960
+Toda a nota está aqui.
+
+00:17:05.240 --> 00:17:06.160
+Adriano, eu não quero.
+
+00:17:06.220 --> 00:17:09.100
+Eu só quero a primeira parte, o primeiro
+cabeçalho.
+
+00:17:09.320 --> 00:17:12.080
+Aqui são as headlines que eu tenho
+dentro da nota.
+
+00:17:12.260 --> 00:17:14.280
+Eu tenho aqui a minha nota.
+
+00:17:15.040 --> 00:17:17.240
+Vamos abrir ela aqui, a comunidade
+vendária.
+
+00:17:17.880 --> 00:17:19.160
+Vamos abrir ela aqui.
+
+00:17:19.160 --> 00:17:20.320
+Para você ver.
+
+00:17:20.500 --> 00:17:21.420
+Tem dois cabeçalhos.
+
+00:17:21.900 --> 00:17:23.820
+Eu quero só a primeira parte.
+
+00:17:23.960 --> 00:17:24.500
+O que você faz?
+
+00:17:24.620 --> 00:17:25.380
+Você vem aqui.
+
+00:17:26.600 --> 00:17:34.800
+Depois do nome da nota, você coloca
+hashtag e já vai mostrar para você qual
+
+00:17:34.800 --> 00:17:35.920
+cabeçalho você quer.
+
+00:17:36.440 --> 00:17:37.680
+Eu quero o primeiro aqui.
+
+00:17:38.480 --> 00:17:40.100
+H2, comunidade vendária.
+
+00:17:40.320 --> 00:17:40.680
+Olha lá.
+
+00:17:42.740 --> 00:17:48.500
+Ficou simplesmente aquela parte da nota
+ali dentro.
+
+00:17:48.500 --> 00:17:49.420
+Incorporando.
+
+00:17:49.940 --> 00:17:55.740
+Então aqui, eu estou em pouco tempo
+apresentando os recursos principais para
+
+00:17:55.740 --> 00:18:00.620
+você dessa ferramenta que é uma
+ferramenta fantástica que vai agora
+
+00:18:00.620 --> 00:18:10.180
+ajudar muito e vai fazer com que você
+consiga bons resultados na demonstração,
+
+00:18:10.440 --> 00:18:14.880
+na apresentação, até mesmo na conexão de
+notas.
+
+00:18:14.880 --> 00:18:18.180
+Então isso é muito, muito, muito legal.
+
+00:18:18.940 --> 00:18:21.400
+O que mais eu quero mostrar aqui?
+
+00:18:21.960 --> 00:18:26.400
+Eu quero mostrar que você pode agrupar
+tudo isso aqui.
+
+00:18:26.600 --> 00:18:35.620
+Você pode chegar aqui e imagine que você
+está movimentando um grupo de elementos
+
+00:18:35.620 --> 00:18:36.220
+aqui dentro.
+
+00:18:36.280 --> 00:18:41.480
+Se eu venho aqui e mexo aqui, eu estou
+mexendo esse elemento.
+
+00:18:41.480 --> 00:18:50.780
+Mas eu quero que todo esse grupo aqui de
+cards venham e façam parte da mesma
+
+00:18:50.780 --> 00:18:51.940
+ideia.
+
+00:18:52.240 --> 00:18:56.800
+Eu mexo eles e eles se movimentam todos
+de uma vez.
+
+00:18:57.280 --> 00:19:06.040
+Então você consegue selecionar um grupo
+de cards ou de elementos, notas, vídeos,
+
+00:19:06.160 --> 00:19:10.700
+não importa e você vai ter aqui o Create
+Group.
+
+00:19:12.060 --> 00:19:14.900
+Assim como você vai ter também o que?
+
+00:19:15.600 --> 00:19:16.160
+Align.
+
+00:19:16.740 --> 00:19:19.700
+Você pode alinhá -los, alinhar vários
+elementos.
+
+00:19:19.840 --> 00:19:22.040
+Vou mostrar ele para você, mas vamos
+aqui criar o grupo.
+
+00:19:22.260 --> 00:19:23.420
+Olha só o que você consegue fazer.
+
+00:19:23.780 --> 00:19:29.480
+Eu criei um grupo que daí agora, eu
+selecionando esse grupo, eu posso mexer
+
+00:19:29.480 --> 00:19:30.420
+todos de uma vez.
+
+00:19:30.420 --> 00:19:36.300
+Além de poder aqui dar uma cor
+diferenciada para o meu grupo.
+
+00:19:36.880 --> 00:19:38.580
+Olha lá o que você consegue fazer.
+
+00:19:40.280 --> 00:19:43.920
+Você pode mudar o nome do agrupamento e
+tudo mais.
+
+00:19:45.200 --> 00:19:47.060
+Você tem aqui a parte de alinhamento.
+
+00:19:47.780 --> 00:19:55.120
+Você pode até mesmo, se você seleciona o
+grupo, você pode colocar uma imagem de
+
+00:19:55.120 --> 00:19:57.720
+background dentro do grupo.
+
+00:19:57.720 --> 00:20:04.100
+Então tem muita opção para você
+personalizar mesmo isso aqui.
+
+00:20:04.660 --> 00:20:06.920
+Para selecionar o grupo você vem aqui em
+cima.
+
+00:20:07.140 --> 00:20:10.380
+Você pode também remover o grupo.
+
+00:20:11.800 --> 00:20:13.260
+E é muito simples isso daí.
+
+00:20:13.800 --> 00:20:17.720
+Como que tudo isso aqui está sendo
+armazenado?
+
+00:20:17.920 --> 00:20:20.220
+Como tudo isso aqui eu vou criar?
+
+00:20:20.480 --> 00:20:25.260
+E daí Adriano, para eu midrar isso aqui,
+para eu passar isso aqui para frente,
+
+00:20:26.060 --> 00:20:30.980
+isso aqui está sendo armazenado como um
+arquivo JSON.
+
+00:20:32.460 --> 00:20:38.600
+Se eu for aqui agora no meu cofre teste
+aula para ver os meus arquivos, eu vou
+
+00:20:38.600 --> 00:20:45.620
+ver que eu tenho aqui, exemplo canvas
+.canvas É a extensão, não é MD como você
+
+00:20:45.620 --> 00:20:46.960
+já aprendeu em outras aulas.
+
+00:20:47.880 --> 00:20:52.540
+E esse canvas, se eu for mostrar aqui
+para você, eu vou abrir aqui com essa
+
+00:20:52.540 --> 00:21:00.860
+ferramenta de texto mesmo, você vai
+perceber que ele é um arquivo organizado
+
+00:21:00.860 --> 00:21:06.640
+em TEDs, em agrupamento de campos, que
+qualquer ferramenta pode ver.
+
+00:21:07.220 --> 00:21:10.960
+Então é isso daqui que você está vendo
+que é um arquivo JSON, assim como um
+
+00:21:10.960 --> 00:21:14.780
+arquivo XML, é um arquivo
+intercambiável.
+
+00:21:15.000 --> 00:21:16.540
+Você pode trocar esses arquivos.
+
+00:21:16.660 --> 00:21:22.940
+Então outras ferramentas vão abrir
+também esse arquivo e conseguir ver.
+
+00:21:22.940 --> 00:21:24.740
+Você vai conseguir exportar e tudo mais.
+
+00:21:25.280 --> 00:21:33.120
+Então não deixa também de ser um arquivo
+texto, um arquivo que vai poder ser
+
+00:21:33.120 --> 00:21:38.980
+pesquisável, que o seu segundo cérebro
+também vai poder conversar com isso
+
+00:21:38.980 --> 00:21:39.300
+aqui.
+
+00:21:40.680 --> 00:21:42.460
+Então isso aqui nós já vimos.
+
+00:21:43.600 --> 00:21:47.060
+Nós vamos ver algumas opções de menu
+aqui que eu tenho, que podem
+
+00:21:47.060 --> 00:21:49.760
+personalizar.
+
+00:21:49.760 --> 00:21:55.890
+Que eu posso, por exemplo, pegar tudo
+isso aqui e posso exportar como imagem.
+
+00:21:56.520 --> 00:22:00.260
+É uma das coisas que eu posso, por
+exemplo, fazer.
+
+00:22:00.680 --> 00:22:02.120
+Exportar isso aqui como imagem.
+
+00:22:02.500 --> 00:22:06.660
+Eu posso exportar o canva inteiro ou
+aquilo que eu estou vendo.
+
+00:22:07.060 --> 00:22:12.220
+Uma parte do meu canva que eu estou
+vendo na tela, eu posso exportar para a
+
+00:22:12.220 --> 00:22:12.520
+imagem.
+
+00:22:12.660 --> 00:22:15.080
+Eu posso exportar o canva inteiro.
+
+00:22:15.560 --> 00:22:22.060
+Como que você quer a parte de zoom, se
+você quer mostrar o logo do Obsidian ou
+
+00:22:22.060 --> 00:22:22.880
+não.
+
+00:22:25.180 --> 00:22:29.800
+Aqui tem uma parte de privacidade que
+ele pode exibir, passar isso aqui para
+
+00:22:29.800 --> 00:22:35.620
+uma imagem para mostrar o gráfico, mas
+ele pode deixar o texto escondido, o
+
+00:22:35.620 --> 00:22:37.720
+texto de uma forma obscura.
+
+00:22:38.220 --> 00:22:41.000
+E aí você pode exportar isso aqui.
+
+00:22:41.160 --> 00:22:42.440
+Exemplo canva e tal.
+
+00:22:43.180 --> 00:22:47.100
+Eu vou colocar isso aqui em uma pasta
+minha.
+
+00:22:47.440 --> 00:22:50.860
+Vamos pegar, por exemplo, o meu iCloud
+Drive.
+
+00:22:53.140 --> 00:22:54.440
+E um arquivo PNG.
+
+00:22:55.500 --> 00:22:59.680
+E aí ele vai gerar a imagem para mim.
+
+00:23:00.040 --> 00:23:00.380
+Está aqui.
+
+00:23:02.500 --> 00:23:03.400
+Olha lá.
+
+00:23:04.040 --> 00:23:08.400
+E aqui eu posso selecionar ou não, se eu
+mostro o logo do Obsidian.
+
+00:23:08.860 --> 00:23:12.600
+E ele vai mostrar o gráfico para mim,
+vai passar isso aqui em uma imagem.
+
+00:23:13.500 --> 00:23:13.760
+Está legal?
+
+00:23:14.160 --> 00:23:16.340
+Muito, muito, muito legal.
+
+00:23:17.740 --> 00:23:19.900
+Isso aqui é o canva, minha gente.
+
+00:23:20.860 --> 00:23:25.920
+Não se esqueça que se você esquecer de
+algum atalho, você pode vir aqui no
+
+00:23:25.920 --> 00:23:32.500
+Interrogação, vai sempre resumir para
+você trazer aqui, por exemplo, clonar um
+
+00:23:32.500 --> 00:23:33.060
+cartão.
+
+00:23:33.340 --> 00:23:37.580
+Eu tenho aqui, no meu caso, o Option e o
+Arrastar.
+
+00:23:37.580 --> 00:23:41.380
+No seu caso, Expor Windows vai ser o
+Alt, com certeza.
+
+00:23:41.960 --> 00:23:46.060
+Então eu pego aqui o Option e Arrasto,
+ele já duplicou o Card.
+
+00:23:46.160 --> 00:23:52.760
+Então ele tem muita coisa para facilitar
+e muito a sua operação com o canva.
+
+00:23:52.920 --> 00:23:53.120
+Está legal?
+
+00:23:53.760 --> 00:23:59.360
+Vamos aí, como exercício para essa aula,
+pega alguma das suas notas, alguma
+
+00:23:59.360 --> 00:24:03.680
+ideia, ideia do segundo cérebro, aquilo
+que você está anotando, ou resumo de
+
+00:24:03.680 --> 00:24:04.380
+livros.
+
+00:24:05.440 --> 00:24:09.380
+Pega isso como exercício agora de você
+explorar esse ambiente.
+
+00:24:09.600 --> 00:24:13.840
+Fazer uma exploração desse ambiente para
+conectar as ideias e criar uma
+
+00:24:13.840 --> 00:24:15.520
+ferramenta visual para você.
+
+00:24:15.660 --> 00:24:15.840
+Está legal?
+
+00:24:16.220 --> 00:24:21.580
+Não se esqueça de mudar, se você quiser
+salvar o canvas, seja no Vault ou em um
+
+00:24:21.580 --> 00:24:24.920
+lugar específico, uma pasta específica
+do seu cofre, para ficar mais
+
+00:24:24.920 --> 00:24:25.800
+organizado.
+
+00:24:26.400 --> 00:24:29.500
+Aí você consegue usar da melhor forma.
+
+00:24:29.840 --> 00:24:35.920
+Eu quero agora apresentar para você, na
+próxima aula, olha só aonde você está
+
+00:24:35.920 --> 00:24:37.240
+chegando com essa ferramenta.
+
+00:24:37.740 --> 00:24:43.120
+Eu quero mostrar como você potencializa
+agora o seu segundo cérebro com o IA.
+
+00:24:43.460 --> 00:24:45.600
+Nós vamos começar a adentrar nisso
+agora.
+
+00:24:45.680 --> 00:24:47.360
+Vai ser muito, muito, muito legal.
+
+00:24:47.500 --> 00:24:48.320
+Então fica comigo.
+
+00:24:49.020 --> 00:24:53.960
+Está valendo a pena o investimento,
+porque você está aprendendo em poucas
+
+00:24:53.960 --> 00:24:59.400
+horas, em poucos minutos, coisas que
+levariam anos para você sair taçando e
+
+00:24:59.400 --> 00:25:01.480
+procurando aí pela internet.
+
+00:25:01.480 --> 00:25:07.740
+Na descrição dessa aula eu vou colocar
+um link que você vai ter a parte do
+
+00:25:07.740 --> 00:25:14.180
+Obsidian, onde me mostra vários e vários
+atalhos e formas de você usar o canvas.
+
+00:25:14.320 --> 00:25:14.560
+Está legal?
+
+00:25:14.780 --> 00:25:19.440
+Então eu vou colocar o link ali para
+você já acessar direto e não ficar
+
+00:25:19.440 --> 00:25:25.220
+procurando como você tem inúmeros e
+inúmeros atalhos e dicas.
+
+00:25:25.760 --> 00:25:32.620
+Se eu não me engano, são 28 dicas de
+canvas que o Help do Obsidian atraz para
+
+00:25:32.620 --> 00:25:33.100
+você lá.

@@ -1,0 +1,230 @@
+# Debate Frameworks Configuration
+# Version: 1.0.0
+# Purpose: Define reusable debate structures
+
+frameworks:
+  - id: oxford
+    name: Oxford Debate
+    description: Classic pro/con format with opening statements, rebuttals, and closing arguments
+    rounds: 5
+    round_types:
+      - opening
+      - rebuttal
+      - rebuttal
+      - rebuttal
+      - closing
+    roles:
+      - proposer    # Argues FOR the topic
+      - opposer     # Argues AGAINST the topic
+
+    scoring_weights:
+      framework_application: 0.25
+      style_consistency: 0.20
+      knowledge_depth: 0.20
+      argument_coherence: 0.20
+      personality_fidelity: 0.15
+
+    instructions:
+      opening: |
+        Present your opening statement on the topic.
+        - State your position clearly (FOR or AGAINST)
+        - Provide 2-3 key arguments
+        - Use your signature frameworks and mental models
+        - Stay true to your communication style
+        - Length: 150-250 words
+
+      rebuttal: |
+        Respond to your opponent's arguments and strengthen your position.
+        - Address specific points from opponent
+        - Provide counter-arguments
+        - Use examples and analogies characteristic of your thinking
+        - Apply your frameworks to refute opponent's logic
+        - Length: 150-250 words
+
+      closing: |
+        Deliver your closing argument summarizing your position.
+        - Synthesize your key points
+        - Explain why your position is stronger
+        - Final appeal using your characteristic style
+        - Length: 150-250 words
+
+  - id: socratic
+    name: Socratic Dialogue
+    description: Question-driven exploration to reveal deeper truths through inquiry
+    rounds: 7
+    round_types:
+      - question
+      - answer
+      - question
+      - answer
+      - question
+      - answer
+      - synthesis
+    roles:
+      - questioner   # Asks probing questions
+      - responder    # Provides thoughtful answers
+
+    scoring_weights:
+      framework_application: 0.20
+      style_consistency: 0.25
+      knowledge_depth: 0.25
+      argument_coherence: 0.20
+      personality_fidelity: 0.10
+
+    instructions:
+      question: |
+        Ask a probing question that challenges assumptions or reveals contradictions.
+        - Build on previous answers
+        - Aim to uncover deeper truth
+        - Use your characteristic style of inquiry
+        - Length: 50-100 words
+
+      answer: |
+        Provide a thoughtful, honest answer to the question.
+        - Address the question directly
+        - Acknowledge if you don't know
+        - Use frameworks and examples
+        - Stay authentic to your persona
+        - Length: 100-200 words
+
+      synthesis: |
+        Synthesize the insights from the dialogue.
+        - What truth was revealed?
+        - How did the inquiry change your understanding?
+        - What remains unresolved?
+        - Length: 150-250 words
+
+  - id: steel_man
+    name: Steel Man Debate
+    description: Each side presents the strongest version of the opponent's argument before defending their own
+    rounds: 4
+    round_types:
+      - steel_man_opponent
+      - steel_man_opponent
+      - defend_own
+      - defend_own
+    roles:
+      - advocate_a
+      - advocate_b
+
+    scoring_weights:
+      framework_application: 0.20
+      style_consistency: 0.15
+      knowledge_depth: 0.25
+      argument_coherence: 0.25
+      personality_fidelity: 0.15
+
+    instructions:
+      steel_man_opponent: |
+        Present the STRONGEST version of your opponent's argument.
+        - Argue as if you truly believed their position
+        - Use their best evidence and logic
+        - Make it as compelling as possible
+        - This tests intellectual honesty and understanding
+        - Length: 150-250 words
+
+      defend_own: |
+        Now defend your actual position.
+        - Respond to the steel man you just heard
+        - Explain why your position is still stronger
+        - Use your characteristic frameworks
+        - Length: 150-250 words
+
+  - id: devils_advocate
+    name: Devil's Advocate
+    description: One clone proposes ideas while the other challenges every premise
+    rounds: 6
+    round_types:
+      - proposal
+      - challenge
+      - defense
+      - challenge
+      - defense
+      - synthesis
+    roles:
+      - proposer     # Proposes ideas
+      - challenger   # Challenges everything
+
+    scoring_weights:
+      framework_application: 0.25
+      style_consistency: 0.20
+      knowledge_depth: 0.20
+      argument_coherence: 0.20
+      personality_fidelity: 0.15
+
+    instructions:
+      proposal: |
+        Propose an idea or argument about the topic.
+        - Be bold and specific
+        - Provide reasoning
+        - Use your frameworks
+        - Length: 100-150 words
+
+      challenge: |
+        Challenge the proposal by questioning all assumptions.
+        - Find flaws, edge cases, contradictions
+        - Question premises
+        - Play devil's advocate aggressively
+        - Use your critical thinking style
+        - Length: 100-150 words
+
+      defense: |
+        Defend your proposal against the challenge.
+        - Address specific critiques
+        - Strengthen weak points
+        - Concede where necessary
+        - Length: 100-150 words
+
+      synthesis: |
+        Synthesize what survived the gauntlet.
+        - What ideas held up?
+        - What was revealed as weak?
+        - Final refined position
+        - Length: 150-250 words
+
+  - id: hegelian
+    name: Hegelian Dialectic
+    description: Thesis, antithesis, synthesis approach to arrive at higher truth
+    rounds: 3
+    round_types:
+      - thesis
+      - antithesis
+      - synthesis
+    roles:
+      - thesis_advocate
+      - antithesis_advocate
+
+    scoring_weights:
+      framework_application: 0.25
+      style_consistency: 0.15
+      knowledge_depth: 0.25
+      argument_coherence: 0.25
+      personality_fidelity: 0.10
+
+    instructions:
+      thesis: |
+        Present the thesis - an initial proposition about the topic.
+        - State it clearly and strongly
+        - Provide supporting logic
+        - Use your frameworks
+        - Length: 150-250 words
+
+      antithesis: |
+        Present the antithesis - the opposing view that contradicts the thesis.
+        - Directly oppose the thesis
+        - Show contradictions or limitations
+        - Provide alternative perspective
+        - Length: 150-250 words
+
+      synthesis: |
+        Create a synthesis that transcends both thesis and antithesis.
+        - Find a higher truth that incorporates both
+        - Resolve contradictions at a higher level
+        - Show how both were partially right
+        - This should feel like a breakthrough
+        - Length: 200-300 words
+
+# Metadata
+version: "1.0.0"
+created: "2025-10-14"
+author: "MMOS Mind Mapper"

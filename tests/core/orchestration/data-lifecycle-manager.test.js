@@ -156,7 +156,7 @@ describe('DataLifecycleManager', () => {
     it('should handle corrupted session state gracefully', async () => {
       // Given - corrupted YAML
       const sessionPath = path.join(TEST_PROJECT_ROOT, 'docs/stories/.session-state.yaml');
-      await fs.writeFile(sessionPath, 'invalid: yaml: content: [broken');
+      await fs.writeFile(sessionPath, 'invalid: yaml: content: {broken}');
 
       // When/Then - should not throw
       const result = await manager.cleanupStaleSessions();

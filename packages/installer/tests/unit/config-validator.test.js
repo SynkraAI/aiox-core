@@ -158,7 +158,7 @@ qa:
       const content = `
 project:
   type: GREENFIELD
-  [invalid: syntax
+  {invalid: syntax
 `;
 
       const result = validateYamlSyntax(content);

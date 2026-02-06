@@ -115,7 +115,7 @@ class GreenfieldHandler extends EventEmitter {
     // Workflow path
     this.workflowPath = path.join(
       projectRoot,
-      '.aios-core/development/workflows/greenfield-fullstack.yaml'
+      '.aios-core/development/workflows/greenfield-fullstack.yaml',
     );
 
     // Phase progress tracking
@@ -361,7 +361,7 @@ class GreenfieldHandler extends EventEmitter {
         return this._handlePhaseFailure(
           `${GreenfieldPhase.DISCOVERY}:${step.agent}`,
           spawnResult.error || `Agent ${step.agent} failed on ${step.task}`,
-          { ...context, failedStep: step, completedSteps: stepResults }
+          { ...context, failedStep: step, completedSteps: stepResults },
         );
       }
 
@@ -567,9 +567,9 @@ class GreenfieldHandler extends EventEmitter {
 
     const surfaceResult = surfaceChecker
       ? surfaceChecker.shouldSurface({
-          valid_options_count: options.length,
-          options_with_tradeoffs: surfaceConfig.message,
-        })
+        valid_options_count: options.length,
+        options_with_tradeoffs: surfaceConfig.message,
+      })
       : { should_surface: true };
 
     return {

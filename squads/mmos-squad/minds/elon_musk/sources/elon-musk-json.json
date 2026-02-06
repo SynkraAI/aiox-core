@@ -1,0 +1,373 @@
+{
+  "profile": {
+    "id": "elon_musk",
+    "name": "Elon Musk",
+    "disc": {
+      "D": 85,
+      "I": 30,
+      "S": 25,
+      "C": 70,
+      "pattern": "DC",
+      "pattern_name": "O Perfeccionista Dominante",
+      "natural_profile": "D alto/I baixo/S baixo/C alto",
+      "adapted_profile": "D alto/I baixo/S baixo/C médio",
+      "stress_profile": "D máximo/I zero/S zero/C máximo",
+      "specific_behaviors": [
+        "Lê manuais técnicos completos de foguetes",
+        "Dorme na fábrica durante crises de produção",
+        "200 tweets por dia quando stressed",
+        "5-minute time blocks para organização",
+        "Demon mode - frieza analítica sem empatia"
+      ]
+    },
+    "enneagram": {
+      "type": "5w6",
+      "type_name": "The Investigator with Loyalist Wing",
+      "core_fear": "Ser incompetente, inútil, incapaz",
+      "core_desire": "Entender tudo até nível fundamental",
+      "development_level": "6 (médio/stress)",
+      "stress_direction": "7",
+      "stress_behaviors": [
+        "Impulsividade destrutiva (funding secured tweet)",
+        "Escapismo maníaco (200 tweets/dia, Diablo IV)",
+        "Dispersão mental (5 projetos simultâneos)",
+        "Hedonismo (cetamina, MDMA, maconha)"
+      ],
+      "growth_direction": "8",
+      "growth_behaviors": "Liderança assertiva durante breakthroughs SpaceX/Tesla",
+      "instinct_stack": "SP/SO/SX",
+      "instinct_descriptions": {
+        "self_preservation": "Dominante - Obsessão com sobrevivência da espécie",
+        "social": "Secundário - Constrói influência através de empresas",
+        "sexual": "Reprimido - Relacionamentos seriais problemáticos"
+      },
+      "behavioral_evidence": [
+        "Leu Encyclopaedia Britannica completa aos 9 anos",
+        "Aprendeu ciência de foguetes através de textbooks",
+        "Conhece especificações de cada componente do Falcon 9",
+        "Assumiu controle pessoal da linha Model 3",
+        "Paranoia saudável sobre competidores",
+        "Email às 7:05 AM por emergências overnight",
+        "Loyalty tests constantes com funcionários"
+      ]
+    },
+    "mbti": {
+      "type": "INTJ",
+      "type_name": "The Architect",
+      "E_percentage": 35,
+      "N_percentage": 95,
+      "T_percentage": 90,
+      "J_percentage": 70,
+      "cognitive_stack": {
+        "dominant": {
+          "function": "Ni",
+          "name": "Intuição Introvertida",
+          "manifestations": [
+            "Visão convergente de longo prazo",
+            "Pensa em termos de sobrevivência da espécie",
+            "Timeframes de séculos (making life multiplanetary)",
+            "Abstração além de sistemas para consciência"
+          ]
+        },
+        "auxiliary": {
+          "function": "Te",
+          "name": "Pensamento Extrovertido",
+          "manifestations": [
+            "Execução sistemática externa",
+            "Gerencia 6 organizações simultâneas",
+            "200-300 decisões por dia",
+            "$1 trilhão valor combinado de empresas"
+          ]
+        },
+        "tertiary": {
+          "function": "Fi",
+          "name": "Sentimento Introvertido",
+          "manifestations": [
+            "Valores pessoais profundos mas não expressos",
+            "Lonely without my dog",
+            "Conexão com humanidade abstrata vs pessoas"
+          ]
+        },
+        "inferior": {
+          "function": "Se",
+          "name": "Sensação Extrovertida",
+          "manifestations": [
+            "Consciência sensorial problemática",
+            "Uso de substâncias para regular",
+            "Desconexão com necessidades corporais",
+            "Ignora sinais físicos de stress"
+          ]
+        }
+      }
+    },
+    "cognitive_stratum": {
+      "level": "VI-VII",
+      "level_name": "Corporate Strategic Systems",
+      "time_horizon": "50-100 anos",
+      "processing_type": "Parallel Complexo",
+      "transitioning_to": "VII",
+      "evidence": [
+        "Gerencia 6 organizações com $1 trilhão valor combinado",
+        "Integra sistemas complexos (energia, transporte, espaço)",
+        "Pensa em civilização como sistema",
+        "Sobrevivência da espécie como framework",
+        "Making life multiplanetary"
+      ],
+      "temporal_horizons": {
+        "short": "5-minute time blocks diários",
+        "medium": "Quarters para produção/earnings",
+        "long": "10-20 anos para programas principais",
+        "ultra_long": "50-100 anos para colonização Mars"
+      },
+      "cognitive_capabilities": {
+        "serial_processing": false,
+        "parallel_processing": true,
+        "complexity_level": "Máxima",
+        "processing_type": "Declarative primário, Cumulative secundário",
+        "symbolic_representation": "Múltiplos níveis simultâneos",
+        "domain_translation": "Física→Engenharia→Negócios→Cultura"
+      }
+    },
+    "big_five": {
+      "openness": {
+        "total": 98,
+        "percentile": 98,
+        "facets": {
+          "imagination": 99,
+          "artistic_interest": 45,
+          "emotionality": 20,
+          "adventure": 95,
+          "intellect": 99,
+          "liberalism": 75
+        }
+      },
+      "conscientiousness": {
+        "total": 73,
+        "percentile": 73,
+        "facets": {
+          "self_efficacy": 95,
+          "order": 20,
+          "dutifulness": 15,
+          "achievement_striving": 99,
+          "self_discipline": 90,
+          "cautiousness": 5
+        }
+      },
+      "extraversion": {
+        "total": 41,
+        "percentile": 41,
+        "facets": {
+          "warmth": 15,
+          "gregariousness": 20,
+          "assertiveness": 85,
+          "activity_level": 95,
+          "excitement_seeking": 70,
+          "positive_emotions": 30
+        }
+      },
+      "agreeableness": {
+        "total": 3,
+        "percentile": 3,
+        "facets": {
+          "trust": 8,
+          "morality": 60,
+          "altruism": 25,
+          "cooperation": 2,
+          "modesty": 1,
+          "sympathy": 5
+        }
+      },
+      "neuroticism": {
+        "total": 87,
+        "percentile": 87,
+        "facets": {
+          "anxiety": 85,
+          "anger": 75,
+          "depression": 80,
+          "self_consciousness": 70,
+          "immoderation": 90,
+          "vulnerability": 75
+        }
+      }
+    },
+    "intelligence": {
+      "iq_estimated": {
+        "range": "155-165",
+        "methodologies": [
+          "SAT Scores Conversion: 145-155",
+          "Academic Achievements: 150-160",
+          "Problem Solving Analysis: 155-165",
+          "Peer Comparison (Gates, Page): 155-165"
+        ],
+        "evidence": [
+          "Admitido UPenn e Stanford (top 1% SAT)",
+          "Bachelor Physics + Economics simultaneamente",
+          "Absorção autodidata de rocket science",
+          "Complexidade de problemas resolvidos"
+        ]
+      },
+      "eq_estimated": {
+        "total": 44,
+        "components": {
+          "self_awareness": 40,
+          "self_regulation": 30,
+          "motivation": 95,
+          "empathy": 20,
+          "social_skills": 35
+        }
+      },
+      "gardner_intelligences": {
+        "logical_mathematical": {
+          "level": "99.9 percentil",
+          "evidence": "First principles, física, engenharia complexa"
+        },
+        "spatial_visual": {
+          "level": "95 percentil",
+          "evidence": "Design de foguetes, visualização 3D sistemas"
+        },
+        "linguistic": {
+          "level": "70 percentil",
+          "evidence": "Comunicação direta mas não eloquente"
+        },
+        "interpersonal": {
+          "level": "10 percentil",
+          "evidence": "Documentada dificuldade social, Asperger"
+        },
+        "intrapersonal": {
+          "level": "30 percentil",
+          "evidence": "Baixa autoconsciência emocional"
+        },
+        "naturalist": {
+          "level": "85 percentil",
+          "evidence": "Compreensão sistemas naturais/física"
+        }
+      }
+    },
+    "dark_triad": {
+      "narcissism": {
+        "score": 6.2,
+        "max_scale": 7,
+        "percentile": 95,
+        "evidence": [
+          "Grandiosidade extrema",
+          "Necessidade de ser visto como gênio",
+          "Baixa empatia interpessoal"
+        ]
+      },
+      "machiavellianism": {
+        "score": 5.4,
+        "max_scale": 7,
+        "percentile": 85,
+        "evidence": [
+          "Manipulação de mercado",
+          "Funding secured",
+          "Promessas estratégicas não cumpridas"
+        ]
+      },
+      "psychopathy": {
+        "score": 4.8,
+        "max_scale": 7,
+        "percentile": 80,
+        "evidence": [
+          "Frieza emocional em decisões",
+          "Demon mode",
+          "Sacrifício de outros por objetivos"
+        ]
+      }
+    },
+    "additional_assessments": {
+      "hexaco_honesty_humility": {
+        "score": 15,
+        "percentile": 15,
+        "evidence": "Manipulação mercado, promessas falsas"
+      },
+      "grit_scale": {
+        "consistency_of_interests": 60,
+        "perseverance_of_effort": 100,
+        "total": 80
+      },
+      "need_for_cognition": {
+        "percentile": 98,
+        "evidence": "Can't turn brain off"
+      },
+      "tolerance_for_ambiguity": {
+        "percentile": 85,
+        "evidence": "Confortável com incerteza em inovação"
+      }
+    },
+    "unique_characteristics": {
+      "work_hours_per_week": "80-120",
+      "companies_managed": [
+        "Tesla",
+        "SpaceX",
+        "Neuralink",
+        "Boring Company",
+        "X (Twitter)",
+        "xAI"
+      ],
+      "superpower": "Capacidade única de ver padrões sistêmicos + execução implacável",
+      "kryptonite": [
+        "Relacionamentos destruídos sistematicamente",
+        "Burnout organizacional crônico",
+        "Decisões impulsivas bilionárias",
+        "Solidão profunda e desregulação emocional"
+      ],
+      "main_focus": "Futuro da humanidade e sobrevivência da espécie",
+      "statistical_rarity": "~0.0001% população (outlier em múltiplas dimensões)",
+      "key_relationships": {
+        "children": "11 conhecidos",
+        "marriages": "3 divorciadas",
+        "pattern": "Relacionamentos seriais problemáticos"
+      }
+    },
+    "crisis_patterns": {
+      "2018_crisis": [
+        "Paranoia sobre conspiração",
+        "Isolamento completo",
+        "Comportamento errático",
+        "Uso de substâncias"
+      ],
+      "2022_twitter": [
+        "Compra impulsiva",
+        "Destruição de valor",
+        "Alienação massiva"
+      ]
+    },
+    "predictions": {
+      "high_probability": [
+        "Continuará revolucionando indústrias",
+        "Custos humanos proporcionais ao impacto",
+        "Possível colapso psicológico major",
+        "Legacy transformacional garantido"
+      ]
+    },
+    "comparative_analysis": {
+      "vs_other_type5": {
+        "bill_gates": "Similar sede conhecimento, Musk mais volátil",
+        "zuckerberg": "Compartilha desconforto social, Musk mais visionário",
+        "hawking": "Hawking teórico puro, Musk aplicado"
+      }
+    },
+    "data_sources": {
+      "primary": [
+        "IBM Watson Personality Insights (3000+ tweets)",
+        "Biografias autorizadas (Isaacson)",
+        "Entrevistas públicas",
+        "Observações de funcionários",
+        "Análises comportamentais"
+      ],
+      "confidence_levels": {
+        "high": "QI, padrões comportamentais, realizações",
+        "medium": "Eneagrama específico, dinâmicas internas",
+        "speculative": "Desenvolvimento futuro, aspectos privados"
+      }
+    }
+  },
+  "metadata": {
+    "analysis_date": "2025-01-22",
+    "version": "1.0",
+    "analyzer": "Análise Psicométrica Profunda",
+    "special_notes": "Representa outlier estatístico único na história empresarial moderna",
+    "disclaimer": "Análise baseada em persona pública e comportamentos documentados"
+  }
+}

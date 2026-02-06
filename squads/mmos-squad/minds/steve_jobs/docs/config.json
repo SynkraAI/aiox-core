@@ -1,0 +1,21 @@
+{
+  "name": "Steve Jobs",
+  "id": "steve_jobs",
+  "youtube": {
+    "channel_url": "",
+    "channel_id": "",
+    "known_videos": []
+  },
+  "blog": {
+    "base_url": "",
+    "article_selector": "article",
+    "content_selector": ".post-content",
+    "archive_url": "/blog",
+    "main_articles": []
+  },
+  "patterns": {
+    "signature_words": [],
+    "track_profanity": false,
+    "track_questions": true
+  }
+}

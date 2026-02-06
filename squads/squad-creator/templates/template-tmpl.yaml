@@ -1,0 +1,227 @@
+template:
+  id: squad-template-meta-template-v1
+  name: Squad Template (Meta-Template)
+  version: 1.0
+  output:
+    format: yaml
+    filename: "templates/{{template_id}}.yaml"
+    title: "{{template_name}} Template Definition"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  custom_elicitation:
+    title: "Template Structure Elicitation"
+    sections:
+      - id: template-complexity
+        options:
+          - "Simple Template - Single section output"
+          - "Structured Template - Multiple organized sections"
+          - "Interactive Template - Requires elicitation"
+          - "Advanced Template - Complex with conditionals"
+
+sections:
+  - id: initial-setup
+    instruction: |
+      Initial Setup for Template Meta-Template
+
+      This is a meta-template that creates OTHER templates for squads.
+
+      Gather the following information:
+      - Template ID (kebab-case, e.g., "contract-template")
+      - Template name (human-readable, e.g., "Legal Contract")
+      - Output format (markdown, yaml, json, etc.)
+      - Output filename pattern
+      - Workflow mode (interactive, automated)
+      - Sections structure
+      - Placeholders and variables
+      - Elicitation requirements
+
+      Output file location: `squads/{{pack_name}}/templates/{{template_id}}.yaml`
+
+  - id: template-metadata
+    title: Template Metadata
+    instruction: Define template metadata and output configuration
+    template: |
+      template:
+        id: {{template_id}}
+        name: {{template_name}}
+        version: {{template_version}}
+        output:
+          format: {{output_format}}
+          filename: {{output_filename}}
+          title: "{{output_title}}"
+
+  - id: workflow-config
+    title: Workflow Configuration
+    instruction: |
+      Define workflow mode and elicitation type.
+      - mode: 'interactive' or 'automated'
+      - elicitation: 'none', 'basic-elicitation', 'advanced-elicitation'
+      - custom_elicitation: Define if using advanced elicitation
+    elicit: true
+    template: |
+
+      workflow:
+        mode: {{workflow_mode}}
+        elicitation: {{elicitation_type}}
+        {{#if custom_elicitation}}
+        custom_elicitation:
+          title: "{{elicitation_title}}"
+          sections:
+            {{custom_elicitation_sections}}
+        {{/if}}
+
+  - id: sections-structure
+    title: Sections Structure
+    instruction: |
+      Define all sections that make up this template.
+      Each section should have:
+      - id: Unique identifier (kebab-case)
+      - title: Human-readable section name (optional)
+      - instruction: Guidance for LLM on what to generate
+      - template: Structure with placeholders
+      - elicit: Whether to ask user for input (true/false)
+      - condition: Optional condition for including section
+      - examples: Optional examples to guide generation
+    elicit: true
+    template: |
+
+      sections:
+        {{sections_list}}
+
+  - id: section-example
+    title: Example Section Definition
+    instruction: |
+      Show user example of a well-structured section.
+      Use as reference for creating their own sections.
+    template: |
+
+      # Example section structure:
+      #
+      #   - id: section-identifier
+      #     title: Section Title
+      #     instruction: |
+      #       Clear instruction for what LLM should generate in this section.
+      #       Can include guidance on tone, format, content requirements.
+      #     elicit: true  # Set to true if user input needed
+      #     custom_elicitation: section-identifier  # Reference to custom elicitation
+      #     template: |
+      #       - **Placeholder 1:** {{placeholder_1}}
+      #       - **Placeholder 2:** {{placeholder_2}}
+      #
+      #       {{content_area}}
+      #     examples:
+      #       - |
+      #         Example output showing expected format and content
+      #     condition: Conditional expression  # Optional
+      #     sections:  # Optional nested sections
+      #       - id: nested-section
+      #         ...
+
+  - id: common-patterns
+    title: Common Template Patterns
+    instruction: |
+      Ask user which common patterns to include:
+      - Repeatable sections (for lists)
+      - Conditional sections (based on user input)
+      - Mermaid diagrams
+      - Code blocks
+      - Tables
+      - Nested sections
+    elicit: true
+    custom_elicitation: common-patterns
+    template: |
+
+      # Common patterns selected:
+      {{selected_patterns}}
+
+  - id: repeatable-section
+    title: Repeatable Section Example
+    condition: Uses repeatable sections
+    template: |
+
+      # Example of repeatable section:
+      #
+      #   - id: parent-section
+      #     title: Multiple Items
+      #     sections:
+      #       - id: item-section
+      #         repeatable: true
+      #         title: "Item {{item_number}}"
+      #         template: |
+      #           - **Name:** {{item_name}}
+      #           - **Description:** {{item_description}}
+
+  - id: conditional-section
+    title: Conditional Section Example
+    condition: Uses conditional sections
+    template: |
+
+      # Example of conditional section:
+      #
+      #   - id: conditional-section
+      #     title: Optional Content
+      #     condition: {{condition_expression}}
+      #     template: |
+      #       This section only appears if condition is met
+
+  - id: mermaid-diagram
+    title: Mermaid Diagram Example
+    condition: Uses mermaid diagrams
+    template: |
+
+      # Example of mermaid diagram section:
+      #
+      #   - id: diagram-section
+      #     title: Architecture Diagram
+      #     type: mermaid
+      #     mermaid_type: graph  # or flowchart, sequence, class, etc.
+      #     template: |
+      #       graph TB
+      #           A[Component A] --> B[Component B]
+      #           B --> C[Component C]
+
+  - id: elicitation-sections
+    title: Custom Elicitation Sections
+    condition: Uses custom elicitation
+    instruction: |
+      Define custom elicitation sections for interactive templates.
+      Each section presents options or questions to gather user input.
+    elicit: true
+    template: |
+
+      # Custom elicitation structure:
+      #
+      # custom_elicitation:
+      #   title: "Elicitation Title"
+      #   sections:
+      #     - id: elicitation-section-id
+      #       options:
+      #         - "Option 1 - Description"
+      #         - "Option 2 - Description"
+      #         - "Continue to next section"
+
+      {{custom_elicitation_definition}}
+
+  - id: placeholders
+    title: Placeholder Documentation
+    instruction: |
+      List all placeholders used in this template and their purpose.
+      This helps users understand what information needs to be provided.
+    template: |
+
+      # Placeholders used in this template:
+      #
+      {{placeholder_documentation}}
+
+  - id: validation
+    instruction: |
+      Validate the generated template:
+      - Ensure YAML syntax is correct
+      - Verify all placeholders are documented
+      - Check section IDs are unique
+      - Confirm elicitation sections reference correct IDs
+      - Validate workflow mode and elicitation type are compatible
+
+      If validation fails, prompt user to correct issues.

@@ -1,0 +1,342 @@
+WEBVTT
+
+00:00:00.690 --> 00:00:07.410
+Vendar, se você chegou nessa aula, é
+porque você está instalando no Macbook,
+
+00:00:08.290 --> 00:00:15.530
+já deve ter instalado no iPhone, e lá,
+então, nós criamos uma pasta, um cofre,
+
+00:00:15.550 --> 00:00:21.150
+quer dizer, um vault, um novo
+repositório, para que ele crie uma pasta
+
+00:00:21.150 --> 00:00:23.370
+no iCloud chamada Obsidia.
+
+00:00:23.370 --> 00:00:34.070
+Se você não vai usar o iPhone, você deve
+estar usando o Mac, e deve ter o
+
+00:00:34.070 --> 00:00:39.150
+Android, ou não vai instalar nenhum
+aparelho como esse.
+
+00:00:39.670 --> 00:00:42.330
+Bom, vamos lá, o que eu quero te dizer?
+
+00:00:42.630 --> 00:00:48.490
+Nós estamos aqui, diante da tela, onde
+nós podemos criar um novo vault, vai ter
+
+00:00:48.490 --> 00:00:52.970
+uma aula, onde eu vou explicar
+exatamente o que é o vault, como ele é
+
+00:00:52.970 --> 00:00:53.350
+criado.
+
+00:00:53.370 --> 00:00:54.290
+É estruturado, tá?
+
+00:00:54.370 --> 00:01:01.150
+O vault é a mesma coisa que cofre, é a
+unidade, é o local de armazenamento das
+
+00:01:01.150 --> 00:01:03.230
+nossas notas, do seu segundo cérebro.
+
+00:01:03.990 --> 00:01:12.410
+Então, você pode criar um novo, você
+pode abrir uma pasta, né, como vault, ou
+
+00:01:12.410 --> 00:01:17.010
+você pode usar o Obsidian Sync, que é
+aquela opção paga, tá?
+
+00:01:17.090 --> 00:01:19.530
+Que você não precisa ter.
+
+00:01:19.950 --> 00:01:25.650
+Nós podemos sincronizar, como eu falei
+já na aula, é de sincronização das
+
+00:01:25.650 --> 00:01:31.630
+opções disponíveis, e aí, então, a gente
+pode ter aí diversas opções, tá?
+
+00:01:32.870 --> 00:01:38.170
+Aqui nós podemos selecionar o idioma,
+eu, particularmente, gosto de deixar em
+
+00:01:38.170 --> 00:01:38.730
+inglês, tá?
+
+00:01:39.550 --> 00:01:44.570
+Mas você pode colocar aqui o português
+também, tá aqui, português do Brasil, tá
+
+00:01:44.570 --> 00:01:44.750
+legal?
+
+00:01:45.370 --> 00:01:47.770
+Bom, olha só, o que nós vamos fazer?
+
+00:01:49.190 --> 00:01:56.070
+Se você veio lá daquela aula do iPhone,
+você pode clicar, selecionar essa opção
+
+00:01:56.070 --> 00:01:59.050
+Open Folder as Vaults.
+
+00:01:59.090 --> 00:02:00.010
+O que vai acontecer?
+
+00:02:00.330 --> 00:02:07.630
+Você vai selecionar aqui esse botão, e
+você vai aí no seu Mac, lá no iCloud.
+
+00:02:07.910 --> 00:02:13.590
+E lá vai ter a pasta criada, tem até o
+símbolo aqui, ó, Obsidian.
+
+00:02:13.730 --> 00:02:18.770
+E lá dentro, você vai ter as suas
+pastas, que são os cofres.
+
+00:02:18.870 --> 00:02:23.650
+Os cofres, né, ou os vaults, nada mais
+são do que pastas, que vão estar
+
+00:02:23.650 --> 00:02:25.070
+organizando os seus arquivos.
+
+00:02:25.410 --> 00:02:31.790
+Aqui, naquela aula de iPhone, nós
+criamos Cofre Teste Aula, tá?
+
+00:02:31.890 --> 00:02:36.530
+Então, se você veio daquela aula do
+iPhone e for clicar aqui, o que vai
+
+00:02:36.530 --> 00:02:37.330
+acontecer, né?
+
+00:02:37.390 --> 00:02:39.230
+Eu vou clicar aqui, eu vou dar Open.
+
+00:02:40.570 --> 00:02:45.570
+Vai ser aberto o nosso vault, o nosso
+cofre.
+
+00:02:45.590 --> 00:02:49.370
+Ele tá vazio, criamos lá no iPhone, ele
+veio pra cá vazio.
+
+00:02:49.430 --> 00:02:51.990
+E aqui você pode fazer o quê também?
+
+00:02:52.210 --> 00:02:52.890
+Você pode fazer o quê?
+
+00:02:52.890 --> 00:02:57.730
+Você pode gerenciar outras pastas,
+outros cofres, mas vamos deixar isso lá
+
+00:02:57.730 --> 00:03:00.010
+pra aula, onde eu explico isso
+detalhadamente.
+
+00:03:00.150 --> 00:03:05.450
+O objetivo dessa aula é você saber
+instalar e como começar.
+
+00:03:05.910 --> 00:03:11.770
+Se você tava lá na aula e você pulou
+direto pra essa, porque você não vai
+
+00:03:11.770 --> 00:03:14.830
+instalar no iPhone, você tá instalando
+no Android.
+
+00:03:15.230 --> 00:03:16.230
+Então, o que você vai fazer?
+
+00:03:16.410 --> 00:03:21.970
+Você vai naquela tela, ó, eu vou aqui
+embaixo, selecionar Manage Vaults.
+
+00:03:21.990 --> 00:03:22.470
+Pra quê?
+
+00:03:22.890 --> 00:03:26.750
+Pra chegar naquela tela que nós viemos
+depois da instalação.
+
+00:03:26.850 --> 00:03:34.290
+A diferença é que aqui, ele tá com o meu
+vault aqui, que eu já abri do iCloud.
+
+00:03:34.590 --> 00:03:40.870
+Mas, no caso, se você vai instalar no
+Android ou não vai sincronizar nesse
+
+00:03:40.870 --> 00:03:42.390
+momento com nenhum mobile, né?
+
+00:03:42.430 --> 00:03:48.830
+Você tá vindo da instalação do Mac e já
+veio pra essa aula pra saber como criar
+
+00:03:48.830 --> 00:03:49.390
+o seu cofre.
+
+00:03:49.470 --> 00:03:52.210
+Você vem aqui, Create New Vault, né?
+
+00:03:53.830 --> 00:03:59.530
+Aqui, você vai dar o nome pra ele, tá?
+
+00:03:59.810 --> 00:04:05.950
+Então, eu vou dar aqui um nome
+simplesmente pra fim didático.
+
+00:04:05.990 --> 00:04:09.190
+A gente vai criar aqui um teste 2.
+
+00:04:09.530 --> 00:04:15.110
+E você vai selecionar a pasta onde você
+vai salvar.
+
+00:04:15.530 --> 00:04:18.810
+Eu vou aqui deixar dentro mesmo do meu
+iCloud.
+
+00:04:18.870 --> 00:04:22.490
+Você pode selecionar a pasta aí do seu
+Mac, tá?
+
+00:04:22.530 --> 00:04:22.870
+Que você vai salvar.
+
+00:04:22.870 --> 00:04:23.890
+O que você queira, tá legal?
+
+00:04:24.550 --> 00:04:27.970
+Eu vou selecionar a pasta Obsidian aqui
+dentro do meu iCloud mesmo.
+
+00:04:28.230 --> 00:04:34.930
+E aí, você vai ver, então, que ele vai
+criar ali dentro esse novo cofre, tá?
+
+00:04:35.250 --> 00:04:37.590
+Que aqui, no caso, é o teste 2.
+
+00:04:37.690 --> 00:04:44.190
+Então, eu tenho agora cofre teste aula e
+tenho o teste 2, que é uma outra pasta.
+
+00:04:44.410 --> 00:04:47.010
+Que eu posso vir aqui, né?
+
+00:04:47.310 --> 00:04:51.670
+E eu vou ver, ó, na minha pasta Obsidian
+do Mac.
+
+00:04:52.870 --> 00:04:54.950
+Eu tenho aqui, ó, tenho outras aqui, né?
+
+00:04:55.050 --> 00:04:57.810
+Mas eu tenho aqui, ó, o cofre teste aula
+que eu criei lá no iPhone.
+
+00:04:58.110 --> 00:05:04.410
+E a pasta que eu criei agora, teste 2, é
+o cofre que nós criamos, o Vault, que eu
+
+00:05:04.410 --> 00:05:06.370
+criei agora pra colocar minhas notas.
+
+00:05:06.410 --> 00:05:14.590
+No seu caso, vai se chamar Notas Segundo
+Cérebro, Segundo Cérebro Adriano.
+
+00:05:14.690 --> 00:05:16.330
+Você vai ter o seu nome aí, né?
+
+00:05:16.330 --> 00:05:17.190
+O nome que você quiser.
+
+00:05:17.710 --> 00:05:22.730
+Você vai criar aí e vai, já, então,
+nesse momento, estar...
+
+00:05:22.870 --> 00:05:24.950
+Com o Obsidian configurado.
+
+00:05:24.990 --> 00:05:30.150
+Você vai perceber que eu abri dois
+Vaults, dois cofres, e ele pode estar
+
+00:05:30.150 --> 00:05:32.710
+aberto ao mesmo tempo, tá?
+
+00:05:33.590 --> 00:05:40.290
+E agora, né, nós vamos aprender tudo
+sobre o Vault, as notas, tudo mais.
+
+00:05:40.370 --> 00:05:45.570
+O importante é que você chegou nesse
+ponto aqui da instalação e do início da
+
+00:05:45.570 --> 00:05:46.410
+configuração.
+
+00:05:47.170 --> 00:05:51.910
+Se você tá vindo nessa aula e você tá
+usando...
+
+00:05:52.870 --> 00:05:53.630
+Android, né?
+
+00:05:53.690 --> 00:05:56.470
+Você tem o Macbook, mas você vai usar,
+do outro lado, Android.
+
+00:05:56.830 --> 00:06:04.110
+Vai ter uma aula, abaixo, onde você vai
+diretamente buscar, né, essa opção de
+
+00:06:04.110 --> 00:06:06.410
+usar Macbook e Android.
+
+00:06:06.750 --> 00:06:12.910
+Porque daí você vai aprender como
+configurar a sincronização dentro dessa
+
+00:06:12.910 --> 00:06:13.710
+opção, tá bom?
+
+00:06:13.790 --> 00:06:19.030
+Por hoje, nós vamos ficando aqui, porque
+essa aula, o objetivo dela é tornar você
+
+00:06:19.030 --> 00:06:21.530
+expert em...
+
+00:06:23.210 --> 00:06:28.090
+Gerenciar todos esses Vaults, cofres,
+saber a dinâmica da coisa, independente
+
+00:06:28.090 --> 00:06:29.290
+do cenário que você tá usando.
+
+00:06:29.510 --> 00:06:33.590
+Você vai economizar, já está
+economizando muitas horas aí de
+
+00:06:33.590 --> 00:06:37.410
+cabeçada, porque você já tá indo pelo
+caminho certo, legal?

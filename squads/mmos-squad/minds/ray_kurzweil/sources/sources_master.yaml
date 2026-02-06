@@ -1,0 +1,352 @@
+# SOURCES MASTER - Ray Kurzweil
+# Master inventory of all sources for cognitive analysis
+# Generated: 2025-10-14
+# Status: Collection in progress
+
+sources_master:
+  mind_name: "Ray Kurzweil"
+  compilation_date: "2025-10-14T00:00:00Z"
+  status: "discovery_complete_awaiting_collection"
+
+  metadata:
+    total_sources_identified: 32
+    sources_collected: 0
+    sources_by_tier:
+      tier_1: 11
+      tier_2: 14
+      tier_3: 7
+    sources_by_type:
+      books: 6
+      interviews: 12
+      articles: 8
+      videos: 4
+      social: 2
+      courses: 0
+    temporal_span: "1990 to 2025"
+    collection_progress: "0%"
+
+  # Collection batches for parallel ETL workflow
+  collection_batches:
+    batch_1_critical:
+      priority: "highest"
+      sources: 8
+      estimated_time: "2 hours (parallel)"
+      max_concurrent: 3
+      source_ids:
+        - "T1-001"
+        - "T1-002"
+        - "T1-003"
+        - "T1-007"
+        - "T1-008"
+        - "T1-009"
+        - "T1-010"
+        - "T2-010"
+
+    batch_2_important:
+      priority: "high"
+      sources: 8
+      estimated_time: "1.5 hours (parallel)"
+      max_concurrent: 5
+      source_ids:
+        - "T1-004"
+        - "T1-005"
+        - "T1-011"
+        - "T2-001"
+        - "T2-005"
+        - "T2-007"
+        - "T2-009"
+        - "T2-013"
+
+    batch_3_nice_to_have:
+      priority: "medium"
+      sources: 16
+      estimated_time: "1 hour (parallel)"
+      max_concurrent: 10
+      source_ids:
+        - "T1-006"
+        - "T2-002"
+        - "T2-003"
+        - "T2-004"
+        - "T2-006"
+        - "T2-008"
+        - "T2-011"
+        - "T2-012"
+        - "T2-014"
+        - "T3-001"
+        - "T3-002"
+        - "T3-003"
+        - "T3-004"
+        - "T3-005"
+        - "T3-006"
+        - "T3-007"
+
+  # Source catalog
+  sources:
+    # TIER 1 - HIGH CONFIDENCE
+    - id: "T1-001"
+      title: "The Singularity Is Nearer: When We Merge with AI"
+      type: "book"
+      tier: 1
+      url: "https://www.penguinrandomhouse.com/books/535433/the-singularity-is-nearer-by-ray-kurzweil/"
+      publication_date: "2024-06-25"
+      collection_status: "pending"
+      collection_method: "manual_purchase_pdf"
+      path: null
+      priority_rank: 1
+      key_topics:
+        - "AGI by 2029 update"
+        - "Human-AI merger"
+        - "Longevity escape velocity"
+        - "Nanotech + AI + biotech"
+
+    - id: "T1-002"
+      title: "The Singularity Is Near: When Humans Transcend Biology"
+      type: "book"
+      tier: 1
+      url: "https://www.amazon.com/Singularity-Near-Humans-Transcend-Biology/dp/0143037889"
+      publication_date: "2005"
+      collection_status: "pending"
+      collection_method: "manual_purchase_pdf"
+      path: null
+      priority_rank: 2
+      key_topics:
+        - "Law of Accelerating Returns"
+        - "2045 Singularity"
+        - "Six Epochs"
+        - "GNR revolution"
+
+    - id: "T1-003"
+      title: "How to Create a Mind: The Secret of Human Thought Revealed"
+      type: "book"
+      tier: 1
+      url: "https://www.amazon.com/How-Create-Mind-Thought-Revealed/dp/0143124048"
+      publication_date: "2012"
+      collection_status: "pending"
+      collection_method: "manual_purchase_pdf"
+      path: null
+      priority_rank: 3
+      key_topics:
+        - "Pattern Recognition Theory of Mind"
+        - "Hierarchical hidden Markov models"
+        - "Neocortex simulation"
+        - "Consciousness"
+
+    - id: "T1-004"
+      title: "The Age of Spiritual Machines"
+      type: "book"
+      tier: 1
+      url: "https://www.amazon.com/Age-Spiritual-Machines-Computers-Intelligence/dp/0140282025"
+      publication_date: "1999"
+      collection_status: "pending"
+      collection_method: "manual_purchase_pdf"
+      path: null
+      priority_rank: 4
+      key_topics:
+        - "2009-2099 predictions"
+        - "Spiritual machines"
+        - "Intelligence vs consciousness"
+        - "Tech-philosophy synthesis"
+
+    - id: "T1-005"
+      title: "The Age of Intelligent Machines"
+      type: "book"
+      tier: 1
+      url: "https://www.amazon.com/Age-Intelligent-Machines-Ray-Kurzweil/dp/0262111217"
+      publication_date: "1990"
+      collection_status: "pending"
+      collection_method: "manual_purchase_pdf"
+      path: null
+      priority_rank: 5
+      key_topics:
+        - "Early AI predictions"
+        - "Chess AI (validated)"
+        - "Technology evolution"
+        - "Exponential thinking origins"
+
+    - id: "T1-006"
+      title: "Danielle: Chronicles of a Superheroine"
+      type: "book"
+      tier: 1
+      url: "https://www.amazon.com/Danielle-Chronicles-Superheroine-Ray-Kurzweil/dp/1733447105"
+      publication_date: "2019"
+      collection_status: "pending"
+      collection_method: "manual_purchase_pdf"
+      path: null
+      priority_rank: 15
+      key_topics:
+        - "AI ethics via fiction"
+        - "Human-AI collaboration"
+        - "Personal values"
+        - "Future vision"
+
+    - id: "T1-007"
+      title: "Joe Rogan Experience #2117 - Ray Kurzweil"
+      type: "interview"
+      tier: 1
+      url: "https://www.youtube.com/watch?v=YYh5p-U-pEI"
+      publication_date: "2024-03-12"
+      collection_status: "pending"
+      collection_method: "youtube_transcript"
+      path: null
+      priority_rank: 6
+      key_topics:
+        - "AGI 2029 defense"
+        - "Life extension"
+        - "200+ supplements"
+        - "Google AI work"
+
+    - id: "T1-008"
+      title: "Peter Diamandis Podcast EP #125"
+      type: "interview"
+      tier: 1
+      url: "https://www.diamandis.com/podcast/ray-kurzweil-agi-prediction"
+      publication_date: "2024-10-18"
+      collection_status: "pending"
+      collection_method: "podcast_transcript"
+      path: null
+      priority_rank: 7
+      key_topics:
+        - "2025 predictions"
+        - "Job displacement"
+        - "Nanotech"
+        - "Singularity U vision"
+
+    - id: "T1-009"
+      title: "TED Radio Hour - Prophets of Technology"
+      type: "interview"
+      tier: 1
+      url: "https://www.npr.org/2025/07/11/1255526955/ted-radio-hour-prophets-of-technology-part-1"
+      publication_date: "2025-07-11"
+      collection_status: "pending"
+      collection_method: "npr_transcript"
+      path: null
+      priority_rank: 8
+      key_topics:
+        - "AI life extension"
+        - "Mind merging"
+        - "Ethics"
+        - "Optimism"
+
+    - id: "T1-010"
+      title: "Talks at Google - How to Create a Mind"
+      type: "video"
+      tier: 1
+      url: "https://www.youtube.com/watch?v=zihTWh5i2C4"
+      publication_date: "2013"
+      collection_status: "pending"
+      collection_method: "youtube_transcript"
+      path: null
+      priority_rank: 9
+      key_topics:
+        - "PRTM deep dive"
+        - "Brain reverse-engineering"
+        - "Google work"
+        - "Q&A insights"
+
+    - id: "T1-011"
+      title: "Congressional Testimony on AI Future"
+      type: "interview"
+      tier: 1
+      url: "https://www.judiciary.senate.gov/meetings/oversight-of-ai-principles-for-regulation"
+      publication_date: "2023-05-16"
+      collection_status: "pending"
+      collection_method: "government_transcript"
+      path: null
+      priority_rank: 10
+      key_topics:
+        - "AI regulation"
+        - "Anti-pause position"
+        - "National competitiveness"
+        - "Risk mitigation"
+
+    # TIER 2 - MEDIUM CONFIDENCE
+    - id: "T2-001"
+      title: "Lex Fridman Podcast - Ray Kurzweil"
+      type: "interview"
+      tier: 2
+      url: "https://www.youtube.com/watch?v=ykY69lSpDdo"
+      publication_date: "2022-09-16"
+      collection_status: "pending"
+      collection_method: "youtube_transcript"
+      path: null
+      priority_rank: 11
+      key_topics:
+        - "AGI technical challenges"
+        - "Consciousness theories"
+        - "Personal motivation"
+        - "Philosophy of tech"
+
+    - id: "T2-010"
+      title: "Law of Accelerating Returns Essay"
+      type: "article"
+      tier: 2
+      url: "https://www.kurzweilai.net/the-law-of-accelerating-returns"
+      publication_date: "2001"
+      collection_status: "pending"
+      collection_method: "web_scraping"
+      path: null
+      priority_rank: 21
+      key_topics:
+        - "Law detailed"
+        - "Mathematical models"
+        - "Historical evidence"
+        - "Future implications"
+
+  # Analysis readiness indicators
+  analysis_readiness:
+    minimum_requirements_met: false  # Will be true after collection
+    layer_coverage_adequate: true
+    triangulation_possible: true
+    temporal_depth_sufficient: true
+
+    layer_1_behavioral: "Excellent sources available"
+    layer_2_communication: "Excellent sources available"
+    layer_3_routine: "Good sources available"
+    layer_4_recognition: "Excellent sources available"
+    layer_5_mental_models: "Excellent sources available"
+    layer_6_values: "Excellent sources available"
+    layer_7_obsessions: "Excellent sources available"
+    layer_8_paradoxes: "Good sources available"
+
+  # Recommendations for analysis phase
+  recommendations_for_analysis:
+    strongest_sources_for_deep_layers:
+      - "T1-001"  # Most recent comprehensive thinking
+      - "T1-002"  # Foundation frameworks
+      - "T1-003"  # Cognitive architecture
+      - "T1-007"  # Personal insights (supplements, longevity)
+      - "T2-010"  # Core framework explanation
+
+    triangulation_opportunities:
+      agidiscipline_2029:
+        - "T1-001"
+        - "T1-007"
+        - "T1-008"
+        - "T1-009"
+        - "T2-001"
+        - "T1-011"
+
+      life_extension:
+        - "T1-007"
+        - "T1-009"
+        - "T2-012"
+
+      law_of_accelerating_returns:
+        - "T2-010"
+        - "T1-002"
+        - "T2-005"
+
+    gap_areas:
+      - "Personal relationships (limited public info)"
+      - "Specific Google project details (confidential)"
+      - "Private doubts/uncertainties (confident public persona)"
+
+  # Collection statistics (to be updated)
+  collection_statistics:
+    total_collection_time: null
+    parallel_efficiency: null
+    issues_encountered: []
+    completion_date: null
+
+# Note: This file will be updated after each collection batch
+# Status updates: pending → in_progress → completed → validated

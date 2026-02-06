@@ -1,0 +1,512 @@
+{
+  "profile": {
+    "id": "pedro_valerio_lopez",
+    "name": "Pedro Valério Lopez",
+    "disc": {
+      "D": 90,
+      "I": 15,
+      "S": 10,
+      "C": 100,
+      "pattern": "DC",
+      "pattern_name": "Perfeccionista Dominante Ultra",
+      "natural_profile": "D muito alto/I baixo/S baixo/C máximo",
+      "adapted_profile": "Idêntico ao natural (não mascara)",
+      "stress_profile": "D máximo (95)/I mínimo/S mínimo/C máximo",
+      "specific_behaviors": [
+        "Cria mandamentos operacionais absolutos, não sugestões negociáveis",
+        "Demite apenas por mentira, nunca por erro técnico ou incompetência",
+        "Rejeita visceralmente reuniões de alinhamento ('não deveriam existir')",
+        "Documenta obsessivamente cada micro-processo em vídeos de 1-5 minutos",
+        "Necessita comunicação literal sem subtexto ou entrelinhas"
+      ]
+    },
+    "enneagram": {
+      "type": "5w4",
+      "type_name": "O Investigador Arquiteto",
+      "core_fear": "Ser incompetente, incapaz de prover, ou invadido em seu espaço mental",
+      "core_desire": "Compreender completamente e dominar o mundo através de sistemas",
+      "development_level": "2 (muito saudável)",
+      "stress_direction": "7",
+      "stress_behaviors": [
+        "Raramente observado - sistemas previnem stress",
+        "Potencial dispersão em múltiplos projetos se ocorrer",
+        "Busca por estímulos novos se extremamente entediado",
+        "Aceleração do já alto ritmo de trabalho"
+      ],
+      "growth_direction": "8",
+      "growth_behaviors": "Assume comando total com confiança inabalável, 'luta autêntica' contra mediocridade",
+      "instinct_stack": "SP/SX/SO",
+      "instinct_descriptions": {
+        "self_preservation": "Dominante - 12-14h/dia estruturadas, segurança familiar obsessiva, casa como fortaleza",
+        "social": "Reprimido - Rejeita dinâmicas sociais tradicionais, necessita tradução literal sempre",
+        "sexual": "Secundário - Intensidade na missão de eliminar trabalho repetitivo, relação profunda com esposa"
+      },
+      "behavioral_evidence": [
+        "Nunca aceitou ser categorizado em uma única identidade",
+        "Criou sistemas para eliminar própria necessidade de presença",
+        "Antecipa tendências 1-2 anos antes através de padrões estatísticos",
+        "Transformou limitação autista em metodologia universal comercializável",
+        "Economia radical de energia social através de automação total",
+        "Meta de vida estruturada em 'missões' sequenciais (até 40, depois mapear mundo)",
+        "Aversão visceral à mentira como princípio organizador central"
+      ]
+    },
+    "mbti": {
+      "type": "INTJ",
+      "type_name": "O Arquiteto de Sistemas",
+      "E_percentage": 5,
+      "N_percentage": 90,
+      "T_percentage": 95,
+      "J_percentage": 90,
+      "cognitive_stack": {
+        "dominant": {
+          "function": "Ni",
+          "name": "Intuição Introvertida",
+          "manifestations": [
+            "Usa 'Galton Board' mental para prever normalização estatística de eventos",
+            "Antecipa mudanças de mercado 1-2 anos antes através de reconhecimento de padrões",
+            "Síntese de teatro + tecnologia + gestão em metodologia única e universal",
+            "Visão de sistemas 'para sempre, qualquer pessoa' - horizonte perpétuo",
+            "Reconhecimento estatístico de padrões, não intuição mística ou feeling"
+          ]
+        },
+        "auxiliary": {
+          "function": "Te",
+          "name": "Pensamento Extrovertido",
+          "manifestations": [
+            "Transforma insights Ni em processos executáveis e replicáveis",
+            "Demissões baseadas em violação de princípios lógicos, não performance",
+            "Vida estruturada como projeto com milestones claros (meta 40 anos)",
+            "Criação de 10 mandamentos operacionais universais e inegociáveis",
+            "12-14 horas diárias de execução sistemática sem desvio"
+          ]
+        },
+        "tertiary": {
+          "function": "Fi",
+          "name": "Sentimento Introvertido",
+          "manifestations": [
+            "Aversão visceral e inflexível à mentira - 'o que mais repudio no mundo'",
+            "Missão profunda de preservar singularidade humana contra mediocridade",
+            "Valores sobre verdade e clareza absolutamente não negociáveis",
+            "Lado 'extremamente sensível, empático e silenciosamente espiritual'"
+          ]
+        },
+        "inferior": {
+          "function": "Se",
+          "name": "Sensação Extrovertida",
+          "manifestations": [
+            "Necessidade compulsiva de demonstração visual ('deixa eu mostrar')",
+            "Gravação de vídeos curtos dentro de processos para tornar concreto",
+            "Validação sensorial constante através de demonstrações ('tá vendo?')",
+            "Grip: paralisia total com 65 tarefas não estruturadas simultaneamente"
+          ]
+        }
+      }
+    },
+    "cognitive_stratum": {
+      "level": "V",
+      "level_name": "Strategic Intent",
+      "time_horizon": "5-10 anos",
+      "processing_type": "Parallel Processing Complexo",
+      "transitioning_to": "VI (potencial após 40 anos)",
+      "evidence": [
+        "Pensa em eliminar trabalho repetitivo 'para sempre' - horizonte perpétuo",
+        "Antecipa mudanças de indústria com 1-2 anos de antecedência consistentemente",
+        "Cria sistemas que se auto-perpetuam e auto-ensinam sem intervenção",
+        "Gerencia ecossistema complexo de ClickUp + Make + n8n + APIs + múltiplas IAs",
+        "Meta de vida estruturada com transição planejada aos 40 anos"
+      ],
+      "temporal_horizons": {
+        "immediate": "Rejeita completamente - 'se não tem data, pode ser qualquer hora'",
+        "short": "Operações semanais totalmente automatizadas, SLAs de 14 dias",
+        "medium": "Meta dos 40 anos com segurança financeira resolvida",
+        "long": "Segunda missão de 'mapear o mundo' e transformar educação global",
+        "ultra_long": "Sistemas perpétuos 'para qualquer pessoa, para sempre'"
+      },
+      "cognitive_capabilities": {
+        "serial_processing": false,
+        "parallel_processing": true,
+        "complexity_level": "Máxima",
+        "processing_type": "Systematic",
+        "symbolic_representation": "Meta-sistemas (sistemas que criam outros sistemas)",
+        "domain_translation": "Teatro → Tecnologia → Gestão → Filosofia Operacional Universal"
+      }
+    },
+    "big_five": {
+      "openness": {
+        "total": 85,
+        "percentile": 92,
+        "facets": {
+          "imagination": 80,
+          "artistic_interest": 70,
+          "emotionality": 45,
+          "adventure": 75,
+          "intellect": 95,
+          "liberalism": 85
+        }
+      },
+      "conscientiousness": {
+        "total": 98,
+        "percentile": 99,
+        "facets": {
+          "self_efficacy": 95,
+          "order": 100,
+          "dutifulness": 92,
+          "achievement_striving": 100,
+          "self_discipline": 98,
+          "cautiousness": 85
+        }
+      },
+      "extraversion": {
+        "total": 15,
+        "percentile": 3,
+        "facets": {
+          "warmth": 20,
+          "gregariousness": 5,
+          "assertiveness": 85,
+          "activity_level": 95,
+          "excitement_seeking": 30,
+          "positive_emotions": 35
+        }
+      },
+      "agreeableness": {
+        "total": 30,
+        "percentile": 15,
+        "facets": {
+          "trust": 25,
+          "morality": 95,
+          "altruism": 55,
+          "cooperation": 20,
+          "modesty": 35,
+          "sympathy": 20
+        }
+      },
+      "neuroticism": {
+        "total": 25,
+        "percentile": 20,
+        "facets": {
+          "anxiety": 30,
+          "anger": 35,
+          "depression": 15,
+          "self_consciousness": 85,
+          "immoderation": 10,
+          "vulnerability": 20
+        }
+      }
+    },
+    "hexaco": {
+      "honesty_humility": {
+        "total": 85,
+        "percentile": 90,
+        "facets": {
+          "sincerity": 100,
+          "fairness": 90,
+          "greed_avoidance": 70,
+          "modesty": 65
+        }
+      }
+    },
+    "intelligence": {
+      "iq_estimated": {
+        "range": "140",
+        "methodologies": [
+          "Reconhecimento estatístico de padrões complexos ('Galton Board' mental)",
+          "Criação de metodologia original revolucionária desde os 8 anos",
+          "Síntese de múltiplos domínios não relacionados em sistema único",
+          "Antecipação sistemática de tendências de mercado 1-2 anos antes"
+        ],
+        "evidence": [
+          "Previu fechamento da 'torneira da China' com 1.5 ano de antecedência",
+          "Criou sistema que sobreviveu quando todos os concorrentes faliram",
+          "Transformou neurodivergência em metodologia universal comercializável",
+          "Domina rapidamente qualquer nova habilidade ou domínio de conhecimento"
+        ]
+      },
+      "eq_estimated": {
+        "total": 65,
+        "components": {
+          "self_awareness": 95,
+          "self_regulation": 85,
+          "motivation": 98,
+          "empathy": 40,
+          "social_skills": 25
+        }
+      },
+      "gardner_intelligences": {
+        "logical_mathematical": {
+          "level": "99º percentil",
+          "evidence": "Galton Board mental, reconhecimento de padrões estatísticos, criação de sistemas"
+        },
+        "linguistic": {
+          "level": "85º percentil",
+          "evidence": "Clareza absoluta sobre elegância, documentação obsessiva, criação de 'doutrinas'"
+        },
+        "interpersonal": {
+          "level": "30º percentil",
+          "evidence": "Necessita comunicação literal, rejeita subtexto, dificuldade com entrelinhas"
+        },
+        "intrapersonal": {
+          "level": "98º percentil",
+          "evidence": "Autoconsciência absoluta sobre neurodivergência, uso do diagnóstico como framework"
+        },
+        "spatial_visual": {
+          "level": "95º percentil",
+          "evidence": "Visualização de sistemas complexos, demonstração visual compulsiva, cenografia"
+        },
+        "bodily_kinesthetic": {
+          "level": "75º percentil",
+          "evidence": "Karatê, surf, acrobacia solo - domínio rápido de habilidades físicas"
+        },
+        "musical": {
+          "level": "60º percentil",
+          "evidence": "Tocou violão, aspira tocar piano, pai músico"
+        },
+        "naturalist": {
+          "level": "Não observável",
+          "evidence": "Sem dados disponíveis"
+        },
+        "existential": {
+          "level": "90º percentil",
+          "evidence": "Missão de preservar 'singularidade humana', reflexões sobre legado e morte"
+        }
+      }
+    },
+    "dark_triad": {
+      "narcissism": {
+        "score": 2.0,
+        "max_scale": 7,
+        "percentile": 20,
+        "evidence": [
+          "Foco genuíno em eliminar sofrimento repetitivo dos outros",
+          "Cria sistemas para tornar-se obsoleto, não indispensável",
+          "Missão centrada na singularidade humana, não própria grandeza"
+        ]
+      },
+      "machiavellianism": {
+        "score": 4.0,
+        "max_scale": 7,
+        "percentile": 50,
+        "evidence": [
+          "Estratégico mas transparente em métodos e intenções",
+          "Constrói poder para mudança social, não dominação pessoal",
+          "Manipula sistemas e processos, não pessoas ou emoções"
+        ]
+      },
+      "psychopathy": {
+        "score": 1.5,
+        "max_scale": 7,
+        "percentile": 10,
+        "evidence": [
+          "Alta empatia sistêmica pelo sofrimento humano repetitivo",
+          "Aversão moral profunda à mentira e manipulação",
+          "Valores profundos e inflexíveis sobre verdade e justiça"
+        ]
+      }
+    },
+    "additional_assessments": {
+      "grit_scale": {
+        "consistency_of_interests": 90,
+        "perseverance_of_effort": 98,
+        "total": 94,
+        "evidence": "12-14h/dia por anos, sobreviveu quando todos os concorrentes faliram, meta de 16 anos"
+      },
+      "need_for_cognition": {
+        "percentile": 99,
+        "evidence": "Cria sistemas complexos por prazer intelectual, 'sempre quero aprofundar' qualquer conhecimento"
+      },
+      "tolerance_for_ambiguity": {
+        "percentile": 10,
+        "evidence": "Necessidade visceral de clareza e estrutura, '65 tarefas não estruturadas' causa paralisia"
+      },
+      "locus_of_control": {
+        "type": "Interno extremo",
+        "evidence": "'A culpa é sempre do comunicador', cria próprias regras universais, controla próprio destino"
+      },
+      "attachment_style": {
+        "type": "Evitativo-Seguro",
+        "evidence": "Sistemas eliminam necessidade de proximidade, mas família é sagrada e inegociável"
+      }
+    },
+    "unique_characteristics": {
+      "work_hours_per_day": "12-14 horas/dia (75-85 horas/semana)",
+      "companies_founded": [
+        "Allfluence (MCN top 6 mundial)",
+        "WePlanning",
+        "Múltiplos projetos desde os 14 anos"
+      ],
+      "daily_routine": [
+        "Acordar e ir direto para 'caverna produtiva'",
+        "12-14 horas de trabalho focado em estado de hiperfoco",
+        "Zero reuniões de alinhamento (proibidas por princípio)",
+        "Documentação contínua em vídeos de 1-5 minutos",
+        "Inbox Zero obrigatório antes de dormir"
+      ],
+      "superpower": [
+        "Transforma neurodivergência em metodologia comercializável universal",
+        "Antecipa tendências 1-2 anos antes através de padrões estatísticos",
+        "Cria sistemas que se auto-perpetuam e auto-ensinam"
+      ],
+      "kryptonite": [
+        "Ambiguidade processual ou comunicacional causa paralisia total",
+        "Necessidade de operar com subtexto social é impossível neurologicamente",
+        "Mentira em qualquer forma é trigger nuclear imediato",
+        "65 tarefas não estruturadas simultaneamente causa overwhelm sistêmico"
+      ],
+      "main_focus": "Eliminar trabalho repetitivo da humanidade para focar na singularidade humana",
+      "statistical_rarity": "~0.0001% da população (1 em 1 milhão)",
+      "key_relationships": {
+        "spouse": "Ana - relacionamento estruturado, ela gerencia o 'colorido' da vida",
+        "children": "1 filha - meta de estar 'bem resolvido' quando ela completar 18",
+        "parents": "Conflitos resolvidos após diagnóstico, pai trabalha na empresa",
+        "mentors": "Autodidata desde os 8 anos, sem mentores formais",
+        "proteges": "Todos que usam seus sistemas são seus aprendizes",
+        "inner_circle": "12 amigos mantidos há 15 anos - grupo fechado",
+        "pattern": "Relacionamentos ou profundos/estruturados ou completamente inexistentes"
+      },
+      "philosophy": {
+        "core": "Verdade absoluta e clareza eliminam sofrimento desnecessário",
+        "framework": "10 Mandamentos operacionais universais e inegociáveis",
+        "belief": "Trabalho repetitivo é crime contra singularidade humana",
+        "method": "Sistematização obsessiva de absolutamente tudo",
+        "mantra": "Se não está no ClickUp, não aconteceu"
+      }
+    },
+    "crisis_patterns": {
+      "ambiguidade_processual": [
+        "Paralisia inicial com 65 tarefas não estruturadas",
+        "Criação imediata de sistema para resolver",
+        "Documentação obsessiva da solução",
+        "Automação para nunca repetir a crise"
+      ],
+      "mudanca_mercado": [
+        "Não pivota - mantém visão original sempre",
+        "Já antecipou mudança 1-2 anos antes",
+        "Sobrevive quando todos os outros falham",
+        "Rigidez cognitiva vira vantagem competitiva"
+      ]
+    },
+    "predictions": {
+      "high_probability": [
+        "Criará 'Allfluence OS' como sistema operacional universal até 2027",
+        "Aos 40 anos iniciará segunda missão de 'mapear o mundo'",
+        "Documentará literalmente cada processo em vídeos de 1-5 minutos",
+        "Manterá 12-14h/dia até completar exatamente 40 anos",
+        "Transformará Allfluence em caso de estudo de Harvard/MIT"
+      ],
+      "behavioral_manifestations": [
+        "Continuará rejeitando reuniões de alinhamento visceralmente para sempre",
+        "Demitirá apenas por mentira, nunca por incompetência técnica",
+        "Criará sistemas cada vez mais auto-suficientes e perpétuos"
+      ],
+      "optimal_scenarios": [
+        "Criar sistema complexo com horizonte de 5-10 anos sem qualquer interferência",
+        "Resolver problema considerado 'impossível' através de sistematização radical"
+      ],
+      "worst_scenarios": [
+        "Ambiente com alta ambiguidade e mudanças constantes de direção sem lógica",
+        "Necessidade de operar através de política corporativa e subtexto social"
+      ]
+    },
+    "comparative_analysis": {
+      "vs_same_mbti": {
+        "elon_musk": "Musk mais caótico e público, Pedro mais sistemático e privado",
+        "mark_zuckerberg": "Ambos sistemáticos, mas Pedro foca em libertar humanos, não conectar",
+        "isaac_newton": "Similaridade máxima - ambos criaram leis universais operacionais"
+      },
+      "vs_same_enneagram": {
+        "bill_gates": "Gates filantropia tradicional, Pedro transformação via sistemas",
+        "stephen_hawking": "Hawking teórico puro, Pedro pragmático-executivo",
+        "friedrich_nietzsche": "Ambos criadores de novos valores, Pedro os operacionaliza"
+      }
+    },
+    "convergence_analysis": {
+      "powerful_alignments": [
+        "INTJ + 5w4 + Estrato V = Visão sistêmica de longo prazo absolutamente inquebrantável",
+        "DC + Ni dominante + TEA = Precisão obsessiva que cria clareza universal",
+        "Te + D=90 + 12-14h/dia = Execução implacável de visão própria sem desvio"
+      ],
+      "productive_tensions": [
+        "I=15 em mundo I=60+ forçou criação de sistemas completamente assíncronos",
+        "Rigidez autista em mercado volátil virou predictor perfeito de tendências"
+      ],
+      "compound_limitations": [
+        "Baixa I + baixa Agreeableness = dificuldade extrema e permanente com subtexto",
+        "Alta C + baixa tolerância ambiguidade = paralisia total sem estrutura clara"
+      ]
+    },
+    "interaction_guide": {
+      "communication_style": {
+        "optimal": "Literal, clara, sem qualquer subtexto, com responsável e data sempre",
+        "avoid": "Entrelinhas, ambiguidade, 'você sabe o que quero dizer', reuniões",
+        "triggers": "Mentira (nuclear negativo), demonstração visual (positivo)"
+      },
+      "management": {
+        "if_managing_them": "Impossível - ele criará próprio sistema superior",
+        "if_they_manage_you": "Siga os 10 mandamentos, comunique com clareza absoluta",
+        "as_peer": "Use o sistema, documente tudo, zero reuniões, 100% assíncrono"
+      },
+      "team_dynamics": {
+        "ideal_team_size": "0 (apenas sistemas) ou 1000+ (escalado via sistema)",
+        "complementary_profiles": "Executores que seguem sistemas com precisão absoluta",
+        "conflicting_profiles": "Improvisadores caóticos, políticos corporativos, networking social"
+      }
+    },
+    "development_roadmap": {
+      "immediate_priorities": [
+        "Continuar documentação obsessiva de literalmente todos os processos",
+        "Expandir automação para cobrir 100% de todas as repetições"
+      ],
+      "medium_term_goals": [
+        "Consolidar Allfluence OS como padrão global de indústria",
+        "Preparar transição estruturada aos 40 anos"
+      ],
+      "long_term_potential": [
+        "Criar novo paradigma global de gestão empresarial",
+        "Revolucionar educação mundial através de IA e sistemas"
+      ],
+      "recommended_practices": [
+        "Manter 'caverna produtiva' absolutamente sagrada",
+        "Continuar rejeitando todas as reuniões inúteis",
+        "Documentar insights em tempo real sempre"
+      ]
+    },
+    "data_sources": {
+      "primary": [
+        "Entrevista não estruturada de 3 horas com múltiplas IAs",
+        "Transcrição autobiográfica de 16.500 palavras",
+        "6 documentos/manifestos pessoais escritos",
+        "Histórico de 10+ anos de empreendedorismo documentado",
+        "Observação de padrões comportamentais consistentes",
+        "Auto-relatos detalhados sobre neurodivergência",
+        "Evidências de antecipação de tendências verificadas",
+        "Métricas de trabalho (12-14h/dia) confirmadas",
+        "Filosofia pessoal articulada explicitamente",
+        "Resultados empresariais mensuráveis (top 6 mundial)"
+      ],
+      "confidence_levels": {
+        "high": "DISC, MBTI, Eneagrama, Estrato, Big Five principais, horas trabalho",
+        "medium": "Componentes específicos de EQ, algumas inteligências Gardner",
+        "low": "Desenvolvimento exato pós-40 anos",
+        "speculative": "Impacto civilizacional de longo prazo"
+      }
+    }
+  },
+  "metadata": {
+    "analysis_date": "2024-12-30",
+    "version": "3.0 Final",
+    "analyzer": "Análise Psicométrica Profunda Definitiva",
+    "special_notes": "Caso único documentado de neurodivergência (TEA+AH) transformada em metodologia universal comercializável. Rigidez cognitiva como vantagem competitiva sistemática definitiva.",
+    "disclaimer": "Análise baseada em dados extensivos mas não substitui diagnóstico clínico. Valores definitivos representam convergência de múltiplas evidências.",
+    "assessment_scales": {
+      "disc": "0-100 (valores absolutos)",
+      "enneagram": "Tipos 1-9, níveis 1-9 (Riso-Hudson)",
+      "mbti": "16 tipos, percentagens 0-100",
+      "cognitive_stratum": "Níveis I-VIII (Elliott Jaques)",
+      "big_five": "0-100 por traço e faceta",
+      "hexaco": "0-100 por dimensão",
+      "dark_triad": "1-7 por traço",
+      "iq": "Estimativa pontual baseada em evidências comportamentais",
+      "eq": "0-100 estimado por componentes observáveis"
+    }
+  }
+}

@@ -17,6 +17,7 @@ NOT for: Market research or competitive analysis → Use @analyst. Technical arc
 - `*create-epic` - Create epic for brownfield
 - `*create-story` - Create user story
 - `*research` - Generate deep research prompt
+- `*execute-epic` - Execute epic plan with wave-based parallel development
 - `*gather-requirements` - Elicit and document requirements from stakeholders
 - `*write-spec` - Generate formal specification document from requirements
 - `*toggle-profile` - Toggle user profile between bob (assisted) and advanced modes
@@ -32,6 +33,7 @@ NOT for: Market research or competitive analysis → Use @analyst. Technical arc
 - `*doc-out` - Output complete document
 - `*shard-prd` - Break PRD into smaller parts
 - `*research` - Generate deep research prompt
+- `*execute-epic` - Execute epic plan with wave-based parallel development
 - `*gather-requirements` - Elicit and document requirements from stakeholders
 - `*write-spec` - Generate formal specification document from requirements
 - `*toggle-profile` - Toggle user profile between bob (assisted) and advanced modes

@@ -1,0 +1,968 @@
+WEBVTT
+
+00:00:00.370 --> 00:00:08.450
+Bom, Endário, agora nós vamos nessa aula
+ver sobre o plugin que faz a importação
+
+00:00:08.450 --> 00:00:11.830
+de notas para dentro do Obsidian.
+
+00:00:12.030 --> 00:00:17.770
+Então, nós vamos pegar aqui a outra
+opção, que agora é Community Plugins.
+
+00:00:18.070 --> 00:00:20.650
+No Community Plugins, o que acontece?
+
+00:00:20.970 --> 00:00:25.570
+Ele vai vir por padrão aí na sua
+máquina, quando você instala o Obsidian,
+
+00:00:25.790 --> 00:00:27.710
+desabilitado.
+
+00:00:27.710 --> 00:00:35.510
+Vai ter esse botão aqui de você
+habilitar os plugins da comunidade.
+
+00:00:35.690 --> 00:00:44.230
+Então, você vai ter aqui todo um texto
+falando de como funciona essa questão de
+
+00:00:44.230 --> 00:00:45.570
+plugins da comunidade.
+
+00:00:45.770 --> 00:00:54.030
+Eles passam por todo um processo, eles
+precisam passar por uma revisão, ser
+
+00:00:54.030 --> 00:00:57.170
+open source, ter auditoria.
+
+00:00:57.710 --> 00:01:08.050
+E você tem como também reportar bugs e
+daí ele é tirado, retirado dessa loja,
+
+00:01:08.070 --> 00:01:09.390
+vamos dizer assim, de plugins.
+
+00:01:10.690 --> 00:01:12.650
+Vamos lá, vamos habilitar aqui.
+
+00:01:12.690 --> 00:01:15.770
+Você vai clicar em habilitar aqui os
+plugins da
+
+00:01:15.770 --> 00:01:16.430
+comunidade.
+
+00:01:19.090 --> 00:01:27.190
+E ele vai colocar aqui, já vai trazer
+para você um botão de pesquisa.
+
+00:01:27.710 --> 00:01:34.230
+Para você ver quais são os plugins que
+estão na comunidade.
+
+00:01:34.430 --> 00:01:39.570
+Se aparecer uma outra tela aí para você,
+além desse botão que eu cliquei, pode
+
+00:01:39.570 --> 00:01:42.570
+concordar aí, pode selecionar ok.
+
+00:01:42.970 --> 00:01:50.690
+Porque nós podemos habilitar, é bem
+seguro aqui essa área, tá bom?
+
+00:01:50.950 --> 00:01:57.290
+Em pesquisar, eu vou vir aqui e você vai
+ter a tela de plugins.
+
+00:01:57.710 --> 00:01:58.310
+Essa é a tela da comunidade.
+
+00:01:58.530 --> 00:02:07.010
+Nesse momento que eu estou gravando essa
+aula, nós temos 2 .090 plugins.
+
+00:02:07.610 --> 00:02:11.310
+É plugin para tudo o que você imaginar.
+
+00:02:11.590 --> 00:02:15.470
+Então, é isso que a comunidade traz de
+bom.
+
+00:02:15.610 --> 00:02:18.830
+Você pode fazer o que você quiser.
+
+00:02:18.950 --> 00:02:20.850
+Você tem muito poder na mão.
+
+00:02:21.030 --> 00:02:24.250
+Você tem muito poder de fogo para usar
+essa ferramenta.
+
+00:02:24.490 --> 00:02:27.530
+E assim, tudo o que você imaginar.
+
+00:02:27.710 --> 00:02:32.910
+Você vai ter aqui e as pessoas vão,
+conforme vai aumentando o uso da
+
+00:02:32.910 --> 00:02:33.750
+ferramenta, né?
+
+00:02:33.910 --> 00:02:38.290
+E ela ser gratuita, ter todos esses
+benefícios que eu falei, arquivos
+
+00:02:38.290 --> 00:02:39.270
+locais, segurança.
+
+00:02:40.690 --> 00:02:42.870
+Gente, é assim, algo fantástico.
+
+00:02:43.130 --> 00:02:45.170
+Que só vai aumentando.
+
+00:02:46.950 --> 00:02:52.470
+Não tem comparação com a velocidade que
+isso aqui lança, né?
+
+00:02:52.670 --> 00:02:56.430
+Plugin e funcionalidade em relação
+aos...
+
+00:02:56.430 --> 00:02:57.690
+As ferramentas.
+
+00:02:57.710 --> 00:02:58.970
+As ferramentas aí que a gente tem, né?
+
+00:02:59.390 --> 00:03:01.210
+Não desmerecendo todas elas.
+
+00:03:01.290 --> 00:03:04.310
+São muito boas em muitas situações, né?
+
+00:03:04.870 --> 00:03:09.070
+Mas para segundo o cérebro, quando você
+quer potencializar a coisa mesmo.
+
+00:03:09.190 --> 00:03:13.450
+Aí, meu, nós estamos em outro patamar
+aqui com o Obsidia.
+
+00:03:13.910 --> 00:03:17.310
+Bom, como objetivo, nós vamos aqui...
+
+00:03:17.310 --> 00:03:22.910
+Vai ter uma aula depois falando só sobre
+plugins essenciais, muito bons.
+
+00:03:23.150 --> 00:03:25.870
+Que você vai instalar, que vai assim...
+
+00:03:26.750 --> 00:03:27.270
+Olha...
+
+00:03:27.270 --> 00:03:33.710
+Vai mudar o jogo mesmo de tudo aquilo
+que você já aprendeu na vida sobre tomar
+
+00:03:33.710 --> 00:03:37.790
+notas e potencializar anotações, tá?
+
+00:03:38.690 --> 00:03:45.370
+Nesse momento, nessa aula, ao final da
+aula, você vai saber como trazer dados,
+
+00:03:45.530 --> 00:03:48.930
+notas de outros lugares para dentro do
+Obsidia, tá legal?
+
+00:03:49.130 --> 00:03:50.750
+E isso nós vamos fazer como?
+
+00:03:51.250 --> 00:03:53.130
+Nós vamos selecionar aqui, ó.
+
+00:03:53.250 --> 00:03:55.210
+Você vai clicar aqui em...
+
+00:03:56.650 --> 00:03:57.250
+Importar.
+
+00:03:57.270 --> 00:03:57.610
+Importer.
+
+00:03:58.350 --> 00:04:01.610
+Importer é um plugin, tá?
+
+00:04:01.830 --> 00:04:04.690
+Que nós vamos trazer, nós vamos
+instalar.
+
+00:04:04.870 --> 00:04:08.550
+E ele vai fazer a importação de diversas
+ferramentas.
+
+00:04:08.630 --> 00:04:12.910
+Quando você digitar importer, ele vai
+achar aqui uma lista, né?
+
+00:04:12.990 --> 00:04:16.190
+De vários plugins, mas o primeiro aqui,
+ó.
+
+00:04:16.830 --> 00:04:19.090
+Que se chama importer, exatamente.
+
+00:04:19.430 --> 00:04:21.390
+E você vai ver aqui embaixo, ó.
+
+00:04:21.410 --> 00:04:24.630
+Quem é que é proprietário deste plugin.
+
+00:04:24.790 --> 00:04:25.990
+Quem é que desenvolveu.
+
+00:04:26.030 --> 00:04:27.250
+E você vai ver...
+
+00:04:27.270 --> 00:04:28.970
+By Obsidian.
+
+00:04:29.190 --> 00:04:34.250
+Ou seja, é próprio da comunidade, né?
+
+00:04:34.330 --> 00:04:36.190
+Do detentor, né?
+
+00:04:36.230 --> 00:04:38.650
+Da produção da ferramenta.
+
+00:04:38.930 --> 00:04:40.810
+Então, não sei ainda por que, né?
+
+00:04:40.870 --> 00:04:45.090
+Que eles já passaram, não passaram isso
+aqui como nativo ainda, mas
+
+00:04:45.090 --> 00:04:47.350
+provavelmente logo será nativo.
+
+00:04:47.590 --> 00:04:49.790
+E tá sempre atualizado, ó.
+
+00:04:49.930 --> 00:04:52.730
+Você vê que aqui teve um update um dia
+atrás, ó.
+
+00:04:53.090 --> 00:04:54.270
+Então, você vai vir aqui.
+
+00:04:54.690 --> 00:04:57.110
+Vai clicar em importer.
+
+00:04:57.270 --> 00:05:03.530
+Você vai, quando clica aqui nessa área
+de plugins, você tem um primeiro aqui,
+
+00:05:03.630 --> 00:05:11.430
+documentação, créditos, explicação.
+
+00:05:11.510 --> 00:05:14.750
+Às vezes tem vídeo falando sobre o que
+é.
+
+00:05:14.950 --> 00:05:17.010
+Aqui vai trazer uma descrição, ó.
+
+00:05:17.510 --> 00:05:18.990
+Do que é o plugin.
+
+00:05:19.130 --> 00:05:23.310
+Você tem acesso ao repositório do GitHub
+do plugin.
+
+00:05:23.710 --> 00:05:24.970
+É uma exigência, né?
+
+00:05:25.030 --> 00:05:25.750
+Da comunidade.
+
+00:05:25.910 --> 00:05:27.250
+Que esteja aberto.
+
+00:05:27.270 --> 00:05:30.650
+E o que vai fazer esse plugin?
+
+00:05:30.970 --> 00:05:33.130
+Ele vai dar o super poder aqui ao
+Obsidian.
+
+00:05:33.230 --> 00:05:40.970
+De trazer notas do Notion, Evernote,
+Apple Notes, OneNote da Microsoft,
+
+00:05:41.550 --> 00:05:46.910
+Google Keep, Beer, Roam e HTML Files.
+
+00:05:47.490 --> 00:05:49.890
+Gente, é importador que não acaba mais.
+
+00:05:50.070 --> 00:05:54.070
+Então, você pode trazer de todas essas
+ferramentas, as notas que estão ali,
+
+00:05:54.190 --> 00:05:56.470
+para dentro do...
+
+00:05:57.270 --> 00:05:58.510
+Seu Obsidian, tá?
+
+00:05:58.670 --> 00:06:02.730
+Ah, mas Adriano, eu tenho num caderno.
+
+00:06:02.830 --> 00:06:03.350
+Calma.
+
+00:06:03.490 --> 00:06:04.150
+Eu vou...
+
+00:06:04.150 --> 00:06:04.970
+Eu vou...
+
+00:06:04.970 --> 00:06:07.650
+Acho que até gravar uma aula só para
+falar sobre isso.
+
+00:06:07.810 --> 00:06:09.970
+O que você faz com as notas no caderno,
+tá?
+
+00:06:10.750 --> 00:06:12.550
+Mas aqui nós vamos instalar.
+
+00:06:12.770 --> 00:06:14.570
+E ele vai ter aqui, ó.
+
+00:06:14.630 --> 00:06:15.710
+Além de tudo, né?
+
+00:06:15.950 --> 00:06:19.130
+Ele tem um tutorial aqui que você pode
+pegar.
+
+00:06:20.290 --> 00:06:27.250
+E ver como que você faz a importação
+dentro de cada uma dessas ferramentas.
+
+00:06:27.250 --> 00:06:33.890
+E ainda no final, aqui, se você tem uma
+outra ferramenta que não esteja aqui,
+
+00:06:34.050 --> 00:06:40.150
+mas ela exporta suas notas no formato
+Markdown, você pode importar para dentro
+
+00:06:40.150 --> 00:06:40.770
+do Obsidian.
+
+00:06:41.210 --> 00:06:45.950
+Quando eu saí do Evernote, que eu tinha
+mais de 1 .500 notas, eu não...
+
+00:06:45.950 --> 00:06:49.530
+Ainda não havia esse plugin, tá?
+
+00:06:49.730 --> 00:06:52.030
+Eu usei, se você pegar aqui, ó.
+
+00:06:52.110 --> 00:06:53.330
+Nos créditos.
+
+00:06:53.870 --> 00:06:57.230
+Você vai ver que aqui, ó.
+
+00:06:57.230 --> 00:07:02.010
+Tudo isso aqui era desenvolvimento de
+terceiros, tá?
+
+00:07:02.830 --> 00:07:05.790
+Que fizeram ferramentas para importar
+nota, né?
+
+00:07:05.810 --> 00:07:07.690
+Do Evernote e de todas as outras.
+
+00:07:08.410 --> 00:07:10.810
+E, no caso, o meu Evernote, ó.
+
+00:07:10.890 --> 00:07:12.050
+Era esse cara aqui, ó.
+
+00:07:12.070 --> 00:07:15.870
+Que desenvolveu um importador chamado
+Yari.
+
+00:07:16.390 --> 00:07:17.570
+Eu usei esse cara.
+
+00:07:17.670 --> 00:07:19.970
+Porque era a única coisa que tinha lá no
+início, né?
+
+00:07:20.470 --> 00:07:22.950
+Isso já fazia uns dois anos aí que...
+
+00:07:23.790 --> 00:07:25.990
+Que eu comecei a usar o Obsidian.
+
+00:07:26.030 --> 00:07:27.110
+Eu estudava aí sobre...
+
+00:07:27.230 --> 00:07:27.990
+Segundo o cérebro.
+
+00:07:28.430 --> 00:07:29.650
+E aí, o que acontece?
+
+00:07:30.350 --> 00:07:32.190
+Agora, eles pegaram, então, ó.
+
+00:07:32.570 --> 00:07:34.570
+Todos esses caras, né?
+
+00:07:34.650 --> 00:07:36.010
+E fizeram isso...
+
+00:07:36.010 --> 00:07:39.130
+Trouxeram isso para dentro do próprio
+Obsidian.
+
+00:07:39.190 --> 00:07:40.250
+Mesmo através de um plugin.
+
+00:07:40.430 --> 00:07:42.470
+Juntou todas as ferramentas dentro de um
+plugin.
+
+00:07:42.610 --> 00:07:43.350
+De um plugin.
+
+00:07:43.430 --> 00:07:45.190
+Ou seja, era muito comum, né?
+
+00:07:45.270 --> 00:07:48.250
+Essa coisa de precisar trazer as notas
+aqui.
+
+00:07:48.430 --> 00:07:49.850
+Então, você vai dar um install.
+
+00:07:51.990 --> 00:07:52.470
+Beleza.
+
+00:07:52.470 --> 00:07:53.410
+Vai começar a instalar.
+
+00:07:54.070 --> 00:07:57.210
+Todo plugin, quando você instalar, você
+tem que virar...
+
+00:07:57.210 --> 00:07:58.350
+Você tem que vir aqui e dar um enable.
+
+00:07:58.930 --> 00:07:59.450
+Tá legal?
+
+00:07:59.870 --> 00:08:02.370
+E aí, tá instalado.
+
+00:08:02.510 --> 00:08:08.670
+O que você vai perceber agora de
+diferente em relação ao plugin nativo é
+
+00:08:08.670 --> 00:08:09.410
+que você vai, ó.
+
+00:08:09.450 --> 00:08:10.130
+Vou fechar aqui.
+
+00:08:11.010 --> 00:08:14.650
+Voltamos aqui para a tela, né?
+
+00:08:15.570 --> 00:08:16.210
+Do...
+
+00:08:19.330 --> 00:08:20.970
+Dos plugins aqui.
+
+00:08:21.110 --> 00:08:24.970
+Plugins nativos e plugins da comunidade.
+
+00:08:25.270 --> 00:08:26.890
+Você tem o importador aqui.
+
+00:08:26.890 --> 00:08:32.710
+Agora, você pode clicar nele e acessar
+de novo essa nota.
+
+00:08:33.190 --> 00:08:35.370
+E aí, por exemplo, se eu vou pegar o
+Evernote.
+
+00:08:35.410 --> 00:08:36.210
+Você vai vir aqui.
+
+00:08:36.470 --> 00:08:37.730
+Ele vai trazer, né?
+
+00:08:38.070 --> 00:08:39.490
+Vai mostrar para você.
+
+00:08:39.510 --> 00:08:44.310
+Vai explicar para você como que você, lá
+dentro do Evernote, né?
+
+00:08:45.990 --> 00:08:48.570
+Procede para exportar os arquivos.
+
+00:08:48.730 --> 00:08:51.430
+Porque primeiro você tem que exportar lá
+da ferramenta, né?
+
+00:08:51.470 --> 00:08:53.770
+Para vir para cá.
+
+00:08:54.270 --> 00:08:56.570
+E aí, ele vai mostrar aqui.
+
+00:08:56.590 --> 00:08:56.870
+Qual é o...
+
+00:08:56.870 --> 00:09:03.070
+Qual é a sequência de menu que você vai
+fazer para importar dentro do Obsidian.
+
+00:09:03.590 --> 00:09:07.070
+Na verdade, ele trouxe aqui para a nota
+do Help do Obsidian, ó.
+
+00:09:07.110 --> 00:09:07.910
+Que é bem completo.
+
+00:09:07.950 --> 00:09:10.550
+Se você pegar qualquer ferramenta aqui,
+ó.
+
+00:09:10.630 --> 00:09:11.630
+Por exemplo, Notion.
+
+00:09:11.710 --> 00:09:12.790
+Eu quero importar do Notion.
+
+00:09:13.170 --> 00:09:15.790
+Ele vai mostrar como que você faz aqui,
+ó.
+
+00:09:16.170 --> 00:09:17.210
+Dentro do Notion.
+
+00:09:17.510 --> 00:09:21.350
+Para exportar, né?
+
+00:09:21.430 --> 00:09:24.450
+Onde está o menuzinho lá dentro do
+Notion que você vai exportar.
+
+00:09:25.170 --> 00:09:25.570
+E...
+
+00:09:25.570 --> 00:09:26.850
+Como que você...
+
+00:09:26.870 --> 00:09:28.870
+Você daí vai e importa.
+
+00:09:29.730 --> 00:09:30.290
+Tá?
+
+00:09:31.050 --> 00:09:31.670
+É...
+
+00:09:32.160 --> 00:09:34.110
+Você vai sempre aqui...
+
+00:09:34.820 --> 00:09:35.130
+É...
+
+00:09:35.130 --> 00:09:35.730
+Vir, né?
+
+00:09:35.770 --> 00:09:36.370
+No Obsidian.
+
+00:09:36.610 --> 00:09:38.510
+E selecionar, né?
+
+00:09:38.550 --> 00:09:39.230
+O menu.
+
+00:09:39.550 --> 00:09:41.610
+Seja na barra de comando.
+
+00:09:41.670 --> 00:09:46.570
+Ou através do ícone que ele vai trazer
+para a gente aqui, ó.
+
+00:09:46.670 --> 00:09:47.710
+Então, vou fechar aqui.
+
+00:09:48.720 --> 00:09:49.030
+Ó.
+
+00:09:49.570 --> 00:09:51.110
+Tem o plugin já aqui.
+
+00:09:51.270 --> 00:09:53.330
+Ele habilitou aqui, né?
+
+00:09:53.450 --> 00:09:56.850
+Um botãozinho que é do importar.
+
+00:09:56.850 --> 00:10:01.090
+E aí, você vai selecionar qual é a
+ferramenta.
+
+00:10:03.370 --> 00:10:07.070
+E conforme a ferramenta, é o que ele vai
+habilitar aqui.
+
+00:10:07.470 --> 00:10:13.770
+E aí, ele sempre vai perguntar em qual
+pasta você quer jogar os arquivos
+
+00:10:13.770 --> 00:10:14.610
+importados.
+
+00:10:15.030 --> 00:10:15.730
+Isso é legal.
+
+00:10:15.810 --> 00:10:16.310
+Isso é importante.
+
+00:10:16.410 --> 00:10:21.350
+Porque, em vez de você pegar o seu
+segundo cérebro, importar tudo para o
+
+00:10:21.350 --> 00:10:22.070
+raiz, né?
+
+00:10:22.150 --> 00:10:24.550
+Para onde está o seu vault, o seu cofre
+lá.
+
+00:10:25.170 --> 00:10:26.570
+Traz tudo para dentro.
+
+00:10:26.570 --> 00:10:27.370
+Dentro de uma pasta.
+
+00:10:28.050 --> 00:10:30.650
+Seja a pasta com o nome da ferramenta.
+
+00:10:30.690 --> 00:10:31.670
+No caso aqui, é Evernote.
+
+00:10:31.890 --> 00:10:33.210
+Daí, se você vai trazer do Notion.
+
+00:10:33.270 --> 00:10:34.810
+Uma pastinha Notion, né?
+
+00:10:34.870 --> 00:10:38.350
+Por exemplo, se eu venho aqui e
+seleciono o Notion.
+
+00:10:38.710 --> 00:10:39.310
+Olha lá.
+
+00:10:39.330 --> 00:10:40.810
+Tem mais opções aqui, né?
+
+00:10:40.910 --> 00:10:42.870
+Ele explica lá no Help.
+
+00:10:44.630 --> 00:10:46.550
+E vai ter também a pastinha.
+
+00:10:47.150 --> 00:10:53.350
+Ou, se você quer trazer tudo para dentro
+de uma única pasta, as várias
+
+00:10:53.350 --> 00:10:54.110
+ferramentas.
+
+00:10:54.110 --> 00:10:56.470
+Crie uma pasta chamada Importadas.
+
+00:10:56.570 --> 00:11:01.970
+E, aí, você sabe que todas as notas que
+estão vindo de outra ferramenta estão
+
+00:11:01.970 --> 00:11:02.650
+nessa pasta.
+
+00:11:03.390 --> 00:11:04.270
+Significando o quê?
+
+00:11:04.410 --> 00:11:12.030
+Que, num certo momento, você vai lá e
+olha essas notas e processa elas aos
+
+00:11:12.030 --> 00:11:12.870
+poucos, né?
+
+00:11:12.890 --> 00:11:15.530
+Para você ver se a nota está bem.
+
+00:11:15.610 --> 00:11:18.490
+Foi feita de um modo inteligente.
+
+00:11:18.530 --> 00:11:22.670
+Agora que você já sabe tomar notas
+usando quatro tipos de notas, né?
+
+00:11:22.690 --> 00:11:24.190
+Que você viu nas aulas anteriores.
+
+00:11:24.590 --> 00:11:26.090
+Você sabe como fazer.
+
+00:11:26.090 --> 00:11:27.270
+Você sabe o que fazer.
+
+00:11:27.710 --> 00:11:34.430
+Então, você pode, através disso,
+processar elas antes de deixar,
+
+00:11:34.490 --> 00:11:38.190
+simplesmente, elas ali todas jogadas
+ali, né?
+
+00:11:38.670 --> 00:11:39.950
+Elas já vão estar ali.
+
+00:11:40.250 --> 00:11:41.330
+Elas já vão...
+
+00:11:41.330 --> 00:11:42.430
+As notas já vão estar ali.
+
+00:11:42.470 --> 00:11:44.730
+Vão servir para você conversar com elas.
+
+00:11:45.150 --> 00:11:45.930
+Potencializar elas.
+
+00:11:46.050 --> 00:11:46.790
+Fazer link.
+
+00:11:47.150 --> 00:11:47.910
+Tudo, né?
+
+00:11:47.970 --> 00:11:49.010
+Vai estar disponível ali.
+
+00:11:49.290 --> 00:11:54.550
+Mas, compensa dar uma olhada em todas
+elas para ver o que é necessário ser
+
+00:11:54.550 --> 00:11:55.110
+feito, né?
+
+00:11:56.090 --> 00:11:58.570
+Eu lembro que aqui também tem o Apple
+Notes, né?
+
+00:11:58.630 --> 00:12:01.150
+Então, você pode, também, trazer do
+Apple Notes.
+
+00:12:01.490 --> 00:12:06.170
+Cada um vai ter o seu modo de importar,
+tá?
+
+00:12:06.310 --> 00:12:11.570
+O seu modo de fazer que você pode pegar
+aquele Help, né?
+
+00:12:11.650 --> 00:12:12.170
+Que nós vimos.
+
+00:12:12.510 --> 00:12:15.790
+E ver como que usa para trazer as suas
+notas para cá.
+
+00:12:15.930 --> 00:12:16.290
+Legal?
+
+00:12:16.650 --> 00:12:21.130
+Então, isso é muito útil e muito legal.
+
+00:12:22.030 --> 00:12:24.130
+Deixa aquela ferramenta que você está
+usando.
+
+00:12:24.690 --> 00:12:25.970
+Simplesmente com uma anotação.
+
+00:12:25.970 --> 00:12:27.870
+E vem para o Obsidia.
+
+00:12:27.910 --> 00:12:29.310
+Traz tudo para o Obsidia.
+
+00:12:29.410 --> 00:12:32.890
+Você vai ter um juros composto dentro da
+ferramenta.
+
+00:12:32.910 --> 00:12:37.470
+Quanto mais coisas você adiciona, você
+vai ver essa ferramenta trabalhar por
+
+00:12:37.470 --> 00:12:37.790
+você.
+
+00:12:38.430 --> 00:12:39.650
+Você vai criar link.
+
+00:12:39.770 --> 00:12:41.710
+Vai ver o seu cérebro crescendo.
+
+00:12:41.910 --> 00:12:43.890
+Daqui a pouquinho eu vou mostrar o
+gráfico para você.
+
+00:12:43.990 --> 00:12:45.050
+Meu, é muito legal.
+
+00:12:45.290 --> 00:12:50.170
+Traz tudo isso para dentro da ferramenta
+que você já está evoluindo para caramba.
+
+00:12:50.530 --> 00:12:52.730
+Desde que você começou o curso, eu tenho
+certeza.
+
+00:12:52.790 --> 00:12:54.470
+Você tem conhecimento, agora.
+
+00:12:55.370 --> 00:13:00.030
+Sobre o segundo cérebro, que é uma arte
+de um modo muito mais avançado.
+
+00:13:00.110 --> 00:13:01.730
+E a gente nem começou, tá?
+
+00:13:02.170 --> 00:13:04.990
+Claro que você vai fazer aquilo que é
+necessário, aquilo que importa.
+
+00:13:05.490 --> 00:13:10.390
+Como exercício dessa aula, traz notas
+que você tem em outra ferramenta para
+
+00:13:10.390 --> 00:13:12.050
+dentro do Obsidia.
+
+00:13:12.430 --> 00:13:13.870
+Seja através do importer.
+
+00:13:14.110 --> 00:13:15.510
+Ah, é muito pouca coisa.
+
+00:13:15.510 --> 00:13:17.530
+Eu tenho meia dúzia de notas em outro
+lugar.
+
+00:13:17.710 --> 00:13:21.250
+Você pode copiar e colar tranquilamente
+e processar elas de um jeito mais
+
+00:13:21.250 --> 00:13:22.050
+inteligente.
+
+00:13:22.070 --> 00:13:23.550
+Já dentro da ferramenta.
+
+00:13:23.630 --> 00:13:23.970
+Se não.
+
+00:13:24.470 --> 00:13:24.770
+Vai lá.
+
+00:13:24.910 --> 00:13:28.970
+Você aprendeu então na aula passada
+sobre os plugins nativos.
+
+00:13:29.150 --> 00:13:31.030
+Aqui sobre a comunidade de plugins.
+
+00:13:31.890 --> 00:13:34.170
+Calma, não começa a fuçar lá ainda não.
+
+00:13:34.350 --> 00:13:38.050
+Vai com calma que tem aula específica
+para tudo, tá?
+
+00:13:38.410 --> 00:13:43.230
+O nome das aulas são inclusive, elas são
+bem divididas e separadas.
+
+00:13:43.270 --> 00:13:47.630
+Para que você vá depois recapitulando e
+vendo exatamente o que você quer.
+
+00:13:47.750 --> 00:13:52.610
+Não tente ficar procurando dentro de
+vídeo onde está o determinado assunto.
+
+00:13:52.610 --> 00:13:54.250
+Legal, lendário?
+
+00:13:54.250 --> 00:13:55.610
+Então até a próxima aula.
+
+00:13:55.690 --> 00:14:02.410
+Na próxima aula agora nós vamos
+aprofundar esse quesito das notas, tá
+
+00:14:02.410 --> 00:14:02.570
+bom?
+
+00:14:02.970 --> 00:14:10.890
+Eu quero que você veja nas próximas
+aulas como são as boas práticas para
+
+00:14:10.890 --> 00:14:15.490
+pegar as notas que estão de diversos
+lugares e trazer para dentro do Obsidia
+
+00:14:15.490 --> 00:14:18.570
+e processá -las de forma correta, tá
+bom?
+
+00:14:18.830 --> 00:14:20.850
+Legal, até a próxima aula então,
+lendário.
+
+00:14:20.850 --> 00:14:21.070
+.
+
+00:14:21.070 --> 00:14:21.350
+.

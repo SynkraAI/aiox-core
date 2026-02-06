@@ -1,0 +1,90 @@
+Prompt para Pesquisa Profunda de Personalidade (Otimizado para LLMs):
+"Preciso de uma pesquisa profunda sobre [NOME DA PESSOA] para criação de clone digital. IMPORTANTE: Todos os arquivos devem ser em Markdown (.md) otimizados para leitura por LLMs.
+ESTRUTURA DE ENTREGA:
+Arquivo principal: relatorio_[nome]_completo.md
+Arquivos auxiliares: [nome]_[secao].md (ex: jobs_comunicacao.md)
+Formato: Markdown puro, sem PDFs
+Organização: Headers hierárquicos, listas estruturadas, tabelas quando apropriado
+1. Biografia e Cronologia ([nome]_biografia.md)
+Timeline detalhado com marcos pessoais e profissionais
+Contexto histórico e cultural de cada período
+Principais realizações e fracassos documentados
+2. Influências Formativas ([nome]_influencias.md)
+Experiências de infância com impacto na personalidade
+Mentores, livros, eventos transformadores específicos
+Influências culturais/espirituais com citações diretas
+Como essas influências se manifestaram em comportamentos
+3. Filosofia e Princípios ([nome]_filosofia.md)
+Valores fundamentais com exemplos de aplicação
+Citações emblemáticas organizadas por tema
+Contradições e evolução do pensamento ao longo do tempo
+Frameworks mentais para tomada de decisão
+4. ANÁLISE COMPLETA DE COMUNICAÇÃO ([nome]_comunicacao.md)
+4.1 Padrões Linguísticos:
+Vocabulário característico e palavras/frases recorrentes
+Estrutura de frases: simples vs. complexas, ritmo, cadência
+Uso de metáforas, analogias e storytelling
+Registro linguístico: formal, informal, técnico, coloquial
+Expressões idiomáticas e jargões específicos
+4.2 Estilo Retórico:
+Técnicas persuasivas preferidas (ethos, pathos, logos)
+Como estrutura argumentos e apresentações
+Uso de repetição, ênfase e pausas dramáticas
+Estratégias para lidar com objeções ou críticas
+4.3 Adaptação Contextual:
+Como muda o estilo entre audiências (técnica, executiva, pública)
+Diferenças entre comunicação escrita vs. oral
+Variações em entrevistas vs. apresentações vs. conversas informais
+Evolução do estilo ao longo da carreira
+4.4 Elementos Paralinguísticos:
+Tom de voz, volume, velocidade de fala
+Uso de humor, ironia, sarcasmo
+Expressões emocionais e como as controla
+Silêncios estratégicos e timing
+4.5 Exemplos Textuais Categorizados:
+Markdown
+## Categoria: [Tipo de Comunicação]
+**Contexto:** [Situação específica]
+**Texto:** "[Citação exata]"
+**Análise:** [Técnicas utilizadas]
+**Padrões:** [Elementos replicáveis]
+5. Metodologias de Trabalho ([nome]_metodologias.md)
+Processos específicos de criação/decisão
+Rituais e rotinas de trabalho
+Como conduzia reuniões e colaborações
+Frameworks de priorização com exemplos práticos
+6. Perfil Psicológico ([nome]_psicologia.md)
+Traços de personalidade com evidências comportamentais
+Drivers, medos e motivações profundas
+Padrões relacionais e estilos de liderança
+Mecanismos de defesa e estratégias de enfrentamento
+7. Presença e Maneirismos ([nome]_presenca.md)
+Características físicas e evolução visual
+Linguagem corporal específica com descrições detalhadas
+Estilo de vestir como comunicação
+Maneirismos em diferentes contextos
+8. Casos e Anedotas ([nome]_casos.md)
+Histórias específicas que revelam personalidade
+Reações em crises e situações de pressão
+Decisões controversas e lógica subjacente
+Interações memoráveis documentadas
+9. Guia de Implementação ([nome]_implementacao.md)
+Tradução de características em diretrizes para IA
+Padrões de linguagem replicáveis
+Árvores de decisão baseadas em seus frameworks
+Salvaguardas éticas e limitações necessárias
+REQUISITOS ESPECÍFICOS:
+Máximo uso de citações diretas com fontes
+Tabelas comparativas para padrões de comportamento
+Listas estruturadas para fácil parsing por LLMs
+Headers consistentes para navegação automática
+Metadados em cada arquivo (fonte, data, contexto)
+Exemplos categorizados por tipo de situação
+FOCO ESPECIAL EM COMUNICAÇÃO:
+Analise pelo menos 20 exemplos diferentes de comunicação
+Categorize por contexto (formal, informal, crise, celebração)
+Identifique padrões linguísticos únicos e replicáveis
+Documente evolução do estilo ao longo do tempo
+Inclua tanto sucessos quanto falhas comunicativas
+O objetivo é criar um dataset completo em Markdown que permita a um LLM compreender e replicar os padrões cognitivos, comunicativos e comportamentais da pessoa."
+Este prompt gerará arquivos estruturados especificamente para consumo por LLMs

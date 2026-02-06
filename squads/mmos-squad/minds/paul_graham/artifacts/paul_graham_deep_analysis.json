@@ -1,0 +1,554 @@
+{
+  "metadata": {
+    "generated_at": "2025-09-21 10:53:31",
+    "essays_analyzed": 30,
+    "analysis_type": "deep_cognitive_patterns"
+  },
+  "cognitive_architecture": {
+    "mental_frameworks": [
+      {
+        "essay": "How to Do Great Work",
+        "framework": "The reason we're surprised is that we underestimate the cumulative\neffect of work",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "framework": "Part of the reason we underrate questions is the way they're used\nin schools",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "Writes and Write-Nots",
+        "framework": "The reason so many people have trouble writing is that it's\nfundamentally difficult",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "The Right Kind of Stubborn",
+        "framework": "## [\n\n## 2\n\n## ]\n\nThe reason the persistent and the obstinate seem similar is that\nthey're both hard to stop",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "How to Start Google",
+        "framework": "The reason I know about them is that my wife\nJessica and I started something called Y Combinator that is basically\na startup factory",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "The Need to Read",
+        "framework": "The reason it would matter is that writing is not just a way to convey ideas, but also a way to have them",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "What You (Want to)* Want",
+        "framework": "The reason this is mistaken is that people do sometimes change what they want",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "What I've Learned from Users",
+        "framework": "For example (and this case is all too common), founders will come in to talk about the difficulties they're having raising money, and after digging into their situation, it turns out the reason is that the company is doing badly, and investors can tell",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "What I've Learned from Users",
+        "framework": "So the reason founders don't listen to us is that they don't believe us",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "What I've Learned from Users",
+        "framework": "[4]The reason startups are so counterintuitive is that they're so different from most people's other experiences",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "Heresy",
+        "framework": "The reason the current wave of intolerance comes from the left is simply because the new unifying ideology happened to come from the left",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "Putting Ideas into Words",
+        "framework": "The real test is reading what you've written",
+        "type": "mental_model",
+        "pattern": "the real (.+) is (.+)"
+      },
+      {
+        "essay": "Putting Ideas into Words",
+        "framework": "[3]The reason I've spent so long establishing this rather obvious point is that it leads to another that many people will find shocking",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "Beyond Smart",
+        "framework": "The reason the choice makes me uncomfortable is that being smart still feels like the thing that matters, even though I know intellectually that it isn't",
+        "type": "mental_model",
+        "pattern": "the reason (.+) is (.+)"
+      },
+      {
+        "essay": "How to Work Hard",
+        "framework": "[3] The thing kids do in school that's most like the real version is sports",
+        "type": "mental_model",
+        "pattern": "the real (.+) is (.+)"
+      }
+    ],
+    "thought_patterns": [
+      {
+        "essay": "How to Do Great Work",
+        "pattern": "observation_to_generalization",
+        "observation": "\" Five minutes\nlater I've found something that seems mistaken or incomplete, and\nI'm off",
+        "context": "\" Five minutes\nlater I've found something that seems mistaken or incomplete, and\nI'm off Similar techniques work for starting new projects It's ok to lie\nto yourself about how much work a project will entail, for example"
+      },
+      {
+        "essay": "What I've Learned from Users",
+        "pattern": "observation_to_generalization",
+        "observation": "# What I've Learned from Users\n\n\nSeptember 2022I recently told applicants to Y Combinator that the best advice I could give for getting in, per word, was Explain what you've learned from users",
+        "context": "# What I've Learned from Users\n\n\nSeptember 2022I recently told applicants to Y Combinator that the best advice I could give for getting in, per word, was Explain what you've learned from users That tests a lot of things: whether you're paying attention to users, how well you understand them, and even how much they need what you're making Afterward I asked myself the same question"
+      },
+      {
+        "essay": "What I've Learned from Users",
+        "pattern": "observation_to_generalization",
+        "observation": "# What I've Learned from Users\n\n[1](#f1n)\n[2](#f2n)\n[3](#f3n)\n[counterintuitive](before",
+        "context": "# What I've Learned from Users\n\n[1](#f1n)\n[2](#f2n)\n[3](#f3n)\n[counterintuitive](before html)\n[4](#f4n)\n[5](#f5n)\n[hacking the test](lesson html)\n[Airbnbs](airbnbs"
+      },
+      {
+        "essay": "How to Work Hard",
+        "pattern": "observation_to_generalization",
+        "observation": "What I've learned since I was a kid is how to work toward goals that are neither clearly defined nor externally imposed",
+        "context": "What I've learned since I was a kid is how to work toward goals that are neither clearly defined nor externally imposed You'll probably have to learn both if you want to do really great things The most basic level of which is simply to feel you should be working without anyone telling you to"
+      }
+    ],
+    "cognitive_biases": [],
+    "reasoning_chains": [
+      {
+        "essay": "How to Do Great Work",
+        "premise": "But I was also curious about the shape of the\nintersection",
+        "continuation": "And one thing this exercise shows is that it does\nhave a definite shape; it's not just a point labelled \"work hard",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "So all you need to do is find something you have an aptitude for\nand great interest in",
+        "continuation": "## [\n\n## 1\n\n## ]\n\nThat sounds straightforward, but it's often quite difficult",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "So while some people know what they want to do at\n14, most have to figure it out",
+        "continuation": "The way to figure out what to work on is by working",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "It will not only drive you, but if you let\nit have its way, will also show you what to work on",
+        "continuation": "What are you excessively curious about — curious to a degree that\nwould bore most other people",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "## [\n\n## 2\n\n## ]\n\nIf the answers seem strange, so much the better",
+        "continuation": "Great work often\nhas a tincture of strangeness",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "So in the worst case you choose\nlate based on very incomplete information",
+        "continuation": "## [\n\n## 4\n\n## ]\n\nThe nature of ambition exacerbates this problem",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "So you need to make yourself a big target for luck, and the way to\ndo that is to be curious",
+        "continuation": "Try lots of things, meet lots of people,\nread lots of books, ask lots of questions",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "So you need\nto give different types of work a chance to show you what they're\nlike",
+        "continuation": "But a field should become\n\n## increasingly\n\ninteresting as you\nlearn more about it",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "Since your friends probably have similar interests,\nthis will also get you your initial audience",
+        "continuation": "## This\n\n## should\n\nfollow from the excitingness rule",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "The reason\nI mention this case explicitly is that so many people get it wrong",
+        "continuation": "Instead of making what they want, they try to make what some\nimaginary, more sophisticated audience wants",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "So it\ndoes take a good deal of boldness",
+        "continuation": "But while you need boldness, you don't usually need much planning",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "But there will also be plenty of times when things aren't\nlike that",
+        "continuation": "You don't just put out your sail and get blown forward by inspiration",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "So there's a\ntechnique to working, just as there is to sailing",
+        "continuation": "For example, while you must work hard, it's possible to work too\nhard, and if you do that you'll find you get diminishing returns:\nfatigue will make you stupid, and eventually even damage your health",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "To the extent you can, try\nto arrange your life so you have big blocks of time to work in",
+        "continuation": "You'll shy away from hard tasks if you know you might be interrupted",
+        "reasoning_type": "so (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "premise": "When I'm\nreluctant to start work in the morning, I often trick myself by\nsaying \"I'll just read over what I've got so far",
+        "continuation": "\" Five minutes\nlater I've found something that seems mistaken or incomplete, and\nI'm off",
+        "reasoning_type": "so (.+)"
+      }
+    ],
+    "unique_perspectives": [
+      {
+        "essay": "How to Do Great Work",
+        "insight": "## [\n\n## 1\n\n## ]\n\nThat sounds straightforward, but it's often quite difficult",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "You'll probably guess wrong some of the time, but that's fine",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "It may not be possible\nto prove that you have to work hard to do great things, but the\nempirical evidence is on the scale of the evidence for mortality",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "It would be better if they at least admitted it — if they admitted\nthat the system not only can't do much to help you figure out what\nto work on, but is designed on the assumption that you'll somehow\nmagically guess as a teenager",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "Some people get lucky and do guess correctly, but the rest will\nfind themselves scrambling diagonally across tracks laid down on\nthe assumption that everyone does",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "You can win a gold medal or get rich\nby deciding to as a child and then tenaciously pursuing that goal,\nbut you can't discover natural selection that way",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "But there will also be plenty of times when things aren't\nlike that",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "But we can't grasp that intuitively, so we underrate exponential\ngrowth in its early stages",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "But since\nwe underrate exponential growth early on, this too is mostly done\nunconsciously: people push through the initial, unrewarding phase\nof learning something new because they know from experience that\nlearning new things always takes an initial push, or they grow their\naudience one fan at a time because they have nothing better to do",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "Not because their opinions matter\nmore than your contemporaries', but because something that still\nseems good in a hundred years is more likely to be genuinely good",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "But you never need to worry about that\nproblem, because it's self-solving if you work on sufficiently\nambitious projects",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "But any energy that goes into how you seem comes out of being\ngood",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "There may be some jobs where it's an advantage to be cynical and\npessimistic, but if you want to do great work it's an advantage to\nbe optimistic, even though that means you'll risk looking like a\nfool sometimes",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "But now I suspect it's conceptually prior —\nthat the main ingredient in artistic elegance is mathematical\nelegance",
+        "marker": "but (.+)"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "insight": "But to see\noriginality separated from expertise like that made its nature all\nthe more clear",
+        "marker": "but (.+)"
+      }
+    ],
+    "synthesis_methods": [
+      {
+        "essay": "How to Do Great Work",
+        "analogy": "Don't think of yourself as dependent on some gatekeeper giving you\na \"big break",
+        "source_domain": "yourself",
+        "target_domain": "dependent on some gatekeeper giving you"
+      },
+      {
+        "essay": "How to Do Great Work",
+        "analogy": "You're more likely to do great\nwork if you're an optimist, and more likely to if you think of\nyourself as lucky than if you think of yourself as a victim",
+        "source_domain": "yourself",
+        "target_domain": "a victim"
+      },
+      {
+        "essay": "Having Kids",
+        "analogy": "Having kids is one of those intense types of experience\nthat are hard to imagine unless you've had them",
+        "source_domain": "unless you've had them",
+        "target_domain": ""
+      },
+      {
+        "essay": "The Origins of Wokeness",
+        "analogy": "Imagine having to explain\nto a well-meaning visitor from another planet why using the\nphrase \"people of color\" is considered particularly\nenlightened, but saying \"colored people\" gets you fired",
+        "source_domain": "having to explain",
+        "target_domain": ""
+      },
+      {
+        "essay": "The Origins of Wokeness",
+        "analogy": "Imagine if a\ngroup of employees trying to get someone fired had to do it\nusing only email",
+        "source_domain": "if a",
+        "target_domain": ""
+      },
+      {
+        "essay": "The Origins of Wokeness",
+        "analogy": "You're\nnot hiring Einstein that way; imagine what you get instead",
+        "source_domain": "what you get instead",
+        "target_domain": ""
+      },
+      {
+        "essay": "The Origins of Wokeness",
+        "analogy": "If we're not sure what to do about any particular\nmanifestation of wokeness, imagine we were dealing with some\nother religion, like Christianity",
+        "source_domain": "we were dealing with some",
+        "target_domain": ""
+      },
+      {
+        "essay": "The Origins of Wokeness",
+        "analogy": "Of course not; imagine an\nemployer requiring proof of one's religious beliefs",
+        "source_domain": "an",
+        "target_domain": ""
+      },
+      {
+        "essay": "Founder Mode",
+        "analogy": "Can you imagine the\nforce of will it would take to do this at the average company",
+        "source_domain": "the",
+        "target_domain": ""
+      },
+      {
+        "essay": "Founder Mode",
+        "analogy": "And\nyet imagine how useful such a thing could be",
+        "source_domain": "how useful such a thing could be",
+        "target_domain": ""
+      },
+      {
+        "essay": "Founder Mode",
+        "analogy": "Imagine what they'll do once we can tell them how to run\ntheir companies like Steve Jobs instead of John Sculley",
+        "source_domain": "what they'll do once we can tell them how to run",
+        "target_domain": ""
+      },
+      {
+        "essay": "How to Start Google",
+        "analogy": "Imagine you're\nwriting a game and there's something you want to do in it, and you\ndon't know how",
+        "source_domain": "you're",
+        "target_domain": ""
+      },
+      {
+        "essay": "The Best Essay",
+        "analogy": "## [\n\n## 11\n\n## ]\n\nI can imagine several ways to do that",
+        "source_domain": "several ways to do that",
+        "target_domain": ""
+      },
+      {
+        "essay": "Superlinear Returns",
+        "analogy": "It's hard to imagine a more fundamental change\nthan one in the returns for performance",
+        "source_domain": "a more fundamental change",
+        "target_domain": ""
+      },
+      {
+        "essay": "What You (Want to)* Want",
+        "analogy": "I can imagine someone saying \"I decided to stop wanting to like classical music",
+        "source_domain": "someone saying \"I decided to stop wanting to like classical music",
+        "target_domain": ""
+      },
+      {
+        "essay": "What I've Learned from Users",
+        "analogy": "The energy in the room at a YC dinner is like nothing else I've experienced",
+        "source_domain": "The energy in the room at a YC dinner",
+        "target_domain": "nothing else I've experienced"
+      },
+      {
+        "essay": "Heresy",
+        "analogy": "Imagine what that would be like",
+        "source_domain": "what that would be like",
+        "target_domain": ""
+      },
+      {
+        "essay": "Is There Such a Thing as Good Taste?",
+        "analogy": "Imagine several people looking at a work of art and judging how good it is",
+        "source_domain": "several people looking at a work of art and judging how good it is",
+        "target_domain": ""
+      },
+      {
+        "essay": "Is There Such a Thing as Good Taste?",
+        "analogy": "You have to imagine the responses of subjects with a deep knowledge of art, and enough clarity of mind to be able to ignore extraneous influences like the fame of the artist",
+        "source_domain": "the responses of subjects with a deep knowledge of art, and enough clarity of mind to be able to ignore extraneous influences like the fame of the artist",
+        "target_domain": ""
+      },
+      {
+        "essay": "Beyond Smart",
+        "analogy": "Imagine you had a choice between being really smart but discovering nothing new, and being less smart but discovering lots of new ideas",
+        "source_domain": "you had a choice between being really smart but discovering nothing new, and being less smart but discovering lots of new ideas",
+        "target_domain": ""
+      }
+    ],
+    "decision_heuristics": [
+      {
+        "essay": "The Shape of the Essay Field",
+        "heuristic": "Whatever\nyou say should also be at least somewhat novel to you, however old\nyou are",
+        "pattern_type": "to (.+), (.+)",
+        "domain": "general"
+      },
+      {
+        "essay": "What to Do",
+        "heuristic": "So\nif you think you can make something amazing, you should probably\njust go ahead and do it",
+        "pattern_type": "if you (.+), you should (.+)",
+        "domain": "general"
+      },
+      {
+        "essay": "What to Do",
+        "heuristic": "## Notes\n\n## [\n\n## 1\n\n]\nWe could treat all three as the same kind of should by saying\nthat it's one's duty to live well — for example by saying, as some\nChristians have, that it's one's duty to make the most of one's\nGod-given gifts",
+        "pattern_type": "to (.+), (.+)",
+        "domain": "general"
+      },
+      {
+        "essay": "The Origins of Wokeness",
+        "heuristic": "Whenever anyone tries to ban saying something\nthat we'd previously been able to say, our initial\nassumption should be that they're wrong",
+        "pattern_type": "never (.+)",
+        "domain": "general"
+      },
+      {
+        "essay": "The Origins of Wokeness",
+        "heuristic": "Whenever anyone tries to ban saying something\nthat we'd previously been able to say, our initial\nassumption should be that they're wrong",
+        "pattern_type": "to (.+), (.+)",
+        "domain": "general"
+      },
+      {
+        "essay": "When To Do What You Love",
+        "heuristic": "If you're\nambitious you're told you should go to college, and this is good\nadvice so far as it goes, but that's where it usually ends",
+        "pattern_type": "to (.+), (.+)",
+        "domain": "general"
+      },
+      {
+        "essay": "How to Start Google",
+        "heuristic": "And if you want to start a startup you should try to\nget into the best university you can, because that's where the best\ncofounders are",
+        "pattern_type": "to (.+), (.+)",
+        "domain": "startup"
+      },
+      {
+        "essay": "The Best Essay",
+        "heuristic": "An essay should ordinarily start with what I'm going to call a\nquestion, though I mean this in a very general sense: it doesn't\nhave to be a question grammatically, just something that acts like\none in the sense that it spurs some response",
+        "pattern_type": "to (.+), (.+)",
+        "domain": "creativity"
+      },
+      {
+        "essay": "The Best Essay",
+        "heuristic": "And yet I want to write good essays, and if the initial\nquestion matters, I should care about it",
+        "pattern_type": "to (.+), (.+)",
+        "domain": "general"
+      },
+      {
+        "essay": "The Best Essay",
+        "heuristic": "Schoolchildren are often taught they should decide\n\n## everything\n\nthey want to say, and write this down as an outline before they\nstart writing the essay itself",
+        "pattern_type": "to (.+), (.+)",
+        "domain": "creativity"
+      },
+      {
+        "essay": "Heresy",
+        "heuristic": "There are many on the far left who believe strongly in the reintegration of felons (as I do myself), and yet seem to feel that anyone guilty of certain heresies should never work again",
+        "pattern_type": "never (.+)",
+        "domain": "general"
+      },
+      {
+        "essay": "Is There Such a Thing as Good Taste?",
+        "heuristic": "Now that I've explained how to show there is such a thing as good taste, I should also explain why people think there isn't",
+        "pattern_type": "to (.+), (.+)",
+        "domain": "life"
+      },
+      {
+        "essay": "How to Work Hard",
+        "heuristic": "But you should always be aiming as close to the center as you can without stalling",
+        "pattern_type": "always (.+)",
+        "domain": "general"
+      }
+    ],
+    "problem_solving_approaches": [
+      {
+        "essay": "How to Lose Time and Money",
+        "approach": "\"\n\nThe solution is to develop new alarms",
+        "problem_type": "general",
+        "solution_type": "complex"
+      },
+      {
+        "essay": "The Right Kind of Stubborn",
+        "approach": "## [\n\n## 3\n\n## ]\n\nIn the degenerate case they're indistinguishable: when there's only\none way to solve a problem, your only choice is whether to give up\nor not, and persistence and obstinacy both say no",
+        "problem_type": "general",
+        "solution_type": "complex"
+      },
+      {
+        "essay": "The Right Kind of Stubborn",
+        "approach": "## Worse still, that means they'll tend to be attached to their\n\n## first\n\nideas about how to solve a problem, even though these are the least\ninformed by the experience of working on it",
+        "problem_type": "general",
+        "solution_type": "complex"
+      },
+      {
+        "essay": "How to Start Google",
+        "approach": "## The trick is to start your own company",
+        "problem_type": "general",
+        "solution_type": "complex"
+      },
+      {
+        "essay": "The Need to Read",
+        "approach": "But if you need to solve a complicated, ill-defined problem, it will almost always help to write about it",
+        "problem_type": "general",
+        "solution_type": "complex"
+      },
+      {
+        "essay": "How to Work Hard",
+        "approach": "You need to solve the money problem somehow, and there's nothing wrong with doing that efficiently by trying to make a lot at once",
+        "problem_type": "funding",
+        "solution_type": "complex"
+      }
+    ]
+  },
+  "executive_summary": {
+    "dominant_thinking_patterns": [
+      "observation_to_generalization"
+    ],
+    "signature_frameworks": [
+      "The reason we're surprised is that we underestimate the cumulative\neffect of work",
+      "Part of the reason we underrate questions is the way they're used\nin schools",
+      "The reason so many people have trouble writing is that it's\nfundamentally difficult"
+    ],
+    "unique_perspectives": [
+      "## [\n\n## 1\n\n## ]\n\nThat sounds straightforward, but it's often quite difficult",
+      "You'll probably guess wrong some of the time, but that's fine",
+      "It may not be possible\nto prove that you have to work hard to do great things, but the\nempirical evidence is on the scale of the evidence for mortality"
+    ],
+    "decision_making_style": [],
+    "problem_solving_signature": []
+  }
+}

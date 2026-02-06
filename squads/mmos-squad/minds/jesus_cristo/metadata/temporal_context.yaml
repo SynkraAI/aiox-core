@@ -1,0 +1,1237 @@
+# TEMPORAL CONTEXT - Jesus Cristo
+# 3 Years of Public Ministry (27-30 AD)
+# Chronological mapping of ministry phases, key events, and teaching evolution
+
+timeline:
+  fase_0_preparacao:
+    periodo: "27 AD (início)"
+    duracao: "~3 meses"
+    local: "Região do Jordão, Deserto da Judeia"
+
+    eventos:
+      - evento: "Batismo por João Batista"
+        referencias: "Mateus 3:13-17, Marcos 1:9-11, Lucas 3:21-22, João 1:29-34"
+        significado: "Início oficial do ministério, aprovação divina ('Este é meu Filho amado')"
+        local: "Rio Jordão"
+        teologia: "Identificação com pecadores, inauguração da missão messiânica"
+        simbolismo: "Descida do Espírito como pomba, voz celestial"
+
+      - evento: "Tentação no deserto (40 dias)"
+        referencias: "Mateus 4:1-11, Marcos 1:12-13, Lucas 4:1-13"
+        significado: "Preparação espiritual, rejeição de messianismo político/material"
+        local: "Deserto da Judeia"
+        tentacoes:
+          primeira:
+            descricao: "Transformar pedras em pão"
+            tema: "Materialismo, necessidades físicas"
+            resposta: "Nem só de pão viverá o homem (Dt 8:3)"
+          segunda:
+            descricao: "Pular do pináculo do templo"
+            tema: "Testar Deus, espetáculo miraculoso"
+            resposta: "Não tentarás o Senhor teu Deus (Dt 6:16)"
+          terceira:
+            descricao: "Reinos do mundo por adoração a Satanás"
+            tema: "Poder político, atalho messiânico"
+            resposta: "Ao Senhor teu Deus adorarás (Dt 6:13)"
+        significado_teologico: "Define método messiânico - não força, não espetáculo, não poder político"
+
+      - evento: "Primeiros discípulos (André, Pedro, João, Filipe, Natanael)"
+        referencias: "João 1:35-51"
+        local: "Betânia além do Jordão"
+        sequencia:
+          - "André e outro discípulo (João?) seguem Jesus"
+          - "André traz Pedro ('Achamos o Messias')"
+          - "Jesus chama Filipe"
+          - "Filipe traz Natanael ('Achamos aquele de quem Moisés escreveu')"
+        promessa: "Natanael: 'Vereis o céu aberto e os anjos subindo e descendo sobre o Filho do Homem'"
+
+    caracteristicas_fase:
+      foco: "Preparação pessoal, primeiros contatos"
+      revelacao: "Limitada (João Batista testifica)"
+      oposicao: "Nenhuma"
+      geografia: "Judeia (região jordânica)"
+
+  fase_1_ministerio_inicial_galileia:
+    periodo: "27-28 AD"
+    duracao: "~6-8 meses"
+    local: "Galileia (Cafarnaum como base), breve visita a Jerusalém"
+
+    eventos_chave:
+      - evento: "Primeiro milagre - Bodas de Caná"
+        referencia: "João 2:1-11"
+        local: "Caná da Galileia"
+        significado: "Manifestação inicial de glória, início dos sinais"
+        detalhe: "6 talhas de purificação (água → vinho)"
+        teologia: "Nova aliança superior à antiga (vinho melhor que água de purificação)"
+        resposta: "Discípulos creram nele"
+
+      - evento: "Primeira purificação do Templo"
+        referencia: "João 2:13-22 (cronologia joanina - início do ministério)"
+        nota_critica: "Sinóticos colocam no final; possível dupla purificação ou variação redacional"
+        local: "Jerusalém (Páscoa)"
+        acao: "Expulsa vendedores e cambistas com chicote de cordas"
+        ensino: "'Destruí este templo e em 3 dias o levantarei' (referência à ressurreição do corpo)"
+        autoridades: "Pedem sinal, Jesus dá enigma profético"
+
+      - evento: "Nicodemos - Nascer de novo"
+        referencia: "João 3:1-21"
+        local: "Jerusalém (noite)"
+        pessoa: "Fariseu, membro do Sinédrio"
+        dialogo:
+          nicodemos: "'Sabemos que és mestre vindo de Deus'"
+          jesus: "'Necessário nascer de novo (anothen - do alto)'"
+          ensino: "Nascer da água e do Espírito para ver/entrar Reino"
+        citacao_chave: "João 3:16 - 'Deus amou o mundo de tal maneira que deu seu Filho unigênito'"
+        teologia: "Soteriologia (salvação pela fé), universalismo (mundo)"
+
+      - evento: "Mulher samaritana - Água viva"
+        referencia: "João 4:1-42"
+        local: "Sicar (Samaria), poço de Jacó"
+        significado: "Inclusão de marginalizados (samaritanos, mulher de reputação questionável)"
+        dialogo:
+          pedido: "Dá-me de beber"
+          oferta: "'Água viva' que sacia para sempre"
+          revelacao: "Jesus revela conhecimento sobrenatural (5 maridos)"
+          adoracao: "'Deus é Espírito, adoração em espírito e verdade'"
+          messias: "'Eu o sou, eu que falo contigo'"
+        resultado: "Muitos samaritanos creem (testemunho da mulher + palavras de Jesus)"
+
+      - evento: "Estabelecimento em Cafarnaum"
+        referencia: "Mateus 4:13-17, Marcos 1:14-15"
+        motivo: "Herodes Antipas prende João Batista"
+        proclamacao: "'O tempo está cumprido, o Reino de Deus está próximo; arrependei-vos e crede no Evangelho'"
+        cumprimento: "Isaías 9:1-2 (terra de Zebulom e Naftali - luz às trevas)"
+
+    caracteristicas_fase:
+      foco: "Estabelecer base na Galileia, primeiros discípulos, primeiros sinais"
+      tom: "Revelação gradual de identidade messiânica"
+      metodo: "Diálogos individuais (Nicodemos, samaritana), milagres iniciais"
+      oposicao: "Inicial (curiosidade > suspeita dos fariseus)"
+      geografia: "Galileia (70%), breve Jerusalém (Páscoa)"
+
+  fase_2_ministerio_galileia_pleno:
+    periodo: "28-29 AD"
+    duracao: "~12-15 meses"
+    local: "Galileia (itinerante), Cafarnaum (base), viagens a Jerusalém (festas)"
+
+    eventos_estruturantes:
+      - evento: "Chamado dos 12 Apóstolos"
+        referencia: "Marcos 3:13-19, Lucas 6:12-16"
+        contexto: "Após noite de oração no monte"
+        nomes:
+          grupo_1_principal: "Simão Pedro, André (irmão), Tiago (Zebedeu), João (irmão de Tiago)"
+          grupo_2: "Filipe, Bartolomeu (Natanael), Mateus (Levi, publicano), Tomé"
+          grupo_3: "Tiago (filho de Alfeu), Tadeu (Judas não Iscariotes), Simão (Zelote), Judas Iscariotes"
+        significado: "Núcleo do movimento, 12 tribos de novo Israel"
+        missao: "Estar com Jesus, pregar, expulsar demônios"
+
+      - evento: "Sermão da Montanha (ou Planície)"
+        referencia: "Mateus 5-7 (Montanha) ou Lucas 6:20-49 (Planície)"
+        nota_critica: "Possível mesmo sermão em versões diferentes ou sermões distintos"
+        local: "Monte perto de Cafarnaum"
+        estrutura_mateus:
+          beatitudes:
+            - "Pobres de espírito (deles é o Reino)"
+            - "Os que choram (serão consolados)"
+            - "Mansos (herdarão a terra)"
+            - "Famintos de justiça (serão saciados)"
+            - "Misericordiosos (alcançarão misericórdia)"
+            - "Puros de coração (verão a Deus)"
+            - "Pacificadores (filhos de Deus)"
+            - "Perseguidos por causa da justiça (deles é o Reino)"
+          identidade_discipulos: "Sal da terra, Luz do mundo"
+          lei_reinterpretada:
+            principio: "'Não vim abolir a Lei, mas cumprir'"
+            antieses:
+              - "Não só não matar, mas não se irar nem insultar"
+              - "Não só não adulterar, mas não cobiçar"
+              - "Não jurar (sim seja sim, não seja não)"
+              - "Não olho por olho, mas outra face"
+              - "Não só amar próximo, mas amar inimigos"
+          praticas_religiosas:
+            esmola: "Em secreto, não por ostentação"
+            oracao: "Pai Nosso (modelo de oração - 6 petições)"
+            jejum: "Sem aparência de sofrimento"
+          confianca_divina:
+            - "Tesouro no céu (não terra)"
+            - "Olho singelo (luz interior)"
+            - "Não servir dois senhores (Deus e Mamom)"
+            - "Não andar ansiosos (aves, lírios)"
+            - "Buscar primeiro o Reino"
+          relacoes:
+            - "Não julgar (medida que usardes)"
+            - "Trave e argueiro"
+            - "Pedir, buscar, bater"
+            - "Regra de Ouro: 'Tudo quanto quereis que os homens vos façam, fazei-o vós a eles'"
+          conclusao:
+            - "Porta estreita vs larga"
+            - "Árvore boa/má (frutos)"
+            - "Não quem diz 'Senhor', mas quem faz vontade do Pai"
+            - "Casa sobre rocha vs areia"
+        significado: "Manifesto do Reino, Constituição da comunidade messiânica, ética radical"
+
+      - evento: "Série de milagres de autoridade"
+        periodo: "28-29 AD (dispersos)"
+        tipos:
+          natureza:
+            - evento: "Acalmar tempestade"
+              ref: "Marcos 4:35-41"
+              significado: "Autoridade sobre criação"
+            - evento: "Andar sobre águas"
+              ref: "Mateus 14:22-33"
+              adicional: "Pedro afunda ao duvidar"
+          doenca:
+            - evento: "Leprosos curados"
+              ref: "Múltiplas ocorrências"
+              nota: "Lepra = impureza ritual extrema"
+            - evento: "Paralítico descido pelo teto"
+              ref: "Marcos 2:1-12"
+              ensino: "'Filho, perdoados estão teus pecados' → autoridade para perdoar"
+            - evento: "Mulher com fluxo de sangue"
+              ref: "Marcos 5:25-34"
+              detalhe: "Toca veste, fé cura ('Tua fé te salvou')"
+          demonios:
+            - evento: "Gadareno (Legião)"
+              ref: "Marcos 5:1-20"
+              detalhe: "Demônios entram em porcos, homem vestido e são"
+            - evento: "Mudo possesso"
+              ref: "Mateus 9:32-34"
+              acusacao_inicial: "Fariseus: 'Pelo príncipe dos demônios expulsa demônios'"
+          morte:
+            - evento: "Filha de Jairo"
+              ref: "Marcos 5:21-43"
+              palavras: "'Talitha cumi' (menina, levanta-te)"
+              idade: "12 anos"
+            - evento: "Filho da viúva de Naim"
+              ref: "Lucas 7:11-17"
+              compaixao: "Jesus se comove, toca esquife"
+
+      - evento: "Controvérsias com fariseus (série)"
+        questoes:
+          - topico: "Jejum"
+            ref: "Marcos 2:18-22"
+            resposta: "Noivo presente (alegria), vinho novo em odres novos"
+          - topico: "Sábado (espigas arrancadas)"
+            ref: "Marcos 2:23-28"
+            resposta: "'Sábado feito para homem, não homem para sábado; Filho do Homem é Senhor do sábado'"
+          - topico: "Sábado (homem da mão seca)"
+            ref: "Marcos 3:1-6"
+            princípio: "Lícito fazer bem no sábado"
+            resultado: "Fariseus conspiram com herodianos para matar Jesus"
+          - topico: "Pureza ritual (lavar mãos)"
+            ref: "Marcos 7:1-23"
+            ensino: "'Nada exterior contamina, mas o que sai do coração (maus pensamentos)'"
+            significado: "Relativiza lei cerimonial"
+
+      - evento: "Parábolas do Reino (série principal)"
+        referencia: "Mateus 13, Marcos 4, Lucas 8"
+        contexto: "Ensino às multidões à beira do mar (de barco)"
+        parabolas_principais:
+          semeador:
+            ref: "Marcos 4:3-20"
+            solos: "Caminho (aves), pedregoso (sol), espinhos (sufocam), boa terra (30/60/100x)"
+            interpretacao: "Palavra do Reino, receptividade humana"
+          joio:
+            ref: "Mateus 13:24-30, 36-43"
+            ensino: "Trigo e ervas daninhas crescem juntos até colheita (juízo final)"
+            aplicacao: "Paciência divina, julgamento escatológico"
+          grao_mostarda:
+            ref: "Marcos 4:30-32"
+            ensino: "Menor semente → maior hortaliça (aves fazem ninhos)"
+            tema: "Crescimento do Reino (início pequeno → expansão universal)"
+          fermento:
+            ref: "Mateus 13:33"
+            ensino: "Pouco fermento leveda toda massa"
+            tema: "Influência penetrante do Reino"
+          tesouro_escondido:
+            ref: "Mateus 13:44"
+            ensino: "Homem vende tudo para comprar campo com tesouro"
+            tema: "Valor supremo do Reino"
+          perola_grande_valor:
+            ref: "Mateus 13:45-46"
+            ensino: "Mercador vende tudo por uma pérola"
+            tema: "Reino vale sacrifício total"
+          rede:
+            ref: "Mateus 13:47-50"
+            ensino: "Peixes bons/ruins separados"
+            tema: "Julgamento escatológico"
+        razao_parabolas: "Marcos 4:11-12 - Mistério do Reino dado aos discípulos; aos de fora, enigmas"
+        tema_central: "Reino de Deus - já presente (inaugurado) mas não totalmente realizado (escatológico)"
+
+      - evento: "Alimentação dos 5000"
+        referencia: "Mateus 14:13-21, Marcos 6:30-44, Lucas 9:10-17, João 6:1-15"
+        significado: "Único milagre em todos 4 Evangelhos - importância extraordinária"
+        local: "Lugar deserto perto de Betsaida"
+        contexto: "Retorno dos 12 de missão, multidão segue"
+        detalhe: "5 pães, 2 peixes → 5000 homens (+ mulheres/crianças) → 12 cestos de sobras"
+        tipologia: "Novo Moisés (maná no deserto), banquete messiânico"
+        reacao: "Querem fazê-lo rei à força (João 6:15) - Jesus foge ao monte"
+
+      - evento: "Discurso do Pão da Vida"
+        referencia: "João 6:22-71"
+        local: "Sinagoga de Cafarnaum (dia seguinte à alimentação)"
+        progressao:
+          - "Trabalhar não por comida perecível, mas eterna"
+          - "'Eu sou o pão da vida' (primeira declaração 'Eu sou')"
+          - "'Pão que desceu do céu' (superior ao maná)"
+          - "'Minha carne é verdadeira comida, meu sangue verdadeira bebida'"
+          - "'Quem come minha carne e bebe meu sangue tem vida eterna'"
+        reacao:
+          judeus: "Murmuração ('Como pode dar carne a comer?')"
+          discipulos: "Muitos se escandalizam e abandonam ('Dura é esta palavra')"
+          doze: "Pedro: 'A quem iremos? Tu tens palavras de vida eterna'"
+        significado: "Cristologia alta (preexistência, encarnação), Eucaristia antecipada, crise de discipulado"
+
+    eventos_culminantes:
+      - evento: "Confissão de Pedro em Cesareia de Filipe"
+        referencia: "Mateus 16:13-20, Marcos 8:27-30, Lucas 9:18-21"
+        local: "Cesareia de Filipe (extremo norte, território de Filipe)"
+        contexto: "Região pagã, longe de Jerusalém, momento de retiro"
+        dialogo:
+          jesus: "'Quem dizem os homens ser o Filho do Homem?'"
+          discipulos: "'João Batista, Elias, Jeremias, algum profeta'"
+          jesus: "'Mas vós, quem dizeis que eu sou?'"
+          pedro: "'Tu és o Cristo, o Filho do Deus vivo'"
+          jesus: "'Bem-aventurado, Simão... carne/sangue não revelou, mas Pai... Tu és Pedro, sobre esta pedra edificarei minha igreja'"
+        significado: "TURNING POINT - identidade messiânica revelada e confessada"
+        sequencia_imediata: "Primeira predição da Paixão"
+
+      - evento: "Primeira Predição da Paixão"
+        referencia: "Marcos 8:31-33, Mateus 16:21-23"
+        conteudo: "'Filho do Homem deve sofrer muitas coisas, ser rejeitado pelos anciãos/principais sacerdotes/escribas, ser morto, e ressuscitar ao terceiro dia'"
+        reacao_pedro: "Repreende Jesus ('Isso nunca te acontecerá')"
+        resposta_jesus: "'Arreda, Satanás! Pensas nas coisas dos homens, não de Deus'"
+        ensino_seguinte: "'Se alguém quer vir após mim, negue-se, tome sua cruz e siga-me'"
+        significado: "Redefinição do messianismo - sofredor, não triunfante político"
+
+      - evento: "Transfiguração"
+        referencia: "Mateus 17:1-13, Marcos 9:2-13, Lucas 9:28-36"
+        tempo: "~6 dias após confissão de Pedro"
+        local: "Monte alto (tradicional: Tabor ou Hermon)"
+        testemunhas: "Pedro, Tiago, João (círculo íntimo)"
+        visao:
+          jesus: "Rosto resplandecente, vestes brancas"
+          visitantes: "Moisés (Lei) e Elias (Profetas) conversando sobre 'êxodo' (Paixão)"
+          pedro: "'Façamos 3 tendas' (incompreensão)"
+          nuvem: "Cobre, voz: 'Este é meu Filho amado, ouvi-o'"
+        descida: "Encontram multidão, curam menino lunático (discípulos não conseguiram)"
+        significado: "Confirmação de messianidade divina, cumprimento Lei/Profetas, prefiguração glória futura"
+
+    caracteristicas_fase:
+      foco: "Ensino intensivo (parábolas), formação dos 12, revelação de identidade"
+      tom: "Revelação progressiva (Messias sofredor vs esperado rei conquistador)"
+      metodo: "Parábolas públicas, explicações privadas aos 12, milagres de autoridade"
+      oposicao: "Crescente (fariseus questionam autoridade, conspiram matar - Marcos 3:6)"
+      geografia: "Galileia (80%), viagens a Jerusalém (festas - João), Cesareia Filipe (norte)"
+      progressao: "Popularidade máxima → crise (Pão da Vida) → confissão → predição Paixão"
+
+  fase_3_ministerio_tardio_expandido:
+    periodo: "29-30 AD (início)"
+    duracao: "~6-8 meses"
+    local: "Galileia (diminui), Pereia, Judeia, rumo a Jerusalém"
+    caracteristica: "Jornada para Jerusalém (Lucas 9:51 - 'Fixou o rosto para ir a Jerusalém')"
+
+    predições_paixao_adicionais:
+      segunda:
+        ref: "Marcos 9:30-32"
+        local: "Galileia (passando em secreto)"
+        conteudo: "'Filho do Homem será entregue nas mãos dos homens, matá-lo-ão, e morto ressuscitará ao terceiro dia'"
+        reacao: "Discípulos não entendiam, temiam perguntar"
+      terceira:
+        ref: "Marcos 10:32-34"
+        local: "Caminho para Jerusalém"
+        detalhe: "Mais específica - entregue a gentios, escarnecido, açoitado, cuspido, morto, ressuscitará"
+        contexto: "Tiago/João pedem assentos à direita/esquerda (incompreensão)"
+
+    eventos_chave:
+      - evento: "Envio dos 70 (ou 72) discípulos"
+        referencia: "Lucas 10:1-24"
+        missao: "Preceder Jesus nas cidades para onde ia, anunciar Reino, curar enfermos"
+        instrucoes: "Não levar bolsa/alforje/sandálias, saudar 'Paz', comer do que oferecem"
+        mensagem: "'Chegou a vós o Reino de Deus'"
+        retorno: "'Senhor, até os demônios se submetem a nós em teu nome'"
+        resposta_jesus: "'Vi Satanás cair do céu como relâmpago... alegrai-vos porque vossos nomes estão escritos nos céus'"
+        oração: "'Graças, Pai, porque escondeste aos sábios e revelaste aos pequeninos'"
+
+      - evento: "Parábola do Bom Samaritano"
+        referencia: "Lucas 10:25-37"
+        contexto: "Doutor da lei pergunta: 'Quem é meu próximo?'"
+        historia: "Sacerdote e levita passam, samaritano (inimigo étnico) socorre"
+        conclusao: "'Vai e faze tu o mesmo'"
+        significado: "Amor universal, transcende fronteiras étnicas/religiosas"
+
+      - evento: "Maria e Marta"
+        referencia: "Lucas 10:38-42"
+        local: "Betânia (casa de Lázaro)"
+        contraste: "Marta (serviço ansioso) vs Maria (ouvir Jesus)"
+        ensino: "'Maria escolheu a boa parte, que não lhe será tirada'"
+        tema: "Prioridade da contemplação sobre ativismo"
+
+      - evento: "Parábolas da Misericórdia (tríptico)"
+        referencia: "Lucas 15:1-32"
+        contexto: "Fariseus/escribas murmuram: 'Este recebe pecadores e come com eles'"
+        parabolas:
+          ovelha_perdida:
+            historia: "Pastor deixa 99, busca 1 perdida"
+            aplicacao: "'Alegria no céu por 1 pecador que se arrepende mais que 99 justos'"
+          moeda_perdida:
+            historia: "Mulher procura 1 dracma de 10 perdida"
+            aplicacao: "'Alegria diante dos anjos de Deus por 1 pecador que se arrepende'"
+          filho_prodigo:
+            historia: "Filho pede herança, gasta, volta arrependido; pai celebra"
+            irmao_mais_velho: "Ressentido (representa fariseus)"
+            pai: "'Este teu irmão estava morto e reviveu, perdido e foi achado'"
+            teologia: "Graça soberana, alegria divina na conversão, ressentimento religioso"
+        tema_central: "Coração de Deus pelos perdidos, justificação da comunhão com pecadores"
+
+      - evento: "Parábola do Rico e Lázaro"
+        referencia: "Lucas 16:19-31"
+        historia: "Rico (banquetes) vs Lázaro (mendigo úlceras), invertem no pós-morte"
+        abraao: "'Grande abismo fixado' - impossível passar'"
+        rico: "Pede Abraão enviar Lázaro aos irmãos"
+        resposta: "'Têm Moisés e Profetas... se não os ouvem, nem se alguém ressuscitar dentre os mortos'"
+        tema: "Inversão escatológica, advertência aos ricos indiferentes"
+
+      - evento: "Cura de 10 leprosos"
+        referencia: "Lucas 17:11-19"
+        local: "Fronteira Galileia-Samaria"
+        detalhe: "10 curados, 1 volta (samaritano) para agradecer"
+        jesus: "'Não foram 10 os curados? Onde os 9? Não houve quem voltasse para dar glória a Deus, senão este estrangeiro?'"
+        ensino: "Gratidão rara, fé do estrangeiro superior"
+
+      - evento: "Ressurreição de Lázaro"
+        referencia: "João 11:1-44"
+        local: "Betânia (perto de Jerusalém, ~3 km)"
+        contexto: "Irmãos Maria/Marta enviam recado: 'Aquele que amas está enfermo'"
+        atraso: "Jesus espera 2 dias (propósito: 'para glória de Deus, para que Filho seja glorificado')"
+        chegada: "4 dias no túmulo (tradição judaica: alma permanece 3 dias)"
+        dialogo_marta:
+          marta: "'Se estivesses aqui, meu irmão não teria morrido'"
+          jesus: "'Teu irmão ressuscitará'"
+          marta: "'Sei que ressuscitará na ressurreição, no último dia'"
+          jesus: "'Eu sou a ressurreição e a vida; quem crê em mim, ainda que morra, viverá; e todo que vive e crê em mim não morrerá eternamente. Crês isto?'"
+          marta: "'Sim, Senhor, creio que és o Cristo, o Filho de Deus'"
+        maria: "Cai aos pés chorando, judeus choram"
+        jesus: "Comoveu-se, perturbou-se, chorou (versículo mais curto: 'Jesus chorou' - humanidade)"
+        milagre: "'Lázaro, vem para fora!' - sai com mãos/pés atados"
+        consequencias:
+          positiva: "Muitos judeus creram"
+          negativa: "Sinédrio (Caifás) decide matar Jesus (João 11:45-53) - 'Convém que um homem morra pelo povo'"
+        significado: "Sinal maior (7º em João), prenúncio ressurreição de Jesus, precipita Paixão"
+
+      - evento: "Questão do divórcio"
+        referencia: "Marcos 10:2-12, Mateus 19:3-12"
+        contexto: "Fariseus testam: 'É lícito divorciar por qualquer motivo?'"
+        resposta: "Gênesis 1-2 (ordem criacional - 'uma só carne'), Moisés permitiu por dureza coração"
+        ensino: "'O que Deus ajuntou não separe o homem'"
+        radicalidade: "Casamento indissolúvel (exceção Mateus: porneia - imoralidade sexual)"
+
+      - evento: "Jesus abençoa crianças"
+        referencia: "Marcos 10:13-16"
+        contexto: "Discípulos repreendem pais que trazem crianças"
+        jesus: "Indigna-se - 'Deixai vir os pequeninos... deles é o Reino de Deus'"
+        ensino: "'Quem não receber Reino como criança não entrará nele'"
+        acao: "Toma nos braços, impõe mãos, abençoa"
+
+      - evento: "Jovem rico"
+        referencia: "Marcos 10:17-31"
+        pergunta: "'Bom Mestre, que farei para herdar vida eterna?'"
+        dialogo:
+          jesus: "'Por que me chamas bom? Ninguém é bom senão Deus'"
+          resposta1: "'Sabes mandamentos' (não matar, adulterar, furtar, etc)"
+          jovem: "'Tudo isso guardei desde mocidade'"
+          jesus: "Amou-o - 'Uma coisa te falta: vende tudo, dá aos pobres... vem, segue-me'"
+          reacao: "Retirou-se triste (tinha muitas posses)"
+        ensino: "'Quão dificilmente entrarão no Reino os que têm riquezas... mais fácil camelo passar pelo fundo de agulha'"
+        esperanca: "'Para os homens impossível, mas não para Deus'"
+
+    caracteristicas_fase:
+      foco: "Jornada para Jerusalém (consciente da Paixão vindoura), ensino sobre sofrimento/serviço"
+      ton: "Urgência, preparação dos discípulos, polarização (muitos creem vs autoridades decidem matar)"
+      metodo: "Parábolas de misericórdia/julgamento, milagre maior (Lázaro), ensinos éticos radicais"
+      oposicao: "Decisão formal de matar Jesus tomada (João 11:53) - 'desde aquele dia resolveram matá-lo'"
+      geografia: "Pereia (além Jordão), Judeia, movimento rumo Jerusalém"
+      progressao: "Popularidade em declínio na Galileia → foco em Judeia → precipitação da crise"
+
+  fase_4_semana_final_jerusalém:
+    periodo: "30 AD - Páscoa (Nisã 10-17)"
+    duracao: "~7-8 dias (Domingo das Palmas → Sexta Crucificação → Domingo Ressurreição)"
+    local: "Jerusalém e arredores (Betânia, Monte Oliveiras)"
+    nota_cronologica: "João: crucificação na preparação da Páscoa (14 Nisã); Sinóticos: durante Páscoa (15 Nisã) - debate acadêmico"
+
+    eventos_cronologicos:
+      sabado_anterior:
+        evento: "Jantar em Betânia (6 dias antes Páscoa)"
+        referencia: "João 12:1-11"
+        local: "Casa de Simão, o leproso (Mateus/Marcos) ou casa de Lázaro (João)"
+        acao: "Maria unge pés de Jesus com nardo puro (300 denários), enxuga com cabelos"
+        judas: "Protesta ('por que não vendido e dado aos pobres?') - João: 'era ladrão'"
+        jesus: "'Deixai-a... para o dia de meu sepultamento o guardou; pobres sempre tendes'"
+        significado: "Unção antecipada para sepultura"
+
+      domingo_palmas:
+        data: "10 Nisã (seleção do cordeiro pascal - Êxodo 12:3)"
+        evento: "Entrada Triunfal"
+        referencia: "Mateus 21:1-11, Marcos 11:1-11, Lucas 19:28-44, João 12:12-19"
+        local: "Monte Oliveiras → Jerusalém"
+        preparacao: "Envia 2 discípulos buscar jumentinho (nunca montado)"
+        cumprimento: "Zacarias 9:9 - 'Alegra-te, filha de Sião... teu rei vem, justo, salvador, humilde, montado em jumento'"
+        aclamacao: "'Hosana! Bendito o que vem em nome do Senhor! Bendito o reino que vem, de nosso pai Davi!'"
+        simbolos: "Ramos de palmeira, vestes no caminho"
+        fariseus: "'Mestre, repreende teus discípulos'"
+        jesus: "'Se estes se calarem, as pedras clamarão'"
+        lamento: "Chora sobre Jerusalém - 'Ah, se conheceras... coisas para tua paz... dias virão (70 AD)'"
+        significado: "Aclamação messiânica pública, desafio às autoridades, ironia (rei humilde)"
+        noite: "Volta a Betânia"
+
+      segunda_feira:
+        evento: "Figueira amaldiçoada"
+        referencia: "Marcos 11:12-14"
+        acao: "Jesus tem fome, não acha frutos (não época), amaldiçoa ('nunca mais coma fruto de ti')"
+        significado: "Ação profética - Israel sem frutos (julgamento vindouro)"
+
+        evento2: "Purificação do Templo (2ª vez, cronologia sinótica)"
+        referencia: "Mateus 21:12-17, Marcos 11:15-19, Lucas 19:45-48"
+        acao: "Expulsa cambistas e vendedores de animais, derruba mesas"
+        citacao: "'Minha casa será chamada casa de oração para todas as nações (Is 56:7), mas vós a fizestes covil de salteadores (Jr 7:11)'"
+        curas: "Cegos e coxos no templo"
+        criancas: "Clamam 'Hosana ao Filho de Davi' - principais sacerdotes indignados"
+        reacao: "Principais sacerdotes/escribas buscam como matar (temem povo)"
+        noite: "Sai da cidade (Betânia)"
+
+      terça_feira:
+        evento: "Figueira seca (lição)"
+        referencia: "Marcos 11:20-26"
+        pedro: "'A figueira que amaldiçoaste secou'"
+        ensino: "'Tende fé em Deus... se tiverdes fé e não duvidardes... ao perdoardes, perdoai'"
+
+        debates_serie:
+          - debate: "Autoridade de Jesus questionada"
+            ref: "Marcos 11:27-33"
+            pergunta: "Principais sacerdotes/escribas/anciãos - 'Com que autoridade fazes isto?'"
+            contraquestion: "'Batismo de João - céu ou homens?'"
+            impasse: "Se dizem 'céu' - por que não creram? Se 'homens' - povo apedrejará (João profeta)"
+            resposta: "'Não sabemos' → Jesus: 'Nem eu vos digo com que autoridade'"
+
+          - parabola: "Dois filhos (na vinha)"
+            ref: "Mateus 21:28-32"
+            historia: "Um diz 'vou' mas não vai; outro diz 'não' mas vai"
+            aplicacao: "Publicanos/prostitutas entram antes no Reino (João Batista creram)"
+
+          - parabola: "Lavradores maus"
+            ref: "Marcos 12:1-12"
+            alegoria: "Dono (Deus) → servos (profetas, mortos) → filho amado (Jesus, morto) → vinhateiros punidos"
+            citacao: "Salmo 118:22-23 - 'Pedra rejeitada → cabeça angular'"
+            reacao: "Procuram prendê-lo (mas temem multidão)"
+
+          - debate2: "Tributo a César"
+            ref: "Marcos 12:13-17"
+            armadilha: "Fariseus+herodianos - se diz 'pagar' (impopular), se 'não' (traição Roma)"
+            resposta: "'De quem é imagem/inscrição?' - 'César' → 'Dai a César o que é de César, a Deus o que é de Deus'"
+            significado: "Dualismo (obrigações civis vs religiosas), evita armadilha"
+
+          - debate3: "Ressurreição (saduceus)"
+            ref: "Marcos 12:18-27"
+            questao: "Mulher com 7 maridos (levirato) - de quem na ressurreição?"
+            resposta: "'Errais não conhecendo Escrituras nem poder de Deus... na ressurreição nem casam... são como anjos'"
+            prova: "Êxodo 3:6 - 'Deus de Abraão... (mortos)' → 'Não é Deus de mortos, mas de vivos'"
+
+          - debate4: "Maior mandamento"
+            ref: "Marcos 12:28-34"
+            pergunta: "Escriba sincero - 'Qual primeiro mandamento?'"
+            resposta: "Shemá (Dt 6:4-5) - 'Amarás Senhor teu Deus (todo coração/alma/entendimento/força)' + Lv 19:18 - 'Amarás próximo como a ti mesmo'"
+            escriba: "Concorda - 'Mais que holocaustos/sacrifícios'"
+            jesus: "'Não estás longe do Reino de Deus'"
+            resultado: "Ninguém mais ousa perguntar"
+
+          - contraqualquer: "Jesus pergunta"
+            ref: "Marcos 12:35-37"
+            questao: "'Como dizem escribas que Cristo é filho de Davi?' - Salmo 110:1 - 'Davi chama Senhor'"
+            implicacao: "Messias superior a Davi (transcendência)"
+
+        discurso: "Denúncia dos escribas/fariseus"
+        referencia: "Mateus 23 (extenso), Marcos 12:38-40"
+        sete_ais_mateus:
+          - "'Ai de vós... fechais Reino (não entrais, impedis outros)'"
+          - "'Percorreis mar/terra para 1 prosélito, tornais filho do inferno'"
+          - "'Guias cegos... jurais pelo ouro do templo'"
+          - "'Dizimais hortelã/endro/cominho, negligenciais justiça/misericórdia/fé (coais mosquito, engolis camelo)'"
+          - "'Limpais exterior copo/prato, interior cheio rapina'"
+          - "'Semelhantes sepulcros caiados (belos fora, dentro ossos/imundícia)'"
+          - "'Edificais túmulos profetas... sois filhos dos que mataram... cumprireis medida de vossos pais'"
+        lamento: "'Jerusalém, Jerusalém... quantas vezes quis ajuntar teus filhos (galinha - pintinhos)... não quiseste... casa ficará deserta'"
+
+        evento3: "Óbolo da viúva"
+        referencia: "Marcos 12:41-44"
+        contexto: "Jesus observa ofertas no templo"
+        viuva: "2 leptas (tudo que tinha)"
+        ensino: "'Viúva pobre deu mais que todos... deu da abundância, ela da penúria (tudo)'"
+
+        evento4: "Gregos querem ver Jesus"
+        referencia: "João 12:20-36"
+        pedido: "Alguns gregos (prosélitos) pedem a Filipe: 'Queremos ver Jesus'"
+        resposta: "'Chegou a hora de ser glorificado o Filho do Homem'"
+        paradoxo: "'Grão de trigo morre → muito fruto'"
+        principio: "'Quem ama vida perde-a; quem odeia neste mundo guardá-la-á para vida eterna'"
+        agonia: "'Agora minha alma está perturbada... Pai, salva-me desta hora? Mas para isto vim'"
+        voz_ceu: "'Eu o glorifiquei e ainda o glorificarei'"
+        profecia: "'Quando for levantado da terra, atrairei todos a mim' (modo de morte)"
+
+      quarta_feira:
+        evento: "Discurso do Monte das Oliveiras (Apocalipse Sinótico)"
+        referencia: "Mateus 24-25, Marcos 13, Lucas 21"
+        local: "Monte das Oliveiras (Pedro, Tiago, João, André)"
+        gatilho: "Discípulos admiram templo - Jesus: 'Não ficará pedra sobre pedra'"
+        pergunta: "'Quando? Qual sinal de tua vinda e fim dos tempos?'"
+        estrutura_marcos:
+          sinais_preliminares:
+            - "Falsos cristos/profetas"
+            - "Guerras, rumores de guerras (não é ainda o fim)"
+            - "Terremotos, fomes (princípio dores)"
+          perseguicao:
+            - "'Entregar-vos-ão... açoitar-vos-ão sinagogas... governadores/reis'"
+            - "'Evangelho pregado a todas nações (primeiro)'"
+            - "'Espírito Santo vos ensinará'"
+            - "Traição familiar, ódio universal"
+          grande_tribulacao:
+            - "'Abominação desoladora (Dn 9:27) onde não deve' - fuja Judeia"
+            - "Aflição única ('desde princípio criação')"
+            - "Se Senhor não abreviasse, ninguém se salvaria"
+            - "Falsos cristos/profetas - sinais/prodígios (enganar eleitos)"
+          vinda_filho_homem:
+            - "Sol/lua escurecidos, estrelas caem (Isaías 13:10, 34:4)"
+            - "'Verão Filho do Homem vir nas nuvens com poder e glória (Dn 7:13-14)'"
+            - "Anjos ajuntam eleitos dos 4 ventos"
+          parabolas_vigilancia:
+            figueira: "Quando brota, sabeis verão perto - 'esta geração não passará'"
+            dia_hora: "'Daquele dia/hora ninguém sabe, nem anjos, nem Filho, só Pai'"
+            porteiro: "'Vigiai... não sabeis quando vem senhor da casa'"
+        adicoes_mateus:
+          - parabola_dez_virgens: "5 prudentes (azeite) vs 5 néscias - 'Vigiai'"
+          - parabola_talentos: "Servo fiel multiplica, servo mau enterra - 'Fidelidade'"
+          - juizo_final_ovelhas_cabritos:
+              cena: "Filho do Homem no trono de glória, nações reunidas"
+              criterio: "'Fome dei-vos comer, sede bebida, estrangeiro hospedei, nu vesti, enfermo/preso visitei'"
+              justos: "'Quando te vimos?'"
+              resposta: "'Quando fizestes a um destes pequeninos, a mim o fizestes'"
+              condenacao: "'Apartai-vos... fogo eterno... quando não fizestes a um pequenino'"
+              destinos: "Suplício eterno vs vida eterna"
+        significado: "Escatologia (70 AD + fim dos tempos), ética da vigilância/fidelidade/serviço"
+
+        conspiracao: "Judas negocia traição"
+        referencia: "Mateus 26:14-16, Marcos 14:10-11"
+        acao: "Judas Iscariotes vai a principais sacerdotes"
+        oferta: "30 moedas de prata (preço de escravo - Êxodo 21:32)"
+        busca: "Oportunidade para entregar longe da multidão
+
+      quinta_feira:
+        evento: "Preparação da Páscoa"
+        referencia: "Marcos 14:12-16"
+        instrucoes: "Homem com cântaro de água → casa → dono: 'Onde está meu aposento?'"
+        resultado: "Cenáculo preparado (sala superior mobiliada)"
+
+        evento2: "Última Ceia"
+        referencia: "Mateus 26:17-30, Marcos 14:12-26, Lucas 22:7-38, João 13-17"
+        horario: "Anoitecer (início 15 Nisã - Páscoa)"
+
+        lavar_pes:
+          ref: "João 13:1-20"
+          acao: "Jesus levanta-se, tira manto, cinge toalha, lava pés dos discípulos"
+          pedro: "Protesta - 'Nunca me lavarás os pés'"
+          jesus: "'Se não te lavar, não tens parte comigo'"
+          pedro: "'Não só pés, mas mãos e cabeça'"
+          ensino: "'Se eu, Senhor/Mestre, lavei vossos pés, deveis lavar pés uns dos outros (exemplo dei)'"
+          significado: "Liderança servidora, humildade radical, inversão hierárquica"
+
+        traicao_anunciada:
+          ref: "João 13:21-30"
+          jesus: "'Em verdade vos digo: um de vós me trairá'"
+          discipulos: "Tristeza - 'Sou eu, Senhor?'"
+          joao: "Reclinado no peito de Jesus, Pedro acena perguntar"
+          jesus: "'É aquele a quem eu der o bocado molhado'"
+          judas: "Recebe bocado - 'Satanás entrou nele'"
+          ordem: "'O que fazes, faze-o depressa'"
+          saida: "Judas sai - 'Era noite' (simbolismo joanino: trevas)"
+
+        eucaristia:
+          ref: "Marcos 14:22-25, 1 Cor 11:23-26"
+          pao: "'Tomou pão, abençoou, partiu, deu - Isto é meu corpo (dado por vós - Lucas)'"
+          calice: "'Tomou cálice, deu graças - Isto é meu sangue da aliança (nova - Lucas/Paulo), derramado por muitos (remissão pecados - Mateus)'"
+          mandato: "'Fazei isto em memória de mim' (Lucas/Paulo)"
+          promessa: "'Não beberei deste fruto da videira até aquele dia quando o beber novo convosco no Reino de Deus'"
+          significado: "Aliança em sangue, sacrifício expiatório, memorial perpétuo, banquete escatológico"
+
+        novo_mandamento:
+          ref: "João 13:34-35"
+          texto: "'Novo mandamento vos dou: que vos ameis uns aos outros; como eu vos amei, que também vos vos ameis uns aos outros. Nisto conhecerão todos que sois meus discípulos: se tiverdes amor uns aos outros'"
+          novidade: "Padrão = amor de Cristo (sacrificial, até morte)"
+
+        negacao_predita:
+          ref: "Marcos 14:27-31"
+          profecia: "'Todos vos escandalizareis (Zc 13:7 - ferirei pastor, ovelhas dispersas)... mas ressuscitarei, irei adiante de vós para Galileia'"
+          pedro: "'Ainda que todos, eu não'"
+          jesus: "'Hoje, nesta noite, antes de 2x cantar galo, 3x me negarás'"
+          pedro: "'Ainda que me seja necessário morrer contigo, não te negarei'"
+
+        discursos_despedida:
+          ref: "João 14-16 (exclusivo João)"
+          capitulo_14:
+            - "'Não se turbe vosso coração... na casa de meu Pai muitas moradas'"
+            - "Tomé: 'Não sabemos caminho' → 'Eu sou o caminho, a verdade e a vida; ninguém vem ao Pai senão por mim'"
+            - "Filipe: 'Mostra-nos o Pai' → 'Quem me vê a mim vê o Pai... estou no Pai, Pai em mim'"
+            - "'Obras que faço fareis, e maiores... pedirei Pai, vos dará outro Consolador (Parakletos - Espírito Santo)'"
+            - "'Deixo-vos paz, minha paz vos dou... não como mundo dá'"
+          capitulo_15:
+            - "'Eu sou a videira verdadeira, vós os ramos... sem mim nada podeis fazer'"
+            - "'Permanecei em mim, eu em vós... se guardardes mandamentos'"
+            - "'Este é meu mandamento: amai-vos uns aos outros como eu vos amei. Ninguém tem maior amor que este: dar vida pelos amigos'"
+            - "'Mundo vos odeia... perseguirá... servo não maior que senhor'"
+            - "'Quando vier Consolador... testemunhará de mim'"
+          capitulo_16:
+            - "'Expulsar-vos-ão sinagogas... matará pensará prestar culto a Deus'"
+            - "'Convém que eu vá (se não for, Consolador não virá)... convencerá mundo (pecado, justiça, juízo)'"
+            - "'Tristeza se converterá em alegria (mulher dá à luz)'"
+            - "'Pedi e recebereis... até agora nada pedistes em meu nome'"
+            - "'Tenho-vos dito isto para que em mim tenhais paz. No mundo tereis aflições, mas tende bom ânimo: eu venci o mundo'"
+
+        oracao_sacerdotal:
+          ref: "João 17 (clímax teológico joanino)"
+          estrutura:
+            por_si:
+              - "'Pai, chegou a hora; glorifica teu Filho'"
+              - "'Dei-lhes a conhecer teu nome... vida eterna é esta: conhecer-te (único Deus verdadeiro) e Jesus Cristo'"
+              - "'Glorifica-me junto de ti com glória que tinha antes do mundo existir' (preexistência)"
+            por_discipulos:
+              - "'Manifestei teu nome aos que me deste do mundo... guardaram tua palavra'"
+              - "'Não peço que os tires do mundo, mas que os guardes do mal'"
+              - "'Santifica-os na verdade; tua palavra é a verdade'"
+              - "'Como me enviaste ao mundo, eu os enviei ao mundo'"
+            por_futuros_crentes:
+              - "'Não rogo somente por estes, mas pelos que hão de crer em mim, por intermédio de sua palavra'"
+              - "'A fim de que todos sejam um; como tu, Pai, estás em mim e eu em ti, também sejam eles em nós, para que o mundo creia que tu me enviaste'"
+              - "'Eu neles, tu em mim, a fim de que sejam aperfeiçoados na unidade'"
+              - "'Pai, desejo que onde eu estou, estejam também comigo os que me deste, para que vejam minha glória'"
+          temas: "Glória mútua (Pai-Filho), vida eterna como conhecimento, santificação, missão, unidade eclesial, amor"
+
+        himno: "Cantaram hino (Hallel - Salmos 115-118)"
+        saida: "Monte das Oliveiras"
+
+        getsemani:
+          ref: "Mateus 26:36-46, Marcos 14:32-42, Lucas 22:39-46"
+          local: "Jardim Getsêmani (Monte Oliveiras - 'lagar de azeite')"
+          grupo: "Leva Pedro, Tiago, João (mais próximos)"
+          estado: "'Minha alma está profundamente triste até à morte... vigiai comigo'"
+          oracao_1: "'Aba, Pai, tudo te é possível; afasta de mim este cálice; contudo, não o que eu quero, mas o que tu queres'"
+          discipulos: "Dormindo (3x) - 'espírito pronto, carne fraca'"
+          suor: "Lucas: 'como gotas de sangue' (hematidrose - stress extremo)"
+          anjo: "Lucas: 'apareceu anjo fortalecendo-o'"
+          resolucao: "'Levantai-vos, vamos; eis que se aproxima o que me trai'"
+          significado: "Agonia humana real, submissão à vontade divina, solidão"
+
+        prisao:
+          ref: "João 18:1-11, Marcos 14:43-52"
+          chegada: "Judas com multidão (principais sacerdotes, anciãos, coorte romana)"
+          sinal: "Beijo ('Salve, Rabi!')"
+          jesus: "'Amigo, para que vieste?' (Mateus) / 'A quem buscais?' → 'Jesus Nazareno' → 'Eu sou' → caem"
+          pedro: "Tira espada, corta orelha direita de Malco (servo sumo sacerdote)"
+          jesus: "'Mete espada... cálice que Pai me deu não beberei?' - cura orelha (Lucas)"
+          abandono: "Todos discípulos fogem - jovem nu foge deixando lençol (Marcos - auto-referência?)"
+          significado: "Entrega voluntária ('se me buscais, deixai ir estes'), não-violência"
+
+      sexta_feira:
+        julgamento_religioso:
+          anás:
+            ref: "João 18:12-14, 19-24"
+            pessoa: "Ex-sumo sacerdote (sogro de Caifás), poder real"
+            interrogatorio: "Discípulos, doutrina"
+            jesus: "'Falei abertamente... por que me perguntas? Pergunta aos que ouviram'"
+            bofetada: "Guarda esbofeteia - 'Assim respondes ao sumo sacerdote?'"
+            envio: "Caifás"
+
+          caifas_sinedrio:
+            ref: "Mateus 26:57-68, Marcos 14:53-65"
+            hora: "Madrugada (sessão ilegal - noturna)"
+            testemunhas: "Buscam falso testemunho - não acham consistente"
+            acusacao: "'Ouvi-o dizer: Derrubarei este templo feito por mãos e em 3 dias edificarei outro não por mãos'"
+            silencio: "Jesus não responde"
+            sumo_sacerdote: "'Conjuro-te pelo Deus vivo: És tu o Cristo, Filho de Deus?'"
+            resposta: "Marcos: 'Eu sou' (ego eimi - nome divino); Mateus: 'Tu o dizes' + 'Vereis Filho do Homem assentado à direita do Poder, vindo com nuvens céu (Dn 7:13-14, Sl 110:1)'"
+            reacao: "Rasga vestes - 'Blasfemou! Que mais necessidade temos de testemunhas?'"
+            veredicto: "'Réu de morte'"
+            escarnio: "Cospem, tapam rosto, esbofeteiam - 'Profetiza: quem te bateu?'"
+
+          negacao_pedro:
+            ref: "Marcos 14:66-72, João 18:15-27"
+            local: "Pátio (fogueira)"
+            primeira: "Criada: 'Tu também estavas com Jesus Nazareno' → 'Não sei, não entendo'"
+            segunda: "Outra: 'Este é um deles' → 'Não sou'"
+            terceira: "Grupo: 'Tua fala te denuncia (sotaque galileu)' → 'Não conheço esse homem' (praguejar)"
+            galo: "Canta 2ª vez (conforme predição)"
+            jesus: "Lucas: olha para Pedro"
+            pedro: "Sai, chora amargamente"
+
+          sessao_formal:
+            ref: "Lucas 22:66-71"
+            hora: "Amanhecer (legalizar decisão noturna)"
+            pergunta: "'Se és o Cristo, dize-nos'"
+            resposta: "'Se vos disser, não crereis... de agora em diante Filho do Homem assentado à direita do Poder de Deus'"
+            todos: "'Logo tu és Filho de Deus?' → 'Vós dizis que eu sou'"
+            conclusao: "'Que necessidade temos de testemunho? Ouvimos de sua própria boca'"
+
+        julgamento_civil:
+          pilatos_1:
+            ref: "João 18:28-38"
+            local: "Pretório (residência governador)"
+            hora: "Cedo (6h)"
+            judeus: "Não entram (impureza ritual - véspera Páscoa)"
+            acusacoes: "Lucas: 'Pervertendo nação, proibindo tributo a César, dizendo ser Cristo Rei'"
+            pilatos: "'És tu o rei dos judeus?'"
+            jesus: "'Meu reino não é deste mundo... para isso nasci, para dar testemunho da verdade'"
+            pilatos: "'Que é a verdade?' (cinismo filosófico)"
+            veredicto: "'Não acho nele crime algum' (1ª de 3x)"
+            proposta: "'Costume soltar 1 na Páscoa - quereis rei dos judeus?'"
+            multidao: "'Não este, mas Barrabás!' (salteador)"
+
+          herodes_antipas:
+            ref: "Lucas 23:6-12"
+            motivo: "Pilatos ouve 'Galileia' - jurisdição de Herodes (em Jerusalém para Páscoa)"
+            herodes: "Alegra-se (queria ver milagre)"
+            interrogatorio: "Muitas perguntas"
+            jesus: "Silêncio total (cumprimento Is 53:7 - 'cordeiro mudo')"
+            escarnio: "Veste manto esplêndido (zombaria realeza), devolve a Pilatos"
+            resultado: "Pilatos e Herodes viram amigos (antes inimigos)"
+
+          pilatos_2:
+            ref: "João 19:1-16, Mateus 27:15-26"
+            flagelacao: "Soldados açoitam (flagellum - chicote com metal/osso, pré-crucificação)"
+            escarnio: "Coroa de espinhos, manto púrpura, 'Salve, rei dos judeus!' (bofetadas)"
+            ecce_homo: "Pilatos apresenta - 'Eis o homem!'"
+            reacao: "'Crucifica! Crucifica!'"
+            pilatos: "'Tomai vós e crucificai, pois não acho nele crime' (2ª vez)"
+            acusacao_teologica: "'Temos lei, e segundo lei deve morrer, porque se fez Filho de Deus'"
+            pilatos: "Mais atemorizado - 'De onde és?'"
+            jesus: "Silêncio"
+            pilatos: "'A mim não me falas? Não sabes tenho autoridade soltar-te/crucificar-te?'"
+            jesus: "'Nenhuma autoridade terias se não te fosse dada do alto; quem me entregou a ti maior pecado tem'"
+            tentativa: "Pilatos procura soltar"
+            chantagem: "'Se soltas este, não és amigo de César; todo que se faz rei se opõe a César'"
+            tribunal: "Pilatos assenta no tribunal (Gábata/Lithóstrotos)"
+            hora: "~6h ('hora sexta' - João; 'hora terceira' Marcos - debate cronológico)"
+            pilatos: "'Eis o vosso rei!'"
+            principais_sacerdotes: "'Não temos rei, senão César!' (ironia trágica)"
+            barrabas: "Solto (assassino, sedicioso)"
+            pilatos: "Lava mãos - 'Inocente estou do sangue deste justo'"
+            multidao: "'Sangue dele sobre nós e sobre nossos filhos!'"
+            entrega: "Jesus entregue para crucificação"
+
+          judas:
+            ref: "Mateus 27:3-10, Atos 1:18-19"
+            arrependimento: "Vê condenação, devolve 30 moedas - 'Pequei traindo sangue inocente'"
+            sacerdotes: "'Que nos importa? Isso é contigo'"
+            suicidio: "Mateus: enforca-se; Atos: cai, rebenta, vísceras derramam"
+            campo: "Sacerdotes compram Campo do Oleiro (sangue, cemitério estrangeiros)"
+            cumprimento: "Zacarias 11:12-13 (via Mateus)"
+
+        via_crucis:
+          ref: "Lucas 23:26-32, João 19:16-17"
+          partida: "Pretório (Antônia)"
+          cruz: "Jesus carrega (patibulum - viga horizontal)"
+          simao_cireneu: "Obrigado a carregar (Jesus enfraquecido por flagelação)"
+          mulheres: "Multidão, mulheres batem no peito, lamentam"
+          jesus: "'Filhas de Jerusalém, não choreis por mim, mas por vós... se fazem isto no lenho verde, que no seco?'"
+          criminosos: "2 malfeitores levados com ele"
+
+        crucificacao:
+          ref: "Mateus 27:33-56, Marcos 15:22-41, Lucas 23:33-49, João 19:17-37"
+          local: "Gólgota (Calvário - 'lugar da caveira', aramaico/latim)"
+          hora: "~9h ('hora terceira' - Marcos)"
+          vinho: "Oferecem vinho com mirra (analgésico) - Jesus recusa"
+          crucificacao: "Pregam mãos e pés (João 20:25, Sl 22:16)"
+          inscricao: "Pilatos: 'Jesus Nazareno, Rei dos Judeus' (hebraico, latim, grego - INRI)"
+          protesto: "Principais sacerdotes: 'Não rei dos judeus, mas que disse...'"
+          pilatos: "'O que escrevi, escrevi'"
+          sorteio: "Soldados dividem vestes, lançam sortes sobre túnica (sem costura - cumprimento Sl 22:18)"
+
+          sete_palavras:
+            primeira: "'Pai, perdoa-lhes, porque não sabem o que fazem' (Lucas 23:34)"
+            segunda: "Ao ladrão arrependido: 'Em verdade te digo: hoje estarás comigo no Paraíso' (Lucas 23:43)"
+            terceira: "A Maria/João: 'Mulher, eis aí teu filho... eis aí tua mãe' (João 19:26-27 - provisão filial)"
+            quarta: "'Eli, Eli, lamá sabactâni? (Deus meu, Deus meu, por que me desamparaste?)' (Mateus/Marcos - Salmo 22:1 - abandono divino, substituição penal)"
+            quinta: "'Tenho sede' (João 19:28 - humanidade, cumprimento Sl 69:21)"
+            sexta: "'Tetelestai (Está consumado)' (João 19:30 - missão completa, débito pago)"
+            setima: "'Pai, em tuas mãos entrego meu espírito' (Lucas 23:46 - Salmo 31:5)"
+
+          escarnecedores:
+            passantes: "Meneiam cabeça - 'Destrói templo e reedifica em 3 dias, salva-te'"
+            principais_sacerdotes: "'Salvou outros, a si não pode salvar... se é rei de Israel, desça agora da cruz e creremos'"
+            ladrao: "Um blasfema - 'Se és Cristo, salva-te e a nós'"
+            ladrao_2: "Repreende - 'Nós justamente, mas este nada fez mal' → 'Jesus, lembra-te de mim quando vieres no teu reino'"
+
+          morte:
+            hora: "~15h ('hora nona')"
+            trevas: "Desde meio-dia (3h de escuridão - cósmica, não eclipse)"
+            ultimo_brado: "Grande voz (força sobrenatural)"
+            espírito: "Entrega espírito"
+
+          sinais:
+            veu_templo: "Rasgado de alto a baixo (acesso a Deus aberto, fim sacerdócio levítico)"
+            terremoto: "Terra tremeu, rochas fenderam"
+            ressurreicoes: "Mateus: túmulos abertos, santos ressuscitados (após ressurreição Jesus) entraram cidade santa"
+            centuriao: "'Verdadeiramente este era Filho de Deus!' (Marcos) / 'justo' (Lucas)"
+
+          testemunhas:
+            maria_madalena: "De Magdala (7 demônios expulsos)"
+            maria_mae_tiago_jose: "Mãe de Tiago menor e José"
+            salome: "Mãe de Tiago e João (Zebedeu)"
+            joao: "Discípulo amado (único apóstolo presente)"
+            outras: "Muitas mulheres que seguiam/serviam desde Galileia"
+
+          lanca:
+            ref: "João 19:31-37"
+            contexto: "Parasceve (preparação) - não deixar corpos no sábado"
+            crucifractura: "Pedir quebrar pernas (acelerar morte por asfixia)"
+            ladrones: "Pernas quebradas"
+            jesus: "Já morto - soldado lança lado → sangue e água (pericárdio? João testemunha ocular)"
+            cumprimento: "Êxodo 12:46 ('osso não quebrareis' - cordeiro pascal), Zacarias 12:10 ('olharão para quem traspassaram')"
+
+        sepultamento:
+          ref: "João 19:38-42, Marcos 15:42-47"
+          hora: "Anoitecer (antes pôr-do-sol - início sábado)"
+          jose_arimateia:
+            pessoa: "Membro do Sinédrio (rico, discípulo secreto - Mateus), esperava Reino"
+            coragem: "Pede corpo a Pilatos"
+            pilatos: "Admira-se morte rápida, pergunta centurião, concede"
+          nicodemos:
+            pessoa: "Fariseu (João 3, 7)"
+            oferta: "~33 kg mirra e aloés (mistura aromática, quantidade real)"
+          processo:
+            corpo: "Descido da cruz, envolvido em lençol fino com especiarias (costume judaico)"
+            local: "Túmulo novo de José, jardim perto Gólgota (João), escavado rocha"
+            pedra: "Grande pedra rolada à entrada"
+            mulheres: "Maria Madalena e Maria (José) observam"
+
+          guarda:
+            ref: "Mateus 27:62-66 (exclusivo Mateus)"
+            dia: "Sábado (Parasceve passou)"
+            pedido: "Principais sacerdotes/fariseus a Pilatos: 'Impostor disse ressuscitaria... manda guardar sepulcro até 3º dia (não roubem corpo)'"
+            pilatos: "'Tendes guarda; ide, guardai como entendeis'"
+            selo: "Selam pedra, colocam guarda"
+            ironia: "Precauções humanas vs poder divino"
+
+      sabado:
+        evento: "Sábado - Repouso no Túmulo"
+        referencia: "Silêncio dos 4 Evangelhos"
+        teologia: "'Desceu aos infernos/Hades' (Credo Apostólico, 1 Pedro 3:19 - 'espíritos em prisão')"
+        significado: "Cumprimento pleno da morte, descida às profundezas, mistério"
+        mulheres: "Lucas 23:56 - preparam especiarias, descansam no sábado (Lei)"
+
+      domingo_ressurreicao:
+        evento: "Ressurreição e aparições"
+        referencia: "Mateus 28, Marcos 16, Lucas 24, João 20"
+
+        tumulo_vazio:
+          hora: "Madrugada ('ainda escuro' João; 'nascer do sol' Marcos)"
+          mulheres: "Maria Madalena, Maria (Tiago), Salomé, Joana (variações sinóticas)"
+          preocupacao: "'Quem nos removerá a pedra?'"
+          terremoto: "Mateus: anjo desce, remove pedra, assenta (guardas como mortos)"
+          descoberta: "Pedra removida, túmulo vazio"
+          anjos:
+            descricao: "1 jovem (Marcos), 2 varões (Lucas), 1 anjo (Mateus)"
+            mensagem: "'Não está aqui; ressuscitou como havia dito. Vinde, vede o lugar. Ide, dizei aos discípulos e a Pedro que vai adiante de vós para a Galileia'"
+          reacao: "Temor, espanto, alegria (Mateus)"
+          lencois: "João 20:6-7 - Pedro/João correm, veem lençóis deixados, lenço cabeça enrolado à parte"
+
+        aparicoes_domingo:
+          maria_madalena:
+            ref: "João 20:11-18, Marcos 16:9-11"
+            contexto: "Fica chorando no túmulo"
+            anjos: "2 anjos: 'Mulher, por que choras?'"
+            maria: "'Levaram meu Senhor, não sei onde o puseram'"
+            jesus: "Volta-se, vê alguém (pensa jardineiro)"
+            reconhecimento: "Jesus: 'Maria!' → ela: 'Raboni!' (Mestre)"
+            ordem: "'Não me detenhas (ou toque), pois ainda não subi ao Pai. Vai a meus irmãos e dize: Subo para meu Pai e vosso Pai, meu Deus e vosso Deus'"
+            anuncio: "Maria vai, diz: 'Vi o Senhor!'"
+
+          outras_mulheres:
+            ref: "Mateus 28:9-10"
+            encontro: "Jesus encontra-as indo aos discípulos"
+            adoracao: "Abraçam pés, adoram"
+            mensagem: "'Não temais; ide, dizei a meus irmãos que vão à Galileia; lá me verão'"
+
+          pedro:
+            ref: "Lucas 24:34, 1 Coríntios 15:5"
+            aparicao: "Privada (restauração após negação?)"
+            testemunho: "'O Senhor ressuscitou verdadeiramente e apareceu a Simão!'"
+
+          emaus:
+            ref: "Lucas 24:13-35"
+            discipulos: "Cléopas e outro (11 km de Jerusalém)"
+            conversam: "Tristes sobre acontecimentos"
+            jesus: "Aproxima-se (olhos impedidos reconhecer)"
+            pergunta: "'Que palavras trocais caminhando?'"
+            cleopas: "'És o único peregrino em Jerusalém que não sabe?'"
+            explicacao: "Jesus Nazareno, profeta poderoso... entregue, crucificado... esperávamos redimisse Israel... 3º dia... mulheres viram anjos (ressuscitou)"
+            jesus: "'Ó néscios, tardos de coração... não convinha Cristo padecer e entrar em glória?' - Moisés/Profetas explica Escrituras"
+            aldeia: "Constrangem-no ficar"
+            reconhecimento: "Partir do pão - olhos abertos, Jesus desaparece"
+            retorno: "Voltam correndo a Jerusalém, acham 11: 'Senhor ressuscitou!'"
+
+          onze_apostolos_domingo:
+            ref: "João 20:19-23, Lucas 24:36-43"
+            contexto: "Anoitecer, portas trancadas (medo judeus), sem Tomé"
+            aparicao: "Jesus no meio - 'Paz seja convosco!'"
+            reacao: "Espanto, medo (pensam espírito - Lucas)"
+            prova: "Mostra mãos/pés (cravos), lado (lança) - 'Vede mãos/pés, sou eu mesmo; apalpai, espírito não tem carne/ossos'"
+            lucas: "Come peixe assado e favo de mel (corporalidade real)"
+            comissao: "'Paz seja convosco! Como Pai me enviou, eu vos envio'"
+            sopro: "'Recebei Espírito Santo. A quem perdoardes pecados são perdoados; a quem retiverdes são retidos'"
+            escrituras: "Lucas: abre entendimento - 'Cristo padecer, ressuscitar ao 3º dia, pregar-se arrependimento/remissão em seu nome a todas nações, começando Jerusalém'"
+
+        guardas:
+          ref: "Mateus 28:11-15"
+          relato: "Guardas contam principais sacerdotes"
+          suborno: "Dinheiro + história: 'Discípulos roubaram de noite enquanto dormíamos'"
+          promessa: "'Se chegar a governador, nós o persuadiremos e vos poremos em segurança'"
+          resultado: "'Divulgado entre judeus até hoje'"
+
+    caracteristicas_fase:
+      foco: "Confrontação final, Paixão, morte expiatória, ressurreição"
+      ton: "Intensidade máxima, paradoxo (triunfo via derrota, glória via humilhação)"
+      metodo: "Debates finais (autoridade), ensinos escatológicos, ações proféticas (Templo)"
+      oposicao: "Completa (líderes religiosos executam via Roma)"
+      geografia: "Jerusalém exclusivo (centro teológico/político)"
+      progressao: "Aclamação → rejeição → condenação → execução → validação divina (ressurreição)"
+      significado_global: "Cordeiro pascal (14 Nisã), nova aliança (sangue), vitória sobre morte/pecado/Satanás"
+
+  fase_5_pos_ressurreicao:
+    periodo: "30 AD - 40 dias"
+    duracao: "40 dias (Atos 1:3)"
+    local: "Jerusalém e Galileia"
+
+    eventos:
+      - evento: "Tomé (8 dias depois)"
+        referencia: "João 20:24-29"
+        contexto: "Tomé ausente na 1ª aparição"
+        duvida: "'Se não vir sinal cravos, puser dedo, mão no lado, não crerei'"
+        aparicao: "Domingo seguinte, portas trancadas"
+        jesus: "'Põe dedo aqui (mãos)... mão (lado)... não sejas incrédulo, mas crente'"
+        confissao: "'Meu Senhor e meu Deus!' (cristologia mais alta NT)"
+        bem_aventuranca: "'Porque me viste, creste? Bem-aventurados os que não viram e creram'"
+        significado: "Fé sem visão, corporalidade ressurreta real"
+
+      - evento: "Pesca miraculosa (Galileia)"
+        referencia: "João 21:1-23"
+        local: "Mar de Tiberíades (Galileia)"
+        discipulos: "7 (Pedro, Tomé, Natanael, Zebedeus, 2 outros)"
+        pedro: "'Vou pescar' - outros vão"
+        noite: "Nada pescam"
+        madrugada: "Jesus à praia (não reconhecem)"
+        ordem: "'Lançai rede à direita do barco'"
+        resultado: "153 peixes grandes, rede não rompe (milagre inicial Lucas 5)"
+        joao: "'É o Senhor!' - Pedro lança-se ao mar"
+        refeicao: "Jesus: 'Vinde, comei' - dá pão e peixe (3ª aparição - João)"
+        dialogo_pedro:
+          primeira: "'Simão... amas-me (agapas) mais que estes?' → 'Sim, Senhor, sabes que te amo (philo)' → 'Apascenta meus cordeiros'"
+          segunda: "'Simão... amas-me (agapas)?' → 'Sim, sabes que te amo (philo)' → 'Pastoreia minhas ovelhas'"
+          terceira: "'Simão... amas-me (phileis)?' → Pedro entristece → 'Senhor, sabes tudo, sabes que te amo (philo)' → 'Apascenta minhas ovelhas'"
+          profecia: "'Quando velho, estenderás mãos, outro te cingirá, levará para onde não queres' (morte martirio)"
+          ordem: "'Segue-me'"
+        joao: "Pedro pergunta sobre João - Jesus: 'Se quero que fique até que eu venha, que te importa? Segue-me tu'"
+        significado: "Restauração Pedro (3 negações / 3 confissões), comissão pastoral, martírio predito"
+
+      - evento: "Monte na Galileia (500 irmãos)"
+        referencia: "Mateus 28:16-20, 1 Coríntios 15:6"
+        local: "Monte designado na Galileia"
+        adoracao: "Alguns adoram, outros duvidam"
+        declaracao: "'Toda autoridade me foi dada no céu e na terra'"
+        grande_comissao:
+          mandato: "'Ide, fazei discípulos de todas as nações (ethne - gentios)'"
+          metodo: "'Batizando-os em nome do Pai, do Filho e do Espírito Santo'"
+          conteudo: "'Ensinando-os a guardar todas as coisas que vos tenho mandado'"
+          promessa: "'Eis que estou convosco todos os dias, até à consumação dos séculos'"
+        significado: "Missão universal, fórmula trinitária, presença perpétua"
+        paulo: "1 Cor 15:6 - apareceu a 500+ (maioria viva ao escrever - testemunhas)"
+
+      - evento: "Tiago"
+        referencia: "1 Coríntios 15:7"
+        pessoa: "Tiago, irmão de Jesus (não apóstolo)"
+        significado: "Conversão família (João 7:5 - irmãos não criam), futuro líder igreja Jerusalém (Atos 15)"
+
+      - evento: "Aparições em Jerusalém (40 dias)"
+        referencia: "Atos 1:3"
+        frequencia: "Múltiplas ocasiões"
+        ensino: "'Coisas concernentes ao Reino de Deus'"
+        provas: "'Muitas provas incontestáveis (tekmeriois)'"
+
+      - evento: "Ordem de esperar"
+        referencia: "Lucas 24:49, Atos 1:4-5"
+        mandato: "'Permanecei em Jerusalém até que sejais revestidos de poder do alto'"
+        promessa: "'João batizou com água, vós sereis batizados com Espírito Santo dentro de poucos dias'"
+
+      - evento: "Última pergunta"
+        referencia: "Atos 1:6"
+        pergunta: "'Senhor, é neste tempo que restauras o reino a Israel?'"
+        resposta: "'Não vos compete saber tempos/épocas que Pai reservou... recebereis poder ao descer sobre vós Espírito Santo, ser-me-eis testemunhas em Jerusalém, Judeia, Samaria e até confins da terra'"
+        significado: "Reino espiritual (não político), missão geográfica progressiva, escatologia reformulada"
+
+      - evento: "Ascensão"
+        referencia: "Lucas 24:50-53, Atos 1:9-11"
+        local: "Monte das Oliveiras, perto Betânia"
+        acao: "Levanta mãos, abençoa"
+        ascensao: "'Foi levantado às alturas, e uma nuvem o recebeu, ocultando-o a seus olhos'"
+        anjos: "2 varões de branco: 'Varões galileus, por que estais olhando para o céu? Este Jesus, que dentre vós foi assunto ao céu, virá do mesmo modo como o vistes subir ao céu'"
+        reacao: "Adoram, voltam a Jerusalém com grande júbilo"
+        resultado: "Cenáculo (120 discípulos), oração contínua, aguardam Pentecostes (Atos 2)"
+        significado: "Exaltação final, sessão à direita de Deus, promessa parousia (2ª vinda)"
+
+    caracteristicas_fase:
+      foco: "Validação ressurreição, comissionamento igreja, transição liderança"
+      metodo: "Aparições físicas (comer, tocar), ensino Reino"
+      geografia: "Galileia (reencontro) + Jerusalém (envio)"
+      progressao: "Comprovação → instrução → comissão → partida → espera Espírito"
+      significado: "Ressurreição corpórea real, autoridade universal, missão gentílica, era da igreja
+
+evolucao_ensinamentos:
+  fase_preparacao:
+    foco: "Identidade (Filho de Deus), rejeição de messianismo político"
+    metodo: "Tentações (negativas - o que não é)"
+    revelacao: "Privada (deserto)"
+
+  fase_inicial_galileia:
+    foco: "Reino de Deus (já presente), nova aliança"
+    metodo: "Diálogos pessoais (Nicodemos, samaritana), sinais"
+    revelacao: "Gradual (sinais → fé), inclusiva (samaritanos)"
+    tema: "Nascer de novo, água viva, adoração em espírito"
+
+  fase_plena_galileia:
+    foco: "Ética do Reino, identidade messiânica"
+    metodo: "Parábolas (multidões), explicações privadas (12)"
+    revelacao: "Pública (parábolas enigmáticas), privada aos 12 (Filho do Homem)"
+    temas: "Sermão da Montanha (radicalidade ética), parábolas (Reino presente/futuro), milagres (autoridade)"
+    progressao: "Popularidade → crise (Pão da Vida) → confissão ('Tu és o Cristo')"
+
+  fase_tardia:
+    foco: "Sofrimento messiânico, serviço, preparação para Paixão"
+    metodo: "Predições Paixão, parábolas de misericórdia/julgamento, sinais maiores"
+    revelacao: "Messias sofredor (não político), 3 predições explícitas"
+    temas: "Misericórdia divina (Lucas 15), inversão escatológica (rico/Lázaro), vida eterna (Lázaro)"
+    progressao: "Oposição crescente → decisão matar (Lázaro) → jornada Jerusalém"
+
+  fase_final_jerusalem:
+    foco: "Confrontação, julgamento, nova aliança (sangue)"
+    metodo: "Debates (autoridades), discursos escatológicos, Última Ceia, Paixão"
+    revelacao: "Completa (julgamento: 'Eu sou'), substituição penal (cruz)"
+    temas: "Amor mútuo (novo mandamento), unidade (João 17), sofrimento vicário (cruz), Reino futuro (Oliveiras)"
+    progressao: "Triunfo → rejeição → execução → ressurreição (validação)"
+    cristologia: "Alta (Filho de Deus, preexistência [João 17:5], 'Eu sou' [João 18:6])"
+
+  fase_pos_ressurreicao:
+    foco: "Missão universal, promessa Espírito, esperança parousia"
+    metodo: "Aparições físicas, abertura Escrituras, comissionamento"
+    revelacao: "Ressurreição corpórea, autoridade cósmica ('céu e terra')"
+    temas: "Reino de Deus (40 dias), Grande Comissão (todas nações), Espírito Santo (poder)"
+    progressao: "Comprovação → instrução → envio → ascensão → aguardar Pentecostes"
+
+progressao_geografica:
+  fase_0: "Judeia (Jordão, Deserto)"
+  fase_1: "Galileia (Cafarnaum base), breve Jerusalém"
+  fase_2: "Galileia (itinerante 80%), Jerusalém (festas)"
+  fase_3: "Galileia → Pereia → Judeia → Jerusalém"
+  fase_4: "Jerusalém exclusivo"
+  fase_5: "Jerusalém + Galileia → Jerusalém (Ascensão)"
+  significado: "Periferia (Galileia) → centro (Jerusalém) → mundo (Grande Comissão)"
+
+progressao_revelacao:
+  fase_0: "Filho amado (batismo), não político (tentações)"
+  fase_1: "Sinais iniciais, nova aliança (água → vinho), nascer de novo"
+  fase_2: "Parábolas (Reino), 'Eu sou pão da vida', 'Tu és o Cristo'"
+  fase_3: "Messias sofredor (3 predições), 'Eu sou ressurreição e vida'"
+  fase_4: "'Eu sou' (ego eimi - nome divino), Filho de Deus (julgamento), crucificação/ressurreição"
+  fase_5: "Toda autoridade, missão universal, sessão à direita"
+  modelo: "Segredo messiânico (Marcos) → revelação progressiva → proclamação pública → validação divina"
+
+progressao_oposicao:
+  fase_0: "Nenhuma"
+  fase_1: "Curiosidade → suspeita inicial (fariseus)"
+  fase_2: "Questionamento autoridade → conspiração matar (Marcos 3:6)"
+  fase_3: "Decisão formal matar (João 11:53, após Lázaro)"
+  fase_4: "Execução (líderes religiosos via Roma)"
+  fase_5: "Tentativa suprimir ressurreição (guardas subornados)"
+  paradoxo: "Quanto mais revela identidade, maior oposição → morte → validação"
+
+temas_teologicos_cronologicos:
+  kingdom_now_not_yet:
+    presente: "Fase 1-2 (Reino entre vós, parábolas crescimento)"
+    futuro: "Fase 4 (Oliveiras - vinda glória, julgamento)"
+    sintese: "Inaugurado (1ª vinda) mas não consumado (2ª vinda)"
+
+  messias_sofredor_vs_rei:
+    expectativa: "Rei davídico político conquistador"
+    realidade: "Servo sofredor (Isaías 53), cordeiro pascal"
+    revelacao: "Fase 2 (confissão Pedro + 1ª predição) → Fase 4 (cruz)"
+    resultado: "Discípulos não entendem até ressurreição"
+
+  particularismo_universalismo:
+    fase_1_2: "Primariamente judeus, exceções (samaritana, centurião)"
+    fase_3: "Samaritanos, gentios (gregos João 12)"
+    fase_4: "'Atrairei todos a mim' (João 12:32)"
+    fase_5: "'Todas as nações' (Mateus 28:19)"
+    progressao: "Israel primeiro → mundo (cumprimento Abraão - Gn 12:3)"
+
+  lei_graca:
+    fase_2: "Não abolir mas cumprir (Mateus 5:17), radicalizar (antíteses)"
+    fase_3: "Relativizar cerimonial (Marcos 7 - pureza interior)"
+    fase_4: "Nova aliança (sangue), mandamento novo (amor mútuo)"
+    sintese: "Lei moral permanente (amor Deus/próximo), cerimonial cumprida em Cristo"
+
+  morte_vida:
+    fase_2_3: "'Grão de trigo morre → fruto' (João 12:24)"
+    fase_4: "Morte substitutiva ('sangue derramado por muitos - remissão')"
+    fase_5: "Ressurreição (primícias - 1 Cor 15:20), vida eterna"
+    teologia: "Expiação penal substitutiva, vitória sobre morte/Satanás"
+
+metadata:
+  periodo_total: "27-30 AD (~3 anos)"
+  fases: 5
+  distribuicao_temporal:
+    preparacao: "3 meses"
+    inicial_galileia: "6-8 meses"
+    plena_galileia: "12-15 meses"
+    tardia: "6-8 meses"
+    final_jerusalém: "8 dias"
+    pos_ressurreicao: "40 dias"
+  local_principal: "Galileia (60% tempo), Jerusalém (25%), transições (15%)"
+  progressao_geral: "Revelação gradual → Confrontação → Paixão → Ressurreição → Comissionamento"
+
+  fontes_primarias:
+    - "4 Evangelhos canônicos (harmonização crítica)"
+    - "Atos (pós-ressurreição)"
+    - "Paulo (1 Coríntios 15 - aparições)"
+  fontes_secundarias:
+    - "Flávio Josefo (Antiguidades Judaicas 18.3.3 - Testimonium Flavianum)"
+    - "Tácito (Anais 15.44 - Cristãos, Cristo executado sob Pilatos)"
+    - "Plínio o Jovem (Cartas 10.96 - culto a Cristo)"
+
+  cronologia_debates:
+    joao_vs_sinoticos:
+      purificacao_templo: "João (início), Sinóticos (fim) - possível dupla ou redação teológica"
+      ultima_ceia: "João (antes Páscoa - 14 Nisã), Sinóticos (durante - 15 Nisã)"
+      duracao: "João (3 Páscoas = 2-3 anos), Sinóticos (1 Páscoa implícita? - debate)"
+    consenso_academico:
+      inicio: "27 AD (15º ano Tibério - Lucas 3:1, batismo)"
+      fim: "30 AD (Páscoa - crucificação)"
+      duracao: "~3 anos (João mais confiável cronologicamente)"
+
+  confianca_historica:
+    eventos_nucleares: "MUITO ALTA (batismo, ministério Galileia, Jerusalém, crucificação, ressurreição atestada)"
+    cronologia_exata: "MÉDIA-ALTA (debates João/Sinóticos, datas precisas incertas)"
+    palavras_ipsissima_verba: "VARIÁVEL (consenso teológico, redação específica debatida)"
+    milagres: "Atestação múltipla, interpretação teológica vs histórica debatida"
+
+  lacunas_conhecimento:
+    - "Ano exato nascimento Jesus (6-4 AC provável)"
+    - "Cronologia interna precisa (sequência alguns eventos)"
+    - "'Anos ocultos' (12-30 anos - Nazaré, carpinteiro)"
+    - "Relacionamento com Essênios/Qumran (especulação)"
+
+  nota_metodologica: "Timeline usa harmonização crítica (não fundamentalista nem hipercrítica), privilegia atestação múltipla, reconhece teologia redacional, mantém núcleo histórico consensual"

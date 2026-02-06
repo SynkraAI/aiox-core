@@ -1,0 +1,24 @@
+name: squad-creator
+version: 1.2.0
+short-title: Squad Creator
+description: >-
+  This squad provides tools and agents to create custom AIOS-FULLSTACK
+  squads. It automates the process of creating agents, tasks, templates,
+  workflows, and all necessary components for new domain-specific squads.
+author: AIOS Team
+slashPrefix: squadCreator
+
+# Activation settings - controls what displays when agent is activated
+settings:
+  activation:
+    show_ecosystem_report: true   # Display stats on activation
+    show_greeting: true           # Display agent greeting
+    show_quick_commands: true     # Display command shortcuts
+
+  # Ecosystem report configuration (only if show_ecosystem_report: true)
+  ecosystem_report:
+    show_totals: true             # Total squads, agents, tasks
+    show_top_squads: true         # Table of largest squads
+    show_quality_refs: true       # Gold standard references
+    show_gaps: false              # Identified domain gaps
+    top_squads_limit: 5           # How many squads to display

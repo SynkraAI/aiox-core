@@ -1,0 +1,158 @@
+# Knowledge Base Chunks - Adriano de Marqui
+# Manifest & Retrieval Index
+
+generated: 2025-10-18
+status: COMPLETE
+total_chunks: 25
+chunking_strategy: Semantic + Topic-based
+average_chunk_size: ~500-800 words
+retrieval_optimization: RAG-ready with metadata
+
+---
+
+# CHUNK CATEGORIES
+
+## 1. IDENTITY & VALUES (Chunks 01-05)
+- chunk-01-identity-core.md
+- chunk-02-values-hierarchy.md
+- chunk-03-service-model.md
+- chunk-04-psychometric-profile.md
+- chunk-05-differentiation-factors.md
+
+## 2. FRAMEWORKS & SYSTEMS (Chunks 06-12)
+- chunk-06-gps-framework.md
+- chunk-07-tres-cs-framework.md
+- chunk-08-practice-first-learning.md
+- chunk-09-second-brain-system.md
+- chunk-10-progressive-complexity.md
+- chunk-11-systems-over-willpower.md
+- chunk-12-curator-synthesizer-model.md
+
+## 3. COMMUNICATION STYLE (Chunks 13-17)
+- chunk-13-signature-phrases.md
+- chunk-14-communication-templates.md
+- chunk-15-tone-calibration.md
+- chunk-16-checkpoints-pattern.md
+- chunk-17-rhetorical-devices.md
+
+## 4. PRODUCTIVE PARADOXES (Chunks 18-21)
+- chunk-18-uber-paradox.md
+- chunk-19-paradox-navigation.md
+- chunk-20-context-sensitive-wisdom.md
+- chunk-21-paradox-resolutions.md
+
+## 5. PROFESSIONAL EXPERTISE (Chunks 22-25)
+- chunk-22-tech-expertise.md
+- chunk-23-teaching-methodology.md
+- chunk-24-obsidian-pkm.md
+- chunk-25-ai-applications.md
+
+---
+
+# RETRIEVAL PATTERNS
+
+## By Use Case:
+
+**Teaching/Education Query:**
+→ Retrieve: Chunks 08, 10, 13, 14, 23
+
+**Tool Recommendation:**
+→ Retrieve: Chunks 09, 12, 24
+
+**Communication/Presentation:**
+→ Retrieve: Chunks 07, 14, 15, 17
+
+**Planning/Organization:**
+→ Retrieve: Chunks 06, 09, 11
+
+**Handling Contradictions:**
+→ Retrieve: Chunks 18, 19, 20, 21
+
+**Identity Questions:**
+→ Retrieve: Chunks 01, 02, 03, 05
+
+**Technical Expertise:**
+→ Retrieve: Chunks 22, 24, 25
+
+---
+
+# METADATA SCHEMA
+
+Each chunk contains:
+```yaml
+chunk_id: XX
+title: [Descriptive Title]
+category: [Identity|Frameworks|Communication|Paradoxes|Expertise]
+tags: [relevant, semantic, tags]
+priority: [high|medium|low] # for retrieval ranking
+related_chunks: [XX, YY, ZZ] # for chain retrieval
+confidence: [90-98%]
+source_layers: [Layer X, Y, Z from DNA Mental™]
+```
+
+---
+
+# CHAIN RETRIEVAL PATTERNS
+
+**Chain 1: Complete Teaching Session**
+06 (GPS) → 08 (Practice-First) → 10 (Progressive) → 14 (Templates)
+
+**Chain 2: Tool Recommendation Flow**
+12 (Curator Model) → 09 (Second Brain) → 24 (Obsidian) → 14 (Recommendation Template)
+
+**Chain 3: Identity + Method**
+01 (Identity) → 02 (Values) → 18 (Uber-Paradox) → 08 (Practice-First)
+
+**Chain 4: Communication Mastery**
+15 (Tone) → 13 (Phrases) → 17 (Devices) → 16 (Checkpoints)
+
+**Chain 5: Paradox Navigation**
+18 (Uber-Paradox) → 19 (Navigation) → 20 (Context-Sensitive) → 21 (Resolutions)
+
+---
+
+# SEARCH OPTIMIZATION
+
+## High-Frequency Keywords (Auto-trigger retrieval):
+
+**"ensinar"** → Chunks 08, 10, 23
+**"framework"** → Chunks 06, 07, 08, 11
+**"obsidian"** → Chunks 09, 24
+**"prática"** → Chunks 08, 18
+**"síntese"** → Chunks 12, 02
+**"GPS"** → Chunk 06
+**"três cs"** → Chunk 07
+**"segundo cérebro"** → Chunk 09
+**"lendário"** → Chunks 01, 13
+**"paradoxo"** → Chunks 18, 19, 20, 21
+**"valores"** → Chunk 02
+**"serviço"** → Chunks 02, 03
+
+---
+
+# CHUNK SIZE DISTRIBUTION
+
+**Small (300-500 words):** Chunks 13, 16 (quick reference)
+**Medium (500-800 words):** Chunks 01-12, 14-15, 17-25 (main content)
+**Large (800-1200 words):** None (optimized for RAG context window)
+
+**Rationale:** Chunks sized for optimal retrieval without context overflow
+
+---
+
+# VERSION CONTROL
+
+**Version:** 1.0
+**Last Updated:** 2025-10-18
+**Source Analysis Completion:** 100%
+**Human Validation:** Layers 6, 7, 8 validated
+
+**Future Updates:**
+- Add chunks as new source material emerges
+- Refine based on clone performance testing
+- Update priority rankings based on actual retrieval patterns
+
+---
+
+**Status:** ✅ MANIFEST COMPLETE
+**Next:** Individual chunk generation

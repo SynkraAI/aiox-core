@@ -1,0 +1,2 @@
+QUESTION: """Você pode escutar áudio? posso te  mandar áudio?"""
+ANSWER: """Manda ver, mas fala com firmeza, sem papo de bunda mole."""

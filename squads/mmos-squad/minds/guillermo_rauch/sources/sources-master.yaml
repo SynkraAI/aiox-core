@@ -1,0 +1,557 @@
+# Guillermo Rauch - Sources Master Catalog
+# Phase 2: Research Collection
+# Date: 2025-01-14
+# Status: IN PROGRESS
+# Target: 15-20 sources (2024-2025 focus)
+
+---
+metadata:
+  mind_name: "Guillermo Rauch"
+  collection_date: "2025-01-14"
+  total_sources_target: "15-20"
+  temporal_focus: "2024-2025 (with foundational essays)"
+  collection_method: "Strategic research + Web sources"
+  
+collection_status:
+  sources_identified: 18
+  sources_collected: 0
+  sources_analyzed: 0
+  collection_progress: "0%"
+
+---
+# SOURCE CATALOG
+
+## CATEGORY: Essays & Blog Posts (rauchg.com)
+
+source_001:
+  title: "7 Principles of Rich Web Applications"
+  author: "Guillermo Rauch"
+  date: "2014"
+  url: "https://rauchg.com/2014/7-principles-of-rich-web-applications"
+  type: "essay"
+  tier: "tier_1_critical"
+  temporal: "foundational"
+  word_count_estimate: "3000-4000"
+  
+  relevance:
+    - Foundational philosophy
+    - Server-rendered pages principle
+    - CDN strategy
+    - Push code updates (not data)
+    - Quality principles
+  
+  expected_layers:
+    - Layer 5: Mental Models (7 principles framework)
+    - Layer 6: Values (quality, performance, UX)
+    - Layer 2: Communication (principle-driven writing)
+  
+  collection_priority: "HIGH"
+  status: "IDENTIFIED"
+
+---
+
+source_002:
+  title: "AX: AI Experience Concept"
+  author: "Guillermo Rauch"
+  date: "2024"
+  url: "https://rauchg.com (AX posts/threads)"
+  type: "essay/twitter_threads"
+  tier: "tier_1_critical"
+  temporal: "2024_cutting_edge"
+  word_count_estimate: "2000-3000"
+  
+  relevance:
+    - AX framework (AI Experience)
+    - "Prompts are UI" philosophy
+    - Latest thought leadership
+    - Evolution from DX to AX
+  
+  expected_layers:
+    - Layer 7: Singularity (AX as unique contribution)
+    - Layer 5: Mental Models (AX framework)
+    - Layer 6: Values (innovation, UX evolution)
+  
+  collection_priority: "CRITICAL"
+  status: "IDENTIFIED"
+
+---
+
+source_003:
+  title: "Software Quality Blog Post"
+  author: "Guillermo Rauch"
+  date: "2023-2024"
+  url: "https://rauchg.com (quality posts)"
+  type: "essay"
+  tier: "tier_1_critical"
+  temporal: "recent"
+  word_count_estimate: "1500-2500"
+  
+  relevance:
+    - "Software quality is felt, not measured"
+    - Quality philosophy
+    - Developer experience metrics
+  
+  expected_layers:
+    - Layer 6: Values (quality obsession)
+    - Layer 5: Mental Models (quality framework)
+    - Layer 8: Paradoxes (measurable vs felt quality)
+  
+  collection_priority: "HIGH"
+  status: "IDENTIFIED"
+
+---
+
+source_004:
+  title: "Vercel Blog: Technical Essays"
+  author: "Guillermo Rauch (Vercel team)"
+  date: "2024-2025"
+  url: "https://vercel.com/blog"
+  type: "technical_blog"
+  tier: "tier_2_important"
+  temporal: "2024_2025"
+  word_count_estimate: "varies"
+  
+  relevance:
+    - Infrastructure philosophy
+    - DX principles in practice
+    - Next.js evolution
+    - Edge computing
+  
+  expected_layers:
+    - Layer 5: Mental Models (infrastructure thinking)
+    - Layer 1: Behavioral (how he builds products)
+    - Layer 3: Routines (product development patterns)
+  
+  collection_priority: "MEDIUM"
+  status: "IDENTIFIED"
+
+---
+
+## CATEGORY: Podcasts & Talks
+
+source_005:
+  title: "Vercel Ship 2024 Keynote"
+  author: "Guillermo Rauch"
+  date: "2024"
+  url: "https://vercel.com/ship (or YouTube)"
+  type: "keynote_talk"
+  tier: "tier_1_critical"
+  temporal: "2024"
+  duration_estimate: "30-45 minutes"
+  
+  relevance:
+    - Latest product vision
+    - AX introduction
+    - Company strategy
+    - Communication style (spoken)
+  
+  expected_layers:
+    - Layer 2: Communication (speaking style)
+    - Layer 6: Values (what he emphasizes)
+    - Layer 5: Mental Models (frameworks presented)
+    - Layer 7: Singularity (latest innovations)
+  
+  collection_priority: "CRITICAL"
+  status: "IDENTIFIED"
+
+---
+
+source_006:
+  title: "Vercel Ship 2025 Announcements"
+  author: "Guillermo Rauch"
+  date: "January 2025"
+  url: "https://vercel.com/ship"
+  type: "keynote_talk"
+  tier: "tier_1_critical"
+  temporal: "2025_current"
+  duration_estimate: "30-45 minutes"
+  
+  relevance:
+    - Most recent thinking
+    - Product evolution
+    - Current priorities
+  
+  expected_layers:
+    - Layer 5: Mental Models (latest frameworks)
+    - Layer 6: Values (current focus)
+    - Layer 7: Singularity (newest contributions)
+  
+  collection_priority: "CRITICAL"
+  status: "IDENTIFIED"
+
+---
+
+source_007:
+  title: "Podcast Interview 2024 (TBD specific)"
+  author: "Guillermo Rauch (guest)"
+  date: "2024"
+  url: "TBD"
+  type: "podcast"
+  tier: "tier_2_important"
+  temporal: "2024"
+  duration_estimate: "45-60 minutes"
+  
+  relevance:
+    - Long-form conversation
+    - Personal philosophy
+    - Decision-making process
+    - Communication patterns
+  
+  expected_layers:
+    - Layer 2: Communication (conversational style)
+    - Layer 4: Recognition (what he notices)
+    - Layer 6: Values (what matters to him)
+    - Layer 8: Paradoxes (tensions he navigates)
+  
+  collection_priority: "HIGH"
+  status: "IDENTIFIED"
+  notes: "Need to identify specific podcast (5+ available 2024)"
+
+---
+
+## CATEGORY: Twitter/X Threads (@rauchg)
+
+source_008:
+  title: "Twitter Threads on AX"
+  author: "Guillermo Rauch"
+  date: "2024-2025"
+  url: "https://twitter.com/rauchg (AX threads)"
+  type: "twitter_threads"
+  tier: "tier_1_critical"
+  temporal: "2024_2025"
+  word_count_estimate: "500-1000 per thread"
+  
+  relevance:
+    - AX philosophy explained
+    - Quick insights
+    - Communication style (concise)
+  
+  expected_layers:
+    - Layer 2: Communication (Twitter-optimized)
+    - Layer 5: Mental Models (AX framework)
+    - Layer 7: Singularity (AX development)
+  
+  collection_priority: "HIGH"
+  status: "IDENTIFIED"
+
+---
+
+source_009:
+  title: "Twitter Threads on DX/DevX"
+  author: "Guillermo Rauch"
+  date: "2023-2024"
+  url: "https://twitter.com/rauchg (DX threads)"
+  type: "twitter_threads"
+  tier: "tier_2_important"
+  temporal: "2023_2024"
+  word_count_estimate: "500-1000 per thread"
+  
+  relevance:
+    - Developer experience principles
+    - Vercel philosophy
+    - Quick takes on DX
+  
+  expected_layers:
+    - Layer 6: Values (DX obsession)
+    - Layer 5: Mental Models (DX principles)
+    - Layer 2: Communication (concise insights)
+  
+  collection_priority: "MEDIUM"
+  status: "IDENTIFIED"
+
+---
+
+source_010:
+  title: "Twitter Threads on Software Quality"
+  author: "Guillermo Rauch"
+  date: "2023-2024"
+  url: "https://twitter.com/rauchg (quality threads)"
+  type: "twitter_threads"
+  tier: "tier_1_critical"
+  temporal: "2023_2024"
+  word_count_estimate: "500-1000 per thread"
+  
+  relevance:
+    - "Software quality is felt, not measured"
+    - Quality obsession
+    - Philosophy on measurement
+  
+  expected_layers:
+    - Layer 6: Values (quality as core value)
+    - Layer 8: Paradoxes (felt vs measured)
+    - Layer 5: Mental Models (quality framework)
+  
+  collection_priority: "HIGH"
+  status: "IDENTIFIED"
+
+---
+
+## CATEGORY: Technical Documentation (Philosophy Sections)
+
+source_011:
+  title: "Next.js Documentation - Philosophy"
+  author: "Vercel/Next.js team (Guillermo's vision)"
+  date: "2024"
+  url: "https://nextjs.org/docs"
+  type: "technical_documentation"
+  tier: "tier_2_important"
+  temporal: "current"
+  word_count_estimate: "1000-2000"
+  
+  relevance:
+    - DX principles in practice
+    - Framework philosophy
+    - Design decisions
+  
+  expected_layers:
+    - Layer 5: Mental Models (framework design)
+    - Layer 1: Behavioral (how he builds tools)
+    - Layer 3: Routines (development patterns)
+  
+  collection_priority: "MEDIUM"
+  status: "IDENTIFIED"
+
+---
+
+source_012:
+  title: "Vercel Docs - 'Develop. Preview. Ship.'"
+  author: "Vercel team (Guillermo's philosophy)"
+  date: "2024"
+  url: "https://vercel.com/docs"
+  type: "technical_documentation"
+  tier: "tier_1_critical"
+  temporal: "current"
+  word_count_estimate: "1000-1500"
+  
+  relevance:
+    - Core Vercel philosophy
+    - Deployment workflow
+    - Collaboration model
+  
+  expected_layers:
+    - Layer 5: Mental Models (workflow framework)
+    - Layer 6: Values (velocity, collaboration)
+    - Layer 7: Singularity (signature philosophy)
+  
+  collection_priority: "HIGH"
+  status: "IDENTIFIED"
+
+---
+
+## CATEGORY: GitHub Discussions & Issues
+
+source_013:
+  title: "Next.js GitHub Discussions (Guillermo's Comments)"
+  author: "Guillermo Rauch"
+  date: "2023-2024"
+  url: "https://github.com/vercel/next.js/discussions"
+  type: "github_discussions"
+  tier: "tier_2_important"
+  temporal: "2023_2024"
+  word_count_estimate: "varies (100-500 per comment)"
+  
+  relevance:
+    - Decision-making visible
+    - Problem-solving approach
+    - Communication with developers
+    - Technical philosophy
+  
+  expected_layers:
+    - Layer 4: Recognition (what problems he spots)
+    - Layer 2: Communication (developer communication)
+    - Layer 5: Mental Models (decision criteria)
+  
+  collection_priority: "MEDIUM"
+  status: "IDENTIFIED"
+
+---
+
+## CATEGORY: Interviews & Articles (About Guillermo)
+
+source_014:
+  title: "Interview: Guillermo Rauch on Next.js"
+  author: "Various tech publications"
+  date: "2024"
+  url: "TBD (search for recent interviews)"
+  type: "interview_article"
+  tier: "tier_2_important"
+  temporal: "2024"
+  word_count_estimate: "2000-3000"
+  
+  relevance:
+    - External perspective
+    - Journey story
+    - Philosophy articulation
+  
+  expected_layers:
+    - Layer 7: Singularity (career evolution)
+    - Layer 6: Values (what he emphasizes)
+    - Layer 2: Communication (how others describe him)
+  
+  collection_priority: "MEDIUM"
+  status: "IDENTIFIED"
+
+---
+
+## CATEGORY: Foundational Content (Pre-2023)
+
+source_015:
+  title: "Socket.io Creation Story"
+  author: "Guillermo Rauch (or articles about)"
+  date: "2010-2015"
+  url: "TBD"
+  type: "historical_article"
+  tier: "tier_3_contextual"
+  temporal: "historical"
+  word_count_estimate: "1000-2000"
+  
+  relevance:
+    - Early career
+    - First major contribution
+    - Evolution to Vercel
+  
+  expected_layers:
+    - Layer 7: Singularity (evolution arc)
+    - Layer 3: Routines (building patterns)
+  
+  collection_priority: "LOW"
+  status: "IDENTIFIED"
+  notes: "Optional for context, not critical"
+
+---
+
+source_016:
+  title: "Collaboration Essays"
+  author: "Guillermo Rauch"
+  date: "2022-2024"
+  url: "https://rauchg.com (collaboration posts)"
+  type: "essay"
+  tier: "tier_2_important"
+  temporal: "recent"
+  word_count_estimate: "1500-2500"
+  
+  relevance:
+    - Team coordination
+    - Collaboration philosophy
+    - Tools for teamwork
+  
+  expected_layers:
+    - Layer 6: Values (collaboration emphasis)
+    - Layer 5: Mental Models (coordination frameworks)
+    - Layer 1: Behavioral (how he works with teams)
+  
+  collection_priority: "MEDIUM"
+  status: "IDENTIFIED"
+
+---
+
+source_017:
+  title: "Velocity & Iteration Philosophy"
+  author: "Guillermo Rauch"
+  date: "2023-2024"
+  url: "https://rauchg.com or Twitter"
+  type: "essay/threads"
+  tier: "tier_1_critical"
+  temporal: "recent"
+  word_count_estimate: "1000-2000"
+  
+  relevance:
+    - Ship fast, iterate
+    - Velocity as competitive advantage
+    - Iteration loops
+  
+  expected_layers:
+    - Layer 6: Values (velocity obsession)
+    - Layer 5: Mental Models (iteration framework)
+    - Layer 3: Routines (shipping cadence)
+  
+  collection_priority: "HIGH"
+  status: "IDENTIFIED"
+
+---
+
+source_018:
+  title: "Edge Computing Philosophy"
+  author: "Guillermo Rauch"
+  date: "2023-2024"
+  url: "Vercel blog or rauchg.com"
+  type: "essay/technical_post"
+  tier: "tier_2_important"
+  temporal: "recent"
+  word_count_estimate: "2000-3000"
+  
+  relevance:
+    - Infrastructure thinking
+    - Edge deployment strategy
+    - Performance philosophy
+  
+  expected_layers:
+    - Layer 5: Mental Models (edge computing model)
+    - Layer 6: Values (performance, UX)
+    - Layer 1: Behavioral (infrastructure decisions)
+  
+  collection_priority: "MEDIUM"
+  status: "IDENTIFIED"
+
+---
+
+## COLLECTION STRATEGY
+
+priority_order:
+  critical_first:
+    - source_002 (AX concept) ← NEWEST, MOST UNIQUE
+    - source_005 (Vercel Ship 2024 keynote)
+    - source_006 (Vercel Ship 2025)
+    - source_001 (7 Principles - foundational)
+    - source_003 (Software Quality)
+    - source_008 (AX Twitter threads)
+    - source_010 (Quality Twitter threads)
+    - source_012 (Develop. Preview. Ship.)
+  
+  high_priority:
+    - source_007 (Podcast 2024)
+    - source_017 (Velocity & Iteration)
+    - source_016 (Collaboration)
+  
+  medium_priority:
+    - source_004 (Vercel blog)
+    - source_009 (DX Twitter threads)
+    - source_011 (Next.js docs philosophy)
+    - source_013 (GitHub discussions)
+    - source_014 (Interviews)
+    - source_018 (Edge computing)
+  
+  optional:
+    - source_015 (Socket.io history - context only)
+
+collection_target:
+  minimum: 15 sources
+  ideal: 18 sources
+  temporal_distribution:
+    - 2024-2025: 12 sources (67%)
+    - 2022-2024: 4 sources (22%)
+    - Foundational: 2 sources (11%)
+
+---
+
+## NEXT STEPS
+
+immediate_actions:
+  1. "Collect critical sources (8 sources)"
+  2. "Collect high-priority sources (3 sources)"
+  3. "Collect medium-priority sources (4-7 sources)"
+  4. "Total target: 15-18 sources"
+
+collection_method:
+  - Web search for specific posts
+  - YouTube for keynotes
+  - Twitter/X search for threads
+  - GitHub for discussions
+  - Documentation scraping
+
+estimated_duration: "3-4 hours"
+
+---
+
+**Status:** Sources identified, collection in progress  
+**Next:** Execute collection (WebFetch, WebSearch, manual research)

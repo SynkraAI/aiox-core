@@ -1,0 +1,223 @@
+# MMOS Minds Migration Manifest
+# Generated: 2026-01-02
+# Source: expansion-packs/mmos/minds/
+# Target: squads/mmos-squad/minds/
+
+migration:
+  date: "2026-01-02"
+  executed_by: "@dev (Dex)"
+  story: "STORY-10.7"
+  total_minds: 27
+  source_location: "expansion-packs/mmos/minds/"
+  target_location: "squads/mmos-squad/minds/"
+
+# Migration Status Legend:
+# - MIGRATED: Successfully copied to target
+# - MIGRATED_WITH_NOTES: Copied but needs improvements
+# - RESTRUCTURED: Required structural changes during migration
+
+minds:
+  # TIER 1: Gold Standard (98%)
+  - slug: joao_lozano
+    fidelity_score: 98
+    tier: 1
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "Gold Standard - paradigm-exemplifying"
+
+  # TIER 2: Excellent (97%)
+  - slug: paul_graham
+    fidelity_score: 97
+    tier: 2
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "276 essays, temporal evolution analysis"
+
+  - slug: sam_altman
+    fidelity_score: 97
+    tier: 2
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "Exponential thinking engine"
+
+  # TIER 3: High Fidelity (96%)
+  - slug: pedro_valerio
+    fidelity_score: 96
+    tier: 3
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "Corporate finance M&A expertise"
+
+  - slug: cagan_patton
+    fidelity_score: 96
+    tier: 3
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "Merged mind, explicit layer files"
+
+  - slug: jeff_patton
+    fidelity_score: 96
+    tier: 3
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "Dual-track agile, user story mapping"
+
+  - slug: adriano_de_marqui
+    fidelity_score: 96
+    tier: 3
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "PT-BR native, GPS framework"
+
+  - slug: steve_jobs
+    fidelity_score: 96
+    tier: 3
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "Reality Distortion Field"
+
+  # TIER 4: Strong (95%)
+  - slug: marty_cagan
+    fidelity_score: 95
+    tier: 4
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "SVPG methodology, empowered teams"
+
+  - slug: brad_frost
+    fidelity_score: 95
+    tier: 4
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "Atomic Design framework"
+
+  - slug: elon_musk
+    fidelity_score: 95
+    tier: 4
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "The Algorithm, 4 prompt variants"
+
+  - slug: alan_nicolas
+    fidelity_score: 95
+    tier: 4
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "Dual persona, Pareto³, 8 paradoxes"
+
+  # TIER 5: Good (94%)
+  - slug: jesus_cristo
+    fidelity_score: 94
+    tier: 5
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "7-Step Algorithm, 3 contextual modes"
+
+  - slug: seth_godin
+    fidelity_score: 94
+    tier: 5
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "4 operational modes, 179 sources"
+
+  - slug: andrej_karpathy
+    fidelity_score: 94
+    tier: 5
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "AI educator, LLMs as probabilistic computers"
+
+  - slug: napoleon_hill
+    fidelity_score: 94
+    tier: 5
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "13 Principles, Systematic Mystic"
+
+  # TIER 6: Solid (93%)
+  - slug: alex_hormozi
+    fidelity_score: 93
+    tier: 6
+    status: RESTRUCTURED
+    migrated_at: "2026-01-02"
+    notes: "RESTRUCTURED - COGNITIVE_OS.md moved to system_prompts/"
+
+  - slug: ray_kurzweil
+    fidelity_score: 93
+    tier: 6
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "LAR, mortality urgency, Three Bridges"
+
+  - slug: daniel_kahneman
+    fidelity_score: 93
+    tier: 6
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "System 1/2, Prospect Theory"
+
+  # TIER 7: Acceptable (92%)
+  - slug: jose_amorim
+    fidelity_score: 92
+    tier: 7
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "5 specialized system prompts"
+
+  - slug: don_norman
+    fidelity_score: 92
+    tier: 7
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "Seven Stages of Action, 7 paradoxes"
+
+  - slug: kapil_gupta
+    fidelity_score: 92
+    tier: 7
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "Bilingual KB, anti-prescription"
+
+  # TIER 8: Minimum Threshold (91%)
+  - slug: guillermo_rauch
+    fidelity_score: 91
+    tier: 8
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "DX/AX Framework, Vercel philosophy"
+
+  - slug: kent_beck
+    fidelity_score: 91
+    tier: 8
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "TDD, XP 5 Values, 3X Lifecycle"
+
+  - slug: mitchell_hashimoto
+    fidelity_score: 91
+    tier: 8
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "Tao of HashiCorp, IaC expert"
+
+  - slug: eugene_schwartz
+    fidelity_score: 90
+    tier: 8
+    status: MIGRATED
+    migrated_at: "2026-01-02"
+    notes: "5 Awareness Stages, Market Sophistication"
+
+  # TIER 9: Migrate with Notes (88%)
+  - slug: thiago_finch
+    fidelity_score: 88
+    tier: 9
+    status: MIGRATED_WITH_NOTES
+    migrated_at: "2026-01-02"
+    notes: "See TODO.md - needs Framework expansion, cognitive-spec.yaml, Layer 8"
+
+summary:
+  total: 27
+  migrated: 25
+  pending: 0
+  with_notes: 1
+  restructured: 1

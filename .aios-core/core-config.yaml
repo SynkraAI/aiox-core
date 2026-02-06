@@ -1,97 +1,47 @@
-# ============================================
-# AIOS Core Configuration
-# Version: 2.3.0 (Story 6.11 - Framework Docs Consolidation)
-# Last Updated: 2025-12-14
-# ============================================
-
-# ============================================
-# SECTION 1: Framework Metadata
-# ============================================
 markdownExploder: true
-
 project:
   type: EXISTING_AIOS
-  installedAt: "2025-01-14T00:00:00Z"
-  version: "2.1.0"
-
-# User Profile Configuration
-# PRD: AIOS v2.0 "Projeto Bob" - Seção 2
-# Controls which interface mode is active for the user
-# Options:
-#   - bob: Simplified mode - only Bob visible, orchestrates internally
-#   - advanced: Full access to all agents and commands (default)
-# Set during: Environment Bootstrap (installation)
-# Mutable: Yes (user can change anytime)
+  installedAt: '2025-01-14T00:00:00Z'
+  version: 2.1.0
 user_profile: advanced
-
-# ============================================
-# SECTION 2: Documentation Paths
-# ============================================
 qa:
   qaLocation: docs/qa
-
 prd:
   prdFile: docs/prd.md
   prdVersion: v4
   prdSharded: true
   prdShardedLocation: docs/prd
-  epicFilePattern: "epic-{n}*.md"
-
+  epicFilePattern: epic-{n}*.md
 architecture:
   architectureFile: docs/architecture.md
   architectureVersion: v4
   architectureSharded: true
   architectureShardedLocation: docs/architecture
-
 customTechnicalDocuments: null
-
-# Official framework documentation location
-# English docs in root, translations in /pt and /es folders
 devLoadAlwaysFiles:
   - docs/framework/coding-standards.md
   - docs/framework/tech-stack.md
   - docs/framework/source-tree.md
-
-# Fallback patterns for translations
 devLoadAlwaysFilesFallback:
-  # Portuguese docs
   - docs/pt/framework/coding-standards.md
   - docs/pt/framework/tech-stack.md
   - docs/pt/framework/source-tree.md
-  # Spanish docs
   - docs/es/framework/coding-standards.md
   - docs/es/framework/tech-stack.md
   - docs/es/framework/source-tree.md
-
 devDebugLog: .ai/debug-log.md
 devStoryLocation: docs/stories
 slashPrefix: AIOS
-
-# ============================================
-# SECTION 3: Resource Locations
-# ============================================
 toolsLocation: .aios-core/tools
-
-# Scripts are organized into modules by domain (Story 6.16)
-# - core: Core framework modules (elicitation, session)
-# - development: Development scripts (greeting, workflow, exit hooks)
-# - infrastructure: Infrastructure scripts (git config, project status, validators)
-# - legacy: Migration utilities only (deprecated scripts have been removed)
 scriptsLocation:
   core: .aios-core/core
   development: .aios-core/development/scripts
   infrastructure: .aios-core/infrastructure/scripts
   legacy: .aios-core/scripts
-
 dataLocation: .aios-core/data
 elicitationLocation: .aios-core/elicitation
-# Squads replaced Squads in OSR-8 - see docs/guides/squads-guide.md
 squadsTemplateLocation: templates/squad
 mindsLocation: outputs/minds
-
-# ============================================
-# SECTION 4: IDE Configuration
-# ============================================
 ide:
   selected:
     - vscode
@@ -104,93 +54,70 @@ ide:
     zed: false
     claude-desktop: false
     claude-code: true
-
-# ============================================
-# SECTION 5: MCP Configuration
-# ============================================
 mcp:
   enabled: true
   configLocation: .claude/mcp.json
-
-  # Docker MCP Toolkit Configuration (Story 5.11)
-  # Updated: 2025-12-08 - Changed from stdio to HTTP transport to fix timeout
   docker_mcp:
     enabled: true
-
-    # Gateway Configuration - HTTP Transport (fixes 30s timeout issue)
-    # IMPORTANT: Use HTTP, NOT stdio - gateway must be pre-started as service
     gateway:
-      transport: http  # HTTP/SSE transport for persistent service
-      url: "http://localhost:8080/mcp"
+      transport: http
+      url: http://localhost:8080/mcp
       port: 8080
       watch: true
-      service_file: ".docker/mcp/gateway-service.yml"
-
-    # AIOS Default Presets
-    # minimal: No API keys required (default for new installations)
-    # full: Requires EXA_API_KEY for web search
+      service_file: .docker/mcp/gateway-service.yml
     presets:
       minimal:
-        servers: [context7, desktop-commander, playwright]
-        description: "Core MCPs - no API keys required"
+        servers:
+          - context7
+          - desktop-commander
+          - playwright
+        description: Core MCPs - no API keys required
         api_keys_required: false
-        estimated_tokens: "10-15k"
-
+        estimated_tokens: 10-15k
       full:
-        servers: [context7, desktop-commander, playwright, exa]
-        description: "All MCPs - requires EXA_API_KEY for exa"
+        servers:
+          - context7
+          - desktop-commander
+          - playwright
+          - exa
+        description: All MCPs - requires EXA_API_KEY for exa
         api_keys_required: true
-        estimated_tokens: "20-25k"
-
-    defaultPreset: minimal  # No API keys needed for quick start
-
-    # Default MCPs for AIOS Installation
+        estimated_tokens: 20-25k
+    defaultPreset: minimal
     defaultServers:
       - name: context7
-        description: "Up-to-date library documentation for LLMs"
+        description: Up-to-date library documentation for LLMs
         config: {}
         required: true
         api_key_required: false
-
       - name: desktop-commander
-        description: "File management, terminal commands, and system operations"
+        description: File management, terminal commands, and system operations
         config:
           paths:
-            - "${USER_HOME}"  # Resolves to user's home directory
+            - ${USER_HOME}
         required: true
         api_key_required: false
-
       - name: playwright
-        description: "Browser automation for testing and web interaction"
+        description: Browser automation for testing and web interaction
         config: {}
         required: true
         api_key_required: false
-
       - name: exa
-        description: "AI-powered web search and content extraction"
+        description: AI-powered web search and content extraction
         config:
           apiKeys:
-            EXA_API_KEY: "${EXA_API_KEY}"
-        required: false  # Only in 'full' preset
+            EXA_API_KEY: ${EXA_API_KEY}
+        required: false
         api_key_required: true
-
-    # Commands reference
     commands:
-      # Gateway management
-      start_gateway: "docker compose -f .docker/mcp/gateway-service.yml up -d"
-      stop_gateway: "docker compose -f .docker/mcp/gateway-service.yml down"
-      gateway_health: "curl http://localhost:8080/health"
-
-      # Server management
-      list_servers: "docker mcp server ls"
-      enable_server: "docker mcp server enable {name}"
-      disable_server: "docker mcp server disable {name}"
-
-      # Configuration
-      read_config: "docker mcp config read"
-      write_config: "docker mcp config write"
-
-    # Troubleshooting reference
+      start_gateway: docker compose -f .docker/mcp/gateway-service.yml up -d
+      stop_gateway: docker compose -f .docker/mcp/gateway-service.yml down
+      gateway_health: curl http://localhost:8080/health
+      list_servers: docker mcp server ls
+      enable_server: docker mcp server enable {name}
+      disable_server: docker mcp server disable {name}
+      read_config: docker mcp config read
+      write_config: docker mcp config write
     troubleshooting:
       timeout_issue: |
         If Claude Code shows "Failed to connect to docker-gateway":
@@ -201,31 +128,15 @@ mcp:
         1. Check Docker Desktop is running
         2. Check port 8080 is available: netstat -an | grep 8080
         3. Try alternate port in gateway-service.yml
-
-  # Legacy 1MCP Configuration (DEPRECATED - Story 5.11)
-  # Rollback: See docs/architecture/mcp-optimization-1mcp.md#rollback
-  # onemp:
-  #   enabled: false
-  #   port: 3050
-  #   presets: [aios-dev, aios-research, aios-pm, aios-full]
-
-# ============================================
-# SECTION 6: Performance & Caching
-# ============================================
 lazyLoading:
   enabled: true
   heavySections:
     - pvMindContext
     - squads
     - registry
-
 git:
   showConfigWarning: true
   cacheTimeSeconds: 300
-
-# ============================================
-# SECTION 7: Logging & Status
-# ============================================
 decisionLogging:
   enabled: true
   async: true
@@ -234,7 +145,6 @@ decisionLogging:
   format: adr
   performance:
     maxOverhead: 50
-
 projectStatus:
   enabled: true
   autoLoadOnAgentActivation: true
@@ -249,44 +159,24 @@ projectStatus:
   statusFile: .aios/project-status.yaml
   maxModifiedFiles: 5
   maxRecentCommits: 2
-
 agentIdentity:
   greeting:
-    preference: auto  # Valid values: auto | minimal | named | archetypal
+    preference: auto
     contextDetection: true
     sessionDetection: hybrid
     workflowDetection: hardcoded
     performance:
       gitCheckCache: true
       gitCheckTTL: 300
-
-# ============================================
-# SECTION 8: GitHub Integration
-# ============================================
 github:
   enabled: true
-  cli_required: false  # gh CLI enhances but not required
+  cli_required: false
   features:
     pr_creation: true
     issue_management: true
-
-  # Pull Request Configuration
-  # Controls how @devops *create-pr generates PR titles and descriptions
   pr:
-    # Title format options:
-    # - "conventional": Uses Conventional Commits format for semantic-release
-    #   Example: "feat(auth): implement OAuth login [Story 6.17]"
-    # - "story-first": Story ID first (legacy/simple projects)
-    #   Example: "[Story 6.17] Implement OAuth Login"
-    # - "branch-based": Converts branch name to title
-    #   Example: "Feature User Auth"
-    title_format: conventional  # Options: conventional | story-first | branch-based
-
-    # Include story ID in PR title when available
+    title_format: conventional
     include_story_id: true
-
-    # Conventional commits mapping (only used when title_format: conventional)
-    # Maps branch prefixes to commit types
     conventional_commits:
       enabled: true
       branch_type_map:
@@ -304,76 +194,39 @@ github:
         style/: style
         build/: build
       default_type: feat
-
-    # Base branch for PRs (auto-detected if not set)
-    # base_branch: main
-
-    # Auto-assign reviewers based on story type
     auto_assign_reviewers: false
-
-    # Draft PRs by default
     draft_by_default: false
-
-  # Semantic Release Integration (Story 6.17)
-  # When enabled, PR titles follow Conventional Commits for automatic releases
   semantic_release:
-    enabled: true  # Set to false if project doesn't use semantic-release
-    # Release types triggered by commit prefixes:
-    # - feat: → Minor release (2.3.0 → 2.4.0)
-    # - fix: → Patch release (2.3.0 → 2.3.1)
-    # - feat!: or BREAKING CHANGE: → Major release (2.3.0 → 3.0.0)
-    # - docs:, chore:, test:, etc. → No release
-
-# ============================================
-# SECTION 9: CodeRabbit Integration (Story 6.3.3)
-# MASTER TOGGLE: When enabled=false, ALL CodeRabbit behavior is disabled
-# ============================================
+    enabled: true
 coderabbit_integration:
-  enabled: true  # CodeRabbit CLI installed on this machine
+  enabled: true
   installation_mode: wsl
   wsl_config:
     distribution: Ubuntu
     installation_path: ~/.local/bin/coderabbit
     working_directory: ${PROJECT_ROOT}
-
-  # Self-healing configuration
   self_healing:
     enabled: true
     type: full
     max_iterations: 3
     timeout_minutes: 30
-
-  # Severity handling by agent type
   severity_handling:
-    CRITICAL: auto_fix        # Block and auto-fix (must resolve)
-    HIGH: auto_fix            # Auto-fix (recommend fix)
-    MEDIUM: document_as_debt  # Create tech debt issue
-    LOW: ignore               # Note in review, no action
-
-  # Graceful degradation for machines without CodeRabbit
+    CRITICAL: auto_fix
+    HIGH: auto_fix
+    MEDIUM: document_as_debt
+    LOW: ignore
   graceful_degradation:
     skip_if_not_installed: true
-    fallback_message: "CodeRabbit CLI not found. Skipping automated review. Install via: pip install coderabbit-cli"
-
-  # CLI commands (WSL wrapper for Windows)
+    fallback_message: 'CodeRabbit CLI not found. Skipping automated review. Install via: pip install coderabbit-cli'
   commands:
     qa_pre_review_uncommitted: |
       wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
     qa_story_review_committed: |
       wsl bash -c 'cd ${PROJECT_ROOT} && ~/.local/bin/coderabbit --prompt-only -t committed --base main'
-
   report_location: docs/qa/coderabbit-reports/
-
-# ============================================
-# SECTION 10: Squads System (replaced Expansion Packs in OSR-8)
-# See docs/guides/squads-guide.md for full documentation
-# ============================================
 squads:
   templateLocation: templates/squad
-  # Squads are created from template, not pre-installed
-  # Use: cp -r templates/squad/ squads/my-squad-name/
   autoLoad: false
-
 pvMindContext:
   enabled: true
   location: outputs/minds/pedro_valerio
@@ -381,23 +234,16 @@ pvMindContext:
     persona_voice: true
     technical_depth: advanced
     communication_style: structured
-
 storyBacklog:
   enabled: true
   location: docs/stories/backlog
   prioritization: value_risk
-
-# ============================================
-# SECTION 11: Utility Scripts Registry (Stories 3.4 + 3.5)
-# Utilities are categorized by integration pattern
-# ============================================
 utils:
-  # Agent Helper utilities (28) - Used directly by agents
   helpers:
     - batch-creator
     - capability-analyzer
     - change-propagation-predictor
-    - clickup-helpers  # Located at common/utils/clickup-helpers.js
+    - clickup-helpers
     - code-quality-improver
     - compatibility-checker
     - component-metadata
@@ -423,8 +269,6 @@ utils:
     - validate-filenames
     - version-tracker
     - visual-impact-generator
-
-  # Task Execution utilities (18) - Called during task execution
   executors:
     - approval-workflow
     - branch-manager
@@ -443,13 +287,11 @@ utils:
     - safe-removal-handler
     - test-generator
     - test-updater
-
-  # Framework utilities (11) - Framework-level components
   framework:
     - elicitation-engine
     - elicitation-session-manager
     - improvement-engine
-    - improvement-validator  # Mapped from util-aios-validator
+    - improvement-validator
     - metrics-tracker
     - pattern-learner
     - template-engine
@@ -457,16 +299,9 @@ utils:
     - transaction-manager
     - usage-analytics
     - usage-tracker
-
-# ============================================
-# SECTION 12: IDE Sync System (Story 6.19)
-# Automatically syncs agents to IDE command files
-# ============================================
 ideSync:
   enabled: true
   source: .aios-core/development/agents
-
-  # Target IDE configurations
   targets:
     claude-code:
       enabled: true
@@ -477,66 +312,32 @@ ideSync:
       path: .cursor/rules/agents
       format: condensed-rules
     windsurf:
-      enabled: false  # Disabled v3.10.0 - consolidating to core IDEs
+      enabled: false
       path: .windsurf/rules/agents
       format: xml-tagged-markdown
     antigravity:
       enabled: true
       path: .antigravity/rules/agents
       format: cursor-style
-
-  # Redirects disabled - deprecated agents removed from repository
-  # Users should use the current agent names directly
   redirects: {}
-
-  # Validation settings
   validation:
     strictMode: true
     failOnDrift: true
     failOnOrphaned: false
-
-# ============================================
-# SECTION 13: Auto-Claude Configuration (ADE)
-# Autonomous Development Engine settings
-# ============================================
 autoClaude:
   enabled: true
-  version: "3.0"
-  migratedAt: "2026-01-29T02:25:00Z"
-
-  # Worktree Management (Story 1.4)
-  # Controls automatic worktree creation/cleanup for stories
+  version: '3.0'
+  migratedAt: '2026-01-29T02:25:00Z'
   worktree:
     enabled: true
-    # When to auto-create worktree:
-    # - on_story_start: Auto-create when story moves to "In Progress"
-    # - manual: Only create via explicit command
-    # - never: Disable auto-creation
     autoCreate: on_story_start
-
-    # When to auto-cleanup worktree:
-    # - on_story_done: Auto-cleanup when story moves to "Done" (if clean)
-    # - manual: Only cleanup via explicit command
-    # - never: Keep worktrees indefinitely
     autoCleanup: manual
-
-    # Maximum concurrent worktrees (prevents disk bloat)
     maxWorktrees: 10
-
-    # Days after which a worktree is considered stale
     staleDays: 30
-
-    # Branch prefix for worktree branches
-    branchPrefix: "auto-claude/"
-
-  # Spec Pipeline (Story 3.x - Future)
+    branchPrefix: auto-claude/
   specPipeline:
     enabled: false
-
-  # Execution Engine (Story 4.x - Future)
   execution:
     enabled: false
-
-  # QA Integration (Story 5.x - Future)
   qa:
     enabled: false
