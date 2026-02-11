@@ -53,8 +53,6 @@ module.exports = {
     'tests/integration/install-transaction.test.js',
     // License tests require network/crypto resources unavailable in CI (pre-existing)
     'tests/license/',
-    // Squad adapter tests - module resolution issues (pre-existing)
-    'squads/mmos-squad/tests/',
     // Workflow intelligence tests - assertion count mismatches (pre-existing)
     '.aios-core/workflow-intelligence/__tests__/',
   ],

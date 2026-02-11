@@ -62,8 +62,6 @@ module.exports = [
       'pro/**',
       // Glue scripts
       'scripts/glue/**',
-      // Squad adapters with legacy issues
-      'squads/mmos-squad/**',
     ],
   },
 
