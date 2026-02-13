@@ -23,8 +23,40 @@ const path = require('path');
 const fs = require('fs');
 const readline = require('readline');
 
-// Resolve license modules (relative from .aios-core/cli/commands/pro/)
-const licensePath = path.resolve(__dirname, '..', '..', '..', '..', 'pro', 'license');
+// BUG-6 fix (INS-1): Dynamic licensePath resolution
+// In framework-dev: __dirname = aios-core/.aios-core/cli/commands/pro → ../../../../pro/license
+// In project-dev: pro is installed via npm as @aios-fullstack/pro
+function resolveLicensePath() {
+  // 1. Try relative path (framework-dev mode)
+  const relativePath = path.resolve(__dirname, '..', '..', '..', '..', 'pro', 'license');
+  if (fs.existsSync(relativePath)) {
+    return relativePath;
+  }
+
+  // 2. Try node_modules/@aios-fullstack/pro/license (project-dev mode)
+  try {
+    const proPkg = require.resolve('@aios-fullstack/pro/package.json');
+    const proDir = path.dirname(proPkg);
+    const npmPath = path.join(proDir, 'license');
+    if (fs.existsSync(npmPath)) {
+      return npmPath;
+    }
+  } catch {
+    // @aios-fullstack/pro not installed via npm
+  }
+
+  // 3. Try project root node_modules (fallback)
+  const projectRoot = process.cwd();
+  const cwdPath = path.join(projectRoot, 'node_modules', '@aios-fullstack', 'pro', 'license');
+  if (fs.existsSync(cwdPath)) {
+    return cwdPath;
+  }
+
+  // Return relative path as default (will fail gracefully in loadLicenseModules)
+  return relativePath;
+}
+
+const licensePath = resolveLicensePath();
 
 /**
  * Lazy-load license modules (avoids failing if pro module not installed)

@@ -49,7 +49,15 @@ const { PermissionMode } = require('../../core/permissions');
 const GreetingPreferenceManager = require('./greeting-preference-manager');
 const ContextDetector = require('../../core/session/context-detector');
 const WorkflowNavigator = require('./workflow-navigator');
-const { isProAvailable, loadProModule } = require('../../../bin/utils/pro-detector');
+// BUG-1 fix (INS-1): Graceful degradation when pro-detector is not available
+// In installed projects, bin/utils/pro-detector.js does not exist
+let isProAvailable, loadProModule;
+try {
+  ({ isProAvailable, loadProModule } = require('../../../bin/utils/pro-detector'));
+} catch {
+  isProAvailable = () => false;
+  loadProModule = () => null;
+}
 
 /**
  * ACT-11: Loader importance tiers with per-tier timeout budgets.

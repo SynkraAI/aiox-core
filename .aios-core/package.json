@@ -39,6 +39,7 @@
     "inquirer": "^8.2.6",
     "validator": "^13.15.15",
     "diff": "^5.2.0",
+    "execa": "^5.1.1",
     "highlight.js": "^11.9.0"
   },
   "peerDependencies": {

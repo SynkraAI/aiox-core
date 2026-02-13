@@ -506,7 +506,7 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
           }
         }
 
-        // For Claude Code, also copy .claude/rules folder
+        // For Claude Code, also copy .claude/rules folder, hooks, and settings
         if (ideKey === 'claude-code') {
           spinner.start('Copying Claude Code rules...');
           const rulesFiles = await copyClaudeRulesFolder(projectRoot);
@@ -516,6 +516,27 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
             spinner.succeed(`Copied ${rulesFiles.length} rule file(s) to .claude/rules`);
           } else {
             spinner.info('No rule files to copy');
+          }
+
+          // BUG-3 fix (INS-1): Copy .claude/hooks/ folder (SYNAPSE engine + precompact)
+          spinner.start('Copying Claude Code hooks...');
+          const hookFiles = await copyClaudeHooksFolder(projectRoot);
+          createdFiles.push(...hookFiles);
+          if (hookFiles.length > 0) {
+            createdFolders.push(path.join(projectRoot, '.claude', 'hooks'));
+            spinner.succeed(`Copied ${hookFiles.length} hook file(s) to .claude/hooks`);
+          } else {
+            spinner.info('No hook files to copy (SYNAPSE hooks not found in source)');
+          }
+
+          // BUG-4 fix (INS-1): Create .claude/settings.local.json with hook registration
+          spinner.start('Configuring Claude Code settings...');
+          const settingsFile = await createClaudeSettingsLocal(projectRoot);
+          if (settingsFile) {
+            createdFiles.push(settingsFile);
+            spinner.succeed('Created .claude/settings.local.json with SYNAPSE hook');
+          } else {
+            spinner.info('Skipped settings.local.json (no hooks to register)');
           }
         }
 
@@ -581,6 +602,128 @@ function showSuccessSummary(result) {
   console.log('  4. Use * commands to interact with agents\n');
 }
 
+/**
+ * BUG-3 fix (INS-1): Copy .claude/hooks/ folder during installation
+ * Only copies JS hooks that work without external dependencies (Python, etc.)
+ * @param {string} projectRoot - Project root directory
+ * @returns {Promise<string[]>} List of copied files
+ */
+async function copyClaudeHooksFolder(projectRoot) {
+  const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.claude', 'hooks');
+  const targetDir = path.join(projectRoot, '.claude', 'hooks');
+  const copiedFiles = [];
+
+  if (!await fs.pathExists(sourceDir)) {
+    return copiedFiles;
+  }
+
+  // QA-C2 fix: Guard source === dest (framework-dev mode)
+  if (path.resolve(sourceDir) === path.resolve(targetDir)) {
+    return copiedFiles;
+  }
+
+  await fs.ensureDir(targetDir);
+
+  // Only copy JS hooks that work standalone (no Python/shell deps)
+  const HOOKS_TO_COPY = [
+    'synapse-engine.js',
+    'precompact-session-digest.js',
+    'README.md',
+  ];
+
+  const files = await fs.readdir(sourceDir);
+
+  for (const file of files) {
+    if (!HOOKS_TO_COPY.includes(file)) {
+      continue;
+    }
+
+    const sourcePath = path.join(sourceDir, file);
+    const targetPath = path.join(targetDir, file);
+
+    const stat = await fs.stat(sourcePath);
+    if (stat.isFile()) {
+      await fs.copy(sourcePath, targetPath);
+      copiedFiles.push(targetPath);
+    }
+  }
+
+  return copiedFiles;
+}
+
+/**
+ * BUG-4 fix (INS-1): Create .claude/settings.local.json with hook registration
+ * Creates or merges hook entries into settings.local.json
+ * @param {string} projectRoot - Project root directory
+ * @returns {Promise<string|null>} Path to created/updated file, or null if skipped
+ */
+async function createClaudeSettingsLocal(projectRoot) {
+  const settingsPath = path.join(projectRoot, '.claude', 'settings.local.json');
+  const hookFile = path.join(projectRoot, '.claude', 'hooks', 'synapse-engine.js');
+
+  // Only create if the hook file was actually copied
+  if (!await fs.pathExists(hookFile)) {
+    return null;
+  }
+
+  // QA-C1 fix: Use correct Claude Code nested hook format
+  // Format: { hooks: [{ type, command }] } not flat { type, command }
+  const hookWrapper = {
+    hooks: [
+      {
+        type: 'command',
+        command: 'node ".claude/hooks/synapse-engine.js"',
+      },
+    ],
+  };
+
+  let settings = {};
+
+  // Merge with existing settings if present
+  if (await fs.pathExists(settingsPath)) {
+    try {
+      const existing = await fs.readFile(settingsPath, 'utf8');
+      settings = JSON.parse(existing);
+    } catch (parseError) {
+      // Corrupted file — log and overwrite with fresh settings
+      console.error(`   ⚠️  Could not parse ${settingsPath}: ${parseError.message}`);
+      settings = {};
+    }
+  }
+
+  // Ensure hooks.UserPromptSubmit structure exists
+  if (!settings.hooks) {
+    settings.hooks = {};
+  }
+  if (!Array.isArray(settings.hooks.UserPromptSubmit)) {
+    settings.hooks.UserPromptSubmit = [];
+  }
+
+  // Check if synapse hook is already registered (supports both nested and flat formats)
+  const alreadyRegistered = settings.hooks.UserPromptSubmit.some(entry => {
+    // Nested format: entry.hooks[].command
+    if (Array.isArray(entry.hooks)) {
+      return entry.hooks.some(h => h.command && h.command.includes('synapse-engine.js'));
+    }
+    // Flat format (legacy): entry.command
+    return entry.command && entry.command.includes('synapse-engine.js');
+  });
+
+  if (!alreadyRegistered) {
+    settings.hooks.UserPromptSubmit.push(hookWrapper);
+  }
+
+  try {
+    await fs.ensureDir(path.dirname(settingsPath));
+    await fs.writeFile(settingsPath, JSON.stringify(settings, null, 2), 'utf8');
+  } catch (writeError) {
+    console.error(`   ⚠️  Failed to write ${settingsPath}: ${writeError.message}`);
+    return null;
+  }
+
+  return settingsPath;
+}
+
 module.exports = {
   generateIDEConfigs,
   showSuccessSummary,
@@ -589,4 +732,6 @@ module.exports = {
   backupFile,
   promptFileExists,
   generateTemplateVariables,
+  copyClaudeHooksFolder,
+  createClaudeSettingsLocal,
 };

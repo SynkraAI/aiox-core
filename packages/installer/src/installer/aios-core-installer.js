@@ -321,6 +321,25 @@ async function installAiosCore(options = {}) {
     });
     result.versionInfo = versionInfo;
 
+    // BUG-2 fix (INS-1): Install .aios-core dependencies after copy
+    // The copied .aios-core/package.json has dependencies (js-yaml, execa, etc.)
+    // that must be installed for the activation pipeline to work
+    if (await fs.pathExists(path.join(targetAiosCore, 'package.json'))) {
+      spinner.text = 'Installing .aios-core dependencies...';
+      try {
+        const { exec } = require('child_process');
+        const { promisify } = require('util');
+        const execAsync = promisify(exec);
+        await execAsync('npm install --production --ignore-scripts', {
+          cwd: targetAiosCore,
+          timeout: 60000,
+        });
+      } catch (depError) {
+        // Non-fatal: dependencies may already exist or network unavailable
+        result.errors.push(`Dependencies warning: ${depError.message}`);
+      }
+    }
+
     result.success = true;
     spinner.succeed(`AIOS core installed (${result.installedFiles.length} files)`);
 

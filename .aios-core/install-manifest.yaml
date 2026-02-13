@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 4.0.0
-generated_at: "2026-02-12T13:07:12.745Z"
+generated_at: "2026-02-13T01:03:21.461Z"
 generator: scripts/generate-install-manifest.js
 file_count: 971
 files:
@@ -101,9 +101,9 @@ files:
     type: cli
     size: 12322
   - path: cli/commands/pro/index.js
-    hash: sha256:b12ecd08e1e21c48033def015c5a00315fd26c9e310d7883e1aaf633da68a743
+    hash: sha256:9afa5f4574b5c35f22ddac27fa5fd2b3ba21dce54eb793547a21414081787cc6
     type: cli
-    size: 18712
+    size: 19767
   - path: cli/commands/qa/index.js
     hash: sha256:ff9c3669e31319d5e7be9b42a45f8ef7b9525ed2094e320000bc06cdd0625ca7
     type: cli
@@ -1305,9 +1305,9 @@ files:
     type: script
     size: 18196
   - path: development/scripts/unified-activation-pipeline.js
-    hash: sha256:11c9a7f19044ed38df9e47d26feb1ba5346efd15bd4ec856c871722386575f1b
+    hash: sha256:c3a42ca88075291e67531301a5788d2f6e0e19dee20cde940e7b0c48e9bcade8
     type: script
-    size: 25058
+    size: 25316
   - path: development/scripts/usage-tracker.js
     hash: sha256:b3079713787de7c6ac38a742255861f04e8359ef1b227836040920a64b7e8aac
     type: script
@@ -3077,9 +3077,9 @@ files:
     type: monitor
     size: 856
   - path: package.json
-    hash: sha256:9998a56094f4a308c534d4dd9b29721ef50aabc0c50633763f5c1ac7b7f3da48
+    hash: sha256:8214f27804491484e19771b243abd4069dda9f4a84f46fbdac64862e2bd9fd3a
     type: other
-    size: 2378
+    size: 2401
   - path: product/checklists/accessibility-wcag-checklist.md
     hash: sha256:56126182b25e9b7bdde43f75315e33167eb49b1f9a9cb0e9a37bc068af40aeab
     type: checklist

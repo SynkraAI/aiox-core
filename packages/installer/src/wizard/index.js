@@ -384,40 +384,57 @@ async function runWizard(options = {}) {
             const targetPresetDir = path.join(process.cwd(), '.aios-core', 'data', 'tech-presets');
             await fse.ensureDir(targetPresetDir);
 
-            // Copy the selected preset
-            await fse.copy(
-              presetFile,
-              path.join(targetPresetDir, `${answers.selectedTechPreset}.md`),
-            );
+            // BUG-5 fix (INS-1): Guard against source === dest (e.g., running inside aios-core repo)
+            const targetPresetFile = path.join(targetPresetDir, `${answers.selectedTechPreset}.md`);
+            const sourceResolved = path.resolve(presetFile);
+            const targetResolved = path.resolve(targetPresetFile);
 
-            // Copy the template too
-            const templateFile = path.join(sourcePresetDir, '_template.md');
-            if (fse.existsSync(templateFile)) {
-              await fse.copy(templateFile, path.join(targetPresetDir, '_template.md'));
-            }
+            if (sourceResolved === targetResolved) {
+              console.log('   ℹ️  Tech preset already in place (framework-dev mode)');
+            } else {
+              // Copy the selected preset
+              await fse.copy(presetFile, targetPresetFile);
 
-            // Update technical-preferences.md to mark the selected preset
-            const techPrefsFile = path.join(
-              process.cwd(),
-              '.aios-core',
-              'data',
-              'technical-preferences.md',
-            );
-            const techPrefsSource = path.join(sourcePresetDir, '..', 'technical-preferences.md');
+              // Copy the template too
+              const templateFile = path.join(sourcePresetDir, '_template.md');
+              if (fse.existsSync(templateFile)) {
+                const targetTemplate = path.join(targetPresetDir, '_template.md');
+                if (path.resolve(templateFile) !== path.resolve(targetTemplate)) {
+                  await fse.copy(templateFile, targetTemplate);
+                }
+              }
 
-            if (fse.existsSync(techPrefsSource)) {
-              let techPrefsContent = await fse.readFile(techPrefsSource, 'utf8');
-
-              // Add active preset marker
-              const activePresetSection = `\n## Active Preset\n\n**Selected:** \`${answers.selectedTechPreset}\`\n\nThis preset was selected during installation. The @architect and @dev agents will use these patterns by default.\n`;
-
-              // Insert after the first heading
-              techPrefsContent = techPrefsContent.replace(
-                '# User-Defined Preferred Patterns and Preferences',
-                '# User-Defined Preferred Patterns and Preferences' + activePresetSection,
+              // Update technical-preferences.md to mark the selected preset
+              const techPrefsFile = path.join(
+                process.cwd(),
+                '.aios-core',
+                'data',
+                'technical-preferences.md',
               );
+              const techPrefsSource = path.join(sourcePresetDir, '..', 'technical-preferences.md');
 
-              await fse.writeFile(techPrefsFile, techPrefsContent, 'utf8');
+              if (fse.existsSync(techPrefsSource)) {
+                const techPrefsSourceResolved = path.resolve(techPrefsSource);
+                const techPrefsTargetResolved = path.resolve(techPrefsFile);
+
+                if (techPrefsSourceResolved !== techPrefsTargetResolved) {
+                  // Prefer existing target file to preserve user customizations
+                  const baseFile = fse.existsSync(techPrefsFile) ? techPrefsFile : techPrefsSource;
+                  let techPrefsContent = await fse.readFile(baseFile, 'utf8');
+
+                  // Add active preset marker only if not already present
+                  const activePresetSection = `\n## Active Preset\n\n**Selected:** \`${answers.selectedTechPreset}\`\n\nThis preset was selected during installation. The @architect and @dev agents will use these patterns by default.\n`;
+
+                  if (!techPrefsContent.includes('## Active Preset')) {
+                    // Insert after the first heading
+                    techPrefsContent = techPrefsContent.replace(
+                      '# User-Defined Preferred Patterns and Preferences',
+                      '# User-Defined Preferred Patterns and Preferences' + activePresetSection,
+                    );
+                    await fse.writeFile(techPrefsFile, techPrefsContent, 'utf8');
+                  }
+                }
+              }
             }
 
             console.log(`   ✅ Tech Preset: ${answers.selectedTechPreset}`);
