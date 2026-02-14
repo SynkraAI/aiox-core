@@ -55,6 +55,22 @@ async function main() {
 
   const sessionsDir = path.join(synapsePath, 'sessions');
   const session = loadSession(sessionId, sessionsDir) || { prompt_count: 0 };
+
+  // SYN-13: Read _active-agent.json bridge file as fallback for missing active_agent
+  if (!session.active_agent || !session.active_agent.id) {
+    const bridgePath = path.join(sessionsDir, '_active-agent.json');
+    try {
+      if (fs.existsSync(bridgePath)) {
+        const bridgeData = JSON.parse(fs.readFileSync(bridgePath, 'utf8'));
+        if (bridgeData && bridgeData.id) {
+          session.active_agent = bridgeData;
+        }
+      }
+    } catch (_err) {
+      // Graceful: bridge read failure is non-blocking
+    }
+  }
+
   const engine = new SynapseEngine(synapsePath);
   const result = await engine.process(prompt, session);
 

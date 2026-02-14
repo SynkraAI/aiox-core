@@ -13,12 +13,14 @@
  *   status              Show license status
  *   features            List available pro features
  *   validate            Force online license revalidation
+ *   recover             Recover lost license key via email
  *   help                Show help
  */
 
 const { execSync, spawnSync } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const { recoverLicense } = require('../src/recover');
 
 const PRO_PACKAGE = '@aios-fullstack/pro';
 const VERSION = require('../package.json').version;
@@ -92,12 +94,14 @@ Commands:
   status               Show license status
   features             List available pro features
   validate             Force online license revalidation
+  recover              Recover lost license key via email
   help                 Show this help message
 
 Examples:
   npx aios-pro install
   npx aios-pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
   npx aios-pro status
+  npx aios-pro recover
 
 Documentation: https://synkra.ai/pro/docs
 `);
@@ -136,6 +140,13 @@ switch (command) {
   case 'install':
   case 'setup':
     installPro();
+    break;
+
+  case 'recover':
+    recoverLicense().catch((err) => {
+      console.error(`\n  Recovery failed: ${err.message}\n`);
+      process.exit(1);
+    });
     break;
 
   case 'activate':

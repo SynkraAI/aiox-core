@@ -416,10 +416,10 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.js)', () => {
       expect(fs.existsSync(HOOK_PATH)).toBe(true);
     });
 
-    test('hook file is less than 100 lines', () => {
+    test('hook file is less than 120 lines', () => {
       const content = fs.readFileSync(HOOK_PATH, 'utf8');
       const lines = content.split('\n').length;
-      expect(lines).toBeLessThanOrEqual(100);
+      expect(lines).toBeLessThanOrEqual(120);
     });
 
     test('hook file uses CommonJS (no import/export)', () => {

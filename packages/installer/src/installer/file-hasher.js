@@ -88,7 +88,7 @@ function hashFile(filePath) {
 }
 
 /**
- * Async version of hashFile for parallel processing
+ * Async version of hashFile for parallel processing.
  * INS-2 Performance: Enables parallel hashing with Promise.all
  *
  * @param {string} filePath - Absolute path to the file
@@ -120,6 +120,25 @@ async function hashFileAsync(filePath) {
   }
 
   return crypto.createHash('sha256').update(content).digest('hex');
+}
+
+/**
+ * Async version of hashesMatch using hashFileAsync.
+ *
+ * @param {string} filePath1 - First file path
+ * @param {string} filePath2 - Second file path
+ * @returns {Promise<boolean>} - True if file hashes match
+ */
+async function hashFilesMatchAsync(filePath1, filePath2) {
+  try {
+    const [hash1, hash2] = await Promise.all([
+      hashFileAsync(filePath1),
+      hashFileAsync(filePath2),
+    ]);
+    return hashesMatch(hash1, hash2);
+  } catch {
+    return false;
+  }
 }
 
 /**
@@ -206,6 +225,7 @@ module.exports = {
   hashFilesParallel,
   hashString,
   hashesMatch,
+  hashFilesMatchAsync,
   getFileMetadata,
   isBinaryFile,
   normalizeLineEndings,

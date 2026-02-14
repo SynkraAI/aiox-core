@@ -6,8 +6,12 @@
     "aios-pro": "bin/aios-pro.js"
   },
   "files": [
-    "bin/"
+    "bin/",
+    "src/"
   ],
+  "dependencies": {
+    "open": "^10.0.0"
+  },
   "keywords": [
     "aios",
     "pro",

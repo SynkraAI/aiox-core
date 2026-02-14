@@ -95,3 +95,15 @@ COMMANDS_RULE_SYNAPSE_DEBUG_0=Show detailed debug info: manifest parse results, 
 COMMANDS_RULE_SYNAPSE_DOMAINS_0=List all registered domains with their state and trigger conditions
 COMMANDS_RULE_SYNAPSE_SESSION_0=Show current session context: active agent, workflow, bracket level
 COMMANDS_RULE_SYNAPSE_RELOAD_0=Force reload of manifest and all domain files from disk
+
+# ============================================================
+# [*synapse-diagnose] COMMAND:
+#   0. Run SYNAPSE diagnostic report comparing expected vs actual pipeline
+#   1. Execute: node -e "const {runDiagnostics}=require('./.aios-core/core/synapse/diagnostics/synapse-diagnostics');console.log(runDiagnostics(process.cwd()))"
+#   2. Display the full markdown report to the user
+#   3. Highlight any FAIL or WARN items that need attention
+# ============================================================
+COMMANDS_RULE_SYNAPSE_DIAGNOSE_0=Run SYNAPSE diagnostic report comparing expected vs actual pipeline state
+COMMANDS_RULE_SYNAPSE_DIAGNOSE_1=Execute the diagnostics module and display the full markdown report
+COMMANDS_RULE_SYNAPSE_DIAGNOSE_2=Highlight FAIL and WARN items with recommended fixes
+COMMANDS_RULE_SYNAPSE_DIAGNOSE_3=Check hook registration, session state, manifest integrity, pipeline layers, and UAP bridge

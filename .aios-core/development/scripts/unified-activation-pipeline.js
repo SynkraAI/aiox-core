@@ -38,6 +38,7 @@
 
 const path = require('path');
 const fs = require('fs').promises;
+const fsSync = require('fs');
 const yaml = require('js-yaml');
 
 const GreetingBuilder = require('./greeting-builder');
@@ -328,6 +329,9 @@ class UnifiedActivationPipeline {
 
     // ACT-11: Determine quality level based on what loaded successfully
     const quality = this._determineQuality(metrics);
+
+    // SYN-13: Write active agent to SYNAPSE session (fire-and-forget, 20ms budget)
+    this._writeSynapseSession(agentId, quality, metrics);
 
     return {
       greeting,
@@ -663,6 +667,52 @@ class UnifiedActivationPipeline {
       workflowActive: null,
       sessionStory: null,
     };
+  }
+
+  /**
+   * SYN-13: Write active agent to SYNAPSE session bridge file.
+   *
+   * Writes `.synapse/sessions/_active-agent.json` as a singleton file.
+   * Uses fs.writeFileSync directly (not updateSession) to avoid prompt_count
+   * side effects. Fire-and-forget with try/catch — never blocks activation.
+   *
+   * @private
+   * @param {string} agentId - Agent ID being activated
+   * @param {string} quality - Activation quality ('full'|'partial'|'fallback')
+   * @param {Object} metrics - Metrics object for profiling
+   */
+  _writeSynapseSession(agentId, quality, metrics) {
+    const start = Date.now();
+    try {
+      const sessionsDir = path.join(this.projectRoot, '.synapse', 'sessions');
+      if (!fsSync.existsSync(path.join(this.projectRoot, '.synapse'))) {
+        // .synapse/ does not exist — project may not have SYNAPSE installed
+        const duration = Date.now() - start;
+        metrics.loaders.synapseSession = { duration, status: 'skipped', start, end: start + duration };
+        return;
+      }
+
+      if (!fsSync.existsSync(sessionsDir)) {
+        fsSync.mkdirSync(sessionsDir, { recursive: true });
+      }
+
+      const bridgeData = {
+        id: agentId,
+        activated_at: new Date().toISOString(),
+        activation_quality: quality,
+        source: 'uap',
+      };
+
+      const bridgePath = path.join(sessionsDir, '_active-agent.json');
+      fsSync.writeFileSync(bridgePath, JSON.stringify(bridgeData, null, 2), 'utf8');
+
+      const duration = Date.now() - start;
+      metrics.loaders.synapseSession = { duration, status: 'ok', start, end: start + duration };
+    } catch (error) {
+      const duration = Date.now() - start;
+      metrics.loaders.synapseSession = { duration, status: 'error', start, end: start + duration, error: error.message };
+      console.warn(`[UnifiedActivationPipeline] SYNAPSE session write failed: ${error.message}`);
+    }
   }
 
   /**

@@ -1,0 +1,382 @@
+[
+  {
+    "id": "1763298742141",
+    "type": "T",
+    "title": "Add unit tests for decision-log-generator",
+    "description": "Write comprehensive unit tests for all functions in decision-log-generator.js",
+    "priority": "High",
+    "relatedStory": "6.1.2.6",
+    "createdBy": "@dev",
+    "createdAt": "2025-11-16T13:12:22.141Z",
+    "tags": [
+      "testing",
+      "decision-logging"
+    ],
+    "estimatedEffort": "2 hours",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000001",
+    "type": "T",
+    "title": "Fix @qa agent 9 broken task references",
+    "description": "The @qa agent definition (agents/qa.md) references 9 task files without the qa- prefix. For example, generate-tests.md should be qa-generate-tests.md. All 9 broken refs: generate-tests, manage-story-backlog (should be qa-backlog-add-followup), nfr-assess, review-proposal, review-story, risk-profile, run-tests, test-design, trace-requirements. If dependency resolution does NOT apply automatic prefix fallback, @qa commands fail to find task files.",
+    "priority": "Critical",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:00:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "broken-reference",
+      "qa-agent",
+      "task-resolution"
+    ],
+    "estimatedEffort": "1 hour",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000002",
+    "type": "T",
+    "title": "Standardize 3 duplicate task file pairs",
+    "description": "Three task pairs exist with generic and agent-prefixed versions causing mismatch: (1) apply-qa-fixes.md vs dev-apply-qa-fixes.md - agent def uses generic, YAML uses prefixed. (2) create-next-story.md vs sm-create-next-story.md - keep generic, deprecate sm- prefixed. (3) validate-next-story.md vs dev-validate-next-story.md - verify if both are needed or consolidate. Standardize naming and update all references in agent definitions and workflow YAMLs.",
+    "priority": "High",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:01:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "naming-convention",
+      "duplicate-tasks",
+      "standardization"
+    ],
+    "estimatedEffort": "2 hours",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000003",
+    "type": "T",
+    "title": "Archive 5 deprecated standards documents",
+    "description": "Move 5 deprecated docs from .aios-core/docs/standards/ to .aios-core/docs/standards/archive/: (1) AIOS-LIVRO-DE-OURO.md (v2.0 base, superseded by V2.1-COMPLETE), (2) AIOS-LIVRO-DE-OURO-V2.1.md (v2.1 delta, superseded), (3) AIOS-LIVRO-DE-OURO-V2.1-SUMMARY.md (v2.1 summary, superseded), (4) AIOS-FRAMEWORK-MASTER.md (v2.0 framework, superseded), (5) V3-ARCHITECTURAL-DECISIONS.md (archive candidate per STANDARDS-INDEX). All superseded by AIOS-LIVRO-DE-OURO-V2.1-COMPLETE.md.",
+    "priority": "Medium",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:02:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "cleanup",
+      "deprecated-docs",
+      "standards"
+    ],
+    "estimatedEffort": "30 minutes",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000004",
+    "type": "T",
+    "title": "Consolidate 3 elicitation file duplicates",
+    "description": "Three elicitation step definition files are duplicated between core/elicitation/ and elicitation/: agent-elicitation.js, task-elicitation.js, workflow-elicitation.js. Keep files in core/elicitation/ only, remove elicitation/ copies, and update config references (core-config.yaml elicitationLocation and framework-config.yaml elicitation_dir).",
+    "priority": "Medium",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:03:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "duplication",
+      "elicitation",
+      "cleanup"
+    ],
+    "estimatedEffort": "1 hour",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000005",
+    "type": "T",
+    "title": "Wire or document 7 orphaned SQL templates",
+    "description": "7 SQL templates in product/templates/ have no active consumers: tmpl-rls-roles.sql, tmpl-rls-simple.sql, tmpl-rls-tenant.sql, tmpl-stored-proc.sql, tmpl-trigger.sql, tmpl-view-materialized.sql, tmpl-view.sql. Either wire these to @data-engineer tasks (db-run-sql, db-apply-migration) or document them as manual-use reference templates with a README.",
+    "priority": "Medium",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:04:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "orphan",
+      "sql-templates",
+      "data-engineer"
+    ],
+    "estimatedEffort": "2 hours",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000006",
+    "type": "T",
+    "title": "Archive 5 dead migration scripts",
+    "description": "5 one-time migration scripts have completed their purpose and are effectively dead code: (1) apply-inline-greeting-all-agents.js (Story 6.1.2.5-T1), (2) batch-update-agents-session-context.js (Story 6.1.2.6.2), (3) agent-assignment-resolver.js (Story 6.1.7.1), (4) task-identifier-resolver.js (Story 6.1.7.1), (5) verify-workflow-gaps.js. Move to development/scripts/archive/ or delete.",
+    "priority": "Low",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:05:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "cleanup",
+      "dead-code",
+      "migration-scripts"
+    ],
+    "estimatedEffort": "30 minutes",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000007",
+    "type": "T",
+    "title": "Implement or remove phantom memory modules",
+    "description": "Two core modules are referenced via require() in execution/context-injector.js and execution/subagent-dispatcher.js but do NOT exist on disk: memory/memory-query.js and memory/session-memory.js. Both are guarded with try/catch so they fail silently. Either implement these modules (Epic 9 scope) or remove the dead references to keep the codebase clean.",
+    "priority": "Medium",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:06:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "phantom-dependency",
+      "memory-layer",
+      "core-modules"
+    ],
+    "estimatedEffort": "4 hours",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000008",
+    "type": "E",
+    "title": "Wire permissions/ system to CLI and agent activation",
+    "description": "The core/permissions/ subsystem (3 files: index.js, permission-mode.js, operation-guard.js) is complete and tested but has zero external consumers. The 3-mode permission system (explore/ask/auto) is documented but not wired into CLI guard middleware or agent activation pipeline. Connect it to make the permission system functional.",
+    "priority": "Medium",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:07:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "permissions",
+      "partial-orphan",
+      "integration"
+    ],
+    "estimatedEffort": "4 hours",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000009",
+    "type": "T",
+    "title": "Resolve 3 ghost directories in .aios-core/",
+    "description": "3 directories are referenced in documentation/config but are missing or empty: (1) .aios-core/agent-teams/ -- referenced in install-manifest, source-tree docs, core-architecture, aios-kb.md but does not exist (possibly superseded by squads system). (2) .aios-core/tools/ -- exists but is EMPTY despite core-config.yaml and framework-config.yaml referencing it. (3) .aios-core/processes/ -- does not exist, no references found. Either create with content, remove all references, or document as deprecated.",
+    "priority": "Low",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:08:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "ghost-directory",
+      "cleanup",
+      "documentation"
+    ],
+    "estimatedEffort": "1 hour",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000010",
+    "type": "T",
+    "title": "Add missing test coverage for 10+ core modules",
+    "description": "The following core modules lack dedicated test files: ideation/ideation-engine.js, memory/timeline-manager.js, memory/context-snapshot.js, memory/file-evolution-tracker.js, permissions/index.js (only permission-mode tested), orchestration/condition-evaluator.js, orchestration/skill-dispatcher.js, orchestration/tech-stack-detector.js, utils/output-formatter.js, utils/yaml-validator.js. Each should have at least basic unit tests.",
+    "priority": "Low",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:09:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "testing",
+      "coverage",
+      "core-modules"
+    ],
+    "estimatedEffort": "8 hours",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000011",
+    "type": "E",
+    "title": "Complete config migration from monolithic to L1-L4 hierarchy",
+    "description": "Config system is transitioning from monolithic core-config.yaml to 4-level hierarchy per ADR-PRO-002: L1 framework-config.yaml (read-only), L2 project-config.yaml (team-shared), L3 app-specific (not yet implemented), L4 local-config.yaml (personal). The config-resolver.js and related CLI commands exist but the migration is incomplete. core-config.yaml still functions as primary config. Complete the transition and deprecation path.",
+    "priority": "Low",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:10:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "config-migration",
+      "adr-pro-002",
+      "architecture"
+    ],
+    "estimatedEffort": "8 hours",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000012",
+    "type": "T",
+    "title": "Integrate or archive 5 orphaned infrastructure scripts",
+    "description": "5 infrastructure scripts are referenced only in install-manifest.yaml with no runtime consumers: (1) changelog-generator.js -- integrate into @devops release workflow. (2) dashboard-status-writer.js -- connect to dashboard integration or archive. (3) cicd-discovery.js -- integrate into @devops agent or archive. (4) pr-review-ai.js -- integrate into PR automation or archive. (5) test-discovery.js -- integrate into @qa agent or archive. These appear to be prototypes never fully integrated.",
+    "priority": "Low",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:11:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "orphan",
+      "infrastructure",
+      "cleanup"
+    ],
+    "estimatedEffort": "4 hours",
+    "status": "Open"
+  },
+  {
+    "id": "1738700000013",
+    "type": "T",
+    "title": "Wire 2 orphaned core modules (ideation-engine, timeline-manager)",
+    "description": "Two core modules are fully implemented but have zero external consumers: (1) core/ideation/ideation-engine.js (Story 11.1) -- AI-powered codebase improvement suggestions. No CLI command, no agent reference, no test. (2) core/memory/timeline-manager.js -- unified timeline facade combining evolution tracker + snapshots + build state. Only consumed by internal verify script. Wire to CLI commands or agent workflows to make them functional.",
+    "priority": "Low",
+    "relatedStory": "AIOS-XREF-001",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T18:12:00.000Z",
+    "tags": [
+      "xref-analysis",
+      "orphan",
+      "core-modules",
+      "integration"
+    ],
+    "estimatedEffort": "4 hours",
+    "status": "Open"
+  },
+  {
+    "id": "1738800000001",
+    "type": "E",
+    "title": "ACT-1: Fix GreetingPreferenceManager Configuration",
+    "description": "Add missing preference key to core-config.yaml under agentIdentity.greeting. GreetingPreferenceManager reads this path but the key does not exist, silently defaulting to auto. Fix config, add unit tests for all 4 preference values.",
+    "priority": "Critical",
+    "relatedStory": "EPIC-ACT",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T19:00:00.000Z",
+    "tags": ["epic-act", "activation-pipeline", "config-fix", "greeting"],
+    "estimatedEffort": "4 hours",
+    "status": "Draft"
+  },
+  {
+    "id": "1738800000002",
+    "type": "E",
+    "title": "ACT-2: Audit user_profile Impact Across Agents",
+    "description": "Complete audit of user_profile setting (bob vs advanced) impact across all 17 referencing files. Fix GreetingPreferenceManager to account for bob mode, integrate validate-user-profile into activation pipeline, verify bob mode restricts command visibility.",
+    "priority": "High",
+    "relatedStory": "EPIC-ACT",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T19:01:00.000Z",
+    "tags": ["epic-act", "activation-pipeline", "user-profile", "audit"],
+    "estimatedEffort": "8 hours",
+    "status": "Draft"
+  },
+  {
+    "id": "1738800000003",
+    "type": "E",
+    "title": "ACT-3: ProjectStatusLoader Reliability Overhaul",
+    "description": "Overhaul ProjectStatusLoader 60s cache with event-driven invalidation, multi-terminal file locking, git post-commit hook, worktree awareness, and performance optimization. Target <100ms for status generation.",
+    "priority": "High",
+    "relatedStory": "EPIC-ACT",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T19:02:00.000Z",
+    "tags": ["epic-act", "activation-pipeline", "cache", "reliability", "git-hooks"],
+    "estimatedEffort": "12 hours",
+    "status": "Draft"
+  },
+  {
+    "id": "1738800000004",
+    "type": "E",
+    "title": "ACT-4: PermissionMode Integration Fix",
+    "description": "Wire PermissionMode system into execution layer. Fix environment-bootstrap to initialize permissions.mode, add *yolo command to all 12 agents, wire OperationGuard.checkOperation() into destructive operations. Subsumes backlog item 1738700000008.",
+    "priority": "High",
+    "relatedStory": "EPIC-ACT",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T19:03:00.000Z",
+    "tags": ["epic-act", "activation-pipeline", "permissions", "security", "integration"],
+    "estimatedEffort": "12 hours",
+    "status": "Draft"
+  },
+  {
+    "id": "1738800000005",
+    "type": "E",
+    "title": "ACT-5: WorkflowNavigator + Bob Integration",
+    "description": "Fix dead WorkflowNavigator code: correct method call (getNextSteps→suggestNextCommands), relax trigger conditions, integrate Bob SessionState and SurfaceChecker for intelligent workflow suggestions. Depends on ACT-6 and Epic 11.",
+    "priority": "Medium",
+    "relatedStory": "EPIC-ACT",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T19:04:00.000Z",
+    "tags": ["epic-act", "activation-pipeline", "workflow", "bob-integration"],
+    "estimatedEffort": "10 hours",
+    "status": "Draft"
+  },
+  {
+    "id": "1738800000006",
+    "type": "E",
+    "title": "ACT-6: Unified Activation Pipeline",
+    "description": "Core architectural change: merge Path A (9 agents) and Path B (3 agents) into UnifiedActivationPipeline. All 12 agents get identical context richness via parallel loading. Update all agent .md files, add @aios-master *validate-agents command. Depends on ACT-1, ACT-2, ACT-3, ACT-4.",
+    "priority": "High",
+    "relatedStory": "EPIC-ACT",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T19:05:00.000Z",
+    "tags": ["epic-act", "activation-pipeline", "architecture", "unification"],
+    "estimatedEffort": "16 hours",
+    "status": "Draft"
+  },
+  {
+    "id": "1738800000007",
+    "type": "E",
+    "title": "ACT-7: Context-Aware Greeting Sections",
+    "description": "Refactor greeting section builders to accept full enriched context object. Implement adaptive presentation (new/existing/workflow sessions), natural language project status, intelligent agent handoff context, parallelized sections. Depends on ACT-6.",
+    "priority": "Medium",
+    "relatedStory": "EPIC-ACT",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T19:06:00.000Z",
+    "tags": ["epic-act", "activation-pipeline", "greeting", "context-aware", "llm"],
+    "estimatedEffort": "10 hours",
+    "status": "Draft"
+  },
+  {
+    "id": "1738800000008",
+    "type": "E",
+    "title": "ACT-8: Agent Config Loading + Document Governance",
+    "description": "Enrich agent-config-requirements.yaml for agents that currently load nothing (@pm, @ux-design-expert, @squad-creator). Add 7 missing data files to source-tree.md with ownership. Create governance validation task for @aios-master. Depends on ACT-6.",
+    "priority": "Medium",
+    "relatedStory": "EPIC-ACT",
+    "createdBy": "@po",
+    "createdAt": "2026-02-05T19:07:00.000Z",
+    "tags": ["epic-act", "activation-pipeline", "config", "governance", "documentation"],
+    "estimatedEffort": "8 hours",
+    "status": "Draft"
+  },
+  {
+    "id": "1739520000001",
+    "type": "T",
+    "title": "Add directory cleanup to rollbackScaffold() in pro-scaffolder",
+    "description": "rollbackScaffold() removes individual files but not empty directories created by scaffoldDirectory() via fs.ensureDir(). After rollback, empty dirs like squads/ may persist. Add tracking of created directories and remove them (in reverse order) during rollback if empty.",
+    "priority": "Low",
+    "relatedStory": "INS-3.1",
+    "createdBy": "@dev",
+    "createdAt": "2026-02-14T00:00:00.000Z",
+    "tags": ["qa-feedback", "pro-installer", "rollback", "cleanup"],
+    "estimatedEffort": "1 hour",
+    "status": "Open"
+  },
+  {
+    "id": "1739520000002",
+    "type": "T",
+    "title": "Add edge case tests for pro-scaffolder (force:true, user-modified files)",
+    "description": "Missing tests for: (1) force:true option — should overwrite even when files exist. (2) User-modified file preservation — when dest file has different hash from source, scaffolder should skip (preserve user changes). Both behaviors are implemented but lack explicit test coverage.",
+    "priority": "Low",
+    "relatedStory": "INS-3.1",
+    "createdBy": "@dev",
+    "createdAt": "2026-02-14T00:00:00.000Z",
+    "tags": ["qa-feedback", "pro-installer", "testing", "edge-cases"],
+    "estimatedEffort": "1 hour",
+    "status": "Open"
+  }
+]
