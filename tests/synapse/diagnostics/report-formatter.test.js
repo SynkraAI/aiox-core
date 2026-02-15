@@ -334,7 +334,191 @@ describe('formatReport()', () => {
   });
 
   // ------------------------------------------------------------------
-  // 10. Empty/null data handling
+  // 10. Timing Analysis section (SYN-14)
+  // ------------------------------------------------------------------
+  describe('timing analysis section (8)', () => {
+    it('renders UAP timing table when available', () => {
+      const data = buildFullData({
+        timing: {
+          uap: {
+            available: true, totalDuration: 145, quality: 'full', stale: false, ageMs: 100,
+            loaders: [{ name: 'agentConfig', duration: 45, status: 'ok', tier: 'Critical' }],
+          },
+          hook: { available: false, totalDuration: 0, bracket: 'unknown', layers: [], stale: false, ageMs: 0 },
+          combined: { totalMs: 145 },
+        },
+      });
+      const report = formatReport(data);
+      expect(report).toContain('## 8. Timing Analysis');
+      expect(report).toContain('UAP Activation Pipeline (145ms total');
+      expect(report).toContain('| agentConfig | 45ms | ok | Critical |');
+    });
+
+    it('renders Hook timing table with hookBootMs', () => {
+      const data = buildFullData({
+        timing: {
+          uap: { available: false, totalDuration: 0, quality: 'unknown', loaders: [], stale: false, ageMs: 0 },
+          hook: {
+            available: true, totalDuration: 87, hookBootMs: 42, bracket: 'MODERATE', stale: false, ageMs: 50,
+            layers: [{ name: 'constitution', duration: 12, status: 'ok', rules: 5 }],
+          },
+          combined: { totalMs: 87 },
+        },
+      });
+      const report = formatReport(data);
+      expect(report).toContain('SYNAPSE Hook Pipeline (87ms total');
+      expect(report).toContain('boot: 42ms');
+      expect(report).toContain('| constitution | 12ms | ok | 5 |');
+    });
+
+    it('shows [STALE] tag when data is stale', () => {
+      const data = buildFullData({
+        timing: {
+          uap: { available: true, totalDuration: 100, quality: 'full', stale: true, ageMs: 400000, loaders: [] },
+          hook: { available: false, totalDuration: 0, bracket: 'unknown', layers: [], stale: false, ageMs: 0 },
+          combined: { totalMs: 100 },
+        },
+      });
+      const report = formatReport(data);
+      expect(report).toContain('[STALE]');
+    });
+
+    it('shows no-data message when timing is null', () => {
+      const report = formatReport(buildFullData({ timing: null }));
+      expect(report).toContain('*No timing data available*');
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // 11. Context Quality Analysis section (SYN-14)
+  // ------------------------------------------------------------------
+  describe('quality analysis section (9)', () => {
+    it('renders overall grade and scores', () => {
+      const data = buildFullData({
+        quality: {
+          uap: { available: true, score: 85, maxPossible: 90, loaders: [], stale: false },
+          hook: { available: true, score: 92, maxPossible: 100, bracket: 'MODERATE', layers: [], stale: false },
+          overall: { score: 89, grade: 'B', label: 'GOOD' },
+        },
+      });
+      const report = formatReport(data);
+      expect(report).toContain('## 9. Context Quality Analysis');
+      expect(report).toContain('Overall: 89/100 (B — GOOD)');
+      expect(report).toContain('UAP: 85/100');
+      expect(report).toContain('Hook: 92/100');
+    });
+
+    it('shows [STALE] for stale data', () => {
+      const data = buildFullData({
+        quality: {
+          uap: { available: true, score: 0, maxPossible: 0, loaders: [], stale: true },
+          hook: { available: true, score: 100, maxPossible: 100, bracket: 'MODERATE', layers: [], stale: false },
+          overall: { score: 60, grade: 'C', label: 'ADEQUATE' },
+        },
+      });
+      const report = formatReport(data);
+      expect(report).toContain('[STALE]');
+    });
+
+    it('shows no-data message when quality is null', () => {
+      const report = formatReport(buildFullData({ quality: null }));
+      expect(report).toContain('*No quality data available*');
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // 12. Consistency Checks section (SYN-14)
+  // ------------------------------------------------------------------
+  describe('consistency checks section (10)', () => {
+    it('renders consistency checks table', () => {
+      const data = buildFullData({
+        consistency: {
+          available: true, score: 3, maxScore: 4,
+          checks: [
+            { name: 'bracket', status: 'PASS', detail: 'MODERATE is valid' },
+            { name: 'agent', status: 'FAIL', detail: 'UAP=dev, bridge=qa' },
+          ],
+        },
+      });
+      const report = formatReport(data);
+      expect(report).toContain('## 10. Consistency Checks');
+      expect(report).toContain('Score:** 3/4');
+      expect(report).toContain('| bracket | PASS | MODERATE is valid |');
+      expect(report).toContain('| agent | FAIL | UAP=dev, bridge=qa |');
+    });
+
+    it('shows no-data message when consistency is null', () => {
+      const report = formatReport(buildFullData({ consistency: null }));
+      expect(report).toContain('*No consistency data available*');
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // 13. Output Quality section (SYN-14)
+  // ------------------------------------------------------------------
+  describe('output quality section (11)', () => {
+    it('renders output analysis summary and tables', () => {
+      const data = buildFullData({
+        outputAnalysis: {
+          available: true,
+          summary: { uapHealthy: 5, uapTotal: 6, hookHealthy: 4, hookTotal: 5 },
+          uapAnalysis: [{ name: 'agentConfig', status: 'ok', quality: 'good', detail: 'Loaded OK' }],
+          hookAnalysis: [{ name: 'constitution', status: 'ok', rules: 5, quality: 'good', detail: '5 rules' }],
+        },
+      });
+      const report = formatReport(data);
+      expect(report).toContain('## 11. Output Quality');
+      expect(report).toContain('5/6 healthy');
+      expect(report).toContain('| agentConfig | ok | good | Loaded OK |');
+      expect(report).toContain('| constitution | ok | 5 | good | 5 rules |');
+    });
+
+    it('shows no-data message when outputAnalysis is null', () => {
+      const report = formatReport(buildFullData({ outputAnalysis: null }));
+      expect(report).toContain('*No output analysis data available*');
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // 14. Relevance Matrix section (SYN-14)
+  // ------------------------------------------------------------------
+  describe('relevance matrix section (12)', () => {
+    it('renders relevance matrix table', () => {
+      const data = buildFullData({
+        relevance: {
+          available: true, agentId: 'dev', score: 85,
+          matrix: [{ component: 'agentConfig', importance: 'critical', status: 'ok', gap: false }],
+          gaps: [],
+        },
+      });
+      const report = formatReport(data);
+      expect(report).toContain('## 12. Relevance Matrix');
+      expect(report).toContain('@dev');
+      expect(report).toContain('85/100');
+      expect(report).toContain('| agentConfig | critical | ok | - |');
+    });
+
+    it('renders critical gaps section', () => {
+      const data = buildFullData({
+        relevance: {
+          available: true, agentId: 'dev', score: 50,
+          matrix: [{ component: 'agentConfig', importance: 'critical', status: 'missing', gap: true }],
+          gaps: [{ component: 'agentConfig', importance: 'critical' }],
+        },
+      });
+      const report = formatReport(data);
+      expect(report).toContain('### Critical Gaps');
+      expect(report).toContain('**agentConfig** (critical)');
+    });
+
+    it('shows no-data message when relevance is null', () => {
+      const report = formatReport(buildFullData({ relevance: null }));
+      expect(report).toContain('*No relevance data available*');
+    });
+  });
+
+  // ------------------------------------------------------------------
+  // 15. Empty/null data handling
   // ------------------------------------------------------------------
   describe('empty and null data handling', () => {
     it('handles completely empty data object', () => {

@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SYN-14: Boot time captured before ANY require — measures hook cold start
+const _BOOT_TIME = process.hrtime.bigint();
 'use strict';
 
 /**

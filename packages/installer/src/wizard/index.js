@@ -10,6 +10,7 @@
 const inquirer = require('inquirer');
 const path = require('path');
 const fse = require('fs-extra');
+const { colors } = require('../utils/aios-colors');
 const {
   getLanguageQuestion,
   getUserProfileQuestion,
@@ -816,6 +817,44 @@ async function runWizard(options = {}) {
     } catch (error) {
       console.error('\n⚠️  LLM Routing error:', error.message);
       answers.llmRoutingInstalled = false;
+    }
+
+    // Story INS-3.2: Pro Installation Wizard (optional phase)
+    if (!options.skipPro) {
+      try {
+        const { runProWizard } = require('./pro-setup');
+        const isCI = process.env.CI === 'true' || !process.stdout.isTTY;
+        const hasProKey = !!process.env.AIOS_PRO_KEY;
+
+        if (isCI && hasProKey) {
+          // CI mode: auto-run if AIOS_PRO_KEY is set
+          console.log('\n🔑 Pro license key detected, running Pro setup...');
+          const proResult = await runProWizard({ quiet: true });
+          answers.proInstalled = proResult.success;
+          answers.proResult = proResult;
+        } else if (!isCI && !options.quiet) {
+          // Interactive mode: ask if user has a Pro license
+          const { hasPro } = await inquirer.prompt([
+            {
+              type: 'confirm',
+              name: 'hasPro',
+              message: colors.primary('Do you have an AIOS Pro license key?'),
+              default: false,
+            },
+          ]);
+
+          if (hasPro) {
+            const proResult = await runProWizard();
+            answers.proInstalled = proResult.success;
+            answers.proResult = proResult;
+          } else {
+            answers.proInstalled = false;
+          }
+        }
+      } catch {
+        // Pro module not available — skip silently
+        answers.proInstalled = false;
+      }
     }
 
     // Story 1.8: Installation Validation

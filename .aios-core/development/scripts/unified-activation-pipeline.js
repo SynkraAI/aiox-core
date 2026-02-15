@@ -1,3 +1,6 @@
+// SYN-14: Boot time captured before ANY require — measures cold start
+const _BOOT_TIME = process.hrtime.bigint();
+
 /**
  * Unified Activation Pipeline - Single Entry Point for All 12 Agents
  *
@@ -159,7 +162,7 @@ class UnifiedActivationPipeline {
       // Race: full pipeline vs timeout (clear timer to prevent leak)
       const { promise: timeoutPromise, timerId } = this._timeoutFallback(agentId, pipelineTimeout);
       const result = await Promise.race([
-        this._runPipeline(agentId, options, coreConfig),
+        this._runPipeline(agentId, options, coreConfig, startTime),
         timeoutPromise,
       ]);
       clearTimeout(timerId);
@@ -199,7 +202,7 @@ class UnifiedActivationPipeline {
    * @param {Object} coreConfig - Pre-loaded core config (shared, not read again)
    * @returns {Promise<{greeting: string, context: Object, quality: string, metrics: Object}>}
    */
-  async _runPipeline(agentId, options = {}, coreConfig = {}) {
+  async _runPipeline(agentId, options = {}, coreConfig = {}, startTime = Date.now()) {
     const pipelineStart = Date.now();
     const metrics = { loaders: {} };
 
@@ -332,6 +335,9 @@ class UnifiedActivationPipeline {
 
     // SYN-13: Write active agent to SYNAPSE session (fire-and-forget, 20ms budget)
     this._writeSynapseSession(agentId, quality, metrics);
+
+    // SYN-14: Persist UAP metrics for diagnostics (fire-and-forget)
+    this._persistUapMetrics(agentId, quality, metrics, Date.now() - startTime);
 
     return {
       greeting,
@@ -712,6 +718,50 @@ class UnifiedActivationPipeline {
       const duration = Date.now() - start;
       metrics.loaders.synapseSession = { duration, status: 'error', start, end: start + duration, error: error.message };
       console.warn(`[UnifiedActivationPipeline] SYNAPSE session write failed: ${error.message}`);
+    }
+  }
+
+  /**
+   * SYN-14: Persist UAP metrics to .synapse/metrics/uap-metrics.json.
+   * Fire-and-forget — never blocks activation pipeline.
+   *
+   * @private
+   * @param {string} agentId - Agent ID
+   * @param {string} quality - Activation quality ('full'|'partial'|'fallback')
+   * @param {Object} metrics - Metrics object with loader timings
+   * @param {number} totalDuration - Total activation duration in ms
+   */
+  _persistUapMetrics(agentId, quality, metrics, totalDuration) {
+    try {
+      const synapsePath = path.join(this.projectRoot, '.synapse');
+      if (!fsSync.existsSync(synapsePath)) return;
+      const metricsDir = path.join(synapsePath, 'metrics');
+      if (!fsSync.existsSync(metricsDir)) {
+        fsSync.mkdirSync(metricsDir, { recursive: true });
+      }
+      const requireChainMs = typeof _BOOT_TIME !== 'undefined'
+        ? Number(process.hrtime.bigint() - _BOOT_TIME) / 1e6
+        : 0;
+      const data = {
+        agentId,
+        quality,
+        totalDuration,
+        requireChainMs,
+        loaders: {},
+        timestamp: new Date().toISOString(),
+      };
+      for (const [name, info] of Object.entries(metrics.loaders || {})) {
+        data.loaders[name] = {
+          duration: info.duration || 0,
+          status: info.status || 'unknown',
+        };
+      }
+      fsSync.writeFileSync(
+        path.join(metricsDir, 'uap-metrics.json'),
+        JSON.stringify(data, null, 2), 'utf8',
+      );
+    } catch {
+      // Fire-and-forget: never block the activation pipeline
     }
   }
 

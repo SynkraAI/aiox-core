@@ -78,6 +78,51 @@ function delegateToAios(subcommand) {
   process.exit(result.status ?? 0);
 }
 
+/**
+ * Get value of a CLI argument (e.g., --key VALUE).
+ *
+ * @param {string} flag - Flag name (e.g., '--key')
+ * @returns {string|null} Value or null
+ */
+function getArgValue(flag) {
+  const idx = args.indexOf(flag);
+  if (idx !== -1 && idx + 1 < args.length) {
+    return args[idx + 1];
+  }
+  return null;
+}
+
+/**
+ * Run the Pro Installation Wizard.
+ *
+ * @param {string} [key] - Pre-provided license key
+ */
+function runProWizard(key) {
+  // Lazy import to avoid requiring installer when not needed
+  let proSetup;
+  try {
+    proSetup = require('../../installer/src/wizard/pro-setup');
+  } catch {
+    console.error('Pro wizard module not found.');
+    console.error('Ensure aios-core installer is available.\n');
+    process.exit(1);
+  }
+
+  const options = {};
+  if (key) {
+    options.key = key;
+  }
+
+  proSetup.runProWizard(options).then((result) => {
+    if (!result.success) {
+      process.exit(1);
+    }
+  }).catch((err) => {
+    console.error(`\n  Wizard failed: ${err.message}\n`);
+    process.exit(1);
+  });
+}
+
 // ─── Commands ───────────────────────────────────────────────────────────────
 
 function showHelp() {
@@ -89,6 +134,8 @@ Usage:
 
 Commands:
   install              Install ${PRO_PACKAGE} in the current project
+  install --wizard     Install and run the setup wizard
+  setup, wizard        Run Pro setup wizard (license gate + scaffold + verify)
   activate --key KEY   Activate a license key
   deactivate           Deactivate the current license
   status               Show license status
@@ -99,6 +146,8 @@ Commands:
 
 Examples:
   npx aios-pro install
+  npx aios-pro setup
+  npx aios-pro wizard --key PRO-XXXX-XXXX-XXXX-XXXX
   npx aios-pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
   npx aios-pro status
   npx aios-pro recover
@@ -137,10 +186,23 @@ if (command === '--version' || command === '-v') {
 }
 
 switch (command) {
-  case 'install':
-  case 'setup':
+  case 'install': {
+    // Check for --wizard flag to run wizard after install
+    const runWizardAfter = args.includes('--wizard');
     installPro();
+    if (runWizardAfter) {
+      runProWizard();
+    }
     break;
+  }
+
+  case 'setup':
+  case 'wizard': {
+    // Run the Pro Installation Wizard with license gate
+    const wizardKey = getArgValue('--key');
+    runProWizard(wizardKey);
+    break;
+  }
 
   case 'recover':
     recoverLicense().catch((err) => {

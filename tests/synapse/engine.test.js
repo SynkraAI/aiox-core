@@ -134,7 +134,7 @@ describe('PipelineMetrics', () => {
     metrics.startLayer('constitution');
     expect(metrics.layers.constitution).toBeDefined();
     expect(metrics.layers.constitution.status).toBe('running');
-    expect(typeof metrics.layers.constitution.start).toBe('number');
+    expect(typeof metrics.layers.constitution.start).toBe('bigint');
   });
 
   test('endLayer() should record duration and rules count', () => {
@@ -179,8 +179,8 @@ describe('PipelineMetrics', () => {
   });
 
   test('getSummary() should return correct totals', () => {
-    metrics.totalStart = 1000;
-    metrics.totalEnd = 1050;
+    metrics.totalStart = BigInt(1000000000);
+    metrics.totalEnd = BigInt(1050000000);
 
     metrics.startLayer('l0');
     metrics.endLayer('l0', 6);

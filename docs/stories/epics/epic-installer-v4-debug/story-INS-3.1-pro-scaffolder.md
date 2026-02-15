@@ -1,7 +1,7 @@
 # Story INS-3.1: Implement Pro Content Scaffolder
 
 **Epic:** Installer V4 Debug
-**Status:** Ready for Review
+**Status:** Done
 **Priority:** P1 (Critical Path)
 **Complexity:** M (Medium)
 **Type:** Feature
@@ -253,6 +253,9 @@ Claude Opus 4.6
 | 2026-02-13 | @sm (River) | Story created from D1 Section 8.1 + @po/@architect observations |
 | 2026-02-13 | @po (Pax) | Validation GO (7.6/10). Fixes: quality_gate @qa→@architect, function signature aligned with D1, added Risks section (4 risks), clarified AC3 fallback behavior, added IDE sync to OUT scope, added testing framework details, enriched integration test edge cases. Status: Draft → Ready |
 | 2026-02-14 | @dev (Dex) | QA fix: Restored resolveLicensePath() in index.js (MEDIUM issue from QA gate CONCERNS). 3-stage license path fallback restored for project-dev mode compatibility. |
+| 2026-02-14 | @dev (Dex) | CodeRabbit Round 3 fixes: lazy-load pro-scaffolder require, docs corrections, gate updated to PASS 100/100. |
+| 2026-02-14 | @devops (Gage) | PR #143 squash merged to main (commit cce233b2). Conflicts resolved with main (8 files). |
+| 2026-02-14 | @po (Pax) | Story closed. Status: Done. QA Gate: PASS 100/100. All 8 ACs met, 13/13 tests passing. |
 
 ---
 

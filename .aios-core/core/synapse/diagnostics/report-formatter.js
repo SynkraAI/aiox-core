@@ -145,8 +145,23 @@ function formatReport(data) {
       lines.push(`| ${i + 1} | ${gaps[i].severity} | ${gaps[i].gap} | ${gaps[i].recommendation} |`);
     }
   }
-
   lines.push('');
+
+  // Section 8: Timing Analysis (SYN-14)
+  _formatTimingSection(lines, data.timing);
+
+  // Section 9: Context Quality Analysis (SYN-14)
+  _formatQualitySection(lines, data.quality);
+
+  // Section 10: Consistency Checks (SYN-14)
+  _formatConsistencySection(lines, data.consistency);
+
+  // Section 11: Output Quality (SYN-14)
+  _formatOutputSection(lines, data.outputAnalysis);
+
+  // Section 12: Relevance Matrix (SYN-14)
+  _formatRelevanceSection(lines, data.relevance);
+
   return lines.join('\n');
 }
 
@@ -226,6 +241,41 @@ function _collectGaps(data) {
     }
   }
 
+  // SYN-14 fix: Include gaps from new collectors (consistency, quality, relevance)
+
+  // Consistency check failures
+  const consistencyChecks = data.consistency?.checks || [];
+  for (const check of consistencyChecks) {
+    if (check.status === 'FAIL') {
+      gaps.push({
+        severity: 'MEDIUM',
+        gap: `Consistency: ${check.name} — ${check.detail}`,
+        recommendation: 'Re-activate agent to refresh metrics alignment',
+      });
+    }
+  }
+
+  // Quality grade below threshold
+  if (data.quality?.overall?.grade === 'F') {
+    gaps.push({
+      severity: 'HIGH',
+      gap: `Context quality: ${data.quality.overall.score}/100 (${data.quality.overall.grade})`,
+      recommendation: 'Re-activate agent to refresh UAP metrics',
+    });
+  }
+
+  // Relevance critical gaps
+  const relevanceGaps = data.relevance?.gaps || [];
+  for (const g of relevanceGaps) {
+    if (g.importance === 'critical') {
+      gaps.push({
+        severity: 'HIGH',
+        gap: `Relevance: ${g.component} (${g.importance}) missing`,
+        recommendation: 'Ensure critical context component is available for active agent',
+      });
+    }
+  }
+
   // Sort by severity (HIGH first)
   const severityOrder = { HIGH: 0, MEDIUM: 1, LOW: 2 };
   gaps.sort((a, b) => {
@@ -235,6 +285,200 @@ function _collectGaps(data) {
   });
 
   return gaps;
+}
+
+/**
+ * Section 8: Timing Analysis.
+ * @param {string[]} lines
+ * @param {object} timing
+ */
+function _formatTimingSection(lines, timing) {
+  lines.push('## 8. Timing Analysis');
+  if (!timing || timing.error) {
+    lines.push('*No timing data available*');
+    lines.push('');
+    return;
+  }
+
+  // UAP Timing
+  if (timing.uap && timing.uap.available) {
+    const staleTag = timing.uap.stale ? ' **[STALE]**' : '';
+    lines.push(`### UAP Activation Pipeline (${timing.uap.totalDuration}ms total, quality: ${timing.uap.quality})${staleTag}`);
+    lines.push('| Loader | Duration | Status | Tier |');
+    lines.push('|--------|----------|--------|------|');
+    for (const loader of timing.uap.loaders) {
+      lines.push(`| ${loader.name} | ${loader.duration}ms | ${loader.status} | ${loader.tier} |`);
+    }
+    lines.push(`| **Total** | **${timing.uap.totalDuration}ms** | | |`);
+  } else {
+    lines.push('### UAP Activation Pipeline');
+    lines.push('*No UAP timing data — activate an agent first*');
+  }
+  lines.push('');
+
+  // Hook Timing
+  if (timing.hook && timing.hook.available) {
+    const staleTag = timing.hook.stale ? ' **[STALE]**' : '';
+    const bootInfo = timing.hook.hookBootMs ? ` boot: ${Math.round(timing.hook.hookBootMs)}ms,` : '';
+    lines.push(`### SYNAPSE Hook Pipeline (${timing.hook.totalDuration}ms total,${bootInfo} ${timing.hook.bracket} bracket)${staleTag}`);
+    lines.push('| Layer | Duration | Status | Rules |');
+    lines.push('|-------|----------|--------|-------|');
+    for (const layer of timing.hook.layers) {
+      lines.push(`| ${layer.name} | ${layer.duration}ms | ${layer.status} | ${layer.rules} |`);
+    }
+    const totalRules = timing.hook.layers.reduce((sum, l) => sum + (l.rules || 0), 0);
+    lines.push(`| **Total** | **${timing.hook.totalDuration}ms** | | **${totalRules}** |`);
+  } else {
+    lines.push('### SYNAPSE Hook Pipeline');
+    lines.push('*No Hook timing data — send a prompt first*');
+  }
+  lines.push('');
+
+  // Combined
+  lines.push(`**Combined pipeline time:** ${timing.combined ? timing.combined.totalMs : 0}ms`);
+  lines.push('');
+}
+
+/**
+ * Section 9: Context Quality Analysis.
+ * @param {string[]} lines
+ * @param {object} quality
+ */
+function _formatQualitySection(lines, quality) {
+  lines.push('## 9. Context Quality Analysis');
+  if (!quality || quality.error) {
+    lines.push('*No quality data available*');
+    lines.push('');
+    return;
+  }
+
+  const overall = quality.overall || { score: 0, grade: 'F', label: 'UNKNOWN' };
+  lines.push(`**Overall: ${overall.score}/100 (${overall.grade} — ${overall.label})**`);
+
+  const uapScore = quality.uap ? quality.uap.score : 0;
+  const hookScore = quality.hook ? quality.hook.score : 0;
+  const uapStale = quality.uap && quality.uap.stale ? ' [STALE]' : '';
+  const hookStale = quality.hook && quality.hook.stale ? ' [STALE]' : '';
+  lines.push(`UAP: ${uapScore}/100${uapStale} | Hook: ${hookScore}/100${hookStale}`);
+  lines.push('');
+
+  // UAP Loaders
+  if (quality.uap && quality.uap.loaders && quality.uap.loaders.length > 0) {
+    lines.push('### UAP Loaders');
+    lines.push('| Loader | Score | Criticality | Impact |');
+    lines.push('|--------|-------|-------------|--------|');
+    for (const loader of quality.uap.loaders) {
+      lines.push(`| ${loader.name} | ${loader.score}/${loader.maxScore} | ${loader.criticality} | ${loader.impact} |`);
+    }
+    lines.push('');
+  }
+
+  // Hook Layers
+  if (quality.hook && quality.hook.layers && quality.hook.layers.length > 0) {
+    lines.push('### Hook Layers');
+    lines.push('| Layer | Score | Criticality | Rules | Impact |');
+    lines.push('|-------|-------|-------------|-------|--------|');
+    for (const layer of quality.hook.layers) {
+      lines.push(`| ${layer.name} | ${layer.score}/${layer.maxScore} | ${layer.criticality} | ${layer.rules || '-'} | ${layer.impact} |`);
+    }
+    lines.push('');
+  }
+}
+
+/**
+ * Section 10: Consistency Checks.
+ * @param {string[]} lines
+ * @param {object} consistency
+ */
+function _formatConsistencySection(lines, consistency) {
+  lines.push('## 10. Consistency Checks');
+  if (!consistency || consistency.error || !consistency.available) {
+    lines.push('*No consistency data available*');
+    lines.push('');
+    return;
+  }
+
+  lines.push(`**Score:** ${consistency.score}/${consistency.maxScore}`);
+  lines.push('');
+  lines.push('| Check | Status | Detail |');
+  lines.push('|-------|--------|--------|');
+  for (const check of consistency.checks) {
+    lines.push(`| ${check.name} | ${check.status} | ${check.detail} |`);
+  }
+  lines.push('');
+}
+
+/**
+ * Section 11: Output Quality.
+ * @param {string[]} lines
+ * @param {object} outputAnalysis
+ */
+function _formatOutputSection(lines, outputAnalysis) {
+  lines.push('## 11. Output Quality');
+  if (!outputAnalysis || outputAnalysis.error || !outputAnalysis.available) {
+    lines.push('*No output analysis data available*');
+    lines.push('');
+    return;
+  }
+
+  const s = outputAnalysis.summary;
+  lines.push(`**UAP:** ${s.uapHealthy}/${s.uapTotal} healthy | **Hook:** ${s.hookHealthy}/${s.hookTotal} healthy`);
+  lines.push('');
+
+  if (outputAnalysis.uapAnalysis && outputAnalysis.uapAnalysis.length > 0) {
+    lines.push('### UAP Loaders');
+    lines.push('| Loader | Status | Quality | Detail |');
+    lines.push('|--------|--------|---------|--------|');
+    for (const a of outputAnalysis.uapAnalysis) {
+      lines.push(`| ${a.name} | ${a.status} | ${a.quality} | ${a.detail} |`);
+    }
+    lines.push('');
+  }
+
+  if (outputAnalysis.hookAnalysis && outputAnalysis.hookAnalysis.length > 0) {
+    lines.push('### Hook Layers');
+    lines.push('| Layer | Status | Rules | Quality | Detail |');
+    lines.push('|-------|--------|-------|---------|--------|');
+    for (const a of outputAnalysis.hookAnalysis) {
+      lines.push(`| ${a.name} | ${a.status} | ${a.rules} | ${a.quality} | ${a.detail} |`);
+    }
+    lines.push('');
+  }
+}
+
+/**
+ * Section 12: Relevance Matrix.
+ * @param {string[]} lines
+ * @param {object} relevance
+ */
+function _formatRelevanceSection(lines, relevance) {
+  lines.push('## 12. Relevance Matrix');
+  if (!relevance || relevance.error || !relevance.available) {
+    lines.push('*No relevance data available*');
+    lines.push('');
+    return;
+  }
+
+  lines.push(`**Agent:** @${relevance.agentId} | **Relevance Score:** ${relevance.score}/100`);
+  lines.push('');
+
+  if (relevance.matrix && relevance.matrix.length > 0) {
+    lines.push('| Component | Importance | Status | Gap |');
+    lines.push('|-----------|------------|--------|-----|');
+    for (const item of relevance.matrix) {
+      const gapFlag = item.gap ? 'YES' : '-';
+      lines.push(`| ${item.component} | ${item.importance} | ${item.status} | ${gapFlag} |`);
+    }
+    lines.push('');
+  }
+
+  if (relevance.gaps && relevance.gaps.length > 0) {
+    lines.push('### Critical Gaps');
+    for (const gap of relevance.gaps) {
+      lines.push(`- **${gap.component}** (${gap.importance}): missing or failed`);
+    }
+    lines.push('');
+  }
 }
 
 module.exports = { formatReport };

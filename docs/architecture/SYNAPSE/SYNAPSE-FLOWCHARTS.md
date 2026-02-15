@@ -3,10 +3,11 @@
 > Guia visual completo de como o SYNAPSE funciona: pipeline, layers, domains,
 > conexoes com Memory Intelligence System (MIS) e Activation Pipeline (UAP).
 
-**Versao:** 1.0.0
-**Data:** 2026-02-11
+**Versao:** 2.0.0
+**Data:** 2026-02-14
 **Autor:** @architect (Aria)
 **Status:** Living Document
+**Atualizado:** SYN-14 — Diagnostics v2, Metrics Persistence, Deep Observability
 
 ---
 
@@ -603,8 +604,33 @@ sequenceDiagram
 ```
 aios-core/
 ├── .claude/
-│   └── hooks/
-│       └── synapse-engine.js              # Hook entry point (78 linhas)
+│   ├── hooks/
+│   │   └── synapse-engine.js              # Hook entry point (106 linhas)
+│   ├── commands/synapse/                  # CRUD commands (SYN-9)
+│   │   ├── manager.md                     # Command router
+│   │   ├── tasks/
+│   │   │   ├── add-rule.md                # Add rule to domain
+│   │   │   ├── create-command.md          # Create star-command
+│   │   │   ├── create-domain.md           # Create new domain
+│   │   │   ├── diagnose-synapse.md        # Run *synapse-diagnose
+│   │   │   ├── edit-rule.md               # Edit existing rule
+│   │   │   ├── suggest-domain.md          # AI-powered domain suggestion
+│   │   │   └── toggle-domain.md           # Enable/disable domain
+│   │   ├── templates/
+│   │   │   ├── domain-template            # Domain file template
+│   │   │   └── manifest-entry-template    # Manifest entry template
+│   │   └── utils/
+│   │       └── manifest-parser-reference.md # Manifest syntax ref
+│   └── skills/synapse/                    # SYNAPSE skill (SYN-11)
+│       ├── SKILL.md                       # Main skill definition
+│       ├── references/
+│       │   ├── brackets.md                # Context brackets ref
+│       │   ├── commands.md                # Star-commands ref
+│       │   ├── domains.md                 # Domains ref
+│       │   ├── layers.md                  # 8-layer hierarchy ref
+│       │   └── manifest.md                # Manifest syntax ref
+│       └── assets/
+│           └── README.md                  # Skills assets doc
 │
 ├── .aios-core/core/synapse/               # Engine core (modular)
 │   ├── engine.js                          # SynapseEngine orchestrator
@@ -628,6 +654,21 @@ aios-core/
 │   │   └── formatter.js                   # XML output formatter (SYN-6)
 │   ├── session/
 │   │   └── session-manager.js             # Session CRUD + cleanup (SYN-2)
+│   ├── diagnostics/                       # Observability (SYN-13/SYN-14)
+│   │   ├── synapse-diagnostics.js         # Orchestrator — 10 collectors
+│   │   ├── report-formatter.js            # 12-section markdown report
+│   │   └── collectors/
+│   │       ├── safe-read-json.js          # Shared JSON reader util
+│   │       ├── hook-collector.js          # Hook registration checks
+│   │       ├── session-collector.js       # Session state checks
+│   │       ├── manifest-collector.js      # Manifest integrity checks
+│   │       ├── pipeline-collector.js      # Layer execution simulation
+│   │       ├── uap-collector.js           # UAP bridge status
+│   │       ├── timing-collector.js        # Performance timing (SYN-12)
+│   │       ├── quality-collector.js       # Quality scoring rubric (SYN-12)
+│   │       ├── consistency-collector.js   # Cross-pipeline validation (SYN-14)
+│   │       ├── output-analyzer.js         # Output quality checks (SYN-14)
+│   │       └── relevance-matrix.js        # Agent relevance mapping (SYN-14)
 │   ├── scripts/
 │   │   └── generate-constitution.js       # Auto-gen constitution domain
 │   └── utils/
@@ -640,27 +681,41 @@ aios-core/
 │   ├── global                             # L1 domain
 │   ├── context                            # L1 context brackets
 │   ├── commands                           # L7 star-command blocks
-│   ├── agent-dev                          # L2 @dev domain
-│   ├── agent-qa                           # L2 @qa domain
-│   ├── agent-architect                    # L2 @architect domain
-│   ├── agent-pm                           # L2 @pm domain
-│   ├── agent-po                           # L2 @po domain
-│   ├── agent-sm                           # L2 @sm domain
-│   ├── agent-devops                       # L2 @devops domain
-│   ├── agent-analyst                      # L2 @analyst domain
-│   ├── agent-data-engineer                # L2 @data-engineer domain
-│   ├── agent-ux                           # L2 @ux domain
-│   ├── agent-aios-master                  # L2 @aios-master domain
-│   ├── agent-squad-creator                # L2 @squad-creator domain
-│   ├── workflow-story-dev                 # L3 story development domain
-│   ├── workflow-epic-create               # L3 epic creation domain
-│   ├── workflow-arch-review               # L3 architecture review domain
+│   ├── agent-{id}                         # L2 agent domains (12 agents)
+│   ├── workflow-{id}                      # L3 workflow domains (3 workflows)
 │   ├── sessions/                          # Session JSON files (gitignored)
+│   ├── metrics/                           # Performance metrics (SYN-12/SYN-14)
+│   │   ├── uap-metrics.json              # UAP timing (written at activation)
+│   │   └── hook-metrics.json             # Hook timing (written per-prompt)
 │   └── cache/                             # Cache dir (gitignored)
 │
 ├── .aios-core/development/scripts/
-│   ├── unified-activation-pipeline.js     # UAP — agent activation
+│   ├── unified-activation-pipeline.js     # UAP — agent activation + metrics
 │   └── greeting-builder.js               # Greeting assembly
+│
+├── tests/synapse/                         # Test suite (749 tests)
+│   ├── engine.test.js                     # Engine orchestrator tests
+│   ├── context-tracker.test.js            # Bracket tracker tests
+│   ├── domain-loader.test.js              # Domain loader tests
+│   ├── session-manager.test.js            # Session manager tests
+│   ├── formatter.test.js                  # Output formatter tests
+│   ├── memory-bridge.test.js              # Memory bridge tests
+│   ├── hook-entry.test.js                 # Hook entry point tests
+│   ├── l0-l7 tests                        # Per-layer tests (8 files)
+│   ├── diagnostics/                       # Diagnostics tests (SYN-13/SYN-14)
+│   │   ├── collectors.test.js             # All collectors integration
+│   │   ├── report-formatter.test.js       # Report formatter tests
+│   │   ├── timing-collector.test.js       # Timing collector tests
+│   │   ├── quality-collector.test.js      # Quality scoring tests
+│   │   ├── consistency-collector.test.js  # Consistency check tests
+│   │   ├── output-analyzer.test.js        # Output analyzer tests
+│   │   ├── relevance-matrix.test.js       # Relevance matrix tests
+│   │   └── qa-issues-validation.test.js   # QA issue regression tests
+│   ├── bridge/
+│   │   └── uap-session-bridge.test.js     # UAP bridge integration
+│   ├── e2e/                               # End-to-end scenarios (6 files)
+│   └── benchmarks/
+│       └── pipeline-benchmark.js          # Performance benchmarks
 │
 └── pro/                                   # Pro submodule (proprietary)
     ├── license/
@@ -697,7 +752,179 @@ flowchart LR
 
 ---
 
+## 15. Diagnostics Pipeline — *synapse-diagnose (SYN-13/SYN-14)
+
+O comando `*synapse-diagnose` executa 10 collectors em sequencia,
+cada um isolado via `_safeCollect()` (nunca crasha o diagnostico inteiro).
+
+```mermaid
+flowchart TD
+    CMD["*synapse-diagnose"] --> ORCH["synapse-diagnostics.js<br/>runDiagnostics(projectRoot)"]
+
+    ORCH --> C1["hook-collector<br/>Hook registration checks"]
+    ORCH --> C2["session-collector<br/>Session state + bridge"]
+    ORCH --> C3["manifest-collector<br/>Manifest integrity"]
+    ORCH --> C4["pipeline-collector<br/>Layer simulation"]
+    ORCH --> C5["uap-collector<br/>UAP bridge status"]
+    ORCH --> C6["timing-collector<br/>Performance timing"]
+    ORCH --> C7["quality-collector<br/>Quality scoring"]
+    ORCH --> C8["consistency-collector<br/>Cross-pipeline validation"]
+    ORCH --> C9["output-analyzer<br/>Output quality"]
+    ORCH --> C10["relevance-matrix<br/>Agent relevance"]
+
+    C1 --> FMT["report-formatter.js<br/>formatReport(data)"]
+    C2 --> FMT
+    C3 --> FMT
+    C4 --> FMT
+    C5 --> FMT
+    C6 --> FMT
+    C7 --> FMT
+    C8 --> FMT
+    C9 --> FMT
+    C10 --> FMT
+
+    FMT --> RPT["Markdown Report<br/>(12 sections)"]
+
+    style ORCH fill:#6c5ce7,color:#fff
+    style FMT fill:#a29bfe,color:#fff
+```
+
+### Report Sections (12 total)
+
+| # | Section | Collector Source | Key Data |
+|---|---------|----------------|----------|
+| 1 | Header | All | Timestamp, bracket, overall status |
+| 2 | Hook Status | hook-collector | Registration checks, .claude/hooks/ |
+| 3 | Session Status | session-collector | Active agent, prompt count, bridge |
+| 4 | Manifest Integrity | manifest-collector | Domain file validation |
+| 5 | Pipeline Simulation | pipeline-collector | Active layers for current bracket |
+| 6 | UAP Bridge Status | uap-collector | _active-agent.json, quality |
+| 7 | Gaps & Recommendations | All (aggregated) | Prioritized gap list |
+| 8 | Timing Analysis | timing-collector | Per-loader + per-layer timing |
+| 9 | Context Quality | quality-collector | Weighted scoring, grade A-F |
+| 10 | Consistency Checks | consistency-collector | 4 cross-pipeline validations |
+| 11 | Output Analysis | output-analyzer | Per-component quality assessment |
+| 12 | Relevance Matrix | relevance-matrix | Agent-specific importance map |
+
+### Quality Scoring Formula
+
+```mermaid
+flowchart LR
+    subgraph UAP["UAP Score (40%)"]
+        U_RUBRIC["7 loaders weighted<br/>agentConfig=25, memories=20,<br/>session=15, status=12,<br/>git=8, perm=5, bridge=5"]
+        U_CALC["score / maxPossible * 100"]
+    end
+
+    subgraph HOOK["Hook Score (60%)"]
+        H_RUBRIC["8 layers weighted<br/>constitution=25, agent=25,<br/>global=20, workflow=10,<br/>task=10, squad=5, kw=3, cmd=2"]
+        H_BRACKET["Adjusted by bracket<br/>(only expected layers count)"]
+        H_CALC["score / bracketMax * 100"]
+    end
+
+    U_RUBRIC --> U_CALC
+    H_RUBRIC --> H_BRACKET --> H_CALC
+
+    U_CALC --> OVERALL["overall = UAP*0.4 + Hook*0.6"]
+    H_CALC --> OVERALL
+    OVERALL --> GRADE["A(90+) B(75+) C(60+) D(45+) F(<45)"]
+
+    style OVERALL fill:#fdcb6e,color:#333
+    style GRADE fill:#00b894,color:#fff
+```
+
+### Staleness & Degradation
+
+| Condition | Threshold | Action |
+|-----------|-----------|--------|
+| Fresh data | < 30 min | Score at 100% |
+| Stale data | > 30 min | Score at 50% (degradation) |
+| UAP stale (normal) | > 30 min after activation | Expected in long sessions |
+| Hook stale | > 30 min since last prompt | Unusual — possible issue |
+
+---
+
+## 16. Metrics Persistence — UAP + Hook Pipeline
+
+O SYNAPSE persiste metricas em `.synapse/metrics/` para consumo pelo diagnostico.
+Ambos usam fire-and-forget (try/catch vazio) — nunca bloqueiam o pipeline principal.
+
+```mermaid
+sequenceDiagram
+    participant UAP as UnifiedActivationPipeline
+    participant E as SynapseEngine
+    participant FS as .synapse/metrics/
+    participant D as *synapse-diagnose
+
+    Note over UAP: Agent activation (one-shot)
+    UAP->>FS: Write uap-metrics.json<br/>{agentId, quality, totalDuration,<br/>loaders: {name: {status, duration}},<br/>timestamp}
+
+    Note over E: Per-prompt execution
+    E->>FS: Write hook-metrics.json<br/>{totalDuration, hookBootMs, bracket,<br/>layersLoaded, layersSkipped,<br/>perLayer: {name: {duration, status, rules}},<br/>timestamp}
+
+    Note over D: On-demand diagnostic
+    D->>FS: Read uap-metrics.json
+    D->>FS: Read hook-metrics.json
+    D->>D: timing-collector (timing analysis)
+    D->>D: quality-collector (scoring)
+    D->>D: consistency-collector (cross-validation)
+    D->>D: output-analyzer (quality checks)
+    D->>D: relevance-matrix (agent mapping)
+```
+
+### uap-metrics.json Schema
+
+```json
+{
+  "agentId": "dev",
+  "quality": "full",
+  "totalDuration": 145,
+  "timestamp": "2026-02-14T15:09:10.762Z",
+  "loaders": {
+    "agentConfig": { "status": "ok", "duration": 45 },
+    "permissionMode": { "status": "ok", "duration": 12 },
+    "gitConfig": { "status": "ok", "duration": 8 },
+    "sessionContext": { "status": "ok", "duration": 23 },
+    "projectStatus": { "status": "timeout", "duration": 180 },
+    "memories": { "status": "skipped", "duration": 0 },
+    "synapseSession": { "status": "ok", "duration": 2 }
+  }
+}
+```
+
+### hook-metrics.json Schema
+
+```json
+{
+  "totalDuration": 0.88,
+  "hookBootMs": 12.5,
+  "bracket": "FRESH",
+  "layersLoaded": 3,
+  "layersSkipped": 5,
+  "layersErrored": 0,
+  "totalRules": 70,
+  "timestamp": "2026-02-14T19:07:47.723Z",
+  "perLayer": {
+    "constitution": { "duration": 0.3, "status": "ok", "rules": 34 },
+    "global": { "duration": 0.2, "status": "ok", "rules": 25 },
+    "agent": { "duration": 0.38, "status": "ok", "rules": 11 },
+    "workflow": { "duration": 0, "status": "skipped", "rules": 0 }
+  }
+}
+```
+
+### Consistency Checks (4 validations)
+
+| Check | What it validates | PASS condition |
+|-------|-------------------|---------------|
+| Bracket | Hook bracket is known value | FRESH/MODERATE/DEPLETED/CRITICAL |
+| Agent | UAP agentId matches _active-agent.json | IDs match |
+| Timestamp | UAP and Hook timestamps within 10 min | Gap < 600s |
+| Quality | UAP quality aligns with Hook layer count | full+layers or fallback |
+
+---
+
 *Documento gerado por @architect (Aria)*
 *Baseado na implementacao real do codebase — nao especulativo*
+*Atualizado: 2026-02-14 — SYN-14 Diagnostics v2*
 
 — Aria, arquitetando o futuro 🏗️

@@ -10,6 +10,9 @@
  * @created Story SYN-6 - SynapseEngine Orchestrator + Output Formatter
  */
 
+const fs = require('fs');
+const path = require('path');
+
 const {
   estimateContextPercent,
   calculateBracket,
@@ -71,9 +74,9 @@ class PipelineMetrics {
   constructor() {
     /** @type {Object.<string, object>} Per-layer metrics keyed by name */
     this.layers = {};
-    /** @type {number|null} Pipeline start timestamp (ms) */
+    /** @type {bigint|null} Pipeline start hrtime (nanoseconds) */
     this.totalStart = null;
-    /** @type {number|null} Pipeline end timestamp (ms) */
+    /** @type {bigint|null} Pipeline end hrtime (nanoseconds) */
     this.totalEnd = null;
   }
 
@@ -83,7 +86,7 @@ class PipelineMetrics {
    * @param {string} name - Layer name
    */
   startLayer(name) {
-    this.layers[name] = { start: Date.now(), status: 'running' };
+    this.layers[name] = { start: process.hrtime.bigint(), status: 'running' };
   }
 
   /**
@@ -98,8 +101,9 @@ class PipelineMetrics {
       this.layers[name] = { status: 'ok', rules: rulesCount };
       return;
     }
-    layer.end = Date.now();
-    layer.duration = layer.end - layer.start;
+    const endTime = process.hrtime.bigint();
+    layer.end = endTime;
+    layer.duration = Number(endTime - layer.start) / 1e6;
     layer.status = 'ok';
     layer.rules = rulesCount;
   }
@@ -123,8 +127,9 @@ class PipelineMetrics {
   errorLayer(name, error) {
     const existing = this.layers[name] || {};
     if (existing.start) {
-      existing.end = Date.now();
-      existing.duration = existing.end - existing.start;
+      const endTime = process.hrtime.bigint();
+      existing.end = endTime;
+      existing.duration = Number(endTime - existing.start) / 1e6;
     }
     this.layers[name] = {
       ...existing,
@@ -149,7 +154,7 @@ class PipelineMetrics {
     const values = Object.values(this.layers);
     return {
       total_ms: this.totalStart != null && this.totalEnd != null
-        ? this.totalEnd - this.totalStart
+        ? Number(this.totalEnd - this.totalStart) / 1e6
         : 0,
       layers_loaded: values.filter(l => l.status === 'ok').length,
       layers_skipped: values.filter(l => l.status === 'skipped').length,
@@ -222,7 +227,7 @@ class SynapseEngine {
     const safeProcessConfig = (processConfig && typeof processConfig === 'object') ? processConfig : {};
     const mergedConfig = { ...this.config, ...safeProcessConfig };
     const metrics = new PipelineMetrics();
-    metrics.totalStart = Date.now();
+    metrics.totalStart = process.hrtime.bigint();
 
     // 1. Calculate bracket
     const promptCount = (session && session.prompt_count) || 0;
@@ -233,7 +238,7 @@ class SynapseEngine {
 
     // Guard: no layer config (invalid bracket — should not happen)
     if (!layerConfig) {
-      metrics.totalEnd = Date.now();
+      metrics.totalEnd = process.hrtime.bigint();
       return { xml: '', metrics: metrics.getSummary() };
     }
 
@@ -250,8 +255,8 @@ class SynapseEngine {
         continue;
       }
 
-      // Check hard pipeline timeout
-      if (Date.now() - metrics.totalStart > PIPELINE_TIMEOUT_MS) {
+      // Check hard pipeline timeout (convert hrtime to ms for comparison)
+      if (Number(process.hrtime.bigint() - metrics.totalStart) / 1e6 > PIPELINE_TIMEOUT_MS) {
         // Log remaining layers as skipped
         const remaining = this.layers.slice(this.layers.indexOf(layer));
         for (const r of remaining) {
@@ -300,8 +305,11 @@ class SynapseEngine {
       }
     }
 
-    metrics.totalEnd = Date.now();
+    metrics.totalEnd = process.hrtime.bigint();
     const summary = metrics.getSummary();
+
+    // Persist hook metrics (fire-and-forget)
+    this._persistHookMetrics(summary, bracket, mergedConfig);
 
     // 4. Format output
     const xml = formatSynapseRules(
@@ -316,6 +324,52 @@ class SynapseEngine {
     );
 
     return { xml, metrics: summary };
+  }
+
+  /**
+   * Persist hook metrics to .synapse/metrics/hook-metrics.json (fire-and-forget).
+   * SYN-14: Includes hookBootMs from _hookBootTime passed via processConfig.
+   * @param {object} summary - Pipeline metrics summary
+   * @param {string} bracket - Context bracket
+   * @param {object} [config] - Merged config (may contain _hookBootTime bigint)
+   */
+  _persistHookMetrics(summary, bracket, config) {
+    try {
+      const synapsePath = this.synapsePath;
+      if (!synapsePath || !fs.existsSync(synapsePath)) return;
+      const metricsDir = path.join(synapsePath, 'metrics');
+      if (!fs.existsSync(metricsDir)) {
+        fs.mkdirSync(metricsDir, { recursive: true });
+      }
+      // SYN-14: Calculate hook boot time if _hookBootTime was passed
+      const hookBootTime = config && config._hookBootTime;
+      const hookBootMs = hookBootTime ? Number(process.hrtime.bigint() - hookBootTime) / 1e6 : 0;
+      const data = {
+        totalDuration: summary.total_ms,
+        hookBootMs,
+        bracket,
+        layersLoaded: summary.layers_loaded,
+        layersSkipped: summary.layers_skipped,
+        layersErrored: summary.layers_errored,
+        totalRules: summary.total_rules,
+        perLayer: {},
+        timestamp: new Date().toISOString(),
+      };
+      // Convert per_layer to serializable format (strip bigint start/end)
+      for (const [name, info] of Object.entries(summary.per_layer)) {
+        data.perLayer[name] = {
+          duration: info.duration || 0,
+          status: info.status || 'unknown',
+          rules: info.rules || 0,
+        };
+      }
+      fs.writeFileSync(
+        path.join(metricsDir, 'hook-metrics.json'),
+        JSON.stringify(data, null, 2), 'utf8',
+      );
+    } catch {
+      // Fire-and-forget: never block the hook pipeline
+    }
   }
 }
 
