@@ -2,10 +2,15 @@
  * Pro Installation Wizard with License Gate
  *
  * 3-step wizard: (1) License Gate, (2) Install/Scaffold, (3) Verify
- * Supports interactive mode, CI mode (AIOS_PRO_KEY env var), and lazy import.
+ * Supports interactive mode, CI mode (AIOS_PRO_KEY/AIOS_PRO_EMAIL env vars), and lazy import.
+ *
+ * License Gate supports two activation methods:
+ * - Email + Password authentication (recommended, PRO-11)
+ * - License key (legacy, PRO-6)
  *
  * @module wizard/pro-setup
  * @story INS-3.2 — Implement Pro Installation Wizard with License Gate
+ * @story PRO-11 — Email Authentication & Buyer-Based Pro Activation
  */
 
 'use strict';
@@ -34,6 +39,26 @@ const LICENSE_KEY_PATTERN = /^PRO-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4
  * Maximum retry attempts for license validation.
  */
 const MAX_RETRIES = 3;
+
+/**
+ * Email verification polling interval in milliseconds.
+ */
+const VERIFY_POLL_INTERVAL_MS = 5000;
+
+/**
+ * Email verification polling timeout in milliseconds (10 minutes).
+ */
+const VERIFY_POLL_TIMEOUT_MS = 10 * 60 * 1000;
+
+/**
+ * Minimum password length.
+ */
+const MIN_PASSWORD_LENGTH = 8;
+
+/**
+ * Email format regex.
+ */
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 /**
  * Detect CI environment.
@@ -145,78 +170,425 @@ function loadProScaffolder() {
 }
 
 /**
- * Step 1: License Gate — validate license key.
+ * Step 1: License Gate — authenticate and validate license.
  *
- * In CI mode, reads from AIOS_PRO_KEY env var.
- * In interactive mode, prompts with masked input.
+ * Supports two activation methods:
+ * 1. Email + Password authentication (recommended, PRO-11)
+ * 2. License key (legacy, PRO-6)
+ *
+ * In CI mode, reads from AIOS_PRO_EMAIL + AIOS_PRO_PASSWORD or AIOS_PRO_KEY env vars.
+ * In interactive mode, prompts user to choose method.
  *
  * @param {Object} [options={}] - Options
  * @param {string} [options.key] - Pre-provided key (from CLI args or env)
+ * @param {string} [options.email] - Pre-provided email (from CLI args or env)
+ * @param {string} [options.password] - Pre-provided password (from CLI args or env)
  * @returns {Promise<Object>} Result with { success, key, activationResult }
  */
 async function stepLicenseGate(options = {}) {
-  showStep(1, 3, 'License Validation');
+  showStep(1, 3, 'License Activation');
 
   const isCI = isCIEnvironment();
-  let key = options.key || null;
 
-  // CI mode: read from env var
-  if (!key && isCI) {
-    key = process.env.AIOS_PRO_KEY || null;
-
-    if (!key) {
-      return {
-        success: false,
-        error: 'CI mode: AIOS_PRO_KEY environment variable not set.',
-      };
-    }
+  // CI mode: check env vars
+  if (isCI) {
+    return stepLicenseGateCI(options);
   }
 
-  // Interactive mode: prompt for key
-  if (!key && !isCI) {
-    const inquirer = require('inquirer');
+  // Pre-provided key (from CLI args)
+  if (options.key) {
+    return stepLicenseGateWithKey(options.key);
+  }
 
-    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-      const { licenseKey } = await inquirer.prompt([
+  // Pre-provided email credentials (from CLI args)
+  if (options.email && options.password) {
+    return authenticateWithEmail(options.email, options.password);
+  }
+
+  // Interactive mode: prompt for method
+  const inquirer = require('inquirer');
+
+  const { method } = await inquirer.prompt([
+    {
+      type: 'list',
+      name: 'method',
+      message: colors.primary('How would you like to activate Pro?'),
+      choices: [
         {
-          type: 'password',
-          name: 'licenseKey',
-          message: colors.primary('Enter your Pro license key:'),
-          mask: '*',
-          validate: (input) => {
-            if (!input || !input.trim()) {
-              return 'License key is required';
-            }
-            if (!validateKeyFormat(input)) {
-              return 'Invalid format. Expected: PRO-XXXX-XXXX-XXXX-XXXX';
-            }
-            return true;
-          },
+          name: 'Login with email and password (Recommended)',
+          value: 'email',
         },
-      ]);
+        {
+          name: 'Enter license key',
+          value: 'key',
+        },
+      ],
+    },
+  ]);
 
-      key = licenseKey.trim().toUpperCase();
+  if (method === 'email') {
+    return stepLicenseGateWithEmail();
+  }
 
-      // Validate with API
-      const result = await validateKeyWithApi(key);
+  return stepLicenseGateWithKeyInteractive();
+}
 
-      if (result.success) {
-        showSuccess(`License validated: ${maskLicenseKey(key)}`);
-        return { success: true, key, activationResult: result.data };
+/**
+ * CI mode license gate — reads from env vars.
+ *
+ * Priority: AIOS_PRO_EMAIL + AIOS_PRO_PASSWORD > AIOS_PRO_KEY
+ *
+ * @param {Object} options - Options with possible pre-provided credentials
+ * @returns {Promise<Object>} Result with { success, key, activationResult }
+ */
+async function stepLicenseGateCI(options) {
+  const email = options.email || process.env.AIOS_PRO_EMAIL;
+  const password = options.password || process.env.AIOS_PRO_PASSWORD;
+  const key = options.key || process.env.AIOS_PRO_KEY;
+
+  // Prefer email auth over key
+  if (email && password) {
+    return authenticateWithEmail(email, password);
+  }
+
+  if (key) {
+    return stepLicenseGateWithKey(key);
+  }
+
+  return {
+    success: false,
+    error: 'CI mode: Set AIOS_PRO_EMAIL + AIOS_PRO_PASSWORD or AIOS_PRO_KEY environment variables.',
+  };
+}
+
+/**
+ * Interactive email/password license gate flow.
+ *
+ * Prompts for email, then checks if account exists to determine signup vs login.
+ *
+ * @returns {Promise<Object>} Result with { success, key, activationResult }
+ */
+async function stepLicenseGateWithEmail() {
+  const inquirer = require('inquirer');
+
+  const { email } = await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'email',
+      message: colors.primary('Email:'),
+      validate: (input) => {
+        if (!input || !input.trim()) {
+          return 'Email is required';
+        }
+        if (!EMAIL_PATTERN.test(input.trim())) {
+          return 'Please enter a valid email address';
+        }
+        return true;
+      },
+    },
+  ]);
+
+  const { password } = await inquirer.prompt([
+    {
+      type: 'password',
+      name: 'password',
+      message: colors.primary('Password:'),
+      mask: '*',
+      validate: (input) => {
+        if (!input || input.length < MIN_PASSWORD_LENGTH) {
+          return `Password must be at least ${MIN_PASSWORD_LENGTH} characters`;
+        }
+        return true;
+      },
+    },
+  ]);
+
+  return authenticateWithEmail(email.trim(), password);
+}
+
+/**
+ * Authenticate with email and password.
+ *
+ * Tries login first. If user doesn't exist, offers to create account.
+ * Handles email verification polling for new signups.
+ *
+ * @param {string} email - User email
+ * @param {string} password - User password
+ * @returns {Promise<Object>} Result with { success, key, activationResult }
+ */
+async function authenticateWithEmail(email, password) {
+  const loader = module.exports._testing ? module.exports._testing.loadLicenseApi : loadLicenseApi;
+  const licenseModule = loader();
+
+  if (!licenseModule) {
+    return {
+      success: false,
+      error: 'Pro license module not available. Ensure @aios-fullstack/pro is installed.',
+    };
+  }
+
+  const { LicenseApiClient } = licenseModule;
+  const client = new LicenseApiClient();
+
+  // Check connectivity
+  const online = await client.isOnline();
+  if (!online) {
+    return {
+      success: false,
+      error: 'License server is unreachable. Check your internet connection and try again.',
+    };
+  }
+
+  // Try login first
+  const spinner = createSpinner('Authenticating...');
+  spinner.start();
+
+  let sessionToken;
+  let emailVerified;
+
+  try {
+    const loginResult = await client.login(email, password);
+    sessionToken = loginResult.sessionToken;
+    emailVerified = loginResult.emailVerified;
+    spinner.succeed('Authenticated successfully.');
+  } catch (loginError) {
+    // If invalid credentials, try signup for new users
+    if (loginError.code === 'INVALID_CREDENTIALS') {
+      spinner.info('No account found. Creating a new account...');
+
+      try {
+        await client.signup(email, password);
+        showSuccess('Account created. Verification email sent!');
+        emailVerified = false;
+
+        // Login after signup to get session token
+        const loginAfterSignup = await client.login(email, password);
+        sessionToken = loginAfterSignup.sessionToken;
+      } catch (signupError) {
+        if (signupError.code === 'EMAIL_ALREADY_REGISTERED') {
+          showError('An account exists with this email but the password is incorrect.');
+          showInfo('Forgot your password? Visit https://pro.synkra.ai/reset-password or contact support@synkra.ai');
+          return { success: false, error: signupError.message };
+        }
+        return { success: false, error: signupError.message };
       }
-
-      // Show error and retry
-      const remaining = MAX_RETRIES - attempt;
-      if (remaining > 0) {
-        showError(`${result.error} (${remaining} attempt${remaining > 1 ? 's' : ''} remaining)`);
-      } else {
-        showError(`${result.error} — no attempts remaining.`);
-        return { success: false, error: result.error };
-      }
+    } else if (loginError.code === 'AUTH_RATE_LIMITED') {
+      spinner.fail(loginError.message);
+      return { success: false, error: loginError.message };
+    } else {
+      spinner.fail(`Authentication failed: ${loginError.message}`);
+      return { success: false, error: loginError.message };
     }
   }
 
-  // Validate key format
+  // Wait for email verification if needed
+  if (!emailVerified) {
+    const verifyResult = await waitForEmailVerification(client, sessionToken);
+    if (!verifyResult.success) {
+      return verifyResult;
+    }
+  }
+
+  // Activate Pro
+  return activateProByAuth(client, sessionToken);
+}
+
+/**
+ * Wait for email verification with polling.
+ *
+ * Polls the server every 5 seconds for up to 10 minutes.
+ * User can press R to resend verification email.
+ *
+ * @param {object} client - LicenseApiClient instance
+ * @param {string} sessionToken - Session token
+ * @returns {Promise<Object>} Result with { success }
+ */
+async function waitForEmailVerification(client, sessionToken) {
+  console.log('');
+  showInfo('Waiting for email verification...');
+  showInfo('Open your email and click the verification link.');
+  console.log(colors.dim('  (Checking every 5 seconds... timeout in 10 minutes)'));
+
+  if (!isCIEnvironment()) {
+    console.log(colors.dim('  [Press R to resend verification email]'));
+  }
+
+  const startTime = Date.now();
+  let resendHint = false;
+
+  // Set up keyboard listener for resend (non-CI only)
+  let keyListener;
+  if (!isCIEnvironment() && process.stdin.setRawMode) {
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
+    keyListener = (key) => {
+      if (key.toString().toLowerCase() === 'r') {
+        resendHint = true;
+      }
+      // Ctrl+C
+      if (key.toString() === '\u0003') {
+        cleanupKeyListener();
+        process.exit(0);
+      }
+    };
+    process.stdin.on('data', keyListener);
+  }
+
+  function cleanupKeyListener() {
+    if (keyListener) {
+      process.stdin.removeListener('data', keyListener);
+      if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(false);
+      }
+      process.stdin.pause();
+    }
+  }
+
+  try {
+    while (Date.now() - startTime < VERIFY_POLL_TIMEOUT_MS) {
+      // Handle resend request
+      if (resendHint) {
+        resendHint = false;
+        try {
+          await client.resendVerification(sessionToken);
+          showInfo('Verification email resent.');
+        } catch (error) {
+          showWarning(`Could not resend: ${error.message}`);
+        }
+      }
+
+      // Poll verification status
+      try {
+        const status = await client.checkEmailVerified(sessionToken);
+        if (status.verified) {
+          showSuccess('Email verified!');
+          return { success: true };
+        }
+      } catch {
+        // Polling failure is non-fatal, continue
+      }
+
+      // Wait before next poll
+      await new Promise((resolve) => setTimeout(resolve, VERIFY_POLL_INTERVAL_MS));
+    }
+
+    // Timeout
+    showError('Email verification timed out after 10 minutes.');
+    showInfo('Run the installer again to retry verification.');
+    return { success: false, error: 'Email verification timed out.' };
+  } finally {
+    cleanupKeyListener();
+  }
+}
+
+/**
+ * Activate Pro using an authenticated session.
+ *
+ * @param {object} client - LicenseApiClient instance
+ * @param {string} sessionToken - Authenticated session token
+ * @returns {Promise<Object>} Result with { success, key, activationResult }
+ */
+async function activateProByAuth(client, sessionToken) {
+  const spinner = createSpinner('Validating Pro subscription...');
+  spinner.start();
+
+  try {
+    // Generate machine fingerprint
+    const os = require('os');
+    const crypto = require('crypto');
+    const machineId = crypto
+      .createHash('sha256')
+      .update(`${os.hostname()}-${os.platform()}-${os.arch()}`)
+      .digest('hex')
+      .substring(0, 32);
+
+    // Read aios-core version
+    let aiosCoreVersion = 'unknown';
+    try {
+      const path = require('path');
+      const fs = require('fs');
+      const pkgPath = path.join(__dirname, '..', '..', '..', '..', 'package.json');
+      const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+      aiosCoreVersion = pkg.version || 'unknown';
+    } catch {
+      // Keep 'unknown'
+    }
+
+    const activationResult = await client.activateByAuth(sessionToken, machineId, aiosCoreVersion);
+
+    spinner.succeed(`Pro subscription confirmed! License: ${maskLicenseKey(activationResult.key)}`);
+    return { success: true, key: activationResult.key, activationResult };
+  } catch (error) {
+    if (error.code === 'NOT_A_BUYER') {
+      spinner.fail('No active Pro subscription found for this email.');
+      showInfo('Purchase Pro at https://pro.synkra.ai');
+      return { success: false, error: error.message };
+    }
+    if (error.code === 'SEAT_LIMIT_EXCEEDED') {
+      spinner.fail(error.message);
+      showInfo('Deactivate another device or upgrade your license.');
+      return { success: false, error: error.message };
+    }
+
+    spinner.fail(`Activation failed: ${error.message}`);
+    return { success: false, error: error.message };
+  }
+}
+
+/**
+ * Interactive license key gate (legacy flow).
+ *
+ * @returns {Promise<Object>} Result with { success, key, activationResult }
+ */
+async function stepLicenseGateWithKeyInteractive() {
+  const inquirer = require('inquirer');
+
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    const { licenseKey } = await inquirer.prompt([
+      {
+        type: 'password',
+        name: 'licenseKey',
+        message: colors.primary('Enter your Pro license key:'),
+        mask: '*',
+        validate: (input) => {
+          if (!input || !input.trim()) {
+            return 'License key is required';
+          }
+          if (!validateKeyFormat(input)) {
+            return 'Invalid format. Expected: PRO-XXXX-XXXX-XXXX-XXXX';
+          }
+          return true;
+        },
+      },
+    ]);
+
+    const key = licenseKey.trim().toUpperCase();
+    const result = await validateKeyWithApi(key);
+
+    if (result.success) {
+      showSuccess(`License validated: ${maskLicenseKey(key)}`);
+      return { success: true, key, activationResult: result.data };
+    }
+
+    const remaining = MAX_RETRIES - attempt;
+    if (remaining > 0) {
+      showError(`${result.error} (${remaining} attempt${remaining > 1 ? 's' : ''} remaining)`);
+    } else {
+      showError(`${result.error} — no attempts remaining.`);
+      return { success: false, error: result.error };
+    }
+  }
+
+  return { success: false, error: 'Maximum attempts reached.' };
+}
+
+/**
+ * Validate with pre-provided license key (CI or CLI arg).
+ *
+ * @param {string} key - License key
+ * @returns {Promise<Object>} Result with { success, key, activationResult }
+ */
+async function stepLicenseGateWithKey(key) {
   if (!validateKeyFormat(key)) {
     return {
       success: false,
@@ -224,7 +596,6 @@ async function stepLicenseGate(options = {}) {
     };
   }
 
-  // Validate with API
   const spinner = createSpinner(`Validating license ${maskLicenseKey(key)}...`);
   spinner.start();
 
@@ -489,6 +860,8 @@ async function runProWizard(options = {}) {
   // Step 1: License Gate
   const licenseResult = await stepLicenseGate({
     key: options.key || process.env.AIOS_PRO_KEY,
+    email: options.email || process.env.AIOS_PRO_EMAIL,
+    password: options.password || process.env.AIOS_PRO_PASSWORD,
   });
 
   if (!licenseResult.success) {
@@ -538,10 +911,21 @@ module.exports = {
   // Internal helpers exported for testing
   _testing: {
     validateKeyWithApi,
+    authenticateWithEmail,
+    waitForEmailVerification,
+    activateProByAuth,
+    stepLicenseGateCI,
+    stepLicenseGateWithKey,
+    stepLicenseGateWithKeyInteractive,
+    stepLicenseGateWithEmail,
     loadLicenseApi,
     loadFeatureGate,
     loadProScaffolder,
     MAX_RETRIES,
     LICENSE_KEY_PATTERN,
+    EMAIL_PATTERN,
+    MIN_PASSWORD_LENGTH,
+    VERIFY_POLL_INTERVAL_MS,
+    VERIFY_POLL_TIMEOUT_MS,
   },
 };
