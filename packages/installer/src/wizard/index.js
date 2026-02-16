@@ -710,10 +710,12 @@ async function runWizard(options = {}) {
         const isCI = process.env.CI === 'true' || !process.stdout.isTTY;
         const hasProKey = !!process.env.AIOS_PRO_KEY;
 
+        const proOptions = { targetDir: process.cwd() };
+
         if (isCI && hasProKey) {
           // CI mode: auto-run if AIOS_PRO_KEY is set
           console.log('\n🔑 Pro license key detected, running Pro setup...');
-          const proResult = await runProWizard({ quiet: true });
+          const proResult = await runProWizard({ ...proOptions, quiet: true });
           answers.proInstalled = proResult.success;
           answers.proResult = proResult;
         } else if (!isCI && !options.quiet) {
@@ -728,15 +730,19 @@ async function runWizard(options = {}) {
           ]);
 
           if (hasPro) {
-            const proResult = await runProWizard();
+            const proResult = await runProWizard(proOptions);
             answers.proInstalled = proResult.success;
             answers.proResult = proResult;
+
+            if (!proResult.success && proResult.error) {
+              console.error(`\n⚠️  Pro installation issue: ${proResult.error}`);
+            }
           } else {
             answers.proInstalled = false;
           }
         }
-      } catch {
-        // Pro module not available — skip silently
+      } catch (error) {
+        console.error(`\n⚠️  Pro setup error: ${error.message}`);
         answers.proInstalled = false;
       }
     }
