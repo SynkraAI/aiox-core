@@ -299,7 +299,9 @@ ${agentDef}
 **Task File:** ${taskFile}
 **Expected Output:** ${context.creates || 'See task definition'}
 **Execution Mode:** ${context.yoloMode ? 'YOLO (autonomous)' : 'Interactive'}
+**Execution Profile:** ${context.executionProfile || 'balanced'}
 **Elicitation Required:** ${context.elicit ? 'Yes' : 'No'}
+**Risk Policy:** ${JSON.stringify(context.executionPolicy || {}, null, 0)}
 
 ### Complete Task Definition:
 

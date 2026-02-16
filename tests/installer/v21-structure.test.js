@@ -202,7 +202,7 @@ describe('Legacy Flag Support (--legacy)', () => {
       installType: 'full',
       directory: '.',
       ides: [],
-      expansionPacks: [],
+      squads: [],
       legacyStructure: true,
     };
 
@@ -214,7 +214,7 @@ describe('Legacy Flag Support (--legacy)', () => {
       installType: 'full',
       directory: '.',
       ides: [],
-      expansionPacks: [],
+      squads: [],
       legacyStructure: false,
     };
 

@@ -461,67 +461,7 @@ async function runWizard(options = {}) {
       answers.techPresetResult = { preset: 'none', success: true };
     }
 
-    // DISABLED: Legacy installation block superseded by squads flow (OSR-8)
-    // Install Squads if selected
-    // if (answers.selectedExpansionPacks && answers.selectedExpansionPacks.length > 0) {
-    //   console.log('\n🎁 Installing Squads...');
-    //
-    //   // Detect source squads directory (npm package location)
-    //   const possibleSourceDirs = [
-    //     path.join(__dirname, '..', '..', 'squads'),
-    //     path.join(__dirname, '..', '..', '..', 'squads'),
-    //     path.join(process.cwd(), 'node_modules', '@synkra/aios-core', 'squads'),
-    //   ];
-    //
-    //   let sourceExpansionDir = null;
-    //   for (const dir of possibleSourceDirs) {
-    //     if (fse.existsSync(dir)) {
-    //       sourceExpansionDir = dir;
-    //       break;
-    //     }
-    //   }
-    //
-    //   if (sourceExpansionDir) {
-    //     const targetExpansionDir = path.join(process.cwd(), 'squads');
-    //     await fse.ensureDir(targetExpansionDir);
-    //
-    //     const installedPacks = [];
-    //     const failedPacks = [];
-    //
-    //     for (const pack of answers.selectedExpansionPacks) {
-    //       const sourcePack = path.join(sourceExpansionDir, pack);
-    //       const targetPack = path.join(targetExpansionDir, pack);
-    //
-    //       try {
-    //         if (fse.existsSync(sourcePack)) {
-    //           await fse.copy(sourcePack, targetPack);
-    //           installedPacks.push(pack);
-    //           console.log(`   ✅ ${pack}`);
-    //         } else {
-    //           failedPacks.push({ pack, reason: 'not found' });
-    //           console.log(`   ⚠️  ${pack} - not found in source`);
-    //         }
-    //       } catch (packError) {
-    //         failedPacks.push({ pack, reason: packError.message });
-    //         console.log(`   ⚠️  ${pack} - ${packError.message}`);
-    //       }
-    //     }
-    //
-    //     answers.expansionPacksInstalled = installedPacks.length > 0;
-    //     answers.expansionPacksResult = {
-    //       installed: installedPacks,
-    //       failed: failedPacks,
-    //       targetDir: targetExpansionDir,
-    //     };
-    //
-    //     if (installedPacks.length > 0) {
-    //       console.log(`\n✅ Squads installed (${installedPacks.length}/${answers.selectedExpansionPacks.length})`);
-    //     }
-    //   } else {
-    //     console.log('   ⚠️  Squads source directory not found');
-    //     answers.expansionPacksInstalled = false;
-    //   }
-    // }
+    // Legacy squad installation path removed; unified squads flow is now the only supported path.
 
     // Story 1.4: Generate IDE configs if IDEs were selected
     let ideConfigResult = null;
@@ -545,63 +485,7 @@ async function runWizard(options = {}) {
         }
       }
 
-      // DISABLED: Legacy installation block superseded by squads flow (OSR-8)
-      // Install squad agents to each selected IDE
-      // if (answers.expansionPacksResult && answers.expansionPacksResult.installed.length > 0) {
-      //   console.log('\n📦 Installing squad agents to IDEs...');
-      //
-      //   for (const packName of answers.expansionPacksResult.installed) {
-      //     const packAgentsDir = path.join(answers.expansionPacksResult.targetDir, packName, 'agents');
-      //
-      //     if (await fse.pathExists(packAgentsDir)) {
-      //       const agentFiles = (await fse.readdir(packAgentsDir)).filter(f => f.endsWith('.md'));
-      //
-      //       if (agentFiles.length > 0) {
-      //         for (const ideKey of answers.selectedIDEs) {
-      //           const ideConfig = getIDEConfig(ideKey);
-      //           if (!ideConfig || !ideConfig.agentFolder) continue;
-      //
-      //           const isAntiGravity = ideConfig.specialConfig && ideConfig.specialConfig.type === 'antigravity';
-      //
-      //           // Determine target folder for this squad
-      //           let targetFolder;
-      //           if (isAntiGravity) {
-      //             // AntiGravity: workflows go to .agent/workflows/{packName}/
-      //             targetFolder = path.join(process.cwd(), ideConfig.agentFolder, packName);
-      //             // Also need to copy actual agents to .antigravity/agents/{packName}/
-      //             const agentsTargetFolder = path.join(process.cwd(), ideConfig.specialConfig.agentsFolder, packName);
-      //             await fse.ensureDir(agentsTargetFolder);
-      //
-      //             for (const agentFile of agentFiles) {
-      //               const sourcePath = path.join(packAgentsDir, agentFile);
-      //               const agentName = agentFile.replace('.md', '');
-      //
-      //               // Create workflow file
-      //               const workflowContent = generateExpansionPackWorkflow(agentName, packName);
-      //               await fse.ensureDir(targetFolder);
-      //               await fse.writeFile(path.join(targetFolder, agentFile), workflowContent, 'utf8');
-      //
-      //               // Copy actual agent
-      //               await fse.copy(sourcePath, path.join(agentsTargetFolder, agentFile));
-      //             }
-      //           } else {
-      //             // Other IDEs: copy directly to agentFolder/{packName}/
-      //             targetFolder = path.join(process.cwd(), ideConfig.agentFolder, packName);
-      //             await fse.ensureDir(targetFolder);
-      //
-      //             for (const agentFile of agentFiles) {
-      //               await fse.copy(
-      //                 path.join(packAgentsDir, agentFile),
-      //                 path.join(targetFolder, agentFile),
-      //               );
-      //             }
-      //           }
-      //         }
-      //         console.log(`   ✅ ${packName}: ${agentFiles.length} agents installed to ${answers.selectedIDEs.length} IDE(s)`);
-      //       }
-      //     }
-      //   }
-      // }
+      // Legacy per-squad IDE copy path removed; sync pipeline handles IDE propagation.
     }
 
     // Story 1.6: Environment Configuration

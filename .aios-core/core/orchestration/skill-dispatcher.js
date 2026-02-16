@@ -170,6 +170,8 @@ class SkillDispatcher {
         workflowId: context.workflowId,
         yoloMode: context.yoloMode || false,
         previousPhases: context.previousPhases || {},
+        executionProfile: context.executionProfile || null,
+        executionPolicy: context.executionPolicy || null,
       },
     };
   }

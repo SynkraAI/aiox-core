@@ -1,0 +1,277 @@
+# Brownfield Risk Report Template
+# Story AIOS-DIFF-4.3.2: Template de relatório de risco por fase
+
+template:
+  id: brownfield-risk-report
+  name: Brownfield Migration Risk Report
+  version: "1.0"
+  type: product
+  description: >
+    Template for generating risk assessment reports during brownfield
+    migration phases. Used by @analyst to create executive-level reports.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#                              REPORT STRUCTURE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+sections:
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # EXECUTIVE SUMMARY
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  executive_summary:
+    title: "Executive Summary"
+    content: |
+      ## 📊 Risk Assessment Summary
+
+      **Project:** {{project_name}}
+      **Phase:** {{current_phase}}
+      **Date:** {{report_date}}
+      **Assessor:** @analyst
+
+      ### Overall Risk Level: {{overall_risk_level}}
+
+      | Metric | Value |
+      |--------|-------|
+      | Critical Risks | {{critical_count}} |
+      | High Risks | {{high_count}} |
+      | Medium Risks | {{medium_count}} |
+      | Low Risks | {{low_count}} |
+      | Mitigated | {{mitigated_count}} |
+
+      ### Key Findings
+      {{key_findings}}
+
+      ### Recommended Action
+      {{recommended_action}}
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE-SPECIFIC RISKS
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  phase_risks:
+    title: "Phase-Specific Risk Analysis"
+    phases:
+
+      discovery:
+        name: "Discovery Phase"
+        description: "Initial codebase analysis and documentation"
+        typical_risks:
+          - id: DISC-001
+            name: "Incomplete Documentation"
+            description: "Existing system poorly documented, discovery may miss critical components"
+            probability: medium
+            impact: high
+            mitigation: "Cross-reference with running system, interview stakeholders"
+          - id: DISC-002
+            name: "Hidden Dependencies"
+            description: "Undocumented external services or databases"
+            probability: medium
+            impact: critical
+            mitigation: "Network traffic analysis, env var audit"
+          - id: DISC-003
+            name: "Time Underestimation"
+            description: "Discovery takes longer than 4-8h estimate"
+            probability: low
+            impact: medium
+            mitigation: "Checkpoint after each sub-phase, adjust timeline"
+
+      planning:
+        name: "Planning Phase"
+        description: "PRD and architecture design"
+        typical_risks:
+          - id: PLAN-001
+            name: "Scope Creep"
+            description: "Technical debt resolution expands beyond initial estimate"
+            probability: high
+            impact: medium
+            mitigation: "Fixed scope per phase, explicit out-of-scope list"
+          - id: PLAN-002
+            name: "Architecture Mismatch"
+            description: "Proposed architecture conflicts with existing constraints"
+            probability: medium
+            impact: high
+            mitigation: "Validate with existing code, incremental changes only"
+          - id: PLAN-003
+            name: "Stakeholder Misalignment"
+            description: "Business priorities differ from technical recommendations"
+            probability: medium
+            impact: high
+            mitigation: "Executive report before implementation, explicit tradeoffs"
+
+      migration:
+        name: "Migration Phase"
+        description: "Implementation of changes"
+        typical_risks:
+          - id: MIG-001
+            name: "Breaking Changes"
+            description: "New code breaks existing functionality"
+            probability: medium
+            impact: critical
+            mitigation: "Feature flags, comprehensive test coverage before changes"
+          - id: MIG-002
+            name: "Data Loss"
+            description: "Database migration causes data corruption or loss"
+            probability: low
+            impact: critical
+            mitigation: "Backup before migration, dry-run on staging, rollback script ready"
+          - id: MIG-003
+            name: "Downtime"
+            description: "Migration requires extended system downtime"
+            probability: medium
+            impact: high
+            mitigation: "Zero-downtime migration strategy, maintenance window planning"
+
+      rollout:
+        name: "Rollout Phase"
+        description: "Progressive deployment"
+        typical_risks:
+          - id: ROLL-001
+            name: "Performance Degradation"
+            description: "New code slower than existing implementation"
+            probability: medium
+            impact: high
+            mitigation: "Load testing before rollout, monitoring during rollout"
+          - id: ROLL-002
+            name: "User Disruption"
+            description: "Changed UX confuses existing users"
+            probability: medium
+            impact: medium
+            mitigation: "Gradual rollout (10% → 50% → 100%), feedback collection"
+          - id: ROLL-003
+            name: "Rollback Failure"
+            description: "Unable to revert to previous state"
+            probability: low
+            impact: critical
+            mitigation: "Test rollback before production rollout, checkpoint commits"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # RISK MATRIX
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  risk_matrix:
+    title: "Risk Assessment Matrix"
+    content: |
+      ## Risk Classification
+
+      | Probability / Impact | Low | Medium | High | Critical |
+      |----------------------|-----|--------|------|----------|
+      | **High** | Medium | High | Critical | Critical |
+      | **Medium** | Low | Medium | High | Critical |
+      | **Low** | Low | Low | Medium | High |
+
+      ### Risk Levels
+
+      - **Critical**: Immediate action required, blocks progress
+      - **High**: Must be mitigated before proceeding to next phase
+      - **Medium**: Should be addressed, can proceed with monitoring
+      - **Low**: Acceptable, document and monitor
+
+      ### Current Phase Risks
+
+      | ID | Risk | Probability | Impact | Level | Status |
+      |----|------|-------------|--------|-------|--------|
+      {{risk_table}}
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # MITIGATION PLAN
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  mitigation_plan:
+    title: "Mitigation Plan"
+    content: |
+      ## Mitigation Strategies
+
+      ### Critical & High Risks
+
+      {{critical_mitigations}}
+
+      ### Medium Risks
+
+      {{medium_mitigations}}
+
+      ### Monitoring Plan
+
+      | Risk ID | Metric to Watch | Threshold | Action if Exceeded |
+      |---------|-----------------|-----------|-------------------|
+      {{monitoring_table}}
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # ROLLBACK STRATEGY
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  rollback_strategy:
+    title: "Rollback Strategy"
+    content: |
+      ## Rollback Checkpoints
+
+      ### Phase Checkpoints
+
+      | Phase | Checkpoint | Rollback Command | Recovery Time |
+      |-------|------------|------------------|---------------|
+      | Discovery | Pre-analysis | N/A (read-only) | N/A |
+      | Planning | Pre-PRD | `git checkout {{pre_planning_commit}}` | < 1 min |
+      | Migration | Pre-migration | `git checkout {{pre_migration_commit}}` | < 5 min |
+      | Rollout | Pre-rollout | `git checkout {{pre_rollout_commit}}` | < 5 min |
+
+      ### Database Rollback
+
+      ```bash
+      # If database migration was applied:
+      npm run db:rollback -- --to={{last_good_migration}}
+
+      # If data was modified:
+      # Restore from backup taken at {{backup_timestamp}}
+      ```
+
+      ### Rollback Triggers
+
+      Automatic rollback if:
+      - [ ] Error rate exceeds 5% for 5 minutes
+      - [ ] Response time increases >200% from baseline
+      - [ ] Critical functionality fails health check
+
+      Manual rollback decision by:
+      - [ ] Tech lead approval for partial rollback
+      - [ ] CTO approval for full rollback
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # SIGN-OFF
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  sign_off:
+    title: "Sign-Off"
+    content: |
+      ## Phase Approval
+
+      | Role | Name | Approval | Date |
+      |------|------|----------|------|
+      | Technical Lead | | [ ] Approved | |
+      | Product Owner | | [ ] Approved | |
+      | QA Lead | | [ ] Approved | |
+
+      ### Conditions for Proceeding
+
+      - [ ] All critical risks mitigated
+      - [ ] All high risks have mitigation plan
+      - [ ] Rollback tested and verified
+      - [ ] Stakeholders notified
+
+      ---
+
+      **Report Generated By:** @analyst
+      **Template Version:** 1.0
+      **Story:** AIOS-DIFF-4.3.2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+#                              USAGE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+usage:
+  command: "@analyst → *create-doc brownfield-risk-report"
+  output: "docs/reports/BROWNFIELD-RISK-REPORT-{{phase}}.md"
+  triggers:
+    - Before each brownfield phase transition
+    - When new risks are identified
+    - Before stakeholder review meetings

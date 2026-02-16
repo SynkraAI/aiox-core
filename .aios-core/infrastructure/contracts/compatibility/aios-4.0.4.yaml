@@ -1,0 +1,44 @@
+release: "AIOS 4.0.4"
+updated_at: "2026-02-16"
+source_of_truth:
+  docs_matrix: "docs/ide-integration.md"
+  validator: ".aios-core/infrastructure/scripts/validate-parity.js"
+
+global_required_checks:
+  - paths
+
+ide_matrix:
+  - ide: "claude-code"
+    display_name: "Claude Code"
+    expected_status: "Works"
+    required_checks:
+      - claude-sync
+      - claude-integration
+  - ide: "gemini"
+    display_name: "Gemini CLI"
+    expected_status: "Works"
+    required_checks:
+      - gemini-sync
+      - gemini-integration
+  - ide: "codex"
+    display_name: "Codex CLI"
+    expected_status: "Limited"
+    required_checks:
+      - codex-sync
+      - codex-integration
+      - codex-skills
+  - ide: "cursor"
+    display_name: "Cursor"
+    expected_status: "Limited"
+    required_checks:
+      - cursor-sync
+  - ide: "github-copilot"
+    display_name: "GitHub Copilot"
+    expected_status: "Limited"
+    required_checks:
+      - github-copilot-sync
+  - ide: "antigravity"
+    display_name: "AntiGravity"
+    expected_status: "Limited"
+    required_checks:
+      - antigravity-sync

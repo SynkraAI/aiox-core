@@ -367,7 +367,7 @@ flowchart TB
             CS["Coding Standards"]
             TS["Tech Stack"]
             ST["Source Tree"]
-            IDE["IDE Rules<br/>(Claude Code, Cursor,<br/>Windsurf, Gemini)"]
+            IDE["IDE Rules<br/>(Claude Code, Cursor,<br/>Copilot, Gemini)"]
         end
     end
 
@@ -396,7 +396,7 @@ flowchart TB
 flowchart LR
     INSTALL(["npx aios-core install"]) --> WIZARD["Installation Wizard"]
 
-    WIZARD --> CHOOSE_SQUADS["Escolher Squads<br/>(expansion packs)"]
+    WIZARD --> CHOOSE_SQUADS["Escolher Squads<br/>(squads iniciais)"]
     WIZARD --> CHOOSE_IDE["Escolher IDEs<br/>(Claude Code, Cursor...)"]
     WIZARD --> CHOOSE_CONFIG["Configurar<br/>Preferencias"]
 
@@ -406,7 +406,7 @@ flowchart LR
 
     CHOOSE_IDE --> IDE1["Claude Code"]
     CHOOSE_IDE --> IDE2["Cursor"]
-    CHOOSE_IDE --> IDE3["Windsurf"]
+    CHOOSE_IDE --> IDE3["Copilot Chat"]
     CHOOSE_IDE --> IDE4["Gemini CLI"]
 
     SQ_OPS --> READY(["Workspace Pronto!<br/>Humanos + IA<br/>trabalhando juntos"])

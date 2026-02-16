@@ -7,7 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-*Nothing unreleased at this time.*
+### Added
+
+- `docs/glossary.md` with official AIOS taxonomy terms:
+  - `squad`
+  - `flow-state`
+  - `confidence gate`
+  - `execution profile`
+- `scripts/semantic-lint.js` for semantic terminology regression checks.
+- `tests/unit/semantic-lint.test.js` for semantic lint rule validation.
+
+### Changed
+
+- CI now includes a `Semantic Lint` job (`npm run validate:semantic-lint`).
+- Pre-commit markdown pipeline now runs semantic lint through `lint-staged`.
+
+### Migration Notes
+
+- Deprecated terminology replacements:
+  - `expansion pack` -> `squad`
+  - `permission mode` -> `execution profile`
+  - `workflow state` -> `flow-state` (warning-level migration)
 
 ---
 

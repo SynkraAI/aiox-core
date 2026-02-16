@@ -539,12 +539,6 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
           } else {
             spinner.info('Skipped settings.local.json (no hooks to register)');
           }
-
-          // Silent statusline setup (graceful skip if user already has one)
-          const statuslineResult = await setupGlobalStatusline();
-          if (statuslineResult.installed) {
-            createdFiles.push(...statuslineResult.files);
-          }
         }
 
         // Gemini parity with Claude Code: copy hooks and configure settings
@@ -764,7 +758,6 @@ async function createClaudeSettingsLocal(projectRoot) {
 }
 
 /**
-<<<<<<< HEAD
  * Copy .aios-core/hooks/gemini folder into .gemini/hooks during installation
  * @param {string} projectRoot - Project root directory
  * @returns {Promise<string[]>} List of copied files
@@ -982,115 +975,6 @@ async function linkGeminiExtension(projectRoot) {
   return { status: 'skipped', reason: 'link-failed' };
 }
 
-/**
- * Setup global statusline for Claude Code
- *
- * Copies statusline-script.js and track-agent.sh to ~/.claude/
- * and configures ~/.claude/settings.json with statusLine + hook entries.
- *
- * GRACEFUL SKIP: If user already has a statusLine configured, this function
- * returns silently without any output — the user never knows it was checked.
- *
- * @returns {Promise<{installed: boolean, files: string[]}>}
- */
-async function setupGlobalStatusline() {
-  const homeDir = require('os').homedir();
-  const globalSettingsPath = path.join(homeDir, '.claude', 'settings.json');
-  const result = { installed: false, files: [] };
-
-  // Read existing global settings
-  let settings = {};
-  try {
-    if (await fs.pathExists(globalSettingsPath)) {
-      const content = await fs.readFile(globalSettingsPath, 'utf8');
-      settings = JSON.parse(content);
-    }
-  } catch {
-    // Corrupted or unreadable — treat as empty
-    settings = {};
-  }
-
-  // GRACEFUL SKIP: User already has a statusLine configured
-  if (settings.statusLine) {
-    return result;
-  }
-
-  // Source templates
-  const templatesDir = path.join(__dirname, '..', '..', '..', '..', '.aios-core', 'product', 'templates', 'statusline');
-
-  const scriptSource = path.join(templatesDir, 'statusline-script.js');
-  const hookSource = path.join(templatesDir, 'track-agent.sh');
-
-  // Verify templates exist
-  if (!await fs.pathExists(scriptSource) || !await fs.pathExists(hookSource)) {
-    return result;
-  }
-
-  // Target paths
-  const scriptTarget = path.join(homeDir, '.claude', 'statusline-script.js');
-  const hookTarget = path.join(homeDir, '.claude', 'hooks', 'track-agent.sh');
-  const cacheDir = path.join(homeDir, '.claude', 'session-cache');
-
-  // Copy files
-  try {
-    await fs.ensureDir(path.join(homeDir, '.claude', 'hooks'));
-    await fs.ensureDir(cacheDir);
-    await fs.copy(scriptSource, scriptTarget);
-    await fs.copy(hookSource, hookTarget);
-    result.files.push(scriptTarget, hookTarget);
-  } catch {
-    return result;
-  }
-
-  // Build the statusLine command with platform-appropriate path
-  const scriptPathEscaped = scriptTarget.replace(/\\/g, '\\\\');
-
-  // Add statusLine to settings
-  settings.statusLine = {
-    type: 'command',
-    command: `node "${scriptPathEscaped}"`,
-  };
-
-  // Add track-agent hook to UserPromptSubmit (if not already present)
-  if (!settings.hooks) {
-    settings.hooks = {};
-  }
-  if (!Array.isArray(settings.hooks.UserPromptSubmit)) {
-    settings.hooks.UserPromptSubmit = [];
-  }
-
-  const hookPathEscaped = hookTarget.replace(/\\/g, '\\\\');
-  const alreadyHasTrackAgent = settings.hooks.UserPromptSubmit.some(entry => {
-    if (Array.isArray(entry.hooks)) {
-      return entry.hooks.some(h => h.command && h.command.includes('track-agent'));
-    }
-    return entry.command && entry.command.includes('track-agent');
-  });
-
-  if (!alreadyHasTrackAgent) {
-    settings.hooks.UserPromptSubmit.push({
-      matcher: '',
-      hooks: [
-        {
-          type: 'command',
-          command: `bash "${hookPathEscaped}"`,
-        },
-      ],
-    });
-  }
-
-  // Write settings back
-  try {
-    await fs.ensureDir(path.dirname(globalSettingsPath));
-    await fs.writeFile(globalSettingsPath, JSON.stringify(settings, null, 2), 'utf8');
-    result.installed = true;
-  } catch {
-    return result;
-  }
-
-  return result;
-}
-
 module.exports = {
   generateIDEConfigs,
   showSuccessSummary,
@@ -1104,5 +988,4 @@ module.exports = {
   copyGeminiHooksFolder,
   createGeminiSettings,
   linkGeminiExtension,
-  setupGlobalStatusline,
 };

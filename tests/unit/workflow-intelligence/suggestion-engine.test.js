@@ -115,4 +115,51 @@ describe('SuggestionEngine (Unit)', () => {
       expect(context.storyPath).toBe(testStoryPath);
     });
   });
+
+  describe('Runtime-First Integration', () => {
+    let engine;
+
+    beforeEach(() => {
+      engine = createSuggestionEngine({ lazyLoad: true });
+      engine.invalidateCache();
+    });
+
+    it('should prepend runtime-first recommendation for blocked state', async () => {
+      const context = {
+        agentId: 'dev',
+        lastCommand: null,
+        lastCommands: [],
+        storyPath: 'docs/stories/test.md',
+        branch: 'feature/test',
+        projectState: {},
+        executionSignals: {
+          story_status: 'blocked',
+          qa_status: 'unknown',
+          ci_status: 'green',
+          has_uncommitted_changes: false,
+        },
+      };
+
+      const result = await engine.suggestNext(context);
+      expect(result.suggestions.length).toBeGreaterThan(0);
+      expect(result.suggestions[0].source).toBe('runtime_first');
+      expect(result.suggestions[0].command).toContain('*orchestrate-status');
+      expect(result.runtimeState).toBe('blocked');
+    });
+
+    it('should not inject runtime-first when execution state is unknown', async () => {
+      const context = {
+        agentId: 'dev',
+        lastCommand: null,
+        lastCommands: [],
+        storyPath: null,
+        branch: null,
+        projectState: {},
+      };
+
+      const result = await engine.suggestNext(context);
+      const hasRuntimeFirst = (result.suggestions || []).some((s) => s.source === 'runtime_first');
+      expect(hasRuntimeFirst).toBe(false);
+    });
+  });
 });

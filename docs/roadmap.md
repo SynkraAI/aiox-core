@@ -44,8 +44,13 @@ Primary objective for AIOS 4.0.x execution:
 - runtime-guided next action (state-driven, not command-list driven)
 
 Tracking reference:
-- `docs/stories/active/AIOS-4-differentiation-objective-plan.md`
-- `docs/stories/epics/epic-aios-differentiation-4x/EPIC-AIOS-DIFF-INDEX.md`
+- `docs/strategy/AIOS-LEARNING-CURVE-FOCUS-4.0.4.md`
+- `docs/strategy/AIOS-DIFFERENTIATION-PLAN-4.0.4.md`
+
+Execution gates:
+- P0 gate: onboarding metric + clear IDE matrix + first-value flow + smoke tests
+- P1 gate: compatibility contract enforced in CI + risk profiles + handoffs + confidence score
+- P2 gate: vertical tracks reproducible + brownfield pipeline + taxonomy lint
 
 ### Platform Planning
 
@@ -113,12 +118,12 @@ This public roadmap is synchronized with our internal sprint planning:
 
 | Public Roadmap | Internal Tracking |
 |----------------|-------------------|
-| [GitHub Project](https://github.com/orgs/SynkraAI/projects/1) | `docs/stories/backlog.md` |
+| [GitHub Project](https://github.com/orgs/SynkraAI/projects/1) | `docs/strategy/AIOS-DIFFERENTIATION-PLAN-4.0.4.md` |
 | High-level features | Detailed stories per sprint |
 | Quarterly timeline | Sprint-based execution |
 
 **Sync Checklist (Monthly):**
-- [ ] Review completed sprints in `docs/stories/v4.0.4/`
+- [ ] Review completed sprints against strategy docs in `docs/strategy/`
 - [ ] Update GitHub Project items status (Done/In Progress)
 - [ ] Add new approved features from backlog to Project
 - [ ] Update this ROADMAP.md with latest progress

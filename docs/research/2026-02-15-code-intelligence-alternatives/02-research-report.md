@@ -96,7 +96,7 @@
 | Atributo | Valor |
 |----------|-------|
 | **Tipo** | Code analysis + security scanning |
-| **MCP** | SIM — integra via MCP com Cursor, Copilot, Windsurf |
+| **MCP** | SIM — integra via MCP com Cursor, Copilot e Gemini CLI |
 | **Linguagens** | 10 (JS, TS, Python, Java, Go, Ruby, PHP, C#, Scala, Swift) |
 | **Capabilities** | Dataflow analysis cross-file, dependency graph visualization, supply chain analysis |
 | **Pro Engine** | 98% false positive reduction via dataflow analysis |

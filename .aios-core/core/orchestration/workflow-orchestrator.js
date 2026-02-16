@@ -23,6 +23,7 @@ const ChecklistRunner = require('./checklist-runner');
 const TechStackDetector = require('./tech-stack-detector');
 const ConditionEvaluator = require('./condition-evaluator');
 const SkillDispatcher = require('./skill-dispatcher');
+const { resolveExecutionProfile } = require('./execution-profile-resolver');
 
 /**
  * Orchestrates multi-agent workflow execution
@@ -41,11 +42,15 @@ class WorkflowOrchestrator {
     this.workflowPath = workflowPath;
     this.options = {
       yolo: options.yolo || false,
+      executionProfile: options.executionProfile || null,
+      executionContext: options.executionContext || 'development',
       parallel: options.parallel !== false, // Default true
       onPhaseStart: options.onPhaseStart || this._defaultPhaseStart.bind(this),
       onPhaseComplete: options.onPhaseComplete || this._defaultPhaseComplete.bind(this),
       dispatchSubagent: options.dispatchSubagent || null,
       projectRoot: options.projectRoot || process.cwd(),
+      confidenceThreshold: this._resolveConfidenceThreshold(options.confidenceThreshold),
+      enableConfidenceGate: options.enableConfidenceGate !== false,
     };
 
     this.workflow = null;
@@ -59,6 +64,11 @@ class WorkflowOrchestrator {
     this.skillDispatcher = new SkillDispatcher(this.options);
     this.conditionEvaluator = null; // Initialized after pre-flight detection
     this.techStackProfile = null; // Populated by pre-flight detection
+    this.executionProfile = resolveExecutionProfile({
+      explicitProfile: this.options.executionProfile,
+      context: this.options.executionContext,
+      yolo: this.options.yolo,
+    });
 
     // Execution state
     this.executionState = {
@@ -395,8 +405,15 @@ class WorkflowOrchestrator {
       }
     }
 
-    // Generate execution summary
-    return this._generateExecutionSummary();
+    // Generate execution summary + confidence gate
+    const summary = this._generateExecutionSummary();
+    if (summary.confidenceGate?.enabled && !summary.confidenceGate.passed) {
+      await this.contextManager.markFailed(
+        `Delivery confidence ${summary.deliveryConfidence.score}% below threshold ${summary.confidenceGate.threshold}%`,
+        this.executionState.currentPhase,
+      );
+    }
+    return summary;
   }
 
   /**
@@ -478,7 +495,9 @@ class WorkflowOrchestrator {
 
         // V3.1: Save skip result to context with reason
         const skipResult = this.skillDispatcher.createSkipResult(phase, skipReason);
-        await this.contextManager.savePhaseOutput(phaseNum, skipResult);
+        await this.contextManager.savePhaseOutput(phaseNum, skipResult, {
+          handoffTarget: this._getNextPhaseHandoffTarget(phaseNum),
+        });
 
         return { skipped: true, phase: phaseNum, reason: skipReason };
       }
@@ -522,6 +541,8 @@ class WorkflowOrchestrator {
           notes: phase.notes,
           checklist: phase.checklist,
           template: phase.template,
+          executionProfile: this.executionProfile.profile,
+          executionPolicy: this.executionProfile.policy,
         },
       );
 
@@ -534,6 +555,8 @@ class WorkflowOrchestrator {
           ...context,
           workflowId: this.workflow.workflow?.id,
           yoloMode: this.options.yolo,
+          executionProfile: this.executionProfile.profile,
+          executionPolicy: this.executionProfile.policy,
           previousPhases: this.executionState.completedPhases,
         },
         techStackProfile: this.techStackProfile,
@@ -543,6 +566,11 @@ class WorkflowOrchestrator {
       console.log(
         chalk.gray(
           `   🚀 ${this.skillDispatcher.formatDispatchLog(dispatchPayload).split('\n')[0]}`,
+        ),
+      );
+      console.log(
+        chalk.gray(
+          `   🛡️  Execution profile: ${this.executionProfile.profile} (${this.executionProfile.context})`,
         ),
       );
 
@@ -556,7 +584,8 @@ class WorkflowOrchestrator {
           agentId: phase.agent,
           prompt,
           phase,
-          context,
+          context: dispatchPayload.context,
+          baseContext: context,
         });
 
         // V3.1: Parse and normalize skill output
@@ -586,6 +615,8 @@ class WorkflowOrchestrator {
         result,
         validation,
         timestamp: new Date().toISOString(),
+      }, {
+        handoffTarget: this._getNextPhaseHandoffTarget(phaseNum),
       });
 
       // Notify phase complete
@@ -613,6 +644,31 @@ class WorkflowOrchestrator {
 
     // Fallback to legacy evaluation
     return this._evaluateConditionLegacy(condition);
+  }
+
+  /**
+   * Determine next phase handoff target from workflow sequence.
+   * @private
+   */
+  _getNextPhaseHandoffTarget(currentPhaseNum) {
+    const sequence = Array.isArray(this.workflow?.sequence) ? this.workflow.sequence : [];
+    const currentIndex = sequence.findIndex((p) => p && p.phase === currentPhaseNum);
+    if (currentIndex < 0) {
+      return { phase: null, agent: null };
+    }
+
+    for (let i = currentIndex + 1; i < sequence.length; i += 1) {
+      const next = sequence[i];
+      if (!next || next.workflow_end || !next.phase) {
+        continue;
+      }
+      return {
+        phase: next.phase,
+        agent: next.agent || null,
+      };
+    }
+
+    return { phase: null, agent: null };
   }
 
   /**
@@ -703,7 +759,8 @@ class WorkflowOrchestrator {
     const minutes = Math.floor(duration / 60000);
     const seconds = Math.floor((duration % 60000) / 1000);
 
-    return {
+    const deliveryConfidence = this.contextManager?.getDeliveryConfidence?.() || null;
+    const summary = {
       workflow: this.workflow.workflow?.id,
       status: this.executionState.failedPhases.length === 0 ? 'completed' : 'completed_with_errors',
       duration: `${minutes}m ${seconds}s`,
@@ -717,6 +774,57 @@ class WorkflowOrchestrator {
       failedPhases: this.executionState.failedPhases,
       skippedPhases: this.executionState.skippedPhases,
       outputs: this.contextManager?.getPreviousPhaseOutputs() || {},
+      deliveryConfidence,
+    };
+
+    const confidenceGate = this._evaluateConfidenceGate(deliveryConfidence);
+    if (confidenceGate.enabled) {
+      summary.confidenceGate = confidenceGate;
+      if (!confidenceGate.passed && summary.status === 'completed') {
+        summary.status = 'failed_confidence_gate';
+      }
+    }
+
+    return summary;
+  }
+
+  /**
+   * Resolve confidence threshold from explicit option > env > default.
+   * @private
+   */
+  _resolveConfidenceThreshold(explicitThreshold) {
+    const explicit = Number(explicitThreshold);
+    if (Number.isFinite(explicit)) {
+      return explicit;
+    }
+    const envThreshold = Number(process.env.AIOS_DELIVERY_CONFIDENCE_THRESHOLD);
+    return Number.isFinite(envThreshold) ? envThreshold : 70;
+  }
+
+  /**
+   * Evaluate delivery confidence gate.
+   * @private
+   */
+  _evaluateConfidenceGate(deliveryConfidence) {
+    if (!this.options.enableConfidenceGate) {
+      return { enabled: false, threshold: this.options.confidenceThreshold, passed: true };
+    }
+
+    if (!deliveryConfidence || !Number.isFinite(deliveryConfidence.score)) {
+      return {
+        enabled: true,
+        threshold: this.options.confidenceThreshold,
+        passed: false,
+        reason: 'delivery_confidence_unavailable',
+      };
+    }
+
+    const passed = deliveryConfidence.score >= this.options.confidenceThreshold;
+    return {
+      enabled: true,
+      threshold: this.options.confidenceThreshold,
+      score: deliveryConfidence.score,
+      passed,
     };
   }
 

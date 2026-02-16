@@ -362,3 +362,6 @@ scripts/glue/
 .claude/setup/
 docs/guides/aios-workflows/
 docs/guides/glue-script-guide.md
+
+# Local Gemini project rules generated/managed per workspace
+.gemini/rules.md

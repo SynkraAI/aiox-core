@@ -17,12 +17,14 @@
  * - Each session picks up where the last left off via state file
  *
  * @module workflow-state-manager
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 const fs = require('fs').promises;
 const path = require('path');
 const yaml = require('js-yaml');
+
+const WORKFLOW_STATE_VERSION = '2.0';
 
 class WorkflowStateManager {
   /**
@@ -64,6 +66,7 @@ class WorkflowStateManager {
     const instanceId = this._generateInstanceId(wf.id);
 
     const state = {
+      state_version: WORKFLOW_STATE_VERSION,
       workflow_id: wf.id,
       workflow_name: wf.name || wf.id,
       instance_id: instanceId,
@@ -135,6 +138,130 @@ class WorkflowStateManager {
 
     this._log(`State created: ${instanceId}`);
     return state;
+  }
+
+  // ============ Runtime-First Next Action ============
+
+  /**
+   * Build normalized execution state from runtime signals.
+   * Deterministic priority:
+   * blocked > qa_rejected > ci_red > completed > in_development > ready_for_validation > unknown
+   *
+   * @param {Object} [signals={}]
+   * @param {string} [signals.story_status]
+   * @param {string} [signals.qa_status]
+   * @param {string} [signals.ci_status]
+   * @param {boolean} [signals.has_uncommitted_changes]
+   * @returns {{ state: string, reasons: string[], normalized: Object }}
+   */
+  evaluateExecutionState(signals = {}) {
+    const storyStatus = String(signals.story_status || 'unknown').toLowerCase();
+    const qaStatus = String(signals.qa_status || 'unknown').toLowerCase();
+    const ciStatus = String(signals.ci_status || 'unknown').toLowerCase();
+    const hasUncommitted = Boolean(signals.has_uncommitted_changes);
+
+    const reasons = [];
+    let state = 'unknown';
+
+    if (storyStatus === 'blocked') {
+      state = 'blocked';
+      reasons.push('story status is blocked');
+    } else if (qaStatus === 'rejected' || qaStatus === 'fail' || qaStatus === 'failed') {
+      state = 'qa_rejected';
+      reasons.push(`qa status is ${qaStatus}`);
+    } else if (ciStatus === 'red' || ciStatus === 'failed' || ciStatus === 'error') {
+      state = 'ci_red';
+      reasons.push(`ci status is ${ciStatus}`);
+    } else if (storyStatus === 'done' || storyStatus === 'completed') {
+      state = 'completed';
+      reasons.push(`story status is ${storyStatus}`);
+    } else if (storyStatus === 'in_progress' || storyStatus === 'review') {
+      if (hasUncommitted) {
+        state = 'in_development';
+        reasons.push('story in progress with uncommitted changes');
+      } else {
+        state = 'ready_for_validation';
+        reasons.push('story in progress with clean working tree');
+      }
+    }
+
+    return {
+      state,
+      reasons,
+      normalized: {
+        story_status: storyStatus,
+        qa_status: qaStatus,
+        ci_status: ciStatus,
+        has_uncommitted_changes: hasUncommitted,
+      },
+    };
+  }
+
+  /**
+   * Deterministic next-action recommendation for runtime-first flows.
+   *
+   * @param {Object} [signals={}]
+   * @param {Object} [options={}]
+   * @param {string} [options.story]
+   * @returns {{ state: string, command: string, agent: string, rationale: string, confidence: number }}
+   */
+  getNextActionRecommendation(signals = {}, options = {}) {
+    const result = this.evaluateExecutionState(signals);
+    const storyArg = options.story ? ` ${options.story}` : '';
+
+    const map = {
+      blocked: {
+        command: `*orchestrate-status${storyArg}`,
+        agent: '@po',
+        rationale: 'Story is blocked. Surface blockers and unblock path first.',
+        confidence: 0.95,
+      },
+      qa_rejected: {
+        command: `*apply-qa-fixes${storyArg}`,
+        agent: '@dev',
+        rationale: 'QA rejected the story. Apply fixes before progressing.',
+        confidence: 0.95,
+      },
+      ci_red: {
+        command: '*run-tests',
+        agent: '@dev',
+        rationale: 'CI is red. Reproduce and fix failing tests/checks first.',
+        confidence: 0.92,
+      },
+      completed: {
+        command: `*close-story${storyArg}`,
+        agent: '@po',
+        rationale: 'Story is complete. Close lifecycle and move to next item.',
+        confidence: 0.9,
+      },
+      in_development: {
+        command: '*run-tests',
+        agent: '@dev',
+        rationale: 'Code is in progress with local changes. Validate before QA handoff.',
+        confidence: 0.85,
+      },
+      ready_for_validation: {
+        command: `*review-build${storyArg}`,
+        agent: '@qa',
+        rationale: 'Development appears stable. Proceed to QA structured review.',
+        confidence: 0.82,
+      },
+      unknown: {
+        command: `*next${storyArg}`,
+        agent: '@dev',
+        rationale: 'Context is incomplete. Request explicit workflow guidance.',
+        confidence: 0.4,
+      },
+    };
+
+    const recommendation = map[result.state] || map.unknown;
+    return {
+      state: result.state,
+      command: recommendation.command,
+      agent: recommendation.agent,
+      rationale: recommendation.rationale,
+      confidence: recommendation.confidence,
+    };
   }
 
   /**

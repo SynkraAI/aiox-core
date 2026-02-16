@@ -22,6 +22,7 @@ const path = require('path');
 let wis = null;
 let SessionContextLoader = null;
 let learning = null;
+let WorkflowStateManager = null;
 
 /**
  * Default cache TTL for suggestions (5 minutes)
@@ -93,6 +94,15 @@ class SuggestionEngine {
         learning = null;
       }
     }
+
+    if (!WorkflowStateManager) {
+      try {
+        ({ WorkflowStateManager } = require('../../development/scripts/workflow-state-manager'));
+      } catch (error) {
+        console.warn('[SuggestionEngine] Failed to load WorkflowStateManager:', error.message);
+        WorkflowStateManager = null;
+      }
+    }
   }
 
   /**
@@ -154,11 +164,12 @@ class SuggestionEngine {
    */
   async suggestNext(context) {
     this._loadDependencies();
+    const runtimeNext = this._getRuntimeNextRecommendation(context);
 
     // Check cache first
     const cacheKey = this._generateCacheKey(context);
     if (this._isCacheValid(cacheKey)) {
-      return this.suggestionCache;
+      return this._withRuntimeRecommendation(this.suggestionCache, runtimeNext);
     }
 
     // Default result for when WIS is not available
@@ -172,7 +183,7 @@ class SuggestionEngine {
     };
 
     if (!wis) {
-      return defaultResult;
+      return this._withRuntimeRecommendation(defaultResult, runtimeNext);
     }
 
     try {
@@ -180,10 +191,10 @@ class SuggestionEngine {
       const suggestions = wis.getSuggestions(context);
 
       if (!suggestions || suggestions.length === 0) {
-        return {
+        return this._withRuntimeRecommendation({
           ...defaultResult,
           message: 'No matching workflow found for current context',
-        };
+        }, runtimeNext);
       }
 
       // Get workflow match info
@@ -222,7 +233,7 @@ class SuggestionEngine {
           : 0;
 
       // Build result
-      const result = {
+      let result = {
         workflow: match?.name || suggestions[0]?.workflow || null,
         currentState: suggestions[0]?.state || null,
         confidence: Math.round(finalAvgConfidence * 100) / 100,
@@ -230,6 +241,8 @@ class SuggestionEngine {
         isUncertain: finalAvgConfidence < LOW_CONFIDENCE_THRESHOLD,
         message: null,
       };
+
+      result = this._withRuntimeRecommendation(result, runtimeNext);
 
       // Cache the result
       this._cacheResult(cacheKey, result);
@@ -242,6 +255,102 @@ class SuggestionEngine {
         message: `Error: ${error.message}`,
       };
     }
+  }
+
+  /**
+   * Build runtime execution signals for deterministic next-action recommendation
+   * @param {Object} context - Current session context
+   * @returns {Object} Normalized runtime signals
+   * @private
+   */
+  _buildRuntimeSignals(context = {}) {
+    const projectState = context.projectState || {};
+    const hasUncommitted =
+      typeof projectState.hasUncommittedChanges === 'boolean'
+        ? projectState.hasUncommittedChanges
+        : false;
+
+    const baseSignals = {
+      story_status:
+        projectState.story_status || projectState.storyStatus || (projectState.activeStory ? 'in_progress' : 'unknown'),
+      qa_status: projectState.qa_status || projectState.qaStatus || 'unknown',
+      ci_status:
+        projectState.ci_status ||
+        projectState.ciStatus ||
+        (projectState.failingTests ? 'failed' : 'unknown'),
+      has_uncommitted_changes: hasUncommitted,
+    };
+
+    return {
+      ...baseSignals,
+      ...(context.executionSignals || {}),
+    };
+  }
+
+  /**
+   * Get deterministic runtime-first recommendation if signals are available
+   * @param {Object} context - Current session context
+   * @returns {Object|null} Runtime recommendation or null
+   * @private
+   */
+  _getRuntimeNextRecommendation(context = {}) {
+    if (!WorkflowStateManager) {
+      return null;
+    }
+
+    try {
+      const manager = new WorkflowStateManager();
+      const runtimeSignals = this._buildRuntimeSignals(context);
+      const recommendation = manager.getNextActionRecommendation(runtimeSignals, {
+        story: context.storyPath || '',
+      });
+
+      if (!recommendation || recommendation.state === 'unknown') {
+        return null;
+      }
+
+      return recommendation;
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  /**
+   * Merge runtime-first deterministic recommendation into suggestion result.
+   * @param {Object} result - Suggestion result
+   * @param {Object|null} runtimeNext - Runtime recommendation
+   * @returns {Object} Enhanced result
+   * @private
+   */
+  _withRuntimeRecommendation(result, runtimeNext) {
+    if (!result || !runtimeNext) {
+      return result;
+    }
+
+    const runtimeSuggestion = {
+      command: runtimeNext.command,
+      args: '',
+      description: runtimeNext.rationale,
+      confidence: runtimeNext.confidence,
+      priority: 0,
+      source: 'runtime_first',
+      agent: runtimeNext.agent,
+      executionState: runtimeNext.state,
+    };
+
+    const existing = Array.isArray(result.suggestions) ? result.suggestions : [];
+    const normalizedRuntimeCommand = String(runtimeSuggestion.command || '').trim().toLowerCase();
+    const deduped = existing.filter(
+      (s) => String((s.command || '') + (s.args ? ` ${s.args}` : '')).trim().toLowerCase() !== normalizedRuntimeCommand,
+    );
+
+    return {
+      ...result,
+      suggestions: [runtimeSuggestion, ...deduped],
+      confidence: Math.max(result.confidence || 0, runtimeNext.confidence || 0),
+      isUncertain: false,
+      runtimeState: runtimeNext.state,
+    };
   }
 
   /**

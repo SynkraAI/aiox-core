@@ -4,6 +4,9 @@
 
 Suggest next commands based on current workflow context using the Workflow Intelligence System (WIS). Helps users navigate workflows efficiently without memorizing command sequences.
 
+AIOS 4.0.4 runtime-first mode adds deterministic next-step recommendation from
+execution signals (story/qa/ci/diff) via `workflow-state-manager`.
+
 ## Task Definition (AIOS Task Format V1.0)
 
 ```yaml
@@ -88,7 +91,23 @@ const context = await engine.buildContext({
 });
 ```
 
-### Step 3: Get Suggestions
+### Step 3: Runtime-First Deterministic Recommendation (Preferred)
+```javascript
+const { WorkflowStateManager } = require('.aios-core/development/scripts/workflow-state-manager');
+const manager = new WorkflowStateManager();
+
+const runtimeNext = manager.getNextActionRecommendation(
+  {
+    story_status: context.projectState?.storyStatus || 'unknown',
+    qa_status: context.projectState?.qaStatus || 'unknown',
+    ci_status: context.projectState?.ciStatus || 'unknown',
+    has_uncommitted_changes: context.projectState?.hasUncommittedChanges || false,
+  },
+  { story: args.story || context.storyPath || '' },
+);
+```
+
+### Step 4: Get WIS Suggestions (Fallback / enrichment)
 ```javascript
 const result = await engine.suggestNext(context);
 
@@ -103,15 +122,27 @@ const result = await engine.suggestNext(context);
 // }
 ```
 
-### Step 4: Format Output
+### Step 5: Format Output
 ```javascript
 const formatter = require('.aios-core/workflow-intelligence/engine/output-formatter');
 
-// Limit to top 3 unless --all flag
-const displaySuggestions = args.all ? result.suggestions : result.suggestions.slice(0, 3);
+const runtimeSuggestion = {
+  command: runtimeNext.command,
+  args: '',
+  description: runtimeNext.rationale,
+  confidence: runtimeNext.confidence,
+  priority: 1,
+};
+const mergedSuggestions = [runtimeSuggestion, ...(result.suggestions || [])];
+const displaySuggestions = args.all ? mergedSuggestions : mergedSuggestions.slice(0, 3);
 
 // Display formatted output
-formatter.displaySuggestions(result.workflow, result.currentState, result.confidence, displaySuggestions);
+formatter.displaySuggestions({
+  workflow: result.workflow || 'runtime_first',
+  currentState: runtimeNext.state,
+  confidence: runtimeNext.confidence,
+  suggestions: displaySuggestions,
+});
 ```
 
 ---

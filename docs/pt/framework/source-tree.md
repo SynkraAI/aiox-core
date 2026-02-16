@@ -419,7 +419,7 @@ dependencies:
 | Legado (Deprecado)              | Atual (Squads)                  |
 | ------------------------------- | ------------------------------- |
 | `Squads/` directory             | `templates/squad/` template     |
-| `expansionPacksLocation` config | `squadsTemplateLocation` config |
+| `legacyPacksLocation` config | `squadsTemplateLocation` config |
 | `pack.yaml` manifest            | `squad.yaml` manifest           |
 | Direct loading                  | Template-based creation         |
 
@@ -566,7 +566,7 @@ Directories: kebab-case (minúsculas, separado por hífen)
   ✅ .aios-core/
   ✅ Squads/
   ❌ .AIOS-Core/
-  ❌ expansionPacks/
+  ❌ legacy-packs/
 
 Files (Code): kebab-case com extensão
   ✅ agent-executor.js

@@ -252,10 +252,26 @@ class DashboardIntegration extends EventEmitter {
       await fs.writeJson(this.statusPath, status, { spaces: 2 });
       this.emit('statusUpdated', status);
     } catch (error) {
-      this.emit('error', { type: 'statusUpdate', error });
+      this._emitSafeError({ type: 'statusUpdate', error });
     }
 
     return status;
+  }
+
+  /**
+   * Emit error event only when listeners are present, otherwise degrade to warning.
+   * Avoids unhandled EventEmitter 'error' exceptions in background update flows.
+   * @private
+   * @param {Object} payload
+   */
+  _emitSafeError(payload) {
+    if (this.listenerCount('error') > 0) {
+      this.emit('error', payload);
+      return;
+    }
+
+    const message = payload?.error?.message || 'unknown dashboard error';
+    console.warn(`[DashboardIntegration] ${payload?.type || 'error'}: ${message}`);
   }
 
   /**

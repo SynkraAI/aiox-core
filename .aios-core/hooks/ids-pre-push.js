@@ -16,6 +16,25 @@ const path = require('path');
 
 const REPO_ROOT = path.resolve(__dirname, '../..');
 
+function isDocsOnlyPath(relativePath) {
+  const p = String(relativePath || '').replace(/\\/g, '/');
+  if (!p) return false;
+
+  if (p.startsWith('docs/')) return true;
+  if (p === 'README.md') return true;
+  if (p === 'CHANGELOG.md') return true;
+  if (p === 'CONTRIBUTING.md') return true;
+  if (p === 'CODE_OF_CONDUCT.md') return true;
+  if (p === 'AGENTS.md') return true;
+
+  return false;
+}
+
+function isDocsOnlyPush(changes) {
+  if (!Array.isArray(changes) || changes.length === 0) return false;
+  return changes.every((c) => isDocsOnlyPath(c.relativePath));
+}
+
 function getChangedFilesSinceRemote() {
   try {
     const trackingBranch = execSync('git rev-parse --abbrev-ref --symbolic-full-name @{u}', {
@@ -58,7 +77,11 @@ function getChangedFilesSinceRemote() {
       }
 
       if (!filePath) continue;
-      changes.push({ action, filePath: path.resolve(REPO_ROOT, filePath) });
+      changes.push({
+        action,
+        relativePath: filePath,
+        filePath: path.resolve(REPO_ROOT, filePath),
+      });
     }
 
     return changes;
@@ -73,6 +96,11 @@ async function main() {
 
   if (changes.length === 0) {
     console.log('[IDS-Hook] No relevant changes for registry update.');
+    process.exit(0);
+  }
+
+  if (process.env.AIOS_IDS_FORCE !== '1' && isDocsOnlyPush(changes)) {
+    console.log('[IDS-Hook] Docs-only push detected, skipping registry update.');
     process.exit(0);
   }
 

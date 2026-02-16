@@ -196,7 +196,7 @@ commands:
 
   # === UNIVERSAL COMMANDS ===
   scan {path|url}: 'Analyze HTML/React artifact for patterns'
-  integrate {pack}: 'Connect with squad'
+  integrate {squad}: 'Connect with squad'
   help: 'Show all commands organized by phase'
   status: 'Show current workflow phase'
   guide: 'Show comprehensive usage guide for this agent'

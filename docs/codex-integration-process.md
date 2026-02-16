@@ -16,6 +16,18 @@ O Codex hoje e alvo de primeira classe no AIOS:
 
 Em termos praticos: Codex esta no mesmo trilho arquitetural das integracoes principais do AIOS, sem caminho paralelo legado.
 
+## Status de Compatibilidade (AIOS 4.0.4)
+
+| O que você quer fazer | Funciona no Codex? | Como fazer |
+| --- | --- | --- |
+| Ativar agentes AIOS | Works | `/skills` depois escolha `aios-<agent-id>` |
+| Sincronizar e validar arquivos AIOS | Works | `npm run sync:ide:codex` e `npm run validate:codex-sync` |
+| Checagens automáticas antes/depois de ações | Limited | Rode `npm run validate:parity` manualmente; parte da automação depende de disciplina no fluxo |
+
+Regra prática para iniciantes:
+- Se você quer o máximo de automação (checagens automáticas sem precisar rodar comandos), prefira Claude Code ou Gemini CLI.
+- Se você usa Codex, siga o fluxo local-first: ative agentes via `/skills` e rode os validadores após cada mudança.
+
 ## Arquitetura Canonica
 
 ### Fonte de verdade
