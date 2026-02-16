@@ -5,6 +5,14 @@ All notable changes to Synkra AIOS will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.2.7] - 2026-02-16
+
+### Fixed
+
+- Pro wizard (`npx aios-core install`) now auto-installs `@aios-fullstack/pro` package during Step 2, fixing "Pro package not found" error in greenfield and brownfield projects.
+- Greenfield projects without `package.json` now get `npm init -y` automatically before pro install.
+- Removed unused `headings` import in `pro-setup.js`.
+
 ## [Unreleased]
 
 ### Added

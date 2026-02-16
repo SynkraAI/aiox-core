@@ -16,7 +16,7 @@
 'use strict';
 
 const { createSpinner, showSuccess, showError, showWarning, showInfo } = require('./feedback');
-const { colors, headings, status } = require('../utils/aios-colors');
+const { colors, status } = require('../utils/aios-colors');
 
 /**
  * Gold color for Pro branding.
@@ -947,6 +947,55 @@ async function validateKeyWithApi(key) {
 async function stepInstallScaffold(targetDir, options = {}) {
   showStep(2, 3, 'Pro Content Installation');
 
+  const path = require('path');
+  const fs = require('fs');
+  const { execSync } = require('child_process');
+
+  const proSourceDir = path.join(targetDir, 'node_modules', '@aios-fullstack', 'pro');
+
+  // Step 2a: Ensure package.json exists (greenfield projects)
+  const packageJsonPath = path.join(targetDir, 'package.json');
+  if (!fs.existsSync(packageJsonPath)) {
+    const initSpinner = createSpinner('Initializing package.json...');
+    initSpinner.start();
+    try {
+      execSync('npm init -y', { cwd: targetDir, stdio: 'pipe' });
+      initSpinner.succeed('package.json created');
+    } catch (err) {
+      initSpinner.fail('Failed to create package.json');
+      return { success: false, error: `npm init failed: ${err.message}` };
+    }
+  }
+
+  // Step 2b: Install @aios-fullstack/pro if not present
+  if (!fs.existsSync(proSourceDir)) {
+    const installSpinner = createSpinner('Installing @aios-fullstack/pro...');
+    installSpinner.start();
+    try {
+      execSync('npm install @aios-fullstack/pro', {
+        cwd: targetDir,
+        stdio: 'pipe',
+        timeout: 120000,
+      });
+      installSpinner.succeed('Pro package installed');
+    } catch (err) {
+      installSpinner.fail('Failed to install Pro package');
+      return {
+        success: false,
+        error: `npm install @aios-fullstack/pro failed: ${err.message}. Try manually: npm install @aios-fullstack/pro`,
+      };
+    }
+
+    // Validate installation
+    if (!fs.existsSync(proSourceDir)) {
+      return {
+        success: false,
+        error: 'Pro package not found after npm install. Check npm output.',
+      };
+    }
+  }
+
+  // Step 2c: Scaffold pro content
   const scaffolderModule = loadProScaffolder();
 
   if (!scaffolderModule) {
@@ -955,10 +1004,6 @@ async function stepInstallScaffold(targetDir, options = {}) {
   }
 
   const { scaffoldProContent } = scaffolderModule;
-  const path = require('path');
-
-  // Determine pro source directory
-  const proSourceDir = path.join(targetDir, 'node_modules', '@aios-fullstack', 'pro');
 
   const spinner = createSpinner('Scaffolding pro content...');
   spinner.start();
