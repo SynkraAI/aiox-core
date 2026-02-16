@@ -395,7 +395,34 @@ async function loginWithRetry(client, email) {
       // Activate Pro
       return activateProByAuth(client, loginResult.sessionToken);
     } catch (loginError) {
-      if (loginError.code === 'INVALID_CREDENTIALS') {
+      if (loginError.code === 'EMAIL_NOT_VERIFIED') {
+        // Email not verified — poll by retrying login until verified
+        spinner.info('Email not verified yet. Please check your inbox and click the verification link.');
+        console.log(colors.dim('  (Checking every 5 seconds... timeout in 10 minutes)'));
+
+        const startTime = Date.now();
+        while (Date.now() - startTime < VERIFY_POLL_TIMEOUT_MS) {
+          await new Promise((resolve) => setTimeout(resolve, VERIFY_POLL_INTERVAL_MS));
+          try {
+            const retryLogin = await client.login(email, password);
+            showSuccess('Email verified!');
+            if (!retryLogin.emailVerified) {
+              const verifyResult = await waitForEmailVerification(client, retryLogin.sessionToken, email);
+              if (!verifyResult.success) return verifyResult;
+            }
+            return activateProByAuth(client, retryLogin.sessionToken);
+          } catch (retryError) {
+            if (retryError.code !== 'EMAIL_NOT_VERIFIED') {
+              return { success: false, error: retryError.message };
+            }
+            // Still not verified, continue polling
+          }
+        }
+
+        showError('Email verification timed out after 10 minutes.');
+        showInfo('Run the installer again to retry.');
+        return { success: false, error: 'Email verification timed out.' };
+      } else if (loginError.code === 'INVALID_CREDENTIALS') {
         const remaining = MAX_RETRIES - attempt;
         if (remaining > 0) {
           spinner.fail(`Incorrect password. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining.`);
