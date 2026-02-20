@@ -633,6 +633,11 @@ claude-sonnet-4-6
 
 **Decisão:** APPROVED WITH CONCERNS — Story pode prosseguir para @devops push após criação da story de follow-up para group actions.
 
+### Atualização (2026-02-20) — Após ZAP-019 implementada
+- **MEDIUM concern resolvido:** ZAP-019 implementou o group action menu completo (Ver detalhes / Mover de fase / Arquivar grupo) em `group-card.tsx`. AC-018.6 agora **totalmente satisfeita**.
+- **TypeScript:** 0 erros confirmados em apps/web + apps/api após ZAP-019.
+- **Verdict atualizado: ✅ PASS** — todos os ACs atendidos.
+
 ---
 
 ## Change Log

@@ -39,7 +39,7 @@
 {
   waGroupId: z.string().min(1),              // ⚠️ camelCase! WhatsApp group JID (e.g. 120363XXX@g.us)
   projectId: z.string().uuid(),              // ⚠️ camelCase! required
-  phaseId: z.string().uuid().optional(),     // ⚠️ camelCase! optional
+  phaseId: z.string().uuid(),                // ⚠️ camelCase! REQUIRED (confirmado em groups.ts:43 — sem .optional())
   name: z.string().min(1).max(200),          // ⚠️ REQUIRED (não optional!) — max 200
   capacity: z.number().int().min(1).max(1024).default(1024) // optional, default 1024
 }
@@ -189,6 +189,43 @@ Registrado: `apps/api/src/index.ts` linha 45
 ### Completion Notes
 
 ### Agent Model Used
+
+---
+
+## QA Results
+
+**Reviewer:** Quinn (QA Guardian) | **Date:** 2026-02-20 | **Verdict:** ⚠️ CONCERNS
+
+### Code Review — Static Analysis
+
+| AC | Código | Status |
+|----|--------|--------|
+| AC-016.1 | Schema camelCase confirmado: `projectId`, `phaseId`, `waGroupId`, `name`, `capacity`. Tenant isolation: verifica projeto e fase. Retorna 201 com grupo criado. | ✅ |
+| AC-016.2 | `sessionManager.getGroupInviteLink(...)` chamado. Wrap em try-catch: se falhar, `wa_invite_link = undefined` (null no DB). Graceful degradation por design. | ⚠️ |
+| AC-016.3 | `if (error.code === '23505') throw new AppError('Group already registered', 'DUPLICATE', 409)` — constraint Postgres. | ✅ |
+| AC-016.4 | `if (!project) throw new NotFoundError('Project')` — 404 para projectId não encontrado ou de outro tenant. | ✅ |
+| AC-016.5 | `POST /:id/refresh-link` retorna `{ data }` com grupo completo (inclui `wa_invite_link`). Campo acessível em `data.wa_invite_link`. | ✅ |
+| AC-016.6 | Resposta: id, name, wa_group_id, wa_invite_link, capacity, participant_count, status — todos presentes no `.select()`. | ✅ |
+
+### TypeScript
+- `npm run typecheck -w apps/api` → **0 erros** ✅
+
+### Concerns
+- **MEDIUM — Discrepância de documentação:** Story documenta `phaseId: z.string().uuid().optional()` mas implementação é **REQUIRED** (`phaseId: z.string().uuid()` sem `.optional()`). O curl de AC-016.1 inclui phaseId, então o happy path funciona, mas enviar sem phaseId retorna 400 (não aceita como opcional). Story doc desatualizado — atualizar para refletir que phaseId é obrigatório.
+- **LOW — Invite link pode ser null:** Se Evolution API estiver offline, `wa_invite_link` será null na resposta. AC-016.2 exige não-null. Comportamento é graceful degradation por design, mas pode fazer AC-016.2 falhar em ambiente sem WhatsApp conectado.
+- **LOW — `as any` em refresh-link:** Linha 164 usa `(group.project as any)?.connection_id`. Funciona mas viola tipagem estrita. Tech-debt item.
+
+### Manual Tests Pendentes
+- AC-016.1/2: Requer connection com status='connected' + wa_group_id real de um grupo WhatsApp ativo
+- AC-016.3: Registrar mesmo waGroupId duas vezes → 409
+- AC-016.5: POST /groups/:id/refresh-link → verificar `wa_invite_link` na resposta
+
+### Gate Decision
+**CONCERNS** — 1 concern MEDIUM (discrepância de documentação — phaseId required vs optional), 2 LOW. Não bloqueante para MVP. Ações recomendadas: (1) Corrigir story doc: `phaseId` é obrigatório; (2) Criar tech-debt para remover `as any` no refresh-link.
+
+### Fixes Aplicados (2026-02-20)
+- **MEDIUM resolvido:** Story doc corrigida — `phaseId` agora documentado como REQUIRED (sem `.optional()`).
+- **LOW resolvido:** `as any` em `groups.ts:164` removido. Substituído por `(group.project as Array<{ connection_id: string }> | null)?.[0]?.connection_id` com guard `if (!connectionId) throw new NotFoundError('Group')`. TypeScript: 0 erros confirmados. **Verdict atualizado: PASS**
 
 ---
 

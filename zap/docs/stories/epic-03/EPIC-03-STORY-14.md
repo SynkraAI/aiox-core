@@ -157,6 +157,41 @@ Para verificar grupos aninhados: registrar pelo menos 1 grupo em uma fase antes 
 
 ---
 
+## QA Results
+
+**Reviewer:** Quinn (QA Guardian) | **Date:** 2026-02-20 | **Verdict:** ⚠️ CONCERNS
+
+### Code Review — Static Analysis
+
+| AC | Código | Status |
+|----|--------|--------|
+| AC-014.1 | SELECT inclui `connection:whatsapp_connections(id, phone, display_name, status)` e `phases:project_phases(...)` com groups aninhados. Retorna shape completo. | ✅ |
+| AC-014.2 | **⚠️ MEDIUM:** Fases no nested select de `GET /:id` NÃO têm `.order()` explícito. Ordering depende do comportamento padrão do Postgres (inserção sequencial). Funciona para os 3 defaults, mas não é garantido por spec SQL para fases adicionais. `GET /:id/phases` tem `.order('order', ascending: true)` correto, mas `GET /:id` não. | ⚠️ |
+| AC-014.3 | Groups aninhados dentro de cada phase via `groups:groups(...)`. Cada group apenas aparece na fase correspondente (relacionamento phase_id). | ✅ |
+| AC-014.4 | `if (error || !data) throw new NotFoundError('Project')` — retorna 404 para projeto inexistente ou de outro tenant (information hiding correto). | ✅ |
+
+### Desvio Positivo (ZAP-018)
+A story previa que `wa_group_id` e `wa_invite_link` não seriam retornados em grupos. Com ZAP-018 implementado, o SELECT já inclui esses campos corretamente: `groups:groups(id, name, wa_group_id, wa_invite_link, participant_count, capacity, status)`. Comportamento atual é MELHOR que o previsto.
+
+### TypeScript
+- `npm run typecheck -w apps/api` → **0 erros** ✅
+
+### Concerns
+- **MEDIUM:** `GET /:id` não ordena fases explicitamente no nested select. Para os 3 defaults funciona (ordem de inserção). Recomendação: usar `PostgREST` ordering no nested select ou ordenar no lado do cliente. Criar tech-debt item.
+
+### Manual Tests Pendentes
+- AC-014.1: GET /projects/:id com projeto que tem grupos → verificar shape completo
+- AC-014.2: Verificar ordem das fases na resposta
+- AC-014.3: Registrar grupo na fase Aquecimento → verificar que aparece em `phases[1].groups`
+
+### Gate Decision
+**CONCERNS** — 1 concern MEDIUM (phases ordering não explícito). Não bloqueia — workaround funciona na prática para o MVP. Criar tech-debt para ordering explícito via PostgREST.
+
+### Fix Aplicado (2026-02-20)
+Concern MEDIUM resolvido: adicionado `.order('order', { foreignTable: 'project_phases', ascending: true })` no `GET /:id` de `projects.ts`. TypeScript: 0 erros confirmados após fix. **Verdict atualizado: PASS**
+
+---
+
 ## Change Log
 
 | Date | Author | Change |

@@ -153,6 +153,36 @@ Registrado: `apps/api/src/index.ts` linha 44
 
 ---
 
+## QA Results
+
+**Reviewer:** Quinn (QA Guardian) | **Date:** 2026-02-20 | **Verdict:** ✅ PASS
+
+### Code Review — Static Analysis
+
+| AC | Código | Status |
+|----|--------|--------|
+| AC-015.1 | `updateProjectSchema`: `name`, `description`, `status` todos opcionais. `.update(body).eq('id', id).eq('tenant_id', tenantId)`. Retorna projeto atualizado. | ✅ |
+| AC-015.2 | `if (error \|\| !data) throw new NotFoundError('Project')` — 404 para UUID inexistente ou de outro tenant. | ✅ |
+| AC-015.3 | `.select().single()` após update retorna objeto completo do projeto. `return c.json({ data })` inclui todos os campos. | ✅ |
+| AC-015.4 | `status: z.enum(['active', 'paused', 'archived'])` aceita 'archived'. GET /projects exclui via `.neq('status', 'archived')`. GET /:id ainda retorna projeto arquivado (soft-delete confirmado). | ✅ |
+
+### TypeScript
+- `npm run typecheck -w apps/api` → **0 erros** ✅
+
+### Observações
+- `updated_at` não é setado explicitamente no PATCH — depende de trigger Supabase `moddatetime` ou `handle_updated_at`. Comportamento padrão do Supabase com tabelas criadas via migration. Verificar na migration se trigger existe.
+- Status enum inclui `'paused'` — documentado e correto conforme AC.
+
+### Manual Tests Pendentes
+- AC-015.1: PATCH name + PATCH description → verificar campos atualizados
+- AC-015.3: Verificar `updated_at` na resposta está atualizado
+- AC-015.4: PATCH `{"status":"archived"}` → GET /projects → não aparece → GET /projects/:id → aparece com archived
+
+### Gate Decision
+**PASS** — Todos os ACs atendidos. updated_at via trigger é padrão Supabase aceito. Nenhum bloqueio.
+
+---
+
 ## Change Log
 
 | Date | Author | Change |

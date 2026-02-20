@@ -187,6 +187,38 @@ Registrado em: `apps/api/src/index.ts` linha 44
 
 ---
 
+## QA Results
+
+**Reviewer:** Quinn (QA Guardian) | **Date:** 2026-02-20 | **Verdict:** ✅ PASS
+
+### Code Review — Static Analysis
+
+| AC | Código | Status |
+|----|--------|--------|
+| AC-012.1 | `createProjectSchema`: `connectionId: z.string().uuid()`, `name: z.string().min(1).max(100)` — camelCase confirmado. Verifica conexão do tenant antes de criar. Retorna `{ data }` com 201. | ✅ |
+| AC-012.2 | `if (!connection) throw new NotFoundError('Connection')` — retorna 404 se connectionId não pertencer ao tenant. | ✅ |
+| AC-012.3 | Linhas 73-77: insere Leads (order:0), Aquecimento (order:1), Compradores (order:2) com capacity_per_group:1024. Endpoint `GET /:id/phases` disponível com `.order('order', { ascending: true })`. | ✅ |
+| AC-012.4 | `return c.json({ data }, 201)` — resposta inclui id, name, status, connection_id, created_at. | ✅ |
+| AC-012.5 | `zValidator('json', createProjectSchema)` — Hono retorna 400 automaticamente em payload inválido. | ✅ |
+
+### TypeScript
+- `npm run typecheck -w apps/api` → **0 erros** ✅
+
+### Concerns (não bloqueantes)
+- **LOW:** Erro na inserção das 3 fases padrão não é verificado (linhas 73-77 não checam o retorno). Se falhar, projeto é criado sem fases. Risco baixo mas `await` sem error check. Sugestão: verificar `error` do insert de phases.
+
+### Manual Tests Pendentes
+Os seguintes testes requerem servidor ativo + JWT válido + connection_id real:
+- AC-012.1: `curl POST /api/v1/projects` com token e connection_id válidos
+- AC-012.2: Usar connection_id de outro tenant → verificar 404
+- AC-012.3: `GET /api/v1/projects/:id/phases` → verificar 3 fases
+- AC-012.5: Payload sem `name` → 400; sem `connectionId` → 400
+
+### Gate Decision
+**PASS** — Implementação atende todos os ACs. TypeScript OK. Concern de LOW severity não bloqueia. Manual tests podem ser executados com stack ativa (Docker confirmado ativo).
+
+---
+
 ## Change Log
 
 | Date | Author | Change |
