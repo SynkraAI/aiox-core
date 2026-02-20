@@ -183,12 +183,51 @@ Registrado: `apps/api/src/index.ts` linha 45
 
 ---
 
+## QA Results
+
+**Revisor:** Quinn (@qa) | **Data:** 2026-02-20 | **Veredicto:** ⚠️ CONCERNS
+
+### Code Review — Static Analysis
+
+| AC | Código | Status |
+|----|--------|--------|
+| AC-017.1 | `.neq('status', 'archived')` — grupos arquivados excluídos da listagem. `.order('created_at', { ascending: false })`. Tenant isolation via `.eq('tenant_id', tenantId)`. | ✅ |
+| AC-017.2 | `if (projectId) query.eq('project_id', projectId)` e `if (phaseId) query.eq('phase_id', phaseId)` — filtros opcionais aplicados corretamente. | ✅ |
+| AC-017.3 | `GET /:id` retorna shape com `phase:project_phases(id, name, order)` e `participants:group_participants(id, phone, joined_at, removed_at)`. Dados presentes. **Discrepâncias de documentação vs implementação real** (ver LOWs abaixo). | ⚠️ |
+| AC-017.4 | Nested select `participants:group_participants(id, phone, joined_at, removed_at)` NÃO aplica filtro `removed_at IS NULL` — retorna **todos** os participantes incluindo removidos. Endpoint dedicado `GET /:id/participants` (linha 193-202) usa `.is('removed_at', null)` corretamente. | ❌ |
+| AC-017.5 | `PATCH /:id` aceita `name`, `capacity`, `status`, `phaseId` (mapeado para `phase_id`). Tenant isolation confirmada. | ✅ |
+
+### TypeScript
+- `npm run typecheck -w apps/api` → **0 erros** ✅
+- `npm run typecheck -w apps/web` → **0 erros** ✅
+
+### Concerns
+
+- **MEDIUM — AC-017.4: Participantes removidos incluídos em GET /:id:** `groups.ts:112` — o nested select `participants:group_participants(id, phone, joined_at, removed_at)` não filtra `removed_at IS NULL`. PostgREST não suporta filtro IS NULL em nested selects inline. Fix recomendado: aplicar filtro no handler antes de retornar: `if (data.participants) data.participants = data.participants.filter((p) => !p.removed_at)`. O endpoint dedicado `GET /:id/participants` (linha 193-202) já implementa corretamente com `.is('removed_at', null)`.
+
+- **LOW — Discrepâncias de documentação no AC-017.3:** Story doc documenta campos que diferem do código:
+  - `"phase.position"` → real é `"phase.order"` (campo da tabela `project_phases`)
+  - `"participants[].wa_jid"` → real é `"participants[].phone"` (campo da tabela `group_participants`)
+  - `"invite_link"` → real é `"wa_invite_link"` (campo da tabela `groups`)
+  - Código está correto — documentação da story precisa ser corrigida para evitar confusão no frontend.
+
+### Manual Tests Pendentes
+- AC-017.1: Requer servidor ativo para verificar `.neq('status', 'archived')` em runtime
+- AC-017.4: Requer inserção manual de `group_participants` com `removed_at IS NULL` e `removed_at SET` para validar comportamento
+
+### Gate Decision
+**⚠️ CONCERNS** — 1 concern MEDIUM (participantes removidos incluídos em `GET /:id`), 1 concern LOW (discrepâncias de doc). O concern MEDIUM viola diretamente AC-017.4 mas o endpoint dedicado `GET /:id/participants` funciona corretamente. Não bloqueante para MVP dado que a UI usa o endpoint dedicado ou pode filtrar client-side. Recomendado fix antes de produção.
+
+---
+
 ## Change Log
 
 | Date | Author | Change |
 |------|--------|--------|
 | 2026-02-19 | River (SM) | Story created — QA-only verification (API pré-implementada durante EPIC-02) |
 | 2026-02-19 | Pax (PO) | Validated — GO. Corrigido: tabela "group_participants" (não "participants"). Status: Draft → Ready |
+| 2026-02-20 | Quinn (QA) | QA review — Veredicto: CONCERNS. 1 MEDIUM (participantes removidos em GET /:id), 1 LOW (discrepâncias de doc) |
+| 2026-02-20 | Dex (Dev) | Fix MEDIUM aplicado — post-filter `removed_at === null` em `GET /:id` (groups.ts:122). TypeScript: 0 erros. |
 
 ---
 
