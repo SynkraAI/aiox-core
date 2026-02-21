@@ -16,6 +16,7 @@ const { spawnSync } = require('child_process');
 const { getIDEConfig } = require('../config/ide-configs');
 const { validateProjectName } = require('./validators');
 const { getMergeStrategy, hasMergeStrategy } = require('../merger/index.js');
+const { syncAntigravityWorkflows } = require('../../../../.aios-core/infrastructure/scripts/ide-sync/utils/antigravity-workflows');
 
 /**
  * Render template with variables
@@ -384,6 +385,7 @@ async function createAntiGravityConfigJson(projectRoot, ideConfig) {
   };
 
   await fs.ensureDir(path.dirname(configPath));
+  await fs.writeFile(configPath, JSON.stringify(config, null, 2), 'utf8');
   return configPath;
 }
 
@@ -393,35 +395,10 @@ async function createAntiGravityConfigJson(projectRoot, ideConfig) {
  * @returns {Promise<string[]>} List of copied files
  */
 async function copyAntigravityStaticWorkflows(projectRoot) {
-  const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.aios-core', 'product', 'templates', 'ide-rules', 'antigravity', 'workflows');
-  const targetDir = path.join(projectRoot, '.agent', 'workflows');
-  const copiedFiles = [];
-
-  if (!await fs.pathExists(sourceDir)) {
-    return copiedFiles;
-  }
-
-  // Prevenir cópia sobre si mesmo no repo base
-  if (path.resolve(sourceDir) === path.resolve(targetDir)) {
-    return copiedFiles;
-  }
-
-  await fs.ensureDir(targetDir);
-
-  const files = await fs.readdir(sourceDir);
-  for (const file of files) {
-    if (!file.endsWith('.md')) continue;
-
-    const sourcePath = path.join(sourceDir, file);
-    const targetPath = path.join(targetDir, file);
-    const stat = await fs.stat(sourcePath);
-    if (stat.isFile()) {
-      await fs.copy(sourcePath, targetPath);
-      copiedFiles.push(targetPath);
-    }
-  }
-
-  return copiedFiles;
+  const resultFiles = [];
+  // Use the shared utility
+  syncAntigravityWorkflows(projectRoot, false, resultFiles, false);
+  return resultFiles.map(f => f.path).filter(Boolean);
 }
 
 /**

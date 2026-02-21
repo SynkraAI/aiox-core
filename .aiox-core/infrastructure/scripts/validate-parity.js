@@ -8,6 +8,7 @@ const { spawnSync } = require('child_process');
 const { validateClaudeIntegration } = require('./validate-claude-integration');
 const { validateCodexIntegration } = require('./validate-codex-integration');
 const { validateGeminiIntegration } = require('./validate-gemini-integration');
+const { validateAntigravityIntegration } = require('./validate-antigravity-integration');
 const { validateCodexSkills } = require('./codex-skills-sync/validate');
 const { validatePaths } = require('./validate-paths');
 
@@ -222,6 +223,7 @@ function runParityValidation(options = {}, deps = {}) {
   const runClaudeIntegration = deps.validateClaudeIntegration || validateClaudeIntegration;
   const runCodexIntegration = deps.validateCodexIntegration || validateCodexIntegration;
   const runGeminiIntegration = deps.validateGeminiIntegration || validateGeminiIntegration;
+  const runAntigravityIntegration = deps.validateAntigravityIntegration || validateAntigravityIntegration;
   const runCodexSkills = deps.validateCodexSkills || validateCodexSkills;
   const runPaths = deps.validatePaths || validatePaths;
   const resolvedContractPath = options.contractPath
@@ -243,6 +245,7 @@ function runParityValidation(options = {}, deps = {}) {
     { id: 'cursor-sync', exec: () => runSync('cursor', projectRoot) },
     { id: 'github-copilot-sync', exec: () => runSync('github-copilot', projectRoot) },
     { id: 'antigravity-sync', exec: () => runSync('antigravity', projectRoot) },
+    { id: 'antigravity-integration', exec: () => runAntigravityIntegration({ projectRoot }) },
     { id: 'codex-skills', exec: () => runCodexSkills({ projectRoot, strict: true, quiet: true }) },
     { id: 'paths', exec: () => runPaths({ projectRoot }) },
   ];
@@ -258,13 +261,13 @@ function runParityValidation(options = {}, deps = {}) {
   });
   const contractSummary = contract
     ? {
-        release: contract.release || null,
-        path: path.relative(projectRoot, resolvedContractPath),
-      }
+      release: contract.release || null,
+      path: path.relative(projectRoot, resolvedContractPath),
+    }
     : {
-        release: null,
-        path: path.relative(projectRoot, resolvedContractPath),
-      };
+      release: null,
+      path: path.relative(projectRoot, resolvedContractPath),
+    };
 
   return {
     ok: results.every((r) => r.ok) && contractViolations.length === 0,

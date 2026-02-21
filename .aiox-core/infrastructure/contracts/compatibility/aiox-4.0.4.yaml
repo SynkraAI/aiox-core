@@ -42,3 +42,4 @@ ide_matrix:
     expected_status: "Works"
     required_checks:
       - antigravity-sync
+      - antigravity-integration

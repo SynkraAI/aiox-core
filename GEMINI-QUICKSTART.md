@@ -32,9 +32,10 @@ GOOGLE_AI_API_KEY=sua-chave-aqui
 ## 2. Uso Básico
 
 ### Com o Wrapper (Recomendado)
+*(Nota: Substitua os caminhos pelos caminhos reais da sua máquina)*
 ```bash
 # Dentro de um projeto AIOS
-cd /Users/daniel/Documents/Bordeless/aios-core
+cd /path/to/your/aios-core
 gemini-aios
 
 # O wrapper vai:
@@ -81,7 +82,7 @@ Mostra todos os agentes disponíveis.
 
 ```bash
 # Iniciar Gemini no projeto AIOS
-cd ~/Documents/Bordeless/aios-core
+cd /path/to/your/aios-project
 gemini-aios
 
 # Dentro do Gemini:
@@ -97,7 +98,7 @@ gemini-aios
 
 | Recurso | Claude Code | Gemini CLI |
 |---------|-------------|------------|
-| Modelo | Claude Opus/Sonnet | Gemini 1.5 Pro/Flash |
+| Modelo | Claude Opus/Sonnet | Gemini 2.0 Flash |
 | Custo | $15+/mês | **Grátis** (60/min, 1000/dia) |
 | Ativação | `/dev` | `/aios-dev` |
 | MCP | Nativo | Via extensão |
@@ -113,7 +114,7 @@ gemini-aios
 echo $GOOGLE_AI_API_KEY
 
 # Se vazio, exportar manualmente
-export GOOGLE_AI_API_KEY="sk-..."
+export GOOGLE_AI_API_KEY="AIza..."
 ```
 
 ### Extensão não aparece
@@ -122,7 +123,7 @@ export GOOGLE_AI_API_KEY="sk-..."
 gemini extensions list | grep aios
 
 # Reinstalar se necessário
-cp -r ~/Documents/Bordeless/aios-core/packages/gemini-aios-extension/* ~/.gemini/extensions/aios/
+cp -r /path/to/your/aios-core/packages/gemini-aios-extension/* ~/.gemini/extensions/aios/
 ```
 
 ---
