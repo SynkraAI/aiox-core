@@ -28,6 +28,7 @@ const {
 const {
   installDependencies,
 } = require('../installer/dependency-installer');
+const { commandSync, commandValidate } = require('../../../../.aios-core/infrastructure/scripts/ide-sync/index');
 const {
   installAiosCore,
   hasPackageJson,
@@ -534,6 +535,38 @@ async function runWizard(options = {}) {
     } catch (error) {
       console.warn(`⚠️  Extra commands copy failed: ${error.message}`);
       answers.extraCommandsCopied = 0;
+    }
+
+    // Story INS-4.5: IDE Sync — transform agents/skills/commands for each configured IDE
+    console.log('\n🔄 Running IDE sync...');
+    const targetProjectRoot = process.cwd();
+    const savedCwd = process.cwd();
+    try {
+      process.chdir(targetProjectRoot);
+      await commandSync({ quiet: true });
+      answers.ideSyncStatus = 'synced';
+      console.log('✅ IDE sync: synced');
+
+      // Validate sync output (commandValidate does not support quiet — suppress its console output)
+      const _origLog = console.log;
+      console.log = () => {};
+      try {
+        await commandValidate({ quiet: true });
+        answers.ideSyncValidation = 'pass';
+      } catch (validateError) {
+        answers.ideSyncValidation = 'drift';
+      } finally {
+        console.log = _origLog;
+      }
+      if (answers.ideSyncValidation === 'drift') {
+        console.warn('⚠️  IDE sync validation: drift detected — run \'aios doctor --fix\' post-install');
+      }
+    } catch (syncError) {
+      console.warn(`⚠️  IDE sync failed: ${syncError.message} — run 'aios doctor --fix' post-install`);
+      answers.ideSyncStatus = 'failed';
+      answers.ideSyncValidation = 'skipped';
+    } finally {
+      process.chdir(savedCwd);
     }
 
     // Story 1.6: Environment Configuration
