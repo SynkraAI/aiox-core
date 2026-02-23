@@ -507,6 +507,15 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
           }
         }
 
+        // For Cursor, use IDE sync transformer to generate condensed rules
+        if (ideKey === 'cursor') {
+          spinner.start('Generating Cursor agent rules...');
+          const cursorAgentFiles = await generateCursorAgentRules(projectRoot, ide);
+          // Replace raw-copied agents with transformed versions
+          createdFiles.push(...cursorAgentFiles);
+          spinner.succeed(`Generated ${cursorAgentFiles.length} Cursor agent rules in ${ide.agentFolder}`);
+        }
+
         // For Claude Code, also copy .claude/rules folder, hooks, and settings
         if (ideKey === 'claude-code') {
           spinner.start('Copying Claude Code rules...');
@@ -975,6 +984,77 @@ async function linkGeminiExtension(projectRoot) {
   return { status: 'skipped', reason: 'link-failed' };
 }
 
+/**
+ * Generate Cursor agent rules using the IDE sync transformer
+ * Transforms full agent markdown files into condensed Cursor rules format
+ * and generates redirect files for deprecated agent names
+ * @param {string} projectRoot - Project root directory
+ * @param {Object} ideConfig - Cursor IDE configuration
+ * @returns {Promise<string[]>} List of created files
+ */
+async function generateCursorAgentRules(projectRoot, ideConfig) {
+  const createdFiles = [];
+
+  // Try to use the IDE sync transformer for proper condensed format
+  try {
+    const ideSyncDir = path.join(__dirname, '..', '..', '..', '..', '.aios-core', 'infrastructure', 'scripts', 'ide-sync');
+    const agentParserPath = path.join(ideSyncDir, 'agent-parser.js');
+    const cursorTransformerPath = path.join(ideSyncDir, 'transformers', 'cursor.js');
+
+    if (await fs.pathExists(agentParserPath) && await fs.pathExists(cursorTransformerPath)) {
+      const { parseAllAgents } = require(agentParserPath);
+      const cursorTransformer = require(cursorTransformerPath);
+
+      // v4: Agents are in development/agents/
+      const sourceDir = path.join(__dirname, '..', '..', '..', '..', '.aios-core', 'development', 'agents');
+      const targetDir = path.join(projectRoot, ideConfig.agentFolder);
+
+      await fs.ensureDir(targetDir);
+
+      const agents = parseAllAgents(sourceDir);
+
+      for (const agent of agents) {
+        // Skip agents with fatal errors
+        if (agent.error === 'Failed to parse YAML' || agent.error === 'No YAML block found') {
+          continue;
+        }
+
+        try {
+          const content = cursorTransformer.transform(agent);
+          const filename = cursorTransformer.getFilename(agent);
+          const targetPath = path.join(targetDir, filename);
+
+          await fs.writeFile(targetPath, content, 'utf8');
+          createdFiles.push(targetPath);
+        } catch (transformError) {
+          // Skip individual agent transform errors
+        }
+      }
+
+      // Generate redirect files for deprecated agent names
+      const redirects = {
+        'aios-developer': 'aios-master',
+        'aios-orchestrator': 'aios-master',
+        'db-sage': 'data-engineer',
+        'github-devops': 'devops',
+      };
+
+      for (const [oldName, newName] of Object.entries(redirects)) {
+        const redirectContent = `# Agent Redirect: ${oldName} → ${newName}\n\n> This agent has been renamed. Please use **@${newName}** instead.\n\nSee: .aios-core/development/agents/${newName}.md\n`;
+        const redirectPath = path.join(targetDir, `${oldName}.md`);
+        await fs.writeFile(redirectPath, redirectContent, 'utf8');
+        createdFiles.push(redirectPath);
+      }
+
+      return createdFiles;
+    }
+  } catch (error) {
+    // Fall through to return empty — raw agents were already copied by copyAgentFiles
+  }
+
+  return createdFiles;
+}
+
 module.exports = {
   generateIDEConfigs,
   showSuccessSummary,
@@ -988,4 +1068,5 @@ module.exports = {
   copyGeminiHooksFolder,
   createGeminiSettings,
   linkGeminiExtension,
+  generateCursorAgentRules,
 };

@@ -1,115 +1,84 @@
-# Synkra AIOS Development Rules for Cursor
+---
+description: Synkra AIOS Global Rules - Loaded on every conversation
+globs:
+alwaysApply: true
+---
+
+# Synkra AIOS Development Rules
 
 You are working with Synkra AIOS, an AI-Orchestrated System for Full Stack Development.
 
-## Core Development Rules
+## Core Principles (Constitution)
 
-### Agent Integration
-- Recognize AIOS agent activations: @dev, @qa, @architect, @pm, @po, @sm, @analyst
-- Agent commands use * prefix: *help, *create-story, *task, *exit
-- Follow agent-specific workflows and patterns
+1. **CLI First** → Toda funcionalidade CLI antes de qualquer UI
+2. **Story-Driven** → Nenhum código sem uma story associada em `docs/stories/`
+3. **No Invention** → Não inventar requisitos fora dos artefatos existentes
+4. **Quality First** → `npm run lint`, `npm run typecheck`, `npm test` devem passar
+5. **Agent Authority** → Respeitar autoridades exclusivas de cada agente
 
-### Story-Driven Development
-1. **Always work from a story file** in docs/stories/
-2. **Update story checkboxes** as you complete tasks: [ ] → [x]
+## Agent Activation
+
+Reconheça os seguintes atalhos para ativar agentes AIOS. Ao receber um atalho, carregue o arquivo correspondente em `.aios-core/development/agents/` e assuma a persona completa:
+
+| Atalho | Arquivo |
+|--------|---------|
+| `@dev` | `.aios-core/development/agents/dev.md` |
+| `@qa` | `.aios-core/development/agents/qa.md` |
+| `@architect` | `.aios-core/development/agents/architect.md` |
+| `@sm` | `.aios-core/development/agents/sm.md` |
+| `@po` | `.aios-core/development/agents/po.md` |
+| `@pm` | `.aios-core/development/agents/pm.md` |
+| `@analyst` | `.aios-core/development/agents/analyst.md` |
+| `@devops` | `.aios-core/development/agents/devops.md` |
+| `@data-engineer` | `.aios-core/development/agents/data-engineer.md` |
+| `@ux-design-expert` | `.aios-core/development/agents/ux-design-expert.md` |
+| `@squad-creator` | `.aios-core/development/agents/squad-creator.md` |
+| `@aios-master` | `.aios-core/development/agents/aios-master.md` |
+
+### Activation Rules
+
+- Read the FULL agent file (including YAML block) and adopt the persona
+- Display the greeting as specified in the agent definition
+- Agent commands use `*` prefix: `*help`, `*create-story`, `*task`, `*exit`
+- Stay in character until `*exit` is called
+- Only load dependency files when user requests a specific command execution
+
+## Story-Driven Development
+
+1. **Always work from a story file** in `docs/stories/`
+2. **Update story checkboxes** as you complete tasks: `[ ]` → `[x]`
 3. **Maintain the File List** section with all created/modified files
 4. **Follow acceptance criteria** exactly as written
 
-### Code Quality Standards
+## Code Quality Standards
+
 - Write clean, maintainable code following project conventions
 - Include comprehensive error handling
 - Add unit tests for all new functionality
 - Follow existing patterns in the codebase
+- Run all quality gates before marking tasks complete
 
-### Testing Protocol
-- Run all tests before marking tasks complete
-- Ensure linting passes: `npm run lint`
-- Verify type checking: `npm run typecheck`
-- Add tests for new features
-
-## AIOS Framework Structure
+## Project Structure
 
 ```
-aios-core/
-├── agents/       # Agent persona definitions
-├── tasks/        # Executable task workflows
-├── workflows/    # Multi-step workflows
-├── templates/    # Document templates
-└── checklists/   # Validation checklists
+.aios-core/                    # Framework core
+├── development/agents/        # Agent persona definitions (source of truth)
+├── development/tasks/         # Executable task workflows
+├── development/workflows/     # Multi-step workflows
+├── development/templates/     # Document templates
+└── core-config.yaml           # Project configuration
 
 docs/
-├── stories/      # Development stories
-├── prd/          # Sharded PRD sections
-└── architecture/ # Sharded architecture
+├── stories/                   # Development stories
+├── prd/                       # Product Requirements
+└── architecture/              # Architecture docs
 ```
 
-## Development Workflow
-
-1. **Read the story** - Understand requirements fully
-2. **Implement sequentially** - Follow task order
-3. **Test thoroughly** - Validate each step
-4. **Update story** - Mark completed items
-5. **Document changes** - Update File List
-
-## Best Practices
-
-### When implementing:
-- Check existing patterns first
-- Reuse components and utilities
-- Follow naming conventions
-- Keep functions focused and small
-
-### When testing:
-- Write tests alongside implementation
-- Test edge cases
-- Verify error handling
-- Run full test suite
-
-### When documenting:
-- Update README for new features
-- Document API changes
-- Add inline comments for complex logic
-- Keep story File List current
-
-## Git & GitHub
+## Git Conventions
 
 - Use conventional commits: `feat:`, `fix:`, `docs:`, etc.
-- Reference story ID in commits: `feat: implement IDE detection [Story 2.1]`
-- Ensure GitHub CLI is configured: `gh auth status`
-- Push regularly to avoid conflicts
-
-## Common Patterns
-
-### Error Handling
-```javascript
-try {
-  // Operation
-} catch (error) {
-  console.error(`Error in ${operation}:`, error);
-  throw new Error(`Failed to ${operation}: ${error.message}`);
-}
-```
-
-### File Operations
-```javascript
-const fs = require('fs-extra');
-const path = require('path');
-
-// Always use absolute paths
-const filePath = path.join(__dirname, 'relative/path');
-```
-
-### Async/Await
-```javascript
-async function operation() {
-  try {
-    const result = await asyncOperation();
-    return result;
-  } catch (error) {
-    // Handle error appropriately
-  }
-}
-```
+- Reference story ID in commits: `feat: implement feature [Story 1.1]`
+- Only `@devops` agent can push to remote repositories
 
 ---
-*Synkra AIOS Cursor Configuration v1.0* 
+*Synkra AIOS Cursor Rules v2.0 - Auto-configured*

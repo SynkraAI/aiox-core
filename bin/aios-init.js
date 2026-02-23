@@ -556,7 +556,7 @@ async function main() {
 
     const ideRulesMap = {
       claude: { source: 'claude-rules.md', target: '.claude/CLAUDE.md' },
-      cursor: { source: 'cursor-rules.md', target: '.cursor/rules.md' },
+      cursor: { source: 'cursor-rules.md', target: '.cursor/rules/aios-global.mdc' },
       gemini: { source: 'gemini-rules.md', target: '.gemini/rules.md' },
       'github-copilot': { source: 'copilot-rules.md', target: '.github/chatmodes/aios-agent.md' },
       antigravity: { source: 'antigravity-rules.md', target: '.antigravity/rules.md' },
