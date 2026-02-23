@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Lovable Cria Quiz - Color Palette",
+  "version": "1.0.0",
+  "story": "LOV-1",
+  "author": "@ux-design-expert (Uma)",
+  "date": "2026-02-22",
+
+  "core": {
+    "background": {
+      "primary": { "hex": "#0F0F0F", "rgb": "15, 15, 15", "usage": "Main page background" },
+      "secondary": { "hex": "#1A1A1A", "rgb": "26, 26, 26", "usage": "Card backgrounds, input fields" },
+      "elevated": { "hex": "#252525", "rgb": "37, 37, 37", "usage": "Hover states, active cards" }
+    },
+    "text": {
+      "primary": { "hex": "#F5F5F5", "rgb": "245, 245, 245", "usage": "Headings, body text", "contrastOnBgPrimary": "15.3:1" },
+      "secondary": { "hex": "#A3A3A3", "rgb": "163, 163, 163", "usage": "Labels, sub-text", "contrastOnBgPrimary": "7.2:1" },
+      "muted": { "hex": "#737373", "rgb": "115, 115, 115", "usage": "Micro-copy, LGPD", "contrastOnBgPrimary": "4.6:1" }
+    },
+    "accent": {
+      "primary": { "hex": "#F59E0B", "rgb": "245, 158, 11", "usage": "CTAs, progress bar, highlights", "contrastOnBgPrimary": "8.4:1" },
+      "hover": { "hex": "#D97706", "rgb": "217, 119, 6", "usage": "Button hover state", "contrastOnBgPrimary": "6.8:1" },
+      "pressed": { "hex": "#B45309", "rgb": "180, 83, 9", "usage": "Button active/pressed", "contrastOnBgPrimary": "5.3:1" }
+    },
+    "border": {
+      "default": { "hex": "#2E2E2E", "rgb": "46, 46, 46", "usage": "Card borders, dividers" },
+      "focus": { "hex": "#F59E0B", "rgb": "245, 158, 11", "usage": "Focus rings" }
+    },
+    "semantic": {
+      "success": { "hex": "#22C55E", "rgb": "34, 197, 94", "usage": "Valid inputs, completed progress" },
+      "error": { "hex": "#EF4444", "rgb": "239, 68, 68", "usage": "Validation errors" },
+      "whatsapp": { "hex": "#25D366", "rgb": "37, 211, 102", "usage": "WhatsApp CTA button" }
+    }
+  },
+
+  "archetypes": {
+    "comunicador": {
+      "hex": "#F97316",
+      "rgb": "249, 115, 22",
+      "name": "Warm Orange",
+      "psychology": "Energy, expression, connection",
+      "contrastWhiteLargeText": "3.1:1 (large text only)"
+    },
+    "mentor": {
+      "hex": "#14B8A6",
+      "rgb": "20, 184, 166",
+      "name": "Deep Teal",
+      "psychology": "Wisdom, guidance, calm authority",
+      "contrastWhiteLargeText": "3.3:1 (large text only)"
+    },
+    "construtor": {
+      "hex": "#3B82F6",
+      "rgb": "59, 130, 246",
+      "name": "Strong Blue",
+      "psychology": "Reliability, building, trust",
+      "contrastWhiteLargeText": "4.6:1"
+    },
+    "estrategista": {
+      "hex": "#8B5CF6",
+      "rgb": "139, 92, 246",
+      "name": "Rich Purple",
+      "psychology": "Vision, strategy, uniqueness",
+      "contrastWhiteLargeText": "4.5:1"
+    }
+  },
+
+  "gradients": {
+    "background": "linear-gradient(180deg, #0F0F0F 0%, #1A1A1A 100%)",
+    "cardHover": "linear-gradient(135deg, #252525 0%, #1A1A1A 100%)",
+    "loadingPulse": "radial-gradient(circle, rgba(245,158,11,0.05) 0%, transparent 70%)"
+  },
+
+  "tailwindMapping": {
+    "bg-cria-bg": "#0F0F0F",
+    "bg-cria-bg-secondary": "#1A1A1A",
+    "bg-cria-bg-elevated": "#252525",
+    "text-cria-accent": "#F59E0B",
+    "border-cria-border": "#2E2E2E",
+    "bg-cria-accent": "#F59E0B",
+    "bg-cria-accent-hover": "#D97706",
+    "bg-cria-accent-pressed": "#B45309",
+    "bg-cria-success": "#22C55E",
+    "bg-cria-error": "#EF4444",
+    "bg-cria-whatsapp": "#25D366",
+    "bg-archetype-comunicador": "#F97316",
+    "bg-archetype-mentor": "#14B8A6",
+    "bg-archetype-construtor": "#3B82F6",
+    "bg-archetype-estrategista": "#8B5CF6"
+  }
+}

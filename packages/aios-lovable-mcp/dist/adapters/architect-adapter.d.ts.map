@@ -1,0 +1,1 @@
+{"version":3,"file":"architect-adapter.d.ts","sourceRoot":"","sources":["../../src/adapters/architect-adapter.ts"],"names":[],"mappings":"AAAA;;;;;;;;;GASG;AAEH,OAAO,KAAK,EACV,aAAa,EACb,wBAAwB,EACxB,uBAAuB,EACxB,MAAM,qBAAqB,CAAC;AAI7B,qBAAa,gBAAgB;IACrB,OAAO,CACX,KAAK,EAAE,uBAAuB,GAC7B,OAAO,CAAC,aAAa,CAAC,wBAAwB,CAAC,CAAC;YAwBrC,QAAQ;IAuDtB,IAAI,SAAS,IAAI,MAAM,CAEtB;CACF"}

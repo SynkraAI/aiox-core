@@ -1,0 +1,49 @@
+# Local Development Environment
+version: '3.8'
+
+services:
+  # Redis for BullMQ job queue
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # AIOS Lovable MCP Server
+  aios-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      QUEUE_CONCURRENCY: 5
+      AIOS_API_KEYS: |
+        {
+          "local-dev": "aios_dev_12345678",
+          "lovable": "aios_lovable_abcdefgh"
+        }
+      ADMIN_API_KEY: admin_secret_key_12345
+    depends_on:
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./dist:/app/dist
+    command: npm run dev
+
+volumes:
+  redis-data:
+
+networks:
+  default:
+    name: aios-network

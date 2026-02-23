@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "Lovable Cria Quiz - Typography Scale",
+  "version": "1.0.0",
+  "story": "LOV-1",
+  "author": "@ux-design-expert (Uma)",
+  "date": "2026-02-22",
+
+  "fontFamily": {
+    "primary": "Inter",
+    "fallback": "system-ui, -apple-system, sans-serif",
+    "source": "Google Fonts or Lovable built-in",
+    "reason": "Modern, excellent readability, wide weight range, widely available"
+  },
+
+  "scale": {
+    "h1": {
+      "token": "--text-h1",
+      "mobile": { "size": "28px", "lineHeight": "1.2" },
+      "desktop": { "size": "32px", "lineHeight": "1.2" },
+      "weight": 800,
+      "weightName": "ExtraBold",
+      "letterSpacing": "-0.02em",
+      "usage": "Archetype name, main headline",
+      "tailwind": "text-[28px] md:text-[32px] font-extrabold leading-tight tracking-tight"
+    },
+    "h2": {
+      "token": "--text-h2",
+      "mobile": { "size": "22px", "lineHeight": "1.3" },
+      "desktop": { "size": "24px", "lineHeight": "1.3" },
+      "weight": 700,
+      "weightName": "Bold",
+      "letterSpacing": "-0.01em",
+      "usage": "Question text, section headers",
+      "tailwind": "text-[22px] md:text-[24px] font-bold leading-snug"
+    },
+    "h3": {
+      "token": "--text-h3",
+      "mobile": { "size": "18px", "lineHeight": "1.4" },
+      "desktop": { "size": "20px", "lineHeight": "1.4" },
+      "weight": 600,
+      "weightName": "SemiBold",
+      "letterSpacing": "0",
+      "usage": "Taglines, sub-sections",
+      "tailwind": "text-lg md:text-xl font-semibold leading-snug"
+    },
+    "body": {
+      "token": "--text-body",
+      "mobile": { "size": "16px", "lineHeight": "1.6" },
+      "desktop": { "size": "16px", "lineHeight": "1.6" },
+      "weight": 400,
+      "weightName": "Regular",
+      "letterSpacing": "0",
+      "usage": "Body copy, descriptions",
+      "tailwind": "text-base font-normal leading-relaxed"
+    },
+    "bodyBold": {
+      "token": "--text-body-bold",
+      "mobile": { "size": "16px", "lineHeight": "1.6" },
+      "desktop": { "size": "16px", "lineHeight": "1.6" },
+      "weight": 600,
+      "weightName": "SemiBold",
+      "letterSpacing": "0",
+      "usage": "Emphasized body text",
+      "tailwind": "text-base font-semibold leading-relaxed"
+    },
+    "label": {
+      "token": "--text-label",
+      "mobile": { "size": "14px", "lineHeight": "1.4" },
+      "desktop": { "size": "14px", "lineHeight": "1.4" },
+      "weight": 700,
+      "weightName": "Bold",
+      "letterSpacing": "0.05em",
+      "textTransform": "uppercase",
+      "usage": "Section labels",
+      "tailwind": "text-sm font-bold uppercase tracking-wider"
+    },
+    "micro": {
+      "token": "--text-micro",
+      "mobile": { "size": "12px", "lineHeight": "1.5" },
+      "desktop": { "size": "12px", "lineHeight": "1.5" },
+      "weight": 400,
+      "weightName": "Regular",
+      "letterSpacing": "0",
+      "usage": "LGPD, footnotes",
+      "tailwind": "text-xs font-normal leading-normal"
+    },
+    "cta": {
+      "token": "--text-cta",
+      "mobile": { "size": "16px", "lineHeight": "1.0" },
+      "desktop": { "size": "18px", "lineHeight": "1.0" },
+      "weight": 700,
+      "weightName": "Bold",
+      "letterSpacing": "0.02em",
+      "usage": "Button text",
+      "tailwind": "text-base md:text-lg font-bold tracking-wide"
+    },
+    "option": {
+      "token": "--text-option",
+      "mobile": { "size": "16px", "lineHeight": "1.4" },
+      "desktop": { "size": "16px", "lineHeight": "1.4" },
+      "weight": 500,
+      "weightName": "Medium",
+      "letterSpacing": "0",
+      "usage": "Option card text",
+      "tailwind": "text-base font-medium leading-snug"
+    },
+    "optionLabel": {
+      "token": "--text-option-label",
+      "mobile": { "size": "20px", "lineHeight": "1.0" },
+      "desktop": { "size": "20px", "lineHeight": "1.0" },
+      "weight": 600,
+      "weightName": "SemiBold",
+      "letterSpacing": "0",
+      "usage": "Option letter (A/B/C/D)",
+      "tailwind": "text-xl font-semibold"
+    }
+  },
+
+  "weights": {
+    "regular": 400,
+    "medium": 500,
+    "semibold": 600,
+    "bold": 700,
+    "extrabold": 800
+  },
+
+  "googleFontsImport": "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+}

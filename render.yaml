@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: aios-lovable-mcp
+    runtime: node
+    buildCommand: "cd packages/aios-lovable-mcp && npm install && npm run build"
+    startCommand: "cd packages/aios-lovable-mcp && MCP_ENABLED=false node dist/start-with-http.js"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: MCP_ENABLED
+        value: "false"

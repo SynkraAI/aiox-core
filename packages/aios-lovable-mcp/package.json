@@ -1,0 +1,58 @@
+{
+  "name": "aios-lovable-mcp",
+  "version": "0.1.0",
+  "description": "Synkra AIOS MCP Server for Lovable integration - multi-agent orchestration",
+  "type": "module",
+  "main": "dist/server.js",
+  "bin": {
+    "aios-lovable-mcp": "dist/server.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/server.ts",
+    "dev:http": "tsx src/start-with-http.ts",
+    "start": "node dist/start-with-http.js",
+    "start:http": "node dist/start-with-http.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src/ --ext .ts",
+    "typecheck": "tsc --noEmit",
+    "docker:build": "docker build -t aios-lovable-mcp:latest .",
+    "docker:run": "docker-compose up -d",
+    "docker:stop": "docker-compose down",
+    "docker:logs": "docker-compose logs -f aios-mcp"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "bullmq": "^5.8.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "nanoid": "^4.0.2",
+    "redis": "^4.6.0",
+    "uuid": "^9.0.1",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.0",
+    "@types/uuid": "^9.0.8",
+    "@vitest/ui": "^1.6.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "aios",
+    "lovable",
+    "mcp",
+    "model-context-protocol",
+    "synkra"
+  ],
+  "license": "UNLICENSED",
+  "private": true
+}

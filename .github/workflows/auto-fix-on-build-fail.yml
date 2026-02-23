@@ -1,0 +1,45 @@
+name: Auto-Fix Build Failures
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/aios-lovable-mcp/**'
+      - 'Dockerfile'
+      - 'package.json'
+      - 'package-lock.json'
+
+jobs:
+  auto-fix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Claude Auto-Fix
+        env:
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+        run: |
+          chmod +x .github/scripts/auto-fix-build.js
+          node .github/scripts/auto-fix-build.js
+
+      - name: Push fixes
+        if: success()
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git config --global user.name "Claude Auto-Fix"
+            git config --global user.email "claude@railway.app"
+            git add -A
+            git commit -m "fix: auto-fixed build failure via Claude [skip ci]"
+            git push origin main -f
+          else
+            echo "No changes needed - build already passing"
+          fi

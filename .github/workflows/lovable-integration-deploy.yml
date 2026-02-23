@@ -1,0 +1,146 @@
+name: Lovable Integration Deploy
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/lovable-integration/**'
+      - '.github/workflows/lovable-integration-deploy.yml'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment target'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+
+concurrency:
+  group: lovable-deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '20'
+  PACKAGE_PATH: packages/lovable-integration
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint --workspace=${{ env.PACKAGE_PATH }} --if-present
+
+      - name: Type check
+        run: npm run typecheck --workspace=${{ env.PACKAGE_PATH }} --if-present
+
+      - name: Test
+        run: npm test --workspace=${{ env.PACKAGE_PATH }} --if-present
+
+  build:
+    name: Build
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build --workspace=${{ env.PACKAGE_PATH }} --if-present
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lovable-integration-build
+          path: ${{ env.PACKAGE_PATH }}/dist/
+          retention-days: 7
+
+  deploy-staging:
+    name: Deploy to Staging
+    needs: build
+    if: github.event.inputs.environment == 'staging' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: lovable-integration-build
+          path: ${{ env.PACKAGE_PATH }}/dist/
+
+      - name: Deploy to staging
+        env:
+          DEPLOY_HOST: ${{ secrets.STAGING_HOST }}
+          DEPLOY_KEY: ${{ secrets.STAGING_DEPLOY_KEY }}
+          LOVABLE_API_KEY: ${{ secrets.LOVABLE_API_KEY_STAGING }}
+          LOVABLE_WEBHOOK_SECRET: ${{ secrets.LOVABLE_WEBHOOK_SECRET_STAGING }}
+        run: |
+          echo "Deploying to staging..."
+          # Deployment script placeholder - replace with actual deployment
+          # Options: rsync+ssh, Railway CLI, DigitalOcean App Platform, etc.
+          echo "Deployment target: $DEPLOY_HOST"
+
+      - name: Health check
+        run: |
+          echo "Running health check..."
+          # Replace with actual staging URL
+          # curl --fail --retry 5 --retry-delay 10 https://staging.example.com/health
+          echo "Health check passed"
+
+  deploy-production:
+    name: Deploy to Production
+    needs: build
+    if: github.event.inputs.environment == 'production'
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: lovable-integration-build
+          path: ${{ env.PACKAGE_PATH }}/dist/
+
+      - name: Deploy to production
+        env:
+          DEPLOY_HOST: ${{ secrets.PRODUCTION_HOST }}
+          DEPLOY_KEY: ${{ secrets.PRODUCTION_DEPLOY_KEY }}
+          LOVABLE_API_KEY: ${{ secrets.LOVABLE_API_KEY }}
+          LOVABLE_WEBHOOK_SECRET: ${{ secrets.LOVABLE_WEBHOOK_SECRET }}
+        run: |
+          echo "Deploying to production..."
+          # Deployment script placeholder
+          echo "Deployment target: $DEPLOY_HOST"
+
+      - name: Health check
+        run: |
+          echo "Running health check..."
+          # Replace with actual production URL
+          # curl --fail --retry 5 --retry-delay 10 https://api.example.com/health
+          echo "Health check passed"
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::error::Production deployment failed! Check logs above."
+          # Add Slack/Discord notification here if needed

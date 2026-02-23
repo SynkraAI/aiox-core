@@ -1,0 +1,9 @@
+{
+  "buildCommand": "cd packages/aios-lovable-mcp && npm install && npm run build",
+  "outputDirectory": "packages/aios-lovable-mcp/dist",
+  "env": {
+    "NODE_ENV": "production",
+    "PORT": "3000",
+    "MCP_ENABLED": "false"
+  }
+}

@@ -1,0 +1,17 @@
+🎯 DEPLOY EM 1 CLIQUE - RENDER.COM
+
+Clique aqui:
+https://render.com/deploy?repo=https://github.com/alyfalbertmac-a11y/aios-core&branch=main
+
+DEPOIS:
+- Preencha "Root Directory": packages/aios-lovable-mcp
+- Environment Variables:
+  NODE_ENV = production
+  PORT = 3000
+  MCP_ENABLED = false
+- Click "Deploy"
+- Aguarde 3 minutos
+- Pronto! Você terá a URL pública
+
+RESULTADO:
+https://aios-lovable-mcp.onrender.com (sua URL)

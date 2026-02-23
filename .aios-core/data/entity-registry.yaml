@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-02-16T20:22:35.905Z'
-  entityCount: 508
+  lastUpdated: '2026-02-23T09:15:53.991Z'
+  entityCount: 510
   checksumAlgorithm: sha256
 entities:
   tasks:
@@ -3927,6 +3927,25 @@ entities:
         extensionPoints: []
       checksum: sha256:0e69435307db814563823896e7ba9b29a4a9c10d90f6dedec5cb7a6d6f7ba936
       lastVerified: '2026-02-16T20:19:27.659Z'
+    qa-approve-mcp-requests:
+      path: .aios-core/development/tasks/qa-approve-mcp-requests.md
+      type: task
+      purpose: 'QA: Approve MCP Tool Requests'
+      keywords:
+        - qa
+        - approve
+        - mcp
+        - requests
+        - 'qa:'
+        - tool
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:9233f5eb32fc63759a3bb59a9ba6bc920a7cee51e1fc4b1d301bf4ce6afb3926
+      lastVerified: '2026-02-23T09:15:53.987Z'
   templates:
     activation-instructions-inline-greeting:
       path: .aios-core/product/templates/activation-instructions-inline-greeting.yaml
@@ -6000,7 +6019,9 @@ entities:
     dev-helper:
       path: .aios-core/core/code-intel/helpers/dev-helper.js
       type: module
-      purpose: Code intelligence helper for @dev agent tasks - IDS G4 automation, duplicate detection, conventions, blast radius
+      purpose: >-
+        Code intelligence helper for @dev agent tasks - IDS G4 automation, duplicate detection, conventions, blast
+        radius
       keywords:
         - code-intel
         - dev-helper
@@ -6009,11 +6030,7 @@ entities:
         - blast-radius
         - conventions
         - reuse
-      usedBy:
-        - dev-develop-story
-        - create-service
-        - dev-suggest-refactoring
-        - build-autonomous
+      usedBy: []
       dependencies:
         - code-intel
       adaptability:
