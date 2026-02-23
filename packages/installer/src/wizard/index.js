@@ -21,7 +21,7 @@ const {
 const { setLanguage, t } = require('./i18n');
 const yaml = require('js-yaml');
 const { showWelcome, showCompletion, showCancellation } = require('./feedback');
-const { generateIDEConfigs, showSuccessSummary } = require('./ide-config-generator');
+const { generateIDEConfigs, showSuccessSummary, copySkillFiles, copyExtraCommandFiles } = require('./ide-config-generator');
 const {
   configureEnvironment,
 } = require('../config/configure-environment');
@@ -486,6 +486,54 @@ async function runWizard(options = {}) {
       }
 
       // Legacy per-squad IDE copy path removed; sync pipeline handles IDE propagation.
+    }
+
+    // Story INS-4.3: Wire settings.json boundary generator after .aios-core/ copy
+    console.log('\n🔒 Generating boundary rules...');
+    try {
+      const settingsGenerator = require('../../../../.aios-core/infrastructure/scripts/generate-settings-json');
+      settingsGenerator.generate(process.cwd());
+      const settingsContent = await fse.readFile(path.join(process.cwd(), '.claude', 'settings.json'), 'utf8').catch(() => '{}');
+      const settingsParsed = JSON.parse(settingsContent);
+      const denyCount = (settingsParsed.permissions && settingsParsed.permissions.deny) ? settingsParsed.permissions.deny.length : 0;
+      console.log(`✅ settings.json: generated (${denyCount} deny rules)`);
+      answers.settingsGenerated = true;
+      answers.settingsDenyCount = denyCount;
+    } catch (error) {
+      console.warn(`⚠️  settings.json generation failed: ${error.message} — run 'aios doctor --fix' post-install`);
+      answers.settingsGenerated = false;
+    }
+
+    // Story INS-4.3: Copy skills (Gap #11)
+    console.log('\n📚 Copying skills...');
+    try {
+      const skillsResult = await copySkillFiles(process.cwd());
+      if (skillsResult.skipped) {
+        console.log('   ℹ️  Skills: source not found (skipped)');
+      } else {
+        console.log(`✅ Skills: ${skillsResult.count} copied`);
+      }
+      answers.skillsCopied = skillsResult.count;
+      answers.skillsSkipped = skillsResult.skipped;
+    } catch (error) {
+      console.warn(`⚠️  Skills copy failed: ${error.message}`);
+      answers.skillsCopied = 0;
+    }
+
+    // Story INS-4.3: Copy extra commands (Gap #12)
+    console.log('\n📋 Copying extra commands...');
+    try {
+      const commandsResult = await copyExtraCommandFiles(process.cwd());
+      if (commandsResult.skipped) {
+        console.log('   ℹ️  Extra commands: source not found (skipped)');
+      } else {
+        console.log(`✅ Commands: ${commandsResult.count} extras copied`);
+      }
+      answers.extraCommandsCopied = commandsResult.count;
+      answers.extraCommandsSkipped = commandsResult.skipped;
+    } catch (error) {
+      console.warn(`⚠️  Extra commands copy failed: ${error.message}`);
+      answers.extraCommandsCopied = 0;
     }
 
     // Story 1.6: Environment Configuration
