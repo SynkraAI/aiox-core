@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Parallel Executor Tests
  * Story GEMINI-INT.17

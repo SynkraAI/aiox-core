@@ -239,7 +239,7 @@ describe('WaveExecutor', () => {
       expect(metrics.totalTasks).toBe(3);
       expect(metrics.successful).toBe(2);
       expect(metrics.failed).toBe(1);
-      expect(metrics.successRate).toBeCloseTo(66.67, 0);
+      expect(metrics.successRate).toBeCloseTo(66.67, 1);
       expect(metrics.totalDuration).toBe(350);
       expect(metrics.wallTime).toBe(200);
       expect(metrics.totalWaves).toBe(1);
@@ -290,6 +290,7 @@ describe('WaveExecutor', () => {
 
       expect(executor.activeExecutions.get('t1').status).toBe('cancelled');
       expect(executor.activeExecutions.get('t2').status).toBe('cancelled');
+      // 2 x task_cancelled (one per task) + 1 x execution_cancelled
       expect(events).toHaveLength(3);
     });
   });
@@ -375,11 +376,14 @@ describe('WaveExecutor', () => {
       const ex = new WaveExecutor();
       const consoleSpy = jest.spyOn(console, 'log').mockImplementation();
 
-      const result = await ex.defaultExecutor({ id: 'test-task' }, {});
+      try {
+        const result = await ex.defaultExecutor({ id: 'test-task' }, {});
 
-      expect(result.success).toBe(true);
-      expect(result.output).toContain('Default executor');
-      consoleSpy.mockRestore();
+        expect(result.success).toBe(true);
+        expect(result.output).toContain('Default executor');
+      } finally {
+        consoleSpy.mockRestore();
+      }
     });
   });
 });
