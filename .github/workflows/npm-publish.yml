@@ -185,6 +185,9 @@ jobs:
             echo "tag=preview" >> $GITHUB_OUTPUT
           fi
 
+      - name: Publish safety gate (INS-4.10)
+        run: node bin/utils/validate-publish.js
+
       - name: Check if aios-core should be published
         id: should-publish
         run: |

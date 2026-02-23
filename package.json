@@ -62,7 +62,8 @@
     "validate:semantic-lint": "node scripts/semantic-lint.js",
     "manifest:ensure": "node scripts/ensure-manifest.js",
     "sync:ide:cursor": "node .aios-core/infrastructure/scripts/ide-sync/index.js sync --ide cursor",
-    "prepublishOnly": "npm run generate:manifest && npm run validate:manifest",
+    "validate:publish": "node bin/utils/validate-publish.js",
+    "prepublishOnly": "node bin/utils/validate-publish.js && npm run generate:manifest && npm run validate:manifest",
     "prepare": "husky"
   },
   "dependencies": {
