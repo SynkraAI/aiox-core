@@ -4,7 +4,7 @@
 **Wave:** 3 — Runtime Health & Upgrade Safety (P2)
 **Points:** 2
 **Agents:** @dev
-**Status:** Draft
+**Status:** Ready for Review
 **Blocked By:** —
 **Created:** 2026-02-23
 
@@ -69,35 +69,35 @@
 ## Tasks / Subtasks
 
 ### Task 1: Measure Script Performance (AC4)
-- [ ] 1.1 Run `time node .aios-core/development/scripts/populate-entity-registry.js` on this codebase
-- [ ] 1.2 Record actual runtime — document in Dev Notes
-- [ ] 1.3 Determine execution mode: sync (< 15s) or async (>= 15s)
-- [ ] 1.4 Verify script is idempotent: run twice, check `entity-registry.yaml` is same content
+- [x] 1.1 Run `time node .aios-core/development/scripts/populate-entity-registry.js` on this codebase
+- [x] 1.2 Record actual runtime — document in Dev Notes
+- [x] 1.3 Determine execution mode: sync (< 15s) or async (>= 15s)
+- [x] 1.4 Verify script is idempotent: run twice, check `entity-registry.yaml` is same content
 
 ### Task 2: Understand Existing Hooks (AC3)
-- [ ] 2.1 Read `.husky/pre-push` — confirm it calls `ids-pre-push.js` for incremental updates
-- [ ] 2.2 Read `.aios-core/hooks/ids-pre-push.js` — understand incremental vs full scan
-- [ ] 2.3 Confirm: installer should NOT re-install the pre-push hook (already present)
-- [ ] 2.4 Confirm: bootstrap uses `populate-entity-registry.js` (full scan), pre-push uses `ids-pre-push.js` (incremental)
+- [x] 2.1 Read `.husky/pre-push` — confirm it calls `ids-pre-push.js` for incremental updates
+- [x] 2.2 Read `.aios-core/hooks/ids-pre-push.js` — understand incremental vs full scan
+- [x] 2.3 Confirm: installer should NOT re-install the pre-push hook (already present)
+- [x] 2.4 Confirm: bootstrap uses `populate-entity-registry.js` (full scan), pre-push uses `ids-pre-push.js` (incremental)
 
 ### Task 3: Implement Bootstrap Call (AC1)
-- [ ] 3.1 Find correct injection point in `packages/installer/src/wizard/index.js` — after `.aios-core/` copy
-- [ ] 3.2 Add bootstrap call: `node populate-entity-registry.js targetRoot` (or programmatic require)
-- [ ] 3.3 Implement async guard: if estimated runtime > 15s (based on Task 1 measurement), use `child_process.fork()` with non-blocking callback
-- [ ] 3.4 Wrap in try/catch: log warning on error, continue install
+- [x] 3.1 Find correct injection point in `packages/installer/src/wizard/index.js` — after `.aios-core/` copy
+- [x] 3.2 Add bootstrap call: `node populate-entity-registry.js targetRoot` (or programmatic require)
+- [x] 3.3 Implement async guard: if estimated runtime > 15s (based on Task 1 measurement), use `child_process.fork()` with non-blocking callback
+- [x] 3.4 Wrap in try/catch: log warning on error, continue install
 
 ### Task 4: Update Post-Install Validation (AC2)
-- [ ] 4.1 Verify `aios doctor` `entity-registry` check (from INS-4.1) uses relative threshold (file exists + non-empty)
-- [ ] 4.2 If INS-4.1 not yet merged, document that this check will be enabled when INS-4.1 is ready
+- [x] 4.1 Verify `aios doctor` `entity-registry` check (from INS-4.1) uses relative threshold (file exists + non-empty)
+- [x] 4.2 If INS-4.1 not yet merged, document that this check will be enabled when INS-4.1 is ready
 
 ### Task 5: Install Summary Update (AC1)
-- [ ] 5.1 Add entity registry status to install summary: `entity-registry: populated (N entities)` or `entity-registry: populating in background...` or `entity-registry: failed (see warning)`
+- [x] 5.1 Add entity registry status to install summary: `entity-registry: populated (N entities)` or `entity-registry: populating in background...` or `entity-registry: failed (see warning)`
 
 ### Task 6: Tests (AC5)
-- [ ] 6.1 Unit test: `populate-entity-registry.js` invoked during install flow
-- [ ] 6.2 Unit test: script failure → warning → install continues
-- [ ] 6.3 Unit test: async mode (if applicable) — verify non-blocking execution
-- [ ] 6.4 `npm test` regression check
+- [x] 6.1 Unit test: `populate-entity-registry.js` invoked during install flow
+- [x] 6.2 Unit test: script failure → warning → install continues
+- [x] 6.3 Unit test: async mode (if applicable) — verify non-blocking execution
+- [x] 6.4 `npm test` regression check
 
 ---
 
@@ -183,21 +183,57 @@ Measure in Task 1 before deciding.
 ## Dev Agent Record
 
 ### Agent Model Used
-_To be filled by @dev_
+Claude Opus 4.6
 
 ### Debug Log References
-_To be filled by @dev_
+- Initial regex used `totalEntities` but YAML field is `entityCount` — fixed in both wizard and test
+- Measured runtime: 0.67s (first run), 0.31s (cached/subsequent) — well under 15s, sync mode chosen
+- Idempotency verified: two consecutive runs produce identical output (only timestamps differ)
 
 ### Completion Notes
-_To be filled by @dev_
+- Bootstrap call injected in wizard after IDE sync, before environment config (line ~571)
+- Uses `execSync` with 30s timeout for process isolation (avoids `__dirname` path issues with `require()`)
+- Three status outcomes: `populated` (success), `skipped` (script not found), `failed` (error with warning)
+- Entity count extracted from `entityCount` field in `entity-registry.yaml` metadata
+- No async mode needed — runtime is 0.31-0.67s on aios-core (734 entities)
+- `aios doctor` entity-registry check already uses relative validation (INS-4.1, commit 337213dc)
+- Pre-push hook (`ids-pre-push.js`) untouched — distinct incremental code path
+- 19 unit tests covering all 5 ACs, 0 new test failures
 
 ### File List
-_To be filled by @dev_
+| File | Action | Purpose |
+|------|--------|---------|
+| `packages/installer/src/wizard/index.js` | Modified | Added entity registry bootstrap call after .aios-core/ copy |
+| `packages/installer/tests/unit/entity-registry-bootstrap.test.js` | Created | 19 tests covering AC1-AC5 |
+| `docs/stories/epics/epic-installation-health/story-INS-4.6-entity-registry-on-install.md` | Modified | Task checkboxes, Dev Agent Record, status |
 
 ---
 
 ## QA Results
-_To be filled by @qa_
+
+**Reviewer:** @qa (Quinn) | **Date:** 2026-02-23 | **Model:** Claude Opus 4.6
+
+### Gate Decision: PASS
+
+**Score:** 17/17 AC items verified — all traceable to implementation and tests.
+
+### Evidence
+
+| Check | Result |
+|-------|--------|
+| Tests executed | 19/19 PASS (entity-registry-bootstrap.test.js) |
+| Regression | 0 new failures (26 pre-existing, unrelated) |
+| AC1 (bootstrap call) | Verified: wizard/index.js:572-607, execSync + try/catch + 30s timeout |
+| AC2 (relative threshold) | Verified: doctor check uses lineCount + mtime, no fixed >= 500 |
+| AC3 (no duplication) | Verified: wizard calls populate-entity-registry.js, pre-push calls ids-pre-push.js, cross-negative tests confirm |
+| AC4 (performance) | Verified: 0.86s measured runtime, sync mode correct |
+| AC5 (test coverage) | Verified: 19 tests across 5 AC groups, doctor integration test passes |
+| Scope | No incremental logic added, no hooks modified, no threshold hardcoded |
+
+### Concerns (LOW, non-blocking)
+
+1. `require('child_process')` inside try block (L578) — cosmetic, could be at module top
+2. AC5.3 mtime test depends on AC4 timing test running first (generates fresh file) — add comment noting ordering dependency to prevent CI flakiness
 
 ---
 
@@ -206,3 +242,5 @@ _To be filled by @qa_
 | Date | Author | Change |
 |------|--------|--------|
 | 2026-02-23 | @sm (River) | Story drafted from Epic INS-4 handoff secao 3.6 + Codex Finding A1 (pre-push JA faz incremental, reescopar para bootstrap only, remover threshold fixo, sizing 3→2 pts) |
+| 2026-02-23 | @po (Pax) | [Validation] Score: 10/10, GO. Todos os paths verificados contra codebase real: `populate-entity-registry.js` confirmado (673 linhas, `module.exports` L646 com `populate` exportado), `.husky/pre-push` chama `ids-pre-push.js`, `registry-updater.js` existe. CONCERN-1 (LOW): `populate()` signature nao documentada — @dev resolve na T3.2. CONCERN-2 (INFO): AC2 depende INS-4.1 — ja Done (commit 337213dc). Status: Draft → Approved. |
+| 2026-02-23 | @dev (Dex) | [Implementation] All 6 tasks complete. Bootstrap call added to wizard (sync mode, 0.67s measured). 19 unit tests created (all pass). No new test failures. Entity count regex fixed: `entityCount` (not `totalEntities`). Status: Approved → Ready for Review. |

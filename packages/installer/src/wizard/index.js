@@ -10,6 +10,7 @@
 const inquirer = require('inquirer');
 const path = require('path');
 const fse = require('fs-extra');
+const { execSync } = require('child_process');
 const { colors } = require('../utils/aios-colors');
 const {
   getLanguageQuestion,
@@ -567,6 +568,42 @@ async function runWizard(options = {}) {
       answers.ideSyncValidation = 'skipped';
     } finally {
       process.chdir(savedCwd);
+    }
+
+    // Story INS-4.6: Entity Registry Bootstrap — populate entity-registry.yaml on install
+    console.log('\n📇 Bootstrapping entity registry...');
+    try {
+      const registryScript = path.join(process.cwd(), '.aios-core', 'development', 'scripts', 'populate-entity-registry.js');
+      if (fse.existsSync(registryScript)) {
+        const startMs = Date.now();
+        execSync(`node "${registryScript}"`, {
+          cwd: process.cwd(),
+          encoding: 'utf8',
+          timeout: 30000,
+          stdio: 'pipe',
+        });
+        const elapsedMs = Date.now() - startMs;
+
+        // Read entity count from generated registry
+        const registryPath = path.join(process.cwd(), '.aios-core', 'data', 'entity-registry.yaml');
+        let entityCount = 0;
+        if (fse.existsSync(registryPath)) {
+          const registryContent = fse.readFileSync(registryPath, 'utf8');
+          const countMatch = registryContent.match(/entityCount:\s*(\d+)/);
+          entityCount = countMatch ? parseInt(countMatch[1], 10) : 0;
+        }
+
+        console.log(`✅ Entity registry: populated (${entityCount} entities, ${(elapsedMs / 1000).toFixed(1)}s)`);
+        answers.entityRegistryStatus = 'populated';
+        answers.entityRegistryCount = entityCount;
+        answers.entityRegistryMs = elapsedMs;
+      } else {
+        console.log('   ℹ️  Entity registry script not found (skipped)');
+        answers.entityRegistryStatus = 'skipped';
+      }
+    } catch (error) {
+      console.warn(`⚠️  Entity registry bootstrap failed: ${error.message} — run 'aios doctor' post-install`);
+      answers.entityRegistryStatus = 'failed';
     }
 
     // Story 1.6: Environment Configuration
