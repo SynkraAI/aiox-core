@@ -200,4 +200,172 @@ describe('ParallelExecutor', () => {
       expect(result.success).toBe(true);
     }, 10000);
   });
+
+  // ── Deep mode coverage (P1 requested by maintainer) ──────────────
+
+  describe('RACE mode - edge cases', () => {
+    it('returns gemini when claude fails in race', async () => {
+      const raceExec = new ParallelExecutor({ mode: ParallelMode.RACE });
+      const claude = jest.fn().mockResolvedValue({ success: false, error: 'down' });
+      const gemini = jest.fn().mockResolvedValue({ success: true, output: 'gemini wins' });
+
+      const result = await raceExec.execute(claude, gemini);
+
+      expect(result.selectedProvider).toBe('gemini');
+      expect(result.mode).toBe('race');
+    });
+  });
+
+  describe('CONSENSUS mode - edge cases', () => {
+    it('reports no consensus for very different outputs', async () => {
+      const consensusExec = new ParallelExecutor({
+        mode: ParallelMode.CONSENSUS,
+        consensusSimilarity: 0.95,
+      });
+      const claude = jest.fn().mockResolvedValue({ success: true, output: 'apples oranges bananas' });
+      const gemini = jest.fn().mockResolvedValue({ success: true, output: 'zzz xxx yyy completely different' });
+
+      const result = await consensusExec.execute(claude, gemini);
+
+      expect(result.consensus).toBe(false);
+      expect(result.warning).toContain('did not reach consensus');
+    });
+
+    it('falls back when gemini fails', async () => {
+      const consensusExec = new ParallelExecutor({ mode: ParallelMode.CONSENSUS });
+      const claude = jest.fn().mockResolvedValue({ success: true, output: 'ok' });
+      const gemini = jest.fn().mockRejectedValue(new Error('down'));
+
+      const result = await consensusExec.execute(claude, gemini);
+
+      expect(result.selectedProvider).toBe('claude');
+      expect(result.mode).toBe('fallback');
+    });
+
+    it('increments consensusAgreements on agreement', async () => {
+      const consensusExec = new ParallelExecutor({
+        mode: ParallelMode.CONSENSUS,
+        consensusSimilarity: 0.5,
+      });
+      const claude = jest.fn().mockResolvedValue({ success: true, output: 'same words here' });
+      const gemini = jest.fn().mockResolvedValue({ success: true, output: 'same words here' });
+
+      await consensusExec.execute(claude, gemini);
+
+      expect(consensusExec.stats.consensusAgreements).toBe(1);
+    });
+  });
+
+  describe('BEST_OF mode - edge cases', () => {
+    it('picks claude when only claude succeeds', async () => {
+      const bestExec = new ParallelExecutor({ mode: ParallelMode.BEST_OF });
+      const claude = jest.fn().mockResolvedValue({ success: true, output: 'ok' });
+      const gemini = jest.fn().mockResolvedValue({ success: false });
+
+      const result = await bestExec.execute(claude, gemini);
+
+      expect(result.selectedProvider).toBe('claude');
+    });
+
+    it('picks gemini when only gemini succeeds', async () => {
+      const bestExec = new ParallelExecutor({ mode: ParallelMode.BEST_OF });
+      const claude = jest.fn().mockResolvedValue({ success: false });
+      const gemini = jest.fn().mockResolvedValue({ success: true, output: 'ok' });
+
+      const result = await bestExec.execute(claude, gemini);
+
+      expect(result.selectedProvider).toBe('gemini');
+    });
+
+    it('returns failure when both fail', async () => {
+      const bestExec = new ParallelExecutor({ mode: ParallelMode.BEST_OF });
+      const claude = jest.fn().mockResolvedValue({ success: false });
+      const gemini = jest.fn().mockResolvedValue({ success: false });
+
+      const result = await bestExec.execute(claude, gemini);
+
+      expect(result.success).toBe(false);
+    });
+  });
+
+  describe('MERGE mode - edge cases', () => {
+    it('returns single output when claude fails', async () => {
+      const mergeExec = new ParallelExecutor({ mode: ParallelMode.MERGE });
+      const claude = jest.fn().mockResolvedValue({ success: false });
+      const gemini = jest.fn().mockResolvedValue({ success: true, output: 'gemini only' });
+
+      const result = await mergeExec.execute(claude, gemini);
+
+      expect(result.mode).toBe('merge');
+      expect(result.output).toBe('gemini only');
+    });
+  });
+
+  describe('FALLBACK mode - stats tracking', () => {
+    it('increments fallbacksUsed when claude fails', async () => {
+      const claude = jest.fn().mockRejectedValue(new Error('down'));
+      const gemini = jest.fn().mockResolvedValue({ success: true, output: 'ok' });
+
+      await executor.execute(claude, gemini);
+
+      expect(executor.stats.fallbacksUsed).toBe(1);
+    });
+  });
+
+  describe('_calculateSimilarity', () => {
+    it('returns 1 for identical strings', () => {
+      expect(executor._calculateSimilarity('hello world', 'hello world')).toBe(1);
+    });
+
+    it('returns 0 for completely different strings', () => {
+      expect(executor._calculateSimilarity('aaa', 'bbb')).toBe(0);
+    });
+
+    it('returns 0 when either input is null', () => {
+      expect(executor._calculateSimilarity(null, 'hello')).toBe(0);
+      expect(executor._calculateSimilarity('hello', null)).toBe(0);
+    });
+
+    it('is case insensitive', () => {
+      expect(executor._calculateSimilarity('Hello World', 'hello world')).toBe(1);
+    });
+  });
+
+  describe('_scoreOutput', () => {
+    it('returns 0 for null/empty', () => {
+      expect(executor._scoreOutput(null)).toBe(0);
+      expect(executor._scoreOutput('')).toBe(0);
+    });
+
+    it('scores length > 100 higher', () => {
+      const short = 'a'.repeat(50);
+      const medium = 'a'.repeat(150);
+      expect(executor._scoreOutput(medium)).toBeGreaterThan(executor._scoreOutput(short));
+    });
+
+    it('scores code blocks higher', () => {
+      const withCode = 'x'.repeat(101) + ' ```code``` ';
+      const withoutCode = 'x'.repeat(101);
+      expect(executor._scoreOutput(withCode)).toBeGreaterThan(executor._scoreOutput(withoutCode));
+    });
+  });
+
+  describe('getStats computed rates', () => {
+    it('computes consensusRate and fallbackRate', () => {
+      executor.stats.executions = 10;
+      executor.stats.consensusAgreements = 3;
+      executor.stats.fallbacksUsed = 2;
+
+      const stats = executor.getStats();
+
+      expect(stats.consensusRate).toBeCloseTo(0.3);
+      expect(stats.fallbackRate).toBeCloseTo(0.2);
+    });
+
+    it('returns 0 rates when no executions', () => {
+      const stats = executor.getStats();
+      expect(stats.consensusRate).toBe(0);
+      expect(stats.fallbackRate).toBe(0);
+    });
+  });
 });
