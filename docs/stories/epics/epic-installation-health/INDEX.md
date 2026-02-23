@@ -4,7 +4,7 @@
 
 Garantir que qualquer **fresh install** ou **upgrade** do aios-core resulta num ambiente 100% funcional com todos os artefatos dos epics BM, NOG e GD, e que exista uma forma de **diagnosticar e corrigir** ambientes existentes.
 
-**Origem:** Auditoria pos-epics BM (Boundary Mapping), NOG (Code Intelligence) e GD (Graph Dashboard) revelou 8 gaps criticos no installer — artefatos criados em dev mas nao integrados no fluxo de instalacao.
+**Origem:** Auditoria pos-epics BM (Boundary Mapping), NOG (Code Intelligence) e GD (Graph Dashboard) revelou 8 gaps criticos no installer — artefatos criados em dev mas nao integrados no fluxo de instalacao. **v2:** Incidente npm publish v4.2.14/v4.2.15 + diagnostico profundo de Claude Code discovery revelaram 4 gaps adicionais (#11-#14).
 
 **Principios:**
 - `Install = Complete:` Apos `npx aios-core install`, ambiente 100% funcional
@@ -16,7 +16,8 @@ Garantir que qualquer **fresh install** ou **upgrade** do aios-core resulta num 
 
 | Document | Purpose |
 |----------|---------|
-| [Architect Handoff](../../handoffs/handoff-architect-to-pm-epic-installation-health.md) | Proposta original com gap analysis, specs detalhadas, contexto tecnico |
+| [Architect Handoff v1](../../handoffs/handoff-architect-to-pm-epic-installation-health.md) | Proposta original com gap analysis, specs detalhadas, contexto tecnico |
+| [DevOps Handoff v2](../../handoffs/handoff-devops-to-pm-installation-health-v2.md) | Incidente v4.2.14/v4.2.15, gaps #11-#14, modelo discovery Claude Code |
 | [Epic INS-3 (Installer v4)](../epic-installer-v4-debug/) | Epic anterior — INS-4 e continuacao natural |
 | [Epic BM (Boundary Mapping)](../epic-boundary-mapping/) | Artefatos de boundary que precisam ser instalados |
 | [Epic NOG (Code Intelligence)](../epic-nogic-code-intelligence/) | Artefatos de code-intel para diagnostico |
@@ -36,23 +37,28 @@ Garantir que qualquer **fresh install** ou **upgrade** do aios-core resulta num 
 | 8 | Entity Registry NAO gerado no install | MEDIO | Script existe; pre-push JA faz incremental | A1: reescopar para bootstrap |
 | 9 | Hooks git nao garantidos via `npx` (sem npm install) | ALTO (NOVO) | `package.json` usa `prepare: "husky"` — so funciona via `npm install` | C2: gap no caminho npx |
 | 10 | Ausencia testes regressao para installer pipeline | ALTO (NOVO) | Sem suites para validator/upgrader/doctor/IDE sync | A4: incluir no DoD |
+| 11 | Skills NAO instaladas (7 skills, 0 copiadas) | CRITICO (v2) | `ide-config-generator.js` tem ZERO refs a "skill". `copyAgentFiles()` copia apenas agents | D1: bloqueador UX |
+| 12 | Commands nao-agent NAO copiados (~11 files) | ALTO (v2) | synapse/, greet.md, stories/ — nao copiados. Apenas agents em `.claude/commands/AIOS/agents/` | D2: discovery incompleto |
+| 13 | Hooks Claude Code copiados parcialmente (1/2 JS) | ALTO (v2) | Apenas `synapse-engine.cjs` copiado. `precompact-session-digest.cjs` ignorado. 8 hooks Py/Sh requerem decisao | D3: hooks parciais |
+| 14 | npm publish sem validacao de submodule | CRITICO (v2) | `prepublishOnly` nao valida `pro/` populado. Incidente v4.2.14 publicou pacote sem pro/ | D4: incidente real |
 
 ## Stories (pos-Codex v2.1)
 
-### Wave 1: Foundation (P0 — Generator + Doctor em paralelo)
+### Wave 1: Foundation (P0 — Generator + Doctor + Publish Safety)
 
 | Story | Title | Agent | Points | Status | Blocked By |
 |-------|-------|-------|--------|--------|------------|
-| [INS-4.1](story-INS-4.1-aios-doctor.md) | `aios doctor` — Reescrita com 12+ Checks, --fix, --json | @dev | 5 | Draft | — |
-| [INS-4.2](story-INS-4.2-settings-json-generator.md) | Settings.json Boundary Generator — Deny/Allow from Config | @dev | 5 | Draft | — |
+| [INS-4.1](story-INS-4.1-aios-doctor.md) | `aios doctor` — Reescrita com 12+ Checks, --fix, --json | @dev | 5 | Done | — |
+| [INS-4.2](story-INS-4.2-settings-json-generator.md) | Settings.json Boundary Generator — Deny/Allow from Config | @dev | 5 | Done | — |
+| [INS-4.10](story-INS-4.10-publish-safety-gate.md) | Publish Safety Gate — Submodule + File Count Validation | @devops | 2 | Draft | — |
 
 ### Wave 2: Installer Integration (P1)
 
 | Story | Title | Agent | Points | Status | Blocked By |
 |-------|-------|-------|--------|--------|------------|
-| [INS-4.3](story-INS-4.3-installer-settings-rules.md) | Installer: Wire Generator + Validate Post-Install | @dev | 2 | Draft | INS-4.2 |
+| [INS-4.3](story-INS-4.3-installer-settings-rules.md) | Installer: Full Artifact Copy Pipeline (Settings + Skills + Commands + Hooks) | @dev | 5 | Draft | INS-4.2 |
 | [INS-4.4](story-INS-4.4-claude-md-template-v5.md) | Installer: CLAUDE.md Template v5 (4 secoes novas) | @dev | 3 | Draft | — |
-| [INS-4.5](story-INS-4.5-ide-sync-integration.md) | IDE Sync Integration — via API programatica | @dev + @devops | 3 | Draft | — |
+| [INS-4.5](story-INS-4.5-ide-sync-integration.md) | IDE Sync Integration — Skills + Commands + API programatica | @dev + @devops | 3 | Draft | — |
 
 ### Wave 3: Runtime Health & Upgrade Safety (P2)
 
@@ -60,14 +66,16 @@ Garantir que qualquer **fresh install** ou **upgrade** do aios-core resulta num 
 |-------|-------|-------|--------|--------|------------|
 | [INS-4.6](story-INS-4.6-entity-registry-on-install.md) | Entity Registry Bootstrap on Install (nao incremental) | @dev | 2 | Draft | — |
 | [INS-4.7](story-INS-4.7-config-smart-merge.md) | YAML Merger Strategy + Config Smart Merge (Phase 1) | @dev | 5 | Draft | — |
-| [INS-4.8](story-INS-4.8-health-check-task.md) | Unify Health-Check — Doctor + core/health-check + Task | @dev | 2 | Draft | INS-4.1 |
+| [INS-4.8](story-INS-4.8-health-check-task.md) | Unify Health-Check + Doctor v2 (3 checks novos: skills, commands, hooks) | @dev | 3 | Draft | INS-4.1 |
 
 ## Totals
 
 | Metric | Value |
 |--------|-------|
-| **Total Stories** | 8 |
-| **Total Points** | ~27 (pos-Codex Story Review, ajustado de 26) |
+| **Total Stories** | 9 (+1 INS-4.10) |
+| **Total Points** | ~33 (v4: +3 INS-4.3 expand, +1 INS-4.8 expand, +2 INS-4.10 new) |
+| **Points Done** | 10 (INS-4.1, INS-4.2) |
+| **Points Remaining** | ~23 |
 | **Waves** | 3 |
 | **Executor Primario** | @dev (Dex) |
 | **Pre-requisitos** | Branch `feat/epic-nogic-code-intelligence` merged em main (antes de Wave 2) |
@@ -79,38 +87,42 @@ Garantir que qualquer **fresh install** ou **upgrade** do aios-core resulta num 
 |-------|----------|-------------|-------------------|
 | INS-4.1 | @dev | @devops | [check_completeness, cli_ux, --fix_safety] |
 | INS-4.2 | @dev | @architect | [boundary_correctness, idempotency] |
-| INS-4.3 | @dev | @devops | [install_flow, post_install_validation] |
+| INS-4.3 | @dev | @devops | [install_flow, skills_copy, commands_copy, hooks_copy, post_install_validation] |
 | INS-4.4 | @dev | @architect | [template_completeness, framework_owned_markers] |
-| INS-4.5 | @dev + @devops | @qa | [multi_ide_sync, agent_format_validation] |
+| INS-4.5 | @dev + @devops | @qa | [multi_ide_sync, skills_sync, commands_sync, agent_format_validation] |
 | INS-4.6 | @dev | @qa | [entity_count_sanity, install_flow] |
 | INS-4.7 | @dev | @architect | [merge_safety, user_config_preservation] |
-| INS-4.8 | @dev | @qa | [governance_context, fix_safety, constitution_respect] |
+| INS-4.8 | @dev | @qa | [doctor_v2_checks, skills_count, commands_count, hooks_count, governance_context] |
+| INS-4.10 | @devops | @qa | [submodule_validation, file_count_check, prepublish_safety, ci_integration] |
 
 ## Dependency Graph
 
 ```
 Wave 1 (parallel):
-  INS-4.1 (Doctor) ─────────────────────────────────┐
+  INS-4.1 (Doctor) [DONE] ──────────────────────────┐
   INS-4.2 (Settings Generator) ──→ INS-4.3 (W2)     │
+  INS-4.10 (Publish Safety) ── standalone             │
                                                       │
-Wave 2 (INS-4.4, INS-4.5 parallel):                  │
-  INS-4.3 (Installer Settings+Rules) ← INS-4.2       │
+Wave 2 (INS-4.3, INS-4.4, INS-4.5 parallel):         │
+  INS-4.3 (Full Artifact Copy Pipeline) ← INS-4.2    │
+    └─ Skills (7) + Commands (11) + Hooks JS (2)      │
   INS-4.4 (CLAUDE.md v5) ── parallel                  │
-  INS-4.5 (IDE Sync Integration) ── parallel           │
+  INS-4.5 (IDE Sync + Skills/Commands) ── parallel    │
                                                       │
 Wave 3 (all independent):                             │
   INS-4.6 (Entity Registry on Install) ── standalone  │
   INS-4.7 (Config Smart Merge) ── standalone          │
-  INS-4.8 (Health Check Task) ← INS-4.1 ─────────────┘
+  INS-4.8 (Health Check + Doctor v2) ← INS-4.1 ──────┘
+    └─ +3 checks: skills, commands, hooks Claude Code
 ```
 
 ## Wave Gates
 
 | Wave | Gate Criteria | GO Threshold | NO-GO Threshold |
 |------|--------------|-------------|-----------------|
-| W1 | Doctor funcional + Generator testado | `aios doctor` retorna resultados corretos em 3 cenarios (fresh, upgrade, broken) + generator idempotente | Doctor nao detecta gaps conhecidos OU generator produz rules incorretas |
-| W2 | Installer integrado | Fresh install passa `aios doctor` com 0 FAIL + CLAUDE.md v5 tem todas as secoes + IDE sync chamado | Installer quebra em algum cenario OU secoes faltantes no template |
-| W3 | Runtime health completo | Upgrade preserva config + entity registry gerado + health-check task funcional | Merge corrompe config OU registry <500 entidades OU health-check falha |
+| W1 | Doctor funcional + Generator testado + Publish safe | `aios doctor` retorna resultados corretos em 3 cenarios (fresh, upgrade, broken) + generator idempotente + publish gate bloqueia pacote sem pro/ | Doctor nao detecta gaps conhecidos OU generator produz rules incorretas OU publish sem validacao |
+| W2 | Installer integrado + Full artifact copy | Fresh install passa `aios doctor` com 0 FAIL + CLAUDE.md v5 tem todas as secoes + IDE sync chamado + 7 skills copiadas + 11 commands copiados + 2 hooks JS copiados | Installer quebra em algum cenario OU secoes faltantes OU skills/commands/hooks ausentes |
+| W3 | Runtime health completo + Doctor v2 | Upgrade preserva config + entity registry gerado + health-check task funcional + doctor detecta skills/commands/hooks count | Merge corrompe config OU registry <500 entidades OU health-check falha OU doctor nao detecta novos artefatos |
 
 ## Decisoes PM
 
@@ -146,7 +158,28 @@ Auditoria encontrou 7 `.claude/rules/*.md`: agent-authority, workflow-execution,
 ### Discordancias com Codex
 
 1. **Ordem de waves:** Codex propoe doctor na W3. PM mantem doctor na W1 — ele e validador das waves seguintes.
-2. **Stories adicionais (INS-4.9, INS-4.10):** PM rejeita. Hooks → check no doctor. Testes → DoD de cada story. Desenvolvimento incremental, sem story para testes separada.
+2. **Stories adicionais (INS-4.9):** PM rejeita INS-4.9 separada — absorvida em INS-4.3 expandida. Testes → DoD de cada story.
+
+### DevOps Handoff v2 — Decisoes PM (v4)
+
+**Contexto:** Incidente npm publish v4.2.14/v4.2.15 + diagnostico profundo de Claude Code discovery. [Handoff completo](../../handoffs/handoff-devops-to-pm-installation-health-v2.md).
+
+| Decisao | Opcoes | Decisao PM | Racional |
+|---------|--------|------------|----------|
+| **INS-4.9 (Skills+Commands Copy)** | (A) Story separada 3pts, (B) Absorver em INS-4.3 | **(B) Absorvida em INS-4.3** | Mesmo fluxo, mesmo arquivo (`ide-config-generator.js`). INS-4.3: 2→5 pts |
+| **INS-4.10 (Publish Safety Gate)** | (A) Story separada 2pts, (B) Absorver CI/CD | **(A) Story separada** | CRITICO — incidente real. DoD proprio, Wave 1 para prevenir reincidencia |
+| **Hooks Python/Shell (8 hooks)** | (A) Converter para JS, (B) Install+pre-req, (C) Ignorar | **(A) para criticos + (C) resto** | `write-path-validation` e `read-protection` converter para CJS. Demais hooks Py/Sh sao nice-to-have, ignorar por ora |
+| **Doctor checks novos (#11-#13)** | (A) Reabrir INS-4.1, (B) Nova INS-4.1.1, (C) Absorver INS-4.8 | **(C) Absorver em INS-4.8** | INS-4.1 Done. INS-4.8 ja unifica health-check e depende de INS-4.1. Escopo natural. INS-4.8: 2→3 pts |
+| **INS-4.5 (IDE Sync)** | Escopo original vs expandido | **Expandido** | Titulo atualizado: deve garantir skills + commands no sync, nao apenas agents |
+
+**Impacto no sizing:**
+
+| Story | Pontos Antes | Pontos Depois | Delta | Motivo |
+|-------|-------------|--------------|-------|--------|
+| INS-4.3 | 2 | 5 | +3 | Absorve skills (7), commands (11), hooks JS (2), settings.local.json |
+| INS-4.8 | 2 | 3 | +1 | Absorve 3 doctor checks novos (skills-count, commands-count, hooks-claude-count) |
+| INS-4.10 | — | 2 | +2 | Story nova: publish safety gate |
+| **Total** | 27 | **33** | **+6** | — |
 
 ## Relacao com Outros Epics
 
@@ -157,6 +190,7 @@ Auditoria encontrou 7 `.claude/rules/*.md`: agent-authority, workflow-execution,
 | **GD (Graph Dashboard)** | INS-4.4 documenta `aios graph` no CLAUDE.md template |
 | **TOK (Token Optimization)** | INS-4.6 cria base que TOK-1 consome. INS-4 Wave 1 antes de TOK Wave 1 |
 | **INS-3 (Installer Optimization)** | Continuacao natural — INS-3 otimizou performance, INS-4 otimiza completude |
+| **Incidente v4.2.14/v4.2.15** | INS-4.10 previne reincidencia de publish sem submodule pro/ |
 
 ## Risk Matrix
 
@@ -166,6 +200,9 @@ Auditoria encontrou 7 `.claude/rules/*.md`: agent-authority, workflow-execution,
 | Smart merge complexidade | Media | Medio | Scoped para fase 1 (add new keys only) |
 | Users com ambientes muito customizados | Media | Medio | `aios doctor --dry-run` mostra o que seria alterado |
 | Breaking changes em core-config.yaml schema | Baixa | Alto | Schema validation + versao no config |
+| npm publish sem pro/ submodule (NOVO — incidente real) | Media | Critico | INS-4.10: prepublishOnly check + CI gate. Previne reincidencia |
+| Skills/Commands discovery quebrado pos-install | Alta | Alto | INS-4.3 expandida: copy pipeline completo. Doctor v2 valida contagem |
+| Hooks Python/Shell requerem runtime externo | Media | Medio | Converter criticos para CJS. Ignorar nice-to-have. Documentar pre-requisitos |
 
 ## Success Metrics
 
@@ -174,16 +211,25 @@ Auditoria encontrou 7 `.claude/rules/*.md`: agent-authority, workflow-execution,
 | Fresh install `aios doctor` score | N/A (nao existe) | 0 FAIL, <=2 WARN |
 | Upgrade config preservation | 0% (sobrescreve ou ignora) | 100% user keys preserved |
 | Rules/settings coverage | 0% (nao instalados) | 100% (7 rules + settings.json) |
+| Skills disponiveis apos install | 0/7 (zero copiadas) | 7/7 |
+| Commands disponiveis apos install | 12/23 (so agents) | 23/23 |
+| Hooks JS ativos apos install | 1/2 | 2/2 |
+| Publish safety | 0 checks | Submodule + file count validated |
 | Time to diagnose broken env | Manual (30+ min) | < 10 seconds (`aios doctor`) |
 
 ## Definition of Done
 
-- [ ] All 8 stories completed with acceptance criteria met
-- [ ] `aios doctor` functional with 12 checks, --fix, --json flags
+- [x] INS-4.1: `aios doctor` functional with 12 checks, --fix, --json flags (Done — commit 337213dc)
+- [x] INS-4.2: `generate-settings-json.js` created with path traversal validation, idempotency, 12 tests (Done — commit 4a8d9f9e)
+- [ ] All 9 stories completed with acceptance criteria met
 - [ ] `generate-settings-json.js` created and integrated in installer
 - [ ] Fresh install includes: settings.json, 7 rules files, CLAUDE.md v5, IDE sync, entity registry
+- [ ] Fresh install includes: 7 skills, ~11 commands extras, 2 hooks JS (Gap #11-#13)
+- [ ] `settings.local.json` registers all JS hooks (not just synapse-engine)
+- [ ] `aios doctor` v2 validates skills count (>=7), commands count (>=20), hooks Claude Code count (>=2)
 - [ ] Upgrade preserves user core-config.yaml customizations
 - [ ] `@aios-master *health-check` task functional
+- [ ] `prepublishOnly` validates pro/ submodule populated before npm publish (Gap #14)
 - [ ] Zero regressions in existing install/upgrade flow
 - [ ] Documentation updated (CLAUDE.md template, installer README)
 
@@ -195,18 +241,26 @@ Auditoria encontrou 7 `.claude/rules/*.md`: agent-authority, workflow-execution,
 | 2.0 | 2026-02-23 | @pm (Morgan) | Codex Critical Analysis incorporada. Sizing ajustado (24→~26 pts): INS-4.2 (3→5), INS-4.3 (3→2), INS-4.7 (3→5), INS-4.8 (3→2). Gap analysis expandida para 10 itens com Codex findings. Discordancias: wave order mantida (doctor W1), stories adicionais rejeitadas (hooks→doctor check, testes→DoD). INS-4.3 reescopada para wiring only. |
 | 2.1 | 2026-02-23 | @sm (River) | 8 stories drafadas: INS-4.1 through INS-4.8. Todas incorporam Codex findings (contract bug A3, merger YAML C3, scope reductions A1/A2, regression test DoD A4). Dependency graph respeitado. INS-4.6 entity registry threshold: relativo (nao fixo >=500). INS-4.8 *doctor alias removido para evitar conflito com CLI. |
 | 3.0 | 2026-02-23 | @sm (River) | Stories corrigidas pos-Codex Story Review: schema settings.json como strings "Edit(path)" (INS-4.2), contrato commandSync com adapter pattern (INS-4.5), contrato MergeResult com createMergeResult (INS-4.7), narrativa hooks Claude Code vs git (INS-4.3), markers AIOS-MANAGED-START/END (INS-4.4), source path rules confirmado como .claude/rules/ (INS-4.1). Sizing INS-4.5 ajustado 2→3 pts. Total 27 pts. |
+| 3.1 | 2026-02-23 | @po (Pax) | INS-4.1 closed: Done. 12 modular checks, --fix/--json/--dry-run, 40 tests. QA PASS (9/10). Commit 337213dc. Progress: 1/8 stories. |
+| 4.1 | 2026-02-23 | @po (Pax) | INS-4.2 closed: Done. Settings.json generator with path traversal validation, js-yaml alignment, 12 tests. QA PASS (re-review). Commit 4a8d9f9e. Progress: 2/9 stories (10/33 pts). |
+| 4.0 | 2026-02-23 | @pm (Morgan) | DevOps Handoff v2 incorporado. 4 gaps novos (#11-#14): skills nao instaladas, commands extras ausentes, hooks parciais, publish sem validacao. INS-4.3 expandida (2→5 pts, absorve INS-4.9 skills/commands/hooks copy). INS-4.8 expandida (2→3 pts, absorve 3 doctor checks novos). INS-4.10 criada (2 pts, publish safety gate, Wave 1). INS-4.5 titulo expandido. Total: 27→33 pts, 8→9 stories. Decisoes: hooks Py/Sh criticos→CJS, rest→ignorar. |
 
 ## Handoff to Story Manager
 
-"@sm, por favor crie stories detalhadas para este epic. Key considerations:
+"@sm, por favor atualize as stories afetadas e crie a story INS-4.10. Key considerations:
 
-- Enhancement ao framework AIOS (Node.js CLI, installer pipeline)
-- Specs detalhadas de INS-4.1 (doctor) e INS-4.2 (generator) estao no [handoff do architect](../../handoffs/handoff-architect-to-pm-epic-installation-health.md) secoes 3.1 e 3.2
-- Arquivos-chave do installer documentados no handoff secao 9
-- Contagem de artefatos a instalar no handoff secao 9
-- Patterns existentes: brownfield-upgrader, post-install-validator, ide-sync — seguir padroes
-- Wave 1 pode comecar imediatamente (zero blockers externos)
-- Wave 2 requer branch NOG merged em main
-- INS-4.7 limitado a fase 1: add new keys + warn conflicts (NAO 3-way merge completo)
-- Doctor checks: 12 checks propostos no handoff — validar se sao suficientes
-- Rules files: sao 7 (nao 5 como handoff original dizia)"
+**Stories existentes a ATUALIZAR:**
+- **INS-4.3** — Escopo expandido de 'Wire Generator' para 'Full Artifact Copy Pipeline'. Agora inclui: (1) wire settings.json generator, (2) copiar 7 skills para `.claude/skills/`, (3) copiar ~11 commands extras para `.claude/commands/`, (4) copiar 2 hooks JS para `.claude/hooks/`, (5) registrar hooks em `settings.local.json`. Arquivo principal: `ide-config-generator.js`. Sizing: 2→5 pts
+- **INS-4.5** — Titulo expandido para incluir skills + commands no sync. Garantir que IDE sync cobre todos artefatos, nao apenas agents
+- **INS-4.8** — Escopo expandido: alem de unificar health-check, adicionar 3 checks novos ao doctor: `skills-count` (>=7), `commands-count` (>=20), `hooks-claude-count` (>=2). Sizing: 2→3 pts
+
+**Story NOVA:**
+- **INS-4.10** — Publish Safety Gate (2 pts, Wave 1, @devops executor). Previne reincidencia do incidente v4.2.14/v4.2.15: (1) `prepublishOnly` script valida pro/ submodule inicializado, (2) verifica presenca de `pro/license/license-api.js`, (3) conta minimo de arquivos no pacote. Refs: [DevOps Handoff v2](../../handoffs/handoff-devops-to-pm-installation-health-v2.md) secoes 2 e 4
+
+**Inventario de artefatos para INS-4.3** (ver handoff v2 secao 5):
+- Skills (7): architect-first, checklist-runner, coderabbit-review, mcp-builder, skill-creator, synapse, tech-search
+- Commands extras (~11): greet.md, synapse/manager.md, synapse/tasks/*.md (7), synapse/utils/*.md (1), AIOS/stories/*.md
+- Hooks JS (2): synapse-engine.cjs (ja copiado), precompact-session-digest.cjs (FALTANTE)
+- Decisao PM sobre hooks Python/Shell: converter `write-path-validation` e `read-protection` para CJS. Demais ignorar.
+
+**Wave 1 pode comecar imediatamente** (INS-4.2 + INS-4.10 em paralelo, zero blockers)"

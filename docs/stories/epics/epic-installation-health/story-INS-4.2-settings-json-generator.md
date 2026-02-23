@@ -4,7 +4,7 @@
 **Wave:** 1 — Foundation (P0)
 **Points:** 5
 **Agents:** @dev
-**Status:** Ready for Review
+**Status:** Done
 **Blocked By:** —
 **Created:** 2026-02-23
 
@@ -357,3 +357,4 @@ Dev Notes mencionam "10 pre-existing failures in `pro-design-migration/`". Nao e
 | 2026-02-23 | @sm (River) | [Codex Story Review] Schema settings.json corrigido: entries sao strings `"Edit(path)"` e `"Write(path)"`, NAO objetos `{ tool, path }`. MultiEdit removido (nao existe no schema real). Expected Output Structure e Expansion Strategy atualizados. Contagem confirmada ~60+ rules como strings. Tasks 3.3 e 3.4 corrigidas. |
 | 2026-02-23 | @dev (Dex) | Implementation complete. Generator created at `.aios-core/infrastructure/scripts/generate-settings-json.js`. 10 unit tests passing. core-config.yaml updated with 2 new exception paths. settings.json regenerated (80 deny, 9 allow). All tasks [x]. Status: Ready for Review. |
 | 2026-02-23 | @dev (Dex) | QA Fix Request applied (C1+C3). Fix 1: Added `validateBoundaryPath()` — rejects `..` traversal and absolute paths in boundary config. Fix 2: Replaced `require('yaml')` with `require('js-yaml')` to align with project convention (root package.json dependency). 2 new tests added (12 total, all passing). |
+| 2026-02-23 | @po (Pax) | Story closed. Commit 4a8d9f9e. QA gate PASS (re-review: all concerns resolved). 6 ACs met, 12/12 tests, all tasks [x]. Status: Done. |
