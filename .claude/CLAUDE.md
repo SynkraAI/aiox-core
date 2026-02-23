@@ -1,6 +1,6 @@
-# CLAUDE.md - Synkra AIOS
+# CLAUDE.md
 
-Este arquivo configura o comportamento do Claude Code ao trabalhar neste repositório.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ---
 
@@ -9,8 +9,6 @@ Este arquivo configura o comportamento do Claude Code ao trabalhar neste reposit
 O AIOS possui uma **Constitution formal** com princípios inegociáveis e gates automáticos.
 
 **Documento completo:** `.aios-core/constitution.md`
-
-**Princípios fundamentais:**
 
 | Artigo | Princípio | Severidade |
 |--------|-----------|------------|
@@ -25,22 +23,7 @@ O AIOS possui uma **Constitution formal** com princípios inegociáveis e gates 
 
 ---
 
-## Language Configuration
-
-Language preference is handled by Claude Code's native `language` setting (v2.1.0+).
-Configure in `~/.claude/settings.json` (global) or `.claude/settings.json` (project):
-
-```json
-{ "language": "portuguese" }
-```
-
-The installer writes this automatically during `npx aios-core install`. No language config in `core-config.yaml`.
-
----
-
 ## Premissa Arquitetural: CLI First
-
-O Synkra AIOS segue uma hierarquia clara de prioridades que deve guiar **TODAS** as decisões:
 
 ```
 CLI First → Observability Second → UI Third
@@ -52,41 +35,100 @@ CLI First → Observability Second → UI Third
 | **Observability** | Secundária | Observar e monitorar o que acontece no CLI em tempo real. |
 | **UI** | Terciária | Gestão pontual e visualizações quando necessário. |
 
-### Princípios Derivados
-
-1. **A CLI é a fonte da verdade** - Dashboards apenas observam, nunca controlam
-2. **Funcionalidades novas devem funcionar 100% via CLI** antes de ter qualquer UI
-3. **A UI nunca deve ser requisito** para operação do sistema
-4. **Observabilidade serve para entender** o que o CLI está fazendo, não para controlá-lo
-5. **Ao decidir onde implementar algo**, sempre prefira CLI > Observability > UI
-
-> **Referência formal:** Constitution Artigo I - CLI First (NON-NEGOTIABLE)
+- A CLI é a fonte da verdade — dashboards apenas observam, nunca controlam
+- Funcionalidades novas devem funcionar 100% via CLI antes de ter qualquer UI
+- A UI nunca deve ser requisito para operação do sistema
+- Ao decidir onde implementar algo, sempre prefira CLI > Observability > UI
 
 ---
 
 ## Estrutura do Projeto
 
+Monorepo com npm workspaces. Node.js >=18 (v20+ recomendado), npm >=9.
+
 ```
 aios-core/
-├── .aios-core/              # Core do framework
-│   ├── core/                # Módulos principais (orchestration, memory, etc.)
-│   ├── data/                # Knowledge base, entity registry
-│   ├── development/         # Agents, tasks, templates, checklists, scripts
-│   └── infrastructure/      # CI/CD templates, scripts
-├── bin/                     # CLI executables (aios-init.js, aios.js)
-├── docs/                    # Documentação
-│   └── stories/             # Development stories (active/, completed/)
-├── packages/                # Shared packages
-├── pro/                     # Pro submodule (proprietary)
-├── squads/                  # Squad expansions
-└── tests/                   # Testes
+├── .aios-core/                  # Core do framework
+│   ├── core/                    # 25 módulos (orchestration, memory, config, etc.)
+│   ├── cli/                     # CLI commands e utils
+│   ├── data/                    # Knowledge base, entity registry, tech presets
+│   ├── development/             # Agents, tasks (200+), templates, checklists, workflows (17)
+│   ├── infrastructure/          # CI/CD templates, scripts, schemas, integrations
+│   ├── schemas/                 # JSON schemas (agent-v3, task-v3, squad)
+│   ├── hooks/                   # Git hook scripts (IDS registry sync)
+│   ├── constitution.md          # Princípios inegociáveis do framework
+│   ├── core-config.yaml         # Configuração core do AIOS
+│   ├── framework-config.yaml    # Configuração do framework
+│   └── project-config.yaml      # Configuração do projeto
+├── bin/                         # CLI executables
+│   ├── aios.js                  # Main CLI (entrypoint para `aios` e `aios-core`)
+│   ├── aios-init.js             # Initialization
+│   ├── aios-ids.js              # ID system CLI
+│   └── aios-minimal.js          # Lightweight entrypoint
+├── packages/                    # npm workspaces
+│   ├── installer/               # Installation wizard (config, detection, merger, updater)
+│   ├── aios-install/            # Installation helpers (dep-checker, os-detector)
+│   ├── aios-pro-cli/            # Pro CLI features
+│   └── gemini-aios-extension/   # Google Gemini extension
+├── docs/                        # Documentação
+│   └── stories/                 # Development stories (active/, completed/)
+├── pro/                         # Pro submodule (proprietary, git submodule)
+├── squads/                      # Squad expansions (agents, tasks, workflows)
+├── scripts/                     # Build & automation scripts
+└── tests/                       # Test suites (unit, integration, e2e, regression, etc.)
+```
+
+### TypeScript Path Alias
+
+```json
+"@synkra/aios-core" → ".aios-core/core"
+```
+
+Definido em `tsconfig.json`. Use `@synkra/aios-core` ou `@synkra/aios-core/*` para importar módulos core.
+
+---
+
+## Comandos de Desenvolvimento
+
+### Testes
+```bash
+npm test                              # Jest — rodar todos os testes
+npm run test:watch                    # Jest em modo watch
+npm run test:coverage                 # Jest com relatório de cobertura
+npx jest path/to/file.test.js         # Rodar um único arquivo de teste
+npx jest --testPathPattern="pattern"  # Filtrar testes por padrão
+npm run test:health-check             # Mocha — testes de health check (timeout 30s)
+```
+
+Jest usa `tests/setup.js` como setup global. Timeout de teste: 30s. Cobertura mínima: 80% global target (thresholds atuais mais baixos temporariamente).
+
+### Linting & Formatação
+```bash
+npm run lint                # ESLint (v9 flat config, cache habilitado)
+npm run typecheck           # TypeScript --noEmit
+npm run format              # Prettier em todos os *.md
+```
+
+### Validação
+```bash
+npm run validate:structure  # Source tree guardian
+npm run validate:agents     # Validar definições de agentes
+npm run sync:ide            # Sincronizar regras entre IDEs (Claude, Cursor, Windsurf)
+npm run sync:ide:validate   # Validar sincronização de IDEs
+```
+
+### AIOS CLI
+```bash
+npx aios-core install       # Instalar AIOS em projeto
+npx aios-core doctor        # Diagnóstico do sistema
+npx aios-core info          # Informações do sistema
 ```
 
 ---
 
 ## Sistema de Agentes
 
-### Ativação de Agentes
+### Ativação
 Use `@agent-name` ou `/AIOS:agents:agent-name`:
 
 | Agente | Persona | Escopo Principal |
@@ -103,11 +145,7 @@ Use `@agent-name` ou `/AIOS:agents:agent-name`:
 | `@devops` | Gage | CI/CD, git push (EXCLUSIVO) |
 
 ### Comandos de Agentes
-Use prefixo `*` para comandos:
-- `*help` - Mostrar comandos disponíveis
-- `*create-story` - Criar story de desenvolvimento
-- `*task {name}` - Executar task específica
-- `*exit` - Sair do modo agente
+Prefixo `*`: `*help`, `*create-story`, `*task {name}`, `*exit`
 
 ### Mapeamento Agente → Codebase
 
@@ -124,19 +162,26 @@ Use prefixo `*` para comandos:
 
 ## Story-Driven Development
 
-1. **Trabalhe a partir de stories** - Todo desenvolvimento começa com uma story em `docs/stories/`
-2. **Atualize progresso** - Marque checkboxes conforme completa: `[ ]` → `[x]`
-3. **Rastreie mudanças** - Mantenha a seção File List na story
-4. **Siga critérios** - Implemente exatamente o que os acceptance criteria especificam
+Todo desenvolvimento começa com uma story em `docs/stories/`. Workflow:
 
-### Workflow de Story
 ```
-@po *create-story → @dev implementa → @qa testa → @devops push
+@po/@sm *create-story → @dev implementa → @qa testa → @devops push
 ```
+
+- Marque checkboxes conforme completa: `[ ]` → `[x]`
+- Mantenha a seção File List atualizada na story
+- Implemente exatamente o que os acceptance criteria especificam
 
 ---
 
 ## Padrões de Código
+
+### Estilo (Prettier + ESLint)
+- 2 espaços, sem tabs, semicolons obrigatórios
+- Single quotes (com `avoidEscape`)
+- Trailing comma: `es5`
+- Print width: 100
+- Arrow parens: always
 
 ### Convenções de Nomenclatura
 
@@ -150,140 +195,66 @@ Use prefixo `*` para comandos:
 
 ### Imports
 **Sempre use imports absolutos.** Nunca use imports relativos.
-```typescript
-// ✓ Correto
-import { useStore } from '@/stores/feature/store'
 
-// ✗ Errado
-import { useStore } from '../../../stores/feature/store'
-```
-
-**Ordem de imports:**
-1. React/core libraries
-2. External libraries
-3. UI components
-4. Utilities
-5. Stores
-6. Feature imports
-7. CSS imports
+**Ordem:** React/core → External libs → UI components → Utilities → Stores → Feature → CSS
 
 ### TypeScript
-- Sem `any` - Use tipos apropriados ou `unknown` com type guards
-- Sempre defina interface de props para componentes
-- Use `as const` para objetos/arrays constantes
-- Tipos de ref explícitos: `useRef<HTMLDivElement>(null)`
+- Sem `any` — use tipos apropriados ou `unknown` com type guards
+- Target: ES2022, module: commonjs
+- `noEmit: true` — apenas type checking, sem compilação
 
-### Error Handling
-```typescript
-try {
-  // Operation
-} catch (error) {
-  logger.error(`Failed to ${operation}`, { error })
-  throw new Error(`Failed to ${operation}: ${error instanceof Error ? error.message : 'Unknown'}`)
-}
-```
-
----
-
-## Testes & Quality Gates
-
-### Comandos de Teste
-```bash
-npm test                    # Rodar testes
-npm run test:coverage       # Testes com cobertura
-npm run lint                # ESLint
-npm run typecheck           # TypeScript
-```
-
-### Quality Gates (Pre-Push)
-Antes de push, todos os checks devem passar:
-```bash
-npm run lint        # ESLint
-npm run typecheck   # TypeScript
-npm test            # Jest
-```
+### Variáveis não usadas
+ESLint permite prefixo `_` para ignorar: `_unused`, `_err`
 
 ---
 
 ## Convenções Git
 
 ### Commits
-Seguir Conventional Commits:
-- `feat:` - Nova funcionalidade
-- `fix:` - Correção de bug
-- `docs:` - Documentação
-- `test:` - Testes
-- `chore:` - Manutenção
-- `refactor:` - Refatoração
+Conventional Commits (usado pelo semantic-release para versionamento automático):
+- `feat:` → minor release
+- `fix:` → patch release
+- `perf:` → patch release
+- `breaking change` → major release
 
 **Referencie story ID:** `feat: implement feature [Story 2.1]`
 
 ### Branches
-- `main` - Branch principal
-- `feat/*` - Features
-- `fix/*` - Correções
-- `docs/*` - Documentação
+`main` (principal), `feat/*`, `fix/*`, `docs/*`, `refactor/*`, `test/*`
 
 ### Push Authority
 **Apenas `@devops` pode fazer push para remote.**
 
----
-
-## Otimização Claude Code
-
-### Uso de Ferramentas
-| Tarefa | Use | Não Use |
-|--------|-----|---------|
-| Buscar conteúdo | `Grep` tool | `grep`/`rg` no bash |
-| Ler arquivos | `Read` tool | `cat`/`head`/`tail` |
-| Editar arquivos | `Edit` tool | `sed`/`awk` |
-| Buscar arquivos | `Glob` tool | `find` |
-| Operações complexas | `Task` tool | Múltiplos comandos manuais |
-
-### Performance
-- Prefira chamadas de ferramentas em batch
-- Use execução paralela para operações independentes
-- Cache dados frequentemente acessados durante a sessão
-
-### Gerenciamento de Sessão
-- Rastreie progresso da story durante a sessão
-- Atualize checkboxes imediatamente após completar tasks
-- Mantenha contexto da story atual sendo trabalhada
-- Salve estado importante antes de operações longas
-
-### Recuperação de Erros
-- Sempre forneça sugestões de recuperação para falhas
-- Inclua contexto do erro em mensagens ao usuário
-- Sugira procedimentos de rollback quando apropriado
-- Documente quaisquer correções manuais necessárias
+### Git Hooks (Husky)
+- **lint-staged** (pre-commit): ESLint + Prettier em arquivos staged. Editar agentes em `.aios-core/development/agents/` automaticamente dispara `npm run sync:ide`
+- **post-commit**: Limpa cache de status do projeto e atualiza IDS registry
+- **pre-push**: Sincroniza entity registry
 
 ---
 
-## Comandos Frequentes
+## Arquitetura Core (.aios-core/core/)
 
-### Desenvolvimento
-```bash
-npm run dev                 # Iniciar desenvolvimento
-npm test                    # Rodar testes
-npm run lint                # Verificar estilo
-npm run typecheck           # Verificar tipos
-npm run build               # Build produção
-```
+25 módulos autônomos:
 
-### AIOS
-```bash
-npx aios-core install       # Instalar AIOS
-npx aios-core doctor        # Diagnóstico do sistema
-npx aios-core info          # Informações do sistema
-```
+| Módulo | Função |
+|--------|--------|
+| `orchestration/` | Workflow orchestration (master-orchestrator, bob-orchestrator, workflow-executor) |
+| `execution/` | Task execution (autonomous-build-loop, parallel-executor, wave-executor) |
+| `elicitation/` | User input collection (workflow, task, agent elicitation) |
+| `quality-gates/` | 3 camadas: layer1-precommit, layer2-pr-automation, layer3-human-review |
+| `config/` | Config loading, env interpolation, caching, migration |
+| `mcp/` | MCP integration (os-detector, symlink-manager, global-config-manager) |
+| `permissions/` | Access control (operation-guard, permission-mode) |
+| `memory/` | Persistent patterns (gotchas-memory) |
+| `health-check/` | System health monitoring |
+| `ids/` | Entity ID management |
+| `events/` | Event handling |
+| `session/` | Session state handling |
+| `migration/` | Data migration utilities |
+| `ui/` | Panel rendering, observability |
 
-### Dashboard (apps/dashboard/)
-```bash
-cd apps/dashboard
-npm install
-npm run dev                 # Desenvolvimento
-npm run build               # Build produção
-```
+### Schemas
+JSON schemas para validação em `.aios-core/schemas/`: `agent-v3-schema.json`, `task-v3-schema.json`, `squad-schema.json`
 
 ---
 
@@ -291,7 +262,6 @@ npm run build               # Build produção
 
 Ver `.claude/rules/mcp-usage.md` para regras detalhadas.
 
-**Resumo:**
 - Preferir ferramentas nativas do Claude Code sobre MCP
 - MCP Docker Gateway apenas quando explicitamente necessário
 - `@devops` gerencia toda infraestrutura MCP
@@ -300,17 +270,23 @@ Ver `.claude/rules/mcp-usage.md` para regras detalhadas.
 
 ## Debug
 
-### Habilitar Debug
 ```bash
 export AIOS_DEBUG=true
-```
-
-### Logs
-```bash
 tail -f .aios/logs/agent.log
 ```
 
 ---
 
-*Synkra AIOS Claude Code Configuration v4.0*
+## Language Configuration
+
+Language preference is handled by Claude Code's native `language` setting.
+Configure in `~/.claude/settings.json` (global) or `.claude/settings.json` (project):
+
+```json
+{ "language": "portuguese" }
+```
+
+---
+
+*Synkra AIOS Claude Code Configuration v4.1*
 *CLI First | Observability Second | UI Third*
