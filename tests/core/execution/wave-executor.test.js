@@ -10,8 +10,8 @@
  * Refs #52
  */
 
-jest.mock('../../../.aios-core/workflow-intelligence/engine/wave-analyzer', () => null, { virtual: true });
-jest.mock('../../../.aios-core/core/execution/rate-limit-manager', () => null, { virtual: true });
+jest.mock('../../../.aios-core/workflow-intelligence/engine/wave-analyzer', () => null);
+jest.mock('../../../.aios-core/core/execution/rate-limit-manager', () => null);
 
 const WaveExecutor = require('../../../.aios-core/core/execution/wave-executor');
 
