@@ -1,6 +1,6 @@
 # AIOS Agent Flows - Documentacion Detallada de los Agentes
 
-> [PT](../../aios-agent-flows/README.md) | [EN](../../en/aios-agent-flows/README.md) | **ES**
+> [PT](../../aios-agent-flows/README.md) | [EN](../../en/aios-agent-flows/README.md) | **ES** | [ZH](../../zh/aios-agent-flows/README.md)
 
 ---
 
@@ -169,7 +169,7 @@ flowchart TB
 
 | Documentacion | Ubicacion | Proposito |
 |---------------|-----------|-----------|
-| Agent Reference Guide | [docs/agent-reference-guide.md](../../agent-reference-guide.md) | Referencia rapida |
+| Meta-Agent Commands | [docs/meta-agent-commands.md](../../meta-agent-commands.md) | Referencia rapida |
 | Workflows Guide | [docs/guides/workflows-guide.md](../../guides/workflows-guide.md) | Guia de workflows |
 | AIOS Workflows | [docs/aios-workflows/](../../aios-workflows/) | Detalle de workflows |
 | Architecture | [docs/architecture/](../../architecture/) | Arquitectura tecnica |

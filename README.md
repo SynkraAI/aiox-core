@@ -12,6 +12,8 @@
 [![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Code of Conduct](https://img.shields.io/badge/code%20of%20conduct-Contributor%20Covenant-blue.svg)](CODE_OF_CONDUCT.md)
 
+> 🌐 README por idioma: [EN](docs/README.md) | [PT](docs/pt/README.md) | [ES](docs/es/README.md) | [ZH](docs/zh/README.md)
+
 Framework de Desenvolvimento Auto-Modificável Alimentado por IA. Fundado em Desenvolvimento Ágil Dirigido por Agentes, oferecendo capacidades revolucionárias para desenvolvimento dirigido por IA e muito mais. Transforme qualquer domínio com expertise especializada de IA: desenvolvimento de software, entretenimento, escrita criativa, estratégia de negócios, bem-estar pessoal e muito mais.
 
 ## Comece Aqui (10 Min)
@@ -112,7 +114,7 @@ Esta abordagem de duas fases elimina tanto a **inconsistência de planejamento**
 - 📖 [Guia de Instalação para Windows](docs/installation/windows.md)
 - 📖 [Guia de Instalação para Linux](docs/installation/linux.md)
 
-**Documentação multilíngue disponível:** [Português](docs/pt/installation/) | [Español](docs/es/installation/)
+**Documentação multilíngue disponível:** [English](docs/README.md) | [Português](docs/pt/README.md) | [Español](docs/es/README.md) | [中文](docs/zh/README.md)
 
 ## Navegação Rápida
 

@@ -1,6 +1,6 @@
 # AIOS Workflows - Documentacion Detallada de los Workflows
 
-> [PT](../../aios-workflows/README.md) | [EN](../../en/aios-workflows/README.md) | **ES**
+> [PT](../../aios-workflows/README.md) | [EN](../../en/aios-workflows/README.md) | **ES** | [ZH](../../zh/aios-workflows/README.md)
 
 ---
 
@@ -228,7 +228,7 @@ flowchart TD
 |---------------|-----------|-----------|
 | Workflows Guide | [docs/guides/workflows-guide.md](../../guides/workflows-guide.md) | Guia general |
 | Agent Flows | [docs/aios-agent-flows/](../../aios-agent-flows/) | Detalles de agentes |
-| Agent Reference | [docs/agent-reference-guide.md](../../agent-reference-guide.md) | Referencia rapida |
+| Meta-Agent Commands | [docs/meta-agent-commands.md](../../meta-agent-commands.md) | Referencia rapida |
 
 ---
 
