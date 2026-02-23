@@ -59,13 +59,13 @@ Reduzir o overhead de tokens do AIOS em **25-45%** (conservador) combinando feat
 |-------|-------|-------|--------|--------|------------|
 | [TOK-1](story-TOK-1-unified-tool-registry.md) | Unified Tool Registry Creation | @dev + @architect | 3-5 | ✅ Done | - |
 | [TOK-1.5](story-TOK-1.5-baseline-metrics.md) | Baseline Metrics per Workflow | @dev + @analyst | 2-3 | ✅ Done | - |
-| [TOK-2](story-TOK-2-deferred-search-capability-aware.md) | Deferred/Search Capability-Aware | @dev + @devops | 5 | Draft | TOK-1 |
+| [TOK-2](story-TOK-2-deferred-search-capability-aware.md) | Deferred/Search Capability-Aware | @dev + @devops | 5 | ✅ Done | TOK-1 (Done) |
 
 ### Wave 2: Optimization (P1)
 
 | Story | Title | Agent | Points | Status | Blocked By |
 |-------|-------|-------|--------|--------|------------|
-| [TOK-3](story-TOK-3-ptc-native-bulk-ops.md) | PTC for Native/CLI Bulk Operations | @dev | 5 | Draft | TOK-1.5 |
+| [TOK-3](story-TOK-3-ptc-native-bulk-ops.md) | PTC for Native/CLI Bulk Operations | @dev | 5 | Ready for Review | TOK-1.5 (Done) |
 | [TOK-4A](story-TOK-4A-agent-handoff-context-strategy.md) | Agent Handoff Context Strategy | @dev + @architect | 3-5 | Draft | TOK-1 |
 | [TOK-4B](story-TOK-4B-input-examples-registry.md) | Input Examples Registry + Injection | @dev | 3-5 | Draft | TOK-1 |
 

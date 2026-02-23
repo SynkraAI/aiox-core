@@ -208,6 +208,7 @@ tools:
   - context7          # Research testing best practices and standards
 checklists:
   - qa-master-checklist.md
+execution_mode: programmatic  # TOK-3: PTC-eligible — batch lint+typecheck+test in single Bash block
 ---
 
 # qa-gate

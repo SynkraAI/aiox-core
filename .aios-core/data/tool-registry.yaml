@@ -38,6 +38,9 @@
 # ADR References:
 #   ADR-1: Registry at L3 (.aios-core/data/) — consistent with entity-registry
 #   ADR-2: 3-Tier Tool Mesh (Always/Deferred/External) aligned with L1-L4
+#   ADR-3: PTC native ONLY — MCP tools CANNOT be used in programmatic/batch
+#          code blocks. Only tools with ptc_eligible: true (Tier 1 native) are
+#          allowed. See: templates/ptc-*.md for enforcement patterns.
 #   ADR-5: Tool Search for discovery, Examples for accuracy (incompatible)
 #   ADR-7: Runtime detection flag — capabilities checked before activation
 # =============================================================================
@@ -70,72 +73,84 @@ tools:
     defer: false
     tokenCost: 200
     category: file-operations
+    ptc_eligible: true
   Write:
     tier: 1
     layer: L1
     defer: false
     tokenCost: 200
     category: file-operations
+    ptc_eligible: true
   Edit:
     tier: 1
     layer: L1
     defer: false
     tokenCost: 250
     category: file-operations
+    ptc_eligible: true
   Bash:
     tier: 1
     layer: L1
     defer: false
     tokenCost: 300
     category: system
+    ptc_eligible: true
   Grep:
     tier: 1
     layer: L1
     defer: false
     tokenCost: 200
     category: search
+    ptc_eligible: true
   Glob:
     tier: 1
     layer: L1
     defer: false
     tokenCost: 150
     category: search
+    ptc_eligible: true
   Task:
     tier: 1
     layer: L1
     defer: false
     tokenCost: 400
     category: orchestration
+    ptc_eligible: true
   Skill:
     tier: 1
     layer: L1
     defer: false
     tokenCost: 200
     category: orchestration
+    ptc_eligible: true
   WebSearch:
     tier: 1
     layer: L1
     defer: false
     tokenCost: 250
     category: web
+    ptc_eligible: true
   WebFetch:
     tier: 1
     layer: L1
     defer: false
     tokenCost: 250
     category: web
+    ptc_eligible: true
   NotebookEdit:
     tier: 1
     layer: L1
     defer: false
     tokenCost: 200
     category: file-operations
+    ptc_eligible: true
   AskUserQuestion:
     tier: 1
     layer: L1
     defer: false
     tokenCost: 300
     category: interaction
+    ptc_eligible: true
 
   # ---------------------------------------------------------------------------
   # TIER 2 — Agent Commands & Skills (Deferred on Activation)
@@ -219,6 +234,7 @@ tools:
     essential: false # Task-specific: research, competitor analysis
     tokenCost: 500
     category: web-search
+    ptc_eligible: false  # ADR-3: MCP tools excluded from PTC/batch blocks
     keywords:
       - search
       - research
@@ -233,6 +249,7 @@ tools:
     essential: false # Task-specific: browser automation, screenshots
     tokenCost: 800
     category: browser-automation
+    ptc_eligible: false  # ADR-3: MCP tools excluded from PTC/batch blocks
     keywords:
       - browser
       - screenshot
@@ -248,6 +265,7 @@ tools:
     essential: false # Task-specific: web scraping, social media
     tokenCost: 600
     category: web-scraping
+    ptc_eligible: false  # ADR-3: MCP tools excluded from PTC/batch blocks
     keywords:
       - scraping
       - social-media
@@ -262,6 +280,7 @@ tools:
     essential: true # Core code intelligence — NEVER disable
     tokenCost: 400
     category: code-intelligence
+    ptc_eligible: false  # ADR-3: MCP tools excluded from PTC/batch blocks
     keywords:
       - code-analysis
       - nogic
@@ -275,6 +294,7 @@ tools:
     essential: true # Dependency analysis — NEVER disable
     tokenCost: 400
     category: code-intelligence
+    ptc_eligible: false  # ADR-3: MCP tools excluded from PTC/batch blocks
     keywords:
       - graph
       - dependencies
@@ -509,7 +529,7 @@ task_bindings:
     optional:
       - browser
       - supabase
-    execution_mode: direct
+    execution_mode: programmatic  # TOK-3: batch lint+typecheck+test in single Bash block
 
   dev-develop-story:
     required:
@@ -559,3 +579,23 @@ task_bindings:
       - github-cli
       - context7
     execution_mode: direct
+
+  # --- PTC-eligible bindings (TOK-3) ---
+  entity-validation:
+    required:
+      - Read
+      - Grep
+      - Glob
+      - Bash
+    optional: []
+    execution_mode: programmatic  # TOK-3: batch-scan N entities × M checks in single Bash block
+
+  research-aggregation:
+    required:
+      - Bash
+      - Read
+      - Grep
+      - WebSearch
+    optional:
+      - WebFetch
+    execution_mode: programmatic  # TOK-3: multi-search + filter in single Bash block

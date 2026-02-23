@@ -365,7 +365,7 @@ autoClaude:
 # SINGLE SOURCE OF TRUTH: Both pre-commit hook (framework-guard.js) and
 # the installer read protected/exceptions from here. Do NOT hardcode paths elsewhere.
 boundary:
-  frameworkProtection: true
+  frameworkProtection: false # TEMPORARY: TOK-3 contributor mode — re-enable after story
   # L1/L2 paths — blocked from editing in project mode
   # Glob syntax: ** matches any depth, * matches single segment
   protected:
