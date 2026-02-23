@@ -61,6 +61,8 @@
     "validate:semantic-lint": "node scripts/semantic-lint.js",
     "manifest:ensure": "node scripts/ensure-manifest.js",
     "sync:ide:cursor": "node .aios-core/infrastructure/scripts/ide-sync/index.js sync --ide cursor",
+    "install:agents:global": "node scripts/install-agents-globally.js",
+    "verify:agents:global": "node scripts/verify-global-agents.js",
     "prepublishOnly": "npm run generate:manifest && npm run validate:manifest",
     "prepare": "husky"
   },
