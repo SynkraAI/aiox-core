@@ -1,6 +1,6 @@
 # AIOS Agent Flows - Documentação Detalhada dos Agentes
 
-> 🌐 **PT** | [EN](../en/aios-agent-flows/README.md) | [ES](../es/aios-agent-flows/README.md)
+> 🌐 **PT** | [EN](../en/aios-agent-flows/README.md) | [ES](../es/aios-agent-flows/README.md) | [ZH](../zh/aios-agent-flows/README.md)
 
 ---
 
@@ -169,7 +169,7 @@ flowchart TB
 
 | Documentação | Localização | Propósito |
 |--------------|-------------|-----------|
-| Agent Reference Guide | [docs/agent-reference-guide.md](../agent-reference-guide.md) | Referência rápida |
+| Meta-Agent Commands | [docs/meta-agent-commands.md](../meta-agent-commands.md) | Referência rápida |
 | Workflows Guide | [docs/guides/workflows-guide.md](../guides/workflows-guide.md) | Guia de workflows |
 | AIOS Workflows | [docs/aios-workflows/](../aios-workflows/) | Detalhamento de workflows |
 | Architecture | [docs/architecture/](../architecture/) | Arquitetura técnica |
@@ -183,7 +183,7 @@ Para adicionar ou atualizar documentação de agentes:
 1. Siga a estrutura padrão descrita acima
 2. Inclua diagramas Mermaid atualizados
 3. Mantenha o changelog atualizado
-4. Crie traduções em EN e ES
+4. Crie traduções em EN, ES e ZH
 
 ---
 
