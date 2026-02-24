@@ -5,15 +5,18 @@ const { RegistryProvider } = require('./providers/registry-provider');
 
 /** Cached provider instance (survives across hook invocations in same process). */
 let _provider = null;
+let _providerRoot = null;
 
 /**
  * Get or create a RegistryProvider singleton.
+ * Resets if projectRoot changes between calls.
  * @param {string} projectRoot - Project root directory
  * @returns {RegistryProvider}
  */
 function getProvider(projectRoot) {
-  if (!_provider) {
+  if (!_provider || _providerRoot !== projectRoot) {
     _provider = new RegistryProvider({ projectRoot });
+    _providerRoot = projectRoot;
   }
   return _provider;
 }
@@ -171,6 +174,7 @@ function escapeXml(str) {
  */
 function _resetForTesting() {
   _provider = null;
+  _providerRoot = null;
 }
 
 module.exports = {
