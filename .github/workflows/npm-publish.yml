@@ -171,6 +171,8 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        env:
+          HUSKY: '0'
 
       - name: Download build artifacts
         uses: actions/download-artifact@v4
@@ -239,6 +241,7 @@ jobs:
   publish-aios-install:
     needs: [test, build]
     if: ${{ needs.build.outputs.has_aios_install == 'true' }}
+    continue-on-error: true  # Don't block main publish if @synkra org not yet configured
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -253,7 +256,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: packages/aios-install
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Get aios-install version
         id: pkg-version

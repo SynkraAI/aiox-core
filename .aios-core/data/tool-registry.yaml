@@ -317,24 +317,6 @@ tools:
       - intelligence
     mcp_server: project
     input_examples: null
-  registry-provider:
-    tier: 1
-    layer: L1
-    defer: false
-    essential: true # Native code intelligence — always available
-    tokenCost: 50
-    category: code-intelligence
-    ptc_eligible: true  # ADR-3: Native JS, no MCP dependency
-    mcp_required: false
-    keywords:
-      - entity-registry
-      - code-intelligence
-      - native-provider
-      - definitions
-      - references
-      - dependencies
-    description: Native RegistryProvider using entity-registry.yaml (737+ entities)
-
   code-graph:
     tier: 3
     layer: L4

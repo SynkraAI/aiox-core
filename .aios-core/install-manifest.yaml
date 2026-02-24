@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 4.3.0
-generated_at: "2026-02-24T13:07:16.303Z"
+generated_at: "2026-02-24T13:15:54.628Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1083
+file_count: 1084
 files:
   - path: cli/commands/config/index.js
     hash: sha256:ebcad2ce3807eda29dcddff76d7a95ddc9b7fa160df21fd608f94b802237e862
@@ -1257,13 +1257,17 @@ files:
     type: data
     size: 4622
   - path: data/tool-registry.yaml
-    hash: sha256:ac7c1395b44bd93d59b279fe4f936817829eb2248cf3e8fca2b0a0014b920e23
+    hash: sha256:f619a2c25a22ad2a6250b224e16870772b7568b6cc6ee01a46af534aa4b9f0c4
     type: data
-    size: 15679
+    size: 15178
   - path: data/tool-search-validation.js
     hash: sha256:8757bf087692f002d67115dbe1c8244bbd869600e4f52c49b0d9b07cb9fbb783
     type: data
     size: 5754
+  - path: data/workflow-chains.yaml
+    hash: sha256:1fbf1625e267eedc315cf1e08e5827c250ddc6785fb2cb139e7702def9b66268
+    type: data
+    size: 5055
   - path: data/workflow-patterns.yaml
     hash: sha256:3c3625a5d9eb6eca6f33e3ac35d20fa377b44b061dc1dbf6b04116c6c5722834
     type: data
@@ -1853,9 +1857,9 @@ files:
     type: task
     size: 10334
   - path: development/tasks/create-next-story.md
-    hash: sha256:a7856701c88063e8b81f87ee4aad6c8682eabf78eb23219e3069927d1a19ad8b
+    hash: sha256:792aec86f594ac40a6bd3af1909761c4cc88cde2c60267e925ea5e641c9f5502
     type: task
-    size: 30354
+    size: 30564
   - path: development/tasks/create-service.md
     hash: sha256:31c4b50dbaede1c09d72a1dd5d9b1e5ca4edcbedc5204639d7399818e737c898
     type: task
