@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-02-24T00:45:20.984Z'
+  lastUpdated: '2026-02-24T00:57:27.637Z'
   entityCount: 739
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -4017,15 +4017,12 @@ entities:
         - external
       usedBy: []
       dependencies: []
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: orphan
       adaptability:
         score: 0.8
         constraints: []
         extensionPoints: []
       checksum: sha256:257ae093707a89dd1faef9449547eea23a188eecea22fc2e178a54ea5fff0b05
-      lastVerified: '2026-02-24T00:44:36.424Z'
+      lastVerified: '2026-02-24T00:57:27.632Z'
     run-design-system-pipeline:
       path: .aios-core/development/tasks/run-design-system-pipeline.md
       layer: L2
