@@ -33,6 +33,9 @@ concurrency:
   group: npm-publish-${{ github.ref }}
   cancel-in-progress: false  # Never cancel publishing in progress
 
+permissions:
+  contents: read
+
 env:
   NODE_VERSION: '20'
   NPM_REGISTRY: 'https://registry.npmjs.org/'
@@ -345,6 +348,8 @@ jobs:
     needs: [build, publish, publish-aios-install]
     if: github.event_name == 'release' && (needs.publish.result == 'success' || needs.publish-aios-install.result == 'success')
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

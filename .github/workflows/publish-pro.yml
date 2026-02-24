@@ -26,6 +26,9 @@ on:
     tags:
       - 'pro-v*'
 
+permissions:
+  contents: read
+
 jobs:
   # ─────────────────────────────────────────────────────────────────────────────
   # Quality Gates - Must pass before publish

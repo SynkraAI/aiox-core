@@ -440,13 +440,13 @@ async function loginWithRetry(client, email) {
       } else if (loginError.code === 'INVALID_CREDENTIALS') {
         const remaining = MAX_RETRIES - attempt;
         if (remaining > 0) {
-          spinner.fail(tf('proIncorrectPassword', { remaining }));
-          showInfo(t('proForgotPassword'));
+          spinner.fail(`Incorrect password. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining.`);
+          showInfo('Forgot your password? Visit https://aios-license-server.vercel.app/reset-password');
         } else {
-          spinner.fail(t('proMaxAttempts'));
-          showInfo(t('proForgotPassword'));
-          showInfo(t('proContactSupportEmail'));
-          return { success: false, error: t('proMaxAttempts') };
+          spinner.fail('Maximum login attempts reached.');
+          showInfo('Forgot your password? Visit https://aios-license-server.vercel.app/reset-password');
+          showInfo('Or open an issue: https://github.com/SynkraAI/aios-core/issues');
+          return { success: false, error: 'Maximum login attempts reached.' };
         }
       } else if (loginError.code === 'AUTH_RATE_LIMITED') {
         spinner.fail(loginError.message);

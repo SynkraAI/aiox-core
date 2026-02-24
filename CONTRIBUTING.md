@@ -1,6 +1,6 @@
 # Contributing to Synkra AIOS
 
-> **[Versao em Portugues](CONTRIBUTING-PT.md)**
+> **[Versao em Portugues](docs/pt/contributing.md)**
 
 Welcome to AIOS! Thank you for your interest in contributing. This guide will help you understand our development workflow, contribution process, and how to submit your changes.
 
@@ -14,6 +14,7 @@ Welcome to AIOS! Thank you for your interest in contributing. This guide will he
 - [Contributing Squads](#contributing-squads)
 - [Code Review Process](#code-review-process)
 - [Validation System](#validation-system)
+- [Branch Protection & PR Requirements](#branch-protection--pr-requirements)
 - [Code Standards](#code-standards)
 - [Testing Requirements](#testing-requirements)
 - [Frequently Asked Questions](#frequently-asked-questions)
@@ -334,9 +335,10 @@ When you submit a PR, the following checks run automatically:
 | -------------- | ---------------------- | -------- |
 | **ESLint**     | Code style and quality | Yes      |
 | **TypeScript** | Type checking          | Yes      |
-| **Build**      | Build verification     | Yes      |
-| **Tests**      | Jest test suite        | Yes      |
-| **Coverage**   | Minimum 80% coverage   | Yes      |
+| **Jest Tests** | Test suite (Node 18 & 20) | Yes   |
+| **Validation Summary** | Aggregate gate  | Yes      |
+| **Build**      | Build verification     | No (advisory) |
+| **Coverage**   | Coverage reporting     | No (advisory) |
 
 ### CodeRabbit AI Review
 
@@ -409,6 +411,53 @@ AIOS implements a **Defense in Depth** strategy with 3 validation layers:
 - Coverage reporting
 - Story validation
 - Branch protection rules
+
+---
+
+## Branch Protection & PR Requirements
+
+All changes to `main` must go through a Pull Request. Direct pushes are blocked.
+
+### Required Status Checks
+
+All of these must pass before a PR can be merged:
+
+| Check | Description |
+|-------|-------------|
+| **ESLint** | Code style and quality |
+| **TypeScript Type Checking** | No type errors |
+| **Jest Tests (Node 18)** | Full test suite on Node 18 |
+| **Jest Tests (Node 20)** | Full test suite on Node 20 |
+| **Validation Summary** | Aggregate gate |
+
+### PR Review Rules
+
+- **1 approval required** from a CODEOWNERS reviewer
+- **Stale reviews are dismissed** when new commits are pushed
+- **Conversation resolution required** — all review threads must be resolved
+- **CODEOWNERS review required** — changes to critical paths need the designated owner's approval
+
+### CODEOWNERS
+
+Critical paths require approval from `@Pedrovaleriolopez` or `@oalanicolas` (maintainers):
+
+| Path | Why |
+|------|-----|
+| `.aios-core/core/orchestration/` | Orchestration layer (MasterOrchestrator, GateEvaluator) |
+| `.aios-core/core/execution/` | Execution engine (WaveExecutor, ParallelExecutor) |
+| `packages/` | Installer, CLI, shared libraries |
+| `.github/` | CI/CD workflows, branch protection |
+| `.aios-core/core-config.yaml` | Framework configuration |
+
+All other paths require review from any maintainer (`@Pedrovaleriolopez` or `@oalanicolas`).
+
+See [`.github/CODEOWNERS`](.github/CODEOWNERS) for the full ownership map.
+
+### Force Push & Deletions
+
+- **Force push to main:** Blocked
+- **Branch deletions:** Blocked
+- **Admin bypass:** Disabled (`enforce_admins: true`)
 
 ---
 
@@ -500,7 +549,7 @@ git push --force-with-lease
 
 ### Q: Can I contribute in Portuguese?
 
-**A:** Yes! We accept PRs in Portuguese. See [CONTRIBUTING-PT.md](CONTRIBUTING-PT.md).
+**A:** Yes! We accept PRs in Portuguese. See [CONTRIBUTING-PT](docs/pt/contributing.md).
 
 ### Q: How do I become a maintainer?
 
@@ -545,6 +594,47 @@ npm install && npm test  # All tests pass without pro/
 ```
 
 The `pro/` directory will simply not exist in your clone — this is expected and all features, tests, and CI pass without it.
+
+#### Fork Workflow
+
+When forking and syncing with upstream, **do NOT use `--recurse-submodules`**:
+
+```bash
+# Fork via GitHub UI, then clone (without submodules)
+git clone https://github.com/<your-fork>/aios-core.git
+cd aios-core
+
+# Add upstream and sync
+git remote add upstream https://github.com/SynkraAI/aios-core.git
+git fetch upstream
+git rebase upstream/main
+
+# Push (use --force-with-lease after rebase)
+git push --force-with-lease origin main
+```
+
+> **Submodule push error?** If you see `remote: fatal: did not receive expected object` when pushing after syncing, it means the `pro/` submodule pointer changed upstream and your fork cannot resolve the private reference.
+>
+> **If your fork already had a successful push before** (existing submodule pointer):
+> ```bash
+> git checkout origin/main -- pro
+> git commit -m "chore: reset pro submodule pointer for fork"
+> git push origin main
+> ```
+>
+> **If this is a new fork** (no previous pro pointer on remote):
+> ```bash
+> git rm --cached pro
+> git commit -m "chore: remove pro submodule reference for fork"
+> git push origin main
+> ```
+
+You can also suppress submodule noise in `git status` locally (these settings are local-only and do not affect remote pushes):
+
+```bash
+git config submodule.pro.ignore all
+git config submodule.pro.active false
+```
 
 ### For Team Members (with Pro Access)
 

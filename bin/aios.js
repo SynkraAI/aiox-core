@@ -199,10 +199,14 @@ function showInfo() {
       }
     };
 
-    console.log(`  - Agents: ${countFiles(path.join(aiosCoreDir, 'development', 'agents'))}`);
-    console.log(`  - Tasks: ${countFiles(path.join(aiosCoreDir, 'development', 'tasks'))}`);
-    console.log(`  - Templates: ${countFiles(path.join(aiosCoreDir, 'development', 'templates'))}`);
-    console.log(`  - Workflows: ${countFiles(path.join(aiosCoreDir, 'development', 'workflows'))}`);
+    const devDir = path.join(aiosCoreDir, 'development');
+    const componentBase = fs.existsSync(devDir) ? devDir : aiosCoreDir;
+
+    console.log(`  - Agents: ${countFiles(path.join(componentBase, 'agents'))}`);
+    console.log(`  - Tasks: ${countFiles(path.join(componentBase, 'tasks'))}`);
+    console.log(`  - Templates: ${countFiles(path.join(componentBase, 'templates'))}`);
+    console.log(`  - Workflows: ${countFiles(path.join(componentBase, 'workflows'))}`);
+
   } else {
     console.log('\n⚠️  AIOS Core not found');
   }

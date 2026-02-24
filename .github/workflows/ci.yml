@@ -1,29 +1,17 @@
 name: CI
 # Story 6.1: GitHub Actions Cost Optimization
 # Story TD-3: CI/CD Optimization & Test Coverage
+# Issue #182: Docs-only PRs no longer need a separate skip workflow
 # Consolidated CI workflow - single source of truth for validation
+# Uses dorny/paths-filter for job-level skipping (docs-only PRs skip all jobs gracefully)
 
 on:
   push:
     branches:
       - main
-    paths-ignore:
-      - 'docs/**'
-      - '*.md'
-      - '.aios/**'
-      - 'squads/**'
-      - 'LICENSE'
-      - '.gitignore'
   pull_request:
     branches:
       - main
-    paths-ignore:
-      - 'docs/**'
-      - '*.md'
-      - '.aios/**'
-      - 'squads/**'
-      - 'LICENSE'
-      - '.gitignore'
   workflow_dispatch:
 
 concurrency:
