@@ -4,7 +4,7 @@
 **Wave:** 3 — Runtime Health & Upgrade Safety (P2)
 **Points:** 3
 **Agents:** @dev
-**Status:** Ready for Review
+**Status:** Done
 **Blocked By:** INS-4.1 (`aios doctor` rewrite must be complete first)
 **Created:** 2026-02-23
 
@@ -396,3 +396,6 @@ PASS — Ready for Done. All 7 ACs met, 46 tests passing, clean implementation f
 | 2026-02-23 | @sm (River) | [PM v4 — DevOps Handoff v2] Escopo expandido: 3 novos doctor check modules absorvidos de gaps #11-#13 (INS-4.1 ja Done). Titulo: "Unify Health-Check" → "Unify Health-Check + Doctor v2". AC1 novo (3 checks). ACs renumerados (6→7). Tasks renumeradas (6→7), Task 1 novo (implement checks). Governance map expandido com 3 checks. Sizing: 2→3 pts. |
 | 2026-02-23 | @po (Pax) | [Validation] Score: 8/10, GO. 2 concerns corrigidos: CONCERN-1 (MEDIUM) `check-registry.js` nao existe — corrigido para `checks/index.js` com `loadChecks()` em AC1, Task 1.5, Dev Notes. CONCERN-3 (MEDIUM) Dois sistemas health-check separados nao documentados — adicionada secao "CRITICAL: Two Separate Health-Check Systems" em Dev Notes explicando `core/doctor/` (INS-4.1, 12 checks) vs `core/health-check/` (HCS-2, ~30 checks, 5 dominios) e que a task deve ser REESCRITA de um para outro. 2 concerns nao-bloqueantes (LOW) delegados ao dev: skills structure, --json output format. Status: Draft → Approved. |
 | 2026-02-23 | @dev (Dex) | [Implementation] All 7 tasks complete. 3 new doctor checks (skills-count, commands-count, hooks-claude-count) created. Registry updated 12→15. health-check.yaml rewritten v2→v3 (aios doctor --json). Governance map with 15 checks→Constitution articles. *doctor alias removed. core/health-check annotated. 46 unit tests passing. Status: Approved → Ready for Review. |
+| 2026-02-23 | @qa (Quinn) | [QA Review] Gate PASS. Quality Score 100/100. All 7 ACs verified. 46 tests passing, zero new regressions. |
+| 2026-02-23 | @devops (Gage) | [Push] Commit 40e54d5c pushed to feat/epic-nogic-code-intelligence. |
+| 2026-02-23 | @po (Pax) | [Close] Story closed: Done. Commit 40e54d5c. Last story of Epic INS-4. Epic complete (9/9 stories, 33/33 pts). |

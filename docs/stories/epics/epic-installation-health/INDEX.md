@@ -50,23 +50,23 @@ Garantir que qualquer **fresh install** ou **upgrade** do aios-core resulta num 
 |-------|-------|-------|--------|--------|------------|
 | [INS-4.1](story-INS-4.1-aios-doctor.md) | `aios doctor` — Reescrita com 12+ Checks, --fix, --json | @dev | 5 | Done | — |
 | [INS-4.2](story-INS-4.2-settings-json-generator.md) | Settings.json Boundary Generator — Deny/Allow from Config | @dev | 5 | Done | — |
-| [INS-4.10](story-INS-4.10-publish-safety-gate.md) | Publish Safety Gate — Submodule + File Count Validation | @devops | 2 | Draft | — |
+| [INS-4.10](story-INS-4.10-publish-safety-gate.md) | Publish Safety Gate — Submodule + File Count Validation | @devops | 2 | Done | — |
 
 ### Wave 2: Installer Integration (P1)
 
 | Story | Title | Agent | Points | Status | Blocked By |
 |-------|-------|-------|--------|--------|------------|
 | [INS-4.3](story-INS-4.3-installer-settings-rules.md) | Installer: Full Artifact Copy Pipeline (Settings + Skills + Commands + Hooks) | @dev | 5 | Done | INS-4.2 |
-| [INS-4.4](story-INS-4.4-claude-md-template-v5.md) | Installer: CLAUDE.md Template v5 (4 secoes novas) | @dev | 3 | Draft | — |
-| [INS-4.5](story-INS-4.5-ide-sync-integration.md) | IDE Sync Integration — Skills + Commands + API programatica | @dev + @devops | 3 | Draft | — |
+| [INS-4.4](story-INS-4.4-claude-md-template-v5.md) | Installer: CLAUDE.md Template v5 (4 secoes novas) | @dev | 3 | Done | — |
+| [INS-4.5](story-INS-4.5-ide-sync-integration.md) | IDE Sync Integration — Skills + Commands + API programatica | @dev + @devops | 3 | Done | — |
 
 ### Wave 3: Runtime Health & Upgrade Safety (P2)
 
 | Story | Title | Agent | Points | Status | Blocked By |
 |-------|-------|-------|--------|--------|------------|
-| [INS-4.6](story-INS-4.6-entity-registry-on-install.md) | Entity Registry Bootstrap on Install (nao incremental) | @dev | 2 | Draft | — |
-| [INS-4.7](story-INS-4.7-config-smart-merge.md) | YAML Merger Strategy + Config Smart Merge (Phase 1) | @dev | 5 | Draft | — |
-| [INS-4.8](story-INS-4.8-health-check-task.md) | Unify Health-Check + Doctor v2 (3 checks novos: skills, commands, hooks) | @dev | 3 | Draft | INS-4.1 |
+| [INS-4.6](story-INS-4.6-entity-registry-on-install.md) | Entity Registry Bootstrap on Install (nao incremental) | @dev | 2 | Done | — |
+| [INS-4.7](story-INS-4.7-config-smart-merge.md) | YAML Merger Strategy + Config Smart Merge (Phase 1) | @dev | 5 | Done | — |
+| [INS-4.8](story-INS-4.8-health-check-task.md) | Unify Health-Check + Doctor v2 (3 checks novos: skills, commands, hooks) | @dev | 3 | Done | INS-4.1 |
 
 ## Totals
 
@@ -74,8 +74,9 @@ Garantir que qualquer **fresh install** ou **upgrade** do aios-core resulta num 
 |--------|-------|
 | **Total Stories** | 9 (+1 INS-4.10) |
 | **Total Points** | ~33 (v4: +3 INS-4.3 expand, +1 INS-4.8 expand, +2 INS-4.10 new) |
-| **Points Done** | 15 (INS-4.1, INS-4.2, INS-4.3) |
-| **Points Remaining** | ~18 |
+| **Points Done** | 33 (INS-4.1, INS-4.2, INS-4.3, INS-4.4, INS-4.5, INS-4.6, INS-4.7, INS-4.8, INS-4.10) |
+| **Points Remaining** | 0 |
+| **Epic Status** | **COMPLETE** |
 | **Waves** | 3 |
 | **Executor Primario** | @dev (Dex) |
 | **Pre-requisitos** | Branch `feat/epic-nogic-code-intelligence` merged em main (antes de Wave 2) |
@@ -222,17 +223,23 @@ Auditoria encontrou 7 `.claude/rules/*.md`: agent-authority, workflow-execution,
 - [x] INS-4.1: `aios doctor` functional with 12 checks, --fix, --json flags (Done — commit 337213dc)
 - [x] INS-4.2: `generate-settings-json.js` created with path traversal validation, idempotency, 12 tests (Done — commit 4a8d9f9e)
 - [x] INS-4.3: Full artifact copy pipeline — settings.json wired, 7 skills copy, ~11 commands copy, dynamic hooks registration, 9 tests (Done — commit 8c92b01f)
-- [ ] All 9 stories completed with acceptance criteria met
-- [ ] `generate-settings-json.js` created and integrated in installer
-- [ ] Fresh install includes: settings.json, 7 rules files, CLAUDE.md v5, IDE sync, entity registry
-- [ ] Fresh install includes: 7 skills, ~11 commands extras, 2 hooks JS (Gap #11-#13)
-- [ ] `settings.local.json` registers all JS hooks (not just synapse-engine)
-- [ ] `aios doctor` v2 validates skills count (>=7), commands count (>=20), hooks Claude Code count (>=2)
-- [ ] Upgrade preserves user core-config.yaml customizations
-- [ ] `@aios-master *health-check` task functional
-- [ ] `prepublishOnly` validates pro/ submodule populated before npm publish (Gap #14)
-- [ ] Zero regressions in existing install/upgrade flow
-- [ ] Documentation updated (CLAUDE.md template, installer README)
+- [x] INS-4.4: CLAUDE.md template v5 — 4 new AIOS-MANAGED sections (framework-boundary, rules-system, code-intelligence, graph-dashboard), 15 tests, QA PASS (Done — commit 853b7195)
+- [x] INS-4.5: IDE sync integration via adapter pattern — commandSync + commandValidate after artifact copy, 20 tests, QA PASS (Done — commit 374788fe)
+- [x] INS-4.10: Publish safety gate — validate-publish.js (3 checks: pro/ populated, critical file, file count >= 50), prepublishOnly + CI wired, 17 tests, QA PASS (Done — commit 5513df9a)
+- [x] INS-4.6: Entity registry bootstrap on install — populate-entity-registry.js called sync (0.67s), 3-state outcome, 19 tests, QA PASS (Done — commit 1777ee8f)
+- [x] INS-4.7: YAML merger strategy + config smart merge Phase 1 — yaml-merger.js (181 lines, target-wins), brownfield-upgrader integration, backup safety, 26 tests, QA PASS (Done — commit 12aa5c7c)
+- [x] INS-4.8: Unify health-check + 3 new doctor checks (skills-count, commands-count, hooks-claude-count), health-check.yaml v3 delegates to aios doctor --json, governance map, 46 tests, QA PASS (Done — commit 40e54d5c)
+- [x] All 9 stories completed with acceptance criteria met
+- [x] `generate-settings-json.js` created and integrated in installer
+- [x] Fresh install includes: settings.json, 7 rules files, CLAUDE.md v5, IDE sync, entity registry
+- [x] Fresh install includes: 7 skills, ~11 commands extras, 2 hooks JS (Gap #11-#13)
+- [x] `settings.local.json` registers all JS hooks (not just synapse-engine)
+- [x] `aios doctor` v2 validates skills count (>=7), commands count (>=20), hooks Claude Code count (>=2)
+- [x] Upgrade preserves user core-config.yaml customizations
+- [x] `@aios-master *health-check` task functional
+- [x] `prepublishOnly` validates pro/ submodule populated before npm publish (Gap #14)
+- [x] Zero regressions in existing install/upgrade flow
+- [x] Documentation updated (CLAUDE.md template, installer README)
 
 ## Change Log
 
@@ -245,6 +252,12 @@ Auditoria encontrou 7 `.claude/rules/*.md`: agent-authority, workflow-execution,
 | 3.1 | 2026-02-23 | @po (Pax) | INS-4.1 closed: Done. 12 modular checks, --fix/--json/--dry-run, 40 tests. QA PASS (9/10). Commit 337213dc. Progress: 1/8 stories. |
 | 4.1 | 2026-02-23 | @po (Pax) | INS-4.2 closed: Done. Settings.json generator with path traversal validation, js-yaml alignment, 12 tests. QA PASS (re-review). Commit 4a8d9f9e. Progress: 2/9 stories (10/33 pts). |
 | 4.2 | 2026-02-23 | @po (Pax) | INS-4.3 closed: Done. Full artifact copy pipeline — settings.json generator wired, 7 skills copy, ~11 commands copy, dynamic hooks registration, 9 tests. QA PASS (re-review, 3 TDs resolved). Commit 8c92b01f. Progress: 3/9 stories (15/33 pts). |
+| 4.3 | 2026-02-23 | @po (Pax) | INS-4.4 closed: Done. CLAUDE.md template v5 — 4 new AIOS-MANAGED sections (framework-boundary, rules-system, code-intelligence, graph-dashboard), 8 rule files listed, 15 tests, QA PASS. Commit 853b7195. Progress: 4/9 stories (18/33 pts). |
+| 4.4 | 2026-02-23 | @po (Pax) | INS-4.5 closed: Done. IDE sync integration via adapter pattern — commandSync + commandValidate called after artifact copy, quiet output suppression, 20 tests, QA PASS. Commit 374788fe. Wave 2 complete (3/3 stories). Progress: 5/9 stories (21/33 pts). |
+| 4.5 | 2026-02-23 | @po (Pax) | INS-4.10 closed: Done. Publish safety gate — validate-publish.js with 3 checks (pro/ populated, critical file, file count >= 50), prepublishOnly + npm-publish.yml CI wired, 17 tests, QA PASS. Commit 5513df9a. Wave 1 complete (3/3 stories). Progress: 6/9 stories (23/33 pts, 70%). |
+| 4.6 | 2026-02-23 | @po (Pax) | INS-4.6 closed: Done. Entity registry bootstrap on install — populate-entity-registry.js called after .aios-core/ copy (sync, 0.67s), 3-state outcome (populated/skipped/failed), 19 tests, QA PASS. Commit 1777ee8f. Wave 3: 1/3 stories. Progress: 7/9 stories (25/33 pts, 76%). |
+| 4.7 | 2026-02-23 | @po (Pax) | INS-4.7 closed: Done. YAML merger strategy + config smart merge Phase 1 — yaml-merger.js (181 lines, target-wins deep merge), brownfield-upgrader integration (core-config.yaml exception + backup safety), 26 tests, QA PASS (re-review, 3 concerns resolved). Commit 12aa5c7c. Wave 3: 2/3 stories. Progress: 8/9 stories (30/33 pts, 91%). |
+| 4.8 | 2026-02-23 | @po (Pax) | INS-4.8 closed: Done. Unify health-check + 3 new doctor checks (skills-count, commands-count, hooks-claude-count), health-check.yaml v3 delegates to aios doctor --json, governance map with 15 checks→Constitution articles, 46 tests, QA PASS. Commit 40e54d5c. Wave 3 complete (3/3 stories). **EPIC COMPLETE: 9/9 stories, 33/33 pts, 100%.** All DoD items verified. |
 | 4.0 | 2026-02-23 | @pm (Morgan) | DevOps Handoff v2 incorporado. 4 gaps novos (#11-#14): skills nao instaladas, commands extras ausentes, hooks parciais, publish sem validacao. INS-4.3 expandida (2→5 pts, absorve INS-4.9 skills/commands/hooks copy). INS-4.8 expandida (2→3 pts, absorve 3 doctor checks novos). INS-4.10 criada (2 pts, publish safety gate, Wave 1). INS-4.5 titulo expandido. Total: 27→33 pts, 8→9 stories. Decisoes: hooks Py/Sh criticos→CJS, rest→ignorar. |
 
 ## Handoff to Story Manager
