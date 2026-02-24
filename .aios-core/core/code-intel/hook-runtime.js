@@ -33,50 +33,55 @@ function getProvider(projectRoot) {
 async function resolveCodeIntel(filePath, cwd) {
   if (!filePath || !cwd) return null;
 
-  const provider = getProvider(cwd);
-  if (!provider.isAvailable()) return null;
+  try {
+    const provider = getProvider(cwd);
+    if (!provider.isAvailable()) return null;
 
-  // Normalize to relative path (registry uses relative paths)
-  let relativePath = filePath;
-  if (path.isAbsolute(filePath)) {
-    relativePath = path.relative(cwd, filePath).replace(/\\/g, '/');
-  } else {
-    relativePath = filePath.replace(/\\/g, '/');
-  }
+    // Normalize to relative path (registry uses relative paths)
+    let relativePath = filePath;
+    if (path.isAbsolute(filePath)) {
+      relativePath = path.relative(cwd, filePath).replace(/\\/g, '/');
+    } else {
+      relativePath = filePath.replace(/\\/g, '/');
+    }
 
-  // Run all three queries in parallel
-  const [definition, references, dependencies] = await Promise.all([
-    provider.findDefinition(relativePath),
-    provider.findReferences(relativePath),
-    provider.analyzeDependencies(relativePath),
-  ]);
-
-  // Treat empty dependency graph as no data
-  const hasUsefulDeps = dependencies && dependencies.nodes && dependencies.nodes.length > 0;
-
-  // If nothing found at all, try searching by the file basename
-  if (!definition && !references && !hasUsefulDeps) {
-    const basename = path.basename(relativePath, path.extname(relativePath));
-    const fallbackDef = await provider.findDefinition(basename);
-    if (!fallbackDef) return null;
-
-    const [fallbackRefs, fallbackDeps] = await Promise.all([
-      provider.findReferences(basename),
-      provider.analyzeDependencies(basename),
+    // Run all three queries in parallel
+    const [definition, references, dependencies] = await Promise.all([
+      provider.findDefinition(relativePath),
+      provider.findReferences(relativePath),
+      provider.analyzeDependencies(relativePath),
     ]);
 
-    return {
-      entity: fallbackDef,
-      references: fallbackRefs,
-      dependencies: fallbackDeps,
-    };
-  }
+    // Treat empty dependency graph as no data
+    const hasUsefulDeps = dependencies && dependencies.nodes && dependencies.nodes.length > 0;
 
-  return {
-    entity: definition,
-    references,
-    dependencies,
-  };
+    // If nothing found at all, try searching by the file basename
+    if (!definition && !references && !hasUsefulDeps) {
+      const basename = path.basename(relativePath, path.extname(relativePath));
+      const fallbackDef = await provider.findDefinition(basename);
+      if (!fallbackDef) return null;
+
+      const [fallbackRefs, fallbackDeps] = await Promise.all([
+        provider.findReferences(basename),
+        provider.analyzeDependencies(basename),
+      ]);
+
+      return {
+        entity: fallbackDef,
+        references: fallbackRefs,
+        dependencies: fallbackDeps,
+      };
+    }
+
+    return {
+      entity: definition,
+      references,
+      dependencies,
+    };
+  } catch (_err) {
+    // Guard against provider exceptions to avoid unhandled rejections in hook runtime
+    return null;
+  }
 }
 
 /**

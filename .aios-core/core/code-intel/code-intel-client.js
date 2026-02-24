@@ -92,9 +92,13 @@ class CodeIntelClient {
     if (this._activeProvider) return this._activeProvider;
 
     for (const provider of this._providers) {
-      if (typeof provider.isAvailable === 'function' && provider.isAvailable()) {
-        this._activeProvider = provider;
-        return provider;
+      try {
+        if (typeof provider.isAvailable === 'function' && provider.isAvailable()) {
+          this._activeProvider = provider;
+          return provider;
+        }
+      } catch (_err) {
+        // Provider threw during availability check — treat as unavailable
       }
     }
 

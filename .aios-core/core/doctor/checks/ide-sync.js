@@ -35,12 +35,31 @@ async function run(context) {
     };
   }
 
-  const sourceAgents = fs.readdirSync(agentsSourceDir)
-    .filter((f) => f.endsWith('.md'))
-    .map((f) => f.replace('.md', ''));
+  let sourceAgents, ideFiles;
+  try {
+    sourceAgents = fs.readdirSync(agentsSourceDir)
+      .filter((f) => f.endsWith('.md'))
+      .map((f) => f.replace('.md', ''));
+  } catch (_err) {
+    return {
+      check: name,
+      status: 'FAIL',
+      message: 'Cannot read source agents directory',
+      fixCommand: 'npx aios-core install --force',
+    };
+  }
 
-  const ideFiles = fs.readdirSync(agentsIdeDir)
-    .filter((f) => f.endsWith('.md'));
+  try {
+    ideFiles = fs.readdirSync(agentsIdeDir)
+      .filter((f) => f.endsWith('.md'));
+  } catch (_err) {
+    return {
+      check: name,
+      status: 'WARN',
+      message: 'Cannot read IDE agents directory',
+      fixCommand: 'npx aios-core install --force',
+    };
+  }
 
   const ideAgents = ideFiles.map((f) => f.replace('.md', ''));
   const sourceCount = sourceAgents.length;

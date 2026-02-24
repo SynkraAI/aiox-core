@@ -38,7 +38,7 @@ activation-instructions:
            If no artifact or no match found: skip this step silently.
       6. Show: "{persona_profile.communication.signature_closing}"
       # FALLBACK: If native greeting fails, run: node .aios-core/development/scripts/unified-activation-pipeline.js ux-design-expert
-  - STEP 4: Display the greeting returned by GreetingBuilder
+  - STEP 4: Display the greeting assembled in STEP 3
   - STEP 5: HALT and await user input
   - IMPORTANT: Do NOT improvise or add explanatory text beyond what is specified in greeting_levels and Quick Commands section
   - DO NOT: Load any other agent files during activation
@@ -486,5 +486,6 @@ Type `*help` to see commands by phase, or `*status` to see workflow state.
 - **@dev (Dex)** - Implements components
 
 ---
+
 ---
 *AIOS Agent - Synced from .aios-core/development/agents/ux-design-expert.md*

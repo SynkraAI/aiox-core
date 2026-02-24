@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 4.3.0
-generated_at: "2026-02-24T14:02:03.299Z"
+generated_at: "2026-02-24T14:17:01.005Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1084
 files:
@@ -181,9 +181,9 @@ files:
     type: config
     size: 10999
   - path: core/code-intel/code-intel-client.js
-    hash: sha256:3475d63b39105ad03491706a64c675264f11bce150aa5386442d35064bc1172e
+    hash: sha256:6c9a08a37775acf90397aa079a4ad2c5edcc47f2cfd592b26ae9f3d154d1deb8
     type: core
-    size: 8044
+    size: 8172
   - path: core/code-intel/code-intel-enricher.js
     hash: sha256:0bea0c1953a21621afbb4c9755e782842940cf54cdc88a4318dd7242f1fb02a8
     type: core
@@ -213,9 +213,9 @@ files:
     type: core
     size: 4323
   - path: core/code-intel/hook-runtime.js
-    hash: sha256:a06c31fd205996b2078c7bbe2f52557a878ca6070a6d13fc74ff86d323057901
+    hash: sha256:c35fa247847ff6efeda51033dd04a968573dcc117b6f23e98f46d3200569a97e
     type: core
-    size: 5240
+    size: 5449
   - path: core/code-intel/index.js
     hash: sha256:c8103fb966def9e8ed53dc1840e0e853b5fa4f13291a73a179cbae3545f38754
     type: core
@@ -321,9 +321,9 @@ files:
     type: core
     size: 3348
   - path: core/doctor/checks/ide-sync.js
-    hash: sha256:402997fb6de00e28424719a4f54bf4a7eedef799a6dee5abe3c233fd7e686132
+    hash: sha256:9f79c8477ee9279e013ca7077b50e1b532fec1410a1099382445f41da75bf9b7
     type: core
-    size: 1723
+    size: 2142
   - path: core/doctor/checks/index.js
     hash: sha256:ba46a69971da584fe1d23f11285b24f872af31af3ca8d86f60d693ee6e0d4f73
     type: core
@@ -1221,9 +1221,9 @@ files:
     type: data
     size: 9575
   - path: data/entity-registry.yaml
-    hash: sha256:1a3ebc7fb0c09631e18192e376903db69ef9e40ffc2a661ca87a100e6996051f
+    hash: sha256:25cfd89cd821c08f49ba169cffd594762faea27a500fed130d192c028896c189
     type: data
-    size: 517912
+    size: 519666
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -1373,13 +1373,13 @@ files:
     type: agent
     size: 1123
   - path: development/agents/squad-creator.md
-    hash: sha256:3b78abb09bcb88773884b6b0fe13e6d7b61abf8700f30010cff5e3eacbe2d567
+    hash: sha256:bef79e893812442f6b09cbf8ada7054cc6d9f3746a3898ea71b92f76add33d11
     type: agent
-    size: 13134
+    size: 13169
   - path: development/agents/ux-design-expert.md
-    hash: sha256:c448b4b0e46219625fd71ae086a448d85da7e97975105179319ac2f0a342cdcd
+    hash: sha256:d93d12a59adb499e064005f52108a1c55badde72d48994911581cc7d3c6a9a33
     type: agent
-    size: 19388
+    size: 19380
   - path: development/agents/ux/MEMORY.md
     hash: sha256:e177840efba9c8762891e9789a8252a647add9fb2423ef81618372b27c614d56
     type: agent
