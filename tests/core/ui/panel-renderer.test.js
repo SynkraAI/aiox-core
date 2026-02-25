@@ -5,19 +5,29 @@
  * the observability panel using box drawing and ANSI colors.
  */
 
-// Suppress chalk color output for deterministic testing
-process.env.FORCE_COLOR = '0';
-
 const { PanelRenderer, BOX, STATUS } = require('../../../.aios-core/core/ui/panel-renderer');
 
 // Strip all ANSI codes for content assertions
 function stripAnsi(str) {
-  // eslint-disable-next-line no-control-regex
-  return str.replace(/\x1B\[[0-9;]*[a-zA-Z]/g, '');
+  return str.replace(/\u001B\[[0-9;]*[a-zA-Z]/g, '');
 }
 
 describe('PanelRenderer', () => {
   let renderer;
+  let originalForceColor;
+
+  beforeAll(() => {
+    originalForceColor = process.env.FORCE_COLOR;
+    process.env.FORCE_COLOR = '0';
+  });
+
+  afterAll(() => {
+    if (originalForceColor === undefined) {
+      delete process.env.FORCE_COLOR;
+    } else {
+      process.env.FORCE_COLOR = originalForceColor;
+    }
+  });
 
   beforeEach(() => {
     renderer = new PanelRenderer();
@@ -239,12 +249,21 @@ describe('PanelRenderer', () => {
       expect(result.story).toMatch(/^\d+h\d+m$/);
     });
 
-    test('returns -- for negative or zero elapsed', () => {
+    test('retorna -- quando story_start é null', () => {
       const result = renderer.formatElapsedTime({
-        elapsed: { story_start: 0, session_start: null },
+        elapsed: { story_start: null, session_start: null },
       });
-      // story_start = 0 means huge elapsed, should still format
+      expect(result.story).toBe('--');
       expect(result.session).toBe('--');
+    });
+
+    test('trata story_start 0 como falsy (retorna --)', () => {
+      const result = renderer.formatElapsedTime({
+        elapsed: { story_start: 0, session_start: Date.now() - 5000 },
+      });
+      // 0 é falsy em JS, então retorna '--'
+      expect(result.story).toBe('--');
+      expect(result.session).toMatch(/^\d+s$/);
     });
   });
 
