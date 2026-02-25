@@ -280,7 +280,7 @@ afterAll(() => {
     if (fs.existsSync(file)) fs.unlinkSync(file);
   }
   if (fs.existsSync(FIXTURES_DIR)) {
-    fs.rmdirSync(FIXTURES_DIR, { recursive: true });
+    fs.rmSync(FIXTURES_DIR, { recursive: true, force: true });
   }
 });
 

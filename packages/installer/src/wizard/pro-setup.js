@@ -146,29 +146,55 @@ function showStep(current, total, label) {
 }
 
 /**
+ * Try to load a pro license module via multiple resolution paths.
+ *
+ * Resolution order:
+ * 1. Relative path (framework-dev mode: ../../../../pro/license/{name})
+ * 2. @aios-fullstack/pro package (brownfield: node_modules/@aios-fullstack/pro/license/{name})
+ * 3. Absolute path via aios-core in node_modules (brownfield upgrade)
+ *
+ * @param {string} moduleName - Module filename without extension (e.g., 'license-api')
+ * @returns {Object|null} Loaded module or null
+ */
+function loadProModule(moduleName) {
+  // 1. Framework-dev mode (cloned repo with pro/ submodule)
+  try {
+    return require(`../../../../pro/license/${moduleName}`);
+  } catch { /* not available */ }
+
+  // 2. @aios-fullstack/pro installed in user project
+  try {
+    return require(`@aios-fullstack/pro/license/${moduleName}`);
+  } catch { /* not available */ }
+
+  // 3. aios-core in node_modules (brownfield upgrade from >= v4.2.15)
+  try {
+    const path = require('path');
+    const absPath = path.join(process.cwd(), 'node_modules', 'aios-core', 'pro', 'license', moduleName);
+    return require(absPath);
+  } catch { /* not available */ }
+
+  return null;
+}
+
+/**
  * Try to load the license API client via lazy import.
+ * Attempts multiple resolution paths for framework-dev, greenfield, and brownfield.
  *
  * @returns {{ LicenseApiClient: Function, licenseApi: Object }|null} License API or null
  */
 function loadLicenseApi() {
-  try {
-    return require('../../../../pro/license/license-api');
-  } catch {
-    return null;
-  }
+  return loadProModule('license-api');
 }
 
 /**
  * Try to load the feature gate via lazy import.
+ * Attempts multiple resolution paths for framework-dev, greenfield, and brownfield.
  *
  * @returns {{ featureGate: Object }|null} Feature gate or null
  */
 function loadFeatureGate() {
-  try {
-    return require('../../../../pro/license/feature-gate');
-  } catch {
-    return null;
-  }
+  return loadProModule('feature-gate');
 }
 
 /**
@@ -1192,6 +1218,48 @@ async function runProWizard(options = {}) {
     showProHeader();
   }
 
+  // Pre-check: If license module is not available (brownfield upgrade from older version),
+  // install @aios-fullstack/pro first to get the license API, then proceed with gate.
+  if (!loadLicenseApi()) {
+    const fs = require('fs');
+    const path = require('path');
+    const { execSync } = require('child_process');
+
+    showInfo(t('proModuleBootstrap'));
+
+    // Ensure package.json exists
+    const packageJsonPath = path.join(targetDir, 'package.json');
+    if (!fs.existsSync(packageJsonPath)) {
+      execSync('npm init -y', { cwd: targetDir, stdio: 'pipe' });
+    }
+
+    // Install @aios-fullstack/pro to get license module
+    const proDir = path.join(targetDir, 'node_modules', '@aios-fullstack', 'pro');
+    if (!fs.existsSync(proDir)) {
+      const installSpinner = createSpinner(t('proInstallingPackage'));
+      installSpinner.start();
+      try {
+        execSync('npm install @aios-fullstack/pro', {
+          cwd: targetDir,
+          stdio: 'pipe',
+          timeout: 120000,
+        });
+        installSpinner.succeed(t('proPackageInstalled'));
+      } catch (err) {
+        installSpinner.fail(t('proPackageInstallFailed'));
+        result.error = tf('proNpmInstallFailed', { message: err.message });
+        return result;
+      }
+    }
+
+    // Clear require cache so loadLicenseApi() picks up newly installed module
+    Object.keys(require.cache).forEach((key) => {
+      if (key.includes('license-api') || key.includes('@aios-fullstack')) {
+        delete require.cache[key];
+      }
+    });
+  }
+
   // Step 1: License Gate
   const licenseResult = await stepLicenseGate({
     key: options.key || process.env.AIOS_PRO_KEY,
@@ -1255,6 +1323,7 @@ module.exports = {
     stepLicenseGateWithKey,
     stepLicenseGateWithKeyInteractive,
     stepLicenseGateWithEmail,
+    loadProModule,
     loadLicenseApi,
     loadFeatureGate,
     loadProScaffolder,
