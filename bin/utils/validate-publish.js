@@ -2,13 +2,14 @@
 'use strict';
 
 /**
- * Publish Safety Gate — Submodule + File Count Validation
- * Story INS-4.10
+ * Publish Safety Gate — Submodule + File Count + Dependency Validation
+ * Story INS-4.10, INS-4.12
  *
  * Prevents publishing incomplete packages by validating:
  * 1. pro/ submodule is populated (not empty or uninitialized)
  * 2. Critical file pro/license/license-api.js exists
  * 3. Package file count meets minimum threshold (>= 50)
+ * 4. (INS-4.12) .aios-core/package.json dependency completeness
  *
  * Exit codes: 0 = PASS, 1 = FAIL
  * Usage: node bin/utils/validate-publish.js
@@ -81,7 +82,7 @@ try {
     line.includes('npm notice') && !line.includes('Tarball') && !line.includes('name:') &&
     !line.includes('version:') && !line.includes('filename:') && !line.includes('package size:') &&
     !line.includes('unpacked size:') && !line.includes('shasum:') && !line.includes('integrity:') &&
-    !line.includes('total files:')
+    !line.includes('total files:'),
   );
   fileCount = fileLines.length;
 
@@ -94,6 +95,28 @@ try {
   }
 } catch (err) {
   console.error(`FAIL: npm pack --dry-run failed: ${err.message}`);
+  passed = false;
+}
+
+// Check 4 (INS-4.12): .aios-core dependency completeness
+console.log('');
+console.log('--- Dependency Completeness (INS-4.12) ---\n');
+try {
+  const depValidatorPath = path.join(PROJECT_ROOT, 'scripts', 'validate-aios-core-deps.js');
+  if (fs.existsSync(depValidatorPath)) {
+    execSync(`node "${depValidatorPath}"`, {
+      encoding: 'utf8',
+      cwd: PROJECT_ROOT,
+      timeout: 30000,
+      stdio: 'inherit',
+    });
+    console.log('PASS: .aios-core dependency completeness validated');
+  } else {
+    console.log('SKIP: scripts/validate-aios-core-deps.js not found');
+  }
+} catch (_depErr) {
+  console.error('FAIL: .aios-core dependency completeness check failed');
+  console.error('  Fix: Run "node scripts/validate-aios-core-deps.js" to see details');
   passed = false;
 }
 

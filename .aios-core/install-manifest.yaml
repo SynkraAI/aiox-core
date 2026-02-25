@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 4.4.1
-generated_at: "2026-02-24T15:35:44.814Z"
+version: 4.4.2
+generated_at: "2026-02-25T00:35:46.278Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1084
 files:
@@ -333,9 +333,9 @@ files:
     type: core
     size: 674
   - path: core/doctor/checks/npm-packages.js
-    hash: sha256:16f747d25d3185050c3b149d235dce707555038b51c0659e416a4d33a3672032
+    hash: sha256:09e03cd3558acbdd6b2f4103c156c76a3c07fa2f0b8996739bec7a865d781922
     type: core
-    size: 702
+    size: 2265
   - path: core/doctor/checks/rules-files.js
     hash: sha256:6fe670f3759520f0d4b0abdad14f5f8b0eaa12cc9b15252c6de7e4cfa099d337
     type: core
@@ -1221,9 +1221,9 @@ files:
     type: data
     size: 9575
   - path: data/entity-registry.yaml
-    hash: sha256:1a3ebc7fb0c09631e18192e376903db69ef9e40ffc2a661ca87a100e6996051f
+    hash: sha256:ef72c23f96b1c809d0f8f0bf6abe064d45ed569165b94c5519734c21aeb0ae8f
     type: data
-    size: 517912
+    size: 519735
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -1465,9 +1465,9 @@ files:
     type: script
     size: 11925
   - path: development/scripts/code-quality-improver.js
-    hash: sha256:acdfea90590a2d0d566e720540a8aad4a360cd531c58ad4e67cc4126522b7455
+    hash: sha256:d0c844089e53dcd6c06755d4cb432a60fbebcedcf5a86ed635650573549a1941
     type: script
-    size: 41138
+    size: 41873
   - path: development/scripts/commit-message-generator.js
     hash: sha256:2e75d22307d0e3823b7762a6aff18c4c3842a632f876069215a221bc053336dc
     type: script
@@ -1565,9 +1565,9 @@ files:
     type: script
     size: 22558
   - path: development/scripts/refactoring-suggester.js
-    hash: sha256:d5183f79fae9dc4bf4d3c9136b3622e43a63643a7df622742c350931e45f18f4
+    hash: sha256:d50ea6b609c9cf8385979386fee4b4385d11ebcde15460260f66d04c705f6cd9
     type: script
-    size: 35813
+    size: 36374
   - path: development/scripts/rollback-handler.js
     hash: sha256:b18a9451fa3f8919733251857dbad2bc4b7ecbf782e6c114b88bc867358421a9
     type: script
@@ -3525,9 +3525,9 @@ files:
     type: monitor
     size: 856
   - path: package.json
-    hash: sha256:dff580c83cc1554c75162c9cabb711b5cd85e679c9c8f4968ee74499e99de0c0
+    hash: sha256:ac6d72a82cecd2a98a443dc195e87cf815c2df58fb743737177670999a816b5f
     type: other
-    size: 2401
+    size: 2495
   - path: product/checklists/accessibility-wcag-checklist.md
     hash: sha256:56126182b25e9b7bdde43f75315e33167eb49b1f9a9cb0e9a37bc068af40aeab
     type: checklist

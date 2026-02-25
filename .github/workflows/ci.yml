@@ -317,7 +317,7 @@ jobs:
   validation-summary:
     name: Validation Summary
     runs-on: ubuntu-latest
-    needs: [changes, security-audit, lint, typecheck, test, story-validation, manifest-validation, ide-sync-validation, installer-smoke-test, compatibility-parity-gate]
+    needs: [changes, security-audit, lint, typecheck, test, story-validation, manifest-validation, ide-sync-validation, installer-smoke-test, compatibility-parity-gate, dependency-validation, brownfield-install-test]
     if: always()
 
     steps:
@@ -340,6 +340,8 @@ jobs:
           echo "  Manifest Validation: ${{ needs.manifest-validation.result }}"
           echo "  IDE Sync Validation: ${{ needs.ide-sync-validation.result }}"
           echo "  Installer Smoke Test: ${{ needs.installer-smoke-test.result }}"
+          echo "  Dependency Validation: ${{ needs.dependency-validation.result }}"
+          echo "  Brownfield Install Test: ${{ needs.brownfield-install-test.result }}"
           echo ""
 
           # Check for failures (skipped is OK when changes don't affect that area)
@@ -390,6 +392,18 @@ jobs:
           # Installer Smoke Test: fail if ran and didn't succeed
           if [ "${{ needs.installer-smoke-test.result }}" == "failure" ]; then
             echo "❌ Installer smoke test failed - WRONG WIZARD MAY BE USED!"
+            FAILED=true
+          fi
+
+          # Dependency Validation (INS-4.12): fail if ran and didn't succeed
+          if [ "${{ needs.dependency-validation.result }}" == "failure" ]; then
+            echo "❌ Dependency validation failed - .aios-core/package.json incomplete"
+            FAILED=true
+          fi
+
+          # Brownfield Install Test (INS-4.12): fail if ran and didn't succeed
+          if [ "${{ needs.brownfield-install-test.result }}" == "failure" ]; then
+            echo "❌ Brownfield install test failed - brownfield users will see errors"
             FAILED=true
           fi
 
@@ -510,6 +524,105 @@ jobs:
           npx aios-core --version || echo "CLI version check skipped"
           npx aios-core --help || echo "CLI help check skipped"
         continue-on-error: true
+
+  # INS-4.12: Dependency graph validation — ensures .aios-core/package.json is complete
+  dependency-validation:
+    name: Dependency Validation
+    needs: changes
+    if: ${{ needs.changes.outputs.code == 'true' || needs.changes.outputs.config == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate .aios-core dependency completeness
+        run: node scripts/validate-aios-core-deps.js
+
+  # INS-4.12: Brownfield install test — simulates npm install in existing project
+  brownfield-install-test:
+    name: Brownfield Install Test
+    needs: changes
+    if: ${{ needs.changes.outputs.code == 'true' || needs.changes.outputs.config == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Pack aios-core
+        run: npm pack
+
+      - name: Create brownfield test project
+        run: |
+          mkdir -p /tmp/brownfield-test
+          cd /tmp/brownfield-test
+          npm init -y
+
+      - name: Install aios-core in brownfield project
+        run: |
+          cd /tmp/brownfield-test
+          TARBALL=$(ls ${{ github.workspace }}/aios-core-*.tgz)
+          npm install "$TARBALL"
+
+      - name: Verify .aios-core dependencies installable
+        run: |
+          cd /tmp/brownfield-test
+          AIOS_CORE_DIR="node_modules/aios-core/.aios-core"
+          if [ -f "$AIOS_CORE_DIR/package.json" ]; then
+            cd "$AIOS_CORE_DIR"
+            npm install --production --ignore-scripts
+            echo "✅ .aios-core dependencies installed successfully"
+          else
+            echo "⚠️ .aios-core/package.json not found in installed package"
+            exit 1
+          fi
+
+      - name: Verify key modules resolvable
+        run: |
+          cd /tmp/brownfield-test
+          AIOS_NODE_MODULES="node_modules/aios-core/.aios-core/node_modules"
+          MISSING=0
+
+          for pkg in fast-glob fs-extra js-yaml semver ajv tar chalk; do
+            if [ -d "$AIOS_NODE_MODULES/$pkg" ]; then
+              echo "✅ $pkg found in .aios-core/node_modules/"
+            else
+              echo "❌ $pkg MISSING from .aios-core/node_modules/"
+              MISSING=1
+            fi
+          done
+
+          if [ "$MISSING" -eq 1 ]; then
+            echo ""
+            echo "FAIL: Some required modules are missing"
+            exit 1
+          fi
+
+          echo ""
+          echo "✅ All key modules resolvable in brownfield context"
 
   # Installer smoke test - ensures correct wizard is being used (Story 6.1.4)
   installer-smoke-test:

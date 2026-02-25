@@ -1,10 +1,13 @@
 const fs = require('fs').promises;
 const path = require('path');
 const chalk = require('chalk');
-const { parse } = require('@babel/parser');
-const traverse = require('@babel/traverse').default;
-const generate = require('@babel/generator').default;
-const _t = require('@babel/types');
+
+// INS-4.12: Optional dev-time deps — wrap in try-catch for brownfield installs
+let parse, traverse, generate, _t;
+try { ({ parse } = require('@babel/parser')); } catch { parse = null; }
+try { traverse = require('@babel/traverse').default; } catch { traverse = null; }
+try { generate = require('@babel/generator').default; } catch { generate = null; }
+try { _t = require('@babel/types'); } catch { _t = null; }
 
 /**
  * Automated refactoring suggestion system
@@ -118,12 +121,18 @@ class RefactoringSuggester {
    * Analyze code and suggest refactorings
    */
   async analyzeCode(filePath, options = {}) {
+    // INS-4.12: Guard — @babel deps may not be available in brownfield installs
+    if (!parse || !traverse) {
+      console.warn(chalk.yellow('⚠️  @babel/parser or @babel/traverse not available — refactoring analysis disabled'));
+      return { filePath, suggestions: [], error: '@babel dependencies not installed' };
+    }
+
     console.log(chalk.blue(`🔍 Analyzing: ${filePath}`));
-    
+
     try {
       const _content = await fs.readFile(filePath, 'utf-8');
       const fileType = path.extname(filePath);
-      
+
       if (!['.js', '.jsx', '.ts', '.tsx'].includes(fileType)) {
         return {
           filePath,

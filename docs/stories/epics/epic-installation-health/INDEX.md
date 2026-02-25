@@ -68,16 +68,28 @@ Garantir que qualquer **fresh install** ou **upgrade** do aios-core resulta num 
 | [INS-4.7](story-INS-4.7-config-smart-merge.md) | YAML Merger Strategy + Config Smart Merge (Phase 1) | @dev | 5 | Done | — |
 | [INS-4.8](story-INS-4.8-health-check-task.md) | Unify Health-Check + Doctor v2 (3 checks novos: skills, commands, hooks) | @dev | 3 | Done | INS-4.1 |
 
+### Wave 4: Post-Release Hardening (P0 Hotfix)
+
+| Story | Title | Agent | Points | Status | Blocked By |
+|-------|-------|-------|--------|--------|------------|
+| [INS-4.11](story-INS-4.11-v430-installer-fixes.md) | v4.3.0 Post-Release Installer Fixes | @dev | 8 | Ready for Review | None |
+
+### Wave 5: Brownfield Hardening (P0 Critical)
+
+| Story | Title | Agent | Points | Status | Blocked By |
+|-------|-------|-------|--------|--------|------------|
+| [INS-4.12](story-INS-4.12-brownfield-dependency-resolution.md) | Brownfield Dependency Resolution & CI Publish Safety Net | @dev + @devops | 13 | Draft | None |
+
 ## Totals
 
 | Metric | Value |
 |--------|-------|
-| **Total Stories** | 9 (+1 INS-4.10) |
-| **Total Points** | ~33 (v4: +3 INS-4.3 expand, +1 INS-4.8 expand, +2 INS-4.10 new) |
-| **Points Done** | 33 (INS-4.1, INS-4.2, INS-4.3, INS-4.4, INS-4.5, INS-4.6, INS-4.7, INS-4.8, INS-4.10) |
-| **Points Remaining** | 0 |
-| **Epic Status** | **COMPLETE** |
-| **Waves** | 3 |
+| **Total Stories** | 11 (+INS-4.11, +INS-4.12) |
+| **Total Points** | ~54 (33 base + 8 INS-4.11 + 13 INS-4.12) |
+| **Points Done** | 33 (INS-4.1 through INS-4.10) |
+| **Points Remaining** | 21 (INS-4.11: 8, INS-4.12: 13) |
+| **Epic Status** | **IN PROGRESS** (Waves 1-3 complete, Waves 4-5 active) |
+| **Waves** | 5 |
 | **Executor Primario** | @dev (Dex) |
 | **Pre-requisitos** | Branch `feat/epic-nogic-code-intelligence` merged em main (antes de Wave 2) |
 | **Bloqueadores Externos** | Nenhum para Wave 1 |

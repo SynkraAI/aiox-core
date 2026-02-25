@@ -1,9 +1,12 @@
 const fs = require('fs').promises;
 const path = require('path');
 const chalk = require('chalk');
-const { ESLint } = require('eslint');
-const prettier = require('prettier');
-const jscodeshift = require('jscodeshift');
+
+// INS-4.12: Optional dev-time deps — wrap in try-catch for brownfield installs
+let ESLint, prettier, jscodeshift;
+try { ({ ESLint } = require('eslint')); } catch { ESLint = null; }
+try { prettier = require('prettier'); } catch { prettier = null; }
+try { jscodeshift = require('jscodeshift'); } catch { jscodeshift = null; }
 
 /**
  * Automated code quality improvement system
@@ -119,15 +122,22 @@ class CodeQualityImprover {
    * Initialize tools
    */
   async initialize() {
-    // Initialize ESLint
-    this.eslint = new ESLint({
-      fix: true,
-      baseConfig: await this.loadESLintConfig(),
-      useEslintrc: true
-    });
+    // INS-4.12: Guard optional deps — may be null in brownfield installs
+    if (ESLint) {
+      this.eslint = new ESLint({
+        fix: true,
+        baseConfig: await this.loadESLintConfig(),
+        useEslintrc: true
+      });
+    } else {
+      console.warn('⚠️  eslint not available — linting improvements disabled');
+    }
 
-    // Load Prettier config
-    this.prettierConfig = await this.loadPrettierConfig();
+    if (prettier) {
+      this.prettierConfig = await this.loadPrettierConfig();
+    } else {
+      console.warn('⚠️  prettier not available — formatting improvements disabled');
+    }
   }
 
   /**
@@ -231,6 +241,7 @@ class CodeQualityImprover {
 
     try {
       // Linting issues
+      if (!this.eslint) return metrics;
       const lintResults = await this.eslint.lintText(content, { _filePath });
       metrics.issues = lintResults[0]?.errorCount + lintResults[0]?.warningCount || 0;
 
@@ -254,9 +265,12 @@ class CodeQualityImprover {
 
   async improveFormatting(content, _filePath, options) {
     try {
+      if (!prettier) {
+        return { improved: false, content, changes: [] };
+      }
       const formatted = await prettier.format(content, {
         ...this.prettierConfig,
-        filepath: filePath
+        filepath: _filePath
       });
 
       return {
@@ -276,6 +290,9 @@ class CodeQualityImprover {
 
   async improveLinting(content, _filePath, options) {
     try {
+      if (!this.eslint) {
+        return { improved: false, content, changes: [] };
+      }
       const results = await this.eslint.lintText(content, { _filePath });
       
       if (results[0]?.output) {

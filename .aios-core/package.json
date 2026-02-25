@@ -31,16 +31,20 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "ajv": "^8.17.1",
     "chalk": "^4.1.2",
     "commander": "^12.1.0",
-    "fs-extra": "^11.3.0",
-    "glob": "^10.4.4",
-    "js-yaml": "^4.1.0",
-    "inquirer": "^8.2.6",
-    "validator": "^13.15.15",
     "diff": "^5.2.0",
     "execa": "^5.1.1",
-    "highlight.js": "^11.9.0"
+    "fast-glob": "^3.3.3",
+    "fs-extra": "^11.3.0",
+    "glob": "^10.4.4",
+    "highlight.js": "^11.9.0",
+    "inquirer": "^8.2.6",
+    "js-yaml": "^4.1.0",
+    "semver": "^7.7.2",
+    "tar": "^7.5.7",
+    "validator": "^13.15.15"
   },
   "peerDependencies": {
     "@aios-fullstack/memory": "^4.31.0",

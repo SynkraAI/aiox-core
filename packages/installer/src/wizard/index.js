@@ -571,32 +571,47 @@ async function runWizard(options = {}) {
     }
 
     // Story INS-4.6: Entity Registry Bootstrap — populate entity-registry.yaml on install
+    // Story INS-4.12: Fix module resolution + bootstrap timing
+    // Bootstrap runs AFTER .aios-core deps are installed (aios-core-installer.js:324-345)
+    // NODE_PATH ensures spawned scripts can resolve packages from .aios-core/node_modules/
     console.log('\n📇 Bootstrapping entity registry...');
     try {
       const registryScript = path.join(process.cwd(), '.aios-core', 'development', 'scripts', 'populate-entity-registry.js');
       if (fse.existsSync(registryScript)) {
-        const startMs = Date.now();
-        execSync(`node "${registryScript}"`, {
-          cwd: process.cwd(),
-          encoding: 'utf8',
-          timeout: 30000,
-          stdio: 'pipe',
-        });
-        const elapsedMs = Date.now() - startMs;
+        // INS-4.12 AC3: Guard — skip bootstrap if .aios-core deps are not installed
+        const aiosCoreNodeModules = path.join(process.cwd(), '.aios-core', 'node_modules');
+        if (!fse.existsSync(aiosCoreNodeModules)) {
+          console.warn('⚠️  .aios-core/node_modules/ not found — skipping entity registry bootstrap');
+          console.warn('   Run: cd .aios-core && npm install --production');
+          answers.entityRegistryStatus = 'skipped-no-deps';
+        } else {
+        // INS-4.12 AC2: Set NODE_PATH so spawned scripts resolve deps from .aios-core/node_modules/
+          const parentNodeModules = path.join(process.cwd(), 'node_modules');
+          const nodePath = [aiosCoreNodeModules, parentNodeModules].join(path.delimiter);
+          const startMs = Date.now();
+          execSync(`node "${registryScript}"`, {
+            cwd: process.cwd(),
+            encoding: 'utf8',
+            timeout: 30000,
+            stdio: 'pipe',
+            env: { ...process.env, NODE_PATH: nodePath },
+          });
+          const elapsedMs = Date.now() - startMs;
 
-        // Read entity count from generated registry
-        const registryPath = path.join(process.cwd(), '.aios-core', 'data', 'entity-registry.yaml');
-        let entityCount = 0;
-        if (fse.existsSync(registryPath)) {
-          const registryContent = fse.readFileSync(registryPath, 'utf8');
-          const countMatch = registryContent.match(/entityCount:\s*(\d+)/);
-          entityCount = countMatch ? parseInt(countMatch[1], 10) : 0;
-        }
+          // Read entity count from generated registry
+          const registryPath = path.join(process.cwd(), '.aios-core', 'data', 'entity-registry.yaml');
+          let entityCount = 0;
+          if (fse.existsSync(registryPath)) {
+            const registryContent = fse.readFileSync(registryPath, 'utf8');
+            const countMatch = registryContent.match(/entityCount:\s*(\d+)/);
+            entityCount = countMatch ? parseInt(countMatch[1], 10) : 0;
+          }
 
-        console.log(`✅ Entity registry: populated (${entityCount} entities, ${(elapsedMs / 1000).toFixed(1)}s)`);
-        answers.entityRegistryStatus = 'populated';
-        answers.entityRegistryCount = entityCount;
-        answers.entityRegistryMs = elapsedMs;
+          console.log(`✅ Entity registry: populated (${entityCount} entities, ${(elapsedMs / 1000).toFixed(1)}s)`);
+          answers.entityRegistryStatus = 'populated';
+          answers.entityRegistryCount = entityCount;
+          answers.entityRegistryMs = elapsedMs;
+        } // end else (deps exist)
       } else {
         console.log('   ℹ️  Entity registry script not found (skipped)');
         answers.entityRegistryStatus = 'skipped';
