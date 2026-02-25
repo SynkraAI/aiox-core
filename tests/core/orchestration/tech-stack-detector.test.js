@@ -6,15 +6,26 @@
  */
 
 const path = require('path');
+
+jest.mock('fs-extra');
 const fs = require('fs-extra');
 const TechStackDetector = require('../../../.aios-core/core/orchestration/tech-stack-detector');
-
-// Mock fs-extra
-jest.mock('fs-extra');
 
 describe('TechStackDetector', () => {
   let detector;
   const PROJECT_ROOT = '/fake/project';
+
+  /**
+   * Helper reutilizado em _detectDatabase, _detectFrontend e _detectBackend.
+   * Configura mocks para simular um package.json com as dependências fornecidas.
+   */
+  function setupDeps(deps) {
+    fs.pathExists.mockImplementation(async (p) => {
+      if (p === path.join(PROJECT_ROOT, 'package.json')) return true;
+      return false;
+    });
+    fs.readJson.mockResolvedValue({ dependencies: deps });
+  }
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -163,14 +174,6 @@ describe('TechStackDetector', () => {
   // _detectDatabase
   // ============================================================
   describe('_detectDatabase', () => {
-    function setupDeps(deps) {
-      fs.pathExists.mockImplementation(async (p) => {
-        if (p === path.join(PROJECT_ROOT, 'package.json')) return true;
-        return false;
-      });
-      fs.readJson.mockResolvedValue({ dependencies: deps });
-    }
-
     test('detecta Supabase pelo diretório', async () => {
       fs.pathExists.mockImplementation(async (p) => {
         if (p.endsWith('supabase')) return true;
@@ -332,7 +335,7 @@ describe('TechStackDetector', () => {
       fs.readdir.mockRejectedValue(new Error('permission denied'));
 
       const profile = detector._createEmptyProfile();
-      await expect(detector._detectDatabase(profile)).resolves.not.toThrow();
+      await expect(detector._detectDatabase(profile)).resolves.toBeUndefined();
     });
   });
 
@@ -340,14 +343,6 @@ describe('TechStackDetector', () => {
   // _detectFrontend
   // ============================================================
   describe('_detectFrontend', () => {
-    function setupDeps(deps) {
-      fs.pathExists.mockImplementation(async (p) => {
-        if (p === path.join(PROJECT_ROOT, 'package.json')) return true;
-        return false;
-      });
-      fs.readJson.mockResolvedValue({ dependencies: deps });
-    }
-
     test('detecta React', async () => {
       setupDeps({ react: '^18' });
       const profile = detector._createEmptyProfile();
@@ -500,14 +495,6 @@ describe('TechStackDetector', () => {
   // _detectBackend
   // ============================================================
   describe('_detectBackend', () => {
-    function setupDeps(deps) {
-      fs.pathExists.mockImplementation(async (p) => {
-        if (p === path.join(PROJECT_ROOT, 'package.json')) return true;
-        return false;
-      });
-      fs.readJson.mockResolvedValue({ dependencies: deps });
-    }
-
     test('detecta Express', async () => {
       setupDeps({ express: '^4' });
       const profile = detector._createEmptyProfile();
