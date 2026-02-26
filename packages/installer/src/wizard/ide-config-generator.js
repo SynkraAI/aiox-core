@@ -677,6 +677,7 @@ async function copyClaudeHooksFolder(projectRoot) {
   // Only copy JS hooks that work standalone (no Python/shell deps)
   const HOOKS_TO_COPY = [
     'synapse-engine.cjs',
+    'code-intel-pretool.cjs',
     'precompact-session-digest.cjs',
     'README.md',
   ];
