@@ -1,0 +1,36 @@
+{
+  "name": "@zap/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "worker:dev": "tsx watch src/workers/index.ts",
+    "build": "tsc && tsc-alias",
+    "start": "node dist/index.js",
+    "worker:start": "node dist/workers/index.js",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.43.0",
+    "@zap/types": "*",
+    "bullmq": "^5.4.0",
+    "hono": "^4.3.0",
+    "ioredis": "^5.3.2",
+    "resend": "^3.2.0",
+    "winston": "^3.13.0",
+    "zod": "^3.23.0",
+    "@hono/node-server": "^1.11.0",
+    "@hono/zod-validator": "^0.2.1",
+    "dotenv": "^16.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "tsx": "^4.11.0",
+    "typescript": "^5.4.0",
+    "vitest": "^1.6.0",
+    "tsc-alias": "^1.8.0"
+  }
+}
