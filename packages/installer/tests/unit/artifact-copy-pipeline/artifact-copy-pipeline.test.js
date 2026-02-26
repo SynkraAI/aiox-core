@@ -8,6 +8,8 @@ const {
   copySkillFiles,
   copyExtraCommandFiles,
   createClaudeSettingsLocal,
+  HOOK_EVENT_MAP,
+  DEFAULT_HOOK_CONFIG,
 } = require('../../../../../packages/installer/src/wizard/ide-config-generator');
 
 function createTempDir() {
@@ -166,36 +168,108 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
     });
   });
 
-  describe('createClaudeSettingsLocal — hooks registration', () => {
-    test('registers ALL .cjs hooks in settings.local.json', async () => {
+  describe('HOOK_EVENT_MAP (Story MIS-3.1)', () => {
+    test('maps synapse-engine.cjs to UserPromptSubmit', () => {
+      const config = HOOK_EVENT_MAP['synapse-engine.cjs'];
+      expect(config).toBeDefined();
+      expect(config.event).toBe('UserPromptSubmit');
+      expect(config.matcher).toBeNull();
+      expect(config.timeout).toBe(10);
+    });
+
+    test('maps code-intel-pretool.cjs to PreToolUse with Write|Edit matcher', () => {
+      const config = HOOK_EVENT_MAP['code-intel-pretool.cjs'];
+      expect(config).toBeDefined();
+      expect(config.event).toBe('PreToolUse');
+      expect(config.matcher).toBe('Write|Edit');
+      expect(config.timeout).toBe(10);
+    });
+
+    test('maps precompact-session-digest.cjs to PreCompact', () => {
+      const config = HOOK_EVENT_MAP['precompact-session-digest.cjs'];
+      expect(config).toBeDefined();
+      expect(config.event).toBe('PreCompact');
+      expect(config.matcher).toBeNull();
+      expect(config.timeout).toBe(10);
+    });
+
+    test('covers all 3 known hooks', () => {
+      const keys = Object.keys(HOOK_EVENT_MAP);
+      expect(keys).toHaveLength(3);
+      expect(keys).toContain('synapse-engine.cjs');
+      expect(keys).toContain('code-intel-pretool.cjs');
+      expect(keys).toContain('precompact-session-digest.cjs');
+    });
+
+    test('DEFAULT_HOOK_CONFIG falls back to UserPromptSubmit', () => {
+      expect(DEFAULT_HOOK_CONFIG.event).toBe('UserPromptSubmit');
+      expect(DEFAULT_HOOK_CONFIG.matcher).toBeNull();
+      expect(DEFAULT_HOOK_CONFIG.timeout).toBe(10);
+    });
+  });
+
+  describe('createClaudeSettingsLocal — hook event routing (Story MIS-3.1)', () => {
+    test('registers hooks under correct events using HOOK_EVENT_MAP', async () => {
       const tmpDir = createTempDir();
 
       try {
-        // Create hooks directory with 2 .cjs files
         const hooksDir = path.join(tmpDir, '.claude', 'hooks');
         fs.mkdirSync(hooksDir, { recursive: true });
         fs.writeFileSync(path.join(hooksDir, 'synapse-engine.cjs'), '// hook 1', 'utf8');
-        fs.writeFileSync(path.join(hooksDir, 'precompact-session-digest.cjs'), '// hook 2', 'utf8');
+        fs.writeFileSync(path.join(hooksDir, 'code-intel-pretool.cjs'), '// hook 2', 'utf8');
+        fs.writeFileSync(path.join(hooksDir, 'precompact-session-digest.cjs'), '// hook 3', 'utf8');
         fs.writeFileSync(path.join(hooksDir, 'README.md'), '# Hooks', 'utf8');
 
         const result = await createClaudeSettingsLocal(tmpDir);
-
         expect(result).not.toBeNull();
 
         const settingsContent = fs.readFileSync(path.join(tmpDir, '.claude', 'settings.local.json'), 'utf8');
         const settings = JSON.parse(settingsContent);
 
-        // Should have hooks.UserPromptSubmit with 2 entries
-        expect(settings.hooks).toBeDefined();
+        // synapse-engine → UserPromptSubmit
         expect(settings.hooks.UserPromptSubmit).toBeDefined();
-        expect(settings.hooks.UserPromptSubmit.length).toBe(2);
+        expect(settings.hooks.UserPromptSubmit.length).toBe(1);
+        const upsCommands = settings.hooks.UserPromptSubmit.flatMap(e => e.hooks.map(h => h.command));
+        expect(upsCommands.some(c => c.includes('synapse-engine'))).toBe(true);
 
-        // Both hooks registered
-        const commands = settings.hooks.UserPromptSubmit.flatMap(entry =>
-          entry.hooks.map(h => h.command)
-        );
-        expect(commands.some(c => c.includes('synapse-engine'))).toBe(true);
-        expect(commands.some(c => c.includes('precompact-session-digest'))).toBe(true);
+        // code-intel-pretool → PreToolUse with matcher
+        expect(settings.hooks.PreToolUse).toBeDefined();
+        expect(settings.hooks.PreToolUse.length).toBe(1);
+        expect(settings.hooks.PreToolUse[0].matcher).toBe('Write|Edit');
+        const ptuCommands = settings.hooks.PreToolUse.flatMap(e => e.hooks.map(h => h.command));
+        expect(ptuCommands.some(c => c.includes('code-intel-pretool'))).toBe(true);
+
+        // precompact-session-digest → PreCompact
+        expect(settings.hooks.PreCompact).toBeDefined();
+        expect(settings.hooks.PreCompact.length).toBe(1);
+        const pcCommands = settings.hooks.PreCompact.flatMap(e => e.hooks.map(h => h.command));
+        expect(pcCommands.some(c => c.includes('precompact-session-digest'))).toBe(true);
+
+        // PreCompact should NOT have a matcher
+        expect(settings.hooks.PreCompact[0].matcher).toBeUndefined();
+      } finally {
+        cleanup(tmpDir);
+      }
+    });
+
+    test('unknown hooks fall back to UserPromptSubmit (backwards compatible)', async () => {
+      const tmpDir = createTempDir();
+
+      try {
+        const hooksDir = path.join(tmpDir, '.claude', 'hooks');
+        fs.mkdirSync(hooksDir, { recursive: true });
+        fs.writeFileSync(path.join(hooksDir, 'custom-future-hook.cjs'), '// future hook', 'utf8');
+
+        await createClaudeSettingsLocal(tmpDir);
+
+        const settingsContent = fs.readFileSync(path.join(tmpDir, '.claude', 'settings.local.json'), 'utf8');
+        const settings = JSON.parse(settingsContent);
+
+        // Unknown hook should fall back to UserPromptSubmit
+        expect(settings.hooks.UserPromptSubmit).toBeDefined();
+        expect(settings.hooks.UserPromptSubmit.length).toBe(1);
+        const commands = settings.hooks.UserPromptSubmit.flatMap(e => e.hooks.map(h => h.command));
+        expect(commands.some(c => c.includes('custom-future-hook'))).toBe(true);
       } finally {
         cleanup(tmpDir);
       }
@@ -220,6 +294,7 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
         const hooksDir = path.join(tmpDir, '.claude', 'hooks');
         fs.mkdirSync(hooksDir, { recursive: true });
         fs.writeFileSync(path.join(hooksDir, 'synapse-engine.cjs'), '// hook', 'utf8');
+        fs.writeFileSync(path.join(hooksDir, 'precompact-session-digest.cjs'), '// hook', 'utf8');
 
         // Run twice
         await createClaudeSettingsLocal(tmpDir);
@@ -228,8 +303,9 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
         const settingsContent = fs.readFileSync(path.join(tmpDir, '.claude', 'settings.local.json'), 'utf8');
         const settings = JSON.parse(settingsContent);
 
-        // Should still have only 1 entry
+        // Should still have only 1 entry per event
         expect(settings.hooks.UserPromptSubmit.length).toBe(1);
+        expect(settings.hooks.PreCompact.length).toBe(1);
       } finally {
         cleanup(tmpDir);
       }
@@ -254,6 +330,33 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
 
         expect(settings.customKey).toBe('preserved');
         expect(settings.hooks.UserPromptSubmit.length).toBe(1);
+      } finally {
+        cleanup(tmpDir);
+      }
+    });
+
+    test('synapse-engine regression: still registered as UserPromptSubmit after refactor', async () => {
+      const tmpDir = createTempDir();
+
+      try {
+        const hooksDir = path.join(tmpDir, '.claude', 'hooks');
+        fs.mkdirSync(hooksDir, { recursive: true });
+        fs.writeFileSync(path.join(hooksDir, 'synapse-engine.cjs'), '// hook', 'utf8');
+
+        await createClaudeSettingsLocal(tmpDir);
+
+        const settingsContent = fs.readFileSync(path.join(tmpDir, '.claude', 'settings.local.json'), 'utf8');
+        const settings = JSON.parse(settingsContent);
+
+        expect(settings.hooks.UserPromptSubmit).toBeDefined();
+        expect(settings.hooks.UserPromptSubmit.length).toBe(1);
+
+        const commands = settings.hooks.UserPromptSubmit.flatMap(e => e.hooks.map(h => h.command));
+        expect(commands.some(c => c.includes('synapse-engine'))).toBe(true);
+
+        // No PreCompact or PreToolUse should exist for synapse
+        expect(settings.hooks.PreCompact).toBeUndefined();
+        expect(settings.hooks.PreToolUse).toBeUndefined();
       } finally {
         cleanup(tmpDir);
       }

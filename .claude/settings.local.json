@@ -10,6 +10,5 @@
       "Bash(git push:*)",
       "Bash(node -e:*)"
     ]
-  },
-  "hooks": {}
+  }
 }

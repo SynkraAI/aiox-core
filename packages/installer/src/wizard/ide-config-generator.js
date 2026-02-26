@@ -702,8 +702,42 @@ async function copyClaudeHooksFolder(projectRoot) {
 }
 
 /**
- * BUG-4 fix (INS-1): Create .claude/settings.local.json with hook registration
- * Creates or merges hook entries into settings.local.json
+ * Hook event mapping: fileName → { event, matcher, timeout }
+ * Maps each .cjs hook file to its correct Claude Code event.
+ * Extensible: add new hooks here as they are created.
+ *
+ * @see Story MIS-3.1 - Fix Session-Digest Hook Registration
+ * @see https://code.claude.com/docs/en/hooks (Claude Code Hooks Documentation)
+ */
+const HOOK_EVENT_MAP = {
+  'synapse-engine.cjs': {
+    event: 'UserPromptSubmit',
+    matcher: null,
+    timeout: 10,
+  },
+  'code-intel-pretool.cjs': {
+    event: 'PreToolUse',
+    matcher: 'Write|Edit',
+    timeout: 10,
+  },
+  'precompact-session-digest.cjs': {
+    event: 'PreCompact',
+    matcher: null,
+    timeout: 10,
+  },
+};
+
+/** Default event config for unmapped hooks (backwards compatible). */
+const DEFAULT_HOOK_CONFIG = {
+  event: 'UserPromptSubmit',
+  matcher: null,
+  timeout: 10,
+};
+
+/**
+ * BUG-4 fix (INS-1) + MIS-3.1: Create .claude/settings.local.json with hook registration
+ * Creates or merges hook entries into settings.local.json using HOOK_EVENT_MAP
+ * to register each hook under its correct Claude Code event.
  * @param {string} projectRoot - Project root directory
  * @returns {Promise<string|null>} Path to created/updated file, or null if skipped
  */
@@ -740,27 +774,29 @@ async function createClaudeSettingsLocal(projectRoot) {
     }
   }
 
-  // Ensure hooks.UserPromptSubmit structure exists
   if (!settings.hooks) {
     settings.hooks = {};
   }
-  if (!Array.isArray(settings.hooks.UserPromptSubmit)) {
-    settings.hooks.UserPromptSubmit = [];
-  }
 
-  // Register each .cjs hook file
+  // Register each .cjs hook file under its correct event
   for (const hookFileName of hookFiles) {
     const hookFilePath = path.join(hooksDir, hookFileName);
+    const hookConfig = HOOK_EVENT_MAP[hookFileName] || DEFAULT_HOOK_CONFIG;
+    const eventName = hookConfig.event;
 
-    // QA-C1 fix: Use correct Claude Code nested hook format
+    // Ensure event array exists
+    if (!Array.isArray(settings.hooks[eventName])) {
+      settings.hooks[eventName] = [];
+    }
+
     // Windows workaround: $CLAUDE_PROJECT_DIR has known bug on Windows (GH #6023/#5814)
     const hookCommand = isWindows
       ? `node "${hookFilePath.replace(/\\/g, '\\\\')}"` // Absolute path with escaped backslashes
       : `node "$CLAUDE_PROJECT_DIR/.claude/hooks/${hookFileName}"`;
 
-    // Check if this hook is already registered (supports both nested and flat formats)
+    // Check if this hook is already registered under this event
     const hookBaseName = hookFileName.replace('.cjs', '');
-    const alreadyRegistered = settings.hooks.UserPromptSubmit.some(entry => {
+    const alreadyRegistered = settings.hooks[eventName].some(entry => {
       if (Array.isArray(entry.hooks)) {
         return entry.hooks.some(h => h.command && h.command.includes(hookBaseName));
       }
@@ -768,15 +804,22 @@ async function createClaudeSettingsLocal(projectRoot) {
     });
 
     if (!alreadyRegistered) {
-      settings.hooks.UserPromptSubmit.push({
+      const hookEntry = {
         hooks: [
           {
             type: 'command',
             command: hookCommand,
-            timeout: 10,
+            timeout: hookConfig.timeout,
           },
         ],
-      });
+      };
+
+      // Add matcher if configured (e.g., "Write|Edit" for PreToolUse)
+      if (hookConfig.matcher) {
+        hookEntry.matcher = hookConfig.matcher;
+      }
+
+      settings.hooks[eventName].push(hookEntry);
     }
   }
 
@@ -1136,4 +1179,6 @@ module.exports = {
   copyGeminiHooksFolder,
   createGeminiSettings,
   linkGeminiExtension,
+  HOOK_EVENT_MAP,
+  DEFAULT_HOOK_CONFIG,
 };

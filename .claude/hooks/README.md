@@ -5,13 +5,20 @@ Sistema de governança automática para regras do CLAUDE.md.
 ## Arquitetura
 
 ```
+UserPromptSubmit Hooks
+└── (all prompts)  → synapse-engine.cjs
+
 PreToolUse Hooks
 ├── Read          → read-protection.py
 ├── Write|Edit    → enforce-architecture-first.py
 │                 → write-path-validation.py
 │                 → mind-clone-governance.py
+│                 → code-intel-pretool.cjs
 └── Bash          → sql-governance.py
                   → slug-validation.py
+
+PreCompact Hooks
+└── (manual+auto)  → precompact-session-digest.cjs
 ```
 
 ## Hooks Disponíveis
@@ -133,33 +140,51 @@ echo $?  # Deve retornar 2 (bloqueado)
 
 ## Configuração
 
-Hooks são configurados em `.claude/settings.local.json`:
+Hooks são registrados em `.claude/settings.json` (framework, commitado) ou `.claude/settings.local.json` (overrides locais).
+
+**IMPORTANTE:** Claude Code NÃO usa filesystem discovery. Cada hook DEVE ser registrado explicitamente com o evento correto.
+
+### Registro de Hooks JS (.cjs)
+
+| Hook | Evento | Matcher | Descrição |
+|------|--------|---------|-----------|
+| `synapse-engine.cjs` | `UserPromptSubmit` | — | SYNAPSE context engine |
+| `code-intel-pretool.cjs` | `PreToolUse` | `Write\|Edit` | Code intelligence injection |
+| `precompact-session-digest.cjs` | `PreCompact` | — | Session digest capture |
+
+### Exemplo de Configuração
 
 ```json
 {
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/synapse-engine.cjs\"", "timeout": 10 }]
+      }
+    ],
     "PreToolUse": [
       {
-        "matcher": "Read",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/read-protection.py\"",
-            "timeout": 5
-          }
-        ]
+        "matcher": "Write|Edit",
+        "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/code-intel-pretool.cjs\"", "timeout": 10 }]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/precompact-session-digest.cjs\"", "timeout": 10 }]
       }
     ]
   }
 }
 ```
 
+O installer (`ide-config-generator.js`) usa `HOOK_EVENT_MAP` para registrar automaticamente cada hook no evento correto durante `npx aios-core install`.
+
 ## Manutenção
 
 Para adicionar novo hook:
 
-1. Criar arquivo `.claude/hooks/novo-hook.py`
-2. Adicionar entrada em `.claude/settings.local.json`
+1. Criar arquivo `.claude/hooks/novo-hook.cjs` (deve ler stdin JSON, mesmo pattern do synapse-engine.cjs)
+2. Adicionar mapeamento em `HOOK_EVENT_MAP` no `ide-config-generator.js`
 3. Documentar neste README
 4. Testar com casos reais
 
