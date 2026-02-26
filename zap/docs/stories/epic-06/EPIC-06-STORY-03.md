@@ -273,9 +273,12 @@ export interface OfferParserJob {
 
 | File | Action | Notes |
 |------|--------|-------|
-| `apps/api/src/services/group-monitor.service.ts` | MODIFY | Full implementation |
-| `@zap/types/src/jobs.ts` | MODIFY | Add OfferParserJob type |
-| `apps/api/src/queues/index.ts` | MODIFY | Export offerParserQueue |
+| `apps/api/src/services/group-monitor.service.ts` | CREATE | Full message capture pipeline with deduplication, validation, and enqueuing |
+| `apps/api/src/services/group-monitor.service.test.ts` | CREATE | 14 comprehensive unit tests covering all AC scenarios |
+| `packages/types/src/index.ts` | MODIFY | Add OfferParserJob interface (message_id, group_jid, sender_jid, text, timestamp, tenant_id, media_url) |
+| `apps/api/src/queues/index.ts` | MODIFY | Export offerParserQueue: `new Queue('offer-parser', queueOptions)` |
+| `apps/api/src/middleware/webhook-router.ts` | MODIFY | Expand EvolutionMessageEvent type with all required fields (id, participant, messageTimestamp, media message types) |
+| `apps/api/src/routes/webhooks.ts` | MODIFY | Fix type cast safety for contacts.upsert webhook |
 
 ---
 
@@ -291,6 +294,7 @@ export interface OfferParserJob {
 | Date | Author | Change |
 |------|--------|--------|
 | 2026-02-26 | River (SM) | Story created — ready for development |
+| 2026-02-26 | Dex (Dev) | Implementation complete: message capture pipeline + 14 tests (36/36 PASS, TypeScript clean, all AC verified) |
 
 ---
 
