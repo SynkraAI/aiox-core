@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
+import Image from 'next/image'
 import type { CapturedOffer } from '@/stores/captured-offers'
 
 interface OfferDetailModalProps {
@@ -106,9 +107,11 @@ export function OfferDetailModal({
           {/* Product Image */}
           {offer.product_image_url && (
             <div className="flex justify-center">
-              <img
+              <Image
                 src={offer.product_image_url}
                 alt={offer.product_title}
+                width={256}
+                height={256}
                 className="max-h-64 rounded-lg object-cover"
               />
             </div>
