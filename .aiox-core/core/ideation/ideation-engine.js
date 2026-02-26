@@ -13,7 +13,7 @@ const { execSync } = require('child_process');
 // Import dependencies with fallbacks
 let GotchasMemory;
 try {
-  GotchasMemory = require('../memory/gotchas-memory');
+  ({ GotchasMemory } = require('../memory/gotchas-memory'));
 } catch {
   GotchasMemory = null;
 }
