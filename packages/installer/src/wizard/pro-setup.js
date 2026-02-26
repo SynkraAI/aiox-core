@@ -17,6 +17,7 @@
 
 const { createSpinner, showSuccess, showError, showWarning, showInfo } = require('./feedback');
 const { colors, status } = require('../utils/aios-colors');
+const { t, tf } = require('./i18n');
 
 /**
  * Gold color for Pro branding.
@@ -29,6 +30,11 @@ try {
 } catch {
   gold = (text) => text;
 }
+
+/**
+ * License server base URL (same source of truth as license-api.js CONFIG.BASE_URL).
+ */
+const LICENSE_SERVER_URL = process.env.AIOS_LICENSE_API_URL || 'https://aios-license-server.vercel.app';
 
 /**
  * License key format: PRO-XXXX-XXXX-XXXX-XXXX
@@ -109,11 +115,20 @@ function validateKeyFormat(key) {
  * Show the Pro branding header.
  */
 function showProHeader() {
+  const title = t('proWizardTitle');
+  const subtitle = t('proWizardSubtitle');
+  const maxLen = Math.max(title.length, subtitle.length) + 10;
+  const pad = (str) => {
+    const totalPad = maxLen - str.length;
+    const left = Math.floor(totalPad / 2);
+    const right = totalPad - left;
+    return ' '.repeat(left) + str + ' '.repeat(right);
+  };
   console.log('');
-  console.log(gold('  ╔══════════════════════════════════════════════╗'));
-  console.log(gold('  ║          AIOS Pro Installation Wizard        ║'));
-  console.log(gold('  ║          Premium Content & Features          ║'));
-  console.log(gold('  ╚══════════════════════════════════════════════╝'));
+  console.log(gold('  ╔' + '═'.repeat(maxLen) + '╗'));
+  console.log(gold('  ║' + pad(title) + '║'));
+  console.log(gold('  ║' + pad(subtitle) + '║'));
+  console.log(gold('  ╚' + '═'.repeat(maxLen) + '╝'));
   console.log('');
 }
 
@@ -131,29 +146,69 @@ function showStep(current, total, label) {
 }
 
 /**
+ * Try to load a pro license module via multiple resolution paths.
+ *
+ * Resolution order:
+ * 1. Relative path (framework-dev mode: ../../../../pro/license/{name})
+ * 2. @aios-fullstack/pro package (brownfield: node_modules/@aios-fullstack/pro/license/{name})
+ * 3. Absolute path via aios-core in node_modules (brownfield upgrade)
+ * 4. Absolute path via @aios-fullstack/pro in user project (npx context)
+ *
+ * Path 4 is critical for npx execution: when running `npx aios-core install`,
+ * require() resolves from the npx temp directory, not process.cwd(). After
+ * bootstrap installs @aios-fullstack/pro in the user's project, only an
+ * absolute path to process.cwd()/node_modules/@aios-fullstack/pro/... works.
+ *
+ * @param {string} moduleName - Module filename without extension (e.g., 'license-api')
+ * @returns {Object|null} Loaded module or null
+ */
+function loadProModule(moduleName) {
+  const path = require('path');
+
+  // 1. Framework-dev mode (cloned repo with pro/ submodule)
+  try {
+    return require(`../../../../pro/license/${moduleName}`);
+  } catch { /* not available */ }
+
+  // 2. @aios-fullstack/pro package (works when aios-core is a local dependency)
+  try {
+    return require(`@aios-fullstack/pro/license/${moduleName}`);
+  } catch { /* not available */ }
+
+  // 3. aios-core in node_modules (brownfield upgrade from >= v4.2.15)
+  try {
+    const absPath = path.join(process.cwd(), 'node_modules', 'aios-core', 'pro', 'license', moduleName);
+    return require(absPath);
+  } catch { /* not available */ }
+
+  // 4. @aios-fullstack/pro in user project (npx context — require resolves from
+  //    temp dir, so we need absolute path to where bootstrap installed the package)
+  try {
+    const absPath = path.join(process.cwd(), 'node_modules', '@aios-fullstack', 'pro', 'license', moduleName);
+    return require(absPath);
+  } catch { /* not available */ }
+
+  return null;
+}
+
+/**
  * Try to load the license API client via lazy import.
+ * Attempts multiple resolution paths for framework-dev, greenfield, and brownfield.
  *
  * @returns {{ LicenseApiClient: Function, licenseApi: Object }|null} License API or null
  */
 function loadLicenseApi() {
-  try {
-    return require('../../../../pro/license/license-api');
-  } catch {
-    return null;
-  }
+  return loadProModule('license-api');
 }
 
 /**
  * Try to load the feature gate via lazy import.
+ * Attempts multiple resolution paths for framework-dev, greenfield, and brownfield.
  *
  * @returns {{ featureGate: Object }|null} Feature gate or null
  */
 function loadFeatureGate() {
-  try {
-    return require('../../../../pro/license/feature-gate');
-  } catch {
-    return null;
-  }
+  return loadProModule('feature-gate');
 }
 
 /**
@@ -186,7 +241,7 @@ function loadProScaffolder() {
  * @returns {Promise<Object>} Result with { success, key, activationResult }
  */
 async function stepLicenseGate(options = {}) {
-  showStep(1, 3, 'License Activation');
+  showStep(1, 3, t('proLicenseActivation'));
 
   const isCI = isCIEnvironment();
 
@@ -212,14 +267,14 @@ async function stepLicenseGate(options = {}) {
     {
       type: 'list',
       name: 'method',
-      message: colors.primary('How would you like to activate Pro?'),
+      message: colors.primary(t('proHowActivate')),
       choices: [
         {
-          name: 'Login or create account (Recommended)',
+          name: t('proLoginOrCreate'),
           value: 'email',
         },
         {
-          name: 'Enter license key (legacy)',
+          name: t('proEnterKey'),
           value: 'key',
         },
       ],
@@ -257,7 +312,7 @@ async function stepLicenseGateCI(options) {
 
   return {
     success: false,
-    error: 'CI mode: Set AIOS_PRO_EMAIL + AIOS_PRO_PASSWORD or AIOS_PRO_KEY environment variables.',
+    error: t('proCISetEnv'),
   };
 }
 
@@ -280,13 +335,13 @@ async function stepLicenseGateWithEmail() {
     {
       type: 'input',
       name: 'email',
-      message: colors.primary('Email:'),
+      message: colors.primary(t('proEmailLabel')),
       validate: (input) => {
         if (!input || !input.trim()) {
-          return 'Email is required';
+          return t('proEmailRequired');
         }
         if (!EMAIL_PATTERN.test(input.trim())) {
-          return 'Please enter a valid email address';
+          return t('proEmailInvalid');
         }
         return true;
       },
@@ -302,7 +357,7 @@ async function stepLicenseGateWithEmail() {
   if (!licenseModule) {
     return {
       success: false,
-      error: 'Pro license module not available. Ensure @aios-fullstack/pro is installed.',
+      error: t('proModuleNotAvailable'),
     };
   }
 
@@ -314,39 +369,39 @@ async function stepLicenseGateWithEmail() {
   if (!online) {
     return {
       success: false,
-      error: 'License server is unreachable. Check your internet connection and try again.',
+      error: t('proServerUnreachable'),
     };
   }
 
-  const checkSpinner = createSpinner('Verifying your access...');
+  const checkSpinner = createSpinner(t('proVerifyingAccess'));
   checkSpinner.start();
 
   let checkResult;
   try {
     checkResult = await client.checkEmail(trimmedEmail);
   } catch (checkError) {
-    checkSpinner.fail(`Verification failed: ${checkError.message}`);
+    checkSpinner.fail(tf('proVerificationFailed', { message: checkError.message }));
     return { success: false, error: checkError.message };
   }
 
   // Step 2a: NOT a buyer → stop
   if (!checkResult.isBuyer) {
-    checkSpinner.fail('No AIOS Pro access found for this email.');
+    checkSpinner.fail(t('proNoAccess'));
     console.log('');
-    showInfo('If you believe this is an error, please contact support:');
-    showInfo('  Email: support@synkra.ai');
-    showInfo('  Purchase Pro: https://pro.synkra.ai');
-    return { success: false, error: 'Email not found in Pro buyers list.' };
+    showInfo(t('proContactSupport'));
+    showInfo('  Issues: https://github.com/SynkraAI/aios-core/issues');
+    showInfo('  ' + t('proPurchase'));
+    return { success: false, error: t('proEmailNotBuyer') };
   }
 
   // Step 2b: IS a buyer
   if (checkResult.hasAccount) {
-    checkSpinner.succeed('Pro access confirmed! Account found.');
+    checkSpinner.succeed(t('proAccessConfirmedAccount'));
     // Flow 3: Existing account → Login with password (retry loop)
     return loginWithRetry(client, trimmedEmail);
   }
 
-  checkSpinner.succeed('Pro access confirmed! Let\'s create your account.');
+  checkSpinner.succeed(t('proAccessConfirmedCreate'));
   // Flow 4: New account → Create account flow
   return createAccountFlow(client, trimmedEmail);
 }
@@ -366,23 +421,23 @@ async function loginWithRetry(client, email) {
       {
         type: 'password',
         name: 'password',
-        message: colors.primary('Password:'),
+        message: colors.primary(t('proPasswordLabel')),
         mask: '*',
         validate: (input) => {
           if (!input || input.length < MIN_PASSWORD_LENGTH) {
-            return `Password must be at least ${MIN_PASSWORD_LENGTH} characters`;
+            return tf('proPasswordMin', { min: MIN_PASSWORD_LENGTH });
           }
           return true;
         },
       },
     ]);
 
-    const spinner = createSpinner('Authenticating...');
+    const spinner = createSpinner(t('proAuthenticating'));
     spinner.start();
 
     try {
       const loginResult = await client.login(email, password);
-      spinner.succeed('Authenticated successfully.');
+      spinner.succeed(t('proAuthSuccess'));
 
       // Wait for email verification if needed
       if (!loginResult.emailVerified) {
@@ -397,15 +452,15 @@ async function loginWithRetry(client, email) {
     } catch (loginError) {
       if (loginError.code === 'EMAIL_NOT_VERIFIED') {
         // Email not verified — poll by retrying login until verified
-        spinner.info('Email not verified yet. Please check your inbox and click the verification link.');
-        console.log(colors.dim('  (Checking every 5 seconds... timeout in 10 minutes)'));
+        spinner.info(t('proEmailNotVerified'));
+        console.log(colors.dim('  ' + t('proCheckingEvery')));
 
         const startTime = Date.now();
         while (Date.now() - startTime < VERIFY_POLL_TIMEOUT_MS) {
           await new Promise((resolve) => setTimeout(resolve, VERIFY_POLL_INTERVAL_MS));
           try {
             const retryLogin = await client.login(email, password);
-            showSuccess('Email verified!');
+            showSuccess(t('proEmailVerified'));
             if (!retryLogin.emailVerified) {
               const verifyResult = await waitForEmailVerification(client, retryLogin.sessionToken, email);
               if (!verifyResult.success) return verifyResult;
@@ -419,31 +474,31 @@ async function loginWithRetry(client, email) {
           }
         }
 
-        showError('Email verification timed out after 10 minutes.');
-        showInfo('Run the installer again to retry.');
-        return { success: false, error: 'Email verification timed out.' };
+        showError(t('proVerificationTimeout'));
+        showInfo(t('proRunAgain'));
+        return { success: false, error: t('proVerificationTimeout') };
       } else if (loginError.code === 'INVALID_CREDENTIALS') {
         const remaining = MAX_RETRIES - attempt;
         if (remaining > 0) {
           spinner.fail(`Incorrect password. ${remaining} attempt${remaining > 1 ? 's' : ''} remaining.`);
-          showInfo('Forgot your password? Visit https://pro.synkra.ai/reset-password');
+          showInfo('Forgot your password? Visit https://aios-license-server.vercel.app/reset-password');
         } else {
           spinner.fail('Maximum login attempts reached.');
-          showInfo('Forgot your password? Visit https://pro.synkra.ai/reset-password');
-          showInfo('Or contact support: support@synkra.ai');
+          showInfo('Forgot your password? Visit https://aios-license-server.vercel.app/reset-password');
+          showInfo('Or open an issue: https://github.com/SynkraAI/aios-core/issues');
           return { success: false, error: 'Maximum login attempts reached.' };
         }
       } else if (loginError.code === 'AUTH_RATE_LIMITED') {
         spinner.fail(loginError.message);
         return { success: false, error: loginError.message };
       } else {
-        spinner.fail(`Authentication failed: ${loginError.message}`);
+        spinner.fail(tf('proAuthFailed', { message: loginError.message }));
         return { success: false, error: loginError.message };
       }
     }
   }
 
-  return { success: false, error: 'Maximum login attempts reached.' };
+  return { success: false, error: t('proMaxAttempts') };
 }
 
 /**
@@ -459,18 +514,18 @@ async function createAccountFlow(client, email) {
   const inquirer = require('inquirer');
 
   console.log('');
-  showInfo('Create your AIOS Pro account to get started.');
+  showInfo(t('proCreateAccount'));
 
   // Ask for password with confirmation
   const { newPassword } = await inquirer.prompt([
     {
       type: 'password',
       name: 'newPassword',
-      message: colors.primary('Choose a password:'),
+      message: colors.primary(t('proChoosePassword')),
       mask: '*',
       validate: (input) => {
         if (!input || input.length < MIN_PASSWORD_LENGTH) {
-          return `Password must be at least ${MIN_PASSWORD_LENGTH} characters`;
+          return tf('proPasswordMin', { min: MIN_PASSWORD_LENGTH });
         }
         return true;
       },
@@ -481,11 +536,11 @@ async function createAccountFlow(client, email) {
     {
       type: 'password',
       name: 'confirmPassword',
-      message: colors.primary('Confirm password:'),
+      message: colors.primary(t('proConfirmPassword')),
       mask: '*',
       validate: (input) => {
         if (input !== newPassword) {
-          return 'Passwords do not match';
+          return t('proPasswordsNoMatch');
         }
         return true;
       },
@@ -493,25 +548,25 @@ async function createAccountFlow(client, email) {
   ]);
 
   // Create account
-  const spinner = createSpinner('Creating account...');
+  const spinner = createSpinner(t('proCreatingAccount'));
   spinner.start();
 
   let sessionToken;
   try {
     await client.signup(email, confirmPassword);
-    spinner.succeed('Account created! Verification email sent.');
+    spinner.succeed(t('proAccountCreated'));
   } catch (signupError) {
     if (signupError.code === 'EMAIL_ALREADY_REGISTERED') {
-      spinner.info('Account already exists. Switching to login...');
+      spinner.info(t('proAccountExists'));
       return loginWithRetry(client, email);
     }
-    spinner.fail(`Account creation failed: ${signupError.message}`);
+    spinner.fail(tf('proAccountFailed', { message: signupError.message }));
     return { success: false, error: signupError.message };
   }
 
   // Wait for email verification
   console.log('');
-  showInfo('Please check your email and click the verification link.');
+  showInfo(t('proCheckEmail'));
 
   // Login after signup to get session token
   try {
@@ -528,8 +583,8 @@ async function createAccountFlow(client, email) {
     }
   } else {
     // Need to wait for verification then login
-    showInfo('Waiting for email verification...');
-    showInfo('After verifying, the installation will continue automatically.');
+    showInfo(t('proWaitingVerification'));
+    showInfo(t('proAfterVerifying'));
 
     // Poll by trying to login periodically
     const startTime = Date.now();
@@ -554,9 +609,9 @@ async function createAccountFlow(client, email) {
     }
 
     if (!sessionToken) {
-      showError('Email verification timed out after 10 minutes.');
-      showInfo('Run the installer again to retry.');
-      return { success: false, error: 'Email verification timed out.' };
+      showError(t('proVerificationTimeout'));
+      showInfo(t('proRunAgain'));
+      return { success: false, error: t('proVerificationTimeout') };
     }
   }
 
@@ -581,7 +636,7 @@ async function authenticateWithEmail(email, password) {
   if (!licenseModule) {
     return {
       success: false,
-      error: 'Pro license module not available. Ensure @aios-fullstack/pro is installed.',
+      error: t('proModuleNotAvailable'),
     };
   }
 
@@ -593,27 +648,27 @@ async function authenticateWithEmail(email, password) {
   if (!online) {
     return {
       success: false,
-      error: 'License server is unreachable. Check your internet connection and try again.',
+      error: t('proServerUnreachable'),
     };
   }
 
   // CI mode: check buyer first, then try login or auto-signup
-  const checkSpinner = createSpinner('Verifying access...');
+  const checkSpinner = createSpinner(t('proVerifyingAccessShort'));
   checkSpinner.start();
 
   try {
     const checkResult = await client.checkEmail(email);
     if (!checkResult.isBuyer) {
-      checkSpinner.fail('No AIOS Pro access found for this email.');
-      return { success: false, error: 'Email not found in Pro buyers list.' };
+      checkSpinner.fail(t('proNoAccess'));
+      return { success: false, error: t('proEmailNotBuyer') };
     }
-    checkSpinner.succeed('Pro access confirmed.');
+    checkSpinner.succeed(t('proAccessConfirmed'));
   } catch {
-    checkSpinner.info('Buyer check unavailable, proceeding with login...');
+    checkSpinner.info(t('proBuyerCheckUnavailable'));
   }
 
   // Try login
-  const spinner = createSpinner('Authenticating...');
+  const spinner = createSpinner(t('proAuthenticating'));
   spinner.start();
 
   let sessionToken;
@@ -623,31 +678,31 @@ async function authenticateWithEmail(email, password) {
     const loginResult = await client.login(email, password);
     sessionToken = loginResult.sessionToken;
     emailVerified = loginResult.emailVerified;
-    spinner.succeed('Authenticated successfully.');
+    spinner.succeed(t('proAuthSuccess'));
   } catch (loginError) {
     if (loginError.code === 'INVALID_CREDENTIALS') {
-      spinner.info('Login failed, attempting signup...');
+      spinner.info(t('proLoginFailedSignup'));
       try {
         await client.signup(email, password);
-        showSuccess('Account created. Verification email sent!');
+        showSuccess(t('proAccountCreatedVerify'));
         emailVerified = false;
         const loginAfterSignup = await client.login(email, password);
         sessionToken = loginAfterSignup.sessionToken;
       } catch (signupError) {
         if (signupError.code === 'EMAIL_ALREADY_REGISTERED') {
-          showError('Account exists but the password is incorrect.');
-          return { success: false, error: 'Invalid password.' };
+          showError(t('proAccountExistsWrongPw'));
+          return { success: false, error: t('proAccountExistsWrongPw') };
         }
         return { success: false, error: signupError.message };
       }
     } else {
-      spinner.fail(`Authentication failed: ${loginError.message}`);
+      spinner.fail(tf('proAuthFailed', { message: loginError.message }));
       return { success: false, error: loginError.message };
     }
   }
 
   if (!sessionToken) {
-    return { success: false, error: 'Authentication failed.' };
+    return { success: false, error: t('proAuthFailedShort') };
   }
 
   // Wait for email verification if needed
@@ -675,12 +730,12 @@ async function authenticateWithEmail(email, password) {
  */
 async function waitForEmailVerification(client, sessionToken, email) {
   console.log('');
-  showInfo('Waiting for email verification...');
-  showInfo('Open your email and click the verification link.');
-  console.log(colors.dim('  (Checking every 5 seconds... timeout in 10 minutes)'));
+  showInfo(t('proWaitingVerification'));
+  showInfo(t('proCheckEmail'));
+  console.log(colors.dim('  ' + t('proCheckingEvery')));
 
   if (!isCIEnvironment()) {
-    console.log(colors.dim('  [Press R to resend verification email]'));
+    console.log(colors.dim('  ' + t('proPressResend')));
   }
 
   const startTime = Date.now();
@@ -721,9 +776,9 @@ async function waitForEmailVerification(client, sessionToken, email) {
         resendHint = false;
         try {
           await client.resendVerification(email);
-          showInfo('Verification email resent.');
+          showInfo(t('proVerificationResent'));
         } catch (error) {
-          showWarning(`Could not resend: ${error.message}`);
+          showWarning(tf('proCouldNotResend', { message: error.message }));
         }
       }
 
@@ -731,7 +786,7 @@ async function waitForEmailVerification(client, sessionToken, email) {
       try {
         const status = await client.checkEmailVerified(sessionToken);
         if (status.verified) {
-          showSuccess('Email verified!');
+          showSuccess(t('proEmailVerified'));
           return { success: true };
         }
       } catch {
@@ -743,9 +798,9 @@ async function waitForEmailVerification(client, sessionToken, email) {
     }
 
     // Timeout
-    showError('Email verification timed out after 10 minutes.');
-    showInfo('Run the installer again to retry verification.');
-    return { success: false, error: 'Email verification timed out.' };
+    showError(t('proVerificationTimeout'));
+    showInfo(t('proRunAgainRetry'));
+    return { success: false, error: t('proVerificationTimeout') };
   } finally {
     cleanupKeyListener();
   }
@@ -759,7 +814,7 @@ async function waitForEmailVerification(client, sessionToken, email) {
  * @returns {Promise<Object>} Result with { success, key, activationResult }
  */
 async function activateProByAuth(client, sessionToken) {
-  const spinner = createSpinner('Validating Pro subscription...');
+  const spinner = createSpinner(t('proValidatingSubscription'));
   spinner.start();
 
   try {
@@ -786,26 +841,26 @@ async function activateProByAuth(client, sessionToken) {
 
     const activationResult = await client.activateByAuth(sessionToken, machineId, aiosCoreVersion);
 
-    spinner.succeed(`Pro subscription confirmed! License: ${maskLicenseKey(activationResult.key)}`);
+    spinner.succeed(tf('proSubscriptionConfirmed', { key: maskLicenseKey(activationResult.key) }));
     return { success: true, key: activationResult.key, activationResult };
   } catch (error) {
     if (error.code === 'NOT_A_BUYER') {
-      spinner.fail('No active Pro subscription found for this email.');
-      showInfo('Purchase Pro at https://pro.synkra.ai');
+      spinner.fail(t('proNoSubscription'));
+      showInfo(t('proPurchaseAt'));
       return { success: false, error: error.message };
     }
     if (error.code === 'SEAT_LIMIT_EXCEEDED') {
       spinner.fail(error.message);
-      showInfo('Deactivate another device or upgrade your license.');
+      showInfo(t('proSeatLimit'));
       return { success: false, error: error.message };
     }
     if (error.code === 'ALREADY_ACTIVATED') {
       // License already exists — treat as success (re-install scenario)
-      spinner.succeed('Pro license already activated for this account.');
+      spinner.succeed(t('proAlreadyActivated'));
       return { success: true, key: 'existing', activationResult: { reactivation: true } };
     }
 
-    spinner.fail(`Activation failed: ${error.message}`);
+    spinner.fail(tf('proActivationFailed', { message: error.message }));
     return { success: false, error: error.message };
   }
 }
@@ -823,14 +878,14 @@ async function stepLicenseGateWithKeyInteractive() {
       {
         type: 'password',
         name: 'licenseKey',
-        message: colors.primary('Enter your Pro license key:'),
+        message: colors.primary(t('proEnterKeyPrompt')),
         mask: '*',
         validate: (input) => {
           if (!input || !input.trim()) {
-            return 'License key is required';
+            return t('proKeyRequired');
           }
           if (!validateKeyFormat(input)) {
-            return 'Invalid format. Expected: PRO-XXXX-XXXX-XXXX-XXXX';
+            return t('proKeyInvalid');
           }
           return true;
         },
@@ -841,7 +896,7 @@ async function stepLicenseGateWithKeyInteractive() {
     const result = await validateKeyWithApi(key);
 
     if (result.success) {
-      showSuccess(`License validated: ${maskLicenseKey(key)}`);
+      showSuccess(tf('proKeyValidated', { key: maskLicenseKey(key) }));
       return { success: true, key, activationResult: result.data };
     }
 
@@ -867,17 +922,17 @@ async function stepLicenseGateWithKey(key) {
   if (!validateKeyFormat(key)) {
     return {
       success: false,
-      error: `Invalid key format: ${maskLicenseKey(key)}. Expected: PRO-XXXX-XXXX-XXXX-XXXX`,
+      error: tf('proInvalidKeyFormat', { key: maskLicenseKey(key) }),
     };
   }
 
-  const spinner = createSpinner(`Validating license ${maskLicenseKey(key)}...`);
+  const spinner = createSpinner(tf('proValidatingKey', { key: maskLicenseKey(key) }));
   spinner.start();
 
   const result = await validateKeyWithApi(key);
 
   if (result.success) {
-    spinner.succeed(`License validated: ${maskLicenseKey(key)}`);
+    spinner.succeed(tf('proKeyValidated', { key: maskLicenseKey(key) }));
     return { success: true, key, activationResult: result.data };
   }
 
@@ -899,7 +954,7 @@ async function validateKeyWithApi(key) {
   if (!licenseModule) {
     return {
       success: false,
-      error: 'Pro license module not available. Ensure @aios-fullstack/pro is installed.',
+      error: t('proModuleNotAvailable'),
     };
   }
 
@@ -913,7 +968,7 @@ async function validateKeyWithApi(key) {
     if (!online) {
       return {
         success: false,
-        error: 'License server is unreachable. Check your internet connection and try again.',
+        error: t('proServerUnreachable'),
       };
     }
 
@@ -944,27 +999,27 @@ async function validateKeyWithApi(key) {
   } catch (error) {
     // Handle specific error codes from license-api
     if (error.code === 'INVALID_KEY') {
-      return { success: false, error: 'Invalid license key.' };
+      return { success: false, error: t('proInvalidKey') };
     }
     if (error.code === 'EXPIRED_KEY') {
-      return { success: false, error: 'License key has expired.' };
+      return { success: false, error: t('proExpiredKey') };
     }
     if (error.code === 'SEAT_LIMIT_EXCEEDED') {
-      return { success: false, error: 'Maximum activations reached for this key.' };
+      return { success: false, error: t('proMaxActivations') };
     }
     if (error.code === 'RATE_LIMITED') {
-      return { success: false, error: 'Too many requests. Please wait and try again.' };
+      return { success: false, error: t('proRateLimited') };
     }
     if (error.code === 'NETWORK_ERROR') {
       return {
         success: false,
-        error: 'License server is unreachable. Check your internet connection and try again.',
+        error: t('proServerUnreachable'),
       };
     }
 
     return {
       success: false,
-      error: `License validation failed: ${error.message || 'Unknown error'}`,
+      error: tf('proValidationFailed', { message: error.message || 'Unknown error' }),
     };
   }
 }
@@ -977,7 +1032,7 @@ async function validateKeyWithApi(key) {
  * @returns {Promise<Object>} Result with { success, scaffoldResult }
  */
 async function stepInstallScaffold(targetDir, options = {}) {
-  showStep(2, 3, 'Pro Content Installation');
+  showStep(2, 3, t('proContentInstallation'));
 
   const path = require('path');
   const fs = require('fs');
@@ -988,20 +1043,20 @@ async function stepInstallScaffold(targetDir, options = {}) {
   // Step 2a: Ensure package.json exists (greenfield projects)
   const packageJsonPath = path.join(targetDir, 'package.json');
   if (!fs.existsSync(packageJsonPath)) {
-    const initSpinner = createSpinner('Initializing package.json...');
+    const initSpinner = createSpinner(t('proInitPackageJson'));
     initSpinner.start();
     try {
       execSync('npm init -y', { cwd: targetDir, stdio: 'pipe' });
-      initSpinner.succeed('package.json created');
+      initSpinner.succeed(t('proPackageJsonCreated'));
     } catch (err) {
-      initSpinner.fail('Failed to create package.json');
-      return { success: false, error: `npm init failed: ${err.message}` };
+      initSpinner.fail(t('proPackageJsonFailed'));
+      return { success: false, error: tf('proNpmInitFailed', { message: err.message }) };
     }
   }
 
   // Step 2b: Install @aios-fullstack/pro if not present
   if (!fs.existsSync(proSourceDir)) {
-    const installSpinner = createSpinner('Installing @aios-fullstack/pro...');
+    const installSpinner = createSpinner(t('proInstallingPackage'));
     installSpinner.start();
     try {
       execSync('npm install @aios-fullstack/pro', {
@@ -1009,12 +1064,12 @@ async function stepInstallScaffold(targetDir, options = {}) {
         stdio: 'pipe',
         timeout: 120000,
       });
-      installSpinner.succeed('Pro package installed');
+      installSpinner.succeed(t('proPackageInstalled'));
     } catch (err) {
-      installSpinner.fail('Failed to install Pro package');
+      installSpinner.fail(t('proPackageInstallFailed'));
       return {
         success: false,
-        error: `npm install @aios-fullstack/pro failed: ${err.message}. Try manually: npm install @aios-fullstack/pro`,
+        error: tf('proNpmInstallFailed', { message: err.message }),
       };
     }
 
@@ -1022,7 +1077,7 @@ async function stepInstallScaffold(targetDir, options = {}) {
     if (!fs.existsSync(proSourceDir)) {
       return {
         success: false,
-        error: 'Pro package not found after npm install. Check npm output.',
+        error: t('proPackageNotFound'),
       };
     }
   }
@@ -1031,25 +1086,25 @@ async function stepInstallScaffold(targetDir, options = {}) {
   const scaffolderModule = loadProScaffolder();
 
   if (!scaffolderModule) {
-    showWarning('Pro scaffolder not available. Ensure @aios-fullstack/pro is installed.');
-    return { success: false, error: 'Pro scaffolder module not found.' };
+    showWarning(t('proScaffolderNotAvailable'));
+    return { success: false, error: t('proScaffolderNotFound') };
   }
 
   const { scaffoldProContent } = scaffolderModule;
 
-  const spinner = createSpinner('Scaffolding pro content...');
+  const spinner = createSpinner(t('proScaffolding'));
   spinner.start();
 
   try {
     const scaffoldResult = await scaffoldProContent(targetDir, proSourceDir, {
       onProgress: (progress) => {
-        spinner.text = `Scaffolding: ${progress.message}`;
+        spinner.text = tf('proScaffoldingProgress', { message: progress.message });
       },
       force: options.force || false,
     });
 
     if (scaffoldResult.success) {
-      spinner.succeed(`Pro content installed (${scaffoldResult.copiedFiles.length} files)`);
+      spinner.succeed(tf('proContentInstalled', { count: scaffoldResult.copiedFiles.length }));
 
       if (scaffoldResult.warnings.length > 0) {
         for (const warning of scaffoldResult.warnings) {
@@ -1060,14 +1115,14 @@ async function stepInstallScaffold(targetDir, options = {}) {
       return { success: true, scaffoldResult };
     }
 
-    spinner.fail('Scaffolding failed');
+    spinner.fail(t('proScaffoldFailed'));
     for (const error of scaffoldResult.errors) {
       showError(error);
     }
 
     return { success: false, error: scaffoldResult.errors.join('; '), scaffoldResult };
   } catch (error) {
-    spinner.fail(`Scaffolding error: ${error.message}`);
+    spinner.fail(tf('proScaffoldError', { message: error.message }));
     return { success: false, error: error.message };
   }
 }
@@ -1079,7 +1134,7 @@ async function stepInstallScaffold(targetDir, options = {}) {
  * @returns {Promise<Object>} Verification result
  */
 async function stepVerify(scaffoldResult) {
-  showStep(3, 3, 'Verification');
+  showStep(3, 3, t('proVerification'));
 
   const result = {
     success: true,
@@ -1098,7 +1153,7 @@ async function stepVerify(scaffoldResult) {
       (f) => f.endsWith('.yaml') || f.endsWith('.json'),
     );
 
-    showInfo(`Files installed: ${files.length}`);
+    showInfo(tf('proFilesInstalled', { count: files.length }));
 
     if (result.squads.length > 0) {
       // Extract unique squad names
@@ -1107,11 +1162,11 @@ async function stepVerify(scaffoldResult) {
           .map((f) => f.split('/')[1])
           .filter(Boolean),
       )];
-      showSuccess(`Squads: ${squadNames.join(', ')}`);
+      showSuccess(tf('proSquads', { names: squadNames.join(', ') }));
     }
 
     if (result.configs.length > 0) {
-      showSuccess(`Configs: ${result.configs.length} files`);
+      showSuccess(tf('proConfigs', { count: result.configs.length }));
     }
   }
 
@@ -1126,7 +1181,7 @@ async function stepVerify(scaffoldResult) {
     result.features = available;
 
     if (available.length > 0) {
-      showSuccess(`Features unlocked: ${available.length}`);
+      showSuccess(tf('proFeaturesUnlocked', { count: available.length }));
       for (const feature of available.slice(0, 5)) {
         console.log(colors.dim(`    ${feature}`));
       }
@@ -1139,7 +1194,7 @@ async function stepVerify(scaffoldResult) {
   // Final status
   console.log('');
   console.log(gold('  ════════════════════════════════════════════════'));
-  console.log(status.celebrate('AIOS Pro installation complete!'));
+  console.log(status.celebrate(t('proInstallComplete')));
   console.log(gold('  ════════════════════════════════════════════════'));
   console.log('');
 
@@ -1177,6 +1232,48 @@ async function runProWizard(options = {}) {
     showProHeader();
   }
 
+  // Pre-check: If license module is not available (brownfield upgrade from older version),
+  // install @aios-fullstack/pro first to get the license API, then proceed with gate.
+  if (!loadLicenseApi()) {
+    const fs = require('fs');
+    const path = require('path');
+    const { execSync } = require('child_process');
+
+    showInfo(t('proModuleBootstrap'));
+
+    // Ensure package.json exists
+    const packageJsonPath = path.join(targetDir, 'package.json');
+    if (!fs.existsSync(packageJsonPath)) {
+      execSync('npm init -y', { cwd: targetDir, stdio: 'pipe' });
+    }
+
+    // Install @aios-fullstack/pro to get license module
+    const proDir = path.join(targetDir, 'node_modules', '@aios-fullstack', 'pro');
+    if (!fs.existsSync(proDir)) {
+      const installSpinner = createSpinner(t('proInstallingPackage'));
+      installSpinner.start();
+      try {
+        execSync('npm install @aios-fullstack/pro', {
+          cwd: targetDir,
+          stdio: 'pipe',
+          timeout: 120000,
+        });
+        installSpinner.succeed(t('proPackageInstalled'));
+      } catch (err) {
+        installSpinner.fail(t('proPackageInstallFailed'));
+        result.error = tf('proNpmInstallFailed', { message: err.message });
+        return result;
+      }
+    }
+
+    // Clear require cache so loadLicenseApi() picks up newly installed module
+    Object.keys(require.cache).forEach((key) => {
+      if (key.includes('license-api') || key.includes('@aios-fullstack')) {
+        delete require.cache[key];
+      }
+    });
+  }
+
   // Step 1: License Gate
   const licenseResult = await stepLicenseGate({
     key: options.key || process.env.AIOS_PRO_KEY,
@@ -1188,7 +1285,7 @@ async function runProWizard(options = {}) {
     showError(licenseResult.error);
 
     if (!isCI) {
-      showInfo('Need help? Run: npx aios-pro recover');
+      showInfo(t('proNeedHelp'));
     }
 
     result.error = licenseResult.error;
@@ -1240,9 +1337,11 @@ module.exports = {
     stepLicenseGateWithKey,
     stepLicenseGateWithKeyInteractive,
     stepLicenseGateWithEmail,
+    loadProModule,
     loadLicenseApi,
     loadFeatureGate,
     loadProScaffolder,
+    LICENSE_SERVER_URL,
     MAX_RETRIES,
     LICENSE_KEY_PATTERN,
     EMAIL_PATTERN,

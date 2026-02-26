@@ -543,3 +543,10 @@ metadata:
     - sdd-adoption
   inspiration: GitHub Spec-Kit 9-category taxonomy
 ```
+
+## Handoff
+next_agent: @architect
+next_command: *analyze-impact
+condition: Requirements gathered (requirements.json created)
+alternatives:
+  - agent: @pm, command: *write-spec, condition: SIMPLE complexity, skip assessment

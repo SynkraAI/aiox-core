@@ -3,7 +3,7 @@
  *
  * Verifies branch protection best practices.
  *
- * @module @synkra/aios-core/health-check/checks/repository/branch-protection
+ * @module aios-core/health-check/checks/repository/branch-protection
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

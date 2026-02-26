@@ -3,7 +3,7 @@
  *
  * Verifies Docker configuration if present.
  *
- * @module @synkra/aios-core/health-check/checks/deployment/docker-config
+ * @module aios-core/health-check/checks/deployment/docker-config
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

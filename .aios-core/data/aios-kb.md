@@ -86,7 +86,7 @@ AIOS transforms you into a "Vibe CEO" - directing a team of specialized AI agent
 
 ```bash
 # Interactive installation (recommended)
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 **Installation Steps**:
@@ -889,7 +889,7 @@ Squads extend AIOS-Method beyond traditional software development into ANY domai
 3. **Install via CLI**:
 
    ```bash
-   npx @synkra/aios-core install
+   npx aios-core install
    # Select "Install squad" option
    ```
 

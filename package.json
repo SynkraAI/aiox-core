@@ -1,11 +1,12 @@
 {
   "name": "aios-core",
-  "version": "4.2.13",
+  "version": "4.4.6",
   "description": "Synkra AIOS: AI-Orchestrated System for Full Stack Development - Core Framework",
   "bin": {
     "aios": "bin/aios.js",
     "aios-core": "bin/aios.js",
-    "aios-minimal": "bin/aios-minimal.js"
+    "aios-minimal": "bin/aios-minimal.js",
+    "aios-graph": "bin/aios-graph.js"
   },
   "preferGlobal": false,
   "workspaces": [
@@ -61,7 +62,8 @@
     "validate:semantic-lint": "node scripts/semantic-lint.js",
     "manifest:ensure": "node scripts/ensure-manifest.js",
     "sync:ide:cursor": "node .aios-core/infrastructure/scripts/ide-sync/index.js sync --ide cursor",
-    "prepublishOnly": "npm run generate:manifest && npm run validate:manifest",
+    "validate:publish": "node bin/utils/validate-publish.js",
+    "prepublishOnly": "node bin/utils/validate-publish.js && npm run generate:manifest && npm run validate:manifest",
     "prepare": "husky"
   },
   "dependencies": {
@@ -70,6 +72,7 @@
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "ansi-to-html": "^0.7.2",
+    "asciichart": "^1.5.25",
     "chalk": "^4.1.2",
     "chokidar": "^3.5.3",
     "cli-progress": "^3.12.0",

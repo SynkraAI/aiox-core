@@ -559,7 +559,7 @@ Execute **AFTER** all tasks are complete but **BEFORE** running the DOD checklis
 │  WHILE iteration < max_iterations:                           │
 │    ┌────────────────────────────────────────────────────┐   │
 │    │ 1. Run CodeRabbit CLI                              │   │
-│    │    wsl bash -c 'cd /mnt/c/.../@synkra/aios-core &&    │   │
+│    │    wsl bash -c 'cd /mnt/c/.../aios-core &&    │   │
 │    │    ~/.local/bin/coderabbit --prompt-only           │   │
 │    │    -t uncommitted'                                  │   │
 │    │                                                     │   │
@@ -914,3 +914,11 @@ Found 5 technical decisions needed.
 - **Decision Logs**: Persisted in `.ai/decision-log-{story-id}.md` for future reference and review
 - **Educational Value**: Interactive mode explanations help developers learn framework patterns
 - **Scope Drift Prevention**: Pre-flight mode eliminates mid-development ambiguity
+
+## Handoff
+next_agent: @qa
+next_command: *review {story-id}
+condition: Story status is Ready for Review
+alternatives:
+  - agent: @qa, command: *gate {story-id}, condition: Quick gate decision needed
+  - agent: @dev, command: *apply-qa-fixes, condition: Self-identified issues during dev

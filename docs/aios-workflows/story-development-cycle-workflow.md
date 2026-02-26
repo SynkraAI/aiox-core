@@ -739,7 +739,7 @@ cat docs/prd/PRD.md  # ou localizado conforme config
 **Solução:**
 ```bash
 # Verificar output do CodeRabbit
-wsl bash -c 'cd /mnt/c/.../@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
+wsl bash -c 'cd /mnt/c/.../aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
 
 # Corrigir issues manualmente
 # Depois re-executar *develop

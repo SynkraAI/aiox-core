@@ -217,7 +217,7 @@
 ### Estrutura Atual (v4)
 
 ```
-@synkra/aios-core/
+aios-core/
 ├── .aios-core/                    # Camada do Framework
 │   ├── core/                      # Módulo Core (fundação)
 │   │   ├── config/                # Gerenciamento de configuração

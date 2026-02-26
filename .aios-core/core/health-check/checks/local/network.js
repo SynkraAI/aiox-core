@@ -3,7 +3,7 @@
  *
  * Verifies network connectivity for development tools.
  *
- * @module @synkra/aios-core/health-check/checks/local/network
+ * @module aios-core/health-check/checks/local/network
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

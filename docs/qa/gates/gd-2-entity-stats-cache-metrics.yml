@@ -1,0 +1,64 @@
+schema: 1
+story: 'GD-2'
+story_title: 'Entity Stats e Cache Metrics ASCII'
+gate: PASS
+status_reason: 'All 7 ACs validated. 84 tests passing (41 new). Lint clean. CLI + pipe verified with real data. 3 non-blocking observations documented.'
+reviewer: 'Quinn (Test Architect)'
+updated: '2026-02-21T13:10:00.000Z'
+
+top_issues: []
+waiver: { active: false }
+
+quality_score: 95
+expires: '2026-03-07T13:10:00.000Z'
+
+evidence:
+  tests_reviewed: 41
+  risks_identified: 0
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 7]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: 'No user input processed unsafely. Read-only registry data. No file writes.'
+  performance:
+    status: PASS
+    notes: 'Max 10 data points for charts. 5s cache TTL. Synchronous YAML parse (existing pattern).'
+  reliability:
+    status: PASS
+    notes: 'Graceful offline fallback in MetricsSource. RegistrySource handles missing/corrupt registry. No crash paths.'
+  maintainability:
+    status: PASS
+    notes: 'Follows established CodeIntelSource pattern. JSDoc on all public functions. Private functions exported for testing.'
+
+observations:
+  - id: O1
+    severity: medium
+    category: code
+    description: '_renderLatencyChart TTY/non-TTY branches identical (dead code). asciichart uses UTF-8 box-drawing in both modes.'
+    recommendation: 'Collapse if/else to single block. Consider ASCII-only chart fallback in future story.'
+    suggested_owner: dev
+  - id: O2
+    severity: low
+    category: tests
+    description: 'cli.test.js missing --stats parseArgs and run tests. Coverage is indirect via module tests.'
+    recommendation: 'Add --stats integration test to cli.test.js.'
+    suggested_owner: dev
+  - id: O3
+    severity: low
+    category: code
+    description: 'ESLint warnings for unused args parameter in handleDeps/handleStats. Existing GD-1 pattern.'
+    recommendation: 'Rename to _args to suppress warnings.'
+    suggested_owner: dev
+
+recommendations:
+  immediate: []
+  future:
+    - action: 'Collapse _renderLatencyChart dead code branches (O1)'
+      refs: ['.aios-core/core/graph-dashboard/renderers/stats-renderer.js']
+    - action: 'Add --stats tests to cli.test.js (O2)'
+      refs: ['tests/graph-dashboard/cli.test.js']
+    - action: 'Rename unused args to _args in handlers (O3)'
+      refs: ['.aios-core/core/graph-dashboard/cli.js']

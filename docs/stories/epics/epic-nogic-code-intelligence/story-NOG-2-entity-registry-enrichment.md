@@ -3,7 +3,7 @@
 ## Metadata
 - **Story ID:** NOG-2
 - **Epic:** Code Intelligence Integration (Provider-Agnostic)
-- **Status:** Ready for Review
+- **Status:** Done
 - **Priority:** P0 - Blocker
 - **Points:** 5
 - **Agent:** @dev (Dex) + @aios-master
@@ -456,3 +456,6 @@ Implementacao solida que atende todos os 7 ACs com cobertura de testes adequada.
 | 2026-02-16 | @po (Pax) | v3.0 — Auto-fix: Executor Assignment, Story format, Risks, Definition of Done, Dev Notes (Source Tree, NOG-1 context, Registry Loader context, Testing cenarios), CodeRabbit Integration, Task-AC mapping with subtasks, Dev Agent Record/QA Results placeholders, sourceMtime clarification (fs.statSync on-the-fly), Task 10→11 refactored to concrete RegistryLoader adaptations |
 | 2026-02-16 | @po (Pax) | Status: Draft → Ready (validation GO 10/10, 8 issues auto-fixed) |
 | 2026-02-16 | @dev (Dex) | Implementation complete: all 12 tasks done, 20/20 tests passing, 92/92 code-intel suite passing. Status → Ready for Review |
+| 2026-02-16 | @qa (Quinn) | QA Review: CONCERNS (approved). 7/7 ACs passed. 4 LOW severity observations documented. |
+| 2026-02-16 | @devops (Gage) | PR #171 created, CodeRabbit 7 issues fixed, CI green. Merged to main (squash, commit c4b68ccf). |
+| 2026-02-16 | @po (Pax) | Story closed: Status → Done. Epic index updated. |

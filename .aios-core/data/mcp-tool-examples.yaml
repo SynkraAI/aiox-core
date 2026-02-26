@@ -1,0 +1,215 @@
+# =============================================================================
+# AIOS MCP Tool Examples Registry
+# =============================================================================
+# Input examples for MCP and agent tools to improve Claude's tool selection
+# accuracy. Research shows +18pp improvement (72% → 90%) with concrete examples.
+#
+# ADR-4: Client-layer injection (MCP spec doesn't support native input_examples)
+# ADR-5: Examples for always-loaded (Tier 1/2), Search for deferred (Tier 3)
+#         Exception: essential Tier 3 tools (nogic, code-graph) get examples
+#         because they are never disabled.
+#
+# Limits: max 3 examples per tool, max 200 tokens per example
+# Consumer: .claude/rules/tool-examples.md (client-layer injection)
+# Story: TOK-4B
+# =============================================================================
+
+version: 1.0.0
+
+metadata:
+  lastUpdated: '2026-02-23'
+  story: TOK-4B
+  adrs: [ADR-4, ADR-5]
+  limits:
+    maxExamplesPerTool: 3
+    maxTokensPerExample: 200
+
+tools:
+  # ---------------------------------------------------------------------------
+  # 1. context7 — Library documentation lookup (Tier 2, 6 profiles)
+  # ---------------------------------------------------------------------------
+  context7:
+    tier: 2
+    profiles: [dev, qa, architect, analyst, po, sm]
+    examples:
+      - description: "Look up React Server Components documentation"
+        input:
+          library: "react"
+          topic: "server components"
+        expected: "Returns up-to-date RSC documentation with usage patterns"
+      - description: "Get Supabase RLS policy documentation"
+        input:
+          library: "supabase"
+          topic: "row level security policies"
+        expected: "Returns RLS policy creation syntax and examples"
+      - description: "Find Jest testing framework API reference"
+        input:
+          library: "jest"
+          topic: "mock functions"
+        expected: "Returns jest.fn(), jest.mock() API with examples"
+
+  # ---------------------------------------------------------------------------
+  # 2. git — Version control operations (Tier 2, 5 profiles)
+  # ---------------------------------------------------------------------------
+  git:
+    tier: 2
+    profiles: [dev, qa, architect, devops, sm]
+    examples:
+      - description: "Check uncommitted changes before commit"
+        input:
+          command: "git diff --stat"
+        expected: "Shows file-level summary of all uncommitted changes"
+      - description: "View recent commit history with story references"
+        input:
+          command: "git log --oneline -10"
+        expected: "Shows last 10 commits with conventional commit messages"
+      - description: "Compare current branch against main"
+        input:
+          command: "git diff main...HEAD --stat"
+        expected: "Shows all files changed since branching from main"
+
+  # ---------------------------------------------------------------------------
+  # 3. coderabbit — Automated code review (Tier 2, 5 profiles)
+  # ---------------------------------------------------------------------------
+  coderabbit:
+    tier: 2
+    profiles: [dev, qa, architect, devops, data-engineer]
+    examples:
+      - description: "Pre-commit review of uncommitted changes"
+        input:
+          command: "wsl bash -c 'cd /mnt/c/.../aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'"
+          scope: uncommitted
+        expected: "Returns code review findings categorized by severity (CRITICAL/HIGH/MEDIUM/LOW)"
+      - description: "Full review against main branch for PR"
+        input:
+          command: "wsl bash -c 'cd /mnt/c/.../aios-core && ~/.local/bin/coderabbit --prompt-only --base main'"
+          scope: committed
+        expected: "Returns comprehensive review of all changes since main"
+
+  # ---------------------------------------------------------------------------
+  # 4. browser — Web testing and UI validation (Tier 2, 3 profiles)
+  # ---------------------------------------------------------------------------
+  browser:
+    tier: 2
+    profiles: [dev, qa, ux-design-expert]
+    examples:
+      - description: "Navigate to local development server"
+        input:
+          url: "http://localhost:3000"
+          action: "navigate"
+        expected: "Opens browser at localhost:3000, returns page content/screenshot"
+      - description: "Check for console errors on page"
+        input:
+          url: "http://localhost:3000/dashboard"
+          action: "console_check"
+        expected: "Returns any JavaScript errors or warnings from browser console"
+
+  # ---------------------------------------------------------------------------
+  # 5. supabase — Database operations (Tier 2, 2 profiles)
+  # ---------------------------------------------------------------------------
+  supabase:
+    tier: 2
+    profiles: [dev, qa]
+    examples:
+      - description: "Run database migration"
+        input:
+          command: "supabase db push"
+        expected: "Applies pending migrations to the database"
+      - description: "Check migration status"
+        input:
+          command: "supabase migration list"
+        expected: "Lists all migrations with applied/pending status"
+
+  # ---------------------------------------------------------------------------
+  # 6. exa — AI-powered web search (Tier 3, 2 profiles)
+  # ---------------------------------------------------------------------------
+  exa:
+    tier: 3
+    profiles: [architect, analyst]
+    note: "Tier 3 but included because 2 profiles use it frequently"
+    examples:
+      - description: "Research competitor features"
+        input:
+          query: "AI agent orchestration frameworks comparison 2026"
+          type: "keyword"
+        expected: "Returns relevant articles comparing AI agent frameworks"
+      - description: "Find technical documentation"
+        input:
+          query: "Anthropic tool use best practices input_examples"
+          type: "keyword"
+        expected: "Returns Anthropic documentation on tool use with examples"
+
+  # ---------------------------------------------------------------------------
+  # 7. github-cli — GitHub operations (Tier 2, 2 profiles)
+  # ---------------------------------------------------------------------------
+  github-cli:
+    tier: 2
+    profiles: [devops, po]
+    examples:
+      - description: "Create pull request with conventional title"
+        input:
+          command: "gh pr create --title 'feat: implement feature' --body '## Summary\\n...'"
+        expected: "Creates PR on GitHub with specified title and body"
+      - description: "List open issues with labels"
+        input:
+          command: "gh issue list --state open --label bug"
+        expected: "Returns list of open bug issues"
+      - description: "View PR review status"
+        input:
+          command: "gh pr view 123 --json reviews,statusCheckRollup"
+        expected: "Returns review decisions and CI status for PR #123"
+
+  # ---------------------------------------------------------------------------
+  # 8. nogic — Code intelligence (Tier 3, essential)
+  # ---------------------------------------------------------------------------
+  nogic:
+    tier: 3
+    essential: true
+    note: "Essential Tier 3 — never disabled, gets examples despite ADR-5"
+    examples:
+      - description: "Analyze code dependencies for a module"
+        input:
+          target: "packages/installer/src/index.js"
+          analysis: "dependencies"
+        expected: "Returns dependency graph and import chain for the module"
+      - description: "Find usage patterns for a function"
+        input:
+          target: "generateSettingsJson"
+          analysis: "usages"
+        expected: "Returns all files and locations where function is called"
+
+  # ---------------------------------------------------------------------------
+  # 9. code-graph — Dependency analysis (Tier 3, essential)
+  # ---------------------------------------------------------------------------
+  code-graph:
+    tier: 3
+    essential: true
+    note: "Essential Tier 3 — never disabled, gets examples despite ADR-5"
+    examples:
+      - description: "Generate dependency graph for package"
+        input:
+          scope: "packages/installer"
+          depth: 2
+        expected: "Returns dependency tree up to 2 levels deep"
+      - description: "Find circular dependencies"
+        input:
+          scope: "."
+          check: "circular"
+        expected: "Returns list of circular dependency chains if any"
+
+  # ---------------------------------------------------------------------------
+  # 10. docker-gateway — MCP infrastructure (Tier 2, 1 profile + infra)
+  # ---------------------------------------------------------------------------
+  docker-gateway:
+    tier: 2
+    profiles: [devops]
+    note: "Infrastructure critical — gateway for all Docker-based MCPs"
+    examples:
+      - description: "Check gateway health"
+        input:
+          command: "curl http://localhost:8080/health"
+        expected: "Returns gateway status and available MCP servers"
+      - description: "List enabled MCP servers"
+        input:
+          command: "docker mcp server ls"
+        expected: "Returns list of MCP servers with enabled/disabled status"

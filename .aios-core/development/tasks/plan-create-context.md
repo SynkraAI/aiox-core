@@ -272,6 +272,52 @@ scope_analysis:
         4. Note exemplar implementations
 ```
 
+### Step 3.5: Code Intelligence: Implementation Context (Optional — Auto-skip if unavailable)
+
+> **Condition:** Only execute if `isCodeIntelAvailable()` returns true.
+> If no code intelligence provider is available, skip this step silently and proceed to Step 4.
+
+When code intelligence is available, enrich the context with real symbol definitions, dependencies, and test references:
+
+```javascript
+const { isCodeIntelAvailable } = require('.aios-core/core/code-intel');
+const { getImplementationContext } = require('.aios-core/core/code-intel/helpers/planning-helper');
+
+if (isCodeIntelAvailable()) {
+  // Extract key symbols from story analysis (step 3)
+  const symbols = extractedComponents; // From step 3 scope analysis
+
+  const context = await getImplementationContext(symbols);
+
+  // Enrich files-context.yaml with:
+  // - context.definitions: exact file + line for each symbol definition
+  // - context.dependencies: dependency graph per symbol
+  // - context.relatedTests: test files referencing each symbol
+}
+```
+
+**If data is available, add to files-context.yaml:**
+
+```yaml
+codeIntelligence:
+  definitions:
+    - symbol: '{symbol}'
+      file: '{definition.file}'
+      line: {definition.line}
+  dependencies:
+    - symbol: '{symbol}'
+      deps: {dependency graph}
+  relatedTests:
+    - symbol: '{symbol}'
+      tests:
+        - file: '{test.file}'
+          line: {test.line}
+```
+
+> **Note:** Partial results are accepted — if findDefinition succeeds but analyzeDependencies fails for a symbol, the definition is still included.
+
+---
+
 ### Step 4: Generate Outputs
 
 ```yaml
@@ -666,7 +712,7 @@ errors:
 
 ```yaml
 project:
-  name: '@synkra/aios-core'
+  name: 'aios-core'
   version: '2.3.0'
   type: EXISTING_AIOS
 

@@ -5,14 +5,162 @@
   "description": "Read-only framework defaults shipped with the npm package",
   "type": "object",
   "properties": {
-    "version": {
-      "type": "string",
-      "description": "Framework version"
+    "metadata": {
+      "type": "object",
+      "description": "Framework metadata — name and version",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Framework display name"
+        },
+        "framework_version": {
+          "type": "string",
+          "description": "Semantic version of the framework"
+        }
+      },
+      "required": ["name", "framework_version"],
+      "additionalProperties": false
     },
-    "framework_name": {
-      "type": "string",
-      "description": "Framework name"
+    "markdownExploder": {
+      "type": "boolean",
+      "description": "Enable markdown exploder for document processing",
+      "default": true
+    },
+    "resource_locations": {
+      "type": "object",
+      "description": "Default paths for framework resources",
+      "properties": {
+        "agents_dir": { "type": "string", "description": "Path to agent definitions" },
+        "tasks_dir": { "type": "string", "description": "Path to task definitions" },
+        "templates_dir": { "type": "string", "description": "Path to templates" },
+        "checklists_dir": { "type": "string", "description": "Path to checklists" },
+        "tools_dir": { "type": "string", "description": "Path to tools" },
+        "scripts": {
+          "type": "object",
+          "description": "Script directory paths by category",
+          "properties": {
+            "core": { "type": "string" },
+            "development": { "type": "string" },
+            "infrastructure": { "type": "string" },
+            "legacy": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "data_dir": { "type": "string", "description": "Path to data directory" },
+        "elicitation_dir": { "type": "string", "description": "Path to elicitation templates" },
+        "squads_template_dir": { "type": "string", "description": "Path to squad templates" },
+        "minds_dir": { "type": "string", "description": "Path to minds output" }
+      },
+      "additionalProperties": false
+    },
+    "performance_defaults": {
+      "type": "object",
+      "description": "Default performance tuning options",
+      "properties": {
+        "lazy_loading": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean", "default": true },
+            "heavy_sections": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Config sections loaded lazily"
+            }
+          },
+          "additionalProperties": false
+        },
+        "git": {
+          "type": "object",
+          "properties": {
+            "show_config_warning": { "type": "boolean", "default": true },
+            "cache_time_seconds": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "utility_scripts_registry": {
+      "type": "object",
+      "description": "Registry of utility scripts by category",
+      "properties": {
+        "helpers": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Agent helper utility names"
+        },
+        "executors": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Task execution utility names"
+        },
+        "framework": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Framework-level utility names"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ide_sync_system": {
+      "type": "object",
+      "description": "IDE synchronization system for agent definitions",
+      "properties": {
+        "enabled": { "type": "boolean", "default": true },
+        "source": { "type": "string", "description": "Source directory for agent definitions" },
+        "targets": {
+          "type": "object",
+          "description": "IDE target configurations",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "enabled": { "type": "boolean" },
+              "path": { "type": "string" },
+              "format": { "type": "string", "enum": ["full-markdown-yaml", "condensed-rules", "cursor-style"] }
+            },
+            "additionalProperties": false
+          }
+        },
+        "redirects": { "type": "object", "additionalProperties": true },
+        "validation": {
+          "type": "object",
+          "properties": {
+            "strict_mode": { "type": "boolean" },
+            "fail_on_drift": { "type": "boolean" },
+            "fail_on_orphaned": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "template_overrides": {
+      "type": "object",
+      "description": "Template customization defaults (override at L2)",
+      "properties": {
+        "story": {
+          "type": "object",
+          "properties": {
+            "sections_order": {
+              "oneOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "description": "Custom section order for story templates. null = use template default.",
+              "default": null
+            },
+            "optional_sections": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Section IDs that can be skipped in story templates",
+              "default": []
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
   },
-  "additionalProperties": true
+  "additionalProperties": false
 }

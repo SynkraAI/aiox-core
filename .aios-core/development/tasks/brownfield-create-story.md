@@ -354,4 +354,11 @@ The story creation is successful when:
 - Always prioritize existing system integrity
 - When in doubt about integration complexity, use brownfield-create-epic instead
 - Stories should take no more than 4 hours of focused development work
+
+## Handoff
+next_agent: @po
+next_command: *validate-story-draft {story-id}
+condition: Brownfield story created from assessment
+alternatives:
+  - agent: @sm, command: *draft, condition: Need additional stories from same assessment
  

@@ -4,7 +4,7 @@
  * Manages file backups for self-healing operations.
  * Ensures safe rollback capability before any modifications.
  *
- * @module @synkra/aios-core/health-check/healers/backup-manager
+ * @module aios-core/health-check/healers/backup-manager
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

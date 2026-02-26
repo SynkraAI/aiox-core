@@ -3,7 +3,7 @@
  *
  * Detects and validates IDE/editor configuration.
  *
- * @module @synkra/aios-core/health-check/checks/local/ide-detection
+ * @module aios-core/health-check/checks/local/ide-detection
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

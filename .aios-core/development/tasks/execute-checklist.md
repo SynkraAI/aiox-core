@@ -299,3 +299,10 @@ The LLM will:
 - Execute the complete checklist validation
 - Present a final report with pass/fail rates and key findings
 - Offer to provide detailed analysis of any section, especially those with warnings or failures
+
+## Handoff
+next_agent: @qa
+next_command: *review {story-id}
+condition: Checklist completed with all items passing
+alternatives:
+  - agent: @dev, command: *develop {story-id}, condition: Checklist found blocking issues

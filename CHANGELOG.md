@@ -265,7 +265,7 @@ This release marks the **Open-Source Community Readiness** milestone, preparing 
 
 ### Technical
 - Story: 4.6 - Move Hybrid-Ops to Separate Repository
-- Breaking Change: hybrid-ops no longer bundled with @synkra/aios-core
+- Breaking Change: hybrid-ops no longer bundled with aios-core
 - Migration: Users can install from external repo to `squads/hybrid-ops/`
 - Story: 4.7 - Removed `squads/hybrid-ops.legacy/` directory (legacy backup no longer needed)
 - Story: 4.5.3 - Squads Naming Convention Migration
@@ -287,11 +287,11 @@ This release marks the **Open-Source Community Readiness** milestone, preparing 
 ### Fixed
 - NPX installation from temporary directory no longer attempts IDE detection
 - Clear error message guides users to correct installation directory
-- Prevents confusion when running `npx @synkra/aios-core install` from home directory
+- Prevents confusion when running `npx aios-core install` from home directory
 
 ### Changed
 - Early exit with `process.exit(1)` when NPX temporary context detected
-- Help message provides actionable solution: `cd /path/to/your/project && npx @synkra/aios-core install`
+- Help message provides actionable solution: `cd /path/to/your/project && npx aios-core install`
 
 ### Technical
 - Story: 2.3 - NPX Installation Context Detection & Help Text (macOS)

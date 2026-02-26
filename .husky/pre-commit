@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# Framework Guard — blocks commits to L1/L2 protected paths (Story BM-3)
+# Respects boundary.frameworkProtection toggle in core-config.yaml
+# Bypass: git commit --no-verify
+node bin/utils/framework-guard.js
+
 # Keep install-manifest.yaml synchronized whenever .aios-core files are committed.
 node scripts/ensure-manifest.js
-

@@ -4,7 +4,7 @@
  * Verifies Gemini CLI installation, authentication, and configuration.
  * Detects available features including Preview features, Extensions, and Hooks.
  *
- * @module @synkra/aios-core/health-check/checks/services/gemini-cli
+ * @module aios-core/health-check/checks/services/gemini-cli
  * @version 1.0.0
  * @story GEMINI-INT Story 1 - Gemini CLI Health Check & Detection
  */

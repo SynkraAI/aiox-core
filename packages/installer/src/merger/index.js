@@ -8,6 +8,7 @@
  * Supported file types:
  * - .env files: Key-based merge (adds new variables, preserves existing)
  * - .md files: Section-based merge using AIOS-MANAGED markers
+ * - .yaml/.yml files: Deep merge with target-wins (Phase 1 — Story INS-4.7)
  *
  * @module merger
  * @example
@@ -32,6 +33,7 @@ const {
   ReplaceMerger,
   EnvMerger,
   MarkdownMerger,
+  YamlMerger,
 } = require('./strategies/index.js');
 
 // Re-export types and utilities
@@ -62,6 +64,7 @@ module.exports = {
   ReplaceMerger,
   EnvMerger,
   MarkdownMerger,
+  YamlMerger,
 
   // Parsers
   parseEnvFile,

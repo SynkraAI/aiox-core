@@ -3,7 +3,7 @@
  *
  * Verifies sufficient memory is available.
  *
- * @module @synkra/aios-core/health-check/checks/local/memory
+ * @module aios-core/health-check/checks/local/memory
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

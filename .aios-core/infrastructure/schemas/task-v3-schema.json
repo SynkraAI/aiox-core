@@ -28,6 +28,12 @@
       "default": false,
       "description": "Whether task requires user interaction"
     },
+    "execution_mode": {
+      "type": "string",
+      "enum": ["direct", "programmatic"],
+      "default": "direct",
+      "description": "Execution mode: 'direct' (standard tool calls) or 'programmatic' (PTC/batch — consolidate N tool calls into single Bash block, per ADR-3 native tools only). Tasks without this field default to 'direct' (backward compatible)."
+    },
     "inputs": {
       "type": "object",
       "description": "Required inputs for task execution",

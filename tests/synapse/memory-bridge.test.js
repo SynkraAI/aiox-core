@@ -1,11 +1,12 @@
 /**
  * MemoryBridge Tests
  *
- * Tests for the feature-gated MIS consumer that provides
- * bracket-aware memory retrieval for the SYNAPSE engine.
+ * Tests for the MIS consumer that provides bracket-aware
+ * memory retrieval for the SYNAPSE engine.
  *
  * @module tests/synapse/memory-bridge
  * @story SYN-10 - Pro Memory Bridge (Feature-Gated MIS Consumer)
+ * @migrated INS-4.11 AC9 - Removed pro feature gate, uses open-source provider
  */
 
 jest.setTimeout(10000);
@@ -14,24 +15,15 @@ jest.setTimeout(10000);
 // Mocks
 // ---------------------------------------------------------------------------
 
-const mockFeatureGate = {
-  isAvailable: jest.fn(() => false),
-  require: jest.fn(),
-};
-
-jest.mock('../../pro/license/feature-gate', () => ({
-  featureGate: mockFeatureGate,
-}), { virtual: true });
-
 const mockGetMemories = jest.fn(() => Promise.resolve([]));
 const mockClearCache = jest.fn();
 
-jest.mock('../../pro/memory/synapse-memory-provider', () => ({
+jest.mock('../../.aios-core/core/synapse/memory/synapse-memory-provider', () => ({
   SynapseMemoryProvider: jest.fn().mockImplementation(() => ({
     getMemories: mockGetMemories,
     clearCache: mockClearCache,
   })),
-}), { virtual: true });
+}));
 
 // ---------------------------------------------------------------------------
 // Import (after mocks)
@@ -48,10 +40,8 @@ describe('MemoryBridge', () => {
 
   beforeEach(() => {
     bridge = new MemoryBridge();
-    mockFeatureGate.isAvailable.mockReset();
     mockGetMemories.mockReset();
     mockClearCache.mockReset();
-    mockFeatureGate.isAvailable.mockReturnValue(false);
     mockGetMemories.mockResolvedValue([]);
   });
 
@@ -78,7 +68,6 @@ describe('MemoryBridge', () => {
     });
 
     test('getMemoryHints returns array of hint objects', async () => {
-      mockFeatureGate.isAvailable.mockReturnValue(true);
       mockGetMemories.mockResolvedValue([
         { content: 'test hint', source: 'procedural', relevance: 0.8, tokens: 5 },
       ]);
@@ -95,18 +84,11 @@ describe('MemoryBridge', () => {
   });
 
   // -------------------------------------------------------------------------
-  // AC-2: Feature gate integration
+  // AC-2: Provider integration (no feature gate)
   // -------------------------------------------------------------------------
 
-  describe('feature gate', () => {
-    test('returns [] when feature is unavailable', async () => {
-      mockFeatureGate.isAvailable.mockReturnValue(false);
-      const hints = await bridge.getMemoryHints('dev', 'MODERATE', 100);
-      expect(hints).toEqual([]);
-    });
-
-    test('delegates to provider when feature is available', async () => {
-      mockFeatureGate.isAvailable.mockReturnValue(true);
+  describe('provider integration', () => {
+    test('delegates to provider for memory retrieval', async () => {
       mockGetMemories.mockResolvedValue([
         { content: 'hint 1', source: 'procedural', relevance: 0.9, tokens: 5 },
       ]);
@@ -115,12 +97,11 @@ describe('MemoryBridge', () => {
       expect(hints.length).toBeGreaterThan(0);
     });
 
-    test('feature gate check does not throw', async () => {
-      mockFeatureGate.isAvailable.mockImplementation(() => {
-        throw new Error('Gate error');
-      });
+    test('returns [] when provider is not available', async () => {
+      const b = new MemoryBridge();
+      b._getProvider = () => null;
 
-      const hints = await bridge.getMemoryHints('dev', 'MODERATE', 100);
+      const hints = await b.getMemoryHints('dev', 'MODERATE', 100);
       expect(hints).toEqual([]);
     });
   });
@@ -130,10 +111,6 @@ describe('MemoryBridge', () => {
   // -------------------------------------------------------------------------
 
   describe('bracket-aware retrieval', () => {
-    beforeEach(() => {
-      mockFeatureGate.isAvailable.mockReturnValue(true);
-    });
-
     test('FRESH bracket returns [] (no memory injection)', async () => {
       const hints = await bridge.getMemoryHints('dev', 'FRESH', 100);
       expect(hints).toEqual([]);
@@ -176,14 +153,12 @@ describe('MemoryBridge', () => {
     test('token budget respects bracket max even if caller budget is higher', async () => {
       mockGetMemories.mockResolvedValue([]);
       await bridge.getMemoryHints('dev', 'MODERATE', 9999);
-      // Should use bracket max (50), not caller budget (9999)
       expect(mockGetMemories).toHaveBeenCalledWith('dev', 'MODERATE', 50);
     });
 
     test('token budget uses caller budget when lower than bracket max', async () => {
       mockGetMemories.mockResolvedValue([]);
       await bridge.getMemoryHints('dev', 'CRITICAL', 500);
-      // Should use caller budget (500), not bracket max (1000)
       expect(mockGetMemories).toHaveBeenCalledWith('dev', 'CRITICAL', 500);
     });
   });
@@ -193,12 +168,7 @@ describe('MemoryBridge', () => {
   // -------------------------------------------------------------------------
 
   describe('timeout and error handling', () => {
-    beforeEach(() => {
-      mockFeatureGate.isAvailable.mockReturnValue(true);
-    });
-
     test('returns [] on provider timeout', async () => {
-      // Create a bridge with very short timeout
       const fastBridge = new MemoryBridge({ timeout: 1 });
       mockGetMemories.mockImplementation(() =>
         new Promise((resolve) => setTimeout(() => resolve([{ content: 'late', tokens: 5 }]), 100)),
@@ -216,12 +186,7 @@ describe('MemoryBridge', () => {
     });
 
     test('returns [] when provider constructor fails', async () => {
-      // Reset to trigger fresh provider load that fails
       bridge._reset();
-      bridge._initialized = true;
-      bridge._featureGate = mockFeatureGate;
-
-      // Force _getProvider to fail by clearing cache
       const origGet = bridge._getProvider;
       bridge._getProvider = () => null;
 
@@ -237,10 +202,6 @@ describe('MemoryBridge', () => {
   // -------------------------------------------------------------------------
 
   describe('token budget enforcement', () => {
-    beforeEach(() => {
-      mockFeatureGate.isAvailable.mockReturnValue(true);
-    });
-
     test('truncates hints that exceed budget', async () => {
       mockGetMemories.mockResolvedValue([
         { content: 'a'.repeat(100), source: 'p', relevance: 0.9, tokens: 25 },
@@ -277,11 +238,7 @@ describe('MemoryBridge', () => {
 
   describe('cache management', () => {
     test('clearCache delegates to provider', () => {
-      mockFeatureGate.isAvailable.mockReturnValue(true);
-      // Force init and provider load
-      bridge._init();
       bridge._getProvider();
-
       bridge.clearCache();
       expect(mockClearCache).toHaveBeenCalled();
     });
@@ -297,11 +254,10 @@ describe('MemoryBridge', () => {
 
   describe('_reset', () => {
     test('clears internal state', () => {
-      bridge._init();
+      bridge._getProvider();
       bridge._reset();
       expect(bridge._initialized).toBe(false);
       expect(bridge._provider).toBeNull();
-      expect(bridge._featureGate).toBeNull();
     });
   });
 });

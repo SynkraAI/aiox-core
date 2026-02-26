@@ -183,7 +183,7 @@ Para adicionar ou atualizar documentação de agentes:
 1. Siga a estrutura padrão descrita acima
 2. Inclua diagramas Mermaid atualizados
 3. Mantenha o changelog atualizado
-4. Crie traduções em EN e ES
+4. Crie traduções em EN, ES e ZH
 
 ---
 

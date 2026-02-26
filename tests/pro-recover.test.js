@@ -15,7 +15,7 @@ const { maskEmail, openBrowser, promptEmail, recoverLicense, RECOVERY_URL, RECOV
 
 describe('Recovery Constants', () => {
   test('RECOVERY_URL is the correct portal URL', () => {
-    expect(RECOVERY_URL).toBe('https://pro.synkra.ai/recover');
+    expect(RECOVERY_URL).toBe('https://aios-license-server.vercel.app/reset-password');
   });
 
   test('RECOVERY_MESSAGE is the anti-enumeration message', () => {
@@ -194,5 +194,30 @@ describe('recoverLicense', () => {
     const allOutput = logSpy.mock.calls.map(c => c[0]).join('\n');
     expect(allOutput).toContain('Could not open browser automatically');
     expect(allOutput).toContain(RECOVERY_URL);
+  });
+});
+
+// ─── CLI alias reset-password ───────────────────────────────────────────────
+
+describe('CLI alias reset-password', () => {
+  test('aios-pro.js switch handles reset-password same as recover', () => {
+    // Verify the CLI entry point has reset-password as a case that calls recoverLicense
+    const cliSource = require('fs').readFileSync(
+      require('path').join(__dirname, '../packages/aios-pro-cli/bin/aios-pro.js'),
+      'utf-8'
+    );
+    // Both cases should exist in the same switch block
+    expect(cliSource).toContain("case 'recover':");
+    expect(cliSource).toContain("case 'reset-password':");
+    // reset-password should be listed in help text
+    expect(cliSource).toContain('reset-password');
+  });
+
+  test('showHelp includes reset-password as alias for recover', () => {
+    const cliSource = require('fs').readFileSync(
+      require('path').join(__dirname, '../packages/aios-pro-cli/bin/aios-pro.js'),
+      'utf-8'
+    );
+    expect(cliSource).toMatch(/reset-password\s+.*alias/i);
   });
 });

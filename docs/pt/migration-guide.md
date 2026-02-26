@@ -85,7 +85,7 @@ cp -r .aios-core/tasks/custom ../backups/custom-tasks/
 
 ```bash
 # Registrar versão atual
-npm list @synkra/aios-core/core > ../backups/version-info.txt
+npm list aios-core/core > ../backups/version-info.txt
 
 # Listar arquivos personalizados
 find .aios-core -name "*.custom.*" -type f > ../backups/custom-files.txt
@@ -100,7 +100,7 @@ find .aios-core -name "*.custom.*" -type f > ../backups/custom-files.txt
 # Fechar todas as integrações de IDE e agentes ativos
 
 # 2. Atualizar para a versão mais recente
-npm install -g @synkra/aios-core@latest
+npm install -g aios-core@latest
 
 # 3. Executar comando de atualização
 aios upgrade
@@ -113,13 +113,13 @@ aios --version
 
 ```bash
 # 1. Remover instalação antiga
-npm uninstall -g @synkra/aios-core
+npm uninstall -g aios-core
 
 # 2. Limpar cache
 npm cache clean --force
 
 # 3. Instalar versão mais recente
-npm install -g @synkra/aios-core@latest
+npm install -g aios-core@latest
 
 # 4. Reinicializar projeto
 cd your-project
@@ -131,13 +131,13 @@ aios init --upgrade
 ```bash
 # Atualizar dependências do projeto
 cd your-project
-npm update @synkra/aios-core/core
+npm update aios-core/core
 
 # Reinstalar dependências
 npm install
 
 # Verificar atualização
-npm list @synkra/aios-core/core
+npm list aios-core/core
 ```
 
 ## Verificação Pós-Atualização
@@ -201,7 +201,7 @@ rm -rf current-project
 tar -xzf backups/aios-backup-YYYYMMDD-HHMMSS.tar.gz
 
 # Reinstalar versão anterior
-npm install -g @synkra/aios-core@<previous-version>
+npm install -g aios-core@<previous-version>
 
 # Verificar rollback
 aios --version
@@ -229,7 +229,7 @@ npm install
 npm cache clean --force
 
 # Tentar com log detalhado
-npm install -g @synkra/aios-core@latest --verbose
+npm install -g aios-core@latest --verbose
 
 # Verificar permissões do npm
 npm config get prefix

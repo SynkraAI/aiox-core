@@ -547,7 +547,8 @@ describe('createSession Permission Error Handling', () => {
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
     const originalWriteFileSync = fs.writeFileSync;
     jest.spyOn(fs, 'writeFileSync').mockImplementation((p, data, enc) => {
-      if (typeof p === 'string' && p.endsWith('.json') && p.includes('perm-create')) {
+      // atomicWriteSync writes to .tmp.{pid} first, so match both .json and .tmp paths
+      if (typeof p === 'string' && p.includes('perm-create')) {
         const err = new Error('EACCES');
         err.code = 'EACCES';
         throw err;

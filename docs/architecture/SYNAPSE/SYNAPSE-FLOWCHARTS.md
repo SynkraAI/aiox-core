@@ -717,11 +717,11 @@ aios-core/
 │   └── benchmarks/
 │       └── pipeline-benchmark.js          # Performance benchmarks
 │
+├── .aios-core/core/synapse/memory/
+│   └── synapse-memory-provider.js         # MIS provider for SYNAPSE (open-source, INS-4.11)
 └── pro/                                   # Pro submodule (proprietary)
-    ├── license/
-    │   └── feature-gate.js                # Feature gate for Pro
-    └── memory/
-        └── synapse-memory-provider.js     # MIS provider for SYNAPSE
+    └── license/
+        └── feature-gate.js                # Feature gate for Pro
 ```
 
 ---

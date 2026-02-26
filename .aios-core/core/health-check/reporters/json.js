@@ -4,7 +4,7 @@
  * Generates JSON-formatted health check reports.
  * Suitable for CI/CD integration, dashboards, and programmatic consumption.
  *
- * @module @synkra/aios-core/health-check/reporters/json
+ * @module aios-core/health-check/reporters/json
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

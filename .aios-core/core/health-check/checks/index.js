@@ -3,7 +3,7 @@
  *
  * Aggregates all domain checks for the health check system.
  *
- * @module @synkra/aios-core/health-check/checks
+ * @module aios-core/health-check/checks
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

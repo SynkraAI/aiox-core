@@ -703,7 +703,7 @@ $ aios workflow brownfield-integration --target=./existing-project
 ## Source Tree v4.2 (Current)
 
 ```
-@synkra/aios-core/                        # Root project
+aios-core/                        # Root project
 ├── .aios-core/                        # Framework layer
 │   ├── core/                          # Core module
 │   │   ├── config/                    # Configuration

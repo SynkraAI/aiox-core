@@ -79,12 +79,13 @@ sync-*.sh                     # Agent sync scripts
 
 # AI assistant files
 CLAUDE.md
-.claude
+.claude/*
 !.claude/commands/
 !.claude/commands/AIOS/
 !.claude/commands/AIOS/agents/
 !.claude/CLAUDE.md
 !.claude/rules/
+!.claude/settings.json
 .gemini
 !.gemini/
 !.gemini/rules/

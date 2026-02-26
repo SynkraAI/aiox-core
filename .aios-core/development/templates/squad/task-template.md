@@ -49,6 +49,27 @@ pre-conditions:
     error_message: "Error message if pre-condition fails"
 ```
 
+{{#IF CODE_INTEL_AVAILABLE}}
+## Code Intelligence Duplicate Check
+
+> Auto-check when code intelligence provider is available.
+> This step is advisory only — it never blocks task creation.
+> This section can be safely removed if not needed.
+
+Before proceeding, verify no similar task already exists:
+
+```javascript
+const { checkDuplicateArtefact } = require('.aios-core/core/code-intel/helpers/creation-helper');
+const result = await checkDuplicateArtefact('{{COMPONENTNAME}}', '{{DESCRIPTION}}');
+if (result) {
+  console.warn(result.warning);
+  // Advisory: "Similar task exists: {task-name}. Consider extending instead of creating."
+}
+```
+
+- **Duplicates Found:** {{DUPLICATE_WARNING}}
+{{/IF}}
+
 ## Execution Steps
 
 ### Step 1: Initialize

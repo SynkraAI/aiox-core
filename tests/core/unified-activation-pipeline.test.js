@@ -6,7 +6,7 @@
  * Tests:
  * - Each of 12 agents activates through unified pipeline
  * - Identical context structure for all agents
- * - Parallel loading of 5 loaders
+ * - Parallel loading of 4 loaders (NOG-18: projectStatus removed)
  * - Sequential steps with data dependencies
  * - Timeout protection and fallback behavior
  * - Backward compatibility (generate-greeting.js still works)
@@ -388,7 +388,7 @@ describe('UnifiedActivationPipeline', () => {
   // 3. Parallel Loading
   // -----------------------------------------------------------
   describe('parallel loading', () => {
-    it('should call all 5 loaders', async () => {
+    it('should call all 4 loaders (NOG-18: projectStatus removed)', async () => {
       await pipeline.activate('dev');
 
       // AgentConfigLoader called
@@ -397,8 +397,8 @@ describe('UnifiedActivationPipeline', () => {
       // SessionContextLoader called
       expect(SessionContextLoader).toHaveBeenCalled();
 
-      // ProjectStatusLoader called
-      expect(loadProjectStatus).toHaveBeenCalled();
+      // NOG-18: ProjectStatusLoader no longer called — gitStatus is native in Claude Code
+      // expect(loadProjectStatus).toHaveBeenCalled();
 
       // GitConfigDetector called
       expect(GitConfigDetector).toHaveBeenCalled();
@@ -407,15 +407,17 @@ describe('UnifiedActivationPipeline', () => {
       expect(PermissionMode).toHaveBeenCalled();
     });
 
-    it('should load all 5 loaders even if one is slow', async () => {
-      // Make one loader slow but still within timeout
-      loadProjectStatus.mockImplementation(() =>
-        new Promise(resolve => setTimeout(() => resolve(mockProjectStatus), 50)),
-      );
+    it('should load all 4 loaders even if one is slow (NOG-18: projectStatus removed)', async () => {
+      // Make sessionContext loader slow but still within timeout
+      SessionContextLoader.mockImplementation(() => ({
+        loadContext: jest.fn().mockImplementation(() =>
+          new Promise(resolve => setTimeout(() => resolve(mockSessionContext), 50)),
+        ),
+      }));
 
       const result = await pipeline.activate('dev');
       expect(result.greeting).toBeTruthy();
-      expect(result.context.projectStatus).toEqual(mockProjectStatus);
+      expect(result.context.session).toBeDefined();
     });
   });
 
@@ -534,9 +536,10 @@ describe('UnifiedActivationPipeline', () => {
       expect(result.context.sessionType).toBe('new');
     });
 
-    it('should include project status in context', async () => {
+    it('should include project status as null in context (NOG-18: removed)', async () => {
       const result = await pipeline.activate('dev');
-      expect(result.context.projectStatus).toEqual(mockProjectStatus);
+      // NOG-18: projectStatus loader removed — always null (gitStatus is native in Claude Code)
+      expect(result.context.projectStatus).toBeNull();
     });
 
     it('should include git config in context', async () => {
@@ -913,7 +916,8 @@ describe('UnifiedActivationPipeline', () => {
       expect(LOADER_TIERS.high.loaders).toContain('permissionMode');
       expect(LOADER_TIERS.high.loaders).toContain('gitConfig');
       expect(LOADER_TIERS.bestEffort.loaders).toContain('sessionContext');
-      expect(LOADER_TIERS.bestEffort.loaders).toContain('projectStatus');
+      // NOG-18: projectStatus removed from bestEffort tier
+      expect(LOADER_TIERS.bestEffort.loaders).not.toContain('projectStatus');
     });
 
     it('should return quality "full" when all loaders succeed', async () => {
@@ -973,14 +977,15 @@ describe('UnifiedActivationPipeline', () => {
       expect(result.metrics.loaders).toBeDefined();
     });
 
-    it('should record timing data for all 5 loaders', async () => {
+    it('should record timing data for all 4 loaders (NOG-18: projectStatus removed)', async () => {
       const result = await pipeline.activate('dev');
       const loaderNames = Object.keys(result.metrics.loaders);
       expect(loaderNames).toContain('agentConfig');
       expect(loaderNames).toContain('permissionMode');
       expect(loaderNames).toContain('gitConfig');
       expect(loaderNames).toContain('sessionContext');
-      expect(loaderNames).toContain('projectStatus');
+      // NOG-18: projectStatus no longer profiled
+      expect(loaderNames).not.toContain('projectStatus');
     });
 
     it('should record duration and status for each loader', async () => {
@@ -996,11 +1001,14 @@ describe('UnifiedActivationPipeline', () => {
     });
 
     it('should record error message on loader failure', async () => {
-      loadProjectStatus.mockRejectedValue(new Error('git status failed'));
+      // NOG-18: Use gitConfig loader instead of removed projectStatus
+      GitConfigDetector.mockImplementation(() => ({
+        get: jest.fn().mockImplementation(() => { throw new Error('git config failed'); }),
+      }));
       const freshPipeline = new UnifiedActivationPipeline();
       const result = await freshPipeline.activate('dev');
-      expect(result.metrics.loaders.projectStatus.status).toBe('error');
-      expect(result.metrics.loaders.projectStatus.error).toContain('git status failed');
+      expect(result.metrics.loaders.gitConfig.status).toBe('error');
+      expect(result.metrics.loaders.gitConfig.error).toContain('git config failed');
     });
   });
 
@@ -1124,13 +1132,11 @@ describe('UnifiedActivationPipeline', () => {
       expect(result.fallback).toBe(false);
     });
 
-    it('ProjectStatus slow → partial greeting (everything else present)', async () => {
-      loadProjectStatus.mockImplementation(() =>
-        new Promise((_, reject) => {
-          const id = setTimeout(() => reject(new Error('slow')), 300);
-          _pendingMockTimers.push(id);
-        }),
-      );
+    it('GitConfig slow → partial greeting (everything else present, NOG-18)', async () => {
+      // NOG-18: projectStatus removed; use gitConfig to trigger partial quality
+      GitConfigDetector.mockImplementation(() => ({
+        get: jest.fn().mockImplementation(() => { throw new Error('slow'); }),
+      }));
 
       const freshPipeline = new UnifiedActivationPipeline();
       const result = await freshPipeline.activate('dev');

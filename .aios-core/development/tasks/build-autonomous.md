@@ -190,3 +190,10 @@ The AutonomousBuildLoop emits these events for monitoring:
 ---
 
 _Task file for Story 8.1 - Coder Agent Loop_
+
+## Handoff
+next_agent: @qa
+next_command: *review {story-id}
+condition: Autonomous build completed successfully
+alternatives:
+  - agent: @dev, command: *build-resume {story-id}, condition: Build failed, needs resume

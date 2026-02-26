@@ -52,7 +52,7 @@ y este proyecto sigue [Versionado Semantico](https://semver.org/spec/v2.0.0.html
 
 ### Obsoleto
 
-- Proceso de instalacion manual (usar `npx @synkra/aios-core install` en su lugar)
+- Proceso de instalacion manual (usar `npx aios-core install` en su lugar)
 - Nombre de directorio `.legacy-core/` (migrado automaticamente)
 
 ### Seguridad
@@ -99,7 +99,7 @@ y este proyecto sigue [Versionado Semantico](https://semver.org/spec/v2.0.0.html
 **Actualizacion rapida:**
 
 ```bash
-npx @synkra/aios-core install --force-upgrade
+npx aios-core install --force-upgrade
 ```
 
 **Cambios clave:**

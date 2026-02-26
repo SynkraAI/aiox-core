@@ -3,7 +3,7 @@
  *
  * Verifies CI/CD configuration.
  *
- * @module @synkra/aios-core/health-check/checks/deployment/ci-config
+ * @module aios-core/health-check/checks/deployment/ci-config
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

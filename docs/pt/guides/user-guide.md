@@ -32,11 +32,11 @@ Antes de usar o AIOS, certifique-se de ter:
 
 ```bash
 # Novo projeto (Greenfield)
-npx @synkra/aios-core init my-project
+npx aios-core init my-project
 
 # Projeto existente (Brownfield)
 cd existing-project
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ### Primeiros Passos

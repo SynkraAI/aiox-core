@@ -1,0 +1,123 @@
+name: Bug Report
+description: Report a bug in aios-core
+title: "[Bug]: "
+labels: ["type: bug", "status: needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the information below to help us investigate.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe the bug...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Walk through the issue step-by-step.
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened.
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-output
+    attributes:
+      label: Error Output
+      description: Paste any error messages or stack traces.
+      render: bash
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected Area
+      options:
+        - "Core Framework (.aios-core/core/)"
+        - "Installer (packages/installer/)"
+        - "CLI (bin/, packages/aios-pro-cli/)"
+        - "SYNAPSE Context Engine"
+        - "Health Check System"
+        - "Pro Features"
+        - "Documentation"
+        - "CI/CD / GitHub Actions"
+        - "Other"
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: AIOS Version
+      description: "Run `npx aios-core info` to find your version."
+      placeholder: "e.g., 4.2.13"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - "Windows 11"
+        - "Windows 10"
+        - "macOS (Apple Silicon)"
+        - "macOS (Intel)"
+        - "Ubuntu / Debian"
+        - "Other Linux"
+    validations:
+      required: true
+
+  - type: input
+    id: node-version
+    attributes:
+      label: Node.js Version
+      placeholder: "e.g., 22.21.0"
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How critical is this bug for your use case?
+      options:
+        - "Critical - Blocking production use"
+        - "High - Significant impact on functionality"
+        - "Medium - Minor impact, workaround available"
+        - "Low - Enhancement or nice-to-have fix"
+      default: 2
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: "I have searched existing issues to avoid duplicates"
+          required: true
+        - label: "I have tested with the latest version"
+        - label: "I can consistently reproduce this issue"

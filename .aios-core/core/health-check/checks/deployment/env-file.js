@@ -3,7 +3,7 @@
  *
  * Verifies .env files are properly configured.
  *
- * @module @synkra/aios-core/health-check/checks/deployment/env-file
+ * @module aios-core/health-check/checks/deployment/env-file
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

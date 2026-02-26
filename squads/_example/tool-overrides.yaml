@@ -1,0 +1,55 @@
+# =============================================================================
+# Squad Tool Override — Example
+# =============================================================================
+# This file demonstrates how a squad can extend the base tool registry.
+# Place at: squads/{squad-name}/tool-overrides.yaml
+#
+# The override system uses a merge strategy:
+#   - profiles: merged by agent key (squad profiles extend/replace base)
+#   - tools: merged by tool name (squad tools extend/replace base)
+#   - task_bindings: merged by task name (squad bindings extend/replace base)
+#
+# Override does NOT remove base entries — it only adds or replaces.
+# =============================================================================
+
+extends: tool-registry
+
+overrides:
+  # Add or replace tool entries
+  tools:
+    custom-squad-tool:
+      tier: 3
+      layer: L4
+      defer: true
+      tokenCost: 300
+      category: squad-specific
+      keywords:
+        - custom
+        - squad
+      mcp_server: project
+      input_examples: null
+
+  # Add or replace agent profiles
+  profiles:
+    squad-specialist:
+      always_loaded:
+        - Read
+        - Write
+        - Edit
+        - Bash
+        - Grep
+        - Glob
+      frequently_used:
+        - custom-squad-tool
+      deferred: []
+
+  # Add or replace task bindings
+  task_bindings:
+    squad-custom-task:
+      required:
+        - Read
+        - Write
+        - custom-squad-tool
+      optional:
+        - context7
+      execution_mode: direct

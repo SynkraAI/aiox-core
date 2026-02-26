@@ -4,7 +4,7 @@
  * Generates Markdown-formatted health check reports.
  * Suitable for documentation, GitHub, and static site hosting.
  *
- * @module @synkra/aios-core/health-check/reporters/markdown
+ * @module aios-core/health-check/reporters/markdown
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

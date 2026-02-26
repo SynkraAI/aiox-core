@@ -4,7 +4,7 @@
  * Central registry for all health checks. Manages check registration,
  * lookup, and categorization by domain and severity.
  *
- * @module @synkra/aios-core/health-check/check-registry
+ * @module aios-core/health-check/check-registry
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

@@ -26,10 +26,10 @@ Before starting, ensure you have:
 
 ```bash
 # Run the interactive installation wizard
-npx @synkra/aios-core@latest
+npx aios-core@latest
 
 # Or create a new project with a specific name
-npx @synkra/aios-core@latest init my-project
+npx aios-core@latest init my-project
 cd my-project
 ```
 
@@ -48,7 +48,7 @@ npm install
 Run the diagnostics command:
 
 ```bash
-npx @synkra/aios-core@latest doctor
+npx aios-core@latest doctor
 ```
 
 Or if installed globally:
@@ -165,9 +165,9 @@ All agent commands use the `*` prefix:
 
 ```bash
 # Installation and setup
-npx @synkra/aios-core@latest           # Run wizard
-npx @synkra/aios-core@latest doctor    # Run diagnostics
-npx @synkra/aios-core@latest info      # Show system info
+npx aios-core@latest           # Run wizard
+npx aios-core@latest doctor    # Run diagnostics
+npx aios-core@latest info      # Show system info
 
 # Development
 npm run lint                           # Check code style
@@ -248,7 +248,7 @@ sudo chown -R $(whoami) ~/.npm
 
 ```bash
 # Reinstall AIOS in current project
-npx @synkra/aios-core@latest install
+npx aios-core@latest install
 
 # Or clone fresh
 git clone https://github.com/SynkraAI/aios-core.git

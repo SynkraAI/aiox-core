@@ -1,0 +1,648 @@
+# =============================================================================
+# AIOS Unified Tool Registry
+# =============================================================================
+# Single source of truth for tool loading decisions, enabling deferred loading
+# and intelligent tool selection across agents, tasks, and squads.
+#
+# Consumer Module:
+#   This registry is loaded by `.aios-core/core/registry/registry-loader.js`.
+#   Extend the existing loader to read `tool-registry.yaml` alongside
+#   `entity-registry.yaml`. Both follow the same L3 YAML conventions.
+#
+# Fallback Behavior:
+#   If this file is missing or malformed, the system MUST continue without
+#   degradation. Tools load via their original paths (.mcp.json, agent defs).
+#   The registry is an optimization layer, not a dependency.
+#
+# Migration Strategy:
+#   Incremental — registry starts with core tools and profiles. Additional
+#   tools (180+ tasks, squad-specific) are added progressively as TOK-2+
+#   stories land. Do NOT attempt to catalog all 207 tasks at once.
+#
+# Squad Override Pattern:
+#   Squads can extend this base registry via `squads/{name}/tool-overrides.yaml`.
+#   Override schema:
+#     extends: tool-registry           # base registry reference
+#     overrides:
+#       profiles:                      # add/replace agent profiles
+#         custom-agent:
+#           always_loaded: [...]
+#       tools:                         # add/replace tool entries
+#         custom-tool:
+#           tier: 3
+#           ...
+#       task_bindings:                 # add/replace task bindings
+#         custom-task:
+#           required: [...]
+#
+# ADR References:
+#   ADR-1: Registry at L3 (.aios-core/data/) — consistent with entity-registry
+#   ADR-2: 3-Tier Tool Mesh (Always/Deferred/External) aligned with L1-L4
+#   ADR-3: PTC native ONLY — MCP tools CANNOT be used in programmatic/batch
+#          code blocks. Only tools with ptc_eligible: true (Tier 1 native) are
+#          allowed. See: templates/ptc-*.md for enforcement patterns.
+#   ADR-5: Tool Search for discovery, Examples for accuracy (incompatible)
+#   ADR-7: Runtime detection flag — capabilities checked before activation
+# =============================================================================
+
+version: 1.0.0
+
+metadata:
+  lastUpdated: '2026-02-23'
+  runtimeDetection: true
+  layer: L3
+  description: Unified tool registry for AIOS token optimization
+  epic: epic-token-optimization
+  story: TOK-1
+
+# =============================================================================
+# TOOLS CATALOG
+# =============================================================================
+# Tier 1 (Always): Native Claude Code tools — always loaded, ~3K tokens
+# Tier 2 (Deferred): Agent commands, skills, project tools — loaded on activation
+# Tier 3 (Deferred): MCP tools via Docker Gateway or external — via tool_search
+# =============================================================================
+
+tools:
+  # ---------------------------------------------------------------------------
+  # TIER 1 — Native Claude Code Tools (Always Loaded)
+  # ---------------------------------------------------------------------------
+  Read:
+    tier: 1
+    layer: L1
+    defer: false
+    tokenCost: 200
+    category: file-operations
+    ptc_eligible: true
+  Write:
+    tier: 1
+    layer: L1
+    defer: false
+    tokenCost: 200
+    category: file-operations
+    ptc_eligible: true
+  Edit:
+    tier: 1
+    layer: L1
+    defer: false
+    tokenCost: 250
+    category: file-operations
+    ptc_eligible: true
+  Bash:
+    tier: 1
+    layer: L1
+    defer: false
+    tokenCost: 300
+    category: system
+    ptc_eligible: true
+  Grep:
+    tier: 1
+    layer: L1
+    defer: false
+    tokenCost: 200
+    category: search
+    ptc_eligible: true
+  Glob:
+    tier: 1
+    layer: L1
+    defer: false
+    tokenCost: 150
+    category: search
+    ptc_eligible: true
+  Task:
+    tier: 1
+    layer: L1
+    defer: false
+    tokenCost: 400
+    category: orchestration
+    ptc_eligible: true
+  Skill:
+    tier: 1
+    layer: L1
+    defer: false
+    tokenCost: 200
+    category: orchestration
+    ptc_eligible: true
+  WebSearch:
+    tier: 1
+    layer: L1
+    defer: false
+    tokenCost: 250
+    category: web
+    ptc_eligible: true
+  WebFetch:
+    tier: 1
+    layer: L1
+    defer: false
+    tokenCost: 250
+    category: web
+    ptc_eligible: true
+    filter:
+      type: content
+      max_tokens: 3000
+  NotebookEdit:
+    tier: 1
+    layer: L1
+    defer: false
+    tokenCost: 200
+    category: file-operations
+    ptc_eligible: true
+  AskUserQuestion:
+    tier: 1
+    layer: L1
+    defer: false
+    tokenCost: 300
+    category: interaction
+    ptc_eligible: true
+
+  # ---------------------------------------------------------------------------
+  # TIER 2 — Agent Commands & Skills (Deferred on Activation)
+  # ---------------------------------------------------------------------------
+  git:
+    tier: 2
+    layer: L2
+    defer: true
+    tokenCost: 100
+    category: version-control
+  github-cli:
+    tier: 2
+    layer: L2
+    defer: true
+    tokenCost: 150
+    category: version-control
+  coderabbit:
+    tier: 2
+    layer: L2
+    defer: true
+    tokenCost: 300
+    category: quality
+  context7:
+    tier: 2 # Hybrid: runs via MCP Docker Gateway but classified as Tier 2
+    # because it is agent-scoped (6 agents use it), not task-scoped.
+    # Future consumers (TOK-2 loader) should be aware it requires
+    # docker-gateway availability despite its Tier 2 classification.
+    layer: L2
+    defer: true
+    tokenCost: 200
+    category: documentation
+    keywords:
+      - library
+      - docs
+      - api-reference
+    mcp_server: docker-gateway
+    filter:
+      type: content
+      max_tokens: 5000
+  supabase:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 250
+    category: database
+  supabase-cli:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 200
+    category: database
+  browser:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 300
+    category: testing
+  clickup:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 200
+    category: project-management
+  n8n:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 200
+    category: automation
+  ffmpeg:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 150
+    category: media
+
+  # ---------------------------------------------------------------------------
+  # TIER 3 — MCP External Tools (Deferred via tool_search)
+  # ---------------------------------------------------------------------------
+  exa:
+    tier: 3
+    layer: L4
+    defer: true
+    essential: false # Task-specific: research, competitor analysis
+    tokenCost: 500
+    category: web-search
+    ptc_eligible: false  # ADR-3: MCP tools excluded from PTC/batch blocks
+    keywords:
+      - search
+      - research
+      - web
+      - competitor
+    mcp_server: docker-gateway
+    input_examples: null # Placeholder — populated by TOK-4B
+    filter:
+      type: content
+      max_tokens: 2000
+      extract:
+        - title
+        - snippet
+        - url
+  playwright:
+    tier: 3
+    layer: L4
+    defer: true
+    essential: false # Task-specific: browser automation, screenshots
+    tokenCost: 800
+    category: browser-automation
+    ptc_eligible: false  # ADR-3: MCP tools excluded from PTC/batch blocks
+    keywords:
+      - browser
+      - screenshot
+      - web-test
+      - automation
+      - website
+    mcp_server: direct
+    input_examples: null
+    filter:
+      type: schema
+      fields:
+        - url
+        - title
+        - status
+        - content
+      max_tokens: 4000
+  apify:
+    tier: 3
+    layer: L4
+    defer: true
+    essential: false # Task-specific: web scraping, social media
+    tokenCost: 600
+    category: web-scraping
+    ptc_eligible: false  # ADR-3: MCP tools excluded from PTC/batch blocks
+    keywords:
+      - scraping
+      - social-media
+      - data-extraction
+      - actors
+    mcp_server: docker-gateway
+    input_examples: null
+    filter:
+      type: field
+      fields:
+        - username
+        - caption
+        - likes
+        - timestamp
+        - url
+      max_rows: 20
+  nogic:
+    tier: 3
+    layer: L4
+    defer: true
+    essential: true # Core code intelligence — NEVER disable
+    tokenCost: 400
+    category: code-intelligence
+    ptc_eligible: false  # ADR-3: MCP tools excluded from PTC/batch blocks
+    keywords:
+      - code-analysis
+      - nogic
+      - intelligence
+    mcp_server: project
+    input_examples: null
+  code-graph:
+    tier: 3
+    layer: L4
+    defer: true
+    essential: true # Dependency analysis — NEVER disable
+    tokenCost: 400
+    category: code-intelligence
+    ptc_eligible: false  # ADR-3: MCP tools excluded from PTC/batch blocks
+    keywords:
+      - graph
+      - dependencies
+      - code-structure
+    mcp_server: project
+    input_examples: null
+
+  # ---------------------------------------------------------------------------
+  # TIER 2 — Specialized Agent Tools
+  # ---------------------------------------------------------------------------
+  psql:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 150
+    category: database
+  pg_dump:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 100
+    category: database
+  postgres-explain-analyzer:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 200
+    category: database
+  docker-gateway:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 300
+    category: infrastructure
+  railway-cli:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 150
+    category: deployment
+  google-workspace:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 300
+    category: productivity
+  21st-dev-magic:
+    tier: 2
+    layer: L3
+    defer: true
+    tokenCost: 200
+    category: design
+
+# =============================================================================
+# AGENT PROFILES
+# =============================================================================
+# Each profile defines which tools an agent needs by loading priority.
+# always_loaded: loaded at agent activation (Tier 1 + critical Tier 2)
+# frequently_used: loaded on first relevant task
+# deferred: loaded only via tool_search or explicit request
+# =============================================================================
+
+profiles:
+  dev:
+    always_loaded:
+      - Read
+      - Write
+      - Edit
+      - Bash
+      - Grep
+      - Glob
+      - Task
+      - git
+      - coderabbit
+    frequently_used:
+      - context7
+      - supabase
+      - browser
+      - WebSearch
+    deferred:
+      - n8n
+      - ffmpeg
+      - playwright
+      - exa
+
+  qa:
+    always_loaded:
+      - Read
+      - Grep
+      - Glob
+      - Bash
+      - git
+      - coderabbit
+    frequently_used:
+      - browser
+      - context7
+      - supabase
+      - WebSearch
+    deferred:
+      - playwright
+      - exa
+
+  architect:
+    always_loaded:
+      - Read
+      - Grep
+      - Glob
+      - WebSearch
+      - WebFetch
+      - Task
+    frequently_used:
+      - exa
+      - context7
+      - git
+      - coderabbit
+    deferred:
+      - supabase-cli
+      - railway-cli
+
+  analyst:
+    always_loaded:
+      - Read
+      - Grep
+      - Glob
+      - WebSearch
+      - WebFetch
+      - Task
+    frequently_used:
+      - exa
+      - context7
+    deferred:
+      - google-workspace
+
+  devops:
+    always_loaded:
+      - Bash
+      - Read
+      - Write
+      - Edit
+      - git
+      - github-cli
+    frequently_used:
+      - coderabbit
+      - docker-gateway
+    deferred:
+      - railway-cli
+
+  pm:
+    always_loaded:
+      - Read
+      - Write
+      - Edit
+      - Grep
+      - Glob
+      - Task
+    frequently_used:
+      - WebSearch
+      - WebFetch
+    deferred: []
+
+  po:
+    always_loaded:
+      - Read
+      - Write
+      - Edit
+      - Grep
+      - Glob
+    frequently_used:
+      - github-cli
+      - context7
+    deferred: []
+
+  sm:
+    always_loaded:
+      - Read
+      - Write
+      - Edit
+      - Grep
+      - Glob
+    frequently_used:
+      - git
+      - context7
+    deferred:
+      - clickup
+
+  data-engineer:
+    always_loaded:
+      - Read
+      - Write
+      - Edit
+      - Bash
+      - Grep
+      - Glob
+    frequently_used:
+      - supabase-cli
+      - psql
+      - coderabbit
+    deferred:
+      - pg_dump
+      - postgres-explain-analyzer
+
+  ux-design-expert:
+    always_loaded:
+      - Read
+      - Write
+      - Edit
+      - Grep
+      - Glob
+    frequently_used:
+      - browser
+      - 21st-dev-magic
+    deferred:
+      - playwright
+
+# =============================================================================
+# TASK BINDINGS
+# =============================================================================
+# Maps core tasks to their tool requirements.
+# required: tools that MUST be available
+# optional: tools that enhance but are not required
+# execution_mode: direct (standard) or programmatic (PTC — TOK-3)
+# =============================================================================
+
+task_bindings:
+  qa-gate:
+    required:
+      - Read
+      - Grep
+      - Glob
+      - Bash
+      - coderabbit
+    optional:
+      - browser
+      - supabase
+    execution_mode: programmatic  # TOK-3: batch lint+typecheck+test in single Bash block
+
+  dev-develop-story:
+    required:
+      - Read
+      - Write
+      - Edit
+      - Bash
+      - Grep
+      - Glob
+      - git
+    optional:
+      - coderabbit
+      - context7
+      - supabase
+      - browser
+    execution_mode: direct
+
+  plan-create-implementation:
+    required:
+      - Read
+      - Grep
+      - Glob
+      - Task
+    optional:
+      - WebSearch
+      - context7
+    execution_mode: direct
+
+  create-next-story:
+    required:
+      - Read
+      - Write
+      - Edit
+      - Grep
+      - Glob
+    optional:
+      - git
+      - context7
+    execution_mode: direct
+
+  validate-next-story:
+    required:
+      - Read
+      - Grep
+      - Glob
+    optional:
+      - github-cli
+      - context7
+    execution_mode: direct
+
+  # --- PTC-eligible bindings (TOK-3) ---
+  entity-validation:
+    required:
+      - Read
+      - Grep
+      - Glob
+      - Bash
+    optional: []
+    execution_mode: programmatic  # TOK-3: batch-scan N entities × M checks in single Bash block
+
+  research-aggregation:
+    required:
+      - Bash
+      - Read
+      - Grep
+      - WebSearch
+    optional:
+      - WebFetch
+    execution_mode: programmatic  # TOK-3: multi-search + filter in single Bash block
+
+# =============================================================================
+# ANALYTICS CONFIGURATION (TOK-5)
+# =============================================================================
+# Configurable thresholds for promote/demote recommendations.
+# These values are read by generate-optimization-report.js.
+# Adjust based on observed usage patterns.
+# =============================================================================
+
+analytics:
+  thresholds:
+    promote:
+      minUsesPerSession: 10   # Tool used >N times per session average
+      minSessions: 5          # Across M+ sessions to be statistically meaningful
+    demote:
+      maxUsesPerNSessions: 1  # Tool used <N times per window
+      sessionWindow: 5        # Window of M sessions for demote calculation

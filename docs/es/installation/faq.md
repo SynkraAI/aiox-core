@@ -31,7 +31,7 @@
 
 ### P1: ¿Por qué npx en lugar de npm install -g?
 
-**Respuesta:** Recomendamos `npx @synkra/aios-core install` en lugar de instalación global por varias razones:
+**Respuesta:** Recomendamos `npx aios-core install` en lugar de instalación global por varias razones:
 
 1. **Siempre la Última Versión**: npx obtiene la última versión automáticamente
 2. **Sin Contaminación Global**: No agrega a sus paquetes npm globales
@@ -42,8 +42,8 @@
 **Si prefiere instalación global:**
 
 ```bash
-npm install -g @synkra/aios-core
-@synkra/aios-core install
+npm install -g aios-core
+aios-core install
 ```
 
 ---
@@ -77,7 +77,7 @@ npm --version   # Debe ser 9+
 
 ```bash
 cd /path/to/existing-project
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 El instalador:
@@ -149,13 +149,13 @@ your-project/
 
 ```bash
 # Actualizar vía npx (recomendado)
-npx @synkra/aios-core update
+npx aios-core update
 
 # O reinstalar la última
-npx @synkra/aios-core install --force-upgrade
+npx aios-core install --force-upgrade
 
 # Verificar versión actual
-npx @synkra/aios-core status
+npx aios-core status
 ```
 
 **Qué se actualiza:**
@@ -178,15 +178,15 @@ npx @synkra/aios-core status
 
 | Tipo de Actualización          | Frecuencia   | Comando                     |
 | -------------------- | ----------- | --------------------------- |
-| **Parches de seguridad** | Inmediatamente | `npx @synkra/aios-core update` |
-| **Actualizaciones menores**    | Mensualmente     | `npx @synkra/aios-core update` |
+| **Parches de seguridad** | Inmediatamente | `npx aios-core update` |
+| **Actualizaciones menores**    | Mensualmente     | `npx aios-core update` |
 | **Versiones mayores**   | Trimestralmente   | Revise el changelog primero      |
 
 **Verificar actualizaciones:**
 
 ```bash
-npm show @synkra/aios-core version
-npx @synkra/aios-core status
+npm show aios-core version
+npx aios-core status
 ```
 
 ---
@@ -198,7 +198,7 @@ npx @synkra/aios-core status
 **Opción 1: Reinstalar versión específica**
 
 ```bash
-npx @synkra/aios-core@1.1.0 install --force-upgrade
+npx aios-core@1.1.0 install --force-upgrade
 ```
 
 **Opción 2: Usar Git para restaurar**
@@ -228,7 +228,7 @@ mv .aios-core.backup .aios-core
 
 ```bash
 # Instalar una vez con internet
-npx @synkra/aios-core install
+npx aios-core install
 
 # Empaquetar para uso offline
 tar -czvf aios-offline.tar.gz .aios-core/ .claude/ .cursor/
@@ -260,7 +260,7 @@ tar -xzvf aios-offline.tar.gz
 
    ```bash
    # Instalar y empaquetar
-   npx @synkra/aios-core install
+   npx aios-core install
    cd your-project
    tar -czvf aios-transfer.tar.gz .aios-core/ .claude/ .cursor/ docs/
    ```
@@ -331,7 +331,7 @@ git clone your-repo
 cd your-repo
 
 # Opcionalmente configurar su IDE preferido
-npx @synkra/aios-core install --ide cursor
+npx aios-core install --ide cursor
 ```
 
 Si `.aios-core/` no está commiteado:
@@ -339,7 +339,7 @@ Si `.aios-core/` no está commiteado:
 ```bash
 git clone your-repo
 cd your-repo
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 **Mejor práctica:** Commitear `.aios-core/` para compartir configuraciones de agentes consistentes.
@@ -395,7 +395,7 @@ npx @synkra/aios-core install
 3. **Agregar a la configuración del IDE:**
 
    ```bash
-   npx @synkra/aios-core install --ide claude-code
+   npx aios-core install --ide claude-code
    ```
 
 4. **Activar:** `/my-agent` o `@my-agent`
@@ -445,13 +445,13 @@ npx @synkra/aios-core install
 **Instalar un Squad:**
 
 ```bash
-npx @synkra/aios-core install --Squads hybrid-ops
+npx aios-core install --Squads hybrid-ops
 ```
 
 **Listar paquetes disponibles:**
 
 ```bash
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ---
@@ -509,7 +509,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "18"
-      - run: npx @synkra/aios-core install --full --ide claude-code
+      - run: npx aios-core install --full --ide claude-code
       - run: npm test
 ```
 
@@ -519,7 +519,7 @@ jobs:
 test:
   image: node:18
   script:
-    - npx @synkra/aios-core install --full
+    - npx aios-core install --full
     - npm test
 ```
 

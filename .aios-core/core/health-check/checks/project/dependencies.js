@@ -3,7 +3,7 @@
  *
  * Verifies that required dependencies are present and installed.
  *
- * @module @synkra/aios-core/health-check/checks/project/dependencies
+ * @module aios-core/health-check/checks/project/dependencies
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

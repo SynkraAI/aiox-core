@@ -271,10 +271,12 @@ describe('SynapseEngine', () => {
       expect(contextTracker.calculateBracket).toHaveBeenCalledWith(72);
     });
 
-    test('should call getActiveLayers with bracket', async () => {
+    test('should NOT call getActiveLayers in non-legacy mode (NOG-18)', async () => {
+      // NOG-18: In non-legacy mode, activeLayers = DEFAULT_ACTIVE_LAYERS [0,1,2]
+      // getActiveLayers is only called in SYNAPSE_LEGACY_MODE=true
       contextTracker.calculateBracket.mockReturnValue('MODERATE');
       await engine.process('test', {});
-      expect(contextTracker.getActiveLayers).toHaveBeenCalledWith('MODERATE');
+      expect(contextTracker.getActiveLayers).not.toHaveBeenCalled();
     });
 
     test('should call formatSynapseRules with correct args', async () => {
@@ -316,7 +318,9 @@ describe('SynapseEngine', () => {
       }
     });
 
-    test('should execute all L0-L7 in MODERATE bracket', async () => {
+    test('should only execute L0-L2 in non-legacy mode (NOG-18)', async () => {
+      // NOG-18: In non-legacy mode, only L0-L2 are active regardless of bracket.
+      // getActiveLayers mock is overridden by DEFAULT_ACTIVE_LAYERS = [0,1,2].
       contextTracker.getActiveLayers.mockReturnValue({
         layers: [0, 1, 2, 3, 4, 5, 6, 7],
         memoryHints: false,
@@ -324,8 +328,15 @@ describe('SynapseEngine', () => {
       });
 
       const result = await engine.process('test', { prompt_count: 30 });
-      // L0, L1, L2 should be loaded; L3 also since MODERATE allows it
-      expect(result.metrics.layers_loaded).toBeGreaterThanOrEqual(3);
+
+      // NOG-18: Only L0-L2 active — max 3 layers loaded
+      expect(result.metrics.layers_loaded).toBeLessThanOrEqual(3);
+
+      // Verify L3+ layers are skipped
+      const workflowEntry = result.metrics.per_layer.workflow;
+      if (workflowEntry) {
+        expect(workflowEntry.status).toBe('skipped');
+      }
     });
   });
 
@@ -473,6 +484,35 @@ describe('SynapseEngine', () => {
       await engine.process('test', { prompt_count: 50, active_agent: 'qa' });
 
       expect(mockGetMemoryHints).toHaveBeenCalledWith('qa', 'DEPLETED', 300);
+    });
+  });
+
+  describe('process() — bracket in return value (QW-1)', () => {
+    test('should return bracket field in result', async () => {
+      contextTracker.calculateBracket.mockReturnValue('FRESH');
+      const result = await engine.process('test', { prompt_count: 0 });
+      expect(result.bracket).toBe('FRESH');
+    });
+
+    test('should return MODERATE bracket when context is 55%', async () => {
+      contextTracker.estimateContextPercent.mockReturnValue(55);
+      contextTracker.calculateBracket.mockReturnValue('MODERATE');
+      const result = await engine.process('test', { prompt_count: 60 });
+      expect(result.bracket).toBe('MODERATE');
+    });
+
+    test('should return DEPLETED bracket when context is 30%', async () => {
+      contextTracker.estimateContextPercent.mockReturnValue(30);
+      contextTracker.calculateBracket.mockReturnValue('DEPLETED');
+      const result = await engine.process('test', { prompt_count: 100 });
+      expect(result.bracket).toBe('DEPLETED');
+    });
+
+    test('should return CRITICAL bracket when context is 10%', async () => {
+      contextTracker.estimateContextPercent.mockReturnValue(10);
+      contextTracker.calculateBracket.mockReturnValue('CRITICAL');
+      const result = await engine.process('test', { prompt_count: 120 });
+      expect(result.bracket).toBe('CRITICAL');
     });
   });
 

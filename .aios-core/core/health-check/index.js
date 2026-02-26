@@ -1,13 +1,20 @@
 /**
- * Health Check System - Main Entry Point
+ * Health Check System - Main Entry Point (HCS-2)
  *
  * Provides comprehensive health checking capabilities for AIOS projects.
  * Supports 5 domains: Project Coherence, Local Environment, Repository Health,
  * Deployment Environment, and Service Integration.
  *
- * @module @synkra/aios-core/health-check
+ * NOTE (INS-4.8): This is a SEPARATE system from `core/doctor/` (INS-4.1).
+ * The primary diagnostic interface is `aios doctor` (bin/aios.js → core/doctor/).
+ * The agent-facing task `*health-check` now delegates to `aios doctor --json`
+ * and no longer calls this module. This module is preserved for potential
+ * programmatic use but is NOT the primary health check mechanism.
+ *
+ * @module aios-core/health-check
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
+ * @see core/doctor/ for the primary diagnostic system (15 checks)
  */
 
 const HealthCheckEngine = require('./engine');

@@ -593,3 +593,11 @@ metadata:
     - quality-gate
     - qa
 ```
+
+## Handoff
+next_agent: @architect
+next_command: *plan
+condition: Critique verdict is APPROVED
+alternatives:
+  - agent: @pm, command: *write-spec, condition: Critique verdict is NEEDS_REVISION
+  - agent: @architect, command: *analyze-impact, condition: Critique verdict is BLOCKED

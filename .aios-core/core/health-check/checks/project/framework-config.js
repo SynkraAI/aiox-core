@@ -3,7 +3,7 @@
  *
  * Verifies that AIOS framework configuration files are present.
  *
- * @module @synkra/aios-core/health-check/checks/project/framework-config
+ * @module aios-core/health-check/checks/project/framework-config
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

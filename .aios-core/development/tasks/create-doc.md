@@ -250,6 +250,50 @@ If a YAML Template has not been provided, list all templates from .aios-core/pro
 
 **NEVER ask yes/no questions or use any other format.**
 
+## Code Intelligence: Codebase Intelligence Section (Optional — Auto-skip if unavailable)
+
+> **Condition:** Only execute if `isCodeIntelAvailable()` returns true AND the document being created is a PRD or architecture document.
+> If no code intelligence provider is available, skip this enhancement silently.
+
+When creating PRDs or architecture documents with code intelligence available, add a "Codebase Intelligence" section:
+
+```javascript
+const { isCodeIntelAvailable } = require('.aios-core/core/code-intel');
+const { getCodebaseOverview, getDependencyGraph } = require('.aios-core/core/code-intel/helpers/planning-helper');
+
+if (isCodeIntelAvailable()) {
+  const overview = await getCodebaseOverview('.');
+  const depGraph = await getDependencyGraph('.');
+
+  // Add optional section to generated document:
+  // - overview.codebase: project patterns, file groups, architecture
+  // - overview.stats: file counts, language distribution, LOC
+  // - depGraph.summary: { totalDeps, depth }
+}
+```
+
+**If data is available, append this section to the generated document:**
+
+```markdown
+## Codebase Intelligence
+
+> Auto-generated from code intelligence provider. Real codebase data, not estimates.
+
+### Project Overview
+{{overview.codebase summary — patterns, file groups, architecture}}
+
+### Statistics
+{{overview.stats — file counts, language distribution}}
+
+### Dependency Summary
+- **Total Dependencies:** {{depGraph.summary.totalDeps}}
+- **Dependency Depth:** {{depGraph.summary.depth}}
+```
+
+> **Note:** This section is optional and only appears when a code intelligence provider is available. The document is fully functional without it.
+
+---
+
 ## Processing Flow
 
 1. **Parse YAML template** - Load template metadata and sections

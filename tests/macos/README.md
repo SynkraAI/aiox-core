@@ -190,7 +190,7 @@ This is **expected behavior**.
 
 ```bash
 # Run tests from your home directory or user-writable location
-cd ~/path/to/@synkra/aios-core/tests/macos
+cd ~/path/to/aios-core/tests/macos
 ./run-all-tests.sh
 ```
 

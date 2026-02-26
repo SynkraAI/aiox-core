@@ -1,0 +1,55 @@
+storyId: NOG-14
+title: "ADR — Memory Self-Editing Security Model"
+type: Architecture Decision Record
+verdict: PASS
+qualityScore: 95
+reviewDate: "2026-02-21"
+reviewedBy: "Quinn (@qa)"
+model: "Claude Opus 4.6"
+
+dimensions:
+  threatModelCompleteness:
+    score: 18
+    maxScore: 20
+    notes: "4/4 threats documented with probability x impact. Minor gap: rate limit for valid writes not specified."
+  guardrailSpecification:
+    score: 20
+    maxScore: 20
+    notes: "All 6 guardrails (G1-G6) fully specified with schemas, thresholds, and rationale."
+  implementationGuidance:
+    score: 19
+    maxScore: 20
+    notes: "6-phase sequence, effort estimates, test strategy, SYNAPSE integration points. Minor: red team scope could be more detailed."
+  decisionMatrix:
+    score: 20
+    maxScore: 20
+    notes: "3 options compared (human-gated, auto, hybrid). Clear rationale for Option C. Escalation path defined."
+  securityDepth:
+    score: 18
+    maxScore: 20
+    notes: "Defense in depth. Constitution protection strong. Minor gaps: rate limit, base64 encoding, timing attacks (none blocking)."
+
+acCompliance:
+  AC1_ADR_Document: PASS
+  AC2_Guardrails_Defined: PASS
+  AC3_Implementation_Guidance: PASS
+  AC4_Decision_Matrix: PASS
+
+futureNotes:
+  - title: "Rate limit for valid writes"
+    severity: LOW
+    description: "Add max writes/session (e.g., 10/session) in STR-5 to prevent T2 even with writes that pass validation."
+  - title: "Base64 heuristic check"
+    severity: LOW
+    description: "Consider heuristic for content with high ratio of alphanumeric chars without spaces (encoding indicator)."
+  - title: "Red team playbook"
+    severity: LOW
+    description: "When STR-5 is implemented, create formal playbook with 20+ documented injection attempts."
+
+securityReview:
+  constitutionProtection: "STRONG — blocked fields include constitution and authority. L0 rules NON-NEGOTIABLE."
+  defenseInDepth: "STRONG — G1 (allowlist) + G2 (validation) + G4 (audit) provide layered defense."
+  recoverability: "STRONG — G3 (versioning) enables instant rollback. G6 (TTL) auto-expires stale entries."
+  multiAgentIsolation: "STRONG — per-agent field permissions in G1. Agent identity enforced in G4 audit."
+
+recommendation: "ADR is comprehensive, well-structured, and addresses all identified threats. Ready for @pm approval."

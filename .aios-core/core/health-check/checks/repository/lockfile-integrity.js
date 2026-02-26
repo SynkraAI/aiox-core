@@ -3,7 +3,7 @@
  *
  * Verifies package-lock.json integrity and sync with package.json.
  *
- * @module @synkra/aios-core/health-check/checks/repository/lockfile-integrity
+ * @module aios-core/health-check/checks/repository/lockfile-integrity
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

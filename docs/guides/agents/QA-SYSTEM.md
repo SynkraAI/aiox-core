@@ -375,10 +375,10 @@ coderabbit_integration:
 
 ```bash
 # Pre-review (uncommitted changes)
-wsl bash -c 'cd /mnt/c/.../@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
+wsl bash -c 'cd /mnt/c/.../aios-core && ~/.local/bin/coderabbit --prompt-only -t uncommitted'
 
 # Story review (committed changes vs main)
-wsl bash -c 'cd /mnt/c/.../@synkra/aios-core && ~/.local/bin/coderabbit --prompt-only -t committed --base main'
+wsl bash -c 'cd /mnt/c/.../aios-core && ~/.local/bin/coderabbit --prompt-only -t committed --base main'
 ```
 
 ### Fluxo de Self-Healing

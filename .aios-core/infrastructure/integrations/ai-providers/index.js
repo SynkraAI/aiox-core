@@ -3,7 +3,7 @@
  *
  * Exports all AI provider classes and factory functions.
  *
- * @module @synkra/aios-core/infrastructure/integrations/ai-providers
+ * @module aios-core/infrastructure/integrations/ai-providers
  * @see Epic GEMINI-INT - Story 2: AI Provider Factory Pattern
  */
 

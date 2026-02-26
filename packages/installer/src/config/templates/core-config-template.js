@@ -170,6 +170,31 @@ function generateCoreConfig(options = {}) {
       maxRecentCommits: 2,
     },
 
+    // Boundary Protection (Epic BM — Boundary Mapping)
+    // frameworkProtection: true enforces deny rules in settings.json for L1-L4 layers
+    boundary: {
+      frameworkProtection: true,
+      // L1/L2 paths — blocked from editing in project mode
+      protected: [
+        '.aios-core/core/**',
+        '.aios-core/development/tasks/**',
+        '.aios-core/development/templates/**',
+        '.aios-core/development/checklists/**',
+        '.aios-core/development/workflows/**',
+        '.aios-core/infrastructure/**',
+        '.aios-core/constitution.md',
+        'bin/aios.js',
+        'bin/aios-init.js',
+      ],
+      // L3 paths — mutable exceptions (allowed even within .aios-core/)
+      exceptions: [
+        '.aios-core/data/**',
+        '.aios-core/development/agents/*/MEMORY.md',
+        '.aios-core/core/config/schemas/**',
+        '.aios-core/core/config/template-overrides.js',
+      ],
+    },
+
     // Agent Identity Configuration
     agentIdentity: {
       greeting: {

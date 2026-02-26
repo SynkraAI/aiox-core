@@ -15,6 +15,7 @@ const {
   BRACKETS,
   TOKEN_BUDGETS,
   DEFAULTS,
+  XML_SAFETY_MULTIPLIER,
 } = require('../../.aios-core/core/synapse/context/context-tracker');
 
 // =============================================================================
@@ -111,42 +112,42 @@ describe('estimateContextPercent', () => {
     expect(estimateContextPercent(0)).toBe(100);
   });
 
-  test('should return 98.5% for 2 prompts with defaults (2*1500/200000)', () => {
-    // 100 - (2 * 1500 / 200000 * 100) = 100 - 1.5 = 98.5
-    expect(estimateContextPercent(2)).toBeCloseTo(98.5, 5);
+  test('should return 98.2% for 2 prompts with defaults (2*1500*1.2/200000)', () => {
+    // 100 - (2 * 1500 * 1.2 / 200000 * 100) = 100 - 1.8 = 98.2
+    expect(estimateContextPercent(2)).toBeCloseTo(98.2, 5);
   });
 
-  test('should return 77.5% for 30 prompts with defaults', () => {
-    // 100 - (30 * 1500 / 200000 * 100) = 100 - 22.5 = 77.5
-    expect(estimateContextPercent(30)).toBeCloseTo(77.5, 5);
+  test('should return 73% for 30 prompts with defaults', () => {
+    // 100 - (30 * 1500 * 1.2 / 200000 * 100) = 100 - 27 = 73
+    expect(estimateContextPercent(30)).toBeCloseTo(73, 5);
   });
 
-  test('should return 25% for 100 prompts with defaults', () => {
-    // 100 - (100 * 1500 / 200000 * 100) = 100 - 75 = 25
-    expect(estimateContextPercent(100)).toBeCloseTo(25, 5);
+  test('should return 10% for 100 prompts with defaults', () => {
+    // 100 - (100 * 1500 * 1.2 / 200000 * 100) = 100 - 90 = 10
+    expect(estimateContextPercent(100)).toBeCloseTo(10, 5);
   });
 
   test('should clamp to 0% when tokens exceed max context', () => {
-    // 200 prompts * 1500 = 300000 > 200000
+    // 200 prompts * 1500 * 1.2 = 360000 > 200000
     expect(estimateContextPercent(200)).toBe(0);
   });
 
   test('should support custom avgTokensPerPrompt', () => {
-    // 100 - (10 * 2000 / 200000 * 100) = 100 - 10 = 90
-    expect(estimateContextPercent(10, { avgTokensPerPrompt: 2000 })).toBeCloseTo(90, 5);
+    // 100 - (10 * 2000 * 1.2 / 200000 * 100) = 100 - 12 = 88
+    expect(estimateContextPercent(10, { avgTokensPerPrompt: 2000 })).toBeCloseTo(88, 5);
   });
 
   test('should support custom maxContext', () => {
-    // 100 - (10 * 1500 / 100000 * 100) = 100 - 15 = 85
-    expect(estimateContextPercent(10, { maxContext: 100000 })).toBeCloseTo(85, 5);
+    // 100 - (10 * 1500 * 1.2 / 100000 * 100) = 100 - 18 = 82
+    expect(estimateContextPercent(10, { maxContext: 100000 })).toBeCloseTo(82, 5);
   });
 
   test('should support both custom options', () => {
-    // 100 - (5 * 1000 / 50000 * 100) = 100 - 10 = 90
+    // 100 - (5 * 1000 * 1.2 / 50000 * 100) = 100 - 12 = 88
     expect(estimateContextPercent(5, {
       avgTokensPerPrompt: 1000,
       maxContext: 50000,
-    })).toBeCloseTo(90, 5);
+    })).toBeCloseTo(88, 5);
   });
 
   test('should return 100% for negative promptCount (graceful)', () => {
@@ -168,8 +169,8 @@ describe('estimateContextPercent', () => {
   });
 
   test('should return exactly 1 prompt worth of usage', () => {
-    // 100 - (1 * 1500 / 200000 * 100) = 100 - 0.75 = 99.25
-    expect(estimateContextPercent(1)).toBeCloseTo(99.25, 5);
+    // 100 - (1 * 1500 * 1.2 / 200000 * 100) = 100 - 0.9 = 99.1
+    expect(estimateContextPercent(1)).toBeCloseTo(99.1, 5);
   });
 });
 
@@ -372,25 +373,27 @@ describe('integration: estimate → bracket pipeline', () => {
     expect(calculateBracket(percent)).toBe('FRESH');
   });
 
-  test('should be FRESH at 30 prompts (77.5%)', () => {
-    const percent = estimateContextPercent(30);
+  test('should be FRESH at 25 prompts (77.5%) with 1.2x multiplier', () => {
+    // 100 - (25 * 1500 * 1.2 / 200000 * 100) = 100 - 22.5 = 77.5
+    const percent = estimateContextPercent(25);
     expect(calculateBracket(percent)).toBe('FRESH');
   });
 
-  test('should be MODERATE at 60 prompts (55%)', () => {
-    // 100 - (60 * 1500 / 200000 * 100) = 100 - 45 = 55
-    const percent = estimateContextPercent(60);
+  test('should be MODERATE at 50 prompts (55%) with 1.2x multiplier', () => {
+    // 100 - (50 * 1500 * 1.2 / 200000 * 100) = 100 - 45 = 55
+    const percent = estimateContextPercent(50);
     expect(calculateBracket(percent)).toBe('MODERATE');
   });
 
-  test('should be DEPLETED at 100 prompts (25%)', () => {
-    const percent = estimateContextPercent(100);
+  test('should be DEPLETED at 83 prompts (~25.3%) with 1.2x multiplier', () => {
+    // 100 - (83 * 1500 * 1.2 / 200000 * 100) = 100 - 74.7 = 25.3
+    const percent = estimateContextPercent(83);
     expect(calculateBracket(percent)).toBe('DEPLETED');
   });
 
-  test('should be CRITICAL at 120 prompts (10%)', () => {
-    // 100 - (120 * 1500 / 200000 * 100) = 100 - 90 = 10
-    const percent = estimateContextPercent(120);
+  test('should be CRITICAL at 100 prompts (10%) with 1.2x multiplier', () => {
+    // 100 - (100 * 1500 * 1.2 / 200000 * 100) = 100 - 90 = 10
+    const percent = estimateContextPercent(100);
     expect(calculateBracket(percent)).toBe('CRITICAL');
   });
 
@@ -398,6 +401,48 @@ describe('integration: estimate → bracket pipeline', () => {
     const percent = estimateContextPercent(200);
     expect(calculateBracket(percent)).toBe('CRITICAL');
     expect(percent).toBe(0);
+  });
+});
+
+// =============================================================================
+// XML_SAFETY_MULTIPLIER (QW-3 — NOG-10)
+// =============================================================================
+
+describe('XML_SAFETY_MULTIPLIER (QW-3)', () => {
+  test('should be 1.2', () => {
+    expect(XML_SAFETY_MULTIPLIER).toBe(1.2);
+  });
+
+  test('estimateContextPercent should apply 1.2x multiplier', () => {
+    // With multiplier: usedTokens = 2 * 1500 * 1.2 = 3600
+    // percent = 100 - (3600 / 200000 * 100) = 100 - 1.8 = 98.2
+    expect(estimateContextPercent(2)).toBeCloseTo(98.2, 5);
+  });
+
+  test('MODERATE bracket should be reached earlier with multiplier', () => {
+    // Without multiplier: 60 prompts = 55% (MODERATE)
+    // With 1.2x: 60 prompts → usedTokens = 60*1500*1.2 = 108000
+    // percent = 100 - (108000/200000*100) = 100 - 54 = 46% → still MODERATE
+    const percent60 = estimateContextPercent(60);
+    expect(calculateBracket(percent60)).toBe('MODERATE');
+
+    // With 1.2x: 50 prompts → usedTokens = 50*1500*1.2 = 90000
+    // percent = 100 - (90000/200000*100) = 100 - 45 = 55% → MODERATE
+    const percent50 = estimateContextPercent(50);
+    expect(calculateBracket(percent50)).toBe('MODERATE');
+  });
+
+  test('DEPLETED bracket should be reached earlier with multiplier', () => {
+    // With 1.2x: 80 prompts → usedTokens = 80*1500*1.2 = 144000
+    // percent = 100 - (144000/200000*100) = 100 - 72 = 28% → DEPLETED
+    const percent80 = estimateContextPercent(80);
+    expect(calculateBracket(percent80)).toBe('DEPLETED');
+  });
+
+  test('context exhaustion happens earlier with multiplier', () => {
+    // Without multiplier: 134 prompts = 0% (200000/1500 ≈ 133.3)
+    // With 1.2x: 200000 / (1500*1.2) ≈ 111.1 prompts to exhaust
+    expect(estimateContextPercent(112)).toBe(0); // Should be 0 (clamped)
   });
 });
 

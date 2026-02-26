@@ -1,10 +1,11 @@
 /**
  * SynapseMemoryProvider Tests
  *
- * Tests for the pro-gated MIS retrieval provider used by MemoryBridge.
+ * Tests for the open-source MIS retrieval provider used by MemoryBridge.
  *
  * @module tests/synapse/synapse-memory-provider
  * @story SYN-10 - Pro Memory Bridge (Feature-Gated MIS Consumer)
+ * @migrated INS-4.11 AC9 - Moved to open-source, removed feature gate
  */
 
 jest.setTimeout(10000);
@@ -13,91 +14,56 @@ jest.setTimeout(10000);
 // Mocks
 // ---------------------------------------------------------------------------
 
-const mockFeatureGate = {
-  isAvailable: jest.fn(() => true),
-  require: jest.fn(),
-};
-
-jest.mock('../../pro/license/feature-gate', () => ({
-  featureGate: mockFeatureGate,
-  FeatureGate: jest.fn(),
-}), { virtual: true });
-
 const mockQueryMemories = jest.fn(() => Promise.resolve([]));
 
 jest.mock('../../pro/memory/memory-loader', () => ({
   MemoryLoader: jest.fn().mockImplementation(() => ({
     queryMemories: mockQueryMemories,
   })),
-  AGENT_SECTOR_PREFERENCES: {
-    dev: ['procedural', 'semantic'],
-    qa: ['reflective', 'episodic'],
-    architect: ['semantic', 'reflective'],
-    pm: ['episodic', 'semantic'],
-    po: ['episodic', 'semantic'],
-    sm: ['procedural', 'episodic'],
-    devops: ['procedural', 'episodic'],
-    analyst: ['semantic', 'reflective'],
-    'data-engineer': ['procedural', 'semantic'],
-    'ux-design-expert': ['reflective', 'procedural'],
-  },
 }), { virtual: true });
 
 // ---------------------------------------------------------------------------
-// Import (after mocks) — skip entire suite if pro/ submodule is absent (CI)
+// Import (after mocks)
 // ---------------------------------------------------------------------------
 
-let SynapseMemoryProvider, BRACKET_CONFIG, DEFAULT_SECTORS;
-let proAvailable = true;
-
-try {
-  const mod = require('../../pro/memory/synapse-memory-provider');
-  SynapseMemoryProvider = mod.SynapseMemoryProvider;
-  BRACKET_CONFIG = mod.BRACKET_CONFIG;
-  DEFAULT_SECTORS = mod.DEFAULT_SECTORS;
-} catch {
-  proAvailable = false;
-}
-
-const describeIfPro = proAvailable ? describe : describe.skip;
+const {
+  SynapseMemoryProvider,
+  AGENT_SECTOR_PREFERENCES,
+  BRACKET_CONFIG,
+  DEFAULT_SECTORS,
+} = require('../../.aios-core/core/synapse/memory/synapse-memory-provider');
 
 // =============================================================================
 // SynapseMemoryProvider
 // =============================================================================
 
-describeIfPro('SynapseMemoryProvider', () => {
+describe('SynapseMemoryProvider', () => {
   let provider;
 
   beforeEach(() => {
-    mockFeatureGate.require.mockReset();
     mockQueryMemories.mockReset();
     mockQueryMemories.mockResolvedValue([]);
     provider = new SynapseMemoryProvider();
   });
 
   // -------------------------------------------------------------------------
-  // Construction + Feature Gate
+  // Construction
   // -------------------------------------------------------------------------
 
   describe('construction', () => {
-    test('requires pro.memory.synapse feature', () => {
-      new SynapseMemoryProvider();
-      expect(mockFeatureGate.require).toHaveBeenCalledWith(
-        'pro.memory.synapse',
-        'SYNAPSE Memory Bridge',
-      );
+    test('creates instance without feature gate', () => {
+      const p = new SynapseMemoryProvider();
+      expect(p).toBeDefined();
     });
 
-    test('throws when feature gate denies', () => {
-      mockFeatureGate.require.mockImplementation(() => {
-        throw new Error('Pro feature required');
-      });
-      expect(() => new SynapseMemoryProvider()).toThrow('Pro feature required');
+    test('accepts projectDir option', () => {
+      const p = new SynapseMemoryProvider({ projectDir: '/test' });
+      expect(p).toBeDefined();
     });
   });
 
   // -------------------------------------------------------------------------
-  // AC-4: Agent-scoped memory
+  // Agent-scoped memory
   // -------------------------------------------------------------------------
 
   describe('agent-scoped sector filtering', () => {
@@ -131,7 +97,7 @@ describeIfPro('SynapseMemoryProvider', () => {
   });
 
   // -------------------------------------------------------------------------
-  // AC-5: Session-level caching
+  // Session-level caching
   // -------------------------------------------------------------------------
 
   describe('session-level caching', () => {
@@ -266,13 +232,29 @@ describeIfPro('SynapseMemoryProvider', () => {
       expect(hints[0].content).toBe('Summary text');
     });
   });
+
+  // -------------------------------------------------------------------------
+  // Graceful degradation
+  // -------------------------------------------------------------------------
+
+  describe('graceful degradation', () => {
+    test('returns [] when loader is not available', async () => {
+      // Create a provider with a broken loader path
+      const p = new SynapseMemoryProvider();
+      // Force _getLoader to return null
+      p._getLoader = () => null;
+
+      const result = await p.getMemories('dev', 'MODERATE', 100);
+      expect(result).toEqual([]);
+    });
+  });
 });
 
 // =============================================================================
-// Constants
+// Constants & Exports
 // =============================================================================
 
-describeIfPro('module constants', () => {
+describe('module exports', () => {
   test('BRACKET_CONFIG has MODERATE, DEPLETED, CRITICAL', () => {
     expect(BRACKET_CONFIG).toHaveProperty('MODERATE');
     expect(BRACKET_CONFIG).toHaveProperty('DEPLETED');
@@ -281,5 +263,13 @@ describeIfPro('module constants', () => {
 
   test('DEFAULT_SECTORS is [semantic]', () => {
     expect(DEFAULT_SECTORS).toEqual(['semantic']);
+  });
+
+  test('AGENT_SECTOR_PREFERENCES has all 10 agents', () => {
+    expect(Object.keys(AGENT_SECTOR_PREFERENCES)).toHaveLength(10);
+    expect(AGENT_SECTOR_PREFERENCES).toHaveProperty('dev');
+    expect(AGENT_SECTOR_PREFERENCES).toHaveProperty('qa');
+    expect(AGENT_SECTOR_PREFERENCES).toHaveProperty('architect');
+    expect(AGENT_SECTOR_PREFERENCES).toHaveProperty('devops');
   });
 });

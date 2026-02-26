@@ -15,6 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { atomicWriteSync } = require('../synapse/utils/atomic-write');
 
 const SESSION_STATE_PATH = path.join(process.cwd(), '.aios', 'session-state.json');
 const SESSION_TTL = 60 * 60 * 1000; // 1 hour
@@ -173,12 +174,6 @@ class ContextDetector {
    */
   updateSessionState(state, sessionFilePath = SESSION_STATE_PATH) {
     try {
-      // Ensure directory exists
-      const dir = path.dirname(sessionFilePath);
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-      }
-
       const sessionData = {
         sessionId: state.sessionId || this._generateSessionId(),
         startTime: state.startTime || Date.now(),
@@ -191,7 +186,7 @@ class ContextDetector {
         currentStory: state.currentStory || null,
       };
 
-      fs.writeFileSync(sessionFilePath, JSON.stringify(sessionData, null, 2), 'utf8');
+      atomicWriteSync(sessionFilePath, JSON.stringify(sessionData, null, 2));
     } catch (error) {
       console.warn('[ContextDetector] Failed to update session state:', error.message);
     }

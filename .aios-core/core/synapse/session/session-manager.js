@@ -17,6 +17,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { atomicWriteSync } = require('../utils/atomic-write');
 
 const SCHEMA_VERSION = '2.0';
 const DEFAULT_MAX_AGE_HOURS = 24;
@@ -132,7 +133,7 @@ function createSession(sessionId, cwd, sessionsDir) {
   const filePath = resolveSessionFile(sessionId, dir);
 
   try {
-    fs.writeFileSync(filePath, JSON.stringify(session, null, 2), 'utf8');
+    atomicWriteSync(filePath, JSON.stringify(session, null, 2));
   } catch (error) {
     if (error.code === 'EACCES' || error.code === 'EPERM') {
       console.error(`[synapse:session] Error: Permission denied creating session ${sessionId}`);
@@ -227,7 +228,7 @@ function updateSession(sessionId, sessionsDir, updates) {
   const filePath = resolveSessionFile(sessionId, sessionsDir);
 
   try {
-    fs.writeFileSync(filePath, JSON.stringify(session, null, 2), 'utf8');
+    atomicWriteSync(filePath, JSON.stringify(session, null, 2));
   } catch (error) {
     if (error.code === 'EACCES' || error.code === 'EPERM') {
       console.error(`[synapse:session] Error: Permission denied writing session ${sessionId}`);

@@ -18,6 +18,8 @@ const {
   REPO_ROOT,
   REGISTRY_PATH,
 } = require(path.resolve(__dirname, '../../development/scripts/populate-entity-registry.js'));
+const { enrichRegistryEntry } = require(path.resolve(__dirname, '../code-intel/helpers/creation-helper'));
+const { classifyLayer } = require(path.resolve(__dirname, 'layer-classifier'));
 
 const LOCK_FILE = path.resolve(REPO_ROOT, '.aios-core/data/.entity-registry.lock');
 const BACKUP_DIR = path.resolve(REPO_ROOT, '.aios-core/data/registry-backups');
@@ -278,6 +280,10 @@ class RegistryUpdater {
 
         if (updated > 0) {
           this._resolveAllUsedBy(registry);
+
+          // NOG-8: Apply code intelligence enrichment AFTER resolveAllUsedBy
+          // so that code-intel usedBy data is merged on top of static graph
+          await this._applyCodeIntelEnrichments(registry);
           registry.metadata.lastUpdated = new Date().toISOString();
           registry.metadata.entityCount = this._countEntities(registry);
           this._writeRegistry(registry);
@@ -327,6 +333,7 @@ class RegistryUpdater {
 
     registry.entities[category][entityId] = {
       path: relPath,
+      layer: classifyLayer(relPath),
       type: config.type,
       purpose,
       keywords,
@@ -340,6 +347,11 @@ class RegistryUpdater {
       checksum,
       lastVerified: new Date().toISOString(),
     };
+
+    // NOG-8: Enrich with code intelligence data (advisory, never blocks registration)
+    this._pendingEnrichments = this._pendingEnrichments || [];
+    this._pendingEnrichments.push({ entityId, category, relPath });
+
     return true;
   }
 
@@ -424,6 +436,43 @@ class RegistryUpdater {
       }
     }
     return found;
+  }
+
+  // ─── Internal: Code Intelligence Enrichment (NOG-8) ────────────
+
+  /**
+   * Apply code intelligence enrichment to newly created entities.
+   * Advisory only — never blocks registration. Falls back gracefully.
+   * @param {Object} registry - Registry data
+   * @private
+   */
+  async _applyCodeIntelEnrichments(registry) {
+    const pending = this._pendingEnrichments || [];
+    this._pendingEnrichments = [];
+
+    for (const { entityId, category, relPath } of pending) {
+      try {
+        const entity = registry.entities[category]?.[entityId];
+        if (!entity) continue;
+
+        const enrichment = await enrichRegistryEntry(entityId, relPath);
+        if (!enrichment) continue;
+
+        // Pre-populate usedBy if code intel found references
+        if (enrichment.usedBy && enrichment.usedBy.length > 0) {
+          entity.usedBy = [...new Set([...(entity.usedBy || []), ...enrichment.usedBy])];
+        }
+
+        // Pre-populate dependencies if code intel found them
+        if (enrichment.dependencies && enrichment.dependencies.nodes && enrichment.dependencies.nodes.length > 0) {
+          const existingDeps = Array.isArray(entity.dependencies) ? entity.dependencies : [];
+          const newDeps = enrichment.dependencies.nodes.filter((n) => typeof n === 'string');
+          entity.dependencies = [...new Set([...existingDeps, ...newDeps])];
+        }
+      } catch {
+        // NOG-8 AC5: Fallback — enrichment failure never blocks registration
+      }
+    }
   }
 
   // ─── Internal: Registry I/O ──────────────────────────────────────

@@ -43,6 +43,13 @@ const TOKEN_BUDGETS = {
 };
 
 /**
+ * Safety multiplier for XML-heavy output (SYNAPSE rules).
+ * chars/4 underestimates by 15-25% on XML; 1.2x corrects this.
+ * @see NOG-9 research C6-token-budget.md
+ */
+const XML_SAFETY_MULTIPLIER = 1.2;
+
+/**
  * Default configuration values.
  */
 const DEFAULTS = {
@@ -114,7 +121,7 @@ function estimateContextPercent(promptCount, options = {}) {
     return 0;
   }
 
-  const usedTokens = promptCount * avgTokensPerPrompt;
+  const usedTokens = promptCount * avgTokensPerPrompt * XML_SAFETY_MULTIPLIER;
   const percent = 100 - (usedTokens / maxContext * 100);
   return Math.max(0, Math.min(100, percent));
 }
@@ -187,4 +194,5 @@ module.exports = {
   BRACKETS,
   TOKEN_BUDGETS,
   DEFAULTS,
+  XML_SAFETY_MULTIPLIER,
 };

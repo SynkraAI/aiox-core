@@ -1,0 +1,60 @@
+schema: 1
+story: 'NOG-20'
+story_title: 'Agent Frontmatter & Validation'
+gate: PASS
+status_reason: 'All 5 ACs fully met. Hook script rewritten with node -e (no jq dependency), fail-closed behavior verified. 6/6 hook test scenarios pass. Skills equalized across all 10 native agents. Zero regressions.'
+reviewer: 'Quinn (Test Architect)'
+updated: '2026-02-23T01:00:00Z'
+
+top_issues: []
+
+waiver:
+  active: false
+
+quality_score: 95
+expires: '2026-03-09T01:00:00Z'
+
+evidence:
+  tests_reviewed:
+    count: 6987
+    passing: 6796
+    failing: 31
+    skipped: 160
+    note: 'All failures pre-existing (pro-design-migration, worktree-manager) — zero regressions from NOG-20'
+  hook_tests:
+    count: 6
+    passing: 6
+    scenarios:
+      - 'git push origin main → DENY'
+      - 'git push --force → DENY'
+      - 'git status → ALLOW'
+      - 'git commit -m test → ALLOW'
+      - 'invalid JSON → DENY (fail-closed)'
+      - 'empty input → DENY (fail-closed)'
+  risks_identified:
+    count: 0
+  trace:
+    ac_covered: [1, 2, 3, 4, 5]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: 'Hook uses node -e for JSON parsing (cross-platform). Fail-closed: blocks on parse error. 6/6 scenarios verified.'
+  performance:
+    status: PASS
+    notes: 'Agent activation 3-5ms (target <50ms). No measurable overhead from hooks/skills.'
+  reliability:
+    status: PASS
+    notes: 'Fail-closed behavior confirmed: invalid JSON and empty input both result in DENY. No silent failures.'
+  maintainability:
+    status: PASS
+    notes: 'Consistent frontmatter across all agents. Skills equalized. Design decisions well-documented.'
+
+recommendations:
+  immediate: []
+  future:
+    - action: 'Deep skill analysis per agent/task (Story NOG-22 in backlog)'
+      refs: ['docs/stories/epics/epic-nogic-code-intelligence/story-NOG-22-agent-skill-discovery-mapping.md']
+    - action: 'Create MEMORY.md for remaining 6 agents (sm, analyst, data-engineer, ux, squad-creator, aios-master)'
+      refs: ['.aios-core/development/agents/']

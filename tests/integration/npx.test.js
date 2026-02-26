@@ -1,7 +1,7 @@
 // Integration/Performance test - uses describeIntegration
 /**
  * STORY-1.1: NPX Integration Tests
- * Tests for npx @synkra/aios-core@latest execution
+ * Tests for npx aios-core@latest execution
  */
 
 const { spawn } = require('child_process');
@@ -18,7 +18,7 @@ describeIntegration('npx Execution', () => {
 
       expect(packageJson.bin).toBeDefined();
       expect(packageJson.bin['aios']).toBe('./bin/aios.js');
-      expect(packageJson.bin['@synkra/aios-core']).toBe('./bin/aios.js');
+      expect(packageJson.bin['aios-core']).toBe('./bin/aios.js');
     });
 
     it('should have preferGlobal set to false', () => {
@@ -79,7 +79,7 @@ describeIntegration('npx Execution', () => {
       child.on('close', (code) => {
         expect(code).toBe(0);
         expect(output).toContain('USAGE');
-        expect(output).toContain('@synkra/aios-core');
+        expect(output).toContain('aios-core');
         done();
       });
     }, timeout);

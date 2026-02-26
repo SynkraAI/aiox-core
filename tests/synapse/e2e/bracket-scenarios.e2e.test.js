@@ -4,11 +4,12 @@
  * Tests all 4 context brackets (FRESH, MODERATE, DEPLETED, CRITICAL)
  * using REAL .synapse/ files from project root. No mocks.
  *
- * Context bracket formula: 100 - (promptCount * 1500 / 200000 * 100)
+ * Context bracket formula: 100 - (promptCount * 1500 * 1.2 / 200000 * 100)
+ *   (1.2x XML_SAFETY_MULTIPLIER applied since QW-3 / NOG-10)
  *   prompt_count=0   -> 100%    -> FRESH    (>= 60%)
- *   prompt_count=60  -> 55%     -> MODERATE (40-60%)
- *   prompt_count=90  -> 32.5%   -> DEPLETED (25-40%)
- *   prompt_count=120 -> 10%     -> CRITICAL (< 25%)
+ *   prompt_count=50  -> 55%     -> MODERATE (40-60%)
+ *   prompt_count=75  -> 32.5%   -> DEPLETED (25-40%)
+ *   prompt_count=100 -> 10%     -> CRITICAL (< 25%)
  */
 
 const path = require('path');
@@ -92,11 +93,11 @@ describeIfReady('SYNAPSE E2E: Bracket Scenarios', () => {
   // MODERATE bracket (prompt_count = 60 -> contextPercent = 55%)
   // -----------------------------------------------------------------------
 
-  describe('MODERATE bracket (prompt_count=60)', () => {
+  describe('MODERATE bracket (prompt_count=50)', () => {
     let result;
 
     beforeAll(async () => {
-      result = await engine.process('Continue working on the feature', makeSession(60));
+      result = await engine.process('Continue working on the feature', makeSession(50));
     });
 
     test('XML contains MODERATE bracket', () => {
@@ -122,11 +123,11 @@ describeIfReady('SYNAPSE E2E: Bracket Scenarios', () => {
   // DEPLETED bracket (prompt_count = 90 -> contextPercent = 32.5%)
   // -----------------------------------------------------------------------
 
-  describe('DEPLETED bracket (prompt_count=90)', () => {
+  describe('DEPLETED bracket (prompt_count=75)', () => {
     let result;
 
     beforeAll(async () => {
-      result = await engine.process('We need to wrap up soon', makeSession(90));
+      result = await engine.process('We need to wrap up soon', makeSession(75));
     });
 
     test('XML contains DEPLETED bracket', () => {
@@ -152,11 +153,11 @@ describeIfReady('SYNAPSE E2E: Bracket Scenarios', () => {
   // CRITICAL bracket (prompt_count = 120 -> contextPercent = 10%)
   // -----------------------------------------------------------------------
 
-  describe('CRITICAL bracket (prompt_count=120)', () => {
+  describe('CRITICAL bracket (prompt_count=100)', () => {
     let result;
 
     beforeAll(async () => {
-      result = await engine.process('Final prompt before handoff', makeSession(120));
+      result = await engine.process('Final prompt before handoff', makeSession(100));
     });
 
     test('XML contains CRITICAL bracket', () => {
@@ -176,7 +177,7 @@ describeIfReady('SYNAPSE E2E: Bracket Scenarios', () => {
   describe('Bracket transitions', () => {
     test('increasing prompt_count changes bracket in output', async () => {
       const brackets = [];
-      const promptCounts = [0, 60, 90, 120];
+      const promptCounts = [0, 50, 75, 100];
 
       for (const count of promptCounts) {
         const res = await engine.process(`Prompt at count ${count}`, makeSession(count));

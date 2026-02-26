@@ -16,7 +16,11 @@ describe('CodeIntelClient', () => {
 
   beforeEach(() => {
     mockMcpCallFn = jest.fn();
-    client = new CodeIntelClient({ mcpCallFn: mockMcpCallFn });
+    // Disable RegistryProvider to test MCP provider in isolation
+    client = new CodeIntelClient({
+      mcpCallFn: mockMcpCallFn,
+      registryPath: '/non/existent/registry.yaml',
+    });
   });
 
   describe('Provider Detection (AC3)', () => {
@@ -24,8 +28,10 @@ describe('CodeIntelClient', () => {
       expect(client.isCodeIntelAvailable()).toBe(true);
     });
 
-    it('should not detect provider when mcpCallFn is missing', () => {
-      const noProviderClient = new CodeIntelClient();
+    it('should not detect provider when mcpCallFn is missing and no registry', () => {
+      const noProviderClient = new CodeIntelClient({
+        registryPath: '/non/existent/registry.yaml',
+      });
       expect(noProviderClient.isCodeIntelAvailable()).toBe(false);
     });
   });
@@ -221,7 +227,9 @@ describe('CodeIntelClient', () => {
     });
 
     it('should return false when no provider configured', () => {
-      const bareClient = new CodeIntelClient();
+      const bareClient = new CodeIntelClient({
+        registryPath: '/non/existent/registry.yaml',
+      });
       expect(bareClient.isCodeIntelAvailable()).toBe(false);
     });
   });

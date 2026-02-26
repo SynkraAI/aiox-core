@@ -1,16 +1,17 @@
 /**
- * Memory Bridge — Feature-gated MIS consumer for SYNAPSE engine.
+ * Memory Bridge — MIS consumer for SYNAPSE engine.
  *
  * Connects SynapseEngine to the Memory Intelligence System (MIS)
- * via MemoryLoader API. Implements bracket-aware retrieval with
+ * via SynapseMemoryProvider. Implements bracket-aware retrieval with
  * agent-scoped sector filtering and token budget enforcement.
  *
  * Consumer-only: reads from MIS APIs, never modifies memory stores.
- * Graceful no-op when pro feature is unavailable.
+ * Graceful no-op when MIS module is not installed.
  *
  * @module core/synapse/memory/memory-bridge
- * @version 1.0.0
+ * @version 2.0.0
  * @created Story SYN-10 - Pro Memory Bridge (Feature-Gated MIS Consumer)
+ * @migrated Story INS-4.11 - Removed pro feature gate (AC9)
  */
 
 'use strict';
@@ -39,15 +40,15 @@ const BRACKET_LAYER_MAP = {
 const DEFAULT_SECTORS = ['semantic'];
 
 /**
- * MemoryBridge — Feature-gated MIS consumer.
+ * MemoryBridge — MIS consumer for SYNAPSE engine.
  *
  * Provides bracket-aware memory retrieval with:
- * - Feature gate check (sync, <1ms)
  * - Agent-scoped sector filtering
  * - Token budget enforcement
  * - Session-level caching
  * - Timeout protection (<15ms)
  * - Error catch-all with warn-and-proceed
+ * - Graceful no-op when MIS module is not installed
  */
 class MemoryBridge {
   /**
@@ -57,32 +58,12 @@ class MemoryBridge {
   constructor(options = {}) {
     this._timeout = options.timeout || BRIDGE_TIMEOUT_MS;
     this._provider = null;
-    this._featureGate = null;
     this._initialized = false;
   }
 
   /**
-   * Lazy-load feature gate and provider.
-   * Isolates pro dependency to runtime only.
-   *
-   * @private
-   */
-  _init() {
-    if (this._initialized) return;
-    this._initialized = true;
-
-    try {
-      const { featureGate } = require('../../../../pro/license/feature-gate');
-      this._featureGate = featureGate;
-    } catch {
-      // Pro not installed — feature gate unavailable
-      this._featureGate = null;
-    }
-  }
-
-  /**
-   * Lazy-load the SynapseMemoryProvider (pro).
-   * Only loaded when feature gate confirms availability.
+   * Lazy-load the SynapseMemoryProvider (open-source).
+   * Gracefully returns null if MIS dependencies are not available.
    *
    * @private
    * @returns {object|null} Provider instance or null
@@ -91,11 +72,11 @@ class MemoryBridge {
     if (this._provider) return this._provider;
 
     try {
-      const { SynapseMemoryProvider } = require('../../../../pro/memory/synapse-memory-provider');
+      const { SynapseMemoryProvider } = require('./synapse-memory-provider');
       this._provider = new SynapseMemoryProvider();
       return this._provider;
     } catch {
-      // Provider not available
+      // Provider or MIS not available — graceful degradation
       return null;
     }
   }
@@ -105,7 +86,7 @@ class MemoryBridge {
    *
    * Returns an array of memory hint objects suitable for injection
    * into the SYNAPSE pipeline. Gracefully returns [] when:
-   * - Pro feature is unavailable
+   * - MIS module is not installed
    * - Bracket is FRESH (no memory needed)
    * - Provider fails or times out
    * - Any error occurs
@@ -117,19 +98,13 @@ class MemoryBridge {
    */
   async getMemoryHints(agentId, bracket, tokenBudget) {
     try {
-      // 1. Feature gate check (sync, <1ms)
-      this._init();
-      if (!this._featureGate || !this._featureGate.isAvailable('pro.memory.synapse')) {
-        return [];
-      }
-
-      // 2. Bracket check — FRESH needs no memory
+      // 1. Bracket check — FRESH needs no memory
       const bracketConfig = BRACKET_LAYER_MAP[bracket];
       if (!bracketConfig || bracketConfig.layer === 0) {
         return [];
       }
 
-      // 3. Calculate effective token budget
+      // 2. Calculate effective token budget
       const effectiveBudget = Math.min(
         bracketConfig.maxTokens,
         tokenBudget > 0 ? tokenBudget : bracketConfig.maxTokens,
@@ -139,19 +114,19 @@ class MemoryBridge {
         return [];
       }
 
-      // 4. Load provider
+      // 3. Load provider
       const provider = this._getProvider();
       if (!provider) {
         return [];
       }
 
-      // 5. Execute with timeout protection
+      // 4. Execute with timeout protection
       const hints = await this._executeWithTimeout(
         () => provider.getMemories(agentId, bracket, effectiveBudget),
         this._timeout,
       );
 
-      // 6. Enforce token budget on results
+      // 5. Enforce token budget on results
       return this._enforceTokenBudget(hints || [], effectiveBudget);
     } catch (error) {
       // Catch-all: warn and proceed with empty results
@@ -233,7 +208,6 @@ class MemoryBridge {
    */
   _reset() {
     this._provider = null;
-    this._featureGate = null;
     this._initialized = false;
   }
 }

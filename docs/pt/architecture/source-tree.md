@@ -88,7 +88,7 @@ aios-core/                             # Raiz (projeto brownfield)
 │   └── squad/                         # Template de squad para extensões (veja docs/guides/squads-guide.md)
 │
 ├── bin/                               # Executáveis CLI
-│   ├── @synkra/aios-core.js              # Ponto de entrada principal da CLI
+│   ├── aios-core.js              # Ponto de entrada principal da CLI
 │   └── aios-minimal.js                # CLI mínima
 │
 ├── tools/                             # Ferramentas de build e utilitários

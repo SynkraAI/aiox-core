@@ -44,7 +44,7 @@ git commit -m "feat: add team collaboration mode"
 git push
 
 # ¡Eso es todo! La publicación sucede automáticamente
-# Los usuarios ahora pueden ejecutar: npx @synkra/aios-core (y obtener la nueva versión)
+# Los usuarios ahora pueden ejecutar: npx aios-core (y obtener la nueva versión)
 ```
 
 ### Commits Que NO Disparan Publicaciones

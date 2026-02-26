@@ -1,0 +1,48 @@
+# Agent Handoff Artifact Template
+# Story: TOK-4A — Agent Handoff Context Strategy
+# Purpose: Compact summary of previous agent's work for context-efficient agent switches.
+# Constraint: Filled artifact MUST be < 500 tokens.
+#
+# Usage: On agent switch (@agent command), the outgoing agent populates this template.
+#        The incoming agent receives: own full profile + this artifact (not previous agent's full persona).
+#
+# Reference: OpenAI Swarm handoff pattern, TOK-4A ACs 1-3
+
+handoff:
+  version: "1.0"
+  timestamp: ""           # ISO 8601 (e.g., 2026-02-23T17:00:00Z)
+  from_agent: ""          # Agent ID of outgoing agent (e.g., dev, qa, sm)
+  to_agent: ""            # Agent ID of incoming agent (e.g., qa, devops)
+
+  # What story/task is being worked on
+  story_context:
+    story_id: ""          # e.g., TOK-4A
+    story_path: ""        # e.g., docs/stories/epics/epic-token-optimization/story-TOK-4A-...md
+    story_status: ""      # e.g., In Progress, Ready for Review
+    current_task: ""      # e.g., Task 3: Integration point & limits
+    branch: ""            # e.g., feat/epic-token-optimization
+
+  # Key decisions made by outgoing agent (max 5)
+  decisions:
+    - ""                  # e.g., "Used CLAUDE.md instructions for compaction (not code module)"
+    # - ""
+
+  # Files created or modified by outgoing agent (max 10)
+  files_modified:
+    - ""                  # e.g., ".aios-core/development/templates/agent-handoff-tmpl.yaml"
+    # - ""
+
+  # Active blockers or issues (max 3)
+  blockers:
+    - ""                  # e.g., "NOG-18 not Done — Phase 2 SYNAPSE integration deferred"
+    # - ""
+
+  # What the incoming agent should do next (max 2 sentences)
+  next_action: ""         # e.g., "Run QA gate on TOK-4A. Verify handoff preserves story context."
+
+# --- Compaction Limits (AC 9) ---
+# Max artifact size: 500 tokens (~375 words)
+# Max retained summaries: 3 (oldest discarded on 4th switch)
+# Max decisions: 5
+# Max files_modified: 10
+# Max blockers: 3

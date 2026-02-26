@@ -4,7 +4,7 @@
  * Checks for project configuration coherence and structure.
  * Domain: project
  *
- * @module @synkra/aios-core/health-check/checks/project
+ * @module aios-core/health-check/checks/project
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

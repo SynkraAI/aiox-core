@@ -178,9 +178,9 @@ describe('validateConfig', () => {
       expect(warnings).toEqual([]);
     });
 
-    it('should return warning for invalid project_type enum', () => {
-      // Given
-      const data = { project_type: 'invalid_type' };
+    it('should return warning for invalid project.type enum', () => {
+      // Given — project.type is an enum field with additionalProperties: false
+      const data = { project: { type: 'invalid_type' } };
 
       // When
       const warnings = validateConfig('project', data, 'project-config.yaml');
@@ -275,20 +275,20 @@ describe('loadLayeredConfig', () => {
   });
 
   it('should collect schema validation warnings', () => {
-    // Given
+    // Given — framework-config uses valid schema properties to avoid L1 warnings
     const userConfigPath = path.join(FAKE_HOME, '.aios', 'user-config.yaml');
     setupFileSystem({
-      'framework-config.yaml': 'version: "1.0"',
+      'framework-config.yaml': 'markdownExploder: true',
       [userConfigPath]: 'default_model: claude-sonnet',  // missing required user_profile
     });
 
     // When
     const result = loadLayeredConfig(FAKE_PROJECT);
 
-    // Then
+    // Then — user config missing user_profile should produce a schema warning
     const schemaWarnings = result.warnings.filter((w) => w.includes('[SCHEMA]'));
     expect(schemaWarnings.length).toBeGreaterThan(0);
-    expect(schemaWarnings[0]).toContain('user_profile');
+    expect(schemaWarnings.some((w) => w.includes('user_profile'))).toBe(true);
   });
 
   it('should return empty config when no files exist', () => {

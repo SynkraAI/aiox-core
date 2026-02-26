@@ -12,14 +12,14 @@ Synkra AIOS can be installed via NPX for quick setup without global installation
 
 ### Correct Usage
 
-Always run `npx @synkra/aios-core install` **from your project directory**:
+Always run `npx aios-core install` **from your project directory**:
 
 ```bash
 # Navigate to your project first
 cd /path/to/your/project
 
 # Then run the installer
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ### ⚠️ Common Mistake
@@ -29,11 +29,11 @@ npx @synkra/aios-core install
 ```bash
 # ❌ INCORRECT - Will fail with NPX temporary directory error
 cd ~
-npx @synkra/aios-core install
+npx aios-core install
 
 # ✅ CORRECT - Navigate to project first
 cd ~/my-project
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ## Why This Matters
@@ -56,9 +56,9 @@ AIOS from detecting your IDE correctly.
 
 Solution:
   cd /path/to/your/project
-  npx @synkra/aios-core install
+  npx aios-core install
 
-See: https://@synkra/aios-core.dev/docs/npx-install
+See: https://aios-core.dev/docs/npx-install
 ```
 
 ## Installation Steps
@@ -76,7 +76,7 @@ Your project directory should contain:
 ### Step 2: Run Installer
 
 ```bash
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ### Step 3: Follow Interactive Prompts
@@ -122,7 +122,7 @@ Windows users typically don't encounter this issue, but similar detection patter
    ```
 2. Re-run the installer:
    ```bash
-   npx @synkra/aios-core install
+   npx aios-core install
    ```
 
 ### Wrong Installation Directory
@@ -143,9 +143,9 @@ If your IDE isn't detected after installation:
 If you prefer not to use NPX, you can install globally:
 
 ```bash
-npm install -g @synkra/aios-core
+npm install -g aios-core
 cd /path/to/your/project
-@synkra/aios-core install
+aios-core install
 ```
 
 ## Technical Details
@@ -176,8 +176,8 @@ const patterns = [
 ## Support
 
 For additional help:
-- GitHub Issues: https://github.com/SynkraAIinc/@synkra/aios-core/issues
-- Documentation: https://@synkra/aios-core.dev/docs
+- GitHub Issues: https://github.com/SynkraAIinc/aios-core/issues
+- Documentation: https://aios-core.dev/docs
 - Story Reference: 2.3 - NPX Installation Context Detection
 
 ---

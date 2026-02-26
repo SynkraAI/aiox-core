@@ -63,7 +63,7 @@ body:
       render: javascript
       placeholder: |
         // Your code here
-        const { AIOS } = require('@synkra/aios-core/workspace');
+        const { AIOS } = require('aios-core/workspace');
 
         // ...
 

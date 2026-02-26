@@ -10,6 +10,7 @@
 const inquirer = require('inquirer');
 const path = require('path');
 const fse = require('fs-extra');
+const { execSync } = require('child_process');
 const { colors } = require('../utils/aios-colors');
 const {
   getLanguageQuestion,
@@ -21,13 +22,14 @@ const {
 const { setLanguage, t } = require('./i18n');
 const yaml = require('js-yaml');
 const { showWelcome, showCompletion, showCancellation } = require('./feedback');
-const { generateIDEConfigs, showSuccessSummary } = require('./ide-config-generator');
+const { generateIDEConfigs, showSuccessSummary, copySkillFiles, copyExtraCommandFiles } = require('./ide-config-generator');
 const {
   configureEnvironment,
 } = require('../config/configure-environment');
 const {
   installDependencies,
 } = require('../installer/dependency-installer');
+const { commandSync, commandValidate } = require('../../../../.aios-core/infrastructure/scripts/ide-sync/index');
 const {
   installAiosCore,
   hasPackageJson,
@@ -486,6 +488,137 @@ async function runWizard(options = {}) {
       }
 
       // Legacy per-squad IDE copy path removed; sync pipeline handles IDE propagation.
+    }
+
+    // Story INS-4.3: Wire settings.json boundary generator after .aios-core/ copy
+    console.log('\n🔒 Generating boundary rules...');
+    try {
+      const settingsGenerator = require('../../../../.aios-core/infrastructure/scripts/generate-settings-json');
+      settingsGenerator.generate(process.cwd());
+      const settingsContent = await fse.readFile(path.join(process.cwd(), '.claude', 'settings.json'), 'utf8').catch(() => '{}');
+      const settingsParsed = JSON.parse(settingsContent);
+      const denyCount = (settingsParsed.permissions && settingsParsed.permissions.deny) ? settingsParsed.permissions.deny.length : 0;
+      console.log(`✅ settings.json: generated (${denyCount} deny rules)`);
+      answers.settingsGenerated = true;
+      answers.settingsDenyCount = denyCount;
+    } catch (error) {
+      console.warn(`⚠️  settings.json generation failed: ${error.message} — run 'aios doctor --fix' post-install`);
+      answers.settingsGenerated = false;
+    }
+
+    // Story INS-4.3: Copy skills (Gap #11)
+    console.log('\n📚 Copying skills...');
+    try {
+      const skillsResult = await copySkillFiles(process.cwd());
+      if (skillsResult.skipped) {
+        console.log('   ℹ️  Skills: source not found (skipped)');
+      } else {
+        console.log(`✅ Skills: ${skillsResult.count} copied`);
+      }
+      answers.skillsCopied = skillsResult.count;
+      answers.skillsSkipped = skillsResult.skipped;
+    } catch (error) {
+      console.warn(`⚠️  Skills copy failed: ${error.message}`);
+      answers.skillsCopied = 0;
+    }
+
+    // Story INS-4.3: Copy extra commands (Gap #12)
+    console.log('\n📋 Copying extra commands...');
+    try {
+      const commandsResult = await copyExtraCommandFiles(process.cwd());
+      if (commandsResult.skipped) {
+        console.log('   ℹ️  Extra commands: source not found (skipped)');
+      } else {
+        console.log(`✅ Commands: ${commandsResult.count} extras copied`);
+      }
+      answers.extraCommandsCopied = commandsResult.count;
+      answers.extraCommandsSkipped = commandsResult.skipped;
+    } catch (error) {
+      console.warn(`⚠️  Extra commands copy failed: ${error.message}`);
+      answers.extraCommandsCopied = 0;
+    }
+
+    // Story INS-4.5: IDE Sync — transform agents/skills/commands for each configured IDE
+    console.log('\n🔄 Running IDE sync...');
+    const targetProjectRoot = process.cwd();
+    const savedCwd = process.cwd();
+    try {
+      process.chdir(targetProjectRoot);
+      await commandSync({ quiet: true });
+      answers.ideSyncStatus = 'synced';
+      console.log('✅ IDE sync: synced');
+
+      // Validate sync output (commandValidate does not support quiet — suppress its console output)
+      const _origLog = console.log;
+      console.log = () => {};
+      try {
+        await commandValidate({ quiet: true });
+        answers.ideSyncValidation = 'pass';
+      } catch (validateError) {
+        answers.ideSyncValidation = 'drift';
+      } finally {
+        console.log = _origLog;
+      }
+      if (answers.ideSyncValidation === 'drift') {
+        console.warn('⚠️  IDE sync validation: drift detected — run \'aios doctor --fix\' post-install');
+      }
+    } catch (syncError) {
+      console.warn(`⚠️  IDE sync failed: ${syncError.message} — run 'aios doctor --fix' post-install`);
+      answers.ideSyncStatus = 'failed';
+      answers.ideSyncValidation = 'skipped';
+    } finally {
+      process.chdir(savedCwd);
+    }
+
+    // Story INS-4.6: Entity Registry Bootstrap — populate entity-registry.yaml on install
+    // Story INS-4.12: Fix module resolution + bootstrap timing
+    // Bootstrap runs AFTER .aios-core deps are installed (aios-core-installer.js:324-345)
+    // NODE_PATH ensures spawned scripts can resolve packages from .aios-core/node_modules/
+    console.log('\n📇 Bootstrapping entity registry...');
+    try {
+      const registryScript = path.join(process.cwd(), '.aios-core', 'development', 'scripts', 'populate-entity-registry.js');
+      if (fse.existsSync(registryScript)) {
+        // INS-4.12 AC3: Guard — skip bootstrap if .aios-core deps are not installed
+        const aiosCoreNodeModules = path.join(process.cwd(), '.aios-core', 'node_modules');
+        if (!fse.existsSync(aiosCoreNodeModules)) {
+          console.warn('⚠️  .aios-core/node_modules/ not found — skipping entity registry bootstrap');
+          console.warn('   Run: cd .aios-core && npm install --production');
+          answers.entityRegistryStatus = 'skipped-no-deps';
+        } else {
+        // INS-4.12 AC2: Set NODE_PATH so spawned scripts resolve deps from .aios-core/node_modules/
+          const parentNodeModules = path.join(process.cwd(), 'node_modules');
+          const nodePath = [aiosCoreNodeModules, parentNodeModules].join(path.delimiter);
+          const startMs = Date.now();
+          execSync(`node "${registryScript}"`, {
+            cwd: process.cwd(),
+            encoding: 'utf8',
+            timeout: 30000,
+            stdio: 'pipe',
+            env: { ...process.env, NODE_PATH: nodePath },
+          });
+          const elapsedMs = Date.now() - startMs;
+
+          // Read entity count from generated registry
+          const registryPath = path.join(process.cwd(), '.aios-core', 'data', 'entity-registry.yaml');
+          let entityCount = 0;
+          if (fse.existsSync(registryPath)) {
+            const registryContent = fse.readFileSync(registryPath, 'utf8');
+            const countMatch = registryContent.match(/entityCount:\s*(\d+)/);
+            entityCount = countMatch ? parseInt(countMatch[1], 10) : 0;
+          }
+
+          console.log(`✅ Entity registry: populated (${entityCount} entities, ${(elapsedMs / 1000).toFixed(1)}s)`);
+          answers.entityRegistryStatus = 'populated';
+          answers.entityRegistryCount = entityCount;
+          answers.entityRegistryMs = elapsedMs;
+        } // end else (deps exist)
+      } else {
+        console.log('   ℹ️  Entity registry script not found (skipped)');
+        answers.entityRegistryStatus = 'skipped';
+      }
+    } catch (error) {
+      console.warn(`⚠️  Entity registry bootstrap failed: ${error.message} — run 'aios doctor' post-install`);
+      answers.entityRegistryStatus = 'failed';
     }
 
     // Story 1.6: Environment Configuration

@@ -28,10 +28,10 @@ Antes de começar, certifique-se de ter:
 
 ```bash
 # Executar o wizard de instalação interativo
-npx @synkra/aios-core@latest
+npx aios-core@latest
 
 # Ou criar um novo projeto com nome específico
-npx @synkra/aios-core@latest init meu-projeto
+npx aios-core@latest init meu-projeto
 cd meu-projeto
 ```
 
@@ -50,7 +50,7 @@ npm install
 Execute o comando de diagnóstico:
 
 ```bash
-npx @synkra/aios-core@latest doctor
+npx aios-core@latest doctor
 ```
 
 Ou se instalado globalmente:
@@ -167,9 +167,9 @@ Todos os comandos de agente usam o prefixo `*`:
 
 ```bash
 # Instalação e setup
-npx @synkra/aios-core@latest           # Executar wizard
-npx @synkra/aios-core@latest doctor    # Executar diagnósticos
-npx @synkra/aios-core@latest info      # Mostrar info do sistema
+npx aios-core@latest           # Executar wizard
+npx aios-core@latest doctor    # Executar diagnósticos
+npx aios-core@latest info      # Mostrar info do sistema
 
 # Desenvolvimento
 npm run lint                           # Verificar estilo de código
@@ -250,7 +250,7 @@ sudo chown -R $(whoami) ~/.npm
 
 ```bash
 # Reinstalar AIOS no projeto atual
-npx @synkra/aios-core@latest install
+npx aios-core@latest install
 
 # Ou clonar novamente
 git clone https://github.com/SynkraAI/aios-core.git

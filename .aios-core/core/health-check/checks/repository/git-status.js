@@ -3,7 +3,7 @@
  *
  * Verifies working directory status and uncommitted changes.
  *
- * @module @synkra/aios-core/health-check/checks/repository/git-status
+ * @module aios-core/health-check/checks/repository/git-status
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

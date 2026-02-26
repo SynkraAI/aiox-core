@@ -3,7 +3,7 @@
  *
  * Verifies .aios/ directory structure and permissions.
  *
- * @module @synkra/aios-core/health-check/checks/project/aios-directory
+ * @module aios-core/health-check/checks/project/aios-directory
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

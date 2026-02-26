@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"\nconst { UnifiedActivationPipeline } = require\\(''./.aios-core/development/scripts/unified-activation-pipeline.js''\\);\nconst pipeline = new UnifiedActivationPipeline\\(process.cwd\\(\\)\\);\npipeline.activate\\(''devops''\\).then\\(result => {\n  console.log\\(result.greeting\\);\n}\\).catch\\(err => {\n  console.error\\(''Activation error:'', err.message\\);\n}\\);\n\")",
+      "Bash(npm run lint:*)",
+      "Bash(npm run typecheck:*)",
+      "Bash(npm test:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(node -e:*)"
+    ]
+  }
+}

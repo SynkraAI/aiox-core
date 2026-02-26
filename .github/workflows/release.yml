@@ -131,10 +131,10 @@ jobs:
           VERSION="${{ needs.create-release.outputs.version }}"
 
           # Create output directory
-          mkdir -p @synkra
+          mkdir -p dist
 
           # Use tar with || true to ignore "file changed" warnings
-          tar -czf @synkra/aios-core-${VERSION}.tar.gz \
+          tar -czf aios-core-${VERSION}.tar.gz \
             --exclude=node_modules \
             --exclude=.git \
             --exclude=tests \
@@ -145,13 +145,13 @@ jobs:
             . || true
 
           # Verify tar was created
-          if [ ! -f "@synkra/aios-core-${VERSION}.tar.gz" ]; then
+          if [ ! -f "aios-core-${VERSION}.tar.gz" ]; then
             echo "❌ Failed to create tar archive"
             exit 1
           fi
 
           # Create source code zip
-          zip -r @synkra/aios-core-${VERSION}-source.zip . \
+          zip -r aios-core-${VERSION}-source.zip . \
             -x "node_modules/*" ".git/*" "tests/*" "*.log" ".github/*" "*.tar.gz" "*.zip"
 
       - name: Upload Release Assets
@@ -163,12 +163,12 @@ jobs:
 
           # Upload tar.gz file
           gh release upload "${TAG}" \
-            "@synkra/aios-core-${VERSION}.tar.gz" \
+            "aios-core-${VERSION}.tar.gz" \
             --clobber
 
           # Upload source zip file
           gh release upload "${TAG}" \
-            "@synkra/aios-core-${VERSION}-source.zip" \
+            "aios-core-${VERSION}-source.zip" \
             --clobber
 
   trigger-npm-publish:

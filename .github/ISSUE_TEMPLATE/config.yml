@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Documentation
+    url: https://github.com/SynkraAI/aios-core/tree/main/docs
+    about: Check our documentation before opening an issue
+  - name: Discussions
+    url: https://github.com/SynkraAI/aios-core/discussions
+    about: Ask questions and share ideas in Discussions

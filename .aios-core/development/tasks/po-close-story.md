@@ -425,3 +425,10 @@ updated_at: 2026-02-05
 - `validate-next-story.md` - Validates story before implementation (START)
 - `po-close-story.md` - Closes story after merge (END)
 - `po-backlog-review.md` - Review backlog for sprint planning
+
+## Handoff
+next_agent: @sm
+next_command: *draft
+condition: Story closed, next story in epic available
+alternatives:
+  - agent: @po, command: *backlog-review, condition: Sprint review needed before next story

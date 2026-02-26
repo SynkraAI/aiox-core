@@ -4,7 +4,7 @@
  * Core execution engine for health checks. Handles parallel execution,
  * caching, timeout management, and result aggregation.
  *
- * @module @synkra/aios-core/health-check/engine
+ * @module aios-core/health-check/engine
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

@@ -55,6 +55,47 @@ const architectureShardedLocation = config.architectureShardedLocation || 'docs/
 
 ## Instructions
 
+### 0. Code Intelligence: Codebase Overview (Optional — Auto-skip if unavailable)
+
+> **Condition:** Only execute if `isCodeIntelAvailable()` returns true.
+> If no code intelligence provider is available, skip this step silently and proceed to Step 1.
+
+When code intelligence is available, enrich the epic with real codebase data:
+
+```javascript
+const { isCodeIntelAvailable } = require('.aios-core/core/code-intel');
+const { getCodebaseOverview, getDependencyGraph } = require('.aios-core/core/code-intel/helpers/planning-helper');
+
+if (isCodeIntelAvailable()) {
+  const overview = await getCodebaseOverview('.');
+  const depGraph = await getDependencyGraph('.');
+
+  // Include in epic under "Codebase Intelligence" section:
+  // - overview.codebase: project patterns, file groups
+  // - overview.stats: file counts, language distribution
+  // - depGraph.dependencies: module relationships
+  // - depGraph.summary: { totalDeps, depth }
+}
+```
+
+**If data is available, add this section to the epic:**
+
+#### Codebase Intelligence
+
+| Metric | Value |
+|--------|-------|
+| Project Overview | {{overview.codebase summary}} |
+| File Statistics | {{overview.stats}} |
+| Dependency Depth | {{depGraph.summary.depth}} |
+| Total Dependencies | {{depGraph.summary.totalDeps}} |
+
+**Dependency Graph Summary:**
+{{depGraph.dependencies key relationships}}
+
+> **Note:** This section is auto-generated from code intelligence. Values are real codebase data, not estimates.
+
+---
+
 ### 1. Project Analysis (Required)
 
 Before creating the epic, gather essential information about the existing project:

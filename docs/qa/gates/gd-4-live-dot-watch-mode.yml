@@ -1,0 +1,72 @@
+storyId: GD-4
+storyTitle: "Live DOT Watch Mode"
+epicId: epic-cli-graph-dashboard
+reviewer: "@qa (Quinn)"
+reviewDate: "2026-02-21"
+model: "Claude Opus 4.6"
+
+verdict: PASS
+score: 9.5
+
+verification:
+  tests:
+    command: "npx jest tests/graph-dashboard/"
+    result: "158/158 PASS"
+    new_tests: 14
+    regressions: 0
+  lint:
+    command: "npx eslint (modified files)"
+    result: "0 errors"
+    notes: "1 pre-existing warning on handleSummary args (not from GD-4)"
+
+acceptance_criteria:
+  - id: AC1
+    description: "--watch gera .aios/graph.dot"
+    code_ref: "cli.js:124-135"
+    test_ref: "watch-mode.test.js:88-97"
+    status: PASS
+  - id: AC2
+    description: "Re-gera a cada N segundos (default 5s, --interval)"
+    code_ref: "cli.js:145 setInterval"
+    test_ref: "watch-mode.test.js:111-146"
+    status: PASS
+  - id: AC3
+    description: "File watcher entity-registry.yaml regeneracao imediata"
+    code_ref: "cli.js:149-162 fs.watch+debounce"
+    test_ref: "Indirect (cleanup tested)"
+    status: PASS
+  - id: AC4
+    description: "DOT compativel Graphviz Interactive Preview"
+    code_ref: "cli.js:134 formatAsDot"
+    test_ref: "watch-mode.test.js:165-172"
+    status: PASS
+  - id: AC5
+    description: "--format=mermaid gera .aios/graph.mmd"
+    code_ref: "cli.js:121-122 WATCH_FORMAT_MAP"
+    test_ref: "watch-mode.test.js:99-109"
+    status: PASS
+  - id: AC6
+    description: "Ctrl+C cleanup graceful"
+    code_ref: "cli.js:164-178"
+    test_ref: "watch-mode.test.js:122-134"
+    status: PASS
+  - id: AC7
+    description: "Testes unitarios cobrem lifecycle, file gen, interval, cleanup"
+    code_ref: "14 tests in watch-mode.test.js"
+    test_ref: "14/14 passing"
+    status: PASS
+
+issues:
+  - id: 1
+    severity: LOW
+    category: code
+    description: "SIGINT listener acumula em chamadas multiplas a handleWatch()"
+    recommendation: "Considerar process.once() ou removeListener no cleanup"
+    blocking: false
+
+observations:
+  - "Zero dependencias externas adicionadas"
+  - "Design testavel com state object return pattern"
+  - "Debounce 300ms previne file write storms"
+  - "Cleanup completo (interval + timeout + watcher)"
+  - "Constantes bem extraidas (DEBOUNCE_MS, DEFAULT_WATCH_INTERVAL_MS, WATCH_FORMAT_MAP)"

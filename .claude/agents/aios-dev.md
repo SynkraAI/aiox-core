@@ -12,8 +12,19 @@ tools:
   - Write
   - Edit
   - Bash
+  - Task
 permissionMode: bypassPermissions
 memory: project
+hooks:
+  PreToolUse:
+    - matcher: "Bash"
+      hooks:
+        - type: command
+          command: ".claude/hooks/enforce-git-push-authority.sh"
+skills:
+  - synapse:tasks:diagnose-synapse
+  - coderabbit-review
+  - checklist-runner
 ---
 
 # AIOS Developer - Autonomous Agent

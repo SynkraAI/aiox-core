@@ -3,7 +3,7 @@
  *
  * Verifies shell environment is properly configured.
  *
- * @module @synkra/aios-core/health-check/checks/local/shell-environment
+ * @module aios-core/health-check/checks/local/shell-environment
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

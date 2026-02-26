@@ -1,0 +1,30 @@
+# Issue Labeler configuration (regex-based)
+# Used by .github/workflows/issue-labeler.yml
+# Matches regex patterns against issue body/title content
+#
+# Story: GHIM-001 - GitHub Issue Management
+# Reference: https://github.com/github/issue-labeler
+
+# Type labels (matched against issue body)
+"type: bug":
+  - '(\[Bug\]|bug report|something.*(isn.t|not) working|broken|crash|regression)'
+"type: feature":
+  - '(\[Feature\]|feature request|propose|proposal|new feature|add support|add native)'
+"type: docs":
+  - '(documentation|readme|typo in doc|missing doc|english readme)'
+"type: test":
+  - '(\[Test\]|test coverage|unit test|add.*tests|missing.*tests)'
+
+# Area labels
+"area: installer":
+  - '(npx aios-core|aios-core install|installer|wizard|onboarding|packages.installer)'
+"area: core":
+  - '(\.aios-core.core|orchestration|config.*loader|core framework)'
+"area: synapse":
+  - '(synapse|context engine|domain.*loader|hook.*engine)'
+"area: cli":
+  - '(aios-core info|aios-core update|aios-core doctor|bin/|\.aios-core.cli)'
+"area: pro":
+  - '(pro feature|license|aios-pro|pro/|pro submodule)'
+"area: health-check":
+  - '(health.?check|doctor|diagnostic)'

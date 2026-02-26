@@ -38,7 +38,7 @@ git commit -m "feat: add team collaboration mode"
 git push
 
 # That's it! Release happens automatically 🎉
-# Users can now run: npx @synkra/aios-core (and get the new version)
+# Users can now run: npx aios-core (and get the new version)
 ```
 
 ### Commits That DON'T Trigger Releases

@@ -4,7 +4,7 @@
  * Abstract base class for all health checks. Provides common
  * functionality and enforces the check interface.
  *
- * @module @synkra/aios-core/health-check/base-check
+ * @module aios-core/health-check/base-check
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

@@ -3,7 +3,7 @@
  *
  * Verifies MCP (Model Context Protocol) server integration.
  *
- * @module @synkra/aios-core/health-check/checks/services/mcp-integration
+ * @module aios-core/health-check/checks/services/mcp-integration
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

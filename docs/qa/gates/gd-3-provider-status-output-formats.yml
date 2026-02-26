@@ -1,0 +1,48 @@
+schema: 1
+story: 'GD-3'
+story_title: 'Provider Status e Output Formats'
+gate: PASS
+status_reason: 'All 7 ACs validated. 144 tests passing (56 new). Lint clean. All 4 output formats verified (ASCII, JSON, DOT, Mermaid). Provider status renders correctly in TTY and non-TTY modes.'
+reviewer: 'Quinn (Test Architect)'
+updated: '2026-02-21T18:30:00.000Z'
+
+top_issues: []
+waiver: { active: false }
+
+quality_score: 97
+expires: '2026-03-07T18:30:00.000Z'
+
+evidence:
+  tests_reviewed: 56
+  risks_identified: 0
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 7]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: 'No user input processed unsafely. Read-only metrics data. Mermaid/DOT formatters escape special characters. No injection vectors.'
+  performance:
+    status: PASS
+    notes: 'Promise.all for parallel data fetching. MAX_SUMMARY_PER_CATEGORY=5 limits output. No expensive operations.'
+  reliability:
+    status: PASS
+    notes: 'Graceful offline fallback in status-renderer. circuitBreakerFailures defaults to 0. Empty graph handled in all formatters.'
+  maintainability:
+    status: PASS
+    notes: 'Clean separation: renderers/ for display, formatters/ for export. Follows established GD-1/GD-2 patterns. Private functions exported for testing.'
+
+observations:
+  - id: O1
+    severity: low
+    category: code
+    description: 'maxPerCategory parameter passed from handleSummary to renderTree but not implemented in tree-renderer (no-op). Acceptable for MVP summary view.'
+    recommendation: 'Implement maxPerCategory filtering in tree-renderer if summary becomes verbose with large registries.'
+    suggested_owner: dev
+
+recommendations:
+  immediate: []
+  future:
+    - action: 'Implement maxPerCategory filtering in tree-renderer (O1)'
+      refs: ['.aios-core/core/graph-dashboard/renderers/tree-renderer.js']

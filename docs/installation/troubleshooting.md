@@ -26,7 +26,7 @@
 Run this diagnostic command first to identify common issues:
 
 ```bash
-npx @synkra/aios-core status
+npx aios-core status
 ```
 
 If the status command fails, work through the sections below based on your error message.
@@ -35,7 +35,7 @@ If the status command fails, work through the sections below based on your error
 
 ## Installation Issues
 
-### Issue 1: "npx @synkra/aios-core is not recognized"
+### Issue 1: "npx aios-core is not recognized"
 
 **Symptoms:**
 
@@ -86,7 +86,7 @@ not in your home directory or temporary locations.
 cd /path/to/your/project
 
 # Then run the installer
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ---
@@ -111,7 +111,7 @@ mkdir -p /path/to/your/project
 cd /path/to/your/project
 
 # Run installer
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ---
@@ -148,7 +148,7 @@ nvm use 18
 
 ```
 npm ERR! code E404
-npm ERR! 404 Not Found - GET https://registry.npmjs.org/@synkra/aios-core
+npm ERR! 404 Not Found - GET https://registry.npmjs.org/aios-core
 ```
 
 **Cause:** Package not found on npm registry (network issue or typo).
@@ -167,7 +167,7 @@ npm config get registry
 npm config set registry https://registry.npmjs.org/
 
 # Retry installation
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ---
@@ -192,7 +192,7 @@ export PATH=~/.npm-global/bin:$PATH
 # Add the export line to ~/.bashrc or ~/.zshrc
 
 # Option 2: Use npx instead of global install (recommended)
-npx @synkra/aios-core install
+npx aios-core install
 
 # Option 3: Use nvm to manage Node.js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
@@ -210,7 +210,7 @@ nvm install 18
 ```
 npm ERR! code ETIMEDOUT
 npm ERR! errno ETIMEDOUT
-npm ERR! network request to https://registry.npmjs.org/@synkra/aios-core failed
+npm ERR! network request to https://registry.npmjs.org/aios-core failed
 ```
 
 **Cause:** Network connectivity issue, firewall, or proxy blocking npm.
@@ -229,7 +229,7 @@ npm config set https-proxy http://proxy.company.com:8080
 npm config set strict-ssl false
 
 # Retry with verbose logging
-npm install @synkra/aios-core --verbose
+npm install aios-core --verbose
 ```
 
 ---
@@ -256,7 +256,7 @@ npm config set strict-ssl false
 
 # Verify and retry
 npm config get strict-ssl
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ---
@@ -286,7 +286,7 @@ npm ERR! network This is a problem related to network connectivity.
 
 # Retry with a longer timeout
 npm config set fetch-timeout 60000
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ---
@@ -316,7 +316,7 @@ lsof +D /path/to/project
 kill -9 <PID>
 
 # Try installation again
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ---
@@ -343,7 +343,7 @@ mount | grep /path/to/project
 
 # Install to a writable directory instead
 cd ~/projects/my-project
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ---
@@ -365,7 +365,7 @@ Error: ENOTEMPTY: directory not empty, rmdir '.aios-core'
 mv .aios-core .aios-core.backup
 
 # Run installer with force flag
-npx @synkra/aios-core install --force-upgrade
+npx aios-core install --force-upgrade
 
 # If needed, restore custom files from backup
 cp .aios-core.backup/custom-files/* .aios-core/
@@ -396,7 +396,7 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 # Or use CMD instead of PowerShell
 cmd
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 #### Issue 14: "Path too long"
@@ -416,7 +416,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v LongPathsEnabled /
 
 # Or use a shorter project path
 cd C:\dev\proj
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 #### Issue 15: "npm not found in Git Bash"
@@ -457,7 +457,7 @@ xcode-select --install
 
 # Follow the installation dialog
 # Then retry
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 #### Issue 17: "Apple Silicon (M1/M2) compatibility"
@@ -479,7 +479,7 @@ softwareupdate --install-rosetta
 # Use x86 version of Node.js (if needed)
 arch -x86_64 /bin/bash
 nvm install 18
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ---
@@ -506,7 +506,7 @@ sudo dnf install vips-devel
 
 # Clear npm cache and reinstall
 npm cache clean --force
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 #### Issue 19: "GLIBC version too old"
@@ -555,7 +555,7 @@ nvm use 16
 3. Check IDE settings allow custom commands
 4. Re-run installation for specific IDE:
    ```bash
-   npx @synkra/aios-core install --ide claude-code
+   npx aios-core install --ide claude-code
    ```
 
 ---
@@ -590,7 +590,7 @@ Error: Agent 'dev' not found in .aios-core/agents/
 ls .aios-core/agents/
 
 # If missing, reinstall core
-npx @synkra/aios-core install --full
+npx aios-core install --full
 
 # Check core-config.yaml is valid
 cat .aios-core/core-config.yaml
@@ -619,7 +619,7 @@ npx yaml-lint .aios-core/agents/dev.md
 
 # Reinstall to get clean agent files
 mv .aios-core/agents/dev.md .aios-core/agents/dev.md.backup
-npx @synkra/aios-core install --full
+npx aios-core install --full
 ```
 
 ---
@@ -630,16 +630,16 @@ npx @synkra/aios-core install --full
 
 ```bash
 # Check AIOS installation status
-npx @synkra/aios-core status
+npx aios-core status
 
 # List available Squads
-npx @synkra/aios-core install
+npx aios-core install
 
 # Update existing installation
-npx @synkra/aios-core update
+npx aios-core update
 
 # Show verbose logging
-npx @synkra/aios-core install --verbose
+npx aios-core install --verbose
 ```
 
 ### System Information
@@ -679,7 +679,7 @@ ls -la .aios-core/
 
 ### Before Requesting Help
 
-1. Run `npx @synkra/aios-core status` and note the output
+1. Run `npx aios-core status` and note the output
 2. Check this troubleshooting guide
 3. Search existing [GitHub Issues](https://github.com/SynkraAI/aios-core/issues)
 
@@ -716,7 +716,7 @@ ls -la .aios-core/
 
 ### Support Channels
 
-- **GitHub Issues**: [@synkra/aios-core/issues](https://github.com/SynkraAI/aios-core/issues)
+- **GitHub Issues**: [aios-core/issues](https://github.com/SynkraAI/aios-core/issues)
 - **Documentation**: [docs/installation/](./README.md)
 - **FAQ**: [faq.md](./faq.md)
 

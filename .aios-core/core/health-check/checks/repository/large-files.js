@@ -3,7 +3,7 @@
  *
  * Checks for large files that shouldn't be in git.
  *
- * @module @synkra/aios-core/health-check/checks/repository/large-files
+ * @module aios-core/health-check/checks/repository/large-files
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

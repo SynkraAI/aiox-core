@@ -18,8 +18,11 @@ describe('Fallback Graceful (AC4, NFR-1, NFR-4)', () => {
     let client;
 
     beforeEach(() => {
-      // No mcpCallFn = no provider available
-      client = new CodeIntelClient();
+      // No mcpCallFn AND no registry = no provider available
+      // Must explicitly disable RegistryProvider by pointing to non-existent registry
+      client = new CodeIntelClient({
+        registryPath: '/non/existent/registry.yaml',
+      });
     });
 
     it('should return false for isCodeIntelAvailable', () => {
@@ -85,7 +88,10 @@ describe('Fallback Graceful (AC4, NFR-1, NFR-4)', () => {
     let enricher;
 
     beforeEach(() => {
-      const client = new CodeIntelClient(); // no provider
+      // No mcpCallFn AND no registry = no provider available
+      const client = new CodeIntelClient({
+        registryPath: '/non/existent/registry.yaml',
+      });
       enricher = new CodeIntelEnricher(client);
     });
 

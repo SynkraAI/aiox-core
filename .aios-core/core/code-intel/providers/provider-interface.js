@@ -15,6 +15,15 @@ class CodeIntelProvider {
   }
 
   /**
+   * Check if this provider is available and can serve requests.
+   * Subclasses MUST override this to indicate availability.
+   * @returns {boolean}
+   */
+  isAvailable() {
+    return false;
+  }
+
+  /**
    * Locate the definition of a symbol.
    * @param {string} symbol - Symbol name to find
    * @param {Object} [options] - Provider-specific options

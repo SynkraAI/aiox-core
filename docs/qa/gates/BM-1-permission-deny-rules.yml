@@ -1,0 +1,50 @@
+schema: 1
+story: BM-1
+story_title: Permission Deny Rules & Toggleable Config
+gate: PASS
+status_reason: >
+  All 11 ACs met. Deny rules correctly protect L1/L2 paths, allow rules permit
+  L3/L4 exceptions. Toggleable config documented in core-config.yaml.
+  CONCERN-1 (gitignore) resolved: .claude pattern changed from '.claude' to
+  '.claude/*' with '!.claude/settings.json' exception added.
+reviewer: Quinn (Test Architect)
+updated: '2026-02-22T13:15:00Z'
+
+top_issues: []
+
+quality_score: 100
+expires: '2026-03-08T13:15:00Z'
+
+evidence:
+  tests_reviewed:
+    count: 6799
+    suites: 270
+    pre_existing_failures: 12
+  risks_identified:
+    count: 0
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: No secrets exposed, deny rules protect sensitive paths, allow rules narrowly scoped
+  performance:
+    status: PASS
+    notes: Minimal config files, negligible overhead
+  reliability:
+    status: PASS
+    notes: Deterministic enforcement via Claude Code runtime, no runtime dependencies
+  maintainability:
+    status: PASS
+    notes: Well-documented toggle with 7 inline comments, clear separation of concerns
+
+waiver:
+  active: false
+
+recommendations:
+  immediate: []
+  future:
+    - action: Wire boundary.frameworkProtection toggle to installer automation
+      refs: ['.aios-core/core-config.yaml', 'bin/aios-init.js']

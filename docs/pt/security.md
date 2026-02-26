@@ -26,8 +26,8 @@ Em vez disso, reporte vulnerabilidades de segurança através de um destes canai
    - Clique em "Report a vulnerability"
    - Preencha o formulário com detalhes
 
-2. **Email**
-   - Envie um email para: security@synkra.ai
+2. **GitHub Issues (Privado)**
+   - Abra um [security advisory privado](https://github.com/SynkraAI/aios-core/security/advisories)
    - Use a linha de assunto: `[SECURITY] Breve descrição`
 
 ### O Que Incluir

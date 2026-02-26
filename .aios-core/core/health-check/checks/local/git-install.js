@@ -3,7 +3,7 @@
  *
  * Verifies Git is installed and configured.
  *
- * @module @synkra/aios-core/health-check/checks/local/git-install
+ * @module aios-core/health-check/checks/local/git-install
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

@@ -795,7 +795,7 @@ Features:
 ### Complete Project Structure
 
 ```
-@synkra/aios-core/                        # Root project
+aios-core/                        # Root project
 ├── .aios-core/                        # Modular Architecture
 │   │
 │   ├── core/                          # Core Framework Module

@@ -148,3 +148,11 @@ ide_sync_system:
     strict_mode: true
     fail_on_drift: true
     fail_on_orphaned: false
+
+# --- Template Override Defaults (Section 13) ---
+# Override in project-config.yaml to customize story template rendering.
+# null = use template default order; [] = no optional sections.
+template_overrides:
+  story:
+    sections_order: null
+    optional_sections: []

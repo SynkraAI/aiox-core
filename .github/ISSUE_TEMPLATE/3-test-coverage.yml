@@ -1,0 +1,73 @@
+name: Test Coverage
+description: Propose new test coverage for existing modules
+title: "[Test]: "
+labels: ["type: test", "status: needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to propose test coverage for aios-core modules.
+        Related to [Issue #52](https://github.com/SynkraAI/aios-core/issues/52) (global test coverage improvement).
+
+  - type: textarea
+    id: modules
+    attributes:
+      label: Modules to Test
+      description: List the modules/files that need test coverage.
+      placeholder: |
+        - `.aios-core/core/orchestration/agent-invoker.js`
+        - `.aios-core/core/orchestration/gate-evaluator.js`
+    validations:
+      required: true
+
+  - type: textarea
+    id: test-scope
+    attributes:
+      label: Test Scope
+      description: What types of tests are needed? (unit, integration, e2e)
+      placeholder: |
+        - Unit tests for public API methods
+        - Edge cases for error handling
+        - Integration with dependent modules
+    validations:
+      required: true
+
+  - type: input
+    id: test-count
+    attributes:
+      label: Estimated Test Count
+      placeholder: "e.g., 4 test files, ~50 tests"
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - "Core (.aios-core/core/)"
+        - "Health Check (.aios-core/core/health-check/)"
+        - "Orchestration (.aios-core/core/orchestration/)"
+        - "Config (.aios-core/core/config/)"
+        - "SYNAPSE"
+        - "CLI / Installer"
+        - "Infrastructure"
+        - "Other"
+    validations:
+      required: true
+
+  - type: input
+    id: related-issue
+    attributes:
+      label: Related Issue
+      description: Link to the parent issue if applicable.
+      placeholder: "#52"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: "I have verified these modules lack test coverage"
+          required: true
+        - label: "Tests will use Jest (project standard)"
+          required: true
+        - label: "I can contribute the implementation"

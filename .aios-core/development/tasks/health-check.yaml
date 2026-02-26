@@ -1,15 +1,18 @@
 ---
 # Health Check Task Definition
-# Story: HCS-2 - Health Check System Implementation
-# Version: 1.0.0
+# Story: INS-4.8 - Unify Health-Check + Doctor v2
+# Version: 3.0.0 — Delegates to `aios doctor --json` (unified)
 
 name: health-check
 id: health-check
-version: "2.0"
+version: "3.0"
 description: |
-  Run comprehensive health checks on your AIOS project.
-  Diagnoses configuration issues, environment problems, and provides
-  auto-fixing for common issues.
+  Unified health diagnostic for AIOS projects.
+  Invokes `aios doctor --json` internally via Bash tool and adds governance
+  interpretation with Constitution context and remediation guidance.
+
+  NOTE: This task delegates ALL check logic to `aios doctor` (15 checks).
+  It does NOT have its own list of health checks — single source of truth.
 
 category: development
 owner: devops
@@ -18,168 +21,208 @@ owner: devops
 command: "*health-check"
 aliases:
   - "*hc"
-  - "*doctor"
+# NOTE: *doctor alias REMOVED (INS-4.8) to avoid confusion with CLI `aios doctor`
 
 # Task parameters
 parameters:
-  - name: mode
-    type: string
-    default: "quick"
-    description: "Execution mode: 'quick' (<10s, critical/high only) or 'full' (<60s, all checks)"
-    options:
-      - quick
-      - full
-
-  - name: domain
-    type: string
-    default: "all"
-    description: "Domain to check: project, local, repository, deployment, services, or all"
-    options:
-      - all
-      - project
-      - local
-      - repository
-      - deployment
-      - services
-
   - name: fix
     type: boolean
-    default: true
-    description: "Enable auto-fixing for Tier 1 issues"
-
-  - name: fix-tier
-    type: number
-    default: 1
-    description: "Maximum tier for auto-fixing (1=silent, 2=prompted, 3=manual guide only)"
-    min: 1
-    max: 3
-
-  - name: output
-    type: string
-    default: "console"
-    description: "Output format"
-    options:
-      - console
-      - markdown
-      - json
+    default: false
+    description: "Pass --fix to aios doctor for auto-remediation"
 
   - name: verbose
     type: boolean
     default: false
-    description: "Show all checks, not just issues"
+    description: "Show all checks including passed ones"
 
-  - name: save
-    type: boolean
-    default: false
-    description: "Save report to .aios/reports/health-check-latest.json"
+# Execution instructions
+instructions: |
+  ## How to Execute This Task
 
-# Execution steps
-steps:
-  - id: initialize
-    name: "Initialize Health Check"
-    action: log
-    params:
-      message: "🏥 Starting AIOS Health Check (mode: {{mode}})"
+  This task is executed by an agent using Claude Code native tools (Bash, Read).
+  It does NOT run a script — it provides instructions for the agent to follow.
 
-  - id: run-checks
-    name: "Run Health Checks"
-    action: script
-    script: |
-      const { HealthCheck } = require('../../core/health-check');
+  ### Step 1: Run aios doctor --json
 
-      const config = {
-        mode: '{{mode}}',
-        autoFix: {{fix}},
-        autoFixTier: {{fix-tier}},
-        output: {
-          format: '{{output}}',
-          verbose: {{verbose}},
-        },
-      };
+  Use the Bash tool to run:
 
-      const healthCheck = new HealthCheck(config);
+  ```bash
+  npx aios-core doctor --json
+  ```
 
-      const options = {
-        domain: '{{domain}}',
-      };
+  If `--fix` was requested, run instead:
 
-      const results = await healthCheck.run(options);
+  ```bash
+  npx aios-core doctor --json --fix
+  ```
 
-      // Display report
-      console.log(results.report);
+  NOTE: Always use `npx aios-core` (not `node bin/aios.js`) — this works in both
+  framework-dev mode (resolves local bin) and project-dev/brownfield mode
+  (resolves from node_modules/.bin/).
 
-      // Save if requested
-      if ({{save}}) {
-        const fs = require('fs').promises;
-        const path = require('path');
+  Capture the JSON output.
 
-        const reportDir = path.join(process.cwd(), '.aios', 'reports');
-        await fs.mkdir(reportDir, { recursive: true });
+  ### Step 2: Parse JSON Output
 
-        const reportPath = path.join(reportDir, 'health-check-latest.json');
-        await fs.writeFile(reportPath, JSON.stringify(results, null, 2));
+  The output is a JSON object with structure:
+  ```json
+  {
+    "summary": { "total": 15, "pass": 12, "warn": 2, "fail": 1, "info": 0 },
+    "checks": [
+      { "check": "settings-json", "status": "PASS", "message": "...", "fixCommand": null },
+      { "check": "rules-files", "status": "FAIL", "message": "...", "fixCommand": "aios doctor --fix" }
+    ]
+  }
+  ```
 
-        console.log(`\n📄 Report saved to: ${reportPath}`);
-      }
+  ### Step 3: Apply Governance Interpretation
 
-      // Return summary for task output
-      return {
-        score: results.overall.score,
-        status: results.overall.status,
-        issues: results.overall.issuesCount,
-        autoFixed: results.autoFixed?.length || 0,
-      };
+  For each check result, map to the Constitution article and provide remediation context
+  using the governance map below.
 
-  - id: summary
-    name: "Display Summary"
-    action: log
-    params:
-      message: |
+  ### Step 4: Format Output as Markdown
 
-        Health Check Complete:
-        - Score: {{run-checks.score}}/100
-        - Status: {{run-checks.status}}
-        - Issues: {{run-checks.issues}}
-        - Auto-fixed: {{run-checks.autoFixed}}
+  Present results as a readable markdown report:
+
+  ```markdown
+  ## AIOS Health Check
+
+  Summary: {pass} PASS | {warn} WARN | {fail} FAIL | {info} INFO
+
+  ### Issues Requiring Attention
+
+  **[FAIL] {check-name}** — {message}
+  - Constitution Impact: Article {N} ({article-name}) — {governance-note}
+  - Remediation: {fixCommand or manual instruction}
+
+  **[WARN] {check-name}** — {message}
+  - Constitution Impact: Article {N} ({article-name}) — {governance-note}
+  - Remediation: {fixCommand or manual instruction}
+
+  ### All Checks
+  | Check | Status | Note |
+  |-------|--------|------|
+  | {check} | {status} | {message} |
+  ```
+
+  If `--verbose` is false, only show FAIL and WARN items in the issues section.
+  Always show the summary line and the full table.
+
+# Governance Interpretation Map (Constitution → Check)
+governance_map:
+  settings-json:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Boundary protection — deny rules enforce framework immutability"
+    remediation: "aios doctor --fix"
+
+  rules-files:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Agent authority rules provide behavioral constraints"
+    remediation: "aios doctor --fix"
+
+  agent-memory:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Agent identity persistence across sessions"
+    remediation: "aios doctor --fix"
+
+  entity-registry:
+    article: "III"
+    article_name: "Story-Driven Development"
+    governance_note: "Code intelligence registry for entity-aware development"
+    remediation: "aios doctor --fix"
+
+  git-hooks:
+    article: "V"
+    article_name: "Quality First"
+    governance_note: "Quality gates enforced at git operations"
+    remediation: "aios doctor --fix"
+
+  core-config:
+    article: "I"
+    article_name: "CLI First"
+    governance_note: "Configuration integrity — core-config.yaml drives CLI behavior"
+    remediation: "aios doctor --fix"
+
+  claude-md:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Agent context — CLAUDE.md provides system prompt foundation"
+    remediation: "aios doctor --fix"
+
+  ide-sync:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Agent consistency across IDE configurations"
+    remediation: "aios doctor --fix"
+
+  graph-dashboard:
+    article: "I"
+    article_name: "CLI First"
+    governance_note: "CLI observability dashboard availability"
+    remediation: "Manual — install graph-dashboard package"
+
+  code-intel:
+    article: "III"
+    article_name: "Story-Driven Development"
+    governance_note: "Code intelligence for entity-aware development workflows"
+    remediation: "aios doctor --fix"
+
+  node-version:
+    article: "V"
+    article_name: "Quality First"
+    governance_note: "Runtime requirements — Node.js 18+ required"
+    remediation: "Manual — upgrade Node.js to 18+"
+
+  npm-packages:
+    article: "V"
+    article_name: "Quality First"
+    governance_note: "Dependencies installed and consistent"
+    remediation: "npm install"
+
+  skills-count:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Agent capabilities — skills extend agent functionality"
+    remediation: "npx aios-core install --force"
+
+  commands-count:
+    article: "II"
+    article_name: "Agent Authority"
+    governance_note: "Agent action vocabulary — commands define what agents can do"
+    remediation: "npx aios-core install --force"
+
+  hooks-claude-count:
+    article: "V"
+    article_name: "Quality First"
+    governance_note: "Quality gates — hooks enforce governance at runtime"
+    remediation: "npx aios-core install --force"
 
 # Output schema
 output:
   type: object
   properties:
-    score:
-      type: number
-      description: "Overall health score (0-100)"
-    status:
+    summary:
       type: string
-      description: "Health status: healthy, degraded, warning, critical"
+      description: "PASS/WARN/FAIL count summary"
     issues:
-      type: number
-      description: "Number of issues found"
-    autoFixed:
-      type: number
-      description: "Number of issues auto-fixed"
+      type: array
+      description: "List of FAIL and WARN items with governance context"
+    report:
+      type: string
+      description: "Full markdown report"
 
 # Examples
 examples:
-  - name: "Quick check"
+  - name: "Quick health check"
     command: "*health-check"
-    description: "Run quick health check (critical and high severity)"
+    description: "Run all 15 doctor checks with governance interpretation"
 
-  - name: "Full check"
-    command: "*health-check --mode=full"
-    description: "Run comprehensive health check"
-
-  - name: "Check specific domain"
-    command: "*health-check --domain=repository"
-    description: "Check only repository health"
-
-  - name: "With auto-fix confirmation"
-    command: "*health-check --fix-tier=2"
-    description: "Allow prompted auto-fixes"
-
-  - name: "Save JSON report"
-    command: "*health-check --output=json --save"
-    description: "Generate and save JSON report"
+  - name: "Health check with auto-fix"
+    command: "*health-check --fix"
+    description: "Run checks and auto-fix where possible"
 
   - name: "Verbose output"
     command: "*health-check --verbose"
@@ -187,40 +230,36 @@ examples:
 
 # Help text
 help: |
-  ## AIOS Health Check
+  ## AIOS Health Check (Unified)
 
-  Diagnoses issues in your AIOS project across 5 domains:
-
-  - **Project**: package.json, dependencies, framework config
-  - **Local**: Git, npm, IDE, disk space, memory, network
-  - **Repository**: Git status, branches, conflicts, lockfile
-  - **Deployment**: Environment files, CI/CD, Docker
-  - **Services**: MCP, GitHub CLI, Claude Code, APIs
+  Runs `aios doctor --json` internally and adds governance context.
+  15 checks across configuration, environment, and agent readiness.
 
   ### Quick Start
 
   ```bash
-  *health-check              # Quick check
-  *health-check --mode=full  # Full check
+  *health-check              # Run all checks
+  *health-check --fix        # Auto-fix issues
+  *health-check --verbose    # Show all checks
   ```
 
-  ### Auto-Fixing
+  ### What It Checks
 
-  Issues are classified into 3 tiers:
-  - **Tier 1**: Auto-fixed silently (safe, reversible)
-  - **Tier 2**: Prompted for confirmation
-  - **Tier 3**: Manual guide provided
+  The task delegates to `aios doctor` which runs 15 modular checks:
+  settings-json, rules-files, agent-memory, entity-registry, git-hooks,
+  core-config, claude-md, ide-sync, graph-dashboard, code-intel,
+  node-version, npm-packages, skills-count, commands-count, hooks-claude-count.
 
-  ### Output Formats
+  ### Governance Interpretation
 
-  - `console`: Colorful terminal output
-  - `markdown`: GitHub-compatible markdown
-  - `json`: Machine-readable JSON
+  Each FAIL/WARN result is mapped to a Constitution article:
+  - **Article I** (CLI First): core-config, graph-dashboard
+  - **Article II** (Agent Authority): settings-json, rules-files, agent-memory, claude-md, ide-sync, skills-count, commands-count
+  - **Article III** (Story-Driven Dev): entity-registry, code-intel
+  - **Article V** (Quality First): git-hooks, node-version, npm-packages, hooks-claude-count
 
-  ### Examples
+  ### Relationship to Other Tools
 
-  ```bash
-  *health-check --domain=repository --verbose
-  *health-check --fix-tier=2 --save
-  *hc --mode=full --output=markdown
-  ```
+  - `aios doctor` = CLI tool (standalone, technical output)
+  - `*health-check` = This task (contextual, governance-aware, agent-facing)
+  - `core/health-check/` = Legacy HCS-2 system (separate, not used by this task)

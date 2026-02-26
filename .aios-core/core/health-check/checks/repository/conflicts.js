@@ -3,7 +3,7 @@
  *
  * Checks for merge conflicts in the repository.
  *
- * @module @synkra/aios-core/health-check/checks/repository/conflicts
+ * @module aios-core/health-check/checks/repository/conflicts
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

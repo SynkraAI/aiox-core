@@ -30,6 +30,7 @@ const { syncGeminiCommands, buildGeminiCommandFiles } = require('./gemini-comman
 const claudeCodeTransformer = require('./transformers/claude-code');
 const cursorTransformer = require('./transformers/cursor');
 const antigravityTransformer = require('./transformers/antigravity');
+const githubCopilotTransformer = require('./transformers/github-copilot');
 
 // ANSI colors for output
 const colors = {
@@ -74,7 +75,7 @@ function loadConfig(projectRoot) {
       'github-copilot': {
         enabled: true,
         path: '.github/agents',
-        format: 'full-markdown-yaml',
+        format: 'github-copilot',
       },
       cursor: {
         enabled: true,
@@ -126,6 +127,7 @@ function getTransformer(format) {
     'full-markdown-yaml': claudeCodeTransformer,
     'condensed-rules': cursorTransformer,
     'cursor-style': antigravityTransformer,
+    'github-copilot': githubCopilotTransformer,
   };
 
   return transformers[format] || claudeCodeTransformer;

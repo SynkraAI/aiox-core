@@ -321,6 +321,64 @@ describe('license-api auth methods', () => {
     });
   });
 
+  describe('requestPasswordReset (PRO-12)', () => {
+    it('should return generic message for valid email (anti-enumeration)', async () => {
+      await createMockServer((req, res) => {
+        expect(req.method).toBe('POST');
+        expect(req.url).toBe('/api/v1/auth/request-reset');
+
+        let body = '';
+        req.on('data', (chunk) => (body += chunk));
+        req.on('end', () => {
+          const data = JSON.parse(body);
+          expect(data.email).toBe('user@example.com');
+
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({
+            message: 'If this email is associated with an account, you will receive reset instructions.',
+          }));
+        });
+      });
+
+      const client = new LicenseApiClient({ baseUrl: serverUrl });
+      const result = await client.requestPasswordReset('user@example.com');
+
+      expect(result.message).toContain('reset instructions');
+    });
+
+    it('should return generic message for non-existent email (anti-enumeration)', async () => {
+      await createMockServer((req, res) => {
+        // Server always returns 200 regardless of email existence
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+          message: 'If this email is associated with an account, you will receive reset instructions.',
+        }));
+      });
+
+      const client = new LicenseApiClient({ baseUrl: serverUrl });
+      const result = await client.requestPasswordReset('nonexistent@example.com');
+
+      expect(result.message).toContain('reset instructions');
+    });
+
+    it('should throw AuthError on rate limit', async () => {
+      await createMockServer((req, res) => {
+        res.writeHead(429, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ retryAfter: 3600 }));
+      });
+
+      const client = new LicenseApiClient({ baseUrl: serverUrl });
+
+      try {
+        await client.requestPasswordReset('user@example.com');
+        fail('Should have thrown');
+      } catch (error) {
+        expect(error).toBeInstanceOf(AuthError);
+        expect(error.code).toBe('AUTH_RATE_LIMITED');
+      }
+    });
+  });
+
   describe('resendVerification (AC-9)', () => {
     it('should successfully resend verification', async () => {
       await createMockServer((req, res) => {

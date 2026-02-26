@@ -210,7 +210,7 @@ claude-free
 ```yaml
 story: "6.7"
 version: 1.1.0
-migrated_from: @synkra/aios-core
+migrated_from: aios-core
 dependencies:
   - install-llm-routing.js
   - llm-routing.yaml

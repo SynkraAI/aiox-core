@@ -338,3 +338,10 @@ This task is complete when:
 - ✅ All tests pass (linting, unit, integration)
 - ✅ Story file is updated with changes
 - ✅ Code is ready for QA re-review
+
+## Handoff
+next_agent: @qa
+next_command: *review {story-id}
+condition: Fixes applied, ready for re-review
+alternatives:
+  - agent: @dev, command: *run-tests, condition: Need to verify fixes pass tests first

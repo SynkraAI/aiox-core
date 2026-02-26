@@ -556,6 +556,54 @@ After this analysis:
 
 ---
 
+### Step 5.5: Code Intelligence: Dependency & Complexity (Optional — Auto-skip if unavailable)
+
+> **Condition:** Only execute if `isCodeIntelAvailable()` returns true.
+> If no code intelligence provider is available, skip this step silently and proceed to Step 6.
+
+When code intelligence is available, enrich the analysis with real dependency and complexity data:
+
+```javascript
+const { isCodeIntelAvailable } = require('.aios-core/core/code-intel');
+const { getDependencyGraph, getComplexityAnalysis } = require('.aios-core/core/code-intel/helpers/planning-helper');
+
+if (isCodeIntelAvailable()) {
+  const depGraph = await getDependencyGraph(projectPath);
+  const complexity = await getComplexityAnalysis(serviceEntryPoints);
+
+  // Add to project-analysis.md:
+  // - depGraph.dependencies: real module dependency graph
+  // - depGraph.summary: { totalDeps, depth }
+  // - complexity.perFile: complexity score per file
+  // - complexity.average: average complexity across analyzed files
+}
+```
+
+**If data is available, add these sections to the analysis documents:**
+
+**Dependency Graph (Code Intelligence):**
+
+| Metric | Value |
+|--------|-------|
+| Total Dependencies | {{depGraph.summary.totalDeps}} |
+| Dependency Depth | {{depGraph.summary.depth}} |
+
+{{depGraph.dependencies key relationships}}
+
+**Complexity Metrics (Code Intelligence):**
+
+| File | Complexity Score |
+|------|-----------------|
+{{for each complexity.perFile}}
+| {{file}} | {{complexity.score}} |
+{{end for}}
+
+**Average Complexity:** {{complexity.average}}
+
+> **Note:** These metrics are from real code analysis, not estimates.
+
+---
+
 ### Step 6: Present Results
 
 Display summary to user:

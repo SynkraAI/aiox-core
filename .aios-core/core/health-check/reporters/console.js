@@ -4,7 +4,7 @@
  * Generates formatted console output for health check results.
  * Supports colors and various verbosity levels.
  *
- * @module @synkra/aios-core/health-check/reporters/console
+ * @module aios-core/health-check/reporters/console
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

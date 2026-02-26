@@ -4,7 +4,7 @@
  * Checks for external service integrations.
  * Domain: services
  *
- * @module @synkra/aios-core/health-check/checks/services
+ * @module aios-core/health-check/checks/services
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

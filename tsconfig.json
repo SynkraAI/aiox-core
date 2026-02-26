@@ -20,8 +20,8 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@synkra/aios-core": ["./.aios-core/core"],
-      "@synkra/aios-core/*": ["./.aios-core/core/*"]
+      "aios-core": ["./.aios-core/core"],
+      "aios-core/*": ["./.aios-core/core/*"]
     }
   },
   "include": [

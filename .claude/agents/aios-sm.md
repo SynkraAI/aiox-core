@@ -13,6 +13,15 @@ tools:
   - Bash
 permissionMode: bypassPermissions
 memory: project
+hooks:
+  PreToolUse:
+    - matcher: "Bash"
+      hooks:
+        - type: command
+          command: ".claude/hooks/enforce-git-push-authority.sh"
+skills:
+  - synapse:tasks:diagnose-synapse
+  - checklist-runner
 ---
 
 # AIOS Scrum Master - Autonomous Agent

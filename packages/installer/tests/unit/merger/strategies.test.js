@@ -41,7 +41,7 @@ describe('getMergeStrategy', () => {
   });
 
   it('should return ReplaceMerger for unknown file types', () => {
-    const merger = getMergeStrategy('config.yaml');
+    const merger = getMergeStrategy('config.toml');
     expect(merger).toBeInstanceOf(ReplaceMerger);
   });
 
@@ -71,7 +71,7 @@ describe('hasMergeStrategy', () => {
   });
 
   it('should return false for unsupported files', () => {
-    expect(hasMergeStrategy('config.yaml')).toBe(false);
+    expect(hasMergeStrategy('config.toml')).toBe(false);
   });
 
   it('should return false for .json files', () => {

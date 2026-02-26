@@ -3,7 +3,7 @@
  *
  * Verifies project is ready for deployment.
  *
- * @module @synkra/aios-core/health-check/checks/deployment/deployment-readiness
+ * @module aios-core/health-check/checks/deployment/deployment-readiness
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

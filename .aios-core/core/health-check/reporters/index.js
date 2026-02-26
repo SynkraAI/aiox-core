@@ -4,7 +4,7 @@
  * Manages report generation for health check results.
  * Supports multiple output formats: Console, Markdown, JSON.
  *
- * @module @synkra/aios-core/health-check/reporters
+ * @module aios-core/health-check/reporters
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

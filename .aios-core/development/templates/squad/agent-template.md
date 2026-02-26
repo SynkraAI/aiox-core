@@ -64,6 +64,17 @@ dependencies:
 **Handoff points:**
 - When to hand off to other agents
 
+{{#IF CODE_INTEL_AVAILABLE}}
+## Code Intelligence Context
+
+> Auto-populated when code intelligence provider is available.
+> This section can be safely removed if not needed.
+
+- **Project Structure:** {{PROJECT_STRUCTURE}}
+- **Conventions:** {{CONVENTIONS}}
+- **Related Entities:** {{RELATED_ENTITIES}}
+{{/IF}}
+
 ---
 
 *Agent created by squad-creator*

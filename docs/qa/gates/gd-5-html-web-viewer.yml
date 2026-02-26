@@ -1,0 +1,86 @@
+storyId: GD-5
+storyTitle: "HTML Web Viewer com vis-network"
+epicId: epic-cli-graph-dashboard
+verdict: PASS
+score: 8.5
+reviewer: "Quinn (@qa)"
+date: "2026-02-21"
+
+summary: |
+  Implementacao solida do HTML Web Viewer com vis-network.
+  Codigo limpo, bem estruturado, com sanitizacao XSS adequada.
+  29 testes unitarios cobrindo toda logica pura.
+  Integracao CLI consistente com patterns existentes (GD-1 a GD-4).
+
+ac_traceability:
+  AC1_html_format_flag: PASS
+  AC2_vis_network_cdn: PASS
+  AC3_physics_simulation: PASS
+  AC4_node_colors_by_category: PASS
+  AC5_tooltip_on_click: PASS
+  AC6_browser_open_crossplatform: PARTIAL  # manual test pending
+  AC7_offline_after_first_load: PARTIAL  # manual test pending
+  AC8_unit_tests: PASS
+
+security:
+  xss_sanitization: PASS
+  json_injection: PASS
+  command_injection: PASS
+  cdn_sri: INFO  # No SRI hash, acceptable for dev tool
+
+test_coverage:
+  total_tests: 29
+  passing: 29
+  failing: 0
+  blocks:
+    - name: formatAsHtml
+      tests: 10
+    - name: _sanitize
+      tests: 4
+    - name: _buildVisNodes
+      tests: 4
+    - name: _buildVisEdges
+      tests: 2
+    - name: _buildLegend
+      tests: 2
+    - name: CLI_integration
+      tests: 5
+    - name: XSS_prevention
+      tests: 2
+
+issues:
+  - id: 1
+    severity: LOW
+    category: tests
+    description: "handleHtmlOutput e openInBrowser sem testes unitarios (side effects com fs e exec)"
+    recommendation: "Aceitavel para MVP. Considerar mock de fs/exec em iteracao futura."
+
+  - id: 2
+    severity: INFO
+    category: security
+    description: "CDN script tag sem Subresource Integrity (SRI) hash"
+    recommendation: "Adicionar integrity attribute em iteracao futura para hardening."
+
+  - id: 3
+    severity: INFO
+    category: code
+    description: "handleHtmlOutput retorna outputPath mas valor nao e usado pelo caller em handleDeps"
+    recommendation: "Manter — util para testes futuros e composicao."
+
+manual_testing_pending:
+  - "Task 6.3: Executar node bin/aios.js graph --deps --format=html"
+  - "Task 6.4: Verificar que HTML abre no browser e grafo renderiza"
+  - "Task 6.5: Testar com grafo grande (entity-registry completo, 500+ nodes)"
+
+files_reviewed:
+  - path: ".aios-core/core/graph-dashboard/formatters/html-formatter.js"
+    action: Created
+    lines: 153
+
+  - path: ".aios-core/core/graph-dashboard/cli.js"
+    action: Modified
+    lines: 361
+
+  - path: "tests/graph-dashboard/html-formatter.test.js"
+    action: Created
+    lines: 232

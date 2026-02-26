@@ -824,4 +824,11 @@ module.exports = AnalyzeImpactTask;
 - Sanitize component paths and modification descriptions
 - Ensure approval workflow cannot be bypassed for critical changes
 - Validate output file paths for report generation
-- Log all high-risk modification attempts for audit 
+- Log all high-risk modification attempts for audit
+
+## Handoff
+next_agent: @analyst
+next_command: *research {topic}
+condition: Complexity class is STANDARD or COMPLEX (research needed)
+alternatives:
+  - agent: @pm, command: *write-spec, condition: Complexity class is SIMPLE (skip research) 

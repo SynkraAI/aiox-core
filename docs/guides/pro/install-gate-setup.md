@@ -145,7 +145,7 @@ License activation failed: Invalid key format
 
 - Verifique o formato: `PRO-XXXX-XXXX-XXXX-XXXX` (4 blocos de 4 caracteres hex)
 - Sem espacos extras
-- Contate support@synkra.ai se a chave foi fornecida a voce
+- Abra uma issue em https://github.com/SynkraAI/aios-core/issues se a chave foi fornecida a voce
 
 ### Maximo de seats excedido
 
@@ -196,7 +196,7 @@ License activation failed: ECONNREFUSED
 
 - **Documentacao:** https://synkra.ai/pro/docs
 - **Comprar:** https://synkra.ai/pro
-- **Suporte:** support@synkra.ai
+- **Suporte:** https://github.com/SynkraAI/aios-core/issues
 - **Issues:** https://github.com/SynkraAI/aios-core/issues
 
 ---

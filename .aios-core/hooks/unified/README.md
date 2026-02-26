@@ -188,14 +188,44 @@ module.exports = { onMyEvent, getHookConfig };
 
 ### Step 2: Register Hook
 
+**IMPORTANT:** Claude Code hooks must be registered as `type: "command"` in `settings.json`. They run as separate processes reading JSON from stdin — NOT as module exports.
+
 ```javascript
-// .claude/hooks/my-hook.js
+// .claude/hooks/my-hook.cjs — Process-based hook (reads stdin)
+#!/usr/bin/env node
+'use strict';
 
-const { onMyEvent } = require('../../.aios-core/hooks/unified/runners/my-runner');
+function readStdin() {
+  return new Promise((resolve, reject) => {
+    let data = '';
+    process.stdin.setEncoding('utf8');
+    process.stdin.on('data', (chunk) => { data += chunk; });
+    process.stdin.on('end', () => {
+      try { resolve(JSON.parse(data)); }
+      catch (e) { reject(e); }
+    });
+  });
+}
 
-module.exports = async (context) => {
-  return await onMyEvent(context);
-};
+async function main() {
+  const input = await readStdin();
+  const { onMyEvent } = require('../../.aios-core/hooks/unified/runners/my-runner');
+  await onMyEvent(input);
+}
+
+if (require.main === module) {
+  main().then(() => process.exit(0)).catch(() => process.exit(0));
+}
+```
+
+Then add the mapping to `HOOK_EVENT_MAP` in `packages/installer/src/wizard/ide-config-generator.js`:
+
+```javascript
+'my-hook.cjs': {
+  event: 'PreToolUse', // or UserPromptSubmit, PreCompact, etc.
+  matcher: null,       // or 'Write|Edit' for PreToolUse filtering
+  timeout: 10,
+},
 ```
 
 ### Step 3: Test Hook
@@ -298,10 +328,11 @@ const proModule = require('../../pro/...'); // Fails if pro absent
 
 - **Story GEMINI-INT.8:** Unified Hook Interface (completed)
 - **Story MIS-2:** Dead Code Cleanup (restored hooks foundation)
-- **Story MIS-3:** Session Digest (PreCompact Hook) ← **CURRENT**
+- **Story MIS-3:** Session Digest (PreCompact Hook)
+- **Story MIS-3.1:** Fix Session-Digest Hook Registration ← **CURRENT**
 - **Story PRO-5:** aios-pro Repository Bootstrap (pro-detector pattern)
 
 ---
 
 *Unified Hooks System - AIOS Core*
-*Updated: 2026-02-09 - Story MIS-3*
+*Updated: 2026-02-26 - Story MIS-3.1*

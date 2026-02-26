@@ -23,8 +23,14 @@ describe('GitConfigDetector', () => {
 
   beforeEach(() => {
     jest.useFakeTimers();
-    detector = new GitConfigDetector(5 * 60 * 1000); // 5 minute TTL
     jest.clearAllMocks();
+    detector = new GitConfigDetector(5 * 60 * 1000); // 5 minute TTL
+    // NOG-18: _isGitRepository now uses fs.existsSync (not execSync), so mock it
+    // to control git repo detection in tests.
+    jest.spyOn(detector, '_isGitRepository').mockReturnValue(true);
+    // QW-5: _detectBranchDirect uses fs (not execSync), so mock it to force
+    // fallback to _getCurrentBranchExec which uses the mocked execSync.
+    jest.spyOn(detector, '_detectBranchDirect').mockReturnValue(undefined);
   });
 
   afterEach(() => {
@@ -33,9 +39,9 @@ describe('GitConfigDetector', () => {
 
   describe('Cache Management', () => {
     test('should return cached data on cache hit', () => {
-      // Setup mock git commands
+      // NOG-18: _isGitRepository uses fs (mocked via spy), no execSync for repo check
+      // Only branch (execSync) and remote (execSync) calls remain
       execSync
-        .mockReturnValueOnce('true\n') // is-inside-work-tree
         .mockReturnValueOnce('main\n') // branch
         .mockReturnValueOnce('https://github.com/user/repo.git\n'); // remote url
 
@@ -45,12 +51,11 @@ describe('GitConfigDetector', () => {
       // Second call should use cache (no execSync calls)
       const secondCall = detector.get();
       expect(secondCall).toEqual(firstCall);
-      expect(execSync).toHaveBeenCalledTimes(3); // Only first call
+      expect(execSync).toHaveBeenCalledTimes(2); // Only first call (branch + remote)
     });
 
     test('should execute git commands on cache miss', () => {
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('main\n')
         .mockReturnValueOnce('https://github.com/user/repo.git\n');
 
@@ -63,9 +68,10 @@ describe('GitConfigDetector', () => {
     test('should expire cache after TTL', () => {
       const shortTTL = 100; // 100ms
       detector = new GitConfigDetector(shortTTL);
+      jest.spyOn(detector, '_isGitRepository').mockReturnValue(true);
+      jest.spyOn(detector, '_detectBranchDirect').mockReturnValue(undefined);
 
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('main\n')
         .mockReturnValueOnce('https://github.com/user/repo.git\n');
 
@@ -75,18 +81,16 @@ describe('GitConfigDetector', () => {
       jest.advanceTimersByTime(shortTTL + 1);
 
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('develop\n')
         .mockReturnValueOnce('https://github.com/user/repo.git\n');
 
       detector.get(); // Second call after expiration
 
-      expect(execSync).toHaveBeenCalledTimes(6); // 3 calls each time
+      expect(execSync).toHaveBeenCalledTimes(4); // 2 calls each time
     });
 
     test('should invalidate cache manually', () => {
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('main\n')
         .mockReturnValueOnce('https://github.com/user/repo.git\n');
 
@@ -95,18 +99,16 @@ describe('GitConfigDetector', () => {
       detector.invalidate();
 
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('develop\n')
         .mockReturnValueOnce('https://github.com/user/repo.git\n');
 
       detector.get(); // Should re-detect
 
-      expect(execSync).toHaveBeenCalledTimes(6); // 3 calls each time
+      expect(execSync).toHaveBeenCalledTimes(4); // 2 calls each time
     });
 
     test('should report cache age correctly', () => {
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('main\n')
         .mockReturnValueOnce('https://github.com/user/repo.git\n');
 
@@ -120,9 +122,10 @@ describe('GitConfigDetector', () => {
     test('should detect cache expiring soon', () => {
       const shortTTL = 1000; // 1 second
       detector = new GitConfigDetector(shortTTL);
+      jest.spyOn(detector, '_isGitRepository').mockReturnValue(true);
+      jest.spyOn(detector, '_detectBranchDirect').mockReturnValue(undefined);
 
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('main\n')
         .mockReturnValueOnce('https://github.com/user/repo.git\n');
 
@@ -137,8 +140,8 @@ describe('GitConfigDetector', () => {
 
   describe('Git Repository Detection', () => {
     test('should detect configured git repository', () => {
+      // NOG-18: _isGitRepository uses fs (mocked via spy), only branch + remote via execSync
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('main\n')
         .mockReturnValueOnce('https://github.com/user/repo.git\n');
 
@@ -152,6 +155,8 @@ describe('GitConfigDetector', () => {
     test('should detect unconfigured repository (no git)', () => {
       // Create a fresh detector to avoid cache pollution from other tests
       const freshDetector = new GitConfigDetector(5 * 60 * 1000);
+      // NOG-18: _isGitRepository uses fs.existsSync, mock it to simulate no .git
+      jest.spyOn(freshDetector, '_isGitRepository').mockReturnValue(false);
       execSync.mockImplementation(() => {
         throw new Error('not a git repository');
       });
@@ -164,6 +169,8 @@ describe('GitConfigDetector', () => {
     });
 
     test('should handle timeout gracefully', () => {
+      // NOG-18: _isGitRepository uses fs, mock to false so execSync errors → unconfigured
+      detector._isGitRepository.mockReturnValue(false);
       execSync.mockImplementation(() => {
         throw new Error('Command timeout');
       });
@@ -177,7 +184,6 @@ describe('GitConfigDetector', () => {
   describe('Repository Type Detection', () => {
     test('should detect GitHub repository', () => {
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('main\n')
         .mockReturnValueOnce('https://github.com/user/repo.git\n');
 
@@ -188,7 +194,6 @@ describe('GitConfigDetector', () => {
 
     test('should detect GitLab repository', () => {
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('main\n')
         .mockReturnValueOnce('https://gitlab.com/user/repo.git\n');
 
@@ -199,7 +204,6 @@ describe('GitConfigDetector', () => {
 
     test('should detect Bitbucket repository', () => {
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('main\n')
         .mockReturnValueOnce('https://bitbucket.org/user/repo.git\n');
 
@@ -210,7 +214,6 @@ describe('GitConfigDetector', () => {
 
     test('should detect other repository type', () => {
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('main\n')
         .mockReturnValueOnce('https://custom-git-server.com/repo.git\n');
 
@@ -221,7 +224,6 @@ describe('GitConfigDetector', () => {
 
     test('should handle missing remote URL', () => {
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('main\n')
         .mockImplementationOnce(() => {
           throw new Error('No remote');
@@ -236,7 +238,6 @@ describe('GitConfigDetector', () => {
   describe('Branch Detection', () => {
     test('should detect current branch', () => {
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('feature-123\n')
         .mockReturnValueOnce('https://github.com/user/repo.git\n');
 
@@ -247,7 +248,6 @@ describe('GitConfigDetector', () => {
 
     test('should handle detached HEAD state', () => {
       execSync
-        .mockReturnValueOnce('true\n')
         .mockReturnValueOnce('\n') // Empty branch name
         .mockReturnValueOnce('https://github.com/user/repo.git\n');
 
@@ -259,13 +259,15 @@ describe('GitConfigDetector', () => {
 
   describe('Detailed Information', () => {
     test('should get detailed git information', () => {
+      // NOG-18: _isGitRepository uses fs (mocked via spy), no execSync for repo check
+      // detect() calls: branch (execSync) + remote (execSync)
+      // getDetailed() calls: user.name, user.email, remote, last commit, status --porcelain
       execSync
-        .mockReturnValueOnce('true\n') // is-inside-work-tree
         .mockReturnValueOnce('main\n') // branch
-        .mockReturnValueOnce('https://github.com/user/repo.git\n') // remote
+        .mockReturnValueOnce('https://github.com/user/repo.git\n') // remote (detect)
         .mockReturnValueOnce('John Doe\n') // user.name
         .mockReturnValueOnce('john@example.com\n') // user.email
-        .mockReturnValueOnce('https://github.com/user/repo.git\n') // remote (again)
+        .mockReturnValueOnce('https://github.com/user/repo.git\n') // remote (getDetailed)
         .mockReturnValueOnce('abc123def456\n') // last commit
         .mockReturnValueOnce('M file.txt\n'); // status --porcelain
 
@@ -278,6 +280,8 @@ describe('GitConfigDetector', () => {
     });
 
     test('should handle errors in detailed detection', () => {
+      // NOG-18: _isGitRepository uses fs, mock to false so git errors → unconfigured
+      detector._isGitRepository.mockReturnValue(false);
       execSync.mockImplementation(() => {
         throw new Error('git error');
       });
@@ -290,6 +294,8 @@ describe('GitConfigDetector', () => {
 
   describe('Error Handling', () => {
     test('should gracefully handle all git errors', () => {
+      // NOG-18: _isGitRepository uses fs, mock to false so git errors → unconfigured
+      detector._isGitRepository.mockReturnValue(false);
       execSync.mockImplementation(() => {
         throw new Error('git command failed');
       });
@@ -303,6 +309,8 @@ describe('GitConfigDetector', () => {
     });
 
     test('should cache error results', () => {
+      // NOG-18: _isGitRepository uses fs, mock to false so git errors → unconfigured
+      detector._isGitRepository.mockReturnValue(false);
       execSync.mockImplementation(() => {
         throw new Error('git error');
       });
@@ -311,7 +319,9 @@ describe('GitConfigDetector', () => {
       const secondCall = detector.get();
 
       expect(firstCall).toEqual(secondCall);
-      expect(execSync).toHaveBeenCalledTimes(1); // Only first call
+      // _isGitRepository is mocked via spyOn (no execSync), so no execSync calls expected
+      // get() caches the result from detect(), second get() returns cached
+      expect(execSync).toHaveBeenCalledTimes(0);
     });
   });
 });

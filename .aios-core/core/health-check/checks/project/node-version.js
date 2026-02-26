@@ -3,7 +3,7 @@
  *
  * Verifies Node.js version compatibility with project requirements.
  *
- * @module @synkra/aios-core/health-check/checks/project/node-version
+ * @module aios-core/health-check/checks/project/node-version
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

@@ -1,0 +1,19 @@
+handoff:
+  from_agent: "@sm"
+  to_agent: "@po"
+  last_command: "*draft"
+  story_context:
+    story_id: WIS-16
+    story_path: docs/stories/epics/epic-workflow-intelligence/story-WIS-16-workflow-aware-greeting-handoffs.md
+    story_status: Draft
+    current_task: Story draft created
+    branch: feat/epic-nogic-code-intelligence
+  decisions:
+    - Created story WIS-16 in epic-workflow-intelligence
+  files_modified:
+    - docs/stories/epics/epic-workflow-intelligence/story-WIS-16-workflow-aware-greeting-handoffs.md
+    - docs/stories/epics/epic-workflow-intelligence/EPIC-WIS-INDEX.md
+  blockers: []
+  next_action: Validate story draft quality and completeness
+  consumed: false
+  timestamp: "2026-02-24T10:00:00Z"

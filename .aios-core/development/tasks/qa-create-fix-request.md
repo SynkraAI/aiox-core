@@ -621,3 +621,10 @@ This task is complete when:
 - Constraints section present
 - File follows template structure
 ```
+
+## Handoff
+next_agent: @dev
+next_command: *fix-qa-issues
+condition: QA_FIX_REQUEST.md generated
+alternatives:
+  - agent: @dev, command: *apply-qa-fixes, condition: Simple fixes, no structured request needed

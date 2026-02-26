@@ -11,6 +11,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 const semver = require('semver');
 const { hashFile, hashesMatch } = require('./file-hasher');
+const { YamlMerger } = require('../merger/strategies/yaml-merger.js');
 
 /**
  * Upgrade report structure
@@ -257,12 +258,74 @@ async function applyUpgrade(report, sourceDir, targetDir, options = {}) {
     }
   }
 
-  // Skip user-modified files
+  // Handle user-modified files: skip most, but smart-merge core-config.yaml
   for (const file of report.userModifiedFiles) {
-    result.filesSkipped.push({
-      path: file.path,
-      reason: 'User modified - preserving local changes',
-    });
+    if (file.path.endsWith('core-config.yaml')) {
+      // Story INS-4.7: Smart merge for core-config.yaml instead of skipping
+      let backupPath;
+      try {
+        const sourcePath = path.join(sourceDir, file.path);
+        const targetPath = path.join(aiosCoreDir, file.path);
+
+        if (!dryRun && fs.existsSync(sourcePath) && fs.existsSync(targetPath)) {
+          const sourceContent = fs.readFileSync(sourcePath, 'utf8');
+          const targetContent = fs.readFileSync(targetPath, 'utf8');
+
+          // Backup before merge
+          backupPath = `${targetPath}.backup-${Date.now()}`;
+          fs.copyFileSync(targetPath, backupPath);
+
+          const merger = new YamlMerger();
+          const mergeResult = await merger.merge(sourceContent, targetContent);
+
+          // Write merged content
+          fs.writeFileSync(targetPath, mergeResult.content, 'utf8');
+
+          // Log conflict warnings
+          const conflicts = mergeResult.changes.filter(c => c.type === 'conflict');
+          if (conflicts.length > 0) {
+            result.mergeWarnings = result.mergeWarnings || [];
+            for (const conflict of conflicts) {
+              result.mergeWarnings.push(
+                `core-config.yaml: ${conflict.identifier} — ${conflict.reason}`
+              );
+            }
+          }
+
+          result.filesInstalled.push({
+            path: file.path,
+            action: 'merged',
+            stats: mergeResult.stats,
+            backupPath,
+          });
+        } else if (dryRun) {
+          result.filesInstalled.push({ path: file.path, action: 'merge (dry-run)' });
+        } else {
+          result.filesSkipped.push({
+            path: file.path,
+            reason: 'User modified - source or target missing for merge',
+          });
+        }
+      } catch (mergeError) {
+        // Merge failed — restore backup if exists, skip file
+        if (backupPath && fs.existsSync(backupPath)) {
+          try {
+            const targetPath = path.join(aiosCoreDir, file.path);
+            fs.copyFileSync(backupPath, targetPath);
+          } catch { /* restore failed — backup file still available */ }
+        }
+        console.warn(`⚠️  core-config.yaml merge failed: ${mergeError.message}`);
+        result.filesSkipped.push({
+          path: file.path,
+          reason: `Merge failed: ${mergeError.message} — user config preserved`,
+        });
+      }
+    } else {
+      result.filesSkipped.push({
+        path: file.path,
+        reason: 'User modified - preserving local changes',
+      });
+    }
   }
 
   // Note: We don't delete files that were removed from source

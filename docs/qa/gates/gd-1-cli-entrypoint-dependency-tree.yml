@@ -1,0 +1,44 @@
+schema: 1
+story: 'GD-1'
+story_title: 'CLI Entrypoint e Dependency Tree ASCII'
+gate: PASS
+status_reason: 'All 7 ACs met. 43 tests passing. All coverage observations resolved. Clean architecture with proper fallback chain.'
+reviewer: 'Quinn (Test Architect)'
+updated: '2026-02-21T18:30:00Z'
+
+top_issues: []
+
+waiver: { active: false }
+
+quality_score: 95
+expires: '2026-03-07T18:00:00Z'
+
+evidence:
+  tests_reviewed: 43
+  risks_identified: 0
+  coverage:
+    cli_js: { stmts: 100, branch: 96.15, funcs: 100, lines: 100 }
+    code_intel_source_js: { stmts: 95.45, branch: 71.21, funcs: 100, lines: 98.43 }
+    tree_renderer_js: { stmts: 98.21, branch: 82.85, funcs: 100, lines: 100 }
+    index_js: { stmts: 100, branch: 100, funcs: 100, lines: 100 }
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 7]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: 'No user input in shell commands. No file writes. No network requests from module. process.exit is only side effect.'
+  performance:
+    status: PASS
+    notes: 'Registry with 517 entities renders instantly. Caching with configurable TTL prevents redundant loads.'
+  reliability:
+    status: PASS
+    notes: 'Three-level fallback: code-intel → registry → empty graph. All failure modes produce valid output.'
+  maintainability:
+    status: PASS
+    notes: 'Clean separation (data-source → renderer → CLI). JSDoc on all public functions. Follows existing code-intel patterns.'
+
+recommendations:
+  immediate: []
+  future: []

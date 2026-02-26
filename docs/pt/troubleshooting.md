@@ -33,16 +33,16 @@ Sempre comece com o diagnóstico integrado:
 
 ```bash
 # Diagnóstico básico
-npx @synkra/aios-core doctor
+npx aios-core doctor
 
 # Corrigir automaticamente problemas comuns
-npx @synkra/aios-core doctor --fix
+npx aios-core doctor --fix
 
 # Saída detalhada
-npx @synkra/aios-core doctor --verbose
+npx aios-core doctor --verbose
 
 # Verificar componente específico
-npx @synkra/aios-core doctor --component memory-layer
+npx aios-core doctor --component memory-layer
 ```
 
 ### Correções Rápidas Comuns
@@ -58,7 +58,7 @@ npx @synkra/aios-core doctor --component memory-layer
 *config --reset
 
 # Atualizar para última versão
-npx @synkra/aios-core update
+npx aios-core update
 ```
 
 ## Problemas de Instalação
@@ -79,7 +79,7 @@ npm --version
 npm install -g npx
 
 # Ou usar npm diretamente
-npm exec @synkra/aios-core init my-project
+npm exec aios-core init my-project
 ```
 
 ### Problema: Instalação falha com erros de permissão
@@ -110,7 +110,7 @@ source ~/.bashrc
 ```bash
 # Instalar no diretório do usuário
 cd ~
-npx @synkra/aios-core init my-project
+npx aios-core init my-project
 ```
 
 ### Problema: Erro de versão do Node.js
@@ -160,7 +160,7 @@ npm cache clean --force
 npm config set fetch-timeout 60000
 
 # Pular instalação de dependências
-npx @synkra/aios-core init my-project --skip-install
+npx aios-core init my-project --skip-install
 
 # Então instalar manualmente
 cd my-project
@@ -210,11 +210,11 @@ Error: Failed to initialize meta-agent
 ls -la .aios/config.json
 
 # Validar configuração
-npx @synkra/aios-core doctor --component config
+npx aios-core doctor --component config
 
 # Resetar se corrompido
 rm .aios/config.json
-npx @synkra/aios-core doctor --fix
+npx aios-core doctor --fix
 ```
 
 2. **Verificar dependências:**
@@ -270,7 +270,7 @@ create-agent my-agent   # ✗ Errado
 
 # Ou reiniciar meta-agent
 exit
-npx @synkra/aios-core
+npx aios-core
 ```
 
 ### Problema: Criação de agente falha
@@ -382,7 +382,7 @@ cat .aios/memory-config.json
 export NODE_OPTIONS="--max-old-space-size=1024"
 
 # Executar com memória limitada
-npx @synkra/aios-core
+npx aios-core
 ```
 
 ### Problema: Erros do LlamaIndex
@@ -668,7 +668,7 @@ New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" `
 
 # Ou usar caminhos mais curtos
 cd C:\
-npx @synkra/aios-core init myapp
+npx aios-core init myapp
 ```
 
 #### Problema: Scripts desabilitados
@@ -697,7 +697,7 @@ xcode-select --install
 
 #### Problema: Gatekeeper bloqueia execução
 ```
-Error: "@synkra/aios-core" cannot be opened
+Error: "aios-core" cannot be opened
 ```
 
 **Solução:**
@@ -706,7 +706,7 @@ Error: "@synkra/aios-core" cannot be opened
 sudo spctl --master-disable
 
 # Ou remover quarentena
-xattr -d com.apple.quarantine /usr/local/bin/@synkra/aios-core
+xattr -d com.apple.quarantine /usr/local/bin/aios-core
 ```
 
 ### Problemas do Linux
@@ -736,7 +736,7 @@ sudo pacman -S openssl
 ```bash
 # Saída de debug completa
 export DEBUG=aios:*
-npx @synkra/aios-core
+npx aios-core
 
 # Componentes específicos
 export DEBUG=aios:memory,aios:agent
@@ -759,10 +759,10 @@ grep -i error .aios/logs/*.log
 
 ```bash
 # Gerar diagnóstico completo
-npx @synkra/aios-core doctor --report diagnostic.json
+npx aios-core doctor --report diagnostic.json
 
 # Incluir informações do sistema
-npx @synkra/aios-core info --detailed >> diagnostic.json
+npx aios-core info --detailed >> diagnostic.json
 
 # Criar pacote de suporte
 tar -czf aios-support.tar.gz .aios/logs diagnostic.json
@@ -804,18 +804,18 @@ tar -czf aios-support.tar.gz .aios/logs diagnostic.json
 
 1. **Execute diagnósticos:**
    ```bash
-   npx @synkra/aios-core doctor --verbose > diagnostic.log
+   npx aios-core doctor --verbose > diagnostic.log
    ```
 
 2. **Colete informações:**
    - Versão do Node.js: `node --version`
    - Versão do NPM: `npm --version`
    - SO e versão: `uname -a` ou `ver`
-   - Versão do AIOS: `npx @synkra/aios-core version`
+   - Versão do AIOS: `npx aios-core version`
 
 3. **Verifique issues existentes:**
-   - [GitHub Issues](https://github.com/@synkra/aios-core/@synkra/aios-core/issues)
-   - [Discussions](https://github.com/@synkra/aios-core/@synkra/aios-core/discussions)
+   - [GitHub Issues](https://github.com/aios-core/aios-core/issues)
+   - [Discussions](https://github.com/aios-core/aios-core/discussions)
 
 ### Suporte da Comunidade
 
@@ -826,7 +826,7 @@ tar -czf aios-support.tar.gz .aios/logs diagnostic.json
 
 - **GitHub Discussions**: Perguntas técnicas e solicitações de funcionalidades
 
-- **Stack Overflow**: Marque perguntas com `@synkra/aios-core`
+- **Stack Overflow**: Marque perguntas com `aios-core`
 
 ### Reportando Bugs
 
@@ -839,7 +839,7 @@ Crie relatórios de bug detalhados:
 - AIOS: 1.0.0
 
 ## Passos para Reproduzir
-1. Executar `npx @synkra/aios-core init test`
+1. Executar `npx aios-core init test`
 2. Selecionar template "enterprise"
 3. Erro ocorre durante instalação
 
@@ -870,7 +870,7 @@ npm cache clean --force
 
 # Instalação limpa
 npm install
-npx @synkra/aios-core doctor --fix
+npx aios-core doctor --fix
 
 # Restaurar dados se necessário
 cp .aios.backup/memory.db .aios/
@@ -879,7 +879,7 @@ cp .aios.backup/memory.db .aios/
 ---
 
 **Lembre-se**: A maioria dos problemas pode ser resolvida com:
-1. `npx @synkra/aios-core doctor --fix`
+1. `npx aios-core doctor --fix`
 2. Limpando caches
 3. Atualizando para a última versão
 4. Verificando permissões

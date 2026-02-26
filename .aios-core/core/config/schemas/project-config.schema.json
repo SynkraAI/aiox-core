@@ -5,25 +5,339 @@
   "description": "Team-shared project settings stored in .aios-core/project-config.yaml",
   "type": "object",
   "properties": {
-    "project_name": {
-      "type": "string",
-      "description": "Project name"
-    },
-    "project_type": {
-      "type": "string",
-      "enum": ["fullstack", "api", "frontend", "library", "cli"],
-      "description": "Project type"
-    },
-    "environments": {
+    "project": {
       "type": "object",
-      "description": "Environment-specific configurations",
-      "additionalProperties": {
-        "type": "object"
-      }
+      "description": "Project metadata",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["EXISTING_AIOS", "NEW_PROJECT", "BROWNFIELD"],
+          "description": "Project installation type"
+        },
+        "installed_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 installation timestamp"
+        },
+        "version": {
+          "type": "string",
+          "description": "Project config version"
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": false
     },
-    "deploy_target": {
-      "type": "string",
-      "description": "Deployment target platform"
+    "documentation_paths": {
+      "type": "object",
+      "description": "Paths to documentation artifacts",
+      "properties": {
+        "qa_dir": { "type": "string" },
+        "prd_file": { "type": "string" },
+        "prd_version": { "type": "string" },
+        "prd_sharded": { "type": "boolean" },
+        "prd_sharded_location": { "type": "string" },
+        "architecture_file": { "type": "string" },
+        "architecture_version": { "type": "string" },
+        "architecture_sharded": { "type": "boolean" },
+        "architecture_sharded_location": { "type": "string" },
+        "stories_dir": { "type": "string" },
+        "dev_debug_log": { "type": "string" },
+        "slash_prefix": { "type": "string", "description": "Prefix for slash commands in IDEs" },
+        "custom_technical_documents": {
+          "oneOf": [
+            { "type": "array", "items": { "type": "string" } },
+            { "type": "null" }
+          ]
+        },
+        "dev_load_always_files": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Files loaded on every dev agent activation"
+        },
+        "dev_load_always_files_fallback": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Fallback files for i18n variants"
+        }
+      },
+      "additionalProperties": false
+    },
+    "github_integration": {
+      "type": "object",
+      "description": "GitHub integration settings",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "cli_required": { "type": "boolean" },
+        "features": {
+          "type": "object",
+          "properties": {
+            "pr_creation": { "type": "boolean" },
+            "issue_management": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        },
+        "pr": {
+          "type": "object",
+          "properties": {
+            "title_format": { "type": "string" },
+            "include_story_id": { "type": "boolean" },
+            "conventional_commits": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "branch_type_map": {
+                  "type": "object",
+                  "additionalProperties": { "type": "string" }
+                },
+                "default_type": { "type": "string" }
+              },
+              "additionalProperties": false
+            },
+            "auto_assign_reviewers": { "type": "boolean" },
+            "draft_by_default": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        },
+        "semantic_release": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "coderabbit_integration": {
+      "type": "object",
+      "description": "CodeRabbit automated review integration",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "self_healing": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "type": { "type": "string", "enum": ["light", "full"] },
+            "max_iterations": { "type": "integer", "minimum": 1 },
+            "timeout_minutes": { "type": "integer", "minimum": 1 }
+          },
+          "additionalProperties": false
+        },
+        "severity_handling": {
+          "type": "object",
+          "properties": {
+            "CRITICAL": { "type": "string", "enum": ["auto_fix", "document_as_debt", "ignore"] },
+            "HIGH": { "type": "string", "enum": ["auto_fix", "document_as_debt", "ignore"] },
+            "MEDIUM": { "type": "string", "enum": ["auto_fix", "document_as_debt", "ignore"] },
+            "LOW": { "type": "string", "enum": ["auto_fix", "document_as_debt", "ignore"] }
+          },
+          "additionalProperties": false
+        },
+        "graceful_degradation": {
+          "type": "object",
+          "properties": {
+            "skip_if_not_installed": { "type": "boolean" },
+            "fallback_message": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "report_location": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "squads": {
+      "type": "object",
+      "description": "Squad system configuration",
+      "properties": {
+        "template_location": { "type": "string" },
+        "auto_load": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "logging": {
+      "type": "object",
+      "description": "Logging, status, and agent identity configuration",
+      "properties": {
+        "decision_logging": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "async": { "type": "boolean" },
+            "location": { "type": "string" },
+            "index_file": { "type": "string" },
+            "format": { "type": "string" },
+            "performance": {
+              "type": "object",
+              "properties": {
+                "max_overhead": { "type": "integer", "minimum": 0 }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "project_status": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "auto_load_on_agent_activation": { "type": "boolean" },
+            "show_in_greeting": { "type": "boolean" },
+            "cache_time_seconds": { "type": "integer", "minimum": 0 },
+            "components": {
+              "type": "object",
+              "properties": {
+                "git_branch": { "type": "boolean" },
+                "git_status": { "type": "boolean" },
+                "recent_work": { "type": "boolean" },
+                "current_epic": { "type": "boolean" },
+                "current_story": { "type": "boolean" }
+              },
+              "additionalProperties": false
+            },
+            "status_file": { "type": "string" },
+            "max_modified_files": { "type": "integer", "minimum": 1 },
+            "max_recent_commits": { "type": "integer", "minimum": 1 }
+          },
+          "additionalProperties": false
+        },
+        "agent_identity": {
+          "type": "object",
+          "properties": {
+            "greeting": {
+              "type": "object",
+              "properties": {
+                "context_detection": { "type": "boolean" },
+                "session_detection": { "type": "string" },
+                "workflow_detection": { "type": "string" },
+                "performance": {
+                  "type": "object",
+                  "properties": {
+                    "git_check_cache": { "type": "boolean" },
+                    "git_check_ttl": { "type": "integer", "minimum": 0 }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "story_backlog": {
+      "type": "object",
+      "description": "Story backlog settings",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "location": { "type": "string" },
+        "prioritization": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "pv_mind_context": {
+      "type": "object",
+      "description": "PV Mind context configuration",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "location": { "type": "string" },
+        "features": {
+          "type": "object",
+          "properties": {
+            "persona_voice": { "type": "boolean" },
+            "technical_depth": { "type": "string" },
+            "communication_style": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "auto_claude": {
+      "type": "object",
+      "description": "Auto-Claude autonomous execution settings",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "version": { "type": "string" },
+        "migrated_at": { "type": "string", "format": "date-time" },
+        "worktree": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "auto_create": { "type": "string" },
+            "auto_cleanup": { "type": "string" },
+            "max_worktrees": { "type": "integer", "minimum": 1 },
+            "stale_days": { "type": "integer", "minimum": 1 },
+            "branch_prefix": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "spec_pipeline": {
+          "type": "object",
+          "properties": { "enabled": { "type": "boolean" } },
+          "additionalProperties": false
+        },
+        "execution": {
+          "type": "object",
+          "properties": { "enabled": { "type": "boolean" } },
+          "additionalProperties": false
+        },
+        "qa": {
+          "type": "object",
+          "properties": { "enabled": { "type": "boolean" } },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "boundary": {
+      "type": "object",
+      "description": "Framework boundary protection configuration",
+      "properties": {
+        "frameworkProtection": {
+          "type": "boolean",
+          "description": "Enable/disable deny rules for framework protection",
+          "default": true
+        },
+        "protected": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Glob patterns of protected framework paths"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Glob patterns excluded from protection"
+        }
+      },
+      "required": ["frameworkProtection"],
+      "additionalProperties": false
+    },
+    "template_overrides": {
+      "type": "object",
+      "description": "Template customization overrides (from L1 defaults)",
+      "properties": {
+        "story": {
+          "type": "object",
+          "properties": {
+            "sections_order": {
+              "oneOf": [
+                { "type": "array", "items": { "type": "string" } },
+                { "type": "null" }
+              ],
+              "description": "Custom section order for story templates. null = use template default."
+            },
+            "optional_sections": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Section IDs that can be skipped in story templates"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
   },
   "additionalProperties": true

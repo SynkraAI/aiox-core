@@ -3,7 +3,7 @@
  *
  * Verifies npm is installed and working.
  *
- * @module @synkra/aios-core/health-check/checks/local/npm-install
+ * @module aios-core/health-check/checks/local/npm-install
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

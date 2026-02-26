@@ -32,6 +32,9 @@ concurrency:
   group: macos-testing-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   # Job 1: Intel Mac Testing
   test-intel-mac:
@@ -213,6 +216,9 @@ jobs:
     runs-on: macos-latest
     needs: [test-intel-mac, test-apple-silicon, test-error-recovery]
     if: always()
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout repository

@@ -1,0 +1,19 @@
+handoff:
+  from_agent: "@dev"
+  to_agent: "@qa"
+  last_command: "*develop story-WIS-16"
+  story_context:
+    story_id: WIS-16
+    story_path: docs/stories/epics/epic-workflow-intelligence/story-WIS-16-workflow-aware-greeting-handoffs.md
+    story_status: Ready for Review
+    current_task: All tasks complete
+    branch: feat/epic-nogic-code-intelligence
+  decisions:
+    - Implemented workflow-chains.yaml
+    - Added step 5.5 to all agents
+  files_modified:
+    - .aios-core/data/workflow-chains.yaml
+  blockers: []
+  next_action: Review story implementation
+  consumed: true
+  timestamp: "2026-02-24T12:00:00Z"

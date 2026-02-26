@@ -3,7 +3,7 @@
  *
  * Verifies that package.json exists and is valid JSON.
  *
- * @module @synkra/aios-core/health-check/checks/project/package-json
+ * @module aios-core/health-check/checks/project/package-json
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

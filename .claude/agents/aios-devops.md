@@ -13,6 +13,11 @@ tools:
   - Bash
 permissionMode: bypassPermissions
 memory: project
+skills:
+  - synapse:tasks:diagnose-synapse
+  - synapse:manager
+  - coderabbit-review
+  - checklist-runner
 ---
 
 # AIOS DevOps - Autonomous Agent

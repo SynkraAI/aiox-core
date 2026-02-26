@@ -5,7 +5,7 @@
  * This module contains the essential runtime components that all other
  * modules depend on.
  *
- * @module @synkra/aios-core/core
+ * @module aios-core/core
  * @version 2.0.0
  * @created Story 2.2 - Core Module Creation
  */

@@ -3,7 +3,7 @@
  *
  * Verifies task definition files are valid.
  *
- * @module @synkra/aios-core/health-check/checks/project/task-definitions
+ * @module aios-core/health-check/checks/project/task-definitions
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

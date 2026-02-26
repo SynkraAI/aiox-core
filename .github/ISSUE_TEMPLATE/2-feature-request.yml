@@ -1,0 +1,114 @@
+name: Feature Request
+description: Suggest a new feature or improvement for aios-core
+title: "[Feature]: "
+labels: ["type: feature", "status: needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please describe your idea clearly so we can evaluate it.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: A clear and concise description of the feature.
+      placeholder: Describe the feature...
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this solve? What use case does this enable?
+      placeholder: "Is your feature request related to a problem? Describe it..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How should this feature work? What API or interface would you expect?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Package / Area
+      description: Which part of aios-core should this feature belong to?
+      options:
+        - "Core Framework (.aios-core/core/)"
+        - "Installer (packages/installer/)"
+        - "CLI (bin/, packages/aios-pro-cli/)"
+        - "SYNAPSE Context Engine"
+        - "Health Check System"
+        - "Agent System (.aios-core/development/agents/)"
+        - "Task System (.aios-core/development/tasks/)"
+        - "Memory / Knowledge Base"
+        - "Pro Features"
+        - "Documentation"
+        - "New package / module"
+    validations:
+      required: true
+
+  - type: textarea
+    id: code-example
+    attributes:
+      label: Code Example (Optional)
+      description: What would the API look like?
+      render: javascript
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Other approaches you've considered or existing workarounds.
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact Assessment
+      options:
+        - "New functionality - backward compatible"
+        - "Enhancement to existing feature"
+        - "Performance improvement"
+        - "Developer experience improvement"
+        - "Breaking change - requires major version bump"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How important is this feature to you?
+      options:
+        - "Critical - Blocking my use case"
+        - "High - Would significantly improve my workflow"
+        - "Medium - Nice to have"
+        - "Low - Minor improvement"
+      default: 2
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Community Contribution
+      options:
+        - label: "I would be willing to contribute to implementing this"
+        - label: "I can help with documentation"
+        - label: "I can help with testing"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+      options:
+        - label: "I have searched existing issues and feature requests"
+          required: true
+        - label: "I have provided a clear use case for this feature"
+          required: true

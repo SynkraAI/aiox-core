@@ -2,14 +2,14 @@
 # Automatically welcomes first-time contributors to AIOS
 #
 # Reference: https://github.com/actions/first-interaction
-# Story: OSR-4 - GitHub Community Setup
+# Story: GHIM-001 - GitHub Issue Management
 
 name: Welcome New Contributors
 
 on:
   issues:
     types: [opened]
-  pull_request:
+  pull_request_target:
     types: [opened]
 
 permissions:
@@ -25,51 +25,33 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: |
-            👋 **Welcome to AIOS!**
-
-            Thanks for opening your first issue! We're excited to have you here.
+            Welcome to **aios-core**! Thanks for opening your first issue.
 
             **What happens next?**
-            - A maintainer will review your issue and add appropriate labels
+            - A maintainer will triage this and add appropriate labels
             - We'll respond as soon as possible
-            - Feel free to join the discussion in our [Community Discussions](https://github.com/SynkraAI/aios-core/discussions)
+            - Feel free to join [Community Discussions](https://github.com/SynkraAI/aios-core/discussions)
 
             **Helpful Resources:**
-            - 📖 [Contributing Guide](CONTRIBUTING.md)
-            - 💬 [Community Discussions](https://github.com/SynkraAI/aios-core/discussions)
-            - 📚 [Documentation](docs/)
+            - [Contributing Guide](https://github.com/SynkraAI/aios-core/blob/main/CONTRIBUTING.md)
+            - [Documentation](https://github.com/SynkraAI/aios-core/tree/main/docs)
 
-            **Labels Guide:**
-            - `good-first-issue` - Great for newcomers
-            - `help-wanted` - We need community help
-            - `bug` - Something isn't working
-            - `enhancement` - Feature requests
-
-            Thanks for helping make AIOS better! 🚀
+            **Looking to contribute?** Check issues labeled `community: good first issue`.
 
           pr-message: |
-            🎉 **Welcome to AIOS!**
-
-            Thanks for submitting your first pull request! We're thrilled to have you contribute.
+            Welcome to **aios-core**! Thanks for your first pull request.
 
             **What happens next?**
             1. Automated checks will run on your PR
             2. A maintainer will review your changes
-            3. We may suggest improvements or ask questions
-            4. Once approved, we'll merge your contribution!
+            3. Once approved, we'll merge your contribution!
 
             **PR Checklist:**
-            - [ ] Tests pass locally (`npm test`)
+            - [ ] Tests pass (`npm test`)
             - [ ] Linting passes (`npm run lint`)
-            - [ ] Documentation updated (if applicable)
-            - [ ] Commit messages follow [conventional commits](https://www.conventionalcommits.org/)
+            - [ ] Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/)
 
-            **Helpful Resources:**
-            - 📖 [Contributing Guide](CONTRIBUTING.md)
-            - 📜 [Code of Conduct](CODE_OF_CONDUCT.md)
-            - 🏗️ [Coding Standards](docs/architecture/coding-standards.md)
-
-            Thanks for contributing to AIOS! 🚀
+            Thanks for contributing!
 
       - name: Add triage label to new issues
         if: github.event_name == 'issues'
@@ -83,7 +65,7 @@ jobs:
             });
 
             const hasTriageLabel = labels.data.some(label =>
-              label.name === 'needs-triage'
+              label.name === 'status: needs-triage'
             );
 
             if (!hasTriageLabel) {
@@ -91,6 +73,6 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                labels: ['needs-triage']
+                labels: ['status: needs-triage']
               });
             }

@@ -4,7 +4,7 @@
  * Manages self-healing operations for health check failures.
  * Implements three-tier safety model for auto-fixes.
  *
- * @module @synkra/aios-core/health-check/healers
+ * @module aios-core/health-check/healers
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

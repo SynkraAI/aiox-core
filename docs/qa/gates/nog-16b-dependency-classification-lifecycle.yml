@@ -1,0 +1,43 @@
+schema: 1
+story: NOG-16B
+story_title: 'Dependency Classification + Entity Lifecycle'
+gate: PASS
+status_reason: 'All 7 ACs met with full test coverage (20 new tests, 68 total). No regressions (6732/6732 pass). Registry regenerated with 712 entities at 100% resolution rate.'
+reviewer: 'Quinn (Test Architect)'
+updated: '2026-02-22T00:45:00.000Z'
+
+top_issues: []
+waiver: { active: false }
+
+quality_score: 100
+expires: '2026-03-08T00:45:00.000Z'
+
+evidence:
+  tests_reviewed: 68
+  new_tests_added: 20
+  risks_identified: 0
+  trace:
+    ac_covered: [1, 2, 3, 4, 5, 6, 7]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: 'No user input, no network calls, no eval/exec patterns. Filesystem read-only during scan.'
+  performance:
+    status: PASS
+    notes: 'O(n) classification and lifecycle detection. Set-based external tool lookup O(1). Full scan < 2s for 712 entities.'
+  reliability:
+    status: PASS
+    notes: 'Graceful handling of missing directories, malformed YAML, duplicate entity IDs. 3-tier lifecycle override fallback.'
+  maintainability:
+    status: PASS
+    notes: 'EXTERNAL_TOOLS centralized, DEPRECATED_PATTERNS as constants, all new functions exported and individually testable.'
+
+recommendations:
+  immediate: []
+  future:
+    - action: 'Consider loading EXTERNAL_TOOLS from config file for easier maintenance'
+      refs: ['.aios-core/development/scripts/populate-entity-registry.js']
+    - action: 'Add lifecycle value validation (restrict to known states: production, experimental, deprecated, orphan)'
+      refs: ['.aios-core/development/scripts/populate-entity-registry.js']

@@ -26,7 +26,7 @@ The AIOS installer fails immediately on Linux systems with a module not found er
 ```
 Error: Cannot find AIOS Core module: utils/repository-detector
 Searched: ${PROJECT_ROOT}/.aios-core/utils/repository-detector
-Please ensure @synkra/aios-core is installed correctly.
+Please ensure aios-core is installed correctly.
     at loadAIOSCore (${PROJECT_ROOT}/bin/aios-init.js:43:11)
 ```
 

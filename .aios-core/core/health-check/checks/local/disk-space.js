@@ -3,7 +3,7 @@
  *
  * Verifies sufficient disk space is available.
  *
- * @module @synkra/aios-core/health-check/checks/local/disk-space
+ * @module aios-core/health-check/checks/local/disk-space
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

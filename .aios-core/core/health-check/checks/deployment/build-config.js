@@ -3,7 +3,7 @@
  *
  * Verifies build configuration is valid.
  *
- * @module @synkra/aios-core/health-check/checks/deployment/build-config
+ * @module aios-core/health-check/checks/deployment/build-config
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

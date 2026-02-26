@@ -3,7 +3,7 @@
  *
  * Verifies GitHub CLI (gh) integration.
  *
- * @module @synkra/aios-core/health-check/checks/services/github-cli
+ * @module aios-core/health-check/checks/services/github-cli
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

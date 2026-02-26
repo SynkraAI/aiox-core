@@ -142,6 +142,7 @@ Commands:
   features             List available pro features
   validate             Force online license revalidation
   recover              Recover lost license key via email
+  reset-password       Reset your password (alias for recover)
   help                 Show this help message
 
 Examples:
@@ -205,6 +206,7 @@ switch (command) {
   }
 
   case 'recover':
+  case 'reset-password':
     recoverLicense().catch((err) => {
       console.error(`\n  Recovery failed: ${err.message}\n`);
       process.exit(1);

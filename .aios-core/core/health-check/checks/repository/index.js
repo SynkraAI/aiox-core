@@ -4,7 +4,7 @@
  * Checks for git repository health and configuration.
  * Domain: repository
  *
- * @module @synkra/aios-core/health-check/checks/repository
+ * @module aios-core/health-check/checks/repository
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

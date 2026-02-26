@@ -49,7 +49,7 @@ Esta guía proporciona instrucciones completas para desinstalar Synkra AIOS de s
 
 ```bash
 # Crear respaldo completo
-npx @synkra/aios-core backup --complete
+npx aios-core backup --complete
 
 # O respaldar manualmente directorios importantes
 tar -czf aios-backup-$(date +%Y%m%d).tar.gz \
@@ -69,13 +69,13 @@ La forma más rápida de desinstalar Synkra AIOS:
 
 ```bash
 # Desinstalación básica (preserva datos de usuario)
-npx @synkra/aios-core uninstall
+npx aios-core uninstall
 
 # Desinstalación completa (elimina todo)
-npx @synkra/aios-core uninstall --complete
+npx aios-core uninstall --complete
 
 # Desinstalación con preservación de datos
-npx @synkra/aios-core uninstall --keep-data
+npx aios-core uninstall --keep-data
 ```
 
 ### Desinstalación Interactiva
@@ -83,7 +83,7 @@ npx @synkra/aios-core uninstall --keep-data
 Para desinstalación guiada:
 
 ```bash
-npx @synkra/aios-core uninstall --interactive
+npx aios-core uninstall --interactive
 ```
 
 Esto le preguntará:
@@ -127,14 +127,14 @@ Esto le preguntará:
 
 ```bash
 # Eliminación completa
-npx @synkra/aios-core uninstall --complete --no-backup
+npx aios-core uninstall --complete --no-backup
 ```
 
 ### Paso 4: Eliminar Instalación Global
 
 ```bash
 # Eliminar paquete npm global
-npm uninstall -g @synkra/aios-core
+npm uninstall -g aios-core
 
 # Eliminar cache de npx
 npm cache clean --force
@@ -146,7 +146,7 @@ npm cache clean --force
 
 ```powershell
 # Eliminar archivos de AppData
-Remove-Item -Recurse -Force "$env:APPDATA\@synkra/aios-core"
+Remove-Item -Recurse -Force "$env:APPDATA\aios-core"
 
 # Eliminar archivos temporales
 Remove-Item -Recurse -Force "$env:TEMP\aios-*"
@@ -160,10 +160,10 @@ Remove-Item -Path "HKCU:\Software\Synkra AIOS" -Recurse
 ```bash
 # Eliminar archivos de configuración
 rm -rf ~/.aios
-rm -rf ~/.config/@synkra/aios-core
+rm -rf ~/.config/aios-core
 
 # Eliminar cache
-rm -rf ~/.cache/@synkra/aios-core
+rm -rf ~/.cache/aios-core
 
 # Eliminar archivos temporales
 rm -rf /tmp/aios-*
@@ -175,13 +175,13 @@ rm -rf /tmp/aios-*
 
 ```bash
 # Eliminar solo agentes
-npx @synkra/aios-core uninstall agents
+npx aios-core uninstall agents
 
 # Eliminar solo flujos de trabajo
-npx @synkra/aios-core uninstall workflows
+npx aios-core uninstall workflows
 
 # Eliminar capa de memoria
-npx @synkra/aios-core uninstall memory-layer
+npx aios-core uninstall memory-layer
 
 # Eliminar agente específico
 *uninstall agent-name
@@ -294,7 +294,7 @@ fi
 
 # Detener todos los procesos
 echo "Stopping all processes..."
-pkill -f "@synkra/aios-core" || true
+pkill -f "aios-core" || true
 pkill -f "aios-developer" || true
 
 # Eliminar archivos del proyecto
@@ -305,17 +305,17 @@ rm -rf workflows/
 rm -rf tasks/
 rm -rf templates/
 rm -rf Squads/
-rm -rf node_modules/@synkra/aios-core/
+rm -rf node_modules/aios-core/
 
 # Eliminar archivos globales
 echo "Removing global files..."
-npm uninstall -g @synkra/aios-core
+npm uninstall -g aios-core
 
 # Eliminar datos de usuario
 echo "Removing user data..."
 rm -rf ~/.aios
-rm -rf ~/.config/@synkra/aios-core
-rm -rf ~/.cache/@synkra/aios-core
+rm -rf ~/.config/aios-core
+rm -rf ~/.cache/aios-core
 
 # Limpiar cache de npm
 echo "Cleaning npm cache..."
@@ -323,9 +323,9 @@ npm cache clean --force
 
 # Eliminar de package.json
 echo "Updating package.json..."
-npm uninstall @synkra/aios-core/core
-npm uninstall @synkra/aios-core/memory
-npm uninstall @synkra/aios-core/meta-agent
+npm uninstall aios-core/core
+npm uninstall aios-core/memory
+npm uninstall aios-core/meta-agent
 
 echo "Uninstall complete!"
 ```
@@ -338,7 +338,7 @@ Write-Host "Cleaning Synkra AIOS from Windows Registry..."
 
 # Eliminar del PATH
 $path = [Environment]::GetEnvironmentVariable("PATH", "User")
-$newPath = ($path.Split(';') | Where-Object { $_ -notmatch '@synkra/aios-core' }) -join ';'
+$newPath = ($path.Split(';') | Where-Object { $_ -notmatch 'aios-core' }) -join ';'
 [Environment]::SetEnvironmentVariable("PATH", $newPath, "User")
 
 # Eliminar claves del registro
@@ -358,10 +358,10 @@ Write-Host "Registry cleanup complete!"
 
 ```bash
 # Linux/macOS
-sudo npx @synkra/aios-core uninstall --complete
+sudo npx aios-core uninstall --complete
 
 # Windows (Ejecutar como Administrador)
-npx @synkra/aios-core uninstall --complete
+npx aios-core uninstall --complete
 ```
 
 #### 2. Proceso Todavía en Ejecución
@@ -370,11 +370,11 @@ npx @synkra/aios-core uninstall --complete
 # Forzar detención de todos los procesos
 # Linux/macOS
 killall -9 node
-killall -9 @synkra/aios-core
+killall -9 aios-core
 
 # Windows
 taskkill /F /IM node.exe
-taskkill /F /IM @synkra/aios-core.exe
+taskkill /F /IM aios-core.exe
 ```
 
 #### 3. Archivos Bloqueados
@@ -411,12 +411,12 @@ pkill -9 -f aios || true
 # Eliminar todos los archivos
 rm -rf .aios* aios* *aios*
 rm -rf agents workflows tasks templates
-rm -rf node_modules/@synkra/aios-core
+rm -rf node_modules/aios-core
 rm -rf ~/.aios* ~/.config/aios* ~/.cache/aios*
 
 # Limpiar npm
 npm cache clean --force
-npm uninstall -g @synkra/aios-core
+npm uninstall -g aios-core
 
 echo "Force uninstall complete!"
 ```
@@ -443,7 +443,7 @@ ps aux | grep aios
 ```bash
 # Eliminar de .bashrc/.zshrc
 sed -i '/AIOS_/d' ~/.bashrc
-sed -i '/@synkra/aios-core/d' ~/.bashrc
+sed -i '/aios-core/d' ~/.bashrc
 
 # Eliminar de archivos .env
 find . -name ".env*" -exec sed -i '/AIOS_/d' {} \;
@@ -456,8 +456,8 @@ find . -name ".env*" -exec sed -i '/AIOS_/d' {} \;
 {
   "scripts": {
     // Eliminar estas entradas
-    "aios": "@synkra/aios-core",
-    "meta-agent": "@synkra/aios-core meta-agent"
+    "aios": "aios-core",
+    "meta-agent": "aios-core meta-agent"
   }
 }
 ```
@@ -498,7 +498,7 @@ Si desea reinstalar Synkra AIOS:
 
 3. **Instalación fresca**
    ```bash
-   npx @synkra/aios-core@latest init my-project
+   npx aios-core@latest init my-project
    ```
 
 ### Restaurar desde Respaldo
@@ -548,7 +548,7 @@ Si encuentra problemas durante la desinstalación:
 3. **Soporte de Emergencia**
    ```bash
    # Generar reporte de desinstalación
-   npx @synkra/aios-core diagnose --uninstall > uninstall-report.log
+   npx aios-core diagnose --uninstall > uninstall-report.log
    ```
 
 ---

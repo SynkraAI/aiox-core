@@ -189,7 +189,7 @@ async function runValidation(options) {
     const possibleSources = [
       path.join(__dirname, '../../../../..'), // npm package root
       path.join(projectRoot, 'node_modules/aios-core'),
-      path.join(projectRoot, 'node_modules/@synkra/aios-core'),
+      path.join(projectRoot, 'node_modules/aios-core'),
     ];
 
     for (const src of possibleSources) {

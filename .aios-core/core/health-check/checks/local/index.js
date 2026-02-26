@@ -4,7 +4,7 @@
  * Checks for local development environment health.
  * Domain: local
  *
- * @module @synkra/aios-core/health-check/checks/local
+ * @module aios-core/health-check/checks/local
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

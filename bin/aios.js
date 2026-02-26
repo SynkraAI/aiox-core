@@ -199,10 +199,14 @@ function showInfo() {
       }
     };
 
-    console.log(`  - Agents: ${countFiles(path.join(aiosCoreDir, 'agents'))}`);
-    console.log(`  - Tasks: ${countFiles(path.join(aiosCoreDir, 'tasks'))}`);
-    console.log(`  - Templates: ${countFiles(path.join(aiosCoreDir, 'templates'))}`);
-    console.log(`  - Workflows: ${countFiles(path.join(aiosCoreDir, 'workflows'))}`);
+    const devDir = path.join(aiosCoreDir, 'development');
+    const componentBase = fs.existsSync(devDir) ? devDir : aiosCoreDir;
+
+    console.log(`  - Agents: ${countFiles(path.join(componentBase, 'agents'))}`);
+    console.log(`  - Tasks: ${countFiles(path.join(componentBase, 'tasks'))}`);
+    console.log(`  - Templates: ${countFiles(path.join(componentBase, 'templates'))}`);
+    console.log(`  - Workflows: ${countFiles(path.join(componentBase, 'workflows'))}`);
+
   } else {
     console.log('\n⚠️  AIOS Core not found');
   }
@@ -347,230 +351,23 @@ async function runUpdate() {
   }
 }
 
-// Helper: Run doctor diagnostics
-async function runDoctor() {
-  const doctorArgs = args.slice(1);
-  const shouldFix = doctorArgs.includes('--fix');
-  const isDryRun = doctorArgs.includes('--dry-run');
-  const showHelp = doctorArgs.includes('--help') || doctorArgs.includes('-h');
+// Helper: Run doctor diagnostics (v2.0 — delegates to modular doctor)
+async function runDoctor(options = {}) {
+  const { runDoctorChecks } = require(path.join(__dirname, '..', '.aios-core', 'core', 'doctor'));
 
-  if (showHelp) {
-    console.log(`
-Usage: aios-core doctor [options]
+  const result = await runDoctorChecks({
+    fix: options.fix || false,
+    json: options.json || false,
+    dryRun: options.dryRun || false,
+    quiet: options.quiet || false,
+    projectRoot: process.cwd(),
+  });
 
-Run system diagnostics and optionally fix issues.
+  console.log(result.formatted);
 
-Options:
-  --fix          Attempt to automatically fix detected issues
-  --dry-run      Show what would be fixed without making changes
-  -h, --help     Show this help message
-
-Examples:
-  $ npx aios-core doctor              # Run diagnostics
-  $ npx aios-core doctor --fix        # Fix detected issues
-  $ npx aios-core doctor --dry-run    # Preview fixes
-`);
-    return;
-  }
-
-  console.log('🏥 AIOS System Diagnostics\n');
-
-  const issues = [];
-  let hasErrors = false;
-
-  // Helper: Compare semver versions
-  const compareVersions = (a, b) => {
-    const pa = a.split('.').map((n) => parseInt(n, 10));
-    const pb = b.split('.').map((n) => parseInt(n, 10));
-    for (let i = 0; i < 3; i++) {
-      const na = pa[i] || 0;
-      const nb = pb[i] || 0;
-      if (na > nb) return 1;
-      if (na < nb) return -1;
-    }
-    return 0;
-  };
-
-  // Check 1: Node.js version
-  const nodeVersion = process.version.replace('v', '');
-  const requiredNodeVersion = '18.0.0';
-  const nodeOk = compareVersions(nodeVersion, requiredNodeVersion) >= 0;
-
-  if (!nodeOk) {
-    issues.push({
-      type: 'node_version',
-      autoFix: false,
-      message: `Node.js version: ${process.version} (requires >=18.0.0)`,
-      suggestion: 'nvm install 20 && nvm use 20',
-    });
-    hasErrors = true;
-  }
-  console.log(
-    `${nodeOk ? '✔' : '✗'} Node.js version: ${process.version} ${nodeOk ? '(meets requirement: >=18.0.0)' : '(requires >=18.0.0)'}`,
-  );
-
-  // Check 2: npm
-  try {
-    const npmVersion = execSync('npm --version', { encoding: 'utf8' }).trim();
-    console.log(`✔ npm version: ${npmVersion}`);
-  } catch {
-    issues.push({
-      type: 'npm',
-      autoFix: false,
-      message: 'npm not found',
-      suggestion: 'Install Node.js from https://nodejs.org (includes npm)',
-    });
-    console.log('✗ npm not found');
-    hasErrors = true;
-  }
-
-  // Check 3: Git
-  try {
-    const gitVersion = execSync('git --version', { encoding: 'utf8' }).trim();
-    console.log(`✔ Git installed: ${gitVersion}`);
-  } catch {
-    issues.push({
-      type: 'git',
-      autoFix: false,
-      message: 'Git not found (optional but recommended)',
-      suggestion: 'Install Git from https://git-scm.com',
-    });
-    console.log('⚠️  Git not found (optional but recommended)');
-  }
-
-  // Check 4: AIOS installation
-  const aiosCoreDir = path.join(__dirname, '..', '.aios-core');
-  if (fs.existsSync(aiosCoreDir)) {
-    console.log(`✔ Synkra AIOS: v${packageJson.version}`);
-
-    // Check for corruption using validate (if available)
-    try {
-      const validatorPath = path.join(__dirname, '..', 'packages', 'installer', 'src', 'installer', 'post-install-validator');
-      const { PostInstallValidator } = require(validatorPath);
-      const validator = new PostInstallValidator(process.cwd(), path.join(__dirname, '..'));
-      const report = await validator.validate();
-
-      if (report.stats && (report.stats.missingFiles > 0 || report.stats.corruptedFiles > 0)) {
-        issues.push({
-          type: 'aios_corrupted',
-          autoFix: true,
-          message: `AIOS Core: ${report.stats.missingFiles} missing, ${report.stats.corruptedFiles} corrupted files`,
-          fixAction: async () => {
-            console.log('  🔧 Repairing AIOS installation...');
-            await validator.repair();
-            console.log('  ✓ Repair complete');
-          },
-        });
-        hasErrors = true;
-        console.log(`⚠️  AIOS Core: ${report.stats.missingFiles} missing, ${report.stats.corruptedFiles} corrupted files`);
-      }
-    } catch {
-      // Validation not available, skip corruption check
-    }
-  } else {
-    issues.push({
-      type: 'aios_missing',
-      autoFix: true,
-      message: 'AIOS Core not installed',
-      fixAction: async () => {
-        console.log('  🔧 Installing AIOS...');
-        try {
-          execSync('npx aios-core install --force --quiet', { stdio: 'inherit', timeout: 60000 });
-          console.log('  ✓ Installation complete');
-        } catch (installError) {
-          console.error(`  ✗ Installation failed: ${installError.message}`);
-          throw installError;
-        }
-      },
-    });
-    hasErrors = true;
-    console.log('✗ AIOS Core not installed');
-    console.log('  Run: npx aios-core@latest');
-  }
-
-  // Check 5: AIOS Pro license status (Task 5.1)
-  const proDir = path.join(__dirname, '..', 'pro');
-  if (fs.existsSync(proDir)) {
-    try {
-      const { featureGate } = require(path.join(proDir, 'license', 'feature-gate'));
-      const state = featureGate.getLicenseState();
-
-      const stateEmoji = {
-        'Active': '✔',
-        'Grace': '⚠️',
-        'Expired': '✗',
-        'Not Activated': '➖',
-      };
-
-      if (state === 'Active') {
-        console.log(`${stateEmoji[state]} AIOS Pro: License active`);
-      } else if (state === 'Grace') {
-        console.log(`${stateEmoji[state]} AIOS Pro: License in grace period`);
-        console.log('  Run: aios pro validate');
-      } else if (state === 'Expired') {
-        console.log(`${stateEmoji[state]} AIOS Pro: License expired`);
-        console.log('  Run: aios pro activate --key <KEY>');
-      } else {
-        console.log(`${stateEmoji[state]} AIOS Pro: Not activated`);
-        console.log('  Run: aios pro activate --key <KEY>');
-      }
-    } catch {
-      console.log('⚠️  AIOS Pro: Unable to check license status');
-    }
-  }
-
-  // Apply fixes if --fix
-  if (shouldFix && issues.length > 0) {
-    console.log('\n🔧 Attempting fixes...\n');
-
-    let fixed = 0;
-    let manual = 0;
-
-    for (const issue of issues) {
-      if (issue.autoFix && issue.fixAction) {
-        if (isDryRun) {
-          console.log(`  [DRY RUN] Would fix: ${issue.type}`);
-          fixed++;
-        } else {
-          try {
-            await issue.fixAction();
-            fixed++;
-          } catch (fixError) {
-            console.error(`  ✗ Failed to fix ${issue.type}: ${fixError.message}`);
-            manual++;
-          }
-        }
-      } else {
-        manual++;
-        console.log(`  ⚠️  ${issue.message}`);
-        console.log(`     💡 Fix: ${issue.suggestion}`);
-      }
-    }
-
-    console.log('');
-    if (isDryRun) {
-      console.log(`✅ Dry run completed - ${fixed} issues would be fixed`);
-      if (manual > 0) {
-        console.log(`⚠️  ${manual} issues require manual action`);
-      }
-    } else {
-      if (fixed > 0) {
-        console.log(`✅ Fixed ${fixed} issue${fixed > 1 ? 's' : ''}`);
-      }
-      if (manual > 0) {
-        console.log(`⚠️  ${manual} issue${manual > 1 ? 's' : ''} require manual action`);
-        process.exit(1);
-      }
-    }
-  } else {
-    // Summary (no --fix)
-    console.log('');
-    if (hasErrors) {
-      console.log('⚠️  Some issues were detected. Run with --fix to auto-repair.');
-      process.exit(1);
-    } else {
-      console.log('✅ All checks passed! Your installation is healthy.');
-    }
+  // Exit with code 1 if any FAIL results
+  if (result.data && result.data.summary && result.data.summary.fail > 0) {
+    process.exit(1);
   }
 }
 
@@ -668,6 +465,7 @@ Run health checks on your AIOS installation.
 Options:
   --fix        Automatically fix detected issues
   --dry-run    Show what --fix would do without making changes
+  --json       Output results as structured JSON
   --quiet      Minimal output (exit code only)
   -h, --help   Show this help message
 
@@ -1093,6 +891,7 @@ async function main() {
       }
       const doctorOptions = {
         fix: doctorArgs.includes('--fix'),
+        json: doctorArgs.includes('--json'),
         dryRun: doctorArgs.includes('--dry-run'),
         quiet: doctorArgs.includes('--quiet'),
       };

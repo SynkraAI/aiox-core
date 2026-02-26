@@ -1,115 +1,60 @@
 # Labeler configuration for GitHub Actions
-# Automatically labels PRs based on files changed
-# Used by .github/workflows/pr-labeling.yml
+# Used by: .github/workflows/pr-labeling.yml (PR file-based labeling via actions/labeler)
+# NOTE: Issue body regex matching uses a SEPARATE file: .github/issue-labeler.yml
 #
-# Reference: https://github.com/actions/labeler
-# Story: OSR-4 - GitHub Community Setup
+# Story: GHIM-001 - GitHub Issue Management
+# Updated: 2026-02-20
 
 # ============================================
-# CORE FRAMEWORK LABELS
+# PR FILE-BASED LABELS (actions/labeler)
+# Applied when PR changes files in these paths
 # ============================================
 
-core:
+"area: core":
   - changed-files:
     - any-glob-to-any-file:
-      - '.aios-core/**/*'
-      - 'aios-core/**/*'
-      - 'src/core/**/*'
+      - '.aios-core/core/**/*'
 
-agents:
+"area: agents":
   - changed-files:
     - any-glob-to-any-file:
-      - '.aios-core/agents/**/*'
-      - '**/*.agent.md'
+      - '.aios-core/development/agents/**/*'
       - '.claude/commands/**/*'
 
-templates:
+"area: workflows":
   - changed-files:
     - any-glob-to-any-file:
-      - '.aios-core/**/templates/**/*'
-      - '**/*-tmpl.yaml'
-      - '**/*-tmpl.md'
+      - '.aios-core/development/workflows/**/*'
 
-workflows:
+"area: installer":
   - changed-files:
     - any-glob-to-any-file:
-      - '.aios-core/workflows/**/*'
-      - '**/*.workflow.yaml'
-
-# ============================================
-# SQUAD LABELS
-# ============================================
-
-squad:
-  - changed-files:
-    - any-glob-to-any-file:
-      - 'aios-squads/**/*'
-      - 'squads/**/*'
-
-'squad: etl':
-  - changed-files:
-    - any-glob-to-any-file:
-      - 'aios-squads/etl-squad/**/*'
-      - 'squads/etl/**/*'
-
-'squad: creator':
-  - changed-files:
-    - any-glob-to-any-file:
-      - 'aios-squads/creator-squad/**/*'
-      - 'squads/creator/**/*'
-
-# ============================================
-# MCP ECOSYSTEM LABELS
-# ============================================
-
-mcp:
-  - changed-files:
-    - any-glob-to-any-file:
-      - 'mcp-ecosystem/**/*'
-      - '.aios-core/tools/mcp/**/*'
-      - '**/*mcp*.yaml'
-      - '**/*mcp*.json'
-
-docker-mcp:
-  - changed-files:
-    - any-glob-to-any-file:
-      - '.docker/mcp/**/*'
-      - '**/docker-mcp*.yml'
-      - '**/gateway-service.yml'
-
-preset:
-  - changed-files:
-    - any-glob-to-any-file:
-      - 'mcp-ecosystem/presets/**/*'
-      - '**/*preset*.yaml'
-      - '**/*preset*.json'
-
-# ============================================
-# INFRASTRUCTURE LABELS
-# ============================================
-
-ci/cd:
-  - changed-files:
-    - any-glob-to-any-file:
-      - '.github/**/*'
-      - '.github/workflows/**/*'
-      - 'Dockerfile'
-      - 'docker-compose*.yml'
-      - '.docker/**/*'
-
-installer:
-  - changed-files:
-    - any-glob-to-any-file:
-      - 'tools/installer/**/*'
+      - 'packages/installer/**/*'
       - 'bin/**/*'
-      - 'install*.js'
-      - 'setup*.js'
 
-# ============================================
-# DOCUMENTATION LABELS
-# ============================================
+"area: cli":
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'packages/aios-pro-cli/**/*'
+      - 'bin/*.js'
 
-documentation:
+"area: synapse":
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.claude/hooks/**/*'
+      - '.claude/synapse/**/*'
+
+"area: pro":
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'pro/**/*'
+
+"area: health-check":
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.aios-core/core/health-check/**/*'
+
+"area: docs":
   - changed-files:
     - any-glob-to-any-file:
       - 'docs/**/*'
@@ -117,25 +62,29 @@ documentation:
       - '!node_modules/**/*'
       - '!.github/ISSUE_TEMPLATE/**/*'
 
-# ============================================
-# DEVELOPMENT TOOLS LABELS
-# ============================================
-
-tools:
+"area: devops":
   - changed-files:
     - any-glob-to-any-file:
-      - 'tools/**/*'
-      - 'bin/**/*'
-      - 'scripts/**/*'
+      - '.github/**/*'
+      - 'Dockerfile'
+      - 'docker-compose*.yml'
 
-# ============================================
-# TESTING LABELS
-# ============================================
-
-tests:
+"type: test":
   - changed-files:
     - any-glob-to-any-file:
       - 'tests/**/*'
       - '**/*.test.js'
       - '**/*.spec.js'
       - 'jest.config.*'
+
+squad:
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'squads/**/*'
+
+mcp:
+  - changed-files:
+    - any-glob-to-any-file:
+      - '.aios-core/tools/mcp/**/*'
+      - '**/*mcp*.yaml'
+      - '**/*mcp*.json'

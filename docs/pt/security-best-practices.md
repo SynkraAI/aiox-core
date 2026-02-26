@@ -610,4 +610,4 @@ const emergencyConfig = {
 
 **Lembre-se**: Segurança não é uma implementação única, mas um processo contínuo. Revisões, atualizações e melhorias regulares são essenciais para manter um sistema seguro.
 
-Para dúvidas ou preocupações de segurança, contate: security@synkra/aios-core.dev
+Para dúvidas ou preocupações de segurança, abra uma issue em: https://github.com/SynkraAI/aios-core/issues

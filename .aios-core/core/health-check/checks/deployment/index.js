@@ -4,7 +4,7 @@
  * Checks for deployment configuration and environment.
  * Domain: deployment
  *
- * @module @synkra/aios-core/health-check/checks/deployment
+ * @module aios-core/health-check/checks/deployment
  * @version 1.0.0
  * @story HCS-2 - Health Check System Implementation
  */

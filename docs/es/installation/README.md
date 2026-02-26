@@ -46,13 +46,13 @@ Este directorio contiene documentación completa de instalación y configuració
 ### Nueva Instalación
 
 ```bash
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 ### Actualización
 
 ```bash
-npx @synkra/aios-core install --force-upgrade
+npx aios-core install --force-upgrade
 ```
 
 ### ¿Tiene Problemas?
@@ -104,5 +104,5 @@ npx @synkra/aios-core install --force-upgrade
 
 ## Soporte
 
-- **Issues de GitHub**: [@synkra/aios-core/issues](https://github.com/SynkraAI/aios-core/issues)
+- **Issues de GitHub**: [aios-core/issues](https://github.com/SynkraAI/aios-core/issues)
 - **Documentación**: [docs/](../)

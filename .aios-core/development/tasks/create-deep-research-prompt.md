@@ -496,4 +496,11 @@ CRITICAL: collaborate with the user to develop specific, actionable research que
 - Balance comprehensiveness with focus
 - Document assumptions and limitations clearly
 - Plan for iterative refinement based on initial findings
+
+## Handoff
+next_agent: @pm
+next_command: *write-spec
+condition: Research complete (research.json created)
+alternatives:
+  - agent: @architect, command: *analyze-impact, condition: Research reveals higher complexity than expected
  

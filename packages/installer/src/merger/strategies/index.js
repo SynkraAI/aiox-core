@@ -7,6 +7,7 @@ const path = require('path');
 const { ReplaceMerger } = require('./replace-merger.js');
 const { EnvMerger } = require('./env-merger.js');
 const { MarkdownMerger } = require('./markdown-merger.js');
+const { YamlMerger } = require('./yaml-merger.js');
 
 // Strategy registry - maps file extensions to merger classes
 const strategies = new Map();
@@ -22,6 +23,10 @@ fileNameStrategies.set('.env.example', EnvMerger);
 
 // Markdown files
 strategies.set('.md', MarkdownMerger);
+
+// YAML files (Story INS-4.7)
+strategies.set('.yaml', YamlMerger);
+strategies.set('.yml', YamlMerger);
 
 /**
  * Register a merge strategy for a file extension
@@ -102,4 +107,5 @@ module.exports = {
   ReplaceMerger,
   EnvMerger,
   MarkdownMerger,
+  YamlMerger,
 };
