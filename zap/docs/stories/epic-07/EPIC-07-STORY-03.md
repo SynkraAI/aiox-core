@@ -4,7 +4,7 @@
 **Sprint:** 1 | **Phase:** MVP
 **Priority:** 🔴 CRITICAL
 **Story Points:** 2
-**Status:** Ready for Review
+**Status:** InReview
 **Assigned to:** @dev (Dex)
 **Prepared by:** River (Scrum Master)
 
@@ -199,10 +199,45 @@ CREATE POLICY "Service role unrestricted"
 
 ---
 
+## Dev Agent Record
+
+### Implementation Completed ✅
+
+**Status:** InReview → Ready for Review
+**Developer:** @dev (Dex)
+**Completion Date:** 2026-02-26
+
+#### Implementation Summary
+- **Migration:** `20260226000002_create_captured_offers.sql` (70 lines)
+- **Table:** `captured_offers` with 18 columns, 5 indexes, RLS policies, UNIQUE constraint
+- **Acceptance Criteria:** All 5 AC met (schema, RLS, indexes, migration, soft delete)
+- **Quality:** SQL syntax validated, ready for Supabase db push
+
+#### Quality Checks
+- ✅ AC-039.1: Full schema (18 columns) with CHECK constraints
+- ✅ AC-039.2: RLS policies (authenticated + service_role)
+- ✅ AC-039.3: 5 performance indexes + UNIQUE dedup constraint
+- ✅ AC-039.4: Migration SQL ready (no errors, clean syntax)
+- ✅ AC-039.5: Soft delete pattern via status='expired'
+- ✅ Git commit: `f9bcdd76` (feat: implement ZAP-039)
+
+#### Key Implementation Details
+- **Marketplace Enum:** TEXT with CHECK constraint (shopee, mercadolivre, amazon)
+- **Status Enum:** TEXT with CHECK constraint (new, pending_substitution, ready, sent, expired)
+- **RLS Policies:**
+  - Authenticated: `tenant_id = auth.uid()::uuid` (tenant isolation)
+  - Service role: `true` (unrestricted for backend)
+- **Dedup Strategy:** UNIQUE constraint on (marketplace, product_id, tenant_id, DATE(captured_at))
+- **Soft Delete:** Status='expired' with row retention for analytics
+- **Indexes:** Optimized for queries by (tenant_id, status), dedup_hash, marketplace, expires_at, captured_at
+
+---
+
 ## Change Log
 
 | Date | Author | Change |
 |------|--------|--------|
+| 2026-02-26 | Dex (@dev) | Implementation complete — migration created, RLS/indexes validated, ready for QA |
 | 2026-02-26 | River (SM) | Story created — ready for database work |
 
 ---
