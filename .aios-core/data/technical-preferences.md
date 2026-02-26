@@ -7,9 +7,14 @@ Location: `.aios-core/data/tech-presets/`
 
 ### Available Presets
 
-| Preset         | Technologies                                                   | Best For                                         |
-| -------------- | -------------------------------------------------------------- | ------------------------------------------------ |
-| `nextjs-react` | Next.js 14+, React, TypeScript, Tailwind, Zustand, React Query | Fullstack web apps, SaaS, E-commerce, Dashboards |
+| Preset         | Technologies                                                     | Best For                                                 |
+| -------------- | ---------------------------------------------------------------- | -------------------------------------------------------- |
+| `nextjs-react` | Next.js 16+, React, TypeScript, Tailwind, Zustand, React Query  | Fullstack web apps, SaaS, E-commerce, Dashboards         |
+| `go`           | Go 1.24+, Chi/Gin, pgx/sqlc, Testify, Testcontainers            | APIs, microsserviços, workers concorrentes               |
+| `java`         | Java 21+, Spring Boot, Spring Data JPA, Flyway, JUnit           | Sistemas enterprise, domínios complexos, APIs críticas   |
+| `rust`         | Rust 1.77+, Axum, Tokio, SQLx, thiserror                        | Serviços de alta confiabilidade e alta performance        |
+| `csharp`       | C# 13, .NET 9, ASP.NET Core, EF Core, FluentValidation, xUnit   | Backends enterprise em stack Microsoft                    |
+| `php`          | PHP 8.3+, Laravel 11, Eloquent, Pest/PHPUnit                    | Sistemas web e APIs de negócio em ecossistema Laravel    |
 
 ### How to Use Presets
 
@@ -19,7 +24,7 @@ Location: `.aios-core/data/tech-presets/`
 
 2. **During Development:**
    - Reference the preset when asking `@dev` to implement features
-   - Example: "Follow the nextjs-react preset patterns for this service"
+   - Example: "Follow the go preset patterns for this service"
 
 3. **Creating New Presets:**
    - Copy `_template.md` and fill in technology-specific details
@@ -80,4 +85,4 @@ techPreset:
 
 ---
 
-_Updated: 2025-01-27_
+_Updated: 2026-02-19_

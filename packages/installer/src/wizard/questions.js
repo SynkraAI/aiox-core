@@ -244,8 +244,28 @@ function getTechPresetQuestion() {
         {
           name:
             colors.highlight('nextjs-react') +
-            colors.dim(' - Next.js 14+, React, TypeScript, Tailwind, Zustand'),
+            colors.dim(' - Next.js 16+, React, TypeScript, Tailwind, Zustand'),
           value: 'nextjs-react',
+        },
+        {
+          name: colors.highlight('go') + colors.dim(' - Go services and microservices'),
+          value: 'go',
+        },
+        {
+          name: colors.highlight('java') + colors.dim(' - Java 21+ with Spring Boot'),
+          value: 'java',
+        },
+        {
+          name: colors.highlight('rust') + colors.dim(' - High-reliability Rust services'),
+          value: 'rust',
+        },
+        {
+          name: colors.highlight('csharp') + colors.dim(' - .NET 9+ ASP.NET Core services'),
+          value: 'csharp',
+        },
+        {
+          name: colors.highlight('php') + colors.dim(' - PHP 8.3+ with Laravel'),
+          value: 'php',
         },
         {
           name: 'None' + colors.dim(' - Let AIOS decide based on project'),
