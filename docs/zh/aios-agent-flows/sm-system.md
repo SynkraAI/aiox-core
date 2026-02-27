@@ -37,8 +37,7 @@
 
 | 文件 | 命令 | 目的 |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/sm-create-next-story.md` | `*draft` | 创建待办列表中下一个故事的主要任务 |
-| `.aios-core/development/tasks/create-next-story.md` | `*draft` | 故事创建任务的完整版本 |
+| `.aios-core/development/tasks/create-next-story.md` | `*draft` | 创建待办列表中下一个故事的主要任务 (consolidated, W3.9) |
 | `.aios-core/development/tasks/execute-checklist.md` | `*story-checklist` | 执行故事草稿验证检查清单 |
 | `.aios-core/development/tasks/correct-course.md` | `*correct-course` | 分析并纠正流程偏差 |
 | `.aios-core/development/tasks/collaborative-edit.md` | - | 文档协作编辑 |
@@ -231,7 +230,7 @@ flowchart LR
 
 | 命令 | 任务文件 | 操作 |
 |---------|-----------|----------|
-| `*draft` | `sm-create-next-story.md` / `create-next-story.md` | 创建待办中下一个故事 |
+| `*draft` | `create-next-story.md` | 创建待办中下一个故事 |
 | `*story-checklist` | `execute-checklist.md` | 执行 `story-draft-checklist.md` |
 | `*correct-course` | `correct-course.md` | 分析并纠正流程偏差 |
 | `*help` | (内置) | 显示可用命令 |

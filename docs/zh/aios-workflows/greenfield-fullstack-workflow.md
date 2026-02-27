@@ -406,7 +406,7 @@ flowchart TD
 
 | 步骤 | 代理 | 任务 | 输入 | 输出 | 必需 |
 |------|------|------|------|------|------|
-| 1 | @sm (River) | `sm-create-next-story.md` | 分片的文档 | `{epic}.{story}.story.md` | 是 |
+| 1 | @sm (River) | `create-next-story.md` | 分片的文档 | `{epic}.{story}.story.md` | 是 |
 | 2 | @analyst/@pm | 审阅 | 故事草稿 | 批准的故事 | 可选 |
 | 3 | @dev (Dex) | `dev-develop-story.md` | 批准的故事 | 实现 | 是 |
 | 4 | @qa (Quinn) | `qa-review-story.md` | 实现 | 质量保证反馈 | 可选 |
@@ -507,7 +507,7 @@ graph LR
 | 1 | 生成 AI 前端提示 | @ux-expert | `generate-ai-frontend-prompt.md` |
 | 1 | 执行检查列表 | @po | `execute-checklist.md` |
 | 2 | 分片文档 | @po | `shard-doc.md` |
-| 3 | 创建下一个故事 | @sm | `sm-create-next-story.md` |
+| 3 | 创建下一个故事 | @sm | `create-next-story.md` |
 | 3 | 开发故事 | @dev | `dev-develop-story.md` |
 | 3 | 审阅故事 | @qa | `qa-review-story.md` |
 | 3 | 应用质量保证修复 | @dev | `apply-qa-fixes.md` |
@@ -768,7 +768,7 @@ ls -la docs/
 | 工作流 | `.aios-core/development/workflows/greenfield-fullstack.yaml` | 工作流定义 |
 | 任务 | `.aios-core/development/tasks/environment-bootstrap.md` | 环境引导 |
 | 任务 | `.aios-core/development/tasks/shard-doc.md` | 文档分片 |
-| 任务 | `.aios-core/development/tasks/sm-create-next-story.md` | 故事创建 |
+| 任务 | `.aios-core/development/tasks/create-next-story.md` | 故事创建 |
 | 代理 | `.aios-core/development/agents/*.md` | 代理定义 |
 | 模板 | `.aios-core/development/templates/*.yaml` | 文档模板 |
 | 检查列表 | `.aios-core/development/checklists/*.md` | 验证检查列表 |

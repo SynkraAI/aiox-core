@@ -57,7 +57,7 @@ const ATOMIC_CLASSIFICATIONS = {
     'qa-gate.md',
     'execute-checklist.md',
     'create-next-story.md',
-    'sm-create-next-story.md',
+    // 'sm-create-next-story.md', // consolidated into create-next-story.md
     'brownfield-create-story.md',
     'create-brownfield-story.md',
     'brownfield-create-epic.md',

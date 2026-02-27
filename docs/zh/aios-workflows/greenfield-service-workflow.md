@@ -750,7 +750,7 @@ export AIOS_DEBUG=true
 |------|------|
 | `.aios-core/development/tasks/create-doc.md` | 创建文档 |
 | `.aios-core/development/tasks/shard-doc.md` | 分片文档 |
-| `.aios-core/development/tasks/sm-create-next-story.md` | 创建故事 |
+| `.aios-core/development/tasks/create-next-story.md` | 创建故事 |
 | `.aios-core/development/tasks/dev-develop-story.md` | 实施故事 |
 | `.aios-core/development/tasks/qa-review-story.md` | 审阅实现 |
 | `.aios-core/development/tasks/execute-checklist.md` | 执行检查列表 |

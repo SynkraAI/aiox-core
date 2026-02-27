@@ -91,7 +91,7 @@ flowchart TD
     end
 
     subgraph FIX["阶段 4: 应用修复"]
-        X1["@dev 执行 dev-apply-qa-fixes.md"]
+        X1["@dev 执行 apply-qa-fixes.md"]
         X2["应用修正"]
         X3["用测试验证"]
         X4["生成 fixes-applied.json"]
@@ -200,7 +200,7 @@ sequenceDiagram
             S->>QA: 执行 qa-create-fix-request.md
             QA-->>S: fix-request.md, prioritizedIssues
 
-            S->>DEV: 执行 dev-apply-qa-fixes.md
+            S->>DEV: 执行 apply-qa-fixes.md
             DEV->>DEV: 应用修复
             DEV->>DEV: 运行测试
             DEV-->>S: fixes-applied.json, issuesFixed
@@ -331,7 +331,7 @@ fallback: "使用原始网关文件进行修复"
 | **名称** | `fix_issues` |
 | **阶段** | 4 - 应用修复 |
 | **代理** | `@dev` (Dex) |
-| **任务** | `dev-apply-qa-fixes.md` |
+| **任务** | `apply-qa-fixes.md` |
 | **超时** | 60 分钟 (3,600,000 毫秒) |
 
 **描述:**
@@ -448,7 +448,7 @@ ID: dev
 星座: 水瓶座
 
 QA循环中的责任:
-  - 根据修复请求应用修正 (dev-apply-qa-fixes.md)
+  - 根据修复请求应用修正 (apply-qa-fixes.md)
   - 执行测试来验证修正
   - 更新故事中的开发代理记录
   - 确保修复不会破坏现有功能
@@ -600,9 +600,9 @@ flowchart LR
 
 ---
 
-### 3. dev-apply-qa-fixes.md
+### 3. apply-qa-fixes.md
 
-**位置:** `.aios-core/development/tasks/dev-apply-qa-fixes.md`
+**位置:** `.aios-core/development/tasks/apply-qa-fixes.md`
 
 **目的:** 根据 QA 反馈和网关审查应用修复。
 
@@ -1078,7 +1078,7 @@ mv qa/loop-status.json qa/loop-status.json.bak
 | 工作流定义 | `.aios-core/development/workflows/qa-loop.yaml` |
 | QA 审查任务 | `.aios-core/development/tasks/qa-review-story.md` |
 | 创建修复请求任务 | `.aios-core/development/tasks/qa-create-fix-request.md` |
-| 应用 QA 修复任务 | `.aios-core/development/tasks/dev-apply-qa-fixes.md` |
+| 应用 QA 修复任务 | `.aios-core/development/tasks/apply-qa-fixes.md` |
 | QA 代理 | `.aios-core/development/agents/qa.md` |
 | 开发代理 | `.aios-core/development/agents/dev.md` |
 

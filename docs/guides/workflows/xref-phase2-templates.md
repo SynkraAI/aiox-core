@@ -53,7 +53,7 @@ These are YAML-based document generation templates used by the `create-doc` task
 | 16 | `rls-policies-tmpl.yaml` | create-doc | data-engineer | -- | No |
 | 17 | `schema-design-tmpl.yaml` | db-domain-modeling, create-doc | data-engineer | -- | No |
 | 18 | `state-persistence-tmpl.yaml` | create-doc | ux-design-expert | -- | No |
-| 19 | `story-tmpl.yaml` | create-doc, create-next-story, sm-create-next-story, dev-validate-next-story, validate-next-story | po, sm, qa, aios-master | story-development-cycle (implicit) | No |
+| 19 | `story-tmpl.yaml` | create-doc, create-next-story, create-next-story, dev-validate-next-story, validate-next-story | po, sm, qa, aios-master | story-development-cycle (implicit) | No |
 | 20 | `tokens-schema-tmpl.yaml` | create-doc | ux-design-expert | -- | No |
 
 ---
@@ -292,9 +292,9 @@ Location: `.aios-core/product/checklists/`
 | 1 | `architect-checklist.md` | execute-checklist, analyze-cross-artifact | architect, aios-master | -- | No |
 | 2 | `change-checklist.md` | correct-course, modify-agent, modify-task, modify-workflow, update-manifest, qa-review-proposal, propose-modification, brownfield-create-epic | pm, po, aios-master | -- | No |
 | 3 | `pm-checklist.md` | execute-checklist (via prd-tmpl.yaml), analyze-cross-artifact | pm, aios-master | -- | No |
-| 4 | `po-master-checklist.md` | execute-checklist, validate-next-story, create-next-story, sm-create-next-story, create-brownfield-story, brownfield-create-story, brownfield-create-epic, qa-trace-requirements, dev-validate-next-story, po-sync-story-to-clickup, po-pull-story-from-clickup | po, aios-master | greenfield-ui, greenfield-service, greenfield-fullstack, brownfield-ui, brownfield-service, brownfield-fullstack | No |
+| 4 | `po-master-checklist.md` | execute-checklist, validate-next-story, create-next-story, create-next-story, create-brownfield-story, brownfield-create-story, brownfield-create-epic, qa-trace-requirements, dev-validate-next-story, po-sync-story-to-clickup, po-pull-story-from-clickup | po, aios-master | greenfield-ui, greenfield-service, greenfield-fullstack, brownfield-ui, brownfield-service, brownfield-fullstack | No |
 | 5 | `story-dod-checklist.md` | execute-checklist, dev-develop-story, analyze-cross-artifact, build-autonomous | dev, aios-master | story-development-cycle (implicit) | No |
-| 6 | `story-draft-checklist.md` | create-next-story, sm-create-next-story, analyze-cross-artifact | sm, aios-master | -- | No |
+| 6 | `story-draft-checklist.md` | create-next-story, create-next-story, analyze-cross-artifact | sm, aios-master | -- | No |
 | 7 | `self-critique-checklist.md` | plan-execute-subtask, build-autonomous, document-gotchas | dev | -- | No |
 | 8 | `release-checklist.md` | execute-checklist (implicit) | devops | -- | No |
 | 9 | `pre-push-checklist.md` | execute-checklist (implicit) | devops | -- | No |

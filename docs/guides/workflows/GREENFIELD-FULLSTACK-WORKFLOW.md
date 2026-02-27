@@ -406,11 +406,11 @@ flowchart TD
 
 | Step | Agente | Task | Entrada | Saida | Obrigatorio |
 |------|--------|------|---------|-------|-------------|
-| 1 | @sm (River) | `sm-create-next-story.md` | Docs fragmentados | `{epic}.{story}.story.md` | Sim |
+| 1 | @sm (River) | `create-next-story.md` | Docs fragmentados | `{epic}.{story}.story.md` | Sim |
 | 2 | @analyst/@pm | Revisao | Story draft | Story aprovada | Opcional |
 | 3 | @dev (Dex) | `dev-develop-story.md` | Story aprovada | Implementacao | Sim |
 | 4 | @qa (Quinn) | `qa-review-story.md` | Implementacao | Feedback de QA | Opcional |
-| 5 | @dev (Dex) | `dev-apply-qa-fixes.md` | Feedback de QA | Correcoes aplicadas | Condicional |
+| 5 | @dev (Dex) | `apply-qa-fixes.md` | Feedback de QA | Correcoes aplicadas | Condicional |
 | 6 | @po (Pax) | Retrospectiva | Epic completo | Retrospectiva | Opcional |
 
 ### Ciclo de Story
@@ -507,10 +507,10 @@ graph LR
 | 1 | Generate AI Frontend Prompt | @ux-expert | `generate-ai-frontend-prompt.md` |
 | 1 | Execute Checklist | @po | `execute-checklist.md` |
 | 2 | Shard Document | @po | `shard-doc.md` |
-| 3 | Create Next Story | @sm | `sm-create-next-story.md` |
+| 3 | Create Next Story | @sm | `create-next-story.md` |
 | 3 | Develop Story | @dev | `dev-develop-story.md` |
 | 3 | Review Story | @qa | `qa-review-story.md` |
-| 3 | Apply QA Fixes | @dev | `dev-apply-qa-fixes.md` |
+| 3 | Apply QA Fixes | @dev | `apply-qa-fixes.md` |
 
 ### Templates Utilizados
 
@@ -768,7 +768,7 @@ ls -la docs/
 | Workflow | `.aios-core/development/workflows/greenfield-fullstack.yaml` | Definicao do workflow |
 | Task | `.aios-core/development/tasks/environment-bootstrap.md` | Bootstrap do ambiente |
 | Task | `.aios-core/development/tasks/shard-doc.md` | Fragmentacao de documentos |
-| Task | `.aios-core/development/tasks/sm-create-next-story.md` | Criacao de stories |
+| Task | `.aios-core/development/tasks/create-next-story.md` | Criacao de stories |
 | Agente | `.aios-core/development/agents/*.md` | Definicoes de agentes |
 | Template | `.aios-core/development/templates/*.yaml` | Templates de documentos |
 | Checklist | `.aios-core/development/checklists/*.md` | Checklists de validacao |

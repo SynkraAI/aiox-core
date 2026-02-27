@@ -31,8 +31,7 @@ O agente **@sm (River)** e o Scrum Master tecnico do AIOS, especializado em prep
 
 | Arquivo | Comando | Propósito |
 |---------|---------|-----------|
-| `.aios-core/development/tasks/sm-create-next-story.md` | `*draft` | Task principal para criar proxima story do backlog |
-| `.aios-core/development/tasks/create-next-story.md` | `*draft` | Versao completa da task de criação de story |
+| `.aios-core/development/tasks/create-next-story.md` | `*draft` | Task principal para criar proxima story do backlog (consolidada, W3.9) |
 | `.aios-core/development/tasks/execute-checklist.md` | `*story-checklist` | Executa checklist de validação de story draft |
 | `.aios-core/development/tasks/correct-course.md` | `*correct-course` | Analisa e corrige desvios de processo |
 | `.aios-core/development/tasks/collaborative-edit.md` | - | Edicao colaborativa de documentos |
@@ -225,7 +224,7 @@ flowchart LR
 
 | Comando | Task File | Operacao |
 |---------|-----------|----------|
-| `*draft` | `sm-create-next-story.md` / `create-next-story.md` | Cria proxima story do backlog |
+| `*draft` | `create-next-story.md` | Cria proxima story do backlog |
 | `*story-checklist` | `execute-checklist.md` | Executa `story-draft-checklist.md` |
 | `*correct-course` | `correct-course.md` | Analisa e corrige desvios de processo |
 | `*help` | (built-in) | Mostra comandos disponiveis |

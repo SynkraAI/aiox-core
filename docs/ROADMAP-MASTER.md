@@ -1,7 +1,7 @@
 # ROADMAP MASTER - AIOS + JARVIS
 
 > Documento vivo. Atualizar checkboxes conforme progresso.
-> Criado: 2026-02-26 | Ultima atualizacao: 2026-02-28 (W2.1-W2.6 DONE)
+> Criado: 2026-02-26 | Ultima atualizacao: 2026-02-28 (W2.7/W2.9/W2.10 + W3.1/W3.2/W3.3/W3.5/W3.12/W3.14 verified DONE)
 > Referencia cruzada: `docs/stories/backlog.json`, `docs/roadmap.md`
 
 ---
@@ -97,12 +97,12 @@
 
 ### Voice Hub - Melhorias UX
 
-- [ ] W2.7 - File viewer inline no chat (preview de codigo/texto)
-- [ ] W2.8 - OCR para PDFs escaneados (fallback quando pdf-parse retorna vazio)
-- [ ] W2.9 - Notificacoes push no cockpit (tool executions, errors)
-- [ ] W2.10 - Tema claro/escuro toggle
-- [ ] W2.11 - PWA manifest + service worker (instalar no celular)
-- [ ] W2.12 - Autenticacao basica (pin/senha) para proteger endpoints
+- [x] W2.7 - File viewer inline no chat (preview de codigo/texto) — VERIFIED DONE 2026-02-28
+- [x] W2.8 - OCR para PDFs escaneados (fallback quando pdf-parse retorna vazio) — DONE 2026-02-28 (pdf-to-img + GPT-4o Vision, ate 3 paginas)
+- [x] W2.9 - Notificacoes push no cockpit (tool executions, errors) — VERIFIED DONE 2026-02-28
+- [x] W2.10 - Tema claro/escuro toggle — VERIFIED DONE 2026-02-28
+- [x] W2.11 - PWA manifest + service worker (instalar no celular) — DONE 2026-02-28 (icones SVG+PNG, SW v2, offline page)
+- [x] W2.12 - Autenticacao basica (pin/senha) para proteger endpoints — DONE 2026-02-28 (PIN 4-6 digitos, WS auth, session TTL, auto-logout)
 
 ---
 
@@ -112,26 +112,26 @@
 
 ### Activation Pipeline (ACT-2 → ACT-8)
 
-- [ ] W3.1 - ACT-2: Audit user_profile impact across agents
-- [ ] W3.2 - ACT-3: ProjectStatusLoader reliability overhaul
-- [ ] W3.3 - ACT-4: PermissionMode integration (wiring permissions/ to CLI)
+- [x] W3.1 - ACT-2: Audit user_profile impact across agents — VERIFIED DONE (31 testes, cascade wired)
+- [x] W3.2 - ACT-3: ProjectStatusLoader reliability overhaul — VERIFIED DONE (90 testes)
+- [x] W3.3 - ACT-4: PermissionMode integration (wiring permissions/ to CLI) — VERIFIED DONE (67 testes)
 - [ ] W3.4 - ACT-5: WorkflowNavigator + Bob integration
-- [ ] W3.5 - ACT-6: Unified Activation Pipeline
+- [x] W3.5 - ACT-6: Unified Activation Pipeline — VERIFIED DONE (QA PASS, 67 testes)
 - [ ] W3.6 - ACT-7: Context-Aware Greeting Sections
 - [ ] W3.7 - ACT-8: Agent Config Loading governance
 
 ### Core Gaps
 
-- [ ] W3.8 - Implementar ou remover phantom memory modules (memory-query.js, session-memory.js)
-- [ ] W3.9 - Consolidar 3 duplicate task file pairs
-- [ ] W3.10 - Consolidar 3 elicitation file duplicates
-- [ ] W3.11 - Config migration monolitico → L1-L4
-- [ ] W3.12 - INS-4.11: v4.3.0 post-release installer fixes
+- [x] W3.8 - Remover phantom memory modules (memory-query.js, session-memory.js) — DONE 2026-02-28 (dead imports removidos, 66 testes passando)
+- [x] W3.9 - Consolidar 3 duplicate task file pairs -- DONE: dev-apply-qa-fixes.md and sm-create-next-story.md refs updated to generic versions, entity-registry/install-manifest cleaned. validate-next-story/dev-validate-next-story NOT duplicates (different agents). L2 deny rules block file deletion -- needs manual removal.
+- [x] W3.10 - Consolidar 3 elicitation file duplicates -- DONE: removed 5 duplicates, updated elicitationLocation config
+- [ ] W3.11 - Config migration monolitico → L1-L4 — W4 BLOCKER: migrate-config.js existe mas nunca executado
+- [x] W3.12 - INS-4.11: v4.3.0 post-release installer fixes — VERIFIED DONE (SYNAPSE migration concluida)
 - [ ] W3.13 - INS-4.12: brownfield dependency resolution
 
 ### Stories Pendentes
 
-- [ ] W3.14 - CODEINTEL-RP-001: RegistryProvider completion
+- [x] W3.14 - CODEINTEL-RP-001: RegistryProvider completion — VERIFIED DONE (QA PASS, 351 testes)
 - [ ] W3.15 - NOG-23: post-migration validation benchmark
 - [ ] W3.16 - WIS-16: workflow-aware greeting handoffs
 - [ ] W3.17 - GHIM-001 Phase 3: GitHub Actions execution
@@ -194,13 +194,13 @@
 |------|------------|------------|---|
 | W0 Quick Wins | 10 | 10 | 100% |
 | W1 JARVIS CLI | 19 | 18 | 95% |
-| W2 Integration | 12 | 6 | 50% |
-| W3 Core | 17 | 0 | 0% |
+| W2 Integration | 12 | 12 | 100% |
+| W3 Core | 17 | 9 | 53% |
 | W4 Dashboard | 7 | 0 | 0% |
 | W5 Squads | 5 | 0 | 0% |
 | W6 Pro | 4 | 0 | 0% |
 | W7 Cleanup | 10 | 0 | 0% |
-| **TOTAL** | **84** | **34** | **40%** |
+| **TOTAL** | **84** | **49** | **58%** |
 
 ---
 

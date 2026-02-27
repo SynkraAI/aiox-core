@@ -83,7 +83,7 @@ Every task file referenced across all workflows and agents:
 | # | Task File | Agents | Workflows Used In | Agent Command |
 |---|-----------|--------|-------------------|---------------|
 | 1 | `create-next-story.md` | @sm | SDC, GF, GU, GS, BF, BU, BS | `*draft` |
-| 2 | `sm-create-next-story.md` | @sm | GF, GU, GS | `*draft` |
+| ~~2~~ | ~~`sm-create-next-story.md`~~ | ~~@sm~~ | ~~GF, GU, GS~~ | **REMOVED (W3.9)** -- consolidated into `create-next-story.md` |
 | 3 | `create-brownfield-story.md` | @sm, @pm | BF | `*draft` (SM), `*create-story` (PM) |
 | 4 | `validate-next-story.md` | @po, @dev | SDC | `*validate-story-draft` |
 | 5 | `dev-develop-story.md` | @dev | SDC, GF, GU, GS, BF, BU, BS | `*develop {story-id}` |
@@ -203,7 +203,7 @@ graph LR
 
     subgraph "Tasks"
         T1["create-next-story.md"]
-        T1b["sm-create-next-story.md"]
+        T1b["sm-create-next-story.md (REMOVED W3.9)"]
         T2["execute-checklist.md<br/>+ story-draft-checklist"]
         T3["correct-course.md"]
     end
@@ -766,7 +766,7 @@ sequenceDiagram
             QA-->>DEV: Fix request items
 
             Note over QA,DEV: Apply Fixes Phase
-            DEV->>DEV: *apply-qa-fixes<br/>Task: dev-apply-qa-fixes.md
+            DEV->>DEV: *apply-qa-fixes<br/>Task: apply-qa-fixes.md
             DEV-->>QA: Fixes applied
         end
     end
@@ -817,7 +817,7 @@ sequenceDiagram
             DEV->>DEV: *develop {id}<br/>Task: dev-develop-story.md
             QA->>QA: *review {story}<br/>Task: qa-review-story.md
             opt QA finds issues
-                DEV->>DEV: *apply-qa-fixes<br/>Task: dev-apply-qa-fixes.md
+                DEV->>DEV: *apply-qa-fixes<br/>Task: apply-qa-fixes.md
             end
         end
     end
@@ -867,7 +867,7 @@ flowchart TD
         S2 --> S3{"QA?"}
         S3 -->|Yes| S4["@qa: qa-review-story.md"]
         S4 --> S5{Issues?}
-        S5 -->|Yes| S6["@dev: dev-apply-qa-fixes.md"]
+        S5 -->|Yes| S6["@dev: apply-qa-fixes.md"]
         S6 --> S4
         S5 -->|No| S7{More?}
         S3 -->|No| S7
@@ -1047,18 +1047,18 @@ Three task pairs exist with both a generic and agent-prefixed version:
 
 | Generic (non-prefixed) | Agent-Prefixed | Used in Agent Def | Used in YAML Workflow | Recommendation |
 |------------------------|----------------|--------------------|-----------------------|----------------|
-| `create-next-story.md` (`createNextStory()` by River) | `sm-create-next-story.md` (`smCreateNextStory()` by River) | @sm → `create-next-story.md` | `story-development-cycle.yaml` → `create-next-story` | **Keep generic**, deprecate `sm-` prefix |
-| `apply-qa-fixes.md` (`applyQaFixes()` by Dex) | `dev-apply-qa-fixes.md` (`devApplyQaFixes()` by Dex) | @dev → `apply-qa-fixes.md` | `qa-loop.yaml` → `dev-apply-qa-fixes.md` | **Mismatch!** Agent def ≠ YAML. Standardize. |
+| `create-next-story.md` (`createNextStory()` by River) | ~~`sm-create-next-story.md`~~ (REMOVED W3.9) | @sm → `create-next-story.md` | `story-development-cycle.yaml` → `create-next-story` | **DONE**: `sm-` prefix removed, generic kept |
+| `apply-qa-fixes.md` (`applyQaFixes()` by Dex) | ~~`dev-apply-qa-fixes.md`~~ (REMOVED W3.9) | @dev → `apply-qa-fixes.md` | `qa-loop.yaml` → `apply-qa-fixes.md` | **DONE**: `dev-` prefix removed, generic kept |
 | `validate-next-story.md` (`validateNextStory()` by Quinn) | `dev-validate-next-story.md` (`devValidateNextStory()` by Dex) | @po/@dev → `validate-next-story.md` | (indirect) | Different tasks for different agents. Both valid. |
 
 ### 6.3 Naming Inconsistencies in Documentation
 
 | Issue | Details | Severity |
 |-------|---------|----------|
-| `sm-create-next-story.md` vs `create-next-story.md` | SM agent def uses `create-next-story.md`. Some workflow DOCS reference `sm-` prefix. YAML uses generic. | MEDIUM |
+| ~~`sm-create-next-story.md` vs `create-next-story.md`~~ | **RESOLVED (W3.9)**: `sm-create-next-story.md` removed, all refs point to `create-next-story.md`. | ~~MEDIUM~~ DONE |
 | `dev-develop-story.md` vs `develop-story` | Workflow docs sometimes omit `dev-` prefix. Actual task file is `dev-develop-story.md`. | LOW |
 | `qa-review-story.md` vs `review-story.md` | Brownfield docs reference `review-story.md` but actual file is `qa-review-story.md`. YAML uses `qa-review-story.md`. | MEDIUM |
-| `dev-apply-qa-fixes.md` vs `apply-qa-fixes.md` | QA Loop YAML uses `dev-apply-qa-fixes.md`, @dev agent uses `apply-qa-fixes.md`. Both files exist. | MEDIUM |
+| ~~`dev-apply-qa-fixes.md` vs `apply-qa-fixes.md`~~ | **RESOLVED (W3.9)**: `dev-apply-qa-fixes.md` removed, all refs point to `apply-qa-fixes.md`. | ~~MEDIUM~~ DONE |
 | `story-dod-checklist.md` path | Referenced in `@dev` checklist dependency but checklists/ dir does not exist. | MEDIUM |
 
 ### 6.4 Tasks Referenced in "Em Desenvolvimento" (Future/Planned)

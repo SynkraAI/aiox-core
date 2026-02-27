@@ -31,7 +31,7 @@ This document is the result of a comprehensive cross-reference analysis of every
 | Finding | Severity | Details |
 |---------|----------|---------|
 | **@qa agent has 9 broken task references** | CRITICAL | Task dependency names in `agents/qa.md` don't match actual filenames (missing `qa-` prefix) |
-| **3 duplicate task file pairs** | MEDIUM | `create-next-story`/`sm-create-next-story`, `apply-qa-fixes`/`dev-apply-qa-fixes`, `validate-next-story`/`dev-validate-next-story` |
+| ~~**3 duplicate task file pairs**~~ | ~~MEDIUM~~ DONE | **RESOLVED (W3.9)**: `sm-create-next-story` and `dev-apply-qa-fixes` removed. `validate-next-story`/`dev-validate-next-story` are NOT duplicates (different agents). |
 | **3 elicitation file duplicates** | MEDIUM | Identical files in `core/elicitation/` and `elicitation/` |
 | **3 phantom/missing core modules** | MEDIUM | `memory-query.js`, `session-memory.js`, `security-checker` referenced but don't exist (try/catch guarded) |
 | **19 confirmed orphaned files** | LOW | Files with no active consumers (7 SQL templates, 5 infra scripts, 5 deprecated standards, 2 core modules) |
@@ -622,18 +622,18 @@ The `@qa` agent definition (`agents/qa.md`) references 9 task files using non-pr
 
 | Generic | Agent-Prefixed | Used in Agent Def | Used in YAML Workflow | Issue |
 |---------|----------------|--------------------|-----------------------|-------|
-| `create-next-story.md` | `sm-create-next-story.md` | @sm uses generic | YAML uses generic | Keep generic, deprecate `sm-` |
-| `apply-qa-fixes.md` | `dev-apply-qa-fixes.md` | @dev uses generic | YAML uses `dev-` prefix | **Mismatch!** Standardize. |
+| `create-next-story.md` | ~~`sm-create-next-story.md`~~ | @sm uses generic | YAML uses generic | **DONE (W3.9)**: `sm-` removed |
+| `apply-qa-fixes.md` | ~~`dev-apply-qa-fixes.md`~~ | @dev uses generic | YAML uses generic | **DONE (W3.9)**: `dev-` removed |
 | `validate-next-story.md` | `dev-validate-next-story.md` | @po/@dev uses generic | indirect | Different tasks, both valid |
 
 ### 6.3 Naming Inconsistencies (5)
 
 | Issue | Severity |
 |-------|----------|
-| `sm-create-next-story.md` vs `create-next-story.md` in docs vs YAML | MEDIUM |
+| ~~`sm-create-next-story.md` vs `create-next-story.md`~~ | ~~MEDIUM~~ DONE (W3.9) |
 | `dev-develop-story.md` sometimes referenced without `dev-` prefix | LOW |
 | `qa-review-story.md` vs `review-story.md` in brownfield docs | MEDIUM |
-| `dev-apply-qa-fixes.md` vs `apply-qa-fixes.md` in YAML vs agent def | MEDIUM |
+| ~~`dev-apply-qa-fixes.md` vs `apply-qa-fixes.md`~~ | ~~MEDIUM~~ DONE (W3.9) |
 | `story-dod-checklist.md` path -- checklists dir reference | MEDIUM |
 
 ### 6.4 Phantom Dependencies (3 missing modules)
@@ -721,7 +721,7 @@ The squad system is well-isolated:
 ### Priority 1: Fix Broken References (CRITICAL)
 
 1. **Fix @qa agent task references** -- Update `agents/qa.md` to use full prefixed names (`qa-generate-tests.md` instead of `generate-tests.md`).
-2. **Standardize duplicate tasks** -- Resolve the `apply-qa-fixes.md` vs `dev-apply-qa-fixes.md` mismatch between agent definition and workflow YAML.
+2. ~~**Standardize duplicate tasks**~~ -- **RESOLVED (W3.9)**: `dev-apply-qa-fixes.md` and `sm-create-next-story.md` removed, all refs point to generic versions.
 
 ### Priority 2: Clean Up Orphans (MEDIUM)
 

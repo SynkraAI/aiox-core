@@ -72,7 +72,7 @@ O agente **@dev (Dex)** e o Full Stack Developer do AIOS, responsavel pela imple
 | `.aios-core/development/tasks/qa-backlog-add-followup.md` | @qa | QA adiciona follow-ups ao backlog |
 | `.aios-core/development/tasks/qa-review-story.md` | @qa | QA revisa implementacao do @dev |
 | `.aios-core/development/tasks/github-devops-pre-push-quality-gate.md` | @github-devops | Quality gate antes de push |
-| `.aios-core/development/tasks/sm-create-next-story.md` | @sm | Scrum Master cria stories para @dev |
+| `.aios-core/development/tasks/create-next-story.md` | @sm | Scrum Master cria stories para @dev |
 
 ### Arquivos de Workflows que Usam @dev
 

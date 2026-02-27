@@ -21,12 +21,7 @@ try {
 }
 
 // Import dependencies with fallbacks
-let MemoryQuery, GotchasMemory;
-try {
-  MemoryQuery = require('../memory/memory-query');
-} catch {
-  MemoryQuery = null;
-}
+let GotchasMemory;
 try {
   GotchasMemory = require('../memory/gotchas-memory');
 } catch {
@@ -95,7 +90,7 @@ class SubagentDispatcher extends EventEmitter {
     this.retryDelay = config.retryDelay || 2000;
 
     // Dependencies
-    this.memoryQuery = config.memoryQuery || (MemoryQuery ? new MemoryQuery() : null);
+    this.memoryQuery = config.memoryQuery || null;
     this.gotchasMemory = config.gotchasMemory || (GotchasMemory ? new GotchasMemory() : null);
 
     // Dispatch log

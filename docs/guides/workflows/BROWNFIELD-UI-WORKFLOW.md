@@ -484,7 +484,7 @@ graph LR
 | 8 | `create-next-story.md` | sm | Criar stories |
 | 10 | `dev-develop-story.md` | dev | Implementar story |
 | 11 | `qa-review-story.md` | qa | Revisar implementacao |
-| 12 | `dev-apply-qa-fixes.md` | dev | Aplicar correcoes QA |
+| 12 | `apply-qa-fixes.md` | dev | Aplicar correcoes QA |
 
 ### Tasks Relacionadas
 
@@ -500,7 +500,7 @@ graph TB
         T4[create-next-story.md]
         T5[dev-develop-story.md]
         T6[qa-review-story.md]
-        T7[dev-apply-qa-fixes.md]
+        T7[apply-qa-fixes.md]
     end
 
     subgraph "Tasks de Validacao"

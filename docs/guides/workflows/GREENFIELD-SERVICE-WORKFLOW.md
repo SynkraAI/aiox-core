@@ -748,7 +748,7 @@ export AIOS_DEBUG=true
 |---------|------|
 | `.aios-core/development/tasks/create-doc.md` | Criacao de documentos |
 | `.aios-core/development/tasks/shard-doc.md` | Fragmentacao de documentos |
-| `.aios-core/development/tasks/sm-create-next-story.md` | Criacao de stories |
+| `.aios-core/development/tasks/create-next-story.md` | Criacao de stories |
 | `.aios-core/development/tasks/dev-develop-story.md` | Implementacao de stories |
 | `.aios-core/development/tasks/qa-review-story.md` | Revisao de implementacao |
 | `.aios-core/development/tasks/execute-checklist.md` | Execucao de checklists |

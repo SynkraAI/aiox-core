@@ -14,21 +14,11 @@ const fs = require('fs');
 const path = require('path');
 
 // Import dependencies with fallbacks
-let MemoryQuery, GotchasMemory, SessionMemory;
-try {
-  MemoryQuery = require('../memory/memory-query');
-} catch {
-  MemoryQuery = null;
-}
+let GotchasMemory;
 try {
   GotchasMemory = require('../memory/gotchas-memory');
 } catch {
   GotchasMemory = null;
-}
-try {
-  SessionMemory = require('../memory/session-memory');
-} catch {
-  SessionMemory = null;
 }
 
 class ContextInjector {
@@ -46,9 +36,9 @@ class ContextInjector {
     this.cache = new Map();
 
     // Dependencies
-    this.memoryQuery = config.memoryQuery || (MemoryQuery ? new MemoryQuery() : null);
+    this.memoryQuery = config.memoryQuery || null;
     this.gotchasMemory = config.gotchasMemory || (GotchasMemory ? new GotchasMemory() : null);
-    this.sessionMemory = config.sessionMemory || (SessionMemory ? new SessionMemory() : null);
+    this.sessionMemory = config.sessionMemory || null;
 
     // Root path
     this.rootPath = config.rootPath || process.cwd();

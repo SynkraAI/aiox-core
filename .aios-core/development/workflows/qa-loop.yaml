@@ -212,7 +212,7 @@ workflow:
         Developer agent applies fixes based on the fix request.
         Runs tests and validates changes.
 
-      task: dev-apply-qa-fixes.md
+      task: apply-qa-fixes.md
 
       inputs:
         storyId: "{storyId}"
@@ -434,7 +434,7 @@ workflow:
     dependencies:
       - qa-review-story.md
       - qa-create-fix-request.md
-      - dev-apply-qa-fixes.md
+      - apply-qa-fixes.md
     tags:
       - qa-loop
       - workflow

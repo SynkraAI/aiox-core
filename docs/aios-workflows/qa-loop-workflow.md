@@ -91,7 +91,7 @@ flowchart TD
     end
 
     subgraph FIX["Fase 4: Aplicar Fixes"]
-        X1["@dev executa dev-apply-qa-fixes.md"]
+        X1["@dev executa apply-qa-fixes.md"]
         X2["Aplica correções"]
         X3["Valida com testes"]
         X4["Gera fixes-applied.json"]
@@ -200,7 +200,7 @@ sequenceDiagram
             S->>QA: Executar qa-create-fix-request.md
             QA-->>S: fix-request.md, prioritizedIssues
 
-            S->>DEV: Executar dev-apply-qa-fixes.md
+            S->>DEV: Executar apply-qa-fixes.md
             DEV->>DEV: Aplicar Fixes
             DEV->>DEV: Rodar Testes
             DEV-->>S: fixes-applied.json, issuesFixed
@@ -331,7 +331,7 @@ fallback: "Use raw gate file for fixes"
 | **Nome** | `fix_issues` |
 | **Fase** | 4 - Apply Fixes |
 | **Agente** | `@dev` (Dex) |
-| **Task** | `dev-apply-qa-fixes.md` |
+| **Task** | `apply-qa-fixes.md` |
 | **Timeout** | 60 minutos (3.600.000 ms) |
 
 **Descrição:**
@@ -448,7 +448,7 @@ Arquetipo: Builder
 Signo: Aquarius
 
 Responsabilidades no QA Loop:
-  - Aplicar correções baseadas em fix request (dev-apply-qa-fixes.md)
+  - Aplicar correções baseadas em fix request (apply-qa-fixes.md)
   - Executar testes para validar correções
   - Atualizar Dev Agent Record na story
   - Garantir que fixes nao quebrem funcionalidades existentes
@@ -600,9 +600,9 @@ flowchart LR
 
 ---
 
-### 3. dev-apply-qa-fixes.md
+### 3. apply-qa-fixes.md
 
-**Localização:** `.aios-core/development/tasks/dev-apply-qa-fixes.md`
+**Localização:** `.aios-core/development/tasks/apply-qa-fixes.md`
 
 **Propósito:** Aplicar fixes baseados no feedback de QA e gate review.
 
@@ -1078,7 +1078,7 @@ mv qa/loop-status.json qa/loop-status.json.bak
 | Workflow Definition | `.aios-core/development/workflows/qa-loop.yaml` |
 | QA Review Task | `.aios-core/development/tasks/qa-review-story.md` |
 | Create Fix Request Task | `.aios-core/development/tasks/qa-create-fix-request.md` |
-| Apply QA Fixes Task | `.aios-core/development/tasks/dev-apply-qa-fixes.md` |
+| Apply QA Fixes Task | `.aios-core/development/tasks/apply-qa-fixes.md` |
 | QA Agent | `.aios-core/development/agents/qa.md` |
 | Dev Agent | `.aios-core/development/agents/dev.md` |
 

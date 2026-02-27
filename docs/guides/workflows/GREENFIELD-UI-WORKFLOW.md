@@ -517,7 +517,7 @@ sequenceDiagram
 |----------|-------|
 | **Agente** | `@dev` (Dex) |
 | **Comando** | `*apply-qa-fixes` |
-| **Task** | `dev-apply-qa-fixes.md` |
+| **Task** | `apply-qa-fixes.md` |
 | **Condicao** | `qa_left_unchecked_items` |
 | **Atualiza** | Arquivos de implementacao |
 
@@ -655,7 +655,7 @@ graph LR
 | `create-next-story.md` | @sm | Criar proxima story |
 | `execute-checklist.md` | @sm | Checklist de story draft |
 | `dev-develop-story.md` | @dev | Implementar story |
-| `dev-apply-qa-fixes.md` | @dev | Aplicar correcoes QA |
+| `apply-qa-fixes.md` | @dev | Aplicar correcoes QA |
 | `qa-review-story.md` | @qa | Revisar implementacao |
 | `qa-gate.md` | @qa | Decisao de quality gate |
 

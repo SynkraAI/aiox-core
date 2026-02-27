@@ -2,7 +2,7 @@
 
 $tasks = @(
   # Dev Agent Tasks (5 new - 2 already done in Phase 1)
-  'dev-apply-qa-fixes.md',
+  # 'dev-apply-qa-fixes.md', # REMOVED: consolidated into apply-qa-fixes.md (W3.9)
   'dev-improve-code-quality.md',
   'dev-optimize-performance.md',
   'dev-suggest-refactoring.md',
@@ -26,7 +26,7 @@ $tasks = @(
   'po-manage-story-backlog.md',
   'po-backlog-add.md',
   'po-stories-index.md',
-  'sm-create-next-story.md',
+  # 'sm-create-next-story.md', # REMOVED: consolidated into create-next-story.md (W3.9)
   'pr-automation.md',
   'release-management.md',
   'calculate-roi.md',

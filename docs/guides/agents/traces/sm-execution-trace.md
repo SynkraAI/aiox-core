@@ -106,7 +106,7 @@ sm:
 | Command | Task File | Visibility | Elicit |
 |---------|-----------|------------|--------|
 | `*help` | (built-in) | full, quick, key | No |
-| `*draft` | sm-create-next-story.md + story-tmpl.yaml | full, quick, key | Yes |
+| `*draft` | create-next-story.md + story-tmpl.yaml | full, quick, key | Yes |
 | `*story-checklist` | execute-checklist.md + story-draft-checklist.md | full, quick | Optional |
 | `*retro` | (built-in) | full | No |
 | `*velocity` | (built-in) | full | No |
@@ -120,13 +120,13 @@ sm:
 
 ### `*draft`
 
-**Task file:** `.aios-core/development/tasks/sm-create-next-story.md`
+**Task file:** `.aios-core/development/tasks/create-next-story.md`
 **Template:** `.aios-core/development/templates/story-tmpl.yaml` (MISSING in development/, EXISTS in `.aios-core/product/templates/story-tmpl.yaml`)
 
 **Dependencies loaded:**
 | File | Type | Status |
 |------|------|--------|
-| `sm-create-next-story.md` | Task | EXISTS |
+| `create-next-story.md` | Task | EXISTS |
 | `story-tmpl.yaml` | Template | MISSING in development/, EXISTS in product/templates/ |
 | `.aios-core/product/data/mode-selection-best-practices.md` | Data | Referenced by sm config |
 | `.aios-core/product/templates/` | Templates dir | Scanned dynamically |
@@ -135,7 +135,7 @@ sm:
 
 ```mermaid
 flowchart TD
-    A["*draft"] --> B[Load sm-create-next-story.md task]
+    A["*draft"] --> B[Load create-next-story.md task]
     B --> C[Load template: story-tmpl.yaml]
     C --> D{Template exists?}
     D -->|yes| E[Parse YAML template structure]
@@ -263,7 +263,7 @@ graph TD
     end
 
     subgraph "Task Files"
-        T1[sm-create-next-story.md]
+        T1[create-next-story.md]
         T2[execute-checklist.md]
         T3[correct-course.md]
     end
@@ -343,7 +343,7 @@ graph TD
 
 | File | Type | Referenced By | Impact |
 |------|------|---------------|--------|
-| `story-tmpl.yaml` | Template | `*draft` (sm-create-next-story.md) | MISSING in `.aios-core/development/templates/`, EXISTS in `.aios-core/product/templates/story-tmpl.yaml` |
+| `story-tmpl.yaml` | Template | `*draft` (create-next-story.md) | MISSING in `.aios-core/development/templates/`, EXISTS in `.aios-core/product/templates/story-tmpl.yaml` |
 | `story-draft-checklist.md` | Checklist | `*story-checklist` (execute-checklist.md) | MISSING in `.aios-core/development/checklists/`, EXISTS in `.aios-core/product/checklists/story-draft-checklist.md` |
 
 ---
