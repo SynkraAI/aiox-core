@@ -35,6 +35,8 @@ documentation_paths:
     - "docs/framework/coding-standards.md"
     - "docs/framework/tech-stack.md"
     - "docs/framework/source-tree.md"
+  framework_docs_location: "docs/framework"
+  project_docs_location: "docs/architecture/project-decisions"
   dev_load_always_files_fallback:
     - "docs/pt/framework/coding-standards.md"
     - "docs/pt/framework/tech-stack.md"
@@ -124,6 +126,7 @@ logging:
     max_recent_commits: 2
   agent_identity:
     greeting:
+      preference: "auto"
       context_detection: true
       session_detection: "hybrid"
       workflow_detection: "hardcoded"
@@ -145,6 +148,35 @@ pv_mind_context:
     persona_voice: true
     technical_depth: "advanced"
     communication_style: "structured"
+
+# --- Boundary Protection (Section 14) ---
+boundary:
+  frameworkProtection: true
+  protected:
+    - ".aios-core/core/**"
+    - ".aios-core/development/tasks/**"
+    - ".aios-core/development/templates/**"
+    - ".aios-core/development/checklists/**"
+    - ".aios-core/development/workflows/**"
+    - ".aios-core/infrastructure/**"
+    - ".aios-core/constitution.md"
+    - "bin/aios.js"
+    - "bin/aios-init.js"
+  exceptions:
+    - ".aios-core/data/**"
+    - ".aios-core/development/agents/*/MEMORY.md"
+    - ".aios-core/core/config/schemas/**"
+    - ".aios-core/core/config/template-overrides.js"
+
+# --- JARVIS Configuration (Section 15) ---
+jarvis:
+  enabled: true
+  autonomy: "supervised"
+  personality: true
+  version: "1.0.0"
+  greeting:
+    enabled: true
+    address: "sir"
 
 # --- Auto-Claude Configuration (Section 13) ---
 auto_claude:

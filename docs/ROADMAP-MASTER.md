@@ -118,16 +118,16 @@
 - [ ] W3.4 - ACT-5: WorkflowNavigator + Bob integration
 - [x] W3.5 - ACT-6: Unified Activation Pipeline — VERIFIED DONE (QA PASS, 67 testes)
 - [ ] W3.6 - ACT-7: Context-Aware Greeting Sections
-- [ ] W3.7 - ACT-8: Agent Config Loading governance
+- [x] W3.7 - ACT-8: Agent Config Loading governance — DONE 2026-02-28 (4-phase validator, JSON Schema, 53 testes, 12 agents validados)
 
 ### Core Gaps
 
 - [x] W3.8 - Remover phantom memory modules (memory-query.js, session-memory.js) — DONE 2026-02-28 (dead imports removidos, 66 testes passando)
 - [x] W3.9 - Consolidar 3 duplicate task file pairs -- DONE: dev-apply-qa-fixes.md and sm-create-next-story.md refs updated to generic versions, entity-registry/install-manifest cleaned. validate-next-story/dev-validate-next-story NOT duplicates (different agents). L2 deny rules block file deletion -- needs manual removal.
 - [x] W3.10 - Consolidar 3 elicitation file duplicates -- DONE: removed 5 duplicates, updated elicitationLocation config
-- [ ] W3.11 - Config migration monolitico → L1-L4 — W4 BLOCKER: migrate-config.js existe mas nunca executado
+- [x] W3.11 - Config migration monolitico → L1-L4 — DONE 2026-02-28 (layered config ativo, 176 testes, legacy deprecated. Phase 2: migrar 10 consumers para resolveConfig())
 - [x] W3.12 - INS-4.11: v4.3.0 post-release installer fixes — VERIFIED DONE (SYNAPSE migration concluida)
-- [ ] W3.13 - INS-4.12: brownfield dependency resolution
+- [x] W3.13 - INS-4.12: brownfield dependency resolution — VERIFIED DONE (isolamento deps, NODE_PATH, CI brownfield test, doctor check, 8 testes)
 
 ### Stories Pendentes
 
@@ -195,12 +195,12 @@
 | W0 Quick Wins | 10 | 10 | 100% |
 | W1 JARVIS CLI | 19 | 18 | 95% |
 | W2 Integration | 12 | 12 | 100% |
-| W3 Core | 17 | 9 | 53% |
+| W3 Core | 17 | 13 | 76% |
 | W4 Dashboard | 7 | 0 | 0% |
 | W5 Squads | 5 | 0 | 0% |
 | W6 Pro | 4 | 0 | 0% |
 | W7 Cleanup | 10 | 0 | 0% |
-| **TOTAL** | **84** | **49** | **58%** |
+| **TOTAL** | **84** | **53** | **63%** |
 
 ---
 

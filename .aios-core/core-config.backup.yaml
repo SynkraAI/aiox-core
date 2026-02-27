@@ -1,20 +1,3 @@
-# ============================================
-# DEPRECATED — Legacy Compatibility Layer
-# ============================================
-# This monolithic config is DEPRECATED as of W3.11.
-# The layered config system is now active:
-#   L1: .aios-core/framework-config.yaml (framework defaults)
-#   L2: .aios-core/project-config.yaml   (project settings)
-#   L4: .aios-core/local-config.yaml     (machine-specific, gitignored)
-#   L5: ~/.aios/user-config.yaml          (user preferences)
-#
-# This file is kept ONLY for backward compatibility with direct consumers
-# that have not been migrated to use resolveConfig() yet.
-# New code MUST use: require('.aios-core/core/config/config-resolver').resolveConfig()
-#
-# Backup: .aios-core/core-config.backup.yaml
-# Migration date: 2026-02-26
-# ============================================
 markdownExploder: true
 project:
   type: greenfield
@@ -104,7 +87,7 @@ projectStatus:
   maxModifiedFiles: 5
   maxRecentCommits: 2
 boundary:
-  frameworkProtection: false
+  frameworkProtection: true
   protected:
     - .aios-core/core/**
     - .aios-core/development/tasks/**

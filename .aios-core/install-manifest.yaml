@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 4.4.6
-generated_at: "2026-02-27T02:00:37.833Z"
+generated_at: "2026-02-27T02:18:44.777Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1089
+file_count: 1090
 files:
   - path: cli/commands/config/index.js
     hash: sha256:ebcad2ce3807eda29dcddff76d7a95ddc9b7fa160df21fd608f94b802237e862
@@ -177,9 +177,9 @@ files:
     type: cli
     size: 5907
   - path: core-config.yaml
-    hash: sha256:ee3dcd74195c0c281d23387b8e39638bc269a10403ff09757405b6e80edb33a4
+    hash: sha256:41cac7798dd15c2ae5ce1bd35ddbe6e782fcca58e4af2e54eb445ab8138ff3eb
     type: config
-    size: 3275
+    size: 4107
   - path: core/code-intel/code-intel-client.js
     hash: sha256:6c9a08a37775acf90397aa079a4ad2c5edcc47f2cfd592b26ae9f3d154d1deb8
     type: core
@@ -236,6 +236,10 @@ files:
     hash: sha256:011318e2ba5c250daae2e565a8e8fb1570c99b7569e631276a2bf46e887fc514
     type: core
     size: 10891
+  - path: core/config/agent-definition-validator.js
+    hash: sha256:f0eb41e774dbb05c283cb65e929ad53b4b2beefbe3385fb6c90e109773f66788
+    type: core
+    size: 16121
   - path: core/config/config-cache.js
     hash: sha256:527a788cbe650aa6b13d1101ebc16419489bfef20b2ee93042f6eb6a51e898e9
     type: core
@@ -261,9 +265,9 @@ files:
     type: core
     size: 8156
   - path: core/config/schemas/agent-definition.schema.json
-    hash: sha256:08c3ec09d4fa3c626b42302a038432a6962f797e4cb2ff43d0b15a789e05a542
+    hash: sha256:c3e49df119a6013f34cc2b369d9b7e90a020d9ca57745cdfac4ef21126366e96
     type: core
-    size: 6814
+    size: 7927
   - path: core/config/schemas/framework-config.schema.json
     hash: sha256:b20e62d2c18eafcccca46647604ff629addad16067cf58c04182758dcb61500b
     type: core
@@ -273,9 +277,9 @@ files:
     type: core
     size: 496
   - path: core/config/schemas/project-config.schema.json
-    hash: sha256:6ad7dbc70eca1d1d082f0eba4aa53a99003babda3e1393c1793c16d9c7ab202c
+    hash: sha256:1291475e0aff3b25176550310d6d4e971090ee0f335dcadb4c7d35699f2b9398
     type: core
-    size: 11878
+    size: 13192
   - path: core/config/schemas/user-config.schema.json
     hash: sha256:5cfc53fd0a80aa30f592cfa2aa6535afab746e3b8f6adfd2c0bf6786f6637d69
     type: core
@@ -1269,9 +1273,9 @@ files:
     type: data
     size: 9575
   - path: data/entity-registry.yaml
-    hash: sha256:908f20cde271ff36df883230bfeb4e5c0cd4a8c5e0a267f4585e0b4c96ee7e7a
+    hash: sha256:0812a6706934116911fe877401f47c22ba8ba2cb8d47cca6c631843526f69325
     type: data
-    size: 523286
+    size: 520596
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -1477,9 +1481,9 @@ files:
     type: script
     size: 7534
   - path: development/scripts/agent-config-loader.js
-    hash: sha256:53aa76c1711bb063e033876fcd420be9eadd2f58035ca2ea2fc43cdd7ca317c4
+    hash: sha256:ee6a168f54b6143746fc082ff111b40f009e5101b66833cea32390437e7691ab
     type: script
-    size: 18365
+    size: 18885
   - path: development/scripts/agent-exit-hooks.js
     hash: sha256:805ce1660ab1682327a7f5c372798f1927d6f7f0356b5b12d20eb4c8c6c32a4a
     type: script

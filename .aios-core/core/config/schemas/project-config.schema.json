@@ -58,6 +58,14 @@
           "type": "array",
           "items": { "type": "string" },
           "description": "Fallback files for i18n variants"
+        },
+        "framework_docs_location": {
+          "type": "string",
+          "description": "Path to framework documentation directory"
+        },
+        "project_docs_location": {
+          "type": "string",
+          "description": "Path to project-specific documentation directory"
         }
       },
       "additionalProperties": false
@@ -206,6 +214,7 @@
             "greeting": {
               "type": "object",
               "properties": {
+                "preference": { "type": "string", "enum": ["auto", "minimal", "named", "archetypal"], "description": "Greeting style preference" },
                 "context_detection": { "type": "boolean" },
                 "session_detection": { "type": "string" },
                 "workflow_detection": { "type": "string" },
@@ -286,6 +295,25 @@
         "qa": {
           "type": "object",
           "properties": { "enabled": { "type": "boolean" } },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "jarvis": {
+      "type": "object",
+      "description": "JARVIS intelligent orchestration layer settings",
+      "properties": {
+        "enabled": { "type": "boolean", "description": "Enable/disable JARVIS CLI entry point" },
+        "autonomy": { "type": "string", "enum": ["supervised", "assisted", "autonomous"], "description": "Autonomy mode" },
+        "personality": { "type": "boolean", "description": "MCU JARVIS tone vs plain responses" },
+        "version": { "type": "string", "description": "JARVIS module version" },
+        "greeting": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "address": { "type": "string", "description": "Configurable honorific in greetings" }
+          },
           "additionalProperties": false
         }
       },

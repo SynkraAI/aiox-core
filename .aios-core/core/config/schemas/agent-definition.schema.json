@@ -1,0 +1,275 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "agent-definition.schema.json",
+  "title": "AIOS Agent Definition Schema",
+  "description": "Schema for agent definition YAML blocks embedded in .md files under .aios-core/development/agents/",
+  "type": "object",
+  "required": ["agent"],
+  "properties": {
+    "IDE-FILE-RESOLUTION": {
+      "description": "IDE file resolution instructions (metadata, not validated)",
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          { "type": "object" }
+        ]
+      }
+    },
+    "REQUEST-RESOLUTION": {
+      "description": "Request resolution instructions (metadata, string or array or object)",
+      "oneOf": [
+        { "type": "string" },
+        { "type": "array" },
+        { "type": "object" }
+      ]
+    },
+    "activation-instructions": {
+      "description": "Activation step list for agent startup (strings or key-value step objects)",
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          { "type": "object" }
+        ]
+      }
+    },
+    "agent": {
+      "type": "object",
+      "description": "Core agent identity",
+      "required": ["name", "id", "title", "icon"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name (persona name), e.g. 'Dex'",
+          "minLength": 1
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique agent identifier, e.g. 'dev'",
+          "pattern": "^[a-z][a-z0-9-]*$",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "description": "Role title, e.g. 'Full Stack Developer'",
+          "minLength": 1
+        },
+        "icon": {
+          "type": "string",
+          "description": "Emoji icon for the agent",
+          "minLength": 1
+        },
+        "whenToUse": {
+          "type": "string",
+          "description": "Usage guidance for when to activate this agent"
+        },
+        "aliases": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Alternative names for agent activation"
+        },
+        "customization": {
+          "description": "Agent-specific customization overrides (string or null)",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "persona_profile": {
+      "type": "object",
+      "description": "Persona characteristics",
+      "required": ["archetype", "communication"],
+      "properties": {
+        "archetype": {
+          "type": "string",
+          "description": "Persona archetype, e.g. 'Builder', 'Guardian'",
+          "minLength": 1
+        },
+        "zodiac": {
+          "type": "string",
+          "description": "Zodiac sign with emoji"
+        },
+        "communication": {
+          "type": "object",
+          "required": ["tone"],
+          "properties": {
+            "tone": {
+              "type": "string",
+              "description": "Communication tone",
+              "enum": [
+                "pragmatic",
+                "analytical",
+                "conceptual",
+                "collaborative",
+                "empathetic",
+                "decisive",
+                "strategic",
+                "systematic",
+                "educational",
+                "commanding",
+                "technical"
+              ]
+            },
+            "emoji_frequency": {
+              "type": "string",
+              "enum": ["none", "minimal", "low", "medium", "high"]
+            },
+            "vocabulary": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Characteristic vocabulary words"
+            },
+            "greeting_levels": {
+              "type": "object",
+              "properties": {
+                "minimal": { "type": "string" },
+                "named": { "type": "string" },
+                "archetypal": { "type": "string" }
+              }
+            },
+            "signature_closing": {
+              "type": "string",
+              "description": "Agent signature closing phrase"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": true
+    },
+    "persona": {
+      "type": "object",
+      "description": "Persona role and behavior definition",
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "Full role description"
+        },
+        "style": {
+          "type": "string",
+          "description": "Communication style summary"
+        },
+        "identity": {
+          "type": "string",
+          "description": "Identity statement"
+        },
+        "focus": {
+          "type": "string",
+          "description": "Primary focus area"
+        },
+        "core_principles": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "object" }
+            ]
+          }
+        },
+        "responsibility_boundaries": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "core_principles": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          { "type": "string" },
+          { "type": "object" }
+        ]
+      },
+      "description": "Top-level core principles (alternative to persona.core_principles)"
+    },
+    "commands": {
+      "description": "Available agent commands (array of command objects, or object map in compact format)",
+      "oneOf": [
+        {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Command name without * prefix"
+              },
+              "description": {
+                "type": "string",
+                "description": "Command description"
+              },
+              "visibility": {
+                "oneOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "enum": ["full", "quick", "key"]
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "enum": ["full", "quick", "key"]
+                  }
+                ]
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        {
+          "type": "object",
+          "description": "Compact command format (key-value pairs)",
+          "additionalProperties": true
+        }
+      ]
+    },
+    "develop-story": {
+      "type": "object",
+      "description": "Dev agent story development configuration",
+      "additionalProperties": true
+    },
+    "dependencies": {
+      "type": "object",
+      "description": "Agent dependencies (tasks, checklists, scripts, tools, templates)",
+      "properties": {
+        "checklists": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "tasks": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "scripts": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "tools": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "templates": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "expansion_packs": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
+    "autoClaude": {
+      "type": "object",
+      "description": "AutoClaude integration configuration",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-02-27T01:04:18.811Z'
-  entityCount: 750
+  lastUpdated: '2026-02-27T02:00:38.827Z'
+  entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -231,6 +231,7 @@ entities:
         - fixes
       usedBy:
         - dev
+        - qa-loop
       dependencies:
         - qa
         - dev
@@ -1005,8 +1006,7 @@ entities:
         - test-suite-checklist.md
         - validation
         - (follow-up
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - component-generator.js
         - dev
@@ -1639,10 +1639,6 @@ entities:
         extensionPoints: []
       checksum: sha256:07c59cc5790273949e0568ec86c6dd1565a3ab3b31bd9dec4a29fb4f3fbb0381
       lastVerified: '2026-02-26T18:10:23.349Z'
-    # REMOVED (W3.9): dev-apply-qa-fixes consolidated into apply-qa-fixes
-    # dev-apply-qa-fixes:
-    #   path: .aios-core/development/tasks/dev-apply-qa-fixes.md
-    #   redirectTo: apply-qa-fixes
     dev-backlog-debt:
       path: .aios-core/development/tasks/dev-backlog-debt.md
       layer: L2
@@ -3427,8 +3423,7 @@ entities:
         - console
         - check
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3451,7 +3446,6 @@ entities:
         - request
         - task
       usedBy:
-        - qa
         - qa-loop
       dependencies:
         - qa-review-story
@@ -3478,8 +3472,7 @@ entities:
         - evidence
         - requirements
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - qa
       externalDeps: []
@@ -3502,8 +3495,7 @@ entities:
         - positive
         - detection
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - qa
       externalDeps: []
@@ -3556,8 +3548,7 @@ entities:
         - qa
         - gate
         - qa-gate
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - qa
         - devops
@@ -3591,8 +3582,7 @@ entities:
         - test-generation-checklist.md
         - validation
         - (follow-up
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - test-generator
         - coverage-analyzer
@@ -3620,8 +3610,7 @@ entities:
         - library
         - validation
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - context7
       externalDeps: []
@@ -3643,8 +3632,7 @@ entities:
         - migration
         - validation
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3665,8 +3653,7 @@ entities:
         - nfr
         - assess
         - nfr-assess
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -3695,8 +3682,7 @@ entities:
         - 10-phase
         - quality
         - assurance
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - qa
         - dev
@@ -3722,8 +3708,7 @@ entities:
         - aios
         - developer
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - dependency-impact-analyzer
         - diff-generator
@@ -3753,7 +3738,6 @@ entities:
         - review-story
       usedBy:
         - qa-create-fix-request
-        - qa
         - qa-loop
       dependencies:
         - qa
@@ -3783,8 +3767,7 @@ entities:
         - risk
         - profile
         - risk-profile
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -3810,8 +3793,7 @@ entities:
         - (with
         - code
         - quality
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - dev
         - qa
@@ -3836,8 +3818,7 @@ entities:
         - security
         - checklist
         - task
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -3860,8 +3841,7 @@ entities:
         - test
         - design
         - test-design
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps:
@@ -3887,8 +3867,7 @@ entities:
         - trace
         - requirements
         - trace-requirements
-      usedBy:
-        - qa
+      usedBy: []
       dependencies:
         - po-master-checklist
       externalDeps: []
@@ -4394,10 +4373,6 @@ entities:
         extensionPoints: []
       checksum: sha256:5a416700a36ff61903d5bb6636efcb85e8dbc156fa366d10554ab1d6ddb14d95
       lastVerified: '2026-02-26T18:10:23.459Z'
-    # REMOVED (W3.9): sm-create-next-story consolidated into create-next-story
-    # sm-create-next-story:
-    #   path: .aios-core/development/tasks/sm-create-next-story.md
-    #   redirectTo: create-next-story
     spec-assess-complexity:
       path: .aios-core/development/tasks/spec-assess-complexity.md
       layer: L2
@@ -4437,7 +4412,6 @@ entities:
         - 'pipeline:'
         - specification
       usedBy:
-        - qa
         - spec-pipeline
       dependencies:
         - qa
@@ -6226,8 +6200,7 @@ entities:
         - qa
         - gate
         - tmpl
-      usedBy:
-        - qa
+      usedBy: []
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -6358,7 +6331,6 @@ entities:
       usedBy:
         - aios-master
         - po
-        - qa
         - sm
       dependencies:
         - dev
@@ -7079,48 +7051,6 @@ entities:
         extensionPoints: []
       checksum: sha256:cad97b0096fc034fa6ed6cbd14a963abe32d880c1ce8034b6aa62af2e2239833
       lastVerified: '2026-02-26T18:10:23.587Z'
-    elicitation-engine:
-      path: .aios-core/development/scripts/elicitation-engine.js
-      layer: L2
-      type: script
-      purpose: Entity at .aios-core\development\scripts\elicitation-engine.js
-      keywords:
-        - elicitation
-        - engine
-      usedBy: []
-      dependencies:
-        - security-checker
-        - elicitation-session-manager
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: experimental
-      adaptability:
-        score: 0.7
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:10f731ca75dbaf843997c4eb1a0e4619002463b6d697b8a145638260d90773ce
-      lastVerified: '2026-02-26T18:10:23.588Z'
-    elicitation-session-manager:
-      path: .aios-core/development/scripts/elicitation-session-manager.js
-      layer: L2
-      type: script
-      purpose: Entity at .aios-core\development\scripts\elicitation-session-manager.js
-      keywords:
-        - elicitation
-        - session
-        - manager
-      usedBy:
-        - elicitation-engine
-      dependencies: []
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: production
-      adaptability:
-        score: 0.7
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:4385acbfd7c184a38e123f7a20b5e7b06c1d89d645a6e1bae1c5e0e4232d5181
-      lastVerified: '2026-02-26T18:10:23.589Z'
     generate-greeting:
       path: .aios-core/development/scripts/generate-greeting.js
       layer: L2
@@ -8681,8 +8611,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:f94a62a82fc68cbddbd933cb79f8d3b909b34b9585b4e417e6083adc573fbf1c
-      lastVerified: '2026-02-26T18:10:23.683Z'
+      checksum: sha256:ab4e13af764ebdccb1b518f6d5cb4dea54d693af6eda60b95033982a65c69e63
+      lastVerified: '2026-02-27T02:00:38.816Z'
     parallel-executor:
       path: .aios-core/core/execution/parallel-executor.js
       layer: L1
@@ -8793,6 +8723,7 @@ entities:
         - dispatcher
       usedBy: []
       dependencies:
+        - ai-providers
         - gotchas-memory
       externalDeps: []
       plannedDeps:
@@ -8803,8 +8734,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:7bc03f948ccedfb03a6e4ab7fadb01ab0ea0d3d4dfd71b909cfe2ef3341d7281
-      lastVerified: '2026-02-26T18:10:23.702Z'
+      checksum: sha256:8755d71accf32472580a4e3ca9b9564a2274ec3d28cb9f947cf03bc996e38ecb
+      lastVerified: '2026-02-27T02:00:38.817Z'
     wave-executor:
       path: .aios-core/core/execution/wave-executor.js
       layer: L1
@@ -10727,10 +10658,14 @@ entities:
       path: .aios-core/core/doctor/checks/core-config.js
       layer: L1
       type: module
-      purpose: Entity at .aios-core\core\doctor\checks\core-config.js
+      purpose: JARVIS - Intelligent Orchestration Layer
       keywords:
         - core
         - config
+        - jarvis
+        - intelligent
+        - orchestration
+        - layer
       usedBy: []
       dependencies: []
       externalDeps: []
@@ -10740,8 +10675,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:fbf07087b997250f1c00a2f698910f0689f82f4a3ddfcc007c084a81a784ef87
-      lastVerified: '2026-02-26T18:10:23.779Z'
+      checksum: sha256:ee3dcd74195c0c281d23387b8e39638bc269a10403ff09757405b6e80edb33a4
+      lastVerified: '2026-02-27T02:00:38.814Z'
     entity-registry:
       path: .aios-core/core/doctor/checks/entity-registry.js
       layer: L1
@@ -13215,7 +13150,6 @@ entities:
         - greenfield-fullstack
         - greenfield-service
         - greenfield-ui
-        - qa-loop
         - story-development-cycle
         - self-critique-checklist
         - story-draft-checklist
@@ -13514,35 +13448,10 @@ entities:
         - greenfield-fullstack
         - greenfield-service
         - greenfield-ui
-        - qa-loop
         - spec-pipeline
         - story-development-cycle
         - story-draft-checklist
-      dependencies:
-        - qa-create-fix-request
-        - qa-generate-tests
-        - qa-nfr-assess
-        - qa-gate
-        - qa-review-build
-        - qa-review-proposal
-        - qa-review-story
-        - qa-risk-profile
-        - qa-run-tests
-        - qa-test-design
-        - qa-trace-requirements
-        - create-suite
-        - spec-critique
-        - qa-library-validation
-        - qa-security-checklist
-        - qa-migration-validation
-        - qa-evidence-requirements
-        - qa-false-positive-detection
-        - qa-browser-console-check
-        - qa-gate-tmpl.yaml
-        - story-tmpl.yaml
-        - browser
-        - context7
-        - supabase
+      dependencies: []
       externalDeps:
         - coderabbit
         - git
@@ -13553,8 +13462,8 @@ entities:
         score: 0.3
         constraints: []
         extensionPoints: []
-      checksum: sha256:3312e0b7a962fa1c71128e304458d65becd1e8a2729415c631de3b0c1ba5dd65
-      lastVerified: '2026-02-26T18:10:23.941Z'
+      checksum: sha256:16f7861ec19ec92290bed75fcce62e3ce3b304219b8d660646912cdf9ec576fc
+      lastVerified: '2026-02-27T02:00:38.818Z'
     sm:
       path: .aios-core/development/agents/sm.md
       layer: L2
@@ -14373,8 +14282,6 @@ entities:
         - qa-review-story
         - qa-create-fix-request
         - apply-qa-fixes
-        - qa
-        - dev
       externalDeps: []
       plannedDeps:
         - system
@@ -14383,8 +14290,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:610d1e959a70d8573130dde1f9c24662cb11d4f21f282e61e328411f949ebc64
-      lastVerified: '2026-02-26T18:10:24.041Z'
+      checksum: sha256:2e4dade500de2590da030165486812e6236539861fef964d5dd8f2532c758160
+      lastVerified: '2026-02-27T02:00:38.823Z'
     spec-pipeline:
       path: .aios-core/development/workflows/spec-pipeline.yaml
       layer: L2
@@ -14594,8 +14501,8 @@ entities:
         score: 0.7
         constraints: []
         extensionPoints: []
-      checksum: sha256:61fc99fc0e1bb29a1f8a73f4f9eef73c20bcfc245c61f68b0a837364457b7fb9
-      lastVerified: '2026-02-26T18:10:24.058Z'
+      checksum: sha256:51f377f8d22a713601413a512822b17c239a166b189fc5ca732a440822b392be
+      lastVerified: '2026-02-27T02:00:38.824Z'
     backup-manager:
       path: .aios-core/infrastructure/scripts/backup-manager.js
       layer: L2
@@ -15745,8 +15652,8 @@ entities:
         - security
         - checker
       usedBy:
-        - elicitation-engine
         - modification-validator
+        - elicitation-engine
         - capability-analyzer
         - component-generator
         - improvement-validator
@@ -16854,7 +16761,6 @@ entities:
         - browser
       usedBy:
         - dev
-        - qa
         - ux-design-expert
       dependencies: []
       externalDeps: []
@@ -16901,7 +16807,6 @@ entities:
         - architect
         - dev
         - po
-        - qa
         - sm
         - squad-creator
       dependencies: []
@@ -17013,7 +16918,6 @@ entities:
         - supabase
       usedBy:
         - dev
-        - qa
       dependencies: []
       externalDeps: []
       plannedDeps: []
@@ -17279,7 +17183,6 @@ entities:
         - po-pull-story-from-clickup
         - po-sync-story-to-clickup
         - qa-trace-requirements
-        # sm-create-next-story removed (W3.9), consolidated into create-next-story
         - validate-next-story
         - aios-master
         - po

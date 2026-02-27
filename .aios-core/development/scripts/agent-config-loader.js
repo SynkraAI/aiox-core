@@ -12,6 +12,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 const { globalConfigCache } = require('../../core/config/config-cache');
 const { trackConfigLoad } = require('../../infrastructure/scripts/performance-tracker');
+const { validateAgentDefinition } = require('../../core/config/agent-definition-validator');
 
 /**
  * Agent configuration requirements cache
@@ -342,12 +343,21 @@ class AgentConfigLoader {
         }
       }
       
-      // Validate structure
-      if (!agentDef.agent || !agentDef.agent.id) {
-        throw new Error('Invalid agent definition: missing agent.id');
+      // Schema-based validation (ACT-8 Governance)
+      const validation = validateAgentDefinition(agentDef);
+      if (!validation.valid) {
+        const errorMessages = validation.errors.map(e => `  - [${e.path}] ${e.message}`).join('\n');
+        throw new Error(`Agent definition validation failed for "${this.agentId}":\n${errorMessages}`);
       }
-      
-      // Normalize and validate
+
+      // Log warnings (non-blocking)
+      if (validation.warnings.length > 0) {
+        for (const warn of validation.warnings) {
+          console.warn(`[agent-config] WARNING @${this.agentId}: ${warn.message}`);
+        }
+      }
+
+      // Normalize with defaults
       const normalized = this._normalizeAgentDefinition(agentDef);
       
       // Cache
