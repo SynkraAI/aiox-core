@@ -38,7 +38,10 @@
       "Bash(scp:*)",
       "Bash(gh auth:*)",
       "Bash(git:*)",
-      "Bash(npx eslint:*)"
+      "Bash(npx eslint:*)",
+      "Bash(grep -l \"Wave\\\\|wave\" /opt/aios-core/docs/stories/active/*.story.md 2>/dev/null | head -5; ls /opt/aios-core/docs/stories/epics/ 2>/dev/null || echo \"no epics dir\")",
+      "Bash(grep -h \"^## Status\\\\|^# Story\\\\|Status:\" /opt/aios-core/docs/stories/active/7.*.story.md | head -60)",
+      "Bash(grep -h \"^Draft\\\\|^InProgress\\\\|^Done\\\\|^Ready\\\\|InReview\" /opt/aios-core/docs/stories/active/7.*.story.md 2>/dev/null | sort | uniq -c | sort -rn)"
     ]
   },
   "hooks": {
