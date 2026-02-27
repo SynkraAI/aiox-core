@@ -193,7 +193,7 @@ describe('PanelRenderer', () => {
   // ============================================================
   describe('stripAnsi', () => {
     test('removes ANSI escape codes', () => {
-      const colored = '\x1B[31mRed text\x1B[0m';
+      const colored = '\u001B[31mRed text\u001B[0m';
       expect(renderer.stripAnsi(colored)).toBe('Red text');
     });
 
@@ -206,7 +206,7 @@ describe('PanelRenderer', () => {
     });
 
     test('handles multiple ANSI codes', () => {
-      const multi = '\x1B[1m\x1B[32mBold Green\x1B[0m';
+      const multi = '\u001B[1m\u001B[32mBold Green\u001B[0m';
       expect(renderer.stripAnsi(multi)).toBe('Bold Green');
     });
   });
