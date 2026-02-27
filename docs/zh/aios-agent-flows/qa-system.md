@@ -251,7 +251,7 @@ git_restrictions:
 | **测试命令** | 4 个(`*test-design`、`*trace`、`*generate-tests`、`*run-tests`) |
 | **待办事项命令** | 3 个(`*backlog-*` 系列) |
 | **门决策** | 4 个(PASS、CONCERNS、FAIL、WAIVED) |
-| **严重性级别** | 4 个(CRITICAL、HIGH、MEDIUM、LOW) |
+| **严重性级别** | 3 个(低、中、高) |
 | **自我修复最大** | 3 个迭代 |
 | **CodeRabbit 集成** | 是(WSL 模式) |
 

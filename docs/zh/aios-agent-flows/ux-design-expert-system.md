@@ -47,14 +47,12 @@ flowchart TB
         A3["*shock-report<br/>视觉HTML报告"]
     end
 
-    subgraph PHASE3["第3阶段: 设计令牌与设置"]
+    subgraph PHASE3["第3阶段: 设计令牌"]
         T1["*tokenize<br/>提取令牌"]
         T2["*setup<br/>初始化DS"]
         T3["*migrate<br/>迁移策略"]
         T4["*upgrade-tailwind<br/>升级Tailwind v4"]
         T5["*bootstrap-shadcn<br/>安装Shadcn/Radix"]
-        T6["*audit-tailwind-config<br/>验证Tailwind配置"]
-        T7["*export-dtcg<br/>导出W3C DTCG令牌"]
     end
 
     subgraph PHASE4["第4阶段: 组件构建"]
@@ -153,7 +151,7 @@ flowchart TB
 | 方面 | 详情 |
 |------|------|
 | **总任务数** | 22个任务 |
-| **总命令数** | 20个命令+2个通用 |
+| **总命令数** | 19个命令+4个通用 |
 | **工作流阶段** | 5阶段 |
 | **协作代理** | 4个 |
 

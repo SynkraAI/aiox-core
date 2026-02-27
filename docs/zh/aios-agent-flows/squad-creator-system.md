@@ -249,7 +249,7 @@ flowchart TB
 
     subgraph RECOMMEND["建议"]
         AGENTS["代理生成<br/>- 工作流角色<br/>- 步骤命令<br/>- 置信度计算"]
-        TASKS_R["任务生成<br/>- TASK-FORMAT-V1<br/>- 字段 `Entrada`（输入）<br/>- 字段 `Saida`（输出）"]
+        TASKS_R["任务生成<br/>- TASK-FORMAT-V1<br/>- 输入的 Entrada<br/>- 输出的 Saida"]
         DEDUP["去重<br/>- 合并 >70% 重叠"]
     end
 
@@ -259,7 +259,7 @@ flowchart TB
         CONFIRM["[A]接受代理"]
         MODIFY["[M]修改代理"]
         REJECT["[R]拒绝代理"]
-        ADD["[C]添加自定义"]
+        ADD["[A]添加自定义"]
     end
 
     REVIEW --> BLUEPRINT["蓝图输出<br/>.designs/{name}-design.yaml"]
@@ -276,7 +276,7 @@ flowchart TB
 
 ## 流程图：验证管道
 
-```text
+```mermaid
 flowchart TB
     START["*validate-squad {name}"]
 
@@ -430,7 +430,7 @@ flowchart TB
 
 ## 代理之间的协作图
 
-```text
+```mermaid
 flowchart LR
     subgraph SQUAD_CREATOR["@squad-creator (Craft)"]
         SC_CREATE["*create-squad"]
@@ -667,14 +667,14 @@ flowchart LR
 
 ## 参考
 
-- [任务：squad-creator-create.md](../../../.aios-core/development/tasks/squad-creator-create.md)
-- [任务：squad-creator-validate.md](../../../.aios-core/development/tasks/squad-creator-validate.md)
-- [任务：squad-creator-design.md](../../../.aios-core/development/tasks/squad-creator-design.md)
-- [脚本：squad-generator.js](../../../.aios-core/development/scripts/squad/squad-generator.js)
-- [脚本：squad-validator.js](../../../.aios-core/development/scripts/squad/squad-validator.js)
-- [Schema：squad-schema.json](../../../.aios-core/schemas/squad-schema.json)
-- [代理：squad-creator.md](../../../.aios-core/development/agents/squad-creator.md)
-- [命令：squad-creator.md](../../../.claude/commands/AIOS/agents/squad-creator.md)
+- [任务：squad-creator-create.md](.aios-core/development/tasks/squad-creator-create.md)
+- [任务：squad-creator-validate.md](.aios-core/development/tasks/squad-creator-validate.md)
+- [任务：squad-creator-design.md](.aios-core/development/tasks/squad-creator-design.md)
+- [脚本：squad-generator.js](.aios-core/development/scripts/squad/squad-generator.js)
+- [脚本：squad-validator.js](.aios-core/development/scripts/squad/squad-validator.js)
+- [Schema：squad-schema.json](.aios-core/schemas/squad-schema.json)
+- [代理：squad-creator.md](.aios-core/development/agents/squad-creator.md)
+- [命令：squad-creator.md](.claude/commands/AIOS/agents/squad-creator.md)
 
 ---
 
@@ -687,7 +687,7 @@ flowchart LR
 | **占位符任务** | 3 个（download、publish、sync-synkra） |
 | **支持脚本** | 9 个脚本在 squad/ |
 | **Schemas** | 2 个（squad-schema、squad-design-schema） |
-| **模板** | 4 个（basic、etl、agent-only、custom） |
+| **模板** | 3 个（basic、etl、agent-only） |
 | **模板版本** | 2 个（v1 遗留、v2 编排） |
 | **分发级别** | 3 个（本地、aios-squads、Synkra API） |
 

@@ -203,7 +203,7 @@ flowchart TD
 
 ### 分支管理图
 
-```text
+```mermaid
 flowchart LR
     subgraph SM_SCOPE["@sm - 本地范围"]
         CREATE_BRANCH["git checkout -b<br/>feature/X.Y-story-name"]
@@ -245,7 +245,7 @@ flowchart LR
 
 ### 集成流程
 
-```text
+```mermaid
 flowchart TB
     subgraph UPSTREAM["上游 - 提供给 @sm"]
         PM_UP["@pm (Morgan)<br/>创建史诗结构"]
@@ -297,13 +297,11 @@ flowchart TB
 @sm 只管理本地 Git 操作。远程操作**始终**委派给 @github-devops：
 
 **@sm 允许的操作：**
-```text
-- git checkout -b feature/X.Y-story-name - 创建本地分支
-- git branch - 列出分支
-- git branch -d branch-name - 删除本地分支
-- git checkout branch-name - 切换分支
-- git merge branch-name - 本地合并
-```
+- `git checkout -b feature/X.Y-story-name` - 创建本地分支
+- `git branch` - 列出分支
+- `git branch -d branch-name` - 删除本地分支
+- `git checkout branch-name` - 切换分支
+- `git merge branch-name` - 本地合并
 
 **禁止的操作（使用 @github-devops）：**
 - `git push` - 发送到远程
@@ -369,12 +367,10 @@ dependencies:
 
 ### 分支管理
 
-```text
-1. 使用命名约定 - feature/X.Y-story-name（X.Y = 史诗.故事）
-2. 开始故事时创建分支 - 隔离开发
-3. 不要尝试 push - 始终委派给 @github-devops
-4. 本地解决冲突 - 在请求 push 之前
-```
+1. **使用命名约定** - `feature/X.Y-story-name`（X.Y = 史诗.故事）
+2. **开始故事时创建分支** - 隔离开发
+3. **不要尝试 push** - 始终委派给 @github-devops
+4. **本地解决冲突** - 在请求 push 之前
 
 ### 与其他代理的协作
 
@@ -403,7 +399,7 @@ dependencies:
 2. 确认标签：`epic`、`epic-{epicNum}`
 3. 状态应为"规划中"或"进行中"
 4. 必要时手动创建史诗：
-   ```text
+   ```
    名称：'史诗 {epicNum}：{史诗标题}'
    列表：待办
    标签：['epic', 'epic-{epicNum}']
@@ -473,9 +469,7 @@ dependencies:
 - [核心配置](../.aios-core/core-config.yaml)
 
 ### 相关文档
-```yaml
-- 待办管理系统: ../BACKLOG-MANAGEMENT-SYSTEM.md
-```
+- [待办管理系统](../BACKLOG-MANAGEMENT-SYSTEM.md)
 
 ---
 
