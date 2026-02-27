@@ -209,10 +209,11 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
       expect(stdout).toBe('');
     });
 
-    test('logs error to stderr with [synapse-hook] prefix on invalid JSON', async () => {
-      const { stderr } = await runHook('not valid json');
+    test('exits silently without stderr on invalid JSON (silent exit policy)', async () => {
+      const { stderr, code } = await runHook('not valid json');
 
-      expect(stderr).toContain('[synapse-hook]');
+      expect(code).toBe(0);
+      expect(stderr).toBe('');
     });
 
     test('exits silently when engine.process() throws', async () => {
@@ -230,7 +231,7 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
 
       expect(code).toBe(0);
       expect(stdout).toBe('');
-      expect(stderr).toContain('[synapse-hook]');
+      expect(stderr).toBe('');
     });
 
     test('exits silently when SynapseEngine constructor throws', async () => {
@@ -628,9 +629,8 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
         await new Promise((r) => setTimeout(r, 50));
 
         expect(exitSpy).toHaveBeenCalledWith(0);
-        expect(errorSpy).toHaveBeenCalledWith(
-          expect.stringContaining('[synapse-hook]'),
-        );
+        // Silent exit policy: no stderr output (prevents "hook error" in Claude Code UI)
+        expect(errorSpy).not.toHaveBeenCalled();
       } finally {
         // Restore JEST_WORKER_ID before restoring other mocks
         if (savedWorkerId !== undefined) {
