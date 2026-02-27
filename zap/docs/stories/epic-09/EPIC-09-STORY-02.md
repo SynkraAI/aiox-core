@@ -4,7 +4,7 @@
 **Sprint:** 2 | **Phase:** MVP
 **Priority:** 🔴 CRITICAL
 **Story Points:** 2
-**Status:** Ready for Review
+**Status:** Done
 **Assigned to:** @dev (Dex)
 **Prepared by:** River (Scrum Master)
 
@@ -185,6 +185,7 @@ ${data.marketplace.toUpperCase()}`
 - [x] Performance <100ms per send
 - [x] Unit tests: formatting, send logic
 - [x] `npm run typecheck` → 0 errors
+- [x] Linting passes
 
 ---
 
@@ -192,8 +193,10 @@ ${data.marketplace.toUpperCase()}`
 
 | File | Action | Notes |
 |------|--------|-------|
-| `apps/api/src/workers/broadcast.worker.ts` | MODIFY | Add offerReplicationWorker |
-| `apps/api/src/services/offers/message-formatter.ts` | CREATE | Format messages |
+| `apps/api/src/workers/broadcast.worker.ts` | MODIFY | Extended with offerReplicationWorker (AC-049.1, 049.3, 049.4, 049.5) |
+| `apps/api/src/services/offers/message-formatter.ts` | CREATE | formatOfferMessage() function (AC-049.2) |
+| `apps/api/src/services/offers/message-formatter.test.ts` | CREATE | 5 unit tests for message formatting |
+| `apps/api/src/workers/broadcast.worker.test.ts` | CREATE | 6 unit tests for worker logic and job payload |
 
 ---
 
@@ -201,6 +204,7 @@ ${data.marketplace.toUpperCase()}`
 
 | Date | Author | Change |
 |------|--------|--------|
+| 2026-02-27 | Dex (Dev) | Implemented offerReplicationWorker + message formatting + unit tests (all AC met) |
 | 2026-02-26 | River (SM) | Story created — extends broadcast |
 
 ---
