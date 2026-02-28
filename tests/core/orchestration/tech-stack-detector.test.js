@@ -309,20 +309,23 @@ describe('TechStackDetector', () => {
       expect(profile.database.type).toBe('supabase');
     });
 
-    test('detecta env vars de banco de dados', async () => {
-      fs.pathExists.mockImplementation(async (p) => {
-        if (p.endsWith('package.json')) return true;
-        if (p.endsWith('.env')) return true;
-        return false;
-      });
-      fs.readJson.mockResolvedValue({ dependencies: {} });
-      fs.readFile.mockResolvedValue('DATABASE_URL=postgres://localhost/db');
+    test.each(['.env', '.env.local', '.env.example'])(
+      'detecta env vars de banco de dados em %s',
+      async (envFile) => {
+        fs.pathExists.mockImplementation(async (p) => {
+          if (p.endsWith('package.json')) return true;
+          if (p.endsWith(envFile)) return true;
+          return false;
+        });
+        fs.readJson.mockResolvedValue({ dependencies: {} });
+        fs.readFile.mockResolvedValue('DATABASE_URL=postgres://localhost/db');
 
-      const profile = detector._createEmptyProfile();
-      await detector._detectDatabase(profile);
+        const profile = detector._createEmptyProfile();
+        await detector._detectDatabase(profile);
 
-      expect(profile.database.envVarsConfigured).toBe(true);
-    });
+        expect(profile.database.envVarsConfigured).toBe(true);
+      },
+    );
 
     test('ignora erros de leitura em migrações', async () => {
       fs.pathExists.mockImplementation(async (p) => {
@@ -538,31 +541,21 @@ describe('TechStackDetector', () => {
       expect(profile.backend.type).toBe('edge-functions');
     });
 
-    test('detecta rotas API em api/', async () => {
-      fs.pathExists.mockImplementation(async (p) => {
-        if (p === path.join(PROJECT_ROOT, 'package.json')) return true;
-        if (p === path.join(PROJECT_ROOT, 'api')) return true;
-        return false;
-      });
-      fs.readJson.mockResolvedValue({ dependencies: {} });
+    test.each(['api', 'src/api', 'pages/api', 'app/api'])(
+      'detecta rotas API em %s',
+      async (apiPath) => {
+        fs.pathExists.mockImplementation(async (p) => {
+          if (p === path.join(PROJECT_ROOT, 'package.json')) return true;
+          if (p === path.join(PROJECT_ROOT, apiPath)) return true;
+          return false;
+        });
+        fs.readJson.mockResolvedValue({ dependencies: {} });
 
-      const profile = detector._createEmptyProfile();
-      await detector._detectBackend(profile);
-      expect(profile.backend.hasAPI).toBe(true);
-    });
-
-    test('detecta rotas API em pages/api/ (Next.js)', async () => {
-      fs.pathExists.mockImplementation(async (p) => {
-        if (p === path.join(PROJECT_ROOT, 'package.json')) return true;
-        if (p === path.join(PROJECT_ROOT, 'pages/api')) return true;
-        return false;
-      });
-      fs.readJson.mockResolvedValue({ dependencies: {} });
-
-      const profile = detector._createEmptyProfile();
-      await detector._detectBackend(profile);
-      expect(profile.backend.hasAPI).toBe(true);
-    });
+        const profile = detector._createEmptyProfile();
+        await detector._detectBackend(profile);
+        expect(profile.backend.hasAPI).toBe(true);
+      },
+    );
   });
 
   // ============================================================
