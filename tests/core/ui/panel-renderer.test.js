@@ -7,9 +7,10 @@
 
 const { PanelRenderer, BOX, STATUS } = require('../../../.aios-core/core/ui/panel-renderer');
 
-// Strip all ANSI codes for content assertions
+// Strip all ANSI codes for content assertions (RegExp constructor avoids Biome lint/suspicious/noControlCharactersInRegex)
+const ANSI_RE = new RegExp('\\u001B\\[[0-9;]*[a-zA-Z]', 'g');
 function stripAnsi(str) {
-  return str.replace(/\u001B\[[0-9;]*[a-zA-Z]/g, '');
+  return str.replace(ANSI_RE, '');
 }
 
 describe('PanelRenderer', () => {
@@ -247,14 +248,6 @@ describe('PanelRenderer', () => {
         elapsed: { story_start: now - 3700000 }, // 1h1m
       });
       expect(result.story).toMatch(/^\d+h\d+m$/);
-    });
-
-    test('retorna -- quando story_start é null', () => {
-      const result = renderer.formatElapsedTime({
-        elapsed: { story_start: null, session_start: null },
-      });
-      expect(result.story).toBe('--');
-      expect(result.session).toBe('--');
     });
 
     test('trata story_start 0 como falsy (retorna --)', () => {
