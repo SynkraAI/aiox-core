@@ -128,6 +128,13 @@ describe('ContextManager', () => {
         { spaces: 2 },
       );
     });
+
+    test('propaga erro quando fs.readJson falha', async () => {
+      fs.pathExists.mockResolvedValue(true);
+      fs.readJson.mockRejectedValue(new Error('disk read failed'));
+
+      await expect(manager.initialize()).rejects.toThrow('disk read failed');
+    });
   });
 
   // ─────────────────────────────────────────────
@@ -149,9 +156,10 @@ describe('ContextManager', () => {
     test('startedAt e updatedAt são strings ISO válidas', () => {
       const state = manager._createInitialState();
 
-      expect(() => new Date(state.startedAt)).not.toThrow();
-      expect(() => new Date(state.updatedAt)).not.toThrow();
-      expect(new Date(state.startedAt).toISOString()).toBe(state.startedAt);
+      const startedAtDate = new Date(state.startedAt);
+      const updatedAtDate = new Date(state.updatedAt);
+      expect(startedAtDate.toISOString()).toBe(state.startedAt);
+      expect(updatedAtDate.toISOString()).toBe(state.updatedAt);
     });
 
     test('phases começa como objeto vazio', () => {
@@ -208,19 +216,24 @@ describe('ContextManager', () => {
   // ─────────────────────────────────────────────
   describe('_saveState', () => {
     test('atualiza updatedAt e persiste no disco', async () => {
-      manager._stateCache = manager._createInitialState();
-      const oldUpdated = manager._stateCache.updatedAt;
+      jest.useFakeTimers();
+      try {
+        jest.setSystemTime(new Date('2020-01-01T00:00:00.000Z'));
+        manager._stateCache = manager._createInitialState();
+        const oldUpdated = manager._stateCache.updatedAt;
 
-      // Pequeno delay para garantir timestamp diferente
-      await new Promise((r) => setTimeout(r, 5));
-      await manager._saveState();
+        jest.setSystemTime(new Date('2020-01-01T00:00:01.000Z'));
+        await manager._saveState();
 
-      expect(manager._stateCache.updatedAt).not.toBe(oldUpdated);
-      expect(fs.writeJson).toHaveBeenCalledWith(
-        manager.statePath,
-        manager._stateCache,
-        { spaces: 2 },
-      );
+        expect(manager._stateCache.updatedAt).not.toBe(oldUpdated);
+        expect(fs.writeJson).toHaveBeenCalledWith(
+          manager.statePath,
+          manager._stateCache,
+          { spaces: 2 },
+        );
+      } finally {
+        jest.useRealTimers();
+      }
     });
 
     test('chama ensureStateDir antes de escrever', async () => {
@@ -229,6 +242,13 @@ describe('ContextManager', () => {
       await manager._saveState();
 
       expect(fs.ensureDir).toHaveBeenCalledWith(manager.stateDir);
+    });
+
+    test('propaga erro quando fs.writeJson falha', async () => {
+      manager._stateCache = manager._createInitialState();
+      fs.writeJson.mockRejectedValue(new Error('disk write failed'));
+
+      await expect(manager._saveState()).rejects.toThrow('disk write failed');
     });
   });
 
