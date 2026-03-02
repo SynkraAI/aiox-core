@@ -18,9 +18,12 @@ Draft → Ready → InProgress → InReview → Done
 | Ready | @po validates (GO) | @po | **MUST update status field in story file from Draft → Ready** |
 | InProgress | @dev starts implementation | @dev | Update status field |
 | InReview | @dev completes, @qa reviews | @qa | Update status field |
-| Done | @qa PASS, @devops pushes | @devops | Update status field |
+| Done | @qa PASS / CONCERNS / WAIVED | **@qa** | **MUST update status field InReview → Done** |
+| InProgress (return) | @qa FAIL | **@qa** | **MUST update status field InReview → InProgress** |
 
 **CRITICAL:** The `Draft → Ready` transition is the responsibility of @po during `*validate-story-draft`. When verdict is GO (including conditional GO after fixes are applied), @po MUST update the story's Status field to `Ready` and log the transition in the Change Log. A story left in `Draft` after a GO verdict is a process violation.
+
+**CRITICAL:** The `InReview → Done` and `InReview → InProgress` transitions are the responsibility of @qa during `*qa-gate`. @qa MUST update the story's Status field immediately after creating the gate file (see `qa-gate.md` — MANDATORY FINAL STEP). A story left in `InReview` after a gate verdict is a process violation. @devops does NOT own this transition — @devops only executes `git push` after the story is already `Done`.
 
 ## Phase 1: Create (@sm)
 

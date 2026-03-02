@@ -394,6 +394,23 @@ If blast radius returned HIGH risk:
 3. Keep status_reason to 1-2 sentences maximum
 4. Use severity values exactly: `low`, `medium`, or `high`
 
+## MANDATORY FINAL STEP — Update Story Status
+
+After creating the gate file, **ALWAYS** update the story's `| **Status** |` row in the metadata table and append to the Change Log. This step is non-negotiable — a gate file without a corresponding story Status update is an incomplete task execution.
+
+| Gate verdict | Story Status →  |
+|--------------|-----------------|
+| PASS         | Done            |
+| CONCERNS     | Done            |
+| FAIL         | InProgress      |
+| WAIVED       | Done            |
+
+**Change Log entry (append, do not replace):**
+
+```
+| {YYYY-MM-DD} | @qa (Quinn) | Gate: {verdict} — Status: {old} → {new} |
+```
+
 ## Example Story Update
 
 After creating gate file, append to story's QA Results section:
