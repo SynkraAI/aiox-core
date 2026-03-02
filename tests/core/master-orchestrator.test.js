@@ -433,7 +433,7 @@ describe('MasterOrchestrator', () => {
       // Temporarily make all epics on-demand to trigger the zero-division guard
       const originalConfig = {};
       for (const [num, cfg] of Object.entries(EPIC_CONFIG)) {
-        originalConfig[num] = cfg.onDemand;
+        originalConfig[num] = { had: 'onDemand' in cfg, value: cfg.onDemand };
         cfg.onDemand = true;
       }
 
@@ -442,9 +442,57 @@ describe('MasterOrchestrator', () => {
         expect(progress).toBe(0);
         expect(Number.isNaN(progress)).toBe(false);
       } finally {
-        // Restore original config
-        for (const [num, val] of Object.entries(originalConfig)) {
-          EPIC_CONFIG[num].onDemand = val;
+        // Restore original config — delete property when it was not originally set
+        for (const [num, orig] of Object.entries(originalConfig)) {
+          if (orig.had) {
+            EPIC_CONFIG[num].onDemand = orig.value;
+          } else {
+            delete EPIC_CONFIG[num].onDemand;
+          }
+        }
+      }
+    });
+
+    it('should not count on-demand epics in progress calculation', async () => {
+      await orchestrator.initialize();
+
+      // Epic 5 is on-demand — completing it should not affect progress
+      await orchestrator.executeEpic(5);
+      expect(orchestrator.getProgressPercentage()).toBe(0); // 0 of 3 non-on-demand
+
+      await orchestrator.executeEpic(3);
+      expect(orchestrator.getProgressPercentage()).toBe(33); // 1 of 3 non-on-demand
+    });
+
+    it('should return 0 from _calculateProgressFromState when all epics are on-demand', async () => {
+      await orchestrator.initialize();
+
+      const originalConfig = {};
+      for (const [num, cfg] of Object.entries(EPIC_CONFIG)) {
+        originalConfig[num] = { had: 'onDemand' in cfg, value: cfg.onDemand };
+        cfg.onDemand = true;
+      }
+
+      try {
+        const states = await orchestrator.listSavedStates();
+        // _calculateProgressFromState is private, test via getStatus or direct state
+        // Create a mock state with completed epics
+        const mockState = {
+          epics: {
+            3: { status: EpicStatus.COMPLETED },
+            5: { status: EpicStatus.COMPLETED },
+          },
+        };
+        const progress = orchestrator._calculateProgressFromState(mockState);
+        expect(progress).toBe(0);
+        expect(Number.isNaN(progress)).toBe(false);
+      } finally {
+        for (const [num, orig] of Object.entries(originalConfig)) {
+          if (orig.had) {
+            EPIC_CONFIG[num].onDemand = orig.value;
+          } else {
+            delete EPIC_CONFIG[num].onDemand;
+          }
         }
       }
     });
