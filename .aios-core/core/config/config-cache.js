@@ -220,12 +220,14 @@ class ConfigCache {
 const globalConfigCache = new ConfigCache();
 
 // Auto cleanup expired entries every minute
-setInterval(() => {
+// .unref() allows Node.js to exit naturally when all other work is done
+const _cacheCleanupTimer = setInterval(() => {
   const cleared = globalConfigCache.clearExpired();
   if (cleared > 0) {
     console.log(`🗑️ Config cache: Cleared ${cleared} expired entries`);
   }
 }, 60 * 1000);
+_cacheCleanupTimer.unref();
 
 module.exports = {
   ConfigCache,
