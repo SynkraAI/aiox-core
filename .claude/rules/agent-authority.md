@@ -69,11 +69,27 @@
 
 ### @aios-master — Framework Governance
 
-| Capability | Details |
-|-----------|---------|
-| Execute ANY task directly | No restrictions |
-| Framework governance | Constitutional enforcement |
-| Override agent boundaries | When necessary for framework health |
+| Capability | Rule |
+|-----------|------|
+| Framework ops (agents, tasks, workflows) | Executes directly — within scope |
+| Orchestration (`*run-workflow`, `*plan`, `*workflow`) | Executes directly — within scope |
+| Meta-operations (`*validate-agents`, `*ids-*`, `*correct-course`) | Executes directly — within scope |
+| Tasks with a mapped exclusive agent (see table below) | **DELEGATE by default** — direct execution only with explicit `--force-execute` |
+| `git push` / `gh pr create` / `gh pr merge` | **BLOCKED** — always @devops, no exceptions |
+
+**Tasks @aios-master delegates by default (override with `--force-execute`):**
+
+| Task | Delegate to |
+|------|------------|
+| `create-next-story.md` | @sm |
+| `validate-next-story.md` | @po |
+| `dev-develop-story.md` | @dev |
+| `qa-gate.md` | @qa |
+| `brownfield-create-epic.md` | @pm |
+| `brownfield-create-story.md` | @pm |
+| `facilitate-brainstorming-session.md` | @analyst |
+| `generate-ai-frontend-prompt.md` | @architect |
+| `create-suite.md` | @qa |
 
 ## Cross-Agent Delegation Patterns
 
