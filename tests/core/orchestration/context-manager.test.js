@@ -145,6 +145,13 @@ describe('ContextManager', () => {
 
       await expect(manager.initialize()).rejects.toThrow('disk read failed');
     });
+
+    test('propaga erro quando fs.writeJson falha ao criar estado inicial', async () => {
+      fs.pathExists.mockResolvedValue(false);
+      fs.writeJson.mockRejectedValue(new Error('disk write failed'));
+
+      await expect(manager.initialize()).rejects.toThrow('disk write failed');
+    });
   });
 
   // ─────────────────────────────────────────────
@@ -832,6 +839,13 @@ describe('ContextManager', () => {
 
       expect(fs.ensureDir).toHaveBeenCalledWith(manager.handoffDir);
     });
+
+    test('propaga erro quando fs.writeJson falha', async () => {
+      fs.writeJson.mockRejectedValue(new Error('handoff write failed'));
+
+      await expect(manager._saveHandoffFile({ from: { phase: 1 } }))
+        .rejects.toThrow('handoff write failed');
+    });
   });
 
   // ─────────────────────────────────────────────
@@ -866,6 +880,13 @@ describe('ContextManager', () => {
       await manager._saveConfidenceFile({ score: 50 });
 
       expect(fs.ensureDir).toHaveBeenCalledWith(manager.confidenceDir);
+    });
+
+    test('propaga erro quando fs.writeJson falha', async () => {
+      fs.writeJson.mockRejectedValue(new Error('confidence write failed'));
+
+      await expect(manager._saveConfidenceFile({ score: 85, version: '1.0.0' }))
+        .rejects.toThrow('confidence write failed');
     });
   });
 
