@@ -94,6 +94,9 @@ class SubagentDispatcher extends EventEmitter {
     this.maxRetries = config.maxRetries || 2;
     this.retryDelay = config.retryDelay || 2000;
 
+    // Timeout configuration
+    this.claudeTimeout = config.claudeTimeout || 10 * 60 * 1000; // 10 minutes
+
     // Dependencies
     this.memoryQuery = config.memoryQuery || (MemoryQuery ? new MemoryQuery() : null);
     this.gotchasMemory = config.gotchasMemory || (GotchasMemory ? new GotchasMemory() : null);
@@ -642,21 +645,47 @@ class SubagentDispatcher extends EventEmitter {
   }
 
   /**
-   * Execute prompt via Claude CLI
-   * @param {string} prompt - Prompt to execute
-   * @returns {Promise<Object>} - Execution result
+   * Execute prompt via Claude CLI using stdin for robust handling.
+   * This approach avoids shell-related parsing issues and command injection.
+   * 
+   * @param {string} prompt - The prompt content to send to Claude
+   * @returns {Promise<Object>} - Execution result with success flag and output
    */
   executeClaude(prompt) {
+    if (!prompt || typeof prompt !== 'string') {
+      return Promise.reject(new Error('executeClaude requires a non-empty string prompt'));
+    }
+
     return new Promise((resolve, reject) => {
       const args = ['--print', '--dangerously-skip-permissions'];
-      const escapedPrompt = prompt.replace(/'/g, "'\\''");
-      const fullCommand = `echo '${escapedPrompt}' | claude ${args.join(' ')}`;
 
-      const child = spawn('sh', ['-c', fullCommand], {
+      const child = spawn('claude', args, {
         cwd: this.rootPath,
         env: { ...process.env },
         stdio: ['pipe', 'pipe', 'pipe'],
+        timeout: this.claudeTimeout,
       });
+
+      child.on('error', (error) => {
+        reject(error);
+      });
+
+      let stdinError = null;
+      // Prevent unhandled stream errors if the pipe breaks or process exits early
+      child.stdin.on('error', (err) => {
+        stdinError = err;
+        this.log('stdin_write_error', { error: err.message, code: err.code });
+      });
+
+      // Write prompt via stdin to avoid shell-related issues and command injection
+      if (child.stdin.writable) {
+        child.stdin.write(prompt);
+        child.stdin.end();
+      } else {
+        child.kill();
+        reject(new Error('Claude stdin was not writable immediately after spawn'));
+        return;
+      }
 
       let stdout = '';
       let stderr = '';
@@ -669,20 +698,20 @@ class SubagentDispatcher extends EventEmitter {
         stderr += data.toString();
       });
 
-      child.on('close', (code) => {
-        if (code === 0) {
+      child.on('close', (code, signal) => {
+        if (stdinError) {
+          reject(new Error(`Claude CLI stdin write failed (prompt not delivered): ${stdinError.message}`));
+        } else if (code === 0) {
           resolve({
             success: true,
             output: stdout,
             filesModified: this.extractModifiedFiles(stdout),
           });
+        } else if (signal) {
+          reject(new Error(`Claude CLI killed by signal ${signal} (timeout or external kill): ${stderr || stdout}`));
         } else {
           reject(new Error(`Claude CLI exited with code ${code}: ${stderr || stdout}`));
         }
-      });
-
-      child.on('error', (error) => {
-        reject(error);
       });
     });
   }
