@@ -342,9 +342,7 @@ synapse-package.zip
 # ============================================
 scripts/glue/
 .claude/skills/
-.claude/hooks/
-!.claude/hooks/synapse-engine.cjs
-!.claude/hooks/precompact-session-digest.cjs
+!.claude/hooks/
 .claude/templates/
 .claude/agents/
 .claude/agent-memory/
