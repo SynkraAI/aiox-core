@@ -5,6 +5,7 @@ module.exports = {
   // Test patterns from LOCAL (mais específico)
   testMatch: [
     '**/tests/**/*.test.js',
+    '**/tests/**/*.test.ts',
     '**/tests/**/*.spec.js',
     '**/.aios-core/**/__tests__/**/*.test.js',
     // Pro tests run via pro-integration.yml CI workflow (not in local npm test)
@@ -123,6 +124,10 @@ module.exports = {
 
   // Timeout from REMOTE (30s melhor para operações longas)
   testTimeout: 30000,
+
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest',
+  },
 
   // Config from LOCAL
   verbose: true,
