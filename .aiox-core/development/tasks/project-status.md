@@ -76,9 +76,12 @@ steps:
   - name: Read Story Status (MANDATORY)
     action: |
       For EACH story file found in Step 2:
-        Read lines 1-6 to extract:
-          - Story title (line 1, after "# ")
-          - Status (line 5, after "**" markers)
+        Read the first 20 lines and extract:
+          - Story title: first line starting with "# "
+          - Status: the line immediately after "## Status" heading,
+            trimmed of "**" markers and whitespace.
+            Do NOT rely on fixed line numbers — the Status section
+            position may vary across story templates.
         Map story to its epic (first number = epic_id)
     critical: true
     note: |
@@ -87,8 +90,15 @@ steps:
 
   - name: Cross-Reference & Detect Divergence
     action: |
+      Normalize status values before counting:
+        - "Ready" | "Ready for Dev" | "Ready to Start" → Ready
+        - "InProgress" | "In Progress" → InProgress
+        - "InReview" | "In Review" | "Ready for Review" → InReview
+        - "Done" | "Complete" | "Completed" → Done
+        - "Draft" → Draft
+        - Anything else → Unknown (flag with ⚠️)
       For each epic:
-        - Count stories by status (Done, Ready, Draft, InProgress, etc.)
+        - Count stories by normalized status (Done, Ready, Draft, InProgress, etc.)
         - Compare with epic file's stated progress
         - If mismatch: mark with ⚠️ DIVERGENCE flag
       For stories referenced in epics but without story files:
@@ -110,7 +120,7 @@ steps:
 
 ### Full Panorama
 
-```
+```text
 📊 Status Completo — {Project Name}
 
 Panorama Geral: {done}/{total} stories done ({percentage}%)
@@ -156,7 +166,7 @@ Próximo: {next story recommendation}
 
 When divergence is detected, suggest the fix:
 
-```
+```text
 ⚠️  DIVERGÊNCIA detectada em Epic 7:
     Epic file diz: "In Progress (1/2 stories done)"
     Stories reais: 2/2 Done
@@ -231,7 +241,7 @@ duration_expected: 10-30 seconds
 cost_estimated: $0.001-0.005
 token_usage: ~1,000-5,000 tokens
 optimization: |
-  Read only lines 1-6 of each story file (status is always in lines 3-5).
+  Read only the first 20 lines of each story file (status is in the ## Status section).
   Use parallel Read calls for multiple story files.
   Cache nothing — always read fresh.
 ```
