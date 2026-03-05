@@ -1,0 +1,18 @@
+{
+  "name": "@ciclo/email",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint . --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ciclo/database": "workspace:*"
+  },
+  "devDependencies": {
+    "@ciclo/config": "workspace:*",
+    "typescript": "^5.4.0"
+  }
+}

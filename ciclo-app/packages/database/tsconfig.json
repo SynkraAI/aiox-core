@@ -1,0 +1,9 @@
+{
+  "extends": "@ciclo/config/typescript/library.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

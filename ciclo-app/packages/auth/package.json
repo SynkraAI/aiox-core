@@ -1,0 +1,24 @@
+{
+  "name": "@ciclo/auth",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "lint": "ESLINT_USE_FLAT_CONFIG=false eslint . --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@auth/prisma-adapter": "^2.7.0",
+    "@ciclo/database": "workspace:*",
+    "bcryptjs": "^2.4.3",
+    "next-auth": "^5.0.0-beta.25"
+  },
+  "devDependencies": {
+    "@ciclo/config": "workspace:*",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20.11.0",
+    "next": "^15.1.0",
+    "typescript": "^5.4.0"
+  }
+}

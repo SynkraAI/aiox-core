@@ -1,0 +1,618 @@
+// Ciclo das Estacoes - Prisma Schema
+// Story E1.2: Database Schema — Todas as Entidades
+// PRD Ref: secao 3 (Modelagem de Dados), secao 8 (Modelo de Dados)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum UserRole {
+  USER
+  THERAPIST
+  FACILITATOR
+  ADMIN
+}
+
+enum Season {
+  SPRING
+  SUMMER
+  AUTUMN
+  WINTER
+  CROSS_QUARTER
+}
+
+enum AstronomicalEvent {
+  SPRING_EQUINOX
+  SUMMER_SOLSTICE
+  AUTUMN_EQUINOX
+  WINTER_SOLSTICE
+  IMBOLC
+  BELTANE
+  LUGHNASADH
+  SAMHAIN
+}
+
+enum RegistrationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  REFUNDED
+  TRANSFERRED
+}
+
+enum PaymentMethod {
+  PIX
+  CREDIT_CARD
+  BOLETO
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  APPROVED
+  DECLINED
+  REFUNDED
+}
+
+enum LunarPhaseName {
+  NEW_MOON
+  WAXING_CRESCENT
+  FIRST_QUARTER
+  WAXING_GIBBOUS
+  FULL_MOON
+  WANING_GIBBOUS
+  LAST_QUARTER
+  WANING_CRESCENT
+}
+
+enum GrowthStage {
+  SEED
+  SPROUT
+  SAPLING
+  TREE
+  ANCIENT_TREE
+}
+
+// ============================================================
+// MODELS
+// ============================================================
+
+// --- Health Check (from E1.1) ---
+model HealthCheck {
+  id        String   @id @default(uuid())
+  status    String   @default("ok")
+  checkedAt DateTime @default(now()) @map("checked_at")
+
+  @@map("health_check")
+}
+
+// --- User (AC-1) ---
+// CPF is stored encrypted at application level (NFR-02)
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  emailVerified DateTime? @map("email_verified")
+  name          String
+  image         String?
+  password      String?   /// bcrypt hash (null for OAuth-only users)
+  phone         String?
+  cpf           String?   @unique /// Encrypted at application level (NFR-02)
+  role          UserRole  @default(USER)
+  internalNotes Json?     /// CRM notes (E4.3)
+  isActive      Boolean   @default(true)
+  isDeleted     Boolean   @default(false)
+  deletedAt     DateTime?
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  accounts         Account[]
+  sessions         Session[]
+  therapistProfile TherapistProfile?
+  constitution     Constitution?
+  registrations    Registration[]
+  intentions       Intention[]
+  testimonials     Testimonial[]
+  seasonalTree     SeasonalTree?
+
+  @@index([email])
+  @@index([role])
+  @@index([isDeleted])
+  @@map("users")
+}
+
+// --- Account (NextAuth.js v5 - OAuth accounts) ---
+model Account {
+  id                String  @id @default(uuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+// --- Session (NextAuth.js v5 - database sessions) ---
+model Session {
+  id           String   @id @default(uuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+// --- VerificationToken (NextAuth.js v5) ---
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// --- PasswordResetToken (E1.3 - AC-6) ---
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  email     String
+  token     String   @unique
+  expires   DateTime
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([email, token])
+  @@map("password_reset_tokens")
+}
+
+// --- Therapist Profile (AC-2) ---
+model TherapistProfile {
+  id             String   @id @default(uuid())
+  userId         String   @unique @map("user_id")
+  bio            String?
+  modalities     String[] /// e.g. ["Yoga", "Ayurveda"]
+  certifications String[] /// e.g. ["RYT-200", "CYT"]
+  photoUrl       String?  @map("photo_url")
+  location       String?
+  website        String?
+  instagram      String?
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("therapist_profiles")
+}
+
+// --- Constitution (Dosha/MTC) ---
+model Constitution {
+  id              String  @id @default(uuid())
+  userId          String  @unique @map("user_id")
+  vata            Int     @default(0) /// 0-100
+  pitta           Int     @default(0) /// 0-100
+  kapha           Int     @default(0) /// 0-100
+  mtcElement      String? @map("mtc_element") /// Wood, Fire, Earth, Metal, Water
+  suggestedSeason Season?
+  quizAnswers     Json?   @map("quiz_answers")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("constitutions")
+}
+
+// --- Event (AC-3) ---
+model Event {
+  id                 String             @id @default(uuid())
+  slug               String             @unique
+  season             Season
+  name               String
+  subtitle           String?
+  astronomicalEvent  AstronomicalEvent? @map("astronomical_event")
+  startDate          DateTime           @map("start_date")
+  endDate            DateTime           @map("end_date")
+  elementMTC         String?            @map("element_mtc") /// Wood, Fire, Earth, Metal, Water
+  organMTC           String?            @map("organ_mtc")
+  description        String?            /// Rich text
+  includedPractices  String[]           @map("included_practices")
+  capacity           Int?
+  venue              String?
+  isPublished        Boolean            @default(false) @map("is_published")
+  isSoldOut          Boolean            @default(false) @map("is_sold_out")
+  isDeleted          Boolean            @default(false) @map("is_deleted")
+  deletedAt          DateTime?          @map("deleted_at")
+  createdAt          DateTime           @default(now()) @map("created_at")
+  updatedAt          DateTime           @updatedAt @map("updated_at")
+
+  activities          Activity[]
+  eventFacilitators   EventFacilitator[]
+  ticketTypes         TicketType[]
+  registrations       Registration[]
+  testimonials        Testimonial[]
+  images              Image[]
+  faqs                FAQ[]
+  cancellationPolicy  CancellationPolicy?
+
+  @@index([slug])
+  @@index([season])
+  @@index([isPublished, isDeleted])
+  @@map("events")
+}
+
+// --- Activity (AC-4) ---
+model Activity {
+  id              String   @id @default(uuid())
+  eventId         String   @map("event_id")
+  time            DateTime
+  title           String
+  description     String?
+  durationMinutes Int      @map("duration_minutes")
+  facilitatorId   String?  @map("facilitator_id")
+  order           Int      @default(0)
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  event       Event        @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  facilitator Facilitator? @relation(fields: [facilitatorId], references: [id], onDelete: SetNull)
+
+  @@index([eventId])
+  @@map("activities")
+}
+
+// --- Facilitator (AC-5) ---
+model Facilitator {
+  id          String   @id @default(uuid())
+  name        String
+  role        String?
+  bio         String?
+  photoUrl    String?  @map("photo_url")
+  instagram   String?
+  email       String?
+  phone       String?
+  specialties String[]
+  isFeatured  Boolean  @default(false) @map("is_featured")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  activities        Activity[]
+  eventFacilitators EventFacilitator[]
+
+  @@map("facilitators")
+}
+
+// --- EventFacilitator junction (AC-6) ---
+model EventFacilitator {
+  id            String   @id @default(uuid())
+  eventId       String   @map("event_id")
+  facilitatorId String   @map("facilitator_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  event       Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  facilitator Facilitator @relation(fields: [facilitatorId], references: [id], onDelete: Cascade)
+
+  @@unique([eventId, facilitatorId])
+  @@map("event_facilitators")
+}
+
+// --- TicketType (AC-7) ---
+model TicketType {
+  id                String    @id @default(uuid())
+  eventId           String    @map("event_id")
+  name              String
+  description       String?
+  includes          String[]  /// What's included in the ticket
+  earlyBirdPrice    Int       @map("early_bird_price") /// Centavos
+  earlyBirdDeadline DateTime? @map("early_bird_deadline")
+  regularPrice      Int       @map("regular_price") /// Centavos
+  lastMinutePrice   Int?      @map("last_minute_price") /// Centavos
+  lastMinuteStart   DateTime? @map("last_minute_start")
+  quantityAvailable Int?      @map("quantity_available") /// null = unlimited
+  quantitySold      Int       @default(0) @map("quantity_sold")
+  createdAt         DateTime  @default(now()) @map("created_at")
+  updatedAt         DateTime  @updatedAt @map("updated_at")
+
+  event         Event          @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  registrations Registration[]
+
+  @@index([eventId])
+  @@map("ticket_types")
+}
+
+// --- Registration (AC-8) ---
+model Registration {
+  id                     String             @id @default(uuid())
+  userId                 String             @map("user_id")
+  eventId                String             @map("event_id")
+  ticketTypeId           String             @map("ticket_type_id")
+  status                 RegistrationStatus @default(PENDING)
+  qrCode                 String?            @unique @map("qr_code")
+  dietaryRestrictions    String?            @map("dietary_restrictions")
+  isFirstTime            Boolean            @default(false) @map("is_first_time")
+  checkedInAt            DateTime?          @map("checked_in_at") /// E3.4: QR Code check-in
+  accommodationId        String?            @map("accommodation_id") /// E3.6: Room FK
+  accommodationNights    Int?               @map("accommodation_nights") /// E3.6
+  transferredFrom        String?            @map("transferred_from") /// E3.5: FK to Registration
+  emailConfirmationSent  Boolean            @default(false) @map("email_confirmation_sent") /// E4.1
+  emailReminder7dSent    Boolean            @default(false) @map("email_reminder_7d_sent") /// E4.1
+  emailReminder24hSent   Boolean            @default(false) @map("email_reminder_24h_sent") /// E4.1
+  emailFeedbackSent      Boolean            @default(false) @map("email_feedback_sent") /// E4.1
+  createdAt              DateTime           @default(now()) @map("created_at")
+  updatedAt              DateTime           @updatedAt @map("updated_at")
+
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event        Event       @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  ticketType   TicketType  @relation(fields: [ticketTypeId], references: [id], onDelete: Restrict)
+  accommodation Room?      @relation(fields: [accommodationId], references: [id], onDelete: SetNull)
+  transferredFromReg Registration? @relation("RegistrationTransfer", fields: [transferredFrom], references: [id], onDelete: SetNull)
+  transferredToRegs  Registration[] @relation("RegistrationTransfer")
+  payments     Payment[]
+
+  @@index([userId])
+  @@index([eventId])
+  @@index([status])
+  @@map("registrations")
+}
+
+// --- Payment (AC-9) ---
+model Payment {
+  id             String        @id @default(uuid())
+  registrationId String        @map("registration_id")
+  amount         Int           /// Centavos
+  method         PaymentMethod
+  status         PaymentStatus @default(PENDING)
+  stripeId       String?       @map("stripe_id")
+  mercadoPagoId  String?       @map("mercado_pago_id")
+  pixKey         String?       @map("pix_key")
+  boletoUrl      String?       @map("boleto_url")
+  expiresAt      DateTime?     @map("expires_at")
+  confirmedAt    DateTime?     @map("confirmed_at")
+  createdAt      DateTime      @default(now()) @map("created_at")
+
+  registration Registration @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+
+  @@index([registrationId])
+  @@index([status])
+  @@map("payments")
+}
+
+// --- Lead (AC-10) ---
+model Lead {
+  id                String   @id @default(uuid())
+  email             String   @unique
+  name              String?
+  phone             String?
+  source            String?
+  utmSource         String?  @map("utm_source")
+  utmMedium         String?  @map("utm_medium")
+  utmCampaign       String?  @map("utm_campaign")
+  interestedSeasons  String[] @map("interested_seasons") /// Season names
+  constitutionData  Json?    @map("constitution_data")
+  emailsSent        Int      @default(0) @map("emails_sent")
+  emailsOpened      Int      @default(0) @map("emails_opened")
+  isConverted       Boolean  @default(false) @map("is_converted")
+  convertedAt       DateTime? @map("converted_at")
+  convertedToUserId String?  @map("converted_to_user_id")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  @@index([email])
+  @@index([isConverted])
+  @@map("leads")
+}
+
+// --- Testimonial (AC-11) ---
+model Testimonial {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id")
+  eventId    String   @map("event_id")
+  rating     Int      /// 1-5
+  text       String
+  photoUrl   String?  @map("photo_url")
+  isApproved Boolean  @default(false) @map("is_approved")
+  isFeatured Boolean  @default(false) @map("is_featured")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+  @@index([isApproved, isFeatured])
+  @@map("testimonials")
+}
+
+// --- Image (AC-12) ---
+model Image {
+  id        String   @id @default(uuid())
+  eventId   String   @map("event_id")
+  url       String
+  alt       String?
+  order     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+  @@map("images")
+}
+
+// --- FAQ (AC-12) ---
+model FAQ {
+  id        String   @id @default(uuid())
+  eventId   String   @map("event_id")
+  question  String
+  answer    String
+  order     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@index([eventId])
+  @@map("faqs")
+}
+
+// --- Intention (AC-12) ---
+model Intention {
+  id          String    @id @default(uuid())
+  userId      String    @map("user_id")
+  season      Season
+  text        String
+  isPublic    Boolean   @default(false) @map("is_public")
+  harvestedAt DateTime? @map("harvested_at")
+  harvestNote String?   @map("harvest_note")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([season])
+  @@map("intentions")
+}
+
+// --- Product (AC-13) ---
+model Product {
+  id                  String   @id @default(uuid())
+  name                String
+  description         String?
+  price               Int      /// Centavos
+  benefits            String[]
+  quantityAvailable   Int?     @map("quantity_available") /// null = unlimited
+  installmentsAllowed Int?     @map("installments_allowed")
+  discountCash        Int?     @map("discount_cash") /// Centavos discount for cash payment
+  isActive            Boolean  @default(true) @map("is_active")
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  @@map("products")
+}
+
+// --- Room / Sun House (AC-14) ---
+model Room {
+  id            String   @id @default(uuid())
+  name          String
+  theme         String?
+  description   String?
+  pricePerNight Int      @map("price_per_night") /// Centavos
+  capacity      Int      @default(2)
+  isAvailable   Boolean  @default(true) @map("is_available")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  registrations Registration[]
+
+  @@map("rooms")
+}
+
+// --- CancellationPolicy (AC-15) ---
+model CancellationPolicy {
+  id                        String   @id @default(uuid())
+  eventId                   String?  @unique @map("event_id") /// null = global default
+  earlyDaysThreshold        Int      @map("early_days_threshold") /// e.g. 15
+  earlyRefundPercent        Int      @map("early_refund_percent") /// e.g. 80
+  midDaysLowerThreshold     Int      @map("mid_days_lower_threshold") /// e.g. 7
+  midRefundPercent          Int      @map("mid_refund_percent") /// e.g. 50
+  transferAllowed           Boolean  @default(true) @map("transfer_allowed")
+  description               String?
+  isActive                  Boolean  @default(true) @map("is_active")
+  createdAt                 DateTime @default(now()) @map("created_at")
+  updatedAt                 DateTime @updatedAt @map("updated_at")
+
+  event Event? @relation(fields: [eventId], references: [id], onDelete: Cascade)
+
+  @@map("cancellation_policies")
+}
+
+// --- SeasonalTree ---
+model SeasonalTree {
+  id               String      @id @default(uuid())
+  userId           String      @unique @map("user_id")
+  springCompleted  Boolean     @default(false) @map("spring_completed")
+  summerCompleted  Boolean     @default(false) @map("summer_completed")
+  autumnCompleted  Boolean     @default(false) @map("autumn_completed")
+  winterCompleted  Boolean     @default(false) @map("winter_completed")
+  growthStage      GrowthStage @default(SEED) @map("growth_stage")
+  badges           String[]
+  discountPercent  Int         @default(0) @map("discount_percent")
+  createdAt        DateTime    @default(now()) @map("created_at")
+  updatedAt        DateTime    @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("seasonal_trees")
+}
+
+// --- LunarPhase ---
+model LunarPhase {
+  id             String        @id @default(uuid())
+  date           DateTime      @unique
+  phase          LunarPhaseName
+  illumination   Float         /// 0.0 to 1.0
+  indigenousName String?       @map("indigenous_name")
+  createdAt      DateTime      @default(now()) @map("created_at")
+
+  @@index([date])
+  @@map("lunar_phases")
+}
+
+// --- LocalCircle ---
+model LocalCircle {
+  id           String   @id @default(uuid())
+  name         String
+  location     String?
+  description  String?
+  members      String[] /// User IDs
+  createdBy    String   @map("created_by")
+  nextMeeting  DateTime? @map("next_meeting")
+  meetingPlace String?  @map("meeting_place")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("local_circles")
+}
+
+// --- Integration ---
+model Integration {
+  id         String   @id @default(uuid())
+  name       String   @unique
+  isActive   Boolean  @default(false) @map("is_active")
+  apiKey     String?  @map("api_key") /// Encrypted at app level
+  webhookUrl String?  @map("webhook_url")
+  config     Json?
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@map("integrations")
+}
+
+// --- SiteContent (E2.6: editable landing page texts) ---
+model SiteContent {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     Json
+  updatedBy String?  @map("updated_by")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("site_contents")
+}
