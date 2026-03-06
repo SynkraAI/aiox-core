@@ -241,6 +241,7 @@ docs/research/
 docs/qa/
 docs/epics/
 docs/prd/
+!docs/prd/ciclo-das-estacoes-app.md
 docs/decisions/
 docs/one-pagers/
 docs/strategy/
