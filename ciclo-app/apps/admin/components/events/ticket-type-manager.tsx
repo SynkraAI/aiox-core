@@ -171,7 +171,7 @@ function validateForm(form: TicketFormData): FormErrors {
   const errors: FormErrors = {}
 
   if (!form.name.trim()) {
-    errors.name = 'Nome e obrigatorio.'
+    errors.name = 'Nome é obrigatório.'
   }
 
   const regularPrice = parseFloat(form.regularPrice)
@@ -184,15 +184,15 @@ function validateForm(form: TicketFormData): FormErrors {
     if (isNaN(ebPrice) || ebPrice <= 0) {
       errors.earlyBirdPrice = 'Preco early bird deve ser maior que zero.'
     } else if (!isNaN(regularPrice) && ebPrice >= regularPrice) {
-      // Warning, nao bloqueante — usamos console.warn em vez de bloquear
-      // AC-11: warning, nao bloqueante
+      // Warning, não bloqueante — usamos console.warn em vez de bloquear
+      // AC-11: warning, não bloqueante
     }
   }
 
   if (form.quantityAvailable) {
     const qty = parseInt(form.quantityAvailable, 10)
     if (isNaN(qty) || qty < 1) {
-      errors.quantityAvailable = 'Quantidade deve ser no minimo 1.'
+      errors.quantityAvailable = 'Quantidade deve ser no mínimo 1.'
     }
   }
 
@@ -259,15 +259,15 @@ function TicketForm({
         )}
       </div>
 
-      {/* Descricao */}
+      {/* Descrição */}
       <div>
         <label className="block text-sm font-medium text-gray-700">
-          Descricao
+          Descrição
         </label>
         <textarea
           value={form.description}
           onChange={(e) => update('description', e.target.value)}
-          placeholder="Descricao opcional do tipo de ingresso"
+          placeholder="Descrição opcional do tipo de ingresso"
           rows={2}
           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
         />
@@ -312,10 +312,10 @@ function TicketForm({
             )}
           </div>
 
-          {/* Quantidade disponivel */}
+          {/* Quantidade disponível */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Quantidade Disponivel
+              Quantidade Disponível
             </label>
             <Input
               type="number"
@@ -451,7 +451,7 @@ export function TicketTypeManager({
       const eb = parseFloat(form.earlyBirdPrice)
       const reg = parseFloat(form.regularPrice)
       if (!isNaN(eb) && !isNaN(reg) && eb >= reg) {
-        return 'Atencao: o preco early bird esta igual ou maior que o preco regular.'
+        return 'Atenção: o preco early bird esta igual ou maior que o preco regular.'
       }
     }
     return null
@@ -644,7 +644,7 @@ export function TicketTypeManager({
                       </div>
                     )}
                     <div>
-                      <span className="text-gray-500">Disponivel:</span>{' '}
+                      <span className="text-gray-500">Disponível:</span>{' '}
                       <span className="font-medium">
                         {ticket.quantityAvailable != null
                           ? `${ticket.quantitySold}/${ticket.quantityAvailable}`

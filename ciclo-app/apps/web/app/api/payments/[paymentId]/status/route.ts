@@ -38,7 +38,7 @@ export async function GET(
 
     if (!payment) {
       return NextResponse.json(
-        { error: 'Pagamento nao encontrado.' },
+        { error: 'Pagamento não encontrado.' },
         { status: 404 }
       )
     }

@@ -20,7 +20,7 @@ const mercadoPagoGateway = new MercadoPagoGateway()
 const stripeGateway = new StripeGateway()
 
 /**
- * Returns the appropriate PaymentGateway for the given payment method.
+ * Returns the apprópriate PaymentGateway for the given payment method.
  *
  * @param method - PIX, BOLETO, or CREDIT_CARD
  * @returns PaymentGateway instance

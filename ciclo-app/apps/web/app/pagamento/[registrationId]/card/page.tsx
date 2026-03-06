@@ -46,7 +46,7 @@ export default async function CardPaymentPage({ params }: PageProps) {
   }
 
   if (registration.status === 'CONFIRMED' || payment.status === 'APPROVED') {
-    redirect(`/inscricao/confirmada/${registrationId}`)
+    redirect(`/inscrição/confirmada/${registrationId}`)
   }
 
   // Create PaymentIntent if not yet created
@@ -64,7 +64,7 @@ export default async function CardPaymentPage({ params }: PageProps) {
           <h1 className="text-xl font-bold text-destructive">Erro ao processar cartao</h1>
           <p className="mt-2 text-sm text-muted-foreground">{result.error}</p>
           <a
-            href={`/inscricao/${registration.event.slug}/pagamento`}
+            href={`/inscrição/${registration.event.slug}/pagamento`}
             className="mt-4 inline-block text-sm text-seasonal-primary underline"
           >
             Tentar novamente
@@ -82,9 +82,9 @@ export default async function CardPaymentPage({ params }: PageProps) {
   if (!stripePublishableKey) {
     return (
       <div className="mx-auto max-w-lg p-6">
-        <h1 className="text-xl font-bold text-destructive">Configuracao incompleta</h1>
+        <h1 className="text-xl font-bold text-destructive">Configuração incompleta</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Chave publica do Stripe nao configurada. Contate o administrador.
+          Chave pública do Stripe não configurada. Contate o administrador.
         </p>
       </div>
     )
@@ -92,7 +92,7 @@ export default async function CardPaymentPage({ params }: PageProps) {
 
   return (
     <div className="mx-auto max-w-lg p-6">
-      <h1 className="text-xl font-bold text-foreground">Pagamento com Cartao</h1>
+      <h1 className="text-xl font-bold text-foreground">Pagamento com Cartão</h1>
       <p className="mt-1 text-sm text-muted-foreground">
         {registration.event.name} — {registration.ticketType.name}
       </p>

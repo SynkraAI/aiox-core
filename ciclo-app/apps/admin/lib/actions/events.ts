@@ -47,7 +47,7 @@ export async function createEvent(input: CreateEventInput): Promise<EventActionR
       where: { slug: input.slug },
     })
     if (existing) {
-      return { success: false, error: 'Slug ja existe. Escolha outro.' }
+      return { success: false, error: 'Slug já existe. Escolha outro.' }
     }
 
     const event = await prisma.event.create({
@@ -91,7 +91,7 @@ export async function updateEvent(input: UpdateEventInput): Promise<EventActionR
       },
     })
     if (existing) {
-      return { success: false, error: 'Slug ja existe. Escolha outro.' }
+      return { success: false, error: 'Slug já existe. Escolha outro.' }
     }
 
     await prisma.event.update({
@@ -241,7 +241,7 @@ export async function togglePublish(id: string): Promise<EventActionResult> {
     })
 
     if (!event) {
-      return { success: false, error: 'Evento nao encontrado' }
+      return { success: false, error: 'Evento não encontrado' }
     }
 
     await prisma.event.update({
@@ -268,7 +268,7 @@ export async function toggleSoldOut(id: string): Promise<EventActionResult> {
     })
 
     if (!event) {
-      return { success: false, error: 'Evento nao encontrado' }
+      return { success: false, error: 'Evento não encontrado' }
     }
 
     await prisma.event.update({

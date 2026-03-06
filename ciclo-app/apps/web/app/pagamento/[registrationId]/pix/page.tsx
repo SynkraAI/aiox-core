@@ -47,7 +47,7 @@ export default async function PixPaymentPage({ params }: PageProps) {
 
   // If already confirmed, redirect to success
   if (registration.status === 'CONFIRMED' || payment.status === 'APPROVED') {
-    redirect(`/inscricao/confirmada/${registrationId}`)
+    redirect(`/inscrição/confirmada/${registrationId}`)
   }
 
   // Initiate PIX payment if not yet initiated
@@ -70,7 +70,7 @@ export default async function PixPaymentPage({ params }: PageProps) {
           <h1 className="text-xl font-bold text-destructive">Erro ao gerar PIX</h1>
           <p className="mt-2 text-sm text-muted-foreground">{result.error}</p>
           <a
-            href={`/inscricao/${registration.event.slug}/pagamento`}
+            href={`/inscrição/${registration.event.slug}/pagamento`}
             className="mt-4 inline-block text-sm text-seasonal-primary underline"
           >
             Tentar novamente

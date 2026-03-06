@@ -6,7 +6,7 @@ const IV_LENGTH = 16
 function getEncryptionKey(): Buffer {
   const key = process.env.CPF_ENCRYPTION_KEY
   if (!key) {
-    throw new Error('CPF_ENCRYPTION_KEY nao configurada. Gere com: openssl rand -hex 32')
+    throw new Error('CPF_ENCRYPTION_KEY não configurada. Gere com: openssl rand -hex 32')
   }
   return Buffer.from(key, 'hex')
 }
@@ -37,7 +37,7 @@ export function decryptCpf(encryptedCpf: string): string {
   const [ivHex, encryptedHex, authTagHex] = encryptedCpf.split(':')
 
   if (!ivHex || !encryptedHex || !authTagHex) {
-    throw new Error('Formato de CPF criptografado invalido.')
+    throw new Error('Formato de CPF criptografado inválido.')
   }
 
   const iv = Buffer.from(ivHex, 'hex')

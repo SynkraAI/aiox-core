@@ -5,7 +5,7 @@
 
 export const SEASON_LABELS: Record<string, string> = {
   SPRING: 'Primavera',
-  SUMMER: 'Verao',
+  SUMMER: 'Verão',
   AUTUMN: 'Outono',
   WINTER: 'Inverno',
   CROSS_QUARTER: 'Cross-Quarter',
@@ -13,17 +13,17 @@ export const SEASON_LABELS: Record<string, string> = {
 
 export const SEASON_OPTIONS = [
   { value: 'SPRING', label: 'Primavera' },
-  { value: 'SUMMER', label: 'Verao' },
+  { value: 'SUMMER', label: 'Verão' },
   { value: 'AUTUMN', label: 'Outono' },
   { value: 'WINTER', label: 'Inverno' },
   { value: 'CROSS_QUARTER', label: 'Cross-Quarter' },
 ] as const
 
 export const ASTRONOMICAL_EVENT_LABELS: Record<string, string> = {
-  SPRING_EQUINOX: 'Equinocio de Primavera',
-  SUMMER_SOLSTICE: 'Solsticio de Verao',
-  AUTUMN_EQUINOX: 'Equinocio de Outono',
-  WINTER_SOLSTICE: 'Solsticio de Inverno',
+  SPRING_EQUINOX: 'Equinócio de Primavera',
+  SUMMER_SOLSTICE: 'Solstício de Verão',
+  AUTUMN_EQUINOX: 'Equinócio de Outono',
+  WINTER_SOLSTICE: 'Solstício de Inverno',
   IMBOLC: 'Imbolc',
   BELTANE: 'Beltane',
   LUGHNASADH: 'Lughnasadh',
@@ -32,10 +32,10 @@ export const ASTRONOMICAL_EVENT_LABELS: Record<string, string> = {
 
 export const ASTRONOMICAL_EVENT_OPTIONS = [
   { value: '', label: '(Nenhum)' },
-  { value: 'SPRING_EQUINOX', label: 'Equinocio de Primavera' },
-  { value: 'SUMMER_SOLSTICE', label: 'Solsticio de Verao' },
-  { value: 'AUTUMN_EQUINOX', label: 'Equinocio de Outono' },
-  { value: 'WINTER_SOLSTICE', label: 'Solsticio de Inverno' },
+  { value: 'SPRING_EQUINOX', label: 'Equinócio de Primavera' },
+  { value: 'SUMMER_SOLSTICE', label: 'Solstício de Verão' },
+  { value: 'AUTUMN_EQUINOX', label: 'Equinócio de Outono' },
+  { value: 'WINTER_SOLSTICE', label: 'Solstício de Inverno' },
   { value: 'IMBOLC', label: 'Imbolc' },
   { value: 'BELTANE', label: 'Beltane' },
   { value: 'LUGHNASADH', label: 'Lughnasadh' },
@@ -56,7 +56,7 @@ export const STATUS_LABELS = {
   soldout: 'Esgotado',
 } as const
 
-export const DEFAULT_VENUE = 'Base Triade - Barra Velha/SC'
+export const DEFAULT_VENUE = 'Base Tríade - Barra Velha/SC'
 
 /** Bar fill colors for charts (Tailwind classes) */
 export const SEASON_BAR_COLORS: Record<string, string> = {

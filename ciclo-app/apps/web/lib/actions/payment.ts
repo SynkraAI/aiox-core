@@ -46,11 +46,11 @@ export async function initiatePayment(
     })
 
     if (!payment) {
-      return { success: false, error: 'Pagamento nao encontrado.' }
+      return { success: false, error: 'Pagamento não encontrado.' }
     }
 
     if (payment.registrationId !== input.registrationId) {
-      return { success: false, error: 'Pagamento nao pertence a esta inscricao.' }
+      return { success: false, error: 'Pagamento não pertence a esta inscrição.' }
     }
 
     // If already has an external ID, payment was already initiated

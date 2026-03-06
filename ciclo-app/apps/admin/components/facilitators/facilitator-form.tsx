@@ -200,7 +200,7 @@ export function FacilitatorForm({ facilitator, mode }: FacilitatorFormProps) {
 
       {/* Basic Info */}
       <fieldset className="space-y-4">
-        <legend className="text-lg font-semibold text-gray-900">Informacoes Basicas</legend>
+        <legend className="text-lg font-semibold text-gray-900">Informações Basicas</legend>
 
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -219,13 +219,13 @@ export function FacilitatorForm({ facilitator, mode }: FacilitatorFormProps) {
 
         <div>
           <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-            Papel / Titulo
+            Papel / Título
           </label>
           <Input
             id="role"
             value={role}
             onChange={(e) => setRole(e.target.value)}
-            placeholder="Ex: Terapeuta Holistica, Instrutor de Yoga"
+            placeholder="Ex: Terapeuta Holística, Instrutor de Yoga"
           />
         </div>
 
@@ -346,7 +346,7 @@ export function FacilitatorForm({ facilitator, mode }: FacilitatorFormProps) {
           <span className="text-sm font-medium text-gray-700">Destaque</span>
         </label>
         <p className="text-xs text-gray-500">
-          Facilitadores em destaque aparecem primeiro na pagina publica do evento.
+          Facilitadores em destaque aparecem primeiro na página publica do evento.
         </p>
       </fieldset>
 
@@ -357,7 +357,7 @@ export function FacilitatorForm({ facilitator, mode }: FacilitatorFormProps) {
             ? 'Salvando...'
             : mode === 'create'
               ? 'Criar Facilitador'
-              : 'Salvar Alteracoes'}
+              : 'Salvar Alterações'}
         </Button>
         <Button type="button" variant="outline" onClick={() => router.push('/admin/facilitadores')}>
           Cancelar

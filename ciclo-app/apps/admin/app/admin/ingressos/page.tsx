@@ -13,7 +13,7 @@ export default function IngressosPage() {
       <Card className="mt-6 border-base-gold/10">
         <CardContent className="flex items-center justify-center py-16">
           <p className="text-base-dark/40">
-            Gestao de ingressos em breve &mdash; implementado na E2.3
+            Gestão de ingressos em breve &mdash; implementado na E2.3
           </p>
         </CardContent>
       </Card>

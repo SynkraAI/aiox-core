@@ -81,7 +81,7 @@ export function InstallBanner() {
             type="button"
             onClick={handleDismiss}
             className="rounded-md px-3 py-1.5 text-xs text-[#8a7a6a] transition-colors hover:bg-[#e8dcc8]"
-            aria-label="Dispensar banner de instalacao"
+            aria-label="Dispensar banner de instalação"
           >
             Agora nao
           </button>

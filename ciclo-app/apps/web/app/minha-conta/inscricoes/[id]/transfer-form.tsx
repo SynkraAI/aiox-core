@@ -24,7 +24,7 @@ export function TransferRegistrationForm({
     setError(null)
 
     if (!name.trim() || !email.trim()) {
-      setError('Nome e email sao obrigatorios.')
+      setError('Nome e email são obrigatórios.')
       setIsLoading(false)
       return
     }
@@ -42,17 +42,17 @@ export function TransferRegistrationForm({
       const data = await response.json()
 
       if (!response.ok) {
-        setError(data.error ?? 'Erro ao transferir inscricao.')
+        setError(data.error ?? 'Erro ao transferir inscrição.')
         return
       }
 
       setSuccess(true)
       setTimeout(() => {
-        router.push('/minha-conta/inscricoes')
+        router.push('/minha-conta/inscrições')
         router.refresh()
       }, 2000)
     } catch {
-      setError('Erro de conexao. Tente novamente.')
+      setError('Erro de conexão. Tente novamente.')
     } finally {
       setIsLoading(false)
     }
@@ -62,7 +62,7 @@ export function TransferRegistrationForm({
     return (
       <div className="rounded-md bg-green-50 p-4">
         <p className="text-sm font-medium text-green-800">
-          Inscricao transferida com sucesso para {name} ({email}).
+          Inscrição transferida com sucesso para {name} ({email}).
         </p>
         <p className="text-sm text-green-600 mt-1">Redirecionando...</p>
       </div>
@@ -76,7 +76,7 @@ export function TransferRegistrationForm({
         onClick={() => setIsOpen(true)}
         className="rounded-md border border-blue-300 bg-white px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-50"
       >
-        Transferir Inscricao
+        Transferir Inscrição
       </button>
     )
   }
@@ -125,7 +125,7 @@ export function TransferRegistrationForm({
           disabled={isLoading}
           className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
         >
-          {isLoading ? 'Transferindo...' : 'Confirmar Transferencia'}
+          {isLoading ? 'Transferindo...' : 'Confirmar Transferência'}
         </button>
         <button
           type="button"

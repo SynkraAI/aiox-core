@@ -70,7 +70,7 @@ export function calculatePricing(
     }
   }
 
-  // Regular: caso padrao
+  // Regular: caso padrão
   return { price: ticket.regularPrice, tier: 'regular' }
 }
 
@@ -96,11 +96,11 @@ export function centavosToReais(centavos: number): string {
  * @example reaisToCentavos("1.234,56") => 123456
  */
 export function reaisToCentavos(reais: string): number {
-  // Remove tudo que nao e digito, ponto ou virgula
+  // Remove tudo que não e digito, ponto ou virgula
   let cleaned = reais.replace(/[^\d.,]/g, '')
   if (!cleaned) return 0
 
-  // Detectar formato brasileiro: se tem virgula como ultimo separador decimal
+  // Detectar formato brasileiro: se tem virgula como último separador decimal
   const lastComma = cleaned.lastIndexOf(',')
   const lastDot = cleaned.lastIndexOf('.')
 
@@ -111,7 +111,7 @@ export function reaisToCentavos(reais: string): number {
     // Formato misto: virgulas sao milhares, ponto e decimal
     cleaned = cleaned.replace(/,/g, '')
   }
-  // Se so tem ponto, assume formato internacional (ex: "1234.56")
+  // Se só tem ponto, assume formato internacional (ex: "1234.56")
 
   const value = parseFloat(cleaned)
   if (isNaN(value)) return 0

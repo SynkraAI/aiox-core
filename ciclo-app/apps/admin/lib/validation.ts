@@ -35,14 +35,14 @@ export function validateEventForm(data: EventFormData): EventFormErrors {
 
   // Name: required, max 100 chars
   if (!data.name.trim()) {
-    errors.name = 'Nome e obrigatorio'
+    errors.name = 'Nome é obrigatório'
   } else if (data.name.length > 100) {
-    errors.name = 'Nome deve ter no maximo 100 caracteres'
+    errors.name = 'Nome deve ter no máximo 100 caracteres'
   }
 
   // Slug: required
   if (!data.slug.trim()) {
-    errors.slug = 'Slug e obrigatorio'
+    errors.slug = 'Slug é obrigatório'
   }
 
   // Dates: start before end
@@ -55,17 +55,17 @@ export function validateEventForm(data: EventFormData): EventFormErrors {
   }
 
   if (!data.startDate) {
-    errors.startDate = 'Data inicio e obrigatoria'
+    errors.startDate = 'Data inicio é obrigatória'
   }
 
   if (!data.endDate) {
-    errors.endDate = 'Data fim e obrigatoria'
+    errors.endDate = 'Data fim é obrigatória'
   }
 
   // Capacity: minimum 1
   const capacityNum = parseInt(data.capacity, 10)
   if (data.capacity && (isNaN(capacityNum) || capacityNum < 1)) {
-    errors.capacity = 'Capacidade deve ser no minimo 1'
+    errors.capacity = 'Capacidade deve ser no mínimo 1'
   }
 
   return errors
@@ -128,20 +128,20 @@ export function validateActivityForm(data: ActivityFormData): ActivityFormErrors
 
   // Title: required, max 150 chars
   if (!data.title.trim()) {
-    errors.title = 'Titulo e obrigatorio'
+    errors.title = 'Título é obrigatório'
   } else if (data.title.length > 150) {
-    errors.title = 'Titulo deve ter no maximo 150 caracteres'
+    errors.title = 'Título deve ter no máximo 150 caracteres'
   }
 
   // Time: required, HH:MM format check (the datetime-local input handles format)
   if (!data.time) {
-    errors.time = 'Horario e obrigatorio'
+    errors.time = 'Horário é obrigatório'
   }
 
   // Duration: >= 1
   const duration = parseInt(data.durationMinutes, 10)
   if (!data.durationMinutes || isNaN(duration) || duration < 1) {
-    errors.durationMinutes = 'Duracao deve ser no minimo 1 minuto'
+    errors.durationMinutes = 'Duração deve ser no mínimo 1 minuto'
   }
 
   return errors
@@ -172,14 +172,14 @@ export function validateRoomForm(data: RoomFormData): RoomFormErrors {
 
   // Name: required, max 100 chars
   if (!data.name.trim()) {
-    errors.name = 'Nome e obrigatorio'
+    errors.name = 'Nome é obrigatório'
   } else if (data.name.length > 100) {
-    errors.name = 'Nome deve ter no maximo 100 caracteres'
+    errors.name = 'Nome deve ter no máximo 100 caracteres'
   }
 
   // Price: required, valid number > 0
   if (!data.priceReais.trim()) {
-    errors.priceReais = 'Preco e obrigatorio'
+    errors.priceReais = 'Preco é obrigatório'
   } else {
     const price = parseFloat(data.priceReais.replace(',', '.'))
     if (isNaN(price) || price <= 0) {
@@ -190,7 +190,7 @@ export function validateRoomForm(data: RoomFormData): RoomFormErrors {
   // Capacity: required, minimum 1
   const capacityNum = parseInt(data.capacity, 10)
   if (!data.capacity || isNaN(capacityNum) || capacityNum < 1) {
-    errors.capacity = 'Capacidade deve ser no minimo 1'
+    errors.capacity = 'Capacidade deve ser no mínimo 1'
   }
 
   return errors
@@ -201,16 +201,16 @@ export function validateFacilitatorForm(data: FacilitatorFormData): FacilitatorF
 
   // Name: required, max 100 chars
   if (!data.name.trim()) {
-    errors.name = 'Nome e obrigatorio'
+    errors.name = 'Nome é obrigatório'
   } else if (data.name.length > 100) {
-    errors.name = 'Nome deve ter no maximo 100 caracteres'
+    errors.name = 'Nome deve ter no máximo 100 caracteres'
   }
 
   // Email: valid format if filled
   if (data.email.trim()) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(data.email.trim())) {
-      errors.email = 'Formato de email invalido'
+      errors.email = 'Formato de email inválido'
     }
   }
 

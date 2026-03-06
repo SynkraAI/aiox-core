@@ -48,7 +48,7 @@ function DeleteModal({ roomName, error, onConfirm, onCancel }: DeleteModalProps)
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
-        <h3 className="text-lg font-semibold text-gray-900">Confirmar exclusao</h3>
+        <h3 className="text-lg font-semibold text-gray-900">Confirmar exclusão</h3>
         <p className="mt-2 text-sm text-gray-600">
           Tem certeza que deseja excluir o quarto <strong>{roomName}</strong>?
         </p>
@@ -58,7 +58,7 @@ function DeleteModal({ roomName, error, onConfirm, onCancel }: DeleteModalProps)
           </div>
         )}
         <p className="mt-1 text-xs text-gray-500">
-          Se o quarto possuir inscricoes ativas, a exclusao sera impedida.
+          Se o quarto possuir inscrições ativas, a exclusão sera impedida.
         </p>
         <div className="mt-4 flex justify-end gap-3">
           <Button variant="outline" size="sm" onClick={onCancel}>
@@ -125,7 +125,7 @@ export function RoomListClient({ rooms }: RoomListClientProps) {
           <Input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Buscar por nome, tema ou descricao..."
+            placeholder="Buscar por nome, tema ou descrição..."
             className="max-w-sm"
           />
         </div>
@@ -152,10 +152,10 @@ export function RoomListClient({ rooms }: RoomListClientProps) {
                 Capacidade
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                Inscricoes
+                Inscrições
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                Disponivel
+                Disponível
               </th>
               <th className="px-4 py-3 text-right text-xs font-medium uppercase tracking-wider text-gray-500">
                 Acoes
@@ -197,7 +197,7 @@ export function RoomListClient({ rooms }: RoomListClientProps) {
                           ? 'bg-green-100 text-green-800 hover:bg-green-200'
                           : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
                       }`}
-                      aria-label={room.isAvailable ? 'Marcar como indisponivel' : 'Marcar como disponivel'}
+                      aria-label={room.isAvailable ? 'Marcar como indisponível' : 'Marcar como disponível'}
                     >
                       {room.isAvailable ? 'Sim' : 'Nao'}
                     </button>

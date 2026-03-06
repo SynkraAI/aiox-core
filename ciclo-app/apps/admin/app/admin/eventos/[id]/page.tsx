@@ -13,7 +13,7 @@ import { CancellationPolicyForm } from '../../../../components/cancellation/canc
 
 export const metadata: Metadata = {
   title: 'Editar Evento',
-  description: 'Editar evento do Ciclo das Estacoes',
+  description: 'Editar evento do Ciclo das Estações',
 }
 
 interface EditEventPageProps {
@@ -106,12 +106,12 @@ export default async function EditEventPage({ params }: EditEventPageProps) {
       {/* Cancellation Policy Override (AC-2) */}
       <div className="mt-12 border-t pt-8">
         <h2 className="mb-2 text-xl font-semibold text-gray-900">
-          Politica de Cancelamento
+          Política de Cancelamento
         </h2>
         <p className="mb-4 text-sm text-gray-500">
           {event.cancellationPolicy
-            ? 'Este evento tem uma politica de cancelamento customizada.'
-            : 'Este evento usa a politica global. Configure um override abaixo se necessario.'}
+            ? 'Este evento tem uma política de cancelamento customizada.'
+            : 'Este evento usa a política global. Configure um override abaixo se necessário.'}
         </p>
         <CancellationPolicyForm
           mode="event"

@@ -35,16 +35,16 @@ export async function createActivity(
 ): Promise<ActivityActionResult> {
   try {
     if (!input.title.trim()) {
-      return { success: false, error: 'Titulo e obrigatorio.' }
+      return { success: false, error: 'Título é obrigatório.' }
     }
     if (input.title.length > 150) {
-      return { success: false, error: 'Titulo deve ter no maximo 150 caracteres.' }
+      return { success: false, error: 'Título deve ter no máximo 150 caracteres.' }
     }
     if (input.durationMinutes < 1) {
-      return { success: false, error: 'Duracao deve ser no minimo 1 minuto.' }
+      return { success: false, error: 'Duração deve ser no mínimo 1 minuto.' }
     }
     if (!input.time) {
-      return { success: false, error: 'Horario e obrigatorio.' }
+      return { success: false, error: 'Horário é obrigatório.' }
     }
 
     // Get max order for this event
@@ -82,16 +82,16 @@ export async function updateActivity(
 ): Promise<ActivityActionResult> {
   try {
     if (!input.title.trim()) {
-      return { success: false, error: 'Titulo e obrigatorio.' }
+      return { success: false, error: 'Título é obrigatório.' }
     }
     if (input.title.length > 150) {
-      return { success: false, error: 'Titulo deve ter no maximo 150 caracteres.' }
+      return { success: false, error: 'Título deve ter no máximo 150 caracteres.' }
     }
     if (input.durationMinutes < 1) {
-      return { success: false, error: 'Duracao deve ser no minimo 1 minuto.' }
+      return { success: false, error: 'Duração deve ser no mínimo 1 minuto.' }
     }
     if (!input.time) {
-      return { success: false, error: 'Horario e obrigatorio.' }
+      return { success: false, error: 'Horário é obrigatório.' }
     }
 
     await prisma.activity.update({

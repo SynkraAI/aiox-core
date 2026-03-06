@@ -15,10 +15,10 @@ export default function ResetPasswordPage() {
     return (
       <div className="rounded-lg border border-stone-200 bg-white p-8 shadow-sm">
         <h1 className="mb-4 text-center font-serif text-2xl font-bold text-stone-900">
-          Link Invalido
+          Link Inválido
         </h1>
         <p className="mb-6 text-center text-stone-600">
-          O link de redefinicao de senha e invalido ou expirou.
+          O link de redefinição de senha é inválido ou expirou.
         </p>
         <Link
           href="/forgot-password"
@@ -40,7 +40,7 @@ export default function ResetPasswordPage() {
     const confirmPassword = formData.get('confirmPassword') as string
 
     if (password !== confirmPassword) {
-      setError('As senhas nao coincidem.')
+      setError('As senhas não coincidem.')
       setIsLoading(false)
       return
     }
@@ -74,7 +74,7 @@ export default function ResetPasswordPage() {
           Senha Redefinida
         </h1>
         <p className="mb-6 text-center text-stone-600">
-          Sua senha foi redefinida com sucesso. Faca login com sua nova senha.
+          Sua senha foi redefinida com sucesso. Faça login com sua nova senha.
         </p>
         <Link
           href="/login"
@@ -110,7 +110,7 @@ export default function ResetPasswordPage() {
             required
             minLength={8}
             className="mt-1 block w-full rounded-md border border-stone-300 px-3 py-2 text-stone-900 placeholder-stone-400 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
-            placeholder="Minimo 8 caracteres"
+            placeholder="Mínimo 8 caracteres"
           />
         </div>
 

@@ -20,14 +20,14 @@ export async function POST(request: Request) {
 
     if (!email || typeof email !== 'string') {
       return NextResponse.json(
-        { error: 'Email e obrigatorio.' },
+        { error: 'Email é obrigatório.' },
         { status: 400 }
       )
     }
 
     // Always return success to prevent email enumeration
     const successResponse = NextResponse.json({
-      message: 'Se o email estiver cadastrado, voce recebera instrucoes para redefinir sua senha.',
+      message: 'Se o email estiver cadastrado, você recebera instruções para redefinir sua senha.',
     })
 
     const user = await prisma.user.findUnique({

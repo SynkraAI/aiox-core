@@ -6,7 +6,7 @@ import { Button, Input } from '@ciclo/ui'
 
 const SEASONS = [
   { value: 'Primavera', label: 'Primavera' },
-  { value: 'Verao', label: 'Verao' },
+  { value: 'Verão', label: 'Verão' },
   { value: 'Outono', label: 'Outono' },
   { value: 'Inverno', label: 'Inverno' },
 ] as const
@@ -38,7 +38,7 @@ export function LeadCaptureForm() {
     e.preventDefault()
 
     if (!email.trim()) {
-      setFormState({ status: 'error', message: 'Email e obrigatorio.' })
+      setFormState({ status: 'error', message: 'Email é obrigatório.' })
       return
     }
 
@@ -115,7 +115,7 @@ export function LeadCaptureForm() {
 
       <fieldset>
         <legend className="mb-2 text-sm font-medium text-foreground">
-          Estacoes de interesse
+          Estações de interesse
         </legend>
         <div className="grid grid-cols-2 gap-3">
           {SEASONS.map((season) => (
@@ -161,9 +161,9 @@ export function LeadCaptureForm() {
       </fieldset>
 
       <p className="text-xs text-muted-foreground">
-        Ao enviar, voce concorda com nossa{' '}
+        Ao enviar, você concorda com nossa{' '}
         <a href="/privacidade" className="underline hover:text-foreground">
-          politica de privacidade
+          política de privacidade
         </a>
         .
       </p>

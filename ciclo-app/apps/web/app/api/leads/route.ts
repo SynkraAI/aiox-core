@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
     if (!body.email || !isValidEmail(body.email)) {
       return NextResponse.json(
-        { success: false, message: 'Email valido e obrigatorio.' },
+        { success: false, message: 'Email válido é obrigatório.' },
         { status: 400 },
       )
     }
@@ -53,7 +53,7 @@ export async function POST(request: Request) {
 
       return NextResponse.json({
         success: true,
-        message: 'Voce ja esta em nossa lista! Atualizamos suas preferencias.',
+        message: 'Você já está em nossa lista! Atualizamos suas preferências.',
         isExisting: true,
       })
     }
@@ -74,7 +74,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: 'Interesse registrado com sucesso! Em breve voce recebera novidades.',
+      message: 'Interesse registrado com sucesso! Em breve você recebera novidades.',
       isExisting: false,
     })
   } catch (error) {
@@ -82,7 +82,7 @@ export async function POST(request: Request) {
       `Failed to process lead: ${error instanceof Error ? error.message : 'Unknown'}`,
     )
     return NextResponse.json(
-      { success: false, message: 'Erro ao processar sua solicitacao. Tente novamente.' },
+      { success: false, message: 'Erro ao processar sua solicitação. Tente novamente.' },
       { status: 500 },
     )
   }

@@ -1,5 +1,5 @@
 // @ciclo/email - Email Transacional
-// Story E4.1: Confirmacao, Lembretes e Feedback
+// Story E4.1: Confirmação, Lembretes e Feedback
 
 // Client
 export { sendEmail } from './client'

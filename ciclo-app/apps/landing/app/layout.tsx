@@ -16,13 +16,13 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
-  title: 'Ciclo das Estacoes | Autocuidado Ciclico para Terapeutas',
+  title: 'Ciclo das Estações | Autocuidado Ciclico para Terapeutas',
   description:
-    'O primeiro programa de autocuidado ciclico do Brasil. Eventos sazonais, comunidade e jornada de transformacao para terapeutas holisticos.',
+    'O primeiro programa de autocuidado cíclico do Brasil. Eventos sazonais, comunidade e jornada de transformação para terapeutas holísticos.',
   openGraph: {
     type: 'website',
     locale: 'pt_BR',
-    siteName: 'Ciclo das Estacoes',
+    siteName: 'Ciclo das Estações',
   },
 }
 

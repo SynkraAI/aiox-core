@@ -1,12 +1,12 @@
 /**
- * E2E Test: Visualizacao de Evento Publico — Story E4.6 (AC-2)
+ * E2E Test: Visualização de Evento Publico — Story E4.6 (AC-2)
  *
  * Navega para /eventos/[slug], verifica hero, ingressos e cronograma.
  */
 import { test, expect } from '@playwright/test'
 
-test.describe('Visualizacao de Evento Publico', () => {
-  test('deve exibir pagina do evento com hero, ingressos e cronograma', async ({ page }) => {
+test.describe('Visualização de Evento Publico', () => {
+  test('deve exibir página do evento com hero, ingressos e cronograma', async ({ page }) => {
     // Navigate to eventos listing
     await page.goto('/eventos')
     await expect(page).toHaveTitle(/Eventos/)
@@ -31,7 +31,7 @@ test.describe('Visualizacao de Evento Publico', () => {
 
       // AC-2: Verify schedule/cronograma
       const schedule = page.locator('text=Cronograma').first()
-        .or(page.locator('text=Programacao').first())
+        .or(page.locator('text=Programação').first())
         .or(page.locator('text=Atividades').first())
       await expect(schedule).toBeVisible()
     } else {
@@ -55,7 +55,7 @@ test.describe('Visualizacao de Evento Publico', () => {
     }
   })
 
-  test('deve exibir FAQ se disponivel', async ({ page }) => {
+  test('deve exibir FAQ se disponível', async ({ page }) => {
     await page.goto('/eventos')
 
     const eventLink = page.locator('a[href*="/eventos/"]').first()

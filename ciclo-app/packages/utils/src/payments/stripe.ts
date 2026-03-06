@@ -59,7 +59,7 @@ export class StripeGateway implements PaymentGateway {
       amount: String(amount), // Stripe expects smallest currency unit (centavos for BRL)
       currency: 'brl',
       'metadata[registration_id]': registrationId,
-      description: `Inscricao ${registrationId}`,
+      description: `Inscrição ${registrationId}`,
       'automatic_payment_methods[enabled]': 'true',
     })
 

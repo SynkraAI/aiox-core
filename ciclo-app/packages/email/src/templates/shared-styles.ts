@@ -1,12 +1,12 @@
 /**
  * Shared email styles and layout components
- * Story E4.1 — Base Triade branding for all email templates
+ * Story E4.1 — Base Tríade branding for all email templates
  *
  * All styles are inline CSS for maximum email client compatibility.
  */
 
 export const BRAND = {
-  name: 'Ciclo das Estacoes',
+  name: 'Ciclo das Estações',
   tagline: 'Reconecte-se com os ciclos da natureza',
   colors: {
     primary: '#2D5016',     // Forest green
@@ -18,7 +18,7 @@ export const BRAND = {
     border: '#E8E0D0',      // Light tan
     white: '#FFFFFF',
   },
-  footer: 'iAi - ECOssistema Base Triade',
+  footer: 'iAi - ECOssistema Base Tríade',
 } as const
 
 export function emailLayout(content: string, preheader?: string): string {
@@ -28,7 +28,7 @@ export function emailLayout(content: string, preheader?: string): string {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ciclo das Estacoes</title>
+  <title>Ciclo das Estações</title>
   <!--[if mso]>
   <noscript>
     <xml>
@@ -51,7 +51,7 @@ export function emailLayout(content: string, preheader?: string): string {
           <tr>
             <td style="background-color: ${BRAND.colors.primary}; padding: 24px 32px; text-align: center;">
               <h1 style="margin: 0; font-size: 24px; font-weight: 700; color: ${BRAND.colors.white}; letter-spacing: 0.5px;">
-                🌿 Ciclo das Estacoes
+                🌿 Ciclo das Estações
               </h1>
               <p style="margin: 4px 0 0; font-size: 13px; color: ${BRAND.colors.accent}; letter-spacing: 1px;">
                 ${BRAND.tagline}
@@ -73,7 +73,7 @@ export function emailLayout(content: string, preheader?: string): string {
                 ${BRAND.footer}
               </p>
               <p style="margin: 0; font-size: 11px; color: ${BRAND.colors.textLight};">
-                Este email foi enviado porque voce esta inscrito em um evento Ciclo das Estacoes.
+                Este email foi enviado porque você esta inscrito em um evento Ciclo das Estações.
               </p>
             </td>
           </tr>

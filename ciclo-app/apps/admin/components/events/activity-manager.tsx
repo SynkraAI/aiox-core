@@ -91,18 +91,18 @@ function validateForm(form: ActivityFormData): FormErrors {
   const errors: FormErrors = {}
 
   if (!form.title.trim()) {
-    errors.title = 'Titulo e obrigatorio'
+    errors.title = 'Título é obrigatório'
   } else if (form.title.length > 150) {
-    errors.title = 'Titulo deve ter no maximo 150 caracteres'
+    errors.title = 'Título deve ter no máximo 150 caracteres'
   }
 
   if (!form.time) {
-    errors.time = 'Horario e obrigatorio'
+    errors.time = 'Horário é obrigatório'
   }
 
   const duration = parseInt(form.durationMinutes, 10)
   if (!form.durationMinutes || isNaN(duration) || duration < 1) {
-    errors.durationMinutes = 'Duracao deve ser no minimo 1 minuto'
+    errors.durationMinutes = 'Duração deve ser no mínimo 1 minuto'
   }
 
   return errors
@@ -143,10 +143,10 @@ function ActivityForm({
 
   return (
     <div className="space-y-4 rounded-lg border border-dashed border-gray-300 p-4">
-      {/* Horario */}
+      {/* Horário */}
       <div>
         <label className="block text-sm font-medium text-gray-700">
-          Horario *
+          Horário *
         </label>
         <input
           type="datetime-local"
@@ -159,10 +159,10 @@ function ActivityForm({
         )}
       </div>
 
-      {/* Titulo */}
+      {/* Título */}
       <div>
         <label className="block text-sm font-medium text-gray-700">
-          Titulo *
+          Título *
         </label>
         <Input
           value={form.title}
@@ -175,24 +175,24 @@ function ActivityForm({
         )}
       </div>
 
-      {/* Descricao */}
+      {/* Descrição */}
       <div>
         <label className="block text-sm font-medium text-gray-700">
-          Descricao
+          Descrição
         </label>
         <textarea
           value={form.description}
           onChange={(e) => update('description', e.target.value)}
-          placeholder="Descricao opcional da atividade"
+          placeholder="Descrição opcional da atividade"
           rows={3}
           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
         />
       </div>
 
-      {/* Duracao */}
+      {/* Duração */}
       <div>
         <label className="block text-sm font-medium text-gray-700">
-          Duracao (minutos) *
+          Duração (minutos) *
         </label>
         <Input
           type="number"

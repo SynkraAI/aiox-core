@@ -65,18 +65,18 @@ export async function createRegistration(
   try {
     // Validate CPF server-side
     if (!validateCPF(input.cpf)) {
-      return { success: false, error: 'CPF invalido.' }
+      return { success: false, error: 'CPF inválido.' }
     }
 
     // Validate required fields
     if (!input.name || !input.email || !input.phone) {
-      return { success: false, error: 'Todos os campos obrigatorios devem ser preenchidos.' }
+      return { success: false, error: 'Todos os campos obrigatórios devem ser preenchidos.' }
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(input.email)) {
-      return { success: false, error: 'Email invalido.' }
+      return { success: false, error: 'Email inválido.' }
     }
 
     // Get current session (may be null for guest checkout)
@@ -91,7 +91,7 @@ export async function createRegistration(
       })
 
       if (!event) {
-        throw new Error('Evento nao encontrado.')
+        throw new Error('Evento não encontrado.')
       }
 
       // 2. Check ticket availability with row-level lock
@@ -100,11 +100,11 @@ export async function createRegistration(
       })
 
       if (!ticketType) {
-        throw new Error('Tipo de ingresso nao encontrado.')
+        throw new Error('Tipo de ingresso não encontrado.')
       }
 
       if (ticketType.eventId !== event.id) {
-        throw new Error('Ingresso nao pertence a este evento.')
+        throw new Error('Ingresso não pertence a este evento.')
       }
 
       // Check availability (AC-8)
@@ -222,7 +222,7 @@ export async function createRegistration(
     return result
   } catch (error) {
     const message =
-      error instanceof Error ? error.message : 'Erro ao criar inscricao.'
+      error instanceof Error ? error.message : 'Erro ao criar inscrição.'
     return { success: false, error: message }
   }
 }
@@ -237,7 +237,7 @@ export async function joinWaitlist(
   try {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(input.email)) {
-      return { success: false, error: 'Email invalido.' }
+      return { success: false, error: 'Email inválido.' }
     }
 
     // Upsert lead with waitlist source

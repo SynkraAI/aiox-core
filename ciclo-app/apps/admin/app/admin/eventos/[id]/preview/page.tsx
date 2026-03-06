@@ -11,7 +11,7 @@ import {
 
 export const metadata: Metadata = {
   title: 'Preview Evento',
-  description: 'Visualizacao do evento como sera exibido publicamente',
+  description: 'Visualização do evento como sera exibido publicamente',
 }
 
 interface PreviewEventPageProps {
@@ -112,7 +112,7 @@ export default async function PreviewEventPage({ params }: PreviewEventPageProps
 
           {event.includedPractices.length > 0 && (
             <div>
-              <h2 className="mb-2 text-lg font-semibold text-gray-900">Praticas Incluidas</h2>
+              <h2 className="mb-2 text-lg font-semibold text-gray-900">Práticas Incluídas</h2>
               <div className="flex flex-wrap gap-2">
                 {event.includedPractices.map((practice, i) => (
                   <Badge key={i} variant="secondary">

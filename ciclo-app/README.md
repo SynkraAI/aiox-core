@@ -1,6 +1,6 @@
-# Ciclo das Estacoes
+# Ciclo das Estações
 
-PWA Full-Stack para gestao de eventos sazonais de autocuidado da Base Triade.
+PWA Full-Stack para gestão de eventos sazonais de autocuidado da Base Tríade.
 
 ## Stack
 
@@ -58,13 +58,13 @@ pnpm dev
 
 ### Comandos
 
-| Comando | Descricao |
+| Comando | Descrição |
 |---------|-----------|
 | `pnpm dev` | Inicia todas as apps em modo desenvolvimento |
-| `pnpm build` | Build de producao (paralelo via Turborepo) |
+| `pnpm build` | Build de produção (paralelo via Turborepo) |
 | `pnpm lint` | Executa ESLint em todos os packages |
 | `pnpm typecheck` | Verifica tipos TypeScript |
-| `pnpm format` | Formata codigo com Prettier |
+| `pnpm format` | Formata código com Prettier |
 
 ### Portas
 
@@ -76,7 +76,7 @@ pnpm dev
 
 ## Variaveis de Ambiente
 
-Veja `.env.example` para a lista completa. Variaveis obrigatorias:
+Veja `.env.example` para a lista completa. Variaveis obrigatórias:
 
 - `DATABASE_URL` — Connection string pooled do Supabase (runtime)
 - `DIRECT_URL` — Connection string direct do Supabase (migrations)
@@ -85,4 +85,4 @@ Veja `.env.example` para a lista completa. Variaveis obrigatorias:
 
 ---
 
-iAi . ECOssistema Base Triade(TM)
+iAi . ECOssistema Base Tríade(TM)

@@ -102,16 +102,16 @@ async function KpiCards({ period }: { period: DashboardPeriod }) {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       <KpiCard
-        title="Inscricoes Confirmadas"
+        title="Inscrições Confirmadas"
         value={kpis.totalRegistrations.toString()}
         icon={<UsersIcon />}
-        description="no periodo"
+        description="no período"
       />
       <KpiCard
         title="Receita Total"
         value={formatCurrency(kpis.totalRevenue)}
         icon={<CurrencyIcon />}
-        description="no periodo"
+        description="no período"
       />
       <KpiCard
         title="Ocupacao Media"
@@ -123,7 +123,7 @@ async function KpiCards({ period }: { period: DashboardPeriod }) {
         title="Leads Captados"
         value={kpis.totalLeads.toString()}
         icon={<EnvelopeIcon />}
-        description="no periodo"
+        description="no período"
       />
     </div>
   )
@@ -191,7 +191,7 @@ async function UpcomingEventsCard() {
     <Card className="border-base-gold/10">
       <CardHeader>
         <CardTitle className="text-base font-heading font-semibold text-base-dark">
-          Proximos Eventos
+          Próximos Eventos
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -249,7 +249,7 @@ async function RecentRegistrationsCard() {
     <Card className="border-base-gold/10">
       <CardHeader>
         <CardTitle className="text-base font-heading font-semibold text-base-dark">
-          Ultimas Inscricoes
+          Ultimas Inscrições
         </CardTitle>
       </CardHeader>
       <CardContent>
@@ -293,7 +293,7 @@ export default async function AdminDashboardPage({ searchParams }: AdminDashboar
             Dashboard
           </h1>
           <p className="mt-1 text-sm text-base-dark/60">
-            Visao geral do Ciclo das Estacoes
+            Visao geral do Ciclo das Estações
           </p>
         </div>
         <Suspense fallback={<Skeleton className="h-9 w-64 bg-base-dark/10" />}>

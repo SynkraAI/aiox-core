@@ -4,10 +4,10 @@ export default function LandingPage() {
   return (
     <div className="flex flex-col items-center justify-center py-24">
       <h1 className="text-5xl font-heading text-base-dark text-center">
-        Ciclo das Estacoes
+        Ciclo das Estações
       </h1>
       <p className="mt-6 max-w-2xl text-center text-xl text-base-dark/70 font-body">
-        O primeiro programa de autocuidado ciclico do Brasil.
+        O primeiro programa de autocuidado cíclico do Brasil.
         Reconecte-se com os ritmos da natureza.
       </p>
       <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -17,7 +17,7 @@ export default function LandingPage() {
         </div>
         <div className="rounded-2xl bg-[#FFD700]/20 p-6 text-center">
           <span className="text-2xl">☀️</span>
-          <p className="mt-2 text-sm font-body">Verao</p>
+          <p className="mt-2 text-sm font-body">Verão</p>
         </div>
         <div className="rounded-2xl bg-[#D2691E]/20 p-6 text-center">
           <span className="text-2xl">🍂</span>

@@ -100,7 +100,7 @@ export async function createTestEvent(): Promise<TestEvent> {
     data: {
       slug,
       name: `${E2E_PREFIX}Evento Outono`,
-      subtitle: 'Retiro de reconexao com a natureza',
+      subtitle: 'Retiro de reconexão com a natureza',
       season: Season.AUTUMN,
       startDate,
       endDate,
@@ -108,7 +108,7 @@ export async function createTestEvent(): Promise<TestEvent> {
       capacity: 30,
       isPublished: true,
       description: '<p>Um retiro imersivo para conectar com os ciclos da natureza.</p>',
-      includedPractices: ['Yoga', 'Meditacao', 'Ayurveda'],
+      includedPractices: ['Yoga', 'Meditação', 'Ayurveda'],
       ticketTypes: {
         create: [
           {
@@ -118,7 +118,7 @@ export async function createTestEvent(): Promise<TestEvent> {
             earlyBirdPrice: 99000, // R$ 990,00
             earlyBirdDeadline: startDate,
             quantityAvailable: 20,
-            includes: ['Hospedagem', 'Alimentacao', 'Todas as praticas'],
+            includes: ['Hospedagem', 'Alimentação', 'Todas as práticas'],
           },
           {
             name: 'Day Use',
@@ -127,21 +127,21 @@ export async function createTestEvent(): Promise<TestEvent> {
             earlyBirdPrice: 28000, // R$ 280,00
             earlyBirdDeadline: startDate,
             quantityAvailable: 10,
-            includes: ['Alimentacao diurna', 'Praticas do dia'],
+            includes: ['Alimentação diurna', 'Práticas do dia'],
           },
         ],
       },
       activities: {
         create: [
           {
-            title: 'Abertura do Circulo',
-            description: 'Cerimonia de abertura e intencoes',
+            title: 'Abertura do Círculo',
+            description: 'Cerimônia de abertura e intenções',
             time: new Date(startDate.getTime() + 10 * 60 * 60 * 1000), // 10h
             durationMinutes: 90,
             order: 1,
           },
           {
-            title: 'Pratica de Yoga',
+            title: 'Prática de Yoga',
             description: 'Yoga restaurativo com foco sazonal',
             time: new Date(startDate.getTime() + 14 * 60 * 60 * 1000), // 14h
             durationMinutes: 60,
@@ -152,8 +152,8 @@ export async function createTestEvent(): Promise<TestEvent> {
       faqs: {
         create: [
           {
-            question: 'Preciso ter experiencia previa?',
-            answer: 'Nao, o retiro e aberto a todos os niveis.',
+            question: 'Preciso ter experiência prévia?',
+            answer: 'Nao, o retiro e aberto a todos os níveis.',
             order: 1,
           },
           {

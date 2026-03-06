@@ -6,10 +6,10 @@ import { requireAuth } from '@ciclo/auth'
  * POST /api/registrations/[id]/transfer
  * Story E3.5 - AC-6
  *
- * Transfere inscricao para outra pessoa.
+ * Transfere inscrição para outra pessoa.
  * Cria novo usuario (ou vincula existente), cria nova Registration,
  * marca original como TRANSFERRED.
- * Sem custo. Transferencia sempre permitida (politica default).
+ * Sem custo. Transferência sempre permitida (política default).
  */
 export async function POST(
   request: Request,
@@ -25,7 +25,7 @@ export async function POST(
 
     if (!name || !email) {
       return NextResponse.json(
-        { error: 'Nome e email do novo participante sao obrigatorios.' },
+        { error: 'Nome e email do novo participante são obrigatórios.' },
         { status: 400 }
       )
     }
@@ -33,12 +33,12 @@ export async function POST(
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { error: 'Email invalido.' },
+        { error: 'Email inválido.' },
         { status: 400 }
       )
     }
 
-    // 1. Buscar inscricao original
+    // 1. Buscar inscrição original
     const registration = await prisma.registration.findUnique({
       where: { id: registrationId },
       include: {
@@ -58,7 +58,7 @@ export async function POST(
 
     if (!registration) {
       return NextResponse.json(
-        { error: 'Inscricao nao encontrada.' },
+        { error: 'Inscrição não encontrada.' },
         { status: 404 }
       )
     }
@@ -69,49 +69,49 @@ export async function POST(
 
     if (!isOwner && !isAdmin) {
       return NextResponse.json(
-        { error: 'Acesso negado. Voce so pode transferir suas proprias inscricoes.' },
+        { error: 'Acesso negado. Você só pode transferir suas próprias inscrições.' },
         { status: 403 }
       )
     }
 
-    // 3. Verificar se inscricao pode ser transferida
+    // 3. Verificar se inscrição pode ser transferida
     if (registration.status === 'CANCELLED' || registration.status === 'TRANSFERRED') {
       return NextResponse.json(
-        { error: `Inscricao com status ${registration.status} nao pode ser transferida.` },
+        { error: `Inscrição com status ${registration.status} não pode ser transferida.` },
         { status: 400 }
       )
     }
 
     if (registration.status === 'REFUNDED') {
       return NextResponse.json(
-        { error: 'Inscricao reembolsada nao pode ser transferida.' },
+        { error: 'Inscrição reembolsada não pode ser transferida.' },
         { status: 400 }
       )
     }
 
-    // 4. Verificar politica de transferencia
+    // 4. Verificar política de transferência
     if (registration.event.cancellationPolicy && !registration.event.cancellationPolicy.transferAllowed) {
-      // Checar politica global como fallback
+      // Checar política global como fallback
       const globalPolicy = await prisma.cancellationPolicy.findFirst({
         where: { eventId: null, isActive: true },
       })
       if (globalPolicy && !globalPolicy.transferAllowed) {
         return NextResponse.json(
-          { error: 'Transferencia nao permitida pela politica de cancelamento.' },
+          { error: 'Transferência não permitida pela política de cancelamento.' },
           { status: 400 }
         )
       }
     }
 
-    // 5. Nao pode transferir para si mesmo
+    // 5. Não pode transferir para si mesmo
     if (email.toLowerCase() === registration.user.email.toLowerCase()) {
       return NextResponse.json(
-        { error: 'Nao e possivel transferir a inscricao para voce mesmo.' },
+        { error: 'Não e possivel transferir a inscrição para você mesmo.' },
         { status: 400 }
       )
     }
 
-    // 6. Transaction: criar novo usuario + nova inscricao + marcar original
+    // 6. Transaction: criar novo usuario + nova inscrição + marcar original
     const now = new Date()
 
     const result = await prisma.$transaction(async (tx) => {
@@ -130,7 +130,7 @@ export async function POST(
         })
       }
 
-      // Verificar se target user ja tem inscricao para este evento
+      // Verificar se target user já tem inscrição para este evento
       const existingRegistration = await tx.registration.findFirst({
         where: {
           userId: targetUser.id,
@@ -140,10 +140,10 @@ export async function POST(
       })
 
       if (existingRegistration) {
-        throw new Error('O novo participante ja possui uma inscricao ativa para este evento.')
+        throw new Error('O novo participante já possui uma inscrição ativa para este evento.')
       }
 
-      // Criar nova inscricao com referencia ao original
+      // Criar nova inscrição com referencia ao original
       const newRegistration = await tx.registration.create({
         data: {
           userId: targetUser.id,
@@ -156,7 +156,7 @@ export async function POST(
         },
       })
 
-      // Marcar inscricao original como TRANSFERRED
+      // Marcar inscrição original como TRANSFERRED
       await tx.registration.update({
         where: { id: registrationId },
         data: {
@@ -192,14 +192,14 @@ export async function POST(
 
     return NextResponse.json({
       success: true,
-      message: `Inscricao transferida com sucesso para ${name} (${email}).`,
+      message: `Inscrição transferida com sucesso para ${name} (${email}).`,
       newRegistrationId: result.newRegistrationId,
     })
   } catch (error) {
-    if (error instanceof Error && error.message.includes('Nao autorizado')) {
+    if (error instanceof Error && error.message.includes('Não autorizado')) {
       return NextResponse.json({ error: error.message }, { status: 401 })
     }
-    if (error instanceof Error && error.message.includes('ja possui')) {
+    if (error instanceof Error && error.message.includes('já possui')) {
       return NextResponse.json({ error: error.message }, { status: 400 })
     }
     console.error('[TRANSFER_REGISTRATION]', error)

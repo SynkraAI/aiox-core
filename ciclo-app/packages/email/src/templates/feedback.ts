@@ -1,6 +1,6 @@
 /**
  * Feedback Email Template
- * Story E4.1 — AC-7: Link para formulario de depoimento, pergunta de satisfacao
+ * Story E4.1 — AC-7: Link para formulário de depoimento, pergunta de satisfacao
  */
 
 import { emailLayout, buttonBlock, divider, BRAND } from './shared-styles'
@@ -23,14 +23,14 @@ export function renderFeedbackEmail(data: FeedbackEmailData): EmailRenderResult 
 
   const content = `
     <h2 style="margin: 0 0 8px; font-size: 22px; color: ${BRAND.colors.primary};">
-      Como foi sua experiencia? 🌿
+      Como foi sua experiência? 🌿
     </h2>
     <p style="margin: 0 0 24px; font-size: 16px; color: ${BRAND.colors.text}; line-height: 1.6;">
-      Ola, <strong>${escapeHtml(data.participantName)}</strong>! Esperamos que voce tenha tido uma experiencia transformadora no <strong>${escapeHtml(data.eventName)}</strong>.
+      Ola, <strong>${escapeHtml(data.participantName)}</strong>! Esperamos que você tenha tido uma experiência transformadora no <strong>${escapeHtml(data.eventName)}</strong>.
     </p>
 
     <p style="margin: 0 0 16px; font-size: 14px; color: ${BRAND.colors.text}; line-height: 1.6;">
-      Sua opiniao e muito importante para nos. Avalie sua experiencia clicando em uma estrela:
+      Sua opiniao e muito importante para nos. Avalie sua experiência clicando em uma estrela:
     </p>
 
     <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -44,7 +44,7 @@ export function renderFeedbackEmail(data: FeedbackEmailData): EmailRenderResult 
     ${divider()}
 
     <p style="margin: 0 0 8px; font-size: 14px; color: ${BRAND.colors.text}; line-height: 1.6;">
-      Voce tambem pode deixar um depoimento sobre sua vivencia. Compartilhe o que sentiu, aprendeu e levou consigo:
+      Você também pode deixar um depoimento sobre sua vivencia. Compartilhe o que sentiu, aprendeu e levou consigo:
     </p>
 
     ${buttonBlock('Deixar Depoimento', data.testimonialUrl)}
@@ -54,13 +54,13 @@ export function renderFeedbackEmail(data: FeedbackEmailData): EmailRenderResult 
     </p>
   `
 
-  const html = emailLayout(content, `Como foi o ${data.eventName}? Deixe sua avaliacao`)
+  const html = emailLayout(content, `Como foi o ${data.eventName}? Deixe sua avaliação`)
 
-  const text = `COMO FOI SUA EXPERIENCIA? - Ciclo das Estacoes
+  const text = `COMO FOI SUA EXPERIENCIA? - Ciclo das Estações
 
-Ola, ${data.participantName}! Esperamos que voce tenha tido uma experiencia transformadora no ${data.eventName}.
+Ola, ${data.participantName}! Esperamos que você tenha tido uma experiência transformadora no ${data.eventName}.
 
-Avalie sua experiencia (1-5 estrelas): ${data.ratingUrl}
+Avalie sua experiência (1-5 estrelas): ${data.ratingUrl}
 
 Deixe seu depoimento: ${data.testimonialUrl}
 

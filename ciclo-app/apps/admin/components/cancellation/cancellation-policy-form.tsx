@@ -50,14 +50,14 @@ export function CancellationPolicyForm({
     setIsLoading(true)
     setMessage(null)
 
-    // Validacoes basicas
+    // Validações basicas
     if (earlyDays <= midDays) {
       setMessage({ type: 'error', text: 'Prazo 1 deve ser maior que Prazo 2.' })
       setIsLoading(false)
       return
     }
     if (midDays < 0 || earlyDays < 0) {
-      setMessage({ type: 'error', text: 'Os prazos devem ser numeros positivos.' })
+      setMessage({ type: 'error', text: 'Os prazos devem ser números positivos.' })
       setIsLoading(false)
       return
     }
@@ -89,7 +89,7 @@ export function CancellationPolicyForm({
         setMessage({ type: 'error', text: result.error ?? 'Erro ao salvar.' })
       }
     } catch {
-      setMessage({ type: 'error', text: 'Erro inesperado ao salvar a politica.' })
+      setMessage({ type: 'error', text: 'Erro inesperado ao salvar a política.' })
     } finally {
       setIsLoading(false)
     }
@@ -103,7 +103,7 @@ export function CancellationPolicyForm({
     try {
       const result = await removeEventPolicy(eventId)
       if (result.success) {
-        setMessage({ type: 'success', text: 'Override removido. Evento usara a politica global.' })
+        setMessage({ type: 'success', text: 'Override removido. Evento usara a política global.' })
         router.refresh()
       } else {
         setMessage({ type: 'error', text: result.error ?? 'Erro ao remover override.' })
@@ -120,12 +120,12 @@ export function CancellationPolicyForm({
       {/* Faixa 1: Antecedencia alta */}
       <div className="rounded-lg border border-gray-200 bg-white p-4">
         <h3 className="text-sm font-semibold text-gray-700 mb-3">
-          Faixa 1: Cancelamento com antecedencia
+          Faixa 1: Cancelamento com antecedência
         </h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="early-days" className="block text-sm text-gray-600">
-              Dias antes do evento (minimo)
+              Dias antes do evento (mínimo)
             </label>
             <input
               id="early-days"
@@ -156,12 +156,12 @@ export function CancellationPolicyForm({
       {/* Faixa 2: Antecedencia media */}
       <div className="rounded-lg border border-gray-200 bg-white p-4">
         <h3 className="text-sm font-semibold text-gray-700 mb-3">
-          Faixa 2: Cancelamento com antecedencia media
+          Faixa 2: Cancelamento com antecedência media
         </h3>
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label htmlFor="mid-days" className="block text-sm text-gray-600">
-              Dias antes do evento (minimo)
+              Dias antes do evento (mínimo)
             </label>
             <input
               id="mid-days"
@@ -197,7 +197,7 @@ export function CancellationPolicyForm({
         <p className="text-sm text-gray-400">0% de reembolso (automatico)</p>
       </div>
 
-      {/* Transferencia */}
+      {/* Transferência */}
       <div className="flex items-center gap-3">
         <input
           id="transfer-allowed"
@@ -207,7 +207,7 @@ export function CancellationPolicyForm({
           className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
         />
         <label htmlFor="transfer-allowed" className="text-sm text-gray-700">
-          Permitir transferencia de inscricao (sem custo)
+          Permitir transferência de inscrição (sem custo)
         </label>
       </div>
 

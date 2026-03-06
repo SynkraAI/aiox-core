@@ -25,7 +25,7 @@ const SEASONS: Season[] = ['primavera', 'verao', 'outono', 'inverno']
 
 const SEASON_LABELS: Record<Season, string> = {
   primavera: 'Primavera',
-  verao: 'Verao',
+  verao: 'Verão',
   outono: 'Outono',
   inverno: 'Inverno',
 }
@@ -40,16 +40,16 @@ export default function DesignSystemPage() {
           {/* Header */}
           <header className="space-y-4">
             <h1 className="font-heading text-3xl font-bold text-foreground sm:text-4xl">
-              Design System — Ciclo das Estacoes
+              Design System — Ciclo das Estações
             </h1>
             <p className="font-body text-muted-foreground">
-              Paleta sazonal dinamica, componentes core e tipografia.
+              Paleta sazonal dinâmica, componentes core e tipografia.
             </p>
           </header>
 
           {/* Season Switcher */}
           <section className="space-y-4">
-            <h2 className="font-heading text-2xl font-semibold">Seletor de Estacao</h2>
+            <h2 className="font-heading text-2xl font-semibold">Seletor de Estação</h2>
             <div className="flex flex-wrap gap-3">
               {SEASONS.map((season) => (
                 <button
@@ -181,11 +181,11 @@ export default function DesignSystemPage() {
             <Card className="max-w-sm">
               <CardHeader>
                 <CardTitle>Ciclo da {SEASON_LABELS[activeSeason]}</CardTitle>
-                <CardDescription>Imersao sazonal de autocuidado</CardDescription>
+                <CardDescription>Imersão sazonal de autocuidado</CardDescription>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground">
-                  Programa de reconexao com a natureza e autocuidado ciclico.
+                  Programa de reconexão com a natureza e autocuidado cíclico.
                 </p>
               </CardContent>
             </Card>
@@ -222,22 +222,22 @@ export default function DesignSystemPage() {
             <h2 className="font-heading text-2xl font-semibold">EventCard</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               <EventCard
-                title="Renascenca"
+                title="Renascença"
                 date="18 de Outubro 2026"
                 element="Madeira"
-                status="disponivel"
+                status="disponível"
                 priceFrom={287}
               />
               <EventCard
-                title="Solsticio de Inverno"
+                title="Solstício de Inverno"
                 date="21 de Junho 2026"
-                element="Agua"
+                element="Água"
                 status="esgotado"
                 priceFrom={287}
               />
               <EventCard
-                title="Equinocio de Outono"
-                date="20 de Marco 2026"
+                title="Equinócio de Outono"
+                date="20 de Março 2026"
                 element="Metal"
                 status="em-breve"
                 priceFrom={287}
@@ -256,7 +256,7 @@ export default function DesignSystemPage() {
               />
               <FacilitatorAvatar
                 name="Milena Koch"
-                title="Terapeuta Holistica"
+                title="Terapeuta Holística"
                 specialty="Processos Regenerativos"
               />
               <FacilitatorAvatar
@@ -269,7 +269,7 @@ export default function DesignSystemPage() {
 
           {/* Footer */}
           <footer className="border-t border-border pt-8 text-center text-xs text-muted-foreground">
-            Design System v1.0 — Ciclo das Estacoes — iAi &middot; ECOssistema Base Triade&trade;
+            Design System v1.0 — Ciclo das Estações — iAi &middot; ECOssistema Base Tríade&trade;
           </footer>
         </div>
       </div>

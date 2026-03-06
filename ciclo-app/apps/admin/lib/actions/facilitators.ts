@@ -113,7 +113,7 @@ export async function deleteFacilitator(id: string): Promise<FacilitatorActionRe
         .join(', ')
       return {
         success: false,
-        error: `Nao e possivel excluir. Facilitador associado a atividades em eventos futuros: ${eventNames}`,
+        error: `Não e possivel excluir. Facilitador associado a atividades em eventos futuros: ${eventNames}`,
       }
     }
 
@@ -201,7 +201,7 @@ export async function toggleFeatured(id: string): Promise<FacilitatorActionResul
     })
 
     if (!facilitator) {
-      return { success: false, error: 'Facilitador nao encontrado' }
+      return { success: false, error: 'Facilitador não encontrado' }
     }
 
     await prisma.facilitator.update({

@@ -23,7 +23,7 @@ export async function CancellationPolicyDisplay({
   eventId: _eventId,
   eventPolicy,
 }: CancellationPolicyDisplayProps) {
-  // Se evento nao tem politica propria, busca global
+  // Se evento não tem política própria, busca global
   let policy = eventPolicy
 
   if (!policy) {
@@ -51,7 +51,7 @@ export async function CancellationPolicyDisplay({
       <details className="group rounded-lg border border-border bg-card">
         <summary className="cursor-pointer px-4 py-3 font-heading text-xl font-semibold text-foreground hover:bg-muted/50 [&::-webkit-details-marker]:hidden">
           <span className="flex items-center justify-between">
-            <span id="cancelamento-heading">Politica de Cancelamento</span>
+            <span id="cancelamento-heading">Política de Cancelamento</span>
             <span
               className="ml-2 text-muted-foreground transition-transform group-open:rotate-180"
               aria-hidden="true"
@@ -66,7 +66,7 @@ export async function CancellationPolicyDisplay({
           ) : (
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex justify-between">
-                <span>Cancelamento com +{policy.earlyDaysThreshold} dias de antecedencia:</span>
+                <span>Cancelamento com +{policy.earlyDaysThreshold} dias de antecedência:</span>
                 <span className="font-medium text-foreground">{policy.earlyRefundPercent}% de reembolso</span>
               </li>
               <li className="flex justify-between">
@@ -79,7 +79,7 @@ export async function CancellationPolicyDisplay({
               </li>
               {policy.transferAllowed && (
                 <li className="mt-2 rounded-md bg-muted/50 px-3 py-2">
-                  Transferencia de inscricao para outra pessoa: <strong>sempre permitida, sem custo</strong>.
+                  Transferência de inscrição para outra pessoa: <strong>sempre permitida, sem custo</strong>.
                 </li>
               )}
             </ul>

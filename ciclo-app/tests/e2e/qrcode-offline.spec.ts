@@ -1,12 +1,12 @@
 /**
  * E2E Test: QR Code Offline — Story E4.6 (AC-5)
  *
- * Verifica QR Code disponivel e funcional em modo offline.
+ * Verifica QR Code disponível e funcional em modo offline.
  */
 import { test, expect } from '@playwright/test'
 
 test.describe('QR Code Offline', () => {
-  test('deve exibir QR Code na pagina de inscricoes', async ({ page }) => {
+  test('deve exibir QR Code na página de inscrições', async ({ page }) => {
     // Login first
     await page.goto('/login')
       .catch(() => page.goto('/auth/signin'))
@@ -16,7 +16,7 @@ test.describe('QR Code Offline', () => {
       .or(page.locator('input[name="email"]').first())
 
     if (!(await emailField.isVisible())) {
-      test.skip(true, 'Pagina de login nao encontrada')
+      test.skip(true, 'Pagina de login não encontrada')
       return
     }
 
@@ -34,7 +34,7 @@ test.describe('QR Code Offline', () => {
     await page.waitForTimeout(3000)
 
     // Navigate to user inscriptions page
-    await page.goto('/minha-conta/inscricoes')
+    await page.goto('/minha-conta/inscrições')
     await page.waitForTimeout(2000)
 
     // Check if user has any inscriptions
@@ -58,8 +58,8 @@ test.describe('QR Code Offline', () => {
         const context = page.context()
         await context.setOffline(true)
 
-        // Navigate to inscricoes page while offline
-        await page.goto('/minha-conta/inscricoes').catch(() => {
+        // Navigate to inscrições page while offline
+        await page.goto('/minha-conta/inscrições').catch(() => {
           // Expected to fail or show cached version
         })
 
@@ -71,7 +71,7 @@ test.describe('QR Code Offline', () => {
           .or(page.locator('text=/QR Code/i').first())
 
         // In offline mode, either the cached page shows or offline fallback
-        const offlinePage = page.locator('text=/offline|sem conexao|indisponivel/i').first()
+        const offlinePage = page.locator('text=/offline|sem conexão|indisponível/i').first()
         const isQrVisible = await offlineQr.isVisible().catch(() => false)
         const isOfflinePage = await offlinePage.isVisible().catch(() => false)
 
@@ -82,7 +82,7 @@ test.describe('QR Code Offline', () => {
       }
     } else {
       // No inscriptions — verify empty state
-      const emptyMsg = page.locator('text=/nenhuma inscricao|sem inscricoes/i').first()
+      const emptyMsg = page.locator('text=/nenhuma inscrição|sem inscrições/i').first()
       if (await emptyMsg.isVisible()) {
         await expect(emptyMsg).toBeVisible()
       }

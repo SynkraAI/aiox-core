@@ -34,18 +34,18 @@ export function CancelRegistrationForm({
       const data = await response.json()
 
       if (!response.ok) {
-        setError(data.error ?? 'Erro ao cancelar inscricao.')
+        setError(data.error ?? 'Erro ao cancelar inscrição.')
         return
       }
 
       setSuccess(true)
-      // Redirecionar apos 2 segundos
+      // Redirecionar após 2 segundos
       setTimeout(() => {
-        router.push('/minha-conta/inscricoes')
+        router.push('/minha-conta/inscrições')
         router.refresh()
       }, 2000)
     } catch {
-      setError('Erro de conexao. Tente novamente.')
+      setError('Erro de conexão. Tente novamente.')
     } finally {
       setIsLoading(false)
     }
@@ -55,9 +55,9 @@ export function CancelRegistrationForm({
     return (
       <div className="rounded-md bg-green-50 p-4">
         <p className="text-sm font-medium text-green-800">
-          Inscricao cancelada com sucesso.
+          Inscrição cancelada com sucesso.
           {refundAmount > 0 &&
-            ` Reembolso de ${formatCurrency(refundAmount)} sera processado pelo administrador.`}
+            ` Reembolso de ${formatCurrency(refundAmount)} será processado pelo administrador.`}
         </p>
         <p className="text-sm text-green-600 mt-1">Redirecionando...</p>
       </div>
@@ -71,7 +71,7 @@ export function CancelRegistrationForm({
         onClick={() => setIsConfirming(true)}
         className="rounded-md border border-red-300 bg-white px-4 py-2 text-sm font-medium text-red-700 hover:bg-red-50"
       >
-        Cancelar Inscricao
+        Cancelar Inscrição
       </button>
     )
   }
@@ -80,15 +80,15 @@ export function CancelRegistrationForm({
     <div className="space-y-3">
       <div className="rounded-md bg-red-50 p-4">
         <p className="text-sm font-medium text-red-800">
-          Tem certeza que deseja cancelar esta inscricao?
+          Tem certeza que deseja cancelar esta inscrição?
         </p>
         {refundAmount > 0 ? (
           <p className="text-sm text-red-600 mt-1">
-            Voce recebera um reembolso de {refundPercent}% ({formatCurrency(refundAmount)}).
+            Você recebera um reembolso de {refundPercent}% ({formatCurrency(refundAmount)}).
           </p>
         ) : (
           <p className="text-sm text-red-600 mt-1">
-            Nenhum reembolso sera aplicado conforme a politica de cancelamento.
+            Nenhum reembolso será aplicado conforme a política de cancelamento.
           </p>
         )}
       </div>

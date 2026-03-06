@@ -8,19 +8,19 @@ import { LeadCaptureForm } from '../components/lead-capture-form'
 
 export const revalidate = 300
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestacoes.com.br'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestações.com.br'
 
 export const metadata: Metadata = {
-  title: 'Ciclo das Estacoes — Jornadas de Autoconhecimento | Base Triade',
+  title: 'Ciclo das Estações — Jornadas de Autoconhecimento | Base Tríade',
   description:
-    'Programa de autocuidado ciclico com Medicina Tradicional Chinesa, Ayurveda e Yoga. Eventos sazonais presenciais em Barra Velha, SC.',
+    'Programa de autocuidado cíclico com Medicina Tradicional Chinesa, Ayurveda e Yoga. Eventos sazonais presenciais em Barra Velha, SC.',
   alternates: {
     canonical: BASE_URL,
   },
   openGraph: {
-    title: 'Ciclo das Estacoes — Jornadas de Autoconhecimento',
+    title: 'Ciclo das Estações — Jornadas de Autoconhecimento',
     description:
-      'Programa de autocuidado ciclico com Medicina Tradicional Chinesa, Ayurveda e Yoga. Eventos sazonais presenciais em Barra Velha, SC.',
+      'Programa de autocuidado cíclico com Medicina Tradicional Chinesa, Ayurveda e Yoga. Eventos sazonais presenciais em Barra Velha, SC.',
     type: 'website',
     url: BASE_URL,
     images: [
@@ -28,15 +28,15 @@ export const metadata: Metadata = {
         url: `${BASE_URL}/og-default.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Ciclo das Estacoes — Base Triade',
+        alt: 'Ciclo das Estações — Base Tríade',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ciclo das Estacoes — Jornadas de Autoconhecimento',
+    title: 'Ciclo das Estações — Jornadas de Autoconhecimento',
     description:
-      'Programa de autocuidado ciclico com MTC, Ayurveda e Yoga. Eventos sazonais em Barra Velha, SC.',
+      'Programa de autocuidado cíclico com MTC, Ayurveda e Yoga. Eventos sazonais em Barra Velha, SC.',
     images: [`${BASE_URL}/og-default.jpg`],
   },
 }
@@ -45,8 +45,8 @@ export const metadata: Metadata = {
 const DEFAULT_VALUES = [
   {
     icon: '\uD83C\uDF3F',
-    title: 'Reconexao Natural',
-    text: 'Praticas ancestrais em harmonia com os ciclos da natureza',
+    title: 'Reconexão Natural',
+    text: 'Práticas ancestrais em harmonia com os ciclos da natureza',
   },
   {
     icon: '\uD83E\uDDD1\u200D\uD83E\uDD1D\u200D\uD83E\uDDD1',
@@ -56,11 +56,11 @@ const DEFAULT_VALUES = [
   {
     icon: '\uD83D\uDD2E',
     title: 'Autoconhecimento',
-    text: 'Jornada GET137 de 137 dias entre estacoes',
+    text: 'Jornada GET137 de 137 dias entre estações',
   },
   {
     icon: '\u2728',
-    title: 'Transformacao',
+    title: 'Transformação',
     text: 'Medicina Tradicional Chinesa + Ayurveda + Yoga',
   },
 ] as const
@@ -71,7 +71,7 @@ const ELEMENT_MAP: Record<string, string> = {
   Fire: 'Fogo',
   Earth: 'Terra',
   Metal: 'Metal',
-  Water: 'Agua',
+  Water: 'Água',
 }
 
 function formatDate(date: Date): string {
@@ -82,12 +82,12 @@ function formatDate(date: Date): string {
   }).format(date)
 }
 
-function getEventStatus(event: { isSoldOut: boolean; startDate: Date }): 'disponivel' | 'esgotado' | 'em-breve' {
+function getEventStatus(event: { isSoldOut: boolean; startDate: Date }): 'disponível' | 'esgotado' | 'em-breve' {
   if (event.isSoldOut) return 'esgotado'
   const now = new Date()
   const diffDays = (event.startDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
   if (diffDays > 30) return 'em-breve'
-  return 'disponivel'
+  return 'disponível'
 }
 
 function renderStars(rating: number) {
@@ -151,7 +151,7 @@ export default async function HomePage() {
 
   const aboutProgram =
     (siteContents.get('about_program') as string | null) ??
-    'O Ciclo das Estacoes e um programa da Base Triade que integra Medicina Tradicional Chinesa, Ayurveda e Yoga em jornadas sazonais de autoconhecimento. Cada estacao oferece praticas, rituais e encontros presenciais em Barra Velha, SC, guiados por terapeutas experientes. Nosso objetivo e reconectar voce com os ciclos naturais, promovendo equilibrio, saude e transformacao pessoal ao longo do ano.'
+    'O Ciclo das Estações é um programa da Base Tríade que integra Medicina Tradicional Chinesa, Ayurveda e Yoga em jornadas sazonais de autoconhecimento. Cada estação oferece práticas, rituais e encontros presenciais em Barra Velha, SC, guiados por terapeutas experientes. Nosso objetivo e reconectar você com os ciclos naturais, promovendo equilíbrio, saúde e transformação pessoal ao longo do ano.'
 
   // Build value propositions with possible SiteContent overrides
   const valueProps = DEFAULT_VALUES.map((def, i) => {
@@ -165,7 +165,7 @@ export default async function HomePage() {
   const organizationJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Base Triade',
+    name: 'Base Tríade',
     url: BASE_URL,
     logo: `${BASE_URL}/og-default.jpg`,
     sameAs: [
@@ -196,10 +196,10 @@ export default async function HomePage() {
 
         <div className="relative z-10 mx-auto max-w-3xl">
           <h1 className="font-heading text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            Ciclo das Estacoes
+            Ciclo das Estações
           </h1>
           <p className="mt-4 text-lg text-foreground/80 sm:text-xl">
-            Jornadas de autoconhecimento e reconexao com os ciclos da natureza
+            Jornadas de autoconhecimento e reconexão com os ciclos da natureza
           </p>
           <p className="mt-3 text-base text-muted-foreground">
             {heroTagline}
@@ -217,10 +217,10 @@ export default async function HomePage() {
       <section id="eventos" className="px-4 py-16 sm:py-24">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-center font-heading text-3xl font-bold text-foreground sm:text-4xl">
-            Proximos Eventos
+            Próximos Eventos
           </h2>
           <p className="mt-2 text-center text-muted-foreground">
-            Jornadas sazonais para reconexao e transformacao
+            Jornadas sazonais para reconexão e transformação
           </p>
 
           {events.length > 0 ? (
@@ -292,7 +292,7 @@ export default async function HomePage() {
             Manifeste seu Interesse
           </h2>
           <p className="mt-2 text-center text-muted-foreground">
-            Receba novidades sobre os proximos eventos e jornadas
+            Receba novidades sobre os próximos eventos e jornadas
           </p>
           <div className="mt-10">
             <Suspense fallback={<div className="mx-auto h-64 max-w-md animate-pulse rounded-lg bg-muted" />}>
@@ -406,7 +406,7 @@ export default async function HomePage() {
               <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
                 <li>
                   <Link href="/privacidade" className="hover:text-foreground">
-                    Politica de Privacidade
+                    Política de Privacidade
                   </Link>
                 </li>
               </ul>

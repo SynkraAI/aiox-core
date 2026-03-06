@@ -124,7 +124,7 @@ export function RoomForm({ room, mode }: RoomFormProps) {
 
       {/* Basic Info */}
       <fieldset className="space-y-4">
-        <legend className="text-lg font-semibold text-gray-900">Informacoes do Quarto</legend>
+        <legend className="text-lg font-semibold text-gray-900">Informações do Quarto</legend>
 
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -149,13 +149,13 @@ export function RoomForm({ room, mode }: RoomFormProps) {
             id="theme"
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
-            placeholder="Ex: Elemento Terra, Elemento Agua"
+            placeholder="Ex: Elemento Terra, Elemento Água"
           />
         </div>
 
         <div>
           <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-            Descricao
+            Descrição
           </label>
           <textarea
             id="description"
@@ -163,7 +163,7 @@ export function RoomForm({ room, mode }: RoomFormProps) {
             onChange={(e) => setDescription(e.target.value)}
             rows={4}
             className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-            placeholder="Descricao do quarto, ambientacao e diferenciais..."
+            placeholder="Descrição do quarto, ambientacao e diferenciais..."
           />
         </div>
       </fieldset>
@@ -219,10 +219,10 @@ export function RoomForm({ room, mode }: RoomFormProps) {
             onChange={(e) => setIsAvailable(e.target.checked)}
             className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
           />
-          <span className="text-sm font-medium text-gray-700">Disponivel para reserva</span>
+          <span className="text-sm font-medium text-gray-700">Disponível para reserva</span>
         </label>
         <p className="text-xs text-gray-500">
-          Quartos indisponiveis nao aparecem no checkout para os participantes.
+          Quartos indisponíveis não aparecem no checkout para os participantes.
         </p>
       </fieldset>
 
@@ -233,7 +233,7 @@ export function RoomForm({ room, mode }: RoomFormProps) {
             ? 'Salvando...'
             : mode === 'create'
               ? 'Criar Quarto'
-              : 'Salvar Alteracoes'}
+              : 'Salvar Alterações'}
         </Button>
         <Button type="button" variant="outline" onClick={() => router.push('/admin/espacos')}>
           Cancelar

@@ -24,7 +24,7 @@ export default function AdminError({
         </p>
         {error.digest ? (
           <p className="mt-1 text-xs text-base-dark/40">
-            Codigo: {error.digest}
+            Código: {error.digest}
           </p>
         ) : null}
         <Button onClick={reset} className="mt-6">

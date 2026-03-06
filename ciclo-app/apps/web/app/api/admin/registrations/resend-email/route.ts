@@ -1,6 +1,6 @@
 /**
  * Admin: Resend Transactional Email
- * Story E4.1 — AC-9: Admin pode reenviar qualquer email transacional por inscricao
+ * Story E4.1 — AC-9: Admin pode reenviar qualquer email transacional por inscrição
  *
  * POST /api/admin/registrations/resend-email
  * Body: { registrationId: string, emailType: 'confirmation' | 'reminder7d' | 'reminder24h' | 'feedback' }
@@ -36,14 +36,14 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     if (!body.registrationId || !body.emailType) {
       return NextResponse.json(
-        { error: 'registrationId e emailType sao obrigatorios' },
+        { error: 'registrationId e emailType são obrigatórios' },
         { status: 400 }
       )
     }
 
     if (!VALID_EMAIL_TYPES.includes(body.emailType)) {
       return NextResponse.json(
-        { error: `emailType invalido. Valores aceitos: ${VALID_EMAIL_TYPES.join(', ')}` },
+        { error: `emailType inválido. Valores aceitos: ${VALID_EMAIL_TYPES.join(', ')}` },
         { status: 400 }
       )
     }
@@ -56,7 +56,7 @@ export async function POST(request: Request): Promise<NextResponse> {
 
     if (!registration) {
       return NextResponse.json(
-        { error: 'Inscricao nao encontrada' },
+        { error: 'Inscrição não encontrada' },
         { status: 404 }
       )
     }
@@ -102,7 +102,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     if (error instanceof Error && error.message.includes('Acesso negado')) {
       return NextResponse.json({ error: error.message }, { status: 403 })
     }
-    if (error instanceof Error && error.message.includes('Nao autorizado')) {
+    if (error instanceof Error && error.message.includes('Não autorizado')) {
       return NextResponse.json({ error: error.message }, { status: 401 })
     }
 

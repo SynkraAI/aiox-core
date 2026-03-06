@@ -8,7 +8,7 @@ import { auth } from '@ciclo/auth'
  * Public routes: /, /evento/*, /login, /register, /forgot-password, /reset-password
  * Protected routes:
  *   /profile/* -> USER+
- *   /inscricao/* -> USER+
+ *   /inscrição/* -> USER+
  *   /therapist/* -> THERAPIST+
  *   /facilitator/* -> FACILITATOR+
  *   /admin/* -> ADMIN only
@@ -42,7 +42,7 @@ const PROTECTED_ROUTES: Array<{ prefix: string; minRole: string }> = [
   { prefix: '/facilitator', minRole: 'FACILITATOR' },
   { prefix: '/therapist', minRole: 'THERAPIST' },
   { prefix: '/profile', minRole: 'USER' },
-  { prefix: '/inscricao', minRole: 'USER' },
+  { prefix: '/inscrição', minRole: 'USER' },
 ]
 
 function isPublicRoute(pathname: string): boolean {

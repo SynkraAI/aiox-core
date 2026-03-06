@@ -94,7 +94,7 @@ export async function deleteRoom(id: string): Promise<AccommodationActionResult>
     if (activeRegistrations.length > 0) {
       return {
         success: false,
-        error: `Nao e possivel excluir. Quarto possui ${activeRegistrations.length} inscricao(oes) ativa(s).`,
+        error: `Não e possivel excluir. Quarto possui ${activeRegistrations.length} inscrição(oes) ativa(s).`,
       }
     }
 
@@ -164,7 +164,7 @@ export async function toggleAvailable(id: string): Promise<AccommodationActionRe
     })
 
     if (!room) {
-      return { success: false, error: 'Quarto nao encontrado' }
+      return { success: false, error: 'Quarto não encontrado' }
     }
 
     await prisma.room.update({

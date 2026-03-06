@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestacoes.com.br'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestações.com.br'
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,7 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin/*', '/api/*', '/minha-conta/*', '/inscricao/*'],
+        disallow: ['/admin/*', '/api/*', '/minha-conta/*', '/inscrição/*'],
       },
     ],
     sitemap: `${BASE_URL}/sitemap.xml`,

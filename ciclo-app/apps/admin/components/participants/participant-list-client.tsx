@@ -265,7 +265,7 @@ export function ParticipantListClient({
                 Eventos
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                Ultima Inscricao
+                Ultima Inscrição
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                 Status
@@ -366,7 +366,7 @@ export function ParticipantListClient({
               onClick={() => goToPage(page + 1)}
               disabled={page >= totalPages || isPending}
             >
-              Proximo
+              Próximo
             </Button>
           </div>
         </div>

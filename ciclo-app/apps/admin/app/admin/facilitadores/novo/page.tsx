@@ -4,7 +4,7 @@ import { FacilitatorForm } from '../../../../components/facilitators/facilitator
 
 export const metadata: Metadata = {
   title: 'Criar Facilitador',
-  description: 'Criar novo facilitador no Ciclo das Estacoes',
+  description: 'Criar novo facilitador no Ciclo das Estações',
 }
 
 export default function NovoFacilitadorPage() {

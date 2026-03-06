@@ -19,9 +19,9 @@ export interface PolicyActionResult {
 // ============================================================
 
 /**
- * Retorna a politica de cancelamento para um evento especifico,
- * ou a politica global se nenhum eventId for fornecido.
- * Se nao houver politica, retorna null.
+ * Retorna a política de cancelamento para um evento especifico,
+ * ou a política global se nenhum eventId for fornecido.
+ * Se não houver política, retorna null.
  */
 export async function getCancellationPolicy(
   eventId?: string,
@@ -37,7 +37,7 @@ export async function getCancellationPolicy(
       }
     }
 
-    // Busca politica global (eventId = null)
+    // Busca política global (eventId = null)
     const globalPolicy = await prisma.cancellationPolicy.findFirst({
       where: { eventId: null, isActive: true },
       orderBy: { createdAt: 'desc' },
@@ -53,7 +53,7 @@ export async function getCancellationPolicy(
 }
 
 /**
- * Retorna a politica do banco em formato raw (para formularios admin).
+ * Retorna a política do banco em formato raw (para formulários admin).
  */
 export async function getRawCancellationPolicy(eventId?: string) {
   try {
@@ -77,7 +77,7 @@ export async function getRawCancellationPolicy(eventId?: string) {
 }
 
 /**
- * Verifica se um evento tem politica customizada.
+ * Verifica se um evento tem política customizada.
  */
 export async function hasEventPolicy(eventId: string): Promise<boolean> {
   try {
@@ -96,7 +96,7 @@ export async function hasEventPolicy(eventId: string): Promise<boolean> {
 // ============================================================
 
 /**
- * Atualiza (ou cria) a politica global de cancelamento.
+ * Atualiza (ou cria) a política global de cancelamento.
  */
 export async function updateGlobalPolicy(
   policy: CancellationPolicy,
@@ -126,13 +126,13 @@ export async function updateGlobalPolicy(
       })
     }
 
-    revalidatePath('/admin/configuracoes/cancelamento')
+    revalidatePath('/admin/configurações/cancelamento')
     return { success: true }
   } catch (error) {
     console.error('Failed to update global policy:', error)
     return {
       success: false,
-      error: `Falha ao atualizar politica: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+      error: `Falha ao atualizar política: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
     }
   }
 }
@@ -142,7 +142,7 @@ export async function updateGlobalPolicy(
 // ============================================================
 
 /**
- * Cria ou atualiza politica especifica de um evento.
+ * Cria ou atualiza política especifica de um evento.
  */
 export async function updateEventPolicy(
   eventId: string,
@@ -170,13 +170,13 @@ export async function updateEventPolicy(
     console.error('Failed to update event policy:', error)
     return {
       success: false,
-      error: `Falha ao atualizar politica do evento: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+      error: `Falha ao atualizar política do evento: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
     }
   }
 }
 
 /**
- * Remove politica customizada do evento (volta a usar a global).
+ * Remove política customizada do evento (volta a usar a global).
  */
 export async function removeEventPolicy(
   eventId: string,
@@ -192,7 +192,7 @@ export async function removeEventPolicy(
     console.error('Failed to remove event policy:', error)
     return {
       success: false,
-      error: `Falha ao remover politica do evento: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+      error: `Falha ao remover política do evento: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
     }
   }
 }

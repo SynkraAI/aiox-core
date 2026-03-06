@@ -102,7 +102,7 @@ describe('MercadoPagoGateway', () => {
       const result = await gateway.createPayment('reg-789', 'CREDIT_CARD', 10000)
 
       expect(result.success).toBe(false)
-      expect(result.error).toContain('nao suportado')
+      expect(result.error).toContain('não suportado')
     })
   })
 

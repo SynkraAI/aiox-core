@@ -43,7 +43,7 @@ const FacilitatorAvatar = React.forwardRef<HTMLDivElement, FacilitatorAvatarProp
           {name}
         </h4>
 
-        {/* Titulo/Papel */}
+        {/* Título/Papel */}
         {title && (
           <p className="text-xs text-muted-foreground sm:text-sm">
             {title}

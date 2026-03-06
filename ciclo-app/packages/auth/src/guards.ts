@@ -10,7 +10,7 @@ export async function requireAuth() {
   const session = await auth()
 
   if (!session?.user) {
-    throw new Error('Nao autorizado. Faca login para continuar.')
+    throw new Error('Não autorizado. Faça login para continuar.')
   }
 
   return session

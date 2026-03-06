@@ -21,7 +21,7 @@ export async function PATCH(
 
     if (typeof isActive !== 'boolean') {
       return NextResponse.json(
-        { error: 'Campo isActive (boolean) e obrigatorio.' },
+        { error: 'Campo isActive (boolean) é obrigatório.' },
         { status: 400 }
       )
     }
@@ -33,7 +33,7 @@ export async function PATCH(
 
     if (!targetUser) {
       return NextResponse.json(
-        { error: 'Usuario nao encontrado.' },
+        { error: 'Usuario não encontrado.' },
         { status: 404 }
       )
     }
@@ -41,7 +41,7 @@ export async function PATCH(
     // Prevent self-deactivation
     if (targetUser.id === session.user.id) {
       return NextResponse.json(
-        { error: 'Voce nao pode desativar sua propria conta.' },
+        { error: 'Você não pode desativar sua própria conta.' },
         { status: 400 }
       )
     }
@@ -73,7 +73,7 @@ export async function PATCH(
     if (error instanceof Error && error.message.includes('Acesso negado')) {
       return NextResponse.json({ error: error.message }, { status: 403 })
     }
-    if (error instanceof Error && error.message.includes('Nao autorizado')) {
+    if (error instanceof Error && error.message.includes('Não autorizado')) {
       return NextResponse.json({ error: error.message }, { status: 401 })
     }
     console.error('[ADMIN_STATUS]', error)

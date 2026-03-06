@@ -16,10 +16,10 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Admin | Ciclo das Estacoes',
+    default: 'Admin | Ciclo das Estações',
     template: '%s | Admin Ciclo',
   },
-  description: 'Painel administrativo do Ciclo das Estacoes',
+  description: 'Painel administrativo do Ciclo das Estações',
   robots: { index: false, follow: false },
 }
 

@@ -2,7 +2,7 @@ import type { HTMLAttributes } from 'react'
 import { cn } from '../lib/utils'
 
 interface BaseTriadeWatermarkProps extends HTMLAttributes<HTMLDivElement> {
-  /** Opacidade da marca d'agua (5-8%) */
+  /** Opacidade da marca d'água (5-8%) */
   opacity?: number
 }
 
@@ -29,7 +29,7 @@ export function BaseTriadeWatermark({
         fill="currentColor"
         xmlns="http://www.w3.org/2000/svg"
       >
-        {/* Triangulo Base Triade estilizado */}
+        {/* Triangulo Base Tríade estilizado */}
         <polygon
           points="100,20 180,170 20,170"
           fill="none"
@@ -47,7 +47,7 @@ export function BaseTriadeWatermark({
           strokeWidth="2"
           className="text-base-dark"
         />
-        {/* Texto Base Triade */}
+        {/* Texto Base Tríade */}
         <text
           x="100"
           y="195"

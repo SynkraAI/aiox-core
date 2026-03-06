@@ -11,7 +11,7 @@ import { calculatePricing, centavosToReais } from '@ciclo/utils'
 import { CancellationPolicyDisplay } from './cancellation-policy-display'
 import { Badge, SeasonalBadge } from '@ciclo/ui'
 
-// ISR: revalida a cada 60 segundos (AC-12, preco dinamico)
+// ISR: revalida a cada 60 segundos (AC-12, preco dinâmico)
 export const revalidate = 60
 
 // ---------------------------------------------------------------------------
@@ -27,7 +27,7 @@ const SEASON_MAP: Record<string, string> = {
 
 const SEASON_LABEL: Record<string, string> = {
   SPRING: 'Primavera',
-  SUMMER: 'Verao',
+  SUMMER: 'Verão',
   AUTUMN: 'Outono',
   WINTER: 'Inverno',
   CROSS_QUARTER: 'Entressafra',
@@ -37,7 +37,7 @@ const ELEMENT_ICONS: Record<string, string> = {
   Madeira: '\u6728',
   Fogo: '\u706B',
   Metal: '\u91D1',
-  Agua: '\u6C34',
+  Água: '\u6C34',
   Terra: '\u571F',
 } as const
 
@@ -77,12 +77,12 @@ interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestacoes.com.br'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestações.com.br'
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const event = await getPublicEvent(slug)
-  if (!event) return { title: 'Evento nao encontrado' }
+  if (!event) return { title: 'Evento não encontrado' }
 
   const description = event.subtitle ?? event.description?.slice(0, 160) ?? undefined
   const ogImage = event.images[0]?.url ?? `${BASE_URL}/og-default.jpg`
@@ -146,7 +146,7 @@ export default async function EventPage({ params }: PageProps) {
     ...(heroImage ? { image: heroImage.url } : {}),
     organizer: {
       '@type': 'Organization',
-      name: 'Base Triade',
+      name: 'Base Tríade',
       url: BASE_URL,
     },
     offers: event.ticketTypes.map((t) => {
@@ -170,7 +170,7 @@ export default async function EventPage({ params }: PageProps) {
         availability: isSoldOut
           ? 'https://schema.org/SoldOut'
           : 'https://schema.org/InStock',
-        url: `${process.env.NEXT_PUBLIC_BASE_URL ?? ''}/inscricao/${event.slug}?ticket=${t.id}`,
+        url: `${process.env.NEXT_PUBLIC_BASE_URL ?? ''}/inscrição/${event.slug}?ticket=${t.id}`,
       }
     }),
   }
@@ -244,8 +244,8 @@ export default async function EventPage({ params }: PageProps) {
         {/* DESCRICAO (AC-3) */}
         {/* ============================================================ */}
         {event.description && (
-          <section className="mt-12" aria-labelledby="descricao-heading">
-            <h2 id="descricao-heading" className="font-heading text-2xl font-semibold text-foreground">
+          <section className="mt-12" aria-labelledby="descrição-heading">
+            <h2 id="descrição-heading" className="font-heading text-2xl font-semibold text-foreground">
               Sobre o Evento
             </h2>
             <div
@@ -259,9 +259,9 @@ export default async function EventPage({ params }: PageProps) {
         {/* PRATICAS INCLUIDAS (AC-4) */}
         {/* ============================================================ */}
         {event.includedPractices.length > 0 && (
-          <section className="mt-12" aria-labelledby="praticas-heading">
-            <h2 id="praticas-heading" className="font-heading text-2xl font-semibold text-foreground">
-              Praticas Incluidas
+          <section className="mt-12" aria-labelledby="práticas-heading">
+            <h2 id="práticas-heading" className="font-heading text-2xl font-semibold text-foreground">
+              Práticas Incluídas
             </h2>
             <div className="mt-4 flex flex-wrap gap-2">
               {event.includedPractices.map((practice) => (
@@ -434,7 +434,7 @@ export default async function EventPage({ params }: PageProps) {
                       )}
                       {tier === 'last_minute' && (
                         <Badge variant="destructive" className="text-xs">
-                          Ultima Hora
+                          Última Hora
                         </Badge>
                       )}
                     </div>
@@ -468,7 +468,7 @@ export default async function EventPage({ params }: PageProps) {
                         </span>
                       ) : (
                         <Link
-                          href={`/inscricao/${event.slug}?ticket=${ticket.id}`}
+                          href={`/inscrição/${event.slug}?ticket=${ticket.id}`}
                           className="mt-3 inline-flex w-full items-center justify-center rounded-md bg-seasonal-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-seasonal-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                         >
                           Inscrever-se
@@ -517,7 +517,7 @@ export default async function EventPage({ params }: PageProps) {
         )}
 
         {/* ============================================================ */}
-        {/* POLITICA DE CANCELAMENTO (AC-4: exibido na pagina publica) */}
+        {/* POLITICA DE CANCELAMENTO (AC-4: exibido na página publica) */}
         {/* ============================================================ */}
         <CancellationPolicyDisplay eventId={event.id} eventPolicy={event.cancellationPolicy} />
       </div>

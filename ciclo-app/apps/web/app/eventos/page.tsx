@@ -6,17 +6,17 @@ import { EventCard } from '@ciclo/ui'
 
 export const revalidate = 60
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestacoes.com.br'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestações.com.br'
 
 export const metadata: Metadata = {
   title: 'Eventos — Jornadas Sazonais de Autoconhecimento',
   description:
-    'Confira todos os eventos do Ciclo das Estacoes. Jornadas presenciais com Medicina Tradicional Chinesa, Ayurveda e Yoga em Barra Velha, SC.',
+    'Confira todos os eventos do Ciclo das Estações. Jornadas presenciais com Medicina Tradicional Chinesa, Ayurveda e Yoga em Barra Velha, SC.',
   alternates: {
     canonical: `${BASE_URL}/eventos`,
   },
   openGraph: {
-    title: 'Eventos — Ciclo das Estacoes',
+    title: 'Eventos — Ciclo das Estações',
     description:
       'Jornadas sazonais de autoconhecimento. Eventos presenciais com MTC, Ayurveda e Yoga em Barra Velha, SC.',
     type: 'website',
@@ -26,13 +26,13 @@ export const metadata: Metadata = {
         url: `${BASE_URL}/og-default.jpg`,
         width: 1200,
         height: 630,
-        alt: 'Eventos — Ciclo das Estacoes',
+        alt: 'Eventos — Ciclo das Estações',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Eventos — Ciclo das Estacoes',
+    title: 'Eventos — Ciclo das Estações',
     description:
       'Jornadas sazonais de autoconhecimento com MTC, Ayurveda e Yoga.',
     images: [`${BASE_URL}/og-default.jpg`],
@@ -44,7 +44,7 @@ const ELEMENT_MAP: Record<string, string> = {
   Fire: 'Fogo',
   Earth: 'Terra',
   Metal: 'Metal',
-  Water: 'Agua',
+  Water: 'Água',
 } as const
 
 function formatDate(date: Date): string {
@@ -58,13 +58,13 @@ function formatDate(date: Date): string {
 function getEventStatus(event: {
   isSoldOut: boolean
   startDate: Date
-}): 'disponivel' | 'esgotado' | 'em-breve' {
+}): 'disponível' | 'esgotado' | 'em-breve' {
   if (event.isSoldOut) return 'esgotado'
   const now = new Date()
   const diffDays =
     (event.startDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)
   if (diffDays > 30) return 'em-breve'
-  return 'disponivel'
+  return 'disponível'
 }
 
 export default async function EventosPage() {
@@ -80,14 +80,14 @@ export default async function EventosPage() {
           Eventos
         </h1>
         <p className="mt-2 text-center text-muted-foreground">
-          Jornadas sazonais de autoconhecimento e reconexao
+          Jornadas sazonais de autoconhecimento e reconexão
         </p>
 
         {/* Upcoming Events */}
         {upcomingEvents.length > 0 ? (
           <section className="mt-12">
             <h2 className="font-heading text-xl font-semibold text-foreground">
-              Proximos Eventos
+              Próximos Eventos
             </h2>
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {upcomingEvents.map((event) => {
@@ -124,7 +124,7 @@ export default async function EventosPage() {
               href="/#interesse"
               className="text-seasonal-primary underline"
             >
-              pagina principal
+              página principal
             </Link>
             .
           </p>

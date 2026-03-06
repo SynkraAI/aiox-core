@@ -1,7 +1,7 @@
 /**
  * E2E Test: Admin CRUD Evento — Story E4.6 (AC-6)
  *
- * Login como ADMIN, criar evento, editar, publicar, verificar na pagina publica.
+ * Login como ADMIN, criar evento, editar, publicar, verificar na página publica.
  */
 import { test, expect } from '@playwright/test'
 
@@ -39,7 +39,7 @@ test.describe('Admin CRUD Evento', () => {
     // Check if admin page is accessible
     const adminPage = page.locator('text=/Eventos|Gerenciar/i').first()
     if (!(await adminPage.isVisible())) {
-      test.skip(true, 'Admin panel nao acessivel (pode precisar de auth setup)')
+      test.skip(true, 'Admin panel não acessível (pode precisar de auth setup)')
       return
     }
 
@@ -47,7 +47,7 @@ test.describe('Admin CRUD Evento', () => {
     const createBtn = page.locator('text=/Novo Evento|Criar Evento|Adicionar/i').first()
       .or(page.locator('[data-testid="create-event"]').first())
     if (!(await createBtn.isVisible())) {
-      test.skip(true, 'Botao de criar evento nao encontrado')
+      test.skip(true, 'Botao de criar evento não encontrado')
       return
     }
     await createBtn.click()
@@ -134,7 +134,7 @@ test.describe('Admin CRUD Evento', () => {
 
       // Check for KPI cards
       const kpiCard = page.locator('[data-testid="kpi-card"]').first()
-        .or(page.locator('text=/Inscricoes|Receita|Eventos/i').first())
+        .or(page.locator('text=/Inscrições|Receita|Eventos/i').first())
       if (await kpiCard.isVisible()) {
         await expect(kpiCard).toBeVisible()
       }

@@ -15,7 +15,7 @@ export default async function EspacosPage() {
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Espacos — Sun House</h1>
         <p className="mt-1 text-sm text-gray-600">
-          Gerencie os quartos da Sun House disponiveis para hospedagem durante eventos.
+          Gerencie os quartos da Sun House disponíveis para hospedagem durante eventos.
         </p>
       </div>
 

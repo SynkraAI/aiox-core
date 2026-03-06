@@ -21,14 +21,14 @@ export async function POST(request: Request) {
     // Validation
     if (!name || typeof name !== 'string' || name.trim().length < 2) {
       return NextResponse.json(
-        { error: 'Nome e obrigatorio e deve ter no minimo 2 caracteres.' },
+        { error: 'Nome é obrigatório e deve ter no mínimo 2 caracteres.' },
         { status: 400 }
       )
     }
 
     if (!email || typeof email !== 'string') {
       return NextResponse.json(
-        { error: 'Email e obrigatorio.' },
+        { error: 'Email é obrigatório.' },
         { status: 400 }
       )
     }
@@ -36,14 +36,14 @@ export async function POST(request: Request) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(email)) {
       return NextResponse.json(
-        { error: 'Formato de email invalido.' },
+        { error: 'Formato de email inválido.' },
         { status: 400 }
       )
     }
 
     if (!password || typeof password !== 'string' || password.length < 8) {
       return NextResponse.json(
-        { error: 'Senha e obrigatoria e deve ter no minimo 8 caracteres.' },
+        { error: 'Senha é obrigatória e deve ter no mínimo 8 caracteres.' },
         { status: 400 }
       )
     }
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
 
     if (existingUser) {
       return NextResponse.json(
-        { error: 'Este email ja esta cadastrado.' },
+        { error: 'Este email já esta cadastrado.' },
         { status: 400 }
       )
     }

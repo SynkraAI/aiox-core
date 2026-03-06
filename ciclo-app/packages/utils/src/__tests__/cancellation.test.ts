@@ -8,14 +8,14 @@ import {
 import type { CancellationPolicy } from '../cancellation'
 
 // ============================================================
-// calculateRefund — Tiers padrao (80%, 50%, 0%)
+// calculateRefund — Tiers padrão (80%, 50%, 0%)
 // ============================================================
 
 describe('calculateRefund', () => {
   const eventDate = new Date('2026-06-20')
   const paymentAmount = 45000 // R$ 450,00
 
-  describe('com politica padrao (3 tiers)', () => {
+  describe('com política padrão (3 tiers)', () => {
     it('deve retornar 80% quando cancelamento e +15 dias antes do evento', () => {
       const cancelDate = new Date('2026-06-01') // 19 dias antes
       const result = calculateRefund(eventDate, cancelDate, DEFAULT_CANCELLATION_POLICY, paymentAmount)
@@ -63,7 +63,7 @@ describe('calculateRefund', () => {
       expect(result.refundAmount).toBe(0)
     })
 
-    it('deve retornar 0% quando evento ja passou', () => {
+    it('deve retornar 0% quando evento já passou', () => {
       const cancelDate = new Date('2026-06-21') // 1 dia depois
       const result = calculateRefund(eventDate, cancelDate, DEFAULT_CANCELLATION_POLICY, paymentAmount)
       expect(result.refundPercent).toBe(0)
@@ -98,7 +98,7 @@ describe('calculateRefund', () => {
       expect(result.refundAmount).toBe(800000)
     })
 
-    it('deve retornar 80% com 30 dias de antecedencia', () => {
+    it('deve retornar 80% com 30 dias de antecedência', () => {
       const cancelDate = new Date('2026-05-21') // 30 dias antes
       const result = calculateRefund(eventDate, cancelDate, DEFAULT_CANCELLATION_POLICY, paymentAmount)
       expect(result.refundPercent).toBe(80)
@@ -109,8 +109,8 @@ describe('calculateRefund', () => {
   // Politica customizada
   // ============================================================
 
-  describe('com politica customizada', () => {
-    it('deve aplicar regras de politica com 2 tiers apenas', () => {
+  describe('com política customizada', () => {
+    it('deve aplicar regras de política com 2 tiers apenas', () => {
       const customPolicy: CancellationPolicy = {
         rules: [
           { daysBeforeEvent: 10, refundPercent: 100 },
@@ -124,7 +124,7 @@ describe('calculateRefund', () => {
       expect(result.refundAmount).toBe(45000)
     })
 
-    it('deve aplicar regras de politica com 4 tiers', () => {
+    it('deve aplicar regras de política com 4 tiers', () => {
       const customPolicy: CancellationPolicy = {
         rules: [
           { daysBeforeEvent: 30, refundPercent: 100 },
@@ -164,7 +164,7 @@ describe('calculateRefund', () => {
   // ============================================================
 
   describe('transferAlwaysAllowed', () => {
-    it('deve estar true na politica padrao', () => {
+    it('deve estar true na política padrão', () => {
       expect(DEFAULT_CANCELLATION_POLICY.transferAlwaysAllowed).toBe(true)
     })
   })
@@ -175,14 +175,14 @@ describe('calculateRefund', () => {
 // ============================================================
 
 describe('validateCancellationPolicy', () => {
-  it('deve retornar vazio para politica padrao valida', () => {
+  it('deve retornar vazio para política padrão valida', () => {
     const errors = validateCancellationPolicy(DEFAULT_CANCELLATION_POLICY)
     expect(errors).toHaveLength(0)
   })
 
-  it('deve reportar erro para politica sem regras', () => {
+  it('deve reportar erro para política sem regras', () => {
     const errors = validateCancellationPolicy({ rules: [], transferAlwaysAllowed: true })
-    expect(errors).toContain('A politica deve ter pelo menos uma regra')
+    expect(errors).toContain('A política deve ter pelo menos uma regra')
   })
 
   it('deve reportar erro para daysBeforeEvent negativo', () => {

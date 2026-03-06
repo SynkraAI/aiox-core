@@ -1,6 +1,6 @@
 import { Skeleton } from '@ciclo/ui'
 
-export default function InscricoesLoading() {
+export default function InscriçõesLoading() {
   return (
     <div className="space-y-4">
       <Skeleton className="h-8 w-40 bg-base-dark/10" />

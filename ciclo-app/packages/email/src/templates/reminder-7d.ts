@@ -1,6 +1,6 @@
 /**
  * 7-Day Reminder Email Template
- * Story E4.1 — AC-4: Lembrete do evento, link pagina publica, o que trazer, como chegar
+ * Story E4.1 — AC-4: Lembrete do evento, link página publica, o que trazer, como chegar
  */
 
 import { emailLayout, buttonBlock, infoBox, divider, BRAND } from './shared-styles'
@@ -90,7 +90,7 @@ export function renderReminder7dEmail(data: Reminder7dEmailData): EmailRenderRes
     ? `\nComo chegar:\n${data.howToGetThere}\n`
     : ''
 
-  const text = `LEMBRETE: FALTA 1 SEMANA - Ciclo das Estacoes
+  const text = `LEMBRETE: FALTA 1 SEMANA - Ciclo das Estações
 
 Ola, ${data.participantName}! Falta apenas uma semana para o seu evento.
 

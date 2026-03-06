@@ -40,7 +40,7 @@ export default async function TicketSelectionPage({
     )
 
   if (allSoldOut) {
-    redirect(`/inscricao/${eventSlug}/esgotado`)
+    redirect(`/inscrição/${eventSlug}/esgotado`)
   }
 
   const now = new Date()

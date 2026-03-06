@@ -23,7 +23,7 @@ export function SoldOutClient({ eventSlug, eventName }: SoldOutClientProps) {
 
   function handleSubmit() {
     if (!email.trim()) {
-      setError('Email e obrigatorio.')
+      setError('Email é obrigatório.')
       return
     }
 
@@ -65,7 +65,7 @@ export function SoldOutClient({ eventSlug, eventName }: SoldOutClientProps) {
           </svg>
         </div>
         <h2 className="text-xl font-bold text-foreground">
-          Voce esta na lista de espera!
+          Você está na lista de espera!
         </h2>
         <p className="mt-2 text-sm text-muted-foreground">
           Avisaremos por email caso novas vagas sejam disponibilizadas para{' '}

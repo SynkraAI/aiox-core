@@ -37,7 +37,7 @@ export function AdminHeader({ user, onSignOut }: AdminHeaderProps) {
       {/* Logo area (mobile only -- desktop has sidebar logo) */}
       <div className="flex items-center gap-2 md:hidden">
         <span className="text-sm font-heading font-semibold text-base-dark">
-          Base Triade
+          Base Tríade
         </span>
       </div>
 

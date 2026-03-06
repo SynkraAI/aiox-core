@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation'
 
 /**
- * /minha-conta — redireciona para inscricoes por padrao
+ * /minha-conta — redireciona para inscrições por padrão
  */
 export default function MinhaContaPage() {
-  redirect('/minha-conta/inscricoes')
+  redirect('/minha-conta/inscrições')
 }

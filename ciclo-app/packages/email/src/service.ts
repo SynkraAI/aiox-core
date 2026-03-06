@@ -2,7 +2,7 @@
  * Email Service — Orchestrates template rendering + sending via Resend
  * Story E4.1 — AC-3, AC-6, AC-7: Send transactional emails for registrations
  *
- * Each function loads registration data from DB, renders the appropriate template,
+ * Each function loads registration data from DB, renders the apprópriate template,
  * sends via Resend, and marks the boolean flag to prevent duplicate sends.
  */
 
@@ -14,7 +14,7 @@ import { renderReminder24hEmail } from './templates/reminder-24h'
 import { renderFeedbackEmail } from './templates/feedback'
 import type { ScheduleItem } from './templates/reminder-24h'
 
-const APP_URL = () => process.env.APP_URL ?? 'https://ciclodaseestacoes.com.br'
+const APP_URL = () => process.env.APP_URL ?? 'https://ciclodaseestações.com.br'
 
 // ============================================================
 // Helpers
@@ -97,12 +97,12 @@ export async function sendConfirmationEmail(
       eventLocation: reg.event.venue ?? 'A confirmar',
       ticketTypeName: reg.ticketType.name,
       qrCodeBase64: reg.qrCode ?? undefined,
-      userAreaUrl: `${APP_URL()}/minha-conta/inscricoes/${reg.id}`,
+      userAreaUrl: `${APP_URL()}/minha-conta/inscrições/${reg.id}`,
     })
 
     const result = await sendEmail({
       to: reg.user.email,
-      subject: `Inscricao Confirmada: ${reg.event.name}`,
+      subject: `Inscrição Confirmada: ${reg.event.name}`,
       html,
       text,
     })
@@ -271,7 +271,7 @@ export async function sendFeedbackEmail(registrationId: string): Promise<SendEma
 
     const result = await sendEmail({
       to: reg.user.email,
-      subject: `Como foi o ${reg.event.name}? Deixe sua avaliacao`,
+      subject: `Como foi o ${reg.event.name}? Deixe sua avaliação`,
       html,
       text,
     })

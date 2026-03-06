@@ -59,7 +59,7 @@ export class MercadoPagoGateway implements PaymentGateway {
       success: false,
       paymentId: '',
       externalId: '',
-      error: `Metodo de pagamento nao suportado pelo MercadoPago: ${method}`,
+      error: `Método de pagamento não suportado pelo MercadoPago: ${method}`,
     }
   }
 
@@ -105,10 +105,10 @@ export class MercadoPagoGateway implements PaymentGateway {
 
     const body = {
       transaction_amount: amount / 100, // MP expects BRL, not centavos
-      description: `Inscricao ${registrationId}`,
+      description: `Inscrição ${registrationId}`,
       payment_method_id: 'pix',
       payer: {
-        email: 'pagamento@ciclodasestacoes.com.br', // placeholder; webhook updates
+        email: 'pagamento@ciclodasestações.com.br', // placeholder; webhook updates
       },
       date_of_expiration: expiresAt.toISOString(),
       external_reference: registrationId,
@@ -175,10 +175,10 @@ export class MercadoPagoGateway implements PaymentGateway {
 
     const body = {
       transaction_amount: amount / 100,
-      description: `Inscricao ${registrationId}`,
+      description: `Inscrição ${registrationId}`,
       payment_method_id: 'bolbradesco', // Bradesco boleto (most common)
       payer: {
-        email: 'pagamento@ciclodasestacoes.com.br',
+        email: 'pagamento@ciclodasestações.com.br',
         first_name: 'Participante',
         last_name: 'Ciclo',
         identification: {

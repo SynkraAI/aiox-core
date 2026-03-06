@@ -11,7 +11,7 @@ const config: Partial<Config> = {
     },
     extend: {
       colors: {
-        // Base Triade (neutros) - disponivel em todas as estacoes
+        // Base Tríade (neutros) - disponível em todas as estações
         'base-dark': '#2d1810',
         'base-gold': '#d4a574',
         'base-sienna': '#8B4513',

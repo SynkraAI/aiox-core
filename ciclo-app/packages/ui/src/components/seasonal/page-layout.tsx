@@ -10,7 +10,7 @@ import type { Season } from '../../contexts/season-context'
 interface PageLayoutProps {
   children: ReactNode
   className?: string
-  /** Override da estacao para o layout (caso nao use SeasonProvider) */
+  /** Override da estação para o layout (caso não use SeasonProvider) */
   season?: Season
   /** Esconder footer */
   hideFooter?: boolean
@@ -31,7 +31,7 @@ export function PageLayout({
     const ctx = useSeason()
     resolvedSeason = seasonOverride ?? ctx.season
   } catch {
-    // SeasonProvider nao disponivel, usar override ou default
+    // SeasonProvider não disponível, usar override ou default
     resolvedSeason = seasonOverride ?? 'primavera'
   }
 

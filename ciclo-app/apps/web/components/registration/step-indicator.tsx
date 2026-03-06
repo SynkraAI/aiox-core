@@ -17,7 +17,7 @@ export function StepIndicator({
   totalSteps = 3,
 }: StepIndicatorProps) {
   return (
-    <nav aria-label="Progresso da inscricao" className="mb-8">
+    <nav aria-label="Progresso da inscrição" className="mb-8">
       <ol className="flex items-center justify-center gap-2 sm:gap-4">
         {Array.from({ length: totalSteps }, (_, i) => {
           const step = i + 1

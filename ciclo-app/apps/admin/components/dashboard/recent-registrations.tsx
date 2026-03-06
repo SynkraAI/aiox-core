@@ -36,7 +36,7 @@ export function RecentRegistrations({ registrations }: RecentRegistrationsProps)
   if (registrations.length === 0) {
     return (
       <div className="flex items-center justify-center py-8">
-        <p className="text-sm text-base-dark/40">Nenhuma inscricao recente</p>
+        <p className="text-sm text-base-dark/40">Nenhuma inscrição recente</p>
       </div>
     )
   }

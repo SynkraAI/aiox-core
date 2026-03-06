@@ -41,7 +41,7 @@ export function BoletoPaymentClient({
           Vencimento: <span className="font-bold">{dueDate}</span>
         </p>
         <p className="mt-1 text-xs text-amber-600">
-          O boleto pode levar ate 3 dias uteis para compensar apos o pagamento.
+          O boleto pode levar até 3 dias úteis para compensar após o pagamento.
         </p>
       </div>
 
@@ -76,11 +76,11 @@ export function BoletoPaymentClient({
         </div>
       )}
 
-      {/* Barcode / Linha Digitavel */}
+      {/* Barcode / Linha Digitável */}
       {boletoCode && (
         <div>
           <label className="text-sm font-medium text-foreground">
-            Linha Digitavel
+            Linha Digitável
           </label>
           <div className="mt-1 flex gap-2">
             <input
@@ -103,18 +103,18 @@ export function BoletoPaymentClient({
       <div className="rounded-lg border border-border bg-card p-4">
         <h3 className="text-sm font-semibold text-foreground">Como pagar com Boleto</h3>
         <ol className="mt-2 space-y-1 text-sm text-muted-foreground">
-          <li>1. Clique no botao acima para visualizar o boleto</li>
-          <li>2. Copie a linha digitavel ou imprima o PDF</li>
-          <li>3. Pague pelo app do seu banco, lotericas ou internet banking</li>
-          <li>4. A confirmacao pode levar ate 3 dias uteis</li>
-          <li>5. Voce recebera um email quando o pagamento for confirmado</li>
+          <li>1. Clique no botão acima para visualizar o boleto</li>
+          <li>2. Copie a linha digitável ou imprima o PDF</li>
+          <li>3. Pague pelo app do seu banco, lotéricas ou internet banking</li>
+          <li>4. A confirmação pode levar até 3 dias úteis</li>
+          <li>5. Você recebera um email quando o pagamento for confirmado</li>
         </ol>
       </div>
 
       {/* Status note */}
       <div className="text-center text-sm text-muted-foreground">
         <p>
-          Apos o pagamento, voce recebera a confirmacao por email.
+          Apos o pagamento, você recebera a confirmação por email.
         </p>
         <p className="mt-1">
           Guarde o comprovante de pagamento.

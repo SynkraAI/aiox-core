@@ -31,7 +31,7 @@ export function RecentLeads({ leads }: RecentLeadsProps) {
         <thead>
           <tr className="border-b border-base-dark/10">
             <th className="pb-2 text-left font-medium text-base-dark/60">Email</th>
-            <th className="pb-2 text-left font-medium text-base-dark/60">Estacoes de Interesse</th>
+            <th className="pb-2 text-left font-medium text-base-dark/60">Estações de Interesse</th>
             <th className="pb-2 text-right font-medium text-base-dark/60">Data</th>
           </tr>
         </thead>

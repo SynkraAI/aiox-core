@@ -4,7 +4,7 @@ import { FacilitatorListClient } from '../../../components/facilitators/facilita
 
 export const metadata: Metadata = {
   title: 'Facilitadores',
-  description: 'Gerenciar facilitadores do Ciclo das Estacoes',
+  description: 'Gerenciar facilitadores do Ciclo das Estações',
 }
 
 export default async function FacilitadoresPage() {

@@ -20,14 +20,14 @@ export async function POST(request: Request) {
 
     if (!token || typeof token !== 'string') {
       return NextResponse.json(
-        { error: 'Token de redefinicao e obrigatorio.' },
+        { error: 'Token de redefinição é obrigatório.' },
         { status: 400 }
       )
     }
 
     if (!password || typeof password !== 'string' || password.length < 8) {
       return NextResponse.json(
-        { error: 'Senha deve ter no minimo 8 caracteres.' },
+        { error: 'Senha deve ter no mínimo 8 caracteres.' },
         { status: 400 }
       )
     }
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
 
     if (!resetToken) {
       return NextResponse.json(
-        { error: 'Token invalido ou expirado.' },
+        { error: 'Token inválido ou expirado.' },
         { status: 400 }
       )
     }
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
       })
 
       return NextResponse.json(
-        { error: 'Token expirado. Solicite um novo link de redefinicao.' },
+        { error: 'Token expirado. Solicite um novo link de redefinição.' },
         { status: 400 }
       )
     }
@@ -71,7 +71,7 @@ export async function POST(request: Request) {
     })
 
     return NextResponse.json({
-      message: 'Senha redefinida com sucesso. Faca login com sua nova senha.',
+      message: 'Senha redefinida com sucesso. Faça login com sua nova senha.',
     })
   } catch (error) {
     console.error('[RESET_PASSWORD]', error)

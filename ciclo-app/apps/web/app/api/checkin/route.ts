@@ -35,7 +35,7 @@ export async function POST(request: Request) {
 
     if (!body?.signedPayload || typeof body.signedPayload !== 'string') {
       return NextResponse.json(
-        { error: 'Campo signedPayload e obrigatorio.' },
+        { error: 'Campo signedPayload é obrigatório.' },
         { status: 400 }
       )
     }
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
 
     if (!secret) {
       return NextResponse.json(
-        { error: 'Configuracao de seguranca QR ausente no servidor.' },
+        { error: 'Configuração de seguranca QR ausente no servidor.' },
         { status: 500 }
       )
     }
@@ -62,7 +62,7 @@ export async function POST(request: Request) {
       }))
 
       return NextResponse.json(
-        { valid: false, error: 'QR Code invalido ou assinatura incorreta.' },
+        { valid: false, error: 'QR Code inválido ou assinatura incorreta.' },
         { status: 400 }
       )
     }
@@ -88,7 +88,7 @@ export async function POST(request: Request) {
         return NextResponse.json({
           valid: true,
           offline_mode: false,
-          warning: 'Inscricao nao encontrada no banco de dados. QR valido mas registro ausente.',
+          warning: 'Inscrição não encontrada no banco de dados. QR válido mas registro ausente.',
           data,
         })
       }
@@ -114,7 +114,7 @@ export async function POST(request: Request) {
         return NextResponse.json({
           valid: true,
           offline_mode: false,
-          error: `Inscricao com status ${registration.status}. Apenas inscricoes confirmadas podem fazer check-in.`,
+          error: `Inscrição com status ${registration.status}. Apenas inscrições confirmadas podem fazer check-in.`,
           data,
         }, { status: 400 })
       }
@@ -164,7 +164,7 @@ export async function POST(request: Request) {
       })
     }
   } catch (error) {
-    if (error instanceof Error && error.message.includes('Nao autorizado')) {
+    if (error instanceof Error && error.message.includes('Não autorizado')) {
       return NextResponse.json({ error: error.message }, { status: 401 })
     }
     console.error('[CHECKIN_ERROR]', error)

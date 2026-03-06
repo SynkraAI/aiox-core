@@ -38,9 +38,9 @@ export async function createTicketType(
   input: CreateTicketTypeInput,
 ): Promise<TicketTypeActionResult> {
   try {
-    // Validacoes
+    // Validações
     if (!input.name.trim()) {
-      return { success: false, error: 'Nome e obrigatorio.' }
+      return { success: false, error: 'Nome é obrigatório.' }
     }
     if (input.regularPrice <= 0) {
       return { success: false, error: 'Preco regular deve ser maior que zero.' }
@@ -80,9 +80,9 @@ export async function updateTicketType(
   input: UpdateTicketTypeInput,
 ): Promise<TicketTypeActionResult> {
   try {
-    // Validacoes
+    // Validações
     if (!input.name.trim()) {
-      return { success: false, error: 'Nome e obrigatorio.' }
+      return { success: false, error: 'Nome é obrigatório.' }
     }
     if (input.regularPrice <= 0) {
       return { success: false, error: 'Preco regular deve ser maior que zero.' }
@@ -122,7 +122,7 @@ export async function deleteTicketType(
   id: string,
 ): Promise<TicketTypeActionResult> {
   try {
-    // Verificar se tem inscricoes confirmadas
+    // Verificar se tem inscrições confirmadas
     const registrationCount = await prisma.registration.count({
       where: {
         ticketTypeId: id,
@@ -133,7 +133,7 @@ export async function deleteTicketType(
     if (registrationCount > 0) {
       return {
         success: false,
-        error: `Este tipo de ingresso possui ${registrationCount} inscricao(oes) ativa(s). Nao e possivel remover. Considere desativar o ingresso alterando a quantidade disponivel para 0.`,
+        error: `Este tipo de ingresso possui ${registrationCount} inscrição(oes) ativa(s). Não e possivel remover. Considere desativar o ingresso alterando a quantidade disponível para 0.`,
       }
     }
 

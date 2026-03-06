@@ -16,7 +16,7 @@ export interface NavItem {
  * Items without `roles` are visible to both ADMIN and FACILITATOR.
  * Items with `roles: ['ADMIN']` are ADMIN-only.
  *
- * Per AC-4: FACILITATOR sees only Dashboard, Eventos, Inscricoes.
+ * Per AC-4: FACILITATOR sees only Dashboard, Eventos, Inscrições.
  */
 export const NAV_ITEMS: NavItem[] = [
   {
@@ -42,8 +42,8 @@ export const NAV_ITEMS: NavItem[] = [
     roles: ['ADMIN'],
   },
   {
-    label: 'Inscricoes',
-    href: '/admin/inscricoes',
+    label: 'Inscrições',
+    href: '/admin/inscrições',
     icon: 'ClipboardList',
   },
   {
@@ -71,8 +71,8 @@ export const NAV_ITEMS: NavItem[] = [
     roles: ['ADMIN'],
   },
   {
-    label: 'Configuracoes',
-    href: '/admin/configuracoes',
+    label: 'Configurações',
+    href: '/admin/configurações',
     icon: 'Settings',
     roles: ['ADMIN'],
   },
@@ -96,10 +96,10 @@ export const ROUTE_LABELS: Record<string, string> = {
   eventos: 'Eventos',
   facilitadores: 'Facilitadores',
   ingressos: 'Ingressos',
-  inscricoes: 'Inscricoes',
+  inscrições: 'Inscrições',
   participantes: 'Participantes',
   leads: 'Leads',
   produtos: 'Produtos',
   espacos: 'Espacos',
-  configuracoes: 'Configuracoes',
+  configurações: 'Configurações',
 }

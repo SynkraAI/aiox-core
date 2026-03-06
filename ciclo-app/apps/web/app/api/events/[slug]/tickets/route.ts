@@ -38,7 +38,7 @@ export async function GET(
 
     if (!event || event.isDeleted || !event.isPublished) {
       return NextResponse.json(
-        { error: 'Evento nao encontrado.' },
+        { error: 'Evento não encontrado.' },
         { status: 404 },
       )
     }

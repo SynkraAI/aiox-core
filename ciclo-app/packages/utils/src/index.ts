@@ -1,5 +1,5 @@
 /**
- * Formata valor em centavos para exibicao em BRL
+ * Formata valor em centavos para exibição em BRL
  * Todos os valores monetarios sao armazenados em centavos (PRD FR-02.2)
  */
 export function formatCurrency(cents: number): string {

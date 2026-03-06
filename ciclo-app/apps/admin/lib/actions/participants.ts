@@ -173,7 +173,7 @@ export async function getParticipants(
 }
 
 /**
- * Busca perfil completo do participante com historico de inscricoes
+ * Busca perfil completo do participante com historico de inscrições
  * AC-4
  */
 export async function getParticipant(id: string): Promise<ParticipantDetail | null> {
@@ -251,8 +251,8 @@ export async function getParticipant(id: string): Promise<ParticipantDetail | nu
 }
 
 /**
- * Salva anotacoes internas (append-only com timestamp e autor)
- * AC-5 — LGPD: notas internas, nao visiveis ao participante
+ * Salva anotações internas (append-only com timestamp e autor)
+ * AC-5 — LGPD: notas internas, não visiveis ao participante
  */
 export async function updateParticipantNotes(
   userId: string,
@@ -266,7 +266,7 @@ export async function updateParticipantNotes(
     })
 
     if (!user) {
-      return { success: false, error: 'Participante nao encontrado' }
+      return { success: false, error: 'Participante não encontrado' }
     }
 
     const existingNotes = Array.isArray(user.internalNotes)
@@ -294,7 +294,7 @@ export async function updateParticipantNotes(
     console.error('Failed to update participant notes:', error)
     return {
       success: false,
-      error: `Falha ao salvar anotacoes: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
+      error: `Falha ao salvar anotações: ${error instanceof Error ? error.message : 'Erro desconhecido'}`,
     }
   }
 }
@@ -314,7 +314,7 @@ export async function promoteRole(
     })
 
     if (!user) {
-      return { success: false, error: 'Participante nao encontrado' }
+      return { success: false, error: 'Participante não encontrado' }
     }
 
     // Validate promotion path
@@ -327,7 +327,7 @@ export async function promoteRole(
     if (!allowed.includes(newRole)) {
       return {
         success: false,
-        error: `Promocao invalida: ${user.role} -> ${newRole}. Permitido: ${allowed.join(', ') || 'nenhuma'}`,
+        error: `Promoção invalida: ${user.role} -> ${newRole}. Permitido: ${allowed.join(', ') || 'nenhuma'}`,
       }
     }
 
@@ -410,7 +410,7 @@ export async function exportParticipantsCSV(
       timeStyle: 'short',
     }).format(new Date())
 
-    const headerInfo = `# Exportado em ${exportDate} por ${adminEmail} — Dados confidenciais — Uso interno Base Triade`
+    const headerInfo = `# Exportado em ${exportDate} por ${adminEmail} — Dados confidenciais — Uso interno Base Tríade`
 
     // CSV header
     const csvHeader = 'Nome,Email,Telefone,Eventos,Total Pago'

@@ -1,5 +1,5 @@
 /**
- * E2E Test: Autenticacao — Story E4.6 (AC-4)
+ * E2E Test: Autenticação — Story E4.6 (AC-4)
  *
  * Registro, login, verificar perfil, logout, verificar redirecionamento.
  */
@@ -9,8 +9,8 @@ const TEST_EMAIL = `e2e-auth-${Date.now()}@test.local`
 const TEST_PASSWORD = 'E2eTest@2026!'
 const TEST_NAME = 'Teste E2E Auth'
 
-test.describe('Autenticacao', () => {
-  test('deve fazer login e acessar area logada', async ({ page }) => {
+test.describe('Autenticação', () => {
+  test('deve fazer login e acessar área logada', async ({ page }) => {
     // Navigate to login page
     await page.goto('/login')
       .catch(() => page.goto('/auth/signin'))
@@ -21,7 +21,7 @@ test.describe('Autenticacao', () => {
       .or(page.locator('input[name="email"]').first())
 
     if (!(await loginForm.isVisible())) {
-      test.skip(true, 'Pagina de login nao encontrada')
+      test.skip(true, 'Pagina de login não encontrada')
       return
     }
 

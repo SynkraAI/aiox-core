@@ -6,7 +6,7 @@ import { FacilitatorForm } from '../../../../../components/facilitators/facilita
 
 export const metadata: Metadata = {
   title: 'Editar Facilitador',
-  description: 'Editar facilitador do Ciclo das Estacoes',
+  description: 'Editar facilitador do Ciclo das Estações',
 }
 
 interface EditFacilitatorPageProps {
@@ -55,7 +55,7 @@ export default async function EditFacilitatorPage({ params }: EditFacilitatorPag
         <div className="mt-12 border-t pt-8">
           <h2 className="mb-4 text-xl font-semibold text-gray-900">Eventos Associados</h2>
           <p className="mb-4 text-sm text-gray-500">
-            A associacao evento-facilitador e gerenciada na pagina do evento.
+            A associacao evento-facilitador e gerenciada na página do evento.
           </p>
           <div className="overflow-x-auto rounded-lg border border-gray-200">
             <table className="min-w-full divide-y divide-gray-200">

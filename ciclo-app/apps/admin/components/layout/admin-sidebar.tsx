@@ -63,7 +63,7 @@ function SidebarLogo() {
       </div>
       <div className="flex flex-col">
         <span className="text-sm font-heading font-semibold text-base-bg">
-          Base Triade
+          Base Tríade
         </span>
         <span className="text-xs text-base-bg/50">Admin</span>
       </div>

@@ -2,7 +2,7 @@
  * Full-Screen QR Code Page
  * Story E3.4 — AC-4: Large QR display for scanning at event entrance
  *
- * Accessible from /minha-conta/inscricoes/[id]/qrcode
+ * Accessible from /minha-conta/inscrições/[id]/qrcode
  * Shows large QR code optimized for scanning by facilitators.
  */
 
@@ -26,7 +26,7 @@ export default async function QRCodePage({ params }: PageProps) {
   const session = await auth()
 
   if (!session?.user?.id) {
-    redirect('/auth/login?callbackUrl=/minha-conta/inscricoes')
+    redirect('/auth/login?callbackUrl=/minha-conta/inscrições')
   }
 
   const { id } = await params
@@ -53,24 +53,24 @@ export default async function QRCodePage({ params }: PageProps) {
 
   // Only the owner can view their QR code on this page
   if (registration.userId !== session.user.id) {
-    redirect('/minha-conta/inscricoes')
+    redirect('/minha-conta/inscrições')
   }
 
   if (registration.status !== 'CONFIRMED') {
     return (
       <div className="mx-auto max-w-lg p-6 text-center">
         <h1 className="text-xl font-bold text-foreground mb-4">
-          QR Code Indisponivel
+          QR Code Indisponível
         </h1>
         <p className="text-sm text-muted-foreground mb-6">
-          O QR Code so esta disponivel para inscricoes confirmadas.
+          O QR Code só está disponível para inscrições confirmadas.
           Status atual: {registration.status}
         </p>
         <Link
-          href="/minha-conta/inscricoes"
+          href="/minha-conta/inscrições"
           className="text-sm font-medium text-seasonal-primary hover:text-seasonal-primary/80"
         >
-          Voltar para inscricoes
+          Voltar para inscrições
         </Link>
       </div>
     )
@@ -80,16 +80,16 @@ export default async function QRCodePage({ params }: PageProps) {
     return (
       <div className="mx-auto max-w-lg p-6 text-center">
         <h1 className="text-xl font-bold text-foreground mb-4">
-          QR Code em Geracao
+          QR Code em Geração
         </h1>
         <p className="text-sm text-muted-foreground mb-6">
-          Seu QR Code esta sendo gerado. Tente novamente em alguns instantes.
+          Seu QR Code está sendo gerado. Tente novamente em alguns instantes.
         </p>
         <Link
-          href="/minha-conta/inscricoes"
+          href="/minha-conta/inscrições"
           className="text-sm font-medium text-seasonal-primary hover:text-seasonal-primary/80"
         >
-          Voltar para inscricoes
+          Voltar para inscrições
         </Link>
       </div>
     )
@@ -98,8 +98,8 @@ export default async function QRCodePage({ params }: PageProps) {
   return (
     <div className="mx-auto max-w-lg p-6">
       <nav className="mb-6 text-sm text-muted-foreground">
-        <Link href="/minha-conta/inscricoes" className="hover:text-foreground">
-          Minhas Inscricoes
+        <Link href="/minha-conta/inscrições" className="hover:text-foreground">
+          Minhas Inscrições
         </Link>
         <span className="mx-2">/</span>
         <span className="text-foreground">QR Code</span>
@@ -126,10 +126,10 @@ export default async function QRCodePage({ params }: PageProps) {
 
       <div className="mt-8 text-center">
         <Link
-          href={`/minha-conta/inscricoes/${registration.id}`}
+          href={`/minha-conta/inscrições/${registration.id}`}
           className="text-sm font-medium text-muted-foreground hover:text-foreground"
         >
-          Voltar para detalhes da inscricao
+          Voltar para detalhes da inscrição
         </Link>
       </div>
     </div>

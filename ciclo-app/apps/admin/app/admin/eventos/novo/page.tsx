@@ -4,7 +4,7 @@ import { EventForm } from '../../../../components/events/event-form'
 
 export const metadata: Metadata = {
   title: 'Criar Evento',
-  description: 'Criar novo evento no Ciclo das Estacoes',
+  description: 'Criar novo evento no Ciclo das Estações',
 }
 
 export default function NovoEventoPage() {

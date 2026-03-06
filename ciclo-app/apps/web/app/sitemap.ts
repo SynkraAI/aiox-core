@@ -1,7 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { prisma } from '@ciclo/database'
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestacoes.com.br'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestações.com.br'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Fetch all published event slugs for dynamic pages

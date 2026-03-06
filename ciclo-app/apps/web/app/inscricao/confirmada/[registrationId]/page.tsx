@@ -65,8 +65,8 @@ export default async function ConfirmationPage({ params }: PageProps) {
 
   const methodLabel: Record<string, string> = {
     PIX: 'PIX',
-    BOLETO: 'Boleto Bancario',
-    CREDIT_CARD: 'Cartao de Credito',
+    BOLETO: 'Boleto Bancário',
+    CREDIT_CARD: 'Cartão de Crédito',
   }
 
   return (
@@ -90,17 +90,17 @@ export default async function ConfirmationPage({ params }: PageProps) {
           </svg>
         </div>
         <h1 className="mt-4 text-2xl font-bold text-foreground">
-          Inscricao Confirmada!
+          Inscrição Confirmada!
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Sua inscricao foi realizada com sucesso.
+          Sua inscrição foi realizada com sucesso.
         </p>
       </div>
 
       {/* Registration summary */}
       <div className="mt-8 rounded-lg border border-border bg-card p-6">
         <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-          Resumo da Inscricao
+          Resumo da Inscrição
         </h2>
 
         <div className="mt-4 space-y-3">
@@ -208,10 +208,10 @@ export default async function ConfirmationPage({ params }: PageProps) {
             </svg>
           </div>
           <p className="mt-3 text-sm text-muted-foreground">
-            Seu QR Code de acesso ao evento sera gerado em breve.
+            Seu QR Code de acesso ao evento será gerado em breve.
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
-            Voce recebera por email quando estiver pronto.
+            Você recebera por email quando estiver pronto.
           </p>
         </div>
       )}
@@ -219,7 +219,7 @@ export default async function ConfirmationPage({ params }: PageProps) {
       {/* Actions */}
       <div className="mt-8 space-y-3">
         <Link
-          href="/minha-conta/inscricoes"
+          href="/minha-conta/inscrições"
           className="flex w-full items-center justify-center rounded-md bg-seasonal-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-seasonal-primary/90"
         >
           Minha Conta

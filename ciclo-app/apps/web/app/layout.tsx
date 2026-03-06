@@ -18,16 +18,16 @@ const playfair = Playfair_Display({
   display: 'swap',
 })
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestacoes.com.br'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestações.com.br'
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'Ciclo das Estacoes | Base Triade',
-    template: '%s | Ciclo das Estacoes',
+    default: 'Ciclo das Estações | Base Tríade',
+    template: '%s | Ciclo das Estações',
   },
   description:
-    'Programa de autocuidado ciclico voltado para terapeutas holisticos. Eventos sazonais, comunidade e jornada de transformacao.',
+    'Programa de autocuidado cíclico voltado para terapeutas holísticos. Eventos sazonais, comunidade e jornada de transformação.',
   manifest: '/manifest.json',
   appleWebApp: {
     capable: true,

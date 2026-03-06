@@ -6,8 +6,8 @@ import { auth } from '@ciclo/auth'
 import { formatCurrency } from '@ciclo/utils'
 
 export const metadata: Metadata = {
-  title: 'Minhas Inscricoes',
-  description: 'Veja e gerencie suas inscricoes em eventos',
+  title: 'Minhas Inscrições',
+  description: 'Veja e gerencie suas inscrições em eventos',
 }
 
 const STATUS_LABELS: Record<string, { label: string; color: string }> = {
@@ -18,11 +18,11 @@ const STATUS_LABELS: Record<string, { label: string; color: string }> = {
   TRANSFERRED: { label: 'Transferida', color: 'bg-purple-100 text-purple-800' },
 }
 
-export default async function InscricoesPage() {
+export default async function InscriçõesPage() {
   const session = await auth()
 
   if (!session?.user?.id) {
-    redirect('/auth/login?callbackUrl=/minha-conta/inscricoes')
+    redirect('/auth/login?callbackUrl=/minha-conta/inscrições')
   }
 
   const registrations = await prisma.registration.findMany({
@@ -57,16 +57,16 @@ export default async function InscricoesPage() {
     return (
       <div className="text-center py-12">
         <h1 className="text-2xl font-bold text-gray-900 mb-4">
-          Minhas Inscricoes
+          Minhas Inscrições
         </h1>
         <p className="text-gray-500 mb-6">
-          Voce ainda nao tem inscricoes em eventos.
+          Você ainda não tem inscrições em eventos.
         </p>
         <Link
           href="/eventos"
           className="inline-block rounded-md bg-green-700 px-6 py-3 text-sm font-semibold text-white hover:bg-green-800"
         >
-          Ver Eventos Disponiveis
+          Ver Eventos Disponíveis
         </Link>
       </div>
     )
@@ -75,7 +75,7 @@ export default async function InscricoesPage() {
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-900 mb-6">
-        Minhas Inscricoes
+        Minhas Inscrições
       </h1>
 
       <div className="space-y-4">
@@ -128,7 +128,7 @@ export default async function InscricoesPage() {
                 {/* E3.4: QR Code link for confirmed registrations */}
                 {reg.status === 'CONFIRMED' && reg.qrCode && (
                   <Link
-                    href={`/minha-conta/inscricoes/${reg.id}/qrcode`}
+                    href={`/minha-conta/inscrições/${reg.id}/qrcode`}
                     className="inline-flex items-center gap-1 text-sm font-medium text-seasonal-primary hover:text-seasonal-primary/80"
                   >
                     <svg
@@ -152,10 +152,10 @@ export default async function InscricoesPage() {
                 )}
                 {canManage && (
                   <Link
-                    href={`/minha-conta/inscricoes/${reg.id}`}
+                    href={`/minha-conta/inscrições/${reg.id}`}
                     className="text-sm font-medium text-green-700 hover:text-green-800"
                   >
-                    Gerenciar inscricao
+                    Gerenciar inscrição
                   </Link>
                 )}
               </div>

@@ -60,23 +60,23 @@ export function ParticipantFormClient({
     const newErrors: FormErrors = {}
 
     if (!name.trim()) {
-      newErrors.name = 'Nome completo e obrigatorio.'
+      newErrors.name = 'Nome completo é obrigatório.'
     }
 
     if (!email.trim()) {
-      newErrors.email = 'Email e obrigatorio.'
+      newErrors.email = 'Email é obrigatório.'
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = 'Email invalido.'
+      newErrors.email = 'Email inválido.'
     }
 
     if (!phone.trim()) {
-      newErrors.phone = 'Telefone e obrigatorio.'
+      newErrors.phone = 'Telefone é obrigatório.'
     }
 
     if (!cpf.trim()) {
-      newErrors.cpf = 'CPF e obrigatorio.'
+      newErrors.cpf = 'CPF é obrigatório.'
     } else if (!validateCPF(cpf)) {
-      newErrors.cpf = 'CPF invalido.'
+      newErrors.cpf = 'CPF inválido.'
     }
 
     setErrors(newErrors)
@@ -113,7 +113,7 @@ export function ParticipantFormClient({
       isFirstTime,
     })
 
-    router.push(`/inscricao/${eventSlug}/pagamento`)
+    router.push(`/inscrição/${eventSlug}/pagamento`)
   }
 
   function handleBack() {
@@ -126,7 +126,7 @@ export function ParticipantFormClient({
       dietaryRestrictions: dietaryRestrictions.trim(),
       isFirstTime,
     })
-    router.push(`/inscricao/${eventSlug}`)
+    router.push(`/inscrição/${eventSlug}`)
   }
 
   return (
@@ -135,7 +135,7 @@ export function ParticipantFormClient({
         Dados do participante
       </h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        Preencha seus dados para a inscricao.
+        Preencha seus dados para a inscrição.
       </p>
 
       <div className="mt-6 space-y-5">
@@ -255,28 +255,28 @@ export function ParticipantFormClient({
           </p>
         </div>
 
-        {/* Restricoes alimentares */}
+        {/* Restrições alimentares */}
         <div>
           <label
             htmlFor="dietary"
             className="block text-sm font-medium text-foreground"
           >
-            Restricoes alimentares
+            Restrições alimentares
           </label>
           <textarea
             id="dietary"
             value={dietaryRestrictions}
             onChange={(e) => setDietaryRestrictions(e.target.value)}
-            placeholder="Ex: vegetariano, alergias, intolerancia a lactose..."
+            placeholder="Ex: vegetariano, alergias, intolerância a lactose..."
             rows={3}
             className="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus:border-seasonal-primary focus:outline-none focus:ring-1 focus:ring-seasonal-primary"
           />
         </div>
 
-        {/* E sua primeira vez? */}
+        {/* É sua primeira vez? */}
         <div>
           <span className="block text-sm font-medium text-foreground">
-            E sua primeira vez no evento?
+            É sua primeira vez no evento?
           </span>
           <div className="mt-2 flex gap-6">
             <label className="flex items-center gap-2 text-sm text-foreground">

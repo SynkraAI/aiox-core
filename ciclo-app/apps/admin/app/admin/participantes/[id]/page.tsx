@@ -117,11 +117,11 @@ export default async function ParticipanteDetailPage({ params }: ParticipanteDet
       {/* Registration History */}
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle>Historico de Inscricoes</CardTitle>
+          <CardTitle>Historico de Inscrições</CardTitle>
         </CardHeader>
         <CardContent>
           {participant.registrations.length === 0 ? (
-            <p className="text-sm text-gray-500">Nenhuma inscricao encontrada.</p>
+            <p className="text-sm text-gray-500">Nenhuma inscrição encontrada.</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
@@ -176,7 +176,7 @@ export default async function ParticipanteDetailPage({ params }: ParticipanteDet
       {/* Internal Notes */}
       <Card>
         <CardHeader>
-          <CardTitle>Anotacoes Internas</CardTitle>
+          <CardTitle>Anotações Internas</CardTitle>
         </CardHeader>
         <CardContent>
           <NotesEditor

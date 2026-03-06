@@ -21,7 +21,7 @@ export default function RegisterPage() {
     const confirmPassword = formData.get('confirmPassword') as string
 
     if (password !== confirmPassword) {
-      setError('As senhas nao coincidem.')
+      setError('As senhas não coincidem.')
       setIsLoading(false)
       return
     }
@@ -102,7 +102,7 @@ export default function RegisterPage() {
             required
             minLength={8}
             className="mt-1 block w-full rounded-md border border-stone-300 px-3 py-2 text-stone-900 placeholder-stone-400 focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
-            placeholder="Minimo 8 caracteres"
+            placeholder="Mínimo 8 caracteres"
           />
         </div>
 
@@ -131,7 +131,7 @@ export default function RegisterPage() {
       </form>
 
       <p className="mt-6 text-center text-sm text-stone-600">
-        Ja tem conta?{' '}
+        Já tem conta?{' '}
         <Link href="/login" className="font-medium text-amber-700 hover:text-amber-800">
           Entrar
         </Link>

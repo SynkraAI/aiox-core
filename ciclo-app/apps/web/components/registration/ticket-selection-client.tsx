@@ -31,7 +31,7 @@ interface TicketSelectionClientProps {
 const TIER_LABELS: Record<string, string> = {
   early_bird: 'Early Bird',
   regular: 'Regular',
-  last_minute: 'Ultima Hora',
+  last_minute: 'Última Hora',
 }
 
 export function TicketSelectionClient({
@@ -66,7 +66,7 @@ export function TicketSelectionClient({
       pricingTier: selectedTicket.tier,
     })
 
-    router.push(`/inscricao/${eventSlug}/dados`)
+    router.push(`/inscrição/${eventSlug}/dados`)
   }
 
   return (

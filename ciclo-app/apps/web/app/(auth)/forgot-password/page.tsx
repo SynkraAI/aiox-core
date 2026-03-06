@@ -25,13 +25,13 @@ export default function ForgotPasswordPage() {
 
       if (!response.ok) {
         const data = await response.json()
-        setError(data.error ?? 'Erro ao processar solicitacao.')
+        setError(data.error ?? 'Erro ao processar solicitação.')
         return
       }
 
       setSuccess(true)
     } catch {
-      setError('Erro ao processar solicitacao. Tente novamente.')
+      setError('Erro ao processar solicitação. Tente novamente.')
     } finally {
       setIsLoading(false)
     }
@@ -44,7 +44,7 @@ export default function ForgotPasswordPage() {
           Email Enviado
         </h1>
         <p className="mb-6 text-center text-stone-600">
-          Se o email estiver cadastrado, voce recebera instrucoes para redefinir sua senha.
+          Se o email estiver cadastrado, você recebera instruções para redefinir sua senha.
           Verifique sua caixa de entrada e spam.
         </p>
         <Link
@@ -63,7 +63,7 @@ export default function ForgotPasswordPage() {
         Esqueceu a Senha?
       </h1>
       <p className="mb-6 text-center text-sm text-stone-600">
-        Informe seu email para receber um link de redefinicao.
+        Informe seu email para receber um link de redefinição.
       </p>
 
       {error && (
@@ -92,7 +92,7 @@ export default function ForgotPasswordPage() {
           disabled={isLoading}
           className="w-full rounded-md bg-amber-700 px-4 py-2 font-medium text-white hover:bg-amber-800 disabled:opacity-50"
         >
-          {isLoading ? 'Enviando...' : 'Enviar link de redefinicao'}
+          {isLoading ? 'Enviando...' : 'Enviar link de redefinição'}
         </button>
       </form>
 

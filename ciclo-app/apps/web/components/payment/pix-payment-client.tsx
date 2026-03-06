@@ -85,7 +85,7 @@ export function PixPaymentClient({
         setStatus('CONFIRMED')
         if (pollRef.current) clearInterval(pollRef.current)
         if (timerRef.current) clearInterval(timerRef.current)
-        router.push(`/inscricao/confirmada/${registrationId}`)
+        router.push(`/inscrição/confirmada/${registrationId}`)
       } else if (data.status === 'FAILED') {
         setStatus('FAILED')
         if (pollRef.current) clearInterval(pollRef.current)
@@ -134,7 +134,7 @@ export function PixPaymentClient({
       <div className="mt-6 rounded-lg border border-amber-200 bg-amber-50 p-6 text-center">
         <p className="text-lg font-bold text-amber-700">PIX expirado</p>
         <p className="mt-2 text-sm text-amber-600">
-          O tempo para pagamento via PIX expirou. Voce pode tentar novamente.
+          O tempo para pagamento via PIX expirou. Você pode tentar novamente.
         </p>
         <button
           onClick={() => window.location.reload()}
@@ -166,7 +166,7 @@ export function PixPaymentClient({
       {pixCopiaECola && (
         <div>
           <label className="text-sm font-medium text-foreground">
-            Codigo Copia e Cola
+            Código Copia e Cola
           </label>
           <div className="mt-1 flex gap-2">
             <input
@@ -198,17 +198,17 @@ export function PixPaymentClient({
         <h3 className="text-sm font-semibold text-foreground">Como pagar com PIX</h3>
         <ol className="mt-2 space-y-1 text-sm text-muted-foreground">
           <li>1. Abra o app do seu banco</li>
-          <li>2. Selecione a opcao PIX</li>
-          <li>3. Escaneie o QR Code acima ou copie o codigo</li>
+          <li>2. Selecione a opção PIX</li>
+          <li>3. Escaneie o QR Code acima ou copie o código</li>
           <li>4. Confirme o pagamento</li>
-          <li>5. Aguarde a confirmacao automatica nesta pagina</li>
+          <li>5. Águarde a confirmação automatica nesta pagina</li>
         </ol>
       </div>
 
       {/* Status indicator */}
       <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
         <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-amber-400" />
-        Aguardando pagamento...
+        Águardando pagamento...
       </div>
     </div>
   )

@@ -8,8 +8,8 @@ import type { CancellationPolicy } from '@ciclo/utils'
  * POST /api/registrations/[id]/cancel
  * Story E3.5 - AC-7
  *
- * Cancela inscricao e calcula reembolso automaticamente.
- * Apenas o proprio usuario ou ADMIN pode cancelar.
+ * Cancela inscrição e calcula reembolso automaticamente.
+ * Apenas o próprio usuario ou ADMIN pode cancelar.
  * Reembolso no MVP: placeholder manual — admin aprova.
  */
 export async function POST(
@@ -20,7 +20,7 @@ export async function POST(
     const session = await requireAuth()
     const { id: registrationId } = await params
 
-    // 1. Buscar inscricao com evento e pagamento
+    // 1. Buscar inscrição com evento e pagamento
     const registration = await prisma.registration.findUnique({
       where: { id: registrationId },
       include: {
@@ -45,45 +45,45 @@ export async function POST(
 
     if (!registration) {
       return NextResponse.json(
-        { error: 'Inscricao nao encontrada.' },
+        { error: 'Inscrição não encontrada.' },
         { status: 404 }
       )
     }
 
-    // 2. Verificar autorizacao: proprio usuario ou ADMIN
+    // 2. Verificar autorizacao: próprio usuario ou ADMIN
     const isOwner = registration.userId === session.user.id
     const isAdmin = session.user.role === 'ADMIN'
 
     if (!isOwner && !isAdmin) {
       return NextResponse.json(
-        { error: 'Acesso negado. Voce so pode cancelar suas proprias inscricoes.' },
+        { error: 'Acesso negado. Você só pode cancelar suas próprias inscrições.' },
         { status: 403 }
       )
     }
 
-    // 3. Verificar se inscricao pode ser cancelada
+    // 3. Verificar se inscrição pode ser cancelada
     if (registration.status === 'CANCELLED') {
       return NextResponse.json(
-        { error: 'Esta inscricao ja foi cancelada.' },
+        { error: 'Esta inscrição já foi cancelada.' },
         { status: 400 }
       )
     }
 
     if (registration.status === 'TRANSFERRED') {
       return NextResponse.json(
-        { error: 'Esta inscricao ja foi transferida.' },
+        { error: 'Esta inscrição já foi transferida.' },
         { status: 400 }
       )
     }
 
     if (registration.status === 'REFUNDED') {
       return NextResponse.json(
-        { error: 'Esta inscricao ja foi reembolsada.' },
+        { error: 'Esta inscrição já foi reembolsada.' },
         { status: 400 }
       )
     }
 
-    // 4. Carregar politica de cancelamento (evento override ou global)
+    // 4. Carregar política de cancelamento (evento override ou global)
     let policy: CancellationPolicy | null = null
 
     if (registration.event.cancellationPolicy) {
@@ -115,7 +115,7 @@ export async function POST(
       refundAmount = result.refundAmount
     }
 
-    // 6. Atualizar inscricao para CANCELLED
+    // 6. Atualizar inscrição para CANCELLED
     await prisma.registration.update({
       where: { id: registrationId },
       data: {
@@ -151,17 +151,17 @@ export async function POST(
 
     return NextResponse.json({
       success: true,
-      message: 'Inscricao cancelada com sucesso.',
+      message: 'Inscrição cancelada com sucesso.',
       refund: {
         percent: refundPercent,
         amount: refundAmount,
         note: refundAmount > 0
-          ? 'Reembolso sera processado pelo administrador.'
-          : 'Nenhum reembolso aplicavel conforme a politica de cancelamento.',
+          ? 'Reembolso será processado pelo administrador.'
+          : 'Nenhum reembolso aplicavel conforme a política de cancelamento.',
       },
     })
   } catch (error) {
-    if (error instanceof Error && error.message.includes('Nao autorizado')) {
+    if (error instanceof Error && error.message.includes('Não autorizado')) {
       return NextResponse.json({ error: error.message }, { status: 401 })
     }
     console.error('[CANCEL_REGISTRATION]', error)

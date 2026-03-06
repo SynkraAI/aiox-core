@@ -12,7 +12,7 @@ import { CancelRegistrationForm } from './cancel-form'
 import { TransferRegistrationForm } from './transfer-form'
 
 export const metadata: Metadata = {
-  title: 'Detalhes da Inscricao',
+  title: 'Detalhes da Inscrição',
 }
 
 interface PageProps {
@@ -23,7 +23,7 @@ export default async function RegistrationDetailPage({ params }: PageProps) {
   const session = await auth()
 
   if (!session?.user?.id) {
-    redirect('/auth/login?callbackUrl=/minha-conta/inscricoes')
+    redirect('/auth/login?callbackUrl=/minha-conta/inscrições')
   }
 
   const { id } = await params
@@ -60,7 +60,7 @@ export default async function RegistrationDetailPage({ params }: PageProps) {
 
   // Verificar que pertence ao usuario
   if (registration.userId !== session.user.id) {
-    redirect('/minha-conta/inscricoes')
+    redirect('/minha-conta/inscrições')
   }
 
   const paidAmount = registration.payments[0]?.amount ?? 0
@@ -78,7 +78,7 @@ export default async function RegistrationDetailPage({ params }: PageProps) {
   let refundPreview = { refundPercent: 0, refundAmount: 0 }
 
   if (canCancel && paidAmount > 0) {
-    // Carregar politica (evento override ou global)
+    // Carregar política (evento override ou global)
     let policy = null
 
     if (registration.event.cancellationPolicy) {
@@ -107,7 +107,7 @@ export default async function RegistrationDetailPage({ params }: PageProps) {
     Math.floor((eventDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24))
   )
 
-  // Carregar regras da politica para exibicao
+  // Carregar regras da política para exibição
   let policyRules: Array<{ daysBeforeEvent: number; refundPercent: number }> = []
   let transferAllowed = true
 
@@ -130,14 +130,14 @@ export default async function RegistrationDetailPage({ params }: PageProps) {
   return (
     <div>
       <nav className="mb-6 text-sm text-gray-500">
-        <Link href="/minha-conta/inscricoes" className="hover:text-gray-700">
-          Minhas Inscricoes
+        <Link href="/minha-conta/inscrições" className="hover:text-gray-700">
+          Minhas Inscrições
         </Link>
         <span className="mx-2">/</span>
         <span className="text-gray-900">Detalhes</span>
       </nav>
 
-      {/* Informacoes da inscricao */}
+      {/* Informações da inscrição */}
       <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm mb-6">
         <h1 className="text-xl font-bold text-gray-900 mb-4">
           {registration.event.name}
@@ -182,7 +182,7 @@ export default async function RegistrationDetailPage({ params }: PageProps) {
           </div>
           {canCancel && (
             <div>
-              <dt className="text-sm font-medium text-gray-500">Dias ate o Evento</dt>
+              <dt className="text-sm font-medium text-gray-500">Dias até o Evento</dt>
               <dd className="text-sm text-gray-900">{daysUntilEvent} dias</dd>
             </div>
           )}
@@ -193,7 +193,7 @@ export default async function RegistrationDetailPage({ params }: PageProps) {
       {canCancel && policyRules.length > 0 && (
         <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 mb-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-3">
-            Politica de Cancelamento
+            Política de Cancelamento
           </h2>
           <div className="space-y-2">
             {[...policyRules]
@@ -222,7 +222,7 @@ export default async function RegistrationDetailPage({ params }: PageProps) {
               ))}
             {transferAllowed && (
               <p className="text-sm text-gray-500 mt-2">
-                Transferencia para outra pessoa: sempre permitida, sem custo.
+                Transferência para outra pessoa: sempre permitida, sem custo.
               </p>
             )}
           </div>
@@ -236,14 +236,14 @@ export default async function RegistrationDetailPage({ params }: PageProps) {
             Previa de Reembolso
           </h2>
           <p className="text-sm text-amber-800">
-            Se voce cancelar agora ({daysUntilEvent} dias antes do evento):
+            Se você cancelar agora ({daysUntilEvent} dias antes do evento):
           </p>
           <p className="text-2xl font-bold text-amber-900 mt-2">
             {refundPreview.refundPercent}% = {formatCurrency(refundPreview.refundAmount)}
           </p>
           {refundPreview.refundPercent === 0 && (
             <p className="text-sm text-amber-700 mt-1">
-              Nenhum reembolso disponivel nesta faixa de dias.
+              Nenhum reembolso disponível nesta faixa de dias.
             </p>
           )}
         </div>
@@ -255,10 +255,10 @@ export default async function RegistrationDetailPage({ params }: PageProps) {
           {/* Cancelamento */}
           <div className="rounded-lg border border-red-200 bg-white p-6">
             <h2 className="text-lg font-semibold text-red-900 mb-2">
-              Cancelar Inscricao
+              Cancelar Inscrição
             </h2>
             <p className="text-sm text-gray-600 mb-4">
-              Ao cancelar, sua vaga sera liberada. O reembolso (se aplicavel) sera
+              Ao cancelar, sua vaga será liberada. O reembolso (se aplicavel) sera
               processado pelo administrador.
             </p>
             <CancelRegistrationForm
@@ -268,14 +268,14 @@ export default async function RegistrationDetailPage({ params }: PageProps) {
             />
           </div>
 
-          {/* Transferencia */}
+          {/* Transferência */}
           {canTransfer && transferAllowed && (
             <div className="rounded-lg border border-blue-200 bg-white p-6">
               <h2 className="text-lg font-semibold text-blue-900 mb-2">
-                Transferir Inscricao
+                Transferir Inscrição
               </h2>
               <p className="text-sm text-gray-600 mb-4">
-                Transfira sua inscricao para outra pessoa sem custo adicional.
+                Transfira sua inscrição para outra pessoa sem custo adicional.
                 A pessoa recebera um email com os detalhes.
               </p>
               <TransferRegistrationForm registrationId={registration.id} />
@@ -284,24 +284,24 @@ export default async function RegistrationDetailPage({ params }: PageProps) {
         </div>
       )}
 
-      {/* Status final para inscricoes ja canceladas/transferidas */}
+      {/* Status final para inscrições já canceladas/transferidas */}
       {!canCancel && (
         <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center">
           <p className="text-gray-600">
             {registration.status === 'CANCELLED' &&
-              'Esta inscricao foi cancelada.'}
+              'Esta inscrição foi cancelada.'}
             {registration.status === 'TRANSFERRED' &&
-              'Esta inscricao foi transferida para outra pessoa.'}
+              'Esta inscrição foi transferida para outra pessoa.'}
             {registration.status === 'REFUNDED' &&
-              'Esta inscricao foi reembolsada.'}
+              'Esta inscrição foi reembolsada.'}
             {isPast && registration.status === 'CONFIRMED' &&
-              'Este evento ja ocorreu.'}
+              'Este evento já ocorreu.'}
           </p>
           <Link
-            href="/minha-conta/inscricoes"
+            href="/minha-conta/inscrições"
             className="mt-4 inline-block text-sm font-medium text-green-700 hover:text-green-800"
           >
-            Voltar para inscricoes
+            Voltar para inscrições
           </Link>
         </div>
       )}

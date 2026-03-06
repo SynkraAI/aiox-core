@@ -40,7 +40,7 @@ export interface PaymentResult {
   expiresAt?: Date
   /** Boleto: URL do PDF */
   boletoUrl?: string
-  /** Boleto: codigo de barras / linha digitavel */
+  /** Boleto: código de barras / linha digitável */
   boletoCode?: string
   /** Boleto: data de vencimento */
   boletoDueDate?: Date

@@ -64,14 +64,14 @@ export default async function PaymentPage({ params }: PageProps) {
   // Load cancellation policy for display (AC-4: show at checkout)
   let policyNote: string | null = null
   if (event.cancellationPolicy) {
-    policyNote = `Cancelamento com +${event.cancellationPolicy.earlyDaysThreshold} dias: ${event.cancellationPolicy.earlyRefundPercent}% reembolso. Transferencia ${event.cancellationPolicy.transferAllowed ? 'permitida' : 'nao permitida'}.`
+    policyNote = `Cancelamento com +${event.cancellationPolicy.earlyDaysThreshold} dias: ${event.cancellationPolicy.earlyRefundPercent}% reembolso. Transferência ${event.cancellationPolicy.transferAllowed ? 'permitida' : 'não permitida'}.`
   } else {
     const globalPolicy = await prisma.cancellationPolicy.findFirst({
       where: { eventId: null, isActive: true },
       orderBy: { createdAt: 'desc' },
     })
     if (globalPolicy) {
-      policyNote = `Cancelamento com +${globalPolicy.earlyDaysThreshold} dias: ${globalPolicy.earlyRefundPercent}% reembolso. Transferencia ${globalPolicy.transferAllowed ? 'permitida' : 'nao permitida'}.`
+      policyNote = `Cancelamento com +${globalPolicy.earlyDaysThreshold} dias: ${globalPolicy.earlyRefundPercent}% reembolso. Transferência ${globalPolicy.transferAllowed ? 'permitida' : 'não permitida'}.`
     }
   }
 

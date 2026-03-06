@@ -7,13 +7,13 @@ export default function LeadsPage() {
         Leads
       </h1>
       <p className="mt-1 text-sm text-base-dark/60">
-        Captacao e gestao de leads
+        Captacao e gestão de leads
       </p>
 
       <Card className="mt-6 border-base-gold/10">
         <CardContent className="flex items-center justify-center py-16">
           <p className="text-base-dark/40">
-            Gestao de leads em breve &mdash; implementado na E2.6
+            Gestão de leads em breve &mdash; implementado na E2.6
           </p>
         </CardContent>
       </Card>

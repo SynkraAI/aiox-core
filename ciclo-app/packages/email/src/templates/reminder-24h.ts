@@ -95,7 +95,7 @@ export function renderReminder24hEmail(data: Reminder24hEmailData): EmailRenderR
     ${divider()}
 
     <p style="margin: 0; font-size: 14px; color: ${BRAND.colors.text}; text-align: center; line-height: 1.6;">
-      Chegue com antecedencia para aproveitar ao maximo a experiencia.<br>
+      Chegue com antecedência para aproveitar ao máximo a experiência.<br>
       Nos vemos amanha! 🌿
     </p>
   `
@@ -106,7 +106,7 @@ export function renderReminder24hEmail(data: Reminder24hEmailData): EmailRenderR
     ? `\nCronograma do Dia:\n${data.schedule.map(item => `${item.time} - ${item.title}${item.duration ? ` (${item.duration})` : ''}`).join('\n')}\n`
     : ''
 
-  const text = `LEMBRETE: E AMANHA! - Ciclo das Estacoes
+  const text = `LEMBRETE: E AMANHA! - Ciclo das Estações
 
 Ola, ${data.participantName}! Seu evento e amanha. Estamos ansiosos para te receber!
 
@@ -114,7 +114,7 @@ Evento: ${data.eventName}
 Data: ${data.eventDate}
 Local: ${data.eventLocation}
 ${scheduleText}
-Chegue com antecedencia para aproveitar ao maximo a experiencia.
+Chegue com antecedência para aproveitar ao máximo a experiência.
 Nos vemos amanha!
 
 ---

@@ -1,32 +1,32 @@
 /**
  * E2E Test: Landing Page — Story E4.6 (complementar)
  *
- * Verifica todas as secoes da landing page e formulario de leads.
+ * Verifica todas as secoes da landing page e formulário de leads.
  */
 import { test, expect } from '@playwright/test'
 
 test.describe('Landing Page', () => {
   test('deve exibir todas as secoes da landing page', async ({ page }) => {
     await page.goto('/')
-    await expect(page).toHaveTitle(/Ciclo das Estacoes/)
+    await expect(page).toHaveTitle(/Ciclo das Estações/)
 
     // Hero section
     const heroTitle = page.locator('h1')
-    await expect(heroTitle).toContainText('Ciclo das Estacoes')
+    await expect(heroTitle).toContainText('Ciclo das Estações')
 
     // CTA button
     const ctaBtn = page.locator('text=Conhecer Eventos')
     await expect(ctaBtn).toBeVisible()
 
-    // Proximos Eventos section
-    const eventosSection = page.locator('text=Proximos Eventos')
+    // Próximos Eventos section
+    const eventosSection = page.locator('text=Próximos Eventos')
     await expect(eventosSection).toBeVisible()
 
     // Proposta de Valor section
     const valorSection = page.locator('text=Por que participar?')
     await expect(valorSection).toBeVisible()
 
-    // Formulario de Interesse section
+    // Formulário de Interesse section
     const interesseSection = page.locator('text=Manifeste seu Interesse')
     await expect(interesseSection).toBeVisible()
 
@@ -43,7 +43,7 @@ test.describe('Landing Page', () => {
     await expect(footerFacilitadoras).toBeVisible()
   })
 
-  test('deve submeter formulario de lead com sucesso', async ({ page }) => {
+  test('deve submeter formulário de lead com sucesso', async ({ page }) => {
     await page.goto('/')
 
     // Scroll to form
@@ -104,7 +104,7 @@ test.describe('Landing Page', () => {
     // Verify content
     const content = await jsonLd.first().textContent()
     expect(content).toContain('Organization')
-    expect(content).toContain('Base Triade')
+    expect(content).toContain('Base Tríade')
   })
 
   test('deve exibir footer com links das facilitadoras', async ({ page }) => {

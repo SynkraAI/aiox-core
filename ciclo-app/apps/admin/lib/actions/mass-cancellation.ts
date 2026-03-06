@@ -21,9 +21,9 @@ interface MassCancellationResult {
 // ============================================================
 
 /**
- * Cancela todas as inscricoes ativas de um evento.
+ * Cancela todas as inscrições ativas de um evento.
  * Usado para contingencia climatica ou cancelamento do evento inteiro.
- * Todos os inscritos recebem credito integral ou conforme politica (80%).
+ * Todos os inscritos recebem crédito integral ou conforme política (80%).
  *
  * MVP: reembolso eh placeholder — admin processa manualmente.
  * Notificacao via E4.1 (placeholder — log por enquanto).
@@ -31,7 +31,7 @@ interface MassCancellationResult {
 export async function massCancelEvent(
   eventId: string,
   options: {
-    /** Se true, concede reembolso integral (100%) independente da politica */
+    /** Se true, concede reembolso integral (100%) independente da política */
     fullRefund?: boolean
   } = {}
 ): Promise<MassCancellationResult> {
@@ -45,10 +45,10 @@ export async function massCancelEvent(
     })
 
     if (!event) {
-      return { success: false, error: 'Evento nao encontrado.' }
+      return { success: false, error: 'Evento não encontrado.' }
     }
 
-    // 2. Buscar politica de cancelamento
+    // 2. Buscar política de cancelamento
     let policy: CancellationPolicy | null = null
 
     if (!options.fullRefund) {
@@ -65,7 +65,7 @@ export async function massCancelEvent(
       }
     }
 
-    // 3. Buscar todas as inscricoes ativas (PENDING ou CONFIRMED)
+    // 3. Buscar todas as inscrições ativas (PENDING ou CONFIRMED)
     const registrations = await prisma.registration.findMany({
       where: {
         eventId,
@@ -102,7 +102,7 @@ export async function massCancelEvent(
       refundPercent: number
     }> = []
 
-    // 4. Transaction: cancelar todas as inscricoes
+    // 4. Transaction: cancelar todas as inscrições
     await prisma.$transaction(async (tx) => {
       for (const reg of registrations) {
         const paymentAmount = reg.payments[0]?.amount ?? 0
@@ -121,7 +121,7 @@ export async function massCancelEvent(
 
         totalRefund += refundAmount
 
-        // Cancelar inscricao
+        // Cancelar inscrição
         await tx.registration.update({
           where: { id: reg.id },
           data: {
@@ -159,15 +159,15 @@ export async function massCancelEvent(
       registrations: cancellationLogs,
     }))
 
-    // 6. Placeholder: notificacao de todos os inscritos (E4.1)
-    // TODO: Integrar com sistema de notificacoes quando E4.1 for implementado
+    // 6. Placeholder: notificação de todos os inscritos (E4.1)
+    // TODO: Integrar com sistema de notificações quando E4.1 for implementado
     for (const log of cancellationLogs) {
       console.log(JSON.stringify({
         type: 'NOTIFICATION_PLACEHOLDER',
         timestamp: now.toISOString(),
         to: log.userEmail,
         subject: `Cancelamento do evento: ${event.name}`,
-        body: `Sua inscricao foi cancelada. Reembolso: ${log.refundPercent}% (R$ ${(log.refundAmount / 100).toFixed(2)}).`,
+        body: `Sua inscrição foi cancelada. Reembolso: ${log.refundPercent}% (R$ ${(log.refundAmount / 100).toFixed(2)}).`,
       }))
     }
 

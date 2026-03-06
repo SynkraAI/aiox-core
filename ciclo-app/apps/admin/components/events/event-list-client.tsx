@@ -75,12 +75,12 @@ function DeleteModal({ eventName, onConfirm, onCancel }: DeleteModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
-        <h3 className="text-lg font-semibold text-gray-900">Confirmar exclusao</h3>
+        <h3 className="text-lg font-semibold text-gray-900">Confirmar exclusão</h3>
         <p className="mt-2 text-sm text-gray-600">
           Tem certeza que deseja excluir o evento <strong>{eventName}</strong>?
         </p>
         <p className="mt-1 text-xs text-gray-500">
-          Se houver inscricoes, o evento sera marcado como deletado (soft delete).
+          Se houver inscrições, o evento sera marcado como deletado (soft delete).
           Caso contrario, sera removido permanentemente.
         </p>
         <div className="mt-4 flex justify-end gap-3">
@@ -138,7 +138,7 @@ export function EventListClient({ events }: EventListClientProps) {
       <div className="mb-6 flex flex-wrap items-center gap-4">
         <div>
           <label htmlFor="seasonFilter" className="mr-2 text-sm font-medium text-gray-700">
-            Estacao:
+            Estação:
           </label>
           <select
             id="seasonFilter"
@@ -188,7 +188,7 @@ export function EventListClient({ events }: EventListClientProps) {
                 Nome
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                Estacao
+                Estação
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                 Data

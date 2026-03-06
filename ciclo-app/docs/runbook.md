@@ -1,7 +1,7 @@
-# Runbook de Operacao — Ciclo das Estacoes
+# Runbook de Operacao — Ciclo das Estações
 
-> Documento operacional para gestao do sistema em producao.
-> Ultima atualizacao: 2026-03-05
+> Documento operacional para gestão do sistema em produção.
+> Ultima atualização: 2026-03-05
 
 ---
 
@@ -11,7 +11,7 @@
 2. [Como processar reembolso manualmente](#2-como-processar-reembolso-manualmente)
 3. [Como exportar lista de participantes](#3-como-exportar-lista-de-participantes)
 4. [Como acessar logs](#4-como-acessar-logs)
-5. [Como reenviar email de confirmacao](#5-como-reenviar-email-de-confirmacao)
+5. [Como reenviar email de confirmação](#5-como-reenviar-email-de-confirmação)
 6. [Como cancelar evento inteiro](#6-como-cancelar-evento-inteiro)
 7. [Contatos de emergencia e escalacao](#7-contatos-de-emergencia-e-escalacao)
 
@@ -23,21 +23,21 @@
 
 1. Acessar `https://app.basetriade.com/admin/events`
 2. Clicar em **"Novo Evento"**
-3. Preencher os campos obrigatorios:
+3. Preencher os campos obrigatórios:
    - **Nome** do evento (ex: "Outono 2026")
    - **Slug** (gerado automaticamente, editavel)
-   - **Estacao** (SPRING, SUMMER, AUTUMN, WINTER, CROSS_QUARTER)
-   - **Evento Astronomico** (opcional: equinocio, solsticio, etc.)
+   - **Estação** (SPRING, SUMMER, AUTUMN, WINTER, CROSS_QUARTER)
+   - **Evento Astronomico** (opcional: equinócio, solstício, etc.)
    - **Datas** de inicio e fim
    - **Elemento MTC** e **Orgao MTC** (opcional)
    - **Capacidade** maxima
-   - **Local** (ex: "Base Triade — Itajai/SC")
+   - **Local** (ex: "Base Tríade — Itajai/SC")
 4. Adicionar **tipos de ingresso** (TicketTypes):
-   - Nome, descricao, preco early-bird, preco regular, preco last-minute
-   - Quantidade disponivel
+   - Nome, descrição, preco early-bird, preco regular, preco last-minute
+   - Quantidade disponível
    - Datas de early-bird e last-minute
 5. Vincular **facilitadoras** ao evento
-6. Configurar **politica de cancelamento** (ou usar a politica global padrao)
+6. Configurar **política de cancelamento** (ou usar a política global padrão)
 7. Adicionar imagens e FAQs
 8. **Revisar** e clicar em **"Publicar"** (isPublished = true)
 
@@ -62,7 +62,7 @@
 4. Escolher reembolso **total** ou **parcial**
 5. Confirmar a devolucao
 
-### Via Stripe (pagamentos Cartao de Credito)
+### Via Stripe (pagamentos Cartao de Crédito)
 
 1. Acessar [Stripe Dashboard](https://dashboard.stripe.com/payments)
 2. Localizar o pagamento pelo `stripe_id` (campo na tabela `payments`)
@@ -80,7 +80,7 @@ UPDATE payments
 SET status = 'REFUNDED'
 WHERE id = '<payment-id>';
 
--- Atualizar status da inscricao
+-- Atualizar status da inscrição
 UPDATE registrations
 SET status = 'REFUNDED', updated_at = NOW()
 WHERE id = '<registration-id>';
@@ -93,7 +93,7 @@ cd ciclo-app/packages/database
 npx prisma studio
 ```
 
-Navegar ate a tabela `payments`, localizar o registro e alterar `status` para `REFUNDED`.
+Navegar até a tabela `payments`, localizar o registro e alterar `status` para `REFUNDED`.
 
 ### Politica de reembolso (referencia)
 
@@ -102,7 +102,7 @@ Navegar ate a tabela `payments`, localizar o registro e alterar `status` para `R
 | +15 dias | 80% do valor |
 | 7-14 dias | 50% do valor |
 | < 7 dias | 0% (sem reembolso) |
-| Transferencia | Permitida a qualquer momento |
+| Transferência | Permitida a qualquer momento |
 
 ---
 
@@ -155,16 +155,16 @@ ORDER BY u.name;
 ### Vercel Dashboard
 
 1. Acessar [Vercel Dashboard](https://vercel.com/dashboard)
-2. Selecionar o projeto **ciclo-das-estacoes**
+2. Selecionar o projeto **ciclo-das-estações**
 3. Ir em **"Logs"** no menu lateral
 4. Filtrar por:
    - **Nivel:** Error, Warning, Info
-   - **Periodo:** ultimas 24h, 7 dias, etc.
+   - **Período:** ultimas 24h, 7 dias, etc.
    - **Funcao:** nome da API route ou Server Action
 
 ### Logs estruturados
 
-O sistema usa structured logging. Campos padrao em cada log:
+O sistema usa structured logging. Campos padrão em cada log:
 
 ```json
 {
@@ -180,7 +180,7 @@ O sistema usa structured logging. Campos padrao em cada log:
 ### Sentry (error tracking)
 
 1. Acessar [Sentry Dashboard](https://sentry.io)
-2. Selecionar projeto **ciclo-das-estacoes**
+2. Selecionar projeto **ciclo-das-estações**
 3. Verificar **Issues** abertas
 4. Configurar alertas: Settings > Alerts > criar regra para erros criticos
 
@@ -191,16 +191,16 @@ O sistema usa structured logging. Campos padrao em cada log:
 
 ---
 
-## 5. Como reenviar email de confirmacao
+## 5. Como reenviar email de confirmação
 
 ### Via Admin Dashboard
 
 1. Acessar `https://app.basetriade.com/admin/registrations`
-2. Localizar a inscricao pelo nome ou email do participante
-3. Clicar em **"Reenviar Confirmacao"**
+2. Localizar a inscrição pelo nome ou email do participante
+3. Clicar em **"Reenviar Confirmação"**
 4. O sistema reenviara o email com QR Code via Resend
 
-### Via API (caso necessario)
+### Via API (caso necessário)
 
 ```bash
 curl -X POST https://app.basetriade.com/api/admin/registrations/<registration-id>/resend-confirmation \
@@ -218,7 +218,7 @@ curl -X POST https://app.basetriade.com/api/admin/registrations/<registration-id
 
 ## 6. Como cancelar evento inteiro
 
-> **ATENCAO:** Esta operacao afeta todos os participantes. Executar com cuidado.
+> **ATENCAO:** Esta operação afeta todos os participantes. Executar com cuidado.
 
 ### Procedimento
 
@@ -239,7 +239,7 @@ curl -X POST https://app.basetriade.com/api/admin/registrations/<registration-id
      AND r.status = 'CONFIRMED'
      AND p.status = 'APPROVED';
    ```
-4. **Processar reembolso** de cada participante (ver secao 2):
+4. **Processar reembolso** de cada participante (ver seção 2):
    - Reembolso de 100% em caso de cancelamento pelo organizador
    - Processar via MercadoPago e/ou Stripe conforme metodo de pagamento
 5. **Atualizar** status em massa:
@@ -262,7 +262,7 @@ curl -X POST https://app.basetriade.com/api/admin/registrations/<registration-id
 - [ ] Facilitadoras notificadas
 - [ ] Evento despublicado
 - [ ] Todos os reembolsos processados (MercadoPago + Stripe)
-- [ ] Status de inscricoes atualizado para CANCELLED
+- [ ] Status de inscrições atualizado para CANCELLED
 - [ ] Email de cancelamento enviado a todos os participantes
 - [ ] Motivo documentado
 - [ ] Redes sociais atualizadas (se aplicavel)
@@ -296,7 +296,7 @@ curl -X POST https://app.basetriade.com/api/admin/registrations/<registration-id
 - Sistema fora do ar (Vercel / Supabase down)
 - Falha em processamento de pagamentos
 - Vazamento de dados pessoais (LGPD incident)
-- Erro que impede inscricoes em evento proximo
+- Erro que impede inscrições em evento próximo
 - Problemas com QR Code no dia do evento
 
 ### Procedimento para incidentes LGPD
@@ -304,11 +304,11 @@ curl -X POST https://app.basetriade.com/api/admin/registrations/<registration-id
 1. **Identificar** e conter o incidente
 2. **Documentar** data/hora, dados afetados, causa
 3. **Notificar** Bob imediatamente
-4. **Avaliar** necessidade de notificacao a ANPD (72h para incidentes graves)
-5. **Comunicar** titulares afetados se necessario
+4. **Avaliar** necessidade de notificação a ANPD (72h para incidentes graves)
+5. **Comunicar** titulares afetados se necessário
 6. **Implementar** correcoes e medidas preventivas
 
 ---
 
-*Ciclo das Estacoes — Runbook de Operacao v1.0*
-*iAi . ECOssistema Base Triade*
+*Ciclo das Estações — Runbook de Operacao v1.0*
+*iAi . ECOssistema Base Tríade*

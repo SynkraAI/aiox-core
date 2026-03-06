@@ -14,7 +14,7 @@ export interface ConfirmationEmailData {
   eventLocation: string
   ticketTypeName: string
   qrCodeBase64?: string    // Base64-encoded QR code image (data:image/png;base64,...)
-  userAreaUrl: string      // Link to /minha-conta/inscricoes/[id]
+  userAreaUrl: string      // Link to /minha-conta/inscrições/[id]
 }
 
 export interface EmailRenderResult {
@@ -42,10 +42,10 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): EmailRende
 
   const content = `
     <h2 style="margin: 0 0 8px; font-size: 22px; color: ${BRAND.colors.primary};">
-      Inscricao Confirmada!
+      Inscrição Confirmada!
     </h2>
     <p style="margin: 0 0 24px; font-size: 16px; color: ${BRAND.colors.text};">
-      Ola, <strong>${escapeHtml(data.participantName)}</strong>! Sua inscricao foi confirmada com sucesso.
+      Ola, <strong>${escapeHtml(data.participantName)}</strong>! Sua inscrição foi confirmada com sucesso.
     </p>
 
     ${infoBox(`
@@ -82,21 +82,21 @@ export function renderConfirmationEmail(data: ConfirmationEmailData): EmailRende
     ${divider()}
 
     <p style="margin: 0 0 8px; font-size: 14px; color: ${BRAND.colors.text};">
-      Acesse sua area para ver todos os detalhes da inscricao:
+      Acesse sua area para ver todos os detalhes da inscrição:
     </p>
 
-    ${buttonBlock('Minha Inscricao', data.userAreaUrl)}
+    ${buttonBlock('Minha Inscrição', data.userAreaUrl)}
 
     <p style="margin: 16px 0 0; font-size: 13px; color: ${BRAND.colors.textLight}; text-align: center;">
       Nos vemos no evento! 🌿
     </p>
   `
 
-  const html = emailLayout(content, `Inscricao confirmada para ${data.eventName}`)
+  const html = emailLayout(content, `Inscrição confirmada para ${data.eventName}`)
 
-  const text = `INSCRICAO CONFIRMADA - Ciclo das Estacoes
+  const text = `INSCRICAO CONFIRMADA - Ciclo das Estações
 
-Ola, ${data.participantName}! Sua inscricao foi confirmada com sucesso.
+Ola, ${data.participantName}! Sua inscrição foi confirmada com sucesso.
 
 Evento: ${data.eventName}
 Data: ${data.eventDate}

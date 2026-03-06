@@ -1,60 +1,60 @@
 # Checklist de Lancamento — Ciclo 1 Outono 2026
 
-> Verificacao completa de todos os itens necessarios antes do lancamento do MVP.
+> Verificação completa de todos os itens necessários antes do lancamento do MVP.
 > Story: E4.7 | Sprint: Semanas 7-8
 
 ---
 
 ## Infraestrutura e Ambiente
 
-- [ ] **Vercel environment variables configuradas**: todas as ENVs do `.env.example` preenchidas com valores reais de producao (DATABASE_URL, NEXTAUTH_SECRET, MP_ACCESS_TOKEN, STRIPE_SECRET_KEY, RESEND_API_KEY, etc.)
+- [ ] **Vercel environment variables configuradas**: todas as ENVs do `.env.example` preenchidas com valores reais de produção (DATABASE_URL, NEXTAUTH_SECRET, MP_ACCESS_TOKEN, STRIPE_SECRET_KEY, RESEND_API_KEY, etc.)
 - [ ] **DNS configurado**: dominio `app.basetriade.com` apontando para Vercel
-- [ ] **HTTPS ativo**: certificado SSL valido e renovacao automatica ativa
-- [ ] **Vercel projeto configurado**: branch `main` para producao, preview para PRs
+- [ ] **HTTPS ativo**: certificado SSL válido e renovacao automatica ativa
+- [ ] **Vercel projeto configurado**: branch `main` para produção, preview para PRs
 
 ## Banco de Dados (Supabase)
 
-- [ ] **Supabase producao configurado**: projeto criado em regiao `sa-east-1`
+- [ ] **Supabase produção configurado**: projeto criado em regiao `sa-east-1`
 - [ ] **RLS policies ativas**: verificar cada tabela tem Row Level Security habilitado
-- [ ] **Database URL de producao**: configurada no Vercel (pooled + direct)
+- [ ] **Database URL de produção**: configurada no Vercel (pooled + direct)
 - [ ] **Backup automatico habilitado**: backups diarios com retencao minima de 7 dias
 - [ ] **Migrations executadas**: `prisma migrate deploy` aplicado com sucesso
 
 ## Dados Iniciais (Seed)
 
-- [ ] **Seed de producao executado**: `npm run db:seed` no package database
+- [ ] **Seed de produção executado**: `npm run db:seed` no package database
 - [ ] **Admin user criado**: Bob (ADMIN role) com email correto
 - [ ] **Facilitadoras cadastradas**: Daniela Lopper (@podprana) e Milena Koch (@koch.milenar) como isFeatured
-- [ ] **Espacos Casa do Sol**: 5 quartos criados (Terra, Agua, Fogo, Ar, Cabana Beija-Flor) a R$250/noite
-- [ ] **Politica de cancelamento global**: +15d=80%, 7-14d=50%, <7d=0%, transferencia permitida
+- [ ] **Espacos Casa do Sol**: 5 quartos criados (Terra, Água, Fogo, Ar, Cabana Beija-Flor) a R$250/noite
+- [ ] **Politica de cancelamento global**: +15d=80%, 7-14d=50%, <7d=0%, transferência permitida
 - [ ] **Evento template**: "Outono 2026" com tipos de ingresso basicos
 
 ## Pagamentos
 
-- [ ] **MercadoPago em modo producao**: ACCESS_TOKEN de producao (nao sandbox)
+- [ ] **MercadoPago em modo produção**: ACCESS_TOKEN de produção (nao sandbox)
 - [ ] **MercadoPago webhook configurado**: URL `https://app.basetriade.com/api/webhooks/mercadopago` no painel MP
 - [ ] **MercadoPago webhook secret**: MP_WEBHOOK_SECRET configurado no Vercel
-- [ ] **Stripe em modo live**: STRIPE_SECRET_KEY de producao (sk_live_...)
+- [ ] **Stripe em modo live**: STRIPE_SECRET_KEY de produção (sk_live_...)
 - [ ] **Stripe webhook endpoint configurado**: URL `https://app.basetriade.com/api/webhooks/stripe` no painel Stripe
 - [ ] **Stripe webhook secret**: STRIPE_WEBHOOK_SECRET configurado no Vercel
 
 ## Email Transacional
 
-- [ ] **Resend configurado**: RESEND_API_KEY de producao no Vercel
-- [ ] **Dominio verificado**: `basetriade.com` ou `ciclodaseestacoes.com.br` verificado no Resend
+- [ ] **Resend configurado**: RESEND_API_KEY de produção no Vercel
+- [ ] **Dominio verificado**: `basetriade.com` ou `ciclodaseestações.com.br` verificado no Resend
 - [ ] **DKIM configurado**: registro DNS DKIM adicionado e verificado
 - [ ] **SPF configurado**: registro DNS SPF incluindo Resend
 - [ ] **Remetente configurado**: `noreply@basetriade.com` ou similar
-- [ ] **Email de teste enviado**: verificar que nao cai em spam
+- [ ] **Email de teste enviado**: verificar que não cai em spam
 
 ## Teste Ponta-a-Ponta
 
-- [ ] **Compra de teste R$1**: criar ingresso de teste com preco minimo
-- [ ] **Pagamento via PIX**: processar pagamento e verificar confirmacao
-- [ ] **Email de confirmacao recebido**: verificar email com QR Code
+- [ ] **Compra de teste R$1**: criar ingresso de teste com preco mínimo
+- [ ] **Pagamento via PIX**: processar pagamento e verificar confirmação
+- [ ] **Email de confirmação recebido**: verificar email com QR Code
 - [ ] **QR Code funcional**: escanear e verificar check-in
 - [ ] **Reembolso de teste**: processar reembolso do R$1 de teste
-- [ ] **Fluxo de inscricao completo**: usuario cria conta -> escolhe evento -> seleciona ingresso -> paga -> recebe confirmacao
+- [ ] **Fluxo de inscrição completo**: usuario cria conta -> escolhe evento -> seleciona ingresso -> paga -> recebe confirmação
 
 ## Monitoring e Analytics
 
@@ -75,27 +75,27 @@
 
 ## Testes E2E
 
-- [ ] **Testes E2E passando em producao**: todos os testes da Story E4.6 executados contra o ambiente de producao
+- [ ] **Testes E2E passando em produção**: todos os testes da Story E4.6 executados contra o ambiente de produção
 - [ ] **Fluxo de login/registro**: funcionando
 - [ ] **Fluxo de compra**: funcionando
-- [ ] **Painel admin**: acessivel apenas para ADMIN
+- [ ] **Painel admin**: acessível apenas para ADMIN
 
-## Aprovacoes e Documentacao
+## Aprovações e Documentacao
 
 - [ ] **Runbook criado**: `docs/runbook.md` com procedimentos operacionais
-- [ ] **Aprovacao Daniela Lopper**: conteudo cadastrado no sistema aprovado pela facilitadora
-- [ ] **Aprovacao Milena Koch**: conteudo cadastrado no sistema aprovado pela facilitadora
+- [ ] **Aprovacao Daniela Lopper**: conteúdo cadastrado no sistema aprovado pela facilitadora
+- [ ] **Aprovacao Milena Koch**: conteúdo cadastrado no sistema aprovado pela facilitadora
 - [ ] **Equipe notificada**: todos os envolvidos sabem da data de lancamento
 
 ## Pos-Lancamento (primeiras 48h)
 
 - [ ] Monitorar Sentry para erros criticos
 - [ ] Verificar logs do Vercel para erros 500
-- [ ] Acompanhar primeiras inscricoes
+- [ ] Acompanhar primeiras inscrições
 - [ ] Verificar entregabilidade de emails (Resend dashboard)
 - [ ] Confirmar webhooks de pagamento funcionando (MercadoPago + Stripe)
 
 ---
 
 *Story E4.7 — Checklist de Lancamento*
-*iAi . ECOssistema Base Triade*
+*iAi . ECOssistema Base Tríade*

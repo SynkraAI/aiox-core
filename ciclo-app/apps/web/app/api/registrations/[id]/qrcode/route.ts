@@ -30,7 +30,7 @@ export async function GET(
 
     if (!registration) {
       return NextResponse.json(
-        { error: 'Inscricao nao encontrada.' },
+        { error: 'Inscrição não encontrada.' },
         { status: 404 }
       )
     }
@@ -42,21 +42,21 @@ export async function GET(
 
     if (!isOwner && !isAdmin && !isFacilitator) {
       return NextResponse.json(
-        { error: 'Acesso negado. Voce nao tem permissao para acessar este QR Code.' },
+        { error: 'Acesso negado. Você não tem permissao para acessar este QR Code.' },
         { status: 403 }
       )
     }
 
     if (registration.status !== 'CONFIRMED') {
       return NextResponse.json(
-        { error: 'QR Code disponivel apenas para inscricoes confirmadas.' },
+        { error: 'QR Code disponível apenas para inscrições confirmadas.' },
         { status: 400 }
       )
     }
 
     if (!registration.qrCode) {
       return NextResponse.json(
-        { error: 'QR Code ainda nao foi gerado para esta inscricao.' },
+        { error: 'QR Code ainda não foi gerado para esta inscrição.' },
         { status: 404 }
       )
     }
@@ -66,7 +66,7 @@ export async function GET(
       qrCode: registration.qrCode,
     })
   } catch (error) {
-    if (error instanceof Error && error.message.includes('Nao autorizado')) {
+    if (error instanceof Error && error.message.includes('Não autorizado')) {
       return NextResponse.json({ error: error.message }, { status: 401 })
     }
     console.error('[GET_QR_CODE]', error)

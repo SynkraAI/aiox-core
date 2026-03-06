@@ -53,7 +53,7 @@ function DeleteModal({ facilitatorName, error, onConfirm, onCancel }: DeleteModa
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
-        <h3 className="text-lg font-semibold text-gray-900">Confirmar exclusao</h3>
+        <h3 className="text-lg font-semibold text-gray-900">Confirmar exclusão</h3>
         <p className="mt-2 text-sm text-gray-600">
           Tem certeza que deseja excluir o facilitador <strong>{facilitatorName}</strong>?
         </p>
@@ -63,7 +63,7 @@ function DeleteModal({ facilitatorName, error, onConfirm, onCancel }: DeleteModa
           </div>
         )}
         <p className="mt-1 text-xs text-gray-500">
-          Se o facilitador estiver associado a atividades em eventos futuros, a exclusao sera impedida.
+          Se o facilitador estiver associado a atividades em eventos futuros, a exclusão sera impedida.
         </p>
         <div className="mt-4 flex justify-end gap-3">
           <Button variant="outline" size="sm" onClick={onCancel}>

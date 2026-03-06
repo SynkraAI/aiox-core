@@ -33,17 +33,17 @@ const PAYMENT_METHODS: { value: PaymentMethod; label: string; description: strin
   {
     value: 'PIX',
     label: 'PIX',
-    description: 'Pagamento instantaneo. Confirmacao imediata.',
+    description: 'Pagamento instantâneo. Confirmação imediata.',
   },
   {
     value: 'BOLETO',
-    label: 'Boleto Bancario',
-    description: 'Pagamento em ate 3 dias uteis.',
+    label: 'Boleto Bancário',
+    description: 'Pagamento em até 3 dias úteis.',
   },
   {
     value: 'CREDIT_CARD',
-    label: 'Cartao de Credito',
-    description: 'Parcelamento disponivel via Stripe.',
+    label: 'Cartão de Crédito',
+    description: 'Parcelamento disponível via Stripe.',
   },
 ]
 
@@ -106,7 +106,7 @@ export function PaymentStepClient({
 
   function handleFinalize() {
     if (!paymentMethod) {
-      setError('Selecione um metodo de pagamento.')
+      setError('Selecione um método de pagamento.')
       return
     }
 
@@ -129,10 +129,10 @@ export function PaymentStepClient({
 
       if (!result.success) {
         if (result.waitlistAvailable) {
-          router.push(`/inscricao/${eventSlug}/esgotado`)
+          router.push(`/inscrição/${eventSlug}/esgotado`)
           return
         }
-        setError(result.error || 'Erro ao criar inscricao.')
+        setError(result.error || 'Erro ao criar inscrição.')
         return
       }
 
@@ -152,7 +152,7 @@ export function PaymentStepClient({
 
   function handleBack() {
     updateData({ paymentMethod })
-    router.push(`/inscricao/${eventSlug}/dados`)
+    router.push(`/inscrição/${eventSlug}/dados`)
   }
 
   return (
@@ -161,7 +161,7 @@ export function PaymentStepClient({
         Pagamento
       </h2>
       <p className="mt-1 text-sm text-muted-foreground">
-        Escolha a forma de pagamento e finalize sua inscricao.
+        Escolha a forma de pagamento e finalize sua inscrição.
       </p>
 
       {/* Cross-selling Sun House rooms (AC-9) */}
@@ -219,7 +219,7 @@ export function PaymentStepClient({
                   </p>
                   {!room.isAvailable && (
                     <span className="mt-1 inline-block text-xs font-medium text-destructive">
-                      Indisponivel
+                      Indisponível
                     </span>
                   )}
                 </div>
@@ -253,7 +253,7 @@ export function PaymentStepClient({
       {/* Payment method selection (AC-6) */}
       <div className="mt-6">
         <h3 className="text-sm font-semibold text-foreground">
-          Metodo de pagamento
+          Método de pagamento
         </h3>
         <div className="mt-3 space-y-3">
           {PAYMENT_METHODS.map((method) => (
@@ -342,7 +342,7 @@ export function PaymentStepClient({
           disabled={isPending || !paymentMethod}
           className="rounded-md bg-seasonal-primary px-6 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-seasonal-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isPending ? 'Processando...' : 'Finalizar Inscricao'}
+          {isPending ? 'Processando...' : 'Finalizar Inscrição'}
         </button>
       </div>
     </div>

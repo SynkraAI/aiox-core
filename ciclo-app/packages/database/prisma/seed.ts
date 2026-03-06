@@ -1,8 +1,8 @@
 /**
- * Seed de Producao — Ciclo das Estacoes
+ * Seed de Producao — Ciclo das Estações
  * Story: E4.7 — Checklist de Lancamento (AC-5)
  *
- * Dados iniciais para o ambiente de producao:
+ * Dados iniciais para o ambiente de produção:
  * - 1 admin user (Bob)
  * - Facilitadoras iniciais (Daniela Lopper, Milena Koch) como isFeatured
  * - 5 espacos Casa do Sol (R$250/noite cada)
@@ -48,18 +48,18 @@ async function main() {
     update: {
       name: 'Daniela Lopper',
       role: 'Apresentadora e Facilitadora',
-      bio: 'Criadora do @podprana, referencia em saude integrativa e bem-estar.',
+      bio: 'Criadora do @podprana, referencia em saúde integrativa e bem-estar.',
       instagram: '@podprana',
-      specialties: ['Saude Integrativa', 'Bem-estar', 'Facilitacao'],
+      specialties: ['Saúde Integrativa', 'Bem-estar', 'Facilitacao'],
       isFeatured: true,
     },
     create: {
       id: 'facilitator-daniela-lopper',
       name: 'Daniela Lopper',
       role: 'Apresentadora e Facilitadora',
-      bio: 'Criadora do @podprana, referencia em saude integrativa e bem-estar.',
+      bio: 'Criadora do @podprana, referencia em saúde integrativa e bem-estar.',
       instagram: '@podprana',
-      specialties: ['Saude Integrativa', 'Bem-estar', 'Facilitacao'],
+      specialties: ['Saúde Integrativa', 'Bem-estar', 'Facilitacao'],
       isFeatured: true,
     },
   })
@@ -100,10 +100,10 @@ async function main() {
       capacity: 2,
     },
     {
-      id: 'room-quarto-agua',
-      name: 'Quarto Agua',
-      theme: 'Elemento Agua',
-      description: 'Quarto em tons azuis e fluidos, remetendo a fluidez e profundidade do elemento agua.',
+      id: 'room-quarto-água',
+      name: 'Quarto Água',
+      theme: 'Elemento Água',
+      description: 'Quarto em tons azuis e fluidos, remetendo a fluidez e profundidade do elemento água.',
       pricePerNight: 25000, // R$250
       capacity: 2,
     },
@@ -153,9 +153,9 @@ async function main() {
   console.log(`  [OK] Espacos Casa do Sol: ${roomsData.length} quartos (R$250/noite cada)`)
 
   // ----------------------------------------------------------
-  // 4. Politica de Cancelamento Global
+  // 4. Política de Cancelamento Global
   // ----------------------------------------------------------
-  // PRD: +15d = 80%, 7-14d = 50%, <7d = 0%, transferencia sempre permitida
+  // PRD: +15d = 80%, 7-14d = 50%, <7d = 0%, transferência sempre permitida
   const existingGlobalPolicy = await prisma.cancellationPolicy.findFirst({
     where: { eventId: null, isActive: true },
   })
@@ -170,15 +170,15 @@ async function main() {
         midRefundPercent: 50,
         transferAllowed: true,
         description:
-          'Politica padrao: cancelamento com mais de 15 dias = reembolso de 80%. ' +
+          'Politica padrão: cancelamento com mais de 15 dias = reembolso de 80%. ' +
           'Entre 7 e 14 dias = reembolso de 50%. Menos de 7 dias = sem reembolso. ' +
-          'Transferencia de ingresso permitida a qualquer momento.',
+          'Transferência de ingresso permitida a qualquer momento.',
         isActive: true,
       },
     })
     console.log('  [OK] Politica de cancelamento global criada')
   } else {
-    console.log('  [SKIP] Politica de cancelamento global ja existe')
+    console.log('  [SKIP] Politica de cancelamento global já existe')
   }
 
   // ----------------------------------------------------------
@@ -198,18 +198,18 @@ async function main() {
       elementMTC: 'Metal',
       organMTC: 'Pulmao',
       description:
-        'O Outono 2026 e o primeiro evento oficial do Ciclo das Estacoes. ' +
-        'Uma jornada imersiva de colheita interior, praticas integrativas e ' +
-        'reconexao com os ritmos naturais na transicao para o outono.',
+        'O Outono 2026 é o primeiro evento oficial do Ciclo das Estações. ' +
+        'Uma jornada imersiva de colheita interior, práticas integrativas e ' +
+        'reconexão com os ritmos naturais na transicao para o outono.',
       includedPractices: [
         'Yoga',
-        'Meditacao',
+        'Meditação',
         'Sound Healing',
         'Nutricao Ayurvedica',
         'Terapias Naturais',
       ],
       capacity: 50,
-      venue: 'Casa do Sol — Base Triade, Itajai/SC',
+      venue: 'Casa do Sol — Base Tríade, Itajai/SC',
       isPublished: false, // Publicar manualmente quando pronto
       isSoldOut: false,
     },
@@ -238,10 +238,10 @@ async function main() {
   const ticketTypesData = [
     {
       name: 'Passaporte Completo',
-      description: 'Acesso completo ao evento (sabado + domingo), incluindo todas as atividades e alimentacao.',
+      description: 'Acesso completo ao evento (sabado + domingo), incluindo todas as atividades e alimentação.',
       includes: [
         'Acesso a todas as atividades',
-        'Alimentacao consciente inclusa',
+        'Alimentação consciente inclusa',
         'Material de apoio',
         'Certificado de participacao',
       ],
@@ -258,7 +258,7 @@ async function main() {
       description: 'Acesso ao dia principal do evento no sabado.',
       includes: [
         'Acesso sabado completo',
-        'Alimentacao inclusa',
+        'Alimentação inclusa',
         'Participacao nas atividades do dia',
       ],
       earlyBirdPrice: 19700, // R$197
@@ -298,12 +298,12 @@ async function main() {
     await prisma.product.create({
       data: {
         name: 'Passaporte Anual',
-        description: 'Acesso a todos os 4 eventos do ciclo completo (Primavera, Verao, Outono, Inverno).',
+        description: 'Acesso a todos os 4 eventos do ciclo completo (Primavera, Verão, Outono, Inverno).',
         price: 199700, // R$1.997
         benefits: [
           'Acesso a todos os 4 eventos do ano',
           'Desconto progressivo na Arvore Sazonal',
-          'Prioridade nas inscricoes',
+          'Prioridade nas inscrições',
           'Comunidade exclusiva',
         ],
         installmentsAllowed: 12,
@@ -313,7 +313,7 @@ async function main() {
     })
     console.log('  [OK] Produto: Passaporte Anual (R$1.997)')
   } else {
-    console.log('  [SKIP] Produto Passaporte Anual ja existe')
+    console.log('  [SKIP] Produto Passaporte Anual já existe')
   }
 
   // ----------------------------------------------------------
@@ -322,12 +322,12 @@ async function main() {
   const siteContentData = [
     {
       key: 'hero_title',
-      value: { text: 'Ciclo das Estacoes', subtitle: 'Reconecte-se com os ciclos da natureza' },
+      value: { text: 'Ciclo das Estações', subtitle: 'Reconecte-se com os ciclos da natureza' },
     },
     {
       key: 'hero_description',
       value: {
-        text: 'Uma jornada imersiva de autoconhecimento e reconexao com a natureza atraves dos ciclos sazonais.',
+        text: 'Uma jornada imersiva de autoconhecimento e reconexão com a natureza através dos ciclos sazonais.',
       },
     },
     {
@@ -335,8 +335,8 @@ async function main() {
       value: {
         email: 'contato@basetriade.com',
         phone: '(47) 99999-9999',
-        instagram: '@ciclodasestacoes',
-        address: 'Casa do Sol — Base Triade, Itajai/SC',
+        instagram: '@ciclodasestações',
+        address: 'Casa do Sol — Base Tríade, Itajai/SC',
       },
     },
   ]
@@ -350,7 +350,7 @@ async function main() {
   }
   console.log(`  [OK] SiteContent: ${siteContentData.length} entradas`)
 
-  console.log('\n--- Seed de producao concluido com sucesso! ---\n')
+  console.log('\n--- Seed de produção concluido com sucesso! ---\n')
 }
 
 main()

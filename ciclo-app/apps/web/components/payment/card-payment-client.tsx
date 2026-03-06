@@ -76,7 +76,7 @@ export function CardPaymentClient({
     script.async = true
     script.onload = () => initializeStripe()
     script.onerror = () => {
-      setError('Erro ao carregar Stripe. Verifique sua conexao.')
+      setError('Erro ao carregar Stripe. Verifique sua conexão.')
       setIsLoading(false)
     }
     document.head.appendChild(script)
@@ -123,7 +123,7 @@ export function CardPaymentClient({
     e.preventDefault()
 
     if (!stripeRef.current || !elementsRef.current) {
-      setError('Stripe nao foi carregado corretamente.')
+      setError('Stripe não foi carregado corretamente.')
       return
     }
 
@@ -134,7 +134,7 @@ export function CardPaymentClient({
       await stripeRef.current.confirmPayment({
         elements: elementsRef.current,
         confirmParams: {
-          return_url: `${window.location.origin}/inscricao/confirmada/${registrationId}`,
+          return_url: `${window.location.origin}/inscrição/confirmada/${registrationId}`,
         },
         redirect: 'if_required',
       })
@@ -146,7 +146,7 @@ export function CardPaymentClient({
     }
 
     if (paymentIntent?.status === 'succeeded') {
-      router.push(`/inscricao/confirmada/${registrationId}`)
+      router.push(`/inscrição/confirmada/${registrationId}`)
       return
     }
 
@@ -162,7 +162,7 @@ export function CardPaymentClient({
           <div className="flex items-center justify-center py-8">
             <div className="h-6 w-6 animate-spin rounded-full border-2 border-seasonal-primary border-t-transparent" />
             <span className="ml-2 text-sm text-muted-foreground">
-              Carregando formulario de pagamento...
+              Carregando formulário de pagamento...
             </span>
           </div>
         )}
@@ -189,7 +189,7 @@ export function CardPaymentClient({
 
       {/* Security note */}
       <p className="text-center text-xs text-muted-foreground">
-        Pagamento seguro processado pelo Stripe. Seus dados de cartao nao sao
+        Pagamento seguro processado pelo Stripe. Seus dados de cartao não sao
         armazenados em nossos servidores.
       </p>
     </form>

@@ -86,7 +86,7 @@ function PracticesInput({ practices, onChange }: PracticesInputProps) {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder="Digite uma pratica e pressione Enter"
+          placeholder="Digite uma prática e pressione Enter"
           className="flex-1"
         />
         <Button type="button" variant="outline" size="sm" onClick={addPractice}>
@@ -251,7 +251,7 @@ export function EventForm({ event, mode }: EventFormProps) {
 
       {/* Basic Info */}
       <fieldset className="space-y-4">
-        <legend className="text-lg font-semibold text-gray-900">Informacoes Basicas</legend>
+        <legend className="text-lg font-semibold text-gray-900">Informações Basicas</legend>
 
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-gray-700">
@@ -270,13 +270,13 @@ export function EventForm({ event, mode }: EventFormProps) {
 
         <div>
           <label htmlFor="subtitle" className="block text-sm font-medium text-gray-700">
-            Subtitulo
+            Subtítulo
           </label>
           <Input
             id="subtitle"
             value={subtitle}
             onChange={(e) => setSubtitle(e.target.value)}
-            placeholder="Subtitulo opcional"
+            placeholder="Subtítulo opcional"
           />
         </div>
 
@@ -299,12 +299,12 @@ export function EventForm({ event, mode }: EventFormProps) {
 
       {/* Season & Astronomical */}
       <fieldset className="space-y-4">
-        <legend className="text-lg font-semibold text-gray-900">Estacao e Evento Astronomico</legend>
+        <legend className="text-lg font-semibold text-gray-900">Estação e Evento Astronomico</legend>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
             <label htmlFor="season" className="block text-sm font-medium text-gray-700">
-              Estacao *
+              Estação *
             </label>
             <select
               id="season"
@@ -391,7 +391,7 @@ export function EventForm({ event, mode }: EventFormProps) {
               id="elementMTC"
               value={elementMTC}
               onChange={(e) => setElementMTC(e.target.value)}
-              placeholder="Ex: Madeira, Fogo, Terra, Metal, Agua"
+              placeholder="Ex: Madeira, Fogo, Terra, Metal, Água"
             />
           </div>
 
@@ -411,11 +411,11 @@ export function EventForm({ event, mode }: EventFormProps) {
 
       {/* Description */}
       <fieldset className="space-y-4">
-        <legend className="text-lg font-semibold text-gray-900">Descricao</legend>
+        <legend className="text-lg font-semibold text-gray-900">Descrição</legend>
 
         <div>
           <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-            Descricao do Evento
+            Descrição do Evento
           </label>
           <textarea
             id="description"
@@ -433,7 +433,7 @@ export function EventForm({ event, mode }: EventFormProps) {
 
       {/* Practices */}
       <fieldset className="space-y-4">
-        <legend className="text-lg font-semibold text-gray-900">Praticas Incluidas</legend>
+        <legend className="text-lg font-semibold text-gray-900">Práticas Incluídas</legend>
         <PracticesInput practices={includedPractices} onChange={setIncludedPractices} />
       </fieldset>
 
@@ -508,7 +508,7 @@ export function EventForm({ event, mode }: EventFormProps) {
             ? 'Salvando...'
             : mode === 'create'
               ? 'Criar Evento'
-              : 'Salvar Alteracoes'}
+              : 'Salvar Alterações'}
         </Button>
         <Button type="button" variant="outline" onClick={() => router.push('/admin/eventos')}>
           Cancelar

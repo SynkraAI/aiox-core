@@ -13,16 +13,16 @@ export interface SeasonInfo {
 
 const SEASON_MAP: Record<Season, Omit<SeasonInfo, 'season'>> = {
   primavera: { label: 'Primavera', element: 'Madeira', organ: 'Figado' },
-  verao: { label: 'Verao', element: 'Fogo', organ: 'Coracao' },
+  verao: { label: 'Verão', element: 'Fogo', organ: 'Coracao' },
   outono: { label: 'Outono', element: 'Metal', organ: 'Pulmao' },
-  inverno: { label: 'Inverno', element: 'Agua', organ: 'Rim' },
+  inverno: { label: 'Inverno', element: 'Água', organ: 'Rim' },
 } as const
 
 /**
- * Determina a estacao atual baseado na data.
+ * Determina a estação atual baseado na data.
  * Hemisferio Sul (Brasil):
  * - Primavera: Set 22 - Dez 20
- * - Verao: Dez 21 - Mar 19
+ * - Verão: Dez 21 - Mar 19
  * - Outono: Mar 20 - Jun 20
  * - Inverno: Jun 21 - Set 21
  */
@@ -56,7 +56,7 @@ const SeasonContext = createContext<SeasonContextValue | null>(null)
 
 interface SeasonProviderProps {
   children: ReactNode
-  /** Forcar uma estacao especifica (para preview/testing) */
+  /** Forcar uma estação especifica (para preview/testing) */
   forceSeason?: Season
 }
 

@@ -13,7 +13,7 @@ export default function ProdutosPage() {
       <Card className="mt-6 border-base-gold/10">
         <CardContent className="flex items-center justify-center py-16">
           <p className="text-base-dark/40">
-            Gestao de produtos em breve &mdash; implementado na E2.5
+            Gestão de produtos em breve &mdash; implementado na E2.5
           </p>
         </CardContent>
       </Card>

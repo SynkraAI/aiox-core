@@ -161,7 +161,7 @@ export function QRDisplay({
     if (!canvas) return
 
     const link = document.createElement('a')
-    link.download = `qrcode-${parsed?.payload.registrationId ?? 'inscricao'}.png`
+    link.download = `qrcode-${parsed?.payload.registrationId ?? 'inscrição'}.png`
     link.href = canvas.toDataURL('image/png')
     link.click()
   }
@@ -169,7 +169,7 @@ export function QRDisplay({
   if (!parsed) {
     return (
       <div className={`text-center text-sm text-muted-foreground ${className}`}>
-        QR Code indisponivel.
+        QR Code indisponível.
       </div>
     )
   }
@@ -199,7 +199,7 @@ export function QRDisplay({
               Ingresso Digital
             </h3>
             <p className="text-xs text-muted-foreground mt-1">
-              Apresente este codigo na entrada do evento
+              Apresente este código na entrada do evento
             </p>
           </div>
 

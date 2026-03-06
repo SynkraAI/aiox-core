@@ -45,7 +45,7 @@ function ConfirmModal({ currentRole, targetRole, onConfirm, onCancel }: ConfirmM
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
-        <h3 className="text-lg font-semibold text-gray-900">Confirmar promocao de role</h3>
+        <h3 className="text-lg font-semibold text-gray-900">Confirmar promoção de role</h3>
         <p className="mt-2 text-sm text-gray-600">
           Deseja promover este participante de{' '}
           <strong>{ROLE_LABELS[currentRole] ?? currentRole}</strong> para{' '}
@@ -59,7 +59,7 @@ function ConfirmModal({ currentRole, targetRole, onConfirm, onCancel }: ConfirmM
             Cancelar
           </Button>
           <Button size="sm" onClick={onConfirm}>
-            Confirmar Promocao
+            Confirmar Promoção
           </Button>
         </div>
       </div>
@@ -83,7 +83,7 @@ export function RolePromotion({ userId, currentRole }: RolePromotionProps) {
   if (!promotion) {
     return (
       <p className="text-sm text-gray-500">
-        Role atual: {ROLE_LABELS[currentRole] ?? currentRole} — sem promocao disponivel.
+        Role atual: {ROLE_LABELS[currentRole] ?? currentRole} — sem promoção disponível.
       </p>
     )
   }

@@ -1,7 +1,7 @@
 /**
  * Cancellation policy calculation utilities
  * Pure functions — no side effects, fully testable
- * Story E3.5 — Politica de Cancelamento Editavel
+ * Story E3.5 — Política de Cancelamento Editavel
  * PRD Ref: FR-02.3, Apendice A
  */
 
@@ -30,11 +30,11 @@ export interface RefundResult {
 // ============================================================
 
 /**
- * Politica padrao conforme Apendice A do PRD:
+ * Politica padrão conforme Apendice A do PRD:
  * - +15 dias antes do evento: 80% reembolso
  * - 7 a 14 dias antes do evento: 50% reembolso
  * - <7 dias antes do evento: 0% reembolso
- * Transferencia sempre permitida sem custo
+ * Transferência sempre permitida sem custo
  */
 export const DEFAULT_CANCELLATION_POLICY: CancellationPolicy = {
   rules: [
@@ -50,8 +50,8 @@ export const DEFAULT_CANCELLATION_POLICY: CancellationPolicy = {
 // ============================================================
 
 /**
- * Calcula a diferenca em dias entre duas datas (somente parte de data, sem horario).
- * Retorna numero inteiro de dias.
+ * Calcula a diferenca em dias entre duas datas (somente parte de data, sem horário).
+ * Retorna número inteiro de dias.
  */
 function diffInDays(eventDate: Date, cancelDate: Date): number {
   const eventDay = new Date(eventDate.getFullYear(), eventDate.getMonth(), eventDate.getDate())
@@ -61,7 +61,7 @@ function diffInDays(eventDate: Date, cancelDate: Date): number {
 }
 
 /**
- * Calcula o reembolso de acordo com a politica de cancelamento.
+ * Calcula o reembolso de acordo com a política de cancelamento.
  *
  * As regras devem estar ordenadas por daysBeforeEvent descendente.
  * O sistema itera as regras de cima para baixo e aplica a primeira
@@ -106,7 +106,7 @@ export function calculateRefund(
 // ============================================================
 
 /**
- * Valida que as regras de uma politica estao consistentes:
+ * Valida que as regras de uma política estão consistentes:
  * - Pelo menos 1 regra
  * - daysBeforeEvent >= 0
  * - refundPercent entre 0 e 100
@@ -116,7 +116,7 @@ export function validateCancellationPolicy(policy: CancellationPolicy): string[]
   const errors: string[] = []
 
   if (!policy.rules || policy.rules.length === 0) {
-    errors.push('A politica deve ter pelo menos uma regra')
+    errors.push('A política deve ter pelo menos uma regra')
     return errors
   }
 

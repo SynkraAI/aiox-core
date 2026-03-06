@@ -6,7 +6,7 @@ import bcrypt from 'bcryptjs'
 import { prisma } from '@ciclo/database'
 
 /**
- * NextAuth.js v5 configuration for Ciclo das Estacoes.
+ * NextAuth.js v5 configuration for Ciclo das Estações.
  * Providers: Credentials (email/password) + Google OAuth.
  * Strategy: JWT with role in token.
  */

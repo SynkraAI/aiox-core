@@ -4,7 +4,7 @@ import { EventListClient } from '../../../components/events/event-list-client'
 
 export const metadata: Metadata = {
   title: 'Eventos',
-  description: 'Gerenciar eventos do Ciclo das Estacoes',
+  description: 'Gerenciar eventos do Ciclo das Estações',
 }
 
 export default async function EventosPage() {
@@ -15,7 +15,7 @@ export default async function EventosPage() {
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Eventos</h1>
         <p className="mt-1 text-sm text-gray-600">
-          Gerencie todos os eventos do Ciclo das Estacoes.
+          Gerencie todos os eventos do Ciclo das Estações.
         </p>
       </div>
 

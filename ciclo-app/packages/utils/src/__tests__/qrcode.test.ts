@@ -9,7 +9,7 @@ const TEST_SECRET = 'test-secret-key-for-hmac-256-signing'
 
 const samplePayload: QRPayload = {
   registrationId: '550e8400-e29b-41d4-a716-446655440000',
-  eventSlug: 'solsticio-inverno-2026',
+  eventSlug: 'solstício-inverno-2026',
   participantName: 'Maria Silva',
   ticketTypeName: 'Integral',
   eventDate: '2026-06-21',
@@ -151,7 +151,7 @@ describe('QR Code Signing & Verification', () => {
         samplePayload,
         {
           registrationId: '11111111-1111-1111-1111-111111111111',
-          eventSlug: 'equinocio-primavera-2026',
+          eventSlug: 'equinócio-primavera-2026',
           participantName: 'Carlos Oliveira',
           ticketTypeName: 'Meia',
           eventDate: '2026-09-22',

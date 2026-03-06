@@ -106,7 +106,7 @@ export function ImageGalleryManager({ eventId, images: initialImages }: ImageGal
                 onError={(e) => {
                   const target = e.target as HTMLImageElement
                   target.src = ''
-                  target.alt = 'Imagem nao encontrada'
+                  target.alt = 'Imagem não encontrada'
                 }}
               />
             </div>

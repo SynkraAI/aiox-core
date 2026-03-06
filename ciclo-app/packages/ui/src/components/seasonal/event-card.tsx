@@ -2,11 +2,11 @@ import * as React from 'react'
 import { cn } from '../../lib/utils'
 import type { Season } from '../../contexts/season-context'
 
-type EventStatus = 'disponivel' | 'esgotado' | 'em-breve'
+type EventStatus = 'disponível' | 'esgotado' | 'em-breve'
 
 const STATUS_CONFIG: Record<EventStatus, { label: string; className: string }> = {
-  disponivel: {
-    label: 'Disponivel',
+  disponível: {
+    label: 'Disponível',
     className: 'bg-green-100 text-green-800 border-green-200',
   },
   esgotado: {
@@ -23,7 +23,7 @@ const ELEMENT_ICONS: Record<string, string> = {
   Madeira: '\u6728', // 木
   Fogo: '\u706B',   // 火
   Metal: '\u91D1',   // 金
-  Agua: '\u6C34',    // 水
+  Água: '\u6C34',    // 水
   Terra: '\u571F',   // 土
 } as const
 
@@ -44,7 +44,7 @@ const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
       title,
       date,
       element,
-      status = 'disponivel',
+      status = 'disponível',
       priceFrom,
       imageUrl,
       ...props
@@ -99,7 +99,7 @@ const EventCard = React.forwardRef<HTMLDivElement, EventCardProps>(
             </span>
           </div>
 
-          {/* Titulo */}
+          {/* Título */}
           <h3 className="font-heading text-lg font-semibold text-card-foreground sm:text-xl">
             {title}
           </h3>
