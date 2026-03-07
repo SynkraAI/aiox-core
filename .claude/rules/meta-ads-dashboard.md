@@ -8,40 +8,43 @@ Roda no VPS via Docker + Traefik.
 
 ## URLs
 
-- Login: `https://jarvis.srv1266496.hstgr.cloud/meta-dashboard/login`
-- Dashboard Home: `https://jarvis.srv1266496.hstgr.cloud/meta-dashboard/`
-- Funil de Captacao: `https://jarvis.srv1266496.hstgr.cloud/meta-dashboard/funil`
-- Acesso direto ProjetoVD: `https://jarvis.srv1266496.hstgr.cloud/meta-dashboard/funil?project=projetovd`
+- Login: `https://<VPS_DOMAIN>/meta-dashboard/login`
+- Dashboard Home: `https://<VPS_DOMAIN>/meta-dashboard/`
+- Funil de Captacao: `https://<VPS_DOMAIN>/meta-dashboard/funil`
+- Acesso direto ProjetoVD: `https://<VPS_DOMAIN>/meta-dashboard/funil?project=projetovd`
 
 ## Infraestrutura
 
-- **VPS:** `ssh root@72.62.141.8` (Hostinger srv1266496.hstgr.cloud)
+- **VPS:** Hostinger VPS (acesso via SSH — ver vault interno)
 - **Container:** `meta-ads-dashboard` (porta 5001, healthy)
 - **Codigo fonte VPS:** `/opt/meta-ads-dashboard/`
 - **Docker Compose:** `/opt/jarvis-hub/docker-compose.yml`
-- **Rebuild:** `cd /opt/jarvis-hub && docker compose build meta-dashboard && docker compose up -d meta-dashboard`
+- **Rebuild:** `docker compose build meta-dashboard && docker compose up -d meta-dashboard`
 - **Stack:** React + tRPC + Express + Vite + pnpm
 - **Dockerfile:** `/opt/meta-ads-dashboard/Dockerfile` (node:20-slim, pnpm 10.4.1)
 
 ## Credenciais (env vars no container)
 
-- **META_ACCESS_TOKEN:** EAF2aZCdED4BsBQ... (token longo, no docker-compose)
-- **META_AD_ACCOUNT_ID:** act_191737889662177
-- **SUPABASE_URL:** https://orysnoohbahnmbxbvusl.supabase.co
-- **SUPABASE_ANON_KEY:** eyJhbGci... (no docker-compose)
-- **SUPABASE_SERVICE_ROLE_KEY:** eyJhbGci... (no docker-compose)
-- **GOOGLE_SERVICE_ACCOUNT_KEY_PATH:** /app/config/service-account.json
-- **GOOGLE_SERVICE_ACCOUNT_EMAIL:** jarvis-hub@jarvis-hub-489013.iam.gserviceaccount.com
+> Todas as credenciais sao armazenadas no docker-compose.yml do VPS (nao commitado).
+> Nunca commitar tokens, IDs de conta ou chaves neste repositorio.
+
+- **META_ACCESS_TOKEN:** Configurado via env var no docker-compose
+- **META_AD_ACCOUNT_ID:** Configurado via env var no docker-compose
+- **SUPABASE_URL:** Configurado via env var no docker-compose
+- **SUPABASE_ANON_KEY:** Configurado via env var no docker-compose
+- **SUPABASE_SERVICE_ROLE_KEY:** Configurado via env var no docker-compose
+- **GOOGLE_SERVICE_ACCOUNT_KEY_PATH:** /app/config/service-account.json (montado via volume)
+- **GOOGLE_SERVICE_ACCOUNT_EMAIL:** Configurado via env var no docker-compose
 
 ## Google Sheets — ProjetoVD
 
 ### Planilhas de Leads
-- **Leads Trafego:** `1pWLDLVSq1GA9H3AqKiVJcR7kFPj8KePw_1f6egvvCrw`
+- **Leads Trafego:** ID configurado no Supabase `project_configs.sheets_config`
 - Colunas: email, telefone, data, utmSource, utmCampaign, utmMedium, utmContent, utmTerm
 
 ### Planilhas de Survey (Pesquisa de Avatar)
-- **Survey Trafego:** `1uucY0j9S1k-GCrJuKmwIH6_aVeyYtTdz0JwUtQszLmE`
-- **Survey Organica:** `1h5ar6lKb4B0dWFqNVtEFlwB5YjF7sqh8COgi-mQxyB0`
+- **Survey Trafego:** ID configurado no Supabase `project_configs.sheets_config`
+- **Survey Organica:** ID configurado no Supabase `project_configs.sheets_config`
 - **Perguntas da pesquisa (6 perguntas reais):**
   1. "Ha quanto tempo voce mora fora?" (1-3 anos, 5-10 anos, 3-5 anos, Mais de 20 anos, 10-20 anos, Menos de 1 ano, Nao moro fora)
   2. "Qual e a sua renda mensal (na sua moeda)?" (Ate 1.000, Ate 3.000, Ate 5.000, Nao tenho renda, Ate 10.000, Acima de 10.000)
@@ -52,7 +55,7 @@ Roda no VPS via Docker + Traefik.
 - **Total de respostas matched:** 1.211
 
 ### Planilha Principal (Mecanico Expert)
-- **ID:** `1Zhh7klMyT7l8nKKtWhz6bU6mGrtvkoXXfevZdbhIeIw`
+- **ID:** Configurado no Supabase `project_configs.sheets_config`
 - **Abas:** Leads (A:H), Survey/Pesquisa (dinamica), Ext. Wpp (WhatsApp), Leads Whats
 - **Service Account:** autenticacao via JWT, 15min cache
 
@@ -161,7 +164,7 @@ Roda no VPS via Docker + Traefik.
 - TICKET: R$2.800, TARGET_ROAS: 3.0, MAX_CPA: R$933.33, CONSERVATIVE_MARGIN: 0.8
 
 ### Fluxo de Dados
-```
+```text
 Sheets(leads+surveys) -> sheets-reader.ts -> score-aggregator.ts (match por email/telefone)
 -> agrupa por UTM (term=campanha, medium=adset, content=ad) -> avgScore por grupo
 -> leadScoring.ts (MQL grades, CPL aceitavel) -> routers.ts (merge com Meta API) -> frontend
@@ -175,7 +178,7 @@ Sheets(leads+surveys) -> sheets-reader.ts -> score-aggregator.ts (match por emai
 3. **Painel UTM → Tabela:** Clicar numa campanha/conjunto no painel UTM seleciona na tabela de Lead Score
 
 ### Fluxo tecnico:
-```
+```text
 Click fatia donut → setSurveyAnswerFilter({ question, answer })
 → surveyBreakdownQuery refaz com answerFilter
 → Backend filtra leads cuja survey.answers[question] === answer
@@ -193,7 +196,7 @@ Click fatia donut → setSurveyAnswerFilter({ question, answer })
 - Projetos cadastrados no Supabase `project_configs`
 - Cada projeto tem: PIN, meta_access_token, meta_account_id, sheets_config
 - `getProjectConfig()` em `env.ts` tenta `projects.json` primeiro (NAO EXISTE no VPS), depois env vars
-- Credenciais Meta sao as mesmas env vars para ambos projetos (act_191737889662177)
+- Credenciais Meta sao env vars compartilhadas entre projetos (ver docker-compose)
 - Projeto selecionado via URL param `?project=xxx` + cookie session como fallback
 
 ## Funcionalidades Implementadas (historico)
@@ -273,17 +276,14 @@ Click fatia donut → setSurveyAnswerFilter({ question, answer })
 
 ## GitHub
 
-- Repo: `SynkraAI/aios-core` (origin, somente leitura para klevdm)
+- Repo: `SynkraAI/aios-core` (origin)
 - Fork: `klevdm/aios-core` (remote `fork`, push OK)
-- VPS remote: `root@72.62.141.8:/opt/aios-core` (remote `vps`)
-- PR #548: https://github.com/SynkraAI/aios-core/pull/548
+- VPS remote: configurado localmente (remote `vps`)
 
-## Metodo de Deploy (patches no VPS)
+## Metodo de Deploy
 
-Quando precisar fazer alteracoes no dashboard:
-1. Criar script `.cjs` local (ex: `tmp-fix-xxx.cjs`) que le, modifica e reescreve os arquivos no VPS
-2. `scp` o script para `/tmp/` no VPS
-3. `ssh` + `node /tmp/fix-xxx.cjs` para executar
-4. `cd /opt/jarvis-hub && docker compose build meta-dashboard && docker compose up -d meta-dashboard`
-5. Verificar: `docker ps --filter name=meta-ads-dashboard --format '{{.Status}}'` → deve mostrar "healthy"
-6. Testar no browser: `https://jarvis.srv1266496.hstgr.cloud/meta-dashboard/funil?project=projetovd`
+1. Fazer alteracoes nos arquivos fonte localmente
+2. Commitar e push para o fork
+3. Rebuild no VPS: `docker compose build meta-dashboard && docker compose up -d meta-dashboard`
+4. Verificar: `docker ps --filter name=meta-ads-dashboard --format '{{.Status}}'` → "healthy"
+5. Testar no browser

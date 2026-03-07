@@ -383,3 +383,7 @@ build/
 .aios-core/local/
 .claude/settings.local.json
 .aios/install-log.txt
+
+# Temporary deploy/patch scripts
+tmp-*.cjs
+tmp-deploy/
