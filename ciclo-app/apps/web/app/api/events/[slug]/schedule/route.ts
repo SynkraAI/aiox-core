@@ -50,7 +50,7 @@ export async function GET(
       )
     }
 
-    const schedule: ScheduleItem[] = event.activities.map((activity) => ({
+    const schedule: ScheduleItem[] = event.activities.map((activity: typeof event.activities[number]) => ({
       id: activity.id,
       time: activity.time.toLocaleTimeString('pt-BR', {
         hour: '2-digit',

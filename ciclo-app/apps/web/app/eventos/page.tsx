@@ -4,7 +4,7 @@ import { getPublishedEvents } from '@/events'
 import { calculatePricing } from '@ciclo/utils'
 import { EventCard } from '@ciclo/ui'
 
-export const revalidate = 60
+export const dynamic = 'force-dynamic'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodasestações.com.br'
 

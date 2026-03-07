@@ -40,3 +40,4 @@ packages/database/prisma/*.db-journal
 
 # Misc
 *.tsbuildinfo
+.vercel

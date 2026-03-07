@@ -6,7 +6,7 @@ import { EventCard, SacredDivider, Triskle } from '@ciclo/ui'
 import { getSiteContents } from '../lib/site-content'
 import { LeadCaptureForm } from '../components/lead-capture-form'
 
-export const revalidate = 300
+export const dynamic = 'force-dynamic'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? 'https://ciclodaseestacoes.com.br'
 

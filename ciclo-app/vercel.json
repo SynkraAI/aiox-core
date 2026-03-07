@@ -1,0 +1,6 @@
+{
+  "buildCommand": "pnpm --filter @ciclo/database exec prisma generate && turbo build --filter=@ciclo/web",
+  "outputDirectory": "apps/web/.next",
+  "installCommand": "pnpm install",
+  "framework": "nextjs"
+}

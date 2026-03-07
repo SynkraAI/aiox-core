@@ -10,7 +10,7 @@
 
 import { NextResponse } from 'next/server'
 import { requireRole } from '@ciclo/auth'
-import { prisma, type UserRole } from '@ciclo/database'
+import { prisma } from '@ciclo/database'
 import {
   sendConfirmationEmail,
   sendReminder7dEmail,
@@ -29,7 +29,7 @@ interface ResendRequestBody {
 export async function POST(request: Request): Promise<NextResponse> {
   try {
     // Auth check: ADMIN only
-    const session = await requireRole('ADMIN' as UserRole)
+    const session = await requireRole('ADMIN')
 
     // Parse body
     const body = await request.json() as ResendRequestBody

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { prisma, type UserRole } from '@ciclo/database'
+import { prisma } from '@ciclo/database'
 import { requireRole } from '@ciclo/auth'
 
 /**
@@ -13,7 +13,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await requireRole('ADMIN' as UserRole)
+    const session = await requireRole('ADMIN')
     const { id } = await params
 
     const body = await request.json()

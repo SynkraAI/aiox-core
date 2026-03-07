@@ -41,7 +41,7 @@ const PROTECTED_ROUTES: Array<{ prefix: string; minRole: string }> = [
   { prefix: '/admin', minRole: 'ADMIN' },
   { prefix: '/facilitator', minRole: 'FACILITATOR' },
   { prefix: '/therapist', minRole: 'THERAPIST' },
-  { prefix: '/profile', minRole: 'USER' },
+  { prefix: '/minha-conta', minRole: 'USER' },
   { prefix: '/inscrição', minRole: 'USER' },
 ]
 
@@ -66,7 +66,7 @@ const middleware = auth((req) => {
   if (isPublicRoute(pathname)) {
     // Redirect authenticated users away from auth pages
     if (req.auth && ['/login', '/register'].includes(pathname)) {
-      return NextResponse.redirect(new URL('/profile', req.url))
+      return NextResponse.redirect(new URL('/minha-conta', req.url))
     }
     return NextResponse.next()
   }

@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server'
-import { prisma, type UserRole } from '@ciclo/database'
+import { prisma } from '@ciclo/database'
 import { requireRole } from '@ciclo/auth'
 
-const VALID_ROLES: UserRole[] = ['USER', 'THERAPIST', 'FACILITATOR', 'ADMIN']
+const VALID_ROLES = ['USER', 'THERAPIST', 'FACILITATOR', 'ADMIN'] as const
 
 /**
  * PATCH /api/admin/users/[id]/role
@@ -14,7 +14,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await requireRole('ADMIN' as UserRole)
+    const session = await requireRole('ADMIN')
     const { id } = await params
 
     const body = await request.json()
