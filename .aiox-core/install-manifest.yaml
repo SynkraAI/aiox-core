@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-03-11T15:04:09.395Z"
+generated_at: "2026-03-11T02:22:41.056Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1090
 files:
@@ -237,13 +237,13 @@ files:
     type: core
     size: 10891
   - path: core/config/config-cache.js
-    hash: sha256:b659dfae25865c732555d71abcb1939db908684586d0a06b699d3176077e486e
+    hash: sha256:527a788cbe650aa6b13d1101ebc16419489bfef20b2ee93042f6eb6a51e898e9
     type: core
-    size: 4928
+    size: 4704
   - path: core/config/config-loader.js
-    hash: sha256:bbc6a9e57e9db7a74ae63c901b199f8b8a79eb093f23a280b6420d1aa5f7f813
+    hash: sha256:e19fee885b060c85ee75df71a016259b8e4c21e6c7045a58514afded3a2386a8
     type: core
-    size: 8534
+    size: 8456
   - path: core/config/config-resolver.js
     hash: sha256:3b29df6954cec440debef87cb4e4e7610c94dc74e562d32c74b8ec57d893213b
     type: core
@@ -405,9 +405,9 @@ files:
     type: core
     size: 31780
   - path: core/execution/build-state-manager.js
-    hash: sha256:415fca3ad3d750db1f41f14f33971cf661ee9d6073a570175d695bb3c1be655c
+    hash: sha256:595523caf6db26624e7a483489345b9498ae15d99c2568073a2c0c45d5b46a54
     type: core
-    size: 48976
+    size: 48948
   - path: core/execution/context-injector.js
     hash: sha256:a183255eb4831f701086f23f371f94a9ce10c46ea18c8369ec0fd756777f042f
     type: core
@@ -788,6 +788,10 @@ files:
     hash: sha256:895ec75f6a303edf4cffa0ab7adbb8a4876f62626cc0d7178420efd5758f21a9
     type: core
     size: 8850
+  - path: core/memory/decision-memory.js
+    hash: sha256:7c9189410dffa771db9866e40f1ccb4b8c3bac5d57b4a20f2ef99235ae71ad42
+    type: core
+    size: 18911
   - path: core/memory/gotchas-memory.js
     hash: sha256:0063eff42caf0dda759c0390ac323e7b102f5507f27b8beb7b0acc2fbec407c4
     type: core
@@ -1161,9 +1165,9 @@ files:
     type: core
     size: 16418
   - path: core/synapse/runtime/hook-runtime.js
-    hash: sha256:c8a31f8cfcc760de06c65abd3c5d23d9ffd8490f7f0ae4a674efaba73e10dd44
+    hash: sha256:c1422bda2983600f1e175fbe4a6e2b0d87c73122b06b17c31fe09edd0135199a
     type: core
-    size: 3548
+    size: 3243
   - path: core/synapse/scripts/generate-constitution.js
     hash: sha256:9010d6b34667c96602b76baa1857f0629c797d911b7c42dc11414b007e5e2b91
     type: script
@@ -1205,9 +1209,9 @@ files:
     type: core
     size: 9061
   - path: core/utils/yaml-validator.js
-    hash: sha256:05084596198634dd2a670a752d5c451edfe268e16e3bae511db52184f895366f
+    hash: sha256:41e3715845262c2e49f58745a773e81f4feaaa2325e54bcb0226e4bf08f709dd
     type: core
-    size: 10934
+    size: 10916
   - path: data/agent-config-requirements.yaml
     hash: sha256:68e87b5777d1872c4fed6644dd3c7e3c3e8fd590df7d2b58c36d541cf8e38dd3
     type: data
@@ -1221,9 +1225,9 @@ files:
     type: data
     size: 9575
   - path: data/entity-registry.yaml
-    hash: sha256:cc1bf74d3ef4e90b7a396d5b77259e540b2f9bd4a5b4b1da4977fe49ae83525d
+    hash: sha256:151aca46769c614f0238e7a8e2968884c3888b438ff1c634f0eeb2505e325b83
     type: data
-    size: 521869
+    size: 521804
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
@@ -2236,10 +2240,6 @@ files:
     hash: sha256:90bba47136ccc37c74454a4537728b958955fd487e46e3b8dca869b994c8d1c1
     type: task
     size: 19031
-  - path: development/tasks/project-status.md
-    hash: sha256:3cb76eeb42b7e0b46a06ce0827bc68d2f507a7f4021174b1bd9e68d82463e5e6
-    type: task
-    size: 8664
   - path: development/tasks/propose-modification.md
     hash: sha256:fa340dc0749f40ba7f1ed12ebe107c53f212f764cf7318ee7a816d059528f69e
     type: task
@@ -2985,9 +2985,9 @@ files:
     type: script
     size: 7803
   - path: infrastructure/scripts/config-cache.js
-    hash: sha256:6264ae77eef1e98de62d9f6478becadf6a6692ca88027666dbf5a1e2399c844a
+    hash: sha256:4f55401fee7010d01545808ed6f6c40a91ce43180d405f93d5073480512d30d5
     type: script
-    size: 7697
+    size: 7473
   - path: infrastructure/scripts/config-loader.js
     hash: sha256:8f9489f7c57e775bfbb750761d9714505d5df3938b664cbbdf6701f9e18e240b
     type: script
