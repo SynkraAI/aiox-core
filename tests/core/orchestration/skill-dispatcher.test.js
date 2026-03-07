@@ -5,7 +5,7 @@
  * invocations and handles dispatch payloads and result parsing.
  */
 
-const SkillDispatcher = require('../../../.aios-core/core/orchestration/skill-dispatcher');
+const SkillDispatcher = require('../../../.aiox-core/core/orchestration/skill-dispatcher');
 
 describe('SkillDispatcher', () => {
   let dispatcher;
@@ -41,8 +41,8 @@ describe('SkillDispatcher', () => {
     });
 
     test('has aliases in skill mapping', () => {
-      expect(dispatcher.skillMapping['ux-expert']).toBe('AIOS:agents:ux-design-expert');
-      expect(dispatcher.skillMapping['github-devops']).toBe('AIOS:agents:devops');
+      expect(dispatcher.skillMapping['ux-expert']).toBe('AIOX:agents:ux-design-expert');
+      expect(dispatcher.skillMapping['github-devops']).toBe('AIOX:agents:devops');
     });
   });
 
@@ -51,18 +51,18 @@ describe('SkillDispatcher', () => {
   // ============================================================
   describe('getSkillName', () => {
     test('returns mapped skill name for known agents', () => {
-      expect(dispatcher.getSkillName('architect')).toBe('AIOS:agents:architect');
-      expect(dispatcher.getSkillName('dev')).toBe('AIOS:agents:dev');
-      expect(dispatcher.getSkillName('qa')).toBe('AIOS:agents:qa');
+      expect(dispatcher.getSkillName('architect')).toBe('AIOX:agents:architect');
+      expect(dispatcher.getSkillName('dev')).toBe('AIOX:agents:dev');
+      expect(dispatcher.getSkillName('qa')).toBe('AIOX:agents:qa');
     });
 
     test('resolves aliases to canonical skill', () => {
-      expect(dispatcher.getSkillName('ux-expert')).toBe('AIOS:agents:ux-design-expert');
-      expect(dispatcher.getSkillName('github-devops')).toBe('AIOS:agents:devops');
+      expect(dispatcher.getSkillName('ux-expert')).toBe('AIOX:agents:ux-design-expert');
+      expect(dispatcher.getSkillName('github-devops')).toBe('AIOX:agents:devops');
     });
 
     test('generates fallback skill name for unknown agents', () => {
-      expect(dispatcher.getSkillName('custom-agent')).toBe('AIOS:agents:custom-agent');
+      expect(dispatcher.getSkillName('custom-agent')).toBe('AIOX:agents:custom-agent');
     });
   });
 
@@ -124,7 +124,7 @@ describe('SkillDispatcher', () => {
     test('builds complete payload', () => {
       const payload = dispatcher.buildDispatchPayload(baseParams);
 
-      expect(payload.skill).toBe('AIOS:agents:architect');
+      expect(payload.skill).toBe('AIOX:agents:architect');
       expect(payload.context.phase).toBe(1);
       expect(payload.context.phaseName).toBe('Architecture');
       expect(payload.context.step).toBe('design');
@@ -189,7 +189,13 @@ describe('SkillDispatcher', () => {
       expect(payload.args).toContain('--has-frontend');
       expect(payload.args).toContain('--frontend="react"');
       expect(payload.args).toContain('--typescript');
-      expect(payload.context.techStack).toBeDefined();
+      expect(payload.context.techStack).toEqual({
+        hasDatabase: true,
+        database: { type: 'postgresql' },
+        hasFrontend: true,
+        frontend: { framework: 'react' },
+        hasTypeScript: true,
+      });
     });
 
     test('omits tech stack flags when no profile', () => {
@@ -262,11 +268,11 @@ describe('SkillDispatcher', () => {
       expect(result.timestamp).toBe('2025-01-01T00:00:00Z');
     });
 
-    test('adds timestamp to structured object if missing', () => {
+    test('adds valid ISO timestamp to structured object if missing', () => {
       const input = { status: 'success', summary: 'Done' };
       const result = dispatcher.parseSkillOutput(input);
       expect(result.timestamp).toBeDefined();
-      expect(result.timestamp).not.toBe('2025-01-01T00:00:00Z');
+      expect(Number.isNaN(Date.parse(result.timestamp))).toBe(false);
     });
 
     test('extracts JSON from markdown code block', () => {
@@ -362,7 +368,7 @@ describe('SkillDispatcher', () => {
   describe('formatDispatchLog', () => {
     test('formats log with persona and details', () => {
       const payload = {
-        skill: 'AIOS:agents:architect',
+        skill: 'AIOX:agents:architect',
         args: '--task="design.md"',
         context: {
           phase: 1,
@@ -376,7 +382,7 @@ describe('SkillDispatcher', () => {
 
       expect(log).toContain('Aria');
       expect(log).toContain('@architect');
-      expect(log).toContain('AIOS:agents:architect');
+      expect(log).toContain('AIOX:agents:architect');
       expect(log).toContain('1 - Architecture');
       expect(log).toContain('design-system.md');
       expect(log).toContain('docs/arch.md');
@@ -384,7 +390,7 @@ describe('SkillDispatcher', () => {
 
     test('shows N/A for missing task and output', () => {
       const payload = {
-        skill: 'AIOS:agents:dev',
+        skill: 'AIOX:agents:dev',
         args: '',
         context: { phase: 2, phaseName: 'Dev' },
       };
@@ -396,7 +402,7 @@ describe('SkillDispatcher', () => {
 
     test('uses agent ID as name for unknown agents', () => {
       const payload = {
-        skill: 'AIOS:agents:custom',
+        skill: 'AIOX:agents:custom',
         args: '',
         context: { phase: 1, phaseName: 'Custom' },
       };
@@ -440,13 +446,18 @@ describe('SkillDispatcher', () => {
       expect(dispatcher.isValidAgent('ux-expert')).toBe(true);
     });
 
-    test('returns true for AIOS: prefixed agents', () => {
-      expect(dispatcher.isValidAgent('AIOS:custom:agent')).toBe(true);
+    test('returns true for AIOX: prefixed agents', () => {
+      expect(dispatcher.isValidAgent('AIOX:custom:agent')).toBe(true);
     });
 
-    test('returns false for unknown non-AIOS agents', () => {
+    test('returns false for unknown non-AIOX agents', () => {
       expect(dispatcher.isValidAgent('random-agent')).toBe(false);
       expect(dispatcher.isValidAgent('')).toBe(false);
+    });
+
+    test('handles null and undefined without throwing', () => {
+      expect(dispatcher.isValidAgent(null)).toBe(false);
+      expect(dispatcher.isValidAgent(undefined)).toBe(false);
     });
   });
 });
