@@ -1240,6 +1240,10 @@ files:
     hash: sha256:68b26930b728908b6097fc91956c8c446e5cc0dbe627e3b737495ebcd7e9569b
     type: data
     size: 4451
+  - path: data/tech-presets/angular-nestjs.md
+    hash: sha256:123e5316a822e2d8741856b6683b2260d25bbfbb699652ceedc8fc016293834c
+    type: data
+    size: 22621
   - path: data/tech-presets/csharp.md
     hash: sha256:4667d33407c59fd6c7b4558370893a14df6d461645fc840b2df2fb7508bd6fcf
     type: data

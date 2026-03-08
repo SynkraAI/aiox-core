@@ -248,6 +248,12 @@ function getTechPresetQuestion() {
           value: 'nextjs-react',
         },
         {
+          name:
+            colors.highlight('angular-nestjs') +
+            colors.dim(' - Angular 21 (Signals) + NestJS, TypeScript, Prisma, Angular Material'),
+          value: 'angular-nestjs',
+        },
+        {
           name: colors.highlight('go') + colors.dim(' - Go services and microservices'),
           value: 'go',
         },
