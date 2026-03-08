@@ -567,6 +567,56 @@ describe('SwarmIntelligence', () => {
     });
   });
 
+  describe('resolveProposal - expired deadline', () => {
+    it('should reject expired proposals with deadline_expired reason', () => {
+      const swarm = si.createSwarm('expired-swarm');
+      si.joinSwarm(swarm.id, 'a1');
+      si.joinSwarm(swarm.id, 'a2');
+
+      const p = si.proposeDecision(swarm.id, {
+        description: 'should expire',
+        proposedBy: 'a1',
+        deadlineMs: 1, // 1ms — will expire immediately
+      });
+
+      si.vote(swarm.id, p.id, 'a1', 'approve');
+
+      // Force deadline to the past
+      p.deadline = new Date(Date.now() - 10000).toISOString();
+
+      const result = si.resolveProposal(swarm.id, p.id);
+      expect(result.status).toBe(PROPOSAL_STATUS.REJECTED);
+      expect(result.approved).toBe(false);
+      expect(result.reason).toBe('deadline_expired');
+      expect(p.resolvedAt).toBeDefined();
+    });
+  });
+
+  describe('resolveProposal - quorum counts only approves', () => {
+    it('should not count abstains or rejects toward quorum', () => {
+      const swarm = si.createSwarm('quorum-approve-only', {
+        votingStrategy: 'quorum',
+        consensusThreshold: 0.6,
+      });
+      si.joinSwarm(swarm.id, 'a1');
+      si.joinSwarm(swarm.id, 'a2');
+      si.joinSwarm(swarm.id, 'a3');
+      si.joinSwarm(swarm.id, 'a4');
+      si.joinSwarm(swarm.id, 'a5');
+
+      // quorumRequired = ceil(5 * 0.6) = 3 approves needed
+      const p = si.proposeDecision(swarm.id, { description: 'test', proposedBy: 'a1' });
+      si.vote(swarm.id, p.id, 'a1', 'approve');
+      si.vote(swarm.id, p.id, 'a2', 'reject');
+      si.vote(swarm.id, p.id, 'a3', 'abstain');
+      // totalVotes = 3, but only 1 approve — quorum NOT met (needs 3)
+
+      const result = si.resolveProposal(swarm.id, p.id);
+      expect(result.hasQuorum).toBe(false);
+      expect(result.approved).toBe(false);
+    });
+  });
+
   describe('resolveProposal - common', () => {
     it('should emit proposal:resolved event', () => {
       const handler = jest.fn();
@@ -922,6 +972,38 @@ describe('SwarmIntelligence', () => {
       });
       const result = await fresh.loadFromDisk();
       expect(result).toBe(false);
+    });
+
+    it('should rethrow non-ENOENT errors in loadFromDisk', async () => {
+      const instance = new SwarmIntelligence(TEST_PROJECT_ROOT, { persist: true, debug: false });
+
+      // Write invalid JSON to the persistence file
+      const persistDir = path.join(TEST_PROJECT_ROOT, '.aiox');
+      await fs.mkdir(persistDir, { recursive: true });
+      await fs.writeFile(path.join(persistDir, 'swarms.json'), 'NOT_VALID_JSON', 'utf8');
+
+      // Should throw SyntaxError (JSON parse), NOT silently return false
+      await expect(instance.loadFromDisk()).rejects.toThrow(SyntaxError);
+    });
+
+    it('should serialize persistence writes (promise chain)', async () => {
+      const instance = new SwarmIntelligence(TEST_PROJECT_ROOT, { persist: true, debug: false });
+
+      // Create swarm to trigger multiple _persistAsync calls
+      instance.createSwarm('chain-test-1');
+      instance.createSwarm('chain-test-2');
+      instance.createSwarm('chain-test-3');
+
+      // _pendingSave should be a promise (chain established)
+      expect(instance._pendingSave).toBeInstanceOf(Promise);
+
+      // Wait for all writes to complete
+      await instance._pendingSave;
+
+      // Verify file was written (last write wins)
+      const raw = await fs.readFile(path.join(TEST_PROJECT_ROOT, '.aiox', 'swarms.json'), 'utf8');
+      const data = JSON.parse(raw);
+      expect(data.swarms.length).toBe(3);
     });
   });
 

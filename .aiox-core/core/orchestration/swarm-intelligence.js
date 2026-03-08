@@ -408,6 +408,29 @@ class SwarmIntelligence extends EventEmitter {
       throw new Error(`Proposal ${proposalId} is already resolved (status: ${proposal.status})`);
     }
 
+    // Reject expired proposals before applying voting strategy
+    if (new Date(proposal.deadline) < new Date()) {
+      proposal.status = PROPOSAL_STATUS.REJECTED;
+      proposal.resolvedAt = new Date().toISOString();
+      proposal.resolution = { approved: false, reason: 'deadline_expired' };
+      this._stats.proposalsResolved++;
+
+      this.emit('proposal:resolved', {
+        swarmId,
+        proposalId,
+        status: proposal.status,
+        result: proposal.resolution,
+      });
+      this._log(`Proposal ${proposalId} rejected: deadline expired`);
+      this._persistAsync();
+
+      return {
+        proposalId,
+        status: proposal.status,
+        ...proposal.resolution,
+      };
+    }
+
     const result = this._applyVotingStrategy(swarm, proposal);
 
     proposal.status = result.approved ? PROPOSAL_STATUS.APPROVED : PROPOSAL_STATUS.REJECTED;
@@ -535,7 +558,8 @@ class SwarmIntelligence extends EventEmitter {
    */
   _quorumStrategy(swarm, base) {
     const quorumRequired = Math.ceil(swarm.agents.size * swarm.config.consensusThreshold);
-    const hasQuorum = base.totalVotes >= quorumRequired;
+    // Abstains and rejects don't count toward quorum
+    const hasQuorum = base.approveCount >= quorumRequired;
     const approved = hasQuorum && base.approveCount > base.rejectCount;
 
     return {
@@ -669,6 +693,9 @@ class SwarmIntelligence extends EventEmitter {
         original.citations++;
       }
     }
+
+    // Persist citation bumps
+    this._persistAsync();
 
     return limited;
   }
@@ -837,9 +864,12 @@ class SwarmIntelligence extends EventEmitter {
   _persistAsync() {
     if (!this.options.persist) return;
 
-    this._saveToDisk().catch((err) => {
-      this._log(`Persistence error: ${err.message}`);
-    });
+    // Serialize writes to prevent concurrent fs operations
+    this._pendingSave = (this._pendingSave || Promise.resolve())
+      .then(() => this._saveToDisk())
+      .catch((err) => {
+        this._log(`Persistence error: ${err.message}`);
+      });
   }
 
   /**
@@ -891,9 +921,13 @@ class SwarmIntelligence extends EventEmitter {
 
       this._log('State loaded from disk');
       return true;
-    } catch {
-      // File doesn't exist or is corrupted — start fresh
-      return false;
+    } catch (err) {
+      // Only treat ENOENT (file not found) as fresh start
+      if (err.code === 'ENOENT') {
+        return false;
+      }
+      this._log(`Failed to load state: ${err.message}`);
+      throw err;
     }
   }
 
