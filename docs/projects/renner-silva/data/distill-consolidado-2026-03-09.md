@@ -16,7 +16,7 @@
 | 3 | **Teste das 48h Sem Reclamar** | YT02 + YT-romanni | Protocolo pratico: 48h sem reclamar, zera se reclamar, ganha consciencia |
 | 4 | **7 Passos da Venda** | Mentoria 24 | Roteiro estruturado para calls high-ticket (R$5K-R$400K) |
 | 5 | **Pitch dos 5 Dedos** | Mentoria 23 | Estrutura de oferta: Por que voce? Por que agora? Consequencia de nao comprar? Qualidade? Valor? |
-| 6 | **Cache vs Piti** | Mentoria 23 | Trocar cache (R$40K) por oferta interna no evento (R$400-600K) |
+| 6 | **Cache vs Pitch** | Mentoria 23 | Trocar cache (R$40K) por oferta interna no evento (R$400-600K) |
 | 7 | **Break Even Strategy** | Mentoria 23 | Ingresso paga evento, lucro vem da oferta interna |
 | 8 | **7 Erros Mortais do Palestrante** | YT03-8-passos | Carente, curriculo no inicio, aula chata, sem musica, cronologico, fotos pessoais, sem historia propria |
 | 9 | **Piramide dos Palestrantes** | YT03-8-passos | Diagnostico 3 pilares (Palestra + Seguranca + Vendas) → 4 niveis (Aspirante/Amador/Profissional/Poderoso) |
@@ -139,7 +139,7 @@ O material revela que Renner opera em dois modos distintos:
 
 ### Modo 2: Renner Mentor de Negocios (Mentorias privadas)
 - Frameworks de venda high-ticket (7 Passos, Pitch 5 Dedos)
-- Estrategia de monetizacao (Cache vs Piti, Break Even)
+- Estrategia de monetizacao (Cache vs Pitch, Break Even)
 - Selecao draconiana de alunos ("EU escolho voces")
 - Over delivery como principio de negocio
 - Pragmatismo brutal ("vender caro e mais facil")
@@ -158,12 +158,12 @@ O material revela que Renner opera em dois modos distintos:
 ### Prioridade 2: Adicionar Frameworks de Negocio
 - Roteiro 8 Estagios (core do metodo)
 - 7 Passos da Venda
-- Cache vs Piti
+- Cache vs Pitch
 - Piramide dos Palestrantes
 - Tripe do Palestrante Poderoso
 
 ### Prioridade 3: Criar KB18 — Frameworks de Negocio
-- Monetizacao (Cache vs Piti, Break Even)
+- Monetizacao (Cache vs Pitch, Break Even)
 - Vendas (7 Passos, Pitch 5 Dedos)
 - Diagnostico (Piramide, Tripe)
 - Precificacao (R$5K minimo, crencha limitante)

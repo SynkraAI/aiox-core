@@ -4,6 +4,10 @@ pnpm-lock.yaml
 bun.lock
 deno.lock
 
+# Python virtual environments
+.venv/
+__pycache__/
+
 # Logs
 logs/
 *.log
