@@ -1,7 +1,7 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-03-09T15:57:59.301Z'
-  entityCount: 769
+  lastUpdated: '2026-03-09T16:37:40.122Z'
+  entityCount: 805
   checksumAlgorithm: sha256
   resolutionRate: 100
 entities:
@@ -4156,6 +4156,625 @@ entities:
         extensionPoints: []
       checksum: sha256:f464eb7047b5c078c3734654e7d969527e8cd8804634053a64f441a965e89c9c
       lastVerified: '2026-03-09T15:57:59.223Z'
+    b-roll-editing:
+      path: .aiox-core/development/tasks/b-roll-editing.md
+      layer: L2
+      type: task
+      purpose: '[story support description]'
+      keywords:
+        - roll
+        - editing
+        - b-roll
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:94e78f73703e3665362f27026ddbe0dbcd53e508c2d38a5986a23e50e4966ddf
+      lastVerified: '2026-03-09T16:37:40.101Z'
+    brand-charisma-audit:
+      path: .aiox-core/development/tasks/brand-charisma-audit.md
+      layer: L2
+      type: task
+      purpose: Brand Charisma Audit
+      keywords:
+        - brand
+        - charisma
+        - audit
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:2b83dd86fe06e67458eed8f59c165c0de87e92a589a148a3b26098d455e70878
+      lastVerified: '2026-03-09T16:37:40.106Z'
+    brand-differentiation:
+      path: .aiox-core/development/tasks/brand-differentiation.md
+      layer: L2
+      type: task
+      purpose: '"Mindful professionals who protect their morning time"'
+      keywords:
+        - brand
+        - differentiation
+        - (zag
+        - methodology)
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:151f329cbd84b0193ff09f64ea3ef4e66b47a6f3caf01e9b791ce8bde8722e37
+      lastVerified: '2026-03-09T16:37:40.107Z'
+    brand-gap-analysis:
+      path: .aiox-core/development/tasks/brand-gap-analysis.md
+      layer: L2
+      type: task
+      purpose: Brand Gap Analysis
+      keywords:
+        - brand
+        - gap
+        - analysis
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:a96739b4740663efaaf26bd3e7846480e698106bb1780621eab1334f432dbbd8
+      lastVerified: '2026-03-09T16:37:40.107Z'
+    brand-naming:
+      path: .aiox-core/development/tasks/brand-naming.md
+      layer: L2
+      type: task
+      purpose: Brand Naming
+      keywords:
+        - brand
+        - naming
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:14bd74fbf0875819f57e557a24708bdde5ccd3f04bd03edfc630c597cd942bf1
+      lastVerified: '2026-03-09T16:37:40.109Z'
+    brand-portfolio-strategy:
+      path: .aiox-core/development/tasks/brand-portfolio-strategy.md
+      layer: L2
+      type: task
+      purpose: '"Enterprise IT decision makers"'
+      keywords:
+        - brand
+        - portfolio
+        - strategy
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:445b03e00e2eccaa3dc1a655ce306fa95acb597c773262ba6731df462acaad86
+      lastVerified: '2026-03-09T16:37:40.109Z'
+    channel-visual-strategy:
+      path: .aiox-core/development/tasks/channel-visual-strategy.md
+      layer: L2
+      type: task
+      purpose: Develop Consistent Visual Identity for YouTube Channel
+      keywords:
+        - channel
+        - visual
+        - strategy
+        - develop
+        - consistent
+        - identity
+        - youtube
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:d8f2ecae1181f7e765ead4bb48f701fcccfbea25abd9263e12251103a0647f69
+      lastVerified: '2026-03-09T16:37:40.110Z'
+    client-discovery-call:
+      path: .aiox-core/development/tasks/client-discovery-call.md
+      layer: L2
+      type: task
+      purpose: Conduct effective discovery calls that diagnose the real problem before proposing solutions.
+      keywords:
+        - client
+        - discovery
+        - call
+        - client-discovery-call
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:26d8c4614196439b2ca98a8519d42b286abc3d5c1dff317dc314fe8fffaf1efe
+      lastVerified: '2026-03-09T16:37:40.110Z'
+    color-grading:
+      path: .aiox-core/development/tasks/color-grading.md
+      layer: L2
+      type: task
+      purpose: Cinematic Color Grading
+      keywords:
+        - color
+        - grading
+        - cinematic
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:610dccbdd0ef77057ead87d1c7c40560cc3e3e99366a6bc7c42a4a1ae43052ac
+      lastVerified: '2026-03-09T16:37:40.110Z'
+    design-business-positioning:
+      path: .aiox-core/development/tasks/design-business-positioning.md
+      layer: L2
+      type: task
+      purpose: Stop competing on price. Position yourself as the only logical choice for premium clients.
+      keywords:
+        - design
+        - business
+        - positioning
+        - design-business-positioning
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:78a46962146b96de8bd2d787a0eb7fad6c9d96c4144f36e3ebd909be8804da21
+      lastVerified: '2026-03-09T16:37:40.111Z'
+    design-pricing-strategy:
+      path: .aiox-core/development/tasks/design-pricing-strategy.md
+      layer: L2
+      type: task
+      purpose: Transform from hourly billing to value-based pricing. Stop selling time, start selling transformation.
+      keywords:
+        - design
+        - pricing
+        - strategy
+        - design-pricing-strategy
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:05c14c3c59be1927e1fed3828dd09e7d7ff222a51c9889aef54d12bbe582ca96
+      lastVerified: '2026-03-09T16:37:40.111Z'
+    design-process-optimization:
+      path: .aiox-core/development/tasks/design-process-optimization.md
+      layer: L2
+      type: task
+      purpose: '**'
+      keywords:
+        - design
+        - process
+        - optimization
+        - design-process-optimization
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:e4b49afb4cdc1f046c9820b27aa74fe1cba32962d74a3199de0d4c629d8b2c1c
+      lastVerified: '2026-03-09T16:37:40.111Z'
+    design-proposal-creation:
+      path: .aiox-core/development/tasks/design-proposal-creation.md
+      layer: L2
+      type: task
+      purpose: Create proposals that communicate transformation value and make the buying decision easy.
+      keywords:
+        - design
+        - proposal
+        - creation
+        - design-proposal-creation
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:472abe0d2a898fb2eda4efdf99a119d257334c05021cf5719eefbb6749474a33
+      lastVerified: '2026-03-09T16:37:40.112Z'
+    design-review-orchestration:
+      path: .aiox-core/development/tasks/design-review-orchestration.md
+      layer: L2
+      type: task
+      purpose: >-
+        Coordinate multi-agent design reviews by gathering structured feedback from relevant specialists based on the
+        deliverable type. Ensures comprehensive quality validation through multiple expert perspec
+      keywords:
+        - design
+        - review
+        - orchestration
+        - multi-agent
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:dc3f94c93ad49a02ba5b9265185a1a5cf60f801167d0d1039b3bd86aa7cef1f6
+      lastVerified: '2026-03-09T16:37:40.112Z'
+    design-team-scaling:
+      path: .aiox-core/development/tasks/design-team-scaling.md
+      layer: L2
+      type: task
+      purpose: design-team-scaling
+      keywords:
+        - design
+        - team
+        - scaling
+        - design-team-scaling
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:8168559a3c8060a2c1e723d73c64365472fb0abb5b353424f63223652bc36589
+      lastVerified: '2026-03-09T16:37:40.112Z'
+    design-tooling-audit:
+      path: .aiox-core/development/tasks/design-tooling-audit.md
+      layer: L2
+      type: task
+      purpose: design-tooling-audit
+      keywords:
+        - design
+        - tooling
+        - audit
+        - design-tooling-audit
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:01623e43870b6ba64f02df6bd5497a2fb4728f9625681f153fbbe1c96080c18e
+      lastVerified: '2026-03-09T16:37:40.113Z'
+    design-triage:
+      path: .aiox-core/development/tasks/design-triage.md
+      layer: L2
+      type: task
+      purpose: >-
+        Analyze incoming design requests, classify them by type (brand, UI, photo, video, business), assess complexity,
+        and route to the appropriate specialist agent. This is the gateway task that ensures eve
+      keywords:
+        - design
+        - triage
+        - request
+        - classification
+        - routing
+      usedBy: []
+      dependencies:
+        - 'specialist: "@{optional_second_specialist}"'
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:937503da6d24d4ca652b32f37637cea3b7b90f7cafd28a8baa0f50fdb88b822f
+      lastVerified: '2026-03-09T16:37:40.113Z'
+    designops-maturity-assessment:
+      path: .aiox-core/development/tasks/designops-maturity-assessment.md
+      layer: L2
+      type: task
+      purpose: designops-maturity-assessment
+      keywords:
+        - designops
+        - maturity
+        - assessment
+        - designops-maturity-assessment
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:0c9cfc460d8cc2a31351658fa3ef23b5569593d8b96cc6d5dc8db55cd1e3f5cc
+      lastVerified: '2026-03-09T16:37:40.114Z'
+    designops-metrics-setup:
+      path: .aiox-core/development/tasks/designops-metrics-setup.md
+      layer: L2
+      type: task
+      purpose: '"What the team produces - activity and deliverables"'
+      keywords:
+        - designops
+        - metrics
+        - setup
+        - designops-metrics-setup
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:85c05e48d324fedd6af3af966c71bce4badbb424ab77d95007733bf33646b706
+      lastVerified: '2026-03-09T16:37:40.114Z'
+    lighting-setup-design:
+      path: .aiox-core/development/tasks/lighting-setup-design.md
+      layer: L2
+      type: task
+      purpose: '[What it accomplishes]'
+      keywords:
+        - lighting
+        - setup
+        - design
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:61111c0b63c8cd3c3ec8ae0a05e8c6ab4b835875349c74601c030b8ae395a093
+      lastVerified: '2026-03-09T16:37:40.114Z'
+    lighting-troubleshooting:
+      path: .aiox-core/development/tasks/lighting-troubleshooting.md
+      layer: L2
+      type: task
+      purpose: Lighting Troubleshooting
+      keywords:
+        - lighting
+        - troubleshooting
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:a598d6d446f4cffbb1e5e90a66ea3620ee3e0739856fb93610bb7245715892e9
+      lastVerified: '2026-03-09T16:37:40.115Z'
+    location-lighting:
+      path: .aiox-core/development/tasks/location-lighting.md
+      layer: L2
+      type: task
+      purpose: Location Lighting
+      keywords:
+        - location
+        - lighting
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:41eb1f33dbbdc1204f6a2367528136e9dbac9e643b1e47367500ab0cd732c14c
+      lastVerified: '2026-03-09T16:37:40.115Z'
+    logo-design-process:
+      path: .aiox-core/development/tasks/logo-design-process.md
+      layer: L2
+      type: task
+      purpose: '|'
+      keywords:
+        - logo
+        - design
+        - process
+        - logo-design-process
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:e510c6b8a5871bec1345c89644c4dd3bb0690d24943aef3c8223f6fce11b1d72
+      lastVerified: '2026-03-09T16:37:40.115Z'
+    logo-simplification:
+      path: .aiox-core/development/tasks/logo-simplification.md
+      layer: L2
+      type: task
+      purpose: '|'
+      keywords:
+        - logo
+        - simplification
+        - logo-simplification
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:ee93a6c906a7ff24d2418a537040e1a3084b06af8431d66623afd9f924ecfbb1
+      lastVerified: '2026-03-09T16:37:40.116Z'
+    logo-system-creation:
+      path: .aiox-core/development/tasks/logo-system-creation.md
+      layer: L2
+      type: task
+      purpose: '|'
+      keywords:
+        - logo
+        - system
+        - creation
+        - logo-system-creation
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:3a69952f2b05a6fc924bf93a5b899a82eb1366e0a415f5e853977ba6f049183b
+      lastVerified: '2026-03-09T16:37:40.116Z'
+    one-light-portrait:
+      path: .aiox-core/development/tasks/one-light-portrait.md
+      layer: L2
+      type: task
+      purpose: One Light Portrait
+      keywords:
+        - one
+        - light
+        - portrait
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:f5925b0c695cf0087c561ce9cc041017902d5e3cb5996962666366c1cec68306
+      lastVerified: '2026-03-09T16:37:40.116Z'
+    photo-editing-workflow:
+      path: .aiox-core/development/tasks/photo-editing-workflow.md
+      layer: L2
+      type: task
+      purpose: Complete Photo Editing Workflow
+      keywords:
+        - photo
+        - editing
+        - workflow
+        - complete
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:8a242fc07cea2f3ece4d2e5fd76056566079e566fde67ed565014b7f8344b253
+      lastVerified: '2026-03-09T16:37:40.116Z'
+    preset-creation:
+      path: .aiox-core/development/tasks/preset-creation.md
+      layer: L2
+      type: task
+      purpose: '[description of intended look/mood]'
+      keywords:
+        - preset
+        - creation
+        - lut
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:deec60d566254b642e8676f575e196f572fbe2609ac47c4a53e95ee0411b84a7
+      lastVerified: '2026-03-09T16:37:40.117Z'
+    thumbnail-ab-testing:
+      path: .aiox-core/development/tasks/thumbnail-ab-testing.md
+      layer: L2
+      type: task
+      purpose: '"Rosto de choque + relogio 5:00"'
+      keywords:
+        - thumbnail
+        - ab
+        - testing
+        - structure
+        - a/b
+        - tests
+        - optimization
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:c7587941905dc3338428fde7d70c1b0bb69a08cca87e648cdda14ba0f03f4106
+      lastVerified: '2026-03-09T16:37:40.117Z'
+    thumbnail-audit:
+      path: .aiox-core/development/tasks/thumbnail-audit.md
+      layer: L2
+      type: task
+      purpose: Audit Existing Thumbnails and Identify Improvements
+      keywords:
+        - thumbnail
+        - audit
+        - existing
+        - thumbnails
+        - identify
+        - improvements
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:f2e914a0b07f4186bea8dcfb238eca079656e01b8f76110db90705ff76c3bc5b
+      lastVerified: '2026-03-09T16:37:40.117Z'
+    thumbnail-design:
+      path: .aiox-core/development/tasks/thumbnail-design.md
+      layer: L2
+      type: task
+      purpose: '"Rosto de choque olhando para relogio 5:00"'
+      keywords:
+        - thumbnail
+        - design
+        - high-ctr
+        - youtube
+        - thumbnails
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:a2cd7f632857521ed623b3feef68cb4f9c4b6b1beb05f228d100199388ce0ff6
+      lastVerified: '2026-03-09T16:37:40.118Z'
+    thumbnail-swipe-analysis:
+      path: .aiox-core/development/tasks/thumbnail-swipe-analysis.md
+      layer: L2
+      type: task
+      purpose: Analyze Top-Performing Thumbnails in Niche
+      keywords:
+        - thumbnail
+        - swipe
+        - analysis
+        - analyze
+        - top-performing
+        - thumbnails
+        - niche
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:d0c5ad1f4487d41de85e947d13f00b483dc4db6a07ad8d4c03a985434fd3497b
+      lastVerified: '2026-03-09T16:37:40.118Z'
+    vintage-badge-design:
+      path: .aiox-core/development/tasks/vintage-badge-design.md
+      layer: L2
+      type: task
+      purpose: '|'
+      keywords:
+        - vintage
+        - badge
+        - design
+        - vintage-badge-design
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:a1fc02015d7582369a39dadf29f9f2041a294f0be307da83ac35745700f5b78c
+      lastVerified: '2026-03-09T16:37:40.118Z'
+    visual-qa:
+      path: .aiox-core/development/tasks/visual-qa.md
+      layer: L2
+      type: task
+      purpose: >-
+        Capture visual representations of HTML artifacts (courses, prototypes, landing pages) at multiple device sizes
+        and inspect for visual defects before delivery. Ensures no layout breaks, text overflow, 
+      keywords:
+        - visual
+        - qa
+        - 'task:'
+        - quality
+        - assurance
+        - html
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.8
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:76fd369ab114a96e954f23abf75816b634c3e507ec317c102f5f4d056584d672
+      lastVerified: '2026-03-09T16:37:40.119Z'
   templates:
     activation-instructions-inline-greeting:
       path: .aiox-core/product/templates/activation-instructions-inline-greeting.yaml
@@ -5214,6 +5833,43 @@ entities:
         extensionPoints: []
       checksum: sha256:1e99f1be493b4b3dac1b2a9abc1ae1dd9146f26f86bed229c232690114c3a377
       lastVerified: '2026-03-09T15:57:59.297Z'
+    premium-lp-content-schema:
+      path: .aiox-core/product/templates/premium-lp-content-schema.yaml
+      layer: L2
+      type: template
+      purpose: '"Visual theme applied via token overrides"'
+      keywords:
+        - premium
+        - lp
+        - content
+        - schema
+        - '============================================================'
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.5
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:3525bbb55f36b46fe0675bd12051b02d77aeac5131aae7885532e0977da93650
+      lastVerified: '2026-03-09T16:37:40.119Z'
+    premium-lp-tokens:
+      path: .aiox-core/product/templates/premium-lp-tokens.yaml
+      layer: L2
+      type: template
+      purpose: '============================================================'
+      keywords:
+        - premium
+        - lp
+        - tokens
+        - '============================================================'
+      usedBy: []
+      dependencies: []
+      adaptability:
+        score: 0.5
+        constraints: []
+        extensionPoints: []
+      checksum: sha256:d9be5b6c20b357909aca095b80b4c743e2b39002ef1c7b0b0ea26867817fdf9e
+      lastVerified: '2026-03-09T16:37:40.119Z'
   scripts:
     activation-runtime:
       path: .aiox-core/development/scripts/activation-runtime.js

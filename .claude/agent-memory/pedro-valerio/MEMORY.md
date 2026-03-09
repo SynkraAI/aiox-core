@@ -2,8 +2,9 @@
 
 ## Quick Stats
 - Workflows auditados: 2 (deep-research v1.0, v1.1)
+- Clones auditados: 2 (renner-silva v1.1=8.5, v1.2=9.0)
 - Veto conditions criadas: 18 (deep-research checkpoints.yaml)
-- Gaps identificados: 8 (4 critical v1.0 → FIXED v1.1, 4 minor v1.1)
+- Gaps identificados: 8 workflow (4 critical→FIXED) + 8 clone (1 major + 7 minor)
 
 ---
 
@@ -137,7 +138,21 @@ global:
 
 ---
 
+## Clone Audits
+### [2026-03-09] renner-silva v1.2: APROVADO (9.0/10)
+- +2 KBs novos (KB18 Frameworks Negocio, KB19 Metodo Palestra) — completos
+- +3 KBs atualizados (KB01 v1.4, KB02 v1.3 +15 fingerprints, KB04 v1.3 +13 memorias)
+- 1 MAJOR: escopo agent nao inclui vendas/pricing explicitamente
+- 7 MINOR: README desatualizado (17→19 KBs, ME-40→ME-29), cross-refs erradas
+- Pattern: mind clone audits focam em SOURCE ATTRIBUTION + CROSS-REF INTEGRITY
+
+### [2026-03-08] renner-silva v1.1: APROVADO (8.5/10)
+- Baseline score antes de KB18/KB19
+
+---
+
 ## Notas Recentes
+- [2026-03-09] renner-silva v1.2 APROVADO (9.0/10) — gap principal: escopo vendas
 - [2026-03-08] deep-research v1.1 APROVADO (91/100) — todos 4 CRITICAL resolvidos
 - [2026-03-08] deep-research v1.0 VETADO (62/100) — 4 CRITICAL issues
 - [2026-02-05] Agent Memory implementado - Epic AAA

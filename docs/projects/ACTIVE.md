@@ -2,7 +2,7 @@
 
 | # | Projeto | Status | Agente/Squad | Ultima Sessao | Proximo Passo |
 |---|---------|--------|-------------|---------------|---------------|
-| 1 | ensinio | Proposals vazias | — | 2026-03-08 | Aguardando conteudo de proposta |
+| 1 | **ensinio** | **Squad v3.0.0 pronto, aguardando teste** | **ensinio-whatsapp-prospector** | **2026-03-09** | **Testar pipeline com ZIP real de grupo WhatsApp** |
 | 2 | gui-avila-mind | Transcricao limpa disponivel | squad-creator-pro | 2026-03-07 | Extrair DNA/frameworks |
 | 3 | luiz-fosc-mentoria | Research completa | tech-search | 2026-03-06 | Definir modelo de implementacao |
 | 4 | luiz-fosc-mind-clone | Research INPI concluida | tech-search | 2026-03-05 | Registrar marca ou alternativas |

@@ -2,11 +2,11 @@
 
 ## Estado Atual
 
-- **Clone:** v1.2 (fidelidade v1.1=93/100, v1.2 pending re-score)
+- **Clone:** v1.2 (fidelidade: @oalanicolas 9.5/10, @pedro-valerio 9.0/10)
 - **Squad:** `squads/renner-silva/` (4 tasks, 1 workflow, 19 KBs)
 - **Pipeline:** Transcribe 9/9 | Sculpt 7/9 | Distill 9/9 | KB Update 9/9
 - **Distill consolidado:** `data/distill-consolidado-2026-03-09.md`
-- **Proximo passo:** Re-score fidelidade v1.2, validar com @oalanicolas e @pedro-valerio
+- **Proximo passo:** Fix minor issues (cross-refs bidirecionais, ME-01 a ME-07 expandir) para chegar a 9.5+ no pedro-valerio
 
 ## Ultima Sessao
 
