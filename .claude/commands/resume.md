@@ -1,6 +1,9 @@
 Inicio de sessao ou usuario quer retomar trabalho. Execute os passos abaixo SEM carregar squads/skills:
 
-## Passo 1: Mostrar projetos ativos
+**Argumento opcional:** O usuario pode passar o nome do projeto direto: `/resume {projeto}`
+Se `$ARGUMENTS` estiver preenchido, use-o como nome do projeto e PULE para o Passo 2.
+
+## Passo 1: Mostrar projetos ativos (pular se argumento fornecido)
 - Leia `docs/projects/ACTIVE.md`
 - Mostre todos os projetos ordenados por data da ultima sessao (mais recentes primeiro):
 
@@ -11,7 +14,7 @@ Inicio de sessao ou usuario quer retomar trabalho. Execute os passos abaixo SEM 
 - Use AskUserQuestion para o usuario escolher qual projeto retomar
 
 ## Passo 2: Carregar contexto do projeto
-Apos o usuario escolher:
+Apos o usuario escolher (ou usar o argumento fornecido):
 
 1. Leia `docs/projects/{projeto}/INDEX.md`
 2. Verifique se existe session file recente em `docs/projects/{projeto}/sessions/`

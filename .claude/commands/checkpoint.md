@@ -62,3 +62,12 @@ Mostre ao usuario:
 - ✅/❌ INDEX.md atualizado
 - ✅/❌ ACTIVE.md atualizado
 - ✅/❌ Session file salvo em `docs/projects/{projeto}/sessions/YYYY-MM-DD.md`
+
+Ao final, SEMPRE mostre a dica de retomada:
+
+```
+Para retomar este projeto na proxima sessao, digite:
+/resume {projeto}
+```
+
+Onde `{projeto}` e o nome exato da pasta em `docs/projects/`.
