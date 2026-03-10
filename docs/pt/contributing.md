@@ -1,53 +1,55 @@
-# Contribuindo para o Synkra AIOS
+# Contribuindo com o Synkra AIOX
 
-> **[English Version](CONTRIBUTING.md)**
+> **[English Version](../../CONTRIBUTING.md)**
 
-Bem-vindo ao AIOS! Obrigado pelo seu interesse em contribuir. Este guia vai ajuda-lo a entender nosso fluxo de trabalho, processo de contribuicao e como submeter suas alteracoes.
+Bem-vindo ao AIOX! Obrigado pelo seu interesse em contribuir. Este guia vai ajudá-lo a entender nosso fluxo de desenvolvimento, processo de contribuição e como submeter suas alterações.
 
-## Indice
+## Sumário
 
-- [Inicio Rapido](#inicio-rapido)
-- [Tipos de Contribuicoes](#tipos-de-contribuicoes)
+- [Início Rápido](#início-rápido)
+- [Tipos de Contribuição](#tipos-de-contribuição)
 - [Fluxo de Desenvolvimento](#fluxo-de-desenvolvimento)
-- [Contribuindo Agents](#contribuindo-agents)
-- [Contribuindo Tasks](#contribuindo-tasks)
-- [Contribuindo Squads](#contribuindo-squads)
+- [Contribuindo com Agents](#contribuindo-com-agents)
+- [Contribuindo com Tasks](#contribuindo-com-tasks)
+- [Contribuindo com Squads](#contribuindo-com-squads)
 - [Processo de Code Review](#processo-de-code-review)
-- [Sistema de Validacao](#sistema-de-validacao)
-- [Padroes de Codigo](#padroes-de-codigo)
+- [Sistema de Validação](#sistema-de-validação)
+- [Padrões de Código](#padrões-de-código)
 - [Requisitos de Testes](#requisitos-de-testes)
 - [Perguntas Frequentes](#perguntas-frequentes)
 - [Obtendo Ajuda](#obtendo-ajuda)
+- [Trabalhando com o Pro](#trabalhando-com-o-pro)
+- [Recursos Adicionais](#recursos-adicionais)
 
 ---
 
-## Inicio Rapido
+## Início Rápido
 
 ### 1. Fork e Clone
 
 ```bash
-# Faca fork via GitHub UI, depois clone seu fork
-git clone https://github.com/SEU_USUARIO/aios-core.git
-cd aios-core
+# Faça o fork pela interface do GitHub, depois clone seu fork
+git clone https://github.com/SEU_USUARIO/aiox-core.git
+cd aiox-core
 
 # Adicione o remote upstream
-git remote add upstream https://github.com/SynkraAI/aios-core.git
+git remote add upstream https://github.com/SynkraAI/aiox-core.git
 ```
 
 ### 2. Configure o Ambiente de Desenvolvimento
 
-**Pre-requisitos:**
+**Pré-requisitos:**
 
 - Node.js >= 20.0.0
 - npm
 - Git
-- GitHub CLI (`gh`) - opcional mas recomendado
+- GitHub CLI (`gh`) - opcional, mas recomendado
 
 ```bash
-# Instale as dependencias
+# Instale as dependências
 npm install
 
-# Verifique a configuracao
+# Verifique a configuração
 npm test
 npm run lint
 npm run typecheck
@@ -59,59 +61,60 @@ npm run typecheck
 git checkout -b feature/nome-da-sua-feature
 ```
 
-**Convencoes de Nomenclatura:**
+**Convenções de Nomenclatura de Branches:**
+
 | Prefixo | Uso |
 |---------|-----|
 | `feature/` | Novas funcionalidades, agents, tasks |
-| `fix/` | Correcoes de bugs |
-| `docs/` | Atualizacoes de documentacao |
-| `refactor/` | Refatoracao de codigo |
-| `test/` | Adicoes/melhorias de testes |
+| `fix/` | Correções de bugs |
+| `docs/` | Atualizações de documentação |
+| `refactor/` | Refatoração de código |
+| `test/` | Adição/melhoria de testes |
 
-### 4. Faca Suas Alteracoes
+### 4. Faça Suas Alterações
 
-Siga o guia relevante abaixo para seu tipo de contribuicao.
+Siga o guia relevante abaixo para o tipo da sua contribuição.
 
-### 5. Execute a Validacao Local
+### 5. Execute a Validação Local
 
 ```bash
-npm run lint      # Estilo de codigo
-npm run typecheck # Verificacao de tipos
+npm run lint      # Estilo de código
+npm run typecheck # Verificação de tipos
 npm test          # Executar testes
 npm run build     # Verificar build
 ```
 
-### 6. Push e Crie o PR
+### 6. Push e Criação do PR
 
 ```bash
 git push origin feature/nome-da-sua-feature
 ```
 
-Depois crie um Pull Request no GitHub apontando para a branch `main`.
+Em seguida, crie um Pull Request no GitHub apontando para a branch `main`.
 
 ---
 
-## Tipos de Contribuicoes
+## Tipos de Contribuição
 
-| Contribuicao          | Descricao                            | Dificuldade |
-| --------------------- | ------------------------------------ | ----------- |
-| **Documentacao**      | Corrigir erros, melhorar guias       | Facil       |
-| **Correcoes de Bugs** | Corrigir issues reportadas           | Facil-Medio |
-| **Tasks**             | Adicionar novos workflows de tarefas | Medio       |
-| **Agents**            | Criar novas personas de agentes IA   | Medio       |
-| **Squads**            | Pacote de agents + tasks + workflows | Avancado    |
-| **Core Features**     | Melhorias no framework               | Avancado    |
+| Contribuição      | Descrição                                  | Dificuldade     |
+| ----------------- | ------------------------------------------ | --------------- |
+| **Documentação**  | Corrigir erros, melhorar guias             | Fácil           |
+| **Bug Fixes**     | Corrigir issues reportados                 | Fácil-Médio     |
+| **Tasks**         | Adicionar novos workflows de tasks         | Médio           |
+| **Agents**        | Criar novos agents de IA                   | Médio           |
+| **Squads**        | Pacote de agents + tasks + workflows       | Avançado        |
+| **Core Features** | Melhorias no framework                     | Avançado        |
 
 ---
 
 ## Fluxo de Desenvolvimento
 
-### Convencoes de Commit
+### Convenções de Commit
 
-Usamos [Conventional Commits](https://www.conventionalcommits.org/):
+Utilizamos [Conventional Commits](https://www.conventionalcommits.org/):
 
-```
-<tipo>: <descricao>
+```text
+<tipo>: <descrição>
 
 <corpo opcional>
 ```
@@ -121,40 +124,40 @@ Usamos [Conventional Commits](https://www.conventionalcommits.org/):
 **Exemplos:**
 
 ```bash
-git commit -m "feat(agent): adicionar agent security-auditor"
-git commit -m "fix: resolver memory leak no config loader"
-git commit -m "docs: atualizar guia de contribuicao"
+git commit -m "feat(agent): add security-auditor agent"
+git commit -m "fix: resolve memory leak in config loader"
+git commit -m "docs: update contribution guide"
 ```
 
 ### Processo de Pull Request
 
 1. **Crie o PR** apontando para a branch `main`
-2. **Verificacoes automaticas** executam (lint, typecheck, test, build)
-3. **Review do CodeRabbit** fornece feedback automatizado
-4. **Review do maintainer** - minimo 1 aprovacao necessaria
-5. **Merge** apos todas as verificacoes passarem
+2. **Checks automáticos** são executados (lint, typecheck, test, build)
+3. **Review do CodeRabbit** fornece feedback automatizado por IA
+4. **Review do maintainer** - pelo menos 1 aprovação é necessária
+5. **Merge** após todos os checks passarem
 
 ---
 
-## Contribuindo Agents
+## Contribuindo com Agents
 
-Agents sao personas de IA com expertise e comandos especificos.
+Agents são personas de IA com expertise e comandos específicos.
 
-### Localizacao do Arquivo
+### Localização dos Arquivos de Agent
 
+```text
+.aiox-core/development/agents/seu-agent.md
 ```
-.aios-core/development/agents/seu-agent.md
-```
 
-### Estrutura Obrigatoria
+### Estrutura Obrigatória do Agent
 
 ```yaml
 agent:
-  name: NomeDoAgent
-  id: agent-id # kebab-case, unico
-  title: Titulo Descritivo
+  name: AgentName
+  id: agent-id # kebab-case, único
+  title: Descriptive Title
   icon: emoji
-  whenToUse: 'Quando ativar este agent'
+  whenToUse: 'When to activate this agent'
 
 persona_profile:
   archetype: Builder | Analyst | Guardian | Operator | Strategist
@@ -164,45 +167,45 @@ persona_profile:
     emoji_frequency: none | low | medium | high
 
     vocabulary:
-      - termo-dominio-1
-      - termo-dominio-2
+      - domain-term-1
+      - domain-term-2
 
     greeting_levels:
-      minimal: 'Saudacao curta'
-      named: 'Saudacao com nome e personalidade'
-      archetypal: 'Saudacao arquetipal completa'
+      minimal: 'Short greeting'
+      named: 'Named greeting with personality'
+      archetypal: 'Full archetypal greeting'
 
-    signature_closing: 'Frase de assinatura'
+    signature_closing: 'Signature phrase'
 
 persona:
-  role: 'Papel principal do agent'
-  style: 'Estilo de comunicacao'
-  identity: 'Descricao da identidade'
-  focus: 'No que o agent foca'
+  role: "Agent's primary role"
+  style: 'Communication style'
+  identity: "Agent's identity description"
+  focus: 'What the agent focuses on'
 
   core_principles:
-    - Principio 1
-    - Principio 2
+    - Principle 1
+    - Principle 2
 
 commands:
-  - help: Mostrar comandos disponiveis
-  - comando-custom: Descricao do comando
+  - help: Show available commands
+  - custom-command: Command description
 
 dependencies:
   tasks:
-    - task-relacionada.md
+    - related-task.md
   tools:
-    - nome-ferramenta
+    - tool-name
 ```
 
-### Checklist para Agents
+### Checklist de Contribuição de Agent
 
-- [ ] ID do agent e unico e usa kebab-case
-- [ ] `persona_profile` esta completo com archetype e communication
-- [ ] Todos os comandos tem descricoes
-- [ ] Dependencies listam todas as tasks necessarias
-- [ ] Sem credenciais ou dados sensiveis hardcoded
-- [ ] Segue padroes existentes no codebase
+- [ ] O ID do agent é único e usa kebab-case
+- [ ] O `persona_profile` está completo com archetype e communication
+- [ ] Todos os comandos possuem descrições
+- [ ] As dependências listam todas as tasks necessárias
+- [ ] Não contém credenciais ou dados sensíveis hardcoded
+- [ ] Segue os padrões existentes no codebase
 
 ### Template de PR para Agents
 
@@ -210,72 +213,72 @@ Use o template **Agent Contribution** ao criar seu PR.
 
 ---
 
-## Contribuindo Tasks
+## Contribuindo com Tasks
 
-Tasks sao workflows executaveis que agents podem rodar.
+Tasks são workflows executáveis que os agents podem rodar.
 
-### Localizacao do Arquivo
+### Localização dos Arquivos de Task
 
+```text
+.aiox-core/development/tasks/sua-task.md
 ```
-.aios-core/development/tasks/sua-task.md
-```
 
-### Estrutura Obrigatoria
+### Estrutura Obrigatória da Task
 
 ```markdown
 # Nome da Task
 
-**Descricao:** O que esta task faz
+**Description:** O que esta task faz
 **Agent(s):** @dev, @qa, etc.
 **Elicit:** true | false
 
 ---
 
-## Pre-requisitos
+## Pré-requisitos
 
-- Pre-requisito 1
-- Pre-requisito 2
+- Pré-requisito 1
+- Pré-requisito 2
 
 ## Passos
 
 ### Passo 1: Primeiro Passo
 
-Descricao do que fazer.
+Descrição do que fazer.
 
-**Ponto de Elicitacao (se elicit: true):**
+**Ponto de Elicitação (se elicit: true):**
 
-- Pergunta para o usuario
-- Opcoes a apresentar
+- Pergunta para o usuário
+- Opções a apresentar
 
 ### Passo 2: Segundo Passo
 
 Continue com mais passos...
 
-## Entregaveis
+## Entregáveis
 
-- [ ] Entregavel 1
-- [ ] Entregavel 2
+- [ ] Entregável 1
+- [ ] Entregável 2
 
 ## Tratamento de Erros
 
-Se X acontecer, faca Y.
+Se X acontecer, faça Y.
 
 ---
 
-## Dependencias
+## Dependências
 
-- `dependencia-1.md`
-- `dependencia-2.md`
+- `dependency-1.md`
+- `dependency-2.md`
 ```
 
-### Checklist para Tasks
+### Checklist de Contribuição de Task
 
-- [ ] Task tem descricao e proposito claros
-- [ ] Passos sao sequenciais e logicos
-- [ ] Pontos de elicitacao sao claros (se aplicavel)
-- [ ] Entregaveis estao bem definidos
-- [ ] Orientacao de tratamento de erros incluida
-- [ ] Dependencias existem no codebase
+- [ ] A task possui descrição e propósito claros
+- [ ] Os passos são sequenciais e lógicos
+- [ ] Os pontos de elicitação estão claros (se aplicável)
+- [ ] Os entregáveis estão bem definidos
+- [ ] Orientações de tratamento de erros incluídas
+- [ ] As dependências existem no codebase
 
 ### Template de PR para Tasks
 
@@ -283,13 +286,13 @@ Use o template **Task Contribution** ao criar seu PR.
 
 ---
 
-## Contribuindo Squads
+## Contribuindo com Squads
 
-Squads sao pacotes de agents, tasks e workflows relacionados.
+Squads são pacotes de agents, tasks e workflows relacionados.
 
-### Estrutura de Squad
+### Estrutura do Squad
 
-```
+```text
 seu-squad/
 ├── manifest.yaml       # Metadados do squad
 ├── agents/
@@ -315,135 +318,134 @@ tasks:
   - sua-task
 ```
 
-### Recursos para Squads
+### Recursos sobre Squads
 
-- [Guia de Squads](docs/guides/squads-guide.md) - Documentacao completa
-- [Template de Squad](templates/squad/) - Comece de um template funcional
-- [Discussoes de Squads](https://github.com/SynkraAI/aios-core/discussions/categories/ideas) - Compartilhe ideias
+- [Guia de Squads](docs/guides/squads-guide.md) - Documentação completa
+- [Discussões sobre Squads](https://github.com/SynkraAI/aiox-core/discussions/categories/ideas) - Compartilhe ideias
 
 ---
 
 ## Processo de Code Review
 
-### Verificacoes Automaticas
+### Checks Automáticos
 
-Quando voce submete um PR, as seguintes verificacoes executam automaticamente:
+Ao submeter um PR, os seguintes checks são executados automaticamente:
 
-| Verificacao    | Descricao                    | Obrigatoria |
-| -------------- | ---------------------------- | ----------- |
-| **ESLint**     | Estilo e qualidade de codigo | Sim         |
-| **TypeScript** | Verificacao de tipos         | Sim         |
-| **Build**      | Verificacao de build         | Sim         |
-| **Tests**      | Suite de testes Jest         | Sim         |
-| **Coverage**   | Minimo 80% cobertura         | Sim         |
+| Check          | Descrição                     | Obrigatório |
+| -------------- | ----------------------------- | ----------- |
+| **ESLint**     | Estilo e qualidade de código  | Sim         |
+| **TypeScript** | Verificação de tipos          | Sim         |
+| **Build**      | Verificação de build          | Sim         |
+| **Tests**      | Suite de testes Jest          | Sim         |
+| **Coverage**   | Cobertura mínima de 80%      | Sim         |
 
-### Review do CodeRabbit
+### Review do CodeRabbit por IA
 
-[CodeRabbit](https://coderabbit.ai) automaticamente revisa seu PR e fornece feedback sobre:
+O [CodeRabbit](https://coderabbit.ai) revisa automaticamente seu PR e fornece feedback sobre:
 
-- Qualidade de codigo e boas praticas
-- Preocupacoes de seguranca
-- Padroes especificos do AIOS (agents, tasks, workflows)
+- Qualidade de código e boas práticas
+- Preocupações de segurança
+- Padrões específicos do AIOS (agents, tasks, workflows)
 - Problemas de performance
 
-**Niveis de Severidade:**
+**Níveis de Severidade:**
 
-| Nivel        | Acao Necessaria                                |
-| ------------ | ---------------------------------------------- |
-| **CRITICAL** | Deve corrigir antes do merge                   |
-| **HIGH**     | Fortemente recomendado corrigir                |
-| **MEDIUM**   | Considere corrigir ou documente como tech debt |
-| **LOW**      | Melhoria opcional                              |
+| Nível        | Ação Necessária                                  |
+| ------------ | ------------------------------------------------ |
+| **CRITICAL** | Deve ser corrigido antes do merge                |
+| **HIGH**     | Fortemente recomendado corrigir                  |
+| **MEDIUM**   | Considere corrigir ou documente como tech debt   |
+| **LOW**      | Melhoria opcional                                |
 
 **Respondendo ao CodeRabbit:**
 
-- Enderece issues CRITICAL e HIGH antes de solicitar review
-- Issues MEDIUM podem ser documentadas para follow-up
-- Issues LOW sao informativas
+- Resolva issues CRITICAL e HIGH antes de solicitar review
+- Issues MEDIUM podem ser documentados para acompanhamento
+- Issues LOW são informativos
 
 ### Review do Maintainer
 
-Apos as verificacoes automaticas passarem, um maintainer ira:
+Após os checks automáticos passarem, um maintainer irá:
 
-1. Verificar se as alteracoes atendem aos padroes do projeto
-2. Checar implicacoes de seguranca
-3. Garantir que a documentacao foi atualizada
-4. Aprovar ou solicitar alteracoes
+1. Verificar se as alterações atendem aos padrões do projeto
+2. Checar implicações de segurança
+3. Garantir que a documentação foi atualizada
+4. Aprovar ou solicitar alterações
 
 ### Requisitos para Merge
 
-- [ ] Todas as verificacoes de CI passam
-- [ ] Pelo menos 1 aprovacao de maintainer
+- [ ] Todos os checks de CI passando
+- [ ] Pelo menos 1 aprovação de maintainer
 - [ ] Todas as conversas resolvidas
 - [ ] Sem conflitos de merge
-- [ ] Branch atualizada com main
+- [ ] Branch atualizada com a main
 
 ---
 
-## Sistema de Validacao
+## Sistema de Validação
 
-AIOS implementa uma estrategia de **Defesa em Profundidade** com 3 camadas de validacao:
+O AIOS implementa uma estratégia de **Defesa em Profundidade** com 3 camadas de validação:
 
 ### Camada 1: Pre-commit (Local)
 
 **Performance:** < 5 segundos
 
 - ESLint com cache
-- Compilacao incremental TypeScript
-- IDE sync (auto-stage de arquivos de comando IDE)
+- Compilação incremental do TypeScript
+- Sincronização de IDE (auto-stage de arquivos de comando da IDE)
 
 ### Camada 2: Pre-push (Local)
 
 **Performance:** < 2 segundos
 
-- Validacao de checkboxes de story
-- Verificacoes de consistencia de status
+- Validação de checkboxes de stories
+- Verificações de consistência de status
 
 ### Camada 3: CI/CD (Cloud)
 
 **Performance:** 2-5 minutos
 
-- Lint e verificacao de tipos completos
+- Lint e verificação de tipos completos
 - Suite de testes completa
-- Relatorio de cobertura
-- Validacao de story
-- Regras de protecao de branch
+- Relatório de cobertura
+- Validação de stories
+- Regras de proteção de branch
 
 ---
 
-## Padroes de Codigo
+## Padrões de Código
 
 ### JavaScript/TypeScript
 
 - Recursos ES2022
-- Prefira `const` sobre `let`
-- Use async/await sobre promises
-- Adicione comentarios JSDoc para APIs publicas
-- Siga o estilo de codigo existente
+- Prefira `const` ao invés de `let`
+- Use async/await ao invés de promises
+- Adicione comentários JSDoc para APIs públicas
+- Siga o estilo de código existente
 
-### Organizacao de Arquivos
+### Organização de Arquivos
 
 ```
-.aios-core/
+.aiox-core/
 ├── development/
-│   ├── agents/      # Definicoes de agents
+│   ├── agents/      # Definições de agents
 │   ├── tasks/       # Workflows de tasks
-│   └── workflows/   # Workflows multi-etapas
-├── core/            # Utilitarios core
+│   └── workflows/   # Workflows multi-step
+├── core/            # Utilitários principais
 └── product/
     └── templates/   # Templates de documentos
 
 docs/
-├── guides/          # Guias do usuario
+├── guides/          # Guias de usuário
 └── architecture/    # Arquitetura do sistema
 ```
 
 ### ESLint & TypeScript
 
-- Estende: `eslint:recommended`, `@typescript-eslint/recommended`
+- Extends: `eslint:recommended`, `@typescript-eslint/recommended`
 - Target: ES2022
-- Modo strict habilitado
-- Sem console.log em producao (avisos)
+- Strict mode habilitado
+- Sem console.log em produção (warnings)
 
 ---
 
@@ -451,26 +453,26 @@ docs/
 
 ### Requisitos de Cobertura
 
-- **Minimo:** 80% cobertura (branches, funcoes, linhas, statements)
-- **Testes Unitarios:** Obrigatorios para todas as novas funcoes
-- **Testes de Integracao:** Obrigatorios para workflows
+- **Mínimo:** 80% de cobertura (branches, functions, lines, statements)
+- **Testes Unitários:** Obrigatórios para todas as novas funções
+- **Testes de Integração:** Obrigatórios para workflows
 
 ### Executando Testes
 
 ```bash
 npm test                    # Executar todos os testes
-npm run test:coverage       # Com relatorio de cobertura
+npm run test:coverage       # Com relatório de cobertura
 npm run test:watch          # Modo watch
-npm test -- caminho/para/teste.js # Arquivo especifico
+npm test -- path/to/test.js # Arquivo específico
 ```
 
 ### Escrevendo Testes
 
 ```javascript
-describe('MeuModulo', () => {
-  it('deve fazer algo', () => {
-    const resultado = minhaFuncao();
-    expect(resultado).toBe(esperado);
+describe('MyModule', () => {
+  it('should do something', () => {
+    const result = myFunction();
+    expect(result).toBe(expected);
   });
 });
 ```
@@ -479,17 +481,17 @@ describe('MeuModulo', () => {
 
 ## Perguntas Frequentes
 
-### P: Quanto tempo demora o review?
+### P: Quanto tempo leva o review?
 
-**R:** Nosso objetivo e o primeiro review em 24-48 horas. Alteracoes complexas podem demorar mais.
+**R:** Nosso objetivo é dar o primeiro review dentro de 24-48 horas. Alterações complexas podem levar mais tempo.
 
 ### P: Posso contribuir sem testes?
 
-**R:** Testes sao fortemente encorajados. Para alteracoes apenas de documentacao, testes podem nao ser necessarios.
+**R:** Testes são fortemente encorajados. Para alterações apenas de documentação, testes podem não ser necessários.
 
 ### P: E se meu PR tiver conflitos?
 
-**R:** Faca rebase da sua branch na main mais recente:
+**R:** Faça rebase da sua branch com a main mais recente:
 
 ```bash
 git fetch upstream
@@ -497,45 +499,84 @@ git rebase upstream/main
 git push --force-with-lease
 ```
 
-### P: Posso contribuir em portugues?
+### P: Posso contribuir em português?
 
-**R:** Sim! Aceitamos PRs em portugues. Voce esta lendo o guia certo!
+**R:** Sim! Aceitamos PRs em português. Você está lendo este documento, que é a versão em português do [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ### P: Como me torno um maintainer?
 
-**R:** Contribuicoes consistentes e de alta qualidade ao longo do tempo. Comece com pequenas correcoes e avance para features maiores.
+**R:** Contribuições consistentes e de alta qualidade ao longo do tempo. Comece com correções pequenas e evolua para funcionalidades maiores.
 
-### P: Minhas verificacoes de CI estao falhando. O que faco?
+### P: Meus checks de CI estão falhando. O que faço?
 
 **R:** Verifique os logs do GitHub Actions:
 
 ```bash
-gh pr checks  # Ver status das verificacoes do PR
+gh pr checks  # Ver status dos checks do PR
 ```
 
-Correcoes comuns:
+Correções comuns:
 
 - Execute `npm run lint -- --fix` para problemas de estilo
-- Execute `npm run typecheck` para ver erros de tipo
-- Garanta que os testes passam localmente antes do push
+- Execute `npm run typecheck` para ver erros de tipos
+- Certifique-se de que os testes passam localmente antes de fazer push
 
 ---
 
 ## Obtendo Ajuda
 
-- **GitHub Issues:** [Abra uma issue](https://github.com/SynkraAI/aios-core/issues)
-- **Discussoes:** [Inicie uma discussao](https://github.com/SynkraAI/aios-core/discussions)
-- **Comunidade:** [COMMUNITY-PT.md](COMMUNITY-PT.md)
+- **GitHub Issues:** [Abra uma issue](https://github.com/SynkraAI/aiox-core/issues)
+- **Discussões:** [Inicie uma discussão](https://github.com/SynkraAI/aiox-core/discussions)
+- **Comunidade:** [Discussões](https://github.com/SynkraAI/aiox-core/discussions)
+
+---
+
+## Trabalhando com o Pro
+
+O AIOX usa um modelo Open Core com um git submodule privado `pro/`.
+
+### Para Contribuidores Open-Source
+
+**Você NÃO precisa do submodule pro/.** O clone padrão funciona perfeitamente:
+
+```bash
+git clone https://github.com/SynkraAI/aiox-core.git
+cd aiox-core
+npm install && npm test  # Todos os testes passam sem o pro/
+```
+
+O diretório `pro/` simplesmente não existirá no seu clone — isso é esperado e todas as funcionalidades, testes e CI funcionam sem ele.
+
+### Para Membros do Time (com Acesso ao Pro)
+
+```bash
+# Clone com submodule
+git clone --recurse-submodules https://github.com/SynkraAI/aiox-core.git
+
+# Ou adicione a um clone existente
+git submodule update --init pro
+```
+
+**Ordem de push:** Sempre faça push das alterações do `pro/` primeiro, depois do `aiox-core`.
+
+### Futuro: Configuração via CLI
+
+```bash
+# Disponível em uma versão futura
+aios setup --pro
+```
+
+Para o guia completo de workflow de desenvolvimento, veja [Pro Developer Workflow](docs/guides/workflows/pro-developer-workflow.md).
 
 ---
 
 ## Recursos Adicionais
 
-- [Guia da Comunidade](COMMUNITY-PT.md) - Como participar
+- [Guia da Comunidade](COMMUNITY.md) - Como participar
 - [Guia de Squads](docs/guides/squads-guide.md) - Crie equipes de agents
 - [Arquitetura](docs/architecture/) - Design do sistema
-- [Roadmap](ROADMAP-PT.md) - Direcao do projeto
+- [Roadmap](ROADMAP.md) - Direção do projeto
 
 ---
 
-**Obrigado por contribuir para o Synkra AIOS!**
+**Obrigado por contribuir com o Synkra AIOX!**
