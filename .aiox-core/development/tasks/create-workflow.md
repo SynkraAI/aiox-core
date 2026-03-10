@@ -274,7 +274,7 @@ ELICIT: Workflow Basic Information
 ```
 
 ### Step 2: Workflow Sequence Design
-```
+```text
 ELICIT: Workflow Sequence and Flow
 1. What are the main execution steps/phases? (e.g., "planning", "implementation", "testing")
 2. What is the exact step order (`workflow.sequence`)?
@@ -284,7 +284,7 @@ ELICIT: Workflow Sequence and Flow
 ```
 
 ### Step 3: Agent Orchestration
-```
+```text
 ELICIT: Agent Participation
 For each workflow step:
 1. Which agent(s) are involved?

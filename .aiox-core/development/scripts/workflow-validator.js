@@ -714,11 +714,11 @@ class WorkflowValidator {
     }
 
     if (data.workflow && typeof data.workflow === 'object') {
-      const normalized = { ...data };
-      if (!normalized.workflow.phases && Array.isArray(data.phases)) {
-        normalized.workflow.phases = data.phases;
+      const normalizedWorkflow = { ...data.workflow };
+      if (!normalizedWorkflow.phases && Array.isArray(data.phases)) {
+        normalizedWorkflow.phases = data.phases;
       }
-      return normalized;
+      return { ...data, workflow: normalizedWorkflow };
     }
 
     const normalizedWorkflow = {

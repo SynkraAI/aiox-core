@@ -58,7 +58,7 @@ workflow:
       on_complete:
         status: success
 
-    - workflow_end:
+    - workflow_end: true
       id: complete
       action: workflow_complete
 

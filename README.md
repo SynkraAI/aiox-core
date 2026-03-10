@@ -467,6 +467,8 @@ O AIOX vem com 12 agentes especializados:
 - **dev** - Desenvolvedor e implementação
 - **qa** - Garantia de qualidade e testes
 - **po** (Product Owner) - Gerenciamento de backlog e histórias
+- **data-engineer** - Design de banco de dados e modelagem de dados
+- **devops** - CI/CD, infraestrutura e operações git (autoridade exclusiva de push)
 
 ## Documentação e Recursos
 
