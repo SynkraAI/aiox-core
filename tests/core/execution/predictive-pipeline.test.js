@@ -1092,7 +1092,9 @@ describe('PredictivePipeline', () => {
         }));
       }
 
-      await Promise.all(promises);
+      const results = await Promise.all(promises);
+      const ids = new Set(results.map(r => r.id));
+      expect(ids.size).toBe(20);
 
       const stats = pipeline.getStats();
       expect(stats.outcomes).toBe(20);

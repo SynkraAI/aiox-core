@@ -28,6 +28,7 @@
 const fs = require('fs');
 const path = require('path');
 const EventEmitter = require('events');
+const { atomicWriteSync } = require('../synapse/utils/atomic-write');
 
 // ═══════════════════════════════════════════════════════════════════════════════════
 //                              CONFIGURATION
@@ -162,6 +163,8 @@ class DecisionMemory extends EventEmitter {
    * @returns {Promise<void>}
    */
   async save() {
+    await this._ensureLoaded();
+
     const filePath = path.resolve(this.projectRoot, this.config.decisionsJsonPath);
     const dir = path.dirname(filePath);
 
@@ -178,7 +181,17 @@ class DecisionMemory extends EventEmitter {
       patterns: this.patterns,
     };
 
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
+    atomicWriteSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
+  }
+
+  /**
+   * Ensure decisions are loaded from disk before mutating state
+   * @private
+   */
+  async _ensureLoaded() {
+    if (!this._loaded) {
+      await this.load();
+    }
   }
 
   /**
@@ -192,7 +205,7 @@ class DecisionMemory extends EventEmitter {
    * @param {string} [decision.agentId] - Agent that made the decision
    * @returns {Object} The recorded decision
    */
-  recordDecision({
+  async recordDecision({
     description,
     rationale = '',
     alternatives = [],
@@ -200,6 +213,8 @@ class DecisionMemory extends EventEmitter {
     taskContext = '',
     agentId = 'unknown',
   }) {
+    await this._ensureLoaded();
+
     if (!description) {
       throw new Error('Decision description is required');
     }

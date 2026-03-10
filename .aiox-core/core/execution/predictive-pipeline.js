@@ -177,6 +177,7 @@ class PredictivePipeline extends EventEmitter {
   _enqueueWrite(writeFn) {
     this._writeChain = this._writeChain.then(() => writeFn()).catch((err) => {
       this._emitSafeError({ type: 'persistence', error: err });
+      throw err;
     });
     return this._writeChain;
   }
@@ -306,6 +307,7 @@ class PredictivePipeline extends EventEmitter {
     if (this._outcomes.length > this.maxOutcomes) {
       const excess = this._outcomes.length - this.maxOutcomes;
       this._outcomes.splice(0, excess);
+      this._recalculateModelStats();
     }
 
     await this._persistOutcomes();
@@ -360,6 +362,20 @@ class PredictivePipeline extends EventEmitter {
   }
 
   // ═════════════════════════════════════════════════════════════════════════════
+  /**
+   * Recalculate all model stats from current outcomes.
+   * Called after splice/prune to keep stats consistent.
+   * @private
+   */
+  _recalculateModelStats() {
+    this._model.taskTypeStats = {};
+    this._model.agentStats = {};
+    this._model.strategyStats = {};
+    for (const outcome of this._outcomes) {
+      this._updateModelStats(outcome);
+    }
+  }
+
   //                          FEATURE VECTORS
   // ═════════════════════════════════════════════════════════════════════════════
 
@@ -370,11 +386,14 @@ class PredictivePipeline extends EventEmitter {
    * @returns {Object} Feature vector
    */
   _extractFeatures(task) {
+    const complexity = Number(task.complexity);
+    const contextSize = Number(task.contextSize);
+    const agentExperience = this._getAgentExperience(task.agent);
     return {
       taskType: task.taskType ?? 'unknown',
-      complexity: task.complexity ?? 5,
-      agentExperience: this._getAgentExperience(task.agent),
-      contextSize: task.contextSize ?? 0,
+      complexity: Number.isFinite(complexity) ? complexity : 5,
+      agentExperience: Number.isFinite(agentExperience) ? agentExperience : 0,
+      contextSize: Number.isFinite(contextSize) ? contextSize : 0,
     };
   }
 
@@ -508,7 +527,7 @@ class PredictivePipeline extends EventEmitter {
    */
   _stagePredict(neighbors, features) {
     return this._runStage(PipelineStage.PREDICT, () => {
-      if (neighbors.length === 0) {
+      if (neighbors.length < (this.minSamplesForPrediction || 3)) {
         return this._defaultPrediction(features);
       }
 
@@ -538,7 +557,7 @@ class PredictivePipeline extends EventEmitter {
       const successProbability = weightSum > 0 ? successWeight / weightSum : 0.5;
 
       // EWMA for duration
-      durationEwma = this._computeEwma(durationValues);
+      durationEwma = this._computeEwma(durationValues.reverse());
 
       // Normalize resources
       if (resourceCount > 0) {
