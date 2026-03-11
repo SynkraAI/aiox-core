@@ -1,0 +1,176 @@
+name: navigator
+version: 1.0.0
+description: Autonomous project navigator and orchestration specialist. Maps roadmaps, detects current phase, prevents context loss, and orchestrates multi-agent workflows for complex AIOS projects.
+author: Luiz Fosc
+license: MIT
+slashPrefix: nav
+
+aios:
+  minVersion: "4.0.0"
+  type: squad
+
+squad:
+  domain: navigation
+  specialization: project-mapping-orchestration
+  principles:
+    - Context is King - Never lose track of where you are
+    - Autonomous Yet Transparent - Guide automatically but communicate clearly
+    - Map Before Navigate - Understand the terrain before moving forward
+    - Checkpoints Save Lives - Regular snapshots prevent lost work
+    - Orchestration Over Execution - Delegate to specialists
+    - Progressive Disclosure - Show what matters now
+    - Sync is Sacred - Central and local must always agree
+
+components:
+  agents:
+    - navigator.md
+  tasks:
+    - nav-map-project.md
+    - nav-where-am-i.md
+    - nav-resume-project.md
+    - nav-auto-navigate.md
+    - nav-orchestrate.md
+    - nav-checkpoint.md
+    - nav-status-report.md
+    - nav-update-roadmap.md
+    - nav-detect-phase.md
+    - nav-doctor.md
+  workflows:
+    - wf-new-project-setup.yaml
+    - wf-resume-work.yaml
+    - wf-multi-chat-orchestration.yaml
+  checklists:
+    - roadmap-validation.md
+    - checkpoint-validation.md
+    - orchestration-validation.md
+  templates:
+    - nav-roadmap-tmpl.md
+    - nav-checkpoint-tmpl.md
+    - nav-status-report-tmpl.md
+    - nav-orchestration-tmpl.md
+  data:
+    - navigator-pipeline-map.yaml
+  scripts:
+    - navigator/roadmap-sync.js
+    - navigator/phase-detector.js
+    - navigator/checkpoint-manager.js
+    - navigator/orchestrator.js
+    - navigator/post-commit-hook.js
+    - navigator/doctor.js
+  utils: []
+
+config:
+  extends: none
+
+integration:
+  git_hooks:
+    - post-commit  # Auto-update roadmap when stories change
+
+dependencies:
+  aios_core: []
+  node:
+    - js-yaml
+    - glob
+    - inquirer
+  python: []
+  squads: []
+
+features:
+  roadmap_generation:
+    - Hybrid input (free-form + guided questions)
+    - Customized 10-phase pipeline
+    - Bidirectional sync (central ↔ local)
+  phase_detection:
+    - File-based output detection
+    - Story status parsing (YAML front-matter)
+    - Completion percentage calculation
+    - Blocker identification
+  autonomous_navigation:
+    - Automatic agent delegation
+    - Checkpoint creation on transitions
+    - Next step suggestions
+  multi_chat_orchestration:
+    - Story-to-wave assignment
+    - Parallel execution prompts
+    - Coordinator + worker model
+  health_diagnostics:
+    checks:
+      - Node.js version (>= 18.0.0)
+      - Git availability
+      - NPM dependencies
+      - Git hooks installation
+      - Directory structure
+      - Pipeline map validity
+      - Scripts executable
+
+quality_metrics:
+  test_coverage: "17 unit tests passing (doctor + phase-detector)"
+  eslint_compliance: "100% (0 errors, 0 warnings)"
+  health_checks: "7 validations"
+  documentation: "2,500+ lines (README, examples, guides, checklists)"
+  validation: "Passed JSON Schema validation"
+
+sprint_history:
+  sprint_1:
+    name: Quick Wins
+    status: completed
+    date: 2026-02-14
+    tasks:
+      - Remove scripts from ESLint ignore
+      - Add confirmations for destructive operations
+      - Create *navigator-doctor health check
+      - Add output examples in tasks
+    impact: Quality gates + safety + diagnostics
+    files: 32 files, +4,206 lines
+
+  sprint_2:
+    name: Structure Migration
+    status: completed
+    date: 2026-02-14
+    tasks:
+      - Migrate to squad structure
+      - Create squad.yaml manifest
+      - Auto-install git hooks
+      - Validate with *validate-squad
+    impact: Distribution-ready squad
+    files: 26 files, +5,124 lines
+
+  sprint_3:
+    name: Testing & Quality
+    status: completed
+    date: 2026-02-15
+    tasks:
+      - Add unit tests (17 passing)
+      - Create TypeScript migration guide
+      - Add multi-step workflows (3 YAML)
+      - Add validation checklists (3 comprehensive)
+    impact: Test infrastructure + migration planning + validation
+    files: 10 files, +1,854 lines
+
+  sprint_4:
+    name: Documentation & Polish
+    status: in_progress
+    date: 2026-02-15
+    tasks:
+      - Add mermaid diagrams (5 diagrams)
+      - Create examples (6 practical examples)
+      - Prepare for publication (CHANGELOG, LICENSE, etc)
+      - Add quickstart and troubleshooting
+    impact: Production-ready documentation + publication preparation
+
+references:
+  documentation: squads/navigator/README.md
+  analysis: .aios/navigator-squad-blueprint.yaml
+  sprint_plan: Sprint 1-4 Evolution Plan
+  stories:
+    - Navigator Sprint 1 - Quick Wins
+    - Navigator Sprint 2 - Structure Migration
+
+tags:
+  - navigation
+  - orchestration
+  - roadmap
+  - phase-detection
+  - autonomous
+  - context-management
+  - multi-agent

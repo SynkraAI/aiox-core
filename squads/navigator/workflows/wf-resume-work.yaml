@@ -1,0 +1,98 @@
+---
+workflow:
+  name: Resume Work After Break
+  id: nav-wf-002
+  description: Quickly resume project work after a break or context loss
+  version: 1.0.0
+  executor: "@navigator"
+
+metadata:
+  author: Navigator Squad
+  created: 2026-02-15
+  tags:
+    - resume
+    - context
+    - checkpoint
+
+veto_conditions:
+  step_1_detect_phase:
+    - "No .aios/navigator/ directory exists → BLOCK (no mapped projects, use *map-project)"
+    - "Pipeline map missing or invalid → BLOCK (run *navigator-doctor to fix)"
+  step_3_check_blockers:
+    - "Phase detection returned error → BLOCK (cannot evaluate blockers without phase data)"
+  step_5_auto_navigate:
+    - "Blockers from Step 4 still unresolved → BLOCK (resolve blockers before auto-navigating)"
+    - "No valid next phase identified → BLOCK (pipeline may be complete or misconfigured)"
+
+steps:
+  - id: 1
+    name: Detect Current Phase
+    task: nav-where-am-i
+    executor: "@navigator"
+    inputs: []
+    outputs:
+      - current_phase
+      - progress_percent
+      - blockers
+      - next_steps
+    on_success: next
+
+  - id: 2
+    name: Show Progress Summary
+    task: manual-display
+    executor: human
+    description: |
+      Review your current status:
+      - Current Phase: {current_phase.name}
+      - Progress: {progress_percent}%
+      - Blockers: {blockers}
+      - Next: {next_steps.command}
+
+    on_success: next
+
+  - id: 3
+    name: Check for Blockers
+    task: conditional
+    executor: "@navigator"
+    condition: "{blockers.length} > 0"
+    on_true: 4
+    on_false: 5
+
+  - id: 4
+    name: Resolve Blockers
+    task: manual-action
+    executor: human
+    description: |
+      Resolve these blockers before continuing:
+      {blockers}
+
+      Actions needed:
+      - Check if required input files exist
+      - Verify dependencies are installed
+      - Ensure previous phase is complete
+    on_success: 5
+
+  - id: 5
+    name: Auto-Navigate to Next Step
+    task: nav-auto-navigate
+    executor: "@navigator"
+    inputs:
+      - current_phase
+    outputs:
+      - activation_command
+      - checkpoint_created
+    on_success: complete
+
+completion:
+  message: |
+    🧭 Ready to resume!
+
+    Continue with: {activation_command}
+
+    Checkpoint saved at: {checkpoint_created.filepath}
+
+  next_actions:
+    - command: "{activation_command}"
+      description: "Continue development"
+    - command: "*status-report"
+      description: "Generate detailed status report"
