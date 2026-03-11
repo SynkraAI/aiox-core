@@ -1,9 +1,10 @@
 # Business Rules Extraction — Project Index
 
 ## Estado Atual
-- **Squad:** `business-rules-extraction` v1.2 — 17 componentes, production-ready
-- **Status:** Squad criado, auditado e aprovado por 3 especialistas
-- **Scores:** Fidelidade 84.75% | Workflows 85/83 (aprovados) | Kaizen 75/100
+- **Squad:** `business-rules-extraction` v2.0 — 17 componentes, DNA from source books
+- **Status:** 4/7 experts com DNA extraído de livros/papers (Tier 0)
+- **Scores:** Fidelidade estimada ~92%+ (Feathers 9.2, von Halle 9.0-9.5, Taylor 9.0, Vanthienen 8.5)
+- **Fontes:** 51K linhas processadas (3 livros + 1 paper acadêmico)
 
 ## Dados do Projeto
 - **Squad:** `squads/business-rules-extraction/`
@@ -25,8 +26,10 @@
   7. Adicionou edge cases BRE-specific nos veto_conditions dos 2 workflows
 
 ## Proximo Passo
+- Rodar auditoria v2.0 (oalanicolas + pedro-valerio + kaizen) para medir impacto do DNA extraction
+- Baixar materiais adicionais gratuitos (Ross Manifesto PDF, Sneed papers, SEI reports)
 - Usar o squad pela primeira vez em um sistema legado real
-- Itens MEDIA prioridade pendentes: integrar rule-completeness-checklist no workflow, paralelizar phases independentes, adicionar performance metrics
+- Itens MEDIA prioridade pendentes: integrar rule-completeness-checklist no workflow, paralelizar phases independentes
 
 ## Historico
 | Data | Resumo |
@@ -36,3 +39,5 @@
 | 2026-03-11 | Workflows corrigidos v1.1, templates adicionados, Voice DNA atualizado |
 | 2026-03-11 | Auditoria v1.1: oalanicolas 84.75%, pedro-valerio APROVADO (85+83), kaizen 75/100 |
 | 2026-03-11 | v1.2: personality + episodic memories + metrics em 7/8 agentes + edge cases nos workflows |
+| 2026-03-11 | v2.0: DNA extraction de 4 livros/papers (Feathers 20K, von Halle 22K, Taylor 7.6K, Vanthienen 884) |
+| 2026-03-11 | 30+ materiais gratuitos identificados (blogs, papers, podcasts, SEI reports) |
