@@ -1,92 +1,146 @@
-Usuario quer criar um novo projeto. Siga os passos abaixo:
+Usuário quer criar um novo projeto. Siga os passos abaixo:
 
-## Passo 1: Coletar informacoes
+## Passo 0: Validação prévia
+
+1. Pergunte o **nome do projeto** (kebab-case, ex: `meu-saas-app`)
+2. **VALIDAR nome:** deve corresponder ao padrão `^[a-z0-9]+(-[a-z0-9]+)*$`
+   - Se inválido, mostre erro e peça novamente: "Nome inválido. Use apenas letras minúsculas, números e hífens (ex: meu-app-2)."
+3. **Verificar se projeto já existe:**
+   - Verificar se `docs/projects/{nome}/` já existe
+   - Verificar se há row com mesmo nome em `docs/projects/ACTIVE.md`
+   - Se existir: PARAR e mostrar "Projeto '{nome}' já existe. Veja `docs/projects/{nome}/INDEX.md` ou escolha outro nome."
+
+## Passo 1: Coletar informações
+
 Use AskUserQuestion para perguntar:
 
-1. **Nome do projeto** (kebab-case, ex: meu-saas-app)
-2. **Descricao breve** (1 linha)
-3. **Tipo** — opcoes: squad | app | mind-clone | pipeline | knowledge | research
-4. **Squad/skill principal** (ou "nenhum ainda")
-5. **Status inicial** — opcoes: Em andamento | Pausado
+1. **Descrição breve** (1 linha — será gravada no INDEX.md)
+2. **Tipo** — opções (VALIDAR contra esta lista, rejeitar qualquer outra):
+   - `squad` | `app` | `mind-clone` | `pipeline` | `knowledge` | `research`
+3. **Squad/skill principal** (ou "nenhum ainda")
+4. **Status inicial** — opções (VALIDAR, normalizar para exato):
+   - `Em andamento` → emoji 🔄
+   - `Pausado` → emoji ⏸️
 
-Se o tipo escolhido for `app` ou `squad`, faca uma pergunta adicional:
+Se o tipo escolhido for `app` ou `squad`, faça uma pergunta adicional:
 
-6. **Onde o codigo vai ficar?** — opcoes:
-   - `aios-core/` (padrao — projeto vive dentro do monorepo)
+5. **Onde o código vai ficar?** — opções:
+   - `aios-core/` (padrão — projeto vive dentro do monorepo)
    - `~/CODE/Projects/{nome}/` (app externo independente)
-   - Caminho customizado (usuario digita)
+   - Caminho customizado (usuário digita)
+     - VALIDAR: path deve ser absoluto (começar com `/` ou `~/`)
+     - Verificar se diretório pai existe
+     - Se pai não existir, perguntar: "Diretório pai não existe. Criar?"
 
-Tipos `mind-clone`, `pipeline`, `knowledge` e `research` NAO precisam dessa pergunta — o codigo (se houver) fica em `aios-core/`.
+Tipos `mind-clone`, `pipeline`, `knowledge` e `research` NÃO precisam dessa pergunta — o código (se houver) fica em `aios-core/`.
+
+### Validar squad (se informado)
+
+Se squad informado ≠ "nenhum ainda":
+- Verificar se `squads/{squad}/` existe
+- Se NÃO existir, listar squads disponíveis em `squads/` e perguntar:
+  "Squad '{x}' não encontrado. Escolha: (1) usar mesmo assim, (2) escolher da lista, (3) 'nenhum ainda'"
 
 ## Passo 2: Criar estrutura
-Apos respostas:
+
+Após respostas:
 
 1. Crie `docs/projects/{nome}/` com subpastas:
    - `research/` — pesquisas e deep research
    - `data/` — dados do projeto
    - `sessions/` — session files de checkpoint/resume
 2. Adicione `.gitkeep` em cada subpasta vazia
-3. Se o destino do codigo for `~/CODE/Projects/{nome}/`, crie o diretorio base com `mkdir -p` — sem scaffold de codigo (isso fica pro app-builder ou manual)
+3. Se o destino do código for `~/CODE/Projects/{nome}/` ou caminho customizado, crie o diretório base com `mkdir -p` — sem scaffold de código (isso fica pro app-builder ou manual)
 
 ## Passo 3: Gerar INDEX.md
+
 Crie `docs/projects/{nome}/INDEX.md` seguindo este formato:
 
 ```markdown
-# {Nome Legivel} — Project Index
+# {Nome Legível} — Project Index
 
 ## Estado Atual
+- **Tipo:** {tipo}
+- **Descrição:** {descrição breve coletada no Passo 1}
 - **Squad:** `{squad}` (ou "A definir")
-- **Project Path:** `{path}`
+- **Project Path:** {ver regras abaixo}
 - **Status:** {status descritivo}
 - **Bloqueadores:** Nenhum
 ```
 
-Regras para o campo **Project Path**:
+Regras para o campo **Project Path** (SEMPRE incluir, nunca omitir):
 - Se o projeto vive FORA de `aios-core/` → path absoluto (ex: `~/CODE/Projects/meu-app/`)
-- Se o projeto vive DENTRO de `aios-core/` → omitir o campo (ou usar `(local)`)
+- Se o projeto vive DENTRO de `aios-core/` → path relativo à raiz (ex: `squads/meu-squad/`, `packages/meu-pkg/`)
+- Se o projeto não tem código (tipo: mind-clone, research, knowledge) → `docs/projects/{nome}/`
 
 Restante do INDEX.md:
 
 ```markdown
-## Ultima Sessao
+## Última Sessão
 - **Data:** {data de hoje}
 - **Agente/Squad:** {squad informado ou "Nenhum"}
 - **O que foi feito:**
   1. Projeto criado
 
-## Proximo Passo
-- {baseado no tipo e descricao}
+## Próximo Passo
+- A definir — aguardar primeira sessão de trabalho
 
 ## Squads Relacionados
-- `{squad}` — {descricao breve}
+- `{squad}` — {descrição breve do squad, lida do README.md se existir}
 
 ## Arquivos Chave
-| Arquivo | Conteudo |
+| Arquivo | Conteúdo |
 |---------|---------|
 | INDEX.md | Este arquivo |
 
-## Historico
-| Data | Acao |
+## Histórico
+| Data | Ação |
 |------|------|
 | {data de hoje} | Projeto criado |
 ```
 
-Se o usuario informou um squad que existe em `squads/`, verifique se existe e mencione na secao "Squads Relacionados" com descricao real.
+Se o usuário informou um squad que existe em `squads/`:
+- Ler `squads/{squad}/README.md` para extrair descrição real
+- Usar na seção "Squads Relacionados"
+
+Se squad não existe ou é "nenhum ainda":
+- Omitir seção "Squads Relacionados" ou usar "A definir"
 
 ## Passo 4: Atualizar ACTIVE.md
-- Leia `docs/projects/ACTIVE.md`
-- Adicione uma nova row na tabela com o proximo numero sequencial
-- Status emoji: 🔄 para "Em andamento", ⏸️ para "Pausado"
-- Formate igual as rows existentes
+
+1. Verificar se `docs/projects/ACTIVE.md` existe
+2. Se NÃO existir, criar com header padrão:
+   ```
+   # Projetos Ativos
+
+   | # | Projeto | Status | Agente/Squad | Última Sessão | Próximo Passo |
+   |---|---------|--------|-------------|---------------|---------------|
+   ```
+3. Ler arquivo (agora garantido que existe)
+4. Verificar se projeto já está na tabela (NÃO deveria, pois Passo 0 bloqueou)
+5. Calcular próximo número sequencial: `max(números existentes) + 1`
+6. Adicionar nova row com emoji de status (🔄 ou ⏸️)
+7. Formatar igual às rows existentes
 
 ## Passo 5: Confirmar
-Mostre ao usuario:
-- Estrutura criada (tree view)
+
+Mostre ao usuário:
+- Estrutura criada:
+  ```
+  docs/projects/{nome}/
+  ├── INDEX.md
+  ├── research/
+  │   └── .gitkeep
+  ├── data/
+  │   └── .gitkeep
+  └── sessions/
+      └── .gitkeep
+  ```
 - Path do INDEX.md
-- Row adicionada no ACTIVE.md
+- Row adicionada no ACTIVE.md (#{número})
 
 Se o tipo for `app` e o destino for externo (`~/CODE/Projects/` ou customizado):
 - Pergunte: "Quer iniciar o scaffold com app-builder?"
 
-Caso contrario:
-- Pergunte: "Quer comecar a trabalhar neste projeto agora?"
+Caso contrário:
+- Pergunte: "Quer começar a trabalhar neste projeto agora?"

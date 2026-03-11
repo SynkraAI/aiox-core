@@ -1,48 +1,69 @@
-Inicio de sessao ou usuario quer retomar trabalho. Execute os passos abaixo SEM carregar squads/skills:
+Início de sessão ou usuário quer retomar trabalho. Execute os passos abaixo SEM carregar squads/skills:
 
-**Argumento opcional:** O usuario pode passar o nome do projeto direto: `/resume {projeto}`
+**Argumento opcional:** O usuário pode passar o nome do projeto direto: `/resume {projeto}`
 Se `$ARGUMENTS` estiver preenchido, use-o como nome do projeto e PULE para o Passo 2.
+- **VALIDAR argumento:** Verificar se `docs/projects/{argumento}/` existe
+  - Se NÃO existir: mostrar "Projeto '{argumento}' não encontrado." e cair no Passo 1 (listar projetos)
 
-## Passo 1: Mostrar projetos ativos (pular se argumento fornecido)
+## Passo 1: Mostrar projetos ativos (pular se argumento válido fornecido)
+
 - Leia `docs/projects/ACTIVE.md`
-- Mostre todos os projetos ordenados por data da ultima sessao (mais recentes primeiro):
+- Se ACTIVE.md não existir ou estiver vazio: mostrar "Nenhum projeto ativo encontrado. Use `/new-project` para criar um." e PARAR
+- Mostre todos os projetos ordenados por data da última sessão (mais recentes primeiro):
 
 ```
-# | Projeto | Status | Agente/Squad | Ultima Sessao | Proximo Passo
+# | Projeto | Status | Agente/Squad | Última Sessão | Próximo Passo
 ```
 
-- Use AskUserQuestion para o usuario escolher qual projeto retomar
+- Use AskUserQuestion para o usuário escolher qual projeto retomar
 
 ## Passo 2: Carregar contexto do projeto
-Apos o usuario escolher (ou usar o argumento fornecido):
+
+Após o usuário escolher (ou usar o argumento fornecido):
 
 1. Leia `docs/projects/{projeto}/INDEX.md`
-2. Extraia o campo **Project Path** (se existir) — sera usado no Passo 3
+   - Se não existir: mostrar "INDEX.md ausente para '{projeto}'. Rode `/new-project` para criar a estrutura." e PARAR
+2. Extraia o campo **Project Path** (se existir) — será usado no Passo 3
 3. Verifique se existe session file recente em `docs/projects/{projeto}/sessions/`
-   - Se sim, leia o mais recente (por data no nome do arquivo)
-   - Se nao, use apenas o INDEX.md
-4. Se o session file lista "Arquivos para contexto", leia esses arquivos (max 5)
+   - Se sim, leia o mais recente (por data no nome do arquivo, considerar sufixos `-02`, `-03`)
+   - Se falhar ao ler (arquivo corrompido/truncado): avisar "⚠️ Session file corrompido, usando apenas INDEX.md" e continuar
+   - Se não houver session files, use apenas o INDEX.md
+4. Se o session file lista "Arquivos para contexto", leia esses arquivos (máximo 5 primeiros)
+   - Se algum arquivo não existir mais: pular e avisar "⚠️ Arquivo {path} não encontrado (pode ter sido deletado)"
+   - Se houver mais de 5 listados: ler apenas os 5 primeiros e avisar "Listados mais de 5 arquivos, lendo os 5 primeiros."
 
 ## Passo 3: Resumo de contexto
-Apresente ao usuario de forma concisa:
+
+Apresente ao usuário de forma concisa:
 
 ```
 ## Projeto: {nome}
+**Tipo:** {tipo, se disponível no INDEX.md}
 **Status:** {estado atual}
-**Ultima sessao:** {data} — {o que foi feito}
+**Última sessão:** {data} — {o que foi feito}
 **Agente/Squad:** {qual estava ativo}
-**Decisoes ja tomadas:** {lista, para nao refazer}
-**Proximo passo:** {acao exata}
+**Decisões já tomadas:** {lista, para não refazer}
+**Próximo passo:** {ação exata}
 ```
 
-Se o projeto tem **Project Path** externo (extraido no Passo 2), adicione:
+Se o projeto tem **Project Path** externo (extraído no Passo 2), adicione:
 
 ```
 **Working Directory:** `{project path}`
-⚠️ O codigo deste projeto vive fora de aios-core. Considere trocar o working directory para trabalhar nele.
+⚠️ O código deste projeto vive fora de aios-core. Considere trocar o working directory para trabalhar nele.
 ```
 
-## Passo 4: Aguardar confirmacao
-- Pergunte: "Quer continuar com esse proximo passo, ou fazer algo diferente?"
-- NAO execute nada sem confirmacao explicita do usuario
-- Se o usuario quiser ativar um agente/squad, ai sim carregue o recurso necessario
+Adicione informação de git se disponível:
+
+```
+**Git:** branch `{branch atual}` — {N arquivos modificados, ou "limpo"}
+**Última atividade:** há {X dias/horas desde a última sessão}
+```
+
+Se última sessão foi há mais de 7 dias, adicione: "⚠️ Contexto pode estar desatualizado — revise antes de continuar."
+
+## Passo 4: Aguardar confirmação
+
+- Pergunte: "Quer continuar com esse próximo passo, ou fazer algo diferente?"
+- NÃO execute nada sem confirmação explícita do usuário
+- Se o usuário quiser ativar um agente/squad, aí sim carregue o recurso necessário
