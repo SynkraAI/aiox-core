@@ -219,6 +219,8 @@ App web focado em **extração + composição + envio** de mensagens de prospec�
 - Histórico de uploads já processados
 
 ### 7.3 Dashboard de Prospects
+- **Separado por grupo** — cada upload de ZIP cria um grupo distinto
+- Seletor de grupo no topo (sidebar ou dropdown)
 - Tabela com: nome, telefone, score (client/partner), classificação, temperatura, status
 - Cores por temperatura (HOT=vermelho, WARM=laranja, COLD=azul)
 - Preview da mensagem ao clicar

@@ -1,200 +1,80 @@
 # @pedro-valerio Memory - Process Absolutist
 
 ## Quick Stats
-- Workflows auditados: 4 (deep-research v1.0, v1.1; BRE wf-extract v1.0, wf-formalize v1.0)
+- Workflows auditados: 7 (deep-research v1.0→v1.1; BRE extract v1.0→v1.1, formalize v1.0→v1.1; Mind Cloning v1.1)
 - Clones auditados: 2 (renner-silva v1.1=8.5, v1.2=9.0)
-- Veto conditions criadas: 18 (deep-research checkpoints.yaml)
-- Gaps identificados: 12 workflow (4 critical→FIXED deep-research; 5 CRITICAL BRE; 5 MAJOR BRE) + 8 clone (1 major + 7 minor)
+- Veto conditions criadas: 18 (deep-research) + 24 (BRE v1.1)
+- Detalhes completos: `audit-history.md`
 
 ---
 
-## Princípio Core
-> "Se executor CONSEGUE fazer errado → processo está errado"
+## Principio Core
+> "Se executor CONSEGUE fazer errado -> processo esta errado"
 
 ---
 
-## Workflows Auditados
-<!-- Formato: [DATA] workflow-name: PASS/FAIL (issues) -->
+## Score Board (todos workflows)
 
-### [2026-03-08] deep-research v1.0: VETO (62/100)
-- 4 CRITICAL issues: C1-C4
-- Veto conditions: 3/10
-- Checkpoints: 4/10 (Phase 4 sem quality gate)
-- Stopping criteria: 5/10 (sem edge cases)
-- Zero wrong paths: 5/10 (integrity_score < 70% passa)
-
-### [2026-03-08] deep-research v1.1: APROVAR (91/100)
-- Todos os 4 CRITICAL resolvidos
-- Veto conditions: 9/10 (+6 pontos)
-- Checkpoints: 10/10 (+6 pontos)
-- Stopping criteria: 10/10 (+5 pontos, edge cases completos)
-- Zero wrong paths: 9/10 (+4 pontos, integrity_score agora BLOQUEIA < 60%)
-- Gaps remanescentes: 4 minor (LOW severity, não bloqueantes)
-
-### [2026-03-09] BRE wf-extract-rules v1.0: VETO (62/100)
-- 5 CRITICAL issues: C1-C5 (veto sem blocking, checkpoints fracos, handoffs sem validação, enforcement ausente, fallback ausente)
-- 5 MAJOR issues: M1-M5 (edge cases, ambiguity, quality gates só Phase 5, checkpoint auto sem executor, checklists desconectados)
-- Veto conditions: 7/10 (16 conditions mas SEM blocking: true)
-- Checkpoints: 6/10 (só Phase 5 tem quality gate)
-- Zero wrong paths: 5/10 (executor PODE ignorar 5 vetos críticos)
-- Fallback chains: 4/10 (veto binário, sem graceful degradation)
-- Score 29 pontos ABAIXO de deep-research v1.1
-
-### [2026-03-09] BRE wf-formalize-rules v1.0: VETO (54/100)
-- Mesmos 5 CRITICAL de wf-extract-rules
-- 1 CRITICAL ADICIONAL: checkpoints AUSENTES (só veto_conditions, sem type/question/checks)
-- Veto conditions: 6/10 (6 conditions sem blocking)
-- Checkpoints: 4/10 (PIOR que wf-extract, checkpoints não definidos)
-- Zero wrong paths: 5/10 (executor PODE ignorar vetos)
-- Fallback chains: 3/10 (pior que wf-extract, menos fases)
+| Workflow | Score | Veredicto |
+|----------|-------|-----------|
+| deep-research v1.0 | 62 | VETO |
+| deep-research v1.1 | 91 | APROVAR |
+| BRE wf-extract v1.0 | 62 | VETO |
+| BRE wf-extract v1.1 | 85 | APROVAR |
+| BRE wf-formalize v1.0 | 54 | VETO |
+| BRE wf-formalize v1.1 | 83 | APROVAR |
+| Mind Cloning v1.1 | 78 | APROVAR c/ ressalvas |
 
 ---
 
-## Veto Conditions Criadas
-<!-- Condições de bloqueio que funcionam -->
-
-### Checkpoints Efetivos (deep-research v1.1)
-- V0.1-V0.2: Auto-detection com blocking (research_type unknown → HALT)
-- V1.1-V1.4: Decomposition com blocking (< 5 queries → HALT, < 10 chars → HALT)
-- V2.1-V2.3: Prompt generation (unfilled vars → HALT, < 200 tokens → HALT)
-- V3.1-V3.3: Dispatch (< 3 subagents AND < 5 sources → HALT)
-- V3.5.1-V3.5.3: Evaluate (plateau → FORCE STOP, timeout → FORCE STOP)
-- V4.1-V4.4: Synthesis (< 500 tokens → HALT, < 3 sources → HALT, empty sections → HALT)
-- V4.5.1-V4.5.2: Verify (integrity < 60% → HALT, 60-70% → FLAG REVIEW)
-- V5.1: Document (overwrite protection)
-
-### Patterns Efetivos
-- CP com blocking: true sempre (18 veto conditions com blocking)
-- Quality gate em TODAS as fases (Phase 0-5, 8 quality gates)
-- Integrity score com HARD BLOCK (< 60% → pipeline PARA)
-- Edge cases coverage (plateau, timeout, regression, query exhaustion)
-- Global safeguards (max_waves: 3, timeout: 600s, plateau_threshold: 3)
-
-### Anti-Patterns Detectados
-- ❌ Checkpoint sem veto condition → FIXED deep-research v1.1 (todas fases agora têm veto) | BRE: PRESENTE wf-formalize
-- ❌ Fluxo que permite voltar → OK (pipeline é unidirecional deep-research + BRE)
-- ❌ Handoff sem validação → PARTIAL deep-research + BRE (handoffs implícitos, sem structured format)
-- ❌ Quality gate sem enforcement → FIXED deep-research v1.1 (veto conditions enforçam quality gates) | BRE: PRESENTE (só Phase 5)
-- ❌ Stopping criteria sem edge cases → FIXED deep-research v1.1 (plateau, timeout, regression) | BRE: PRESENTE (ausentes)
-- ❌ Veto sem blocking explícito → BRE CRITICAL (0 de 16 vetos têm blocking: true)
-- ❌ Checkpoint type ausente → BRE wf-formalize CRITICAL (6 vetos sem checkpoint type definido)
-
----
-
-## Gaps de Processo Identificados
-<!-- Problemas encontrados em workflows -->
-
-### CRITICAL (v1.0) — TODOS RESOLVIDOS v1.1
-- C1: Faltam veto conditions em 5 de 6 fases → FIXED (18 veto conditions)
-- C2: Stopping criteria sem edge cases → FIXED (plateau, timeout, regression, query exhaustion)
-- C3: Phase 4 sem quality gate → FIXED (V4.1-V4.4 com >= 500 tokens, >= 3 sources)
-- C4: Integrity score < 70% passa → FIXED (< 60% BLOQUEIA, 60-70% FLAGS)
-
-### MINOR (deep-research v1.1) — NÃO BLOQUEANTES
-- Phase 5 veto incomplete (só overwrite, não valida 4 files output)
-- Handoff format não estruturado (context/files sem validation)
-- Decomposition uniqueness não enforçada (queries podem duplicar)
-- Subagent partial failure não documentado (skipped sub-queries não aparecem no report)
-
-### CRITICAL (BRE v1.0) — BLOQUEANTES
-- C1: Veto conditions sem `blocking: true` explícito (wf-extract 16 vetos, wf-formalize 6 vetos)
-- C2: Checkpoints sem tipo definido (wf-formalize CRITICAL, apenas veto_conditions)
-- C3: Handoffs sem validação estruturada (ambos workflows)
-- C4: Enforcement mechanism ausente (como veto PARA pipeline?)
-- C5: Fallback chains ausentes (veto binário, sem graceful degradation)
-
-### MAJOR (BRE v1.0) — NÃO BLOQUEANTES MAS GRAVES
-- M1: Edge cases não cobertos (timeout, plateau, regression ausentes)
-- M2: Decision tree ambiguity não tratada (multi-stack, prioridade igual, overlapping conclusions)
-- M3: Quality gates apenas em Phase 5 (wf-extract), faltam em Phase 0,1,2,4
-- M4: Checkpoint "auto" sem executor definido (wf-extract Phase 3)
-- M5: Checklists sem integração com workflow (extraction-quality-gate, rule-completeness isolados)
-
----
-
-## Padrões de Validação
-<!-- O que sempre verificar -->
-
-### Em Workflows (8 critérios, peso igual)
-1. **Veto Conditions** (10 pts): TODAS as fases têm blocking conditions?
-2. **Fluxo Unidirecional** (10 pts): Pipeline forward-only, sem voltar?
-3. **Checkpoints** (10 pts): Quality gates + veto conditions em TODAS as fases?
-4. **Zero Wrong Paths** (10 pts): Executor CONSEGUE fazer errado? → processo ESTÁ errado
-5. **Handoffs** (10 pts): Transferências entre fases com format validation?
-6. **Stopping Criteria** (10 pts): Edge cases cobertos (plateau, timeout, regression)?
-7. **Fallback Chains** (10 pts): Graceful degradation, não fail entire pipeline?
-8. **Decision Tree** (10 pts): Ambiguidade, multi-type, negative queries tratados?
+## Padroes de Validacao (8 criterios, 10 pts cada)
+1. Veto Conditions: TODAS as fases tem blocking conditions?
+2. Fluxo Unidirecional: Pipeline forward-only?
+3. Checkpoints: Quality gates + veto em TODAS as fases?
+4. Zero Wrong Paths: Executor CONSEGUE fazer errado?
+5. Handoffs: Transferencias com format validation?
+6. Stopping Criteria: Edge cases cobertos (plateau, timeout)?
+7. Fallback Chains: Graceful degradation?
+8. Decision Tree: Ambiguidade tratada?
 
 ### Scoring
-- 90-100: APROVAR — Production-ready
+- 90-100: APROVAR (production-ready)
 - 70-89: APROVAR com ressalvas
-- 50-69: VETO — Fixes obrigatórios
-- < 50: VETO — Retrabalho completo
+- 50-69: VETO (fixes obrigatorios)
+- < 50: VETO (retrabalho completo)
 
-### Em Agents
-- [ ] 300+ lines?
-- [ ] Voice DNA presente?
-- [ ] Output examples?
-- [ ] Quality gates definidos?
+### Em Agents: 300+ lines? Voice DNA? Output examples? Quality gates?
+
+---
+
+## Anti-Patterns Recorrentes
+- Checkpoint sem veto condition (deep-research v1.0, Mind Cloning v1.1)
+- Quality gate sem enforcement (BRE v1.0, Mind Cloning v1.1)
+- Veto sem blocking explicito (BRE v1.0)
+- Handoff sem input_validation (todos workflows)
+- Dois arquivos descrevendo mesmo fluxo (Mind Cloning: clone-mind.md + workflow YAML)
+- Sem timeout protection (Mind Cloning v1.1)
+
+## Patterns Efetivos
+- Enforcement global: `enforcement: { checkpoint_policy, veto_behavior, max_retries }`
+- Input validation: `input_validation: [ { field, required, min_length, type } ]`
+- Fallback: `fallback: { on_veto, on_timeout }` com graceful degradation
+- Checkpoint types: auto, human_review, quality_gate
+- Global safeguards: max_duration, max_tokens, max_waves, plateau_threshold
+- Quality Gate Enforcement: gate define CRITERIA, veto ENFORCA (blocking: true)
 
 ---
 
 ## Aprendizados Chave
-
-### Edge Cases que SEMPRE verificar
-- **Plateau detection**: coverage_delta < 3% entre waves → FORCE STOP
-- **Timeout protection**: absolute pipeline timeout (ex: 600s)
-- **Coverage regression**: wave N < wave N-1 → FORCE STOP
-- **Query exhaustion**: gap queries retornam 0 results → FORCE STOP
-- **Partial failure**: alguns subagents falham → graceful degradation, não fail entire
-- **Disambiguation**: multi-type queries com score_diff < threshold → ASK USER
-
-### Global Safeguards Pattern
-```yaml
-global:
-  max_pipeline_duration_seconds: {N}  # absolute timeout
-  max_total_tokens: {N}               # cost protection
-  max_waves: {N}                      # hard cap (override config)
-  plateau_threshold: {N}              # delta abaixo = plateau
-```
-
-### Quality Gate Enforcement Pattern
-- Quality gate define CRITERIA
-- Veto condition ENFORÇA criteria (blocking: true)
-- Se gate existe mas veto não → executor CONSEGUE ignorar → processo ESTÁ errado
-
-### Integrity Score Pattern (deep-research v1.1)
-- < 60%: HALT (blocking: true)
-- 60-70%: FLAG "REVIEW REQUIRED" (blocking: false)
-- >= 70%: PASS
-- >= 80%: HIGH QUALITY
-
-### BRE-Specific Patterns (v1.0 gaps)
-- **Checkpoint types obrigatórios**: wf-formalize tinha veto_conditions SEM checkpoint type → executor não sabe QUANDO validar
-- **Quality gates por fase**: BRE só tinha Phase 5, faltavam 0,1,2,4 → 80% do pipeline sem gate
-- **Handoff validation ausente**: output Phase N → input Phase N+1 sem schema check → pipeline prossegue com dados inválidos
-- **Fallback ausente**: veto binário (PASS ou HALT total), sem partial catalog/relaxed constraints/retry mechanism
-- **Edge cases BRE-specific**: characterization test regression, plateau em extraction_points, partial module failure, glossary term disambiguation
-
----
-
-## Clone Audits
-### [2026-03-09] renner-silva v1.2: APROVADO (9.0/10)
-- +2 KBs novos (KB18 Frameworks Negocio, KB19 Metodo Palestra) — completos
-- +3 KBs atualizados (KB01 v1.4, KB02 v1.3 +15 fingerprints, KB04 v1.3 +13 memorias)
-- 1 MAJOR: escopo agent nao inclui vendas/pricing explicitamente
-- 7 MINOR: README desatualizado (17→19 KBs, ME-40→ME-29), cross-refs erradas
-- Pattern: mind clone audits focam em SOURCE ATTRIBUTION + CROSS-REF INTEGRITY
-
-### [2026-03-08] renner-silva v1.1: APROVADO (8.5/10)
-- Baseline score antes de KB18/KB19
+- Edge cases SEMPRE verificar: plateau, timeout, regression, query exhaustion, partial failure, disambiguation
+- Conteudo rico NAO compensa workflow fraco (Mind Cloning: tasks 9/10, workflow 6/10)
+- Duplicacao de fluxo (task + workflow YAML) e GAP CRITICAL - single source of truth
+- CONDITIONAL paths precisam de tracking/propagacao entre fases
 
 ---
 
 ## Notas Recentes
-- [2026-03-09] BRE wf-formalize v1.0 VETADO (54/100) — 6 CRITICAL (checkpoint types AUSENTES)
-- [2026-03-09] BRE wf-extract v1.0 VETADO (62/100) — 5 CRITICAL, 5 MAJOR (veto sem blocking)
-- [2026-03-09] renner-silva v1.2 APROVADO (9.0/10) — gap principal: escopo vendas
-- [2026-03-08] deep-research v1.1 APROVADO (91/100) — todos 4 CRITICAL resolvidos
-- [2026-03-08] deep-research v1.0 VETADO (62/100) — 4 CRITICAL issues
-- [2026-02-05] Agent Memory implementado - Epic AAA
+- [2026-03-11] Mind Cloning v1.1 APROVADO c/ RESSALVAS (78/100) — 3C, 5M, 7m. Gap: workflow YAML sem gates em 3/5 fases
+- [2026-03-11] BRE v1.1 APROVADO — extract 85, formalize 83
+- [2026-03-09] renner-silva v1.2 APROVADO (9.0/10)
+- [2026-03-08] deep-research v1.1 APROVADO (91/100)
