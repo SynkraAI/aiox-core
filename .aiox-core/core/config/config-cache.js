@@ -72,7 +72,16 @@ class ConfigCache {
    * @returns {boolean} True if key exists and is valid
    */
   has(key) {
-    return this.get(key) !== null;
+    if (!this.cache.has(key)) {
+      return false;
+    }
+    const timestamp = this.timestamps.get(key);
+    if (Date.now() - timestamp > this.ttl) {
+      this.cache.delete(key);
+      this.timestamps.delete(key);
+      return false;
+    }
+    return true;
   }
 
   /**

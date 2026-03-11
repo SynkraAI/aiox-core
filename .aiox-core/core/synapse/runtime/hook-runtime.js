@@ -46,7 +46,7 @@ function resolveHookRuntime(input) {
   if (!fs.existsSync(synapsePath)) return null;
 
   try {
-    const { loadSession, cleanStaleSessions } = require(
+    const { loadSession, createSession, cleanStaleSessions } = require(
       path.join(cwd, '.aiox-core', 'core', 'synapse', 'session', 'session-manager.js'),
     );
     const { SynapseEngine } = require(
@@ -54,7 +54,16 @@ function resolveHookRuntime(input) {
     );
 
     const sessionsDir = path.join(synapsePath, 'sessions');
-    const session = loadSession(sessionId, sessionsDir) || { prompt_count: 0 };
+
+    // Create session file on first prompt if it doesn't exist.
+    // Without this, updateSession() silently fails because loadSession() returns null.
+    let session = loadSession(sessionId, sessionsDir);
+    if (!session && sessionId) {
+      session = createSession(sessionId, cwd, sessionsDir);
+    }
+    if (!session) {
+      session = { prompt_count: 0 };
+    }
     const engine = new SynapseEngine(synapsePath);
 
     // AC3: Run cleanup on first prompt only (fire-and-forget)

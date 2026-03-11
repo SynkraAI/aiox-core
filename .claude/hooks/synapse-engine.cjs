@@ -87,24 +87,24 @@ async function main() {
   });
 }
 
-/**
- * Safely exit the process — no-op inside Jest workers to prevent worker crashes.
- * @param {number} code - Exit code
- */
-function safeExit(code) {
-  if (process.env.JEST_WORKER_ID) return;
-  process.exit(code);
-}
-
-/** Entry point runner — sets safety timeout and executes main(). */
+/** Entry point runner — lets Node exit naturally after stdout flush. */
 function run() {
-  const timer = setTimeout(() => safeExit(0), HOOK_TIMEOUT_MS);
+  const timer = setTimeout(() => {
+    // process.exitCode alone won't terminate the process if active handles
+    // remain (e.g. stdout backpressure). Use process.exit() to enforce the
+    // 5 s hard limit and guarantee the hook never blocks Claude Code.
+    process.exit(0);
+  }, HOOK_TIMEOUT_MS);
   timer.unref();
   main()
-    .then(() => safeExit(0))
+    .then(() => {
+      clearTimeout(timer);
+      process.exitCode = 0;
+    })
     .catch(() => {
+      clearTimeout(timer);
       // Silent exit — stderr output triggers "hook error" in Claude Code UI
-      safeExit(0);
+      process.exitCode = 0;
     });
 }
 

@@ -338,7 +338,8 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
       tmpDir = createMockProject({
         sessionCode: `
           function loadSession() { return null; }
-          module.exports = { loadSession };
+          function createSession() { return null; }
+          module.exports = { loadSession, createSession };
         `,
         engineCode: `
           class SynapseEngine {
@@ -566,7 +567,8 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
       tmpDir = createMockProject({
         sessionCode: `
           function loadSession() { return null; }
-          module.exports = { loadSession };
+          function createSession() { return null; }
+          module.exports = { loadSession, createSession };
         `,
         engineCode: `
           class SynapseEngine {
@@ -610,15 +612,11 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
   describe('run() entry point', () => {
     const hookModule = require('../../.claude/hooks/synapse-engine.cjs');
 
-    test('run() sets safety timeout, catches errors, and exits with 0', async () => {
-      const exitSpy = jest.spyOn(process, 'exit').mockImplementation(() => {});
+    test('run() sets safety timeout, catches errors, and sets exitCode 0', async () => {
       const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
       const { Readable } = require('stream');
       const originalStdin = process.stdin;
-
-      // Temporarily clear JEST_WORKER_ID so safeExit() calls process.exit()
-      const savedWorkerId = process.env.JEST_WORKER_ID;
-      delete process.env.JEST_WORKER_ID;
+      const originalExitCode = process.exitCode;
 
       const mockStdin = new Readable({ read() {} });
       Object.defineProperty(process, 'stdin', { value: mockStdin, writable: true });
@@ -630,15 +628,11 @@ describe('SYNAPSE Hook Entry Point (synapse-engine.cjs)', () => {
         // Wait for async catch handler to complete
         await new Promise((r) => setTimeout(r, 50));
 
-        expect(exitSpy).toHaveBeenCalledWith(0);
+        expect(process.exitCode).toBe(0);
         // Silent exit policy: no stderr output (prevents "hook error" in Claude Code UI)
         expect(errorSpy).not.toHaveBeenCalled();
       } finally {
-        // Restore JEST_WORKER_ID before restoring other mocks
-        if (savedWorkerId !== undefined) {
-          process.env.JEST_WORKER_ID = savedWorkerId;
-        }
-        exitSpy.mockRestore();
+        process.exitCode = originalExitCode;
         errorSpy.mockRestore();
         Object.defineProperty(process, 'stdin', { value: originalStdin, writable: true });
       }

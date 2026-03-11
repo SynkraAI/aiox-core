@@ -49,20 +49,29 @@ function readStdin() {
   });
 }
 
+/**
+ * Resolve runner path — works in both framework-dev and installed projects.
+ * Framework-dev: PROJECT_ROOT/.aiox-core/hooks/unified/runners/precompact-runner.js
+ * Installed:     PROJECT_ROOT/node_modules/aiox-core/.aiox-core/hooks/unified/runners/precompact-runner.js
+ */
+function resolveRunnerPath() {
+  const fs = require('fs');
+  const candidates = [
+    path.join(PROJECT_ROOT, '.aiox-core', 'hooks', 'unified', 'runners', 'precompact-runner.js'),
+    path.join(PROJECT_ROOT, 'node_modules', 'aiox-core', '.aiox-core', 'hooks', 'unified', 'runners', 'precompact-runner.js'),
+  ];
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) return candidate;
+  }
+  return null;
+}
+
 /** Main hook execution pipeline. */
 async function main() {
   const input = await readStdin();
 
-  // Resolve path to the unified hook runner via __dirname (not input.cwd)
-  // Same pattern as synapse-engine.cjs — robust against incorrect cwd
-  const runnerPath = path.join(
-    PROJECT_ROOT,
-    '.aiox-core',
-    'hooks',
-    'unified',
-    'runners',
-    'precompact-runner.js',
-  );
+  const runnerPath = resolveRunnerPath();
+  if (!runnerPath) return; // Runner not available — silent exit
 
   // Build context object expected by onPreCompact
   const context = {
@@ -76,8 +85,34 @@ async function main() {
     provider: 'claude',
   };
 
-  const { onPreCompact } = require(runnerPath);
-  await onPreCompact(context);
+  // Spawn a detached child process so the digest is fire-and-forget.
+  // Using require() in-process keeps the event loop alive (setImmediate inside
+  // the runner), causing the hook to block until the 9 s safety timeout.
+  // The child receives context via AIOX_HOOK_CONTEXT env var and calls
+  // onPreCompact() exported by the runner module.
+  try {
+    const { spawn } = require('child_process');
+    let contextJson;
+    try {
+      contextJson = JSON.stringify(context);
+    } catch (_) {
+      contextJson = '{}';
+    }
+    const inlineScript = [
+      `const ctx = JSON.parse(process.env.AIOX_HOOK_CONTEXT || '{}');`,
+      `const { onPreCompact } = require(${JSON.stringify(runnerPath)});`,
+      `onPreCompact(ctx).catch(() => {});`,
+    ].join('\n');
+    const child = spawn(process.execPath, ['-e', inlineScript], {
+      detached: true,
+      stdio: 'ignore',
+      env: { ...process.env, AIOX_HOOK_CONTEXT: contextJson },
+    });
+    child.on('error', () => {});
+    child.unref();
+  } catch (_) {
+    // Silent — spawn failures must not crash the hook
+  }
 }
 
 /** Entry point runner — sets safety timeout and executes main(). */
