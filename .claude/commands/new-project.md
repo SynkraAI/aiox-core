@@ -122,7 +122,7 @@ Se squad não existe ou é "nenhum ainda":
 6. Adicionar nova row com emoji de status (🔄 ou ⏸️)
 7. Formatar igual às rows existentes
 
-## Passo 5: Confirmar
+## Passo 5: Confirmar e sugerir próximo passo
 
 Mostre ao usuário:
 - Estrutura criada:
@@ -139,8 +139,20 @@ Mostre ao usuário:
 - Path do INDEX.md
 - Row adicionada no ACTIVE.md (#{número})
 
-Se o tipo for `app` e o destino for externo (`~/CODE/Projects/` ou customizado):
-- Pergunte: "Quer iniciar o scaffold com app-builder?"
+### Sugestão inteligente por tipo
 
-Caso contrário:
-- Pergunte: "Quer começar a trabalhar neste projeto agora?"
+Baseado no tipo do projeto, sugira o próximo passo concreto:
+
+| Tipo | Sugestão |
+|------|----------|
+| `app` | "Próximo passo: `@pm *create-epic` para definir escopo e criar PRD, ou `/new-project-full` para o pipeline completo." |
+| `squad` | "Próximo passo: Criar `squads/{nome}/README.md` com escopo do squad, depois `@sm *draft` para primeira story." |
+| `mind-clone` | "Próximo passo: Coletar fontes do indivíduo (vídeos, textos, entrevistas). Use `@analyst` para research." |
+| `pipeline` | "Próximo passo: Mapear steps do pipeline (inputs → processamento → outputs). Use `@architect` para design." |
+| `knowledge` | "Próximo passo: Organizar fontes e definir estrutura da knowledge base. Use `@analyst` para research." |
+| `research` | "Próximo passo: Definir perguntas de pesquisa e metodologia. Use `/tech-search` para deep research." |
+
+Se o tipo for `app` e o destino for externo (`~/CODE/Projects/` ou customizado):
+- Adicione: "Quer iniciar o scaffold com app-builder?"
+
+Ao final, sempre pergunte: "Quer executar o próximo passo sugerido agora?"
