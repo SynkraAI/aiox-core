@@ -1355,6 +1355,7 @@ class MasterOrchestrator extends EventEmitter {
     if (!state.epics) return 0;
 
     const totalEpics = Object.keys(EPIC_CONFIG).filter((num) => !EPIC_CONFIG[num].onDemand).length;
+    if (totalEpics === 0) return 0;
 
     const completedEpics = Object.values(state.epics).filter(
       (epic) => epic.status === EpicStatus.COMPLETED,
@@ -1411,6 +1412,7 @@ class MasterOrchestrator extends EventEmitter {
    */
   getProgressPercentage() {
     const totalEpics = Object.keys(EPIC_CONFIG).filter((num) => !EPIC_CONFIG[num].onDemand).length;
+    if (totalEpics === 0) return 0;
 
     const completedEpics = Object.values(this.executionState.epics).filter(
       (epic) => epic.status === EpicStatus.COMPLETED,
