@@ -3,7 +3,7 @@
 ## Estado Atual
 - **Squad base:** `ensinio-whatsapp-prospector` v3.0.0 (pipeline CLI completo)
 - **Project Path:** `~/CODE/Projects/ensinio-prospector-app/`
-- **Status:** M1 Done + M2 Done — App com scoring, preview, WhatsApp connect
+- **Status:** M1 + M2 + M3 Done — Circle DS + IndexedDB + sort funcional
 - **Bloqueadores:** Nenhum
 
 ## Visão do Produto
@@ -16,24 +16,27 @@ App de prospecção via WhatsApp Web com outreach integrado e tracking de envios
 - Substitui Google Sheets como destino final
 
 **Stack definida:**
-- **Frontend:** Next.js 15 + Tailwind + shadcn/ui
+- **Frontend:** Next.js 16 + Tailwind v4 + @circle-ds/react (link local)
+- **State:** Zustand 5 + IndexedDB (nativa)
 - **Backend:** Next.js API Routes + Supabase (PostgreSQL)
 - **WhatsApp:** Evolution API (self-hosted, Docker)
 
 ## Última Sessão
 - **Data:** 2026-03-11
 - **Agente/Squad:** @dev (implementação)
-- **O que foi feito:**
-  1. PRD atualizado: fluxo ZIP upload (não API), WhatsApp só p/ envio
-  2. M1 Done: Next.js 15 + Supabase schema + chat parser + upload ZIP + dashboard
-  3. M2 Done: scoring engine + preview mensagens + WhatsApp connect + Evolution API
-  4. VK Talks processado: 80 membros, 50 telefones, 28 prospects scorados, 28 mensagens
-  5. 12 decisões tomadas, 0 em aberto
+- **O que foi feito (M3):**
+  1. Migração visual: shadcn/ui → @circle-ds/react (Card, Badge, Button, Alert, Table)
+  2. Removidas 5 deps: shadcn, @base-ui/react, cva, clsx, tailwind-merge
+  3. Novo `scoring-colors.ts`: estilos inline para badges (CSSProperties)
+  4. Sort funcional na ProspectsTable (4 colunas: C, P, Classificação, Temp)
+  5. Persistência IndexedDB: dados sobrevivem reload (saveGroup, loadAllGroups, deleteGroup)
+  6. Store refatorado: `crypto.randomUUID()`, `loadFromIdb()`, `isHydrated`
+  7. Hydrate automático via useEffect no mount
+  8. Build passando sem erros
 
 ## Próximo Passo
-- M3: Envio direto via Evolution API + integração GHL (criar contato pós-envio)
-- Ou: deploy Evolution API Docker local e testar QR code real
-- Ou: processar mais grupos (enviar mais ZIPs)
+- M4: Envio direto via Evolution API + fila de envio + rate limiting
+- Alternativas: filtros/busca na tabela, export CSV, edição de telefone inline
 
 ## Squads Relacionados
 - `ensinio-whatsapp-prospector` — Pipeline CLI de prospecção via WhatsApp (v3.0.0, 77 prospects processados)
@@ -43,15 +46,23 @@ App de prospecção via WhatsApp Web com outreach integrado e tracking de envios
 ## Arquivos Chave
 | Arquivo | Conteúdo |
 |---------|---------|
-| INDEX.md | Este arquivo |
-| PRD.md | Product Requirements Document v0.1 |
-| research/whatsapp-web-integration.md | Research sobre integração WhatsApp Web |
-| `squads/ensinio-whatsapp-prospector/` | Squad base com pipeline CLI |
-| `squads/ensinio-whatsapp-prospector/data/outputs/mentoria-50k/` | Dados do primeiro batch (77 prospects) |
+| `src/app/page.tsx` | Layout principal + hydrate IndexedDB |
+| `src/stores/prospects-store.ts` | Estado global (Zustand + IndexedDB) |
+| `src/lib/scoring-engine.ts` | Engine de scoring dual-axis |
+| `src/lib/chat-parser.ts` | Parser de chats WhatsApp |
+| `src/lib/scoring-colors.ts` | Estilos inline para badges (circle-ds) |
+| `src/lib/services/local-db.ts` | Serviço IndexedDB (saveGroup, loadAllGroups, deleteGroup) |
+| `src/lib/services/evolution-api.ts` | Client Evolution API |
+| `src/components/prospects-table.tsx` | Tabela com sort (circle-ds Table) |
+| `src/components/message-preview.tsx` | Preview + edição de mensagem |
+| `src/components/whatsapp-connect.tsx` | Conexão WhatsApp (QR code) |
+| `src/components/scoring-summary.tsx` | Resumo badges temperatura/classificação |
+| `src/components/group-selector.tsx` | Seletor de grupos |
 
 ## Histórico
 | Data | Ação |
 |------|------|
+| 2026-03-11 | M3 Done — Circle DS migration + IndexedDB persistence + sort funcional |
 | 2026-03-11 | M2 Done — scoring engine, message preview, WhatsApp connect, Evolution API |
 | 2026-03-11 | M1 Done — Next.js + Supabase + chat parser + upload ZIP + multi-grupo |
 | 2026-03-11 | VK Talks processado — 80 membros, 50 telefones, 28 mensagens outreach |
