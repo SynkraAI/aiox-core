@@ -24,7 +24,9 @@
       "mcp__figma__get_metadata",
       "mcp__figma__get_screenshot",
       "mcp__figma__get_variable_defs",
-      "mcp__exa__web_search_exa"
+      "mcp__exa__web_search_exa",
+      "mcp__figma__get_design_context",
+      "mcp__figma__whoami"
     ],
     "deny": []
   }
