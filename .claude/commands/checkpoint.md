@@ -1,33 +1,56 @@
-Contexto acabando ou usuario pediu checkpoint. Execute TODOS os passos abaixo SEM carregar squads/skills:
+Contexto acabando ou usuário pediu checkpoint. Execute TODOS os passos abaixo SEM carregar squads/skills:
 
-## Passo 0: Mudancas nao commitadas
+## Passo 0: Mudanças não commitadas
+
 - Rode `git diff --stat` via Bash
-- Se houver mudancas nao commitadas, pergunte ao usuario: "Quer fazer commit ou stash antes do checkpoint?"
-- Se sim, faca commit com mensagem `chore: checkpoint session` ou `git stash`
-- Se nao, apenas registre os arquivos modificados no session file
+- Se comando falhar (repo corrompido, sem git), continue com aviso: "⚠️ Git status indisponível — pulando verificação de mudanças."
+- Se houver mudanças não commitadas:
+  - **Se o agente atual é @dev:** pergunte "Quer fazer commit ou stash antes do checkpoint?"
+    - Se sim, faça commit com mensagem `chore: checkpoint session` ou `git stash`
+  - **Se o agente atual NÃO é @dev:** apenas registre os arquivos modificados no session file
+    - Mostre: "⚠️ Existem mudanças não commitadas. Apenas @dev pode fazer commits. Registrando no session file..."
 
 ## Passo 1: Identificar projeto ativo
+
 - Rode `git log --oneline -5` via Bash
 - Analise o contexto da conversa para identificar o projeto ativo
-- Se trabalhou em mais de 1 projeto, pergunte qual e o foco principal
+- Se trabalhou em mais de 1 projeto, pergunte qual é o foco principal
+- **VALIDAR:** Verificar se `docs/projects/{projeto}/` existe
+  - Se NÃO existir: pergunte "Projeto '{projeto}' não encontrado em docs/projects/. Quer criar com `/new-project`?"
+  - **NUNCA** criar INDEX.md avulso sem a estrutura completa do `/new-project`
 
 ## Passo 2: Atualizar INDEX.md do projeto
+
 - Leia `docs/projects/{projeto}/INDEX.md`
-- Extraia o campo **Project Path** (se existir) — sera usado no Passo 4
-- Atualize as secoes:
+- Se INDEX.md NÃO existir: PARAR e orientar "INDEX.md ausente. Rode `/new-project {projeto}` primeiro para criar a estrutura correta."
+- Extraia o campo **Project Path** (se existir) — será usado no Passo 4
+- Atualize as seções:
   - **Estado Atual**: reflita o estado real agora
-  - **Ultima Sessao**: data/hora agora, agente/squad usado, o que foi feito (detalhado)
-  - **Proximo Passo**: acao concreta para retomar
-  - **Historico**: adicione 1 linha com data e resumo
-- Se INDEX.md nao existe, crie seguindo o padrao dos existentes (leia `docs/projects/ensinio/INDEX.md` como referencia)
+  - **Última Sessão**: data/hora agora, agente/squad usado, o que foi feito (detalhado)
+  - **Próximo Passo**: ação concreta para retomar
+  - **Histórico**: adicione 1 linha com data e resumo
 
 ## Passo 3: Atualizar ACTIVE.md
+
 - Leia `docs/projects/ACTIVE.md`
-- Atualize a row do projeto: status, agente/squad, ultima sessao, proximo passo
-- Se o projeto nao esta na tabela, adicione uma nova row
+- Se NÃO existir, criar com header padrão:
+  ```
+  # Projetos Ativos
+
+  | # | Projeto | Status | Agente/Squad | Última Sessão | Próximo Passo |
+  |---|---------|--------|-------------|---------------|---------------|
+  ```
+- Atualize a row do projeto: status, agente/squad, última sessão, próximo passo
+- Se o projeto não está na tabela, adicione uma nova row (calcular `max(#) + 1`)
 
 ## Passo 4: Salvar session file
-- Crie `docs/projects/{projeto}/sessions/YYYY-MM-DD.md` com:
+
+**Naming:** `YYYY-MM-DD-{seq}.md` onde `{seq}` é um sufixo sequencial:
+- Verificar se já existe `docs/projects/{projeto}/sessions/YYYY-MM-DD*.md`
+- Se não existir nenhum: usar `YYYY-MM-DD.md` (sem sufixo)
+- Se já existir: usar `YYYY-MM-DD-02.md`, `YYYY-MM-DD-03.md`, etc.
+
+Criar o session file com:
 
 ```markdown
 # Session {data}
@@ -37,68 +60,72 @@ Contexto acabando ou usuario pediu checkpoint. Execute TODOS os passos abaixo SE
 - **INDEX.md:** `docs/projects/{projeto}/INDEX.md`
 ```
 
-Se o projeto tem **Project Path** externo (extraido no Passo 2), adicione:
+Se o projeto tem **Project Path** externo (extraído no Passo 2), adicione:
 
 ```markdown
 ## Working Directory
 - **Path:** `{project path}`
-- Arquivos do projeto real vivem neste diretorio, fora de aios-core.
+- Arquivos do projeto real vivem neste diretório, fora de aios-core.
 ```
 
 Restante do session file:
 
 ```markdown
 ## O que foi feito
-{descricao detalhada com contexto suficiente para retomar}
+{descrição detalhada com contexto suficiente para retomar}
 
 ## Agente/Squad em uso
-{agente ou squad ativo nesta sessao}
+{agente ou squad ativo nesta sessão}
 
-## Arquivos para contexto (proximo Claude DEVE ler)
+## Arquivos para contexto (próximo Claude DEVE ler)
 - `{arquivo 1}`
 - `{arquivo 2}`
 - `{arquivo 3}`
 ```
 
-Se o projeto tem Project Path externo, use paths absolutos para arquivos que vivem fora de aios-core (ex: `~/CODE/Projects/meu-app/src/index.ts`).
+**IMPORTANTE:** Liste no máximo 5 arquivos essenciais. O `/resume` lerá até 5.
+
+Se o projeto tem Project Path externo, use paths absolutos para arquivos fora de aios-core.
 
 ```markdown
-## Decisoes tomadas
-- {decisao 1 — para nao refazer}
-- {decisao 2}
+## Decisões tomadas
+- {decisão 1 — para não refazer}
+- {decisão 2}
 
-## Proximo passo exato
-{comando ou acao especifica}
+## Próximo passo exato
+{comando ou ação específica}
 
-## Arquivos modificados nao commitados
+## Arquivos modificados não commitados
 {lista ou "Nenhum — tudo commitado"}
 ```
 
-## Passo 5: Health check rapido dos instruction files
+## Passo 5: Health check rápido dos instruction files
+
 - Conte as linhas de: `~/.claude/CLAUDE.md`, `.claude/CLAUDE.md`, MEMORY.md do projeto
-- Conte as linhas dos rules always-on (sem `paths:` frontmatter) em `.claude/rules/`
+- Conte as linhas dos rules em `.claude/rules/` que NÃO têm frontmatter com campo `paths:`
 - Some tudo = **total always-loaded**
 - Se total > 500 linhas, mostre WARNING:
 
 ```
 ⚠️ Instruction files cresceram: {total} linhas (limite: 500)
-   Rode `/audit-instructions` para diagnostico completo.
+   Rode `/audit-instructions` para diagnóstico completo.
 ```
 
 - Se total <= 500, mostre apenas: `Instructions: {total}/500 linhas — OK`
 
-## Passo 6: Confirmacao
-Mostre ao usuario:
+## Passo 6: Confirmação
+
+Mostre ao usuário:
 - ✅/❌ INDEX.md atualizado
 - ✅/❌ ACTIVE.md atualizado
-- ✅/❌ Session file salvo em `docs/projects/{projeto}/sessions/YYYY-MM-DD.md`
+- ✅/❌ Session file salvo em `docs/projects/{projeto}/sessions/{nome-arquivo}.md`
 - Instructions health: {total}/500
 
 Ao final, SEMPRE mostre a dica de retomada:
 
 ```
-Para retomar este projeto na proxima sessao, digite:
+Para retomar este projeto na próxima sessão, digite:
 /resume {projeto}
 ```
 
-Onde `{projeto}` e o nome exato da pasta em `docs/projects/`.
+Onde `{projeto}` é o nome exato da pasta em `docs/projects/`.
