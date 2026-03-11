@@ -4,19 +4,21 @@
 
 **Mind Clone Elite (95%)** — Voice DNA (10/10) + Thinking DNA (9/9) + Synthesis completa.
 8/8 camadas DNA Mental cobertas. 280K palavras analisadas (2 livros + 7 podcasts).
+Squad atualizado para v1.2.0 com todas as correções da avaliação tripla.
 Falta: Smoke Test (3 testes de validação).
 
 ## Ultima Sessao
 
-- **Data:** 2026-03-11
-- **Squad:** mind-cloning (Helix)
+- **Data:** 2026-03-11 (sessão 2)
+- **Squad:** mind-cloning (Helix) v1.2.0
 - **O que foi feito:**
-  1. ETL de 2 livros EPUB → Markdown (Almanack + How to Get Rich = 92K words)
-  2. Download de 7 transcrições YouTube via yt-dlp (legendas auto-caption = 188K words)
-  3. Collect Sources — GO (5/5), 18 fontes catalogadas
-  4. Voice DNA extraction — 8 fases, 10/10 (15 power words, 12 phrases, 7 paradoxes)
-  5. Thinking DNA extraction — 7 fases, 9/9 (27 heuristics IF/THEN, 7 frameworks)
-  6. Synthesize Mind — Elite 95%, 5 stages, 5 alignments, 3 tensions
+  1. Avaliação tripla do squad: @oalanicolas (87/100), @pedro-valerio (78/100), Kaizen (85/100)
+  2. Corrigidos 10 gaps identificados — squad atualizado de v1.1.0 para v1.2.0
+  3. Workflow YAML: gates em todas 5 fases + enforcement global + input_validation + fallback
+  4. Heurísticas: AN006-AN010 adicionadas (frequência quantitativa, bidirecionalidade, parafônicos, profundidade episódica, sincronia)
+  5. Voice DNA: Phase 9 (Prosódia/Parafônicos) + frequências quantitativas em power words
+  6. Novos artefatos: checklist síntese, template smoke-test-result, task diagnose-clone
+  7. README atualizado: output path padronizado, contagem de artefatos, versão
 
 ## Proximo Passo
 
@@ -29,7 +31,8 @@ Rodar `*smoke-test naval-ravikant` — 3 testes de validação:
 
 | Data | Resumo |
 |------|--------|
-| 2026-03-11 | Mind clone completo Elite 95% — Voice 10/10, Thinking 9/9, Synthesis, 5 stages. Falta smoke test. |
+| 2026-03-11 (s2) | Avaliação tripla (Ola 87, PV 78, Kaizen 85) + 10 correções → squad v1.2.0 |
+| 2026-03-11 (s1) | Mind clone completo Elite 95% — Voice 10/10, Thinking 9/9, Synthesis, 5 stages. Falta smoke test. |
 
 ## Squads Usados
 

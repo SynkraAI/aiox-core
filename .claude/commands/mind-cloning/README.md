@@ -25,11 +25,13 @@ Squad especializado em clonar mentes de experts através de extração sistemát
 
 ```
 1. *collect-sources      ← BLOCKING GATE (GO/NO-GO)
-2. *extract-voice-dna    ← 8 fases (~1-2h)
-3. *extract-thinking-dna ← 7 fases (~1-2h)
-4. *synthesize-mind      ← Combina Voice + Thinking
-5. *smoke-test           ← BLOCKING GATE (3/3 tests)
+2. *extract-voice-dna    ← BLOCKING GATE (9 fases, >= 8/10)
+3. *extract-thinking-dna ← BLOCKING GATE (7 fases, >= 7/9)
+4. *synthesize-mind      ← BLOCKING GATE (>= 6/8 layers)
+5. *smoke-test           ← BLOCKING GATE (3/3 tests >= 7/10)
 ```
+
+Enforcement global: `veto_behavior: blocking`, `no_phase_skip`. Ver `workflows/full-mind-clone.yaml`.
 
 Fases 2 e 3 podem rodar em paralelo.
 
@@ -51,14 +53,19 @@ Fases 2 e 3 podem rodar em paralelo.
 
 ## Output
 
+**Localização padrão:** `.claude/commands/mind-cloning/minds/{mind_slug}/outputs/`
+
 ```
-outputs/minds/{mind_slug}/
-├── sources_inventory.yaml    # Fontes classificadas por tier
-├── voice_dna.yaml            # Vocabulário, tom, histórias, immune system
-├── thinking_dna.yaml         # Frameworks, heurísticas, decision pipeline
-├── mind_dna_complete.yaml    # DNA combinado + síntese
-├── smoke_test_result.yaml    # Resultado dos 3 testes
-└── quality_dashboard.md      # Métricas de qualidade
+.claude/commands/mind-cloning/minds/{mind_slug}/
+├── sources/                     # Fontes originais (livros, transcrições)
+└── outputs/
+    ├── sources_inventory.yaml   # Fontes classificadas por tier
+    ├── voice_dna.yaml           # Vocabulário, tom, histórias, immune system
+    ├── thinking_dna.yaml        # Frameworks, heurísticas, decision pipeline
+    ├── mind_dna_complete.yaml   # DNA combinado + síntese
+    ├── smoke_test_result.yaml   # Resultado dos 3 testes
+    ├── quality_dashboard.md     # Métricas de qualidade
+    └── diagnostic_report.yaml   # (se diagnóstico foi executado)
 ```
 
 ---
@@ -95,7 +102,7 @@ Referência completa: `data/dna-mental-8layers.md`
 Quando um clone está fraco, use `*diagnose-clone`:
 
 1. Roda 6 perguntas diagnósticas
-2. Identifica red flags e heurísticas violadas (AN001-AN005)
+2. Identifica red flags e heurísticas violadas (AN001-AN010)
 3. Gera plano de correção com causa raiz + esforço estimado
 
 Referência completa: `data/diagnostic-framework.md`
@@ -118,15 +125,15 @@ squads/mind-cloning/
 ├── config.yaml              # Manifest
 ├── agents/
 │   └── mind-cloner.md       # Agente Helix
-├── tasks/                   # 6 tasks executáveis
-├── templates/               # 5 templates de output
+├── tasks/                   # 7 tasks executáveis
+├── templates/               # 6 templates de output
 ├── data/                    # 8 arquivos de referência
-├── checklists/              # 3 quality gates
+├── checklists/              # 4 quality gates
 ├── workflows/               # Pipeline completo
 └── scripts/                 # Extensões futuras
 ```
 
 ---
 
-*Mind Cloning Squad v1.1.0*
+*Mind Cloning Squad v1.2.0*
 *Agente: Helix (mind-cloner)*
