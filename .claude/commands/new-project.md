@@ -41,6 +41,17 @@ Se squad informado ≠ "nenhum ainda":
 - Se NÃO existir, listar squads disponíveis em `squads/` e perguntar:
   "Squad '{x}' não encontrado. Escolha: (1) usar mesmo assim, (2) escolher da lista, (3) 'nenhum ainda'"
 
+## Passo 1.5: Scan automático de arquivos existentes
+
+Antes de criar, busque no codebase por arquivos que já existam relacionados ao projeto:
+1. Stories em `docs/stories/active/` e `docs/stories/completed/` que contenham o nome do projeto
+2. Epics em `docs/stories/epics/` que contenham o nome do projeto
+3. Squads em `squads/{squad}/` (se squad informado)
+4. Scripts em `tools/` que contenham o nome do projeto
+
+Se encontrar algo, mostre ao usuário: "Encontrados {N} arquivos existentes relacionados a este projeto" e liste-os.
+Eles serão incluídos na seção "Arquivos Chave" do INDEX.md.
+
 ## Passo 2: Criar estrutura
 
 Após respostas:
@@ -50,7 +61,42 @@ Após respostas:
    - `data/` — dados do projeto
    - `sessions/` — session files de checkpoint/resume
 2. Adicione `.gitkeep` em cada subpasta vazia
-3. Se o destino do código for `~/CODE/Projects/{nome}/` ou caminho customizado, crie o diretório base com `mkdir -p` — sem scaffold de código (isso fica pro app-builder ou manual)
+3. Se o destino do código for externo (`~/CODE/Projects/{nome}/` ou customizado):
+   - Crie o diretório base com `mkdir -p`
+   - Crie um `.claude/CLAUDE.md` de ponte dentro do projeto externo (ver Passo 2.5)
+
+## Passo 2.5: Criar ponte CLAUDE.md para projetos externos
+
+**APENAS se o projeto vive FORA de aios-core** (path externo).
+
+Crie `{project-path}/.claude/CLAUDE.md` com este conteúdo:
+
+```markdown
+# CLAUDE.md — {Nome Legível}
+
+## Projeto AIOX
+Este projeto é gerenciado pelo framework AIOX. A governança (INDEX, stories, sessions) vive centralizada em aios-core.
+
+- **Governança:** ~/aios-core/docs/projects/{nome}/INDEX.md
+- **Stories ativas:** ~/aios-core/docs/stories/active/
+- **Sessions:** ~/aios-core/docs/projects/{nome}/sessions/
+- **ACTIVE.md:** ~/aios-core/docs/projects/ACTIVE.md
+- **Framework:** ~/aios-core/
+
+## Ao iniciar sessão neste diretório
+1. Leia `~/aios-core/docs/projects/{nome}/INDEX.md` para contexto completo
+2. Verifique se há session file recente em `~/aios-core/docs/projects/{nome}/sessions/`
+3. Ou use: `cd ~/aios-core && /resume {nome}`
+
+## Ao finalizar sessão
+1. Use: `cd ~/aios-core && /checkpoint`
+2. Ou salve estado manualmente em `~/aios-core/docs/projects/{nome}/sessions/`
+
+## Convenções deste projeto
+{A definir — preencha com stack, lint rules, etc. conforme o projeto evolui}
+```
+
+Isso permite que o Claude Code tenha contexto quando o working directory está no projeto externo.
 
 ## Passo 3: Gerar INDEX.md
 
@@ -92,12 +138,35 @@ Restante do INDEX.md:
 | Arquivo | Conteúdo |
 |---------|---------|
 | INDEX.md | Este arquivo |
+{incluir arquivos encontrados no Passo 1.5, se houver}
+
+## Human Checklist
+{selecionar checklist baseado no tipo — ver seção abaixo}
 
 ## Histórico
 | Data | Ação |
 |------|------|
 | {data de hoje} | Projeto criado |
 ```
+
+### Seleção de Human Checklist por tipo
+
+Leia `squads/navigator/data/human-checklist-templates.md` e selecione a seção correspondente ao tipo do projeto:
+- `app` → seção "Type: app"
+- `squad` → seção "Type: squad"
+- `mind-clone` → seção "Type: mind-clone"
+- `pipeline` → seção "Type: pipeline"
+- `knowledge` → seção "Type: knowledge"
+- `research` → usar "Type: knowledge" como fallback
+
+Copie o conteúdo markdown da seção selecionada para dentro do INDEX.md.
+Se o arquivo `human-checklist-templates.md` não existir, usar checklist mínimo:
+```
+### A cada sessão
+- [ ] `/checkpoint` — Salvar estado antes de sair
+```
+
+### Squads no INDEX.md
 
 Se o usuário informou um squad que existe em `squads/`:
 - Ler `squads/{squad}/README.md` para extrair descrição real
