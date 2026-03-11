@@ -13,7 +13,7 @@ const { execSync } = require('child_process');
 // Import dependencies with fallbacks
 let GotchasMemory;
 try {
-  GotchasMemory = require('../memory/gotchas-memory');
+  ({ GotchasMemory } = require('../memory/gotchas-memory'));
 } catch {
   GotchasMemory = null;
 }
@@ -76,10 +76,10 @@ class IdeationEngine {
     let filtered = suggestions;
     if (this.gotchasMemory) {
       try {
-        const knownIssues = await this.gotchasMemory.getAll();
+        const knownIssues = this.gotchasMemory.listGotchas();
         filtered = suggestions.filter((s) => !this.isKnownGotcha(s, knownIssues));
-      } catch {
-        // Ignore
+      } catch (error) {
+        console.warn('[IdeationEngine] Failed to load known gotchas for filtering:', error.message);
       }
     }
 

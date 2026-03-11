@@ -36,6 +36,13 @@ class ConditionEvaluator {
     // Context for QA approval tracking (updated externally)
     this._qaApproved = false;
     this._phaseOutputs = {};
+
+    // Runtime overrides for conditions that cannot be inferred from TechStackProfile.
+    // Workflow engines populate this map at runtime to drive human-intent conditions
+    // (e.g., user_wants_ai_generation, stories_remaining). When a condition is absent
+    // from the map the evaluator falls back to a permissive default so that optional
+    // workflow steps are not silently skipped.
+    this._runtimeOverrides = {};
   }
 
   /**
@@ -52,6 +59,29 @@ class ConditionEvaluator {
    */
   setPhaseOutputs(outputs) {
     this._phaseOutputs = outputs;
+  }
+
+  /**
+   * Set a runtime condition value that cannot be derived from TechStackProfile.
+   * Use this to drive human-intent conditions such as loop-termination signals
+   * (stories_remaining, epic_complete) and optional step flags
+   * (user_wants_ai_generation, etc.) from the workflow engine.
+   *
+   * @param {string} name - Condition name (e.g., 'stories_remaining')
+   * @param {boolean} value - Resolved value for this execution cycle
+   */
+  setRuntimeCondition(name, value) {
+    this._runtimeOverrides[name] = Boolean(value);
+  }
+
+  /**
+   * Set multiple runtime conditions at once.
+   * @param {Object.<string, boolean>} overrides - Map of condition name to value
+   */
+  setRuntimeConditions(overrides) {
+    for (const [name, value] of Object.entries(overrides)) {
+      this._runtimeOverrides[name] = Boolean(value);
+    }
   }
 
   /**
@@ -97,6 +127,39 @@ class ConditionEvaluator {
       // Composite conditions
       has_any_data_to_analyze: () =>
         this.profile.hasDatabase || this.profile.hasFrontend || this.profile.hasBackend,
+
+      // Workflow guidance conditions — human-driven, cannot be inferred from the
+      // tech stack profile. The workflow engine resolves these at runtime via
+      // setRuntimeCondition() / setRuntimeConditions(). When no override has been
+      // registered the evaluator returns true (permissive default) so that optional
+      // and iterative workflow steps are not silently skipped. Loop-termination
+      // conditions (stories_remaining, epic_complete) MUST be set to false by the
+      // orchestrator when the loop should exit; leaving them unset keeps the loop
+      // running, which is the safe default for unmanaged executions.
+      user_wants_ai_generation: () =>
+        this._runtimeOverrides['user_wants_ai_generation'] !== undefined
+          ? this._runtimeOverrides['user_wants_ai_generation']
+          : true, // Optional AI UI generation step
+      stories_remaining: () =>
+        this._runtimeOverrides['stories_remaining'] !== undefined
+          ? this._runtimeOverrides['stories_remaining']
+          : true, // Repeat story cycle; orchestrator sets false when backlog is empty
+      epic_complete: () =>
+        this._runtimeOverrides['epic_complete'] !== undefined
+          ? this._runtimeOverrides['epic_complete']
+          : true, // Optional epic retrospective step
+      architecture_suggests_prd_changes: () =>
+        this._runtimeOverrides['architecture_suggests_prd_changes'] !== undefined
+          ? this._runtimeOverrides['architecture_suggests_prd_changes']
+          : true, // Optional PRD update after architecture review
+      po_checklist_issues: () =>
+        this._runtimeOverrides['po_checklist_issues'] !== undefined
+          ? this._runtimeOverrides['po_checklist_issues']
+          : true, // Optional fix delegation when PO finds issues
+      user_has_generated_ui: () =>
+        this._runtimeOverrides['user_has_generated_ui'] !== undefined
+          ? this._runtimeOverrides['user_has_generated_ui']
+          : true, // Optional project-setup guidance for generated UI
     };
 
     // Check for built-in evaluator
@@ -145,9 +208,9 @@ class ConditionEvaluator {
       return this._evaluateDotNotation(condition);
     }
 
-    // Unknown condition - default to true (permissive)
+    // Unknown condition - default to false (fail-safe)
     console.warn(`[ConditionEvaluator] Unknown condition: ${condition}`);
-    return true;
+    return false;
   }
 
   /**
@@ -336,6 +399,13 @@ class ConditionEvaluator {
       project_has_backend: 'No backend framework detected',
       supabase_configured: 'Supabase not configured or missing environment variables',
       qa_review_approved: 'QA review not yet approved',
+      // Runtime-resolved conditions
+      user_wants_ai_generation: 'Orchestrator signalled: user declined AI UI generation',
+      stories_remaining: 'Orchestrator signalled: story backlog is empty',
+      epic_complete: 'Orchestrator signalled: epic is not yet complete',
+      architecture_suggests_prd_changes: 'Orchestrator signalled: no PRD changes suggested by architecture review',
+      po_checklist_issues: 'Orchestrator signalled: PO checklist passed with no issues',
+      user_has_generated_ui: 'Orchestrator signalled: no generated UI present in project',
     };
 
     const reasons = failed.map((c) => explanations[c] || `Condition not met: ${c}`);

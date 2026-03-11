@@ -94,7 +94,12 @@ class CircuitBreaker {
    */
   recordFailure() {
     this._failureCount++;
-    this._lastFailureTime = Date.now();
+
+    // Only update lastFailureTime when not already OPEN
+    // to preserve the original recovery timeout
+    if (this._state !== STATE_OPEN) {
+      this._lastFailureTime = Date.now();
+    }
 
     if (this._state === STATE_HALF_OPEN) {
       // Any failure in half-open re-opens the circuit
