@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DMN 1.3 Export Template — Business Rules Extraction Squad -->
+<!-- Based on OMG Decision Model and Notation (DMN) v1.3 specification -->
+<!-- Agent: james-taylor (DMN standard co-author) -->
+
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"
+             xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/"
+             xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/"
+             xmlns:feel="https://www.omg.org/spec/DMN/20191111/FEEL/"
+             id="{SYSTEM_ID}_decisions"
+             name="{SYSTEM_NAME} — Extracted Business Rules"
+             namespace="https://bre.aiox.dev/{SYSTEM_ID}">
+
+  <!-- ============================================ -->
+  <!-- METADATA                                      -->
+  <!-- ============================================ -->
+  <!-- extraction_date: {YYYY-MM-DD}                 -->
+  <!-- source_system: {SYSTEM_NAME}                  -->
+  <!-- source_stack: {COBOL|Java|.NET|ERP|mixed}     -->
+  <!-- total_rules: {N}                              -->
+  <!-- total_decisions: {N}                          -->
+  <!-- extraction_tool: BRE Squad v2.0               -->
+
+  <!-- ============================================ -->
+  <!-- INPUT DATA                                    -->
+  <!-- ============================================ -->
+  <!-- Define all input data elements used by decisions -->
+
+  <inputData id="input_{INPUT_ID}" name="{Input Name}">
+    <description>{Description of input data}</description>
+    <variable id="var_{INPUT_ID}" name="{Input Name}" typeRef="string"/>
+    <!-- typeRef options: string, number, boolean, date, time, dateTime -->
+    <!-- For complex types, define itemDefinition below -->
+  </inputData>
+
+  <!-- Repeat for each input data element -->
+
+  <!-- ============================================ -->
+  <!-- ITEM DEFINITIONS (Complex Types)              -->
+  <!-- ============================================ -->
+
+  <itemDefinition id="type_{TYPE_ID}" name="{Type Name}">
+    <description>{From business glossary}</description>
+    <itemComponent id="comp_{COMP_ID}" name="{Component Name}">
+      <typeRef>string</typeRef>
+    </itemComponent>
+    <!-- Repeat for each component -->
+  </itemDefinition>
+
+  <!-- ============================================ -->
+  <!-- KNOWLEDGE SOURCES                             -->
+  <!-- ============================================ -->
+  <!-- Trace to business motivation / regulatory source -->
+
+  <knowledgeSource id="ks_{KS_ID}" name="{Source Name}">
+    <description>{Business motivation or regulatory reference}</description>
+    <!-- e.g., "SOX Section 302 — CEO/CFO certification of financial reports" -->
+    <!-- e.g., "Business Policy BP-001 — Premium customer discount policy" -->
+  </knowledgeSource>
+
+  <!-- ============================================ -->
+  <!-- BUSINESS KNOWLEDGE MODELS                     -->
+  <!-- ============================================ -->
+  <!-- Reusable decision logic (rule families) -->
+
+  <businessKnowledgeModel id="bkm_{BKM_ID}" name="{Rule Family Name}">
+    <description>{Rule family description from Decision Model}</description>
+    <variable id="var_bkm_{BKM_ID}" name="{Rule Family Name}"/>
+    <encapsulatedLogic id="logic_{BKM_ID}">
+      <formalParameter id="param_{PARAM_ID}" name="{Parameter}" typeRef="string"/>
+      <context id="ctx_{BKM_ID}">
+        <contextEntry>
+          <variable id="ce_var_{ID}" name="{Entry Name}"/>
+          <literalExpression id="le_{ID}">
+            <text>{FEEL expression}</text>
+          </literalExpression>
+        </contextEntry>
+      </context>
+    </encapsulatedLogic>
+  </businessKnowledgeModel>
+
+  <!-- ============================================ -->
+  <!-- DECISIONS                                     -->
+  <!-- ============================================ -->
+
+  <decision id="dec_{DEC_ID}" name="{Decision Name}">
+    <description>{Decision description}</description>
+    <question>{What question does this decision answer?}</question>
+    <allowedAnswers>{Possible outcomes}</allowedAnswers>
+    <variable id="var_dec_{DEC_ID}" name="{Decision Name}" typeRef="string"/>
+
+    <!-- Input data requirements -->
+    <informationRequirement id="ir_{ID}">
+      <requiredInput href="#{input_ID}"/>
+    </informationRequirement>
+
+    <!-- Knowledge source (traceability) -->
+    <authorityRequirement id="ar_{ID}">
+      <requiredAuthority href="#{ks_ID}"/>
+    </authorityRequirement>
+
+    <!-- Decision logic as decision table -->
+    <decisionTable id="dt_{DEC_ID}" hitPolicy="UNIQUE" aggregation="COLLECT">
+      <!-- hitPolicy: UNIQUE | FIRST | PRIORITY | ANY | COLLECT | RULE ORDER | OUTPUT ORDER -->
+
+      <!-- Input columns (conditions) -->
+      <input id="dtinput_{ID}" label="{Condition Name}">
+        <inputExpression id="ie_{ID}" typeRef="string">
+          <text>{FEEL expression for input}</text>
+        </inputExpression>
+        <inputValues id="iv_{ID}">
+          <text>{Allowed values list}</text>
+        </inputValues>
+      </input>
+
+      <!-- Output columns (conclusions) -->
+      <output id="dtoutput_{ID}" label="{Conclusion Name}" name="{output_var}" typeRef="string">
+        <outputValues id="ov_{ID}">
+          <text>{Allowed output values}</text>
+        </outputValues>
+      </output>
+
+      <!-- Rules (rows) -->
+      <rule id="rule_{RULE_ID}">
+        <description>BR-{MODULE}-{SEQ}: {Rule name from catalog}</description>
+        <inputEntry id="ie_rule_{ID}">
+          <text>{Condition value or FEEL expression}</text>
+        </inputEntry>
+        <outputEntry id="oe_rule_{ID}">
+          <text>{Conclusion value}</text>
+        </outputEntry>
+      </rule>
+
+      <!-- Repeat for each rule row -->
+    </decisionTable>
+  </decision>
+
+  <!-- Repeat for each decision -->
+
+  <!-- ============================================ -->
+  <!-- DECISION REQUIREMENTS DIAGRAM (DRD)           -->
+  <!-- ============================================ -->
+
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="drd_{SYSTEM_ID}" name="{System Name} — Decision Requirements">
+
+      <!-- Decision shapes -->
+      <dmndi:DMNShape id="shape_dec_{DEC_ID}" dmnElementRef="dec_{DEC_ID}">
+        <dc:Bounds x="300" y="100" width="180" height="80"/>
+      </dmndi:DMNShape>
+
+      <!-- Input data shapes -->
+      <dmndi:DMNShape id="shape_input_{INPUT_ID}" dmnElementRef="input_{INPUT_ID}">
+        <dc:Bounds x="300" y="300" width="180" height="60"/>
+      </dmndi:DMNShape>
+
+      <!-- Knowledge source shapes -->
+      <dmndi:DMNShape id="shape_ks_{KS_ID}" dmnElementRef="ks_{KS_ID}">
+        <dc:Bounds x="550" y="100" width="180" height="80"/>
+      </dmndi:DMNShape>
+
+      <!-- Information requirement edges -->
+      <dmndi:DMNEdge id="edge_ir_{ID}" dmnElementRef="ir_{ID}">
+        <di:waypoint x="390" y="300"/>
+        <di:waypoint x="390" y="180"/>
+      </dmndi:DMNEdge>
+
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+
+</definitions>

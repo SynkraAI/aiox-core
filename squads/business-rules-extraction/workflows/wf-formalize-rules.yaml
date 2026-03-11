@@ -1,0 +1,167 @@
+name: wf-formalize-rules
+version: "2.0.0"
+description: |
+  Workflow para formalizar regras de negocio ja extraidas em formato padronizado.
+  Use quando as regras ja foram extraidas mas precisam de formalizacao e padronizacao.
+
+trigger: "*formalize"
+orchestrator: bre-chief
+
+# Global enforcement
+enforcement:
+  checkpoint_policy: "no_phase_skip"
+  veto_behavior: "blocking"
+  max_retries_per_phase: 2
+  max_duration_minutes: 120
+  max_waves: 2
+  fallback_on_max_retries: "escalate_to_human"
+  fallback_on_timeout: "export_partial_with_gaps_flagged"
+  metrics_logging: true
+
+phases:
+  - id: phase_1_organize
+    name: "Organize by Rule Family"
+    agent: barbara-von-halle
+    description: "Group raw rules into rule families by conclusion"
+    inputs:
+      - raw_business_rules
+    input_validation:
+      - field: raw_business_rules
+        required: true
+        min_items: 1
+    actions:
+      - "Identify unique conclusions across all rules"
+      - "Group rules by shared conclusion into families"
+      - "Create condition/conclusion tables for each family"
+      - "Apply 3 levels of normalization"
+      - "Challenge each rule: valid? complete? current?"
+    outputs:
+      - rule_families
+      - decision_model
+    checkpoint:
+      type: auto
+      blocking: true
+      checks:
+        - "All rules assigned to a family"
+        - "All tables pass 3NF validation"
+        - "No orphan conditions"
+      veto_conditions:
+        - condition: "Rules have overlapping conclusions across families"
+          severity: critical
+        - condition: "More than 30% of rules fail normalization"
+          severity: critical
+        - condition: "Normalization plateau (re-normalization yields same failures)"
+          severity: medium
+    fallback:
+      on_veto: "Decompose overlapping families, re-normalize failed rules"
+      on_timeout: "Flag non-normalized rules for manual review"
+      on_plateau: "Accept current normalization level, document gaps for SME review"
+
+  - id: phase_2_standardize
+    name: "Vocabulary Standardization"
+    agent: ronald-ross
+    depends_on: phase_1_organize
+    description: "Build business glossary and rewrite in RuleSpeak"
+    inputs:
+      - rule_families
+      - decision_model
+    input_validation:
+      - field: rule_families
+        required: true
+        min_items: 1
+      - field: decision_model
+        required: true
+    actions:
+      - "Extract all business terms from rules"
+      - "Build glossary with definitions"
+      - "Create fact model (terms → facts → rules)"
+      - "Rewrite all rules in RuleSpeak"
+      - "Trace rules to business motivations"
+    outputs:
+      - business_glossary
+      - fact_model
+      - rulespeak_rules
+    checkpoint:
+      type: human_review
+      blocking: true
+      question: "Can business stakeholders read and understand the standardized rules?"
+      veto_conditions:
+        - condition: "Glossary has undefined terms"
+          severity: critical
+        - condition: "Rules not readable by business stakeholders"
+          severity: major
+        - condition: "Glossary term disambiguation needed (same term, multiple meanings)"
+          severity: major
+    fallback:
+      on_veto: "Simplify vocabulary, add missing glossary definitions"
+      on_timeout: "Export with glossary gaps documented"
+      on_disambiguation: "Create context-qualified terms, re-validate with stakeholders"
+
+  - id: phase_3_verify
+    name: "Verify & Export"
+    agents:
+      - jan-vanthienen
+      - james-taylor
+    depends_on: phase_2_standardize
+    description: "Verify tables and export to DMN"
+    inputs:
+      - rulespeak_rules
+      - decision_model
+    input_validation:
+      - field: rulespeak_rules
+        required: true
+        min_items: 1
+      - field: decision_model
+        required: true
+    actions:
+      - "Check completeness of all decision tables"
+      - "Check consistency (no contradictions)"
+      - "Contract tables to minimum rows"
+      - "Model decisions using DMN notation"
+      - "Export DMN file"
+    outputs:
+      - verified_tables
+      - dmn_export
+    checkpoint:
+      type: quality_gate
+      blocking: true
+      gate: extraction-quality-gate.md
+      veto_conditions:
+        - condition: "Contradictions found in tables"
+          severity: critical
+        - condition: "Incomplete tables without justification"
+          severity: major
+    fallback:
+      on_veto: "Return contradictory tables to von-halle for re-normalization"
+      on_timeout: "Export partial DMN with verification gaps flagged"
+
+metrics:
+  log_file: "metrics-log.json"
+  per_phase:
+    - timestamp_start
+    - timestamp_end
+    - rules_count
+    - errors_count
+    - retries_count
+    - veto_conditions_triggered
+  per_pipeline:
+    - total_duration_minutes
+    - total_rules_formalized
+    - normalization_success_rate
+    - glossary_completeness_rate
+
+# Rule completeness validation
+rule_validation:
+  checklist: rule-completeness-checklist.md
+  apply_at: phase_1_organize
+  mode: per_rule
+  threshold: "90% pass (40/45 checkboxes)"
+  on_fail: "Flag rule as INCOMPLETE, queue for re-work"
+
+completion_criteria:
+  - "All rules formalized in standard format"
+  - "Business glossary complete"
+  - "Decision tables verified"
+  - "DMN export available"
+  - "Zero critical veto conditions unresolved"
+  - "Metrics log exported"

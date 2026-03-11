@@ -1,0 +1,97 @@
+name: business-rules-extraction
+version: "2.1.0"
+domain: "Legacy System Business Rules Extraction & Standardization"
+description: |
+  Squad especializado em extrair, formalizar e padronizar regras de negocio
+  de sistemas legados (COBOL, ERP, Java legado, .NET, etc.) em documentacao
+  consistente e reutilizavel.
+
+  Baseado em 7 elite minds com frameworks documentados:
+  - Harry M. Sneed (COBOL extraction)
+  - Michael Feathers (legacy code analysis)
+  - Barbara von Halle (Decision Model)
+  - Ronald G. Ross (RuleSpeak/SBVR)
+  - James Taylor (Decision Management Systems)
+  - Robert Seacord / Grace Lewis (Risk-Managed Modernization)
+  - Jan Vanthienen (Decision Tables)
+
+keywords:
+  - business rules
+  - legacy systems
+  - reverse engineering
+  - COBOL
+  - mainframe
+  - code archaeology
+  - decision tables
+  - rule extraction
+  - modernization
+  - program comprehension
+  - SBVR
+  - DMN
+  - RuleSpeak
+
+tier_system:
+  tier_0_diagnosis:
+    - bre-chief          # Orchestrator - triage and routing
+    - michael-feathers   # Legacy code analysis & change points
+  tier_1_extraction:
+    - harry-sneed        # COBOL/legacy business logic extraction
+    - barbara-von-halle  # Decision Model formalization
+    - ronald-ross        # RuleSpeak standardization
+  tier_2_systematization:
+    - james-taylor       # Decision Management Systems
+    - robert-seacord     # Risk-Managed Modernization
+    - jan-vanthienen     # Decision Table verification
+
+agents:
+  - bre-chief
+  - michael-feathers
+  - harry-sneed
+  - barbara-von-halle
+  - ronald-ross
+  - james-taylor
+  - robert-seacord
+  - jan-vanthienen
+
+workflows:
+  - wf-extract-rules.yaml     # Full extraction pipeline (6 phases)
+  - wf-formalize-rules.yaml   # Formalization & standardization (3 phases)
+  - wf-quick-extract.yaml     # Quick extraction for small systems <10k LOC (3 phases)
+
+tasks:
+  - analyze-legacy-system.md   # Initial system analysis
+  - extract-business-rules.md  # Rule extraction from code
+  - formalize-rules.md         # Formalize into standard format
+  - create-decision-tables.md  # Decision table creation
+  - validate-rules.md          # Rule validation & verification
+  - generate-catalog.md        # Rule catalog generation
+  - assess-modernization.md    # Modernization readiness assessment
+
+templates:
+  - business-rule-tmpl.yaml        # Standard rule format
+  - decision-table-tmpl.yaml       # Decision table format
+  - rule-catalog-tmpl.md           # Rule catalog document
+  - extraction-report-tmpl.md      # Extraction session report
+  - modernization-assessment-tmpl.md # System assessment
+  - dmn-export-tmpl.xml            # DMN 1.3 export format
+
+checklists:
+  - extraction-quality-gate.md     # Quality gate for extracted rules
+  - rule-completeness-checklist.md # Rule completeness validation
+
+settings:
+  mode: "book-based"
+  fidelity_current: "83.5%"
+  fidelity_target: "90%+"
+  kaizen_score: "84/100"
+  created: "2026-03-09"
+  last_updated: "2026-03-11"
+  dna_sources:
+    - michael-feathers: "Working Effectively with Legacy Code (20K LOC)"
+    - barbara-von-halle: "The Decision Model (22K LOC)"
+    - james-taylor: "Decision Management Systems (7.6K LOC)"
+    - jan-vanthienen: "Decision Tables to Expert Systems (884 LOC)"
+  pending_sources:
+    - harry-sneed: "Papers IEEE/ACM"
+    - ronald-ross: "Business Rule Concepts + BRCommunity"
+    - robert-seacord: "SEI Technical Reports"
