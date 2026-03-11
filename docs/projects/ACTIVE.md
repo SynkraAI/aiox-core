@@ -10,7 +10,7 @@
 | 6 | high-ticket-sales | 25 livros mapeados | tech-search | 2026-03-04 | Definir ordem de leitura |
 | 7 | **renner-silva** | **Clone v1.2 pronto (9.5/10)** | **Kaizen + squad-chief** | **2026-03-09** | **Expandir ME-01 a ME-07, incorporar 15 FPs em KB07** |
 | 8 | **designcode-ui** | **20 componentes + Storybook + demo Nebula** | **design-chief** | **2026-03-10** | **Refinar visual + testes + deploy** |
-| 9 | **meta-ads-prospector** | 🔄 **Pivô: dark posts → IG Posts** | **@pm** | **2026-03-11** | **Pivotar para Instagram Posts** (`~/CODE/Projects/meta-ads-prospector/`) |
+| 9 | **meta-ads-prospector** | **v2.0 Pipeline Apify + dual scoring pronto** | **@dev** | **2026-03-11** | **Testar pipeline com post real** (`~/CODE/Projects/meta-ads-prospector/`) |
 | 10 | **ensinio-prospector-app** | **M1+M2 Done — App com scoring, preview, WhatsApp** | **@dev** | **2026-03-11** | **M3: Envio via Evolution API + GHL sync** |
 | 11 | **naval-ravikant-mind** | **Mind Clone Elite 95% — falta smoke test** | **mind-cloning** | **2026-03-11** | **Rodar smoke test (3 testes)** |
 
