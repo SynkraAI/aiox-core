@@ -3,7 +3,7 @@
 ## Estado Atual
 - **Squad base:** `ensinio-whatsapp-prospector` v3.0.0 (pipeline CLI completo)
 - **Project Path:** `~/CODE/Projects/ensinio-prospector-app/`
-- **Status:** PRD v0.2 completo — todas as decisões tomadas, pronto para M1
+- **Status:** M1 Done + M2 Done — App com scoring, preview, WhatsApp connect
 - **Bloqueadores:** Nenhum
 
 ## Visão do Produto
@@ -22,20 +22,18 @@ App de prospecção via WhatsApp Web com outreach integrado e tracking de envios
 
 ## Última Sessão
 - **Data:** 2026-03-11
-- **Agente/Squad:** Nenhum (setup + PRD)
+- **Agente/Squad:** @dev (implementação)
 - **O que foi feito:**
-  1. Projeto criado com /new-project
-  2. Deep research: integração WhatsApp Web (5 alternativas)
-  3. Mapeamento completo do squad (4 agentes, 9 fases, 411 linhas)
-  4. PRD v0.2 completo — fluxo App→WhatsApp→GHL definido
-  5. 7 decisões tomadas, 0 em aberto
+  1. PRD atualizado: fluxo ZIP upload (não API), WhatsApp só p/ envio
+  2. M1 Done: Next.js 15 + Supabase schema + chat parser + upload ZIP + dashboard
+  3. M2 Done: scoring engine + preview mensagens + WhatsApp connect + Evolution API
+  4. VK Talks processado: 80 membros, 50 telefones, 28 prospects scorados, 28 mensagens
+  5. 12 decisões tomadas, 0 em aberto
 
 ## Próximo Passo
-- Criar story para M1 (Story-Driven Development)
-- Setup Next.js + Tailwind + shadcn/ui em ~/CODE/Projects/ensinio-prospector-app/
-- Setup Supabase (schema)
-- Deploy Evolution API local (Docker)
-- QR code login funcional + listagem de grupos
+- M3: Envio direto via Evolution API + integração GHL (criar contato pós-envio)
+- Ou: deploy Evolution API Docker local e testar QR code real
+- Ou: processar mais grupos (enviar mais ZIPs)
 
 ## Squads Relacionados
 - `ensinio-whatsapp-prospector` — Pipeline CLI de prospecção via WhatsApp (v3.0.0, 77 prospects processados)
