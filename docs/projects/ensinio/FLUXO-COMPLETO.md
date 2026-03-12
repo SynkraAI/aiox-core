@@ -1,6 +1,8 @@
-# 🎯 Fluxo Completo: Ensinio WhatsApp Prospector v4.0
+# 🎯 Fluxo Completo: Ensinio WhatsApp Prospector v5.0 (Sheets-First)
 
-**Documento:** Explicação visual do fluxo de dados desde o ZIP do WhatsApp até o Google Sheets (com sincronização GHL)
+**Documento:** Explicação visual do fluxo de dados desde o ZIP do WhatsApp até o Google Sheets (com sincronização GHL opcional)
+
+**Arquitetura:** Google Sheets = Fonte de Verdade | GHL = CRM Secundário
 
 ---
 
@@ -13,23 +15,40 @@ ZIP do WhatsApp
      ↓
 [VALIDATE] → Valida dados
      ↓
-[RESOLVE PHONES] → Pede números dos contatos
+[RESOLVE PHONES] → Pede números dos contatos (INTERATIVO)
      ↓
 [LOAD KB] → Carrega Ensinio solutions
      ↓
 [ANALYZE] → Analisa com ICP + Red Flags + Scoring
      ↓
-[VALIDATE SCORING] → Valida scores
-     ↓
 [WRITE OUTREACH] → Gera mensagens personalizadas
      ↓
 [VALIDATE OUTREACH] → Valida mensagens
      ↓
-[GHL SYNC] → Cria contatos, deals e envia messages no GHL
+═══════════════════════════════════════════════════
+[GOOGLE SHEETS] ← FASE 8: FONTE DE VERDADE ✅
+   ├─ Todos os dados + análise
+   ├─ Mensagens prontas
+   ├─ Links WhatsApp diretos
+   └─ Status de envio (editável pelo usuário)
+═══════════════════════════════════════════════════
      ↓
-[SHEETS] → Popula Google Sheets com resultados
+👤 [USUÁRIO ENVIA] → WhatsApp Web (MANUAL)
+     ├─ Clica link em Coluna G
+     ├─ Copia mensagem de Coluna F
+     └─ Marca "✅ Enviado" em Coluna H
      ↓
-📊 RESULTADO FINAL
+═════════════════════════════════════════════════════
+[GHL SYNC - OPCIONAL] ← FASE 9: CRM SECUNDÁRIO
+   ├─ Cria contatos
+   ├─ Cria deals
+   ├─ Aplica tags
+   ├─ Preenche Links GHL (Coluna I)
+   ├─ Preenche GHL IDs (Coluna J)
+   └─ ❌ NÃO envia mensagens (você já enviou)
+═════════════════════════════════════════════════════
+     ↓
+📊 RESULTADO FINAL: Sheets + GHL Sincronizados
 ```
 
 ---
@@ -404,132 +423,19 @@ Abs
 
 ---
 
-## 📍 FASE 5: GHL SYNC (Sincronizar com GoHighLevel) 🆕 v4.0
+## 📍 FASE 8: POPULATE GOOGLE SHEETS (Preencher planilha) - BLOQUEADOR ✅
 
 **Agente:** Atlas (prospector-chief)
 **Modelo:** sonnet
-**Task:** `sync-to-ghl.md`
-**Tempo:** ~2-5 minutos (rate limited: 600ms entre requests)
-**Status:** ⚠️ PODE FALHAR (API issues)
-
-### PASSO 0: PERGUNTAR TAGS (OBRIGATÓRIO)
-```
-Qual tag deseja aplicar aos contatos no GHL?
-
-1. "Leads Fosc" (default)
-2. Outra tag
-3. Múltiplas tags
-→ Aguarda resposta do usuário
-```
-
-### PASSO 1: Criar/Buscar Contatos
-Para cada prospect aprovado:
-
-```
-REQUEST: POST /contacts/
-{
-  "locationId": "XXXXXX",
-  "firstName": "João",
-  "lastName": "Silva",
-  "phone": "+5531999887766",
-  "source": "WhatsApp Group Prospector",
-  "tags": ["Leads Fosc"],
-  "customFields": {
-    "whatsapp_group": "Mentoria 50k",
-    "prospect_score": "7.2",
-    "ensinio_pillar": "Marketing & Growth",
-    "prospect_type": "Content Creator"
-  }
-}
-
-RESPONSE:
-{
-  "contactId": "ABC123",
-  "firstName": "João",
-  "phone": "+5531999887766"
-}
-```
-
-**Deduplicação:** Busca por telefone antes de criar (`GET /contacts/lookup/phone/{phone}`)
-- Se existe → apenas adiciona tags
-- Se não existe → cria novo
-
-### PASSO 2: Criar Deals (Oportunidades)
-Para cada contato criado:
-
-```
-REQUEST: POST /opportunities/
-{
-  "pipelineId": "xRqrV2LoT6E8iwLW4Syi",
-  "pipelineStageId": "d3c25373-2b78-43d4-af3a-b4781f15874e",
-  "locationId": "XXXXXX",
-  "contactId": "ABC123",
-  "name": "João Silva - Mentoria 50k",
-  "source": "WhatsApp Prospector",
-  "status": "open",
-  "monetaryValue": 0
-}
-
-RESPONSE:
-{
-  "dealId": "DEAL123",
-  "contactId": "ABC123",
-  "pipelineId": "xRqrV2LoT6E8iwLW4Syi",
-  "stage": "Para prospectar"  ← Estágio inicial
-}
-```
-
-### PASSO 3: Enviar Mensagens (se `send_messages: true`)
-Para cada deal criado:
-
-```
-REQUEST: POST /messages/
-{
-  "locationId": "XXXXXX",
-  "contactId": "ABC123",
-  "type": "WhatsApp",
-  "message": "Opa João!\n\nAchei demais seu podcast! 🎙️\n...",
-  "source": "WhatsApp Prospector"
-}
-
-RESPONSE: 200 OK
-```
-
-### ⚠️ POSSÍVEIS ERROS NO GHL SYNC
-
-**BLOCKER CRÍTICO ENCONTRADO NA SESSÃO ANTERIOR:**
-```
-❌ POST /opportunities/ retorna HTTP 404 (Not Found)
-   Endpoint: POST /opportunities/
-   Versão API: 2021-07-28
-   Status: 49 contatos falharam com 404
-```
-
-**POSSÍVEL SOLUÇÃO:** Tentar `/deals/` em vez de `/opportunities/`
-- Contatos FUNCIONAM via `/contacts/` ✅
-- Deals FALHAM via `/opportunities/` ❌
-- Precisa investigar endpoint correto
-
-### ⚠️ QUALITY GATE QG-005: GHL Sync
-- Contatos criados no GHL?
-- Deals criados no pipeline?
-- Mensagens enviadas com sucesso?
-- Rate limiting respeitado (600ms)?
-- Deduplicação funcionando?
-
----
-
-## 📍 FASE 6: POPULATE GOOGLE SHEETS (Preencher planilha)
-
-**Agente:** Atlas (prospector-chief)
-**Modelo:** sonnet
-**Task:** `populate-sheet.md`
-**Tempo:** ~2-5 minutos
+**Task:** `populate-sheet-v5.md`
+**Tempo:** ~30-60s
+**Status:** ✅ CRÍTICO (bloqueador, sem fallback)
+**Tipo:** Fonte de Verdade
 
 ### O que acontece:
 1. ✅ Pega todos os prospects aprovados
 2. ✅ Ordena por temperature score (mais quente primeiro)
-3. ✅ Formata dados para Google Sheets
+3. ✅ Formata dados para Google Sheets (10 colunas)
 4. ✅ Popula abas conforme `sheet_mode`:
 
 ### SHEET MODES:
@@ -549,22 +455,43 @@ C) append
    → Não sobrescreve dados anteriores
 ```
 
-### ESTRUTURA DO GOOGLE SHEETS:
+### ESTRUTURA DO GOOGLE SHEETS (10 COLUNAS):
 ```
 Coluna A: Nome (primeiro nome apenas)
 Coluna B: Telefone (+55XXXXXXXXXXX)
 Coluna C: Grupo do WhatsApp
-Coluna D: Nome/nicho do projeto
-Coluna E: Explicação projeto
-Coluna F: Mensagem WhatsApp
-Coluna G: Link WhatsApp direto (URL-encoded)
+Coluna D: Projeto/Nicho
+Coluna E: Explicação Projeto (1-2 linhas)
+Coluna F: Mensagem WhatsApp (personalizada, pronta para enviar)
+Coluna G: Link WhatsApp Direto (https://wa.me/+55...)
+Coluna H: Status Envio ⭐ (editável: ⬜ Não enviado | ✅ Enviado | ⚠️ Erro)
+Coluna I: Link GHL (preenchido em Phase 9)
+Coluna J: GHL Contact ID (preenchido em Phase 9)
 
 Classificação: Por TEMPERATURE (mais quente primeiro)
 ```
 
 ### EXEMPLO DE LINHA FINAL:
 ```
-| João Silva | +5531999887766 | Mentoria 50k | Podcast | ... | Opa João!... | https://wa.me/55... |
+| João Silva | +5531999887766 | Mentoria 50k | Podcast | Monetiza... | Opa João!... | https://wa.me/55... | ⬜ Não... | [vazio] | [vazio] |
+                                                                                       ↑
+                                                                           (preenchido após GHL sync)
+```
+
+### 🎯 FLUXO DO USUÁRIO (FASE 8):
+```
+1. Abre Google Sheets (pronto!)
+2. Para cada linha:
+   a. Clica em Coluna G (Link WhatsApp)
+   b. Abre WhatsApp Web
+   c. Copia texto da Coluna F
+   d. Cola na conversa
+   e. Envia
+   f. Volta pro Sheets
+   g. Marca "✅ Enviado" em Coluna H
+3. Quando terminar (ou em paralelo):
+   - Executa GHL Sync (Phase 9)
+   - Atualiza Colunas I+J com links
 ```
 
 ### ⚠️ QUALITY GATE QG-004: Sheet Population
@@ -572,31 +499,184 @@ Classificação: Por TEMPERATURE (mais quente primeiro)
 - Número de linhas matches contatos aprovados?
 - Ordenação por temperature OK?
 - URLs de WhatsApp funcionam?
+- Links contêm message pre-encoded?
+- Colunas I+J estão vazias (para Phase 9)?
+
+---
+
+## 📍 FASE 9: GHL SYNC (Sincronizar com GoHighLevel) - OPCIONAL
+
+**Agente:** Atlas (prospector-chief)
+**Modelo:** sonnet
+**Task:** `sync-to-ghl-v5.md`
+**Tempo:** ~2-5 minutos (rate limited: 600ms entre requests)
+**Status:** ⚠️ OPCIONAL (não bloqueador, sem fallback se falhar)
+**Tipo:** CRM Secundário (lê de Sheets)
+
+### ⚠️ IMPORTANTE: NÃO ENVIA MENSAGENS!
+
+```
+❌ ESTA FASE NÃO ENVIA NENHUMA MENSAGEM
+   Envio já foi feito em Phase 8 (manual via WhatsApp Web)
+   Você já marcou "✅ Enviado" em Coluna H
+
+✅ ESTA FASE FAZ:
+   - Cria contatos no GHL
+   - Cria deals no pipeline
+   - Aplica tags aos contatos
+   - Preenche Link GHL em Coluna I
+   - Preenche GHL Contact ID em Coluna J
+```
+
+### PASSO 0: PERGUNTAR TAGS (OBRIGATÓRIO)
+```
+Qual tag deseja aplicar aos contatos no GHL?
+
+1. "Leads Fosc" (default)
+2. Outra tag
+3. Múltiplas tags
+→ Aguarda resposta do usuário
+```
+
+### PASSO 1: Ler Dados do Sheets
+```
+Lê todas as linhas da Sheets (Phase 8)
+Filtra apenas contatos onde Coluna H = "✅ Enviado"
+(opcional: sincronizar também "Não enviado" se user quer)
+```
+
+### PASSO 2: Criar/Buscar Contatos
+Para cada prospect lido do Sheets:
+
+```
+REQUEST: POST /contacts/
+{
+  "locationId": "XXXXXX",
+  "firstName": "João",
+  "lastName": "Silva",
+  "phone": "+5531999887766",
+  "source": "WhatsApp Group Prospector",
+  "tags": ["Leads Fosc"],  ← TAG PERGUNTADO EM PASSO 0
+  "customFields": {
+    "whatsapp_group": "Mentoria 50k",
+    "prospect_score": "7.2",
+    "ensinio_pillar": "Marketing & Growth",
+    "prospect_type": "Content Creator",
+    "sheets_source_row": "2"  ← Rastreamento
+  }
+}
+
+RESPONSE:
+{
+  "contactId": "ABC123",
+  "firstName": "João",
+  "phone": "+5531999887766"
+}
+```
+
+**Deduplicação:** Busca por telefone antes de criar (`GET /contacts/lookup/phone/{phone}`)
+- Se existe → apenas adiciona tags
+- Se não existe → cria novo
+
+### PASSO 3: Criar Deals
+Para cada contato criado:
+
+```
+REQUEST: POST /deals/
+{
+  "pipelineId": "xRqrV2LoT6E8iwLW4Syi",
+  "pipelineStageId": "d3c25373-2b78-43d4-af3a-b4781f15874e",
+  "locationId": "XXXXXX",
+  "contactId": "ABC123",
+  "name": "João Silva - Mentoria 50k",
+  "source": "WhatsApp Prospector",
+  "status": "open",
+  "monetaryValue": 0
+}
+
+RESPONSE:
+{
+  "dealId": "DEAL123",
+  "contactId": "ABC123",
+  "pipelineId": "xRqrV2LoT6E8iwLW4Syi",
+  "stage": "Para prospectar"
+}
+```
+
+### PASSO 4: Atualizar Sheets com Links GHL
+```
+UPDATE Sheets {
+  Coluna I: "https://app.highlevel.com/contacts/{contact_id}",
+  Coluna J: "{contact_id}"
+}
+```
+
+### PASSO 5: ❌ NÃO FAZER
+```
+❌ Enviar mensagens via GHL
+❌ Usar POST /messages/
+❌ Tentar integração WhatsApp do GHL
+❌ Sobrescrever Status Envio (Coluna H)
+
+Por quê? Você já enviou manualmente em Phase 8
+       GHL não deixa enviar dessa forma
+       Sheets é a fonte de verdade
+```
+
+### ⚠️ POSSÍVEIS ERROS NO GHL SYNC
+
+**ENDPOINT DECISION:**
+```
+Tentar /deals/ primeiro:
+  POST /deals/ → Se 200, usar /deals/
+
+Fallback para /opportunities/:
+  POST /opportunities/ → Se 200, usar /opportunities/
+
+NOTA: Versão anterior falhou com /opportunities/ (404)
+      Provavelmente /deals/ é o correto
+```
+
+### ⚠️ QUALITY GATE QG-009: GHL Sync
+- Contatos criados no GHL?
+- Deals criados no pipeline?
+- Rate limiting respeitado (600ms)?
+- Deduplicação funcionando?
+- Colunas I+J atualizadas no Sheets?
+- ❌ Nenhuma mensagem foi enviada?
 
 ---
 
 ## 📊 RESULTADO FINAL
 
-### Google Sheets Output
+### Google Sheets (Fase 8) - Fonte de Verdade ✅
 ```
 Spreadsheet ID: 124EQQAkmt9D7-49LbR-Jx64DhxdtCwceUQgqolk5ZFI
 
 Dados consolidados:
-├── Coluna A-G: Prospect data
+├── Coluna A-J: Prospect data + status + GHL links
 ├── Linha 1: Headers
 ├── Linhas 2+: Um prospect por linha
 ├── Ordenação: Temperature DESC (mais quente primeiro)
+├── Coluna H: Status Envio (você preenche)
+├── Coluna I+J: GHL Links (Fase 9 preenche)
 └── Filtros: Aplicáveis por coluna
+
+TOTAL: 145 contatos prontos para enviar
 ```
 
-### GoHighLevel
+### GoHighLevel (Fase 9) - CRM Secundário (Opcional)
 ```
-Contatos criados: 145
+Status: Sincronizado com Sheets (APÓS Phase 8)
+
+Contatos criados: 145 (lidos de Sheets)
 Deals criados: 145
-Mensagens enviadas: 145
-Tags aplicadas: "Leads Fosc"
+Mensagens enviadas: 0 ❌ (você envia no WhatsApp Web)
+Tags aplicadas: "Leads Fosc" (perguntado em Phase 9)
 Pipeline: "Qualificacao"
 Stage: "Para prospectar"
+
+Backup: Coluna I+J do Sheets têm links
 ```
 
 ### Relatório de Qualidade
@@ -608,8 +688,9 @@ Batch Summary:
 ├── Red flags blocked: 8
 ├── Qualified prospects: 142 (95%)
 ├── Messages approved: 145 (100%)
-├── GHL sync successful: 145
-├── Sheet population successful: 145
+├── Sheet population successful: 145 ✅
+├── Messages sent via WhatsApp: [manual, user counted]
+├── GHL sync successful: [optional, depends on Phase 9]
 └── Batch quality score: 96.7%
 ```
 
@@ -617,26 +698,26 @@ Batch Summary:
 
 ## ⚠️ POTENCIAIS PROBLEMAS IDENTIFICADOS
 
-### 1. **BLOCKER CRÍTICO: GHL API Endpoint 404**
+### 1. **ENDPOINT DECISION: /deals/ vs /opportunities/**
 ```
-Status: ACTIVE
-Severity: CRITICAL
-Impact: GHL sync falha para deals
+Status: NEEDS TESTING
+Severity: MEDIUM (Phase 9 optional)
+Impact: GHL sync pode falhar se endpoint errado
 
-Error: POST /opportunities/ → 404 Not Found
-Cause: Endpoint pode estar errado/desatualizado
-Solution: Tentar /deals/ em vez de /opportunities/
+Error anterior: POST /opportunities/ → 404 Not Found
+Solução: Testar POST /deals/ primeiro
+Fallback: Se /deals/ falhar, tentar /opportunities/
 
 Files affected:
-- squads/ensinio-whatsapp-prospector/tasks/sync-to-ghl.md
-- docs/projects/ensinio/sessions/2026-03-12-ghl-sync-test.md
+- squads/ensinio-whatsapp-prospector/tasks/sync-to-ghl-v5.md
 ```
 
-### 2. **Low Phone Coverage Warning**
+### 2. **Phone Coverage Warning**
 ```
 Atual: ~43-65% dos contatos têm telefone
 Target: >80%
 Impacto: Phase 2b (resolve phones) é obrigatória e manual
+Mitigação: Usuário fornece imagens + OCR automático
 ```
 
 ### 3. **Phone-book Management**
@@ -648,60 +729,70 @@ Current: Sem duplicação entre grupos ✅
 
 ### 4. **GHL Tag Prompt**
 ```
-Requirement: SEMPRE perguntar ao usuário antes de sync
+Requirement: SEMPRE perguntar ao usuário antes de sync (Phase 9)
 Current: Implementado com prompt interativo ✅
 ```
 
 ---
 
-## 🔍 CHECKLIST: O QUE VOCÊ DEVE REVISAR
+## 🔍 CHECKLIST: ARQUITETURA v5.0
 
 ### Cada Fase Tem:
-- [ ] Agente designado (Cipher, Atlas, Minerva, Velvet)?
-- [ ] Modelo apropriado (haiku/sonnet/opus)?
-- [ ] Task file documentada?
-- [ ] Quality gate definido?
-- [ ] Error handling documentado?
-- [ ] Veto conditions claras?
+- [x] Agente designado (Cipher, Atlas, Minerva, Velvet)?
+- [x] Modelo apropriado (haiku/sonnet/opus)?
+- [x] Task file documentada?
+- [x] Quality gate definido?
+- [x] Error handling documentado?
+- [x] Veto conditions claras?
 
-### Pipeline Geral:
-- [ ] Ordem das fases está correta?
-- [ ] Dados fluem corretamente entre fases?
-- [ ] Todos os quality gates são blocking quando necessário?
-- [ ] GHL sync está antes do Sheets (ordem importa)?
-- [ ] Batch pipeline permite múltiplos grupos?
+### Novo Fluxo (Sheets-First):
+- [x] Phase 8 (Sheets) é BLOQUEADOR?
+- [x] Phase 9 (GHL) é OPCIONAL?
+- [x] Sheets = Fonte de Verdade?
+- [x] GHL = CRM Secundário?
+- [x] Envio = Manual via WhatsApp Web?
+- [x] Phase 9 NÃO envia mensagens?
 
 ### Integrações:
-- [ ] GHL API endpoint está correto? ⚠️ **PROBLEMA CONHECIDO**
 - [ ] Google Sheets API funcionando?
 - [ ] Phone books sendo armazenados per group?
+- [ ] GHL endpoint correto (/deals/ vs /opportunities/)?
 - [ ] Tags sendo aplicadas corretamente no GHL?
+- [ ] Coluna H (Status Envio) editável no Sheets?
+- [ ] Colunas I+J preenchidas corretamente em Phase 9?
 
 ---
 
-## 📞 PRÓXIMOS PASSOS PARA VOCÊ REVISAR
+## 📞 PRÓXIMOS PASSOS PARA IMPLEMENTAR
 
-1. **Investigar GHL Endpoint 404**
-   - Testar `/deals/` em vez de `/opportunities/`
-   - Validar versão API (2021-07-28 pode estar desatualizada)
-   - Documentar endpoint correto
+1. **Phase 8: Criar `populate-sheet-v5.md`**
+   - Ler dados analisados de Phase 7
+   - Formatar 10 colunas (A-J)
+   - Criar URLs WhatsApp pre-encoded
+   - Deixar Colunas H, I, J vazias
+   - Ordenar por temperature
 
-2. **Validar Phone Coverage**
+2. **Phase 9: Criar `sync-to-ghl-v5.md`**
+   - Ler dados do Sheets (Phase 8)
+   - Testar endpoint correto (/deals/ vs /opportunities/)
+   - Criar contatos + deals
+   - Preencher Colunas I+J
+   - ❌ Não enviar mensagens
+
+3. **Validação Geral**
    - Phase 2b é obrigatória para contatos sem número
-   - Usuário precisa estar disponível para responder
+   - Usuário edita Coluna H (Status Envio)
+   - GHL Sync é opcional (não bloqueia pipeline)
 
-3. **Testar Batch Processing**
-   - Múltiplos ZIPs sendo processados sequencialmente
-   - Consolidação de resultados funcionando
-   - Phone-books não sendo misturados
-
-4. **Verificar GHL Sync Completo**
-   - Contatos criados ✅
-   - Deals criados ❌ (404 error)
-   - Mensagens enviadas ⚠️ (depende de deal ser criado)
+4. **Testes End-to-End**
+   - ZIP → Sheets completo (pronto para envio)
+   - Usuário envia via WhatsApp Web
+   - GHL Sync sincroniza dados (optional)
+   - Verificar deduplicação
 
 ---
 
-**Versão:** v4.0.0 (com GHL Integration)
+**Versão:** v5.0.0 (Sheets-First Architecture)
 **Data:** 2026-03-12
-**Criado para revisão:** @dev review com @po + @architect
+**Arquitetura:** Google Sheets = Source of Truth | GHL = Secondary CRM
+**Envio:** Manual via WhatsApp Web | Phase 9 ❌ Não envia
