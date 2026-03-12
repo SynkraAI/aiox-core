@@ -40,7 +40,7 @@
   3. ✅ Documentação completa atualizada:
      - `squads/ensinio-mind/README.md` (v2.1.0)
      - `docs/projects/ensinio/INDEX.md` (sessão adicionada)
-  4. ✅ Gerado quality-dashboard para monitoramento
+  4. ✅ Gerado quality-dashboard para monitoramento (salvo em `docs/projects/ensinio/quality-dashboard-ensinio.md`)
   5. ✅ Commit pronto para push (delegado para @devops)
 
 ---
