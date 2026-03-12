@@ -3,7 +3,7 @@
 /**
  * Testes unitários para RecoveryHandler
  *
- * Módulo: .aios-core/core/orchestration/recovery-handler.js
+ * Módulo: .aiox-core/core/orchestration/recovery-handler.js
  * Cobertura: todas as funções públicas, edge cases, error paths
  */
 
@@ -17,15 +17,15 @@ jest.mock('fs-extra', () => ({
 }));
 
 // Mock dos módulos de infraestrutura (stuck-detector, rollback-manager, recovery-tracker)
-jest.mock('../../../.aios-core/infrastructure/scripts/stuck-detector', () => {
+jest.mock('../../../.aiox-core/infrastructure/scripts/stuck-detector', () => {
   throw new Error('Module not available');
 }, { virtual: true });
 
-jest.mock('../../../.aios-core/infrastructure/scripts/rollback-manager', () => {
+jest.mock('../../../.aiox-core/infrastructure/scripts/rollback-manager', () => {
   throw new Error('Module not available');
 }, { virtual: true });
 
-jest.mock('../../../.aios-core/infrastructure/scripts/recovery-tracker', () => {
+jest.mock('../../../.aiox-core/infrastructure/scripts/recovery-tracker', () => {
   throw new Error('Module not available');
 }, { virtual: true });
 
@@ -35,7 +35,7 @@ const {
   RecoveryHandler,
   RecoveryStrategy,
   RecoveryResult,
-} = require('../../../.aios-core/core/orchestration/recovery-handler');
+} = require('../../../.aiox-core/core/orchestration/recovery-handler');
 
 // ─────────────────────────────────────────────────────────────────────────────
 //  Helpers
@@ -808,7 +808,7 @@ describe('RecoveryHandler', () => {
       await handler._escalateToHuman(3, new Error('critical failure'), {});
 
       expect(fs.ensureDir).toHaveBeenCalledWith(
-        path.join('/fake/project', '.aios', 'escalations'),
+        path.join('/fake/project', '.aiox', 'escalations'),
       );
       expect(fs.writeJson).toHaveBeenCalledWith(
         expect.stringContaining('escalation-STORY-001-epic3-'),
@@ -990,7 +990,7 @@ describe('RecoveryHandler', () => {
       const report = { epicNum: 3, storyId: 'STORY-001' };
       const resultPath = await handler._saveEscalationReport(report);
 
-      expect(fs.ensureDir).toHaveBeenCalledWith(path.join('/fake/project', '.aios', 'escalations'));
+      expect(fs.ensureDir).toHaveBeenCalledWith(path.join('/fake/project', '.aiox', 'escalations'));
       expect(fs.writeJson).toHaveBeenCalledWith(
         expect.any(String),
         report,

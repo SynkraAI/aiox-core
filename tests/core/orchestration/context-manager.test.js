@@ -1167,11 +1167,11 @@ describe('ContextManager', () => {
       expect(manager._resolveConfidenceThreshold()).toBe(70);
     });
 
-    test('retorna 0 quando env é string vazia (Number("") === 0)', () => {
+    test('retorna fallback 70 quando env é string vazia', () => {
       process.env.AIOX_DELIVERY_CONFIDENCE_THRESHOLD = '';
 
-      // Number('') === 0, que é Number.isFinite, então retorna 0
-      expect(manager._resolveConfidenceThreshold()).toBe(0);
+      // String vazia é tratada como ausente — retorna fallback
+      expect(manager._resolveConfidenceThreshold()).toBe(70);
     });
 
     test('aceita valores decimais', () => {
