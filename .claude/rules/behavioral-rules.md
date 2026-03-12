@@ -1,5 +1,17 @@
 # Behavioral Rules — NEVER / ALWAYS
 
+## CHECKPOINT #0 — READ BEFORE ACT (MANDATORY)
+
+Antes de QUALQUER implementação, SEMPRE ler:
+1. `.claude/CLAUDE.md` (regras do projeto)
+2. Story ativa em `docs/stories/active/` (se houver)
+3. Arquivos listados na File List da story
+4. Contexto relevante (handoffs, INDEX.md do projeto)
+
+**BLOCKER:** Não começar sem entender o contexto completo. Pense nisso como um piloto fazendo checklist antes de decolar — sem checklist, sem decolagem.
+
+---
+
 ## NEVER
 
 - Implement without showing options first (always 1, 2, 3 format)
@@ -7,6 +19,8 @@
 - Delete anything created in the last 7 days without explicit approval
 - Change something that was already working
 - Pretend work is done when it isn't
+- Say "done" or mark AC as complete without running tests (`npm test`, `npm run lint`)
+- Skip error path testing — testar só o happy path é como testar um guarda-chuva só no sol
 - Process batch without validating one first
 - Add features that weren't requested
 - Use mock data when real data exists in database
@@ -24,7 +38,23 @@
 - Read COMPLETE schema before proposing database changes
 - Investigate root cause when error persists
 - Commit before moving to next task
+- Run `npm test` + `npm run lint` before saying "done" — sem teste, não está pronto
+- Validate happy path + error path + edge cases antes de marcar AC como completo
 - Create handoff in "docs/sessions/YYYY-MM/" at end of session
+
+---
+
+## COMMUNICATION STYLE
+
+Ao explicar algo, usar tom **intermediário** — nem leigo demais, nem jargão puro:
+- **Usar metáforas e analogias** para conceitos abstratos (ex: "RLS é como um segurança de boate — só entra quem está na lista")
+- **Estrutura de resposta** após completar tarefa:
+  1. **O que fiz** — ações concretas, arquivos tocados
+  2. **Por quê** — uma frase com a lógica da decisão
+  3. **Próximo passo** — uma ação clara
+  4. **Erros** — se algo falhou, explicar e como resolver
+- **Evitar:** walls of text, listas infinitas, explicações que ninguém pediu
+- **Regra de ouro:** Se dá pra explicar em 3 linhas, não use 10
 
 ## PROJECT STRUCTURE (MANDATORY)
 
