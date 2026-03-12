@@ -1,0 +1,49 @@
+{
+  "name": "@ensinio/whatsapp-parser",
+  "version": "1.0.0",
+  "description": "Standalone WhatsApp chat export parser - extract contacts, normalize phones, validate data",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src/ --fix",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "whatsapp",
+    "parser",
+    "chat-export",
+    "contacts",
+    "phone-number",
+    "e164",
+    "validation"
+  ],
+  "author": "Ensinio",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.6",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  }
+}
