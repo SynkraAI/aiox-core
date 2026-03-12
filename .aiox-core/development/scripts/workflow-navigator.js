@@ -1,6 +1,15 @@
 /**
  * Workflow Navigator - Next-Step Suggestions for Workflow State
  *
+ * @deprecated Semi-deprecated since Epic 11/12. Bob Orchestrator (Story 12.3)
+ * now handles workflow routing via codified decision tree, and SessionState
+ * (Story 11.5) manages session persistence. This module may still be used
+ * by greeting-builder.js and unified-activation-pipeline.js for legacy
+ * command suggestion flows. New workflow navigation should use:
+ * - .aiox-core/core/orchestration/bob-orchestrator.js (decision routing)
+ * - .aiox-core/core/orchestration/session-state.js (state persistence)
+ * - .aiox-core/core/orchestration/workflow-executor.js (execution engine)
+ *
  * Provides intelligent next-step command suggestions based on:
  * - Current workflow state (detected from command history)
  * - Workflow transitions (defined in workflow-patterns.yaml)
@@ -11,6 +20,8 @@
  * - Pre-populated command templates
  * - Numbered list formatting for user selection
  */
+
+console.warn('[DEPRECATED] workflow-navigator.js — workflow routing now handled by bob-orchestrator.js (Story 12.3) and session-state.js (Story 11.5)');
 
 const fs = require('fs');
 const path = require('path');

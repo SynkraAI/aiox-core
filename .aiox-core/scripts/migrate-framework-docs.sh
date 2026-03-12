@@ -2,6 +2,10 @@
 #
 # AIOX Framework Documentation Migration Script
 #
+# @deprecated One-time migration script (Story 6.1.2.6, completed).
+# Framework docs have been migrated to aiox-core. This script is no longer needed.
+# Documentation now lives natively in docs/ and .aiox-core/docs/.
+#
 # Purpose: Migrate framework docs from aiox-fullstack to aiox-core (REPO 1)
 # Story: 6.1.2.6 - Framework Configuration System
 # Execution Timeline: Q2 2026 (Repository Migration Phase)
@@ -14,6 +18,8 @@
 #   --target-repo    Path to aiox-core repository (default: ../aiox-core)
 #   --help           Show this help message
 #
+
+echo "[DEPRECATED] migrate-framework-docs.sh — migration already completed. Docs live natively in docs/ and .aiox-core/docs/."
 
 set -e  # Exit on error
 

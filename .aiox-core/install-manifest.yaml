@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-03-11T15:04:09.395Z"
+generated_at: "2026-03-12T18:49:52.538Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1090
+file_count: 1091
 files:
   - path: cli/commands/config/index.js
     hash: sha256:25c4b9bf4e0241abf7754b55153f49f1a214f1fb5fe904a576675634cb7b3da9
@@ -284,6 +284,10 @@ files:
     hash: sha256:3505471b0adff9bfcea08f46cca3aeeda46a283bbe7ee711dd566e5974c3257f
     type: template
     size: 721
+  - path: core/docs/orchestration-hierarchy.md
+    hash: sha256:86daaa7fbc1f7b1f62466c929c523ad5a807ea44d50c87ad302ac34191b775e3
+    type: documentation
+    size: 4060
   - path: core/doctor/checks/agent-memory.js
     hash: sha256:08d5d685e4fdaaedf081020229844f4a58c9fd00244e4c37eb5b3fd78f4feb61
     type: core
@@ -1705,13 +1709,13 @@ files:
     type: script
     size: 15887
   - path: development/scripts/workflow-navigator.js
-    hash: sha256:45bd9f0317b6a0b9e9577b5b26550f1b7fafec2c45c1b542a6947ffd69a70fec
+    hash: sha256:43e3fb1a9655a06bcfd54d450b0e6e079fbb3f292673afd86afbe4adb578c6de
     type: script
-    size: 9847
+    size: 10595
   - path: development/scripts/workflow-state-manager.js
-    hash: sha256:3a896079b32b8efb8c532c0626c4ce14fb52cc92afbb086f6f2d2a0367d60dec
+    hash: sha256:5300937308b430285891afda757ea83ccf20fcdd64005a870c06f3b072c0ee06
     type: script
-    size: 20129
+    size: 20262
   - path: development/scripts/workflow-validator.js
     hash: sha256:abb16e5cd34ec06bbca0a31af3fc500c3a5c98f66d0a72546e4a2827653abcd3
     type: script
@@ -4073,21 +4077,21 @@ files:
     type: script
     size: 8761
   - path: scripts/batch-migrate-phase1.ps1
-    hash: sha256:c1f72c94244b7fe8f1f5cf12f0eb2cea017aeaca620953ede02c5c8f0125b429
+    hash: sha256:6f9d7117cee5a9180a9ff952ea9b2a9cc66d0365b76bdd4e3ba879329636da99
     type: script
-    size: 974
+    size: 1333
   - path: scripts/batch-migrate-phase2.ps1
-    hash: sha256:9f7d0a90fec3c2553cd5b757765b15839a0eeefb040fe6e23d58faa801eefe61
+    hash: sha256:290b25e360894ea33b6fda3bef572b57e49292bed516221eb89b9cc77fa03814
     type: script
-    size: 2591
+    size: 2950
   - path: scripts/batch-migrate-phase3.ps1
-    hash: sha256:5555a7095693dd7a64be48c6fb0e03b706a68ffd66af9edebac65b798dc4f2bb
+    hash: sha256:eadbccd740b43fa430e590d6412fecc53bc0e45bcc457d6dfce5c7ded526b1c1
     type: script
-    size: 1492
+    size: 1851
   - path: scripts/command-execution-hook.js
-    hash: sha256:295663ee1d236c1085f359773c8940a2cb05cea648e39ef1f02f745a3e7d0990
+    hash: sha256:43360a859c8d1701b2dc05cd32b9451227daa30c268fc7296f0cae4c850f86d0
     type: script
-    size: 5047
+    size: 5518
   - path: scripts/diagnostics/diagnose-installation.js
     hash: sha256:a3e2dc1b3630d6c14098a7becf007caeb7ecf5ded72b1d2be116fdc8b5778fe4
     type: script
@@ -4257,9 +4261,9 @@ files:
     type: script
     size: 4468
   - path: scripts/migrate-framework-docs.sh
-    hash: sha256:535844ae659e1cb4d35658cde8379b64a4195ff62ee84d048b9a5c7249f5b617
+    hash: sha256:b6380908affc59158594a7cbeaf737b0a755ff12d99a8bf6527e0f6c616154ec
     type: script
-    size: 9488
+    size: 9837
   - path: scripts/pm.sh
     hash: sha256:ee33d9c7cd88a4d537bf2dc8c89c734f3e6027fc7d0cf4c668066e6c600e7e3a
     type: script
@@ -4269,9 +4273,9 @@ files:
     type: script
     size: 4527
   - path: scripts/session-context-loader.js
-    hash: sha256:c994dcd432125f969e1bf1b9eac2b1511b02722b7e73f16aa20db3d2fb4d0b90
+    hash: sha256:bf7aab6da9feda285bab0d5456e7eb412289a85687a671e117a141264a2a4cfa
     type: script
-    size: 1583
+    size: 1717
   - path: scripts/test-template-system.js
     hash: sha256:a9950ff166530e657ac7fb64fb1b121fa2d909371618e35a0543c554a34be435
     type: script
@@ -4281,9 +4285,9 @@ files:
     type: script
     size: 6083
   - path: scripts/validate-phase1.ps1
-    hash: sha256:ea9f40a265c44fffeb859f5041f7d7cbcd49322d3f0c0d88949f8ac8b7c25c15
+    hash: sha256:26402ca0e4d97c0f1671222fccab463435b83d8d464e4771c6b6e8d1ce29f971
     type: script
-    size: 768
+    size: 1053
   - path: scripts/workflow-management.md
     hash: sha256:fae596f7be326f897fafeab252fdffd2c6d6cb3163f31f71a4c01d5c88e79930
     type: script

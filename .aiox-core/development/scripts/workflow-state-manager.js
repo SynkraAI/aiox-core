@@ -20,6 +20,8 @@
  * @version 2.0.0
  */
 
+console.warn('[DEPRECATED] workflow-state-manager.js — use .aiox-core/core/orchestration/session-state.js instead (Story 11.5)');
+
 const fs = require('fs').promises;
 const path = require('path');
 const yaml = require('js-yaml');

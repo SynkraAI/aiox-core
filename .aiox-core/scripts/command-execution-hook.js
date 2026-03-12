@@ -1,21 +1,29 @@
 #!/usr/bin/env node
 /**
  * Command Execution Hook
- * 
+ *
+ * @deprecated Superseded by SessionState (Story 11.5) which provides unified
+ * session state persistence with crash recovery, phase tracking, and epic/story
+ * context. This script's simple command-history tracking is now a subset of
+ * SessionState's capabilities. New code should use:
+ * - .aiox-core/core/orchestration/session-state.js
+ *
  * Updates session state after command execution for workflow continuity.
- * 
+ *
  * Responsibilities:
  * - Track command execution history
- * - Update session type (new → existing → workflow)
+ * - Update session type (new -> existing -> workflow)
  * - Record agent transitions
  * - Enable intelligent greeting adaptation
- * 
+ *
  * Usage:
  *   const { updateSessionAfterCommand } = require('./command-execution-hook');
  *   await updateSessionAfterCommand(agentId, commandName);
- * 
+ *
  * Part of Story 6.1.4: Unified Greeting System Integration
  */
+
+console.warn('[DEPRECATED] command-execution-hook.js — use .aiox-core/core/orchestration/session-state.js instead (Story 11.5)');
 
 const fs = require('fs').promises;
 const path = require('path');

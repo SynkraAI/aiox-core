@@ -1,3 +1,8 @@
+# @deprecated One-time migration script (Task V2.0 migration, completed).
+# All tasks have been migrated to V2.0 format. This script is no longer needed.
+# Replacement: tasks are now natively V2.0 — use validate-task-v2.js for validation.
+Write-Warning "[DEPRECATED] batch-migrate-phase1.ps1 — migration already completed. Tasks are V2.0 natively."
+
 # Phase 1 - Batch migrate critical tasks
 
 $tasks = @(

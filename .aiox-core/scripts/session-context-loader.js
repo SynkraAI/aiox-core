@@ -15,6 +15,8 @@
 
 'use strict';
 
+console.warn('[DEPRECATED] session-context-loader.js — use require(\'.aiox-core/core/session/context-loader\') directly (WIS-3)');
+
 // Re-export from canonical location
 const SessionContextLoader = require('../core/session/context-loader');
 

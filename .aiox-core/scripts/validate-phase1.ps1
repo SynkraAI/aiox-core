@@ -1,3 +1,7 @@
+# @deprecated One-time validation script for Task V2.0 Phase 1 migration.
+# Migration is complete. Use validate-task-v2.js directly for ongoing validation.
+Write-Warning "[DEPRECATED] validate-phase1.ps1 — Phase 1 migration already validated. Use validate-task-v2.js directly."
+
 $tasks = @(
   'dev-develop-story.md',
   'create-next-story.md',
