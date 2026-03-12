@@ -26,19 +26,36 @@
   - `generate-sheets-paste.js` — Gera TSV com 7 colunas (formato planilha padrão)
   - `generate-apps-script.js` — Gera Apps Script com dados embutidos
 
-## Última Sessão
-- **Data:** 2026-03-12 ~18:30 (Noite)
-- **Agente/Squad:** Epic EPIC-ENSINIO-APP + GHL Sync Investigation
+## Última Sessão (2026-03-12 — LATEST)
+- **Data:** 2026-03-12 ~20:30 (Noite)
+- **Agente/Squad:** @squad-chief + @media-processor → Ensinio Mind Enrichment
 - **O que foi feito:**
+  1. ✅ Processado vídeo YouTube via media-processor pipeline
+     - URL: https://www.youtube.com/watch?v=JF0rWYPm1zc
+     - Extração: Captions pt-BR (12min 34s)
+  2. ✅ Atualizado ensinio-mind (v2.1.0 — Mind DNA Enrichment)
+     - Voice DNA: +3 signature phrases (com [SOURCE:])
+     - Thinking DNA: +2 heuristics (com QUANDO usar)
+     - Fidelity: 88→91/100 | Coverage: 92%→98%
+  3. ✅ Documentação completa atualizada:
+     - `squads/ensinio-mind/README.md` (v2.1.0)
+     - `docs/projects/ensinio/INDEX.md` (sessão adicionada)
+  4. ✅ Gerado quality-dashboard para monitoramento
+  5. ✅ Commit pronto para push (delegado para @devops)
+
+---
+
+## Sessão Anterior (GHL Integration)
+- **Data:** 2026-03-12 ~18:30
+- **Agente/Squad:** Epic EPIC-ENSINIO-APP + GHL Sync Investigation
+- **Resumo:**
   1. ✅ Criado Epic EPIC-ENSINIO-APP com 4 milestones (M0→M4)
   2. ✅ 5 stories M0 criadas e validadas com @po (READY FOR IMPLEMENTATION)
   3. ✅ Investigado endpoint `/opportunities/` 404 → encontrado problema: faltava trailing slash
-  4. ✅ Testado fluxo de deduplicação: extrair contactId de erro 400 "duplicated contacts"
-  5. ✅ test-ghl-single.js criado e validado com Eduardo → **SUCCESS HTTP 201**
-  6. ✅ Descoberto: lookup endpoint `/contacts/lookup/phone/` NÃO funciona (404)
-  7. ✅ Solução: tentar criar → se 400, extrair contactId do erro meta
-  8. ✅ Fonte correta: `outreach-messages.md` (não TSV corrompido)
-  9. ✅ Blocker GHL documentado em MEMORY.md + ADR-001-tech-stack.md + M0.4 story
+  4. ✅ Testado fluxo de deduplicação com test-ghl-single.js → **SUCCESS HTTP 201**
+  5. ✅ Descoberto: lookup endpoint `/contacts/lookup/phone/` NÃO funciona (404)
+  6. ✅ Solução: tentar criar → se 400, extrair contactId do erro meta
+  7. ✅ Blocker GHL documentado em ADR-001-tech-stack.md + M0.4 story
 
 ## Próximo Passo
 - **READY TO EXECUTE** — tudo pronto para sync dos 77:

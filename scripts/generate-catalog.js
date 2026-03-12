@@ -399,38 +399,49 @@ function generateMarkdown(squads, skills, tools, agents) {
 }
 
 /**
- * Sync slash commands — ensure every squad has a README.md in .claude/commands/
+ * Sync slash commands — ensure every squad has a README.md in .claude/commands/, .gemini/commands/, .codex/commands/
  */
 function syncCommands(squads) {
   log('🔗 Syncing slash commands...', 'cyan');
 
-  const commandsDir = path.join(ROOT, '.claude', 'commands');
-  let created = 0;
+  const models = ['claude', 'gemini', 'codex'];
+  let totalCreated = 0;
 
-  squads.forEach(squad => {
-    const cmdDir = path.join(commandsDir, squad.slug);
-    const cmdReadme = path.join(cmdDir, 'README.md');
+  models.forEach(model => {
+    const commandsDir = path.join(ROOT, `.${model}`, 'commands');
+    let modelCreated = 0;
 
-    if (!fs.existsSync(cmdDir)) {
-      fs.mkdirSync(cmdDir, { recursive: true });
-    }
+    squads.forEach(squad => {
+      const cmdDir = path.join(commandsDir, squad.slug);
+      const cmdReadme = path.join(cmdDir, 'README.md');
 
-    if (!fs.existsSync(cmdReadme)) {
-      // Copy README from squad source, or generate minimal one
-      const srcReadme = path.join(SQUADS_DIR, squad.slug, 'README.md');
-      if (fs.existsSync(srcReadme)) {
-        fs.copyFileSync(srcReadme, cmdReadme);
-      } else {
-        fs.writeFileSync(cmdReadme, `# ${squad.name}\n\n${squad.description}\n`, 'utf8');
+      if (!fs.existsSync(cmdDir)) {
+        fs.mkdirSync(cmdDir, { recursive: true });
       }
-      created++;
+
+      if (!fs.existsSync(cmdReadme)) {
+        // Copy README from squad source, or generate minimal one
+        const srcReadme = path.join(SQUADS_DIR, squad.slug, 'README.md');
+        if (fs.existsSync(srcReadme)) {
+          fs.copyFileSync(srcReadme, cmdReadme);
+        } else {
+          fs.writeFileSync(cmdReadme, `# ${squad.name}\n\n${squad.description}\n`, 'utf8');
+        }
+        modelCreated++;
+      }
+    });
+
+    if (modelCreated > 0) {
+      log(`✓ ${model}: Created ${modelCreated} missing command(s)`, 'green');
+    } else {
+      log(`✓ ${model}: All commands in sync`, 'green');
     }
+
+    totalCreated += modelCreated;
   });
 
-  if (created > 0) {
-    log(`✓ Created ${created} missing command(s)`, 'green');
-  } else {
-    log('✓ All commands in sync', 'green');
+  if (totalCreated === 0) {
+    log('✓ All models synchronized', 'green');
   }
 }
 
