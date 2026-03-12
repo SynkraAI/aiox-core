@@ -4,9 +4,29 @@
 - **task_name:** parse-chat-export
 - **status:** active
 - **responsible_executor:** chat-parser (Cipher)
-- **execution_type:** Hybrid (Worker checklist + Agent format detection)
+- **execution_type:** Module-based (uses @ensinio/whatsapp-parser)
+- **implementation:** `squads/ensinio-whatsapp-prospector/lib/parse-chat-export-impl.js`
 - **input:** ZIP file path containing WhatsApp export
 - **output:** Structured JSON with contacts and messages
+
+## Integration Note (AC-5)
+
+This task now uses the `@ensinio/whatsapp-parser` module for all parsing logic.
+See **Story M0.1-AC5** for integration details.
+
+**Module API:**
+```javascript
+const { parseWhatsAppExport, validateParsedData } = require('@ensinio/whatsapp-parser');
+
+// Parse ZIP file
+const result = await parseWhatsAppExport(zipPath);
+
+// Validate result
+const validation = validateParsedData(result);
+```
+
+**Implementation File:**
+- `lib/parse-chat-export-impl.js` — Wraps module with error handling and recovery
 
 ## Action Items
 

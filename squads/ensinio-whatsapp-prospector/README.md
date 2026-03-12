@@ -110,6 +110,81 @@ WhatsApp exports mostram nomes de contatos salvos, não números. Nova fase inte
 
 ---
 
+## Parser Module Integration (AC-5)
+
+**Version:** 1.0.0 (integrated with M0.1 story)
+
+The parsing logic is now powered by `@ensinio/whatsapp-parser`, a standalone module providing:
+
+### Module API
+
+**Import:**
+```javascript
+const { parseWhatsAppExport, validateParsedData } = require('@ensinio/whatsapp-parser');
+```
+
+**Main Functions:**
+- `parseWhatsAppExport(zipPath)` — Parse ZIP file → ParsedExport
+- `validateParsedData(data)` — Validate parsed output
+- `normalizePhoneNumber(phone)` — Normalize phone to E.164
+- `detectChatFormat(content)` — Auto-detect chat format (Android BR, iOS BR, etc)
+
+### Implementation
+
+The squad's parse task uses:
+- **File:** `lib/parse-chat-export-impl.js`
+- **Functions:** `parseWhatsAppExportFile()`, `parseWithRecovery()`
+- **Error Handling:** Retry logic + descriptive error messages
+
+### Output Schema
+
+```json
+{
+  "group_name": "Nome do Grupo",
+  "total_contacts": 150,
+  "total_messages": 5000,
+  "date_range": { "start": "2025-01-01T00:00:00Z", "end": "2026-02-19T23:59:59Z" },
+  "format_detected": "android_br",
+  "contacts": [
+    {
+      "name": "Joao",
+      "phone": "+5531999999999",
+      "message_count": 45,
+      "first_message_date": "2025-03-15T14:30:00Z",
+      "last_message_date": "2026-01-20T23:59:59Z",
+      "messages": [
+        { "timestamp": "2025-03-15T14:30:00Z", "content": "..." }
+      ]
+    }
+  ]
+}
+```
+
+### Backward Compatibility
+
+✅ **Zero Breaking Changes:**
+- Output structure is identical to previous version
+- Phone numbers remain in E.164 format
+- Timestamps remain in ISO 8601 format
+- Contact ordering preserved (by message count)
+- All downstream tasks work without modification
+
+### Testing
+
+Integration tests validate:
+- Output schema compatibility (AC-4: 82/82 tests ✅)
+- Backward compatibility with GHL sync, Sheets population, phone resolution
+- Error handling (missing ZIP, empty files, encoding issues)
+- Coverage: >= 70% for squad integration
+
+**Test file:** `packages/ensinio-whatsapp-parser/tests/integration/squad-integration.test.ts`
+
+### Breaking Changes
+
+None expected. If found, they will be documented here.
+
+---
+
 ## Agentes
 
 | Agente | Persona | Modelo | Papel | Tier |

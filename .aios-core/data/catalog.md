@@ -24,7 +24,6 @@
 | dan-koe | Koe Squad — The OnePerson Business System | `/dan-koe` |
 | design | | | `/design` |
 | dopamine-learning | Dopamine Learning Squad: Complete Documentation | `/dopamine-learning` |
-| email-management-squad | Email Management Squad | `/email-management-squad` |
 | ensinio-mind | Ensinio Mind — Knowledge Hub | `/ensinio-mind` |
 | ensinio-prospector | Ensinio Prospector | `/ensinio-prospector` |
 | ensinio-whatsapp-prospector | Ensinio WhatsApp Prospector | `/ensinio-whatsapp-prospector` |
