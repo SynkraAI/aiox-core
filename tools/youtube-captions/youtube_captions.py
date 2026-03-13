@@ -79,7 +79,7 @@ def parse_subtitle_content(subtitle_data, fmt="json3"):
     return "\n".join(lines)
 
 
-def fetch_subtitles_raw(video_url, lang_priority=None):
+def fetch_subtitles_raw(video_url, lang_priority=None, proxy=None):
     """Fetch raw subtitle data from a YouTube video using yt-dlp."""
     if lang_priority is None:
         lang_priority = DEFAULT_LANG_PRIORITY
@@ -93,6 +93,8 @@ def fetch_subtitles_raw(video_url, lang_priority=None):
         "quiet": True,
         "no_warnings": True,
     }
+    if proxy:
+        ydl_opts["proxy"] = proxy
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         info = ydl.extract_info(video_url, download=False)
@@ -138,12 +140,17 @@ def pick_best_subtitle(info, lang_priority=None):
     return None, None, None
 
 
-def download_subtitle_content(url):
+def download_subtitle_content(url, proxy=None):
     """Download subtitle JSON3 content from URL."""
     req = urllib.request.Request(url, headers={
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
         "Accept-Language": "en-US,en;q=0.9",
     })
+    if proxy:
+        handler = urllib.request.ProxyHandler({"https": proxy, "http": proxy})
+        opener = urllib.request.build_opener(handler)
+        with opener.open(req, timeout=30) as resp:
+            return json.loads(resp.read().decode("utf-8"))
     with urllib.request.urlopen(req, timeout=30) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
@@ -158,7 +165,7 @@ def format_duration(seconds):
     return f"{h:02d}:{m:02d}:{s:02d}"
 
 
-def fetch_captions_transcript_api(video_id, lang_priority=None, cookies_path=None):
+def fetch_captions_transcript_api(video_id, lang_priority=None, cookies_path=None, proxy=None):
     """Fallback: fetch captions using youtube-transcript-api."""
     if not HAS_TRANSCRIPT_API:
         return None, None
@@ -176,6 +183,12 @@ def fetch_captions_transcript_api(video_id, lang_priority=None, cookies_path=Non
             cj.load(ignore_discard=True, ignore_expires=True)
             session = requests.Session()
             session.cookies = cj
+            kwargs["http_client"] = session
+
+        if proxy and not cookies_path:
+            import requests
+            session = requests.Session()
+            session.proxies = {"http": proxy, "https": proxy}
             kwargs["http_client"] = session
 
         ytt_api = YouTubeTranscriptApi(**kwargs)
@@ -309,7 +322,7 @@ def fetch_captions_with_browser_cookies(video_url, video_id, lang_priority=None)
 
 
 def extract_captions(video_url, output_dir=None, lang_priority=None, output_format="md",
-                     cookies_path=None):
+                     cookies_path=None, proxy=None):
     """Extract captions from a single YouTube video.
 
     Uses yt-dlp for metadata + subtitle download. Falls back to
@@ -321,7 +334,7 @@ def extract_captions(video_url, output_dir=None, lang_priority=None, output_form
         lang_priority = DEFAULT_LANG_PRIORITY
 
     print(f"  Fetching metadata: {video_url}")
-    info = fetch_subtitles_raw(video_url, lang_priority)
+    info = fetch_subtitles_raw(video_url, lang_priority, proxy)
 
     title = info.get("title", "untitled")
     channel = info.get("channel", info.get("uploader", "unknown"))
@@ -334,7 +347,7 @@ def extract_captions(video_url, output_dir=None, lang_priority=None, output_form
 
     if not sub_url:
         # Try transcript API fallback even if yt-dlp found nothing
-        text, meta = fetch_captions_transcript_api(video_id, lang_priority, cookies_path)
+        text, meta = fetch_captions_transcript_api(video_id, lang_priority, cookies_path, proxy)
         if text and text.strip():
             print(f"  Found captions via transcript API: {meta['language']} ({meta['subtitle_type']})")
             lang = meta["language"]
@@ -347,7 +360,7 @@ def extract_captions(video_url, output_dir=None, lang_priority=None, output_form
         print(f"  Found captions: {lang} ({sub_type})")
 
         try:
-            sub_data = download_subtitle_content(sub_url)
+            sub_data = download_subtitle_content(sub_url, proxy)
             text = parse_subtitle_content(sub_data)
         except Exception as e:
             if "429" in str(e):
@@ -355,7 +368,7 @@ def extract_captions(video_url, output_dir=None, lang_priority=None, output_form
                 # Attempt 1: transcript API fallback
                 if HAS_TRANSCRIPT_API:
                     print(f"  Rate limited, trying transcript API fallback...")
-                    text, meta = fetch_captions_transcript_api(video_id, lang_priority, cookies_path)
+                    text, meta = fetch_captions_transcript_api(video_id, lang_priority, cookies_path, proxy)
                     if text and text.strip():
                         lang = meta["language"]
                         sub_type = meta["subtitle_type"]
@@ -438,7 +451,7 @@ extracted_at: "{datetime.now().strftime('%Y-%m-%d %H:%M')}"
 
 
 def extract_playlist(playlist_url, output_dir, lang_priority=None, output_format="md",
-                     cookies_path=None):
+                     cookies_path=None, proxy=None):
     """Extract captions from all videos in a YouTube playlist."""
     if lang_priority is None:
         lang_priority = DEFAULT_LANG_PRIORITY
@@ -469,7 +482,7 @@ def extract_playlist(playlist_url, output_dir, lang_priority=None, output_format
         print(f"[{i}/{len(entries)}] Processing...")
 
         try:
-            result = extract_captions(video_url, str(playlist_dir), lang_priority, output_format, cookies_path)
+            result = extract_captions(video_url, str(playlist_dir), lang_priority, output_format, cookies_path, proxy)
             if result:
                 results.append(result)
         except Exception as e:
@@ -532,7 +545,7 @@ def get_video_durations(video_ids, api_key):
 
 def search_youtube(query, output_dir, max_results=100, api_key=None,
                    min_duration=600, lang_priority=None, output_format="md",
-                   list_only=False, delay=5, cookies_path=None):
+                   list_only=False, delay=5, cookies_path=None, proxy=None):
     """Search YouTube for videos and extract captions from results."""
     if not api_key:
         api_key = os.environ.get("YOUTUBE_API_KEY")
@@ -646,7 +659,7 @@ def search_youtube(query, output_dir, max_results=100, api_key=None,
         retries = 0
         while retries < 3:
             try:
-                result = extract_captions(video_url, str(output_path), lang_priority, output_format, cookies_path)
+                result = extract_captions(video_url, str(output_path), lang_priority, output_format, cookies_path, proxy)
                 if result:
                     results.append(result)
                 else:
@@ -739,6 +752,7 @@ Examples:
     parser.add_argument("--list-only", action="store_true", help="Search mode: only list video URLs, don't extract captions")
     parser.add_argument("--delay", type=int, default=5, help="Seconds between caption extractions to avoid rate limiting (default: 5)")
     parser.add_argument("--cookies", metavar="FILE", help="Path to cookies.txt file (Netscape format) to bypass rate limiting")
+    parser.add_argument("--proxy", metavar="URL", help="Proxy URL (e.g. socks5://127.0.0.1:1080 or http://proxy:8080)")
     parser.add_argument("-o", "--output", default=".", help="Output directory (default: current)")
     parser.add_argument(
         "-l", "--lang", action="append", dest="langs",
@@ -758,18 +772,19 @@ Examples:
     lang_priority = args.langs if args.langs else DEFAULT_LANG_PRIORITY
 
     cookies = args.cookies
+    proxy = args.proxy
 
     if args.search:
         search_youtube(
             args.search, args.output, max_results=args.max, api_key=args.api_key,
             min_duration=args.min_duration, lang_priority=lang_priority,
             output_format=args.format, list_only=args.list_only, delay=args.delay,
-            cookies_path=cookies,
+            cookies_path=cookies, proxy=proxy,
         )
     elif args.playlist:
-        extract_playlist(args.playlist, args.output, lang_priority, args.format, cookies)
+        extract_playlist(args.playlist, args.output, lang_priority, args.format, cookies, proxy)
     elif args.url:
-        result = extract_captions(args.url, args.output, lang_priority, args.format, cookies)
+        result = extract_captions(args.url, args.output, lang_priority, args.format, cookies, proxy)
         if not result:
             print("No captions found.")
             sys.exit(1)
