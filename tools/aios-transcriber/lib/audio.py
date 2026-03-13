@@ -7,9 +7,47 @@ Typical reduction: 80-95% of original file size.
 """
 
 import json
+import logging
 import subprocess
 import tempfile
 from pathlib import Path
+
+logger = logging.getLogger('aios-transcriber')
+
+
+def is_already_optimized(file_path):
+    """Check if audio is already MP3 mono 16kHz <= 64kbps (skip compression).
+
+    Returns True if file is already optimized for transcription.
+    """
+    file_path = Path(file_path)
+    if file_path.suffix.lower() != '.mp3':
+        return False
+
+    try:
+        result = subprocess.run(
+            ['ffprobe', '-v', 'quiet', '-print_format', 'json',
+             '-show_streams', '-show_format', str(file_path)],
+            capture_output=True, text=True, check=True
+        )
+        data = json.loads(result.stdout)
+
+        streams = data.get('streams', [])
+        audio_stream = next((s for s in streams if s.get('codec_type') == 'audio'), None)
+        if not audio_stream:
+            return False
+
+        channels = int(audio_stream.get('channels', 0))
+        sample_rate = int(audio_stream.get('sample_rate', 0))
+        bit_rate = int(data.get('format', {}).get('bit_rate', 0))
+
+        is_mono = channels == 1
+        is_16khz = sample_rate <= 16000
+        is_low_bitrate = bit_rate <= 64000
+
+        return is_mono and is_16khz and is_low_bitrate
+    except (subprocess.CalledProcessError, json.JSONDecodeError, ValueError, StopIteration):
+        return False
 
 
 def compress_audio(input_path, output_path=None, bitrate='64k'):
@@ -27,6 +65,16 @@ def compress_audio(input_path, output_path=None, bitrate='64k'):
         RuntimeError: if ffmpeg fails
     """
     input_path = Path(input_path)
+
+    # Skip if already optimized
+    if is_already_optimized(input_path):
+        logger.info('Already optimized, skipping compression')
+        if output_path is None:
+            return input_path
+        # Copy to output if path was specified
+        import shutil
+        shutil.copy2(str(input_path), str(output_path))
+        return output_path
 
     if output_path is None:
         suffix = '.mp3'
@@ -60,7 +108,7 @@ def compress_audio(input_path, output_path=None, bitrate='64k'):
     compressed_size = output_path.stat().st_size
     reduction = (1 - compressed_size / original_size) * 100 if original_size > 0 else 0
 
-    print(f'  Compressed: {_format_size(original_size)} -> {_format_size(compressed_size)} ({reduction:.0f}% reduction)')
+    logger.info(f'Compressed: {_format_size(original_size)} -> {_format_size(compressed_size)} ({reduction:.0f}% reduction)')
 
     return output_path
 

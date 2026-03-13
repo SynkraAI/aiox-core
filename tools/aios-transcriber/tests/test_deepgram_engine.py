@@ -49,12 +49,14 @@ class TestDeepgramEngineProperties:
 class TestTranscribeFile:
     """Test transcribe_file method."""
 
+    @patch('lib.deepgram_engine.splitter_mod')
     @patch('lib.deepgram_engine.audio_mod')
-    def test_transcribe_file_success(self, mock_audio):
+    def test_transcribe_file_success(self, mock_audio, mock_splitter):
         """Successful transcription should return dict with expected keys."""
         # Setup mocks
         mock_audio.get_duration.return_value = 600
         mock_audio.compress_audio.return_value = Path('/tmp/compressed.mp3')
+        mock_splitter.needs_splitting.return_value = False
 
         engine = DeepgramEngine(api_key='test-key')
 
@@ -71,10 +73,12 @@ class TestTranscribeFile:
         assert result['duration_seconds'] == 600
         assert result['engine'] == 'deepgram-nova-3'
 
+    @patch('lib.deepgram_engine.splitter_mod')
     @patch('lib.deepgram_engine.audio_mod')
-    def test_transcribe_file_no_compression(self, mock_audio):
+    def test_transcribe_file_no_compression(self, mock_audio, mock_splitter):
         """compress=False should skip compression."""
         mock_audio.get_duration.return_value = 120
+        mock_splitter.needs_splitting.return_value = False
 
         engine = DeepgramEngine(api_key='test-key')
 
@@ -189,8 +193,10 @@ class TestApiCall:
             with patch('lib.deepgram_engine.urllib.request.urlopen', side_effect=[error_429, mock_success]):
                 result = engine._api_call('/fake/path.mp3')
 
-        # Should have slept once (5s backoff)
-        mock_sleep.assert_called_once_with(5)
+        # Should have slept once (5s base + jitter, so between 5.0 and 6.5s)
+        mock_sleep.assert_called_once()
+        sleep_time = mock_sleep.call_args[0][0]
+        assert 5.0 <= sleep_time <= 6.5, f'Sleep time {sleep_time} out of expected range'
         assert result == 'retry success'
 
     @patch('lib.deepgram_engine.time.sleep')

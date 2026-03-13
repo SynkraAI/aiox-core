@@ -7,11 +7,14 @@ Deepgram limit: 2GB per request.
 Splits by duration (10-minute chunks) using ffmpeg.
 """
 
+import logging
 import subprocess
 import tempfile
 from pathlib import Path
 
 from . import audio as audio_mod
+
+logger = logging.getLogger('aios-transcriber')
 
 # Thresholds in bytes
 GROQ_MAX_SIZE = 24 * 1024 * 1024       # 24MB
@@ -44,7 +47,7 @@ def split_audio(file_path, chunk_duration=CHUNK_DURATION_SECONDS):
     total_duration = audio_mod.get_duration(file_path)
 
     if total_duration <= 0:
-        print(f'  WARNING: Could not detect duration, returning file as-is')
+        logger.warning('Could not detect duration, returning file as-is')
         return [file_path]
 
     num_chunks = int(total_duration // chunk_duration) + (1 if total_duration % chunk_duration > 0 else 0)
@@ -52,7 +55,7 @@ def split_audio(file_path, chunk_duration=CHUNK_DURATION_SECONDS):
     if num_chunks <= 1:
         return [file_path]
 
-    print(f'  Splitting into {num_chunks} chunks ({chunk_duration}s each)...')
+    logger.info(f'Splitting into {num_chunks} chunks ({chunk_duration}s each)...')
 
     tmp_dir = Path(tempfile.mkdtemp(prefix='aios-split-'))
     chunks = []
@@ -73,13 +76,13 @@ def split_audio(file_path, chunk_duration=CHUNK_DURATION_SECONDS):
         result = subprocess.run(cmd, capture_output=True, text=True)
 
         if result.returncode != 0:
-            print(f'  WARNING: Failed to create chunk {i}: {result.stderr[:200]}')
+            logger.warning(f'Failed to create chunk {i}: {result.stderr[:200]}')
             continue
 
         if chunk_path.exists() and chunk_path.stat().st_size > 0:
             chunks.append(chunk_path)
 
-    print(f'  Created {len(chunks)} chunks in {tmp_dir}')
+    logger.info(f'Created {len(chunks)} chunks in {tmp_dir}')
     return chunks
 
 

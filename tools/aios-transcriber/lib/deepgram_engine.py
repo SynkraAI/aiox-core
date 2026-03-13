@@ -9,7 +9,9 @@ Pricing: ~$0.0043/min (~R$2.50/hora)
 """
 
 import json
+import logging
 import os
+import random
 import threading
 import time
 import urllib.error
@@ -18,6 +20,9 @@ from pathlib import Path
 from queue import Queue
 
 from . import audio as audio_mod
+from . import splitter as splitter_mod
+
+logger = logging.getLogger('aios-transcriber')
 
 API_URL = 'https://api.deepgram.com/v1/listen'
 MODEL = 'nova-3'
@@ -100,7 +105,33 @@ class DeepgramEngine:
                 if file_size > max_uncompressed:
                     from .exceptions import FileTooLargeError
                     raise FileTooLargeError(file_path, file_size, max_uncompressed) from e
-                print(f'  WARNING: Compression failed, using original: {e}')
+                logger.warning(f'Compression failed, using original: {e}')
+
+        # Split if file is too large after compression
+        if splitter_mod.needs_splitting(upload_path, engine='deepgram'):
+            logger.info('File exceeds Deepgram limit, splitting into chunks...')
+            chunks = splitter_mod.split_audio(upload_path)
+            try:
+                texts = []
+                for ci, chunk in enumerate(chunks, 1):
+                    logger.info(f'Transcribing chunk {ci}/{len(chunks)}...')
+                    chunk_text = self._api_call(chunk)
+                    if chunk_text:
+                        texts.append(chunk_text)
+
+                return {
+                    'text': '\n\n'.join(texts),
+                    'language': self.language,
+                    'duration_seconds': duration,
+                    'engine': self.engine_name,
+                }
+            finally:
+                splitter_mod.cleanup_chunks(chunks)
+                if compressed and compressed != file_path:
+                    try:
+                        compressed.unlink(missing_ok=True)
+                    except OSError:
+                        pass
 
         try:
             text = self._api_call(upload_path)
@@ -231,7 +262,8 @@ class DeepgramEngine:
                 elif e.code == 429:
                     if attempt < MAX_RETRIES:
                         wait = RETRY_BACKOFF[min(attempt, len(RETRY_BACKOFF) - 1)]
-                        print(f'  Rate limited, retrying in {wait}s...')
+                        wait += random.uniform(0, 0.3 * wait)
+                        logger.warning(f'Rate limited, retrying in {wait:.1f}s...')
                         time.sleep(wait)
                         continue
                     raise RuntimeError(f'Deepgram rate limit after {MAX_RETRIES} retries') from e
@@ -241,7 +273,8 @@ class DeepgramEngine:
             except urllib.error.URLError as e:
                 if attempt < MAX_RETRIES:
                     wait = RETRY_BACKOFF[min(attempt, len(RETRY_BACKOFF) - 1)]
-                    print(f'  Network error, retrying in {wait}s: {e}')
+                    wait += random.uniform(0, 0.3 * wait)
+                    logger.warning(f'Network error, retrying in {wait:.1f}s: {e}')
                     time.sleep(wait)
                     continue
                 raise RuntimeError(f'Network error after {MAX_RETRIES} retries: {e}') from e

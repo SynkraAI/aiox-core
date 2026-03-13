@@ -15,10 +15,19 @@ Usage:
 """
 
 import argparse
+import logging
 import subprocess
 import sys
 import time
 from pathlib import Path
+
+# Configure logging
+logging.basicConfig(
+    format='%(asctime)s [%(levelname)s] [%(name)s] %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+    level=logging.INFO,
+)
+logger = logging.getLogger('aios-transcriber')
 
 # Add lib to path
 sys.path.insert(0, str(Path(__file__).parent))
