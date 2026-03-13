@@ -1,0 +1,218 @@
+# Workflow: Advisory Session
+# Complete workflow for conducting advisory board sessions
+
+workflow:
+  id: advisory-session
+  name: "Advisory Board Session"
+  version: "1.0"
+  description: >
+    Workflow completo para sessoes de advisory. O usuario apresenta uma questao,
+    o board-chief diagnostica e roteia, advisors respondem, e uma sintese final
+    e produzida com action items.
+  orchestrator: board-chief
+  estimated_time: "15-60min depending on depth"
+
+phases:
+
+  # =========================================================================
+  # PHASE 1: INTAKE
+  # =========================================================================
+  - id: intake
+    name: "Receber Questão"
+    agent: board-chief
+    duration: "2-5min"
+    description: "Captura a questão do usuário e contexto relevante"
+
+    inputs:
+      - question: "Questão, dilema ou situação"
+      - context: "Números, constraints, timeline (opcional)"
+      - depth: "quick | standard | deep (opcional, default: standard)"
+
+    actions:
+      - "Capturar questão do usuário"
+      - "Pedir contexto adicional se necessário"
+      - "Confirmar entendimento antes de prosseguir"
+
+    checkpoint:
+      id: "AB-CP-01"
+      name: "Questão Capturada"
+      criteria:
+        - "Questão clara e específica"
+        - "Contexto suficiente para advisors responderem"
+      veto:
+        - "Questão vaga demais → pedir clarificação"
+        - "Sem contexto em decisão high-stakes → bloquear"
+
+    output:
+      question_brief:
+        question: "string"
+        context: "string"
+        depth: "enum"
+        domain: "Strategy | Execution | Thinking | Vision"
+
+  # =========================================================================
+  # PHASE 2: DIAGNOSE & ROUTE
+  # =========================================================================
+  - id: diagnose
+    name: "Diagnosticar e Rotear"
+    agent: board-chief
+    duration: "2-3min"
+    description: "Classifica a questão e seleciona advisors relevantes"
+
+    actions:
+      - "Classificar domínio primário (Strategy/Execution/Thinking/Vision)"
+      - "Identificar sub-domínio específico"
+      - "Consultar perfil ENTP para blind spots"
+      - "Selecionar advisors baseado no routing_matrix"
+      - "Ajustar seleção conforme depth solicitada"
+
+    routing_matrix:
+      strategy:
+        competitive_moats: hamilton-helmer
+        scaling_operations: verne-harnish
+        disruption_innovation: clayton-christensen
+        simplification_first_principles: elon-musk
+      execution:
+        offers_growth: alex-hormozi
+        capital_decisions: keith-cunningham
+        negotiation_stakeholders: chris-voss
+      thinking:
+        probabilistic_decisions: annie-duke
+        risk_fragility: nassim-taleb
+        mental_models_clarity: shane-parrish
+        leverage_philosophy: naval-ravikant
+      vision:
+        product_simplicity: steve-jobs
+        creative_expansion: walt-disney
+
+    checkpoint:
+      id: "AB-CP-02"
+      name: "Routing Definido"
+      criteria:
+        - "Domínio classificado"
+        - "Advisors selecionados (min 1, max 6)"
+        - "Blind spots ENTP identificados"
+
+    output:
+      routing:
+        domain: "string"
+        sub_domain: "string"
+        selected_advisors: "list"
+        entp_blind_spots: "list"
+
+  # =========================================================================
+  # PHASE 3: ADVISOR RESPONSES
+  # =========================================================================
+  - id: advise
+    name: "Respostas dos Advisors"
+    agent: "[selected advisors]"
+    duration: "5-20min"
+    description: "Cada advisor selecionado responde na sua voz autêntica"
+
+    actions:
+      - "Carregar mind_dna de cada advisor"
+      - "Cada advisor analisa a questão pelo seu framework"
+      - "Cada advisor fornece diagnóstico + recomendação + veto"
+      - "Para decision-council: permitir desacordo explícito"
+
+    response_format:
+      per_advisor:
+        name: "Nome do advisor"
+        framework: "Framework aplicado"
+        diagnosis: "Como ele vê a situação"
+        recommendation: "O que ele recomenda"
+        conditions: "O que precisa ser verdade"
+        veto: "Deal-breaker se houver"
+
+    checkpoint:
+      id: "AB-CP-03"
+      name: "Respostas Completas"
+      criteria:
+        - "Todos os advisors selecionados responderam"
+        - "Cada resposta usa framework específico (não genérico)"
+        - "Voz autêntica preservada"
+      veto:
+        - "Resposta genérica sem framework → refazer"
+        - "Advisor respondendo fora do seu domínio → redirecionar"
+
+    output:
+      responses: "list of advisor responses"
+
+  # =========================================================================
+  # PHASE 4: SYNTHESIS
+  # =========================================================================
+  - id: synthesize
+    name: "Sintetizar"
+    agent: board-chief
+    duration: "3-5min"
+    description: "board-chief sintetiza todas as respostas em recomendação final"
+
+    actions:
+      - "Identificar consenso entre advisors"
+      - "Mapear divergências e explicar por quê"
+      - "Formular recomendação ponderada"
+      - "Aplicar calibração ENTP"
+      - "Gerar action items concretos"
+
+    synthesis_structure:
+      consensus: "Onde todos concordam"
+      divergence: "Onde discordam e por quê"
+      recommendation: "Melhor caminho para perfil ENTP"
+      action_items: "3-5 ações com next steps"
+      entp_warning: "Blind spot específico para esta decisão"
+      follow_up: "Pergunta sugerida para próxima sessão"
+
+    checkpoint:
+      id: "AB-CP-04"
+      name: "Síntese Completa"
+      criteria:
+        - "Consenso e divergências mapeados"
+        - "Recomendação fundamentada"
+        - "Action items concretos e executáveis"
+        - "Calibração ENTP presente"
+      veto:
+        - "Sem action items → bloquear"
+        - "Recomendação sem fundamentação → refazer"
+
+    output:
+      advisory_response:
+        consensus: "string"
+        divergence: "string"
+        recommendation: "string"
+        action_items: "checklist"
+        entp_warning: "string"
+        follow_up: "string"
+
+  # =========================================================================
+  # PHASE 5: CLOSE
+  # =========================================================================
+  - id: close
+    name: "Encerrar Sessão"
+    agent: board-chief
+    duration: "1-2min"
+    description: "Encerrar e oferecer próximos passos"
+
+    actions:
+      - "Apresentar resposta final formatada"
+      - "Oferecer aprofundamento com advisor específico"
+      - "Sugerir follow-up ou próxima sessão"
+
+    output:
+      session_complete: true
+      follow_up_suggested: "string"
+
+# =========================================================================
+# ERROR HANDLING
+# =========================================================================
+error_handling:
+  advisor_unavailable:
+    action: "Substituir por advisor do mesmo tier"
+    fallback: "board-chief responde no lugar"
+
+  question_too_broad:
+    action: "Pedir para user decompor em sub-questões"
+    max_sub_questions: 3
+
+  conflicting_advice:
+    action: "Apresentar como divergência legítima, não resolver artificialmente"
+    note: "Desacordo entre experts é valioso, não um bug"

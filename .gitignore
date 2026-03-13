@@ -63,6 +63,7 @@ squads/*
 !squads/_example/
 # Published squads (whitelisted for repository)
 !squads/claude-code-mastery/
+!squads/advisor-board/
 keys/
 *.secret
 *.credentials

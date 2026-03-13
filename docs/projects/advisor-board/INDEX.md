@@ -1,27 +1,24 @@
 # Advisory Board Squad
 
 ## Estado Atual
-**Status:** CLONAGEM COMPLETA | Montagem do squad pendente
-**Squad:** `squads/advisor-board/` (ainda nao criado)
-**Minds:** 11/11 clonados em `outputs/minds/{slug}/` + 2 existentes (Naval, Hormozi)
+**Status:** SQUAD COMPLETO | Pronto para uso
+**Squad:** `squads/advisor-board/` (21 arquivos)
+**Minds:** 11/11 clonados + 2 existentes (Naval, Hormozi) = 13 advisors
 
 ## Ultima Sessao
-- **Data:** 2026-03-13
+- **Data:** 2026-03-13 (sessao 2)
 - **Agente:** Squad Architect (squad-chief)
 - **O que foi feito:**
-  - Reconversao de 21 livros (epub/pdf/mobi -> markdown) via pandoc + calibre
-  - Fonte: Dropbox (`LIVROS PARA MENTORIA DE PALESTRAS/`)
-  - Destino: `outputs/minds/advisor-board-sources/{slug}/`
-  - Clonagem de 11 minds em paralelo (subagents oalanicolas)
-  - Total: 2.599.413 words processados, 33 YAML files gerados
+  - Squad completo criado com 14 agents (board-chief + 13 advisors)
+  - 3 tasks: board-session, decision-council, strategic-review
+  - 1 workflow: advisory-session.yaml
+  - config.yaml + README.md + data/luiz-fosc-profile.md
+  - Total: 6.269 linhas de agents, 21 arquivos
 
 ## Proximo Passo
-1. Criar estrutura `squads/advisor-board/` (config.yaml, README.md)
-2. Criar `board-chief.md` (orquestrador com integracao ENTP)
-3. Criar 13 agent files referenciando `outputs/minds/{slug}/`
-4. Criar tasks (board-session, decision-council, strategic-review)
-5. Criar workflow (advisory-session)
-6. Validar com `*validate-squad advisor-board`
+1. Testar squad com uma sessao real (`*session`)
+2. Validar com `*validate-squad advisor-board` (opcional)
+3. Iterar baseado em uso real
 
 ## 13 Advisors
 
@@ -68,4 +65,5 @@ Tier 1 (Vision): Jobs, Disney
 
 ## Historico
 - 2026-03-12: Pesquisa iterativa (18 nomes), perfil ENTP, lista final 13 minds, ETL 21 livros
-- 2026-03-13: Reconversao livros (Dropbox), clonagem 11 minds em paralelo (2.6M words)
+- 2026-03-13 (s1): Reconversao livros (Dropbox), clonagem 11 minds em paralelo (2.6M words)
+- 2026-03-13 (s2): Squad completo criado (14 agents, 3 tasks, 1 workflow, 21 arquivos, 6.269 linhas)

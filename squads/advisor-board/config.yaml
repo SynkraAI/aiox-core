@@ -1,0 +1,130 @@
+pack:
+  name: advisor-board
+  version: 1.0.0
+  short-title: Advisory Board
+  description: >-
+    Personal advisory board of 13 elite minds spanning strategy, execution,
+    thinking, and vision. Each advisor is cloned from documented frameworks
+    with high-fidelity DNA. The board-chief orchestrates sessions by routing
+    questions to the right advisors based on the user's ENTP cognitive profile.
+  author: Luiz Fosc
+  icon: "🏛️"
+  slashPrefix: advisorBoard
+
+pattern_library:
+  prefix: AB
+  naming_convention:
+    format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+    example: "AB-TP-001"
+  categories:
+    - id: TP
+      name: "Task Patterns"
+      description: "Patterns for advisory task structure"
+    - id: EP
+      name: "Executor Patterns"
+      description: "Patterns for executor selection"
+    - id: PP
+      name: "Process Patterns"
+      description: "Patterns for advisory workflows"
+  patterns: []
+
+tier_structure:
+  orchestrator: board-chief
+  tier_0:
+    name: "Diagnostico"
+    agents: [board-chief]
+    purpose: "Analisa pergunta, consulta perfil ENTP, roteia para advisors"
+  tier_1_strategy:
+    name: "Strategy"
+    agents: [hamilton-helmer, verne-harnish, clayton-christensen, elon-musk]
+    purpose: "Estrategia competitiva, scaling, inovacao disruptiva, first principles"
+  tier_1_execution:
+    name: "Execution"
+    agents: [alex-hormozi, keith-cunningham, chris-voss]
+    purpose: "Growth, capital allocation, negociacao"
+  tier_1_thinking:
+    name: "Thinking"
+    agents: [annie-duke, nassim-taleb, shane-parrish, naval-ravikant]
+    purpose: "Decision making, antifragilidade, modelos mentais, filosofia"
+  tier_1_vision:
+    name: "Vision"
+    agents: [steve-jobs, walt-disney]
+    purpose: "Product vision, criatividade, brand"
+
+minds:
+  hamilton-helmer:
+    dna_path: "outputs/minds/hamilton-helmer/"
+    fidelity: "9.0/10"
+    source: "7 Powers (45K words)"
+  verne-harnish:
+    dna_path: "outputs/minds/verne-harnish/"
+    fidelity: "8.5/10"
+    source: "Scaling Up (93K words)"
+  chris-voss:
+    dna_path: "outputs/minds/chris-voss/"
+    fidelity: "8.7/10"
+    source: "Never Split the Difference (84K words)"
+  alex-hormozi:
+    dna_path: "squads/hormozi/"
+    fidelity: "9.0/10"
+    source: "Squad existente (16 agents, 165+ files)"
+    note: "Referencia squad completo, nao mind isolado"
+  clayton-christensen:
+    dna_path: "outputs/minds/clayton-christensen/"
+    fidelity: "8.9/10"
+    source: "Disruptive Innovation Collection (264K words)"
+  annie-duke:
+    dna_path: "outputs/minds/annie-duke/"
+    fidelity: "8.5/10"
+    source: "Thinking in Bets (79K words)"
+  keith-cunningham:
+    dna_path: "outputs/minds/keith-cunningham/"
+    fidelity: "9.0/10"
+    source: "The Road Less Stupid (76K words)"
+  naval-ravikant:
+    dna_path: "squads/mind-cloning/minds/naval-ravikant/outputs/"
+    fidelity: "9.5/10"
+    source: "2 books + 7 podcasts (280K words)"
+  nassim-taleb:
+    dna_path: "outputs/minds/nassim-taleb/"
+    fidelity: "8.9/10"
+    source: "3 livros (447K words)"
+  shane-parrish:
+    dna_path: "outputs/minds/shane-parrish/"
+    fidelity: "8.9/10"
+    source: "2 livros (107K words)"
+  steve-jobs:
+    dna_path: "outputs/minds/steve-jobs/"
+    fidelity: "8.9/10"
+    source: "3 livros (383K words)"
+  elon-musk:
+    dna_path: "outputs/minds/elon-musk/"
+    fidelity: "8.9/10"
+    source: "2 livros (321K words)"
+  walt-disney:
+    dna_path: "outputs/minds/walt-disney/"
+    fidelity: "8.8/10"
+    source: "3 livros (579K words)"
+
+user_profile:
+  dna_path: "squads/luiz-fosc/data/dna/"
+  mbti: "ENTP"
+  cognitive_style: "Ne-Ti dominant, convergent thinker under pressure"
+
+task_standards:
+  enforce_anatomy: true
+  validator: "AB-TP-001"
+  required_fields:
+    - task_name
+    - status
+    - responsible_executor
+    - execution_type
+    - input
+    - output
+    - action_items
+    - acceptance_criteria
+
+workflow_config:
+  checkpoint_policy: advisory
+  fail_fast: false
+  allow_manual_override: true
