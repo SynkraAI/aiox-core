@@ -5,6 +5,7 @@ Tracks which files have been transcribed, failed, or are pending.
 State is persisted to .transcription-state.json in the working directory.
 """
 
+import fcntl
 import json
 from datetime import datetime
 from pathlib import Path
@@ -38,12 +39,17 @@ class TranscriptionState:
         }
 
     def _save(self):
-        """Persist state to disk with atomic write."""
+        """Persist state to disk with atomic write and file locking."""
         self.work_dir.mkdir(parents=True, exist_ok=True)
-        tmp_path = self.state_file.with_suffix('.tmp')
-        with open(tmp_path, 'w', encoding='utf-8') as f:
-            json.dump(self.state, f, indent=2, ensure_ascii=False)
-        tmp_path.replace(self.state_file)
+        with open(self.state_file, 'a+') as f:
+            fcntl.flock(f.fileno(), fcntl.LOCK_EX)
+            try:
+                f.seek(0)
+                f.truncate()
+                json.dump(self.state, f, indent=2, ensure_ascii=False)
+                f.flush()
+            finally:
+                fcntl.flock(f.fileno(), fcntl.LOCK_UN)
 
     def is_completed(self, file_path):
         """Check if a file has already been transcribed."""

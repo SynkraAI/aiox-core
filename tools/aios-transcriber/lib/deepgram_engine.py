@@ -95,6 +95,11 @@ class DeepgramEngine:
                 compressed = audio_mod.compress_audio(file_path, bitrate=bitrate)
                 upload_path = compressed
             except RuntimeError as e:
+                file_size = file_path.stat().st_size
+                max_uncompressed = 500 * 1024 * 1024  # 500MB
+                if file_size > max_uncompressed:
+                    from .exceptions import FileTooLargeError
+                    raise FileTooLargeError(file_path, file_size, max_uncompressed) from e
                 print(f'  WARNING: Compression failed, using original: {e}')
 
         try:

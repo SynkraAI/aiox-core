@@ -129,6 +129,48 @@ def is_audio_file(path):
     return Path(path).suffix.lower() in audio_exts | video_exts
 
 
+def validate_media_file(path):
+    """Validate that a file is a real audio/video file using ffprobe.
+
+    Checks both file extension AND actual media content via ffprobe.
+    Catches cases like a .txt file renamed to .mp3.
+
+    Args:
+        path: path to the file to validate
+
+    Returns:
+        True if valid media file.
+
+    Raises:
+        InvalidMediaFileError: if ffprobe cannot parse the file.
+    """
+    from .exceptions import InvalidMediaFileError
+
+    path = Path(path)
+
+    if not path.exists():
+        raise InvalidMediaFileError(path, 'file not found')
+
+    if not is_audio_file(path):
+        raise InvalidMediaFileError(path, f'unsupported extension: {path.suffix}')
+
+    result = subprocess.run(
+        ['ffprobe', '-v', 'quiet', '-print_format', 'json', '-show_format', str(path)],
+        capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        raise InvalidMediaFileError(path, 'ffprobe validation failed')
+
+    try:
+        data = json.loads(result.stdout)
+        if not data.get('format', {}).get('format_name'):
+            raise InvalidMediaFileError(path, 'no format detected by ffprobe')
+    except json.JSONDecodeError:
+        raise InvalidMediaFileError(path, 'ffprobe returned invalid JSON')
+
+    return True
+
+
 def _format_size(size_bytes):
     """Format bytes to human readable string."""
     for unit in ['B', 'KB', 'MB', 'GB']:

@@ -236,9 +236,10 @@ def cmd_download_and_transcribe(args, platform):
 
     # Step 1: Download
     print(f'Step 1: Downloading from {platform}...')
-    result = subprocess.run(download_cmd, check=False)
+    result = subprocess.run(download_cmd, capture_output=True, text=True)
     if result.returncode != 0:
-        print(f'WARNING: Download had issues (exit code {result.returncode}), continuing with available files...')
+        from lib.exceptions import DownloadFailedError
+        raise DownloadFailedError(platform, result.stderr)
 
     # Step 2: Transcribe downloaded files
     print(f'\nStep 2: Transcribing downloaded files...')
