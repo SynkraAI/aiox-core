@@ -15,6 +15,8 @@
 | 11 | **naval-ravikant-mind** | **Mind Clone Elite 95% — falta smoke test** | **mind-cloning** | **2026-03-11** | [INDEX](naval-ravikant-mind/INDEX.md) |
 | 12 | **tabgroup-vault** | 🔄 **Extensão Brave/Chrome — backup de tab groups** | **—** | **2026-03-12** | [INDEX](~/CODE/Projects/tabgroup-vault/.aios/INDEX.md) |
 | 13 | **garimpoai** | 🔄 **Assistente IA para licitações públicas brasileiras (PNCP)** | **—** | **2026-03-12** | [INDEX](~/CODE/Projects/garimpoai/.aios/INDEX.md) |
+| 14 | **evolution-api** | **WhatsApp conectado via pairing code (Hetzner VPS v2.3.7)** | **—** | **2026-03-13** | [INDEX](evolution-api/INDEX.md) |
+| 15 | **advisory-board** | **11/11 minds clonados (2.6M words) — montar squad pendente** | **squad-chief** | **2026-03-13** | [INDEX](advisor-board/INDEX.md) |
 
 ## Backlog (Futuros Projetos)
 
