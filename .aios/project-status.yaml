@@ -2,18 +2,18 @@ status:
   branch: chore/devops-10-improvements
   modifiedFiles:
     - .aios/session.json
-    - docs/stories/active/M0.1-AC5-squad-integration.md
+    - docs/projects/ACTIVE.md
+    - docs/projects/ensinio/INDEX.md
     - .aios/handoffs/2026-03-12-advisor-board-squad.md
     - .aios/handoffs/2026-03-12-m0-1-ac5-dev-to-devops.md
-    - tools/google-sheets-writer.js
-  modifiedFilesTotalCount: 5
+  modifiedFilesTotalCount: 7
   recentCommits:
+    - 'd chore: checkpoint session — ensinio sheets audit + GHL sync'
     - 'd feat: add emoji-only name resolution from chat context'
-    - '3 feat: add Evolution WhatsApp API tool (zero deps)'
   currentEpic: Ensinio Prospector App
   currentStory: story-m1-foundation
-  lastUpdate: '2026-03-12T21:28:38.810Z'
+  lastUpdate: '2026-03-13T02:20:59.591Z'
   isGitRepo: true
-timestamp: 1773350918812
+timestamp: 1773368459593
 ttl: 60
-gitFingerprint: 1773264689977.0225:1773345957124.5535
+gitFingerprint: 1773264689977.0225:1773368389837.1052

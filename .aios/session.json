@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "pid": 98064,
+  "pid": 79724,
   "sessionId": "session-1771550831494-rwn54yvi2",
   "project": {
     "type": "project",
@@ -10,10 +10,10 @@
     "titleEmoji": ""
   },
   "status": {
-    "phase": "testing",
+    "phase": "extraction",
     "progress": "25/55",
     "currentTask": "",
-    "emoji": "🧪"
+    "emoji": "🧬"
   },
   "context": {
     "story": "M0.1-AC5-squad-integration",
@@ -24,6 +24,6 @@
   },
   "metadata": {
     "startedAt": "2026-02-20T01:27:11.494Z",
-    "lastUpdatedAt": "2026-03-13T02:04:32.983Z"
+    "lastUpdatedAt": "2026-03-13T13:29:24.081Z"
   }
 }

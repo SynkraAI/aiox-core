@@ -1,14 +1,15 @@
 # Ensinio — Project Index
 
 ## Estado Atual
-- **Squad:** `ensinio-whatsapp-prospector` v4.0.0 — pipeline completo com GHL
+- **Squad:** `ensinio-whatsapp-prospector` v5.0 — Sheets-First + GHL Sync
 - **Epic:** [EPIC-ENSINIO-APP](../../stories/epics/epic-ensinio-prospector-app/EPIC.md) — Evolução Squad → App
 - **Local:** `docs/projects/ensinio/`
-- **Status:** Squad operacional, epic de evolução para app em Draft
-- **Resultados:** 178 contatos, 77 qualificados, 20 HOT prospects (score 9-10)
-- **Phone Resolution:** 77/77 prospects com telefone resolvido (100% coverage)
+- **Status:** Planilha auditada, nomes corrigidos, GHL sincronizado
+- **Resultados:** 77 leads, 75 sincronizados no GHL, 2 pendentes (VERIFICAR)
+- **Phone Resolution:** 67/77 verificados na lista de membros, 8 de saídos do grupo, 2 VERIFICAR
 - **Outreach:** 77/77 mensagens personalizadas com WhatsApp links
-- **Google Sheets:** Scripts prontos (TSV + Apps Script), MCP OAuth configurado
+- **Google Sheets:** Planilha com Nome/Sobrenome/Telefone separados, dados auditados
+- **GHL:** 75 contatos + deals sincronizados (5 novos, 70 nomes atualizados)
 
 ## Dados do Projeto
 - **Phone-book:** `squads/ensinio-whatsapp-prospector/data/phone-books/mentoria-50k.json`
@@ -27,21 +28,17 @@
   - `generate-apps-script.js` — Gera Apps Script com dados embutidos
 
 ## Última Sessão (2026-03-12 — LATEST)
-- **Data:** 2026-03-12 ~20:30 (Noite)
-- **Agente/Squad:** @squad-chief + @media-processor → Ensinio Mind Enrichment
+- **Data:** 2026-03-12 ~22:00 (Noite)
+- **Agente/Squad:** ensinio-whatsapp-prospector (direto, sem agent formal)
 - **O que foi feito:**
-  1. ✅ Processado vídeo YouTube via media-processor pipeline
-     - URL: https://www.youtube.com/watch?v=JF0rWYPm1zc
-     - Extração: Captions pt-BR (12min 34s)
-  2. ✅ Atualizado ensinio-mind (v2.1.0 — Mind DNA Enrichment)
-     - Voice DNA: +3 signature phrases (com [SOURCE:])
-     - Thinking DNA: +2 heuristics (com QUANDO usar)
-     - Fidelity: 88→91/100 | Coverage: 92%→98%
-  3. ✅ Documentação completa atualizada:
-     - `squads/ensinio-mind/README.md` (v2.1.0)
-     - `docs/projects/ensinio/INDEX.md` (sessão adicionada)
-  4. ✅ Gerado quality-dashboard para monitoramento (salvo em `docs/projects/ensinio/quality-dashboard-ensinio.md`)
-  5. ✅ Commit pronto para push (delegado para @devops)
+  1. ✅ Auditoria completa de 77 leads: cruzou planilha × lista de membros × chat
+  2. ✅ Corrigiu 9 telefones errados (6 duplicados do +5511974830404 + 3 outros)
+  3. ✅ Completou 23 nomes com sobrenomes (Katia→Katia Tavares, etc.)
+  4. ✅ Separou Nome/Sobrenome em colunas distintas na planilha
+  5. ✅ Removeu prefixos profissionais (Engenheiro, Dra, Psicóloga, etc.)
+  6. ✅ Criou `sync-sheets-to-ghl.js` — lê da planilha e sincroniza com GHL
+  7. ✅ Sincronizou 75/77 leads no GHL (5 novos contatos+deals, 70 nomes atualizados)
+  8. ✅ Verificação cruzada: 67 números confirmados, 8 de saídos do grupo, 2 VERIFICAR
 
 ---
 
@@ -58,16 +55,16 @@
   7. ✅ Blocker GHL documentado em ADR-001-tech-stack.md + M0.4 story
 
 ## Próximo Passo
-- **READY TO EXECUTE** — tudo pronto para sync dos 77:
-  1. Reescrever sync-mentoria-ghl-v2.js com lógica de deduplicação (usar test-ghl-single.js como referência)
-  2. Executar: `node scripts/sync-mentoria-ghl-v2.js` (esperado: 77 opportunities, 0 duplicatas)
-  3. Popular Google Sheets com resultado
-  4. Paralelo: Iniciar M0.1 (Smart Name Parser) para resolver problema de nomes concatenados
+- **Verificar 2 telefones pendentes:** Vinicius Soares e Patrícia de Pieri (saíram do grupo)
+- **Resolver 2 nomes:** ⚖️ (DDD 61, jurídica) e Get and Go (empresa mini mercado)
+- **SDR:** Completar sobrenomes faltantes (Eduardo, Alexandra, Ci, Jovito, etc.)
+- **Opcional:** Implementar Phase 8 (populate-sheet-v5.md) e Phase 9 (sync-to-ghl-v5.md) do pipeline v5.0
 
 ## Histórico
 | Data | Sessão | Resumo |
 |------|--------|--------|
-| 2026-03-12 | GHL Integration v4.0 | API GHL validada, pipeline v4.0 com sync (contact+deal+msg), tag prompt, image-first phone resolution |
+| 2026-03-12 (3) | Sheets Audit + GHL Sync | Auditoria 77 leads, 9 telefones corrigidos, 23 nomes completados, 75 sincronizados no GHL |
+| 2026-03-12 (2) | GHL Integration v4.0 | API GHL validada, pipeline v4.0 com sync (contact+deal+msg), tag prompt, image-first phone resolution |
 | 2026-03-10 (2) | Phone Resolution + Sheets | 77/77 telefones resolvidos, scripts Google Sheets, MCP OAuth configurado |
 | 2026-03-10 (1) | Outreach completo | 57 novas mensagens (score 3-6), total 77/77 prospects cobertos |
 | 2026-03-09 (3) | Phone Resolution + Outreach | 20/20 telefones resolvidos, 20 mensagens personalizadas escritas |

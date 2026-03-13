@@ -2,7 +2,7 @@
 
 | # | Projeto | Status | Agente/Squad | Última Sessão | INDEX |
 |---|---------|--------|-------------|---------------|-------|
-| 1 | **ensinio** | **Squad v4.0 — GHL integration (contact+deal+msg+tags)** | **ensinio-whatsapp-prospector** | **2026-03-12** | [INDEX](ensinio/INDEX.md) |
+| 1 | **ensinio** | **v5.0 — Sheets auditado, 75/77 GHL sync OK** | **ensinio-whatsapp-prospector** | **2026-03-12** | [INDEX](ensinio/INDEX.md) |
 | 2 | gui-avila-mind | Transcrição limpa disponível | squad-creator-pro | 2026-03-07 | [INDEX](gui-avila-mind/INDEX.md) |
 | 3 | luiz-fosc-mentoria | Research completa | tech-search | 2026-03-06 | [INDEX](luiz-fosc-mentoria/INDEX.md) |
 | 4 | luiz-fosc-mind-clone | Research INPI concluída | tech-search | 2026-03-05 | [INDEX](luiz-fosc-mind-clone/INDEX.md) |
