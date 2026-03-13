@@ -1,20 +1,23 @@
 #!/usr/bin/env python3
 """YouTube fast path — extract captions without downloading video.
 
-Wraps tools/youtube-captions/youtube_captions.py via subprocess.
+Imports tools/youtube-captions/youtube_captions.py directly as a library.
 This is the fastest transcription path: subtitles are extracted in seconds.
 """
 
-import subprocess
 import sys
 from pathlib import Path
 
-# Path to youtube-captions script (relative to aios-core root)
-YOUTUBE_CAPTIONS_SCRIPT = Path(__file__).parent.parent.parent / 'youtube-captions' / 'youtube_captions.py'
+# Add youtube-captions to import path
+_YT_CAPTIONS_DIR = str(Path(__file__).parent.parent.parent / 'youtube-captions')
+if _YT_CAPTIONS_DIR not in sys.path:
+    sys.path.insert(0, _YT_CAPTIONS_DIR)
+
+from youtube_captions import extract_captions, extract_playlist  # noqa: E402
 
 
 def transcribe_youtube(url, output_dir, lang_priority=None, is_playlist=False):
-    """Extract YouTube captions via youtube-captions tool.
+    """Extract YouTube captions via direct import of youtube-captions.
 
     Args:
         url: YouTube video or playlist URL
@@ -23,32 +26,18 @@ def transcribe_youtube(url, output_dir, lang_priority=None, is_playlist=False):
         is_playlist: if True, treat as playlist URL
 
     Returns:
-        True if successful, False otherwise
-    """
-    if not YOUTUBE_CAPTIONS_SCRIPT.exists():
-        print(f'ERROR: youtube-captions script not found at {YOUTUBE_CAPTIONS_SCRIPT}')
-        print('  Expected: tools/youtube-captions/youtube_captions.py')
-        return False
+        dict with caption data if successful (single video),
+        list of dicts if playlist,
+        None if no captions found.
 
-    cmd = [sys.executable, str(YOUTUBE_CAPTIONS_SCRIPT)]
+    Raises:
+        Exception: propagates errors with full stack trace.
+    """
+    print('Extracting YouTube captions (fast path, no download)...')
 
     if is_playlist:
-        cmd.extend(['--playlist', url])
-    else:
-        cmd.append(url)
+        results = extract_playlist(url, str(output_dir), lang_priority)
+        return results if results else None
 
-    cmd.extend(['-o', str(output_dir)])
-
-    if lang_priority:
-        for lang in lang_priority:
-            cmd.extend(['-l', lang])
-
-    cmd.extend(['--format', 'md'])
-
-    print(f'Extracting YouTube captions (fast path, no download)...')
-    try:
-        result = subprocess.run(cmd, check=False)
-        return result.returncode == 0
-    except Exception as e:
-        print(f'ERROR: Failed to run youtube-captions: {e}')
-        return False
+    result = extract_captions(url, str(output_dir), lang_priority)
+    return result

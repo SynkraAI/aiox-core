@@ -42,6 +42,39 @@ except ImportError:
     HAS_BROWSER_COOKIES = False
 
 
+# Import canonical formatter from aios-transcriber
+_FORMATTER = None
+
+def _get_formatter():
+    """Lazy-load the canonical formatter from aios-transcriber."""
+    global _FORMATTER
+    if _FORMATTER is None:
+        formatter_dir = str(Path(__file__).parent.parent / 'aios-transcriber' / 'lib')
+        if formatter_dir not in sys.path:
+            sys.path.insert(0, formatter_dir)
+        from formatter import generate_markdown as _gen_md, save_markdown as _save_md, slugify as _slugify_fn
+        _FORMATTER = {'generate_markdown': _gen_md, 'save_markdown': _save_md, 'slugify': _slugify_fn}
+    return _FORMATTER
+
+
+def _get_exceptions():
+    """Lazy-load custom exceptions from aios-transcriber."""
+    lib_dir = str(Path(__file__).parent.parent / 'aios-transcriber' / 'lib')
+    if lib_dir not in sys.path:
+        sys.path.insert(0, lib_dir)
+    from exceptions import NoSubtitlesError
+    return NoSubtitlesError
+
+
+# Public API
+__all__ = [
+    'extract_captions',
+    'extract_playlist',
+    'search_youtube',
+    'DEFAULT_LANG_PRIORITY',
+]
+
+
 # Language priority: try these in order
 DEFAULT_LANG_PRIORITY = ["pt-BR", "pt", "en", "en-US", "es"]
 
@@ -353,8 +386,8 @@ def extract_captions(video_url, output_dir=None, lang_priority=None, output_form
             lang = meta["language"]
             sub_type = meta["subtitle_type"]
         else:
-            print(f"  WARNING: No captions found for: {title}")
-            return None
+            NoSubtitlesError = _get_exceptions()
+            raise NoSubtitlesError(video_url, title)
     else:
         sub_type = "auto-generated" if is_auto else "manual"
         print(f"  Found captions: {lang} ({sub_type})")
@@ -383,14 +416,14 @@ def extract_captions(video_url, output_dir=None, lang_priority=None, output_form
                         sub_type = meta["subtitle_type"]
 
                 if not (text and text.strip()):
-                    print(f"  WARNING: Rate limited, all fallbacks failed for: {title}")
-                    return None
+                    NoSubtitlesError = _get_exceptions()
+                    raise NoSubtitlesError(video_url, title)
             else:
                 raise
 
     if not text.strip():
-        print(f"  WARNING: Empty captions for: {title}")
-        return None
+        NoSubtitlesError = _get_exceptions()
+        raise NoSubtitlesError(video_url, title)
 
     # Format date
     date_formatted = ""
@@ -433,21 +466,29 @@ def extract_captions(video_url, output_dir=None, lang_priority=None, output_form
 
 
 def generate_markdown(data):
-    """Generate markdown with frontmatter from caption data."""
-    frontmatter = f"""---
-title: "{data['title']}"
-channel: "{data['channel']}"
-date: "{data['date']}"
-language: "{data['language']}"
-subtitle_type: "{data['subtitle_type']}"
-duration: "{data['duration']}"
-source_url: "{data['source_url']}"
-source_type: youtube_captions
-word_count: {data['word_count']}
-extracted_at: "{datetime.now().strftime('%Y-%m-%d %H:%M')}"
----"""
+    """Generate markdown using the canonical formatter from aios-transcriber.
 
-    return f"{frontmatter}\n\n# {data['title']}\n\n{data['text']}\n"
+    Maps youtube-captions result dict to the formatter's expected schema.
+    Uses transcribed_at (not extracted_at) for unified frontmatter.
+    """
+    fmt = _get_formatter()
+    formatter_data = {
+        'title': data.get('title', 'Untitled'),
+        'source': data.get('source_url', ''),
+        'source_type': 'youtube_captions',
+        'engine': 'yt-dlp',
+        'language': data.get('language', ''),
+        'duration': data.get('duration', '00:00:00'),
+        'text': data.get('text', ''),
+        'word_count': data.get('word_count', 0),
+    }
+    if data.get('channel'):
+        formatter_data['channel'] = data['channel']
+    if data.get('date'):
+        formatter_data['date'] = data['date']
+    if data.get('subtitle_type'):
+        formatter_data['subtitle_type'] = data['subtitle_type']
+    return fmt['generate_markdown'](formatter_data)
 
 
 def extract_playlist(playlist_url, output_dir, lang_priority=None, output_format="md",
