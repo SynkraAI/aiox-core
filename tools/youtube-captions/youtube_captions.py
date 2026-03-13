@@ -128,7 +128,11 @@ def pick_best_subtitle(info, lang_priority=None):
 
 def download_subtitle_content(url):
     """Download subtitle JSON3 content from URL."""
-    with urllib.request.urlopen(url, timeout=30) as resp:
+    req = urllib.request.Request(url, headers={
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "Accept-Language": "en-US,en;q=0.9",
+    })
+    with urllib.request.urlopen(req, timeout=30) as resp:
         return json.loads(resp.read().decode("utf-8"))
 
 
@@ -328,7 +332,7 @@ def get_video_durations(video_ids, api_key):
 
 def search_youtube(query, output_dir, max_results=100, api_key=None,
                    min_duration=600, lang_priority=None, output_format="md",
-                   list_only=False):
+                   list_only=False, delay=5):
     """Search YouTube for videos and extract captions from results."""
     if not api_key:
         api_key = os.environ.get("YOUTUBE_API_KEY")
@@ -451,7 +455,7 @@ def search_youtube(query, output_dir, max_results=100, api_key=None,
             except Exception as e:
                 if "429" in str(e) and retries < 2:
                     retries += 1
-                    wait = 5 * retries
+                    wait = delay * (2 ** retries)
                     print(f"  Rate limited, waiting {wait}s (retry {retries}/2)...")
                     time.sleep(wait)
                 else:
@@ -459,9 +463,9 @@ def search_youtube(query, output_dir, max_results=100, api_key=None,
                     skipped_no_captions += 1
                     break
 
-        # Small delay between videos to avoid rate limiting
+        # Delay between videos to avoid rate limiting
         if i < total:
-            time.sleep(2)
+            time.sleep(delay)
 
     # Phase 4: Generate index and manifest
     if results:
@@ -533,6 +537,7 @@ Examples:
     parser.add_argument("--api-key", help="YouTube Data API v3 key (or set YOUTUBE_API_KEY env var)")
     parser.add_argument("--min-duration", type=int, default=600, help="Min video duration in seconds for search mode (default: 600 = 10min)")
     parser.add_argument("--list-only", action="store_true", help="Search mode: only list video URLs, don't extract captions")
+    parser.add_argument("--delay", type=int, default=5, help="Seconds between caption extractions to avoid rate limiting (default: 5)")
     parser.add_argument("-o", "--output", default=".", help="Output directory (default: current)")
     parser.add_argument(
         "-l", "--lang", action="append", dest="langs",
@@ -555,7 +560,7 @@ Examples:
         search_youtube(
             args.search, args.output, max_results=args.max, api_key=args.api_key,
             min_duration=args.min_duration, lang_priority=lang_priority,
-            output_format=args.format, list_only=args.list_only,
+            output_format=args.format, list_only=args.list_only, delay=args.delay,
         )
     elif args.playlist:
         extract_playlist(args.playlist, args.output, lang_priority, args.format)
