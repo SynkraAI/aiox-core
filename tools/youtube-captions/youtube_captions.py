@@ -237,60 +237,72 @@ def fetch_captions_transcript_api(video_id, lang_priority=None, cookies_path=Non
         return None, None
 
 
-def fetch_captions_with_browser_cookies(video_id, lang_priority=None):
-    """Last resort: use browser cookies to bypass IP rate limiting."""
-    if not HAS_BROWSER_COOKIES or not HAS_TRANSCRIPT_API:
-        return None, None
+def fetch_captions_with_browser_cookies(video_url, video_id, lang_priority=None):
+    """Last resort: use yt-dlp with browser cookies to bypass rate limiting.
 
-    browsers = [
-        ("Chrome", browser_cookie3.chrome),
-        ("Firefox", browser_cookie3.firefox),
-    ]
+    Uses yt-dlp's native --cookies-from-browser which triggers the macOS
+    Keychain dialog for permission.
+    """
+    import tempfile
 
-    for browser_name, cookie_fn in browsers:
+    if lang_priority is None:
+        lang_priority = DEFAULT_LANG_PRIORITY
+
+    browsers = ["chrome", "firefox", "safari"]
+
+    for browser in browsers:
         try:
-            cj = cookie_fn(domain_name=".youtube.com")
-            if not any(True for _ in cj):
-                continue
+            with tempfile.TemporaryDirectory() as tmpdir:
+                ydl_opts = {
+                    "skip_download": True,
+                    "writesubtitles": True,
+                    "writeautomaticsub": True,
+                    "subtitleslangs": lang_priority,
+                    "subtitlesformat": "json3",
+                    "outtmpl": os.path.join(tmpdir, "%(id)s.%(ext)s"),
+                    "cookiesfrombrowser": (browser,),
+                    "quiet": True,
+                    "no_warnings": True,
+                }
 
-            import requests
-            session = requests.Session()
-            session.cookies = cj
-            ytt_api = YouTubeTranscriptApi(http_client=session)
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    ydl.download([video_url])
 
-            transcript_list = ytt_api.list(video_id)
-            best_lang = None
-            for t in transcript_list:
-                if t.language_code in (lang_priority or DEFAULT_LANG_PRIORITY):
-                    best_lang = t.language_code
-                    break
-                if best_lang is None:
-                    best_lang = t.language_code
+                # Find downloaded subtitle files
+                sub_files = list(Path(tmpdir).glob(f"{video_id}*.json3"))
+                if not sub_files:
+                    continue
 
-            if not best_lang:
-                continue
+                # Pick best by language priority
+                best_file = sub_files[0]
+                for lang in lang_priority:
+                    for f in sub_files:
+                        if f".{lang}." in f.name:
+                            best_file = f
+                            break
 
-            result = ytt_api.fetch(video_id, languages=[best_lang])
-            lines = []
-            for snippet in result:
-                start = snippet.start if hasattr(snippet, "start") else snippet.get("start", 0)
-                text_val = snippet.text if hasattr(snippet, "text") else snippet.get("text", "")
-                minutes = int(start) // 60
-                seconds = int(start) % 60
-                text_clean = re.sub(r"\n", " ", text_val).strip()
-                if text_clean:
-                    lines.append(f"[{minutes:02d}:{seconds:02d}] {text_clean}")
+                sub_content = best_file.read_text(encoding="utf-8")
+                sub_data = json.loads(sub_content)
+                text = parse_subtitle_content(sub_data)
 
-            text = "\n".join(lines)
-            if text.strip():
-                is_auto = any(t.is_generated for t in transcript_list if t.language_code == best_lang)
-                sub_type = "auto-generated" if is_auto else "manual"
-                print(f"  Browser cookies ({browser_name}) worked: {best_lang} ({sub_type})")
-                return text, {"language": best_lang, "subtitle_type": sub_type}
+                if text.strip():
+                    # Detect language from filename
+                    detected_lang = "unknown"
+                    for lang in lang_priority:
+                        if f".{lang}." in best_file.name:
+                            detected_lang = lang
+                            break
+
+                    is_auto = ".auto." in best_file.name or detected_lang not in [
+                        lang for lang in lang_priority
+                    ]
+                    sub_type = "auto-generated" if is_auto else "manual"
+                    print(f"  Browser cookies ({browser}) worked: {detected_lang} ({sub_type})")
+                    return text, {"language": detected_lang, "subtitle_type": sub_type}
 
         except Exception as e:
             err_msg = str(e).split("\n")[0]
-            print(f"  Browser cookies ({browser_name}) failed: {err_msg}")
+            print(f"  Browser cookies ({browser}) failed: {err_msg}")
             continue
 
     return None, None
@@ -349,10 +361,10 @@ def extract_captions(video_url, output_dir=None, lang_priority=None, output_form
                         sub_type = meta["subtitle_type"]
                         print(f"  Fallback OK: {lang} ({sub_type})")
 
-                # Attempt 2: browser cookies
-                if not (text and text.strip()) and HAS_BROWSER_COOKIES:
+                # Attempt 2: yt-dlp with browser cookies
+                if not (text and text.strip()):
                     print(f"  Trying browser cookies fallback...")
-                    text, meta = fetch_captions_with_browser_cookies(video_id, lang_priority)
+                    text, meta = fetch_captions_with_browser_cookies(video_url, video_id, lang_priority)
                     if text and text.strip():
                         lang = meta["language"]
                         sub_type = meta["subtitle_type"]
