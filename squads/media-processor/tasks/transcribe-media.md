@@ -15,7 +15,7 @@
 
 ## Purpose
 
-Transcrever arquivos de mídia local (video/audio) usando o video-transcriber CLI, gerando transcrição estruturada, limpa e segmentada em chunks para processamento posterior.
+Transcrever arquivos de mídia local (video/audio) usando o aios-transcriber CLI, gerando transcrição estruturada e limpa em markdown para processamento posterior. Usa Whisper ou Deepgram conforme configuração.
 
 **Por que esta task existe:**
 - Converte mídia falada em texto estruturado
@@ -43,10 +43,10 @@ Transcrever arquivos de mídia local (video/audio) usando o video-transcriber CL
 ## Preconditions
 
 ### System Requirements
-- [x] video-transcriber instalado em `tools/video-transcriber/`
-- [x] Virtual environment ativado (`.venv/bin/`)
+- [x] aios-transcriber disponível em `tools/aios-transcriber/`
+- [x] Python 3.8+ instalado
 - [x] FFmpeg instalado (para extração de audio)
-- [x] Whisper model baixado (primeiro uso demora mais)
+- [x] Whisper ou Deepgram configurado (dependendo do engine escolhido)
 
 ### Input Validation
 - [x] `media_file` existe e é legível
@@ -63,9 +63,8 @@ Transcrever arquivos de mídia local (video/audio) usando o video-transcriber CL
 
 ### Step 1: Prepare Environment
 ```bash
-# Validate video-transcriber installation
-cd <PROJECT_ROOT>/tools/video-transcriber
-test -f .venv/bin/video-transcriber || { echo "video-transcriber not installed"; exit 1; }
+# Validate aios-transcriber installation
+test -f <PROJECT_ROOT>/tools/aios-transcriber/aios_transcriber.py || { echo "aios-transcriber not installed"; exit 1; }
 
 # Create output directory
 mkdir -p "{output_dir}"
@@ -85,87 +84,61 @@ else
 fi
 ```
 
-### Step 3: Execute Transcription (Route A: Local Media)
+### Step 3: Execute Transcription (Route A: Local Media with Whisper)
 ```bash
-# For local video/audio files
-cd <PROJECT_ROOT>/tools/video-transcriber
-
-# Transcribe
-.venv/bin/video-transcriber transcribe "{media_file}" \
-  -o "{output_dir}/transcription.json" \
-  -m {model} \
-  -l {language}
-
-# Validate output
-test -f "{output_dir}/transcription.json" || { echo "Transcription failed"; exit 1; }
-```
-
-### Step 3b: Execute Transcription (Route B: URL)
-```bash
-# For YouTube or direct media URLs
-cd <PROJECT_ROOT>/tools/video-transcriber
-
-# Process (download + transcribe in one step)
-.venv/bin/video-transcriber process "{media_file}" \
+# For local video/audio files using Whisper
+python3 <PROJECT_ROOT>/tools/aios-transcriber/aios_transcriber.py \
+  local "{media_file}" \
   -o "{output_dir}" \
-  -m {model} \
-  -l {language}
+  --engine whisper
 
 # Validate output
-test -f "{output_dir}/transcription.json" || { echo "Process failed"; exit 1; }
+test -f "{output_dir}/transcript.md" || { echo "Transcription failed"; exit 1; }
 ```
 
-### Step 3c: Execute Transcription (Route C: Existing Transcript)
+### Step 3b: Execute Transcription (Route B: Local Media with Deepgram)
 ```bash
-# For VTT, SRT, TXT, MD files
-cd <PROJECT_ROOT>/tools/video-transcriber
-
-# Ingest existing transcript
-.venv/bin/video-transcriber ingest "{media_file}" \
-  -o "{output_dir}/transcription.json"
+# For local video/audio files using Deepgram (faster, paid)
+python3 <PROJECT_ROOT>/tools/aios-transcriber/aios_transcriber.py \
+  local "{media_file}" \
+  -o "{output_dir}" \
+  --engine deepgram
 
 # Validate output
-test -f "{output_dir}/transcription.json" || { echo "Ingest failed"; exit 1; }
+test -f "{output_dir}/transcript.md" || { echo "Transcription failed"; exit 1; }
 ```
 
-### Step 4: Clean Transcription
+### Step 3c: Execute Transcription (Route C: YouTube URL)
 ```bash
-cd <PROJECT_ROOT>/tools/video-transcriber
+# For YouTube URLs (uses caption extraction)
+python3 <PROJECT_ROOT>/tools/aios-transcriber/aios_transcriber.py \
+  youtube "{media_file}" \
+  -o "{output_dir}"
 
-# Clean (remove duplicates, fix spacing, improve readability)
-.venv/bin/video-transcriber clean "{output_dir}/transcription.json" \
-  -o "{output_dir}/transcription_clean.json"
-
-# Validate clean output
-test -f "{output_dir}/transcription_clean.json" || { echo "Clean failed"; exit 1; }
-test -f "{output_dir}/transcription_clean.md" || { echo "Markdown export failed"; exit 1; }
+# Validate output
+test -f "{output_dir}/transcript.md" || { echo "Caption extraction failed"; exit 1; }
 ```
 
-### Step 5: Chunk Transcription
+### Step 4: Validate Output
+
+**Note:** aios-transcriber outputs clean markdown directly. No separate clean/chunk steps needed.
+
 ```bash
-cd <PROJECT_ROOT>/tools/video-transcriber
+# Validate transcript exists
+test -f "{output_dir}/transcript.md" || { echo "Transcript missing"; exit 1; }
 
-# Chunk (semantic segmentation for processing)
-.venv/bin/video-transcriber chunk "{output_dir}/transcription_clean.json" \
-  -o "{output_dir}/chunks"
-
-# Validate chunks
-test -d "{output_dir}/chunks" || { echo "Chunking failed"; exit 1; }
-CHUNK_COUNT=$(ls "{output_dir}/chunks"/*.json 2>/dev/null | wc -l)
-test "$CHUNK_COUNT" -gt 0 || { echo "No chunks generated"; exit 1; }
+# Validate metadata
+test -f "{output_dir}/metadata.json" || { echo "Metadata missing"; exit 1; }
 ```
 
-### Step 6: Generate Stats
+### Step 5: Generate Stats
 ```bash
-# Stats are auto-generated during clean step
-test -f "{output_dir}/stats.json" || { echo "Stats missing"; exit 1; }
+# Stats are in metadata.json
+test -f "{output_dir}/metadata.json" || { echo "Metadata missing"; exit 1; }
 
 # Extract key metrics
-WORD_COUNT=$(jq -r '.word_count' "{output_dir}/stats.json")
-DURATION=$(jq -r '.duration_seconds' "{output_dir}/stats.json")
-CHUNK_COUNT=$(jq -r '.chunk_count' "{output_dir}/stats.json")
-
-echo "Transcription complete: $WORD_COUNT words, $DURATION seconds, $CHUNK_COUNT chunks"
+WORD_COUNT=$(wc -w < "{output_dir}/transcript.md")
+echo "Transcription complete: $WORD_COUNT words"
 ```
 
 ---
@@ -174,11 +147,8 @@ echo "Transcription complete: $WORD_COUNT words, $DURATION seconds, $CHUNK_COUNT
 
 | Output | Type | Location | Description |
 |--------|------|----------|-------------|
-| `transcription.json` | JSON | `{output_dir}/` | Raw Whisper output with timestamps |
-| `transcription_clean.json` | JSON | `{output_dir}/` | Cleaned, structured transcription |
-| `transcription_clean.md` | Markdown | `{output_dir}/` | Human-readable transcript |
-| `chunks/` | Directory | `{output_dir}/chunks/` | Semantic segments (JSON files) |
-| `stats.json` | JSON | `{output_dir}/` | Metadata: word count, duration, quality metrics |
+| `transcript.md` | Markdown | `{output_dir}/` | Clean markdown transcript |
+| `metadata.json` | JSON | `{output_dir}/` | Video metadata, duration, engine used |
 
 **Output Structure (Lesson Folder = Unidade Atômica):**
 
@@ -186,16 +156,9 @@ All transcription outputs go into the **lesson folder** — the same directory w
 
 ```
 {lesson_folder}/                    # = output_dir
-├── video.mp4                       # Already here from download phase
-├── video_16k.wav                   # Audio prep (if applicable)
-├── transcription.json              # Raw Whisper output
-├── transcription_clean.json        # Cleaned output
-├── transcription_clean.md          # Markdown export
-├── stats.json                      # Metrics
-└── chunks/
-    ├── chunk_001.json
-    ├── chunk_002.json
-    └── ...
+├── video.mp4                       # Already here from download phase (if applicable)
+├── transcript.md                   # Clean markdown transcript
+└── metadata.json                   # Metadata
 ```
 
 **Path convention:** `{session_dir}/{Course}/{NN}{SEP}{Module}/{NN}{SEP}{Lesson}/`
@@ -211,22 +174,15 @@ All transcription outputs go into the **lesson folder** — the same directory w
 **Automated Checks:**
 ```bash
 # 1. All expected files exist
-test -f "{output_dir}/transcription.json"
-test -f "{output_dir}/transcription_clean.json"
-test -f "{output_dir}/transcription_clean.md"
-test -f "{output_dir}/stats.json"
-test -d "{output_dir}/chunks"
+test -f "{output_dir}/transcript.md"
+test -f "{output_dir}/metadata.json"
 
-# 2. Stats validation
-WORD_COUNT=$(jq -r '.word_count' "{output_dir}/stats.json")
+# 2. Content validation
+WORD_COUNT=$(wc -w < "{output_dir}/transcript.md")
 test "$WORD_COUNT" -gt 0 || { echo "Empty transcription"; exit 1; }
 
-# 3. Chunk validation
-CHUNK_COUNT=$(ls "{output_dir}/chunks"/*.json 2>/dev/null | wc -l)
-test "$CHUNK_COUNT" -gt 0 || { echo "No chunks generated"; exit 1; }
-
-# 4. Markdown readability
-MD_LINES=$(wc -l < "{output_dir}/transcription_clean.md")
+# 3. Markdown readability
+MD_LINES=$(wc -l < "{output_dir}/transcript.md")
 test "$MD_LINES" -gt 10 || { echo "Transcript too short"; exit 1; }
 ```
 
@@ -238,9 +194,8 @@ test "$MD_LINES" -gt 10 || { echo "Transcript too short"; exit 1; }
 
 **Thresholds:**
 - Word count > 0 (CRITICAL)
-- Chunk count > 0 (CRITICAL)
 - Duration > 0 (CRITICAL)
-- Confidence score > 0.7 (if available, RECOMMENDED)
+- Valid markdown format (CRITICAL)
 
 ---
 
@@ -249,14 +204,13 @@ test "$MD_LINES" -gt 10 || { echo "Transcript too short"; exit 1; }
 **Pass Criteria:**
 - All automated checks pass
 - Word count > 100 (for media > 1min)
-- Chunk count > 0
+- Valid markdown format
 - No critical errors in logs
 
 **Fail Criteria (Retry):**
 - Empty transcription (word count = 0)
-- No chunks generated
 - Missing required files
-- FFmpeg errors (invalid media format)
+- Invalid media format
 
 **Escalation Criteria:**
 - Retry limit exceeded (3 attempts)
@@ -269,14 +223,14 @@ test "$MD_LINES" -gt 10 || { echo "Transcript too short"; exit 1; }
 ## Integration Points
 
 ### Downstream Tasks
-- **NEXT:** `sculpt-transcript.md` (consumes `transcription_clean.md`)
+- **NEXT:** `sculpt-transcript.md` (consumes `transcript.md`)
 - **PARALLEL:** Can run for multiple items simultaneously
 
 ### Upstream Tasks
 - **PREVIOUS:** `download-media.md` (if source is URL) OR direct user input (local file)
 
 ### Squad Coordination
-- Outputs `transcription_clean.md` to handoff location for transcript-sculptor
+- Outputs `transcript.md` to handoff location for transcript-sculptor
 - Updates batch status with transcription stats
 - Logs completion in session state
 
@@ -288,11 +242,10 @@ test "$MD_LINES" -gt 10 || { echo "Transcript too short"; exit 1; }
 
 | Error | Cause | Recovery |
 |-------|-------|----------|
-| `Transcription failed` | Whisper error, invalid media | Retry with smaller model (base) |
+| `Transcription failed` | Engine error, invalid media | Try different engine (whisper vs deepgram) |
 | `FFmpeg not found` | Missing dependency | Install FFmpeg: `brew install ffmpeg` |
-| `Model download timeout` | Network issue | Retry, use pre-downloaded model |
-| `Empty transcription` | Silent media, wrong language | Verify media, try language auto-detect |
-| `Chunking failed` | Malformed JSON | Re-run clean step |
+| `Empty transcription` | Silent media, wrong engine | Verify media, try different engine |
+| `API error` | Deepgram API issue | Fallback to Whisper |
 
 ### Retry Strategy
 - Max retries: 3
@@ -305,15 +258,15 @@ test "$MD_LINES" -gt 10 || { echo "Transcript too short"; exit 1; }
 ## Performance Notes
 
 **Benchmarks (estimados):**
-- 1min video → ~30s transcription (model: medium)
-- 10min video → ~3min transcription
-- 1h video → ~15-20min transcription
+- 1min video → ~10-20s transcription (Whisper) or ~5s (Deepgram)
+- 10min video → ~2-4min transcription (Whisper) or ~15s (Deepgram)
+- 1h video → ~10-20min transcription (Whisper) or ~1min (Deepgram)
 
 **Optimization Tips:**
-- Use `tiny` or `base` model for speed (lower quality)
-- Use `large` model for critical content (slower)
-- Process multiple files in parallel (max 4 concurrent)
-- Pre-download Whisper models to avoid first-run delay
+- Use Deepgram for speed (paid, very fast)
+- Use Whisper for free option (slower but good quality)
+- Process multiple files in parallel (max 4 concurrent for Whisper)
+- For YouTube, use caption extraction instead (10-100x faster)
 
 ---
 
@@ -322,17 +275,14 @@ test "$MD_LINES" -gt 10 || { echo "Transcript too short"; exit 1; }
 ### Environment Variables
 ```bash
 # Optional: Override defaults
-export WHISPER_MODEL="medium"      # tiny, base, small, medium, large
-export WHISPER_LANGUAGE="pt"       # pt, en, es, etc.
-export WHISPER_DEVICE="cpu"        # cpu, cuda (if GPU available)
+export DEEPGRAM_API_KEY="your-key"  # For Deepgram engine
+export TRANSCRIPTION_ENGINE="whisper"  # whisper or deepgram
 ```
 
 ### Config File (squad-manifest.yaml)
 ```yaml
 transcription:
-  default_model: medium
-  default_language: pt
-  chunk_max_words: 500
+  default_engine: whisper  # whisper or deepgram
   parallel_limit: 4
 ```
 
@@ -340,27 +290,23 @@ transcription:
 
 ## Examples
 
-### Example 1: Course Lesson (Cademi)
+### Example 1: Course Lesson (Cademi) with Whisper
 ```bash
 # Input — media lives in lesson folder from download phase
 media_file: "sessions/mp-2026-0302-001/Método 30D/01 - Seja Bem-Vindo/01 - Bem-vindo/video.mp4"
 output_dir: "sessions/mp-2026-0302-001/Método 30D/01 - Seja Bem-Vindo/01 - Bem-vindo/"
 
 # Execution
-cd <PROJECT_ROOT>/tools/video-transcriber
-.venv/bin/video-transcriber transcribe \
-  "sessions/mp-2026-0302-001/Método 30D/01 - Seja Bem-Vindo/01 - Bem-vindo/video.mp4" \
-  -o "sessions/mp-2026-0302-001/Método 30D/01 - Seja Bem-Vindo/01 - Bem-vindo/transcription.json" \
-  -m medium -l pt
+python3 <PROJECT_ROOT>/tools/aios-transcriber/aios_transcriber.py \
+  local "sessions/mp-2026-0302-001/Método 30D/01 - Seja Bem-Vindo/01 - Bem-vindo/video.mp4" \
+  -o "sessions/mp-2026-0302-001/Método 30D/01 - Seja Bem-Vindo/01 - Bem-vindo/" \
+  --engine whisper
 
 # Output — all files in the SAME lesson folder
 sessions/mp-2026-0302-001/Método 30D/01 - Seja Bem-Vindo/01 - Bem-vindo/
 ├── video.mp4                       # Already existed
-├── transcription.json              # NEW
-├── transcription_clean.json        # NEW
-├── transcription_clean.md          # NEW (12,450 words)
-├── stats.json                      # NEW
-└── chunks/                         # NEW (25 files)
+├── transcript.md                   # NEW (12,450 words)
+└── metadata.json                   # NEW
 ```
 
 ### Example 2: Course Lesson (Hotmart)
@@ -372,49 +318,48 @@ output_dir: "sessions/mp-2026-0302-001/Curso Vendas/01_Fundamentos/01_Introduç�
 # Output — same pattern, output_dir = lesson folder
 ```
 
-### Example 3: YouTube URL
+### Example 3: YouTube URL (Caption Extraction)
 ```bash
-# Input — YouTube creates lesson folder dynamically
+# Input — YouTube uses caption extraction (fast)
 media_file: "https://www.youtube.com/watch?v=ABC123"
 output_dir: "sessions/mp-2026-0302-001/YouTube/01_ABC123-Video-Title/"
 
 # Execution
-cd <PROJECT_ROOT>/tools/video-transcriber
-.venv/bin/video-transcriber process "https://www.youtube.com/watch?v=ABC123" \
-  -o "sessions/mp-2026-0302-001/YouTube/01_ABC123-Video-Title/" \
-  -m medium -l pt
+python3 <PROJECT_ROOT>/tools/aios-transcriber/aios_transcriber.py \
+  youtube "https://www.youtube.com/watch?v=ABC123" \
+  -o "sessions/mp-2026-0302-001/YouTube/01_ABC123-Video-Title/"
 ```
 
-### Example 4: Existing VTT File
+### Example 4: Local File with Deepgram (Fast)
 ```bash
-# Input — local files also use lesson folder structure
-media_file: "<USER_HOME>/Downloads/subtitles.vtt"
-output_dir: "sessions/mp-2026-0302-001/Local/01_subtitles/"
+# Input — Deepgram for fast transcription (paid)
+media_file: "<USER_HOME>/Downloads/recording.mp4"
+output_dir: "sessions/mp-2026-0302-001/Local/01_recording/"
 
 # Execution
-cd <PROJECT_ROOT>/tools/video-transcriber
-.venv/bin/video-transcriber ingest "<USER_HOME>/Downloads/subtitles.vtt" \
-  -o "sessions/mp-2026-0302-001/Local/01_subtitles/transcription.json"
-
-# Then clean + chunk as usual
+python3 <PROJECT_ROOT>/tools/aios-transcriber/aios_transcriber.py \
+  local "<USER_HOME>/Downloads/recording.mp4" \
+  -o "sessions/mp-2026-0302-001/Local/01_recording/" \
+  --engine deepgram
 ```
 
 ---
 
 ## Notes
 
-- **Language detection:** Se `--language` não especificado, Whisper tenta auto-detectar (menos preciso)
-- **Model selection:** `medium` é o melhor balanço para pt-BR. `large` raramente melhora significativamente.
-- **Chunk size:** Padrão é ~500 palavras por chunk. Configurável via `--chunk-size`.
-- **Parallel processing:** Suporta múltiplos arquivos em paralelo (limite: 4 concurrent para evitar memory issues)
+- **Engine selection:** Whisper (free, slower) vs Deepgram (paid, very fast)
+- **YouTube optimization:** Use `youtube` subcommand for caption extraction (10-100x faster)
+- **Language detection:** Auto-detected by engine
+- **Clean output:** Markdown directly generated (no separate clean/chunk steps)
+- **Parallel processing:** Suporta múltiplos arquivos em paralelo (limite: 4 concurrent para Whisper)
 
 ---
 
 ## References
 
-- Tool: `tools/video-transcriber/`
-- CLI docs: `tools/video-transcriber/README.md`
-- Whisper models: https://github.com/openai/whisper#available-models-and-languages
+- Tool: `tools/aios-transcriber/`
+- CLI docs: `tools/aios-transcriber/README.md`
+- YouTube module: `tools/aios-transcriber/lib/youtube.py`
 - Quality Gate: `.aios-core/core/quality-gates/QG-002-transcription-quality.md`
 
 ---

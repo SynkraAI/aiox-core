@@ -58,7 +58,7 @@ Pipeline simplificado que apenas classifica e faz download do conteúdo, sem tra
 |----------|------|-----|
 | Hotmart | `download-hotmart.md` | `hotmart-dl download` |
 | Cademi | `download-cademi.md` | `cademi-dl download` |
-| YouTube | `download-youtube.md` | `video-transcriber process --download-only` |
+| YouTube | `download-youtube.md` | `aios-transcriber youtube` (caption extraction) |
 
 **Veto Conditions:**
 - Auth expired → HALT, prompt re-authentication

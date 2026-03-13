@@ -26,9 +26,13 @@ outputs:
 tools:
   installed:
     - exa: "Web search"
+  primary:
+    - youtube-captions: "YouTube transcript extraction (search + single video + playlist)"
+    - aios-transcriber: "Unified transcriber (YouTube via youtube-captions, local via Deepgram/Whisper)"
   recommended:
-    - mcp-youtube-transcript: "YouTube transcripts"
     - firecrawl-mcp: "Web scraping"
+  optional:
+    - mcp-youtube-transcript: "Alternative MCP for YouTube transcripts (if installed)"
   see_also: "docs/TOOL-RECOMMENDATIONS.md"
 
 elicit: false
@@ -80,9 +84,9 @@ youtube_sources:
 ```
 
 **Ferramentas:**
-- YouTube Data API (search)
-- youtube-transcript-api (Python)
-- Whisper (se transcrição indisponível)
+- `youtube-captions --search "{mind_name}" --max 100` (auto-discovery + extraction em segundos)
+- `aios-transcriber youtube "{url}"` (single video/playlist via caption extraction)
+- `aios-transcriber local "{file}" --engine whisper` (fallback para arquivos sem legenda)
 
 ---
 

@@ -53,12 +53,24 @@ tools:
         - web_search_exa
         - company_research_exa
 
-  recommended:
+  primary:
+    - name: youtube-captions
+      status: installed
+      purpose: "Extrair legendas/transcrições do YouTube (search mode + single video + playlist)"
+      cli: "python3 tools/youtube-captions/youtube_captions.py"
+      note: "Search mode exclusivo: --search '{mind_name}' --max 100"
+
+    - name: aios-transcriber
+      status: installed
+      purpose: "Transcritor unificado (YouTube via youtube-captions, local via Deepgram/Whisper)"
+      cli: "python3 tools/aios-transcriber/aios_transcriber.py"
+
+  optional:
     - name: mcp-youtube-transcript
-      status: recommended
-      purpose: "Extrair transcrições do YouTube"
+      status: optional
+      purpose: "MCP alternativo para transcrições YouTube (se instalado)"
       install: "npx -y @jkawamoto/mcp-youtube-transcript"
-      fallback: "Use Exa + WebFetch para buscar transcripts existentes"
+      fallback: "Use youtube-captions (já instalado)"
 
     - name: firecrawl-mcp
       status: recommended
@@ -102,11 +114,13 @@ phases:
       - step: 0.3
         name: "Check available tools"
         action: |
-          Check which MCPs are installed:
+          Check which tools are available:
           - [x] exa (always available)
-          - [ ] mcp-youtube-transcript
-          - [ ] firecrawl-mcp
-          - [ ] mcp-perplexity
+          - [x] youtube-captions (tools/youtube-captions/ — search + extraction)
+          - [x] aios-transcriber (tools/aios-transcriber/ — unified transcriber)
+          - [ ] firecrawl-mcp (optional MCP)
+          - [ ] mcp-youtube-transcript (optional MCP alternative)
+          - [ ] mcp-perplexity (optional MCP)
 
           Set tool_mode based on availability.
 
@@ -146,17 +160,26 @@ phases:
       - step: 1.3
         name: "Extract transcripts"
         tool_priority:
-          1: mcp-youtube-transcript  # Se instalado
-          2: exa + WebFetch          # Fallback: buscar transcripts existentes
-          3: manual_note             # Último recurso: marcar para download manual
+          1: youtube-captions        # Instalado — extrai legendas em segundos
+          2: aios-transcriber        # Wrapper unificado (usa youtube-captions internamente)
+          3: mcp-youtube-transcript  # Alternativa MCP (se instalado)
+          4: exa + WebFetch          # Fallback: buscar transcripts existentes na web
 
-        action_if_mcp_available: |
-          For each video_url:
-            transcript = mcp__youtube_transcript__get_transcript(video_url)
-            save to {output_path}/transcripts/YT_{index}.md
+        action_primary: |
+          # Auto-discovery: busca os top vídeos do expert automaticamente
+          python3 tools/youtube-captions/youtube_captions.py \
+            --search "{mind_name}" --max 100 --min-duration 600 \
+            -o {output_path}/transcripts/
+
+          # Output: _INDEX.md + _search_manifest.yaml + N arquivos .md
+
+        action_single_video: |
+          # Para vídeos específicos já identificados
+          python3 tools/aios-transcriber/aios_transcriber.py \
+            youtube "{video_url}" -o {output_path}/transcripts/
 
         action_fallback: |
-          For each video_url:
+          For each video_url without captions:
             search = exa.web_search_exa("{video_title} transcript")
             if transcript_found:
               content = WebFetch(transcript_url)
@@ -505,6 +528,13 @@ metadata:
   author: "Squad Architect"
   based_on: "Tool Discovery 2026-02-05"
   changelog:
+    - version: "2.1.0"
+      date: "2026-03-13"
+      changes:
+        - "TRANS-5: youtube-captions como tool primário (search mode exclusivo)"
+        - "aios-transcriber como wrapper unificado (YouTube + local)"
+        - "mcp-youtube-transcript rebaixado para optional/fallback"
+        - "Comandos CLI concretos em tool_priority (não mais genéricos)"
     - version: "2.0.0"
       date: "2026-02-05"
       changes:

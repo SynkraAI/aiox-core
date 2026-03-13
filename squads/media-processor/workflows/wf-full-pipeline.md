@@ -82,10 +82,10 @@ Orquestra o pipeline completo: desde a classificação da fonte até a construç
 | **Output** | `transcription_clean.md` + chunks (in same lesson folder) |
 | **Gate** | QG-002 (Transcription Quality) per item |
 
-**Path Convention:** `output_dir` = lesson folder (same dir as video.mp4)
+**Path Convention:** `output_dir` = lesson folder (same dir as video.mp4 or where captions are extracted)
 ```
-{session_dir}/{Course}/{Module}/{Lesson}/transcription_clean.md
-{session_dir}/{Course}/{Module}/{Lesson}/chunks/
+{session_dir}/{Course}/{Module}/{Lesson}/transcript.md
+{session_dir}/{Course}/{Module}/{Lesson}/metadata.json
 ```
 
 **Veto Conditions:**
@@ -94,12 +94,12 @@ Orquestra o pipeline completo: desde a classificação da fonte até a construç
 - After 2 retries still failing → SKIP item, log as failed
 
 **Checkpoint:**
-- [ ] transcription_clean.md exists in lesson folder and non-empty
-- [ ] Chunks directory has >= 1 file
+- [ ] transcript.md exists in lesson folder and non-empty
+- [ ] Metadata.json exists
 - [ ] QG-002 passed
 - [ ] Manifest updated
 
-**Note for YouTube:** `video-transcriber process` combines download + transcribe. Skip Phase 2 and start here with `process` command.
+**Note for YouTube:** `aios-transcriber youtube` extracts captions only (no video download, very fast). Skip Phase 2 and start here with `youtube` command.
 
 ---
 
@@ -110,13 +110,13 @@ Orquestra o pipeline completo: desde a classificação da fonte até a construç
 | **Agent** | transcript-sculptor (delegation) |
 | **Task** | `sculpt-transcript.md` |
 | **Duration** | 10-30 min per item |
-| **Input** | `{lesson_folder}/transcription_clean.md` |
+| **Input** | `{lesson_folder}/transcript.md` |
 | **Output** | `{lesson_folder}/masterpiece.md` (same folder) |
 | **Gate** | NONE (sculptor has internal quality) |
 
-**Path Convention:** `output_dir` = lesson folder (masterpiece.md alongside video and transcription)
+**Path Convention:** `output_dir` = lesson folder (masterpiece.md alongside transcript)
 ```
-/transcript-sculptor:process {lesson_folder}/transcription_clean.md {lesson_folder}/
+/transcript-sculptor:process {lesson_folder}/transcript.md {lesson_folder}/
 ```
 
 **Veto Conditions:**

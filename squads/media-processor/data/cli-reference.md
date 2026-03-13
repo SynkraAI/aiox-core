@@ -53,33 +53,33 @@ cademi-dl download -c "{course_url}" --audio-only
 
 ---
 
-## video-transcriber
+## aios-transcriber
 
-**Location:** `tools/video-transcriber/`
-**CLI:** `tools/video-transcriber/.venv/bin/video-transcriber`
+**Location:** `tools/aios-transcriber/`
+**CLI:** `python3 tools/aios-transcriber/aios_transcriber.py`
 
 ```bash
-# Full process: download + transcribe + clean + chunk
-video-transcriber process "{source}" -o "{output_dir}" -m medium -l pt
+# YouTube video (uses caption extraction - very fast)
+python3 tools/aios-transcriber/aios_transcriber.py youtube "{url}" -o "{output_dir}"
 
-# Transcribe existing file
-video-transcriber transcribe "{file}" -o "{output.json}" -m medium -l pt
+# YouTube playlist
+python3 tools/aios-transcriber/aios_transcriber.py youtube --playlist "{url}" -o "{output_dir}"
 
-# Clean raw transcription
-video-transcriber clean "{input.json}" -o "{output.json}"
+# Local file transcription (Whisper)
+python3 tools/aios-transcriber/aios_transcriber.py local "{file}" -o "{output_dir}" --engine whisper
 
-# Chunk transcription
-video-transcriber chunk "{input.json}" -o "{chunks_dir}"
+# Local file transcription (Deepgram)
+python3 tools/aios-transcriber/aios_transcriber.py local "{file}" -o "{output_dir}" --engine deepgram
 
-# Ingest local file (transcribe + clean + chunk)
-video-transcriber ingest "{file}" -o "{output_dir}"
-
-# Batch playlist
-video-transcriber batch-playlist "{playlist_url}" -o "{output_dir}" -m medium -l pt
+# Get help
+python3 tools/aios-transcriber/aios_transcriber.py --help
 ```
 
-**Models:** `base`, `small`, `medium`, `large` (default: `medium`)
-**Languages:** `-l pt` (portuguese), `-l en` (english), etc.
+**Notes:**
+- YouTube source: Uses caption extraction (seconds, not minutes) - no Whisper needed
+- Local files: Choose engine (whisper or deepgram)
+- No separate clean/chunk steps - outputs clean markdown directly
+- Language detection is automatic via yt-dlp priority for YouTube
 
 ---
 
@@ -119,9 +119,10 @@ df -h .
 
 | Flag | Tool | Purpose |
 |------|------|---------|
-| `-m medium` | video-transcriber | Whisper model size |
-| `-l pt` | video-transcriber | Language |
-| `-o {dir}` | video-transcriber | Output directory |
+| `--engine whisper` | aios-transcriber | Use Whisper for transcription (local files) |
+| `--engine deepgram` | aios-transcriber | Use Deepgram for transcription (local files) |
+| `--playlist` | aios-transcriber | Process YouTube playlist |
+| `-o {dir}` | aios-transcriber | Output directory |
 | `-q best` | hotmart-dl | Quality selection |
 | `--subtitles` | hotmart-dl | Download subtitles |
 | `--materials` | hotmart-dl | Download materials |

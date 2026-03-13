@@ -9,7 +9,7 @@ pack:
   author: luiz-fosc
   description: >
     Meta-orchestrator that unifies hotmart-downloader, cademi-downloader,
-    video-transcriber, transcript-sculptor, video-content-distillery, and
+    aios-transcriber, transcript-sculptor, video-content-distillery, and
     knowledge-base-builder into a single automated pipeline. Supports
     Hotmart, Cademi, and YouTube platforms. Downloads, transcribes, sculpts,
     distills, and builds knowledge bases from video/audio content.
@@ -128,15 +128,15 @@ dependencies:
         - "Cademi course download"
         - "Batch mode + audio-only"
 
-    - name: video-transcriber
-      path: tools/video-transcriber/
-      cli: video-transcriber
-      venv: tools/video-transcriber/.venv/bin/video-transcriber
+    - name: aios-transcriber
+      path: tools/aios-transcriber/
+      cli: python3 tools/aios-transcriber/aios_transcriber.py
+      venv: python3 tools/aios-transcriber/aios_transcriber.py
       capabilities:
-        - "YouTube download"
-        - "Whisper transcription (mlx/faster/openai)"
-        - "Cleaning + chunking"
-        - "Batch playlist"
+        - "YouTube caption extraction (fast)"
+        - "Local file transcription (Whisper/Deepgram)"
+        - "Playlist batch processing"
+        - "Unified markdown output"
 
   squads:
     - name: transcript-sculptor

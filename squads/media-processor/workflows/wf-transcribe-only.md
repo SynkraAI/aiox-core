@@ -53,13 +53,13 @@ Pipeline simplificado que transcreve arquivos locais de vídeo/áudio sem downlo
 | **Task** | `transcribe-media.md` |
 | **Duration** | 5 min - 1h per file |
 | **Input** | Media file path (in lesson folder) |
-| **Output** | `transcription_clean.md` + chunks (in same lesson folder) |
+| **Output** | `transcript.md` + metadata (in same lesson folder) |
 | **Gate** | QG-002 (Transcription Quality) |
 
 **Path Convention:** `output_dir` = lesson folder (same directory as media file)
 ```bash
-cd tools/video-transcriber &&
-.venv/bin/video-transcriber ingest "{file}" -o "{lesson_folder}/transcription.json"
+python3 tools/aios-transcriber/aios_transcriber.py \
+  local "{file}" -o "{lesson_folder}/" --engine whisper
 ```
 
 **Veto Conditions:**
@@ -68,8 +68,8 @@ cd tools/video-transcriber &&
 - Audio duration 0 → SKIP file
 
 **Checkpoint:**
-- [ ] transcription_clean.md exists in lesson folder per file
-- [ ] Chunks generated in lesson folder
+- [ ] transcript.md exists in lesson folder per file
+- [ ] Metadata.json generated in lesson folder
 - [ ] QG-002 passed per file
 - [ ] Manifest updated
 
@@ -94,13 +94,8 @@ Transcription outputs live in the **lesson folder** alongside the media files (L
 │   └── {Module}/
 │       └── {Lesson}/                   # Lesson folder
 │           ├── video.mp4               # Original media
-│           ├── transcription.json      # Raw Whisper output
-│           ├── transcription_clean.json # Cleaned
-│           ├── transcription_clean.md  # Markdown export
-│           ├── stats.json              # Metrics
-│           └── chunks/
-│               ├── chunk_001.json
-│               └── chunk_002.json
+│           ├── transcript.md           # Clean markdown transcript
+│           └── metadata.json           # Metrics
 ├── pipeline-status.json
 └── processing-manifest.json
 ```
@@ -111,8 +106,8 @@ For local files without course hierarchy, a simple structure is used:
 ├── Local/
 │   ├── 01_{filename}/                  # Lesson folder per file
 │   │   ├── video.mp4
-│   │   ├── transcription_clean.md
-│   │   └── chunks/
+│   │   ├── transcript.md
+│   │   └── metadata.json
 │   └── 02_{filename}/
 │       └── ...
 ├── pipeline-status.json

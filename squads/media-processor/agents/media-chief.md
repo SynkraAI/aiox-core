@@ -92,7 +92,7 @@ routing:
         - "youtu.be/*"
         - "www.youtube.com/watch*"
       task: download-youtube
-      cli: "tools/video-transcriber/.venv/bin/video-transcriber"
+      cli: "python3 tools/aios-transcriber/aios_transcriber.py"
 
     youtube_playlist:
       patterns:
@@ -100,7 +100,7 @@ routing:
         - "www.youtube.com/playlist*"
       task: download-youtube
       mode: batch-playlist
-      cli: "tools/video-transcriber/.venv/bin/video-transcriber"
+      cli: "python3 tools/aios-transcriber/aios_transcriber.py"
 
     local_file:
       patterns:
@@ -152,7 +152,7 @@ pipeline:
     - name: transcribe
       display: "Transcricao"
       agent: media-chief
-      description: "Transcribe audio via Whisper (video-transcriber CLI)"
+      description: "Transcribe audio via aios-transcriber (captions for YouTube, Whisper/Deepgram for local)"
       gate: QG-002
 
     - name: sculpt
@@ -224,31 +224,19 @@ cli_reference:
       cd {project_root}/tools/cademi-downloader &&
       .venv/bin/cademi-dl courses
 
-  video_transcriber:
-    process: >
-      cd {project_root}/tools/video-transcriber &&
-      .venv/bin/video-transcriber process
-      "{source}" -o "{output_dir}" -m medium -l pt
-    transcribe: >
-      cd {project_root}/tools/video-transcriber &&
-      .venv/bin/video-transcriber transcribe
-      "{file}" -o "{output_dir}/transcription.json" -m medium -l pt
-    clean: >
-      cd {project_root}/tools/video-transcriber &&
-      .venv/bin/video-transcriber clean
-      "{input_json}" -o "{output_json}"
-    chunk: >
-      cd {project_root}/tools/video-transcriber &&
-      .venv/bin/video-transcriber chunk
-      "{input_json}" -o "{output_dir}/chunks"
-    batch_playlist: >
-      cd {project_root}/tools/video-transcriber &&
-      .venv/bin/video-transcriber batch-playlist
-      "{playlist_url}" -o "{output_dir}" -m medium -l pt
-    ingest: >
-      cd {project_root}/tools/video-transcriber &&
-      .venv/bin/video-transcriber ingest
-      "{file}" -o "{output_dir}"
+  aios_transcriber:
+    youtube: >
+      python3 {project_root}/tools/aios-transcriber/aios_transcriber.py
+      youtube "{source}" -o "{output_dir}"
+    youtube_playlist: >
+      python3 {project_root}/tools/aios-transcriber/aios_transcriber.py
+      youtube --playlist "{playlist_url}" -o "{output_dir}"
+    local_whisper: >
+      python3 {project_root}/tools/aios-transcriber/aios_transcriber.py
+      local "{file}" -o "{output_dir}" --engine whisper
+    local_deepgram: >
+      python3 {project_root}/tools/aios-transcriber/aios_transcriber.py
+      local "{file}" -o "{output_dir}" --engine deepgram
 
   validation:
     ffprobe: >
@@ -458,7 +446,7 @@ output_examples:
       Fetching playlist... Found 24 videos.
 
       **Processing item 1/24:** "How to Build an Offer"
-      Phase: download+transcribe (video-transcriber process)
+      Phase: download+transcribe (aios-transcriber process)
       [████░░░░░░░░░░░░░░░░░░░░░░░░░] 4% — Model: medium, Language: pt
 
   - input: "*resume squads/media-processor/sessions/mp-2026-0223-001/"
@@ -604,8 +592,8 @@ dependencies:
 |----------|-------------|------|
 | Hotmart | `*.hotmart.com` | hotmart-dl |
 | Cademi | `*.cademi.com.br` | cademi-dl |
-| YouTube | `youtube.com/watch`, `youtu.be/` | video-transcriber |
-| YouTube Playlist | `youtube.com/playlist` | video-transcriber batch |
-| Local files | `.mp4`, `.mkv`, `.m4a`, `.wav` | video-transcriber |
+| YouTube | `youtube.com/watch`, `youtu.be/` | aios-transcriber |
+| YouTube Playlist | `youtube.com/playlist` | aios-transcriber batch |
+| Local files | `.mp4`, `.mkv`, `.m4a`, `.wav` | aios-transcriber |
 
 ---

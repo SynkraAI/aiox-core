@@ -71,9 +71,9 @@ For each normalized input, apply detection rules:
 |---------|----------|-------------|----------|
 | `*.hotmart.com*` | Hotmart | hotmart | download-hotmart |
 | `*.cademi.com.br*` | Cademi | cademi | download-cademi |
-| `youtube.com/watch*` | YouTube | youtube | download-youtube |
-| `youtu.be/*` | YouTube | youtube | download-youtube |
-| `youtube.com/playlist*` | YouTube Playlist | youtube_playlist | download-youtube (batch) |
+| `youtube.com/watch*` | YouTube | youtube | download-youtube (caption extraction) |
+| `youtu.be/*` | YouTube | youtube | download-youtube (caption extraction) |
+| `youtube.com/playlist*` | YouTube Playlist | youtube_playlist | download-youtube (batch captions) |
 | `*.mp4`, `*.mkv`, `*.webm`, `*.avi`, `*.mov` | Local Video | local_video | transcribe-media |
 | `*.m4a`, `*.mp3`, `*.wav`, `*.ogg`, `*.flac` | Local Audio | local_audio | transcribe-media |
 | `*.md`, `*.txt`, `*.vtt`, `*.srt` | Local Text | local_transcription | sculpt-transcript |

@@ -39,8 +39,8 @@ User Request
 |----------|------|-----|------|
 | Hotmart | hotmart-downloader | `hotmart-dl` | Browser cookies |
 | Cademi | cademi-downloader | `cademi-dl` | Browser cookies (Playwright) |
-| YouTube | video-transcriber | `video-transcriber` | None (public) / cookies (private) |
-| Local files | video-transcriber | `video-transcriber ingest` | None |
+| YouTube | aios-transcriber | `aios-transcriber` | None (public) / cookies (private) |
+| Local files | aios-transcriber | `aios-transcriber ingest` | None |
 
 ---
 

@@ -1,6 +1,6 @@
 # Media Processor
 
-**Meta-orchestrator** que unifica hotmart-downloader, cademi-downloader, video-transcriber, transcript-sculptor, video-content-distillery e knowledge-base-builder em um pipeline automatizado.
+**Meta-orchestrator** que unifica hotmart-downloader, cademi-downloader, aios-transcriber, transcript-sculptor, video-content-distillery e knowledge-base-builder em um pipeline automatizado.
 
 Um comando do usuário → pipeline completo: download → transcrição → escultura editorial → destilação → knowledge base.
 
@@ -72,9 +72,9 @@ flowchart TD
 |-----------|-------------|------------|
 | Hotmart | `*.hotmart.com` | hotmart-dl |
 | Cademi | `*.cademi.com.br` | cademi-dl |
-| YouTube | `youtube.com/watch`, `youtu.be/` | video-transcriber |
-| YouTube Playlist | `youtube.com/playlist` | video-transcriber batch |
-| Arquivos locais | `.mp4`, `.mkv`, `.m4a`, `.wav` | video-transcriber ingest |
+| YouTube | `youtube.com/watch`, `youtu.be/` | aios-transcriber |
+| YouTube Playlist | `youtube.com/playlist` | aios-transcriber |
+| Arquivos locais | `.mp4`, `.mkv`, `.m4a`, `.wav` | aios-transcriber |
 
 ---
 
@@ -101,8 +101,8 @@ squads/media-processor/
 │   ├── classify-request.md                  # Detectar plataforma e tipo
 │   ├── download-hotmart.md                  # Download via hotmart-dl
 │   ├── download-cademi.md                   # Download via cademi-dl
-│   ├── download-youtube.md                  # Download via video-transcriber
-│   ├── transcribe-media.md                  # Transcrição via Whisper
+│   ├── download-youtube.md                  # Download via aios-transcriber
+│   ├── transcribe-media.md                  # Transcrição via aios-transcriber
 │   ├── sculpt-transcript.md                 # Delegação → transcript-sculptor
 │   ├── distill-content.md                   # Delegação → video-content-distillery
 │   ├── build-knowledge-base.md              # Delegação → knowledge-base-builder
@@ -165,7 +165,7 @@ Lê `pipeline-status.json` da sessão ativa e exibe:
 ### Ferramentas (tools/)
 - `hotmart-downloader` — Download de cursos Hotmart
 - `cademi-downloader` — Download de cursos Cademi
-- `video-transcriber` — Download YouTube + transcrição Whisper
+- `aios-transcriber` — Download YouTube + transcrição (caption extraction ou Whisper)
 
 ### Squads
 - `transcript-sculptor` — Escultura editorial de transcrições

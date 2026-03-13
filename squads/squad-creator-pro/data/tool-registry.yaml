@@ -65,11 +65,57 @@ squad_creator_recommendations:
   # ─────────────────────────────────────────────────────────────────────────────
 
   priority_1_quick_wins:
-    mcp-youtube-transcript:
-      status: recommended
-      priority: 1
+    youtube-captions:
+      status: installed
+      priority: 0
       category: source_acquisition
-      purpose: "Extrair transcrições de vídeos YouTube para clonagem de minds"
+      purpose: "Extrair legendas/transcrições YouTube (search mode + single video + playlist)"
+      type: local_tool
+      path: "tools/youtube-captions/youtube_captions.py"
+      capabilities:
+        - "extract_youtube_captions"
+        - "search_mode_auto_discovery"
+        - "multi_language_priority"
+        - "playlist_support"
+        - "3_tier_fallback_chain"
+        - "proxy_and_cookies_support"
+      cli_examples:
+        search: 'python3 tools/youtube-captions/youtube_captions.py --search "{expert}" --max 100 -o output/'
+        single: 'python3 tools/youtube-captions/youtube_captions.py "{url}" -o output/'
+        playlist: 'python3 tools/youtube-captions/youtube_captions.py --playlist "{url}" -o output/'
+      impact: 10
+      effort: none
+      note: "Já instalado. Search mode é exclusivo (nenhum outro tool tem). Extraí legendas em segundos."
+      integration_point: "auto-acquire-sources.md, collect-sources.md, wf-auto-acquire-sources.yaml"
+
+    aios-transcriber:
+      status: installed
+      priority: 0
+      category: source_acquisition
+      purpose: "Transcritor unificado (YouTube via youtube-captions, local via Deepgram/Whisper)"
+      type: local_tool
+      path: "tools/aios-transcriber/aios_transcriber.py"
+      capabilities:
+        - "youtube_caption_extraction"
+        - "deepgram_api_transcription"
+        - "whisper_local_transcription"
+        - "batch_processing_with_resume"
+        - "auto_compression"
+        - "parallel_workers"
+      cli_examples:
+        youtube: 'python3 tools/aios-transcriber/aios_transcriber.py youtube "{url}" -o output/'
+        local: 'python3 tools/aios-transcriber/aios_transcriber.py local "{file}" -o output/'
+        batch: 'python3 tools/aios-transcriber/aios_transcriber.py batch ~/dir/ -o output/'
+      impact: 10
+      effort: none
+      note: "Já instalado. Importa youtube-captions como biblioteca. Usar para local files e batch."
+      integration_point: "auto-acquire-sources.md, collect-sources.md"
+
+    mcp-youtube-transcript:
+      status: optional
+      priority: 3
+      category: source_acquisition
+      purpose: "MCP alternativo para transcrições YouTube (usar se youtube-captions não funcionar)"
       capabilities:
         - "extract_youtube_transcripts"
         - "multi_language_support"
@@ -78,13 +124,13 @@ squad_creator_recommendations:
       install_command: "npx -y @jkawamoto/mcp-youtube-transcript"
       github: "https://github.com/jkawamoto/mcp-youtube-transcript"
       stars: 271
-      impact: 10
+      impact: 5
       effort: low
+      note: "Alternativa MCP. youtube-captions (local) já cobre 100% dos use cases + search mode."
       use_cases:
-        - "Extrair transcripts de entrevistas de experts"
-        - "Capturar keynotes e masterclasses"
-        - "Coletar podcasts em vídeo"
-      integration_point: "auto-acquire-sources.md, collect-sources.md"
+        - "Fallback se youtube-captions tiver rate limit"
+        - "Integração com outros MCPs"
+      integration_point: "wf-auto-acquire-sources.yaml (fallback)"
 
     firecrawl-mcp:
       status: recommended
