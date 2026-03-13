@@ -87,10 +87,16 @@ function createEventStore() {
       state.metrics.recentTimestamps.shift();
     }
 
-    // Update context from envelope fields
-    if (event.session_id) state.sessionId = event.session_id;
-    if (event.aiox_story_id) state.currentStory = event.aiox_story_id;
-    if (event.aiox_agent) state.currentAgent = event.aiox_agent;
+    // Update context from envelope fields.
+    // DashboardEmitter._postEvent nests session_id/aiox_agent/aiox_story_id
+    // inside data (see dashboard-emitter.js:320-328). Support both shapes.
+    const session_id = event.session_id || data.session_id;
+    const aiox_agent = event.aiox_agent || data.aiox_agent;
+    const aiox_story_id = event.aiox_story_id || data.aiox_story_id;
+
+    if (session_id) state.sessionId = session_id;
+    if (aiox_story_id) state.currentStory = aiox_story_id;
+    if (aiox_agent) state.currentAgent = aiox_agent;
 
     // Derive state from event type
     const data = event.data || {};
@@ -131,7 +137,7 @@ function createEventStore() {
       }
 
       case 'AgentActivated': {
-        const agentId = data.agentId || event.aiox_agent;
+        const agentId = data.agentId || data.aiox_agent || event.aiox_agent;
         if (agentId) {
           state.activeAgents[agentId] = {
             name: data.agentName || data.persona || agentId,
@@ -144,7 +150,7 @@ function createEventStore() {
       }
 
       case 'AgentDeactivated': {
-        const agentId = data.agentId || event.aiox_agent;
+        const agentId = data.agentId || data.aiox_agent || event.aiox_agent;
         if (agentId) {
           delete state.activeAgents[agentId];
         }

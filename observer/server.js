@@ -29,6 +29,8 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
+const { randomUUID } = crypto;
+
 // chokidar is already in package.json dependencies
 let chokidar;
 try {
@@ -374,7 +376,9 @@ async function handleRequest(req, res) {
 
   try {
     if (method === 'POST' && url === '/events') {
-      const event = await readBody(req);
+      const body = await readBody(req);
+      // DashboardEmitter._postEvent does not include an `id` field — generate one
+      const event = body.id ? body : Object.assign({ id: randomUUID() }, body);
       store.addEvent(event);
       broadcast('event', event);
       sendJson(res, 200, { ok: true });

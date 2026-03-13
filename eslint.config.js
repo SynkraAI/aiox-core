@@ -61,6 +61,8 @@ module.exports = [
       'pro/**',
       // Glue scripts
       'scripts/glue/**',
+      // Observer server — standalone runtime tool, not part of TS project
+      'observer/**',
     ],
   },
 
