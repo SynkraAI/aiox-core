@@ -653,8 +653,28 @@ function showSuccessSummary(result) {
 }
 
 /**
+ * Hooks disponíveis para todos os tiers (free + pro)
+ * @type {string[]}
+ */
+const HOOKS_FREE = [
+  'synapse-engine.cjs',
+  'synapse-wrapper.cjs',
+  'precompact-wrapper.cjs',
+  'README.md',
+];
+
+/**
+ * Hooks exclusivos do tier pro (requerem aios-pro)
+ * @type {string[]}
+ */
+const HOOKS_PRO_ONLY = [
+  'precompact-session-digest.cjs',
+];
+
+/**
  * BUG-3 fix (INS-1): Copy .claude/hooks/ folder during installation
  * Only copies JS hooks that work without external dependencies (Python, etc.)
+ * Pro-only hooks (precompact-session-digest) are skipped when pro/ is unavailable (#544)
  * @param {string} projectRoot - Project root directory
  * @returns {Promise<string[]>} List of copied files
  */
@@ -674,13 +694,12 @@ async function copyClaudeHooksFolder(projectRoot) {
 
   await fs.ensureDir(targetDir);
 
-  // Only copy JS hooks that work standalone (no Python/shell deps)
-  const HOOKS_TO_COPY = [
-    'synapse-engine.cjs',
-    'code-intel-pretool.cjs',
-    'precompact-session-digest.cjs',
-    'README.md',
-  ];
+  // Detecta se pro/ está disponível para decidir quais hooks copiar (#544)
+  const { isProAvailable } = require('../../../../bin/utils/pro-detector');
+  const isPro = isProAvailable();
+  const HOOKS_TO_COPY = isPro
+    ? [...HOOKS_FREE, ...HOOKS_PRO_ONLY]
+    : HOOKS_FREE;
 
   const files = await fs.readdir(sourceDir);
 
