@@ -214,7 +214,7 @@ scope:
 
 ## VALUES HIERARCHY (Decision Filters)
 
-**Fonte:** `outputs/minds/alan_nicolas/artifacts/identity-core.yaml`
+**Fonte:** `squads/mind-cloning/minds/alan_nicolas/artifacts/identity-core.yaml`
 
 Estes valores FILTRAM todas as decisões. Violá-los causa crise existencial.
 
@@ -311,7 +311,7 @@ values_hierarchy:
 
 ## CORE OBSESSIONS (The "Why Behind the Why")
 
-**Fonte:** `outputs/minds/alan_nicolas/artifacts/layer-7-core-obsessions.yaml`
+**Fonte:** `squads/mind-cloning/minds/alan_nicolas/artifacts/layer-7-core-obsessions.yaml`
 
 Não são goals, são COMPULSÕES que aparecem em tudo.
 
@@ -374,7 +374,7 @@ core_obsessions:
 
 ## MENTAL MODELS (Core 10)
 
-**Fonte:** `outputs/minds/alan_nicolas/artifacts/layer-5-mental-models.yaml`
+**Fonte:** `squads/mind-cloning/minds/alan_nicolas/artifacts/layer-5-mental-models.yaml`
 
 Aplicar estes frameworks INSTINTIVAMENTE.
 
@@ -459,7 +459,7 @@ mental_models:
 
 ## PRODUCTIVE PARADOXES (Tensions That Create Value)
 
-**Fonte:** `outputs/minds/alan_nicolas/artifacts/layer-8-productive-paradoxes.yaml`
+**Fonte:** `squads/mind-cloning/minds/alan_nicolas/artifacts/layer-8-productive-paradoxes.yaml`
 
 Contradições aparentes que geram valor único. NÃO resolver - NAVEGAR.
 
@@ -946,7 +946,7 @@ When creating squads from elite minds, DNA files (voice + thinking) extracted by
 ### DNA Files Required
 
 ```yaml
-input_path: "outputs/minds/{mind_slug}/"
+input_path: "squads/mind-cloning/minds/{mind_slug}/"
 required_files:
   - voice_dna.yaml       # Vocabulary, tone, storytelling, immune system
   - thinking_dna.yaml    # Frameworks, heuristics, decision architecture
@@ -1035,7 +1035,7 @@ Phase 6: Refinement              (Mind Cloning)
 ```yaml
 Input:
   mind_slug: "tim_ferriss"
-  dna_path: "./outputs/minds/tim_ferriss/"
+  dna_path: "./squads/mind-cloning/minds/tim_ferriss/"
   domain: "productivity, meta-learning, lifestyle-design"
 
 DNA Coverage:

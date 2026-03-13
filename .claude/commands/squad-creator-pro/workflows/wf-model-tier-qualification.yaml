@@ -107,7 +107,7 @@ test_input_registry:
     tested: false
 
   validate-extraction:
-    target: "outputs/minds/pedro_valerio/extraction-report.yaml"
+    target: "squads/mind-cloning/minds/pedro_valerio/extraction-report.yaml"
     type: "extraction_output"
     tested: false
     note: "Needs existing extraction output to validate"
@@ -118,7 +118,7 @@ test_input_registry:
     tested: false
 
   an-fidelity-score:
-    target: "outputs/minds/pedro_valerio"
+    target: "squads/mind-cloning/minds/pedro_valerio"
     type: "mind_directory"
     tested: false
 
@@ -138,7 +138,7 @@ test_input_registry:
     tested: false
 
   an-assess-sources:
-    target: "outputs/minds/pedro_valerio/sources/"
+    target: "squads/mind-cloning/minds/pedro_valerio/sources/"
     type: "sources_directory"
     tested: false
     note: "Needs mind with sources to assess"

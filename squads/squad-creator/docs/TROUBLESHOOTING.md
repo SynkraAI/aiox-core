@@ -131,7 +131,7 @@ O agent não está aplicando corretamente o DNA extraído.
 **Test 1 falhou: Voice DNA**
 ```bash
 # Verificar voice_dna.yaml
-cat outputs/minds/{slug}/voice_dna.yaml
+cat squads/mind-cloning/minds/{slug}/voice_dna.yaml
 
 # Se incompleto, re-extrair com mais fontes
 *extract-voice-dna "{expert}" --sources ./mais-entrevistas/
@@ -140,7 +140,7 @@ cat outputs/minds/{slug}/voice_dna.yaml
 **Test 2 falhou: Thinking DNA**
 ```bash
 # Verificar thinking_dna.yaml
-cat outputs/minds/{slug}/thinking_dna.yaml
+cat squads/mind-cloning/minds/{slug}/thinking_dna.yaml
 
 # Verificar se heuristics estão completas
 # Se não, re-extrair
@@ -169,7 +169,7 @@ Voice DNA não foi bem aplicado no agent.md.
 ### Diagnóstico
 ```bash
 # Comparar DNA com agent
-cat outputs/minds/{slug}/voice_dna.yaml
+cat squads/mind-cloning/minds/{slug}/voice_dna.yaml
 cat squads/{squad}/agents/{agent}.md
 
 # Verificar se power_words aparecem no agent
@@ -251,8 +251,8 @@ Fontes diferentes apresentam visões conflitantes do expert.
 ### Diagnóstico
 ```bash
 # Ver onde está a contradição
-cat outputs/minds/{slug}/voice_dna.yaml
-cat outputs/minds/{slug}/thinking_dna.yaml
+cat squads/mind-cloning/minds/{slug}/voice_dna.yaml
+cat squads/mind-cloning/minds/{slug}/thinking_dna.yaml
 
 # Procurar por:
 # - Tom diferente em diferentes contextos
@@ -401,7 +401,7 @@ Se nenhuma solução funcionou:
    ```bash
    *show-context
    *validate-squad {squad}
-   cat outputs/minds/{slug}/quality_dashboard.md
+   cat squads/mind-cloning/minds/{slug}/quality_dashboard.md
    ```
 
 3. **Abra issue** com essas informações

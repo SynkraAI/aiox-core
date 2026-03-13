@@ -30,7 +30,7 @@ inputs:
   optional:
     - target_count: "Número alvo de fontes (default: 15)"
     - focus: "youtube|books|podcasts|articles|all (default: all)"
-    - output_path: "Path para salvar (default: outputs/minds/{slug}/sources/)"
+    - output_path: "Path para salvar (default: squads/mind-cloning/minds/{slug}/sources/)"
 
 outputs:
   primary:
@@ -90,7 +90,7 @@ phases:
         name: "Generate slug"
         action: |
           slug = mind_name.lower().replace(" ", "_").replace("-", "_")
-          output_path = f"outputs/minds/{slug}/sources/"
+          output_path = f"squads/mind-cloning/minds/{slug}/sources/"
 
       - step: 0.2
         name: "Create directory structure"

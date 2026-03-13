@@ -66,7 +66,7 @@ Use run_in_background for parallel work.
 Load git status and gotchas before starting.
 
 # Communication
-Write results to outputs/minds/slug/result.yaml
+Write results to squads/mind-cloning/minds/slug/result.yaml
 
 # Agent refs
 Read .claude/agents/specialist.md for identity.
@@ -84,7 +84,7 @@ Send shutdown request and call TeamDelete.
 NEVER skip validation. DO NOT hardcode values.
 
 # Artifacts
-Store in outputs/minds/slug/artifacts/
+Store in squads/mind-cloning/minds/slug/artifacts/
 FIXTURE
 
 # Fixture: legacy workflow (should score low)

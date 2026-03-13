@@ -141,7 +141,7 @@ outputs:
 
 preconditions:
   - "Squad exists at squads/{pack_name}/"
-  - "If specialist: check if mind exists in outputs/minds/{specialist_slug}/"
+  - "If specialist: check if mind exists in squads/mind-cloning/minds/{specialist_slug}/"
   - "WebSearch tool available (for external research)"
   - "Write permissions for output directories"
 
@@ -211,12 +211,12 @@ phases:
 
     search_locations:
       primary_sources:
-        path: "outputs/minds/{specialist_slug}/sources/"
+        path: "squads/mind-cloning/minds/{specialist_slug}/sources/"
         description: "Raw materials, transcripts, books, articles"
         priority: 1
 
       analysis:
-        path: "outputs/minds/{specialist_slug}/analysis/"
+        path: "squads/mind-cloning/minds/{specialist_slug}/analysis/"
         description: "Identity core, cognitive spec, frameworks"
         priority: 2
 
@@ -226,7 +226,7 @@ phases:
         priority: 3
 
       synthesis:
-        path: "outputs/minds/{specialist_slug}/synthesis/"
+        path: "squads/mind-cloning/minds/{specialist_slug}/synthesis/"
         description: "Communication style, mental models"
         priority: 4
 
@@ -242,8 +242,8 @@ phases:
       📂 Local Knowledge Check for 'gary_halbert':
 
       Found Resources:
-        ✅ outputs/minds/gary_halbert/sources/ (12 files, 4,200 lines)
-        ✅ outputs/minds/gary_halbert/analysis/identity-core.yaml
+        ✅ squads/mind-cloning/minds/gary_halbert/sources/ (12 files, 4,200 lines)
+        ✅ squads/mind-cloning/minds/gary_halbert/analysis/identity-core.yaml
         ✅ docs/research/gary-halbert-direct-mail-research.md (890 lines)
 
       Coverage: 70% (strong foundation)
@@ -829,7 +829,7 @@ anti_pattern_prevented: |
 integration:
   upstream:
     - "User request for new agent"
-    - "Existing minds in outputs/minds/"
+    - "Existing minds in squads/mind-cloning/minds/"
     - "Existing research in docs/research/"
 
   downstream:

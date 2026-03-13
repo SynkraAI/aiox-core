@@ -76,7 +76,7 @@ phases:
     steps:
       - step: 1
         action: "Verificar se mind já existe"
-        check: "outputs/minds/{mind_slug}/mind_dna_complete.yaml exists?"
+        check: "squads/mind-cloning/minds/{mind_slug}/mind_dna_complete.yaml exists?"
 
       - step: 2
         action: "Se existe, redirecionar para update-mind.md"
@@ -116,7 +116,7 @@ phases:
 
     output:
       file: "acquired_sources.yaml"
-      location: "outputs/minds/{mind_slug}/"
+      location: "squads/mind-cloning/minds/{mind_slug}/"
       merge_with: "collect-sources.md results"
 
   # ─────────────────────────────────────────────────────────────────────────────
@@ -202,7 +202,7 @@ phases:
 
     output:
       file: "sources_inventory.yaml"
-      location: "outputs/minds/{mind_slug}/"
+      location: "squads/mind-cloning/minds/{mind_slug}/"
       required_for: ["Phase 1", "Phase 2"]
 
   # ─────────────────────────────────────────────────────────────────────────────
@@ -230,7 +230,7 @@ phases:
 
     output:
       file: "voice_dna.yaml"
-      location: "outputs/minds/{mind_slug}/"
+      location: "squads/mind-cloning/minds/{mind_slug}/"
 
     checkpoint:
       gate: "VOICE_QUALITY"
@@ -280,7 +280,7 @@ phases:
 
     output:
       file: "thinking_dna.yaml"
-      location: "outputs/minds/{mind_slug}/"
+      location: "squads/mind-cloning/minds/{mind_slug}/"
 
     checkpoint:
       gate: "THINKING_QUALITY"
@@ -397,7 +397,7 @@ phases:
 
     output:
       file: "smoke_test_result.yaml"
-      location: "outputs/minds/{mind_slug}/"
+      location: "squads/mind-cloning/minds/{mind_slug}/"
 
   # ─────────────────────────────────────────────────────────────────────────────
   # PHASE 5: QUALITY DASHBOARD GENERATION
@@ -426,7 +426,7 @@ phases:
 
     output:
       file: "quality_dashboard.md"
-      location: "outputs/minds/{mind_slug}/"
+      location: "squads/mind-cloning/minds/{mind_slug}/"
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # OUTPUT TEMPLATE

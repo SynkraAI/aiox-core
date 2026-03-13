@@ -38,6 +38,6 @@
 - 5 tasks: mentor-session, diagnose, temperament-analysis, vocation-guidance, evaluate-content
 - 1 checklist: content-quality.md
 - 1 data file: frameworks-reference.md
-- Mind DNA source: `outputs/minds/italo-marsili/mind_dna_complete.yaml`
+- Mind DNA source: `squads/mind-cloning/minds/italo-marsili/mind_dna_complete.yaml`
 - Smoke test: 3/3 PASS (10/10 em todos)
 - Fidelity: Elite (95%), Voice: 10/10, Thinking: 9/9

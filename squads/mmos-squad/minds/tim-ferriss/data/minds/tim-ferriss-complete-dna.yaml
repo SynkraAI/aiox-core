@@ -13,8 +13,8 @@ metadata:
   version: "1.0.0"
 
   source_files:
-    voice_dna: "outputs/minds/tim_ferriss/voice_dna.yaml"
-    thinking_dna: "outputs/minds/tim_ferriss/thinking_dna.yaml"
+    voice_dna: "squads/mind-cloning/minds/tim_ferriss/voice_dna.yaml"
+    thinking_dna: "squads/mind-cloning/minds/tim_ferriss/thinking_dna.yaml"
 
   sources_count: 14
   tier_0_count: 1   # User-provided EPUB

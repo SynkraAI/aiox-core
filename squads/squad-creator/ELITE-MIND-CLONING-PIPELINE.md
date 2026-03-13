@@ -23,7 +23,7 @@ Status: Production Ready
 ```bash
 # PHASE 0: Research (1-2h)
 @mind-cloner *collect-sources {mind_slug}
-# → Review outputs/minds/{mind_slug}/sources_inventory.yaml
+# → Review squads/mind-cloning/minds/{mind_slug}/sources_inventory.yaml
 # → Confirm GO/NO-GO
 
 # PHASE 1: DNA Extraction (2-4h, can run in parallel)
@@ -32,10 +32,10 @@ Status: Production Ready
 
 # PHASE 2: Synthesis (30min)
 @mind-cloner *synthesize-mind {mind_slug}
-# → Review outputs/minds/{mind_slug}/quality_dashboard.md
+# → Review squads/mind-cloning/minds/{mind_slug}/quality_dashboard.md
 
 # PHASE 3: Squad Creation (1-2h)
-@squad-creator *create-squad-from-dna {mind_slug} --dna-source ./outputs/minds/{mind_slug}/
+@squad-creator *create-squad-from-dna {mind_slug} --dna-source ./squads/mind-cloning/minds/{mind_slug}/
 
 # PHASE 4: Tool Discovery (2-3h, parallel)
 @squad-creator *discover-tools {mind_slug}
@@ -151,7 +151,7 @@ sources_path: "./custom-sources/tim-ferriss/"  # optional
 
 **Output:**
 ```yaml
-outputs/minds/{mind_slug}/sources_inventory.yaml
+squads/mind-cloning/minds/{mind_slug}/sources_inventory.yaml
   total_sources: 47
   tier_0_count: 12   # Books, playbooks, courses
   tier_1_count: 18   # Interviews, podcasts
@@ -186,7 +186,7 @@ outputs/minds/{mind_slug}/sources_inventory.yaml
 
 **Output:**
 ```yaml
-outputs/minds/{mind_slug}/voice_dna.yaml  (10 components)
+squads/mind-cloning/minds/{mind_slug}/voice_dna.yaml  (10 components)
   completeness_score: 9/10
 ```
 
@@ -210,7 +210,7 @@ outputs/minds/{mind_slug}/voice_dna.yaml  (10 components)
 
 **Output:**
 ```yaml
-outputs/minds/{mind_slug}/thinking_dna.yaml  (9 components)
+squads/mind-cloning/minds/{mind_slug}/thinking_dna.yaml  (9 components)
   completeness_score: 8/9
 ```
 
@@ -236,7 +236,7 @@ outputs/minds/{mind_slug}/thinking_dna.yaml  (9 components)
 
 **Output:**
 ```yaml
-outputs/minds/{mind_slug}/mind_dna_complete.yaml
+squads/mind-cloning/minds/{mind_slug}/mind_dna_complete.yaml
   fidelity_level: "Elite"
   fidelity_percentage: 94%
   voice_score: 9/10
@@ -246,7 +246,7 @@ outputs/minds/{mind_slug}/mind_dna_complete.yaml
 ```
 
 ```markdown
-outputs/minds/{mind_slug}/quality_dashboard.md
+squads/mind-cloning/minds/{mind_slug}/quality_dashboard.md
   # Layer coverage breakdown
   # Gaps identified
   # Recommendations
@@ -273,7 +273,7 @@ outputs/minds/{mind_slug}/quality_dashboard.md
 **Input:**
 ```yaml
 mind_slug: "tim_ferriss"
-dna_path: "./outputs/minds/tim_ferriss/"
+dna_path: "./squads/mind-cloning/minds/tim_ferriss/"
 domain: "productivity, meta-learning, lifestyle-design"
 ```
 
@@ -377,7 +377,7 @@ squads/{mind_slug}/tools/decision-matrix.md
 
 **Output:**
 ```yaml
-outputs/minds/{mind_slug}/smoke_test_result.yaml
+squads/mind-cloning/minds/{mind_slug}/smoke_test_result.yaml
   total_tests: 3
   passed: 3
   failed: 0
@@ -411,7 +411,7 @@ outputs/minds/{mind_slug}/smoke_test_result.yaml
 
 **Output:**
 ```markdown
-outputs/minds/{mind_slug}/diagnosis_report.md
+squads/mind-cloning/minds/{mind_slug}/diagnosis_report.md
   # Symptoms
   # Root causes
   # Correction plan (step-by-step)
@@ -419,7 +419,7 @@ outputs/minds/{mind_slug}/diagnosis_report.md
 ```
 
 ```yaml
-outputs/minds/{mind_slug}/refinement_plan.yaml
+squads/mind-cloning/minds/{mind_slug}/refinement_plan.yaml
   actions:
     - re_extract_voice_component: "storytelling"
     - re_extract_thinking_component: "frameworks.secondary"
@@ -554,7 +554,7 @@ A squad is considered **successfully cloned** when:
 
 ```
 .
-├── outputs/minds/{mind_slug}/
+├── squads/mind-cloning/minds/{mind_slug}/
 │   ├── sources_inventory.yaml       (Phase 0)
 │   ├── voice_dna.yaml               (Phase 1A)
 │   ├── thinking_dna.yaml            (Phase 1B)

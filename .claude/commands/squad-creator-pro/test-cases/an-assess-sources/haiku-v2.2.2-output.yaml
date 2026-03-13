@@ -16,7 +16,7 @@ source_assessment:
   sources:
     - name: "$100M Offers (Livro 100M Ofertas)"
       type: "livro"
-      path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Ofertas/"
+      path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Ofertas/"
       duration: "18 capítulos (est. 250+ páginas)"
       published_date: "2021"
       notes: "Primeiro livro da série Acquisition.com - Framework inaugural do autor"
@@ -74,7 +74,7 @@ source_assessment:
 
     - name: "$100M Leads (Livro 100M Leads)"
       type: "livro"
-      path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
+      path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
       duration: "Seções I-V + Bônus (est. 300+ páginas)"
       published_date: "2023 (aprox.)"
       notes: "Segundo livro da série - Expande sobre geração de leads"
@@ -132,7 +132,7 @@ source_assessment:
 
     - name: "$100M Money Models (Livro 100m Modelos)"
       type: "livro"
-      path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100m Modelos/"
+      path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100m Modelos/"
       duration: "Introdução + 6 Seções (est. 280+ páginas)"
       published_date: "2024 (aprox.)"
       notes: "Terceiro livro da série - Monetização e modelos de negócio"
@@ -190,7 +190,7 @@ source_assessment:
 
     - name: "Entrevista Tom Bilyeu (Impact Theory)"
       type: "entrevista"
-      path: "outputs/minds/alex_hormozi/sources/interviews/Entrevista Tom Biley.md"
+      path: "squads/mind-cloning/minds/alex_hormozi/sources/interviews/Entrevista Tom Biley.md"
       url: "https://youtu.be/Tigt75AcLLA?si=ATu29K7rgAmL5XYY"
       duration: "~2h (estimado - padrão Impact Theory)"
       published_date: "desconhecido"

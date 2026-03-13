@@ -10,9 +10,9 @@ fidelity_target: "90%+"
 
 # Source DNA (complete extraction)
 source_dna:
-  complete: "outputs/minds/alex_hormozi/mind_dna_complete.yaml"
-  voice: "outputs/minds/alex_hormozi/voice_dna.yaml"
-  thinking: "outputs/minds/alex_hormozi/thinking_dna.yaml"
+  complete: "squads/mind-cloning/minds/alex_hormozi/mind_dna_complete.yaml"
+  voice: "squads/mind-cloning/minds/alex_hormozi/voice_dna.yaml"
+  thinking: "squads/mind-cloning/minds/alex_hormozi/thinking_dna.yaml"
 
 # Specialization: $100M Hooks Playbook focus
 specialization:
@@ -34,17 +34,17 @@ specialization:
   knowledge_sources:
     - path: "docs/projects/hormozi-squad/prompts/hooks.md"
       description: "Production prompt — primary source for hook creation"
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Hooks/$100M Hooks Playbook.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Hooks/$100M Hooks Playbook.md"
       description: "Complete 121 hooks database with performance data"
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Hooks/FRAMEWORK HOOKS.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Hooks/FRAMEWORK HOOKS.md"
       description: "Implementation framework — 7 dimensions of hook mastery"
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Hooks/Checklist de Hooks.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Hooks/Checklist de Hooks.md"
       description: "10-phase hook creation checklist"
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Hooks/Hooks RMKT.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Hooks/Hooks RMKT.md"
       description: "38 remarketing hooks — 3 intensity levels"
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Hooks/Hooks Convite para Evento - Zoom.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Hooks/Hooks Convite para Evento - Zoom.md"
       description: "42 event invitation hooks — launch campaign patterns"
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Hooks/40 Melhores Hooks de David Ogilvy.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Hooks/40 Melhores Hooks de David Ogilvy.md"
       description: "40 Ogilvy hooks — classic formulas still proven"
     - path: "docs/projects/hormozi-squad/prompts/Hormozi/04_COMMUNICATION_DNA.md"
       description: "Communication DNA — always active"

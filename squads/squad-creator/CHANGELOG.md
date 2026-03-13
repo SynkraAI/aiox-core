@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Mental Model Integration: Decision Checkpoints in oalanicolas Tasks**
 
-Mental models (VALUES, OBSESSIONS, MODELS, PARADOXES) from `outputs/minds/alan_nicolas/artifacts/` were present in `oalanicolas.md` but disconnected from tasks — clone executed procedurally without consulting them.
+Mental models (VALUES, OBSESSIONS, MODELS, PARADOXES) from `squads/mind-cloning/minds/alan_nicolas/artifacts/` were present in `oalanicolas.md` but disconnected from tasks — clone executed procedurally without consulting them.
 
 Now **46 checkpoints** across **10 tasks** force the clone to consult mental models BEFORE decisions.
 

@@ -28,7 +28,7 @@ independence_details: |
   - Todo conhecimento está no DNA extraído (voice_dna.yaml + thinking_dna.yaml)
   - Base MBTI completa com 16 perfis Premium (~860K words) em data/mbti/
   - Funciona offline com base de conhecimento local
-  - DNA source: squads/luiz-fosc/data/dna/
+  - DNA source: squads/mind-cloning/minds/luiz-fosc/
 
 agents:
   - luiz-fosc

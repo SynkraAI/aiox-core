@@ -8,7 +8,7 @@
 #   Example: @squad-creator *run-workflow elite-mind-clone tim_ferriss
 #
 # Output:
-#   - outputs/minds/{mind_slug}/     (DNA files)
+#   - squads/mind-cloning/minds/{mind_slug}/     (DNA files)
 #   - squads/{mind_slug}/            (Complete squad)
 
 workflow:
@@ -71,7 +71,7 @@ workflow:
         sources_path: "{{variables.sources_path}}"
 
       output:
-        - path: "outputs/minds/{{variables.mind_slug}}/sources_inventory.yaml"
+        - path: "squads/mind-cloning/minds/{{variables.mind_slug}}/sources_inventory.yaml"
           type: yaml
           description: "Sources classified by tier (0-3)"
 
@@ -114,10 +114,10 @@ workflow:
 
       input:
         mind_slug: "{{variables.mind_slug}}"
-        sources: "outputs/minds/{{variables.mind_slug}}/sources_inventory.yaml"
+        sources: "squads/mind-cloning/minds/{{variables.mind_slug}}/sources_inventory.yaml"
 
       output:
-        - path: "outputs/minds/{{variables.mind_slug}}/voice_dna.yaml"
+        - path: "squads/mind-cloning/minds/{{variables.mind_slug}}/voice_dna.yaml"
           type: yaml
           description: "Voice DNA (10 components)"
 
@@ -143,10 +143,10 @@ workflow:
 
       input:
         mind_slug: "{{variables.mind_slug}}"
-        sources: "outputs/minds/{{variables.mind_slug}}/sources_inventory.yaml"
+        sources: "squads/mind-cloning/minds/{{variables.mind_slug}}/sources_inventory.yaml"
 
       output:
-        - path: "outputs/minds/{{variables.mind_slug}}/thinking_dna.yaml"
+        - path: "squads/mind-cloning/minds/{{variables.mind_slug}}/thinking_dna.yaml"
           type: yaml
           description: "Thinking DNA (9 components)"
 
@@ -171,15 +171,15 @@ workflow:
 
       input:
         mind_slug: "{{variables.mind_slug}}"
-        voice_dna: "outputs/minds/{{variables.mind_slug}}/voice_dna.yaml"
-        thinking_dna: "outputs/minds/{{variables.mind_slug}}/thinking_dna.yaml"
+        voice_dna: "squads/mind-cloning/minds/{{variables.mind_slug}}/voice_dna.yaml"
+        thinking_dna: "squads/mind-cloning/minds/{{variables.mind_slug}}/thinking_dna.yaml"
 
       output:
-        - path: "outputs/minds/{{variables.mind_slug}}/mind_dna_complete.yaml"
+        - path: "squads/mind-cloning/minds/{{variables.mind_slug}}/mind_dna_complete.yaml"
           type: yaml
           description: "Complete DNA (Voice + Thinking + Synthesis)"
 
-        - path: "outputs/minds/{{variables.mind_slug}}/quality_dashboard.md"
+        - path: "squads/mind-cloning/minds/{{variables.mind_slug}}/quality_dashboard.md"
           type: markdown
           description: "Quality metrics and DNA Mental 8-layer coverage"
 
@@ -222,7 +222,7 @@ workflow:
         mind_slug: "{{variables.mind_slug}}"
         expert_name: "{{variables.expert_name}}"
         domain: "{{variables.domain}}"
-        dna_path: "outputs/minds/{{variables.mind_slug}}/"
+        dna_path: "squads/mind-cloning/minds/{{variables.mind_slug}}/"
         dna_files:
           voice: "voice_dna.yaml"
           thinking: "thinking_dna.yaml"
@@ -296,10 +296,10 @@ workflow:
       input:
         mind_slug: "{{variables.mind_slug}}"
         squad_path: "squads/{{variables.mind_slug}}/"
-        dna_reference: "outputs/minds/{{variables.mind_slug}}/mind_dna_complete.yaml"
+        dna_reference: "squads/mind-cloning/minds/{{variables.mind_slug}}/mind_dna_complete.yaml"
 
       output:
-        - path: "outputs/minds/{{variables.mind_slug}}/smoke_test_result.yaml"
+        - path: "squads/mind-cloning/minds/{{variables.mind_slug}}/smoke_test_result.yaml"
           type: yaml
           description: "Test results (3 tests: identity, framework, voice)"
 
@@ -338,15 +338,15 @@ workflow:
 
       input:
         mind_slug: "{{variables.mind_slug}}"
-        smoke_test_results: "outputs/minds/{{variables.mind_slug}}/smoke_test_result.yaml"
-        quality_dashboard: "outputs/minds/{{variables.mind_slug}}/quality_dashboard.md"
+        smoke_test_results: "squads/mind-cloning/minds/{{variables.mind_slug}}/smoke_test_result.yaml"
+        quality_dashboard: "squads/mind-cloning/minds/{{variables.mind_slug}}/quality_dashboard.md"
 
       output:
-        - path: "outputs/minds/{{variables.mind_slug}}/diagnosis_report.md"
+        - path: "squads/mind-cloning/minds/{{variables.mind_slug}}/diagnosis_report.md"
           type: markdown
           description: "Gap analysis and correction plan"
 
-        - path: "outputs/minds/{{variables.mind_slug}}/refinement_plan.yaml"
+        - path: "squads/mind-cloning/minds/{{variables.mind_slug}}/refinement_plan.yaml"
           type: yaml
           description: "Step-by-step refinement actions"
 
@@ -373,9 +373,9 @@ workflow:
       - "Tools discovered and prioritized"
 
     outputs_summary:
-      dna_files: "outputs/minds/{mind_slug}/*.yaml"
+      dna_files: "squads/mind-cloning/minds/{mind_slug}/*.yaml"
       squad_files: "squads/{mind_slug}/**"
-      reports: "outputs/minds/{mind_slug}/*.md"
+      reports: "squads/mind-cloning/minds/{mind_slug}/*.md"
 
     reusability:
       description: |

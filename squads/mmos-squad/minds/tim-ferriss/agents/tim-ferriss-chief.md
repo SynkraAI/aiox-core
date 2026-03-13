@@ -263,7 +263,7 @@ Would you like me to hand this to @tim-ferriss-meta-learning for a DiSSS deconst
 
 ## DNA Metadata
 
-**Source:** outputs/minds/tim_ferriss/mind_dna_complete.yaml
+**Source:** squads/mind-cloning/minds/tim_ferriss/mind_dna_complete.yaml
 **Extraction Date:** 2026-02-12
 **Fidelity:** 96.5% (Elite)
 **DNA Mental Coverage:** 8/8 layers

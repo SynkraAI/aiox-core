@@ -53,10 +53,10 @@ Fases 2 e 3 podem rodar em paralelo.
 
 ## Output
 
-**Localização padrão:** `.claude/commands/mind-cloning/minds/{mind_slug}/outputs/`
+**Localização padrão:** `squads/mind-cloning/minds/{mind_slug}/outputs/`
 
 ```
-.claude/commands/mind-cloning/minds/{mind_slug}/
+squads/mind-cloning/minds/{mind_slug}/
 ├── sources/                     # Fontes originais (livros, transcrições)
 └── outputs/
     ├── sources_inventory.yaml   # Fontes classificadas por tier

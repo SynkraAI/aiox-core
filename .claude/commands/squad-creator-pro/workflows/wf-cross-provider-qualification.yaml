@@ -120,7 +120,7 @@ cross_provider_candidates:
     expected_savings: "80-90%"
     risk: "Quality degradation in voice capture"
     test_input:
-      target: "outputs/minds/pedro_valerio/sources/"
+      target: "squads/mind-cloning/minds/pedro_valerio/sources/"
       type: "sources_directory"
     pt_br_critical: true
 
@@ -130,7 +130,7 @@ cross_provider_candidates:
     expected_savings: "80-90%"
     risk: "Missing mental models"
     test_input:
-      target: "outputs/minds/pedro_valerio/sources/"
+      target: "squads/mind-cloning/minds/pedro_valerio/sources/"
       type: "sources_directory"
     pt_br_critical: true
 
@@ -153,7 +153,7 @@ cross_provider_candidates:
     expected_savings: "80%"
     risk: "Generic agent without depth"
     test_input:
-      target: "outputs/minds/pedro_valerio/"
+      target: "squads/mind-cloning/minds/pedro_valerio/"
       type: "mind_directory"
     pt_br_critical: true
 
@@ -163,7 +163,7 @@ cross_provider_candidates:
     expected_savings: "80%"
     risk: "Incomplete clone structure"
     test_input:
-      target: "outputs/minds/pedro_valerio/"
+      target: "squads/mind-cloning/minds/pedro_valerio/"
       type: "mind_directory"
     pt_br_critical: true
 

@@ -129,7 +129,7 @@ metadata:
   version: "1.2.0"
   architecture: "hybrid-style"
   created: "2026-02-22"
-  mind_dna_source: "outputs/minds/italo-marsili/mind_dna_complete.yaml"
+  mind_dna_source: "squads/mind-cloning/minds/italo-marsili/mind_dna_complete.yaml"
   fidelity: "Elite (95%)"
   voice_score: "10/10"
   thinking_score: "9/9"
@@ -692,4 +692,4 @@ activation:
 
 *AIOS Agent - Italo Marsili Squad v1.0.0*
 *Fidelity: Elite (95%) | Voice: 10/10 | Thinking: 9/9 | Layers: 8/8*
-*Mind DNA Source: outputs/minds/italo-marsili/mind_dna_complete.yaml*
+*Mind DNA Source: squads/mind-cloning/minds/italo-marsili/mind_dna_complete.yaml*

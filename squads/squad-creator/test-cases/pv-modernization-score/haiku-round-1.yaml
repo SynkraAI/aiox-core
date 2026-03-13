@@ -74,13 +74,13 @@ modernization_score:
       name: "File-Based Communication"
       status: "PASS"
       evidence: |
-        Phase 0a output: "acquired_sources.yaml" → "outputs/minds/{mind_slug}/"
-        Phase 0b output: "sources_inventory.yaml" → "outputs/minds/{mind_slug}/"
-        Phase 1 output: "voice_dna.yaml" → "outputs/minds/{mind_slug}/"
-        Phase 2 output: "thinking_dna.yaml" → "outputs/minds/{mind_slug}/"
-        Phase 3 output: "mind_dna_complete.yaml" → "outputs/minds/{mind_slug}/"
-        Phase 4 output: "smoke_test_result.yaml" → "outputs/minds/{mind_slug}/"
-        Phase 5 output: "quality_dashboard.md" → "outputs/minds/{mind_slug}/"
+        Phase 0a output: "acquired_sources.yaml" → "squads/mind-cloning/minds/{mind_slug}/"
+        Phase 0b output: "sources_inventory.yaml" → "squads/mind-cloning/minds/{mind_slug}/"
+        Phase 1 output: "voice_dna.yaml" → "squads/mind-cloning/minds/{mind_slug}/"
+        Phase 2 output: "thinking_dna.yaml" → "squads/mind-cloning/minds/{mind_slug}/"
+        Phase 3 output: "mind_dna_complete.yaml" → "squads/mind-cloning/minds/{mind_slug}/"
+        Phase 4 output: "smoke_test_result.yaml" → "squads/mind-cloning/minds/{mind_slug}/"
+        Phase 5 output: "quality_dashboard.md" → "squads/mind-cloning/minds/{mind_slug}/"
         Estrutura outputs/{slug}/ coerente em todas as fases.
       rationale: "All phase outputs use file-based communication pattern"
 
@@ -145,11 +145,11 @@ modernization_score:
       name: "Artifact Output Directory"
       status: "PASS"
       evidence: |
-        All outputs go to: outputs/minds/{mind_slug}/{filename}
+        All outputs go to: squads/mind-cloning/minds/{mind_slug}/{filename}
         Structured by mind identity (slug-based), not arbitrary.
-        outputs/minds/{slug}/metadata/state.json pattern ready.
+        squads/mind-cloning/minds/{slug}/metadata/state.json pattern ready.
         Subdirectory organization: phase outputs, artifacts, metrics.
-        Quality dashboard goes to outputs/minds/{slug}/ (structured).
+        Quality dashboard goes to squads/mind-cloning/minds/{slug}/ (structured).
         Template output_template shows complete YAML structure.
       rationale: "Artifact directory structure fully architected"
 
@@ -351,7 +351,7 @@ modernization_score:
       - Add proper finalization (shutdown + cleanup)
       - Define bypassPermissions mode explicitly
       - Test smoke tests Phase 4 against real agent
-      - Validate file outputs in outputs/minds/{slug}/ structure
+      - Validate file outputs in squads/mind-cloning/minds/{slug}/ structure
 
   # ═══════════════════════════════════════════════════════════════════════════════
   # VALIDATION EVIDENCE

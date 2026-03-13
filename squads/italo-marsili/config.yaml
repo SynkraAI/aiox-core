@@ -19,7 +19,7 @@ independence_details: |
   - Não requer banco de dados
   - Não requer APIs externas
   - Todo conhecimento está inline no agent file
-  - Mind DNA source: outputs/minds/italo-marsili/mind_dna_complete.yaml
+  - Mind DNA source: squads/mind-cloning/minds/italo-marsili/mind_dna_complete.yaml
   - Funciona offline com base de conhecimento fornecida
 
 agents:

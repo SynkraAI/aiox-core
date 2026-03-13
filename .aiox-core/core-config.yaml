@@ -235,7 +235,7 @@ squads:
   autoLoad: false
 pvMindContext:
   enabled: true
-  location: outputs/minds/pedro_valerio
+  location: squads/mind-cloning/minds/pedro_valerio
   features:
     persona_voice: true
     technical_depth: advanced

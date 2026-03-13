@@ -137,7 +137,7 @@ axioma_assessment:
       threshold: 6.0
       status: PASS
       evidence: |
-        Output (mind_dna_complete.yaml) é persistido em outputs/minds/{slug}/ (reproduzível).
+        Output (mind_dna_complete.yaml) é persistido em squads/mind-cloning/minds/{slug}/ (reproduzível).
         Workflow define CLEAR input/output/checkpoint contrato para cada fase.
         Rework loops preservam tentativas anteriores (iteração, não falha + restart).
         Brownfield mode (Phase -1) reconhece que clones podem ter ciclo de vida longo.

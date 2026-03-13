@@ -387,7 +387,7 @@ Máxima fidelidade com materiais do usuário:
 | Comando | Descrição | Output |
 |---------|-----------|--------|
 | `*create-squad` | Criar squad completo (6 fases) | `squads/{name}/` |
-| `*clone-mind {name}` | Extrair Voice + Thinking DNA | `outputs/minds/{slug}/` |
+| `*clone-mind {name}` | Extrair Voice + Thinking DNA | `squads/mind-cloning/minds/{slug}/` |
 | `*create-agent` | Agent individual para squad | `agents/{name}.md` |
 | `*create-workflow` | Workflow multi-fase | `workflows/{name}.yaml` |
 | `*create-task` | Task atômica | `tasks/{name}.md` |
@@ -811,7 +811,7 @@ mmos/squads/
 ├── content/              # Content creators
 └── ... (24 mais squads)
 
-mmos/outputs/minds/       # Minds extraídos
+mmos/squads/mind-cloning/minds/       # Minds extraídos
 ├── alex-hormozi/         # Voice DNA + Thinking DNA completo
 ├── ry-schwartz/          # Email mastery framework
 ├── gary-halbert/         # Boron Letters DNA

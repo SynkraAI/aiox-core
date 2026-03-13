@@ -134,7 +134,7 @@
 
 ## Smoke Test (Pré-existente)
 
-**Arquivo:** `outputs/minds/italo-marsili/smoke_test_result.yaml`
+**Arquivo:** `squads/mind-cloning/minds/italo-marsili/smoke_test_result.yaml`
 **Data:** 2026-02-22
 **Avaliador:** Usuário (conhece o expert)
 

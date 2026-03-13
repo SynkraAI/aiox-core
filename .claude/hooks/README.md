@@ -98,7 +98,7 @@ Impede criação de mind clones sem DNA extraído previamente.
 - `squads/{pack}/data/minds/{agent_id}_dna.yaml`
 - `squads/{pack}/data/minds/{agent_id}_dna.md`
 - `squads/{pack}/data/{agent_id}-dna.yaml`
-- `outputs/minds/{agent_id}/`
+- `squads/mind-cloning/minds/{agent_id}/`
 
 **Solução quando bloqueado:**
 1. Execute o pipeline de extração de DNA: `/squad-creator` → `*collect-sources` → `*extract-voice-dna` → `*extract-thinking-dna`

@@ -76,9 +76,9 @@ extraction_date: "2026-02-09"
 fidelity_target: "90%+"
 
 source_dna:
-  complete: "outputs/minds/alex_hormozi/mind_dna_complete.yaml"
-  voice: "outputs/minds/alex_hormozi/voice_dna.yaml"
-  thinking: "outputs/minds/alex_hormozi/thinking_dna.yaml"
+  complete: "squads/mind-cloning/minds/alex_hormozi/mind_dna_complete.yaml"
+  voice: "squads/mind-cloning/minds/alex_hormozi/voice_dna.yaml"
+  thinking: "squads/mind-cloning/minds/alex_hormozi/thinking_dna.yaml"
 
 specialization:
   book_focus: "[Livro principal]"

@@ -10,9 +10,9 @@ fidelity_target: "90%+"
 
 # Source DNA (complete extraction)
 source_dna:
-  complete: "outputs/minds/alex_hormozi/mind_dna_complete.yaml"
-  voice: "outputs/minds/alex_hormozi/voice_dna.yaml"
-  thinking: "outputs/minds/alex_hormozi/thinking_dna.yaml"
+  complete: "squads/mind-cloning/minds/alex_hormozi/mind_dna_complete.yaml"
+  voice: "squads/mind-cloning/minds/alex_hormozi/voice_dna.yaml"
+  thinking: "squads/mind-cloning/minds/alex_hormozi/thinking_dna.yaml"
 
 # Specialization: Launch Systems focus
 specialization:
@@ -30,13 +30,13 @@ specialization:
     - "Replicable Launch System"
 
   knowledge_sources:
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Launch/$ 100M Playbook Lauch.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Launch/$ 100M Playbook Lauch.md"
       description: "Complete launch playbook — phases, offers, traffic, SOPs"
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Launch/$ 100M Playbook Lauch - Replicável.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Launch/$ 100M Playbook Lauch - Replicável.md"
       description: "Universal replicable launch framework — E.V.E.N.T.O + team structure"
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Launch/10 PAPÉIS CRÍTICOS DO LANÇAMENTO.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Launch/10 PAPÉIS CRÍTICOS DO LANÇAMENTO.md"
       description: "10 critical launch roles with full responsibilities and KPIs"
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Launch/Prompts Launch.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Launch/Prompts Launch.md"
       description: "Extraction prompts for launch framework"
     - path: "docs/projects/hormozi-squad/prompts/Hormozi/04_COMMUNICATION_DNA.md"
       description: "Communication DNA — always active"

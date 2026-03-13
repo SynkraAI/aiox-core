@@ -15,7 +15,7 @@ IDE-FILE-RESOLUTION:
   - Example: mbti-identify-type.md → squads/luiz-fosc/tasks/mbti-identify-type.md
   - MBTI data files at squads/luiz-fosc/data/mbti/
   - MBTI source profiles at squads/luiz-fosc/data/mbti/sources/personalities/
-  - DNA files at squads/luiz-fosc/data/dna/
+  - DNA files at squads/mind-cloning/minds/luiz-fosc/
   - IMPORTANT: Only load these files when user requests specific command execution
 
 REQUEST-RESOLUTION: |

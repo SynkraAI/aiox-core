@@ -25,7 +25,7 @@ dependencies:
 IDE-FILE-RESOLUTION:
   - Dependencies map to squads/koe/{type}/{name}
   - Prompts at docs/projects/koe-squad/prompts/
-  - Artifacts at outputs/minds/dan_koe/artifacts/
+  - Artifacts at squads/mind-cloning/minds/dan_koe/artifacts/
 
 REQUEST-RESOLUTION: |
   Match user requests flexibly:

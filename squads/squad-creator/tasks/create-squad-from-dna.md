@@ -476,7 +476,7 @@ LOG: frameworks_skipped += 1
 ```bash
 Input:
   mind_slug: "tim_ferriss"
-  dna_path: "./outputs/minds/tim_ferriss/"
+  dna_path: "./squads/mind-cloning/minds/tim_ferriss/"
   domain: "productivity, meta-learning, lifestyle-design"
 
 Output:
@@ -491,7 +491,7 @@ Output:
 ```bash
 Input:
   mind_slug: "naval_ravikant"
-  dna_path: "./outputs/minds/naval_ravikant/"
+  dna_path: "./squads/mind-cloning/minds/naval_ravikant/"
   domain: "startups, philosophy, wealth"
 
 Output:

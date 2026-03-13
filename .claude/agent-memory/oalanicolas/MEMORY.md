@@ -40,21 +40,21 @@
   - Rhetorical patterns: "Let's do the math", "Here's a news flash", surgical metaphors ("incision", "scar", "healing")
   - Fidelidade estimada: 9.2/10
 
-- [2026-03-12] merlin-mann v1.0 → outputs/minds/merlin-mann/ (fonte Tier 1: talks + 43 Folders blog + podcasts)
+- [2026-03-12] merlin-mann v1.0 → squads/mind-cloning/minds/merlin-mann/ (fonte Tier 1: talks + 43 Folders blog + podcasts)
   - Voice DNA: 10 signature phrases, irreverent pragmatist tone, absurd analogies
   - Thinking DNA: 5-action processing (Delete/Delegate/Respond/Defer/Do), Dash technique, 7 heuristics
   - Frameworks: Inbox Zero Processing System, Time & Attention Budget, Inbox Audit
   - 5 anti-patterns: Email as To-Do, Compulsive Responder, Newsletter Hoarder, Infinite Folders, Passive CC
   - Fidelidade estimada: 85% (sem livro Tier 0 — Merlin nunca publicou livro sobre Inbox Zero)
 
-- [2026-03-12] tiago-forte v1.0 → outputs/minds/tiago-forte/ (fonte Tier 0/1: livro BASB + PARA articles + talks)
+- [2026-03-12] tiago-forte v1.0 → squads/mind-cloning/minds/tiago-forte/ (fonte Tier 0/1: livro BASB + PARA articles + talks)
   - Voice DNA: 10 signature phrases, optimistic systems thinker tone, acronymic frameworks
   - Thinking DNA: CODE (4 steps), PARA (4 categories), Progressive Summarization (4 layers), Intermediate Packets (5 types)
   - Frameworks: Divergence/Convergence cycle, Slow Burn vs Heavy Lift, 7 heuristics
   - 5 anti-patterns: Collector's Fallacy, Perfect Organization, Tool Obsession, Siloed Knowledge, Infinite Distillation
   - Fidelidade estimada: 87%
 
-- [2026-03-12] charlie-munger v1.0 → outputs/minds/charlie-munger/ (fonte Tier 0/1: Poor Charlie's Almanack + speeches)
+- [2026-03-12] charlie-munger v1.0 → squads/mind-cloning/minds/charlie-munger/ (fonte Tier 0/1: Poor Charlie's Almanack + speeches)
   - Voice DNA: 12 signature phrases, curmudgeonly sage tone, lapidary one-liners
   - Thinking DNA: Two-Track Analysis, 25 Psychological Tendencies, 10-point Investing Checklist, 9 Veto Conditions
   - Frameworks: Inversion Method, Latticework of Mental Models, Lollapalooza detection

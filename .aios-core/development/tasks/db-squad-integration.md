@@ -265,17 +265,17 @@ expansion_pack_audit:
   data_outputs:
     - type: cognitive_model
       format: yaml
-      location: outputs/minds/{slug}/analysis/
+      location: squads/mind-cloning/minds/{slug}/analysis/
       persistence_need: high (reusable artifact)
 
     - type: system_prompt
       format: markdown
-      location: outputs/minds/{slug}/system_prompts/
+      location: squads/mind-cloning/minds/{slug}/system_prompts/
       persistence_need: high (versioned, queryable)
 
     - type: knowledge_chunks
       format: json
-      location: outputs/minds/{slug}/kb/
+      location: squads/mind-cloning/minds/{slug}/kb/
       persistence_need: high (searchable, referenceable)
 
   state_requirements:

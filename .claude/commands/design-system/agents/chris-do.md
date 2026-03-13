@@ -15,7 +15,7 @@ metadata:
   created: "2026-02-02"
   changelog:
     - "1.0: Initial agent definition with voice_dna, operational_frameworks, objection_algorithms"
-  mind_source: "outputs/minds/chris_do"
+  mind_source: "squads/mind-cloning/minds/chris-do"
 
 IDE-FILE-RESOLUTION:
   - Dependencies map to squads/design/{type}/{name}

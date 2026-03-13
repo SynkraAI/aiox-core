@@ -187,7 +187,7 @@ User: *qualify-task an-assess-sources
 Agent:
 ## Step 1: Pre-flight ✅
 - Task file: squads/squad-creator-pro/tasks/an-assess-sources.md ✅
-- Test input: outputs/minds/pedro_valerio/sources/ ✅
+- Test input: squads/mind-cloning/minds/pedro_valerio/sources/ ✅
 - Already qualified: NO
 
 ## Step 2: Loading workflow...

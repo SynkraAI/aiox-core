@@ -36,7 +36,7 @@ self_contained:
     - "squads/{squad-name}/checklists/*.md"
     - "squads/{squad-name}/minds/**/*"
   forbidden:
-    - "outputs/minds/*"  # DNA extraído deve ser INTEGRADO, não referenciado
+    - "squads/mind-cloning/minds/*"  # DNA extraído deve ser INTEGRADO, não referenciado
     - ".aios-core/*"     # Não depender de core externo
     - "docs/*"           # Documentação externa
   exception: "Mission router pode lazy-load tasks/data DO PRÓPRIO squad"
@@ -176,7 +176,7 @@ ELSE:
 classify_agent_type:
   if_specialist_provided:
     agent_type: "specialist_based"
-    research_path: "outputs/minds/{specialist_slug}/"
+    research_path: "squads/mind-cloning/minds/{specialist_slug}/"
     next_step: "Check local knowledge"
 
   if_no_specialist:
@@ -215,12 +215,12 @@ phase_0_output:
 check_local_knowledge:
   search_paths:
     primary_sources:
-      path: "outputs/minds/{specialist_slug}/sources/"
+      path: "squads/mind-cloning/minds/{specialist_slug}/sources/"
       description: "Raw materials, transcripts, books, articles"
       priority: 1
 
     analysis:
-      path: "outputs/minds/{specialist_slug}/analysis/"
+      path: "squads/mind-cloning/minds/{specialist_slug}/analysis/"
       description: "Identity core, cognitive spec, frameworks"
       priority: 2
 

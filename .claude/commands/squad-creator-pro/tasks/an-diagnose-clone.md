@@ -47,7 +47,7 @@ source_quality_rules:
   BRONZE: "SE <30% são ouro"
 
   ouro_indicators:
-    - "References to outputs/minds/*/artifacts/"
+    - "References to squads/mind-cloning/minds/*/artifacts/"
     - "References to canonical .yaml files"
     - "References to entrevistas, podcasts, livros específicos"
 
@@ -167,7 +167,7 @@ grep -c 'output_example\|example_output\|```yaml' {clone_file} em section exampl
 #### Source Quality Check
 ```bash
 # Contar referências ouro vs total
-# Ouro: outputs/minds/, canonical .yaml, entrevistas, livros
+# Ouro: squads/mind-cloning/minds/, canonical .yaml, entrevistas, livros
 # Bronze: genérico, inferido, terceiros
 # SE >70% ouro → OURO | SE 30-70% → MIXED | SE <30% → BRONZE
 ```

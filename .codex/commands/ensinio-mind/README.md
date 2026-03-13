@@ -98,7 +98,7 @@ Aponte symlinks para `squads/ensinio-mind/data/` ao invés de duplicar arquivos.
   - Fidelity Score: 88/100 → **91/100** (+3 points)
   - Coverage: 92% → **98%** (+6%)
   - Total Sources: 15 → **16**
-- **Quality Dashboard:** `outputs/minds/ensinio/quality-dashboard-ensinio.md`
+- **Quality Dashboard:** `squads/mind-cloning/minds/ensinio/quality-dashboard-ensinio.md`
 
 ### ⏳ Pendente (v3.0):
 - [ ] Processo de onboarding (passo a passo)

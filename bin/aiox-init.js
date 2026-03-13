@@ -1093,7 +1093,7 @@ async function updateGitIgnore(mode, projectRoot) {
       '# AIOX-FullStack Framework Files (auto-managed - do not edit)',
       '.aiox-core/',
       'node_modules/@aiox/',
-      'outputs/minds/',
+      'squads/mind-cloning/minds/',
       '.aiox-installation-config.yaml',
       '# End AIOX-FullStack auto-managed section',
       '',

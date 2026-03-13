@@ -119,7 +119,7 @@ Executa clonagem completa (Voice + Thinking DNA).
 
 **Output:**
 ```
-outputs/minds/{slug}/
+squads/mind-cloning/minds/{slug}/
 ├── sources_inventory.yaml
 ├── voice_dna.yaml
 ├── thinking_dna.yaml

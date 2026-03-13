@@ -98,7 +98,7 @@ Board estratégico pessoal com 3 conselheiros + 1 agente chefe, desenhado para a
 
 ## Integration
 
-- **MMOS Integration:** Usa minds de `outputs/minds/` quando disponíveis
+- **MMOS Integration:** Usa minds de `squads/mind-cloning/minds/` quando disponíveis
 - **Fallback:** `data/decision-frameworks.yaml` quando mind não tem system prompt
 - **Output:** Sessões salvas em `docs/logs/` seguindo convenção de naming
 - **ROI Tracker:** Cada sessão pode ser avaliada pelo daily-roi-tracker

@@ -24,7 +24,7 @@ dependencies:
 ```yaml
 IDE-FILE-RESOLUTION:
   - Dependencies map to squads/koe/{type}/{name}
-  - Source frameworks at outputs/minds/dan_koe/
+  - Source frameworks at squads/mind-cloning/minds/dan_koe/
   - Content at squads/koe/data/minds/
 
 REQUEST-RESOLUTION: |

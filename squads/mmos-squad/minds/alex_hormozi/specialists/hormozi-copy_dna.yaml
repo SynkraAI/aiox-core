@@ -10,9 +10,9 @@ fidelity_target: "90%+"
 
 # Source DNA (complete extraction)
 source_dna:
-  complete: "outputs/minds/alex_hormozi/mind_dna_complete.yaml"
-  voice: "outputs/minds/alex_hormozi/voice_dna.yaml"
-  thinking: "outputs/minds/alex_hormozi/thinking_dna.yaml"
+  complete: "squads/mind-cloning/minds/alex_hormozi/mind_dna_complete.yaml"
+  voice: "squads/mind-cloning/minds/alex_hormozi/voice_dna.yaml"
+  thinking: "squads/mind-cloning/minds/alex_hormozi/thinking_dna.yaml"
 
 # Specialization: Sales Copy focus
 specialization:
@@ -33,21 +33,21 @@ specialization:
     - "48-Hour Pre-Launch Validation Protocol"
 
   knowledge_sources:
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Copy/BLUEPRINT PV.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Copy/BLUEPRINT PV.md"
       description: "17-element sales page blueprint — primary structural source"
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Copy/BLUEPRINT UPSELL.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Copy/BLUEPRINT UPSELL.md"
       description: "Upsell page architecture and psychology"
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Copy/Checklist LP.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Copy/Checklist LP.md"
       description: "10-phase landing page conversion checklist"
     - path: "docs/projects/hormozi-squad/prompts/Hormozi/04_COMMUNICATION_DNA.md"
       description: "Communication DNA — voice, style, persuasion structures"
-    - path: "outputs/minds/alex_hormozi/sources/03 Programas/(Blueprint) $100M Money Models/Original/Email_SMS_Copy_and_Mailers.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/03 Programas/(Blueprint) $100M Money Models/Original/Email_SMS_Copy_and_Mailers.md"
       description: "Real email/SMS copy from $100M Money Models launch"
-    - path: "outputs/minds/alex_hormozi/sources/03 Programas/(Blueprint) $100M Money Models/Original/Registration_Page_Content.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/03 Programas/(Blueprint) $100M Money Models/Original/Registration_Page_Content.md"
       description: "Registration page copy patterns"
-    - path: "outputs/minds/alex_hormozi/sources/03 Programas/(Blueprint) $100M Money Models/Original/VIP_VSL_and_OTO_Content.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/03 Programas/(Blueprint) $100M Money Models/Original/VIP_VSL_and_OTO_Content.md"
       description: "VIP VSL and OTO copy patterns"
-    - path: "outputs/minds/alex_hormozi/sources/03 Programas/(Blueprint) $100M Money Models/pt-br/scripts/Pre_Event_Registration_VSL.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/03 Programas/(Blueprint) $100M Money Models/pt-br/scripts/Pre_Event_Registration_VSL.md"
       description: "Registration VSL script template"
 
 # Voice DNA summary (from complete extraction)

@@ -264,7 +264,7 @@ handoff_to_oalanicolas:
 ```yaml
 return_from_oalanicolas:
   status: "complete"
-  output_path: "outputs/minds/gary_halbert/"
+  output_path: "squads/mind-cloning/minds/gary_halbert/"
   artifacts:
     - sources_inventory.yaml
     - voice_dna.yaml

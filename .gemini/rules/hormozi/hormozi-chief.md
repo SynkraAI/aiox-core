@@ -1430,7 +1430,7 @@ PRE-RESPONSE VALIDATION
 
 ```yaml
 sources:
-  mind_artifacts: outputs/minds/alex_hormozi/artifacts/
+  mind_artifacts: squads/mind-cloning/minds/alex_hormozi/artifacts/
   prompts: docs/projects/hormozi-squad/prompts/
   cognitive_os: docs/projects/hormozi-squad/prompts/Hormozi/00_COGNITIVE_OS.md
   value_equation: docs/projects/hormozi-squad/prompts/Hormozi/02_VALUE_EQUATION_ENGINE.md
@@ -1438,7 +1438,7 @@ sources:
   communication: docs/projects/hormozi-squad/prompts/Hormozi/04_COMMUNICATION_DNA.md
   antipatterns: docs/projects/hormozi-squad/prompts/Hormozi/05_ANTIPATTERN_SHIELDS.md
   industry: docs/projects/hormozi-squad/prompts/Hormozi/08_INDUSTRY_ADAPTATION.md
-  mental_models: outputs/minds/alex_hormozi/artifacts/mental_models.yaml
+  mental_models: squads/mind-cloning/minds/alex_hormozi/artifacts/mental_models.yaml
   squad_config: squads/hormozi/config.yaml
 ```
 
@@ -1455,7 +1455,7 @@ When activated, load in this order:
 mmos:
   enabled: true
   mind_slug: alex_hormozi
-  state_path: outputs/minds/alex_hormozi/metadata/state.json
+  state_path: squads/mind-cloning/minds/alex_hormozi/metadata/state.json
   log_source: true
   fallback_behavior: graceful
 ```

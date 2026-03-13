@@ -33,7 +33,7 @@ axioma_assessment:
       threshold: 6.0
       veto: false
       status: PASS
-      evidence: "Contribui diretamente para o objetivo maior de criar agentes de alta fidelidade (85-97%). Pipeline conecta com next_steps (create-agent.md) e brownfield_commands (update-mind). Integra com sistema maior: outputs/minds/{slug}/, templates/, checklists/. Suporta tanto greenfield quanto brownfield mode."
+      evidence: "Contribui diretamente para o objetivo maior de criar agentes de alta fidelidade (85-97%). Pipeline conecta com next_steps (create-agent.md) e brownfield_commands (update-mind). Integra com sistema maior: squads/mind-cloning/minds/{slug}/, templates/, checklists/. Suporta tanto greenfield quanto brownfield mode."
 
     - name: "Excelência Operacional"
       score: 8
@@ -81,7 +81,7 @@ axioma_assessment:
       threshold: 6.0
       veto: false
       status: PASS
-      evidence: "Funciona sem intervenção manual: auto-acquire busca fontes automaticamente, checkpoints auto-validam, rework loops auto-iteram. Outputs em YAML estruturado permitem processamento por outros sistemas. Brownfield mode permite atualização incremental vs recriação. Templates e checklists padronizados garantem consistência cross-execution. Escala: cada mind clone é independente em outputs/minds/{slug}/."
+      evidence: "Funciona sem intervenção manual: auto-acquire busca fontes automaticamente, checkpoints auto-validam, rework loops auto-iteram. Outputs em YAML estruturado permitem processamento por outros sistemas. Brownfield mode permite atualização incremental vs recriação. Templates e checklists padronizados garantem consistência cross-execution. Escala: cada mind clone é independente em squads/mind-cloning/minds/{slug}/."
 
     - name: "Adaptabilidade"
       score: 7

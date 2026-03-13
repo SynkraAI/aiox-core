@@ -28,7 +28,7 @@ Required Files (check before starting):
 1. outputs/courses/{slug}/COURSE-BRIEF.md (or will create)
 2. expansion-packs/creator-os/checklists/checklist-aula-perfeita.md
 3. expansion-packs/creator-os/templates/ (all templates)
-4. outputs/minds/{professor_slug}/ (if clone mode)
+4. squads/mind-cloning/minds/{professor_slug}/ (if clone mode)
 ```
 
 **Action:** If ANY missing → STOP and ask user or create from template.
@@ -46,7 +46,7 @@ Templates: expansion-packs/creator-os/templates/
 Checklists: expansion-packs/creator-os/checklists/
   - checklist-aula-perfeita.md
 
-MMOS Personas: outputs/minds/{professor_slug}/
+MMOS Personas: squads/mind-cloning/minds/{professor_slug}/
   - system_prompts/system-prompt-generalista.md
   - analysis/identity-core.yaml
   - synthesis/communication-style.md

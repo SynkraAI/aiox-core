@@ -4,10 +4,10 @@
 
 | Arquivo | Local | Conteúdo |
 |---------|-------|----------|
-| `voice_dna.yaml` | `squads/luiz-fosc/data/dna/` | Voice DNA completo (348 linhas) |
-| `thinking_dna.yaml` | `squads/luiz-fosc/data/dna/` | Thinking DNA completo (487 linhas) |
-| `mind_dna_complete.yaml` | `squads/luiz-fosc/data/dna/` | Síntese Voice + Thinking (398 linhas) |
-| `sources-manifest.yaml` | `squads/luiz-fosc/data/dna/sources/` | 38 fontes catalogadas (262 linhas) |
+| `voice_dna.yaml` | `squads/mind-cloning/minds/luiz-fosc/outputs/` | Voice DNA completo (348 linhas) |
+| `thinking_dna.yaml` | `squads/mind-cloning/minds/luiz-fosc/outputs/` | Thinking DNA completo (487 linhas) |
+| `mind_dna_complete.yaml` | `squads/mind-cloning/minds/luiz-fosc/outputs/` | Síntese Voice + Thinking (398 linhas) |
+| `sources-manifest.yaml` | `squads/mind-cloning/minds/luiz-fosc/outputs/sources/` | 38 fontes catalogadas (262 linhas) |
 
 ## Extraction Stats
 

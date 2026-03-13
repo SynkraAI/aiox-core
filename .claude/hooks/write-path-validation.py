@@ -46,8 +46,8 @@ PATH_RULES = [
     },
     {
         "name_patterns": [r"mind.*specific", r"mind.*validation"],
-        "expected_path": "outputs/minds/",
-        "description": "Docs específicos de mind → outputs/minds/{slug}/docs/",
+        "expected_path": "squads/mind-cloning/minds/",
+        "description": "Docs específicos de mind → squads/mind-cloning/minds/{slug}/docs/",
     },
 ]
 
@@ -61,7 +61,12 @@ ALWAYS_VALID_PATHS = [
     ".git/",
     "app/",
     "supabase/",
-    "outputs/",
+]
+
+# Paths bloqueados para mind clone data (devem ir para squads/mind-cloning/minds/)
+BLOCKED_MIND_PATHS = [
+    "squads/mind-cloning/minds/",
+    ".claude/commands/mind-cloning/minds/",
 ]
 
 # =============================================================================
@@ -153,6 +158,30 @@ def main():
     # Normalizar path
     project_root = get_project_root()
     relative_path = normalize_path(file_path, project_root)
+
+    # BLOQUEAR: Mind clone data em paths deprecados
+    for blocked in BLOCKED_MIND_PATHS:
+        if relative_path.startswith(blocked):
+            error_msg = f"""
+╔══════════════════════════════════════════════════════════════════════════════╗
+║  BLOCKED: Mind clone data em local deprecado                                ║
+╠══════════════════════════════════════════════════════════════════════════════╣
+║                                                                              ║
+║  Path:     {relative_path[:58]:<58} ║
+║                                                                              ║
+║  Mind clones DEVEM ficar em:                                                ║
+║    squads/mind-cloning/minds/{{slug}}/                                        ║
+║                                                                              ║
+║  Estrutura:                                                                  ║
+║    sources/   — materiais brutos (imutáveis)                                ║
+║    outputs/   — artefatos gerados (regeneráveis)                            ║
+║                                                                              ║
+║  INDEX: squads/mind-cloning/minds/INDEX.md                                  ║
+║                                                                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+"""
+            print(error_msg, file=sys.stderr)
+            sys.exit(2)
 
     # Verificar se é área sempre válida
     if is_always_valid(relative_path):

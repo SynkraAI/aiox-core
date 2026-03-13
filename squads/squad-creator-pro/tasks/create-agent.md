@@ -124,7 +124,7 @@ ELSE:
 classify_agent_type:
   if_specialist_provided:
     agent_type: "specialist_based"
-    research_path: "outputs/minds/{specialist_slug}/"
+    research_path: "squads/mind-cloning/minds/{specialist_slug}/"
     next_step: "Check local knowledge"
 
   if_no_specialist:
@@ -163,12 +163,12 @@ phase_0_output:
 check_local_knowledge:
   search_paths:
     primary_sources:
-      path: "outputs/minds/{specialist_slug}/sources/"
+      path: "squads/mind-cloning/minds/{specialist_slug}/sources/"
       description: "Raw materials, transcripts, books, articles"
       priority: 1
 
     analysis:
-      path: "outputs/minds/{specialist_slug}/analysis/"
+      path: "squads/mind-cloning/minds/{specialist_slug}/analysis/"
       description: "Identity core, cognitive spec, frameworks"
       priority: 2
 

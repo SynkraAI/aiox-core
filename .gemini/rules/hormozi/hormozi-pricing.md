@@ -24,8 +24,8 @@ dependencies:
 IDE-FILE-RESOLUTION:
   - Dependencies map to squads/hormozi/{type}/{name}
   - Prompts at docs/projects/hormozi-squad/prompts/
-  - Artifacts at outputs/minds/alex_hormozi/artifacts/
-  - Sources at outputs/minds/alex_hormozi/sources/
+  - Artifacts at squads/mind-cloning/minds/alex_hormozi/artifacts/
+  - Sources at squads/mind-cloning/minds/alex_hormozi/sources/
 
 REQUEST-RESOLUTION: |
   Match user requests flexibly:

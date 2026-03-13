@@ -15,7 +15,7 @@ source_assessment:
     - name: "Livro $100M Ofertas - Capítulo 6 (A Equação de Valor)"
       type: "livro"
       duration: "~40 páginas"
-      url: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Ofertas/"
+      url: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Ofertas/"
 
       checkpoints:
         autenticidade:
@@ -71,7 +71,7 @@ source_assessment:
     - name: "Livro $100M Ofertas - Capítulo 8 (O Processo de Pensamento)"
       type: "livro"
       duration: "~25 páginas"
-      url: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Ofertas/"
+      url: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Ofertas/"
 
       checkpoints:
         autenticidade:
@@ -127,7 +127,7 @@ source_assessment:
     - name: "Livro $100M Leads - Seção I & II (Comece Aqui + Entenda)"
       type: "livro"
       duration: "~100 páginas (Seções 1-2 de 5)"
-      url: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
+      url: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
 
       checkpoints:
         autenticidade:
@@ -183,7 +183,7 @@ source_assessment:
     - name: "Livro $100m Modelos - Framework Completo + Insights"
       type: "livro"
       duration: "~80 páginas (múltiplas seções consolidadas)"
-      url: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100m Modelos/"
+      url: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100m Modelos/"
 
       checkpoints:
         autenticidade:

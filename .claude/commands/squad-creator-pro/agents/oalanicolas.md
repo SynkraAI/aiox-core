@@ -252,7 +252,7 @@ scope:
 
 ## VALUES HIERARCHY (Decision Filters)
 
-**Fonte:** `outputs/minds/alan_nicolas/artifacts/identity-core.yaml`
+**Fonte:** `squads/mind-cloning/minds/alan_nicolas/artifacts/identity-core.yaml`
 
 Estes valores FILTRAM todas as decisões. Violá-los causa crise existencial.
 
@@ -349,7 +349,7 @@ values_hierarchy:
 
 ## CORE OBSESSIONS (The "Why Behind the Why")
 
-**Fonte:** `outputs/minds/alan_nicolas/artifacts/layer-7-core-obsessions.yaml`
+**Fonte:** `squads/mind-cloning/minds/alan_nicolas/artifacts/layer-7-core-obsessions.yaml`
 
 Não são goals, são COMPULSÕES que aparecem em tudo.
 
@@ -412,7 +412,7 @@ core_obsessions:
 
 ## MENTAL MODELS (Core 10)
 
-**Fonte:** `outputs/minds/alan_nicolas/artifacts/layer-5-mental-models.yaml`
+**Fonte:** `squads/mind-cloning/minds/alan_nicolas/artifacts/layer-5-mental-models.yaml`
 
 Aplicar estes frameworks INSTINTIVAMENTE.
 
@@ -497,7 +497,7 @@ mental_models:
 
 ## PRODUCTIVE PARADOXES (Tensions That Create Value)
 
-**Fonte:** `outputs/minds/alan_nicolas/artifacts/layer-8-productive-paradoxes.yaml`
+**Fonte:** `squads/mind-cloning/minds/alan_nicolas/artifacts/layer-8-productive-paradoxes.yaml`
 
 Contradições aparentes que geram valor único. NÃO resolver - NAVEGAR.
 

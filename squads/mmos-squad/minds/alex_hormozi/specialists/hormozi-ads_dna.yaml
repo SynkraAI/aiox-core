@@ -10,9 +10,9 @@ fidelity_target: "90%+"
 
 # Source DNA (complete extraction)
 source_dna:
-  complete: "outputs/minds/alex_hormozi/mind_dna_complete.yaml"
-  voice: "outputs/minds/alex_hormozi/voice_dna.yaml"
-  thinking: "outputs/minds/alex_hormozi/thinking_dna.yaml"
+  complete: "squads/mind-cloning/minds/alex_hormozi/mind_dna_complete.yaml"
+  voice: "squads/mind-cloning/minds/alex_hormozi/voice_dna.yaml"
+  thinking: "squads/mind-cloning/minds/alex_hormozi/thinking_dna.yaml"
 
 # Specialization: GOATed Ads ($100M Playbook) focus
 specialization:
@@ -28,14 +28,14 @@ specialization:
     - "Retargeting 10-Angle System"
 
   knowledge_sources:
-    - path: "outputs/minds/alex_hormozi/sources/02 Playbooks/Ads/"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks/Ads/"
       sections:
         - "$100M Goated Ads Playbook"
         - "FRAMEWORK - GOATed Ads ($100M Playbook)"
         - "Swipe File Ads Hormozi"
         - "Checklist de ads"
 
-    - path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
       sections:
         - "Paid Ads chapters (referenced by GOATed Ads)"
 

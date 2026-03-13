@@ -15,7 +15,7 @@ source_assessment:
   sources:
     - name: "$100M Offers (Livro Completo)"
       type: "livro"
-      path: "/Users/oalanicolas/Code/mmos/outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Ofertas/"
+      path: "/Users/oalanicolas/Code/mmos/squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Ofertas/"
       duration: "23 arquivos, ~3247 linhas, ~40+ páginas"
 
       checkpoints:
@@ -98,7 +98,7 @@ source_assessment:
 
     - name: "$100M Leads (Livro Completo)"
       type: "livro"
-      path: "/Users/oalanicolas/Code/mmos/outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
+      path: "/Users/oalanicolas/Code/mmos/squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
       duration: "9 arquivos incluindo introdução, ~3000+ linhas"
 
       checkpoints:
@@ -181,7 +181,7 @@ source_assessment:
 
     - name: "$100M Money Models (Livro Completo)"
       type: "livro"
-      path: "/Users/oalanicolas/Code/mmos/outputs/minds/alex_hormozi/sources/01 Livros/Livro 100m Modelos/"
+      path: "/Users/oalanicolas/Code/mmos/squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100m Modelos/"
       duration: "Múltiplos arquivos incluindo framework completo, ~3000+ linhas"
 
       checkpoints:

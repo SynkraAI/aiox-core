@@ -57,12 +57,13 @@ FUNCTIONAL_AGENT_PATTERNS = [
     r'^workflow-.*',
 ]
 
-# Locais onde DNA pode estar
+# Local canônico ÚNICO para mind clones (centralizado em 2026-03-12)
+# Fallbacks mantidos para backward compatibility com squads que têm DNAs inline
 DNA_LOCATIONS = [
-    "squads/{pack}/data/minds/{agent_id}_dna.yaml",
-    "squads/{pack}/data/minds/{agent_id}_dna.md",
-    "squads/{pack}/data/{agent_id}-dna.yaml",
-    "outputs/minds/{agent_id}/",
+    "squads/mind-cloning/minds/{agent_id}/",          # CANÔNICO (preferido)
+    "squads/{pack}/data/minds/{agent_id}_dna.yaml",   # Fallback (squads com DNA inline)
+    "squads/{pack}/data/minds/{agent_id}_dna.md",     # Fallback
+    "squads/{pack}/data/{agent_id}-dna.yaml",         # Fallback
 ]
 
 # =============================================================================
@@ -176,7 +177,7 @@ def main():
 ║  LOCAIS VERIFICADOS:                                                         ║
 ║  • squads/{pack_name}/data/minds/{agent_id}_dna.yaml
 ║  • squads/{pack_name}/data/minds/{agent_id}_dna.md
-║  • outputs/minds/{agent_id}/
+║  • squads/mind-cloning/minds/{agent_id}/
 ║                                                                              ║
 ║  SOLUÇÕES:                                                                   ║
 ║  1. Execute o pipeline de clone: /squad-creator → *collect-sources           ║

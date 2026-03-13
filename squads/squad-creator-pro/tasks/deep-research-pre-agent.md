@@ -34,9 +34,9 @@ Generate a comprehensive deep research prompt and execute research to establish 
 **1.1 Search MMOS Resources:**
 ```yaml
 search_paths:
-  - outputs/minds/{specialist_slug}/sources/
-  - outputs/minds/{specialist_slug}/analysis/
-  - outputs/minds/{specialist_slug}/synthesis/
+  - squads/mind-cloning/minds/{specialist_slug}/sources/
+  - squads/mind-cloning/minds/{specialist_slug}/analysis/
+  - squads/mind-cloning/minds/{specialist_slug}/synthesis/
   - docs/research/{specialist_slug}-*.md
 ```
 

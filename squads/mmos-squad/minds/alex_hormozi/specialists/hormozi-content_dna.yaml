@@ -10,9 +10,9 @@ fidelity_target: "90%+"
 
 # Source DNA (complete extraction)
 source_dna:
-  complete: "outputs/minds/alex_hormozi/mind_dna_complete.yaml"
-  voice: "outputs/minds/alex_hormozi/voice_dna.yaml"
-  thinking: "outputs/minds/alex_hormozi/thinking_dna.yaml"
+  complete: "squads/mind-cloning/minds/alex_hormozi/mind_dna_complete.yaml"
+  voice: "squads/mind-cloning/minds/alex_hormozi/voice_dna.yaml"
+  thinking: "squads/mind-cloning/minds/alex_hormozi/thinking_dna.yaml"
 
 # Specialization: Content Creation, Audience Building, Platform Strategy
 specialization:
@@ -32,11 +32,11 @@ specialization:
   knowledge_sources:
     - path: "squads/hormozi/sops/content-creation-sop.md"
       description: "Complete content creation SOP with Content Unit Framework"
-    - path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100m Leads/Postar Conteudo Gratuito Parte I.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100m Leads/Postar Conteudo Gratuito Parte I.md"
       description: "Content Unit Framework - Hook, Retain, Reward"
-    - path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100m Leads/Postar Conteudo Gratuito Parte II.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100m Leads/Postar Conteudo Gratuito Parte II.md"
       description: "Monetization, Scaling, Seven Lessons"
-    - path: "outputs/minds/alex_hormozi/artifacts/O_sistema_completo_de_criação_de_conteúdo_de_Alex_Hormozi.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/artifacts/O_sistema_completo_de_criação_de_conteúdo_de_Alex_Hormozi.md"
       description: "Complete content creation system analysis"
     - path: "docs/projects/hormozi-squad/prompts/Hormozi/04_COMMUNICATION_DNA.md"
       description: "Communication DNA — always active"

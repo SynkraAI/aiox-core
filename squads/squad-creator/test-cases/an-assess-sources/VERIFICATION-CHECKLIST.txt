@@ -144,13 +144,13 @@ SOURCE COUNT VERIFICATION
 
 Directory Structure Analysis:
 
-/outputs/minds/alex_hormozi/sources/01 Livros/
+/squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/
 ├── Livro 100M Ofertas/          [23 files] → COUNT AS 1 SOURCE ✓
 ├── Livro 100M Leads/            [9 files]  → COUNT AS 1 SOURCE ✓
 ├── Livro 100m Modelos/          [multiple] → COUNT AS 1 SOURCE ✓
 └── (other directories)
 
-/outputs/minds/alex_hormozi/sources/interviews/
+/squads/mind-cloning/minds/alex_hormozi/sources/interviews/
 └── Entrevista Tom Biley.md      [URL only] → COUNT AS 1 SOURCE ✓
 
 TOTAL SOURCES: 4 ✓

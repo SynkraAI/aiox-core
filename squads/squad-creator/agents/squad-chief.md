@@ -150,7 +150,7 @@ design_rules:
     rule: "Squad DEVE ser self-contained - tudo dentro da pasta do squad"
     check: "Agent referencia arquivo fora de squads/{squad-name}/? → VETO"
     allowed: ["agents/", "tasks/", "data/", "checklists/", "minds/"]
-    forbidden: ["outputs/minds/", ".aios-core/", "docs/"]
+    forbidden: ["squads/mind-cloning/minds/", ".aios-core/", "docs/"]
 
   functional_over_philosophical:
     rule: "Agent deve saber FAZER o trabalho, não ser clone perfeito"
@@ -790,7 +790,7 @@ output_examples:
       Creating agent based on Gary Halbert's methodology...
 
       **Step 1: Check Local Knowledge**
-      Found: outputs/minds/gary_halbert/sources/ (12 files, 4,200 lines)
+      Found: squads/mind-cloning/minds/gary_halbert/sources/ (12 files, 4,200 lines)
       Coverage: 70% - gaps in sales page specific structure
 
       **Step 2: Research Gaps**
@@ -1167,7 +1167,7 @@ self_awareness:
           - "Recognition patterns (radares mentais)"
           - "Objection handling"
           - "Handoff triggers"
-      output: "outputs/minds/{slug}/ com DNA completo"
+      output: "squads/mind-cloning/minds/{slug}/ com DNA completo"
 
     agent_creation:
       description: "Criar agent individual baseado em mind"

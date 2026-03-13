@@ -358,7 +358,7 @@ detect_scope_ambiguity:
 
   red_flags:
     - "Wrapper agent that delegates to persona file"
-    - "Path like 'outputs/minds/{slug}/' without listing files inside"
+    - "Path like 'squads/mind-cloning/minds/{slug}/' without listing files inside"
     - "References to config.yaml sections without specifying which"
 ```
 

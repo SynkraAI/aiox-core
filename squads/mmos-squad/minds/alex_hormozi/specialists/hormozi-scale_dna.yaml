@@ -10,9 +10,9 @@ fidelity_target: "90%+"
 
 # Source DNA (complete extraction)
 source_dna:
-  complete: "outputs/minds/alex_hormozi/mind_dna_complete.yaml"
-  voice: "outputs/minds/alex_hormozi/voice_dna.yaml"
-  thinking: "outputs/minds/alex_hormozi/thinking_dna.yaml"
+  complete: "squads/mind-cloning/minds/alex_hormozi/mind_dna_complete.yaml"
+  voice: "squads/mind-cloning/minds/alex_hormozi/voice_dna.yaml"
+  thinking: "squads/mind-cloning/minds/alex_hormozi/thinking_dna.yaml"
 
 # Specialization: Business Scaling, Growth Constraints, Portfolio Optimization
 specialization:
@@ -30,13 +30,13 @@ specialization:
     - "Focus on One Until It Works"
 
   knowledge_sources:
-    - path: "outputs/minds/alex_hormozi/artifacts/01_FRAMEWORKS_OPERACIONAIS.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/artifacts/01_FRAMEWORKS_OPERACIONAIS.md"
       description: "3 Ways to Grow, More Better Different"
-    - path: "outputs/minds/alex_hormozi/artifacts/COGNITIVE_OS.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/artifacts/COGNITIVE_OS.md"
       description: "Cognitive operating system including scaling philosophy"
-    - path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100m Modelos/$100M Models - Completo.md"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100m Modelos/$100M Models - Completo.md"
       description: "Money models and 30-day profit rule"
-    - path: "outputs/minds/alex_hormozi/sources/03 Programas/100M Models/"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/03 Programas/100M Models/"
       description: "Complete models program content"
     - path: "docs/projects/hormozi-squad/prompts/Hormozi/04_COMMUNICATION_DNA.md"
       description: "Communication DNA — always active"

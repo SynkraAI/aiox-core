@@ -35,10 +35,10 @@ elicit: true
 
 ```yaml
 existing_files:
-  mind_dna: "outputs/minds/{mind_slug}/mind_dna_complete.yaml"
-  voice_dna: "outputs/minds/{mind_slug}/voice_dna.yaml"
-  thinking_dna: "outputs/minds/{mind_slug}/thinking_dna.yaml"
-  sources_inventory: "outputs/minds/{mind_slug}/sources_inventory.yaml"
+  mind_dna: "squads/mind-cloning/minds/{mind_slug}/mind_dna_complete.yaml"
+  voice_dna: "squads/mind-cloning/minds/{mind_slug}/voice_dna.yaml"
+  thinking_dna: "squads/mind-cloning/minds/{mind_slug}/thinking_dna.yaml"
+  sources_inventory: "squads/mind-cloning/minds/{mind_slug}/sources_inventory.yaml"
   agent_file: "squads/{squad}/agents/{mind_slug}.md"  # Se já tem agente
 ```
 
@@ -219,19 +219,19 @@ conflicts:
 ```yaml
 updated_files:
   mind_dna_complete:
-    path: "outputs/minds/{mind_slug}/mind_dna_complete.yaml"
-    backup: "outputs/minds/{mind_slug}/backups/mind_dna_{timestamp}.yaml"
+    path: "squads/mind-cloning/minds/{mind_slug}/mind_dna_complete.yaml"
+    backup: "squads/mind-cloning/minds/{mind_slug}/backups/mind_dna_{timestamp}.yaml"
 
   voice_dna:
-    path: "outputs/minds/{mind_slug}/voice_dna.yaml"
+    path: "squads/mind-cloning/minds/{mind_slug}/voice_dna.yaml"
     sections_updated: []
 
   thinking_dna:
-    path: "outputs/minds/{mind_slug}/thinking_dna.yaml"
+    path: "squads/mind-cloning/minds/{mind_slug}/thinking_dna.yaml"
     sections_updated: []
 
   sources_inventory:
-    path: "outputs/minds/{mind_slug}/sources_inventory.yaml"
+    path: "squads/mind-cloning/minds/{mind_slug}/sources_inventory.yaml"
     new_sources_added: 0
 ```
 

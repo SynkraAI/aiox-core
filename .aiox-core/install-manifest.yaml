@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-03-12T14:34:07.596Z"
+generated_at: "2026-03-13T13:28:10.285Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1126
 files:
@@ -177,9 +177,9 @@ files:
     type: cli
     size: 5907
   - path: core-config.yaml
-    hash: sha256:d1d90d2cc22e4c870a8a90446d6b98dfd1918829cd5c5f31809bece6ddcfc1cf
+    hash: sha256:87ba00900f4515c4ecb146ac5a878b2a7d214345343a575ab9c26e9626c91f1e
     type: config
-    size: 10999
+    size: 11011
   - path: core/code-intel/code-intel-client.js
     hash: sha256:6c9a08a37775acf90397aa079a4ad2c5edcc47f2cfd592b26ae9f3d154d1deb8
     type: core
@@ -1897,9 +1897,9 @@ files:
     type: task
     size: 11646
   - path: development/tasks/create-agent.md
-    hash: sha256:538954ecee93c0b4467d4dc00ce4315b2fac838ad298a11c6bc4e45366430e17
+    hash: sha256:21728cc31caaf5229f0c5e3150979d088822ce24d1543b8cbc8b2ef115a6e044
     type: task
-    size: 32296
+    size: 32332
   - path: development/tasks/create-brownfield-story.md
     hash: sha256:88dc7949dbfde53773135650a6864c2b7a36cbfe93239cee8edf8a9c082b0fcf
     type: task
@@ -2005,9 +2005,9 @@ files:
     type: task
     size: 11713
   - path: development/tasks/db-squad-integration.md
-    hash: sha256:13ce5e3226dadffad490752064169e124e2c989514e2e7b3c249445b9ad3485c
+    hash: sha256:530a95185359a2ee47c187ca23b64ec865a0b1815873d9fed10fb278835d2089
     type: task
-    size: 16747
+    size: 16783
   - path: development/tasks/db-supabase-setup.md
     hash: sha256:64e02b6c69bb87d0082590484fadc0510cb88e4a6dc01b3c7015e5e6e6bcb585
     type: task

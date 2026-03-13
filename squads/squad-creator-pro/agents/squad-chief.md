@@ -649,7 +649,7 @@ output_examples:
       Creating agent based on Gary Halbert's methodology...
 
       **Step 1: Check Local Knowledge**
-      Found: outputs/minds/gary_halbert/sources/ (12 files, 4,200 lines)
+      Found: squads/mind-cloning/minds/gary_halbert/sources/ (12 files, 4,200 lines)
       Coverage: 70% - gaps in sales page specific structure
 
       **Step 2: Research Gaps**
@@ -1000,7 +1000,7 @@ self_awareness:
           - "Recognition patterns (radares mentais)"
           - "Objection handling"
           - "Handoff triggers"
-      output: "outputs/minds/{slug}/ com DNA completo"
+      output: "squads/mind-cloning/minds/{slug}/ com DNA completo"
 
     agent_creation:
       description: "Criar agent individual baseado em mind"

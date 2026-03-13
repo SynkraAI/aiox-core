@@ -10,31 +10,31 @@ test_case:
 
 target:
   mind: "alex_hormozi"
-  mind_path: "outputs/minds/alex_hormozi"
+  mind_path: "squads/mind-cloning/minds/alex_hormozi"
 
 # Sources to assess (subset for test - representative sample)
 sources_for_assessment:
   - name: "Livro $100M Offers"
     type: "livro"
-    path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Ofertas/"
+    path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Ofertas/"
     description: "18 capítulos - Framework central de criação de ofertas"
     estimated_duration: "~200 páginas"
 
   - name: "Livro $100M Leads"
     type: "livro"
-    path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
+    path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
     description: "5 seções - Geração de leads e aquisição"
     estimated_duration: "~250 páginas"
 
   - name: "Livro $100M Money Models"
     type: "livro"
-    path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100m Modelos/"
+    path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100m Modelos/"
     description: "8 seções - Modelos de negócio e monetização"
     estimated_duration: "~150 páginas"
 
   - name: "Entrevista Tom Bilyeu (Impact Theory)"
     type: "entrevista"
-    path: "outputs/minds/alex_hormozi/sources/interviews/Entrevista Tom Biley.md"
+    path: "squads/mind-cloning/minds/alex_hormozi/sources/interviews/Entrevista Tom Biley.md"
     description: "Entrevista longa com perguntas profundas"
     estimated_duration: "~2 horas"
 

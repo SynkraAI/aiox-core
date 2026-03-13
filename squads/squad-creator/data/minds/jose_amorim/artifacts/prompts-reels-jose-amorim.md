@@ -581,4 +581,4 @@ Cada bloco agora inclui um checklist interno que a IA deve usar antes de retorna
 
 **Versão:** 1.0
 **Gerado em:** 2025-12-19
-**Baseado em:** outputs/minds/jose_amorim/artifacts/
+**Baseado em:** squads/mind-cloning/minds/jose_amorim/artifacts/

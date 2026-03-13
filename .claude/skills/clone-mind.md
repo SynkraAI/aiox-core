@@ -168,44 +168,44 @@ For each phase, invoke the corresponding legendary agent:
 
 1. **Invoke @victoria-viability-specialist**
    - Task: Assess viability for cloning {slug}
-   - Output: `outputs/minds/{slug}/analysis/viability-assessment.yaml`
+   - Output: `squads/mind-cloning/minds/{slug}/analysis/viability-assessment.yaml`
 
 2. **Invoke @research-specialist**
    - Task: Collect and validate sources for {slug}
-   - Output: `outputs/minds/{slug}/sources/sources-master.yaml`
+   - Output: `squads/mind-cloning/minds/{slug}/sources/sources-master.yaml`
 
 #### Phase 2: Analysis (Parallel Execution)
 
 3. **Invoke @daniel-behavioral-analyst**
    - Task: Extract behavioral patterns and state transitions
-   - Output: `outputs/minds/{slug}/analysis/behavioral-patterns.yaml`
+   - Output: `squads/mind-cloning/minds/{slug}/analysis/behavioral-patterns.yaml`
 
 4. **Invoke @barbara-cognitive-architect**
    - Task: Map mental models and cognitive architecture
-   - Output: `outputs/minds/{slug}/analysis/cognitive-architecture.yaml`
+   - Output: `squads/mind-cloning/minds/{slug}/analysis/cognitive-architecture.yaml`
 
 5. **Invoke @identity-analyst** 🔴 HUMAN CHECKPOINT
    - Task: Extract identity core (L6-L8)
-   - Output: `outputs/minds/{slug}/analysis/identity-core.yaml`
+   - Output: `squads/mind-cloning/minds/{slug}/analysis/identity-core.yaml`
    - **STOP for human validation before proceeding**
 
 #### Phase 3: Synthesis
 
 6. **Invoke @charlie-synthesis-expert**
    - Task: Build latticework and knowledge integration
-   - Output: `outputs/minds/{slug}/synthesis/latticework.yaml`
+   - Output: `squads/mind-cloning/minds/{slug}/synthesis/latticework.yaml`
 
 #### Phase 4: Implementation
 
 7. **Invoke @constantin-implementation-architect**
    - Task: Generate system prompt and meta-axioms
-   - Output: `outputs/minds/{slug}/implementation/system-prompt.md`
+   - Output: `squads/mind-cloning/minds/{slug}/implementation/system-prompt.md`
 
 #### Phase 5: Quality
 
 8. **Invoke @quinn-quality-specialist**
    - Task: Validate quality gates
-   - Output: `outputs/minds/{slug}/validation/quality-report.yaml`
+   - Output: `squads/mind-cloning/minds/{slug}/validation/quality-report.yaml`
 
 ### Step 4: Finalize
 
@@ -246,7 +246,7 @@ At L6-L8 (Identity Core), the pipeline MUST stop for human validation:
 ## Output Structure
 
 ```
-outputs/minds/{slug}/
+squads/mind-cloning/minds/{slug}/
 ├── metadata/
 │   ├── metadata.yaml           # Pipeline state
 │   └── pipeline_state.yaml     # State machine
@@ -321,7 +321,7 @@ This skill coexists with the AIOX `*map` command:
 Both use the same infrastructure:
 - `squads/mmos/lib/*.py` - Python utilities
 - `squads/mmos/workflows/*.yaml` - Workflow definitions
-- `outputs/minds/{slug}/` - Output directory
+- `squads/mind-cloning/minds/{slug}/` - Output directory
 - `.claude/commands/MMOS/agents/` - Agent definitions
 
 ---

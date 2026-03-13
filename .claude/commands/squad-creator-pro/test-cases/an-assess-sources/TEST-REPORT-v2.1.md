@@ -146,7 +146,7 @@ Completude:
 ### 4. Entrevista Tom Bilyeu (Bronze - Source Issue)
 - **Type:** Entrevista (Interview)
 - **Status:** Tier = Bronze (file contains only URL, no content)
-- **File path:** `/Users/oalanicolas/Code/mmos/outputs/minds/alex_hormozi/sources/interviews/Entrevista Tom Biley.md`
+- **File path:** `/Users/oalanicolas/Code/mmos/squads/mind-cloning/minds/alex_hormozi/sources/interviews/Entrevista Tom Biley.md`
 - **File content:**
   ```
   [3 blank lines]

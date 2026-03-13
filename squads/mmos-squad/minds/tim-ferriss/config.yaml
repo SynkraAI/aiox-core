@@ -227,7 +227,7 @@ metadata:
 
   related_outputs:
     dna_files: "data/minds/"
-    source_inventory: "outputs/minds/tim_ferriss/sources_inventory.yaml"
-    quality_dashboard: "outputs/minds/tim_ferriss/quality_dashboard.md"
+    source_inventory: "squads/mind-cloning/minds/tim_ferriss/sources_inventory.yaml"
+    quality_dashboard: "squads/mind-cloning/minds/tim_ferriss/quality_dashboard.md"
 
 # Elite Mind Cloning Pipeline v1.0 | DNA Fidelity: 96.5% | 8/8 Layers Complete

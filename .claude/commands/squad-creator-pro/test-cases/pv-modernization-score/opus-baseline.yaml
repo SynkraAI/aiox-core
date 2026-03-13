@@ -127,14 +127,14 @@ modernization_score:
       status: "PASS"
       evidence: |
         The workflow consistently uses file-based communication between phases
-        via the `outputs/minds/{mind_slug}/` directory. Specific evidence:
+        via the `squads/mind-cloning/minds/{mind_slug}/` directory. Specific evidence:
 
-        - Phase 0a outputs to `outputs/minds/{mind_slug}/acquired_sources.yaml` (line 119)
-        - Phase 0b outputs to `outputs/minds/{mind_slug}/sources_inventory.yaml` (line 205)
-        - Phase 1 outputs to `outputs/minds/{mind_slug}/voice_dna.yaml` (line 233)
-        - Phase 2 outputs to `outputs/minds/{mind_slug}/thinking_dna.yaml` (line 283)
-        - Phase 4 outputs to `outputs/minds/{mind_slug}/smoke_test_result.yaml` (line 400)
-        - Phase 5 outputs to `outputs/minds/{mind_slug}/quality_dashboard.md` (line 429)
+        - Phase 0a outputs to `squads/mind-cloning/minds/{mind_slug}/acquired_sources.yaml` (line 119)
+        - Phase 0b outputs to `squads/mind-cloning/minds/{mind_slug}/sources_inventory.yaml` (line 205)
+        - Phase 1 outputs to `squads/mind-cloning/minds/{mind_slug}/voice_dna.yaml` (line 233)
+        - Phase 2 outputs to `squads/mind-cloning/minds/{mind_slug}/thinking_dna.yaml` (line 283)
+        - Phase 4 outputs to `squads/mind-cloning/minds/{mind_slug}/smoke_test_result.yaml` (line 400)
+        - Phase 5 outputs to `squads/mind-cloning/minds/{mind_slug}/quality_dashboard.md` (line 429)
 
         Each phase produces a named file, and downstream phases reference
         these files (e.g., `required_for: ["Phase 1", "Phase 2"]` on line 206).
@@ -250,17 +250,17 @@ modernization_score:
       status: "PASS"
       evidence: |
         The workflow uses a structured, consistent output directory:
-        `outputs/minds/{mind_slug}/` for all artifacts. Evidence:
+        `squads/mind-cloning/minds/{mind_slug}/` for all artifacts. Evidence:
 
-        - `outputs/minds/{mind_slug}/acquired_sources.yaml` (line 119)
-        - `outputs/minds/{mind_slug}/sources_inventory.yaml` (line 205)
-        - `outputs/minds/{mind_slug}/voice_dna.yaml` (line 233)
-        - `outputs/minds/{mind_slug}/thinking_dna.yaml` (line 283)
-        - `outputs/minds/{mind_slug}/smoke_test_result.yaml` (line 400)
-        - `outputs/minds/{mind_slug}/quality_dashboard.md` (line 429)
-        - `outputs/minds/{mind_slug}/mind_dna_complete.yaml` (line 79, in check)
+        - `squads/mind-cloning/minds/{mind_slug}/acquired_sources.yaml` (line 119)
+        - `squads/mind-cloning/minds/{mind_slug}/sources_inventory.yaml` (line 205)
+        - `squads/mind-cloning/minds/{mind_slug}/voice_dna.yaml` (line 233)
+        - `squads/mind-cloning/minds/{mind_slug}/thinking_dna.yaml` (line 283)
+        - `squads/mind-cloning/minds/{mind_slug}/smoke_test_result.yaml` (line 400)
+        - `squads/mind-cloning/minds/{mind_slug}/quality_dashboard.md` (line 429)
+        - `squads/mind-cloning/minds/{mind_slug}/mind_dna_complete.yaml` (line 79, in check)
 
-        The pattern is `outputs/minds/{slug}/` rather than the strict
+        The pattern is `squads/mind-cloning/minds/{slug}/` rather than the strict
         `outputs/{workflow}/{slug}/` template, but the structure is
         well-organized, consistent, and non-arbitrary. All outputs go
         to a predictable, slug-based directory under outputs/.
@@ -356,7 +356,7 @@ modernization_score:
       action: |
         Add a preamble step before Phase -1 that loads: git status of the
         project, any active gotchas from .claude/rules/, user preferences,
-        and current state of outputs/minds/ directory. This ensures agents
+        and current state of squads/mind-cloning/minds/ directory. This ensures agents
         start with full situational awareness.
       effort: "low - add initialization block"
       preserves: "No existing content affected"
@@ -427,7 +427,7 @@ modernization_score:
       - "Smoke test definitions with validates and pass_criteria"
       - "Output template structure (mind_dna format)"
       - "Specialist routing logic (who handles which phase)"
-      - "File-based communication paths (outputs/minds/{slug}/)"
+      - "File-based communication paths (squads/mind-cloning/minds/{slug}/)"
       - "Brownfield/greenfield mode branching"
       - "Tool priority fallback chain in Phase 0a"
       - "Decision matrix patterns (GO/CONDITIONAL/NO_GO)"

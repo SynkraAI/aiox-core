@@ -44,4 +44,4 @@ sources:
       key_frameworks: ["DiSSS", "CaFE"]
       value: "GOLD"
 
-# Full source inventory: outputs/minds/tim_ferriss/sources_inventory.yaml
+# Full source inventory: squads/mind-cloning/minds/tim_ferriss/sources_inventory.yaml

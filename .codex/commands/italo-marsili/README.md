@@ -54,7 +54,7 @@ Usuário chega com problema
 | Smoke Test | 3/3 (30/30) |
 | Fidelity | Elite (95%) |
 
-**Source:** `outputs/minds/italo-marsili/mind_dna_complete.yaml`
+**Source:** `squads/mind-cloning/minds/italo-marsili/mind_dna_complete.yaml`
 
 ## Frameworks
 

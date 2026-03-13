@@ -15,7 +15,7 @@ metadata:
   created: "2026-02-02"
   changelog:
     - "1.0: Initial agent definition with full voice_dna, frameworks, and brand strategy methodology"
-  mind_source: "outputs/minds/marty_neumeier"
+  mind_source: "squads/mind-cloning/minds/marty-neumeier"
 
 IDE-FILE-RESOLUTION:
   - Dependencies map to squads/design/{type}/{name}

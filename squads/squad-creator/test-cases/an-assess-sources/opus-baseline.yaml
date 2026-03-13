@@ -24,7 +24,7 @@ source_assessment:
       type: livro
       url: null
       duration: "~250 pages (18 chapters)"
-      path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Ofertas/"
+      path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Ofertas/"
 
       checkpoints:
         autenticidade:
@@ -137,7 +137,7 @@ source_assessment:
       type: livro
       url: null
       duration: "~300 pages (5 sections)"
-      path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
+      path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
 
       checkpoints:
         autenticidade:
@@ -249,7 +249,7 @@ source_assessment:
       type: livro
       url: null
       duration: "~200 pages (6 sections + insights)"
-      path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100m Modelos/"
+      path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100m Modelos/"
 
       checkpoints:
         autenticidade:
@@ -361,7 +361,7 @@ source_assessment:
       type: entrevista
       url: "https://youtu.be/Tigt75AcLLA?si=ATu29K7rgAmL5XYY"
       duration: "Unknown (only URL available)"
-      path: "outputs/minds/alex_hormozi/sources/interviews/Entrevista Tom Biley.md"
+      path: "squads/mind-cloning/minds/alex_hormozi/sources/interviews/Entrevista Tom Biley.md"
 
       checkpoints:
         autenticidade:

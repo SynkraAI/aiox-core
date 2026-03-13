@@ -162,7 +162,7 @@ axioma_assessment:
         Workflow gera outputs persistidos, reutilizáveis, e generalizados para perpetuidade.
 
         O que faz BEM:
-        - Outputs persistem em outputs/minds/{mind_slug}/ (não são ephemeral)
+        - Outputs persistem em squads/mind-cloning/minds/{mind_slug}/ (não são ephemeral)
         - mind_dna_complete.yaml é input direto para create-agent.md (funciona sem manual intervention)
         - Processo é completamente generalizado (mind_name, domain como inputs) - não hard-coded para caso específico
         - Brownfield mode (Phase -1) permite updates sem re-clone (sustenta evolução do mind)

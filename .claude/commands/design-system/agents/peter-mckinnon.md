@@ -15,7 +15,7 @@ metadata:
   created: "2026-02-02"
   changelog:
     - "1.0: Initial agent definition with full MMOS structure"
-  mind_source: "outputs/minds/peter_mckinnon"
+  mind_source: "squads/mind-cloning/minds/peter-mckinnon"
 
 IDE-FILE-RESOLUTION:
   - Dependencies map to squads/design/{type}/{name}

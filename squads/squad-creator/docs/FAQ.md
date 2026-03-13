@@ -700,7 +700,7 @@ Mas perderá o processo de extração de DNA.
 
 1. `*validate-squad {nome}` - Validação completa
 2. `*quality-dashboard {nome}` - Ver métricas
-3. Ler os arquivos de DNA em `outputs/minds/{slug}/`
+3. Ler os arquivos de DNA em `squads/mind-cloning/minds/{slug}/`
 
 ### Posso customizar o processo de criação?
 

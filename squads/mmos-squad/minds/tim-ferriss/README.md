@@ -450,9 +450,9 @@ For these, the squad will acknowledge limits and delegate or decline.
 
 ## Related Documentation
 
-- **Quality Dashboard:** `outputs/minds/tim_ferriss/quality_dashboard.md`
-- **Complete DNA:** `outputs/minds/tim_ferriss/mind_dna_complete.yaml`
-- **Source Inventory:** `outputs/minds/tim_ferriss/sources_inventory.yaml`
+- **Quality Dashboard:** `squads/mind-cloning/minds/tim_ferriss/quality_dashboard.md`
+- **Complete DNA:** `squads/mind-cloning/minds/tim_ferriss/mind_dna_complete.yaml`
+- **Source Inventory:** `squads/mind-cloning/minds/tim_ferriss/sources_inventory.yaml`
 - **Pipeline Docs:** `squads/squad-creator/ELITE-MIND-CLONING-PIPELINE.md`
 
 ---

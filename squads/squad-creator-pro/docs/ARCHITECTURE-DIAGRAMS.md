@@ -640,7 +640,7 @@ graph TD
         H --> H5[CONCEPTS.md]
     end
 
-    subgraph "outputs/minds/{slug}/"
+    subgraph "squads/mind-cloning/minds/{slug}/"
         O1[sources_inventory.yaml]
         O2[voice_dna.yaml]
         O3[thinking_dna.yaml]

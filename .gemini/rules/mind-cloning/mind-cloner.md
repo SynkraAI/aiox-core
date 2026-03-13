@@ -288,7 +288,7 @@ Type `*help` to see all commands, or `*guide` for the complete guide.
 ### Output Structure
 
 ```
-outputs/minds/{mind_slug}/
+squads/mind-cloning/minds/{mind_slug}/
 ├── sources_inventory.yaml      # Phase 1
 ├── voice_dna.yaml             # Phase 2
 ├── thinking_dna.yaml          # Phase 3

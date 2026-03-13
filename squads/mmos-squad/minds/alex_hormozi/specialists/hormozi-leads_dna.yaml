@@ -10,9 +10,9 @@ fidelity_target: "90%+"
 
 # Source DNA (complete extraction)
 source_dna:
-  complete: "outputs/minds/alex_hormozi/mind_dna_complete.yaml"
-  voice: "outputs/minds/alex_hormozi/voice_dna.yaml"
-  thinking: "outputs/minds/alex_hormozi/thinking_dna.yaml"
+  complete: "squads/mind-cloning/minds/alex_hormozi/mind_dna_complete.yaml"
+  voice: "squads/mind-cloning/minds/alex_hormozi/voice_dna.yaml"
+  thinking: "squads/mind-cloning/minds/alex_hormozi/thinking_dna.yaml"
 
 # Specialization: $100M Leads focus
 specialization:
@@ -27,7 +27,7 @@ specialization:
     - "LTGP:CAC Optimization"
 
   knowledge_sources:
-    - path: "outputs/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
+    - path: "squads/mind-cloning/minds/alex_hormozi/sources/01 Livros/Livro 100M Leads/"
       sections:
         - "Secao I Comece Aqui"
         - "Secao II Entenda"
