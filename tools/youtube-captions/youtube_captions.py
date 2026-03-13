@@ -17,6 +17,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.parse
 import urllib.request
 from datetime import datetime
@@ -326,7 +327,8 @@ def get_video_durations(video_ids, api_key):
 
 
 def search_youtube(query, output_dir, max_results=100, api_key=None,
-                   min_duration=600, lang_priority=None, output_format="md"):
+                   min_duration=600, lang_priority=None, output_format="md",
+                   list_only=False):
     """Search YouTube for videos and extract captions from results."""
     if not api_key:
         api_key = os.environ.get("YOUTUBE_API_KEY")
@@ -395,6 +397,36 @@ def search_youtube(query, output_dir, max_results=100, api_key=None,
         print("No videos matched the duration filter.")
         return []
 
+    # List-only mode: save URLs without extracting captions
+    if list_only:
+        output_path = Path(output_dir)
+        output_path.mkdir(parents=True, exist_ok=True)
+
+        urls_path = output_path / "_urls.txt"
+        url_lines = []
+        for entry in filtered:
+            url_lines.append(f"https://www.youtube.com/watch?v={entry['id']}")
+        urls_path.write_text("\n".join(url_lines) + "\n", encoding="utf-8")
+
+        index_path = output_path / "_INDEX.md"
+        index_lines = [f"# YouTube Search: {query}\n"]
+        index_lines.append(f"Total: {len(filtered)} videos found (list-only mode)\n")
+        index_lines.append("| # | Title | Duration | URL |")
+        index_lines.append("|---|-------|----------|-----|")
+        for idx, entry in enumerate(filtered, 1):
+            dur = durations.get(entry["id"], 0)
+            url = f"https://www.youtube.com/watch?v={entry['id']}"
+            index_lines.append(f"| {idx} | {entry['title']} | {format_duration(dur)} | {url} |")
+        index_path.write_text("\n".join(index_lines) + "\n", encoding="utf-8")
+
+        print(f"\nList saved: {urls_path} ({len(filtered)} URLs)")
+        print(f"Index saved: {index_path}")
+        print(f"\nTo extract captions, run one at a time:")
+        print(f'  python youtube_captions.py "URL" -o {output_dir}')
+        print(f"\nOr use xargs for batch with delay:")
+        print(f'  cat {urls_path} | xargs -I {{}} -P1 sh -c \'sleep 3 && python youtube_captions.py "{{}}" -o {output_dir}\'')
+        return filtered
+
     # Phase 3: Extract captions
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
@@ -407,15 +439,29 @@ def search_youtube(query, output_dir, max_results=100, api_key=None,
         video_url = f"https://www.youtube.com/watch?v={entry['id']}"
         print(f"\n[{i}/{total}] {entry['title'][:60]}")
 
-        try:
-            result = extract_captions(video_url, str(output_path), lang_priority, output_format)
-            if result:
-                results.append(result)
-            else:
-                skipped_no_captions += 1
-        except Exception as e:
-            print(f"  ERROR: {e}")
-            skipped_no_captions += 1
+        retries = 0
+        while retries < 3:
+            try:
+                result = extract_captions(video_url, str(output_path), lang_priority, output_format)
+                if result:
+                    results.append(result)
+                else:
+                    skipped_no_captions += 1
+                break
+            except Exception as e:
+                if "429" in str(e) and retries < 2:
+                    retries += 1
+                    wait = 5 * retries
+                    print(f"  Rate limited, waiting {wait}s (retry {retries}/2)...")
+                    time.sleep(wait)
+                else:
+                    print(f"  ERROR: {e}")
+                    skipped_no_captions += 1
+                    break
+
+        # Small delay between videos to avoid rate limiting
+        if i < total:
+            time.sleep(2)
 
     # Phase 4: Generate index and manifest
     if results:
@@ -486,6 +532,7 @@ Examples:
     parser.add_argument("--max", type=int, default=100, help="Max videos to fetch in search mode (default: 100)")
     parser.add_argument("--api-key", help="YouTube Data API v3 key (or set YOUTUBE_API_KEY env var)")
     parser.add_argument("--min-duration", type=int, default=600, help="Min video duration in seconds for search mode (default: 600 = 10min)")
+    parser.add_argument("--list-only", action="store_true", help="Search mode: only list video URLs, don't extract captions")
     parser.add_argument("-o", "--output", default=".", help="Output directory (default: current)")
     parser.add_argument(
         "-l", "--lang", action="append", dest="langs",
@@ -507,7 +554,8 @@ Examples:
     if args.search:
         search_youtube(
             args.search, args.output, max_results=args.max, api_key=args.api_key,
-            min_duration=args.min_duration, lang_priority=lang_priority, output_format=args.format,
+            min_duration=args.min_duration, lang_priority=lang_priority,
+            output_format=args.format, list_only=args.list_only,
         )
     elif args.playlist:
         extract_playlist(args.playlist, args.output, lang_priority, args.format)
