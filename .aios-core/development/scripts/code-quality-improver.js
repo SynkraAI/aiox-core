@@ -33,7 +33,7 @@ class CodeQualityImprover {
       description: 'Apply consistent code formatting',
       improver: this.improveFormatting.bind(this),
       priority: 'medium',
-      automatic: true
+      automatic: true,
     });
 
     // Linting fixes
@@ -42,7 +42,7 @@ class CodeQualityImprover {
       description: 'Fix linting errors and warnings',
       improver: this.improveLinting.bind(this),
       priority: 'high',
-      automatic: true
+      automatic: true,
     });
 
     // Modern syntax upgrades
@@ -51,7 +51,7 @@ class CodeQualityImprover {
       description: 'Upgrade to modern JavaScript syntax',
       improver: this.upgradeToModernSyntax.bind(this),
       priority: 'medium',
-      automatic: true
+      automatic: true,
     });
 
     // Import optimization
@@ -60,7 +60,7 @@ class CodeQualityImprover {
       description: 'Organize and optimize import statements',
       improver: this.optimizeImports.bind(this),
       priority: 'low',
-      automatic: true
+      automatic: true,
     });
 
     // Dead code elimination
@@ -69,7 +69,7 @@ class CodeQualityImprover {
       description: 'Remove unused variables and functions',
       improver: this.removeUnusedCode.bind(this),
       priority: 'high',
-      automatic: false
+      automatic: false,
     });
 
     // Consistent naming
@@ -78,7 +78,7 @@ class CodeQualityImprover {
       description: 'Apply consistent naming conventions',
       improver: this.improveNaming.bind(this),
       priority: 'medium',
-      automatic: false
+      automatic: false,
     });
 
     // Error handling improvements
@@ -87,7 +87,7 @@ class CodeQualityImprover {
       description: 'Improve error handling patterns',
       improver: this.improveErrorHandling.bind(this),
       priority: 'high',
-      automatic: false
+      automatic: false,
     });
 
     // Async/await conversion
@@ -96,7 +96,7 @@ class CodeQualityImprover {
       description: 'Convert promises to async/await',
       improver: this.convertToAsyncAwait.bind(this),
       priority: 'medium',
-      automatic: true
+      automatic: true,
     });
 
     // Type safety improvements
@@ -105,7 +105,7 @@ class CodeQualityImprover {
       description: 'Add type checks and validations',
       improver: this.improveTypeSafety.bind(this),
       priority: 'high',
-      automatic: false
+      automatic: false,
     });
 
     // Documentation generation
@@ -114,7 +114,7 @@ class CodeQualityImprover {
       description: 'Generate missing JSDoc comments',
       improver: this.generateDocumentation.bind(this),
       priority: 'medium',
-      automatic: false
+      automatic: false,
     });
   }
 
@@ -127,7 +127,7 @@ class CodeQualityImprover {
       this.eslint = new ESLint({
         fix: true,
         baseConfig: await this.loadESLintConfig(),
-        useEslintrc: true
+        useEslintrc: true,
       });
     } else {
       console.warn('⚠️  eslint not available — linting improvements disabled');
@@ -154,7 +154,7 @@ class CodeQualityImprover {
         return {
           _filePath,
           improvements: [],
-          error: 'Unsupported file type'
+          error: 'Unsupported file type',
         };
       }
 
@@ -188,7 +188,7 @@ class CodeQualityImprover {
               pattern: pattern.name,
               priority: pattern.priority,
               changes: result.changes,
-              impact: result.impact || 'medium'
+              impact: result.impact || 'medium',
             });
             
             this.improvements.push(...result.improvements || []);
@@ -213,16 +213,16 @@ class CodeQualityImprover {
         metrics: {
           before: initialMetrics,
           after: finalMetrics,
-          improvementScore
+          improvementScore,
         },
-        changed: content !== improvedContent
+        changed: content !== improvedContent,
       };
 
     } catch (_error) {
       return {
         _filePath,
         improvements: [],
-        error: error.message
+        error: error.message,
       };
     }
   }
@@ -236,7 +236,7 @@ class CodeQualityImprover {
       complexity: 0,
       maintainability: 0,
       issues: 0,
-      coverage: 0
+      coverage: 0,
     };
 
     try {
@@ -270,7 +270,7 @@ class CodeQualityImprover {
       }
       const formatted = await prettier.format(content, {
         ...this.prettierConfig,
-        filepath: _filePath
+        filepath: _filePath,
       });
 
       return {
@@ -280,8 +280,8 @@ class CodeQualityImprover {
         improvements: [{
           type: 'formatting',
           description: 'Applied Prettier formatting',
-          line: 0
-        }]
+          line: 0,
+        }],
       };
     } catch (_error) {
       return { improved: false, content, error: error.message };
@@ -304,8 +304,8 @@ class CodeQualityImprover {
             type: 'linting',
             description: msg.message,
             line: msg.line,
-            severity: msg.severity === 2 ? 'error' : 'warning'
-          }))
+            severity: msg.severity === 2 ? 'error' : 'warning',
+          })),
         };
       }
 
@@ -322,7 +322,7 @@ class CodeQualityImprover {
 
     try {
       // Convert var to let/const
-      let ast = j(content);
+      const ast = j(content);
       const _varToLetConst = ast
         .find(j.VariableDeclaration, { kind: 'var' })
         .forEach(path => {
@@ -347,7 +347,7 @@ class CodeQualityImprover {
           const arrowFunction = j.arrowFunctionExpression(
             path.node.params,
             path.node.body,
-            path.node.body.type !== 'BlockStatement'
+            path.node.body.type !== 'BlockStatement',
           );
           j(_path).replaceWith(arrowFunction);
           improved = true;
@@ -377,8 +377,8 @@ class CodeQualityImprover {
         improvements: changes.map(change => ({
           type: 'modern_syntax',
           description: change,
-          line: 0
-        }))
+          line: 0,
+        })),
       };
 
     } catch (_error) {
@@ -468,8 +468,8 @@ class CodeQualityImprover {
         improvements: changes.map(change => ({
           type: 'optimize_imports',
           description: change,
-          line: 0
-        }))
+          line: 0,
+        })),
       };
 
     } catch (_error) {
@@ -527,7 +527,7 @@ class CodeQualityImprover {
           improvements.push({
             type: 'remove_unused',
             description: `Removed unused variable: ${varName}`,
-            line: declaratorPath.node.loc?.start.line || 0
+            line: declaratorPath.node.loc?.start.line || 0,
           });
         }
       }
@@ -559,7 +559,7 @@ class CodeQualityImprover {
           improvements.push({
             type: 'remove_unused',
             description: `Removed unused function: ${funcName}`,
-            line: funcPath.node.loc?.start.line || 0
+            line: funcPath.node.loc?.start.line || 0,
           });
         }
       }
@@ -570,7 +570,7 @@ class CodeQualityImprover {
         improved,
         content: improved ? result : content,
         changes,
-        improvements
+        improvements,
       };
 
     } catch (_error) {
@@ -610,7 +610,7 @@ class CodeQualityImprover {
           improvements.push({
             type: 'naming_conventions',
             description: `Renamed ${oldName} to ${newName}`,
-            line: path.node.loc?.start.line || 0
+            line: path.node.loc?.start.line || 0,
           });
         });
 
@@ -635,7 +635,7 @@ class CodeQualityImprover {
           improvements.push({
             type: 'naming_conventions',
             description: `Renamed class ${oldName} to ${newName}`,
-            line: path.node.loc?.start.line || 0
+            line: path.node.loc?.start.line || 0,
           });
         });
 
@@ -661,7 +661,7 @@ class CodeQualityImprover {
                 improvements.push({
                   type: 'naming_conventions',
                   description: `Renamed constant ${oldName} to ${newName}`,
-                  line: declarator.loc?.start.line || 0
+                  line: declarator.loc?.start.line || 0,
                 });
               }
             }
@@ -674,7 +674,7 @@ class CodeQualityImprover {
         improved,
         content: improved ? result : content,
         changes,
-        improvements
+        improvements,
       };
 
     } catch (_error) {
@@ -709,14 +709,14 @@ class CodeQualityImprover {
                     j.callExpression(
                       j.memberExpression(
                         j.identifier('console'),
-                        j.identifier('error')
+                        j.identifier('error'),
                       ),
-                      [j.identifier('error')]
-                    )
+                      [j.identifier('error')],
+                    ),
                   ),
-                  j.throwStatement(j.identifier('error'))
-                ])
-              )
+                  j.throwStatement(j.identifier('error')),
+                ]),
+              ),
             );
             
             path.node.body.body = [tryStatement];
@@ -727,7 +727,7 @@ class CodeQualityImprover {
             improvements.push({
               type: 'error_handling',
               description: `Added try-catch to async function ${funcName}`,
-              line: path.node.loc?.start.line || 0
+              line: path.node.loc?.start.line || 0,
             });
           }
         });
@@ -749,12 +749,12 @@ class CodeQualityImprover {
               j.callExpression(
                 j.memberExpression(
                   j.identifier('console'),
-                  j.identifier('error')
+                  j.identifier('error'),
                 ),
-                [j.literal('Error caught:'), errorParam]
-              )
+                [j.literal('Error caught:'), errorParam],
+              ),
             ),
-            j.throwStatement(errorParam)
+            j.throwStatement(errorParam),
           ];
           
           improved = true;
@@ -762,7 +762,7 @@ class CodeQualityImprover {
           improvements.push({
             type: 'error_handling',
             description: 'Added proper error re-throwing in catch block',
-            line: path.node.loc?.start.line || 0
+            line: path.node.loc?.start.line || 0,
           });
         });
 
@@ -772,7 +772,7 @@ class CodeQualityImprover {
         improved,
         content: improved ? result : content,
         changes,
-        improvements
+        improvements,
       };
 
     } catch (_error) {
@@ -814,7 +814,7 @@ class CodeQualityImprover {
             improvements.push({
               type: 'async_await',
               description: 'Converted .then() chain to async/await',
-              line: path.node.loc?.start.line || 0
+              line: path.node.loc?.start.line || 0,
             });
           }
         });
@@ -835,7 +835,7 @@ class CodeQualityImprover {
             promiseCallback.params,
             promiseCallback.body,
             promiseCallback.generator,
-            true // async
+            true, // async
           );
           
           path.node.arguments[0] = asyncFunction;
@@ -844,7 +844,7 @@ class CodeQualityImprover {
           improvements.push({
             type: 'async_await',
             description: 'Made Promise callback async',
-            line: path.node.loc?.start.line || 0
+            line: path.node.loc?.start.line || 0,
           });
         });
 
@@ -854,7 +854,7 @@ class CodeQualityImprover {
         improved,
         content: improved ? result : content,
         changes,
-        improvements
+        improvements,
       };
 
     } catch (_error) {
@@ -886,15 +886,15 @@ class CodeQualityImprover {
                     j.binaryExpression(
                       '==',
                       param,
-                      j.identifier('undefined')
+                      j.identifier('undefined'),
                     ),
                     j.throwStatement(
                       j.newExpression(
                         j.identifier('Error'),
-                        [j.literal(`Parameter '${param.name}' is required`)]
-                      )
-                    )
-                  )
+                        [j.literal(`Parameter '${param.name}' is required`)],
+                      ),
+                    ),
+                  ),
                 );
               }
             });
@@ -909,7 +909,7 @@ class CodeQualityImprover {
               improvements.push({
                 type: 'type_safety',
                 description: `Added parameter validation to function ${funcName}`,
-                line: path.node.loc?.start.line || 0
+                line: path.node.loc?.start.line || 0,
               });
             }
           }
@@ -931,7 +931,7 @@ class CodeQualityImprover {
             improvements.push({
               type: 'type_safety',
               description: 'Added optional chaining for safer property access',
-              line: path.node.loc?.start.line || 0
+              line: path.node.loc?.start.line || 0,
             });
           }
         });
@@ -946,7 +946,7 @@ class CodeQualityImprover {
         improved,
         content: improved ? result : content,
         changes,
-        improvements
+        improvements,
       };
 
     } catch (_error) {
@@ -989,7 +989,7 @@ class CodeQualityImprover {
           
           // Add JSDoc comment
           path.node.leadingComments = [
-            j.commentBlock(jsdoc.replace('/**', '*').replace('*/', ''), true)
+            j.commentBlock(jsdoc.replace('/**', '*').replace('*/', ''), true),
           ];
           
           improved = true;
@@ -997,7 +997,7 @@ class CodeQualityImprover {
           improvements.push({
             type: 'documentation',
             description: `Generated JSDoc for function ${funcName}`,
-            line: path.node.loc?.start.line || 0
+            line: path.node.loc?.start.line || 0,
           });
         });
 
@@ -1015,7 +1015,7 @@ class CodeQualityImprover {
           jsdoc += ' */';
           
           path.node.leadingComments = [
-            j.commentBlock(jsdoc.replace('/**', '*').replace('*/', ''), true)
+            j.commentBlock(jsdoc.replace('/**', '*').replace('*/', ''), true),
           ];
           
           improved = true;
@@ -1023,7 +1023,7 @@ class CodeQualityImprover {
           improvements.push({
             type: 'documentation',
             description: `Generated JSDoc for class ${className}`,
-            line: path.node.loc?.start.line || 0
+            line: path.node.loc?.start.line || 0,
           });
         });
 
@@ -1033,7 +1033,7 @@ class CodeQualityImprover {
         improved,
         content: improved ? result : content,
         changes,
-        improvements
+        improvements,
       };
 
     } catch (_error) {
@@ -1053,19 +1053,19 @@ class CodeQualityImprover {
       return {
         env: {
           es2021: true,
-          node: true
+          node: true,
         },
         extends: ['eslint:recommended'],
         parserOptions: {
           ecmaVersion: 12,
-          sourceType: 'module'
+          sourceType: 'module',
         },
         rules: {
           'no-unused-vars': 'error',
           'no-console': 'warn',
           'semi': ['error', 'always'],
-          'quotes': ['error', 'single']
-        }
+          'quotes': ['error', 'single'],
+        },
       };
     }
   }
@@ -1082,7 +1082,7 @@ class CodeQualityImprover {
         singleQuote: true,
         tabWidth: 2,
         trailingComma: 'es5',
-        printWidth: 80
+        printWidth: 80,
       };
     }
   }
@@ -1100,7 +1100,7 @@ class CodeQualityImprover {
       /\bcatch\s*\(/g,
       /\?\s*[^:]+\s*:/g, // ternary
       /\|\|/g,
-      /&&/g
+      /&&/g,
     ];
     
     complexityPatterns.forEach(pattern => {
@@ -1125,7 +1125,7 @@ class CodeQualityImprover {
     const complexityRatio = complexity / lines;
     
     const maintainability = Math.min(100, Math.max(0, 
-      100 - (complexityRatio * 50) + (commentRatio * 20)
+      100 - (complexityRatio * 50) + (commentRatio * 20),
     ));
     
     return Math.round(maintainability);
@@ -1147,7 +1147,7 @@ class CodeQualityImprover {
       issues: Math.max(0, before.issues - after.issues),
       complexity: Math.max(0, before.complexity - after.complexity),
       maintainability: Math.max(0, after.maintainability - before.maintainability),
-      coverage: Math.max(0, after.coverage - before.coverage)
+      coverage: Math.max(0, after.coverage - before.coverage),
     };
     
     // Calculate weighted score
@@ -1172,7 +1172,7 @@ class CodeQualityImprover {
     });
     
     return Array.from(fixedRules.entries()).map(([rule, count]) => 
-      `Fixed ${count} ${rule} issue${count > 1 ? 's' : ''}`
+      `Fixed ${count} ${rule} issue${count > 1 ? 's' : ''}`,
     );
   }
 
@@ -1301,7 +1301,7 @@ class CodeQualityImprover {
       filesAnalyzed: this.metrics.size,
       totalImprovements: 0,
       byType: {},
-      averageScore: 0
+      averageScore: 0,
     };
 
     let totalScore = 0;

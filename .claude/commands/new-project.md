@@ -104,6 +104,12 @@ Este projeto usa governança híbrida AIOX. INDEX, stories e sessions vivem loca
 1. Use: `/checkpoint` (detecta automaticamente modo HYBRID)
 2. INDEX.md e session são salvos em `.aios/` local
 
+## Estilo de comunicação
+- **Tom:** explique como se fosse para um adolescente curioso de 15 anos. Inteligente, mas sem jargão
+- **Metáforas obrigatórias:** sempre usar analogias do cotidiano para conceitos técnicos ou abstratos
+- **Concisão:** se dá pra explicar em 3 linhas, não use 10
+- **Estrutura pós-tarefa:** O que fiz, Por quê, Próximo passo, Erros (se houver)
+
 ## Convenções deste projeto
 {A definir — preencha com stack, lint rules, etc. conforme o projeto evolui}
 ```

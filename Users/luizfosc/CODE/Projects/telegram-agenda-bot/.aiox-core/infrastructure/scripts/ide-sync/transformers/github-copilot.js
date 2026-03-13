@@ -38,7 +38,7 @@ function transform(agentData) {
     '---',
     `name: ${id}`,
     `description: '${description}'`,
-    `tools: ['read', 'edit', 'search', 'execute']`,
+    'tools: [\'read\', \'edit\', \'search\', \'execute\']',
     '---',
   ].join('\n');
 

@@ -27,13 +27,13 @@ const PRICING = {
   'deepseek-chat': {
     input: 0.07,   // $0.07 per 1M input tokens
     output: 0.14,  // $0.14 per 1M output tokens
-    cached: 0.014  // $0.014 per 1M cached tokens
+    cached: 0.014,  // $0.014 per 1M cached tokens
   },
   'deepseek-reasoner': {
     input: 0.55,   // $0.55 per 1M input tokens
     output: 2.19,  // $2.19 per 1M output tokens
-    cached: 0.14   // $0.14 per 1M cached tokens
-  }
+    cached: 0.14,   // $0.14 per 1M cached tokens
+  },
 };
 
 /**
@@ -66,7 +66,7 @@ function loadUsageData() {
     aliases: {},
     totalRequests: 0,
     totalTokens: { input: 0, output: 0, cached: 0 },
-    totalCost: 0
+    totalCost: 0,
   };
 }
 
@@ -113,7 +113,7 @@ function recordUsage(alias, request, response) {
       tokens: { input: 0, output: 0, cached: 0 },
       cost: 0,
       byModel: {},
-      byDay: {}
+      byDay: {},
     };
   }
 
@@ -193,8 +193,8 @@ function proxyRequest(req, res, alias) {
       method: req.method,
       headers: {
         ...req.headers,
-        host: DEEPSEEK_HOST
-      }
+        host: DEEPSEEK_HOST,
+      },
     };
 
     // Remove problematic headers
@@ -273,8 +273,8 @@ function proxyStreamingRequest(req, res, alias) {
       method: req.method,
       headers: {
         ...req.headers,
-        host: DEEPSEEK_HOST
-      }
+        host: DEEPSEEK_HOST,
+      },
     };
 
     delete options.headers['content-length'];
@@ -287,7 +287,7 @@ function proxyStreamingRequest(req, res, alias) {
       res.writeHead(proxyRes.statusCode, {
         ...proxyRes.headers,
         'cache-control': 'no-cache',
-        'connection': 'keep-alive'
+        'connection': 'keep-alive',
       });
 
       let totalInputTokens = 0;
@@ -321,8 +321,8 @@ function proxyStreamingRequest(req, res, alias) {
           recordUsage(alias, requestData, {
             usage: {
               prompt_tokens: totalInputTokens,
-              completion_tokens: totalOutputTokens
-            }
+              completion_tokens: totalOutputTokens,
+            },
           });
         }
       });
@@ -545,5 +545,5 @@ module.exports = {
   calculateCost,
   PRICING,
   DATA_DIR,
-  USAGE_FILE
+  USAGE_FILE,
 };

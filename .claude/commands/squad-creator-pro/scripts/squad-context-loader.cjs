@@ -36,22 +36,22 @@ const AGENT_MAP = {
     role: 'Mind Cloning Architect',
     phases: ['research', 'source_validation', 'dna_extraction', 'agent_scaffolding'],
     handoff_to: 'pedro-valerio',
-    source: 'squads/squad-creator-pro/agents/oalanicolas.md'
+    source: 'squads/squad-creator-pro/agents/oalanicolas.md',
   },
   'pedro-valerio': {
     persona_name: 'Pedro Valério',
     role: 'Process Absolutist',
     phases: ['task_anatomy', 'quality_gate'],
     handoff_to: 'squad-chief',
-    source: 'squads/squad-creator-pro/agents/pedro-valerio.md'
+    source: 'squads/squad-creator-pro/agents/pedro-valerio.md',
   },
   'squad-chief': {
     persona_name: 'Squad Chief',
     role: 'Integration Orchestrator',
     phases: ['integration', 'smoke_test'],
     handoff_to: null,
-    source: 'squads/squad-creator/agents/squad-chief.md'
-  }
+    source: 'squads/squad-creator/agents/squad-chief.md',
+  },
 };
 
 // Pipeline order for handoff_from calculation
@@ -140,7 +140,7 @@ Output: JSON context to stdout
   if (!AGENT_MAP[agentKey]) {
     outputError('INVALID_AGENT', `Invalid agent key: ${agentKey}`, {
       received: agentKey,
-      valid_keys: Object.keys(AGENT_MAP)
+      valid_keys: Object.keys(AGENT_MAP),
     });
     process.exit(1);
   }
@@ -149,7 +149,7 @@ Output: JSON context to stdout
   const slug = resolveSlug(cliSlug);
   if (!slug) {
     outputError('NO_ACTIVE_SQUAD', 'No slug provided and no .active-squad file found', {
-      hint: 'Run: node squad-state-manager.cjs init <slug>'
+      hint: 'Run: node squad-state-manager.cjs init <slug>',
     });
     process.exit(1);
   }
@@ -158,7 +158,7 @@ Output: JSON context to stdout
   const statePath = getStatePath(slug);
   if (!fs.existsSync(statePath)) {
     outputError('STATE_NOT_FOUND', `State file not found: ${statePath}`, {
-      hint: `Run: node squad-state-manager.cjs init ${slug}`
+      hint: `Run: node squad-state-manager.cjs init ${slug}`,
     });
     process.exit(1);
   }
@@ -169,7 +169,7 @@ Output: JSON context to stdout
   } catch {
     outputError('CORRUPTED_STATE', `Corrupted state.json for ${slug}`, {
       path: statePath,
-      hint: 'Delete and re-init.'
+      hint: 'Delete and re-init.',
     });
     process.exit(1);
   }
@@ -195,8 +195,8 @@ Output: JSON context to stdout
       persona: agent.persona_name,
       role: agent.role,
       phases: agent.phases,
-      source: agent.source
-    }
+      source: agent.source,
+    },
   };
 
   outputJson(context);

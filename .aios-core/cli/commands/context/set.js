@@ -33,17 +33,17 @@ async function execute(args) {
     project: {
       name: name,
       ...(options.emoji && { emoji: options.emoji }),
-      ...(options.type && { type: options.type })
+      ...(options.type && { type: options.type }),
     },
     status: {
       ...(options.phase && { phase: options.phase }),
       ...(options.progress && { progress: options.progress }),
-      ...(options.status && { emoji: options.status })
+      ...(options.status && { emoji: options.status }),
     },
     metadata: {
       ...(options.agent && { activeAgent: options.agent }),
-      ...(options.story && { story: options.story })
-    }
+      ...(options.story && { story: options.story }),
+    },
   };
 
   // Update session

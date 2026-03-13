@@ -254,41 +254,41 @@ async function main() {
 
   try {
     switch (command) {
-    case 'update': {
-      if (!range || !jsonValues) {
-        console.error('update requires <range> and <json-values>');
-        process.exit(1);
+      case 'update': {
+        if (!range || !jsonValues) {
+          console.error('update requires <range> and <json-values>');
+          process.exit(1);
+        }
+        const values = JSON.parse(jsonValues);
+        await cmdUpdate(sheets, spreadsheetId, range, values);
+        break;
       }
-      const values = JSON.parse(jsonValues);
-      await cmdUpdate(sheets, spreadsheetId, range, values);
-      break;
-    }
-    case 'append': {
-      if (!range || !jsonValues) {
-        console.error('append requires <range> and <json-values>');
-        process.exit(1);
+      case 'append': {
+        if (!range || !jsonValues) {
+          console.error('append requires <range> and <json-values>');
+          process.exit(1);
+        }
+        const values = JSON.parse(jsonValues);
+        await cmdAppend(sheets, spreadsheetId, range, values);
+        break;
       }
-      const values = JSON.parse(jsonValues);
-      await cmdAppend(sheets, spreadsheetId, range, values);
-      break;
-    }
-    case 'clear':
-      if (!range) {
-        console.error('clear requires <range>');
+      case 'clear':
+        if (!range) {
+          console.error('clear requires <range>');
+          process.exit(1);
+        }
+        await cmdClear(sheets, spreadsheetId, range);
+        break;
+      case 'read':
+        if (!range) {
+          console.error('read requires <range>');
+          process.exit(1);
+        }
+        await cmdRead(sheets, spreadsheetId, range);
+        break;
+      default:
+        console.error(`Unknown command: ${command}. Use update, append, clear, or read.`);
         process.exit(1);
-      }
-      await cmdClear(sheets, spreadsheetId, range);
-      break;
-    case 'read':
-      if (!range) {
-        console.error('read requires <range>');
-        process.exit(1);
-      }
-      await cmdRead(sheets, spreadsheetId, range);
-      break;
-    default:
-      console.error(`Unknown command: ${command}. Use update, append, clear, or read.`);
-      process.exit(1);
     }
   } catch (error) {
     console.error(JSON.stringify({

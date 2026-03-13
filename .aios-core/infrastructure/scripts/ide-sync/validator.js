@@ -158,7 +158,7 @@ function validateAllIdes(ideConfigs, redirectsConfig) {
     const ideResult = validateIdeSync(
       config.expectedFiles,
       config.targetDir,
-      redirectsConfig
+      redirectsConfig,
     );
 
     results.ides[ideName] = ideResult;
@@ -193,8 +193,8 @@ function formatValidationReport(results, verbose = false) {
   // Summary
   lines.push('## Summary');
   lines.push('');
-  lines.push(`| Metric | Count |`);
-  lines.push(`|--------|-------|`);
+  lines.push('| Metric | Count |');
+  lines.push('|--------|-------|');
   lines.push(`| Total Expected | ${results.summary.total} |`);
   lines.push(`| Synced | ${results.summary.synced} |`);
   lines.push(`| Missing | ${results.summary.missing} |`);

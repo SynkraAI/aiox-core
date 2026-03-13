@@ -170,7 +170,7 @@ class PatternExtractor {
         if (allPatterns[pattern.category]) {
           // Check for duplicates
           const exists = allPatterns[pattern.category].some(
-            (p) => p.name === pattern.name
+            (p) => p.name === pattern.name,
           );
           if (!exists) {
             allPatterns[pattern.category].push(pattern);
@@ -998,7 +998,7 @@ export async function getUsers(options?: {
       }
 
       // File system operations
-      if (content.includes("fs.promises") || content.includes("require('fs').promises")) {
+      if (content.includes('fs.promises') || content.includes("require('fs').promises")) {
         if (!seenPatterns.has('fs-async')) {
           seenPatterns.add('fs-async');
           patterns.push({
@@ -1349,7 +1349,7 @@ module.exports = { formatBytes, debounce, deepClone };
 
         for (const pattern of patterns) {
           const existingIndex = existingPatterns[category].findIndex(
-            (p) => p.name === pattern.name
+            (p) => p.name === pattern.name,
           );
 
           if (existingIndex >= 0) {
@@ -1538,7 +1538,7 @@ Examples:
   if (!quiet) {
     const totalPatterns = Object.values(extractor.detectedPatterns).reduce(
       (sum, p) => sum + p.length,
-      0
+      0,
     );
     console.log(`\nTotal patterns detected: ${totalPatterns}`);
     for (const [category, patterns] of Object.entries(extractor.detectedPatterns)) {

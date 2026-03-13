@@ -18,7 +18,7 @@ class DependencyAnalyzer {
     this.paths = {
       agents: path.join(this.rootPath, 'aios-core', 'agents'),
       tasks: path.join(this.rootPath, 'aios-core', 'tasks'),
-      workflows: path.join(this.rootPath, 'aios-core', 'workflows')
+      workflows: path.join(this.rootPath, 'aios-core', 'workflows'),
     };
     
     // Dependency cache
@@ -37,7 +37,7 @@ class DependencyAnalyzer {
       optional: [],
       missing: [],
       circular: false,
-      graph: new Map()
+      graph: new Map(),
     };
     
     switch (componentType) {
@@ -74,13 +74,13 @@ class DependencyAnalyzer {
             type: 'task',
             id: taskId,
             path: taskPath,
-            reason: `Command '${command}' requires task`
+            reason: `Command '${command}' requires task`,
           });
         } else {
           dependencies.missing.push({
             type: 'task',
             id: taskId,
-            reason: `Command '${command}' requires task file`
+            reason: `Command '${command}' requires task file`,
           });
         }
       }
@@ -96,7 +96,7 @@ class DependencyAnalyzer {
             type: 'workflow',
             id: workflowId,
             path: workflowPath,
-            reason: 'Agent workflow reference'
+            reason: 'Agent workflow reference',
           });
         }
       }
@@ -112,13 +112,13 @@ class DependencyAnalyzer {
             type: 'agent',
             id: agentId,
             path: agentPath,
-            reason: 'Explicit agent dependency'
+            reason: 'Explicit agent dependency',
           });
         } else {
           dependencies.missing.push({
             type: 'agent',
             id: agentId,
-            reason: 'Required agent not found'
+            reason: 'Required agent not found',
           });
         }
       }
@@ -139,13 +139,13 @@ class DependencyAnalyzer {
           type: 'agent',
           id: taskData.agentName,
           path: agentPath,
-          reason: 'Task belongs to agent'
+          reason: 'Task belongs to agent',
         });
       } else {
         dependencies.missing.push({
           type: 'agent',
           id: taskData.agentName,
-          reason: 'Agent not found for task'
+          reason: 'Agent not found for task',
         });
       }
     }
@@ -160,13 +160,13 @@ class DependencyAnalyzer {
             type: 'task',
             id: taskId,
             path: taskPath,
-            reason: 'Task dependency'
+            reason: 'Task dependency',
           });
         } else {
           dependencies.missing.push({
             type: 'task',
             id: taskId,
-            reason: 'Required task not found'
+            reason: 'Required task not found',
           });
         }
       }
@@ -203,7 +203,7 @@ class DependencyAnalyzer {
           type: 'task',
           id: taskId,
           path: taskPath,
-          reason: 'Workflow step requires task'
+          reason: 'Workflow step requires task',
         });
         
         // Also check the task's agent dependency
@@ -218,7 +218,7 @@ class DependencyAnalyzer {
               type: 'agent',
               id: agentId,
               path: agentPath,
-              reason: 'Task requires agent'
+              reason: 'Task requires agent',
             });
           }
         }
@@ -226,7 +226,7 @@ class DependencyAnalyzer {
         dependencies.missing.push({
           type: 'task',
           id: taskId,
-          reason: 'Workflow step requires task'
+          reason: 'Workflow step requires task',
         });
       }
     }
@@ -241,13 +241,13 @@ class DependencyAnalyzer {
             type: 'workflow',
             id: workflowId,
             path: workflowPath,
-            reason: 'Sub-workflow dependency'
+            reason: 'Sub-workflow dependency',
           });
         } else {
           dependencies.missing.push({
             type: 'workflow',
             id: workflowId,
-            reason: 'Required workflow not found'
+            reason: 'Required workflow not found',
           });
         }
       }
@@ -321,7 +321,7 @@ class DependencyAnalyzer {
     const results = {
       valid: true,
       issues: [],
-      resolutions: []
+      resolutions: [],
     };
     
     for (const component of components) {
@@ -331,7 +331,7 @@ class DependencyAnalyzer {
         results.valid = false;
         results.issues.push({
           component: component.config.name || component.config.id,
-          missing: deps.missing
+          missing: deps.missing,
         });
         
         // Suggest resolutions
@@ -340,7 +340,7 @@ class DependencyAnalyzer {
             action: 'create',
             type: missing.type,
             id: missing.id,
-            reason: missing.reason
+            reason: missing.reason,
           });
         }
       }
@@ -349,7 +349,7 @@ class DependencyAnalyzer {
         results.valid = false;
         results.issues.push({
           component: component.config.name || component.config.id,
-          issue: 'Circular dependency detected'
+          issue: 'Circular dependency detected',
         });
       }
     }
@@ -464,8 +464,8 @@ class DependencyAnalyzer {
       choices: [
         { name: 'Create all missing dependencies', value: 'create-all' },
         { name: 'Select which to create', value: 'select' },
-        { name: 'Skip dependency creation', value: 'skip' }
-      ]
+        { name: 'Skip dependency creation', value: 'skip' },
+      ],
     }]);
     
     if (action === 'skip') {
@@ -476,7 +476,7 @@ class DependencyAnalyzer {
       for (const dep of missing) {
         componentsToCreate.push({
           type: dep.type,
-          config: await this.getMinimalConfig(dep.type, dep.id)
+          config: await this.getMinimalConfig(dep.type, dep.id),
         });
       }
     } else {
@@ -488,14 +488,14 @@ class DependencyAnalyzer {
         choices: missing.map(dep => ({
           name: `${dep.type}: ${dep.id}`,
           value: dep,
-          checked: true
-        }))
+          checked: true,
+        })),
       }]);
       
       for (const dep of selected) {
         componentsToCreate.push({
           type: dep.type,
-          config: await this.getMinimalConfig(dep.type, dep.id)
+          config: await this.getMinimalConfig(dep.type, dep.id),
         });
       }
     }
@@ -513,7 +513,7 @@ class DependencyAnalyzer {
       valid: true,
       issues: [],
       taskDependencies: [],
-      missingTasks: []
+      missingTasks: [],
     };
     
     // Extract all task references
@@ -541,7 +541,7 @@ class DependencyAnalyzer {
               result.valid = false;
               result.issues.push({
                 step: step.id || step.name,
-                issue: `References non-existent step: ${depId}`
+                issue: `References non-existent step: ${depId}`,
               });
             }
           }
@@ -557,7 +557,7 @@ class DependencyAnalyzer {
         result.taskDependencies.push({
           taskId,
           path: taskPath,
-          exists: true
+          exists: true,
         });
       } else {
         result.valid = false;
@@ -578,7 +578,7 @@ class DependencyAnalyzer {
       if (this.detectCircularDependencies(stepGraph)) {
         result.valid = false;
         result.issues.push({
-          issue: 'Circular dependency detected in workflow steps'
+          issue: 'Circular dependency detected in workflow steps',
         });
       }
     }
@@ -599,14 +599,14 @@ class DependencyAnalyzer {
           type: 'input',
           name: 'agentTitle',
           message: `Title for agent '${id}':`,
-          default: id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+          default: id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
         }]);
         
         return {
           agentName: id,
           agentTitle,
           whenToUse: `Dependency for ${id}`,
-          commands: []
+          commands: [],
         };
         
       case 'task':
@@ -614,14 +614,14 @@ class DependencyAnalyzer {
           type: 'input',
           name: 'taskTitle',
           message: `Title for task '${id}':`,
-          default: id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+          default: id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
         }]);
         
         return {
           taskId: id,
           taskTitle,
           taskDescription: `Dependency task for ${id}`,
-          agentName: 'aios-developer'
+          agentName: 'aios-developer',
         };
         
       case 'workflow':
@@ -629,7 +629,7 @@ class DependencyAnalyzer {
           workflowId: id,
           workflowName: id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
           workflowType: 'standard',
-          steps: []
+          steps: [],
         };
     }
   }

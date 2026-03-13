@@ -17,7 +17,7 @@ class ConflictResolver {
       'theirs': this.resolveTheirs.bind(this),
       'manual': this.resolveManual.bind(this),
       'auto': this.resolveAuto.bind(this),
-      'interactive': this.resolveInteractive.bind(this)
+      'interactive': this.resolveInteractive.bind(this),
     };
   }
 
@@ -32,7 +32,7 @@ class ConflictResolver {
       if (conflicts.length === 0) {
         return {
           hasConflicts: false,
-          files: []
+          files: [],
         };
       }
 
@@ -40,7 +40,7 @@ class ConflictResolver {
       for (const file of conflicts) {
         const content = await fs.readFile(
           path.join(this.rootPath, file),
-          'utf-8'
+          'utf-8',
         );
         
         const conflictInfo = this.parseConflictMarkers(_content);
@@ -48,20 +48,20 @@ class ConflictResolver {
           file,
           conflicts: conflictInfo.conflicts,
           conflictCount: conflictInfo.conflicts.length,
-          type: this.detectConflictType(file, conflictInfo)
+          type: this.detectConflictType(file, conflictInfo),
         });
       }
 
       return {
         hasConflicts: true,
         files: conflictDetails,
-        totalConflicts: conflictDetails.reduce((sum, f) => sum + f.conflictCount, 0)
+        totalConflicts: conflictDetails.reduce((sum, f) => sum + f.conflictCount, 0),
       };
     } catch (error) {
       console.error(chalk.red(`Error detecting conflicts: ${error.message}`));
       return {
         hasConflicts: false,
-        error: error.message
+        error: error.message,
       };
     }
   }
@@ -88,7 +88,7 @@ class ConflictResolver {
           theirs: [],
           separator: null,
           endLine: null,
-          branch: line.substring(8).trim()
+          branch: line.substring(8).trim(),
         };
       } else if (inConflict && line.startsWith('=======')) {
         currentConflict.separator = lineNumber;
@@ -164,7 +164,7 @@ class ConflictResolver {
     }
 
     console.log(chalk.yellow(
-      `Found ${conflictInfo.totalConflicts} conflicts in ${conflictInfo.files.length} files`
+      `Found ${conflictInfo.totalConflicts} conflicts in ${conflictInfo.files.length} files`,
     ));
 
     const resolver = this.strategies[strategy];
@@ -175,7 +175,7 @@ class ConflictResolver {
     const results = {
       resolved: 0,
       failed: 0,
-      files: []
+      files: [],
     };
 
     for (const fileInfo of conflictInfo.files) {
@@ -188,14 +188,14 @@ class ConflictResolver {
           results.files.push({
             file: fileInfo.file,
             status: 'resolved',
-            method: resolved.method
+            method: resolved.method,
           });
         } else {
           results.failed++;
           results.files.push({
             file: fileInfo.file,
             status: 'failed',
-            error: resolved.error
+            error: resolved.error,
           });
         }
       } catch (error) {
@@ -203,7 +203,7 @@ class ConflictResolver {
         results.files.push({
           file: fileInfo.file,
           status: 'error',
-          error: error.message
+          error: error.message,
         });
       }
     }
@@ -223,12 +223,12 @@ class ConflictResolver {
       return {
         success: true,
         conflictsResolved: fileInfo.conflictCount,
-        method: 'ours'
+        method: 'ours',
       };
     } catch (error) {
       return {
         success: false,
-        error: error.message
+        error: error.message,
       };
     }
   }
@@ -245,12 +245,12 @@ class ConflictResolver {
       return {
         success: true,
         conflictsResolved: fileInfo.conflictCount,
-        method: 'theirs'
+        method: 'theirs',
       };
     } catch (error) {
       return {
         success: false,
-        error: error.message
+        error: error.message,
       };
     }
   }
@@ -264,10 +264,10 @@ class ConflictResolver {
     const content = await fs.readFile(filePath, 'utf-8');
     
     console.log(chalk.yellow(
-      `Manual resolution required for ${fileInfo.file}`
+      `Manual resolution required for ${fileInfo.file}`,
     ));
     console.log(chalk.gray(
-      'Edit the file to resolve conflicts, then mark as resolved'
+      'Edit the file to resolve conflicts, then mark as resolved',
     ));
     
     // In a real implementation, this would open an editor
@@ -275,7 +275,7 @@ class ConflictResolver {
     return {
       success: false,
       error: 'Manual resolution required',
-      instruction: `Edit ${filePath} and run: git add "${fileInfo.file}"`
+      instruction: `Edit ${filePath} and run: git add "${fileInfo.file}"`,
     };
   }
 
@@ -319,7 +319,7 @@ class ConflictResolver {
         // Can't auto-resolve
         return {
           success: false,
-          error: `Cannot auto-resolve ${fileInfo.type} conflicts`
+          error: `Cannot auto-resolve ${fileInfo.type} conflicts`,
         };
     }
 
@@ -330,7 +330,7 @@ class ConflictResolver {
     return {
       success: true,
       conflictsResolved: resolvedCount,
-      method: `auto-${fileInfo.type}`
+      method: `auto-${fileInfo.type}`,
     };
   }
 
@@ -371,15 +371,15 @@ class ConflictResolver {
           { name: 'Keep both (ours first)', value: 'both-ours' },
           { name: 'Keep both (theirs first)', value: 'both-theirs' },
           { name: 'Custom merge', value: 'custom' },
-          { name: 'Skip this conflict', value: 'skip' }
-        ]
+          { name: 'Skip this conflict', value: 'skip' },
+        ],
       }]);
 
       if (resolution !== 'skip') {
         resolvedContent = await this.applyResolution(
           resolvedContent,
           _conflict,
-          resolution
+          resolution,
         );
         resolvedCount++;
       }
@@ -393,7 +393,7 @@ class ConflictResolver {
     return {
       success: true,
       conflictsResolved: resolvedCount,
-      method: 'interactive'
+      method: 'interactive',
     };
   }
 
@@ -403,7 +403,7 @@ class ConflictResolver {
    */
   async applyResolution(_content, _conflict, resolution) {
     const lines = content.split('\n');
-    let newLines = [];
+    const newLines = [];
     let skipUntil = null;
 
     for (let i = 0; i < lines.length; i++) {
@@ -430,7 +430,7 @@ class ConflictResolver {
               type: 'editor',
               name: 'custom',
               message: 'Enter custom resolution:',
-              default: conflict.ours.join('\n')
+              default: conflict.ours.join('\n'),
             }]);
             newLines.push(...custom.split('\n'));
             break;
@@ -454,8 +454,8 @@ class ConflictResolver {
     
     for (const _conflict of fileInfo.conflicts) {
       const pattern = new RegExp(
-        `<<<<<<<[^\\n]*\\n[\\s\\S]*?=======\\n([\\s\\S]*?)>>>>>>>[^\\n]*\\n`,
-        'g'
+        '<<<<<<<[^\\n]*\\n[\\s\\S]*?=======\\n([\\s\\S]*?)>>>>>>>[^\\n]*\\n',
+        'g',
       );
       resolved = resolved.replace(pattern, '$1');
     }
@@ -489,8 +489,8 @@ class ConflictResolver {
     let resolved = content;
     for (const _conflict of fileInfo.conflicts) {
       const pattern = new RegExp(
-        `<<<<<<<[^\\n]*\\n[\\s\\S]*?>>>>>>>[^\\n]*\\n`,
-        'g'
+        '<<<<<<<[^\\n]*\\n[\\s\\S]*?>>>>>>>[^\\n]*\\n',
+        'g',
       );
       resolved = resolved.replace(pattern, Array.from(imports).join('\n') + '\n');
     }
@@ -525,7 +525,7 @@ class ConflictResolver {
         }
         
         const pattern = new RegExp(
-          `<<<<<<<[^\\n]*\\n[\\s\\S]*?=======\\n([\\s\\S]*?)>>>>>>>[^\\n]*\\n`
+          '<<<<<<<[^\\n]*\\n[\\s\\S]*?=======\\n([\\s\\S]*?)>>>>>>>[^\\n]*\\n',
         );
         
         if (useTheirs) {
@@ -598,7 +598,7 @@ class ConflictResolver {
     if (!conflictInfo.hasConflicts) {
       return {
         summary: 'No conflicts detected',
-        details: []
+        details: [],
       };
     }
 
@@ -612,10 +612,10 @@ class ConflictResolver {
         preview: file.conflicts.map(c => ({
           lines: `${c.startLine}-${c.endLine}`,
           oursPreview: c.ours.slice(0, 2).join('\n'),
-          theirsPreview: c.theirs.slice(0, 2).join('\n')
-        }))
+          theirsPreview: c.theirs.slice(0, 2).join('\n'),
+        })),
       })),
-      recommendations: this.generateRecommendations(conflictInfo)
+      recommendations: this.generateRecommendations(conflictInfo),
     };
 
     return report;
@@ -639,7 +639,7 @@ class ConflictResolver {
       recommendations.push({
         type: 'whitespace',
         suggestion: 'Use auto-resolution for whitespace conflicts',
-        command: "resolver.resolveConflicts('auto', { type: 'whitespace' })"
+        command: "resolver.resolveConflicts('auto', { type: 'whitespace' })",
       });
     }
 
@@ -647,7 +647,7 @@ class ConflictResolver {
       recommendations.push({
         type: 'imports',
         suggestion: 'Merge import statements from both branches',
-        command: "resolver.resolveConflicts('auto', { type: 'imports' })"
+        command: "resolver.resolveConflicts('auto', { type: 'imports' })",
       });
     }
 
@@ -655,7 +655,7 @@ class ConflictResolver {
       recommendations.push({
         type: 'version',
         suggestion: 'Keep the higher version number',
-        command: "resolver.resolveConflicts('auto', { type: 'version' })"
+        command: "resolver.resolveConflicts('auto', { type: 'version' })",
       });
     }
 
@@ -664,7 +664,7 @@ class ConflictResolver {
       recommendations.push({
         type: 'general',
         suggestion: 'Consider reviewing branch merge strategy',
-        command: 'Use smaller, more focused branches'
+        command: 'Use smaller, more focused branches',
       });
     }
 

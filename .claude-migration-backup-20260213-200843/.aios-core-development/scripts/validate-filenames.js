@@ -61,7 +61,7 @@ const PORTUGUESE_TERMS = {
   'decisoes': 'decisions',
   'decises': 'decisions',
   'decisao': 'decision',
-  'deciso': 'decision'
+  'deciso': 'decision',
 };
 
 // Expected standard filenames (architecture)
@@ -75,7 +75,7 @@ const STANDARD_FILES = [
   'database-schema.md',
   'data-models.md',
   'api-design.md',
-  'architecture-diagram.md'
+  'architecture-diagram.md',
 ];
 
 class FilenameValidator {
@@ -109,7 +109,7 @@ class FilenameValidator {
       this.errors.push({
         file: path.join(directory, filename),
         issue: 'Contains Portuguese characters (accents)',
-        suggestion: this.removeAccents(basename) + '.md'
+        suggestion: this.removeAccents(basename) + '.md',
       });
       return;
     }
@@ -122,7 +122,7 @@ class FilenameValidator {
         this.errors.push({
           file: path.join(directory, filename),
           issue: `Contains Portuguese term: "${ptTerm}"`,
-          suggestion: suggested + '.md'
+          suggestion: suggested + '.md',
         });
       }
     }

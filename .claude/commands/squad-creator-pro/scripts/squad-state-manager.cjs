@@ -29,7 +29,7 @@ const VALID_PHASES = [
   'integration',        // phase_5: Integrate into squad
   'smoke_test',         // phase_6: Functional test
   'completed',
-  'failed'
+  'failed',
 ];
 
 const VALID_STATUSES = [
@@ -38,7 +38,7 @@ const VALID_STATUSES = [
   'checkpoint',    // Awaiting human approval
   'approved',
   'rejected',
-  'completed'
+  'completed',
 ];
 
 // Agent mapping for each phase
@@ -50,7 +50,7 @@ const PHASE_AGENTS = {
   'task_anatomy': 'pedro-valerio',
   'quality_gate': 'pedro-valerio',
   'integration': 'squad-chief',
-  'smoke_test': 'squad-chief'
+  'smoke_test': 'squad-chief',
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -64,7 +64,7 @@ function outputJson(data) {
 function outputError(code, message, details = {}) {
   outputJson({
     success: false,
-    error: { code, message, details }
+    error: { code, message, details },
   });
 }
 
@@ -139,7 +139,7 @@ function cmdInit(slug, options = {}) {
   if (!/^[a-z0-9]+(_[a-z0-9]+)*$/.test(slug)) {
     outputError('INVALID_SLUG', 'Slug must be snake_case', {
       received: slug,
-      expected_pattern: '^[a-z0-9]+(_[a-z0-9]+)*$'
+      expected_pattern: '^[a-z0-9]+(_[a-z0-9]+)*$',
     });
     process.exit(1);
   }
@@ -160,8 +160,8 @@ function cmdInit(slug, options = {}) {
     agent_history: [],
     metadata: {
       source_mind: sourceMind,
-      target_domain: targetDomain
-    }
+      target_domain: targetDomain,
+    },
   };
 
   state.updated_at = now;
@@ -178,7 +178,7 @@ function cmdInit(slug, options = {}) {
     success: true,
     slug,
     path: getStatePath(slug),
-    display_name: state.display_name
+    display_name: state.display_name,
   });
 }
 
@@ -192,7 +192,7 @@ function cmdUpdate(slug, phase, status, options = {}) {
   if (!VALID_PHASES.includes(phase)) {
     outputError('INVALID_PHASE', `Invalid phase: ${phase}`, {
       received: phase,
-      valid_phases: VALID_PHASES
+      valid_phases: VALID_PHASES,
     });
     process.exit(1);
   }
@@ -201,7 +201,7 @@ function cmdUpdate(slug, phase, status, options = {}) {
   if (status && !VALID_STATUSES.includes(status)) {
     outputError('INVALID_STATUS', `Invalid status: ${status}`, {
       received: status,
-      valid_statuses: VALID_STATUSES
+      valid_statuses: VALID_STATUSES,
     });
     process.exit(1);
   }
@@ -223,7 +223,7 @@ function cmdUpdate(slug, phase, status, options = {}) {
     console.error('WARNING: state.json modified in last 5s - possible concurrent access');
     console.error('Use --force to override');
     outputError('CONCURRENT_MODIFICATION', 'state.json was modified in the last 5 seconds', {
-      hint: 'Use --force to override'
+      hint: 'Use --force to override',
     });
     process.exit(1);
   }
@@ -231,7 +231,7 @@ function cmdUpdate(slug, phase, status, options = {}) {
   const now = new Date().toISOString();
   const previous = {
     current_phase: state.current_phase,
-    checkpoint_status: state.checkpoint_status
+    checkpoint_status: state.checkpoint_status,
   };
 
   // Update phase tracking
@@ -241,7 +241,7 @@ function cmdUpdate(slug, phase, status, options = {}) {
     status: resolvedStatus,
     started_at: state.phases[phase] ? state.phases[phase].started_at : now,
     agent: PHASE_AGENTS[phase] || null,
-    ...(resolvedStatus === 'completed' ? { completed_at: now } : {})
+    ...(resolvedStatus === 'completed' ? { completed_at: now } : {}),
   };
 
   state.current_phase = phase;
@@ -268,8 +268,8 @@ function cmdUpdate(slug, phase, status, options = {}) {
     current: {
       current_phase: phase,
       checkpoint_status: resolvedStatus,
-      agent: PHASE_AGENTS[phase] || null
-    }
+      agent: PHASE_AGENTS[phase] || null,
+    },
   });
 }
 
@@ -280,7 +280,7 @@ function cmdGet(slug) {
   const resolvedSlug = resolveSlug(slug);
   if (!resolvedSlug) {
     outputError('NO_ACTIVE_SQUAD', 'No slug provided and no .active-squad file found', {
-      hint: 'Run: node squad-state-manager.cjs init <slug>'
+      hint: 'Run: node squad-state-manager.cjs init <slug>',
     });
     process.exit(1);
   }
@@ -293,7 +293,7 @@ function cmdGet(slug) {
 
   if (state.__corrupted) {
     outputError('CORRUPTED_STATE', `state.json for ${resolvedSlug} is corrupted (invalid JSON)`, {
-      path: getStatePath(resolvedSlug)
+      path: getStatePath(resolvedSlug),
     });
     process.exit(1);
   }
@@ -337,7 +337,7 @@ function cmdList(statusFilter) {
       checkpoint_status: status,
       updated_at: state.updated_at || null,
       is_active_squad: slug === activeSquad,
-      agent_history: state.agent_history || []
+      agent_history: state.agent_history || [],
     });
   }
 
@@ -442,7 +442,7 @@ Active squad file:    squads/.active-squad`);
 
   } else {
     outputError('INVALID_COMMAND', `Unknown command: ${command}`, {
-      valid_commands: ['init', 'update', 'get', 'list']
+      valid_commands: ['init', 'update', 'get', 'list'],
     });
     process.exit(1);
   }

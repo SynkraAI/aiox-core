@@ -39,7 +39,7 @@ function parseYaml(yamlContent) {
         (match, indent, name, param, desc) => {
           const fullName = param ? `${name} ${param}` : name;
           return `${indent}- name: "${fullName}"\n${indent}  description: "${desc.replace(/"/g, '\\"')}"`;
-        }
+        },
       );
 
       // Fix pipe patterns with invalid YAML
@@ -69,7 +69,7 @@ function extractSection(content, heading) {
   // Match ## heading or ### heading
   const regex = new RegExp(
     `^#{2,3}\\s*${escapedHeading}\\s*$\\n([\\s\\S]*?)(?=^#{2,3}\\s|$)`,
-    'mi'
+    'mi',
   );
 
   const match = content.match(regex);

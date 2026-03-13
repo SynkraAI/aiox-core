@@ -22,9 +22,9 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
 
   describe('AC1: Submodule validation', () => {
     test('script checks pro/ directory exists', () => {
-      expect(scriptSource).toContain("PRO_DIR");
+      expect(scriptSource).toContain('PRO_DIR');
       expect(scriptSource).toContain("'pro'");
-      expect(scriptSource).toContain("fs.existsSync(PRO_DIR)");
+      expect(scriptSource).toContain('fs.existsSync(PRO_DIR)');
     });
 
     test('script checks pro/ is not empty (filters .git)', () => {
@@ -32,8 +32,8 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
     });
 
     test('script checks critical file pro/license/license-api.js', () => {
-      expect(scriptSource).toContain("license-api.js");
-      expect(scriptSource).toContain("fs.existsSync(CRITICAL_FILE)");
+      expect(scriptSource).toContain('license-api.js');
+      expect(scriptSource).toContain('fs.existsSync(CRITICAL_FILE)');
     });
 
     test('error message includes fix command for submodule', () => {
@@ -55,7 +55,7 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
     });
 
     test('uses npm pack --dry-run for file counting', () => {
-      expect(scriptSource).toContain("npm pack --dry-run");
+      expect(scriptSource).toContain('npm pack --dry-run');
     });
 
     test('error message includes file count on failure', () => {

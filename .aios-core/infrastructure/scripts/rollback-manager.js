@@ -92,7 +92,7 @@ class RollbackManager {
           this.rootPath,
           CONFIG.storiesBasePath,
           this.storyId,
-          CONFIG.defaultRecoveryDir
+          CONFIG.defaultRecoveryDir,
         );
       }
     }
@@ -126,7 +126,7 @@ class RollbackManager {
         for (const epicDir of epicDirs) {
           searchPaths.push(
             path.join(storiesDir, epicDir, this.storyId),
-            path.join(storiesDir, epicDir, this.storyId.toLowerCase())
+            path.join(storiesDir, epicDir, this.storyId.toLowerCase()),
           );
         }
       } catch {
@@ -328,7 +328,7 @@ class RollbackManager {
     // Check if already at the checkpoint
     if (currentCommit === checkpoint.lastGood) {
       console.log(
-        `Already at checkpoint ${checkpoint.lastGood.substring(0, 7)} for subtask ${subtaskId}`
+        `Already at checkpoint ${checkpoint.lastGood.substring(0, 7)} for subtask ${subtaskId}`,
       );
       result.success = true;
       result.message = 'Already at checkpoint';
@@ -346,7 +346,7 @@ class RollbackManager {
     console.log(`Reason: ${reason}`);
 
     if (checkpoint.files && checkpoint.files.length > 0) {
-      console.log(`\nFiles that may be affected:`);
+      console.log('\nFiles that may be affected:');
       for (const file of checkpoint.files) {
         console.log(`  - ${file}`);
       }
@@ -640,7 +640,7 @@ Acceptance Criteria Coverage:
             console.log(`\n[${entry.timestamp}] ${status}`);
             console.log(`  Subtask: ${entry.subtaskId}`);
             console.log(
-              `  From: ${entry.from?.substring(0, 7) || 'N/A'} -> To: ${entry.to?.substring(0, 7) || 'N/A'}`
+              `  From: ${entry.from?.substring(0, 7) || 'N/A'} -> To: ${entry.to?.substring(0, 7) || 'N/A'}`,
             );
             console.log(`  Reason: ${entry.reason}`);
             if (entry.filesAffected && entry.filesAffected.length > 0) {

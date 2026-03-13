@@ -21,7 +21,7 @@ async function execute(args) {
       console.log(JSON.stringify({
         project: session.project,
         status: session.status,
-        metadata: session.metadata
+        metadata: session.metadata,
       }, null, 2));
     } else {
       // Formatted output

@@ -38,20 +38,20 @@ const DEFAULT_SESSION = {
   project: {
     type: 'unknown',
     name: '',
-    emoji: '📦'
+    emoji: '📦',
   },
   status: {
     phase: '',
     progress: null,
     currentTask: '',
-    emoji: ''
+    emoji: '',
   },
   metadata: {
     startedAt: null,
     lastUpdatedAt: null,
     activeAgent: null,
-    story: null
-  }
+    story: null,
+  },
 };
 
 /**
@@ -111,8 +111,8 @@ class SessionStateManager extends EventEmitter {
       metadata: {
         ...DEFAULT_SESSION.metadata,
         startedAt: now,
-        lastUpdatedAt: now
-      }
+        lastUpdatedAt: now,
+      },
     };
   }
 
@@ -191,9 +191,9 @@ class SessionStateManager extends EventEmitter {
       metadata: {
         ...current.metadata,
         ...(updates.metadata || {}),
-        lastUpdatedAt: new Date().toISOString()
+        lastUpdatedAt: new Date().toISOString(),
       },
-      pid: process.pid
+      pid: process.pid,
     };
 
     // Write to file
@@ -257,7 +257,7 @@ class SessionStateManager extends EventEmitter {
       await fs.promises.writeFile(
         archivePath,
         JSON.stringify(session, null, 2),
-        'utf8'
+        'utf8',
       );
 
       // Emit event
@@ -276,7 +276,7 @@ class SessionStateManager extends EventEmitter {
   async gc(maxAgeDays = 30) {
     const results = {
       staleSessionsRemoved: 0,
-      archivedSessionsRemoved: 0
+      archivedSessionsRemoved: 0,
     };
 
     try {
@@ -339,7 +339,7 @@ class SessionStateManager extends EventEmitter {
       await fs.promises.writeFile(
         tempPath,
         JSON.stringify(session, null, 2),
-        'utf8'
+        'utf8',
       );
 
       // Atomic rename (on POSIX systems)
@@ -353,7 +353,7 @@ class SessionStateManager extends EventEmitter {
           await fs.promises.writeFile(
             this.sessionPath,
             JSON.stringify(session, null, 2),
-            'utf8'
+            'utf8',
           );
         } else {
           throw error;

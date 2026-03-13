@@ -64,7 +64,7 @@ class RollbackHandler {
           type: 'confirm',
           name: 'confirm',
           message: 'Do you want to rollback this transaction?',
-          default: true
+          default: true,
         }]);
         
         if (!confirm) {
@@ -79,8 +79,8 @@ class RollbackHandler {
       const rollbackResult = await this.transactionManager.rollbackTransaction(
         transaction.id,
         {
-          continueOnError: options.continueOnError !== false
-        }
+          continueOnError: options.continueOnError !== false,
+        },
       );
       
       // Display results
@@ -88,14 +88,14 @@ class RollbackHandler {
       
       return {
         success: rollbackResult.failed.length === 0,
-        result: rollbackResult
+        result: rollbackResult,
       };
       
     } catch (error) {
       console.error(chalk.red(`\n❌ Rollback failed: ${error.message}`));
       return {
         success: false,
-        error: error.message
+        error: error.message,
       };
     }
   }
@@ -154,7 +154,7 @@ class RollbackHandler {
       
       // Filter operations
       const selectedOps = transaction.operations.filter(op => 
-        operationIds.includes(op.id)
+        operationIds.includes(op.id),
       );
       
       if (selectedOps.length === 0) {
@@ -169,14 +169,14 @@ class RollbackHandler {
         description: `Selective rollback of ${transactionId}`,
         metadata: {
           originalTransaction: transactionId,
-          selectedOperations: operationIds
-        }
+          selectedOperations: operationIds,
+        },
       });
       
       const results = {
         successful: [],
         failed: [],
-        warnings: []
+        warnings: [],
       };
       
       // Rollback selected operations
@@ -186,7 +186,7 @@ class RollbackHandler {
         } catch (error) {
           results.failed.push({
             operation: op.id,
-            error: error.message
+            error: error.message,
           });
         }
       }
@@ -198,14 +198,14 @@ class RollbackHandler {
       
       return {
         success: results.failed.length === 0,
-        result: results
+        result: results,
       };
       
     } catch (error) {
       console.error(chalk.red(`Selective rollback failed: ${error.message}`));
       return {
         success: false,
-        error: error.message
+        error: error.message,
       };
     }
   }
@@ -257,7 +257,7 @@ class RollbackHandler {
           path: backupFilePath,
           componentType,
           componentName,
-          timestamp
+          timestamp,
         });
       }
       
@@ -303,7 +303,7 @@ class RollbackHandler {
     const validation = await this.modificationValidator.validateModification(
       componentType,
       originalContent,
-      modifiedContent
+      modifiedContent,
     );
     
     if (!validation.valid) {
@@ -355,12 +355,12 @@ class RollbackHandler {
           componentName,
           backupPath,
           targetPath,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         });
         
         return {
           success: true,
-          message: `Successfully rolled back ${componentType}: ${componentName}`
+          message: `Successfully rolled back ${componentType}: ${componentName}`,
         };
       } else {
         throw new Error('Restoration failed');
@@ -368,7 +368,7 @@ class RollbackHandler {
     } catch (error) {
       return {
         success: false,
-        error: error.message
+        error: error.message,
       };
     }
   }
@@ -395,7 +395,7 @@ class RollbackHandler {
             path: path.join(typeBackupPath, file),
             timestamp: new Date(timestamp),
             componentName,
-            componentType
+            componentType,
           };
         })
         .sort((a, b) => b.timestamp - a.timestamp);
@@ -465,7 +465,7 @@ class RollbackHandler {
       metadata_update: '📊',
       component_created: '📦',
       backup_created: '💾',
-      modification_rollback: '⏪'
+      modification_rollback: '⏪',
     };
     
     return icons[type] || '•';

@@ -46,7 +46,7 @@ class ContextTracker {
         '.aios-core',
         'core',
         'session',
-        'project-types.yaml'
+        'project-types.yaml',
       );
 
       const data = fs.readFileSync(configPath, 'utf8');
@@ -71,7 +71,7 @@ class ContextTracker {
         app: { emoji: '⚡', patterns: ['apps/', 'src/app/', 'pages/'] },
         tool: { emoji: '🛠️', patterns: ['tools/', 'cli/'] },
         'design-system': { emoji: '🎨', patterns: ['design-system/', 'components/'] },
-        project: { emoji: '📦', patterns: [] } // Fallback
+        project: { emoji: '📦', patterns: [] }, // Fallback
       },
       phases: {
         research: { emoji: '🔬', keywords: ['research', 'analysis', 'investigation'] },
@@ -80,8 +80,8 @@ class ContextTracker {
         validation: { emoji: '✅', keywords: ['validate', 'verify', 'check'] },
         testing: { emoji: '🧪', keywords: ['test', 'spec', 'coverage'] },
         deployment: { emoji: '🚀', keywords: ['deploy', 'release', 'publish'] },
-        maintenance: { emoji: '🔧', keywords: ['refactor', 'cleanup', 'fix'] }
-      }
+        maintenance: { emoji: '🔧', keywords: ['refactor', 'cleanup', 'fix'] },
+      },
     };
   }
 
@@ -114,7 +114,7 @@ class ContextTracker {
         return {
           type,
           emoji: typeConfig.emoji || '📦',
-          confidence
+          confidence,
         };
       }
     }
@@ -123,7 +123,7 @@ class ContextTracker {
     return {
       type: 'project',
       emoji: projectTypes.project?.emoji || '📦',
-      confidence: 0
+      confidence: 0,
     };
   }
 
@@ -147,7 +147,7 @@ class ContextTracker {
           return {
             phase,
             emoji: phaseConfig.emoji || '',
-            confidence: 0.8
+            confidence: 0.8,
           };
         }
       }
@@ -165,7 +165,7 @@ class ContextTracker {
           return {
             phase,
             emoji: phaseConfig.emoji || '',
-            confidence: 0.6
+            confidence: 0.6,
           };
         }
       }
@@ -177,7 +177,7 @@ class ContextTracker {
       return {
         phase: 'testing',
         emoji: phases.testing?.emoji || '🧪',
-        confidence: 0.4
+        confidence: 0.4,
       };
     }
 
@@ -185,7 +185,7 @@ class ContextTracker {
     return {
       phase: '',
       emoji: '',
-      confidence: 0
+      confidence: 0,
     };
   }
 
@@ -206,7 +206,7 @@ class ContextTracker {
           completed: 0,
           total: 0,
           percentage: 0,
-          progress: null
+          progress: null,
         };
       }
 
@@ -225,7 +225,7 @@ class ContextTracker {
         completed,
         total,
         percentage,
-        progress: total > 0 ? `${completed}/${total}` : null
+        progress: total > 0 ? `${completed}/${total}` : null,
       };
     } catch (error) {
       // Return zero progress on error
@@ -233,7 +233,7 @@ class ContextTracker {
         completed: 0,
         total: 0,
         percentage: 0,
-        progress: null
+        progress: null,
       };
     }
   }
@@ -299,7 +299,7 @@ class ContextTracker {
       const STATUS_PRIORITY = {
         'InProgress': 3,
         'Ready': 2,
-        'Draft': 1
+        'Draft': 1,
       };
 
       // List .md files, sorted by mtime descending, limit to 20
@@ -355,20 +355,20 @@ class ContextTracker {
         return {
           branch: null,
           hasChanges: false,
-          emoji: ''
+          emoji: '',
         };
       }
 
       // Get current branch
       const branch = execSync('git rev-parse --abbrev-ref HEAD', {
         cwd: this.cwd,
-        encoding: 'utf8'
+        encoding: 'utf8',
       }).trim();
 
       // Check for uncommitted changes
       const status = execSync('git status --porcelain', {
         cwd: this.cwd,
-        encoding: 'utf8'
+        encoding: 'utf8',
       }).trim();
 
       const hasChanges = status.length > 0;
@@ -376,14 +376,14 @@ class ContextTracker {
       return {
         branch,
         hasChanges,
-        emoji: hasChanges ? '🟡' : '🟢'
+        emoji: hasChanges ? '🟡' : '🟢',
       };
     } catch (error) {
       // Not a git repo or git command failed
       return {
         branch: null,
         hasChanges: false,
-        emoji: ''
+        emoji: '',
       };
     }
   }
@@ -421,26 +421,26 @@ class ContextTracker {
       this.inferPhase(command),
       this.extractProgress(),
       this.getGitState(),
-      this.detectProjectName()
+      this.detectProjectName(),
     ]);
 
     return {
       project: {
         type: projectType.type,
         name: projectName,
-        emoji: projectType.emoji
+        emoji: projectType.emoji,
       },
       status: {
         phase: phase.phase,
         progress: progress.progress,
         currentTask: '',
-        emoji: phase.emoji
+        emoji: phase.emoji,
       },
       git: gitState,
       confidence: {
         projectType: projectType.confidence,
-        phase: phase.confidence
-      }
+        phase: phase.confidence,
+      },
     };
   }
 }

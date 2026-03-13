@@ -92,7 +92,7 @@ Exit Codes:
   0 - Validation passed
   1 - Validation failed (missing/corrupted files)
   2 - Validation error (could not complete)
-`
+`,
     )
     .action(async (options) => {
       await runValidation(options);
@@ -121,8 +121,8 @@ async function runValidation(options) {
             location: '.aios-core',
           },
           null,
-          2
-        )
+          2,
+        ),
       );
     } else {
       console.error(chalk.red('\nError: AIOS-Core not found in current directory'));
@@ -147,8 +147,8 @@ async function runValidation(options) {
             hint: 'This may indicate a corrupted installation',
           },
           null,
-          2
-        )
+          2,
+        ),
       );
     } else {
       console.error(chalk.red(`\nError: ${errorMsg}`));
@@ -173,8 +173,8 @@ async function runValidation(options) {
               path: sourceDir,
             },
             null,
-            2
-          )
+            2,
+          ),
         );
       } else {
         console.error(chalk.red('\nError: Invalid source directory'));
@@ -218,10 +218,10 @@ async function runValidation(options) {
     onProgress: options.json
       ? () => {}
       : (current, total, file) => {
-          if (spinner) {
-            spinner.text = `Validating ${current}/${total}: ${truncatePath(file, 40)}`;
-          }
-        },
+        if (spinner) {
+          spinner.text = `Validating ${current}/${total}: ${truncatePath(file, 40)}`;
+        }
+      },
   });
 
   try {
@@ -242,7 +242,7 @@ async function runValidation(options) {
         if (!options.json) {
           console.error(chalk.yellow('\nWarning: Cannot repair - source directory not found'));
           console.error(
-            chalk.dim('Specify source with --source <dir> or ensure package is installed')
+            chalk.dim('Specify source with --source <dir> or ensure package is installed'),
           );
         }
         repairResult = {
@@ -274,15 +274,15 @@ async function runValidation(options) {
         issueCount: report.issues?.length ?? 0,
         repair: repairAttempted
           ? {
-              attempted: true,
-              success: repairResult?.success ?? false,
-              error: repairResult?.error ?? null,
-              dryRun: options.dryRun === true,
-              repairedCount: repairResult?.repaired?.length ?? 0,
-              failedCount: repairResult?.failed?.length ?? 0,
-              repaired: repairResult?.repaired ?? [],
-              failed: repairResult?.failed ?? [],
-            }
+            attempted: true,
+            success: repairResult?.success ?? false,
+            error: repairResult?.error ?? null,
+            dryRun: options.dryRun === true,
+            repairedCount: repairResult?.repaired?.length ?? 0,
+            failedCount: repairResult?.failed?.length ?? 0,
+            repaired: repairResult?.repaired ?? [],
+            failed: repairResult?.failed ?? [],
+          }
           : { attempted: false },
       };
       console.log(JSON.stringify(output, null, 2));
@@ -327,8 +327,8 @@ async function runValidation(options) {
             stack: options.verbose ? error.stack : undefined,
           },
           null,
-          2
-        )
+          2,
+        ),
       );
     } else {
       console.error(chalk.red(`\nError: ${error.message}`));
@@ -371,11 +371,11 @@ async function runRepair(validator, options, spinner) {
     onProgress: options.json
       ? () => {}
       : (current, total, file) => {
-          if (spinner) {
-            const action = dryRun ? 'Checking' : 'Repairing';
-            spinner.text = `${action} ${current}/${total}: ${truncatePath(file, 40)}`;
-          }
-        },
+        if (spinner) {
+          const action = dryRun ? 'Checking' : 'Repairing';
+          spinner.text = `${action} ${current}/${total}: ${truncatePath(file, 40)}`;
+        }
+      },
   });
 
   if (spinner) {

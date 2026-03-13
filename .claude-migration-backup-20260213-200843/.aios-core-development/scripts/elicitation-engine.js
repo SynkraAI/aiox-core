@@ -30,14 +30,14 @@ class ElicitationEngine {
       startTime: new Date().toISOString(),
       answers: {},
       currentStep: 0,
-      options
+      options,
     };
     
     if (options.saveSession) {
       this.sessionFile = path.join(
         process.cwd(), 
         '.aios-sessions', 
-        `${componentType}-${Date.now()}.json`
+        `${componentType}-${Date.now()}.json`,
       );
       await fs.ensureDir(path.dirname(this.sessionFile));
     }
@@ -104,7 +104,7 @@ class ElicitationEngine {
         type: 'confirm',
         name: '_showHelp',
         message: 'Would you like to see help for this step?',
-        default: false
+        default: false,
       });
     }
     
@@ -274,7 +274,7 @@ class ElicitationEngine {
     
     return {
       valid: errors.length === 0,
-      errors
+      errors,
     };
   }
 
@@ -353,7 +353,7 @@ class ElicitationEngine {
       completedSteps: this.sessionData.currentStep + 1,
       answers: Object.keys(this.sessionData.answers).length,
       duration: this.sessionData.startTime ? 
-        Date.now() - new Date(this.sessionData.startTime).getTime() : 0
+        Date.now() - new Date(this.sessionData.startTime).getTime() : 0,
     };
   }
 

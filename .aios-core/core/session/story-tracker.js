@@ -40,17 +40,17 @@ class StoryTracker {
     const stateManager = new SessionStateManager(this.projectRoot);
     await stateManager.update({
       status: {
-        progress: `${progress.completed}/${progress.total}`
+        progress: `${progress.completed}/${progress.total}`,
       },
       metadata: {
         story: storyId,
-        storyPath: storyPath
-      }
+        storyPath: storyPath,
+      },
     });
 
     return {
       ...progress,
-      percentage: Math.round((progress.completed / progress.total) * 100)
+      percentage: Math.round((progress.completed / progress.total) * 100),
     };
   }
 
@@ -88,7 +88,7 @@ class StoryTracker {
     const patterns = [
       /Story ID:?\s*([A-Z0-9-]+)/i,
       /# Story\s+([A-Z0-9-]+)/i,
-      /story[-_]([A-Z0-9-]+)/i
+      /story[-_]([A-Z0-9-]+)/i,
     ];
 
     for (const pattern of patterns) {
@@ -134,7 +134,7 @@ class StoryTracker {
 
       // Find most recently modified
       const stats = await Promise.all(
-        files.map(async f => ({ path: f, mtime: (await fs.stat(f)).mtime }))
+        files.map(async f => ({ path: f, mtime: (await fs.stat(f)).mtime })),
       );
 
       stats.sort((a, b) => b.mtime - a.mtime);

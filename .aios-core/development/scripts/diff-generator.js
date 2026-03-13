@@ -12,7 +12,7 @@ class DiffGenerator {
       removed: chalk.red,
       unchanged: chalk.gray,
       header: chalk.cyan,
-      lineNumber: chalk.yellow
+      lineNumber: chalk.yellow,
     };
   }
 
@@ -28,7 +28,7 @@ class DiffGenerator {
     const {
       contextLines = 3,
       showLineNumbers = true,
-      colorize = true
+      colorize = true,
     } = options;
 
     const patch = diffLib.createPatch(
@@ -37,7 +37,7 @@ class DiffGenerator {
       modifiedContent,
       'Current Version',
       'Modified Version',
-      { context: contextLines }
+      { context: contextLines },
     );
 
     if (!colorize) {
@@ -64,8 +64,8 @@ class DiffGenerator {
       summary: {
         added: [],
         removed: [],
-        modified: []
-      }
+        modified: [],
+      },
     };
 
     // Compare top-level keys
@@ -83,7 +83,7 @@ class DiffGenerator {
           status: 'modified',
           original: original[key],
           modified: modified[key],
-          changes: this.compareValues(original[key], modified[key])
+          changes: this.compareValues(original[key], modified[key]),
         };
         diff.summary.modified.push(key);
       }
@@ -107,21 +107,21 @@ class DiffGenerator {
     const yamlDiff = this.generateYamlDiff(
       originalParts.yaml,
       modifiedParts.yaml,
-      agentName
+      agentName,
     );
 
     const markdownDiff = this.generateUnifiedDiff(
       originalParts.markdown,
       modifiedParts.markdown,
       `${agentName}.md`,
-      { contextLines: 5 }
+      { contextLines: 5 },
     );
 
     return {
       agent: agentName,
       yamlChanges: yamlDiff,
       markdownChanges: markdownDiff,
-      impactSummary: this.generateImpactSummary(yamlDiff)
+      impactSummary: this.generateImpactSummary(yamlDiff),
     };
   }
 
@@ -177,7 +177,7 @@ class DiffGenerator {
 
     return {
       yaml: match[1],
-      markdown: match[2]
+      markdown: match[2],
     };
   }
 
@@ -211,7 +211,7 @@ class DiffGenerator {
             type: 'modified',
             key,
             original: original[key],
-            modified: modified[key]
+            modified: modified[key],
           });
         }
       }
@@ -219,7 +219,7 @@ class DiffGenerator {
       changes.push({
         type: 'value_changed',
         original,
-        modified
+        modified,
       });
     }
 
@@ -319,7 +319,7 @@ class DiffGenerator {
     output.push(
       this.colors.header('Original'.padEnd(columnWidth)) +
       ' '.repeat(gutter) +
-      this.colors.header('Modified'.padEnd(columnWidth))
+      this.colors.header('Modified'.padEnd(columnWidth)),
     );
     output.push(this.colors.header('─'.repeat(width)));
 

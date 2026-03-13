@@ -377,7 +377,7 @@ class ProjectStatusLoader {
         ['log', `-${this.maxRecentCommits}`, '--oneline', '--no-decorate'],
         {
           cwd: this.rootPath,
-        }
+        },
       );
 
       if (!stdout) return [];
@@ -460,7 +460,7 @@ class ProjectStatusLoader {
 
         // Check for InProgress status
         const statusMatch = content.match(
-          /\*\*Status:\*\*\s*(InProgress|In Progress|🔄\s*InProgress|🔄\s*In Progress)/i
+          /\*\*Status:\*\*\s*(InProgress|In Progress|🔄\s*InProgress|🔄\s*In Progress)/i,
         );
 
         if (statusMatch) {
@@ -789,10 +789,10 @@ class ProjectStatusLoader {
     if (status.worktrees && Object.keys(status.worktrees).length > 0) {
       const worktreeCount = Object.keys(status.worktrees).length;
       const activeCount = Object.values(status.worktrees).filter(
-        (w) => w.status === 'active'
+        (w) => w.status === 'active',
       ).length;
       const withChanges = Object.values(status.worktrees).filter(
-        (w) => w.uncommittedChanges > 0
+        (w) => w.uncommittedChanges > 0,
       ).length;
 
       let worktreeInfo = `${activeCount}/${worktreeCount} active`;

@@ -74,7 +74,7 @@ class ApproachManager {
         this.rootPath,
         'docs/stories',
         this.storyId,
-        CONFIG.recoveryDir
+        CONFIG.recoveryDir,
       );
     }
 
@@ -174,13 +174,13 @@ class ApproachManager {
             for (const [key, value] of Object.entries(item)) {
               rendered = rendered.replace(
                 new RegExp(`\\{\\{this\\.${key}\\}\\}`, 'g'),
-                String(value)
+                String(value),
               );
             }
             return rendered.trim();
           })
           .join('\n');
-      }
+      },
     );
 
     return result;
@@ -568,10 +568,10 @@ class ApproachManager {
     // Generate recommendations
     if (failedApproaches.length >= 3) {
       suggestions.recommendedActions.push(
-        'Consider fundamentally different approach - multiple attempts have failed'
+        'Consider fundamentally different approach - multiple attempts have failed',
       );
       suggestions.recommendedActions.push(
-        'Review story requirements for possible misunderstanding'
+        'Review story requirements for possible misunderstanding',
       );
       suggestions.recommendedActions.push('Check if dependencies are blocking progress');
     } else if (failedApproaches.length >= 2) {
@@ -840,7 +840,7 @@ Acceptance Criteria Coverage:
           console.log(JSON.stringify(result, null, 2));
         } else {
           console.log(
-            `Started approach for subtask ${subtaskId} (attempt #${result.attemptNumber})`
+            `Started approach for subtask ${subtaskId} (attempt #${result.attemptNumber})`,
           );
           console.log(`Current approach file: ${manager.currentApproachPath}`);
         }
@@ -932,12 +932,12 @@ Acceptance Criteria Coverage:
           console.log(`  Total attempts: ${result.totalAttempts}`);
           console.log(`  Failed: ${result.failedAttempts}`);
           console.log(`  Successful: ${result.successfulAttempts}`);
-          console.log(`\n  Recommendations:`);
+          console.log('\n  Recommendations:');
           for (const action of result.recommendedActions) {
             console.log(`    - ${action}`);
           }
           if (result.avoidPatterns.length > 0) {
-            console.log(`\n  Patterns to avoid:`);
+            console.log('\n  Patterns to avoid:');
             for (const pattern of result.avoidPatterns) {
               console.log(`    - ${pattern.pattern} (${pattern.reason})`);
             }
@@ -957,7 +957,7 @@ Acceptance Criteria Coverage:
             const successes = subtask.approaches.filter((a) => a.success === true).length;
             const failures = subtask.approaches.filter((a) => a.success === false).length;
             console.log(
-              `  ${subtask.subtaskId}: ${subtask.approaches.length} attempts (${successes} success, ${failures} failed)`
+              `  ${subtask.subtaskId}: ${subtask.approaches.length} attempts (${successes} success, ${failures} failed)`,
             );
           }
         }

@@ -27,7 +27,7 @@ class PRDGenerator {
   constructor() {
     this.rl = readline.createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
     });
     this.data = {};
   }
@@ -140,7 +140,7 @@ class PRDGenerator {
       return {
         mode,
         data: this.data,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
 
     } catch (error) {

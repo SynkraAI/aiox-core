@@ -43,7 +43,7 @@ class TransactionManager {
         operations: [],
         backups: [],
         metadata: options.metadata || {},
-        rollbackOnError: options.rollbackOnError !== false
+        rollbackOnError: options.rollbackOnError !== false,
       };
       
       // Save initial transaction state
@@ -83,7 +83,7 @@ class TransactionManager {
         path: operation.path,
         previousState: null,
         newState: null,
-        metadata: operation.metadata || {}
+        metadata: operation.metadata || {},
       };
       
       // Backup current state if needed
@@ -138,7 +138,7 @@ class TransactionManager {
       return {
         transactionId,
         operations: transaction.operations.length,
-        duration: transaction.duration
+        duration: transaction.duration,
       };
       
     } catch (error) {
@@ -168,7 +168,7 @@ class TransactionManager {
         transactionId,
         successful: [],
         failed: [],
-        warnings: []
+        warnings: [],
       };
       
       // Process operations in reverse order
@@ -180,7 +180,7 @@ class TransactionManager {
         } catch (error) {
           rollbackResults.failed.push({
             operation: operation.id,
-            error: error.message
+            error: error.message,
           });
           
           if (!options.continueOnError) {
@@ -199,7 +199,7 @@ class TransactionManager {
       // Remove from active transactions
       this.activeTransactions.delete(transactionId);
       
-      console.log(chalk.green(`✅ Rollback completed`));
+      console.log(chalk.green('✅ Rollback completed'));
       console.log(chalk.gray(`   Successful: ${rollbackResults.successful.length}`));
       console.log(chalk.gray(`   Failed: ${rollbackResults.failed.length}`));
       console.log(chalk.gray(`   Warnings: ${rollbackResults.warnings.length}`));
@@ -227,13 +227,13 @@ class TransactionManager {
           results.successful.push({
             operation: operation.id,
             action: 'deleted',
-            path: operation.path
+            path: operation.path,
           });
         } else {
           results.warnings.push({
             operation: operation.id,
             warning: 'File already removed',
-            path: operation.path
+            path: operation.path,
           });
         }
         break;
@@ -245,13 +245,13 @@ class TransactionManager {
           results.successful.push({
             operation: operation.id,
             action: 'restored',
-            path: operation.path
+            path: operation.path,
           });
         } else {
           results.warnings.push({
             operation: operation.id,
             warning: 'No backup available',
-            path: operation.path
+            path: operation.path,
           });
         }
         break;
@@ -263,13 +263,13 @@ class TransactionManager {
           results.successful.push({
             operation: operation.id,
             action: 'restored',
-            path: operation.path
+            path: operation.path,
           });
         } else {
           results.warnings.push({
             operation: operation.id,
             warning: 'No backup available',
-            path: operation.path
+            path: operation.path,
           });
         }
         break;
@@ -287,7 +287,7 @@ class TransactionManager {
       default:
         results.warnings.push({
           operation: operation.id,
-          warning: `Unknown operation type: ${operation.type}`
+          warning: `Unknown operation type: ${operation.type}`,
         });
     }
   }
@@ -319,7 +319,7 @@ class TransactionManager {
       }
       
       transactions.sort((a, b) => 
-        new Date(b.startTime) - new Date(a.startTime)
+        new Date(b.startTime) - new Date(a.startTime),
       );
       
       return transactions[0];
@@ -356,13 +356,13 @@ class TransactionManager {
           startTime: transaction.startTime,
           endTime: transaction.endTime,
           status: transaction.status,
-          operations: transaction.operations.length
+          operations: transaction.operations.length,
         });
       }
       
       // Sort by start time (newest first)
       transactions.sort((a, b) => 
-        new Date(b.startTime) - new Date(a.startTime)
+        new Date(b.startTime) - new Date(a.startTime),
       );
       
       return transactions.slice(0, limit);
@@ -439,7 +439,7 @@ class TransactionManager {
         path: filePath,
         content: content,
         hash: hash,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
       
       // Save backup
@@ -497,19 +497,19 @@ class TransactionManager {
         results.successful.push({
           operation: operation.id,
           action: 'manifest_restored',
-          path: manifestPath
+          path: manifestPath,
         });
       } else {
         results.warnings.push({
           operation: operation.id,
-          warning: 'No manifest backup available'
+          warning: 'No manifest backup available',
         });
       }
       
     } catch (error) {
       results.failed.push({
         operation: operation.id,
-        error: `Manifest rollback failed: ${error.message}`
+        error: `Manifest rollback failed: ${error.message}`,
       });
     }
   }
@@ -525,14 +525,14 @@ class TransactionManager {
         // This would need integration with ComponentMetadata
         results.warnings.push({
           operation: operation.id,
-          warning: 'Metadata rollback not fully implemented'
+          warning: 'Metadata rollback not fully implemented',
         });
       }
       
     } catch (error) {
       results.failed.push({
         operation: operation.id,
-        error: `Metadata rollback failed: ${error.message}`
+        error: `Metadata rollback failed: ${error.message}`,
       });
     }
   }

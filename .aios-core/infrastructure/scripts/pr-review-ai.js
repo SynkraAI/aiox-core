@@ -526,9 +526,9 @@ class AIReviewer {
     const findingsSummary =
       staticFindings.length > 0
         ? `\n\n## Static Analysis Findings\n${staticFindings
-            .slice(0, 20)
-            .map((f) => `- [${f.severity}] ${f.file}:${f.line || 'N/A'} - ${f.message}`)
-            .join('\n')}`
+          .slice(0, 20)
+          .map((f) => `- [${f.severity}] ${f.file}:${f.line || 'N/A'} - ${f.message}`)
+          .join('\n')}`
         : '';
 
     return `You are an expert code reviewer. Review this Pull Request and provide constructive feedback.
@@ -583,7 +583,7 @@ Respond with a JSON object:
             encoding: 'utf8',
             maxBuffer: 10 * 1024 * 1024,
             timeout: 180000,
-          }
+          },
         );
         resolve(result);
       } catch (error) {
@@ -711,7 +711,7 @@ class PRReviewAI extends EventEmitter {
         {
           cwd: this.rootPath,
           encoding: 'utf8',
-        }
+        },
       );
       const pr = JSON.parse(prJson);
 
@@ -803,7 +803,7 @@ class PRReviewAI extends EventEmitter {
     // Stats
     parts.push(`**PR #${prData.number}**: ${prData.title}`);
     parts.push(
-      `- Files: ${prData.stats?.filesChanged || 0} | +${prData.stats?.additions || 0} / -${prData.stats?.deletions || 0}`
+      `- Files: ${prData.stats?.filesChanged || 0} | +${prData.stats?.additions || 0} / -${prData.stats?.deletions || 0}`,
     );
 
     // Verdict
@@ -855,7 +855,7 @@ class PRReviewAI extends EventEmitter {
           {
             cwd: this.rootPath,
             encoding: 'utf8',
-          }
+          },
         );
       } else if (
         review.verdict === Verdict.APPROVE &&

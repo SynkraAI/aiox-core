@@ -36,7 +36,7 @@ const TOOL_REGISTRY_FILE = path.resolve(ROOT, '.aios-core', 'data', 'tool-regist
 // --- Default Thresholds (overridden by tool-registry.yaml) ---
 const DEFAULT_THRESHOLDS = {
   promote: { minUsesPerSession: 10, minSessions: 5 },
-  demote: { maxUsesPerNSessions: 1, sessionWindow: 5 }
+  demote: { maxUsesPerNSessions: 1, sessionWindow: 5 },
 };
 
 // --- Load Thresholds from tool-registry.yaml (AC 15) ---
@@ -49,12 +49,12 @@ function loadThresholds() {
       return {
         promote: {
           minUsesPerSession: t.promote?.minUsesPerSession ?? DEFAULT_THRESHOLDS.promote.minUsesPerSession,
-          minSessions: t.promote?.minSessions ?? DEFAULT_THRESHOLDS.promote.minSessions
+          minSessions: t.promote?.minSessions ?? DEFAULT_THRESHOLDS.promote.minSessions,
         },
         demote: {
           maxUsesPerNSessions: t.demote?.maxUsesPerNSessions ?? DEFAULT_THRESHOLDS.demote.maxUsesPerNSessions,
-          sessionWindow: t.demote?.sessionWindow ?? DEFAULT_THRESHOLDS.demote.sessionWindow
-        }
+          sessionWindow: t.demote?.sessionWindow ?? DEFAULT_THRESHOLDS.demote.sessionWindow,
+        },
       };
     }
   } catch {
@@ -116,7 +116,7 @@ function aggregateUsage(sessions) {
           total_token_cost_input: 0,
           total_token_cost_output: 0,
           sessions_used: 0,
-          invocations_per_session: []
+          invocations_per_session: [],
         };
       }
       const stat = toolStats[event.tool_name];
@@ -205,7 +205,7 @@ function compareBaseline(baseline, usageData, registry) {
       baseline_overhead_pct: baselineOverheadPct,
       post_optimization_schema_overhead: postOptSchemaOverhead,
       post_optimization_avg_usage_per_session: Math.round(avgPostOptPerSession),
-      sessions_analyzed: sessionCount
+      sessions_analyzed: sessionCount,
     };
   }
 
@@ -237,7 +237,7 @@ function compareBaseline(baseline, usageData, registry) {
     dynamic_usage: {
       avg_invocation_tokens_per_session: Math.round(avgPostOptPerSession),
       total_invocation_tokens: postOptTotal,
-      sessions_analyzed: sessionCount
+      sessions_analyzed: sessionCount,
     },
     workflow_comparison: workflowComparison,
     per_tool_breakdown: Object.values(toolStats).map(t => ({
@@ -245,8 +245,8 @@ function compareBaseline(baseline, usageData, registry) {
       total_invocations: t.total_invocations,
       avg_invocations_per_session: Math.round(t.avg_invocations_per_session * 10) / 10,
       total_tokens: t.total_token_cost_input + t.total_token_cost_output,
-      avg_tokens_per_session: Math.round(t.avg_tokens_per_session)
-    })).sort((a, b) => b.total_tokens - a.total_tokens)
+      avg_tokens_per_session: Math.round(t.avg_tokens_per_session),
+    })).sort((a, b) => b.total_tokens - a.total_tokens),
   };
 }
 
@@ -278,9 +278,9 @@ function generateRecommendations(usageData, registry, thresholds) {
           sessions_used: stat.sessions_used,
           total_sessions: sessionCount,
           threshold_invocations: thresholds.promote.minUsesPerSession,
-          threshold_sessions: thresholds.promote.minSessions
+          threshold_sessions: thresholds.promote.minSessions,
         },
-        rationale: `Tool used ${Math.round(stat.avg_invocations_per_session * 10) / 10} times/session across ${stat.sessions_used} sessions (threshold: >${thresholds.promote.minUsesPerSession}/session, ${thresholds.promote.minSessions}+ sessions)`
+        rationale: `Tool used ${Math.round(stat.avg_invocations_per_session * 10) / 10} times/session across ${stat.sessions_used} sessions (threshold: >${thresholds.promote.minUsesPerSession}/session, ${thresholds.promote.minSessions}+ sessions)`,
       });
     }
 
@@ -307,9 +307,9 @@ function generateRecommendations(usageData, registry, thresholds) {
           sessions_used: stat.sessions_used,
           total_sessions: sessionCount,
           threshold_max_uses: thresholds.demote.maxUsesPerNSessions,
-          threshold_session_window: thresholds.demote.sessionWindow
+          threshold_session_window: thresholds.demote.sessionWindow,
         },
-        rationale: `Tool used in ${stat.sessions_used}/${sessionCount} sessions (rate: ${Math.round(usageRate * 100)}%). Threshold: <${thresholds.demote.maxUsesPerNSessions} per ${thresholds.demote.sessionWindow} sessions (${Math.round(demoteThresholdRate * 100)}%)`
+        rationale: `Tool used in ${stat.sessions_used}/${sessionCount} sessions (rate: ${Math.round(usageRate * 100)}%). Threshold: <${thresholds.demote.maxUsesPerNSessions} per ${thresholds.demote.sessionWindow} sessions (${Math.round(demoteThresholdRate * 100)}%)`,
       });
     }
   }
@@ -326,9 +326,9 @@ function generateRecommendations(usageData, registry, thresholds) {
           evidence: {
             usage_rate: 0,
             sessions_used: 0,
-            total_sessions: sessionCount
+            total_sessions: sessionCount,
           },
-          rationale: `Tool never used in ${sessionCount} analyzed sessions. Consider demotion to Tier 3 (deferred).`
+          rationale: `Tool never used in ${sessionCount} analyzed sessions. Consider demotion to Tier 3 (deferred).`,
         });
       }
     }
@@ -359,7 +359,7 @@ function generateReport(comparison, recommendations, usageData, thresholds) {
     measurement_period: {
       start: periodStart,
       end: periodEnd,
-      sessions_analyzed: sessionCount
+      sessions_analyzed: sessionCount,
     },
     baseline_comparison: comparison,
     total_tokens_saved: comparison.available ? comparison.absolute_reduction_tokens : 0,
@@ -368,7 +368,7 @@ function generateReport(comparison, recommendations, usageData, thresholds) {
     recommendations_count: recommendations.length,
     promote_count: recommendations.filter(r => r.action === 'promote').length,
     demote_count: recommendations.filter(r => r.action === 'demote').length,
-    thresholds_used: thresholds
+    thresholds_used: thresholds,
   };
 }
 
@@ -379,7 +379,7 @@ function saveRecommendations(recommendations, dryRun) {
     generated_at: new Date().toISOString(),
     story: 'TOK-5',
     recommendations_count: recommendations.length,
-    recommendations: recommendations
+    recommendations: recommendations,
   }, { lineWidth: 120, noRefs: true });
 
   if (!dryRun) {
@@ -493,5 +493,5 @@ module.exports = {
   generateRecommendations,
   generateReport,
   aggregateUsage,
-  DEFAULT_THRESHOLDS
+  DEFAULT_THRESHOLDS,
 };

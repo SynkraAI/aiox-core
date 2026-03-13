@@ -36,7 +36,7 @@ class TemplateEngine {
     
     // Restore escaped braces
     processed = processed.replace(/\{\{ESCAPED_BRACE_(LEFT|RIGHT)\}\}/g, (match, side) => 
-      side === 'LEFT' ? '{{' : '}}'
+      side === 'LEFT' ? '{{' : '}}',
     );
     
     return processed;
@@ -67,7 +67,7 @@ class TemplateEngine {
           INDEX: index,
           FIRST: index === 0,
           LAST: index === items.length - 1,
-          [loopVar.replace('_', '')]: item
+          [loopVar.replace('_', '')]: item,
         };
         
         // Process nested loops and conditionals
@@ -142,7 +142,7 @@ class TemplateEngine {
     const allPatterns = [
       this.variablePattern,
       /\{\{#IF_([^}]+)\}\}/g,
-      /\{\{#EACH_([^}]+)\}\}/g
+      /\{\{#EACH_([^}]+)\}\}/g,
     ];
     
     for (const pattern of allPatterns) {
@@ -162,7 +162,7 @@ class TemplateEngine {
     return {
       valid: missing.length === 0,
       missing,
-      found: Array.from(foundVars)
+      found: Array.from(foundVars),
     };
   }
 
@@ -204,7 +204,7 @@ class TemplateEngine {
     const variables = {
       simple: [],
       conditionals: [],
-      loops: []
+      loops: [],
     };
     
     // Extract simple variables

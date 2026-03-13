@@ -44,7 +44,7 @@ const LAYER_RULES = [
  * @returns {'L1' | 'L2' | 'L3' | 'L4'} The boundary layer
  */
 function classifyLayer(entityPath) {
-  if (typeof entityPath !== "string") return "L4";
+  if (typeof entityPath !== 'string') return 'L4';
 
   // Normalize: forward slashes, no leading ./ or /
   const normalized = entityPath

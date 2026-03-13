@@ -28,7 +28,7 @@ class ObsidianAppFiller {
   constructor() {
     this.rl = readline.createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
     });
   }
 
@@ -224,7 +224,7 @@ class ObsidianAppFiller {
         backupPath,
         prd,
         content,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
 
       // Save task data to temp file for Claude to read

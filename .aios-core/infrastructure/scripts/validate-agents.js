@@ -315,7 +315,7 @@ function validateAgentFormat(agents) {
         type: 'MISSING_AUTOCLAUDE',
         agent: id,
         message: `Missing autoClaude section in ${file} (V2 format)`,
-        suggestion: `Add autoClaude section with version: '3.0'`,
+        suggestion: 'Add autoClaude section with version: \'3.0\'',
       });
     }
 
@@ -328,7 +328,7 @@ function validateAgentFormat(agents) {
           type: 'DEPRECATED_GREETING',
           agent: id,
           message: `@${id} uses deprecated generate-greeting.js`,
-          suggestion: `Change to greeting-builder.js`,
+          suggestion: 'Change to greeting-builder.js',
         });
       }
     }

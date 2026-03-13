@@ -46,8 +46,8 @@ async function ghlApi(endpoint, method = 'GET', body = null) {
     headers: {
       'Authorization': `Bearer ${GHL_API_TOKEN}`,
       'Version': '2021-07-28',
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   };
   if (body) options.body = JSON.stringify(body);
 
@@ -74,7 +74,7 @@ async function createOrGetContact(lead) {
       lastName: lead.lastName,
       phone: lead.phone,
       source: 'WhatsApp Group Prospector',
-      tags: [TAG]
+      tags: [TAG],
     });
     return { contactId: result.contact?.id, isNew: true };
   } catch (e) {
@@ -123,7 +123,7 @@ async function createDeal(contactId, lead) {
     name: `${lead.firstName}${lead.lastName ? ' ' + lead.lastName : ''} - Mentoria 50K`,
     source: 'WhatsApp Prospector',
     status: 'open',
-    monetaryValue: 0
+    monetaryValue: 0,
   };
 
   // Try /opportunities/ first
@@ -169,7 +169,7 @@ async function main() {
       phone,
       group: group || 'MENTORIA 50K',
       type: type || 'client',
-      description: description || ''
+      description: description || '',
     });
   }
 
@@ -204,11 +204,11 @@ async function main() {
       // Step 2: Deal
       const deal = await createDeal(contactId, lead);
       if (deal.dealId && deal.endpoint === 'EXISTS') {
-        process.stdout.write(`Deal EXISTS\n`);
+        process.stdout.write('Deal EXISTS\n');
       } else if (deal.dealId) {
         process.stdout.write(`Deal CREATED (${deal.endpoint})\n`);
       } else {
-        process.stdout.write(`Contact OK, Deal FAILED\n`);
+        process.stdout.write('Contact OK, Deal FAILED\n');
       }
 
       results.push({
@@ -217,7 +217,7 @@ async function main() {
         contactId,
         dealId: deal.dealId,
         isNew,
-        status: deal.dealId ? 'success' : 'partial'
+        status: deal.dealId ? 'success' : 'partial',
       });
       ok++;
     } catch (error) {
@@ -226,7 +226,7 @@ async function main() {
         name: `${lead.firstName} ${lead.lastName}`.trim(),
         phone: lead.phone,
         status: 'error',
-        error: error.message
+        error: error.message,
       });
       errors++;
     }
@@ -237,7 +237,7 @@ async function main() {
   }
 
   const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
-  console.log(`\n=== Resultado ===`);
+  console.log('\n=== Resultado ===');
   console.log(`  OK: ${ok} | Erros: ${errors} | Total: ${leads.length}`);
   console.log(`  Tempo: ${elapsed}s\n`);
 

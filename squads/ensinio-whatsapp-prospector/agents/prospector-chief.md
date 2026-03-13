@@ -48,19 +48,23 @@ agent:
 
 command_loader:
   "*full-pipeline":
-    description: "Execute full pipeline: parse -> analyze -> write -> sheet"
+    description: "Execute full pipeline v5.0 (11 phases): parse -> sheet -> evolution -> ghl"
     requires:
       - "workflows/full-pipeline.yaml"
       - "tasks/parse-chat-export.md"
+      - "tasks/validate-parsed-data.md"
+      - "tasks/load-ensinio-kb.md"
+      - "tasks/resolve-phone-numbers.md"
       - "tasks/analyze-prospects.md"
       - "tasks/write-outreach.md"
-      - "tasks/populate-sheet.md"
-      - "tasks/validate-parsed-data.md"
+      - "tasks/validate-outreach-batch.md"
+      - "tasks/populate-sheet-v5.md"
+      - "tasks/send-via-evolution-api.md"
     optional:
+      - "tasks/sync-to-ghl-v5.md"
       - "data/ensinio-solutions-kb.md"
       - "data/scoring-criteria.md"
-      - "data/message-rules.md"
-    output_format: "google_sheets_populated + completion_report"
+    output_format: "google_sheets_populated + send_report + completion_report"
 
   "*parse":
     description: "Parse WhatsApp ZIP export"
@@ -81,20 +85,27 @@ command_loader:
     description: "Generate personalized outreach messages"
     requires:
       - "tasks/write-outreach.md"
-      - "data/message-rules.md"
       - "checklists/message-quality-checklist.md"
+    note: "Copy rules now come from external squads (copywriting-squad, leandro-ladeira)"
     output_format: "messages_json"
 
-  "*sync-ghl":
-    description: "Sync prospects to GoHighLevel (contacts + deals + messages)"
+  "*send-evolution":
+    description: "Send messages via Evolution API (interactive, always asks)"
     requires:
-      - "tasks/sync-to-ghl.md"
+      - "tasks/send-via-evolution-api.md"
+    note: "NUNCA envia sem confirmacao. Sempre pergunta antes."
+    output_format: "send_report"
+
+  "*sync-ghl":
+    description: "Sync prospects to GHL (contacts + deals, NO messages)"
+    requires:
+      - "tasks/sync-to-ghl-v5.md"
     output_format: "ghl_sync_report"
 
   "*populate-sheet":
-    description: "Populate Google Sheets with results"
+    description: "Populate Google Sheets with results (v5.0, 10 columns)"
     requires:
-      - "tasks/populate-sheet.md"
+      - "tasks/populate-sheet-v5.md"
     output_format: "sheet_confirmation"
 
 # ============================================================================
@@ -143,57 +154,71 @@ operational_frameworks:
   pipeline_orchestration:
     name: "Ensinio Prospect Pipeline"
     category: "Sales Pipeline"
-    description: "7-phase pipeline from WhatsApp export to Google Sheets"
+    description: "11-phase pipeline from WhatsApp export to Google Sheets + Evolution API + GHL"
     steps:
       1_parse:
         action: "Delegate ZIP parsing to @chat-parser"
         output: "contacts_json"
-        quality_gate: "QG-001: Parse validation"
-      2_validate:
+      2_validate_parse:
         action: "Run parse validation (QG-001)"
-        checks:
-          - "All messages extracted"
-          - "No duplicate contacts"
-          - "Phone numbers normalized"
-          - "Metadata complete"
+        quality_gate: "QG-001: Parse validation"
       3_load_kb:
-        action: "Load Ensinio solutions KB (parallel with parse)"
+        action: "Load Ensinio solutions KB (parallel with Phase 1)"
         output: "kb_loaded"
         optimization: "Runs in parallel with parsing for efficiency"
-      4_analyze:
-        action: "Delegate analysis to @prospect-analyst"
+      4_resolve_phones:
+        action: "Resolve phone numbers (interactive, images + manual)"
+        quality_gate: "QG-000.5: Phone resolution"
+        interactive: true
+      5_analyze:
+        action: "Delegate dual scoring to @prospect-analyst"
         output: "prospects_json"
         quality_gate: "QG-002: Analysis validation"
-      5_write:
-        action: "Delegate outreach writing to @outreach-writer"
+      6_validate_scoring:
+        action: "Validate scoring quality (QG-002.5)"
+        quality_gate: "QG-002.5: Scoring validation"
+      7_write:
+        action: "Delegate outreach assembly to @outreach-writer (who consults copy squads)"
         output: "messages_json"
-        quality_gate: "QG-003: Message quality validation"
-      6_validate_batch:
+        copy_delegation:
+          mandatory:
+            - "@eugene-schwartz (awareness level)"
+            - "@leandro-ladeira (Big Idea por cluster)"
+            - "@copy-maestro (clone selection)"
+            - "[clone executor] (draft da mensagem)"
+            - "@claude-hopkins (audit final)"
+          note: "outreach-writer monta mensagem final com contexto Ensinio. NAO escreve copy sozinho."
+      8_validate_batch:
         action: "Validate outreach batch (QG-003, max 2 rework iterations)"
-        checks:
-          - "Messages sound human"
-          - "No template patterns visible"
-          - "Proper personalization"
-          - "WhatsApp links functional"
-      7_sync_ghl:
-        action: "Sync to GoHighLevel (QG-005)"
-        interactive: true
-        pre_step: "ASK user for tags (default: 'Leads Fosc')"
-        sub_steps:
-          - "Create/find contacts with tags"
-          - "Create deals in pipeline Qualificacao"
-          - "Send outreach messages via WhatsApp"
-        output: "ghl_sync_report"
-        quality_gate: "QG-005: GHL sync validation"
-      8_populate:
-        action: "Populate Google Sheets (QG-004)"
+        quality_gate: "QG-003: Message quality validation"
+      9_populate_sheet:
+        action: "Populate Google Sheets (QG-008) — SOURCE OF TRUTH"
         output: "sheet_populated"
-        quality_gate: "QG-004: Sheet validation"
+        quality_gate: "QG-008: Sheet population"
+        blocker: true
+      10_send_evolution:
+        action: "Send via Evolution API (INTERACTIVE — always ask before)"
+        quality_gate: "QG-010: Send validation"
+        interactive: true
+        note: "NUNCA envia sem confirmacao explicita do usuario"
+      11_ghl_sync:
+        action: "Sync to GHL (OPTIONAL — no message sending)"
+        quality_gate: "QG-005: GHL sync validation"
+        optional: true
+        note: "NAO envia mensagens. Apenas cria contatos e deals."
 
   quality_gates:
+    QG-000.5:
+      name: "Phone Resolution"
+      trigger: "After phone resolution (Phase 4)"
+      checks:
+        - "phone_coverage > 0%"
+        - "all_phones_e164_format"
+        - "phone_book_saved"
+      blocker: false
     QG-001:
       name: "Parse Validation"
-      trigger: "After parse completion"
+      trigger: "After parse validation (Phase 2)"
       checks:
         - "contacts.length > 0"
         - "no_duplicates"
@@ -202,42 +227,63 @@ operational_frameworks:
       blocker: true
     QG-002:
       name: "Analysis Validation"
-      trigger: "After analysis completion"
+      trigger: "After dual scoring (Phase 5)"
       checks:
-        - "all_contacts_scored"
-        - "type_classification_complete"
+        - "all_contacts_scored (client + partner)"
+        - "classification_complete (7x3 matrix)"
         - "pillar_mapping_complete"
         - "temperature_calculated"
       blocker: true
+    QG-002.5:
+      name: "Scoring Validation"
+      trigger: "After scoring validation (Phase 6)"
+      checks:
+        - "score_distribution_not_uniform"
+        - "at_least_one_prospect_score_gte_3"
+        - "dual_scoring_consistent"
+      blocker: true
     QG-003:
       name: "Message Quality Validation"
-      trigger: "After message generation"
+      trigger: "After outreach validation (Phase 8)"
       checks:
+        - "copy_squads_consulted (mandatory: schwartz, ladeira, copy-maestro, clone, hopkins)"
+        - "claude_hopkins_audit_passed"
         - "human_feel_score >= 7"
         - "no_template_patterns"
         - "personalization_complete"
         - "whatsapp_links_valid"
       blocker: false
       max_iterations: 2
-    QG-004:
-      name: "Sheet Validation"
-      trigger: "After sheet population"
+    QG-008:
+      name: "Sheet Population"
+      trigger: "After sheet population (Phase 9)"
       checks:
         - "all_prospects_inserted"
-        - "columns_correct"
+        - "10_columns_correct"
         - "ordered_by_temperature"
         - "links_functional"
+        - "status_column_default_nao_enviado"
       blocker: true
+    QG-010:
+      name: "Send Validation"
+      trigger: "After Evolution API send (Phase 10)"
+      checks:
+        - "user_confirmed_send"
+        - "evolution_connected"
+        - "success_rate >= 80%"
+        - "sheet_status_updated"
+      blocker: false
     QG-005:
       name: "GHL Sync Validation"
-      trigger: "After GHL sync"
+      trigger: "After GHL sync (Phase 11)"
       checks:
         - "all_contacts_created_or_found"
         - "all_deals_in_correct_pipeline"
         - "tags_applied_per_user_choice"
-        - "messages_sent_or_failures_documented"
+        - "no_messages_sent (v5.0 rule)"
         - "no_auth_errors"
-      blocker: true
+      blocker: false
+      optional: true
 
   batch_processing:
     strategy: "Smart batching with progress tracking"
@@ -247,7 +293,7 @@ operational_frameworks:
       - "Analysis (batched by 50 contacts)"
     progress_reporting:
       interval: "Every 10% completion"
-      format: "Fase X/7 - Y% completo - Z contatos processados"
+      format: "Fase X/11 — Y% completo — Z contatos processados"
 
 # ============================================================================
 # AIOS LEVEL 3: VOICE DNA
@@ -297,7 +343,7 @@ voice_dna:
       trigger: "*full-pipeline"
       output: "progress_updates"
       signals:
-        - "Fase X/7..."
+        - "Fase X/11..."
         - "Processando batch Y..."
         - "Quality gate Z verificado..."
       cadence: "Update every phase completion"
@@ -337,16 +383,20 @@ output_examples:
     output: |
       🎯 **Pipeline Status**
 
-      **Fase atual:** 4/7 - Analise de prospects
-      **Progresso:** 60% completo
+      **Fase atual:** 5/11 - Analise de prospects
+      **Progresso:** 45% completo
 
       ✅ Fase 1: Parse completo (342 contatos extraidos)
       ✅ Fase 2: Validacao (QG-001 PASS)
-      ✅ Fase 3: KB carregado (23 solucoes Ensinio)
-      🔄 Fase 4: Analise em andamento (205/342 contatos analisados)
-      ⏳ Fase 5: Aguardando (escrita de mensagens)
-      ⏳ Fase 6: Aguardando (validacao batch)
-      ⏳ Fase 7: Aguardando (populacao sheet)
+      ✅ Fase 3: KB carregado (67 features Ensinio)
+      ✅ Fase 4: Telefones resolvidos (289/342)
+      🔄 Fase 5: Analise em andamento (205/342 contatos analisados)
+      ⏳ Fase 6: Aguardando (validacao scoring)
+      ⏳ Fase 7: Aguardando (escrita de mensagens)
+      ⏳ Fase 8: Aguardando (validacao batch)
+      ⏳ Fase 9: Aguardando (populacao sheet)
+      ⏳ Fase 10: Aguardando (envio Evolution API)
+      ⏳ Fase 11: Aguardando (GHL sync - opcional)
 
       **Proxima acao:** Completar analise de 137 contatos restantes
 
@@ -377,9 +427,13 @@ output_examples:
 
       **Quality Gates:**
       ✅ QG-001: Parse validation (PASS)
+      ✅ QG-000.5: Phone resolution (PASS)
       ✅ QG-002: Analysis validation (PASS)
+      ✅ QG-002.5: Scoring validation (PASS)
       ✅ QG-003: Message quality (PASS - 1 iteracao)
-      ✅ QG-004: Sheet validation (PASS)
+      ✅ QG-008: Sheet population (PASS)
+      ✅ QG-010: Send validation (PASS - 43/47 enviados)
+      ⏭️ QG-005: GHL sync (skipped - opcional)
 
       **Aprovacao vs Rejeicao:**
       - Aprovados: 127 (37%)
@@ -418,9 +472,9 @@ anti_patterns:
     why_bad: "Scoring impreciso por dados insuficientes"
     correct_approach: "Sempre validar message_count >= 10 OR adicionar low_data_flag"
 
-  - pattern: "Pular quality gates (QG-001 through QG-004)"
+  - pattern: "Pular quality gates (QG-001 through QG-010)"
     why_bad: "Output com qualidade nao validada vai para Google Sheets"
-    correct_approach: "Sempre executar todos os 4 quality gates em ordem"
+    correct_approach: "Sempre executar todos os quality gates em ordem (8 gates, 2 opcionais)"
 
   - pattern: "Nao validar batch de mensagens antes de popular sheet"
     why_bad: "Mensagens roboticas/template vao para usuario final"
@@ -432,7 +486,11 @@ anti_patterns:
 
   - pattern: "Executar pipeline sem carregar KB primeiro"
     why_bad: "Analise sem contexto das solucoes Ensinio"
-    correct_approach: "Fase 3 (load KB) SEMPRE antes de Fase 4 (analyze)"
+    correct_approach: "Phase 3 (load KB) SEMPRE antes de Phase 5 (analyze)"
+
+  - pattern: "Enviar mensagens via Evolution API sem confirmacao"
+    why_bad: "Spam involuntario, numeros errados, mensagens nao revisadas"
+    correct_approach: "Phase 10 SEMPRE pergunta antes de enviar. Mostra preview de 3 msgs."
 
   - pattern: "Nao ordenar sheet por temperatura"
     why_bad: "Usuario perde tempo procurando melhores prospects"
@@ -448,13 +506,14 @@ anti_patterns:
 
 completion_criteria:
   task_done_when:
-    - "Google Sheets populated with all qualified prospects"
-    - "All 4 quality gates passed (QG-001 through QG-004)"
+    - "Google Sheets populated with all qualified prospects (Phase 9)"
+    - "All blocking quality gates passed (QG-001, QG-002, QG-002.5, QG-003, QG-008)"
+    - "Evolution API send completed or skipped by user (Phase 10)"
     - "Completion report generated with distribution metrics"
     - "Prospects ordered by temperature (highest first)"
     - "All WhatsApp links functional and tested"
 
-  handoff_to: "User (Fosc) for review and send"
+  handoff_to: "User (Fosc) for review"
 
   validation_checklist:
     - "All contacts parsed and deduplicated"
@@ -479,7 +538,7 @@ learning_systems:
     message_effectiveness:
       metric: "Taxa de resposta por tipo de mensagem"
       source: "User relato de respostas recebidas"
-      adjustment: "Atualizar message-rules.md com templates efetivos"
+      adjustment: "Feedback para squads de copy (copywriting-squad, leandro-ladeira)"
 
     pillar_accuracy:
       metric: "Precisao do mapping tipo -> pillar"
@@ -526,6 +585,28 @@ workflow_integration:
       description: "Message validation uses smart sampling for large datasets"
       benefit: "Validates quality without 100% review overhead"
 
+  cross_squad_dependencies:
+    mandatory:
+      - squad: "copywriting-squad"
+        agents: ["@eugene-schwartz", "@copy-maestro", "@claude-hopkins", "[clone executor]"]
+        purpose: "Awareness, strategy, copy execution, audit"
+      - squad: "leandro-ladeira"
+        agents: ["@leandro-ladeira"]
+        purpose: "Big Idea por cluster de dor"
+      - squad: "ensinio-mind"
+        data: ["ensinio-solutions-kb.md", "ensinio-icps.md", "ensinio-arguments.md", "ensinio-sales-playbook.md"]
+        purpose: "Contexto do produto Ensinio"
+    optional:
+      - squad: "hormozi"
+        agents: ["@hormozi-hooks"]
+        purpose: "Hooks fortes para abertura"
+      - squad: "storytelling-masters-fosc"
+        agents: ["@matthew-dicks"]
+        purpose: "Micro-stories de conexao"
+      - squad: "conversao-extrema"
+        agents: ["@tessman-copy"]
+        purpose: "Word mapping para objecoes"
+
   cross_squad_potential:
     - squad: "content-engine"
       synergy: "Reuse message templates for other outreach campaigns"
@@ -555,11 +636,14 @@ commands:
   - name: write
     description: "Generate personalized outreach messages"
 
-  - name: sync-ghl
-    description: "Sync prospects to GoHighLevel (contacts + deals + messages)"
-
   - name: populate-sheet
-    description: "Populate Google Sheets with results"
+    description: "Populate Google Sheets with results (v5.0, 10 columns)"
+
+  - name: send-evolution
+    description: "Send messages via Evolution API (interactive, always asks)"
+
+  - name: sync-ghl
+    description: "Sync prospects to GHL (contacts + deals, NO messages)"
 
   - name: status
     description: "Show current pipeline progress"
@@ -574,14 +658,19 @@ commands:
 dependencies:
   tasks:
     - parse-chat-export.md
+    - validate-parsed-data.md
     - load-ensinio-kb.md
+    - resolve-phone-numbers.md
     - analyze-prospects.md
     - write-outreach.md
-    - populate-sheet.md
-    - validate-parsed-data.md
+    - validate-outreach-batch.md
+    - populate-sheet-v5.md
+    - send-via-evolution-api.md
+    - sync-to-ghl-v5.md
 
   workflows:
     - full-pipeline.yaml
+    - batch-pipeline.yaml
 
   data:
     - ensinio-solutions-kb.md
@@ -589,7 +678,11 @@ dependencies:
     - scoring-criteria.md
 
   checklists:
+    - parse-validation-checklist.md
+    - phone-validation-checklist.md
+    - scoring-validation-checklist.md
     - message-quality-checklist.md
+    - ghl-sync-checklist.md
 
 # ============================================================================
 # GOOGLE SHEETS CONFIGURATION
@@ -597,15 +690,18 @@ dependencies:
 
 google_sheets:
   spreadsheet_id: "124EQQAkmt9D7-49LbR-Jx64DhxdtCwceUQgqolk5ZFI"
-  sheet_name: "Pagina1"
+  architecture: "v5.0 Sheets-First (source of truth)"
   columns:
     A: Nome
-    B: Telefone
+    B: Telefone (E.164)
     C: Grupo WhatsApp origem
     D: Nome/nicho do projeto
     E: Explicacao detalhada do projeto
     F: Mensagem do WhatsApp
-    G: Link WhatsApp direto
+    G: Link WhatsApp direto (pre-encoded)
+    H: Status Envio (Nao enviado / Enviado / Erro)
+    I: Link GHL (preenchido pela Phase 11)
+    J: GHL Contact ID (preenchido pela Phase 11)
 
 # ============================================================================
 # AUTO-CLAUDE CONFIG
@@ -617,12 +713,13 @@ autoClaude:
 
 ## Quick Commands
 
-- `*full-pipeline {zip} {grupo}` - Pipeline completo (7 fases)
+- `*full-pipeline {zip} {grupo}` - Pipeline completo (11 fases, v5.0)
 - `*parse {zip}` - Parsear export WhatsApp
-- `*analyze` - Analisar prospects
-- `*write` - Gerar mensagens
-- `*sync-ghl` - Sincronizar com GoHighLevel (contatos + deals + mensagens)
-- `*populate-sheet` - Popular Google Sheets
+- `*analyze` - Analisar prospects (dual scoring)
+- `*write` - Gerar mensagens (squad delegation)
+- `*populate-sheet` - Popular Google Sheets (source of truth)
+- `*send-evolution` - Enviar via Evolution API (sempre pergunta antes)
+- `*sync-ghl` - Sincronizar com GHL (opcional, sem envio de msgs)
 - `*status` - Ver progresso do pipeline
 - `*help` - Ver comandos
 
@@ -631,18 +728,22 @@ autoClaude:
 **Coordena:**
 - **@chat-parser** - Parsing tecnico de exports
 - **@prospect-analyst** - Analise e scoring de prospects
-- **@outreach-writer** - Copywriting de mensagens
+- **@outreach-writer** - Montagem de mensagens (delega copy para squads: copywriting-squad, leandro-ladeira)
 
 ## Pipeline Overview
 
 ```
-ZIP Export → Parse → Validate → Load KB → Analyze → Write → Validate Batch → GHL Sync → Populate Sheet
-   (User)      (1)      (2)       (3)       (4)      (5)         (6)             (7)           (8)
+ZIP → Parse → Validate → Load KB → Phones → Analyze → Validate → Write → Validate → Sheet → Evolution → GHL
+       (1)      (2)        (3)       (4)      (5)       (6)       (7)      (8)       (9)      (10)       (11)
+                                                                                   BLOCKER  INTERACTIVE  OPTIONAL
 ```
 
 **Quality Gates:**
-- QG-001: Parse validation (blocker)
-- QG-002: Analysis validation (blocker)
-- QG-003: Message quality (max 2 iterations)
-- QG-004: Sheet validation (blocker)
-- QG-005: GHL sync validation (blocker)
+- QG-000.5: Phone resolution (Phase 4)
+- QG-001: Parse validation (Phase 2, blocker)
+- QG-002: Analysis validation (Phase 5, blocker)
+- QG-002.5: Scoring validation (Phase 6, blocker)
+- QG-003: Message quality (Phase 8, max 2 iterations)
+- QG-008: Sheet population (Phase 9, blocker)
+- QG-010: Send validation (Phase 10, interactive)
+- QG-005: GHL sync validation (Phase 11, optional)

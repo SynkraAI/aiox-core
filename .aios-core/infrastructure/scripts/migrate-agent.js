@@ -234,7 +234,7 @@ function insertAutoClaudeSection(content, autoClaudeYaml) {
   // Insert autoClaude section before the closing ```
   const newContent = content.replace(
     yamlBlockMatch[0],
-    `${beforeClosing}\n${autoClaudeYaml}\n${closing}`
+    `${beforeClosing}\n${autoClaudeYaml}\n${closing}`,
   );
 
   return { content: newContent };
@@ -247,9 +247,9 @@ function generateDiff(agentId, autoClaude) {
   const lines = [];
 
   lines.push('');
-  lines.push(`═══════════════════════════════════════════════════════════`);
+  lines.push('═══════════════════════════════════════════════════════════');
   lines.push(`  Migration Preview: ${agentId}.md (V2 → V3)`);
-  lines.push(`═══════════════════════════════════════════════════════════`);
+  lines.push('═══════════════════════════════════════════════════════════');
   lines.push('');
   lines.push('+ Added autoClaude section:');
   lines.push('');
@@ -260,7 +260,7 @@ function generateDiff(agentId, autoClaude) {
   });
 
   lines.push('');
-  lines.push(`═══════════════════════════════════════════════════════════`);
+  lines.push('═══════════════════════════════════════════════════════════');
 
   return lines.join('\n');
 }
@@ -329,7 +329,7 @@ async function migrateAgent(rootPath, agentId, options = {}) {
   // Insert autoClaude section
   const { content: newContent, error: insertError } = insertAutoClaudeSection(
     content,
-    autoClaudeYaml
+    autoClaudeYaml,
   );
 
   if (insertError) {

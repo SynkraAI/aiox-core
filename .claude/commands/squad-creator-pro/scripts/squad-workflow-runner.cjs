@@ -40,7 +40,7 @@ const PIPELINE_PHASES = [
   { id: 'quality_gate', agent: 'pedro-valerio', human_checkpoint: true },
   { id: 'integration', agent: 'squad-chief', human_checkpoint: false },
   { id: 'smoke_test', agent: 'squad-chief', human_checkpoint: false },
-  { id: 'completed', agent: null, human_checkpoint: false }
+  { id: 'completed', agent: null, human_checkpoint: false },
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -59,7 +59,7 @@ function runStateManager(args) {
   try {
     const result = execSync(`node "${STATE_MANAGER}" ${args}`, {
       encoding: 'utf8',
-      stdio: ['pipe', 'pipe', 'pipe']
+      stdio: ['pipe', 'pipe', 'pipe'],
     });
     return JSON.parse(result.trim());
   } catch (err) {
@@ -134,8 +134,8 @@ function cmdStart(slug, options = {}) {
     next_step: {
       agent: 'oalanicolas',
       task: 'Research sources for the squad',
-      command: `Use @oalanicolas to research sources for ${slug}`
-    }
+      command: `Use @oalanicolas to research sources for ${slug}`,
+    },
   });
 }
 
@@ -159,7 +159,7 @@ function cmdNext(slug, options = {}) {
   if (currentStatus !== 'completed' && currentStatus !== 'approved' && !force) {
     outputError('PHASE_NOT_COMPLETE', `Current phase "${currentPhase}" is not complete`, {
       current_status: currentStatus,
-      hint: 'Complete the current phase first, or use --force to skip'
+      hint: 'Complete the current phase first, or use --force to skip',
     });
     process.exit(1);
   }
@@ -172,7 +172,7 @@ function cmdNext(slug, options = {}) {
       action: 'next',
       slug,
       message: 'Pipeline already completed',
-      current_phase: currentPhase
+      current_phase: currentPhase,
     });
     return;
   }
@@ -193,8 +193,8 @@ function cmdNext(slug, options = {}) {
         action: 'Review and approve/revise/abort',
         approve: `node squad-workflow-runner.cjs approve ${slug}`,
         revise: `node squad-workflow-runner.cjs revise ${slug} --to task_anatomy`,
-        abort: `node squad-workflow-runner.cjs abort ${slug}`
-      }
+        abort: `node squad-workflow-runner.cjs abort ${slug}`,
+      },
     });
     return;
   }
@@ -212,7 +212,7 @@ function cmdNext(slug, options = {}) {
     agent: nextPhase.agent,
     next_step: nextPhase.agent
       ? { agent: nextPhase.agent, task: `Execute ${nextPhase.id} phase` }
-      : { message: 'Pipeline completed' }
+      : { message: 'Pipeline completed' },
   });
 }
 
@@ -245,7 +245,7 @@ function cmdResume(slug) {
       ? { message: 'Awaiting human decision (approve/revise/abort)' }
       : phaseInfo && phaseInfo.agent
         ? { agent: phaseInfo.agent, task: `Continue ${currentPhase} phase` }
-        : { message: 'Ready to advance to next phase' }
+        : { message: 'Ready to advance to next phase' },
   });
 }
 
@@ -271,7 +271,7 @@ function cmdStatus(slug) {
       agent: phase.agent,
       status,
       human_checkpoint: phase.human_checkpoint,
-      current: idx === currentPhaseIdx
+      current: idx === currentPhaseIdx,
     };
   });
 
@@ -289,7 +289,7 @@ function cmdStatus(slug) {
     agent_history: state.agent_history || [],
     completed_outputs: state.completed_outputs || [],
     created_at: state.created_at,
-    updated_at: state.updated_at
+    updated_at: state.updated_at,
   });
 }
 
@@ -306,7 +306,7 @@ function cmdApprove(slug) {
   if (state.checkpoint_status !== 'checkpoint') {
     outputError('NOT_AT_CHECKPOINT', 'Not at a human checkpoint', {
       current_phase: state.current_phase,
-      current_status: state.checkpoint_status
+      current_status: state.checkpoint_status,
     });
     process.exit(1);
   }
@@ -330,7 +330,7 @@ function cmdRevise(slug, targetPhase) {
   const phaseInfo = getCurrentPhaseInfo(targetPhase);
   if (!phaseInfo) {
     outputError('INVALID_PHASE', `Invalid phase: ${targetPhase}`, {
-      valid_phases: PIPELINE_PHASES.map(p => p.id)
+      valid_phases: PIPELINE_PHASES.map(p => p.id),
     });
     process.exit(1);
   }
@@ -344,7 +344,7 @@ function cmdRevise(slug, targetPhase) {
     target_phase: targetPhase,
     status: 'in_progress',
     agent: phaseInfo.agent,
-    message: `Returned to ${targetPhase} for revision`
+    message: `Returned to ${targetPhase} for revision`,
   });
 }
 
@@ -359,7 +359,7 @@ function cmdAbort(slug, reason = 'Aborted by user') {
     action: 'abort',
     slug,
     status: 'failed',
-    reason
+    reason,
   });
 }
 
@@ -462,7 +462,7 @@ Agents:
 
   } else {
     outputError('INVALID_COMMAND', `Unknown command: ${command}`, {
-      valid_commands: ['start', 'resume', 'next', 'status', 'approve', 'revise', 'abort']
+      valid_commands: ['start', 'resume', 'next', 'status', 'approve', 'revise', 'abort'],
     });
     process.exit(1);
   }

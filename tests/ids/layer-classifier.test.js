@@ -5,7 +5,7 @@
  */
 const path = require('path');
 const { classifyLayer, LAYER_RULES } = require(
-  path.resolve(__dirname, '../../.aiox-core/core/ids/layer-classifier')
+  path.resolve(__dirname, '../../.aiox-core/core/ids/layer-classifier'),
 );
 
 describe('classifyLayer', () => {

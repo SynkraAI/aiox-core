@@ -1,32 +1,39 @@
 # Ensinio WhatsApp Prospector - Squad Configuration
-# Version: 2.0.0
-# Updated: 2026-03-02
+# Version: 5.0.0
+# Updated: 2026-03-13
+# Architecture: Sheets-First (Google Sheets = source of truth)
 
 name: ensinio-whatsapp-prospector
-version: "3.0.0"
+version: "5.0.0"
 entry_agent: prospector-chief
 
 squad:
   name: ensinio-whatsapp-prospector
   display_name: "Ensinio WhatsApp Prospector"
-  version: "3.0.0"
+  version: "5.0.0"
   domain: "sales prospecting, whatsapp analysis, lead generation, outreach, icp matching"
   description: |
     Squad especializado em prospectar leads a partir de exports de grupos de WhatsApp.
-    Parseia chats, analisa fit com solucoes Ensinio, gera mensagens personalizadas
-    e popula Google Sheets com dados estruturados e links diretos de WhatsApp.
+    Parseia chats, analisa fit com solucoes Ensinio (dual scoring), gera mensagens
+    personalizadas via squad delegation, popula Google Sheets (source of truth),
+    envia via Evolution API (com confirmacao) e sincroniza com GHL (opcional).
 
   context: |
     Ensinio e uma plataforma LMS All-in-One com 5 pilares de solucao:
-    1. LMS/Area de Membros (23 features: vitrine streaming, comunidades, trilhas, SCORM, aulas ao vivo, quizzes, certificados MEC, gamificacao)
-    2. Gamificacao (7 features: pontos XP, moedas, 25 gatilhos, missoes, niveis, ranking, loja)
-    3. Agentes de IA (11 features: vendas 24/7, tutor, suporte, customizado, multi-canal, follow-up, qualificacao)
-    4. Pagamentos Integrados (15 features: checkout, ofertas, PIX/boleto/cartao, split, afiliados, upsell, order bump, cupons)
-    5. White Label + App + Integracoes (13 features: white label, app mobile, SSO, API, webhooks, Hotmart/Kiwify, dashboards)
+    1. LMS/Area de Membros (23 features)
+    2. Gamificacao (7 features)
+    3. Agentes de IA (11 features)
+    4. Pagamentos Integrados (15 features)
+    5. White Label + App + Integracoes (13 features)
 
     Total: 67 features mapeadas no KB v2.0.
 
-    Mensagens sao enviadas pelo Antonio, a pedido do Fosc (socio fundador).
+    ARQUITETURA v5.0 (Sheets-First):
+    - Google Sheets e a fonte de verdade (Phase 9)
+    - Envio via Evolution API com confirmacao (Phase 10)
+    - GHL Sync e opcional, NAO envia mensagens (Phase 11)
+
+    Mensagens sao enviadas pelo Antonio, a pedido do Fosc.
     Output vai para Google Sheets ID: 124EQQAkmt9D7-49LbR-Jx64DhxdtCwceUQgqolk5ZFI
 
   keywords:
@@ -37,6 +44,7 @@ squad:
     - lms sales
     - chat parsing
     - google sheets
+    - evolution api
 
 orchestrator:
   agent: prospector-chief
@@ -53,20 +61,19 @@ layers:
         model: haiku
 
   analysis:
-    description: "Analise de prospects e matching com solucoes Ensinio"
+    description: "Analise de prospects e matching com solucoes Ensinio (dual scoring)"
     agents:
       - id: prospect-analyst
         name: Minerva
-        role: Solution Fit Analyst & Lead Scorer
+        role: Solution Fit Analyst & Lead Scorer (Dual Scoring)
         file: agents/prospect-analyst.md
         model: sonnet
 
   outreach:
-    description: "Geracao de mensagens personalizadas de outreach"
+    description: "Montagem de mensagens personalizadas (delega copy para squads)"
     agents:
       - id: outreach-writer
-        name: Velvet
-        role: Personalized Outreach Copywriter
+        role: Outreach Message Assembler (delega copy para squads)
         file: agents/outreach-writer.md
         model: opus
 
@@ -81,36 +88,40 @@ layers:
 workflows:
   full_pipeline:
     file: workflows/full-pipeline.yaml
-    description: "Pipeline completo: Parse -> Validate -> Resolve Phones -> Analyze -> Score Validate -> Write -> Validate Batch -> GHL Sync -> Output"
-    phases: 10
+    description: "Pipeline v5.0 completo (11 fases): Parse -> Sheets -> Evolution API -> GHL"
+    phases: 11
   batch_pipeline:
     file: workflows/batch-pipeline.yaml
-    description: "Pipeline batch: Processa multiplos grupos de WhatsApp e consolida numa unica planilha"
-    phases: 4
+    description: "Pipeline batch: multiplos grupos, aba por grupo, envio seletivo"
+    phases: 5
 
 quality_gates:
-  - id: QG-000.5
-    name: "Phone Resolution"
-    transition: "Parsed Contacts -> Contacts with Phones"
-    type: interactive
-    criteria: "All meaningful contacts have phone or are explicitly skipped"
-    checklist: checklists/phone-validation-checklist.md
-
   - id: QG-001
     name: "Parse Validation"
+    phase: 2
     transition: "Raw ZIP -> Structured Contacts"
     type: blocking
     criteria: "Contatos extraidos com nome, telefone e mensagens agrupadas"
     checklist: checklists/parse-validation-checklist.md
 
+  - id: QG-000.5
+    name: "Phone Resolution"
+    phase: 4
+    transition: "Parsed Contacts -> Contacts with Phones"
+    type: interactive
+    criteria: "All meaningful contacts have phone or are explicitly skipped"
+    checklist: checklists/phone-validation-checklist.md
+
   - id: QG-002
     name: "Analysis Complete"
-    transition: "Contacts -> Scored Prospects"
+    phase: 5
+    transition: "Contacts -> Dual-Scored Prospects"
     type: blocking
-    criteria: "Todos os contatos analisados com score e solucoes match"
+    criteria: "Todos os contatos analisados com dual score e classificacao 7x3"
 
   - id: QG-002.5
     name: "Scoring Validation"
+    phase: 6
     transition: "Scored Prospects -> Validated Scores"
     type: blocking
     criteria: "Distribuicao de scores validada, classificacao consistente"
@@ -118,23 +129,33 @@ quality_gates:
 
   - id: QG-003
     name: "Message Quality"
+    phase: 8
     transition: "Draft -> Approved Message"
     type: blocking
-    criteria: "Mensagem passa no message-quality-checklist (humanizacao, personalizacao)"
+    criteria: "Squad delegation completa, Hopkins audit PASS"
     checklist: checklists/message-quality-checklist.md
     max_rework_iterations: 2
 
-  - id: QG-004
+  - id: QG-008
     name: "Sheet Population"
-    transition: "Approved -> Google Sheets"
+    phase: 9
+    transition: "Approved -> Google Sheets (10 columns)"
     type: blocking
-    criteria: "Dados inseridos na planilha com links WhatsApp funcionais"
+    criteria: "Dados inseridos na planilha com 10 colunas, links funcionais, ordenacao correta"
+
+  - id: QG-010
+    name: "Send Validation"
+    phase: 10
+    transition: "Sheets -> Evolution API Send"
+    type: interactive
+    criteria: "Usuario confirmou, success rate >= 80%, status atualizado no Sheets"
 
   - id: QG-005
     name: "GHL Sync Validation"
-    transition: "Approved Messages -> GHL (Contact + Deal + Message)"
-    type: blocking
-    criteria: "Contatos criados, deals no pipeline, mensagens enviadas"
+    phase: 11
+    transition: "Sheets -> GHL (Contact + Deal)"
+    type: optional
+    criteria: "Contatos criados, deals no pipeline, colunas I+J preenchidas"
     checklist: checklists/ghl-sync-checklist.md
 
 settings:
@@ -143,7 +164,17 @@ settings:
   google_sheets_id: "124EQQAkmt9D7-49LbR-Jx64DhxdtCwceUQgqolk5ZFI"
   ensinio_kb_source: "ensinio-mind/data/ensinio-solutions-kb.md"
 
-  # GoHighLevel Integration
+  # Evolution API (Phase 10)
+  evolution:
+    tool_path: "tools/evolution-whatsapp-api"
+    env_file: ".env"
+    interval_ms: 3000
+    error_threshold_percent: 20
+    max_retries: 3
+    confirm_before_send: true  # ALWAYS — NON-NEGOTIABLE
+    preview_count: 3
+
+  # GoHighLevel Integration (Phase 11 — optional)
   ghl:
     env_file: ".env"
     base_url: "https://services.leadconnectorhq.com"
@@ -152,11 +183,11 @@ settings:
     default_stage_id: "d3c25373-2b78-43d4-af3a-b4781f15874e"
     default_tags:
       - "Leads Fosc"
-    tag_prompt: true  # ALWAYS ask user for tags before syncing
+    tag_prompt: true
     rate_limit_delay_ms: 600
     batch_size: 50
-    send_messages: true  # Enable WhatsApp message sending via GHL
-    message_channel: "whatsapp"
+    send_messages: false  # v5.0: GHL NAO envia mensagens (Evolution API faz isso)
+
   ensinio_mind_sources:
     icps: "ensinio-mind/data/ensinio-icps.md"
     red_flags: "ensinio-mind/data/ensinio-red-flags.md"

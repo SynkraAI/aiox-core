@@ -16,7 +16,7 @@ class MetricsTracker {
       performance: ['execution_time', 'memory_usage', 'cpu_usage'],
       quality: ['test_coverage', 'code_complexity', 'error_rate'],
       impact: ['files_modified', 'functions_improved', 'bugs_fixed'],
-      user: ['approval_rate', 'rollback_rate', 'satisfaction_score']
+      user: ['approval_rate', 'rollback_rate', 'satisfaction_score'],
     };
   }
 
@@ -39,7 +39,7 @@ class MetricsTracker {
           created: new Date().toISOString(),
           improvements: [],
           aggregates: this.initializeAggregates(),
-          trends: {}
+          trends: {},
         });
       }
     } catch (error) {
@@ -64,7 +64,7 @@ class MetricsTracker {
       analysis: improvement.analysis || {},
       plan: improvement.plan || {},
       outcome: 'pending',
-      measurements: await this.gatherMeasurements(improvement)
+      measurements: await this.gatherMeasurements(improvement),
     };
 
     metrics.improvements.push(entry);
@@ -135,7 +135,7 @@ class MetricsTracker {
       metrics: entry.metrics,
       measurements: entry.measurements,
       impact_summary: this.generateImpactSummary(entry),
-      recommendations: this.generateRecommendations(entry)
+      recommendations: this.generateRecommendations(entry),
     };
     
     return report;
@@ -152,7 +152,7 @@ class MetricsTracker {
     
     const cutoff = this.getPeriodCutoff(period);
     const recentImprovements = metrics.improvements.filter(
-      i => new Date(i.timestamp) > cutoff
+      i => new Date(i.timestamp) > cutoff,
     );
     
     const dashboard = {
@@ -162,13 +162,13 @@ class MetricsTracker {
         successful: recentImprovements.filter(i => i.outcome === 'success').length,
         failed: recentImprovements.filter(i => i.outcome === 'failed').length,
         rolled_back: recentImprovements.filter(i => i.outcome === 'rolled_back').length,
-        pending: recentImprovements.filter(i => i.outcome === 'pending').length
+        pending: recentImprovements.filter(i => i.outcome === 'pending').length,
       },
       performance: this.calculatePerformanceMetrics(recentImprovements),
       quality: this.calculateQualityMetrics(recentImprovements),
       trends: metrics.trends,
       top_improvements: this.getTopImprovements(recentImprovements, 5),
-      recommendations: this.generateDashboardRecommendations(metrics)
+      recommendations: this.generateDashboardRecommendations(metrics),
     };
     
     return dashboard;
@@ -189,20 +189,20 @@ class MetricsTracker {
         total: metrics.improvements.length,
         by_outcome: this.groupByOutcome(metrics.improvements),
         by_category: this.groupByCategory(metrics.improvements),
-        by_month: this.groupByMonth(metrics.improvements)
+        by_month: this.groupByMonth(metrics.improvements),
       },
       performance: {
         average_duration: this.calculateAverageDuration(metrics.improvements),
         success_rate: this.calculateSuccessRate(metrics.improvements),
-        improvement_velocity: this.calculateVelocity(metrics.improvements)
+        improvement_velocity: this.calculateVelocity(metrics.improvements),
       },
       impact: {
         total_files_modified: metrics.aggregates.total_files_modified,
         total_functions_improved: metrics.aggregates.total_functions_improved,
-        average_improvement_score: this.calculateAverageImprovementScore(metrics.improvements)
+        average_improvement_score: this.calculateAverageImprovementScore(metrics.improvements),
       },
       patterns: this.identifyPatterns(metrics.improvements),
-      insights: this.generateInsights(metrics)
+      insights: this.generateInsights(metrics),
     };
     
     return analytics;
@@ -216,7 +216,7 @@ class MetricsTracker {
     const measurements = {
       baseline: {},
       projected: {},
-      actual: {}
+      actual: {},
     };
     
     // Baseline measurements from analysis
@@ -225,10 +225,10 @@ class MetricsTracker {
         overall_score: improvement.analysis.overall_score,
         category_scores: improvement.analysis.categories
           ? Object.entries(improvement.analysis.categories).reduce((acc, [cat, data]) => {
-              acc[cat] = data.score;
-              return acc;
-            }, {})
-          : {}
+            acc[cat] = data.score;
+            return acc;
+          }, {})
+          : {},
       };
     }
     
@@ -238,13 +238,13 @@ class MetricsTracker {
         impact: improvement.plan.estimatedImpact,
         effort: improvement.plan.estimatedEffort,
         risk: improvement.plan.riskLevel,
-        files: improvement.plan.affectedFiles?.length || 0
+        files: improvement.plan.affectedFiles?.length || 0,
       };
     }
     
     // Actual measurements will be filled later
     measurements.actual = {
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
     
     return measurements;
@@ -328,7 +328,7 @@ class MetricsTracker {
       trends.success_rate.unshift({
         period: i,
         rate: successRate,
-        count: periodImprovements.length
+        count: periodImprovements.length,
       });
     }
     
@@ -373,7 +373,7 @@ class MetricsTracker {
       current: recent,
       previous,
       change: change.toFixed(1),
-      direction: change > 0 ? 'up' : change < 0 ? 'down' : 'stable'
+      direction: change > 0 ? 'up' : change < 0 ? 'down' : 'stable',
     };
   }
 
@@ -385,7 +385,7 @@ class MetricsTracker {
     const summary = {
       scope: 'unknown',
       magnitude: 'unknown',
-      areas_affected: []
+      areas_affected: [],
     };
     
     if (entry.measurements.projected) {
@@ -416,21 +416,21 @@ class MetricsTracker {
     if (entry.outcome === 'failed') {
       recommendations.push({
         type: 'investigation',
-        message: 'Investigate failure cause and adjust validation criteria'
+        message: 'Investigate failure cause and adjust validation criteria',
       });
     }
     
     if (entry.outcome === 'rolled_back') {
       recommendations.push({
         type: 'review',
-        message: 'Review rollback reasons and improve testing coverage'
+        message: 'Review rollback reasons and improve testing coverage',
       });
     }
     
     if (entry.measurements.projected && entry.measurements.projected.risk === 'high') {
       recommendations.push({
         type: 'caution',
-        message: 'Consider breaking high-risk improvements into smaller changes'
+        message: 'Consider breaking high-risk improvements into smaller changes',
       });
     }
     
@@ -447,14 +447,14 @@ class MetricsTracker {
     if (metrics.aggregates.success_rate < 70) {
       recommendations.push({
         priority: 'high',
-        message: 'Success rate below 70% - review validation and testing processes'
+        message: 'Success rate below 70% - review validation and testing processes',
       });
     }
     
     if (metrics.aggregates.rolled_back_improvements > metrics.aggregates.successful_improvements * 0.2) {
       recommendations.push({
         priority: 'medium',
-        message: 'High rollback rate detected - improve sandbox testing'
+        message: 'High rollback rate detected - improve sandbox testing',
       });
     }
     
@@ -462,7 +462,7 @@ class MetricsTracker {
     if (recentTrend && recentTrend.direction === 'down' && recentTrend.change < -50) {
       recommendations.push({
         priority: 'low',
-        message: 'Improvement velocity decreasing - consider process optimization'
+        message: 'Improvement velocity decreasing - consider process optimization',
       });
     }
     
@@ -486,7 +486,7 @@ class MetricsTracker {
         id: i.improvement_id,
         timestamp: i.timestamp,
         impact: i.measurements.projected?.impact,
-        areas: i.plan?.target_areas || []
+        areas: i.plan?.target_areas || [],
       }));
   }
 
@@ -498,7 +498,7 @@ class MetricsTracker {
     const patterns = {
       common_failures: {},
       success_factors: [],
-      time_patterns: {}
+      time_patterns: {},
     };
     
     // Analyze failures
@@ -520,7 +520,7 @@ class MetricsTracker {
       patterns.success_factors.push({
         factor: 'optimal_file_count',
         value: Math.round(avgFiles),
-        confidence: 0.7
+        confidence: 0.7,
       });
     }
     
@@ -543,7 +543,7 @@ class MetricsTracker {
       insights.push({
         type: 'timing',
         message: `Most improvements occur at ${peakHour[0]}:00 hours`,
-        data: { hour: peakHour[0], count: peakHour[1] }
+        data: { hour: peakHour[0], count: peakHour[1] },
       });
     }
     
@@ -556,7 +556,7 @@ class MetricsTracker {
       insights.push({
         type: 'focus',
         message: `${topCategory[0]} improvements are most common (${topCategory[1]} times)`,
-        data: { category: topCategory[0], count: topCategory[1] }
+        data: { category: topCategory[0], count: topCategory[1] },
       });
     }
     
@@ -578,7 +578,7 @@ class MetricsTracker {
       total_duration_ms: 0,
       success_rate: 0,
       improvements_by_category: {},
-      improvements_by_hour: {}
+      improvements_by_hour: {},
     };
   }
 
@@ -632,7 +632,7 @@ class MetricsTracker {
   calculateAverageImprovementScore(_improvements) {
     const withScores = improvements.filter(i => 
       i.measurements?.baseline?.overall_score && 
-      i.outcome === 'success'
+      i.outcome === 'success',
     );
     
     if (withScores.length === 0) return 0;
@@ -702,7 +702,7 @@ class MetricsTracker {
         .sort((a, b) => a.duration_ms - b.duration_ms)[0]?.duration_ms || null,
       slowest_improvement: successful
         .filter(i => i.duration_ms)
-        .sort((a, b) => b.duration_ms - a.duration_ms)[0]?.duration_ms || null
+        .sort((a, b) => b.duration_ms - a.duration_ms)[0]?.duration_ms || null,
     };
   }
 
@@ -714,7 +714,7 @@ class MetricsTracker {
     return {
       test_coverage_impact: 'N/A', // Would need actual test data
       complexity_reduction: 'N/A', // Would need complexity analysis
-      error_rate_change: 'N/A' // Would need error tracking
+      error_rate_change: 'N/A', // Would need error tracking
     };
   }
 
@@ -728,15 +728,15 @@ class MetricsTracker {
     
     categories.forEach(cat => {
       const catImprovements = improvements.filter(i => 
-        i.plan?.target_areas?.includes(cat)
+        i.plan?.target_areas?.includes(cat),
       );
       
       trends[cat] = {
         total: catImprovements.length,
         success_rate: this.calculateSuccessRate(catImprovements),
         recent_activity: catImprovements.filter(i => 
-          new Date(i.timestamp) > this.getPeriodCutoff('7d')
-        ).length
+          new Date(i.timestamp) > this.getPeriodCutoff('7d'),
+        ).length,
       };
     });
     
@@ -756,7 +756,7 @@ class MetricsTracker {
         version: '1.0.0',
         improvements: [],
         aggregates: this.initializeAggregates(),
-        trends: {}
+        trends: {},
       };
     }
   }
@@ -768,7 +768,7 @@ class MetricsTracker {
   async saveMetrics(metrics) {
     await fs.writeFile(
       this.metricsFile,
-      JSON.stringify(metrics, null, 2)
+      JSON.stringify(metrics, null, 2),
     );
   }
 }

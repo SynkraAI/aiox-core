@@ -437,7 +437,7 @@ describe('CreationHelper', () => {
       const msg = _formatDuplicateWarning(
         'my-task',
         { matches: [{ file: 'tasks/similar.md' }] },
-        [{ file: 'agents/user.md', line: 2 }]
+        [{ file: 'agents/user.md', line: 2 }],
       );
 
       expect(msg).toContain('Similar artefact exists: tasks/similar.md');
@@ -449,7 +449,7 @@ describe('CreationHelper', () => {
       const msg = _formatDuplicateWarning(
         'my-task',
         { matches: [{ file: 'tasks/old.md' }] },
-        null
+        null,
       );
 
       expect(msg).toContain('Similar artefact exists');
@@ -460,7 +460,7 @@ describe('CreationHelper', () => {
       const msg = _formatDuplicateWarning(
         'my-task',
         null,
-        [{ file: 'index.js', line: 5 }]
+        [{ file: 'index.js', line: 5 }],
       );
 
       expect(msg).toContain('"my-task" already referenced');
@@ -471,7 +471,7 @@ describe('CreationHelper', () => {
       const msg = _formatDuplicateWarning(
         'task',
         { matches: [{ path: 'alt/path.md' }] },
-        null
+        null,
       );
 
       expect(msg).toContain('Similar artefact exists: alt/path.md');

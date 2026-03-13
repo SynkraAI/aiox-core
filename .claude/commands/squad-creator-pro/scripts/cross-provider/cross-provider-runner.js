@@ -42,26 +42,26 @@ const MODELS = {
     provider: 'anthropic',
     model_id: 'claude-opus-4-5-20250514',
     via: 'task-tool',
-    cost: { input: 15.00, output: 75.00 }
+    cost: { input: 15.00, output: 75.00 },
   },
   glm5: {
     provider: 'openrouter',
     model_id: 'z-ai/glm-5',
     via: 'api',
-    cost: { input: 0.80, output: 3.20 }
+    cost: { input: 0.80, output: 3.20 },
   },
   kimi: {
     provider: 'openrouter',
     model_id: 'moonshotai/kimi-k2.5',
     via: 'api',
-    cost: { input: 0.50, output: 2.80 }
-  }
+    cost: { input: 0.50, output: 2.80 },
+  },
 };
 
 const DEFAULTS = {
   temperature: 0.3,
   maxTokens: 8000,
-  timeoutMs: 180000
+  timeoutMs: 180000,
 };
 
 // ============================================================================
@@ -83,7 +83,7 @@ function loadTask(taskName) {
     path: taskPath,
     content,
     hash,
-    loadedAt: new Date().toISOString()
+    loadedAt: new Date().toISOString(),
   };
 }
 
@@ -179,7 +179,7 @@ function truncateTaskContent(content, maxChars) {
   const outputIdx = content.indexOf('## OUTPUT:');
   const cutoffIdx = Math.min(
     qualityIdx > 0 ? qualityIdx : Infinity,
-    outputIdx > 0 ? outputIdx : Infinity
+    outputIdx > 0 ? outputIdx : Infinity,
   );
 
   if (cutoffIdx < Infinity) {
@@ -235,14 +235,14 @@ async function runOpenRouterModel(modelConfig, prompt, options = {}) {
       'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
       'Content-Type': 'application/json',
       'HTTP-Referer': 'https://lendario.ai',
-      'X-Title': 'Cross-Provider Qualification Test'
+      'X-Title': 'Cross-Provider Qualification Test',
     },
     body: JSON.stringify({
       model: modelConfig.model_id,
       messages: [{ role: 'user', content: prompt }],
       max_tokens: options.maxTokens || DEFAULTS.maxTokens,
-      temperature: options.temperature || DEFAULTS.temperature
-    })
+      temperature: options.temperature || DEFAULTS.temperature,
+    }),
   });
 
   const data = await response.json();
@@ -257,7 +257,7 @@ async function runOpenRouterModel(modelConfig, prompt, options = {}) {
     usage: data.usage,
     latency: elapsed,
     cost: calculateCost(data.usage, modelConfig.cost),
-    raw: data
+    raw: data,
   };
 }
 
@@ -312,7 +312,7 @@ async function runTest(taskName, modelName, inputArg, options = {}) {
   }
 
   if (result.content) {
-    console.log(`\n✅ Complete!`);
+    console.log('\n✅ Complete!');
     console.log(`   Latency: ${result.latency.toFixed(1)}s`);
     console.log(`   Cost: $${result.cost.toFixed(4)}`);
     console.log(`   Tokens: ${JSON.stringify(result.usage)}`);
@@ -340,18 +340,18 @@ async function runTest(taskName, modelName, inputArg, options = {}) {
       model: modelName,
       model_id: modelConfig.model_id,
       timestamp,
-      run_id: runId
+      run_id: runId,
     },
     metrics: {
       latency_seconds: result.latency,
       cost_usd: result.cost,
-      tokens: result.usage
+      tokens: result.usage,
     },
     input: {
       path: path.basename(testInputPath),
-      size_chars: testInput.length
+      size_chars: testInput.length,
     },
-    output: result.content
+    output: result.content,
   };
 
   const resultPath = path.join(outputDir, `${runId}.yaml`);
@@ -364,7 +364,7 @@ async function runTest(taskName, modelName, inputArg, options = {}) {
 function formatAsYaml(obj) {
   let yaml = `# Cross-Provider Test Result\n# Generated: ${new Date().toISOString()}\n\n`;
 
-  yaml += `meta:\n`;
+  yaml += 'meta:\n';
   yaml += `  task: "${obj.meta.task}"\n`;
   yaml += `  task_hash: "${obj.meta.task_hash}"\n`;
   yaml += `  model: "${obj.meta.model}"\n`;
@@ -372,28 +372,28 @@ function formatAsYaml(obj) {
   yaml += `  timestamp: "${obj.meta.timestamp}"\n`;
   yaml += `  run_id: "${obj.meta.run_id}"\n\n`;
 
-  yaml += `metrics:\n`;
+  yaml += 'metrics:\n';
   yaml += `  latency_seconds: ${obj.metrics.latency_seconds?.toFixed(1) || 'null'}\n`;
   yaml += `  cost_usd: ${obj.metrics.cost_usd?.toFixed(4) || 'null'}\n`;
   if (obj.metrics.tokens) {
-    yaml += `  tokens:\n`;
+    yaml += '  tokens:\n';
     yaml += `    prompt: ${obj.metrics.tokens.prompt_tokens}\n`;
     yaml += `    completion: ${obj.metrics.tokens.completion_tokens}\n`;
     yaml += `    total: ${obj.metrics.tokens.total_tokens}\n`;
   }
-  yaml += `\n`;
+  yaml += '\n';
 
-  yaml += `input:\n`;
+  yaml += 'input:\n';
   yaml += `  path: "${obj.input.path}"\n`;
   yaml += `  size_chars: ${obj.input.size_chars}\n\n`;
 
-  yaml += `output: |\n`;
+  yaml += 'output: |\n';
   if (obj.output) {
     obj.output.split('\n').forEach(line => {
       yaml += `  ${line}\n`;
     });
   } else {
-    yaml += `  null\n`;
+    yaml += '  null\n';
   }
 
   return yaml;

@@ -13,7 +13,7 @@ console.log('    1. Open the spreadsheet in browser');
 console.log('    2. Check column H for "Enviado" marks');
 console.log('    3. Filter to show only "Enviado" rows\n');
 console.log(`📁 Total prospects in TSV: ${tsvLines.length - 1} (excluding header)`);
-console.log(`🔗 Sheet: https://docs.google.com/spreadsheets/d/124EQQAkmt9D7-49LbR-Jx64DhxdtCwceUQgqolk5ZFI/edit?gid=0#gid=0`);
+console.log('🔗 Sheet: https://docs.google.com/spreadsheets/d/124EQQAkmt9D7-49LbR-Jx64DhxdtCwceUQgqolk5ZFI/edit?gid=0#gid=0');
 console.log('\n🔄 When ready, you can:\n');
 console.log('   Option 1: Run script to skip already-sent prospects');
 console.log('   Option 2: Manually review column H and note down skips\n');

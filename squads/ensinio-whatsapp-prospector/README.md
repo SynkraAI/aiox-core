@@ -1,198 +1,144 @@
 # Ensinio WhatsApp Prospector
 
-Squad especializado em prospectar leads qualificados a partir de exports de grupos de WhatsApp, cruzando com as 67 soluções da Ensinio (5 pilares), ICPs, red flags e gerando mensagens personalizadas de outreach para Google Sheets.
+Squad especializado em prospectar leads qualificados a partir de exports de grupos de WhatsApp, cruzando com as 67 soluções da Ensinio (5 pilares), ICPs, red flags e gerando mensagens personalizadas de outreach para Google Sheets, com envio via Evolution API.
 
-**Version:** 4.0.0 | **Entry Agent:** Atlas (prospector-chief) | **Model Tier:** haiku/sonnet/opus
+**Version:** 5.0.0 | **Entry Agent:** Atlas (prospector-chief) | **Model Tier:** haiku/sonnet/opus
 
 ---
 
-## What's New in v4.0.0
+## What's New in v5.0.0
 
-### GoHighLevel Integration (Phase 7)
-Antes de popular o Google Sheets, o pipeline agora sincroniza com o GHL:
-- **Criar contatos** no GHL com tags customizaveis (default: "Leads Fosc")
-- **Criar deals** no pipeline Qualificacao (stage "Para prospectar")
-- **Enviar mensagens** de outreach via WhatsApp API do GHL
-- **Tag prompt interativo**: SEMPRE pergunta ao usuario qual tag aplicar antes de sincronizar
-- **Rate limiting**: batch com delay de 600ms entre requests
-- **Deduplicacao**: busca por telefone antes de criar contato
-- **Quality Gate QG-005**: valida sync completo
+### Sheets-First Architecture
+Google Sheets agora é a **fonte de verdade**, não o GHL.
 
-### Configuracao
-```env
-# squads/ensinio-whatsapp-prospector/.env
-GHL_API_TOKEN=pit-xxx
-GHL_LOCATION_ID=xxx
-GHL_PIPELINE_ID=xRqrV2LoT6E8iwLW4Syi
-GHL_DEFAULT_STAGE_ID=d3c25373-2b78-43d4-af3a-b4781f15874e
+```
+ANTES (v4.0):  Parse -> Analyze -> Write -> GHL SYNC -> Sheets
+AGORA (v5.0):  Parse -> Analyze -> Write -> SHEETS -> Evolution API -> GHL (opcional)
 ```
 
+### Pipeline Renumerado (11 Fases Sequenciais)
+Fases agora são sequenciais sem buracos: 1 a 11.
+
+### Phase 10: Envio via Evolution API (INTERATIVO)
+- Envia mensagens via Evolution API (self-hosted)
+- **NUNCA envia sem confirmação explícita**
+- Preview de 3 mensagens antes de confirmar
+- Pacing mínimo 3s entre mensagens
+- Pausa automática se erro > 20%
+- Atualiza status no Sheets em tempo real
+- Fallback: envio manual via links WhatsApp (Coluna G)
+
+### Phase 11: GHL Sync (OPCIONAL)
+- **NÃO envia mensagens** (crítico!)
+- Apenas cria contatos + deals no GHL
+- Preenche Colunas I+J no Sheets
+- Fallback endpoint: `/deals/` se `/opportunities/` der 404
+
+### 10 Colunas no Google Sheets
+| Coluna | Conteúdo | Preenchida por |
+|--------|----------|----------------|
+| A | Nome | Phase 9 |
+| B | Telefone (E.164) | Phase 9 |
+| C | Grupo WhatsApp | Phase 9 |
+| D | Projeto/Nicho | Phase 9 |
+| E | Explicação | Phase 9 |
+| F | Mensagem | Phase 9 |
+| G | Link WhatsApp (pré-encoded) | Phase 9 |
+| H | Status Envio | Phase 10 (ou manual) |
+| I | Link GHL | Phase 11 |
+| J | GHL Contact ID | Phase 11 |
+
 ---
 
-## What's New in v3.0.0
-
-### 1. Phone Resolution (Phase 2b) — Interactive
-WhatsApp exports mostram nomes de contatos salvos, não números. Nova fase interativa:
-- Apresenta contatos sem número e pergunta ao usuário
-- Valida formato E.164 automaticamente (`+55XXXXXXXXXXX`)
-- Auto-normaliza inputs comuns (`31 99988-7766` → `+5531999887766`)
-- **Phone-books PER GROUP** — "João" no Grupo A != "João" no Grupo B
-- Reutiliza phone-book se o grupo já foi processado antes
-
-### 2. ICP + Red Flags Intelligence (ensinio-mind v1.1)
-- **Red flag pre-screen:** 4 BLOQUEADORES que eliminam antes de analisar (produto físico, só ebook, afiliado, "gerenciem tudo")
-- **ICP match scoring:** Bônus por match demográfico e comportamental
-- **Nichos top 5:** Business, Education, Health, Finance, Tech
-- **Argumentos por score:** Cada faixa de temperatura recebe o argumento ideal
-
-### 3. Multi-Grupo Batch
-- Processar múltiplos ZIPs de uma vez
-- Cada grupo com pipeline independente
-- Consolidar numa única planilha (3 modos: single_tab, new_tab_per_group, append)
-- KB carregado uma vez e reutilizado
-
-### 4. Scoring v2.1
-- Bônus ICP (faturamento, audiência, plataformas concorrentes)
-- Penalidades red flags (-1 a -2)
-- Argumento recomendado por score range
-- Data sources: `ensinio-mind/data/` (ICPs, red flags, arguments, sales playbook)
-
----
-
-## Pipeline (v4.0)
+## Pipeline v5.0 (11 Fases)
 
 ```
                                     ┌─────────────────┐
-                                    │  Load KB (P2)   │
+                                    │  Load KB (P3)   │
                                     │  Atlas/sonnet   │
                                     └────────┬────────┘
                                              │ parallel
 ┌──────────┐    ┌──────────┐    ┌────────────┴────────────┐
-│ Parse(P1)│───>│Valid.(P1b│───>│  Resolve Phones (P2b)   │
-│  Cipher  │    │) Cipher  │    │  Atlas/interactive      │
+│ Parse(P1)│───>│Valid.(P2)│───>│  Resolve Phones (P4)    │
+│  Cipher  │    │  Cipher  │    │  Atlas/interactive      │
 │  haiku   │    │  haiku   │    └────────────┬────────────┘
 └──────────┘    └──────────┘                 │
                               ┌──────────────┴──────────────┐
-                              │    Analyze & Score (P3)      │
+                              │    Analyze & Score (P5)      │
                               │    Minerva/sonnet            │
-                              │    + ICP match + Red flags   │
+                              │    Dual Scoring (client +    │
+                              │    partner) + Matriz 7x3     │
                               └──────────────┬───────────────┘
                                              │
                               ┌──────────────┴──────────────┐
-                              │    Valid. Score (P3b)         │
+                              │    Validate Scoring (P6)     │
                               │    Atlas/sonnet              │
                               └──────────────┬───────────────┘
                                              │
                               ┌──────────────┴──────────────┐
-                              │    Write Outreach (P4)       │
-                              │    Velvet/opus               │
+                              │    Write Outreach (P7)       │
+                              │    Assembler/opus            │
+                              │    Squad Delegation:         │
+                              │    schwartz + ladeira +      │
+                              │    copy-maestro + clone +    │
+                              │    hopkins audit             │
                               └──────────────┬───────────────┘
                                              │
                               ┌──────────────┴──────────────┐
-                              │    Valid. Batch (P4b)        │
+                              │    Validate Batch (P8)       │
                               │    Atlas/sonnet              │
                               └──────────────┬───────────────┘
                                              │
                               ┌──────────────┴──────────────┐
-                              │    GHL Sync (P5) [NEW v4.0]  │
+                              │    Populate Sheets (P9)      │
                               │    Atlas/sonnet              │
-                              │    Contact + Deal + Message  │
-                              │    + Tag prompt interativo   │
+                              │    SOURCE OF TRUTH           │
+                              │    BLOQUEADOR                │
                               └──────────────┬───────────────┘
                                              │
                               ┌──────────────┴──────────────┐
-                              │    Sheets (P6)               │
+                              │    Send Evolution API (P10)  │
                               │    Atlas/sonnet              │
+                              │    INTERATIVO (sempre perg.) │
+                              └──────────────┬───────────────┘
+                                             │
+                              ┌──────────────┴──────────────┐
+                              │    GHL Sync (P11)            │
+                              │    Atlas/sonnet              │
+                              │    OPCIONAL (sem msgs)       │
                               └─────────────────────────────┘
 ```
 
-**10 fases** | **7 quality gates** | **Retry policy** com exponential backoff
+**11 fases** | **8 quality gates** | **Retry policy** com exponential backoff
 
 ---
 
-## Parser Module Integration (AC-5)
+## Parser Module Integration
 
-**Version:** 1.0.0 (integrated with M0.1 story)
+**Package:** `@ensinio/whatsapp-parser` (standalone module)
 
-The parsing logic is now powered by `@ensinio/whatsapp-parser`, a standalone module providing:
-
-### Module API
-
-**Import:**
 ```javascript
-const { parseWhatsAppExport, validateParsedData } = require('@ensinio/whatsapp-parser');
+const { parseWhatsAppExport, validateParsedData, normalizePhoneNumber } = require('@ensinio/whatsapp-parser');
 ```
 
-**Main Functions:**
-- `parseWhatsAppExport(zipPath)` — Parse ZIP file → ParsedExport
+- `parseWhatsAppExport(zipPath)` — Parse ZIP -> ParsedExport
 - `validateParsedData(data)` — Validate parsed output
 - `normalizePhoneNumber(phone)` — Normalize phone to E.164
-- `detectChatFormat(content)` — Auto-detect chat format (Android BR, iOS BR, etc)
+- `detectChatFormat(content)` — Auto-detect format (Android BR, iOS BR, etc)
 
-### Implementation
-
-The squad's parse task uses:
-- **File:** `lib/parse-chat-export-impl.js`
-- **Functions:** `parseWhatsAppExportFile()`, `parseWithRecovery()`
-- **Error Handling:** Retry logic + descriptive error messages
-
-### Output Schema
-
-```json
-{
-  "group_name": "Nome do Grupo",
-  "total_contacts": 150,
-  "total_messages": 5000,
-  "date_range": { "start": "2025-01-01T00:00:00Z", "end": "2026-02-19T23:59:59Z" },
-  "format_detected": "android_br",
-  "contacts": [
-    {
-      "name": "Joao",
-      "phone": "+5531999999999",
-      "message_count": 45,
-      "first_message_date": "2025-03-15T14:30:00Z",
-      "last_message_date": "2026-01-20T23:59:59Z",
-      "messages": [
-        { "timestamp": "2025-03-15T14:30:00Z", "content": "..." }
-      ]
-    }
-  ]
-}
-```
-
-### Backward Compatibility
-
-✅ **Zero Breaking Changes:**
-- Output structure is identical to previous version
-- Phone numbers remain in E.164 format
-- Timestamps remain in ISO 8601 format
-- Contact ordering preserved (by message count)
-- All downstream tasks work without modification
-
-### Testing
-
-Integration tests validate:
-- Output schema compatibility (AC-4: 82/82 tests ✅)
-- Backward compatibility with GHL sync, Sheets population, phone resolution
-- Error handling (missing ZIP, empty files, encoding issues)
-- Coverage: >= 70% for squad integration
-
-**Test file:** `packages/ensinio-whatsapp-parser/tests/integration/squad-integration.test.ts`
-
-### Breaking Changes
-
-None expected. If found, they will be documented here.
+**Implementation:** `lib/parse-chat-export-impl.js`
+**Tests:** 82/82 passing, 86.75% coverage
 
 ---
 
 ## Agentes
 
-| Agente | Persona | Modelo | Papel | Tier |
-|--------|---------|--------|-------|------|
-| **prospector-chief** | Atlas | sonnet | Pipeline Orchestrator & Lead Qualification Chief | Orchestration |
-| **chat-parser** | Cipher | haiku | WhatsApp Export Parser & Data Validator | Processing |
-| **prospect-analyst** | Minerva | sonnet | Solution Fit Analyst & Lead Scorer (+ ICP/Red Flag) | Analysis |
-| **outreach-writer** | Velvet | opus | Personalized Outreach Copywriter | Outreach |
+| Agente | Persona | Modelo | Papel |
+|--------|---------|--------|-------|
+| **prospector-chief** | Atlas | sonnet | Pipeline Orchestrator (Phases 2-4, 6, 8-11) |
+| **chat-parser** | Cipher | haiku | WhatsApp Parser (Phases 1-2) |
+| **prospect-analyst** | Minerva | sonnet | Dual Scorer (Phase 5) |
+| **outreach-writer** | Assembler | opus | Message Assembler (Phase 7, delega copy) |
 
 ---
 
@@ -200,109 +146,64 @@ None expected. If found, they will be documented here.
 
 ### Pipeline Completo (1 grupo)
 ```
-/ensinio-whatsapp-prospector:workflows:full-pipeline
+*full-pipeline {zip_path} {group_name}
 ```
-Inputs: `{zip_path}` (path do ZIP exportado) + `{group_name}` (nome do grupo)
 
-### Pipeline Batch (múltiplos grupos)
+### Pipeline Batch (multiplos grupos)
 ```
-/ensinio-whatsapp-prospector:workflows:batch-pipeline
+*batch-pipeline [{zip1, grupo1}, {zip2, grupo2}, ...]
 ```
-Inputs: Array de `{zip_path, group_name}` + `{sheet_mode}` (single_tab | new_tab_per_group | append)
 
 ### Tasks Individuais
 ```
-/ensinio-whatsapp-prospector:tasks:parse-chat-export        # P1: Parsear ZIP WhatsApp
-/ensinio-whatsapp-prospector:tasks:validate-parsed-data     # P1b: Validar dados parseados
-/ensinio-whatsapp-prospector:tasks:load-ensinio-kb          # P2: Carregar KB Ensinio (5 pilares)
-/ensinio-whatsapp-prospector:tasks:resolve-phone-numbers    # P2b: Resolver telefones (interativo)
-/ensinio-whatsapp-prospector:tasks:analyze-prospects         # P3: Analisar, ICP match, red flags, scorer
-/ensinio-whatsapp-prospector:tasks:write-outreach            # P4: Gerar mensagens personalizadas
-/ensinio-whatsapp-prospector:tasks:validate-outreach-batch   # P4b: Validar batch de mensagens
-/ensinio-whatsapp-prospector:tasks:sync-to-ghl               # P5: Sync GHL (Contact+Deal+Msg) [NEW v4.0]
-/ensinio-whatsapp-prospector:tasks:populate-sheet            # P6: Popular Google Sheets
-/ensinio-whatsapp-prospector:tasks:handle-parse-errors       # Recovery: Tratar erros de parse
+*parse {zip}             # Phase 1: Parsear ZIP
+*analyze                 # Phase 5: Analisar + dual scoring
+*write                   # Phase 7: Gerar mensagens (squad delegation)
+*populate-sheet          # Phase 9: Popular Sheets (source of truth)
+*send-evolution          # Phase 10: Enviar via Evolution API (pergunta antes)
+*sync-ghl               # Phase 11: Sync GHL (opcional, sem msgs)
+*status                  # Ver progresso do pipeline
 ```
 
----
-
-## Phone Number Format (E.164)
-
+### Envio Seletivo por Grupo (batch)
 ```
-+[country_code][area_code][number]
+"Envie todas as mensagens do grupo Mentoria 50K"
+→ Filtra aba "Mentoria 50K" no Sheets → Phase 10 so para esse grupo
 ```
-
-| Type | Format | Example |
-|------|--------|---------|
-| BR Mobile | +55[DDD]9[XXXX][XXXX] | +5511999887766 |
-| BR Landline | +55[DDD][XXXX][XXXX] | +551133445566 |
-| International | +[code][number] | +1234567890 |
-
-Auto-normalization: `31 99988-7766` → `+5531999887766`
-
-Phone-books: `data/phone-books/{group-slug}.json` (per group, never global)
-
----
-
-## Data Sources
-
-### From this squad (data/)
-| Arquivo | Conteúdo |
-|---------|----------|
-| `scoring-criteria.md` | Critérios de scoring v2.1 (com ICP + red flags) |
-| `message-rules.md` | Regras de mensagem |
-| `phone-books/{slug}.json` | Phone books per group |
-
-### From ensinio-mind (source of truth)
-| Arquivo | Conteúdo |
-|---------|----------|
-| `ensinio-solutions-kb.md` | KB completo — 5 pilares, 67+ features |
-| `ensinio-icps.md` | ICP detalhado (demográfico + comportamental) |
-| `ensinio-red-flags.md` | 18 red flags + 4 BLOQUEADORES |
-| `ensinio-arguments.md` | 3 argumentos principais + matriz de uso |
-| `ensinio-sales-playbook.md` | 5 objeções + respostas + perguntas |
-| `ensinio-sales-cycle.md` | Timeline, funil, aceleradores |
 
 ---
 
 ## Quality Gates
 
-| ID | Nome | Transição | Tipo |
-|----|------|-----------|------|
-| QG-000.5 | Phone Resolution | Parsed -> Contacts with Phones | Interactive |
-| QG-001 | Parse Validation | Raw ZIP -> Structured Contacts | Blocking |
-| QG-002 | Analysis Complete | Contacts -> Scored Prospects | Blocking |
-| QG-002.5 | Scoring Validation | Scored -> Validated Scores | Blocking |
-| QG-003 | Message Quality | Draft -> Approved Message | Blocking |
-| QG-005 | GHL Sync | Approved -> GHL (Contact+Deal+Msg) | Blocking |
-| QG-004 | Sheet Population | Approved -> Google Sheets | Blocking |
+| ID | Nome | Phase | Tipo |
+|----|------|-------|------|
+| QG-001 | Parse Validation | 2 | Bloqueador |
+| QG-000.5 | Phone Resolution | 4 | Interativo |
+| QG-002 | Analysis Complete | 5 | Bloqueador |
+| QG-002.5 | Scoring Validation | 6 | Bloqueador |
+| QG-003 | Message Quality | 8 | Bloqueador (max 2 iter) |
+| QG-008 | Sheet Population | 9 | Bloqueador |
+| QG-010 | Send Validation | 10 | Interativo |
+| QG-005 | GHL Sync | 11 | Opcional |
 
 ---
 
-## Red Flags (BLOQUEADORES)
+## Red Flags (BLOQUEADORES — client_score = 0)
 
-| Red Flag | Sinal | Score |
-|----------|-------|-------|
-| Produto físico | Vender roupas, canecas, produtos tangíveis | 0 (excluir) |
-| Apenas ebook | Quer vitrine para PDF simples | 0 (excluir) |
-| Afiliado/revenda | Quer revender, não criar conteúdo | 0 (excluir) |
-| "Gerenciem tudo" | Quer terceirização total | 0 (excluir) |
+| Red Flag | Sinal | Efeito |
+|----------|-------|--------|
+| Produto físico | Vende roupas, canecas (ele mesmo) | client_score = 0 |
+| Apenas ebook | Quer vitrine para PDF simples | client_score = 0 |
+| Afiliado/revenda | Quer revender, não criar conteúdo | client_score = 0 |
+| "Gerenciem tudo" | Quer terceirização total | client_score = 0 |
+
+**NOTA:** Bloqueadores afetam APENAS client_score. Partner_score é avaliado independentemente.
 
 ---
 
 ## Output: Google Sheets
 
 **Spreadsheet ID:** `124EQQAkmt9D7-49LbR-Jx64DhxdtCwceUQgqolk5ZFI`
-
-| Coluna | Conteúdo |
-|--------|----------|
-| A | Nome (primeiro nome) |
-| B | Telefone (+55XXXXXXXXXXX) |
-| C | Grupo do WhatsApp de origem |
-| D | Nome/nicho do projeto |
-| E | Explicação detalhada do projeto |
-| F | Mensagem do WhatsApp (raw text) |
-| G | Link WhatsApp direto (URL-encoded) |
 
 Ordenado por **temperature score** (mais quente primeiro).
 
@@ -312,64 +213,90 @@ Ordenado por **temperature score** (mais quente primeiro).
 
 ```
 ensinio-whatsapp-prospector/
-├── config.yaml                          # Configuração do squad v3.0
+├── config.yaml                          # Configuração v5.0
 ├── README.md                            # Este arquivo
 ├── agents/
 │   ├── prospector-chief.md              # Atlas - Orquestrador
 │   ├── chat-parser.md                   # Cipher - Parser
 │   ├── prospect-analyst.md              # Minerva - Analista
-│   └── outreach-writer.md               # Velvet - Copywriter
+│   └── outreach-writer.md               # Assembler (delega copy)
 ├── tasks/
 │   ├── parse-chat-export.md             # P1: Parse ZIP
-│   ├── validate-parsed-data.md          # P1b: Validação parse
+│   ├── validate-parsed-data.md          # P2: Validação parse
 │   ├── handle-parse-errors.md           # Recovery: Erros parse
-│   ├── load-ensinio-kb.md               # P2: Carregar KB
-│   ├── resolve-phone-numbers.md         # P2b: Resolver telefones (NEW v3.0)
-│   ├── analyze-prospects.md             # P3: Analisar + ICP + Red Flags (UPDATED v3.0)
-│   ├── write-outreach.md                # P4: Escrever mensagens
-│   ├── validate-outreach-batch.md       # P4b: Validar batch
-│   ├── sync-to-ghl.md                  # P5: Sync GHL (NEW v4.0)
-│   └── populate-sheet.md               # P6: Popular Sheets
+│   ├── load-ensinio-kb.md               # P3: Carregar KB
+│   ├── resolve-phone-numbers.md         # P4: Resolver telefones
+│   ├── analyze-prospects.md             # P5: Dual Scoring
+│   ├── write-outreach.md                # P7: Squad delegation
+│   ├── validate-outreach-batch.md       # P8: Validar batch
+│   ├── populate-sheet-v5.md             # P9: Sheets (source of truth)
+│   ├── send-via-evolution-api.md        # P10: Evolution API (NEW v5.0)
+│   └── sync-to-ghl-v5.md               # P11: GHL Sync (opcional)
 ├── workflows/
-│   ├── full-pipeline.yaml               # Pipeline completo (9 fases) (UPDATED v3.0)
-│   └── batch-pipeline.yaml             # Pipeline batch multi-grupo (NEW v3.0)
+│   ├── full-pipeline.yaml               # Pipeline 11 fases (v5.0)
+│   └── batch-pipeline.yaml              # Batch multi-grupo (v5.0)
 ├── checklists/
 │   ├── parse-validation-checklist.md    # QG-001
-│   ├── phone-validation-checklist.md    # QG-000.5 (NEW v3.0)
+│   ├── phone-validation-checklist.md    # QG-000.5
 │   ├── scoring-validation-checklist.md  # QG-002.5
 │   ├── message-quality-checklist.md     # QG-003
-│   └── ghl-sync-checklist.md           # QG-005 (NEW v4.0)
-└── data/
-    ├── ensinio-solutions-kb.md          # KB v2.0 (symlink to ensinio-mind)
-    ├── message-rules.md                 # Regras de mensagem
-    ├── scoring-criteria.md              # Critérios de scoring v2.1 (UPDATED v3.0)
-    └── phone-books/                     # Phone books per group (NEW v3.0)
-        └── {group-slug}.json            # Um arquivo por grupo
+│   └── ghl-sync-checklist.md            # QG-005
+├── data/
+│   ├── scoring-criteria.md              # v3.0 (dual scoring)
+│   ├── message-rules.md                 # Regras de mensagem
+│   └── phone-books/                     # Phone books per group
+│       └── {group-slug}.json
+├── lib/
+│   └── parse-chat-export-impl.js        # Parser implementation
+└── outputs/                             # Exemplo outputs
 ```
 
 ---
 
-## Settings
+## Configuração
 
+### Evolution API (.env)
+```env
+EVOLUTION_API_URL=https://your-evolution-api.example.com
+EVOLUTION_API_KEY=your-api-key
+EVOLUTION_INSTANCE=your-instance-name
+```
+
+### GHL (.env, opcional)
+```env
+GHL_API_TOKEN=pit-xxx
+GHL_LOCATION_ID=xxx
+GHL_PIPELINE_ID=xRqrV2LoT6E8iwLW4Syi
+GHL_DEFAULT_STAGE_ID=d3c25373-2b78-43d4-af3a-b4781f15874e
+```
+
+### Squad Settings (config.yaml)
 | Setting | Valor |
 |---------|-------|
 | `google_sheets_id` | `124EQQAkmt9D7-49LbR-Jx64DhxdtCwceUQgqolk5ZFI` |
 | `ensinio_kb_source` | `ensinio-mind/data/ensinio-solutions-kb.md` |
-| `ensinio_mind_sources` | ICPs, red flags, arguments, playbook, cycle |
-| `phone_books_dir` | `data/phone-books` |
 | `phone_format` | E.164 |
 | `default_country_code` | +55 |
 | `min_score_threshold` | 3 |
 | `max_rework_iterations` | 2 |
-| `batch_size` | 50 |
-| `language` | pt-BR |
-| `ghl.pipeline_id` | `xRqrV2LoT6E8iwLW4Syi` (Qualificacao) |
-| `ghl.default_stage_id` | `d3c25373-...` (Para prospectar) |
-| `ghl.default_tags` | `["Leads Fosc"]` |
-| `ghl.tag_prompt` | `true` (SEMPRE perguntar antes) |
-| `ghl.send_messages` | `true` |
-| `ghl.rate_limit_delay_ms` | 600 |
+| `evolution.interval_ms` | 3000 |
+| `evolution.error_threshold` | 20% |
+| `evolution.confirm_before_send` | true (ALWAYS) |
 
 ---
 
-*WhatsApp Prospector Ensinio v4.0.0 - AIOS Squad*
+## Dependências Externas (Squads)
+
+### Mandatory
+- **ensinio-mind** — KB Ensinio, ICPs, Red Flags, Arguments, Playbook
+- **copywriting-squad** — Awareness, Clone selection, Draft, Audit
+- **leandro-ladeira** — Big Idea por cluster de dor
+
+### Optional
+- **hormozi** — Hooks fortes
+- **storytelling-masters-fosc** — Micro-stories
+- **conversao-extrema** — Word mapping
+
+---
+
+*WhatsApp Prospector Ensinio v5.0.0 — Sheets-First | Evolution API | AIOS Squad*

@@ -67,7 +67,7 @@ class VersionTracker {
         migration_required = false,
         breaking_changes = [],
         compatibility_notes = '',
-        release_notes = ''
+        release_notes = '',
       } = versionData;
 
       // Validate version format
@@ -99,7 +99,7 @@ class VersionTracker {
         components_modified: await this.detectModifiedComponents(),
         api_changes: await this.detectApiChanges(),
         deprecations: [],
-        migration_path: migration_required ? `${this.currentVersion}-to-${version}` : null
+        migration_path: migration_required ? `${this.currentVersion}-to-${version}` : null,
       };
 
       // Add to version history
@@ -138,7 +138,7 @@ class VersionTracker {
       include_migrations = true,
       include_breaking = false,
       since_version = null,
-      status_filter = null
+      status_filter = null,
     } = options;
 
     if (!this.versionInfo) {
@@ -181,8 +181,8 @@ class VersionTracker {
         migration_required: v.migration_required,
         breaking_changes: v.breaking_changes?.length || 0,
         status: v.status,
-        components_modified: v.components_modified?.length || 0
-      }))
+        components_modified: v.components_modified?.length || 0,
+      })),
     };
   }
 
@@ -197,7 +197,7 @@ class VersionTracker {
       warnings: [],
       migration_path: null,
       estimated_effort: 'unknown',
-      risk_level: 'low'
+      risk_level: 'low',
     };
 
     try {
@@ -294,7 +294,7 @@ class VersionTracker {
         reason: deprecationInfo.reason || 'Version deprecated',
         migration_target: deprecationInfo.migration_target || this.currentVersion,
         removal_timeline: deprecationInfo.removal_timeline || 'TBD',
-        deprecation_notice: deprecationInfo.notice || `Version ${version} is deprecated. Please upgrade to ${this.currentVersion}.`
+        deprecation_notice: deprecationInfo.notice || `Version ${version} is deprecated. Please upgrade to ${this.currentVersion}.`,
       };
 
       versionEntry.status = 'deprecated';
@@ -323,7 +323,7 @@ class VersionTracker {
       estimated_duration: 0,
       risk_assessment: 'low',
       requirements: [],
-      rollback_available: true
+      rollback_available: true,
     };
 
     try {
@@ -339,7 +339,7 @@ class VersionTracker {
             estimated_time: this.estimateMigrationTime(version),
             risk_level: this.assessMigrationRisk(version),
             prerequisites: version.migration_prerequisites || [],
-            rollback_supported: true
+            rollback_supported: true,
           };
           
           path.steps.push(step);
@@ -356,7 +356,7 @@ class VersionTracker {
 
       // Collect unique requirements
       path.requirements = [...new Set(
-        path.steps.flatMap(step => step.prerequisites)
+        path.steps.flatMap(step => step.prerequisites),
       )];
 
       return path;
@@ -382,19 +382,19 @@ class VersionTracker {
       version_distribution: {
         active: 0,
         deprecated: 0,
-        archived: 0
+        archived: 0,
       },
       migration_summary: {
         total_migrations: 0,
         pending_migrations: 0,
-        failed_migrations: 0
+        failed_migrations: 0,
       },
       breaking_changes_summary: {
         total_breaking_versions: 0,
-        recent_breaking_changes: []
+        recent_breaking_changes: [],
       },
       compatibility_matrix: {},
-      recommendations: []
+      recommendations: [],
     };
 
     // Analyze version distribution
@@ -411,7 +411,7 @@ class VersionTracker {
         if (semver.gte(version.version, semver.major(this.currentVersion) + '.0.0')) {
           report.breaking_changes_summary.recent_breaking_changes.push({
             version: version.version,
-            changes: version.breaking_changes.slice(0, 3)
+            changes: version.breaking_changes.slice(0, 3),
           });
         }
       }
@@ -422,7 +422,7 @@ class VersionTracker {
       report.recommendations.push({
         type: 'cleanup',
         priority: 'medium',
-        message: `${report.version_distribution.deprecated} deprecated versions should be archived`
+        message: `${report.version_distribution.deprecated} deprecated versions should be archived`,
       });
     }
 
@@ -430,7 +430,7 @@ class VersionTracker {
       report.recommendations.push({
         type: 'stability',
         priority: 'high',
-        message: 'High number of breaking changes detected. Consider stability improvements.'
+        message: 'High number of breaking changes detected. Consider stability improvements.',
       });
     }
 
@@ -460,10 +460,10 @@ class VersionTracker {
         components_modified: [],
         api_changes: [],
         deprecations: [],
-        migration_path: null
+        migration_path: null,
       }],
       migration_history: [],
-      compatibility_matrix: {}
+      compatibility_matrix: {},
     };
   }
 

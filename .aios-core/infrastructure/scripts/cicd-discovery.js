@@ -181,7 +181,7 @@ class ConfigParser {
 
     // Extract stages
     const stagesMatch = pipelineContent.match(
-      /stages\s*\{([\s\S]*?)\}(?=\s*(?:post|options|triggers|\}|$))/
+      /stages\s*\{([\s\S]*?)\}(?=\s*(?:post|options|triggers|\}|$))/,
     );
     if (stagesMatch) {
       const stageMatches = stagesMatch[1].matchAll(/stage\s*\(\s*['"]([^'"]+)['"]\s*\)/g);

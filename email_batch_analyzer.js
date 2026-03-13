@@ -4,11 +4,11 @@ const path = require('path');
 // Simular dados de emails que vamos analisar
 const emailSamples = [
   {
-    from: "Google <no-reply@accounts.google.com>",
-    subject: "Alerta de segurança para felipe@lupaconstrutora.com.br",
-    type: "SECURITY",
-    action: "DEFER"
-  }
+    from: 'Google <no-reply@accounts.google.com>',
+    subject: 'Alerta de segurança para felipe@lupaconstrutora.com.br',
+    type: 'SECURITY',
+    action: 'DEFER',
+  },
 ];
 
 // Vamos coletar mais dados através de uma segunda chamada

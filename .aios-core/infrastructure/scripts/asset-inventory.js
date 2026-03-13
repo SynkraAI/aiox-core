@@ -312,20 +312,20 @@ function findOrphans(inventory) {
   inventory.agents.forEach((agent) => {
     agent.dependencies.tasks.forEach((t) => referenced.add(`task:${t.replace('.md', '')}`));
     agent.dependencies.templates.forEach((t) =>
-      referenced.add(`template:${t.replace(/\.(yaml|yml|md)$/, '')}`)
+      referenced.add(`template:${t.replace(/\.(yaml|yml|md)$/, '')}`),
     );
     agent.dependencies.checklists.forEach((t) =>
-      referenced.add(`checklist:${t.replace('.md', '')}`)
+      referenced.add(`checklist:${t.replace('.md', '')}`),
     );
     agent.dependencies.data.forEach((t) => referenced.add(`data:${t.replace(/\.(md|yaml)$/, '')}`));
   });
 
   inventory.tasks.forEach((task) => {
     task.dependencies.templates.forEach((t) =>
-      referenced.add(`template:${t.replace(/\.(yaml|yml|md)$/, '')}`)
+      referenced.add(`template:${t.replace(/\.(yaml|yml|md)$/, '')}`),
     );
     task.dependencies.checklists.forEach((t) =>
-      referenced.add(`checklist:${t.replace('.md', '')}`)
+      referenced.add(`checklist:${t.replace('.md', '')}`),
     );
   });
 
@@ -425,7 +425,7 @@ async function generateInventory(rootPath, options = {}) {
       scanDirectory(
         path.join(rootPath, ASSET_PATHS.checklists),
         ASSET_PATTERNS.checklists,
-        rootPath
+        rootPath,
       ),
       scanDirectory(path.join(rootPath, ASSET_PATHS.scripts), ASSET_PATTERNS.scripts, rootPath),
       scanDirectory(path.join(rootPath, ASSET_PATHS.schemas), ASSET_PATTERNS.schemas, rootPath),

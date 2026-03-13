@@ -865,7 +865,7 @@ ${chalk.cyan('Acceptance Criteria Coverage:')}
 
         if (!quiet) {
           console.log(
-            chalk.green(`\n✓ Started attempt #${attempt.number} for ${storyId}/${subtaskId}`)
+            chalk.green(`\n✓ Started attempt #${attempt.number} for ${storyId}/${subtaskId}`),
           );
           console.log(chalk.dim(`  Approach: ${approach}`));
           if (changes.length > 0) {

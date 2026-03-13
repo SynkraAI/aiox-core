@@ -266,7 +266,7 @@ class ChangelogGenerator {
 
     // Extract user story if present
     const userStoryMatch = content.match(
-      /\*\*As a\*\*\s+(.+),\s*\*\*I want\*\*\s+(.+),\s*\*\*so that\*\*\s+(.+)/i
+      /\*\*As a\*\*\s+(.+),\s*\*\*I want\*\*\s+(.+),\s*\*\*so that\*\*\s+(.+)/i,
     );
 
     return {
@@ -275,10 +275,10 @@ class ChangelogGenerator {
       type,
       userStory: userStoryMatch
         ? {
-            role: userStoryMatch[1],
-            action: userStoryMatch[2],
-            benefit: userStoryMatch[3],
-          }
+          role: userStoryMatch[1],
+          action: userStoryMatch[2],
+          benefit: userStoryMatch[3],
+        }
         : null,
     };
   }
@@ -502,7 +502,7 @@ class ChangelogGenerator {
       }
     } else {
       // Create new changelog
-      const header = `# Changelog\n\nAll notable changes to this project will be documented in this file.\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),\nand this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n\n`;
+      const header = '# Changelog\n\nAll notable changes to this project will be documented in this file.\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),\nand this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n\n';
       fs.writeFileSync(this.changelogPath, header + changelog);
     }
 

@@ -174,7 +174,7 @@ function main() {
   const { squadName, skillsDir } = parseArgs(process.argv);
   if (!squadName) {
     fail(
-      'usage: node squads/squad-creator-pro/scripts/sync-chief-codex-skill.js --squad <squad-name> [--skills-dir <path>]'
+      'usage: node squads/squad-creator-pro/scripts/sync-chief-codex-skill.js --squad <squad-name> [--skills-dir <path>]',
     );
   }
 
@@ -217,7 +217,7 @@ function main() {
   const title = oneLine(chiefYaml?.agent?.title, `${chiefId} Chief`);
   const whenToUse = oneLine(
     chiefYaml?.agent?.whenToUse,
-    `Use para ativar o chief ${chiefId} do squad ${squadName}.`
+    `Use para ativar o chief ${chiefId} do squad ${squadName}.`,
   );
 
   const chiefPathRelative = path.relative(projectRoot, chiefPath).replace(/\\/g, '/');

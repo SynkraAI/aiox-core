@@ -79,7 +79,7 @@ function loadAndValidateUserProfile(configPath) {
   const defaultConfigPath = path.join(
     process.cwd(),
     '.aios-core',
-    'core-config.yaml'
+    'core-config.yaml',
   );
   const resolvedPath = configPath || defaultConfigPath;
 

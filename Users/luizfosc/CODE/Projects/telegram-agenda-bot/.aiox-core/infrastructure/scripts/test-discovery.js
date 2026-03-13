@@ -720,7 +720,7 @@ class CoverageAnalyzer {
           const match = content.match(/module\.exports\s*=\s*(\{[\s\S]*\})/);
           if (match) {
             try {
-              // eslint-disable-next-line no-eval
+               
               return eval('(' + match[1] + ')');
             } catch {
               return {};
@@ -916,7 +916,7 @@ class TestRunner extends EventEmitter {
 
     // Jest/Vitest format
     const jestMatch = output.match(
-      /Tests:\s+(\d+)\s+passed(?:,\s+(\d+)\s+failed)?(?:,\s+(\d+)\s+skipped)?(?:,\s+(\d+)\s+total)?/
+      /Tests:\s+(\d+)\s+passed(?:,\s+(\d+)\s+failed)?(?:,\s+(\d+)\s+skipped)?(?:,\s+(\d+)\s+total)?/,
     );
     if (jestMatch) {
       summary.passed = parseInt(jestMatch[1]) || 0;
@@ -937,7 +937,7 @@ class TestRunner extends EventEmitter {
 
     // Pytest format
     const pytestMatch = output.match(
-      /(\d+)\s+passed(?:,\s+(\d+)\s+failed)?(?:,\s+(\d+)\s+skipped)?/
+      /(\d+)\s+passed(?:,\s+(\d+)\s+failed)?(?:,\s+(\d+)\s+skipped)?/,
     );
     if (pytestMatch) {
       summary.passed = parseInt(pytestMatch[1]) || 0;

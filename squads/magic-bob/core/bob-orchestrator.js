@@ -344,7 +344,7 @@ class BobOrchestrator {
       const { execSync } = require('child_process');
 
       // Find all monitor-claude-status.sh processes
-      const monitorsOutput = execSync(`pgrep -f "monitor-claude-status.sh" 2>/dev/null || true`, {
+      const monitorsOutput = execSync('pgrep -f "monitor-claude-status.sh" 2>/dev/null || true', {
         encoding: 'utf8',
         timeout: 5000,
       }).trim();

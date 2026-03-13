@@ -72,7 +72,7 @@ function installLLMRouting(options = {}) {
     templatesDir = path.join(__dirname, 'templates'),
     enableTracking = true,
     onProgress = console.log,
-    onError = console.error
+    onError = console.error,
   } = options;
 
   const result = {
@@ -80,7 +80,7 @@ function installLLMRouting(options = {}) {
     installDir: null,
     filesInstalled: [],
     envCreated: false,
-    errors: []
+    errors: [],
   };
 
   // Check templates exist
@@ -148,7 +148,7 @@ function installLLMRouting(options = {}) {
     try {
       fs.copyFileSync(envExample, envFile);
       result.envCreated = true;
-      onProgress(`✅ Created .env from .env.example`);
+      onProgress('✅ Created .env from .env.example');
     } catch (error) {
       result.success = false;
       result.errors.push(`Failed to create .env: ${error.message}`);
@@ -187,7 +187,7 @@ function updateClaudeConfig(trackingEnabled = true) {
       version: LLM_ROUTING_VERSION,
       installedAt: new Date().toISOString(),
       commands: ['claude-max', 'claude-free', 'deepseek-usage', 'deepseek-proxy'],
-      trackingEnabled
+      trackingEnabled,
     };
 
     fs.writeFileSync(claudeConfigPath, JSON.stringify(config, null, 2));
@@ -263,7 +263,7 @@ module.exports = {
   isLLMRoutingInstalled,
   getInstallDir,
   getInstallationSummary,
-  LLM_ROUTING_VERSION
+  LLM_ROUTING_VERSION,
 };
 
 // Run if executed directly
@@ -272,7 +272,7 @@ if (require.main === module) {
 
   const result = installLLMRouting({
     projectRoot: process.cwd(),
-    templatesDir: path.join(__dirname, 'templates')
+    templatesDir: path.join(__dirname, 'templates'),
   });
 
   const summary = getInstallationSummary(result);

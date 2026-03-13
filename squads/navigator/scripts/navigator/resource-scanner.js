@@ -59,7 +59,7 @@ function scanSquads() {
 
     squads.push({
       name: entry.name,
-      description: description
+      description: description,
     });
   }
 
@@ -103,7 +103,7 @@ function scanTools() {
 
     tools.push({
       name: entry.name,
-      description: description
+      description: description,
     });
   }
 
@@ -167,7 +167,7 @@ function scanSkills() {
     skills.push({
       name: entry.name,
       activation: `/AIOS:skills:${entry.name}`,
-      description: description
+      description: description,
     });
   }
 
@@ -182,7 +182,7 @@ function scanAllResources() {
     squads: scanSquads(),
     tools: scanTools(),
     skills: scanSkills(),
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 }
 

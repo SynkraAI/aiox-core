@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-03-13T13:30:43.968Z"
+generated_at: "2026-03-13T22:44:33.171Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1126
 files:
@@ -193,21 +193,21 @@ files:
     type: core
     size: 5637
   - path: core/code-intel/helpers/dev-helper.js
-    hash: sha256:2418a5f541003c73cc284e88a6b0cb666896a47ffd5ed4c08648269d281efc4c
+    hash: sha256:7e7f9bb92725ca1d85b0a7151668bc5bcdd6fc9b73fed5b2b2c28217d14535ab
     type: core
-    size: 5770
+    size: 5751
   - path: core/code-intel/helpers/devops-helper.js
     hash: sha256:c40cfa9ac2f554a707ff68c7709ae436349041bf00ad2f42811ccbe8ba842462
     type: core
     size: 5115
   - path: core/code-intel/helpers/planning-helper.js
-    hash: sha256:2edcf275122125205a9e737035c8b25efdc4af13e7349ffc10c3ebe8ebe7654d
+    hash: sha256:9ca5b57b74b5729685369662659e15a91e35ec3a33691973be000ecd85974f3d
     type: core
-    size: 6863
+    size: 6844
   - path: core/code-intel/helpers/qa-helper.js
-    hash: sha256:ca069dad294224dd5c3369826fb39d5c24287d49d74360049f8bbc55f190eeda
+    hash: sha256:9dbb84c1c4ed1aa57385ad2a6c74520f2020e6f8883012dd57c51486172ee528
     type: core
-    size: 5184
+    size: 5146
   - path: core/code-intel/helpers/story-helper.js
     hash: sha256:778466253ac66103ebc3b1caf71f44b06a0d5fb3d39fe8d3d473dd4bc73fefc6
     type: core
@@ -277,9 +277,9 @@ files:
     type: core
     size: 936
   - path: core/config/template-overrides.js
-    hash: sha256:1708dc8764e7f88dfefd7684240afcd5f13657170ac104aed99145e2bb8ae82c
+    hash: sha256:202d141a292bc5a8dd0697e044d7627b260839ae8b7119fd40ae486b3a1b0825
     type: core
-    size: 2223
+    size: 2224
   - path: core/config/templates/user-config.yaml
     hash: sha256:3505471b0adff9bfcea08f46cca3aeeda46a283bbe7ee711dd566e5974c3257f
     type: template
@@ -445,9 +445,9 @@ files:
     type: core
     size: 10251
   - path: core/graph-dashboard/data-sources/code-intel-source.js
-    hash: sha256:e508d6cbadcd2358fa7756dcaceefbaa510bd89155e036e2cbd386585408ff8f
+    hash: sha256:2b0534f57a8f6ca2ff5942e42faf147f1be84773b3af33c9e506ee8f318b558c
     type: core
-    size: 6799
+    size: 6800
   - path: core/graph-dashboard/data-sources/metrics-source.js
     hash: sha256:b1e4027f82350760b67ea8f58e04a5e739f87f010838487043e29dab7301ae9e
     type: core
@@ -725,7 +725,7 @@ files:
     type: core
     size: 3624
   - path: core/ids/layer-classifier.js
-    hash: sha256:4ae1e7d341076a13d08b8b5baf7a687ad2c7df673d50fc3554d522fe79debcdc
+    hash: sha256:2a240b70ac3507e50a64b96d580c4d933bf2116125fb52c8237db2ed9ebf27b7
     type: core
     size: 2382
   - path: core/ids/README.md
@@ -1217,11 +1217,11 @@ files:
     type: data
     size: 34235
   - path: data/capability-detection.js
-    hash: sha256:5176849c01d90e5867f18962e03ff10a10628f40c30fe5c8cb65209f833c0884
+    hash: sha256:317d1b51b5cda2e35ac6d468e33e05c0948e6d7f05f51d750d7ce6ff5a58535a
     type: data
-    size: 9575
+    size: 9590
   - path: data/entity-registry.yaml
-    hash: sha256:7591e935a194dd8b6c0acc952d75f6044c6b4763a0b1dedfdd166ee405652345
+    hash: sha256:cfef1dbf150f99a546a24235035f0343aff3ad98ed4badb1c617a5b0081e45a9
     type: data
     size: 545222
   - path: data/learned-patterns.yaml
@@ -1281,9 +1281,9 @@ files:
     type: data
     size: 15178
   - path: data/tool-search-validation.js
-    hash: sha256:8757bf087692f002d67115dbe1c8244bbd869600e4f52c49b0d9b07cb9fbb783
+    hash: sha256:d83f0680d38996be4615c1f3425d35e0b20c5c93c09da470d2c6a42dcfc3583c
     type: data
-    size: 5754
+    size: 5755
   - path: data/workflow-chains.yaml
     hash: sha256:1fbf1625e267eedc315cf1e08e5827c250ddc6785fb2cb139e7702def9b66268
     type: data

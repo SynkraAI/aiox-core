@@ -560,7 +560,7 @@ Each gotcha includes the **wrong** approach, the **right** approach, and the **r
           low: [...this.gotchas.values()].filter((g) => g.severity === Severity.LOW).length,
         },
         byCategory: Object.fromEntries(
-          [...categories.entries()].map(([cat, items]) => [cat, items.length])
+          [...categories.entries()].map(([cat, items]) => [cat, items.length]),
         ),
         insightsScanned: this.stats.insightsScanned,
       },
@@ -766,7 +766,7 @@ Each gotcha includes the **wrong** approach, the **right** approach, and the **r
         relatedFiles: discovery.relatedFiles,
         severity: discovery.relevance === 'high' ? Severity.HIGH : Severity.MEDIUM,
       },
-      insights
+      insights,
     );
   }
 
@@ -784,7 +784,7 @@ Each gotcha includes the **wrong** approach, the **right** approach, and the **r
         category: this._detectCategory(pattern),
         severity: Severity.MEDIUM,
       },
-      insights
+      insights,
     );
   }
 

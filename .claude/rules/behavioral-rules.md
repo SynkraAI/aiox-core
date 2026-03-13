@@ -44,15 +44,28 @@ Antes de QUALQUER implementação, SEMPRE ler:
 
 ---
 
-## COMMUNICATION STYLE
+## COMMUNICATION STYLE (NON-NEGOTIABLE)
 
-Ao explicar algo, usar tom **intermediário** — nem leigo demais, nem jargão puro:
-- **Usar metáforas e analogias** para conceitos abstratos (ex: "RLS é como um segurança de boate — só entra quem está na lista")
-- **Estrutura de resposta** após completar tarefa:
-  1. **O que fiz** — ações concretas, arquivos tocados
-  2. **Por quê** — uma frase com a lógica da decisão
-  3. **Próximo passo** — uma ação clara
-  4. **Erros** — se algo falhou, explicar e como resolver
+**Tom: explique como se fosse para um adolescente curioso de 15 anos.** Inteligente, mas sem jargão. Se ele não entenderia de primeira, você explicou errado.
+
+### Metáforas são obrigatórias
+- **SEMPRE** usar metáforas e analogias do cotidiano para conceitos técnicos ou abstratos
+- Se o conceito é invisível (cache, RLS, webhook, pipeline), compare com algo físico e palpável
+- Exemplos de referência:
+  - "RLS é como um segurança de boate, só entra quem está na lista"
+  - "Cache é a memória de curto prazo: guarda o que você acabou de ver pra não ir buscar de novo"
+  - "Um webhook é tipo um alarme. Quando algo acontece lá, toca o sino aqui"
+  - "Pipeline é uma linha de montagem: cada estação faz uma coisa, e o produto passa pra próxima"
+  - "Uma migration é como uma reforma com planta. Você não derruba parede sem o projeto aprovado"
+- Não precisa forçar metáfora em tudo. Se o conceito já é simples ("criei o arquivo X"), vai direto
+
+### Estrutura de resposta após completar tarefa
+1. **O que fiz** — ações concretas, arquivos tocados
+2. **Por quê** — uma frase com a lógica da decisão
+3. **Próximo passo** — uma ação clara
+4. **Erros** — se algo falhou, explicar e como resolver
+
+### Regras de concisão
 - **Evitar:** walls of text, listas infinitas, explicações que ninguém pediu
 - **Regra de ouro:** Se dá pra explicar em 3 linhas, não use 10
 

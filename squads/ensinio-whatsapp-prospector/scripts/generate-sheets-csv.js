@@ -3,6 +3,8 @@
 
 const fs = require('fs');
 const path = require('path');
+const { resolvePhoneFromBook } = require('../lib/phone-resolver');
+const { generateWhatsAppLink } = require('../lib/whatsapp-utils');
 
 const DATA_DIR = path.join(__dirname, '..', 'data', 'outputs', 'mentoria-50k');
 const PHONE_BOOK = path.join(__dirname, '..', 'data', 'phone-books', 'mentoria-50k.json');
@@ -31,7 +33,7 @@ for (const section of sections) {
 
   // Extract phone from phone book or from file
   const phoneLine = lines.find(l => l.startsWith('**Phone:**'));
-  let phone = phoneLine ? phoneLine.replace('**Phone:**', '').trim() : '';
+  const phone = phoneLine ? phoneLine.replace('**Phone:**', '').trim() : '';
 
   // Extract message (between **Message:** and **WhatsApp Link:** or ---)
   const messageStart = lines.findIndex(l => l.startsWith('**Message:**'));
@@ -42,52 +44,11 @@ for (const section of sections) {
     .join('\n')
     .trim();
 
-  // Try to resolve phone from phone book
-  let resolvedPhone = phone;
-  const nameLower = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  // Resolve phone from phone book
+  const { phone: resolvedPhone } = resolvePhoneFromBook(name, phoneBook);
 
-  // Exact or contains match
-  for (const [contactName, contactData] of Object.entries(phoneBook.contacts)) {
-    const cLower = contactName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    if (cLower.includes(nameLower) || nameLower.includes(cLower)) {
-      resolvedPhone = contactData.phone;
-      break;
-    }
-  }
-
-  // First+last name match
-  if (!resolvedPhone || resolvedPhone === 'NEEDS_RESOLUTION') {
-    const nameParts = nameLower.split(/\s+/);
-    for (const [contactName, contactData] of Object.entries(phoneBook.contacts)) {
-      const cLower = contactName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      const matched = nameParts.filter(p => p.length > 2 && cLower.includes(p));
-      if (matched.length >= 2) {
-        resolvedPhone = contactData.phone;
-        break;
-      }
-    }
-  }
-
-  // First name fallback
-  if (!resolvedPhone || resolvedPhone === 'NEEDS_RESOLUTION') {
-    const firstName = nameLower.split(/\s+/)[0];
-    if (firstName.length > 2) {
-      for (const [contactName, contactData] of Object.entries(phoneBook.contacts)) {
-        const cLower = contactName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        if (cLower.startsWith(firstName)) {
-          resolvedPhone = contactData.phone;
-          break;
-        }
-      }
-    }
-  }
-
-  // Clean phone for WhatsApp link (remove + and spaces)
-  const cleanPhone = resolvedPhone.replace(/[^0-9]/g, '');
-
-  // Generate WhatsApp link
-  const encodedMessage = encodeURIComponent(message);
-  const waLink = cleanPhone ? `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodedMessage}` : '';
+  // Generate WhatsApp link (using 'api' format to match original)
+  const waLink = generateWhatsAppLink(resolvedPhone, message, { format: 'api' });
 
   // Determine tier
   let tier = '';
@@ -105,7 +66,7 @@ for (const section of sections) {
     phone: resolvedPhone,
     message,
     waLink,
-    status: 'Pendente'
+    status: 'Pendente',
   });
 }
 
@@ -123,7 +84,7 @@ csvLines.push([
   'Status',
   'Resposta',
   'Data Envio',
-  'Notas'
+  'Notas',
 ].join('\t'));
 
 for (const p of prospects) {
@@ -139,7 +100,7 @@ for (const p of prospects) {
     p.status,
     '',
     '',
-    ''
+    '',
   ].join('\t'));
 }
 
@@ -148,7 +109,7 @@ fs.writeFileSync(outputPath, csvLines.join('\n'), 'utf8');
 
 console.log(`Generated ${prospects.length} prospects`);
 console.log(`Output: ${outputPath}`);
-console.log(`\nBreakdown by tier:`);
+console.log('\nBreakdown by tier:');
 const tiers = {};
 for (const p of prospects) {
   tiers[p.tier] = (tiers[p.tier] || 0) + 1;

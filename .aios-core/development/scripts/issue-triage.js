@@ -71,7 +71,7 @@ function applyLabels(number, type, priority, areas, extra) {
   const addStr = addLabels.map(l => `"${l}"`).join(',');
   console.log(`Applying to #${number}: ${addLabels.join(', ')}`);
   gh(`issue edit ${number} --add-label ${addStr} --remove-label "status: needs-triage"`);
-  console.log(`  Done.`);
+  console.log('  Done.');
 }
 
 function generateReport() {
@@ -84,7 +84,7 @@ function generateReport() {
     byType: {},
     byPriority: {},
     byArea: {},
-    byStatus: {}
+    byStatus: {},
   };
 
   for (const issue of issues) {
@@ -115,19 +115,19 @@ function generateReport() {
   console.log('\n=== Issue Triage Report ===\n');
   console.log(`Total open issues: ${stats.total}`);
   console.log(`Untriaged: ${stats.untriaged}`);
-  console.log(`\nBy Type:`);
+  console.log('\nBy Type:');
   for (const [k, v] of Object.entries(stats.byType).sort((a, b) => b[1] - a[1])) {
     console.log(`  ${k}: ${v}`);
   }
-  console.log(`\nBy Priority:`);
+  console.log('\nBy Priority:');
   for (const [k, v] of Object.entries(stats.byPriority).sort()) {
     console.log(`  ${k}: ${v}`);
   }
-  console.log(`\nBy Area:`);
+  console.log('\nBy Area:');
   for (const [k, v] of Object.entries(stats.byArea).sort((a, b) => b[1] - a[1])) {
     console.log(`  ${k}: ${v}`);
   }
-  console.log(`\nBy Status:`);
+  console.log('\nBy Status:');
   for (const [k, v] of Object.entries(stats.byStatus).sort((a, b) => b[1] - a[1])) {
     console.log(`  ${k}: ${v}`);
   }

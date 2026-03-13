@@ -1,171 +1,181 @@
-# Task: Write Outreach Messages
+# Task: Write Outreach Messages (v3.0 — Squad Delegation)
 
 ## Task Anatomy
 - **task_name:** write-outreach
 - **status:** active
-- **responsible_executor:** outreach-writer (Velvet)
-- **execution_type:** Agent
+- **responsible_executor:** outreach-writer (outreach-writer) — ASSEMBLER, not copywriter
+- **execution_type:** Agent (with mandatory squad delegation)
 - **input:**
-  - Analyzed prospect data from prospect-analyst (v3.0 — dual scoring + classification)
-  - Message rules from data/message-rules.md
-  - Sales arguments from ensinio-mind/data/ensinio-arguments.md
+  - Analyzed prospect data from prospect-analyst (v3.0, dual scoring + classification)
+  - Copy strategy from specialist squads (mandatory consultation)
+  - Ensinio knowledge from ensinio-mind squad
 - **output:**
   - Personalized messages with WhatsApp links (JSON)
   - URL-encoded message text
   - Valid WhatsApp links
-  - approach_type based on 7 classifications (not binary client/partner)
+  - approach_type based on 7 classifications
+
+## Filosofia v3.0
+
+**MUDANCA CRITICA:** outreach-writer NAO escreve copy. outreach-writer MONTA mensagens com base na estrategia dos especialistas.
+
+Pense assim: outreach-writer e o garcom que monta o prato. Os chefs estao na cozinha (squads de copy).
+Ele nao inventa receitas. Ele recebe o prato pronto e apresenta na mesa com o toque final.
+
+**Squads obrigatorios:**
+- `copywriting-squad` — estrategia, execucao e audit
+- `leandro-ladeira` — Big Idea por cluster de dor
+- `ensinio-mind` — contexto do produto (ICP, solutions, arguments)
+
+**Squads opcionais:**
+- `hormozi` — hooks fortes
+- `storytelling-masters-fosc` — narrativas de conexao
+- `conversao-extrema` — word mapping para objecoes
 
 ## Action Items
 
-### Step 1: Load Rules
-Load message rules from `data/message-rules.md`:
-- Sender is always Antonio
-- Sent on behalf of Fosc (socio fundador da Ensinio)
-- Must feel 100% human-written
-- Must be personalized per prospect
+### Step 1: Load Prospect Data
+Load analyzed prospect data (v3.0 with dual scoring + classification).
+**VETO:** Se dados nao estiverem no formato v3.0, HALT.
 
-### Step 2: Route by Classification
-For EACH qualified prospect, determine message structure based on classification:
+### Step 2: Load Ensinio Context
+Load from ensinio-mind squad:
+- `ensinio-mind/data/ensinio-solutions-kb.md` (67 features)
+- `ensinio-mind/data/ensinio-icps.md` (ICP)
+- `ensinio-mind/data/ensinio-arguments.md` (argumentos)
+- `ensinio-mind/data/ensinio-sales-playbook.md` (objecoes + respostas)
 
-#### CLIENTE_PURO (client 7-10, partner 0-3)
-**Estrutura:** Venda direta clássica
-1. Greeting casual (primeiro nome)
-2. Introdução Antonio
-3. Fosc viu mensagem/projeto no grupo
-4. Descrever projeto DELES especificamente
-5. Conectar dor à solução Ensinio
-6. Contextualizar temporalmente se necessário
-7. CTA: demo/papo rápido
-8. Fechamento quente
+### Step 3: Consult @eugene-schwartz (Awareness)
+**Squad:** copywriting-squad
+**Agent:** @eugene-schwartz
+**Reference:** squads/copywriting-squad/data/awareness-levels-kb.md
 
-#### CLIENTE_INDICADOR (client 7-10, partner 4-6)
-**Estrutura:** Venda direta + menção de indicação
-1-7: Igual CLIENTE_PURO
-8. Adicionar: "A gente também tem um programa de indicação pra quem conhece outras pessoas do nicho"
-9. Fechamento quente
+Para CADA prospect (ou grupo de prospects similares):
+- Enviar: dados do prospect (projeto, dor, classificacao)
+- Perguntar: "Qual nivel de awareness? Como abordar nesse nivel?"
+- Receber: awareness_level + abordagem recomendada
 
-#### CLIENTE_EMBAIXADOR (client 7-10, partner 7-10)
-**Estrutura:** Venda direta (como CLIENTE_PURO) + menção leve de parceria no final
-**Objetivo:** Fechar como cliente primeiro — gerar receita. A parceria é bônus.
-1. Greeting casual (primeiro nome)
-2. Introdução Antonio
-3. Fosc viu mensagem/projeto no grupo
-4. Descrever projeto DELES especificamente (igual CLIENTE_PURO)
-5. Conectar dor à solução Ensinio (foco em resolver o problema DELE)
-6. Contextualizar temporalmente se necessário
-7. CTA: demo/papo rápido (venda direta)
-8. Menção leve: "Ah, e a gente também tem um programa de parceiros que pode ser interessante pra quem trabalha com [formação/consultoria]"
-9. Fechamento quente
+**Output esperado:** Mapa prospect → awareness_level
 
-#### PARCEIRO_TÁTICO (client 4-6, partner 4-6)
-**Estrutura:** Soft approach duplo
-1. Greeting casual
-2. Introdução Antonio
-3. Referência ao trabalho/projeto deles
-4. Menção leve da Ensinio como possível ferramenta
-5. CTA suave: "Se fizer sentido, posso te mostrar rapidinho"
-6. Fechamento
+### Step 4: Consult @leandro-ladeira (Big Idea)
+**Squad:** leandro-ladeira
+**Agent:** @leandro-ladeira
+**Command:** *big-idea
 
-#### PARCEIRO_ESTRATÉGICO (client 4-6, partner 7-10) — ALTA PRIORIDADE
-**Estrutura:** Proposta de parceria estratégica
-1. Greeting casual
-2. Introdução Antonio
-3. Reconhecer posição de influência/formação
-4. Proposta: "A Ensinio pode ser a plataforma oficial do seu [método/grupo/programa]"
-5. Benefício multiplicador: "Seus [alunos/clientes] ganham acesso com condições especiais"
-6. CTA: "Queria te apresentar o programa de parceiros premium"
-7. Fechamento quente
+Para CADA cluster de dor (agrupar prospects por dor similar):
+- Enviar: cluster de dor + contexto do grupo WhatsApp
+- Perguntar: "Qual angulo unico (Big Idea) para esse cluster?"
+- Receber: big_idea_angle + hook_principal
 
-#### AFILIADO_PURO (client 0-3, partner 4-6)
-**Estrutura:** Programa de afiliados simples
-1. Greeting casual
-2. Introdução Antonio
-3. Referência ao trabalho/audiência deles
-4. Programa de afiliados: "comissão por cada indicação"
-5. CTA: "Posso te explicar como funciona?"
-6. Fechamento
+**Output esperado:** Mapa cluster_dor → big_idea
 
-#### CANAL_PREMIUM (client 0-3, partner 7-10) — ALTA PRIORIDADE
-**Estrutura:** Parceria formal
-1. Greeting casual
-2. Introdução Antonio
-3. Reconhecer influência/comunidade
-4. Proposta formal: "Parceria onde você ganha acesso gratuito à plataforma em troca de [recomendação/review/canal]"
-5. Prova social: mencionar outros parceiros se relevante
-6. CTA: "Queria te mostrar a proposta"
-7. Fechamento quente
+### Step 5: Consult @copy-maestro (Strategy + Clone Selection)
+**Squad:** copywriting-squad
+**Agent:** @copy-maestro
 
-### Step 3: Quality Check per Message
-Apply message-quality-checklist:
-- [ ] Feels human-written (not AI)
-- [ ] No "nome + sobrenome" pattern
-- [ ] No corporate language
-- [ ] Personalized with prospect's actual project
-- [ ] Temporal context included (if message is old)
-- [ ] Correct approach for classification (7 types, not 2)
-- [ ] Max 5-6 short paragraphs
-- [ ] Max 1-2 emojis
-- [ ] Natural CTA (not pushy)
-- [ ] EMBAIXADOR: mensagem foca em venda direta, parceria é menção leve no final
-- [ ] ESTRATÉGICO/CANAL: mensagem foca em parceria como proposta principal
+Para CADA prospect:
+- Enviar: dados + awareness (step 3) + big_idea (step 4) + classificacao
+- Perguntar: "Qual clone executor? Qual estrutura de mensagem?"
+- Receber: clone_selecionado + estrutura + tom
 
-### Step 4: Generate WhatsApp Links
-For each message:
-1. URL-encode the message text
-2. Handle special characters (newlines, accents, emojis)
-3. Build link: `https://api.whatsapp.com/send?phone={phone}&text={encoded_message}`
-4. Validate the link format
+**Hints de routing por classificacao:**
+| Classificacao | Clone sugerido | Por que |
+|---|---|---|
+| CLIENTE_PURO | @clayton-makepeace ou @gary-halbert | Emocao + dor ou storytelling |
+| CLIENTE_INDICADOR | @andre-chaperon | Relationship first |
+| CLIENTE_EMBAIXADOR | @gary-halbert | Story de conexao, foco na dor |
+| PARCEIRO_TATICO | @ben-settle | Tom casual, sem pressao |
+| PARCEIRO_ESTRATEGICO | @david-ogilvy | Copy premium/B2B |
+| AFILIADO_PURO | @ben-settle | Infotainment, leve |
+| CANAL_PREMIUM | @david-ogilvy | Parceria premium + prova social |
 
-### Step 5: Output
-Generate JSON output for each prospect with raw message, WhatsApp link, and classification.
+**IMPORTANTE:** Estes sao hints, nao regras. @copy-maestro decide o clone final.
+
+### Step 6: Consult Clone Executor (Draft)
+**Squad:** copywriting-squad
+**Agent:** [clone selecionado no step 5]
+
+Para CADA prospect:
+- Enviar: Big Idea + awareness + estrutura + dados do prospect
+- Pedir: "Escreva draft de mensagem WhatsApp (4-5 paragrafos, casual brasileiro)"
+- Restricoes: max 4-5 paragrafos, sem bullet points, sem formalidade, sem hifen/travessao
+- Receber: draft_mensagem (corpo da copy)
+
+### Step 7: outreach-writer Assembly (Contexto Ensinio)
+outreach-writer recebe o draft e adiciona o contexto Ensinio:
+
+1. **Greeting:** "Oi [primeiro nome]! [entrada variada], da Ensinio."
+2. **Fosc ponte:** Inserir posicionamento do Fosc conforme classificacao
+3. **Draft do clone:** Corpo da mensagem (step 6)
+4. **Contexto temporal:** Se mensagem antiga, adicionar ponte
+5. **Proposta Ensinio:** Conforme classificacao (condicao especial, parceria, afiliacao)
+6. **CTA:** Manter o CTA do clone ou adaptar com contexto Ensinio
+7. **Fechamento:** "Abraco!"
+
+**Regras Ensinio (so outreach-writer aplica):**
+- Fosc como "um dos fundadores" (NUNCA "socio fundador")
+- Condicao especial por serem do mesmo grupo
+- Antonio como remetente
+- Variacao de entrada entre prospects
+- EMBAIXADOR: SEM parceria na 1a msg
+- ESTRATEGICO/CANAL: parceria como proposta principal
+
+### Step 8: Audit @claude-hopkins
+**Squad:** copywriting-squad
+**Agent:** @claude-hopkins
+**Reference:** squads/copywriting-squad/checklists/audit-copy-hopkins.md
+
+Para CADA mensagem final:
+- Enviar: mensagem completa montada
+- Pedir: audit de qualidade (tom humano, persuasao natural, CTA de valor)
+- Receber: PASS/FAIL + ajustes
+
+Se FAIL: voltar ao step 6 com feedback do Hopkins. Max 2 iteracoes.
+
+### Step 9: Generate WhatsApp Links
+Para cada mensagem aprovada pelo Hopkins:
+1. URL-encode a mensagem
+2. Tratar caracteres especiais (newlines, acentos, emojis)
+3. Montar link: `https://api.whatsapp.com/send?phone={phone}&text={encoded_message}`
+4. Validar formato do link
+
+### Step 10: Output
+Gerar JSON com:
+- prospect_name, phone, classification
+- awareness_level (de @eugene-schwartz)
+- big_idea_angle (de @leandro-ladeira)
+- copy_clone_used (qual clone escreveu)
+- raw_message, whatsapp_link
+- audit_status (PASS de @claude-hopkins)
 
 ## Acceptance Criteria
-- Each message sounds 100% human-written
-- No anti-pattern violations
-- WhatsApp links correctly URL-encoded
-- Classification-based approach correctly applied (7 types)
-- EMBAIXADOR/ESTRATÉGICO/CANAL messages mention partnership/permuta
-- Each message unique (no copy-paste between prospects)
+- TODA mensagem foi escrita por um clone especialista (nao por outreach-writer sozinho)
+- TODA mensagem passou pelo audit de @claude-hopkins
+- Awareness definido por @eugene-schwartz (nao hardcoded)
+- Big Idea definida por @leandro-ladeira (nao inventada)
+- Clone selecionado por @copy-maestro (nao arbitrario)
+- Contexto Ensinio aplicado por outreach-writer (Fosc, Antonio, classificacoes)
+- WhatsApp links corretamente URL-encoded
+- Cada mensagem e unica (nao copy-paste)
+- Entradas variadas entre prospects
 
 ## Veto Conditions
-- **BLOCKING:** Prospect analysis data not available (must be v3.0 with dual scoring)
-- **BLOCKING:** Message rules not loaded
+- **BLOCKING:** Prospect analysis data not available (must be v3.0)
+- **BLOCKING:** Mensagem escrita sem consultar squad de copy
+- **BLOCKING:** Awareness definido sem consultar @eugene-schwartz
+- **BLOCKING:** Big Idea definida sem consultar @leandro-ladeira
+- **BLOCKING:** Mensagem nao passou pelo audit de @claude-hopkins
 - **BLOCKING:** Prospect has no name or phone
-- **WARNING:** Prospect has low scores (client < 5 AND partner < 5) - use shorter, softer message
+- **BLOCKING:** Mensagem usa "socio fundador"
+- **WARNING:** Prospect has low scores (client < 5 AND partner < 5)
 - **WARNING:** No temporal context but messages are > 6 months old
 
-## Output Example
-
-### CLIENTE_EMBAIXADOR
-```json
-{
-  "name": "Katia",
-  "phone": "+5521987654321",
-  "classification": "CLIENTE_EMBAIXADOR",
-  "raw_message": "Oi Katia! Tudo bem?\n\nMeu nome e Antonio, faco parte do time da Ensinio.\n\nO Fosc ta no grupo MENTORIA 50K e viu que voce ensina especialistas a criar infoprodutos. Muito bacana o seu trabalho!\n\nPelo que entendi, voce ta usando Cademi e Asaas e tem tido alguns problemas com bugs e integracao. A gente tem uma plataforma que ja vem com tudo integrado — area de membros, checkout, comunidade — sem precisar ficar juntando varias ferramentas.\n\nSeria bacana bater um papo rapido pra te mostrar como funciona?\n\nAh, e a gente tambem tem um programa de parceiros que pode ser interessante pra quem trabalha formando outros produtores de conteudo.\n\nAbraco!",
-  "whatsapp_link": "https://api.whatsapp.com/send?phone=5521987654321&text=...",
-  "approach_type": "CLIENTE_EMBAIXADOR"
-}
-```
-
-### CANAL_PREMIUM
-```json
-{
-  "name": "Diego",
-  "phone": "+5531996543210",
-  "classification": "CANAL_PREMIUM",
-  "raw_message": "Oi Diego! Tudo bem?\n\nAqui e o Antonio, do time da Ensinio.\n\nO Fosc me falou sobre o seu canal de educacao no YouTube — muito bacana o conteudo que voce produz pra essa audiencia.\n\nA gente tem uma proposta de parceria que pode ser interessante: voce ganha acesso gratuito a plataforma e em troca indica pra sua audiencia quando fizer sentido. Varios criadores de conteudo ja estao nesse modelo com a gente.\n\nPosso te explicar melhor como funciona?\n\nAbraco!",
-  "whatsapp_link": "https://api.whatsapp.com/send?phone=5531996543210&text=...",
-  "approach_type": "CANAL_PREMIUM"
-}
-```
-
 ## Error Handling
-- **No prospect data:** HALT and request analyze-prospects task completion
-- **Message rules not found:** HALT and request rules file creation
-- **URL encoding failure:** Log error, skip prospect, continue with batch
-- **Missing phone number:** Skip prospect and flag in error report
-- **Classification missing:** HALT — requires v3.0 scoring data
+- **Squad indisponivel:** Log qual squad falhou, tentar fallback (carregar KB direto)
+- **Clone FAIL no audit:** Reescrever max 2x, se persistir escalar para @copy-maestro
+- **No prospect data:** HALT e pedir conclusao do analyze-prospects
+- **URL encoding failure:** Log, skip prospect, continuar batch
+- **Missing phone:** Skip e flag no error report
 
 ## Completion Criteria
-All prospects have personalized messages per classification, quality check passed, WhatsApp links generated
+Todos os prospects tem mensagens escritas por clones especializados, auditadas por Hopkins, montadas por outreach-writer com contexto Ensinio, com WhatsApp links funcionais.

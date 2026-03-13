@@ -25,7 +25,7 @@ const SCAN_CONFIG = [
   { category: 'infra-scripts', basePath: '.aios-core/infrastructure/scripts', glob: '**/*.js', type: 'script' },
   { category: 'infra-tools', basePath: '.aios-core/infrastructure/tools', glob: '**/*.{yaml,yml,md}', type: 'tool' },
   { category: 'product-checklists', basePath: '.aios-core/product/checklists', glob: '**/*.md', type: 'checklist' },
-  { category: 'product-data', basePath: '.aios-core/product/data', glob: '**/*.{yaml,yml,md}', type: 'data' }
+  { category: 'product-data', basePath: '.aios-core/product/data', glob: '**/*.{yaml,yml,md}', type: 'data' },
 ];
 
 const ADAPTABILITY_DEFAULTS = {
@@ -38,14 +38,14 @@ const ADAPTABILITY_DEFAULTS = {
   task: 0.8,
   workflow: 0.4,
   util: 0.6,
-  tool: 0.7
+  tool: 0.7,
 };
 
 const EXTERNAL_TOOLS = new Set([
   'coderabbit', 'git', 'github-cli', 'docker', 'supabase', 'browser',
   'ffmpeg', 'n8n', 'context7', 'playwright', 'apify', 'clickup',
   'jira', 'slack', 'exa', 'eslint', 'jest', 'npm', 'node',
-  'docker-gateway', 'desktop-commander', 'railway'
+  'docker-gateway', 'desktop-commander', 'railway',
 ]);
 
 const DEPRECATED_PATTERNS = [/^old[-_]/, /^backup[-_]/, /deprecated/i, /^legacy[-_]/];
@@ -132,7 +132,7 @@ const YAML_DEP_FIELDS = {
 
 const KNOWN_AGENTS = [
   'dev', 'qa', 'pm', 'po', 'sm', 'architect', 'devops',
-  'analyst', 'data-engineer', 'ux-design-expert', 'aios-master'
+  'analyst', 'data-engineer', 'ux-design-expert', 'aios-master',
 ];
 
 // Pattern A: YAML dependency block items (- name.md)
@@ -396,10 +396,10 @@ function scanCategory(config, verbose = false) {
       adaptability: {
         score: defaultScore,
         constraints: [],
-        extensionPoints: []
+        extensionPoints: [],
       },
       checksum,
-      lastVerified: new Date().toISOString()
+      lastVerified: new Date().toISOString(),
     };
 
     if (lifecycleOverride) {
@@ -580,7 +580,7 @@ function populate(options = {}) {
   const categories = SCAN_CONFIG.map((c) => ({
     id: c.category,
     description: getCategoryDescription(c.category),
-    basePath: c.basePath
+    basePath: c.basePath,
   }));
 
   const registry = {
@@ -589,16 +589,16 @@ function populate(options = {}) {
       lastUpdated: new Date().toISOString(),
       entityCount: totalCount,
       checksumAlgorithm: 'sha256',
-      resolutionRate: rate
+      resolutionRate: rate,
     },
     entities: allEntities,
-    categories
+    categories,
   };
 
   const yamlContent = yaml.dump(registry, {
     lineWidth: 120,
     noRefs: true,
-    sortKeys: false
+    sortKeys: false,
   });
 
   try {
@@ -627,7 +627,7 @@ function getCategoryDescription(category) {
     'infra-scripts': 'Infrastructure automation and utility scripts',
     'infra-tools': 'Infrastructure tool definitions and configurations',
     'product-checklists': 'Product validation and review checklists',
-    'product-data': 'Product reference data and configuration files'
+    'product-data': 'Product reference data and configuration files',
   };
   return descriptions[category] || category;
 }
@@ -669,5 +669,5 @@ module.exports = {
   EXTERNAL_TOOLS,
   DEPRECATED_PATTERNS,
   REPO_ROOT,
-  REGISTRY_PATH
+  REGISTRY_PATH,
 };

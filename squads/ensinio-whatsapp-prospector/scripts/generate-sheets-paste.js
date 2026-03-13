@@ -3,6 +3,8 @@
 
 const fs = require('fs');
 const path = require('path');
+const { resolvePhoneFromBook } = require('../lib/phone-resolver');
+const { generateWhatsAppLink } = require('../lib/whatsapp-utils');
 
 const DATA_DIR = path.join(__dirname, '..', 'data', 'outputs', 'mentoria-50k');
 const PHONE_BOOK = path.join(__dirname, '..', 'data', 'phone-books', 'mentoria-50k.json');
@@ -27,42 +29,11 @@ for (const section of sections) {
   if (messageEnd === -1) messageEnd = lines.length;
   const message = lines.slice(messageStart + 1, messageEnd).join('\n').trim();
 
-  // Resolve phone
-  const nameLower = name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  let phone = '';
-  let nicho = '';
+  // Resolve phone from phone book
+  const { phone, notes: nicho } = resolvePhoneFromBook(name, phoneBook);
 
-  for (const [cn, cd] of Object.entries(phoneBook.contacts)) {
-    const cLower = cn.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    if (cLower.includes(nameLower) || nameLower.includes(cLower)) {
-      phone = cd.phone;
-      nicho = cd.notes || '';
-      break;
-    }
-  }
-
-  // Fuzzy match
-  if (!phone) {
-    const parts = nameLower.split(/\s+/);
-    for (const [cn, cd] of Object.entries(phoneBook.contacts)) {
-      const cLower = cn.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      const matched = parts.filter(p => p.length > 2 && cLower.includes(p));
-      if (matched.length >= 2) { phone = cd.phone; nicho = cd.notes || ''; break; }
-    }
-  }
-  if (!phone) {
-    const firstName = nameLower.split(/\s+/)[0];
-    if (firstName.length > 2) {
-      for (const [cn, cd] of Object.entries(phoneBook.contacts)) {
-        const cLower = cn.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        if (cLower.startsWith(firstName)) { phone = cd.phone; nicho = cd.notes || ''; break; }
-      }
-    }
-  }
-
-  const cleanPhone = phone.replace(/[^0-9]/g, '');
-  const encodedMsg = encodeURIComponent(message);
-  const waLink = cleanPhone ? `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodedMsg}` : '';
+  // Generate WhatsApp link (using 'api' format to match original)
+  const waLink = generateWhatsAppLink(phone, message, { format: 'api' });
 
   // Extract nicho/project from notes or approach line
   const approachLine = lines.find(l => l.startsWith('**Approach:**'));
@@ -80,7 +51,7 @@ for (const section of sections) {
     descricao,
     mensagem: message,
     link: waLink,
-    score
+    score,
   });
 }
 
@@ -99,7 +70,7 @@ for (const r of rows) {
     r.nicho,
     r.descricao,
     r.mensagem.replace(/\t/g, ' ').replace(/\n/g, '\n'),
-    r.link
+    r.link,
   ].join('\t'));
 }
 
@@ -108,7 +79,7 @@ fs.writeFileSync(output, tsvLines.join('\n'), 'utf8');
 
 console.log(`${rows.length} prospects gerados (sorted by score)`);
 console.log(`Output: ${output}`);
-console.log(`\nPara colar no Google Sheets:`);
+console.log('\nPara colar no Google Sheets:');
 console.log(`1. pbcopy < "${output}"`);
-console.log(`2. Abra a planilha e clique na celula A1`);
-console.log(`3. Cmd+V para colar`);
+console.log('2. Abra a planilha e clique na celula A1');
+console.log('3. Cmd+V para colar');

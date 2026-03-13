@@ -1,8 +1,16 @@
-# Full Pipeline Workflow
-# Parse WhatsApp export -> Validate -> Analyze -> Write -> Validate -> GHL Sync -> Populate Sheets
+# Full Pipeline Workflow v5.0
+# Parse -> Validate -> Load KB -> Resolve Phones -> Analyze -> Validate Scoring ->
+# Write Outreach -> Validate Batch -> Populate Sheets -> Send Evolution API -> GHL Sync
 name: full-pipeline
-version: "3.0.0"
-description: "Pipeline completo de prospeccao: ZIP WhatsApp -> GHL (Contact + Deal + Message) -> Google Sheets"
+version: "5.0.0"
+description: |
+  Pipeline completo de prospeccao: ZIP WhatsApp -> Google Sheets (source of truth) ->
+  Envio via Evolution API (interativo) -> GHL Sync (opcional).
+
+  ARQUITETURA v5.0 (Sheets-First):
+  - Google Sheets e a fonte de verdade (Phase 9)
+  - Envio via Evolution API com confirmacao (Phase 10)
+  - GHL Sync e opcional, NAO envia mensagens (Phase 11)
 
 trigger:
   command: "*full-pipeline {zip_path} {group_name}"
@@ -35,8 +43,11 @@ retry_policy:
     - "temporary_unavailable"
 
 phases:
+  # =========================================================================
+  # PHASE 1: Parse WhatsApp Export
+  # =========================================================================
   - id: phase-1-parse
-    name: "Parse WhatsApp Export"
+    name: "Phase 1: Parse WhatsApp Export"
     agent: chat-parser
     model: haiku
     task: tasks/parse-chat-export.md
@@ -63,8 +74,11 @@ phases:
       model: haiku
     rollback: "No rollback needed - read-only operation"
 
-  - id: phase-1b-validate-parse
-    name: "Validate Parsed Data"
+  # =========================================================================
+  # PHASE 2: Validate Parsed Data
+  # =========================================================================
+  - id: phase-2-validate-parse
+    name: "Phase 2: Validate Parsed Data"
     agent: chat-parser
     model: haiku
     task: tasks/validate-parsed-data.md
@@ -98,8 +112,11 @@ phases:
       model: haiku
     rollback: "Re-parse with different encoding if format issue"
 
-  - id: phase-2-load-kb
-    name: "Load Ensinio Knowledge Base"
+  # =========================================================================
+  # PHASE 3: Load Ensinio Knowledge Base (paralelo com Phase 1)
+  # =========================================================================
+  - id: phase-3-load-kb
+    name: "Phase 3: Load Ensinio Knowledge Base"
     agent: prospector-chief
     model: sonnet
     task: tasks/load-ensinio-kb.md
@@ -119,18 +136,21 @@ phases:
         action: LOG_AND_CONTINUE
     description: |
       Carregar e estruturar os 5 pilares de solucao Ensinio (67 features).
-      Source: data/ensinio-solutions-kb.md
+      Source: ensinio-mind/data/ensinio-solutions-kb.md
       Pode rodar em paralelo com o parsing.
     rollback: "No rollback needed - read-only operation"
 
-  - id: phase-2b-resolve-phones
-    name: "Resolve Phone Numbers (Interactive)"
+  # =========================================================================
+  # PHASE 4: Resolve Phone Numbers (Interactive)
+  # =========================================================================
+  - id: phase-4-resolve-phones
+    name: "Phase 4: Resolve Phone Numbers (Interactive)"
     agent: prospector-chief
     model: sonnet
     task: tasks/resolve-phone-numbers.md
     timeout_minutes: 60
     depends_on:
-      - phase-1b-validate-parse
+      - phase-2-validate-parse
     inputs:
       - parsed_contacts
       - group_name
@@ -138,6 +158,7 @@ phases:
       - contacts_with_phones
       - phone_book_path
       - phone_resolution_summary
+    quality_gate: QG-000.5
     veto_conditions:
       - condition: "validate-parsed-data not completed"
         severity: BLOCKING
@@ -155,15 +176,18 @@ phases:
       Reutilizar phone-book se grupo ja foi processado antes.
     rollback: "No rollback needed - phone-book is additive"
 
-  - id: phase-3-analyze
-    name: "Analyze & Score Prospects"
+  # =========================================================================
+  # PHASE 5: Analyze & Score Prospects (Dual Scoring)
+  # =========================================================================
+  - id: phase-5-analyze
+    name: "Phase 5: Analyze & Score Prospects (Dual Scoring)"
     agent: prospect-analyst
     model: sonnet
     task: tasks/analyze-prospects.md
     timeout_minutes: 30
     depends_on:
-      - phase-2b-resolve-phones
-      - phase-2-load-kb
+      - phase-4-resolve-phones
+      - phase-3-load-kb
     inputs:
       - contacts_with_phones
       - ensinio_kb
@@ -179,23 +203,24 @@ phases:
         severity: BLOCKING
         action: HALT
     description: |
-      Red flag pre-screen (BLOQUEADOR = score 0, excluir).
-      ICP match assessment (bonus scoring).
-      Cruzar cada contato com solucoes Ensinio.
-      Scoring de temperatura (1-10) com v2.1 criteria.
-      Classificar: cliente potencial vs parceiro.
-      Filtrar score >= 3.
-      Selecionar argumento recomendado por score range.
+      Red flag pre-screen (BLOQUEADOR = client_score 0).
+      EIXO 1: Client Score (0-10) — potencial como cliente direto.
+      EIXO 2: Partner Score (0-10) — potencial como multiplicador.
+      Matriz 7x3 de classificacao.
+      Filtrar: client_score >= 3 OR partner_score >= 4.
     rollback: "Re-analyze with adjusted scoring criteria"
 
-  - id: phase-3b-validate-scoring
-    name: "Validate Scoring Quality"
+  # =========================================================================
+  # PHASE 6: Validate Scoring Quality
+  # =========================================================================
+  - id: phase-6-validate-scoring
+    name: "Phase 6: Validate Scoring Quality"
     agent: prospector-chief
     model: sonnet
     task: checklists/scoring-validation-checklist.md
     timeout_minutes: 5
     depends_on:
-      - phase-3-analyze
+      - phase-5-analyze
     inputs:
       - scored_prospects
     outputs:
@@ -211,16 +236,19 @@ phases:
     description: |
       Validar qualidade do scoring.
       Verificar distribuicao de scores.
-      Sanity check de classificacao.
+      Sanity check de classificacao dual (client + partner).
 
-  - id: phase-4-write
-    name: "Write Personalized Messages"
+  # =========================================================================
+  # PHASE 7: Write Personalized Messages (Squad Delegation)
+  # =========================================================================
+  - id: phase-7-write
+    name: "Phase 7: Write Personalized Messages (Squad Delegation)"
     agent: outreach-writer
     model: opus
     task: tasks/write-outreach.md
     timeout_minutes: 45
     depends_on:
-      - phase-3b-validate-scoring
+      - phase-6-validate-scoring
     inputs:
       - scored_prospects
     outputs:
@@ -233,18 +261,26 @@ phases:
         severity: BLOCKING
         action: HALT
     description: |
-      Escrever mensagem personalizada por prospect.
-      Gerar links diretos de WhatsApp com URL encoding.
+      outreach-writer NAO escreve copy. Ele monta a mensagem consultando:
+      1. @eugene-schwartz (awareness level)
+      2. @leandro-ladeira (Big Idea por cluster)
+      3. @copy-maestro (clone selection)
+      4. [clone executor] (draft da mensagem)
+      5. @claude-hopkins (audit final)
+      Depois monta mensagem final com contexto Ensinio + gera WhatsApp links.
     rollback: "Rewrite specific messages that failed validation"
 
-  - id: phase-4b-validate-outreach
-    name: "Validate Outreach Batch"
+  # =========================================================================
+  # PHASE 8: Validate Outreach Batch
+  # =========================================================================
+  - id: phase-8-validate-outreach
+    name: "Phase 8: Validate Outreach Batch"
     agent: prospector-chief
     model: sonnet
     task: tasks/validate-outreach-batch.md
     timeout_minutes: 15
     depends_on:
-      - phase-4-write
+      - phase-7-write
     inputs:
       - messages_with_links
     outputs:
@@ -271,22 +307,112 @@ phases:
         agent: outreach-writer
         max_iterations: 2
         input: rejected_messages
-    rollback: "Return to phase-4-write with rejection feedback"
+    rollback: "Return to phase-7-write with rejection feedback"
 
-  - id: phase-5-ghl-sync
-    name: "Sync to GoHighLevel (Contact + Deal + Message)"
+  # =========================================================================
+  # PHASE 9: Populate Google Sheets (BLOQUEADOR — Source of Truth)
+  # =========================================================================
+  - id: phase-9-populate-sheet
+    name: "Phase 9: Populate Google Sheets (Source of Truth)"
     agent: prospector-chief
     model: sonnet
-    task: tasks/sync-to-ghl.md
-    timeout_minutes: 30
+    task: tasks/populate-sheet-v5.md
+    timeout_minutes: 10
     depends_on:
-      - phase-4b-validate-outreach
+      - phase-8-validate-outreach
     inputs:
       - approved_messages
+      - group_name
+    outputs:
+      - sheet_url
+      - summary_stats
+    quality_gate: QG-008
+    veto_conditions:
+      - condition: "No approved messages to populate"
+        severity: BLOCKING
+        action: HALT
+      - condition: "Google Sheets access not available"
+        severity: BLOCKING
+        action: HALT
+      - condition: "Sheet already has data for this group"
+        severity: WARNING
+        action: ASK_USER
+    description: |
+      BLOQUEADOR: Google Sheets e a fonte de verdade em v5.0.
+      10 colunas: Nome, Telefone, Grupo, Projeto, Explicacao, Mensagem,
+      Link WhatsApp, Status Envio, Link GHL, GHL Contact ID.
+      Ordenar por temperature DESC.
+      Coluna H default: "Nao enviado"
+    rollback: "Clear sheet rows and re-populate"
+
+  # =========================================================================
+  # PHASE 10: Send via Evolution API (INTERATIVO — sempre pergunta)
+  # =========================================================================
+  - id: phase-10-send-evolution
+    name: "Phase 10: Send via Evolution API (Interactive)"
+    agent: prospector-chief
+    model: sonnet
+    task: tasks/send-via-evolution-api.md
+    timeout_minutes: 60
+    depends_on:
+      - phase-9-populate-sheet
+    inputs:
+      - approved_messages
+      - group_name
+    outputs:
+      - send_report
+      - updated_sheet_status
+    quality_gate: QG-010
+    interactive: true
+    veto_conditions:
+      - condition: "Evolution API not configured (.env)"
+        severity: BLOCKING
+        action: HALT
+      - condition: "Evolution instance not connected"
+        severity: BLOCKING
+        action: HALT
+      - condition: "User did not confirm send"
+        severity: BLOCKING
+        action: HALT
+      - condition: "Error rate > 20%"
+        severity: WARNING
+        action: PAUSE_AND_ASK
+    description: |
+      INTERATIVO: NUNCA envia sem confirmacao explicita do usuario.
+
+      Fluxo:
+      1. Ler Sheets, filtrar contatos com status "Nao enviado"
+      2. PERGUNTAR: "Deseja enviar X mensagens do grupo {nome}? [S/N]"
+      3. Mostrar preview de 2-3 mensagens antes do envio
+      4. Se confirmado: batch send com pacing (intervalMs >= 3000)
+      5. Atualizar Coluna H: "Nao enviado" -> "Enviado" ou "Erro"
+      6. Relatorio: enviados / erros / pendentes
+
+      Guardrails:
+      - NUNCA envia sem confirmacao (BLOQUEADOR)
+      - Pacing minimo 3s entre mensagens
+      - Se erro > 20%, PAUSA e pergunta ao usuario
+      - Mostra preview antes de confirmar
+    rollback: "Messages already sent cannot be unsent - document failures"
+
+  # =========================================================================
+  # PHASE 11: Sync to GHL (OPCIONAL — sem envio de mensagens)
+  # =========================================================================
+  - id: phase-11-ghl-sync
+    name: "Phase 11: Sync to GHL (Optional)"
+    agent: prospector-chief
+    model: sonnet
+    task: tasks/sync-to-ghl-v5.md
+    timeout_minutes: 30
+    depends_on:
+      - phase-9-populate-sheet
+    optional: true
+    inputs:
+      - approved_messages
+      - group_name
     outputs:
       - ghl_contacts_created
       - ghl_deals_created
-      - ghl_messages_sent
       - ghl_sync_report
     quality_gate: QG-005
     veto_conditions:
@@ -300,60 +426,40 @@ phases:
         severity: WARNING
         action: "WAIT_AND_RETRY"
     description: |
-      Para cada prospect aprovado:
+      OPCIONAL: NAO envia mensagens. Apenas sincroniza dados com GHL.
+
+      Para cada prospect:
       1. Perguntar tags ao usuario (default: "Leads Fosc")
-      2. POST /contacts/ → criar/buscar contato no GHL (com tags)
-      3. POST /opportunities/ → criar deal no pipeline Qualificacao
-      4. POST /conversations/messages → enviar mensagem de outreach
-      Batch com delay de 600ms entre requests (rate limit ~100/min).
-      Idempotency keys para evitar duplicatas.
+      2. POST /contacts/ -> criar/buscar contato no GHL (com tags)
+      3. POST /deals/ (fallback /opportunities/) -> criar deal
+      4. Atualizar Colunas I+J no Sheets (Link GHL, Contact ID)
+
+      CRITICO: Esta fase NAO envia nenhuma mensagem.
+      O envio e feito pela Phase 10 (Evolution API) ou manualmente.
     rollback: "Deals can be manually deleted in GHL if needed"
 
-  - id: phase-6-sheet
-    name: "Populate Google Sheets"
-    agent: prospector-chief
-    model: sonnet
-    task: tasks/populate-sheet.md
-    timeout_minutes: 10
-    depends_on:
-      - phase-5-ghl-sync
-    inputs:
-      - approved_messages
-    outputs:
-      - sheet_url
-      - summary_stats
-    quality_gate: QG-004
-    veto_conditions:
-      - condition: "No approved messages to populate"
-        severity: BLOCKING
-        action: HALT
-      - condition: "Google Sheets access not available"
-        severity: BLOCKING
-        action: HALT
-      - condition: "Sheet already has data"
-        severity: WARNING
-        action: ASK_USER
-    description: |
-      Popular a planilha Google Sheets com todos os dados.
-      Ordenar por temperatura.
-      Validar links.
-    rollback: "Clear sheet rows and re-populate"
-
+# =========================================================================
+# COMPLETION
+# =========================================================================
 completion:
   summary: |
-    Pipeline completo! Resultados:
-    - GHL: Contatos, deals e mensagens sincronizados
+    Pipeline v5.0 completo! Resultados:
+    - Google Sheets (source of truth): populado com todos os prospects
+    - Evolution API: mensagens enviadas (se confirmado pelo usuario)
+    - GHL: contatos e deals sincronizados (se Phase 11 executada)
     - Planilha: https://docs.google.com/spreadsheets/d/124EQQAkmt9D7-49LbR-Jx64DhxdtCwceUQgqolk5ZFI
   report:
     - total_contacts_parsed
+    - total_phones_resolved
     - total_qualified_prospects
-    - prospects_by_type
+    - prospects_by_classification
     - prospects_by_pillar
     - temperature_distribution
     - messages_approved_vs_rejected
     - batch_quality_score
     - quality_gates_summary
+    - evolution_api_sent
+    - evolution_api_errors
     - ghl_contacts_created
     - ghl_deals_created
-    - ghl_messages_sent
     - ghl_tags_applied

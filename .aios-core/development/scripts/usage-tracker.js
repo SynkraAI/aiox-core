@@ -46,8 +46,8 @@ class UsageTracker {
       risk_assessment: {
         impact_level: 'low',
         affected_areas: [],
-        migration_complexity: 'simple'
-      }
+        migration_complexity: 'simple',
+      },
     };
 
     try {
@@ -111,18 +111,18 @@ class UsageTracker {
         total_references: {
           before: baselineAnalysis.total_references,
           after: currentAnalysis.total_references,
-          change: currentAnalysis.total_references - baselineAnalysis.total_references
+          change: currentAnalysis.total_references - baselineAnalysis.total_references,
         },
         dependent_components: {
           before: baselineAnalysis.dependent_components.length,
           after: currentAnalysis.dependent_components.length,
-          change: currentAnalysis.dependent_components.length - baselineAnalysis.dependent_components.length
+          change: currentAnalysis.dependent_components.length - baselineAnalysis.dependent_components.length,
         },
         new_usages: this.findNewUsages(baselineAnalysis.usage_locations, currentAnalysis.usage_locations),
-        removed_usages: this.findRemovedUsages(baselineAnalysis.usage_locations, currentAnalysis.usage_locations)
+        removed_usages: this.findRemovedUsages(baselineAnalysis.usage_locations, currentAnalysis.usage_locations),
       },
       trend: this.calculateUsageTrend(baselineAnalysis, currentAnalysis),
-      migration_progress: this.calculateMigrationProgress(baselineAnalysis, currentAnalysis)
+      migration_progress: this.calculateMigrationProgress(baselineAnalysis, currentAnalysis),
     };
 
     // Save change tracking
@@ -145,11 +145,11 @@ class UsageTracker {
         usage_location: {
           file: usage.file,
           line: usage.line,
-          context: usage.context
+          context: usage.context,
         },
         message: this.generateWarningMessage(componentId, deprecationInfo, usage),
         severity: this.calculateWarningSeverity(deprecationInfo, usage),
-        suggested_actions: this.generateSuggestedActions(componentId, deprecationInfo, usage)
+        suggested_actions: this.generateSuggestedActions(componentId, deprecationInfo, usage),
       };
 
       warnings.push(warning);
@@ -171,7 +171,7 @@ class UsageTracker {
       high_usage_components: [],
       zero_usage_components: [],
       usage_distribution: {},
-      dependency_graph: {}
+      dependency_graph: {},
     };
 
     const componentsToAnalyze = componentIds || await this.getAllTrackedComponents();
@@ -188,7 +188,7 @@ class UsageTracker {
           stats.high_usage_components.push({
             component_id: componentId,
             reference_count: analysis.total_references,
-            impact_level: analysis.risk_assessment.impact_level
+            impact_level: analysis.risk_assessment.impact_level,
           });
         }
 
@@ -270,7 +270,7 @@ class UsageTracker {
             column: match.column,
             context: line.trim(),
             reference_type: match.type,
-            match_text: match.text
+            match_text: match.text,
           });
         }
       }
@@ -297,7 +297,7 @@ class UsageTracker {
           type: pattern.type,
           text: match[0],
           column: match.index,
-          confidence: pattern.confidence || 0.8
+          confidence: pattern.confidence || 0.8,
         });
       }
     }
@@ -342,7 +342,7 @@ class UsageTracker {
       by_file_type: {},
       by_usage_type: {},
       temporal_distribution: {},
-      complexity_indicators: {}
+      complexity_indicators: {},
     };
 
     for (const ref of references) {
@@ -387,7 +387,7 @@ class UsageTracker {
     return {
       impact_level: impactLevel,
       affected_areas: affectedAreas,
-      migration_complexity: migrationComplexity
+      migration_complexity: migrationComplexity,
     };
   }
 
@@ -402,7 +402,7 @@ class UsageTracker {
       id: componentId,
       type: type,
       name: name,
-      file_path: `aios-core/${type}s/${name}.md`
+      file_path: `aios-core/${type}s/${name}.md`,
     };
   }
 
@@ -410,7 +410,7 @@ class UsageTracker {
     const defaultPaths = [
       path.join(this.rootPath, 'aios-core'),
       path.join(this.rootPath, 'src'),
-      path.join(this.rootPath, 'lib')
+      path.join(this.rootPath, 'lib'),
     ];
 
     if (options.scanPaths) {
@@ -467,7 +467,7 @@ class UsageTracker {
       'package.json',
       '.aiosrc',
       'aios.config.js',
-      'manifest.yaml'
+      'manifest.yaml',
     ];
 
     for (const configFile of configFiles) {
@@ -505,16 +505,16 @@ class UsageTracker {
   findNewUsages(oldUsages, newUsages) {
     return newUsages.filter(newUsage => 
       !oldUsages.some(oldUsage => 
-        oldUsage.file === newUsage.file && oldUsage.line === newUsage.line
-      )
+        oldUsage.file === newUsage.file && oldUsage.line === newUsage.line,
+      ),
     );
   }
 
   findRemovedUsages(oldUsages, newUsages) {
     return oldUsages.filter(oldUsage => 
       !newUsages.some(newUsage => 
-        newUsage.file === oldUsage.file && newUsage.line === oldUsage.line
-      )
+        newUsage.file === oldUsage.file && newUsage.line === oldUsage.line,
+      ),
     );
   }
 
@@ -621,52 +621,52 @@ class UsageTracker {
         {
           pattern: 'agent:\\s*{component_name}',
           type: 'yaml_reference',
-          confidence: 0.9
+          confidence: 0.9,
         },
         {
           pattern: 'use\\s+{component_name}',
           type: 'usage_statement',
-          confidence: 0.8
-        }
+          confidence: 0.8,
+        },
       ],
       task: [
         {
           pattern: '\\*{component_name}',
           type: 'task_invocation',
-          confidence: 0.9
+          confidence: 0.9,
         },
         {
           pattern: 'require\\(.*{component_name}.*\\)',
           type: 'import_statement',
-          confidence: 0.8
-        }
+          confidence: 0.8,
+        },
       ],
       workflow: [
         {
           pattern: 'workflow:\\s*{component_name}',
           type: 'workflow_reference',
-          confidence: 0.9
-        }
+          confidence: 0.9,
+        },
       ],
       util: [
         {
           pattern: 'require\\(.*{component_name}.*\\)',
           type: 'import_statement',
-          confidence: 0.9
+          confidence: 0.9,
         },
         {
           pattern: 'import.*{component_name}',
           type: 'import_statement',
-          confidence: 0.9
-        }
+          confidence: 0.9,
+        },
       ],
       default: [
         {
           pattern: '{component_name}',
           type: 'general_reference',
-          confidence: 0.6
-        }
-      ]
+          confidence: 0.6,
+        },
+      ],
     };
   }
 }

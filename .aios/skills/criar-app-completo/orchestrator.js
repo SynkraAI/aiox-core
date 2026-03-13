@@ -99,7 +99,7 @@ class AppCompleto {
       return {
         mode: 'silent',
         data,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       };
     }
 
@@ -205,14 +205,14 @@ class AppCompleto {
     const taskData = {
       filePath: appFilePath,
       timestamp: new Date().toISOString(),
-      mode: 'auto-fill'
+      mode: 'auto-fill',
     };
 
     const tempPath = path.join(process.cwd(), '.aios', 'tmp', 'app-filler-task.json');
     fs.mkdirSync(path.dirname(tempPath), { recursive: true });
     fs.writeFileSync(tempPath, JSON.stringify(taskData, null, 2));
 
-    this.log(`✅ Dados preparados para Claude processar`, 'green');
+    this.log('✅ Dados preparados para Claude processar', 'green');
     this.log(`📍 Task file: ${tempPath}\n`, 'gray');
 
     return taskData;
@@ -265,7 +265,7 @@ ${JSON.stringify(prdData.data, null, 2)}`;
         success: true,
         prdData,
         appFilePath,
-        taskData
+        taskData,
       };
 
     } catch (error) {

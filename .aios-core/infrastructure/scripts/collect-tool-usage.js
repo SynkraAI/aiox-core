@@ -41,7 +41,7 @@ function createEvent(toolName, invocationCount, tokenCostInput, tokenCostOutput,
     token_cost_input: Number(tokenCostInput) || 0,
     token_cost_output: Number(tokenCostOutput) || 0,
     session_id: String(sessionId),
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 }
 
@@ -54,7 +54,7 @@ function sanitizeEvent(event) {
     token_cost_input: Math.max(0, Math.floor(Number(event.token_cost_input) || 0)),
     token_cost_output: Math.max(0, Math.floor(Number(event.token_cost_output) || 0)),
     session_id: String(event.session_id || '').replace(/[^a-zA-Z0-9_-]/g, ''),
-    timestamp: event.timestamp || new Date().toISOString()
+    timestamp: event.timestamp || new Date().toISOString(),
   };
 }
 
@@ -107,7 +107,7 @@ function loadUsageData() {
     version: '1.0.0',
     schema: 'tool-usage-analytics',
     description: 'Tool usage tracking data for AIOS token optimization (TOK-5)',
-    sessions: []
+    sessions: [],
   };
 }
 
@@ -162,7 +162,7 @@ function generateSampleData(sessionId) {
     { name: 'Task', inputCost: 400, outputCost: 300 },
     { name: 'git', inputCost: 100, outputCost: 50 },
     { name: 'coderabbit', inputCost: 300, outputCost: 200 },
-    { name: 'context7', inputCost: 200, outputCost: 150 }
+    { name: 'context7', inputCost: 200, outputCost: 150 },
   ];
 
   return tools.map(t => {
@@ -172,7 +172,7 @@ function generateSampleData(sessionId) {
       count,
       t.inputCost * count,
       t.outputCost * count,
-      sessionId
+      sessionId,
     );
   });
 }
@@ -222,7 +222,7 @@ async function main() {
         e.invocation_count,
         e.token_cost_input,
         e.token_cost_output,
-        sessionId
+        sessionId,
       ));
     } else {
       // No stdin data — show usage
@@ -258,7 +258,7 @@ async function main() {
     total_invocations: valid.reduce((sum, e) => sum + e.invocation_count, 0),
     total_token_cost_input: valid.reduce((sum, e) => sum + e.token_cost_input, 0),
     total_token_cost_output: valid.reduce((sum, e) => sum + e.token_cost_output, 0),
-    events: valid
+    events: valid,
   };
 
   data.sessions.push(session);
@@ -278,7 +278,7 @@ async function main() {
     total_tokens: session.total_token_cost_input + session.total_token_cost_output,
     pruned_sessions: removed,
     total_sessions: data.sessions.length,
-    dryRun
+    dryRun,
   };
 
   if (jsonOutput) {
@@ -307,5 +307,5 @@ module.exports = {
   pruneOldEntries,
   loadUsageData,
   generateSampleData,
-  RETENTION_DAYS
+  RETENTION_DAYS,
 };

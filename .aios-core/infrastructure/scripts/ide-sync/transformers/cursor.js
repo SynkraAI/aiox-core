@@ -50,7 +50,7 @@ ${icon} **${title}**${archetype ? ` | ${archetype}` : ''}
 
   // Add key commands if different from quick
   const keyOnlyCommands = keyCommands.filter(
-    k => !quickCommands.some(q => q.name === k.name)
+    k => !quickCommands.some(q => q.name === k.name),
   );
   if (keyOnlyCommands.length > 0) {
     content += `## Key Commands

@@ -66,7 +66,7 @@ function logUsage(task, model, tokensIn = 0, tokensOut = 0, latencyMs = 0) {
     latency_ms: parseInt(latencyMs) || 0,
     cost_actual: calculateCost(model, tokensIn, tokensOut),
     cost_if_opus: calculateCost('opus', tokensIn, tokensOut),
-    savings: calculateCost('opus', tokensIn, tokensOut) - calculateCost(model, tokensIn, tokensOut)
+    savings: calculateCost('opus', tokensIn, tokensOut) - calculateCost(model, tokensIn, tokensOut),
   };
 
   // Append to JSONL log
@@ -88,7 +88,7 @@ function calculateCost(model, tokensIn, tokensOut) {
   const rates = {
     haiku: { input: 1.00, output: 5.00 },
     sonnet: { input: 3.00, output: 15.00 },
-    opus: { input: 5.00, output: 25.00 }
+    opus: { input: 5.00, output: 25.00 },
   };
   const rate = rates[model] || rates.opus;
   return (tokensIn * rate.input + tokensOut * rate.output) / 1000000;
@@ -121,7 +121,7 @@ function generateReport(days = 7) {
     by_task: {},
     total_savings: 0,
     total_cost_actual: 0,
-    total_cost_if_opus: 0
+    total_cost_if_opus: 0,
   };
 
   entries.forEach(e => {

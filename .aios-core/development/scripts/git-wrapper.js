@@ -24,7 +24,7 @@ class GitWrapper {
     try {
       const { stdout, stderr } = await execAsync(`${this.gitPath} ${command}`, {
         cwd: this.rootPath,
-        ...options
+        ...options,
       });
       
       if (stderr && !options.ignoreStderr) {
@@ -145,7 +145,7 @@ class GitWrapper {
   async commit(message, options = {}) {
     const {
       author = 'aios-developer <aios-developer@aios-fullstack.local>',
-      signoff = true
+      signoff = true,
     } = options;
 
     let command = `commit -m "${message.replace(/"/g, '\\"')}"`;
@@ -207,7 +207,7 @@ class GitWrapper {
       modified: [],
       added: [],
       deleted: [],
-      untracked: []
+      untracked: [],
     };
     
     if (porcelainStatus) {
@@ -228,7 +228,7 @@ class GitWrapper {
     return {
       branch,
       clean: porcelainStatus === '',
-      files
+      files,
     };
   }
 
@@ -250,7 +250,7 @@ class GitWrapper {
         author,
         email,
         date: new Date(parseInt(timestamp) * 1000),
-        subject
+        subject,
       };
     });
   }
@@ -278,7 +278,7 @@ class GitWrapper {
     const {
       strategy = 'recursive',
       message = null,
-      noFastForward = true
+      noFastForward = true,
     } = options;
 
     let command = `merge ${branchName}`;
@@ -299,7 +299,7 @@ class GitWrapper {
       const output = await this.execGit(command);
       return {
         success: true,
-        message: output
+        message: output,
       };
     } catch (_error) {
       // Check for conflicts
@@ -308,7 +308,7 @@ class GitWrapper {
         return {
           success: false,
           conflicts,
-          error: 'Merge conflicts detected'
+          error: 'Merge conflicts detected',
         };
       }
       throw error;
@@ -363,7 +363,7 @@ class GitWrapper {
       from = 'HEAD',
       to = null,
       files = [],
-      nameOnly = false
+      nameOnly = false,
     } = options;
 
     let command = 'diff';
@@ -425,7 +425,7 @@ class GitWrapper {
     return Object.entries(remotes).map(([name, urls]) => ({
       name,
       fetchUrl: urls.fetch,
-      pushUrl: urls.push
+      pushUrl: urls.push,
     }));
   }
 
@@ -441,7 +441,7 @@ class GitWrapper {
       _componentName,
       summary,
       details = [],
-      breakingChanges = []
+      breakingChanges = [],
     } = modification;
 
     let message = `${action}(${componentType}): ${summary}`;

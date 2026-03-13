@@ -30,12 +30,12 @@ async function workflowStart(workflow, projectRoot = process.cwd()) {
       phase: 'workflow',
       progress: `0/${totalSteps}`,
       currentTask: workflow.name || 'Workflow',
-      emoji: workflow.emoji || '⚙️'
+      emoji: workflow.emoji || '⚙️',
     },
     metadata: {
       workflowActive: workflow.name,
-      workflowStartedAt: new Date().toISOString()
-    }
+      workflowStartedAt: new Date().toISOString(),
+    },
   });
 }
 
@@ -56,8 +56,8 @@ async function workflowStep(step, stepIndex, totalSteps, projectRoot = process.c
       phase: step.phase || 'workflow',
       progress: `${stepIndex + 1}/${totalSteps}`,
       currentTask: step.name || step.task || `Step ${stepIndex + 1}`,
-      emoji: step.emoji || '⚙️'
-    }
+      emoji: step.emoji || '⚙️',
+    },
   });
 }
 
@@ -77,12 +77,12 @@ async function workflowComplete(workflow, projectRoot = process.cwd()) {
       phase: 'completed',
       progress: `${totalSteps}/${totalSteps}`,
       currentTask: 'Workflow complete',
-      emoji: '✅'
+      emoji: '✅',
     },
     metadata: {
       workflowActive: null,
-      workflowCompletedAt: new Date().toISOString()
-    }
+      workflowCompletedAt: new Date().toISOString(),
+    },
   });
 }
 
@@ -100,12 +100,12 @@ async function workflowError(error, projectRoot = process.cwd()) {
     status: {
       phase: 'error',
       currentTask: `Error: ${error.message}`,
-      emoji: '❌'
+      emoji: '❌',
     },
     metadata: {
       workflowActive: null,
-      lastError: error.message
-    }
+      lastError: error.message,
+    },
   });
 }
 
@@ -139,7 +139,7 @@ async function executeWorkflowWithContext(workflow, stepExecutor, projectRoot = 
     return {
       success: true,
       stepsCompleted,
-      totalSteps
+      totalSteps,
     };
 
   } catch (error) {
@@ -148,7 +148,7 @@ async function executeWorkflowWithContext(workflow, stepExecutor, projectRoot = 
     return {
       success: false,
       error: error.message,
-      stepsCompleted: 0
+      stepsCompleted: 0,
     };
   }
 }
@@ -158,5 +158,5 @@ module.exports = {
   workflowStep,
   workflowComplete,
   workflowError,
-  executeWorkflowWithContext
+  executeWorkflowWithContext,
 };

@@ -32,7 +32,7 @@ const colors = {
   green: '\x1b[32m',
   yellow: '\x1b[33m',
   blue: '\x1b[34m',
-  cyan: '\x1b[36m'
+  cyan: '\x1b[36m',
 };
 
 function log(message, color = 'reset') {
@@ -104,7 +104,7 @@ function extractSquads() {
     squads.push({
       name,
       slug: squadDir,
-      description
+      description,
     });
   });
 
@@ -169,7 +169,7 @@ function extractSkills() {
 
     skills.push({
       name: skillName,
-      description
+      description,
     });
   });
 
@@ -222,7 +222,7 @@ function extractTools() {
 
     tools.push({
       name: toolName,
-      description
+      description,
     });
   });
 
@@ -240,63 +240,63 @@ function extractAgents() {
     {
       id: '@dev',
       persona: 'Dex',
-      scope: 'Implementação de código, git add/commit, branch management'
+      scope: 'Implementação de código, git add/commit, branch management',
     },
     {
       id: '@qa',
       persona: 'Quinn',
-      scope: 'Testes e qualidade, QA gates, code review'
+      scope: 'Testes e qualidade, QA gates, code review',
     },
     {
       id: '@architect',
       persona: 'Aria',
-      scope: 'Arquitetura e design técnico, technology selection'
+      scope: 'Arquitetura e design técnico, technology selection',
     },
     {
       id: '@pm',
       persona: 'Morgan',
-      scope: 'Product Management, epic orchestration, requirements'
+      scope: 'Product Management, epic orchestration, requirements',
     },
     {
       id: '@po',
       persona: 'Pax',
-      scope: 'Product Owner, story validation, backlog prioritization'
+      scope: 'Product Owner, story validation, backlog prioritization',
     },
     {
       id: '@sm',
       persona: 'River',
-      scope: 'Scrum Master, story creation, sprint management'
+      scope: 'Scrum Master, story creation, sprint management',
     },
     {
       id: '@analyst',
       persona: 'Alex',
-      scope: 'Pesquisa e análise de dados'
+      scope: 'Pesquisa e análise de dados',
     },
     {
       id: '@data-engineer',
       persona: 'Dara',
-      scope: 'Database design, schema DDL, query optimization'
+      scope: 'Database design, schema DDL, query optimization',
     },
     {
       id: '@ux-design-expert',
       persona: 'Uma',
-      scope: 'UX/UI design, design systems, user research'
+      scope: 'UX/UI design, design systems, user research',
     },
     {
       id: '@devops',
       persona: 'Gage',
-      scope: 'CI/CD, git push (EXCLUSIVO), MCP management, infrastructure'
+      scope: 'CI/CD, git push (EXCLUSIVO), MCP management, infrastructure',
     },
     {
       id: '@aios-master',
       persona: 'Master',
-      scope: 'Framework governance, constitutional enforcement'
+      scope: 'Framework governance, constitutional enforcement',
     },
     {
       id: '@squad-creator',
       persona: 'Scout',
-      scope: 'Squad creation, workspace setup, onboarding'
-    }
+      scope: 'Squad creation, workspace setup, onboarding',
+    },
   ];
 
   log(`✓ Loaded ${agents.length} agents`, 'green');

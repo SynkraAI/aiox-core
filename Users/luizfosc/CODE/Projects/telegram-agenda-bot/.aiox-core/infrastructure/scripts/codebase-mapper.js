@@ -1014,7 +1014,7 @@ class CodebaseMapper {
       stats: {
         totalFiles: this._fileIndex.size,
         codeFiles: [...this._fileIndex.values()].filter(f =>
-          CONFIG.codeExtensions.includes(f.extension)
+          CONFIG.codeExtensions.includes(f.extension),
         ).length,
         testFiles: [...this._fileIndex.values()].filter(f => f.hasTests).length,
         components: [...this._fileIndex.values()].filter(f => f.isComponent).length,
@@ -1221,7 +1221,7 @@ Acceptance Criteria Coverage:
         if (!quiet) {
           console.log('\nCodebase map generated successfully.');
           const map = await mapper.toJSON();
-          console.log(`\nStats:`);
+          console.log('\nStats:');
           console.log(`  Total files: ${map.stats.totalFiles}`);
           console.log(`  Code files: ${map.stats.codeFiles}`);
           console.log(`  Test files: ${map.stats.testFiles}`);
@@ -1248,7 +1248,7 @@ Acceptance Criteria Coverage:
           console.log('\nCodebase Map Diff:');
           console.log(`  Previous: ${diff.previousMappedAt}`);
           console.log(`  Current:  ${diff.currentMappedAt}`);
-          console.log(`\nChanges:`);
+          console.log('\nChanges:');
           console.log(`  Files: ${diff.changes.files.added >= 0 ? '+' : ''}${diff.changes.files.added}`);
           console.log(`  Services: ${diff.changes.services.previous} -> ${diff.changes.services.current}`);
           console.log(`  Patterns changed: ${diff.changes.patterns.changed ? 'Yes' : 'No'}`);

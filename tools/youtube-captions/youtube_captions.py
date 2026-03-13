@@ -15,6 +15,7 @@ Outputs clean .md files ready for /etl-universal-converter.
 import argparse
 import json
 import os
+import random
 import re
 import sys
 import time
@@ -64,6 +65,20 @@ def _get_exceptions():
         sys.path.insert(0, lib_dir)
     from exceptions import NoSubtitlesError
     return NoSubtitlesError
+
+
+_STATE_CLASS = None
+
+def _get_state_class():
+    """Lazy-load TranscriptionState from aios-transcriber."""
+    global _STATE_CLASS
+    if _STATE_CLASS is None:
+        state_dir = str(Path(__file__).parent.parent / 'aios-transcriber' / 'lib')
+        if state_dir not in sys.path:
+            sys.path.insert(0, state_dir)
+        from state import TranscriptionState
+        _STATE_CLASS = TranscriptionState
+    return _STATE_CLASS
 
 
 # Public API
@@ -125,6 +140,7 @@ def fetch_subtitles_raw(video_url, lang_priority=None, proxy=None):
         "subtitlesformat": "json3",
         "quiet": True,
         "no_warnings": True,
+        "socket_timeout": 30,
     }
     if proxy:
         ydl_opts["proxy"] = proxy
@@ -516,18 +532,35 @@ def extract_playlist(playlist_url, output_dir, lang_priority=None, output_format
     playlist_dir = Path(output_dir) / slugify(playlist_title)
     playlist_dir.mkdir(parents=True, exist_ok=True)
 
+    # Resume support
+    TranscriptionState = _get_state_class()
+    state = TranscriptionState(playlist_dir)
+
     results = []
     for i, entry in enumerate(entries, 1):
         video_id = entry.get("id") or entry.get("url", "")
         video_url = f"https://www.youtube.com/watch?v={video_id}"
+
+        # Skip already completed
+        if state.is_completed(video_url):
+            print(f"[{i}/{len(entries)}] Already completed, skipping")
+            continue
+
         print(f"[{i}/{len(entries)}] Processing...")
 
         try:
             result = extract_captions(video_url, str(playlist_dir), lang_priority, output_format, cookies_path, proxy)
             if result:
                 results.append(result)
+                filepath = result.get('filepath', '')
+                state.mark_completed(video_url, filepath, 'yt-dlp')
         except Exception as e:
             print(f"  ERROR: {e}")
+            state.mark_failed(video_url, str(e))
+
+    summary = state.summary()
+    if summary['completed'] > len(results):
+        print(f"\nResume: {summary['completed']} total completed ({summary['completed'] - len(results)} from previous run)")
 
     # Generate index
     if results:
@@ -619,10 +652,10 @@ def search_youtube(query, output_dir, max_results=100, api_key=None,
         try:
             data = youtube_api_get("search", params, api_key)
         except urllib.error.HTTPError as e:
-            print(f"ERROR: YouTube API returned {e.code}: {e.reason}")
+            print(f"WARNING: YouTube API returned {e.code}: {e.reason}")
             if e.code == 403:
-                print("  Check your API key and quota at https://console.cloud.google.com/")
-            sys.exit(1)
+                print("  API quota may be exceeded. Saving partial results...")
+            break  # Exit loop with partial results instead of sys.exit(1)
 
         for item in data.get("items", []):
             video_id = item.get("id", {}).get("videoId")
@@ -693,33 +726,36 @@ def search_youtube(query, output_dir, max_results=100, api_key=None,
     skipped_no_captions = 0
     total = len(filtered)
 
-    for i, entry in enumerate(filtered, 1):
-        video_url = f"https://www.youtube.com/watch?v={entry['id']}"
-        print(f"\n[{i}/{total}] {entry['title'][:60]}")
+    try:
+        for i, entry in enumerate(filtered, 1):
+            video_url = f"https://www.youtube.com/watch?v={entry['id']}"
+            print(f"\n[{i}/{total}] {entry['title'][:60]}")
 
-        retries = 0
-        while retries < 3:
-            try:
-                result = extract_captions(video_url, str(output_path), lang_priority, output_format, cookies_path, proxy)
-                if result:
-                    results.append(result)
-                else:
-                    skipped_no_captions += 1
-                break
-            except Exception as e:
-                if "429" in str(e) and retries < 2:
-                    retries += 1
-                    wait = delay * (2 ** retries)
-                    print(f"  Rate limited, waiting {wait}s (retry {retries}/2)...")
-                    time.sleep(wait)
-                else:
-                    print(f"  ERROR: {e}")
-                    skipped_no_captions += 1
+            retries = 0
+            while retries < 3:
+                try:
+                    result = extract_captions(video_url, str(output_path), lang_priority, output_format, cookies_path, proxy)
+                    if result:
+                        results.append(result)
+                    else:
+                        skipped_no_captions += 1
                     break
+                except Exception as e:
+                    if "429" in str(e) and retries < 2:
+                        retries += 1
+                        wait = delay * (2 ** retries) + random.uniform(0, 0.3 * delay * (2 ** retries))
+                        print(f"  Rate limited, waiting {wait:.1f}s (retry {retries}/2)...")
+                        time.sleep(wait)
+                    else:
+                        print(f"  ERROR: {e}")
+                        skipped_no_captions += 1
+                        break
 
-        # Delay between videos to avoid rate limiting
-        if i < total:
-            time.sleep(delay)
+            # Delay between videos to avoid rate limiting
+            if i < total:
+                time.sleep(delay)
+    except KeyboardInterrupt:
+        print(f"\n\nInterrupted after {len(results)} extractions. Saving partial results...")
 
     # Phase 4: Generate index and manifest
     if results:

@@ -1,14 +1,72 @@
 # @oalanicolas Memory - Mind Cloning Architect
 
 ## Quick Stats
-- Minds clonados: 8 (1 palestrante, 4 technical thought leaders, 3 productivity/decision experts)
-- Fidelidade média: 9.0/10
-- Fontes processadas: 50K+ linhas (livros Tier 0 + papers acadêmicos + web sources)
+- Minds clonados: 16 (1 palestrante, 4 technical thought leaders, 3 productivity/decision experts, 1 negotiation expert, 1 business educator, 2 strategy theorists, 1 product visionary, 1 engineer-emperor, 1 risk philosopher, 1 entertainment visionary)
+- Fidelidade média: 8.9/10
+- Fontes processadas: 90K+ linhas (livros Tier 0 + papers acadêmicos + web sources)
 
 ---
 
 ## Minds Clonados
 <!-- Formato: [DATA] mind-name → arquivo (fidelidade X%, fontes Y) -->
+- [2026-03-13] walt-disney v1.0 → outputs/minds/walt-disney/ (fonte Tier 0+1: 3 livros, ~579K words)
+  - Voice DNA: 18+ signature phrases, folksy-midwestern-with-steel tone, 3 voice modes
+  - Thinking DNA: 7 frameworks (Plussing, Quality-First, Storyboard, Personality Animation, Wienie, Sandbox, Innovation)
+  - 5 episodic memories, 12 decision heuristics, 8 anti-patterns, 7 mental frameworks
+  - NOTE: 3-Room Strategy (Dreamer-Realist-Critic) is Robert Dilts attribution, NOT in source material
+  - Includes Iger principles + Catmull Braintrust analysis (how Disney DNA persisted post-mortem)
+  - Fidelidade estimada: 88%
+
+- [2026-03-13] steve-jobs v1.0 → outputs/minds/steve-jobs/ (fonte Tier 0+1: 3 livros, ~381K words)
+  - Voice DNA: 18 signature phrases, binary intensity, reality distortion field, 4 metaphor families
+  - Thinking DNA: 7 frameworks (Simplicity Religion, End-to-End, Focus/1000 No's, A-Player, Demo-Driven, Product-First, Taste)
+  - 10 episodic memories, 12 decision heuristics, 9 anti-patterns, influence map
+  - Fidelidade estimada: 89%
+
+- [2026-03-13] nassim-taleb v1.0 → outputs/minds/nassim-taleb/ (fonte Tier 0: 3 livros Incerto, ~453K words total)
+  - 3 arquivos YAML: voice_dna.yaml, thinking_dna.yaml, mind_dna_complete.yaml
+  - Voice DNA: 12+ signature phrases, combative-intellectual tone, Mediterranean storyteller, Fat Tony Brooklyn voice
+  - Thinking DNA: 3 major frameworks (Black Swan, Antifragility, Skin in the Game), barbell strategy, via negativa, Lindy Effect
+  - Vocabulary fingerprints: "Mediocristan/Extremistan" (208x), "convexity" (295x), "Fat Tony" (116x), "turkey/peru" (94x), "iatrogenics" (104x), "optionality" (104x), "fragilista/interventionista" (64x), "barbell" (52x), "Lindy" (56x), "via negativa" (31x)
+  - 5 episodic memories (Lebanese Civil War, 1987 Crash, 2008 Crisis, Fat Tony Coin Toss, Mandelbrot Call)
+  - 12 decision heuristics, 10 anti-patterns, 8 mental frameworks, 7 knowledge bases
+  - System prompt + decision tree for agent instantiation
+  - Strategic sampling: ~80K of 453K words (18%) — prologues, key chapters, glossaries from all 3 books
+  - Mixed language sources: Antifragile in PT-BR translation, Black Swan + SITG in English
+  - Fidelidade estimada: 89% (gaps: Fooled by Randomness + Bed of Procrustes unavailable, Twitter persona, technical papers)
+
+- [2026-03-13] elon-musk v1.0 → outputs/minds/elon-musk/ (fonte Tier 0+1: Isaacson bio 230K words FR + Liftoff 90K words EN)
+  - 3 arquivos YAML: voice_dna.yaml, thinking_dna.yaml, mind_dna_complete.yaml
+  - Voice DNA: 15+ signature phrases, blunt-engineer-commander tone, cosmic-frame + profanity pattern
+  - Thinking DNA: The Algorithm (5 steps), First Principles/Idiot Index, Iterative Design, Rush Toward Red
+  - Vocabulary fingerprints: "requirement" (questioned), "idiot/stupid" (applied to processes), "physics" (ultimate authority)
+  - 10 episodic memories (Russian rip-off, The Tent, Lucas Hughes $200 skirt, De-automation, Flight 2 slosh, Epoxy boots, Hammer fix, Butyl plugs, Bolt counting, "You work at SpaceX now")
+  - 12 decision heuristics, 10 anti-patterns, psychological profile, decision tree
+  - Strategic sampling: Prologue + Algorithm ch + urgence maniaque + Raptor cost + Fremont factory + Liftoff early years/Texas/flights
+  - French source: Isaacson bio is in French translation — quotes translated back to English for agent use
+  - Fidelidade estimada: 89% (gaps: Twitter acquisition, Neuralink/AI chapters not sampled, no direct transcripts)
+
+- [2026-03-13] clayton-christensen v1.0 → outputs/minds/clayton-christensen/ (fonte Tier 0: 3-book collection "Disruptive Innovation", 263K words)
+  - 3 arquivos YAML: voice_dna.yaml, thinking_dna.yaml, mind_dna_complete.yaml
+  - Voice DNA: 10 signature phrases, humble-authority tone, cross-industry case study pedagogy
+  - Thinking DNA: Disruptive Innovation Theory (complete), JTBD, RPV, Value Network, Strategy Process, 3 Litmus Tests, Innovator's DNA (5 skills)
+  - Vocabulary fingerprints: "disruptive" (400+), "sustaining" (350+), "value network" (124), "resource allocation" (80+)
+  - 10 episodic memories (Andy Grove/Celeron, Seagate 3.5", minimills, milkshake, Intel emergent, Sunday basketball, Pandesic, Sony, Woolco, Schwab)
+  - 10 anti-patterns (cramming disruption into mainstream, waiting for large markets, deliberate planning for emergent, etc.)
+  - System prompt + 12 decision heuristics
+  - Strategic sampling: read intro + Ch.1-2 + Ch.8 + Ch.11 (Dilemma), Ch.2-3 + Ch.7-8 (Solution), intro + Ch.1 (DNA), complete HBR article
+  - Fidelidade estimada: 89% (gap: later works not in collection, DNA skill deep-dives not fully extracted)
+
+- [2026-03-13] hamilton-helmer v1.0 → outputs/minds/hamilton-helmer/ (fonte Tier 0: livro "7 Powers", ~2900 linhas)
+  - 3 arquivos YAML: voice_dna.yaml, thinking_dna.yaml, mind_dna_complete.yaml
+  - Voice DNA: 13 signature phrases, economist-practitioner tone, case-study-first pedagogy
+  - Thinking DNA: 7 Powers completos (definicao + benefit + barrier + SLM + diagnostics + case studies)
+  - Frameworks: Fundamental Equation, The Mantra, Power Progression, 3 paths to Compelling Value
+  - 10 episodic memories (Intel, Netflix, Vanguard, Pixar, Toyota, Tiffany, SAP, Apple III, Kodak)
+  - 8 anti-patterns (Operational Excellence Delusion, Welcome Competitor Fallacy, etc.)
+  - System prompt + Decision Tree (8-step Strategic Assessment Protocol)
+  - Fidelidade estimada: 9.0/10 (Tier 0 source, single book gap)
+
 - [2026-03-09] renner-silva v1.2 → squads/squad-creator/data/minds/renner_silva/05_clone_final/ (fidelidade 9.5/10, 19 KBs, 29 memorias episodicas)
   - v1.1: 9.3/10 | v1.2: 9.5/10 (+0.2)
   - Gap principal restante: ME-01 a ME-07 rasas, cross-refs unidirecionais
@@ -54,6 +112,14 @@
   - 5 anti-patterns: Collector's Fallacy, Perfect Organization, Tool Obsession, Siloed Knowledge, Infinite Distillation
   - Fidelidade estimada: 87%
 
+- [2026-03-13] keith-cunningham v1.0 → outputs/minds/keith-cunningham/ (fonte Tier 0: livro "The Road Less Stupid", ~76K words)
+  - Extraído Voice DNA + Thinking DNA + 10 episodic memories + 200+ Thinking Time questions
+  - Vocabulary fingerprints: "bumper sticker" (70+), "Thinking Time" (103+), "dumb tax" (50+), "KJC" (45), "Go Think" (44)
+  - Frameworks: 5 Core Disciplines, Big 8, 4 Hats, Risk Assessment Tool, Growth Funnel, FOWTW/GAGI/GITT, Power of 3
+  - 30 bumper stickers catalogued, 6 anti-patterns named, 7 decision heuristics, 3 success propositions
+  - Output: 3 YAML files (voice_dna.yaml, thinking_dna.yaml, mind_dna_complete.yaml)
+  - Fidelidade estimada: 9.0/10
+
 - [2026-03-12] charlie-munger v1.0 → squads/mind-cloning/minds/charlie-munger/ (fonte Tier 0/1: Poor Charlie's Almanack + speeches)
   - Voice DNA: 12 signature phrases, curmudgeonly sage tone, lapidary one-liners
   - Thinking DNA: Two-Track Analysis, 25 Psychological Tendencies, 10-point Investing Checklist, 9 Veto Conditions
@@ -61,6 +127,18 @@
   - 5 anti-patterns: Man-with-Hammer, Cargo Cult, Consistency Trap, Social Proof, Overconfidence Spiral
   - Deletion decision tree (Munger applied to email/info mgmt): Inversion → Incentive → Competence → Opportunity Cost → Lollapalooza
   - Fidelidade estimada: 88%
+
+- [2026-03-13] chris-voss v1.0 → outputs/minds/chris-voss/ (fonte Tier 1: web-extracted do livro "Never Split the Difference", 84K words)
+  - Voice DNA: 3 voices (playful 80%, FM DJ 10-20%, assertive rarely), 8 proprietary terms, 8 forbidden phrases
+  - Thinking DNA: 5 frameworks (Tactical Empathy System, Ackerman Model, Black Swan Method, Execution Guarantee, 3 Negotiator Types)
+  - Signature phrases: 8 identity-level + 8 technique-level + 5 philosophical
+  - Episodic memories: 5 FBI stories (Harvard role-play, Haiti $4751, Schilling "That's right", Harlem 6h, Chase Manhattan)
+  - 12 decision heuristics (trigger → action format)
+  - 10 anti-patterns (split the difference, "I understand", asking "Why", etc.)
+  - Metaphor families: 8 (discovery not battle, empathy as martial art, labels as sunlight, kidnappers as businessmen)
+  - Existing agent: squads/negotiation/agents/chris-voss.md (negotiation squad)
+  - Gap: livro Tier 0 nao lido diretamente (arquivo nao encontrado no path esperado — gitignored/cleaned)
+  - Fidelidade estimada: 87%
 
 ---
 
@@ -190,4 +268,13 @@
   - 10 episodic memories with quantified outcomes (e.g., "50% premium increase", "5th → 99th rank")
   - 5 core frameworks extracted: AAA, characteristics filter, discovery methods, DRD, three-legged stool
 - [2026-03-09] Renner Silva v1.2 scored 9.5/10 (APPROVED). Delta +0.2 from v1.1.
+- [2026-03-13] Chris Voss DNA extraction via Tier 1 web sources (livro Tier 0 nao disponivel no path esperado).
+  - NOVO PATTERN: Negotiation expert voice = "FBI war stories as hooks" + proprietary terminology + forbidden phrases
+  - Proprietary terms are CRITICAL for negotiation experts: "tactical empathy" (not "empathy"), "mirror" (not "repeat"), "label" (not "observe")
+  - Forbidden phrases = negative vocabulary fingerprints — what he NEVER says is as important as what he says
+  - Three voices pattern (playful 80% / FM DJ 10-20% / assertive rarely) = delivery framework, not just tone
+  - Chapter-by-chapter extraction via web summaries = viable Tier 1 strategy when Tier 0 file unavailable
+  - Multiple sources cross-validated: grahammann.net, runn.io, thegrowthfaculty.com, MasterClass references
+  - Already had agent in squads/negotiation/ — mind DNA is deeper/more structured reference
+  - Advisory Board sources (outputs/minds/advisor-board-sources/) are gitignored and may have been cleaned
 - [2026-02-05] Agent Memory implementado - Epic AAA

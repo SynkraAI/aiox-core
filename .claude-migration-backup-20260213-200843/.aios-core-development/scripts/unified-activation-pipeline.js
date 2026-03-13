@@ -708,11 +708,11 @@ class UnifiedActivationPipeline {
     await stateManager.update({
       metadata: {
         activeAgent: agentId,
-        lastActivated: new Date().toISOString()
+        lastActivated: new Date().toISOString(),
       },
       project: {
-        emoji: agentEmoji
-      }
+        emoji: agentEmoji,
+      },
     });
   }
 
@@ -737,7 +737,7 @@ class UnifiedActivationPipeline {
       'ux-design-expert': '🎨',
       'devops': '🚀',
       'aios-master': '👑',
-      'squad-creator': '👥'
+      'squad-creator': '👥',
     };
     return emojiMap[agentId] || '🤖';
   }

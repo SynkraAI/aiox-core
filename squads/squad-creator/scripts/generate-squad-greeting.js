@@ -38,8 +38,8 @@ const GreetingBuilder = require('../../../.aios-core/development/scripts/greetin
 const SessionContextLoader = require('../../../.aios-core/scripts/session-context-loader');
 const { loadProjectStatus } = require('../../../.aios-core/infrastructure/scripts/project-status-loader');
 
-const SQUADS_PATH = './squads';
-const REGISTRY_PATH = './squads/squad-creator/data/squad-registry.yaml';
+const DEFAULT_SQUADS_PATH = './squads';
+const DEFAULT_REGISTRY_PATH = './squads/squad-creator/data/squad-registry.yaml';
 const TIMEOUT_MS = 200;
 
 /**
@@ -47,10 +47,11 @@ const TIMEOUT_MS = 200;
  *
  * @param {string} squadName - Squad directory name
  * @param {string} agentName - Agent file name (without .md)
+ * @param {string} [squadsPath] - Custom squads path
  * @returns {Promise<Object>} Parsed agent definition
  */
-async function loadSquadAgent(squadName, agentName) {
-  const agentPath = path.join(process.cwd(), SQUADS_PATH, squadName, 'agents', `${agentName}.md`);
+async function loadSquadAgent(squadName, agentName, squadsPath = DEFAULT_SQUADS_PATH) {
+  const agentPath = path.join(process.cwd(), squadsPath, squadName, 'agents', `${agentName}.md`);
 
   try {
     const content = await fs.readFile(agentPath, 'utf8');
@@ -121,10 +122,11 @@ function normalizeAgentDefinition(agentDef) {
  * Load squad config.yaml
  *
  * @param {string} squadName - Squad directory name
+ * @param {string} [squadsPath] - Custom squads path
  * @returns {Promise<Object>} Squad configuration
  */
-async function loadSquadConfig(squadName) {
-  const loader = new SquadLoader({ squadsPath: SQUADS_PATH });
+async function loadSquadConfig(squadName, squadsPath = DEFAULT_SQUADS_PATH) {
+  const loader = new SquadLoader({ squadsPath });
 
   try {
     const { manifestPath } = await loader.resolve(squadName);
@@ -139,12 +141,13 @@ async function loadSquadConfig(squadName) {
 /**
  * Load squad registry data
  *
+ * @param {string} [registryPath] - Custom registry path
  * @returns {Promise<Object>} Registry data
  */
-async function loadSquadRegistry() {
+async function loadSquadRegistry(registryPath = DEFAULT_REGISTRY_PATH) {
   try {
-    const registryPath = path.join(process.cwd(), REGISTRY_PATH);
-    const content = await fs.readFile(registryPath, 'utf8');
+    const fullPath = path.join(process.cwd(), registryPath);
+    const content = await fs.readFile(fullPath, 'utf8');
     return yaml.load(content);
   } catch (error) {
     console.warn(`[generate-squad-greeting] Failed to load registry: ${error.message}`);
@@ -212,10 +215,11 @@ function getTopSquads(registry, limit = 5) {
  * Generate ecosystem report from registry
  *
  * @param {Object} settings - Ecosystem report settings
+ * @param {string} [registryPath] - Custom registry path
  * @returns {Promise<string>} Formatted report
  */
-async function generateEcosystemReport(settings = {}) {
-  const registry = await loadSquadRegistry();
+async function generateEcosystemReport(settings = {}, registryPath) {
+  const registry = await loadSquadRegistry(registryPath);
   const counts = getEcosystemCounts(registry);
 
   let report = `## 📊 AIOS Squad Ecosystem
@@ -295,14 +299,19 @@ async function loadSessionContext(agentId) {
  *
  * @param {string} squadName - Squad directory name
  * @param {string} [agentName] - Agent name (defaults to main orchestrator)
+ * @param {Object} [opts] - Optional configuration
+ * @param {string} [opts.squadsPath] - Custom squads path
+ * @param {string} [opts.registryPath] - Custom registry path
  * @returns {Promise<string>} Formatted greeting
  */
-async function generateSquadGreeting(squadName, agentName) {
+async function generateSquadGreeting(squadName, agentName, opts = {}) {
   const startTime = Date.now();
+  const squadsPath = opts.squadsPath || DEFAULT_SQUADS_PATH;
+  const registryPath = opts.registryPath || DEFAULT_REGISTRY_PATH;
 
   try {
     // Load squad config
-    const config = await loadSquadConfig(squadName);
+    const config = await loadSquadConfig(squadName, squadsPath);
     const settings = config.settings || {};
     const activationSettings = settings.activation || {};
 
@@ -312,7 +321,7 @@ async function generateSquadGreeting(squadName, agentName) {
     }
 
     // Load agent definition
-    const agentDef = await loadSquadAgent(squadName, agentName);
+    const agentDef = await loadSquadAgent(squadName, agentName, squadsPath);
 
     // Build greeting parts
     const parts = [];
@@ -320,7 +329,7 @@ async function generateSquadGreeting(squadName, agentName) {
     // 1. Ecosystem report (if enabled)
     if (activationSettings.show_ecosystem_report) {
       const ecosystemSettings = settings.ecosystem_report || {};
-      const report = await generateEcosystemReport(ecosystemSettings);
+      const report = await generateEcosystemReport(ecosystemSettings, registryPath);
       parts.push(report);
     }
 
@@ -403,7 +412,7 @@ if (require.main === module) {
     setTimeout(() => reject(new Error('Greeting timeout')), TIMEOUT_MS),
   );
 
-  Promise.race([generateSquadGreeting(squadName, agentName), timeoutPromise])
+  Promise.race([generateSquadGreeting(squadName, agentName, {}), timeoutPromise])
     .then(greeting => {
       console.log(greeting);
       process.exit(0);

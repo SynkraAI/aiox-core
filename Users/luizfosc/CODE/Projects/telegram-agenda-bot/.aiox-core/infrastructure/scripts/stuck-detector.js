@@ -278,7 +278,7 @@ class StuckDetector {
         result.context.similarityScore = circularResult.similarity;
         this._log(
           `Circular approach detected: ${circularResult.similarity.toFixed(2)} similarity`,
-          'warn'
+          'warn',
         );
       }
     }
@@ -509,7 +509,7 @@ class StuckDetector {
             Math.min(
               dp[i - 1][j], // deletion
               dp[i][j - 1], // insertion
-              dp[i - 1][j - 1] // substitution
+              dp[i - 1][j - 1], // substitution
             );
         }
       }
@@ -838,7 +838,7 @@ class StuckDetector {
     lines.push(`Generated:            ${report.generatedAt}`);
     lines.push(`Severity:             ${chalk.bold(this._colorSeverity(report.severity))}`);
     lines.push(
-      `Status:               ${report.summary.isStuck ? chalk.red('STUCK') : chalk.green('OK')}`
+      `Status:               ${report.summary.isStuck ? chalk.red('STUCK') : chalk.green('OK')}`,
     );
     lines.push(`Reason:               ${report.summary.reason || 'N/A'}`);
     lines.push(`Confidence:           ${(report.summary.confidence * 100).toFixed(1)}%`);
@@ -1124,7 +1124,7 @@ ${chalk.cyan('Examples:')}
       case 'mark': {
         if (positionalArgs.length < 3) {
           console.error(
-            chalk.red('Error: implementation path, subtaskId, and attempts JSON required')
+            chalk.red('Error: implementation path, subtaskId, and attempts JSON required'),
           );
           process.exit(1);
         }
@@ -1160,7 +1160,7 @@ ${chalk.cyan('Examples:')}
         const result1 = detector.check(attempts1);
         console.log(`  Stuck: ${result1.stuck}, Reason: ${result1.reason}`);
         console.log(
-          `  ${result1.stuck && result1.reason === 'consecutive_failures' ? chalk.green('PASS') : chalk.red('FAIL')}`
+          `  ${result1.stuck && result1.reason === 'consecutive_failures' ? chalk.green('PASS') : chalk.red('FAIL')}`,
         );
 
         // Test 2: Circular approach detection
@@ -1171,10 +1171,10 @@ ${chalk.cyan('Examples:')}
         ];
         const result2 = detector.check(attempts2, 'install lodash then use map function');
         console.log(
-          `  Stuck: ${result2.stuck}, Similarity: ${(result2.context.similarityScore || 0).toFixed(2)}`
+          `  Stuck: ${result2.stuck}, Similarity: ${(result2.context.similarityScore || 0).toFixed(2)}`,
         );
         console.log(
-          `  ${result2.stuck && result2.reason.includes('circular') ? chalk.green('PASS') : chalk.red('FAIL')}`
+          `  ${result2.stuck && result2.reason.includes('circular') ? chalk.green('PASS') : chalk.red('FAIL')}`,
         );
 
         // Test 3: Not stuck
@@ -1199,16 +1199,16 @@ ${chalk.cyan('Examples:')}
         console.log(`  Suggestions count: ${result4.suggestions.length}`);
         console.log(`  First suggestion: ${result4.suggestions[0]?.substring(0, 50)}...`);
         console.log(
-          `  ${result4.suggestions.length > 0 ? chalk.green('PASS') : chalk.red('FAIL')}`
+          `  ${result4.suggestions.length > 0 ? chalk.green('PASS') : chalk.red('FAIL')}`,
         );
 
         // Test 5: Report generation
         console.log('\nTest 5: Report generation');
         const report = detector.generateEscalationReport('1.1', attempts4);
-        console.log(`  Report sections: summary, attemptHistory, analysis, recommendations`);
+        console.log('  Report sections: summary, attemptHistory, analysis, recommendations');
         console.log(`  Severity: ${report.severity}`);
         console.log(
-          `  ${report.severity && report.recommendations ? chalk.green('PASS') : chalk.red('FAIL')}`
+          `  ${report.severity && report.recommendations ? chalk.green('PASS') : chalk.red('FAIL')}`,
         );
 
         console.log(chalk.bold('\nAll tests completed!\n'));

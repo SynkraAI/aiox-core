@@ -44,8 +44,8 @@ class BackupManager {
             total_backups: 0,
             successful_restores: 0,
             failed_restores: 0,
-            total_size: 0
-          }
+            total_size: 0,
+          },
         });
       }
     } catch (error) {
@@ -75,7 +75,7 @@ class BackupManager {
       size: 0,
       checksums: {},
       compressed: true,
-      status: 'creating'
+      status: 'creating',
     };
 
     try {
@@ -105,7 +105,7 @@ class BackupManager {
       // Create backup manifest
       await fs.writeFile(
         path.join(tempDir, 'backup-manifest.json'),
-        JSON.stringify(backupInfo, null, 2)
+        JSON.stringify(backupInfo, null, 2),
       );
 
       // Create tar archive
@@ -113,9 +113,9 @@ class BackupManager {
         {
           gzip: { level: this.compressionLevel },
           file: backupPath,
-          cwd: tempDir
+          cwd: tempDir,
         },
-        ['.']
+        ['.'],
       );
 
       // Get backup size
@@ -166,7 +166,7 @@ class BackupManager {
       backupId,
       restored_files: [],
       failed_files: [],
-      warnings: []
+      warnings: [],
     };
 
     try {
@@ -194,7 +194,7 @@ class BackupManager {
       // Extract backup
       await tar.extract({
         file: backupPath,
-        cwd: restoreTemp
+        cwd: restoreTemp,
       });
 
       // Load manifest
@@ -239,7 +239,7 @@ class BackupManager {
           } catch (error) {
             result.failed_files.push({
               file: relPath,
-              error: error.message
+              error: error.message,
             });
             result.success = false;
           }
@@ -319,7 +319,7 @@ class BackupManager {
     if (filter.metadata) {
       backups = backups.filter(b => {
         return Object.entries(filter.metadata).every(([key, value]) => 
-          b.metadata[key] === value
+          b.metadata[key] === value,
         );
       });
     }
@@ -333,7 +333,7 @@ class BackupManager {
       files: b.files.length,
       size: this.formatSize(b.size),
       metadata: b.metadata,
-      isActive: b.id === this.activeBackup
+      isActive: b.id === this.activeBackup,
     }));
   }
 
@@ -400,7 +400,7 @@ class BackupManager {
       valid: true,
       backupId,
       errors: [],
-      warnings: []
+      warnings: [],
     };
 
     try {
@@ -420,7 +420,7 @@ class BackupManager {
         const entries = [];
         await tar.list({
           file: backupPath,
-          onentry: entry => entries.push(entry.path)
+          onentry: entry => entries.push(entry.path),
         });
         
         if (!entries.includes('./backup-manifest.json')) {
@@ -464,8 +464,8 @@ class BackupManager {
           total_backups: 0,
           successful_restores: 0,
           failed_restores: 0,
-          total_size: 0
-        }
+          total_size: 0,
+        },
       };
     }
   }
@@ -477,7 +477,7 @@ class BackupManager {
   async saveMetadata(metadata) {
     await fs.writeFile(
       this.metadataFile,
-      JSON.stringify(metadata, null, 2)
+      JSON.stringify(metadata, null, 2),
     );
   }
 
@@ -561,14 +561,14 @@ class BackupManager {
       const metadata = await this.getBackupDetails(backupId);
       await fs.writeFile(
         metadataPath,
-        JSON.stringify(metadata, null, 2)
+        JSON.stringify(metadata, null, 2),
       );
       
       return {
         success: true,
         exported: exportPath,
         metadata: metadataPath,
-        size: metadata.size
+        size: metadata.size,
       };
       
     } catch (error) {

@@ -412,7 +412,7 @@ class SubtaskVerifier {
       playwright = require('playwright');
     } catch {
       throw new Error(
-        'Browser verification requires Playwright - install with: npm install playwright'
+        'Browser verification requires Playwright - install with: npm install playwright',
       );
     }
 
@@ -505,7 +505,7 @@ class SubtaskVerifier {
 
     const message = error.message || '';
     return transientPatterns.some((pattern) =>
-      message.toLowerCase().includes(pattern.toLowerCase())
+      message.toLowerCase().includes(pattern.toLowerCase()),
     );
   }
 
@@ -611,7 +611,7 @@ class SubtaskVerifier {
       for (const result of results.subtasks) {
         const status = result.passed ? chalk.green('PASS') : chalk.red('FAIL');
         lines.push(
-          `${status} [${result.subtaskId}] ${result.verificationType} (${result.duration}ms)`
+          `${status} [${result.subtaskId}] ${result.verificationType} (${result.duration}ms)`,
         );
         if (!result.passed && result.error) {
           lines.push(`     Error: ${result.error.message || result.error}`);

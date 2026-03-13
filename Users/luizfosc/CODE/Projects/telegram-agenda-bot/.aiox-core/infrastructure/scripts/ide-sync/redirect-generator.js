@@ -27,7 +27,7 @@ const DEFAULT_REDIRECTS = {
 function generateRedirectContent(oldId, newId, format) {
   const baseContent = {
     header: `# Agent Redirect: ${oldId} → ${newId}`,
-    notice: `**DEPRECATED:** This agent has been renamed/merged.`,
+    notice: '**DEPRECATED:** This agent has been renamed/merged.',
     instruction: `Use \`@${newId}\` instead.`,
   };
 

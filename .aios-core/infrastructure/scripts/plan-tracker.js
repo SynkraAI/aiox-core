@@ -124,14 +124,14 @@ class PlanTracker {
           'docs/stories',
           this.storyId,
           'plan',
-          CONFIG.implementationFile
+          CONFIG.implementationFile,
         );
         this.progressPath = path.join(
           this.rootPath,
           'docs/stories',
           this.storyId,
           'plan',
-          CONFIG.buildProgressFile
+          CONFIG.buildProgressFile,
         );
       }
     }
@@ -152,7 +152,7 @@ class PlanTracker {
         'docs/stories',
         this.storyId.toLowerCase(),
         'plan',
-        CONFIG.implementationFile
+        CONFIG.implementationFile,
       ),
       // Story ID with hyphens
       path.join(
@@ -160,7 +160,7 @@ class PlanTracker {
         'docs/stories',
         this.storyId.replace(/[_]/g, '-'),
         'plan',
-        CONFIG.implementationFile
+        CONFIG.implementationFile,
       ),
       // .aios plans location
       path.join(this.rootPath, '.aios/plans', this.storyId, CONFIG.implementationFile),
@@ -201,8 +201,8 @@ class PlanTracker {
               epicDir,
               this.storyId.toLowerCase(),
               'plan',
-              CONFIG.implementationFile
-            )
+              CONFIG.implementationFile,
+            ),
           );
         }
       } catch {
@@ -414,7 +414,7 @@ class PlanTracker {
     lines.push('');
     lines.push(`📈 Overall Progress: ${stats.percentComplete}%`);
     lines.push(
-      `   Total: ${stats.total} | Completed: ${stats.completed} | In Progress: ${stats.inProgress} | Failed: ${stats.failed}`
+      `   Total: ${stats.total} | Completed: ${stats.completed} | In Progress: ${stats.inProgress} | Failed: ${stats.failed}`,
     );
     lines.push(`   Status: ${StatusEmoji[stats.status]} ${stats.status.toUpperCase()}`);
 

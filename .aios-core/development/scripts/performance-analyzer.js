@@ -15,7 +15,7 @@ class PerformanceAnalyzer {
       cyclomaticComplexity: 10,
       nestingDepth: 5,
       importCount: 20,
-      unusedCode: 0.1 // 10% unused code ratio
+      unusedCode: 0.1, // 10% unused code ratio
     };
     this.performancePatterns = {
       // Sync operations that should be async
@@ -23,28 +23,28 @@ class PerformanceAnalyzer {
         /fs\.readFileSync/g,
         /fs\.writeFileSync/g,
         /fs\.existsSync/g,
-        /JSON\.parse\(\s*fs\.readFileSync/g
+        /JSON\.parse\(\s*fs\.readFileSync/g,
       ],
       // Memory-intensive patterns
       memoryIssues: [
         /\.map\(\s*.*\.map\(/g, // Nested maps
         /new Array\(\d{4,}\)/g, // Large arrays
         /JSON\.stringify.*JSON\.parse/g, // Unnecessary serialization
-        /require\(\s*['"`][^'"`]+\.json['"`]\s*\)/g // Large JSON imports
+        /require\(\s*['"`][^'"`]+\.json['"`]\s*\)/g, // Large JSON imports
       ],
       // Performance anti-patterns
       antiPatterns: [
         /console\.log/g, // Console logs in production
         /debugger/g, // Debugger statements
         /setTimeout\(\s*.*,\s*0\s*\)/g, // Unnecessary setTimeout
-        /setInterval\(\s*.*,\s*[0-9]{1,2}\s*\)/g // High-frequency intervals
+        /setInterval\(\s*.*,\s*[0-9]{1,2}\s*\)/g, // High-frequency intervals
       ],
       // Inefficient loops
       inefficientLoops: [
         /for\s*\(\s*.*\.length\s*;/g, // Length calculated in loop condition
         /while\s*\(\s*true\s*\)/g, // Infinite loops
-        /forEach.*forEach/g // Nested forEach
-      ]
+        /forEach.*forEach/g, // Nested forEach
+      ],
     };
   }
 
@@ -69,8 +69,8 @@ class PerformanceAnalyzer {
         critical_issues: 0,
         high_priority_issues: 0,
         medium_priority_issues: 0,
-        low_priority_issues: 0
-      }
+        low_priority_issues: 0,
+      },
     };
 
     try {
@@ -98,7 +98,7 @@ class PerformanceAnalyzer {
       analysis.metrics = this.calculateIssuePriorities(analysis);
       analysis.recommendations = this.generatePerformanceRecommendations(analysis);
 
-      console.log(chalk.green(`✅ Performance analysis completed`));
+      console.log(chalk.green('✅ Performance analysis completed'));
       console.log(chalk.gray(`   Files analyzed: ${analysis.metrics.total_files_analyzed}`));
       console.log(chalk.gray(`   Issues found: ${analysis.metrics.total_issues_found}`));
       console.log(chalk.gray(`   Overall score: ${analysis.overall_score}/10`));
@@ -124,7 +124,7 @@ class PerformanceAnalyzer {
       async_opportunities: [],
       quality_issues: [],
       file_size_issues: [],
-      complexity_issues: []
+      complexity_issues: [],
     };
 
     try {
@@ -145,7 +145,7 @@ class PerformanceAnalyzer {
           severity: stats.size > this.thresholds.fileSize * 2 ? 'high' : 'medium',
           recommendation: 'Consider breaking down into smaller modules',
           impact: 'high',
-          effort: 'medium'
+          effort: 'medium',
         });
       }
 
@@ -204,7 +204,7 @@ class PerformanceAnalyzer {
               severity: 'high',
               recommendation: 'Convert to async equivalent',
               impact: 'high',
-              effort: 'low'
+              effort: 'low',
             });
           });
         }
@@ -246,7 +246,7 @@ class PerformanceAnalyzer {
               severity,
               recommendation,
               impact: 'medium',
-              effort: 'medium'
+              effort: 'medium',
             });
           });
         }
@@ -288,7 +288,7 @@ class PerformanceAnalyzer {
               severity,
               recommendation,
               impact: 'low',
-              effort: 'low'
+              effort: 'low',
             });
           });
         }
@@ -330,7 +330,7 @@ class PerformanceAnalyzer {
               severity,
               recommendation,
               impact: 'medium',
-              effort: 'low'
+              effort: 'low',
             });
           });
         }
@@ -357,7 +357,7 @@ class PerformanceAnalyzer {
           severity: func.lines > this.thresholds.functionLength * 2 ? 'high' : 'medium',
           recommendation: 'Break down into smaller functions',
           impact: 'medium',
-          effort: 'medium'
+          effort: 'medium',
         });
       }
 
@@ -370,7 +370,7 @@ class PerformanceAnalyzer {
           severity: func.complexity > this.thresholds.cyclomaticComplexity * 1.5 ? 'high' : 'medium',
           recommendation: 'Reduce conditional complexity',
           impact: 'high',
-          effort: 'high'
+          effort: 'high',
         });
       }
 
@@ -383,7 +383,7 @@ class PerformanceAnalyzer {
           severity: 'medium',
           recommendation: 'Reduce nesting depth using early returns or guard clauses',
           impact: 'medium',
-          effort: 'medium'
+          effort: 'medium',
         });
       }
     });
@@ -405,7 +405,7 @@ class PerformanceAnalyzer {
         severity: 'medium',
         recommendation: 'Consider breaking down module or using dynamic imports',
         impact: 'low',
-        effort: 'medium'
+        effort: 'medium',
       });
     }
 
@@ -422,7 +422,7 @@ class PerformanceAnalyzer {
         severity: 'low',
         recommendation: 'Remove unused imports',
         impact: 'low',
-        effort: 'low'
+        effort: 'low',
       });
     }
 
@@ -452,7 +452,7 @@ class PerformanceAnalyzer {
             severity: 'low',
             recommendation: 'Remove if truly unused or export if needed elsewhere',
             impact: 'low',
-            effort: 'low'
+            effort: 'low',
           });
         }
       }
@@ -480,7 +480,7 @@ class PerformanceAnalyzer {
           startLine: index + 1,
           lines: this.estimateFunctionLength(lines, index),
           complexity: this.estimateComplexity(lines, index),
-          nestingDepth: this.estimateNestingDepth(lines, index)
+          nestingDepth: this.estimateNestingDepth(lines, index),
         };
 
         functions.push(funcInfo);
@@ -618,12 +618,12 @@ class PerformanceAnalyzer {
       critical: 2,
       high: 1,
       medium: 0.5,
-      low: 0.1
+      low: 0.1,
     };
 
     // Apply penalties based on issue severity
     [...analysis.bottlenecks, ...analysis.memory_issues, ...analysis.async_opportunities,
-     ...analysis.code_quality_issues, ...analysis.file_size_issues, ...analysis.complexity_issues]
+      ...analysis.code_quality_issues, ...analysis.file_size_issues, ...analysis.complexity_issues]
       .forEach(issue => {
         score -= penalties[issue.severity] || 0.1;
       });
@@ -654,7 +654,7 @@ class PerformanceAnalyzer {
       ...analysis.async_opportunities,
       ...analysis.code_quality_issues,
       ...analysis.file_size_issues,
-      ...analysis.complexity_issues
+      ...analysis.complexity_issues,
     ];
 
     metrics.critical_issues = allIssues.filter(i => i.severity === 'critical').length;
@@ -677,7 +677,7 @@ class PerformanceAnalyzer {
         priority: 'critical',
         category: 'immediate_action',
         message: `${analysis.metrics.critical_issues} critical performance issues require immediate attention`,
-        action: 'Fix critical bottlenecks before deployment'
+        action: 'Fix critical bottlenecks before deployment',
       });
     }
 
@@ -687,7 +687,7 @@ class PerformanceAnalyzer {
         priority: 'high',
         category: 'performance',
         message: `${analysis.metrics.high_priority_issues} high-priority performance issues detected`,
-        action: 'Address synchronous operations and complexity issues'
+        action: 'Address synchronous operations and complexity issues',
       });
     }
 
@@ -697,7 +697,7 @@ class PerformanceAnalyzer {
         priority: 'medium',
         category: 'memory',
         message: `${analysis.memory_issues.length} memory optimization opportunities found`,
-        action: 'Implement memory-efficient patterns and data structures'
+        action: 'Implement memory-efficient patterns and data structures',
       });
     }
 
@@ -707,7 +707,7 @@ class PerformanceAnalyzer {
         priority: 'medium',
         category: 'modularity',
         message: `${analysis.file_size_issues.length} files are too large`,
-        action: 'Break down large files into smaller, focused modules'
+        action: 'Break down large files into smaller, focused modules',
       });
     }
 
@@ -717,7 +717,7 @@ class PerformanceAnalyzer {
         priority: 'high',
         category: 'general',
         message: `Overall performance score is ${analysis.overall_score}/10`,
-        action: 'Comprehensive performance review and optimization needed'
+        action: 'Comprehensive performance review and optimization needed',
       });
     }
 

@@ -295,7 +295,7 @@ async function commandSync(options) {
       }
 
       console.log(
-        `   ${status} ${agentCount} agents${commandCount > 0 ? `, ${commandCount} commands` : ''}, ${redirectCount} redirects${errorCount > 0 ? `, ${errorCount} errors` : ''}`
+        `   ${status} ${agentCount} agents${commandCount > 0 ? `, ${commandCount} commands` : ''}, ${redirectCount} redirects${errorCount > 0 ? `, ${errorCount} errors` : ''}`,
       );
 
       if (options.verbose && result.errors.length > 0) {
@@ -317,11 +317,11 @@ async function commandSync(options) {
 
     if (options.dryRun) {
       console.log(
-        `${colors.yellow}Dry run: ${totalFiles} agents + ${totalRedirects} redirects would be written${colors.reset}`
+        `${colors.yellow}Dry run: ${totalFiles} agents + ${totalRedirects} redirects would be written${colors.reset}`,
       );
     } else {
       console.log(
-        `${colors.green}✅ Sync complete: ${totalFiles} agents + ${totalRedirects} redirects${colors.reset}`
+        `${colors.green}✅ Sync complete: ${totalFiles} agents + ${totalRedirects} redirects${colors.reset}`,
       );
     }
 
@@ -385,7 +385,7 @@ async function commandValidate(options) {
     const redirects = generateAllRedirects(
       config.redirects,
       path.join(projectRoot, ideConfig.path),
-      ideConfig.format
+      ideConfig.format,
     );
 
     for (const redirect of redirects) {

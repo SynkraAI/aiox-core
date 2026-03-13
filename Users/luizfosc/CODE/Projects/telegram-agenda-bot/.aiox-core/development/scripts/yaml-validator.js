@@ -15,13 +15,13 @@ class YAMLValidator {
         structure: {
           agent: {
             required: ['name', 'id', 'title', 'icon', 'whenToUse'],
-            optional: ['customization']
+            optional: ['customization'],
           },
           persona: {
             required: ['role', 'style', 'identity', 'focus'],
-            optional: []
-          }
-        }
+            optional: [],
+          },
+        },
       },
       manifest: {
         required: ['bundle', 'agents'],
@@ -29,9 +29,9 @@ class YAMLValidator {
         structure: {
           bundle: {
             required: ['name', 'icon', 'description'],
-            optional: []
-          }
-        }
+            optional: [],
+          },
+        },
       },
       workflow: {
         required: ['workflow', 'stages'],
@@ -39,10 +39,10 @@ class YAMLValidator {
         structure: {
           workflow: {
             required: ['id', 'name', 'description', 'type', 'scope'],
-            optional: []
-          }
-        }
-      }
+            optional: [],
+          },
+        },
+      },
     };
   }
 
@@ -54,7 +54,7 @@ class YAMLValidator {
       valid: true,
       errors: [],
       warnings: [],
-      parsed: null
+      parsed: null,
     };
 
     try {
@@ -64,9 +64,9 @@ class YAMLValidator {
         onWarning: (warning) => {
           results.warnings.push({
             type: 'yaml_warning',
-            message: warning.toString()
+            message: warning.toString(),
           });
-        }
+        },
       });
 
       // Type-specific validation
@@ -83,7 +83,7 @@ class YAMLValidator {
         type: 'parse_error',
         message: error.message,
         line: error.mark ? error.mark.line : null,
-        column: error.mark ? error.mark.column : null
+        column: error.mark ? error.mark.column : null,
       });
     }
 
@@ -105,8 +105,8 @@ class YAMLValidator {
         filePath,
         errors: [{
           type: 'file_error',
-          message: `Could not read file: ${error.message}`
-        }]
+          message: `Could not read file: ${error.message}`,
+        }],
       };
     }
   }
@@ -124,7 +124,7 @@ class YAMLValidator {
         results.errors.push({
           type: 'missing_required',
           field,
-          message: `Missing required field: ${field}`
+          message: `Missing required field: ${field}`,
         });
       }
     }
@@ -137,7 +137,7 @@ class YAMLValidator {
             data[field], 
             field, 
             fieldRules, 
-            results
+            results,
           );
         }
       }
@@ -146,7 +146,7 @@ class YAMLValidator {
     // Warn about unknown fields
     const allKnownFields = [
       ...(rules.required || []),
-      ...(rules.optional || [])
+      ...(rules.optional || []),
     ];
     
     for (const field of Object.keys(data)) {
@@ -154,7 +154,7 @@ class YAMLValidator {
         results.warnings.push({
           type: 'unknown_field',
           field,
-          message: `Unknown field: ${field}`
+          message: `Unknown field: ${field}`,
         });
       }
     }
@@ -171,7 +171,7 @@ class YAMLValidator {
         results.errors.push({
           type: 'missing_required',
           field: `${fieldName}.${subfield}`,
-          message: `Missing required field: ${fieldName}.${subfield}`
+          message: `Missing required field: ${fieldName}.${subfield}`,
         });
       }
     }
@@ -192,7 +192,7 @@ class YAMLValidator {
         results.warnings.push({
           type: 'null_value',
           field: fullPath,
-          message: `Null or undefined value at ${fullPath}`
+          message: `Null or undefined value at ${fullPath}`,
         });
       }
 
@@ -202,7 +202,7 @@ class YAMLValidator {
           results.errors.push({
             type: 'invalid_type',
             field: fullPath,
-            message: `${fullPath} must be a non-empty string`
+            message: `${fullPath} must be a non-empty string`,
           });
         }
       }
@@ -213,7 +213,7 @@ class YAMLValidator {
           results.warnings.push({
             type: 'empty_icon',
             field: fullPath,
-            message: 'Icon field is empty'
+            message: 'Icon field is empty',
           });
         }
       }
@@ -232,7 +232,7 @@ class YAMLValidator {
         results.valid = false;
         results.errors.push({
           type: 'circular_reference',
-          message: 'Circular reference detected in YAML structure'
+          message: 'Circular reference detected in YAML structure',
         });
       }
     }
@@ -243,7 +243,7 @@ class YAMLValidator {
       results.warnings.push({
         type: 'deep_nesting',
         depth: maxDepth,
-        message: `Deep nesting detected (${maxDepth} levels)`
+        message: `Deep nesting detected (${maxDepth} levels)`,
       });
     }
   }
@@ -285,7 +285,7 @@ class YAMLValidator {
     return {
       content: fixed,
       validation,
-      changed: content !== fixed
+      changed: content !== fixed,
     };
   }
 
@@ -359,7 +359,7 @@ class YAMLValidator {
     // Fix unquoted strings that need quotes
     return content.replace(
       /^(\s*\w+):\s*([^"'\n]*[:{}\[\]|>&*!%@`][^"'\n]*)$/gm,
-      '$1: "$2"'
+      '$1: "$2"',
     );
   }
 
@@ -369,8 +369,8 @@ class YAMLValidator {
   generateReport(validation) {
     const report = [];
     
-    report.push(`YAML Validation Report`);
-    report.push(`=====================`);
+    report.push('YAML Validation Report');
+    report.push('=====================');
     report.push(`Valid: ${validation.valid ? '✅ Yes' : '❌ No'}`);
     
     if (validation.errors.length > 0) {

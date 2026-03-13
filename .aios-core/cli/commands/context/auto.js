@@ -52,7 +52,7 @@ async function execute(args) {
     // Ask for confirmation
     const rl = readline.createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
     });
 
     const answer = await new Promise(resolve => {
@@ -72,8 +72,8 @@ async function execute(args) {
       status: {
         phase: detected.status.phase,
         progress: detected.status.progress,
-        emoji: detected.status.emoji || (detected.git.hasChanges ? '🟡' : '🟢')
-      }
+        emoji: detected.status.emoji || (detected.git.hasChanges ? '🟡' : '🟢'),
+      },
     });
 
     console.log('\n✓ Context updated');

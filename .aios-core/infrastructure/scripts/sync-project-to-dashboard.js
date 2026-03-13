@@ -101,7 +101,7 @@ async function syncProjectToDashboard() {
     await fs.writeFile(
       dashboardPath,
       JSON.stringify(dashboardData, null, 2),
-      'utf-8'
+      'utf-8',
     );
 
     console.log('✅ Dashboard status.json synced with session.json');

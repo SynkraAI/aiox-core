@@ -1,7 +1,7 @@
 # @pedro-valerio Memory - Process Absolutist
 
 ## Quick Stats
-- Workflows auditados: 8 (deep-research v1.0→v1.1; BRE extract v1.0→v1.1, formalize v1.0→v1.1; Mind Cloning v1.1; Project Lifecycle v1.0)
+- Workflows auditados: 9 (deep-research v1.0→v1.1; BRE extract v1.0→v1.1, formalize v1.0→v1.1; Mind Cloning v1.1; Project Lifecycle v1.0; YouTube Transcription v1.0)
 - Clones auditados: 2 (renner-silva v1.1=8.5, v1.2=9.0)
 - Veto conditions criadas: 18 (deep-research) + 24 (BRE v1.1) + 8 (Project Lifecycle)
 - Detalhes completos: `audit-history.md`
@@ -25,6 +25,7 @@
 | BRE wf-formalize v1.1 | 83 | APROVAR |
 | Mind Cloning v1.1 | 78 | APROVAR c/ ressalvas |
 | Project Lifecycle v1.0 | 40 | VETO |
+| YouTube Transcription v1.0 | 47 | VETO |
 
 ---
 
@@ -58,6 +59,10 @@
 - Sobrescrita silenciosa por naming collision (Project Lifecycle: session YYYY-MM-DD.md)
 - Skill B cria artefato de Skill A como fallback (checkpoint cria INDEX.md = viola single responsibility)
 - Data contract com campo renomeado entre template e dados reais (Project Path vs Local)
+- **Fallback silencioso com return None** (YouTube: 429 rate limit → transcript-api → browser-cookies → None sem veto)
+- **Subprocess delegation sem veto** (aios-transcriber → youtube_captions.py, check=False = erro oculto)
+- **Extension-only validation** (is_audio_file: .mp3 OK, mas .txt renomeado pra .mp3 passa)
+- **State file sem lock** (TranscriptionState: JSON atômico mas concurrent access = race condition)
 
 ## Patterns Efetivos
 - Enforcement global: `enforcement: { checkpoint_policy, veto_behavior, max_retries }`
@@ -66,6 +71,8 @@
 - Checkpoint types: auto, human_review, quality_gate
 - Global safeguards: max_duration, max_tokens, max_waves, plateau_threshold
 - Quality Gate Enforcement: gate define CRITERIA, veto ENFORCA (blocking: true)
+- **Retry com backoff exponencial** (Deepgram: [5s, 10s, 30s], Search: 2^retry)
+- **Atomic write pattern** (TranscriptionState: tmp → replace)
 
 ---
 
@@ -74,10 +81,14 @@
 - Conteudo rico NAO compensa workflow fraco (Mind Cloning: tasks 9/10, workflow 6/10)
 - Duplicacao de fluxo (task + workflow YAML) e GAP CRITICAL - single source of truth
 - CONDITIONAL paths precisam de tracking/propagacao entre fases
+- **Fallback chain SEM veto final = silent failure** (YouTube: 3 níveis mas resultado vazio = continue)
+- **Magic bytes > extension check** (is_audio_file só olha .mp3, não valida header)
+- **Subprocess com check=False = esconde erro** (youtube.py → youtube_captions.py retorna False, mas erro não sobe)
 
 ---
 
 ## Notas Recentes
+- [2026-03-13] YouTube Transcription v1.0 VETO (47/100) — 3C, 2H, 6M, 1L. Fallback chain sem veto, subprocess sem raise, extension-only validation
 - [2026-03-11] Project Lifecycle v1.0 VETO (40/100) — 3C, 4H, 4M, 2L. Skills /new-project+/checkpoint+/resume sem veto conditions
 - [2026-03-11] Mind Cloning v1.1 APROVADO c/ RESSALVAS (78/100) — 3C, 5M, 7m. Gap: workflow YAML sem gates em 3/5 fases
 - [2026-03-11] BRE v1.1 APROVADO — extract 85, formalize 83

@@ -127,7 +127,7 @@ function auditSkills() {
   console.log(`Total skills: ${skills.length}`);
   console.log(`Total lines: ${totalLines}`);
   console.log(`Estimated tokens: ${totalTokens}`);
-  console.log(`\n🔴 Large skills (>200 lines) that need optimization:\n`);
+  console.log('\n🔴 Large skills (>200 lines) that need optimization:\n');
 
   largeSkills.forEach((s, i) => {
     console.log(`  ${i + 1}. ${s.skill}`);
@@ -173,7 +173,7 @@ function optimizeSkills() {
     }
   });
 
-  console.log(`\n📊 Results:`);
+  console.log('\n📊 Results:');
   console.log(`   Updated: ${updated}`);
   console.log(`   Skipped: ${skipped}`);
   console.log(`   Errors: ${errors}\n`);

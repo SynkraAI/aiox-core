@@ -17,7 +17,7 @@ if (!CLIENT_ID || !CLIENT_SECRET) {
 }
 const SCOPES = [
   'https://www.googleapis.com/auth/spreadsheets',
-  'https://www.googleapis.com/auth/drive'
+  'https://www.googleapis.com/auth/drive',
 ].join(' ');
 
 const server = http.createServer(async (req, res) => {
@@ -41,7 +41,7 @@ const server = http.createServer(async (req, res) => {
         client_id: CLIENT_ID,
         client_secret: CLIENT_SECRET,
         redirect_uri: REDIRECT_URI,
-        grant_type: 'authorization_code'
+        grant_type: 'authorization_code',
       }).toString();
 
       const tokenReq = https.request({
@@ -50,8 +50,8 @@ const server = http.createServer(async (req, res) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
-          'Content-Length': Buffer.byteLength(postData)
-        }
+          'Content-Length': Buffer.byteLength(postData),
+        },
       }, (tokenRes) => {
         let data = '';
         tokenRes.on('data', chunk => data += chunk);

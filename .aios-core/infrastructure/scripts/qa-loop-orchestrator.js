@@ -126,7 +126,7 @@ class QALoopOrchestrator {
       this.rootPath,
       CONFIG.statusDir,
       this.storyId,
-      CONFIG.statusFileName
+      CONFIG.statusFileName,
     );
 
     // Dashboard paths (AC7)
@@ -224,7 +224,7 @@ class QALoopOrchestrator {
 
     this._log(`\n⚠️  Detected abandoned QA loop for ${this.storyId}`);
     this._log(`   Last update: ${this.status.updatedAt}`);
-    this._log(`   Recovering...`);
+    this._log('   Recovering...');
 
     // Mark as interrupted and save
     this.status.wasAbandoned = true;
@@ -277,7 +277,7 @@ class QALoopOrchestrator {
     const loopEntries = Object.entries(index.loops);
     if (loopEntries.length > 50) {
       const sorted = loopEntries.sort(
-        (a, b) => new Date(b[1].updatedAt) - new Date(a[1].updatedAt)
+        (a, b) => new Date(b[1].updatedAt) - new Date(a[1].updatedAt),
       );
       index.loops = Object.fromEntries(sorted.slice(0, 50));
     }
@@ -450,7 +450,7 @@ class QALoopOrchestrator {
         // Check max iterations (AC2, AC3)
         if (this.status.currentIteration >= this.maxIterations) {
           await this.escalateToHuman(
-            `Max iterations (${this.maxIterations}) reached without APPROVE`
+            `Max iterations (${this.maxIterations}) reached without APPROVE`,
           );
           break;
         }
@@ -483,9 +483,9 @@ class QALoopOrchestrator {
     const iterationStart = Date.now();
 
     this._log('');
-    this._log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+    this._log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     this._log(`  Iteration ${this.status.currentIteration}/${this.maxIterations}`);
-    this._log(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`);
+    this._log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
 
     // Initialize history entry
     this.addHistoryEntry({
@@ -783,7 +783,7 @@ class QALoopOrchestrator {
     if (this.status.status !== LoopStatus.STOPPED && this.status.status !== LoopStatus.ESCALATED) {
       throw new Error(
         `Cannot resume loop with status '${this.status.status}'. ` +
-          `Must be '${LoopStatus.STOPPED}' or '${LoopStatus.ESCALATED}'.`
+          `Must be '${LoopStatus.STOPPED}' or '${LoopStatus.ESCALATED}'.`,
       );
     }
 
@@ -866,7 +866,7 @@ class QALoopOrchestrator {
         `  ${entry.iteration}. ${emoji} ${(entry.verdict || 'N/A').padEnd(8)} ` +
           `| Found: ${String(entry.issuesFound).padStart(2)} | ` +
           `Fixed: ${String(fixed).padStart(2)} | ` +
-          `Duration: ${duration}`
+          `Duration: ${duration}`,
       );
 
       totalIssuesFound += entry.issuesFound || 0;
@@ -995,7 +995,7 @@ function listLoops(options = {}) {
     // Apply filter
     if (filter === 'active') {
       loops = Object.fromEntries(
-        Object.entries(loops).filter(([, v]) => v.status === LoopStatus.IN_PROGRESS)
+        Object.entries(loops).filter(([, v]) => v.status === LoopStatus.IN_PROGRESS),
       );
     } else if (filter === 'abandoned') {
       const now = Date.now();
@@ -1004,7 +1004,7 @@ function listLoops(options = {}) {
           if (v.status !== LoopStatus.IN_PROGRESS) return false;
           const lastUpdate = new Date(v.updatedAt).getTime();
           return now - lastUpdate > CONFIG.abandonedThreshold;
-        })
+        }),
       );
     }
 
@@ -1199,7 +1199,7 @@ async function main() {
           const emoji = StatusEmoji[loop.status] || '❓';
           const abandoned = loop.wasAbandoned ? ' (recovered)' : '';
           console.log(
-            `  ${emoji} ${id}: ${loop.status} - ${loop.currentIteration}/${loop.maxIterations}${abandoned}`
+            `  ${emoji} ${id}: ${loop.status} - ${loop.currentIteration}/${loop.maxIterations}${abandoned}`,
           );
         }
         if (listResult.count === 0) {

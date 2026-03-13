@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 const readline = require('readline');
+const { generateWhatsAppLink } = require('../squads/ensinio-whatsapp-prospector/lib/whatsapp-utils');
 
 const TSV_FILE = path.join(__dirname, '../data/outputs/mentoria-50k/outreach-sheets-final.tsv');
 
@@ -12,7 +13,7 @@ function loadProspects() {
     const prospects = [];
     const rl = readline.createInterface({
       input: fs.createReadStream(TSV_FILE),
-      crlfDelay: Infinity
+      crlfDelay: Infinity,
     });
 
     let lineNum = 0;
@@ -26,7 +27,7 @@ function loadProspects() {
           id: prospects.length + 1,
           name: parts[0],
           phone: parts[1],
-          message: parts[5]
+          message: parts[5],
         });
       }
     });
@@ -36,19 +37,13 @@ function loadProspects() {
   });
 }
 
-// Generate WhatsApp Web link
-function generateWhatsAppLink(phone, message) {
-  const encodedMsg = encodeURIComponent(message);
-  return `https://web.whatsapp.com/send?phone=${phone}&text=${encodedMsg}`;
-}
-
 // Open URL in browser
 function openUrl(url) {
   const cmd = process.platform === 'darwin' 
     ? `open "${url}"` 
     : process.platform === 'linux'
-    ? `xdg-open "${url}"`
-    : `start "${url}"`;
+      ? `xdg-open "${url}"`
+      : `start "${url}"`;
   
   exec(cmd, (err) => {
     if (err) console.error('Error opening URL:', err.message);
@@ -60,7 +55,7 @@ function getUserInput(prompt) {
   return new Promise((resolve) => {
     const rl = readline.createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
     });
 
     rl.question(prompt, (answer) => {
@@ -93,7 +88,7 @@ async function main() {
 
   for (let i = 0; i < prospects.length; i++) {
     const prospect = prospects[i];
-    const link = generateWhatsAppLink(prospect.phone, prospect.message);
+    const link = generateWhatsAppLink(prospect.phone, prospect.message, { format: 'web' });
     
     console.log(`[${String(i + 1).padStart(2, '0')}/77] ${prospect.name.padEnd(30)}`);
     console.log(`   🔗 ${link.substring(0, 80)}...\n`);
@@ -102,7 +97,7 @@ async function main() {
     openUrl(link);
     
     // Wait for user confirmation
-    const answer = await getUserInput(`   ✓ Message sent? (y/n/skip/quit): `);
+    const answer = await getUserInput('   ✓ Message sent? (y/n/skip/quit): ');
     
     if (answer === 'quit' || answer === 'q') {
       console.log('\n⏸️  Stopped by user.');
@@ -132,7 +127,7 @@ async function main() {
   const resultFile = path.join(__dirname, '../data/outputs/mentoria-50k/whatsapp-manual-results.json');
   fs.writeFileSync(resultFile, JSON.stringify(results, null, 2));
 
-  console.log(`\n✅ Done!`);
+  console.log('\n✅ Done!');
   console.log(`   ✓ Sent: ${successCount}/${results.length}`);
   console.log(`   📁 Results: ${resultFile}\n`);
 }

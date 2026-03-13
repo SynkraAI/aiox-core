@@ -53,7 +53,7 @@ function getTemplateOverrides(resolvedConfig) {
   if (unknown.length > 0) {
     throw new Error(
       `Unknown story section ID(s) in template_overrides: ${unknown.join(', ')}. ` +
-      `Valid IDs: ${KNOWN_STORY_SECTIONS.join(', ')}`
+      `Valid IDs: ${KNOWN_STORY_SECTIONS.join(', ')}`,
     );
   }
 

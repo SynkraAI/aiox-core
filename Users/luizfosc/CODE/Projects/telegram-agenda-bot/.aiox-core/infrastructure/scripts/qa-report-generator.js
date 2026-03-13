@@ -235,7 +235,7 @@ class QAReportGenerator {
 
     if (!Object.values(Severity).includes(severity)) {
       throw new Error(
-        `Invalid severity: ${severity}. Must be one of: ${Object.values(Severity).join(', ')}`
+        `Invalid severity: ${severity}. Must be one of: ${Object.values(Severity).join(', ')}`,
       );
     }
 
@@ -462,12 +462,12 @@ class QAReportGenerator {
 
     // Security vulnerabilities
     const criticalVulns = this.data.security.vulnerabilities.filter(
-      (v) => v.severity === 'critical' || v.severity === 'high'
+      (v) => v.severity === 'critical' || v.severity === 'high',
     );
 
     if (criticalVulns.length > 0) {
       this.data.requiredActions.push(
-        `Address ${criticalVulns.length} critical/high security vulnerability(ies)`
+        `Address ${criticalVulns.length} critical/high security vulnerability(ies)`,
       );
     }
   }
@@ -487,14 +487,14 @@ class QAReportGenerator {
     // Coverage suggestion
     if (this.data.coverage < 80) {
       this.data.suggestions.push(
-        `Improve test coverage (currently ${this.data.coverage}%, target 80%)`
+        `Improve test coverage (currently ${this.data.coverage}%, target 80%)`,
       );
     }
 
     // Minor issues summary
     if (this.data.issuesBySeverity.minor > 0) {
       this.data.suggestions.push(
-        `${this.data.issuesBySeverity.minor} minor issue(s) can be addressed in future iterations`
+        `${this.data.issuesBySeverity.minor} minor issue(s) can be addressed in future iterations`,
       );
     }
   }
@@ -537,15 +537,15 @@ class QAReportGenerator {
     // Issues by severity
     markdown = markdown.replace(
       /\{\{issuesBySeverity\.critical\}\}/g,
-      String(report.issuesBySeverity.critical)
+      String(report.issuesBySeverity.critical),
     );
     markdown = markdown.replace(
       /\{\{issuesBySeverity\.major\}\}/g,
-      String(report.issuesBySeverity.major)
+      String(report.issuesBySeverity.major),
     );
     markdown = markdown.replace(
       /\{\{issuesBySeverity\.minor\}\}/g,
-      String(report.issuesBySeverity.minor)
+      String(report.issuesBySeverity.minor),
     );
 
     // Test results
@@ -553,7 +553,7 @@ class QAReportGenerator {
       for (const metric of ['total', 'pass', 'fail', 'skip']) {
         markdown = markdown.replace(
           new RegExp(`\\{\\{tests\\.${type}\\.${metric}\\}\\}`, 'g'),
-          String(report.tests[type][metric])
+          String(report.tests[type][metric]),
         );
       }
     }
@@ -665,12 +665,12 @@ class QAReportGenerator {
       const issuesList = report.issues.critical.map((issue) => this._renderIssue(issue)).join('\n');
       result = result.replace(
         /\{\{#if issues\.critical\.length\}\}([\s\S]*?)\{\{#each issues\.critical\}\}[\s\S]*?\{\{\/each\}\}([\s\S]*?)\{\{else\}\}[\s\S]*?\{\{\/if\}\}/g,
-        `$1${issuesList}$2`
+        `$1${issuesList}$2`,
       );
     } else {
       result = result.replace(
         /\{\{#if issues\.critical\.length\}\}[\s\S]*?\{\{else\}\}([\s\S]*?)\{\{\/if\}\}/g,
-        '$1'
+        '$1',
       );
     }
 
@@ -681,12 +681,12 @@ class QAReportGenerator {
         .join('\n');
       result = result.replace(
         /\{\{#if issues\.major\.length\}\}([\s\S]*?)\{\{#each issues\.major\}\}[\s\S]*?\{\{\/each\}\}([\s\S]*?)\{\{else\}\}[\s\S]*?\{\{\/if\}\}/g,
-        `$1${issuesList}$2`
+        `$1${issuesList}$2`,
       );
     } else {
       result = result.replace(
         /\{\{#if issues\.major\.length\}\}[\s\S]*?\{\{else\}\}([\s\S]*?)\{\{\/if\}\}/g,
-        '$1'
+        '$1',
       );
     }
 
@@ -697,12 +697,12 @@ class QAReportGenerator {
         .join('\n');
       result = result.replace(
         /\{\{#if issues\.minor\.length\}\}([\s\S]*?)\{\{#each issues\.minor\}\}[\s\S]*?\{\{\/each\}\}([\s\S]*?)\{\{else\}\}[\s\S]*?\{\{\/if\}\}/g,
-        `$1${issuesList}$2`
+        `$1${issuesList}$2`,
       );
     } else {
       result = result.replace(
         /\{\{#if issues\.minor\.length\}\}[\s\S]*?\{\{else\}\}([\s\S]*?)\{\{\/if\}\}/g,
-        '$1'
+        '$1',
       );
     }
 
@@ -713,12 +713,12 @@ class QAReportGenerator {
         .join('\n');
       result = result.replace(
         /\{\{#if regression\.detected\}\}[\s\S]*?\{\{#each regression\.items\}\}[\s\S]*?\{\{\/each\}\}([\s\S]*?)\{\{else\}\}[\s\S]*?\{\{\/if\}\}/g,
-        `### Regression Detected\n\n${regressionList}$1`
+        `### Regression Detected\n\n${regressionList}$1`,
       );
     } else {
       result = result.replace(
         /\{\{#if regression\.detected\}\}[\s\S]*?\{\{else\}\}([\s\S]*?)\{\{\/if\}\}/g,
-        '$1'
+        '$1',
       );
     }
 
@@ -729,12 +729,12 @@ class QAReportGenerator {
         .join('\n');
       result = result.replace(
         /\{\{#if security\.vulnerabilities\.length\}\}[\s\S]*?\{\{#each security\.vulnerabilities\}\}[\s\S]*?\{\{\/each\}\}([\s\S]*?)\{\{else\}\}[\s\S]*?\{\{\/if\}\}/g,
-        `### Vulnerabilities Found\n\n| Severity | Type | Location | Description |\n|----------|------|----------|-------------|\n${vulnRows}$1`
+        `### Vulnerabilities Found\n\n| Severity | Type | Location | Description |\n|----------|------|----------|-------------|\n${vulnRows}$1`,
       );
     } else {
       result = result.replace(
         /\{\{#if security\.vulnerabilities\.length\}\}[\s\S]*?\{\{else\}\}([\s\S]*?)\{\{\/if\}\}/g,
-        '$1'
+        '$1',
       );
     }
 
@@ -743,7 +743,7 @@ class QAReportGenerator {
       const actionsList = report.requiredActions.map((a, i) => `${i + 1}. ${a}`).join('\n');
       result = result.replace(
         /\{\{#if verdict === 'REJECT'\}\}[\s\S]*?\{\{#each requiredActions\}\}[\s\S]*?\{\{\/each\}\}([\s\S]*?)\{\{\/if\}\}/g,
-        `### Required Actions Before Approval\n\n${actionsList}$1`
+        `### Required Actions Before Approval\n\n${actionsList}$1`,
       );
     } else {
       result = result.replace(/\{\{#if verdict === 'REJECT'\}\}[\s\S]*?\{\{\/if\}\}/g, '');
@@ -754,7 +754,7 @@ class QAReportGenerator {
       const suggestionsList = report.suggestions.map((s) => `- ${s}`).join('\n');
       result = result.replace(
         /\{\{#if suggestions\.length\}\}[\s\S]*?\{\{#each suggestions\}\}[\s\S]*?\{\{\/each\}\}([\s\S]*?)\{\{\/if\}\}/g,
-        `### Suggestions for Improvement\n\n${suggestionsList}$1`
+        `### Suggestions for Improvement\n\n${suggestionsList}$1`,
       );
     } else {
       result = result.replace(/\{\{#if suggestions\.length\}\}[\s\S]*?\{\{\/if\}\}/g, '');
@@ -770,7 +770,7 @@ class QAReportGenerator {
   _renderIssue(issue, includeVerification = true, isMinor = false) {
     const severity = issue.severity.toUpperCase();
     let md = `#### ${issue.id}: ${issue.title}\n\n`;
-    md += `| Field | Value |\n|-------|-------|\n`;
+    md += '| Field | Value |\n|-------|-------|\n';
     md += `| **Severity** | ${severity} |\n`;
     md += `| **Location** | \`${issue.location}\` |\n`;
     md += `| **Category** | ${issue.category} |\n\n`;
@@ -782,7 +782,7 @@ class QAReportGenerator {
     }
 
     if (includeVerification && issue.verification && issue.verification.length > 0) {
-      md += `**Verification Steps:**\n`;
+      md += '**Verification Steps:**\n';
       issue.verification.forEach((step, i) => {
         md += `${i + 1}. ${step}\n`;
       });

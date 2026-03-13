@@ -17,7 +17,7 @@ const path = require('path');
 const config = require('../lib/config-loader');
 
 const PATHS = {
-  outputDir: config.paths.llmTests
+  outputDir: config.paths.llmTests,
 };
 
 // ============================================================================
@@ -62,11 +62,11 @@ function parseYaml(content) {
   result.cost = costMatch ? parseFloat(costMatch[1]) : null;
   result.tokens = {
     prompt: promptTokens ? parseInt(promptTokens[1]) : null,
-    completion: completionTokens ? parseInt(completionTokens[1]) : null
+    completion: completionTokens ? parseInt(completionTokens[1]) : null,
   };
 
   const outputMatch = content.match(/output: \|\n([\s\S]+)$/);
-  result.output = outputMatch ? outputMatch[1].replace(/^  /gm, '').trim() : null;
+  result.output = outputMatch ? outputMatch[1].replace(/^ {2}/gm, '').trim() : null;
 
   return result;
 }
@@ -81,18 +81,18 @@ function compare(baseline, candidate) {
       baseline: baseline.latency,
       candidate: candidate.latency,
       ratio: candidate.latency / baseline.latency,
-      improvement: `${((1 - candidate.latency / baseline.latency) * 100).toFixed(1)}% faster`
+      improvement: `${((1 - candidate.latency / baseline.latency) * 100).toFixed(1)}% faster`,
     },
     cost: {
       baseline: baseline.cost,
       candidate: candidate.cost,
       ratio: candidate.cost / baseline.cost,
-      savings: `${((1 - candidate.cost / baseline.cost) * 100).toFixed(1)}% cheaper`
+      savings: `${((1 - candidate.cost / baseline.cost) * 100).toFixed(1)}% cheaper`,
     },
     tokens: {
       baseline: baseline.tokens,
-      candidate: candidate.tokens
-    }
+      candidate: candidate.tokens,
+    },
   };
 
   const baselineLines = baseline.output?.split('\n').length || 0;
@@ -101,7 +101,7 @@ function compare(baseline, candidate) {
   metrics.content = {
     baseline_lines: baselineLines,
     candidate_lines: candidateLines,
-    ratio: candidateLines / baselineLines
+    ratio: candidateLines / baselineLines,
   };
 
   return metrics;

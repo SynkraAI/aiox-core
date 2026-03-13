@@ -132,7 +132,7 @@ class WorktreeManager {
     if (currentWorktrees.length >= this.maxWorktrees) {
       throw new Error(
         `Maximum worktrees limit (${this.maxWorktrees}) reached. ` +
-          `Remove stale worktrees before creating new ones.`
+          'Remove stale worktrees before creating new ones.',
       );
     }
 
@@ -184,7 +184,7 @@ class WorktreeManager {
       await this.execGit(branchArgs);
     } catch (error) {
       console.warn(
-        chalk.yellow(`Warning: Could not delete branch ${branchName}: ${error.message}`)
+        chalk.yellow(`Warning: Could not delete branch ${branchName}: ${error.message}`),
       );
     }
 
@@ -345,8 +345,8 @@ class WorktreeManager {
       } catch (error) {
         console.warn(
           chalk.yellow(
-            `Warning: Could not remove stale worktree ${worktree.storyId}: ${error.message}`
-          )
+            `Warning: Could not remove stale worktree ${worktree.storyId}: ${error.message}`,
+          ),
         );
       }
     }
@@ -404,7 +404,7 @@ class WorktreeManager {
         const { stdout: conflictOutput } = await execa(
           this.gitPath,
           ['diff', '--name-only', '--diff-filter=U'],
-          { cwd: this.projectRoot }
+          { cwd: this.projectRoot },
         );
         conflicts = conflictOutput ? conflictOutput.split('\n').filter((f) => f.trim()) : [];
       } catch {
@@ -545,7 +545,7 @@ class WorktreeManager {
         console.log(chalk.gray('  Use "git commit" to complete the merge'));
       } else if (options.squash) {
         console.log(
-          chalk.green(`✓ Merged ${storyId} (squashed) → ${result.commitHash?.substring(0, 7)}`)
+          chalk.green(`✓ Merged ${storyId} (squashed) → ${result.commitHash?.substring(0, 7)}`),
         );
       } else {
         console.log(chalk.green(`✓ Merged ${storyId} → ${result.commitHash?.substring(0, 7)}`));
@@ -672,7 +672,7 @@ class WorktreeManager {
       const staleTag = wt.status === 'stale' ? chalk.red(' (stale)') : '';
 
       lines.push(
-        `${statusIcon} ${chalk.cyan(wt.storyId.padEnd(12))} │ ${wt.branch.padEnd(25)} │ ${changesText.padEnd(15)} │ ${age}${staleTag}`
+        `${statusIcon} ${chalk.cyan(wt.storyId.padEnd(12))} │ ${wt.branch.padEnd(25)} │ ${changesText.padEnd(15)} │ ${age}${staleTag}`,
       );
     }
 

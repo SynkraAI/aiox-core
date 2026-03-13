@@ -15,7 +15,7 @@ class TestGenerator {
       total_generated: 0,
       successful: 0,
       failed: 0,
-      generation_time: 0
+      generation_time: 0,
     };
   }
 
@@ -92,14 +92,14 @@ class TestGenerator {
           file_path: testFile.file_path,
           test_type: testFile.test_type,
           content: testContent,
-          test_count: testFile.test_count
+          test_count: testFile.test_count,
         });
 
       } catch (_error) {
         errors.push({
           file_path: testFile.file_path,
           test_type: testFile.test_type,
-          error: error.message
+          error: error.message,
         });
       }
     }
@@ -108,7 +108,7 @@ class TestGenerator {
       component_id: component.id,
       generated_files: generatedFiles,
       errors: errors,
-      success_rate: generatedFiles.length / testSuite.test_files.length
+      success_rate: generatedFiles.length / testSuite.test_files.length,
     };
 
     console.log(chalk.green(`✅ Test suite generated for ${component.name}`));
@@ -148,7 +148,7 @@ class TestGenerator {
       const additionalTestCases = await this.generateAdditionalTestCases(
         componentAnalysis, 
         testFile.test_type, 
-        config
+        config,
       );
 
       if (additionalTestCases.length > 0) {
@@ -190,7 +190,7 @@ class TestGenerator {
       dependencies: [],
       async_operations: false,
       error_handling: false,
-      configuration: null
+      configuration: null,
     };
 
     try {
@@ -270,9 +270,9 @@ class TestGenerator {
       type: 'functionality',
       setup: func.async ? 'const result = await ' : 'const result = ',
       assertions: [
-        `expect(result).toBeDefined();`,
-        func.async ? `expect(typeof result).toBe('object');` : `expect(result).toBeTruthy();`
-      ]
+        'expect(result).toBeDefined();',
+        func.async ? 'expect(typeof result).toBe(\'object\');' : 'expect(result).toBeTruthy();',
+      ],
     });
 
     // Parameter validation test
@@ -282,8 +282,8 @@ class TestGenerator {
         type: 'validation',
         setup: `const invalidCall = () => ${func.name}();`,
         assertions: [
-          `expect(invalidCall).toThrow();`
-        ]
+          'expect(invalidCall).toThrow();',
+        ],
       });
     }
 
@@ -294,8 +294,8 @@ class TestGenerator {
         type: 'edge_case',
         setup: `// Edge case testing for ${func.name}`,
         assertions: [
-          `// Add edge case assertions here`
-        ]
+          '// Add edge case assertions here',
+        ],
       });
     }
 
@@ -315,8 +315,8 @@ class TestGenerator {
       setup: `const instance = new ${cls.name}();`,
       assertions: [
         `expect(instance).toBeInstanceOf(${cls.name});`,
-        `expect(instance).toBeDefined();`
-      ]
+        'expect(instance).toBeDefined();',
+      ],
     });
 
     // Method tests
@@ -326,8 +326,8 @@ class TestGenerator {
         type: 'method',
         setup: `const instance = new ${cls.name}();\nconst result = ${method.async ? 'await ' : ''}instance.${method.name}();`,
         assertions: [
-          `expect(result).toBeDefined();`
-        ]
+          'expect(result).toBeDefined();',
+        ],
       });
     }
 
@@ -345,17 +345,17 @@ class TestGenerator {
         setup: '// Async operation test setup',
         assertions: [
           '// Add async-specific assertions',
-          'expect(result).resolves.toBeDefined();'
-        ]
+          'expect(result).resolves.toBeDefined();',
+        ],
       },
       {
         name: 'should handle async operation timeouts',
         type: 'timeout',
         setup: '// Timeout test setup',
         assertions: [
-          'expect(longRunningOperation).rejects.toThrow("timeout");'
-        ]
-      }
+          'expect(longRunningOperation).rejects.toThrow("timeout");',
+        ],
+      },
     ];
   }
 
@@ -370,9 +370,9 @@ class TestGenerator {
         setup: '// Error simulation setup',
         assertions: [
           'expect(errorHandlerFunction).not.toThrow();',
-          'expect(result.error).toBeDefined();'
-        ]
-      }
+          'expect(result.error).toBeDefined();',
+        ],
+      },
     ];
   }
 
@@ -408,7 +408,7 @@ class TestGenerator {
     if (content.includes('async') && content.length > 5000) {
       optimized = optimized.replace(
         /describe\('([^']+)', \(\) => \{/,
-        "describe('$1', () => {\n  jest.setTimeout(10000);\n"
+        "describe('$1', () => {\n  jest.setTimeout(10000);\n",
       );
     }
 
@@ -426,7 +426,7 @@ class TestGenerator {
     if (content.includes('async')) {
       optimized = optimized.replace(
         /describe\('([^']+)', function\(\) \{/,
-        "describe('$1', function() {\n  this.timeout(5000);\n"
+        "describe('$1', function() {\n  this.timeout(5000);\n",
       );
     }
 
@@ -647,7 +647,7 @@ ${content}`;
             name: match[1],
             parameters: match[2] ? match[2].split(',').map(p => p.trim()) : [],
             async: func.includes('async'),
-            visibility: 'public'
+            visibility: 'public',
           });
         }
       });
@@ -663,7 +663,7 @@ ${content}`;
             name: match[1],
             parameters: match[3] ? match[3].split(',').map(p => p.trim()) : [],
             async: !!match[2],
-            visibility: 'public'
+            visibility: 'public',
           });
         }
       });
@@ -687,9 +687,9 @@ ${content}`;
               const methodMatch = method.match(/(\w+)\s*\(/);
               return {
                 name: methodMatch ? methodMatch[1] : 'unknown',
-                async: method.includes('async')
+                async: method.includes('async'),
               };
-            }).filter(m => m.name !== 'constructor')
+            }).filter(m => m.name !== 'constructor'),
           });
         }
       });
@@ -708,7 +708,7 @@ ${content}`;
         if (match) {
           dependencies.push({
             name: match[1],
-            type: match[1].startsWith('./') || match[1].startsWith('../') ? 'local' : 'external'
+            type: match[1].startsWith('./') || match[1].startsWith('../') ? 'local' : 'external',
           });
         }
       });
@@ -757,7 +757,7 @@ ${content}`;
     // Add framework-specific test utilities
     if (config.framework === 'jest') {
       if (componentAnalysis.async_operations) {
-        imports.push(`const { jest } = require('@jest/globals');`);
+        imports.push('const { jest } = require(\'@jest/globals\');');
       }
     }
 
@@ -768,9 +768,9 @@ ${content}`;
     const setup = [];
     
     if (componentAnalysis.type === 'util' && componentAnalysis.classes.length > 0) {
-      setup.push(`  let instance;\n`);
+      setup.push('  let instance;\n');
       setup.push(`  beforeEach(() => {\n    instance = new ${componentAnalysis.classes[0].name}();\n  });\n`);
-      setup.push(`  afterEach(() => {\n    if (instance && instance.cleanup) instance.cleanup();\n  });\n`);
+      setup.push('  afterEach(() => {\n    if (instance && instance.cleanup) instance.cleanup();\n  });\n');
     }
 
     return setup.length > 0 ? setup.join('\n') : null;
@@ -828,7 +828,7 @@ ${content}`;
         : 0,
       average_generation_time: this.generationStats.total_generated > 0
         ? this.generationStats.generation_time / this.generationStats.total_generated
-        : 0
+        : 0,
     };
   }
 

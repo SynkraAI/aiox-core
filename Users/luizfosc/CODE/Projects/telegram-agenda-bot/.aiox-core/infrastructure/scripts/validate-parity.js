@@ -258,13 +258,13 @@ function runParityValidation(options = {}, deps = {}) {
   });
   const contractSummary = contract
     ? {
-        release: contract.release || null,
-        path: path.relative(projectRoot, resolvedContractPath),
-      }
+      release: contract.release || null,
+      path: path.relative(projectRoot, resolvedContractPath),
+    }
     : {
-        release: null,
-        path: path.relative(projectRoot, resolvedContractPath),
-      };
+      release: null,
+      path: path.relative(projectRoot, resolvedContractPath),
+    };
 
   return {
     ok: results.every((r) => r.ok) && contractViolations.length === 0,

@@ -177,7 +177,7 @@ function scoreEntries(entries, promptKeywords, idf, historyBoosts) {
       removeAccents((entry.title || '').toLowerCase())
         .replace(/[^a-z0-9\s-]/g, ' ')
         .split(/\s+/)
-        .filter(t => t.length > 2)
+        .filter(t => t.length > 2),
     );
 
     let score = 0;

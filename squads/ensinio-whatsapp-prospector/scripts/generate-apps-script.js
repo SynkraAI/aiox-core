@@ -69,7 +69,7 @@ for (const section of sections) {
     approach,
     `Score ${score}/10` + (nicho ? ` - ${nicho}` : ''),
     message,
-    waLink
+    waLink,
   ]);
 }
 

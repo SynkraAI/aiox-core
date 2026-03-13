@@ -16,7 +16,7 @@ class ModificationValidator {
       agent: this.validateAgentModification.bind(this),
       task: this.validateTaskModification.bind(this),
       workflow: this.validateWorkflowModification.bind(this),
-      template: this.validateTemplateModification.bind(this)
+      template: this.validateTemplateModification.bind(this),
     };
   }
 
@@ -34,7 +34,7 @@ class ModificationValidator {
       errors: [],
       warnings: [],
       suggestions: [],
-      breakingChanges: []
+      breakingChanges: [],
     };
 
     // Basic validation
@@ -49,7 +49,7 @@ class ModificationValidator {
       const typeResult = await this.validationRules[componentType](
         originalContent,
         modifiedContent,
-        options
+        options,
       );
       this.mergeResults(result, typeResult);
     } else {
@@ -64,7 +64,7 @@ class ModificationValidator {
     const breakingChanges = await this.detectBreakingChanges(
       _componentType,
       originalContent,
-      modifiedContent
+      modifiedContent,
     );
     result.breakingChanges = breakingChanges;
 
@@ -81,7 +81,7 @@ class ModificationValidator {
       valid: true,
       errors: [],
       warnings: [],
-      suggestions: []
+      suggestions: [],
     };
 
     try {
@@ -154,7 +154,7 @@ class ModificationValidator {
       valid: true,
       errors: [],
       warnings: [],
-      suggestions: []
+      suggestions: [],
     };
 
     // Check for required sections
@@ -209,7 +209,7 @@ class ModificationValidator {
       valid: true,
       errors: [],
       warnings: [],
-      suggestions: []
+      suggestions: [],
     };
 
     try {
@@ -270,11 +270,11 @@ class ModificationValidator {
             // Check if criteria references valid artifacts or phases
             const referencesValid = this.validateCriteriaReferences(
               criteria,
-              modifiedWorkflow
+              modifiedWorkflow,
             );
             if (!referencesValid) {
               result.warnings.push(
-                `Entry criteria '${criteria}' in phase '${phaseName}' may reference non-existent artifact`
+                `Entry criteria '${criteria}' in phase '${phaseName}' may reference non-existent artifact`,
               );
             }
           }
@@ -298,7 +298,7 @@ class ModificationValidator {
       valid: true,
       errors: [],
       warnings: [],
-      suggestions: []
+      suggestions: [],
     };
 
     // Check for placeholder consistency
@@ -308,7 +308,7 @@ class ModificationValidator {
     // Warn about unreplaced placeholders
     if (uniquePlaceholders.length > 0) {
       result.suggestions.push(
-        `Template contains ${uniquePlaceholders.length} placeholders: ${uniquePlaceholders.join(', ')}`
+        `Template contains ${uniquePlaceholders.length} placeholders: ${uniquePlaceholders.join(', ')}`,
       );
     }
 
@@ -331,7 +331,7 @@ class ModificationValidator {
     const result = {
       valid: true,
       errors: [],
-      warnings: []
+      warnings: [],
     };
 
     const baseDir = path.join(process.cwd(), 'aios-core');
@@ -362,7 +362,7 @@ class ModificationValidator {
     const result = {
       valid: true,
       errors: [],
-      warnings: []
+      warnings: [],
     };
 
     // Check for broken internal links
@@ -392,7 +392,7 @@ class ModificationValidator {
     const result = {
       valid: true,
       errors: [],
-      warnings: []
+      warnings: [],
     };
 
     const securityIssues = await this.securityChecker.checkContent(content);
@@ -434,7 +434,7 @@ class ModificationValidator {
               breakingChanges.push({
                 type: 'removed_commands',
                 items: removedCommands,
-                impact: 'Users relying on these commands will need to update their workflows'
+                impact: 'Users relying on these commands will need to update their workflows',
               });
             }
           }
@@ -451,7 +451,7 @@ class ModificationValidator {
         if (originalOutput && modifiedOutput && originalOutput[0] !== modifiedOutput[0]) {
           breakingChanges.push({
             type: 'output_format_changed',
-            impact: 'Components consuming this task output may need updates'
+            impact: 'Components consuming this task output may need updates',
           });
         }
         break;
@@ -471,7 +471,7 @@ class ModificationValidator {
             breakingChanges.push({
               type: 'removed_phases',
               items: removedPhases,
-              impact: 'Projects using this workflow may fail at removed phases'
+              impact: 'Projects using this workflow may fail at removed phases',
             });
           }
         } catch (_error) {
@@ -495,7 +495,7 @@ class ModificationValidator {
 
     return {
       yaml: match[1],
-      markdown: match[2]
+      markdown: match[2],
     };
   }
 

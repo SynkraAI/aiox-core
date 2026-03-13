@@ -24,7 +24,7 @@ class CommitMessageGenerator {
       build: 'Changes that affect the build system or external dependencies',
       ci: 'Changes to CI configuration files and scripts',
       chore: 'Other changes that don\'t modify src or test files',
-      revert: 'Reverts a previous commit'
+      revert: 'Reverts a previous commit',
     };
     
     // Component-specific actions
@@ -35,22 +35,22 @@ class CommitMessageGenerator {
         update: 'Updated configuration or metadata',
         refactor: 'Refactored implementation',
         deprecate: 'Marked features as deprecated',
-        remove: 'Removed deprecated features'
+        remove: 'Removed deprecated features',
       },
       task: {
         improve: 'Improved task flow or logic',
         fix: 'Fixed task execution issues',
         update: 'Updated task steps or output',
         optimize: 'Optimized performance',
-        clarify: 'Clarified instructions or prompts'
+        clarify: 'Clarified instructions or prompts',
       },
       workflow: {
         restructure: 'Restructured workflow phases',
         add: 'Added new phases or transitions',
         update: 'Updated phase configuration',
         optimize: 'Optimized workflow execution',
-        fix: 'Fixed workflow issues'
-      }
+        fix: 'Fixed workflow issues',
+      },
     };
     
     // Keywords for categorizing changes
@@ -59,7 +59,7 @@ class CommitMessageGenerator {
       fix: ['fix', 'resolve', 'correct', 'repair', 'patch'],
       refactor: ['refactor', 'restructure', 'reorganize', 'improve structure'],
       perf: ['optimize', 'performance', 'speed up', 'efficiency'],
-      docs: ['document', 'docs', 'readme', 'comment', 'clarify']
+      docs: ['document', 'docs', 'readme', 'comment', 'clarify'],
     };
   }
 
@@ -75,7 +75,7 @@ class CommitMessageGenerator {
       originalContent,
       modifiedContent,
       userIntent = '',
-      metadata = {}
+      metadata = {},
     } = modification;
 
     try {
@@ -83,7 +83,7 @@ class CommitMessageGenerator {
       const analysis = await this.analyzeModification(
         componentType,
         originalContent,
-        modifiedContent
+        modifiedContent,
       );
       
       // Determine commit type and action
@@ -96,7 +96,7 @@ class CommitMessageGenerator {
         componentName,
         action,
         analysis,
-        userIntent
+        userIntent,
       );
       
       // Generate detailed description
@@ -106,7 +106,7 @@ class CommitMessageGenerator {
       const breakingChanges = await this.detectBreakingChanges(
         componentType,
         originalContent,
-        modifiedContent
+        modifiedContent,
       );
       
       // Construct the full message
@@ -116,7 +116,7 @@ class CommitMessageGenerator {
         summary,
         body: details,
         breaking: breakingChanges,
-        metadata
+        metadata,
       });
       
       return {
@@ -125,7 +125,7 @@ class CommitMessageGenerator {
         scope: componentType,
         summary,
         analysis,
-        breakingChanges
+        breakingChanges,
       };
       
     } catch (_error) {
@@ -147,9 +147,9 @@ class CommitMessageGenerator {
       statistics: {
         linesAdded: 0,
         linesRemoved: 0,
-        filesChanged: 1
+        filesChanged: 1,
       },
-      semanticChanges: []
+      semanticChanges: [],
     };
 
     // Generate diff for analysis
@@ -157,12 +157,12 @@ class CommitMessageGenerator {
       originalContent,
       modifiedContent,
       `${componentType}.before`,
-      `${componentType}.after`
+      `${componentType}.after`,
     );
 
     // Parse diff to extract changes
     const lines = diff.split('\n');
-    let _currentSection = null;
+    const _currentSection = null;
     
     for (const line of lines) {
       if (line.startsWith('+') && !line.startsWith('+++')) {
@@ -181,19 +181,19 @@ class CommitMessageGenerator {
       case 'agent':
         analysis.semanticChanges = await this.analyzeAgentChanges(
           originalContent,
-          modifiedContent
+          modifiedContent,
         );
         break;
       case 'task':
         analysis.semanticChanges = await this.analyzeTaskChanges(
           originalContent,
-          modifiedContent
+          modifiedContent,
         );
         break;
       case 'workflow':
         analysis.semanticChanges = await this.analyzeWorkflowChanges(
           originalContent,
-          modifiedContent
+          modifiedContent,
         );
         break;
     }
@@ -232,7 +232,7 @@ class CommitMessageGenerator {
         const removed = originalCmds.filter(cmd => !modifiedCmds.includes(cmd));
         const modified = originalCmds.filter(cmd => 
           modifiedCmds.includes(cmd) && 
-          originalMeta.commands[cmd] !== modifiedMeta.commands[cmd]
+          originalMeta.commands[cmd] !== modifiedMeta.commands[cmd],
         );
         
         if (added.length > 0) {
@@ -250,7 +250,7 @@ class CommitMessageGenerator {
       if (originalMeta.dependencies || modifiedMeta.dependencies) {
         const depChanges = this.compareDependencies(
           originalMeta.dependencies || {},
-          modifiedMeta.dependencies || {}
+          modifiedMeta.dependencies || {},
         );
         if (depChanges.length > 0) {
           changes.push(...depChanges);
@@ -265,7 +265,7 @@ class CommitMessageGenerator {
             type: 'metadata_changed',
             field,
             from: originalMeta[field],
-            to: modifiedMeta[field]
+            to: modifiedMeta[field],
           });
         }
       }
@@ -295,7 +295,7 @@ class CommitMessageGenerator {
         changes.push({
           type: 'section_modified',
           section: section.replace('## ', ''),
-          contentChanged: true
+          contentChanged: true,
         });
       }
     }
@@ -308,7 +308,7 @@ class CommitMessageGenerator {
       changes.push({
         type: 'elicitation_changed',
         from: originalElicits,
-        to: modifiedElicits
+        to: modifiedElicits,
       });
     }
 
@@ -320,7 +320,7 @@ class CommitMessageGenerator {
       changes.push({
         type: 'steps_changed',
         from: originalSteps,
-        to: modifiedSteps
+        to: modifiedSteps,
       });
     }
 
@@ -362,7 +362,7 @@ class CommitMessageGenerator {
             changes.push({
               type: 'phase_modified',
               phase,
-              details: this.comparePhases(originalPhase, modifiedPhase)
+              details: this.comparePhases(originalPhase, modifiedPhase),
             });
           }
         }
@@ -491,7 +491,7 @@ class CommitMessageGenerator {
     // Add statistics
     if (analysis.statistics.linesAdded > 0 || analysis.statistics.linesRemoved > 0) {
       details.push(
-        `Changed: +${analysis.statistics.linesAdded} -${analysis.statistics.linesRemoved} lines`
+        `Changed: +${analysis.statistics.linesAdded} -${analysis.statistics.linesRemoved} lines`,
       );
     }
 
@@ -555,7 +555,7 @@ class CommitMessageGenerator {
     const validation = await this.validator.validateModification(
       componentType,
       originalContent,
-      modifiedContent
+      modifiedContent,
     );
     
     return validation.breakingChanges || [];
@@ -619,7 +619,7 @@ class CommitMessageGenerator {
       agents: 0,
       tasks: 0,
       workflows: 0,
-      total: modifications.length
+      total: modifications.length,
     };
     
     // Process each modification
@@ -660,7 +660,7 @@ class CommitMessageGenerator {
       message,
       type,
       stats,
-      breakingChanges: allBreaking
+      breakingChanges: allBreaking,
     };
   }
 
@@ -680,7 +680,7 @@ class CommitMessageGenerator {
       suggestions.push({
         type: 'format',
         issue: 'Header doesn\'t follow conventional format',
-        suggestion: 'Use format: type(_scope): subject'
+        suggestion: 'Use format: type(_scope): subject',
       });
     } else {
       const [, type, scope, subject] = headerMatch;
@@ -690,7 +690,7 @@ class CommitMessageGenerator {
         suggestions.push({
           type: 'type',
           issue: `Unknown commit type: ${type}`,
-          suggestion: `Use one of: ${Object.keys(this.commitTypes).join(', ')}`
+          suggestion: `Use one of: ${Object.keys(this.commitTypes).join(', ')}`,
         });
       }
       
@@ -699,7 +699,7 @@ class CommitMessageGenerator {
         suggestions.push({
           type: 'length',
           issue: 'Subject line too long',
-          suggestion: 'Keep subject under 50 characters'
+          suggestion: 'Keep subject under 50 characters',
         });
       }
       
@@ -708,7 +708,7 @@ class CommitMessageGenerator {
         suggestions.push({
           type: 'case',
           issue: 'Subject should not be capitalized',
-          suggestion: 'Use lowercase for subject'
+          suggestion: 'Use lowercase for subject',
         });
       }
       
@@ -716,7 +716,7 @@ class CommitMessageGenerator {
         suggestions.push({
           type: 'punctuation',
           issue: 'Subject should not end with period',
-          suggestion: 'Remove trailing period'
+          suggestion: 'Remove trailing period',
         });
       }
     }
@@ -727,7 +727,7 @@ class CommitMessageGenerator {
         suggestions.push({
           type: 'spacing',
           issue: 'Missing blank line after header',
-          suggestion: 'Add blank line between header and body'
+          suggestion: 'Add blank line between header and body',
         });
       }
       
@@ -737,7 +737,7 @@ class CommitMessageGenerator {
           suggestions.push({
             type: 'line-length',
             issue: `Line ${i + 1} exceeds 72 characters`,
-            suggestion: 'Wrap body text at 72 characters'
+            suggestion: 'Wrap body text at 72 characters',
           });
         }
       }
@@ -746,7 +746,7 @@ class CommitMessageGenerator {
     return {
       valid: suggestions.length === 0,
       suggestions,
-      improvedMessage: this.applyImprovements(message, suggestions)
+      improvedMessage: this.applyImprovements(message, suggestions),
     };
   }
 
@@ -761,7 +761,7 @@ class CommitMessageGenerator {
       switch (suggestion.type) {
         case 'case':
           improved = improved.replace(/^(\w+)(\([\w-]+\))?: (.)/, (match, type, scope, firstChar) => 
-            `${type}${scope || ''}: ${firstChar.toLowerCase()}`
+            `${type}${scope || ''}: ${firstChar.toLowerCase()}`,
           );
           break;
         case 'punctuation':
@@ -788,7 +788,7 @@ class CommitMessageGenerator {
     }
     return {
       yaml: match[1],
-      markdown: match[2]
+      markdown: match[2],
     };
   }
 
