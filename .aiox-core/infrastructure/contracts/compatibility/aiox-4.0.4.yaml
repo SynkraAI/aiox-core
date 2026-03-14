@@ -39,6 +39,7 @@ ide_matrix:
       - github-copilot-sync
   - ide: "antigravity"
     display_name: "AntiGravity"
-    expected_status: "Limited"
+    expected_status: "Works"
     required_checks:
       - antigravity-sync
+      - antigravity-integration

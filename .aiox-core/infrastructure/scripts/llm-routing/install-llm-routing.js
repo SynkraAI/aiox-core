@@ -100,12 +100,26 @@ function installLLMRouting(options = {}) {
   const claudeFreeScript = enableTracking ? 'claude-free-tracked' : 'claude-free';
 
   const scripts = isWindows
-    ? [`${claudeFreeScript}.cmd`, 'claude-max.cmd', 'deepseek-usage.cmd', 'deepseek-proxy.cmd']
-    : [`${claudeFreeScript}.sh`, 'claude-max.sh', 'deepseek-usage.sh', 'deepseek-proxy.sh'];
+    ? [`${claudeFreeScript}.cmd`, 'claude-max.cmd', 'deepseek-usage.cmd', 'deepseek-proxy.cmd', 'qwen-router.cmd']
+    : [`${claudeFreeScript}.sh`, 'claude-max.sh', 'deepseek-usage.sh', 'deepseek-proxy.sh', 'qwen-router.sh'];
 
   const targetNames = isWindows
-    ? ['claude-free.cmd', 'claude-max.cmd', 'deepseek-usage.cmd', 'deepseek-proxy.cmd']
-    : ['claude-free', 'claude-max', 'deepseek-usage', 'deepseek-proxy'];
+    ? ['claude-free.cmd', 'claude-max.cmd', 'deepseek-usage.cmd', 'deepseek-proxy.cmd', 'aiox-qwen.cmd']
+    : ['claude-free', 'claude-max', 'deepseek-usage', 'deepseek-proxy', 'aiox-qwen'];
+
+  // Ensure global bin for helper scripts exists
+  const globalAioxBin = path.join(os.homedir(), '.aiox', 'bin');
+  if (!fs.existsSync(globalAioxBin)) {
+    fs.mkdirSync(globalAioxBin, { recursive: true });
+  }
+
+  // Copy helpers
+  const bridgeSrc = path.join(__dirname, 'usage-tracker', 'ollama-bridge.js');
+  const bridgeDest = path.join(globalAioxBin, 'ollama-bridge.js');
+  if (fs.existsSync(bridgeSrc)) {
+    fs.copyFileSync(bridgeSrc, bridgeDest);
+    onProgress('✅ Installed: ollama-bridge helper');
+  }
 
   // Install each script
   scripts.forEach((script, index) => {
@@ -186,7 +200,7 @@ function updateClaudeConfig(trackingEnabled = true) {
     config.aioxLLMRouting = {
       version: LLM_ROUTING_VERSION,
       installedAt: new Date().toISOString(),
-      commands: ['claude-max', 'claude-free', 'deepseek-usage', 'deepseek-proxy'],
+      commands: ['claude-max', 'claude-free', 'deepseek-usage', 'deepseek-proxy', 'aiox-qwen'],
       trackingEnabled
     };
 
@@ -205,10 +219,12 @@ function isLLMRoutingInstalled() {
 
   if (isWindows) {
     return fs.existsSync(path.join(installDir, 'claude-max.cmd')) &&
-           fs.existsSync(path.join(installDir, 'claude-free.cmd'));
+           fs.existsSync(path.join(installDir, 'claude-free.cmd')) &&
+           fs.existsSync(path.join(installDir, 'aiox-qwen.cmd'));
   } else {
     return fs.existsSync(path.join(installDir, 'claude-max')) &&
-           fs.existsSync(path.join(installDir, 'claude-free'));
+           fs.existsSync(path.join(installDir, 'claude-free')) &&
+           fs.existsSync(path.join(installDir, 'aiox-qwen'));
   }
 }
 
@@ -228,6 +244,7 @@ function getInstallationSummary(result) {
     summary.push('Commands installed:');
     summary.push('  • claude-max      → Uses your Claude Max subscription');
     summary.push('  • claude-free     → Uses DeepSeek (~$0.14/M tokens) with tracking');
+    summary.push('  • aiox-qwen       → Uses Qwen 3 14B (Local or Cloud Router)');
     summary.push('  • deepseek-usage  → View usage statistics by alias');
     summary.push('  • deepseek-proxy  → Manage the usage tracking proxy');
     summary.push('');

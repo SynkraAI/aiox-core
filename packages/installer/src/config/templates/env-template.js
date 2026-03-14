@@ -73,6 +73,12 @@ ANTHROPIC_API_KEY=${apiKeys.anthropic || ''}
 # OpenAI API Key - Get yours at: https://platform.openai.com/api-keys
 OPENAI_API_KEY=${apiKeys.openai || ''}
 
+# Qwen 3 14B (via OpenRouter or direct)
+# Get your key at: https://openrouter.ai/keys
+QWEN_API_KEY=${apiKeys.qwen || apiKeys.openrouter || ''}
+QWEN_BASE_URL=
+AIOX_QWEN_MODEL=qwen/qwen-3-14b
+
 # --------------------------------------------
 # Search & Research Tools
 # --------------------------------------------
@@ -184,6 +190,12 @@ ANTHROPIC_API_KEY=
 
 # OpenAI API Key - Get yours at: https://platform.openai.com/api-keys
 OPENAI_API_KEY=
+
+# Qwen 3 14B (via OpenRouter or direct)
+# Get your key at: https://openrouter.ai/keys
+QWEN_API_KEY=
+QWEN_BASE_URL=
+AIOX_QWEN_MODEL=qwen/qwen-3-14b
 
 # --------------------------------------------
 # Search & Research Tools

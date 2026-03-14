@@ -97,6 +97,8 @@ CLAUDE.md
 !.gemini/rules/AIOX/agents/
 !.gemini/rules/AIOX/agents/*.md
 
+# Antigravity generated outputs
+.agent/workflows/
 # AI Session Artifacts (Story 6.1.2.6 - Decision Logging)
 # Auto-generated decision logs from yolo mode executions
 .ai/

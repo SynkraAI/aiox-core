@@ -52,6 +52,13 @@ async function main() {
   } catch {
     console.log('   ⚠️  Gemini CLI: Running from extension');
   }
+  
+  try {
+    require('child_process').execSync('aiox-qwen --version', { stdio: 'pipe' });
+    console.log('   ✅ Qwen Router (aiox-qwen): Available');
+  } catch {
+    // Optional, don't show if not installed yet
+  }
 
   // Check config
   const configPath = path.join(projectDir, '.aiox-ai-config.yaml');

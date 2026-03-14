@@ -39,7 +39,7 @@ describe('validate-parity', () => {
         { ide: 'codex', display_name: 'Codex CLI', expected_status: 'Limited', required_checks: ['codex-sync', 'codex-integration', 'codex-skills'] },
         { ide: 'cursor', display_name: 'Cursor', expected_status: 'Limited', required_checks: ['cursor-sync'] },
         { ide: 'github-copilot', display_name: 'GitHub Copilot', expected_status: 'Limited', required_checks: ['github-copilot-sync'] },
-        { ide: 'antigravity', display_name: 'AntiGravity', expected_status: 'Limited', required_checks: ['antigravity-sync'] },
+        { ide: 'antigravity', display_name: 'AntiGravity', expected_status: 'Limited', required_checks: ['antigravity-sync', 'antigravity-integration'] },
       ],
     };
   }
@@ -56,12 +56,13 @@ describe('validate-parity', () => {
         validateGeminiIntegration: () => ok,
         validateCodexSkills: () => ok,
         validatePaths: () => ok,
+        validateAntigravityIntegration: () => ok,
         loadCompatibilityContract: () => buildMockContract(),
       },
     );
 
     expect(result.ok).toBe(true);
-    expect(result.checks).toHaveLength(11);
+    expect(result.checks).toHaveLength(12);
     expect(result.checks.every((c) => c.ok)).toBe(true);
     expect(result.contractViolations).toHaveLength(0);
   });
@@ -83,6 +84,7 @@ describe('validate-parity', () => {
         validateGeminiIntegration: () => ({ ok: true, errors: [], warnings: [] }),
         validateCodexSkills: () => ({ ok: true, errors: [], warnings: [] }),
         validatePaths: () => ({ ok: true, errors: [], warnings: [] }),
+        validateAntigravityIntegration: () => ({ ok: true, errors: [], warnings: [] }),
         loadCompatibilityContract: () => buildMockContract(),
       },
     );
@@ -106,6 +108,7 @@ describe('validate-parity', () => {
         validateGeminiIntegration: () => ok,
         validateCodexSkills: () => ok,
         validatePaths: () => ok,
+        validateAntigravityIntegration: () => ok,
         loadCompatibilityContract: () => buildMockContract(),
       },
     );
@@ -147,6 +150,7 @@ describe('validate-parity', () => {
         validateGeminiIntegration: () => ok,
         validateCodexSkills: () => ok,
         validatePaths: () => ok,
+        validateAntigravityIntegration: () => ok,
         loadCompatibilityContract: (contractPath) => {
           if (contractPath.endsWith('aiox-4.0.3.yaml')) {
             return {
