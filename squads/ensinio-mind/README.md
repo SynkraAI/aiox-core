@@ -102,8 +102,9 @@ Para usar dados em outro squad, aponte symlinks para `squads/ensinio-mind/data/`
 - **Breakdown:** 2 VENDAS (Ricardo) + 14 SUPORTE/CS (Bhrenda+equipe)
 - **Insights extraídos:** 9 objeções, 5 ICPs, 12 red flags, 47 fricções, 58 FAQs, 12 padrões de setup
 - **Churn risks identificados:** Gil Junior (85%), Vamos para o Quadro (100%), Aforismos (40%)
-- **Feature requests:** 7 features (3 P0, 2 P1, 2 P2) — separado para produto
+- **Feature requests:** 7 features (2 P0, 2 P1, 2 P2, 1 P3) — `ensinio-feature-requests.md` criado
 - **Arquivo consolidado:** `data/insights-batch-3-raw.md` (fonte bruta para integração futura)
+- **16 data files** (antes 15)
 
 ### v2.1.0 (2026-03-14)
 - **Nova task:** `extract-from-calls.md` — extrai insights de calls tl;dv (Google Drive)
