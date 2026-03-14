@@ -87,6 +87,9 @@ function createEventStore() {
       state.metrics.recentTimestamps.shift();
     }
 
+    // Derive state from event type
+    const data = event.data || {};
+
     // Update context from envelope fields.
     // DashboardEmitter._postEvent nests session_id/aiox_agent/aiox_story_id
     // inside data (see dashboard-emitter.js:320-328). Support both shapes.
@@ -97,9 +100,6 @@ function createEventStore() {
     if (session_id) state.sessionId = session_id;
     if (aiox_story_id) state.currentStory = aiox_story_id;
     if (aiox_agent) state.currentAgent = aiox_agent;
-
-    // Derive state from event type
-    const data = event.data || {};
 
     switch (type) {
       case 'BobPhaseChange': {
