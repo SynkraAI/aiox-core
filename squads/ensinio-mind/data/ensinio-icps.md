@@ -156,4 +156,56 @@
 
 ---
 
-**Versão:** 3.0 | **Data:** 2026-03-14 | **Fonte:** Google Forms (06-13/03) + tl;dv calls batch 1 (5 calls, 2026-03)
+## Novos ICPs Validados em Campo — Batch 2 (tl;dv, 2026-03-14)
+
+### ICP-06: Mentores de tráfego/marketing (ticket médio R$ 500-3K)
+**Exemplo:** Éder/Arthur (Call 1, batch 2)
+**Características:**
+- Vendem mentorias/consultorias de tráfego pago
+- 50-200 alunos/clientes ativos
+- Ticket: R$ 500-3K (recorrente ou one-time)
+- Dor principal: Falta de área de membros profissional
+- Red flag: Se só fazem venda única (não recorrente), churn é alto
+
+### ICP-07: Agências de automação WhatsApp (ticket R$ 300-1K/mês por cliente)
+**Exemplo:** Clemisson (Call 2, batch 2)
+**Características:**
+- Prestam serviço de automação WhatsApp para outros negócios
+- 10-50 clientes ativos
+- Ticket: R$ 300-1K/cliente/mês
+- Dor principal: Cada cliente precisa de área de membros separada
+- Fit perfeito: White-label do Ensinio para revenda
+
+### ICP-08: Personal trainers indo pro digital (ticket R$ 200-800/mês)
+**Exemplo:** Marcus (Call 3, batch 2)
+**Características:**
+- Fazem atendimento presencial
+- Querem escalar criando produto digital (treinos online)
+- 0-20 alunos online (começando)
+- Ticket: R$ 200-800/aluno/mês
+- Dor principal: Não sabem por onde começar (tech)
+- Objeção típica: "Preciso validar primeiro" → oferecer Starter
+
+### ICP-09: Traders/investidores (ticket R$ 5-12K one-time ou R$ 1-3K/mês)
+**Exemplo:** Marcos Eduardo (Call 4, batch 2)
+**Características:**
+- Ensinam Forex, day trade, swing trade
+- 50-500 alunos
+- Ticket: R$ 5-12K one-time OU R$ 1-3K/mês (sala de sinais)
+- Dor principal: Gamificação, ranking, competições
+- Red flag: Compliance (regulação CVM) — validar autorização
+
+### ICP-10: Artesanato/hobbies para 60+ (ticket R$ 50-300/mês)
+**Exemplo:** Luiz Affonso (Call 5, batch 2)
+**Características:**
+- Público 60+ anos
+- Nicho: artesanato, jardinagem, culinária
+- 500-5K alunos
+- Ticket: R$ 50-300/mês
+- Dor principal: Público não é tech-savvy
+- Fit: Se o instrutor também for 60+, identificação alta
+- Solução: Setup incluso + onboarding completo
+
+---
+
+**Versão:** 3.1 | **Data:** 2026-03-14 | **Fonte:** Google Forms (06-13/03) + tl;dv calls batch 1+2 (10 calls, 2026-03)

@@ -237,4 +237,58 @@ Use este checklist para identificar VETO em primeiros 5 minutos:
 
 ---
 
-**Versão:** 3.0 | **Data:** 2026-03-14 | **Fonte:** Google Forms (06-13/03) + tl;dv calls batch 1 (5 calls, 2026-03)
+## Novos Red Flags Identificados — Batch 2 (tl;dv, 2026-03-14)
+
+### RF-27: "Preciso pensar" sem data específica
+**Contexto:** Call 3, Call 4 (batch 2)
+**Por quê é red flag:** Significa "não quero comprar mas não sei como dizer não"
+**Como lidar:** Forçar follow-up: "Entendi. Que dia você acha que decide? Vou te ligar na quarta."
+
+### RF-28: Não tem base de alunos ainda
+**Contexto:** Call 3 (Marcus - 0 alunos online)
+**Por quê é red flag:** Vai demorar meses pra gerar receita, pode cancelar antes
+**Como lidar:** Oferecer trial longo (30 dias) ou pausar até ter primeiros alunos
+
+### RF-29: Só venda one-time, sem recorrência
+**Contexto:** Call 4 (Marcos Eduardo - cursos R$ 5-12K)
+**Por quê é red flag:** Churn altíssimo, LTV baixo
+**Como lidar:** Sugerir adicionar recorrência (sala de sinais, comunidade)
+
+### RF-30: Público muito velho/tech-averse
+**Contexto:** Call 5 (Luiz - 60+ anos)
+**Por quê é red flag:** Vai dar muito suporte, pode frustrar o cliente
+**Como lidar:** Cobrar setup completo + onboarding incluso
+
+### RF-31: Quer custom demais
+**Contexto:** Call 4 (Marcos - queria gamificação custom)
+**Por quê é red flag:** Expectativa de produto sob medida, vai reclamar
+**Como lidar:** Vender Professional, mas deixar claro que roadmap é compartilhado
+
+### RF-32: Não sabe o ticket que vai cobrar
+**Contexto:** Call 3 (Marcus - "ainda não defini")
+**Por quê é red flag:** Negócio imaturo, pode desistir
+**Como lidar:** Ajudar a definir ticket, posicionar como consultoria inclusa
+
+### RF-33: Já teve problema com plataforma anterior
+**Contexto:** Call 2 (Clemisson - "Hotmart me bloqueou")
+**Por quê é red flag:** Pode ter feito algo errado (spam, fraude)
+**Como lidar:** Perguntar o motivo do bloqueio. Se for spam, recusar.
+
+### RF-34: Quer vender produto ilegal/grey area
+**Contexto:** Call 4 (Marcos - sinais Forex sem regulação)
+**Por quê é red flag:** Risco legal pro Ensinio
+**Como lidar:** Pedir CNPJ, verificar se tem autorização CVM
+
+### RF-35: Não tem CNPJ
+**Contexto:** Call 1 (Éder - pessoa física)
+**Por quê é red flag:** Limites de faturamento, compliance
+**Como lidar:** Aceitar PF até R$ 10K/mês, depois exigir PJ
+
+### RF-36: Quer desconto logo de cara
+**Contexto:** Call 1, Call 4
+**Por quê é red flag:** Vai sempre pedir desconto, LTV baixo
+**Como lidar:** Não dar desconto na primeira call. Se insistir, oferecer trial menor.
+
+---
+
+**Versão:** 3.1 | **Data:** 2026-03-14 | **Fonte:** Google Forms (06-13/03) + tl;dv calls batch 1+2 (10 calls, 2026-03)

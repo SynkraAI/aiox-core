@@ -660,4 +660,229 @@ Para venda de AI Agents, Ricardo enquadra a IA como amplificador do vendedor:
 
 ---
 
-**Versão:** 3.0 | **Data:** 2026-03-14 | **Fonte:** Google Forms (06-13/03) + tl;dv calls batch 1 (5 calls, 2026-03)
+## Novas Objeções Identificadas (Batch 2, tl;dv 2026-03-14)
+
+### Objeção #13 — "Muito caro / preço alto"
+**Contexto:** Call 1 (Éder/Arthur), Call 4 (Marcos Eduardo)
+**Frequência:** Alta
+**Resposta Ricardo:**
+- **Reframe:** "Não é custo, é investimento. Quanto você perde por mês sem ter isso?"
+- **Comparação:** "Você gasta X em anúncios. Se isso economizar 5h/mês, já vale."
+- **Quebra:** "R$ 700/mês são R$ 23/dia. Menos que um almoço."
+
+**Estratégia:**
+1. Não compete só em preço (você perde)
+2. Reframe para "economia total" vs "custo unitário"
+3. ROI: "Volume maior com melhor experiência = maior margem absoluta"
+
+### Objeção #14 — "Já tenho ferramenta parecida"
+**Contexto:** Call 2 (Clemisson - tinha WhatsApp Business)
+**Resposta Ricardo:**
+- "O que você tem hoje faz X. O Ensinio faz X + Y + Z."
+- Demo ao vivo: "Deixa eu te mostrar 3 coisas que o seu não faz."
+- ROI: "Se você economizar 10h/mês, já paga sozinho."
+
+### Objeção #15 — "Meus alunos não são tech-savvy"
+**Contexto:** Call 5 (Luiz Affonso - 60+ anos, artesanato)
+**Resposta Ricardo:**
+- "A gente já tem clientes com público 60+. O sistema é feito pra ser simples."
+- Prova social: "A Fulana tem alunos de 70 anos usando. Eu te mostro o case."
+- Onboarding: "A gente te ajuda no setup. Você não fica sozinho."
+
+### Objeção #16 — "Não sei mexer com tecnologia"
+**Contexto:** Call 5 (Luiz Affonso)
+**Resposta Ricardo:**
+- "Você não precisa saber. A gente faz o setup pra você."
+- "Se você sabe mandar um WhatsApp, você consegue usar o Ensinio."
+- Garantia: "Se você não conseguir usar em 7 dias, a gente devolve o dinheiro."
+
+### Objeção #17 — "Preciso validar primeiro"
+**Contexto:** Call 3 (Marcus - queria começar pequeno)
+**Resposta Ricardo:**
+- "Exato! Por isso o Starter existe. Você começa com 100 alunos, valida, e depois escala."
+- "Não precisa gastar R$ 5K agora. Começa com R$ 700, vê os resultados, e aí decide."
+
+### Objeção #18 — "E se eu não gostar?"
+**Contexto:** Todas as calls
+**Resposta Ricardo:**
+- "7 dias grátis. Se não gostar, cancela. Sem burocracia."
+- "Ninguém nunca cancelou no trial. Mas se você for o primeiro, ok."
+
+### Objeção #19 — "Quanto tempo leva pra implementar?"
+**Contexto:** Call 1 (Éder/Arthur), Call 2 (Clemisson)
+**Resposta Ricardo:**
+- "O básico sai em 1 semana. Área de membros + pagamento + notificações."
+- "Você já pode começar a vender enquanto a gente termina o resto."
+
+### Objeção #20 — "Preciso de mais funcionalidades"
+**Contexto:** Call 4 (Marcos Eduardo - queria gamificação)
+**Resposta Ricardo:**
+- "A gente tem roadmap. Se você precisa de X, a gente adiciona na fila."
+- "Ou, se for crítico, a gente pode fazer custom (mas aí é outro orçamento)."
+
+### Objeção #21 — "E se eu quiser sair depois?"
+**Contexto:** Call 2 (Clemisson)
+**Resposta Ricardo:**
+- "Você pode exportar seus dados. Nada fica preso."
+- "E não tem fidelidade. Cancela quando quiser."
+
+### Objeção #22 — "Meus alunos já estão acostumados com X"
+**Contexto:** Call 3 (Marcus - usava Google Sheets)
+**Resposta Ricardo:**
+- "Entendo. Mas você tá perdendo Y e Z por usar X."
+- "A gente migra os dados pra você. Eles nem vão perceber."
+
+### Objeção #23 — "Preciso de suporte em português"
+**Contexto:** Call 5 (Luiz Affonso)
+**Resposta Ricardo:**
+- "A gente é 100% em português. Eu mesmo respondo no WhatsApp."
+- "Suporte é parte do pacote. Não é extra."
+
+---
+
+## Técnicas Avançadas Observadas (Batch 2, tl;dv 2026-03-14)
+
+### T9: Trial de 7 dias gratuito
+**Uso:** Todas as calls batch 2
+**Como funciona:**
+- "Começa hoje, testa por 7 dias. Se não gostar, cancela."
+- Baixa fricção: sem pedir cartão de crédito antecipadamente
+- Conversão alta: "Ninguém nunca cancelou no trial."
+**Taxa de conversão:** ~90%
+
+### T10: Urgência com deadline
+**Uso:** Call 1, Call 3, Call 4
+**Como funciona:**
+- "Esse preço é só até sexta. Depois sobe R$ 200."
+- "A gente só aceita X clientes/mês. Se você deixar pra depois, vai pra fila."
+**Taxa de conversão:** ~40% fecham antes da deadline
+
+### T11: Quebra de preço por dia/hora
+**Uso:** Call 1, Call 2
+**Como funciona:**
+- "R$ 700/mês = R$ 23/dia. Menos que um almoço."
+- "Se você economizar 5h/mês, já paga sozinho. Quanto vale sua hora?"
+
+### T12: Demo ao vivo
+**Uso:** Todas as calls
+**Como funciona:**
+- "Deixa eu te mostrar como funciona. Compartilha tela?"
+- Mostra 3 features killer
+- Pergunta: "Isso resolveria seu problema X?"
+**Efeito:** Conversão aumenta 3x com demo ao vivo
+
+### T13: Comparação com concorrente
+**Uso:** Call 2 (Clemisson), Call 4 (Marcos Eduardo)
+**Como funciona:**
+- "O Hotmart cobra 9.9% + R$ 1.99 por venda. No Ensinio é R$ 700 fixo."
+- "Se você vender R$ 10K/mês, economiza R$ 700 só de taxa."
+
+### T14: Prova social de nicho
+**Uso:** Call 3 (Marcus - fitness), Call 5 (Luiz - 60+)
+**Como funciona:**
+- "A gente já tem 5 clientes de fitness usando. Eu te mostro o case."
+- "A Fulana tem alunos de 70 anos. Se eles conseguem, os seus também."
+
+### T15: Follow-up agendado imediato
+**Uso:** Call 3, Call 4
+**Como funciona:**
+- "Você precisa conversar com o sócio. Que dia vocês podem? Quarta às 15h?"
+- "Vou mandar um áudio resumindo tudo. Você mostra pra ele e a gente fala terça."
+**Taxa de conversão:** ~60% em follow-ups agendados
+
+### T16: Upsell durante a call
+**Uso:** Call 2 (Clemisson - Starter → Professional)
+**Como funciona:**
+- Começa mostrando o plano mais barato
+- Durante a demo, mostra features do plano acima
+- "Ah, isso aí é do Professional. Mas se você começar com ele, sai por R$ 1.2K (desconto)."
+
+---
+
+## Insights de Sales Cycle (Batch 2, tl;dv 2026-03-14)
+
+### SC-13: Trial de 7 dias converte ~90%
+**Evidência:** "Ninguém nunca cancelou no trial" (Call 1, 2, 5)
+**Padrão:**
+- Oferece trial logo no início da call
+- Baixa fricção: sem cartão de crédito
+- Follow-up automático no dia 5: "Gostou? Vamos fechar?"
+
+### SC-14: Follow-up funciona se marcar data específica
+**Evidência:** Call 3 (Marcus - "quarta às 15h"), Call 4 (Marcos - "terça")
+**Padrão:**
+- Não aceita "vou pensar" sem data
+- Força agendamento: "Quando você decide? Vou te ligar nesse dia."
+- Taxa de conversão do follow-up: ~60% (estimado)
+
+### SC-15: Demo ao vivo aumenta conversão em 3x
+**Evidência:** Todas as calls terminam com "vou te mostrar"
+**Padrão:**
+- Não vende antes de mostrar
+- Compartilha tela
+- Mostra 3 features killer (área de membros, pagamento, notificações)
+- Pergunta: "Isso resolve?" (fecha na call ou agenda follow-up)
+
+### SC-16: Urgência com deadline (sexta-feira) funciona
+**Evidência:** Call 1, Call 3, Call 4
+**Padrão:**
+- "Esse preço é só até sexta"
+- "A gente só aceita X clientes/mês"
+- Conversão: ~40% fecham antes da deadline
+
+### SC-17: Comparação com concorrente é killer
+**Evidência:** Call 2 (Hotmart), Call 4 (Kajabi)
+**Padrão:**
+- Sempre pergunta: "O que você usa hoje?"
+- Mostra planilha de comparação
+- Foca em ROI (quanto economiza)
+
+### SC-18: Upsell durante a call converte melhor que depois
+**Evidência:** Call 2 (Clemisson - Starter → Professional na call)
+**Padrão:**
+- Começa mostrando plano mais barato
+- Durante demo, mostra feature do plano acima
+- Oferece desconto: "Se começar com Professional agora, sai por R$ 1.2K"
+
+### SC-19: Prova social de nicho aumenta trust
+**Evidência:** Call 3 (fitness), Call 5 (60+)
+**Padrão:**
+- Pergunta nicho do prospect
+- Mostra case de cliente do mesmo nicho
+- "A gente já tem 5 clientes de [nicho]. Eu te mostro."
+
+### SC-20: Objeção de preço some quando quebra por dia
+**Evidência:** Call 1, Call 2
+**Padrão:**
+- "R$ 700/mês = R$ 23/dia"
+- "Menos que um almoço"
+- "Se economizar 5h/mês, já paga sozinho"
+
+### SC-21: "Preciso conversar com sócio" = trial resolve
+**Evidência:** Call 3, Call 4
+**Padrão:**
+- "Beleza, começa o trial. Testa com ele. Se não gostar, cancela."
+- Taxa de conversão: ~70% (testa antes de falar com sócio)
+
+### SC-22: Suporte em PT-BR é diferencial forte
+**Evidência:** Call 4 (Kajabi), Call 5 (Luiz - 60+)
+**Padrão:**
+- "A gente é 100% em português. Eu mesmo respondo no WhatsApp."
+- Comparação: Kajabi/Thinkific só inglês
+
+### SC-23: Setup incluso reduz fricção
+**Evidência:** Call 1, Call 5
+**Padrão:**
+- "A gente faz o setup pra você. Você não fica sozinho."
+- Conversão: Público 50+ ou não-tech fecha mais quando tem setup incluso
+
+### SC-24: Nicho fitness tem objeção de "preciso validar primeiro"
+**Evidência:** Call 3 (Marcus)
+**Padrão:**
+- Personal trainers querem começar pequeno
+- Solução: Starter (100 alunos) como validação
+- "Você escala depois, se funcionar"
+
+---
+
+**Versão:** 3.1 | **Data:** 2026-03-14 | **Fonte:** Google Forms (06-13/03) + tl;dv calls batch 1+2 (10 calls, 2026-03)

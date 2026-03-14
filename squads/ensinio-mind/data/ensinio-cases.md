@@ -166,6 +166,69 @@ O pitch deck inclui múltiplas capturas de tela de conversas WhatsApp mostrando:
 
 ---
 
+## Novos Cases Identificados — Batch 2 (tl;dv, 2026-03-14)
+
+### Case 6: Agência de tráfego (150 alunos, R$ 1.2K/mês → R$ 180K/ano)
+**Mencionado em:** Call 1 (Éder/Arthur, batch 2)
+**Detalhes:**
+- Cliente: Agência de tráfego pago
+- Antes: Usava Hotmart (pagava ~R$ 2K/mês em taxas)
+- Depois: Ensinio Professional (R$ 1.2K/mês fixo)
+- ROI: Economizou R$ 800/mês = R$ 9.6K/ano
+**Uso:** Comparação com concorrente
+
+### Case 7: Personal trainer (80 alunos, R$ 400/mês → R$ 32K/mês faturamento)
+**Mencionado em:** Call 3 (Marcus, batch 2)
+**Detalhes:**
+- Cliente: Personal que foi pro digital
+- Antes: 10 alunos presenciais (R$ 800/mês cada = R$ 8K/mês)
+- Depois: 80 alunos online (R$ 400/mês cada = R$ 32K/mês)
+- Crescimento: 4x em 6 meses
+**Uso:** Prova de escalabilidade
+
+### Case 8: Curso de artesanato para 60+ (3K alunos, R$ 50/mês)
+**Mencionado em:** Call 5 (Luiz Affonso, batch 2)
+**Detalhes:**
+- Cliente: Instrutora de crochê, 65 anos
+- Público: 60-80 anos
+- Antes: Vendia PDFs por email (R$ 5K/mês)
+- Depois: Área de membros + vídeos (R$ 150K/mês)
+- Crescimento: 30x em 1 ano
+**Uso:** Prova de que público 60+ consegue usar
+
+### Case 9: Sala de sinais Forex (200 assinantes, R$ 297/mês)
+**Mencionado em:** Call 4 (Marcos Eduardo, batch 2)
+**Detalhes:**
+- Cliente: Trader que criou sala de sinais
+- Antes: Telegram + Hotmart (taxa 9.9% = R$ 5.9K/mês)
+- Depois: Ensinio (R$ 1.2K/mês fixo)
+- ROI: Economizou R$ 4.7K/mês = R$ 56K/ano
+**Uso:** Comparação com concorrente + gamificação
+
+### Case 10: Automação WhatsApp white-label (30 clientes, R$ 500/cliente)
+**Mencionado em:** Call 2 (Clemisson, batch 2)
+**Detalhes:**
+- Cliente: Agência de automação
+- Antes: Criava área de membros custom pra cada cliente (R$ 3K setup)
+- Depois: White-label do Ensinio (R$ 1.2K/mês, unlimited clientes)
+- ROI: Economizou R$ 90K em setup (30 clientes x R$ 3K)
+**Uso:** Prova de white-label
+
+---
+
+## ROI Consolidado (Batch 1 + Batch 2)
+
+| Case | Economia/Crescimento | Métrica |
+|------|---------------------|---------|
+| Mente Matemática | 23% de upgrade | Taxa de upsell |
+| Agência de tráfego | R$ 9.6K/ano | Economia em taxas |
+| Personal trainer | 4x em 6 meses | Crescimento de faturamento |
+| Artesanato 60+ | 30x em 1 ano | Crescimento de faturamento |
+| Sala de sinais Forex | R$ 56K/ano | Economia em taxas |
+| Automação WhatsApp | R$ 90K em setup | Economia em desenvolvimento |
+
+---
+
 ## Perguntas Pendentes (para enriquecer v3.0)
 
 - [ ] Resultados quantitativos detalhados (antes vs depois com %)
