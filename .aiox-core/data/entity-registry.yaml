@@ -14085,26 +14085,6 @@ entities:
         extensionPoints: []
       checksum: sha256:58422e884e46660216d5389878ae2f0ab619da7d34f34ed1dff917dfd8fed7db
       lastVerified: '2026-03-11T00:48:55.924Z'
-    _template:
-      path: .aiox-core/data/tech-presets/_template.md
-      layer: L3
-      type: data
-      purpose: '''Brief description of when to use this preset'''
-      keywords:
-        - template
-        - tech
-        - preset
-      usedBy: []
-      dependencies: []
-      externalDeps: []
-      plannedDeps: []
-      lifecycle: orphan
-      adaptability:
-        score: 0.5
-        constraints: []
-        extensionPoints: []
-      checksum: sha256:68b26930b728908b6097fc91956c8c446e5cc0dbe627e3b737495ebcd7e9569b
-      lastVerified: '2026-03-06T11:53:37.603Z'
     angular-nestjs:
       path: .aiox-core/data/tech-presets/angular-nestjs.md
       layer: L3
