@@ -235,9 +235,8 @@ describe('stats-renderer', () => {
     });
 
     it('should return days ago', () => {
-      const now = new Date();
-      now.setDate(now.getDate() - 7);
-      expect(_timeAgo(now.toISOString())).toBe('7d ago');
+      const then = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+      expect(_timeAgo(then.toISOString())).toBe('7d ago');
     });
 
     it('should return unknown for invalid dates', () => {

@@ -68,7 +68,7 @@ describe('check-registry', () => {
 
     test('throws for duplicate id', () => {
       registry.register(new ProjectCheck('dup'));
-      expect(() => registry.register(new ProjectCheck('dup'))).toThrow("already registered");
+      expect(() => registry.register(new ProjectCheck('dup'))).toThrow('already registered');
     });
 
     test('indexes check by domain', () => {

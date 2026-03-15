@@ -45,7 +45,7 @@ const FALLBACK_EXCEPTIONS = [
  */
 function globToRegex(glob) {
   // 1. Replace ** with placeholder before processing
-  let pattern = glob.replace(/\*\*/g, '\u0000');
+  let pattern = glob.replace(/\*\*/g, '\0');
 
   // 2. Escape all regex-special chars (dots, plus, etc.) — but NOT * or placeholder
   pattern = pattern.replace(/[.+?^${}()|[\]\\]/g, '\\$&');
@@ -54,7 +54,7 @@ function globToRegex(glob) {
   pattern = pattern.replace(/\*/g, '[^/]+');
 
   // 4. Restore ** placeholder to any-depth matcher
-  pattern = pattern.replace(/\u0000/g, '.+');
+  pattern = pattern.replace(/\0/g, '.+');
 
   // If pattern ends with .+ (was **), match prefix
   if (glob.endsWith('**')) {

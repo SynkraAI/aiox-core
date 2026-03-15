@@ -47,7 +47,6 @@ async function run(context) {
     };
   }
 
-  const present = EXPECTED_RULES.length - missing.length;
   const severity = missing.length > 3 ? 'FAIL' : 'WARN';
 
   return {

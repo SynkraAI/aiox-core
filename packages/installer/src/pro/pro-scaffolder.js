@@ -80,7 +80,7 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
   // Validate pro source exists
   if (!await fs.pathExists(proSourceDir)) {
     result.errors.push(
-      `Pro package not found at ${proSourceDir}. Run "npm install @aiox-fullstack/pro" first.`
+      `Pro package not found at ${proSourceDir}. Run "npm install @aiox-fullstack/pro" first.`,
     );
     return result;
   }
@@ -160,7 +160,7 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
       result.errors.push(`Rollback errors: ${rollbackResult.errors.join(', ')}`);
     }
     result.warnings.push(
-      `Scaffolding failed: ${error.message}. ${rollbackResult.removed} files cleaned up.`
+      `Scaffolding failed: ${error.message}. ${rollbackResult.removed} files cleaned up.`,
     );
   }
 
@@ -425,7 +425,7 @@ async function installSquadCommands(targetDir) {
       for (const agentFile of agentFiles) {
         await fs.copy(
           path.join(agentsDir, agentFile),
-          path.join(destDir, agentFile)
+          path.join(destDir, agentFile),
         );
         files.push(path.relative(targetDir, path.join(destDir, agentFile)).replace(/\\/g, '/'));
       }

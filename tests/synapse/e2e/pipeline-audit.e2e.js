@@ -147,7 +147,7 @@ async function auditAgentActivation(agents = ALL_AGENTS, runs = RUNS_PER_AGENT) 
     for (let i = 0; i < runs; i++) {
       try {
         const { result, duration } = await timedRunAsync(() =>
-          UnifiedActivationPipeline.activate(agentId)
+          UnifiedActivationPipeline.activate(agentId),
         );
         timings.push(duration);
         qualities.push(result?.quality || 'unknown');
@@ -256,7 +256,7 @@ async function auditSessionSimulation(agents = SESSION_SIM_AGENTS, prompts = SES
 
       // Run SYNAPSE pipeline
       const { result: synapseResult, duration: synapseDuration } = await timedRunAsync(() =>
-        engine.process(`Simulated prompt ${promptIdx} for ${agentId}`, session)
+        engine.process(`Simulated prompt ${promptIdx} for ${agentId}`, session),
       );
 
       const metricsSummary = synapseResult?.metrics || {};
@@ -319,7 +319,7 @@ async function auditSessionSimulation(agents = SESSION_SIM_AGENTS, prompts = SES
 
     console.log(`  ${agentId}: default=${transitions.length} transitions (final=${snapshots[snapshots.length - 1]?.bracket}), small=${smallTransitions.length} transitions (final=${snapshots[snapshots.length - 1]?.smallBracket}), avgSynapse=${results[agentId].summary.avgSynapseDuration.toFixed(2)}ms`);
     if (smallTransitions.length > 1) {
-      console.log(`    Small context transitions:`);
+      console.log('    Small context transitions:');
       smallTransitions.forEach(t => console.log(`      prompt ${t.prompt}: ${t.from || 'START'} → ${t.to}`));
     }
   }
@@ -480,25 +480,25 @@ async function auditSynapseRules() {
   // Run engine for FRESH bracket (layers [0,1,2,7])
   const freshSession = { prompt_count: bracketPromptCounts.FRESH, active_agent: { id: 'dev' }, context: {} };
   const { result: freshResult, duration: freshDuration } = await timedRunAsync(() =>
-    engine.process('Audit prompt for FRESH bracket', freshSession)
+    engine.process('Audit prompt for FRESH bracket', freshSession),
   );
 
   // Run engine for MODERATE bracket (all 8 layers)
   const moderateSession = { prompt_count: bracketPromptCounts.MODERATE, active_agent: { id: 'dev' }, context: {} };
   const { result: moderateResult, duration: moderateDuration } = await timedRunAsync(() =>
-    engine.process('Audit prompt for MODERATE bracket', moderateSession)
+    engine.process('Audit prompt for MODERATE bracket', moderateSession),
   );
 
   // Run engine for DEPLETED bracket (all layers + memory hints)
   const depletedSession = { prompt_count: bracketPromptCounts.DEPLETED, active_agent: { id: 'dev' }, context: {} };
   const { result: depletedResult, duration: depletedDuration } = await timedRunAsync(() =>
-    engine.process('Audit prompt for DEPLETED bracket', depletedSession)
+    engine.process('Audit prompt for DEPLETED bracket', depletedSession),
   );
 
   // Run engine for CRITICAL bracket (all layers + memory + handoff)
   const criticalSession = { prompt_count: bracketPromptCounts.CRITICAL, active_agent: { id: 'dev' }, context: {} };
   const { result: criticalResult, duration: criticalDuration } = await timedRunAsync(() =>
-    engine.process('Audit prompt for CRITICAL bracket', criticalSession)
+    engine.process('Audit prompt for CRITICAL bracket', criticalSession),
   );
 
   function analyzeResult(result, label, bracket) {
@@ -671,7 +671,7 @@ async function auditProjectStatus(iterations = PROJECT_STATUS_ITERATIONS) {
   } else if (recommended) {
     results.recommendation = `TIMEOUT ${recommended.timeout}ms covers 95%+ of cases. Current 20ms is too aggressive.`;
   } else {
-    results.recommendation = `Consider restructuring: no timeout value covers 95% of commands.`;
+    results.recommendation = 'Consider restructuring: no timeout value covers 95% of commands.';
   }
 
   console.log(`  Total estimated p50: ${totalP50.toFixed(0)}ms`);
@@ -804,7 +804,7 @@ function classifyFeatures(auditData) {
       0,
       gitData.fullDetect?.stats?.p50 || 0,
       gitData.fullDetect?.stats?.p50 > 50 ? 'OPTIMIZE' : 'KEEP',
-      'Branch awareness is essential for context. But _isGitRepository() execSync is overhead — use .git/HEAD existence check instead.'
+      'Branch awareness is essential for context. But _isGitRepository() execSync is overhead — use .git/HEAD existence check instead.',
     );
   }
 
@@ -816,7 +816,7 @@ function classifyFeatures(auditData) {
       0,
       psData.estimatedTotalP50 || 0,
       psData.estimatedTotalP50 > 100 ? 'OPTIMIZE' : 'KEEP',
-      `Provides commit/branch/dirty status for greeting. Takes ~${(psData.estimatedTotalP50 || 0).toFixed(0)}ms. Often times out at 20ms budget.`
+      `Provides commit/branch/dirty status for greeting. Takes ~${(psData.estimatedTotalP50 || 0).toFixed(0)}ms. Often times out at 20ms budget.`,
     );
   }
 
@@ -883,26 +883,26 @@ with sub-millisecond precision, classifying each feature as ESSENTIAL, USEFUL, C
 
   // AC1: Agent Activation
   if (auditData.agentActivation && !auditData.agentActivation.skipped) {
-    md += `## 1. Agent Activation (All Agents)\n\n`;
-    md += `| Agent | p50 (ms) | p95 (ms) | Quality | Slowest Loader | Slowest (ms) |\n`;
-    md += `|-------|----------|----------|---------|----------------|-------------|\n`;
+    md += '## 1. Agent Activation (All Agents)\n\n';
+    md += '| Agent | p50 (ms) | p95 (ms) | Quality | Slowest Loader | Slowest (ms) |\n';
+    md += '|-------|----------|----------|---------|----------------|-------------|\n';
     for (const [agentId, data] of Object.entries(auditData.agentActivation)) {
       const primaryQ = Object.entries(data.qualityCounts || {}).sort((a, b) => b[1] - a[1])[0]?.[0] || 'unknown';
       md += `| ${agentId} | ${data.timing.p50.toFixed(1)} | ${data.timing.p95.toFixed(1)} | ${primaryQ} | ${data.slowestLoader?.name || 'n/a'} | ${(data.slowestLoader?.avgDuration || 0).toFixed(1)} |\n`;
     }
-    md += `\n**Targets:** warm p50 <150ms, cold p95 <250ms\n\n`;
+    md += '\n**Targets:** warm p50 <150ms, cold p95 <250ms\n\n';
   }
 
   // AC2: Session Simulation
   if (auditData.sessionSimulation) {
-    md += `## 2. Multi-Prompt Session Simulation\n\n`;
-    md += `> **Note:** With default maxContext=200000 tokens, each prompt uses only ~0.9% of context.\n`;
-    md += `> 15 prompts = ~13.5% used → stays FRESH. This is correct behavior.\n`;
-    md += `> A "small context" (20k) scenario shows bracket transitions working correctly.\n\n`;
+    md += '## 2. Multi-Prompt Session Simulation\n\n';
+    md += '> **Note:** With default maxContext=200000 tokens, each prompt uses only ~0.9% of context.\n';
+    md += '> 15 prompts = ~13.5% used → stays FRESH. This is correct behavior.\n';
+    md += '> A "small context" (20k) scenario shows bracket transitions working correctly.\n\n';
     for (const [agentId, data] of Object.entries(auditData.sessionSimulation)) {
       md += `### Agent: ${agentId}\n\n`;
-      md += `| Prompt | Bracket (200k) | Context% | Small Bracket (20k) | Small% | Layers | Rules | Tokens | SYNAPSE (ms) |\n`;
-      md += `|--------|---------------|----------|--------------------|---------| ------|-------|--------|-------------|\n`;
+      md += '| Prompt | Bracket (200k) | Context% | Small Bracket (20k) | Small% | Layers | Rules | Tokens | SYNAPSE (ms) |\n';
+      md += '|--------|---------------|----------|--------------------|---------| ------|-------|--------|-------------|\n';
       for (const snap of data.snapshots) {
         md += `| ${snap.promptIdx} | ${snap.bracket} | ${snap.contextPercent.toFixed(1)}% | ${snap.smallBracket} | ${(snap.smallContextPercent || 0).toFixed(1)}% | ${snap.activeLayers.join(',')} | ${snap.totalRules} | ${snap.estimatedTokens} | ${snap.synapseDuration.toFixed(2)} |\n`;
       }
@@ -914,56 +914,56 @@ with sub-millisecond precision, classifying each feature as ESSENTIAL, USEFUL, C
   // AC3: Git Detection
   if (auditData.gitDetection) {
     const git = auditData.gitDetection;
-    md += `## 3. Git Detection Diagnostic\n\n`;
-    md += `| Method | p50 (ms) | p95 (ms) | p99 (ms) |\n`;
-    md += `|--------|----------|----------|----------|\n`;
+    md += '## 3. Git Detection Diagnostic\n\n';
+    md += '| Method | p50 (ms) | p95 (ms) | p99 (ms) |\n';
+    md += '|--------|----------|----------|----------|\n';
     md += `| .git/HEAD direct read | ${git.directRead.stats.p50.toFixed(3)} | ${git.directRead.stats.p95.toFixed(3)} | ${git.directRead.stats.p99.toFixed(3)} |\n`;
     md += `| execSync (rev-parse HEAD) | ${git.execSync.stats.p50.toFixed(1)} | ${git.execSync.stats.p95.toFixed(1)} | ${git.execSync.stats.p99.toFixed(1)} |\n`;
     md += `| _isGitRepository (execSync) | ${git.isGitRepository.stats.p50.toFixed(1)} | ${git.isGitRepository.stats.p95.toFixed(1)} | ${git.isGitRepository.stats.p99.toFixed(1)} |\n`;
     md += `| Full detect() | ${git.fullDetect.stats.p50.toFixed(1)} | ${git.fullDetect.stats.p95.toFixed(1)} | ${git.fullDetect.stats.p99.toFixed(1)} |\n`;
     md += `| Cached get() | ${git.cachedGet.stats.p50.toFixed(3)} | ${git.cachedGet.stats.p95.toFixed(3)} | ${git.cachedGet.stats.p99.toFixed(3)} |\n`;
     md += `\n**Diagnosis:** ${git.diagnosis}\n\n`;
-    md += `**Key Finding:** The journey data showing 35-131ms gitConfig times is caused by \`_isGitRepository()\` calling \`execSync('git rev-parse --is-inside-work-tree')\` before the fast \`.git/HEAD\` read. The direct read itself is <1ms.\n\n`;
+    md += '**Key Finding:** The journey data showing 35-131ms gitConfig times is caused by `_isGitRepository()` calling `execSync(\'git rev-parse --is-inside-work-tree\')` before the fast `.git/HEAD` read. The direct read itself is <1ms.\n\n';
   }
 
   // AC4: SYNAPSE Rules
   if (auditData.synapseRules) {
-    md += `## 4. SYNAPSE Rule Impact Analysis\n\n`;
-    md += `| Bracket | Rules | Tokens (est) | Adjusted (*1.2) | Layers Active | Layers Producing | Duration (ms) |\n`;
-    md += `|---------|-------|-------------|----------------|---------------|-----------------|---------------|\n`;
+    md += '## 4. SYNAPSE Rule Impact Analysis\n\n';
+    md += '| Bracket | Rules | Tokens (est) | Adjusted (*1.2) | Layers Active | Layers Producing | Duration (ms) |\n';
+    md += '|---------|-------|-------------|----------------|---------------|-----------------|---------------|\n';
     for (const bracket of ['FRESH', 'MODERATE', 'DEPLETED', 'CRITICAL']) {
       const data = auditData.synapseRules[bracket];
       if (data) {
         md += `| ${bracket} | ${data.totalRules} | ${data.estimatedTokens} | ${data.adjustedTokens} | ${data.layersAttempted}/8 | ${data.layersLoaded}/8 | ${data.totalDuration.toFixed(2)} |\n`;
       }
     }
-    md += `\n`;
-    md += `> **Note:** "Layers Active" = layers the bracket filter allows to execute. "Layers Producing" = layers that returned rules.\n`;
-    md += `> Layers 3-6 (workflow, task, squad, keyword) require active session context (workflow, task, squad, matching keywords) to produce rules.\n`;
-    md += `> In this audit with no active workflow/task/squad, only L0 (constitution), L1 (global), L2 (agent) produce rules regardless of bracket.\n`;
-    md += `> The bracket filter is working correctly: FRESH allows 4 layers (0,1,2,7), MODERATE+ allows all 8.\n\n`;
+    md += '\n';
+    md += '> **Note:** "Layers Active" = layers the bracket filter allows to execute. "Layers Producing" = layers that returned rules.\n';
+    md += '> Layers 3-6 (workflow, task, squad, keyword) require active session context (workflow, task, squad, matching keywords) to produce rules.\n';
+    md += '> In this audit with no active workflow/task/squad, only L0 (constitution), L1 (global), L2 (agent) produce rules regardless of bracket.\n';
+    md += '> The bracket filter is working correctly: FRESH allows 4 layers (0,1,2,7), MODERATE+ allows all 8.\n\n';
 
     // Per-layer breakdown for MODERATE (all layers attempted)
     const mod = auditData.synapseRules.MODERATE;
     if (mod?.perLayer) {
-      md += `### Per-Layer Breakdown (MODERATE — all 8 layers attempted)\n\n`;
-      md += `| Layer | Bracket Active | Status | Rules | Skip Reason | Duration (ms) |\n`;
-      md += `|-------|---------------|--------|-------|-------------|---------------|\n`;
+      md += '### Per-Layer Breakdown (MODERATE — all 8 layers attempted)\n\n';
+      md += '| Layer | Bracket Active | Status | Rules | Skip Reason | Duration (ms) |\n';
+      md += '|-------|---------------|--------|-------|-------------|---------------|\n';
       for (const [name, data] of Object.entries(mod.perLayer)) {
         md += `| ${name} | ${data.bracketActive ? 'YES' : 'no'} | ${data.status} | ${data.rules || 0} | ${data.skipReason || '-'} | ${(data.duration || 0).toFixed(3)} |\n`;
       }
-      md += `\n`;
+      md += '\n';
 
       // Also show FRESH for comparison
       const fresh = auditData.synapseRules.FRESH;
       if (fresh?.perLayer) {
-        md += `### Per-Layer Breakdown (FRESH — 4 layers attempted)\n\n`;
-        md += `| Layer | Bracket Active | Status | Rules | Skip Reason | Duration (ms) |\n`;
-        md += `|-------|---------------|--------|-------|-------------|---------------|\n`;
+        md += '### Per-Layer Breakdown (FRESH — 4 layers attempted)\n\n';
+        md += '| Layer | Bracket Active | Status | Rules | Skip Reason | Duration (ms) |\n';
+        md += '|-------|---------------|--------|-------|-------------|---------------|\n';
         for (const [name, data] of Object.entries(fresh.perLayer)) {
           md += `| ${name} | ${data.bracketActive ? 'YES' : 'no'} | ${data.status} | ${data.rules || 0} | ${data.skipReason || '-'} | ${(data.duration || 0).toFixed(3)} |\n`;
         }
-        md += `\n`;
+        md += '\n';
       }
     }
   }
@@ -971,18 +971,18 @@ with sub-millisecond precision, classifying each feature as ESSENTIAL, USEFUL, C
   // AC5: projectStatus
   if (auditData.projectStatus) {
     const ps = auditData.projectStatus;
-    md += `## 5. projectStatus Root Cause Analysis\n\n`;
-    md += `| Git Command | p50 (ms) | p95 (ms) |\n`;
-    md += `|-------------|----------|----------|\n`;
+    md += '## 5. projectStatus Root Cause Analysis\n\n';
+    md += '| Git Command | p50 (ms) | p95 (ms) |\n';
+    md += '|-------------|----------|----------|\n';
     for (const [name, s] of Object.entries(ps.commandTimings)) {
       md += `| \`${name}\` | ${s.p50.toFixed(1)} | ${s.p95.toFixed(1)} |\n`;
     }
     md += `\n**Slowest:** \`${ps.slowestCommand.name}\` (p50=${ps.slowestCommand.p50.toFixed(0)}ms)\n`;
     md += `**Total estimated p50:** ${ps.estimatedTotalP50.toFixed(0)}ms\n`;
     md += `**fsmonitor:** ${ps.fsmonitorEnabled ? 'ENABLED' : 'disabled'}\n\n`;
-    md += `### Timeout Coverage Analysis\n\n`;
-    md += `| Timeout (ms) | Commands Within | Coverage |\n`;
-    md += `|-------------|-----------------|----------|\n`;
+    md += '### Timeout Coverage Analysis\n\n';
+    md += '| Timeout (ms) | Commands Within | Coverage |\n';
+    md += '|-------------|-----------------|----------|\n';
     for (const t of ps.timeoutAnalysis) {
       md += `| ${t.timeout} | ${t.commandsWithinTimeout}/${t.totalCommands} | ${t.coveragePercent}% |\n`;
     }
@@ -991,27 +991,27 @@ with sub-millisecond precision, classifying each feature as ESSENTIAL, USEFUL, C
 
   // AC6: Token Estimation
   if (auditData.tokenEstimation) {
-    md += `## 6. Token Estimation Accuracy\n\n`;
-    md += `| Content Type | Chars | Est. Tokens | Adjusted (*1.2) | Chars/Token |\n`;
-    md += `|-------------|-------|-------------|----------------|------------|\n`;
+    md += '## 6. Token Estimation Accuracy\n\n';
+    md += '| Content Type | Chars | Est. Tokens | Adjusted (*1.2) | Chars/Token |\n';
+    md += '|-------------|-------|-------------|----------------|------------|\n';
     for (const s of auditData.tokenEstimation.samples) {
       md += `| ${s.name} | ${s.chars} | ${s.estimatedTokens} | ${s.adjustedTokens} | ${s.charsPerTokenRatio} |\n`;
     }
-    md += `\n**Formula:** \`Math.ceil(text.length / 4)\` with \`1.2x\` XML safety multiplier\n`;
+    md += '\n**Formula:** `Math.ceil(text.length / 4)` with `1.2x` XML safety multiplier\n';
     if (auditData.tokenEstimation.existingSessions?.length > 0) {
-      md += `\n**Existing sessions with prompt_count > 0:**\n`;
+      md += '\n**Existing sessions with prompt_count > 0:**\n';
       for (const s of auditData.tokenEstimation.existingSessions) {
         md += `- ${s.file}: prompt_count=${s.promptCount}, bracket=${s.lastBracket}, tokens_used=${s.lastTokensUsed}\n`;
       }
     }
-    md += `\n`;
+    md += '\n';
   }
 
   // AC7: Classification Report
   if (classifications) {
-    md += `## 7. Feature Classification Report\n\n`;
-    md += `| Feature | Category | Tokens | Time (ms) | Verdict | Rationale |\n`;
-    md += `|---------|----------|--------|-----------|---------|-----------|\n`;
+    md += '## 7. Feature Classification Report\n\n';
+    md += '| Feature | Category | Tokens | Time (ms) | Verdict | Rationale |\n';
+    md += '|---------|----------|--------|-----------|---------|-----------|\n';
     for (const c of classifications) {
       md += `| ${c.name} | ${c.category} | ${c.tokens} | ${c.timeMs.toFixed(1)} | ${c.verdict} | ${c.rationale.substring(0, 80)}${c.rationale.length > 80 ? '...' : ''} |\n`;
     }
@@ -1025,34 +1025,34 @@ with sub-millisecond precision, classifying each feature as ESSENTIAL, USEFUL, C
     const cosmeticTokens = classifications.filter(c => c.category === 'COSMETIC').reduce((s, c) => s + c.tokens, 0);
     const totalTokens = classifications.reduce((s, c) => s + c.tokens, 0);
 
-    md += `\n### Summary\n\n`;
-    md += `| Category | Count | Tokens | % of Total |\n`;
-    md += `|----------|-------|--------|------------|\n`;
+    md += '\n### Summary\n\n';
+    md += '| Category | Count | Tokens | % of Total |\n';
+    md += '|----------|-------|--------|------------|\n';
     md += `| ESSENTIAL | ${essentialCount} | ${essentialTokens} | ${totalTokens > 0 ? (essentialTokens / totalTokens * 100).toFixed(0) : 0}% |\n`;
     md += `| USEFUL | ${usefulCount} | ${classifications.filter(c => c.category === 'USEFUL').reduce((s, c) => s + c.tokens, 0)} | ${totalTokens > 0 ? (classifications.filter(c => c.category === 'USEFUL').reduce((s, c) => s + c.tokens, 0) / totalTokens * 100).toFixed(0) : 0}% |\n`;
     md += `| COSMETIC | ${cosmeticCount} | ${cosmeticTokens} | ${totalTokens > 0 ? (cosmeticTokens / totalTokens * 100).toFixed(0) : 0}% |\n`;
     md += `| OVERHEAD | ${overheadCount} | ${classifications.filter(c => c.category === 'OVERHEAD').reduce((s, c) => s + c.tokens, 0)} | n/a |\n`;
-    md += `\n`;
+    md += '\n';
   }
 
   // Recommendations
-  md += `## 8. Recommendations\n\n`;
-  md += `### Top Optimization Targets\n\n`;
-  md += `1. **Git Detection:** Replace \`_isGitRepository()\` execSync with \`.git/HEAD\` existence check (saves ~50ms)\n`;
-  md += `2. **projectStatus Timeout:** Increase from 20ms or restructure to run fewer/async git commands\n`;
-  md += `3. **SYNAPSE Token Budget:** Review cosmetic layers in FRESH bracket — only L0,L1,L2,L7 are loaded but still may carry persona/greeting overhead\n\n`;
+  md += '## 8. Recommendations\n\n';
+  md += '### Top Optimization Targets\n\n';
+  md += '1. **Git Detection:** Replace `_isGitRepository()` execSync with `.git/HEAD` existence check (saves ~50ms)\n';
+  md += '2. **projectStatus Timeout:** Increase from 20ms or restructure to run fewer/async git commands\n';
+  md += '3. **SYNAPSE Token Budget:** Review cosmetic layers in FRESH bracket — only L0,L1,L2,L7 are loaded but still may carry persona/greeting overhead\n\n';
 
-  md += `### "Lean Activation" Scenario\n\n`;
-  md += `If we stripped everything non-essential (COSMETIC + OVERHEAD):\n`;
+  md += '### "Lean Activation" Scenario\n\n';
+  md += 'If we stripped everything non-essential (COSMETIC + OVERHEAD):\n';
   if (classifications) {
     const removableTokens = classifications.filter(c => c.category === 'COSMETIC' || c.category === 'OVERHEAD').reduce((s, c) => s + c.tokens, 0);
     const removableTime = classifications.filter(c => c.category === 'COSMETIC' || c.category === 'OVERHEAD').reduce((s, c) => s + c.timeMs, 0);
     md += `- **Tokens saved:** ~${removableTokens}\n`;
     md += `- **Time saved:** ~${removableTime.toFixed(0)}ms\n`;
-    md += `- **Note:** Cosmetic features (greeting, persona) serve UX purpose — removal not recommended unless context is critical\n\n`;
+    md += '- **Note:** Cosmetic features (greeting, persona) serve UX purpose — removal not recommended unless context is critical\n\n';
   }
 
-  md += `---\n\n*Report generated by NOG-17 pipeline audit script*\n`;
+  md += '---\n\n*Report generated by NOG-17 pipeline audit script*\n';
 
   return md;
 }
@@ -1064,7 +1064,7 @@ async function main() {
   const args = process.argv.slice(2);
   const mode = args.find(a => a.startsWith('--')) || '--full';
 
-  console.log(`\nNOG-17: E2E Pipeline Audit`);
+  console.log('\nNOG-17: E2E Pipeline Audit');
   console.log(`Mode: ${mode}`);
   console.log(`Project: ${PROJECT_ROOT}`);
   console.log(`Timestamp: ${new Date().toISOString()}`);
@@ -1076,7 +1076,7 @@ async function main() {
       // AC1: Agent Activation
       auditData.agentActivation = await auditAgentActivation(
         mode === '--quick' ? ['dev', 'qa', 'architect'] : ALL_AGENTS,
-        mode === '--quick' ? 1 : RUNS_PER_AGENT
+        mode === '--quick' ? 1 : RUNS_PER_AGENT,
       );
 
       // AC4: SYNAPSE Rule Analysis (always fast, no agents needed)
@@ -1126,14 +1126,14 @@ async function main() {
       data: auditData,
       classifications,
     });
-    console.log(`\nRaw data saved: .synapse/metrics/audit/NOG-17-raw.json`);
+    console.log('\nRaw data saved: .synapse/metrics/audit/NOG-17-raw.json');
 
     // Generate report (full mode only)
     if (mode === '--full') {
       const report = generateReport(auditData, classifications);
       ensureDir(path.dirname(REPORT_PATH));
       fs.writeFileSync(REPORT_PATH, report, 'utf8');
-      console.log(`Report saved: docs/qa/NOG-17-pipeline-audit-report.md`);
+      console.log('Report saved: docs/qa/NOG-17-pipeline-audit-report.md');
     }
 
     console.log('\nAudit complete.');

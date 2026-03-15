@@ -280,7 +280,7 @@ Examples:
  * Handle default summary view: dependency tree (compact) + stats + provider status.
  * @param {Object} args - Parsed CLI args
  */
-async function handleSummary(args) {
+async function handleSummary(_args) {
   const codeIntelSource = new CodeIntelSource();
   const registrySource = new RegistrySource();
   const metricsSource = new MetricsSource();

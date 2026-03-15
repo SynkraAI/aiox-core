@@ -88,29 +88,6 @@ function ensureDir(dirPath) {
 }
 
 /**
- * Ensure .synapse/.gitignore exists with required entries
- *
- * @param {string} synapsePath - Path to .synapse/ directory
- */
-function ensureGitignore(synapsePath) {
-  const gitignorePath = path.join(synapsePath, '.gitignore');
-
-  if (fs.existsSync(gitignorePath)) {
-    return;
-  }
-
-  const content = [
-    '# SYNAPSE runtime data (auto-generated)',
-    'sessions/',
-    'cache/',
-    '',
-  ].join('\n');
-
-  ensureDir(synapsePath);
-  fs.writeFileSync(gitignorePath, content, 'utf8');
-}
-
-/**
  * Create a new session
  *
  * Creates the session JSON file with schema v2.0 defaults.
@@ -124,10 +101,6 @@ function ensureGitignore(synapsePath) {
 function createSession(sessionId, cwd, sessionsDir) {
   const dir = sessionsDir || path.join(cwd, '.synapse', 'sessions');
   ensureDir(dir);
-
-  // Ensure .gitignore exists in .synapse/
-  const synapsePath = path.dirname(dir);
-  ensureGitignore(synapsePath);
 
   const session = buildDefaultSession(sessionId, cwd);
   const filePath = resolveSessionFile(sessionId, dir);
@@ -399,6 +372,5 @@ module.exports = {
   deleteSession,
   cleanStaleSessions,
   generateTitle,
-  ensureGitignore,
   SCHEMA_VERSION,
 };

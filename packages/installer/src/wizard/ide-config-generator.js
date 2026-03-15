@@ -264,7 +264,7 @@ async function copyAgentFiles(projectRoot, agentFolder, ideConfig = null) {
           const targetPath = path.join(targetDir, filename);
           await fs.writeFile(targetPath, content, 'utf8');
           copiedFiles.push(targetPath);
-        } catch (transformError) {
+        } catch (_transformError) {
           // Fallback: copy raw file with .agent.md extension
           const targetPath = path.join(targetDir, `${agentName}.agent.md`);
           await fs.copy(sourcePath, targetPath);

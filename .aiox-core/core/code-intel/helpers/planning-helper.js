@@ -7,7 +7,7 @@ const { getEnricher, getClient, isCodeIntelAvailable } = require('../index');
 const RISK_THRESHOLDS = {
   LOW_MAX: 4,       // 0-4 refs = LOW
   MEDIUM_MAX: 15,   // 5-15 refs = MEDIUM
-                     // >15 refs = HIGH
+  // >15 refs = HIGH
 };
 
 /**
