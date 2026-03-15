@@ -53,6 +53,21 @@ Use for dependency graphs and circular dependency detection.
 - **Dependency tree:** Generate graph for a package with configurable depth
 - **Circular check:** Detect circular dependency chains in the project
 
+### jcodemunch — Code Intelligence & Token Reducer (Essential)
+Use INSTEAD OF Read/Grep para navegar código. Redução de 99% em tokens via AST indexing.
+**FLUXO OBRIGATÓRIO antes de usar:** verifique se o projeto está indexado com `list_repos`.
+Se não indexado: `index_folder` com o path do projeto (executar apenas uma vez).
+- **Indexar projeto:** `index_folder({ "folder_path": "D:/aiox-genesis/aiox-core/projeto-one" })`
+- **Verificar índice:** `list_repos({})` — lista projetos indexados
+- **Visão geral do projeto:** `get_repo_outline({ "repo": "projeto-one" })`
+- **Buscar função/classe:** `search_symbols({ "repo": "projeto-one", "query": "useAioxState" })`
+- **Obter símbolo completo:** `get_symbol({ "repo": "projeto-one", "symbol_id": "lib/hooks/use-aiox-state.ts::useAioxState" })`
+- **Trecho de arquivo:** `get_file_content({ "repo": "projeto-one", "file_path": "server/index.js", "start_line": 1, "end_line": 50 })`
+- **Busca full-text:** `search_text({ "repo": "projeto-one", "query": "SSE event-stream" })`
+- **Reindexar após refactor:** `invalidate_cache({ "repo": "projeto-one" })` → `index_folder`
+
+**Regra de prioridade:** jcodemunch > Grep > Read (para arquivos de código)
+
 ### docker-gateway — MCP Infrastructure
 Use for managing Docker-based MCP servers. `@devops` manages infrastructure.
 - **Health check:** `curl http://localhost:8080/health`
