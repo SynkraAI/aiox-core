@@ -10,6 +10,7 @@ cd /Users/luizfosc/aios-core || {
 
 # Check if there are changes to commit
 if git diff --quiet HEAD && git diff --cached --quiet && [ -z "$(git ls-files --others --exclude-standard)" ]; then
+  echo "👍"
   osascript -e 'display notification "Nada para enviar — tudo já está no GitHub" with title "AIOS Backup" sound name "Pop"'
   exit 0
 fi
@@ -31,6 +32,7 @@ fi
 
 # Push to GitHub
 if git push origin main; then
+  echo "👍"
   osascript -e 'display notification "Backup enviado com sucesso!" with title "AIOS Backup ✓" sound name "Glass"'
 else
   echo "🚨 ❌ ERRO: Push para GitHub falhou"
