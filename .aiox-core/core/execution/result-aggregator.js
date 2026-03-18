@@ -15,15 +15,15 @@ class ResultAggregator extends EventEmitter {
     super();
 
     // Root path for reports
-    this.rootPath = config.rootPath || process.cwd();
-    this.reportDir = config.reportDir || path.join(this.rootPath, 'plan');
+    this.rootPath = config.rootPath ?? process.cwd();
+    this.reportDir = config.reportDir ?? path.join(this.rootPath, 'plan');
 
     // Conflict detection settings
     this.detectConflicts = config.detectConflicts !== false;
 
     // Aggregation history
     this.history = [];
-    this.maxHistory = config.maxHistory || 50;
+    this.maxHistory = config.maxHistory ?? 50;
   }
 
   /**
@@ -36,8 +36,8 @@ class ResultAggregator extends EventEmitter {
 
     const aggregation = {
       id: `agg-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-      waveIndex: waveResults.waveIndex || waveResults.wave,
-      startedAt: waveResults.startedAt || new Date().toISOString(),
+      waveIndex: waveResults.waveIndex ?? waveResults.wave,
+      startedAt: waveResults.startedAt ?? new Date().toISOString(),
       completedAt: new Date().toISOString(),
       tasks: [],
       conflicts: [],
@@ -46,15 +46,15 @@ class ResultAggregator extends EventEmitter {
     };
 
     // Collect task results
-    const results = waveResults.results || [];
+    const results = waveResults.results ?? [];
     for (const result of results) {
       aggregation.tasks.push({
         taskId: result.taskId,
-        agentId: result.agentId || 'unknown',
+        agentId: result.agentId ?? 'unknown',
         success: result.success,
-        filesModified: result.filesModified || this.extractFilesFromOutput(result.output),
-        duration: result.duration || 0,
-        output: this.summarizeOutput(result.output || result.result?.output),
+        filesModified: result.filesModified ?? this.extractFilesFromOutput(result.output),
+        duration: result.duration ?? 0,
+        output: this.summarizeOutput(result.output ?? result.result?.output),
         error: result.error,
       });
     }
@@ -138,7 +138,7 @@ class ResultAggregator extends EventEmitter {
     const conflicts = [];
 
     for (const task of tasks) {
-      const files = task.filesModified || [];
+      const files = task.filesModified ?? [];
 
       for (const file of files) {
         if (fileModifications.has(file)) {
@@ -304,7 +304,7 @@ class ResultAggregator extends EventEmitter {
     const tasks = aggregation.tasks;
     const successful = tasks.filter((t) => t.success).length;
     const failed = tasks.filter((t) => !t.success).length;
-    const totalDuration = tasks.reduce((sum, t) => sum + (t.duration || 0), 0);
+    const totalDuration = tasks.reduce((sum, t) => sum + (t.duration ?? 0), 0);
 
     // Calculate wall time
     const wallTime = Date.now() - startTime;
@@ -336,7 +336,7 @@ class ResultAggregator extends EventEmitter {
   calculateOverallMetrics(consolidated) {
     const allTasks = consolidated.allTasks;
     const successful = allTasks.filter((t) => t.success).length;
-    const totalDuration = allTasks.reduce((sum, t) => sum + (t.duration || 0), 0);
+    const totalDuration = allTasks.reduce((sum, t) => sum + (t.duration ?? 0), 0);
 
     // Calculate wave metrics
     const waveSuccessRates = consolidated.waves.map((w) => w.metrics.successRate);
