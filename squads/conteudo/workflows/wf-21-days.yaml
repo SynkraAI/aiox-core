@@ -1,0 +1,98 @@
+name: wf-21-days
+description: Workflow do Sistema de Dominacao 21 Dias — reposicionamento cerebral, amplificacao de autoridade e extracao continua
+version: "1.0"
+
+phases:
+  - id: fase1
+    name: "Fase 1 — Reposicionamento Cerebral (Dias 1-7)"
+    agent: strategist
+    description: Mudar percepcao da audiencia com Bio Imperial, primeiro CLC e StoryAds diarios
+    veto_condition: "Bio Imperial nao criada ou CLC sem validacao do oraculo (score < 80%) -> VETO"
+    elicit: true
+    steps:
+      - "Dia 1: Publicar nova Bio Imperial no perfil"
+      - "Dia 1: Publicar primeiro Carrossel de Lavagem Cerebral (CLC)"
+      - "Dias 1-7: StoryAds diarios (1-2 por dia) com imagens casuais"
+      - "Dia 3: Monitorar reacoes e engajamento"
+      - "Dia 5: Ajustar tom dos StoryAds baseado em respostas"
+      - "Dia 7: Avaliar metricas da fase 1"
+    tasks:
+      - create-bio
+      - create-clc
+      - create-storyadd
+    outputs:
+      - bio_publicada
+      - clc_1_publicado
+      - storyadds_semana_1
+      - metricas_fase_1
+    checkpoint: Bio ativa + CLC publicado + 7 dias de StoryAds + metricas coletadas
+    metricas:
+      - engajamento_medio_stories
+      - saves_clc
+      - dms_recebidos
+      - percepcao_audiencia
+
+  - id: fase2
+    name: "Fase 2 — Amplificacao de Autoridade (Dias 8-21)"
+    agent: strategist
+    description: Escalar autoridade com mais CLCs, subida de preco e filtragem de leads
+    veto_condition: "Metricas da fase 1 nao coletadas ou engajamento medio de stories zerado -> VETO"
+    depends_on: [fase1]
+    elicit: true
+    steps:
+      - "Dias 8-10: Criar e publicar 2o CLC (tema complementar)"
+      - "Dia 10: Subir preco +30% (reposicionar ticket)"
+      - "Dias 11-14: StoryAds com provas de resultado (prints, depoimentos)"
+      - "Dia 14: Criar e publicar 3o CLC"
+      - "Dias 15-18: Filtrar leads — afastar curiosos, atrair compradores"
+      - "Dias 19-21: Avaliar metricas e preparar transicao para Fase 3"
+    tasks:
+      - create-clc
+      - create-storyadd
+      - create-levantada-mao
+    outputs:
+      - clc_2_publicado
+      - clc_3_publicado
+      - storyadds_provas
+      - preco_reposicionado
+      - leads_filtrados
+      - metricas_fase_2
+    checkpoint: 3 CLCs publicados + preco ajustado + leads qualificados identificados
+    metricas:
+      - dms_qualificados
+      - vendas_realizadas
+      - ticket_medio
+      - engagement_rate_crescimento
+
+  - id: fase3
+    name: "Fase 3 — Extracao Continua (Dias 22-60)"
+    agent: content-planner
+    description: Sistema de vendas perpetuo com escada de ofertas e ritual semanal
+    veto_condition: "Menos de 3 CLCs publicados ou nenhum lead qualificado identificado na fase 2 -> VETO"
+    depends_on: [fase2]
+    elicit: true
+    steps:
+      - "Dia 22: Definir escada de 3 niveis de oferta (entrada, core, premium)"
+      - "Dias 22-30: Implementar vendas via DM silencioso"
+      - "Semanal: Ritual de conteudo (1 CLC + StoryAds diarios)"
+      - "Quinzenal: Rodar Story Direto (E6) para levantada de mao"
+      - "Mensal: Executar 1 estrategia completa (E1, E4 ou E8)"
+      - "Dia 60: Avaliacao geral e ajuste de sistema"
+    tasks:
+      - create-strategy
+      - create-levantada-mao
+      - create-storyadd
+      - create-clc
+    outputs:
+      - escada_ofertas
+      - sistema_vendas_dm
+      - ritual_semanal
+      - calendario_mensal
+      - metricas_fase_3
+    checkpoint: Sistema perpetuo funcionando com vendas recorrentes
+    metricas:
+      - faturamento_mensal
+      - leads_por_semana
+      - conversao_dm
+      - ticket_medio_crescimento
+      - retorno_sobre_conteudo

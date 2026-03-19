@@ -1,0 +1,603 @@
+#!/usr/bin/env python3
+"""
+Gerador de Carrossel OPES — Brand Guide Compliant
+Gera slides 1080x1350 (4:5) com estética dark mode / terminal
+Fonte: SFNS (San Francisco) — fallback para Helvetica
+"""
+
+import os
+import sys
+from PIL import Image, ImageDraw, ImageFont
+
+# ============================================
+# BRAND GUIDE COLORS
+# ============================================
+COLORS = {
+    "dark_bg": (15, 15, 19),         # #0f0f13
+    "surface": (211116, 26, 36),         # #1a1a24
+    "surface_2": (34, 34, 46),       # #22222e
+    "purple": (139, 92, 246),        # #8b5cf6
+    "purple_light": (167, 139, 250), # #a78bfa
+    "cyan": (6, 182, 212),           # #06b6d4
+    "cyan_light": (103, 232, 249),   # #67e8f9
+    "text_primary": (232, 232, 240), # #e8e8f0
+    "text_muted": (136, 136, 160),   # #8888a0
+    "text_dim": (90, 90, 112),       # #5a5a70
+    "success": (16, 185, 129),       # #10b981
+    "card_border": (51, 54, 57),     # #333639
+    "twitter_bg": (21, 32, 43),      # #15202b
+    "twitter_card": (25, 39, 52),    # #192734
+}
+
+WIDTH = 1080
+HEIGHT = 1350
+
+# ============================================
+# FONT LOADING
+# ============================================
+def load_font(size, bold=False):
+    """Load SF or Helvetica font."""
+    paths = [
+        "/System/Library/Fonts/SFNS.ttf",
+        "/System/Library/Fonts/SFCompact.ttf",
+        "/System/Library/Fonts/Helvetica.ttc",
+        "/System/Library/Fonts/Geneva.ttf",
+    ]
+    for p in paths:
+        try:
+            font = ImageFont.truetype(p, size)
+            return font
+        except (OSError, IOError):
+            continue
+    return ImageFont.load_default()
+
+
+def load_mono_font(size):
+    """Load monospace font."""
+    paths = [
+        "/System/Library/Fonts/SFNSMono.ttf",
+        "/System/Library/Fonts/Menlo.ttc",
+    ]
+    for p in paths:
+        try:
+            return ImageFont.truetype(p, size)
+        except (OSError, IOError):
+            continue
+    return load_font(size)
+
+
+# ============================================
+# DRAWING HELPERS
+# ============================================
+def new_slide():
+    """Create a new dark mode slide."""
+    img = Image.new("RGB", (WIDTH, HEIGHT), COLORS["dark_bg"])
+    return img, ImageDraw.Draw(img)
+
+
+def draw_rounded_rect(draw, xy, fill, outline=None, radius=16):
+    """Draw a rounded rectangle."""
+    x0, y0, x1, y1 = xy
+    draw.rounded_rectangle(xy, radius=radius, fill=fill, outline=outline)
+
+
+def draw_text_centered(draw, text, y, font, fill=None):
+    """Draw centered text at y position."""
+    if fill is None:
+        fill = COLORS["text_primary"]
+    bbox = draw.textbbox((0, 0), text, font=font)
+    tw = bbox[2] - bbox[0]
+    x = (WIDTH - tw) // 2
+    draw.text((x, y), text, font=font, fill=fill)
+    return bbox[3] - bbox[1]
+
+
+def draw_text_left(draw, text, x, y, font, fill=None, max_width=None):
+    """Draw left-aligned text with optional wrapping."""
+    if fill is None:
+        fill = COLORS["text_primary"]
+    if max_width is None:
+        draw.text((x, y), text, font=font, fill=fill)
+        bbox = draw.textbbox((0, 0), text, font=font)
+        return bbox[3] - bbox[1]
+
+    words = text.split()
+    lines = []
+    current = ""
+    for w in words:
+        test = f"{current} {w}".strip()
+        bbox = draw.textbbox((0, 0), test, font=font)
+        if bbox[2] - bbox[0] > max_width:
+            if current:
+                lines.append(current)
+            current = w
+        else:
+            current = test
+    if current:
+        lines.append(current)
+
+    total_h = 0
+    for line in lines:
+        draw.text((x, y + total_h), line, font=font, fill=fill)
+        bbox = draw.textbbox((0, 0), line, font=font)
+        total_h += int((bbox[3] - bbox[1]) * 1.4)
+    return total_h
+
+
+def draw_glow_line(draw, y, color, width_pct=0.6):
+    """Draw a subtle horizontal glow line."""
+    margin = int(WIDTH * (1 - width_pct) / 2)
+    for i in range(3):
+        alpha_color = tuple(max(0, c - i * 30) for c in color)
+        draw.line([(margin, y + i), (WIDTH - margin, y + i)], fill=alpha_color, width=1)
+
+
+def draw_accent_dot(draw, x, y, color, radius=6):
+    """Draw an accent dot."""
+    draw.ellipse([x - radius, y - radius, x + radius, y + radius], fill=color)
+
+
+def draw_slide_number(draw, current, total):
+    """Draw slide number indicator."""
+    font = load_font(28)
+    text = f"{current}/{total}"
+    draw_text_centered(draw, text, HEIGHT - 80, font, COLORS["text_dim"])
+
+
+def draw_signature(draw):
+    """Draw @josecarlosamorim.ai signature."""
+    font = load_font(24)
+    text = "@josecarlosamorim.ai"
+    bbox = draw.textbbox((0, 0), text, font=font)
+    tw = bbox[2] - bbox[0]
+    draw.text((WIDTH - tw - 40, HEIGHT - 50), text, font=font, fill=COLORS["text_dim"])
+
+
+# ============================================
+# SLIDE GENERATORS
+# ============================================
+
+def slide_cover():
+    """Slide 1: Cover — Hook."""
+    img, draw = new_slide()
+
+    # Glow accent top
+    for i in range(80):
+        alpha = max(0, 30 - i)
+        draw.line([(0, i), (WIDTH, i)],
+                  fill=(COLORS["purple"][0], COLORS["purple"][1], COLORS["purple"][2]),
+                  width=1)
+        # Fake alpha via color blend
+        r = int(COLORS["dark_bg"][0] + (COLORS["purple"][0] - COLORS["dark_bg"][0]) * alpha / 100)
+        g = int(COLORS["dark_bg"][1] + (COLORS["purple"][1] - COLORS["dark_bg"][1]) * alpha / 100)
+        b = int(COLORS["dark_bg"][2] + (COLORS["purple"][2] - COLORS["dark_bg"][2]) * alpha / 100)
+        draw.line([(0, i), (WIDTH, i)], fill=(r, g, b), width=1)
+
+    # Main headline
+    font_big = load_font(72)
+    font_sub = load_font(36)
+    font_small = load_font(28)
+
+    y = 380
+    draw_text_centered(draw, "Tenho 16", y, font_big, COLORS["text_primary"])
+    y += 90
+    draw_text_centered(draw, "funcionários.", y, font_big, COLORS["text_primary"])
+    y += 120
+    draw_text_centered(draw, "Nenhum é humano.", y, font_big, COLORS["purple_light"])
+
+    y += 160
+    draw_glow_line(draw, y, COLORS["purple"], 0.4)
+
+    y += 40
+    draw_text_centered(draw, "Conheça o time que opera minha empresa", y, font_sub, COLORS["text_muted"])
+    y += 50
+    draw_text_centered(draw, "sem que eu precise contratar ninguém.", y, font_sub, COLORS["text_muted"])
+
+    y += 80
+    draw_text_centered(draw, "deslize →", y, font_small, COLORS["text_dim"])
+
+    draw_slide_number(draw, 1, 9)
+    draw_signature(draw)
+    return img
+
+
+def slide_quem_sou():
+    """Slide 2: Quem é o José."""
+    img, draw = new_slide()
+
+    font_label = load_font(24)
+    font_name = load_font(56)
+    font_title = load_font(32)
+    font_body = load_font(28)
+    font_detail = load_font(24)
+
+    y = 120
+    draw_text_centered(draw, "QUEM SOU EU", y, font_label, COLORS["purple"])
+
+    y += 80
+    draw_glow_line(draw, y, COLORS["purple"], 0.3)
+
+    y += 50
+    draw_text_centered(draw, "José Carlos Amorim", y, font_name, COLORS["text_primary"])
+
+    y += 80
+    draw_text_centered(draw, "Nexialista | CEO Augmentado", y, font_title, COLORS["cyan"])
+
+    y += 80
+
+    # Info cards
+    infos = [
+        ("ANTES", "Âncora de TV por 10 anos", "Rede Amazônica + CBN | 300K viewers/dia"),
+        ("AGORA", "OPES — One Person Enterprise System", "1 pessoa operando como empresa de 16 via IA"),
+        ("SUPERPOWER", "Tradução de Complexidade", "Pego o complicado e transformo em claro"),
+        ("OBSESSÃO", "Democratizar IA", "Sem perder profundidade. Sem simplificar demais."),
+    ]
+
+    for label, main, detail in infos:
+        # Card background
+        card_y = y
+        draw_rounded_rect(draw, (60, card_y, WIDTH - 60, card_y + 130),
+                          fill=COLORS["surface"], outline=COLORS["card_border"], radius=12)
+        # Label
+        draw.text((90, card_y + 15), label, font=font_label, fill=COLORS["purple"])
+        # Main text
+        draw.text((90, card_y + 48), main, font=font_body, fill=COLORS["text_primary"])
+        # Detail
+        draw_text_left(draw, detail, 90, card_y + 88, font_detail, COLORS["text_muted"], max_width=WIDTH - 180)
+
+        y += 155
+
+    draw_slide_number(draw, 2, 9)
+    draw_signature(draw)
+    return img
+
+
+def slide_opes():
+    """Slide 3: O que é OPES."""
+    img, draw = new_slide()
+
+    font_label = load_font(24)
+    font_big = load_font(48)
+    font_tagline = load_font(36)
+    font_body = load_font(28)
+    font_mono = load_mono_font(22)
+
+    y = 120
+    draw_text_centered(draw, "O SISTEMA", y, font_label, COLORS["cyan"])
+
+    y += 80
+    draw_text_centered(draw, "OPES", y, font_big, COLORS["text_primary"])
+    y += 60
+    draw_text_centered(draw, "One Person Enterprise System", y, font_tagline, COLORS["purple_light"])
+
+    y += 80
+    draw_glow_line(draw, y, COLORS["cyan"], 0.3)
+
+    y += 50
+    draw_text_centered(draw, "1 pessoa. 1 sistema. 6 braços.", y, font_tagline, COLORS["text_primary"])
+
+    y += 80
+
+    # Organograma visual simples
+    roles = [
+        ("CMO", "Estratégia", COLORS["purple"]),
+        ("IDEAÇÃO", "Big Ideas", COLORS["cyan"]),
+        ("PRODUÇÃO", "Escrita", COLORS["purple"]),
+        ("DESIGNER", "Visual", COLORS["cyan"]),
+        ("DISTRIBUIÇÃO", "Plataformas", COLORS["purple"]),
+        ("MÉTRICAS", "Analytics", COLORS["cyan"]),
+    ]
+
+    # 2 columns, 3 rows
+    col_w = 440
+    row_h = 110
+    start_x = (WIDTH - 2 * col_w - 40) // 2
+    for i, (role, desc, color) in enumerate(roles):
+        col = i % 2
+        row = i // 2
+        x = start_x + col * (col_w + 40)
+        cy = y + row * (row_h + 15)
+
+        draw_rounded_rect(draw, (x, cy, x + col_w, cy + row_h),
+                          fill=COLORS["surface"], outline=color, radius=10)
+        draw_accent_dot(draw, x + 25, cy + row_h // 2, color, 8)
+        draw.text((x + 45, cy + 18), role, font=font_label, fill=color)
+        draw.text((x + 45, cy + 52), desc, font=font_body, fill=COLORS["text_muted"])
+
+    draw_slide_number(draw, 3, 9)
+    draw_signature(draw)
+    return img
+
+
+def slide_agent(num, total, label, agent_name, mind_source, role_desc, detail_lines, color):
+    """Generic agent slide."""
+    img, draw = new_slide()
+
+    font_label = load_font(24)
+    font_agent = load_font(48)
+    font_mind = load_font(32)
+    font_body = load_font(28)
+    font_detail = load_font(26)
+    font_quote = load_font(30)
+
+    y = 120
+    draw_text_centered(draw, label, y, font_label, color)
+
+    y += 80
+    draw_text_centered(draw, agent_name, y, font_agent, COLORS["text_primary"])
+
+    y += 65
+    draw_text_centered(draw, f"Mind: {mind_source}", y, font_mind, color)
+
+    y += 70
+    draw_glow_line(draw, y, color, 0.3)
+
+    y += 50
+
+    # Role description in card
+    draw_rounded_rect(draw, (60, y, WIDTH - 60, y + 100),
+                      fill=COLORS["surface"], outline=color, radius=12)
+    draw_text_left(draw, role_desc, 90, y + 20, font_body, COLORS["text_primary"], max_width=WIDTH - 180)
+    y += 130
+
+    # Detail lines
+    for line in detail_lines:
+        draw_accent_dot(draw, 90, y + 16, color, 5)
+        draw_text_left(draw, line, 115, y, font_detail, COLORS["text_muted"], max_width=WIDTH - 200)
+        y += 55
+
+    # Quote at bottom
+    y += 30
+    draw_rounded_rect(draw, (80, y, WIDTH - 80, y + 90),
+                      fill=COLORS["surface_2"], radius=10)
+    quote = detail_lines[-1] if detail_lines else ""
+    draw.text((100, y + 25), f'"{quote}"', font=font_detail, fill=COLORS["text_dim"])
+
+    draw_slide_number(draw, num, total)
+    draw_signature(draw)
+    return img
+
+
+def slide_cmo():
+    """Slide 4: CMO — Seth Godin."""
+    return slide_agent(
+        num=4, total=9,
+        label="CMO — ESTRATÉGIA",
+        agent_name="Seth Godin",
+        mind_source="Clone Cognitivo",
+        role_desc="Decide SE o conteúdo é notável. Se não é, não sai.",
+        detail_lines=[
+            "Smallest Viable Audience — pra QUEM?",
+            "Purple Cow — é notável ou medíocre?",
+            "Permission Marketing — constrói confiança?",
+            "Score mínimo: 4/5 pra avançar",
+            "Se não é remarkable, não publica.",
+        ],
+        color=COLORS["purple"]
+    )
+
+
+def slide_ideation():
+    """Slide 5: Ideação — Dan Koe."""
+    return slide_agent(
+        num=5, total=9,
+        label="IDEAÇÃO — BIG IDEAS",
+        agent_name="Dan Koe",
+        mind_source="Clone Cognitivo",
+        role_desc="Gera a matéria-prima: tema, ângulo, provocação.",
+        detail_lines=[
+            "Content Map com 3 territórios",
+            "1 Idea → 3 ângulos → o melhor avança",
+            "Rotação semanal de temas",
+            "Só ideias com PROVA REAL",
+            "Sem prova, sem post.",
+        ],
+        color=COLORS["cyan"]
+    )
+
+
+def slide_production():
+    """Slide 6: Produção — Voz do José."""
+    return slide_agent(
+        num=6, total=9,
+        label="PRODUÇÃO — ESCRITA",
+        agent_name="Copywriter OPES",
+        mind_source="DNA de Voz do José",
+        role_desc="Escreve na MINHA voz. Não na voz de IA.",
+        detail_lines=[
+            "200+ padrões de linguagem proibidos",
+            "Checklist de autenticidade em cada post",
+            "Começa com cena real, nunca teoria",
+            "Números reais, não arredondados",
+            "Se parece IA, reescreve.",
+        ],
+        color=COLORS["purple"]
+    )
+
+
+def slide_restante():
+    """Slide 7: Designer + Distribuição + Métricas."""
+    img, draw = new_slide()
+
+    font_label = load_font(24)
+    font_title = load_font(40)
+    font_role = load_font(30)
+    font_body = load_font(26)
+
+    y = 120
+    draw_text_centered(draw, "O RESTO DO TIME", y, font_label, COLORS["cyan"])
+
+    y += 80
+    draw_text_centered(draw, "3 agentes de suporte", y, font_title, COLORS["text_primary"])
+
+    y += 80
+    draw_glow_line(draw, y, COLORS["cyan"], 0.3)
+
+    agents = [
+        ("DESIGNER", "Direção visual — define formato, gera prompts de imagem, segue brand guide", COLORS["purple"]),
+        ("DISTRIBUIÇÃO", "Adapta IG + LinkedIn em paralelo — nunca copy-paste entre plataformas", COLORS["cyan"]),
+        ("MÉTRICAS", "Análise semanal — Save Rate, DMs, Purple Cow Average. Dados reais via Apify.", COLORS["purple"]),
+    ]
+
+    y += 40
+    for role, desc, color in agents:
+        draw_rounded_rect(draw, (60, y, WIDTH - 60, y + 180),
+                          fill=COLORS["surface"], outline=color, radius=12)
+        draw_accent_dot(draw, 90, y + 30, color, 8)
+        draw.text((115, y + 15), role, font=font_role, fill=color)
+        draw_text_left(draw, desc, 90, y + 65, font_body, COLORS["text_muted"], max_width=WIDTH - 180)
+        y += 210
+
+    draw_slide_number(draw, 7, 9)
+    draw_signature(draw)
+    return img
+
+
+def slide_resultado():
+    """Slide 8: Resultado."""
+    img, draw = new_slide()
+
+    font_label = load_font(24)
+    font_big = load_font(44)
+    font_body = load_font(30)
+    font_stat = load_font(56)
+    font_stat_label = load_font(22)
+
+    y = 120
+    draw_text_centered(draw, "O RESULTADO", y, font_label, COLORS["purple"])
+
+    y += 80
+    draw_text_centered(draw, "Esse post que tu tá lendo?", y, font_big, COLORS["text_primary"])
+    y += 60
+    draw_text_centered(draw, "Foi feito por eles.", y, font_big, COLORS["purple_light"])
+
+    y += 80
+    draw_glow_line(draw, y, COLORS["purple"], 0.4)
+
+    y += 50
+
+    # Stats grid
+    stats = [
+        ("6", "agentes IA"),
+        ("84", "commits/mês"),
+        ("9", "clones cognitivos"),
+        ("0", "funcionários humanos"),
+    ]
+
+    col_w = 420
+    row_h = 160
+    start_x = (WIDTH - 2 * col_w - 40) // 2
+    for i, (num, label) in enumerate(stats):
+        col = i % 2
+        row = i // 2
+        x = start_x + col * (col_w + 40)
+        cy = y + row * (row_h + 20)
+
+        color = COLORS["purple"] if i % 2 == 0 else COLORS["cyan"]
+        draw_rounded_rect(draw, (x, cy, x + col_w, cy + row_h),
+                          fill=COLORS["surface"], outline=color, radius=12)
+
+        # Number centered
+        bbox = draw.textbbox((0, 0), num, font=font_stat)
+        nw = bbox[2] - bbox[0]
+        draw.text((x + (col_w - nw) // 2, cy + 25), num, font=font_stat, fill=color)
+
+        # Label centered
+        bbox2 = draw.textbbox((0, 0), label, font=font_stat_label)
+        lw = bbox2[2] - bbox2[0]
+        draw.text((x + (col_w - lw) // 2, cy + 105), label, font=font_stat_label, fill=COLORS["text_muted"])
+
+    y += 2 * (row_h + 20) + 40
+    draw_text_centered(draw, "Da ideia ao post publicado.", y, font_body, COLORS["text_muted"])
+    y += 45
+    draw_text_centered(draw, "Automático.", y, font_body, COLORS["text_primary"])
+
+    draw_slide_number(draw, 8, 9)
+    draw_signature(draw)
+    return img
+
+
+def slide_cta():
+    """Slide 9: CTA."""
+    img, draw = new_slide()
+
+    font_label = load_font(24)
+    font_big = load_font(48)
+    font_body = load_font(32)
+    font_cta = load_font(36)
+    font_handle = load_font(28)
+
+    # Glow accent bottom
+    for i in range(80):
+        yi = HEIGHT - 80 + i
+        r = int(COLORS["dark_bg"][0] + (COLORS["cyan"][0] - COLORS["dark_bg"][0]) * max(0, 30 - i) / 100)
+        g = int(COLORS["dark_bg"][1] + (COLORS["cyan"][1] - COLORS["dark_bg"][1]) * max(0, 30 - i) / 100)
+        b = int(COLORS["dark_bg"][2] + (COLORS["cyan"][2] - COLORS["dark_bg"][2]) * max(0, 30 - i) / 100)
+        draw.line([(0, yi), (WIDTH, yi)], fill=(r, g, b), width=1)
+
+    y = 300
+    draw_text_centered(draw, "Quer ver como funciona", y, font_big, COLORS["text_primary"])
+    y += 65
+    draw_text_centered(draw, "por dentro?", y, font_big, COLORS["text_primary"])
+
+    y += 100
+    draw_glow_line(draw, y, COLORS["cyan"], 0.3)
+
+    y += 60
+
+    # CTA buttons
+    ctas = [
+        ("Salva esse post", COLORS["purple"]),
+        ("Segue pra acompanhar", COLORS["cyan"]),
+        ("Me manda um DM", COLORS["purple"]),
+    ]
+
+    for text, color in ctas:
+        bbox = draw.textbbox((0, 0), text, font=font_cta)
+        tw = bbox[2] - bbox[0]
+        th = bbox[3] - bbox[1]
+        bx = (WIDTH - tw) // 2 - 30
+        draw_rounded_rect(draw, (bx, y, bx + tw + 60, y + th + 30),
+                          fill=COLORS["surface"], outline=color, radius=10)
+        draw_text_centered(draw, text, y + 10, font_cta, color)
+        y += th + 60
+
+    y += 20
+    draw_text_centered(draw, "@josecarlosamorim.ai", y, font_handle, COLORS["text_muted"])
+
+    draw_slide_number(draw, 9, 9)
+    return img
+
+
+# ============================================
+# MAIN
+# ============================================
+def main():
+    output_dir = sys.argv[1] if len(sys.argv) > 1 else "."
+
+    os.makedirs(output_dir, exist_ok=True)
+
+    slides = [
+        ("01-cover", slide_cover),
+        ("02-quem-sou", slide_quem_sou),
+        ("03-opes", slide_opes),
+        ("04-cmo-seth", slide_cmo),
+        ("05-ideacao-dankoe", slide_ideation),
+        ("06-producao-pedro", slide_production),
+        ("07-time-suporte", slide_restante),
+        ("08-resultado", slide_resultado),
+        ("09-cta", slide_cta),
+    ]
+
+    print(f"Gerando {len(slides)} slides em {output_dir}/")
+    for name, generator in slides:
+        img = generator()
+        path = os.path.join(output_dir, f"{name}.png")
+        img.save(path, "PNG", quality=95)
+        print(f"  ✓ {path}")
+
+    print(f"\n✅ Carrossel completo: {len(slides)} slides prontos.")
+
+
+if __name__ == "__main__":
+    main()

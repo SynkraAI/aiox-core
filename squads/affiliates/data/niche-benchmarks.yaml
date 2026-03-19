@@ -1,0 +1,288 @@
+# Benchmarks por Nicho — RPM, EPC, DR, Comissão
+# Atualizado: 2026-02 | Fonte: Ahrefs, SEMrush, pesquisa de mercado, dados agregados de afiliados
+# Uso: referência para agentes niche-ops e affiliate-strategist
+# Nota: valores medianos do mercado. Top performers superam consistentemente.
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  currency: USD
+  methodology: "Medianas de mercado baseadas em pesquisa pública e dados agregados 2024-2025."
+  definitions:
+    rpm: "Revenue per Mille — receita por 1.000 pageviews (exibição + afiliados combinados)"
+    epc: "Earnings per Click — receita por clique em link de afiliado"
+    avg_dr_competitors: "Domain Rating médio dos top 10 concorrentes no nicho (Ahrefs)"
+    avg_commission_pct: "Comissão média de afiliado disponível no nicho"
+    difficulty: "Dificuldade competitiva geral: easy / medium / hard / very_hard"
+
+verticals:
+
+  health:
+    display_name: "Saúde & Bem-Estar"
+    avg_rpm_usd: 35
+    avg_epc_usd: 1.80
+    avg_dr_competitors: 52
+    avg_commission_pct: 35
+    difficulty: hard
+    top_programs:
+      - ClickBank (suplementos)
+      - Amazon Associates (equipamentos)
+      - CJ Affiliate (farmácias online)
+    monetization_mix:
+      display_ads_pct: 30
+      affiliate_pct: 60
+      info_products_pct: 10
+    best_content_types:
+      - reviews de suplementos
+      - comparativos de equipamentos
+      - guias de dieta e exercício
+    hcu_sensitivity: high
+    notes: >
+      Nicho YMYL. Google exige E-E-A-T forte (autoria de especialistas, fontes médicas).
+      Pós-HCU 2023, sites sem autor credível sofreram quedas. Suplementos com
+      comissões altas mas FTC compliance rigoroso nos EUA.
+
+  finance:
+    display_name: "Finanças Pessoais & Investimentos"
+    avg_rpm_usd: 65
+    avg_epc_usd: 3.20
+    avg_dr_competitors: 61
+    avg_commission_pct: 25
+    difficulty: very_hard
+    top_programs:
+      - CJ Affiliate (cartões de crédito)
+      - Impact (fintech)
+      - PartnerStack (ferramentas financeiras)
+    monetization_mix:
+      display_ads_pct: 20
+      affiliate_pct: 75
+      info_products_pct: 5
+    best_content_types:
+      - comparativos de cartão de crédito
+      - reviews de corretoras
+      - calculadoras financeiras
+      - guias de investimento
+    hcu_sensitivity: very_high
+    notes: >
+      RPM mais alto de todos os nichos. Extremamente competitivo — dominado por
+      NerdWallet, Bankrate, Forbes Advisor. Requer E-E-A-T máximo. CPC altíssimo
+      (até $50/clique em alguns sub-nichos). Lead gen pode superar affiliate direto.
+
+  technology:
+    display_name: "Tecnologia & Software"
+    avg_rpm_usd: 28
+    avg_epc_usd: 2.10
+    avg_dr_competitors: 55
+    avg_commission_pct: 20
+    difficulty: hard
+    top_programs:
+      - PartnerStack (SaaS)
+      - Impact (ferramentas digitais)
+      - ShareASale (software)
+    monetization_mix:
+      display_ads_pct: 25
+      affiliate_pct: 70
+      info_products_pct: 5
+    best_content_types:
+      - reviews de ferramentas SaaS
+      - comparativos (Tool A vs Tool B)
+      - tutoriais com monetização de afiliado
+      - listas de melhores ferramentas
+    hcu_sensitivity: medium
+    notes: >
+      SaaS B2B com comissões recorrentes mensais é o ponto doce. Um único cliente
+      pode gerar $20-200/mês recorrente. Audiência técnica exige profundidade.
+      Less impactado pelo HCU que saúde/finanças.
+
+  education:
+    display_name: "Educação Online & Cursos"
+    avg_rpm_usd: 22
+    avg_epc_usd: 1.50
+    avg_dr_competitors: 45
+    avg_commission_pct: 45
+    difficulty: medium
+    top_programs:
+      - Hotmart (BR)
+      - Kiwify (BR)
+      - ClickBank (global)
+      - ShareASale (Coursera, Udemy)
+    monetization_mix:
+      display_ads_pct: 15
+      affiliate_pct: 75
+      info_products_pct: 10
+    best_content_types:
+      - reviews de cursos
+      - comparativos de plataformas
+      - guias de aprendizado por habilidade
+      - roadmaps de carreira
+    hcu_sensitivity: low
+    notes: >
+      Comissões altas (30-60%). Mercado brasileiro tem oportunidade enorme via
+      Hotmart/Kiwify. Sub-nicho de programação e idiomas tem crescimento constante.
+      Sazonalidade forte (janeiro e julho para cursos de idioma/concursos).
+
+  beauty:
+    display_name: "Beleza & Skincare"
+    avg_rpm_usd: 18
+    avg_epc_usd: 0.90
+    avg_dr_competitors: 48
+    avg_commission_pct: 12
+    difficulty: hard
+    top_programs:
+      - Amazon Associates
+      - ShareASale (Sephora, etc.)
+      - Rakuten (Macy's, Nordstrom)
+      - Monetizze (BR)
+    monetization_mix:
+      display_ads_pct: 35
+      affiliate_pct: 55
+      info_products_pct: 10
+    best_content_types:
+      - reviews de produtos
+      - tutoriais em vídeo (YouTube + blog)
+      - listas sazonais (presentes, verão)
+      - dupes e comparativos de preço
+    hcu_sensitivity: medium
+    notes: >
+      Fortemente dominado por criadores de conteúdo no TikTok/Instagram.
+      Tráfego orgânico competitivo. Combinar SEO + social funciona melhor.
+      Produtos físicos com comissões 8-15% na Amazon. Skincare tem conversão melhor
+      que maquiagem online.
+
+  pets:
+    display_name: "Animais de Estimação"
+    avg_rpm_usd: 20
+    avg_epc_usd: 1.10
+    avg_dr_competitors: 42
+    avg_commission_pct: 8
+    difficulty: medium
+    top_programs:
+      - Amazon Associates
+      - Chewy Affiliate (via Impact)
+      - Petco (via CJ)
+    monetization_mix:
+      display_ads_pct: 40
+      affiliate_pct: 55
+      info_products_pct: 5
+    best_content_types:
+      - reviews de alimentos e petiscos
+      - guias de raças
+      - reviews de acessórios e camas
+      - guias de saúde e veterinário
+    hcu_sensitivity: low
+    notes: >
+      Nicho evergreen com audiência apaixonada. Compras recorrentes (ração) criam
+      LTV alto via Amazon. Chewy tem programa excelente com cookie de 15 dias e
+      comissão de $15 para novos clientes. Menos impactado pelo HCU.
+
+  home:
+    display_name: "Casa & Decoração"
+    avg_rpm_usd: 25
+    avg_epc_usd: 1.40
+    avg_dr_competitors: 47
+    avg_commission_pct: 6
+    difficulty: medium
+    top_programs:
+      - Amazon Associates
+      - Wayfair (via CJ)
+      - Home Depot (via Impact)
+      - ShareASale (marcas de decoração)
+    monetization_mix:
+      display_ads_pct: 35
+      affiliate_pct: 60
+      info_products_pct: 5
+    best_content_types:
+      - "melhores [produto] para [necessidade]"
+      - comparativos de preço
+      - guias de reforma e DIY
+      - room tours e decoração por estilo
+    hcu_sensitivity: low
+    notes: >
+      Ticket médio alto em categoria de móveis e eletrodomésticos compensa
+      comissões percentuais baixas. Amazon funciona bem. Sazonalidade em
+      dezembro e períodos de mudança (março, julho). Social (Pinterest) gera
+      tráfego qualificado para este nicho.
+
+  travel:
+    display_name: "Viagens & Turismo"
+    avg_rpm_usd: 30
+    avg_epc_usd: 2.50
+    avg_dr_competitors: 58
+    avg_commission_pct: 4
+    difficulty: hard
+    top_programs:
+      - Booking.com (via seu próprio programa)
+      - TripAdvisor (via CJ)
+      - Expedia (via CJ)
+      - Airbnb (referral)
+      - VRBO
+    monetization_mix:
+      display_ads_pct: 20
+      affiliate_pct: 75
+      info_products_pct: 5
+    best_content_types:
+      - guias de destino
+      - reviews de hotéis
+      - itinerários de viagem
+      - guias de mochileiro e budget travel
+    hcu_sensitivity: high
+    notes: >
+      Dominado por OTAs e grandes publishers (Lonely Planet, TripAdvisor).
+      Comissões baixas mas volume alto. Pós-COVID recuperação forte. Micro-nichos
+      (viagem com pets, van life, destinos específicos) têm menos concorrência.
+      Sazonalidade intensa (verão, férias escolares).
+
+  gaming:
+    display_name: "Games & Entretenimento Digital"
+    avg_rpm_usd: 12
+    avg_epc_usd: 0.80
+    avg_dr_competitors: 50
+    avg_commission_pct: 5
+    difficulty: hard
+    top_programs:
+      - Amazon Associates (hardware)
+      - Fanatical (via ShareASale — jogos digitais)
+      - Green Man Gaming
+      - Humble Bundle (referral)
+    monetization_mix:
+      display_ads_pct: 50
+      affiliate_pct: 40
+      info_products_pct: 10
+    best_content_types:
+      - reviews de jogos e hardware
+      - guias e walkthroughs
+      - tops e rankings de jogos
+      - comparativos de periféricos (mouse, teclado, headset)
+    hcu_sensitivity: low
+    notes: >
+      RPM menor mas audiência muito engajada. Hardware gamer tem ticket alto
+      (compensando comissões Amazon). Sub-nicho de periféricos/setups é mais
+      rentável que jogos digitais. Streaming/Twitch e YouTube dominam;
+      blog funciona como suporte para SEO long-tail.
+
+  saas:
+    display_name: "SaaS & Ferramentas de Produtividade"
+    avg_rpm_usd: 45
+    avg_epc_usd: 4.50
+    avg_dr_competitors: 53
+    avg_commission_pct: 30
+    difficulty: hard
+    top_programs:
+      - PartnerStack (Notion, Monday.com, etc.)
+      - Impact (Semrush, Canva, etc.)
+      - Programa direto (HubSpot 30%, etc.)
+    monetization_mix:
+      display_ads_pct: 10
+      affiliate_pct: 85
+      info_products_pct: 5
+    best_content_types:
+      - reviews aprofundados de ferramentas
+      - comparativos (Notion vs Obsidian, etc.)
+      - tutoriais de use case
+      - "melhores ferramentas para [profissão]"
+    hcu_sensitivity: medium
+    notes: >
+      Melhor EPC de todos os nichos quando recorrência é considerada.
+      Uma conversão pode gerar $50-500+ ao longo do tempo.
+      Audiência B2B tem maior LTV. Comparativos têm altíssima intenção de compra.
+      Requer conhecimento técnico real das ferramentas para credibilidade.

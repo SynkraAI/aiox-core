@@ -1,0 +1,512 @@
+# =============================================================================
+# SOP Scoring Rubric - Master Reference
+# =============================================================================
+# Used by: sop-analyst (analyze-sop task)
+# Version: 1.0.0
+# Based on: Juran Quality Trilogy, Deming 14 Points, Crosby Zero Defects
+#
+# Scoring Philosophy:
+#   Every score MUST be backed by evidence from the SOP being analyzed.
+#   No score is valid without at least one citation. Scores reflect the
+#   document's fitness for its stated purpose and audience.
+#
+# Grade Scale:
+#   A+ = 95-100  |  A = 90-94  |  B+ = 85-89  |  B = 80-84
+#   C+ = 75-79   |  C = 70-74  |  D = 60-69   |  F = 0-59
+# =============================================================================
+
+rubric:
+  version: "1.0.0"
+  total_weight: 100
+  passing_score: 70
+  certification_score: 90
+
+  score_ranges:
+    critical:
+      range: "0-20"
+      label: "Critical"
+      description: "Fundamentally deficient. The SOP cannot be used in this dimension."
+      action: "Immediate rewrite required for this dimension."
+      color: "#DC2626"
+
+    poor:
+      range: "21-40"
+      label: "Poor"
+      description: "Significant deficiencies. Major gaps that create risk."
+      action: "Major remediation required before use."
+      color: "#EA580C"
+
+    fair:
+      range: "41-60"
+      label: "Fair"
+      description: "Partially adequate. Usable with significant caveats."
+      action: "Targeted improvements needed within 30 days."
+      color: "#CA8A04"
+
+    good:
+      range: "61-80"
+      label: "Good"
+      description: "Meets most requirements. Minor gaps or improvements possible."
+      action: "Schedule improvements for next review cycle."
+      color: "#2563EB"
+
+    excellent:
+      range: "81-100"
+      label: "Excellent"
+      description: "Exceeds requirements. Best-practice quality."
+      action: "Maintain. Consider as template for other SOPs."
+      color: "#16A34A"
+
+  dimensions:
+    - id: DIM-01
+      name: "Clarity"
+      weight: 10
+      description: |
+        Measures how easily the SOP can be understood by its target audience.
+        Language should be simple, direct, and free of unnecessary jargon.
+        The reader should never have to re-read a sentence to understand it.
+
+      scoring_signals:
+        - signal: "Reading level"
+          description: "Flesch-Kincaid grade level at or below 8th grade"
+          excellent: "Grade 6 or below, crystal clear language"
+          good: "Grade 7-8, clear with minor complexity"
+          fair: "Grade 9-10, some difficult passages"
+          poor: "Grade 11-12, frequently difficult"
+          critical: "Grade 13+, academic or legal language"
+
+        - signal: "Action verb usage"
+          description: "Steps begin with clear, imperative action verbs"
+          excellent: "100% of steps start with action verbs"
+          good: "90%+ steps start with action verbs"
+          fair: "70-89% steps start with action verbs"
+          poor: "50-69% steps start with action verbs"
+          critical: "< 50% steps start with action verbs"
+
+        - signal: "Ambiguity density"
+          description: "Absence of vague words (appropriate, adequate, sufficient, various, etc.)"
+          excellent: "Zero vague qualifiers found"
+          good: "1-2 vague qualifiers, all in non-critical sections"
+          fair: "3-5 vague qualifiers, some in procedure steps"
+          poor: "6-10 vague qualifiers, several in critical steps"
+          critical: "10+ vague qualifiers throughout"
+
+        - signal: "Sentence length"
+          description: "Average sentence length in procedural sections"
+          excellent: "< 15 words average"
+          good: "15-20 words average"
+          fair: "21-25 words average"
+          poor: "26-35 words average"
+          critical: "> 35 words average"
+
+        - signal: "Defined terminology"
+          description: "Technical terms are defined in a glossary or on first use"
+          excellent: "All technical terms defined, glossary comprehensive"
+          good: "Most terms defined, minor omissions"
+          fair: "Some terms defined, several assumed known"
+          poor: "Few terms defined, significant assumed knowledge"
+          critical: "No definitions, heavy jargon without explanation"
+
+    - id: DIM-02
+      name: "Completeness"
+      weight: 15
+      description: |
+        Measures whether the SOP covers all necessary information for the
+        process to be executed successfully. Includes happy path, error paths,
+        edge cases, prerequisites, and post-conditions.
+
+      scoring_signals:
+        - signal: "Step coverage"
+          description: "All process steps from start to finish are documented"
+          excellent: "Complete coverage with sub-steps for complex actions"
+          good: "All major steps covered, sub-steps for critical actions"
+          fair: "Major steps covered, some gaps in sub-steps"
+          poor: "Several steps missing or overly summarized"
+          critical: "Large portions of the process undocumented"
+
+        - signal: "Edge case coverage"
+          description: "Unusual but possible scenarios are addressed"
+          excellent: "Comprehensive edge case documentation with examples"
+          good: "Common edge cases documented"
+          fair: "Some edge cases mentioned but not detailed"
+          poor: "Edge cases acknowledged but not addressed"
+          critical: "No edge case consideration"
+
+        - signal: "Prerequisites listed"
+          description: "All required materials, access, knowledge, and conditions documented"
+          excellent: "Complete checklist with verification steps"
+          good: "All prerequisites listed"
+          fair: "Most prerequisites listed, some assumed"
+          poor: "Partial prerequisite list"
+          critical: "No prerequisites section"
+
+        - signal: "Post-conditions defined"
+          description: "Expected state after SOP completion is documented"
+          excellent: "Detailed expected state with verification procedures"
+          good: "Expected outcomes clearly stated"
+          fair: "Some outcomes mentioned"
+          poor: "Vague completion criteria"
+          critical: "No definition of done"
+
+        - signal: "Scope boundaries"
+          description: "What is in-scope and out-of-scope is explicitly stated"
+          excellent: "Clear in-scope/out-of-scope with cross-references"
+          good: "In-scope clearly defined, out-of-scope mentioned"
+          fair: "Scope implied but not explicitly stated"
+          poor: "Scope ambiguous"
+          critical: "No scope definition, reader must guess"
+
+    - id: DIM-03
+      name: "Executability"
+      weight: 15
+      description: |
+        Measures whether a qualified person can execute the SOP without
+        additional guidance. The ultimate test: can a new team member
+        complete the process by following only this document?
+
+      scoring_signals:
+        - signal: "Standalone execution"
+          description: "SOP can be followed without asking questions"
+          excellent: "Fully standalone, tested with new team members"
+          good: "Standalone for experienced staff, minor clarifications for new"
+          fair: "Requires some tribal knowledge to execute"
+          poor: "Frequently requires verbal clarification"
+          critical: "Cannot be executed without a guide"
+
+        - signal: "Decision points explicit"
+          description: "All IF/THEN/ELSE logic is clearly documented"
+          excellent: "All decision trees documented with flowcharts"
+          good: "All decision points documented in text"
+          fair: "Major decision points documented"
+          poor: "Some decision points implicit"
+          critical: "Decision logic undocumented, relies on judgment"
+
+        - signal: "Single action per step"
+          description: "Each step contains exactly one action"
+          excellent: "100% single-action steps"
+          good: "95%+ single-action steps"
+          fair: "80-94% single-action steps"
+          poor: "60-79% single-action steps"
+          critical: "< 60%, steps are compound instructions"
+
+        - signal: "Verification checkpoints"
+          description: "Steps include how to verify the action was successful"
+          excellent: "Every critical step has a verification method"
+          good: "Most steps have verification"
+          fair: "Some verification points"
+          poor: "Rare verification checkpoints"
+          critical: "No verification methods documented"
+
+    - id: DIM-04
+      name: "Measurability"
+      weight: 10
+      description: |
+        Measures whether the SOP defines quantitative success criteria,
+        KPIs, time estimates, and measurable standards that allow
+        objective assessment of execution quality.
+
+      scoring_signals:
+        - signal: "KPIs defined"
+          description: "Key Performance Indicators for the process are specified"
+          excellent: "3+ KPIs with targets, measurement methods, and frequency"
+          good: "2-3 KPIs with targets"
+          fair: "1-2 KPIs, loosely defined"
+          poor: "Qualitative goals only"
+          critical: "No performance measures"
+
+        - signal: "Time estimates"
+          description: "Expected duration for steps or phases is provided"
+          excellent: "Per-step time estimates with total process duration"
+          good: "Per-phase time estimates"
+          fair: "Total process time estimate only"
+          poor: "Vague time references (soon, quickly)"
+          critical: "No time information"
+
+        - signal: "Success criteria quantified"
+          description: "Success/failure is defined with measurable thresholds"
+          excellent: "All criteria quantified (e.g., < 5% error rate)"
+          good: "Most criteria quantified"
+          fair: "Some criteria quantified, others qualitative"
+          poor: "Mostly qualitative criteria"
+          critical: "No measurable success criteria"
+
+        - signal: "Baseline documented"
+          description: "Current performance baseline is recorded for improvement tracking"
+          excellent: "Baseline data with historical trend"
+          good: "Current baseline documented"
+          fair: "Baseline mentioned but not quantified"
+          poor: "No baseline, improvement not measurable"
+          critical: "No concept of measurement"
+
+    - id: DIM-05
+      name: "Compliance"
+      weight: 10
+      description: |
+        Measures adherence to applicable regulatory standards, industry
+        best practices, and organizational policies. Scored relative to
+        the standards declared in the SOP's scope.
+
+      scoring_signals:
+        - signal: "Standard references"
+          description: "Applicable standards are identified and cited"
+          excellent: "All applicable standards cited with clause references"
+          good: "Standards cited, most clauses referenced"
+          fair: "Standards mentioned without specific clauses"
+          poor: "Standards vaguely referenced"
+          critical: "No standards referenced despite applicability"
+
+        - signal: "Requirement coverage"
+          description: "Standard requirements are addressed in SOP content"
+          excellent: "100% of applicable requirements addressed"
+          good: "90%+ requirements addressed"
+          fair: "70-89% requirements addressed"
+          poor: "50-69% requirements addressed"
+          critical: "< 50% requirements addressed"
+
+        - signal: "Audit trail support"
+          description: "SOP supports creating audit evidence during execution"
+          excellent: "Built-in record-keeping, sign-off points, timestamps"
+          good: "Record-keeping requirements documented"
+          fair: "Some records mentioned"
+          poor: "Minimal audit trail support"
+          critical: "No audit trail consideration"
+
+        - signal: "Regulatory language"
+          description: "Correct use of mandatory (shall/must) vs advisory (should/may)"
+          excellent: "Consistent, correct use throughout"
+          good: "Mostly correct, minor inconsistencies"
+          fair: "Inconsistent usage"
+          poor: "Frequent misuse"
+          critical: "No distinction made"
+
+    - id: DIM-06
+      name: "Maintainability"
+      weight: 10
+      description: |
+        Measures how easy the SOP is to update, version, and keep current.
+        A maintainable SOP has clear ownership, scheduled reviews, and
+        modular structure that allows targeted updates.
+
+      scoring_signals:
+        - signal: "Version control"
+          description: "Version numbering, revision history, change tracking"
+          excellent: "Semantic versioning, complete change log, diff-friendly"
+          good: "Version numbers, revision history with dates"
+          fair: "Version number present, minimal history"
+          poor: "Version mentioned but not systematically tracked"
+          critical: "No version control"
+
+        - signal: "Ownership assigned"
+          description: "Document owner and review responsibilities are clear"
+          excellent: "Owner, reviewers, and approvers named with roles"
+          good: "Owner and reviewer assigned"
+          fair: "Owner assigned, reviewer unclear"
+          poor: "Ownership vague"
+          critical: "No ownership defined"
+
+        - signal: "Review schedule"
+          description: "Periodic review cadence is defined"
+          excellent: "Review schedule with triggers (time-based AND event-based)"
+          good: "Time-based review schedule"
+          fair: "Review mentioned but not scheduled"
+          poor: "No review plan"
+          critical: "Document appears abandoned"
+
+        - signal: "Modular structure"
+          description: "Sections are independent enough to update individually"
+          excellent: "Fully modular, sections can be updated independently"
+          good: "Mostly modular, few cross-dependencies"
+          fair: "Some modularity"
+          poor: "Tightly coupled sections"
+          critical: "Monolithic, any change requires full review"
+
+    - id: DIM-07
+      name: "Accessibility"
+      weight: 10
+      description: |
+        Measures how easily the SOP can be found, navigated, and used
+        in various contexts (on screen, printed, mobile, integrated into
+        tools).
+
+      scoring_signals:
+        - signal: "Navigation aids"
+          description: "Table of contents, section numbers, cross-references"
+          excellent: "TOC, numbered sections, hyperlinked cross-refs, index"
+          good: "TOC and numbered sections"
+          fair: "Section numbers only"
+          poor: "Basic headings without hierarchy"
+          critical: "No navigation structure"
+
+        - signal: "Searchability"
+          description: "Key terms, tags, metadata support search and discovery"
+          excellent: "Tagged with keywords, metadata, searchable in doc system"
+          good: "Key terms in headers, basic metadata"
+          fair: "Some searchable structure"
+          poor: "Minimal searchability"
+          critical: "Cannot be found without knowing exact location"
+
+        - signal: "Format flexibility"
+          description: "SOP works in multiple contexts (screen, print, mobile)"
+          excellent: "Tested in multiple formats, responsive layout"
+          good: "Works on screen and print"
+          fair: "Optimized for one format only"
+          poor: "Formatting issues in some contexts"
+          critical: "Only usable in one specific format"
+
+        - signal: "Progressive disclosure"
+          description: "Summary/overview available, detail accessible when needed"
+          excellent: "Executive summary, quick-ref card, and full detail"
+          good: "Summary section with full detail"
+          fair: "Detail only, no summary"
+          poor: "Overwhelming detail without overview"
+          critical: "Wall of text, no structure"
+
+    - id: DIM-08
+      name: "Error Handling"
+      weight: 10
+      description: |
+        Measures how well the SOP handles things going wrong. Includes
+        troubleshooting guides, escalation paths, rollback procedures,
+        and recovery steps.
+
+      scoring_signals:
+        - signal: "Exception procedures"
+          description: "Documented procedures for when things deviate from happy path"
+          excellent: "Comprehensive exception handling for each critical step"
+          good: "Common exceptions documented with resolution"
+          fair: "Some exceptions mentioned"
+          poor: "Generic troubleshooting section only"
+          critical: "No exception handling"
+
+        - signal: "Escalation paths"
+          description: "Clear escalation hierarchy when operator cannot resolve"
+          excellent: "Multi-level escalation with contacts, SLAs, and triggers"
+          good: "Escalation path with contacts"
+          fair: "Escalation mentioned, contacts missing"
+          poor: "Vague escalation guidance"
+          critical: "No escalation path"
+
+        - signal: "Rollback procedures"
+          description: "Steps to undo or recover from a failed execution"
+          excellent: "Per-step rollback with data recovery procedures"
+          good: "Phase-level rollback procedures"
+          fair: "General rollback guidance"
+          poor: "Rollback mentioned but not detailed"
+          critical: "No rollback consideration"
+
+        - signal: "Troubleshooting guide"
+          description: "Symptom-cause-resolution troubleshooting matrix"
+          excellent: "Comprehensive matrix with decision tree"
+          good: "Common issues with solutions"
+          fair: "Some troubleshooting tips"
+          poor: "Generic advice only"
+          critical: "No troubleshooting support"
+
+    - id: DIM-09
+      name: "Visual Design"
+      weight: 5
+      description: |
+        Measures the effective use of visual elements to enhance
+        understanding. Diagrams, flowcharts, screenshots, and tables
+        that complement text instructions.
+
+      scoring_signals:
+        - signal: "Flowcharts/diagrams"
+          description: "Process flow visualized graphically"
+          excellent: "Complete process flowchart with decision diamonds"
+          good: "Simplified flowchart for main process"
+          fair: "Partial diagrams"
+          poor: "Text-only descriptions of flows"
+          critical: "No visual aids for complex processes"
+
+        - signal: "Screenshots/examples"
+          description: "Visual examples for UI or physical operations"
+          excellent: "Annotated screenshots for every UI step"
+          good: "Screenshots for critical steps"
+          fair: "Some screenshots, not annotated"
+          poor: "Described but not shown"
+          critical: "No visual examples for visual processes"
+
+        - signal: "Table usage"
+          description: "Structured data presented in tables vs paragraphs"
+          excellent: "All structured data in well-formatted tables"
+          good: "Most structured data in tables"
+          fair: "Some data in tables"
+          poor: "Tables used poorly or not at all"
+          critical: "Structured data buried in paragraphs"
+
+    - id: DIM-10
+      name: "AI-Readiness"
+      weight: 5
+      description: |
+        Measures how easily the SOP can be converted to or consumed by
+        AI/ML systems. Structured data, consistent formatting, and
+        machine-parseable elements.
+
+      scoring_signals:
+        - signal: "Structured format"
+          description: "Content uses consistent, parseable formatting"
+          excellent: "Fully structured, parseable by automated tools"
+          good: "Mostly structured, minor manual parsing needed"
+          fair: "Partially structured"
+          poor: "Mostly unstructured prose"
+          critical: "Free-form text, cannot be parsed"
+
+        - signal: "Metadata completeness"
+          description: "Machine-readable metadata (tags, categories, identifiers)"
+          excellent: "Complete YAML/JSON frontmatter with all metadata fields"
+          good: "Basic metadata present"
+          fair: "Some metadata"
+          poor: "Minimal metadata"
+          critical: "No machine-readable metadata"
+
+        - signal: "ML companion exists"
+          description: "A machine-readable version (YAML) exists alongside the human version"
+          excellent: "Full ML SOP conforming to sop-ml-schema.yaml"
+          good: "ML version exists with minor schema gaps"
+          fair: "Partial ML version"
+          poor: "No ML version but structure supports conversion"
+          critical: "No ML version, structure prevents conversion"
+
+  composite_scoring:
+    method: "weighted_average"
+    formula: "sum(dimension_score * dimension_weight) / 100"
+    rounding: "round to nearest integer"
+    grade_thresholds:
+      A_plus: 95
+      A: 90
+      B_plus: 85
+      B: 80
+      C_plus: 75
+      C: 70
+      D: 60
+      F: 0
+
+  modifiers:
+    crosby_maturity_bonus:
+      description: "Add bonus points based on Crosby 14-point assessment"
+      mature_count_10_plus: "+3 points"
+      mature_count_7_to_9: "+2 points"
+      mature_count_4_to_6: "+1 point"
+      mature_count_below_4: "+0 points"
+      max_bonus: 3
+      note: "Bonus cannot push score above 100"
+
+    compliance_penalty:
+      description: "Subtract points for compliance violations"
+      critical_violation: "-20 points per violation"
+      major_violation: "-10 points per violation"
+      minor_violation: "-3 points per violation"
+      note: "Penalty cannot push score below 0"
+
+  reporting:
+    required_elements:
+      - "Overall weighted score with grade"
+      - "Per-dimension score with evidence citations"
+      - "Top 3 strengths (highest-scoring dimensions)"
+      - "Top 3 improvement areas (lowest-scoring dimensions)"
+      - "Crosby maturity overlay results"
+      - "Compliance modifier applied (if any)"
+      - "Comparison to passing threshold (70)"
+      - "Comparison to certification threshold (90)"
+      - "Specific, actionable recommendations per low-scoring dimension"

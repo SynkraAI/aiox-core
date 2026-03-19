@@ -1,0 +1,97 @@
+# Workflow: Full System Extraction Pipeline
+# Complete extraction from scan to catalog for an entire legacy system
+
+workflow:
+  id: wf-extract-system
+  name: "Full System Extraction Pipeline"
+  trigger: "*scan {path}"
+  executor: archaeologist
+
+  phases:
+    - phase: 1
+      name: "Scan"
+      task: scan-codebase
+      input:
+        path: "{path}"
+      output:
+        - scan_report
+        - hotspot_ranking
+        - module_map
+
+    - phase: 2
+      name: "Prioritize"
+      task: identify-rule-hotspots
+      input:
+        file_list: "{scan.source_files}"
+      output:
+        - ranked_hotspots
+
+    - phase: 3
+      name: "Create Output Structure"
+      action: |
+        Create output directory tree:
+        {output_dir}/rules/
+        {output_dir}/catalog/
+        {output_dir}/audit/
+
+    - phase: 4
+      name: "Extract (Batch)"
+      task: orchestrate-extraction
+      delegated_to: decoder (per file)
+      input:
+        hotspot_ranking: "{ranked_hotspots}"
+        output_dir: "{output_dir}"
+      behavior: |
+        Process files in hotspot order (highest first).
+        Log progress after each file.
+        Skip files that error (log reason, continue).
+        Save extraction-progress.md after each file.
+      checkpoint:
+        condition: "files_processed >= 1"
+        on_fail: "ERROR: No files could be processed."
+
+    - phase: 5
+      name: "Classify"
+      task: classify-rule
+      delegated_to: cartographer
+      input:
+        rules_dir: "{output_dir}/rules/"
+      action: |
+        Classify all extracted rules by domain and module.
+        Assign unique IDs across the system.
+
+    - phase: 6
+      name: "Catalog"
+      task: catalog-rules
+      delegated_to: cartographer
+      input:
+        rules_dir: "{output_dir}/rules/"
+      output:
+        - rule-catalog.md
+        - rule-catalog.yaml
+        - domain-map.md
+
+    - phase: 7
+      name: "Audit"
+      tasks:
+        - validate-extraction-quality
+        - generate-coverage-report
+      delegated_to: auditor
+      input:
+        rules_dir: "{output_dir}/rules/"
+        source_dir: "{path}"
+        scan_report: "{output_dir}/scan-report.md"
+
+    - phase: 8
+      name: "Finalize"
+      tasks:
+        - generate-migration-brief
+      action: |
+        Generate migration brief.
+        Produce extraction-summary.md.
+        Display final metrics.
+
+  quality_gates:
+    - QG-LRE-001
+    - QG-LRE-002
+    - QG-LRE-003

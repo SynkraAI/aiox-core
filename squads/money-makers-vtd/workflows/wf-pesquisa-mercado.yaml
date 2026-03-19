@@ -1,0 +1,401 @@
+# WF-2: Pesquisa de Mercado
+# Duration: 1-2h
+# Best for: Validar nicho, identificar ciclo do produto e linguagem do público antes de criar
+# Key Agent: pesquisador-ia
+
+workflow:
+  id: wf-pesquisa-mercado
+  name: "Pesquisa de Mercado"
+  duration: "1-2h"
+  trigger: "*pesquisa-mercado"
+  description: |
+    Workflow de pesquisa profunda de mercado baseado nas heurísticas do Natanael Oliveira:
+    "A IA é sua consultora de mercado 24 horas" (NO-H001).
+
+    Três saídas fundamentais:
+    1. Mapeamento de tendências (Google Trends, redes sociais, fóruns)
+    2. Ciclo do produto no nicho (Introdução/Crescimento/Maturidade/Declínio/Evergreen)
+    3. Dores na linguagem real do público (como FALAM, não jargão técnico)
+
+    "Dados > intuição. Sempre." (NO-H002)
+
+    O pesquisador-ia executa buscas reais antes de qualquer criação de produto ou funil.
+    Nenhum produto deve ser criado sem esta pesquisa prévia.
+
+  best_for:
+    - "Validar nicho antes de criar produto"
+    - "Identificar se nicho está em crescimento ou declínio"
+    - "Capturar linguagem exata do público para copy"
+    - "Encontrar ângulos de abordagem ainda não explorados"
+    - "Diagnosticar saturação e diferenciação"
+
+  decision_matrix_fit:
+    awareness: "unaware a solution-aware"
+    sophistication: "stage-1 a stage-3"
+    price_point: "qualquer ticket"
+    traffic_temp: "cold + warm"
+    primary_output: "pesquisa-mercado-{nicho}.md"
+
+  clone_combinations:
+    primary: "pesquisador-ia"
+    secondary:
+      - "vtd-chief (interpretação estratégica)"
+      - "copy-andromeda (extração de linguagem)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 1: MAPEAMENTO DE TENDÊNCIAS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-1
+    name: "Mapeamento de Tendências"
+    days: "1"
+    tier: 0
+    description: |
+      A IA pesquisa ativamente as tendências do nicho em múltiplas fontes:
+      - Google Trends: volume de busca, sazonalidade, termos relacionados
+      - Redes sociais: hashtags em alta, posts virais, comentários com mais engajamento
+      - Fóruns e comunidades: Reddit, grupos Facebook/WhatsApp, Quora Brasil
+      - YouTube: vídeos com mais visualizações, comentários das seções de perguntas
+      - Amazon: livros mais vendidos na categoria, reviews de 1 e 2 estrelas (dores reais)
+
+      REGRA CRÍTICA (NO-H001): A pesquisa é ATIVA, não baseada em achismo.
+      O pesquisador-ia documenta fontes, números e datas de cada dado coletado.
+
+      REGRA CRÍTICA (NO-H002): Dados verificados têm prioridade sobre intuição do expert.
+      Se os dados contradizem a intuição, os dados vencem.
+
+    tasks:
+      - task_id: pesquisa-google-trends
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Pesquisar Google Trends para o nicho:
+          - Volume de busca (últimos 12 meses, últimos 5 anos)
+          - Sazonalidade (picos e vales)
+          - Termos relacionados em alta
+          - Comparação com nichos adjacentes
+        output: "tendencias-google-{nicho}.md"
+
+      - task_id: pesquisa-redes-sociais
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Mapear tendências em redes sociais:
+          - Instagram: hashtags com 10k-100k posts (não saturadas, não mortas)
+          - TikTok: vídeos virais do nicho (identificar ganchos)
+          - YouTube: vídeos com > 100k views, analisar títulos e thumbnails
+          - Facebook grupos: tópicos mais comentados
+        output: "tendencias-social-{nicho}.md"
+
+      - task_id: pesquisa-dores-comunidades
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Minerar dores em comunidades e fóruns:
+          - Reddit (r/ relevantes)
+          - Grupos Facebook do nicho
+          - Comentários YouTube dos maiores canais
+          - Seção de perguntas frequentes dos concorrentes
+          - Reviews negativos Amazon (categoria relacionada)
+        output: "dores-comunidades-{nicho}.md"
+
+    elicitation:
+      required: true
+      questions:
+        - id: nicho
+          question: "Qual o nicho a pesquisar? (ex: confeitaria, marketing digital, yoga)"
+          type: text
+          required: true
+
+        - id: subnicho
+          question: "Tem algum subnicho específico ou pode ser amplo?"
+          type: text
+          required: false
+
+        - id: concorrentes
+          question: "Cite 3 concorrentes ou referências neste nicho (perfis, canais, sites)"
+          type: text
+          required: false
+
+        - id: produto_em_mente
+          question: "Já tem produto em mente ou é pesquisa exploratória?"
+          type: text
+          required: false
+
+    checkpoint:
+      criteria:
+        - "Google Trends analisado com dados dos últimos 12 meses"
+        - "Mínimo 5 hashtags mapeadas por volume"
+        - "Mínimo 20 dores coletadas de comunidades reais"
+        - "Fontes documentadas com data de coleta"
+        - "Dados quantitativos presentes (não apenas qualitativos)"
+      human_review: true
+      message: "Mapeamento de tendências concluído. Revisar dados antes de avançar."
+      veto_conditions:
+        - "SE dados sem fonte verificável → VETO. Pesquisa sem evidência é opinião (NO-H002)."
+        - "SE só usou achismo sem pesquisa ativa → VETO. IA deve pesquisar, não inventar (NO-H001)."
+        - "SE menos de 20 dores coletadas → INCOMPLETO. Coletar mais antes de avançar."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2: CICLO DO PRODUTO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Ciclo do Produto"
+    days: "1"
+    tier: 1
+    description: |
+      Identificar em qual fase do ciclo o nicho e seus produtos se encontram:
+
+      FASES DO CICLO:
+      - Introdução: baixo volume, early adopters, oportunidade de pioneer
+      - Crescimento: volume aumentando, ainda dá para entrar e crescer rápido
+      - Maturidade: mercado saturado, precisa de diferenciação forte
+      - Declínio: demanda caindo, produto perdendo relevância
+      - Evergreen: demanda estável, sempre haverá público (saúde, relacionamento, dinheiro)
+
+      ESTRATÉGIA POR FASE:
+      - Introdução: educar mercado, ser o pioneiro, aceitar CAC maior
+      - Crescimento: entrar rápido, copiar ângulos vencedores, escalar
+      - Maturidade: nichar mais, diferenciar por entrega, comunidade
+      - Declínio: evitar ou pivotar
+      - Evergreen: posicionar em subnicho, ângulo único
+
+    tasks:
+      - task_id: classificar-ciclo
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Com base nos dados da Fase 1, classificar o nicho no ciclo do produto.
+          Justificar com dados (volume de busca, saturação de concorrentes, engajamento).
+          Identificar se o nicho é Evergreen ou tem sazonalidade forte.
+        output: "ciclo-produto-{nicho}.md"
+
+      - task_id: mapear-concorrentes
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Mapear os principais players do nicho:
+          - Quantos concorrentes diretos existem?
+          - Qual o ticket médio praticado?
+          - Qual o ângulo de posicionamento de cada um?
+          - Onde estão os gaps (o que ninguém faz ainda)?
+        output: "mapa-concorrentes-{nicho}.md"
+
+      - task_id: oportunidades-gaps
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Identificar oportunidades baseadas no ciclo e mapa de concorrentes:
+          - Subnichos não atendidos
+          - Formatos de produto não explorados
+          - Canais de aquisição que concorrentes ignoram
+          - Ângulos de copy não utilizados
+        output: "oportunidades-{nicho}.md"
+
+    checkpoint:
+      criteria:
+        - "Fase do ciclo identificada com justificativa baseada em dados"
+        - "Mínimo 5 concorrentes mapeados com ticket e posicionamento"
+        - "Gaps identificados (oportunidades reais, não genéricas)"
+        - "Recomendação estratégica clara baseada na fase do ciclo"
+      human_review: true
+      message: "Ciclo do produto identificado. Validar fase e estratégia recomendada."
+      veto_conditions:
+        - "SE ciclo identificado como Declínio sem alternativa → ALERTA. Reconsiderar nicho."
+        - "SE zero gaps encontrados → SUSPEITO. Pesquisa provavelmente incompleta."
+        - "SE fase classificada sem dados quantitativos → VETO. Precisa de evidência (NO-H002)."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3: DORES NA LINGUAGEM DO PÚBLICO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Dores na Linguagem do Público"
+    days: "1"
+    tier: 2
+    description: |
+      A fase mais valiosa para copy e posicionamento.
+
+      PRINCÍPIO FUNDAMENTAL:
+      O público tem dores reais expressas em linguagem própria.
+      Copy que usa a linguagem EXATA do público converte 3-5x mais.
+      Jargão técnico do expert MATA a conversão.
+
+      O QUE COLETAR:
+      - Frases exatas usadas em reclamações, perguntas, desabafos
+      - Palavras-gatilho que surgem repetidamente
+      - O "antes" e o "depois" como o público descreve (não como o expert descreve)
+      - Medos específicos (o que as pessoas temem no nicho)
+      - Sonhos específicos (o que desejam, na linguagem deles)
+      - Objeções mais comuns (por que não compram)
+
+      FONTE PRIMÁRIA: comentários de 1 e 2 estrelas + perguntas em fóruns.
+      São dores não filtradas, sem o viés do vendedor.
+
+    tasks:
+      - task_id: extrair-linguagem-publica
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Extrair citações literais do público:
+          - Copiar EXATAMENTE como falam (sem corrigir gramática)
+          - Categorizar por: dor, medo, desejo, objeção
+          - Identificar as 5 frases mais repetidas (padrões de linguagem)
+          - Anotar emojis, gírias, expressões regionais usados com frequência
+        output: "linguagem-publica-{nicho}.md"
+
+      - task_id: glossario-conversao
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Criar glossário de conversão: dois lados, expert vs público.
+          Exemplo:
+          - Expert diz: "nutrição funcional" → Público diz: "comer direito sem neura"
+          - Expert diz: "gestão de fluxo de caixa" → Público diz: "parar de ficar no vermelho"
+          - Expert diz: "copywriting" → Público diz: "saber vender com palavras"
+          Este glossário alimenta todos os workflows de copy.
+        output: "glossario-conversao-{nicho}.md"
+
+      - task_id: relatorio-pesquisa-final
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Consolidar toda a pesquisa em relatório final:
+          - Resumo executivo (1 página)
+          - Top 10 dores em ordem de frequência
+          - Fase do ciclo + estratégia recomendada
+          - Glossário de conversão
+          - 5 ângulos de copy validados com linguagem real
+          - Próximos passos recomendados
+        output: "pesquisa-mercado-{nicho}.md"
+
+    checkpoint:
+      criteria:
+        - "Mínimo 50 citações literais coletadas"
+        - "Top 10 dores classificadas por frequência"
+        - "Glossário expert vs público com mínimo 15 termos"
+        - "5 ângulos de copy derivados da linguagem real"
+        - "Relatório final consolidado e legível"
+      human_review: true
+      message: "Pesquisa de mercado completa. Relatório final pronto para uso em copy e produto."
+      veto_conditions:
+        - "SE linguagem do público é jargão técnico → SUSPEITO. Revisar fontes de coleta."
+        - "SE menos de 50 citações → INCOMPLETO. Minerar mais fontes."
+        - "SE glossário vazio → VETO. Sem glossário, copy vai usar linguagem do expert (mata conversão)."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_stakeholders: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHECKPOINT CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+checkpoint_config:
+  - phase: PHASE-1
+    heuristic: "NO-H001"
+    criteria: "Dados coletados de fontes reais verificáveis"
+    veto_condition: "Pesquisa sem evidência = opinião disfarçada"
+
+  - phase: PHASE-2
+    heuristic: "NO-H002"
+    criteria: "Ciclo identificado com dados quantitativos"
+    veto_condition: "Dados > intuição. Sempre."
+
+  - phase: PHASE-3
+    heuristic: "NO-H001 + NO-H002"
+    criteria: "Linguagem do público documentada literalmente"
+    veto_condition: "Jargão do expert em copy = conversão destruída"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMPLETION SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+completion_signal: "<promise>COMPLETE</promise>"
+checkpoint_signal: "<promise>CHECKPOINT:PHASE-X</promise>"
+blocked_signal: "<promise>BLOCKED:T-X.Y</promise>"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT ARTIFACTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  tendencias:
+    - "tendencias-google-{nicho}.md — Dados Google Trends com sazonalidade"
+    - "tendencias-social-{nicho}.md — Hashtags e posts virais mapeados"
+    - "dores-comunidades-{nicho}.md — Dores brutas de fóruns e grupos"
+
+  ciclo:
+    - "ciclo-produto-{nicho}.md — Fase do ciclo com justificativa"
+    - "mapa-concorrentes-{nicho}.md — Players e posicionamento"
+    - "oportunidades-{nicho}.md — Gaps e oportunidades identificados"
+
+  linguagem:
+    - "linguagem-publica-{nicho}.md — Citações literais classificadas"
+    - "glossario-conversao-{nicho}.md — Expert vs público (mín. 15 termos)"
+    - "pesquisa-mercado-{nicho}.md — Relatório final consolidado"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  tendencias:
+    - "[ ] Google Trends analisado (12 meses + 5 anos)"
+    - "[ ] Mínimo 5 hashtags com volume documentado"
+    - "[ ] Mínimo 20 dores brutas coletadas"
+    - "[ ] Todas as fontes documentadas com data"
+
+  ciclo:
+    - "[ ] Fase identificada: Introdução/Crescimento/Maturidade/Declínio/Evergreen"
+    - "[ ] Mínimo 5 concorrentes mapeados"
+    - "[ ] Gaps identificados (subnichos, formatos, canais, ângulos)"
+    - "[ ] Estratégia recomendada para a fase"
+
+  linguagem:
+    - "[ ] Mínimo 50 citações literais do público"
+    - "[ ] Top 10 dores classificadas por frequência"
+    - "[ ] Glossário com mínimo 15 termos (expert vs público)"
+    - "[ ] 5 ângulos de copy com linguagem real"
+    - "[ ] Relatório final consolidado"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GOVERNANCE GATE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+governance_gate:
+  required_checks:
+    - "Pesquisa baseada em dados reais (NO-H001)"
+    - "Dados verificáveis > intuição em todos os pontos (NO-H002)"
+    - "Linguagem do público documentada literalmente (sem jargão técnico)"
+    - "Fontes primárias incluídas (comentários, fóruns, não apenas o expert)"
+    - "Ciclo do produto identificado com evidência quantitativa"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  framework: "AIOS Squad Creator"
+  created: "2026-02-21"
+  primary_use_case: "Pesquisa de mercado antes de criar produto ou funil"
+  source_mind: "natanael-oliveira"
+  key_difference: |
+    Único workflow focado exclusivamente em pesquisa antes da criação.
+    Garante que copy e produto usem a linguagem REAL do público.
+    Gera glossário de conversão reutilizável em todos os outros workflows.

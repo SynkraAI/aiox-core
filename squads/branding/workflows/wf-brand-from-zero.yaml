@@ -1,0 +1,229 @@
+workflow:
+  id: wf-brand-from-zero
+  name: "Brand From Zero"
+  description: "Complete brand creation from scratch — 5 phases, 6 agents, full brand package"
+  version: "1.0.0"
+  estimated_duration: "4-8 hours"
+  orchestrator: brand-chief
+
+phases:
+  - id: phase_1_diagnose
+    name: "DIAGNOSE — Brand Strategy"
+    agent: marty-neumeier
+    description: "Define what the brand IS before anything visual"
+    duration: "60-90 min"
+
+    inputs:
+      - "Business context (what the company does)"
+      - "Target market description"
+      - "Competitor landscape"
+      - "Founder's vision/motivation"
+
+    steps:
+      - "Run Brand Gap analysis"
+      - "Build Brand Ladder (Features→Benefits→Values→Identity)"
+      - "Execute Zag 17-step onliness exercise"
+      - "Run Charismatic Brand Test"
+      - "Define brand archetype (from data/brand-archetypes.md)"
+
+    outputs:
+      - "Onliness statement: 'Our brand is the only ___ that ___'"
+      - "Brand ladder document"
+      - "Brand archetype selection (primary + optional secondary)"
+      - "Brand values (3-5 specific, not generic)"
+      - "Brand personality traits"
+
+    checkpoint:
+      question: "Is the brand strategy clear enough to position?"
+      pass_criteria:
+        - "Onliness statement is specific and defensible"
+        - "Brand archetype is selected with rationale"
+        - "Values are specific (not 'innovation, quality, trust')"
+      veto_conditions:
+        - "Onliness statement contains 'best' or 'leading' → VETO (not distinctive)"
+        - "More than 2 archetypes selected → VETO (too diluted)"
+        - "Values are generic platitudes → VETO (must be specific)"
+
+  - id: phase_2_position
+    name: "POSITION — Competitive Context"
+    agent: april-dunford
+    description: "Crystallize how the brand is different and for whom"
+    duration: "45-60 min"
+    depends_on: phase_1_diagnose
+
+    inputs:
+      - "Brand strategy from Phase 1"
+      - "Competitive landscape"
+      - "Customer interviews/data (if available)"
+
+    steps:
+      - "Map competitive alternatives (what would customers use instead?)"
+      - "Identify unique attributes"
+      - "Map attributes to customer value (and proof)"
+      - "Define target customer characteristics"
+      - "Select market category"
+      - "Identify relevant trends"
+      - "Synthesize positioning statement"
+
+    outputs:
+      - "Competitive alternatives map"
+      - "Positioning canvas (10 elements)"
+      - "One-sentence positioning statement"
+      - "Target customer profile"
+
+    checkpoint:
+      question: "Can we explain why we're different in one sentence?"
+      pass_criteria:
+        - "Competitive alternatives are real, specific companies"
+        - "Differentiated value is provable (not aspirational)"
+        - "Target customer is specific enough to find them"
+      veto_conditions:
+        - "Positioning uses 'innovative' or 'cutting-edge' without proof → VETO"
+        - "No competitive alternatives identified → VETO (means no market)"
+        - "Target is 'everyone' → VETO (too broad)"
+
+  - id: phase_3_name
+    name: "NAME — Verbal Identity"
+    agent: alexandra-watkins
+    description: "Create a brand name that encodes the positioning"
+    duration: "60-90 min"
+    depends_on: phase_2_position
+
+    inputs:
+      - "Brand strategy from Phase 1"
+      - "Positioning from Phase 2"
+      - "Domain/trademark constraints"
+
+    steps:
+      - "Generate naming creative brief"
+      - "Name storm: 50+ candidates using 8 techniques"
+      - "SMILE test each candidate (5 criteria)"
+      - "SCRATCH test survivors (7 elimination criteria)"
+      - "Shortlist top 5-10"
+      - "Domain/trademark preliminary check"
+      - "Present finalists with rationale"
+
+    outputs:
+      - "Naming creative brief"
+      - "50+ name candidates (documented)"
+      - "Top 5 finalists with SMILE/SCRATCH scores"
+      - "Recommended name with full rationale"
+      - "Tagline options (3-5)"
+
+    checkpoint:
+      question: "Does the name pass both SMILE and SCRATCH?"
+      pass_criteria:
+        - "Selected name scores 4+ on all SMILE criteria"
+        - "Selected name passes all 7 SCRATCH tests"
+        - "Domain availability confirmed (or alternatives)"
+      veto_conditions:
+        - "Name fails any SCRATCH criterion → VETO"
+        - "Name requires explanation → VETO"
+        - "Name is too similar to competitor → VETO"
+
+  - id: phase_4_identify
+    name: "IDENTIFY — Visual System"
+    agents:
+      - michael-johnson
+      - sagi-haviv
+    description: "Create the complete visual identity system including logo"
+    duration: "90-120 min"
+    depends_on: phase_3_name
+
+    inputs:
+      - "Brand strategy from Phase 1"
+      - "Positioning from Phase 2"
+      - "Selected name from Phase 3"
+      - "Brand archetype and personality"
+
+    steps:
+      - "@michael-johnson: Design complete visual identity system"
+      - "  - Typography architecture (brand + UI typefaces)"
+      - "  - Color system (primary, secondary, neutral, semantic)"
+      - "  - Imagery/photography style"
+      - "  - Grid system and layout principles"
+      - "@sagi-haviv: Design logo/mark"
+      - "  - Select logo category (wordmark, symbol, combo, etc.)"
+      - "  - Create logo concepts"
+      - "  - Run simplicity test"
+      - "  - Evaluate against 5 pillars"
+      - "  - Create logo application system"
+      - "@michael-johnson: Compile brand guidelines document"
+
+    outputs:
+      - "Logo (primary, variations, favicon, monochrome)"
+      - "Color palette (HEX, RGB, CMYK, Pantone)"
+      - "Typography specifications"
+      - "Brand guidelines document (complete)"
+      - "Logo usage guidelines (dos/don'ts)"
+
+    checkpoint:
+      question: "Does the visual identity reflect the brand strategy?"
+      pass_criteria:
+        - "Logo passes 5-pillar evaluation (all 7+/10)"
+        - "Colors map to brand personality (documented rationale)"
+        - "Typography hierarchy is clear"
+        - "Brand guidelines are comprehensive"
+      veto_conditions:
+        - "Logo fails simplicity test → VETO"
+        - "Colors don't pass WCAG AA contrast → VETO"
+        - "No brand guidelines document → VETO"
+
+  - id: phase_5_activate
+    name: "ACTIVATE — Movement & Launch"
+    agent: emily-heyward
+    description: "Transform the brand into a movement people join"
+    duration: "60-90 min"
+    depends_on: phase_4_identify
+
+    inputs:
+      - "Complete brand identity from Phases 1-4"
+      - "Business launch context"
+
+    steps:
+      - "Define emotional hook"
+      - "Build brand narrative (tension→belief→resolution)"
+      - "Design movement architecture"
+      - "  - Shared enemy identification"
+      - "  - Tribe rituals"
+      - "  - Brand lexicon"
+      - "Complete Brand Soul Canvas"
+      - "Touchpoint audit and plan"
+      - "Launch story creation"
+
+    outputs:
+      - "Brand Soul Canvas (complete)"
+      - "Brand narrative document"
+      - "Movement architecture"
+      - "Touchpoint plan"
+      - "Launch narrative"
+
+    checkpoint:
+      question: "Does the brand make people FEEL something?"
+      pass_criteria:
+        - "Brand Soul Canvas all blocks filled"
+        - "Shared enemy is clear and specific"
+        - "Emotional hook exists and resonates"
+        - "Touchpoint plan covers all key moments"
+      veto_conditions:
+        - "No emotional hook identified → VETO"
+        - "Brand narrative is feature-first → VETO (must be emotion-first)"
+        - "No shared enemy → WARNING (optional but recommended)"
+
+completion:
+  deliverables:
+    - "Brand Strategy Document (Phase 1)"
+    - "Positioning Canvas (Phase 2)"
+    - "Brand Name + Tagline (Phase 3)"
+    - "Visual Identity System (Phase 4)"
+    - "Brand Guidelines / Brand Book (Phase 4)"
+    - "Brand Soul Canvas (Phase 5)"
+    - "Movement Architecture (Phase 5)"
+    - "Launch Narrative (Phase 5)"
+
+  success_criteria:
+    - "All 5 phase checkpoints passed"
+    - "Brand passes the gut feeling test"
+    - "Onliness statement is specific and defensible"
+    - "Visual identity is consistent across all applications"
+    - "The brand has a documented belief system"

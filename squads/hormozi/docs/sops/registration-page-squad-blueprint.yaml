@@ -1,0 +1,762 @@
+# Registration Page Squad Blueprint
+# Source: $100M Money Models Blueprint - Registration Page Content
+# Pattern: Squad Blueprint Standard
+# Version: 1.0.0
+# Extracted: 2026-02-10
+
+metadata:
+  name: registration-page-squad
+  version: "1.0.0"
+  description: "Squad for creating high-converting event registration pages using Hormozi methodology"
+  source: "$100M Money Models Blueprint - Registration Page Content"
+  created: "2026-02-10"
+  pattern: "SC-BP-001"
+
+# ============================================================================
+# AGENTS
+# ============================================================================
+
+agents:
+  registration_strategist:
+    name: "Registration Strategist"
+    role: "Define event parameters and registration strategy"
+    expertise:
+      - Event planning and positioning
+      - Audience segmentation
+      - Conversion funnel design
+      - VIP tier architecture
+    responsibilities:
+      - Define event core details (date, time, platform, promise)
+      - Design registration-to-revenue funnel
+      - Create VIP ascension path
+      - Establish registration goals and KPIs
+    decision_authority:
+      - Event positioning and messaging
+      - VIP tier benefits structure
+      - Registration goal targets
+      - Funnel architecture
+    tools:
+      - funnel_mapper
+      - audience_analyzer
+      - goal_setter
+    source_reference: "Main_Offer_Landing_Page.md, lines 90-120"
+
+  registration_copywriter:
+    name: "Registration Copywriter"
+    role: "Write all registration page and sequence copy"
+    expertise:
+      - Hook creation
+      - Authority positioning
+      - Mystery/curiosity building
+      - CTA optimization
+    responsibilities:
+      - Write registration page VSL script
+      - Create confirmation email copy
+      - Write nurture sequence emails
+      - Craft SMS messages
+      - Write countdown sequence
+    decision_authority:
+      - Copy tone and voice
+      - Subject line selection
+      - CTA wording
+      - Sequence timing recommendations
+    guardrails:
+      - Must include mystery element that builds curiosity
+      - Must use specific numbers for authority
+      - Must make registration feel effortless
+      - Must include multiple timezones
+    templates:
+      hook: |
+        "Quick question. Can I get your email address?
+        Because I want to invite you to the biggest [AVATAR] event of the [SEASON/YEAR].
+        I spent over [INVESTMENT] on this event."
+      authority: |
+        "I [OWN/RUN] [COMPANY].
+        [PORTFOLIO/CLIENTS] have done [SPECIFIC RESULT] in [TIMEFRAME].
+        I [PERSONAL ACCOMPLISHMENT with specific numbers]."
+      mystery: |
+        "I've also been working on a secret project for over [TIME].
+        I won't tell you what it is yet, but I can tell you:
+        - It's better than [KNOWN VALUABLE THING]
+        - It costs less than [MORE VALUABLE THING]
+        - Every person who shows up live gets one FREE."
+      cta: |
+        "All you have to do is ONE thing:
+        Enter your email below and click submit.
+        That's it."
+    source_reference: "Pre_Event_Registration_VSL.md, complete script"
+
+  email_automation_specialist:
+    name: "Email/SMS Automation Specialist"
+    role: "Build and optimize all registration automations"
+    expertise:
+      - Email automation platforms (HubSpot, etc.)
+      - SMS marketing
+      - Segmentation logic
+      - Deliverability optimization
+    responsibilities:
+      - Configure registration form and data capture
+      - Build confirmation email automation
+      - Set up nurture sequences with correct timing
+      - Configure countdown sequence
+      - Set up VIP vs non-VIP segmentation
+      - Configure abandoned registration recovery
+    decision_authority:
+      - Automation platform selection
+      - Timing intervals
+      - Segmentation rules
+      - Technical implementation
+    sequence_timing:
+      confirmation: "IMMEDIATE"
+      first_followup: "15 minutes"
+      value_reminder: "24 hours"
+      affiliate_invite: "48 hours"
+      second_affiliate: "72 hours"
+    source_reference: "Registration_Page_Content.md, lines 7-56"
+
+  technical_lead:
+    name: "Technical Implementation Lead"
+    role: "Build registration infrastructure"
+    expertise:
+      - Landing page builders
+      - Form integration
+      - Calendar integration
+      - Tracking and analytics
+    responsibilities:
+      - Set up registration page
+      - Configure form with minimal fields
+      - Integrate calendar buttons (Google, Apple, Outlook)
+      - Set up vanity URLs
+      - Configure tracking pixels
+      - Implement smart links for abandoned form recovery
+    decision_authority:
+      - Platform selection
+      - Technical architecture
+      - Integration choices
+      - Performance optimization
+    technical_requirements:
+      form_fields: "Minimum necessary (email + name for events)"
+      calendar_integration: "Google, Apple, Outlook buttons"
+      vanity_url: "Subdomain for easy reference"
+      load_time: "<3 seconds"
+    source_reference: "Main_Offer_Landing_Page.md, line 104"
+
+  conversion_optimizer:
+    name: "Conversion Optimizer"
+    role: "Optimize registration and VIP upgrade rates"
+    expertise:
+      - A/B testing
+      - Conversion rate optimization
+      - Heatmap analysis
+      - Funnel analytics
+    responsibilities:
+      - Monitor registration conversion rates
+      - Track VIP upgrade rates
+      - Identify drop-off points
+      - Recommend optimizations
+      - Test variations
+    decision_authority:
+      - Test priorities
+      - Optimization recommendations
+      - Performance alerts
+    metrics:
+      registration_conversion: ">30% from targeted traffic"
+      vip_upgrade_rate: ">5% of registrations"
+      email_open_rate: ">40% for launch emails"
+      event_showup_rate: ">25% of registrations"
+    source_reference: "Pre_Event_Registration_VSL.md, lines 24-25"
+
+# ============================================================================
+# EXECUTOR MATRIX
+# ============================================================================
+
+executor_matrix:
+  # Phase 1: Pre-Registration Setup
+  event_definition:
+    task: "Define event core details"
+    cognitive_type: "Planning"
+    executor: "Human"
+    automation: "LOW"
+    agent: "registration_strategist"
+
+  technical_setup:
+    task: "Set up technical infrastructure"
+    cognitive_type: "Execution"
+    executor: "Worker"
+    automation: "MEDIUM"
+    agent: "technical_lead"
+
+  ascension_path:
+    task: "Create VIP ascension path"
+    cognitive_type: "Strategy"
+    executor: "Human"
+    automation: "LOW"
+    agent: "registration_strategist"
+
+  # Phase 2: Registration Page Copy
+  hook_creation:
+    task: "Create registration page hook"
+    cognitive_type: "Creative"
+    executor: "Human"
+    automation: "LOW"
+    agent: "registration_copywriter"
+
+  authority_statement:
+    task: "Write authority statement"
+    cognitive_type: "Creative"
+    executor: "Human"
+    automation: "LOW"
+    agent: "registration_copywriter"
+
+  mystery_element:
+    task: "Create mystery/curiosity element"
+    cognitive_type: "Creative"
+    executor: "Human"
+    automation: "LOW"
+    agent: "registration_copywriter"
+
+  cta_creation:
+    task: "Write registration CTA"
+    cognitive_type: "Creative"
+    executor: "Hybrid"
+    automation: "MEDIUM"
+    agent: "registration_copywriter"
+
+  # Phase 3: Post-Registration Flow
+  confirmation_email:
+    task: "Create confirmation email"
+    cognitive_type: "Template"
+    executor: "Hybrid"
+    automation: "HIGH"
+    agent: "registration_copywriter"
+
+  sms_confirmation:
+    task: "Create SMS confirmation"
+    cognitive_type: "Template"
+    executor: "Worker"
+    automation: "HIGH"
+    agent: "email_automation_specialist"
+
+  thank_you_page:
+    task: "Create thank you page with VIP upsell"
+    cognitive_type: "Creative + Technical"
+    executor: "Hybrid"
+    automation: "MEDIUM"
+    agent: "technical_lead"
+
+  # Phase 4: Nurture Sequence
+  fifteen_min_followup:
+    task: "Create 15-minute follow-up email"
+    cognitive_type: "Template"
+    executor: "Worker"
+    automation: "HIGH"
+    agent: "email_automation_specialist"
+
+  twentyfour_hour_reminder:
+    task: "Create 24-hour value reminder"
+    cognitive_type: "Template"
+    executor: "Worker"
+    automation: "HIGH"
+    agent: "email_automation_specialist"
+
+  affiliate_invitation:
+    task: "Create 48-hour affiliate invitation"
+    cognitive_type: "Template"
+    executor: "Worker"
+    automation: "HIGH"
+    agent: "email_automation_specialist"
+
+  # Phase 5: Abandoned Registration Recovery
+  abandonment_detection:
+    task: "Configure abandonment tracking"
+    cognitive_type: "Technical"
+    executor: "Worker"
+    automation: "HIGH"
+    agent: "technical_lead"
+
+  recovery_email:
+    task: "Create abandonment recovery email"
+    cognitive_type: "Template"
+    executor: "Hybrid"
+    automation: "HIGH"
+    agent: "email_automation_specialist"
+
+  # Phase 6: Countdown Sequence
+  countdown_sequence:
+    task: "Create pre-event countdown emails"
+    cognitive_type: "Template + Creative"
+    executor: "Hybrid"
+    automation: "MEDIUM"
+    agent: "registration_copywriter"
+
+  forty_eight_hour_checklist:
+    task: "Create 48-hour checklist email"
+    cognitive_type: "Template"
+    executor: "Worker"
+    automation: "HIGH"
+    agent: "email_automation_specialist"
+
+  # Phase 7: Launch Day Communications
+  launch_day_sequence:
+    task: "Configure launch day email/SMS sequence"
+    cognitive_type: "Technical"
+    executor: "Worker"
+    automation: "HIGH"
+    agent: "email_automation_specialist"
+
+  during_event_reminders:
+    task: "Set up during-event reminder emails"
+    cognitive_type: "Template"
+    executor: "Worker"
+    automation: "HIGH"
+    agent: "email_automation_specialist"
+
+  # Ongoing: Optimization
+  conversion_monitoring:
+    task: "Monitor and optimize conversion rates"
+    cognitive_type: "Analysis"
+    executor: "Hybrid"
+    automation: "MEDIUM"
+    agent: "conversion_optimizer"
+
+# ============================================================================
+# QUALITY GATES
+# ============================================================================
+
+quality_gates:
+  gate_1_strategy:
+    name: "Strategy Complete"
+    checkpoint: "Before page build"
+    criteria:
+      - event_details_finalized: "Date, time, platform confirmed"
+      - mystery_element_defined: "Real reveal planned for event"
+      - vip_path_designed: "Upgrade benefits stack complete"
+      - registration_goal_set: "Target number defined"
+    validation:
+      method: "Strategist review"
+      threshold: "All criteria met"
+    source: "Main_Offer_Landing_Page.md, lines 90-120"
+
+  gate_2_copy:
+    name: "Copy Complete"
+    checkpoint: "Before technical build"
+    criteria:
+      - hook_creates_curiosity: "Makes reader want to know more"
+      - authority_has_numbers: "Specific, verifiable results"
+      - mystery_is_real: "Will actually be delivered at event"
+      - cta_feels_effortless: "One simple action"
+      - timezones_included: "PT and ET minimum"
+    validation:
+      method: "Copy review + read-aloud test"
+      threshold: "All criteria met"
+    source: "Pre_Event_Registration_VSL.md"
+
+  gate_3_technical:
+    name: "Technical Ready"
+    checkpoint: "Before launch"
+    criteria:
+      - form_works: "Submission successful"
+      - email_delivers: "Within 60 seconds"
+      - sms_delivers: "Immediate"
+      - calendar_links_work: "Google, Apple, Outlook tested"
+      - smart_links_preserve_data: "Pre-filled checkout works"
+      - load_time: "<3 seconds"
+    validation:
+      method: "QA testing"
+      threshold: "100% pass rate"
+    source: "Main_Offer_Landing_Page.md, line 104"
+
+  gate_4_automation:
+    name: "Automation Validated"
+    checkpoint: "48 hours before event"
+    criteria:
+      - confirmation_triggers: "Immediate on registration"
+      - fifteen_min_triggers: "Correct segment only"
+      - twentyfour_hour_triggers: "Correct timing"
+      - forttyeight_hour_triggers: "Affiliate invite works"
+      - countdown_scheduled: "All emails scheduled correctly"
+      - launch_day_ready: "All launch day emails scheduled"
+      - vip_segmentation: "VIP vs non-VIP working"
+    validation:
+      method: "Test registrations through full sequence"
+      threshold: "100% automation accuracy"
+    source: "Registration_Page_Content.md, full sequence"
+
+  gate_5_performance:
+    name: "Performance Acceptable"
+    checkpoint: "Ongoing"
+    criteria:
+      - registration_rate: ">30% conversion from targeted traffic"
+      - vip_upgrade_rate: ">5% of registrations"
+      - email_open_rate: ">40%"
+      - showup_rate: ">25% of registrations"
+    validation:
+      method: "Analytics monitoring"
+      threshold: "All metrics at target"
+    source: "Pre_Event_Registration_VSL.md, lines 24-25"
+
+# ============================================================================
+# WORKFLOWS
+# ============================================================================
+
+workflows:
+  registration_page_creation:
+    name: "Registration Page Creation"
+    trigger: "New event registration needed"
+    steps:
+      - phase: "Strategy"
+        agent: "registration_strategist"
+        tasks:
+          - "Define event core details"
+          - "Design registration-to-revenue funnel"
+          - "Create VIP ascension path"
+          - "Set registration goals"
+        gate: "gate_1_strategy"
+
+      - phase: "Copy"
+        agent: "registration_copywriter"
+        tasks:
+          - "Write registration page VSL script"
+          - "Create hook, authority, mystery, CTA"
+          - "Write all email copy"
+          - "Write SMS messages"
+        gate: "gate_2_copy"
+
+      - phase: "Technical Build"
+        agent: "technical_lead"
+        tasks:
+          - "Build registration page"
+          - "Configure form"
+          - "Integrate calendar"
+          - "Set up vanity URLs"
+          - "Configure tracking"
+        gate: "gate_3_technical"
+
+      - phase: "Automation Setup"
+        agent: "email_automation_specialist"
+        tasks:
+          - "Configure confirmation automation"
+          - "Set up nurture sequence"
+          - "Configure countdown sequence"
+          - "Set up launch day sequence"
+          - "Configure segmentation"
+        gate: "gate_4_automation"
+
+      - phase: "Optimization"
+        agent: "conversion_optimizer"
+        tasks:
+          - "Monitor conversion rates"
+          - "Track VIP upgrades"
+          - "Identify issues"
+          - "Recommend improvements"
+        gate: "gate_5_performance"
+
+# ============================================================================
+# EMAIL SEQUENCE TEMPLATES
+# ============================================================================
+
+email_sequences:
+  confirmation_sequence:
+    trigger: "Registration complete"
+    emails:
+      - name: "Confirmation"
+        timing: "IMMEDIATE"
+        subject: "You're registered. (Save this email)"
+        segment: "All registrants"
+        elements:
+          - congratulations
+          - save_email_warning
+          - event_details
+          - registration_milestone
+          - platform_info
+          - calendar_link
+          - mystery_tease
+          - vip_mention
+        source: "Registration_Page_Content.md, line 13"
+
+      - name: "First Follow-up"
+        timing: "15 minutes"
+        subject: "in case you missed this"
+        segment: "Registered, NOT purchased"
+        elements:
+          - already_registered_confirmation
+          - vip_benefits_stack
+          - cta_to_upgrade
+        source: "Registration_Page_Content.md, lines 21-24"
+
+      - name: "Value Reminder"
+        timing: "24 hours"
+        subject: "Get your book first + VIP Livestream"
+        segment: "Registered, NOT purchased"
+        elements:
+          - operational_reason_to_preorder
+          - vip_benefits_with_details
+          - same_price_reminder
+          - cta_to_upgrade
+        source: "Registration_Page_Content.md, lines 32-38"
+
+      - name: "Affiliate Invitation"
+        timing: "48 hours"
+        subject: "Win a day with me (free)"
+        segment: "Registered, exclude existing affiliates"
+        elements:
+          - previous_launch_stats
+          - how_referral_works
+          - prize_structure
+          - affiliate_signup_link
+        source: "Registration_Page_Content.md, lines 39-46"
+
+  countdown_sequence:
+    trigger: "Registration + time-based"
+    emails:
+      - timing: "45 days before"
+        subject: "I've got a new book"
+        purpose: "Announcement"
+
+      - timing: "41 days before"
+        subject: "[Your Invite Inside]"
+        purpose: "Official invitation"
+
+      - timing: "35 days before"
+        subject: "What's a money model?"
+        purpose: "Content preview"
+
+      - timing: "28 days before"
+        subject: "[new pic] - shipment of books for you"
+        purpose: "Behind-the-scenes"
+
+      - timing: "19 days before"
+        subject: "I'm giving something HUGE away...LIVE"
+        purpose: "Mystery tease"
+
+      - timing: "14 days before"
+        subject: "Bigger than..."
+        purpose: "Logistics + hype"
+
+      - timing: "11 days before"
+        subject: "5 Mystery headliners...1 event...free?"
+        purpose: "Speaker reveal"
+
+      - timing: "9 days before"
+        subject: "Money Models (sneak peek)"
+        purpose: "Content tease"
+
+      - timing: "7 days before"
+        subject: "Did you miss this?"
+        purpose: "Meta-concept"
+
+      - timing: "4 days before"
+        subject: "What I'm gonna give you..."
+        purpose: "Secret project"
+
+      - timing: "48 hours before"
+        subject: "(48hrs out) what you need to know"
+        purpose: "Checklist"
+        elements:
+          - calendar_reminder
+          - vip_upgrade_cta
+          - desktop_recommendation
+          - share_with_friend_cta
+          - registration_count
+          - early_join_warning
+          - full_timezone_list
+        source: "Registration_Page_Content.md, line 218"
+
+      - timing: "24 hours before"
+        subject: "Watch your inbox tomorrow @9am PST / 12pm EST"
+        purpose: "Final prep"
+
+  launch_day_sequence:
+    trigger: "Event day"
+    emails:
+      - timing: "3 hours before"
+        subject: "Live in ~3hrs"
+        segment: "Non-VIP"
+        elements:
+          - save_link
+          - set_alarm
+          - last_vip_chance
+
+      - timing: "3 hours before (VIP)"
+        subject: "Live in ~3hrs"
+        segment: "VIP only"
+        elements:
+          - private_link_warning
+          - set_alarm
+
+      - timing: "60 minutes before"
+        subject: "We're live in 60min..."
+        elements:
+          - stream_is_up
+          - join_early_cta
+          - last_vip_chance
+
+      - timing: "15 minutes before"
+        subject: "WE ARE LIVE NOW (LINK INSIDE)"
+        elements:
+          - minimal_copy
+          - direct_link
+
+      - timing: "+15 minutes"
+        subject: "Alex is live & murdering it! Hop on!"
+        from: "Different sender (e.g., Leila)"
+        purpose: "Re-engagement with fresh voice"
+
+      - timing: "+60 minutes"
+        subject: "Made this for you..."
+        purpose: "Offer reveal"
+
+      - timing: "+90 minutes"
+        subject: "Launch Bonus Gone When Livestream Ends"
+        purpose: "Urgency"
+
+# ============================================================================
+# METRICS & TRACKING
+# ============================================================================
+
+metrics:
+  primary:
+    registration_conversion:
+      target: ">30%"
+      measurement: "Visitors to registrations"
+
+    vip_upgrade_rate:
+      target: ">5%"
+      measurement: "Registrations to VIP purchases"
+
+    email_open_rate:
+      target: ">40%"
+      measurement: "Launch emails opened"
+
+    event_showup_rate:
+      target: ">25%"
+      measurement: "Registrations to live attendance"
+
+  secondary:
+    sms_opt_in_rate:
+      measurement: "Phone numbers captured"
+
+    calendar_add_rate:
+      measurement: "Calendar button clicks"
+
+    referral_conversion_rate:
+      measurement: "Affiliate signups to referrals"
+
+    abandoned_form_recovery:
+      measurement: "Recovered registrations"
+
+    time_to_register:
+      measurement: "Session duration to registration"
+
+# ============================================================================
+# TOOLS & INTEGRATIONS
+# ============================================================================
+
+tools:
+  registration_form:
+    recommended:
+      - HubSpot
+      - Typeform
+      - Native Shopify
+    requirements:
+      - Minimal fields
+      - Fast submission
+      - Data export
+
+  email_platform:
+    recommended:
+      - HubSpot
+      - ActiveCampaign
+      - Klaviyo
+    requirements:
+      - Automation triggers
+      - Segmentation
+      - Smart links
+      - High deliverability
+
+  sms_platform:
+    recommended:
+      - Postscript
+      - Klaviyo
+      - Twilio
+    requirements:
+      - Immediate delivery
+      - Opt-out handling
+      - Compliance
+
+  calendar_integration:
+    required:
+      - Google Calendar
+      - Apple Calendar
+      - Outlook
+    format: "ICS files or direct links"
+
+  analytics:
+    required:
+      - Google Analytics 4
+      - Platform analytics
+    optional:
+      - Hotjar/Clarity (heatmaps)
+      - Funnel tracking tools
+
+# ============================================================================
+# SOURCE REFERENCES
+# ============================================================================
+
+source_references:
+  primary_sources:
+    - document: "Registration_Page_Content.md"
+      path: "/Users/oalanicolas/Code/mmos/squads/mind-cloning/minds/alex_hormozi/sources/03 Programas/(Blueprint) $100M Money Models/Original/"
+      content: "Complete email and SMS sequences for registration flow"
+
+    - document: "Pre_Event_Registration_VSL.md"
+      path: "/Users/oalanicolas/Code/mmos/squads/mind-cloning/minds/alex_hormozi/sources/03 Programas/(Blueprint) $100M Money Models/pt-br/scripts/"
+      content: "Registration page VSL script template"
+
+    - document: "Main_Offer_Landing_Page.md"
+      path: "/Users/oalanicolas/Code/mmos/squads/mind-cloning/minds/alex_hormozi/sources/03 Programas/(Blueprint) $100M Money Models/Original/"
+      content: "Funnel architecture and technical requirements"
+
+  key_citations:
+    hook_template:
+      source: "Pre_Event_Registration_VSL.md"
+      line: 5
+      quote: "Pergunta rapida. Posso pegar seu endereco de email?"
+
+    registration_goal:
+      source: "Registration_Page_Content.md"
+      line: 13
+      quote: "Our goal is to pass 1,000,000+ registrations by launch day"
+
+    mystery_element:
+      source: "Pre_Event_Registration_VSL.md"
+      line: 17
+      quote: "E melhor que um NFT e custa menos que um Bitcoin"
+
+    cta_simplicity:
+      source: "Pre_Event_Registration_VSL.md"
+      line: 21
+      quote: "Voce se inscreve abaixo e clica em enviar. E isso."
+
+    social_proof:
+      source: "Pre_Event_Registration_VSL.md"
+      line: 24
+      quote: "Ja temos mais de 300.000 pessoas registradas"
+
+    confirmation_subject:
+      source: "Registration_Page_Content.md"
+      line: 12
+      quote: "You're registered. (Save this email)"
+
+    followup_timing:
+      source: "Registration_Page_Content.md"
+      line: 21
+      quote: "Within 15 minutes of [Your Registered] Email"
+
+    early_join_warning:
+      source: "Registration_Page_Content.md"
+      line: 218
+      quote: "it is best to join 12-17 minutes early"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

@@ -1,0 +1,435 @@
+# Content Engine — Capability → Tool Mapping
+# ═══════════════════════════════════════════════════════════════════════════════
+# Mapeamento de capacidades do squad para ferramentas disponíveis.
+# Gerado por: discover-tools.md (Phase 6 Synthesis)
+# Data: 2026-02-11
+# ═══════════════════════════════════════════════════════════════════════════════
+
+version: "1.0"
+squad: content-engine
+generated: "2026-02-11"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GAPS IDENTIFICADOS + FERRAMENTAS RECOMENDADAS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+capabilities:
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # GAP 1: Social Media Analytics
+  # ─────────────────────────────────────────────────────────────────────────────
+  social_media_analytics:
+    description: "Métricas de performance por plataforma (reach, saves, shares)"
+    priority: high
+    agents: ["@caleb-ralston", "@vanessa-lau", "@content-engine"]
+    tools:
+      primary:
+        - name: "Instagram Graph API"
+          type: api
+          cost: grátis
+          auth: OAuth 2.0
+          rate_limit: "200 req/user/hora"
+          integration: "Fase 0 do Weekly Sprint (métricas de performance)"
+        - name: "YouTube Data API v3"
+          type: api
+          cost: "grátis (10k units/dia)"
+          auth: "API Key ou OAuth 2.0"
+          integration: "Análise de scripts (@george-blackman)"
+      fallback:
+        - name: "Late API"
+          type: api
+          cost: "$19/mês (analytics add-on $10/mês)"
+          note: "Analytics unificado de 13 plataformas"
+      mcp_candidate:
+        - name: "instagram-mcp"
+          github: null
+          note: "Verificar disponibilidade real antes de integrar"
+          stars: null
+          status: unverified
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # GAP 2: Headline / Copy A/B Testing (Scoring)
+  # ─────────────────────────────────────────────────────────────────────────────
+  headline_scoring:
+    description: "Scoring automático de headlines e copy (readability + sentiment + heurísticas)"
+    priority: high
+    agents: ["@nicolas-cole", "@oraculo-torriani", "@devil-advocate"]
+    tools:
+      primary:
+        - name: "textstat"
+          type: library
+          ecosystem: python
+          install: "pip install textstat"
+          stars: 1300
+          cost: grátis
+          capabilities: ["flesch_reading_ease", "gunning_fog", "smog_index", "reading_time"]
+          integration: "Checklist do Torriani (readability score)"
+        - name: "leia-br"
+          type: library
+          ecosystem: python
+          install: "pip install leia-br"
+          stars: 4900
+          cost: grátis
+          capabilities: ["sentiment_analysis", "social_media_calibrated", "emoji_support"]
+          integration: "Devil's Advocate (carga emocional do copy)"
+      node_alternative:
+        - name: "text-readability"
+          type: library
+          ecosystem: npm
+          install: "npm install text-readability"
+          note: "Port TypeScript do textstat"
+        - name: "sentiment"
+          type: library
+          ecosystem: npm
+          install: "npm install sentiment"
+          note: "AFINN-165 + Emoji Sentiment Ranking"
+      build_custom:
+        description: "Headline Scorer combinando textstat + LeIA + power words list + heurísticas (comprimento, números, perguntas)"
+        note: "CoSchedule NÃO tem API pública"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # GAP 3: Competitor Content Scraping
+  # ─────────────────────────────────────────────────────────────────────────────
+  competitor_scraping:
+    description: "Monitorar conteúdo de concorrentes e referências"
+    priority: medium
+    agents: ["@caleb-ralston", "@alex-hormozi"]
+    tools:
+      primary:
+        - name: "EXA MCP"
+          type: mcp
+          status: installed
+          cost: grátis (free tier)
+          capabilities: ["web_search", "company_research"]
+          integration: "Fase 0 Weekly Sprint (pesquisa de mercado)"
+      recommended:
+        - name: "firecrawl-mcp"
+          type: mcp
+          status: "known (já no registry)"
+          stars: 3303
+          cost: "grátis (free tier)"
+          capabilities: ["web_scraping", "markdown_conversion", "anti_bot"]
+          integration: "Brand Audit, Attention Audit"
+      fallback:
+        - name: "instaloader"
+          type: cli
+          install: "pip install instaloader"
+          note: "Download de posts Instagram (sem API oficial)"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # GAP 4: Content Scheduling
+  # ─────────────────────────────────────────────────────────────────────────────
+  content_scheduling:
+    description: "Agendar e publicar posts em múltiplas plataformas"
+    priority: medium
+    agents: ["@content-engine", "@vanessa-lau", "@justin-welsh"]
+    tools:
+      primary:
+        - name: "Late API"
+          type: api
+          cost: "grátis (20 posts/mês) | $19/mês (120 posts)"
+          auth: "Bearer Token"
+          platforms: 13
+          capabilities: ["multi_platform_posting", "scheduling", "webhooks", "analytics"]
+          integration: "Fase 5 Weekly Sprint (publicação)"
+      alternative:
+        - name: "Postiz"
+          type: github_project
+          stars: 26500
+          cost: "grátis (self-hosted)"
+          license: AGPL-3.0
+          note: "Requer Docker no VPS; mais complexo mas 100% grátis"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # GAP 5: SEO / Keyword Research
+  # ─────────────────────────────────────────────────────────────────────────────
+  seo_keyword_research:
+    description: "Pesquisa de keywords e tópicos com volume de busca"
+    priority: medium
+    agents: ["@caleb-ralston", "@alex-hormozi", "@dan-koe"]
+    tools:
+      primary:
+        - name: "KeyBERT"
+          type: library
+          ecosystem: python
+          install: "pip install keybert"
+          stars: 4100
+          cost: grátis
+          capabilities: ["keyword_extraction", "BERT_embeddings", "MMR_diversity"]
+          integration: "Content Philosophy, Instagram Plan"
+        - name: "YAKE"
+          type: library
+          ecosystem: python
+          install: "pip install yake"
+          cost: grátis
+          capabilities: ["unsupervised_keywords", "multi_language", "cli_native"]
+          note: "Mais rápido que KeyBERT, sem modelo pesado"
+      api_option:
+        - name: "Keywords Everywhere"
+          type: api
+          cost: "$10 one-time (100k credits, não expiram)"
+          capabilities: ["search_volume", "CPC", "competition", "trend_data"]
+        - name: "SerpApi"
+          type: api
+          cost: "$50/mês (5k buscas)"
+          capabilities: ["google_trends_stable", "SERP_data", "people_also_ask"]
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # GAP 6: Newsletter Delivery
+  # ─────────────────────────────────────────────────────────────────────────────
+  newsletter_delivery:
+    description: "Envio e gestão de newsletter"
+    priority: low
+    agents: ["@nicolas-cole", "@dan-koe"]
+    tools:
+      primary:
+        - name: "Beehiiv API"
+          type: api
+          cost: "grátis até 2.500 subscribers"
+          capabilities: ["subscribers_CRUD", "posts_CRUD", "automations", "webhooks"]
+          integration: "Newsletter-to-Social workflow"
+      alternative:
+        - name: "Kit (ConvertKit) API v4"
+          type: api
+          cost: "grátis até 10.000 subscribers"
+          capabilities: ["broadcasts", "tags", "automations", "custom_fields"]
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # GAP 7: Readability Scoring
+  # ─────────────────────────────────────────────────────────────────────────────
+  readability_scoring:
+    description: "Análise de legibilidade e complexidade de texto"
+    priority: high
+    agents: ["@oraculo-torriani", "@devil-advocate", "@nicolas-cole"]
+    tools:
+      # Mesmas ferramentas do headline_scoring (textstat, text-readability)
+      primary_ref: headline_scoring
+      note: "Compartilha ferramentas com headline_scoring — textstat/text-readability cobrem ambos"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # GAP 8: Hashtag Research
+  # ─────────────────────────────────────────────────────────────────────────────
+  hashtag_research:
+    description: "Sugestão de hashtags relevantes por plataforma"
+    priority: low
+    agents: ["@vanessa-lau", "@justin-welsh"]
+    tools:
+      primary:
+        - name: "KeyBERT → hashtags"
+          type: library
+          ecosystem: python
+          note: "Extrair keywords e converter para #hashtags"
+          integration: "Write Post task (hashtag suggestions)"
+      api_option:
+        - name: "RiteKit API"
+          type: api
+          cost: "grátis (100 credits/mês)"
+          capabilities: ["hashtag_suggestions", "trending_hashtags", "engagement_stats"]
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # GAP 9: Trend Detection
+  # ─────────────────────────────────────────────────────────────────────────────
+  trend_detection:
+    description: "Detectar tendências e tópicos em alta"
+    priority: high
+    agents: ["@alex-hormozi", "@gary-vaynerchuk", "@caleb-ralston"]
+    tools:
+      primary:
+        - name: "trendspyg"
+          type: library
+          ecosystem: python
+          install: "pip install trendspyg"
+          cost: grátis
+          capabilities: ["trending_now", "regional_data", "115_regions"]
+          note: "Substituto do pytrends (ARQUIVADO abril 2025)"
+          integration: "Fase 0 Weekly Sprint (trending topics)"
+        - name: "Reddit API"
+          type: api
+          cost: grátis
+          rate_limit: "100 req/min"
+          capabilities: ["trending_subreddits", "hot_posts", "top_posts"]
+          integration: "Attention Audit, Content Philosophy"
+      mcp_candidate:
+        - name: "dataforseo-mcp"
+          type: mcp
+          stars: 141
+          note: "Google Trends + SERP + keyword data via MCP"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # GAP 10: YouTube Transcript Extraction
+  # ─────────────────────────────────────────────────────────────────────────────
+  youtube_transcripts:
+    description: "Extrair transcrições de vídeos YouTube para repurposing"
+    priority: high
+    agents: ["@george-blackman", "@justin-welsh"]
+    tools:
+      primary:
+        - name: "mcp-youtube-transcript"
+          type: mcp
+          status: "known (já no registry)"
+          install: "npx -y @jkawamoto/mcp-youtube-transcript"
+          stars: 271
+          cost: grátis
+          capabilities: ["transcript_extraction", "multi_language", "paragraph_segmentation"]
+          integration: "YouTube-to-Everything workflow"
+      cli_fallback:
+        - name: "youtube-transcript-api"
+          type: cli
+          ecosystem: python
+          install: "pip install youtube-transcript-api"
+          note: "CLI + Python API, ativamente mantido (2026)"
+        - name: "yt-dlp"
+          type: cli
+          install: "pip install yt-dlp"
+          note: "Download de legendas e áudio"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FERRAMENTAS JÁ DISPONÍVEIS NO ECOSSISTEMA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+existing_tools:
+  vps:
+    - name: "Chrome Headless"
+      usage: "HTML-to-Image (slides de carrossel)"
+      location: "VPS — marketing-pipeline skill"
+    - name: "Brave Search"
+      usage: "Web search para pesquisa de tendências"
+      location: "VPS — OpenClaw bundled"
+    - name: "Nano Banana Pro"
+      usage: "Geração de imagens via Gemini"
+      location: "VPS — skill instalada"
+    - name: "Whisper"
+      usage: "Transcrição de áudio"
+      location: "VPS — /usr/local/bin/whisper"
+
+  claude_code:
+    - name: "EXA MCP"
+      usage: "Web research, company analysis"
+      status: installed
+    - name: "Context7 MCP"
+      usage: "Documentação de bibliotecas"
+      status: installed
+    - name: "Puppeteer MCP"
+      usage: "Browser automation, screenshots"
+      status: known
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# IMPACT × EFFORT MATRIX
+# ═══════════════════════════════════════════════════════════════════════════════
+#
+# Impact: 1-10 (quanto resolve o gap)
+# Effort: low (minutos) | medium (horas) | high (dias)
+#
+# ┌─────────────────────────────────────────────────────────┐
+# │           HIGH IMPACT                                    │
+# │                                                          │
+# │  ★ textstat+LeIA (10/low)   ★ trendspyg (9/low)       │
+# │  ★ youtube-transcript (9/low) ★ KeyBERT (8/low)        │
+# │  ★ Late API (8/medium)       ★ Instagram API (9/med)   │
+# │  ★ Reddit API (7/low)                                   │
+# │                                                          │
+# │           LOW IMPACT                                     │
+# │                                                          │
+# │  · RiteKit (5/low)           · Beehiiv API (6/medium)  │
+# │  · Postiz (7/high)           · DataForSEO MCP (6/high) │
+# │                                                          │
+# │  LOW EFFORT ◄─────────────────────────► HIGH EFFORT      │
+# └─────────────────────────────────────────────────────────┘
+
+impact_effort_matrix:
+  quick_wins:  # High Impact + Low Effort
+    - tool: "textstat + leia-br"
+      impact: 10
+      effort: low
+      gaps_solved: ["headline_scoring", "readability_scoring"]
+    - tool: "trendspyg"
+      impact: 9
+      effort: low
+      gaps_solved: ["trend_detection"]
+    - tool: "mcp-youtube-transcript"
+      impact: 9
+      effort: low
+      gaps_solved: ["youtube_transcripts"]
+    - tool: "KeyBERT + YAKE"
+      impact: 8
+      effort: low
+      gaps_solved: ["seo_keyword_research", "hashtag_research"]
+    - tool: "Reddit API"
+      impact: 7
+      effort: low
+      gaps_solved: ["trend_detection"]
+
+  strategic:  # High Impact + Medium Effort
+    - tool: "Late API"
+      impact: 8
+      effort: medium
+      gaps_solved: ["content_scheduling", "social_media_analytics"]
+    - tool: "Instagram Graph API"
+      impact: 9
+      effort: medium
+      gaps_solved: ["social_media_analytics"]
+    - tool: "YouTube Data API v3"
+      impact: 8
+      effort: medium
+      gaps_solved: ["social_media_analytics"]
+
+  nice_to_have:  # Low Impact or High Effort
+    - tool: "Beehiiv API"
+      impact: 6
+      effort: medium
+      gaps_solved: ["newsletter_delivery"]
+    - tool: "Postiz (self-hosted)"
+      impact: 7
+      effort: high
+      gaps_solved: ["content_scheduling"]
+    - tool: "dataforseo-mcp"
+      impact: 6
+      effort: high
+      gaps_solved: ["seo_keyword_research"]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PLANO DE INTEGRAÇÃO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+integration_plan:
+
+  immediate:  # Esta semana — pip/npm install e pronto
+    description: "Quick wins que não requerem API keys ou infra"
+    tools:
+      - "pip install textstat leia-br keybert yake trendspyg youtube-transcript-api"
+      - "npm install text-readability sentiment"
+    integration_points:
+      - agent: "@oraculo-torriani"
+        usage: "Adicionar readability score ao checklist de validação"
+      - agent: "@devil-advocate"
+        usage: "Usar sentiment analysis nos testes de carga emocional"
+      - agent: "@nicolas-cole"
+        usage: "KeyBERT para keyword extraction em headlines"
+      - agent: "@content-engine"
+        usage: "trendspyg para trending topics na Fase 0"
+
+  short_term:  # Próximas 2 semanas — requer API keys
+    description: "APIs grátis que precisam de configuração OAuth/keys"
+    tools:
+      - "Instagram Graph API (OAuth + Meta app review)"
+      - "YouTube Data API v3 (API Key via Google Cloud)"
+      - "Reddit API (OAuth app registration)"
+      - "mcp-youtube-transcript (instalar MCP)"
+    integration_points:
+      - workflow: "weekly-sprint.md Fase 0"
+        usage: "Analytics automáticos de performance semanal"
+      - workflow: "youtube-to-everything.md"
+        usage: "Extração automática de transcripts"
+
+  medium_term:  # Próximo mês — requer setup mais elaborado
+    description: "Ferramentas pagas ou que requerem infra adicional"
+    tools:
+      - "Late API ($19/mês para scheduling)"
+      - "Keywords Everywhere ($10 one-time)"
+      - "Beehiiv ou Kit API (newsletter automation)"
+      - "firecrawl-mcp (competitor scraping)"
+    integration_points:
+      - workflow: "weekly-sprint.md Fase 5"
+        usage: "Publicação automática via Late API"
+      - workflow: "newsletter-to-social.md"
+        usage: "Integração com plataforma de newsletter"

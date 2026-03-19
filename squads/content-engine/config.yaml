@@ -1,0 +1,400 @@
+# Content Engine v2 - Unified Squad Configuration
+# Merge of social-strategist (8 agents) + copy (9 agents) + devil-advocate (new)
+# Version: 2.0.0
+# Created: 2026-02-10
+
+# Top-level fields (standard AIOS format)
+name: content-engine
+version: "2.0.0"
+entry_agent: content-engine
+
+squad:
+  name: content-engine
+  display_name: "Content Engine v2"
+  version: "2.0.0"
+  domain: "content strategy, copywriting, social media, brand building"
+  description: |
+    Squad unificado de 18 mentes elite para estrategia de conteudo, copywriting,
+    distribuicao e validacao. 3 camadas: Estrategia (planejar) → Producao (criar
+    com debate) → Qualidade (validar + desafiar). Construido para o posicionamento
+    do Tiago: "Clareza em meio ao caos".
+
+  context: |
+    Brazilian content creator selling clarity/direction services.
+    Publishes on Instagram, YouTube, TikTok, LinkedIn, Substack.
+    Product: "Next Step" (beta gratuito — sessao de clareza e direcao).
+    Enemy: FOMO, pressa, formulas magicas, falso produtivo.
+    ICP: Empreendedor/profissional 28-42 anos, R$5-25k/mes, casado com filhos pequenos.
+    Schwartz: Awareness Level 3 (Solution Aware), Sophistication 3-4 (Mechanism/Enlarged).
+    Mass Desire: Confianca de direcao sem sacrificio adicional.
+    Mecanismo unico: "Obesidade mental" como causa-raiz (angulo novo no mercado BR).
+    ICP Source of Truth: data/icp-research.md
+    Visual Rules Source of Truth: data/visual-rules.md (neurociencia + 8M fotos, 25+ fontes)
+    Visual Research Completa: data/visual-research.md (440 linhas, dados brutos)
+
+  keywords:
+    - content strategy
+    - social media
+    - copywriting
+    - personal branding
+    - video scripts
+    - newsletter
+    - instagram
+    - youtube
+    - debate
+    - validation
+
+orchestrator:
+  agent: content-engine
+  file: agents/content-engine.md
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 3-LAYER ARCHITECTURE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+layers:
+  # CAMADA 1: ESTRATEGIA (planejar)
+  strategy:
+    description: "Diagnostico, planejamento macro, posicionamento, frameworks estrategicos"
+    agents:
+      - id: caleb-ralston
+        name: Caleb Ralston
+        role: Brand Strategy Diagnostician
+        file: agents/caleb-ralston.md
+        frameworks: [Brand Journey, Accordion Method, Waterfall, 7-Day Sprint]
+        also_in: [quality]  # Atua em review de alinhamento (Fase 5)
+
+      - id: dan-koe
+        name: Dan Koe
+        role: Content Philosopher & One-Person Business Architect
+        file: agents/dan-koe.md
+        frameworks: [One-Person Business Model, Newsletter-First, Art of Focus]
+
+      - id: gary-vaynerchuk
+        name: Gary Vaynerchuk
+        role: Attention & Distribution Strategist
+        file: agents/gary-vaynerchuk.md
+        frameworks: [Day Trading Attention, Content Model, Platform-Native, Document Don't Create]
+
+      - id: alex-hormozi
+        name: Alex Hormozi
+        role: Leads & Content at Scale Strategist
+        file: agents/alex-hormozi.md
+        frameworks: [Core Four, Rule of 100, Hook-Retain-Reward, Lead Magnets]
+
+  # CAMADA 2: PRODUCAO (criar — com debate)
+  production:
+    description: "Copywriting, scripts, content creation — debate obrigatorio para feed"
+    agents:
+      - id: nicolas-cole
+        name: Nicolas Cole
+        role: Digital Writing Craftsman & Debate Consolidator
+        file: agents/nicolas-cole.md
+        frameworks: [Atomic Essays, Headline Engineering, Rate of Revelation, Writing Rhythms]
+        special_role: "Dono do merge em debates de copy social"
+
+      - id: stefan-georgi
+        name: Stefan Georgi
+        role: RMBC Method Master & Long-Form Specialist
+        file: agents/stefan-georgi.md
+        frameworks: [RMBC Method, VSL Scripts, Mechanism Discovery]
+
+      - id: joanna-wiebe
+        name: Joanna Wiebe
+        role: Conversion Copywriter
+        file: agents/joanna-wiebe.md
+        frameworks: [Voice of Customer, Message Mining, Conversion Optimization]
+
+      - id: george-blackman
+        name: George Blackman
+        role: YouTube Scriptwriting Specialist
+        file: agents/george-blackman.md
+        frameworks: [YTSP 5-Phase, Setup-Tension-Payoff, Target-Transformation-Stakes]
+
+      - id: vanessa-lau
+        name: Vanessa Lau
+        role: Instagram Strategy & Content Repurposing Specialist
+        file: agents/vanessa-lau.md
+        frameworks: [1-to-54 Repurposing, 9 Content Pillars, ANC Funnel]
+
+      - id: justin-welsh
+        name: Justin Welsh
+        role: Content Systems Architect & Solopreneur
+        file: agents/justin-welsh.md
+        frameworks: [ContentOS, LinkedInOS, 1-to-12 Repurposing, Content Matrix]
+
+      - id: gary-halbert
+        name: Gary Halbert
+        role: Direct Response Master
+        file: agents/gary-halbert.md
+        frameworks: [Sales Letters, A-Pile, Starving Crowd, Emotional Hooks]
+
+      - id: claude-hopkins
+        name: Claude Hopkins
+        role: Scientific Advertising Pioneer
+        file: agents/claude-hopkins.md
+        frameworks: [Scientific Advertising, Preemptive Claims, Reason-Why Copy]
+
+      - id: dan-kennedy
+        name: Dan Kennedy
+        role: No BS Direct Response & Offer Specialist
+        file: agents/dan-kennedy.md
+        frameworks: [No BS Marketing, Magnetic Marketing, Offer Architecture, Deadline Strategies]
+
+      - id: david-ogilvy
+        name: David Ogilvy
+        role: Brand Advertising & Research-Driven Copy Pioneer
+        file: agents/david-ogilvy.md
+        frameworks: [Research-First Advertising, Brand Image, Headline Rules, Long Copy Principles]
+
+  # LEGACY ORCHESTRATOR (mantido para compatibilidade)
+  legacy_orchestrators:
+    agents:
+      - id: social-strategist
+        name: Social Strategist
+        role: Legacy Orchestrator (substituido por content-engine)
+        file: agents/social-strategist.md
+        note: "Orchestrador original do social-strategist squad. Mantido para referencia."
+
+  # CAMADA 3: QUALIDADE (validar + desafiar)
+  quality:
+    description: "Diagnostico de awareness, validacao brutal, devil's advocate"
+    agents:
+      - id: eugene-schwartz
+        name: Eugene Schwartz
+        role: Market Analyst & Awareness Diagnostician
+        file: agents/eugene-schwartz.md
+        frameworks: [5 Levels of Awareness, 5 Levels of Market Sophistication]
+        rule: "SEMPRE roda ANTES de qualquer producao"
+
+      - id: oraculo-torriani
+        name: Oraculo Torriani
+        role: Copy Quality Validator & QA Guardian
+        file: agents/oraculo-torriani.md
+        frameworks: [Master Validator, 5 Non-Negotiable Criteria]
+        rule: "Gate FINAL para todo conteudo de feed. So 10/10 passa."
+
+      - id: devil-advocate
+        name: Devil's Advocate
+        role: Advogado do Diabo & Quality Challenger
+        file: agents/devil-advocate.md
+        frameworks: [Teste da Substituicao, Teste do Dado, Teste do Scroll]
+        rule: "Ataca generico, vago, sem dados. NAO reescreve."
+        # modes: documentation/routing field only — no runtime validation needed.
+        # copy mode = testes de copy (Substituicao, Dado, Scroll)
+        # visual mode = 3 testes visuais (Repeticao, 7 Principios, 50ms)
+        modes: [copy, visual]
+
+  # CAMADA 4: VISUAL (art direction — debate visual para capas)
+  visual:
+    description: "Art direction, debate visual e typography para capas de carrossel e posts"
+    agents:
+      - id: visual-director
+        name: Visual Director
+        role: Art Director & Cinematographer
+        file: agents/visual-director.md
+        frameworks: [Mood Board, Visual Storytelling, Composition Rules]
+        rule: "Lidera Blocos 1 (Art Direction) e 3 (Ambiente) do Nano Banana"
+        status: active
+
+      - id: visual-technician
+        name: Visual Technician
+        role: Technical Visual Engineer
+        file: agents/visual-technician.md
+        frameworks: [Camera Theory, Color Science, Post-Production]
+        rule: "Lidera Blocos 2 (Tecnica) e 5 (Design) do Nano Banana"
+        status: active
+
+      - id: visual-typographer
+        name: Visual Typographer
+        role: Typography & Text Layout Specialist
+        file: agents/visual-typographer.md
+        frameworks: [Type Hierarchy, Readability Science, Gemini Text Rendering]
+        rule: "Lidera Bloco 4 (Texto) do Nano Banana. Especialista em posicionamento Gemini."
+        status: active
+
+  # ORCHESTRATORS (routing layer)
+  orchestrators:
+    - id: content-engine
+      name: Content Engine
+      role: Orchestrador Unificado
+      file: agents/content-engine.md
+      description: "Router principal — sabe quando usar estrategia vs producao vs qualidade"
+
+    - id: copy-chief
+      name: Copy Chief
+      role: Sub-Router de Copy (vendas, landing pages, VSLs)
+      file: agents/copy-chief.md
+      description: "Router especializado para copy de vendas/conversao. Ativado pelo orchestrator."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DEBATE CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+debate:
+  enabled: true
+  workflow: workflows/debate-session.md
+
+  rules:
+    feed_posts: "DEBATE OBRIGATORIO (3 opinioes + devil's advocate + Torriani)"
+    carousels: "DEBATE OBRIGATORIO"
+    reels: "DEBATE OBRIGATORIO"
+    stories: "Producao direta (1 agente + checklist) — sem debate"
+    mid_week_adapt: "Debate rapido (2 opinioes + devil's advocate)"
+
+  agent_pairs:
+    carousel_copy:
+      agent_a: nicolas-cole
+      agent_b: alex-hormozi
+      consolidator: nicolas-cole
+
+    reel_script:
+      agent_a: george-blackman
+      agent_b: nicolas-cole
+      consolidator: nicolas-cole
+
+    static_phrase:
+      agent_a: nicolas-cole
+      agent_b: dan-koe
+      consolidator: nicolas-cole
+
+    landing_email:
+      agent_a: joanna-wiebe
+      agent_b: stefan-georgi
+      consolidator: joanna-wiebe
+
+    # DEBATE VISUAL (capas de carrossel/post)
+    carousel_cover:
+      agent_a: visual-director
+      agent_b: visual-technician
+      critic: devil-advocate  # modo visual (3 testes: Repeticao, 7 Principios, 50ms)
+      typographer: visual-typographer
+      workflow: workflows/cover-art-direction.md
+
+  limits:
+    max_rounds: 2
+    escalation: "3a rejeicao do Torriani = decisao humana (Tiago)"
+    time_per_debate: "30-45min"
+
+  scoring:
+    social_content: 7  # minimo Torriani para conteudo social
+    sales_copy: 10     # minimo Torriani para copy de vendas
+
+  visual_rules:
+    source_of_truth: data/visual-rules.md
+    research_full: data/visual-research.md
+    nano_banana_template: templates/nano-banana-prompt-tmpl.md
+    rule: "TODO prompt de imagem DEVE seguir visual-rules.md (7 Principios + Checklist Rapido)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  weekly_sprint:
+    file: workflows/weekly-sprint.md
+    description: "Sprint semanal completo: dados → contexto → macro → micro → copy → review"
+    phases: 6
+
+  mid_week_adapt:
+    file: workflows/mid-week-adapt.md
+    description: "Adaptacao mid-week: analise → debate rapido → reescrita"
+    phases: 3
+
+  debate_session:
+    file: workflows/debate-session.md
+    description: "Debate estruturado: A → B → devil's advocate → consolidacao → Torriani"
+    phases: 6
+
+  carousel_creation:
+    file: workflows/carousel-creation.md
+    description: "Criar carrossel Instagram (com debate de copy + debate visual)"
+
+  cover_art_direction:
+    file: workflows/cover-art-direction.md
+    description: "Pipeline de art direction para capas (debate visual + rotacao)"
+
+  content_piece:
+    file: workflows/content-piece.md
+    description: "Produzir 1 peca de conteudo (com debate se feed)"
+
+  youtube_to_everything:
+    file: workflows/youtube-to-everything.md
+    description: "YouTube → repurposing para todas plataformas"
+
+  newsletter_to_social:
+    file: workflows/newsletter-to-social.md
+    description: "Newsletter → distribuicao social"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES (from copy squad)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  - id: QG-001
+    name: "Request Classification"
+    transition: "Input → Camada 1 ou 3"
+    type: routing
+    criteria: "Tipo de request e awareness level identificados"
+
+  - id: QG-002
+    name: "Diagnosis Complete"
+    transition: "Camada 3 (Schwartz) → Camada 2"
+    type: blocking
+    criteria: "Market awareness + sophistication determinados"
+
+  - id: QG-003
+    name: "Debate Complete"
+    transition: "Debate → Consolidacao"
+    type: blocking
+    criteria: "3 versoes + devil's advocate + merge feito"
+
+  - id: QG-004
+    name: "Torriani Validation"
+    transition: "Draft → Aprovado"
+    type: blocking
+    criteria: "Score minimo atingido (7/10 social, 10/10 vendas)"
+
+  - id: QG-005
+    name: "Output Final"
+    transition: "Aprovado → Entregue"
+    type: blocking
+    criteria: "Todos os gates passaram, copy formatada, JSON batch gerado"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SETTINGS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+settings:
+  show_greeting: true
+  show_ecosystem_report: false
+  language: pt-BR
+  target_platforms:
+    - instagram
+    - youtube
+    - tiktok
+    - linkedin
+    - substack
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PATTERN LIBRARY (from copy squad)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+pattern_library:
+  prefix: CE
+  categories:
+    - id: SP
+      name: "Strategy Patterns"
+      description: "Patterns para diagnostico e planejamento"
+    - id: DP
+      name: "Debate Patterns"
+      description: "Patterns para mecanismo de debate"
+    - id: CP
+      name: "Copy Patterns"
+      description: "Patterns para producao de copy"
+    - id: VP
+      name: "Validation Patterns"
+      description: "Patterns para validacao (Torriani + Devil's Advocate)"
+    - id: WP
+      name: "Workflow Patterns"
+      description: "Patterns para workflows (sprint, adaptacao)"

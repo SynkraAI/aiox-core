@@ -1,0 +1,1292 @@
+# Workshop Launch Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Workshop Playbook + Framework Analysis - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: workshop-launch
+  purpose: "Execute high-converting online workshop launches that convert 10-30% of live attendees"
+  domain: launch-marketing
+  source_playbooks:
+    - "$ 100M Workshop Playbook.md"
+    - "FRAMEWORK WORKSHOP HORMOZI.md"
+    - "CHECKLIST COMPLETO WORKSHOP.md"
+    - "PLAYBOOK DE CONTEUDO E SLIDES.md"
+    - "ANALISE DO FRAMEWORK DO WORKSHOP.md"
+
+  core_equation: |
+    Launch ROI = (Live Attendees x Conversion Rate x AOV) / Ad Spend
+    Target: 10-30% live conversion rate
+    Impact: 5-20x ROI on advertising spend
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: workshop-commander
+      role: "Orchestrate the 7-Block workshop and coordinate all phases"
+      decisions:
+        - "Phase transition timing"
+        - "Resource allocation across team"
+        - "Real-time performance adjustments"
+        - "Escalation trigger assessment"
+      kpis:
+        - "Overall conversion rate"
+        - "Live attendance vs registrations"
+        - "Revenue vs ad spend ROI"
+
+  tier_0_diagnosis:
+    - agent: offer-architect
+      role: "Design and validate offer structure with value stack"
+      inputs:
+        - "Product/service details"
+        - "Market pricing data"
+        - "Customer testimonials"
+      outputs:
+        - "Complete offer document"
+        - "Pricing matrix with anchor"
+        - "Bonus stack with values"
+
+    - agent: proof-curator
+      role: "Organize and match social proof to audience segments"
+      inputs:
+        - "Customer testimonials"
+        - "Case studies"
+        - "Screenshots and results"
+      outputs:
+        - "Proof library by demographic"
+        - "Case study scripts"
+        - "Real-time proof displays"
+
+  tier_1_execution:
+    - agent: content-producer
+      role: "Create slides, scripts, and educational framework"
+      specialization: "Block 3: Educacao Profunda"
+      deliverables:
+        - "100-1600 slide deck"
+        - "Framework documentation"
+        - "Transition scripts"
+        - "Demonstration materials"
+
+    - agent: traffic-driver
+      role: "Execute registration campaigns and warmup sequences"
+      specialization: "Phase A: Pre-Workshop"
+      capabilities:
+        - "Ad campaign management"
+        - "Email sequence creation"
+        - "Registration optimization"
+        - "Reminder automation"
+
+    - agent: tech-director
+      role: "Manage all technical systems and backups"
+      specialization: "Technical execution"
+      responsibilities:
+        - "Streaming setup and backup"
+        - "Payment gateway testing"
+        - "Chat moderation setup"
+        - "Real-time monitoring"
+
+  tier_2_judgment:
+    - agent: conversion-closer
+      role: "Execute offer presentation and handle objections"
+      specialization: "Blocks 5-7: Stack, Risk Inversion, Close"
+      techniques:
+        - "Price reduction scripting"
+        - "Urgency creation"
+        - "Live objection handling"
+        - "Q&A facilitation"
+
+    - agent: performance-analyst
+      role: "Monitor KPIs and recommend real-time adjustments"
+      inputs:
+        - "Live attendance data"
+        - "Retention metrics"
+        - "Engagement rates"
+        - "Conversion tracking"
+      outputs:
+        - "Performance alerts"
+        - "Optimization recommendations"
+        - "Post-event analysis"
+
+    - agent: follow-up-specialist
+      role: "Execute post-workshop conversion and downsell"
+      specialization: "Phase C: Post-Workshop"
+      techniques:
+        - "Replay sequence"
+        - "Last chance urgency"
+        - "Downsell positioning"
+        - "Non-buyer recovery"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  workshop-commander:
+    id: workshop-commander
+    title: "Workshop Launch Orchestrator"
+    tier: orchestrator
+    icon: "🎯"
+
+    purpose: |
+      Coordinate the complete workshop launch from preparation through
+      post-event follow-up. Ensure all 7 blocks execute flawlessly and
+      conversion targets are achieved.
+
+    core_frameworks:
+      - name: "7-Block Structure"
+        components:
+          - "Hook Impossivel (10 min)"
+          - "Origem e Conexao (15 min)"
+          - "Educacao Profunda (60 min)"
+          - "Casos em Cascata (30 min)"
+          - "Stack de Valor (20 min)"
+          - "Inversao de Risco (10 min)"
+          - "Demonstracao Final (30 min)"
+      - name: "Launch ROI Optimization"
+        equation: "(Live Attendees x Conversion Rate x AOV) / Ad Spend"
+
+    decision_authority:
+      - "Phase timing and transitions"
+      - "Resource allocation"
+      - "Real-time pivots during live event"
+      - "Escalation triggers"
+
+    inputs:
+      - "Registration and attendance data"
+      - "Real-time retention metrics"
+      - "Team status reports"
+      - "Technical system status"
+
+    outputs:
+      - "Phase transition signals"
+      - "Performance alerts"
+      - "Resource reallocation directives"
+      - "Post-event analysis report"
+
+    success_metrics:
+      primary:
+        - name: "Live Conversion Rate"
+          target: "10-30%"
+        - name: "Launch ROI"
+          target: "5-20x ad spend"
+      secondary:
+        - "Registration to live: >25%"
+        - "1-hour retention: >40%"
+        - "Chat engagement: >20%"
+
+  offer-architect:
+    id: offer-architect
+    title: "Offer & Stack Designer"
+    tier: tier_0
+    icon: "💎"
+
+    purpose: |
+      Design irresistible offers with high-anchor pricing and sequential
+      value stacking. Create the psychological framework for conversion.
+
+    offer_components:
+      core_offer:
+        requirements:
+          - "Clear primary deliverable"
+          - "Specific outcome promise"
+          - "Defined delivery mechanism"
+          - "Strong guarantee"
+
+      value_stack:
+        structure: |
+          Stack total must be 10x+ final price.
+          Example from Hormozi:
+          - Lead System: $15,999
+          - Sales System: $5,999
+          - Delivery System: $6,499
+          - Profit System: $41,458
+          - Total: $69,955 (then reduce to $5,997)
+
+      bonus_categories:
+        - "Sistema/template pratico (valor 3-5x preco)"
+        - "Treinamento complementar"
+        - "Comunidade ou suporte"
+        - "Ferramentas/software"
+        - "Sessoes ao vivo/consultoria"
+        - "Conteudo exclusivo futuro"
+
+      scarcity_bonuses:
+        - "Bonus para primeiros X"
+        - "Bonus apenas ao vivo"
+        - "Item que desaparece quando live termina"
+
+    pricing_strategy:
+      anchor_establishment:
+        - "Calculate true market value"
+        - "Sum all component values"
+        - "Add time/expertise value"
+
+      reduction_sequence:
+        - "First reduction: 50-70% off anchor"
+        - "Second reduction: Additional 50% off"
+        - "Final price: 90-95% off anchor"
+
+      payment_options:
+        - "A vista com desconto"
+        - "Parcelado sem juros"
+        - "Entrada + parcelas"
+        - "Gateway backup"
+
+    outputs:
+      - "Complete offer document"
+      - "Pricing matrix with justifications"
+      - "Bonus stack with individual values"
+      - "Guarantee formulation"
+      - "Downsell structure"
+
+  proof-curator:
+    id: proof-curator
+    title: "Social Proof Specialist"
+    tier: tier_0
+    icon: "📊"
+
+    purpose: |
+      Collect, organize, and strategically deploy social proof throughout
+      the workshop. Match proof demographics to audience segments.
+
+    proof_types:
+      personal_results:
+        - "Faturamento comprovavel"
+        - "Numero de empresas vendidas"
+        - "Evolucao temporal (de X para Y em Z tempo)"
+        - "Screenshots de dashboards/relatorios"
+        - "Prints de transferencias bancarias"
+
+      client_results:
+        minimum: 10
+        requirements:
+          - "Screenshots de depoimentos"
+          - "Videos de 30-60 segundos"
+          - "Prints de conversas WhatsApp/email"
+          - "Antes/depois com numeros especificos"
+          - "Diversidade de nichos/industrias"
+
+      external_validations:
+        - "Certificacoes relevantes"
+        - "Aparicoes em midia"
+        - "Parcerias com empresas conhecidas"
+        - "Numero de seguidores/inscritos"
+        - "Reviews em plataformas publicas"
+        - "Premiacoes ou reconhecimentos"
+
+      real_time_proof:
+        - "Dashboard ao vivo de vendas"
+        - "Contador de participantes"
+        - "Testemunhos durante evento"
+        - "Demonstracoes funcionando"
+
+    organization_strategy:
+      by_demographic:
+        - "Age and gender"
+        - "Industry/niche"
+        - "Company size"
+        - "Problem type"
+        - "Desired outcome"
+
+      by_workshop_block:
+        block_1: "Quick wins, numbers"
+        block_2: "Personal transformation"
+        block_3: "Framework validation"
+        block_4: "Diverse case studies"
+        block_5: "ROI justification"
+        block_6: "Risk elimination"
+        block_7: "Real-time success"
+
+    case_study_structure: |
+      1. Situacao inicial (numeros)
+      2. Tentativas anteriores
+      3. Ceticismo/objecoes
+      4. Implementacao especifica
+      5. Resultado mensuravel
+      6. Tempo para resultado
+      7. Efeito colateral positivo
+
+    outputs:
+      - "Proof library organized by segment"
+      - "Case study scripts"
+      - "Slide-ready proof materials"
+      - "Real-time proof display system"
+
+  content-producer:
+    id: content-producer
+    title: "Content & Framework Creator"
+    tier: tier_1
+    icon: "🎨"
+
+    purpose: |
+      Create the educational framework and all content assets for the
+      workshop. Transform expertise into teachable, memorable content.
+
+    framework_design:
+      structure: |
+        Parte 1: Problema Universal
+        - Identificar dor #1 da audiencia
+        - Amplificar consequencias
+        - Mostrar tentativas falhas comuns
+
+        Parte 2: Descoberta Unica
+        - Momento de insight
+        - Por que outros metodos falham
+        - Principio contra-intuitivo
+
+        Parte 3: Sistema Replicavel
+        - 3-5 passos nomeados
+        - Demonstracao de pelo menos 1 passo
+        - Resultados esperados por passo
+
+      requirements:
+        - "Proprietary name for framework"
+        - "3-5 core components"
+        - "3 counter-intuitive insights"
+        - "Memorable analogies"
+        - "Practical demonstrations"
+
+    slide_production:
+      quantity: "100-1600 slides"
+      pacing: "6-10 slides per minute"
+
+      distribution:
+        bloco_1_abertura: "Slides 1-150 (15-20 min)"
+        bloco_2_problema: "Slides 151-350 (20-25 min)"
+        bloco_3_solucao: "Slides 351-800 (45-60 min)"
+        bloco_4_implementacao: "Slides 801-1000 (20-30 min)"
+        bloco_5_oferta: "Slides 1001-1400 (30-40 min)"
+        bloco_6_fechamento: "Slides 1401-1600 (15-20 min)"
+
+      types:
+        texto: "40% - Max 7 words, 72pt+ font"
+        dados: "20% - Simplified graphs, highlighted numbers"
+        imagem: "20% - Real screenshots, high quality photos"
+        transicao: "10% - Section titles, provocative questions"
+        mistos: "10% - Text over image, simple diagrams"
+
+      specifications:
+        aspect_ratio: "16:9 (1920x1080 minimum)"
+        font: "Sans-serif bold (Impact/Bebas/Montserrat)"
+        min_font_size: "32pt"
+        colors: "Maximum 3 (black, white, 1 accent)"
+        images: "High resolution, no watermarks"
+
+    script_creation:
+      scripts_required:
+        - "Opening hook (first 60 seconds)"
+        - "Block transitions (5 scripts)"
+        - "Education to offer transition"
+        - "Price reduction sequence"
+        - "Guarantee presentation"
+        - "Closing urgency"
+
+      transition_scripts:
+        "1_to_2": "Agora que voce viu o que e possivel, deixe-me mostrar o que esta impedindo 99% das pessoas..."
+        "2_to_3": "Mas existe uma saida. E ela e mais simples do que voce imagina..."
+        "3_to_4": "Conhecimento sem acao e apenas entretenimento. Veja como implementar..."
+        "4_to_5": "Voce tem duas opcoes: fazer sozinho ou deixar que eu facilite o caminho..."
+        "5_to_6": "A decisao e sua, mas o tempo nao espera..."
+
+    outputs:
+      - "Named proprietary framework"
+      - "Complete slide deck"
+      - "All transition scripts"
+      - "Demonstration materials"
+      - "Support materials (PDF/workbook)"
+
+  traffic-driver:
+    id: traffic-driver
+    title: "Registration & Traffic Specialist"
+    tier: tier_1
+    icon: "🚀"
+
+    purpose: |
+      Drive registrations through paid ads and organic promotion.
+      Maximize live attendance through strategic warmup and reminders.
+
+    registration_campaigns:
+      timeline:
+        launch: "D-10 to D-4"
+        optimization: "Daily bid adjustments"
+        scale: "Based on cost per registration"
+
+      channels:
+        paid:
+          - "Facebook/Instagram Ads"
+          - "YouTube Ads"
+          - "Google Search"
+          - "LinkedIn (B2B)"
+        organic:
+          - "Email list"
+          - "Social posts"
+          - "Affiliate partners"
+
+      landing_page_elements:
+        - "Clear value proposition"
+        - "Specific date/time"
+        - "What they'll learn"
+        - "Scarcity element"
+        - "Social proof"
+        - "Low-friction form"
+
+    warmup_sequence:
+      content_strategy:
+        - "Email de confirmacao (immediately)"
+        - "Email de aquecimento 1 (valor)"
+        - "Email de aquecimento 2 (prova social)"
+        - "Email de aquecimento 3 (o que esperar)"
+
+      video_content:
+        count: "3-5 warmup videos"
+        purpose: "Deliver value, build anticipation, don't oversell"
+        rule: "Each video provides standalone insight"
+
+    reminder_system:
+      automated:
+        - timing: "24h before"
+          content: "Full details + anticipation builder"
+        - timing: "1h before"
+          content: "Link reminder + urgency"
+
+      sms_whatsapp:
+        - timing: "24h before"
+          content: "Quick reminder"
+        - timing: "10 min before"
+          content: "We're starting!"
+
+      email_24h_template: |
+        Assunto: Confirmado para amanha + surpresa
+
+        [NOME],
+
+        Amanha as [HORA] vou revelar [RESULTADO ESPECIFICO].
+        Mas tem um detalhe que nao contei...
+        Durante o workshop, vou fazer [DEMONSTRACAO IMPACTANTE]
+        ao vivo com alguem da audiencia.
+        Pode ser voce.
+
+        Link da sala: [LINK]
+        Hora: [HORA]
+        O que trazer: [PREPARACAO]
+
+        PS: Nos primeiros 10 minutos, entrego [BONUS RAPIDO].
+        Nao atrase.
+
+    conversion_targets:
+      registration_to_live: ">25%"
+      cost_per_registration: "Track and optimize daily"
+
+    outputs:
+      - "Ad campaigns running"
+      - "Email sequences deployed"
+      - "Reminder automations active"
+      - "Registration reports"
+
+  tech-director:
+    id: tech-director
+    title: "Technical Operations Director"
+    tier: tier_1
+    icon: "⚙️"
+
+    purpose: |
+      Ensure flawless technical execution with redundancy for every
+      critical system. No single point of failure allowed.
+
+    tech_stack:
+      streaming:
+        primary: "OBS + YouTube/Facebook Live"
+        backup: "Zoom as contingency"
+        rule: "Backup stream always running in parallel"
+
+      slides:
+        tool: "Google Slides (shareable)"
+        backup: "Downloaded PDF version"
+
+      chat:
+        tool: "ManyChat for automations"
+        moderation: "Dedicated moderator team"
+
+      payments:
+        primary: "Hotmart/Stripe"
+        backup: "Secondary gateway ready"
+        test: "Full test 24h before"
+
+      support:
+        tool: "WhatsApp Business API"
+        coverage: "Team on standby during event"
+
+    go_live_checklist:
+      60_min_before:
+        - "Todos os links testados"
+        - "Slides carregados"
+        - "Equipe posicionada"
+        - "Backup stream rodando"
+
+      30_min_before:
+        - "Camera e audio ok"
+        - "Chat moderado ativo"
+        - "Gateway funcionando"
+        - "Warmup slides on"
+
+      10_min_before:
+        - "Musica de entrada"
+        - "Contador regressivo"
+        - "Mensagens automaticas"
+        - "Respirar fundo 3x"
+
+    contingency_protocols:
+      streaming_failure:
+        - "Immediate switch to Zoom backup"
+        - "Email blast with new link"
+        - "Chat team directs to backup"
+        - "Continue from where stopped"
+
+      payment_failure:
+        - "Switch to backup gateway"
+        - "Manual payment collection if needed"
+        - "Team takes phone orders"
+
+      audio_video_issues:
+        - "Pre-recorded segment ready"
+        - "Backup microphone tested"
+        - "Secondary camera ready"
+
+    monitoring_during_event:
+      metrics:
+        - "Stream health"
+        - "Viewer count"
+        - "Chat activity"
+        - "Payment processing"
+        - "Error rates"
+
+    outputs:
+      - "All systems tested and operational"
+      - "Backup systems verified"
+      - "Team briefed on contingencies"
+      - "Monitoring dashboards live"
+
+  conversion-closer:
+    id: conversion-closer
+    title: "Live Conversion Specialist"
+    tier: tier_2
+    icon: "💰"
+
+    purpose: |
+      Execute the offer blocks (5-7) with maximum persuasive impact.
+      Handle objections in real-time and close with urgency.
+
+    scripts:
+      opening_hook: |
+        "Nos proximos [TEMPO], vou mostrar exatamente como [RESULTADO ESPECIFICO]
+        sem [OBJECAO 1], sem [OBJECAO 2], mesmo que [LIMITACAO COMUM].
+
+        E vou provar isso ao vivo, na sua frente, fazendo [DEMONSTRACAO].
+
+        Se ao final voce nao tiver pelo menos [PEQUENO RESULTADO GARANTIDO],
+        eu [PENALIDADE PARA VOCE]."
+
+      education_to_offer: |
+        "Voce viu como [RECAPITULAR INSIGHT PRINCIPAL].
+
+        Agora voce tem duas opcoes:
+        Opcao 1: Pegar tudo que mostrei e tentar implementar sozinho.
+        Vai funcionar? Talvez. Em quanto tempo? Nao sei.
+
+        Opcao 2: Deixar eu instalar isso para voce, junto com
+        [BENEFICIO EXTRA NAO MENCIONADO ANTES].
+
+        Deixe-me mostrar exatamente o que voce recebe..."
+
+      price_reduction: |
+        "O valor normal disso seria [ANCORA ALTA] porque [JUSTIFICATIVA].
+
+        Mas nao vou cobrar [ANCORA].
+        Nem mesmo [50% DA ANCORA].
+        Nem [25% DA ANCORA].
+
+        Hoje, apenas para quem esta ao vivo, o investimento e [PRECO FINAL].
+
+        Mas tem um detalhe..."
+        [REVELAR CONDICAO OU BONUS SURPRESA]
+
+      guarantee_formula: |
+        "Se em 90 dias voce nao tiver [RESULTADO],
+        mesmo aplicando [CONDICAO MINIMA],
+        eu [CONSEQUENCIA FAVORAVEL AO CLIENTE]"
+
+    psychological_triggers:
+      reciprocidade:
+        timing: "Block 3-4"
+        implementation: "Dar framework completo, resolver problema ao vivo, bonus surpresa"
+
+      prova_social:
+        timing: "Throughout"
+        implementation: "Mostrar vendas tempo real, depoimentos, numero de participantes"
+
+      autoridade:
+        timing: "Block 1-2"
+        implementation: "Credenciais no inicio, demonstracao de expertise"
+
+      escassez:
+        timing: "Block 5-6"
+        implementation: "Unidades limitadas reais, bonus que expira, preco que aumenta"
+
+      urgencia:
+        timing: "Block 6-7"
+        implementation: "Condicao especial ao vivo, fast action bonus, penalidade por esperar"
+
+    objection_handling:
+      prepared_objections:
+        - objection: "Muito caro"
+          response: "ROI demonstration + payment options"
+        - objection: "Nao tenho tempo"
+          response: "Implementation speed + support"
+        - objection: "Preciso pensar"
+          response: "What specifically? + Address concern"
+        - objection: "Ja tentei algo similar"
+          response: "What was different about that?"
+        - objection: "Funciona no meu nicho?"
+          response: "Case study from similar niche"
+
+    closing_techniques:
+      countdown:
+        - "Timer de 3 minutos na tela"
+        - "Recapitulacao de tudo"
+        - "Ultima chance para bonus"
+
+      live_proof:
+        - "Show sales happening in real-time"
+        - "Read buyer names/comments"
+        - "Display spots remaining"
+
+    outputs:
+      - "High-impact offer delivery"
+      - "Objections handled"
+      - "Maximum urgency created"
+      - "Conversions captured"
+
+  performance-analyst:
+    id: performance-analyst
+    title: "Real-Time Performance Monitor"
+    tier: tier_2
+    icon: "📈"
+
+    purpose: |
+      Monitor all KPIs during the workshop and provide real-time
+      optimization recommendations to the commander.
+
+    kpis_during_event:
+      retention:
+        1h:
+          ruim: "<40%"
+          ok: "40-60%"
+          otimo: ">60%"
+        2h:
+          ruim: "<25%"
+          ok: "25-40%"
+          otimo: ">40%"
+
+      peak_audience:
+        ruim: "Inicio"
+        ok: "Meio"
+        otimo: "During offer"
+
+      chat_engagement:
+        ruim: "<10%"
+        ok: "10-20%"
+        otimo: ">20%"
+
+      click_rate:
+        ruim: "<5%"
+        ok: "5-15%"
+        otimo: ">15%"
+
+    conversion_funnel:
+      registrados_to_presentes: "Meta 25%+"
+      presentes_to_clique: "Meta 30%+"
+      clique_to_compra: "Meta 30%+"
+      overall: "Meta 2.5%+ dos registrados"
+
+    alert_triggers:
+      immediate:
+        - "Retention drops below 25% at any point"
+        - "Technical issues detected"
+        - "Payment failures spiking"
+
+      warning:
+        - "Retention 10% below benchmark"
+        - "Chat engagement declining"
+        - "Click rate below 5%"
+
+    troubleshooting_guide:
+      low_retention:
+        causes:
+          - "Hook muito fraco"
+          - "Muito papo, pouca acao"
+          - "Nao entregou valor cedo"
+        actions:
+          - "Signal to accelerate to value"
+          - "Add demonstration"
+          - "Increase visual variety"
+
+      low_conversion:
+        causes:
+          - "Oferta desalinhada com conteudo"
+          - "Preco sem justificativa"
+          - "Falta de urgencia real"
+        actions:
+          - "Strengthen transition script"
+          - "Add more price justification"
+          - "Emphasize scarcity"
+
+      high_objections:
+        causes:
+          - "Nao antecipou concerns"
+          - "Falta de proof points"
+          - "Transicao abrupta para venda"
+        actions:
+          - "Address top objections live"
+          - "Add more case studies"
+          - "Slow down transition"
+
+    outputs:
+      - "Real-time performance dashboard"
+      - "Optimization recommendations"
+      - "Post-event analysis report"
+      - "Improvement recommendations"
+
+  follow-up-specialist:
+    id: follow-up-specialist
+    title: "Post-Workshop Conversion Specialist"
+    tier: tier_2
+    icon: "🔄"
+
+    purpose: |
+      Maximize conversions after the live event through replay,
+      urgency sequences, and downsell strategies.
+
+    replay_strategy:
+      delivery:
+        timing: "Immediately after workshop"
+        deadline: "24-48h expiration"
+
+      messaging:
+        - "Replay available"
+        - "What you missed"
+        - "Deadline reminder"
+        - "Final chance"
+
+    last_chance_sequence:
+      timeline:
+        day_1: "Replay + highlights"
+        day_2: "Urgency + testimonials"
+        day_3: "Final deadline"
+
+      elements:
+        - "Maintain real deadline"
+        - "Show post-event buyers"
+        - "Reinforce scarcity"
+
+    downsell_strategy:
+      timing: "After main offer deadline"
+      options:
+        - "Versao simplificada da oferta"
+        - "Parcelamento alternativo"
+        - "Trial ou teste"
+
+      positioning: |
+        Downsell should be DIFFERENT product, not discounted main.
+        Preserve value of main offer.
+
+    non_buyer_recovery:
+      segmentation:
+        - "Watched but didn't buy"
+        - "Registered but didn't attend"
+        - "Partial attendees"
+
+      long_term:
+        - "Add to content nurture"
+        - "Future launch invitations"
+        - "Different offer positioning"
+
+    outputs:
+      - "Replay sequence deployed"
+      - "Additional conversions captured"
+      - "Downsell results"
+      - "Non-buyer segments for future"
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Phase A: Pre-Workshop
+  - task: "Define offer and pricing"
+    executor: Human
+    automation: LOW
+    guardrails: "Anchor must be 10-20x final price"
+
+  - task: "Create educational framework"
+    executor: Human
+    automation: LOW
+    guardrails: "Must include 3 counter-intuitive insights"
+
+  - task: "Collect and organize proof"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Minimum 10 case studies"
+
+  - task: "Structure bonus stack"
+    executor: Human
+    automation: LOW
+    guardrails: "Each bonus has standalone value"
+
+  - task: "Produce slides"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "100+ slides minimum, 7 words max per slide"
+
+  - task: "Record warmup content"
+    executor: Human
+    automation: LOW
+    guardrails: "Each video provides standalone insight"
+
+  - task: "Configure tech stack"
+    executor: Worker
+    automation: HIGH
+    guardrails: "No single point of failure"
+
+  - task: "Launch traffic campaigns"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Track cost per registration daily"
+
+  - task: "Execute email sequence"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Every email increases desire to attend"
+
+  - task: "Complete rehearsal"
+    executor: Human
+    automation: LOW
+    guardrails: "Record and review"
+
+  # Phase B: Workshop Execution
+  - task: "Pre-show setup"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Double-check every system"
+
+  - task: "Block 1: Hook Impossivel"
+    executor: Human
+    automation: LOW
+    guardrails: "Specific, measurable promise"
+
+  - task: "Block 2: Origem e Conexao"
+    executor: Human
+    automation: LOW
+    guardrails: "Start worse than audience"
+
+  - task: "Block 3: Educacao Profunda"
+    executor: Human
+    automation: LOW
+    guardrails: "60%+ of time on education"
+
+  - task: "Block 4: Casos em Cascata"
+    executor: Human
+    automation: LOW
+    guardrails: "Minimum 3 diverse cases"
+
+  - task: "Block 5: Stack de Valor"
+    executor: Human
+    automation: LOW
+    guardrails: "Stack total 10x+ final price"
+
+  - task: "Block 6: Inversao de Risco"
+    executor: Human
+    automation: LOW
+    guardrails: "Guarantee must be specific and believable"
+
+  - task: "Block 7: Demonstracao Final"
+    executor: Human
+    automation: LOW
+    guardrails: "Don't end until sales velocity drops"
+
+  - task: "Real-time monitoring"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Alert on threshold breaches"
+
+  - task: "Chat moderation"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Collect objections for Q&A"
+
+  - task: "Payment processing"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Backup gateway ready"
+
+  # Phase C: Post-Workshop
+  - task: "Send replay email"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Set clear expiration"
+
+  - task: "Execute last chance sequence"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Deadline must be real"
+
+  - task: "Follow up with non-buyers"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Don't devalue main offer"
+
+  - task: "Post-event analysis"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Identify optimization opportunities"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Registration Volume Gate"
+    transition: "Traffic -> Event"
+    condition: "registrations >= 1000"
+    type: blocking
+    failure_action: "Extend ads or postpone event"
+
+  QG-002:
+    name: "Live Attendance Gate"
+    transition: "Registrations -> Live"
+    condition: "live_attendance >= 25% of registrations"
+    type: warning
+    failure_action: "Review reminder sequence"
+
+  QG-003:
+    name: "1-Hour Retention Gate"
+    transition: "Start -> Block 3"
+    condition: "retention_1h >= 40%"
+    type: warning
+    failure_action: "Strengthen hook and early value"
+
+  QG-004:
+    name: "Pre-Offer Retention Gate"
+    transition: "Education -> Offer"
+    condition: "retention_pre_offer >= 30%"
+    type: warning
+    failure_action: "Add more demonstrations"
+
+  QG-005:
+    name: "Conversion Rate Gate"
+    transition: "Offer -> Close"
+    condition: "conversion_rate >= 5%"
+    type: warning
+    failure_action: "Audit offer-content alignment"
+
+  QG-006:
+    name: "Tech Readiness Gate"
+    transition: "Setup -> Go Live"
+    condition: "all_systems_tested AND backup_running"
+    type: blocking
+    failure_action: "Complete tech checklist"
+
+  QG-007:
+    name: "ROI Gate"
+    transition: "Post-Event Analysis"
+    condition: "roi >= 5x ad_spend"
+    type: reporting
+    failure_action: "Review ad spend efficiency"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  pre_workshop_workflow:
+    trigger: "Workshop planning initiated"
+    phases:
+      - phase: "D-30 to D-21: Foundation"
+        steps:
+          - agent: offer-architect
+            action: "Define offer and pricing"
+          - agent: content-producer
+            action: "Create educational framework"
+          - agent: proof-curator
+            action: "Collect social proofs"
+          - agent: offer-architect
+            action: "Structure bonuses"
+
+      - phase: "D-20 to D-11: Production"
+        steps:
+          - agent: content-producer
+            action: "Produce slides"
+          - agent: traffic-driver
+            action: "Record warmup content"
+          - agent: tech-director
+            action: "Configure tech stack"
+
+      - phase: "D-10 to D-4: Traffic"
+        steps:
+          - agent: traffic-driver
+            action: "Launch traffic campaigns"
+          - agent: traffic-driver
+            action: "Activate affiliates"
+          - agent: traffic-driver
+            action: "Email sequence"
+
+      - phase: "D-3 to D-0: Execution"
+        steps:
+          - agent: workshop-commander
+            action: "Complete rehearsal"
+          - agent: tech-director
+            action: "Tech verification"
+          - agent: workshop-commander
+            action: "Final briefing"
+
+  workshop_execution_workflow:
+    trigger: "Go live signal"
+    steps:
+      - step: 1
+        time: "-60 min"
+        agent: tech-director
+        action: "Pre-show setup complete"
+
+      - step: 2
+        time: "0:00"
+        agent: conversion-closer
+        action: "Block 1: Hook Impossivel"
+
+      - step: 3
+        time: "0:10"
+        agent: conversion-closer
+        action: "Block 2: Origem e Conexao"
+
+      - step: 4
+        time: "0:25"
+        agent: content-producer
+        action: "Block 3: Educacao Profunda"
+        parallel: performance-analyst monitors retention
+
+      - step: 5
+        time: "1:25"
+        agent: proof-curator
+        action: "Block 4: Casos em Cascata"
+
+      - step: 6
+        time: "1:55"
+        agent: conversion-closer
+        action: "Block 5: Stack de Valor"
+
+      - step: 7
+        time: "2:15"
+        agent: conversion-closer
+        action: "Block 6: Inversao de Risco"
+
+      - step: 8
+        time: "2:25"
+        agent: conversion-closer
+        action: "Block 7: Demonstracao Final"
+
+      - step: 9
+        time: "throughout"
+        agent: performance-analyst
+        action: "Real-time monitoring and alerts"
+
+  post_workshop_workflow:
+    trigger: "Workshop ends"
+    steps:
+      - step: 1
+        timing: "Immediately"
+        agent: follow-up-specialist
+        action: "Send replay email"
+
+      - step: 2
+        timing: "D+1"
+        agent: follow-up-specialist
+        action: "Start last chance sequence"
+
+      - step: 3
+        timing: "D+3"
+        agent: follow-up-specialist
+        action: "Execute final deadline"
+
+      - step: 4
+        timing: "D+4+"
+        agent: follow-up-specialist
+        action: "Non-buyer follow-up / downsell"
+
+      - step: 5
+        timing: "D+7"
+        agent: performance-analyst
+        action: "Complete post-event analysis"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    live_conversion_rate:
+      formula: "Live Sales / Live Attendees"
+      target: "10-30%"
+      benchmark:
+        ruim: "<5%"
+        ok: "5-10%"
+        otimo: ">10%"
+
+    launch_roi:
+      formula: "Revenue / Ad Spend"
+      target: "5-20x"
+      benchmark:
+        ruim: "<3x"
+        ok: "3-5x"
+        otimo: ">5x"
+
+  secondary:
+    registration_to_live:
+      formula: "Live Attendees / Registrations"
+      target: ">25%"
+
+    retention_1h:
+      formula: "Viewers at 1h / Peak Viewers"
+      target: ">40%"
+
+    retention_2h:
+      formula: "Viewers at 2h / Peak Viewers"
+      target: ">25%"
+
+    chat_engagement:
+      formula: "Active Chatters / Viewers"
+      target: ">20%"
+
+    click_rate:
+      formula: "Link Clicks / Viewers"
+      target: ">15%"
+
+  funnel_metrics:
+    registrations: "Track daily"
+    cost_per_registration: "Optimize daily"
+    email_open_rates: "Track per email"
+    warmup_engagement: "Views, completion"
+    live_attendance: "Peak and average"
+    replay_views: "Track daily"
+    replay_conversions: "Track to deadline"
+
+# ===============================================================================
+# TECHNOLOGY REQUIREMENTS
+# ===============================================================================
+
+technology:
+  required:
+    - tool: "OBS Studio"
+      purpose: "Professional streaming"
+      features:
+        - "Multi-scene switching"
+        - "Local recording backup"
+        - "Overlay support"
+
+    - tool: "YouTube/Facebook Live"
+      purpose: "Primary streaming platform"
+      features:
+        - "Large audience capacity"
+        - "Live chat"
+        - "Replay auto-generation"
+
+    - tool: "Zoom"
+      purpose: "Backup streaming"
+      features:
+        - "Quick switch capability"
+        - "Screen sharing"
+        - "Chat moderation"
+
+    - tool: "Google Slides"
+      purpose: "Presentation"
+      features:
+        - "Real-time collaboration"
+        - "Shareable links"
+        - "Remote advance"
+
+    - tool: "Payment Gateway"
+      purpose: "Sales processing"
+      features:
+        - "Multiple payment options"
+        - "Upsell capability"
+        - "Backup gateway"
+
+    - tool: "Email Automation"
+      purpose: "Pre/post sequences"
+      features:
+        - "Segmentation"
+        - "Scheduling"
+        - "Analytics"
+
+  recommended:
+    - tool: "ManyChat"
+      purpose: "Chat automation"
+
+    - tool: "WhatsApp Business API"
+      purpose: "Support channel"
+
+    - tool: "Real-time Analytics Dashboard"
+      purpose: "Live monitoring"
+
+    - tool: "Local Recording"
+      purpose: "Backup and replay"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Specific ad creative templates"
+    severity: Medium
+    clarification_needed: "What creative formats perform best for workshop registration?"
+
+  - id: GAP-002
+    description: "Affiliate recruitment process"
+    severity: Low
+    note: "Not detailed in source materials"
+
+  - id: GAP-003
+    description: "Team role definitions during live"
+    severity: Medium
+    clarification_needed: "Who does what during the live event?"
+
+  - id: GAP-004
+    description: "Legal compliance for guarantees"
+    severity: High
+    clarification_needed: "What guarantee structures are legally safe?"
+
+  - id: GAP-005
+    description: "Replay strategy optimization"
+    severity: Medium
+    clarification_needed: "Optimal replay availability window"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 7
+  workflows_documented: 3
+  agents_defined: 8
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

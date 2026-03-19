@@ -1,0 +1,236 @@
+workflow:
+  id: wf-conteudo-educacional
+  name: "Pipeline de Conteúdo Educacional"
+  version: "1.0.0"
+  duration: "1 sessão (30-45 min)"
+
+  description: |
+    Pipeline completo para criação de conteúdo educacional com a voz
+    autêntica de José Amorim. Transforma um tema em conteúdo publicável
+    passando por 4 fases: definição → tradução → criação → validação.
+
+    FILOSOFIA: "Democratizar complexidade sem perder profundidade."
+
+  best_for:
+    - "Posts educacionais sobre IA e tecnologia"
+    - "Artigos sobre TDAH e neurodivergência"
+    - "Conteúdo de nexialismo (conexões cross-domain)"
+    - "Newsletter educacional"
+    - "Threads explicativas sobre conceitos complexos"
+
+  prerequisites:
+    required:
+      - "Tema ou conceito definido"
+      - "Plataforma/formato escolhido (LinkedIn, blog, thread, newsletter)"
+    optional:
+      - "Audiência-alvo identificada"
+      - "Referências ou inspirações"
+
+  phases:
+    - id: PHASE-1
+      name: "Definição Estratégica (OMFA)"
+      duration: "5-8 min"
+      description: "Definir objetivo, momento, formato e abordagem"
+
+      objective: |
+        Aplicar framework OMFA para alinhar o conteúdo com:
+        - O que queremos alcançar
+        - O momento da audiência
+        - O formato ideal
+        - A abordagem correta
+
+      tasks:
+        - type: elicitation
+          description: "Levantamento OMFA com o usuário"
+          questions:
+            objetivo:
+              - "O que você quer que a pessoa SINTA/FAÇA depois de ler?"
+              - "Qual é a transformação desejada?"
+            momento:
+              - "Quem é sua audiência? O que eles estão enfrentando agora?"
+            formato:
+              - "Onde vai publicar? (LinkedIn, blog, newsletter, thread)"
+            abordagem:
+              - "Qual tom? Provocativo, empático, estratégico, educativo?"
+
+          outputs:
+            omfa_brief:
+              description: "OMFA preenchido com as 4 dimensões"
+              format: "yaml"
+
+      checkpoint:
+        criteria:
+          - "OMFA completo com as 4 dimensões preenchidas"
+          - "Tema claramente definido"
+        human_review: false
+        auto_advance: true
+
+    - id: PHASE-2
+      name: "Tradução via Espiral Expansiva"
+      duration: "8-12 min"
+      description: "Criar metáfora âncora e estruturar as 5 camadas"
+
+      objective: |
+        Transformar o tema em estrutura da Espiral Expansiva:
+        - Criar metáfora visual-espacial central
+        - Estruturar as 5 camadas
+        - Adaptar densidade para a audiência
+
+      tasks:
+        - type: task_file
+          file: tasks/explicar-conceito.md
+          description: "Aplicar Espiral Expansiva ao tema"
+          inputs:
+            - conceito (do tema definido na Phase 1)
+            - audiencia (do OMFA)
+          outputs:
+            espiral:
+              description: "Estrutura das 5 camadas aplicadas ao tema"
+              format: "markdown"
+            metafora_ancora:
+              description: "Metáfora visual central"
+              format: "string"
+
+      checkpoint:
+        criteria:
+          - "Metáfora visual criada e compreensível"
+          - "5 camadas da espiral rascunhadas"
+        human_review: true
+        auto_advance: false
+        review_prompt: |
+          Olha a metáfora que eu criei pra esse conceito:
+          [metáfora]
+
+          E a estrutura da espiral:
+          [5 camadas resumidas]
+
+          Tá fazendo sentido? Quer que eu mude alguma coisa antes de escrever?
+
+    - id: PHASE-3
+      name: "Criação do Conteúdo"
+      duration: "10-15 min"
+      description: "Escrever o conteúdo final com voz autêntica"
+
+      objective: |
+        Produzir o conteúdo final usando:
+        - Espiral Expansiva como estrutura
+        - Voz autêntica de José (entusiasmo, intimidade, parênteses)
+        - Formato adequado à plataforma
+
+      tasks:
+        - type: task_file
+          file: tasks/criar-conteudo.md
+          description: "Criar conteúdo com voz José"
+          inputs:
+            - tema
+            - formato (do OMFA)
+            - espiral (da Phase 2)
+          outputs:
+            conteudo_draft:
+              description: "Conteúdo em draft para revisão"
+              format: "markdown"
+
+      checkpoint:
+        criteria:
+          - "Conteúdo escrito no formato correto"
+          - "Metáfora visual presente"
+          - "Voz autêntica de José verificada"
+        human_review: true
+        auto_advance: false
+        review_prompt: |
+          Pronto! Dá uma olhada no conteúdo.
+          Tá soando como José? A metáfora ficou clara?
+          Me fala o que quer ajustar.
+
+    - id: PHASE-4
+      name: "Validação e Refinamento"
+      duration: "5-8 min"
+      description: "Validar fidelidade e refinar detalhes"
+
+      objective: |
+        Garantir qualidade final:
+        - Checklist de fidelidade aprovado
+        - Anti-patterns ausentes
+        - Formatação para plataforma
+
+      tasks:
+        - type: validation
+          description: "Validar contra checklist de fidelidade"
+          checklist:
+            - "Metáfora visual-espacial presente?"
+            - "Respiração textual (frases curtas/longas)?"
+            - "2ª pessoa ('você') predominante?"
+            - "Entusiasmo genuíno (não neutro)?"
+            - "Confessionalidade se relevante?"
+            - "Nenhum anti-pattern violado?"
+            - "Formatado para plataforma-alvo?"
+
+      checkpoint:
+        criteria:
+          - "Mínimo 5/7 checks aprovados"
+          - "Zero anti-patterns detectados"
+        human_review: false
+        auto_advance: true
+
+  outputs:
+    primary:
+      - name: "conteudo-final.md"
+        description: "Conteúdo educacional pronto para publicar"
+        location: "squads/jose-amorim/sessions/{session_id}/"
+
+    secondary:
+      - name: "omfa-brief.yaml"
+        description: "OMFA preenchido da sessão"
+        location: "squads/jose-amorim/sessions/{session_id}/"
+
+  agents_by_phase:
+    PHASE-1: "jose-amorim (modo Estrategista Direto)"
+    PHASE-2: "jose-amorim (modo Professor Socrático)"
+    PHASE-3: "jose-amorim (modo criativo livre)"
+    PHASE-4: "jose-amorim (modo validação)"
+
+  quality_checklist:
+    pre_execution:
+      - "Tema definido e claro?"
+      - "Formato/plataforma escolhido?"
+
+    during_execution:
+      - "Metáfora visual criada antes de explicar?"
+      - "Espiral Expansiva aplicada?"
+
+    post_execution:
+      - "Checklist de fidelidade aprovado (5+/7)?"
+      - "Anti-patterns ausentes?"
+      - "Conteúdo pronto para publicar?"
+
+  error_handling:
+    - error: "Tema muito amplo para um único conteúdo"
+      action: "Dividir em série de conteúdos, priorizar um aspecto"
+
+    - error: "Metáfora não funciona para o conceito"
+      action: "Tentar domínios alternativos de metáfora (tech, arquitetura, cotidiano)"
+
+    - error: "Tom não soa como José"
+      action: "Re-ler checklist de fidelidade, adicionar mais parênteses TDAH e entusiasmo"
+
+  completion_signals:
+    workflow_complete:
+      - "Conteúdo publicável produzido"
+      - "Checklist de fidelidade aprovado"
+
+    follow_up_needed:
+      - condition: "Tema gerou múltiplos ângulos"
+        action: "Criar série de conteúdos — rodar pipeline novamente para cada ângulo"
+
+  metadata:
+    created: "2026-03-08"
+    author: "AIOS Squad Creator"
+    version: "1.0.0"
+    framework_version: "AIOS 4.0"
+    persona_fidelity: "85-90%"
+    source_agent: "jose-amorim v1.0.0"
+    voice_dna_compliance: true
+    frameworks_used:
+      - "Espiral Expansiva (José Amorim)"
+      - "OMFA (José Amorim)"
+      - "Nexialismo (José Amorim)"

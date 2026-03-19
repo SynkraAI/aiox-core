@@ -1,0 +1,374 @@
+# Koe Squad — Framework Evolution Tracker
+# Tracks how Dan Koe's frameworks evolved across eras
+# Used by: koe-chief (routing context), koe-advisor (historical perspective), all agents (version awareness)
+# Version: 1.0.0
+# Created: 2026-02-14
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PURPOSE: Track the temporal evolution of Dan Koe's core frameworks.
+# Each era represents a distinct phase in his thinking, with version markers
+# indicating when concepts appeared, matured, or were replaced.
+# Agents should default to the LATEST era unless user context demands otherwise.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+evolution_model: "cumulative"  # Each era BUILDS on previous, does not replace
+
+eras:
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # ERA 1: Freelancer Escape (2018-2020)
+  # ─────────────────────────────────────────────────────────────────────────
+  - era: "freelancer_escape"
+    period: "2018-2020"
+    label: "Escape the Client Trap"
+    core_theme: "Transitioning from trading time for money to building leveraged income"
+    context: "Dan Koe was a web designer/freelancer learning to build digital products"
+
+    frameworks_introduced:
+      - name: "Traffic + Offers = Business"
+        version: "v1.0"
+        status: "introduced"
+        description: "The fundamental equation — simplest model of online business"
+        maturity: "seed"
+
+      - name: "Value Hierarchy"
+        version: "v0.5"
+        status: "introduced"
+        description: "Early version — Entertainment vs Information vs Transformation"
+        maturity: "seed"
+        note: "Implementation tier added later in Modern Mastery era"
+
+    key_beliefs:
+      - "Freelancing is a trap — you trade time for money with a ceiling"
+      - "Digital products are the escape — build once, sell infinitely"
+      - "Skills are the foundation — master something before monetizing"
+
+    vocabulary_markers:
+      - "escape freelancing"
+      - "build a business, not a job"
+      - "digital products over services"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # ERA 2: One-Person Business (2020-2022)
+  # ─────────────────────────────────────────────────────────────────────────
+  - era: "one_person_business"
+    period: "2020-2022"
+    label: "The One-Person Business Model"
+    core_theme: "Systematizing the solo creator business with leverage and sovereignty"
+    context: "Dan Koe built his newsletter to 100K+ subscribers and launched courses"
+
+    frameworks_introduced:
+      - name: "One-Person Business Architecture"
+        version: "v1.0"
+        status: "introduced"
+        description: "Complete model for running a business solo with systems and leverage"
+        maturity: "developed"
+
+      - name: "You Are The Niche"
+        version: "v1.0"
+        status: "introduced"
+        description: "Anti-niche-down philosophy — your unique intersection IS the niche"
+        maturity: "developed"
+
+      - name: "Personal Monopoly"
+        version: "v1.0"
+        status: "introduced"
+        description: "Skills x Obsessions x Experience = category of one (extended from Jack Butcher)"
+        maturity: "developed"
+
+      - name: "The Leverage Stack"
+        version: "v1.0"
+        status: "introduced"
+        description: "Brand → Digital Products → Content Systems → Automation"
+        maturity: "developed"
+
+      - name: "Sovereignty Test"
+        version: "v1.0"
+        status: "introduced"
+        description: "Four dimensions — Revenue, Time, Creative, Location sovereignty"
+        maturity: "seed"
+
+    frameworks_evolved:
+      - name: "Traffic + Offers = Business"
+        version: "v1.5"
+        status: "matured"
+        change: "Added risk reversal as the secret weapon for offer conversion"
+
+      - name: "Value Hierarchy"
+        version: "v1.0"
+        status: "matured"
+        change: "Solidified four tiers with price ranges and conversion paths"
+
+    key_beliefs:
+      - "One person with leverage beats a team without it"
+      - "You are the niche — stop niching down, niche UP"
+      - "Brand is a lead generation system, not a vanity project"
+      - "Sovereignty over scale — freedom is the metric"
+
+    vocabulary_markers:
+      - "one-person business"
+      - "you are the niche"
+      - "personal monopoly"
+      - "leverage stack"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # ERA 3: The Art of Focus (2022-2023)
+  # ─────────────────────────────────────────────────────────────────────────
+  - era: "art_of_focus"
+    period: "2022-2023"
+    label: "The Art of Focus"
+    core_theme: "Deep work, attention management, and the psychology of creator productivity"
+    context: "Dan Koe published 'The Art of Focus' book, integrated philosophy with productivity"
+
+    frameworks_introduced:
+      - name: "Conscious Conditioning Process"
+        version: "v1.0"
+        status: "introduced"
+        description: "Recognize → Reframe → Design → Repeat → Reward — rewiring automatic patterns"
+        maturity: "developed"
+
+      - name: "Polarity Principle"
+        version: "v1.0"
+        status: "introduced"
+        description: "Vision + Anti-Vision tension as motivation engine"
+        maturity: "developed"
+
+      - name: "Autoprogramming Protocol"
+        version: "v1.0"
+        status: "introduced"
+        description: "Belief replacement through action, not affirmations"
+        maturity: "developed"
+
+      - name: "Anti-Conformity Principle"
+        version: "v1.0"
+        status: "introduced"
+        description: "First-principles questioning of default paths — informed divergence"
+        maturity: "developed"
+
+      - name: "Focus Funnel"
+        version: "v1.0"
+        status: "introduced"
+        description: "Eliminate → Automate → Delegate → Focus — attention prioritization"
+        maturity: "seed"
+
+      - name: "Attention Spectrum"
+        version: "v1.0"
+        status: "introduced"
+        description: "Mapping where attention goes vs where it should go"
+        maturity: "seed"
+
+    frameworks_evolved:
+      - name: "Sovereignty Test"
+        version: "v1.5"
+        status: "matured"
+        change: "Deepened from business metric to life philosophy — sovereignty as lifestyle design"
+
+      - name: "One-Person Business Architecture"
+        version: "v1.5"
+        status: "matured"
+        change: "Integrated deep work and focus management as core business competency"
+
+    key_beliefs:
+      - "Focus is the meta-skill — everything else is downstream"
+      - "You are not your thoughts — you are the awareness that can reprogram them"
+      - "Passion is output of mastery, not input"
+      - "The conformist path is the risky path"
+      - "Transmute, dont suppress — negative emotions are raw material"
+
+    vocabulary_markers:
+      - "conscious conditioning"
+      - "transmute"
+      - "autoprogramming"
+      - "polarity principle"
+      - "anti-conformity"
+      - "myelination"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # ERA 4: Modern Mastery (2023-2024)
+  # ─────────────────────────────────────────────────────────────────────────
+  - era: "modern_mastery"
+    period: "2023-2024"
+    label: "Modern Mastery"
+    core_theme: "Systematizing the creator business into a teachable methodology"
+    context: "Dan Koe launched Modern Mastery course, codified frameworks into curriculum"
+
+    frameworks_introduced:
+      - name: "APAG Writing Framework"
+        version: "v1.0"
+        status: "introduced"
+        description: "Attention → Problem → Agitate → Guide — content structure for conversion"
+        maturity: "developed"
+
+      - name: "Content Cascade"
+        version: "v1.0"
+        status: "introduced"
+        description: "One Big Idea → Multiple formats → Cross-platform distribution"
+        maturity: "developed"
+
+      - name: "Godfather Offer Construction"
+        version: "v1.0"
+        status: "introduced"
+        description: "Core offer + Bonuses + Guarantee + Real scarcity = irresistible"
+        maturity: "developed"
+
+      - name: "Risk Reversal"
+        version: "v1.0"
+        status: "introduced"
+        description: "The secret weapon — remove all buyer risk to multiply conversion"
+        maturity: "developed"
+
+    frameworks_evolved:
+      - name: "Traffic + Offers = Business"
+        version: "v2.0"
+        status: "matured"
+        change: "Fully integrated with Godfather Offer and Risk Reversal as sub-systems"
+
+      - name: "Value Hierarchy"
+        version: "v2.0"
+        status: "matured"
+        change: "Added Implementation tier ($5K+) and inter-tier conversion paths"
+
+      - name: "Focus Funnel"
+        version: "v1.5"
+        status: "matured"
+        change: "Integrated with creative energy management — focus follows energy cycles"
+
+      - name: "Conscious Conditioning Process"
+        version: "v1.5"
+        status: "matured"
+        change: "Applied to business context — conditioning for consistent content creation"
+
+    key_beliefs:
+      - "Modern mastery is the path — not passion-finding, but skill-building"
+      - "Content is the new resume — what you create IS your authority"
+      - "Risk reversal is the single highest-leverage element in any offer"
+      - "The Godfather Offer makes saying no feel stupid — through value, not pressure"
+
+    vocabulary_markers:
+      - "modern mastery"
+      - "APAG"
+      - "content cascade"
+      - "Godfather Offer"
+      - "risk reversal"
+      - "Big Idea"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # ERA 5: Digital Renaissance (2024-present)
+  # ─────────────────────────────────────────────────────────────────────────
+  - era: "digital_renaissance"
+    period: "2024-present"
+    label: "The Digital Renaissance"
+    core_theme: "Synthesizing philosophy, business, and creativity into a unified life operating system"
+    context: "Dan Koe positions himself as thought leader for the digital renaissance — creators as modern philosophers"
+
+    frameworks_introduced:
+      - name: "Future-Present Integration"
+        version: "v1.0"
+        status: "introduced"
+        description: "Vision (10-year) + Presence (today) + Action (daily) — three-level alignment"
+        maturity: "developed"
+
+      - name: "Entrepreneurial Paradoxes"
+        version: "v1.0"
+        status: "introduced"
+        description: "Both/And thinking — integration over compromise for apparent contradictions"
+        maturity: "developing"
+
+      - name: "Creative Energy Management"
+        version: "v1.0"
+        status: "introduced"
+        description: "Aligning work types to biological energy cycles for sustained output"
+        maturity: "developing"
+
+    frameworks_evolved:
+      - name: "Sovereignty Test"
+        version: "v2.0"
+        status: "matured"
+        change: "Becomes the north star for ALL decisions — not just business, but life"
+
+      - name: "You Are The Niche"
+        version: "v2.0"
+        status: "matured"
+        change: "Extended from brand positioning to life philosophy — your uniqueness IS the strategy"
+
+      - name: "Personal Monopoly"
+        version: "v1.5"
+        status: "matured"
+        change: "Now includes temporal evolution — your monopoly shifts as you grow"
+
+      - name: "Anti-Conformity Principle"
+        version: "v1.5"
+        status: "matured"
+        change: "Deepened into digital renaissance philosophy — creators as modern philosophers"
+
+    key_beliefs:
+      - "We are in a digital renaissance — creators are the new philosophers"
+      - "Business, creativity, and philosophy are one system, not three"
+      - "Sovereignty is the ultimate metric for every life decision"
+      - "The future belongs to multi-domain thinkers, not specialists"
+      - "Simple, no? The best ideas are radically simple."
+
+    vocabulary_markers:
+      - "digital renaissance"
+      - "sovereign creator"
+      - "future-present integration"
+      - "both/and"
+      - "radical simplicity"
+      - "Simple, no?"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FRAMEWORK VERSION SUMMARY
+# ═══════════════════════════════════════════════════════════════════════════════
+
+version_summary:
+  "Traffic + Offers":
+    introduced: "2018 (v1.0)"
+    current: "v2.0 (2024)"
+    trajectory: "Simple equation → Integrated with Godfather Offer + Risk Reversal"
+
+  "Value Hierarchy":
+    introduced: "2018 (v0.5)"
+    current: "v2.0 (2024)"
+    trajectory: "3 tiers → 4 tiers with Implementation + conversion paths"
+
+  "Sovereignty Test":
+    introduced: "2020 (v1.0)"
+    current: "v2.0 (2024)"
+    trajectory: "Business metric → Life operating system north star"
+
+  "Conscious Conditioning":
+    introduced: "2022 (v1.0)"
+    current: "v1.5 (2024)"
+    trajectory: "Personal development → Applied to business consistency"
+
+  "You Are The Niche":
+    introduced: "2020 (v1.0)"
+    current: "v2.0 (2024)"
+    trajectory: "Brand positioning → Life philosophy"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# USAGE PROTOCOL
+# ═══════════════════════════════════════════════════════════════════════════════
+
+usage_protocol:
+  default_era: "digital_renaissance"
+  rule: "Always use the LATEST version of a framework unless user context demands a specific era"
+  when_to_reference_older_eras:
+    - "User is at an earlier stage (e.g., still freelancing → era 1 context is relevant)"
+    - "Historical comparison requested"
+    - "Understanding WHY a framework evolved"
+  update_frequency: "Review quarterly for new Dan Koe content"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-14"
+  author: "koe-squad"
+  total_eras: 5
+  total_frameworks_tracked: 15
+  primary_agents: ["koe-chief", "koe-advisor"]
+  supporting_agents: ["all koe-* agents"]
+  source: "Aggregated from Dan Koe's books, courses, newsletters, YouTube, and podcast content (2018-2025)"

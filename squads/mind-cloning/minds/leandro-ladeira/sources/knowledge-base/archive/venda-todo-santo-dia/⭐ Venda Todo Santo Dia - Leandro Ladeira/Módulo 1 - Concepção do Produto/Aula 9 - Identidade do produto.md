@@ -1,0 +1,117 @@
+# Módulo 1 - Concepção do Produto
+
+> **Fonte:** Aula 9 - Identidade do produto.m4a
+> **Duração:** 19min
+> **Transcrição:** Deepgram nova-3 | 2026-03-06
+
+---
+
+Se você não fizer isso, você perdeu 90 por 100 da chance de você dar certo no. Sabe o que que é? Ele fez 1 cara de quê? Pô, é isso mesmo, eu pensei. Se for o que eu estou pensando.
+
+É definir a furadeira e o quadro. Estava Estava até conversando com o Vitor aqui, e essa questão é o seguinte, quando você tem 1 produto de lançamento, e aqui eu vou dar 1 exemplo do MBR que eu acho que não tem problema, quando você tem 1 produto de lançamento, pode o tempo todo vender só o quadro na parede. Você vende só ideia. No caso do produto da Cátia, é mulheres bem resolvidas. É 1 ideia abstrata.
+
+Por quê? Porque você convidou a pessoa pra 1 evento, chamando pra ela ser 1 mulher mais construída, mais bem resolvida, tem toda a tem tem tudo lá dentro, né, do que que vai entregar. Mas na hora de vender 1 lançamento, o que que tem escrito no anúncio final, que é pra fazer a pessoa comprar, né, no email de abertura? É inscrições abertas pro curso mulheres bem resolvidas, não é tão tangível, tão específico, porque você já vendeu a ideia antes, a pessoa vai lá e compra, entendeu? Se eu tentar botar o mulheres bem resolvidos no perpétuo, vai ser muito mais difícil de vender usando o tipo de comunicação que a gente vende hoje.
+
+Eu ia ter, pode até vender o mesmo produto, mas eu tinha que adaptar a comunicação pra ela começar a ser mais específica. A pessoa precisa saber da ferramenta, do que que vai entregar. Então, no nosso caso aqui, primeira coisa que você tem que escrever nesse seu papel aí, cara, qual que é a sua furadeira, qual que é o seu quadro. Vou dar o exemplo, o quadro de autoestima. O quadro é a mulher vivendo feliz e com autoestima.
+
+A furadeira é com técnica de EFT, que fica batendo. Está bem claro o quadro. E aí qual que é o o decorado? Que aí na aula de a gente vai saber que é a extrínseca. Não é só autoestima, é cara, é viver com a família feliz, é se sentir bem, o marido dela ter orgulho da pessoa que ela é, o pai dela ter orgulho da filha, enfim, tem várias coisas, né?
+
+Agora tem gente que tem o mesmo quadro, por exemplo, viver com autoestima, mas a ferramenta não é EFT, é hipnose, é autohipnose. Por quê? Vai ter gente que tem ódio de autohipnose, não gosta de autohipnose, ele quer outra ferramenta. Às vezes a ferramenta vai ser coach, às vezes a ferramenta vai ser FT, às vezes a ferramenta vai ser espiritualidade, às vezes a ferramenta vai ser esporte. Sabia que esporte pode ajudar com a autoestima?
+
+Claro que pode. Porque a pessoa fica, porra, fitness lá, mais bonitona, tal, a autoestima vai lá pra cima. Qual que é a sua ferramenta e qual que é o seu quadro? Inclusive você pode ter 1 quadro, vamos dizer que a ferramenta aqui no caso que eu falei que era esporte, né, sei lá, 1 hit, que é aquele esporte que você queima muita caloria não sei o quê, e o quadro você autoestima, mas às vezes a, com essa furadeira, com essa ferramenta você também pode ter 1 quadro que não seja autoestima, seja saúde. Às vezes você pode até ter 2 quadros pra mesma ferramenta, pra mesma furadeira, mas você tem que ter consciência disso.
+
+Olha, o meu quadro principal, é ruim quando você tem 2 quadros, viu? Vou te falar a verdade, é ruim. O legal é quando você tem 1 quadro só porque você bate muito nele, você é cara, bate muito nele e tal. Mas você pode ter vários quadros sim. Eu se fizesse 1 produto desses de esporte, de ficar sarado, não sei o quê, eu ia ter 1 quadro de autoestima e ia ter 1 quadro de saúde.
+
+Eu acho que faz todo sentido, saúde, autoestima, né? 1 exemplo pra você ver como é que isso não funciona muito bem no perpétuo é que ninguém vai procurar curso d mulheres bem resolvidas. O cara não procura curso d 6 em 7. Até perpétuo, curso d perpétuo é meio, cara, só quem já é muito do do mercado. É muito difícil ter alguém curso d é f t.
+
+Tem também, dá até pra ter, mas é 1 universo muito pequeno, fica difícil de você abrir e escalar. Você até consegue, né, indo pelas urgências ocultas e tal, até levar a pessoa a saber que existe EFT, mas você vai ter mais dificuldade de fazer essa venda mais rápido. Curso de inglês, cara, todo mundo sabe que tem curso de inglês, né? Produto físico, por exemplo, faca pra churrasco. Você não precisa explicar pro cara o que que é 1 faca de churrasco, o que que, ele já sabe que precisa, ele vai fazer 1 churrasco, ele sabe que precisa de faca de churrasco, de carvão, ele só vai lá com faca de churrasco, olha o que ele acha que é melhor, e pronto, compra a faca.
+
+Se fosse mulheres bem resolvidas, ela primeiro ia ter que ensinar, bicho, tem 1 negócio que chama churrasco, você, porra, bota carvão, bota sal, quando você corta com a faca direitinho assim, porra, sai derretendo 1 picanha. Você tem que explicar o que que é 1 churrasco, entendeu? Então pô, a gente está trabalhando com produto físico agora, impressionante como vende mais rápido e mais fácil do que produto digital, só que é menos lucrativo e menos escalável e é 1 puta dor de cabeça. A gente está fazendo porque a gente gosta de problema na vida, mas é muito fácil porque a gente vende pra lá, vibrador. Já existe vibrador há muito tempo, o bicho vende gelzinho, de fazer as parada, o nego já conhece há muito tempo, mas a galera não conhece ainda o que que é o autoconhecimento do próprio corpo, não sei o que, então tem que, cara, dar 1 puta ensinada antes de vender.
+
+Então quanto mais consciência você tem da sua furadeira e do seu quadro, melhorar. Então você vai escrever aí agora qual que é sua furadeira e qual o seu quadro. Agora tem 1 outro negócio, às vezes a sua furadeira é o seu método, o seu nome, que você criou. Por exemplo, tinha 1 pessoa que ela ensinava arquétipos. A furadeira dela é arquétipo, o quadro é aprender a se posicionar e no caso tem 1 empresa de melhor sucesso, né?
+
+Então ela tem esse processo. Só que eu falei, isso é 1 coisa que eu vou dar na aula de copy. Quando você dá o seu nome pra teoria, ela é 1 teoria única, ela melhora, ela fica sua, em vez de ensinar teste, porque eu falei pra ela ensinar a teoria da personalidade XPT0. Só que ninguém vai procurar a teoria da da da da personalidade XPT0 porque ela que inventou, acabou de inventar, não existe ainda. Então, nesse caso, você está com 1 furadeira muito única, é bom porque você elimina concorrente, mas é ruim porque não tem, você não surfa a onda do mercado que tem consciência sobre a coisa.
+
+É 1 desafio que você vai ter, se você tem isso. Tem 1 ponto positivo e ponto negativo disso. Então, são escolhas. E você pode até pegar 1 pouco, isso é o método de ensino de jiujitsu dos Grace. O cara quer ser campeão de jiujitsu, ele jiujitsu já tem, mas ele fala é o método Grace.
+
+Então, consegue ter 1 pouco das 2 coisas né então é o método de posicionamento da personalidade SPT0E aí por aí vai. Eu estou olhando 1 pouco pra baixo aqui é porque eu estou colando. Beleza? Sinceridade. Agora o que você vai definir o produto é você contar a história do produto, você tem que saber a história do seu produto, cara.
+
+Ele não chegou aqui do nada. Não é a sua história de, tem a ver, às vezes pode até ser praticamente a mesma, mas você tem que saber a história de como que você chegou nesse produto. Então já começa a desenvolver o seu lastro aí. Esse produto surgiu de onde? Você não pode ter tirado o produto do chapéu.
+
+Ah, eu comprei o curso de marketing digital e agora eu vou ensinar as pessoas a, sei lá, balé. Bicho, você, de onde é que você aprendeu balé? Você descobriu que tem balé é 1 bom nicho, que muita gente quer aprender balé e agora você vai ensinar balé? Não pode. Tem que ter 1 história que você chegou aí até ensinar balé, né?
+
+Ou ou sua ou da pessoa que você está fazendo o marketing pra ela, que vocês estão fazendo em parceria, né? Você tem 1 sócia como eu. Pra fazer a história do, a identidade do produto, tem que ter a história de como que você chegou nesse produto, por que que ele é único, aonde você aprendeu, que que você estudou. No meu, tem a minha história única desse produto aqui. Cara, eu fui lá, comecei com o infoproduto, fiz o da Cátia, tive 1 problema, depois quis fazer só o perpétuo, vendi minha agência, fiz o meu primeiro perpétuo, vendi pouquinho, escalei, vendeu mais e tal.
+
+Entrei nos perpétuos que mais vendia no Brasil, depois lancei outro, tal, hoje tenho 5, agora ensino. Esse é o meu momento da da da vida desse produto. Você vai pegar o seu momento também, escreve a história, tem que estar aí no seu dever, né, história. A outra coisa que você pode pegar pra fazer a identidade do seu produto, quais são as analogias do seu produto? Eu tenho várias, eu tenho a analogia da semente, tenho a da mangueira, tenho a da cachoeira, o do oxigênio.
+
+Quais as analogias do seu produto? Você já tem que estar com isso pronto, porque quando você for convidado pra dar 1 palestra, quando você for convidado pra dar 1 entrevista, pra fazer 1 live, você tem 10 analogias pra cada tipo de de lugar que você for diferente, você já entra com 1 arma. Eu até vou ensinar na aula de também você ter várias armas que é o banco de histórias. Então você tem que ter o seu banco de analogias pra mostrar o seu ponto pras pessoas. Então, quais são as analogias do seu produto?
+
+No meu caso, eu já falei quais são as analogias. Então você pode fazer, sei lá, escola de jiujitsu. A técnica é como, tem 1 1 1, olha como é que isso funciona mesmo. E é secular essa parada. Tem 1 arte marcial que ela faz tudo analogia com os bicho, né?
+
+Kung Fu, não é? Que é a analogia das posições lá, é 1 é o garfanhoto, não sei o quê, é o panda, sei lá o quê. É as da Radio Facial, não sou lutador não. Mas cara, o que que o seu produto vende, o que que o seu método é que você consegue contar 1 historinha, 1 analogia? Como eu tenho a minha analogia da semente, como eu tenho a analogia da cachoeira, como eu tenho minha analogia.
+
+E você vê que ela as minhas analogias são muito ligadas à minha própria personalidade, Analogia da privada entupida, ou como é que ela tem muito a ver com a minha personalidade? Não que eu intubo privadas, porque eu tento ser mais engraçado. A outra coisa, quais são os argumentos lógicos incontestáveis do seu produto? Tem 200000000 de pessoas no Brasil. Com certeza hoje vai ter alguém interessado em aprender a fazer crochê.
+
+E aí isso é incontestável, não dá pra, cara, tem alguém procurando sobre crochê hoje, é verdade, não dá pra contestar. E isso é fundamenta pra que eu consiga vender. E quando você começa a ter esses argumentos incontestáveis, você começa a criar 1 produto com identidade mais forte, né? Então, quais são os seus argumentos lógicos incontestáveis? E não é prova.
+
+Muita gente fala, ah, incontestável, eu tenho 1000 alunos que conseguiram. Isso não é não é lógico. Ele até tem 1 linha lógica tal, mas ele não faz você, durante o meu webinar, quantos argumentos lógicos eu já usei? Esse da urgência é 1 argumento lógico cara, todo dia tem urgência de 1 pessoa com urgência. Esse da consciência é lógico, a pessoa que tem consciência sobre o seu produto está mais fácil de comprar.
+
+O da oportunidade é lógico, tem 1 monte de gente que não conhece o seu produto, é 1 oportunidade pra você ir pra ela. Então, retórica caristotélica isso aí, você sabe? É, meu irmão. Não sabia. É retórica caristotélica, eu já estudei sobre isso.
+
+Depois vocês procuram aí sobre retórica caristotélica, que é você pegar 1 verdade e a baseada em várias verdades você constrói 1 linha argumentativa. Que cultura, né, Vitão? Porra. Depois você tem que dar os seus nomes pras suas coisas, quais o seu produto ele não pode ser, sabe quem faz isso muito bem? A Polishop.
+
+A Polishop na, nunca é 1 aquecedor, bicho. É o aquecedor master, o sistema de tecnologia. Então você tem que dar o nome das suas coisas. Você vê que eu dou meus nomes, né? Eu tenho a minha teoria do fluxo da venda, a matriz do perpétuo.
+
+Isso é meu, se alguém quiser botar, está me copiando, é a matriz do perpétuo. E olha como é que eu vou dando nome em tudo, eu vou criando, cara, a matriz do perpétuo é composta por urgência, consciência Oportunidade. Eu tenho dislexia, né, que eu estou inventando. Eu inventei essa teoria das urgências ocultas. E, cara, às vezes outro cara chama de outro nome e tal, mas da forma como eu coloquei dentro da minha parada, é muito didático, então você tem que dar nome a tudo, você tem que ser didático.
+
+Quais são as ferramentas pra você ser didático? Você encontrar nomes, aí é 1 segredo também já da didática aí quando você for construir o seu Nomes palpáveis pra maioria do público que você definiu lá na outra aula. Porque por exemplo, no meu universo aqui, eu quero deixar completamente aberto. Então eu coloco nomes que qualquer pessoa entende. Então eu não vou ficar falando de funil de vendas, eu não falo de topo de funil, fundo de funil, eu procuro usar a palavra lead, CPC.
+
+Às vezes eu até brinco quando eu quero fazer campanha de consciência, ou então algum post de consciência. Já viu eu fazendo isso? O cara perguntou pra mim, Leandro, o que que é CPC? Eu falei, CPC é o maior indicador pra você saber se o seu lead está com CTR adequado E0LTV final da sua campanha vai dar o mas no final o que importa é o. Esse, eu estava fazendo 1 campanha de oportunidade pra quem já conhece alguma coisa, então eu só sabia que o público daquilo ali era 1 linguagem altamente técnica, eu poderia estar fazendo, está dando umas desfocadas assim, eu poderia estar fazendo linguagem técnica ali porque era 1 campanha de consciente, era 1 era 1 post ali, 1 brincadeira de consciência.
+
+E o outro cara que não entendia nada, eu queria demonstrar pra ele que ele tem que aprender, eu fiz 1 piada com todo mundo e tal. Eu apavorei o cara. Então é importante que você dê nome pras suas teorias, pra sua metodologia, os nomes das coisas que estão lá dentro. E pode parecer muito pretensioso agora, mas se você pensa em longo prazo, que é 1 valor meu, e você repete esses nomes por 5, 10, 20, né? Vamos botar 5 anos já, né?
+
+20 anos, o cara, porra, tenho 60, não vai dar não pra mim, 1 vez que eu fiz a piada, diria que a vó Palmirinha não pode pensar em longo prazo, ninguém ficou bravo comigo. Mas a parada é o seguinte, quando você repete esses nomes você começa a criar 1 estrutura mais forte, o próprio fórmula né, o o criou lá CPL 1, p l 2, CPL 3, PPL, isso foi repetindo tanto que faz parte do universo cognitivo de quem estuda marketing. E daqui a 10 anos ele vai ser tipo o os 4 p's do marketing, está ligado? Do do. Eu não conheço muito.
+
+Você é meio dele? É mais ou menos. Clóter. Clóter? Clóter.
+
+Então, é isso. E olha só que interessante, você pode ter o seu os seus nomes numa metodologia única sua, pra ensinar 1 coisa de 1 de 1 outra, por exemplo, tem 0EFT, que é 1 caso bem específico, que 1 coisa que já já existe, mas você pode ter o seu jeito de ensinar o FT igual ao jiujitsu, tem jiujitsu lá, cara já tem o nome do armlock, né? Eu sou, não entendo de, tem o nome lá armlock, mas você pode ser, o seu jeito de chegar no armlock, o seu jeito de, sei lá, não tem o método Grace, ele vai ensinar a saída tal, o jeito de treinar tal, o jeito de cair tal. Então no seu caso, quais são os nomes específicos que você está dando e quais são a as teorias que você tem por trás e, isso que tem que ter história, como que você chegou nessa teoria? Como é que eu cheguei nessas na nessas minhas teorias de urgência tal?
+
+Porque eu sabia quando eu fazia o 1 anúncio bem direto tocando numa urgência oculta, eu fazia venda. E eu fui fazendo, cara, isso aqui não veio do dia pra noite, foram muitos anos fazendo várias campanhas, a gente foi organizando internamente. Essas teorias aqui a gente criava pra treinar as a equipe interna aqui. O cara que fazia o vídeo a gente já fala, olha, cara, vídeo de urgência, já tem a parte urgência, urgência oculta tal, vamos fazer reunião pra descobrir urgência oculta. Foram anos aí a gente foi chegando.
+
+E é lógico que você precisa de fazer 10 anos de, né, pra começar a criar o seu curso, né? Você pode criar as suas teorias, suas suposições e dar uns nomes criativos e que funcionem pra grande maioria da pessoa mundial. Tem 1 coisa que eu falo que é o discurso do Obama, já ouviu falar? Que o Obama tem 1 discurso que até 1 criança de 7 anos consegue entender tudo. Então não tentar falar bonito, não é?
+
+Botar 1 monte de palavra em inglês. Só se você estiver com 1 público muito específico que você quer que ele seja só muito técnico, aí você faz lá com as palavras que só aquele público vai entender. Mas, fora isso, se você quiser ir pra 1 nicho mais aberto, mais macro, e você quiser ser mais entendido por mais pessoas, tente dar exemplos mais tranquilos. Eu gosto muito do Eric quando ele fala montinho e montão. Parece meio tosco até, né?
+
+Mas cara, é é entendível por qualquer pessoa, é 1 teoria muito dele e tal. E lógico que não é a teoria do curso, é 1 teoria que ele dá gratuita, né? Por isso que eu estou até falando aqui, da teoria do cara, o meu curso paga aqui, mas assim, ela é muito entendível, né? A minha também é muito entendível. Então fazendo o resumo, cara, você tem que saber sua furadeira, seu quadro, dar nome pras suas técnicas, suas teorias, seu método, você tem que ter argumentos lógicos, você tem que ter suas analogias e a sua história, e e adivinha só o que ficou faltando pra você ter 1 produto com identidade forte?
+
+O nome do produto. Você precisa de ter 1 nome, aí aí você pode também fazer 1 de nome, pegar. Agora não fique tão preso, nossa, não encontrei o nome ideal. Eu acho que a gente não está no nosso nome ideal ainda, venda todo santo dia, mas eu eu tinha data pra lançar, então foi foi o que eu lancei e tal, e até bom que você veja super sincero, estou contando a verdade aqui. Mas provavelmente a gente ainda vai encontrar esse nome e tal, mas está com problema de identidade que eu estou corrigindo.
+
+Como eu tenho essa empresa tem, nem 1 dia, a empresa nem existe ainda, o CNPJ está saindo, tudo bem, está acontecendo, vocês estão vendo a coisa acontecer. E aí por último, ainda tem 1 coisa importante, é como é que você organiza o seu curso. Porque você vai falar assim, cara, eu sei vender brigadeiro, é 1 curso de venda de brigadeiro. E como é que eu transformo isso em curso? Você tem 1 monte de conhecimento, e como é que você transforma esse curso?
+
+A primeira coisa que eu faço pra transformar algo em curso, eu pego o objetivo final que eu quero que a pessoa saiba. Eu começo não pelo início, começo pelo final. E aí pelo final eu vou fazendo o processo reserva pra saber o que que ele precisa até conseguir aquilo. Por exemplo, se fosse vender brigadeiro, a ideia é que pessoa ganhe 5000 reais vendendo brigadeiro, que é bem específico, né? Mas é ou então que ela consiga sustentar a família dela vendendo brigadeiro.
+
+Pô, por que que, pra conseguir vender brigadeiro, o que que ela precisa saber? Fazer o brigadeiro, depois ela precisa saber vender o brigadeiro. Tá aí eu vou lá. Pra saber o brigadeiro, o que que ela precisa? Os ingredientes, ela precisa saber comprar e ter lucro, né?
+
+Então ela precisa saber aonde compra mais barato, qual a marca mais barata, qual a marca que tem 1 bom custobenefício, que não adianta ser só mais barato também, porque o cliente também tem que gostar. Então, o primeiro módulo eu podia colocar só sobre compras. Pode parecer meio babaca, mas tem que dividir em módulo mesmo, você não pode ser, meu curso é 1000 aulas, solta as aulas tudo e faz desorganizado. Tem que planejar, eu planejei isso aqui, galera. Se vocês forem ver aqui, a gente ficou 1 bom tempo organizando isso aqui, com o modo, vamos pensar.
+
+Pode ser que exista até 1 ciência de como você queria 1 curso ou 1 curso específico sobre isso, talvez você compre 1 dia 1 curso que alguém estudou muito mais sobre isso. Eu fiz muito empiricamente, mas os que eu fiz estão, pô, deram todos muito certo. Então o que que você vai fazer? Você vai dividir, eu começo desse jeito, qual objetivo final que eu quero o cara, porque se você não tiver objetivo final, se você for, ah, daqui até sei lá onde, você não consegue fazer a volta. Então você começa do final, que é o que pro no meu caso, que que eu quero que ele faça?
+
+10 vendas todo dia. E que, de preferência de 1 venda de 500 reais, 150 k, que é a minha intenção pra você aí, viu? É isso que eu quero pra você. Fui descobrindo o que que ele precisa. Pô, ele precisa criar 1 produto, ele precisa entender como se comunicar, como concebe o produto.
+
+O que que ele precisa entender? A estratégia por trás desse negócio todo. Que ele precisa entender? Copy. Que que ele precisa entender?
+
+Tráfego. O que que ele precisa entender? Cara, tráfego orgânico, porque pô, gente não pega tanta urgência, precisa de tráfego orgânico, de pesquisa no Google e no YouTube. Que que ele precisa? De rede social, linha editorial.
+
+Então eu fui fazendo os módulos. Depois, eu fui botando a minha teoria própria dentro disso, agora tem 1 coisa muito importante, sabe o que que é? Tem que ser conectado 1 coisa com a outra, tudo conectado. Se não tiver ligação entre 1 módulo e outro, você fica com o curso avulso. Que sabe o que que acontece quando você tem 1 curso com módulo avulso?
+
+O cara fica perguntando pra você, eu quero só o módulo de, eu quero só o módulo. Já aconteceu com a gente, criou 1 produto e teve esse problema. A pessoa queria, eu não queria o curso inteiro. Ah não, esse aqui é muito caro, eu queria só o módulo de linha editorial. Aí dá 1 merda porque a coisa está desconecta.
+
+E você precisa de ter o quebracabeça inteiro, senão não faz sentido. Por isso que eu não faço eu não ensino eu ensino pra perpétuo do meu jeito, do meu método, que pode ser, pode pegar 1 outro método do cara que ensina o que ensina a fazer com mais gatilho mental pra forçar a venda. O meu é o tipo de que não força a venda, é o que encontra o cara no momento de ver. Você entende que é tudo diferente? Não adianta você comprar 1000 curso de só.
+
+Vai dar merda, não não vai te servir pra nada sem o restante das coisas. Numa retrospectiva agora final, você pra você conseguir organizar o seu produto, pra você pra ele ter tração, pra você crescer ao longo do tempo, em vez de você só ficar patinando, porque 1 coisa ajuda a crescer a outra, sabia? Quando você começa a crescer o produto, cresce sua identidade. Se você começa a crescer sua identidade, você gera desejo pelo produto e mais gente começa a falar de você. Então você precisa de identidade do comunicador, identidade do consumidor e identidade do produto.
+
+São os 3 i's. Olha, eu que inventei, dou 1 nome pra minhas coisas, os 3 i's, olha. O, como é que teu amigo lá que falou? O Clóter. O Clóter ficaria invejoso dessa teoria aqui, viu?
+
+O Clóter ia falar, pô moleque. É, isso aí. E é 1 teoria prática. Eu não estudei igual ele provavelmente estudou cientificamente, mas eu estudei empiricamente e tive ótimos resultados, você vai ter também. E tem 1 monte de dever de casa pra você fazer aí, ralação aí, meu brother.
+
+Enquanto você está escrevendo aí, estou gravando vídeo aqui a semana inteira. Então vamos depois pra próxima aula que é sobre precificação. E aí vai ter as planilha. Cara, essa parada não é querendo tirar expectativa não, ter umas planilha boa, pra você entender como é que você precifica e como é que você planeja o seu ano, com clareza.

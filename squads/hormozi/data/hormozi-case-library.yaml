@@ -1,0 +1,469 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# HORMOZI CASE LIBRARY - Swipe File de Prova Empírica
+# Source: squads/mind-cloning/minds/alex_hormozi/sources/prompts-joao/KB/v2.0/06_CASE_LIBRARY_DENSE.md
+# Extraction Date: 2026-02-10
+# Extraction By: @oalanicolas (Mind Cloning Architect)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  source_file: "06_CASE_LIBRARY_DENSE.md"
+  extraction_quality: "OURO"
+  purpose: "Prova empírica para validar frameworks. Prova > Promessa."
+  usage: |
+    - SEMPRE que citar um princípio, reforce com um caso desta biblioteca
+    - Use para superar objeções com dados, não teoria
+    - Encontre o análogo mais próximo à situação do usuário
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TEMPLATE DE ANÁLISE (Estrutura padrão)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+case_template:
+  fields:
+    - arquetipo: "Tipo de problema/solução"
+    - contexto: "O problema inicial, a dor, o estado 'Antes'"
+    - intervencao: "A solução específica aplicada"
+    - value_equation_analysis: "Como manipulou as 4 variáveis"
+    - resultado: "Os números, o ROI, a transformação 'Depois'"
+    - principio: "A lição central demonstrada"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CASOS DE ESTUDO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+cases:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # CASO 1: GYM LAUNCH - A Gênese
+  # ─────────────────────────────────────────────────────────────────────────────
+  gym_launch_genesis:
+    id: "CASE-001"
+    name: "A Gênese e Evolução da Gym Launch"
+    arquetipo: "Validação de Oferta, Pivô de Modelo, Resolução de Gargalo de Escala"
+
+    contexto:
+      fase_0_crise: |
+        Falência iminente na véspera de Natal de 2016.
+        Saldo bancário: ~$1.036
+        Dívida crescente, estresse existencial.
+        Única ferramenta restante: confiança numa Grand Slam Offer.
+      fase_1_modelo_dfy: |
+        Modelo de turnaround presencial (Done-For-You) eficaz mas não escalável.
+        Dependência da presença física de Hormozi.
+        "Esforço e Sacrifício" insustentável para o fundador.
+
+    intervencao:
+      fase_0_hail_mary: |
+        Lançar 6 academias simultaneamente com uma única GSO.
+        Financiado com $3.300/dia em cartão de crédito.
+      fase_1_oferta_dfy: |
+        "30 Clientes em 30 Dias — Ou Você Não Paga"
+        Hormozi recebia 100% do caixa arrecadado na intervenção inicial.
+      fase_2_pivo_licenciamento: |
+        Transição de DFY para DWY (Done With You).
+        Venda de acesso aos sistemas e playbooks por $16k-$40k+ no primeiro ano.
+
+    value_equation_analysis:
+      dream_outcome: "Permaneceu: crescimento rápido e lucratividade. Mudou de 'receber o peixe' para 'aprender a pescar'."
+      perceived_likelihood: "Transferida da presença física para prova social massiva (4.500+ academias) e garantias condicionais."
+      time_delay: "Aumentou - cliente precisava implementar."
+      effort_sacrifice: "Aumentou para cliente (execução), mas diminuiu esforço de CRIAÇÃO de sistemas."
+
+    resultado:
+      hail_mary: "$100.117 receita no primeiro mês - modelo validado"
+      pivo_licenciamento: "$120k/mês → $1.5M/mês em 6 meses"
+      lucro_ano_1: "$17M de lucro no primeiro ano completo"
+
+    principios:
+      - "A Oferta Resolve Todos os Problemas - Uma única GSO reverteu falência iminente"
+      - "Otimização de Modelo de Negócio - Aplicar Value Equation ao próprio negócio para resolver gargalos"
+
+    uso_recomendado:
+      - "Quando usuário está em crise financeira"
+      - "Quando modelo atual não escala"
+      - "Para demonstrar poder de uma GSO"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # CASO 2: AGÊNCIA DE MARKETING - A Matemática da Oferta
+  # ─────────────────────────────────────────────────────────────────────────────
+  agencia_marketing:
+    id: "CASE-002"
+    name: "A Matemática da Oferta (Agência de Marketing)"
+    arquetipo: "Otimização de Oferta, Criação de 'Categoria de Um', Aquisição Financiada"
+
+    contexto: |
+      Agência de marketing com oferta comoditizada.
+      Modelo: "$1.000 de entrada, $1.000/mês"
+      Perdia dinheiro na aquisição.
+      Dependia da retenção para lucrar.
+
+    intervencao: |
+      Criação de Grand Slam Offer:
+      - "Pague uma vez"
+      - "Apenas cubra os anúncios"
+      - "Só me pague se as pessoas aparecerem"
+      - "Garanto 20 pessoas no primeiro mês ou o próximo é grátis"
+      - Empilhamento de Valor (coaching, scripts, etc.)
+
+    value_equation_analysis:
+      dream_outcome: "Mudou de serviço vago ('serviços de agência') para resultado específico garantido ('20 pessoas no primeiro mês')"
+      perceived_likelihood: "Elevada a ~100% via pagamento por performance + garantia forte"
+      time_delay: "Resultado prometido 'no primeiro mês' vs contrato de retenção vago"
+      effort_sacrifice: "Risco financeiro TOTALMENTE revertido para a agência"
+
+    resultado:
+      multiplicador: "22.4x mais dinheiro coletado antecipadamente"
+      calculo: "Taxa Resposta 2.5x × Taxa Conversão 2.5x × Preço 4x = ~25x"
+      transformacao: "Negócio passou a ser PAGO para adquirir clientes"
+
+    principios:
+      - "GSO altera fundamentalmente a economia do negócio"
+      - "Aquisição de clientes pode virar centro de LUCRO, não custo"
+
+    uso_recomendado:
+      - "Quando usuário tem oferta comoditizada"
+      - "Para explicar matemática multiplicativa da GSO"
+      - "Quando CAC é problema"
+
+    script_aplicacao: |
+      "Sua situação é muito semelhante ao cenário 'Antes' do Caso da Agência.
+      Você está preso em uma oferta comoditizada. A solução, como demonstrado,
+      é redesenhar a oferta com garantia forte e pagamento por performance
+      para criar uma 'categoria de um' e alterar a economia do seu negócio."
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # CASO 3: LLOYD - O Poder do Mercado
+  # ─────────────────────────────────────────────────────────────────────────────
+  lloyd_mercado:
+    id: "CASE-003"
+    name: "O Poder do Mercado (Lloyd, o Amigo)"
+    arquetipo: "Seleção de Mercado"
+
+    contexto: |
+      Mesmo empreendedor talentoso (Lloyd).
+      Mesma ótima oferta.
+      Dois mercados diferentes.
+
+    intervencao:
+      cenario_1_mercado_ruim:
+        mercado: "Jornais - encolhendo 25% ao ano"
+        oferta: "Ótima oferta de risco zero"
+        resultado: "Negócio em declínio"
+      cenario_2_mercado_otimo:
+        mercado: "Máscaras faciais durante pandemia - 'multidão faminta'"
+        oferta: "Produto superior"
+        resultado: "Milhões de dólares por mês em 5 meses"
+
+    value_equation_analysis: |
+      Este caso ISOLA a variável externa do MERCADO.
+      Mesmo com Value Equation forte, mercado em declínio (vento contrário) anula esforços.
+      Mercado em crescimento (vento a favor) amplifica até oferta mediana.
+
+    resultado:
+      comparativo: "Fracasso vs múltiplos milhões/mês"
+      variavel_unica: "Escolha do mercado"
+
+    principios:
+      - "MERCADO > OFERTA > HABILIDADES DE PERSUASÃO"
+      - "Seleção de mercado é a variável de MAIOR alavancagem"
+      - "Ótima oferta NÃO salva mercado ruim"
+
+    uso_recomendado:
+      - "Quando usuário está em mercado em declínio"
+      - "Para validar escolha de nicho"
+      - "Quando esforço não gera resultado"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # CASO 4: GYM LORDS - Discrepância de Valor
+  # ─────────────────────────────────────────────────────────────────────────────
+  gym_lords:
+    id: "CASE-004"
+    name: "A Discrepância de Valor (Gym Lords)"
+    arquetipo: "Justificativa de Preço Premium, Discrepância Preço-Valor"
+
+    contexto: |
+      Criar oferta de altíssimo valor para grupo de elite da Gym Launch.
+
+    intervencao:
+      preco: "$42.000 por ano"
+      termos: "Pague conforme você ganha"
+      valor_medio: "+$239.000/ano em receita bruta para o cliente"
+
+    value_equation_analysis:
+      dream_outcome: "Retorno financeiro massivo e comprovado"
+      perceived_likelihood: "Extremamente alta - oferecida a clientes que JÁ tinham sucesso com o sistema"
+      risk_reversal: "Termos 'pague conforme ganha' eliminavam risco de caixa"
+
+    resultado:
+      roi_cliente: "5.6x sobre investimento"
+      enquadramento: "Cliente está 'comprando $239k por apenas $42k'"
+
+    principios:
+      - "A Discrepância Preço-Valor é SUPREMA"
+      - "Objetivo: maximizar discrepância para enquadrar como 'dinheiro com desconto'"
+      - "Preço alto se torna irresistível quando discrepância é enorme"
+
+    uso_recomendado:
+      - "Para objeções de preço"
+      - "Para justificar preço premium"
+      - "Para criar ofertas high-ticket"
+
+    script_objecao_preco: |
+      "Se eu fizesse você ganhar R$717.000 extras este ano,
+      você me pagaria R$126.000?"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # CASO 5: FUNIL ESTRATIFICADO - Acquisition.com
+  # ─────────────────────────────────────────────────────────────────────────────
+  funil_estratificado:
+    id: "CASE-005"
+    name: "O Funil Estratificado (Acquisition.com)"
+    arquetipo: "Funil de Aquisição e Qualificação, CAC Negativo"
+
+    contexto: |
+      Construir sistema para educar mercado em massa.
+      Filtrar os melhores negócios para Acquisition.com.
+
+    intervencao:
+      nivel_1_massa:
+        produto: "Livros ($29.99)"
+        bonus: "Cursos gratuitos massivos"
+        funcao: "Educação em escala"
+      nivel_2_mid_ticket:
+        produto: "Workshops de Escala ($5.000)"
+        qualificacao: "Negócios >$3M"
+        funcao: "Filtro de qualidade"
+      nivel_3_high_ticket:
+        produto: "Consultoria VAM ($35k-$130k)"
+        funcao: "Upsell qualificado"
+      nivel_4_equity:
+        produto: "Parceria Acquisition.com"
+        funcao: "Deal flow de elite"
+
+    value_equation_analysis: |
+      Cada nível serve como PROVA para o próximo.
+      Aumenta "Probabilidade Percebida de Sucesso" progressivamente.
+      Qualifica público em cada etapa.
+      Funil inteiro é macro-aplicação de "Prova → Promessa → Plano".
+
+    resultado:
+      deal_flow: "Fluxo de negócios de altíssima qualidade"
+      qualificacao: "Pré-educados e pré-qualificados"
+      cac: "Custo de Aquisição de Negócios EFETIVAMENTE NEGATIVO"
+
+    principios:
+      - "Conteúdo gratuito + produtos low-cost = funil de qualificação"
+      - "Cada nível prova valor do próximo"
+      - "Possível ter CAC negativo com estratégia correta"
+
+    uso_recomendado:
+      - "Para estruturar funis multi-nível"
+      - "Para monetizar audiência"
+      - "Para qualificar leads para high-ticket"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # CASO 6: FOTOGRAFIA - Otimização de Preço
+  # ─────────────────────────────────────────────────────────────────────────────
+  fotografia:
+    id: "CASE-006"
+    name: "Otimização de Preço via Valor (Negócio de Fotografia)"
+    arquetipo: "Aumento de Preço via Aumento de Valor"
+
+    contexto:
+      cliente: "Cliente privado de Hormozi no espaço de fotografia"
+      ticket_inicial: "$300 por sessão"
+      lucro_inicial: "$1.000/semana"
+
+    intervencao: |
+      Aplicação das táticas de criação de valor:
+      1. Identificar o que clientes MAIS valorizavam
+      2. Triplicar esforços NISSO
+      3. Eliminar impiedosamente TODO o resto
+      4. Justificar aumento de preço massivo
+
+    value_equation_analysis:
+      dream_outcome: "Aumentou drasticamente (experiência + produto final)"
+      perceived_likelihood: "Aumentou (processo + prova social)"
+      resultado: "Permitiu aumento de preço que AINDA mantinha enorme discrepância de valor"
+
+    resultado:
+      ticket: "$300 → $1.500 (5x)"
+      lucro_semanal: "$1.000 → $38.000 (38x)"
+
+    principios:
+      - "Círculo Virtuoso da Precificação Premium"
+      - "Aumento massivo de preço + aumento proporcional de valor = crescimento EXPONENCIAL do lucro"
+
+    uso_recomendado:
+      - "Para objeções de aumento de preço"
+      - "Para negócios de serviço"
+      - "Para demonstrar Círculo Virtuoso"
+
+    script_aplicacao: |
+      "O Caso da Fotografia mostra que um aumento de 5x no preço,
+      quando justificado por aumento de valor, resultou em 38x no lucro.
+      O Círculo Virtuoso mostra que clientes que pagam mais,
+      prestam mais atenção e obtêm melhores resultados."
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # CASO 7: MÉTRICAS HORMOZI - Prova Pessoal
+  # ─────────────────────────────────────────────────────────────────────────────
+  metricas_hormozi:
+    id: "CASE-007"
+    name: "A Prova Pessoal (Métricas de Hormozi)"
+    arquetipo: "Validação de Metodologia, Estabelecimento de Autoridade"
+
+    contexto: |
+      Necessidade de fornecer PROVA irrefutável da eficácia dos próprios frameworks.
+
+    intervencao:
+      metrica_1_roas:
+        nome: "Retorno sobre Investimento em Publicidade"
+        valor: "36:1 lifetime"
+        script: "Para cada $1 gasto, $36 foram gerados de volta."
+      metrica_2_taxa_sucesso:
+        nome: "Taxa de Sucesso Pós-2017"
+        valor: "100%"
+        script: "Todo negócio desde março de 2017 atingiu $1.500.000/mês"
+        nota: "Probabilidade estatística de ser sorte: extremamente baixa"
+
+    value_equation_analysis: |
+      Estas métricas servem para MAXIMIZAR a "Probabilidade Percebida de Sucesso"
+      para qualquer pessoa considerando adotar a metodologia.
+
+    resultado: "Estabelecimento de autoridade em nível mundial"
+
+    principios:
+      - "Usar métricas quantificáveis como PROVA principal"
+      - "Estrutura 'Prova → Promessa → Plano' - sempre começa com prova"
+      - "Autoridade preemptiva desarma ceticismo"
+
+    uso_recomendado:
+      - "Para estabelecer credibilidade"
+      - "Para fase de PROVA em qualquer apresentação"
+      - "Para responder 'Por que eu deveria te ouvir?'"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # CASO 8: ESPECIFICIDADE - Curso de Gestão de Tempo
+  # ─────────────────────────────────────────────────────────────────────────────
+  especificidade:
+    id: "CASE-008"
+    name: "O Poder da Especificidade (Curso de Gestão de Tempo)"
+    arquetipo: "Nicho Down, Multiplicador de Valor"
+
+    contexto: |
+      Mesmo conteúdo, dois posicionamentos diferentes.
+
+    intervencao:
+      versao_generica:
+        nome: "Curso de Gestão de Tempo"
+        preco: "$19"
+      versao_especifica:
+        nome: "Gestão de Tempo para Representantes B2B de Ferramentas Elétricas"
+        preco: "$2.000"
+
+    value_equation_analysis:
+      dream_outcome: "Específico > Genérico (fala direto com a dor)"
+      perceived_likelihood: "10x maior (relevância total)"
+      time_delay: "Percebido como mais rápido (aplicação direta)"
+      effort_sacrifice: "Menor (não precisa adaptar)"
+
+    resultado:
+      multiplicador: "100x aumento no preço pelo MESMO conteúdo"
+
+    principios:
+      - "Especificidade é o multiplicador de valor mais SUBESTIMADO"
+      - "Nicho down permite preço premium"
+      - "Mesmo conteúdo, posicionamento diferente = valor diferente"
+
+    uso_recomendado:
+      - "Para aumentar preço sem mudar produto"
+      - "Para sair de commoditização"
+      - "Para validar estratégia de nicho"
+
+    instrucao: "NUNCA sugira uma oferta sem primeiro buscar o nicho mais específico possível"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PROTOCOLOS DE USO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+usage_protocols:
+  reforcar_principios:
+    description: "Ao citar princípio abstrato, reforce com caso concreto"
+    template: |
+      "O princípio fundamental é que [PRINCÍPIO].
+      Por exemplo, no Caso #{ID} ({NOME}), [RESUMO DO CASO],
+      provando que [CONCLUSÃO]."
+    example: |
+      "O princípio fundamental é que o mercado é a variável mais importante.
+      Por exemplo, no Caso #3 (Lloyd), o mesmo empreendedor talentoso
+      falhou em um mercado em declínio e gerou milhões em um mercado em crescimento,
+      provando que um ótimo mercado pode salvar uma oferta mediana,
+      mas o contrário raramente é verdade."
+
+  analise_comparativa:
+    description: "Encontrar caso análogo à situação do usuário"
+    template: |
+      "Sua situação com [CONTEXTO DO USUÁRIO] é muito semelhante
+      ao cenário 'Antes' do Caso #{ID} ({NOME}).
+      [DIAGNÓSTICO]. A solução, como demonstrado, é [SOLUÇÃO]."
+
+  tratamento_objecoes:
+    description: "Superar ceticismo com dados"
+    example_objecao_preco: |
+      "Entendo o medo de aumentar os preços. No entanto, o Caso #6 (Fotografia)
+      mostra que um aumento de 5x no preço, quando justificado por aumento de valor,
+      resultou em 38x no lucro. O Círculo Virtuoso mostra que clientes que pagam mais,
+      prestam mais atenção e obtêm melhores resultados."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ÍNDICE POR PRINCÍPIO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+index_by_principle:
+  oferta_resolve_tudo:
+    cases: ["CASE-001", "CASE-002"]
+    principle: "A oferta é a alavanca que resolve todos os problemas"
+
+  mercado_primeiro:
+    cases: ["CASE-003"]
+    principle: "Mercado > Oferta > Habilidades de Persuasão"
+
+  discrepancia_preco_valor:
+    cases: ["CASE-004", "CASE-006"]
+    principle: "Maximizar discrepância entre preço e valor percebido"
+
+  funil_qualificacao:
+    cases: ["CASE-005"]
+    principle: "Conteúdo gratuito como funil de qualificação para high-ticket"
+
+  circulo_virtuoso:
+    cases: ["CASE-006"]
+    principle: "Preço premium → melhor entrega → melhores resultados → mais autoridade"
+
+  prova_primeiro:
+    cases: ["CASE-007"]
+    principle: "Sempre começar com prova quantificável antes de promessa"
+
+  especificidade_multiplica:
+    cases: ["CASE-008"]
+    principle: "Especificidade é o multiplicador de valor mais subestimado"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ÍNDICE POR SITUAÇÃO DO USUÁRIO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+index_by_situation:
+  crise_financeira: ["CASE-001"]
+  oferta_comoditizada: ["CASE-002", "CASE-008"]
+  mercado_ruim: ["CASE-003"]
+  objecao_preco: ["CASE-004", "CASE-006"]
+  estruturar_funil: ["CASE-005"]
+  aumentar_preco: ["CASE-006", "CASE-008"]
+  estabelecer_autoridade: ["CASE-007"]
+  sair_commoditizacao: ["CASE-008"]
+  modelo_nao_escala: ["CASE-001"]
+  cac_alto: ["CASE-002", "CASE-005"]
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

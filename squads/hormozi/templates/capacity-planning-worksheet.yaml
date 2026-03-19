@@ -1,0 +1,151 @@
+# Capacity Planning Worksheet
+# Source: hormozi-scale agent - Capacity Planning Frameworks
+# Use: Fill out to assess capacity constraints and plan growth
+
+template_id: HZ_TMPL_CAPACITY
+version: "1.0"
+
+# ═══════════════════════════════════════════════════════════════════
+# SECTION 1: CURRENT STATE
+# ═══════════════════════════════════════════════════════════════════
+
+current_state:
+  revenue: ""           # Current monthly/annual revenue
+  customers: ""         # Total active customers
+  team_size: ""         # Full-time employees
+  revenue_per_employee: ""  # Revenue / Team size (target: >$250k)
+
+# ═══════════════════════════════════════════════════════════════════
+# SECTION 2: CAPACITY LIMITS
+# ═══════════════════════════════════════════════════════════════════
+
+capacity_limits:
+  max_customers_current_team: ""   # How many customers can you serve?
+  max_revenue_current_team: ""     # Revenue ceiling with current team
+  breaks_first_at_2x: ""           # What breaks if volume doubles?
+
+# ═══════════════════════════════════════════════════════════════════
+# SECTION 3: UTILIZATION ANALYSIS
+# ═══════════════════════════════════════════════════════════════════
+
+utilization:
+  current_rate: ""  # (customers / max_customers) x 100
+  # Benchmarks:
+  # - >80%: Need to add capacity BEFORE scaling acquisition
+  # - 70-80%: Ideal - scale acquisition
+  # - <70%: Focus on acquisition, not capacity
+
+  assessment: ""  # [NEED_CAPACITY | IDEAL | NEED_ACQUISITION]
+
+# ═══════════════════════════════════════════════════════════════════
+# SECTION 4: BOTTLENECK ANALYSIS
+# ═══════════════════════════════════════════════════════════════════
+
+bottleneck_analysis:
+  sales_capacity:
+    calls_per_week_possible: ""
+    calls_per_week_actual: ""
+    utilization: ""
+
+  delivery_capacity:
+    clients_can_serve: ""
+    clients_currently_serving: ""
+    utilization: ""
+
+  support_capacity:
+    tickets_per_week_can_handle: ""
+    tickets_per_week_actual: ""
+    utilization: ""
+
+  primary_bottleneck: ""  # [SALES | DELIVERY | SUPPORT | NONE]
+
+# ═══════════════════════════════════════════════════════════════════
+# SECTION 5: GROWTH SCENARIO (2x in 12 months)
+# ═══════════════════════════════════════════════════════════════════
+
+growth_scenario:
+  target_revenue: ""  # 2x current
+
+  hires_needed:
+    salespeople: ""
+    delivery_staff: ""
+    support_staff: ""
+    total: ""
+
+  additional_payroll_per_month: ""
+
+  hiring_timeline:
+    month_1_2: "Define roles, start recruiting"
+    month_3_4: "First hires onboarded"
+    month_5_6: "First hires productive"
+    month_7_8: "Second wave hiring"
+    month_9_10: "Second wave productive"
+    month_11_12: "Optimize and refine"
+
+# ═══════════════════════════════════════════════════════════════════
+# SECTION 6: HIRING PLAN CALCULATOR
+# ═══════════════════════════════════════════════════════════════════
+
+hiring_calculator:
+  inputs:
+    target_revenue: ""
+    revenue_per_employee_target: "$250,000"  # Benchmark
+    current_employees: ""
+
+  calculations:
+    required_employees: ""  # target_revenue / revenue_per_employee
+    hires_needed: ""        # required - current
+
+  budget_per_hire:
+    recruiting_cost: "$5,000-20,000"
+    annual_salary: ""
+    fully_loaded_cost: ""  # salary x 1.3 (benefits, taxes)
+    training_time_to_productivity: "30-90 days"
+
+# ═══════════════════════════════════════════════════════════════════
+# SECTION 7: TECHNOLOGY INVESTMENT
+# ═══════════════════════════════════════════════════════════════════
+
+technology_investment:
+  current_stage: ""  # [$0-100k | $100k-1M | $1M-3M | $3M-10M | $10M+]
+
+  budget_guidelines:
+    stage_0_100k: "$0-100/month - Free CRM, free PM, basic email"
+    stage_100k_1M: "$100-500/month - Paid CRM, scheduling, basic automation"
+    stage_1M_3M: "$500-2,000/month - Full CRM suite, marketing automation"
+    stage_3M_10M: "$2,000-10,000/month - Enterprise tools, BI, HR systems"
+    stage_10M_plus: "$10,000+/month - Full tech stack, custom development"
+
+  rules:
+    - "Technology spend: 2-5% of revenue"
+    - "ROI target: 5-10x within 12 months"
+
+  current_monthly_spend: ""
+  recommended_spend: ""  # Based on stage
+
+# ═══════════════════════════════════════════════════════════════════
+# SECTION 8: ACTION PLAN
+# ═══════════════════════════════════════════════════════════════════
+
+action_plan:
+  immediate_actions:  # This week
+    - ""
+
+  short_term_actions:  # This month
+    - ""
+
+  medium_term_actions:  # This quarter
+    - ""
+
+# ═══════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════
+
+metadata:
+  created_date: ""
+  last_updated: ""
+  reviewed_by: ""
+  next_review: ""  # Quarterly recommended
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

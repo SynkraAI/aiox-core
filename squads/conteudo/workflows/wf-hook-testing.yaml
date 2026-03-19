@@ -1,0 +1,91 @@
+name: wf-hook-testing
+description: Workflow de teste de hooks com framework Hormozi 70-20-10 — geracao, teste, analise e otimizacao
+version: "1.0"
+
+phases:
+  - id: geracao
+    name: Geracao de Hooks
+    agent: content-chief
+    description: Gerar batch de hooks usando framework 70-20-10
+    veto_condition: "Nicho ou avatar nao definidos ou formato alvo indefinido -> VETO"
+    elicit: true
+    task: create-hook-batch
+    steps:
+      - Coletar nicho, avatar e formato alvo
+      - Consultar banco de hooks (data/hooks-bank.md)
+      - Gerar 70% hooks comprovados adaptados ao nicho
+      - Gerar 20% variacoes e combinacoes
+      - Gerar 10% hooks experimentais/contraintuitivos
+      - Categorizar por tipo e nivel de risco
+      - Entregar batch organizado (default 20 hooks)
+    outputs:
+      - batch_hooks_comprovados
+      - batch_hooks_variacoes
+      - batch_hooks_experimentais
+    checkpoint: Batch completo com 20+ hooks categorizados
+
+  - id: teste
+    name: Teste de Performance
+    agent: content-planner
+    description: Planejar e executar teste dos hooks em conteudo real
+    veto_condition: "Batch com menos de 20 hooks ou proporcao 70-20-10 nao respeitada -> VETO"
+    depends_on: [geracao]
+    elicit: true
+    steps:
+      - Selecionar 10 hooks do batch para teste (mix de categorias)
+      - Criar conteudo completo para cada hook (carrossel, reels ou stories)
+      - Definir calendario de publicacao (1-2 hooks/dia por 5-7 dias)
+      - Definir metricas de acompanhamento por hook
+      - Publicar e coletar dados
+    outputs:
+      - calendario_teste
+      - conteudos_com_hooks
+      - metricas_baseline
+    checkpoint: 10 hooks testados com metricas coletadas
+    metricas:
+      - views_por_hook
+      - engagement_rate_por_hook
+      - saves_por_hook
+      - comments_por_hook
+      - dms_por_hook
+
+  - id: analise
+    name: Analise de Resultados
+    agent: content-validator
+    description: Analisar performance dos hooks e identificar padroes de sucesso
+    veto_condition: "Menos de 10 hooks testados ou metricas nao coletadas (views, engagement, saves) -> VETO"
+    depends_on: [teste]
+    elicit: false
+    steps:
+      - Compilar metricas de todos os hooks testados
+      - Ranquear hooks por performance (engagement, saves, DMs)
+      - Identificar padroes entre hooks que mais performaram
+      - Identificar padroes entre hooks que falharam
+      - Cruzar performance com tipo e nivel de risco
+      - Gerar relatorio de analise
+    outputs:
+      - ranking_hooks
+      - padroes_sucesso
+      - padroes_falha
+      - relatorio_analise
+    checkpoint: Analise completa com padroes identificados
+
+  - id: otimizacao
+    name: Otimizacao e Novo Batch
+    agent: content-chief
+    description: Gerar novo batch otimizado baseado nos aprendizados
+    veto_condition: "Analise sem padroes de sucesso/falha identificados ou ranking de hooks ausente -> VETO"
+    depends_on: [analise]
+    elicit: true
+    steps:
+      - Aplicar aprendizados da analise ao framework 70-20-10
+      - Aumentar peso dos padroes que funcionaram
+      - Descartar padroes que falharam
+      - Gerar novo batch de 20 hooks otimizado
+      - Atualizar banco de hooks (data/hooks-bank.md) com novos comprovados
+      - Definir proximo ciclo de teste
+    outputs:
+      - batch_hooks_otimizado
+      - banco_hooks_atualizado
+      - plano_proximo_ciclo
+    checkpoint: Novo batch pronto + banco de hooks atualizado

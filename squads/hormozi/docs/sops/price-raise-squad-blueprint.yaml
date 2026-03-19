@@ -1,0 +1,919 @@
+# Price Raise Squad Blueprint
+# Source: $100M Playbook: Price Raise - Alex Hormozi
+# Version: 1.0.0
+# Created: 2026-02-10
+# Complements: pricing-framework-sop.md
+
+metadata:
+  name: price-raise-squad
+  version: "1.0.0"
+  source: "$100M Playbook: Price Raise"
+  author: "Alex Hormozi"
+  extracted_by: "SOP Extractor Agent"
+  extraction_date: "2026-02-10"
+  related_sops:
+    - pricing-framework-sop.md
+    - lead-nurture-sop.md
+
+# =============================================================================
+# SQUAD OVERVIEW
+# =============================================================================
+
+overview:
+  purpose: |
+    Execute price raises on existing customers while maximizing retention
+    and minimizing churn through the RAISE communication framework.
+
+  core_equation: |
+    Net Revenue Impact = (New Price x Retained Customers) - (Old Price x All Customers)
+
+  success_metrics:
+    - retention_rate_30_day: ">70%"
+    - retention_rate_90_day: ">65%"
+    - net_revenue_impact: "positive"
+    - type_2_response_rate: "<10%"
+
+  source_reference: "Pages 1-23, $100M Price Raise Playbook"
+
+# =============================================================================
+# AGENTS
+# =============================================================================
+
+agents:
+
+  # ---------------------------------------------------------------------------
+  # ANALYSIS AGENTS
+  # ---------------------------------------------------------------------------
+
+  price_raise_analyst:
+    name: "Price Raise Analyst"
+    description: |
+      Calculates breakeven points, analyzes customer segments, and models
+      various price increase scenarios to determine optimal pricing strategy.
+
+    responsibilities:
+      - Calculate breakeven churn percentage
+      - Segment customers by tenure and value
+      - Model revenue scenarios at various price points
+      - Analyze new customer test data
+      - Track and report churn patterns
+
+    cognitive_types:
+      - Analysis
+      - Synthesis
+
+    tools:
+      - spreadsheet_calculator
+      - crm_query
+      - revenue_modeling
+
+    inputs:
+      - current_pricing_data
+      - customer_segment_list
+      - new_customer_conversion_data
+      - churn_history
+
+    outputs:
+      - breakeven_analysis_report
+      - segment_risk_assessment
+      - revenue_scenario_models
+      - recommended_price_point
+
+    decision_rules:
+      - "Must have >2 weeks new customer data before recommending rollout"
+      - "Breakeven calculation must be validated before communication"
+      - "Flag if projected churn exceeds 50%"
+
+    source_reference: "Pages 6-8: 'Do the math. You should know what percentage of customers you can lose'"
+
+  # ---------------------------------------------------------------------------
+  # COMMUNICATION AGENTS
+  # ---------------------------------------------------------------------------
+
+  raise_letter_composer:
+    name: "RAISE Letter Composer"
+    description: |
+      Drafts personalized price raise communications following the RAISE
+      framework (Remind, Address, Invest, Soften, Explain).
+
+    responsibilities:
+      - Compose Section R (Remind) with personalized value bullets
+      - Draft Section A (Address) with clear price statement
+      - Create Section I (Invest) with future investment descriptions
+      - Structure Section S (Soften) with loyalty discount terms
+      - Write Section E (Explain) with appropriate PS statement
+
+    cognitive_types:
+      - Synthesis
+      - Creativity
+      - Perception
+
+    tools:
+      - template_engine
+      - personalization_data_pull
+      - content_library
+
+    inputs:
+      - customer_data_enriched
+      - value_delivered_metrics
+      - planned_investments_list
+      - loyalty_discount_terms
+      - business_type_b2b_or_b2c
+
+    outputs:
+      - personalized_raise_letter
+      - video_script_version
+      - ps_statement_appropriate
+
+    decision_rules:
+      - "All 5 RAISE sections must be present"
+      - "Personalize to greatest degree possible"
+      - "Only list investments actually planned"
+      - "Use B2B or B2C PS statement appropriately"
+
+    framework:
+      R_REMIND:
+        purpose: "Remind them of value already provided"
+        format: "1-5 personalized value bullets"
+        source: "Page 10: 'The more you can personalize, the better'"
+
+      A_ADDRESS:
+        purpose: "State price change directly"
+        format: "Single clear sentence"
+        source: "Page 10: 'Rip off the bandaid. Don't waste time.'"
+
+      I_INVEST:
+        purpose: "Describe future investments"
+        format: "3 investment bullets with customer benefits"
+        categories:
+          - hiring_people
+          - training
+          - equipment
+          - technology
+          - facility_upgrades
+          - service_level
+        source: "Page 11: 'Tell them how you're going to invest the money'"
+
+      S_SOFTEN:
+        purpose: "Provide loyalty discount"
+        format: "Expiring discount with credit amount"
+        duration: "3-6 months typical"
+        source: "Page 12: 'People are more okay with a vanishing discount'"
+
+      E_EXPLAIN:
+        purpose: "Safety valve for concerns"
+        format: "PS statement with direct response offer"
+        variants:
+          b2c: "if this will materially affect your ability to buy groceries"
+          b2b: "if this materially impacts your business"
+        source: "Page 13: 'Add in a line that says basically If this is gonna make you homeless'"
+
+    source_reference: "Pages 10-14, 24-25: Complete RAISE framework"
+
+  video_announcement_producer:
+    name: "Video Announcement Producer"
+    description: |
+      Creates video announcement content using the RAISE letter as a script,
+      with proper community posting and comment management.
+
+    responsibilities:
+      - Convert RAISE letter to video script
+      - Produce announcement video
+      - Post to community with comments disabled
+      - Create redirect messaging for questions
+
+    cognitive_types:
+      - Execution
+      - Creativity
+
+    tools:
+      - video_production
+      - community_platform
+      - comment_management
+
+    inputs:
+      - finalized_raise_letter
+      - owner_presenter_info
+      - community_platform_access
+
+    outputs:
+      - announcement_video
+      - community_post_with_disabled_comments
+      - redirect_messaging_template
+
+    decision_rules:
+      - "ALWAYS disable comments on announcement posts"
+      - "Redirect all questions to direct contact"
+      - "Do not engage in public discussions about business decisions"
+
+    source_reference: "Page 15: 'If you have the option to turn off comments, do so'"
+
+  # ---------------------------------------------------------------------------
+  # RESPONSE HANDLING AGENTS
+  # ---------------------------------------------------------------------------
+
+  response_classifier:
+    name: "Response Classifier"
+    description: |
+      Classifies customer responses into three types and routes to
+      appropriate handling protocol.
+
+    responsibilities:
+      - Monitor incoming responses
+      - Classify responses as Type 1, 2, or 3
+      - Route to appropriate handler
+      - Track response patterns
+
+    cognitive_types:
+      - Perception
+      - Judgment
+
+    tools:
+      - sentiment_analysis
+      - classification_rules
+      - routing_engine
+
+    inputs:
+      - customer_responses
+      - customer_history
+      - engagement_data
+
+    outputs:
+      - classified_response_queue
+      - response_pattern_report
+      - type_2_alert_list
+
+    classification_framework:
+      type_1:
+        description: "See value, don't like it but understand"
+        indicators:
+          - "I understand"
+          - "Not happy but okay"
+          - acceptance_without_negotiation
+        action: "No special action required"
+        source: "Page 13: 'They may not like it. Nor should they. But they will understand'"
+
+      type_2:
+        description: "Actually affected financially"
+        indicators:
+          - hardship_claim
+          - specific_financial_concerns
+          - genuine_distress_signals
+        action: "Extend discount 3-6 months"
+        source: "Page 13: 'People actually affected. They will write you sob stories.'"
+
+      type_3:
+        description: "Were going to cancel anyway"
+        indicators:
+          - low_engagement_history
+          - immediate_cancellation_request
+          - no_negotiation_attempted
+        action: "Accept churn, no concession"
+        source: "Page 13-14: 'People who were gonna cancel anyways'"
+
+    decision_rules:
+      - "Let customer self-identify through PS statement response"
+      - "Don't assume Type 2 - require claim"
+      - "Track Type 3 pattern for pulled forward churn analysis"
+
+    source_reference: "Pages 13-14: Three types of responses"
+
+  type_2_handler:
+    name: "Type 2 Response Handler"
+    description: |
+      Handles genuinely affected customers with empathy and extended
+      discount terms while maintaining relationship.
+
+    responsibilities:
+      - Respond to Type 2 classified responses
+      - Negotiate extended discount terms
+      - Document agreements
+      - Track extension utilization
+
+    cognitive_types:
+      - Judgment
+      - Negotiation
+      - Empathy
+
+    tools:
+      - communication_platform
+      - discount_management
+      - agreement_documentation
+
+    inputs:
+      - type_2_classified_response
+      - customer_history
+      - discount_policy_limits
+
+    outputs:
+      - extended_discount_agreement
+      - customer_retention_note
+      - follow_up_scheduled
+
+    scripts:
+      standard_extension: |
+        "Don't worry, we got you. Why don't we extend your discount another
+        6 months, then reach out then. Is that fair?"
+
+      stair_step_option: |
+        "Let's do this differently. Instead of one big jump, let's do three
+        smaller increases over 9 months. Fair?"
+
+    decision_rules:
+      - "Give benefit of doubt on hardship claims"
+      - "Maximum extension typically 6 months"
+      - "Can offer stair-step for large increases"
+      - "Document all agreements"
+
+    source_reference: "Page 13: 'For key customers it actually affects, be ready to extend'"
+
+  # ---------------------------------------------------------------------------
+  # EXECUTION AGENTS
+  # ---------------------------------------------------------------------------
+
+  delivery_orchestrator:
+    name: "Delivery Orchestrator"
+    description: |
+      Manages the timing and method of price raise communication delivery
+      across all channels and customer segments.
+
+    responsibilities:
+      - Determine delivery method based on increase size
+      - Schedule communication waves
+      - Coordinate email, video, and meeting deliveries
+      - Update new customer pricing immediately after existing notification
+
+    cognitive_types:
+      - Execution
+      - Coordination
+
+    tools:
+      - email_automation
+      - calendar_management
+      - pricing_system_update
+
+    inputs:
+      - finalized_communications
+      - customer_segments
+      - increase_percentage
+      - delivery_schedule
+
+    outputs:
+      - delivery_confirmation_log
+      - new_pricing_activation_confirmation
+      - meeting_schedule_for_large_increases
+
+    delivery_matrix:
+      under_50_percent:
+        method: "Letter/email with optional video"
+        timing: "Same-day delivery to all segments"
+        meetings: "Not required"
+        source: "Page 6"
+
+      50_to_100_percent:
+        method: "Video + individual calls for key accounts"
+        timing: "Staggered over 1 week"
+        meetings: "Key accounts only"
+        source: "Page 6: 'Meet with people if you raise prices more than 50%'"
+
+      over_100_percent:
+        method: "Personal calls with ALL affected customers"
+        timing: "Staggered over 2-4 weeks"
+        meetings: "All customers"
+        source: "Page 6: Shopify competitor called all 300 customers"
+
+    decision_rules:
+      - "New customer pricing updates IMMEDIATELY after existing notification"
+      - "No delay on new customer pricing"
+      - ">50% increase requires individual meetings"
+
+    source_reference: "Pages 6, 15: Delivery method selection"
+
+  churn_monitor:
+    name: "Churn Monitor"
+    description: |
+      Tracks churn patterns post-price-raise to validate expected pattern
+      (high Month 1 -> low Month 2 -> baseline Month 3) and alert on anomalies.
+
+    responsibilities:
+      - Track daily/weekly churn rates
+      - Compare to expected pattern
+      - Identify pulled forward churn vs. genuine loss
+      - Alert on anomalies
+      - Generate 30/60/90 day reports
+
+    cognitive_types:
+      - Analysis
+      - Pattern Recognition
+
+    tools:
+      - churn_analytics
+      - alerting_system
+      - reporting_dashboard
+
+    inputs:
+      - cancellation_events
+      - historical_churn_baseline
+      - customer_engagement_data
+
+    outputs:
+      - churn_pattern_analysis
+      - anomaly_alerts
+      - net_revenue_impact_report
+      - retention_rate_dashboard
+
+    expected_pattern:
+      month_1: "Increase in churn (pulled forward)"
+      month_2: "Decrease in churn (below normal)"
+      month_3: "Return to baseline"
+      source: "Page 13-14: 'You will get an increase in churn the first month, then a decrease'"
+
+    alert_thresholds:
+      month_1_churn: ">2x normal baseline"
+      month_2_churn: "Above normal (should be below)"
+      month_3_churn: ">1.5x baseline"
+
+    decision_rules:
+      - "Month 1 spike is expected - don't panic"
+      - "Alert if Month 2 doesn't drop"
+      - "Investigate if Month 3 doesn't normalize"
+
+    source_reference: "Pages 13-14: Expected churn pattern"
+
+  new_customer_objection_handler:
+    name: "New Customer Objection Handler"
+    description: |
+      Handles objections from new customers who reference friends' lower prices
+      or complain about current pricing.
+
+    responsibilities:
+      - Respond to "my friend paid less" objections
+      - Reframe price increase as positive
+      - Maintain conviction in new pricing
+
+    cognitive_types:
+      - Negotiation
+      - Persuasion
+
+    tools:
+      - sales_scripts
+      - communication_platform
+
+    inputs:
+      - new_customer_objection
+      - retention_statistics
+
+    outputs:
+      - objection_handled_response
+      - sales_continuation
+
+    scripts:
+      friend_paid_less: |
+        "That may feel like bad news but it's actually good news. First - it's
+        good news because we just keep making the value better. And, to give you
+        some confidence, 96% of our customers agreed. And they should know -
+        they're already using it. Beyond that - the good news is - this is the
+        cheapest it'll ever be. So there will never be a better time to get started."
+
+    decision_rules:
+      - "Never apologize for pricing"
+      - "Reframe as value increase"
+      - "Use social proof (96% agreed)"
+      - "Create urgency (cheapest ever)"
+
+    source_reference: "Pages 15-16: 'People moan, but they still buy'"
+
+# =============================================================================
+# EXECUTOR MATRIX
+# =============================================================================
+
+executor_matrix:
+
+  # Analysis Phase
+  calculate_breakeven:
+    executor: worker
+    automation_potential: HIGH
+    tools: [spreadsheet, formula_engine]
+    source: "Page 6"
+
+  segment_customers:
+    executor: worker
+    automation_potential: HIGH
+    tools: [crm_query]
+    source: "Page 23"
+
+  model_scenarios:
+    executor: hybrid
+    automation_potential: MEDIUM
+    tools: [revenue_modeling, human_validation]
+    source: "Pages 7-8"
+
+  # Communication Preparation Phase
+  compose_value_bullets:
+    executor: hybrid
+    automation_potential: MEDIUM
+    tools: [data_pull, human_writing]
+    source: "Page 10"
+
+  draft_investment_section:
+    executor: human
+    automation_potential: LOW
+    tools: [strategic_planning]
+    source: "Page 11"
+
+  structure_loyalty_discount:
+    executor: hybrid
+    automation_potential: MEDIUM
+    tools: [discount_calculator, human_approval]
+    source: "Page 12"
+
+  finalize_letter:
+    executor: human
+    automation_potential: LOW
+    tools: [content_review]
+    source: "Pages 14, 24-25"
+
+  # Execution Phase
+  send_communications:
+    executor: worker
+    automation_potential: HIGH
+    tools: [email_automation]
+    source: "Page 23"
+
+  post_video:
+    executor: human
+    automation_potential: LOW
+    tools: [community_platform]
+    source: "Page 15"
+
+  disable_comments:
+    executor: worker
+    automation_potential: HIGH
+    tools: [platform_settings]
+    source: "Page 15"
+
+  update_new_pricing:
+    executor: worker
+    automation_potential: HIGH
+    tools: [pricing_system]
+    source: "Page 15"
+
+  # Response Phase
+  classify_responses:
+    executor: hybrid
+    automation_potential: MEDIUM
+    tools: [sentiment_analysis, human_review]
+    source: "Page 13"
+
+  handle_type_1:
+    executor: worker
+    automation_potential: HIGH
+    tools: [auto_acknowledgment]
+    source: "Page 13"
+
+  handle_type_2:
+    executor: human
+    automation_potential: LOW
+    tools: [communication, negotiation]
+    source: "Page 13"
+
+  handle_type_3:
+    executor: worker
+    automation_potential: HIGH
+    tools: [churn_processing]
+    source: "Page 13-14"
+
+  # Monitoring Phase
+  track_churn:
+    executor: worker
+    automation_potential: HIGH
+    tools: [analytics_dashboard]
+    source: "Page 13-14"
+
+  generate_reports:
+    executor: worker
+    automation_potential: HIGH
+    tools: [reporting_engine]
+    source: "Inferred"
+
+  escalate_anomalies:
+    executor: hybrid
+    automation_potential: MEDIUM
+    tools: [alerting, human_decision]
+    source: "Inferred"
+
+# =============================================================================
+# QUALITY GATES
+# =============================================================================
+
+quality_gates:
+
+  pre_launch:
+    new_customer_test_complete:
+      threshold: ">2 weeks data"
+      blocker: true
+      source: "Page 6"
+
+    breakeven_calculated:
+      threshold: "Formula validated"
+      blocker: true
+      source: "Page 6"
+
+    raise_letter_complete:
+      threshold: "All 5 sections present"
+      blocker: true
+      source: "Page 10"
+
+    response_protocol_ready:
+      threshold: "Team trained"
+      blocker: true
+      source: "Page 13"
+
+    loyalty_discount_defined:
+      threshold: "3-6 month window set"
+      blocker: true
+      source: "Page 12"
+
+  post_launch:
+    month_1_churn:
+      threshold: "<2x normal churn"
+      blocker: false
+      action: "Pause and analyze if exceeded"
+      source: "Page 13-14"
+
+    month_2_churn:
+      threshold: "Below normal"
+      blocker: false
+      action: "Expected - continue monitoring"
+      source: "Page 13-14"
+
+    month_3_churn:
+      threshold: "Return to baseline"
+      blocker: false
+      action: "Investigate if still elevated"
+      source: "Page 13-14"
+
+    type_2_response_rate:
+      threshold: "<10% of customers"
+      blocker: false
+      action: "Review communication if exceeded"
+      source: "Inferred"
+
+    net_revenue_impact:
+      threshold: "Positive vs breakeven"
+      blocker: false
+      action: "Investigate if negative"
+      source: "Pages 7-8"
+
+# =============================================================================
+# ESCALATION PATHS
+# =============================================================================
+
+escalation_paths:
+
+  churn_spike:
+    trigger: "Churn >2x normal in Month 1"
+    escalate_to: "Owner/Executive"
+    timeline: "Same day"
+    action: "Review letter, offer more concessions"
+    source: "Inferred from context"
+
+  high_type_2_rate:
+    trigger: "Type 2 responses >20%"
+    escalate_to: "Sales Manager"
+    timeline: "Within 24h"
+    action: "Review hardship criteria"
+    source: "Inferred from context"
+
+  negative_pr:
+    trigger: "Negative PR/social media"
+    escalate_to: "Marketing Lead"
+    timeline: "Immediately"
+    action: "Prepare public response"
+    source: "Inferred from context"
+
+  key_account_threat:
+    trigger: "Key account threatens to leave"
+    escalate_to: "Account Manager/Owner"
+    timeline: "Within 1h"
+    action: "Personal call, custom terms"
+    source: "Page 13"
+
+  legal_concerns:
+    trigger: "Legal concerns raised"
+    escalate_to: "Legal counsel"
+    timeline: "Same day"
+    action: "Review communications"
+    source: "Inferred from context"
+
+# =============================================================================
+# CROSS-REFERENCES
+# =============================================================================
+
+cross_references:
+
+  pricing_framework_sop:
+    file: "pricing-framework-sop.md"
+    relationship: "Complementary - use Pricing Framework for initial pricing, Price Raise for existing customers"
+    overlap_areas:
+      - value_equation
+      - price_testing
+      - roi_calculation
+    differentiation:
+      pricing_framework: "Initial pricing strategy, 10 Pricing Plays, new customer focus"
+      price_raise: "Communication to existing customers, RAISE framework, retention tactics"
+
+  lead_nurture_sop:
+    file: "lead-nurture-sop.md"
+    relationship: "Tangential - different funnel stage"
+    potential_integration:
+      - "Re-nurture churned customers after 90 days"
+      - "Apply personalization tactics to price raise communication"
+
+# =============================================================================
+# WORKFLOWS
+# =============================================================================
+
+workflows:
+
+  standard_price_raise:
+    name: "Standard Price Raise Workflow"
+    steps:
+      - step: 1
+        name: "Test New Price on New Customers"
+        agent: price_raise_analyst
+        duration: "2-4 weeks"
+        outputs: [conversion_data, churn_data]
+
+      - step: 2
+        name: "Calculate Breakeven"
+        agent: price_raise_analyst
+        duration: "1 day"
+        outputs: [breakeven_analysis]
+
+      - step: 3
+        name: "Segment Customers"
+        agent: price_raise_analyst
+        duration: "1 day"
+        outputs: [segment_list]
+
+      - step: 4
+        name: "Compose RAISE Letter"
+        agent: raise_letter_composer
+        duration: "2-3 days"
+        outputs: [personalized_letters]
+
+      - step: 5
+        name: "Create Video (Optional)"
+        agent: video_announcement_producer
+        duration: "1-2 days"
+        outputs: [announcement_video]
+        conditional: "If community exists"
+
+      - step: 6
+        name: "Send Communications"
+        agent: delivery_orchestrator
+        duration: "1 day"
+        outputs: [delivery_log]
+
+      - step: 7
+        name: "Update New Customer Pricing"
+        agent: delivery_orchestrator
+        duration: "Same day as Step 6"
+        outputs: [pricing_update_confirmation]
+
+      - step: 8
+        name: "Handle Responses"
+        agents: [response_classifier, type_2_handler]
+        duration: "Ongoing 2-4 weeks"
+        outputs: [response_log, extension_agreements]
+
+      - step: 9
+        name: "Monitor Churn"
+        agent: churn_monitor
+        duration: "90 days"
+        outputs: [churn_reports, net_revenue_analysis]
+
+  emergency_price_raise:
+    name: "Emergency Price Raise (Trey Scenario)"
+    description: "For businesses in critical cash flow situation"
+    steps:
+      - step: 1
+        name: "Skip Testing - Go Direct"
+        agent: price_raise_analyst
+        duration: "1 day"
+        outputs: [breakeven_analysis]
+        note: "Testing skipped due to urgency"
+
+      - step: 2
+        name: "Rapid Letter Composition"
+        agent: raise_letter_composer
+        duration: "1 day"
+        outputs: [raise_letter]
+
+      - step: 3
+        name: "Video + Community Post"
+        agent: video_announcement_producer
+        duration: "Same day"
+        outputs: [video, post]
+
+      - step: 4
+        name: "Execute Full Rollout"
+        agent: delivery_orchestrator
+        duration: "1 day"
+        outputs: [complete_notification]
+
+      - step: 5
+        name: "Handle Volume Responses"
+        agents: [response_classifier, type_2_handler]
+        duration: "1-2 weeks"
+        outputs: [response_handling]
+
+    source: "Pages 1-2: Trey's story - executed in 1 week"
+
+# =============================================================================
+# METRICS & KPIs
+# =============================================================================
+
+metrics:
+
+  primary:
+    retention_rate_30_day:
+      formula: "(Customers Retained at 30 days) / (Total Customers at Start)"
+      target: ">70%"
+      source: "Derived from breakeven logic"
+
+    retention_rate_90_day:
+      formula: "(Customers Retained at 90 days) / (Total Customers at Start)"
+      target: ">65%"
+      source: "Derived from churn pattern"
+
+    net_revenue_impact:
+      formula: "(New Price x Retained) - (Old Price x All)"
+      target: "Positive"
+      source: "Pages 7-8"
+
+    type_distribution:
+      formula: "Count by Type / Total Responses"
+      target: "Type 1 majority, Type 2 <10%"
+      source: "Page 13"
+
+  secondary:
+    churn_pattern_adherence:
+      description: "Matches expected high-low-normal pattern"
+      source: "Pages 13-14"
+
+    communication_personalization_score:
+      description: "Percentage of letters with personalized value bullets"
+      target: ">80%"
+      source: "Page 10"
+
+    response_handling_time:
+      description: "Time to handle Type 2 responses"
+      target: "<24 hours"
+      source: "Inferred"
+
+    new_customer_conversion_at_new_price:
+      description: "Validates new pricing in market"
+      source: "Page 6"
+
+# =============================================================================
+# VALIDATION CHECKLIST
+# =============================================================================
+
+validation:
+  sop_completeness:
+    - part_1_purpose: true
+    - part_2_scope: true
+    - part_3_preconditions: true
+    - part_4_core_framework: true
+    - part_5_process_steps: true
+    - part_6_decision_rules: true
+    - part_7_exceptions: true
+    - part_8_outputs: true
+    - part_9_validation: true
+    - part_10_escalation: true
+    - part_11_revision_history: true
+
+  step_anatomy:
+    fields_per_step: 8
+    required_fields:
+      - description
+      - cognitive_type
+      - automation_potential
+      - executor
+      - precondition
+      - output
+      - guardrails
+      - decision_rule
+
+  source_references:
+    total_elements_mapped: 100+
+    appendix_d_complete: true
+
+  cross_references:
+    pricing_framework_linked: true
+    lead_nurture_linked: true
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

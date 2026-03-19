@@ -1,0 +1,51 @@
+# Source File Frontmatter Template
+# Used by collect-content task when saving collected sources
+#
+# Every collected source file (.md) must include this frontmatter
+# at the top of the file, wrapped in --- delimiters.
+
+# Required fields
+source_id: "{slug}"           # Semantic slug, matches filename
+title: "{title}"              # Title of the source content
+type: "{type}"                # blog | article | interview | youtube | social | manual
+tier: "{T1/T2/T3}"           # T1=authoritative, T2=valuable, T3=supplementary
+url: "{url}"                  # Original URL of the source
+collected_at: "{ISO 8601}"    # When the content was collected
+collection_method: "{method}" # web_fetch | video_transcriber | manual
+slug: "{slug}"                # Same as source_id, for cross-reference
+mind: "{mind_slug}"           # Which mind this source belongs to
+
+# Optional fields
+word_count: 0                 # Approximate word count of content
+language: "en"                # Language code (en, pt, es, etc.)
+published_at: ""              # Original publication date (if known)
+author: ""                    # Author name (if different from mind)
+platform: ""                  # Platform name (youtube, medium, substack, etc.)
+tags: []                      # Content tags/topics
+channel: ""                   # YouTube channel name (for youtube type)
+duration_seconds: 0           # Duration in seconds (for video/audio)
+quality_notes: ""             # Any notes about content quality
+
+# Example usage in a markdown file:
+#
+# ---
+# source_id: "how-to-be-successful"
+# title: "How to Be Successful"
+# type: "blog"
+# tier: "T1"
+# url: "https://blog.samaltman.com/how-to-be-successful"
+# collected_at: "2026-02-10T15:30:00Z"
+# collection_method: "web_fetch"
+# slug: "how-to-be-successful"
+# mind: "sam_altman"
+# word_count: 3500
+# language: "en"
+# published_at: "2019-01-24"
+# author: "Sam Altman"
+# platform: "personal_blog"
+# tags: ["success", "advice", "career"]
+# ---
+#
+# # How to Be Successful
+#
+# Content of the blog post goes here...

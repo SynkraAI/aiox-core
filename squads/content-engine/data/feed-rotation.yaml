@@ -1,0 +1,63 @@
+# Feed Rotation Tracker — Content Engine
+# Atualizado automaticamente pelo workflow cover-art-direction
+# Source of Truth para evitar repetição visual no feed
+
+last_updated: "2026-02-12"
+
+# Histórico de covers (mais recente primeiro, max 10)
+covers:
+  - id: "carrossel-metodo-131"
+    date: "2026-02-12"
+    type: "Rosto + Headline"
+    style: "editorial contemplativo"
+    mood: "clareza silenciosa, vulnerabilidade intelectual"
+    has_face: true
+    palette: "branco dominante + navy text + gold accent"
+    conceito_score: 9.2
+    conceito: "A (Visual Director) — rosto contemplativo 3/4 lateral, fundo branco, lower third"
+    headline: "método 1-3-1. pra decidir qualquer coisa."
+  - id: "carrossel-131"
+    date: "2026-02-13"
+    type: "Headline Bold sobre Navy"
+    style: "editorial minimal"
+    mood: "tenso e provocador"
+    has_face: false
+    palette: "navy monocromático + gold accent"
+    conceito_score: 9.4
+    conceito: "B (Visual Technician) — overhead papel amassado concêntrico"
+    headline: "47 abas abertas na mente."
+
+# Regras de rotação
+rotation_rules:
+  max_repeat_type: 3      # Mesmo tipo de capa não pode repetir em 3 posts seguidos
+  max_repeat_style: 2     # Mesmo estilo visual não pode repetir em 2 posts seguidos
+  max_repeat_palette: 2   # Mesma paleta não pode repetir em 2 posts seguidos (era 3, agora mais rigoroso)
+  face_frequency: "30-40%" # Rostos em 30-40% dos covers
+
+  # REGRAS DE ALTERNÂNCIA DE COR (nova — obrigatória)
+  color_alternation:
+    enabled: true
+    rule: "Se último = ESCURO → próximo = CLARO. Se último = CLARO → próximo = ESCURO."
+    max_same_tone: 2  # Máximo 2 consecutivos na mesma tonalidade (hard block no 3o)
+    dark_colors: ["#14213D", "#2D2D2D"]     # Navy, Cinza escuro
+    light_colors: ["#FFFFFF", "#F0F0F0", "#C9A84C"]  # Branco, Cinza claro, Gold (exceção para marcos)
+    never_as_background: ["#E63946"]  # Chaos Red = só accent
+    gold_as_background:
+      allowed_for: ["lançamento", "conquista", "marco", "data importante", "celebração"]
+      max_frequency: "1 a cada 15-20 posts"
+      text_colors_on_gold: ["#14213D", "#FFFFFF"]  # Navy ou branco sobre gold
+
+  # REGRA DE DIVERSIDADE VISUAL (nova — obrigatória)
+  diversity:
+    force_face_after: 3  # Se 3 posts sem rosto → próximo DEVE ter rosto
+    force_different_approach: true  # No debate visual, 1 conceito DEVE ter abordagem oposta ao outro
+    min_face_ratio: 0.3  # Mínimo 30% dos últimos 10 posts com rosto
+
+# 6 tipos disponíveis (de visual-rules.md)
+available_types:
+  - "Headline Bold sobre Navy"      # ESCURO
+  - "Headline Bold sobre Branco"    # CLARO
+  - "Rosto + Headline"              # ESCURO ou CLARO (depende do overlay)
+  - "Número/Estatística Grande"     # ESCURO ou CLARO
+  - "Quote com Typewriter"          # ESCURO
+  - "Headline Bold sobre Gold"      # CLARO (apenas para marcos/lançamentos — max 1 a cada 15-20 posts)

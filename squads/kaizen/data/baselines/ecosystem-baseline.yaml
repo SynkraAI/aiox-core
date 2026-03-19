@@ -1,0 +1,87 @@
+# Ecosystem Baseline — Kaizen Squad
+# Date: 2026-02-15 (atualizado pelo self-improve ciclo 1)
+# Purpose: Baseline for performance tracking and trend analysis
+
+baseline:
+  date: "2026-02-15"
+  version: "1.1.0"
+  updated_by: "wf-self-improve ciclo 1"
+
+  squads:
+    content-engine:
+      type: stream-aligned
+      agent_count: 29
+      mind_count: 18
+      status: active
+      notes: "Principal squad de produção de conteúdo"
+
+    copy:
+      type: stream-aligned
+      agent_count: 9
+      mind_count: 0
+      status: active
+      notes: "Copy especializada — candidato a fusão com content-engine"
+
+    youtube-outlier:
+      type: stream-aligned
+      agent_count: 5
+      mind_count: 0
+      status: new
+      notes: "Estratégia de canal YouTube — sem minds (GAP CRÍTICO)"
+
+    youtube-scripts:
+      type: stream-aligned
+      agent_count: 10
+      mind_count: 0
+      status: new
+      notes: "Criação de scripts YouTube — sem minds (GAP CRÍTICO)"
+
+    youtube-title:
+      type: stream-aligned
+      agent_count: 8
+      mind_count: 0
+      status: new
+      notes: "Otimização de títulos YouTube — sem minds (GAP CRÍTICO)"
+
+    kaizen:
+      type: enabling
+      agent_count: 7
+      mind_count: 10
+      status: active
+      notes: "Meta-squad de análise do ecossistema"
+
+    squad-creator:
+      type: platform
+      agent_count: 5
+      mind_count: 2
+      status: active
+      notes: "Plataforma de criação de squads"
+
+    openclaw-mastery:
+      type: platform
+      agent_count: 3
+      mind_count: 0
+      status: active
+      notes: "Operação do VPS e bot OpenClaw"
+
+    framework-clonagem:
+      type: reference
+      agent_count: 0
+      mind_count: 0
+      status: reference
+      notes: "Documentação de referência para clonagem"
+
+  totals:
+    squads: 9
+    agents: 76
+    minds: 30
+    active_squads: 8
+    reference_squads: 1
+
+  git_activity:
+    period: "2026-02-01 a 2026-02-15"
+    total_commits: 26
+    feat_commits: 12
+    fix_commits: 3
+    docs_commits: 4
+    chore_commits: 3

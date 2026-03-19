@@ -1,0 +1,445 @@
+name: viral-squad
+version: 1.0.0
+short-title: "🔥 Viral Video Creators - Super Squad Elite"
+description: |
+  Squad definitivo de 28 agentes especializados em criar vídeos virais para Instagram usando Remotion.
+  Focado em viralização, engajamento e crescimento através de estratégia baseada em dados e psicologia.
+  Utiliza Design System Academia Lendária v4.1 (Minimalismo Lendário) e sistema de debate entre agentes.
+  Integração com 21st.dev MCP para criação de componentes UI de alta qualidade.
+
+author: Creators IA
+license: MIT
+slashPrefix: viral
+
+aios:
+  minVersion: "2.1.0"
+  type: squad
+
+# Entry Point - Agente principal para ativação do squad
+entry_agent: viral
+
+# Objetivos do Squad
+objectives:
+  primary: "Criar vídeos virais para Instagram que alcançam 1M+ views e maximizam engajamento"
+  metrics:
+    - "Views: 1M-10M+ por vídeo"
+    - "Viral Coefficient: >1.5"
+    - "Save Rate: 8-12%"
+    - "Retention @3s: >75%"
+    - "Crescimento: 10K-100K followers/mês"
+
+# Design System
+design_system:
+  name: "Academia Lendária v4.1"
+  aesthetic: "Minimalismo Lendário"
+  colors:
+    background: "#000000" # ~70% da tela
+    foreground: "#FFFFFF" # ~22% da tela
+    primary: "#C9B298" # Gold - MAX 8% (SACRED RULE)
+    muted: "#A8A8A8"
+  rule: "8% Gold Rule - NUNCA exceder 8% de ouro na tela"
+  typography:
+    ui: "Inter (SemiBold 600)"
+    body: "Source Serif 4 (Regular 400)"
+  icons: "Flaticon Regular Rounded"
+
+# Regras Globais de Enforcement
+rules:
+  # Rule 1: Design System Token Enforcement
+  design_system_tokens:
+    scope: "visual" # Aplica a todas as divisoes visuais
+    affected_divisions:
+      - viral-design # 6 agentes
+      - remotion-experts # 5 agentes
+    affected_agents:
+      - "@visual-impact"
+      - "@motion-master"
+      - "@color-psychologist"
+      - "@thumbnail-king"
+      - "@layout-architect"
+      - "@ui-magic"
+      - "@remotion-architect"
+      - "@animation-pro"
+      - "@react-wizard"
+      - "@render-master"
+      - "@effects-master"
+    enforcement: "MANDATORY"
+    description: "Todo componente visual Remotion DEVE importar tokens do Design System"
+    rule: |
+      REGRA OBRIGATORIA: Qualquer componente visual (.tsx) gerado por agentes das divisoes
+      viral-design e remotion-experts DEVE obrigatoriamente:
+
+      1. IMPORTAR tokens: import { colors, typography, spacing, animation } from '@/styles/tokens'
+      2. USAR tokens para cores: colors.background, colors.foreground, colors.primary, colors.muted
+      3. USAR tokens para fontes: typography.ui, typography.body, typography.weights.*, typography.sizes.*
+      4. USAR tokens para spacing: spacing.xs/sm/md/lg/xl/xxl
+      5. USAR tokens para animacao: animation.fast/normal/slow, animation.easing.*
+      6. NUNCA hardcodar: #000000, #FFFFFF, #C9B298, "Inter", "Source Serif 4", "Space Grotesk"
+      7. VALIDAR 8% Gold Rule: colors.primary nunca excede 8% da area da tela
+
+      ZERO EXCECOES. Se um agente gerar codigo com valores hardcoded, o output DEVE ser rejeitado.
+    token_source: "academia-lendaria-ds/src/tokens/remotion.ts"
+    reference_template: "templates/remotion/ds-integrated-component.tsx"
+
+  # Rule 2: Quality Gate - Checklist Obrigatoria
+  quality_gate_visual:
+    scope: "visual"
+    enforcement: "MANDATORY"
+    description: "Todo output visual DEVE passar pela checklist antes de ser entregue"
+    checklist: "checklists/design-system-checklist.md"
+    when: "BEFORE_DELIVERY"
+    rule: |
+      Antes de entregar qualquer componente visual, o agente DEVE executar a checklist
+      design-system-checklist.md e validar TODOS os items aplicaveis:
+
+      - Secao 1: Token Integration (OBRIGATORIO para todo componente)
+      - Secao 2: Core Color Rules (OBRIGATORIO)
+      - Secao 3: Typography Rules (OBRIGATORIO)
+      - Secao 5: Animation Rules (quando tem animacao)
+      - Secao 6: Remotion Component Structure (para componentes .tsx)
+      - Secao 7: 21st.dev Adaptation (quando convertendo de 21st.dev)
+      - Secao 8: Pre-Export Check (OBRIGATORIO)
+
+      Se qualquer item OBRIGATORIO falhar, o componente NAO pode ser entregue.
+      O agente deve corrigir e re-validar antes de entregar.
+    validation_report: |
+      Ao entregar componente, incluir mini-report:
+      ```
+      DS Compliance: PASS/FAIL
+      Token Import: YES/NO
+      Hardcoded Values: 0
+      Gold Usage: X.XX% (< 8%)
+      Checklist: X/X items passed
+      ```
+
+  # Rule 3: Auto-trigger 21st.dev para novos componentes
+  auto_trigger_21st_dev:
+    scope: "component_creation"
+    enforcement: "RECOMMENDED"
+    description: "Ao criar componente UI novo, considerar 21st.dev MCP como fonte"
+    trigger_conditions:
+      - "Agente precisa criar um componente UI NOVO (nao existente)"
+      - "Agente precisa de inspiracao visual para layout/design"
+      - "Usuario pede componente tipo: card, button, overlay, lower-third, stat display"
+      - "Componente envolve layout complexo (grid, flex patterns)"
+    workflow: |
+      Quando um agente visual precisa criar um NOVO componente:
+
+      1. BUSCAR inspiracao: mcp__magic__21st_magic_component_inspiration
+         - Usar para entender padroes visuais modernos
+         - Anotar patterns relevantes
+
+      2. CRIAR componente: mcp__magic__21st_magic_component_builder
+         - Fornecer contexto completo (DS, formato, uso)
+         - Incluir standaloneRequestQuery descritivo
+
+      3. CONVERTER para Remotion: Seguir pipeline completo
+         - Pipeline: workflows/design-creative/21st-to-remotion-pipeline.md
+         - Remover Tailwind -> inline styles
+         - Substituir valores por tokens
+         - Adicionar useCurrentFrame() e animacoes
+         - Remover hover/focus/active
+
+      4. VALIDAR: Checklist design-system-checklist.md
+         - Executar todas as secoes obrigatorias
+         - Gerar mini-report de compliance
+
+      Se o componente ja existe no codebase (templates/remotion/), REUTILIZAR
+      ao inves de criar novo. Verificar templates existentes ANTES de chamar 21st.dev.
+    delegation: "Qualquer agente pode delegar criacao de componente para @ui-magic"
+    skip_conditions:
+      - "Componente ja existe em templates/remotion/"
+      - "Modificacao simples de componente existente (usar replace_symbol_body)"
+      - "Ajuste de props/valores em componente ja convertido"
+
+# Formatos de Vídeo Suportados
+video_formats:
+  instagram_reels:
+    width: 1080
+    height: 1920
+    fps: 30
+    duration_range: "15-90 segundos"
+  instagram_feed:
+    width: 1080
+    height: 1080
+    fps: 30
+    duration_range: "3-60 segundos"
+  instagram_stories:
+    width: 1080
+    height: 1920
+    fps: 30
+    duration_range: "até 15 segundos"
+
+# Componentes do Squad
+components:
+  # 30 Agentes Especializados (7 divisoes)
+  agents:
+    # Viral Strategy Division (5 agentes)
+    - viral-strategy/viral.md # @viral - Chief Viral Strategist
+    - viral-strategy/trend-hunter.md # @trend-hunter - Trend Research
+    - viral-strategy/hook-master.md # @hook-master - Hook Creation
+    - viral-strategy/retention-architect.md # @retention-architect - Retention
+    - viral-strategy/algorithm-hacker.md # @algorithm-hacker - Algorithm
+
+    # Viral Content Division (5 agentes)
+    - viral-content/script-architect.md # @script-architect - Scripts
+    - viral-content/copy-wizard.md # @copy-wizard - Copywriting
+    - viral-content/storyteller.md # @storyteller - Storytelling
+    - viral-content/viral-topics.md # @viral-topics - Content Ideas
+    - viral-content/research-ninja.md # @research-ninja - Competitor Analysis
+
+    # Viral Design Division (7 agentes)
+    - viral-design/visual-impact.md # @visual-impact - Visual Hooks
+    - viral-design/motion-master.md # @motion-master - Motion Design
+    - viral-design/color-psychologist.md # @color-psychologist - Color Psychology
+    - viral-design/thumbnail-king.md # @thumbnail-king - Thumbnails
+    - viral-design/layout-architect.md # @layout-architect - Composition
+    - viral-design/ui-magic.md # @ui-magic - 21st.dev Component Specialist
+    - viral-design/art-director.md # @art-director - Creative Production Director (NEW)
+
+    # Remotion Experts Division (6 agentes)
+    - remotion-experts/remotion-architect.md # @remotion-architect - Architecture
+    - remotion-experts/animation-pro.md # @animation-pro - Animations
+    - remotion-experts/react-wizard.md # @react-wizard - React/TypeScript
+    - remotion-experts/render-master.md # @render-master - Rendering
+    - remotion-experts/effects-master.md # @effects-master - Visual Effects
+    - remotion-experts/rapid-assembler.md # @rapid-assembler - Speed Video Builder (NEW)
+
+    # Data & Analytics Division (4 agentes)
+    - data-analytics/metrics-guru.md # @metrics-guru - Metrics Analysis
+    - data-analytics/ab-test-master.md # @ab-test-master - A/B Testing
+    - data-analytics/retention-analyst.md # @retention-analyst - Retention Data
+    - data-analytics/audience-intel.md # @audience-intel - Audience Intelligence
+
+    # Audio & Engagement Division (3 agentes)
+    - audio-engagement/sound-designer.md # @sound-designer - Audio
+    - audio-engagement/engagement-engineer.md # @engagement-engineer - Engagement
+    - audio-engagement/growth-hacker.md # @growth-hacker - Growth
+
+  # 20 Workflows Profissionais (5 categorias)
+  workflows:
+    # Viral Creation (6 workflows)
+    - viral-creation/viral-factory.md # Criar vídeo viral completo
+    - viral-creation/trend-jacking.md # Pegar carona em trend
+    - viral-creation/remix-viral.md # Remixar viral de competidor
+    - viral-creation/hook-lab.md # Testar hooks cientificamente
+    - viral-creation/content-series-launch.md # Lançar série viral
+    - viral-creation/viral-replication-system.md # Sistema de replicação
+
+    # Optimization (5 workflows)
+    - optimization/retention-surgery.md # Fix baixa retenção
+    - optimization/algorithm-boost.md # Otimizar para algoritmo
+    - optimization/viral-coefficient-boost.md # Aumentar compartilhamentos
+    - optimization/engagement-explosion.md # Explodir engajamento
+    - optimization/performance-optimization.md # Otimizar performance técnica
+
+    # Design & Creative (5 workflows)
+    - design-creative/design-system-creation.md # Criar design system
+    - design-creative/visual-refresh.md # Atualizar visual
+    - design-creative/animation-library-build.md # Biblioteca de animações
+    - design-creative/thumbnail-lab.md # Otimizar thumbnails
+    - design-creative/ui-component-factory.md # Criar componentes via 21st.dev
+    - design-creative/21st-to-remotion-pipeline.md # Pipeline completo 21st.dev -> DS -> Remotion (NEW)
+
+    # Growth & Scale (3 workflows)
+    - growth-scale/viral-growth-sprint.md # Crescer rápido
+    - growth-scale/content-machine-setup.md # Máquina de conteúdo
+    - growth-scale/paid-amplification-campaign.md # Campanha paga
+
+    # Research & Innovation (2 workflows)
+    - research-innovation/trend-research-sprint.md # Pesquisa profunda
+    - research-innovation/innovation-lab.md # Experimentar formatos novos
+
+  # Checklists de Qualidade
+  checklists:
+    - checklists/viral-checklist.md # Pre-publish checklist
+    - checklists/algorithm-checklist.md # Algorithm optimization
+    - checklists/retention-checklist.md # Retention optimization
+    - checklists/post-publish-checklist.md # Post-publish actions
+    - checklists/design-system-checklist.md # Design system compliance
+
+  # Templates Prontos
+  templates:
+    # Scripts (5 templates)
+    - templates/scripts/transformation-story.md # Before/After journey
+    - templates/scripts/mistake-reveal.md # Stop doing X, do Y
+    - templates/scripts/listicle.md # Number-based rapid fire
+    - templates/scripts/controversy.md # Hot take + debate
+    - templates/scripts/day-in-life.md # Behind the scenes
+
+    # Hooks (10+ tested)
+    - templates/hooks/pattern-interrupt.md # 82% retention
+    - templates/hooks/curiosity-gap.md # 78% retention
+    - templates/hooks/bold-claim.md # 80% retention
+    - templates/hooks/before-after-split.md # 85% retention
+    - templates/hooks/number-shock.md # 75% retention
+
+    # Captions
+    - templates/captions/hook-caption.md # Strong opening captions
+    - templates/captions/cta-caption.md # Call-to-action captions
+
+    # Thumbnails
+    - templates/thumbnails/high-contrast.md # High-contrast designs
+    - templates/thumbnails/before-after.md # Before/After thumbnails
+
+    # Remotion Components
+    - templates/remotion/kinetic-typography.tsx # Animated text
+    - templates/remotion/fade-transition.tsx # Smooth fades
+    - templates/remotion/slide-transition.tsx # Directional slides
+    - templates/remotion/particle-system.tsx # Visual effects
+    - templates/remotion/viral-stat-card.tsx # Stats display (21st.dev adapted)
+    - templates/remotion/advanced-components.tsx # Complex components
+    - templates/remotion/ds-integrated-component.tsx # DS reference template (NEW)
+
+# Configuração
+config:
+  extends: extend
+  design-system: data/design-system.md
+  remotion-tokens: data/remotion-tokens-reference.ts # Token reference for agents
+  viral-frameworks: data/viral-frameworks.md
+  metrics-benchmarks: data/metrics-benchmarks.md
+  debate-system: data/debate-system.md
+
+# Dependências
+dependencies:
+  node:
+    - remotion
+    - "@remotion/cli"
+    - "@remotion/bundler"
+    - "@remotion/player"
+    - react
+    - react-dom
+  squads: []
+  skills:
+    - remotion-best-practices
+  mcp_servers:
+    - name: "21st.dev Magic"
+      tools:
+        - mcp__magic__21st_magic_component_builder
+        - mcp__magic__21st_magic_component_inspiration
+        - mcp__magic__21st_magic_component_refiner
+        - mcp__magic__logo_search
+      description: "MCP para criar componentes UI de alta qualidade"
+      integration_policy:
+        hierarchy: "Academia Lendária v4.1 = LEI | 21st.dev = FERRAMENTA"
+        rule: "21st.dev é fonte de componentes e inspiração. Academia Lendária tem prioridade ABSOLUTA."
+        mandatory_adaptation:
+          - "Cores: Substituir por paleta Academia Lendária (#000 70%, #FFF 22%, #C9B298 max 8%)"
+          - "Tipografia: Inter SemiBold 600 (UI) / Source Serif 4 Regular 400 (body)"
+          - "Icons: Flaticon Regular Rounded"
+          - "8% Gold Rule: SAGRADA - validar sempre"
+          - "Mobile-first: Validar em 1080x1920"
+        agents_with_access:
+          - "@visual-impact - Buscar inspiração visual e pattern interrupts"
+          - "@motion-master - Referência de animações e transições"
+          - "@color-psychologist - Análise de tendências de cor em UI"
+          - "@thumbnail-king - Layouts de thumbnail e text overlays"
+          - "@layout-architect - Padrões de composição e grid"
+          - "@ui-magic - Especialista técnico (executa criação via MCP)"
+        delegation_rule: "Para criação técnica de componentes via MCP, agentes delegam para @ui-magic"
+        pipeline_guide: "workflows/design-creative/21st-to-remotion-pipeline.md"
+        token_source: "academia-lendaria-ds/src/tokens/remotion.ts"
+
+# Sistema de Debate Entre Agentes
+debate_system:
+  enabled: true
+  description: "Todos os agentes debatem e votam para chegar à melhor solução"
+  voting_weights:
+    weight_3x:
+      - "@viral"
+      - "@retention-architect"
+      - "@metrics-guru"
+    weight_2x:
+      - "@hook-master"
+      - "@visual-impact"
+      - "@thumbnail-king"
+      - "@algorithm-hacker"
+      - "@engagement-engineer"
+      - "@remotion-architect"
+      - "@growth-hacker"
+    weight_1_5x:
+      - "@motion-master"
+      - "@animation-pro"
+      - "@sound-designer"
+      - "@ui-magic"
+    weight_1x:
+      - "demais agentes"
+  consensus_rules:
+    - "Unanimidade preferencial para decisões críticas"
+    - "Maioria ponderada (>60%) para decisões operacionais"
+    - "Veto power: @viral pode vetar com justificativa estratégica"
+    - "Data trumps opinion: Dados de @metrics-guru sempre pesam mais"
+  mandatory_debate_points:
+    - "Seleção de trend"
+    - "Escolha de hook (CRÍTICO)"
+    - "Estrutura de roteiro"
+    - "Conceito visual"
+    - "Arquitetura técnica"
+    - "Otimização de algoritmo"
+    - "Review final de qualidade"
+    - "Estratégia de distribuição"
+
+# Benchmarks de Sucesso
+success_benchmarks:
+  viral_metrics:
+    views:
+      good: "100K"
+      viral: "1M"
+      mega_viral: "10M+"
+    view_rate:
+      good: "100%"
+      viral: "200%"
+      mega_viral: "500%+"
+    save_rate:
+      good: "5%"
+      viral: "8%"
+      mega_viral: "12%+"
+    share_rate:
+      good: "1.5%"
+      viral: "3%"
+      mega_viral: "5%+"
+    retention_3s:
+      good: "70%"
+      viral: "75%"
+      mega_viral: "85%+"
+    viral_coefficient:
+      good: "1.0"
+      viral: "1.5"
+      mega_viral: "3.0+"
+
+  algorithm_signals_2025:
+    - signal: "Saves"
+      weight: "10x"
+      description: "Strongest signal"
+    - signal: "Shares"
+      weight: "8x"
+      description: "Viral indicator"
+    - signal: "Watch Time"
+      weight: "7x"
+      description: "Quality signal"
+    - signal: "Follows"
+      weight: "6x"
+      description: "Conversion"
+    - signal: "Comments"
+      weight: "5x"
+      description: "Engagement"
+    - signal: "Profile Visits"
+      weight: "4x"
+      description: "Interest"
+
+# Tags para descoberta
+tags:
+  - viral
+  - instagram
+  - reels
+  - remotion
+  - video
+  - engagement
+  - growth
+  - marketing
+  - social-media
+  - academia-lendaria
+  - design-system
+  - debate-system
+  - algorithm
+  - retention

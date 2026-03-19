@@ -1,0 +1,124 @@
+version: "1.1"
+generated_at: "2026-02-19"
+generated_by: "squad-chief/discover-tools"
+policy: "internal-first"
+
+squad:
+  name: design
+  domain: design_system
+  budget_tier: low_cost
+
+use_cases:
+  - ds-setup-design-system
+  - ds-build-component
+  - ds-generate-documentation
+  - ds-validate-ai-readiness
+  - ds-visual-regression
+  - ds-figma-pipeline
+  - ds-governance
+
+capability_tools:
+  ds_component_metadata_generation:
+    priority: high
+    primary:
+      - script:generate_components_metadata.cjs
+    fallback: []
+
+  ds_component_metadata_validation:
+    priority: high
+    primary:
+      - script:validate_components_metadata.cjs
+    fallback: []
+
+  ds_manifest_sync:
+    priority: high
+    primary:
+      - script:sync_design_manifest.cjs
+    fallback: []
+
+  ds_manifest_drift_validation:
+    priority: high
+    primary:
+      - script:validate_design_manifest_drift.cjs
+    fallback: []
+
+  ds_task_checklist_validation:
+    priority: high
+    primary:
+      - script:validate_task_checklist_bindings.cjs
+    fallback: []
+
+  ds_mcp_skeleton_validation:
+    priority: high
+    primary:
+      - script:validate_mcp_skeleton.cjs
+    fallback: []
+
+  ds_mcp_runtime_queries:
+    priority: high
+    primary:
+      - workspace:design-system-mcp-server
+    fallback:
+      - script:test_mcp_tools.cjs
+
+  ds_ast_structural_contract_mining:
+    priority: high
+    primary:
+      - script:scan-structural-model (profile:design-system)
+    fallback:
+      - cli:ast-grep
+      - native:grep
+
+  visual_regression:
+    priority: medium
+    primary:
+      - local:playwright
+    fallback:
+      - chromatic
+      - percy
+
+  figma_sync:
+    priority: medium
+    primary:
+      - ds-figma-pipeline
+    fallback:
+      - figma-api
+
+recommendations:
+  quick_wins:
+    - script:generate_components_metadata.cjs
+    - script:validate_components_metadata.cjs
+    - script:sync_design_manifest.cjs
+    - script:validate_design_manifest_drift.cjs
+    - script:validate_task_checklist_bindings.cjs
+    - script:validate_mcp_skeleton.cjs
+    - script:scan-structural-model (profile:design-system)
+  strategic:
+    - local:playwright
+    - script:test_mcp_tools.cjs
+    - library:ts-morph
+  optional:
+    - chromatic
+    - percy
+    - figma-api
+    - cli:semgrep
+
+integration_order:
+  - wave: 1
+    tools:
+      - script:generate_components_metadata.cjs
+      - script:validate_components_metadata.cjs
+      - script:sync_design_manifest.cjs
+      - script:validate_design_manifest_drift.cjs
+      - script:validate_task_checklist_bindings.cjs
+      - script:validate_mcp_skeleton.cjs
+      - script:scan-structural-model (profile:design-system)
+  - wave: 2
+    tools:
+      - local:playwright
+      - script:test_mcp_tools.cjs
+  - wave: 3
+    tools:
+      - chromatic
+      - percy
+      - figma-api

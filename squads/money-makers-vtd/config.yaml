@@ -1,0 +1,297 @@
+squad:
+  name: money-makers-vtd
+  version: 1.0.0
+  short-title: "Vendas Todos os Dias"
+  description: >-
+    Squad de monetização perpétua baseado no método Natanael Oliveira.
+    3 Playbooks Simultâneos: Aquisição + Monetização + Escala.
+    Modelo 12/54/27: 12 funis/ano, 54 campanhas/ano, 27 produtos/ano.
+    "Só vende quem oferece. Quem tem cronograma tem caixa."
+  author: squad-creator
+  icon: 💰
+  slashPrefix: vtd
+  source_mind: natanael-oliveira
+  domain: monetização digital perpétua
+  keywords:
+    - monetização
+    - empilhamento
+    - campanhas semanais
+    - funil perpétuo
+    - infoprodutos
+    - Amazon
+    - copy por sentimento
+    - Andromeda
+
+settings:
+  greeting:
+    level: named
+    show_commands: quick
+  language: pt-BR
+  model_routing:
+    default: sonnet
+    research: opus
+    validation: haiku
+
+agents:
+  - id: vtd-chief
+    file: agents/vtd-chief.md
+    tier: orchestrator
+    role: "Coordenador do squad — triage, diagnóstico, routing"
+    commands:
+      - "*money-machine"
+      - "*diagnostico"
+      - "*mix-produtos"
+      - "*plano-anual"
+      - "*help"
+
+  - id: pesquisador-ia
+    file: agents/pesquisador-ia.md
+    tier: 0
+    role: "Pesquisa de mercado com IA — tendências, ciclo do produto, dores"
+    commands:
+      - "*pesquisa-mercado"
+
+  - id: arquiteto-funil
+    file: agents/arquiteto-funil.md
+    tier: 1
+    role: "Funis de aquisição perpétuos — lead magnet, ManyChat, tráfego"
+    commands:
+      - "*aquisicao-funil"
+
+  - id: monetizador
+    file: agents/monetizador.md
+    tier: 1
+    role: "Empilhamento de ofertas — campanhas, mix, ancoragem, caixa rápido"
+    commands:
+      - "*monetiza-empilhar"
+      - "*campanha"
+      - "*mix-produtos"
+      - "*caixa-rapido"
+      - "*criar-produto"
+
+  - id: copy-andromeda
+    file: agents/copy-andromeda.md
+    tier: 1
+    role: "Copy por sentimento (Andromeda) — criativos, Hook→Punch→Premissa"
+    commands:
+      - "*copy-andromeda"
+      - "*copy-campanha"
+
+  - id: escalador
+    file: agents/escalador.md
+    tier: 2
+    role: "Escala — Amazon, apps IA, mineração de dados, modelo enxuto"
+    commands:
+      - "*escala-amazon"
+      - "*escala-ia"
+
+workflows:
+  - id: wf-money-machine
+    file: workflows/wf-money-machine.yaml
+    trigger: "*money-machine {nicho}"
+    phases: 6
+    description: "Playbook completo Money Machine para um nicho"
+
+  - id: wf-pesquisa-mercado
+    file: workflows/wf-pesquisa-mercado.yaml
+    trigger: "*pesquisa-mercado"
+    phases: 3
+    description: "Pesquisa de mercado com IA"
+
+  - id: wf-aquisicao-funil
+    file: workflows/wf-aquisicao-funil.yaml
+    trigger: "*aquisicao-funil"
+    phases: 4
+    description: "Montar funil de aquisição perpétuo"
+
+  - id: wf-campanha-semanal
+    file: workflows/wf-campanha-semanal.yaml
+    trigger: "*campanha {tipo}"
+    phases: 4
+    description: "Criar 1 campanha semanal com 7 gatilhos"
+
+  - id: wf-empilhamento
+    file: workflows/wf-empilhamento.yaml
+    trigger: "*monetiza-empilhar"
+    phases: 3
+    description: "Empilhamento de ofertas diário"
+
+  - id: wf-escala-amazon
+    file: workflows/wf-escala-amazon.yaml
+    trigger: "*escala-amazon"
+    phases: 4
+    description: "Escala via livros Amazon"
+
+  - id: wf-diagnostico
+    file: workflows/wf-diagnostico.yaml
+    trigger: "*diagnostico {negocio}"
+    phases: 3
+    description: "Diagnóstico do modelo de negócio"
+
+  - id: wf-criar-produto
+    file: workflows/wf-criar-produto.yaml
+    trigger: "*criar-produto {nicho}"
+    phases: 5
+    description: "Criar produto do zero ao blueprint"
+
+  - id: wf-planejamento-anual
+    file: workflows/wf-planejamento-anual.yaml
+    trigger: "*plano-anual {nicho}"
+    phases: 5
+    description: "Planejamento anual 12/54/27"
+
+tasks:
+  - id: task-copy-andromeda
+    file: tasks/task-copy-andromeda.md
+    trigger: "*copy-andromeda"
+    agent: copy-andromeda
+
+  - id: task-copy-campanha
+    file: tasks/task-copy-campanha.md
+    trigger: "*copy-campanha"
+    agent: copy-andromeda
+
+  - id: task-mix-produtos
+    file: tasks/task-mix-produtos.md
+    trigger: "*mix-produtos {meta}"
+    agent: monetizador
+
+  - id: task-escala-ia
+    file: tasks/task-escala-ia.md
+    trigger: "*escala-ia"
+    agent: escalador
+
+  - id: task-ciclo-produto
+    file: tasks/task-ciclo-produto.md
+    trigger: "(interno)"
+    agent: pesquisador-ia
+
+  - id: task-analise-ancoragem
+    file: tasks/task-analise-ancoragem.md
+    trigger: "(interno)"
+    agent: monetizador
+
+  - id: task-caixa-rapido
+    file: tasks/task-caixa-rapido.md
+    trigger: "*caixa-rapido {meta}"
+    agent: monetizador
+
+templates:
+  products:
+    - tmpl-ebook.md
+    - tmpl-desafio.md
+    - tmpl-workshop.md
+    - tmpl-curso.md
+    - tmpl-imersao.md
+    - tmpl-aula-ao-vivo.md
+    - tmpl-livro-amazon.md
+    - tmpl-app-ia.md
+    - tmpl-mentoria.md
+    - tmpl-kit-monetizacao.md
+
+checklists:
+  products:
+    - cl-ebook.md
+    - cl-desafio.md
+    - cl-workshop.md
+    - cl-curso.md
+    - cl-imersao.md
+    - cl-aula-ao-vivo.md
+    - cl-livro-amazon.md
+    - cl-app-ia.md
+    - cl-mentoria.md
+    - cl-kit.md
+  universal:
+    - cl-produto-universal.md
+
+commands:
+  - name: "*money-machine {nicho}"
+    description: "Montar playbook completo Money Machine"
+    type: workflow
+    artifact: wf-money-machine.yaml
+
+  - name: "*pesquisa-mercado"
+    description: "Pesquisa de mercado com IA"
+    type: workflow
+    artifact: wf-pesquisa-mercado.yaml
+
+  - name: "*aquisicao-funil"
+    description: "Montar funil de aquisição perpétuo"
+    type: workflow
+    artifact: wf-aquisicao-funil.yaml
+
+  - name: "*monetiza-empilhar"
+    description: "Empilhamento de ofertas"
+    type: workflow
+    artifact: wf-empilhamento.yaml
+
+  - name: "*campanha {tipo}"
+    description: "Criar campanha semanal (7 gatilhos)"
+    type: workflow
+    artifact: wf-campanha-semanal.yaml
+
+  - name: "*escala-amazon"
+    description: "Escala via livros Amazon"
+    type: workflow
+    artifact: wf-escala-amazon.yaml
+
+  - name: "*escala-ia"
+    description: "Apps e agentes IA como produto"
+    type: task
+    artifact: task-escala-ia.md
+
+  - name: "*copy-andromeda"
+    description: "Criativos por sentimento (Andromeda)"
+    type: task
+    artifact: task-copy-andromeda.md
+
+  - name: "*copy-campanha"
+    description: "Copy para campanha semanal"
+    type: task
+    artifact: task-copy-campanha.md
+
+  - name: "*mix-produtos {meta}"
+    description: "Mix de produtos para meta de faturamento"
+    type: task
+    artifact: task-mix-produtos.md
+
+  - name: "*diagnostico {negocio}"
+    description: "Diagnóstico do modelo de negócio"
+    type: workflow
+    artifact: wf-diagnostico.yaml
+
+  - name: "*criar-produto {nicho}"
+    description: "Criar produto do zero ao blueprint"
+    type: workflow
+    artifact: wf-criar-produto.yaml
+
+  - name: "*plano-anual {nicho}"
+    description: "Planejamento anual 12/54/27"
+    type: workflow
+    artifact: wf-planejamento-anual.yaml
+
+  - name: "*caixa-rapido {meta}"
+    description: "Caixa rápido em 24h"
+    type: task
+    artifact: task-caixa-rapido.md
+
+  - name: "*help"
+    description: "Listar todos os comandos"
+    type: builtin
+
+# Natanael Oliveira - Key Heuristics Reference
+heuristics_index:
+  NO-H001: "Pesquisa IA ANTES de criar"
+  NO-H002: "Linguagem do público, não jargão"
+  NO-H003: "1 produto = 1 problema"
+  NO-H004: "Lead magnet = conteúdo que era pago"
+  NO-H005: "Aula de manhã 11h converte mais"
+  NO-H006: "Escassez no domingo à noite"
+  NO-H014: "Copy por sentimento, não demografia"
+  NO-H020: "Caixa rápido = oferta irresistível + R$50-100 ads"
+  NO-F012: "High ticket ANTES de low ticket (ancoragem)"
+  NO-F021: "Sempre próximo passo pós-compra"
+  NO-F022: "98% não compraram = oferece algo"
+  NO-F033: "Custo variável > fixo (50-60% lucro)"
+  NO-F049: "NUNCA parar de mandar email"
+  NO-F050: "NUNCA livro sem modelo de negócio"

@@ -1,0 +1,318 @@
+# Pedro Valério - Workflow Validation & AIOS Knowledge
+# Loaded on-demand by: *modernization-score, *agent-activation-check, *validation-script, *smoke-test-design, *preservation-audit
+# Source: pedro-valerio.md (extracted for lazy loading)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# IDS - Incremental Development System (Detailed)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+ids:
+  philosophy: |
+    "Humans develop incrementally; AI agents develop generationally.
+    O problema é que IA cria do zero enquanto humano busca o que já existe.
+    IDS força a hierarquia: REUSE > ADAPT > CREATE."
+
+  decision_matrix:
+    reuse:
+      when: "relevanceScore >= 90%"
+      action: "Usa direto, sem alteração"
+    adapt:
+      when: "relevanceScore >= 60% AND impactOnOthers < 30%"
+      action: "Modifica com cuidado"
+    create:
+      when: "relevanceScore < 60%"
+      action: "Cria novo COM JUSTIFICATIVA OBRIGATÓRIA"
+
+  heuristics:
+    - id: "IDS001"
+      name: "Regra do Inventário Primeiro"
+      rule: "SE agente vai criar algo → OBRIGATÓRIO consultar Entity Registry antes"
+      rationale: "IA cria do zero por default. Forçar consulta evita duplicação."
+
+    - id: "IDS002"
+      name: "Regra do REUSE > ADAPT > CREATE"
+      rule: "SE relevância >= 60% → PROIBIDO criar novo, OBRIGATÓRIO adaptar existente"
+      rationale: "CREATE só quando realmente não existe similar."
+
+    - id: "IDS003"
+      name: "Regra da Justificativa CREATE"
+      rule: "SE decisão é CREATE → justificativa estruturada obrigatória"
+      rationale: "Sem justificativa = CREATE não aprovado."
+      justification_schema: |
+        evaluated_patterns: [lista do que foi avaliado]
+        rejection_reasons: {padrão: "motivo de rejeição"}
+        new_capability: "o que esse novo artefato adiciona"
+        review_scheduled: "data de revisão futura"
+
+    - id: "IDS004"
+      name: "Regra do CREATE Rate"
+      rule: "SE CREATE rate > 40% após mês 4 → sistema está doente"
+      rationale: "CREATE rate é termômetro de saúde. Meta: <15% após 12 meses."
+      thresholds:
+        - period: "Mês 1-3"
+          acceptable: "50-60%"
+          status: "Normal - construindo registry"
+        - period: "Mês 4-6"
+          acceptable: "30-40%"
+          status: "Saudável - padrões emergindo"
+        - period: "Mês 7-12"
+          acceptable: "15-25%"
+          status: "Maduro - sistema funcionando"
+        - period: "Mês 12+"
+          acceptable: "<15%"
+          status: "Ótimo - cultura de reuso forte"
+
+    - id: "IDS005"
+      name: "Regra do Gate Automático"
+      rule: "SE gate é runtime (G4-G6) → DEVE ser automático, latência < 60s"
+      rationale: "Verificação manual em runtime cria fricção."
+      gate_classification:
+        human_in_loop: ["@pm", "@sm", "@po"]
+        automatic: ["@dev", "@qa", "@devops"]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Verification Gates
+# ═══════════════════════════════════════════════════════════════════════════════
+
+verification_gates:
+  gate_types:
+    human_in_loop:
+      agents: ["@pm", "@sm", "@po"]
+      latency: "< 24h"
+      behavior: "Advisory ou Soft block"
+    automatic:
+      agents: ["@dev", "@qa", "@devops"]
+      latency: "< 60s"
+      behavior: "Informational ou Hard block"
+  principle: |
+    "Gates G4-G6 DEVEM ser automáticos. Verificação manual em runtime
+    cria fricção inaceitável. Humano aprova ANTES, máquina valida DURANTE."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Self-Healing Patterns
+# ═══════════════════════════════════════════════════════════════════════════════
+
+self_healing:
+  categories:
+    data_integrity:
+      - problem: "Checksum errado"
+        auto_heal: true
+        action: "Recalcula"
+      - problem: "Referência órfã"
+        auto_heal: true
+        action: "Remove referência"
+      - problem: "Schema inválido"
+        auto_heal: false
+        action: "Avisa humano"
+    performance:
+      - problem: "Query lenta > 100ms"
+        auto_heal: true
+        action: "Rebuild index"
+      - problem: "Cache hit < 70%"
+        auto_heal: true
+        action: "Expand cache"
+    quality:
+      - problem: "Near-duplicate > 95%"
+        auto_heal: false
+        action: "Sugere merge ao humano"
+      - problem: "False CREATE (60 dias, 0 reuse)"
+        auto_heal: false
+        action: "Queue review"
+  principle: |
+    "Sistema imunológico: problemas simples são auto-curados,
+    problemas complexos escalam para humano. Sem zona cinza."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Modernization Score (12-Point Checklist)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+modernization_score:
+  description: "12-point checklist para avaliar se workflow é moderno"
+  patterns:
+    - id: 1
+      name: "Teams Architecture"
+      check: "TeamCreate, TaskCreate, Task tool usados"
+      legacy_if: "YAML declarativo sem Teams"
+    - id: 2
+      name: "SKILL.md Frontmatter"
+      check: "YAML frontmatter com name: e description:"
+      legacy_if: "Arquivo .yaml ou sem frontmatter"
+    - id: 3
+      name: "Blocking Execution"
+      check: "Task tool SEM run_in_background para fases sequenciais"
+      legacy_if: "Sleep loops ou polling"
+    - id: 4
+      name: "Parallel Execution"
+      check: "Task tool COM run_in_background: true para fases paralelas"
+      legacy_if: "Parallel apenas conceitual"
+    - id: 5
+      name: "Context Preamble"
+      check: "Agente carrega git status, gotchas, preferences"
+      legacy_if: "Sem context loading"
+    - id: 6
+      name: "File-Based Communication"
+      check: "Fases comunicam via outputs/{slug}/01-phase.md"
+      legacy_if: "Inline output blocks"
+    - id: 7
+      name: "Agent File References"
+      check: "Read your agent file at .claude/commands/..."
+      legacy_if: "Personas hardcoded no workflow"
+    - id: 8
+      name: "Task Dependencies"
+      check: "blockedBy na criação de tasks"
+      legacy_if: "depends_on declarativo"
+    - id: 9
+      name: "bypassPermissions Mode"
+      check: "mode: bypassPermissions explícito"
+      legacy_if: "Permissões implícitas"
+    - id: 10
+      name: "Proper Finalization"
+      check: "shutdown_request + TeamDelete no fim"
+      legacy_if: "Sem cleanup de team"
+    - id: 11
+      name: "Anti-Pattern Documentation"
+      check: "Seção NEVER DO THIS presente"
+      legacy_if: "Sem documentação de anti-patterns"
+    - id: 12
+      name: "Artifact Output Directory"
+      check: "outputs/{workflow}/{slug}/ estruturado"
+      legacy_if: "Outputs em locais arbitrários"
+
+  scoring:
+    "12/12": "Totalmente moderno - pronto para produção"
+    "9-11/12": "Quase moderno - ajustes menores"
+    "5-8/12": "Parcialmente moderno - refactor significativo"
+    "1-4/12": "Majoritariamente legado - rewrite necessário"
+    "0/12": "Completamente legado - rewrite total"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Validation Script Pattern
+# ═══════════════════════════════════════════════════════════════════════════════
+
+validation_script_pattern:
+  description: "Todo epic/story deve ter script de validação automatizada"
+  template: |
+    #!/bin/bash
+    # validation-{story-id}.sh
+    ERRORS=0
+
+    echo "=== Story {id} Validation ==="
+
+    # Check 1: Required file exists
+    if [ -f "{path}" ]; then
+      echo "✅ Check 1: File exists"
+    else
+      echo "❌ VETO: File not found"
+      ERRORS=$((ERRORS+1))
+    fi
+
+    # Check 2: Required section present
+    if grep -q "{pattern}" "{file}"; then
+      echo "✅ Check 2: Section present"
+    else
+      echo "❌ VETO: Section missing"
+      ERRORS=$((ERRORS+1))
+    fi
+
+    # Final verdict
+    if [ "$ERRORS" -eq 0 ]; then
+      echo "=== ALL VALIDATIONS PASSED ==="
+      exit 0
+    else
+      echo "=== VALIDATION FAILED: $ERRORS errors ==="
+      exit 1
+    fi
+  principle: "Script exit 0 = aprovado. Exit non-zero = VETO."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Smoke Test Design
+# ═══════════════════════════════════════════════════════════════════════════════
+
+smoke_test_design:
+  description: "Smoke tests validam que workflow executa end-to-end"
+  structure:
+    - name: "Happy Path"
+      command: "/workflow {minimal-input}"
+      verification:
+        - "Team criado"
+        - "Todas as fases executam"
+        - "Artifacts gerados"
+        - "TeamDelete executado"
+    - name: "Parallel Execution"
+      purpose: "Validar que fases paralelas realmente executam em paralelo"
+      verification:
+        - "N agents spawned simultaneamente"
+        - "TaskOutput blocks corretamente"
+        - "Sem file conflicts"
+    - name: "Error Recovery"
+      purpose: "Validar que erros são tratados corretamente"
+      verification:
+        - "Feedback loop acionado"
+        - "Max retries respeitado"
+        - "HALT com mensagem clara"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# Preservation Audit
+# ═══════════════════════════════════════════════════════════════════════════════
+
+preservation_audit:
+  description: "Garantir que refactor preserva lógica original"
+  checklist:
+    - "Todas as heurísticas originais presentes"
+    - "Thresholds numéricos mantidos"
+    - "Output format consistente"
+    - "Fluxo de decisão idêntico"
+    - "Specialist handoffs preservados"
+  principle: "Refactor muda COMO executa, não O QUE executa"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AIOS Agent Execution Knowledge
+# ═══════════════════════════════════════════════════════════════════════════════
+
+aios_agent_execution:
+  principle: |
+    "Agentes devem ser ATIVADOS, não SIMULADOS. A diferença é onde a definição
+    do agente fica: no system prompt (ativação real) ou na user message (faz de conta)."
+
+  correct_pattern:
+    name: "--append-system-prompt (SEMPRE USAR)"
+    behavior: "SOMA ao CLAUDE.md existente"
+    diagram: |
+      SYSTEM PROMPT (prioridade máxima)
+      ├── CLAUDE.md (Constitution, framework rules)
+      ├── .claude/rules/*.md (MCP usage, patterns)
+      └── --append-system-prompt → AGENT DEFINITION
+
+      USER MESSAGE (a task a executar)
+      ├── Story content (acceptance criteria)
+      └── Completion rules
+
+      CONTROLS (flags CLI)
+      ├── --dangerously-skip-permissions (autonomous)
+      ├── --max-budget-usd (cost ceiling)
+      └── --allowed-tools (tool scoping por agente)
+
+  wrong_pattern:
+    name: "--system-prompt (NUNCA USAR)"
+    behavior: "SUBSTITUI CLAUDE.md - perde tudo"
+
+  tool_scoping:
+    dev: ["Bash", "Edit", "Read", "Write", "Grep", "Glob", "Task"]
+    qa: ["Bash(npm test:*)", "Read", "Grep", "Glob"]
+    architect: ["Read", "Grep", "Glob", "WebSearch"]
+    principle: "Cada agente só pode usar as ferramentas do seu papel"
+
+  model_selection:
+    orchestrator: "opus (decisões complexas)"
+    specialist: "sonnet (execução focada)"
+    validator: "haiku (checks rápidos)"
+
+  anti_patterns:
+    - action: "Usar --system-prompt ao invés de --append-system-prompt"
+      reason: "Perde CLAUDE.md, Constitution, Rules"
+    - action: "Deixar agente CREATE sem consultar Entity Registry"
+      reason: "IA vai criar duplicata. Forçar IDS."
+    - action: "Gate runtime com validação manual"
+      reason: "Fricção inaceitável. Runtime gates automáticos < 60s"
+    - action: "Agent definition na user message"
+      reason: "Faz de conta vs ativação real"

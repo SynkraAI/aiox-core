@@ -1,0 +1,166 @@
+# Scaling Patterns by Business Type
+# Source: hormozi-scale agent - Business Type Analysis
+# Use: Reference when diagnosing scaling constraints by business model
+
+data_id: HZ_DATA_SCALE_001
+version: "1.0"
+
+business_types:
+
+  service_business:
+    name: "Service Business"
+    examples: ["Consulting", "Agency", "Professional Services", "Coaching"]
+
+    typical_constraint: "Capacity (people)"
+
+    scale_path:
+      step_1: "Productize service offerings"
+      step_2: "Hire to replicate delivery"
+      step_3: "Specialize by niche or service"
+
+    warning: "Quality at scale is the main challenge"
+
+    key_metric: "Revenue per employee"
+    target: ">$250k per employee"
+
+    common_mistakes:
+      - "Hiring before documenting processes"
+      - "Taking any client regardless of fit"
+      - "Founder staying in delivery too long"
+
+  info_products:
+    name: "Info-Products / Digital Products"
+    examples: ["Courses", "Memberships", "Digital Downloads", "Coaching Programs"]
+
+    typical_constraint: "Conversion or Delivery (getting results)"
+
+    scale_path:
+      step_1: "Improve offer using Value Equation"
+      step_2: "Scale paid advertising"
+      step_3: "Improve retention and completion rates"
+
+    warning: "High churn if product does not deliver promised results"
+
+    key_metric: "LTV:CAC ratio"
+    target: ">3:1 before scaling ads"
+
+    common_mistakes:
+      - "Scaling ads before product delivers results"
+      - "Ignoring completion rates"
+      - "No community or support for students"
+
+  agency:
+    name: "Agency"
+    examples: ["Marketing Agency", "Creative Agency", "Development Agency", "PR Agency"]
+
+    typical_constraint: "Delivery quality at scale"
+
+    scale_path:
+      step_1: "Build systems and SOPs"
+      step_2: "Build team layer by layer"
+      step_3: "Improve client selection (say no more)"
+
+    warning: "Saying yes to wrong clients kills margins"
+
+    key_metric: "Profit per client"
+    target: ">30% gross margin per client"
+
+    common_mistakes:
+      - "Taking low-margin clients for revenue"
+      - "No client qualification process"
+      - "Founder doing all client work"
+
+  saas:
+    name: "SaaS (Software as a Service)"
+    examples: ["B2B Software", "B2C Apps", "Platforms", "Tools"]
+
+    typical_constraint: "Acquisition vs Retention balance"
+
+    scale_path:
+      step_1: "Achieve negative churn (expansion > churn)"
+      step_2: "Optimize activation and onboarding"
+      step_3: "Scale acquisition channels"
+
+    warning: "Scaling with high churn burns cash rapidly"
+
+    key_metrics:
+      - "MRR (Monthly Recurring Revenue)"
+      - "Churn rate (<5% monthly)"
+      - "LTV:CAC (>3:1)"
+
+    common_mistakes:
+      - "Scaling acquisition before fixing churn"
+      - "No onboarding optimization"
+      - "Feature bloat instead of core value"
+
+  ecommerce:
+    name: "E-commerce"
+    examples: ["DTC Brands", "Dropshipping", "Amazon Sellers", "Retail"]
+
+    typical_constraint: "Unit economics and CAC"
+
+    scale_path:
+      step_1: "Optimize LTV (AOV + repeat purchases)"
+      step_2: "Reduce CAC through organic + brand"
+      step_3: "Scale profitable ad spend"
+
+    warning: "Cash cycle is critical - inventory ties up capital"
+
+    key_metrics:
+      - "ROAS (Return on Ad Spend)"
+      - "AOV (Average Order Value)"
+      - "LTV (Customer Lifetime Value)"
+      - "Contribution margin per order"
+
+    common_mistakes:
+      - "Scaling unprofitable products"
+      - "Ignoring repeat purchase rate"
+      - "No email/SMS for retention"
+
+# ═══════════════════════════════════════════════════════════════════
+# DECISION MATRIX
+# ═══════════════════════════════════════════════════════════════════
+
+decision_matrix:
+  identify_business_type:
+    question: "How do you deliver value?"
+    options:
+      - "Done-for-you service → Service Business or Agency"
+      - "Done-with-you → Coaching/Info-product"
+      - "Do-it-yourself digital → Info-product or SaaS"
+      - "Physical product → E-commerce"
+      - "Software access → SaaS"
+
+  diagnose_constraint:
+    service_agency:
+      - "If calendar empty → Leads"
+      - "If plenty of leads but not closing → Conversion"
+      - "If closing but can't deliver → Capacity"
+
+    info_product:
+      - "If ads not converting → Offer or Targeting"
+      - "If high refunds → Product quality"
+      - "If high churn → Retention/results"
+
+    saas:
+      - "If high churn → Product/onboarding"
+      - "If low conversion → Offer/positioning"
+      - "If healthy metrics → Scale acquisition"
+
+    ecommerce:
+      - "If ROAS < 2 → Fix offer or creative"
+      - "If no repeat purchases → Fix retention"
+      - "If profitable but slow → Scale ad spend"
+
+# ═══════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0"
+  created: "2026-02-10"
+  source: "hormozi-scale agent expansion"
+  based_on: "$100M Offers, $100M Leads methodology"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

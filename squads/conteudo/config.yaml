@@ -1,0 +1,297 @@
+name: conteudo
+description: Squad de criacao de conteudo Instagram (carrosseis, Reels, Stories, campanhas, pesquisa de concorrentes)
+version: "2.1"
+language: pt-BR
+
+agents:
+  - name: content-chief
+    file: agents/content-chief.md
+    tier: 0
+    role: orchestrador
+    description: Orchestrador central. Diagnostica, recomenda e direciona.
+
+  - name: carousel-creator
+    file: agents/carousel-creator.md
+    tier: 1
+    role: criador
+    description: Cria carrosseis de 1-10 slides. 7 tipos + 9 frameworks.
+
+  - name: reels-creator
+    file: agents/reels-creator.md
+    tier: 1
+    role: criador
+    description: Roteiros de Reels. DNA BLAZE completo. 6 blocos + 7 padroes.
+
+  - name: stories-strategist
+    file: agents/stories-strategist.md
+    tier: 1
+    role: criador
+    description: Sequencias de Stories com intencao de conversao.
+
+  - name: strategist
+    file: agents/strategist.md
+    tier: 1
+    role: estrategista
+    description: 8 estrategias de campanha E1-E8 com cronograma integrado Feed + Stories.
+
+  - name: positioning-expert
+    file: agents/positioning-expert.md
+    tier: 1
+    role: posicionamento
+    description: Bio Imperial, CLC, StoryAds e Sistema 21 dias.
+
+  - name: competitor-analyst
+    file: agents/competitor-analyst.md
+    tier: 1
+    role: pesquisador
+    description: Pesquisa concorrentes BR + US. Scrape, transcricao, analise de padroes.
+
+  - name: content-planner
+    file: agents/content-planner.md
+    tier: 2
+    role: planejador
+    description: Planejamento estrategico. 5 niveis de consciencia. 25 ideias/ciclo.
+
+  - name: content-repurposer
+    file: agents/content-repurposer.md
+    tier: 2
+    role: adaptador
+    description: Adapta conteudo entre formatos (carousel→reel, reel→stories, post→campanha).
+
+  - name: content-validator
+    file: agents/content-validator.md
+    tier: 2
+    role: validador
+    description: Oraculo unificado. Valida carrosseis (12 testes) e Reels (3 niveis).
+
+tasks:
+  # Criacao
+  - name: create-carousel
+    file: tasks/create-carousel.md
+    agent: carousel-creator
+
+  - name: create-reels
+    file: tasks/create-reels.md
+    agent: reels-creator
+
+  - name: create-stories
+    file: tasks/create-stories.md
+    agent: stories-strategist
+
+  - name: create-stories-venda
+    file: tasks/create-stories-venda.md
+    agent: stories-strategist
+
+  - name: create-stories-pas
+    file: tasks/create-stories-pas.md
+    agent: stories-strategist
+
+  - name: create-stories-funil
+    file: tasks/create-stories-funil.md
+    agent: stories-strategist
+
+  - name: create-levantada-mao
+    file: tasks/create-levantada-mao.md
+    agent: stories-strategist
+
+  - name: create-strategy
+    file: tasks/create-strategy.md
+    agent: strategist
+
+  - name: create-bio
+    file: tasks/create-bio.md
+    agent: positioning-expert
+
+  - name: create-storyadd
+    file: tasks/create-storyadd.md
+    agent: positioning-expert
+
+  - name: create-clc
+    file: tasks/create-clc.md
+    agent: positioning-expert
+
+  - name: create-hook-batch
+    file: tasks/create-hook-batch.md
+    agent: content-chief
+
+  - name: create-content-series
+    file: tasks/create-content-series.md
+    agent: content-chief
+
+  - name: create-campaign
+    file: tasks/create-campaign.md
+    agent: content-chief
+
+  # *multiplicar (antigo Piramide de Conteudo)
+  - name: ingest-pillar
+    file: tasks/ingest-pillar.md
+    agent: content-chief
+
+  - name: create-impact-phrases
+    file: tasks/create-impact-phrases.md
+    agent: carousel-creator
+
+  # Planejamento e Diagnostico
+  - name: plan-content
+    file: tasks/plan-content.md
+    agent: content-planner
+
+  - name: atomize-content
+    file: tasks/atomize-content.md
+    agent: content-repurposer
+
+  - name: plan-calendar
+    file: tasks/plan-calendar.md
+    agent: content-planner
+
+  - name: diagnose-avatar
+    file: tasks/diagnose-avatar.md
+    agent: content-planner
+
+  # Adaptacao e Validacao
+  - name: repurpose-content
+    file: tasks/repurpose-content.md
+    agent: content-repurposer
+
+  - name: validate-content
+    file: tasks/validate-content.md
+    agent: content-validator
+
+  - name: audit-content
+    file: tasks/audit-content.md
+    agent: content-validator
+
+  # Pesquisa de Concorrentes
+  - name: research-competitors
+    file: tasks/research-competitors.md
+    agent: competitor-analyst
+
+  - name: transcribe-content
+    file: tasks/transcribe-content.md
+    agent: competitor-analyst
+
+  - name: analyze-competitor
+    file: tasks/analyze-competitor.md
+    agent: competitor-analyst
+
+workflows:
+  - name: wf-create-content
+    file: workflows/wf-create-content.yaml
+    description: Criacao de peca unica (briefing → validacao)
+
+  - name: wf-campaign
+    file: workflows/wf-campaign.yaml
+    description: Campanha multi-formato integrada
+
+  - name: wf-strategy
+    file: workflows/wf-strategy.yaml
+    description: Estrategia completa E1-E8
+
+  - name: wf-positioning
+    file: workflows/wf-positioning.yaml
+    description: Posicionamento completo (Bio + CLC + StoryAds + 21 dias)
+
+  - name: wf-21-days
+    file: workflows/wf-21-days.yaml
+    description: Sistema de dominacao 21 dias
+
+  - name: wf-hook-testing
+    file: workflows/wf-hook-testing.yaml
+    description: Teste de hooks 70-20-10
+
+  - name: wf-competitor-intel
+    file: workflows/wf-competitor-intel.yaml
+    description: Pipeline pesquisa de concorrentes BR + US
+
+  - name: wf-atomization
+    file: workflows/wf-atomization.yaml
+    description: Atomizacao de conteudo longo em pecas curtas
+
+  - name: wf-multiplicar
+    file: workflows/wf-multiplicar.yaml
+    description: "*multiplicar: 1 conteudo longo → 30+ micro-pecas com qualidade garantida (carrosseis, reels, cortes, stories, frases, briefs de email)"
+
+checklists:
+  - name: oraculo-posts
+    file: checklists/oraculo-posts.md
+
+  - name: oraculo-reels
+    file: checklists/oraculo-reels.md
+
+  - name: content-rules
+    file: checklists/content-rules.md
+
+  - name: hook-quality
+    file: checklists/hook-quality.md
+
+  - name: belief-elements
+    file: checklists/belief-elements.md
+
+  - name: strategy-execution
+    file: checklists/strategy-execution.md
+
+  - name: bio-quality
+    file: checklists/bio-quality.md
+
+  - name: storyadd-quality
+    file: checklists/storyadd-quality.md
+
+  - name: campaign-coherence
+    file: checklists/campaign-coherence.md
+
+  - name: competitor-analysis
+    file: checklists/competitor-analysis.md
+
+data:
+  # Nucleo e Identidade
+  - nucleo.md
+  - expression.md
+  - modos-operacionais.md
+  - regras-inviolaveis.md
+  - cliches-proibidos.md
+
+  # Posts e Carrosseis
+  - tipos-de-post.md
+  - frameworks-copy.md
+  - aberturas-poderosas.md
+  - hooks-bank.md
+  - cta-bank.md
+  - swipe-posts.md
+  - belief-checklist.md
+  - posts-intencionais.md
+
+  # Reels
+  - reels-framework.md
+  - reels-imperial.md
+  - reels-patterns.md
+  - reels-swipefile.md
+  - oraculo-posts.md
+  - oraculo-reels.md
+
+  # Stories e StoryAds
+  - stories-categorias.md
+  - storyadds.md
+
+  # Estrategia e Posicionamento
+  - estrategias.md
+  - posicionamento.md
+  - avatar-research.md
+
+  # Pesquisa de Concorrentes
+  - competitor-frameworks.md
+
+  # Planejamento e Estrategia Avancada
+  - planejamento-consciencia.md
+  - narrativas-card-by-card.md
+  - posts-bastidores.md
+  - templates-prompt-carrossel.md
+  - sistema-htb.md
+  - proporcao-conteudo.md
+  - instagram-algoritmo-2025.md
+  - calendario-framework.md
+  - frameworks-oferta.md
+
+sources:
+  imperador: AGENTE IMPERADOR (sistema completo de posts intencionais, hooks, CTAs, oraculo)
+  blaze: AGENTE BLAZE (sistema de Reels, 6 blocos, 7 padroes virais, 500+ hooks)
+  brandcontent: BRANDCONTENT (9 frameworks de copy para carrosseis, 5 tipos abertura)

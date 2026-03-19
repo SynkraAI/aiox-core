@@ -1,0 +1,313 @@
+# Plataformas de Afiliados — Mercado Brasileiro
+# Atualizado: 2026-02 | Fonte: pesquisa de mercado + dados públicos das plataformas
+# Uso: referência para agentes affiliate-br e affiliate-strategist
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  currency: BRL
+  notes: "Comissões variam por produto/produtor. Verifique sempre na plataforma."
+
+programs:
+
+  hotmart:
+    name: Hotmart
+    url: https://www.hotmart.com
+    type: marketplace
+    marketplace: true
+    commission_range:
+      min_pct: 20
+      max_pct: 80
+      typical_pct: 40
+      notes: "Produtos digitais (cursos, ebooks). Produtor define a comissão."
+    cookie_duration_days: 30
+    payout_method:
+      - transferencia_bancaria
+      - paypal
+      - wire_transfer
+    payout_minimum_brl: 100
+    payment_frequency: quinzenal
+    dashboard_quality: excellent
+    deep_link: true
+    sub_affiliate: false
+    payment_international: true
+    strengths:
+      - maior marketplace de infoprodutos do Brasil
+      - painel de afiliados robusto com relatórios detalhados
+      - suporte a cupons de desconto para afiliados
+      - HotLeads para captura antes da compra
+    weaknesses:
+      - taxa de 9,9% sobre vendas (descontado do produtor)
+      - disputa de afiliados acirrada nos produtos populares
+    top_categories:
+      - cursos_online
+      - marketing_digital
+      - saude_emagrecimento
+      - financas_pessoais
+      - idiomas
+
+  kiwify:
+    name: Kiwify
+    url: https://www.kiwify.com.br
+    type: marketplace
+    marketplace: true
+    commission_range:
+      min_pct: 20
+      max_pct: 80
+      typical_pct: 45
+      notes: "Crescendo rapidamente. Muitos produtores migram da Hotmart para taxas menores."
+    cookie_duration_days: 30
+    payout_method:
+      - pix
+      - transferencia_bancaria
+    payout_minimum_brl: 80
+    payment_frequency: quinzenal
+    dashboard_quality: good
+    deep_link: true
+    sub_affiliate: false
+    payment_international: false
+    strengths:
+      - taxa menor que Hotmart (4,99% + R$1 por venda)
+      - Pix instantâneo para recebimento
+      - interface moderna e intuitiva
+      - suporte mais rápido que concorrentes
+    weaknesses:
+      - catálogo menor que Hotmart
+      - sem suporte a pagamento internacional para afiliados
+    top_categories:
+      - cursos_online
+      - saude
+      - relacionamento
+      - financas
+
+  monetizze:
+    name: Monetizze
+    url: https://www.monetizze.com.br
+    type: marketplace
+    marketplace: true
+    commission_range:
+      min_pct: 20
+      max_pct: 70
+      typical_pct: 35
+      notes: "Forte em produtos físicos suplementos e infoprodutos."
+    cookie_duration_days: 30
+    payout_method:
+      - transferencia_bancaria
+      - pix
+    payout_minimum_brl: 100
+    payment_frequency: quinzenal
+    dashboard_quality: good
+    deep_link: true
+    sub_affiliate: true
+    sub_affiliate_commission_pct: 5
+    payment_international: false
+    strengths:
+      - forte em suplementos e produtos físicos
+      - sub-afiliados (2 níveis)
+      - checkout com upsell nativo
+    weaknesses:
+      - interface menos moderna
+      - volume menor que Hotmart
+    top_categories:
+      - suplementos
+      - saude_beleza
+      - cursos_online
+      - emagrecimento
+
+  eduzz:
+    name: Eduzz
+    url: https://www.eduzz.com
+    type: marketplace
+    marketplace: true
+    commission_range:
+      min_pct: 20
+      max_pct: 75
+      typical_pct: 38
+      notes: "Plataforma completa com ERP para produtores."
+    cookie_duration_days: 30
+    payout_method:
+      - transferencia_bancaria
+      - pix
+      - paypal
+    payout_minimum_brl: 100
+    payment_frequency: quinzenal
+    dashboard_quality: good
+    deep_link: true
+    sub_affiliate: false
+    payment_international: true
+    strengths:
+      - infraestrutura robusta para produtores
+      - integração com múltiplos gateways
+      - bom rastreamento de conversões
+    weaknesses:
+      - migração de produtores para Hotmart/Kiwify
+      - suporte lento
+    top_categories:
+      - cursos_online
+      - marketing
+      - financas
+      - saude
+
+  braip:
+    name: Braip
+    url: https://www.braip.com.br
+    type: marketplace
+    marketplace: true
+    commission_range:
+      min_pct: 20
+      max_pct: 70
+      typical_pct: 35
+      notes: "Forte em nicho de beleza e suplementos. Checkout otimizado."
+    cookie_duration_days: 30
+    payout_method:
+      - pix
+      - transferencia_bancaria
+    payout_minimum_brl: 80
+    payment_frequency: quinzenal
+    dashboard_quality: good
+    deep_link: true
+    sub_affiliate: false
+    payment_international: false
+    strengths:
+      - checkout de alta conversão
+      - forte em beleza e suplementos físicos
+      - relatórios em tempo real
+    weaknesses:
+      - menor catálogo
+      - sem pagamento internacional
+    top_categories:
+      - beleza
+      - suplementos
+      - emagrecimento
+      - saude
+
+  ticto:
+    name: Ticto
+    url: https://www.ticto.com.br
+    type: marketplace
+    marketplace: true
+    commission_range:
+      min_pct: 20
+      max_pct: 70
+      typical_pct: 40
+      notes: "Crescendo no nicho de eventos e mentorias presenciais."
+    cookie_duration_days: 14
+    payout_method:
+      - pix
+      - transferencia_bancaria
+    payout_minimum_brl: 50
+    payment_frequency: semanal
+    dashboard_quality: medium
+    deep_link: true
+    sub_affiliate: false
+    payment_international: false
+    strengths:
+      - pagamento semanal (diferencial)
+      - mínimo baixo (R$50)
+      - forte em eventos e mentorias
+    weaknesses:
+      - cookie curto (14 dias)
+      - catálogo menor
+      - marca menos conhecida
+    top_categories:
+      - eventos
+      - mentorias
+      - cursos_online
+      - coaching
+
+  doppus:
+    name: Doppus
+    url: https://www.doppus.com
+    type: marketplace
+    marketplace: true
+    commission_range:
+      min_pct: 20
+      max_pct: 70
+      typical_pct: 38
+      notes: "Plataforma com foco em assinaturas e membership."
+    cookie_duration_days: 30
+    payout_method:
+      - pix
+      - transferencia_bancaria
+    payout_minimum_brl: 100
+    payment_frequency: quinzenal
+    dashboard_quality: medium
+    deep_link: true
+    sub_affiliate: false
+    payment_international: false
+    strengths:
+      - forte em modelos de assinatura/recorrência
+      - checkout personalizável
+    weaknesses:
+      - menos conhecido que concorrentes
+      - catálogo menor
+    top_categories:
+      - memberships
+      - assinaturas
+      - cursos_online
+
+  perfectpay:
+    name: PerfectPay
+    url: https://www.perfectpay.com.br
+    type: marketplace
+    marketplace: true
+    commission_range:
+      min_pct: 20
+      max_pct: 70
+      typical_pct: 40
+      notes: "Checkout de alta performance. Forte em lançamentos."
+    cookie_duration_days: 30
+    payout_method:
+      - pix
+      - transferencia_bancaria
+    payout_minimum_brl: 100
+    payment_frequency: quinzenal
+    dashboard_quality: good
+    deep_link: true
+    sub_affiliate: false
+    payment_international: false
+    strengths:
+      - checkout com alta taxa de aprovação de cartão
+      - forte em lançamentos de infoprodutos
+      - ordem de bump e upsell nativos
+    weaknesses:
+      - menos afiliados disponíveis
+      - interface do afiliado menos intuitiva
+    top_categories:
+      - cursos_online
+      - marketing_digital
+      - financas
+
+  cakto:
+    name: Cakto
+    url: https://www.cakto.com.br
+    type: marketplace
+    marketplace: true
+    commission_range:
+      min_pct: 20
+      max_pct: 75
+      typical_pct: 42
+      notes: "Nova plataforma com foco em SaaS e assinaturas recorrentes."
+    cookie_duration_days: 60
+    payout_method:
+      - pix
+      - transferencia_bancaria
+    payout_minimum_brl: 50
+    payment_frequency: quinzenal
+    dashboard_quality: good
+    deep_link: true
+    sub_affiliate: false
+    payment_international: false
+    strengths:
+      - cookie mais longo (60 dias)
+      - foco em recorrência (comissão mensal)
+      - interface moderna
+      - mínimo baixo de saque
+    weaknesses:
+      - plataforma nova (menos produtos)
+      - marca em construção
+    top_categories:
+      - saas
+      - memberships
+      - cursos_online
+      - ferramentas_digitais

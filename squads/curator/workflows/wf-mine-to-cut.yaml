@@ -1,0 +1,642 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Mine to Cut (Complete Pipeline)
+# Version: 1.0.0
+# Purpose: Transform raw content into editor-ready cut script
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflow-id: wf-mine-to-cut
+name: Mine to Cut (Complete Pipeline)
+version: 1.3.0
+estimated-time: 35-65 minutes
+complexity: medium
+
+description: |
+  Complete pipeline from raw transcript/URL to final roteiro_corte.yaml.
+  Coordinates all curator squad tiers to produce editor-ready output.
+  Includes cut configuration phase with Duration Intelligence, style presets,
+  and multi-variant support.
+
+  Pipeline:
+  [Input] → Tier 0 (Mine) → Configuration → Tier 1 (Narrative) → Tier 2 (Format) → [Output]
+              ↓ parallel                                              ↑ multi-variant
+           Tier 0.5 (Curadoria)                                    if num_variants > 1
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# INPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+inputs:
+  required:
+    - content: "URL or transcript text"
+    - target_format: "shorts | longform | longform_simple | documentary"
+  optional:
+    - target_duration: "Target duration in minutes/seconds"
+    - style: "Narrative style preference (blind-assembly | rule-of-six | 5-second)"
+    - enrich: "true | false - Add external data curation (default: false)"
+    - platform: "tiktok | reels | youtube_shorts | youtube_main"
+    - target_platform: "Target distribution platform (affects duration sweet spots)"
+    - style_preset: "viral | educational | emotional | entertaining (default: from content type)"
+    - num_variants: "Number of cut variants to generate (1-5, default: 1)"
+    - duration_mode: "content-driven (default) — duration derived from content, not fixed buckets"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 0: ACQUISITION
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 0
+    name: Acquisition
+    duration: 2-5 min
+    agent: "/youtube (external)"
+    skip_if: "transcript provided directly"
+
+    steps:
+      - step: 1
+        action: "Check if URL or transcript"
+        decision:
+          url: "Route to /youtube"
+          transcript: "Skip to Phase 1"
+
+      - step: 2
+        action: "Fetch transcript via /youtube"
+        command: "/youtube *download {url}"
+
+    checkpoint:
+      gate: "QG-001"
+      criteria:
+        - "Transcript exists and readable"
+        - "Duration known"
+        - "Speaker attribution if multiple"
+      blocking: true
+
+    error_handling:
+      - condition: "/youtube agent not available"
+        action: "Prompt user to paste transcript manually"
+        message: "YouTube agent unavailable. Paste transcript directly with *mine [text]"
+      - condition: "Video private/deleted/unavailable"
+        action: "Inform user and request alternative"
+        message: "Video not accessible. Options: 1) Check URL 2) Paste transcript manually 3) Try different URL"
+      - condition: "Script dependency missing"
+        action: "Install and retry"
+        command: "pip install -r scripts/youtube-transcripts/requirements.txt"
+
+    output:
+      file: "transcript.txt"
+      pass_to: "Phase 1"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 1: MINING
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 1
+    name: Mining
+    duration: 10-15 min
+    agent: "content-miner-pro"
+
+    steps:
+      - step: 1
+        action: "Execute Paper Edit methodology"
+        phases:
+          - "Transcribe & Timestamp"
+          - "Color Code (Tag)"
+          - "Arrange (Select)"
+          - "Radio Cut (Audio Test)"
+
+      - step: 2
+        action: "Generate {source-slug}/momentos.md"
+        includes:
+          - "All moments with exact timestamps"
+          - "Type classification (hook, insight, story, etc)"
+          - "Impact scores"
+          - "Context sentences"
+
+    checkpoint:
+      gate: "QG-002"
+      criteria:
+        - "{source-slug}/momentos.md exists"
+        - "{source-slug}/transcricao_anotada.md exists"
+        - "All moments have exact timestamps (start AND end)"
+        - "All moments are tagged by type"
+        - "Impact scores assigned"
+      blocking: true
+      post_action:
+        - action: "Run timestamp validation (BLOCKING)"
+          code: |
+            python squads/curator/scripts/validate_timestamps.py output/curated/{source-slug}/momentos.md --transcript _temp/mining/{source-slug}/transcript_raw.txt --tolerance 2
+          on_fail: "Exit code 1 = WRONG timestamps. Fix before proceeding."
+          blocking: true
+
+    output:
+      files:
+        - "{source-slug}/momentos.md"
+        - "{source-slug}/transcricao_anotada.md"
+      pass_to: "Phase 2"
+
+    parallel_trigger:
+      if: "enrich == true"
+      start: "Phase 1.5 (Curation)"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 1.5: CURATION (PARALLEL)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 1.5
+    name: Data Curation
+    duration: 5-10 min
+    agent: "data-curator"
+    parallel_to: "Phase 2"
+    skip_if: "enrich == false"
+
+    steps:
+      - step: 1
+        action: "Extract key topics from momentos.md"
+
+      - step: 2
+        action: "Research news, trends, statistics"
+        frameworks:
+          - "I Am the Algorithm (Dave Pell)"
+          - "Haystack Method (Bhargava)"
+
+      - step: 3
+        action: "Generate curadoria.yaml"
+
+    output:
+      file: "curadoria.yaml"
+      merge_with: "Phase 2 output"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 1.8: CUT CONFIGURATION
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 1.8
+    name: Cut Configuration
+    duration: 3-5 min
+    agent: "curator-chief"
+    depends_on: "Phase 1 (banco_momentos ready)"
+
+    description: |
+      Configure cut parameters BEFORE narrative assembly.
+      Uses Duration Intelligence (content-driven, not fixed buckets),
+      style presets, and multi-variant settings.
+      User MUST confirm configuration before cut generation proceeds.
+      Reference: .dispatch/research/curator-cut-customization-research.md
+
+    parameters:
+      target_platform: "Platform for distribution (affects duration sweet spots)"
+      style_preset: "viral | educational | emotional | entertaining"
+      num_variants: "1-5 (default: 1)"
+      duration_mode: "content-driven (default) — content determines duration, platform caps as ceiling"
+
+    steps:
+      - step: 1
+        action: "Analyze banco_momentos for content density and hook inventory"
+        output:
+          - "Total viable moments count"
+          - "Top hooks ranked by MQR score"
+          - "Content density assessment (high/medium/low)"
+
+      - step: 2
+        action: "Apply Duration Intelligence"
+        duration_intelligence:
+          shorts:
+            hook: "1-7s (pattern interrupt: 1-3s, question: 3-5s, story: 3-7s)"
+            core_value: "10-40s (single insight: 10-20s, multi-point: 20-40s)"
+            payoff: "2-7s (punchline: 2-5s, emotional beat: 3-7s)"
+            cta_loop: "2-3s (CTA) or 1-2s (loop setup)"
+            total: "sum of above, capped by platform limit"
+          longform:
+            intro: "10-30s (cold open from best moment)"
+            transitions: "2-5s per transition point"
+            outro: "15-30s (CTA + wrap)"
+            total: "intro + sum(chapter_durations) + sum(transitions) + outro"
+        platform_sweet_spots:
+          tiktok: {viral: "24-38s", value: "60-90s", max: "10m"}
+          reels: {viral: "7-15s", value: "30-45s", max: "90s"}
+          youtube_shorts: {optimal: "50-58s", max: "60s"}
+          linkedin: {optimal: "60-90s", max: "10m"}
+          twitter_x: {optimal: "20-45s", max: "140s"}
+        output: "Recommended duration with breakdown and platform confidence"
+
+      - step: 3
+        action: "Apply style preset"
+        style_presets:
+          viral:
+            pacing: "fast"
+            cut_frequency: "every 2-4s"
+            overlay_density: "high"
+            energy: "high throughout"
+            hook_strategy: "pattern-interrupt or bold-claim"
+          educational:
+            pacing: "moderate"
+            cut_frequency: "every 5-8s"
+            overlay_density: "medium"
+            energy: "rising with plateaus"
+            hook_strategy: "question or counter-intuitive"
+          emotional:
+            pacing: "slow-build"
+            cut_frequency: "every 8-15s"
+            overlay_density: "low"
+            energy: "wave pattern (build → release)"
+            hook_strategy: "personal-story or vulnerability"
+          entertaining:
+            pacing: "variable"
+            cut_frequency: "every 3-6s"
+            overlay_density: "high"
+            energy: "re-engagement every 3min"
+            hook_strategy: "surprise or spectacle"
+
+      - step: 4
+        action: "Configure multi-variant settings (if num_variants > 1)"
+        multi_variant:
+          rule: "num_variants > 1 → generate N DIFFERENT assemblies, NOT N copies"
+          diversity_requirements:
+            - "Each variant MUST use a different hook"
+            - "Each variant SHOULD use different supporting moments where possible"
+            - "Each variant MAY use different pacing/style for contrast"
+          variant_cap: 5
+          constraint: "If fewer unique hooks than requested variants, cap at available hooks"
+          output_per_variant: "roteiro_corte_v{N}.yaml with hook, moments, duration, style, rationale"
+          comparison_summary: "Table comparing all variants across dimensions"
+
+      - step: 5
+        action: "Present configuration summary for user confirmation"
+        presents:
+          - "Duration recommendation with content-driven breakdown"
+          - "Platform sweet spot alignment and confidence level"
+          - "Style preset and pacing parameters"
+          - "Number of variants and hook assignments (if multi-variant)"
+          - "Estimated total output"
+        blocking_rule: "User must confirm configuration before Phase 2 begins"
+
+    checkpoint:
+      gate: "QG-CFG"
+      criteria:
+        - "Duration Intelligence breakdown calculated from content (not fixed buckets)"
+        - "Platform sweet spot alignment assessed with confidence level"
+        - "Style preset selected with measurable pacing parameters"
+        - "Multi-variant config valid (if num_variants > 1: sufficient unique hooks)"
+        - "User confirmed configuration"
+      blocking: true
+
+    output:
+      file: "cut_configuration.yaml"
+      pass_to: "Phase 2"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 2: NARRATIVE
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 2
+    name: Narrative Structure
+    duration: 10-15 min
+    agent: "Tier 1 agent (selected based on style)"
+    skip_if: "target_format == 'longform_simple' — chronological order replaces narrative restructuring. Route directly to Phase 3 with transcricao_anotada as backbone."
+
+    agent_selection:
+      - condition: "style == 'blind-assembly' OR target_format == 'documentary'"
+        agent: "ken-burns"
+        rationale: "Blind Assembly method for documentary feel"
+
+      - condition: "style == 'rule-of-six' OR complex multi-thread"
+        agent: "walter-murch"
+        rationale: "Rule of Six for sophisticated editing"
+
+      - condition: "style == '5-second' OR transformation story"
+        agent: "matthew-dicks"
+        rationale: "5-Second Moment for clear transformation arc"
+
+      - condition: "default"
+        agent: "ken-burns"
+        rationale: "Default to documentary approach"
+
+    steps:
+      - step: 1
+        action: "Build narrative structure from moments"
+        input:
+          - "{source-slug}/momentos.md (required)"
+          - "{source-slug}/transcricao_anotada.md (for bridge material and inter-moment context)"
+
+      - step: 2
+        action: "Determine assembly order"
+        note: "May differ from chronological. Use transcricao_anotada BRIDGE segments for transition text."
+
+      - step: 3
+        action: "Identify transitions needed"
+        note: "Source bridge text from transcricao_anotada BRIDGE segments where available. Do NOT invent."
+
+      - step: 4
+        action: "Generate narrative_structure.yaml"
+
+    checkpoint:
+      gate: "QG-003"
+      criteria:
+        - "Narrative structure makes sense"
+        - "Assembly order defined"
+        - "No narrative gaps"
+        - "Transitions identified"
+      blocking: true
+
+    output:
+      file: "narrative_structure.yaml"
+      pass_to: "Phase 3"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 3: FORMAT OPTIMIZATION
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 3
+    name: Format Optimization
+    duration: 5-10 min
+    agent: "Tier 2 agent (selected based on format)"
+
+    agent_selection:
+      - condition: "target_format == 'shorts'"
+        agent: "mrbeast"
+        then_also: "brendan-kane for hook optimization"
+
+      - condition: "target_format == 'longform'"
+        agent: "mrbeast"
+        then_also: "jonah-berger for shareability"
+
+      - condition: "need viral optimization"
+        agent: "brendan-kane"
+        rationale: "Hook Point methodology"
+
+      - condition: "need shareability analysis"
+        agent: "jonah-berger"
+        rationale: "STEPPS framework"
+
+    steps:
+      - step: 1
+        action: "Load cut_configuration.yaml and apply parameters"
+        input:
+          - "narrative_structure.yaml (required)"
+          - "cut_configuration.yaml (duration, style, variant settings)"
+          - "{source-slug}/transcricao_anotada.md (for cut points, bridge material)"
+
+      - step: 2
+        action: "Apply format-specific optimization with style preset pacing"
+
+      - step: 3
+        action: "Optimize hooks and retention per style preset parameters"
+
+      - step: 4
+        action: "Merge curadoria if available"
+
+      - step: 5
+        action: "Generate roteiro_corte.yaml (or multi-variant outputs)"
+        note: "Include corte_natural_in/out and bridge fields per moment from transcricao_anotada"
+        multi_variant_behavior:
+          if_num_variants_1: "Generate single roteiro_corte.yaml"
+          if_num_variants_gt_1: |
+            Generate N different assemblies:
+            - roteiro_corte_v1.yaml (primary: best hook + top moments)
+            - roteiro_corte_v2.yaml (alternative hook + different/overlapping moments)
+            - roteiro_corte_v{N}.yaml (maximize diversity across hooks, moments, pacing)
+            Each variant includes: hook used, moments selected, duration, style, rationale
+            Generate comparison_summary table across all variants
+
+    output:
+      single_variant: "roteiro_corte.yaml"
+      multi_variant:
+        - "roteiro_corte_v{1..N}.yaml"
+        - "variant_comparison_summary.md"
+      pass_to: "Phase 4"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 4: FINAL OUTPUT
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 4
+    name: Final Output
+    duration: 2-5 min
+    agent: "curator-chief"
+
+    steps:
+      - step: 1
+        action: "Validate roteiro_corte.yaml"
+        checks:
+          - "All timestamps exact"
+          - "Assembly order clear"
+          - "Editor instructions complete"
+
+      - step: 2
+        action: "Generate editor instructions"
+
+      - step: 3
+        action: "Create summary report"
+
+    checkpoint:
+      gate: "QG-004"
+      criteria:
+        - "roteiro_corte.yaml complete"
+        - "All timestamps exact"
+        - "Instructions clear for editor"
+        - "Narrative coherence verified"
+      blocking: true
+
+    output:
+      files:
+        - "roteiro_corte.yaml"
+        - "editor_instructions.md"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 5: RENDER
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 5
+    name: Render
+    duration: 5-30 min
+    agent: "ffmpeg-cutter"
+    depends_on: "Phase 4 (QG-004 validated cut YAML)"
+
+    steps:
+      - step: 1
+        action: "Load QG-004 validated roteiro_corte.yaml and source video path"
+        veto:
+          - condition: "roteiro_corte.yaml missing QG-004 validation"
+            action: "BLOCK — return to Phase 4"
+            message: "YAML must pass QG-004 before render. Run Phase 4 first."
+          - condition: "Source video file not found at provided path"
+            action: "BLOCK — request valid video path from user"
+            message: "Source video not found. Provide valid path to continue."
+
+      - step: 2
+        action: "Execute ffmpeg cuts per roteiro_corte.yaml timestamps"
+        details:
+          - "Cut each momento using corte_natural_in/out timestamps"
+          - "Preserve original audio/video quality (no re-encode unless required)"
+          - "Apply assembly order from roteiro_corte.yaml"
+
+      - step: 3
+        action: "Generate render_report.md"
+        includes:
+          - "List of rendered segments with output paths"
+          - "Duration of each segment vs expected"
+          - "Any warnings or trim adjustments made"
+          - "Total render time"
+
+    checkpoint:
+      gate: "QG-RENDER"
+      checklist: "squads/curator/checklists/render-quality.md"
+      criteria:
+        - "All segments rendered without ffmpeg errors"
+        - "Output segment durations match roteiro_corte.yaml within tolerance (±2s)"
+        - "render_report.md generated and complete"
+        - "No source segments missing or skipped"
+      blocking: true
+
+    output:
+      files:
+        - "rendered video segments (one file per momento)"
+        - "render_report.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT TEMPLATE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+output_template: |
+  # ROTEIRO DE CORTE
+  # Source: {source}
+  # Format: {target_format}
+  # Generated: {date}
+  # Workflow: wf-mine-to-cut v1.0
+
+  metadata:
+    source: "{source}"
+    original_duration: "{duration}"
+    target_duration: "{target}"
+    format: "{format}"
+    platform: "{platform}"
+
+  momentos:
+    - id: 1
+      timestamp_inicio: "00:12:34"
+      timestamp_fim: "00:13:45"
+      duracao_segundos: 71
+      transcricao: |
+        Texto EXATO do momento...
+      tipo: "hook"
+      ordem_montagem: 1
+      transicao_antes: null
+      transicao_depois: "natural"
+      notas_editor: "Forte hook de abertura"
+
+    - id: 2
+      timestamp_inicio: "00:05:12"
+      timestamp_fim: "00:06:30"
+      # ... continues
+
+  curadoria:  # if enrich == true
+    - id: 1
+      tipo: "noticia"
+      conteudo: "..."
+      fonte: "..."
+      encaixe_sugerido: "após momento #3"
+
+  instrucoes_editor:
+    gerais:
+      - "Cortar silêncios > 2 segundos"
+      - "Manter energia alta no início"
+    especificas:
+      - momento: 1
+        instrucao: "Este é o hook, não adicionar intro antes"
+      - momento: 3
+        instrucao: "Momento de transição, pode adicionar música sutil"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES SUMMARY
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  - gate: QG-001
+    phase: 0
+    name: "Transcript Acquired"
+    blocking: true
+
+  - gate: QG-002
+    phase: 1
+    name: "Mining Complete"
+    blocking: true
+
+  - gate: QG-CFG
+    phase: 1.8
+    name: "Cut Configuration Confirmed"
+    blocking: true
+    criteria: "Duration Intelligence + style preset + multi-variant config confirmed by user"
+
+  - gate: QG-003
+    phase: 2
+    name: "Narrative Validated"
+    blocking: true
+
+  - gate: QG-004
+    phase: 4
+    name: "Output Ready"
+    blocking: true
+
+  - gate: QG-RENDER
+    phase: 5
+    name: "Render Complete"
+    blocking: true
+    checklist: "squads/curator/checklists/render-quality.md"
+    criteria: "All segments rendered, durations within ±2s tolerance, render_report.md complete"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXECUTION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+execution:
+  command: "*full-pipeline {url|transcript} {format}"
+  example: "*full-pipeline https://youtube.com/watch?v=xxx shorts"
+
+  shortcuts:
+    shorts: "*full-pipeline {input} shorts --platform tiktok"
+    longform: "*full-pipeline {input} longform --platform youtube_main"
+    documentary: "*full-pipeline {input} longform --style blind-assembly"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DEPENDENCIES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+dependencies:
+  tasks:
+    - "mine-transcript.md"
+    - "build-narrative.md"
+    - "format-cut.md"
+    - "curate-data.md"
+    - "execute-cut.md"
+    - "generate-editor-guide.md"
+  agents:
+    - "content-miner-pro"
+    - "data-curator"
+    - "ken-burns | walter-murch | matthew-dicks | robert-mckee"
+    - "brendan-kane | jonah-berger | mrbeast"
+    - "curator-chief"
+    - "ffmpeg-cutter"
+  templates:
+    - "templates/banco-momentos-tmpl.md"
+    - "templates/transcricao-anotada-tmpl.md"
+    - "templates/curadoria-tmpl.yaml"
+    - "templates/shorts-cut-tmpl.yaml"
+    - "templates/longform-cut-tmpl.yaml"
+  checklists:
+    - "checklists/mining-quality.md"
+    - "checklists/narrative-quality.md"
+    - "checklists/output-quality.md"
+    - "checklists/curation-quality.md"
+    - "checklists/render-quality.md"
+
+version_history:
+  - version: 1.0.0
+    date: 2026-02-04
+    changes: "Initial workflow creation"
+  - version: 1.0.1
+    date: 2026-02-05
+    changes: "Added dependencies section for consistency with other workflows"
+  - version: 1.1.0
+    date: 2026-02-06
+    changes: "v2.6.0: Phase 1 outputs both momentos + transcricao_anotada. Phases 2-3 input transcricao_anotada for bridge material and cut points. QG-002 updated."
+  - version: 1.2.0
+    date: 2026-02-06
+    changes: "Story #2 Phase 6: Added Phase 1.8 (Cut Configuration) with Duration Intelligence, style presets, multi-variant support, platform sweet spots, and QG-CFG gate. Phase 3 updated for multi-variant output."
+  - version: 1.3.0
+    date: 2026-02-18
+    changes: "Added Phase 5 (Render) with ffmpeg-cutter agent, QG-RENDER gate (checklist: render-quality.md), veto conditions for missing QG-004 validation and missing video file, and render_report.md output."

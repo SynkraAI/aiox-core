@@ -1,0 +1,179 @@
+---
+# VOICE DNA — Instagram Patterns
+# Padrões de Voz Extraídos de 50 Posts Instagram
+# José Carlos Amorim (@josecarlosamorim.ai)
+# Gerado: 2026-02-01
+# Uso: @marketing-production e @marketing-distribution consultam
+# para garantir autenticidade na escrita
+
+# ============================================
+# HOOK PATTERNS (como José abre posts)
+# ============================================
+hook_patterns:
+  # TIPO 1: Frase-bomba (afirmação forte, curta)
+  frase_bomba:
+    exemplos:
+      - "Meu cargo não existe em nenhuma empresa do mundo."
+      - "Clareza > All"
+      - "Mesmo pagando, eu aprendi a limpar piscina."
+      - "Sorte é jogar na loteria."
+      - "Alta performance nem sempre é barulho."
+    engajamento_medio: "medio (20-44 likes)"
+    quando_usar: "Carousels, posts reflexivos"
+
+  # TIPO 2: Provocação/Pergunta
+  provocacao:
+    exemplos:
+      - "E você, acha que o seu emprego vai morrer?"
+      - "Você passou por isso também?"
+      - "Já pensou nisso?"
+      - "IA é semelhante ao MetaVerso em hype?"
+      - "Quem você acha que ganhou essa batalha?"
+    engajamento_medio: "medio-alto (30-60 likes)"
+    quando_usar: "Reels, posts de debate"
+
+  # TIPO 3: Pop Culture Bridge
+  pop_culture:
+    exemplos:
+      - "Antes da IA generativa existir, o Batman já estava explicando tudo."
+      - "Usando rage bait pra mostrar um vídeo de rage bait..."
+    engajamento_medio: "VIRAL (123-10989 likes)"
+    quando_usar: "Reels, vídeos curtos — é a MELHOR formula"
+
+  # TIPO 4: Confessional direto
+  confessional:
+    exemplos:
+      - "Opinião com base em nada, me dando o direito de falar o que sinto..."
+      - "A Apple avisou, eu que fui teimoso."
+      - "Esse é o ciclo que muitas pessoas iguais a mim passam."
+    engajamento_medio: "medio-alto (32-66 likes)"
+    quando_usar: "Posts pessoais, vulnerabilidade"
+
+  # TIPO 5: Autoridade suave
+  autoridade:
+    exemplos:
+      - "Empresário que ainda decide no achismo já está ficando para trás."
+      - "Pra construir sistemas maiores, não começa em ferramenta."
+      - "Se você acha que o mercado de IA saturou..."
+    engajamento_medio: "alto (27-161 likes)"
+    quando_usar: "Posts educativos, posicionamento"
+
+  # TIPO 6: Celebração/Marco
+  celebracao:
+    exemplos:
+      - "Comemorando 8 anos de casados, 13 anos juntos."
+      - "Nada melhor do que honrar quem acreditou em você."
+      - "Esse é o novo marco na minha vida."
+    engajamento_medio: "muito alto (127-178 likes)"
+    quando_usar: "Datas especiais, marcos, gratidão"
+
+# ============================================
+# WRITING STYLE — INSTAGRAM ESPECÍFICO
+# ============================================
+instagram_voice:
+  tom_dominante: "casual-confessional"
+  pessoa: "1a pessoa (eu/meu) + 2a pessoa (você/tu)"
+
+  marcadores_jose:
+    casual:
+      - "tô" # "eu tô olhando"
+      - "tá" # "que tá sendo criado"
+      - "pra" # "pra construir"
+      - "kkk" # humor leve
+      - "hein" # "Clima ficou tenso aqui hein"
+    entusiasmo:
+      - "CINCO MINUTOS" # capitalização de ênfase
+      - "!" # uso moderado
+      - "..." # reticências de suspense
+    emojis:
+      frequencia: "baixa (1-2 por post, às vezes nenhum)"
+      preferidos: ["...", "!", "?"] # pontuação como emoção
+      nota: "José quase NÃO usa emojis. Quando usa, é estratégico."
+
+  estrutura_posts_curtos:
+    padrao: |
+      [Hook de 1 linha]
+      [Espaço]
+      [Contexto em 2-3 linhas]
+      [Espaço]
+      [Ponto forte / revelação]
+    exemplo: |
+      A Apple avisou, eu que fui teimoso.
+
+  estrutura_posts_longos:
+    padrao: |
+      [Hook — frase forte]
+      [Espaço]
+      [Build-up — contexto pessoal]
+      [Espaço]
+      [Virada — insight]
+      [Espaço]
+      [Expansão — conexão maior]
+      [Espaço]
+      [CTA natural]
+    exemplo: |
+      Meu cargo não existe em nenhuma empresa do mundo.
+      [...]
+      Você é um Nexialista.
+      [...]
+      Eu falo mais sobre isso na minha newsletter, comenta aqui...
+
+  formatacao:
+    quebras_linha: "frequentes (respiro visual)"
+    paragrafos: "curtos (1-3 frases)"
+    listas_numeradas: "usa quando processo/passo-a-passo (AIOS post)"
+    negrito: "não usa no IG (limitação plataforma)"
+    hashtags: "no final, 10-15, separadas do texto"
+
+# ============================================
+# TEMAS QUE GERAM ENGAJAMENTO
+# ============================================
+engagement_map:
+  tier_1_viral:
+    temas:
+      - "Pop culture + IA"
+      - "Eventos/marcos pessoais"
+      - "Vida pessoal/família"
+    faixa_likes: "100-10000+"
+    formato_ideal: "Video/Reel"
+
+  tier_2_forte:
+    temas:
+      - "TDAH/neurodivergência"
+      - "Autoridade (Sebrae, Martha Gabriel)"
+      - "Provocação de mercado"
+      - "Humor (futebol, rage bait)"
+    faixa_likes: "40-130"
+    formato_ideal: "Video ou Carousel"
+
+  tier_3_solido:
+    temas:
+      - "AIOS/sistemas"
+      - "Frases de impacto"
+      - "Reflexões pessoais"
+    faixa_likes: "20-45"
+    formato_ideal: "Carousel ou Imagem"
+
+  tier_4_fraco:
+    temas:
+      - "Hooks genéricos sem contexto"
+      - "Carousels sem hook forte"
+    faixa_likes: "15-20"
+    evitar_ou: "Fortalecer hook"
+
+# ============================================
+# ANTI-PATTERNS (o que NÃO soa como José no IG)
+# ============================================
+anti_patterns:
+  - "Hooks genéricos: 'Você já sentiu isso?' (sem contexto = fraco)"
+  - "Posts puramente educativos sem story pessoal"
+  - "Tom corporativo/formal"
+  - "Excesso de emojis"
+  - "Hashtags no meio do texto"
+  - "CTA forçado sem contexto"
+  - "Posts sem opinião (neutros)"
+
+# ============================================
+# DNA SUMMARY (5 palavras)
+# ============================================
+dna_instagram: "confessional | provocativo | visual | nexialista | autêntico"

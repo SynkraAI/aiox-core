@@ -1,0 +1,94 @@
+name: mind-content-updater
+version: 1.0.0
+description: |
+  Mind Content Updater - Automated Source Discovery, Collection & Analysis.
+  Discovers, collects, and analyzes source materials for MMOS mind cloning
+  using MCP tools (Exa, WebSearch, WebFetch) and local tools (aios-transcriber, youtube-captions).
+author: luizfosc
+license: MIT
+slashPrefix: mcu
+documentation: README.md
+
+aios:
+  minVersion: "2.1.0"
+  type: squad
+
+components:
+  agents:
+    - mind-content-updater.md
+  tasks:
+    - discover-sources.md
+    - collect-content.md
+    - analyze-sources.md
+    - harvest-full-pipeline.md
+    - generate-inventory.md
+  templates:
+    - sources-master-template.yaml
+    - discovery-report-template.yaml
+    - source-frontmatter-template.yaml
+  workflows:
+    - wf-harvest.yaml
+  checklists:
+    - source-collection-checklist.md
+  config:
+    - content-types.yaml
+    - search-queries.yaml
+
+dependencies:
+  node: []
+  python: []
+  tools:
+    - aios-transcriber  # ~/aios-core/tools/aios-transcriber/
+    - youtube-captions  # ~/aios-core/tools/youtube-captions/
+  squads:
+    - mmos-squad  # Output target for collected sources
+
+integrations:
+  mmos-squad:
+    module: "squads/mmos-squad"
+    usage: "Output target - saves sources to minds/{mind}/sources/"
+  aios-transcriber:
+    module: "tools/aios-transcriber"
+    usage: "YouTube video transcription pipeline"
+  youtube-captions:
+    module: "tools/youtube-captions"
+    usage: "YouTube video search and discovery"
+
+mcp_tools:
+  discovery:
+    exa:
+      tool: mcp__exa__web_search_exa
+      usage: "Semantic web search for mind content"
+    web_search:
+      tool: WebSearch
+      usage: "General web search for specific URLs"
+  collection:
+    web_fetch:
+      tool: WebFetch
+      usage: "Extract markdown content from URLs"
+    aios_transcriber:
+      tool: "tools/aios-transcriber"
+      usage: "Download and transcribe YouTube videos"
+      command: "python3 tools/aios-transcriber/aios_transcriber.py youtube {url} -o {output_dir}"
+    youtube_captions:
+      tool: "tools/youtube-captions"
+      usage: "Search and discover YouTube videos"
+      command: "python3 tools/youtube-captions/youtube_captions.py --search {query} --max 100 -o {output_dir}"
+
+output:
+  base_path: "squads/mmos-squad/minds/{mind}/sources/"
+  structure:
+    blogs: "{slug}.md"
+    youtube: "{slug}/"
+    articles: "{slug}.md"
+    interviews: "{slug}.md"
+    social: "{slug}.md"
+    manual: "README.md"
+  inventory: "sources_master.yaml"
+
+tags:
+  - source-discovery
+  - web-scraping
+  - content-collection
+  - mind-cloning
+  - mmos-integration

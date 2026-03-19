@@ -1,0 +1,240 @@
+# Growth Experiment Log — Histórico de Experimentos
+# Atualizado: 2026-02
+# Uso: agente growth-optimizer registra todos os experimentos de crescimento aqui
+# ICE Score: Impact × Confidence × Ease (1-10 cada, multiplicado)
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  instructions: >
+    Adicione novos experimentos ao array `experiments` abaixo.
+    Nunca edite entradas com status `completed` ou `cancelled`.
+    IDs são sequenciais: GX-001, GX-002, etc.
+    Revise semanalmente para atualizar resultados e learnings.
+  ice_score_guide:
+    impact: "1-10: qual o potencial de impacto nos KPIs principais?"
+    confidence: "1-10: quão confiante estamos de que vai funcionar?"
+    ease: "1-10: quão fácil/barato é implementar? (10 = muito fácil)"
+    calculation: "ice_score = impact × confidence × ease (max: 1000)"
+    prioritization: "Execute experimentos com ICE > 200 primeiro"
+
+experiments:
+
+  - id: GX-001
+    date: "2025-04-10"
+    site: vpn-compare.com
+    hypothesis: >
+      Adicionar uma caixa de "Editor's Choice" destacada (com badge visual e
+      background colorido) para o produto #1 da lista aumentará a taxa de clique
+      neste produto em 30%+ sem reduzir cliques totais.
+    type: feature
+    category: ux_conversion
+    metric:
+      primary: "CTR no produto #1 da lista"
+      secondary:
+        - "CTR total na página"
+        - "Revenue per session"
+    baseline:
+      ctr_product_1_pct: 18.5
+      revenue_per_session_usd: 0.82
+      source: "GA4 últimos 90 dias"
+    target:
+      ctr_product_1_pct: 25.0
+      revenue_per_session_usd: 1.00
+    implementation:
+      effort_days: 2
+      cost_usd: 0
+      tool: "CSS + HTML (edição de template)"
+      notes: "Adicionar div.editors-choice com badge SVG e borda dourada"
+    ice_score:
+      impact: 8
+      confidence: 7
+      ease: 9
+      total: 504
+    status: completed
+    start_date: "2025-04-12"
+    end_date: "2025-05-15"
+    result:
+      ctr_product_1_change_pct: +38.2
+      revenue_per_session_change_pct: +22.0
+      ctr_total_change_pct: +5.1
+      winner: true
+      confidence_pct: 98
+      notes: >
+        Superou expectativas. CTR no produto #1 aumentou 38% (meta era 30%).
+        Revenue per session subiu 22% — o efeito halo também aumentou cliques
+        nos outros produtos da lista (usuários com mais confiança clicam mais).
+    learnings: >
+      Badge visual de "Editor's Choice" tem efeito de anchoring — usuários tratam
+      o produto destacado como recomendação de especialista, não apenas como
+      primeiro da lista. O efeito foi maior em mobile (+45%) que desktop (+28%),
+      possivelmente porque mobile tem menos espaço para comparação e o badge
+      serve como atalho de decisão. Padrão deve ser aplicado em todas as
+      pillar pages de review do portfolio.
+    next_steps:
+      - "Implementar em todos os sites do portfolio (prioridade: sites com >10K sessões/mês)"
+      - "Testar variações: 'Best Value' vs 'Editor's Choice' vs 'Most Popular'"
+      - "Medir impacto nos 30 dias seguintes à implementação em cada site"
+    tags:
+      - cro
+      - ux
+      - conversion
+      - social_proof
+      - mobile
+
+  - id: GX-002
+    date: "2025-07-05"
+    site: email-list-geral
+    hypothesis: >
+      Criar uma sequência de reativação de 4 emails para assinantes inativos
+      há 90+ dias (sem abertura) vai recuperar 15%+ como ativos, reduzindo
+      a necessidade de nova aquisição e melhorando entregabilidade geral.
+    type: channel
+    category: email_reengagement
+    metric:
+      primary: "Taxa de reativação (abertura ou clique nos 4 emails)"
+      secondary:
+        - "Unsubscribe rate"
+        - "Deliverability score (score de caixa de entrada)"
+        - "Revenue recuperado"
+    baseline:
+      inactive_subscribers: 4280
+      inactive_pct_of_list: 42
+      deliverability_score: 82
+      notes: "Lista total: 10.190 assinantes. 4.280 sem abertura há 90+ dias."
+    target:
+      reactivation_rate_pct: 15
+      deliverability_score: 88
+    implementation:
+      effort_days: 3
+      cost_usd: 0
+      tool: "ActiveCampaign"
+      notes: >
+        Sequência de 4 emails com subjects provocativos, período de 10 dias:
+        1. 'Você ainda está aí?'
+        2. 'Última chance de ficar na lista'
+        3. 'Deixa eu te dar algo de valor antes de ir'
+        4. 'Entendemos. Removendo você agora.'
+    ice_score:
+      impact: 7
+      confidence: 8
+      ease: 8
+      total: 448
+    status: completed
+    start_date: "2025-07-08"
+    end_date: "2025-07-22"
+    result:
+      subscribers_reactivated: 834
+      reactivation_rate_pct: 19.5
+      unsubscribes: 1.248
+      remaining_removed: 2.198
+      deliverability_score_after: 91
+      revenue_from_reactivated_usd: 1.250
+      notes: >
+        Taxa de reativação de 19.5% superou meta de 15%.
+        1.248 unsubscribes esperados e saudáveis.
+        2.198 foram removidos automaticamente (sem resposta alguma).
+        Lista final: 6.744 assinantes, porém 100% ativos ou confirmados.
+        Deliverability score subiu de 82 para 91 — impacto positivo no open rate
+        geral (de 24% para 31% nas semanas seguintes).
+      winner: true
+      confidence_pct: 99
+    learnings: >
+      Limpeza de lista melhora entregabilidade imediatamente e de forma mensurável.
+      Email 3 ('Deixa eu te dar algo de valor') teve a maior taxa de reativação
+      (8.2% dos inativos) — o gatilho de reciprocidade funciona mesmo em inativos.
+      Email 4 ('Removendo você agora') gerou pânico saudável: mais pessoas
+      responderam neste email que em qualquer outro (resposta = confirmação de interesse).
+      Processo deve ser executado a cada 90 dias como rotina de higiene de lista.
+    next_steps:
+      - "Agendar próxima reativação para outubro/2025 (90 dias depois)"
+      - "Criar automação permanente: novos inativos a cada 90 dias entram na sequência automaticamente"
+      - "Testar sequência de 3 emails (mais curta) vs 4 emails para encontrar mínimo eficaz"
+    tags:
+      - email
+      - deliverability
+      - list_hygiene
+      - reengagement
+      - automation
+
+  - id: GX-003
+    date: "2025-10-15"
+    site: colchoes-guia.com.br
+    hypothesis: >
+      Criar uma ferramenta interativa de "quiz de colchão" (6 perguntas sobre
+      preferências de sono, peso, posição) que recomenda o melhor produto
+      aumentará o tempo no site e CR de afiliado em 20%+ por reduzir
+      a paralisia de análise do visitante.
+    type: feature
+    category: interactive_tool
+    metric:
+      primary: "CR de afiliado (cliques → compras rastreadas)"
+      secondary:
+        - "Time on site"
+        - "Bounce rate"
+        - "Pages per session"
+    baseline:
+      avg_cr_affiliate_pct: 1.8
+      avg_time_on_site_seconds: 142
+      bounce_rate_pct: 64
+    target:
+      avg_cr_affiliate_pct: 2.2
+      avg_time_on_site_seconds: 240
+    implementation:
+      effort_days: 8
+      cost_usd: 0
+      tool: "Typeform embed ou implementação custom (React)"
+    ice_score:
+      impact: 8
+      confidence: 6
+      ease: 5
+      total: 240
+    status: planned
+    start_date: null
+    end_date: null
+    result: null
+    learnings: null
+    next_steps:
+      - "Pesquisar ferramentas de quiz (Typeform, Outgrow, implementação própria)"
+      - "Definir as 6 perguntas do quiz com especialista"
+      - "Mapear cada resposta para produto recomendado"
+    tags:
+      - interactive_tool
+      - cro
+      - ux
+      - quiz
+
+template_empty:
+  - id: "GX-XXX"
+    date: "YYYY-MM-DD"
+    site: "domain.com"
+    hypothesis: >
+      [SE mudança implementada ENTÃO resultado esperado PORQUE razão/mecanismo]
+    type: "ab_test | feature | channel | process | content"
+    category: "cro | seo | email | social | paid | ux | product"
+    metric:
+      primary: "métrica principal a ser movida"
+      secondary: []
+    baseline:
+      metric_value: null
+      source: "onde os dados foram coletados"
+    target:
+      metric_value: null
+      change_pct_expected: null
+    implementation:
+      effort_days: null
+      cost_usd: null
+      tool: "ferramenta ou método"
+      notes: null
+    ice_score:
+      impact: null
+      confidence: null
+      ease: null
+      total: null
+    status: "planned | running | completed | cancelled | paused"
+    start_date: null
+    end_date: null
+    result: null
+    learnings: null
+    next_steps: []
+    tags: []

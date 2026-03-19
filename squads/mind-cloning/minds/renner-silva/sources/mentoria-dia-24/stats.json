@@ -1,0 +1,10 @@
+{
+  "original_count": 12897,
+  "final_count": 1081,
+  "removed_total": 11816,
+  "loops_found": 7,
+  "loop_segments_removed": 11468,
+  "silence_runs_found": 0,
+  "silence_segments_removed": 0,
+  "gaps_found": 0
+}

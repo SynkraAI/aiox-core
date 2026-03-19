@@ -1,0 +1,116 @@
+# Best Practices Catalog
+# The Architect reads this file to discover which best-practices are available.
+# Read the full file only for best-practices relevant to the squad being created.
+
+catalog:
+  # === Discipline Best Practices ===
+  - id: copywriting
+    name: "Copywriting & Persuasive Writing"
+    whenToUse: "Creating agents that write persuasive copy, hooks, CTAs, social media captions, sales content, or viral angles."
+    file: copywriting.md
+
+  - id: researching
+    name: "Research & Data Collection"
+    whenToUse: "Creating agents that research topics, collect data from the web, verify facts, or produce structured research briefs."
+    file: researching.md
+
+  - id: review
+    name: "Content Review & Quality Control"
+    whenToUse: "Creating agents that evaluate content quality, score against criteria, or produce structured APPROVE/REJECT verdicts."
+    file: review.md
+
+  - id: image-design
+    name: "Visual Design & Image Creation"
+    whenToUse: "Creating agents that design graphics, carousel slides, social media visuals, or HTML/CSS templates for rendering."
+    file: image-design.md
+
+  - id: social-networks-publishing
+    name: "Social Networks Publishing"
+    whenToUse: "Creating agents that publish content to Instagram, LinkedIn, X/Twitter, YouTube, or other social platforms."
+    file: social-networks-publishing.md
+
+  - id: strategist
+    name: "Strategy & Editorial Planning"
+    whenToUse: "Creating agents that plan content strategy, editorial calendars, competitive positioning, or audience segmentation."
+    file: strategist.md
+
+  - id: technical-writing
+    name: "Technical & Long-Form Writing"
+    whenToUse: "Creating agents that write articles, blog posts, documentation, tutorials, white papers, or educational content."
+    file: technical-writing.md
+
+  - id: data-analysis
+    name: "Data Analysis & Interpretation"
+    whenToUse: "Creating agents that interpret metrics, extract insights, benchmark performance, or produce analytical reports."
+    file: data-analysis.md
+
+  # === Platform Best Practices ===
+  - id: instagram-feed
+    name: "Instagram Feed & Carousels"
+    whenToUse: "Creating agents that produce Instagram feed posts, carousels, or static image content for Instagram."
+    file: instagram-feed.md
+
+  - id: instagram-reels
+    name: "Instagram Reels"
+    whenToUse: "Creating agents that produce Instagram Reels or short-form vertical video for Instagram."
+    file: instagram-reels.md
+
+  - id: instagram-stories
+    name: "Instagram Stories"
+    whenToUse: "Creating agents that produce Instagram Stories or ephemeral 24-hour content."
+    file: instagram-stories.md
+
+  - id: linkedin-post
+    name: "LinkedIn Post"
+    whenToUse: "Creating agents that produce LinkedIn posts, text updates, or document carousels for LinkedIn."
+    file: linkedin-post.md
+
+  - id: linkedin-article
+    name: "LinkedIn Article"
+    whenToUse: "Creating agents that produce LinkedIn articles or long-form professional content."
+    file: linkedin-article.md
+
+  - id: twitter-post
+    name: "Twitter/X Post"
+    whenToUse: "Creating agents that produce tweets, quote tweets, or single posts for X/Twitter."
+    file: twitter-post.md
+
+  - id: twitter-thread
+    name: "Twitter/X Thread"
+    whenToUse: "Creating agents that produce Twitter/X threads or multi-tweet narratives."
+    file: twitter-thread.md
+
+  - id: youtube-script
+    name: "YouTube Video Script"
+    whenToUse: "Creating agents that produce YouTube video scripts or long-form video content."
+    file: youtube-script.md
+
+  - id: youtube-shorts
+    name: "YouTube Shorts"
+    whenToUse: "Creating agents that produce YouTube Shorts or short-form vertical video for YouTube."
+    file: youtube-shorts.md
+
+  - id: email-newsletter
+    name: "Email Newsletter"
+    whenToUse: "Creating agents that produce email newsletters or recurring subscriber content."
+    file: email-newsletter.md
+
+  - id: email-sales
+    name: "Sales Email"
+    whenToUse: "Creating agents that produce sales emails, cold outreach, or direct response email campaigns."
+    file: email-sales.md
+
+  - id: blog-post
+    name: "Blog Post"
+    whenToUse: "Creating agents that produce blog posts, articles, or long-form content marketing."
+    file: blog-post.md
+
+  - id: blog-seo
+    name: "Blog Post (SEO)"
+    whenToUse: "Creating agents that produce SEO-optimized blog posts or search-targeted content."
+    file: blog-seo.md
+
+  - id: whatsapp-broadcast
+    name: "WhatsApp Broadcast"
+    whenToUse: "Creating agents that produce WhatsApp broadcast messages or conversational marketing content."
+    file: whatsapp-broadcast.md

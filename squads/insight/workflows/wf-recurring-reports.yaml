@@ -1,0 +1,381 @@
+# Workflow: Recurring Reports
+# Manages the cadence of weekly, monthly, and quarterly reports
+# Triggered by cycle schedule or manual request
+
+workflow:
+  id: wf-recurring-reports
+  name: "Recurring Reports — Weekly, Monthly, Quarterly"
+  version: "1.0"
+  trigger: "Schedule cycle or manual request"
+  orchestrator: "@insight-chief"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# INPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+inputs:
+  required:
+    - name: report_type
+      type: enum
+      values: ["weekly", "monthly", "quarterly"]
+    - name: client_name
+      type: string
+      description: "For monthly/quarterly. 'all' for weekly internal."
+  optional:
+    - name: metrics_data
+      type: object
+      description: "Pre-collected data (Ads, Analytics, CRM, Maps)"
+    - name: previous_report
+      type: object
+      description: "Previous period report for comparison"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CADENCE SCHEDULE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+cadence:
+  weekly:
+    day: "Monday"
+    time: "09:00 BRT"
+    audience: "Operator (internal)"
+    executor: "@data-storyteller"
+    qa_required: false
+    autonomy_override: "Level 3 (auto-approve)"
+
+  monthly:
+    day: "First business day of month"
+    time: "09:00 BRT"
+    audience: "Client (external)"
+    executor: "@data-storyteller"
+    qa_required: true
+    qa_time: "15 min operator review"
+    autonomy_override: null  # Uses current level
+
+  quarterly:
+    day: "First business day after quarter end"
+    time: "09:00 BRT"
+    audience: "Client + Operator"
+    executors: ["@digital-profiler", "@market-scout", "@data-storyteller"]
+    qa_required: true
+    qa_time: "30 min joint review"
+    autonomy_override: "Level 1 (always supervised)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WEEKLY DASHBOARD (simplest flow)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+flows:
+  weekly:
+    name: "Weekly Internal Dashboard"
+    phases: 2
+    estimated_time: "15-20 min"
+
+    phase_1_collect:
+      name: "Collect Metrics"
+      executor: "@insight-chief"
+      steps:
+        - "Pull KPIs for all active clients"
+        - "Sources: Google Ads, GA4, Search Console, Maps"
+        - "Detect anomalies (drops > 20%, spikes > 50%)"
+        - "Flag alerts"
+      checkpoint:
+        id: "IN-WF-R04"
+        criteria:
+          - "All active clients have data (or flagged as missing)"
+          - "Anomaly detection ran"
+        veto:
+          - "Zero clients with data → ABORT (data collection broken)"
+      output: "Consolidated metrics + alerts"
+
+    phase_2_report:
+      name: "Generate Dashboard"
+      executor: "@data-storyteller"
+      task: "tasks/run-storyteller.md"
+      depends_on: [phase_1_collect]
+      input:
+        report_type: "weekly"
+        metrics_data: "{from phase_1}"
+      checkpoint:
+        criteria:
+          - "All active clients included"
+          - "Alerts highlighted"
+          - "Actionable recommendations present"
+      output: "Weekly dashboard → operator"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MONTHLY CLIENT REPORT (standard flow)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  monthly:
+    name: "Monthly Client Report"
+    phases: 3
+    estimated_time: "30-45 min per client"
+
+    phase_1_collect:
+      name: "Collect & Consolidate Data"
+      executor: "@insight-chief"
+      steps:
+        - "Pull month's data: Ads, Analytics, Search Console, Maps"
+        - "Pull CRM data: leads, pipeline, conversions (if available)"
+        - "Calculate deltas vs previous month"
+        - "Identify highlight of the month"
+      checkpoint:
+        criteria:
+          - "At least 1 data source available"
+          - "Deltas calculated"
+        veto:
+          - "Zero data for client → ABORT + escalate"
+      output: "Consolidated monthly data"
+
+    phase_2_report:
+      name: "Generate Narrative Report"
+      executor: "@data-storyteller"
+      task: "tasks/run-storyteller.md"
+      depends_on: [phase_1_collect]
+      input:
+        report_type: "monthly"
+        client_name: "{client_name}"
+        metrics_data: "{from phase_1}"
+        previous_report: "{previous_report}"
+      checkpoint:
+        id: "IN-WF-R01"
+        criteria:
+          - "ABT headline present"
+          - "Month-over-month comparison included"
+          - "Highlight of the month present"
+          - "Next steps defined"
+          - "Non-technical language"
+        veto:
+          - "Numbers without narrative → REJECT"
+          - "Missing comparison → REJECT"
+      output: "Monthly report draft"
+
+    phase_3_qa:
+      name: "QA & Delivery (IN-QA-003)"
+      executor: "@insight-chief"
+      task: "tasks/qa-checkpoint.md"
+      depends_on: [phase_2_report]
+      input:
+        output_type: "report"
+        output_data: "{from phase_2}"
+      steps:
+        - "Run IN-QA-003 checklist"
+        - "Apply autonomy level decision"
+        - "If approved → deliver to client"
+      on_failure:
+        strategy: "forward_retry"
+        max_cycles: 2
+        steps:
+          - "Create NEW storyteller task instance with feedback"
+          - "Storyteller produces new report → re-enter phase_3_qa"
+          - "If 2 cycles fail → ESCALATE to operator"
+      output: "Approved report → client"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUARTERLY EVOLUTION REPORT (full re-analysis)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  quarterly:
+    name: "Quarterly Evolution Report"
+    phases: 5  # 1: Re-analysis, 1.5: QA Gate, 2: Evolution, 3: Report, 4: Joint Review
+    estimated_time: "60-90 min per client"
+
+    phase_1_re_analysis:
+      name: "Full Re-analysis"
+      execution: parallel
+      parallel_agents:
+        - agent: "@digital-profiler"
+          task: "tasks/run-profiler.md"
+          purpose: "Fresh dossier — compare with initial"
+          output_key: "fresh_dossier"
+          timeout: "30 min"
+
+        - agent: "@market-scout"
+          task: "tasks/run-scout.md"
+          purpose: "Fresh market scan — new opportunities"
+          output_key: "fresh_map"
+          timeout: "30 min"
+
+      checkpoint:
+        criteria:
+          - "Fresh dossier completed"
+          - "Fresh map completed"
+
+    phase_1b_qa_gate:
+      name: "QA Gate — Validate Re-analysis Outputs"
+      executor: "@insight-chief"
+      task: "tasks/qa-checkpoint.md"
+      depends_on: [phase_1_re_analysis]
+      rationale: |
+        Mesmo padrão do wf-new-lead Phase 1.5.
+        Chief NÃO pode calcular evolução com dados não validados.
+      steps:
+        - action: "Run QA on fresh dossier (IN-QA-001)"
+          input: { output_type: "dossier", output_data: "{fresh_dossier}" }
+        - action: "Run QA on fresh map (IN-QA-002)"
+          input: { output_type: "map", output_data: "{fresh_map}" }
+        - action: "Compare with initial baseline (score delta check)"
+      checkpoint:
+        id: "IN-WF-R03"
+        criteria:
+          - "Fresh dossier passes IN-QA-001"
+          - "Fresh map passes IN-QA-002"
+          - "Baseline comparison data available"
+        veto:
+          - "Any blocking check fails → new forward cycle (max 2)"
+          - "No baseline to compare → ESCALATE to operator"
+      on_failure:
+        strategy: "forward_retry"
+        max_cycles: 2
+      output:
+        fresh_dossier_validated: "{after QA PASS}"
+        fresh_map_validated: "{after QA PASS}"
+
+    phase_2_evolution:
+      name: "Calculate Evolution"
+      executor: "@insight-chief"
+      depends_on: [phase_1b_qa_gate]
+      steps:
+        - "Compare fresh_dossier_validated with initial dossier (score delta)"
+        - "Compare fresh_map_validated with initial map (new opportunities)"
+        - "Calculate ROI of actions taken this quarter"
+        - "Identify wins and remaining gaps"
+      output: "Evolution data package"
+
+    phase_3_report:
+      name: "Generate Evolution Report"
+      executor: "@data-storyteller"
+      task: "tasks/run-storyteller.md"
+      depends_on: [phase_2_evolution]
+      input:
+        report_type: "quarterly"
+        client_name: "{client_name}"
+        metrics_data: "{from phase_2}"
+      checkpoint:
+        id: "IN-WF-R02"
+        criteria:
+          - "Score evolution chart (3 months)"
+          - "Competitor comparison evolution"
+          - "ROI calculated"
+          - "Recommendations for next quarter"
+        veto:
+          - "No evolution data → REJECT"
+          - "No forward-looking recommendations → REJECT"
+
+    phase_4_review:
+      name: "Joint Review — Final QA (IN-QA-003) + Delivery"
+      executor: "@insight-chief"
+      task: "tasks/qa-checkpoint.md"
+      depends_on: [phase_3_report]
+      mode: "Level 1 (always supervised)"
+      steps:
+        - "Run IN-QA-003 on evolution report"
+        - "Operator reviews with client context"
+        - "Approve or request changes"
+        - "Deliver to client"
+      on_failure:
+        strategy: "forward_retry"
+        max_cycles: 2
+      output: "Approved quarterly report → client"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  data_unavailable:
+    action: "Note missing data source in report"
+    fallback: "Use last available data + flag as stale"
+    escalate_if: "No data at all for a client"
+
+  agent_timeout:
+    action: "Retry once (new forward cycle)"
+    escalate_if: "Still fails after retry"
+
+  qa_rejection:
+    strategy: "forward_retry"
+    action: "Create NEW task instance for source agent with feedback context"
+    note: "Previous output archived as attempt_N. New cycle, never go back."
+    max_cycles: 2
+    escalate_if: "Still rejected after 2 forward cycles"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OPERATOR GUIDE — EXECUÇÃO PRÁTICA NO CLAUDE CODE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+operator_guide:
+  context: |
+    No Claude Code, o operador executa os reports manualmente seguindo o cadence.
+    Nenhum agendamento automático — operador é responsável por lembrar do ciclo.
+
+  weekly:
+    when: "Toda segunda-feira"
+    steps:
+      - step: 1
+        action: "Ativar @insight-chief"
+        command: "@insight-chief *dashboard-weekly"
+        result: "Chief coleta KPIs e manda pro storyteller"
+      - step: 2
+        action: "Chief despacha @data-storyteller"
+        command: "@data-storyteller *dashboard-weekly"
+        result: "Dashboard salvo em outputs/insight/dashboard-semanal-{YYYY-MM-DD}.md"
+    total_activations: 2
+    estimated_time: "15-20 min"
+
+  monthly:
+    when: "Primeiro dia útil do mês"
+    steps:
+      - step: 1
+        action: "Ativar @insight-chief"
+        command: "@insight-chief *report-monthly '{cliente}'"
+        result: "Chief coleta dados do mês"
+      - step: 2
+        action: "Chief despacha @data-storyteller"
+        command: "@data-storyteller *report-monthly '{cliente}'"
+        result: "Report draft gerado"
+      - step: 3
+        action: "Reativar @insight-chief para QA"
+        command: "@insight-chief *review report-{client-slug}"
+        result: "QA PASS → entrega ao cliente / FAIL → feedback pro storyteller"
+    total_activations: 3
+    estimated_time: "30-45 min por cliente"
+
+  quarterly:
+    when: "Primeiro dia útil após fim do trimestre"
+    steps:
+      - step: 1
+        action: "Ativar @insight-chief para triage"
+        command: "@insight-chief *report-quarterly '{cliente}'"
+        result: "Chief prepara re-análise"
+      - step: 2
+        action: "Ativar @digital-profiler (re-análise)"
+        command: "@digital-profiler *profile '{cliente}' {cidade} {nicho}"
+        result: "Novo dossiê (fresh)"
+      - step: 3
+        action: "Ativar @market-scout (re-análise)"
+        command: "@market-scout *scout {nicho} {cidade}"
+        result: "Novo mapa (fresh)"
+      - step: 4
+        action: "Reativar @insight-chief para QA Gate"
+        command: "@insight-chief *review dossiê-{client-slug}"
+        then: "@insight-chief *review mapa-{client-slug}"
+        result: "QA PASS nos 2 outputs"
+      - step: 5
+        action: "Chief calcula evolução (score delta, ROI)"
+        note: "Automático dentro da mesma sessão do chief"
+      - step: 6
+        action: "Ativar @data-storyteller"
+        command: "@data-storyteller *report-quarterly '{cliente}'"
+        result: "Report de evolução gerado"
+      - step: 7
+        action: "Reativar @insight-chief para joint review"
+        command: "@insight-chief *review report-{client-slug}"
+        result: "Level 1 — operador SEMPRE revisa antes de entregar"
+    total_activations: 7
+    estimated_time: "60-90 min por cliente"
+
+  tips:
+    - "Monte um checklist semanal/mensal para não esquecer os ciclos"
+    - "Para múltiplos clientes monthly: rode em lote (1 por vez, mesmo session)"
+    - "Quarterly SEMPRE roda com Level 1 — operador revisa antes de entregar"
+    - "Se CRM não está ativo, forneça dados manualmente ao storyteller"

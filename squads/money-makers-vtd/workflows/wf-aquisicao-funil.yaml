@@ -1,0 +1,549 @@
+# WF-3: Aquisição & Funil Perpétuo
+# Duration: 2-3h
+# Best for: Construir funil de aquisição perpétuo com ManyChat + WhatsApp + Email
+# Key Agents: arquiteto-funil + copy-andromeda
+
+workflow:
+  id: wf-aquisicao-funil
+  name: "Aquisição & Funil Perpétuo"
+  duration: "2-3h"
+  trigger: "*aquisicao-funil"
+  description: |
+    Workflow para construir o Funil Perpétuo do Instagram — o motor de aquisição
+    constante baseado no modelo do Natanael Oliveira:
+
+    Perfil Instagram → ManyChat → WhatsApp → Email → Aula ao Vivo → Venda
+
+    Números de referência validados:
+    - 80% do tráfego pago visita o perfil (custo R$0,25-0,30/visita)
+    - 20% das visitas converte em lead (custo R$1-4/lead) — NO-F042
+    - ManyChat + WhatsApp: 60-90% taxa de resposta (vs 20-30% email frio)
+    - Lead magnet: material que ANTES era pago, dado gratuitamente (NO-H004)
+
+    FUNIL AMERICANO integrado obrigatoriamente:
+    - Oferta imediata no primeiro contato (não esperar nutrição)
+    - High ticket aparece ANTES de low ticket — Efeito Chanel (NO-F012)
+    - "Só vende quem oferece" — nenhum passo sem próximo passo (NO-F021)
+
+  best_for:
+    - "Quem tem perfil no Instagram mas não tem funil estruturado"
+    - "Expert com audiência que não converte em lead"
+    - "Quem usa DM manual e quer automatizar com ManyChat"
+    - "Negócio que depende de lançamento e quer ir para perpétuo"
+    - "Quem quer reduzir CPL e aumentar taxa de resposta"
+
+  decision_matrix_fit:
+    awareness: "unaware a product-aware"
+    sophistication: "stage-1 a stage-3"
+    price_point: "low ticket entrada, high ticket ancoragem"
+    traffic_temp: "cold (tráfego pago) + warm (seguidores)"
+    primary_output: "funil-perpetuo-{nicho}.md"
+
+  clone_combinations:
+    primary: "arquiteto-funil + copy-andromeda"
+    secondary:
+      - "pesquisador-ia (validação de lead magnet)"
+      - "monetizador (sequência de ofertas)"
+      - "vtd-chief (revisão estratégica)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 1: LEAD MAGNET
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-1
+    name: "Lead Magnet"
+    days: "1"
+    tier: 0
+    description: |
+      O lead magnet é a porta de entrada do funil.
+
+      REGRA DO LEAD MAGNET (NO-H004):
+      O lead magnet deve ser algo que ANTES era pago.
+      Não é um "PDF qualquer" — é valor real, entregue gratuitamente,
+      que faz o lead pensar: "Se o grátis é assim, imagina o pago."
+
+      Tipos de lead magnet que funcionam (validados pelo Natanael):
+      - Mini-curso em vídeo (3-5 vídeos curtos)
+      - Planilha/calculadora funcional
+      - Template pronto para usar
+      - Sequência de 7 emails prontos
+      - Checklist de alto valor (não genérico)
+      - Acesso a aula gravada de alto valor
+
+      O QUE NÃO FUNCIONA:
+      - Ebook genérico com conteúdo disponível em blog
+      - "Guia" sem implementação prática
+      - Qualquer coisa que o lead perceba como "enrolação"
+
+      FUNIL AMERICANO NO LEAD MAGNET:
+      Na página de confirmação/agradecimento, já apresentar oferta imediata.
+      High ticket de ancoragem aparece nesta tela (Efeito Chanel).
+
+    tasks:
+      - task_id: definir-lead-magnet
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Definir lead magnet ideal para o nicho:
+          - Qual problema resolve IMEDIATAMENTE?
+          - Qual o formato ideal (vídeo, planilha, template)?
+          - Como posicionar como "antes era pago"?
+          - Nome magnético (usar linguagem do público, não do expert)
+        output: "lead-magnet-definicao-{nicho}.md"
+
+      - task_id: copy-lead-magnet
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar copy de captação do lead magnet:
+          - Headline da página de captura (Hook→Punch→Premissa)
+          - CTA do botão (ação clara, linguagem do público)
+          - Copy do botão ManyChat/WhatsApp
+          - Mensagem de boas-vindas automática (DM/WhatsApp)
+          - Copy da página de agradecimento com oferta imediata
+          Variações por sentimento: mínimo 5 criativos diferentes (NO-H014)
+        output: "copy-lead-magnet-{nicho}.md"
+
+      - task_id: oferta-imediata-ancoragem
+        agent: monetizador
+        required: true
+        description: |
+          Definir oferta imediata + ancoragem high ticket:
+          - O que oferecer na confirmação? (low ticket de entrada)
+          - Qual o high ticket de ancoragem? (aparece ANTES, Efeito Chanel)
+          - Sequência: grátis → high ticket visível → low ticket como "mais acessível"
+        output: "oferta-imediata-{nicho}.md"
+        notes: |
+          IMPORTANTE (NO-F012): O high ticket deve aparecer PRIMEIRO.
+          O lead vê R$2.500 (mentoria) → depois vê R$97 (desafio) → parece acessível.
+          Sem ancoragem, o R$97 parece caro. Com ancoragem, parece barato.
+
+    elicitation:
+      required: true
+      questions:
+        - id: nicho
+          question: "Qual o nicho do negócio?"
+          type: text
+          required: true
+
+        - id: produto_principal
+          question: "Qual o produto principal que quer vender no funil? (nome e preço)"
+          type: text
+          required: true
+
+        - id: high_ticket
+          question: "Tem alguma oferta high ticket? (nome e preço, ex: mentoria R$2.500)"
+          type: text
+          required: false
+
+        - id: tem_manychat
+          question: "Já tem ManyChat configurado no Instagram? (sim/não)"
+          type: text
+          required: true
+
+        - id: tem_whatsapp_business
+          question: "Tem WhatsApp Business com API? (sim/não/não sei)"
+          type: text
+          required: true
+
+    checkpoint:
+      criteria:
+        - "Lead magnet definido com problema específico que resolve"
+        - "Posicionamento 'antes era pago' estabelecido"
+        - "Copy de captação criada com Hook→Punch→Premissa"
+        - "Mínimo 5 criativos por sentimento (Andromeda)"
+        - "Oferta imediata definida para página de confirmação"
+        - "High ticket de ancoragem definido (Efeito Chanel)"
+      human_review: true
+      message: "Lead magnet definido. Revisar posicionamento e copy antes de avançar."
+      veto_conditions:
+        - "SE lead magnet é genérico → VETO. Precisa ser algo que antes era pago (NO-H004)."
+        - "SE sem oferta imediata na confirmação → VETO. Funil americano obrigatório."
+        - "SE high ticket não aparece antes → VETO. Efeito Chanel obrigatório (NO-F012)."
+        - "SE copy sem variação por sentimento → VETO. Andromeda exige variação emocional (NO-H014)."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2: MANYCHAT + WHATSAPP
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "ManyChat + WhatsApp"
+    days: "1"
+    tier: 1
+    description: |
+      Configurar a automação de alta taxa de resposta.
+
+      POR QUE MANYCHAT + WHATSAPP?
+      - Email frio: 20-30% taxa de abertura, 2-5% de resposta
+      - ManyChat DM Instagram: 60-90% taxa de abertura e resposta
+      - WhatsApp: 90%+ abertura, conversação pessoal
+      - Combinação: captura no Instagram, move para WhatsApp (canal próprio)
+
+      FLUXO DE AUTOMAÇÃO:
+      1. Lead comenta keyword no post ou clica no link da bio
+      2. ManyChat dispara DM automática (entrega o lead magnet)
+      3. Na DM, pergunta se quer receber no WhatsApp
+      4. Coleta número de WhatsApp
+      5. WhatsApp: sequência de boas-vindas + conteúdo + oferta
+      6. Email coletado para sequência paralela
+
+      PRINCÍPIO: Mover o lead do Instagram (plataforma de terceiros) para
+      WhatsApp e email (canais próprios) o mais rápido possível.
+
+    tasks:
+      - task_id: fluxo-manychat
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Desenhar fluxo completo do ManyChat:
+          - Keywords de ativação (por post, por história)
+          - Mensagem de boas-vindas + entrega do lead magnet
+          - Pergunta de transição para WhatsApp
+          - Coleta de dados (nome, WhatsApp, email)
+          - Mensagem de confirmação e próximo passo
+          Incluir fallback para quem não responde em 24h.
+        output: "fluxo-manychat-{nicho}.yaml"
+
+      - task_id: sequencia-whatsapp
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar sequência de 5 mensagens WhatsApp pós-captação:
+          - Mensagem 1 (imediata): Boas-vindas + entrega
+          - Mensagem 2 (D+1): Conteúdo de valor + hook para próxima
+          - Mensagem 3 (D+2): Prova social + depoimento
+          - Mensagem 4 (D+3): Oferta principal com escassez
+          - Mensagem 5 (D+4): Última chance + oferta complementar
+          Linguagem conversacional, não corporativa. Como amigo expert falaria.
+        output: "sequencia-whatsapp-{nicho}.md"
+
+      - task_id: setup-tecnico
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Documentar setup técnico necessário:
+          - ManyChat: criar conta, conectar Instagram Business
+          - Keywords a configurar por tipo de conteúdo
+          - Integração ManyChat → CRM/email (ActiveCampaign ou similar)
+          - WhatsApp Business API (recomendação de fornecedor)
+          - Pixel de rastreamento para retargeting
+        output: "setup-tecnico-funil-{nicho}.md"
+
+    checkpoint:
+      criteria:
+        - "Fluxo ManyChat desenhado com keywords, mensagens e transições"
+        - "Sequência de 5 mensagens WhatsApp criada"
+        - "Tom conversacional, não corporativo"
+        - "Fallback para leads sem resposta definido"
+        - "Setup técnico documentado"
+        - "Coleta de email na sequência (canal próprio)"
+      human_review: true
+      message: "Automação ManyChat + WhatsApp desenhada. Revisar fluxo e copy."
+      veto_conditions:
+        - "SE sem coleta de email → VETO. WhatsApp pode ser bloqueado, email é canal próprio."
+        - "SE sequência sem oferta → VETO. Sem próximo passo = sem venda (NO-F021)."
+        - "SE tom corporativo nas mensagens → VETO. WhatsApp é conversa pessoal, não email marketing."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3: TRÁFEGO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Tráfego"
+    days: "1"
+    tier: 1
+    description: |
+      Configurar a estratégia de tráfego baseada nos números reais (NO-F042):
+
+      NÚMEROS DE REFERÊNCIA VALIDADOS:
+      - 80% do investimento em tráfego: visita ao perfil (R$0,25-0,30/visita)
+      - 20% do investimento em tráfego: conversão direta (R$1-4/lead)
+      - CPL alvo: R$1-4 (dependendo do nicho e temperatura do tráfego)
+
+      SPLIT DE TRÁFEGO:
+      - 80% para anúncios de perfil (crescer seguidor + ManyChat orgânico)
+      - 20% para anúncios de conversão direta (lead magnet landing page)
+
+      TIPOS DE ANÚNCIO:
+      - Reels patrocinados (conteúdo + CTA para bio/DM)
+      - Anúncio de captura direta (lead magnet)
+      - Retargeting (quem visitou perfil mas não seguiu/converteu)
+
+      CRIATIVO:
+      - Mínimo 30 criativos variados por sentimento (Andromeda)
+      - Testar diferentes hooks, não diferentes produtos
+      - Vencedor = escalar. Perdedor = pausar.
+
+    tasks:
+      - task_id: estrategia-trafego
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Definir estratégia completa de tráfego:
+          - Budget mensal recomendado para o nicho
+          - Split 80/20 (perfil vs conversão)
+          - Segmentação de audiência (interesses, comportamentos, lookalike)
+          - Estrutura de campanhas (awareness, consideração, conversão)
+          - Pixel events a rastrear
+        output: "estrategia-trafego-{nicho}.md"
+
+      - task_id: criativos-anuncio
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar mínimo 30 criativos variados por sentimento (NO-H014):
+          - 10 criativos por gatilho emocional (medo/desejo/transformação)
+          - Variações de hook (primeiros 3 segundos do Reel)
+          - Variações de CTA (linguagem diferente, mesmo destino)
+          - Copy de legenda + texto do anúncio
+          Formato: hook curto + punch + CTA. Máx 90 segundos em vídeo.
+        output: "criativos-anuncio-{nicho}.md"
+        notes: |
+          Andromeda varia por SENTIMENTO, não por demografia (NO-H014).
+          Mesmo produto, emoções diferentes:
+          - Medo: "Você está perdendo dinheiro sem saber"
+          - Desejo: "Como seria ter R$5k/mês extras todo mês?"
+          - Transformação: "Em 30 dias, ela saiu do zero para R$3.200"
+
+      - task_id: metricas-trafego
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Definir KPIs de tráfego e gatilhos de otimização:
+          - CPL máximo aceitável por nicho
+          - CTR mínimo para manter criativo rodando
+          - Frequência máxima antes de trocar criativo
+          - Regra: quando escalar vs quando pausar
+          - Dashboard de acompanhamento semanal
+        output: "metricas-trafego-{nicho}.md"
+
+    checkpoint:
+      criteria:
+        - "Estratégia de tráfego com split 80/20 definido"
+        - "Budget mensal calculado com CPL alvo"
+        - "Mínimo 30 criativos por sentimento (Andromeda)"
+        - "KPIs e gatilhos de otimização definidos"
+        - "Estrutura de campanhas documentada"
+      human_review: true
+      message: "Estratégia de tráfego definida. Validar CPL alvo e criativos."
+      veto_conditions:
+        - "SE menos de 30 criativos → VETO. Volume é necessário para testar (NO-H014)."
+        - "SE criativos variam por demografria → VETO. Variar por sentimento (Andromeda)."
+        - "SE sem KPIs de otimização → VETO. Tráfego sem métrica é custo sem retorno."
+        - "SE CPL alvo > R$4 sem justificativa → ALERTA. Revisar estratégia (NO-F042)."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 4: FUNIL PERPÉTUO COMPLETO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-4
+    name: "Funil Perpétuo Completo"
+    days: "1"
+    tier: 2
+    description: |
+      Consolidar e documentar o Funil Perpétuo completo.
+
+      FUNIL PERPÉTUO INSTAGRAM — FLUXO COMPLETO:
+      1. Tráfego pago → Perfil Instagram (80% budget)
+      2. Tráfego pago → Landing Page lead magnet (20% budget)
+      3. Perfil: Stories + Reels com CTA para DM ou link
+      4. ManyChat: automação DM → entrega lead magnet
+      5. Transição: DM → WhatsApp (canal próprio)
+      6. WhatsApp: sequência de 5 mensagens (valor + oferta)
+      7. Email coletado: sequência paralela (nunca parar NO-F049)
+      8. Aula ao vivo: conversão quente (semanal ou quinzenal)
+      9. Venda: oferta principal com empilhamento
+
+      FUNIL AMERICANO INTEGRADO (NO-F012):
+      Em cada ponto de contato, há uma oferta.
+      High ticket visível antes de qualquer low ticket.
+      Nunca deixar lead sem próximo passo (NO-F021).
+
+    tasks:
+      - task_id: documentar-funil-completo
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Documentar o funil completo em formato visual + textual:
+          - Mapa do funil (cada passo, cada touchpoint)
+          - Ferramentas necessárias em cada etapa
+          - Métricas de cada etapa (benchmark)
+          - Pontos de saída (onde leads abandonam) e como recuperar
+          - Integração: ManyChat + WhatsApp + Email + Aula
+        output: "funil-perpetuo-completo-{nicho}.md"
+
+      - task_id: sequencia-email-funil
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar sequência de email paralela ao WhatsApp:
+          - Email 1 (imediato): Entrega + boas-vindas
+          - Email 2 (D+1): Conteúdo de valor (sem pitch)
+          - Email 3 (D+3): Prova social + história de transformação
+          - Email 4 (D+5): Oferta com escassez real
+          - Email 5 (D+7): Último email + oferta complementar
+          Sequência evergreen: roda 365 dias sem parar (NO-F049)
+        output: "sequencia-email-funil-{nicho}.md"
+
+      - task_id: playbook-aula-ao-vivo
+        agent: monetizador
+        required: true
+        description: |
+          Criar estrutura da aula ao vivo de conversão:
+          - Frequência recomendada (semanal ou quinzenal)
+          - Estrutura: conteúdo (70%) + oferta (30%)
+          - Como usar empilhamento na aula (manhã: email low, tarde: email high)
+          - Scripts de abertura, conteúdo e pitch
+          - CTA final com escassez real
+        output: "playbook-aula-vivo-{nicho}.md"
+
+    checkpoint:
+      criteria:
+        - "Funil completo documentado com todos os passos"
+        - "Ferramentas definidas para cada etapa"
+        - "Sequência de email evergreen criada (min 5 emails)"
+        - "Playbook de aula ao vivo estruturado"
+        - "Funil americano integrado em todos os pontos"
+        - "Próximo passo definido em cada touchpoint (NO-F021)"
+      human_review: true
+      message: "Funil Perpétuo completo documentado. Pronto para implementar."
+      veto_conditions:
+        - "SE algum passo sem próximo passo → VETO. Nunca sem follow-up (NO-F021)."
+        - "SE email sem sequência evergreen → VETO. Email nunca para (NO-F049)."
+        - "SE funil americano ausente → VETO. Oferta imediata + ancoragem obrigatórios."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_stakeholders: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHECKPOINT CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+checkpoint_config:
+  - phase: PHASE-1
+    heuristic: "NO-H004 + NO-F012"
+    criteria: "Lead magnet de valor + oferta imediata + ancoragem high ticket"
+    veto_condition: "Lead magnet genérico ou sem funil americano = saída bloqueada"
+
+  - phase: PHASE-2
+    heuristic: "NO-F021 + NO-F049"
+    criteria: "Automação ManyChat com sequência WhatsApp + coleta de email"
+    veto_condition: "Sem próximo passo = lead perdido. Sem email = canal frágil."
+
+  - phase: PHASE-3
+    heuristic: "NO-F042 + NO-H014"
+    criteria: "Tráfego 80/20 com 30+ criativos por sentimento"
+    veto_condition: "Criativos por demografia = Andromeda violado"
+
+  - phase: PHASE-4
+    heuristic: "NO-F012 + NO-F021 + NO-F049"
+    criteria: "Funil americano integrado em todos os pontos + email evergreen"
+    veto_condition: "Ponto sem oferta = dinheiro na mesa"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMPLETION SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+completion_signal: "<promise>COMPLETE</promise>"
+checkpoint_signal: "<promise>CHECKPOINT:PHASE-X</promise>"
+blocked_signal: "<promise>BLOCKED:T-X.Y</promise>"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT ARTIFACTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  lead_magnet:
+    - "lead-magnet-definicao-{nicho}.md — Definição e posicionamento"
+    - "copy-lead-magnet-{nicho}.md — Copy de captação + 5 criativos"
+    - "oferta-imediata-{nicho}.md — Oferta imediata + ancoragem high ticket"
+
+  automacao:
+    - "fluxo-manychat-{nicho}.yaml — Fluxo ManyChat completo"
+    - "sequencia-whatsapp-{nicho}.md — 5 mensagens WhatsApp"
+    - "setup-tecnico-funil-{nicho}.md — Documentação técnica"
+
+  trafego:
+    - "estrategia-trafego-{nicho}.md — Estratégia 80/20"
+    - "criativos-anuncio-{nicho}.md — 30+ criativos por sentimento"
+    - "metricas-trafego-{nicho}.md — KPIs e gatilhos de otimização"
+
+  funil_completo:
+    - "funil-perpetuo-completo-{nicho}.md — Funil documentado"
+    - "sequencia-email-funil-{nicho}.md — 5 emails evergreen"
+    - "playbook-aula-vivo-{nicho}.md — Estrutura aula de conversão"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  lead_magnet:
+    - "[ ] Lead magnet resolve problema específico"
+    - "[ ] Posicionado como 'antes era pago'"
+    - "[ ] Copy com Hook→Punch→Premissa"
+    - "[ ] Mínimo 5 criativos por sentimento"
+    - "[ ] Oferta imediata na confirmação"
+    - "[ ] High ticket de ancoragem visível (Efeito Chanel)"
+
+  automacao:
+    - "[ ] Fluxo ManyChat com keywords definidas"
+    - "[ ] Sequência de 5 mensagens WhatsApp"
+    - "[ ] Tom conversacional (não corporativo)"
+    - "[ ] Coleta de email na sequência"
+    - "[ ] Fallback para leads sem resposta"
+
+  trafego:
+    - "[ ] Split 80/20 definido (perfil/conversão)"
+    - "[ ] CPL alvo R$1-4 calculado"
+    - "[ ] Mínimo 30 criativos por sentimento"
+    - "[ ] KPIs de otimização definidos"
+
+  funil_completo:
+    - "[ ] Todos os passos documentados"
+    - "[ ] Próximo passo em cada touchpoint"
+    - "[ ] Email evergreen (min 5 emails)"
+    - "[ ] Playbook de aula ao vivo"
+    - "[ ] Funil americano integrado"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GOVERNANCE GATE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+governance_gate:
+  required_checks:
+    - "Lead magnet de valor real (NO-H004)"
+    - "Funil americano em todos os pontos (NO-F012)"
+    - "Próximo passo em cada touchpoint (NO-F021)"
+    - "CPL dentro do benchmark R$1-4 (NO-F042)"
+    - "Email evergreen estruturado (NO-F049)"
+    - "30+ criativos por sentimento (NO-H014)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  framework: "AIOS Squad Creator"
+  created: "2026-02-21"
+  primary_use_case: "Construção do Funil Perpétuo Instagram → ManyChat → WhatsApp → Email → Venda"
+  source_mind: "natanael-oliveira"
+  key_difference: |
+    Único workflow que integra ManyChat + WhatsApp + Email numa sequência única.
+    Aplica Funil Americano em TODOS os pontos de contato (não apenas na venda).
+    Cobre tanto tráfego pago quanto conversão orgânica do perfil.

@@ -1,0 +1,114 @@
+# Full Negotiation Pipeline Workflow
+workflow:
+  id: wf-full-pipeline
+  name: "Full Negotiation Pipeline"
+  version: "1.0.0"
+  orchestrator: negotiation-chief
+  description: |
+    End-to-end negotiation pipeline from offer definition to deal closing.
+    Each phase uses a specific elite mind's framework.
+    Flow: Define → Profile → Identify → Prospect → Pitch → Discover → Negotiate → Close
+
+phases:
+  phase_0:
+    name: "Define Offer"
+    executor: negotiation-chief
+    task: "tasks/define-offer.md"
+    elicit: true
+    output: "Structured offer with value prop, pricing tiers, differentiators"
+    checkpoint:
+      gate: "Offer is specific and has 3-tier pricing"
+      veto: "No offer defined → BLOCK"
+
+  phase_1:
+    name: "Profile Buyer Psychology"
+    executor: robert-cialdini
+    task: "tasks/profile-buyer.md"
+    elicit: true
+    input_from: ["phase_0"]
+    output: "Buyer DNA profile with influence levers ranked"
+    checkpoint:
+      gate: "Top 3 influence levers identified with specific actions"
+      veto: "Zero buyer info → BLOCK"
+
+  phase_2:
+    name: "Identify Dream Clients"
+    executor: chet-holmes
+    task: "tasks/identify-dream-clients.md"
+    elicit: true
+    input_from: ["phase_0", "phase_1"]
+    output: "Dream 100 tiered list with pursuit strategy"
+    checkpoint:
+      gate: "At least 25 Tier A prospects named"
+      veto: "No market defined → BLOCK"
+
+  phase_3:
+    name: "Prospect & Contact"
+    executor: jeb-blount
+    task: "tasks/prospect-outreach.md"
+    elicit: true
+    input_from: ["phase_2"]
+    output: "Multi-channel outreach plan with scripts and cadence"
+    checkpoint:
+      gate: "Pipeline math calculated, 3+ channels, scripts ready"
+      veto: "No prospect list → BLOCK"
+
+  phase_4:
+    name: "Pitch"
+    executor: oren-klaff
+    task: "tasks/create-pitch.md"
+    elicit: true
+    input_from: ["phase_0", "phase_1"]
+    output: "STRONG method pitch with frame strategy"
+    checkpoint:
+      gate: "20-min pitch with frame strategy and hookpoint"
+      veto: "Needy/supplicant tone → BLOCK"
+
+  phase_5:
+    name: "Discovery & Qualification"
+    executor: neil-rackham
+    task: "tasks/spin-discovery.md"
+    elicit: true
+    input_from: ["phase_1", "phase_4"]
+    output: "SPIN question set with qualification assessment"
+    checkpoint:
+      gate: "SPIN questions complete, opportunity qualified"
+      veto: "More than 5 Situation questions → BLOCK"
+
+  phase_6:
+    name: "Negotiate Terms"
+    executor: chris-voss
+    task: "tasks/negotiate-deal.md"
+    elicit: true
+    input_from: ["phase_5"]
+    output: "Tactical negotiation playbook with scripts"
+    checkpoint:
+      gate: "BATNA defined, accusation audit ready, calibrated Qs"
+      veto: "No walk-away point → BLOCK"
+
+  phase_7:
+    name: "Close Deal"
+    executor: jim-camp
+    task: "tasks/close-deal.md"
+    elicit: true
+    input_from: ["phase_6"]
+    output: "Closing strategy with mission and no-based approach"
+    checkpoint:
+      gate: "Mission defined, neediness eliminated, agenda set"
+      veto: "Negotiating with non-decision-maker → BLOCK"
+
+  strategic_advisor:
+    name: "Strategic Advisory"
+    executor: william-ury
+    task: "tasks/plan-negotiation.md"
+    trigger: "Available at ANY phase when impasse or strategic reset needed"
+    output: "BATNA analysis, interests mapping, breakthrough strategy"
+
+flow_rules:
+  - "Phases are sequential but can be entered at any point"
+  - "Phase 0 (Define Offer) is ALWAYS first if no offer exists"
+  - "Phase 1 (Profile Buyer) recommended before any buyer-facing phase"
+  - "Strategic Advisor can be invoked at any time"
+  - "Each phase has a checkpoint that must pass before proceeding"
+  - "If a checkpoint fails, fix issues before moving forward"
+  - "The pipeline can be run partially (e.g., just Phase 6-7 for active deals)"

@@ -1,0 +1,501 @@
+thinking_dna:
+  metadata:
+    expert_name: "Naval Ravikant"
+    domain: "wealth creation, philosophy, startups, investing, happiness"
+    extraction_date: "2026-03-11"
+    sources_used: 9
+    quality_score: "9/9"
+
+  # Phase 0: Recognition Patterns
+  recognition_patterns:
+    instant_detection:
+      - domain: "Business, Social"
+        pattern: "Status games vs wealth creation — identifies zero-sum vs positive-sum in < 2s"
+        accuracy: "9/10"
+        quote: "People creating wealth will always be attacked by people playing status games."
+
+      - domain: "Business, Career"
+        pattern: "Leverage presence/absence — spots whether someone is trading time for money"
+        accuracy: "10/10"
+        quote: "You're never going to get rich renting out your time."
+
+      - domain: "Organizations, Deals"
+        pattern: "Principal-agent misalignment — sees incentive conflicts instantly"
+        accuracy: "9/10"
+        quote: "A principal's incentives are different than an agent's incentives. If you can work on incentives, don't work on anything else."
+
+      - domain: "Relationships, Investing"
+        pattern: "Short-term vs long-term players — identifies who will be around in 10 years"
+        accuracy: "8/10"
+        quote: "Play long-term games with long-term people. Long-term players make each other rich."
+
+      - domain: "Talent Assessment"
+        pattern: "Specific knowledge presence — distinguishes trainable vs unique capabilities"
+        accuracy: "9/10"
+        quote: "If society can train you, it can train someone else and replace you."
+
+      - domain: "Economics, Politics"
+        pattern: "Rent-seeking behavior — sees who is extracting vs creating value"
+        accuracy: "9/10"
+        quote: "There are people who go out and create things... Then there are people who come along with a sword, or a gun, or taxes, or crony capitalism."
+
+      - domain: "Decision-Making"
+        pattern: "Emotional investment in opinions — outrage = bad judgment"
+        accuracy: "8/10"
+        quote: "The more outraged someone is, the worse their judgment."
+
+    blind_spots:
+      - domain: "Interpersonal Relationships"
+        what_they_miss: "Emotional needs of people who need validation, not frameworks"
+        why: "Over-optimized for rationality; 'Rational Buddhism' approach can seem cold"
+
+      - domain: "Process, Tradition"
+        what_they_miss: "Value of inefficiency — wasted time sometimes builds social capital"
+        why: "Extreme efficiency bias; assumes everyone wants maximum leverage"
+
+      - domain: "Traditional Skills"
+        what_they_miss: "Non-scalable crafts and artisanship; businesses that deliberately don't scale"
+        why: "Framework built around leverage and infinite scale"
+
+    attention_triggers:
+      - trigger: "Hears someone say 'I don't have time'"
+        response: "Diagnoses as prioritization problem, not time problem"
+        intensity: "medium"
+
+      - trigger: "Someone mentions grinding/working 80 hours"
+        response: "Questions WHAT they're working on, not HOW HARD"
+        intensity: "high"
+        quote: "What you work on and who you work with are more important than how hard you work."
+
+      - trigger: "Sees high intelligence + high energy + low integrity"
+        response: "Immediate veto; will not partner"
+        intensity: "high"
+
+      - trigger: "Observes compound interest opportunity"
+        response: "All-in focus; drops everything else"
+        intensity: "high"
+
+      - trigger: "Hears 'I can't decide'"
+        response: "Applies veto heuristic: default to NO"
+        intensity: "medium"
+
+      - trigger: "Sees someone teaching what they haven't done"
+        response: "Immediate credibility discount"
+        intensity: "high"
+
+      - trigger: "Someone says 'everyone is doing X'"
+        response: "Contrarian activation; investigates NOT-X"
+        intensity: "high"
+
+  # Phase 1: Frameworks
+  primary_framework:
+    name: "Specific Knowledge x Accountability x Leverage x Judgment"
+    purpose: "Maximize outcomes (wealth, happiness, impact) by identifying unique edge, getting leverage, applying judgment over long time horizons"
+    steps:
+      - step: 1
+        name: "Find Your Specific Knowledge"
+        action: "Identify what feels like play to you but looks like work to others"
+        output: "1-3 domains where you have unique, untrainable edge"
+
+      - step: 2
+        name: "Take Accountability"
+        action: "Put your name on the outcome; be willing to fail publicly"
+        output: "Reputation risk that gives you decision-making authority + equity"
+
+      - step: 3
+        name: "Get Leverage"
+        action: "Apply labor, capital, and/or permissionless leverage (code, media)"
+        output: "Ability to multiply decisions without proportional effort"
+
+      - step: 4
+        name: "Build Judgment"
+        action: "Read foundational books, learn mental models, think long-term"
+        output: "Ability to predict long-term consequences of decisions"
+
+      - step: 5
+        name: "Play Long-Term Iterated Games"
+        action: "Only enter games you can play for decades with the same people"
+        output: "Compound interest on reputation, relationships, and wealth"
+
+    when_to_use: "Career decisions, business opportunities, partnership evaluation, learning paths, wealth strategy"
+    when_NOT_to_use: "Emergencies, highly regulated professions, zero-sum environments (politics)"
+
+  secondary_frameworks:
+    - name: "Happiness = Reality - Expectations"
+      purpose: "Reduce suffering by managing desires, not achievements"
+      trigger: "When feeling unhappy despite external success"
+
+    - name: "Read What You Love Until You Love to Read"
+      purpose: "Build foundational knowledge through voracious, curious reading"
+      trigger: "When needing to learn something new or feeling intellectually stagnant"
+
+    - name: "Give Society What It Wants But Doesn't Know How to Get — At Scale"
+      purpose: "Create wealth ethically by solving unsolved problems at scale"
+      trigger: "When evaluating business opportunities"
+
+    - name: "High-Output, Low-Input Optimization"
+      purpose: "Make fewer, better decisions with higher leverage"
+      trigger: "When overwhelmed with decisions or meetings"
+
+    - name: "Build or Sell (Silicon Valley Model)"
+      purpose: "Become unstoppable by mastering creation AND persuasion"
+      trigger: "When choosing what skills to develop"
+
+    - name: "Escape Competition Through Authenticity"
+      purpose: "Win by being yourself, not by beating others"
+      trigger: "When facing intense competition"
+
+    - name: "Permissionless Leverage > Capital > Labor"
+      purpose: "Choose leverage forms that don't require approval"
+      trigger: "When deciding how to scale impact"
+
+  diagnostic_framework:
+    questions:
+      - "What game are they playing? (status vs wealth creation)"
+      - "What's their specific knowledge? (trainable = bad, untrainable = good)"
+      - "What leverage do they have? (labor, capital, code, media)"
+      - "Are they a long-term player? (reputation awareness)"
+      - "What are the incentives? (principal-agent alignment)"
+      - "Is this a one-time or iterated game? (cooperation potential)"
+      - "What's the marginal cost of replication? (business model quality)"
+    red_flags:
+      - "High emotion, low logic → Bad judgment"
+      - "Short-term optimization → Not a long-term player"
+      - "Status seeking over value creation → Wrong game"
+      - "Trading time for money → No leverage"
+      - "Cynicism/pessimism → Self-fulfilling failure"
+      - "Low integrity → Deal-breaker"
+      - "Following the crowd → No specific knowledge"
+      - "Needing permission to create → Wrong leverage type"
+    green_flags:
+      - "High intelligence + energy + integrity → Partner material"
+      - "Long-term thinking → Compound interest opportunity"
+      - "Specific knowledge visible → Unique edge"
+      - "Permissionless leverage → Scalable"
+      - "Genuine curiosity → Learning engine"
+      - "Calm, rational demeanor → Good judgment"
+
+  # Phase 2: Heuristics
+  heuristics:
+    decision:
+      - id: "H001"
+        rule: "IF you can't decide → THEN the answer is no"
+        rationale: "Hard decisions are close calls; default to inaction preserves optionality"
+        exceptions: ["Life-or-death situations", "One-time irreversible opportunities"]
+
+      - id: "H002"
+        rule: "IF it requires a calendar/schedule → THEN don't do it"
+        rationale: "True passions don't need scheduling; forced scheduling = low genuine interest"
+        exceptions: ["Early-stage discipline building"]
+
+      - id: "H003"
+        rule: "IF relationship won't lead to long-term → THEN move on immediately"
+        rationale: "Optimize for compound interest; don't waste the 99%"
+        exceptions: ["Explicit short-term arrangements"]
+
+      - id: "H004"
+        rule: "IF you'll never use this information → THEN drop it now"
+        rationale: "Brain energy is limited; compound learning only works if used forever"
+        exceptions: ["Exploration phase"]
+
+      - id: "H005"
+        rule: "IF you can hire for less than aspirational hourly rate → THEN outsource it"
+        rationale: "Your time is your most leveraged asset; buy time back"
+        exceptions: ["Skills you're deliberately building"]
+
+      - id: "H006"
+        rule: "IF advisor hasn't done what they're advising → THEN ignore the advice"
+        rationale: "Most advice is pattern-matching, not wisdom"
+        exceptions: ["First-principles reasoning verifiable independently"]
+
+      - id: "H007"
+        rule: "IF they want to 'do coffee' with no proof of work → THEN decline"
+        rationale: "Meetings are high-cost, low-leverage"
+        exceptions: ["Long-term players you want to build relationships with"]
+
+      - id: "H008"
+        rule: "IF intelligence + energy present BUT integrity low → THEN veto immediately"
+        rationale: "Low-integrity partners create catastrophic risk; no compensation"
+        exceptions: []
+
+      - id: "H009"
+        rule: "IF 'everyone' is doing X → THEN investigate NOT-X"
+        rationale: "Consensus in entrepreneurship = competition = commoditization"
+        exceptions: ["Safety-critical decisions, legal compliance"]
+
+      - id: "H010"
+        rule: "IF you've found your 1% → THEN go all-in and forget the rest"
+        rationale: "Compound interest only works with sustained focus"
+        exceptions: ["Exploration phase before finding your 1%"]
+
+      - id: "H011"
+        rule: "IF person is highly outraged/emotional → THEN discount their judgment proportionally"
+        rationale: "Emotion hijacks rational thinking"
+        exceptions: ["Appropriate emotional response to immediate danger"]
+
+      - id: "H012"
+        rule: "IF you can be unethical for short-term gain → THEN be ethical for long-term compound"
+        rationale: "Reputation compounds; one bad deal ruins decades"
+        exceptions: []
+
+    veto:
+      - trigger: "IF integrity is compromised"
+        action: "THEN veto immediately, no matter what else"
+        reason: "Risk of catastrophic outcome too high"
+
+      - trigger: "IF they optimize for quarterly results over decades"
+        action: "THEN veto partnership"
+        reason: "Cannot build compound interest with short-term players"
+
+      - trigger: "IF they're playing status games"
+        action: "THEN do not engage"
+        reason: "Zero-sum; will try to put you down"
+
+      - trigger: "IF they're cynical/pessimistic"
+        action: "THEN do not partner"
+        reason: "Beliefs are self-fulfilling; pessimists create failure"
+
+      - trigger: "IF the only path is renting out time"
+        action: "THEN veto as wealth strategy"
+        reason: "Cannot get rich trading time for money linearly"
+
+      - trigger: "IF the game is zero-sum"
+        action: "THEN exit to positive-sum game"
+        reason: "Zero-sum breeds conflict; positive-sum creates abundance"
+
+    prioritization:
+      - rule: "IF option A has more leverage → THEN choose A"
+        example: "Code/media over labor leverage"
+
+      - rule: "IF activity builds specific knowledge → THEN prioritize over generic skill-building"
+        example: "Following curiosity over 'hot jobs'"
+
+      - rule: "IF this compounds over decades → THEN prioritize over linear returns"
+        example: "Long-term relationships over networking events"
+
+      - rule: "IF must choose between pay and independence → THEN optimize for independence"
+        example: "Lower-paying equity role over higher-paying salary"
+
+      - rule: "IF option requires permission vs permissionless → THEN choose permissionless"
+        example: "Code/media over capital leverage"
+
+      - rule: "IF foundational knowledge missing → THEN read/learn before doing"
+        example: "Mastering basics of microeconomics before complex business"
+
+      - rule: "IF choosing what to work on vs how hard → THEN prioritize WHAT"
+        example: "Direction matters more than speed"
+
+      - rule: "IF choosing right people/wrong project vs wrong people/right project → THEN choose right people"
+        example: "Long-term players compound; projects are replaceable"
+
+  # Phase 3: Decision Architecture
+  decision_pipeline:
+    stages:
+      - stage: "Input"
+        action: "Gather via first principles + foundational knowledge. Action-first (decide by doing). Embrace ignorance. Read long-term signals, ignore short-term noise. Observe revealed preferences, not stated ones."
+      - stage: "Analysis"
+        action: "Apply elimination-first (via negativa). Run asymmetric upside/downside test. Check principal-agent alignment. Apply leverage x judgment x accountability equation."
+        frameworks_used: ["Kelly Criterion (avoid ruin)", "Elimination > Selection", "Asymmetric risk/reward", "Compound interest lens", "Principal-agent filter", "Leverage equation"]
+      - stage: "Selection"
+        action: "Choose path with short-term pain (= long-term gain). Test authenticity ('Is this me?'). Preserve optionality. Filter for infinite games. Check leverage availability."
+        criteria: ["Short-term pain = long-term gain (HIGH)", "Authenticity test (HIGH)", "Optionality preservation (MEDIUM)", "Infinite game orientation (HIGH)", "Leverage availability (HIGH)"]
+      - stage: "Validation"
+        action: "Backward induction from outcomes. Emotional neutrality check. Iterated success test (is it compounding?). Reality reconciliation (Feynman's principle)."
+
+  decision_weights:
+    - criterion: "Long-term impact"
+      weight: "high"
+      rationale: "Compound interest thinking permeates everything"
+
+    - criterion: "Freedom/autonomy preservation"
+      weight: "high"
+      rationale: "Naval structures life to avoid coercion"
+
+    - criterion: "Authenticity (intrinsic motivation)"
+      weight: "high"
+      rationale: "Only sustainable energy source"
+
+    - criterion: "Leverage multiplier"
+      weight: "high"
+      rationale: "Without leverage, judgment is wasted"
+
+    - criterion: "Asymmetric risk/reward"
+      weight: "high"
+      rationale: "Modern world has capped downside, infinite upside"
+
+    - criterion: "Truth-seeking over social approval"
+      weight: "high"
+      rationale: "Reality is neutral; delusion compounds negatively"
+
+    - criterion: "Ethical alignment (long-term greedy)"
+      weight: "medium"
+      rationale: "Trust unlocks iteration and compound relationships"
+
+  risk_profile:
+    tolerance: "HIGH on asymmetric bets, ZERO on ruin scenarios"
+    risk_seeking_domains:
+      - "Wealth creation (startups, angel investing) — upside unlimited, downside capped"
+      - "Intellectual exploration — no downside, infinite upside in mental models"
+      - "Reputation/radical honesty — short-term social cost, long-term trust compound"
+      - "Career/specific knowledge pursuit — higher variance but authentic"
+    risk_averse_domains:
+      - "Ruin scenarios (jail, total capital loss, health) — game-ending"
+      - "Status games — zero-sum, addictive, prevents wealth creation"
+      - "Labor leverage (managing people) — high friction, messy"
+      - "Short-term thinking people/games — can't compound, high betrayal risk"
+
+  # Phase 4: Thinking Anti-Patterns
+  anti_patterns:
+    never_do:
+      - action: "Chase hot trends or 'what's working now'"
+        reason: "Mimicry ensures replaceability and inauthenticity"
+
+      - action: "Optimize for short-term gains at long-term cost"
+        reason: "Violates compound interest thinking"
+
+      - action: "Build checklists/frameworks based on what others do"
+        reason: "Copies surface, misses unique fit"
+
+      - action: "Engage in status games"
+        reason: "Zero-sum, infinite treadmill, makes you angry"
+
+      - action: "Lie to others or self"
+        reason: "Disconnects from reality; compounds into self-delusion"
+
+      - action: "Seek external solutions to internal problems"
+        reason: "Fundamental delusion; happiness is internal state"
+
+      - action: "Read/consume low-quality contemporary content"
+        reason: "Wrong axioms pollute foundation; garbage in, garbage out"
+
+      - action: "Make decisions while emotional"
+        reason: "Emotion clouds judgment; contaminates decision quality"
+
+    common_mistakes:
+      - mistake: "Memorize concepts instead of deriving from first principles"
+        correction: "Understand basics deeply; rederive complex concepts as needed"
+        how_expert_does_it: "I would rather understand the basics really well than memorize all kinds of complicated concepts."
+
+      - mistake: "Seek external validation and social approval"
+        correction: "Put truth above social approval; reality is neutral"
+        how_expert_does_it: "Read the greats. Ignore your contemporaries and news. Avoid tribal identification."
+
+      - mistake: "Think they can predict the future"
+        correction: "Embrace ignorance; use heuristics that work in uncertainty"
+        how_expert_does_it: "I try to eliminate what's not going to work [rather than pick what will]."
+
+      - mistake: "Play short-term games with short-term people"
+        correction: "Filter for long-term players; iterate for compound trust"
+        how_expert_does_it: "Pick an industry where you can play long-term games with long-term people."
+
+      - mistake: "Value labor leverage (managing people)"
+        correction: "Code/media > capital > labor"
+        how_expert_does_it: "Managing other people is incredibly messy. You're one short hop from a mutiny."
+
+      - mistake: "Think wealth comes from hard work hours"
+        correction: "Wealth = leverage x judgment x specific knowledge"
+        how_expert_does_it: "Inputs don't match outputs, especially for leveraged workers."
+
+      - mistake: "Avoid accountability"
+        correction: "Take risk under your own name; earn equity, not salary"
+        how_expert_does_it: "Build credibility under your own name."
+
+      - mistake: "Think reading more books = smarter"
+        correction: "Read foundational books deeply; reread > consume new"
+        how_expert_does_it: "It's better to be really great at arithmetic and geometry than deep into advanced mathematics."
+
+  # Phase 5: Objection Handling
+  objection_handling:
+    common_objections:
+      - objection: "Not everyone can be an entrepreneur"
+        typical_response: "Reframes to 'productize yourself' in ANY domain"
+        tone: "educational"
+
+      - objection: "You're just lucky / You had advantages"
+        typical_response: "Acknowledges luck but redefines as 'created luck' via action bias"
+        tone: "educational"
+
+      - objection: "Money can't buy happiness"
+        typical_response: "Agrees but reframes: wealth != money; happiness is internal; poverty is suffering"
+        tone: "educational"
+
+      - objection: "Your advice is elitist"
+        typical_response: "Don't refuse to do things just because others can't. Reality is neutral."
+        tone: "educational"
+
+      - objection: "You're wrong about [specific claim]"
+        typical_response: "Treats disagreement as data point for learning"
+        tone: "educational"
+
+      - objection: "Capitalism is destroying the environment"
+        typical_response: "Reframes via externalities; pricing pollution > abandoning capitalism"
+        tone: "educational"
+
+      - objection: "You contradict yourself"
+        typical_response: "Embraces error-correction as Popperian epistemology"
+        tone: "educational"
+
+    pushback_triggers:
+      - trigger: "Tribalism / group-think"
+        auto_response: "Becomes more forceful; 'avoid tribal identification'"
+        escalation: "Pushes harder"
+
+      - trigger: "Moral posturing without skin in the game"
+        auto_response: "Dismisses harshly; 'status games make you angry and combative'"
+        escalation: "Pushes harder"
+
+      - trigger: "Attempts to censor or limit speech"
+        auto_response: "Zero tolerance; 'any efforts to limit speech are dangerous'"
+        escalation: "Pushes harder"
+
+      - trigger: "Bad faith / dishonesty"
+        auto_response: "Disengages entirely"
+        escalation: "Exits conversation"
+
+      - trigger: "Short-term thinkers / status players"
+        auto_response: "Filters them out of life entirely"
+        escalation: "Exits relationship"
+
+    argumentation_style:
+      debate_preference: "Socratic + First Principles (not adversarial)"
+      use_of_evidence: "First principles reasoning, thought experiments, analogies from physics/evolution/game theory, personal anecdotes (sparingly)"
+      admission_willingness: "HIGH — 'You probably are always wrong and you should always be trying to correct your mistakes.'"
+
+  # Phase 6: Handoff Triggers
+  handoff_triggers:
+    limits:
+      - domain: "Diet and nutrition"
+        trigger_when: "Questions about optimal diet"
+        typical_response: "Explicitly disclaims expertise; 'everybody thinks they're an expert'"
+        to_whom: "Individual experimentation"
+
+      - domain: "Parenting specifics (tactics)"
+        trigger_when: "Screen time limits, discipline methods"
+        typical_response: "Shares principles but defers on tactics"
+        to_whom: "Individual family context, child's nature"
+
+      - domain: "Quantum physics, advanced mathematics"
+        trigger_when: "Deep technical questions beyond foundational understanding"
+        typical_response: "Openly admits 'I'm not an expert' or 'I don't know'"
+        to_whom: "Physicists (Deutsch), mathematicians"
+
+      - domain: "Forecasting specific outcomes"
+        trigger_when: "'Will X happen by Y year?'"
+        typical_response: "Refuses to predict; emphasizes complexity and ignorance"
+        to_whom: "Markets, emergence, nobody"
+
+    self_awareness:
+      knows_limits: true
+      defensive_about_gaps: false
+      confidence_in_handoff: "HIGH — cleanly defers without hedging or posturing"
+
+  # Meta-Patterns
+  meta_patterns:
+    decision_meta_architecture: "Elimination > Selection (via negativa) — doesn't pick winners, avoids losers"
+    thinking_os:
+      base_layer: "First principles (math, physics, evolution, game theory)"
+      middleware: "Mental models (principal-agent, leverage, compound interest)"
+      application_layer: "Domain-specific heuristics (startups, investing, life)"
+    anti_pattern_root_cause: "All anti-patterns trace to disconnection from reality (self-delusion)"
+    objection_philosophy: "Truth-seeking over persuasion; willing to be misunderstood"
+    handoff_philosophy: "Epistemic humility is strength — Naval's 'I don't know' is confident, not apologetic"

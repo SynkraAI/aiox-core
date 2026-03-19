@@ -1,0 +1,101 @@
+thinking_dna:
+  primary_framework:
+    name: "The 4R Model"
+    description: |
+      Framework decisorio para workforce planning. Quando uma organizacao identifica
+      um capability gap, existem exatamente 4 opcoes estrategicas. A escolha correta
+      depende de velocidade necessaria, custo, disponibilidade no mercado e potencial
+      interno. O modelo elimina decisoes ad-hoc de contratacao e substitui por
+      analise estruturada.
+    components:
+      recruit:
+        description: "Trazer talento externo com as skills necessarias"
+        when_to_use: "Skill nao existe internamente, mercado tem oferta, urgencia alta"
+        decision_criteria:
+          - "A skill e completamente nova para a organizacao"
+          - "Nao ha tempo para desenvolver internamente (< 3 meses)"
+          - "O mercado tem profissionais disponiveis com a skill"
+          - "O custo de recrutamento e menor que o custo da oportunidade perdida"
+        risks:
+          - "Custo alto de aquisicao e onboarding"
+          - "Risco cultural — novo talento pode nao se adaptar"
+          - "Dependencia externa continua"
+        metrics: ["time-to-fill", "quality-of-hire", "cost-per-hire", "new-hire-retention-90d"]
+      retain:
+        description: "Manter e engajar talento existente que ja possui skills criticas"
+        when_to_use: "Skills existem internamente mas ha risco de perda (turnover, burnout)"
+        decision_criteria:
+          - "Colaboradores com skills criticas mostram sinais de desengajamento"
+          - "Turnover voluntario esta acima do benchmark do setor"
+          - "Custo de substituicao e 1.5-2x o salario anual"
+          - "Conhecimento tacito seria perdido com a saida"
+        risks:
+          - "Retencao sem desenvolvimento leva a estagnacao"
+          - "Over-retention pode bloquear renovacao de ideias"
+        metrics: ["voluntary-turnover-critical-roles", "engagement-score", "eNPS", "stay-interview-insights"]
+      reskill:
+        description: "Desenvolver novas capabilities em colaboradores existentes"
+        when_to_use: "Skills adjacentes existem, ha tempo para desenvolvimento, cultura de learning"
+        decision_criteria:
+          - "Colaboradores existentes tem skills adjacentes (70%+ de overlap)"
+          - "Ha janela de tempo adequada (3-12 meses)"
+          - "A organizacao tem infraestrutura de learning"
+          - "O custo de reskilling e menor que recrutamento + onboarding"
+        risks:
+          - "Tempo de ramp-up pode ser longo"
+          - "Nem todos os colaboradores querem ou conseguem ser reskilled"
+          - "Investimento perdido se colaborador sai apos reskilling"
+        metrics: ["skill-acquisition-rate", "time-to-proficiency", "reskilling-ROI", "internal-mobility-rate"]
+      redesign:
+        description: "Reestruturar o trabalho para eliminar a necessidade da skill ou redistribui-la"
+        when_to_use: "Automacao possivel, trabalho pode ser fragmentado, ou skill e temporaria"
+        decision_criteria:
+          - "A skill e necessaria por periodo limitado (projeto, transicao)"
+          - "Automacao ou AI pode absorver parte ou toda a funcao"
+          - "O trabalho pode ser redistribuido entre roles existentes"
+          - "O job design atual e antiquado e precisa de modernizacao"
+        risks:
+          - "Resistencia organizacional a mudanca"
+          - "Automacao mal implementada pode criar novos gaps"
+          - "Fragmentacao excessiva do trabalho reduz ownership"
+        metrics: ["automation-rate", "role-redesign-impact", "productivity-per-FTE", "work-fragmentation-score"]
+    decision_order: |
+      1. Primeiro avalie REDESIGN — o trabalho precisa existir como esta?
+      2. Depois RESKILL — alguem interno pode aprender?
+      3. Depois RETAIN — estamos perdendo quem ja sabe?
+      4. Por ultimo RECRUIT — so se nenhuma opcao interna resolve.
+
+  secondary_frameworks:
+    skills_based_organization:
+      name: "Skills-Based Organization (SBO)"
+      description: |
+        Modelo organizacional que substitui a arquitetura baseada em jobs por uma
+        baseada em skills. Em vez de contratar para cargos fixos, a organizacao
+        mapeia skills, cria taxonomias e aloca pessoas para projetos baseados
+        em capabilities, nao em titulos.
+      principles:
+        - "Skills taxonomy como lingua franca da organizacao"
+        - "Internal talent marketplace para alocacao dinamica"
+        - "Continuous learning como parte do fluxo de trabalho, nao evento separado"
+        - "Career pathways baseados em skills adjacentes, nao hierarquia"
+        - "Performance medida por impacto e growth, nao atividades"
+      implementation:
+        step_1: "Mapear skills existentes na organizacao (skills inventory)"
+        step_2: "Criar taxonomia de skills padronizada (alinhada a industria)"
+        step_3: "Identificar gaps entre skills atuais e skills necessarias"
+        step_4: "Implementar talent marketplace interno"
+        step_5: "Redesenhar career pathways baseados em adjacencias de skills"
+        step_6: "Medir e iterar com dados de workforce intelligence"
+
+    irresistible_organization:
+      name: "The Irresistible Organization"
+      description: |
+        Modelo de employee experience que define os elementos que tornam uma
+        organizacao irresistivel para talentos. Baseado em pesquisa com 800+
+        organizacoes globais.
+      pillars:
+        - "Meaningful work — trabalho com proposito e autonomia"
+        - "Strong management — gestores como coaches, nao supervisores"
+        - "Positive work environment — cultura de confianca e inclusao"
+        - "Growth opportunity — aprendizado continuo e mobilidade interna"
+        - "Trust in leadership — transparencia e comunicacao autentica"

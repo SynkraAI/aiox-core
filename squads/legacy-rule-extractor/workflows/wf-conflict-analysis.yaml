@@ -1,0 +1,46 @@
+# Workflow: Cross-System Conflict Analysis
+# Compare rules from two or more systems to find conflicts
+
+workflow:
+  id: wf-conflict-analysis
+  name: "Cross-System Conflict Analysis"
+  trigger: "*conflicts {dir-a} {dir-b}"
+  executor: archaeologist
+
+  phases:
+    - phase: 1
+      name: "Load Catalogs"
+      action: |
+        Load rule catalogs from both directories.
+        Validate both catalogs have valid structure.
+        Display summary of both systems (rule counts, domains).
+
+    - phase: 2
+      name: "Detect Conflicts"
+      task: detect-conflicts
+      delegated_to: auditor
+      input:
+        catalog_a: "{dir-a}/catalog/rule-catalog.yaml"
+        catalog_b: "{dir-b}/catalog/rule-catalog.yaml"
+
+    - phase: 3
+      name: "Detect Redundancies"
+      task: detect-redundancies
+      delegated_to: auditor
+      input:
+        catalogs: ["{dir-a}", "{dir-b}"]
+      action: |
+        Find rules duplicated across systems.
+        Flag for consolidation.
+
+    - phase: 4
+      name: "Generate Reports"
+      action: |
+        Produce:
+        - conflict-report.md (sorted by severity)
+        - redundancy-report.md
+        - gap-analysis.md
+        - Executive summary with actionable recommendations
+
+  quality_gates:
+    - QG-LRE-003

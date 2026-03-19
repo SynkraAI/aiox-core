@@ -1,0 +1,357 @@
+# Prop Trading Firms — Dados para Afiliados
+# Atualizado: 2026-02 | Fonte: sites oficiais das firmas, Trustpilot, comunidades de trading
+# Uso: agente prop-trading-affiliate para análise e recomendação de programas
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  currency: USD
+  disclaimer: >
+    Prop firms são negócios de alto risco. Verifique sempre a situação regulatória
+    no país do seu público. Taxas de avaliação e condições mudam frequentemente.
+    Conteúdo de afiliado neste nicho requer disclaimers rigorosos sobre risco financeiro.
+  regulatory_note: >
+    Após ação regulatória da CFTC nos EUA (2024) contra várias prop firms,
+    o setor passou por consolidação. Verifique a situação atual de cada firma
+    antes de promover.
+
+firms:
+
+  ftmo:
+    name: FTMO
+    url: https://ftmo.com
+    country_origin: CZE
+    founded: 2015
+    regulation: unregulated
+    regulation_notes: >
+      FTMO é uma prop firm privada, não uma corretora regulamentada.
+      Opera sob modelo de avaliação — traders recebem capital simulado.
+    markets:
+      - forex
+      - indices
+      - commodities
+      - crypto
+    account_sizes_usd:
+      - 10000
+      - 25000
+      - 50000
+      - 100000
+      - 200000
+    evaluation_fee_range_usd:
+      min: 155
+      max: 1080
+      notes: "Depende do tamanho da conta e do modelo de avaliação escolhido."
+    evaluation_models:
+      - name: "FTMO Challenge"
+        phases: 2
+        profit_target_p1_pct: 10
+        profit_target_p2_pct: 5
+        max_daily_loss_pct: 5
+        max_total_loss_pct: 10
+      - name: "Swing Challenge"
+        phases: 2
+        notes: "Sem regras de fim do dia. Para swing traders."
+      - name: "FTMO Free Trial"
+        cost: 0
+        notes: "Trial gratuito de 10 dias para praticar."
+    profit_split_pct: 80
+    profit_split_max_pct: 90
+    profit_split_notes: "Começa em 80%. Aumenta para 90% após consistência."
+    commission_affiliate_pct: 10
+    commission_affiliate_notes: >
+      10% sobre a taxa de avaliação paga pelo referenciado.
+      Exemplo: avaliação de $500 → $50 de comissão.
+    cookie_days: 30
+    payout_frequency: monthly
+    payout_methods:
+      - bank_transfer
+      - crypto
+      - rise
+    trustpilot_score: 4.8
+    trustpilot_reviews: 8000
+    strengths:
+      - marca mais reconhecida globalmente em prop trading
+      - excelente reputação de pagamentos (8+ anos)
+      - suporte multilíngue incluindo português
+      - comunidade forte no YouTube e forums
+      - processo de avaliação transparente
+    weaknesses:
+      - taxas de avaliação relativamente caras
+      - sem conta de demonstração gratuita permanente
+      - regras rígidas que eliminam muitos traders
+    affiliate_notes: >
+      Programa de afiliados mais robusto do setor. Dashboard com métricas detalhadas.
+      Material de marketing disponível em português. Conversão alta pela confiança da marca.
+      Sub-nicho de traders BR tem crescido significativamente.
+
+  apex_trader_funding:
+    name: Apex Trader Funding
+    url: https://apextraderfunding.com
+    country_origin: USA
+    founded: 2021
+    regulation: unregulated
+    markets:
+      - futures
+      - micros
+    account_sizes_usd:
+      - 25000
+      - 50000
+      - 75000
+      - 100000
+      - 150000
+      - 250000
+      - 300000
+    evaluation_fee_range_usd:
+      min: 67
+      max: 657
+      notes: "Promoções frequentes com 80-90% de desconto. Monitorar site para promos."
+    evaluation_models:
+      - name: "Full Account"
+        phases: 1
+        profit_target_pct: 6
+        max_daily_loss_pct: 2
+        max_trailing_drawdown_pct: variable
+        notes: "Avaliação de fase única — diferencial competitivo."
+    profit_split_pct: 100
+    profit_split_notes: >
+      Primeiros $25.000 de lucro: 100% para o trader.
+      Acima de $25.000: 90% para o trader.
+    commission_affiliate_pct: 10
+    commission_affiliate_notes: >
+      10% da taxa de avaliação. Promoções frequentes podem afetar valor da comissão
+      (desconto reduz base de cálculo).
+    cookie_days: 30
+    payout_frequency: biweekly
+    payout_methods:
+      - bank_transfer
+      - wise
+      - crypto
+    trustpilot_score: 4.4
+    trustpilot_reviews: 3200
+    strengths:
+      - avaliação de fase única (mais rápido que 2 fases)
+      - 100% de profit split até $25K (diferencial)
+      - promoções agressivas (facilita conversão)
+      - múltiplas contas simultâneas permitidas
+    weaknesses:
+      - foco apenas em futuros (sem forex)
+      - trailing drawdown pode ser difícil de gerenciar
+      - menos reconhecimento de marca que FTMO fora dos EUA
+    affiliate_notes: >
+      Promoções de 80-90% off frequentes facilitam conversão mas reduzem comissão.
+      Ótimo para audiência de traders de futuros americanos.
+
+  topstep:
+    name: TopStep
+    url: https://www.topstep.com
+    country_origin: USA
+    founded: 2012
+    regulation: unregulated
+    markets:
+      - futures
+      - forex
+    account_sizes_usd:
+      - 50000
+      - 100000
+      - 150000
+    evaluation_fee_range_usd:
+      min: 49
+      max: 149
+      notes: "Cobrança mensal durante a avaliação (não taxa única)."
+    evaluation_models:
+      - name: "Trading Combine"
+        phases: 1
+        cost_model: monthly_subscription
+        profit_target_pct: 6
+        max_daily_loss_pct: 2
+        max_total_loss_pct: 3
+    profit_split_pct: 100
+    profit_split_notes: "Primeiros $5.000: 100%. Acima: 90%."
+    commission_affiliate:
+      type: hybrid
+      cpa_usd: 100
+      revenue_share_pct: 30
+      notes: "CPA por nova conta financiada OU revenue share de 30% nas mensalidades."
+    cookie_days: 30
+    payout_frequency: weekly
+    payout_methods:
+      - bank_transfer
+      - paypal
+    trustpilot_score: 4.2
+    trustpilot_reviews: 2100
+    strengths:
+      - pioneira e marca reconhecida (desde 2012)
+      - modelo de assinatura mensal — menor barreira de entrada
+      - programa de afiliados com CPA ou revenue share
+      - pagamentos semanais (diferencial)
+    weaknesses:
+      - modelo mensal acumula custo se trader demorar para passar
+      - profit split começa só acima de $5K
+      - conta menor ($50K máx vs $200K da FTMO)
+    affiliate_notes: >
+      Modelo de comissão flexível (CPA ou revenue share). Revenue share mensal
+      cria renda recorrente. Boa opção para afiliados de conteúdo de longo prazo.
+
+  bulenox:
+    name: Bulenox
+    url: https://bulenox.com
+    country_origin: USA
+    founded: 2022
+    regulation: unregulated
+    markets:
+      - futures
+    account_sizes_usd:
+      - 10000
+      - 25000
+      - 50000
+      - 100000
+      - 150000
+      - 250000
+    evaluation_fee_range_usd:
+      min: 49
+      max: 349
+      notes: "Preços competitivos. Promoções frequentes."
+    evaluation_models:
+      - name: "Standard Evaluation"
+        phases: 1
+        profit_target_pct: 8
+        max_daily_loss_pct: 2
+        trailing_drawdown: true
+    profit_split_pct: 90
+    profit_split_notes: "90% para trader desde o primeiro pagamento."
+    commission_affiliate_pct: 15
+    commission_affiliate_notes: >
+      15% de comissão — acima da média do setor.
+      Uma das comissões de afiliado mais altas do segmento.
+    cookie_days: 45
+    payout_frequency: weekly
+    payout_methods:
+      - bank_transfer
+      - crypto
+      - rise
+    trustpilot_score: 4.3
+    trustpilot_reviews: 850
+    strengths:
+      - comissão de afiliado mais alta (15%)
+      - cookie mais longo (45 dias)
+      - pagamentos semanais
+      - conta mínima baixa ($10K)
+    weaknesses:
+      - marca menos conhecida (fundada em 2022)
+      - menos histórico de pagamentos que FTMO
+      - apenas futuros
+    affiliate_notes: >
+      Melhor comissão do setor (15%) + cookie maior. Boa opção para diversificar
+      o portfolio de afiliados de prop trading. Menos conversão espontânea por
+      ser marca mais nova — requer mais conteúdo de educação.
+
+  my_funded_futures:
+    name: My Funded Futures (MyFundedFutures)
+    url: https://myfundedfutures.com
+    country_origin: USA
+    founded: 2022
+    regulation: unregulated
+    markets:
+      - futures
+      - micros
+    account_sizes_usd:
+      - 10000
+      - 25000
+      - 50000
+      - 75000
+      - 100000
+      - 150000
+    evaluation_fee_range_usd:
+      min: 41
+      max: 374
+      notes: "Preços muito competitivos. Promoções semanais comuns."
+    evaluation_models:
+      - name: "Standard"
+        phases: 1
+        profit_target_pct: 6
+        max_daily_loss_pct: 2
+        trailing_drawdown: true
+      - name: "Starter"
+        phases: 1
+        profit_target_pct: 3
+        notes: "Meta menor — mais fácil de passar."
+    profit_split_pct: 90
+    profit_split_notes: "90% desde o início. Sem período de ramp-up."
+    commission_affiliate_pct: 10
+    cookie_days: 30
+    payout_frequency: biweekly
+    payout_methods:
+      - bank_transfer
+      - crypto
+    trustpilot_score: 4.5
+    trustpilot_reviews: 1400
+    strengths:
+      - modelo Starter com meta menor (3%) — alta taxa de aprovação
+      - preço competitivo
+      - boa reputação de pagamentos para ser firma nova
+      - múltiplas contas simultâneas
+    weaknesses:
+      - apenas futuros
+      - marca ainda em construção
+      - menos material de marketing em português
+    affiliate_notes: >
+      Modelo Starter com profit target de 3% tem alta taxa de conversão
+      (traders querem passar logo). Bom complemento ao FTMO no portfolio de afiliados.
+
+  earn2trade:
+    name: Earn2Trade
+    url: https://earn2trade.com
+    country_origin: USA
+    founded: 2019
+    regulation: unregulated
+    markets:
+      - futures
+    account_sizes_usd:
+      - 25000
+      - 50000
+      - 100000
+      - 150000
+    evaluation_fee_range_usd:
+      min: 50
+      max: 150
+      notes: "Cobrança mensal de assinatura (como TopStep)."
+    evaluation_models:
+      - name: "The Gauntlet Mini"
+        phases: 1
+        cost_model: monthly_subscription
+        profit_target_pct: 10
+        max_daily_loss_pct: 2
+    profit_split_pct: 80
+    profit_split_notes: "80% para o trader."
+    commission_affiliate_pct: 30
+    commission_affiliate_notes: >
+      30% de revenue share sobre as mensalidades pagas pelo referenciado.
+      Renda recorrente enquanto o trader mantém a assinatura.
+    cookie_days: 60
+    payout_frequency: monthly
+    payout_methods:
+      - paypal
+      - bank_transfer
+    trustpilot_score: 4.0
+    trustpilot_reviews: 780
+    strengths:
+      - revenue share de 30% recorrente — renda passiva significativa
+      - cookie de 60 dias — o mais longo da lista
+      - educação integrada na plataforma (diferencial para iniciantes)
+    weaknesses:
+      - profit target alto (10%) comparado a concorrentes
+      - profit split menor (80%)
+      - marca menos conhecida no Brasil
+    affiliate_notes: >
+      Revenue share de 30% recorrente é altamente atrativo para afiliados de
+      conteúdo de longo prazo. Um trader que paga $100/mês gera $30/mês para
+      o afiliado. Cookie de 60 dias facilita conversão de conteúdo evergreen.
+
+comparison_summary:
+  highest_affiliate_commission: bulenox
+  longest_cookie: earn2trade
+  most_trusted_brand: ftmo
+  best_for_recurring_income: earn2trade
+  best_for_futures_usa: apex_trader_funding
+  best_profit_split_for_trader: topstep
+  best_for_beginners: my_funded_futures

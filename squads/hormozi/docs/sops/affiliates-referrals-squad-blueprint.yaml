@@ -1,0 +1,1131 @@
+# Affiliates & Referrals Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Leads: Section IV "Get People Who Get Leads" - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: affiliates-referrals
+  purpose: "Get other people to advertise for you through customers, employees, agencies, and affiliates"
+  domain: growth-leverage
+  source_playbook: "$100M Leads: Section IV - Get People Who Get Leads"
+
+  core_equation: |
+    Leverage = Output / Input
+    Goal: More leads for less work through lead getters
+    Impact: Exponential growth (1→2→4→8) vs. linear (1→2→3→4)
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: leverage-coordinator
+      role: "Orchestrate all four lead getter types and optimize leverage"
+      decisions:
+        - "Which lead getter type to prioritize"
+        - "Resource allocation across referral programs"
+        - "Identify bottlenecks in leverage system"
+      kpis:
+        - "Total leads from lead getters"
+        - "Cost per lead by source"
+        - "Leverage ratio (output/input)"
+
+  tier_0_diagnosis:
+    - agent: referral-diagnostician
+      role: "Diagnose why referrals aren't happening"
+      inputs:
+        - "Customer satisfaction data"
+        - "Current referral rate"
+        - "Churn rate"
+      outputs:
+        - "Root cause (product vs. not asking)"
+        - "Goodwill assessment"
+        - "Improvement priorities"
+
+    - agent: leverage-auditor
+      role: "Assess current leverage state across all lead getter types"
+      inputs:
+        - "Lead source data"
+        - "Cost by acquisition channel"
+        - "Lead getter performance"
+      outputs:
+        - "Leverage scenario assessment (1-4)"
+        - "Gap analysis by lead getter type"
+        - "Scaling recommendations"
+
+  tier_1_execution:
+    - agent: goodwill-builder
+      role: "Execute six methods to increase product value and goodwill"
+      specialization: "Customer Referrals - Value Creation"
+      methods:
+        sell_better_customers: "Find and target ideal customer profile"
+        set_better_expectations: "Lower promises, exceed delivery"
+        get_better_results: "Identify and force success behaviors"
+        faster_wins: "Deliver value in smaller, faster increments"
+        improve_product: "Monthly improvement cycle"
+        sell_next_thing: "Prevent customer drop-off"
+
+    - agent: referral-asker
+      role: "Execute seven methods to systematically request referrals"
+      specialization: "Customer Referrals - Request Systems"
+      methods:
+        one_sided: "Pay CAC to referrer OR friend"
+        two_sided: "Split CAC between both parties"
+        at_purchase: "Ask during buying moment"
+        negotiation_chip: "Trade discount for introductions"
+        referral_events: "Time-bound promotions"
+        ongoing_program: "Always-on referral messaging"
+        unlockable_bonuses: "Rewards for referrals + testimonials"
+
+    - agent: employee-trainer
+      role: "Transform employees into lead getters using 3Ds method"
+      specialization: "Employee Lead Generation"
+      training_method:
+        document: "Create checklist from actual work"
+        demonstrate: "Show step-by-step"
+        duplicate: "They replicate under observation"
+      targets:
+        - "Lead generation skills transfer"
+        - "Checklist clarity (stranger test)"
+        - "Performance measurement"
+
+  tier_2_judgment:
+    - agent: referral-program-designer
+      role: "Design and optimize referral program mechanics"
+      inputs:
+        - "CAC data"
+        - "Customer LTV"
+        - "Competitor referral programs"
+      outputs:
+        - "Incentive structure recommendations"
+        - "Program mechanics design"
+        - "Success criteria definition"
+
+    - agent: leverage-optimizer
+      role: "Optimize lead getter to lead getter recruitment"
+      goal: "Achieve Scenario #4: Lead getters who get lead getters"
+      strategies:
+        - "Employee referral programs for hiring"
+        - "Customer advocacy programs"
+        - "Affiliate tier structures"
+        - "Agency partnership models"
+
+    - agent: belief-shifter
+      role: "Transform leader mindset on delegation and leverage"
+      beliefs_to_change:
+        old_1: "If you want something done right, do it yourself"
+        new_1: "Get someone to spend all their time doing it"
+        old_2: "Nobody can do it like I do"
+        new_2: "If I can do it, someone else can do it better"
+        old_3: "No one can replace me"
+        new_3: "Everyone is replaceable, especially me"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  leverage-coordinator:
+    id: leverage-coordinator
+    title: "Leverage & Lead Getter Orchestrator"
+    tier: orchestrator
+    icon: "⚙️"
+
+    purpose: |
+      Coordinate all four types of lead getters to maximize leverage.
+      Move business from Scenario #1 (you alone) to Scenario #4 (lead getters who get lead getters).
+
+    core_frameworks:
+      - name: "Four Leverage Scenarios"
+        source: "Section IV Introduction p.1-2"
+        scenarios:
+          - scenario: 1
+            description: "You are the lead getter"
+            work: HIGH
+            leads: LOW
+            leverage: LOW
+          - scenario: 2
+            description: "One lead getter working for you"
+            work: LOW
+            leads: LOW
+            leverage: HIGH
+          - scenario: 3
+            description: "Many lead getters working for you"
+            work: HIGH
+            leads: HIGH
+            leverage: HIGHER
+          - scenario: 4
+            description: "Lead getters who get lead getters"
+            work: LOW
+            leads: HIGH
+            leverage: HIGHEST
+
+      - name: "Four Lead Getter Types"
+        source: "Section IV Introduction p.3"
+        types:
+          - customers: "Buy and refer others"
+          - employees: "Work in your business getting leads"
+          - agencies: "Businesses with services that get leads"
+          - affiliates: "Tell their audiences about your stuff"
+
+    decision_authority:
+      - "Lead getter type prioritization"
+      - "Resource allocation across programs"
+      - "Performance intervention triggers"
+      - "Scaling decisions"
+
+    success_metrics:
+      primary:
+        - name: "Total Lead Getter Leads"
+          target: ">50% of all leads"
+        - name: "Referral vs. Churn Ratio"
+          target: "Referrals > Churn"
+      secondary:
+        - "Employee lead efficiency"
+        - "Referral program participation"
+        - "Leverage scenario progression"
+
+  referral-diagnostician:
+    id: referral-diagnostician
+    title: "Referral System Diagnostician"
+    tier: tier_0
+    icon: "🔍"
+
+    purpose: |
+      Diagnose why referrals aren't happening and identify the root cause.
+      Two main problems: product not good enough OR not asking.
+
+    diagnostic_framework:
+      source: "Chapter #1 p.7-8"
+
+      problem_1_product:
+        name: "Product Not Good Enough"
+        test_question: "If product were exceptional, would people already know about it?"
+        indicators:
+          - "Customers too embarrassed to tell friends"
+          - "Product is okay but non-remarkable"
+          - "Referral rate stays low despite asking"
+        action: "Focus on six ways to give more value"
+
+      problem_2_not_asking:
+        name: "Not Asking for Referrals"
+        test_question: "Are we systematically requesting referrals?"
+        indicators:
+          - "No referral program exists"
+          - "No incentives offered"
+          - "Asking feels awkward"
+        action: "Implement seven ways to ask for referrals"
+
+    goodwill_formula:
+      source: "Chapter #1 p.8"
+      equation: "Goodwill = Value - Price"
+      insight: "More goodwill creates more word of mouth, which creates more referrals"
+
+    outputs:
+      - "Root cause classification"
+      - "Goodwill score assessment"
+      - "Priority recommendations"
+      - "Action plan"
+
+  leverage-auditor:
+    id: leverage-auditor
+    title: "Leverage State Auditor"
+    tier: tier_0
+    icon: "📊"
+
+    purpose: |
+      Assess current leverage state and identify gaps across all lead getter types.
+      Determine which scenario (1-4) the business currently operates in.
+
+    assessment_criteria:
+      scenario_1:
+        description: "You alone doing Core Four"
+        indicators:
+          - "All leads come from personal effort"
+          - "No employees doing lead generation"
+          - "No referral systems"
+        work: HIGH
+        leads: LOW
+
+      scenario_2:
+        description: "One lead getter"
+        indicators:
+          - "At least one person generating leads"
+          - "Some leverage achieved"
+          - "Not scalable yet"
+        work: LOW
+        leads: LOW
+
+      scenario_3:
+        description: "Many lead getters"
+        indicators:
+          - "Multiple employees generating leads"
+          - "Active referral programs"
+          - "Working hard on recruiting/training"
+        work: HIGH
+        leads: HIGH
+
+      scenario_4:
+        description: "Lead getters who get lead getters"
+        indicators:
+          - "Lead getters recruit new lead getters"
+          - "Systems compound without you"
+          - "Business grows while you sleep"
+        work: LOW
+        leads: HIGH
+
+    outputs:
+      - "Current scenario classification"
+      - "Lead source breakdown by type"
+      - "Gap analysis by lead getter type"
+      - "Progression roadmap"
+
+  goodwill-builder:
+    id: goodwill-builder
+    title: "Goodwill & Value Builder"
+    tier: tier_1
+    icon: "💎"
+
+    purpose: |
+      Execute the six methods to increase product value and build goodwill.
+      More goodwill = more referrals.
+
+    six_methods:
+      source: "Chapter #1 p.9-23"
+
+      method_1_better_customers:
+        name: "Sell Better Customers"
+        maps_to: "Call Outs in advertising"
+        process:
+          - "Find what most successful customers have in common"
+          - "Use similarities to target new audience"
+          - "Better fit = more value = more goodwill"
+        example: "PR company found lowest churn in specific niche, narrowed targeting, broke plateau"
+
+      method_2_better_expectations:
+        name: "Set Better Expectations"
+        maps_to: "Dream Outcome in advertising"
+        process:
+          - "Slowly lower promises"
+          - "Keep lowering until close rates decrease"
+          - "Stop at that point (optimal)"
+        insight: "You control expectations, so you can exceed them"
+
+      method_3_better_results:
+        name: "Get Better Results for More People"
+        maps_to: "Perceived Likelihood in advertising"
+        process:
+          - "Survey to find best results customers"
+          - "Interview to find what they did different"
+          - "Look at common actions"
+          - "Force new customers to repeat those actions"
+          - "Measure improvement"
+          - "Match guarantee to success actions"
+        example: "Gym Launch - ads + sale in 7 days = 3x LTGP"
+
+      method_4_faster_wins:
+        name: "Decrease Time Delay"
+        maps_to: "Time Delay in advertising"
+        tactics:
+          - "Deliver small things at intervals, not all at once"
+          - "Share progress updates frequently"
+          - "Force wins in first 48 hours"
+          - "BAMFAM - always schedule next contact"
+          - "Add 50% to deadlines to deliver 'early'"
+        insight: "Customers form lasting impression in first 48 hours"
+
+      method_5_improve_product:
+        name: "Keep Improving Your Stuff"
+        maps_to: "Effort & Sacrifice in advertising"
+        monthly_process:
+          - "Find most common problem (support, surveys, reviews)"
+          - "Figure out fix (ask customers who succeeded despite problem)"
+          - "Improve product"
+          - "Test with small group of struggling customers"
+          - "If solved, launch to all; if not, iterate"
+          - "Move to next problem, repeat forever"
+
+      method_6_sell_next:
+        name: "Tell Them What to Buy Next"
+        maps_to: "Call to Action in advertising"
+        principle: "If they want more but you don't sell, they'll buy from someone else"
+        benefits:
+          - "Prevents customer drop-off"
+          - "More things to buy = more things to refer"
+          - "Some customers refer for product B who didn't for A"
+
+  referral-asker:
+    id: referral-asker
+    title: "Referral Request Specialist"
+    tier: tier_1
+    icon: "🗣️"
+
+    purpose: |
+      Systematically request referrals using seven proven methods.
+      Key: treat referral request as an OFFER showing value to customer.
+
+    core_principle:
+      source: "Chapter #1 p.24"
+      quote: "Referrals come when you show the value the customer gets when they refer their friends"
+
+    seven_methods:
+      source: "Chapter #1 p.25-32"
+
+      method_1_one_sided:
+        name: "One-Sided Referral Benefit"
+        description: "Pay CAC to referrer OR friend"
+        mechanics:
+          - "Pay average CAC when friend signs up"
+          - "Ask for real three-way introduction (call/text/email)"
+          - "Ask immediately at purchase, don't wait"
+        example: "$200 when friend signs up OR $200 off for friend"
+        tip: "Works great for spouses - both benefit"
+
+      method_2_two_sided:
+        name: "Two-Sided Referral Benefits"
+        description: "Split CAC between both parties"
+        mechanics:
+          - "Half to referrer (cash or credit)"
+          - "Half to friend (credit or discount)"
+        examples:
+          - "Dropbox: Free storage to both - 39x growth in 15 months"
+          - "PayPal: $10 credit to both - 100M users"
+        local_example: "$100 cash to you + $100 off for friend"
+
+      method_3_at_purchase:
+        name: "Ask Right When They Buy"
+        description: "Capture referrals at peak excitement"
+        mechanics:
+          - "On sales contract or checkout page"
+          - "Ask for names and phone numbers"
+          - "Show benefit of doing with friend"
+        script: "People who do our program with another person tend to get 3x the results. Who else could you do this program with?"
+        evidence: "New salesperson broke records - half of sales were referrals"
+
+      method_4_negotiation_chip:
+        name: "Referrals as Negotiation Chip"
+        description: "Trade discount for introductions"
+        mechanics:
+          - "If they want lower price, offer discount for referrals"
+          - "Different price justified by different terms"
+        script: "I can't do anything less than $500 down, but if you make a three-way text introduction to some friends right now, I'll cut that initiation fee."
+        objection_handler: "Yes - Stacy got $100 off for three referrals. Want $100 off? Who are you thinking of?"
+
+      method_5_events:
+        name: "Referral Events"
+        description: "Time-bound promotions with urgency"
+        mechanics:
+          - "1-4 week duration"
+          - "Points, credits, dollars, or bragging rights"
+          - "Sell benefits of working with others"
+        event_names:
+          - "Bring a Friend promotion"
+          - "Spouse Challenge promotion"
+          - "Accountability Partner promotion"
+          - "Coach Challenge (teams with employees)"
+
+      method_6_ongoing:
+        name: "Ongoing Referral Programs"
+        description: "Always-on referral messaging"
+        mechanics:
+          - "Talk about benefits of doing things with others all the time"
+          - "In content, outreach, ads"
+        evidence: "Friend saw 33% increase in signups (250k referrals out of 1M customers)"
+
+      method_7_unlockable:
+        name: "Unlockable Referral Bonuses"
+        description: "Rewards for referral + testimonial"
+        bonus_types:
+          - "VIP bonuses"
+          - "Courses"
+          - "Tokens/Status"
+          - "Training"
+          - "Merchandise"
+          - "Service level upgrades"
+          - "Premium support"
+          - "Additional service hours"
+        principle: "The more insane you make the offer, the more people will refer"
+
+  employee-trainer:
+    id: employee-trainer
+    title: "Employee Lead Generation Trainer"
+    tier: tier_1
+    icon: "👨‍🏫"
+
+    purpose: |
+      Transform employees into effective lead getters using the 3Ds method.
+      Goal: Employees do Core Four activities on your behalf.
+
+    training_method:
+      name: "The 3Ds"
+      source: "Chapter #2 p.47-51"
+
+      step_1_document:
+        description: "Create checklist from actual work"
+        process:
+          - "Write exact steps as you do them"
+          - "Have observers watch and document"
+          - "Record yourself doing multiple ways"
+          - "Test: Can YOU get A+ results following only checklist?"
+          - "First draft complete when it works for you"
+
+      step_2_demonstrate:
+        description: "Show step-by-step in front of them"
+        process:
+          - "Walk through checklist step by step"
+          - "Note any confusion points"
+          - "Adjust checklist for clarity"
+          - "Second draft ready for them to try"
+
+      step_3_duplicate:
+        description: "They replicate under observation"
+        process:
+          - "They follow exact same checklist"
+          - "You observe"
+          - "If right directions + wrong result = fix checklist"
+          - "If right directions + right result = done"
+          - "Repeat until they get it right"
+
+    clarity_test:
+      source: "Chapter #2 p.50"
+      question: "If you disappeared tomorrow, could a stranger get the results you get if they just followed your checklist?"
+
+    training_principles:
+      source: "Chapter #2 p.51-54"
+      principles:
+        - "If they err or get confused, WE erred or made it confusing"
+        - "If we have to explain what a step means, step is too complicated"
+        - "Competence vs. performance: they may know but need practice (slow → smooth → fast)"
+        - "Focus on ability to follow directions, not just results"
+        - "Praise every success, even if result is wrong but directions followed"
+        - "No punishment during training - learning is punishment enough"
+        - "One piece of feedback at a time"
+        - "Performance drops = they stopped doing important step (retrain)"
+
+  referral-program-designer:
+    id: referral-program-designer
+    title: "Referral Program Designer"
+    tier: tier_2
+    icon: "🎨"
+
+    purpose: |
+      Design optimal referral program mechanics and incentive structures.
+      Balance between motivation and sustainability.
+
+    design_principles:
+      source: "Chapter #1 p.24-33"
+
+      incentive_ceiling:
+        rule: "Pay up to CAC for referrals"
+        logic: "You'd pay that to ads anyway"
+        warning: "Don't exceed CAC (unsustainable)"
+
+      timing:
+        optimal: "At moment of purchase"
+        also_good: "After major wins"
+        avoid: "After complaints"
+
+      introduction_quality:
+        required: "Real three-way introduction"
+        not_enough: "Just a name and number"
+        channels: ["Call", "Text", "Email"]
+
+      urgency:
+        method: "Gift card with expiration"
+        window: "7-14 days"
+        effect: "Forces action"
+
+    advanced_tactics:
+      gift_card_strategy:
+        source: "Chapter #1 p.32-33"
+        mechanics:
+          - "Give gift card worth 1/3 program cost"
+          - "Can give to friend if friend signs up"
+          - "Expiration date forces action"
+          - "Referrer gets status from giving"
+        reframe: "From 'join my program' to 'I got this gift card, want it?'"
+
+      gift_card_sale:
+        description: "Sell gift cards at 90% off"
+        mechanics:
+          - "Only for friends of customers"
+          - "Referrer looks generous"
+          - "You get paid to acquire"
+        result: "Win-win-win"
+
+    outputs:
+      - "Program structure recommendation"
+      - "Incentive level calculation"
+      - "Mechanics documentation"
+      - "Success metrics definition"
+
+  leverage-optimizer:
+    id: leverage-optimizer
+    title: "Leverage Maximization Specialist"
+    tier: tier_2
+    icon: "🚀"
+
+    purpose: |
+      Optimize toward Scenario #4: Lead getters who get lead getters.
+      Create compounding systems that grow without direct effort.
+
+    scenario_4_strategies:
+      source: "Section IV Introduction p.1-3"
+
+      customer_layer:
+        goal: "Customers bring customers who bring customers"
+        tactics:
+          - "Referral program with tiered rewards"
+          - "Advocacy program with status"
+          - "Community building"
+
+      employee_layer:
+        goal: "Employees recruit employees"
+        tactics:
+          - "Employee referral bonuses"
+          - "Team leaders recruit and train"
+          - "Career paths tied to team building"
+
+      agency_layer:
+        goal: "Agencies bring more agencies" # [INFERRED]
+        tactics:
+          - "Partner programs"
+          - "Referral fees between agencies"
+
+      affiliate_layer:
+        goal: "Affiliates recruit affiliates"
+        tactics:
+          - "Tiered affiliate structures"
+          - "Super-affiliate programs"
+          - "Affiliate managers"
+
+    compound_effect:
+      source: "Section IV Introduction p.2"
+      quote: "Lead getters can go get lead getters! So we do something once and then lead getters can do it forever."
+
+  belief-shifter:
+    id: belief-shifter
+    title: "Leadership Mindset Transformer"
+    tier: tier_2
+    icon: "🧠"
+
+    purpose: |
+      Transform leader beliefs that block delegation and leverage.
+      Replace limiting beliefs with empowering ones.
+
+    belief_transformations:
+      source: "Chapter #2 p.40-42"
+
+      transformation_1:
+        old: "If you want something done right, do it yourself"
+        new: "If you want something done right, get someone to spend all their time doing it"
+        insight: "Full-time focus beats part-time excellence"
+
+      transformation_2:
+        old: "Nobody can do it like I do"
+        new: "If I can do it, someone else can do it better"
+        insight: "You being best is temporary and limiting"
+
+      transformation_3:
+        old: "No one can replace me"
+        new: "Everyone is replaceable, especially me"
+        insight: "Replace yourself ASAP to become useful elsewhere"
+
+    wealth_principle:
+      source: "Chapter #2 p.39"
+      quote: "You get rich from what you earn. You become wealthy from what you own."
+      implication: "Employees turn your job into an asset"
+
+    scenario_comparison:
+      source: "Chapter #2 p.38-39"
+      without_employees: "$5M revenue, $2M profit, works only with you = well-paid job, near-zero business value"
+      with_employees: "Same numbers, works without you = valuable asset, $10M+ worth, plus free time"
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Diagnosis Tasks
+  - task: "Calculate referral vs. churn ratio"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Monthly comparison required"
+
+  - task: "Diagnose product vs. asking problem"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Use diagnostic questions"
+
+  - task: "Assess current leverage scenario (1-4)"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Clear criteria for each scenario"
+
+  # Goodwill Building Tasks
+  - task: "Identify best customer patterns"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Survey data required"
+
+  - task: "Survey customers for success behaviors"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Standard questions"
+
+  - task: "Interview top performers"
+    executor: Human
+    automation: LOW
+    guardrails: "Focus on actions, not outcomes"
+
+  - task: "Force success behaviors in onboarding"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Tie to guarantee conditions"
+
+  - task: "Run monthly product improvement cycle"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Recurring monthly task"
+
+  - task: "Design next product/upsell"
+    executor: Human
+    automation: LOW
+    guardrails: "Prevent customer drop-off"
+
+  # Referral Asking Tasks
+  - task: "Set up one-sided referral incentive"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Pay up to CAC"
+
+  - task: "Set up two-sided referral incentive"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Split CAC between parties"
+
+  - task: "Add referral ask to sales process"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "At purchase moment"
+
+  - task: "Train negotiation chip usage"
+    executor: Human
+    automation: LOW
+    guardrails: "Script provided"
+
+  - task: "Plan and run referral event"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "1-4 week duration"
+
+  - task: "Set up ongoing referral program"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Always-on messaging"
+
+  - task: "Design unlockable referral bonuses"
+    executor: Human
+    automation: LOW
+    guardrails: "Make offer insane"
+
+  - task: "Create gift card referral system"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "7-14 day expiration"
+
+  # Employee Tasks
+  - task: "Document work process (checklist)"
+    executor: Human
+    automation: LOW
+    guardrails: "Must pass stranger test"
+
+  - task: "Demonstrate to new employee"
+    executor: Human
+    automation: LOW
+    guardrails: "Step by step"
+
+  - task: "Observe employee duplication"
+    executor: Human
+    automation: LOW
+    guardrails: "Fix checklist, not employee"
+
+  - task: "Calculate employee lead ROI"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Payroll / Leads formula"
+
+  - task: "Diagnose sales vs. advertising problem"
+    executor: Human
+    automation: LOW
+    guardrails: "Use diagnostic question"
+
+  # Leverage Optimization Tasks
+  - task: "Design employee referral program"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Apply customer referral principles"
+
+  - task: "Create affiliate program structure"
+    executor: Human
+    automation: LOW
+    guardrails: "Commission up to CAC"
+
+  - task: "Identify agency partnerships"
+    executor: Human
+    automation: LOW
+    guardrails: "Don't depend forever"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Product Goodwill Gate"
+    transition: "Before asking for referrals"
+    condition: "Product delivers exceptional value (NPS > 50)"
+    type: blocking
+    failure_action: "Focus on six ways to give more value"
+    source: "Chapter #1 p.7-8"
+
+  QG-002:
+    name: "Referral vs. Churn Gate"
+    transition: "Monthly review"
+    condition: "referral_rate > churn_rate"
+    type: warning
+    failure_action: "Product improvement priority over referral tactics"
+    source: "Chapter #1 p.6"
+
+  QG-003:
+    name: "Checklist Clarity Gate"
+    transition: "Before training employees"
+    condition: "Stranger test passed (could replicate from checklist alone)"
+    type: blocking
+    failure_action: "Improve documentation"
+    source: "Chapter #2 p.50"
+
+  QG-004:
+    name: "Employee ROI Gate"
+    transition: "After training period"
+    condition: "LTGP:CAC >= 3:1"
+    type: warning
+    failure_action: "Diagnose sales vs. advertising problem"
+    source: "Chapter #2 p.55-57"
+
+  QG-005:
+    name: "Referral Program Incentive Gate"
+    transition: "Before launching program"
+    condition: "referral_reward <= CAC"
+    type: blocking
+    failure_action: "Reduce incentive or verify CAC calculation"
+    source: "Chapter #1 p.25"
+
+  QG-006:
+    name: "Leverage Scenario Progression Gate"
+    transition: "Quarterly review"
+    condition: "Progressing toward Scenario #4"
+    type: warning
+    failure_action: "Identify bottleneck in lead getter recruitment"
+    source: "Section IV Introduction p.1-3"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  referral_system_setup:
+    trigger: "Business has paying customers"
+    steps:
+      - step: 1
+        agent: referral-diagnostician
+        action: "Diagnose current referral state"
+        output: "Root cause (product vs. not asking)"
+
+      - step: 2
+        agent: goodwill-builder
+        action: "Identify and implement value improvements"
+        condition: "If product issue identified"
+
+      - step: 3
+        agent: referral-asker
+        action: "Implement referral asking methods"
+        priority: "Start with at-purchase ask"
+
+      - step: 4
+        agent: referral-program-designer
+        action: "Design full referral program"
+        output: "Program mechanics and incentives"
+
+      - step: 5
+        agent: leverage-coordinator
+        action: "Track and optimize performance"
+        ongoing: true
+
+  employee_lead_generation_setup:
+    trigger: "Need to scale beyond personal capacity"
+    steps:
+      - step: 1
+        agent: belief-shifter
+        action: "Transform leader mindset"
+        output: "New beliefs about delegation"
+
+      - step: 2
+        agent: employee-trainer
+        action: "Document current lead generation process"
+        output: "Checklist passing stranger test"
+
+      - step: 3
+        agent: employee-trainer
+        action: "Demonstrate to new hires"
+        output: "Second draft checklist"
+
+      - step: 4
+        agent: employee-trainer
+        action: "Observe duplication and refine"
+        output: "Competent employee"
+
+      - step: 5
+        agent: leverage-auditor
+        action: "Calculate employee ROI"
+        output: "LTGP:CAC ratio"
+
+  leverage_maximization:
+    trigger: "Business at Scenario 2-3"
+    steps:
+      - step: 1
+        agent: leverage-auditor
+        action: "Assess current scenario"
+        output: "Scenario classification and gaps"
+
+      - step: 2
+        agent: leverage-optimizer
+        action: "Design lead getter recruitment systems"
+        output: "Programs for each lead getter type"
+
+      - step: 3
+        agent: leverage-coordinator
+        action: "Prioritize and allocate resources"
+        output: "Implementation roadmap"
+
+      - step: 4
+        agent: leverage-optimizer
+        action: "Optimize toward Scenario #4"
+        ongoing: true
+        target: "Lead getters who get lead getters"
+
+# ===============================================================================
+# KPIS & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    leverage_ratio:
+      formula: "Total Leads / Direct Effort Hours"
+      target: "Increasing over time"
+      source: "Section IV Introduction"
+
+    referral_net_growth:
+      formula: "Referrals - Churn"
+      target: "> 0 (referrals exceeding churn)"
+      source: "Chapter #1 p.6"
+
+    employee_lead_cost:
+      formula: "Total Payroll / Total Leads Generated"
+      target: "<1/3 of LTGP"
+      source: "Chapter #2 p.55"
+
+  secondary:
+    referral_rate:
+      formula: "Referrals / Total Customers"
+      minimum: "5%"
+      target: "15%"
+      top_performer: "30%+"
+
+    ltgp_cac_ratio:
+      formula: "LTGP / CAC"
+      minimum: "3:1"
+      target: "5:1"
+      top_performer: "10:1+"
+
+    scenario_progress:
+      measure: "Current leverage scenario"
+      target: "Progress toward Scenario #4"
+
+  by_lead_getter:
+    customers:
+      - "Referral rate"
+      - "Referral-to-customer conversion"
+      - "Referral program participation"
+
+    employees:
+      - "Leads per employee"
+      - "Training time to competence"
+      - "Employee retention"
+
+    agencies:
+      - "Agency CAC vs. internal CAC"
+      - "Quality of leads"
+      - "Dependency level"
+
+    affiliates:
+      - "Affiliate leads/month"
+      - "Commission as % of revenue"
+      - "Affiliate retention"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Low referral rate despite asking"
+    possible_causes:
+      - "Product not good enough"
+      - "Incentive not compelling"
+      - "Wrong timing of ask"
+    diagnosis:
+      - "Check NPS/satisfaction scores"
+      - "Compare incentive to CAC"
+      - "Review when asks happen"
+    solutions:
+      - "Focus on six ways to give more value"
+      - "Increase incentive up to CAC"
+      - "Move ask to purchase moment"
+    source: "Chapter #1 p.7-8"
+
+  - symptom: "Employees not generating leads"
+    possible_causes:
+      - "Poor training"
+      - "Checklist not clear"
+      - "Sales vs. advertising mismatch"
+    diagnosis:
+      - "Can stranger replicate from checklist?"
+      - "Are leads qualified but not buying?"
+      - "Are leads unqualified?"
+    solutions:
+      - "Improve documentation"
+      - "Focus on sales training"
+      - "Focus on advertising/targeting"
+    source: "Chapter #2 p.51-57"
+
+  - symptom: "High referral rate but low conversion"
+    possible_causes:
+      - "Wrong incentive structure"
+      - "Attracting wrong type of referral"
+      - "Referral handoff poor"
+    diagnosis:
+      - "Compare referral quality to paid leads"
+      - "Review incentive (pulling quantity vs quality)"
+      - "Check referral onboarding process"
+    solutions:
+      - "Adjust incentive to reward quality"
+      - "Better qualify referral leads"
+      - "Improve referral onboarding"
+    source: "[INFERRED]"
+
+  - symptom: "Stuck at Scenario 2-3"
+    possible_causes:
+      - "Not recruiting lead getters systematically"
+      - "Lead getters not trained to recruit"
+      - "No incentive for lead getters to recruit"
+    diagnosis:
+      - "Are we actively recruiting lead getters?"
+      - "Do lead getters know they should recruit?"
+      - "Is there reward for bringing more lead getters?"
+    solutions:
+      - "Apply Core Four to lead getter recruitment"
+      - "Add recruiting to lead getter training"
+      - "Create tiered incentive structures"
+    source: "Section IV Introduction p.1-3"
+
+# ===============================================================================
+# TECHNOLOGY REQUIREMENTS
+# ===============================================================================
+
+technology:
+  required:
+    - tool: "Referral Tracking System"
+      purpose: "Track who referred whom"
+      features:
+        - "Unique referral links/codes"
+        - "Attribution tracking"
+        - "Reward automation"
+
+    - tool: "CRM with Lead Source Tracking"
+      purpose: "Segment leads by source"
+      features:
+        - "Lead getter type tagging"
+        - "Conversion tracking by source"
+        - "LTGP by source"
+
+    - tool: "Employee Performance Dashboard"
+      purpose: "Track lead generation by employee"
+      features:
+        - "Leads per employee"
+        - "Cost per lead"
+        - "Training progress"
+
+  recommended:
+    - tool: "Affiliate Management Platform"
+      purpose: "Scale affiliate program"
+
+    - tool: "Survey/NPS Tool"
+      purpose: "Measure goodwill"
+
+    - tool: "Gift Card System"
+      purpose: "Advanced referral tactics"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Agencies chapter content missing from source"
+    severity: HIGH
+    clarification_needed: "Full agency management playbook"
+
+  - id: GAP-002
+    description: "Affiliates chapter content missing from source"
+    severity: HIGH
+    clarification_needed: "Full affiliate program playbook"
+
+  - id: GAP-003
+    description: "Specific commission structures for affiliates"
+    severity: MEDIUM
+    clarification_needed: "Industry benchmarks and case studies"
+
+  - id: GAP-004
+    description: "Agency contract terms and KPIs"
+    severity: MEDIUM
+    clarification_needed: "Best practices for agency management"
+
+  - id: GAP-005
+    description: "Referral tracking technology recommendations"
+    severity: LOW
+    clarification_needed: "Specific software options"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 6
+  workflows_documented: 3
+
+  source_coverage:
+    customer_referrals: "COMPLETE (full chapter)"
+    employees: "COMPLETE (full chapter)"
+    agencies: "PARTIAL (intro mentions only)"
+    affiliates: "PARTIAL (intro mentions only)"
+
+  blueprint_status: "READY FOR SQUAD CREATION (partial on agencies/affiliates)"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

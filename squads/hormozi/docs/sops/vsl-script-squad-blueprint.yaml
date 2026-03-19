@@ -1,0 +1,777 @@
+# VSL Script Squad Blueprint
+# Source: Blueprint $100M Money Models - VIP VSL and OTO Content
+# Pattern: SC-PE-002 (Squad Blueprint Standard)
+# Version: 1.0.0
+# Extracted: 2026-02-10
+
+metadata:
+  name: hormozi-vsl-script
+  description: "Create high-converting VSL scripts using Hormozi's video sales letter framework"
+  version: "1.0.0"
+  source: "Blueprint $100M Money Models - VIP VSL and OTO Content"
+  category: "copywriting"
+  complexity: "advanced"
+
+# ============================================================================
+# AGENTS
+# ============================================================================
+
+agents:
+  vsl_strategist:
+    name: "VSL Strategist"
+    role: "architect"
+    description: |
+      Plans VSL structure, determines positioning, and sets strategic direction.
+      Decides VSL type, duration, proof depth, and offer sequencing.
+    responsibilities:
+      - Analyze funnel position and traffic temperature
+      - Determine optimal VSL type and duration
+      - Plan proof stack depth based on offer price
+      - Design OTO sequence strategy
+      - Set urgency mechanism parameters
+    inputs:
+      - offer_specification
+      - funnel_map
+      - avatar_profile
+      - traffic_source_analysis
+    outputs:
+      - vsl_strategy_document
+      - duration_specification
+      - proof_requirements
+      - oto_sequence_plan
+    decision_authority:
+      - vsl_type_selection
+      - duration_parameters
+      - proof_depth_level
+      - oto_sequencing
+    cognitive_type: "strategic_planning"
+
+  vsl_hook_writer:
+    name: "VSL Hook Writer"
+    role: "specialist"
+    description: |
+      Creates pattern interrupt openings and curiosity gaps.
+      Specializes in the first 15-30 seconds that determine watch-through.
+    responsibilities:
+      - Write pattern interrupt openings
+      - Create curiosity gaps
+      - Test hook variants
+      - Optimize first-impression metrics
+    inputs:
+      - vsl_strategy_document
+      - avatar_pain_points
+      - offer_unique_mechanism
+    outputs:
+      - hook_script (15-30 seconds)
+      - curiosity_gap_tease
+      - hook_variants (A/B testing)
+    cognitive_type: "creative_synthesis"
+    templates:
+      registration_hook: |
+        "Pergunta rapida. Posso pegar seu [CONTACT INFO]? Porque quero
+        convidar voce para [BIG PROMISE/EVENT]."
+      vip_upgrade_hook: |
+        "Parabens, voce foi registrado com sucesso. [CONFIRMATION]...
+        Alem disso, quero te dar [X] bonus incriveis se voce simplesmente
+        [ACTION] clicando no botao abaixo deste video."
+      recap_hook: |
+        "Olhem isso. Vou contar sobre a oferta mais insana que provavelmente
+        ja fiz, e ela desaparece na [DEADLINE] para sempre."
+      oto_hook: |
+        "Obrigado por [WHAT THEY JUST DID]. Tudo o que voces acabaram de
+        receber esta a caminho... Agora sobre aquela oferta especial..."
+      thank_you_hook: |
+        "Boa escolha. Voce acabou de conseguir algo que me levou anos
+        para construir."
+
+  vsl_authority_builder:
+    name: "VSL Authority Builder"
+    role: "specialist"
+    description: |
+      Establishes credibility and explains motive in the Context phase.
+      Creates trust foundation for the rest of the VSL.
+    responsibilities:
+      - Select relevant credentials
+      - Craft authority statements
+      - Write motive explanations
+      - Build trust early
+    inputs:
+      - creator_credentials
+      - vsl_strategy_document
+      - offer_context
+    outputs:
+      - authority_section_script
+      - motive_explanation_script
+    cognitive_type: "curation_synthesis"
+    templates:
+      authority_statement: |
+        "Eu sou [WHO I AM]. [COMPANY/PORTFOLIO] que [QUANTIFIABLE RESULT].
+        [ADDITIONAL CREDENTIAL IF NEEDED]."
+      motive_explanation: |
+        "[WHAT SEEMS ILLOGICAL ABOUT THIS OFFER]... se voce nao soubesse
+        por que eu fiz isso.
+        Fiz isso por apenas uma razao: [REAL REASON]."
+      mission_motive: |
+        "Parte da razao pela qual estou fazendo [THIS OFFER] e porque
+        [LARGER MISSION]. Quero [BIG GOAL FOR THE WORLD]."
+
+  vsl_problem_agitator:
+    name: "VSL Problem Agitator"
+    role: "specialist"
+    description: |
+      Makes prospects feel the pain of their current situation.
+      Creates emotional resonance that drives desire for solution.
+    responsibilities:
+      - Identify core problems
+      - Write problem agitation scripts
+      - Create "cost of inaction" urgency
+      - Balance pain with hope
+    inputs:
+      - avatar_pain_points
+      - vsl_strategy_document
+      - problem_research
+    outputs:
+      - problem_identification_script
+      - agitation_script
+      - cost_of_waiting_script
+    cognitive_type: "empathetic_storytelling"
+    templates:
+      four_constraints: |
+        "Quando olhamos para os negocios, todos sofreram de uma das
+        quatro grandes restricoes:
+        1. [CONSTRAINT 1]
+        2. [CONSTRAINT 2]
+        3. [CONSTRAINT 3]
+        4. [CONSTRAINT 4]"
+      cost_of_inaction: |
+        "Cada dia que voce espera e outro dia que voce esta pagando
+        o que chamo de 'imposto da ignorancia.' E esse imposto se compoe."
+      specific_agitation: |
+        "Agora mesmo, enquanto voce esta [CURRENT STATE], voce pode estar
+        [LOSING X]. Ou [LEAVING Y ON TABLE]. Nao porque voce esta fazendo
+        algo errado - mas porque voce ainda nao descobriu [SOLUTION]."
+
+  vsl_solution_presenter:
+    name: "VSL Solution Presenter"
+    role: "specialist"
+    description: |
+      Introduces the unique mechanism and explains what prospects get.
+      Bridges from problem to offer with compelling solution narrative.
+    responsibilities:
+      - Name and introduce mechanism
+      - Break down solution components
+      - Create value perception
+      - Differentiate from alternatives
+    inputs:
+      - product_specification
+      - offer_components
+      - vsl_strategy_document
+    outputs:
+      - mechanism_introduction_script
+      - component_breakdown_script
+    cognitive_type: "synthesis_organization"
+    templates:
+      mechanism_intro: |
+        "Havia algumas coisas que separavam [WINNERS] dos [LOSERS] e,
+        peca por peca, comecei a junta-las no que chamo de [MECHANISM NAME]."
+      mechanism_definition: |
+        "[MECHANISM] e [DEFINITION]. Entao [BENEFIT]. [MECHANISM] faz
+        [RESULT 1]. [RESULT 2]. [RESULT 3]."
+      component_stack: |
+        "Estes [COMPONENTS] se dividem em [X] sistemas:
+        Sistema #1: [NAME] - [X] [THINGS] que resolvem [PROBLEM]...
+        Sistema #2: [NAME] - [X] [THINGS] que resolvem [PROBLEM]..."
+
+  vsl_proof_builder:
+    name: "VSL Proof Builder"
+    role: "specialist"
+    description: |
+      Stacks evidence to build belief in the solution.
+      Uses data, testimonials, and credentials strategically.
+    responsibilities:
+      - Select appropriate proof elements
+      - Format data-based proof
+      - Structure success stories
+      - Order proof for maximum impact
+    inputs:
+      - testimonials_library
+      - results_data
+      - vsl_strategy_document
+    outputs:
+      - data_proof_script
+      - success_stories_script
+      - credentials_script
+    cognitive_type: "curation_organization"
+    templates:
+      data_proof: |
+        "[X]% dos [SUBJECTS] [POSITIVE RESULT]
+        O aumento mediano em [METRIC] foi de [AMOUNT]
+        O aumento medio em [METRIC] foi de [AMOUNT]"
+      success_story: |
+        "[NAME], [QUALIFIER]. [He/She] conseguiu [SPECIFIC RESULT]
+        [usando/depois de] [YOUR SOLUTION]."
+      extended_proof: |
+        "[COMPANY] - [INDUSTRY]: De [BEFORE METRIC] para [AFTER METRIC]
+        [PERSON] conseguiu [RESULT] depois de [ACTION]
+        [PERSON] [TRANSFORMATION] usando [SPECIFIC COMPONENT]"
+
+  vsl_offer_stacker:
+    name: "VSL Offer Stacker"
+    role: "specialist"
+    description: |
+      Presents all components and bonuses with value assignments.
+      Creates obvious price-value gap through strategic stacking.
+    responsibilities:
+      - List all offer components
+      - Assign values to each component
+      - Stack bonuses strategically
+      - Create anchoring comparison
+    inputs:
+      - offer_specification
+      - component_values
+      - bonus_list
+    outputs:
+      - component_stack_script
+      - bonus_stack_script
+      - value_anchor_script
+    cognitive_type: "math_strategy"
+    templates:
+      component_stack: |
+        "Voce recebe [X] [COMPONENTS]. [These] nao sao [INFERIOR VERSION].
+        [These] sao [SUPERIOR VERSION] que voce pode [USE CASE].
+        Eles cobrem tudo desde [TOPIC] ate [TOPIC]."
+      value_anchor: |
+        "Esses [COMPONENTS] normalmente custam $[HIGH PRICE] cada para
+        [ALTERNATIVE WAY TO GET]. Se voce somar o que alguem pagaria
+        por [X] [SESSIONS/ITEMS] seria $[HUGE TOTAL] sozinho."
+      bonus_stack: |
+        "Alem disso, quero te dar [X] bonus incriveis:
+        Numero um, [BONUS 1]
+        Numero dois, [BONUS 2]..."
+
+  vsl_closer:
+    name: "VSL Closer"
+    role: "specialist"
+    description: |
+      Handles price reveal, guarantee, urgency, and call to action.
+      Converts interest into immediate action.
+    responsibilities:
+      - Write price reveal with context
+      - Craft guarantee statement
+      - Create urgency mechanism
+      - Write clear CTA
+    inputs:
+      - pricing_specification
+      - guarantee_terms
+      - urgency_mechanism
+      - cta_details
+    outputs:
+      - price_reveal_script
+      - guarantee_script
+      - urgency_script
+      - cta_script
+    cognitive_type: "persuasive_execution"
+    templates:
+      price_reveal: |
+        "Seu investimento e $[PRICE] para [WHAT THEY GET], que e
+        [TAX/OTHER BENEFIT].
+        Se voce se qualificar atraves de [FINANCING], pode consegui-los
+        por apenas $[MONTHLY] por mes. Isso e [COMPARISON]."
+      savings_emphasis: |
+        "Esse e o acordo - mas voce esta economizando cerca de [X]% do preco."
+      urgency: |
+        "Esta oferta desaparece para sempre [DEADLINE]. Por duas razoes:
+        1. [REASON 1]
+        2. [REASON 2]"
+      cta: |
+        "Tudo possivel quando voce clicar no botao abaixo deste video
+        agora mesmo. Voce tera acesso a tudo - [LIST KEY THINGS]."
+
+  vsl_confirmation_writer:
+    name: "VSL Confirmation Writer"
+    role: "specialist"
+    description: |
+      Creates thank you VSLs that reduce buyer's remorse and set expectations.
+      Bridges purchase to implementation.
+    responsibilities:
+      - Write purchase confirmation
+      - Set clear expectations
+      - Provide implementation steps
+      - Tease next opportunity (if applicable)
+    inputs:
+      - purchase_details
+      - delivery_process
+      - next_steps_sequence
+      - oto_specification (optional)
+    outputs:
+      - confirmation_script
+      - expectations_script
+      - next_steps_script
+      - oto_tease_script (optional)
+    cognitive_type: "organizational_clarity"
+    templates:
+      confirmation: |
+        "Boa escolha. Voce acabou de conseguir algo que me levou
+        [TIME] para construir."
+      expectations: |
+        "Isso nao e [WHAT IT'S NOT]. Isso nao e [WHAT IT'S NOT].
+        Isso e o que [ACTUALLY IS] agora para [OUTCOME]."
+      next_steps: |
+        "Passo 1: [ACTION]
+        Passo 2: [ACTION]
+        Passo 3: [ACTION]"
+      oto_tease: |
+        "Agora sobre aquela oferta especial que prometi...
+        [TRANSITION TO OTO]"
+
+# ============================================================================
+# EXECUTOR MATRIX
+# ============================================================================
+
+executor_matrix:
+  vsl_type_decision:
+    task: "Determine VSL type based on funnel position"
+    executor: "vsl_strategist"
+    type: "decision"
+    automation: "none"
+    dependencies: ["funnel_map", "traffic_analysis"]
+
+  duration_planning:
+    task: "Set VSL duration parameters"
+    executor: "vsl_strategist"
+    type: "planning"
+    automation: "assisted"
+    dependencies: ["vsl_type_decision"]
+    rules:
+      cold_traffic: "8-15 minutes"
+      warm_traffic: "3-8 minutes"
+      hot_traffic: "3-5 minutes"
+
+  hook_creation:
+    task: "Write pattern interrupt opening"
+    executor: "vsl_hook_writer"
+    type: "creative"
+    automation: "ai_draft_human_select"
+    dependencies: ["vsl_type_decision", "avatar_profile"]
+
+  curiosity_gap_creation:
+    task: "Create tease that maintains attention"
+    executor: "vsl_hook_writer"
+    type: "creative"
+    automation: "ai_draft_human_select"
+    dependencies: ["hook_creation"]
+
+  authority_section:
+    task: "Establish credibility quickly"
+    executor: "vsl_authority_builder"
+    type: "curation"
+    automation: "template_fill"
+    dependencies: ["creator_credentials"]
+
+  motive_explanation:
+    task: "Explain why making this offer"
+    executor: "vsl_authority_builder"
+    type: "synthesis"
+    automation: "low"
+    dependencies: ["authority_section"]
+
+  problem_identification:
+    task: "Name specific problems audience faces"
+    executor: "vsl_problem_agitator"
+    type: "research"
+    automation: "data_driven"
+    dependencies: ["avatar_pain_points"]
+
+  problem_agitation:
+    task: "Make problems vivid and emotional"
+    executor: "vsl_problem_agitator"
+    type: "creative"
+    automation: "low"
+    dependencies: ["problem_identification"]
+
+  mechanism_introduction:
+    task: "Present unique solution/system"
+    executor: "vsl_solution_presenter"
+    type: "synthesis"
+    automation: "template_assisted"
+    dependencies: ["problem_agitation", "product_specification"]
+
+  component_breakdown:
+    task: "List what they get in detail"
+    executor: "vsl_solution_presenter"
+    type: "organization"
+    automation: "high"
+    dependencies: ["mechanism_introduction"]
+
+  data_proof_compilation:
+    task: "Present quantifiable results"
+    executor: "vsl_proof_builder"
+    type: "curation"
+    automation: "data_pull"
+    dependencies: ["results_data"]
+
+  success_story_selection:
+    task: "Choose and format testimonials"
+    executor: "vsl_proof_builder"
+    type: "curation"
+    automation: "assisted"
+    dependencies: ["testimonials_library"]
+
+  offer_stacking:
+    task: "Present components with values"
+    executor: "vsl_offer_stacker"
+    type: "math_strategy"
+    automation: "calculation_based"
+    dependencies: ["component_breakdown"]
+
+  bonus_stacking:
+    task: "Layer additional value"
+    executor: "vsl_offer_stacker"
+    type: "strategy"
+    automation: "template_assisted"
+    dependencies: ["offer_stacking"]
+
+  price_reveal:
+    task: "Present price with anchoring"
+    executor: "vsl_closer"
+    type: "persuasion"
+    automation: "template_assisted"
+    dependencies: ["offer_stacking"]
+
+  guarantee_presentation:
+    task: "Remove perceived risk"
+    executor: "vsl_closer"
+    type: "legal_strategy"
+    automation: "high"
+    dependencies: ["guarantee_terms"]
+
+  urgency_creation:
+    task: "Create reason to act now"
+    executor: "vsl_closer"
+    type: "strategy"
+    automation: "template_assisted"
+    dependencies: ["urgency_mechanism"]
+
+  cta_delivery:
+    task: "Clear call to action"
+    executor: "vsl_closer"
+    type: "execution"
+    automation: "high"
+    dependencies: ["urgency_creation"]
+
+  confirmation_writing:
+    task: "Thank you and next steps"
+    executor: "vsl_confirmation_writer"
+    type: "organization"
+    automation: "template_assisted"
+    dependencies: ["purchase_details"]
+
+# ============================================================================
+# QUALITY GATES
+# ============================================================================
+
+quality_gates:
+  gate_1_strategy:
+    name: "Strategy Validation"
+    checkpoint: "After vsl_strategy_document"
+    criteria:
+      - vsl_type_appropriate_for_funnel_position: true
+      - duration_matches_traffic_temperature: true
+      - proof_depth_matches_price_point: true
+      - oto_sequence_logical: true
+    blocker: true
+
+  gate_2_hook:
+    name: "Hook Quality"
+    checkpoint: "After hook_creation"
+    criteria:
+      - pattern_interrupt_present: true
+      - curiosity_gap_created: true
+      - duration_under_30_seconds: true
+      - addresses_viewer_directly: true
+    blocker: true
+
+  gate_3_context:
+    name: "Authority Established"
+    checkpoint: "After authority_section"
+    criteria:
+      - credentials_quantifiable: true
+      - motive_believable: true
+      - trust_foundation_set: true
+    blocker: false
+
+  gate_4_problem:
+    name: "Problem Resonance"
+    checkpoint: "After problem_agitation"
+    criteria:
+      - problems_specific_not_generic: true
+      - emotional_resonance_achieved: true
+      - solution_teased_not_revealed: true
+    blocker: true
+
+  gate_5_solution:
+    name: "Solution Clarity"
+    checkpoint: "After component_breakdown"
+    criteria:
+      - mechanism_named_and_explained: true
+      - components_clearly_listed: true
+      - differentiation_from_alternatives: true
+    blocker: true
+
+  gate_6_proof:
+    name: "Proof Sufficient"
+    checkpoint: "After proof compilation"
+    criteria:
+      - minimum_proof_elements_met: true
+      - proof_matches_price_point: true
+      - testimonials_varied: true
+    blocker: true
+    rules:
+      under_100: "2-3 testimonials minimum"
+      100_to_1000: "3-5 testimonials + data"
+      over_1000: "5+ testimonials + extensive data"
+
+  gate_7_offer:
+    name: "Offer Stack Complete"
+    checkpoint: "After bonus_stacking"
+    criteria:
+      - all_components_listed: true
+      - values_assigned: true
+      - price_value_gap_obvious: true
+    blocker: true
+
+  gate_8_close:
+    name: "Close Effective"
+    checkpoint: "After cta_delivery"
+    criteria:
+      - price_anchored: true
+      - guarantee_present: true
+      - urgency_real_not_fake: true
+      - cta_clear_and_singular: true
+    blocker: true
+
+  gate_final:
+    name: "Final Script Validation"
+    checkpoint: "Before production"
+    criteria:
+      - all_seven_phases_complete: true
+      - duration_within_target: true
+      - teleprompter_ready: true
+      - b_roll_notes_included: true
+    blocker: true
+
+# ============================================================================
+# WORKFLOWS
+# ============================================================================
+
+workflows:
+  main_vsl_creation:
+    name: "Complete VSL Script Creation"
+    trigger: "new_vsl_request"
+    steps:
+      - step: "strategy_planning"
+        agent: "vsl_strategist"
+        outputs: ["vsl_strategy_document"]
+        gate: "gate_1_strategy"
+
+      - step: "hook_creation"
+        agent: "vsl_hook_writer"
+        outputs: ["hook_script", "curiosity_gap"]
+        gate: "gate_2_hook"
+
+      - step: "context_building"
+        agent: "vsl_authority_builder"
+        outputs: ["authority_script", "motive_script"]
+        gate: "gate_3_context"
+
+      - step: "problem_development"
+        agent: "vsl_problem_agitator"
+        outputs: ["problem_script", "agitation_script"]
+        gate: "gate_4_problem"
+
+      - step: "solution_presentation"
+        agent: "vsl_solution_presenter"
+        outputs: ["mechanism_script", "components_script"]
+        gate: "gate_5_solution"
+
+      - step: "proof_compilation"
+        agent: "vsl_proof_builder"
+        outputs: ["data_proof", "success_stories"]
+        gate: "gate_6_proof"
+
+      - step: "offer_construction"
+        agent: "vsl_offer_stacker"
+        outputs: ["offer_stack", "bonus_stack"]
+        gate: "gate_7_offer"
+
+      - step: "close_creation"
+        agent: "vsl_closer"
+        outputs: ["price_reveal", "guarantee", "urgency", "cta"]
+        gate: "gate_8_close"
+
+      - step: "final_assembly"
+        outputs: ["complete_vsl_script"]
+        gate: "gate_final"
+
+  oto_sequence_creation:
+    name: "OTO Sequence Development"
+    trigger: "oto_sequence_request"
+    steps:
+      - step: "oto_strategy"
+        agent: "vsl_strategist"
+        outputs: ["oto_sequence_plan"]
+
+      - step: "thank_you_vsl"
+        workflow: "thank_you_vsl_creation"
+
+      - step: "oto_vsl_1"
+        workflow: "main_vsl_creation"
+        context: "first_oto"
+
+      - step: "downsell_vsl"
+        workflow: "main_vsl_creation"
+        context: "downsell"
+        condition: "if_oto_declined"
+
+  thank_you_vsl_creation:
+    name: "Thank You VSL Creation"
+    trigger: "post_purchase_vsl_needed"
+    steps:
+      - step: "confirmation_opening"
+        agent: "vsl_confirmation_writer"
+        outputs: ["confirmation_script"]
+
+      - step: "expectations_setting"
+        agent: "vsl_confirmation_writer"
+        outputs: ["expectations_script"]
+
+      - step: "next_steps"
+        agent: "vsl_confirmation_writer"
+        outputs: ["next_steps_script"]
+
+      - step: "oto_tease"
+        agent: "vsl_confirmation_writer"
+        outputs: ["oto_tease_script"]
+        condition: "if_oto_exists"
+
+# ============================================================================
+# DECISION RULES
+# ============================================================================
+
+decision_rules:
+  dr_001_vsl_duration:
+    name: "VSL Duration by Traffic"
+    trigger: "planning_phase"
+    rule: |
+      IF traffic == cold THEN duration = 8-15min
+      IF traffic == warm THEN duration = 3-8min
+      IF traffic == hot (just_purchased) THEN duration = 3-5min
+
+  dr_002_proof_depth:
+    name: "Proof Depth by Price"
+    trigger: "proof_planning"
+    rule: |
+      IF offer_price < $100 THEN basic_proof (2-3 testimonials)
+      IF offer_price $100-$1000 THEN medium_proof (3-5 + data)
+      IF offer_price > $1000 THEN heavy_proof (5+ + extensive data)
+
+  dr_003_urgency_type:
+    name: "Urgency Selection"
+    trigger: "close_planning"
+    rule: |
+      IF launch_based THEN deadline_urgency
+      IF capacity_limited THEN spot_urgency
+      IF bonus_limited THEN bonus_urgency
+      IF no_real_scarcity THEN SKIP or soft_urgency
+
+  dr_004_oto_sequencing:
+    name: "OTO Flow"
+    trigger: "post_purchase"
+    rule: |
+      IF purchased_low_ticket THEN offer_mid_ticket_oto
+      IF purchased_mid_ticket THEN offer_high_ticket_oto
+      IF declined_oto THEN offer_downsell (30-50% lower)
+      IF accepted_oto THEN additional_oto OR thank_you_only
+
+# ============================================================================
+# METRICS
+# ============================================================================
+
+metrics:
+  primary:
+    watch_time_50_percent:
+      target: ">50%"
+      measurement: "viewers who watch >50% of VSL"
+
+    cta_click_rate:
+      target: ">10% warm, >5% cold"
+      measurement: "clicks / views"
+
+    conversion_rate:
+      target: ">3% cold, >10% warm"
+      measurement: "purchases / views"
+
+  secondary:
+    drop_off_points:
+      target: "no >15% drop at single point"
+      measurement: "retention graph analysis"
+
+    oto_acceptance_rate:
+      target: ">20%"
+      measurement: "oto_purchases / initial_purchases"
+
+    completion_rate:
+      target: ">30%"
+      measurement: "viewers who watch to end"
+
+# ============================================================================
+# INTEGRATION
+# ============================================================================
+
+integration:
+  inputs:
+    - source: "offer_specification"
+      format: "yaml/json"
+      required: true
+
+    - source: "funnel_map"
+      format: "diagram/yaml"
+      required: true
+
+    - source: "avatar_profile"
+      format: "document"
+      required: true
+
+    - source: "testimonials_library"
+      format: "database/spreadsheet"
+      required: true
+
+    - source: "creator_credentials"
+      format: "document"
+      required: true
+
+  outputs:
+    - destination: "production_team"
+      format: "teleprompter_script"
+
+    - destination: "video_team"
+      format: "shot_list"
+
+    - destination: "analytics"
+      format: "tracking_plan"
+
+  related_sops:
+    - name: "sales-page-sop"
+      relationship: "complementary"
+      note: "VSL SOP focuses on video scripts; sales-page SOP focuses on page elements"
+
+    - name: "hooks-ads-sop"
+      relationship: "upstream"
+      note: "Hooks drive traffic to VSL pages"
+
+    - name: "offer-creation-sop"
+      relationship: "prerequisite"
+      note: "Offer must be defined before VSL can be scripted"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

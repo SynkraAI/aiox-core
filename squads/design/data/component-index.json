@@ -1,0 +1,836 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-03-06",
+  "source": "shadcn/ui documentation",
+  "total_components": 46,
+  "components": [
+    {
+      "name": "Accordion",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/accordion",
+      "props": ["type", "value", "defaultValue", "onValueChange", "collapsible", "disabled", "className", "asChild"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["border", "foreground", "muted-foreground"],
+        "spacing": ["py-4", "pb-4"],
+        "typography": ["text-sm", "font-medium"]
+      },
+      "when_to_use": "FAQ sections, collapsible content panels, settings pages with grouped options, long-form content that benefits from progressive disclosure",
+      "when_not_to_use": "Single toggle visibility (use Collapsible), tabbed interfaces where all content is equally important (use Tabs), navigation menus (use NavigationMenu)",
+      "related_components": ["Collapsible", "Tabs"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/accordion",
+      "accessibility_notes": "Built on Radix Accordion. Supports keyboard navigation with Arrow keys between triggers, Enter/Space to toggle. Uses aria-expanded, aria-controls, and role=region. Single or multiple mode via type prop.",
+      "page_sections": ["faq", "settings-form", "content-body", "sidebar", "benefits"]
+    },
+    {
+      "name": "Alert",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/alert",
+      "props": ["variant", "className"],
+      "variants": ["default", "destructive"],
+      "design_tokens": {
+        "colors": ["background", "foreground", "destructive", "border"],
+        "spacing": ["p-4"],
+        "typography": ["text-sm", "font-medium"]
+      },
+      "when_to_use": "Inline status messages, form validation summaries, system notifications that persist on page, important callouts within content",
+      "when_not_to_use": "Ephemeral notifications that auto-dismiss (use Sonner/Toast), confirmation before destructive actions (use AlertDialog), simple helper text under form fields (use FormDescription)",
+      "related_components": ["AlertDialog", "Sonner"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/alert",
+      "accessibility_notes": "Uses role=alert for assertive announcements to screen readers. Destructive variant uses aria-live=assertive. Should contain AlertTitle and AlertDescription for proper semantic structure.",
+      "page_sections": ["auth-form", "settings-form", "dashboard-kpis", "content-body"]
+    },
+    {
+      "name": "AlertDialog",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/alert-dialog",
+      "props": ["open", "defaultOpen", "onOpenChange"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["background", "foreground", "muted", "border"],
+        "spacing": ["p-6", "gap-4"],
+        "typography": ["text-lg", "text-sm", "font-semibold"]
+      },
+      "when_to_use": "Confirming destructive actions like delete or remove, irreversible operations requiring explicit user consent, interrupting user flow for critical decisions",
+      "when_not_to_use": "Displaying information without requiring action (use Dialog), non-critical confirmations (use Dialog), form input collection (use Dialog with Form)",
+      "related_components": ["Dialog", "Button"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/alert-dialog",
+      "accessibility_notes": "Built on Radix AlertDialog. Traps focus within dialog when open. Cancel button receives initial focus by default. Escape key cancels. Uses role=alertdialog, aria-describedby, aria-labelledby. Requires both action and cancel buttons for accessibility compliance.",
+      "page_sections": ["settings-form", "dashboard-tables", "content-body"]
+    },
+    {
+      "name": "Avatar",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/avatar",
+      "props": ["className", "asChild"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["muted", "muted-foreground"],
+        "spacing": ["h-10", "w-10"],
+        "typography": []
+      },
+      "when_to_use": "User profile images, comment author indicators, team member lists, navigation bar user menus, testimonial cards",
+      "when_not_to_use": "Logo display (use plain img), decorative icons that are not user-related (use Icon component), large hero images (use standard img)",
+      "related_components": ["HoverCard", "DropdownMenu"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/avatar",
+      "accessibility_notes": "Built on Radix Avatar. AvatarImage uses standard img alt attribute for screen readers. AvatarFallback displays initials or icon when image fails to load. Ensure meaningful alt text is provided for user identification.",
+      "page_sections": ["navigation", "topbar", "testimonials", "social-proof", "content-header", "footer"]
+    },
+    {
+      "name": "Badge",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/badge",
+      "props": ["variant", "className", "asChild"],
+      "variants": ["default", "secondary", "destructive", "outline"],
+      "design_tokens": {
+        "colors": ["primary", "secondary", "destructive", "border", "foreground"],
+        "spacing": ["px-2.5", "py-0.5"],
+        "typography": ["text-xs", "font-semibold"]
+      },
+      "when_to_use": "Status indicators, category labels, count notifications, feature tags, plan tier labels in pricing sections",
+      "when_not_to_use": "Clickable actions (use Button), large status banners (use Alert), interactive filters (use ToggleGroup), form labels (use Label)",
+      "related_components": ["Button", "Toggle"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/badge",
+      "accessibility_notes": "Rendered as a span by default. For status indicators, add role=status or aria-label describing the status. When used as a link with asChild, ensure proper anchor semantics.",
+      "page_sections": ["hero", "pricing", "features", "dashboard-kpis", "dashboard-tables", "content-header"]
+    },
+    {
+      "name": "Breadcrumb",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/breadcrumb",
+      "props": ["separator", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["muted-foreground", "foreground"],
+        "spacing": ["gap-1.5"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Multi-level page navigation showing hierarchy, settings pages with nested sections, e-commerce category navigation, dashboard sub-pages",
+      "when_not_to_use": "Top-level navigation between main sections (use NavigationMenu), pagination between pages of results (use Pagination), step indicators in wizards (use custom Stepper)",
+      "related_components": ["NavigationMenu", "DropdownMenu"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/breadcrumb",
+      "accessibility_notes": "Uses nav element with aria-label='breadcrumb'. BreadcrumbPage uses aria-current=page for the current page. BreadcrumbSeparator is aria-hidden. Supports BreadcrumbEllipsis for collapsed intermediate items with DropdownMenu.",
+      "page_sections": ["navigation", "topbar", "content-header", "settings-nav", "footer"]
+    },
+    {
+      "name": "Button",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/button",
+      "props": ["variant", "size", "asChild", "disabled", "className"],
+      "variants": ["default", "destructive", "outline", "secondary", "ghost", "link"],
+      "design_tokens": {
+        "colors": ["primary", "primary-foreground", "destructive", "destructive-foreground", "secondary", "secondary-foreground", "accent", "accent-foreground"],
+        "spacing": ["h-10", "px-4", "py-2", "h-9", "h-11"],
+        "typography": ["text-sm", "font-medium"]
+      },
+      "when_to_use": "Primary actions, form submissions, navigation triggers, CTA sections, dialog action buttons, toolbar actions",
+      "when_not_to_use": "Text links within paragraphs (use anchor tag), icon-only triggers without visible label (add aria-label or use size=icon with tooltip), navigation items in menus (use NavigationMenu items)",
+      "related_components": ["ButtonGroup", "Toggle", "DropdownMenu"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/button",
+      "accessibility_notes": "Renders as native button element with proper focus ring. Supports asChild to render as anchor or other element while maintaining button semantics. Disabled state sets aria-disabled. Size=icon variant should always include aria-label or sr-only text. Uses focus-visible for keyboard-only focus indication.",
+      "page_sections": ["hero", "cta", "pricing", "auth-form", "settings-form", "navigation", "content-body", "features", "footer", "benefits"]
+    },
+    {
+      "name": "Calendar",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/calendar",
+      "props": ["mode", "selected", "onSelect", "disabled", "month", "onMonthChange", "className", "numberOfMonths", "fromDate", "toDate", "defaultMonth"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["primary", "primary-foreground", "accent", "accent-foreground", "muted-foreground"],
+        "spacing": ["p-3"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Date selection in forms, booking and scheduling interfaces, date range pickers for reports, inline date display for dashboards",
+      "when_not_to_use": "Simple date text input without calendar UI (use Input with type=date), selecting only month/year (use Select dropdowns), time-only selection (use dedicated time picker)",
+      "related_components": ["DatePicker", "Popover", "Form"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/calendar",
+      "accessibility_notes": "Built on react-day-picker. Full keyboard navigation with Arrow keys for day navigation, PageUp/PageDown for months. Uses role=grid with proper aria-label for month. Selected dates have aria-selected=true. Disabled dates have aria-disabled=true.",
+      "page_sections": ["settings-form", "dashboard-kpis", "content-body"]
+    },
+    {
+      "name": "Card",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/card",
+      "props": ["className", "asChild"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["card", "card-foreground", "border", "muted-foreground"],
+        "spacing": ["p-6", "gap-2"],
+        "typography": ["text-2xl", "text-sm", "font-semibold"]
+      },
+      "when_to_use": "Content grouping with header/body/footer structure, dashboard KPI tiles, pricing plan cards, feature showcase items, auth form containers, settings sections",
+      "when_not_to_use": "Simple bordered containers without semantic structure (use div with border), full-width content sections (use semantic section element), list items in a dense list (use Table rows)",
+      "related_components": ["Dialog", "Sheet"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/card",
+      "accessibility_notes": "Semantic wrapper using div by default. Use CardTitle within CardHeader for proper heading hierarchy. When card is interactive (clickable), wrap with anchor or button using asChild and ensure focus styles are visible. CardDescription provides supplementary text.",
+      "page_sections": ["hero", "features", "pricing", "dashboard-kpis", "auth-form", "testimonials", "benefits", "cta", "settings-form", "content-body"]
+    },
+    {
+      "name": "Carousel",
+      "atomic_category": "organism",
+      "import_path": "@/components/ui/carousel",
+      "props": ["opts", "plugins", "orientation", "setApi", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["border", "background", "foreground"],
+        "spacing": ["p-1", "gap-4"],
+        "typography": []
+      },
+      "when_to_use": "Image galleries, testimonial sliders, feature showcases with multiple items, product image carousels, onboarding step presentations",
+      "when_not_to_use": "Content that users must all see (use grid layout), critical information (carousels have low engagement), simple before/after comparisons (use side-by-side layout)",
+      "related_components": ["Card", "Button"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/carousel",
+      "accessibility_notes": "Built on Embla Carousel. Uses role=region with aria-roledescription=carousel. Each slide has role=group with aria-roledescription=slide. Previous/Next buttons have descriptive aria-labels. Keyboard navigation with arrow keys when focused.",
+      "page_sections": ["hero", "testimonials", "features", "social-proof", "demo"]
+    },
+    {
+      "name": "Checkbox",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/checkbox",
+      "props": ["checked", "defaultChecked", "onCheckedChange", "disabled", "required", "name", "value", "className", "asChild"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["primary", "primary-foreground", "border"],
+        "spacing": ["h-4", "w-4"],
+        "typography": []
+      },
+      "when_to_use": "Multiple selection from a list, boolean toggles in forms, terms and conditions acceptance, filter checkboxes, table row selection",
+      "when_not_to_use": "Mutually exclusive options (use RadioGroup), on/off toggle with immediate effect (use Switch), single binary choice with prominent display (use Switch)",
+      "related_components": ["RadioGroup", "Switch", "Form", "Label"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/checkbox",
+      "accessibility_notes": "Built on Radix Checkbox. Uses role=checkbox with aria-checked supporting true, false, and mixed (indeterminate) states. Toggle with Space key. Must be associated with a Label using htmlFor for accessibility. Focus ring visible on keyboard navigation.",
+      "page_sections": ["settings-form", "auth-form", "dashboard-tables", "content-body"]
+    },
+    {
+      "name": "Collapsible",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/collapsible",
+      "props": ["open", "defaultOpen", "onOpenChange", "disabled", "className", "asChild"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["border"],
+        "spacing": ["gap-2"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Single expandable section, show/hide additional details, sidebar section collapse, code block expansion, advanced settings toggle",
+      "when_not_to_use": "Multiple expandable sections in a list (use Accordion), navigation menus (use NavigationMenu), modal content (use Dialog or Sheet)",
+      "related_components": ["Accordion"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/collapsible",
+      "accessibility_notes": "Built on Radix Collapsible. Trigger has aria-expanded and aria-controls linking to content. Content region is hidden from accessibility tree when collapsed. Activated with Enter/Space on trigger.",
+      "page_sections": ["sidebar", "settings-form", "content-body"]
+    },
+    {
+      "name": "Combobox",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/combobox",
+      "props": ["open", "onOpenChange", "value", "onValueChange", "placeholder", "searchPlaceholder", "emptyText", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["popover", "popover-foreground", "primary", "muted-foreground"],
+        "spacing": ["p-0"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Searchable select with many options, auto-complete fields, tag selection, framework/technology selection, location lookup",
+      "when_not_to_use": "Small lists under 7 items (use Select or RadioGroup), free-form text input without predefined options (use Input), multi-step filtering (use Command palette)",
+      "related_components": ["Command", "Popover", "Select"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/combobox",
+      "accessibility_notes": "Composed from Command and Popover. Uses role=combobox on trigger with aria-expanded. Command list provides role=listbox with aria-selected on active option. Keyboard navigation with Arrow keys, Enter to select, Escape to close. Type-ahead search filters options.",
+      "page_sections": ["settings-form", "auth-form", "dashboard-kpis", "content-body"]
+    },
+    {
+      "name": "Command",
+      "atomic_category": "organism",
+      "import_path": "@/components/ui/command",
+      "props": ["value", "onValueChange", "filter", "shouldFilter", "loop", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["popover", "popover-foreground", "muted", "muted-foreground", "accent", "accent-foreground"],
+        "spacing": ["p-2"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Command palettes (Cmd+K), searchable action menus, application-level search, quick navigation between pages, keyboard-driven workflows",
+      "when_not_to_use": "Simple dropdown selection (use Select), autocomplete for form fields (use Combobox), navigation menus without search (use NavigationMenu)",
+      "related_components": ["Combobox", "Dialog", "Popover"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/command",
+      "accessibility_notes": "Built on cmdk. Uses role=listbox with aria-label. CommandInput has role=combobox. Items are role=option with aria-selected. Full keyboard navigation: Arrow keys to navigate, Enter to select, Escape to close. CommandEmpty announces 'No results found' to screen readers. Groups use role=group with aria-labelledby.",
+      "page_sections": ["navigation", "topbar", "dashboard-kpis"]
+    },
+    {
+      "name": "ContextMenu",
+      "atomic_category": "organism",
+      "import_path": "@/components/ui/context-menu",
+      "props": ["onOpenChange", "modal"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["popover", "popover-foreground", "accent", "accent-foreground", "muted-foreground"],
+        "spacing": ["p-1", "px-2", "py-1.5"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Right-click context actions on elements, file browser actions, canvas editor tools, table row actions as secondary interaction pattern",
+      "when_not_to_use": "Primary action menus (use DropdownMenu with visible trigger), mobile-first interfaces where right-click is not natural (use DropdownMenu), simple action lists (use DropdownMenu)",
+      "related_components": ["DropdownMenu", "Menubar"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/context-menu",
+      "accessibility_notes": "Built on Radix ContextMenu. Supports keyboard shortcuts display. Items support disabled state. Submenus, checkbox items, and radio groups available. Uses role=menu with role=menuitem children. Keyboard: Arrow keys navigate, Enter/Space activate, Escape closes. Long-press on touch devices.",
+      "page_sections": ["dashboard-tables", "content-body", "sidebar"]
+    },
+    {
+      "name": "DataTable",
+      "atomic_category": "organism",
+      "import_path": "@/components/ui/data-table",
+      "props": ["columns", "data", "pagination", "sorting", "filtering", "columnVisibility", "rowSelection", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["border", "muted", "muted-foreground", "primary"],
+        "spacing": ["p-4"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Displaying structured data with sorting, filtering and pagination, admin dashboards, user management lists, analytics data views, any tabular data exceeding 10 rows",
+      "when_not_to_use": "Simple key-value display (use description lists), small static data under 5 rows (use Table), card-based data display (use grid of Cards), content-heavy layouts (use list components)",
+      "related_components": ["Table", "Pagination", "Select", "Input", "DropdownMenu", "Checkbox"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/data-table",
+      "accessibility_notes": "Built on TanStack Table. Uses native table elements for proper semantics. Column headers are th with scope=col. Sortable columns announce sort direction. Row selection checkboxes have proper labels. Pagination controls have aria-labels. Use caption element for table description.",
+      "page_sections": ["dashboard-tables", "settings-form", "content-body"]
+    },
+    {
+      "name": "DatePicker",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/date-picker",
+      "props": ["date", "onDateChange", "placeholder", "disabled", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["popover", "popover-foreground", "muted-foreground", "primary"],
+        "spacing": ["p-3"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Form date fields, report date range selection, scheduling interfaces, filter by date controls, event date selection",
+      "when_not_to_use": "Displaying a calendar always visible on page (use Calendar directly), time-only input (use dedicated time picker), date display without editing (use formatted text)",
+      "related_components": ["Calendar", "Popover", "Button", "Form"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/date-picker",
+      "accessibility_notes": "Composed from Popover, Button, and Calendar. Trigger button announces selected date. Calendar within popover inherits full keyboard navigation. Popover manages focus trap. Button displays formatted date or placeholder text for screen readers.",
+      "page_sections": ["settings-form", "dashboard-kpis", "content-body"]
+    },
+    {
+      "name": "Dialog",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/dialog",
+      "props": ["open", "defaultOpen", "onOpenChange", "modal"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["background", "foreground", "muted-foreground", "border"],
+        "spacing": ["p-6", "gap-4"],
+        "typography": ["text-lg", "text-sm", "font-semibold"]
+      },
+      "when_to_use": "Form input collection in overlay, detail views without page navigation, configuration modals, content creation dialogs, image/media preview overlays",
+      "when_not_to_use": "Confirmations of destructive actions (use AlertDialog), side panel content (use Sheet), ephemeral notifications (use Sonner/Toast), content that should be indexable by search engines",
+      "related_components": ["AlertDialog", "Sheet", "Drawer"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/dialog",
+      "accessibility_notes": "Built on Radix Dialog. Focus trapped within dialog when open. First focusable element receives focus on open. Escape closes dialog. Uses role=dialog with aria-labelledby (DialogTitle) and aria-describedby (DialogDescription). Overlay prevents interaction with content behind. DialogClose button must be present.",
+      "page_sections": ["auth-form", "settings-form", "content-body", "dashboard-tables"]
+    },
+    {
+      "name": "Drawer",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/drawer",
+      "props": ["open", "onOpenChange", "shouldScaleBackground", "direction", "dismissible", "handleOnly", "snapPoints", "activeSnapPoint", "setActiveSnapPoint", "fadeFromIndex"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["background", "foreground", "muted", "border"],
+        "spacing": ["p-4", "pb-0"],
+        "typography": ["text-lg", "text-sm", "font-semibold"]
+      },
+      "when_to_use": "Mobile-first bottom sheets, responsive alternative to Dialog on mobile, progressive disclosure of form sections, mobile navigation menus, mobile filter panels",
+      "when_not_to_use": "Desktop-only side panels (use Sheet), desktop modal dialogs (use Dialog), permanent navigation (use sidebar layout), confirmations requiring explicit action (use AlertDialog)",
+      "related_components": ["Dialog", "Sheet"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/drawer",
+      "accessibility_notes": "Built on vaul. Focus trapped when open. Supports snap points for partial open states. Drag handle provides visual affordance for touch interaction. Uses role=dialog semantics. Escape key closes drawer. Background scaling option provides depth cue.",
+      "page_sections": ["navigation", "settings-form", "content-body"]
+    },
+    {
+      "name": "DropdownMenu",
+      "atomic_category": "organism",
+      "import_path": "@/components/ui/dropdown-menu",
+      "props": ["open", "defaultOpen", "onOpenChange", "modal"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["popover", "popover-foreground", "accent", "accent-foreground", "muted-foreground", "destructive"],
+        "spacing": ["p-1", "px-2", "py-1.5"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Action menus triggered by button click, user profile menus, more actions overflow menus, table row action menus, settings gear menus",
+      "when_not_to_use": "Form field selection (use Select or Combobox), primary navigation (use NavigationMenu), right-click menus (use ContextMenu), command palettes with search (use Command)",
+      "related_components": ["ContextMenu", "Menubar", "Select", "Button"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/dropdown-menu",
+      "accessibility_notes": "Built on Radix DropdownMenu. Trigger has aria-haspopup=menu and aria-expanded. Menu uses role=menu with role=menuitem children. Full keyboard: Arrow keys navigate, Enter/Space activate, Escape closes. Supports checkbox items, radio groups, and submenus. Keyboard shortcut hints displayed but not functional by default.",
+      "page_sections": ["topbar", "navigation", "dashboard-tables", "settings-nav", "content-header"]
+    },
+    {
+      "name": "Form",
+      "atomic_category": "organism",
+      "import_path": "@/components/ui/form",
+      "props": ["form"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["destructive", "muted-foreground"],
+        "spacing": ["gap-2"],
+        "typography": ["text-sm", "font-medium"]
+      },
+      "when_to_use": "Any form requiring validation, login/registration forms, settings forms, data entry forms, multi-step wizards with field validation",
+      "when_not_to_use": "Simple search bars without validation (use Input directly), display-only data (use description lists), single-field inline edits (may be overkill, use controlled Input)",
+      "related_components": ["Input", "Select", "Checkbox", "RadioGroup", "Switch", "Textarea", "Label", "Button"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/form",
+      "accessibility_notes": "Built on React Hook Form with Zod validation. FormField connects input to label via htmlFor/id. FormMessage announces validation errors to screen readers via aria-describedby. FormDescription provides helper text linked via aria-describedby. Error messages use aria-live=polite for dynamic announcements.",
+      "page_sections": ["auth-form", "settings-form", "content-body"]
+    },
+    {
+      "name": "HoverCard",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/hover-card",
+      "props": ["open", "defaultOpen", "onOpenChange", "openDelay", "closeDelay"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["popover", "popover-foreground", "border"],
+        "spacing": ["p-4", "w-80"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "User profile preview on hover, link previews, additional context for truncated text, tooltip-like rich content with images or formatted text",
+      "when_not_to_use": "Mobile interfaces where hover is unavailable (use Popover with click), critical information users must see (use inline content), interactive forms within the card (use Popover or Dialog)",
+      "related_components": ["Tooltip", "Popover"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/hover-card",
+      "accessibility_notes": "Built on Radix HoverCard. Opens on hover and focus for keyboard users. Content is accessible to screen readers when visible. Not suitable as sole method of conveying information since hover is not available on touch devices. Use as progressive enhancement only.",
+      "page_sections": ["social-proof", "testimonials", "content-body", "dashboard-tables"]
+    },
+    {
+      "name": "Input",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/input",
+      "props": ["type", "placeholder", "disabled", "value", "onChange", "name", "id", "required", "className", "autoComplete", "readOnly"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["border", "input", "ring", "foreground", "muted-foreground"],
+        "spacing": ["h-10", "px-3", "py-2"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Single-line text entry, email fields, password fields, search fields, number inputs, URL inputs, any form field requiring typed user input",
+      "when_not_to_use": "Multi-line text (use Textarea), selection from predefined options (use Select or Combobox), date selection (use DatePicker), file upload (use dedicated file input)",
+      "related_components": ["Label", "Form", "Textarea"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/input",
+      "accessibility_notes": "Standard HTML input element with consistent styling. Must be associated with Label via htmlFor/id for screen readers. Placeholder is not a substitute for label. Uses focus-visible ring for keyboard navigation. Disabled state is communicated via aria-disabled. Use aria-describedby to link to helper text or error messages.",
+      "page_sections": ["auth-form", "settings-form", "navigation", "topbar", "content-body"]
+    },
+    {
+      "name": "InputOTP",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/input-otp",
+      "props": ["maxLength", "value", "onChange", "disabled", "pattern", "render", "containerClassName", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["border", "ring", "foreground"],
+        "spacing": ["h-10", "w-10", "gap-2"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "OTP/verification code entry, PIN input, two-factor authentication forms, SMS code confirmation",
+      "when_not_to_use": "Regular text input (use Input), password entry (use Input with type=password), long numeric inputs like phone numbers (use Input with pattern)",
+      "related_components": ["Input", "Form"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/input-otp",
+      "accessibility_notes": "Built on input-otp library. Uses a single hidden input for the actual value with visual slots for display. Supports paste from clipboard. Keyboard: type digits to advance, Backspace to go back. Pattern prop restricts input to valid characters. Screen readers announce the input as a single field.",
+      "page_sections": ["auth-form"]
+    },
+    {
+      "name": "Label",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/label",
+      "props": ["htmlFor", "className", "asChild"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["foreground"],
+        "spacing": [],
+        "typography": ["text-sm", "font-medium"]
+      },
+      "when_to_use": "Form field labels, checkbox and radio labels, any input that needs an accessible name, settings toggle descriptions",
+      "when_not_to_use": "Headings (use proper h1-h6), general text content (use p), badge-style labels (use Badge), non-interactive descriptive text (use span)",
+      "related_components": ["Input", "Checkbox", "RadioGroup", "Switch", "Form"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/label",
+      "accessibility_notes": "Built on Radix Label. Renders as HTML label element. htmlFor prop creates accessible association with form control. Clicking label focuses the associated input. Essential for screen reader users to understand form field purpose. Peer styling changes appearance when associated input is disabled.",
+      "page_sections": ["auth-form", "settings-form", "content-body"]
+    },
+    {
+      "name": "Menubar",
+      "atomic_category": "organism",
+      "import_path": "@/components/ui/menubar",
+      "props": ["className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["border", "background", "foreground", "accent", "accent-foreground", "muted-foreground"],
+        "spacing": ["p-1", "px-2", "py-1.5", "h-10"],
+        "typography": ["text-sm", "font-medium"]
+      },
+      "when_to_use": "Desktop application-style menu bar, editor toolbars with grouped actions, admin panels with hierarchical menus, complex action organization at page level",
+      "when_not_to_use": "Simple page navigation (use NavigationMenu), mobile navigation (use Sheet or Drawer), single dropdown actions (use DropdownMenu), command search interface (use Command)",
+      "related_components": ["DropdownMenu", "NavigationMenu", "ContextMenu"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/menubar",
+      "accessibility_notes": "Built on Radix Menubar. Uses role=menubar with role=menu for each dropdown. Full keyboard navigation: Arrow Left/Right between menus, Arrow Up/Down within menu items, Enter/Space to activate, Escape to close. Supports checkbox items, radio groups, submenus, and keyboard shortcut display. RTL layout support.",
+      "page_sections": ["topbar", "navigation"]
+    },
+    {
+      "name": "NavigationMenu",
+      "atomic_category": "organism",
+      "import_path": "@/components/ui/navigation-menu",
+      "props": ["value", "defaultValue", "onValueChange", "delayDuration", "skipDelayDuration", "orientation", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["background", "foreground", "muted", "muted-foreground", "accent", "accent-foreground", "popover", "border"],
+        "spacing": ["p-4", "gap-3"],
+        "typography": ["text-sm", "font-medium"]
+      },
+      "when_to_use": "Primary site navigation with dropdown mega-menus, multi-level page navigation, header navigation with content-rich dropdowns, marketing site main nav",
+      "when_not_to_use": "Mobile hamburger menu content (use Sheet with links), sidebar navigation (use custom sidebar), breadcrumb-style navigation (use Breadcrumb), app-style menubar (use Menubar)",
+      "related_components": ["Menubar", "Breadcrumb", "DropdownMenu"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/navigation-menu",
+      "accessibility_notes": "Built on Radix NavigationMenu. Uses nav element with role=navigation. Triggers have aria-expanded and aria-controls. Arrow key navigation between menu items. Content panels use aria-labelledby. Viewport manages animated content transitions. Uses NavigationMenuIndicator for visual active state. Screen readers announce expanded/collapsed state.",
+      "page_sections": ["navigation", "topbar"]
+    },
+    {
+      "name": "Pagination",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/pagination",
+      "props": ["className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["foreground", "muted-foreground", "accent", "accent-foreground", "border"],
+        "spacing": ["gap-1"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Navigating paginated data lists, search results pagination, article archive pagination, table data pagination alongside DataTable",
+      "when_not_to_use": "Infinite scroll patterns (use IntersectionObserver), carousel navigation (use Carousel controls), step-by-step wizards (use custom stepper), tab-like navigation (use Tabs)",
+      "related_components": ["DataTable", "Button"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/pagination",
+      "accessibility_notes": "Uses nav element with aria-label=pagination. Page links use aria-current=page for the active page. Previous/Next buttons have descriptive aria-labels. Ellipsis elements are aria-hidden. Each page link is focusable with visible focus ring.",
+      "page_sections": ["dashboard-tables", "content-body"]
+    },
+    {
+      "name": "Popover",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/popover",
+      "props": ["open", "defaultOpen", "onOpenChange", "modal"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["popover", "popover-foreground", "border"],
+        "spacing": ["p-4", "w-80"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Rich interactive content triggered by click, color pickers, date pickers (as container for Calendar), filter panels, form sections shown on demand",
+      "when_not_to_use": "Simple text hints (use Tooltip), full-page overlays (use Dialog), hover-only previews (use HoverCard), mobile-first bottom panels (use Drawer)",
+      "related_components": ["Tooltip", "HoverCard", "Dialog", "DropdownMenu"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/popover",
+      "accessibility_notes": "Built on Radix Popover. Trigger has aria-haspopup and aria-expanded. Content is focus-trapped when modal. Escape closes popover and returns focus to trigger. Positioned automatically to stay within viewport. Portal renders content at document root to avoid overflow clipping.",
+      "page_sections": ["navigation", "settings-form", "dashboard-kpis", "topbar", "content-body"]
+    },
+    {
+      "name": "Progress",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/progress",
+      "props": ["value", "max", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["secondary", "primary"],
+        "spacing": ["h-4"],
+        "typography": []
+      },
+      "when_to_use": "File upload progress, task completion percentage, onboarding step progress, loading indicators with known completion, KPI target visualization",
+      "when_not_to_use": "Indeterminate loading without known progress (use Skeleton or spinner), step-by-step wizards (use custom stepper), skill/rating display (use custom bar chart)",
+      "related_components": ["Skeleton", "Slider"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/progress",
+      "accessibility_notes": "Built on Radix Progress. Uses role=progressbar with aria-valuenow, aria-valuemin=0, and aria-valuemax. Screen readers announce percentage complete. Indeterminate state when value is null. Provide aria-label or aria-labelledby to describe what is progressing.",
+      "page_sections": ["dashboard-kpis", "content-body", "settings-form"]
+    },
+    {
+      "name": "RadioGroup",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/radio-group",
+      "props": ["value", "defaultValue", "onValueChange", "disabled", "required", "orientation", "name", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["primary", "border"],
+        "spacing": ["gap-2"],
+        "typography": []
+      },
+      "when_to_use": "Mutually exclusive option selection, plan/tier selection, preference settings with 2-5 options, survey single-choice questions",
+      "when_not_to_use": "More than 7 options (use Select or Combobox), multiple selection (use Checkbox group), binary on/off toggle (use Switch), options with rich content preview (use Card-based selector)",
+      "related_components": ["Checkbox", "Select", "Form", "Label"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/radio-group",
+      "accessibility_notes": "Built on Radix RadioGroup. Uses role=radiogroup with role=radio children. Arrow keys navigate between options and auto-select. Tab moves focus into and out of the group. Each radio must have an associated Label. aria-required on group when required. Focus ring on active item.",
+      "page_sections": ["settings-form", "pricing", "auth-form", "content-body"]
+    },
+    {
+      "name": "ResizablePanel",
+      "atomic_category": "organism",
+      "import_path": "@/components/ui/resizable",
+      "props": ["defaultSize", "minSize", "maxSize", "collapsible", "collapsedSize", "onCollapse", "onExpand", "onResize", "className", "direction"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["border", "background"],
+        "spacing": ["p-6"],
+        "typography": []
+      },
+      "when_to_use": "Split-pane layouts like code editors, adjustable sidebar and content areas, comparison views, dashboard with resizable widget columns",
+      "when_not_to_use": "Fixed-width sidebars (use CSS grid/flex), responsive breakpoint layouts (use CSS media queries), simple two-column content (use grid layout)",
+      "related_components": ["ScrollArea", "Separator"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/resizable",
+      "accessibility_notes": "Built on react-resizable-panels. Resize handle uses role=separator with aria-orientation. Keyboard: Arrow keys adjust panel size, Home/End for min/max. Handle has aria-valuenow, aria-valuemin, aria-valuemax as percentages. Tab navigates between handles. Double-click handle to reset to default size.",
+      "page_sections": ["dashboard-charts", "dashboard-tables", "content-body", "sidebar"]
+    },
+    {
+      "name": "ScrollArea",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/scroll-area",
+      "props": ["type", "scrollHideDelay", "className", "orientation"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["border", "muted"],
+        "spacing": ["h-72", "w-48"],
+        "typography": []
+      },
+      "when_to_use": "Fixed-height containers with overflow content, dropdown menu content areas, sidebar navigation with many items, code preview blocks, chat message lists",
+      "when_not_to_use": "Full page scrolling (use native scroll), horizontal image galleries (use Carousel), small content that fits without scrolling, virtual/infinite lists with thousands of items (use virtualization library)",
+      "related_components": ["Separator"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/scroll-area",
+      "accessibility_notes": "Built on Radix ScrollArea. Provides custom-styled scrollbars that remain accessible. Keyboard users can scroll with Arrow keys when focused. Scroll position is preserved. type='always' shows scrollbar permanently, 'scroll' shows on scroll, 'hover' shows on hover, 'auto' shows when content overflows.",
+      "page_sections": ["sidebar", "dashboard-tables", "content-body", "settings-nav"]
+    },
+    {
+      "name": "Select",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/select",
+      "props": ["value", "defaultValue", "onValueChange", "open", "defaultOpen", "onOpenChange", "disabled", "required", "name", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["popover", "popover-foreground", "border", "muted-foreground", "accent", "accent-foreground"],
+        "spacing": ["h-10", "px-3", "py-2"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Single selection from predefined list of 3-15 options, form dropdowns, sort/filter selectors, settings with enumerated choices",
+      "when_not_to_use": "Searchable/filterable lists (use Combobox), more than 15 options without search (use Combobox), multiple selection (use Checkbox group), two options only (use Switch or RadioGroup)",
+      "related_components": ["Combobox", "RadioGroup", "Form"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/select",
+      "accessibility_notes": "Built on Radix Select. Trigger uses role=combobox with aria-expanded and aria-autocomplete=none. Content uses role=listbox. Items use role=option with aria-selected. Full keyboard: Space/Enter opens, Arrow keys navigate, type-ahead character search, Escape closes. Groups use role=group with aria-labelledby. Scroll buttons for long lists.",
+      "page_sections": ["settings-form", "dashboard-kpis", "content-body", "auth-form"]
+    },
+    {
+      "name": "Separator",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/separator",
+      "props": ["orientation", "decorative", "className", "asChild"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["border"],
+        "spacing": ["my-4"],
+        "typography": []
+      },
+      "when_to_use": "Visual dividers between content sections, menu item group separators, toolbar section dividers, card content section breaks",
+      "when_not_to_use": "Spacing between elements (use margin/padding), decorative borders on containers (use CSS border), table row dividers (use table borders)",
+      "related_components": [],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/separator",
+      "accessibility_notes": "Built on Radix Separator. Uses role=separator with aria-orientation (horizontal/vertical). When decorative=true, uses role=none and is hidden from accessibility tree. Non-decorative separators communicate content boundaries to screen readers.",
+      "page_sections": ["content-body", "sidebar", "settings-form", "footer", "navigation", "pricing", "features"]
+    },
+    {
+      "name": "Sheet",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/sheet",
+      "props": ["open", "defaultOpen", "onOpenChange", "side"],
+      "variants": ["top", "right", "bottom", "left"],
+      "design_tokens": {
+        "colors": ["background", "foreground", "border", "muted-foreground"],
+        "spacing": ["p-6", "gap-4"],
+        "typography": ["text-lg", "text-sm", "font-semibold"]
+      },
+      "when_to_use": "Mobile navigation menus, filter/settings side panels, detail panels alongside main content, form panels without full modal overlay, shopping cart slide-out",
+      "when_not_to_use": "Confirmations requiring explicit decision (use AlertDialog), mobile bottom sheets with snap points (use Drawer), content that should coexist with page (use ResizablePanel), simple tooltips or popovers (use respective components)",
+      "related_components": ["Dialog", "Drawer", "NavigationMenu"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/sheet",
+      "accessibility_notes": "Built on Radix Dialog. Focus trapped when open. Uses role=dialog with aria-labelledby (SheetTitle) and aria-describedby (SheetDescription). Escape closes sheet. Overlay prevents background interaction. Side prop controls slide direction (top/right/bottom/left). Close button should be present and accessible.",
+      "page_sections": ["navigation", "sidebar", "settings-form", "content-body"]
+    },
+    {
+      "name": "Skeleton",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/skeleton",
+      "props": ["className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["muted"],
+        "spacing": [],
+        "typography": []
+      },
+      "when_to_use": "Loading placeholders mimicking content layout, initial page load states, lazy-loaded content placeholders, skeleton screens for perceived performance",
+      "when_not_to_use": "Determinate progress with percentage (use Progress), simple spinner for quick operations (use spinner animation), error states (use Alert), empty states with action prompts",
+      "related_components": ["Progress"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/skeleton",
+      "accessibility_notes": "Purely visual component with pulse animation. Add aria-busy=true to the container being loaded and aria-live=polite to announce when content replaces skeleton. Use aria-label on skeleton container to describe what is loading. Remove skeletons from accessibility tree with aria-hidden=true.",
+      "page_sections": ["dashboard-kpis", "dashboard-charts", "dashboard-tables", "content-body", "features"]
+    },
+    {
+      "name": "Slider",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/slider",
+      "props": ["value", "defaultValue", "onValueChange", "onValueCommit", "min", "max", "step", "disabled", "orientation", "minStepsBetweenThumbs", "inverted", "name", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["primary", "secondary", "border"],
+        "spacing": ["h-2"],
+        "typography": []
+      },
+      "when_to_use": "Numeric range selection with visual feedback, volume/brightness controls, price range filters, image adjustment sliders, rating with continuous scale",
+      "when_not_to_use": "Precise numeric input (use Input with type=number), binary on/off (use Switch), discrete options from a list (use Select or RadioGroup), progress display without interaction (use Progress)",
+      "related_components": ["Progress", "Input", "Form"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/slider",
+      "accessibility_notes": "Built on Radix Slider. Uses role=slider with aria-valuenow, aria-valuemin, aria-valuemax, aria-orientation. Keyboard: Arrow keys adjust value by step, Page Up/Down by 10x step, Home/End for min/max. Supports multiple thumbs for range selection. Provide aria-label to describe the slider purpose.",
+      "page_sections": ["settings-form", "pricing", "content-body"]
+    },
+    {
+      "name": "Sonner",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/sonner",
+      "props": ["position", "expand", "duration", "closeButton", "richColors", "theme", "className", "toastOptions"],
+      "variants": ["default", "success", "error", "warning", "info"],
+      "design_tokens": {
+        "colors": ["background", "foreground", "border", "destructive", "muted-foreground"],
+        "spacing": ["p-4", "gap-1.5"],
+        "typography": ["text-sm", "font-semibold"]
+      },
+      "when_to_use": "Success/error feedback after form submissions, notification of background process completion, copy-to-clipboard confirmation, brief non-blocking status messages",
+      "when_not_to_use": "Persistent status that requires user attention (use Alert), confirmations before actions (use AlertDialog), inline form validation messages (use Form error messages), critical errors requiring acknowledgment (use Dialog)",
+      "related_components": ["Alert"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/sonner",
+      "accessibility_notes": "Built on sonner library. Uses role=status with aria-live=polite for non-urgent toasts and aria-live=assertive for error toasts. Auto-dismisses after duration. Close button is keyboard accessible. Multiple toasts stack visually. Screen readers announce toast content when it appears. Position prop controls screen region.",
+      "page_sections": ["auth-form", "settings-form", "dashboard-kpis", "content-body"]
+    },
+    {
+      "name": "Switch",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/switch",
+      "props": ["checked", "defaultChecked", "onCheckedChange", "disabled", "required", "name", "value", "className", "asChild"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["primary", "input", "background"],
+        "spacing": ["h-6", "w-11"],
+        "typography": []
+      },
+      "when_to_use": "Boolean settings with immediate effect (dark mode, notifications), feature flags, preference toggles, any on/off state that applies immediately",
+      "when_not_to_use": "Form submission required before applying change (use Checkbox), multiple related options (use Checkbox group), three or more states (use RadioGroup or Select)",
+      "related_components": ["Checkbox", "Form", "Label"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/switch",
+      "accessibility_notes": "Built on Radix Switch. Uses role=switch with aria-checked (true/false). Toggled with Space key. Must have associated Label via htmlFor or aria-label. Focus ring visible on keyboard navigation. Visually distinguishable on/off states for color-blind users via position indicator.",
+      "page_sections": ["settings-form", "content-body"]
+    },
+    {
+      "name": "Table",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/table",
+      "props": ["className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["border", "muted", "foreground", "muted-foreground"],
+        "spacing": ["p-4", "h-12"],
+        "typography": ["text-sm", "font-medium"]
+      },
+      "when_to_use": "Static or simple tabular data display, comparison tables in pricing, specification tables, small data sets under 10 rows without sorting/filtering needs",
+      "when_not_to_use": "Large datasets requiring sorting/filtering/pagination (use DataTable), responsive card-like layouts on mobile (use Card grid), key-value pairs (use description list), non-tabular data forced into grid (use CSS Grid)",
+      "related_components": ["DataTable", "Card"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/table",
+      "accessibility_notes": "Uses native HTML table elements (table, thead, tbody, tr, th, td) for inherent accessibility. Column headers use th with implicit scope=col. Add caption element for table description. Use aria-sort on sortable column headers. Ensure sufficient color contrast for borders and text.",
+      "page_sections": ["pricing", "dashboard-tables", "content-body", "features"]
+    },
+    {
+      "name": "Tabs",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/tabs",
+      "props": ["value", "defaultValue", "onValueChange", "orientation", "activationMode", "className"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["muted", "muted-foreground", "background", "foreground", "border"],
+        "spacing": ["p-1", "px-3", "py-1.5"],
+        "typography": ["text-sm", "font-medium"]
+      },
+      "when_to_use": "Organizing related content into switchable panels, settings sections, dashboard view modes, product detail sections (description/reviews/specs), form sections",
+      "when_not_to_use": "Navigation between different pages (use NavigationMenu or router), progressive content that builds on previous (use stepper/wizard), single panel that collapses (use Accordion or Collapsible), content that should all be visible simultaneously",
+      "related_components": ["Accordion", "NavigationMenu"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/tabs",
+      "accessibility_notes": "Built on Radix Tabs. TabsList uses role=tablist. TabsTrigger uses role=tab with aria-selected and aria-controls. TabsContent uses role=tabpanel with aria-labelledby. Keyboard: Arrow keys switch tabs (auto or manual activation via activationMode), Tab moves into panel content. Focus management follows WAI-ARIA Tabs pattern.",
+      "page_sections": ["settings-nav", "dashboard-kpis", "content-body", "features", "demo"]
+    },
+    {
+      "name": "Textarea",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/textarea",
+      "props": ["placeholder", "disabled", "value", "onChange", "name", "id", "required", "rows", "className", "readOnly", "maxLength"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["border", "input", "ring", "foreground", "muted-foreground"],
+        "spacing": ["px-3", "py-2", "min-h-20"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Multi-line text entry, comments and feedback forms, description fields, message composition, bio/about fields in profiles",
+      "when_not_to_use": "Single-line input like names or emails (use Input), rich text with formatting (use rich text editor), code input with syntax highlighting (use code editor component)",
+      "related_components": ["Input", "Label", "Form"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/textarea",
+      "accessibility_notes": "Standard HTML textarea element. Must be associated with Label via htmlFor/id. Placeholder is not a substitute for label. Uses focus-visible ring. Resizable by default (can be overridden with CSS resize property). Use aria-describedby for character count or helper text. maxLength provides built-in validation.",
+      "page_sections": ["settings-form", "auth-form", "content-body"]
+    },
+    {
+      "name": "Toggle",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/toggle",
+      "props": ["variant", "size", "pressed", "defaultPressed", "onPressedChange", "disabled", "className", "asChild"],
+      "variants": ["default", "outline"],
+      "design_tokens": {
+        "colors": ["transparent", "accent", "accent-foreground", "muted", "muted-foreground", "border"],
+        "spacing": ["h-10", "px-3"],
+        "typography": ["text-sm", "font-medium"]
+      },
+      "when_to_use": "Toolbar formatting buttons (bold, italic), view mode toggles (list/grid), single on/off option with button appearance, filter toggles",
+      "when_not_to_use": "Form boolean fields (use Checkbox or Switch), navigation (use Button or NavigationMenu), mutually exclusive group selection (use ToggleGroup), action buttons without toggle state (use Button)",
+      "related_components": ["ToggleGroup", "Button", "Switch"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/toggle",
+      "accessibility_notes": "Built on Radix Toggle. Uses aria-pressed to communicate toggle state. Activated with Enter/Space. Visual distinction between pressed and unpressed states. Provide aria-label when using icon-only toggle. Focus ring visible on keyboard navigation.",
+      "page_sections": ["content-header", "dashboard-kpis", "content-body"]
+    },
+    {
+      "name": "ToggleGroup",
+      "atomic_category": "molecule",
+      "import_path": "@/components/ui/toggle-group",
+      "props": ["type", "value", "defaultValue", "onValueChange", "variant", "size", "disabled", "className"],
+      "variants": ["default", "outline"],
+      "design_tokens": {
+        "colors": ["transparent", "accent", "accent-foreground", "muted", "border"],
+        "spacing": ["gap-1"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "View mode switcher (grid/list/table), text alignment options, toolbar formatting groups, segmented controls for filtering, chart type selection",
+      "when_not_to_use": "Form fields requiring validation (use RadioGroup with Form), navigation between pages (use Tabs or NavigationMenu), actions that do not represent state (use Button group), more than 5 options (use Select or RadioGroup)",
+      "related_components": ["Toggle", "RadioGroup", "Tabs"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/toggle-group",
+      "accessibility_notes": "Built on Radix ToggleGroup. type=single uses role=radiogroup semantics with arrow key navigation. type=multiple allows independent toggles. Each item uses aria-pressed. Provide group-level aria-label. Focus moves between items with Arrow keys in single mode.",
+      "page_sections": ["dashboard-kpis", "content-header", "settings-form", "content-body"]
+    },
+    {
+      "name": "Tooltip",
+      "atomic_category": "atom",
+      "import_path": "@/components/ui/tooltip",
+      "props": ["open", "defaultOpen", "onOpenChange", "delayDuration", "skipDelayDuration", "disableHoverableContent"],
+      "variants": [],
+      "design_tokens": {
+        "colors": ["popover", "popover-foreground"],
+        "spacing": ["px-3", "py-1.5"],
+        "typography": ["text-sm"]
+      },
+      "when_to_use": "Labeling icon-only buttons, showing full text for truncated content, providing keyboard shortcut hints, brief explanatory text on hover/focus",
+      "when_not_to_use": "Rich content with links or images (use HoverCard or Popover), interactive content like forms (use Popover), essential information users must see (use inline text), mobile-primary interfaces (tooltips rely on hover)",
+      "related_components": ["HoverCard", "Popover"],
+      "shadcn_doc_url": "https://ui.shadcn.com/docs/components/tooltip",
+      "accessibility_notes": "Built on Radix Tooltip. Shows on hover and focus for keyboard accessibility. Content is linked via aria-describedby to the trigger. Delay prevents accidental activation. Not a substitute for aria-label on interactive elements. Skip delay allows quick browsing between tooltips. Escape dismisses tooltip.",
+      "page_sections": ["navigation", "topbar", "dashboard-kpis", "content-header", "sidebar"]
+    }
+  ]
+}

@@ -1,0 +1,316 @@
+# Plataformas de Afiliados — Mercado Global
+# Atualizado: 2026-02 | Fonte: pesquisa de mercado + dados públicos
+# Uso: referência para agentes affiliate-strategist e niche-ops
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  currency: USD
+  notes: "Comissões e políticas mudam frequentemente. Verifique os termos oficiais."
+
+programs:
+
+  amazon_associates:
+    name: Amazon Associates
+    url: https://affiliate-program.amazon.com
+    network_type: first_party
+    global_reach: true
+    commission_range:
+      min_pct: 1
+      max_pct: 10
+      typical_pct: 3
+      notes: "Varia muito por categoria. Eletrônicos 1-3%, moda 4-10%, beleza 3%."
+    commission_by_category:
+      fashion: 10
+      beauty: 3
+      health: 4.5
+      electronics: 3
+      books: 4.5
+      home_garden: 3
+      sports: 3
+      toys: 3
+      video_games: 1
+      computers: 2.5
+    cookie_duration_days: 1
+    cookie_notes: "24h após clique. 90 dias se adicionar ao carrinho sem comprar."
+    payment_methods:
+      - direct_deposit
+      - amazon_gift_card
+      - check
+    min_payout_usd: 10
+    payment_frequency: monthly
+    categories_strong:
+      - products (qualquer categoria física)
+      - books
+      - electronics
+      - household
+    strengths:
+      - confiança extrema do consumidor (alta conversão)
+      - catálogo de 350M+ produtos
+      - cookie de carrinho de 90 dias
+      - disponível em 20+ países com programas locais
+    weaknesses:
+      - comissões muito baixas (1-10%)
+      - cookie de 24h para compra direta
+      - programa pode ser encerrado/alterado unilateralmente
+      - proibido em alguns estados dos EUA (nexus tax)
+    best_for:
+      - review sites de produtos físicos
+      - comparison sites
+      - gift guides
+
+  clickbank:
+    name: ClickBank
+    url: https://www.clickbank.com
+    network_type: marketplace
+    global_reach: true
+    commission_range:
+      min_pct: 25
+      max_pct: 90
+      typical_pct: 55
+      notes: "Comissões altíssimas em infoprodutos. Muitos produtos de qualidade baixa."
+    cookie_duration_days: 60
+    payment_methods:
+      - check
+      - direct_deposit
+      - wire_transfer
+      - payoneer
+    min_payout_usd: 10
+    payment_frequency: biweekly
+    categories_strong:
+      - health_fitness
+      - weight_loss
+      - relationships
+      - make_money_online
+      - spirituality
+      - supplements
+    strengths:
+      - comissões extremamente altas
+      - cookie longo (60 dias)
+      - processamento global
+      - recorrência em muitos produtos
+    weaknesses:
+      - muitos produtos de qualidade baixa / scam
+      - reputação mista no mercado
+      - chargebacks frequentes em alguns nichos
+      - FTC compliance pode ser problemático
+    best_for:
+      - marketers experientes que sabem selecionar produtos
+      - nichos de saúde, finanças, relacionamento
+
+  shareasale:
+    name: ShareASale (Awin Company)
+    url: https://www.shareasale.com
+    network_type: network
+    global_reach: true
+    commission_range:
+      min_pct: 2
+      max_pct: 50
+      typical_pct: 8
+      notes: "Varia muito por merchant. Média de 8% para produtos físicos, até 50% para digitais."
+    cookie_duration_days: 30
+    cookie_notes: "Varia por merchant (30-120 dias típico)."
+    payment_methods:
+      - check
+      - direct_deposit
+      - payoneer
+      - wire_transfer
+    min_payout_usd: 50
+    payment_frequency: monthly
+    categories_strong:
+      - fashion
+      - home_decor
+      - software_saas
+      - health_beauty
+      - financial_services
+    strengths:
+      - 4.500+ merchants
+      - interface transparente com métricas por merchant
+      - boa variedade de nichos
+      - programa de bônus de desempenho
+    weaknesses:
+      - pagamento mínimo mais alto ($50)
+      - interface desatualizada
+      - aprovação individual por merchant
+    best_for:
+      - sites de moda, decoração, software B2B
+
+  cj_affiliate:
+    name: CJ Affiliate (Commission Junction)
+    url: https://www.cj.com
+    network_type: network
+    global_reach: true
+    commission_range:
+      min_pct: 1
+      max_pct: 30
+      typical_pct: 5
+      notes: "Brands premium com comissões menores mas conversão alta."
+    cookie_duration_days: 30
+    cookie_notes: "Varia por merchant. Geralmente 30-90 dias."
+    payment_methods:
+      - direct_deposit
+      - check
+      - payoneer
+    min_payout_usd: 50
+    payment_frequency: monthly
+    categories_strong:
+      - travel
+      - finance
+      - retail
+      - technology
+      - home_services
+    strengths:
+      - brands premium (Barnes & Noble, Office Depot, Lowe's, etc.)
+      - relatórios avançados
+      - ferramenta de deep linking excelente
+      - suporte dedicado para publishers grandes
+    weaknesses:
+      - aprovação rigorosa (exige tráfego mínimo)
+      - pagamento mínimo $50
+      - alguns merchants têm requisitos rígidos
+    best_for:
+      - publishers estabelecidos com tráfego consistente
+      - nichos de viagem, finanças, varejo
+
+  impact:
+    name: Impact (Impact.com)
+    url: https://impact.com
+    network_type: network
+    global_reach: true
+    commission_range:
+      min_pct: 2
+      max_pct: 50
+      typical_pct: 10
+      notes: "Plataforma moderna com muitas marcas de tecnologia e SaaS."
+    cookie_duration_days: 30
+    cookie_notes: "Varia por merchant. Muitos SaaS têm 60-90 dias."
+    payment_methods:
+      - paypal
+      - direct_deposit
+      - wire_transfer
+    min_payout_usd: 10
+    payment_frequency: monthly
+    categories_strong:
+      - saas
+      - fintech
+      - travel
+      - retail
+      - apps
+    strengths:
+      - plataforma tecnicamente superior (tracking robusto)
+      - marcas de SaaS (Shopify, Semrush, Canva, etc.)
+      - pagamentos flexíveis (CPA, CPL, revenue share)
+      - automação de relatórios avançada
+    weaknesses:
+      - curva de aprendizado íngreme
+      - nem todos merchants aceitam afiliados novos
+    best_for:
+      - afiliados de tecnologia e SaaS
+      - publishers com audiência B2B
+
+  awin:
+    name: Awin
+    url: https://www.awin.com
+    network_type: network
+    global_reach: true
+    commission_range:
+      min_pct: 1
+      max_pct: 25
+      typical_pct: 6
+      notes: "Forte na Europa. 25.000+ anunciantes globais."
+    cookie_duration_days: 30
+    cookie_notes: "Geralmente 30 dias. Varia por merchant."
+    payment_methods:
+      - bank_transfer
+      - paypal
+    min_payout_usd: 20
+    payment_frequency: biweekly
+    categories_strong:
+      - retail
+      - travel
+      - finance
+      - telecoms
+      - fashion
+    strengths:
+      - líder europeu (UK, DE, FR, ES)
+      - 25.000+ anunciantes
+      - ferramentas de deep linking e creative
+      - pagamento quinzenal
+    weaknesses:
+      - taxa de depósito inicial $5 (reembolsada)
+      - mais forte na Europa que nas Américas
+    best_for:
+      - publishers com audiência europeia
+      - nichos de varejo e viagem
+
+  rakuten:
+    name: Rakuten Advertising
+    url: https://rakutenadvertising.com
+    network_type: network
+    global_reach: true
+    commission_range:
+      min_pct: 1
+      max_pct: 20
+      typical_pct: 5
+      notes: "Premium brands. Walmart, Best Buy, Macy's, etc."
+    cookie_duration_days: 30
+    cookie_notes: "Varia por merchant."
+    payment_methods:
+      - check
+      - direct_deposit
+      - paypal
+    min_payout_usd: 50
+    payment_frequency: monthly
+    categories_strong:
+      - retail
+      - travel
+      - finance
+      - fashion
+    strengths:
+      - marcas premium e reconhecidas
+      - boa taxa de conversão por confiança da marca
+      - interface limpa e relatórios claros
+    weaknesses:
+      - catálogo menor de merchants
+      - aprovação pode ser lenta
+      - pagamento mínimo $50
+    best_for:
+      - publishers estabelecidos
+      - nichos de varejo premium
+
+  partnerstack:
+    name: PartnerStack
+    url: https://www.partnerstack.com
+    network_type: marketplace
+    global_reach: true
+    commission_range:
+      min_pct: 5
+      max_pct: 50
+      typical_pct: 20
+      notes: "Foco em SaaS B2B. Comissões recorrentes mensais comuns."
+    cookie_duration_days: 90
+    cookie_notes: "Geralmente 90 dias. Muitos programas oferecem lifetime cookie."
+    payment_methods:
+      - paypal
+      - stripe
+      - bank_transfer
+    min_payout_usd: 5
+    payment_frequency: monthly
+    categories_strong:
+      - saas_b2b
+      - software
+      - marketing_tools
+      - developer_tools
+      - hr_tools
+    strengths:
+      - especializado em SaaS B2B (Notion, Monday.com, etc.)
+      - comissões recorrentes (revenue share mensal)
+      - cookie longo (90+ dias)
+      - mínimo de saque baixo ($5)
+      - painel robusto
+    weaknesses:
+      - foco exclusivo em SaaS (sem produtos físicos)
+      - audiência B2B necessária
+    best_for:
+      - afiliados de tecnologia e ferramentas B2B
+      - publishers com audiência de profissionais e empresas

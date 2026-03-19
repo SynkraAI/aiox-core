@@ -1,0 +1,1007 @@
+# Subscription Model Squad Blueprint
+# Pattern: HO-SB-003 (Hormozi Squad Blueprint Standard)
+# Source: $100M Money Models - Secao 5: Ofertas de Continuidade
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: subscription-model
+  purpose: "Maximize recurring revenue through strategically structured continuity offers that make customers start AND keep paying"
+  domain: monetization
+  source_playbooks:
+    - "$100M Money Models - Section 5: Continuity Offers"
+
+  core_equation: |
+    ONE-TIME: $1,000 x 10% conversion = $10,000 (10 customers)
+    CONTINUITY: $50/mo x 40% conversion x 20 months = $40,000 (40 customers)
+    BONUS: 4x more customers for upsell
+
+  golden_rules:
+    - "You can shear a sheep its whole life, but you can only skin it once"
+    - "Continuity offers are amazing because you sell once but get paid repeatedly"
+    - "By doing continuity offers last, we get the best of all worlds"
+    - "No successful continuity business I've seen has a standalone membership offer"
+    - "The bonus itself should have more value than the first continuity payment"
+
+  relationship_to_retention_sop: |
+    This SOP COMPLEMENTS retention-sop.md:
+    - Subscription Model SOP: How to make customers START continuity
+    - Retention SOP: How to make customers STAY in continuity
+    Cross-reference for complete customer lifecycle coverage.
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: continuity-coordinator
+      role: "Orchestrate subscription model design and optimization"
+      decisions:
+        - "Choose offer type (Bonus, Discount, Waived Fee)"
+        - "Set pricing mix (standalone vs continuity ratio)"
+        - "Design prepayment upsells"
+        - "Balance upfront cash vs recurring revenue"
+      kpis:
+        - "Continuity signup rate"
+        - "Standalone vs continuity mix"
+        - "30-day profit from continuity"
+        - "Prepayment uptake rate"
+
+  tier_0_diagnosis:
+    - agent: asset-inventory-specialist
+      role: "Inventory existing assets for bonus creation"
+      inputs:
+        - "Existing courses, templates, tools"
+        - "Historical pricing data"
+        - "Onboarding processes"
+        - "Content archives"
+      outputs:
+        - "Asset inventory with real prices"
+        - "Total bonus value calculation"
+        - "Bonus package recommendations"
+        - "Cost-to-deliver analysis"
+
+    - agent: pricing-analyst
+      role: "Analyze and optimize pricing structure"
+      inputs:
+        - "Current pricing"
+        - "Conversion data"
+        - "Target continuity percentage"
+        - "Competitor pricing"
+      outputs:
+        - "Standalone multiplier recommendation"
+        - "Continuity pricing recommendation"
+        - "Expected conversion split"
+        - "Prepayment discount structure"
+
+    - agent: offer-type-selector
+      role: "Recommend optimal offer type for business context"
+      inputs:
+        - "Business type (product, service, digital)"
+        - "Existing assets"
+        - "Cash flow needs"
+        - "Service delivery timeline"
+      outputs:
+        - "Primary offer type recommendation"
+        - "Secondary offer type (if applicable)"
+        - "Implementation priority"
+        - "Expected outcomes"
+
+  tier_1_execution:
+    - agent: bonus-architect
+      role: "Design and structure bonus continuity offers"
+      specialization: "Continuity Bonus Offers"
+      capabilities:
+        - "Bonus value calculation"
+        - "Bonus-to-membership anchoring"
+        - "Script creation for bonus presentation"
+        - "Cross-bonus strategy (physical + digital)"
+      rules:
+        bonus_value: "Bonus perceived value > first continuity payment"
+        bonus_relevance: "Bonus must be related to main offer"
+        bonus_source: "Prefer existing assets (zero marginal cost)"
+        anchoring: "Use real prices, never invented values"
+
+    - agent: waived-fee-architect
+      role: "Design and structure waived fee offers"
+      specialization: "Waived Fee Offers"
+      capabilities:
+        - "Fee calculation (3-5x monthly)"
+        - "Commitment period design"
+        - "Documentation creation"
+        - "Cancellation fee process"
+      rules:
+        fee_range: "3-5x monthly rate"
+        minimum_commitment: "12+ months"
+        documentation: "Customer must initial understanding"
+        post_commitment: "Fee disappears after completing commitment"
+
+    - agent: prepayment-designer
+      role: "Create prepayment discount structures"
+      specialization: "Bulk Prepayment Upsells"
+      capabilities:
+        - "Prepayment offer creation"
+        - "Discount calculation"
+        - "Impact projection"
+        - "Upsell timing optimization"
+      formulas:
+        impact: "1/8 accept 'buy 5 get 1' = 50% more 30-day profits"
+
+    - agent: script-writer
+      role: "Create sales scripts for continuity offers"
+      specialization: "Continuity Offer Presentation"
+      scripts:
+        - "Bonus presentation (bonus first, membership second)"
+        - "'Want to know how to get it free?' transition"
+        - "Bonus stacking"
+        - "Standalone vs continuity options"
+        - "Waived fee presentation"
+        - "Prepayment upsell"
+
+  tier_2_judgment:
+    - agent: conversion-optimizer
+      role: "Optimize conversion between standalone and continuity"
+      specialization: "Pricing Psychology"
+      pricing_table:
+        target_50_percent: "Standalone = 1.33x monthly"
+        target_60_percent: "Standalone = 1.66x monthly"
+        target_70_percent: "Standalone = 2.00x monthly"
+        target_80_percent: "Standalone = 2.33x monthly"
+        target_90_percent: "Standalone = 2.66x monthly"
+      principle: |
+        Higher standalone price relative to continuity = more choose continuity
+        Lower standalone price relative to continuity = more choose standalone
+
+    - agent: commitment-designer
+      role: "Design commitment structures for maximum retention"
+      specialization: "Commitment + Bonus Combinations"
+      options:
+        - type: "Bonus only"
+          description: "Customer gets bonus just for joining"
+          result: "Maximum signups, less commitment"
+        - type: "Bonus + Commitment"
+          description: "Customer gets bonus only if committing to 3/6/12 months"
+          result: "Fewer signups, stronger commitment"
+        - type: "Waived Fee"
+          description: "Fee waived with commitment, owed if leave early"
+          result: "Strong commitment, clear exit cost"
+
+    - agent: funnel-position-strategist
+      role: "Position continuity offers correctly in the funnel"
+      specialization: "Offer Sequencing"
+      positioning:
+        never: "Continuity as sole lead offer"
+        always: "Trial/challenge/lead magnet BEFORE continuity"
+        sequence:
+          1: "Lead magnet / Attraction offer -> Upfront cash"
+          2: "Upsell offers -> More upfront cash"
+          3: "Downsell offers -> Recover lost sales"
+          4: "CONTINUITY OFFERS -> Cash today + cash tomorrow"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  continuity-coordinator:
+    id: continuity-coordinator
+    title: "Subscription Model Orchestrator"
+    tier: orchestrator
+    icon: "subscription"
+
+    purpose: |
+      Coordinate all subscription model and continuity offer initiatives.
+      Balance upfront cash needs with recurring revenue building.
+      Ensure continuity offers are positioned correctly in the funnel.
+
+    core_frameworks:
+      - name: "Three Continuity Offers"
+        components: ["Bonus Offers", "Discount Offers", "Waived Fee Offers"]
+      - name: "Pricing Mix Optimization"
+        components: ["Standalone pricing", "Continuity pricing", "Multiplier strategy"]
+      - name: "Prepayment Structure"
+        components: ["Bulk discounts", "Commitment bonuses", "30-day profit optimization"]
+
+    decision_authority:
+      - "Select primary offer type"
+      - "Set pricing multipliers"
+      - "Approve bonus packages"
+      - "Design prepayment structures"
+
+    inputs:
+      - "Business type and assets"
+      - "Cash flow requirements"
+      - "Current conversion data"
+      - "Competitor analysis"
+
+    outputs:
+      - "Continuity offer design"
+      - "Pricing structure"
+      - "Script templates"
+      - "Expected outcomes"
+
+    success_metrics:
+      primary:
+        - name: "Continuity Signup Rate"
+          target: "Match target % (50-90% based on strategy)"
+        - name: "30-Day Profit"
+          target: "Meet or exceed projections"
+      secondary:
+        - "Prepayment uptake >12%"
+        - "Early cancellation <5%"
+        - "Bonus perceived value > 2x first payment"
+
+  bonus-architect:
+    id: bonus-architect
+    title: "Continuity Bonus Designer"
+    tier: tier_1
+    icon: "gift"
+
+    purpose: |
+      Design bonus continuity offers that make the membership irresistible.
+      Ensure bonus value exceeds first payment and is related to main offer.
+      Create scripts that sell the bonus, not the membership.
+
+    bonus_types:
+      one_time:
+        description: "Something amazing given once at signup"
+        examples:
+          - "$800 in dog toys free with $59/mo food subscription"
+          - "$1,000 accelerator free when joining $100/mo membership"
+          - "All 40 past newsletters ($15,880) free with $399/mo subscription"
+
+      recurring:
+        description: "Something given every month"
+        examples:
+          - "New dog toy every month as a member"
+          - "Physical copy of newsletter mailed monthly"
+
+      progression:
+        description: "Titles and status as bonus"
+        examples:
+          - "Silver, Gold, Diamond, Double Diamond at 3/6/12 months"
+
+    bonus_framework:
+      more_of_same:
+        description: "Extension of what they already buy"
+        example: "2 years of past newsletters free when becoming member"
+
+      complementary:
+        description: "Something that adds to main product"
+        example: "Nutrition services free when joining fitness membership"
+
+      upgrade:
+        description: "Higher tier as bonus"
+        example: "Gold membership when buying bronze. Limited availability."
+
+    rules:
+      - rule: "Bonus value > first payment"
+        source: "Line 57"
+        quote: "Typically, the bonus itself has more value than the first continuity payment"
+
+      - rule: "Bonus related to main offer"
+        source: "Lines 95-96"
+        quote: "If the bonus is too different, you'll attract the wrong customers"
+
+      - rule: "Use existing assets"
+        source: "Lines 97-98"
+        quote: "Make bonuses from things you already have and do"
+
+      - rule: "Realistic prices"
+        source: "Lines 101-102"
+        quote: "Use realistic bonus prices... won't anchor the customer and you'll lose trust"
+
+    presentation_flow:
+      step_1: "Sell the BONUS benefits (not the membership)"
+      step_2: "Shock them with the value"
+      step_3: "Ask: 'Want to know how to get it free?'"
+      step_4: "Reveal: Become member to get bonus free"
+      step_5: "Stack additional bonuses with dollar values"
+      step_6: "Offer standalone option at higher price"
+
+  waived-fee-architect:
+    id: waived-fee-architect
+    title: "Waived Fee Offer Designer"
+    tier: tier_1
+    icon: "shield"
+
+    purpose: |
+      Design waived fee offers that create strong commitment through
+      the psychology of avoiding a fee. Ideal for services with
+      long-term results (SEO, investing, weight loss).
+
+    structure:
+      option_a:
+        name: "Month-to-Month with Fee"
+        components:
+          - "Setup fee (3-5x monthly)"
+          - "Monthly rate"
+          - "Cancel anytime"
+
+      option_b:
+        name: "Commitment with Waived Fee"
+        components:
+          - "No setup fee"
+          - "Commitment period (12+ months)"
+          - "Monthly rate"
+          - "Pay fee if break commitment early"
+          - "Fee disappears after completing commitment"
+
+    psychology:
+      entry: "People sign up to AVOID the fee"
+      during: "Fee motivates staying"
+      retention: "Cost to leave (fee) > cost to stay (monthly)"
+
+    fee_calculation:
+      minimum: "1.5x monthly (more upfront cash, less commitment)"
+      standard: "3-5x monthly (balanced)"
+      maximum: "5x monthly (maximum commitment)"
+
+    example:
+      commitment_duration: "12 months"
+      monthly_rate: "$1,000"
+      setup_fee: "$5,000"
+
+      option_a_presentation: |
+        "Pay $5,000 setup fee + $1,000 first month = $6,000 today
+        Then $1,000/month
+        Cancel whenever you want"
+
+      option_b_presentation: |
+        "Waive the $5,000 fee
+        Commit to 12 months
+        Pay $1,000/month
+        If you leave early, pay the $5,000 you would have paid anyway"
+
+    rules:
+      - rule: "Minimum 12 month commitment"
+        source: "Line 190"
+        quote: "I prefer this offer for commitments of a year and longer"
+
+      - rule: "Fee 3-5x monthly"
+        source: "Line 165"
+        quote: "Typically, I make the fee three to five times my monthly rate"
+
+      - rule: "Customer must initial"
+        source: "Line 155"
+        quote: "I also have them initial that they understand they can leave early if they pay the fee"
+
+      - rule: "Investigate if >5% cancel early"
+        source: "Line 184"
+        quote: "If more than 5% of people want to cancel early, investigate"
+
+      - rule: "Fee disappears after commitment"
+        source: "Line 188"
+        quote: "If someone stays the entirety of the commitment, then wants to cancel, they earned their free cancellation"
+
+    ideal_for:
+      - "SEO services (results take time)"
+      - "Investment services (compounding takes time)"
+      - "Weight loss programs (transformation is gradual)"
+      - "Consulting and transformation programs"
+      - "Any service where clients 'get emotional' and might quit before seeing results"
+
+    advanced_tactic:
+      name: "Fee for Hated Cause"
+      description: "Donate fee to cause customer hates if they cancel early"
+      script: |
+        "What cause do you absolutely hate?"
+        [Customer answers]
+        "Great. If you cancel early, I'll be donating your setup fee to them."
+      psychology:
+        - "Don't want to lose the money"
+        - "Don't want it to go to hated cause"
+
+  pricing-analyst:
+    id: pricing-analyst
+    title: "Continuity Pricing Strategist"
+    tier: tier_0
+    icon: "calculator"
+
+    purpose: |
+      Analyze and optimize pricing structure for continuity offers.
+      Set standalone vs continuity multipliers based on business goals.
+      Project expected conversion splits.
+
+    multiplier_table:
+      source: "Line 113 - tested across thousands of gyms"
+      data:
+        - target_continuity: "50%"
+          standalone_multiplier: "1.33x"
+          example: "$266 standalone vs $199/mo membership"
+
+        - target_continuity: "60%"
+          standalone_multiplier: "1.66x"
+          example: "$333 standalone vs $199/mo membership"
+
+        - target_continuity: "70%"
+          standalone_multiplier: "2.00x"
+          example: "$399 standalone vs $199/mo membership"
+
+        - target_continuity: "80%"
+          standalone_multiplier: "2.33x"
+          example: "$466 standalone vs $199/mo membership"
+
+        - target_continuity: "90%"
+          standalone_multiplier: "2.66x"
+          example: "$532 standalone vs $199/mo membership"
+
+    principle: |
+      "The smaller the standalone price compared to continuity, more people buy standalone.
+      The bigger the standalone price compared to continuity, more people choose continuity."
+
+    prepayment_impact:
+      offer: "Buy 5 months, get 1 free"
+      uptake_needed: "1 in 8 (12.5%)"
+      impact: "50% more 30-day profits"
+      calculation: |
+        Normal: 8 customers x 1 month = 8 months revenue
+        With upsell: 7 customers x 1 month + 1 customer x 5 months = 12 months revenue
+        Difference: 12/8 = 1.5 = 50% increase
+
+    decision_rules:
+      - "Want maximum upfront cash -> Lower standalone multiplier (1.33x)"
+      - "Want maximum recurring -> Higher standalone multiplier (2.66x)"
+      - "Want balanced -> Middle multiplier (1.66x - 2x)"
+      - "Need more cash -> Add prepayment upsells"
+
+  script-writer:
+    id: script-writer
+    title: "Continuity Sales Script Creator"
+    tier: tier_1
+    icon: "document"
+
+    purpose: |
+      Create sales scripts for all continuity offer types.
+      Ensure scripts follow Hormozi's methodology of selling the bonus first.
+
+    script_templates:
+      bonus_presentation:
+        name: "Bonus Continuity Script"
+        steps:
+          - step: 1
+            name: "Sell the Bonus"
+            script: |
+              "Let me show you something incredible that we have.
+              [DESCRIBE BONUS WITH ENTHUSIASM]
+              This normally costs [HIGH VALUE]. People pay [VALUE] for this because
+              [BENEFITS]."
+
+          - step: 2
+            name: "Pause for Reaction"
+            note: "Let the value anchor sink in"
+
+          - step: 3
+            name: "The Free Question"
+            script: |
+              "Do you want to know how you can get this for free?"
+              [Wait for YES]
+
+          - step: 4
+            name: "Reveal Membership"
+            script: |
+              "Become a VIP member today and you'll get all of this as a free gift
+              for joining. Or you can just buy it for [HIGH VALUE].
+              Which do you prefer?"
+
+          - step: 5
+            name: "Stack Bonuses"
+            script: |
+              "Great! And on top of that, when you become a member, you also get:
+              - [BONUS 2] - value of [X]
+              - [BONUS 3] - value of [Y]
+              - [BONUS 4] - value of [Z]
+
+              All of this for just [MONTHLY PRICE] per month."
+
+      waived_fee_presentation:
+        name: "Waived Fee Script"
+        script: |
+          "You have two options to get started.
+
+          Option A: You can go month-to-month. This comes with a setup fee of
+          [FEE] because it costs us money to get you started. But you can cancel
+          whenever you want.
+
+          Option B: If you commit to [12 MONTHS], I waive the fee completely.
+          You just pay [MONTHLY] per month. If for some reason you need to leave
+          early, you'd pay the fee you would have paid anyway.
+
+          Which makes more sense for you?"
+
+      hated_cause_script:
+        name: "Fee for Hated Cause Script"
+        script: |
+          "What's a cause or organization that you absolutely hate?
+          Something that makes you boil with anger?"
+
+          [CUSTOMER RESPONDS]
+
+          "Great. Here's what we'll do. If you commit to [12 MONTHS] and I waive
+          your [FEE] fee, and you decide to cancel early, I'm going to donate
+          that entire fee to [CAUSE].
+
+          This gives you two reasons to stay: you don't lose the money, and it
+          doesn't go to something you hate. Does that work for you?"
+
+      prepayment_upsell:
+        name: "Prepayment Upsell Script"
+        script: |
+          "Want to save even more money?"
+
+          [CUSTOMER LEANS IN]
+
+          "If you prepay for 5 months today, I'll give you the 6th month free.
+          That's basically [X%] off.
+
+          And as an extra bonus for committing, you also get [ADDITIONAL BONUS].
+
+          Do you want to do that?"
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Diagnosis
+  - task: "Inventory existing assets for bonuses"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Human validates pricing accuracy"
+
+  - task: "Calculate total bonus value"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Use real historical prices only"
+
+  - task: "Determine optimal offer type"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Human validates business context"
+
+  - task: "Set standalone/continuity multiplier"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Follow multiplier table"
+
+  # Design
+  - task: "Design bonus package"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Bonus value > first payment, related to main offer"
+
+  - task: "Structure waived fee offer"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Fee 3-5x monthly, 12+ month commitment"
+
+  - task: "Create prepayment discount structure"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Project impact using formulas"
+
+  - task: "Generate sales scripts"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Follow template structure"
+
+  # Execution
+  - task: "Present bonus continuity offer"
+    executor: Human
+    automation: LOW
+    guardrails: "Follow script, sell bonus first"
+
+  - task: "Present waived fee offer"
+    executor: Human
+    automation: LOW
+    guardrails: "Follow script, customer initials"
+
+  - task: "Present prepayment upsell"
+    executor: Human
+    automation: LOW
+    guardrails: "Offer after main continuity accepted"
+
+  # Monitoring
+  - task: "Track standalone vs continuity conversion"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Alert if off target by >10%"
+
+  - task: "Monitor early cancellation rate"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Alert if >5%"
+
+  - task: "Calculate 30-day profit impact"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Include prepayment in calculation"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Bonus Value Gate"
+    transition: "Offer Design -> Ready"
+    condition: "bonus_perceived_value > first_payment"
+    type: blocking
+    failure_action: "Increase bonus value or reduce first payment"
+
+  QG-002:
+    name: "Bonus Relevance Gate"
+    transition: "Offer Design -> Ready"
+    condition: "bonus_related_to_main_offer == true"
+    type: blocking
+    failure_action: "Replace bonus with relevant alternative"
+
+  QG-003:
+    name: "Fee Range Gate"
+    transition: "Waived Fee Design -> Ready"
+    condition: "fee >= monthly * 3 AND fee <= monthly * 5"
+    type: warning
+    failure_action: "Adjust fee to standard range unless justified"
+
+  QG-004:
+    name: "Commitment Duration Gate"
+    transition: "Waived Fee Design -> Ready"
+    condition: "commitment_months >= 12"
+    type: blocking
+    failure_action: "Extend commitment to minimum 12 months"
+
+  QG-005:
+    name: "Early Cancellation Gate"
+    transition: "Live -> Optimization"
+    condition: "early_cancellation_rate < 5%"
+    type: warning
+    failure_action: "Investigate product, not increase fee"
+
+  QG-006:
+    name: "Funnel Position Gate"
+    transition: "Design -> Launch"
+    condition: "lead_offer_exists == true"
+    type: blocking
+    failure_action: "Create trial/challenge/lead magnet before continuity"
+
+  QG-007:
+    name: "Pricing Documentation Gate"
+    transition: "Waived Fee Launch -> Active"
+    condition: "customer_initialed == true"
+    type: blocking
+    failure_action: "Have customer initial understanding before proceeding"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  offer_design_workflow:
+    trigger: "New continuity offer needed"
+    steps:
+      - step: 1
+        agent: asset-inventory-specialist
+        action: "Inventory all existing assets"
+        output: "Asset list with real prices"
+
+      - step: 2
+        agent: offer-type-selector
+        action: "Recommend offer type based on business context"
+        output: "Primary and secondary offer type"
+
+      - step: 3
+        agent: pricing-analyst
+        action: "Calculate pricing structure"
+        output: "Multiplier and expected conversion"
+
+      - step: 4
+        agent: bonus-architect
+        action: "Design bonus package"
+        condition: "If bonus offer selected"
+
+      - step: 5
+        agent: waived-fee-architect
+        action: "Design waived fee structure"
+        condition: "If waived fee selected"
+
+      - step: 6
+        agent: prepayment-designer
+        action: "Create prepayment upsells"
+        output: "Prepayment offer structure"
+
+      - step: 7
+        agent: script-writer
+        action: "Generate all scripts"
+        output: "Complete script package"
+
+      - step: 8
+        agent: continuity-coordinator
+        action: "Final review and approval"
+        gate: "All quality gates pass"
+
+  bonus_offer_workflow:
+    trigger: "Presenting bonus continuity offer"
+    steps:
+      - step: 1
+        action: "Present bonus benefits (NOT membership)"
+        script: "bonus_presentation step 1"
+
+      - step: 2
+        action: "Anchor the value"
+        note: "Let price sink in"
+
+      - step: 3
+        action: "Ask 'Want to know how to get it free?'"
+        script: "bonus_presentation step 3"
+
+      - step: 4
+        action: "Reveal membership gets bonus free"
+        script: "bonus_presentation step 4"
+
+      - step: 5
+        action: "Stack additional bonuses"
+        script: "bonus_presentation step 5"
+
+      - step: 6
+        action: "Offer standalone option"
+        note: "At higher multiplier price"
+
+      - step: 7
+        action: "If accepted, offer prepayment upsell"
+        script: "prepayment_upsell"
+
+  waived_fee_workflow:
+    trigger: "Presenting waived fee offer"
+    steps:
+      - step: 1
+        action: "Present two options clearly"
+        script: "waived_fee_presentation"
+
+      - step: 2
+        action: "If commitment chosen, have customer initial"
+        document: "Fee waiver agreement"
+
+      - step: 3
+        action: "Optional: Add hated cause motivation"
+        script: "hated_cause_script"
+        condition: "If want extra commitment"
+
+      - step: 4
+        action: "Process signup"
+        tracking: "Log commitment terms"
+
+  optimization_workflow:
+    trigger: "Monthly review OR metrics off target"
+    steps:
+      - step: 1
+        agent: pricing-analyst
+        action: "Review conversion split"
+        check: "Is actual matching target?"
+
+      - step: 2
+        agent: pricing-analyst
+        action: "Adjust multiplier if needed"
+        rule: "Follow multiplier table"
+
+      - step: 3
+        agent: waived-fee-architect
+        action: "Review early cancellation rate"
+        alert: "If >5%, investigate product"
+
+      - step: 4
+        agent: prepayment-designer
+        action: "Review prepayment uptake"
+        target: ">12.5% (1 in 8)"
+
+      - step: 5
+        agent: continuity-coordinator
+        action: "Update projections"
+        output: "Next month targets"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    continuity_signup_rate:
+      formula: "Continuity signups / Total offer presentations"
+      target: "Match target % from multiplier table"
+      measurement: "Per presentation basis"
+
+    standalone_vs_continuity_mix:
+      formula: "Continuity signups / (Continuity + Standalone signups)"
+      target: "50-90% depending on strategy"
+      lever: "Adjust multiplier to change"
+
+    thirty_day_profit:
+      formula: "(First payments) + (Prepayments) + (Standalone sales)"
+      target: "Meet or exceed projections"
+      optimization: "Add prepayment upsells"
+
+  secondary:
+    prepayment_uptake:
+      formula: "Prepayment accepts / Continuity signups"
+      target: ">12.5% (1 in 8)"
+      impact: "50% more 30-day profit"
+
+    early_cancellation_rate:
+      formula: "Cancelled before commitment / Total committed"
+      target: "<5%"
+      alert: ">5% = investigate product"
+
+    bonus_perceived_value_ratio:
+      formula: "Bonus total value / First payment"
+      target: ">1.0x minimum, >2.0x ideal"
+      rule: "Must always exceed 1.0x"
+
+  by_offer_type:
+    bonus_offers:
+      - "Bonus acceptance rate"
+      - "Bonus-only vs continuity split"
+      - "Average bonus value anchored"
+
+    waived_fee_offers:
+      - "Commitment vs month-to-month split"
+      - "Early cancellation rate"
+      - "Fee collection rate (on cancellations)"
+
+    prepayment:
+      - "Uptake rate"
+      - "Average prepayment months"
+      - "30-day profit contribution"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Too many choosing standalone"
+    possible_causes:
+      - "Standalone multiplier too low"
+      - "Bonus value not compelling"
+      - "Continuity not presented well"
+    diagnosis:
+      - "Check multiplier against target table"
+      - "Review bonus perceived value"
+      - "Audit script delivery"
+    solutions:
+      - "Increase standalone multiplier"
+      - "Add more bonuses"
+      - "Retrain on script"
+
+  - symptom: "Too many choosing month-to-month (waived fee)"
+    possible_causes:
+      - "Fee too low"
+      - "Commitment period too long"
+      - "Trust not established"
+    diagnosis:
+      - "Check fee is 3-5x monthly"
+      - "Review commitment duration"
+      - "Assess sales rapport"
+    solutions:
+      - "Increase fee"
+      - "Reduce commitment (but minimum 12 months)"
+      - "Build more trust before offer"
+
+  - symptom: ">5% cancelling before commitment end"
+    possible_causes:
+      - "Product not delivering value"
+      - "Wrong customers being sold"
+      - "External circumstances"
+    diagnosis:
+      - "Review product delivery"
+      - "Analyze customer profile"
+      - "Conduct exit interviews"
+    solutions:
+      - "Improve product (NOT increase fee)"
+      - "Refine customer qualification"
+      - "Reference retention-sop.md"
+
+  - symptom: "Low prepayment uptake"
+    possible_causes:
+      - "Not offering"
+      - "Discount not compelling"
+      - "Wrong timing"
+    diagnosis:
+      - "Confirm offer is being made"
+      - "Review discount structure"
+      - "Check timing in flow"
+    solutions:
+      - "Always offer after continuity acceptance"
+      - "Increase discount or add bonus"
+      - "Present immediately after yes"
+
+  - symptom: "Bonus not resonating"
+    possible_causes:
+      - "Bonus not related to main offer"
+      - "Value not credible"
+      - "Presentation not focused on bonus"
+    diagnosis:
+      - "Check bonus relevance"
+      - "Verify prices are real"
+      - "Audit script delivery"
+    solutions:
+      - "Replace with related bonus"
+      - "Use only real historical prices"
+      - "Sell bonus BEFORE revealing membership"
+
+# ===============================================================================
+# INTEGRATION WITH RETENTION SOP
+# ===============================================================================
+
+retention_integration:
+  relationship: "Complementary SOPs"
+
+  this_sop_covers:
+    - "How to make customers START continuity"
+    - "Bonus, Discount, Waived Fee offer structures"
+    - "Pricing for maximum signups"
+    - "Scripts for conversion"
+
+  retention_sop_covers:
+    - "How to make customers STAY"
+    - "5 Horsemen of Retention"
+    - "9-Step Churn Checklist"
+    - "Exit interviews and win-back"
+
+  handoff_points:
+    - trigger: "Customer signs up for continuity"
+      action: "Begin retention-sop onboarding workflow"
+
+    - trigger: "Customer completes waived fee commitment"
+      action: "Offer annual pricing from retention-sop"
+
+    - trigger: "Customer wants to cancel"
+      action: "Use retention-sop exit interview protocol"
+
+  cross_references:
+    - "Annual Pricing Options -> retention-sop Step 6"
+    - "Exit Interviews -> retention-sop Horseman 5"
+    - "Churn Reduction -> retention-sop complete"
+    - "LTV Calculation -> retention-sop Crazy 8"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Discount offer details (mentioned but video reference)"
+    severity: Medium
+    source: "Line 137 - training video referenced"
+    resolution: "Extract from video if available"
+
+  - id: GAP-002
+    description: "Specific commitment periods besides 12 months"
+    severity: Low
+    clarification_needed: "When to use 6 months vs 12 months vs 24 months"
+
+  - id: GAP-003
+    description: "Industry-specific bonus examples"
+    severity: Medium
+    clarification_needed: "More examples beyond gym, pet food, digital"
+
+  - id: GAP-004
+    description: "Fee collection process when customer cancels early"
+    severity: Medium
+    clarification_needed: "Legal/operational process for collecting waived fee"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 17/17
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 14
+  executor_matrix_complete: true
+  quality_gates_defined: 7
+  workflows_documented: 4
+  source_references: 105
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

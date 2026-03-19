@@ -1,0 +1,10 @@
+packet_id,item_id,test_group,prompt_id,response_source,response_label
+P1,1,domain,1,clone,R3
+P1,2,decision,3,clone,R7
+P1,3,objection,2,clone,R2
+P1,4,domain,2,clone,R9
+P1,5,decision,1,clone,R1
+P1,6,objection,1,clone,R6
+P1,7,domain,3,clone,R4
+P1,8,decision,2,clone,R8
+P1,9,objection,3,clone,R5

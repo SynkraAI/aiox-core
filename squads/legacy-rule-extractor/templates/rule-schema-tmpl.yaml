@@ -1,0 +1,170 @@
+# Rule Schema Template
+# Standard YAML frontmatter for all extracted business rules
+#
+# Usage: Each rule in a rules-{filename}.md file follows this schema
+
+# ===============================================================
+# FILE HEADER (one per extraction file)
+# ===============================================================
+
+file_header:
+  source_file: "{{SOURCE_FILE}}"
+  source_language: "{{LANGUAGE}}"
+  source_lines_total: "{{TOTAL_LINES}}"
+  extracted_at: "{{DATE}}"
+  extracted_by: "decoder"
+  analysis_depth: "{{DEPTH}}"
+  total_rules: "{{RULE_COUNT}}"
+  confidence_distribution:
+    alta: "{{ALTA_COUNT}}"
+    media: "{{MEDIA_COUNT}}"
+    baixa: "{{BAIXA_COUNT}}"
+  rule_types:
+    calculation: "{{CALC_COUNT}}"
+    validation: "{{VALID_COUNT}}"
+    decision: "{{DECISION_COUNT}}"
+    state_transition: "{{STATE_COUNT}}"
+    implicit: "{{IMPLICIT_COUNT}}"
+
+# ===============================================================
+# RULE SCHEMA (one per extracted rule)
+# ===============================================================
+
+rule:
+  # Required fields
+  rule_id: "{{DOMAIN}}-{{MODULE}}-{{SEQ}}"
+  title: "{{TITLE}}"
+  domain: "{{DOMAIN_NAME}}"
+  module: "{{MODULE_NAME}}"
+  severity: "{{critica|importante|informativa}}"
+  confidence: "{{alta|media|baixa}}"
+  type: "{{calculation|validation|decision|state_transition|implicit}}"
+
+  source:
+    file: "{{SOURCE_FILE}}"
+    lines: "{{START_LINE}}-{{END_LINE}}"
+    language: "{{LANGUAGE}}"
+
+  # Description fields
+  description: "{{BUSINESS_DESCRIPTION}}"
+  logic: "{{CODE_LOGIC_OR_PSEUDOCODE}}"
+
+  conditions:
+    - "{{PRECONDITION_1}}"
+    - "{{PRECONDITION_2}}"
+
+  exceptions:
+    - "{{EXCEPTION_1}}"
+
+  # Optional fields
+  dependencies:
+    - "{{RELATED_RULE_ID}}"
+
+  tags:
+    - "{{TAG_1}}"
+    - "{{TAG_2}}"
+
+  extracted_at: "{{ISO_DATE}}"
+
+# ===============================================================
+# EXAMPLE: COBOL calculation rule
+# ===============================================================
+
+example_cobol_calculation: |
+  ---
+  rule_id: "FIN-CALC-001"
+  title: "Calculo de ICMS sobre mercadorias importadas"
+  domain: financeiro
+  module: calculo-impostos
+  severity: critica
+  confidence: alta
+  type: calculation
+
+  source:
+    file: "CALCICMS.CBL"
+    lines: "142-178"
+    language: cobol
+
+  description: >
+    Aplica aliquota de ICMS diferenciada para mercadorias importadas,
+    com base na UF de destino e na classificacao NCM do produto.
+
+  logic: |
+    IF WS-TIPO-MERC = 'IMP'
+      EVALUATE WS-UF-DEST
+        WHEN 'SP' WHEN 'RJ' WHEN 'MG'
+          MOVE 18 TO WS-ALIQ-ICMS
+        WHEN OTHER
+          MOVE 12 TO WS-ALIQ-ICMS
+      END-EVALUATE
+      IF WS-NCM(1:2) = '84' OR '85'
+        SUBTRACT 2 FROM WS-ALIQ-ICMS
+      END-IF
+      COMPUTE WS-VL-ICMS ROUNDED =
+        WS-VL-MERC * WS-ALIQ-ICMS / 100
+    END-IF
+
+  conditions:
+    - "Mercadoria deve ser do tipo IMPORTADA (WS-TIPO-MERC = 'IMP')"
+    - "UF de destino determina faixa de aliquota base"
+    - "NCM iniciando com 84 ou 85 recebe reducao de 2 pontos"
+
+  exceptions:
+    - "Zona Franca de Manaus: isencao total (ver FIN-CALC-007)"
+    - "Produtos com suspensao tributaria: ver TRB-SUSP-001"
+
+  dependencies:
+    - "FIN-CALC-007"
+    - "TRB-SUSP-001"
+    - "CAD-PROD-012"
+
+  tags: [icms, importacao, ncm, tributario, aliquota]
+  extracted_at: "2026-03-09"
+  ---
+
+# ===============================================================
+# EXAMPLE: PL/SQL validation rule
+# ===============================================================
+
+example_plsql_validation: |
+  ---
+  rule_id: "CAD-CLI-003"
+  title: "Validacao de CPF/CNPJ obrigatorio para clientes ativos"
+  domain: cadastro
+  module: cliente
+  severity: critica
+  confidence: alta
+  type: validation
+
+  source:
+    file: "PKG_CLIENTE.pks"
+    lines: "89-102"
+    language: plsql
+
+  description: >
+    Todo cliente com status ATIVO deve ter CPF (pessoa fisica) ou
+    CNPJ (pessoa juridica) preenchido e valido. Rejeita ativacao
+    sem documento.
+
+  logic: |
+    IF p_status = 'A' THEN
+      IF p_tipo_pessoa = 'F' AND (p_cpf IS NULL OR LENGTH(p_cpf) != 11) THEN
+        RAISE_APPLICATION_ERROR(-20001, 'CPF obrigatorio para PF ativa');
+      ELSIF p_tipo_pessoa = 'J' AND (p_cnpj IS NULL OR LENGTH(p_cnpj) != 14) THEN
+        RAISE_APPLICATION_ERROR(-20002, 'CNPJ obrigatorio para PJ ativa');
+      END IF;
+    END IF;
+
+  conditions:
+    - "Status do cliente deve ser ATIVO (p_status = 'A')"
+    - "Tipo pessoa F exige CPF com 11 digitos"
+    - "Tipo pessoa J exige CNPJ com 14 digitos"
+
+  exceptions:
+    - "Clientes com status diferente de ATIVO nao sao validados"
+
+  dependencies: []
+
+  tags: [cpf, cnpj, validacao, cadastro, cliente]
+  extracted_at: "2026-03-09"
+  ---

@@ -1,0 +1,517 @@
+# Squad Blueprint: Pricing Framework Executor
+# Extracted from: Hormozi Pricing SOP
+# Version: 1.0
+# Date: 2026-02-10
+
+squad:
+  name: hormozi-pricing
+  purpose: "Execute the Hormozi Premium Pricing Framework to maximize revenue while maintaining customer value perception"
+  extracted_from: "pricing-framework-sop.md"
+
+  # Based on Hormozi's own team structure for pricing decisions
+  philosophy: |
+    "The fastest way to make more money is to charge more money for the same thing."
+    - Price is the only decision Warren Buffet personally controlled at See's Candies
+    - Testing on new customers first, then rolling out to existing base
+    - Annual price review is non-negotiable
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIER STRUCTURE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+tier_structure:
+  orchestrator:
+    - pricing-strategist
+    # Main coordinator for pricing decisions
+    # Routes to appropriate specialists based on phase
+
+  tier_0_diagnosis:
+    - market-validator
+    - value-equation-analyst
+    # Initial analysis before any pricing decision
+
+  tier_1_execution:
+    - niche-specialist
+    - price-tester
+    - breakeven-calculator
+    # Core execution of pricing framework
+
+  tier_2_communication:
+    - raise-letter-writer
+    - objection-handler
+    # Customer-facing communications
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENT DEFINITIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents:
+  pricing-strategist:
+    role: "Orchestrator"
+    description: "Coordinates the entire pricing framework execution"
+    cognitive_type: "Judgment + Synthesis"
+    executor_type: "Hybrid"
+
+    responsibilities:
+      - "Route requests to appropriate tier agents"
+      - "Make final pricing decisions based on data"
+      - "Approve rollout to existing customers"
+      - "Monitor overall process health"
+
+    decision_rules:
+      - "DR-006: ROI Cliente > 300%"
+      - "DR-007: Preço < Valor Percebido SEMPRE"
+      - "DR-008: 2x preço + -20% conversão = FAZER"
+
+    handoffs:
+      - to: market-validator
+        when: "New pricing initiative starts"
+      - to: raise-letter-writer
+        when: "Price validated, ready for communication"
+      - to: objection-handler
+        when: "Customer complaints received"
+
+  market-validator:
+    role: "Tier 0 - Diagnosis"
+    description: "Validates market against 4 Hormozi indicators"
+    cognitive_type: "Analysis"
+    executor_type: "Agent"
+
+    inputs:
+      - "Target market description"
+      - "Competitor pricing data"
+      - "Customer demographics"
+
+    outputs:
+      - "Market validation score (0-12)"
+      - "4 indicator breakdown"
+      - "Go/No-Go recommendation"
+
+    decision_rules:
+      - "DR-001: Dor Massiva scoring"
+      - "DR-002: Poder de Compra verification"
+      - "DR-003: Fácil de Atingir assessment"
+      - "DR-004: Crescendo evaluation"
+
+    threshold: "Score >= 8/12 to proceed"
+
+    tools:
+      - "WebSearch (market research)"
+      - "Data analysis"
+      - "Competitor benchmarking"
+
+  value-equation-analyst:
+    role: "Tier 0 - Diagnosis"
+    description: "Calculates and optimizes the Value Equation"
+    cognitive_type: "Analysis + Synthesis"
+    executor_type: "Agent"
+
+    inputs:
+      - "Product/service description"
+      - "Customer testimonials"
+      - "Delivery timeline"
+      - "Required customer effort"
+
+    outputs:
+      - "Value Equation score"
+      - "Optimization recommendations"
+      - "Quick wins identification"
+
+    formula: |
+      VALOR = (Resultado dos Sonhos × Probabilidade Percebida)
+              ÷ (Atraso Temporal × Esforço/Sacrifício)
+
+    focus_areas:
+      numerator:
+        - "Dream Outcome clarity"
+        - "Proof stack strength"
+        - "Guarantee power"
+      denominator:
+        - "Time to first win"
+        - "Effort reduction opportunities"
+        - "Done-for-you vs DIY ratio"
+
+  niche-specialist:
+    role: "Tier 1 - Execution"
+    description: "Defines and validates niche specificity for price multiplication"
+    cognitive_type: "Judgment + Creativity"
+    executor_type: "Human"
+
+    inputs:
+      - "Current positioning"
+      - "Target audience data"
+      - "Competitor landscape"
+
+    outputs:
+      - "Niche definition (Level 0-3)"
+      - "Price multiplier recommendation"
+      - "Messaging adjustments"
+
+    framework:
+      level_0: "Generic (1x multiplier)"
+      level_1: "By profession (2-5x)"
+      level_2: "By sub-niche (5-10x)"
+      level_3: "Ultra-specific (10-100x)"
+
+    commitment_rule: "Minimum 6 months before pivoting"
+
+  price-tester:
+    role: "Tier 1 - Execution"
+    description: "Executes price tests on new customers"
+    cognitive_type: "Analysis"
+    executor_type: "Worker"
+
+    inputs:
+      - "Proposed new price"
+      - "Current baseline metrics"
+      - "Test duration"
+
+    outputs:
+      - "Conversion rate delta"
+      - "Churn rate projection"
+      - "LTV calculation"
+      - "Total Return comparison"
+
+    test_protocol:
+      phase_1:
+        action: "Test on NEW customers only"
+        duration: "2-4 weeks"
+        metric: "Conversion rate change"
+      phase_2:
+        action: "Calculate projected LTV"
+        duration: "1 week"
+        metric: "Total Return comparison"
+      phase_3:
+        action: "Go/No-Go decision"
+        condition: "New Total Revenue > Old Total Revenue"
+
+  breakeven-calculator:
+    role: "Tier 1 - Execution"
+    description: "Calculates breakeven point and validates price increase math"
+    cognitive_type: "Calculation"
+    executor_type: "Worker"
+
+    inputs:
+      - "Current price and metrics"
+      - "Proposed price"
+      - "Expected conversion change"
+      - "Expected churn change"
+
+    outputs:
+      - "Breakeven analysis"
+      - "Revenue projection"
+      - "Risk assessment"
+
+    formula: |
+      Breakeven = (Old Revenue) / (New Price × (1 - Expected Churn Increase))
+
+      Example validation:
+      - Price $10 → 5% conv → $500/100 clicks
+      - Price $20 → 4% conv → $800/100 clicks (+60%)
+      - Rule: If 2x price + -20% conversion = +60% revenue → APPROVE
+
+  raise-letter-writer:
+    role: "Tier 2 - Communication"
+    description: "Creates price increase communications using RAISE framework"
+    cognitive_type: "Synthesis + Creativity"
+    executor_type: "Agent"
+
+    inputs:
+      - "Customer data (tenure, value received)"
+      - "New price and effective date"
+      - "Planned improvements"
+      - "Loyalty discount terms"
+
+    outputs:
+      - "Personalized RAISE letter"
+      - "Video script (optional)"
+      - "FAQ document"
+
+    framework:
+      R: "Remind them of value provided"
+      A: "Address price change directly"
+      I: "Invest in their future (planned improvements)"
+      S: "Soften with loyalty discount (3-6 months)"
+      E: "Explain away concerns (PS statement)"
+
+    rules:
+      - "Personalize to greatest degree possible"
+      - "Include specific value metrics"
+      - "Frame improvements as investments"
+      - "Always include PS statement"
+
+  objection-handler:
+    role: "Tier 2 - Communication"
+    description: "Handles customer objections to price increases"
+    cognitive_type: "Judgment + Empathy"
+    executor_type: "Hybrid"
+
+    inputs:
+      - "Customer objection"
+      - "Customer history"
+      - "Customer tier/value"
+
+    outputs:
+      - "Classified response type"
+      - "Recommended action"
+      - "Response template"
+
+    response_taxonomy:
+      type_1:
+        description: "Value seers - complain but comply"
+        action: "None needed"
+
+      type_2:
+        description: "Actually affected"
+        action: "Extend discount 3-6 months"
+        template: |
+          "Don't worry, we got you. Why don't we extend your
+          discount another 6 months, then reach out then. Is that fair?"
+
+      type_3:
+        description: "Was going to cancel anyway"
+        action: "Accept as pulled-forward churn"
+        insight: "Month 1 high, Month 2 low, Month 3 baseline"
+
+    escalation:
+      - condition: "High-value customer threatens to leave"
+        action: "Stair-step discount implementation"
+      - condition: ">50% price increase"
+        action: "Individual meetings required"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXECUTOR MATRIX
+# ═══════════════════════════════════════════════════════════════════════════════
+
+executor_matrix:
+  - task: "Market Validation"
+    executor: "Agent"
+    guardrails: "Must cite data sources"
+    automation: "HIGH"
+
+  - task: "Value Equation Analysis"
+    executor: "Agent"
+    guardrails: "Human validates assumptions"
+    automation: "HIGH"
+
+  - task: "Niche Selection"
+    executor: "Human"
+    guardrails: "6-month commitment minimum"
+    automation: "LOW"
+
+  - task: "Price Testing"
+    executor: "Worker"
+    guardrails: "New customers only first"
+    automation: "HIGH"
+
+  - task: "Breakeven Calculation"
+    executor: "Worker"
+    guardrails: "Auto-validation formulas"
+    automation: "HIGH"
+
+  - task: "RAISE Letter Creation"
+    executor: "Agent"
+    guardrails: "Human approval before send"
+    automation: "MEDIUM"
+
+  - task: "Objection Handling"
+    executor: "Hybrid"
+    guardrails: "Type 2 requires human approval"
+    automation: "MEDIUM"
+
+  - task: "Final Pricing Decision"
+    executor: "Human"
+    guardrails: "Mirror test required"
+    automation: "NONE"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  QG-001:
+    name: "Market Validation Gate"
+    transition: "Start → Tier 0 Analysis"
+    condition: "Market score >= 8/12"
+    type: "blocking"
+
+  QG-002:
+    name: "Value Equation Gate"
+    transition: "Tier 0 → Tier 1 Execution"
+    condition: "Value Equation optimized (numerator up, denominator down)"
+    type: "blocking"
+
+  QG-003:
+    name: "Price Test Gate"
+    transition: "Test → Rollout"
+    condition: "New Total Revenue > Old Total Revenue"
+    type: "blocking"
+
+  QG-004:
+    name: "Conviction Gate"
+    transition: "Before Rollout"
+    condition: "Human passes mirror test"
+    type: "blocking"
+    executor: "Human ONLY"
+
+  QG-005:
+    name: "Communication Gate"
+    transition: "Before Customer Contact"
+    condition: "RAISE letter approved, PS statement included"
+    type: "blocking"
+
+  QG-006:
+    name: "Churn Monitoring Gate"
+    transition: "Post-Rollout (90 days)"
+    condition: "Churn pattern matches expected (high→low→baseline)"
+    type: "warning"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  new_pricing_initiative:
+    trigger: "Annual review OR new launch OR value increase"
+    steps:
+      - agent: "market-validator"
+        action: "Validate market (4 indicators)"
+        gate: "QG-001"
+
+      - agent: "value-equation-analyst"
+        action: "Calculate and optimize Value Equation"
+        gate: "QG-002"
+
+      - agent: "niche-specialist"
+        action: "Define/refine niche specificity"
+
+      - agent: "pricing-strategist"
+        action: "Propose new price based on analysis"
+
+      - agent: "price-tester"
+        action: "Test on new customers"
+        duration: "2-4 weeks"
+
+      - agent: "breakeven-calculator"
+        action: "Validate math"
+        gate: "QG-003"
+
+      - agent: "pricing-strategist"
+        action: "Mirror test (conviction check)"
+        gate: "QG-004"
+
+      - agent: "raise-letter-writer"
+        action: "Create RAISE communication"
+        gate: "QG-005"
+
+      - agent: "pricing-strategist"
+        action: "Approve and execute rollout"
+
+      - agent: "objection-handler"
+        action: "Handle responses"
+        duration: "90 days"
+        gate: "QG-006"
+
+  price_objection_workflow:
+    trigger: "Customer complaint received"
+    steps:
+      - agent: "objection-handler"
+        action: "Classify response type (1, 2, or 3)"
+
+      - agent: "objection-handler"
+        action: "Apply appropriate response"
+        conditions:
+          type_1: "No action"
+          type_2: "Extend discount, human approval"
+          type_3: "Accept churn"
+
+      - agent: "pricing-strategist"
+        action: "Monitor aggregate response"
+        condition: "If >20% Type 2, consider stair-step"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIMING & CADENCE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+timing:
+  annual_review:
+    frequency: "Minimum once per year"
+    reference: "Warren Buffet/See's Candies: 50+ years, 10% avg"
+
+  launch_pairing:
+    window: "Within 90 days of new product/feature launch"
+    framing: "Early adopter pricing"
+
+  test_duration:
+    new_customers: "2-4 weeks"
+    rollout_monitoring: "90 days"
+
+  discount_terms:
+    loyalty_discount: "3-6 months"
+    stair_step_intervals: "3-6 month increments"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METRICS & KPIs
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metrics:
+  primary:
+    - name: "Total Revenue per 100 Clicks"
+      formula: "Clicks × Conv Rate × LTV"
+      target: "Increase with each price change"
+
+    - name: "Customer ROI"
+      formula: "(Result - Price) / Price × 100%"
+      threshold: "> 300%"
+
+  secondary:
+    - name: "Conversion Rate Delta"
+      acceptable_loss: "-30% max"
+
+    - name: "Churn Rate Pattern"
+      expected: "Month 1 high, Month 2 low, Month 3 baseline"
+
+    - name: "Price Multiplier Achievement"
+      target: "10-100x for ultra-specific niches"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DEPENDENCIES & INTEGRATIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+dependencies:
+  sops:
+    - "pricing-framework-sop.md"
+
+  data_sources:
+    - "Customer database (tenure, value received)"
+    - "Sales metrics (conversion, churn, LTV)"
+    - "Market research tools"
+
+  templates:
+    - "RAISE letter template"
+    - "Objection response templates"
+    - "Breakeven calculator"
+
+integrations:
+  crm: "Customer segmentation for personalized letters"
+  billing: "Discount implementation and tracking"
+  analytics: "Churn monitoring dashboard"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GAPS & FUTURE IMPROVEMENTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+gaps_resolved:
+  - "ROI threshold defined (>300%)"
+  - "Testing protocol documented"
+  - "Timing rules established"
+  - "Exception handling with taxonomy"
+
+future_improvements:
+  - "A/B testing automation for price points"
+  - "Predictive churn modeling integration"
+  - "Dynamic pricing based on value equation scores"
+  - "Automated RAISE letter personalization"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

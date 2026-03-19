@@ -1,0 +1,366 @@
+workflow:
+  id: wf-sop-extraction-pipeline
+  name: "SOP Extraction Pipeline"
+  version: "1.0.0"
+  orchestrator: sop-chief
+  mode: interactive
+
+  description: |
+    Extracts structured SOP content from unstructured or semi-structured sources.
+    Sources can include: meeting transcripts, video transcripts, chat logs, legacy
+    documents, tribal knowledge interviews, existing but poorly formatted procedures,
+    code repositories, runbooks, and wiki pages.
+
+    The pipeline applies progressive refinement: raw capture -> decomposition ->
+    role mapping -> structuring -> confidence scoring -> gap analysis -> validation.
+
+    Every extracted step receives a confidence score (0.0-1.0) indicating how
+    certain the extraction is. Steps below 0.7 confidence are flagged for
+    mandatory human review. A teach-back validation is recommended before
+    the SOP is considered production-ready.
+
+    Extraction philosophy: "Capture first, structure second, validate always."
+
+  phases:
+    phase_0:
+      name: "Source Analysis"
+      agent: sop-chief
+      steps:
+        - id: "0.1"
+          name: "Receive Source Material"
+          action: "Accept source document(s) or content from user"
+          elicit: true
+        - id: "0.2"
+          name: "Classify Source Type"
+          action: |
+            Determine source type and set extraction strategy:
+            - transcript (meeting/video): temporal extraction, speaker identification
+            - legacy_document: structural parsing, format conversion
+            - chat_log: threaded extraction, noise filtering
+            - interview: Q&A decomposition, expertise mapping
+            - codebase: logic extraction, comment mining, README parsing
+            - wiki: section extraction, link resolution
+            - runbook: step extraction, command capture
+            - mixed: multi-strategy, source-segment tagging
+        - id: "0.3"
+          name: "Assess Source Quality"
+          action: |
+            Rate source quality on 5-point scale:
+            - Excellent (5): Well-organized, complete, current
+            - Good (4): Mostly organized, minor gaps
+            - Fair (3): Partially organized, significant gaps
+            - Poor (2): Disorganized, major gaps, possibly outdated
+            - Minimal (1): Fragment, single perspective, unverified
+            Record quality score as baseline confidence modifier.
+        - id: "0.4"
+          name: "Identify Process Boundaries"
+          action: "Determine where the process starts and ends within the source material"
+          elicit: true
+        - id: "0.5"
+          name: "Set Extraction Parameters"
+          action: |
+            Configure extraction:
+            - Target format: human, ML, or dual
+            - Granularity: high (sub-steps), medium (steps), low (phases only)
+            - Compliance context: applicable standards (if any)
+            - Domain vocabulary: key terms to watch for
+          elicit: true
+
+    phase_1:
+      name: "Raw Capture"
+      agent: sop-creator
+      steps:
+        - id: "1.1"
+          name: "Full Content Extraction"
+          action: |
+            Extract ALL procedural content from source, preserving:
+            - Sequential actions (do this, then do that)
+            - Conditional logic (if X, then Y)
+            - Warnings and cautions
+            - Time references and durations
+            - Tool and material references
+            - Role/person references
+            - Success/failure indicators
+        - id: "1.2"
+          name: "Noise Filtering"
+          action: |
+            Remove non-procedural content:
+            - Small talk and filler (transcripts)
+            - Off-topic discussions
+            - Repeated information (keep most detailed version)
+            - Meta-commentary about the process vs the process itself
+        - id: "1.3"
+          name: "Chronological Ordering"
+          action: "Arrange extracted content in chronological/logical order"
+        - id: "1.4"
+          name: "Source Attribution"
+          action: "Tag each extracted element with source location (page, timestamp, line number)"
+
+    phase_2:
+      name: "Step Decomposition"
+      agent: sop-creator
+      steps:
+        - id: "2.1"
+          name: "Identify Atomic Steps"
+          action: |
+            Break content into atomic steps following these rules:
+            - One action per step
+            - Each step has a clear start and end
+            - Each step produces a verifiable result
+            - Steps are ordered by dependency, not just chronology
+        - id: "2.2"
+          name: "Identify Decision Points"
+          action: |
+            Map all branching logic:
+            - IF/THEN/ELSE conditions
+            - WHILE/UNTIL loops
+            - GO-TO/SKIP conditions
+            - Exception triggers
+            Document each decision point with condition, true-path, and false-path.
+        - id: "2.3"
+          name: "Identify Prerequisites"
+          action: |
+            Extract all prerequisites:
+            - Required tools and equipment
+            - Required access/permissions
+            - Required knowledge/training
+            - Required prior steps or states
+            - Environmental conditions
+        - id: "2.4"
+          name: "Identify Outputs"
+          action: |
+            For each step, identify:
+            - Expected output/result
+            - Success criteria (how to know it worked)
+            - Artifacts produced (files, records, products)
+        - id: "2.5"
+          name: "Build Step Dependency Graph"
+          action: |
+            Map dependencies between steps:
+            - Which steps must precede others?
+            - Which steps can run in parallel?
+            - Which steps are optional?
+            - Which steps have retry logic?
+
+    phase_3:
+      name: "Role Mapping"
+      agent: sop-creator
+      steps:
+        - id: "3.1"
+          name: "Extract Actors"
+          action: |
+            Identify all actors mentioned in source:
+            - Named individuals (map to roles, not names)
+            - Role references (operator, supervisor, admin)
+            - System actors (automated processes, scheduled jobs)
+            - External actors (vendors, customers, regulators)
+        - id: "3.2"
+          name: "Assign RACI Matrix"
+          action: |
+            For each major step, assign:
+            - Responsible: Who executes the step?
+            - Accountable: Who is ultimately answerable?
+            - Consulted: Who provides input before?
+            - Informed: Who is notified after?
+            Flag steps with no clear Responsible as gaps.
+        - id: "3.3"
+          name: "Map Handoff Points"
+          action: |
+            Identify where work transfers between roles:
+            - What triggers the handoff?
+            - What information is passed?
+            - What is the expected response time?
+            - What happens if the handoff fails?
+
+    phase_4:
+      name: "Structure Formation"
+      agent: sop-creator
+      steps:
+        - id: "4.1"
+          name: "Apply SOP Template"
+          action: |
+            Organize extracted content into standard SOP structure:
+            - Header (title, ID, version, date, owner)
+            - Purpose and Scope
+            - Definitions
+            - Roles and Responsibilities (RACI)
+            - Prerequisites
+            - Procedure (numbered steps with sub-steps)
+            - Quality Criteria
+            - Exception Handling
+            - References
+            - Revision History
+        - id: "4.2"
+          name: "Normalize Language"
+          action: |
+            Standardize extracted language:
+            - Convert passive voice to active
+            - Start each step with an action verb
+            - Replace vague terms with specific ones
+            - Standardize terminology (pick one term, use it consistently)
+            - Add quantitative criteria where source provides qualitative ones
+        - id: "4.3"
+          name: "Add Navigation Aids"
+          action: |
+            Enhance document usability:
+            - Add table of contents
+            - Add cross-references between related steps
+            - Add visual markers for warnings/cautions
+            - Add estimated time for each phase
+        - id: "4.4"
+          name: "Generate ML Format"
+          condition: "format in ['ml', 'dual']"
+          agent: sop-ml-architect
+          action: "Convert structured SOP to ML-readable YAML format per sop-ml-schema.yaml"
+
+    phase_5:
+      name: "Confidence Scoring"
+      agent: sop-analyst
+      steps:
+        - id: "5.1"
+          name: "Score Each Step"
+          action: |
+            Assign confidence score (0.0-1.0) to each extracted step:
+            - 0.9-1.0: Explicitly stated, unambiguous, corroborated
+            - 0.7-0.89: Clearly implied, single source, likely accurate
+            - 0.5-0.69: Inferred from context, needs verification
+            - 0.3-0.49: Partially extracted, significant assumptions made
+            - 0.0-0.29: Speculative, based on domain conventions not source
+        - id: "5.2"
+          name: "Score Justification"
+          action: |
+            For each step, document:
+            - Source reference (where in source material)
+            - Extraction method (explicit/implied/inferred/assumed)
+            - Corroboration (confirmed by multiple sources or single source)
+            - Uncertainty notes (what could be wrong)
+        - id: "5.3"
+          name: "Calculate Aggregate Confidence"
+          action: |
+            Compute overall SOP confidence:
+            - Average step confidence (weighted by step criticality)
+            - Minimum step confidence (weakest link)
+            - Percentage of steps above 0.7 threshold
+            - Overall extraction quality grade
+
+    phase_6:
+      name: "Gap Analysis"
+      agent: sop-analyst
+      steps:
+        - id: "6.1"
+          name: "Identify Missing Information"
+          action: |
+            Flag gaps in extracted SOP:
+            - Steps with confidence < 0.7 (needs human verification)
+            - Decision points with missing branches
+            - RACI cells that are empty
+            - Prerequisites that are assumed but not stated
+            - Success criteria that are vague or missing
+            - Exception handling not covered
+        - id: "6.2"
+          name: "Generate Interview Questions"
+          action: |
+            For each gap, generate specific questions:
+            - What exactly happens at step X?
+            - Who is responsible for Y?
+            - What happens if Z fails?
+            - How long does step W typically take?
+            - What tools are needed for step V?
+        - id: "6.3"
+          name: "Classify Gaps"
+          action: |
+            Categorize each gap:
+            - Critical: Process cannot be executed without this information
+            - Important: Process can be executed but with risk
+            - Minor: Process works, but documentation is incomplete
+            - Enhancement: Would improve but not required
+        - id: "6.4"
+          name: "Generate Gap Report"
+          action: "Compile all gaps into a structured report with questions and priority"
+
+    phase_7:
+      name: "Validation"
+      agent: sop-analyst
+      steps:
+        - id: "7.1"
+          name: "Run Quality Checklist"
+          action: "Execute sop-quality-checklist against extracted SOP draft"
+        - id: "7.2"
+          name: "Score Against Rubric"
+          action: "Run 10-dimension scoring from sop-scoring-rubric.yaml"
+        - id: "7.3"
+          name: "Verify Logical Flow"
+          action: |
+            Validate process logic:
+            - No circular dependencies
+            - All branches terminate
+            - No unreachable steps
+            - Start and end points are clear
+        - id: "7.4"
+          name: "Recommend Teach-Back"
+          action: |
+            Generate teach-back validation plan:
+            - Identify ideal teach-back participants (role, experience level)
+            - Create teach-back script (walk through SOP, note confusion points)
+            - Define success criteria for teach-back (completion without questions)
+            - Estimate teach-back duration
+
+    phase_8:
+      name: "Output & Handoff"
+      agent: sop-chief
+      steps:
+        - id: "8.1"
+          name: "Save Draft SOP"
+          action: "Save extracted SOP to outputs/sop-factory/extractions/"
+        - id: "8.2"
+          name: "Save Gap Report"
+          action: "Save gap analysis and interview questions"
+        - id: "8.3"
+          name: "Save Confidence Report"
+          action: "Save per-step confidence scores and justifications"
+        - id: "8.4"
+          name: "Highlight Review Items"
+          action: |
+            Generate a human-review summary:
+            - List all steps with confidence < 0.7
+            - List all critical gaps
+            - List all assumptions made during extraction
+            - Provide specific instructions for each review item
+        - id: "8.5"
+          name: "Recommend Next Steps"
+          action: |
+            Suggest follow-up actions:
+            - If confidence >= 0.8 average: proceed to wf-sop-audit-pipeline
+            - If confidence 0.6-0.79: conduct teach-back first, then re-extract
+            - If confidence < 0.6: gather additional source material, re-run extraction
+          elicit: true
+
+  quality_gate:
+    id: "QG-EXTRACT-001"
+    name: "Extraction Completeness Gate"
+    transition: "Extraction In Progress -> Extraction Complete"
+    type: blocking
+    criteria:
+      - "All steps have confidence scores assigned"
+      - "All gaps are flagged and classified"
+      - "Gap report includes interview questions for all critical gaps"
+      - "Teach-back plan is generated"
+      - "Source attribution exists for every extracted step"
+      - "RACI matrix is populated (gaps flagged, not left empty)"
+      - "Logical flow is validated (no circular deps, all branches terminate)"
+    veto_conditions:
+      - "Steps without confidence scores -> HALT, scoring incomplete"
+      - "Critical gaps without interview questions -> HALT, cannot hand off"
+      - "No source attribution -> HALT, extraction is unverifiable"
+      - "Average confidence < 0.3 -> HALT, source material insufficient"
+
+  output:
+    format: "Extraction Package"
+    location: "outputs/sop-factory/extractions/"
+    artifacts:
+      - draft_sop: "draft-{process-name}-sop-v0.1.md"
+      - draft_sop_ml: "draft-{process-name}-sop-v0.1.yaml"
+      - gap_report: "gaps-{process-name}-{date}.md"
+      - confidence_report: "confidence-{process-name}-{date}.md"
+      - review_summary: "review-items-{process-name}-{date}.md"
+      - teachback_plan: "teachback-{process-name}-{date}.md"

@@ -1,0 +1,88 @@
+# Technology Radar — Initial Baseline
+# Date: 2026-02-15
+# Source: Week 07 Kaizen Report
+# Purpose: Baseline for tracking technology adoption over time
+
+radar:
+  date: "2026-02-15"
+  version: "1.0.0"
+
+  quadrants:
+
+    apis:
+      adopt:
+        - name: "Gemini API"
+          usage: "Image generation (Nano Banana), embeddings"
+          squads: ["content-engine", "openclaw-mastery"]
+        - name: "OpenAI API"
+          usage: "Content generation, analysis"
+          squads: ["content-engine"]
+      trial:
+        - name: "Together.ai"
+          usage: "FLUX Schnell image generation"
+          squads: ["openclaw-mastery"]
+      assess: []
+      hold: []
+
+    mcps:
+      adopt:
+        - name: "Context7"
+          usage: "Library documentation lookup"
+          squads: ["all"]
+        - name: "Exa"
+          usage: "Advanced web search, company research"
+          squads: ["all"]
+      trial:
+        - name: "Browser (Puppeteer)"
+          usage: "Automação browser, thumbnails, renders"
+          squads: ["content-engine"]
+          movement: "Trial → Adopt (recomendado)"
+        - name: "Notion"
+          usage: "CRUD páginas e databases"
+          squads: ["all"]
+      assess:
+        - name: "Magic (21st.dev)"
+          usage: "Component builder, logo search"
+          squads: ["content-engine"]
+      hold: []
+
+    libraries:
+      adopt:
+        - name: "React + Vite"
+          usage: "Frontend build"
+          squads: ["content-engine"]
+        - name: "TypeScript"
+          usage: "Type safety"
+          squads: ["all"]
+      trial: []
+      assess: []
+      hold: []
+
+    ai_models:
+      adopt:
+        - name: "Claude Opus 4.6"
+          usage: "Primary AI model for all squads"
+          squads: ["all"]
+        - name: "Gemini Flash"
+          usage: "Image generation, fast inference"
+          squads: ["content-engine", "openclaw-mastery"]
+      trial:
+        - name: "Kimi K2.5"
+          usage: "OpenClaw bot model"
+          squads: ["openclaw-mastery"]
+      assess: []
+      hold: []
+
+  recommended_movements:
+    - tool: "Whisper API"
+      from: "NEW"
+      to: "Assess"
+      rationale: "Transcrição de áudio para YouTube scripts"
+    - tool: "YouTube Data API"
+      from: "NEW"
+      to: "Assess"
+      rationale: "Analytics de performance para youtube-outlier"
+    - tool: "Puppeteer MCP"
+      from: "Trial"
+      to: "Adopt"
+      rationale: "Uso consistente em content-engine para renders"

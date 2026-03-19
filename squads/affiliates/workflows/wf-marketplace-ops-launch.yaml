@@ -1,0 +1,375 @@
+# Marketplace Operations Launch Workflow
+# Pipeline para setup de afiliados em marketplaces BR
+# Source: @architect research — Amazon Associates + Shopee + Mercado Livre
+# Version: 1.0.0
+
+id: wf-marketplace-ops-launch
+name: "Marketplace Operations Launch"
+version: "1.0.0"
+duration: "1-2 weeks"
+description: |
+  Workflow para lançar operações de afiliados em marketplaces brasileiros.
+  Amazon BR + Shopee + Mercado Livre + sistema de seleção e broadcast.
+
+  FILOSOFIA: "Multi-marketplace = múltiplas fontes de receita. Nunca dependa de um só."
+
+  RESULTADO: 3 plataformas ativas com critérios de seleção e broadcast operacional.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Lançar operação de afiliados em marketplaces"
+  - "Diversificar de digital-only para produtos físicos"
+  - "Montar canal de ofertas (Telegram/WhatsApp) com marketplaces"
+
+decision_matrix_fit:
+  complexity: medium
+  agents_required: 3
+  estimated_duration: "1-2 weeks"
+  user_involvement: "low-medium"
+  prerequisites:
+    - "CPF/CNPJ para cadastro"
+    - "Canal de distribuição (Telegram/WhatsApp — execute wf-br-market-entry)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: marketplace-ops
+      role: "Setup plataformas, seleção de produtos, broadcast"
+      phases: [0, 1, 2, 3, 4]
+
+    - agent: affiliate-strategist
+      role: "Critérios de seleção de produtos"
+      phases: [3]
+
+    - agent: performance-analyst
+      role: "Setup de tracking por marketplace"
+      phases: [4]
+
+  synergies:
+    - agents: [marketplace-ops, affiliate-strategist]
+      pattern: "Ops executa, Strategist define critérios"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 0: AMAZON BR SETUP
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-0
+    name: "Amazon BR Setup"
+    days: "Days 1-2"
+    tier: 0
+    description: |
+      Setup Amazon Associates Brasil.
+      Roundups > single reviews. In-content links + comparison tables = maior EPC.
+      Cookie 24h — tudo no carrinho conta.
+
+    agent: marketplace-ops
+
+    tasks:
+      - task_id: T0.1
+        name: "Setup Amazon BR Affiliate"
+        task_ref: setup-amazon-br-affiliate.md
+        required: true
+        description: "Conta Associates + configuração de links"
+        output: "amazon_setup.yaml"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Amazon Ready"
+      criteria:
+        - "Conta Associates aprovada"
+        - "Store ID configurado"
+        - "Categorias de comissão mapeadas"
+      human_review: false
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 1: SHOPEE SETUP
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-1
+    name: "Shopee Setup"
+    days: "Days 3-4"
+    tier: 0
+    description: |
+      Setup Shopee Brasil affiliate.
+      3M afiliados, Lives (100K elegíveis, 5x earnings).
+      Attribution 7 dias. Best: eletrônicos, moda, beleza.
+      Promos: 9.9, 10.10, 11.11, 12.12.
+
+    agent: marketplace-ops
+
+    tasks:
+      - task_id: T1.1
+        name: "Setup Shopee Affiliate"
+        task_ref: setup-shopee-affiliate.md
+        required: true
+        description: "Conta + painel + Shopee Lives eligibility"
+        output: "shopee_setup.yaml"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Shopee Ready"
+      criteria:
+        - "Conta affiliate ativa"
+        - "Painel de afiliado acessível"
+        - "Comissões por categoria mapeadas"
+      human_review: false
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 2: MERCADO LIVRE SETUP
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-2
+    name: "Mercado Livre Setup"
+    days: "Days 5-6"
+    tier: 0
+    description: |
+      Setup Mercado Livre affiliate.
+      Até 16% comissão, 310% crescimento YoY, cupons exclusivos.
+      Cobertura LATAM (Argentina, México, Colômbia).
+
+    agent: marketplace-ops
+
+    tasks:
+      - task_id: T2.1
+        name: "Setup Mercado Livre Affiliate"
+        task_ref: setup-mercadolivre-affiliate.md
+        required: true
+        description: "Conta + cupons + programa LATAM"
+        output: "mercadolivre_setup.yaml"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Mercado Livre Ready"
+      criteria:
+        - "Conta affiliate ativa"
+        - "Cupons exclusivos solicitados"
+        - "Categorias top mapeadas"
+      human_review: false
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 3: PRODUCT SELECTION SYSTEM
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-3
+    name: "Product Selection"
+    days: "Days 7-9"
+    tier: 1
+    description: |
+      Definição de critérios de seleção de produtos para promoção.
+      Score por: comissão, rating, vendas, estoque, preço competitivo.
+
+    agents:
+      primary: marketplace-ops
+      secondary: affiliate-strategist
+
+    tasks:
+      - task_id: T3.1
+        name: "Definir Critérios de Seleção"
+        task_ref: product-selection-criteria.md
+        required: true
+        description: "Score: comissão × rating × vendas × estoque"
+        output: "selection_criteria.yaml"
+
+    inline_structures:
+      product_selection_score:
+        dimensions:
+          - id: SEL_001
+            name: "Comissão Efetiva"
+            weight: 30
+            scoring:
+              3: ">= 10% ou >= R$20/venda"
+              2: "5-9.9% ou R$10-19/venda"
+              1: "2-4.9% ou R$5-9/venda"
+              0: "< 2% ou < R$5/venda"
+
+          - id: SEL_002
+            name: "Rating/Reputação"
+            weight: 20
+            scoring:
+              3: ">= 4.5 stars, 100+ reviews"
+              2: "4.0-4.4 stars, 50+ reviews"
+              1: "3.5-3.9 stars"
+              0: "< 3.5 stars ou sem reviews"
+
+          - id: SEL_003
+            name: "Volume de Vendas"
+            weight: 25
+            scoring:
+              3: "Best seller da categoria"
+              2: "Top 20 da categoria"
+              1: "Vendas moderadas"
+              0: "Poucas vendas"
+
+          - id: SEL_004
+            name: "Disponibilidade"
+            weight: 25
+            scoring:
+              3: "Em estoque, entrega rápida"
+              2: "Em estoque, entrega normal"
+              1: "Estoque limitado"
+              0: "Fora de estoque"
+
+        decision:
+          PROMOTE: "Score ponderado >= 2.5"
+          MONITOR: "Score 1.5-2.4"
+          SKIP: "Score < 1.5"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Selection System Ready"
+      criteria:
+        - "Critérios de seleção documentados"
+        - "Mínimo 20 produtos selecionados across marketplaces"
+        - "Mix de categorias (não concentrar em uma)"
+      human_review: true
+      message: "Revise critérios de seleção e lista inicial de produtos."
+      veto_conditions:
+        - condition: "100% produtos de uma única categoria"
+          action: "WARNING — Diversificar para reduzir risco sazonal"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 4: BROADCAST SYSTEM
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-4
+    name: "Broadcast System"
+    days: "Days 10-14"
+    tier: 2
+    description: |
+      Ativação do sistema de broadcast de ofertas.
+      Seleção diária → formatação → distribuição multicanal.
+
+    agents:
+      primary: marketplace-ops
+      secondary: performance-analyst
+
+    tasks:
+      - task_id: T4.1
+        name: "Criar Offer Broadcast System"
+        task_ref: create-offer-broadcast.md
+        required: true
+        agent: marketplace-ops
+        description: "Seleção + formatação + distribuição diária"
+        output: "broadcast_system.yaml"
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Broadcast Operational"
+      criteria:
+        - "Sistema de seleção diária ativo"
+        - "Templates de oferta por canal"
+        - "Tracking UTM por marketplace + canal"
+        - "Primeira semana de ofertas agendada"
+      human_review: true
+      message: "Revise o sistema de broadcast antes de iniciar operações diárias."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "affiliates-chief"
+    - document_reason: true
+    - require_human_override: true
+
+  common_failures:
+    - failure: "Amazon Associates conta rejeitada"
+      phase: 0
+      resolution: "Verificar requisitos mínimos de conteúdo (3+ posts)"
+
+    - failure: "Shopee não aprovada"
+      phase: 1
+      resolution: "Verificar requisitos de seguidores mínimos"
+
+    - failure: "Zero produtos com score >= 2.5"
+      phase: 3
+      resolution: "Expandir categorias ou ajustar thresholds"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-marketplace-ops-launch"
+      status: "completed"
+      outputs:
+        - "amazon_setup.yaml"
+        - "shopee_setup.yaml"
+        - "mercadolivre_setup.yaml"
+        - "selection_criteria.yaml"
+        - "broadcast_system.yaml"
+
+  checkpoint:
+    type: "checkpoint_reached"
+    payload:
+      phase_id: "PHASE-{N}"
+      status: "awaiting_review"
+
+  blocked:
+    type: "workflow_blocked"
+    payload:
+      phase_id: "PHASE-{N}"
+      reason: "veto_condition_triggered"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  phase_0:
+    - "amazon_setup.yaml"
+  phase_1:
+    - "shopee_setup.yaml"
+  phase_2:
+    - "mercadolivre_setup.yaml"
+  phase_3:
+    - "selection_criteria.yaml"
+  phase_4:
+    - "broadcast_system.yaml"
+
+  final_deliverable:
+    name: "Marketplace Ops Package"
+    location: "outputs/marketplace-ops/{id}/"
+    contents:
+      - "README.md — Overview multi-marketplace"
+      - "platform_setups/ — Configs por marketplace"
+      - "selection_criteria.yaml — Critérios de seleção"
+      - "broadcast_system.yaml — Sistema de distribuição"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-18"
+  author: "squad-architect"
+  source_frameworks:
+    - "Amazon Associates BR"
+    - "Shopee Affiliate Program"
+    - "Mercado Livre Affiliate"
+    - "Multi-Marketplace Strategy"
+  priority: 1
+  quality_gate: "SC_WFL_001"

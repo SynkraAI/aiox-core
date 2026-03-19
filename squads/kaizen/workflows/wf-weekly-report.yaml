@@ -1,0 +1,95 @@
+# Workflow: Weekly Recommendations Report
+# ID: wf-weekly-report
+# Version: 1.0.0
+# Purpose: Generate weekly actionable recommendations report
+# Orchestrator: kaizen-chief
+
+workflow_name: weekly_recommendations_report
+description: >-
+  Simplified version of wf-ecosystem-analysis focused on generating the weekly report.
+  If a full analysis was run recently (< 3 days), uses cached results. Otherwise,
+  triggers full analysis first. Applies RULE-RD-001 and QG-KZ-004 before delivery.
+agent_sequence:
+  - kaizen-chief  # Phase 0: check cache
+  - kaizen-chief  # Phase 1: trigger full analysis if needed (delegates to wf-ecosystem-analysis)
+  - kaizen-chief  # Phase 2: format and deliver report
+success_indicators:
+  - "Executive summary present (max 3 sentences)"
+  - "Recommendations classified by RULE-RD-001 (N>=3)"
+  - "Max 5 recommendations prioritized by impact"
+  - "Each recommendation has evidence + action + cost"
+  - "QG-KZ-004 passed"
+
+workflow:
+  id: wf-weekly-report
+  name: "Weekly Recommendations Report"
+  version: "1.0.0"
+  orchestrator: kaizen-chief
+  mode: autonomous
+
+  description: |
+    Simplified version of wf-ecosystem-analysis focused on generating
+    the weekly report. If a full analysis was run recently (< 3 days),
+    uses cached results. Otherwise, triggers full analysis first.
+
+  phases:
+    phase_0:
+      name: "Check Recent Analysis"
+      steps:
+        - id: "0.1"
+          name: "Check for recent full analysis"
+          action: "Look for data/reports/week-*-*.md from last 3 days"
+          decision:
+            if_found: "Use cached results → skip to phase_2"
+            if_not_found: "Trigger wf-ecosystem-analysis → then phase_2"
+
+    phase_1:
+      name: "Full Analysis (if needed)"
+      condition: "No recent analysis found"
+      action: "Execute wf-ecosystem-analysis.yaml"
+
+    phase_2:
+      name: "Format Report"
+      steps:
+        - id: "2.1"
+          name: "Load latest analysis"
+          action: "Read most recent report from data/reports/"
+
+        - id: "2.2"
+          name: "Extract top recommendations"
+          action: "Select top 3-5 by impact score"
+
+        - id: "2.3"
+          name: "Generate executive summary"
+          action: "3-sentence summary of ecosystem state"
+
+        - id: "2.4"
+          name: "Format for delivery"
+          action: "Apply templates/weekly-report-tmpl.md"
+
+  quality_gate:
+    id: "QG-KZ-004"
+    name: "Weekly Report Quality"
+    transition: "Format → Delivery"
+    type: blocking
+    criteria:
+      - "Executive summary presente (max 3 frases)"
+      - "Recomendações classificadas por nível (RULE-RD-001)"
+      - "Max 5 recomendações priorizadas por impacto"
+      - "Cada recomendação tem evidência + ação + custo"
+      - "Template weekly-report-tmpl.md aplicado corretamente"
+    veto_conditions:
+      - "Recomendação sem evidência → REMOVER do relatório"
+      - "Mais de 5 recomendações → CORTAR por menor impacto"
+      - "Dados fabricados (sem git log/glob) → BLOQUEAR publicação"
+
+  output:
+    format: "Weekly Recommendations Report (Markdown)"
+    sections:
+      - executive_summary
+      - competency_gaps
+      - tool_gaps
+      - agent_performance_alerts
+      - squad_recommendations
+      - cost_highlights
+      - prioritized_actions

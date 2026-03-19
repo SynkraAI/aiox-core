@@ -1,0 +1,743 @@
+# Brand Guide — OPES Marketing Arm
+# Version: 3.0.0
+# Referência visual para @designer e @distribution
+# Atualizado: 2026-02-01 (Carousel Visual System + Brand Signature v3)
+
+---
+
+identity:
+  brand_name: "OPES — One Person Enterprise System"
+  tagline: "1 pessoa. 1 sistema. 6 braços."
+  tagline_premium: "Eu não ensino IA. Eu instalo empresas."
+  owner: "José Carlos Amorim"
+  positioning: "Arquiteto do One Person Enterprise System — instala empresas de IA premium"
+  positioning_old: "Profissional solo operando como empresa de 6 via IA"
+  positioning_updated: "2026-02-01"
+
+# ============================================
+# PALETA DE CORES
+# ============================================
+colors:
+  primary:
+    dark_bg: "#0f0f13"
+    surface: "#1a1a24"
+    surface_2: "#22222e"
+
+  accent:
+    orange: "#d97758"        # COR PROPRIETÁRIA — dot/selo de marca (Anthropic terracotta)
+    orange_muted: "#b3614a"  # versão escura para underlines sutis
+    purple: "#8b5cf6"        # secundário — dashboards, dados, destaques técnicos
+    purple_light: "#a78bfa"
+    cyan: "#06b6d4"          # secundário — métricas, números
+    cyan_light: "#67e8f9"
+
+  semantic:
+    success: "#10b981"
+    warning: "#f59e0b"
+    error: "#ef4444"
+    info: "#3b82f6"
+
+  text:
+    primary: "#e8e8f0"
+    muted: "#8888a0"
+    dim: "#5a5a70"
+
+  usage:
+    background: "dark_bg para fundo principal (preto puro #0A0A0F para posts)"
+    cards: "surface para cards e containers"
+    brand_signature: "orange (#d97758) EXCLUSIVO para dot/selo da assinatura — NUNCA usar em outro lugar"
+    highlights: "purple para destaques técnicos, cyan para dados/métricas"
+    cta: "purple ou cyan para botões e links"
+    alerts: "semantic colors para estados"
+
+# ============================================
+# TIPOGRAFIA
+# ============================================
+typography:
+  primary_font: "Inter"
+  fallback: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+  mono_font: "'SF Mono', 'Fira Code', monospace"
+
+  sizes:
+    hero: "2.2rem (títulos principais)"
+    h1: "1.5rem"
+    h2: "1.15rem"
+    body: "0.88rem"
+    caption: "0.72rem"
+    micro: "0.62rem"
+
+  weights:
+    bold: 800
+    semibold: 700
+    medium: 600
+    regular: 400
+
+  signature_font: "Cursiva manuscrita (assinatura pessoal do José) — EXCEÇÃO à regra de fontes"
+
+  rules:
+    - "Nunca usar fontes cursivas ou decorativas — EXCEÇÃO: assinatura manuscrita do José"
+    - "Nunca usar mais de 2 pesos por peça"
+    - "Mínimo 24px para body em imagens (legibilidade mobile)"
+    - "Mínimo 36px para headlines em imagens"
+    - "Letter-spacing: 0.5-2px para uppercase labels"
+
+# ============================================
+# ESTILO VISUAL
+# ============================================
+visual_style:
+  mood: "Apple-level minimalism — premium, cirúrgico, restrito"
+  aesthetic: "Tipografia sobre preto puro. A sofisticação está na restrição."
+  inspiration:
+    - "Apple keynote slides"
+    - "Bloomberg terminal"
+    - "Luxury brand identity (Hermès, Bottega Veneta)"
+    - "Architectural firm presentations"
+
+  elements:
+    borders: "1px solid com opacity baixa (rgba)"
+    border_radius: "12-16px para cards, 6-8px para elementos menores"
+    shadows: "Box-shadow com opacity baixa, nunca drop-shadow pesado"
+    glow: "Sutil — radial-gradient com accent color a 10-15% opacity"
+    icons: "Emoji ou ícones line/outline — nunca filled/solid pesado"
+
+  layout:
+    spacing: "Generoso — muito espaço negativo"
+    hierarchy: "1 foco por slide/imagem"
+    alignment: "Left-aligned para texto, center para títulos"
+    grid: "Consistente — 16px base unit"
+
+# ============================================
+# VISUAL NÃO-PERMITIDO
+# ============================================
+never:
+  images:
+    - "Stock photos genéricas (pessoas sorrindo, handshake, escritório)"
+    - "Fotos com marca d'água"
+    - "Imagens de banco de imagem sem tratamento"
+    - "Screenshots sem crop/blur de dados sensíveis"
+
+  design:
+    - "Gradientes rainbow ou neon excessivo"
+    - "Templates de coach genérico (fontes cursivas, cores pastel)"
+    - "Muitos elementos por slide (poluição visual)"
+    - "Bordas grossas ou sombras pesadas"
+    - "Clipart ou ilustrações infantis"
+
+  text_in_images:
+    - "Fontes menores que 24px (ilegível em mobile)"
+    - "Texto sobre imagem sem contraste (sem overlay)"
+    - "Mais de 15 palavras por slide de carrossel"
+    - "Parágrafos inteiros dentro de imagem"
+
+# ============================================
+# TEMPLATES DE PROMPT (GEMINI)
+# ============================================
+image_prompts:
+  base_template: |
+    Minimalist {ESTILO} illustration on dark background (#0f0f13).
+    {DESCRIÇÃO}. Clean lines, subtle purple (#8b5cf6) and
+    cyan (#06b6d4) accents. No text. Professional tech aesthetic.
+    Aspect ratio: {RATIO}.
+
+  styles:
+    conceitual: "abstract geometric"
+    tech: "digital interface elements"
+    diagrama: "schematic flowchart style"
+    metafora: "symbolic metaphorical"
+
+  anti_prompts:
+    - "realistic human faces"
+    - "stock photo style"
+    - "corporate office setting"
+    - "bright colorful cheerful"
+    - "text or typography in image"
+    - "logos or brand marks"
+
+# ============================================
+# CATÁLOGO DE FORMATOS (DEFINITIVO)
+# ============================================
+# @designer DEVE escolher um destes formatos. Nenhum outro é permitido.
+# Cada formato tem specs exatos, template e quando usar.
+
+formatos:
+
+  # ─────────────────────────────────────────
+  # FORMATO 1: POST ESTÁTICO
+  # ─────────────────────────────────────────
+  post_estatico:
+    id: "F1"
+    nome: "Post Estático"
+    descricao: "Imagem única com frase de impacto ou visual conceitual"
+    quando_usar:
+      - "Frase-bomba / provocação visual"
+      - "Contraste forte (antes vs depois)"
+      - "Quote com atribuição"
+      - "Resultado/número impactante"
+    proporcao:
+      instagram: "4:5 (1080×1350px) — OBRIGATÓRIO"
+      linkedin: "1.91:1 (1200×627px)"
+    template:
+      fundo: "#0f0f13 (dark_bg) ou imagem conceitual Gemini"
+      headline: "36-48px, Inter Bold, #e8e8f0, max 10 palavras"
+      subtitulo: "20-24px, Inter Medium, #8888a0, max 15 palavras (opcional)"
+      assinatura: "Brand Signature System — cursiva 'José Amorim' + dot laranja (#D97758), canto inferior direito"
+      acento: "NENHUM — o dot laranja da assinatura é o único acento"
+    regras:
+      - "1 foco visual por imagem — NUNCA 2 ideias"
+      - "Texto legível em mobile (min 36px headline)"
+      - "Espaço negativo generoso (40%+ da imagem)"
+
+  # ─────────────────────────────────────────
+  # FORMATO 2: CARROSSEL PADRÃO
+  # ─────────────────────────────────────────
+  carrossel_padrao:
+    id: "F2"
+    nome: "Carrossel Padrão"
+    descricao: "Slides sequenciais com conteúdo educativo ou framework"
+    quando_usar:
+      - "Tutorial / passo-a-passo"
+      - "Lista (5 coisas que..., 7 erros...)"
+      - "Framework / modelo mental"
+      - "Sequência lógica (progresso, evolução)"
+    proporcao:
+      instagram: "4:5 (1080×1350px) — OBRIGATÓRIO"
+      linkedin: "4:5 (1080×1350px) via PDF"
+    slides:
+      min: 5
+      max: 10
+      ideal: 7
+    template:
+      slide_1_capa:
+        purpose: "Hook visual — parar o scroll"
+        conteudo: "Título impactante (max 7 palavras)"
+        texto: "36-48px, Inter Bold, #e8e8f0"
+        fundo: "#0f0f13 com glow accent sutil"
+        extra: "Swipe indicator (→ ou 'deslize')"
+      slides_meio:
+        purpose: "1 ideia por slide — entregar valor"
+        conteudo: "Headline (max 5 palavras) + corpo (max 15 palavras)"
+        texto_headline: "28-36px, Inter Bold, #e8e8f0"
+        texto_body: "20-24px, Inter Regular, #8888a0"
+        fundo: "Consistente com slide 1"
+        numeracao: "Opcional — 1/7, 2/7... em #5a5a70, canto superior"
+      slide_final_cta:
+        purpose: "Call to action + assinatura"
+        conteudo: "CTA claro + @josecarlosamorim.ai"
+        texto: "28-36px, Inter Semibold"
+        cor_cta: "#8b5cf6 (purple) ou #06b6d4 (cyan)"
+    regras:
+      - "Fundo CONSISTENTE em todos os slides"
+      - "1 ideia por slide — NUNCA amontoar"
+      - "Progresso visual (barra ou dots) opcional"
+      - "Transição visual suave entre slides"
+
+  # ─────────────────────────────────────────
+  # FORMATO 3: CARROSSEL TWITTER ★ OBRIGATÓRIO
+  # ─────────────────────────────────────────
+  carrossel_twitter:
+    id: "F3"
+    nome: "Carrossel Twitter"
+    obrigatorio: true
+    descricao: "Slides que simulam posts/tweets em dark mode. Thread visual no formato IG."
+    nota: "Formato que MAIS performa para o José. Usar pelo menos 2x por semana."
+    quando_usar:
+      - "Thread de pensamentos / hot takes sequenciais"
+      - "Opiniões curtas e afiadas"
+      - "Série de insights rápidos"
+      - "Reações a tendências / notícias"
+      - "Provocações em sequência"
+    proporcao:
+      instagram: "4:5 (1080×1350px) — OBRIGATÓRIO"
+      linkedin: "4:5 (1080×1350px) via PDF ou imagens"
+    slides:
+      min: 4
+      max: 10
+      ideal: 6
+    template:
+      estilo: "Simula interface do Twitter/X em dark mode"
+      fundo_slide: "#000000 (preto puro) ou #15202b (Twitter dark)"
+      card_tweet:
+        fundo: "#1e1e1e ou #192734"
+        border: "1px solid #333639"
+        border_radius: "16px"
+        padding: "16-20px"
+      avatar:
+        imagem: ".aios-core/expansion-packs/marketing-opes/assets/avatar-jose.jpg (circular, 48×48px)"
+        fonte: "IMG_8140.JPG — foto com óculos laranja, blazer preto, fundo cinza"
+        posicao: "Topo esquerdo do card"
+      nome_usuario:
+        nome: "José Carlos Amorim"
+        nome_font: "16px, Inter Bold, #e8e8f0"
+        handle: "@josecarlosamorim.ai"
+        handle_font: "14px, Inter Regular, #8888a0"
+      texto_tweet:
+        font: "20-24px, Inter Regular, #e8e8f0"
+        max_palavras: 40
+        line_height: "1.4"
+      metricas_fake:
+        mostrar: true
+        estilo: "Ícones de reply, retweet, like, views em #8888a0"
+        nota: "Números opcionais — podem ser omitidos"
+      slide_1:
+        extra: "Pode ter headline acima do card (28-36px, #8b5cf6)"
+        nota: "Hook que contextualiza a thread"
+      slide_final:
+        conteudo: "Último tweet + CTA"
+        cta: "Dentro do card ou abaixo"
+        assinatura: "Brand Signature System — cursiva 'José Amorim' + dot laranja (#D97758)"
+    regras:
+      - "Cada slide = 1 tweet (1 pensamento completo)"
+      - "Tom: direto, curto, opinativo — como se estivesse tweetando"
+      - "NUNCA parecer screenshot real — é SIMULADO com design limpo"
+      - "Manter consistência visual entre slides"
+      - "Texto do tweet deve funcionar isolado (alguém pode screenshotar 1 slide)"
+
+  # ─────────────────────────────────────────
+  # FORMATO 4: TEXTO PURO
+  # ─────────────────────────────────────────
+  texto_puro:
+    id: "F4"
+    nome: "Texto Puro"
+    descricao: "Post sem imagem. O texto é o conteúdo."
+    quando_usar:
+      - "Confessional pesado / vulnerabilidade"
+      - "Bastidor / storytelling longo"
+      - "Quando não há visual remarkable"
+      - "Na dúvida: texto puro > visual medíocre"
+    proporcao: "N/A — sem imagem"
+    regras:
+      - "Reservado para posts onde a voz carrega sozinha"
+      - "Formatação do texto compensa a falta de visual"
+      - "Hook na primeira linha é AINDA MAIS crítico"
+
+  # ─────────────────────────────────────────
+  # FORMATO 5: IMAGEM CONCEITUAL (GEMINI)
+  # ─────────────────────────────────────────
+  imagem_conceitual:
+    id: "F5"
+    nome: "Imagem Conceitual"
+    descricao: "Imagem gerada por IA (Gemini) que ilustra conceito abstrato"
+    quando_usar:
+      - "Metáfora visual forte"
+      - "Conceito abstrato que se beneficia de ilustração"
+      - "Post filosófico / reflexivo"
+    proporcao:
+      instagram: "4:5 (1080×1350px) ou 1:1 (1080×1080px)"
+      linkedin: "1.91:1 (1200×627px)"
+    gerador: "Nano Banana Pro (gemini-3-pro-image-preview)"
+    prompt_base: |
+      Minimalist {ESTILO} illustration on dark background (#0f0f13).
+      {DESCRIÇÃO}. Clean lines, subtle purple (#8b5cf6) and
+      cyan (#06b6d4) accents. No text. Professional tech aesthetic.
+      Aspect ratio: {RATIO}.
+    regras:
+      - "Remarkable ou não usa — visual medíocre é pior que texto"
+      - "NUNCA rostos humanos realistas"
+      - "NUNCA texto dentro da imagem gerada"
+      - "Imagem serve o conceito, não decora"
+
+# ============================================
+# PROPORÇÕES — RESUMO RÁPIDO
+# ============================================
+proporcoes_resumo:
+  instagram:
+    padrao: "4:5 (1080×1350px) — TODO conteúdo IG é 4:5"
+    story: "9:16 (1080×1920px) — stories e reels"
+    excecao: "1:1 (1080×1080px) — só se visual exigir"
+  linkedin:
+    padrao: "1.91:1 (1200×627px) — imagem de post"
+    carrossel: "4:5 (1080×1350px) — documento PDF"
+  twitter:
+    padrao: "Simulado dentro do IG — não é post real no X"
+
+# ============================================
+# FREQUÊNCIA DE FORMATOS (SEMANAL)
+# ============================================
+frequencia_formatos:
+  meta_semanal:
+    carrossel_twitter: "2-3x por semana (formato principal)"
+    carrossel_padrao: "1-2x por semana"
+    post_estatico: "1x por semana"
+    texto_puro: "1x por semana (confessional)"
+    imagem_conceitual: "0-1x por semana (quando fizer sentido)"
+  regra: "Carrossel Twitter é o formato padrão. Na dúvida, usa F3."
+
+# ============================================
+# DECISION TREE: QUAL FORMATO?
+# ============================================
+decision_tree_formato:
+  pergunta_1: "O conteúdo é uma SEQUÊNCIA de pensamentos curtos/hot takes?"
+  se_sim_1: "F3 — Carrossel Twitter"
+  se_nao_1:
+    pergunta_2: "Tem PASSO-A-PASSO, lista ou framework com 4+ itens?"
+    se_sim_2: "F2 — Carrossel Padrão"
+    se_nao_2:
+      pergunta_3: "Tem UMA frase/número de impacto visual?"
+      se_sim_3: "F1 — Post Estático"
+      se_nao_3:
+        pergunta_4: "É confessional pesado / storytelling sem visual claro?"
+        se_sim_4: "F4 — Texto Puro"
+        se_nao_4:
+          pergunta_5: "O conceito se beneficia de ilustração abstrata?"
+          se_sim_5: "F5 — Imagem Conceitual"
+          se_nao_5: "F3 — Carrossel Twitter (default)"
+
+# ============================================
+# BRAND SIGNATURE SYSTEM (v3 — 2026-02-01)
+# ============================================
+# v2: Fundo + Assinatura + Dot (Marty Neumeier)
+# v3: + Dot Navigator + Traço de Pincel (Amanda Khayat + Designer + Marty + Seth)
+# 5 elementos de reconhecibilidade. Sistema visual proprietário completo.
+# Regra: estes 5 elementos são o TETO. Nunca adicionar mais.
+
+brand_signature:
+  sistema:
+    descricao: "3 elementos que fazem alguém olhar 0.5s e saber que é José Amorim"
+    referencia_aprovada: "outputs/hubs/marketing/2026-02-04-post-sig-orange-v1.png"
+
+  # Elemento 1: Fundo preto puro
+  fundo:
+    cor: "#0A0A0F"
+    regra: "Preto puro em TODA peça. Sem textura, sem gradiente, sem noise."
+    nota: "O território visual proprietário é o dark mode permanente."
+
+  # Elemento 2: Assinatura manuscrita
+  assinatura:
+    tipo: "Cursiva manuscrita — caligrafia pessoal do José"
+    texto: "José Amorim"
+    cor: "#CCCCDD (off-white)"
+    posicao: "Canto inferior direito"
+    tamanho: "~150-200px de largura, legível mas não dominante"
+    regra: "Presente em TODA peça visual. A caligrafia é única — passa no Hand Test."
+    nota: "EXCEÇÃO à regra de 'nunca usar cursiva' — a assinatura é o único elemento humano."
+
+  # Elemento 3: Dot laranja (selo de marca)
+  dot:
+    cor: "#D97758 (terracotta/Anthropic orange)"
+    tamanho: "~3x o tamanho de um ponto final normal — proporcional à assinatura"
+    posicao: "Imediatamente após a assinatura manuscrita"
+    significado: "Selo de 'instalado, completo, feito' — como lacre de cera em carta"
+    regra: "O dot laranja é a ÚNICA cor quente em toda composição. EXCLUSIVO para a assinatura."
+    nota: "A cor conecta à Anthropic (fundação da operação) sem dizer. Quem sabe, sabe."
+
+  # Elemento 4: Dot Navigator (v3 — em todo slide de carrossel)
+  dot_navigator:
+    cor: "#D97758 (mesmo do selo)"
+    descricao: "O dot laranja aparece em TODO slide como selo de autenticidade"
+    regra: "Ver carousel_visual_system.dot_navigator para comportamentos por slide"
+    nota: "Amplia o dot da assinatura para sistema de navegação visual"
+
+  # Elemento 5: Traço de Pincel Seco (v3 — em toda peça visual)
+  traco_pincel:
+    estilo: "Dry brush stroke — sumi-e japonês"
+    cor: "#2A2A36"
+    descricao: "Traço orgânico que cria tensão visual e profundidade"
+    regra: "Ver carousel_visual_system.traco_pincel para specs completos"
+    nota: "O traço ecoa a assinatura manuscrita — mesma 'mão' que assina é a que traça"
+
+  # Regras do sistema
+  regras:
+    - "Os 5 elementos formam o sistema completo — usar todos em peças visuais"
+    - "A assinatura + dot substitui @josecarlosamorim.ai como watermark"
+    - "NUNCA usar o orange (#D97758) em outro contexto que não dots e assinatura"
+    - "Estes 5 elementos são o TETO — nunca adicionar mais"
+    - "Em carrosseis: dot navigator em todo slide, assinatura no final, traço em todos"
+    - "Em posts estáticos: assinatura + dot + traço de pincel"
+    - "Em texto puro: não aplicável (sem visual)"
+    - "O traço de pincel NUNCA cobre texto — sempre atrás ou abaixo"
+    - "O traço varia de direção entre peças (nunca 2 iguais seguidos)"
+
+# ============================================
+# CAROUSEL VISUAL SYSTEM v1.0 (2026-02-01)
+# ============================================
+# Definido por @amanda-khayat (hook psychology) + @designer (visual execution)
+# Validado por @brand (Marty Neumeier) + @cmo (Seth Godin) + CEO
+# Referência aprovada: outputs/hubs/marketing/visual-hook-tests/slide1-test-B-presente.png
+#
+# PRINCÍPIO (Amanda): "O olho VÊ antes de LER. 0.3s para parar o scroll.
+# Precisa de elemento visual inesperado que o cérebro não processa instantaneamente."
+#
+# 3 camadas visuais (antes da pessoa ler uma palavra):
+# 1. Dot laranja quente → olho vai direto pra cor quente (biológico)
+# 2. Traço de pincel seco → cérebro detecta movimento onde não deveria ter
+# 3. Gancho visual grande → informação de impacto em tamanho massivo
+
+carousel_visual_system:
+  version: "1.0"
+  modelo_aprovado: "Test B (Traço Presente)"
+  gerador: "Nano Banana Pro (gemini-2.0-flash-exp-image-generation)"
+
+  # ─── ELEMENTO 1: DOT NAVIGATOR ───
+  # O orange dot (#D97758) aparece em TODO slide como selo de autenticidade.
+  dot_navigator:
+    cor: "#D97758"
+    regra: "Presente em TODOS os slides do carrossel — NUNCA omitir"
+    comportamentos:
+      capa:
+        tamanho: "~20px raio — destaque visual"
+        posicao: "Canto superior esquerdo (~60px do topo, ~60px da esquerda)"
+        funcao: "Primeiro ponto que o olho detecta (cor quente em mar frio)"
+      conteudo:
+        tamanho: "~6px raio — marcador sutil"
+        posicao: "Canto superior esquerdo (~60px, ~60px)"
+        funcao: "Selo de origem — 'isto é do José Amorim'"
+      cta:
+        tamanho: "~8px raio — junto à assinatura"
+        posicao: "Imediatamente após assinatura manuscrita"
+        funcao: "Lacre de cera — fecha a peça"
+      extra: "Dot no topo esquerdo TAMBÉM aparece no CTA (duplo dot: navegador + assinatura)"
+
+  # ─── ELEMENTO 2: TRAÇO DE PINCEL SECO ───
+  # Dry brush stroke orgânico que cria tensão visual e profundidade.
+  # NUNCA geométrico, NUNCA computacional. Sempre parecer FEITO À MÃO.
+  traco_pincel:
+    estilo: "Dry brush stroke — sumi-e japonês, pincel seco com bordas irregulares"
+    cor: "#2A2A36 (visível mas não dominante)"
+    opacidade: "50-60%"
+    regra_posicao: "NUNCA cobrir texto. Sempre atrás ou abaixo do conteúdo textual."
+    regra_variacao: "NUNCA repetir a mesma direção em carrosseis consecutivos"
+    mood: "Arte, não template. Caligrafia, não vetor."
+
+    # Variações de direção (rotacionar entre carrosseis)
+    variacoes:
+      - "diagonal ascendente (lower-left → upper-right)"
+      - "arco inferior (sweep from left to right, lower third)"
+      - "pincelada curta horizontal (centro-direita)"
+      - "diagonal descendente (upper-left → lower-right)"
+      - "arco vertical (sweep from bottom to center)"
+
+    por_tipo_slide:
+      capa: "Traço PRESENTE e visível. Pode ser mais dramático. Ocupa zona direita/inferior."
+      conteudo: "Traço na metade inferior (zona de respiro). Texto fica limpo na zona superior."
+      cta: "Arco sutil no lower third. Assinatura pode ficar sobre ou perto do traço."
+
+  # ─── ELEMENTO 3: GANCHO VISUAL (Slide 1) ───
+  # O elemento de impacto que para o scroll. MUDA conforme conteúdo.
+  gancho_visual:
+    principio: "Elemento curto em tamanho MASSIVO que o olho detecta antes de ler"
+    tamanho_texto: "200-300px+ para o elemento principal"
+    posicao: "Upper-left com margem generosa (~80px)"
+
+    # 4 tipos de gancho — @designer escolhe conforme Big Idea do post
+    tipos:
+      numero_concreto:
+        descricao: "Número específico que gera curiosidade"
+        exemplos: ["17", "84", "R$0", "3 semanas", "6 agentes"]
+        prompt_var: "The number \"{GANCHO}\" in massive bold white sans-serif (~300px tall)"
+        quando: "Post tem dado concreto impactante"
+
+      palavra_bomba:
+        descricao: "Uma palavra ou verbo curto de impacto"
+        exemplos: ["Recusei.", "Instalei.", "Bizarro.", "Não."]
+        prompt_var: "The word \"{GANCHO}\" in massive bold white sans-serif (~250px tall)"
+        quando: "Post tem declaração provocativa ou contrarian"
+
+      pergunta_curta:
+        descricao: "Pergunta de 2-3 palavras que abre loop"
+        exemplos: ["E se?", "Por quê?", "Quem disse?", "Quanto custa?"]
+        prompt_var: "The question \"{GANCHO}\" in massive bold white sans-serif (~200px tall)"
+        quando: "Post abre com questionamento ou provocação"
+
+      contraste_visual:
+        descricao: "Duas frases curtas com contraste tipográfico (grande + muted)"
+        exemplos: ["1 pessoa. (grande) / 6 braços. (muted)", "Eu não ensino. (grande) / Eu instalo. (muted)"]
+        prompt_var: "\"{GANCHO_FORTE}\" in massive bold white (~250px), below it \"{GANCHO_MUTED}\" in smaller muted gray #777788 (~60px)"
+        quando: "Post tem dualidade ou antes/depois"
+
+  # ─── REGRAS GERAIS ───
+  regras:
+    - "TODO carrossel DEVE usar o Carousel Visual System — sem exceção"
+    - "O traço de pincel varia de direção entre carrosseis (nunca 2 iguais seguidos)"
+    - "O dot laranja é o ÚNICO elemento quente — NADA mais em cor quente"
+    - "Espaço negativo generoso (40%+ de vazio por slide)"
+    - "Texto legível em mobile: min 36px headlines, min 24px body"
+    - "Hierarquia: branco #E8E8F0 para destaque, muted #777788 para contexto"
+    - "Assinatura cursiva + dot APENAS no slide final"
+    - "Numeração sutil (XX/YY) no canto inferior direito em #5A5A70"
+
+# ============================================
+# PROMPT TEMPLATES — CARROSSEL (Nano Banana Pro)
+# ============================================
+# Templates maleáveis para @designer gerar slides via Gemini.
+# Variáveis entre {CHAVES} devem ser preenchidas por slide.
+
+carousel_prompt_templates:
+
+  # ─── SLIDE CAPA (Slide 1) ───
+  slide_capa: |
+    Create a premium minimalist social media post image, portrait orientation (4:5 ratio, 1080x1350px).
+    BACKGROUND: Pure solid black (#0A0A0F). No gradients, no texture.
+    VISUAL ELEMENT — DRY BRUSH STROKE: A single elegant dry brush stroke in dark gray (#2A2A36),
+    approximately 50-60% opacity, sweeping {DIRECAO_TRACO} across the composition.
+    The stroke MUST look hand-painted, organic, imperfect — like Japanese sumi-e calligraphy.
+    Real brush texture with dry, feathered edges and visible bristle marks.
+    The stroke is PRESENT — clearly visible, adding drama and artistic depth.
+    The stroke must NOT overlap with text areas.
+    TYPOGRAPHY: {GANCHO_PROMPT}
+    Left-aligned with generous margin (~80px from left edge).
+    Below the main element, in much smaller text (~40px), muted gray (#777788):
+    "{SUBTEXTO}"
+    BRAND DOT: Solid circle in warm terracotta orange (#D97758), approximately 20px diameter,
+    positioned upper-left corner (60px from top, 60px from left). The ONLY warm color.
+    MOOD: Apple keynote meets Japanese ink painting. Ultra-premium. Zero decorative elements
+    besides the brush stroke. No borders, no icons, no patterns, no stock imagery.
+
+  # ─── SLIDES CONTEÚDO (Slides 2 a N-1) ───
+  slide_conteudo: |
+    Create a premium minimalist social media post image, portrait orientation (4:5 ratio, 1080x1350px).
+    BACKGROUND: Pure solid black (#0A0A0F). No gradients, no texture.
+    VISUAL ELEMENT — DRY BRUSH STROKE: A single elegant dry brush stroke in dark gray (#2A2A36),
+    approximately 50-60% opacity, positioned in the LOWER HALF of the image (below the text zone).
+    Direction: {DIRECAO_TRACO}. Hand-painted, organic, Japanese sumi-e style.
+    The stroke must NEVER overlap with text. Text zone (upper 55%) stays clean.
+    TYPOGRAPHY (upper-left area, margin ~80px from left, starting ~120px from top):
+    {LINHAS_TEXTO}
+    Use white (#E8E8F0) for emphasis/bold lines, muted gray (#777788) for context lines.
+    Font: clean sans-serif (like SF Pro or Inter). Line spacing generous.
+    BRAND DOT: Small solid orange circle (#D97758), ~6px radius, upper-left corner (60px, 60px).
+    SLIDE NUMBER: "{NUM}/{TOTAL}" in very dim gray (#5A5A70), small (~18px), bottom-right corner.
+    MOOD: Apple keynote slide. Ultra-premium minimalism. The brush stroke adds depth
+    without competing with text. Zero other decorations.
+
+  # ─── SLIDE CTA (Slide Final) ───
+  slide_cta: |
+    Create a premium minimalist social media post image, portrait orientation (4:5 ratio, 1080x1350px).
+    BACKGROUND: Pure solid black (#0A0A0F). No gradients, no texture.
+    VISUAL ELEMENT — DRY BRUSH STROKE: A single elegant dry brush stroke in dark gray (#2A2A36),
+    approximately 50-60% opacity. A gentle arc in the lower third of the image.
+    Hand-painted, organic, Japanese sumi-e style. The stroke creates a visual "bed" for the signature.
+    TYPOGRAPHY (upper-left area, margin ~80px, starting ~180px from top):
+    {TEXTO_CTA}
+    Large bold white sans-serif (~64px). Each line a short declarative statement.
+    BRAND SIGNATURE (bottom-right, ~80% down):
+    Handwritten cursive signature "José Amorim" in off-white (#CCCCDD), elegant flowing script,
+    approximately 200px wide. Immediately after: solid orange dot (#D97758), ~3x period size.
+    The signature style must match the reference: thin, angular, personal — NOT rounded/formal.
+    BRAND DOT (navigator): Small solid orange circle (#D97758), ~6px radius, upper-left (60px, 60px).
+    SLIDE NUMBER: "{NUM}/{TOTAL}" in very dim gray (#5A5A70), small (~18px), bottom-right.
+    MOOD: The closing statement. Apple-level restraint. Brush stroke + signature + orange dot
+    form a cohesive brand language. The ONLY warm color is orange. Zero other decorations.
+
+# Prompt base para posts estáticos (F1) com Brand Signature:
+brand_signature_prompt_template: |
+  Pure black background (#0A0A0F), solid, no texture. Portrait 9:16.
+  DRY BRUSH STROKE: Single elegant stroke in dark gray (#2A2A36), 50-60% opacity,
+  {DIRECAO_TRACO}. Hand-painted, organic, sumi-e style. Must NOT overlap text.
+  TOP (upper 30%): Large bold white sans-serif headline, left-aligned.
+  "{HEADLINE}"
+  MIDDLE: vast empty black space.
+  LOWER (~68%): Smaller muted gray (#777788) text:
+  "{SUBTITULO}"
+  BRAND DOT: Solid orange circle (#D97758), ~20px, upper-left corner (60px, 60px).
+  BOTTOM RIGHT (~85%): Handwritten cursive signature "José Amorim" in off-white #CCCCDD,
+  elegant and fluid. Immediately after: solid orange dot (#D97758), ~3x period size.
+  The orange dot is the ONLY warm color. Apple meets sumi-e. Zero other decorations.
+
+# ============================================
+# SPECS POR PLATAFORMA (REFERÊNCIA TÉCNICA)
+# ============================================
+platform_specs_tecnico:
+  instagram:
+    post: "1080×1350px (4:5)"
+    carousel: "1080×1350px (4:5), 2-10 slides"
+    story: "1080×1920px (9:16)"
+    reel_cover: "1080×1920px (9:16)"
+    profile_pic: "320×320px (1:1)"
+    file_formats: "JPG, PNG (< 8MB por imagem)"
+    carousel_format: "Imagens individuais"
+
+  linkedin:
+    post_image: "1200×627px (1.91:1)"
+    post_square: "1080×1080px (1:1)"
+    document: "1080×1350px (PDF), max 300 páginas"
+    cover_image: "1584×396px"
+    profile_pic: "400×400px (1:1)"
+    file_formats: "JPG, PNG, PDF"
+
+  twitter_simulado:
+    nota: "Não postamos no X — simulamos visual Twitter dentro do IG"
+    card_bg: "#1e1e1e ou #192734"
+    card_border: "#333639"
+    avatar_size: "48×48px circular"
+    texto_font: "20-24px Inter"
+
+# ============================================
+# LINGUAGEM PREMIUM (v2 — 2026-02-01)
+# ============================================
+# Regras de linguagem que reforçam percepção de
+# "gênio e caro" em todo conteúdo orgânico.
+
+linguagem_premium:
+  tom: "Construtor que pensa em voz alta — CEO que opera E mostra o processo"
+  referencia: "Dan Koe construindo, não Naval filosofando. Mostra o pipeline, não apenas a conclusão."
+
+  # Palavras/frases OBRIGATÓRIAS (usar regularmente)
+  vocabulario_premium:
+    usar:
+      - "instalar" # (não "ensinar", "mostrar", "revelar")
+      - "sistema" # (não "método", "técnica", "hack")
+      - "operação" # (não "negócio online")
+      - "pipeline" # (não "processo")
+      - "time" # (referindo-se aos agentes IA)
+      - "arquitetura" # (não "estrutura")
+      - "implementar" # (não "aplicar")
+      - "margem" # (não "lucro")
+      - "enterprise" # (não "empresa")
+      - "recusei" # (escassez real)
+      - "instalei" # (done-for-you)
+
+  # Palavras/frases PROIBIDAS no conteúdo orgânico
+  vocabulario_proibido:
+    nunca_usar:
+      - "curso"
+      - "aula"
+      - "aprenda"
+      - "descubra"
+      - "revelado"
+      - "segredo"
+      - "método infalível"
+      - "renda extra"
+      - "trabalhe de casa"
+      - "ganhe dinheiro"
+      - "link na bio"
+      - "clique aqui"
+      - "não perca"
+      - "vagas limitadas"
+      - "promoção"
+      - "desconto"
+      - "grátis"
+      - "mentor"
+      - "coach"
+      - "professor"
+      - "aluno"
+      - "transformação"
+      - "jornada de sucesso"
+      - "mindset"
+      - "desbloqueie"
+    razao: "Termos de infoproduto de massa destroem percepção premium"
+
+  # Regras de conteúdo premium
+  regras_conteudo:
+    - "Nunca mencionar preço publicamente — quem pergunta no DM já tem permissão"
+    - "Nunca fazer tutorial passo-a-passo — ensinar = commodity, instalar = premium"
+    - "Nunca comparar com concorrentes — comparar = mesmo nível"
+    - "Mostrar o sistema rodando > prometer resultados"
+    - "Falar sobre o que recusou > falar sobre o que aceitou"
+    - "Confessar erros do sistema > fingir perfeição"
+    - "Usar linguagem de CEO (time, operação, pipeline) > linguagem de coach (jornada, transformação)"
+    - "Dados reais com fonte > opinião sem base"
+
+  # Como cada tipo de post reforça premium
+  percepcao_por_tipo:
+    genio:
+      descricao: "'Esse cara é um gênio'"
+      conteudo: "Bastidores do sistema funcionando, complexidade visível, decisões técnicas"
+      exemplo: "Meu CMO de IA reprovou 3 posts antes de aprovar esse"
+    caro:
+      descricao: "'Isso é caro'"
+      conteudo: "Resultados que justificam, nunca mencionar preço, mostrar escassez real"
+      exemplo: "Sistema gerou 3 posts enquanto eu tomava café. Quanto custaria 6 funcionários?"
+    necessario:
+      descricao: "'Eu preciso disso'"
+      conteudo: "Dor do profissional solo que trabalha 14h/dia, contraste antes/depois"
+      exemplo: "Você tem 6 funcionários ou trabalha por 6?"

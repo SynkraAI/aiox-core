@@ -1,0 +1,79 @@
+# Business Rule Template — Standard Format
+# Use this template for every extracted business rule
+
+rule:
+  id: "BR-{MODULE}-{SEQ}"          # e.g., BR-LOAN-001
+  name: "{Descriptive name}"
+  version: "1.0"
+  status: "extracted|validated|approved|deprecated"
+
+  # Classification
+  classification:
+    domain: "{business domain}"       # e.g., Lending, Claims, Billing
+    module: "{source module}"         # e.g., LOAN-APPROVAL, CLAIM-PROC
+    type: "definitional|behavioral|constraint|derivation|inference"
+    priority: "critical|high|medium|low"
+
+  # Rule Statement (RuleSpeak format)
+  statement:
+    natural_language: |
+      {Rule written in plain business language that non-technical
+      stakeholders can read and understand}
+    rulespeak: |
+      {Rule written in RuleSpeak structured natural language}
+      Example: "A loan application MUST be rejected
+      IF the applicant's credit score IS LESS THAN 620
+      AND the loan amount EXCEEDS 80% of the property value."
+
+  # Decision Model (von Halle format)
+  decision:
+    conclusion: "{What this rule determines}"
+    rule_family: "{Group of rules sharing this conclusion}"
+    conditions:
+      - name: "{condition_1}"
+        type: "numeric|categorical|boolean|date"
+        values: ["{possible values or ranges}"]
+      - name: "{condition_2}"
+        type: "numeric|categorical|boolean|date"
+        values: ["{possible values or ranges}"]
+    decision_table:
+      # Each row is a rule variant
+      rows:
+        - conditions: ["{val1}", "{val2}"]
+          conclusion: "{result}"
+        - conditions: ["{val1}", "{val2}"]
+          conclusion: "{result}"
+
+  # Source Traceability
+  traceability:
+    source_system: "{system name}"
+    source_file: "{file path or program name}"
+    source_lines: "{line range, e.g., 1250-1280}"
+    source_language: "COBOL|Java|C#|SQL|PL/SQL|ABAP|other"
+    extraction_method: "static_analysis|characterization_test|sme_interview|documentation"
+    extraction_date: "YYYY-MM-DD"
+    extracted_by: "{agent or person}"
+    confidence: "high|medium|low"
+    code_snippet: |
+      {Relevant code excerpt showing the rule implementation}
+
+  # Business Context
+  business_context:
+    motivation: "{Why this rule exists — business reason}"
+    owner: "{Business unit or role responsible}"
+    regulatory: "{Regulation reference if applicable}"
+    exceptions: "{Known exceptions to this rule}"
+    related_rules: ["BR-{MODULE}-{SEQ}"]
+
+  # Validation
+  validation:
+    sme_validated: false
+    sme_name: ""
+    validation_date: ""
+    notes: ""
+
+  # Metadata
+  metadata:
+    created: "YYYY-MM-DD"
+    updated: "YYYY-MM-DD"
+    tags: ["{tag1}", "{tag2}"]

@@ -1,0 +1,190 @@
+# Legacy Rule Extractor Squad Configuration
+# Version: 1.0.0
+# Created: 2026-03-09
+
+pack:
+  name: legacy-rule-extractor
+  title: "Legacy Rule Extractor — Code Archaeology for Business Rules"
+  version: "1.0.0"
+  author: luiz-fosc
+  description: >
+    Squad especializado em extrair, documentar e catalogar regras de negocio
+    de sistemas legados (COBOL, Java antigo, VB, PL/SQL, RPG, Natural/ADABAS,
+    Clipper, Delphi, etc). Analisa codigo-fonte, stored procedures, triggers,
+    e logica de negocio implicita para gerar documentacao padronizada, identificar
+    conflitos entre sistemas e preparar base de conhecimento para migracao
+    ou modernizacao.
+  slash_prefix: lre
+  pattern_prefix: LRE
+  category: code-analysis
+  icon: null
+  type: orchestrator
+  entry_agent: archaeologist
+
+tags:
+  - legacy
+  - business-rules
+  - code-analysis
+  - reverse-engineering
+  - modernization
+  - migration
+  - documentation
+  - cobol
+  - plsql
+  - java-legacy
+
+settings:
+  output:
+    location: configurable      # User defines output directory
+    default_dir: "rules-output" # Default subdirectory name
+    format: markdown            # Output format
+    overwrite: false
+  analysis:
+    max_file_size_mb: 50        # Skip files larger than this
+    supported_languages:
+      - cobol
+      - java
+      - vb6
+      - vbnet
+      - plsql
+      - tsql
+      - rpg
+      - natural
+      - clipper
+      - delphi
+      - pascal
+      - csharp
+      - cpp
+      - python
+      - abap
+      - fortran
+      - foxpro
+    depth_levels:
+      - surface    # Variable names, function signatures
+      - standard   # Control flow, conditionals, calculations
+      - deep       # Cross-reference, implicit rules, side effects
+  catalog:
+    classification_domains:
+      - financeiro
+      - tributario
+      - rh
+      - logistica
+      - comercial
+      - producao
+      - contabil
+      - juridico
+      - custom
+    severity_levels:
+      - critica       # Rule that breaks the system if wrong
+      - importante    # Rule that affects business outcomes
+      - informativa   # Rule that documents behavior
+    confidence_levels:
+      - alta          # Explicitly coded, clear intent
+      - media         # Inferred from logic, needs validation
+      - baixa         # Implicit, side-effect based, ambiguous
+  conflict_detection:
+    enabled: true
+    cross_system: true           # Compare rules across different systems
+    similarity_threshold: 0.75   # Cosine similarity for rule matching
+  batch:
+    max_concurrent: 3
+    skip_binary: true
+    skip_generated: true         # Skip auto-generated code
+
+activation:
+  slash_command: lre
+  aliases:
+    - legacy-rule-extractor
+    - rule-extractor
+    - legacy-rules
+  example_activation: "@archaeologist"
+
+agents:
+  orchestrator:
+    - archaeologist
+  specialists:
+    - cartographer
+    - decoder
+    - auditor
+
+workflows:
+  - id: wf-extract-single
+    name: "Single File Rule Extraction"
+    phases: 5
+    quality_gates: 1
+    duration: "1min - 15min"
+
+  - id: wf-extract-system
+    name: "Full System Extraction Pipeline"
+    phases: 8
+    quality_gates: 3
+    duration: "30min - 4h"
+
+  - id: wf-conflict-analysis
+    name: "Cross-System Conflict Analysis"
+    phases: 4
+    quality_gates: 1
+    duration: "15min - 1h"
+
+  - id: wf-catalog-generation
+    name: "Rule Catalog Generation"
+    phases: 3
+    quality_gates: 1
+    duration: "5min - 30min"
+
+tasks:
+  # Archaeologist tasks
+  - scan-codebase
+  - identify-rule-hotspots
+  - orchestrate-extraction
+  # Decoder tasks
+  - extract-rules-from-file
+  - parse-control-flow
+  - extract-calculations
+  - extract-validations
+  - extract-state-transitions
+  # Cartographer tasks
+  - classify-rule
+  - catalog-rules
+  - generate-rule-map
+  - generate-migration-brief
+  # Auditor tasks
+  - detect-conflicts
+  - detect-redundancies
+  - validate-extraction-quality
+  - generate-coverage-report
+
+quality_gates:
+  - id: QG-LRE-001
+    name: Extraction Completeness
+    type: blocking
+    checks:
+      - "All source files scanned"
+      - "Rule count > 0 per module"
+      - "Each rule has ID, description, source reference"
+      - "Confidence level assigned to every rule"
+      - "No orphan references (rule mentions code that wasn't analyzed)"
+
+  - id: QG-LRE-002
+    name: Catalog Consistency
+    type: blocking
+    checks:
+      - "All rules classified by domain"
+      - "No duplicate rule IDs"
+      - "Cross-references are bidirectional"
+      - "Severity assigned to every rule"
+      - "Rule catalog YAML validates against schema"
+
+  - id: QG-LRE-003
+    name: Conflict Report Quality
+    type: reporting
+    checks:
+      - "All conflicts have both source references"
+      - "Conflict type classified (contradiction, overlap, gap)"
+      - "Resolution recommendation present"
+      - "Impact assessment completed"
+
+dependencies:
+  squads: []
+  python_packages: []
+  system: []

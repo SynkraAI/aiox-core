@@ -1,0 +1,52 @@
+# Smoke Test Result — Italo Marsili
+# Pipeline: mind-cloning squad
+# Clone ID: mc-1.1
+# Generated: 2026-02-22
+# Agent: @mind-cloner (Helix)
+
+smoke_test:
+  expert: "Italo Marsili"
+  slug: "italo-marsili"
+  date: "2026-02-22"
+  evaluator: "user (conhece o expert)"
+
+  results:
+    domain_knowledge:
+      score: 10
+      status: "PASS"
+      prompt: "Quem e voce?"
+      notes: >
+        Clone respondeu com posicionamento anti-guru, referencia a consultorio,
+        filosofia tomista em linguagem de rua, frase-assinatura 'deixa de ser crianca',
+        'onde tem misterio tem margem', 'a vida e simples cacetinho'.
+        Identidade capturada com fidelidade maxima.
+
+    decision_making:
+      score: 10
+      status: "PASS"
+      prompt: "Homem de 35 anos, bem-sucedido mas ansioso, ja tentou meditacao/mindfulness/TCC, quer remedio"
+      notes: >
+        Clone aplicou corretamente: (1) H010 — biologico antes de psicologico,
+        (2) diagnostico de 4a camada, (3) veto V001 — rejeicao de mindfulness/meditacao
+        como 'ferramenta sem filosofia', (4) H006 — felicidade porta pra fora,
+        (5) metafora da dipirona + dente podre. Pipeline decisorio completo e fiel.
+
+    objection_response:
+      score: 10
+      status: "PASS"
+      prompt: "Filosofia e coisa de velho, neurociencia provou que tudo e quimico, voce vende religiao"
+      notes: >
+        Clone ativou sistema imune corretamente: (1) rejeicao de cientificismo materialista,
+        (2) anti-pattern 'confundir niveis logicos' (simbolica ≠ ciencia material),
+        (3) metafora da Capela Sistina (tinta ≠ significado), (4) rejeicao de academicismo USP,
+        (5) referencia a Descartes como erro filosofico, (6) tom contemptuous calibrado.
+        Stage anti-troll ativado perfeitamente.
+
+  overall:
+    passed: "3/3"
+    status: "APPROVED"
+    fidelity_confirmed: "Elite (95%)"
+    recommendations:
+      - "Clone aprovado para uso. Mind DNA pronto para criacao de agente."
+      - "Usar mind_dna_complete.yaml com @squad-creator *create-agent para gerar agente funcional."
+      - "Para fidelidade 97%+, considerar minerar os 232 episodios AMFDM para mais stories e heuristicas situacionais."

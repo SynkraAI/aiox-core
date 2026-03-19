@@ -1,0 +1,777 @@
+# Squad Blueprint: Value Equation Framework Executor
+# Extracted from: Hormozi Value Equation SOP
+# Version: 1.0
+# Date: 2026-02-10
+
+squad:
+  name: hormozi-value-equation
+  purpose: "Apply the Hormozi Value Equation to create Grand Slam Offers where perceived value is so superior to price that prospects would feel stupid saying no"
+  extracted_from: "value-equation-sop.md"
+
+  # Based on Hormozi's Value Equation philosophy
+  philosophy: |
+    "Valor = (Resultado dos Sonhos x Probabilidade Percebida) / (Atraso Temporal x Esforco)"
+
+    The best companies focus all their attention on the bottom of the equation.
+    Making things immediate, perfect, and effortless.
+    - Apple made iPhone effortless
+    - Amazon made buying one click
+    - Netflix made TV consumption immediate
+
+    "If you can make the bottom of the equation equal zero, you're golden."
+    Source: [Cap. 6, p.4]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIER STRUCTURE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+tier_structure:
+  orchestrator:
+    - value-architect
+    # Main coordinator for Value Equation application
+    # Routes to appropriate specialists based on phase
+
+  tier_0_discovery:
+    - dream-outcome-analyst
+    - problem-excavator
+    # Initial research to understand avatar and obstacles
+
+  tier_1_creation:
+    - solution-transformer
+    - delivery-vehicle-designer
+    - value-stacker
+    # Core creation of offer components
+
+  tier_2_optimization:
+    - perception-optimizer
+    - quick-win-engineer
+    # Optimize each variable in the equation
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENT DEFINITIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents:
+  value-architect:
+    role: "Orchestrator"
+    description: "Coordinates the entire Value Equation application process"
+    cognitive_type: "Judgment + Synthesis"
+    executor_type: "Hybrid"
+
+    responsibilities:
+      - "Route requests to appropriate tier agents"
+      - "Validate Value Equation balance across all variables"
+      - "Ensure all problems are being solved"
+      - "Approve final offer stack"
+
+    decision_rules:
+      - "DR-001: Focus on denominator - best companies reduce time and effort"
+      - "DR-004: Solve ALL problems - one missing can kill the sale"
+      - "DR-009: Keep low cost/high value items always (GOLD)"
+
+    handoffs:
+      - to: dream-outcome-analyst
+        when: "New offer creation starts"
+      - to: problem-excavator
+        when: "Dream outcome defined, need obstacles"
+      - to: value-stacker
+        when: "All solutions created, ready to package"
+
+    core_equation: |
+      VALOR = (Resultado dos Sonhos x Probabilidade Percebida)
+              ÷ (Atraso Temporal x Esforco e Sacrificio)
+
+      Source: [Cap. 6, p.2-3]
+
+  dream-outcome-analyst:
+    role: "Tier 0 - Discovery"
+    description: "Identifies and articulates the prospect's Dream Outcome connected to status"
+    cognitive_type: "Analysis + Empathy"
+    executor_type: "Agent"
+
+    inputs:
+      - "Target avatar description"
+      - "Market research data"
+      - "Competitor offerings"
+      - "Customer interviews/testimonials"
+
+    outputs:
+      - "Dream Outcome statement (one phrase)"
+      - "Status connection identified"
+      - "Underlying desires mapped"
+
+    framework:
+      universal_desires:
+        - "Ser percebidas como bonitas"
+        - "Ser respeitadas"
+        - "Ser percebidas como poderosas"
+        - "Ser amadas"
+        - "Aumentar seu status"
+      source: "[Cap. 6, p.7]"
+
+    rules:
+      - "Don't sell the flight, sell the vacation"
+      - "Connect outcome to status increase"
+      - "Frame in terms of how others will perceive them"
+      source: "[Cap. 9, p.2]"
+
+    example:
+      input: "People wanting fitness help"
+      output: "Perder 20 libras em 6 semanas"
+      analysis: "Dream outcome (lose 20lbs) + decreased time delay (6 weeks)"
+
+  problem-excavator:
+    role: "Tier 0 - Discovery"
+    description: "Systematically lists ALL obstacles prospects face in achieving the Dream Outcome"
+    cognitive_type: "Divergent Thinking"
+    executor_type: "Agent"
+
+    inputs:
+      - "Dream Outcome from dream-outcome-analyst"
+      - "Customer journey map"
+      - "Sales call recordings/transcripts"
+      - "Support tickets and complaints"
+
+    outputs:
+      - "Problem list organized by journey stage"
+      - "Problems categorized by 4 dimensions"
+      - "Minimum 30 problems (ideal 50+)"
+
+    four_dimensions:
+      - dimension: "Resultado dos Sonhos"
+        question: "Isso nao vai valer a pena financeiramente"
+        example: "E muito caro"
+
+      - dimension: "Probabilidade"
+        question: "Nao vai funcionar para mim especificamente"
+        example: "Ja tentei antes e nao funcionou"
+
+      - dimension: "Esforco e Sacrificio"
+        question: "Isso sera muito dificil, confuso"
+        example: "Nao vou gostar, vou ser ruim nisso"
+
+      - dimension: "Tempo"
+        question: "Isso vai levar muito tempo"
+        example: "Estou muito ocupado para fazer isso"
+
+    source: "[Cap. 9, p.4]"
+
+    target_count:
+      minimum: 30
+      ideal: 50
+      reasoning: "Quanto mais problemas voce pensar, mais problemas voce consegue resolver"
+      source: "[Cap. 9, p.5]"
+
+    example_output:
+      stage: "Comprar Comida Saudavel"
+      problems:
+        - "E dificil, confuso, e eu nao vou gostar"
+        - "Levara muito tempo"
+        - "E caro"
+        - "E insustentavel, minha familia atrapalhara"
+        - "Se eu viajar, nao saberei o que comprar"
+
+  solution-transformer:
+    role: "Tier 1 - Creation"
+    description: "Transforms each problem into a solution statement using inversion"
+    cognitive_type: "Inversion + Creativity"
+    executor_type: "Agent"
+
+    inputs:
+      - "Complete problem list from problem-excavator"
+
+    outputs:
+      - "Solution statement for each problem"
+      - "All problems matched with solutions"
+
+    transformation_formula: |
+      "Simplesmente adicionar 'como' e reverter o problema"
+      Source: [Cap. 9, p.5]
+
+    template: |
+      PROBLEMA: [Descrever o problema]
+      ↓
+      SOLUCAO: "Como [inverso do problema] mesmo se [objecao]"
+
+    examples:
+      - problem: "Comprar comida saudavel e dificil e confuso"
+        solution: "Como tornar a compra de comida saudavel facil e prazerosa, para que qualquer um possa faze-lo (especialmente maes ocupadas!)"
+
+      - problem: "Comprar comida saudavel leva muito tempo"
+        solution: "Como comprar comida saudavel rapidamente"
+
+      - problem: "Comprar comida saudavel e caro"
+        solution: "Como comprar comida saudavel por menos do que sua conta atual de supermercado"
+
+    critical_rule: |
+      "Voce resolvera TODOS os problemas."
+      Source: [Cap. 9, p.5]
+
+  delivery-vehicle-designer:
+    role: "Tier 1 - Creation"
+    description: "Designs multiple delivery vehicles for each solution using the Delivery Cube"
+    cognitive_type: "Creativity + Analysis"
+    executor_type: "Agent"
+
+    inputs:
+      - "Solution list from solution-transformer"
+
+    outputs:
+      - "3+ delivery vehicles per solution"
+      - "Vehicles categorized by cost and value"
+      - "10x/0.1x variations explored"
+
+    delivery_cube:
+      attention_level:
+        - "Um-a-um"
+        - "Pequeno grupo"
+        - "Um-para-muitos"
+
+      effort_level:
+        - name: "DIY (Do It Yourself)"
+          description: "descobrir sozinho"
+          price_multiplier: "1x"
+
+        - name: "DWY (Done With You)"
+          description: "voce ensina como fazer"
+          price_multiplier: "3-5x"
+
+        - name: "DFY (Done For You)"
+          description: "voce faz para eles"
+          price_multiplier: "10-30x"
+
+      delivery_medium:
+        - "Pessoalmente"
+        - "Telefone / Zoom"
+        - "Email / Texto / Chat"
+        - "Video (ao vivo ou gravado)"
+        - "Escrito"
+
+    source: "[Cap. 10, p.6-7]"
+
+    test_10x_01x: |
+      "Se meus clientes me pagassem 10x meu preco, o que eu forneceria?
+       Se eles me pagassem 1/10 do preco, como ainda geraria resultado?"
+      Source: [Cap. 10, p.7]
+
+    prioritize: |
+      "Se ha um tipo de veiculo de entrega no qual focar, e criar solucoes de
+      alto valor 'um-para-muitos'. Estas serao as que normalmente tem a maior
+      discrepancia entre custo e valor."
+      Source: [Cap. 10, p.9]
+
+  value-stacker:
+    role: "Tier 1 - Creation"
+    description: "Trims low-value items and stacks high-value items into named packages with specific values"
+    cognitive_type: "Judgment + Synthesis"
+    executor_type: "Hybrid"
+
+    inputs:
+      - "All delivery vehicles from delivery-vehicle-designer"
+      - "Cost data for each vehicle"
+
+    outputs:
+      - "Trimmed list (high-value only)"
+      - "Named packages with dollar values"
+      - "Final stack with total value and price"
+
+    decision_matrix:
+      high_cost_high_value: "MANTER (com preco premium)"
+      high_cost_low_value: "ELIMINAR PRIMEIRO"
+      low_cost_high_value: "OURO - MANTER SEMPRE"
+      low_cost_low_value: "ELIMINAR SEGUNDO"
+
+    source: "[Cap. 10, p.8]"
+
+    value_criteria: |
+      "Pergunte-se qual dessas coisas essa pessoa ira:
+       1. Valorizar financeiramente
+       2. Fazer acreditar que provavelmente tera sucesso
+       3. Fazer sentir que pode fazer com muito menos esforco
+       4. Ajuda-la a alcancar o objetivo com muito menos tempo"
+      Source: [Cap. 10, p.8]
+
+    package_template: |
+      [NOME SEXY DO PACOTE]
+      [Promessa especifica] (valor de $XXX)
+
+      Inclui:
+      1. [Item com nome especifico]
+      2. [Item com nome especifico]
+      3. [Item com nome especifico]
+
+    pricing_rule: "Preco final < 25% do valor total empilhado"
+
+    example_output:
+      packages:
+        - name: "Sistema Infalivel de Compras Economicas"
+          promise: "economizara centenas de dolares por mes na sua comida"
+          value: 1000
+          items:
+            - "Orientacao Nutricional 1-a-1"
+            - "Tour gravado pelo supermercado"
+            - "Calculadora DIY de Supermercado"
+            - "Lista de compras para cada semana"
+            - "Check-in via texto semanalmente"
+
+        - name: "Guia de Cozinha para Pais Ocupados Pronto em 5min"
+          promise: "como qualquer um pode comer saudavel mesmo sem tempo"
+          value: 600
+          items:
+            - "Instrucoes de Preparacao de Refeicoes"
+            - "Calculadora DIY de Preparacao"
+            - "Guia de lanches em menos de 5min"
+
+      total_value: 4351
+      price: 599
+      ratio: "7.3x"
+
+  perception-optimizer:
+    role: "Tier 2 - Optimization"
+    description: "Optimizes how each Value Equation variable is perceived by the prospect"
+    cognitive_type: "Psychology + Communication"
+    executor_type: "Agent"
+
+    inputs:
+      - "Final offer stack from value-stacker"
+      - "Current messaging/copy"
+
+    outputs:
+      - "Perception optimization for each variable"
+      - "Messaging recommendations"
+      - "Proof stack suggestions"
+
+    core_principle: |
+      "Percepcao e realidade. A Grand Slam Offer so se torna valiosa
+       uma vez que o prospect PERCEBE."
+      Source: [Cap. 6, p.5]
+
+    case_study_london_metro: |
+      "O maior aumento na satisfacao dos passageiros nunca foi de trens mais rapidos.
+       Foi de um simples mapa pontilhado que mostrava quando o proximo trem chegaria.
+       O mapa custou milhoes. Trens mais rapidos custam bilhoes."
+      Source: [Cap. 6, p.5-6]
+
+    optimization_by_variable:
+      dream_outcome:
+        strategy: "Frame in terms of status gained"
+        tactic: "Talk about how others will perceive their achievement"
+        example: "Os queixos dos seus amigos de golfe cairao quando virem sua bola voar 40 jardas alem das deles"
+        source: "[Cap. 6, p.9]"
+
+      perceived_likelihood:
+        strategy: "Stack proof and certainty"
+        tactics:
+          - "Social proof and testimonials"
+          - "Track record of results"
+          - "Strong guarantees (see Cap. 15)"
+          - "Third-party endorsements"
+          - "Case studies with specifics"
+        principle: "Pessoas pagam por certeza"
+        source: "[Cap. 6, p.10]"
+
+      time_delay:
+        strategy: "Communicate speed and quick wins"
+        tactics:
+          - "First win in 7 days or less"
+          - "Show progress milestones"
+          - "Deadline-driven results"
+        principle: "Rapido supera gratis"
+        source: "[Cap. 6, p.12]"
+
+      effort_sacrifice:
+        strategy: "Minimize perceived work required"
+        tactics:
+          - "Emphasize DFY components"
+          - "Show how easy it is"
+          - "Compare to harder alternatives"
+        example: "Fitness vs Lipoaspiracao comparison"
+        source: "[Cap. 6, p.13-14]"
+
+    psychological_vs_logical: |
+      "A maioria das pessoas tenta resolver problemas usando solucoes logicas.
+       Mas as solucoes logicas geralmente ja foram tentadas.
+       Foque em mudar a percepcao, nao apenas a realidade."
+      Source: [Cap. 6, p.6]
+
+  quick-win-engineer:
+    role: "Tier 2 - Optimization"
+    description: "Designs the quick win experience that happens within 7 days of purchase"
+    cognitive_type: "Design + Psychology"
+    executor_type: "Agent"
+
+    inputs:
+      - "Final offer from value-stacker"
+      - "Delivery timeline"
+      - "Onboarding process"
+
+    outputs:
+      - "Quick win milestone (first 7 days)"
+      - "Emotional win trigger"
+      - "Progress communication plan"
+
+    principle: |
+      "Sempre tente incorporar vitorias de curto prazo e imediatas para um cliente.
+       Eles so precisam saber que estao no caminho certo."
+      Source: [Cap. 6, p.11]
+
+    two_elements:
+      long_term: "O que eles compram (resultado dos sonhos)"
+      short_term: "O que os faz ficar (vitorias ao longo do caminho)"
+      insight: "A coisa que as pessoas compram e o valor de longo prazo. Mas a coisa que as faz ficar tempo suficiente para obte-lo e a experiencia de curto prazo."
+      source: "[Cap. 6, p.11]"
+
+    science: |
+      "Pessoas que experimentam uma vitoria cedo sao mais propensas a
+       continuar com algo do que aquelas que nao experimentam."
+      Source: [Cap. 6, p.12]
+
+    example:
+      context: "Gym Launch"
+      quick_win: "Fazer anuncios irem ao vivo e fechar primeira venda de $2.000 dentro dos primeiros 7 dias"
+      source: "[Cap. 6, p.11]"
+
+    design_checklist:
+      - "Win happens within 7 days maximum"
+      - "Win is emotionally significant"
+      - "Win reinforces decision to buy"
+      - "Win is visible/measurable to client"
+      - "Win creates momentum for next milestone"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXECUTOR MATRIX
+# ═══════════════════════════════════════════════════════════════════════════════
+
+executor_matrix:
+  - task: "Dream Outcome Analysis"
+    executor: "Agent"
+    guardrails: "Human validates status connection"
+    automation: "HIGH"
+
+  - task: "Problem Excavation"
+    executor: "Agent"
+    guardrails: "Human validates completeness (50+ target)"
+    automation: "HIGH"
+
+  - task: "Solution Transformation"
+    executor: "Agent"
+    guardrails: "Verify all problems have solutions"
+    automation: "HIGH"
+
+  - task: "Delivery Vehicle Design"
+    executor: "Agent"
+    guardrails: "Human selects final vehicles"
+    automation: "MEDIUM"
+
+  - task: "Value Stacking"
+    executor: "Hybrid"
+    guardrails: "Human approves pricing decision"
+    automation: "MEDIUM"
+
+  - task: "Perception Optimization"
+    executor: "Agent"
+    guardrails: "Human validates messaging"
+    automation: "MEDIUM"
+
+  - task: "Quick Win Design"
+    executor: "Hybrid"
+    guardrails: "Must achieve win in 7 days"
+    automation: "MEDIUM"
+
+  - task: "Final Offer Approval"
+    executor: "Human"
+    guardrails: "Value > 4x Price check"
+    automation: "NONE"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  QG-001:
+    name: "Dream Outcome Gate"
+    transition: "Start → Problem Excavation"
+    condition: "Dream Outcome connected to status increase"
+    type: "blocking"
+
+  QG-002:
+    name: "Problem Completeness Gate"
+    transition: "Excavation → Transformation"
+    condition: "Minimum 30 problems listed (ideal 50+)"
+    type: "blocking"
+
+  QG-003:
+    name: "All Problems Solved Gate"
+    transition: "Transformation → Vehicle Design"
+    condition: "Every problem has at least one solution"
+    type: "blocking"
+    source: "[Cap. 9, p.5]: 'Voce resolvera TODOS os problemas'"
+
+  QG-004:
+    name: "Vehicle Diversity Gate"
+    transition: "Design → Stacking"
+    condition: "3+ delivery vehicles per core solution"
+    type: "warning"
+
+  QG-005:
+    name: "Value Ratio Gate"
+    transition: "Stacking → Optimization"
+    condition: "Total Value > 4x Price"
+    type: "blocking"
+
+  QG-006:
+    name: "Quick Win Gate"
+    transition: "Before Launch"
+    condition: "First win achievable within 7 days"
+    type: "blocking"
+    source: "[Cap. 6, p.11]: 'primeira venda de $2.000 dentro dos primeiros sete dias'"
+
+  QG-007:
+    name: "Perception Check Gate"
+    transition: "Before Launch"
+    condition: "All 4 Value Equation variables optimized for perception"
+    type: "warning"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  create_grand_slam_offer:
+    trigger: "New offer creation requested"
+    steps:
+      - agent: "dream-outcome-analyst"
+        action: "Define Dream Outcome connected to status"
+        gate: "QG-001"
+
+      - agent: "problem-excavator"
+        action: "List 50+ problems across 4 dimensions"
+        gate: "QG-002"
+
+      - agent: "solution-transformer"
+        action: "Transform all problems into solutions"
+        gate: "QG-003"
+
+      - agent: "delivery-vehicle-designer"
+        action: "Create 3+ vehicles per solution using Delivery Cube"
+        gate: "QG-004"
+
+      - agent: "value-stacker"
+        action: "Trim and stack into named packages"
+        gate: "QG-005"
+
+      - agent: "quick-win-engineer"
+        action: "Design first 7-day win"
+        gate: "QG-006"
+
+      - agent: "perception-optimizer"
+        action: "Optimize perception of all 4 variables"
+        gate: "QG-007"
+
+      - agent: "value-architect"
+        action: "Final approval and launch"
+
+  optimize_existing_offer:
+    trigger: "Conversion rate below target OR churn above target"
+    steps:
+      - agent: "value-architect"
+        action: "Diagnose which Value Equation variable is weak"
+
+      - agent: "problem-excavator"
+        action: "Check if any new problems exist"
+        condition: "If new objections identified"
+
+      - agent: "perception-optimizer"
+        action: "Optimize weak variable perception"
+
+      - agent: "quick-win-engineer"
+        action: "Verify quick win is happening"
+        condition: "If churn is the issue"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VALUE EQUATION FORMULAS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+value_equation:
+  formula: |
+    VALOR = (Resultado dos Sonhos x Probabilidade Percebida)
+            ÷ (Atraso Temporal x Esforco e Sacrificio)
+
+  optimization_goals:
+    numerator:
+      dream_outcome: "AUMENTAR - conectar a status"
+      perceived_likelihood: "AUMENTAR - provas, garantias, historico"
+
+    denominator:
+      time_delay: "DIMINUIR - vitorias rapidas, resultados imediatos"
+      effort_sacrifice: "DIMINUIR - DFY > DWY > DIY"
+
+  infinite_value_condition: |
+    "Se atraso temporal = 0 E esforco = 0, valor = infinito"
+    Source: [Cap. 6, p.4]
+
+  ideal_example: |
+    "Imagine clicar no botao de compra em um produto para perda de peso
+     e instantaneamente ver seu estomago se transformar em um tanquinho."
+    Source: [Cap. 6, p.4]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMPARISON EXAMPLES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+comparison_examples:
+  meditation_vs_xanax:
+    dream_outcome: "Relaxamento, Diminuicao da Ansiedade, Bem-estar"
+    meditation:
+      dream_outcome: 1
+      likelihood: 0  # "Baixa, requer pratica"
+      time_delay: 0  # "Leva semanas/meses"
+      effort: 0      # "Alto, pratica diaria"
+      total: "1/4"
+    xanax:
+      dream_outcome: 1
+      likelihood: 1  # "Alta, funciona para maioria"
+      time_delay: 1  # "Funciona em 30 minutos"
+      effort: 1      # "Baixo, apenas engolir pilula"
+      total: "4/4"
+    insight: "E por isso que Xanax e multibilionario"
+    source: "[Cap. 6, p.16-17]"
+
+  supplements_vs_gyms:
+    dream_outcome: "Ser saudavel, perder peso"
+    supplements:
+      market_size: "$123B"
+      effort: "Tomar pilula = rapido e facil"
+    gyms:
+      market_size: "$62B"
+      effort: "Treinar = lento e dificil"
+    source: "[Cap. 6, p.18]"
+
+  fitness_vs_liposuction:
+    dream_outcome: "Parecer bem"
+    fitness:
+      effort: "Alto (exercicio diario, prep refeicoes)"
+      sacrifice: "Alto (tempo, alimentos favoritos)"
+      time_delay: "12-24 meses"
+      typical_price: "$100/mes"
+    liposuction:
+      effort: "Baixo (aparecer para cirurgia)"
+      sacrifice: "Baixo (dias de recuperacao)"
+      time_delay: "Uma tarde"
+      typical_price: "$25.000"
+    source: "[Cap. 6, p.13-14]"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIMING & CADENCE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+timing:
+  full_offer_creation:
+    duration: "30 days"
+    phases:
+      - name: "Foundation"
+        days: "1-7"
+        tasks:
+          - "Dream Outcome definition"
+          - "Problem excavation (50+)"
+
+      - name: "Creation"
+        days: "8-14"
+        tasks:
+          - "Solution transformation"
+          - "Delivery vehicle design"
+
+      - name: "Optimization"
+        days: "15-21"
+        tasks:
+          - "Value stacking"
+          - "Quick win engineering"
+
+      - name: "Launch Prep"
+        days: "22-30"
+        tasks:
+          - "Perception optimization"
+          - "Final approval"
+
+  quick_win_timing:
+    first_win: "Within 7 days"
+    source: "[Cap. 6, p.11]"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METRICS & KPIs
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metrics:
+  primary:
+    - name: "Value-to-Price Ratio"
+      formula: "Total Stack Value / Price"
+      target: "> 4x (ideal 7x+)"
+
+    - name: "Problems Resolved"
+      formula: "Solutions / Total Problems"
+      target: "100%"
+
+    - name: "Quick Win Achievement"
+      formula: "Clients achieving first win / Total clients"
+      target: "> 90%"
+
+  secondary:
+    - name: "Conversion Rate"
+      target: "2.5x industry average"
+      source: "[Framework Doc, p.5]"
+
+    - name: "Offer Incomparability"
+      test: "Can prospect compare to competitor?"
+      target: "No comparison possible"
+
+    - name: "Prospect Reaction"
+      test: "Do they think 'Tudo isso, por apenas isso?'"
+      target: "Yes"
+      source: "[Cap. 10, p.1]"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DEPENDENCIES & INTEGRATIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+dependencies:
+  sops:
+    - "value-equation-sop.md"
+    - "pricing-framework-sop.md"
+
+  data_sources:
+    - "Customer interviews and surveys"
+    - "Sales call recordings"
+    - "Support tickets"
+    - "Competitor analysis"
+
+  templates:
+    - "Problem excavation worksheet"
+    - "Solution transformation template"
+    - "Delivery Cube matrix"
+    - "Value stack calculator"
+
+integrations:
+  pricing_squad: "For final price determination"
+  guarantee_framework: "For perceived likelihood optimization"
+  scarcity_urgency: "For time delay optimization"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GAPS & FUTURE IMPROVEMENTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+gaps_resolved:
+  - "Problem excavation systematized (4 dimensions)"
+  - "Delivery Cube framework documented"
+  - "Value stacking matrix defined"
+  - "Quick win requirement (7 days) established"
+  - "Perception vs Reality principle captured"
+
+future_improvements:
+  - "Automated problem extraction from sales calls"
+  - "AI-assisted solution brainstorming"
+  - "Dynamic value calculator integration"
+  - "Competitor value equation benchmarking"
+  - "A/B testing framework for perception optimization"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

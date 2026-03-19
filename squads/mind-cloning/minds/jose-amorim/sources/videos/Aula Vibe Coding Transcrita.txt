@@ -1,0 +1,2814 @@
+﻿0:00
+deixa o computador beleza show Boa tarde galera
+0:07
+tudo bom seguinte hoje eh eu vou compartilhar com vocês um pouquinho aí do que a gente tem quer dizer eu tenho
+0:13
+feito aqui de interface com inteligência artificial Se vocês quiser liberar a
+0:20
+câmera pode ficar tranquilo liberar o áudio A ideia é que não seja uma aula é
+0:25
+uma imersão então é uma troca de conhecimento aqui eh não é algo oficial da formação ainda vou fazer um curso bem
+0:32
+elaborado bem organizadinho beleza para todo mundo ficar conseguir seguir numa
+0:37
+boa mas deixa eu logo apresentar as minhas certificações eu não sou Dev não
+0:44
+sou desenvolvedor eu sou nexialista eu entendo de tudo um pouco e Vou juntando as coisas para criar resultado então
+0:52
+assim se você é nexialista Ou se você deve estar assistindo esse conteúdo
+0:57
+gravado Talvez eu fale algumas coisas que não são tão técnicas mas a ideia é
+1:02
+que a gente aprenda aqui o feijão com arroz o básico do básico para poder ter uma base do que que a gente vai fazer
+1:08
+então eu gosto muito de simplificar as coisas para poder construir então eu vou construir a gente
+1:14
+vai aprender do zero do zero eu vou vou considerar que a gente não sabe nada mesmo que a gente já saiba alguma coisa
+1:21
+tá só para garantir que as pessoas mais Humildes poderão entender também deixa
+1:28
+eu só mandar aqui tem o professor de inglês da formação ele quer participar ele ele ele fala português também deixa
+1:36
+eu colocar ele aqui ele quer participar que ele quer aprender também ele tá entrando agora
+1:42
+nessa era da ia nome dele é Gabriel
+1:49
+Born já já já ele chega por aí Ah chegou por aí o Cleiton também né
+1:56
+bem-vindo Cleiton seja bem-vindo irmão podem mandar os fons aí que eu vou
+2:01
+vou aprovando compartilhar minha tela com vocês todo mundo tá conseguindo ver a
+2:08
+tela tá cheio das dos troços
+2:13
+aqui estão vendo a a tela tá aparecendo aí [Música]
+2:20
+né para alguém não tá aparecendo tá tudo tranquilo Olha Fran tá aí nossa nossa VP
+2:29
+E aí Fran buenas Boa tarde vamos lá então gente
+2:38
+vamos lá vou começar então aqui falando primeiro o que que nós seremos após essa aula nós seremos desenvolvedores Duck
+2:45
+stack o que que é um desenvolvedor duc stack existe o desenvolvedor F stack eu
+2:51
+não sabia o que que era isso eu descobri semana passada eu sempre ouvi falar mas desenvolvedor Du é vou explicar minha
+2:58
+teoria aqui o desenvolvedor F stack é o desenvolvedor que faz tudo né ele sabe
+3:04
+parte de front end backend então ele faz essas paradas todas eu confesso que eu não sabia nada nem que que era frontend
+3:10
+eu demorei um pouco para entender mas agora as peças se encaixaram E aí eu
+3:15
+desenvolvi pra gente essa linguagem que é o desenvolvedor Du xtec que é o pato né o Duck de pato que ele faz tudo mas
+3:23
+ao mesmo tempo ele não se aprofunda tanto mas ele sabe o suficiente ele nada
+3:28
+ele anda e ele voa que é o que a gente vai fazer aqui tá então a ideia não é
+3:34
+sermos Mega especialistas substituir todos os deves com as nossas viais não A ideia é a gente conseguir desenvolver
+3:40
+coisas pro nosso dia a dia mesmo sabendo muito pouco sobre desenvolvimento então A ideia é sermos desenvolvedores Dux
+3:47
+Tech né A gente trabalha muito essa metáfora do Pato Então a gente vai aprender um pouquinho do todo que que a
+3:54
+gente vai fazer a gente vai aprender frontend backend e lógica Traduzindo pra
+4:02
+minha linguagem porque eu particularmente me explicava eu nunca entendia o que que era front end backend
+4:07
+back todos os Ends da vida aí frontend é como se fosse a construção de uma casa
+4:13
+Então imagina que a construção dos cômodos dos tijolos botar o cimento tudo
+4:18
+ali é o que a gente vê é o front end né o backend é a interligação do sistema
+4:25
+elétrico com poste externo então a gente constrói a casa todinha pinta ficar
+4:30
+bacana só que se a gente morar na casa não vai ter nada para utilizar dentro da casa então tem que ligar o encanamento
+4:36
+da casa com a rede de tubulação da empresa que faz fornecimento tem que ligar a rede elétrica da casa com a
+4:44
+distribuição da empresa que fornece energia então o backend é essa
+4:49
+interligação da casa com o mundo externo e a lógica é a construção do disjuntor
+4:55
+por exemplo dessa casa para contar a energia saber quanto a gente consome que é o o a ligação do todo né eu separei
+5:03
+aqui e vou mandar para vocês o link eu sou muito visual então eu não consigo
+5:09
+aprender as coisas se eu não não visualizar eu desenvolvi isso aqui ó vou mandar o link para vocês no chat também
+5:15
+terem acesso ah cadê Aqui o
+5:23
+chat eu só tenho um monitor então se eu não ler as mensagens
+5:29
+vocês me perdoem aí mas eu sei que vocês estão falando alguma coisa aí e quer programar bacana imagina que tá fazendo
+5:35
+miojo boa então vamos lá é o seguinte vamos começar pela pela lógica
+5:43
+de uma construção de uma casa tá eh a construção de um desenvolvedor full
+5:50
+stack ela tem três estágios Tem a parte da construção da casa tem a parte da
+5:56
+pintura da casa e tem a parte da ligação da casa com o todo a parte de frontend tem três linguagens
+6:04
+praticamente as principais HTML CSS e JavaScript [ __ ] Agora complicou as
+6:10
+coisas aí eu já não tô entendendo mais nada eu fiquei assim demorei muito tempo
+6:16
+para entender como isso se conversa mas eu fiz isso daqui que para mim ficou muito fácil o HTML é uma linguagem que é
+6:24
+como se a gente fizesse a parte da construção da casa os tijolos as par os
+6:30
+cômodos a gente monta a estrutura da casa sem nada só no reboco mesmo nem
+6:35
+pinta então fiz aqui a minha casinha no visual aparece a casinha lá com as
+6:41
+paredes com toda a estrutura dela na estrutura visual do projeto né Na parte
+6:47
+de de código mesmo de programação começa a surgir pastas com esses nomes aqui ponto env Git P Jon vai surgir isso
+6:57
+daqui ainda hoje vocês vão ver que isso aqui vai surgir Mas a gente não vai construir nenhuma dessas pastas na mão
+7:02
+no dedo elas vão se construir com ia nosso último nível vai ser essa construção aqui então HTML é aquele
+7:10
+código eh que tem bem parecido com XML aquele código que tem o menor e o maior
+7:15
+então é construído com base nisso uma estrutura de uma página só que é aquele negócio bem brusco é uma casa sem
+7:22
+rebocos só só o reboco sem tinta sem nada é só a casa mesmo no duro a ling
+7:29
+agem em C ss é a pintura da casa então quando a gente começa a escolher a cor a
+7:36
+colocar um papel de parede quando a gente começa a estilizar a casa é a linguagem
+7:42
+CSS então quando a gente adiciona o CSS no nosso código a gente começa a dar
+7:49
+design né dar a cor dar o brilho um botão mais bonitinho mais brilhoso
+7:55
+deixar o negocinho mais fru fru né mais estiloso mais bonito estética ente visualmente E aí entra o JavaScript o
+8:03
+JavaScript ele faz o quê ele une toda a construção com algum tipo de lógica
+8:10
+Então imagina que na nossa casa a gente construiu a parte da estética toda a
+8:15
+gente construiu as paredes só que a gente precisa interligar toda a rede
+8:20
+elétrica dela para que ela quando a gente apertar um botão aconteça algo Então essa é a linguagem do JavaScript o
+8:27
+JavaScript É a lógica por trás de você apertar um interruptor de energia e ele ligar a luz inclusive até coloquei aqui
+8:34
+o botão de ligar a luz Nossa minha casa ficou maravilhosa aquela casinha bem de quinta série mesmo eu tentei fazer
+8:40
+melhor mas eu fiz andé agora isso daqui eu não tive nem tempo de estudar Direito foi bem corrido mas essa é a estrutura
+8:47
+de frontend tá só que a gente vai treinar junto isso construir passo a
+8:55
+passo para poder ficar fácil para todo mundo eu quero que todo mundo consiga fazer junto não é uma uma aula uma uma
+9:01
+imersão teórica tá a gente vai fazer junto quero saber o seguinte Vocês estão
+9:06
+entendendo até aqui tá muito complexo como é que tá o negócio Quais são as dúvidas até então pode liberar o
+9:14
+microfone e perguntar que aí eu a gente já vai refinando
+9:19
+juntos cara até momento suave tudo certo tá tudo certo alguém alguém mais tá
+9:27
+conseguindo seguir tranquilo Então vamos seguir bom então estudamos
+9:35
+Aqui Esta parte aqui frontend construção da casa backend é interligação Tecnicamente eu expliquei aqui para
+9:42
+vocês né o HTML os tijolos da casa os cômodos CSS a pintura papel de parede
+9:48
+estilização JavaScript interligação da rede elétrica interna Encarnação sensores Mas é por que você tá ensinando
+9:54
+isso aqui agora logo de cara assim eu nem entendo HTML CSS JavaScript Eu também não
+9:59
+só que fez muita falta quando eu fui aprendendo a ao longo do tempo não saber
+10:06
+isso daqui porque você vai ver um monte de código a gente vai dar um Prom vai escrever um monte de código você vai
+10:11
+ficar aqui já acho é isso que tá sendo criado Não sei então é bom já a gente saber o que que tá sendo criado para
+10:17
+poder ter um um uma base e saber o que que tá certo o que que tá errado porque nem sempre a ia constrói certo o código
+10:23
+vamos lá então primeira primeira coisa que a gente vai fazer quem tem o cloud
+10:29
+aí aí já quem tem o cloud todo mundo tem o
+10:38
+cloud que tem instalado não só acessar mesmo acessar
+10:44
+no o cloud vocês já tem o cloud quem não tem o cloud Vamos lá fazer a a inscrição
+10:51
+junto então clode pai vocês vão digitar aí a
+10:56
+gente vai conseguir utilizar ele de graça tá não precisa pagar vai digitar cloud. vou até logar em outra em outro
+11:04
+e-mail meu pra gente construir junto a gente só vai seguir quando vocês
+11:09
+vocês que não tem o cloud ainda fazer a inscrição tá vocês vão digitar aqui cloud. vai aqui pro login e aí eu como
+11:17
+já tenho o Google vou apertar em continuar com o Google e vou logar numa outra conta minha
+11:26
+aqui pode ser essa daqui mesmo que já tava não c aqui não
+11:34
+ah
+11:42
+aqui quema que não tiver o cloud instala junto o que que ele vai fazer ele vai
+11:49
+pedir um número para você confirmar que você é uma pessoa né antigamente quem é
+11:56
+das antigas sabe que pro Brasil não tava liberado então a gente tinha que colocar aqui um número de fora não Deus nos
+12:01
+acuda vocês podem colocar o o número de vocês mesmo tá o número de celular do
+12:07
+DDD local do Brasil e aí quando você aplicar apertar aqui ele vai mandar um código pro celular é um um SMS às vezes
+12:16
+demora aí um minutinho Ó o meu já chegou aqui tá então eu vou colocar aqui
+12:24
+991 955 E aí ele vai dar uma tela de
+12:30
+bem-vindo e tudo mais vai perguntar seu nome colocar aqui ó lendário da
+12:39
+i só a apertando em continue e continue Li tudo concorda com tudo ele vai roubar
+12:44
+todos os dados e quando tiver nessa tela aqui a gente já tá pronto para
+12:50
+começar deixa eu ver aqui nas mensagens tenho Sim tenho sim pago a gente vai usar a ele gratuito
+12:59
+Inclusive eu vou até nessa nessa conta gratuita aqui pra gente pras pessoas que não tem o cloud conseguir utilizar o
+13:05
+cloud alguém não ainda não conseguiu o cloud Só Para eu esperar para não a
+13:11
+gente não ir sem cleon conseguiu acho que só o Cleiton que precisava
+13:20
+instalar Fala gabes Gabriel Gabriel bor é o nosso professor de inglês
+13:36
+listening acho que ele tá
+13:41
+mutado G eu não tô te ouvindo mas daqui a pouco
+13:48
+a gente gente libera teu áudio aí Ah ele digitou a Valeu estamos junto estamos juntos esquenta não esquenta
+13:57
+não ok
+14:12
+aí galera vocês conseguiram né Vamos lá então o
+14:19
+Gabriel pelo celular mas não tem problema não depois quando você tiver no PC
+14:25
+você então exp para vocês o porquê a gente
+14:30
+vai passar pro nível um onde a gente vai construir essa interface visual no Cloud que através do artfacts que é o nível
+14:38
+Pat donal depois a gente vai pro v0 também gratuito tá a gente vai construir
+14:44
+no v0 não só o front end mas o backend também que a gente já vai pro nível de Super Patos e aí por último a gente vai
+14:52
+pro Bolt que ele constrói front end backend mas ele faz uma construção real você consegue comercializar mesmo o que
+14:59
+você vai construir é uma construção muito boa e a gente cede o código para
+15:04
+você utilizar que aí é o nível de ati Patinhas né que aí meu amiga é o money que é o que o pessoal tem construído os
+15:11
+T dos SAS vamos lá pro artifact clouds eu vou mandar para vocês aqui na
+15:17
+mensagem uma listinha do que que a gente vai construir Serão três fases tá a
+15:22
+gente vai fazer um to list básico apenas para adicionista
+15:29
+então vocês podem copiar isso daqui ó P deixa eu fechar esse nhn aqui que
+15:34
+ele tá abrindo toda hora então o que que a gente vai fazer aqui pedir para ele o
+15:39
+seguinte Construa um artifact de pode dar Control V no que eu mandei
+15:47
+que ele vai começar a construção quando você pede um artifact automaticamente o CL Ele ativa a janela de construção dele
+15:55
+de interface visual se a se APAR enter ele vai começar aí a montar eu acho né Ah tá eu
+16:02
+nunca usei o faz tempo que eu não uso a a versão free dele pelo amor de deus eu me esqueci de testar isso aí vai que
+16:08
+vocês não TM o pago né Aí passa Vergonha aqui se der se aparecer isso e der certo
+16:14
+vai falando no chat Zé apareceu aqui você vai digitar Construa um
+16:21
+artifact de to list básico apenas para adicionar e listar apareceu Vitor
+16:28
+consegui show Quem mais vai falando aí para para
+16:34
+que a gente possa est na mesma
+16:45
+linha é em Python aqui
+16:51
+Cleiton no caso a gente a gente só vai por enquanto no Cloud trabalhar a
+16:58
+linguagem natural só mesmo prompt tá a gente vai dar nossa linguagem de gente e o cloud vai transformar isso pra
+17:04
+linguagem de máquina dele aqui ele construiu e aqui em HTML né como a gente
+17:11
+falou só o HTML Zão cru e alguns componentes Mas a gente não
+17:18
+vai se ater Tanto à parte de de de código em si tá a gente vai o objetivo é
+17:23
+que eu faça que com que vocês tenham a capacidade de construir aplicativos web Inter sem precisar saber código então a
+17:31
+gente vai dar o prompt e ele vai gerar um vai gerar uma interface então aqui a
+17:36
+gente tem uma lista simples né fazer as compras aí se a gente apertar o botão
+17:42
+ele vai aparecer aqui ó fazer as compras ganhar dinheiro clicar aqui ó ganhar
+17:47
+dinheiro vai aparecer aqui então recapitulando O que que a gente a gente
+17:52
+estudou em relação à estruturas a parte de construção das Linhas das
+17:59
+dos Campos tudo isso daqui é HTML que é a a parte bruta mesmo do negócio né
+18:07
+Essas cores essa estilização né o branco com o cinza mais claro o preto é o que a
+18:13
+gente chama de CSS e quando a gente coloca aqui ó eh lavar roupa por exemplo
+18:21
+e clica no botão essa função de fazer algo que tá aqui em cima vi pra lista é
+18:27
+quem faz é o JavaScript Então a gente tem aqui a interação da interface visual
+18:34
+dessas três linguagens não vou meter muito Aos aos detalhes Mas aqui tem a a
+18:39
+a a estrutura delas como eu falei tem o HTML tem aqui acho que tudo tá HTML como
+18:46
+eu não conheço muito de código falando para vocês né aqui eu sei que tá a lógica né Eu acho que isso aqui é o JavaScript eu eu sou sou pulsador mas
+18:54
+basicamente tá construído aqui algo bem simples dúvidas vocês conseguiram fazer
+19:00
+aí consegui Beleza agora a gente vai fazer o o dois que eu mandei lá tá que é
+19:08
+um tul list com tudo do um e a marcação de conclusão e remoção então eu posso
+19:15
+dizer para ele faça agora e dou control V tiul com tudo do um que ele vai
+19:21
+entender que é tudo que a gente acabou de fazer e marcação de conclusão e remoção pode dar enter que ele vai
+19:29
+refazer o código ó ele tá refazendo o código se
+19:34
+alguém me disser aí Zé Python isso daí beleza eu realmente eu não sei absolutamente nada de programação eu só
+19:41
+sei assim bater o olho e saber onde Talvez esteja errado ou não mas eu não sei construir o
+19:48
+processo ó aí ele me falou aqui ó atualizei aí o tud list com várias melhorias funcionalidades checkbox tal
+19:57
+vou testar aqui o meu fazer compras ó percebe que agora não é só uma
+20:04
+lista sem nada tem aqui a o botãozinho de lixeirinha que se eu apertar ele
+20:10
+exclui tem aqui o botão de checklist que se eu apertar ele dá como concluída e
+20:16
+assim não sabemos nada de como isso foi construído mas foi construído com linguagem natural aqui prompte
+20:23
+transformando né colocar mais algumas coisas aqui eh lavar o carro que eu preciso o carro então
+20:31
+aí tá funcional aqui para mim tá funcional para alguém deu erro todo mundo tá
+20:37
+conseguindo a hora que vocês não conseguirem vocês Falé deu errado aqui deu ruim cara não
+20:43
+consegui Felipe boa Felipe aqui ele não tá funcional pedi para revisar que que
+20:49
+deu no teu ó o seu que que aconteceu no teu deu erro
+20:55
+vermelho vamos simular aqui que ele não funcionou o alu fez fez Bacana aqui não
+21:02
+apareceu a interface Ricardo fazer o seguinte Cadê eu tô
+21:10
+aqui Deixa eu procurar o Ricardo aqui na
+21:21
+participation que
+21:28
+que que aconteceu no seu aí Ricardo Fala aí coloquei o código mas não apareceu os
+21:36
+comandos o código em Python mas não apareceu eh app Pronto né que é interface web ali vê se ele não tá nesse
+21:44
+botão bem aqui ó às vezes ele fica no botão code e não não tem o botão preview ou
+21:50
+ele escreveu dentro da dentro da janela dele aqui do lado esquerdo
+21:59
+ele ele fez o código aqui em não ele fez na janela do lado direito
+22:06
+aham não tem o preview não tem o preview qual qual qual
+22:13
+navegador que você tá compartilhar a tela dá Vou já colocar para você compartilhar a tela aqui que eu vou te
+22:22
+ajudar opões de compartilhamento vários
+22:27
+participantes vê se você consegue participar
+22:43
+compartilhar conseguiu Ricardo aqui achei aqui achei tua tela aqui agora foi foi agora foi fala para ele assim ó eu
+22:51
+quero isso num ar effect eu quero isso
+23:01
+num artf isso é pode ser ele vai entender
+23:08
+pode pode dar enter aí bora acompanhar aqui se Dudu Ricardo vai aparecer Talvez
+23:15
+para quem tá assistindo gravado não vai aparecer a tela do Ricardo porque o zoom ele tá com algumas restrições Mas de
+23:22
+qualquer forma eu tô gravando duas vezes aqui ó agora apareceu o que que acontece aí no caso do Ricardo e até vou explicar
+23:29
+para vocês o cloud ele tá sendo o motor de construção de código de praticamente
+23:34
+todas as interfaces todas as IAG de interface visual E aí às vezes ele não entende que é para construir na janela
+23:40
+dele o artifact aí ele só cria o código mesmo então quando vocês forem pedir
+23:46
+algo que vocês querem que ele crie visualmente sempre bota a palavra artifact que aí ele entende que é para
+23:51
+ele criar beleza alguém com esse problema Gabriel conseguiu solucionar
+23:57
+né está criando em HTML mesmo ah Valeu Alê obrigado viu
+24:03
+principalmente tudo certo então vamos seguir deu certinho né faz o outro lá
+24:09
+agora aproveitar aqui que o Ricardo faz o o segundo nível lá Ricardo para
+24:15
+adicionar excluir e dar o check pode vir lá no na nossa mensagem do
+24:22
+zoom eu sei o que vai ter só você tentar com
+24:29
+beleza Vamos ver aí a construção agora do dessa atualização do
+24:54
+Ricardo finalizando fechou beleza testa aí pra gente Coloca aí umas tarefas para
+24:59
+ver se vai aparecer o excluir se vai
+25:06
+adicionar é bom que eu já vou saber o que que vocês precisam fazer hoje aí não
+25:15
+fizeram boa apareceu tá aí ó clica em excluir fechou boa R deu certo Vamos
+25:21
+seguir então acho que todo mundo tá conseguindo acompanhar aí né Eh o que que acontece em relação à limitação do
+25:27
+Cloud eu já vou falar para para vocês vocês percebem aqui que ele que ele nesse nível dois ele já fez um código
+25:32
+maior ele tem uma limitação de 300 linhas de código então vai chegar o momento que a gente não vai construir
+25:39
+conseguir mais construir algo nele Vamos pro nível três então eu coloquei aqui na na mensagem o nível três tá então o
+25:48
+Ricardo aí fez o nível dois agora a gente vai só dar o cont Crol V aqui ó T list com tudo do
+25:56
+dois isso é comparação de categorias vou mandar só isso bora ver se ele vai
+26:01
+entender ele geralmente ele tem uma janela de contexto boa né então ele tende a entender que eu quero isso n ele
+26:07
+vai ele vai construir então vocês só fazem copiar a mensagem que eu mandei que tem a os três níveis um tiul com
+26:14
+tudo do dois separado por categoria E agora vamos aguardar a
+26:21
+construção dele aqui
+26:28
+Oi José entrei depois poderia enviar novamente a mensagem no chat Opa Claro envio
+26:35
+sim você tem Cloud o cloud eu tenho conta mas não tenho o
+26:42
+pago não o gratuito mesmo ele ele dá conta no gratuito ó para mim aqui ele escreveu o
+26:49
+código c o preview Beleza vou testar aqui se se teve de não conseguir fazer o
+26:56
+login O meu fica só carregando carregando uma tela branca aí não vai carregando deixa eu ver a tua tela aí
+27:02
+Ixe eu tô no no notebook Tô pelo celular no Zoom Ah tá no Zoom pelo celular deixa
+27:09
+eu ver então hum como que aparece a tela Aparece alguma
+27:17
+mensagem Pera aí que eu vou entrar no Zoom pelo tá que aí eu te ajudo o cloud
+27:23
+já até trazi alguns bugs para vocês o cloud ele tem um o cloud não só o cloud mas o o chat ept e algumas llms Elas têm
+27:30
+um problema muito sério com extensões do Google então por exemplo é muito comum a gente tem essa extensão aqui do Google
+27:36
+de tradução e a gente deixa ela em português quando a gente deixa em português Às vezes o cloud não abre
+27:42
+então eu sempre deixo o esse essa extensão de tradução em inglês e tem uma outra problemática às
+27:50
+vezes nem com a tradução em inglês ele ele funciona às vezes ele aparece uma mensagem assim estamos em manutenção
+27:56
+voltamos em breve é mentira nem é é só um bug mesmo e aí se você usa o Google
+28:01
+Chrome você vem aqui em extensões gerencia as extensões e tira todas as
+28:07
+extensões possíveis desativa todas as extensões E aí dá um F5 que aí às vezes
+28:12
+ele às vezes não ele volta ele vai voltar não é comum ele ficar nessa tela
+28:18
+essa tela branca no caso é melhor um outro navegador Você tá no Chrome não pode ser no Chrome não tem problema não
+28:24
+você tem alguma extensão ativa temho várias desativa aí só pra gente fazer o
+28:30
+teste geralmente é o o a extensão de Tradutor é só temporário deixa eu
+28:41
+pegar Enquanto isso vamos testar aqui nome da categoria A categoria vai ser saúde acionamos a categoria ó no meu o
+28:50
+que que aconteceu aqui ó Tô clicando em saúde e ele não vai ele tá bugado então eu vou falar para ele assim ó e aí esse
+28:56
+é um processo de iteração S que é natural de todas as iis de criação de interface visual tá bom quando
+29:03
+você cria visualmente ele tá funcional então o HTML tá bem construído o CSS
+29:09
+aqui ainda não tem mas o JavaScript não tá porque quando eu crio aqui ele não manda nada isso significa que é como se
+29:16
+eu tivesse feito ali a minha instalação da rede elétrica mas quando eu ligo o botão de ligar a lâmpada não liga então
+29:22
+eu vou dizer para ele assim ó quando eu clico no botão de adicionar ele não
+29:29
+funciona só isso Zé a ideia das i é justamente essa interação humana Então
+29:35
+você fala para ela exatamente o que tá acontecendo não precisa ser muito rebuscado pensar numa linguagem muito
+29:41
+complexa a iteração é o processo mais importante na construção dessas interfaces visuais dificilmente você vai
+29:48
+conseguir construir algo bacana já com uma um único prompt o ideal é você pede
+29:54
+e aí ela vai te dar um resultado aí você itera os as as melhores interfaces que eu fiz Elas tiveram pelo menos 20
+30:02
+iterações que é o processo dela me dá uma resposta eu dou outra dou outro a última que eu fiz no Bolt Eu acho que eu
+30:08
+cheguei a quase 100 iterações assim de mandar volta manda e volta vamos ver
+30:14
+agora se tá funcional lembra que antes não tava funcional colocar aqui categoria saúde clicar em
+30:20
+adicionar continua não funcionando agora tá pedindo o número de telefone isso bota o número do seu telefone com DDD
+30:28
+que ele vai mandar um SMS para você confirmar e e logar Vai me falando aí
+30:35
+continua sem funcionar aqui pelo menos ou é eu que sou les mesmo que já tava aqui ó
+30:41
+lazer é eu que sou les meso já tava criando aqui é burr mesmo tá vendo O problema não é a problema é humano ela
+30:48
+tá criando aqui as categorias ó tá vendo lazer Se eu colocar aqui ó humano sem
+30:55
+noção e clicar em adicionar ela criou aqui ó um novo uma nova categoria é eu
+31:02
+que sou bestalhado mesmo mas vamos lá gente então tá aqui ó todas as categorias agora percebe que o espaço
+31:08
+aqui ó A ideia é que esse quadrinho aqui seja a tarefa que você vai fazer só que
+31:14
+tá pequeno não tô vendo nada tá vendo aqui eu posso falar para ela que não tá funcional aqui eu vou falar iterar para
+31:21
+ela fala assim o espaço para preenchimento da tarefa está muito
+31:30
+pequeno passa maior e funcional ele não tá
+31:39
+funcionando se o de vocês não funcionar sigam assim também alguém o de vocês
+31:45
+funcionou botão tá tentando adicionar uma string vazia diretamente em vez de usar o valor do input vou coir isso B se
+31:51
+eu já manja mais da das das partes de código fica até mais fácil né que você bate o olho e já fala exatamente o que
+31:57
+você quer eu como não manjo eu vou na conversa aqui fal ó o negócio aqui não tá funcionando não O botão aqui tá meio
+32:03
+estranho mas eu acho que agora vai funcionar enquanto você aguarda pode
+32:10
+falar pode falar enquanto você aguarda aí só para eu contextualizar um pouquinho a gente tá construindo algo
+32:16
+direto no clou né Eh qual a diferença de eu fazer aqui ou tentar lá no Bol Eu
+32:21
+Nunca mexer nada disso você vai falar disso também Claro vou sim mas eu já posso adiantar quando a gente constrói
+32:28
+no Cloud o cloud ele tem uma limitação de só ficar dentro da interface da da
+32:34
+antropic então a gente consegue criar coisas funcionais pra gente você consegue compartilhar esses links mas
+32:40
+ele só cria a interface visual você não consegue adicionar nenhuma lógica você não consegue adicionar a lógica você
+32:46
+consegue né mas uma ia por exemplo para adicionar uma inteligência artificial no
+32:51
+nosso na nossa interface visual a gente vai precisar construir o que a gente chamou de backend né que vou vou mostrar
+32:58
+aqui já no v0 então o cloud ela tem essa limitação vou mostrar logo para vocês
+33:03
+aqui ó quando vocês clicam aqui em publish aqui embaixo tem um botãozinho chamado publish publish and copy link aí
+33:12
+ó ele já ele subiu essa interface pra nuvem da antropic ela fica disponível na
+33:18
+internet então se eu abrir Eu posso enviar esse link para outras pessoas utilizarem ó ele aparece aqui para mim
+33:25
+tá vendo eh você pode compartilhar com outas pessoas você pode deixar salvo mas ele tá na na web ele ele tá feito Deploy
+33:33
+então a gente consegue jogar isso como se fosse um aplicativo Real A diferença é que eu não
+33:39
+consigo integrar aqui no Cloud nenhuma ia fazer nenhum nada que fuja da
+33:44
+antropic é só coisas mesmo que relacionadas a código aqui inclusive ele sempre mantém a o negóci a marca dágua
+33:52
+deles mesmo tendo o pago eles vão manter a marca d'água deles porque eles são uma empresa muito em segurança né de dados
+33:59
+então eles não eles não não não tendem a deixar isso tão explícito a deixar ele
+34:06
+acessar a internet Ah vamos ver se tá funcional aqui agora acho que agora tá né fazer a lição de
+34:15
+casa pronto agora tá funcional aqui para mim ó vou adicionar uma nova categoria que é saúde esporte
+34:24
+lazer adicionar vamos ver categoria saúde esporte lazer joga bola bola à
+34:34
+noite pronto ó aí agora tá tá vendo que tá ficando separado por categorias né eu
+34:39
+botei saúde espor lazer ele tá separando em jogar bola à noite certinho se eu botar que trabalho né aula
+34:46
+lendária ele vai adicionar ó adicionou aqui o trabalho ó da aula lendária dá
+34:54
+para fazer o checklist o de vocês ficou funcional ou tá com alguma
+34:59
+problemática aqui deu certo Deu certo pô show Que bom fico feliz então José
+35:06
+repete para mim repete para mim por favor o último prompt último prompt é de saúde esporte lazer aí pronto aqui
+35:18
+perfeito falei para ele que o o espaço de preenchimento da tarefa tava muito pequeno tá um quadradinho bem pequeno aí
+35:24
+pedi para ele fazer maior e fazer funcional que não tava funcionando o cloud 3.5 sonet é a melhor e a para
+35:32
+escrita de código no momento todas elas estão todas as empresas estão utilizando ele a Microsoft tá utilizando ele o Bolt
+35:40
+utiliza ele o vizer utiliza ele então aqui a gente consegue ter o melhor
+35:46
+desempenho de correção de código e criação de código para que que eu utilizo o cloud pensando em interface
+35:52
+visual só para ter ideias do que que eu posso fazer se é viável ou não não
+35:57
+porque é fácil você fazer aqui já com essas interações né via via prompt e
+36:03
+olhar aqui é bem rápido ele é muito rápido para fazer essas criações então eu gosto dele mais para ter ideia mas
+36:10
+assim pensando em produto ele não vai atender pensando em necessidades
+36:15
+pessoais por exemplo eu fiz uma aa eu fiz uma aula de cloud ensinando sobre
+36:20
+Cloud eu usei muito ele para criar as aulas Então imagina que você tem algo que você quer mostrar um processo vamos
+36:27
+fazer o seguinte deixa eu pegar alguém que tem algo que dá pra gente construir
+36:32
+alguém que tem algo em mente aí pra gente construir junto
+36:37
+agora Alguém quer participar e a gente eu vou junto na tela senão eu faço por
+36:44
+aqui cara não tenho nada em mente não mas ia te fazer uma pergunta bem nessa mesma linha você não consegue aproveitar
+36:50
+nada do do teu código ali lá no Bolt por exemplo ou o promt só o que daria para
+36:56
+aproveitar alguma coisa das trabalho dá sim aqui ó quando a gente aperta na no
+37:02
+botão code eu tenho acesso a todo o código de construção dele né então às vezes quando eu quero utilizar no Bolt
+37:10
+ou no v0 eu eu colo uma parte aqui né Fala pô eu quero assim porque assim tá
+37:16
+funcionando às vezes no v0 ele não utiliza direito falo eu quero eu chego lá no v0 falo assim eu quero
+37:22
+assim aí ele Eita agora ele vai construir uma coisa doida aí a aí ele eu
+37:28
+consigo utilizar essas partes de código se eu venho aqui ele funciona eu vou no v0 não funciona aí eu consigo pegar essa
+37:35
+lógica e jogar para ele eu vou mostrar já no próximo nível que a gente o que a
+37:41
+gente pode fazer junto com v0 vocês conseguiram ter a ideia do Cloud funcionar
+37:49
+direitinho o que eu quero que a gente faça agora a gente fez o
+37:55
+HTML cadê que que ele fez aqui ó ah isso aqui ó
+38:00
+bom que ele errou aqui quando acontece isso daqui e vocês vão ver que vai acontecer muito é quando ele erra o
+38:06
+código quando ele não consegue eh declarar uma uma variável do jeito
+38:12
+certo acontece vez ou outra ele acaba errando é só clicar no botão try fixing
+38:17
+with Cloud e ele vai colar isso para cá e vai fazer a correção eu já atingi o
+38:25
+meu limite aqui de mensagens no no gratuito mas não tem problema que a gente não vai mais mexer no Cloud a
+38:31
+gente vai agora pro v0 vamos lá v0 então só digitar v0 PDV
+38:41
+bar chat como eu fiz com clod eu vou fazer com v0 também eu
+38:46
+vou fazer o logout por O v0 ele não tem o login com o
+38:55
+Google se você apertar aqui aqui eming sai desgrama sign out ele tá logando
+39:04
+automático vou abrir aqui uma outra uma
+39:09
+janela sem para mostrar para vocês Deixa eu só um
+39:16
+pouquin Não ele tá logando automático o que que vai acontecer aqui
+39:22
+o v0 se vocês clicarem aí vocês vão ver que na hora de apertar em login ele vai
+39:28
+aparecer com github vou ter que vou ter que mudar aqui pera aí pronto perfil de
+39:35
+visitante v0 pd é o link Essa é a tela
+39:40
+que vai aparecer para você você consegue já digitar aqui algumas coisas mas a gente vai ter que fazer o login tá
+39:46
+clicar aqui em signin só que percebe que aqui ó ele não
+39:52
+tem o login com o Google ele tem o login com github e outras plataformas você tem
+39:58
+a opção de eh clicar criar uma conta na vercel mas o que que eu indico fazer uma
+40:05
+conta no github Por quê o github ele é uma plataforma que vai conversar com o
+40:12
+v0 para construir as coisas então se você loga diretamente com seu github fica mais fácil fazer a construção
+40:18
+dentro do v0 então o que que a gente vai fazer para quem não tem conta no github
+40:24
+github Vou digitar aqui como se fosse alguém do zero vou clicar aqui onde tem
+40:30
+o símbolo do gatinho e aí eu vou fazer o meu cadastro no github a gente
+40:37
+vai fazer junto Beleza eu vou colocar aqui o o meu que eu ainda não tenho
+40:43
+conta ó apareceu aqui para mim vou clicar em continuar vou criar meu
+40:54
+passw meu username username é o nickname né quem é da das lanhes das antigas aí
+41:01
+sabe como é inclusive J Carlos remix era meu nick do CS
+41:07
+continue ele vai pedir uma verificação de conta né Eh resolva este Enigma para sabermos que
+41:14
+você é uma pessoa de verdade os enigmas estão cada vez mais difíceis né Bora ver
+41:20
+se eu consigo esse daqui ó esse daqui ah use setas para girar o objeto pra
+41:28
+direção que a mão está apontando esse daqui é até mais fácil Tem uns que é mais difícil então ele tá a mão tá
+41:34
+apontando para cá vou botar o avião para cá e vou clicar em
+41:40
+enviar Será que ele agora aceita que eu sou humano Pronto ele aceitou que eu sou humano e agora ele vai me mandar um
+41:47
+código de verificação pro meu e-mail ô Zé Mas por que que é tão complexo fazer uma conta no github porque o github ele
+41:55
+fica com boa parte dos códigos você peda os seus códigos nele então imagina né se
+42:00
+você tem um código que é de um aplicativo seu que você comercializa alguém vai lá acessa seu github Exclui
+42:06
+isso é um caos então quanto mais segurança melhor em relação a isso vocês
+42:13
+estão conseguindo fazer junto aí o login do github Essa é a parte mais demorada tá do v0 que é a criação da conta no
+42:24
+github Ô José vou te dar uma ideia é uma processadora de pagamentos aí conosco ao
+42:30
+vivo com qu mano uma processadora de pagamentos tipo
+42:36
+hotmart para fazer o quê pra gente fazer um um web app né Ah
+42:46
+tá tá tá tá entendi entendi entendi na na prática aqui você fala né isso pode
+42:52
+ser Ó ele mandou para mim aqui o código dei contr CTR V ele Já identificou aí agora eu
+43:01
+posso fazer o login p@gmail.com e a
+43:09
+senha José tá escutando aí tô te ouvindo pode falar cara para criar vai criar o
+43:15
+link para compartilhar com outras pessoas né Aí vai ter que pagar um domínio como é essa parte do Cloud não
+43:23
+no V no B no V se você você paga você não se você tem o v0 e o o Bolt pago
+43:31
+você não precisa pagar domínio nada não só que ele sede assim uma link dele uma url personalizada dele então você não
+43:39
+consegue você até consegue Mas vai ter que fazer um bem bolado aí para colocar um domínio
+43:45
+próprio para mudar lá a parte de mudar o my url pra sua URL quando a gente for na
+43:51
+prática aqui V vou te mostrar como é que é o RL deles e e a mudança para domínio
+43:57
+Mas você consegue compartilhar o link sim tá fica hospedado o v0 é da vercel então tudo que você publica no v0 fica
+44:04
+no hospedado na versel automaticamente se você por exemplo não pagou não vai sair do ar Aquela aquele aquela
+44:11
+construção sua Vou colocar qualquer coisa aqui pra gente
+44:16
+seguir vamos continuar com free E aí vai começar o o dashboard
+44:24
+Pronto agora eu já tenho a minha conta do giub aqui não vou precisar mexer nada no github era só para ter mesmo um login
+44:31
+lá aqui no v0 problemas vocês querem que siga aqui
+44:40
+deixa eu responder a pergunta do alu tem como armazenar algo direto nos artifacts
+44:45
+tipo interações não no Cloud não no Cloud você só
+44:50
+consegue gerar a interface visual o código mas não consegue tipo colocar
+44:56
+subir uma foto ó usa essa foto aqui isso não dá isso a gente vai fazer agora no v0 você entrou direto pelo e-mail sem SA
+45:04
+pelo github Ah então pronto vocês conseguirem logar para mim é suficiente é porque para mim ficou mais fácil pelo
+45:10
+pelo github aqui aí ele vai mandar aqui para mim um link de confirmação pense num negócio
+45:16
+vou autorizar vercel E aí ela conta não encontrada
+45:22
+falei isso não pelo amor de Deus
+45:28
+P zer by vsel logar signin
+45:42
+github é porque eu acho que tem que confirmar aqui autorização de
+45:49
+e-mail pronto é aqui ó
+45:57
+acho que agora vai Ele sempre vai mandando o link de de confirmação né Ele mandou aqui o link de
+46:04
+confirmação para Agora sim fazer o login fazer autenticação
+46:27
+é não encontra minha conta de jeito nenhum deixa eu logar aqui com digitar o meu e-mail continuar com
+46:38
+e-mail para quem não conseguiu logar pelo github a gente vai aí pelo por esse método
+46:45
+mais mais sugestivo que é botar o e-mail ele vai mandar um link de confirmação é
+46:51
+porque com o github vai ficar ficaria mais fácil algumas algumas conexões lá dentro mas não tem problema não
+47:06
+assim que chegar daqui para amanhã
+47:14
+voltar tentar mais uma vez aqui senão eu vou paraa minha conta que eu já tenho né
+47:22
+Tá tá de mal aqui ah a gente planeja uma coisa às vezes
+47:28
+não dá certo não eu vou pra minha conta que eu já tenho aqui e depois na gravada a gente soluciona isso porque senão a
+47:35
+gente vai perder muito tempo aqui bom v0 quando vocês conseguirem fazer o
+47:41
+login vai ser isso aqui de novo só que a diferença é que agora vai ter os seus
+47:46
+dados aqui de de login como é que funciona o v0 Diferentemente do Cloud o
+47:54
+v0 é uma ia que ele constrói utilizando o motor de construção de código do Cloud
+48:00
+mas ele consegue integrar esse código dentro da versel que é uma empresa de
+48:06
+hospedagem Então a gente tem aqui a possibilidade de fazer com que a nossa
+48:11
+construção converse com o mundo exterior então aqui até separei no no segmento
+48:18
+aqui ó fazer o cadastro no github eu fiz o cadastro mas deu aquele bozinho de não
+48:24
+conseguir logar quem conseguiu logar a gente vai seguir junto primeira coisa que a gente
+48:29
+vai fazer para quem tá no v0 construir um formulário simples tá que é um formulário de html sem nenhum
+48:36
+estilização sem cor sem nada construir um formulário com nome profissão e
+48:42
+principal dificuldade atual vou mandar aqui no nosso na nossa
+48:48
+mensagem mas vocês podem digitar também tá vamos lá no v0 digitar bem assim
+48:55
+ó com Construa um formulário
+49:00
+com nome profissão principal dificuldade
+49:06
+principal dificuldade atual aí o v0 ele vai começar a construção e você vai
+49:11
+perceber que é idêntico ao que o cloud faz porque é a mesma llm que é utilizado
+49:16
+ele começa do mesmo jeitinho o que que vai mudar a liberdade que a gente tem ó
+49:23
+ele criou aqui para mim esse formul percebe é a a máquina de criação do
+49:29
+cloue é a mesma estrutura é a mesma cor Cadê rapaz sumiu aqui el pode falar bem
+49:37
+dele que ele some com o negócio Rapaz agora eu vi olha tava
+49:47
+aqui Um dos problemas já vou logo falar um dos problemas do v0 o
+49:53
+preview não está aparecendo aí ó você tem que forçar ele essa essas
+49:59
+ias estão cada vez mais revoltadas às vezes é problema de da do próprio
+50:04
+navegador tá o Google Chrome ou algo mesmo da máquina mas geralmente quando
+50:10
+não aparece aqui é só você falar para ele assim ó o preview não tá aparecendo aí ele ajusta para aparecer o preview
+50:16
+então voltando aqui ó é idêntico ao Cloud tudo a a estética a estilização
+50:24
+zero é igualzinho do Cloud só que no Cloud a gente não tinha nenhum botão
+50:29
+para mexer no código só tinha o código pronto o v0 até anteontem também não
+50:35
+dava para fazer isso mas ontem a atualização dele permitiu que a gente possa mexer no código então a gente pode
+50:43
+vir aqui e personalizar o código mas isso é isso aqui é muito muito novo isso
+50:49
+aqui é é de ontem isso aqui não dava para fazer Qual a vantagem agora antes
+50:55
+quando eu por exemplo eu queria mudar uma cor aí às vezes ele tinha que e
+51:01
+construir o código todinho de novo do zero para poder ter uma cor por exemplo
+51:08
+aí eles inseriram uma forma de que eles chamam de quickedit que aí ele ia lá na
+51:14
+linha buscava a cor e fazia o ajuste só que às vezes ele ajustava a cor e desarruma o código todinho aí ele
+51:20
+construía tudinho de novo do zero e age a demorar dependendo do tamanho da estrutura do que você quer fazer então
+51:25
+isso aqui D liberdade pra gente por exemplo tem um problema aqui eu copio jogo lá no Cloud ó tô com esse problema
+51:32
+aqui aí ele soluciona para mim mas a gente não precisa ir para isso por enquanto agora ele tem o prev preview
+51:39
+ele tem a possibilidade de mexer no código e tem o console console por enquanto dele ainda tá com alguns erros
+51:45
+de vez em quando vamos ver se tá funcional aqui tá alguém tá com conseguir com v0 aberto
+52:02
+Eu não abri o v0 mas tô entendendo perfeitamente aqui aprendendo contigo e
+52:07
+ao mesmo tempo já tô no no Bol que eu já tinha um cadastro Tô tentando
+52:13
+trabalhar Tranquilo então vocês estão para importante é vocês entenderem bom aqui ó eu eu coloquei algum alguns dados
+52:20
+né só que o que que vai acontecer eu não pedi para ele criar nenhuma interface no
+52:25
+que a gente chama JavaScript né que é a o botão fazer algo então se eu clicar no
+52:31
+botão não acontece nada então eu tô clicando no botão aqui nada tá acontecendo por qu porque eu não pedi
+52:37
+para ele ele faz exatamente o que a gente pede então eu queria um formulário está aqui o formulário direitinho sem
+52:43
+tirar nem pôr com nome profissão e e dificuldade Atual O que que a gente vai
+52:48
+fazer até agora tudo foi gerado só no HTML que é essa estrutura zerada tem
+52:56
+nada de estética vamos fazer agora algumas adições de design a gente vai
+53:02
+fazer uma estilização agora colocando o CSS Como que eu faço isso José existem
+53:08
+três estruturas básicas que sempre essas interfaces frontend tem o header que é o
+53:15
+a parte de cima cabeçalho o hero que é aquela parte que fica bem no meio ali
+53:20
+onde tem geralmente uma imagem e um vídeo e o footer que é o rodapé com as redes sociais
+53:27
+vou jogar aqui no nas mensagens para vocês se vocês quiserem fazer a mesma coisa mas a única coisa a única
+53:34
+atividade diferente que eu vou fazer é pedir para ele assim ó
+53:40
+adicione header Hero e footer não vou
+53:45
+pedir mais nada de detalhe só para vocês verem como a estilização muda conforme a
+53:50
+nossa solicitação ó outra mudança que aconteceu de de de sexta para hoje essas pastas
+53:58
+aqui não existiam eu não tinha acesso a isso daqui eu tô vendo agora isso daqui
+54:04
+me possibilita um milhão de coisas isso tá acontecendo porque como estão surgindo surgindo outras iais a
+54:10
+competição força elas a desenvolver mais rápido bom ela ela fez uma mudança aqui
+54:16
+vamos dar uma olhada para ver se ela inseriu o que eu pedi Às vezes o preview demora um pouquinho ó não teve header tá
+54:25
+do mesmo jeito tá não teve footer tá do mesmo jeito que que eu vou fazer aí o
+54:30
+processo de iteração quando você pede algo e não sai aí você tenta modificar a
+54:35
+fala para tentar chegar no ponto que você quer eu vou falar assim ó eu quero um
+54:41
+header escrito formação
+54:49
+lendária um hero com espaço para imagem
+54:56
+Zé não sei o que que é o hero Toda vez que você falar Hero ela vai entender que é a principal componente da homepage ali
+55:04
+daquela página que você tá e um footer com foter
+55:11
+escrito eu sou uma ia
+55:18
+bacana eu fiz a primeira solicitação ela não mudou eu vou fazer uma segunda
+55:23
+solicitação e ver se ela vai fazer aí esse esse ajuste ó ela falou que vai
+55:30
+atualizar o header então em tese o header já tá no código só que por algum motivo ela não tá conseguindo me mostrar
+55:36
+isso no preview agora atualizar o componente principal b b b Bobô O que que ela fez
+55:43
+aqui como essas iis elas estão mudando muito elas estão confundindo que nem o a
+55:50
+gente teve com o Ricardo elas não conseguem colocar a mudança do lado esquerdo no lado direito então ela me
+55:56
+instruiu aqui como fazer e não fez então vou falar para ela aqui ó altere você o
+56:02
+que você me sugeriu bem Rude mesmo que elas elas estão muito gata mas acontece muito isso de às vezes
+56:10
+ela gerar o código e quer que você colhe o código lá sendo que é ela que tem que colocar o código Ah agora sim ela vai
+56:17
+atualizar isso é um erro que tá acontecendo recente por conta dessas mudanças que tá acontecendo propriamente
+56:23
+no Cloud no v0 e no Bolt estão repetindo aí o v0 e o BT para ver quem que fica melhor E aí tem essa problemática de que
+56:31
+o cloud ele tá gerando os códigos dentro dele mesmo mas é só assim como a gente
+56:36
+falou lá no no Cloud Gere um artifact aqui no v0 a gente fala adicione no seu
+56:42
+código porque senão ela vai querer que você copie e cole então aqui ela já mudou ela inseriu um CSS ela inseriu um
+56:50
+uma estilização ó colocou aqui o header formação lendária colocou aqui os botões
+56:55
+de de início sobre contato lembra a gente não adicionou o JavaScript por isso não tá funcional se eu clicar não
+57:02
+acontece nada isso aqui que eu chamo de header ou de Hero ele adiciona aqui um
+57:07
+espaço paraa imagem e daqui a pouquinho a gente vai inserir uma imagem e aqui tem o formulário lá que era o formulário
+57:13
+Inicial o nome profissão principal dificuldade tem o botão de iniciar jornada ele até adicionou já algumas
+57:19
+observações ó esse preencha Campo eh ele mesmo que adicionou eu não pedi mas ele já já adicionou isso e aqui ó é o footer
+57:27
+que é a o rodapé então Ó eu sou uma Iá bacana ela colocou aqui ó criada para
+57:32
+ajudar você a se tornar lendário isso eu não pedi isso foi ela mesmo que colocou vocês viram Então ela com base nos proms
+57:39
+que você manda ela começa a melhorar às vezes ela piora às vezes ela melhora se
+57:46
+eu quiser mudar a cor eu consigo mudar a cor aqui tá roxo se eu quiser falar para ela assim ó eu quero que o eu quero que
+57:54
+o CSS tem coloração preta e
+58:00
+branca aí é gosto mesmo você consegue fazer essa iteração para mudar o design
+58:06
+Conforme você você quer com as paletas de cores que você precisa a próxima
+58:12
+iteração que a gente vai fazer é inserir imagem dentro lá do daquele Hero ela tá
+58:19
+fazendo aí a atualização nessas PES isso daqui Nossa isso aqui faz ganhar muito
+58:24
+tempo muito muito tempo porque o que que o que acontecia Antes quando eu pedia uma única mudança ela fazia todo o
+58:31
+código do zero assim desde o início ia fazendo fazendo fazendo esse pedido que
+58:36
+eu fiz aqui ela ia demorar uns dois A TR minutos para poder fazer bom ela fez
+58:41
+aqui as adições colocou tudo em preto e branco só que o problema é que até o texto ela colocou em branco aqui ó no
+58:47
+início sobre contato isso é algo que itera também então percebe que conforme
+58:52
+eu peço ela vai modificando vamos inserir uma imagem aqui tá uma imagem
+58:58
+aqui no Hero onde Tá em transforme-se uma lenda como que eu insiro uma imagem
+59:03
+venho aqui no Attack files escolho uma
+59:08
+imagem pegar aqui qualquer imagem que eu tenha que ess ess PC tem pouca imagem e vou falar assim ó adicione esta
+59:17
+imagem ao Hero simples e bem direto quanto mais
+59:24
+fácil for para um m entender o que você quer mais fácil vai ser para ma entender o que você quer
+59:30
+também então agora ela vai adicionar a av0
+59:37
+especificamente fá para ela aqui ó tá cachada aqui tá vendo el tem a imagem só que tá crushado vou falar para ela aqui
+59:44
+a imagem não está aparecendo vou colocar como eu mesmo
+59:50
+entendo tá aparecendo um símbolo de papel é o
+59:58
+rasgado com o nome da imagem às vezes quando eu não sei algo
+1:00:05
+muito específico por exemplo esse negócio de header footer Hero eu fui aprendendo junto com o v0 aqui enquanto
+1:00:12
+eu ia construindo porque ele ia falando Ah o hero tá coisa tal e aí eu vou pesquisando fica mais fácil quando você
+1:00:20
+entende essas nomenclaturas para ele ir direto ao ponto ali ó ah eu quero Hero tal esse daqui é um um erro que
+1:00:26
+aconteceu quando acontecer erro no v0 ele vai mostrar aqui para você nesse nesse botão em vermelho aqui nessa
+1:00:33
+janela em vermelha só clicar em Fix with the zero e enviar e aí ele vai se autoc
+1:00:40
+corrigir digamos assim né isso acontece no Cloud e com o v0 é a mesma coisa ela
+1:00:45
+comete essa esses erros e aí você consegue e ir solicitando os ajustes
+1:00:51
+Vamos ver se agora ela faz deu mais um erro
+1:00:58
+Acontece muito de dar dois três erros Quando ela começa a modificar o código quando a há uma exigência para uma
+1:01:06
+mudança muito brusca vamos ver se ela faz uma um ajuste aí ó Isso aqui é o quick Edit ela tá
+1:01:14
+olhando o código para ver onde foi que ela errou aqui ela já mudou ó ela vai ver onde que ela ela pode ter errado E
+1:01:22
+aí bora ver bom o que que aconteceu como ela não conseguiu Inserir a imagem ela
+1:01:29
+voltou pro código anterior e aí eu vou tentar de novo mas eu vou pegar uma outra imagem aqui que aqu ela tava bem
+1:01:37
+ruim col ó insira esta imagem no background só para mostrar que dá para
+1:01:44
+inserir subindo a imagem ela inserir aqui no nosso na nossa
+1:01:54
+interface eu ia falar que aqui o v0 é bacana porque a vcel ela pega a minha
+1:01:59
+imagem ela sobe na nuvem dela e adiciona ao código do v0 então fica mais fácil
+1:02:06
+desse jeito inserir imagens especificamente no Bolt Eu ainda tenho
+1:02:11
+um problema de eu tenho que subir minha imagem em algum lugar eu pego a URL o código e jogo dentro do do código do
+1:02:19
+Bolt para poder a imagem aparecer eh a atualização a a a nova atualização
+1:02:27
+dela fez com que acontecesse alguma problemática eu tô vendo que tá aparecendo a imagem no fundo mas ela não
+1:02:32
+tá não tá aparecendo aqui vou tentar mais uma vez uma outra imagem ó para
+1:02:39
+aqui a imagem não está aparecendo está
+1:02:46
+crach Vamos tentar mais uma vez senão a gente prossegue tá são só detalhes estéticos de design
+1:02:58
+ela mudou muito de ontem para hoje mesmo isso aqui essas essas essas pastinhas
+1:03:04
+não tinham isso daqui antes ela gerava um único código E
+1:03:11
+aí eu conseguia ver exatamente onde tava o problema porque eu copiava o código inteiro e jogava lá no Cloud vamos ver
+1:03:18
+se ela vai colocar mais uma vez ela não colocou nada não ou ela
+1:03:25
+colocou acho que ela colocou sim acho que agora Foi só que é minha imagem que era muito muito grande bom mas é assim
+1:03:31
+que coloca a imagem tá você pede e bota para ela colocar uma imagem lá vamos seguir agora a parte de
+1:03:39
+estética você percebe que aqui no v0 você consegue trabalhar muito melhor então através da iteração você vai
+1:03:46
+melhorando o processo a próxima fase é
+1:03:53
+construir o JavaScript aqui ó funcionalidade tá então que que a
+1:03:59
+gente vai construir aqui de JavaScript quando alguém clicar aqui em iniciar jornada vai aparecer uma mensagem então
+1:04:06
+eu vou adicionar isso aqui em prompt vamos
+1:04:11
+adicionar funcionalidades quando o usuário clicar em iniciar
+1:04:19
+jornada mostre uma página m Obrigado cara você é
+1:04:29
+demais eu gosto de colocar frases diferentes que é para mostrar que realmente ela me obedece ela ela atua
+1:04:38
+tal qual eu eu mando ela seguir então ela vai fazer o que aqui agora vai pegar
+1:04:43
+e adicionar o JavaScript Então a gente vai ter já a o frontend completo tanto a
+1:04:49
+criação do HTML a estrutura a estilização do CSS que é essa interface
+1:04:56
+com as cores né com funcionalidade brilho efeito tudo que envolve a estética o Design na parte do CSS e
+1:05:03
+agora a gente vai adicionar a linguagem JavaScript que é a funcionalidade dela
+1:05:09
+né dos botões vamos ver se vai funcionar de primeira informação lendária e tudo
+1:05:15
+mais vou colocar o nome aqui ter mais
+1:05:21
+tempo vou clicar em iniciar jornada pronto ela me levou aqui para um uma
+1:05:28
+página de obrigado muito obrigado cara você é demais sua jornada lendária está apenas começando aqui tá aparecendo a
+1:05:35
+letra tá em branco por isso que não tá mostrando o contraste mas eu vou já pedir para para ajustar aqui ajuste a
+1:05:43
+cor da as cores das fontes para ter
+1:05:48
+contraste dúvidas essa é a última interação paraa parte visual agora a gente vai construir a lógica e inserir
+1:05:57
+uma inteligência artificial por trás aqui o backend dúvidas alguém tá
+1:06:02
+conseguindo acompanhar tá ficando muito complexo pode mandar pra gente aí
+1:06:08
+Ah tranquilo J bem bacana tô acompanho Show Beleza então vamos seguir aqui ela
+1:06:15
+vai construir pra gente então essa interface com as
+1:06:22
+cores agora ela tá muito rápida nossa muito rápida gente sério mesmo isso aqui
+1:06:27
+é um avanço significativo ela tá com as cores né você percebe que tá sem
+1:06:33
+contraste né as cores dos
+1:06:39
+botões coloca em preto eu vou ser bem mais claro porque às vezes ela ela já tá
+1:06:45
+num contexto tão grande que ela já já se perdeu um pouco ó aí agora como eu pedi para ela
+1:06:52
+colocar em preto vai vai garantir aí o contraste
+1:07:00
+fazend atualização bem
+1:07:06
+rapidinho pronto fez atualização aqui ficou fou semast ficou
+1:07:14
+meio estranho né mas a gente vai seguir assim mesmo pelo menos tá tá funcional aqui bom aqui a gente construiu digamos
+1:07:21
+a nossa interface web né ela tá funcional aqui tem os botões dá para
+1:07:27
+digitar tá tudo bacana o que que a gente vai fazer agora a gente vai começar a
+1:07:32
+construir o que a gente chama de back end que é a parte que a gente insere a a
+1:07:41
+backend que que a gente vai fazer especificamente no v0 E por que que eu
+1:07:46
+descobri isso daqui um fisioterapeuta um personal trainer me procurou porque ele
+1:07:52
+viu que eu tava fazendo essas interfaces aqui eu acho muito bacana construir nessas Land pays e tal e ele falou assim
+1:07:58
+cara eu tenho uma annese vou até mostrar para vocês o projeto dele eu tenho uma
+1:08:05
+anamnese que eu faço que é bem longa e essa anamnese eu tenho um problema
+1:08:12
+porque quando os caras eles preenchem eu tenho que olhar tudo do zero assim é são muitos dados tem como tu fazer ess esse
+1:08:20
+formulário com i a para mimí eu falei cara eu posso eu posso tentar e eu eu
+1:08:26
+juro para vocês assim eu eu eu vendi o serviço né fiz toda a oferta mas eu não sabia se eu conseguia não e aí ele me
+1:08:34
+passou todos os dados né eu fui iterando e tudo mais e aí eu criei para ele uma
+1:08:39
+uma interface visual só que o problema tinha a interface visual que é essa
+1:08:45
+daqui ó eles atualizaram tá tá uma porcaria eles atualizaram tudo vou ter que depois
+1:08:51
+até mostrar para vocês aqui o funcionamento E aí eu não sabia como integrar a
+1:08:57
+inteligência artificial na na página porque eu não sabia mesmo né aí o que que eu fiz como eu entendo de de nhn eu
+1:09:05
+criei um web Hook eu falei aqui no vezeiro ó esse aqui é meu url de web Hook envia todos os dados para cá foi
+1:09:13
+experimental enviei E aí para minha incrível surpresa ela fez o envio então
+1:09:19
+tudo que foi preenchido na página ela enviava via web Hook no nhn Então essa foi a forma que que eu consegui de
+1:09:27
+integrar assim foi a forma que eu consegui e é o que a gente vai fazer agora quanto carrega lá então eu vou
+1:09:34
+mostrar para vocês aqui ó tô aqui no meu v0
+1:09:40
+né voltar logo lá aqui tô aqui no meu v0
+1:09:45
+e eu quero que quando o cara clique em iniciar a jornada os dados que ele preencher aqui eu posso utilizar para
+1:09:52
+fazer alguma coisa com eles então o que que eu vou fazer agora eu não vou conseguir ensinar nhn aqui é automação
+1:10:00
+numa outra aula se vocês quiserem a gente pode trabalhar um pco um pouco nhn mas eu vou criar aqui o nhn é uma
+1:10:06
+ferramenta de integração onde a gente consegue fazer programações conversas entre programas que não fazem sentido
+1:10:12
+Então imagina você acabou de criar algo aqui e quer colocar Inteligência Artificial nisso não tem nada nativo
+1:10:18
+nele especificamente para fazer essa conversa então eu venho aqui vou adicionar o novo workflow E aí eu vou
+1:10:24
+adicionar o que eu falei ainda há pouco chama web Hook Vou Colocar o web
+1:10:29
+Hook vou só mudar aqui ó colocar aula
+1:10:36
+lendária E aí o que que eu vou fazer aqui fica um pouco mais complexo para
+1:10:41
+quem não entende de de Integração eu não vou entrar nos detalhes mas tem que mudar de get para post tá é um método
+1:10:47
+post e o que que eu vou fazer eu vou copiar essa URL aqui do do nhn e vou
+1:10:54
+voltar lá pro zer e vou falar para ele assim ó Esta é minha url de web
+1:11:02
+Hook vou colar o RL do meu web Hook e falo para ele assim ó quando o
+1:11:09
+usuário clicar em iniciar a jornada envio os dados para meu web
+1:11:17
+Hook assim mesmo em linguagem natural sem sem muita complexidade E aí o que
+1:11:23
+que ele vai fazer todo toos os campos que que tem de variáveis nome profissão
+1:11:28
+principal dificuldade ele vai transformar isso num código que o meu NN vai conseguir trabalhar então eu vou
+1:11:36
+conseguir pegar esse Envio daqui e agora trabalhar no que a gente chama de backend especificamente o nosso backend
+1:11:44
+vai ser o nhn tá o n8n pode ser no make também mas eu utilizo mais o n8n Então
+1:11:51
+pronto em tese eu pedi aqui e é para ter já a inserção do Web Hook vamos esperar
+1:11:57
+ele finalizar o código vamos testar como que a gente testa vou colocar meu nome José Carlos profissão é advis principal
+1:12:05
+dificuldade ter mais tempo antes de clicar em iniciar jornada eu vou vir
+1:12:10
+aqui no meu ntn e botar para ele ouvir o evento o que que é ouvir o evento ouvir
+1:12:17
+o evento é ele vai est esperando por acontecer alguma coisa para ele ser chamado como eu pedi para esse botão
+1:12:24
+ligar para o ntn quando eu apertar aqui é para ele mandar e esse esses dados
+1:12:30
+para lá vamos ver se vai dar certo cliquei Muito obrigado cara você é demais sua jornada lendária está apenas
+1:12:36
+começando o nhn recebeu recebeu tá aqui todos os dados que a gente acabou de
+1:12:41
+construir no Bolt estão agora no nhn vou clicar aqui nesse pininho para eu
+1:12:47
+mostrar para vocês que eles estão aqui tá vou fazer um set
+1:12:53
+Field para quem não conhece de nhn Pode parecer um mar de números aqui mas os
+1:12:59
+nossos dados estão em três Campos específicos bem aqui ó nesse Campo bar
+1:13:05
+vou pegar o nome vou pegar a profissão e vou pegar a dificuldade e agora eu tenho
+1:13:13
+tudo que foi enviado lá pelo meu meu v0 aqui no meu nhn agora eu faço o que eu
+1:13:19
+quiser com esses dados aí é a criatividade de vocês e o que que vocês vão conseguir integrar Vamos colocar uma
+1:13:25
+ia nisso aí agora é saber de nhn não mais de interface visual Vou colocar aqui uma openni só para fazer um teste
+1:13:33
+bem bem rápido mensagem ao assistente Ah vou colocar aqui um Ah não Esso daqui
+1:13:40
+não nag assistente não vou usar só um node do do da openni para ficar bem fácil aqui isso daqui é uma forma de
+1:13:48
+conversar com a com a o chat ept só que
+1:13:53
+fora daquela janela que a gente já conhece então tá aqui né o me meu node da Open o que que eu vou fazer eu vou
+1:14:01
+escolher alguma coisa para esses dados aqui ó vou falar para ele aqui ó esse é o nome do meu
+1:14:09
+cliente vou puxar o nome
+1:14:14
+aqui esse é o nome do meu cliente Essa é a profissão dele vou puxar aqui a profissão dele Zé
+1:14:23
+por que tá ficando em verde aí eu não entendo nada é o seguinte eh quando alguém preencher aqui esse
+1:14:31
+esse formulário nem sempre vai ser o Zé nem sempre vai ser o José Carlos às vezes vai ser o João vai ser o o Rogério
+1:14:39
+o Maurício então eu não posso usar o que a gente chama de dado variável estática
+1:14:44
+eu não posso deixar nome José Carlos isso daqui é uma variável Então o que ela vai pegar é tudo que for preenchido
+1:14:51
+no campo nome o que for preenchido é Rogério ela vai traduzir para para Rogério se for João ela vai trazer para
+1:14:57
+João se for Renato vai ser Renato então você percebe aqui do lado que a gente
+1:15:02
+consegue ver a conversão em verde então é por isso que a gente utiliza aqui as variáveis e não um conteúdo estático
+1:15:10
+porque a gente precisa que ele seja variável conforme um um cliente preenche
+1:15:15
+eu vou conseguir trabalhar de forma diferente a principal dificuldade dele é
+1:15:25
+crie aí eu vou fazer qualquer promp aqui tá gente não Não esperem muito de mim
+1:15:30
+não crie uma solução para que ele
+1:15:35
+possa ter o que ele quer tá bem feijão com arroz aqui eu não vou gastar muito
+1:15:42
+cabeça com isso não modelo que eu vou escolher aqui vamos pegar um 4 mini que
+1:15:47
+é baratinho então o que que vai acontecer quando eu apertar aqui em test step tudo que eu recebi
+1:15:55
+é para ele gerar uma resposta então vamos ver o que que vai acontecer vai gerar uma
+1:16:02
+resposta processando no chat ept aquela conversa lá e aqui está a resposta você
+1:16:08
+percebe que a resposta ela tá com todo aquele trabalho né ahis Bá o que que eu vou fazer agora só
+1:16:15
+para mostrar para vocês como funciona eu vou enviar isso para um e-mail só que antes de vinhar pro
+1:16:22
+e-mail vocês percebem que aqui tá tudo em linguagem markdown o chat GPT ele tem
+1:16:27
+a linguagem markdown que é com hashtag né 2 TR tem aqui os asterístico barra n
+1:16:33
+que é linha aqui no ntn tem uma um node que chama markdown então eu posso
+1:16:41
+converter markdown para HTML Por que que você vai converter markdown para HTML Zé
+1:16:47
+porque a linguagem do e-mail que a gente recebe no Gmail essa linguagem HTML Pode
+1:16:52
+até parecer né que a gente digita ali normal a gente ver mas por trás dela é uma linguagem HTML para ficar naquele
+1:16:59
+formato então o que que eu vou fazer vou só puxar aqui esse content que foi o conteúdo gerado pelo chat ept colocar
+1:17:06
+aqui no markdown e quando eu clicar em test step ele vai fazer a conversão pro
+1:17:13
+HTML agora eu vou mandar pro meu e-mail botar um e-mail
+1:17:20
+aqui S mensagem tá aqui ó enviar mensagem para quem que eu vou enviar esse e-mail aqui ó vou enviar para mim
+1:17:26
+para eu testar como eu falei eu não vou entrar em tantos detalhes do nhn numa próxima
+1:17:32
+aula a gente pode trabalhar especificamente nisso só para mostrar o funcionamento aqui do esse daqui é o do
+1:17:38
+chat PT e aqui é o HTML como eu sei que HTML que tem aqui ó barra p não sei que
+1:17:45
+H3 é uma linguagem HTML Então vou puxar aqui cadê Aqui Down
+1:17:53
+aqui a mensagem vai ser essa daqui ó campo de mensagem bora ver se funcionou
+1:17:59
+problema tá isso aqui é um errin que acontece Às vezes Ah não coloquei aqui ó
+1:18:05
+teste aula botou só o título da da do e-mail vamos ver se chegou então pra
+1:18:12
+gente colocar aqui meu Gmail tá aqui ó eu como tá o meu e-mail ele enviou de
+1:18:20
+mim para mim então ó para ajudar José Carlos advis ter mais tempo no seu tem aqui a solução sistema de otimização
+1:18:26
+automação de tarefas b b todas a toda a a mensagem o processamento chat PPT ele
+1:18:33
+transformou num HTML e enviou pro meu e-mail Então olha só a liberdade que a
+1:18:38
+gente ganhou mesmo sem saber programar óbvio que boa parte da parte da da
+1:18:44
+complexidade tá aqui no Inn Mas sendo bem honesto o Inn não tem uma curva de aprendizagem tão complexa com um
+1:18:51
+pouquinho de lógica trabalho uma semana você consegue fazer isso daqui ó percebe tem um web Hook Eu só pego os dados que
+1:18:58
+eu quero eu coloco aqui um prompt e envio pro e-mail isso aqui é só formatação não tem tanto segredo E aí
+1:19:06
+imagina só agora a gente já tem um formulário que envia em tempo real o que
+1:19:11
+Eu preencho aqui então vamos testar na prática agora vou clicar em salvar vou
+1:19:16
+ativar ele aqui ó E agora tem o pulo do gato que que vai
+1:19:23
+acontecer a gente e aí para quem entende NN sabe do que eu vou falar a gente
+1:19:29
+enviou esse essa URL aqui ó essa URL é uma url de
+1:19:35
+teste ela tá usando a URL de teste quando eu vou quando eu ativo aqui esse
+1:19:42
+botão ele passa a usar uma url de produção então eu tenho que trocar uma
+1:19:48
+url lá no v0 senão vai não vai funcionar ele tá usando essa de teste eu tenho que
+1:19:54
+vir aqui copiar e pedir para ele mudar o RL lá então vamos mudar a RL lá eu tô
+1:20:00
+tentando entender que de Ach que ele tá fazendo aqui que ele errou tanta coisa o negócio já tava pronto ó já botou no local R aqui vamos esperar aqui se nosso
+1:20:08
+querido filho v0
+1:20:14
+acabar Nossa el tá complicando o código aqui sei sei porque tanta
+1:20:22
+coisa dúvidas Pessoal vocês estão conseguindo eu sei que o nhn é uma parte um pouco mais
+1:20:27
+complicada mas fora o nhn a lógica vocês estão conseguindo
+1:20:34
+pegar o José enviaram uma dúvida bem pertinente aqui no chat o Alexandre ele
+1:20:39
+perguntou se ele perguntou se o v0 consegue replicar um layout que é
+1:20:45
+enviado por imagem vamos já tentar Alexandre eu o o cloue faz bem vamos já
+1:20:52
+tentar V vamos vamos fazer isso na prática aqui finalizando isso eu já a gente já testa eu confesso que eu nunca
+1:20:57
+fiz que eu gosto de construir do do zero né mas a gente vai já testar se dá se ele faz esse layout aí vou tirar essa
+1:21:03
+dúvida na hora então vamos lá o que que eu vou ter que mudar para funcionar automaticamente vou só mudar o Web Hook
+1:21:10
+aqui que é de produção e não mais de teste vou pedir para ele aqui ó mude o
+1:21:16
+Web Hook para este
+1:21:21
+URL E aí ele vai trocar para mim web Hook de teste pelo web Hook de de
+1:21:27
+produção para que eu consiga já ter esse meu formulário automático rodando deixa eu ver até onde é que ele
+1:21:34
+vai fazer a mudança aqui e da próxima vez eu nem vou mais pedir para ele mudar eu vou eu mesmo e
+1:21:41
+mudo pronto Ah tá bem mais fácil agora antes a gente não tinha o controle do código então a gente tinha que pedir
+1:21:46
+dele tudo agora eu consigo ir lá trocar ó ele trocou vamos ver se tá funcionando em tese Se eu colocar algo aqui é para
+1:21:54
+chegar algo no meu e-mail meu último e-mail é esse daqui tá vou colocar Vamos criar aqui um um nome fictício Maurício
+1:22:05
+Gonzaga ele é ele é dom de
+1:22:11
+confeitaria principal dificuldade atual tenho muito cliente
+1:22:19
+insatisfeito reclamando de atendimento queria uma
+1:22:25
+uma solução de a vamos clicar aqui em iniciar a jornada se estiver funcionando
+1:22:31
+bom ele enviou agora vamos saber se vai chegar no nosso e-mail isso que a gente
+1:22:36
+acabou de construir em tese é para esse formulário que a gente acabou de construir processar lá no Inn e enviar
+1:22:44
+pro nosso e-mail pode demorar um pouquinho aqui eu consigo no nhn
+1:22:49
+acompanhar se a execução deu certo ou não aqui ela deu certo vamos ver se
+1:22:55
+chegou no e-mail chegou no e-mail ó teste aula ó solução de a para melhorar
+1:23:00
+o atendimento na Confeitaria chatbot B Bá sistema de reamento de feedback então
+1:23:06
+assim ó essa solução aqui muito bom muito bom essa solução aqui feijão com
+1:23:12
+arr simples que a gente que é iniciante consegue construir eu Zé já consegui
+1:23:19
+vender comecei com R 1000 para aprender para fazer uma namese com isso eu Eu só
+1:23:24
+pego a nam mnesia e jogo pro e-mail do cara só nessa construção Aí depois ele falou para médico aí o médico Deixa eu
+1:23:31
+ver se eu mostro tudo do médico para vocês aqui ficou muito legal dele aí do médico eu já comrei mais já aumentei
+1:23:37
+para 3.500 aí disso ele já pediu outro serviços e não é algo difícil de fazer é
+1:23:43
+algo simples que com prompt e e lógica você consegue construir e para m e onde
+1:23:50
+você hospedou o link para para enviar para ele aí dentro mesmo ou tu fez fora daí a gente vai vou já produzir aqui
+1:23:56
+para para vocês o link aqui ó nossa eu não vou conseguir mostrar que ele mudou tudo aqui vamos fazer aqui o nosso mesmo
+1:24:02
+Ó Zé ficou pronto A iteração tá funcionando o que que eu faço agora para
+1:24:08
+dar pra pessoa esse link a gente vai aqui em Deploy a vantagem do v0 é que
+1:24:13
+ele hospeda automaticamente então se eu clicar em Deploy o que que é o Deploy aí
+1:24:18
+ele colocar criação não colocar aqui quando
+1:24:23
+vocês clicar em Deploy ele vai pedir para criar um projeto tá só criar o nome de um projeto Eu criei esse criação
+1:24:29
+geral aqui só para ter alguma coisa O Deploy ele pegar esse meu código que eu acabei de construir e subir na internet
+1:24:37
+para que outras pessoas tenham acesso também o que que acontece em outras plataformas por exemplo o o replit no
+1:24:44
+replit você consegue construir o seu código ele fica funcionando na internet só que você tem que pagar um valor
+1:24:50
+mensal de 0 para ter sempre hospedado esse esse código na internet a vantagem
+1:24:56
+do v0 é que para soluções mais simples até essas daqui de prototipagem a gente
+1:25:01
+consegue subir na internet na própria na própria rede da vercel que é uma uma
+1:25:08
+empresa de de hospedagem Então esse processo de Deploy É eu tô subindo pra rede para ele ficar disponível e o
+1:25:15
+detalhe se você paga a versão paga do v0 você consegue personalizar o RL então ó
+1:25:22
+ele já tá pronto aqui tá Ready o que que eu vou fazer eu vou personalizar o
+1:25:28
+domínio eu vou vir aqui ele vai ficar com domínio P vs. app Mas sendo assim
+1:25:34
+bem honesto os clientes pouc se importam com isso então se eu colocar aqui ó
+1:25:39
+eh formulário mágico e clicar em save
+1:25:44
+ele vai clico em update ele vai fazer em vez desse código feião aqui ó vai
+1:25:50
+transformar o URL em formulário mágico p Excel P app então para pra venda por mim
+1:25:59
+não tem problema porque o dificilmente o cliente ele vai querer algo específico
+1:26:04
+Agora se ele quiser algo específico aí você fala ah não aí vai ficar mais difícil vai ter que mudar domínio vai ter que mandar mudar monte de requisição
+1:26:12
+lá no no até esqueço lá da das na parte de hospedagem Aí você cobra um valor a mais mas os meus por enquanto eles não
+1:26:20
+TM pedido personalização de URL então ele Cadê você não fez meu amigo formulário
+1:26:30
+mágico ela tá com ela tá com muito bugzinho vamos
+1:26:36
+ver só não ficou Claro para mim como que você personaliza e compra o domínio da aí dentro mesmo se tu comprar o domínio
+1:26:43
+tu pode pôr ele aí dentro na verão aqui quando você paga o v zer você não não
+1:26:50
+precisa não precisa fazer nada para mudar esse domínio aqui ele já aparece automático aqui eu configurar domínio
+1:26:56
+agora se você quiser colocar no seu próprio domínio aí fica um pouco mais complexo aí tem que ir no github ou na
+1:27:02
+própria vercel eu demoraria aqui umas Du horas para fazer para mostrar aqui é um pouquinho mais complexo por isso que eu
+1:27:08
+a gente vai ficar só nessa parte aqui mas eu quero mostrar aqui que dá para
+1:27:14
+Cadê rapaz ela mudou muito de ontem para hoje então ela tá com muito bug ela não tava
+1:27:20
+assim anteontem não ela não tá não tá mudando aqui não ah agora mudou tá vendo aqui ó formulário mágico P versel.app
+1:27:27
+então assim não tá aquele código todo estruturado muito doido tá o negócio tem um nome e assim funcional
+1:27:39
+Cadê Oxe rapaz a gente fez foi outra coisa dechei no outro negócio aqui ó
+1:27:46
+Simple Job for a gente não fez o Deploy dessa bom
+1:27:51
+mas Vocês entenderam o processo aqui do Deploy né clica aqui no botão eu acho que tem uma forma simples de de fazer
+1:27:57
+isso indo lá por exemplo no registro.br redirecionando o Teu Domínio de lá para
+1:28:03
+issso É isso aí mesmo É exatamente esse processo tá é que eu Zé eu tenho uma dificuldade enorme com com esse negócio
+1:28:09
+de aponta pro domínio pro DNS e tal aí daí eu for ensinar que vou ficar meia hora rodando em círculos mas
+1:28:17
+eh Quem que tá falando quem que deu essa resposta fui eu eli eli mas aí é por aí
+1:28:24
+mesmo tá é redirecionamento de de domínio você você pega esse link aqui e bota lá para ele direcionar via registro
+1:28:31
+br ou posting e outras mais e ele faz o direcionamento para para Teu Domínio
+1:28:37
+personalizado é que eu mesmo não sei explicar tão bem a ponto de me sinto firme para mostrar como faz eu teria que
+1:28:43
+ficar umas meia hora aqui mas é isso Pessoal consegui já conseguiu ter ter
+1:28:48
+uma ideia pode pode mandar as dúvidas aí
+1:28:54
+Alguém perguntou alguma coisa não Deixa Eu Lá olher as mensagens aqui ó Alexandre apontamento de DNS para
+1:29:00
+direcionar o domínio P obrigado é por aí mesmo é por aí mesmo eu eu tava vendo
+1:29:06
+pelo menos nos testes que eu fiz é só apontamento de DNS mesmo é que eu ainda não tive eh a paciência de fazer isso que eu tive
+1:29:14
+tanto problema para criar o meu NN que eu desisti de DNS de apontamento de domínio eu pago para o pessoal fazer
+1:29:21
+para mim ah plano foi embora free vocês estavam no v0 né ferramenta consegue replicar um
+1:29:27
+layout enviado para ela na imagem vamos lá Alê vamos testar isso daí que você mandou ó pulo do gato para vocês aqui
+1:29:35
+deixa eu fechar essas coisas aqui isso daqui eu aprendi com o
+1:29:42
+próprio desenvolvedor de produtos da da vercel ele diz vou abrir um zero aqui ó
+1:29:50
+ele diz que eles utilizam esse esse site aqui ó para pegar a treinar a base da do v0
+1:30:01
+deixa eu fechar esse aqui não meu amigo eu não quero isso ó eles ele diz que
+1:30:08
+eles pegam daqui desse site eh goodly P Website eu vou até botar na nas
+1:30:14
+mensagens aqui do nas mensagens aqui do do zoom para
+1:30:20
+vocês terem acesso aqui eles dizem que eles pegem pegam daqui as inspirações
+1:30:25
+para fazer um banco de dados para que o o v0 ele consiga construir o v0 ele é
+1:30:30
+baseado na biblioteca Shade cen para quem conhece aí é uma biblioteca que já tem botões prontos já tem uma série de
+1:30:38
+coisas prontas e fica mais fácil construir mas eles eles dão como sugestão inspiração desses sites desses
+1:30:46
+sites aqui então vamos pegar aqui e dar um print tá vamos pegar aqui um site de ai pegar esse aqui por exemplo tá
+1:30:54
+vamos só dar um print nele Deixa eu ver se eu consigo visitar para dar um print
+1:31:00
+melhor pronto dar um print nele aqui aqui ele vai tá na apresentação né
+1:31:06
+vou dar um print aqui não
+1:31:18
+sobe vou dar um print aqui vou subir para ele aqui essa imagem e falar assim
+1:31:24
+ó quero algo igual só que com a palavra prompt bem bem chula mesmo tá
+1:31:32
+escrito chip né Shop muito criativo vamos ver o que que ele faz
+1:31:40
+aqui eu tô testando com vocês tá não sei se vai dar certo não mas vamos ver
+1:31:47
+aqui mas aqui ó é gold gold. Website é onde eles eles se inspiram para pegar
+1:31:55
+e criatividade pro pro v0 bora ver o que que ele constrói logo de cara ó ele ele
+1:32:02
+não ele não fez o código aqui do lado direito lembra passa o código você
+1:32:11
+mesmo quero que você trabalhe
+1:32:17
+u ele tá ele tá agindo aqui como Cloud e não como v0 acontece peço Desculpas pelo mal
+1:32:24
+entendido Pronto agora ele começou a construir aqui vamos ver como é que fica
+1:32:29
+com base no no pedido aí do nosso querido ali enquanto isso eu vou ler as mensagens aqui Ricardo mandou a bola solução no CL
+1:32:36
+F DNS né ainda tem bastante gente aí né pessoal tá por aí já já vem a cereja do
+1:32:43
+bolo que é V zero hein bom ele criou aqui ó não ficou aquela coisa Aquela
+1:32:48
+coca-cola toda né Mas já é o início
+1:32:54
+tá vamos iterar para ver se a gente consegue no resultado melhor já tem aqui alguma coisa Falar assim ó eu quero que
+1:33:04
+as letras as letras tenham uma
+1:33:14
+estilização e o cursor tenha o efeito de como que é o
+1:33:21
+nome desse efeito aqui cara eu vou colocar o que vocês sabem o nome desse efeito aqui que ele ele dissolve as
+1:33:27
+coisas né de dissolver a imagem como vocês estão vendo eu sou bem
+1:33:37
+eh limitado em relação a falar com a i eu não consigo quando eu não sei o nome
+1:33:42
+eu falo o que vem que eu acho que é Tá mas pode ser que não dê certo vamos ver como vai ficar aqui mas é esse efeito
+1:33:48
+dissolver aqui o cursor ele entende eu sei que eu já eu já fiz ah quero igual
+1:33:54
+uma bola eu quero o cursor uma seta ao contrário eu quero o cursor em formato de Cruz ele entende agora se ele vai
+1:34:00
+aplicar efeito ao cursor Eu nunca fiz vamos ver agora bom que a gente quem
+1:34:06
+sabe faz ao vivo bom ele não adicionou nada ao cursor ainda não pelo menos aqui para
+1:34:13
+mim vou tentar mais uma vez o efeito não
+1:34:18
+funcionou vou ser um pouco mais detalhado quero que passar por cima das
+1:34:25
+Letras o cursor faa com que haja um um
+1:34:33
+dissolve parecendo areia tô realmente cuspindo as coisas
+1:34:40
+aqui para ele quando eu construo gente eu não faço assim não tá eu eu vou construindo um prompt mais bem elaborado
+1:34:45
+né trabalho com clou ali mas como a gente tá num Brainstorm aqui a gente tá
+1:34:51
+jogando que tá vindo na cabeça vamos ver uma das atualizações que eu gostei
+1:34:58
+foi essa essa mudança de velocidade tá muito rápido graças a Deus senão a gente ia ficar aqui mais asas meia hora para
+1:35:05
+ele ficar modificando as coisas se não der certo esse vai ser o
+1:35:11
+último a gente vai seguir pro pro Bolt vamos ver é aí não não mudou nada
+1:35:20
+não Aí a iteração mesmo é você buscar ele até tá tá fazendo um Animation frame
+1:35:26
+aqui só que não tá funcionando deixa eu ver se não não tá funcionando não aí a
+1:35:31
+iteração mesmo é dar uma olhada nos códigos trabalhar mas eu sei que dá para o cursor ele ter algumas alguns efeitos
+1:35:39
+Sim vamos lá então pro Bolt pra gente finalizar agora a cereja do bolo dúvidas
+1:35:45
+sobre v0 algo a mais construções deixa eu dar uma lida nas mensagens sabe se
+1:35:51
+vcel e v0 são assinaturas diferentes ó se eu não sei Ó eu não sei mesmo se se a
+1:35:59
+tv0 e versel são são diferentes eu posso dar uma olhada assim que terminar a aula
+1:36:04
+aqui eu vou dar uma olhada porque geralmente quando eu faço Deploy eu já faço direto no servidor deles desse jeito que eu falei né fica o ponto vsel
+1:36:12
+ponto app porque eu acho mais fácil e por enquanto os clientes não reclamaram na hora que eles reclamar e eu mudo
+1:36:19
+achei que ficou interessante você selecionou um layout difícil pois é eu e eu acho que dá para iterar muito mais dá
+1:36:24
+para melhorar 100% então é que a gente tá fazendo algo bem bem rápido vamos lá
+1:36:30
+então para nosso querido bot Como logar no bolot b.new Existem muitos Bots se
+1:36:37
+vocês botarem só bot no Google vai ter uma porrada de Bolt tá então eu indico
+1:36:42
+colocar Bolt pon New porque ele não aparece nem aqui agora que tá subindo aqui ó no ranking de de ia mas é esse
+1:36:49
+aqui ó b. New é essa ia aqui um detalhe que eu vou explicar para
+1:36:55
+vocês tá um pouquinho mais complexo agora a gente já passou por v0 vamos lá
+1:37:01
+pro Bolt isso aqui é muito importante é um pouco mais teórico mas é muito
+1:37:07
+importante no Bolt a gente tem a facilidade dele ter a muitas estruturas
+1:37:14
+já prontas para trabalhar no v0 acaba que a gente constrói muita coisa do zero
+1:37:20
+mesmo por isso v0 então a ideia do v0 é vai ser uma prototipagem uma construção
+1:37:26
+bloco A bloco É como se você tivesse ali num Brainstorm com LEGO você vai montando e vendo que fica mais bonito
+1:37:31
+tem aqueles Legos lá do Star Wars alguns que já estão prontos mas a ideia do v0
+1:37:36
+especificamente é prototipagem ele não é voltado pra Construção oficial de um web
+1:37:43
+aplicativo um size Mas você como eu mostrei você consegue fazer eh colocar
+1:37:48
+superp base e colocar backend com unit n só que ele é para alo bem específico
+1:37:54
+pontual para um problema bem pequeno digamos assim já o v0 aqui embaixo ele
+1:37:59
+tem uma série de de bibliotecas de Framework onde a gente pode deixar isso
+1:38:05
+robusto o suficiente para virar um size para virar um aplicativo de fato então
+1:38:12
+vocês precisam entender um pouquinho desse dessa diferença entre react e nextjs tá o react é que a gente usa no
+1:38:20
+v0 praticamente ele é todo criado em act né É uma ferramenta para montar a sua
+1:38:26
+própria lanchonete do zero fica uma coisa linda mas dá trabalho o nex JS que
+1:38:31
+é essa a especialidade do Bolt eu diria é você comprar uma franquia da
+1:38:37
+McDonald's é igual de todo mundo mas é mais fácil então a diferença de v0 e BOL
+1:38:43
+eu vejo muito essa facilidade na construção do next.js você compra uma McDonald's um
+1:38:50
+Burger King você já tem um monte de estrutura pronta que ele monta para você então fica bem mais fácil enquanto no v0
+1:38:56
+você vai construindo no dedo como você a gente viu ali vamos fazer o seguinte vou
+1:39:01
+testar junto com vocês a mesma coisa que a gente fez lá no no v0 eu vou fazer no
+1:39:08
+Bolt eu vou pegar aqui vou eh subir para
+1:39:14
+ele vou subir para ele um arquivo do do print aqui do lado
+1:39:20
+aqui captura de tela essa daqui não não essa daqui não vamos
+1:39:28
+tirar o print de novo lá melhor Vamos pegar esse da Cadê
+1:39:33
+Ai chip pronto vou dar um print aqui vou no Bolt vou subir para
+1:39:43
+ele falar para ele Ó quero um uma L
+1:39:49
+page assim com efeito de
+1:39:54
+e a palavra shop em vez de
+1:40:00
+chip passa com todas as interações já
+1:40:05
+disponíveis em JavaScript em em JavaScript bom no Bolt especificamente
+1:40:13
+eh o que eles indicam você fazer um prompt de cara já bem detalhado para ele
+1:40:19
+criar o ideal dele é você já dar um prompt não precisa ser um prompt gigante
+1:40:24
+Mas já dá para ele uma ideia de construção ó eu quero uma lé de peage com coisa tal x vai ter isso aquilo e aí
+1:40:32
+você depois vai iterando eles dizem que o bot funciona muito bem com indicações
+1:40:37
+de blocos de mudanças então lembra que a gente por que que fez muita diferença eu
+1:40:43
+eu aprender depois o que que é o JavaScript o CSS o
+1:40:48
+HTML por qu ó aqui a gente já percebe que no não ficou igual v0 mas já teve um
+1:40:55
+efeito né já teve um efeito Zinho aqui ó o get tickets ele ficou mais bem
+1:41:00
+distribuído deixa eu tirar aqui ó ó tá bem mais distribuído vou pedir pro Bolt
+1:41:07
+adicione efeitos visuais na Land page e no
+1:41:16
+cursor vou vou vou dar o pronte mais absurdo de todos que é quando a pessoa tá sem criatividade me prenda eu acho
+1:41:24
+que esse daqui é o é o que eu acho mais chula de todas Mas lembra a gente tá no Brainstorm aqui pelo amor de Deus depois
+1:41:30
+eu vou mostrar aqui Os projetos que eu fiz que é para não parecer que eu não sei nada de nada né mas aqui no Bolt
+1:41:38
+Então a gente tem essas construções em blocos Qual a diferença do v0 pro BOL olha só a quantidade de de páginas que a
+1:41:46
+gente tem aqui no Bol e tudo isso aqui a gente consegue ajustar o que que ele tá
+1:41:51
+fazendo ele tá indo componente por componente ajustando e modificando antes
+1:41:57
+só o Bolt fazia isso o v0 ele não fazia ontem a vs atualizou e agora ele também
+1:42:02
+faz né a gente consegue visualizar essa modificação a gente tem acesso às pastas e consegue trabalhar mais detalhadamente
+1:42:11
+e Outra vantagem quando eu construo aqui eu consigo fazer o Deploy tal qual o v0
+1:42:18
+e já tá disponível na internet também só eu fazer um direcionamento de domínio e fica
+1:42:24
+disponível outro detalhe importante eu consigo fazer o download desse código para eu utilizar então é muito mais
+1:42:31
+interessante eu ter a possibilidade de utilizar o código todo com todos os componentes ó percebe que aqui ó eu já
+1:42:38
+consigo dá mais efeito que no v0 eu não entendo Qual o efeito que tá lá quem é o
+1:42:44
+desenvolvedor daqui deve entender Qual o nome desse efeito aqui mas aqui ó a gente já conseguiu dar uma modificada já
+1:42:50
+tem um um um efeito melhor já tem um trabalho melhor aqui já tem o efeito Blur né então percebe que aqui já deu um
+1:42:59
+suum assim em relação a criação de estética Vamos Construir uma land
+1:43:06
+page Então a gente vai construir juntos aqui uma land Page do zero da dessa nossa aula vamos vender
+1:43:12
+essa nossa aula aqui tá então vou comear aqui o promt quero construir uma ling
+1:43:18
+Page para vender um
+1:43:23
+uma imersão de ia para ia para
+1:43:31
+interfaces visuais ensinando clad
+1:43:38
+v0 Bolt construção de códigos
+1:43:45
+para HTML CSS JavaScript nextjs
+1:43:53
+vou colocar monte de coisa aqui a imersão vai ter 4
+1:43:59
+horas de duração via Zoom vai
+1:44:07
+custar vai custar R
+1:44:12
+10.000 somente para 20 participantes quero que a
+1:44:19
+homepage seja instigante para um trabalho com EA deve ter animações
+1:44:28
+estilo e toda ambiência de algo
+1:44:33
+relacionado à Inteligência Artificial deve ser algo
+1:44:41
+ã deve ser uma homepage de
+1:44:51
+10.000 bom vamos ver o que ele ele constrói aqui é um prompt um pouco mais robusto não é o prompt perfeito longe
+1:44:57
+disso de 0 a 10 isso aqui eu acho que tá seis mas a gente vai iterar juntos tá para eu mostrar
+1:45:04
+a como a gente faz a adição de a nele que aí é que fica mais fácil se no v0 eu
+1:45:11
+tinha que mandar um web Hook para trabalhar no Inn e fazer todo aqueles nodes aqui fica muito mais fácil por quê
+1:45:19
+Porque eu peço para ele assim ó eu quero adicionar na página x o chat ept aí ele
+1:45:25
+vai criar todo o código você vai copiar a sua api do chat ept Vai colar no
+1:45:31
+código e pronto ele vai tá funcionando a gente vai vai mostrar o funcionamento aqui na prática disso vamos primeiro
+1:45:37
+esperar ele fazer a criação da nossa homepage e aí a gente vê como integra ia
+1:45:44
+e a ideia é a gente integrar ia e eu vou fazer também um banco de dados aqui para
+1:45:49
+quem é um pouco mais avançado eh dá tem uma a ideia de como integrar o sup base
+1:45:55
+também então vamos ver essa primeira geração com o nosso prompt aí bem bem
+1:46:01
+feijão com arroz né algo que acontece muito Oi pode falar cara muito top já tá
+1:46:07
+me dando muito Insight aqui tô comemorando deixa fazer uma pergunta já cérebro já tá pegando fogo pode fazer tá
+1:46:13
+tá tá fervendo aqui cara eh falando aí falou de supa base agora e é nisso que eu tava pensando é o melhor para te
+1:46:20
+fazer banco de dados e tal você tem alguma Uma Outra experiência eu uso supabase porque eu gosto de ter um um
+1:46:28
+banco de dados relacional porque a maioria das coisas que eu faço elas geralmente T relação né a gente constrói
+1:46:35
+por exemplo você faz um um ranking do que é mais importante o supabase ele é melhor porque ele consegue relacionar
+1:46:41
+como se fosse uma planilha de excel né ah o dia tal o cliente x comprou tal
+1:46:46
+coisa E aí ele conversa com um outro uma outra planilha no dia tal client comprou
+1:46:51
+tal coisa Aí ele consegue fazer uma média de vendas então para um banco do
+1:46:56
+que eu preciso para minha necessidade o supabase me serve melhor mas o que muita gente diz principalmente quem tá
+1:47:03
+começando a a mexer com banco de dados é que o Google firebase ele é mais simples
+1:47:09
+de se utilizar então assim eu indicaria para quem tá começando fazer o supa base
+1:47:17
+porque tem muito material disponível de supa base inclusive na formação YouTube e tudo mais depois que você cria você
+1:47:23
+consegue criar o banco relacional pedir aqui pro Bolt criar o código né então
+1:47:28
+fica fica mais simples mas o Google firebase diz que atende melhor para
+1:47:33
+principalmente quem tá começando Então são essas duas opções que o pessoal mais utiliza ou o Google firebase que é da
+1:47:39
+Google né então tem muita facilidade principalmente com tela de login e tem o
+1:47:45
+supabase que é que é o que todo mundo utiliza porque ele é ele é de código código aberto eu não sei se eu respondi
+1:47:50
+tua pergunta mas é eu acho que é por aí né respondeu respondeu perfeito vou de suab bom Ele criou aqui pra gente essa
+1:47:57
+essa essa Land page está linda maravilhosa não ele buscou na internet aí umas imagens Ele criou eu acho
+1:48:04
+domínio arte da ya visual ó colocou aqui uns un asas imagens
+1:48:10
+investimento mas percebe que tá bem melhor que o v zer logo de cara com o único prompt ele já deu uma modificada
+1:48:18
+boa agora vamos iterar a parte do Design para ficar um design agradável
+1:48:23
+né tá bom para início Mas vamos
+1:48:30
+melhorar quero coloração azul e
+1:48:37
+dourado rapaz revolução isso aí ficou muito cara é bom demais né você é louco
+1:48:43
+Além disso os ícones estão muito infantils Ero algo pede para faz
+1:48:51
+interação assim ele não es o código do zero né Isso que é legal isso ele ele
+1:48:56
+vai na passa específica e ele modifica para não quebrar tudo se quero algo estilizado
+1:49:04
+lembre-se a gente tá construindo algo de 10.000
+1:49:12
+parceiro precisa ter um background com efeitos visuais deixa eu
+1:49:20
+ver o que mais aqui Adicione
+1:49:26
+um uma janela de chatbot para conversar com o
+1:49:35
+usuário eu não vou pedir ainda tive essa ideia aqui a gente vai adicionar uma janela de chatbot aqui no nosso no nosso
+1:49:42
+Land page mas eu não pedi ainda para el
+1:49:48
+Oi superagente desculpa plugar ele no superagente Exatamente é uma opção você
+1:49:54
+pode pegar o iframe do superagentes e joga aqui que ele vai funcionar eu vou eu vou dar uma opção mais simples e
+1:50:01
+rápida para quem tá começando e numa outra aula eu posso mostrar como o superagentes Fixa aqui porque no
+1:50:07
+superagentes a gente consegue trabalhar muito melhor prompt banco de dados né o que eu ia falar é que eu não coloquei
+1:50:13
+aqui é que eu quero chat ept ah vai ter o chat ept aqui por qu quando a gente tá
+1:50:20
+tratando com BOL sobre um tema fica na tema com ele eu tô falando com ele de design por isso é importante eu comecei
+1:50:26
+falando da gente entender a diferença do front end que é HTML CSS JavaScript e o
+1:50:32
+backend que é a parte da lógica se eu pedir às vezes design e backend ou seja
+1:50:38
+muda a cor para azul e adiciona o chat ept ele colide ele acaba gerando alguns
+1:50:44
+erros e aí fica difícil às vezes corrigir o código se der erro até melhor que eu vou mostrar como conserto aqui
+1:50:49
+que é bem simples mas o ideal é trabalhar blocos de ideias com ele você itera primeiro design primeiro Font de
+1:50:56
+todo e depois você trabalha toda a lógica porque são pastas diferentes e aí
+1:51:02
+fica mais fácil para ele trabalhar vamos ver se ele vai vai melhorar bom sim dá
+1:51:10
+para ficar bom bom 100% é porque eu mesmo não manjo tanto na parte de de Land page mas já tá já deu um azul e
+1:51:17
+amarelo aqui eu vou tentar mais uma iteração porque eu ainda não gostei aqui tem o
+1:51:23
+botão do chatbot Ó ele já colocou aqui o botãozinho do assistente a gente vai
+1:51:28
+integrar esse assistente com o chat ept vou mostrar já já mas antes tá vendo que
+1:51:34
+apareceu aqui ó um problema potencial problema detectado é só apertar em try
+1:51:40
+to Fix problem Ele mesmo vai solucionar provavelmente esse problema tá atrelado
+1:51:45
+ao chatbot ao botãozinho do chatbot ele vai lá na no page ptsx
+1:51:53
+essa página aqui ó decorem bem page.ts tsx É a página principal da parte de
+1:52:01
+código Então sempre que você pedir uma modificação ele vai fazer uma modificação aqui o restante das páginas
+1:52:09
+envolve a o ui ux né o a interface o
+1:52:14
+design vamos ver se ele ajusta pra gente esse problema o bom do Bolt é que ele tem esses Eh esses pequenos problemas
+1:52:21
+ele consegue corrigir dependendo do tamanho que do sistema que você queira criar ele vai ficando mais complexo eu
+1:52:27
+vou mostrar aqui como eu fiz o nosso professor de inglês tá aí o Gabriel eu fiz
+1:52:33
+uma um um teste de proef de inglês aqui no Bolt vamos ver clicar aqui no chatbot
+1:52:40
+para ver se vai dar o problema Não não deu o problema clicar enviar aqui ele não vai
+1:52:45
+responder nada ele respondeu aqui mas ele essa mensagem aqui é uma mensagem automática que ele criou tá
+1:52:52
+ó quer ver ó é uma mensagem automática não tem integração de a aqui Não ele só colocou para já ter uma função aí e no
+1:53:00
+nosso na nossa L page eu vou falar para ele assim ó eu não gostei da
+1:53:08
+estética tá muito amadora Faça algo com
+1:53:14
+nextjs tenha mais ah animações
+1:53:20
+mais efeito mais vida mais
+1:53:25
+eá vamos ver se ele entrega um design um pouquinho melhor esse daqui é um design
+1:53:31
+muito muito singelo né e eu tô trabalhando ainda essa essa
+1:53:36
+aprendizado do das linguagens de de design de de Land page então ainda tem
+1:53:42
+essas limitações aqui vamos ver se ele já entrega pra gente algo um pouquinho melhor que aí eu já a gente já começa a
+1:53:48
+Inserir a ia nele mas o que que ele tá fazendo aqui ó ele tá na pasta global.css lembra CSS design então toda
+1:53:56
+vez que a gente falar de design ele vai mexer no CSS Ele tá mexendo aqui nessas
+1:54:03
+pastas de T tsx que é também uma outra linguagem de Type de Type
+1:54:09
+script para ver se ele chega num design que me agrada aí ele vai mudar tudo que
+1:54:16
+é referente aí a à parte de de design eu falei sobre o o CSS mas existem outras
+1:54:24
+formas né de mudar o design outras linguagens mas eu tô trazendo algo bem bem Raso que é para gente mesmo que não
+1:54:30
+entende tanto de código conseguir já ter a liberdade de construir o as nossas próprias LPS as nossas próprias soluções
+1:54:38
+quando ele começa a atualizar o page ptsx é porque ele já tá nos finalmentes
+1:54:44
+que é a última página que geralmente ele atualiza Por quê todos os outros componentes eles estão dentro do page
+1:54:52
+ptsx ele só vai indicando dentro do Page tsx para onde a O código vai ter que ir
+1:55:00
+vamos dar uma olhada aqui primeiro se vai aparecer o
+1:55:08
+preview bom foi bom que não apareceu o preview porque às vezes o preview ele
+1:55:14
+não aparece aqui ou então ele fica pesado ele fez aqui ele tentou fazer um
+1:55:21
+um bem bolado aqui né inclusive ó a setinha ela se une no nas bolinhas aqui
+1:55:27
+ó caraca que é feito dois isso aqui não sei como faz não vou até aumentar aqui para vocês
+1:55:34
+visualizarem ó parece interessante ó a setinha ela une com as bolas que passam
+1:55:40
+aqui ó mas percebe que aqui ó já fizemos algo melhor ele já consegue entregar pra
+1:55:46
+gente algo que sai daquele daquele daquela daqu aqueles ícones mais simples
+1:55:51
+e tudo mais Vamos seguir então ó agora sim animação ficou melhor aqui surgindo
+1:55:58
+e tal se eu quisesse aí é interação né adicionar as coisas esse izinho aqui é que Dea
+1:56:06
+chateado acho muito infantil Mas vamos seguir fiz o meu design Zé gostei agora
+1:56:12
+minha L page tá do jeito que eu quero agora eu quero adicionar ia a gente colocou aqui o nosso
+1:56:18
+chatbot para que ele atenda o nosso cliente aqui agora eu vou falar para ele
+1:56:23
+beleza vamos seguir agora para inserir
+1:56:30
+Ah o chat ept dentro da nossa janela de
+1:56:36
+ia vamos usar a versão 4 o
+1:56:43
+mini do chat PT E aí ele vai criar uma outra pasta
+1:56:50
+agora paraa gente trabalhar a questão da api da Open
+1:56:55
+Open ó ele criou criou aqui esse chat. TS ele tá criando algumas
+1:57:04
+respostas padrão eu já vou parar aqui porque eu não quero que ele crie
+1:57:09
+resposta prão eu quero quero integrar minha api
+1:57:16
+do chat FT na janela do nosso chatbot
+1:57:22
+Me guie eu vou pedir para ele me guiar porque às vezes quando a gente pede para ele fazer logo especificamente ele faz o
+1:57:30
+que vem na venta dele então o que que ele vai fazer ele vai adicionar algumas páginas então isso
+1:57:37
+daqui ó já mostra que ele tá tentando Inserir a api aqui ó fazendo o update
+1:57:43
+ele deu erro vou dar um retry aqui ó sempre que der erro por
+1:57:49
+exemplo eu fui para cá ele começou a alucinar muito já não tá me entregando
+1:57:55
+nada eu tenho opção de vir aqui ó Nessa parte ele tava funcionando aqui e eu
+1:58:02
+peço para ele voltar a partir daqui assim que ele finalizar o código eu vou mostrar para vocês como retornar é Agora
+1:58:10
+sim agora tá Tá ok vou ajudar você a integrar ap do chat
+1:58:16
+ap do nosso chatbot primeiro vamos criar um serviço para gerenciar chamados api depois atualizar o comput chatbot beleza
+1:58:23
+ele vai fazer toda a parte difícil de programação que a gente quer dizer que eu não entendo eu aí só pra gente só ter
+1:58:29
+o trabalho de colar a api lá beleza o que que ele disse aqui ó ele
+1:58:36
+construiu toda todo backend pra gente integrar o nosso chat GPT no chatbot a
+1:58:42
+única coisa que ele pediu pra gente fazer o mano foi substituir a api no arquivo pon env P local pela nossa chave
+1:58:50
+de API vamos lá pegar uma chave de api na
+1:58:55
+openni para quem não tem chave de api não sabe criar platform open.com E aí
+1:59:02
+você vai cair numa página como essa você ter o chat ept de 0 é diferente de você
+1:59:08
+ter a api da openni são coisas distintas quando você loga aqui nessa nesse nesse
+1:59:15
+url de platform opi você vai ter que colocar um crédito mínimo de 5 tá então
+1:59:20
+eu já tenho aqui ó vou só mostrar como é que faz vai clicar aqui na ferramenta vai clicar aqui em
+1:59:26
+Billing E aí É só adicionar aqui ó credit Balan Inclusive eu vou até
+1:59:32
+adicionar aqui Porque tá para terminar colocar ó aqui para mostrar para você já
+1:59:38
+tá já tá salvo o meu cartão de crédito confirme
+1:59:47
+payment E aí ele vai adicionar para para mim aqui os ó
+1:59:53
+pronto pagamento tá $29 a o valor mínimo é 5 por isso que eu
+1:59:58
+coloquei 5 vamos pegar então a depois que você coloca aqui o valor você vai
+2:00:04
+aqui em playground playground não é dashboard
+2:00:10
+api kys vou repetir aqui ó vai em dashboard api kys vai criar uma nova api
+2:00:19
+esse nome você coloca o nome que você quiser nome que você quiser não é para
+2:00:25
+colocar isso é só um exemplo tá coloca o nome que você quiser aqui e criar a chave do API pronto vou copiar essa
+2:00:32
+chave de api depois eu vou apagar Não se preocupem vou no Bolt ele diz para eu ir
+2:00:38
+nessa pasta aqui ó env pon local vou lá env pon local e ele diz ó
+2:00:43
+seu apq aqui vou só apagar seu apq aqui depois do igual vou clicar aqui o
+2:00:50
+control V para salvar minha minha api sempre importante mudou clica em
+2:00:55
+save E aí ele vai salvar sempre que eu mudar algo no código direto aqui não for
+2:01:01
+o próprio Bolt Mood eu tenho que vir aqui ó E reiniciar que aí ele vai
+2:01:06
+reiniciar a aplicação bom vamos ver agora se o nosso chatbot tá integrado
+2:01:11
+com a openi tá aqui não tá aparecendo porque
+2:01:16
+ele colocou em Preto a o texto Então vou logo mudar aqui ó a cor de de
+2:01:22
+digitação do usuário está na cor preta coloque na cor branca para ter
+2:01:32
+contraste para vocês poderem acompanharem aí a o que eu vou digitar senão vai ficar um negócio doido
+2:01:39
+ah chatbot input test color ele vai exatamente na pasta ó componente chatbots tsx e reescreve só o que é
+2:01:48
+preciso em vez de mexer no código todo ele vai ex onde precisa ir ele modifica
+2:01:54
+e assim fica mais mais simples e menos menos Custoso você gerar Esses códigos
+2:02:02
+tá vamos ver se agora funcionou continua preto mas eu vou vou
+2:02:09
+seguir aqui pra gente não enrolar muito Olá boa tarde escrever aqui ó vamos ver
+2:02:15
+se vai funcionar ele reiniciou tentar mais uma
+2:02:21
+vez Ah agora ele atualizou Olá boa tarde aqui é para fazer uma conexão boa
+2:02:28
+tarde como posso ajudá-lo hoje ó ele já tá integrado quem é
+2:02:37
+você sou um assistente especializado em a desenvolvimento de interfac visuais estou aqui para fornecer informações
+2:02:43
+esclarecer suas dúvidas e tudo mais vamos ver onde é que tá esse código e cadê cadê chat GPT bom tá aqui ó esse
+2:02:51
+aqui é o código que que ele criou do chat ept ele pegou toda a estrutura que ele já tem da openi e ele mesmo criou o
+2:02:56
+prompt que ele utilizou foi esse aqui ó você é um assistente especializado em I desenvolvimento de interfaces visuais
+2:03:01
+responsá para fornecer informações b b b b b aqui se você quiser depois você faz
+2:03:07
+um prompt mais especializado Ele criou do jeito que ele achou que era interessante mas percebe como a gente
+2:03:13
+não precisou fazer integração nenhuma fazer web Hook absolutamente nada a gente só pediu assim ó bota um chatbot
+2:03:20
+do chat PT ali e a gente colou a nossa chave de api e funcionou Então já tá integrado aqui a nossa homepage com o
+2:03:27
+chat GPT né aqui dentro se o cara quiser conversar comigo ele vai conversar com a
+2:03:33
+minha ia né o chat ept treinado dúvidas até aqui ou muitas José possibilidades pode
+2:03:41
+mandar mano eu fiquei só com uma dúvida se eu quiser mudar apenas um Um item por
+2:03:47
+exemplo ah eu tô criando algo aqui também aí não gostei de um de uma parte
+2:03:52
+visual o que tu tinha falado ali que facilita ele vai só naquela parte Ah sim
+2:03:58
+aqui as p manda out tu pede ali normal e ele vai reescrever todo o código quando
+2:04:04
+você pede no design ele modifica especificamente o que você pede Vamos citar um exemplo vou falar para ele que
+2:04:11
+eu não gostei dessa cor amarela né do botão eu não gostei da cor amarela no
+2:04:16
+botão eu quero Rosa estilo Barbie
+2:04:22
+eu gosto de falar coisas fora do padrão aqui que é pra gente lembrar aí o que que ele vai fazer ele vai na pasta
+2:04:28
+específica ó global.css automático automático você não precisa fazer nada
+2:04:34
+você só pede o componente e a mudança que você quer e ele vai fazer a a
+2:04:41
+atualização para você vou esperar ele fazer aqui esse essa mudança pra gente aqui ó ele vai reescrever algumas outras
+2:04:48
+bibliotecas que t a ver todas essas pastinhas elas estão interligadas entre si então quando ele muda uma que ele
+2:04:55
+sabe que tá enraizada nas outras ele faz modificação em várias passas de uma vez
+2:05:00
+eu tô usando o Bolt tem pouco tempo tem duas semanas e assim semana passada ele
+2:05:06
+dava erro para caramba toda vez era erro erro erro e essa semana especificamente
+2:05:12
+ele ficou muito bom muito muito bom ó aí ele mudou tá vendo ele colocou um rosa
+2:05:17
+como eu pedi mudou aqui as partículas e tudo mais e tudo tá nessa nessa
+2:05:22
+coloração que a gente solicitou show legal eu eu tô pedindo algo bem bem
+2:05:27
+elaborado aqui para ele uma ideia que eu tenho aqui eh eu na primeira conversa
+2:05:33
+não mostrava nada preview sempre em branco aí eu abri uma conversa nova de primeira ele já mostrou Então acho que é
+2:05:38
+algum bug mesmo É ele tem ele tem bugzin às vezes quando não aparece aqui o
+2:05:44
+preview eu confesso que para mim hoje ele tá dando super certo eu tô amando isso que ele tá funcionando bem mas
+2:05:49
+vocês podem vir aqui no co aqui embaixo clicar em terminal e
+2:05:54
+digitar npm Run Dev isso daqui é como se fosse um start para ele tá então sempre
+2:06:02
+que ele não funcionar vocês podem vir aqui e escrever isso aqui ó npn Run ele
+2:06:08
+mesmo ele faz isso ele aqui ó quando ele finaliza aparece aqui ó npm Run só que
+2:06:14
+às vezes ele não ele não faz então não aparece o preview algumas vezes porque ele esquece de dar o start e o código é
+2:06:21
+esse daqui ó npm Run sempre que não carregar tentem isso Mas dependendo
+2:06:28
+da da complexidade do que vocês estão construindo demora um pouco para fazer
+2:06:33
+essa essa integração O que que a gente vai fazer agora V integrar com um banco
+2:06:38
+de dados tá pra gente ter a estrutura completa desde ia landpage visual e
+2:06:45
+receber e saber como essa conversa acontece a gente vai pode falar pode na
+2:06:50
+hora e dá para integrar também com o Google Agenda Google Agenda eu ainda não
+2:06:59
+fiz mas posso te dizer com certeza dá sim ah beleza tudo que tiver ele ele faz
+2:07:06
+Ah legal E se eu quiser usar o cloud ao invés do do da Open também a mudar lá
+2:07:14
+isso você pede para ele para ele usar Unic ó vou querer como chatbot e o cloud
+2:07:20
+da aí ele vai mudar osos códigos para utilizar o cloud da un trofic e vai
+2:07:26
+deixar só a pastinha lá ó colhe seu sua api aqui aí no caso do Cloud né Você tem o Api do Cloud Não ainda não mas tô
+2:07:34
+pensando em fazer é console. unic.com E aí aqui você cria a api dele
+2:07:41
+só criar em Create Key bem simples também você vai criar uma empresa lá e
+2:07:46
+ele vai gerar pi basicamente você só solicita qual pi que você vai querer E
+2:07:51
+aí ele só joga lá ó vai colar tua api aqui nessa pasta e aí vai funcionar quando não funcionar aí vai ter que ter
+2:08:00
+um um pouco mais de estudo dar uma olhada na documentação da api que você tá utilizando por exemplo o Google
+2:08:05
+Agenda com certeza tem muitas eh muitos detalhes lá de de api aí aí é ser humano
+2:08:12
+mesmo bater a cabeça lendo lá e falando para ele às vezes ó api funciona assim e tal tal tal entendi legal obrigado Vamos
+2:08:22
+colocar agora um banco de dados para finalizar a nossa imersão e a nossa nossa Land page aqui ah a o banco de
+2:08:31
+dados que a gente vai utilizar É o supabase Zé por que que eu preciso de banco de dados eu preciso de banco de dados Não não é obrigatório ter banco de
+2:08:38
+dados a gente cria banco de dados quando a gente quer ter um controle do que tá acontecendo na nossa interface por
+2:08:45
+exemplo aqui tá tendo uma conversa várias pessoas vão conversar com meu agente mas quantas pessoas vão conversar
+2:08:53
+o que que mais elas vão falar como é que eu posso pegar esses dados para utilizar e gerar inteligência quantos cliques
+2:09:00
+teve aqui no Garanta sua vaga ah mas tem lá o o o traqueamento que já é feito e
+2:09:06
+tudo mais só que a gente tá construindo algumas construções elas vão ter muitas
+2:09:11
+personalizações que não vai não vai dar para traquear vai ser algo muito único exclusivo então aí em alguns casos é
+2:09:18
+interessante você ter um banco de dados o que que eu vou querer de dado aqui só o que que o o as pessoas estão
+2:09:25
+conversando aqui com o meu assistente como que eu vou fazer Primeira coisa eu
+2:09:30
+vou criar uma conta no supabase tá vou dar o logout aqui o supabase ele é uma é
+2:09:36
+um banco de dados open source é gratuito percebe que aqui também ele não tem o
+2:09:42
+login com o Google ele mas ele tem com Git Hub ou você pode criar sua conta
+2:09:47
+aqui no signup Now e aí você faz uma conta diretamente no base Não especificamente uma conta
+2:09:54
+eh uma outra conta em outra plataforma vou clicar em continuar com
+2:10:00
+github E aí eu vou simular que eu não sei nada de de banco de dados
+2:10:06
+absolutamente nada eu vou falar para ele assim ó eu quero que todas toda a
+2:10:12
+conversa com meu chatbot vá para um banco de
+2:10:18
+dados vou usar o supabase Me guie nesse processo não sei nada por
+2:10:26
+que que você tá falando isso porque eu tô conversando com o cloud como eu sei que eu tô conversando com o cloud o
+2:10:32
+cloud é muito bom para guiar você no uso de uma de uma API no uso de um processo
+2:10:38
+principalmente essas ferramentas que são muito famosas já supabase o o Google
+2:10:44
+Google firebase então fica muito mais fácil você utilizar eh pedindo pro lo tgia em vez de você
+2:10:52
+ter que ler lá porque ele já tem esse treinamento na base de dados dele é a ia que para mim é uma a LM que para mim
+2:10:58
+atualmente é a mais completa e mais inteligente do momento o que que ele tá fazendo aqui ó ele já tá atualizando
+2:11:06
+para mim todas as pastas para receber o supabase eu pedi para ele me guiar então
+2:11:12
+ele já tá criando toda a interface toda a preparação em código e agora ele vai me falar o que que eu humano preciso
+2:11:19
+fazer vamos lá ele falou o seguinte primeiro você vai criar uma conta no supabase que é o que
+2:11:26
+a gente acabou de fazer aqui beleza depois você vai criar um novo projeto
+2:11:31
+quando você logar no supabase vai est assim vou clicar aqui no novo projeto deixa eu apagar
+2:11:37
+essa você só pode criar você só pode criar três projetos
+2:11:44
+eu acho que talvez a não consiga bora ver aqui ó dá dá para criar então vou voltar aqui
+2:11:51
+ó ele me falou para criar em clicar em novo projeto vou clicar em novo
+2:11:58
+projeto vou cli criar uma organização aqui tá aí ele vai pedir ó escolha um projeto
+2:12:05
+criado que foi o que eu cliquei aqui no Aurora ai e crie duas ah tabelas no sup
+2:12:13
+base dashboard vou criar o nome aqui ó de teste aula lendária
+2:12:21
+ele vai ter que Obrigatoriamente criar um um uma senha tá então você pode criar
+2:12:27
+aqui em generate passb e copia e salva essa senha aqui porque se você colocar
+2:12:32
+uma senha comum que você geralmente usa no dia a dia ele não vai aceitar então eu geralmente clico Loo aqui no generate
+2:12:38
+passw região qual que eu vou usar Zé usa que você está no momento em em loc se
+2:12:44
+você tá nos Estados Unidos USA dos Estados Unidos você tá na Índia usa da índia se a gente tá no Brasil tem a de São Paulo aqui ó South America Paulo
+2:12:52
+criar New Project o que que vai acontecer aqui vai aparecer um monte de
+2:12:57
+coisa muito doida que eu particularmente Zé eu entendo muito pouco do todo tá de
+2:13:03
+banco de dados mas ele fica funcional para mim e é suficiente mas isso aqui ó a non Public é como se fosse o código da
+2:13:12
+api Não se preocupa que a gente vai mostrar como usar daqui a pouquinho
+2:13:17
+então ele criou aqui para mim uma série de parâmetros que a gente vai utilizar mas para o nosso projeto só vai precisar
+2:13:25
+disso aqui vamos voltar para para lá aí ele fala o seguinte ó para se você pedir
+2:13:31
+para ele falar em português ele fala em português também mas ele funciona melhor em inglês pro projeto criar duas tabelas
+2:13:36
+no super base dashboard ele pediu para criar isso daqui primeira coisa que eu vou fazer ele deu 12 problemas vamos
+2:13:44
+solucionar logo todos os problemas antes de
+2:13:49
+seguir ele vai fazer ajustes que que a gente vai ter que
+2:13:54
+fazer bom viu que agora sumiu aquela janela enquanto a gente tá naquela janela supabase tá criando o nosso
+2:14:02
+projeto ele demora em média uns 2 3 minutos para criar o seu projeto E aí você poder utilizar Então agora ele tá
+2:14:10
+conectado tá vendoo um um verdinho aqui tem uma bancada de botão aqui muito
+2:14:16
+botão o único que a gente vai utilizar Por enquanto é o table editor e o SQL
+2:14:22
+editor vocês não vão precisar criar código planilha nada tudo que vai quem
+2:14:29
+vai criar é o Bolt é por isso que é vantajoso criar com ele porque você pede dele e só faz copiar as coisas aqui não
+2:14:35
+precisa entender nada de supabase para você ter seu banco de dados Ó tem mais
+2:14:40
+dois problemas vou geralmente quando você insere apis ele dá muitos problemas Agora sim os
+2:14:47
+problemas estão aparecendo ele tá criando aqui aqui ó um
+2:14:53
+algumas algumas mensagens eu não pedi para ele criar mensagem
+2:15:03
+padrão ó continua dando problema el tá estruturando o código para armazenar no
+2:15:08
+sup base né isso exatamente ele já fez uma estrutura boa aqui ó se a gente olhar o sup base aqui ó ele já colocou a
+2:15:15
+RL só para receber e o aquele código anon que que ele ele botou lá mas ele tá
+2:15:22
+fazendo o restinho aqui embora ver se ele ele acerta ainda tá
+2:15:27
+errando oô José Oi pode falar eu tô criando aqui e eu percebi que fica
+2:15:33
+bastante lento né Para eu navegar entre as paginas inhas que ele criou aqui para mim isso é só porque tá nesse ambiente
+2:15:40
+ou você acha que ficou muito pesado dependendo da linguagem que você usa
+2:15:45
+fica pesado mesmo mas eh é algo que você também pode iterar com ele você fala assim ó o ambiente que eu tô criando tá
+2:15:52
+ficando muito pesado e aí ele vai fazer alguns ajustes de código para mudar pequenas funções para deixar mais fluida
+2:15:58
+a página então aqui por exemplo como o meu processador é é bom e ele tá bem
+2:16:05
+fluido Você tá no o seu PC ele é um PC robusto sim PC é bom é o Mac Mac bom Ah
+2:16:13
+então é geralmente é é código pesado mesmo aí você pode iterar com ele falar
+2:16:18
+que tá ficando muito pesado porque ele puxa algumas bibli tecas Principalmente quando tem animação eh alguns
+2:16:24
+componentes mais de difícil carregamento e aí a página mesmo ela não fica tão
+2:16:29
+fluida por conta da do código que é criado no o design fica bonito a estética mas a fluidez nem tanto e aí
+2:16:37
+que a gente entra né nessa nessa linha de ver o que que fica mais fluido e ao mesmo tempo bonito mas é algo que você
+2:16:44
+pode itar com ele você pode falar que tá acontecendo isso às vezes é uma linha mais um um detalhe a menos assim que ele
+2:16:50
+colocou que um efeito Blue ou um Gradiente que tá deixando a página
+2:16:59
+lenta ele tá cadê ó no Spice positions Jason pass vamos dar mais um aqui
+2:17:07
+um uma correção o que aconteceu aqui é que já tinha api do chat ept e provavelmente
+2:17:14
+ele quis colocar outra api do supabase e ele se confundiu aí ele tá criando o código todinho de novo porque ele não
+2:17:21
+conseguiu seguir com o Api já existente ó ele já fez atualização no nosso P pqg
+2:17:28
+Jon Vamos ver se agora
+2:17:34
+vai É bom que se não for eu volto lá do início até para mostrar para vocês como
+2:17:39
+que faz quando ele ele dá esse errinho ó quando ele ele faz muitas atualizações geralmente o preview fica
+2:17:48
+demorado vou abrir aqui um no terminal acho que agora ele vai aparecer pronto
+2:17:54
+apareceu em tese está funcional vamos ver se nosso bote continua com com chat
+2:18:00
+ept á Boa tarde não ele ele tirou o chat ept eu vi que ele tava fazendo besteira
+2:18:07
+ele tirou o chat ept e colocou mensagens salvas Tá vou falar para ele aqui ó você
+2:18:12
+tirou api o chat ept do
+2:18:18
+chatbot retorne com ela não quero imagens pré
+2:18:26
+salvas aí com o tempo vocês vão vão notar que assim eu não sou como já falei
+2:18:31
+não sou desenvolvedor mas com o tempo utilizando ferramenta vocês vão notar que ela ela vai começar a fazer umas
+2:18:36
+mudanças que de cara você já sabe o que ela tá fazendo mesmo não entendendo a fundo o código Vocês conseguem saber que
+2:18:43
+ela tá fazendo algo que você não pediu eu vi ali que ela tava escrevendo algumas mensagens pré preenchidas E aí
+2:18:51
+eu imaginei que ela tivesse modificando porque como eu imaginei né a gente adicionou mais uma Pit su base aí ela
+2:18:57
+não conseguiu colocar em cima da que já tinha do chat ept ela começou a fazer alguns erros vamos ver o que ele fez
+2:19:03
+aqui ó e3f tá isso aqui ele
+2:19:12
+resolve eu vou tentar fazer mais uma uma solução de problema senão eu vou voltar
+2:19:17
+lá do início aonde o nosso chatbot tava funci
+2:19:26
+fonal vamos ver se o chat Bod tá funcionando Boa tarde desculpe ocorreu
+2:19:33
+um erro a processar ele tá ele tem um vamos lá voltar então o
+2:19:39
+que que acontece quando começa a dar muitos erros assim ele alucinou demais ele não consegue votar pro código
+2:19:46
+anterior e uma das formas que eles a acharam uma solução para para você não
+2:19:52
+ter que construir tudo de novo do zero é voltar pro ponto onde ele funcionava aqui deixa eu
+2:20:01
+ver aqui pronto no Rosa tá vendo aqui ó tem um botão chamado Roll back to
+2:20:06
+checkpoint se você apertar no Roll back to checkpoint ele vai reverter todo o
+2:20:11
+código que ele fez Depois disso então você tem é como se fosse um um pré-save
+2:20:17
+isso é assim a mão na roda porque antes tinha que construir o código todo então
+2:20:23
+em tese é para tá funcional vamos dar Vamos solucionar
+2:20:29
+esses dois problemas aqui é bom que quando dá problema a
+2:20:35
+gente vê que ele tá funcionando de verdade porque geralmente quando a gente vê vídeo na internet tudo flui tão bem né tudo dá certo funciona certinho de
+2:20:41
+primeira nunca dá problema vamos ver se o nosso chatbot tá funcionando Olá boa
+2:20:48
+tarde acho que tá demorou para responder sim tá funcionando beleza chat GPT tá de
+2:20:54
+volta agora eu vou falar para ele de novo quero adicionar o supabase como banco de dados
+2:21:02
+por que que deu erro porque como eu falei que eu queria mapear tudo que fosse conversado com o chat PT ele
+2:21:10
+modificou o código que tava dentro da da do uso da api da openni então eu vou
+2:21:16
+tentar evitar de falar chat ept para ele não alterar nada da openni quero captar
+2:21:22
+dados das con da da conversa no chat eu vou tentar não
+2:21:30
+utilizar o termo chatbot chpt Open para ele não confundir o código e acabar
+2:21:38
+modificando bom aqui ele já adicionou vai adicionar um um código novo a esse
+2:21:44
+package Jon é um uma das pestas principais que tem todas as animações toda parte de
+2:21:54
+design vai criar
+2:22:00
+aqui aqui é a função do chatbot né mensagem S mensagens
+2:22:06
+beleza girou um ID quando a a mensagem é aberta um ID único para eu ter a essa
+2:22:13
+conversa salva no sup base então ele tá criando aqui ó a alguns Alguns
+2:22:19
+parâmetros para eu ter como mapear lá no meu sup base vamos ver se geralmente quando
+2:22:26
+adiciono o supabase ele dá 12 erros que aqueles 12 erros que apareceram no início vou ver se vai aparecer esses
+2:22:32
+erros aí aqui ele me diz o seguinte então tá adicionou o ID tudo mais aí ele
+2:22:38
+me guia de como fazer a gente já fez aqui a nossa o nosso projeto o que que
+2:22:45
+eu vou fazer para ele falando um pouquinho de supabase eu sei 1% de su
+2:22:51
+aqui em table editor é onde a gente cria as tabelas imagina que a gente tá no Excel Então você cria uma tabela aí você
+2:22:59
+vai criar aqui janela a janela ou coluna a coluna vai colocar todos os detalhes
+2:23:05
+aqui quando é para ser manual é mais difícil mas a gente não vai utilizar
+2:23:11
+esse modelo manual O que que a gente vai utilizar um código para ele criar tudo
+2:23:16
+pra gente que é o SQL editor então o que que eu vou vou pedir eu vou pedir pro
+2:23:22
+Bolt criar um SQL para que eu utilize
+2:23:27
+aqui dentro do do do sup base e ele vai criar tudo que a gente precisa eu vou ignorar esse erro aqui depois a gente
+2:23:34
+ajusta ele crie para mim um código SQL para eu colocar no sup base para que
+2:23:44
+ele alimente para que ele seja alimentado
+2:23:49
+seja alimentado com esses dados ele vai fazer para mim um código
+2:23:56
+SQL que eu vou colar aqui e ele vai est já pronto para uso por que que eu peço
+2:24:02
+do Bolt Porque como o Bolt construiu o meu código Ele já sabe tudo que precisa
+2:24:08
+para fazer essa construção no SQL então ele Cadê o SQL que ele fez
+2:24:14
+aqui ele construiu dentro da página o Ed Primar aqui e tudo mais deixa dar uma olhada aqui ó ele
+2:24:22
+construiu bem aqui ó supabase SQL ele colocou dentro da página aqui não tem
+2:24:27
+problema isso daqui a gente copia vem aqui no
+2:24:33
+supabase Cola e dá o Run o que que vai
+2:24:38
+acontecer esse código criou tudo que eu preciso de tabela se eu for no table
+2:24:44
+editor eu vou ver aqui ó que tem o chat Analytics já com todas as a os
+2:24:49
+parâmetros que eu preciso o chat mensagens com todos os parâmetros que eu preciso Então o supabase a tabela já tá
+2:24:56
+pronta a única coisa que eu tenho que fazer é colocar lá o o código da api e a URL primeiro a gente vai resolver esses
+2:25:04
+problemas aqui especificamente do supabase Ele sempre dá esses 12 problemas vamos ver se dessa vez ele
+2:25:11
+soluciona vai mudar o m pon local aqui no m p local é onde ficam as as chaves
+2:25:18
+de api o o que que aconteceu aqui a gente já tinha colocado a chave de api da openni só que ele apagou porque ele
+2:25:25
+criou a chave do supabase e por isso a gente não estava conseguindo acessar o nosso chatbot aí como o chatbot não
+2:25:33
+estava respondendo aí ele criou mensagens automáticas para não ficar sem nada vamos dar uma olhada aqui no que
+2:25:39
+que ele fez su base vamos agora ele tá dando
+2:25:45
+esses erros porque a gente vai ter que botar na mão agora
+2:25:50
+vamos lá botar na mão primeira coisa que a gente vai fazer URL do supabase Next
+2:25:57
+Public supabase a gente vai vir aqui em
+2:26:02
+API Cadê não Project settings api e a gente vai copiar essa URL aqui ó
+2:26:10
+essa que é a URL do projeto vou apertar em copiar Vou colar lá Pronto já ten a
+2:26:17
+URL do supabase Agora eu preciso dessa an Key que ele pede vou aqui na
+2:26:25
+pii aqui embaixo ó en Public vou criar aqui copy e vou colar aqui e por
+2:26:36
+último a api da Open que ele apagou esse
+2:26:41
+safado vou gerar uma nova api É bom deixar salvo porque de vez em quando ele faz essas essas cagadas vou criar aqui a
+2:26:50
+pen nova vou criar copiar jogar
+2:26:56
+lá na nossa página já botei as apis Já botei tudo o que que eu vou fazer salvar
+2:27:03
+nunca esqueçam de salvar e aí eu vou dar agora um Restart Eu já atualizei tudo de
+2:27:09
+URL que foi preciso porque esse erro que ele tá dando é porque ó agora só tem um
+2:27:16
+problema viu esse erro que tá dando é porque ele tava tentando bu uma API só que não tinha nada preenchido lá então
+2:27:22
+aí é um trabalho um pouco mais humano de colocar api especificamente pro supabase tá então vou pegar aqui esse problema
+2:27:30
+que ele ele colocou Eh aí já é um probleminha de no chatbot que ele vai conseguir ajustar Ele tá dizendo aqui ó
+2:27:38
+que vai atualizar ele vai atualizar aqui no no
+2:27:43
+supabase quando você cria uma nova tabela existe aqui ó existe uma autenticação
+2:27:53
+política não é bem o nome não é autenticação política é uma autenticação de segurança ele cria automaticamente
+2:27:59
+essa autenticação com o código aqui e aí ele vai tentar mudar para acessar ele continua dando esse
+2:28:07
+problema vou tentar mais uma vez mas é essa autorização aqui que ele não tá
+2:28:13
+conseguindo essa autorização aqui ó
+2:28:21
+ó El ele atualizou aqui o meu o meu
+2:28:27
+código Vamos ver se agora ele vai ele continua com problema o que que eu vou
+2:28:32
+fazer ele atualizou esse código aqui eu vou copiar esse código esse
+2:28:38
+código aqui ó supabase psql eu vou lá no supabase SQL editor que que eu vou fazer
+2:28:46
+como eu criei Ele criou um novo código
+2:28:51
+se eu clicar Run aqui ó disquer ele vai aparecer isso aqui ó errou porque já
+2:28:57
+existe algo criado nesse nesse nesse com essa A nomenclatura eu ainda não sei
+2:29:04
+como solucionar isso então eu vou vou apagar aqui tá essa que a gente acabou de fazer vou mostrar para vocês como eu
+2:29:11
+fiz exatamente como eu fiz porque eu não consegui vou apagar esse que já tem
+2:29:16
+porque senão ele não vai conseguir criar um outro cadê
+2:29:22
+aqui filtro teste aula aqui vou
+2:29:34
+deletar não tem nada a minha maior dificuldade de todo
+2:29:41
+criação no Bolt foi a criação do tal do do do banco de dados eu vou tentar mais
+2:29:47
+uma vez aqui senão ele vai ficar sem banco de dados a nossa aula não isso aqui não vai solucionar tão cedo Isso
+2:29:53
+aqui é tem que manjar bastante de banco de dados e eu só sei o feijão com arroz mas eu vou mostrar o projeto que eu fiz
+2:29:59
+aqui com banco de
+2:30:06
+dados é continua aqui o problema dele aqui eu vou falar o seguinte para ele
+2:30:11
+aqui eu vou ignorar isso aqui a gente vai conversar normalmente e ver se aparece
+2:30:18
+alguma coisa aqui tá então Olá boa noite vamos ver se tá funcionar o nosso
+2:30:25
+chatbot Olá boa noite como posso ajudar você queria saber sobre a imersão vamos
+2:30:35
+ver se vai chegar o o que a gente tá conversando aqui vai chegar lá no nosso supabase lá na no nosso banco de dados
+2:30:42
+pelo menos o A openni tá funcionando bem aqui né chatbot vamos ver se aparece
+2:30:48
+algo aqui Vou atualizar
+2:30:54
+o erro que ele tá falando lá José é que viola política de segurança do da tabela então eu vou vir
+2:31:04
+aqui vou criar uma política de segurança que
+2:31:10
+aceita tudo porque geralmente quando Ele criava para mim Ele criava Ele criava já
+2:31:16
+todas as políticas necessárias de segurança
+2:31:22
+vou adicionar aqui cadê vamos vir aqui na nossa
+2:31:28
+tabela aqui ó eu vou adicionar aqui Create
+2:31:38
+aqui ele já tá automático eu vou fazer o seguinte isso aqui essa parte de de
+2:31:45
+política de segurança eu vou apagar e vou criar uma nova
+2:31:50
+vai ficar mais fácil Se ele deixar né que ele tá chato hoje não quer deixar fazer nada quando a gente conversa de um
+2:31:59
+aplicativo com outro principalmente com banco de dados a gente tem que autorizar tudo que a gente tá fazendo e
+2:32:08
+aqui vou criar uma nova política Tá eu vou deixar tudo
+2:32:14
+autorizado geralmente aqui ele pede para que seja true aqui seja true tudo
+2:32:20
+verdade tudo autorizado Vou colocar aqui ó público isso aqui é só um nome tá não
+2:32:27
+interfere no no que vai ser usado não vou salvar essa política de segurança
+2:32:33
+então em tese tudo que eu quiser fazer é para ele aceitar vamos atualizar aqui no
+2:32:40
+no Bolt e ver se agora ele vai conseguir fazer essa
+2:32:46
+integração Olá boa noite
+2:32:52
+bom ele não deu nenhum erro vamos ver se chegou aqui um um boa noite no nosso
+2:32:57
+pbas vou vir aqui em table editor e essa aqui ó é o nossa a nossa
+2:33:07
+tabela pronto chegou aqui ó agora sim tá comunicado ó ele tem tanto a a a
+2:33:13
+resposta do usuário quanto a resposta do chat GPT E aí daqui paraa frente aí é
+2:33:20
+trabalho de banco de dados mesmo mas só para mostrar como fazer essa ligação do
+2:33:25
+supabase com o nosso BOL quem foi que falou o lance da política de de
+2:33:31
+privacidade fui eu Eli Você salvou cara obrigado é que às vezes já o cérebro já
+2:33:37
+já tá tão desgastado mas ele salvou a nossa nossa aula aí você foi você foi fera agora gente dúvidas acho que eu sei
+2:33:45
+que a gente viu foi do zero para muito longe mas eu acho que isso daqui é o
+2:33:51
+mais do que eu tem na internet em relação à entrega do Bolt eu ainda não vi ninguém ligar todos esses pontos para
+2:33:57
+entregar e fazer algo já novo dúvidas cara muito bom eu só quero só quero te
+2:34:03
+parabenizar aí e te agradecer pelo tempo que você despendeu para para ensinar já
+2:34:11
+me deu muitas ideias eu não tinha ideia do que era b não conhecia nada hoje eu tive a sorte de entrar no grupo
+2:34:17
+acompanhar as conversas Eu tava mais tranquilo e você apareceu aí com com essa aula então muito muito obrigado tô
+2:34:24
+criando aqui já uma parada que eu queria fazer e tá ficando bonito muito bom mesmo pô show demais el Te Agradeço
+2:34:30
+também pela paciência a gente eu falei que era uma imersão porque ia demorar mesmo né era muita coisa só a última
+2:34:36
+resposta aqui pro Vitor tem como colocar um assistente personalizado em vez do chat repit genérico Tem sim só pedir
+2:34:42
+para ele que você vai usar um assistent E aí eu vou até mostrar para você aqui ó em vez de colocar a API ele vai pedir
+2:34:50
+para você o ID do seu assistant então você vai aqui no platform assistant e vai ter ID que é essa ID aqui ó ele vai
+2:34:58
+pedir para você copiar esse id e ele vai integrar com o seu assistent Tá bom então a gente teve aí as três
+2:35:04
+possibilidades do mais novo pro Cloud para quem quer aprender a parte de interface visual de front end v0 para
+2:35:11
+quem quer começar a juntar os dois front end com backend usando nhn ou make e
+2:35:16
+para quem tem balha na bala na agulha aí para comprar uns ó e começar a torrar token o Bolt que para mim entrega tudo
+2:35:24
+isso aqui para mim é inteligência artificial 2.0 é daqui pra frente a gente tem o poder de criação muito
+2:35:31
+grande só basta ter a criatividade E aí meus amigos o mundo agora é nosso eu tô
+2:35:37
+com essa parte de interface visual com ia então isso aqui eu tô entregando para vocês o que eu ainda tô aprendendo
+2:35:43
+basicão assim que eu for evoluindo eu vou passando e vai ter um módulo gravado dessa aulona toda já mastigada bem
+2:35:51
+detalhada para vocês fechou Tamo Junto Tamo junto cara tu é fera Valeu
+2:35:57
+irmão deixa um salve lá na na na formação para dar um um gás lá no grupo do WhatsApp pra galera ver que rolou e e
+2:36:05
+a gente tem umas próximas imersões tá vou deixar salve e vou daqui a pouco compartilhar o link com a galera Valeu
+2:36:10
+gente obrigado boa noite agrade valeu amigo muito obrigado

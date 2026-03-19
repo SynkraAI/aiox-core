@@ -1,0 +1,740 @@
+# Hooks Squad Blueprint
+# Based on: $100M Hooks Playbook - Alex Hormozi
+# Cross-Reference: goated-ads-sop.md (hooks = 80% of ad creation)
+# Version: 1.0.0
+# Date: 2026-02-10
+
+metadata:
+  name: "Hormozi Hooks Squad"
+  description: "Master the first 5 seconds to 5-100x marketing results"
+  source: "$100M Playbook: Hooks"
+  author: "Alex Hormozi"
+  version: "1.0.0"
+  created: "2026-02-10"
+
+core_principle:
+  mantra: "You gotta nail the hook or nothing else matters"
+  ogilvy_rule: "80% of advertising dollar is spent in the headline"
+  dean_lesson: "Make them feel important, not you"
+
+# =============================================================================
+# AGENTS
+# =============================================================================
+
+agents:
+  # ---------------------------------------------------------------------------
+  # HOOK RESEARCHER
+  # ---------------------------------------------------------------------------
+  hook_researcher:
+    name: "Hook Researcher"
+    description: "Collects, analyzes, and categorizes winning hooks from multiple sources"
+    cognitive_type: "Analysis + Pattern Recognition"
+
+    capabilities:
+      - "Analyze competitor content for hooks"
+      - "Extract hooks from viral content"
+      - "Categorize hooks by type and awareness level"
+      - "Identify patterns in top performers"
+      - "Maintain swipe file organization"
+
+    inputs:
+      - type: "competitor_urls"
+        description: "List of competitor profiles/pages to analyze"
+      - type: "platform"
+        description: "Which platform to research (YouTube, Instagram, Twitter, Ads)"
+      - type: "niche_keywords"
+        description: "Keywords for content search"
+      - type: "date_range"
+        description: "How far back to analyze"
+
+    outputs:
+      - type: "hook_library"
+        format: "spreadsheet"
+        schema:
+          columns:
+            - name: "Hook Text"
+            - name: "Hook Type"
+            - name: "Awareness Level"
+            - name: "Source"
+            - name: "Views/Engagement"
+            - name: "Link"
+            - name: "Date Found"
+      - type: "pattern_analysis"
+        format: "markdown"
+        content: "Insights on what's working in the niche"
+
+    decision_rules:
+      - id: "DR-R001"
+        rule: "Source priority: 1) Own winners, 2) Own organic, 3) Competitor ads, 4) Viral content, 5) Ad libraries"
+      - id: "DR-R002"
+        rule: "Only include hooks with verifiable performance data when possible"
+      - id: "DR-R003"
+        rule: "Categorize every hook by type (8 types) and awareness level (5 levels)"
+
+  # ---------------------------------------------------------------------------
+  # HOOK WRITER
+  # ---------------------------------------------------------------------------
+  hook_writer:
+    name: "Hook Writer"
+    description: "Creates hook variations following templates and 70-20-10 framework"
+    cognitive_type: "Synthesis + Creativity"
+
+    capabilities:
+      - "Write hooks using proven templates"
+      - "Create variations of winning hooks"
+      - "Adapt hooks from adjacent niches"
+      - "Match hooks to awareness levels"
+      - "Combine verbal and nonverbal elements"
+
+    inputs:
+      - type: "topic"
+        description: "What the content is about"
+      - type: "avatar"
+        description: "Target audience description"
+      - type: "awareness_level"
+        description: "Which level(s) to target (1-5)"
+      - type: "winning_hooks"
+        description: "Previous winners to build on (from researcher)"
+      - type: "quantity"
+        description: "How many hooks to produce (default: 50)"
+
+    outputs:
+      - type: "hook_set"
+        format: "markdown"
+        schema:
+          sections:
+            - "70% Core Hooks (variations of winners)"
+            - "20% Emerging Hooks (adapted from other niches)"
+            - "10% Experimental Hooks (new ideas)"
+      - type: "hook_distribution"
+        format: "yaml"
+        content: "Breakdown by type and awareness level"
+
+    decision_rules:
+      - id: "DR-W001"
+        rule: "70-20-10 split: 70% proven variations, 20% adjacent adaptations, 10% experiments"
+      - id: "DR-W002"
+        rule: "If 90% hooks in 'Most Aware' bucket, spread to colder levels"
+      - id: "DR-W003"
+        rule: "When in doubt, go broader"
+      - id: "DR-W004"
+        rule: "Every hook must have: Call Out + Condition for Value"
+      - id: "DR-W005"
+        rule: "Hook determines content, not the other way around"
+
+    templates:
+      labels:
+        pattern: "[Avatar], I have a gift for you"
+        example: "Local business owners, I have a gift for you"
+
+      yes_questions:
+        pattern: "Would you pay [amount] to have [dream result] in [timeframe]?"
+        example: "Would you pay $1,000 to have the business of your dreams in 30 days?"
+
+      open_questions:
+        pattern: "Which would you rather be? [Option A] or [Option B]?"
+        example: "Which would you rather be? The guy pushing the boulder up the hill? Or the one with the boulder at the top who can just flick it?"
+
+      conditionals:
+        pattern: "If you're [situation], you're [doing it wrong/missing out]"
+        example: "If you're working all the time and your business isn't growing, you're working on the wrong sh*t."
+
+      commands:
+        pattern: "Read this if you [want result/have problem]"
+        example: "Read this if you're tired of being broke"
+
+      statements:
+        pattern: "The smartest thing you can do [today/this year]..."
+        example: "The smartest thing you can do today..."
+
+      lists:
+        pattern: "[Number] ways to [achieve result/avoid problem]"
+        example: "In this video I'm going to talk to you about the 28 ways to stay poor"
+
+      narratives:
+        pattern: "One day [dramatic setup]..."
+        example: "One day I was in the back and this old lady comes in and she was piss angry"
+
+      exclamations:
+        pattern: "[Emotion sound]... This is [big claim]"
+        example: "Ahhhhh... This is the blueprint to becoming a millionaire"
+
+      mirror_question:
+        pattern: "Have you ever [universal but private experience]?"
+        example: "Have you ever looked in the mirror and thought 'I should be further ahead by now?'"
+
+      number_shock:
+        pattern: "[Specific impressive number] [metric]... [story/explanation]"
+        example: "$4,664 per month in recurring revenue... That's what Kyle... The last person on the leaderboard... Was able to build"
+
+      confession:
+        pattern: "I have a confession... [vulnerable truth]"
+        example: "I have a confession... I am sick and tired of seeing people who have never run a business before teaching other people how to grow businesses"
+
+      real_quick:
+        pattern: "Real quick [question/request]..."
+        example: "Real quick question... Can I have your email address?"
+
+      rumor:
+        pattern: "The rumors are true..."
+        example: "The rumors are true..."
+
+      thats_weird:
+        pattern: "That's weird... [curiosity-creating observation]"
+        example: "That's weird... I don't see your name on the invite list?"
+
+      banana_interrupt:
+        pattern: "[Unusual action] + You might be wondering why I just [action]... because [value connection]"
+        example: "You might be wondering why I just caught a banana... And the reason why is because the amount of value I'm going to give you in the next 30 seconds is bananas"
+
+  # ---------------------------------------------------------------------------
+  # HOOK TESTER
+  # ---------------------------------------------------------------------------
+  hook_tester:
+    name: "Hook Tester"
+    description: "Manages hook testing, collects data, and identifies winners"
+    cognitive_type: "Execution + Analysis"
+
+    capabilities:
+      - "Set up A/B tests for hooks"
+      - "Track performance metrics"
+      - "Identify top and bottom performers"
+      - "Calculate statistical significance"
+      - "Recommend next iterations"
+
+    inputs:
+      - type: "hooks"
+        description: "Hooks to test"
+      - type: "content_type"
+        description: "Ad, short content, long content, or email"
+      - type: "platform"
+        description: "Where to test"
+      - type: "budget"
+        description: "Testing budget (for ads)"
+      - type: "success_metrics"
+        description: "What to measure (CTR, views, engagement)"
+
+    outputs:
+      - type: "performance_report"
+        format: "dashboard"
+        metrics:
+          - "CTR by hook"
+          - "Engagement rate"
+          - "5-second retention"
+          - "Cost per result"
+      - type: "winner_identification"
+        format: "ranked_list"
+        content: "Top 10% and Bottom 10% clearly identified"
+      - type: "iteration_recommendations"
+        format: "action_items"
+        content: "What to test next based on patterns"
+
+    decision_rules:
+      - id: "DR-T001"
+        rule: "Test 10 hooks per ad, 3-4 per long content"
+      - id: "DR-T002"
+        rule: "Top 10% = create 5+ variations"
+      - id: "DR-T003"
+        rule: "Bottom 10% = never use again"
+      - id: "DR-T004"
+        rule: "Middle performers = test 1-2 variations only"
+      - id: "DR-T005"
+        rule: "Let the data do the teaching - no opinions"
+
+    testing_ratios:
+      paid_ads:
+        hooks_per_piece: 10
+        reason: "Highest stakes, need most data"
+      short_content:
+        approach: "Reuse winning tweets as shorts"
+        reason: "Cross-platform validation"
+      long_content:
+        hooks_per_piece: 3-4
+        reason: "Team picks best in post"
+      emails:
+        approach: "Active split tests every send"
+        reason: "Document winners separately"
+
+  # ---------------------------------------------------------------------------
+  # SWIPE FILE CURATOR
+  # ---------------------------------------------------------------------------
+  swipe_curator:
+    name: "Swipe File Curator"
+    description: "Maintains organized library of hooks with performance data"
+    cognitive_type: "Curation + Organization"
+
+    capabilities:
+      - "Organize hooks by multiple dimensions"
+      - "Update performance data"
+      - "Remove underperformers"
+      - "Surface relevant hooks for new projects"
+      - "Track hook reuse success"
+
+    inputs:
+      - type: "new_hooks"
+        description: "Hooks to add to library"
+      - type: "performance_data"
+        description: "Updated metrics for existing hooks"
+      - type: "query"
+        description: "What kind of hooks are needed"
+
+    outputs:
+      - type: "organized_library"
+        format: "database"
+        dimensions:
+          - "By Type (8 categories)"
+          - "By Awareness Level (5 levels)"
+          - "By Platform"
+          - "By Performance Tier"
+          - "By Date"
+      - type: "recommendations"
+        format: "curated_list"
+        content: "Best hooks for specific query"
+
+    organization_schema:
+      by_type:
+        - labels
+        - questions_yes
+        - questions_open
+        - conditionals
+        - commands
+        - statements
+        - lists
+        - narratives
+        - exclamations
+      by_awareness:
+        - level_5_most_aware
+        - level_4_product_aware
+        - level_3_solution_aware
+        - level_2_problem_aware
+        - level_1_unaware
+      by_platform:
+        - youtube_long
+        - youtube_shorts
+        - instagram
+        - twitter
+        - facebook_ads
+        - email
+        - linkedin
+      by_performance:
+        - top_10_percent
+        - middle_tier
+        - bottom_10_percent_archived
+
+# =============================================================================
+# EXECUTOR MATRIX
+# =============================================================================
+
+executor_matrix:
+  phases:
+    research:
+      steps:
+        - step: "Competitor Analysis"
+          executor: "Worker"
+          automation_potential: "HIGH"
+          tools: ["ad_library_scraper", "social_analytics"]
+
+        - step: "Hook Extraction"
+          executor: "Hybrid"
+          automation_potential: "MEDIUM"
+          tools: ["text_extraction", "human_judgment"]
+
+        - step: "Categorization"
+          executor: "Worker"
+          automation_potential: "HIGH"
+          tools: ["classification_model"]
+
+        - step: "Pattern Analysis"
+          executor: "Human"
+          automation_potential: "LOW"
+          tools: ["analytics_dashboard"]
+
+    creation:
+      steps:
+        - step: "70% Core Variations"
+          executor: "Worker"
+          automation_potential: "HIGH"
+          tools: ["llm_variation_generator"]
+
+        - step: "20% Adaptation"
+          executor: "Hybrid"
+          automation_potential: "MEDIUM"
+          tools: ["llm_with_human_review"]
+
+        - step: "10% Experimental"
+          executor: "Human"
+          automation_potential: "LOW"
+          tools: ["creative_brainstorm"]
+
+        - step: "Quality Review"
+          executor: "Human"
+          automation_potential: "LOW"
+          tools: ["checklist_validation"]
+
+    testing:
+      steps:
+        - step: "Test Setup"
+          executor: "Worker"
+          automation_potential: "HIGH"
+          tools: ["ad_platform_api", "content_scheduler"]
+
+        - step: "Data Collection"
+          executor: "Worker"
+          automation_potential: "HIGH"
+          tools: ["analytics_integration"]
+
+        - step: "Performance Analysis"
+          executor: "Hybrid"
+          automation_potential: "MEDIUM"
+          tools: ["statistical_analysis", "human_insight"]
+
+        - step: "Winner Identification"
+          executor: "Worker"
+          automation_potential: "HIGH"
+          tools: ["ranking_algorithm"]
+
+    iteration:
+      steps:
+        - step: "Top 10% Expansion"
+          executor: "Hybrid"
+          automation_potential: "HIGH"
+          tools: ["variation_generator"]
+
+        - step: "Bottom 10% Removal"
+          executor: "Worker"
+          automation_potential: "HIGH"
+          tools: ["library_management"]
+
+        - step: "Library Update"
+          executor: "Worker"
+          automation_potential: "HIGH"
+          tools: ["database_operations"]
+
+# =============================================================================
+# QUALITY GATES
+# =============================================================================
+
+quality_gates:
+  hook_writing:
+    gate_1:
+      name: "Structure Check"
+      criteria:
+        - "Hook has clear Call Out element"
+        - "Hook has Condition for Value"
+        - "Hook type is identifiable"
+        - "Awareness level is appropriate"
+      pass_threshold: "All 4 criteria met"
+
+    gate_2:
+      name: "Distribution Check"
+      criteria:
+        - "70-20-10 split maintained"
+        - "Not >90% in single awareness level"
+        - "Multiple hook types represented"
+      pass_threshold: "All criteria met"
+
+    gate_3:
+      name: "Focus Check"
+      criteria:
+        - "Hook is about THEM, not about YOU"
+        - "No ego-driven introductions"
+        - "Value promise is clear"
+      pass_threshold: "All criteria met"
+
+  testing:
+    gate_1:
+      name: "Volume Check"
+      criteria:
+        - "Minimum hooks per content type met"
+        - "Ads: 10 hooks, Long: 3-4 hooks"
+      pass_threshold: "Minimum volume achieved"
+
+    gate_2:
+      name: "Data Quality Check"
+      criteria:
+        - "Sufficient impressions for significance"
+        - "All hooks tracked properly"
+        - "Metrics captured accurately"
+      pass_threshold: "Statistical validity confirmed"
+
+    gate_3:
+      name: "Iteration Check"
+      criteria:
+        - "Top 10% identified"
+        - "Bottom 10% marked for removal"
+        - "Next batch planned with 70-20-10"
+      pass_threshold: "Iteration plan complete"
+
+  performance:
+    thresholds:
+      ctr:
+        poor: "<0.5%"
+        acceptable: "0.5-1%"
+        good: "1-2%"
+        excellent: ">2%"
+
+      five_second_retention:
+        poor: "<20%"
+        acceptable: "20-30%"
+        good: "30-50%"
+        excellent: ">50%"
+
+      engagement_rate:
+        poor: "<1%"
+        acceptable: "1-2%"
+        good: "2-5%"
+        excellent: ">5%"
+
+# =============================================================================
+# WORKFLOWS
+# =============================================================================
+
+workflows:
+  weekly_hook_creation:
+    trigger: "Every Friday (Ad Day)"
+    steps:
+      - step: 1
+        name: "Review Previous Winners"
+        agent: "swipe_curator"
+        action: "Surface top 5 hooks from last week"
+        output: "Top hooks for variation"
+
+      - step: 2
+        name: "Research New Sources"
+        agent: "hook_researcher"
+        action: "Find 10 new hooks from competitors"
+        output: "Fresh hook inspiration"
+
+      - step: 3
+        name: "Create Hook Set"
+        agent: "hook_writer"
+        action: "Write 50 hooks following 70-20-10"
+        output: "50 categorized hooks"
+
+      - step: 4
+        name: "Quality Review"
+        agent: "human"
+        action: "Review hooks against quality gates"
+        output: "Approved hook set"
+
+      - step: 5
+        name: "Test Setup"
+        agent: "hook_tester"
+        action: "Configure tests for new hooks"
+        output: "Tests running"
+
+    expected_output:
+      hooks: 50
+      time: "2-3 hours"
+      quality: "All gates passed"
+
+  hook_performance_review:
+    trigger: "Weekly (Monday)"
+    steps:
+      - step: 1
+        name: "Collect Data"
+        agent: "hook_tester"
+        action: "Pull all performance metrics"
+        output: "Performance report"
+
+      - step: 2
+        name: "Rank Hooks"
+        agent: "hook_tester"
+        action: "Identify top 10% and bottom 10%"
+        output: "Ranked list"
+
+      - step: 3
+        name: "Update Library"
+        agent: "swipe_curator"
+        action: "Add winners, archive losers"
+        output: "Updated swipe file"
+
+      - step: 4
+        name: "Plan Next Batch"
+        agent: "hook_writer"
+        action: "Prepare 70-20-10 plan based on learnings"
+        output: "Next week's strategy"
+
+    expected_output:
+      insights: "Clear winners and losers identified"
+      library_update: "Swipe file current"
+      next_plan: "70-20-10 split ready"
+
+  first_time_setup:
+    trigger: "New user/project"
+    steps:
+      - step: 1
+        name: "External Research"
+        agent: "hook_researcher"
+        action: "Collect 50 hooks from top performers"
+        output: "Initial hook library"
+
+      - step: 2
+        name: "Use All 50"
+        agent: "hook_writer"
+        action: "Create content using all collected hooks"
+        output: "First batch of content"
+
+      - step: 3
+        name: "Test Everything"
+        agent: "hook_tester"
+        action: "Run all hooks, collect baseline data"
+        output: "Performance baseline"
+
+      - step: 4
+        name: "Establish 70-20-10"
+        agent: "hook_tester"
+        action: "Identify top 10% for core bucket"
+        output: "Ready for weekly cycle"
+
+    expected_output:
+      library: "50 hooks documented"
+      baseline: "Performance data established"
+      framework: "70-20-10 ready to execute"
+
+# =============================================================================
+# INTEGRATION WITH GOATED ADS SOP
+# =============================================================================
+
+goated_ads_integration:
+  relationship: "Hooks SOP = 80% of GOATed Ads effort"
+
+  handoff_points:
+    hooks_to_ads:
+      from: "hooks_squad"
+      to: "goated_ads_squad"
+      deliverable: "50 hooks ready for ad assembly"
+      format: "Categorized by awareness level"
+
+    performance_feedback:
+      from: "goated_ads_squad"
+      to: "hooks_squad"
+      deliverable: "Hook performance data from ads"
+      format: "CTR, conversions, engagement by hook"
+
+  shared_concepts:
+    awareness_levels: "Same 5-level framework (Eugene Schwartz)"
+    testing_philosophy: "Let the data do the teaching"
+    time_allocation: "80% hooks, 20% everything else"
+
+  workflow_connection:
+    - "Friday: Create 50 hooks (Hooks SOP)"
+    - "Friday: Assemble 150-750 ads (GOATed Ads SOP)"
+    - "Week: Test and collect data"
+    - "Monday: Review and iterate (both SOPs)"
+
+# =============================================================================
+# METRICS & TRACKING
+# =============================================================================
+
+metrics:
+  leading_indicators:
+    daily:
+      - name: "Hooks Created"
+        target: 10
+      - name: "Variations per Winner"
+        target: 5
+      - name: "Swipe File Additions"
+        target: 3
+
+    weekly:
+      - name: "Total Hooks Tested"
+        target: 50
+      - name: "New Hooks from Research"
+        target: 20
+      - name: "70-20-10 Split Accuracy"
+        target: "Within 5%"
+
+  lagging_indicators:
+    weekly:
+      - name: "CTR by Hook"
+        benchmark: ">1%"
+      - name: "Top 10% Performance Lift"
+        benchmark: ">2x average"
+      - name: "Bottom 10% Identification Rate"
+        benchmark: "100%"
+
+    monthly:
+      - name: "Hook Library Growth"
+        target: "+100 hooks"
+      - name: "Winner Density"
+        target: "20% of library in top tier"
+      - name: "Reuse Success Rate"
+        benchmark: ">80% of reused hooks perform"
+
+# =============================================================================
+# RESOURCES
+# =============================================================================
+
+resources:
+  spreadsheet_template:
+    columns:
+      - "Hook Text"
+      - "Hook Type"
+      - "Awareness Level"
+      - "Source"
+      - "Platform"
+      - "Views/Engagement"
+      - "CTR"
+      - "Link"
+      - "Date Added"
+      - "Performance Tier"
+      - "Notes"
+
+    tabs:
+      - "YouTube"
+      - "Instagram"
+      - "Twitter"
+      - "Facebook Ads"
+      - "Email"
+      - "Archive (Bottom 10%)"
+
+  quick_reference:
+    hook_types:
+      - "Labels: '[Avatar], I have a gift for you'"
+      - "Yes Questions: 'Would you pay X for Y?'"
+      - "Open Questions: 'Which would you rather be?'"
+      - "Conditionals: 'If you're X, you're doing Y wrong'"
+      - "Commands: 'Read this if you want X'"
+      - "Statements: 'The smartest thing you can do...'"
+      - "Lists: 'X ways to achieve Y'"
+      - "Narratives: 'One day, [dramatic event]...'"
+      - "Exclamations: 'Ahhhhh... This is [big claim]'"
+
+    awareness_levels:
+      - "5: Most Aware → Offer-driven"
+      - "4: Product-Aware → Proof-driven"
+      - "3: Solution-Aware → Promise-driven"
+      - "2: Problem-Aware → Pain-driven"
+      - "1: Unaware → Curiosity-driven"
+
+    70_20_10:
+      - "70%: Proven winners and variations"
+      - "20%: Adaptations from other niches"
+      - "10%: Experimental new ideas"
+
+# =============================================================================
+# VALIDATION
+# =============================================================================
+
+validation:
+  sop_completeness:
+    parts_required: 11
+    parts_present: 11
+    status: "COMPLETE"
+
+  source_references:
+    minimum_required: 50
+    total_mapped: 80
+    status: "COMPLETE"
+
+  cross_reference:
+    goated_ads_sop: "LINKED"
+    relationship: "Complementary (hooks = 80% of ads)"
+    status: "COMPLETE"
+
+  checklist_created: true
+  blueprint_created: true
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

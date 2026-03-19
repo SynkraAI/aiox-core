@@ -1,0 +1,116 @@
+workflow:
+  id: wf-content-from-brand
+  name: "Brand to Content Strategy"
+  description: "Transforma brand guidelines em pilares de conteúdo e calendário editorial mensal"
+  squad: presenca-digital
+  version: 1.0.0
+  trigger: "Novos artefatos do squad branding disponíveis (Brand Book, Positioning Canvas, Brand Voice Guidelines, Brand Soul Canvas)"
+  estimated_duration: "3-4h"
+  upstream_squad: branding
+  flow: unidirectional
+
+phases:
+  - id: phase-1
+    name: "Brand Input"
+    agent: presenca-digital-chief
+    description: "Lê e internaliza todos os artefatos upstream do squad branding antes de iniciar a estratégia"
+    inputs:
+      - source: branding/outputs/brand-book.md
+      - source: branding/outputs/positioning-canvas.md
+      - source: branding/outputs/brand-voice-guidelines.md
+      - source: branding/outputs/brand-soul-canvas.md
+    outputs:
+      - brand-brief.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "Todos os 4 artefatos upstream lidos e consolidados"
+        - "Brand brief gerado com essência, voz, posicionamento e diferenciadores"
+        - "Nenhum artefato upstream ausente"
+      veto_conditions:
+        - "Artefatos do squad branding ausentes ou incompletos — workflow bloqueado até upstream entregar"
+        - "Brand voice não definida — sem voz não há conteúdo alinhado"
+    next: phase-2
+
+  - id: phase-2
+    name: "Pillar Strategy"
+    agent: paulo-cuenca
+    description: "Aplica o Método da Cordilheira para mapear pilares (picos), sub-temas (trails) e ângulos únicos de autoridade"
+    inputs:
+      - brand-brief.md
+    outputs:
+      - content-pillars.md
+    checkpoint:
+      type: human
+      criteria:
+        - "3-5 pilares de conteúdo definidos com justificativa estratégica"
+        - "Cada pilar tem pico (tema principal), trails (sub-temas) e território único"
+        - "Pilares rastreáveis ao posicionamento do brand brief"
+      veto_conditions:
+        - "Pilares genéricos sem território de autoridade — retrabalhar"
+        - "Menos de 3 pilares — insuficiente para calendário sustentável"
+        - "Pilares não conectados à brand voice — violação de coerência"
+    next: phase-3
+
+  - id: phase-3
+    name: "Content OS Design"
+    agent: justin-welsh
+    description: "Projeta o Content Operating System: templates por pilar, cadência por plataforma e sistema de produção 4h/semana"
+    inputs:
+      - content-pillars.md
+      - brand-brief.md
+    outputs:
+      - content-os.md
+    checkpoint:
+      type: human
+      criteria:
+        - "Template de conteúdo definido para cada pilar"
+        - "Cadência por plataforma especificada (LinkedIn, Instagram, YouTube, etc.)"
+        - "Sistema de produção batch documentado (PAIPS aplicado)"
+        - "Estimativa de volume semanal viável em 4h"
+      veto_conditions:
+        - "Volume de produção inviável para o time — reduzir scope"
+        - "Sem template definido para algum pilar — bloqueio na produção"
+    next: phase-4
+
+  - id: phase-4
+    name: "Hook Framework"
+    agent: brendan-kane
+    description: "Define padrões de hook (Hook Point) para cada pilar — os 3 segundos que capturam atenção em cada formato"
+    inputs:
+      - content-pillars.md
+      - content-os.md
+    outputs:
+      - hook-patterns.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "Mínimo 5 templates de hook por pilar"
+        - "Hooks adaptados por plataforma (texto, vídeo, carrossel)"
+        - "3-second rule aplicada a cada template"
+      veto_conditions:
+        - "Hooks genéricos sem diferenciação por pilar — retrabalhar"
+    next: phase-5
+
+  - id: phase-5
+    name: "Editorial Calendar Output"
+    agent: presenca-digital-chief
+    description: "Consolida pilares, Content OS e hooks em calendário editorial mensal pronto para execução"
+    inputs:
+      - content-pillars.md
+      - content-os.md
+      - hook-patterns.md
+    outputs:
+      - editorial-calendar-monthly.md
+      - batch-schedule.md
+    checkpoint:
+      type: human
+      criteria:
+        - "Calendário cobre 4 semanas completas"
+        - "Cada entrada tem: data, pilar, formato, plataforma, hook template, responsável"
+        - "Distribuição equilibrada entre pilares"
+        - "Batch schedule semanal definido (dia + horário de produção)"
+      veto_conditions:
+        - "Calendário com lacunas de mais de 3 dias sem conteúdo — preencher"
+        - "Um único pilar com mais de 60% das entradas — rebalancear"
+    next: END

@@ -1,0 +1,389 @@
+# Koe Squad — Sovereignty Frameworks Library
+# Dan Koe's sovereignty assessment and one-person business architecture frameworks
+# Version: 1.0.0
+# Created: 2026-02-14
+# Used by: koe-advisor (primary), koe-offers (supporting), koe-chief (routing)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PURPOSE: Canonical reference of Dan Koe's sovereignty and business frameworks.
+# Each framework includes dimensions, scoring criteria, source, and examples.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+frameworks:
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 1: Sovereignty Test
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: SF-001
+    name: "Sovereignty Test"
+    category: "business_assessment"
+    description: "Four-dimension assessment of business and life freedom. The foundational diagnostic used before any strategic recommendation."
+    dimensions:
+      - dimension: "Revenue Sovereignty"
+        definition: "Financial independence from single sources, clients, or time-for-money traps"
+        scoring_criteria:
+          low_1_3: "Single income source, fully client-dependent, income stops when work stops"
+          medium_4_6: "2-3 income sources, some passive elements, but still requires daily presence"
+          high_7_8: "Diversified streams, significant passive income, can take weeks off"
+          exceptional_9_10: "Multiple passive streams, revenue scales without time, fully independent"
+        key_metrics:
+          - "Number of independent revenue streams"
+          - "% of revenue that continues if you stop working for 30 days"
+          - "Dependency ratio (largest source as % of total)"
+        improvement_levers:
+          - "Create digital products (courses, templates, tools)"
+          - "Build email list for direct audience access"
+          - "Add affiliate or partnership revenue"
+          - "Productize services into scalable offers"
+
+      - dimension: "Time Sovereignty"
+        definition: "Control over how, when, and where you spend your hours"
+        scoring_criteria:
+          low_1_3: "Fixed schedule, meetings-dominated, no control over calendar"
+          medium_4_6: "Flexible hours but constrained by obligations and deadlines"
+          high_7_8: "Full calendar control, deep work protected, can disappear for days"
+          exceptional_9_10: "Work only when inspired, fully async, time is completely yours"
+        key_metrics:
+          - "Hours per week in deep work vs reactive work"
+          - "Ability to take unplanned time off without consequences"
+          - "% of tasks automated or delegated to systems"
+        improvement_levers:
+          - "Implement 2-4h deep work protocol"
+          - "Batch all meetings to specific days"
+          - "Automate repetitive workflows"
+          - "Design async communication as default"
+
+      - dimension: "Creative Sovereignty"
+        definition: "Freedom to create what you want, own what you make, and align work with obsessions"
+        scoring_criteria:
+          low_1_3: "Client-dictated work, no IP ownership, executing others' vision"
+          medium_4_6: "Some creative control but constrained by market or client demands"
+          high_7_8: "Full creative control, own all IP, aligned with personal interests"
+          exceptional_9_10: "100% self-directed, prolific IP creation, fulfilled and energized daily"
+        key_metrics:
+          - "Number of owned digital assets (courses, products, content library)"
+          - "% of work aligned with personal obsessions"
+          - "Named frameworks created and owned"
+        improvement_levers:
+          - "Build Personal Monopoly (unique intersection)"
+          - "Create and name your own frameworks"
+          - "Transition from services to products"
+          - "Implement Content Cascade for systematic IP creation"
+
+      - dimension: "Location Sovereignty"
+        definition: "Ability to work from any location with internet access"
+        scoring_criteria:
+          low_1_3: "Office-bound, physical presence required, location-dependent operations"
+          medium_4_6: "Mostly remote but with geographic constraints or occasional travel required"
+          high_7_8: "Fully remote, rare physical obligations, can work from most locations"
+          exceptional_9_10: "Digital nomad capable, zero location dependencies, work from anywhere"
+        key_metrics:
+          - "Days per month with location constraints"
+          - "% of tools and systems that are cloud-based"
+          - "Customer delivery that requires physical presence"
+        improvement_levers:
+          - "Migrate all tools to cloud-based solutions"
+          - "Eliminate physical presence requirements"
+          - "Set up international payment processing"
+          - "Build fully async team communication"
+
+    overall_scoring:
+      formula: "(Revenue + Time + Creative + Location) / 4"
+      interpretation:
+        sovereign: "9-10: Full freedom achieved. Focus on optimization and protection."
+        strong: "7-8: Near sovereignty. Identify and address remaining constraints."
+        developing: "5-6: Visible progress. Prioritize weakest dimension."
+        constrained: "3-4: Significant restructuring needed. Emergency focus on lowest score."
+        trapped: "1-2: Critical. Immediate sovereignty plan required."
+
+    source: "Dan Koe — Digital Economics course, The Art of Focus, Newsletter articles"
+    related_template: "templates/sovereignty-scorecard.md"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 2: One-Person Business Architecture
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: SF-002
+    name: "One-Person Business Architecture"
+    category: "business_design"
+    description: "The Leverage Stack — a layered architecture for building a scalable one-person business where each layer multiplies the effect of layers below"
+    layers:
+      - layer: 1
+        name: "Brand (Trust)"
+        function: "Establish authority and trust through authentic content and lived experience"
+        build_order: "FIRST — nothing works without trust"
+        activities:
+          - "Consistent content creation (weekly minimum)"
+          - "Share genuine stories and frameworks"
+          - "Build email list as owned audience"
+          - "Develop Personal Monopoly positioning"
+        metrics:
+          - "Email list growth rate"
+          - "Content engagement depth (replies, saves, shares)"
+          - "Brand search volume"
+          - "Trust indicators (testimonials, case studies)"
+        timeline: "3-6 months for foundation"
+        critical_rule: "Trust takes time. You cannot shortcut this layer."
+
+      - layer: 2
+        name: "Digital Products (Scale)"
+        function: "Convert trust into revenue through scalable digital offers"
+        build_order: "SECOND — only after brand trust is established"
+        activities:
+          - "Design offers using Value Hierarchy"
+          - "Build digital products (courses, templates, tools)"
+          - "Apply Risk Reversal to every offer"
+          - "Price based on value, not competition"
+        metrics:
+          - "Revenue per subscriber"
+          - "Product conversion rate"
+          - "Value-to-price ratio (target >= 10:1)"
+          - "Refund rate"
+        timeline: "1-3 months per product"
+        critical_rule: "Products fail without brand trust. Layer 1 must be solid."
+
+      - layer: 3
+        name: "Content Systems (Marketing)"
+        function: "Systematic content creation and distribution that runs on autopilot"
+        build_order: "THIRD — systematize what's already working from Layer 1"
+        activities:
+          - "Implement Content Cascade (1 → 20+ pieces)"
+          - "Automate distribution across platforms"
+          - "Build content calendar as distribution calendar"
+          - "Create SOPs for content production"
+        metrics:
+          - "Content output rate (pieces per hour invested)"
+          - "Cascade efficiency (derivatives per primary piece)"
+          - "Organic reach across platforms"
+          - "Content-to-revenue attribution"
+        timeline: "1-2 months for systems"
+        critical_rule: "Systems amplify what works. Don't systematize bad content."
+
+      - layer: 4
+        name: "Automation (Time)"
+        function: "Technology multiplies effort without requiring additional time"
+        build_order: "FOURTH — automate after validating the system works"
+        activities:
+          - "Automate email sequences and funnels"
+          - "Set up payment processing and delivery"
+          - "Implement analytics and tracking"
+          - "Build self-serve customer support"
+        metrics:
+          - "Revenue per hour worked"
+          - "Automation coverage %"
+          - "Support ticket volume"
+          - "Time freed per week"
+        timeline: "Ongoing optimization"
+        critical_rule: "Automation without a working system = automating failure."
+
+    architecture_rules:
+      - "Build in order: Layer 1 → 2 → 3 → 4. Skipping layers creates fragile businesses."
+      - "Each layer depends on the one below. Weak foundation = unstable stack."
+      - "One person can manage all 4 layers with the right systems."
+      - "The goal is NOT to build a team. The goal is to build leverage."
+
+    source: "Dan Koe — Digital Economics course, Newsletter, Modern Mastery"
+    related_frameworks: ["SF-001", "SF-003"]
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 3: Traffic + Offers Equation
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: SF-003
+    name: "Traffic + Offers Equation"
+    category: "business_fundamentals"
+    description: "The fundamental simplification of all business into two variables — the right people seeing your offer. Everything else is a distraction."
+    formula: "Business = Traffic (right people seeing) + Offers (right thing offered at right value)"
+    components:
+      traffic:
+        definition: "The flow of the RIGHT people who become aware of your existence"
+        key_distinction: "Not just eyeballs — qualified attention from people who need what you offer"
+        sources:
+          organic:
+            - "Content marketing (newsletters, YouTube, social media)"
+            - "SEO and search presence"
+            - "Community building"
+            - "Word of mouth and referrals"
+          paid:
+            - "Social media ads (targeted to avatar)"
+            - "Search ads"
+            - "Sponsorships and partnerships"
+          borrowed:
+            - "Guest appearances on podcasts/channels"
+            - "Collaborations with complementary creators"
+            - "Joint ventures"
+        diagnosis:
+          low_traffic: "Nobody sees your offer → focus on content and distribution"
+          wrong_traffic: "People see it but don't buy → misaligned audience, fix targeting"
+          right_traffic: "Qualified people see and engage → ready for offer optimization"
+
+      offers:
+        definition: "The value exchange you propose — what you give in return for money"
+        key_distinction: "Not just products — the complete package of value, risk reversal, and transformation"
+        components:
+          - "Core deliverable (the primary thing they receive)"
+          - "Value hierarchy position (entertainment → implementation)"
+          - "Risk reversal (guarantee that removes buyer risk)"
+          - "Pricing (value-to-price ratio >= 10:1)"
+        diagnosis:
+          no_offer: "You have traffic but no offer → create first product"
+          weak_offer: "People see it but don't buy → strengthen value or add risk reversal"
+          strong_offer: "Good conversion rate → scale traffic"
+
+    diagnostic_process:
+      - "1. Identify which variable is the bottleneck (Traffic or Offers)"
+      - "2. Diagnose the sub-problem within that variable"
+      - "3. Apply the appropriate framework (Content Cascade for traffic, Risk Reversal for offers)"
+      - "4. Measure and iterate"
+
+    simplification_rule: "When business feels complicated, reduce back to these two variables. 99% of problems are either a traffic problem or an offer problem."
+    source: "Dan Koe — Digital Economics course, 'Your Entire Marketing Strategy In One Sentence' (Dan Henry influence)"
+    related_frameworks: ["SF-002", "SF-004"]
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 4: Digital Economics Principles
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: SF-004
+    name: "Digital Economics Principles"
+    category: "economic_leverage"
+    description: "The unique economic properties of digital businesses that enable one-person operations to achieve outsized results"
+    principles:
+      - principle: "Marginal Cost Near Zero"
+        description: "Once a digital product is created, the cost to serve one additional customer approaches zero"
+        implication: "Your 1000th customer costs almost nothing more than your 1st"
+        application: "Build digital products (courses, templates, software) that scale without additional production cost"
+        example: "A $200 course costs $5,000 to create. Whether 50 or 5,000 people buy it, production cost stays the same."
+
+      - principle: "Scale Without Hiring"
+        description: "Digital tools and automation enable scaling revenue without proportionally scaling team"
+        implication: "One person with the right systems can serve thousands"
+        application: "Invest in automation, self-serve tools, and async communication before hiring"
+        example: "Automated email sequences handle sales, onboarding, and support for thousands of customers."
+
+      - principle: "Distribution is Free"
+        description: "Social platforms provide free distribution channels — your content reaches people at zero marginal cost"
+        implication: "Content marketing is the highest ROI marketing channel for one-person businesses"
+        application: "Create content consistently. Let the platforms do the distribution. Own the audience via email."
+        example: "One newsletter cascaded into 20+ pieces reaches 100K+ people across platforms — at zero ad spend."
+
+      - principle: "Knowledge as Product"
+        description: "Specific knowledge and lived experience can be packaged into infinitely replicable digital products"
+        implication: "Your education, experience, and frameworks are scalable assets"
+        application: "Package specific knowledge into courses, templates, guides. Your intersection = your product."
+        example: "Dan Koe's knowledge of marketing + philosophy + content = Digital Economics course (thousands of students, no inventory)."
+
+      - principle: "Compounding Returns"
+        description: "Content, brand, and skills compound over time — each piece makes the next one more effective"
+        implication: "The 100th newsletter is exponentially more valuable than the 1st (audience, skill, backlinks, SEO)"
+        application: "Play long-term games. Invest in compounding assets (content, email list, brand equity)."
+        example: "A creator's year-3 revenue is typically 10x their year-1 revenue, even with same hours invested."
+
+    scoring_criteria:
+      per_principle:
+        not_leveraged: "0: Not using this principle at all"
+        partially_leveraged: "1: Some use but not systematic"
+        fully_leveraged: "2: Systematically leveraging this principle"
+      overall:
+        max_score: "10 (5 principles x 2 points each)"
+        sovereign: "8-10: Fully leveraging digital economics"
+        developing: "5-7: Good foundation, room to improve"
+        underleveraged: "0-4: Missing significant leverage — priority fix"
+
+    source: "Dan Koe — Digital Economics course, Modern Mastery, Newsletter"
+    related_frameworks: ["SF-002", "SF-003"]
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 5: Future-Present Integration
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: SF-005
+    name: "Future-Present Integration"
+    category: "strategic_alignment"
+    description: "Three-level system for ensuring every daily action is aligned with long-term vision while maintaining quality presence in the current moment"
+    levels:
+      - level: "Vision (10-Year Horizon)"
+        purpose: "Absolute clarity on the destination — who you're becoming, not just what you're achieving"
+        practice:
+          frequency: "Monthly deep review"
+          technique: "Describe your ideal Tuesday in 10 years — every detail (wake time, activities, people, location, feelings)"
+          output: "Living vision document (updated monthly)"
+        key_questions:
+          - "Who am I becoming in 10 years?"
+          - "What does my ideal ordinary day look like?"
+          - "What would I regret NOT doing?"
+          - "What must be true for this vision to be reality?"
+        danger: "Vision without presence = daydreaming (no action, just imagination)"
+
+      - level: "Presence (Today)"
+        purpose: "Quality execution in the current moment — deep work, flow state, full engagement"
+        practice:
+          frequency: "Daily (every working session)"
+          technique: "Single-task focus, deep work protocol, device-free blocks"
+          output: "Deep work output (content, products, systems)"
+        key_questions:
+          - "Am I fully engaged with this task?"
+          - "Am I doing my best work right now?"
+          - "Is this task worthy of my focused attention?"
+          - "Am I in flow or in distraction?"
+        danger: "Presence without vision = wandering (busy but directionless)"
+
+      - level: "Action (Daily Micro-Progress)"
+        purpose: "1% better compounded daily — the bridge between vision and today"
+        practice:
+          frequency: "Daily alignment check (5 minutes)"
+          technique: "Before starting work: 'Does today's plan serve the 10-year vision?'"
+          output: "Aligned daily priority list"
+        key_questions:
+          - "What is the single highest-leverage action I can take today?"
+          - "Does this task move me toward the vision or is it maintenance?"
+          - "Am I spending time on things that compound?"
+          - "What can I eliminate today that doesn't serve the vision?"
+        danger: "Action without vision and presence = busy work (efficient at the wrong things)"
+
+    integration_rule: "All three levels must be active simultaneously. Vision sets direction. Presence ensures quality. Action ensures progress."
+
+    alignment_diagnostic:
+      - symptom: "Working hard but feeling stuck"
+        diagnosis: "Action without Vision — you're efficient at tasks that don't matter"
+        fix: "Reconnect to 10-year vision. Cut tasks that don't ladder up."
+      - symptom: "Clear vision but no progress"
+        diagnosis: "Vision without Action — daydreaming without execution"
+        fix: "Define ONE daily action that moves the needle. Do it first."
+      - symptom: "Busy and productive but unfulfilled"
+        diagnosis: "Action without Presence — doing but not being"
+        fix: "Implement deep work protocol. Single-task. Feel the work."
+      - symptom: "Scattered, starting many things, finishing few"
+        diagnosis: "Action without Vision or Presence — reactive mode"
+        fix: "Stop everything. Reconnect to vision. Choose ONE project."
+
+    source: "Dan Koe — The Art of Focus, Newsletter articles on time and vision"
+    related_frameworks: ["SF-001", "SF-002"]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CROSS-REFERENCE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+cross_reference:
+  config_mental_models:
+    SF-001: "MM_007: The Leverage Stack (partial), custom sovereignty assessment"
+    SF-002: "MM_007: The Leverage Stack"
+    SF-003: "MM_001: Traffic + Offers = Business"
+    SF-004: "Extension of MM_001 and MM_007"
+    SF-005: "Related to MM_003: Fill/Empty/Use Brain Cycle"
+
+  thinking_dna_frameworks:
+    SF-001: "DF-003 (One-Person Business Architecture), H-006 (Sovereignty Check)"
+    SF-002: "DF-003"
+    SF-003: "DF-003, H-001 (Reduce to Traffic + Offers)"
+    SF-004: "DF-003, DF-006 (Digital Renaissance)"
+    SF-005: "DF-010 (Future-Present Integration)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-14"
+  author: "koe-squad"
+  total_frameworks: 5
+  primary_agent: "koe-advisor"
+  supporting_agents: ["koe-offers", "koe-chief"]
+  source: "Aggregated from Dan Koe's Digital Economics course, The Art of Focus, Modern Mastery, and Newsletter"

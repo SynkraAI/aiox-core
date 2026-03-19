@@ -1,0 +1,269 @@
+# Biblioteca de Hooks — Abertura de Conteúdo para Social
+# Atualizado: 2026-02
+# Uso: agentes social-hooks, copy-vendas e social-strategist
+# Como usar: substitua {placeholder} com o dado real do nicho/produto
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  instructions: >
+    Hooks são as primeiras 1-3 frases/segundos de qualquer conteúdo.
+    Determinam se o usuário para ou passa para o próximo post.
+    Use um hook por peça de conteúdo. Teste variações sistematicamente.
+  placeholders:
+    "{niche}": "nicho específico (ex: emagrecimento, finanças, idiomas)"
+    "{number}": "número específico e concreto (ex: 3, 7, 47)"
+    "{result}": "resultado desejado pelo público (ex: perder 10kg, ganhar R$5k/mês)"
+    "{time}": "período de tempo (ex: 30 dias, 7 dias, 3 meses)"
+    "{product}": "nome do produto ou ferramenta"
+    "{mistake}": "erro comum do público (ex: pular o café da manhã, comprar caro)"
+    "{person}": "persona ou tipo de pessoa (ex: iniciantes, mães, freelancers)"
+    "{claim}": "afirmação forte ou contra-intuitiva"
+    "{secret}": "informação não óbvia"
+    "{expert}": "autoridade ou especialista (ex: nutricionista, trader)"
+
+categories:
+
+  curiosity:
+    description: "Gera curiosidade intelectual — o usuário precisa saber a resposta"
+    psychology: "Zeigarnik Effect: o cérebro fica incomodado com perguntas sem resposta"
+    best_platforms:
+      - tiktok
+      - instagram_reels
+      - youtube_shorts
+      - email_subject
+    hooks:
+      - template: "Esse {secret} sobre {niche} ninguém te conta."
+        example: "Esse segredo sobre emagrecimento ninguém te conta."
+        notes: "Funciona melhor quando o 'segredo' é real e inesperado."
+
+      - template: "Por que {number}% das pessoas falham em {niche}? (a resposta vai te surpreender)"
+        example: "Por que 95% das pessoas falham em dieta? (a resposta vai te surpreender)"
+        notes: "Número alto cria urgência. Prometa revelar algo contra-intuitivo."
+
+      - template: "Você sabia que {claim}?"
+        example: "Você sabia que comer de madrugada pode ajudar a emagrecer?"
+        notes: "Use afirmação contrária ao senso comum. Precisa ser verdadeira."
+
+      - template: "O que {expert} descobriu sobre {niche} que mudou tudo."
+        example: "O que um neurocientista descobriu sobre produtividade que mudou tudo."
+        notes: "Referência de autoridade aumenta credibilidade do hook."
+
+      - template: "O motivo real pelo qual você não consegue {result}."
+        example: "O motivo real pelo qual você não consegue economizar dinheiro."
+        notes: "Diagnóstico implícito. Público sente que você sabe o problema deles."
+
+      - template: "Eu testei {product} por {time}. O resultado me surpreendeu."
+        example: "Eu testei esse suplemento por 30 dias. O resultado me surpreendeu."
+        notes: "Experiência pessoal + resultado aberto cria loop de curiosidade."
+
+      - template: "A razão estranha pela qual {claim}."
+        example: "A razão estranha pela qual pessoas mais pobres tendem a gastar mais."
+        notes: "'Estranha' amplifica o padrão de curiosidade."
+
+      - template: "Ninguém está falando sobre isso em {niche}."
+        example: "Ninguém está falando sobre isso em investimentos."
+        notes: "Exclusividade implícita. Cuide para não overpromise."
+
+      - template: "Isso vai mudar a forma como você pensa sobre {niche}."
+        example: "Isso vai mudar a forma como você pensa sobre exercício."
+        notes: "Promete transformação de perspectiva, não apenas informação."
+
+      - template: "A verdade que {expert} não quer que você saiba sobre {niche}."
+        example: "A verdade que as academias não querem que você saiba sobre musculação."
+        notes: "Gancho de 'insider vs outsider'. Use com responsabilidade — não crie conspiranismo."
+
+  fear:
+    description: "Aciona o medo de perda ou de estar cometendo um erro"
+    psychology: "Loss aversion: perder algo causa 2x mais impacto emocional que ganhar"
+    best_platforms:
+      - email_subject
+      - youtube_thumbnail
+      - instagram_carrossel
+      - facebook_groups
+    hooks:
+      - template: "Você está cometendo esse erro em {niche} sem saber."
+        example: "Você está cometendo esse erro no seu treino sem saber."
+        notes: "Erro implícito cria urgência de descobrir qual é."
+
+      - template: "Pare de fazer isso em {niche} agora."
+        example: "Pare de fazer isso com seu dinheiro agora."
+        notes: "Imperativo forte. Funciona melhor com o erro sendo contraintuitivo."
+
+      - template: "Se você não fizer isso, vai se arrepender em {time}."
+        example: "Se você não fizer isso agora, vai se arrepender em 5 anos."
+        notes: "Urgência temporal + arrependimento futuro."
+
+      - template: "{number} sinais de que você está fazendo {niche} errado."
+        example: "7 sinais de que você está investindo errado."
+        notes: "Lista numerada cria expectativa clara de conteúdo."
+
+      - template: "O {mistake} que está te impedindo de {result}."
+        example: "O hábito que está te impedindo de perder peso."
+        notes: "Diagnóstico específico. O erro deve ressoar com o público."
+
+      - template: "Por que {number}% das pessoas perdem dinheiro em {niche}."
+        example: "Por que 80% das pessoas perdem dinheiro investindo."
+        notes: "Estatística de falha + identificação com o público."
+
+      - template: "O que acontece com seu {recurso} se você não {ação}."
+        example: "O que acontece com seu metabolismo se você não come de 3 em 3 horas."
+        notes: "Consequência negativa específica amplifica o medo."
+
+      - template: "Cuidado: {produto} pode ser uma furada."
+        example: "Cuidado: esse suplemento popular pode ser uma furada."
+        notes: "Aviso de perigo. Muito forte — entregue conteúdo real na sequência."
+
+      - template: "Você está pagando {valor} a mais do que deveria em {niche}."
+        example: "Você está pagando R$500 a mais do que deveria em seguros."
+        notes: "Perda financeira quantificada ressoa muito em nichos de finanças."
+
+      - template: "Isso está destruindo seu {resultado} sem que você perceba."
+        example: "Isso está destruindo seu sono sem que você perceba."
+        notes: "Agente oculto de dano. Cria urgência de descoberta."
+
+  desire:
+    description: "Desperta o desejo pelo resultado que o público quer alcançar"
+    psychology: "Dopamine anticipation: visualizar o resultado libera dopamina antes de atingi-lo"
+    best_platforms:
+      - tiktok
+      - instagram_reels
+      - email_body
+      - youtube_long
+    hooks:
+      - template: "Como {person} conseguiu {result} em {time} sem {sacrifício}."
+        example: "Como essa mãe conseguiu perder 15kg em 3 meses sem academia."
+        notes: "Social proof + resultado + remoção de obstáculo. Fórmula clássica."
+
+      - template: "Imagina acordar todos os dias e {resultado_positivo}."
+        example: "Imagina acordar todos os dias sem dívidas no cartão."
+        notes: "Visualização de futuro ideal. Mais eficaz no formato de story narrado."
+
+      - template: "Em {time}, você pode {result}. Deixa eu te mostrar como."
+        example: "Em 90 dias, você pode falar inglês fluente. Deixa eu te mostrar como."
+        notes: "Timeline específica + promessa + oferta de conteúdo."
+
+      - template: "A estratégia de {niche} que me fez {result}."
+        example: "A estratégia de SEO que me fez ganhar R$8.000/mês trabalhando de casa."
+        notes: "Resultado pessoal + credibilidade implícita."
+
+      - template: "Você merece {resultado}. Aqui está como conseguir."
+        example: "Você merece férias sem culpa. Aqui está como planejar."
+        notes: "Validação emocional + promessa de solução."
+
+      - template: "{number} passos para {result} em {time}."
+        example: "3 passos para economizar R$1.000 esse mês."
+        notes: "Processo simples + resultado concreto + urgência temporal."
+
+      - template: "Esse método me ajudou a {result} — e pode funcionar para você também."
+        example: "Esse método me ajudou a dobrar minha renda — e pode funcionar para você também."
+        notes: "Social proof pessoal + inclusão do leitor."
+
+      - template: "A vida depois de {conquista} é assim."
+        example: "A vida depois de quitar todas as dívidas é assim."
+        notes: "Aspiração de identidade. Funciona bem com depoimentos reais."
+
+      - template: "Tudo que você precisa para {result} está nesse vídeo/post."
+        example: "Tudo que você precisa para criar um site lucrativo está nesse vídeo."
+        notes: "Completude implícita. O conteúdo deve entregar o prometido."
+
+      - template: "Finalmente: {result} sem {sacrifício}."
+        example: "Finalmente: emagrecer sem cortar o chocolate."
+        notes: "'Finalmente' implica que o público estava esperando por isso."
+
+  surprise:
+    description: "Apresenta algo inesperado que quebra expectativas"
+    psychology: "Pattern interrupt: o cérebro para de 'pilotar automático' diante do inesperado"
+    best_platforms:
+      - tiktok
+      - youtube_shorts
+      - instagram_reels
+    hooks:
+      - template: "Eu errei tudo em {niche} por {time} — e aprendi isso."
+        example: "Eu errei tudo em investimentos por 2 anos — e aprendi isso."
+        notes: "Vulnerabilidade + aprendizado. Cria confiança e humanidade."
+
+      - template: "Essa é a coisa mais estúpida que já fiz em {niche}."
+        example: "Essa é a coisa mais estúpida que já fiz tentando emagrecer."
+        notes: "Confissão cômica ou dramática. Alta humanidade."
+
+      - template: "Contraditório: {claim_contraintuitivo}."
+        example: "Contraditório: comer mais pode te ajudar a emagrecer mais rápido."
+        notes: "Afirmação que contradiz o senso comum — mas deve ser verdadeira."
+
+      - template: "Eu ganhei {resultado} fazendo exatamente o oposto do que ensinam."
+        example: "Eu ganhei R$20k/mês fazendo exatamente o oposto do que ensinam sobre marketing."
+        notes: "Anti-convencional. Forte apelo para quem falhou seguindo o convencional."
+
+      - template: "Essa ferramenta de {price} substitui um software de {price_alto}."
+        example: "Essa ferramenta de R$47/mês substitui um software de R$500/mês."
+        notes: "Choque de valor. Perfeito para afiliados de ferramentas."
+
+      - template: "Resultado de {time} de {atividade}: {número_surpreendente}."
+        example: "Resultado de 30 dias de cold emails: 847 respostas."
+        notes: "Resultado concreto e inesperadamente alto."
+
+      - template: "Eu deletei meu {perfil_ou_conta} e aconteceu isso."
+        example: "Eu deletei meu Instagram por 30 dias e aconteceu isso."
+        notes: "Ação radical + curiosidade sobre as consequências."
+
+      - template: "O conselho de {niche} que todo mundo dá está errado."
+        example: "O conselho de dieta que todo mundo dá está completamente errado."
+        notes: "Desafio de autoridade estabelecida. Requer evidência sólida."
+
+      - template: "Ninguém me contou que {verdade_desconhecida} quando comecei em {niche}."
+        example: "Ninguém me contou que marketing de afiliados leva 12 meses para funcionar."
+        notes: "Revelação tardia + identificação com quem está começando."
+
+      - template: "Tentei {número} vezes fazer {coisa}. O que finalmente funcionou foi isso."
+        example: "Tentei 7 vezes criar uma renda online. O que finalmente funcionou foi isso."
+        notes: "Jornada de falhas → solução. Alta empatia com o público."
+
+  social_proof:
+    description: "Usa validação social para criar credibilidade e FOMO"
+    psychology: "Social proof: humanos usam o comportamento dos outros como guia de decisão"
+    best_platforms:
+      - youtube_long
+      - email_body
+      - instagram_carrossel
+      - facebook_groups
+    hooks:
+      - template: "{número} pessoas já usaram esse método para {result}."
+        example: "Mais de 12.000 pessoas já usaram esse método para sair das dívidas."
+        notes: "Volume + resultado específico. Use números reais e verificáveis."
+
+      - template: "Por que {número} {person} estão migrando para {product/estratégia}."
+        example: "Por que 50.000 criadores estão migrando para o Kit para email."
+        notes: "Migração em massa cria FOMO. Implica que quem não fez está atrasado."
+
+      - template: "O que as pessoas mais bem-sucedidas em {niche} fazem diferente."
+        example: "O que as pessoas mais bem-sucedidas em vendas online fazem diferente."
+        notes: "Acesso a práticas de elite. Aspiracional."
+
+      - template: "Depoimento real: '{citacao_curta}' — {person}."
+        example: "Depoimento real: 'Perdi 8kg em 45 dias sem academia' — Maria, 34 anos."
+        notes: "Prova social específica > genérica. Dados reais aumentam credibilidade."
+
+      - template: "Esse produto tem {número} avaliações {rating}. Vale mesmo?"
+        example: "Esse curso tem 4.800 avaliações 5 estrelas. Vale mesmo?"
+        notes: "Contextualiza prova social + cria expectativa de review honesto."
+
+      - template: "Todos os meus seguidores que testaram {produto/estratégia} disseram isso."
+        example: "Todos os meus seguidores que testaram essa dieta disseram isso."
+        notes: "Comunidade como prova social. Cria senso de pertencimento."
+
+      - template: "O método de {pessoa_famosa} que {número} pessoas replicaram."
+        example: "O método de estudo de Josh Kaufman que 30.000 pessoas replicaram."
+        notes: "Autoridade + volume de adoção. Cuide com claims de celebridades."
+
+      - template: "Antes e depois real: de {situação_ruim} para {situação_boa} em {time}."
+        example: "Antes e depois real: de R$-3.000 para R$+5.000 em 6 meses."
+        notes: "Transformação quantificada. Deve ser de caso real e verificável."
+
+      - template: "A história de {person} que começou do zero e hoje {result}."
+        example: "A história da Ana que começou sem seguidores e hoje fatura R$30k/mês."
+        notes: "Jornada de zero a herói. Identidade aspiracional."
+
+      - template: "Por que {autoridade} recomenda {product} para {person}."
+        example: "Por que 9 em 10 nutricionistas recomendam esse tipo de proteína."
+        notes: "Endorsement de autoridade. Muito poderoso em nichos de saúde."

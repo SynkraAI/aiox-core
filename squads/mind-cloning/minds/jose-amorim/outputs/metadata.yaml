@@ -1,0 +1,80 @@
+---
+mind:
+  name: "José Carlos Amorim"
+  slug: "jose_amorim"
+  type: "hybrid"
+  status: "completed"
+  created_at: "2025-10-15"
+  completed_at: "2026-01-31"
+
+special_case:
+  type: "private_individual"
+  reason: "Non-public person - hybrid workflow (interview + self-authored material)"
+  standard_mmos_applicable: true
+  note: "Successfully completed using modified pipeline with high-density sources"
+
+archetype:
+  primary: "private_individual"
+  note: "First private individual completed via hybrid approach"
+
+pipeline:
+  version: "3.0"
+  methodology: "DNA Mental™ (hybrid: self-authored + interview)"
+  workflow_status: "completed"
+  fidelity_projection: "85-90%"
+
+phases:
+  viability:
+    status: "completed"
+    note: "7 sources of high density offset low count"
+  research:
+    status: "completed"
+    sources_collected: 7
+    primary_sources: 2
+    synthetic_sources: 5
+    word_count_analyzed: 48000
+    note: "Livro Nexialismo (200pg) + Aula transcrita (2h) + entrevista + 4 análises pré-compiladas"
+  analysis:
+    status: "completed"
+    confidence: "high"
+    layers_complete: [1, 2, 3, 4, 5, 6, 7, 8]
+    human_checkpoints_passed: [6, 7, 8]
+    stated_demonstrated_alignment: "92%"
+  synthesis:
+    status: "completed"
+    artifacts: ["frameworks_synthesized.md", "voice_guide.md", "communication_templates.md", "decision_patterns.md"]
+  implementation:
+    status: "completed"
+    artifacts: ["identity_core.yaml", "instructions_core.yaml"]
+  validation:
+    status: "completed"
+    fidelity_score: "85-90%"
+    note: "Pipeline complete. Gaps documented in validation-report.md"
+
+system_prompts:
+  generalista:
+    version: "1.0"
+    path: "system_prompts/generalista.md"
+    created_at: "2026-01-31"
+
+kb:
+  status: "populated"
+  populated_at: "2026-02-01"
+  updated_at: "2026-02-01"
+  artifacts:
+    - "kb/story-bank.yaml"
+    - "kb/voice-dna-instagram.yaml"
+    - "kb/content-dna.yaml"
+    - "kb/llm-blacklist.yaml"
+    - "kb/frameworks-proprietarios.yaml"
+  sources_used:
+    - "50 posts Instagram (@josecarlosamorim.ai)"
+    - "Livro Nexialismo"
+    - "Entrevista + detalhes-pessoais.md"
+    - "8-layer analysis"
+    - "newsletter-growth-dankoe/data/author-profile.yaml"
+    - "newsletter-growth-dankoe/data/jose-intersecao-mapeamento.yaml"
+    - "newsletter-growth-dankoe/data/business-context.yaml"
+  note: "KB fully populated. Includes Instagram voice, LLM blacklist, proprietary frameworks, and intersecção real."
+
+total_artifacts: 35

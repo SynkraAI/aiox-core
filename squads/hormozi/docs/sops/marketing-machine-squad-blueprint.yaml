@@ -1,0 +1,1433 @@
+# Marketing Machine Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Playbook: Marketing Machine - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: marketing-machine
+  purpose: "Transform business into ads machine that produces endless content without founder dependency"
+  domain: marketing-operations
+  source_playbook: "$100M Playbook: Marketing Machine"
+
+  core_insight: |
+    "A company that relies on your face will always be less valuable than one that doesn't."
+    "Eighty percent of top-performing ads weren't me. They were our customers."
+    Source: p.5
+
+  business_impact:
+    - "Eliminates founder dependency for customer acquisition"
+    - "Creates enterprise value ($46.2M sale achieved after implementation)"
+    - "Generates more ads, better ads, without founder face"
+    - "Enables business sale without keyman risk"
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: machine-coordinator
+      role: "Orchestrate all seven nodes of the Marketing Machine"
+      decisions:
+        - "Prioritize which nodes to activate based on business stage"
+        - "Allocate resources across content capture workflows"
+        - "Identify bottlenecks in testimonial pipeline"
+        - "Schedule events and competitions for content surges"
+      kpis:
+        - "Weekly content flow (>5 new pieces/week)"
+        - "Customer-generated ratio (>80% of top ads)"
+        - "Testimonial pipeline volume"
+        - "Node coverage (5+ nodes active)"
+
+  tier_0_diagnosis:
+    - agent: content-auditor
+      role: "Monitor content health across all nodes and identify gaps"
+      inputs:
+        - "Current content inventory"
+        - "Ad performance data"
+        - "Node activity metrics"
+        - "Testimonial submission rates"
+      outputs:
+        - "Content gap report"
+        - "Node activation recommendations"
+        - "Resource reallocation needs"
+        - "Priority customers for testimonials"
+
+    - agent: permission-guardian
+      role: "Ensure all content usage complies with permission protocols"
+      inputs:
+        - "Customer contracts"
+        - "Permission requests"
+        - "Content usage logs"
+      outputs:
+        - "Permission status by customer"
+        - "Compliance flags"
+        - "Content cleared for use"
+
+  tier_1_execution:
+    - agent: lifecycle-harvester
+      role: "Extract before/during/after moments from customer journey calls"
+      specialization: "Node I: Lifecycle Ads"
+      capabilities:
+        - "Identify happy customers from weekly reports"
+        - "Locate call recordings across timeline"
+        - "Clip key moments (before, during, after)"
+        - "Assemble lifecycle narrative"
+      targets:
+        weekly_submissions: "Sales sends happy-customer-calls weekly"
+        video_output: "1+ lifecycle video per key customer"
+
+    - agent: social-scraper
+      role: "Monitor and capture customer-generated social content"
+      specialization: "Node II: Social Media Scrape"
+      capabilities:
+        - "Monitor hashtags and tags across platforms"
+        - "Capture ephemeral content (stories) within 24h"
+        - "Organize media with searchable naming"
+        - "Separate studs from duds based on engagement"
+      targets:
+        daily_scrape: "All platforms monitored"
+        story_capture: "<24 hours for ephemeral content"
+
+    - agent: event-captain
+      role: "Maximize testimonial capture at in-person events"
+      specialization: "Node III: In-Person Events"
+      capabilities:
+        - "Coordinate camera teams and recording rooms"
+        - "Execute hit list of priority testimonials"
+        - "Capture stage ads at key moments"
+        - "Run man-in-the-street rapid interviews"
+      techniques:
+        stage_ads: "Selfie with crowd, end of day 1 or before lunch day 2"
+        pro_testimonials: "6-point script in dedicated room"
+        man_in_street: "10 questions, 10+ responses each"
+
+    - agent: community-miner
+      role: "Extract proof from support chats, communities, and reviews"
+      specialization: "Node IV: Communication & Communities"
+      capabilities:
+        - "Search key terms in support messages"
+        - "Screenshot customer wins"
+        - "Screen record community scrolls"
+        - "Scrape review sites"
+      keywords:
+        - "PIF, Sales, $, Profit, Revenue, Monthly"
+        - "close, closed, leads, show, scheduled, win"
+
+    - agent: incentive-architect
+      role: "Design and execute bonus unlocks and award testimonials"
+      specialization: "Node V: Bonuses & Awards"
+      capabilities:
+        - "Create compelling bonus offers"
+        - "Design aspirational awards"
+        - "Execute four-form proof capture per award"
+        - "Track testimonial-for-bonus exchanges"
+      four_proofs:
+        - "Post with numbers in group (PROOF 1)"
+        - "Video to proof@yourco.com (PROOF 2)"
+        - "Unboxing video when received (PROOF 3)"
+        - "Stage/in-person presentation recording (PROOF 4)"
+
+    - agent: competition-runner
+      role: "Execute testimonial competitions with ad performance judging"
+      specialization: "Node VI: Competitions"
+      capabilities:
+        - "Design competition structure"
+        - "Execute multi-channel announcement"
+        - "Personal outreach to top 50 customers"
+        - "Run all submissions as ads for 30 days"
+        - "Measure by conversions, announce winner"
+      frequency: "1-2x per year maximum (fatigue prevention)"
+
+  tier_2_judgment:
+    - agent: content-curator
+      role: "Assess content quality and route to appropriate use"
+      inputs:
+        - "Raw content from all nodes"
+        - "Organic performance data"
+        - "Historical ad performance"
+      outputs:
+        - "Stud vs dud classification"
+        - "Recommended ad combinations"
+        - "Content ready for production"
+      insight: "Good organic performance correlates highly with good ad performance"
+
+    - agent: assembly-director
+      role: "Combine content pieces into final ad creatives"
+      capabilities:
+        - "Match proven visuals with proven copy"
+        - "Create lifecycle narratives"
+        - "Build highlight reel compilations"
+        - "Package weekly content for ad team"
+
+    - agent: calendar-strategist
+      role: "Plan content surges from events and competitions"
+      responsibilities:
+        - "Schedule events 2x/year"
+        - "Schedule competitions 1x/year"
+        - "Run competitions between events"
+        - "Ensure big flow every 12 weeks"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  machine-coordinator:
+    id: machine-coordinator
+    title: "Marketing Machine Orchestrator"
+    tier: orchestrator
+    icon: "factory"
+
+    purpose: |
+      Coordinate all seven nodes of the Marketing Machine to produce
+      endless customer-generated ads without founder dependency.
+      "Turn everything you do into ads."
+
+    core_frameworks:
+      - name: "Seven Nodes"
+        components:
+          - "Lifecycle Ads"
+          - "Social Media Scrape"
+          - "In-Person Events"
+          - "Communication & Communities"
+          - "Bonuses & Awards"
+          - "Competitions"
+          - "Delivery (local only)"
+      - name: "Implementation Priority"
+        order:
+          - "Competition (big influx)"
+          - "Chat/Messaging Scrape"
+          - "Community Scrape"
+          - "Reviews Scrape"
+          - "Social Media Scrape"
+          - "Bonus Unlocks"
+          - "Award Unlocks"
+          - "Events"
+          - "Lifecycle"
+
+    decision_authority:
+      - "Node activation priority"
+      - "Resource allocation across nodes"
+      - "Event and competition scheduling"
+      - "Content production pipeline"
+
+    success_metrics:
+      primary:
+        - name: "Customer-Generated Ratio"
+          target: ">80% of top 50 ads"
+          source: "p.5 - 'eighty percent of them weren't me'"
+        - name: "Weekly Content Flow"
+          target: ">5 new pieces"
+      secondary:
+        - "Active nodes: 5+"
+        - "Testimonial pipeline: >10/month"
+        - "Content surge every 12 weeks"
+
+  content-auditor:
+    id: content-auditor
+    title: "Content Health Monitor"
+    tier: tier_0
+    icon: "chart"
+
+    purpose: |
+      Monitor the health of content flow across all seven nodes.
+      Identify gaps before they become problems.
+
+    audit_dimensions:
+      node_activity:
+        - "Lifecycle: Weekly happy customer names submitted?"
+        - "Social: Daily tag monitoring happening?"
+        - "Events: Next event scheduled with camera plan?"
+        - "Communication: Weekly screenshot collection?"
+        - "Bonuses: Unlock submissions flowing?"
+        - "Awards: Four-form capture completing?"
+        - "Competitions: Next competition planned?"
+
+      content_quality:
+        - "Stud/dud ratio improving?"
+        - "Organic engagement trending up?"
+        - "Ad performance by content type"
+
+    outputs:
+      - "Weekly content health report"
+      - "Node activation recommendations"
+      - "Priority customer list for testimonials"
+      - "Resource reallocation needs"
+
+  permission-guardian:
+    id: permission-guardian
+    title: "Permission & Compliance Specialist"
+    tier: tier_0
+    icon: "shield"
+
+    purpose: |
+      Ensure all customer content usage complies with permissions.
+      "Even though they sign a document, we still ask."
+
+    permission_protocol:
+      contract_level:
+        requirement: "Compliance and permission language in all customer contracts"
+        covers: "Compliance, training, and advertising purposes"
+
+      personal_level:
+        requirement: "Ask if they feel OK with using their story"
+        action_if_no: "Honor their wishes"
+        philosophy: "Plenty more successful clients feel ecstatic to share"
+
+    outputs:
+      - "Permission status by customer"
+      - "Content cleared for advertising use"
+      - "Compliance flags for review"
+
+  lifecycle-harvester:
+    id: lifecycle-harvester
+    title: "Lifecycle Content Specialist"
+    tier: tier_1
+    icon: "video"
+
+    purpose: |
+      Extract before/during/after moments from customer journey
+      to create powerful lifecycle testimonial ads.
+
+    workflow:
+      step_1_collect:
+        action: "Receive weekly happy-customer list from Sales"
+        output: "Names of customers with great results"
+
+      step_2_locate:
+        action: "Search calendar events for all calls with that customer"
+        output: "Timeline of all recorded interactions"
+
+      step_3_clip:
+        action: "Extract key moments"
+        moments:
+          before: "Initial sales call - struggle, pain point"
+          during: "1-2 support calls - journey, learning"
+          after: "Upsell, milestone, or testimonial call - victory"
+
+      step_4_assemble:
+        action: "Create lifecycle narrative"
+        output: "Complete customer journey video"
+
+    local_business_variant:
+      name: "Delivery Moment Capture"
+      description: "Ribbon cutting ceremony style"
+      examples:
+        - "Kitchen reveal (eyes closed then sees)"
+        - "Scale results (weight loss)"
+        - "Teeth after veneers"
+        - "Job offer reaction"
+      hook: "Raw reactions become first 3-5 seconds of ad"
+
+    infrastructure_requirements:
+      - "All calls recorded"
+      - "Extra storage (no auto-delete)"
+      - "Client names in calendar event titles"
+      - "Searchable labeling system"
+
+  social-scraper:
+    id: social-scraper
+    title: "Social Media Content Hunter"
+    tier: tier_1
+    icon: "hashtag"
+
+    purpose: |
+      Monitor and capture all customer-generated social content
+      before it disappears.
+
+    hashtag_system:
+      purpose: "Unified tagging for easy discovery"
+      examples:
+        gym_launch: ["#gymlord", "#gymlaunch", "#gymowner"]
+        prestige_labs: ["#poweredbyprestige"]
+        personal: ["#neverskipdessert", "#acquisition", "#100moffers", "#100mleads"]
+
+    capture_workflow:
+      daily_tasks:
+        - "Monitor all defined hashtags"
+        - "Check tagged posts/stories"
+        - "Capture stories within 24 hours (ephemeral!)"
+        - "Save with searchable naming convention"
+
+      organization:
+        - "Tag with relevant facts"
+        - "Create searchable names"
+        - "Separate studs from duds folder"
+
+    performance_correlation: |
+      "Good organic performance correlates highly with
+      good ad and outbound performance"
+
+    ad_creation:
+      rule: "Use best-performing images/videos with already-performing ad copy"
+      includes: "Yes, including stuff you posted"
+
+  event-captain:
+    id: event-captain
+    title: "Event Testimonial Commander"
+    tier: tier_1
+    icon: "stage"
+
+    purpose: |
+      Maximize testimonial capture at every in-person event.
+      "Every event should more than pay for itself in proof alone."
+
+    event_philosophy: |
+      "If you're an in-person business you have an insane advantage.
+      Every day is an in-person event."
+      "Since events cost a fortune and I didn't sell anything,
+      that media was the only way I could get returns."
+
+    three_capture_types:
+      stage_ads:
+        description: "Ads recorded on stage with crowd"
+        checklist:
+          - "Picture on stage with people celebrating behind"
+          - "Multiple selfie images"
+          - "Video if possible (one take!)"
+        timing: "End of day one or before lunch day two"
+
+      professional_testimonials:
+        description: "Dedicated room recordings with 6-point script"
+        setup:
+          - "Reserve two rooms: event + recording"
+          - "Or 2-3 extra hotel rooms for recording"
+          - "Two camera operators + one runner"
+          - "Better team on testimonials"
+          - "Multiple mics and cameras"
+          - "TEST. TEST. TEST. equipment"
+        pre_event:
+          - "Pick customers ahead of time"
+          - "Confirm in writing"
+          - "Print hit list on clipboard"
+          - "Announce at event start"
+          - "Introduce handler to everyone"
+        incentives:
+          - "Bonus for testimonial participation"
+          - "$50 handler bonus for each non-list capture"
+        execution:
+          - "Avoid pulling during keynotes"
+          - "Use mornings, lunches, breaks, end of day"
+          - "Name at beginning of video"
+          - "Multiple hook versions"
+
+      man_in_street:
+        description: "Quick soundbite interviews during breaks"
+        setup: "Second two-man camera team"
+        preparation: "10 core questions, target 10+ responses each"
+        example_questions:
+          - "How many new customers have you gained since you started?"
+          - "What were you making before X vs now?"
+          - "How much extra income has X added?"
+          - "How much weight have you lost?"
+          - "What was your credit score before/after?"
+        execution:
+          - "Print questions for camera team"
+          - "Tally space below each question"
+          - "Ask only that question until target reached"
+        output: "Fast-hitting highlight reels"
+
+    six_point_script:
+      - question: "What was rock bottom before doing this?"
+        type: "Internal Struggle"
+      - question: "What were your objective metrics?"
+        type: "External Struggle"
+      - question: "What were your main concerns about buying?"
+        type: "Skepticism"
+      - question: "What made you do it anyways?"
+        type: "Overcome"
+      - question: "What are your objective metrics now?"
+        type: "External Victory"
+      - question: "What's been the best moment since?"
+        type: "Internal Victory"
+
+  community-miner:
+    id: community-miner
+    title: "Communication & Community Harvester"
+    tier: tier_1
+    icon: "messages"
+
+    purpose: |
+      Extract proof from every customer communication channel.
+      "Weaponize all those great little moments."
+
+    three_sources:
+      support_chat:
+        description: "Screenshot juicy messages when things go well"
+        keywords: ["PIF", "Sales", "$", "Profit", "Revenue", "Monthly", "close", "closed", "leads", "show", "scheduled", "win"]
+        workflow:
+          - "Create shared folder for all reps"
+          - "Set reminder to search key terms"
+          - "Sort by date, screenshot new ones"
+          - "Optional: sub-folders by type"
+        culture:
+          - "Manager notes who turned in screenshots"
+          - "Give kudos (they won't do it otherwise)"
+          - "Optional: $100 gift card for winning ad screenshots"
+
+      community_wins:
+        description: "Posts and comments from customer community"
+        workflow:
+          - "Create 'wins' post category if possible"
+          - "Create community wins folder"
+          - "Friday: wins of the week post"
+          - "Monday: screenshot weekend wins"
+          - "Search same key terms in group"
+        bonus_technique: |
+          "Screen record scrolling through the comments/wins
+          for the week (or over multiple weeks).
+          This gives you yet another ad to run."
+
+      reviews_scrape:
+        description: "External review site monitoring"
+        sites: ["Glassdoor", "Yelp", "Google", "Facebook", "TrustPilot", "Amazon"]
+        workflow:
+          - "List all review sites"
+          - "Create reviews folder"
+          - "Calendar reminder per site"
+          - "Sort by newest, screenshot good ones"
+
+  incentive-architect:
+    id: incentive-architect
+    title: "Bonus & Award Testimonial Designer"
+    tier: tier_1
+    icon: "trophy"
+
+    purpose: |
+      Design irresistible bonuses and awards that generate testimonials.
+      "Ask people to submit testimonials to get the award."
+
+    bonus_unlocks:
+      concept: "Trade testimonial for valuable bonus"
+      types:
+        - "Training content"
+        - "Tiny project/deliverable"
+        - "One-time access"
+        - "Status tier"
+      requirements:
+        - "Make it big and sexy"
+        - "Attach a price to it"
+        - "Make it for sale (then offer testimonial as alternative)"
+      unlock_instructions:
+        - "Send video under 5min hitting 6 points to proof@yourco.com"
+        - "Use reference video (your best one)"
+        - "Post video in group with stats"
+        - "Tag community manager"
+        - "Include keywords for scraping"
+
+    award_testimonials:
+      concept: "Create aspirational award, exchange for 4 forms of proof"
+      design_principles:
+        - "Tie to community identity"
+        - "Make it big and cool"
+        - "Spend money on it (makes more back)"
+        - "People must crave this thing"
+        - "Don't do boring"
+      example:
+        company: "Gym Launch"
+        award: "Sword and shield"
+        why: "Swords = bodybuilding prestige, community = Gym Lords"
+
+      four_forms_capture:
+        proof_1:
+          type: "Written/Screenshot"
+          action: "Post showing actual numbers in group"
+          requirement: "Tag community owner"
+        proof_2:
+          type: "Video"
+          action: "Email video to proof@yourco.com"
+        proof_3:
+          type: "Unboxing Video"
+          action: "Record receiving and opening mailed award"
+        proof_4:
+          type: "Stage Recording"
+          action: "Record in-person or stage presentation"
+          note: "Keep personalized/engraved one to mail + generic for stage"
+
+  competition-runner:
+    id: competition-runner
+    title: "Testimonial Competition Executor"
+    tier: tier_1
+    icon: "medal"
+
+    purpose: |
+      Run high-impact testimonial competitions judged by ad performance.
+      "The one with the most conversions over 30 days wins."
+
+    frequency_warning: |
+      "People tire of them, so you can't do them very often,
+      like once or twice a year max."
+
+    competition_structure:
+      format: "Raw iPhone-style testimonial"
+      judging: "Ad conversion performance over 30 days"
+      award_example: "6 months of free service/product"
+
+    execution_workflow:
+      phase_1_setup:
+        - "Set announcement date & deadline"
+        - "Define crazy award"
+        - "Prepare submission instructions"
+        - "Gather reference video (last winner or best)"
+        - "Attach 6-point script"
+
+      phase_2_announce:
+        - "Announce via ALL internal channels (email, group, community)"
+        - "Countdown to deadline"
+        - "Personal invitations to top 50 customers"
+        - "Regular follow-up"
+
+      phase_3_collect:
+        tip: |
+          "Ask them to do it the moment - 'right now, it takes 5min,
+          just take out your phone so you don't have to think about it'"
+        quality: "The raw-er the better"
+
+      phase_4_judge:
+        - "Cut off submissions at deadline"
+        - "Format all as ads"
+        - "Run them for 30 days"
+        - "Count conversions"
+        - "Announce winner publicly"
+
+  content-curator:
+    id: content-curator
+    title: "Content Quality Assessor"
+    tier: tier_2
+    icon: "filter"
+
+    purpose: |
+      Separate studs from duds and route content appropriately.
+      "Good organic performance correlates highly with good ad performance."
+
+    classification_system:
+      studs:
+        definition: "Content that outperformed typical posts"
+        indicators:
+          - "High organic engagement"
+          - "Strong emotional response"
+          - "Clear results/metrics mentioned"
+          - "Authentic feel"
+        destination: "Top performer folder for ad testing"
+
+      duds:
+        definition: "Average or below-average performing content"
+        use: "Archive for volume/backup"
+
+    workflow:
+      - "Review all incoming content"
+      - "Check organic performance metrics"
+      - "Apply stud/dud classification"
+      - "Route studs to ad combination testing"
+      - "Track ad performance to refine classification"
+
+  assembly-director:
+    id: assembly-director
+    title: "Ad Creative Assembly Specialist"
+    tier: tier_2
+    icon: "combine"
+
+    purpose: |
+      Combine content pieces into final ad creatives.
+      "Use best-performing images and videos with already-performing ad copy."
+
+    assembly_types:
+      lifecycle_narrative:
+        description: "Before/during/after customer journey"
+        source: "Lifecycle Harvester outputs"
+
+      highlight_reel:
+        description: "Fast-hitting compilation of responses"
+        source: "Man-in-street testimonials"
+        format: "Same question, multiple people answering"
+
+      community_scroll:
+        description: "Screen recording of wins/comments"
+        source: "Community miner outputs"
+
+      stud_combinations:
+        description: "Proven visual + proven copy"
+        source: "Content curator outputs"
+
+    weekly_output:
+      name: "Weekly Content Package"
+      contents:
+        - "List of names with great results"
+        - "Scraped social media (images + videos)"
+        - "Chat screenshots"
+        - "Community testimonials"
+        - "New 5-star reviews"
+        - "Bonus unlock submissions"
+        - "Award deliveries"
+        - "Customer reaction videos"
+
+  calendar-strategist:
+    id: calendar-strategist
+    title: "Content Surge Planner"
+    tier: tier_2
+    icon: "calendar"
+
+    purpose: |
+      Plan the annual calendar of events and competitions
+      to create regular content surges.
+
+    planning_framework:
+      rhythm: "Big flow every 12 weeks"
+      components:
+        events: "2 per year"
+        competitions: "1 per year"
+        relationship: "Run competitions between events"
+
+    annual_calendar_template:
+      q1: "Event 1"
+      q2: "Competition"
+      q3: "Event 2"
+      q4: "Ongoing node collection"
+
+    philosophy: |
+      "For some, this is all the ad content they'll ever need."
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Node I: Lifecycle
+  - task: "Add permission language to contracts"
+    executor: Human
+    automation: LOW
+    node: Lifecycle
+    guardrails: "Legal review required"
+
+  - task: "Configure call recording"
+    executor: Worker
+    automation: HIGH
+    node: Lifecycle
+    guardrails: "Disable auto-delete, extra storage"
+
+  - task: "Create calendar events with client names"
+    executor: Worker
+    automation: HIGH
+    node: Lifecycle
+    guardrails: "Consistent naming convention"
+
+  - task: "Send weekly happy-customer list"
+    executor: Human
+    automation: LOW
+    node: Lifecycle
+    guardrails: "Sales team responsibility"
+
+  - task: "Locate all calls for customer"
+    executor: Worker
+    automation: HIGH
+    node: Lifecycle
+    guardrails: "Search by name, verify dates"
+
+  - task: "Clip before/during/after moments"
+    executor: Human
+    automation: LOW
+    node: Lifecycle
+    guardrails: "Follow moment criteria"
+
+  - task: "Assemble lifecycle video"
+    executor: Human
+    automation: LOW
+    node: Lifecycle
+    guardrails: "Show don't tell narrative"
+
+  # Node II: Social Media
+  - task: "Define hashtags and tags"
+    executor: Human
+    automation: LOW
+    node: Social
+    guardrails: "Multiple hashtags per context"
+
+  - task: "Monitor tags across platforms"
+    executor: Hybrid
+    automation: MEDIUM
+    node: Social
+    guardrails: "Daily check, stories within 24h"
+
+  - task: "Save with searchable naming"
+    executor: Hybrid
+    automation: MEDIUM
+    node: Social
+    guardrails: "Consistent convention"
+
+  - task: "Separate studs from duds"
+    executor: Hybrid
+    automation: MEDIUM
+    node: Social
+    guardrails: "Based on organic engagement"
+
+  # Node III: Events
+  - task: "Reserve recording rooms"
+    executor: Human
+    automation: LOW
+    node: Events
+    guardrails: "Two rooms or hotel rooms"
+
+  - task: "Hire camera teams"
+    executor: Human
+    automation: LOW
+    node: Events
+    guardrails: "Better team on testimonials"
+
+  - task: "Create hit list of testimonial targets"
+    executor: Human
+    automation: LOW
+    node: Events
+    guardrails: "Confirm in writing"
+
+  - task: "Capture stage ads"
+    executor: Human
+    automation: LOW
+    node: Events
+    guardrails: "End of day 1 or before lunch day 2"
+
+  - task: "Execute professional testimonials"
+    executor: Human
+    automation: LOW
+    node: Events
+    guardrails: "6-point script, name at start"
+
+  - task: "Run man-in-street interviews"
+    executor: Human
+    automation: LOW
+    node: Events
+    guardrails: "10 questions, 10+ responses each"
+
+  # Node IV: Communication & Communities
+  - task: "Define win keywords"
+    executor: Human
+    automation: LOW
+    node: Communication
+    guardrails: "Update as new language emerges"
+
+  - task: "Search and screenshot chat wins"
+    executor: Hybrid
+    automation: MEDIUM
+    node: Communication
+    guardrails: "Reward reps for doing it"
+
+  - task: "Post weekly wins request"
+    executor: Worker
+    automation: HIGH
+    node: Communication
+    guardrails: "Every Friday"
+
+  - task: "Screenshot community wins"
+    executor: Hybrid
+    automation: MEDIUM
+    node: Communication
+    guardrails: "Monday start of week"
+
+  - task: "Screen record community scroll"
+    executor: Human
+    automation: LOW
+    node: Communication
+    guardrails: "Weekly or cumulative"
+
+  - task: "Scrape review sites"
+    executor: Hybrid
+    automation: MEDIUM
+    node: Communication
+    guardrails: "Calendar reminder per site"
+
+  # Node V: Bonuses & Awards
+  - task: "Design bonus offer"
+    executor: Human
+    automation: LOW
+    node: Bonuses
+    guardrails: "Big and sexy, real value"
+
+  - task: "Create award trophy"
+    executor: Human
+    automation: LOW
+    node: Awards
+    guardrails: "Spend money, make it coveted"
+
+  - task: "Promote bonus unlock"
+    executor: Hybrid
+    automation: MEDIUM
+    node: Bonuses
+    guardrails: "Video pitch visible to all customers"
+
+  - task: "Capture four forms of proof"
+    executor: Hybrid
+    automation: MEDIUM
+    node: Awards
+    guardrails: "Never give award without all 4"
+
+  # Node VI: Competitions
+  - task: "Design competition structure"
+    executor: Human
+    automation: LOW
+    node: Competitions
+    guardrails: "1-2x/year max"
+
+  - task: "Announce via all channels"
+    executor: Worker
+    automation: HIGH
+    node: Competitions
+    guardrails: "Email, group, community"
+
+  - task: "Personal outreach to top 50"
+    executor: Human
+    automation: LOW
+    node: Competitions
+    guardrails: "Ask them to do it NOW"
+
+  - task: "Run submissions as ads"
+    executor: Worker
+    automation: HIGH
+    node: Competitions
+    guardrails: "30 day measurement window"
+
+  - task: "Count conversions, announce winner"
+    executor: Hybrid
+    automation: MEDIUM
+    node: Competitions
+    guardrails: "Public announcement"
+
+  # Node VII: Weekly Assembly
+  - task: "Compile weekly content package"
+    executor: Hybrid
+    automation: MEDIUM
+    node: Assembly
+    guardrails: "Start of week checklist"
+
+  - task: "Plan 6-month content calendar"
+    executor: Human
+    automation: LOW
+    node: Assembly
+    guardrails: "Big flow every 12 weeks"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Permission Gate"
+    transition: "Content Capture -> Content Use"
+    condition: "contract_signed AND personal_ok"
+    type: blocking
+    failure_action: "Honor wishes, do not use"
+    source: "p.8"
+
+  QG-002:
+    name: "Lifecycle Completeness Gate"
+    transition: "Clips -> Final Video"
+    condition: "before_clip AND during_clip AND after_clip"
+    type: blocking
+    failure_action: "Wait for missing moments"
+
+  QG-003:
+    name: "Event Equipment Gate"
+    transition: "Setup -> Recording"
+    condition: "tested_audio AND tested_video AND backup_available"
+    type: blocking
+    failure_action: "Do not proceed until tested"
+    source: "p.14 - TEST. TEST. TEST."
+
+  QG-004:
+    name: "Award Four-Form Gate"
+    transition: "Award Given -> Complete"
+    condition: "proof_1 AND proof_2 AND proof_3 AND proof_4"
+    type: warning
+    failure_action: "Follow up for missing proofs"
+
+  QG-005:
+    name: "Competition Frequency Gate"
+    transition: "Plan -> Launch"
+    condition: "last_competition > 6_months_ago"
+    type: blocking
+    failure_action: "Wait - fatigue risk"
+    source: "p.21 - once or twice a year max"
+
+  QG-006:
+    name: "Weekly Content Gate"
+    transition: "Week End -> Week Start"
+    condition: "new_content >= 5"
+    type: warning
+    failure_action: "Audit all nodes for gaps"
+
+  QG-007:
+    name: "Customer-Generated Ratio Gate"
+    transition: "Ad Production -> Launch"
+    condition: "customer_generated_ratio >= 80%"
+    type: warning
+    failure_action: "Reduce founder content in rotation"
+    source: "p.5 - 80% weren't me"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  happy_customer_to_lifecycle_ad:
+    trigger: "Sales identifies happy customer"
+    steps:
+      - step: 1
+        agent: lifecycle-harvester
+        action: "Receive name from weekly list"
+        output: "Customer identified for lifecycle"
+
+      - step: 2
+        agent: permission-guardian
+        action: "Verify contract permission"
+        output: "Permission confirmed"
+
+      - step: 3
+        agent: lifecycle-harvester
+        action: "Search calendar for all calls"
+        output: "Call timeline mapped"
+
+      - step: 4
+        agent: lifecycle-harvester
+        action: "Clip before moment (sales call)"
+        output: "Before clip"
+
+      - step: 5
+        agent: lifecycle-harvester
+        action: "Clip during moments (support calls)"
+        output: "During clips (1-2)"
+
+      - step: 6
+        agent: lifecycle-harvester
+        action: "Clip after moment (milestone/testimonial)"
+        output: "After clip"
+
+      - step: 7
+        agent: assembly-director
+        action: "Assemble lifecycle narrative"
+        output: "Complete lifecycle ad"
+
+      - step: 8
+        agent: content-curator
+        action: "Test organically, assess performance"
+        output: "Stud/dud classification"
+
+  event_testimonial_capture:
+    trigger: "In-person event scheduled"
+    steps:
+      - step: 1
+        agent: event-captain
+        action: "Reserve rooms, hire camera teams"
+        output: "Infrastructure ready"
+
+      - step: 2
+        agent: event-captain
+        action: "Create hit list, confirm in writing"
+        output: "Priority testimonials identified"
+
+      - step: 3
+        agent: event-captain
+        action: "Prepare 10 questions for man-in-street"
+        output: "Question sheets printed"
+
+      - step: 4
+        agent: event-captain
+        action: "TEST. TEST. TEST. all equipment"
+        output: "Equipment verified"
+        gate: QG-003
+
+      - step: 5
+        agent: event-captain
+        action: "Announce to attendees"
+        output: "Attendees know the process"
+
+      - step: 6
+        agent: event-captain
+        action: "Capture stage ads"
+        timing: "End of day 1 or before lunch day 2"
+        output: "Stage photos and videos"
+
+      - step: 7
+        agent: event-captain
+        action: "Execute professional testimonials"
+        output: "6-point testimonial videos"
+
+      - step: 8
+        agent: event-captain
+        action: "Run man-in-street interviews"
+        output: "10+ responses per question"
+
+      - step: 9
+        agent: assembly-director
+        action: "Create highlight reels"
+        output: "Compilation videos"
+
+  award_four_form_capture:
+    trigger: "Customer achieves award milestone"
+    steps:
+      - step: 1
+        agent: incentive-architect
+        action: "Notify customer of award qualification"
+        output: "Award process initiated"
+
+      - step: 2
+        agent: incentive-architect
+        action: "Request PROOF 1: Post with numbers"
+        output: "Written testimonial in community"
+
+      - step: 3
+        agent: incentive-architect
+        action: "Request PROOF 2: Video to email"
+        output: "Video testimonial received"
+
+      - step: 4
+        agent: incentive-architect
+        action: "Ship personalized award"
+        output: "Award in transit"
+
+      - step: 5
+        agent: incentive-architect
+        action: "Request PROOF 3: Unboxing video"
+        output: "Unboxing video received"
+
+      - step: 6
+        agent: incentive-architect
+        action: "Schedule PROOF 4: Stage presentation"
+        output: "Presentation scheduled"
+        condition: "Next event available"
+
+      - step: 7
+        agent: incentive-architect
+        action: "Capture PROOF 4 at event"
+        output: "Stage presentation video"
+
+      - step: 8
+        agent: content-curator
+        action: "Organize all 4 proofs"
+        output: "Complete award testimonial package"
+        gate: QG-004
+
+  competition_execution:
+    trigger: "Competition scheduled"
+    steps:
+      - step: 1
+        agent: competition-runner
+        action: "Finalize structure, award, deadline"
+        output: "Competition framework"
+        gate: QG-005
+
+      - step: 2
+        agent: competition-runner
+        action: "Announce via all channels"
+        output: "Competition live"
+
+      - step: 3
+        agent: competition-runner
+        action: "Personal outreach to top 50"
+        output: "Priority invitations sent"
+
+      - step: 4
+        agent: competition-runner
+        action: "Countdown communications"
+        output: "Engagement maintained"
+
+      - step: 5
+        agent: competition-runner
+        action: "Cut off submissions"
+        output: "All videos collected"
+
+      - step: 6
+        agent: competition-runner
+        action: "Format all as ads"
+        output: "Ads ready to run"
+
+      - step: 7
+        agent: competition-runner
+        action: "Run for 30 days"
+        output: "Conversion data collected"
+
+      - step: 8
+        agent: competition-runner
+        action: "Count conversions, identify winner"
+        output: "Winner determined"
+
+      - step: 9
+        agent: competition-runner
+        action: "Announce winner publicly"
+        output: "Competition complete"
+
+  weekly_content_assembly:
+    trigger: "Start of week"
+    steps:
+      - step: 1
+        agent: content-auditor
+        action: "Check all node activity"
+        output: "Node health report"
+
+      - step: 2
+        agent: social-scraper
+        action: "Compile scraped social media"
+        output: "Social content package"
+
+      - step: 3
+        agent: community-miner
+        action: "Compile chat and community screenshots"
+        output: "Communication content package"
+
+      - step: 4
+        agent: community-miner
+        action: "Compile new reviews"
+        output: "Review content package"
+
+      - step: 5
+        agent: incentive-architect
+        action: "Compile bonus and award submissions"
+        output: "Incentive content package"
+
+      - step: 6
+        agent: assembly-director
+        action: "Assemble weekly content package"
+        output: "Complete weekly package"
+        gate: QG-006
+
+      - step: 7
+        agent: content-curator
+        action: "Classify studs vs duds"
+        output: "Content prioritized for ads"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    customer_generated_ratio:
+      formula: "Customer-generated ads / Top 50 ads"
+      target: ">80%"
+      source: "p.5 - eighty percent weren't me"
+
+    weekly_content_flow:
+      formula: "New content pieces per week"
+      target: ">5"
+
+    testimonial_pipeline:
+      formula: "New testimonials per month"
+      target: ">10"
+
+  secondary:
+    node_coverage:
+      formula: "Active nodes / Total nodes"
+      target: ">5 of 7"
+
+    content_surge_frequency:
+      formula: "Days between major content influxes"
+      target: "<12 weeks"
+
+    stud_ratio:
+      formula: "High performers / Total content"
+      target: "Improving trend"
+
+  by_node:
+    lifecycle:
+      - "Happy customers identified weekly"
+      - "Lifecycle videos produced"
+
+    social:
+      - "Tags monitored daily"
+      - "Stories captured within 24h"
+      - "Studs identified"
+
+    events:
+      - "Events held per year (target: 2)"
+      - "Testimonials captured per event"
+      - "Equipment failures (target: 0)"
+
+    communication:
+      - "Screenshots collected weekly"
+      - "Wins posts engagement"
+      - "Review sites monitored"
+
+    bonuses:
+      - "Bonus unlocks redeemed"
+      - "Testimonial-to-bonus ratio"
+
+    awards:
+      - "Awards given"
+      - "Four-form completion rate"
+
+    competitions:
+      - "Competitions per year (target: 1)"
+      - "Submissions received"
+      - "Conversion spread"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "No testimonials coming in"
+    possible_causes:
+      - "Awards/bonuses not compelling enough"
+      - "Process too complex"
+      - "No reward for team participation"
+    diagnosis:
+      - "Check award crave-ability"
+      - "Review submission steps"
+      - "Audit rep incentive structure"
+    solutions:
+      - "Make awards bigger/cooler"
+      - "Simplify unlock process"
+      - "Add gift cards for screenshots"
+
+  - symptom: "Founder still in most ads"
+    possible_causes:
+      - "Not enough customer content"
+      - "Customer content not performing"
+      - "Team defaulting to familiar"
+    diagnosis:
+      - "Count customer vs founder content"
+      - "Compare performance metrics"
+      - "Review ad selection process"
+    solutions:
+      - "Activate more nodes"
+      - "Test more customer content"
+      - "Set 80% customer ratio mandate"
+
+  - symptom: "Events not producing content"
+    possible_causes:
+      - "Equipment failures"
+      - "No hit list prepared"
+      - "Timing wrong"
+    diagnosis:
+      - "Review equipment check records"
+      - "Count planned vs captured"
+      - "Review capture timing"
+    solutions:
+      - "TEST. TEST. TEST. beforehand"
+      - "Confirm hit list in writing"
+      - "Follow timing guidelines"
+
+  - symptom: "Competition fatigue"
+    possible_causes:
+      - "Running too frequently"
+      - "Awards not compelling"
+      - "Same winners"
+    diagnosis:
+      - "Check competition frequency"
+      - "Survey past participants"
+    solutions:
+      - "Limit to 1-2x per year"
+      - "Improve awards"
+      - "Fresh outreach to new customers"
+
+  - symptom: "Team not collecting screenshots"
+    possible_causes:
+      - "No incentive"
+      - "No process"
+      - "No recognition"
+    diagnosis:
+      - "Check reward system"
+      - "Review checklist compliance"
+    solutions:
+      - "Add gift card incentive"
+      - "Manager kudos for submissions"
+      - "If you don't reward it, they won't do it"
+
+# ===============================================================================
+# TECHNOLOGY REQUIREMENTS
+# ===============================================================================
+
+technology:
+  required:
+    - tool: "Call Recording System"
+      purpose: "Capture lifecycle moments"
+      features:
+        - "Record all call types"
+        - "Extra storage capacity"
+        - "No auto-delete"
+        - "Searchable by name/date"
+
+    - tool: "Social Monitoring"
+      purpose: "Track hashtags and tags"
+      features:
+        - "Multi-platform monitoring"
+        - "Story capture alerts"
+        - "Searchable archive"
+
+    - tool: "Content Library"
+      purpose: "Organize all captured content"
+      features:
+        - "Searchable naming"
+        - "Folder organization"
+        - "Stud/dud tagging"
+        - "Performance tracking"
+
+    - tool: "Video Editing"
+      purpose: "Create lifecycle and compilation videos"
+      features:
+        - "Clip extraction"
+        - "Narrative assembly"
+        - "Highlight reels"
+
+    - tool: "Community Platform"
+      purpose: "Host customer wins and testimonials"
+      features:
+        - "Wins category"
+        - "Tag/mention capability"
+        - "Searchable"
+
+  recommended:
+    - tool: "Testimonial Submission Portal"
+      purpose: "Centralize video submissions"
+
+    - tool: "Award Tracking System"
+      purpose: "Track four-form completion"
+
+    - tool: "Ad Performance Dashboard"
+      purpose: "Track customer vs founder ratio"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Specific editing software/workflow"
+    severity: Low
+    note: "Tools for lifecycle video assembly"
+
+  - id: GAP-002
+    description: "Budget for awards/trophies"
+    severity: Medium
+    clarification_needed: "ROI calculation for custom awards"
+
+  - id: GAP-003
+    description: "Legal nuances by jurisdiction"
+    severity: Medium
+    note: "Recording consent laws vary"
+
+  - id: GAP-004
+    description: "Ad platform specifics"
+    severity: Low
+    note: "Facebook-centric examples only"
+
+  - id: GAP-005
+    description: "Team size requirements"
+    severity: Medium
+    clarification_needed: "Minimum viable team per node"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 7
+  workflows_documented: 5
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

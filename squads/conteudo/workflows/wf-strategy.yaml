@@ -1,0 +1,112 @@
+name: wf-strategy
+description: Workflow completo para executar estrategia de conteudo E1-E8 — da coleta a entrega final
+version: "1.0"
+
+phases:
+  - id: coleta
+    name: Coleta de Informacoes
+    agent: strategist
+    description: Coletar as 4 informacoes obrigatorias + intencao do usuario
+    veto_condition: "Falta qualquer uma das 4 informacoes obrigatorias (oferta, avatar, dor, transformacao) ou intencao indefinida -> VETO"
+    elicit: true
+    steps:
+      - Perguntar o que vende (mentoria/produto/servico)
+      - Perguntar para quem (avatar especifico)
+      - Perguntar qual dor real
+      - Perguntar qual transformacao entrega
+      - Identificar intencao (vender, gerar leads, doutrinar, validar)
+    outputs:
+      - oferta
+      - avatar
+      - dor
+      - transformacao
+      - intencao
+    checkpoint: Todas as 4 informacoes obrigatorias coletadas + intencao clara
+
+  - id: selecao
+    name: Selecao de Estrategia
+    agent: strategist
+    description: Usar Decisor Estrategico Automatico para selecionar E1-E8
+    veto_condition: "Intencao ambigua que nao mapeia para nenhuma estrategia E1-E8 ou usuario nao confirmou selecao -> VETO"
+    depends_on: [coleta]
+    elicit: true
+    steps:
+      - Mapear intencao para estrategia via tabela decisora
+      - Apresentar estrategia selecionada ao usuario (1. Confirmar, 2. Trocar, 3. Ajustar)
+      - Confirmar selecao
+    routing:
+      vender_produto: E1 - Lancamento de Pressao
+      gerar_leads: E2 - Isca Magnetica
+      doutrinar: E3 - Doutrina Silenciosa
+      conversao_rapida: E4 - Stories Venda Direta
+      campanha_completa: E5 - Feed de Guerra Visual
+      lead_qualificado: E6 - Story Direto
+      validar_mentoria: E7 - Stories PAS
+      funil_pressao: E8 - Stories Funil Pressao
+    outputs:
+      - estrategia_selecionada
+      - codigo_estrategia
+    checkpoint: Estrategia confirmada pelo usuario
+
+  - id: execucao
+    name: Execucao da Estrategia
+    agent: dynamic
+    description: Executar cronograma completo com templates personalizados
+    veto_condition: "Estrategia nao confirmada pelo usuario ou dados de coleta incompletos -> VETO"
+    depends_on: [selecao]
+    elicit: true
+    steps:
+      - Gerar cronograma dia-a-dia personalizado
+      - Criar templates de Feed (quando aplicavel)
+      - Criar templates de Stories (quando aplicavel)
+      - Apresentar pecas ao usuario para aprovacao
+    task_routing:
+      E1: create-strategy (cronograma 5 dias feed+stories)
+      E2: create-strategy (cronograma isca magnetica)
+      E3: create-strategy (cronograma doutrinacao)
+      E4: create-stories-venda (5 stories)
+      E5: create-strategy (5 posts feed + stories)
+      E6: create-levantada-mao (1 story)
+      E7: create-stories-pas (11 stories)
+      E8: create-stories-funil (5 dias stories)
+    outputs:
+      - cronograma
+      - templates_feed
+      - templates_stories
+    checkpoint: Todas as pecas geradas e aprovadas pelo usuario
+
+  - id: validacao
+    name: Validacao pelo Oraculo
+    agent: content-validator
+    description: Validar cada peca gerada pelos padroes do oraculo
+    veto_condition: "Nenhuma peca gerada na fase de execucao ou pecas sem texto completo -> VETO"
+    depends_on: [execucao]
+    elicit: false
+    steps:
+      - Aplicar oraculo-posts em pecas de feed
+      - Aplicar oraculo-reels em roteiros de reels
+      - Verificar tom imperial em todas as pecas
+      - Verificar concisao e progressao emocional
+      - Reescrever pecas com score < 80%
+    retry_on_fail: true
+    max_retries: 3
+    outputs:
+      - scores_oraculo
+      - pecas_validadas
+    checkpoint: Todas as pecas com score >= 80%
+
+  - id: entrega
+    name: Entrega Final
+    agent: strategist
+    description: Entregar pacote completo formatado com proximos passos
+    veto_condition: "Alguma peca com score oraculo < 80% ou pecas nao aprovadas pelo usuario -> VETO"
+    depends_on: [validacao]
+    elicit: false
+    steps:
+      - Formatar entrega no padrao (nome, objetivo, formato, cronograma, templates, proximos passos)
+      - Incluir notas de execucao (horarios, frequencia, formato visual)
+      - Sugerir proximos passos (Adaptar → Executar → Monitorar → Ajustar)
+      - Oferecer personalizacao opcional
+    outputs:
+      - pacote_estrategia_completo
+    checkpoint: Entrega formatada e pronta para execucao

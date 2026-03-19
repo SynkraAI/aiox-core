@@ -1,0 +1,130 @@
+squad:
+  name: presenca-digital
+  display_name: "Presença Digital Squad"
+  description: "Squad de execução de conteúdo multi-plataforma — posts, reels, carrosseis, scripts, blog, newsletter, campanhas"
+  icon: "📱"
+  domain: content_creation
+  version: "1.0.0"
+  upstream: branding
+
+agents:
+  - id: presenca-digital-chief
+    name: "Presença Digital Chief"
+    file: agents/presenca-digital-chief.md
+    tier: 0
+    role: orchestrator
+    description: "Orquestrador — roteia pedidos, coordena agentes, garante consistência com brand guidelines"
+
+  - id: paulo-cuenca
+    name: "Paulo Cuenca"
+    file: agents/paulo-cuenca.md
+    tier: 0
+    role: content-strategist
+    description: "Estratégia de conteúdo — Método da Cordilheira, pilares, retenção, multiplataforma (BR)"
+
+  - id: justin-welsh
+    name: "Justin Welsh"
+    file: agents/justin-welsh.md
+    tier: 1
+    role: content-system-architect
+    description: "Content Operating System — 4h/semana, PAIPS Formula, cadência operacional"
+
+  - id: ross-simmonds
+    name: "Ross Simmonds"
+    file: agents/ross-simmonds.md
+    tier: 1
+    role: distribution-master
+    description: "Distribuição — DREAM framework, Create Once Distribute Forever, multi-plataforma"
+
+  - id: natanael-oliveira
+    name: "Natanael Oliveira"
+    file: agents/natanael-oliveira.md
+    tier: 1
+    role: campaign-engine
+    description: "Campanhas & copy — Copy Andromeda, 7 gatilhos, empilhamento, 54 campanhas/ano (BR)"
+
+  - id: brendan-kane
+    name: "Brendan Kane"
+    file: agents/brendan-kane.md
+    tier: 1
+    role: hook-engineer
+    description: "Hooks & viralidade — Hook Point, 3-second rule, A/B testing científico"
+
+  - id: nicolas-cole
+    name: "Nicolas Cole"
+    file: agents/nicolas-cole.md
+    tier: 2
+    role: digital-writer
+    description: "Escrita digital — Atomic Essays, Ship 30, posts LinkedIn/carrosseis/threads"
+
+  - id: camilo-coutinho
+    name: "Camilo Coutinho"
+    file: agents/camilo-coutinho.md
+    tier: 2
+    role: video-scriptwriter
+    description: "Scripts de vídeo — Roteiro Chicote (6 perguntas), CEQCOM, reels/shorts/YouTube (BR)"
+
+  - id: vanessa-lau
+    name: "Vanessa Lau"
+    file: agents/vanessa-lau.md
+    tier: 2
+    role: repurposing-architect
+    description: "Repurposing — Content Matrix, YouTube→thread→carrossel→reel pipeline"
+
+workflows:
+  - id: wf-content-from-brand
+    file: workflows/wf-content-from-brand.yaml
+    description: "Transforma brand guidelines em pilares de conteúdo e calendário editorial"
+
+  - id: wf-weekly-content-batch
+    file: workflows/wf-weekly-content-batch.yaml
+    description: "Batch semanal de criação de conteúdo multi-plataforma (4h session)"
+
+  - id: wf-video-content
+    file: workflows/wf-video-content.yaml
+    description: "Pipeline de conteúdo em vídeo (roteiro→hook→script→distribuição)"
+
+  - id: wf-campaign-week
+    file: workflows/wf-campaign-week.yaml
+    description: "Campanha semanal com gatilho + copy Andromeda + distribuição"
+
+tasks:
+  - content-strategy.md
+  - create-post.md
+  - create-carousel.md
+  - create-reel-script.md
+  - create-youtube-script.md
+  - create-blog-post.md
+  - create-newsletter.md
+  - create-campaign.md
+  - create-stories-sequence.md
+  - repurpose-content.md
+  - content-calendar.md
+  - hook-generation.md
+  - coherence-check.md
+
+templates:
+  - post-tmpl.md
+  - carousel-tmpl.md
+  - reel-script-tmpl.md
+  - youtube-script-tmpl.md
+  - blog-post-tmpl.md
+  - newsletter-tmpl.md
+  - campaign-tmpl.md
+  - content-calendar-tmpl.md
+  - stories-sequence-tmpl.md
+
+checklists:
+  - content-quality-checklist.md
+  - platform-specs-checklist.md
+  - brand-coherence-checklist.md
+  - hook-quality-checklist.md
+  - video-script-checklist.md
+  - smoke-tests.md
+
+data:
+  - platform-specs.md
+  - content-formats-guide.md
+  - hook-patterns-library.md
+  - hashtag-strategy.md
+  - presenca-digital-kb.md

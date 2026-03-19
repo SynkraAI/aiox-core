@@ -1,0 +1,1070 @@
+# WF: Criar Produto do Zero ao Blueprint
+# Duration: 2-3h
+# Best for: Criar um novo produto do zero com pesquisa, posicionamento, copy e blueprint executável
+# Key Agents: pesquisador-ia, monetizador, copy-andromeda, vtd-chief
+
+workflow:
+  id: wf-criar-produto
+  name: "Criar Produto do Zero ao Blueprint"
+  duration: "2-3h"
+  trigger: "*criar-produto {nicho}"
+  description: |
+    Workflow completo de criação de produto baseado na DNA do Natanael Oliveira:
+    - Pesquisa com IA ANTES de criar (NO-H001, NO-H002)
+    - 1 produto = 1 problema (NO-H003)
+    - Produto sempre com próximo passo (NO-F021)
+    - Escalar no custo variável, nunca no fixo (NO-F033)
+    - High ticket aparece ANTES de low ticket (NO-F012)
+    - Copy por sentimento, não por demografia (NO-H014)
+
+    "Você não está criando um infoproduto. Você está montando uma empresa de educação." (NO-F037)
+
+    Este workflow produz o BLUEPRINT COMPLETO de um produto:
+    - Pesquisa validada com tendências e dores do público
+    - Tipo de produto selecionado com posicionamento no mix low/mid/high
+    - Tema e ângulo de copy com variações por sentimento (Andromeda)
+    - Validação pelo Natanael com todos os veto conditions
+    - Blueprint executável: produto + copy + funil mínimo + primeira campanha
+
+    Caso real integrado: "prompts de copy" (R$2,50 CPL) vs "Escreva seu livro em 48h" (R$0,80 CPL)
+    — o ângulo certo reduz custo de aquisição em 68%.
+
+  best_for:
+    - "Criar um produto novo do zero para o mix (low, mid ou high)"
+    - "Expert que quer lançar rapidamente com pesquisa e copy validada"
+    - "Produto para campanhas do cronograma 54 campanhas/ano"
+    - "Preencher gap no mix (ex: tem low e high, precisa de mid)"
+    - "Criar fonte de lucro com estrutura de funil mínimo pronto"
+
+  decision_matrix_fit:
+    awareness: "problem-aware a solution-aware"
+    sophistication: "stage-2 a stage-4"
+    price_point: "qualquer ticket (low R$9-14 / mid R$97-297 / high R$997-5k)"
+    traffic_temp: "warm + cold"
+    primary_output: "blueprint-{produto}.md"
+
+  clone_combinations:
+    primary: "pesquisador-ia + monetizador"
+    secondary:
+      - "copy-andromeda (fase de tema e ângulo)"
+      - "vtd-chief (fase de validação e blueprint)"
+
+  product_types_reference:
+    low_ticket:
+      - tipo: ebook
+        ticket: "R$9-14"
+        categoria: low
+        esforco_producao: "2-4h"
+        notas: "Entrada no funil. Porta para mid ticket. 1 problema específico, solução imediata."
+      - tipo: aula_ao_vivo
+        ticket: "Gratuito / R$9-27"
+        categoria: low
+        esforco_producao: "1-2h"
+        notas: "Lead magnet poderoso. Ativa neurônio espelho. Alto CPL se mal anunciado."
+      - tipo: livro_amazon
+        ticket: "R$24-44"
+        categoria: low
+        esforco_producao: "1-3 semanas"
+        notas: "Escalável. Fonte passiva. Funciona como funil independente. Livro → email → oferta."
+      - tipo: app_ia
+        ticket: "R$50-247"
+        categoria: low-mid
+        esforco_producao: "1-4 semanas"
+        notas: "Alta escalabilidade. Custo variável baixo. Upsell natural."
+    mid_ticket:
+      - tipo: desafio
+        ticket: "R$97-197"
+        categoria: mid
+        esforco_producao: "3-7 dias"
+        notas: "Alta conversão. Engajamento diário. Porta natural para curso/imersão."
+      - tipo: workshop
+        ticket: "R$197-297"
+        categoria: mid
+        esforco_producao: "1 dia"
+        notas: "Entrega concentrada. Fácil de vender. Ideal para base existente."
+      - tipo: curso
+        ticket: "R$297"
+        categoria: mid
+        esforco_producao: "1-3 semanas"
+        notas: "Produto âncora do mid. Escalável com tráfego. Precisa de sequência de email."
+    high_ticket:
+      - tipo: imersao
+        ticket: "R$997"
+        categoria: high
+        esforco_producao: "1-2 dias (ao vivo)"
+        notas: "Alta percepção de valor. Ideal para base quente. Ancoragem para mentoria."
+      - tipo: mentoria
+        ticket: "R$2.500-5.000"
+        categoria: high
+        esforco_producao: "Contínuo"
+        notas: "Maior ticket. Acompanhamento 1-a-1 ou em grupo. High ticket aparece ANTES (NO-F012)."
+      - tipo: kit_monetizacao
+        ticket: "R$997-2.500"
+        categoria: high
+        esforco_producao: "1-2 semanas"
+        notas: "Bundle estratégico. Agrupa produtos existentes. Alto valor percebido."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 1: PESQUISA (pesquisador-ia)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-1
+    name: "Pesquisa de Mercado e Dores"
+    duration: "30-45min"
+    tier: 0
+    agent: pesquisador-ia
+    description: |
+      Pesquisa completa com IA antes de criar qualquer produto (NO-H001).
+      Nenhuma decisão de produto é tomada sem dados. Intuição sem pesquisa = produto morto.
+
+      A pesquisa cobre 3 eixos obrigatórios:
+      1. TENDÊNCIAS — o que está crescendo no nicho (últimos 90 dias)
+      2. DORES na linguagem do público — as PALAVRAS EXATAS que usam (não nossa interpretação)
+      3. CICLO DO PRODUTO — se o tema está em crescimento, maturidade ou declínio
+
+      "A pessoa que sabe o problema do cliente melhor do que ela mesma sempre vende mais." (NO-H002)
+
+      Ferramenta de pesquisa: IA com busca ativa (Exa, Perplexity, ou ChatGPT com browsing).
+      Fontes: comentários de posts, reviews de livros Amazon, perguntas em grupos, Yahoo Respostas,
+      fóruns do nicho, descrições de concorrentes, avaliações negativas de produtos similares.
+
+    tasks:
+      - task_id: pesquisa-tendencias
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Pesquisar com IA quais temas do nicho estão em alta nos últimos 90 dias.
+          Usar Google Trends, BuzzSumo ou equivalente via IA.
+          Identificar 5-10 temas com potencial de produto.
+        output: "pesquisa-tendencias.md"
+        notas: |
+          Formato esperado por tema:
+          - tema: "{nome do tema}"
+            tendencia: "crescimento | maturidade | declinio"
+            volume_busca: "alto | medio | baixo"
+            concorrencia: "alta | media | baixa"
+            oportunidade: "{por que este tema agora}"
+
+      - task_id: pesquisa-dores
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Pesquisar as DORES do público na linguagem que ELES usam.
+          Fontes: reviews Amazon, comentários Instagram, grupos Facebook, Reddit, Quora.
+          Coletar frases textuais, não resumos. A copy vai sair dessas frases.
+        output: "pesquisa-dores.md"
+        notas: |
+          Formato esperado:
+          - dor: "Frase exata do público"
+            fonte: "Amazon Review | comentário IG | grupo FB"
+            frequencia: "muita | media | baixa"
+            emocao: "frustração | medo | vergonha | esperança | urgência"
+            angulo_possivel: "{como essa dor vira ângulo de copy}"
+
+          Mínimo 15 frases textuais coletadas.
+          Agrupar por emoção dominante (referência: Andromeda / NO-H014).
+
+      - task_id: pesquisa-ciclo
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Analisar o ciclo de vida de cada tema candidato.
+          Um produto em declínio precisa de pivô de ângulo antes de ser criado.
+          Produto novo não tem audiência — precisa de estratégia de penetração.
+        output: "pesquisa-ciclo.md"
+        notas: |
+          Para cada tema candidato:
+          - ciclo: "emergente | crescimento | maturidade | declinio"
+          - se_declinio_pivo: "{como mudar o ângulo para revitalizar}"
+          - janela_oportunidade: "{por quanto tempo este tema ainda converte}"
+          - produtos_concorrentes: ["lista de produtos similares existentes"]
+          - diferenciacao_possivel: "{o que faria este produto único}"
+
+    elicitation:
+      required: true
+      questions:
+        - id: nicho
+          question: "Qual o nicho principal? (ex: confeitaria, marketing digital, emagrecimento)"
+          type: text
+          required: true
+
+        - id: publico
+          question: "Descreva seu público: quem são, faixa etária, nível de conhecimento"
+          type: text
+          required: true
+
+        - id: produtos_existentes
+          question: "Quais produtos você já tem? (liste com ticket para não duplicar)"
+          type: text
+          required: true
+
+        - id: gap_no_mix
+          question: "O que está faltando no seu mix? (low, mid ou high ticket?)"
+          type: choice
+          options: ["low ticket (R$9-297)", "mid ticket (R$97-297)", "high ticket (R$997+)", "Não sei — deixar a pesquisa decidir"]
+          required: false
+
+        - id: prazo
+          question: "Qual o prazo para lançar este produto? (ex: 2 semanas, 1 mês)"
+          type: text
+          required: true
+
+    checkpoint:
+      criteria:
+        - "Tendências pesquisadas com IA (mínimo 5 temas identificados)"
+        - "Dores coletadas em linguagem do público (mínimo 15 frases textuais)"
+        - "Ciclo de produto avaliado para os temas candidatos"
+        - "Fontes documentadas (não pode ser intuição do agente)"
+        - "Pesquisa IA feita ANTES de escolher o produto (NO-H001 respeitado)"
+      human_review: true
+      message: "Pesquisa completa. Revisar tendências e dores antes de selecionar o produto."
+      veto_conditions:
+        - "SE tema principal está em DECLÍNIO sem pivô de ângulo identificado → BLOCK. Produto em declínio sem pivô = dinheiro desperdiçado. Pivotar o ângulo ou trocar o tema."
+        - "SE dores coletadas são da interpretação do agente, não frases do público → BLOCK. Precisamos das palavras DELES, não das nossas (NO-H002)."
+        - "SE pesquisa foi feita sem IA (só conhecimento interno) → BLOCK. Dados > intuição. Pesquisar com IA antes de criar (NO-H001)."
+        - "SE menos de 5 temas candidatos identificados → ALERTA. Ampliar pesquisa antes de avançar."
+
+    heuristics:
+      - id: NO-H001
+        descricao: "Pesquisar com IA antes de criar qualquer produto"
+        aplicacao: "Todas as tasks desta fase usam IA para buscar dados reais"
+      - id: NO-H002
+        descricao: "Conhecer o problema do cliente melhor do que ele mesmo"
+        aplicacao: "Coleta de frases textuais do público, não resumos"
+
+    output: "pesquisa-produto.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2: SELEÇÃO DE TIPO (monetizador)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Seleção de Tipo e Posicionamento no Mix"
+    duration: "20-30min"
+    tier: 1
+    agent: monetizador
+    description: |
+      Com a pesquisa em mãos, selecionar o TIPO de produto mais adequado e
+      posicioná-lo estrategicamente no mix low/mid/high.
+
+      "Você está montando uma empresa de educação, não um infoproduto." (NO-F037)
+      Cada produto deve ter um próximo passo claro — nenhum produto existe isolado.
+
+      O próximo passo define COMO o cliente avança no ecossistema após a compra:
+      - Comprou ebook (R$14) → próximo: desafio (R$97)
+      - Comprou desafio (R$97) → próximo: curso (R$297)
+      - Comprou curso (R$297) → próximo: imersão (R$997) ou mentoria (R$2.5k)
+
+      REGRA DO EFEITO CHANEL (NO-F012):
+      High ticket SEMPRE aparece antes de low ticket no funil.
+      O cliente precisa ver o R$2.500 antes de ver o R$97 — isso valoriza o low ticket.
+
+      ELICITATION OBRIGATÓRIA nesta fase: qual tipo de produto o expert quer criar?
+
+    tasks:
+      - task_id: selecao-tipo-produto
+        agent: monetizador
+        required: true
+        description: |
+          Apresentar os 10 tipos de produto com tickets e contexto do nicho.
+          Coletar decisão do expert via elicitation.
+          Validar adequação ao gap no mix identificado na pesquisa.
+        output: "selecao-produto.md"
+
+      - task_id: posicionamento-mix
+        agent: monetizador
+        required: true
+        description: |
+          Definir como o produto escolhido se encaixa no mix existente.
+          Mapear o próximo passo (o que o cliente compra depois).
+          Definir ancoragem de high ticket (quem aparece antes).
+          Calcular contribuição ao Plano 1K/dia.
+        output: "posicionamento-mix.md"
+        notas: |
+          Formato de posicionamento:
+          - produto_novo:
+              tipo: "{tipo escolhido}"
+              ticket: "R$XX"
+              categoria: "low | mid | high"
+          - entrada_no_mix:
+              substitui: "{produto existente que fica obsoleto, se houver}"
+              complementa: "{produto que este novo produto alimenta}"
+              proximo_passo: "{o que o cliente compra depois — obrigatório}"
+          - funil_americano:
+              oferta_imediata: "{oferta que aparece no primeiro contato}"
+              ancoragem_high: "{high ticket que aparece ANTES do novo produto}"
+          - contribuicao_1k_dia:
+              unidades_necessarias: X
+              por_dia: "R$XX"
+
+    elicitation:
+      required: true
+      prompt: |
+        Com base na pesquisa do nicho {nicho}, os tipos de produto recomendados são:
+
+        ─────────────────────────────────────────────
+        LOW TICKET (entrada de funil, alto volume)
+        ─────────────────────────────────────────────
+        1. Ebook                R$9-14     | 2-4h para produzir
+        2. Aula ao Vivo         Grátis-R$27 | 1-2h para produzir
+        3. Livro Amazon         R$24-44    | 1-3 semanas (escalável passivo)
+        4. App IA               R$50-247   | 1-4 semanas (escalável)
+
+        ─────────────────────────────────────────────
+        MID TICKET (motor de receita, volume médio)
+        ─────────────────────────────────────────────
+        5. Desafio              R$97-197   | 3-7 dias (alta conversão)
+        6. Workshop             R$197-297  | 1 dia (entrega concentrada)
+        7. Curso                R$297      | 1-3 semanas (produto âncora)
+
+        ─────────────────────────────────────────────
+        HIGH TICKET (margens altas, volume baixo)
+        ─────────────────────────────────────────────
+        8. Imersão              R$997      | 1-2 dias ao vivo
+        9. Mentoria             R$2.5k-5k  | Contínuo (1-a-1 ou grupo)
+        10. Kit Monetização     R$997-2.5k | Bundle de produtos existentes
+
+        Qual tipo você quer criar agora?
+      questions:
+        - id: tipo_produto
+          question: "Qual tipo de produto? (número de 1-10 ou o nome)"
+          type: choice
+          options:
+            - "1 - Ebook (R$9-14)"
+            - "2 - Aula ao Vivo (Grátis-R$27)"
+            - "3 - Livro Amazon (R$24-44)"
+            - "4 - App IA (R$50-247)"
+            - "5 - Desafio (R$97-197)"
+            - "6 - Workshop (R$197-297)"
+            - "7 - Curso (R$297)"
+            - "8 - Imersão (R$997)"
+            - "9 - Mentoria (R$2.5k-5k)"
+            - "10 - Kit Monetização (R$997-2.5k)"
+          required: true
+
+        - id: ticket_exato
+          question: "Qual o ticket exato que vai cobrar? (ex: R$14, R$97, R$297)"
+          type: text
+          required: true
+
+        - id: nome_provisorio
+          question: "Tem algum nome provisório em mente para o produto? (pode deixar em branco)"
+          type: text
+          required: false
+
+        - id: prazo_producao
+          question: "Qual o prazo para ter o produto pronto para vender?"
+          type: text
+          required: true
+
+    checkpoint:
+      criteria:
+        - "Tipo de produto selecionado pelo expert (elicitation executada)"
+        - "Ticket definido dentro da faixa do tipo escolhido"
+        - "Posicionamento no mix low/mid/high mapeado"
+        - "Próximo passo definido (para onde o cliente vai depois)"
+        - "Ancoragem de high ticket identificada (Efeito Chanel)"
+        - "Contribuição ao Plano 1K/dia calculada"
+      human_review: true
+      message: "Tipo e posicionamento definidos. Confirmar antes de avançar para tema e copy."
+      veto_conditions:
+        - "SE produto selecionado não tem próximo passo definido → BLOCK. NUNCA crie produto sem sequência — dinheiro na mesa (NO-F021)."
+        - "SE novo produto não cabe no mix (duplica ticket existente sem diferenciação) → BLOCK. Adicionar ao mix deve preencher gap, não criar concorrência interna."
+        - "SE o custo variável do produto vai aumentar com escala (ex: produto que exige mais horas do expert por venda) → ALERTA. Escalar no variável, não no fixo (NO-F033)."
+
+    heuristics:
+      - id: NO-H003
+        descricao: "1 produto = 1 problema"
+        aplicacao: "O produto selecionado deve resolver apenas 1 problema específico"
+      - id: NO-F021
+        descricao: "NUNCA sem próximo passo"
+        aplicacao: "Mapear o que o cliente compra depois antes de criar o produto"
+      - id: NO-F012
+        descricao: "Efeito Chanel — high ticket aparece antes"
+        aplicacao: "Definir ancoragem high ticket que aparece ANTES do novo produto"
+
+    output: "selecao-produto.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3: TEMA + ÂNGULO DE COPY (copy-andromeda)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Tema que Converte + Ângulo de Copy por Sentimento"
+    duration: "30-45min"
+    tier: 1
+    agent: copy-andromeda
+    description: |
+      Aplicar o Sistema Andromeda para definir o tema que converte e os ângulos de copy
+      baseados em SENTIMENTO do público — não em dados demográficos.
+
+      "O mesmo produto, ângulos diferentes, públicos diferentes comprando." (NO-H014)
+
+      O Sistema Andromeda mapeia 7 estados emocionais e cria copy que ressoa com cada um.
+      Um produto precisa de pelo menos 5 variações de ângulo para testar e escalar.
+
+      ESTRUTURA OBRIGATÓRIA: Hook → Punch → Premissa
+      - HOOK: Para o scroll. Vinculado ao sentimento dominante do público naquele momento.
+      - PUNCH: Impacto emocional que mantém a atenção. Afirmação inesperada ou provocadora.
+      - PREMISSA: Argumento central que sustenta a oferta. A razão para comprar agora.
+
+      CASO REAL INTEGRADO:
+      Produto: Ebook de prompts de IA para copy
+      - Ângulo ruim: "Prompts de Copy para IA" → CPL R$2,50 (alto, genérico)
+      - Ângulo bom: "Escreva seu livro em 48h com IA" → CPL R$0,80 (baixo, específico)
+      Diferença: o segundo ângulo usa o RESULTADO (livro em 48h) e o SENTIMENTO (urgência/facilidade),
+      não a solução (prompts). O produto é o mesmo. O ângulo mudou tudo.
+
+    tasks:
+      - task_id: tema-central
+        agent: copy-andromeda
+        required: true
+        description: |
+          Definir o tema central do produto — o "chapéu" que vai na embalagem.
+          O tema é o RESULTADO prometido, não o método.
+          Baseado nas dores coletadas na pesquisa e no tipo de produto escolhido.
+        output: "tema-central.md"
+        notas: |
+          Tema bom: específico, com resultado tangível, em linguagem do público
+          Tema ruim: genérico, foca no método, usa jargão do expert
+
+          Exemplos por tipo:
+          - Ebook: "Fature R$3k/mês com confeitaria sem abrir loja" (não: "Gestão de Confeitaria")
+          - Desafio: "7 dias para seu primeiro cliente no Instagram" (não: "Desafio de Marketing")
+          - Mentoria: "De R$0 a R$10k/mês em 90 dias ou devolvo tudo" (não: "Mentoria de Negócios")
+
+      - task_id: angulos-por-sentimento
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar 5+ variações de ângulo baseadas nos 7 estados emocionais do Sistema Andromeda.
+          Cada ângulo = 1 Hook + 1 Punch + 1 Premissa.
+          Os ângulos serão testados na primeira campanha para identificar o mais rentável.
+        output: "angulos-copy.md"
+        notas: |
+          7 Sentimentos do Sistema Andromeda:
+          1. Esperança — "Ainda dá tempo de..."
+          2. Frustração — "Cansada de tentar e não conseguir..."
+          3. Urgência — "Só até domingo porque..."
+          4. Medo — "O que acontece se você continuar..."
+          5. Vergonha — "Eu também já tive vergonha de..."
+          6. Inveja Social — "Enquanto você estava esperando, ela..."
+          7. Curiosidade — "O segredo que confeiteiras lucrativas nunca contam"
+
+          Formato de cada ângulo:
+          - angulo_id: A1
+            sentimento: "Esperança"
+            publico_alvo: "{quem está neste estado emocional agora}"
+            hook: "{frase que para o scroll — máx 15 palavras}"
+            punch: "{afirmação impactante — máx 25 palavras}"
+            premissa: "{argumento central que sustenta a compra — máx 40 palavras}"
+            formato_recomendado: "Reels | Stories | Email | Post carrossel"
+            cpl_estimado: "baixo | medio | alto (estimativa)"
+
+      - task_id: nome-produto
+        agent: copy-andromeda
+        required: true
+        description: |
+          Propor 3-5 opções de nome para o produto baseadas no tema central escolhido.
+          O nome deve ser o ângulo que mais converte embutido no produto.
+          Nome = primeiro copy que o cliente vê.
+        output: "opcoes-nome.md"
+        notas: |
+          Critérios de nome que converte:
+          - Específico: contém resultado ou prazo (R$3k, 7 dias, 48h)
+          - Em linguagem do público (não jargão do expert)
+          - Curto: máx 7 palavras para o título principal
+          - Memorável: fácil de repetir, fácil de indicar
+
+          Formato:
+          - opcao: 1
+            nome: "{nome completo}"
+            subtitulo: "{subtítulo que reforça o resultado}"
+            angulo_base: "{sentimento Andromeda que embasa}"
+            ponto_forte: "{por que este nome converte}"
+            ponto_fraco: "{riscos ou limitações}"
+
+    checkpoint:
+      criteria:
+        - "Tema central definido com resultado tangível e linguagem do público"
+        - "Mínimo 5 ângulos de copy com Hook→Punch→Premissa cada"
+        - "Variação por SENTIMENTO (mínimo 3 sentimentos diferentes cobertos)"
+        - "Mínimo 3 opções de nome propostas"
+        - "Nenhum ângulo genérico — cada um tem diferenciação clara"
+        - "Caso real ou benchmark incluído para validar potencial de CPL"
+      human_review: true
+      message: "Tema e ângulos prontos. Selecionar o ângulo principal e nome antes de validar."
+      veto_conditions:
+        - "SE todos os ângulos são variações do MESMO sentimento → BLOCK. Copy genérica sem variação por sentimento viola o Sistema Andromeda (NO-H014). Precisa de pelo menos 3 sentimentos diferentes."
+        - "SE Hook não para o scroll (é genérico, vago ou óbvio) → BLOCK. Hook que não para o scroll = dinheiro desperdiçado em tráfego."
+        - "SE nome do produto foca no método e não no resultado → ALERTA. Nome = primeiro copy. Renomear com resultado tangível."
+        - "SE os ângulos ignoram as frases textuais coletadas na pesquisa de dores → BLOCK. Andromeda usa as palavras DELES. Retornar à pesquisa-dores.md e extrair as frases."
+
+    heuristics:
+      - id: NO-H014
+        descricao: "Copy por sentimento, não por demografia"
+        aplicacao: "Mínimo 5 ângulos cobrindo pelo menos 3 dos 7 sentimentos Andromeda"
+      - id: NO-H002
+        descricao: "Conhecer o problema do cliente melhor do que ele mesmo"
+        aplicacao: "Hooks e Punches baseados nas frases textuais da pesquisa"
+
+    case_real:
+      descricao: "Ebook de prompts IA para copy — mesmo produto, ângulo diferente"
+      angulo_ruim:
+        titulo: "Prompts de Copy para IA"
+        cpl: "R$2,50"
+        problema: "Foca no método (prompts), não no resultado. Genérico."
+      angulo_bom:
+        titulo: "Escreva seu livro em 48h com IA"
+        cpl: "R$0,80"
+        diferenca: "Foca no resultado (livro em 48h) e no sentimento (facilidade/urgência)."
+      licao: "Mesmo produto. Ângulo certo = 68% menos custo de aquisição."
+
+    output: "tema-copy.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 4: VALIDAÇÃO (vtd-chief)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-4
+    name: "Validação pelo DNA do Natanael"
+    duration: "20-30min"
+    tier: 2
+    agent: vtd-chief
+    description: |
+      Validação final do produto contra os veto conditions do Natanael Oliveira.
+      O vtd-chief aplica os 6 critérios obrigatórios antes de liberar o blueprint.
+
+      Esta fase garante que o produto criado está 100% alinhado com a estratégia
+      do Natanael e com o modelo de negócio Vendas Todos os Dias.
+
+      "Se não passa nos 6 critérios, o produto não existe." — vtd-chief
+
+    tasks:
+      - task_id: validacao-6-criterios
+        agent: vtd-chief
+        required: true
+        description: |
+          Aplicar os 6 veto conditions do Natanael em sequência.
+          Cada critério é verificado contra os outputs das fases anteriores.
+          Qualquer FAIL = produto bloqueado até correção.
+        output: "validacao.md"
+        notas: |
+          CRITÉRIO 1 — TEM PRÓXIMO PASSO? (NO-F021)
+          - O produto define claramente o que o cliente compra depois?
+          - Tem sequência de email pós-compra que oferece o próximo?
+          - Resultado esperado: "Sim, após {produto} o cliente vai para {próximo}"
+          - Veredicto: PASS | FAIL
+
+          CRITÉRIO 2 — CABE NO MIX LOW/MID/HIGH?
+          - O ticket está dentro da faixa do tipo escolhido?
+          - Complementa o mix existente sem criar competição interna?
+          - Preenche o gap identificado na elicitation da Fase 2?
+          - Veredicto: PASS | FAIL
+
+          CRITÉRIO 3 — CUSTO VARIÁVEL? (NO-F033)
+          - O custo do produto NÃO cresce proporcionalmente com o volume de vendas?
+          - Produtos físicos ou que exigem mais horas do expert = ALERTA
+          - Margem de lucro estimada >= 50%?
+          - Veredicto: PASS | FAIL | ALERTA
+
+          CRITÉRIO 4 — PESQUISA IA FEITA ANTES? (NO-H001)
+          - A pesquisa da Fase 1 usou IA com dados reais?
+          - As dores são frases textuais do público (NO-H002)?
+          - Os ângulos de copy saem das pesquisas de dores?
+          - Veredicto: PASS | FAIL
+
+          CRITÉRIO 5 — 1 PRODUTO = 1 PROBLEMA? (NO-H003)
+          - O produto resolve apenas 1 problema específico?
+          - O nome e a promessa não são "multifuncionais" (ex: "tudo sobre marketing")?
+          - O público sabe exatamente o que vai resolver comprando?
+          - Veredicto: PASS | FAIL
+
+          CRITÉRIO 6 — HIGH TICKET APARECE ANTES? (NO-F012)
+          - O funil mínimo do produto mostra o high ticket ANTES do produto novo?
+          - A ancoragem está definida (cliente vê R$2.500 antes de ver R$97)?
+          - O Efeito Chanel está aplicado no posicionamento?
+          - Veredicto: PASS | FAIL
+
+      - task_id: plano-correcao
+        agent: vtd-chief
+        required: false
+        description: |
+          Se algum critério falhar, criar plano de correção específico.
+          Cada FAIL vira uma tarefa de correção com responsável e prazo.
+          Após correção, re-validar o critério reprovado.
+        output: "plano-correcao.md"
+
+    checkpoint:
+      criteria:
+        - "6 critérios verificados e documentados com veredicto"
+        - "Zero FAIL — todos os critérios PASS (ou ALERTA documentado)"
+        - "Plano de correção criado para qualquer FAIL (se houver)"
+        - "vtd-chief assinou o produto como aprovado para blueprint"
+      human_review: true
+      message: "Validação dos 6 critérios completa. Revisar antes de gerar o Blueprint."
+      veto_conditions:
+        - "SE Critério 1 FAIL (sem próximo passo) → BLOCK. Retornar à Fase 2 e definir próximo passo antes de avançar. (NO-F021)"
+        - "SE Critério 3 FAIL (custo variável cresce com escala) → BLOCK. Produto com custo fixo crescente não escala. Redesenhar formato. (NO-F033)"
+        - "SE Critério 4 FAIL (sem pesquisa IA) → BLOCK. Retornar à Fase 1 e refazer pesquisa com IA. (NO-H001)"
+        - "SE Critério 5 FAIL (produto resolve múltiplos problemas) → BLOCK. Dividir em 2 produtos ou focar em 1 problema. (NO-H003)"
+        - "SE Critério 6 FAIL (high ticket não aparece antes) → BLOCK. Redesenhar funil mínimo com ancoragem obrigatória. (NO-F012)"
+        - "SE mais de 1 critério FAIL simultaneamente → BLOCK TOTAL. Retornar à fase com mais FAILs e reconstruir."
+
+    heuristics:
+      - id: NO-F021
+        descricao: "NUNCA sem próximo passo"
+        aplicacao: "Critério 1 da validação"
+      - id: NO-F033
+        descricao: "Escalar no variável, não no fixo"
+        aplicacao: "Critério 3 da validação"
+      - id: NO-H001
+        descricao: "Pesquisa IA antes de criar"
+        aplicacao: "Critério 4 da validação"
+      - id: NO-H003
+        descricao: "1 produto = 1 problema"
+        aplicacao: "Critério 5 da validação"
+      - id: NO-F012
+        descricao: "High ticket aparece antes (Efeito Chanel)"
+        aplicacao: "Critério 6 da validação"
+
+    output: "validacao.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 5: BLUEPRINT (monetizador + copy-andromeda)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-5
+    name: "Blueprint Executável"
+    duration: "30-45min"
+    tier: 2
+    agent: "monetizador + copy-andromeda"
+    description: |
+      Geração do documento final: o Blueprint completo do produto.
+      O Blueprint é o documento-mãe que o expert executa para criar e lançar o produto.
+
+      Inclui:
+      - Especificação completa do produto (estrutura, entrega, formato)
+      - Nome final + subtítulo
+      - Ângulo principal de copy + 4 ângulos alternativos para teste
+      - Funil mínimo (entrada → produto → próximo passo)
+      - Primeira campanha completa (gatilho, Hook→Punch→Premissa, sequência email)
+      - Meta de vendas calculada com contribuição ao Plano 1K/dia
+
+      O template de blueprint é selecionado dinamicamente com base no tipo de produto escolhido:
+      - Ebook → tmpl-ebook.md
+      - Desafio → tmpl-desafio.md
+      - Workshop → tmpl-workshop.md
+      - Curso → tmpl-curso.md
+      - Imersão → tmpl-imersao.md
+      - Livro Amazon → tmpl-livro-amazon.md
+      - App IA → tmpl-app-ia.md
+      - Aula ao Vivo → tmpl-aula-ao-vivo.md
+      - Mentoria → tmpl-mentoria.md
+      - Kit Monetização → tmpl-kit-monetizacao.md
+
+    tasks:
+      - task_id: selecionar-template
+        agent: vtd-chief
+        required: true
+        description: |
+          Identificar o template correto para o tipo de produto selecionado.
+          Carregar template de squads/money-makers-vtd/templates/.
+          Confirmar existência antes de preencher.
+        output: "template-selecionado.md"
+        notas: |
+          Template path: squads/money-makers-vtd/templates/tmpl-{tipo}.md
+          Se template não existir, gerar estrutura base inline no blueprint.
+
+      - task_id: blueprint-produto
+        agent: monetizador
+        required: true
+        description: |
+          Gerar a seção de especificação do produto no blueprint.
+          Define o que o cliente recebe, em qual formato, com qual entrega.
+        output: "blueprint-{produto}-especificacao.md"
+        notas: |
+          Seções obrigatórias da especificação:
+
+          ## Produto
+          - nome_final: "{nome escolhido na Fase 3}"
+          - subtitulo: "{subtítulo que reforça resultado}"
+          - tipo: "{tipo selecionado na Fase 2}"
+          - ticket: "R$XX"
+          - categoria: "low | mid | high"
+          - problema_resolve: "{1 problema específico}"
+          - resultado_prometido: "{resultado tangível em X tempo ou passos}"
+          - formato_entrega: "PDF | ao vivo | plataforma | app | físico"
+          - tamanho_estimado: "{páginas, horas, módulos, dias}"
+          - tempo_producao: "{estimativa realista}"
+
+          ## Estrutura de Entrega
+          {estrutura detalhada: módulos, capítulos, dias, sessões}
+
+          ## Próximo Passo (obrigatório)
+          - proximo_produto: "{nome do produto seguinte}"
+          - ticket_proximo: "R$XX"
+          - ponte: "{como o produto atual entrega o cliente para o próximo}"
+
+          ## Funil Mínimo
+          - ancoragem_high: "{high ticket que aparece antes — Efeito Chanel}"
+          - entrada: "{como o lead chega até este produto}"
+          - oferta_imediata: "{o que é ofertado no primeiro contato}"
+          - upsell_pos_compra: "{o que aparece logo após a compra}"
+          - sequencia_email_pos_compra: "{3 emails mínimos após a venda}"
+
+      - task_id: blueprint-copy
+        agent: copy-andromeda
+        required: true
+        description: |
+          Gerar a seção de copy do blueprint.
+          Inclui o ângulo principal selecionado e os 4 alternativos para teste A/B.
+          Inclui Hook→Punch→Premissa completo para cada ângulo.
+        output: "blueprint-{produto}-copy.md"
+        notas: |
+          ## Copy Principal (Ângulo 1 — para lançar)
+          - angulo: "{sentimento Andromeda}"
+          - hook: "{frase que para o scroll}"
+          - punch: "{impacto emocional}"
+          - premissa: "{argumento de compra}"
+          - headline_vsl: "{headline se usar vídeo de vendas}"
+          - cta_principal: "{chamada para ação principal}"
+
+          ## Ângulos Alternativos para Teste (A2-A5)
+          {mesmo formato, 4 ângulos adicionais com sentimentos diferentes}
+
+          ## Copy para Primeira Campanha
+          - gatilho_semana: "{qual dos 7 gatilhos do Sistema de Recompensa Central}"
+          - tema_campanha: "{tema central da campanha}"
+          - hook_campanha: "{hook específico para esta campanha}"
+          - punch_campanha: "{punch específico}"
+          - premissa_campanha: "{premissa desta campanha}"
+          - formato_campanha: "Reels | Stories | Email | Post carrossel | Ao vivo"
+          - empilhamento:
+              manha: "{email/oferta manhã}"
+              tarde: "{email/oferta tarde com ancoragem high ticket}"
+              noite: "{cross-sell ou follow-up}"
+
+      - task_id: blueprint-lancamento
+        agent: monetizador
+        required: true
+        description: |
+          Definir a estratégia da primeira campanha de lançamento.
+          Inclui meta de vendas, sequência de email, calendário de publicações.
+        output: "blueprint-{produto}-lancamento.md"
+        notas: |
+          ## Meta de Vendas
+          - meta_primeira_semana: "{X unidades}"
+          - receita_estimada: "R$XX (X un × R$ticket)"
+          - contribuicao_1k_dia: "R$XX/dia"
+          - break_even_trafego: "{quanto pode gastar em tráfego para dar lucro}"
+
+          ## Sequência de Email (mínimo 5 emails)
+          - email_1 (D0 — pós compra): "Boas-vindas + como acessar + próximo passo"
+          - email_2 (D1): "Dica rápida do produto + reforço de resultado esperado"
+          - email_3 (D3): "Case/prova + ponte para próximo produto"
+          - email_4 (D7): "Oferta do próximo produto (com ancoragem high ticket)"
+          - email_5 (D14): "Urgência/escassez para próximo produto (NO-H006: domingo à noite)"
+
+          ## Calendário Primeira Semana
+          - Dia 1 (lançamento):
+              formato: "{formato principal}"
+              gatilho: "{gatilho do Sistema de Recompensa Central}"
+              horario: "19h (horário de pico)"
+          - Dia 3:
+              formato: "Stories de prova/bastidor"
+              conteudo: "Mostrar quem já está acessando/resultado antecipado"
+          - Dia 5:
+              formato: "Email + Stories"
+              conteudo: "Urgência + lembrete (domingo à noite = melhor horário)"
+          - Dia 7:
+              formato: "Post + email de escassez"
+              conteudo: "Encerramento + direcionamento para próximo produto"
+
+          ## Budget de Tráfego (se usar pago)
+          - budget_recomendado: "R$XX (estimativa conservadora)"
+          - roi_esperado: "R$XX de receita / R$XX de tráfego = {X}x ROAS"
+          - split_recomendado: "80% para quem já segue / 20% para cold"
+
+    checkpoint:
+      criteria:
+        - "Blueprint gerado com template correto do tipo de produto"
+        - "Especificação completa do produto (o que entrega, como entrega)"
+        - "Próximo passo definido com ponte clara para o produto seguinte"
+        - "Funil mínimo com ancoragem high ticket (Efeito Chanel)"
+        - "Copy principal + 4 ângulos alternativos (Andromeda)"
+        - "Sequência de 5+ emails mapeada"
+        - "Calendário da primeira semana de lançamento criado"
+        - "Meta de vendas calculada com contribuição ao 1K/dia"
+      human_review: true
+      message: "Blueprint completo gerado. Revisar e confirmar para execução."
+      veto_conditions:
+        - "SE blueprint não tem próximo passo definido → BLOCK. Todo produto precisa de sequência (NO-F021)."
+        - "SE sequência de email não inclui oferta do próximo produto → BLOCK. 98% não compraram — o que você vai fazer com eles? (NO-F022)"
+        - "SE meta de vendas não tem contribuição ao 1K/dia calculada → BLOCK. Blueprint sem números não é executável."
+        - "SE calendário de lançamento está vazio ou genérico → ALERTA. Primeiro post precisa de data, horário e gatilho definidos."
+
+    template_loader:
+      logic: |
+        Baseado no tipo_produto da Fase 2:
+        - ebook → templates/tmpl-ebook.md
+        - desafio → templates/tmpl-desafio.md
+        - workshop → templates/tmpl-workshop.md
+        - curso → templates/tmpl-curso.md
+        - imersao → templates/tmpl-imersao.md
+        - aula_ao_vivo → templates/tmpl-aula-ao-vivo.md
+        - livro_amazon → templates/tmpl-livro-amazon.md
+        - app_ia → templates/tmpl-app-ia.md
+        - mentoria → templates/tmpl-mentoria.md
+        - kit_monetizacao → templates/tmpl-kit-monetizacao.md
+      fallback: "Se template não existe, gerar estrutura inline com seções obrigatórias."
+
+    output: "blueprint-{produto}.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_stakeholders: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+  on_veto_block:
+    - halt_workflow: true
+    - log_veto_reason: true
+    - message: "Produto BLOQUEADO. Ver veto_conditions na fase correspondente."
+    - action: "Corrigir o item vetado e retornar à fase de origem para re-validação."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHECKPOINT CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+checkpoint_config:
+  - phase: PHASE-1
+    heuristic: "NO-H001, NO-H002"
+    criteria: "Pesquisa com IA + dores em linguagem do público"
+    veto_condition: "Tema em declínio sem pivô = produto morto antes de nascer"
+
+  - phase: PHASE-2
+    heuristic: "NO-H003, NO-F021, NO-F012"
+    criteria: "Tipo selecionado + posicionamento mix + próximo passo + ancoragem"
+    veto_condition: "Produto sem próximo passo = funil sem fundo (NO-F021)"
+
+  - phase: PHASE-3
+    heuristic: "NO-H014, NO-H002"
+    criteria: "5+ ângulos por sentimento + Hook→Punch→Premissa + 3 opções de nome"
+    veto_condition: "Copy genérica sem variação por sentimento = Andromeda violado (NO-H014)"
+
+  - phase: PHASE-4
+    heuristic: "NO-F021, NO-F033, NO-H001, NO-H003, NO-F012"
+    criteria: "6 critérios do Natanael: todos PASS"
+    veto_condition: "Qualquer FAIL nos 6 critérios = produto não avança para blueprint"
+
+  - phase: PHASE-5
+    heuristic: "NO-F021, NO-F022, NO-F012"
+    criteria: "Blueprint com template + copy + funil + sequência email + meta vendas"
+    veto_condition: "Blueprint sem números executáveis = documento inútil"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMPLETION SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+completion_signal: "<promise>COMPLETE</promise>"
+checkpoint_signal: "<promise>CHECKPOINT:PHASE-X</promise>"
+blocked_signal: "<promise>BLOCKED:T-X.Y</promise>"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT ARTIFACTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  pesquisa:
+    - "pesquisa-tendencias.md — Tendências do nicho com ciclo de produto"
+    - "pesquisa-dores.md — Dores em linguagem do público (frases textuais)"
+    - "pesquisa-ciclo.md — Ciclo de vida dos temas candidatos"
+    - "pesquisa-produto.md — Output consolidado da Fase 1"
+
+  selecao:
+    - "selecao-produto.md — Tipo de produto + ticket + posicionamento no mix"
+    - "posicionamento-mix.md — Próximo passo + ancoragem + contribuição 1K/dia"
+
+  copy:
+    - "tema-central.md — Tema que converte com resultado tangível"
+    - "angulos-copy.md — 5+ ângulos por sentimento Andromeda"
+    - "opcoes-nome.md — 3-5 opções de nome com critérios"
+    - "tema-copy.md — Output consolidado da Fase 3"
+
+  validacao:
+    - "validacao.md — 6 critérios do Natanael com veredicto PASS/FAIL"
+    - "plano-correcao.md — Correções pendentes (se houver FAILs)"
+
+  blueprint:
+    - "blueprint-{produto}.md — Documento final executável (produto + copy + funil + campanha)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENT ASSIGNMENTS BY PHASE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents_by_phase:
+  PHASE-1:
+    primary:
+      - "pesquisador-ia"
+    secondary:
+      - "vtd-chief (supervisão de criterios)"
+  PHASE-2:
+    primary:
+      - "monetizador"
+    secondary:
+      - "vtd-chief (veto conditions)"
+  PHASE-3:
+    primary:
+      - "copy-andromeda"
+    secondary:
+      - "pesquisador-ia (alimenta copy com dores pesquisadas)"
+  PHASE-4:
+    primary:
+      - "vtd-chief"
+    secondary: []
+  PHASE-5:
+    primary:
+      - "monetizador"
+      - "copy-andromeda"
+    secondary:
+      - "vtd-chief (seleção de template e revisão final)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  pesquisa:
+    - "[ ] IA usada para buscar tendências (não só conhecimento interno)"
+    - "[ ] Mínimo 5 temas candidatos identificados com ciclo de produto"
+    - "[ ] Mínimo 15 frases textuais do público coletadas"
+    - "[ ] Fontes documentadas (Amazon, Instagram, grupos, etc.)"
+    - "[ ] Nenhum tema em declínio sem pivô de ângulo"
+
+  selecao:
+    - "[ ] Elicitation executada — expert escolheu o tipo"
+    - "[ ] Ticket dentro da faixa do tipo escolhido"
+    - "[ ] Próximo passo definido (onde o cliente vai depois)"
+    - "[ ] Ancoragem high ticket identificada (Efeito Chanel)"
+    - "[ ] Contribuição ao 1K/dia calculada"
+    - "[ ] Custo variável verificado (margem >= 50%)"
+
+  copy:
+    - "[ ] Tema com resultado tangível (não método)"
+    - "[ ] Mínimo 5 ângulos, mínimo 3 sentimentos Andromeda diferentes"
+    - "[ ] Hook→Punch→Premissa em cada ângulo"
+    - "[ ] Mínimo 3 opções de nome propostas"
+    - "[ ] Ângulos baseados nas frases da pesquisa-dores.md"
+    - "[ ] Caso real ou benchmark de CPL incluído"
+
+  validacao:
+    - "[ ] Critério 1 PASS — tem próximo passo (NO-F021)"
+    - "[ ] Critério 2 PASS — cabe no mix low/mid/high"
+    - "[ ] Critério 3 PASS — custo variável controlado (NO-F033)"
+    - "[ ] Critério 4 PASS — pesquisa IA feita antes (NO-H001)"
+    - "[ ] Critério 5 PASS — 1 produto = 1 problema (NO-H003)"
+    - "[ ] Critério 6 PASS — high ticket aparece antes (NO-F012)"
+
+  blueprint:
+    - "[ ] Template correto selecionado para o tipo de produto"
+    - "[ ] Especificação completa (o que entrega, como entrega, tamanho)"
+    - "[ ] Próximo passo com ponte clara"
+    - "[ ] Funil mínimo com ancoragem e oferta imediata"
+    - "[ ] Copy principal + 4 ângulos alternativos"
+    - "[ ] Sequência de 5+ emails pós-compra"
+    - "[ ] Calendário da primeira semana (data + horário + gatilho)"
+    - "[ ] Meta de vendas com contribuição ao 1K/dia"
+    - "[ ] Budget de tráfego calculado (se usar pago)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GOVERNANCE GATE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+governance_gate:
+  required_checks:
+    - "Pesquisa com IA documentada em pesquisa-produto.md (NO-H001)"
+    - "Dores em linguagem do público, não interpretação do agente (NO-H002)"
+    - "1 produto = 1 problema verificado (NO-H003)"
+    - "Próximo passo definido antes do blueprint (NO-F021)"
+    - "98% que não compraram têm sequência de email (NO-F022)"
+    - "Custo variável não cresce com escala (NO-F033)"
+    - "High ticket aparece antes — Efeito Chanel ativo (NO-F012)"
+    - "Copy por sentimento Andromeda — mínimo 3 variações (NO-H014)"
+    - "6 critérios do Natanael todos PASS na validação"
+    - "Blueprint gerado com template correto do tipo de produto"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT EXAMPLE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+output_example: |
+  ## Blueprint: Ebook — "Confeitaria R$3k/mês: O Modelo que Funciona Sem Loja Física"
+  Nicho: Confeitaria | Ticket: R$14 | Categoria: Low
+
+  ### Especificação do Produto
+  - Problema resolve: "Como precificar corretamente e ter margem sem abrir loja"
+  - Resultado prometido: "Modelo de precificação que garante 60% de margem"
+  - Formato: PDF + planilha de precificação
+  - Tamanho: 47 páginas + 1 planilha Excel
+
+  ### Próximo Passo
+  - Produto seguinte: Desafio "Confeitaria 7K em 30 Dias" — R$97
+  - Ponte: Email no D7 pós-compra com oferta do desafio
+
+  ### Funil Mínimo
+  - Ancoragem high: Mentoria "Confeitaria 5K/mês" R$2.500 (aparece na obrigado page)
+  - Entrada: Perfil Instagram → ManyChat → "Receba a planilha gratuita"
+  - Oferta imediata: Ebook R$14 (mesmo para quem pediu só a planilha)
+
+  ### Copy Principal (Sentimento: Esperança)
+  - Hook: "Confeiteiras que faturam R$3k/mês sem loja usam este modelo"
+  - Punch: "Enquanto você cobra R$15 pelo bolo, ela cobra R$80 — pela mesma receita"
+  - Premissa: "A diferença não é o bolo. É como ela precifica. E dá pra aprender em 1 tarde."
+
+  ### Primeira Campanha
+  - Gatilho: DEMONSTRAÇÃO (mostar a planilha funcionando ao vivo)
+  - Dia 1 — Reels 19h: precificar um bolo ao vivo, mostrar margem em tempo real
+  - Dia 3 — Stories: prints de confeiteiras que já usam (prova social)
+  - Dia 5 — Email: urgência "Preço vai subir segunda-feira"
+  - Dia 7 — Post domingo 21h: escassez + encerramento
+  - Meta semana 1: 50 unidades × R$14 = R$700 → Contribuição 1K/dia: R$100/dia
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  framework: "AIOS Squad Creator"
+  created: "2026-02-21"
+  primary_use_case: "Criar produto do zero ao blueprint com pesquisa, copy e funil mínimo"
+  source_mind: "natanael-oliveira"
+  squad: "money-makers-vtd"
+  key_difference: |
+    Único workflow que garante os 6 critérios do Natanael ANTES de criar o blueprint.
+    Integra o Sistema Andromeda (copy por sentimento) com pesquisa de IA obrigatória.
+    O produto só existe se passar nos veto conditions — sem atalho, sem intuição pura.
+    Template de blueprint selecionado dinamicamente por tipo de produto.
+  heuristics_referenced:
+    - NO-H001: "Pesquisa IA antes de criar"
+    - NO-H002: "Conhecer o problema melhor que o cliente"
+    - NO-H003: "1 produto = 1 problema"
+    - NO-H006: "Domingo à noite converte mais"
+    - NO-H014: "Copy por sentimento, não demografia (Andromeda)"
+    - NO-F012: "Efeito Chanel — high ticket aparece antes"
+    - NO-F021: "NUNCA sem próximo passo"
+    - NO-F022: "98% não compraram — o que você fez com eles?"
+    - NO-F033: "Escalar no variável, não no fixo"
+    - NO-F037: "Empresa de educação, não infoproduto"

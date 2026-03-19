@@ -1,0 +1,1252 @@
+# Guarantees Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Offers - Alex Hormozi (Chapter 15: Enhancing Your Offer - Guarantees)
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: guarantees
+  purpose: "Transform offers from ordinary to irresistible by reversing customer risk through strategic guarantee design"
+  domain: offer-enhancement
+  source_playbook: "$100M Offers - Chapter 15: Guarantees"
+
+  core_principle: |
+    The biggest objection to any product or service = RISK
+    Risk reversal = immediate way to make any offer more attractive
+    Impact: 2-4x conversion increase by improving guarantee quality
+
+  guarantee_formula: |
+    Guarantee = [Result X] + [Time Period Y] + [Consequence Z]
+    "If you don't get X result in Y time, we will do Z"
+    Without the "or what" portion = weak and diluted guarantee
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: guarantee-architect
+      role: "Design complete guarantee strategy aligned with business model"
+      decisions:
+        - "Select appropriate guarantee type(s)"
+        - "Determine stacking strategy"
+        - "Balance conversion vs. refund risk"
+      kpis:
+        - "Conversion lift from guarantee"
+        - "Net sales after refunds"
+        - "Customer quality score"
+
+  tier_0_diagnosis:
+    - agent: offer-analyst
+      role: "Analyze product/service characteristics for guarantee fit"
+      inputs:
+        - "Product/service deliverables"
+        - "Fulfillment cost structure"
+        - "Success factor identification"
+        - "Result measurability assessment"
+      outputs:
+        - "Product characteristic report"
+        - "Recommended guarantee types"
+        - "Risk assessment"
+
+    - agent: refund-economist
+      role: "Calculate guarantee economics and validate profitability"
+      inputs:
+        - "Current conversion rates"
+        - "Current refund rates"
+        - "Expected conversion lift"
+        - "Expected refund increase"
+      outputs:
+        - "Net impact projection"
+        - "Break-even analysis"
+        - "ROI recommendation"
+
+  tier_1_execution:
+    - agent: unconditional-crafter
+      role: "Design and script unconditional guarantees"
+      specialization: "Type 1: Unconditional Guarantees"
+      capabilities:
+        - "Full refund structures"
+        - "Premium refund offers"
+        - "'Informed decision' framing"
+        - "Jason Fladlien scripts"
+      outputs:
+        - "Unconditional guarantee copy"
+        - "Refund process design"
+
+    - agent: conditional-crafter
+      role: "Design conditional guarantees with strategic conditions"
+      specialization: "Type 2: Conditional Guarantees"
+      capabilities:
+        - "Success condition identification"
+        - "'Better than money back' design"
+        - "Work-until-done structures"
+        - "Double-down offers"
+        - "Performance pay models"
+      outputs:
+        - "Conditional guarantee copy"
+        - "Conditions documentation"
+        - "Compliance tracking design"
+
+    - agent: anti-guarantee-crafter
+      role: "Design anti-guarantees with compelling justification"
+      specialization: "Type 3: Anti-Guarantees"
+      capabilities:
+        - "'Reason why' narrative development"
+        - "Vulnerability positioning"
+        - "Commitment extraction"
+      outputs:
+        - "Anti-guarantee copy"
+        - "Justification narrative"
+
+    - agent: implied-crafter
+      role: "Design performance-based implied guarantees"
+      specialization: "Type 4: Implied Guarantees"
+      capabilities:
+        - "Revenue share structures"
+        - "Profit share models"
+        - "Interest alignment articulation"
+      outputs:
+        - "Implied guarantee copy"
+        - "Performance structure documentation"
+
+  tier_2_judgment:
+    - agent: guarantee-stacker
+      role: "Combine multiple guarantees for maximum impact"
+      inputs:
+        - "Primary guarantee"
+        - "Secondary guarantee options"
+        - "Bonus stack"
+      outputs:
+        - "Stacked guarantee package"
+        - "Integration with offer stack"
+      techniques:
+        - "Unconditional + Conditional stacking"
+        - "Sequential conditional stacking"
+        - "Guarantee + Bonus integration"
+
+    - agent: guarantee-namer
+      role: "Create memorable, visceral guarantee names"
+      inputs:
+        - "Guarantee structure"
+        - "Brand voice"
+        - "Target audience"
+      outputs:
+        - "Named guarantee"
+        - "Tagline/hook"
+      anti_patterns:
+        - "Never use 'satisfaction'"
+        - "Avoid generic 'risk-free'"
+        - "Don't be vanilla"
+
+    - agent: refund-optimizer
+      role: "Monitor and optimize guarantee performance"
+      responsibilities:
+        - "Track conversion vs. refund rates"
+        - "Identify gaming patterns"
+        - "Recommend adjustments"
+        - "A/B test guarantee variations"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  guarantee-architect:
+    id: guarantee-architect
+    title: "Guarantee Strategy Architect"
+    tier: orchestrator
+    icon: "🛡️"
+
+    purpose: |
+      Design complete guarantee strategies that maximize conversions
+      while maintaining profitability. Select and combine guarantee types
+      based on business model and customer profile.
+
+    core_frameworks:
+      - name: "Four Guarantee Types"
+        components: ["Unconditional", "Conditional", "Anti-Guarantee", "Implied"]
+      - name: "Guarantee Power Formula"
+        formula: "If X result not achieved in Y time, we will do Z"
+      - name: "Net Impact Calculation"
+        formula: "(New_Conv × (1-New_Refund)) / (Old_Conv × (1-Old_Refund))"
+
+    decision_authority:
+      - "Primary guarantee type selection"
+      - "Stacking strategy approval"
+      - "Condition threshold setting"
+      - "Naming direction"
+
+    decision_tree:
+      - condition: "Consumable or value-depleting product?"
+        then: "Lean toward Anti-Guarantee or Conditional"
+        source: "Ch.15 - Items that are consumable or massively diminish in value"
+
+      - condition: "High fulfillment cost?"
+        then: "Use Conditional or Anti-Guarantee"
+        source: "Ch.15 - If tremendous cost associated... employ conditional or ANTI"
+
+      - condition: "Revenue share or performance model?"
+        then: "Use Implied Guarantee + Anti front-end"
+        source: "Ch.15 - Implied guarantees are any offer that is performance-based"
+
+      - condition: "Priority is maximum conversions?"
+        then: "Use Unconditional"
+        source: "Ch.15 - Unconditional are the strongest guarantees"
+
+      - condition: "Priority is maximum client results?"
+        then: "Use Conditional tied to success actions"
+        source: "Ch.15 - Tying your guarantee to the things they need to do"
+
+    success_metrics:
+      primary:
+        - name: "Conversion Lift"
+          target: "2-4x from guarantee improvement"
+          source: "Jason Fladlien observation"
+        - name: "Net Sales Impact"
+          target: ">1.0x (positive net after refunds)"
+      secondary:
+        - "Customer quality score (guarantee buyers vs. others)"
+        - "Refund rate by guarantee type"
+        - "Time to refund request"
+
+  offer-analyst:
+    id: offer-analyst
+    title: "Offer Characteristics Analyst"
+    tier: tier_0
+    icon: "🔍"
+
+    purpose: |
+      Analyze product/service characteristics to determine optimal
+      guarantee type and structure. Identify success factors and
+      measurable outcomes.
+
+    analysis_dimensions:
+      consumability:
+        question: "Does value deplete upon delivery?"
+        impact: "High = Anti-Guarantee recommended"
+        examples:
+          consumable: ["Events", "Experiences", "Food", "Services rendered"]
+          non_consumable: ["Software", "Courses (with replay)", "Physical products"]
+
+      fulfillment_cost:
+        question: "What are hard costs of delivery?"
+        impact: "High cost = Conditional or Anti recommended"
+        warning: "You have to swallow cost of refund AND cost of fulfilling"
+
+      measurability:
+        question: "Can results be objectively measured?"
+        impact: "High = Strong Conditional possible"
+        examples:
+          measurable: ["Revenue increase", "Weight loss", "Client acquisition"]
+          less_measurable: ["Happiness", "Confidence", "Knowledge gained"]
+
+      success_factors:
+        question: "What actions must customer take?"
+        impact: "Clear actions = Conditional with compliance tracking"
+        examples:
+          - "Complete all modules"
+          - "Attend all sessions"
+          - "Implement homework"
+          - "Follow nutrition plan"
+
+    outputs:
+      - characteristic_assessment:
+          consumability_score: "[LOW/MEDIUM/HIGH]"
+          fulfillment_cost_score: "[LOW/MEDIUM/HIGH]"
+          measurability_score: "[LOW/MEDIUM/HIGH]"
+          customer_control_score: "[LOW/MEDIUM/HIGH]"
+
+      - recommended_types:
+          primary: "[Unconditional/Conditional/Anti/Implied]"
+          secondary: "[optional secondary type]"
+          reasoning: "[brief justification]"
+
+      - success_factors_list:
+          - factor: "[action customer must take]"
+            measurable: "[yes/no]"
+            trackable: "[yes/no]"
+
+  refund-economist:
+    id: refund-economist
+    title: "Guarantee Economics Analyst"
+    tier: tier_0
+    icon: "📊"
+
+    purpose: |
+      Calculate the economics of guarantee strategies. Ensure net
+      positive impact even if refund rates increase. Run the math,
+      don't be emotional.
+
+    core_calculation:
+      formula: |
+        Net Impact = (New_Conversions × (1 - New_Refund_Rate)) /
+                     (Old_Conversions × (1 - Old_Refund_Rate))
+
+      example:
+        before:
+          sales: 100
+          refund_rate: 5%
+          net_sales: 95
+        after:
+          sales: 130
+          refund_rate: 10%
+          net_sales: 117
+        result: "117/95 = 1.23x (23% improvement)"
+
+    break_even_analysis:
+      principle: |
+        "For a guarantee not to be worth it, the increase in sales
+        would have to be 100% offset by people who refunded"
+      example: |
+        5% absolute sales increase needs 5% absolute refund increase
+        to break even (which would be doubling refunds from 5% to 10%)
+
+    warnings:
+      - trigger: "Refund rate increase > Conversion lift"
+        action: "Adjust guarantee strength or add conditions"
+
+      - trigger: "Negative net impact projected"
+        action: "Do not implement - revisit guarantee design"
+
+    outputs:
+      - economics_report:
+          current_conversions: "[number]"
+          current_refund_rate: "[percentage]"
+          projected_conversions: "[number]"
+          projected_refund_rate: "[percentage]"
+          net_impact_multiplier: "[x.xx]"
+          recommendation: "[PROCEED/ADJUST/REJECT]"
+
+  unconditional-crafter:
+    id: unconditional-crafter
+    title: "Unconditional Guarantee Specialist"
+    tier: tier_1
+    icon: "🎟️"
+
+    purpose: |
+      Create powerful unconditional guarantees that maximize conversions
+      through "try before you buy" positioning. Frame as informed
+      decision, not yes/no decision.
+
+    guarantee_variants:
+      full_refund:
+        description: "100% money back"
+        risk_level: "HIGH"
+        use_when: "Default option, low-cost products"
+
+      partial_refund:
+        description: "50% money back"
+        risk_level: "MEDIUM"
+        use_when: "Shared risk appropriate"
+
+      ad_spend_refund:
+        description: "Money back + advertising costs"
+        risk_level: "VERY HIGH"
+        use_when: "Marketing/advertising services"
+
+      competitor_payment:
+        description: "Pay for competitor's program"
+        risk_level: "EXTREME"
+        use_when: "Ultimate confidence in superiority"
+
+      premium_refund:
+        description: "Money back + additional amount"
+        risk_level: "EXTREME"
+        use_when: "'Better than nothing' positioning"
+
+    master_script:
+      name: "Informed Decision Frame"
+      source: "Jason Fladlien"
+      script: |
+        "I'm not asking you to decide yes or no today... I'm asking you to
+        make a fully informed decision, that's all. The only way to make a
+        fully informed decision is by being on the inside, not the outside.
+
+        So you get in and see if everything we say on this webinar is true
+        and valuable for you. Then, if it is, that's when you decide to keep it.
+
+        If it's not for you, no hard feelings. You'll then, after signing up,
+        be able to make a fully informed decision that this is not for you.
+
+        But you can't make that decision right now for the same reason you
+        don't buy a house without first looking inside.
+
+        And know this... whether it's 29 minutes or 29 days from now... if you're
+        not happy, I'm not happy. For any reason, if you want your money back,
+        you can have it because I only want to keep your money if you're happy.
+
+        All you have to do is go to support@xyz.com and tell us 'give me my
+        money' and you'll have it, and fast—our support response times
+        average 61 minutes on a 24/7 basis."
+
+    key_frames:
+      - name: "Inside vs Outside"
+        principle: "Can't decide from outside, need to be inside"
+
+      - name: "House Analogy"
+        principle: "Don't buy house without looking inside"
+
+      - name: "Happy Money"
+        principle: "I only want to keep your money if you're happy"
+
+  conditional-crafter:
+    id: conditional-crafter
+    title: "Conditional Guarantee Specialist"
+    tier: tier_1
+    icon: "📋"
+
+    purpose: |
+      Design conditional guarantees that drive customer action while
+      providing powerful risk reversal. Create "better than money back"
+      outcomes that customers actually want.
+
+    condition_categories:
+      attendance:
+        examples: ["Show up to all sessions", "Attend all trainings"]
+        trackable: true
+
+      completion:
+        examples: ["Finish all modules", "Complete all exercises", "Fill out all forms"]
+        trackable: true
+
+      implementation:
+        examples: ["Do the homework", "Follow the plan", "Execute the steps"]
+        trackable: varies
+
+      timeframe:
+        examples: ["Within 90 days", "By end of program"]
+        trackable: true
+
+    outcome_types:
+      result_specific:
+        description: "Quantify a specific outcome"
+        template: |
+          "Guaranteed: At least X new customers in Y days. If you don't
+          get at least X new customers in Y days, we'll continue to work
+          for free until you do."
+        source: "Ch.15 Result Specific examples"
+
+      work_until_done:
+        description: "Continue until success achieved"
+        template: |
+          "If you make every part of this program for 90 days and don't
+          add at least $10,000/mo in recurring revenue... I'll pay your
+          monthly fees until you do. We'll keep working with you until
+          it works at no additional cost."
+        source: "Ch.15 'This is my favorite'"
+
+      double_down:
+        description: "Increase promise if initial fails"
+        template: |
+          "If you don't get [INITIAL PROMISE], we'll [DOUBLED PROMISE].
+          If you don't get 10 clients in Month 1, we'll get you 20 clients
+          in the next 2 months."
+        source: "Ch.15 Pro Tip: Extreme Variation"
+
+      extended_credit:
+        description: "Additional service free"
+        template: |
+          "If you don't X by date Y, then we'll give you 6 EXTRA months
+          of product at no cost."
+        note: "Weaker than other options but better than nothing"
+
+      performance_pay:
+        description: "Only pay if results achieved"
+        template: |
+          "You owe nothing for our services unless you're DELIGHTEDLY
+          SATISFIED with the increase in leads and sales. We guarantee
+          to increase your sales by 20% in 20 days or you owe nothing."
+        use_case: "Continuity/subscription models"
+
+      personal_completion:
+        description: "You personally finish the job"
+        template: |
+          "If you do every part of this program for 90 days and don't
+          [RESULT]... I'll fly to your office and stay there working
+          with you every day until we have it set up."
+        note: "Strong but not applicable in many scenarios"
+
+      third_party_validation:
+        description: "Based on others noticing"
+        template: |
+          "If your spouse doesn't double take at you in 60 days, we'll
+          pay for the meal plan and training for you both for the next year."
+        use_case: "When results are visible to others"
+
+    ideal_calibration: |
+      "Ideally, 100% of your customers would qualify for a conditional
+      guarantee, but will have achieved their outcome and therefore
+      not want to take it. That is an ideal we can all strive for."
+
+  anti-guarantee-crafter:
+    id: anti-guarantee-crafter
+    title: "Anti-Guarantee Specialist"
+    tier: tier_1
+    icon: "🚫"
+
+    purpose: |
+      Create compelling "all sales final" positions with strong
+      justification. Show vulnerability that customers immediately
+      understand and respect.
+
+    when_to_use:
+      - "Consumable products (vitamins, supplements)"
+      - "Services already rendered"
+      - "Experiences (events, workshops)"
+      - "Revenue share models"
+      - "Items that diminish massively in value once given"
+
+    reason_why_framework:
+      principle: |
+        "You should create a 'creative reason why' sales are final.
+        Normally, you're going to want to show a massive exposure or
+        vulnerability on your part that a consumer could immediately
+        understand and think 'Yeah, that makes sense.'"
+
+      categories:
+        consumable_logic:
+          example: |
+            "If you wanted to test some shoes, would you buy them, wear
+            them for a week and then ask for a return? No. You wouldn't
+            be able to return them anyway after wearing them. It would be
+            gross to return used shoes. Well, our product is no different."
+
+        time_investment:
+          example: |
+            "My time is the most valuable asset I have. And I'm going to
+            invest my time and decades of experience in helping you
+            implement everything perfectly. But I'll only do this IF, and
+            only if, you promise me to give 100% effort."
+
+        protecting_others:
+          example: |
+            "If you buy our course and decide you don't want to follow it
+            or don't want to do the work, we lose money, but more
+            importantly, it won't be fair to the students who are here
+            working hard. They came here to get results. And they're who
+            I owe responsibility to. So again, final sales means final sales."
+
+        revenue_share:
+          example: |
+            "Look, I don't charge anything up front. I make money only when
+            you make money. I'm going to invest my time and resources in you.
+            I just need you to be fully committed to making this work.
+            If you're not fully committed, we won't take you on, period."
+
+    commitment_extraction:
+      principle: "Pair anti-guarantee with commitment request"
+      example: |
+        "But I'll only do this IF, and only if, you promise me to give
+        100% effort. If you do, I promise you'll get the best results
+        of your life... so how much do you have invested in this?
+        Are you in?"
+
+  implied-crafter:
+    id: implied-crafter
+    title: "Implied Guarantee Specialist"
+    tier: tier_1
+    icon: "🤝"
+
+    purpose: |
+      Design performance-based structures where you only profit when
+      the client profits. Align interests completely.
+
+    requirements:
+      transparency: "Must be able to measure the outcome"
+      trust: "Trust (or control) that you'll be compensated when you perform"
+      clear_definition: "Performance must be clearly defined"
+      upside_participation: "If I do a great job, I'll be very well compensated"
+
+    structure_types:
+      revenue_share:
+        description: "Percentage of revenue generated"
+        alignment: "HIGH"
+
+      profit_share:
+        description: "Percentage of profit (not gross)"
+        alignment: "HIGHEST"
+        note: "Means if not more profitable, you make nothing"
+
+      triggers:
+        description: "Bonuses at certain milestones"
+        alignment: "MEDIUM-HIGH"
+
+      ratchets:
+        description: "Increasing percentages at higher performance"
+        alignment: "HIGH"
+
+    master_script:
+      template: |
+        "I charge exactly $0 for my services. You heard right. $0.
+
+        I don't want a penny from you. I only make money when you make
+        money. Period.
+
+        Plus, I only get a cut of profit, not gross revenue. That means
+        if you don't become more profitable, I don't make a thing.
+
+        It means I could come in, spend your money recklessly, increase
+        your sales, and not make anything. Although that's unlikely,
+        I hope you see where my interests are 100% aligned with yours.
+
+        I literally cannot make money unless you make money first.
+
+        Sure, it also means that if you make a lot of money, I make a lot
+        (which is true). But again, I only make if you make."
+
+    combination_note: |
+      "This is my current business model when I enter a business.
+      I don't charge anything. Zero. Nada. Zip. Zilch.
+
+      It is an anti-guarantee on the front and an implied guarantee on
+      the back end. If the business doesn't improve, I make no money. Simple."
+
+  guarantee-stacker:
+    id: guarantee-stacker
+    title: "Guarantee Stacking Specialist"
+    tier: tier_2
+    icon: "📚"
+
+    purpose: |
+      Combine multiple guarantees for maximum impact. Stack guarantee
+      types and integrate with bonus offers for ultimate risk reversal.
+
+    stacking_patterns:
+      unconditional_plus_conditional:
+        description: "Short-term no questions + longer-term conditional"
+        example: |
+          "You get our unconditional 30-day no questions asked guarantee...
+          PLUS, a conditional triple your money back in 90 days if you
+          complete the program and don't get results."
+        psychology: "Removes immediate risk + projects future success"
+
+      sequential_conditionals:
+        description: "Multiple milestone guarantees"
+        example: |
+          "You will make $10,000 in 60 days, $30,000 in 90 days, as long
+          as you do things 1, 2, and 3."
+        psychology: "Projects prospect into outcome they now believe likely"
+
+      anti_plus_implied:
+        description: "Front-end anti with back-end performance"
+        example: |
+          "All sales final (we invest heavily upfront). But we only
+          profit when you profit (performance model)."
+        psychology: "Commitment + alignment"
+
+      guarantee_plus_bonus:
+        description: "Guarantee failure triggers valuable bonus"
+        example: |
+          "If you don't add $10k/mth to your business by end of program—
+          assuming you complete every module in 90 days—I'll write all
+          your sales copy for a year (value $50,000)."
+        psychology: "Failure is actually winning"
+
+    integration_rules:
+      - rule: "Each layer must add unique protection"
+        rationale: "Redundant layers dilute impact"
+
+      - rule: "Layers must not contradict"
+        rationale: "Confusion kills conversions"
+
+      - rule: "Earlier layers should be unconditional"
+        rationale: "Lower barrier to entry first"
+
+      - rule: "Later layers can be conditional"
+        rationale: "Reward committed customers"
+
+  guarantee-namer:
+    id: guarantee-namer
+    title: "Guarantee Naming Specialist"
+    tier: tier_2
+    icon: "🏷️"
+
+    purpose: |
+      Create memorable, visceral guarantee names that stand out from
+      generic competitors. Spice it up.
+
+    anti_patterns:
+      never_use:
+        - "Satisfaction Guarantee"
+        - "Risk-Free Trial"
+        - "Money Back Guarantee"
+        - "100% Satisfaction"
+      reason: "Vanilla, forgettable, everyone uses them"
+
+    naming_framework:
+      principle: |
+        "Rather than using 'satisfaction' or some other 'vanilla' word,
+        describe it more strongly."
+
+      technique: "Create vivid imagery that demonstrates commitment level"
+
+      examples:
+        generic_bad: "30-Day Satisfaction Money Back Guarantee"
+
+        creative_good: |
+          "In 30 days, if you wouldn't jump into shark-infested waters
+          to retrieve our product, we'll return every dollar you paid."
+
+        creative_great: |
+          "You'll get our famous 'Club A Baby Seal Guarantee.' After 30
+          days using our services, if you wouldn't club a baby seal to
+          continue as a customer, you don't pay a penny."
+
+    naming_patterns:
+      extreme_action_test:
+        formula: "If you wouldn't [EXTREME ACTION] to keep [PRODUCT], [CONSEQUENCE]"
+        examples:
+          - "Jump into shark-infested waters"
+          - "Club a baby seal"
+          - "Walk across hot coals"
+
+      superlative_outcome:
+        formula: "[NUMBER]X Your [INVESTMENT/MONEY] Back"
+        examples:
+          - "Triple Your Money Back Guarantee"
+          - "5X ROI Guarantee"
+
+      personal_commitment:
+        formula: "The [PERSONAL ACTION] Guarantee"
+        examples:
+          - "I'll Fly To Your Office Guarantee"
+          - "Work Until It Works Guarantee"
+
+  refund-optimizer:
+    id: refund-optimizer
+    title: "Guarantee Performance Optimizer"
+    tier: tier_2
+    icon: "📈"
+
+    purpose: |
+      Monitor guarantee performance and optimize for maximum net
+      positive impact. Identify gaming patterns and recommend adjustments.
+
+    monitoring_metrics:
+      primary:
+        - "Conversion rate (with guarantee vs. without/before)"
+        - "Refund rate by guarantee type"
+        - "Net sales (conversions minus refunds)"
+        - "Time to refund request"
+
+      secondary:
+        - "Customer quality score (guarantee buyers vs. others)"
+        - "Lifetime value by acquisition path"
+        - "Testimonial rate by acquisition path"
+        - "Condition compliance rate (conditional guarantees)"
+
+    gaming_detection:
+      patterns:
+        - "Immediate refund requests (within hours)"
+        - "Completion claims without evidence"
+        - "Repeat refunders (serial behavior)"
+        - "Chargebacks instead of refund process"
+
+      responses:
+        - "Add friction to refund process (not eliminate)"
+        - "Strengthen conditions"
+        - "Add compliance verification"
+        - "Blacklist serial abusers"
+
+    optimization_levers:
+      conversion_low:
+        diagnosis: "Guarantee not compelling enough"
+        actions:
+          - "Strengthen 'or what' consequence"
+          - "Add guarantee stacking"
+          - "Improve naming/positioning"
+
+      refunds_high:
+        diagnosis: "Attracting wrong customers or conditions too easy"
+        actions:
+          - "Add or strengthen conditions"
+          - "Shift from unconditional to conditional"
+          - "Add compliance verification"
+
+      net_negative:
+        diagnosis: "Guarantee economics not working"
+        actions:
+          - "PAUSE guarantee"
+          - "Complete economics recalculation"
+          - "Consider anti-guarantee"
+
+    ab_testing:
+      recommended_tests:
+        - "Unconditional vs. Conditional"
+        - "Different timeframes (30 vs. 60 vs. 90 days)"
+        - "Different consequence levels"
+        - "Named vs. generic guarantee"
+        - "Stacked vs. single guarantee"
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Phase I: Analysis
+  - task: "Analyze product characteristics"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Consider all cost factors"
+    agent: offer-analyst
+
+  - task: "Calculate guarantee economics"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Use standard formula"
+    agent: refund-economist
+
+  - task: "Identify success factors"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Must be trackable"
+    agent: offer-analyst
+
+  # Phase II: Unconditional
+  - task: "Design unconditional structure"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Templates available"
+    agent: unconditional-crafter
+
+  - task: "Write unconditional script"
+    executor: Human
+    automation: LOW
+    guardrails: "Frame as informed decision"
+    agent: unconditional-crafter
+
+  # Phase III: Conditional
+  - task: "Define success conditions"
+    executor: Human
+    automation: LOW
+    guardrails: "Conditions must be achievable"
+    agent: conditional-crafter
+
+  - task: "Design 'better than money back' outcome"
+    executor: Human
+    automation: LOW
+    guardrails: "Perceived value > investment"
+    agent: conditional-crafter
+
+  - task: "Write conditional script"
+    executor: Human
+    automation: LOW
+    guardrails: "Conditions crystal clear"
+    agent: conditional-crafter
+
+  # Phase IV: Anti-Guarantee
+  - task: "Develop 'reason why' narrative"
+    executor: Human
+    automation: LOW
+    guardrails: "Must show vulnerability"
+    agent: anti-guarantee-crafter
+
+  - task: "Write anti-guarantee script"
+    executor: Human
+    automation: LOW
+    guardrails: "Pair with commitment"
+    agent: anti-guarantee-crafter
+
+  # Phase V: Implied
+  - task: "Design performance structure"
+    executor: Human
+    automation: LOW
+    guardrails: "Must have transparency to measure"
+    agent: implied-crafter
+
+  - task: "Write implied guarantee script"
+    executor: Human
+    automation: LOW
+    guardrails: "Make alignment crystal clear"
+    agent: implied-crafter
+
+  # Phase VI: Stacking
+  - task: "Stack multiple guarantees"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Each layer adds unique value"
+    agent: guarantee-stacker
+
+  - task: "Integrate with bonus stack"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Enhance, not confuse"
+    agent: guarantee-stacker
+
+  # Phase VII: Naming
+  - task: "Create guarantee name"
+    executor: Human
+    automation: LOW
+    guardrails: "Never use 'satisfaction'"
+    agent: guarantee-namer
+
+  # Ongoing: Optimization
+  - task: "Monitor guarantee metrics"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Daily tracking"
+    agent: refund-optimizer
+
+  - task: "Detect gaming patterns"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Flag for review"
+    agent: refund-optimizer
+
+  - task: "A/B test variations"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Statistical significance required"
+    agent: refund-optimizer
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Or What Gate"
+    transition: "Guarantee Draft → Final"
+    condition: "Consequence Z is clearly defined"
+    type: blocking
+    source: "Without the 'or what' portion = weak and diluted"
+    failure_action: "Rewrite with clear consequence"
+
+  QG-002:
+    name: "Economics Gate"
+    transition: "Design → Implementation"
+    condition: "Net impact > 1.0x projected"
+    type: blocking
+    source: "Don't be emotional, just run the math"
+    failure_action: "Adjust guarantee strength"
+
+  QG-003:
+    name: "Condition Clarity Gate"
+    transition: "Conditional Draft → Final"
+    condition: "All conditions 100% specific and trackable"
+    type: blocking
+    failure_action: "Eliminate ambiguity"
+
+  QG-004:
+    name: "Reason Why Gate"
+    transition: "Anti-Guarantee Draft → Final"
+    condition: "Consumer would immediately understand"
+    type: blocking
+    source: "Think 'Yeah, that makes sense'"
+    failure_action: "Develop stronger narrative"
+
+  QG-005:
+    name: "Name Gate"
+    transition: "Naming → Final"
+    condition: "Not using generic terms (satisfaction, risk-free)"
+    type: warning
+    source: "If using 'satisfaction'—you failed"
+    failure_action: "Create vivid name"
+
+  QG-006:
+    name: "Stack Coherence Gate"
+    transition: "Stacking → Final"
+    condition: "No contradictions, each layer unique"
+    type: blocking
+    failure_action: "Simplify stack"
+
+  QG-007:
+    name: "Calibration Gate"
+    transition: "Conditional Threshold → Final"
+    condition: "80%+ compliant customers would achieve threshold"
+    type: warning
+    source: "Ideally 100% qualify but achieve outcome"
+    failure_action: "Adjust threshold"
+
+  QG-008:
+    name: "Risk Address Gate"
+    transition: "Offer → Market"
+    condition: "Risk explicitly addressed in sales engagement"
+    type: blocking
+    source: "Always address risk... Always"
+    failure_action: "Add guarantee section to offer"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  new_guarantee_design:
+    trigger: "New offer being created"
+    steps:
+      - step: 1
+        agent: offer-analyst
+        action: "Analyze product characteristics"
+        output: "Characteristic assessment"
+
+      - step: 2
+        agent: offer-analyst
+        action: "Identify success factors"
+        output: "Success factors list"
+
+      - step: 3
+        agent: guarantee-architect
+        action: "Select primary guarantee type"
+        output: "Type selection with rationale"
+
+      - step: 4
+        agent: refund-economist
+        action: "Calculate projected economics"
+        output: "Net impact projection"
+        gate: QG-002
+
+      - step: 5
+        agent: "[type]-crafter"
+        action: "Design guarantee structure"
+        output: "Guarantee structure"
+        note: "Route to appropriate crafter based on type"
+
+      - step: 6
+        agent: "[type]-crafter"
+        action: "Write guarantee script"
+        output: "Guarantee copy"
+        gate: "QG-001 (Or What)"
+
+      - step: 7
+        agent: guarantee-stacker
+        action: "Evaluate stacking opportunities"
+        output: "Stacking recommendation"
+        optional: true
+
+      - step: 8
+        agent: guarantee-namer
+        action: "Create memorable name"
+        output: "Named guarantee"
+        gate: QG-005
+
+      - step: 9
+        agent: guarantee-architect
+        action: "Final approval"
+        output: "Approved guarantee package"
+
+  conditional_guarantee_workflow:
+    trigger: "Conditional type selected"
+    steps:
+      - step: 1
+        agent: conditional-crafter
+        action: "Define success conditions"
+        output: "Conditions list"
+        gate: QG-003
+
+      - step: 2
+        agent: conditional-crafter
+        action: "Design 'better than money back' outcome"
+        output: "Outcome package"
+
+      - step: 3
+        agent: conditional-crafter
+        action: "Calibrate thresholds"
+        output: "Calibrated thresholds"
+        gate: QG-007
+
+      - step: 4
+        agent: conditional-crafter
+        action: "Write script"
+        output: "Conditional guarantee copy"
+
+  anti_guarantee_workflow:
+    trigger: "Anti-guarantee type selected"
+    steps:
+      - step: 1
+        agent: anti-guarantee-crafter
+        action: "Develop 'reason why' narrative"
+        output: "Justification narrative"
+        gate: QG-004
+
+      - step: 2
+        agent: anti-guarantee-crafter
+        action: "Create commitment extraction"
+        output: "Commitment sequence"
+
+      - step: 3
+        agent: anti-guarantee-crafter
+        action: "Write script"
+        output: "Anti-guarantee copy"
+
+  guarantee_optimization_workflow:
+    trigger: "Guarantee live for 30+ days"
+    steps:
+      - step: 1
+        agent: refund-optimizer
+        action: "Pull performance metrics"
+        output: "Performance report"
+
+      - step: 2
+        agent: refund-economist
+        action: "Calculate actual net impact"
+        output: "Actual economics"
+
+      - step: 3
+        agent: refund-optimizer
+        action: "Identify optimization opportunities"
+        output: "Optimization recommendations"
+
+      - step: 4
+        agent: guarantee-architect
+        action: "Approve/reject optimizations"
+        output: "Approved changes"
+
+      - step: 5
+        agent: refund-optimizer
+        action: "Implement A/B test"
+        output: "Test running"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    conversion_lift:
+      formula: "Conversions_With_Guarantee / Conversions_Without"
+      target: "2-4x improvement"
+      source: "Jason Fladlien observation"
+
+    net_sales_impact:
+      formula: "(Conv_New × (1-Refund_New)) / (Conv_Old × (1-Refund_Old))"
+      target: ">1.0x (positive)"
+
+  secondary:
+    refund_rate:
+      formula: "Refunds / Total Sales"
+      target: "Increase < Conversion Lift"
+
+    customer_quality:
+      formula: "LTV of guarantee buyers vs. other buyers"
+      warning: "Guarantee buyers may be lower quality"
+
+    time_to_refund:
+      formula: "Average days from purchase to refund request"
+      insight: "Immediate requests = gaming"
+
+    condition_compliance:
+      formula: "Customers meeting conditions / Total customers"
+      target: "100% compliance with 100% success (ideal)"
+
+  by_guarantee_type:
+    unconditional:
+      - "Conversion lift"
+      - "Refund rate"
+      - "Time to refund"
+
+    conditional:
+      - "Compliance rate"
+      - "Success rate (compliant customers)"
+      - "Refund rate (compliant vs. non-compliant)"
+
+    anti:
+      - "Conversion impact (vs. control)"
+      - "Customer quality score"
+      - "Complaint rate"
+
+    implied:
+      - "Performance achievement rate"
+      - "Revenue/profit share earned"
+      - "Customer satisfaction"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Low conversion lift from guarantee"
+    possible_causes:
+      - "Weak 'or what' consequence"
+      - "Generic positioning"
+      - "Unclear conditions"
+    diagnosis:
+      - "Review consequence strength"
+      - "Check name memorability"
+      - "Audit condition clarity"
+    solutions:
+      - "Strengthen consequence"
+      - "Create vivid name"
+      - "Clarify conditions"
+
+  - symptom: "Refund rate exceeds conversion benefit"
+    possible_causes:
+      - "Attracting wrong customers"
+      - "Conditions too easy"
+      - "Gaming by bad actors"
+    diagnosis:
+      - "Analyze customer quality by source"
+      - "Review condition compliance"
+      - "Check for gaming patterns"
+    solutions:
+      - "Add or strengthen conditions"
+      - "Shift to conditional guarantee"
+      - "Add compliance verification"
+
+  - symptom: "Low condition compliance"
+    possible_causes:
+      - "Conditions too hard"
+      - "Conditions not clear"
+      - "Customers not motivated"
+    diagnosis:
+      - "Review completion rates by condition"
+      - "Survey customers on barriers"
+    solutions:
+      - "Simplify conditions"
+      - "Clarify requirements"
+      - "Add accountability systems"
+
+  - symptom: "Guarantee buyers have lower LTV"
+    possible_causes:
+      - "Attracting uncommitted customers"
+      - "Guarantee positioning problem"
+    source: "People who buy because of guarantees can become very bad customers"
+    solutions:
+      - "Add conditions tied to success actions"
+      - "Shift to conditional guarantee"
+      - "Screen for commitment in sales process"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Legal compliance review requirements"
+    severity: High
+    clarification_needed: "Specific legal requirements by jurisdiction"
+    note: "Consult legal counsel before implementing"
+
+  - id: GAP-002
+    description: "Specific threshold benchmarks by industry"
+    severity: Medium
+    clarification_needed: "What conversion/refund rates are normal?"
+    note: "May require industry research"
+
+  - id: GAP-003
+    description: "Condition tracking system requirements"
+    severity: Medium
+    clarification_needed: "Technical requirements for compliance tracking"
+
+  - id: GAP-004
+    description: "Refund process design details"
+    severity: Medium
+    clarification_needed: "Operational process for handling refunds"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 8
+  workflows_documented: 4
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

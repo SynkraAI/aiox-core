@@ -1,0 +1,93 @@
+# Squad manifest for IDE command generation
+squad:
+  name: negotiation
+  slashPrefix: negotiation
+  version: "1.0.0"
+
+agents:
+  - id: negotiation-chief
+    file: agents/negotiation-chief.md
+    role: orchestrator
+    tier: 0
+
+  - id: robert-cialdini
+    file: agents/robert-cialdini.md
+    role: buyer-profiling
+    tier: 1
+
+  - id: chet-holmes
+    file: agents/chet-holmes.md
+    role: client-identification
+    tier: 1
+
+  - id: jeb-blount
+    file: agents/jeb-blount.md
+    role: prospecting
+    tier: 1
+
+  - id: oren-klaff
+    file: agents/oren-klaff.md
+    role: pitching
+    tier: 1
+
+  - id: neil-rackham
+    file: agents/neil-rackham.md
+    role: discovery
+    tier: 1
+
+  - id: chris-voss
+    file: agents/chris-voss.md
+    role: negotiation
+    tier: 1
+
+  - id: william-ury
+    file: agents/william-ury.md
+    role: strategic-advisor
+    tier: 1
+
+  - id: jim-camp
+    file: agents/jim-camp.md
+    role: closing
+    tier: 1
+
+tasks:
+  - id: profile-buyer
+    file: tasks/profile-buyer.md
+  - id: identify-dream-clients
+    file: tasks/identify-dream-clients.md
+  - id: prospect-outreach
+    file: tasks/prospect-outreach.md
+  - id: create-pitch
+    file: tasks/create-pitch.md
+  - id: spin-discovery
+    file: tasks/spin-discovery.md
+  - id: negotiate-deal
+    file: tasks/negotiate-deal.md
+  - id: close-deal
+    file: tasks/close-deal.md
+  - id: plan-negotiation
+    file: tasks/plan-negotiation.md
+  - id: handle-objection
+    file: tasks/handle-objection.md
+  - id: define-offer
+    file: tasks/define-offer.md
+
+workflows:
+  - id: wf-full-pipeline
+    file: workflows/wf-full-pipeline.yaml
+  - id: wf-negotiate-deal
+    file: workflows/wf-negotiate-deal.yaml
+
+checklists:
+  - id: deal-readiness
+    file: checklists/deal-readiness.md
+  - id: negotiation-prep
+    file: checklists/negotiation-prep.md
+
+templates:
+  - id: buyer-profile-tmpl
+    file: templates/buyer-profile-tmpl.md
+  - id: negotiation-plan-tmpl
+    file: templates/negotiation-plan-tmpl.md
+  - id: proposal-tmpl
+    file: templates/proposal-tmpl.md

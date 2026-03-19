@@ -1,0 +1,62 @@
+# MMOS Sources Master Catalog
+# Mind: {mind_name}
+# Generated: {timestamp}
+# Generator: mind-content-updater squad v1.0.0
+
+mind: "{mind_name}"
+slug: "{mind_slug}"
+generated_at: "{timestamp}"
+generator: "mind-content-updater"
+schema_version: "2.0"
+
+summary:
+  total_sources: 0
+  total_word_count: 0
+  total_size_bytes: 0
+  total_size_mb: 0
+  collection_method: "automated"
+  quality_assessment: "pending"
+
+source_breakdown:
+  blogs: 0
+  articles: 0
+  interviews: 0
+  youtube: 0
+  social: 0
+  manual: 0
+
+tier_breakdown:
+  T1_authoritative: 0
+  T2_valuable: 0
+  T3_supplementary: 0
+
+content_profile:
+  primary_languages: []
+  collection_methods: []
+  date_range:
+    earliest: "unknown"
+    latest: "unknown"
+
+sources: []
+  # Example entry:
+  # - slug: "how-to-be-successful"
+  #   title: "How to Be Successful"
+  #   type: "blog"
+  #   tier: "T1"
+  #   path: "blogs/how-to-be-successful.md"
+  #   url: "https://blog.samaltman.com/how-to-be-successful"
+  #   word_count: 3500
+  #   file_size_bytes: 21000
+  #   hash: "sha256:abc123def456"
+  #   collected_at: "2026-02-10T12:00:00"
+  #   collection_method: "web_fetch"
+  #   language: "en"
+
+mmos_readiness:
+  status: "insufficient"
+  total_sources: "0 (minimum: 15)"
+  tier_1_count: "0 (minimum: 5)"
+  type_diversity: "0 types (minimum: 3)"
+  word_count: "0 (minimum: 50000 recommended)"
+  gaps:
+    - "No sources collected yet"

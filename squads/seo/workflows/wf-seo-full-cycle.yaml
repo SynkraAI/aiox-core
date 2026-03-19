@@ -1,0 +1,285 @@
+name: wf-seo-full-cycle
+display_name: "SEO Full Cycle: Evaluate → Optimize → Report"
+version: "1.0.0"
+description: "Three-phase workflow that audits a website's SEO (scoring 0-100), applies all optimizations, and generates a before/after improvement report."
+
+trigger: "*seo-audit-optimize"
+orchestrator: "seo-chief"
+
+inputs:
+  - name: "target"
+    description: "URL or local path to the website/page(s) to audit"
+    required: true
+    elicit: true
+  - name: "focus_keyphrases"
+    description: "Primary keyphrases per page (optional, auto-detected if not provided)"
+    required: false
+    elicit: true
+  - name: "language"
+    description: "Content language (default: auto-detect)"
+    required: false
+    default: "auto"
+
+phases:
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 1: AUDIT — Score current state 0-100
+  # ═══════════════════════════════════════════════════════════════════════════
+  phase_1_audit:
+    name: "SEO Audit & Scoring"
+    description: "All agents evaluate their domain. Each produces a category score. Combined into 0-100 total."
+    agents: ["on-page-optimizer", "technical-auditor", "schema-architect", "content-quality-assessor", "performance-engineer", "ai-visibility-optimizer", "site-architect"]
+    execution: "parallel"
+    tasks:
+      - agent: "on-page-optimizer"
+        task: "evaluate-on-page.md"
+        output: "scores.on_page (0-25)"
+        checks:
+          - "Title tag: present, length (50-60 chars), keyword placement"
+          - "Meta description: present, length (120-160 chars), keyword included"
+          - "H1: single, contains keyword"
+          - "Heading hierarchy: logical H1>H2>H3"
+          - "Keyword density: 1-2.5%"
+          - "Keyword in first 100 words"
+          - "Keyword in URL slug"
+          - "Keyword in image alt text"
+          - "Content length vs. top 10 benchmark"
+          - "Readability: Flesch score, sentence length, passive voice"
+          - "Internal links present (min 1)"
+          - "External links present (min 1)"
+
+      - agent: "technical-auditor"
+        task: "evaluate-technical.md"
+        output: "scores.technical (0-20)"
+        checks:
+          - "HTTP status codes (no 4xx/5xx)"
+          - "Broken internal links"
+          - "Broken external links"
+          - "Redirect chains (max 1 hop)"
+          - "Canonical tags present and correct"
+          - "robots.txt valid"
+          - "XML sitemap exists and valid"
+          - "HTTPS enforced (no mixed content)"
+          - "Mobile-responsive (viewport meta)"
+          - "No duplicate title/meta across pages"
+          - "Hreflang correct (if multi-language)"
+          - "No orphan pages"
+
+      - agent: "schema-architect"
+        task: "evaluate-schema.md"
+        output: "scores.schema (0-15)"
+        checks:
+          - "JSON-LD structured data present"
+          - "Page type correctly identified (Article, Product, LocalBusiness, etc.)"
+          - "Required properties present per schema type"
+          - "No JSON syntax errors"
+          - "Organization/WebSite schema on homepage"
+          - "BreadcrumbList schema present"
+          - "Rich result eligibility (FAQ, HowTo, etc.)"
+          - "Entity @id linking correct"
+          - "No deprecated schema types"
+          - "Google Rich Results Test: valid"
+
+      - agent: "content-quality-assessor"
+        task: "evaluate-content-quality.md"
+        output: "scores.content_quality (0-15)"
+        checks:
+          - "Author bio/byline present"
+          - "Author page/schema exists"
+          - "About page exists with credentials"
+          - "Contact information accessible"
+          - "Privacy policy present"
+          - "Terms of service present"
+          - "Content depth (vs. competing pages)"
+          - "Original information/research/data"
+          - "Citations to authoritative sources"
+          - "Last updated date present"
+          - "Editorial standards visible"
+          - "YMYL classification check"
+
+      - agent: "performance-engineer"
+        task: "evaluate-performance.md"
+        output: "scores.performance (0-10)"
+        checks:
+          - "LCP < 2.5s"
+          - "INP < 200ms"
+          - "CLS < 0.1"
+          - "Images optimized (WebP/AVIF, compressed)"
+          - "Images have width/height attributes"
+          - "Lazy loading on below-fold images"
+          - "Critical CSS inlined"
+          - "No render-blocking resources"
+          - "Font loading optimized (font-display: swap)"
+          - "Total page weight reasonable"
+
+      - agent: "ai-visibility-optimizer"
+        task: "evaluate-ai-visibility.md"
+        output: "scores.ai_visibility (0-10)"
+        checks:
+          - "llms.txt present at root"
+          - "Content has quantitative statistics"
+          - "Citations from credible sources"
+          - "Self-contained content blocks (no context dependency)"
+          - "Semantic HTML structure"
+          - "Direct answers to questions (featured snippet format)"
+          - "Structured data for AI parsability"
+          - "robots.txt AI crawler policy defined"
+          - "Content is unique/original (not commodity)"
+
+      - agent: "site-architect"
+        task: "evaluate-architecture.md"
+        output: "scores.site_architecture (0-5)"
+        checks:
+          - "URL structure clean and descriptive"
+          - "URLs use hyphens, lowercase, no parameters"
+          - "Logical content hierarchy (silo structure)"
+          - "Navigation reflects content structure"
+          - "Internal linking connects related content"
+          - "No pages deeper than 3 clicks from home"
+
+    checkpoint:
+      name: "Audit Complete"
+      action: "Combine all category scores into total (0-100). Assign grade. Present full breakdown to user."
+      veto_conditions:
+        - "Any agent fails to return a score → re-run that agent"
+        - "Score calculation doesn't sum to category weights → recalculate"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 2: OPTIMIZE — Apply all fixes
+  # ═══════════════════════════════════════════════════════════════════════════
+  phase_2_optimize:
+    name: "SEO Optimization"
+    description: "Each agent applies fixes for issues found in Phase 1. Priority: highest-impact fixes first."
+    depends_on: "phase_1_audit"
+    execution: "sequential_by_priority"
+    priority_order:
+      - "on-page-optimizer"      # Highest impact: meta tags, titles, headings
+      - "schema-architect"       # High impact: structured data generation
+      - "technical-auditor"      # High impact: broken links, canonicals
+      - "performance-engineer"   # Medium impact: CWV fixes
+      - "ai-visibility-optimizer" # Medium impact: GEO optimization
+      - "content-quality-assessor" # Guidance: E-E-A-T recommendations
+      - "site-architect"         # Guidance: architecture recommendations
+
+    tasks:
+      - agent: "on-page-optimizer"
+        task: "optimize-on-page.md"
+        actions:
+          - "Fix/add missing meta titles with keyword placement"
+          - "Fix/add meta descriptions with keyword + CTA"
+          - "Fix heading hierarchy (single H1, logical H2/H3)"
+          - "Add keyword to first paragraph if missing"
+          - "Fix image alt text"
+          - "Add Open Graph tags (og:title, og:description, og:image)"
+          - "Add Twitter Card tags"
+
+      - agent: "schema-architect"
+        task: "generate-schema.md"
+        actions:
+          - "Detect page type and generate appropriate JSON-LD"
+          - "Add Organization schema to homepage"
+          - "Add BreadcrumbList schema"
+          - "Add FAQ/HowTo schema where applicable"
+          - "Validate all generated schema"
+
+      - agent: "technical-auditor"
+        task: "optimize-technical.md"
+        actions:
+          - "Fix broken internal links"
+          - "Add missing canonical tags"
+          - "Generate/fix XML sitemap"
+          - "Fix robots.txt issues"
+          - "Add missing viewport meta tag"
+          - "Fix redirect chains"
+
+      - agent: "performance-engineer"
+        task: "optimize-performance.md"
+        actions:
+          - "Add width/height to images missing dimensions"
+          - "Add lazy loading to below-fold images"
+          - "Recommend image format optimization (WebP)"
+          - "Add fetchpriority=high to LCP element"
+          - "Add font-display: swap to @font-face"
+          - "Identify and flag render-blocking resources"
+
+      - agent: "ai-visibility-optimizer"
+        task: "optimize-ai-visibility.md"
+        actions:
+          - "Generate llms.txt for the site"
+          - "Add statistics and citations where possible"
+          - "Ensure content blocks are self-contained"
+          - "Add direct-answer formatting for key questions"
+          - "Set AI crawler policy in robots.txt"
+
+      - agent: "content-quality-assessor"
+        task: "recommend-content-quality.md"
+        actions:
+          - "Generate E-E-A-T improvement recommendations"
+          - "Suggest author bio additions"
+          - "Flag missing trust pages (About, Contact, Privacy, Terms)"
+          - "Recommend content depth improvements"
+
+      - agent: "site-architect"
+        task: "recommend-architecture.md"
+        actions:
+          - "Analyze URL structure, suggest improvements"
+          - "Map internal linking opportunities"
+          - "Recommend content silo structure"
+          - "Flag pages too deep in navigation"
+
+    checkpoint:
+      name: "Optimization Complete"
+      action: "All agents report changes made. Compile change manifest."
+      veto_conditions:
+        - "Agent modifies file outside project scope → VETO"
+        - "Schema generated has syntax errors → re-validate"
+        - "Meta tag exceeds character limits → re-optimize"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 3: REPORT — Re-evaluate and show improvement
+  # ═══════════════════════════════════════════════════════════════════════════
+  phase_3_report:
+    name: "SEO Improvement Report"
+    description: "Re-run audit, compare before/after scores, generate improvement report."
+    depends_on: "phase_2_optimize"
+    agent: "seo-chief"
+    tasks:
+      - task: "re-evaluate.md"
+        description: "Run all Phase 1 checks again on optimized site"
+
+      - task: "generate-seo-report.md"
+        description: "Generate comprehensive before/after report"
+        output_format: |
+          # SEO Optimization Report
+          ## Overall Score
+          BEFORE: {before_score}/100 ({before_grade})
+          AFTER:  {after_score}/100 ({after_grade})
+          IMPROVEMENT: +{delta} points
+
+          ## Category Breakdown
+          | Category | Before | After | Change |
+          |----------|--------|-------|--------|
+          | On-Page SEO (/25) | {b} | {a} | +{d} |
+          | Technical SEO (/20) | {b} | {a} | +{d} |
+          | Schema (/15) | {b} | {a} | +{d} |
+          | Content Quality (/15) | {b} | {a} | +{d} |
+          | Performance (/10) | {b} | {a} | +{d} |
+          | AI Visibility (/10) | {b} | {a} | +{d} |
+          | Site Architecture (/5) | {b} | {a} | +{d} |
+
+          ## Changes Made
+          {list_of_all_changes}
+
+          ## Remaining Recommendations
+          {items_that_need_manual_attention}
+
+    checkpoint:
+      name: "Report Complete"
+      action: "Present report to user. Highlight top improvements and remaining manual items."
+      veto_conditions:
+        - "After score lower than before score without explanation → investigate"
+
+outputs:
+  - "seo-audit-before.json — Pre-optimization scores and findings"
+  - "seo-audit-after.json — Post-optimization scores"
+  - "seo-report.md — Full before/after improvement report"
+  - "changes-manifest.json — All changes made with file paths"

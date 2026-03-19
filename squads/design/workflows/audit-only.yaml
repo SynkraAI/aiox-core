@@ -1,0 +1,226 @@
+workflow:
+  id: design-system-audit-only
+  name: Design System Audit-Only
+  description: "Audit-only workflow: scan codebase for UI chaos, generate visual shock report and ROI calculation for stakeholder presentation. Mandatory governance protocol: squads/design/protocols/ai-first-governance.md"
+  version: 2.0.0
+  type: sequential
+  sequence:
+    - step: step-1-audit
+      id: step-1-audit
+      phase: 1
+      phase_name: Audit Codebase for Pattern Redundancy
+      agent: brad-frost
+      action: audit
+      outputs:
+        - inventory_report
+        - state_file
+      next: step-2-consolidate
+    - step: step-2-consolidate
+      id: step-2-consolidate
+      phase: 2
+      phase_name: Consolidate Patterns for Metrics
+      agent: brad-frost
+      action: consolidate
+      outputs:
+        - consolidation_report
+        - reduction_metrics
+      next: step-3-shock-report
+    - step: step-3-shock-report
+      id: step-3-shock-report
+      phase: 3
+      phase_name: Generate Visual Shock Report
+      agent: brad-frost
+      action: shock-report
+      outputs:
+        - shock_report_html
+        - shock_report_pdf
+        - screenshots
+      next: step-4-calculate-roi
+    - step: step-4-calculate-roi
+      id: step-4-calculate-roi
+      phase: 4
+      phase_name: Calculate ROI and Cost Savings
+      agent: brad-frost
+      action: calculate-roi
+      outputs:
+        - roi_report
+        - roi_summary
+        - executive_summary
+      next: step-5-tokenize-preview
+    - step: step-5-tokenize-preview
+      id: step-5-tokenize-preview
+      phase: 5
+      phase_name: Preview Token Recommendations (Optional)
+      agent: brad-frost
+      action: tokenize
+      outputs:
+        - token_preview
+    - workflow_end:
+        id: complete
+        action: workflow_complete
+metadata:
+  author: Brad (Design System Architect)
+  created_date: "2025-10-27"
+  last_modified: "2026-02-16"
+  tags:
+    - design-system
+    - audit
+    - shock-report
+    - roi
+    - executive
+    - brad
+inputs:
+  codebase_path:
+    type: string
+    description: Path to codebase for audit (e.g., ./src)
+    required: true
+    validation: Must be valid directory path
+  project_name:
+    type: string
+    description: Project name for output organization
+    required: true
+    default: my-app
+  hourly_rate:
+    type: number
+    description: Developer hourly rate for ROI calculation (USD)
+    required: false
+    default: 150
+  team_size:
+    type: number
+    description: Number of developers on team
+    required: false
+    default: 5
+steps:
+  - id: step_1_audit
+    name: Audit Codebase for Pattern Redundancy
+    type: agent
+    agent: brad-frost
+    command: "*audit"
+    inputs:
+      path: "{{codebase_path}}"
+    outputs:
+      inventory_report: outputs/design-system/{{project_name}}/audit/inventory.yaml
+      state_file: outputs/design-system/{{project_name}}/.state.yaml
+    error_handling:
+      strategy: fail
+  - id: step_2_consolidate
+    name: Consolidate Patterns for Metrics
+    type: agent
+    agent: brad-frost
+    command: "*consolidate"
+    inputs:
+      inventory: "{{step_1_audit.inventory_report}}"
+    outputs:
+      consolidation_report: outputs/design-system/{{project_name}}/consolidation/decisions.yaml
+      reduction_metrics: outputs/design-system/{{project_name}}/consolidation/metrics.yaml
+    error_handling:
+      strategy: fail
+  - id: step_3_shock_report
+    name: Generate Visual Shock Report
+    type: agent
+    agent: brad-frost
+    command: "*shock-report"
+    inputs:
+      inventory: "{{step_1_audit.inventory_report}}"
+      consolidation: "{{step_2_consolidate.consolidation_report}}"
+    outputs:
+      shock_report_html: outputs/design-system/{{project_name}}/reports/shock-report.html
+      shock_report_pdf: outputs/design-system/{{project_name}}/reports/shock-report.pdf
+      screenshots: outputs/design-system/{{project_name}}/reports/screenshots/
+    error_handling:
+      strategy: fail
+  - id: step_4_calculate_roi
+    name: Calculate ROI and Cost Savings
+    type: agent
+    agent: brad-frost
+    command: "*calculate-roi"
+    inputs:
+      consolidation: "{{step_2_consolidate.consolidation_report}}"
+      reduction_metrics: "{{step_2_consolidate.reduction_metrics}}"
+      hourly_rate: "{{hourly_rate}}"
+      team_size: "{{team_size}}"
+    outputs:
+      roi_report: outputs/design-system/{{project_name}}/reports/roi.yaml
+      roi_summary: outputs/design-system/{{project_name}}/reports/roi-summary.md
+      executive_summary: outputs/design-system/{{project_name}}/reports/executive-summary.pdf
+    error_handling:
+      strategy: fail
+  - id: step_5_tokenize_preview
+    name: Preview Token Recommendations (Optional)
+    type: agent
+    agent: brad-frost
+    command: "*tokenize"
+    inputs:
+      consolidation: "{{step_2_consolidate.consolidation_report}}"
+      preview_mode: true
+    outputs:
+      token_preview: outputs/design-system/{{project_name}}/reports/token-preview.yaml
+    error_handling:
+      strategy: skip
+outputs:
+  audit_complete:
+    type: boolean
+    description: Audit completed successfully
+    source: step_4_calculate_roi.success
+  shock_report_location:
+    type: string
+    description: Path to visual shock report (HTML)
+    source: step_3_shock_report.shock_report_html
+  roi_summary_location:
+    type: string
+    description: Path to ROI summary (Markdown)
+    source: step_4_calculate_roi.roi_summary
+  executive_summary_location:
+    type: string
+    description: Path to executive summary (PDF)
+    source: step_4_calculate_roi.executive_summary
+  pattern_count_before:
+    type: number
+    description: Total patterns before consolidation
+    source: step_2_consolidate.reduction_metrics.before
+  pattern_count_after:
+    type: number
+    description: Recommended patterns after consolidation
+    source: step_2_consolidate.reduction_metrics.after
+  reduction_percentage:
+    type: number
+    description: Pattern reduction percentage
+    source: step_2_consolidate.reduction_metrics.reduction_percent
+  annual_savings_usd:
+    type: number
+    description: Projected annual cost savings (USD)
+    source: step_4_calculate_roi.roi_report.annual_savings
+  roi_ratio:
+    type: number
+    description: ROI ratio (savings/investment)
+    source: step_4_calculate_roi.roi_report.roi_ratio
+  breakeven_days:
+    type: number
+    description: Days to breakeven
+    source: step_4_calculate_roi.roi_report.breakeven_days
+global_error_handling:
+  on_error: abort
+  notification:
+    enabled: true
+    channels:
+      - console
+security:
+  authorization_required: false
+  audit_logging: true
+quality_gates:
+  internal_quality_chain:
+    required:
+      - node squads/design/scripts/design-system/generate_components_metadata.cjs
+      - node squads/design/scripts/design-system/validate_components_metadata.cjs
+      - node squads/design/scripts/design-system/sync_design_manifest.cjs
+      - node squads/design/scripts/design-system/validate_design_manifest_drift.cjs
+      - node squads/design/scripts/design-system/validate_task_checklist_bindings.cjs
+      - node squads/design/scripts/design-system/validate_mcp_skeleton.cjs
+    optional:
+      - node squads/design/scripts/design-system/test_mcp_tools.cjs
+    blocking: true
+    policy: internal-first
+    exception:
+      external_tool_allowed_with:
+        - capability_gap_documented
+        - rationale_recorded

@@ -1,0 +1,261 @@
+{
+  "metadata": {
+    "total_fontes": 2,
+    "rastreabilidade": "100%",
+    "tipo_conteudo": "Educacional (sem propaganda)",
+    "versao": "1.0"
+  },
+  "fontes_primarias": [
+    {
+      "id": "fonte-metodo",
+      "tipo": "Documento Estruturado",
+      "titulo": "Método Renner Silva - 'Aplauda de Pé'",
+      "arquivo": "Método Renner Silva.md",
+      "caminho_completo": "/Users/luizfosc/Projects/knowledge-base-renner-silva/raw/lives/Método Renner Silva.md",
+      "autor": "Renner Silva",
+      "data_criacao": "2026-02-11",
+      "linhas_totais": 102,
+      "formato": "Markdown",
+      "conteudo_tipo": "Framework educacional",
+      "qualidade": "Excelente - Estruturado, limpo, sem propaganda",
+      "conceitos_extraidos": [
+        "c1-humildade-estrategica",
+        "c1-imprevisibilidade",
+        "c1-dopamina",
+        "c2-venda-resultado",
+        "c2-prova-social",
+        "c3-estrutura-passos",
+        "c3-quatro-estagios",
+        "c4-conquistar-direito",
+        "c4-estrutura-jornada",
+        "c4-memorias-emocionais",
+        "c4-autenticidade",
+        "c4-sem-fotos",
+        "c5-video-recapitulativo",
+        "c5-emocao-como-memoria",
+        "c5-essencia-metodo"
+      ],
+      "modulos_mapeados": [1, 2, 3, 4, 5],
+      "secoes": [
+        {
+          "titulo": "Passo 1: Faça as Pessoas Gostarem de Você",
+          "linhas": "14-20",
+          "conceitos": ["c1-humildade-estrategica", "c1-imprevisibilidade", "c1-dopamina"]
+        },
+        {
+          "titulo": "Passo 2: Promova o Seu Conteúdo",
+          "linhas": "22-27",
+          "conceitos": ["c2-venda-resultado", "c2-prova-social"]
+        },
+        {
+          "titulo": "Passo 3: Entregue o Conteúdo em Passos",
+          "linhas": "29-38",
+          "conceitos": ["c3-estrutura-passos", "c3-quatro-estagios"]
+        },
+        {
+          "titulo": "Passo 4: Conte a Sua História de Essência",
+          "linhas": "40-51",
+          "conceitos": ["c4-conquistar-direito", "c4-estrutura-jornada", "c4-memorias-emocionais", "c4-autenticidade", "c4-sem-fotos"]
+        },
+        {
+          "titulo": "Passo 5: Termine com Emoção",
+          "linhas": "53-60",
+          "conceitos": ["c5-video-recapitulativo", "c5-emocao-como-memoria", "c5-essencia-metodo"]
+        },
+        {
+          "titulo": "Prompts - Template de Introdução",
+          "linhas": "62-102",
+          "conceitos": ["c2-venda-resultado"],
+          "tipo": "Ferramenta prática"
+        }
+      ]
+    },
+    {
+      "id": "fonte-palestra-romani",
+      "tipo": "Transcrição de Palestra Modelo",
+      "titulo": "Palestra Renner Silva (O esqueleto da apresentação)",
+      "arquivo": "Palestra Renner Silva (O esqueleto da apresentação).md",
+      "caminho_completo": "/Users/luizfosc/Projects/knowledge-base-renner-silva/raw/lives/Palestra Renner Silva (O esqueleto da apresentação).md",
+      "autor": "Renner Silva",
+      "evento": "Palestra Romani (transcrição completa)",
+      "data_criacao": "2026-02-11",
+      "linhas_totais": 113,
+      "formato": "Markdown (transcrição de áudio)",
+      "duracao_original_estimada": "60-90 minutos",
+      "conteudo_tipo": "Exemplo prático do método aplicado",
+      "qualidade": "Excelente - Exemplo real de aplicação",
+      "exemplos_praticos_extraidos": [
+        {
+          "conceito": "c1-imprevisibilidade",
+          "descricao": "Abertura com mágica e piadas de mineiro antes de falar do tema",
+          "localizacao": "Linhas 8-40",
+          "resultado": "Plateia rindo, conectada, curiosa"
+        },
+        {
+          "conceito": "c1-dopamina",
+          "descricao": "Piadas regionais (mineirês), truques de mágica que falham propositalmente",
+          "localizacao": "Linhas 22-40",
+          "resultado": "Risadas genuínas, dopamina liberada"
+        },
+        {
+          "conceito": "c2-venda-resultado",
+          "descricao": "Introdução sobre empresários: 87% demissões comportamentais (Harvard)",
+          "localizacao": "Linhas 15-16 (referenciado)",
+          "resultado": "Necessidade criada antes de ensinar os 3 passos"
+        },
+        {
+          "conceito": "c2-prova-social",
+          "descricao": "Estatística de Harvard, contraste empresas sucesso vs fracasso",
+          "localizacao": "Linhas 15-16",
+          "resultado": "Validação científica da tese"
+        },
+        {
+          "conceito": "c4-estrutura-jornada",
+          "descricao": "Início (mágico de família) → Queda (péssimo mágico) → Decisão (primeiro passo) → Vitória (TV nacional)",
+          "localizacao": "Linhas 9-26",
+          "resultado": "Arco emocional completo, plateia emocionada"
+        },
+        {
+          "conceito": "c4-autenticidade",
+          "descricao": "Renner admite ser péssimo mágico, humor autocrítico genuíno",
+          "localizacao": "Linhas 18-24",
+          "resultado": "Autenticidade gera conexão profunda"
+        },
+        {
+          "conceito": "c3-quatro-estagios",
+          "descricao": "Aplicação dos 4 estágios (Nome, Definição, Contexto, Ferramenta) nos 3 passos da Fórmula Mágica",
+          "localizacao": "Seção central (implícito na estrutura)",
+          "resultado": "Conteúdo claro e memorável"
+        }
+      ],
+      "tecnicas_demonstradas": [
+        "Não começar com currículo (MC apresenta)",
+        "Abertura imprevisível com mágica e humor",
+        "Uso de dinâmicas interativas ('O que a vaca bebe?')",
+        "Storytelling autêntico sem fotos",
+        "Estrutura em 3 passos claros"
+      ],
+      "modulos_demonstrados": [1, 2, 3, 4],
+      "nota": "Módulo 5 (vídeo final) não aparece na transcrição, mas é descrito no Método"
+    }
+  ],
+  "fontes_secundarias": {
+    "lives_completas": {
+      "nota": "Disponíveis mas NÃO processadas (contêm propaganda/vendas)",
+      "arquivos": [
+        {
+          "nome": "LIVE RENNER DIA 21_clean.md",
+          "linhas": 12362,
+          "tamanho": "392KB",
+          "uso": "Referência opcional para snippets específicos"
+        },
+        {
+          "nome": "LIVE RENNER DIA 22_clean.md",
+          "linhas": 19328,
+          "tamanho": "621KB",
+          "uso": "Referência opcional para snippets específicos"
+        },
+        {
+          "nome": "LIVE RENNER DIA 23_clean.md",
+          "linhas": 9313,
+          "tamanho": "320KB",
+          "uso": "Referência opcional para snippets específicos"
+        },
+        {
+          "nome": "LIVE RENNER DIA 24_clean.md",
+          "linhas": 5411,
+          "tamanho": "190KB",
+          "uso": "Referência opcional para snippets específicos"
+        }
+      ],
+      "decisao_processamento": "Processamento Conservador (Opção A): Focar em fontes limpas",
+      "razao": "Evitar ruído comercial no produto educacional"
+    }
+  },
+  "mapa_rastreabilidade": {
+    "conceito_para_fonte": {
+      "c1-humildade-estrategica": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 18,
+        "exemplo_pratico": "fonte-palestra-romani (MC apresenta credenciais)"
+      },
+      "c1-imprevisibilidade": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 19,
+        "exemplo_pratico": "fonte-palestra-romani (mágica + piadas mineiro)"
+      },
+      "c1-dopamina": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 20,
+        "exemplo_pratico": "fonte-palestra-romani (piadas regionais)"
+      },
+      "c2-venda-resultado": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 26,
+        "exemplo_pratico": "fonte-palestra-romani (87% Harvard)"
+      },
+      "c2-prova-social": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 27,
+        "exemplo_pratico": "fonte-palestra-romani (estatísticas)"
+      },
+      "c3-estrutura-passos": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 31,
+        "exemplo_pratico": "fonte-palestra-romani (3 passos da Fórmula Mágica)"
+      },
+      "c3-quatro-estagios": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 33,
+        "exemplo_pratico": "fonte-palestra-romani (implícito na estrutura)"
+      },
+      "c4-conquistar-direito": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 42,
+        "exemplo_pratico": "fonte-palestra-romani (história após conteúdo)"
+      },
+      "c4-estrutura-jornada": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 44,
+        "exemplo_pratico": "fonte-palestra-romani (Início-Queda-Decisão-Vitória)"
+      },
+      "c4-memorias-emocionais": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 49,
+        "exemplo_pratico": "fonte-palestra-romani (vulnerabilidade autêntica)"
+      },
+      "c4-autenticidade": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 51,
+        "exemplo_pratico": "fonte-palestra-romani (admite ser péssimo mágico)"
+      },
+      "c4-sem-fotos": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 50,
+        "exemplo_pratico": "fonte-palestra-romani (narrativa sem slides)"
+      },
+      "c5-video-recapitulativo": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 57,
+        "exemplo_pratico": "Descrito no método (não capturado na transcrição)"
+      },
+      "c5-emocao-como-memoria": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 54,
+        "exemplo_pratico": "Princípio central do método"
+      },
+      "c5-essencia-metodo": {
+        "fonte_primaria": "fonte-metodo",
+        "linha": 60,
+        "exemplo_pratico": "Filosofia central: quem você se tornou > o que conquistou"
+      }
+    }
+  },
+  "metricas_qualidade": {
+    "rastreabilidade_completa": "100%",
+    "conceitos_com_fonte": "15/15 (100%)",
+    "conceitos_com_exemplo_pratico": "14/15 (93%)",
+    "fontes_limpas_sem_propaganda": "2/2 (100%)",
+    "cobertura_modulos": "5/5 (100%)"
+  }
+}

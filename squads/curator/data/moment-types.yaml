@@ -1,0 +1,461 @@
+# ===============================================================================
+# MOMENT TYPES - Reference Classification for Content Mining
+# Version: 1.0.0
+# Squad: curator
+# Used by: content-miner-pro, timestamp-cataloger
+# Referenced from: squads/curator/agents/content-miner-pro.md (dependencies.data)
+#
+# PURPOSE:
+#   Canonical reference for moment type classification during Paper Edit
+#   Phase 2 (Color Code / Tag). Every moment extracted from a transcript
+#   MUST be assigned exactly one type from this file.
+#
+# USAGE:
+#   - content-miner-pro loads this during *mine execution
+#   - Each moment in {source-slug}/momentos.md gets a `tipo` from these IDs
+#   - Detection signals guide the agent on HOW to identify each type
+#   - Scoring weights adjust impact_score based on target_format
+# ===============================================================================
+
+# ===============================================================================
+# TYPE DEFINITIONS
+# ===============================================================================
+
+moment_types:
+
+  # ---------------------------------------------------------------------------
+  # HOOK - Attention-grabbing moments
+  # ---------------------------------------------------------------------------
+  - id: hook
+    name: "Hook"
+    description: >-
+      Attention-grabbing opener, surprising statement, provocative question,
+      or scroll-stopping moment. Designed to capture and hold attention
+      within the first seconds.
+    priority: 1
+    weight:
+      shorts: 10
+      longform: 8
+      documentary: 6
+    detection_signals:
+      primary:
+        - "Counter-intuitive claim that challenges common belief"
+        - "Big promise or bold prediction"
+        - "Curiosity gap (opens a loop the audience needs closed)"
+        - "Controversy or polarizing statement"
+        - "Strong emotion (anger, surprise, excitement)"
+      secondary:
+        - "Rhetorical question that demands mental engagement"
+        - "Pattern interrupt (unexpected topic shift)"
+        - "Direct challenge to the audience"
+        - "Startling statistic or data point"
+    markers:
+      - "counter-intuitive"
+      - "big-promise"
+      - "curiosity-gap"
+      - "controversy"
+      - "strong-emotion"
+      - "rhetorical-question"
+      - "pattern-interrupt"
+      - "direct-challenge"
+      - "startling-stat"
+    example:
+      text: "Tudo que te ensinaram sobre produtividade esta errado."
+      why: "Counter-intuitive claim that challenges universal assumption, creates curiosity gap"
+    min_duration_seconds: 5
+    max_duration_seconds: 60
+    typical_duration_seconds: 15
+    notes: >-
+      A single transcript can have multiple hooks. Rank by impact_score.
+      Best hooks work STANDALONE (no prior context needed). Hooks at the
+      start of a video are openers; hooks mid-content are re-engagement points.
+
+  # ---------------------------------------------------------------------------
+  # INSIGHT - Valuable information and new perspectives
+  # ---------------------------------------------------------------------------
+  - id: insight
+    name: "Insight"
+    description: >-
+      Valuable information, new perspective, actionable knowledge, or
+      framework introduction. The audience learns something they can
+      immediately apply or that shifts their mental model.
+    priority: 2
+    weight:
+      shorts: 7
+      longform: 9
+      documentary: 9
+    detection_signals:
+      primary:
+        - "Framework or model introduction (naming a concept)"
+        - "Data point or statistic with source"
+        - "Cause-effect explanation (X happens because Y)"
+        - "Pattern revelation (connecting dots others miss)"
+      secondary:
+        - "Step-by-step process or methodology"
+        - "Reframe of a common problem"
+        - "Analogy or metaphor that clarifies a complex idea"
+        - "Principle extraction from experience"
+        - "Contrarian reasoning with evidence"
+    markers:
+      - "framework"
+      - "data-point"
+      - "cause-effect"
+      - "pattern-revelation"
+      - "methodology"
+      - "reframe"
+      - "analogy"
+      - "principle"
+      - "contrarian-with-evidence"
+    example:
+      text: "70% do resultado vem do contexto mental, nao das tecnicas."
+      why: "Reframes the common focus on techniques, provides a specific data point, shifts mental model"
+    min_duration_seconds: 10
+    max_duration_seconds: 180
+    typical_duration_seconds: 45
+    notes: >-
+      Insights are the backbone of educational content. They often follow
+      a hook or story that sets context. An insight without context may
+      need a preceding moment (mark dependency). High-value insights
+      can be repurposed as standalone carousel slides or quote cards.
+
+  # ---------------------------------------------------------------------------
+  # STORY - Narrative segments with arc
+  # ---------------------------------------------------------------------------
+  - id: story
+    name: "Story"
+    description: >-
+      Narrative segment with a clear arc: setup, tension, and resolution.
+      Stories create emotional engagement and make abstract concepts
+      concrete through lived experience.
+    priority: 3
+    weight:
+      shorts: 6
+      longform: 9
+      documentary: 10
+    detection_signals:
+      primary:
+        - "Personal anecdote (speaker's own experience)"
+        - "Case study (client or third-party example)"
+        - "Before/after transformation"
+        - "Client or student example with specific details"
+      secondary:
+        - "Hero's journey micro-arc (challenge, struggle, resolution)"
+        - "Failure story with lesson learned"
+        - "Origin story (how something began)"
+        - "Contrast narrative (two paths, two outcomes)"
+        - "Emotional escalation followed by resolution"
+    markers:
+      - "personal-anecdote"
+      - "case-study"
+      - "before-after"
+      - "client-example"
+      - "failure-lesson"
+      - "origin-story"
+      - "contrast-narrative"
+      - "transformation"
+    example:
+      text: "Tinha um cliente que trabalhava 16 horas por dia..."
+      why: "Opens a case study with specific detail, implies a transformation arc is coming"
+    min_duration_seconds: 30
+    max_duration_seconds: 600
+    typical_duration_seconds: 120
+    notes: >-
+      Stories are typically the longest moments. They MUST be preserved
+      in their entirety -- cutting a story mid-arc destroys its impact.
+      Mark the FULL segment from setup to resolution. If a story spans
+      multiple non-contiguous segments, note dependencies between them.
+      Stories often contain embedded hooks, insights, or quotes -- tag
+      the overall segment as story, note sub-moments in tags array.
+
+  # ---------------------------------------------------------------------------
+  # QUOTE - Quotable, shareable statements
+  # ---------------------------------------------------------------------------
+  - id: quote
+    name: "Quote"
+    description: >-
+      Quotable, shareable statement with standalone value. Memorable
+      phrasing that can be extracted as-is for social media, quote cards,
+      newsletter pull-quotes, or email subject lines.
+    priority: 4
+    weight:
+      shorts: 9
+      longform: 7
+      documentary: 7
+    detection_signals:
+      primary:
+        - "Memorable phrasing (rhythm, alliteration, parallelism)"
+        - "Universal truth stated in original way"
+        - "Contrarian take (goes against conventional wisdom)"
+        - "Call to action or rallying cry"
+      secondary:
+        - "Condensed wisdom (complex idea in one sentence)"
+        - "Emotional resonance (audience would screenshot this)"
+        - "Tweetable length (under 280 characters)"
+        - "Aphorism or maxim with personal twist"
+        - "Definition or redefinition of a concept"
+    markers:
+      - "memorable-phrasing"
+      - "universal-truth"
+      - "contrarian-take"
+      - "call-to-action"
+      - "condensed-wisdom"
+      - "tweetable"
+      - "aphorism"
+      - "redefinition"
+    example:
+      text: "Voce nao precisa de mais tempo, precisa de mais clareza."
+      why: "Parallelism, contrarian reframe, tweetable, standalone value"
+    min_duration_seconds: 3
+    max_duration_seconds: 30
+    typical_duration_seconds: 10
+    notes: >-
+      Quotes are the most repurposable moment type. They work across
+      every format: shorts overlays, carousel text, email subject lines,
+      newsletter pull-quotes, social media posts. A single strong quote
+      can anchor an entire short. Transcription must be EXACT -- a
+      paraphrased quote loses its punch.
+
+  # ---------------------------------------------------------------------------
+  # TRANSITION - Natural bridges between topics
+  # ---------------------------------------------------------------------------
+  - id: transition
+    name: "Transition"
+    description: >-
+      Natural bridge between topics or segments. Transitions maintain
+      narrative flow and prevent the "picotado" (choppy) feeling.
+      Essential for assembling non-adjacent moments into coherent output.
+    priority: 5
+    weight:
+      shorts: 3
+      longform: 7
+      documentary: 8
+    detection_signals:
+      primary:
+        - "Topic change signal ('Isso me leva ao...', 'Agora vamos falar de...')"
+        - "Recap moment (summarizes before moving forward)"
+        - "Question pivot (asks question that shifts topic)"
+        - "Callback (references earlier point to bridge to new one)"
+      secondary:
+        - "Enumeration signal ('O segundo ponto e...', 'Terceiro...')"
+        - "Contrast bridge ('Mas por outro lado...')"
+        - "Temporal shift ('Depois disso...', 'Anos depois...')"
+        - "Audience re-engagement ('Presta atencao agora...')"
+    markers:
+      - "topic-change"
+      - "recap"
+      - "question-pivot"
+      - "callback"
+      - "enumeration"
+      - "contrast-bridge"
+      - "temporal-shift"
+      - "re-engagement"
+    example:
+      text: "Isso me leva ao segundo ponto..."
+      why: "Natural topic change, signals structure to audience, bridges two segments"
+    min_duration_seconds: 3
+    max_duration_seconds: 30
+    typical_duration_seconds: 8
+    notes: >-
+      Transitions have LOW standalone value but HIGH assembly value.
+      Without transitions, cutting moments together sounds choppy.
+      When assembling non-adjacent moments, check if a natural
+      transition exists between them. If not, flag as a gap in
+      Phase 3 (Arrange). Transitions are rarely needed for shorts
+      but critical for longform and documentary formats.
+
+  # ---------------------------------------------------------------------------
+  # B-ROLL CUE - Moments needing visual support
+  # ---------------------------------------------------------------------------
+  - id: b_roll_cue
+    name: "B-Roll Cue"
+    description: >-
+      Moment that benefits from or requires visual support beyond the
+      talking head. Signals to the editor where to insert supplementary
+      footage, graphics, screen recordings, or data visualizations.
+    priority: 6
+    weight:
+      shorts: 5
+      longform: 6
+      documentary: 9
+    detection_signals:
+      primary:
+        - "Data visualization opportunity (mentions numbers, charts, graphs)"
+        - "Demonstration needed ('Veja aqui...', 'Olha isso...')"
+        - "Example that requires showing (screen share, product demo)"
+      secondary:
+        - "Physical description ('Imagina uma cena onde...')"
+        - "Reference to external content ('Nesse video aqui...', 'No artigo...')"
+        - "List or comparison that benefits from on-screen text"
+        - "Location or environment reference"
+        - "Process walkthrough that needs screen capture"
+    markers:
+      - "data-visualization"
+      - "demonstration"
+      - "screen-recording"
+      - "physical-description"
+      - "external-reference"
+      - "on-screen-text"
+      - "location-reference"
+      - "process-walkthrough"
+    example:
+      text: "Veja aqui no grafico..."
+      why: "Explicit reference to visual element, editor needs to know to insert graphic"
+    min_duration_seconds: 5
+    max_duration_seconds: 120
+    typical_duration_seconds: 20
+    notes: >-
+      B-roll cues are instructions for the editor, not content for the
+      audience. They indicate WHERE visual support is needed. The notes
+      field should describe WHAT visual to insert. In Phase 4 (Radio Cut),
+      moments flagged as b_roll_cue are tested: does the audio still make
+      sense without the visual? If not, the moment needs the visual to
+      be included in the final cut.
+
+# ===============================================================================
+# SCORING
+# ===============================================================================
+
+scoring:
+  method: "MQR (Moment Quality Rubric)"
+  reference: "squads/curator/data/moment-quality-rubric.yaml"
+  description: >-
+    Impact scores (1-10) are derived from the MQR 4-dimension rubric:
+    H (Hook Strength ×0.35) + E (Emotional Arousal ×0.25) +
+    S (Shareability ×0.25) + C (Standalone Clarity ×0.15).
+    Compact notation: H8/E7/S9/C6. See moment-quality-rubric.yaml for
+    full criteria, questions, and anti-inflation guard.
+
+  interpretation:
+    - range: "9-10"
+      label: "Exceptional"
+      action: "Always include. Candidate for shorts, highlights, lead content."
+    - range: "7-8"
+      label: "Strong"
+      action: "Include in longform. Evaluate for shorts with minor framing."
+    - range: "5-6"
+      label: "Solid"
+      action: "Include if it supports narrative flow. May cut for time constraints."
+    - range: "3-4"
+      label: "Filler"
+      action: "Include only if needed for narrative bridge. First to cut for time."
+    - range: "1-2"
+      label: "Skip"
+      action: "Skip unless no alternatives exist for a required narrative gap."
+
+  weight_by_format:
+    description: >-
+      Each moment type has a weight per target format (shorts, longform,
+      documentary). The weight (1-10) represents how important that type
+      is for the given format. Multiply impact_score by type weight to
+      get format-adjusted score for ranking.
+    formula: "adjusted_score = impact_score * (type_weight / 10)"
+    example: >-
+      A hook with impact_score 8 in shorts format:
+      adjusted = 8 * (10/10) = 8.0
+      Same hook in documentary format:
+      adjusted = 8 * (6/10) = 4.8
+
+# ===============================================================================
+# TARGET FORMAT PROFILES
+# ===============================================================================
+
+target_formats:
+
+  - id: shorts
+    name: "Shorts / Reels / TikTok"
+    duration_range: "15-90 seconds"
+    priority_types:
+      - hook       # Must open strong
+      - quote      # Standalone shareable
+      - insight    # Quick value delivery
+    assembly_notes: >-
+      Shorts need a hook in the first 3 seconds. One core moment (insight,
+      quote, or story fragment) in the middle. Optional callback or CTA
+      at end. Transitions are rarely needed. B-roll cues help but are
+      not essential.
+    minimum_moments:
+      hook: 1
+      core: 1  # insight, quote, or story fragment
+
+  - id: longform
+    name: "Longform Video (YouTube, Podcast Clips)"
+    duration_range: "3-20 minutes"
+    priority_types:
+      - insight    # Educational backbone
+      - story      # Emotional engagement
+      - hook       # Retention points
+      - transition # Flow maintenance
+    assembly_notes: >-
+      Longform needs a strong opening hook, then alternates between
+      insights and stories for engagement. Transitions maintain flow
+      between topics. Quotes serve as punctuation marks between sections.
+      B-roll cues improve production value.
+    minimum_moments:
+      hook: 2
+      insight: 3
+      story: 1
+      transition: 2
+
+  - id: documentary
+    name: "Documentary / Narrative Assembly"
+    duration_range: "10-60 minutes"
+    priority_types:
+      - story      # Narrative backbone
+      - insight    # Intellectual depth
+      - transition # Seamless flow
+      - b_roll_cue # Visual richness
+    assembly_notes: >-
+      Documentary format follows Ken Burns methodology: build the audio
+      narrative first (Blind Assembly), then layer visuals. Stories form
+      the backbone. Insights provide intellectual texture. Transitions
+      must be seamless. B-roll is critical for visual storytelling.
+      Every moment must serve the overarching narrative arc.
+    minimum_moments:
+      story: 3
+      insight: 4
+      transition: 3
+      b_roll_cue: 5
+
+# ===============================================================================
+# VALIDATION RULES
+# ===============================================================================
+
+validation:
+  rules:
+    - "Every moment in {source-slug}/momentos.md MUST have a tipo from the IDs defined above"
+    - "Valid tipo values: hook, insight, story, quote, transition, b_roll_cue"
+    - "No other tipo values are accepted"
+    - "Each momento MUST have a tags array with values from the markers list of its type"
+    - "impact_score MUST be 1-10 integer (derived from MQR formula)"
+    - "Each moment MUST have mqr field with compact notation (H{n}/E{n}/S{n}/C{n})"
+    - "Moments outside typical_duration_seconds range should include a note explaining why"
+
+  valid_types:
+    - hook
+    - insight
+    - story
+    - quote
+    - transition
+    - b_roll_cue
+
+# ===============================================================================
+# CHANGELOG
+# ===============================================================================
+
+changelog:
+  - version: "1.1.0"
+    date: "2026-02-05"
+    changes:
+      - "Replaced vague scoring_guide with MQR pointer (moment-quality-rubric.yaml)"
+      - "Retained weight_by_format system (unchanged)"
+      - "Added mqr validation rule to require compact notation per moment"
+      - "Score interpretation labels retained for reference"
+
+  - version: "1.0.0"
+    date: "2026-02-04"
+    changes:
+      - "Initial creation with 6 moment types"
+      - "Scoring guide with format-adjusted weights"
+      - "Target format profiles (shorts, longform, documentary)"
+      - "Detection signals and markers for each type"
+      - "Validation rules for {source-slug}/momentos.md integration"

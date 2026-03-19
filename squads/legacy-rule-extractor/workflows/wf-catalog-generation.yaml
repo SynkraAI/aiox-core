@@ -1,0 +1,38 @@
+# Workflow: Rule Catalog Generation
+# Generate catalog from previously extracted rules
+
+workflow:
+  id: wf-catalog-generation
+  name: "Rule Catalog Generation"
+  trigger: "*catalog {rules-dir}"
+  executor: archaeologist
+
+  phases:
+    - phase: 1
+      name: "Collect & Validate"
+      action: |
+        Read all rule files from rules-dir.
+        Validate schema compliance.
+        Report any malformed files.
+
+    - phase: 2
+      name: "Classify & Catalog"
+      tasks:
+        - classify-rule
+        - catalog-rules
+        - generate-rule-map
+      delegated_to: cartographer
+      input:
+        rules_dir: "{rules-dir}"
+
+    - phase: 3
+      name: "Output"
+      action: |
+        Produce:
+        - catalog/rule-catalog.md
+        - catalog/rule-catalog.yaml
+        - catalog/domain-map.md
+        Display summary statistics.
+
+  quality_gates:
+    - QG-LRE-002

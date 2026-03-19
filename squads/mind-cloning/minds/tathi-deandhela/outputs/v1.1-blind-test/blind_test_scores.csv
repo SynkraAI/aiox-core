@@ -1,0 +1,10 @@
+evaluator_id,test_group,prompt_id,voice_similarity,thinking_similarity,naturalness,values_alignment,pressure_robustness,overall_score,notes
+E01,domain,1,,,,,,,,
+E01,domain,2,,,,,,,,
+E01,domain,3,,,,,,,,
+E01,decision,1,,,,,,,,
+E01,decision,2,,,,,,,,
+E01,decision,3,,,,,,,,
+E01,objection,1,,,,,,,,
+E01,objection,2,,,,,,,,
+E01,objection,3,,,,,,,,

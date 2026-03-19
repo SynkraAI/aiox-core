@@ -1,0 +1,516 @@
+# Koe Squad — Mindset Frameworks Library
+# Dan Koe's mindset and psychological transformation frameworks
+# Version: 1.0.0
+# Created: 2026-02-14
+# Used by: koe-mindset (primary), koe-advisor (supporting), all koe-* agents
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PURPOSE: Canonical reference of Dan Koe's mindset frameworks.
+# Each framework includes steps, when to use, source, and practical example.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+frameworks:
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 1: Conscious Conditioning Process
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: MF-001
+    name: "Conscious Conditioning Process"
+    category: "identity_transformation"
+    description: "Systematic five-step process for rewiring automatic negative responses into conscious empowering choices through deliberate practice and neurological reinforcement"
+    steps:
+      - step: 1
+        name: "Recognize"
+        action: "Catch the automatic thought, emotion, or behavioral pattern without judgment"
+        key_skill: "Metacognition — observing your own thinking as if watching a movie"
+        practice: "Daily meditation (10 min), evening journaling, pause-before-react discipline"
+        pitfall: "Judging the thought instead of simply observing it"
+
+      - step: 2
+        name: "Reframe"
+        action: "Question the belief underlying the automatic response and find empowering alternatives"
+        key_questions:
+          - "Is this actually true, or is it a story I'm telling myself?"
+          - "What else could be true about this situation?"
+          - "What would my future self think about this?"
+          - "How can this experience serve me instead of limiting me?"
+        pitfall: "Forced toxic positivity instead of genuine reframing"
+
+      - step: 3
+        name: "Design Response"
+        action: "Consciously choose the empowering interpretation and corresponding action"
+        principle: "You cannot control events. You CAN control your response to events."
+        technique: "Write down the old response and the new designed response side by side"
+        pitfall: "Designing an unsustainable response — start small and build"
+
+      - step: 4
+        name: "Repeat"
+        action: "Practice the new response consistently until it becomes automatic"
+        science: "Neural pathways strengthen through repetition (myelination) — each rep makes the new response faster and more natural"
+        minimum: "21 days for initial habit formation, 66 days for automaticity"
+        pitfall: "Expecting overnight transformation — conditioning is a practice, not a pill"
+
+      - step: 5
+        name: "Reward"
+        action: "Celebrate the new response to reinforce the neural pathway"
+        types:
+          - "Intrinsic: pride and satisfaction in choosing the empowering response"
+          - "Social: sharing wins with an accountability partner or community"
+          - "Tangible: small reward after consistent streak (7 days, 30 days)"
+        pitfall: "Skipping rewards — the brain needs positive reinforcement to lock in new pathways"
+
+    when_to_use:
+      - "Emotional reactivity (anger, frustration, fear) disrupting productivity"
+      - "Recurring negative thought patterns about capability or worthiness"
+      - "Self-sabotage behaviors that persist despite wanting to change"
+      - "Any situation where your default response isn't serving your goals"
+    source: "Dan Koe — The Art of Focus, Modern Mastery course, Newsletter articles"
+    related_frameworks: ["MF-004", "MF-005"]
+    example:
+      situation: "Creator freezes when about to publish content, fearing criticism"
+      recognize: "Notice the thought: 'People will judge me. This isn't good enough.'"
+      reframe: "'Good enough' is a moving target. Published is better than perfect. Criticism means people are paying attention."
+      design_response: "Set a timer for 5 minutes. At zero, hit publish regardless. Then close the app for 2 hours."
+      repeat: "Do this for every piece of content for 30 days. Track completions."
+      reward: "After 30 consecutive publishes, buy that book you've been wanting."
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 2: Polarity Principle
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: MF-002
+    name: "Polarity Principle"
+    category: "motivation_design"
+    description: "Dual-force motivation system using the tension between Vision (what you move toward) and Anti-Vision (what you move away from) to create sustained, energized action"
+    components:
+      vision:
+        definition: "The vivid, specific image of your ideal future self and life"
+        characteristics:
+          - "Specific enough to feel real (not vague aspirations)"
+          - "Identity-based ('I am someone who...') not just goal-based"
+          - "Emotionally charged — must create genuine pull"
+          - "10-year horizon for strategic clarity"
+        danger: "Too much vision without urgency = complacency, daydreaming, procrastination"
+        practice: "Monthly vision journaling — describe your ideal Tuesday in detail"
+
+      anti_vision:
+        definition: "The visceral, concrete picture of the life you refuse to live"
+        characteristics:
+          - "Present-tense pain — feel it NOW, not abstractly"
+          - "Specific enough to be uncomfortable (the cubicle, the boss, the regret)"
+          - "Productively uncomfortable — motivating, not paralyzing"
+          - "Connected to your current trajectory if nothing changes"
+        danger: "Too much anti-vision without hope = burnout, cynicism, depression"
+        practice: "Quarterly anti-vision writing — describe what life looks like in 5 years if you change nothing"
+
+    tension_mechanism: "The gap between Vision and Anti-Vision creates PRODUCTIVE TENSION — the energy that drives action"
+    balance_rule: "If you lack urgency, your anti-vision is too weak. If you're burning out, your vision is unclear."
+
+    when_to_use:
+      - "Motivation dips or creative blocks"
+      - "Major strategic decisions (evaluate against both poles)"
+      - "Annual/quarterly planning and goal-setting"
+      - "When comfort is becoming complacency"
+    source: "Dan Koe — The Art of Focus, Newsletter (Polarity Principle article)"
+    related_frameworks: ["MF-001", "MF-005"]
+    example:
+      vision: "In 5 years: Working 4 hours/day on ideas I'm passionate about, $500K annual revenue from digital products, writing from a cafe in Lisbon, community of 100K+ subscribers who value my perspective."
+      anti_vision: "In 5 years if nothing changes: Still working 50 hours/week for clients, no IP owned, income dependent on next project, scrolling social media instead of creating, regretting not starting when I had the energy."
+      tension: "The gap between these two images creates the urgency to start today AND the clarity of what to build."
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 3: Autoprogramming Protocol
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: MF-003
+    name: "Autoprogramming Protocol"
+    category: "belief_engineering"
+    description: "Systematic process for identifying, replacing, and installing empowering beliefs through deliberate practice — NOT affirmations, but beliefs coupled with action"
+    key_distinction: "Affirmations are words without action. Autoprogramming combines belief with behavior. You don't just SAY 'I am confident' — you DO confident things until the belief catches up."
+    steps:
+      - step: 1
+        name: "Audit"
+        action: "List current beliefs about money, success, capability, worthiness, and creativity"
+        technique: "Complete these sentences honestly: 'Money is...', 'I am...', 'Success requires...', 'I deserve...'"
+        output: "Raw belief inventory — don't filter or judge"
+
+      - step: 2
+        name: "Evaluate"
+        action: "Score each belief: does it serve your Vision or your Anti-Vision?"
+        scoring:
+          serves_vision: "+1 (keep and strengthen)"
+          neutral: "0 (investigate further)"
+          serves_anti_vision: "-1 (replace immediately)"
+        output: "Categorized belief map"
+
+      - step: 3
+        name: "Replace"
+        action: "Write the empowering version of each limiting belief"
+        rules:
+          - "Must be believable (not delusional) — stretch, don't snap"
+          - "Must be actionable (what behavior does this belief produce?)"
+          - "Must be specific (not 'I am successful' but 'I create valuable content that helps people')"
+        output: "Replacement belief set"
+
+      - step: 4
+        name: "Install"
+        action: "Practice the new belief through journaling, self-talk, AND corresponding action"
+        methods:
+          - "Morning journaling: write the new belief and one action it demands today"
+          - "Self-talk correction: when old belief surfaces, consciously redirect to new"
+          - "Behavioral proof: take actions that PROVE the new belief true"
+        output: "Daily practice log"
+
+      - step: 5
+        name: "Verify"
+        action: "After 30 days, assess if the new belief feels natural"
+        test: "Does this belief arise automatically in relevant situations? If not, more reps needed."
+        output: "Belief installation status (installed/in-progress/needs-more-reps)"
+
+    when_to_use:
+      - "Deep-seated limiting beliefs about money, creativity, or capability"
+      - "Identity shifts (employee to entrepreneur, consumer to creator)"
+      - "Persistent self-sabotage despite knowing what to do"
+      - "After Conscious Conditioning reveals root belief behind behavior"
+    source: "Dan Koe — Modern Mastery course, Newsletter articles on identity"
+    related_frameworks: ["MF-001", "MF-002"]
+    example:
+      old_belief: "'I'm not an expert. Who would pay for my knowledge?'"
+      evaluation: "-1 (serves anti-vision — keeps you small and dependent)"
+      new_belief: "'I have unique lived experience that helps people. My specific knowledge is valuable because nobody else has my intersection of skills and stories.'"
+      installation: "Publish 1 piece of content per day sharing what I know. Track positive responses. After 30 days, review evidence."
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 4: Habit Loop Reengineering
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: MF-004
+    name: "Habit Loop Reengineering"
+    category: "behavior_design"
+    description: "Redesign the Cue-Routine-Reward loop to replace destructive habits with empowering ones through environment design and identity attachment"
+    components:
+      cue:
+        definition: "The trigger that initiates the habit loop"
+        design_principles:
+          - "Make desired behavior cue OBVIOUS (put journal on pillow, open writing app first)"
+          - "Make undesired behavior cue INVISIBLE (delete social media apps, block sites)"
+          - "Use existing habits as cues for new ones (habit stacking)"
+        examples:
+          - "Alarm at 6am → Sit at desk (not check phone)"
+          - "Coffee brewed → Open writing document"
+          - "Lunch finished → 15-min walk (not scroll)"
+
+      routine:
+        definition: "The behavior itself — the action performed"
+        design_principles:
+          - "Start absurdly small (2 minutes, not 2 hours)"
+          - "Make it easy — reduce friction to near zero"
+          - "Identity-based ('I am a writer' not 'I should write')"
+          - "Scale gradually after the habit is established"
+        examples:
+          - "Write 1 sentence (not 1000 words) — just start"
+          - "Do 1 pushup (not 50) — just begin"
+          - "Capture 1 idea (not process 10) — just notice"
+
+      reward:
+        definition: "The positive reinforcement that locks in the habit"
+        design_principles:
+          - "Immediate reward (not delayed gratification for habit formation)"
+          - "Identity confirmation ('I showed up, I am a creator')"
+          - "Visual tracking (streak counter, calendar X marks)"
+          - "Never break the chain — 2 misses in a row resets the loop"
+        examples:
+          - "After writing: checkmark on calendar + 5 minutes of enjoyable activity"
+          - "After deep work block: coffee break + review what you created"
+          - "After publishing: close laptop and walk — reward the ship, not the result"
+
+    myelination_layer: "Every repetition strengthens the neural pathway. The 100th rep is exponentially easier than the 1st. This is neurological compound interest."
+
+    when_to_use:
+      - "Building new creative habits (writing, creating, publishing)"
+      - "Breaking destructive habits (social media addiction, procrastination)"
+      - "Redesigning daily routines for deep work optimization"
+      - "Supporting Conscious Conditioning with behavioral reinforcement"
+    source: "Dan Koe — The Art of Focus, adapted from Charles Duhigg and James Clear with Koe's identity-first approach"
+    related_frameworks: ["MF-001", "MF-003"]
+    example:
+      target_habit: "Daily deep writing for content creation"
+      cue_design: "Coffee machine finishes brewing → sit at desk with document open (no phone in room)"
+      routine_design: "Write for 2 minutes minimum. If flow state emerges, continue up to 90 minutes."
+      reward_design: "After session: mark calendar X, review word count, enjoy 10 minutes of guilt-free leisure."
+      identity_attachment: "'I am a professional writer. Writers write daily. This is who I am.'"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 5: Anti-Conformity Principle
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: MF-005
+    name: "Anti-Conformity Principle"
+    category: "strategic_thinking"
+    description: "Systematic questioning of default paths, conventional wisdom, and societal expectations — not contrarianism for its own sake, but informed divergence based on first-principles thinking"
+    components:
+      - name: "Question Default Paths"
+        description: "Before following any conventional path, ask: 'Is this actually optimal, or is it just common?'"
+        examples:
+          - "College → Corporate job → Retirement (is this the only path to financial security?)"
+          - "Niche down → Specialize → Compete (is hyper-specialization really necessary?)"
+          - "Hustle harder → Work more hours → Grind (does more effort = more results?)"
+
+      - name: "First-Principles Audit"
+        description: "Strip advice back to its fundamental assumptions and test each one"
+        process:
+          - "1. Identify the conventional advice"
+          - "2. List the assumptions it's based on"
+          - "3. Test each assumption against your specific situation"
+          - "4. Keep what's true, discard what's just common"
+
+      - name: "Informed Divergence"
+        description: "Diverge from convention ONLY when first-principles analysis supports it"
+        rules:
+          - "This is NOT contrarianism — you need evidence, not just rebellion"
+          - "Understand WHY the convention exists before rejecting it"
+          - "Test your divergent path with small experiments before committing"
+          - "Be prepared to return to convention if evidence disproves your thesis"
+
+      - name: "Productive Rebellion"
+        description: "Channel anti-conformity into creation, not destruction"
+        principle: "Don't just reject the default — build something better"
+        examples:
+          - "Reject 'niche down' → Build 'You Are The Niche' (personal monopoly)"
+          - "Reject 'hustle culture' → Build 'Leverage Stack' (work less, impact more)"
+          - "Reject 'find your passion' → Build 'Passion is output of mastery' (do, then love)"
+
+    when_to_use:
+      - "Before making major life/career decisions on autopilot"
+      - "When 'best practices' feel wrong for your specific situation"
+      - "When you notice everyone doing the same thing (saturation signal)"
+      - "During strategic planning — challenge every assumption"
+    source: "Dan Koe — Newsletter articles, The Art of Focus, Digital Renaissance philosophy"
+    related_frameworks: ["MF-002", "MF-003"]
+    example:
+      convention: "'You need to niche down to succeed as a content creator.'"
+      assumption_1: "Niching = specificity = easier to find audience"
+      test_1: "True in 2015. In 2026, niches are oversaturated. Unique intersections win."
+      assumption_2: "Being a generalist means being mediocre at everything"
+      test_2: "False. T-shaped knowledge (broad + 1 deep) creates unique perspectives."
+      divergent_path: "Instead of niching to 'productivity tips for developers,' combine development + philosophy + writing into a unique personal brand."
+      result: "Category of one, no direct competition, higher authority."
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 6: Focus Funnel
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: MF-006
+    name: "Focus Funnel"
+    category: "attention_management"
+    description: "Four-stage filter that every activity must pass through to earn your attention — Eliminate, Automate, Delegate, Focus. What survives the funnel is your real work."
+    stages:
+      - stage: 1
+        name: "Eliminate"
+        action: "Remove activities that produce zero or negative value — if it doesnt need to exist, kill it"
+        question: "Does this NEED to exist at all?"
+        examples: ["Unnecessary meetings", "Vanity metrics tracking", "Comparison scrolling", "Busywork that feels productive but creates nothing"]
+        pitfall: "Keeping things because they always existed — tradition is not justification"
+
+      - stage: 2
+        name: "Automate"
+        action: "Use systems, tools, and technology for anything repetitive"
+        question: "Can a system do this without me?"
+        examples: ["Email sequences", "Social media scheduling", "Invoice generation", "Content distribution"]
+        pitfall: "Over-engineering automation for tasks that should be eliminated instead"
+
+      - stage: 3
+        name: "Delegate"
+        action: "Hand off tasks that require a human but not YOUR unique skills"
+        question: "Does this require MY specific genius?"
+        examples: ["Editing", "Customer support", "Administrative tasks", "Research compilation"]
+        pitfall: "Delegating creative vision or strategic decisions — those stay with you"
+
+      - stage: 4
+        name: "Focus"
+        action: "Protect deep work time for the activities only you can do — this is your highest leverage"
+        question: "Is this where my unique genius creates the MOST value?"
+        examples: ["Writing original content", "Framework design", "Strategic thinking", "High-ticket calls"]
+        pitfall: "Letting urgency override importance — your focus time is sacred"
+
+    funnel_rule: "Every activity must pass through all 4 stages in order. What survives is your real work. Everything else is noise disguised as productivity."
+
+    when_to_use:
+      - "Feeling overwhelmed or spread too thin"
+      - "Calendar is full but output is low"
+      - "Cant find time for deep creative work"
+      - "Starting a new phase and need to restructure time"
+    source: "Dan Koe — The Art of Focus"
+    related_frameworks: ["MF-001", "MF-005", "MF-007"]
+    example:
+      situation: "Creator spends 6 hours daily on social media, email, and content editing"
+      eliminate: "Unsubscribe from 80% of newsletters, disable non-essential notifications, stop tracking follower count daily"
+      automate: "Schedule social posts via tool, set up email templates for common responses"
+      delegate: "Hire editor for videos, use VA for email triage"
+      focus: "Reclaimed 3.5 hours for writing and strategic thinking — the only work that compounds"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 7: Attention Spectrum Audit
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: MF-007
+    name: "Attention Spectrum Audit"
+    category: "attention_management"
+    description: "Diagnostic tool for mapping where your attention currently goes versus where it SHOULD go for maximum sovereignty and creative output"
+    dimensions:
+      - dimension: "Consumption vs Creation"
+        spectrum: "How much time consuming others' content vs creating your own?"
+        healthy_ratio: "20% consume / 80% create"
+        diagnostic:
+          healthy: "Consuming intentionally for input, creating prolifically for output"
+          warning: "Consuming > 30% — attention leaking to others' agendas"
+          critical: "Consuming > 50% — you are building someone else's brand, not yours"
+        fix: "Set consumption windows (30 min/day max). Create FIRST, consume AFTER."
+
+      - dimension: "Reactive vs Proactive"
+        spectrum: "How much time responding to others vs initiating your own agenda?"
+        healthy_ratio: "20% reactive / 80% proactive"
+        diagnostic:
+          healthy: "Morning is yours, afternoon handles others"
+          warning: "Reactive > 40% — living someone else's agenda"
+          critical: "Reactive > 60% — your business runs you, not the other way around"
+        fix: "No email/DMs before noon. Block morning for proactive work. Batch reactive tasks."
+
+      - dimension: "Shallow vs Deep"
+        spectrum: "How much time on shallow tasks (email, social, admin) vs deep work (writing, strategy, creation)?"
+        healthy_ratio: "30% shallow / 70% deep"
+        diagnostic:
+          healthy: "Deep work protected, shallow tasks batched"
+          warning: "Deep work < 50% — output quality declining"
+          critical: "Deep work < 30% — you are busy but not productive"
+        fix: "Use Focus Funnel (MF-006) to eliminate/automate shallow tasks. Protect 4h daily for deep work."
+
+    audit_protocol:
+      - "1. Track your time for 3 days (use time-tracking app or manual log)"
+      - "2. Categorize each activity into the 3 dimensions"
+      - "3. Calculate current ratios"
+      - "4. Compare to healthy ratios"
+      - "5. Apply Focus Funnel to close the gaps"
+      - "6. Re-audit after 2 weeks"
+
+    when_to_use:
+      - "Feeling busy but unproductive"
+      - "Creative output has declined"
+      - "Overwhelm without clear cause"
+      - "Quarterly review of work patterns"
+    source: "Dan Koe — The Art of Focus, Newsletter articles"
+    related_frameworks: ["MF-006", "MF-008"]
+    example:
+      current_state:
+        consumption_creation: "45/55 (too much consumption)"
+        reactive_proactive: "55/45 (too reactive)"
+        shallow_deep: "60/40 (too shallow)"
+      diagnosis: "Attention is leaking to consumption and reactive tasks. Deep work is suffering."
+      prescription: "Apply Focus Funnel. Set consumption window 4-4:30pm. No email before noon. Protect 6am-10am for deep creation."
+      target_state:
+        consumption_creation: "20/80"
+        reactive_proactive: "25/75"
+        shallow_deep: "30/70"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # FRAMEWORK 8: Creative Energy Management
+  # ─────────────────────────────────────────────────────────────────────────
+  - id: MF-008
+    name: "Creative Energy Management"
+    category: "energy_design"
+    description: "Align work types to biological energy cycles — peak energy for creation, sustained energy for structure, low energy for maintenance. Energy management beats time management."
+    core_principle: "You dont manage time. You manage energy. The same hour at peak energy produces 10x the output of an hour at low energy."
+
+    energy_blocks:
+      - block: "Peak Energy"
+        typical_time: "First 2-4 hours after waking (varies per person)"
+        work_type: "Deep creative work — writing, framework design, strategic thinking, content creation"
+        rules:
+          - "NEVER waste peak energy on email, meetings, or admin"
+          - "Protect this block like your life depends on it — because your creative life does"
+          - "Minimize decisions before this block (same breakfast, same clothes, same routine)"
+          - "No phone, no notifications, no interruptions"
+        output_expectation: "This block should produce 80% of your highest-value output"
+
+      - block: "Sustained Energy"
+        typical_time: "Mid-morning to early afternoon (2-3 hours)"
+        work_type: "Structured work — editing, research, course creation, planning, calls"
+        rules:
+          - "Good for work that needs focus but not peak creativity"
+          - "Schedule important calls and meetings here"
+          - "Use for processing and structuring ideas generated during Peak block"
+        output_expectation: "Refinement and execution of what Peak block generated"
+
+      - block: "Low Energy"
+        typical_time: "Late afternoon / evening"
+        work_type: "Administrative — social media, email, light reading, recovery, consumption"
+        rules:
+          - "Accept lower output — fighting biology is a losing strategy"
+          - "Use for maintenance tasks and shallow work"
+          - "This is where your consumption window goes"
+          - "Recovery IS productive — it recharges tomorrow's peak block"
+        output_expectation: "Maintenance done, recovery started, next day prepared"
+
+    recovery_framework:
+      principle: "Creative output is not infinite. Recovery is not laziness — it is the investment that makes tomorrow's deep work possible."
+      types:
+        - type: "Micro Recovery (within blocks)"
+          duration: "5-15 min"
+          activities: ["Walk", "Breathwork", "Stretch", "Nature exposure"]
+          frequency: "Every 90 minutes of deep work"
+        - type: "Daily Recovery"
+          duration: "2-4 hours"
+          activities: ["Exercise", "Social time", "Hobbies", "Sleep preparation"]
+          frequency: "Every evening"
+        - type: "Weekly Recovery"
+          duration: "1 full day"
+          activities: ["Complete disconnect", "Nature", "Play", "No screens"]
+          frequency: "Weekly (non-negotiable)"
+
+    when_to_use:
+      - "Designing or redesigning daily routine"
+      - "Creative output declining despite working same hours"
+      - "Burnout signals appearing"
+      - "Transitioning to deep work lifestyle"
+    source: "Dan Koe — Modern Mastery, Newsletter articles on productivity and energy"
+    related_frameworks: ["MF-006", "MF-007", "MF-004"]
+    example:
+      before:
+        schedule: "Check email at 7am, meetings 9-11, write 2-4pm, admin 4-6pm"
+        problem: "Writing happens at low energy. Peak energy wasted on email and meetings."
+      after:
+        schedule: "Write 6-10am (peak), Calls + editing 10am-1pm (sustained), Email + social 3-5pm (low)"
+        result: "Same hours, 3x writing output, better quality, less fatigue"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CROSS-REFERENCE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+cross_reference:
+  config_mental_models:
+    MF-001: "MM_006: Conscious Conditioning Process"
+    MF-002: "MM_009: Polarity Principle"
+    MF-003: "Related to MM_006 (deeper belief layer)"
+    MF-004: "Related to MM_006 (behavioral layer)"
+    MF-005: "Related to MM_005: Digital Renaissance"
+    MF-006: "MM_011: Focus Funnel (Art of Focus)"
+    MF-007: "MM_012: Attention Spectrum (Art of Focus)"
+    MF-008: "MM_013: Creative Energy Management (Modern Mastery)"
+
+  thinking_dna_frameworks:
+    MF-001: "DF-005"
+    MF-002: "DF-007"
+    MF-003: "Extension of DF-005"
+    MF-004: "DF-002"
+    MF-005: "DF-006"
+    MF-006: "Extension of DF-002 (attention layer)"
+    MF-007: "Diagnostic tool for DF-002 + DF-005"
+    MF-008: "Extension of DF-002 (energy layer)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.1.0"
+  created: "2026-02-14"
+  updated: "2026-02-14"
+  author: "koe-squad"
+  total_frameworks: 8
+  primary_agent: "koe-mindset"
+  supporting_agents: ["koe-advisor", "koe-chief"]
+  source: "Aggregated from Dan Koe's books, courses, newsletters, and YouTube content"

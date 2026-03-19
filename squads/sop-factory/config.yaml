@@ -1,0 +1,263 @@
+# SOP Factory - Elite Standard Operating Procedures Squad v1.0
+# Squad Configuration
+
+name: sop-factory
+version: "1.0.0"
+description: "Elite SOP creation, extraction, analysis, grading and AI-optimization squad. Creates world-class SOPs for humans and AI agents based on Deming, Gawande, Juran, Toyota, ISO 9001, FDA/GMP, and Six Sigma methodologies."
+author: "AIOX Team"
+created_at: "2026-03-09"
+
+pack:
+  name: sop-factory
+  title: "SOP Factory - Elite Process Documentation Squad"
+  version: "1.0.0"
+  author: "AIOX Team"
+  description: "Creates, extracts, analyzes, grades and converts SOPs using the world's best process documentation methodologies. Dual-output: human-readable and AI/ML-consumable formats."
+  icon: "&#x2699;"
+  slash_prefix: "sop"
+
+metadata:
+  version: "1.0.0"
+  score: null
+
+# ==============================================================================
+# SQUAD TYPE & INTEGRATION
+# ==============================================================================
+squad_type: pipeline
+# pipeline = Sequential flow: Input -> Process -> Quality Gate -> Output
+
+expert_dna_sources:
+  - name: "W. Edwards Deming"
+    domain: "Quality Management, PDCA Cycle, System of Profound Knowledge"
+    applied_to: "Overall squad philosophy, continuous improvement loops"
+  - name: "Atul Gawande"
+    domain: "Checklist Manifesto, surgical safety checklists"
+    applied_to: "Checklist design, simplicity principles, safety-critical SOPs"
+  - name: "Joseph Juran"
+    domain: "Quality Trilogy (Planning, Control, Improvement)"
+    applied_to: "SOP lifecycle management, quality gates"
+  - name: "Taiichi Ohno"
+    domain: "Toyota Production System, Lean Manufacturing, Gemba"
+    applied_to: "Process extraction, waste elimination, standardized work"
+  - name: "Michael Gerber"
+    domain: "E-Myth, Business Systematization"
+    applied_to: "Franchise-ready SOPs, work ON the system"
+  - name: "Philip Crosby"
+    domain: "Zero Defects, Quality is Free"
+    applied_to: "SOP quality auditing, conformance standards"
+  - name: "ISO 9001:2015"
+    domain: "Quality Management Systems"
+    applied_to: "Document control, process approach, risk-based thinking"
+  - name: "FDA 21 CFR Part 11 / GMP"
+    domain: "Pharmaceutical SOP Gold Standard"
+    applied_to: "Regulated SOP format, version control, approval workflows"
+  - name: "Six Sigma DMAIC"
+    domain: "Define-Measure-Analyze-Improve-Control"
+    applied_to: "SOP analysis methodology, statistical process control"
+
+mmos_integration:
+  enabled: false
+  fallback_behavior: "graceful"
+
+workspace_integration:
+  level: none
+  rationale: >-
+    SOP Factory outputs go to outputs/sop-factory/ for generated SOPs
+    and docs/sops/ for canonical organizational SOPs.
+  read_paths: []
+  write_paths: []
+  readiness_owner: coo-orchestrator
+  readiness_resolver: null
+
+# ==============================================================================
+# AGENTS
+# ==============================================================================
+agents:
+  - id: sop-chief
+    name: "SOP Chief"
+    role: "Squad orchestrator and SOP lifecycle coordinator"
+    tier: orchestrator
+    specialty: "Routes requests, coordinates agents, enforces quality standards"
+
+  - id: sop-analyst
+    name: "SOP Analyst"
+    role: "Analyzes and grades existing SOPs"
+    tier: 1
+    specialty: "Multi-dimensional SOP scoring, gap detection, compliance assessment"
+
+  - id: sop-creator
+    name: "SOP Creator"
+    role: "Creates human-readable SOPs from scratch"
+    tier: 1
+    specialty: "FDA/GMP-grade process documentation, visual SOPs, decision trees"
+
+  - id: sop-ml-architect
+    name: "SOP ML Architect"
+    role: "Creates machine-readable/AI-consumable SOPs"
+    tier: 1
+    specialty: "YAML/JSON structured SOPs, state machines, agent-executable procedures"
+
+  - id: sop-extractor
+    name: "SOP Extractor"
+    role: "Extracts SOPs from existing processes"
+    tier: 1
+    specialty: "Process mining, tribal knowledge capture, unstructured-to-structured conversion"
+
+  - id: sop-auditor
+    name: "SOP Auditor"
+    role: "Quality gate and compliance validation"
+    tier: 2
+    specialty: "ISO 9001/FDA audit, zero-defect validation, remediation planning"
+
+# ==============================================================================
+# TASKS
+# ==============================================================================
+tasks:
+  # --- Creation ---
+  - id: create-sop-human
+    name: "Create Human-Readable SOP"
+    category: creation
+    description: "Create a complete SOP optimized for human consumption"
+
+  - id: create-sop-ml
+    name: "Create AI/ML-Readable SOP"
+    category: creation
+    description: "Create a structured SOP for AI agent consumption (YAML/JSON)"
+
+  - id: create-checklist
+    name: "Create Checklist from SOP"
+    category: creation
+    description: "Generate operational checklist from existing SOP"
+
+  # --- Analysis ---
+  - id: analyze-sop
+    name: "Analyze & Grade SOP"
+    category: analysis
+    description: "Multi-dimensional analysis and scoring of an existing SOP"
+
+  - id: benchmark-sop
+    name: "Benchmark SOP Against Standards"
+    category: analysis
+    description: "Compare SOP against ISO/FDA/industry gold standards"
+
+  # --- Extraction ---
+  - id: extract-sop
+    name: "Extract SOP from Process"
+    category: extraction
+    description: "Extract structured SOP from unstructured process description"
+
+  - id: extract-from-video
+    name: "Extract SOP from Video/Transcript"
+    category: extraction
+    description: "Convert video tutorial or transcript into structured SOP"
+
+  # --- Conversion ---
+  - id: convert-sop-format
+    name: "Convert SOP Format"
+    category: conversion
+    description: "Convert between human-readable and ML formats"
+
+  # --- Audit ---
+  - id: audit-sop
+    name: "Full SOP Audit"
+    category: audit
+    description: "Comprehensive compliance and quality audit"
+
+  - id: audit-batch
+    name: "Batch SOP Audit"
+    category: audit
+    description: "Audit multiple SOPs at once with comparative scoring"
+
+# ==============================================================================
+# WORKFLOWS
+# ==============================================================================
+workflows:
+  - id: wf-sop-creation-pipeline
+    name: "SOP Creation Pipeline"
+    category: creation
+    description: "End-to-end SOP creation: gather requirements -> draft -> review -> refine -> validate -> publish"
+
+  - id: wf-sop-audit-pipeline
+    name: "SOP Audit Pipeline"
+    category: audit
+    description: "Full audit: ingest -> analyze -> score -> benchmark -> remediate -> certify"
+
+  - id: wf-sop-extraction-pipeline
+    name: "SOP Extraction Pipeline"
+    category: extraction
+    description: "Extract: capture input -> identify steps -> structure -> validate -> format -> publish"
+
+# ==============================================================================
+# TEMPLATES
+# ==============================================================================
+templates:
+  - id: sop-human-tmpl
+    name: "Human-Readable SOP Template"
+
+  - id: sop-ml-tmpl
+    name: "AI/ML-Readable SOP Template"
+
+  - id: sop-analysis-report-tmpl
+    name: "SOP Analysis Report Template"
+
+  - id: sop-scorecard-tmpl
+    name: "SOP Scorecard Template"
+
+  - id: checklist-from-sop-tmpl
+    name: "Checklist Generation Template"
+
+# ==============================================================================
+# CHECKLISTS
+# ==============================================================================
+checklists:
+  - id: sop-quality-checklist
+    name: "SOP Quality Checklist"
+
+  - id: sop-completeness-checklist
+    name: "SOP Completeness Checklist"
+
+  - id: sop-ml-validation-checklist
+    name: "SOP ML/AI Validation Checklist"
+
+# ==============================================================================
+# DATA (Knowledge Bases)
+# ==============================================================================
+data:
+  - id: sop-scoring-rubric
+    name: "SOP Scoring Rubric"
+    description: "10-dimension scoring rubric with weights and signal definitions"
+
+  - id: sop-standards-reference
+    name: "SOP Standards Reference"
+    description: "Cross-reference of ISO 9001, FDA/GMP, TPS, Six Sigma requirements"
+
+  - id: sop-ml-schema
+    name: "SOP ML Schema Definition"
+    description: "YAML/JSON schema for machine-readable SOPs"
+
+# ==============================================================================
+# DEPENDENCIES & TAGS
+# ==============================================================================
+dependencies:
+  squads:
+    - aiox-core
+
+tags:
+  - sop
+  - standard-operating-procedures
+  - process-documentation
+  - quality-management
+  - iso-9001
+  - fda-gmp
+  - six-sigma
+  - lean
+  - toyota-production-system
+  - checklist
+  - ai-readable-sop
+  - machine-learning
+  - process-extraction
+  - compliance
+  - audit
+  - deming
+  - gawande
+  - juran

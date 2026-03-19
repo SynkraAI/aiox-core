@@ -1,0 +1,24 @@
+{
+  "legacyEditor": false,
+  "livePreview": true,
+  "defaultViewMode": "source",
+  "showFrontmatter": true,
+  "showLineNumber": true,
+  "spellcheck": true,
+  "spellcheckLanguages": [
+    "pt-BR"
+  ],
+  "strictLineBreaks": false,
+  "vimMode": false,
+  "readableLineLength": true,
+  "promptDelete": true,
+  "newFileLocation": "current",
+  "attachmentFolderPath": "Recursos",
+  "showInlineTitle": true,
+  "pdfExportSettings": {
+    "pageSize": "A4",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  }
+}

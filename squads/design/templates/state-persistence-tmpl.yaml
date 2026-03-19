@@ -1,0 +1,219 @@
+# .state.yaml
+# Design System State Tracking
+# Brad writes audit/consolidation/tokenization data
+# Merovingian reads and writes component building data
+# Enables seamless handoff between agents
+
+version: "1.0"
+project_name: "{{project_name}}"
+created_at: "{{created_timestamp}}"
+updated_at: "{{updated_timestamp}}"
+tailwind_version: "{{tailwind_version}}"
+
+# Current phase in design system workflow
+system_state:
+  phase: "{{current_phase}}"  # audit_complete | consolidation_complete | tokenize_complete | migration_strategy_complete | setup_complete | building_components
+
+  # Phase 1: Inventory (Brad)
+  inventory:
+    scanned_at: "{{scan_timestamp}}"
+    scan_path: "{{scan_path}}"
+    total_files: {{total_files}}
+    frameworks_detected:
+      react: {{has_react}}
+      vue: {{has_vue}}
+      html: {{has_html}}
+    patterns:
+      buttons:
+        unique: {{buttons_unique}}
+        instances: {{buttons_instances}}
+        redundancy_factor: {{buttons_redundancy}}
+      colors:
+        unique: {{colors_unique}}
+        instances: {{colors_instances}}
+        redundancy_factor: {{colors_redundancy}}
+      spacing:
+        unique_padding: {{spacing_padding}}
+        unique_margin: {{spacing_margin}}
+      typography:
+        unique_fonts: {{typography_fonts}}
+        unique_sizes: {{typography_sizes}}
+        unique_weights: {{typography_weights}}
+      forms:
+        unique_inputs: {{forms_inputs}}
+        unique_forms: {{forms_forms}}
+    estimated_monthly_cost: "{{estimated_cost}}"
+
+  # Phase 2: Consolidation (Brad)
+  consolidation:
+    completed_at: "{{consolidation_timestamp}}"
+    patterns_consolidated:
+      colors:
+        before: {{colors_before}}
+        after: {{colors_after}}
+        reduction: "{{colors_reduction}}%"
+        clusters: {{colors_clusters}}
+      buttons:
+        before: {{buttons_before}}
+        after: {{buttons_after}}
+        reduction: "{{buttons_reduction}}%"
+        variants: {{buttons_variants}}
+      spacing:
+        before: {{spacing_before}}
+        after: {{spacing_after}}
+        reduction: "{{spacing_reduction}}%"
+        scale: {{spacing_scale}}
+      typography:
+        before: {{typography_before}}
+        after: {{typography_after}}
+        reduction: "{{typography_reduction}}%"
+    overall_reduction: "{{overall_reduction}}%"
+    target_met: {{target_met}}
+    user_overrides: {{user_overrides}}
+
+  # Phase 3: Tokenization (Brad)
+  tokens:
+    generated_at: "{{token_timestamp}}"
+    version: "{{token_version}}"
+    location: "{{token_location}}"
+    exports:
+      - tokens.yaml
+      - tokens.json
+      - tokens.css
+      - tokens.tailwind.js
+      - tokens.scss
+      - tokens.dtcg.json
+    categories:
+      color: {{token_color_count}}
+      spacing: {{token_spacing_count}}
+      typography: {{token_typography_count}}
+      radius: {{token_radius_count}}
+      shadow: {{token_shadow_count}}
+    total_tokens: {{total_tokens}}
+    coverage: "{{token_coverage}}%"
+    dtcg_compliant: {{token_dtcg_compliant}}
+    color_space: "{{token_color_space}}"
+
+  # Phase 4: ROI Analysis (Brad)
+  roi:
+    calculated_at: "{{roi_timestamp}}"
+    before:
+      patterns: {{patterns_before}}
+      monthly_cost: {{monthly_cost_before}}
+      annual_cost: {{annual_cost_before}}
+    after:
+      patterns: {{patterns_after}}
+      monthly_cost: {{monthly_cost_after}}
+      annual_cost: {{annual_cost_after}}
+    savings:
+      monthly: {{monthly_savings}}
+      annual: {{annual_savings}}
+    implementation:
+      estimated_cost: {{implementation_cost}}
+    roi_metrics:
+      ratio: {{roi_ratio}}
+      breakeven_months: {{breakeven_months}}
+
+  # Phase 5: Migration Strategy (Brad)
+  migration:
+    strategy_created_at: "{{migration_timestamp}}"
+    phases:
+      - phase: 1
+        name: "Foundation"
+        duration_sprints: 1
+        status: {{phase1_status}}
+      - phase: 2
+        name: "High-Impact"
+        duration_sprints: 2-3
+        priorities: {{phase2_priorities}}
+        status: {{phase2_status}}
+      - phase: 3
+        name: "Long-Tail"
+        duration_sprints: 2-4
+        status: {{phase3_status}}
+      - phase: 4
+        name: "Enforcement"
+        duration_sprints: 1
+        status: {{phase4_status}}
+    current_phase: {{current_migration_phase}}
+    completion_percentage: {{migration_completion}}
+    estimated_completion: "{{migration_completion_date}}"
+
+  # Phase 6: Merovingian Setup
+  atlas_setup:
+    completed_at: "{{atlas_setup_timestamp}}"
+    starting_point: "{{starting_point}}"  # brownfield | greenfield
+    configuration:
+      component_directory: "{{component_dir}}"
+      css_approach: "{{css_approach}}"
+      test_framework: "{{test_framework}}"
+      storybook_enabled: {{storybook_enabled}}
+    tokens_loaded: {{tokens_loaded_success}}
+
+  # Phase 7: Component Building (Merovingian)
+  patterns_built:
+    atoms:
+      total: {{atoms_total}}
+      components: {{atoms_list}}
+    molecules:
+      total: {{molecules_total}}
+      components: {{molecules_list}}
+    organisms:
+      total: {{organisms_total}}
+      components: {{organisms_list}}
+    templates:
+      total: {{templates_total}}
+      components: {{templates_list}}
+
+  # Documentation (Merovingian)
+  documentation:
+    generated_at: "{{docs_timestamp}}"
+    components_documented: {{docs_components}}
+    pattern_library_location: "{{docs_location}}"
+
+  # Integration (Merovingian)
+  integrations:
+    mmos:
+      status: {{mmos_integration_status}}
+      components: {{mmos_components}}
+    creator_os:
+      status: {{creator_os_integration_status}}
+      components: {{creator_os_components}}
+    innerlens:
+      status: {{innerlens_integration_status}}
+      components: {{innerlens_components}}
+
+  tooling:
+    tailwind:
+      version: "{{tailwind_version}}"
+      upgraded_at: "{{tailwind_upgraded_at}}"
+      oxide_benchmark:
+        full_build_ms: {{tailwind_full_build_ms}}
+        incremental_build_us: {{tailwind_incremental_build_us}}
+      theme_layers_validated: {{tailwind_theme_validated}}
+    design_tokens:
+      dtcg_version: "{{dtcg_version}}"
+      exports:
+        json: {{dtcg_json_path}}
+        yaml: {{dtcg_yaml_path}}
+      okclh_coverage: "{{oklch_coverage}}"
+    shadcn:
+      bootstrap_completed_at: "{{shadcn_bootstrap_timestamp}}"
+      components_installed: {{shadcn_components}}
+    dark_mode:
+      enabled: {{dark_mode_enabled}}
+      parity_score: "{{dark_mode_parity_score}}"
+
+# Agent execution history (for debugging and handoff)
+agent_history:
+  - agent: "{{agent_name}}"
+    command: "{{command}}"
+    timestamp: "{{command_timestamp}}"
+    args: {{command_args}}
+    status: "{{command_status}}"
+
+# Flags for agent communication
+flags:
+  ready_for_atlas: {{ready_for_atlas}}
+  ready_for_migration: {{ready_for_migration}}
+  system_complete: {{system_complete}}

@@ -1,0 +1,207 @@
+name: self-healing-design-system
+id: self-healing-workflow
+version: 1.0.0
+description: |
+  Workflow de auto-correção para design system.
+  Usa ferramentas existentes (Vercel, CodeRabbit, GitHub Actions) para detectar e corrigir problemas automaticamente.
+type: legacy
+triggers:
+  - on_push:
+      paths:
+        - workspace/ui/**
+        - workspace/system/**
+        - workspace/domains/design-system/**
+  - on_pr:
+      paths:
+        - "**/*.tsx"
+        - "**/*.css"
+  - scheduled:
+      cron: 0 6 * * 1
+detection:
+  lint:
+    tool: eslint
+    config: .eslintrc.js
+    auto_fix: true
+    severity_threshold: warning
+  typecheck:
+    tool: typescript
+    config: tsconfig.json
+    strict: true
+  accessibility:
+    tool: axe-core
+    rules:
+      - wcag2aa
+      - best-practice
+    severity_threshold: serious
+  token_drift:
+    tool: custom
+    script: scripts/detect-token-drift.cjs
+    checks:
+      - hardcoded_colors: true
+      - hardcoded_spacing: true
+      - missing_css_vars: true
+  registry_sync:
+    tool: custom
+    script: scripts/validate-registry-sync.cjs
+    checks:
+      - component_count_match: true
+      - metadata_completeness: true
+auto_fix:
+  automatic:
+    - type: lint
+      action: eslint --fix
+      commit_message: "fix(ds): auto-fix lint issues"
+    - type: formatting
+      action: prettier --write
+      commit_message: "style(ds): auto-format code"
+    - type: imports
+      action: "eslint --fix --rule 'import/order: error'"
+      commit_message: "fix(ds): organize imports"
+  requires_approval:
+    - type: token_replacement
+      description: Substituir hardcoded values por tokens
+      action: scripts/replace-hardcoded-tokens.cjs
+      approval_channel: "#design-system"
+    - type: a11y_fix
+      description: Adicionar atributos de acessibilidade
+      action: scripts/add-a11y-attributes.cjs
+      approval_channel: "#design-system"
+    - type: component_migration
+      description: Migrar componente para novo padrão
+      action: scripts/migrate-component.cjs
+      approval_channel: "#design-system"
+integrations:
+  vercel:
+    enabled: true
+    features:
+      - preview_deployments: true
+      - build_error_detection: true
+      - performance_monitoring: true
+    auto_actions:
+      - on_build_fail: notify_slack
+      - on_perf_regression: create_issue
+  coderabbit:
+    enabled: true
+    features:
+      - pr_review: true
+      - security_scan: true
+      - pattern_detection: true
+    config:
+      focus:
+        - design_system_patterns
+        - accessibility
+        - token_usage
+  github_actions:
+    enabled: true
+    workflows:
+      - design-ci.yml
+      - copy-lint.yml
+    auto_actions:
+      - on_check_fail: add_comment
+      - on_fix_available: create_suggestion
+  sentry:
+    enabled: true
+    features:
+      - error_tracking: true
+      - performance_monitoring: true
+    alerts:
+      - on_spike: notify_slack
+      - on_new_error: create_issue
+notifications:
+  channels:
+    slack:
+      webhook: ${SLACK_WEBHOOK_URL}
+      channel: "#design-system"
+    github:
+      issues: true
+      prs: true
+      comments: true
+  templates:
+    auto_fix_applied:
+      title: 🔧 Auto-fix applied
+      body: |
+        **Type:** {fix_type}
+        **Files:** {files_changed}
+        **Commit:** {commit_sha}
+    fix_requires_approval:
+      title: ⚠️ Fix requires approval
+      body: |
+        **Type:** {fix_type}
+        **Description:** {description}
+        **Impact:** {files_affected} files
+        **Action:** Review and approve in PR #{pr_number}
+    detection_report:
+      title: 📊 Weekly Design System Health
+      body: |
+        **Period:** {start_date} - {end_date}
+
+        **Issues Detected:** {total_issues}
+        **Auto-fixed:** {auto_fixed} ({auto_fix_rate}%)
+        **Pending Review:** {pending_review}
+
+        **Top Issues:**
+        {top_issues_list}
+metrics:
+  track:
+    - auto_fix_rate
+    - detection_accuracy
+    - mean_time_to_fix
+    - issues_by_type
+    - issues_by_component
+  targets:
+    auto_fix_rate: 80%
+    mean_time_to_fix: < 24h
+    detection_accuracy: 95%
+rollback:
+  enabled: true
+  triggers:
+    - build_failure_after_fix
+    - test_failure_after_fix
+    - manual_request
+  actions:
+    - revert_commit
+    - notify_team
+    - create_incident
+quality_gates:
+  pre_merge:
+    - lint_pass: required
+    - typecheck_pass: required
+    - a11y_pass: required
+    - token_drift_check: required
+    - registry_sync: required
+  post_deploy:
+    - lighthouse_score: ">= 90"
+    - core_web_vitals: pass
+    - error_rate: < 0.1%
+workflow:
+  id: self-healing-workflow
+  name: self-healing-design-system
+  version: 1.0.0
+  description: |
+    Workflow de auto-correção para design system.
+    Usa ferramentas existentes (Vercel, CodeRabbit, GitHub Actions) para detectar e corrigir problemas automaticamente.
+  type: legacy
+  sequence:
+    - step: sequence
+      id: sequence
+      phase: 1
+      phase_name: sequence
+      agent: aiox-master
+      action: execute_process-section-sequence
+      next: detection
+    - step: detection
+      id: detection
+      phase: 2
+      phase_name: detection
+      agent: aiox-master
+      action: execute_process-section-detection
+      next: auto-fix
+    - step: auto-fix
+      id: auto-fix
+      phase: 3
+      phase_name: auto_fix
+      agent: aiox-master
+      action: execute_process-section-auto-fix
+    - workflow_end:
+        id: complete
+        action: workflow_complete

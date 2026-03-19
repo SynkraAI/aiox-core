@@ -1,0 +1,551 @@
+{
+  "language": "pt",
+  "original_segments": 123,
+  "cleaned_segments": 68,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 2.98,
+      "start_formatted": "00:00",
+      "end_formatted": "00:02",
+      "text": "Agora chegou a hora de a gente fazer a cópia do anúncio.",
+      "type": "speech"
+    },
+    {
+      "start": 3.18,
+      "end": 4.64,
+      "start_formatted": "00:03",
+      "end_formatted": "00:04",
+      "text": "A cópia, na verdade, você já fez.",
+      "type": "speech"
+    },
+    {
+      "start": 4.76,
+      "end": 6.18,
+      "start_formatted": "00:04",
+      "end_formatted": "00:06",
+      "text": "Chegou a hora de a gente fazer o anúncio.",
+      "type": "speech"
+    },
+    {
+      "start": 6.5200000000000005,
+      "end": 9.120000000000001,
+      "start_formatted": "00:06",
+      "end_formatted": "00:09",
+      "text": "Eu fiz tudo anúncio e imagem. Então, qual é o site que eu entrei?",
+      "type": "speech"
+    },
+    {
+      "start": 9.44,
+      "end": 12.780000000000001,
+      "start_formatted": "00:09",
+      "end_formatted": "00:12",
+      "text": "Canva.com e fiz tudo de graça. O que eu fiz?",
+      "type": "speech"
+    },
+    {
+      "start": 12.84,
+      "end": 14.24,
+      "start_formatted": "00:12",
+      "end_formatted": "00:14",
+      "text": "Eu fiz vários anúncios.",
+      "type": "speech"
+    },
+    {
+      "start": 14.52,
+      "end": 19.44,
+      "start_formatted": "00:14",
+      "end_formatted": "00:19",
+      "text": "Fiz o anúncio 1, plano como vender de 10 a 30 mentorias de R$2.997,",
+      "type": "speech"
+    },
+    {
+      "start": 19.84,
+      "end": 21.52,
+      "start_formatted": "00:19",
+      "end_formatted": "00:21",
+      "text": "todos os meses com funil automático.",
+      "type": "speech"
+    },
+    {
+      "start": 22.32,
+      "end": 25.900000000000002,
+      "start_formatted": "00:22",
+      "end_formatted": "00:25",
+      "text": "Plano como vender de 10 a 30 mentorias de R$2.997,",
+      "type": "speech"
+    },
+    {
+      "start": 26.12,
+      "end": 30.98,
+      "start_formatted": "00:26",
+      "end_formatted": "00:30",
+      "text": "todos os meses com funil automático. 3, fui mudando, mudei poucas coisas.",
+      "type": "speech"
+    },
+    {
+      "start": 31.48,
+      "end": 35.879999999999995,
+      "start_formatted": "00:31",
+      "end_formatted": "00:35",
+      "text": "O que eu fiz? Como vender? Esse anúncio aqui foi o melhor que deu.",
+      "type": "speech"
+    },
+    {
+      "start": 36.48,
+      "end": 40.68,
+      "start_formatted": "00:36",
+      "end_formatted": "00:40",
+      "text": "Foi o quarto anúncio. Eu fiz 22 anúncios na primeira semana.",
+      "type": "speech"
+    },
+    {
+      "start": 40.9,
+      "end": 42.879999999999995,
+      "start_formatted": "00:40",
+      "end_formatted": "00:42",
+      "text": "Quer vender de 10 a 20 mentorias por mês?",
+      "type": "speech"
+    },
+    {
+      "start": 43.28,
+      "end": 46.46,
+      "start_formatted": "00:43",
+      "end_formatted": "00:46",
+      "text": "Sua jornada para vender 20 mentorias começa em um vídeo de 10 minutos.",
+      "type": "speech"
+    },
+    {
+      "start": 46.58,
+      "end": 49.480000000000004,
+      "start_formatted": "00:46",
+      "end_formatted": "00:49",
+      "text": "Descubra como. 50k por mês com mentorias.",
+      "type": "speech"
+    },
+    {
+      "start": 49.56,
+      "end": 51.879999999999995,
+      "start_formatted": "00:49",
+      "end_formatted": "00:51",
+      "text": "Liberei um vídeo de 5 minutos explicando como isso é possível.",
+      "type": "speech"
+    },
+    {
+      "start": 52.64,
+      "end": 57.34,
+      "start_formatted": "00:52",
+      "end_formatted": "00:57",
+      "text": "Então, cara, eu fiz 20 anúncios, tudo da mesma promessa,",
+      "type": "speech"
+    },
+    {
+      "start": 57.34,
+      "end": 58.080000000000005,
+      "start_formatted": "00:57",
+      "end_formatted": "00:58",
+      "text": "é diferente.",
+      "type": "speech"
+    },
+    {
+      "start": 58.300000000000004,
+      "end": 61.92,
+      "start_formatted": "00:58",
+      "end_formatted": "01:01",
+      "text": "E o anúncio que mais me trouxe lead foi o anúncio 4.",
+      "type": "speech"
+    },
+    {
+      "start": 62.52,
+      "end": 65.62,
+      "start_formatted": "01:02",
+      "end_formatted": "01:05",
+      "text": "Renan, por que eu estou falando isso? Cara, você faz 1,",
+      "type": "speech"
+    },
+    {
+      "start": 66.16,
+      "end": 69.66,
+      "start_formatted": "01:06",
+      "end_formatted": "01:09",
+      "text": "vem aqui e duplica e vai mudando. Então, não tem segredo.",
+      "type": "speech"
+    },
+    {
+      "start": 69.72,
+      "end": 73.18,
+      "start_formatted": "01:09",
+      "end_formatted": "01:13",
+      "text": "Eu fiz vários anúncios, mas sempre com a mesma promessa,",
+      "type": "speech"
+    },
+    {
+      "start": 73.24000000000001,
+      "end": 75.68,
+      "start_formatted": "01:13",
+      "end_formatted": "01:15",
+      "text": "jogando para a mesma página. É isso que você tem que fazer.",
+      "type": "speech"
+    },
+    {
+      "start": 76.02000000000001,
+      "end": 80.30000000000001,
+      "start_formatted": "01:16",
+      "end_formatted": "01:20",
+      "text": "4, 5, 6 modelos, vai lá e coloca lá. Está vindo lead bom,",
+      "type": "speech"
+    },
+    {
+      "start": 80.42,
+      "end": 82.96000000000001,
+      "start_formatted": "01:20",
+      "end_formatted": "01:22",
+      "text": "está vindo lead... Olha as fotinhos da pessoa.",
+      "type": "speech"
+    },
+    {
+      "start": 83.08000000000001,
+      "end": 87.26,
+      "start_formatted": "01:23",
+      "end_formatted": "01:27",
+      "text": "Como que eu avalio? Lá no Instagram, as pessoas vão começar a mandar direct,",
+      "type": "speech"
+    },
+    {
+      "start": 87.34,
+      "end": 89.8,
+      "start_formatted": "01:27",
+      "end_formatted": "01:29",
+      "text": "eu entro no Instagram e avalio as fotinhos.",
+      "type": "speech"
+    },
+    {
+      "start": 89.96000000000001,
+      "end": 92.28,
+      "start_formatted": "01:29",
+      "end_formatted": "01:32",
+      "text": "Olha se a pessoa tem dinheiro, se é um público qualificado,",
+      "type": "speech"
+    },
+    {
+      "start": 92.62,
+      "end": 96.74000000000001,
+      "start_formatted": "01:32",
+      "end_formatted": "01:36",
+      "text": "se está com cara. Se vem gente com parede de sarapico,",
+      "type": "speech"
+    },
+    {
+      "start": 97.18,
+      "end": 100.72,
+      "start_formatted": "01:37",
+      "end_formatted": "01:40",
+      "text": "eu já paro o anúncio. Se vem gente lá, começa a pitar lá,",
+      "type": "speech"
+    },
+    {
+      "start": 100.80000000000001,
+      "end": 102.24000000000001,
+      "start_formatted": "01:40",
+      "end_formatted": "01:42",
+      "text": "pi, pi, pi, pi, né, sabe?",
+      "type": "speech"
+    },
+    {
+      "start": 102.58,
+      "end": 104.52000000000001,
+      "start_formatted": "01:42",
+      "end_formatted": "01:44",
+      "text": "Pessoas que estão precisando de dinheiro,",
+      "type": "speech"
+    },
+    {
+      "start": 104.64,
+      "end": 106.72,
+      "start_formatted": "01:44",
+      "end_formatted": "01:46",
+      "text": "já desligo aquele criativo e vou para o próximo.",
+      "type": "speech"
+    },
+    {
+      "start": 107.14,
+      "end": 110.4,
+      "start_formatted": "01:47",
+      "end_formatted": "01:50",
+      "text": "Porque nem sempre o criativo que traz pessoas mais...",
+      "type": "speech"
+    },
+    {
+      "start": 111.96000000000001,
+      "end": 113.94,
+      "start_formatted": "01:51",
+      "end_formatted": "01:53",
+      "text": "mais pessoas é o melhor criativo.",
+      "type": "speech"
+    },
+    {
+      "start": 113.94,
+      "end": 116.12,
+      "start_formatted": "01:53",
+      "end_formatted": "01:56",
+      "text": "O melhor criativo é o que traz as pessoas qualificadas",
+      "type": "speech"
+    },
+    {
+      "start": 116.12,
+      "end": 117.32000000000001,
+      "start_formatted": "01:56",
+      "end_formatted": "01:57",
+      "text": "pronto para comprar o nosso produto.",
+      "type": "speech"
+    },
+    {
+      "start": 117.34,
+      "end": 121.14,
+      "start_formatted": "01:57",
+      "end_formatted": "02:01",
+      "text": "Então, o criativo que mais me trouxe foi esse criativo aqui,",
+      "type": "speech"
+    },
+    {
+      "start": 121.14,
+      "end": 125.14,
+      "start_formatted": "02:01",
+      "end_formatted": "02:05",
+      "text": "que está aqui abaixo do vídeo. Então, não tem segredo.",
+      "type": "speech"
+    },
+    {
+      "start": 125.14,
+      "end": 127.34,
+      "start_formatted": "02:05",
+      "end_formatted": "02:07",
+      "text": "Como que faz, né? Vou fazer um anúncio aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 127.34,
+      "end": 132.54,
+      "start_formatted": "02:07",
+      "end_formatted": "02:12",
+      "text": "Ó, vem aqui, duplica, escreve o texto. Cara, não tem segredo.",
+      "type": "speech"
+    },
+    {
+      "start": 132.54,
+      "end": 138.14000000000001,
+      "start_formatted": "02:12",
+      "end_formatted": "02:18",
+      "text": "Ó, vou colocar um texto aqui. É... texto, bota um título.",
+      "type": "speech"
+    },
+    {
+      "start": 138.14000000000001,
+      "end": 146.76,
+      "start_formatted": "02:18",
+      "end_formatted": "02:26",
+      "text": "Como vender de 10 a 30 mentorias. Ó, vou colocar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 147.34,
+      "end": 155.34,
+      "start_formatted": "02:27",
+      "end_formatted": "02:35",
+      "text": "Nos próximos... próximos 30 dias. Pronto, agora o que eu vou fazer?",
+      "type": "speech"
+    },
+    {
+      "start": 155.34,
+      "end": 159.34,
+      "start_formatted": "02:35",
+      "end_formatted": "02:39",
+      "text": "Vou deixar agradável a leitura, vou botar o texto aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 159.34,
+      "end": 165.34,
+      "start_formatted": "02:39",
+      "end_formatted": "02:45",
+      "text": "Pronto. Para cá. Opa, não quero esse centralizado.",
+      "type": "speech"
+    },
+    {
+      "start": 165.34,
+      "end": 169.34,
+      "start_formatted": "02:45",
+      "end_formatted": "02:49",
+      "text": "Pronto, eu quero assim. Nos próximos 30 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 169.34,
+      "end": 173.34,
+      "start_formatted": "02:49",
+      "end_formatted": "02:53",
+      "text": "Como vender de 10 a 30 mentorias nos próximos 30 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 173.34,
+      "end": 177.14000000000001,
+      "start_formatted": "02:53",
+      "end_formatted": "02:57",
+      "text": "Pronto, daí eu boto um centro, um centro de 30 dias,",
+      "type": "speech"
+    },
+    {
+      "start": 177.14,
+      "end": 180.14,
+      "start_formatted": "02:57",
+      "end_formatted": "03:00",
+      "text": "um CTA. Qual é o CTA? Já tá aqui, ó.",
+      "type": "speech"
+    },
+    {
+      "start": 180.14,
+      "end": 182.14,
+      "start_formatted": "03:00",
+      "end_formatted": "03:02",
+      "text": "Não vou ficar escrevendo aqui com um texto aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 182.14,
+      "end": 184.14,
+      "start_formatted": "03:02",
+      "end_formatted": "03:04",
+      "text": "Envie... Aqui vai ter a palavra-chave.",
+      "type": "speech"
+    },
+    {
+      "start": 184.14,
+      "end": 188.14,
+      "start_formatted": "03:04",
+      "end_formatted": "03:08",
+      "text": "Envie 54K no meu direct e eu lhe enviarei um plano,",
+      "type": "speech"
+    },
+    {
+      "start": 188.14,
+      "end": 191.14,
+      "start_formatted": "03:08",
+      "end_formatted": "03:11",
+      "text": "um vídeo de 5 minutos. Pronto. Tá pronto aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 191.14,
+      "end": 197.14,
+      "start_formatted": "03:11",
+      "end_formatted": "03:17",
+      "text": "O que que eu faço? Duplico. Como vender de...",
+      "type": "speech"
+    },
+    {
+      "start": 197.14,
+      "end": 202.14,
+      "start_formatted": "03:17",
+      "end_formatted": "03:22",
+      "text": "Como vender de 10 a 30 mentorias... É...",
+      "type": "speech"
+    },
+    {
+      "start": 202.14,
+      "end": 211.14,
+      "start_formatted": "03:22",
+      "end_formatted": "03:31",
+      "text": "De 2.997. 2.997. Como vender...",
+      "type": "speech"
+    },
+    {
+      "start": 211.14,
+      "end": 214.14,
+      "start_formatted": "03:31",
+      "end_formatted": "03:34",
+      "text": "Ou posso fazer assim ainda, bem específico, ó.",
+      "type": "speech"
+    },
+    {
+      "start": 214.14,
+      "end": 225.14,
+      "start_formatted": "03:34",
+      "end_formatted": "03:45",
+      "text": "Como vender 20 mentorias... Por 2.997. Como vender 20 mentorias...",
+      "type": "speech"
+    },
+    {
+      "start": 225.14,
+      "end": 236.14,
+      "start_formatted": "03:45",
+      "end_formatted": "03:56",
+      "text": "Mentorias... Por 2.997. Nos próximos 30 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 236.14,
+      "end": 239.14,
+      "start_formatted": "03:56",
+      "end_formatted": "03:59",
+      "text": "Olha que legal esse aqui. Esse aqui eu não utilizei ainda.",
+      "type": "speech"
+    },
+    {
+      "start": 239.14,
+      "end": 243.14,
+      "start_formatted": "03:59",
+      "end_formatted": "04:03",
+      "text": "Como vender 20 mentorias por 2.997 nos próximos 30 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 243.14,
+      "end": 245.14,
+      "start_formatted": "04:03",
+      "end_formatted": "04:05",
+      "text": "Pronto, já tô até falando o valor da minha mentoria.",
+      "type": "speech"
+    },
+    {
+      "start": 245.14,
+      "end": 249.14,
+      "start_formatted": "04:05",
+      "end_formatted": "04:09",
+      "text": "É o valor da minha mentoria. Pronto. Simples assim.",
+      "type": "speech"
+    },
+    {
+      "start": 249.14,
+      "end": 252.14,
+      "start_formatted": "04:09",
+      "end_formatted": "04:12",
+      "text": "Tá pronto. O que que você vai fazer? Vai fazer o anúncio.",
+      "type": "speech"
+    },
+    {
+      "start": 252.14,
+      "end": 254.14,
+      "start_formatted": "04:12",
+      "end_formatted": "04:14",
+      "text": "Simples. Fácil pra caramba.",
+      "type": "speech"
+    },
+    {
+      "start": 254.14,
+      "end": 258.14,
+      "start_formatted": "04:14",
+      "end_formatted": "04:18",
+      "text": "E se você quiser fazer o vídeo, na aula anterior tem lá a cópia de como fazer o vídeo.",
+      "type": "speech"
+    },
+    {
+      "start": 258.14,
+      "end": 260.14,
+      "start_formatted": "04:18",
+      "end_formatted": "04:20",
+      "text": "Tamo junto. Até a próxima aula.",
+      "type": "speech"
+    }
+  ]
+}

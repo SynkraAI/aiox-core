@@ -1,0 +1,137 @@
+workflow:
+  id: wf-campaign-week
+  name: "Campaign Week"
+  description: "Campanha semanal completa: seleção de gatilho + Copy Andromeda + hook injection + distribuição DREAM (sistema 54 campanhas/ano)"
+  squad: presenca-digital
+  version: 1.0.0
+  trigger: "Início de semana de campanha — conforme cadência de 54 campanhas/ano do Natanael Oliveira"
+  estimated_duration: "5-6h"
+  depends_on: wf-content-from-brand
+  flow: unidirectional
+  cadence: "weekly (54 campaigns/year)"
+
+phases:
+  - id: phase-1
+    name: "Campaign Brief"
+    agent: presenca-digital-chief
+    description: "Seleciona o gatilho da semana dentre os 7 gatilhos de Natanael, define o tema da campanha e alinha com calendário editorial"
+    inputs:
+      - editorial-calendar-monthly.md
+      - content-pillars.md
+      - brand-brief.md
+    outputs:
+      - campaign-brief.md
+    checkpoint:
+      type: human
+      criteria:
+        - "Gatilho da semana selecionado (1 dos 7: curiosidade, medo, ganância, urgência, prova social, autoridade, reciprocidade)"
+        - "Tema da campanha conectado a um pilar de conteúdo"
+        - "Objetivo da campanha definido: awareness, lead gen, conversão, engajamento"
+        - "Plataformas-alvo e volume de criativos estimado (30-70 por campanha)"
+        - "Campanha alinhada ao calendário sem conflito com batch semanal"
+      veto_conditions:
+        - "Gatilho escolhido já usado nas últimas 2 semanas — trocar para evitar repetição"
+        - "Tema não conectado a nenhum pilar estratégico — redirecionar"
+        - "Objetivo de campanha não definido — bloqueio total"
+    next: phase-2
+
+  - id: phase-2
+    name: "Copy Engine"
+    agent: natanael-oliveira
+    description: "Executa Copy Andromeda: gera criativos organizados por sentimento emocional, de 30 a 70 variações para teste e distribuição"
+    inputs:
+      - campaign-brief.md
+      - brand-voice-guidelines.md
+      - content-pillars.md
+    outputs:
+      - campaign-copies-raw.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "Mínimo 30 variações de copy geradas"
+        - "Criativos organizados por sentimento (ex: medo do fracasso, desejo de sucesso, curiosidade, etc.)"
+        - "Cada copy tem: headline, body, CTA"
+        - "Gatilho da semana ativado em 100% dos criativos"
+        - "Voz alinhada ao brand voice guidelines"
+        - "Copy Andromeda framework aplicado (estrutura de 5 atos quando aplicável)"
+      veto_conditions:
+        - "Menos de 30 variações — insuficiente para sistema Andromeda, continuar gerando"
+        - "Gatilho não presente na headline ou abertura — reescrever"
+        - "Criativos sem CTA definido — adicionar antes de avançar"
+        - "Voz desalinhada com brand guidelines — refatorar batch completo"
+    next: phase-3
+
+  - id: phase-3
+    name: "Hook Injection"
+    agent: brendan-kane
+    description: "Aplica Hook Point em cada criativo: reforça os primeiros 3 segundos de cada copy para captura máxima de atenção"
+    inputs:
+      - campaign-copies-raw.md
+      - hook-patterns.md
+      - campaign-brief.md
+    outputs:
+      - campaign-copies-hooked.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "Todos os criativos revisados com Hook Point aplicado"
+        - "Primeiros 3 segundos de cada criativo otimizados"
+        - "Variações de hook A/B criadas para os 10 melhores criativos"
+        - "Hook alinhado ao gatilho emocional de cada criativo"
+      veto_conditions:
+        - "Hooks genéricos sem relação com o sentimento do criativo — retrabalhar"
+        - "Mais de 20% dos criativos sem revisão de hook — bloquear avanço"
+    next: phase-4
+
+  - id: phase-4
+    name: "Multi-Platform Adapt"
+    agent: ross-simmonds
+    description: "Aplica DREAM framework para adaptar a campanha a cada plataforma: formato, timing, tom e mecânica de distribuição"
+    inputs:
+      - campaign-copies-hooked.md
+      - campaign-brief.md
+      - content-os.md
+    outputs:
+      - campaign-distribution-plan.md
+      - campaign-platform-adaptations.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "DREAM aplicado: Distribute, Repurpose, Engage, Automate, Monitor"
+        - "Criativos adaptados por plataforma (LinkedIn, Instagram, TikTok, Email, etc.)"
+        - "Timing de publicação definido por plataforma ao longo da semana"
+        - "Sequência de lançamento dos criativos planejada (não publicar tudo no dia 1)"
+        - "Métricas de sucesso definidas por plataforma"
+      veto_conditions:
+        - "Campanha concentrada em uma única plataforma sem justificativa — revisar"
+        - "Sem sequência de publicação — todos os criativos no mesmo dia é erro de distribuição"
+        - "Métricas ausentes — sem dados não há otimização"
+    next: phase-5
+
+  - id: phase-5
+    name: "Campaign Review"
+    agent: presenca-digital-chief
+    description: "Revisão final de coerência: campanha completa verificada contra brand alignment, pilares e objetivos da semana"
+    inputs:
+      - campaign-copies-hooked.md
+      - campaign-platform-adaptations.md
+      - campaign-distribution-plan.md
+      - brand-voice-guidelines.md
+      - brand-soul-canvas.md
+    outputs:
+      - campaign-approved.md
+      - campaign-qa-report.md
+    checkpoint:
+      type: human
+      criteria:
+        - "100% dos criativos principais revisados pelo chief"
+        - "Campanha coerente com brand soul (valores, propósito, posicionamento)"
+        - "Nenhum criativo viola brand voice guidelines"
+        - "Plano de distribuição viável para execução na semana"
+        - "campaign-qa-report.md assinado e campanha liberada"
+      veto_conditions:
+        - "Criativo viola brand soul ou valores — remover antes de publicar"
+        - "Tom da campanha inconsistente entre plataformas — harmonizar"
+        - "Mais de 15% dos criativos reprovados — retornar à phase-2 com brief revisado"
+        - "Distribuição sobrecarrega uma única plataforma — rebalancear com ross-simmonds"
+    next: END

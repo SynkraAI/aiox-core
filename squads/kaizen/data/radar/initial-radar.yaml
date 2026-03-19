@@ -1,0 +1,75 @@
+# Initial Technology Radar — Kaizen Squad
+# Date: 2026-02-15
+# Status: Baseline (to be updated by tech-radar agent)
+
+quadrants:
+  APIs:
+    adopt:
+      - name: "Gemini API"
+        since: "2025-Q4"
+        used_by: ["content-engine", "marketing"]
+        notes: "Primary image gen + text gen"
+      - name: "OpenAI API"
+        since: "2025-Q3"
+        used_by: ["content-engine"]
+        notes: "GPT-4 for specific tasks"
+    trial:
+      - name: "Together.ai"
+        since: "2026-Q1"
+        used_by: ["marketing"]
+        notes: "FLUX Schnell image gen"
+    assess: []
+    hold: []
+
+  "MCPs/Integrations":
+    adopt:
+      - name: "Context7"
+        since: "2025-Q4"
+        used_by: ["all"]
+        notes: "Library documentation"
+      - name: "Exa"
+        since: "2025-Q4"
+        used_by: ["all"]
+        notes: "Web search + research"
+    trial:
+      - name: "Browser (Puppeteer)"
+        since: "2025-Q4"
+        used_by: ["content-engine"]
+        notes: "Screenshot + automation"
+      - name: "Notion"
+        since: "2026-Q1"
+        used_by: ["kaizen"]
+        notes: "Knowledge management"
+    assess:
+      - name: "Magic (21st.dev)"
+        since: "2026-Q1"
+        notes: "Component builder"
+    hold: []
+
+  "Libraries/Frameworks":
+    adopt:
+      - name: "React + Vite"
+        since: "2025-Q3"
+        used_by: ["dashboard"]
+      - name: "TypeScript"
+        since: "2025-Q3"
+        used_by: ["all"]
+    trial: []
+    assess: []
+    hold: []
+
+  "AI Models":
+    adopt:
+      - name: "Claude Opus 4.6"
+        since: "2026-Q1"
+        used_by: ["all squads via Claude Code"]
+      - name: "Gemini 2.0 Flash"
+        since: "2025-Q4"
+        used_by: ["content-engine"]
+    trial:
+      - name: "Moonshot Kimi K2.5"
+        since: "2026-Q1"
+        used_by: ["openclaw"]
+        notes: "VPS agent model"
+    assess: []
+    hold: []

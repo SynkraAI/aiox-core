@@ -1,0 +1,230 @@
+# KPI Benchmarks — EPC, CR, ROAS, LTV por Nicho e Canal
+# Atualizado: 2026-02 | Fonte: dados agregados de afiliados 2024-2025, relatórios de redes
+# Uso: agente performance-analyst e growth-optimizer
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  currency: USD
+  note: >
+    Benchmarks são medianas de mercado. Top performers superam 3-5x esses valores.
+    Dados regionais (BR) tendem a ter EPC menor em USD mas similar em BRL relativo.
+  definitions:
+    epc: "Earnings Per Click — receita por clique no link de afiliado (USD)"
+    cr: "Conversion Rate — % de cliques que resultam em venda/conversão"
+    roas: "Return on Ad Spend — receita gerada / custo de anúncio"
+    ltv: "Lifetime Value — valor total gerado por um cliente ao longo do relacionamento (USD)"
+    cac: "Customer Acquisition Cost — custo para adquirir um cliente convertido (USD)"
+  channels_explained:
+    seo: "Tráfego orgânico de buscadores (Google, Bing)"
+    social: "Tráfego orgânico de redes sociais (TikTok, Instagram, YouTube)"
+    email: "Tráfego via lista de email (broadcast e sequências automáticas)"
+    paid: "Tráfego de anúncios pagos (Meta Ads, Google Ads, TikTok Ads)"
+
+niches:
+
+  health:
+    display_name: "Saúde & Bem-Estar"
+    channels:
+      seo:
+        avg_epc_usd: 1.45
+        avg_cr_pct: 2.8
+        avg_roas: null
+        avg_ltv_usd: 180
+        avg_cac_usd: null
+        notes: >
+          CR variado por sub-nicho. Suplementos convertem melhor que fitness equipment.
+          Tráfego orgânico tem epc baixo mas escala bem com volume.
+      social:
+        avg_epc_usd: 0.65
+        avg_cr_pct: 1.2
+        avg_roas: null
+        avg_ltv_usd: 120
+        avg_cac_usd: null
+        notes: >
+          Social tem CR menor mas volume maior. TikTok Shop integrado pode triplicar EPC.
+          Conteúdo de before/after e testimonial tem melhor conversão.
+      email:
+        avg_epc_usd: 2.80
+        avg_cr_pct: 4.5
+        avg_roas: null
+        avg_ltv_usd: 250
+        avg_cac_usd: null
+        notes: >
+          Email tem o maior EPC do canal por segmentação e intenção.
+          Lista segmentada por problema específico supera benchmark significativamente.
+      paid:
+        avg_epc_usd: 1.80
+        avg_cr_pct: 3.2
+        avg_roas: 2.8
+        avg_ltv_usd: 180
+        avg_cac_usd: 45
+        notes: >
+          ROAS de 2.8x é limiar de lucratividade. Top performers atingem 4-6x.
+          Meta Ads funciona melhor que Google Ads em saúde por targeting de interesse.
+          Nicho com restrições no Meta (sem antes/depois explícito em ads).
+
+  finance:
+    display_name: "Finanças Pessoais & Investimentos"
+    channels:
+      seo:
+        avg_epc_usd: 3.20
+        avg_cr_pct: 2.1
+        avg_roas: null
+        avg_ltv_usd: 350
+        avg_cac_usd: null
+        notes: >
+          EPC alto por CPC alto do nicho. Cartão de crédito lead gen pode chegar
+          a $50-100 por conversão. CR menor por processo de aprovação/qualificação.
+      social:
+        avg_epc_usd: 1.10
+        avg_cr_pct: 0.8
+        avg_roas: null
+        avg_ltv_usd: 280
+        avg_cac_usd: null
+        notes: >
+          Twitter/X tem audiência de finanças mais receptiva que Instagram.
+          YouTube long-form converte muito melhor que short-form para finanças.
+          Nicho de "fintwit" tem comunidade engajada.
+      email:
+        avg_epc_usd: 4.50
+        avg_cr_pct: 3.8
+        avg_roas: null
+        avg_ltv_usd: 420
+        avg_cac_usd: null
+        notes: >
+          Email de finanças tem maior EPC de todas as combinações nicho/canal.
+          Sequências de nurture longas (30-60 dias) aumentam LTV significativamente.
+          Lista de qualidade > lista grande em finanças.
+      paid:
+        avg_epc_usd: 3.80
+        avg_cr_pct: 1.9
+        avg_roas: 2.2
+        avg_ltv_usd: 350
+        avg_cac_usd: 95
+        notes: >
+          ROAS menor por CPC altíssimo. Google Search para intent queries específicas
+          (melhores cartões de crédito, como investir) tem ROAS melhor que Display.
+          Nicho com muitas restrições de compliance em paid (exige disclaimers específicos).
+
+  technology:
+    display_name: "Tecnologia & Software (SaaS)"
+    channels:
+      seo:
+        avg_epc_usd: 2.10
+        avg_cr_pct: 3.5
+        avg_roas: null
+        avg_ltv_usd: 280
+        avg_cac_usd: null
+        notes: >
+          Comparativos de ferramentas têm CR altíssimo (5-8%) por intenção de compra clara.
+          Conteúdo de review aprofundado converte 3x mais que artigos superficiais.
+          SaaS com comissão recorrente eleva LTV significativamente.
+      social:
+        avg_epc_usd: 1.20
+        avg_cr_pct: 1.8
+        avg_roas: null
+        avg_ltv_usd: 220
+        avg_cac_usd: null
+        notes: >
+          YouTube Shorts de "ferramenta que mudou minha vida" tem bom EPC em tech.
+          LinkedIn tem audiência B2B receptiva para SaaS mas menor volume.
+          TikTok tech tem crescido — audiência jovem de desenvolvedores.
+      email:
+        avg_epc_usd: 3.50
+        avg_cr_pct: 5.2
+        avg_roas: null
+        avg_ltv_usd: 380
+        avg_cac_usd: null
+        notes: >
+          Newsletter de tecnologia com curadoria de ferramentas tem dos melhores
+          desempenhos do mercado. Audiência de tech workers tem renda alta e
+          disposição a pagar por ferramentas. Promoções de trial free convertem bem.
+      paid:
+        avg_epc_usd: 2.60
+        avg_cr_pct: 3.8
+        avg_roas: 3.5
+        avg_ltv_usd: 280
+        avg_cac_usd: 52
+        notes: >
+          ROAS melhor que saúde e finanças por CPC menor. Google Ads para
+          "[ferramenta] alternativa" e "[ferramenta] vs [ferramenta]" têm
+          conversão altíssima. Retargeting de visitantes de review pages é eficaz.
+
+  education:
+    display_name: "Educação Online & Cursos"
+    channels:
+      seo:
+        avg_epc_usd: 1.50
+        avg_cr_pct: 2.5
+        avg_roas: null
+        avg_ltv_usd: 150
+        avg_cac_usd: null
+        notes: >
+          CR razoável mas sazonalidade forte (janeiro, julho, setembro).
+          Conteúdo de review de cursos específicos tem CR 4-6%.
+          Sub-nicho de concursos públicos (BR) tem EPC maior.
+      social:
+        avg_epc_usd: 0.80
+        avg_cr_pct: 1.5
+        avg_roas: null
+        avg_ltv_usd: 110
+        avg_cac_usd: null
+        notes: >
+          YouTube é o canal mais eficaz (tutoriais com CTA para curso completo).
+          TikTok de "aprendi X em Y dias" converte bem para cursos de idiomas.
+          Instagram carrossel "aprenda [habilidade] em 7 passos" + CTA para curso.
+      email:
+        avg_epc_usd: 2.20
+        avg_cr_pct: 3.8
+        avg_roas: null
+        avg_ltv_usd: 200
+        avg_cac_usd: null
+        notes: >
+          Sequências SOS (Soap Opera) para lançamentos de cursos têm CR 5-8%.
+          Lead magnet relevante (minicurso, checklist) cria lista altamente qualificada.
+          Urgência de lançamento (carrinho fechando) é eficaz neste nicho.
+      paid:
+        avg_epc_usd: 1.80
+        avg_cr_pct: 2.8
+        avg_roas: 3.2
+        avg_ltv_usd: 150
+        avg_cac_usd: 38
+        notes: >
+          ROAS bom por CPC relativamente menor que finanças/saúde.
+          Vídeo ads com depoimentos reais têm melhor desempenho.
+          Retargeting de visitantes de página de vendas é essencial.
+          CPL (cost per lead) para email captura + nurture pode ser estratégia melhor.
+
+cross_channel_insights:
+  highest_epc_combination: "finance × email"
+  highest_cr_combination: "technology × email"
+  best_roas_combination: "technology × paid"
+  highest_ltv_combination: "finance × email"
+  best_for_beginners: "education × seo"
+  best_for_scale: "health × paid"
+  best_organic_combination: "technology × seo"
+
+tier_definitions:
+  top_performer:
+    description: "Top 10% de afiliados do mercado"
+    multiplier: "3-5x acima do benchmark"
+    characteristics:
+      - "Lista de email de 10.000+ seguidores qualificados"
+      - "SEO com 100.000+ sessões/mês"
+      - "YouTube com 50.000+ inscritos no nicho"
+      - "Testa sistematicamente offers e content"
+  median_performer:
+    description: "50% central de afiliados"
+    multiplier: "1x benchmark (valores desta tabela)"
+    characteristics:
+      - "Lista de 1.000-10.000 seguidores"
+      - "SEO com 5.000-50.000 sessões/mês"
+      - "Conteúdo semi-regular"
+  beginner:
+    description: "Bottom 40% de afiliados"
+    multiplier: "0.1-0.5x benchmark"
+    characteristics:
+      - "Lista em construção (<1.000)"
+      - "SEO < 5.000 sessões/mês"
+      - "Conteúdo irregular"

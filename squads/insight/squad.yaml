@@ -1,0 +1,34 @@
+metadata:
+  version: 1.0.0
+  created: '2026-02-19'
+  generated_by: sync-ide-command.py
+  squad: insight
+  status: REGISTERED
+squad:
+  name: insight
+  title: Insight
+  version: 1.0.0
+  slashPrefix: Insight
+  entry_agent: insight-chief
+  description: "Squad de market intelligence para neg\xF3cios locais brasileiros.\
+    \ Pesquisa presen\xE7a digital, mapeia oportunidades de mercado e transforma dados\
+    \ em relat\xF3rios narrativos que vendem. Acionado desde a pr\xE9-venda."
+components:
+  agents:
+  - conrado-adolpho
+  - data-storyteller
+  - digital-profiler
+  - insight-chief
+  - market-scout
+  counts:
+    agents: 5
+    tasks: 5
+    workflows: 2
+    templates: 7
+    checklists: 1
+    data_files: 5
+ide_sync:
+  targets:
+  - claude
+  slashPrefix: Insight
+  command_pattern: /Insight:agents:{agent_name}

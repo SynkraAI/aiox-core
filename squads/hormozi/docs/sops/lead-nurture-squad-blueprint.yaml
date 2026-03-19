@@ -1,0 +1,1170 @@
+# Lead Nurture Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Playbook: Lead Nurture - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: lead-nurture
+  purpose: "Maximize throughput: get more leads to respond, schedule, and show up to buy"
+  domain: sales-operations
+  source_playbook: "$100M Playbook: Lead Nurture"
+
+  core_equation: |
+    Throughput = Schedule Rate × Show Rate
+    Target: 20-40% improvement in show rates
+    Impact: At 20% margins = 2-3x profit increase
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIER STRUCTURE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+tier_structure:
+  orchestrator:
+    - agent: nurture-coordinator
+      role: "Orchestrate the Four Pillars workflow and optimize throughput"
+      decisions:
+        - "Route leads to appropriate pillar focus"
+        - "Identify bottlenecks in nurture funnel"
+        - "Escalate edge cases to human review"
+      kpis:
+        - "Overall throughput rate"
+        - "Pillar performance balance"
+        - "Time-to-show metrics"
+
+  tier_0_diagnosis:
+    - agent: lead-scorer
+      role: "Score and classify incoming leads (Red/Yellow/Green)"
+      inputs:
+        - "Lead opt-in data"
+        - "Qualification responses"
+        - "Demographic information"
+      outputs:
+        - "Lead score (Red/Yellow/Green)"
+        - "Recommended closer match"
+        - "Personalization tags"
+
+    - agent: availability-auditor
+      role: "Monitor and optimize scheduling availability"
+      inputs:
+        - "Calendar data"
+        - "Booking patterns"
+        - "No-show data"
+      outputs:
+        - "Availability gaps report"
+        - "Optimal time slot recommendations"
+        - "Staffing recommendations"
+
+  tier_1_execution:
+    - agent: speed-daemon
+      role: "Ensure rapid first contact and appointment booking"
+      specialization: "Pillar II: Speed"
+      targets:
+        first_contact: "<5 minutes (target: <60 seconds)"
+        appointment_window: "<72 hours"
+      techniques:
+        - "Double-dial protocol"
+        - "Voicemail + immediate text"
+        - "Pull-forward scripts"
+        - "Hot handoff execution"
+
+    - agent: personalizer
+      role: "Craft personalized messaging and incentives"
+      specialization: "Pillar III: Personalization"
+      capabilities:
+        - "Multi-channel initial contact"
+        - "Lead research synthesis"
+        - "Segmented messaging selection"
+        - "Push/Pull incentive deployment"
+        - "Proof matching to demographics"
+
+    - agent: volume-engine
+      role: "Execute high-volume contact cadences"
+      specialization: "Pillar IV: Volume"
+      cadences:
+        day_1: "6 attempts (call-call-vm-text, call-text, call-text)"
+        days_2_3: "2 calls + 1 text per day"
+        days_4_7: "1 call + 1 text per day"
+        day_8_plus: "Transition to long-term nurture"
+      reminders:
+        automated: ["Immediate confirmation", "24h", "12h", "3h"]
+        manual: ["Night before", "Morning of", "60 min before"]
+
+  tier_2_judgment:
+    - agent: closer-router
+      role: "Match qualified leads to optimal closers"
+      inputs:
+        - "Lead score and profile"
+        - "Closer performance data"
+        - "Availability matrix"
+      outputs:
+        - "Optimal lead-closer pairing"
+        - "Hot handoff package"
+        - "Edification talking points"
+
+    - agent: ghost-hunter
+      role: "Recover leads who go dark"
+      triggers:
+        - "No response for 24h with appointment scheduled"
+        - "Missed appointment"
+        - "Dropped off after qualification"
+      techniques:
+        - "Multi-channel re-engagement"
+        - "Proof of results from their cohort"
+        - "90-day nurture sequence"
+        - "Calendar double-booking for uncertain shows"
+
+    - agent: culture-keeper
+      role: "Maintain 'Garbage Man Culture' standards"
+      responsibilities:
+        - "Track rep performance rankings"
+        - "Reinforce cultural mantras"
+        - "Identify and celebrate top performers"
+        - "Coach underperformers on process adherence"
+      mantras:
+        - "Volume negates luck"
+        - "Yellows are the new gold"
+        - "BAMFAM as a way of life"
+        - "Process > All"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENT DEFINITIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents:
+  nurture-coordinator:
+    id: nurture-coordinator
+    title: "Lead Nurture Orchestrator"
+    tier: orchestrator
+    icon: "🎯"
+
+    purpose: |
+      Coordinate the Four Pillars of Lead Nurture to maximize throughput.
+      Ensure leads flow efficiently from opt-in to show-up.
+
+    core_frameworks:
+      - name: "Four Pillars"
+        components: ["Availability", "Speed", "Personalization", "Volume"]
+      - name: "Throughput Optimization"
+        equation: "Schedule Rate × Show Rate"
+      - name: "ALAN Principles"
+        origin: "Artificial Lead Automation & Nurture"
+
+    decision_authority:
+      - "Lead routing between pillars"
+      - "Resource allocation across team"
+      - "Escalation trigger assessment"
+      - "Performance intervention thresholds"
+
+    inputs:
+      - "Lead volume and source data"
+      - "Current throughput metrics"
+      - "Team capacity status"
+      - "Exception flags"
+
+    outputs:
+      - "Pillar priority recommendations"
+      - "Resource reallocation directives"
+      - "Performance reports"
+      - "Optimization experiments"
+
+    success_metrics:
+      primary:
+        - name: "Throughput Rate"
+          target: ">25%"
+          calculation: "Shows / Total Leads"
+        - name: "Lead-to-Close Ratio"
+          target: ">17.5%"
+      secondary:
+        - "Schedule Rate >40%"
+        - "Show Rate >60%"
+        - "First Contact <5min"
+
+  lead-scorer:
+    id: lead-scorer
+    title: "Lead Qualification Specialist"
+    tier: tier_0
+    icon: "🎨"
+
+    purpose: |
+      Score incoming leads using Red/Yellow/Green system.
+      Match lead quality to appropriate handling and closer assignment.
+
+    scoring_system:
+      green:
+        definition: "Prime lead - matches ideal customer profile"
+        indicators:
+          - "Demographic match to best customers"
+          - "High intent signals"
+          - "Budget/authority confirmed"
+          - "Timeline urgency"
+        action: "Route to best closer immediately"
+
+      yellow:
+        definition: "Less qualified but workable"
+        indicators:
+          - "Partial demographic match"
+          - "Moderate intent"
+          - "Some qualification gaps"
+        action: "Standard process - 'Yellows are the new gold'"
+        philosophy: "Every lead is free practice"
+
+      red:
+        definition: "Unqualified - poor fit"
+        indicators:
+          - "Budget mismatch"
+          - "Wrong geography/industry"
+          - "No decision authority"
+          - "Unrealistic timeline"
+        action: "Remove from calendar, offer resources/downsell"
+
+    data_sources:
+      - "Opt-in form responses"
+      - "Application answers"
+      - "Social media profiles"
+      - "Website/company research"
+      - "Historical customer patterns"
+
+    outputs:
+      - "Lead score (R/Y/G)"
+      - "Qualification summary"
+      - "Recommended closer"
+      - "Personalization tags"
+      - "Risk flags"
+
+  availability-auditor:
+    id: availability-auditor
+    title: "Scheduling Availability Optimizer"
+    tier: tier_0
+    icon: "📅"
+
+    purpose: |
+      Monitor and optimize appointment availability across all dimensions.
+      Ensure leads can always find convenient scheduling options.
+
+    availability_dimensions:
+      days_per_week:
+        current: "Track current days available"
+        target: "7 days"
+        rationale: "5 days = 71%, 7 days = 100% availability"
+
+      hours_per_day:
+        current: "Track current hours"
+        target: "6am-6pm PST (9am-9pm EST)"
+        rationale: "Available when customers are available to buy"
+
+      slots_per_hour:
+        current: "Track interval options"
+        target: "4 per hour (15-minute intervals)"
+        rationale: "More options = more bookings"
+
+      scheduling_methods:
+        required: ["Inbound", "Outbound", "Self-schedule"]
+        optimization: "Track conversion by method"
+
+    audit_outputs:
+      - "Availability gap report"
+      - "Peak demand analysis"
+      - "Staffing recommendations"
+      - "Self-scheduler UX audit"
+
+    red_flags:
+      - "Days with <50% slot utilization"
+      - "Hours with zero availability"
+      - "Self-scheduler abandonment >30%"
+      - "Long gaps between available times"
+
+  speed-daemon:
+    id: speed-daemon
+    title: "Speed-to-Contact Specialist"
+    tier: tier_1
+    icon: "⚡"
+
+    purpose: |
+      Execute lightning-fast first contact and appointment booking.
+      Every minute of delay = lost revenue.
+
+    speed_targets:
+      first_contact:
+        exceptional: "<60 seconds (391% conversion increase)"
+        standard: "<5 minutes"
+        warning: ">5 minutes"
+        critical: ">1 hour (7x qualification drop)"
+
+      first_appointment:
+        ideal: "Same call / today"
+        acceptable: "Within 72 hours"
+        warning: ">72 hours"
+        discourage: ">5 days"
+
+      response_time:
+        target: "Minutes, not hours"
+        tracking: "Timestamp every interaction"
+
+    techniques:
+      double_dial:
+        description: "Call twice immediately - second call often gets through"
+        rationale: "Many phones block first unknown call"
+
+      immediate_voicemail_text:
+        sequence: ["Call 1", "Call 2", "Voicemail", "Text within 30 seconds"]
+
+      pull_forward:
+        script: |
+          "Hey, this is [Name] from [Company]... I saw you booked for [Day].
+          Just calling to confirm details. Is now a terrible time?
+          [Qualify] Great - I have an opening today at [time]...
+          unless now is a good time?"
+
+      hot_handoff:
+        description: "Transfer to closer while lead is hot"
+        includes: ["3-way text intro", "Edification", "Qualification summary"]
+
+    litmus_test: |
+      "If you're not hearing 'Man, that was fast! You guys are on top of it!'
+      at least once a day, you're not calling leads fast enough."
+
+  personalizer:
+    id: personalizer
+    title: "Personalization & Incentive Specialist"
+    tier: tier_1
+    icon: "🎁"
+
+    purpose: |
+      Make every interaction feel custom and valuable.
+      Give leads reasons to show up through personalization and incentives.
+
+    communication_strategy:
+      initial_blast:
+        channels: ["Call", "Text", "DM", "Email"]
+        rule: "Hit all channels, continue where they respond"
+
+      continuation:
+        principle: "Follow the lead's preferred channel"
+        escalation: "Move to richer medium when appropriate"
+
+      style: |
+        "Reach out like you're actually trying to get ahold of them -
+        not just going through the motions. Like you need to reach
+        your parents about an emergency."
+
+    personalization_levels:
+      easy:
+        effort: "5 minutes per lead"
+        activities:
+          - "Check social media profiles"
+          - "Review website/company"
+          - "Note recent activities"
+        example: |
+          "Hey Greg, I see your site traffic is down 18% this quarter.
+          We helped another customer in similar situation go up 100%
+          in 90 days. I prepped a walkthrough for your auto shop."
+
+      hard:
+        effort: "One-time setup, then automated"
+        activities:
+          - "Create sequences per revenue level"
+          - "Create sequences per pain point"
+          - "Create sequences per industry"
+
+    incentives:
+      push_type:
+        mechanism: "Give gift before appointment (reciprocity)"
+        example: |
+          "Hey [Name]! I wanted to make sure you're caffeinated for
+          our meeting tomorrow. Check your email - I sent you a $5
+          gift card."
+        psychology: "Even when they know what you're doing, it still works"
+
+      pull_type:
+        mechanism: "A/B choice that assumes attendance"
+        example: |
+          "Since you're a first-time client, I'm setting aside
+          some free products for you. Would you prefer face cream
+          or hand lotion?"
+        psychology: "Choosing = implicit commitment to show"
+
+        ab_categories:
+          - "Quantity: One bottle or two?"
+          - "Start dates: Tomorrow or Monday?"
+          - "Type: Shirt or shorts?"
+          - "Colors: Black or white?"
+          - "Personnel: John or Sara?"
+          - "Times: Morning or afternoon?"
+
+    proof_deployment:
+      timing:
+        - "After schedule, before show"
+        - "Between first and second call"
+        - "Every 90 days for ghosted leads"
+
+      matching_rule: |
+        Match proof demographics to lead demographics:
+        - Age, gender, ethnicity
+        - Industry, company size
+        - Problem type, desired outcome
+
+  volume-engine:
+    id: volume-engine
+    title: "High-Volume Contact Executor"
+    tier: tier_1
+    icon: "📞"
+
+    purpose: |
+      Execute relentless contact cadences. Most salespeople give up
+      after 1.3 attempts. We do 7+.
+
+    philosophy: |
+      "Volume negates luck. Nearly half of all salespeople give up
+      after the first attempt. The more often you reach out, the
+      more of them show up."
+
+    contact_cadence:
+      day_1_opt_in:
+        - step: 1
+          action: "Call within 5 minutes"
+          timing: "Immediate"
+        - step: 2
+          action: "Double-dial"
+          timing: "Immediately after step 1"
+        - step: 3
+          action: "Leave voicemail"
+          timing: "If no answer"
+        - step: 4
+          action: "Text immediately"
+          timing: "Within 30 seconds of voicemail"
+        - step: 5
+          action: "Double-dial + text"
+          timing: "Few hours later"
+        - step: 6
+          action: "Double-dial + text"
+          timing: "Few more hours later"
+
+      days_2_3:
+        - "Call early in day"
+        - "Call later in day"
+        - "Text after second call"
+
+      days_4_7:
+        - "Call once per day"
+        - "Text once per day"
+
+      day_8_plus:
+        action: "Transition to long-term nurture"
+        content: "Free value with soft CTAs"
+        trigger: "Re-engagement restarts from top"
+
+    reminder_system:
+      automated:
+        - timing: "Immediately"
+          content: "Confirmation: time, date, caller number, person meeting"
+        - timing: "24 hours before"
+          content: "Reminder with details"
+        - timing: "12 hours before"
+          content: "Reminder"
+        - timing: "3 hours before"
+          content: "Final automated reminder"
+
+        template: |
+          [Auto msg] Hey [Name]! Quick reminder about your appointment
+          tomorrow at [time]. You'll be speaking with [Closer] from
+          [Area Code]. Looking forward to it!
+
+      manual:
+        - timing: "Night before"
+          content: "Personal check-in"
+        - timing: "Morning of"
+          content: "Confirmation"
+        - timing: "60 minutes before"
+          content: "See you soon"
+
+        source: "Real cell phone (iPhone for blue messages)"
+
+    conversation_framework:
+      name: "A-C-A"
+      steps:
+        - "Acknowledge: Respond to what they said"
+        - "Compliment: Something genuine about them"
+        - "Ask: The next question (qualify or pull forward)"
+
+  closer-router:
+    id: closer-router
+    title: "Lead-to-Closer Matching Specialist"
+    tier: tier_2
+    icon: "🎯"
+
+    purpose: |
+      Match the best leads to the best closers.
+      A timeshare company went from $200M to $1B by getting this right.
+
+    matching_algorithm:
+      step_1: "Identify best customer patterns (demographics + actions)"
+      step_2: "Ask those questions in opt-ins/applications"
+      step_3: "Score leads 1-5 or Red/Yellow/Green"
+      step_4: "Route best leads to best closers"
+      step_5: "Track conversion by pairing, optimize"
+
+    closer_ranking:
+      metrics:
+        - "Show rate (measures work ethic)"
+        - "Close rate (measures skill)"
+        - "Lead-to-close ratio (total performance)"
+      insight: "Best closers are typically best setters"
+
+    hot_handoff_package:
+      edification_script: |
+        "You're in luck. You're going to speak with one of our top
+        experts on [topic]. He's been in this game for a while and
+        helped [similar businesses] achieve [desired outcome].
+        We're fortunate to have him."
+
+      handoff_includes:
+        - "Lead qualification summary"
+        - "Key pain points mentioned"
+        - "Specific desired outcomes"
+        - "Any concerns raised"
+        - "Best contact channel"
+
+    bamfam_enforcement:
+      rule: "NEVER end a call without scheduling the next one"
+      philosophy: "BAMFAM as a way of life"
+      objection_handling: "Being dodgy about next call = objection to handle"
+      script: |
+        "Great, let me pull up my calendar... What day works better -
+        [Day A] or [Day B]? Morning or afternoon? Great, I've got you
+        locked in for [specific time]. You'll get a confirmation shortly."
+
+  ghost-hunter:
+    id: ghost-hunter
+    title: "Lead Recovery Specialist"
+    tier: tier_2
+    icon: "👻"
+
+    purpose: |
+      Recover leads who go dark. Never give up completely.
+      Show them what they missed by not showing up.
+
+    ghost_triggers:
+      - "No response 24h before scheduled appointment"
+      - "Missed appointment without cancellation"
+      - "Stopped responding after qualification"
+      - "Ghosted during scheduling conversation"
+
+    recovery_techniques:
+      immediate_ghost:
+        action: "Double-book the calendar slot"
+        rationale: "Reduce impact of no-show"
+
+      proof_recovery:
+        timing: "Every 90 days"
+        content: "Show results of people who signed up around when they ghosted"
+        psychology: "Makes them feel left behind but offers chance to catch up"
+
+      multi_channel_surge:
+        description: "Reach out on all channels simultaneously"
+        message_style: "Genuine concern, not desperate"
+
+      long_term_nurture:
+        trigger: "After 7-day cadence exhausted"
+        content: "Free value with soft CTAs"
+        goal: "Keep top of mind until they re-engage"
+
+    calendar_management:
+      uncertain_shows: "Double-book slots with qualified backup lead"
+      confirmed_ghosts: "Release slot, mark lead for 90-day nurture"
+
+  culture-keeper:
+    id: culture-keeper
+    title: "Performance Culture Guardian"
+    tier: tier_2
+    icon: "🏆"
+
+    purpose: |
+      Maintain the 'Garbage Man Culture' that drives relentless execution.
+      Culture = rules that govern good and bad behavior.
+
+    core_mantras:
+      - mantra: "Volume negates luck"
+        meaning: "More attempts = more success"
+        application: "Do more than everyone else"
+
+      - mantra: "Yellows are the new gold"
+        meaning: "Less qualified leads = opportunity"
+        application: "Don't sleep on any lead"
+
+      - mantra: "BAMFAM as a way of life"
+        meaning: "Book-A-Meeting-From-A-Meeting"
+        application: "Never leave calls open"
+
+      - mantra: "Be a garbage man"
+        meaning: "Take leads others reject"
+        application: "Every lead is free practice"
+
+      - mantra: "Process > All"
+        meaning: "No one is above the process"
+        application: "Follow the system religiously"
+
+    performance_tracking:
+      rankings:
+        - metric: "Show Rate"
+          measures: "Work ethic"
+        - metric: "Close Rate"
+          measures: "Skill"
+        - metric: "Lead-to-Close"
+          measures: "Complete performance"
+
+      display: "Public leaderboard, updated weekly"
+      insight: "Same people should top all three lists if culture is healthy"
+
+    reinforcement:
+      positive:
+        - "Give kudos to highest show rates"
+        - "Ask top performers what they did"
+        - "When they say 'I just followed the process,' celebrate that"
+
+      corrective:
+        - "High close rate + low lead work = entitled, wasteful"
+        - "Cherry-picking = against culture"
+        - "Judging leads = missing opportunity"
+
+    compensation:
+      commission_bump: "5-30% of sale commission for high show rates"
+      non_monetary: ["Attention", "Affection", "Approval"]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXECUTOR MATRIX
+# ═══════════════════════════════════════════════════════════════════════════════
+
+executor_matrix:
+  # Pillar I: Availability
+  - task: "Configure 7-day calendar"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Staff rotation schedule required"
+
+  - task: "Set extended hours (6am-6pm PST)"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Coverage capacity verified"
+
+  - task: "Enable 15-minute intervals"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Use gaps for lead follow-up"
+
+  - task: "Optimize self-scheduler UX"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "A/B test changes"
+
+  # Pillar II: Speed
+  - task: "Alert on new lead opt-in"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Real-time notification required"
+
+  - task: "Make first contact call"
+    executor: Human
+    automation: LOW
+    guardrails: "Must be within 5 minutes"
+
+  - task: "Execute double-dial protocol"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Follow local laws"
+
+  - task: "Send immediate text after voicemail"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Template must feel personal"
+
+  - task: "Pull appointment forward"
+    executor: Human
+    automation: LOW
+    guardrails: "Use pull-forward script"
+
+  - task: "Hot handoff to closer"
+    executor: Human
+    automation: LOW
+    guardrails: "Include edification, 3-way text"
+
+  # Pillar III: Personalization
+  - task: "Multi-channel initial blast"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Hit all channels simultaneously"
+
+  - task: "Research lead profile"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "5 minutes minimum for high-value"
+
+  - task: "Score lead (R/Y/G)"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Human validates AI scoring"
+
+  - task: "Route lead to closer"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Match quality to skill"
+
+  - task: "Select segmented messaging"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Must match lead profile"
+
+  - task: "Deploy push incentive (gift)"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Amount not insulting"
+
+  - task: "Deploy pull incentive (A/B)"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Track choice as commitment signal"
+
+  - task: "Match proof to demographics"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Proof library organized by segment"
+
+  # Pillar IV: Volume
+  - task: "Execute Day 1 contact cadence"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "6 attempts minimum"
+
+  - task: "Execute Days 2-7 cadence"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Decreasing frequency"
+
+  - task: "Send automated reminders"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Be transparent they're automated"
+
+  - task: "Send manual reminders"
+    executor: Human
+    automation: LOW
+    guardrails: "Must feel personal, use iPhone"
+
+  - task: "Execute BAMFAM"
+    executor: Human
+    automation: LOW
+    guardrails: "Never end call without next meeting"
+
+  - task: "Transition to long-term nurture"
+    executor: Worker
+    automation: HIGH
+    guardrails: "After Day 7 cadence exhausted"
+
+  # Culture & Performance
+  - task: "Track rep performance metrics"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Show rate, close rate, lead-to-close"
+
+  - task: "Generate leaderboard"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Update weekly, display publicly"
+
+  - task: "Coach underperformers"
+    executor: Human
+    automation: LOW
+    guardrails: "Focus on process adherence"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  QG-001:
+    name: "Speed Gate"
+    transition: "Opt-in → First Contact"
+    condition: "contact_time < 5_minutes"
+    type: blocking
+    failure_action: "Escalate to manager, add capacity"
+
+  QG-002:
+    name: "Scheduling Window Gate"
+    transition: "Contact → Appointment"
+    condition: "appointment_date <= now + 72_hours"
+    type: warning
+    failure_action: "Apply pull-forward technique"
+
+  QG-003:
+    name: "Lead Quality Gate"
+    transition: "Score → Calendar"
+    condition: "lead_score != RED"
+    type: blocking
+    failure_action: "Remove from calendar, offer resources"
+
+  QG-004:
+    name: "Volume Gate"
+    transition: "Day 1 → Day 2"
+    condition: "day_1_attempts >= 6"
+    type: warning
+    failure_action: "Complete remaining attempts"
+
+  QG-005:
+    name: "Reminder Gate"
+    transition: "Scheduled → Show"
+    condition: "automated_reminders_sent AND manual_reminders_sent"
+    type: warning
+    failure_action: "Complete reminder sequence"
+
+  QG-006:
+    name: "BAMFAM Gate"
+    transition: "Call End → Next Call Scheduled"
+    condition: "next_appointment_scheduled == true"
+    type: blocking
+    failure_action: "Do not end call without scheduling"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  new_lead_workflow:
+    trigger: "Lead opts in"
+    steps:
+      - step: 1
+        agent: lead-scorer
+        action: "Score lead (R/Y/G)"
+        output: "Lead classification"
+
+      - step: 2
+        agent: speed-daemon
+        action: "Alert for immediate contact"
+        sla: "<5 minutes"
+
+      - step: 3
+        agent: speed-daemon
+        action: "Execute first contact (double-dial, VM, text)"
+        output: "Contact status"
+
+      - step: 4
+        agent: personalizer
+        action: "Research lead, prepare personalized approach"
+        parallel_to: "step 3"
+
+      - step: 5
+        agent: closer-router
+        action: "Match to appropriate closer"
+        condition: "If lead_score == GREEN"
+
+      - step: 6
+        agent: speed-daemon
+        action: "Book appointment within 72h or close now"
+        output: "Appointment scheduled"
+
+      - step: 7
+        agent: volume-engine
+        action: "Start reminder sequence"
+        trigger: "Appointment confirmed"
+
+  no_response_workflow:
+    trigger: "Lead not responding to contact"
+    steps:
+      - step: 1
+        agent: volume-engine
+        action: "Continue Day 1 cadence (6 attempts)"
+        condition: "If day == 1 AND attempts < 6"
+
+      - step: 2
+        agent: volume-engine
+        action: "Execute Days 2-3 cadence"
+        condition: "If day <= 3"
+
+      - step: 3
+        agent: volume-engine
+        action: "Execute Days 4-7 cadence"
+        condition: "If day <= 7"
+
+      - step: 4
+        agent: ghost-hunter
+        action: "Transition to long-term nurture"
+        condition: "If day > 7"
+
+  appointment_reminder_workflow:
+    trigger: "Appointment scheduled"
+    steps:
+      - step: 1
+        agent: volume-engine
+        action: "Send immediate confirmation"
+        timing: "Immediately"
+
+      - step: 2
+        agent: volume-engine
+        action: "Send 24h automated reminder"
+        timing: "24 hours before"
+
+      - step: 3
+        agent: volume-engine
+        action: "Send manual night-before reminder"
+        timing: "Evening before"
+
+      - step: 4
+        agent: volume-engine
+        action: "Send 12h automated reminder"
+        timing: "12 hours before"
+
+      - step: 5
+        agent: volume-engine
+        action: "Send morning-of manual reminder"
+        timing: "Morning of appointment"
+
+      - step: 6
+        agent: volume-engine
+        action: "Send 3h automated reminder"
+        timing: "3 hours before"
+
+      - step: 7
+        agent: volume-engine
+        action: "Send 60-min manual reminder"
+        timing: "60 minutes before"
+
+  ghost_recovery_workflow:
+    trigger: "Lead ghosts scheduled appointment"
+    steps:
+      - step: 1
+        agent: ghost-hunter
+        action: "Mark lead for recovery"
+        output: "Ghost status flagged"
+
+      - step: 2
+        agent: ghost-hunter
+        action: "Multi-channel surge outreach"
+        timing: "Same day"
+
+      - step: 3
+        agent: ghost-hunter
+        action: "Add to 90-day proof sequence"
+        condition: "If no response to surge"
+
+      - step: 4
+        agent: personalizer
+        action: "Send proof of results from their cohort"
+        timing: "Every 90 days"
+
+      - step: 5
+        agent: volume-engine
+        action: "Re-enter standard cadence"
+        trigger: "Lead re-engages"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# KPIs & SUCCESS METRICS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+kpis:
+  primary:
+    throughput:
+      formula: "Shows / Total Leads"
+      target: ">25%"
+      impact: "20-40% improvement = 2-3x profit at 20% margins"
+
+    lead_to_close:
+      formula: "Closed / Total Leads"
+      target: ">17.5%"
+      benchmark:
+        minimum: "7.5%"
+        target: "17.5%"
+        top_performer: "34%"
+
+  secondary:
+    schedule_rate:
+      formula: "Scheduled / Engaged Leads"
+      target: ">40%"
+
+    show_rate:
+      formula: "Shows / Scheduled"
+      target: ">60%"
+
+    first_contact_speed:
+      formula: "Avg time to first contact"
+      target: "<5 minutes"
+      exceptional: "<60 seconds"
+
+  by_pillar:
+    availability:
+      - "Days per week with availability"
+      - "Hours per day available"
+      - "Slots per hour offered"
+      - "Self-scheduler conversion rate"
+
+    speed:
+      - "First contact time distribution"
+      - "Appointment booking window distribution"
+      - "Response time to messages"
+
+    personalization:
+      - "Channel preference match rate"
+      - "Lead score accuracy"
+      - "Incentive conversion rate"
+      - "Proof engagement rate"
+
+    volume:
+      - "Average contact attempts per lead"
+      - "Reminder completion rate"
+      - "BAMFAM compliance rate"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TROUBLESHOOTING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+troubleshooting:
+  - symptom: "Low schedule rate"
+    possible_causes:
+      - "Limited availability (days/hours/slots)"
+      - "Self-scheduler friction"
+      - "Slow first contact"
+    diagnosis:
+      - "Check availability audit report"
+      - "Review self-scheduler abandonment"
+      - "Check first contact time metrics"
+    solutions:
+      - "Expand availability to 7 days"
+      - "Reduce self-scheduler steps"
+      - "Add capacity for faster contact"
+
+  - symptom: "Low show rate"
+    possible_causes:
+      - "Appointments too far out"
+      - "Insufficient reminders"
+      - "No incentives/personalization"
+    diagnosis:
+      - "Check appointment window distribution"
+      - "Verify reminder sequence completion"
+      - "Review incentive deployment"
+    solutions:
+      - "Enforce 72h max window"
+      - "Implement full reminder sequence"
+      - "Deploy push/pull incentives"
+
+  - symptom: "High show rate, low close rate"
+    possible_causes:
+      - "Reps cherry-picking leads"
+      - "Poor lead-closer matching"
+      - "Qualification gaps"
+    diagnosis:
+      - "Review lead quality distribution by rep"
+      - "Compare conversion by lead-closer pairing"
+      - "Audit qualification questions"
+    solutions:
+      - "Enforce 'garbage man' culture"
+      - "Optimize lead-closer routing"
+      - "Improve qualification criteria"
+
+  - symptom: "Team giving up too early"
+    possible_causes:
+      - "Culture not reinforced"
+      - "No volume tracking"
+      - "Compensation not aligned"
+    diagnosis:
+      - "Check average attempts per lead"
+      - "Review leaderboard usage"
+      - "Audit commission structure"
+    solutions:
+      - "Reinforce 'volume negates luck' mantra"
+      - "Implement public leaderboards"
+      - "Add show rate commission bump"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TECHNOLOGY REQUIREMENTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+technology:
+  required:
+    - tool: "Auto Dialer"
+      purpose: "2-3x team efficiency"
+      features:
+        - "Lead prioritization"
+        - "Cadence automation"
+        - "Performance tracking"
+
+    - tool: "CRM with Timestamps"
+      purpose: "Track all interactions"
+      features:
+        - "Response time tracking"
+        - "Lead scoring integration"
+        - "Rep performance dashboard"
+
+    - tool: "Multi-channel Messaging"
+      purpose: "Reach leads on preferred channel"
+      features:
+        - "SMS, Email, DM integration"
+        - "Automated sequences"
+        - "Response tracking"
+
+    - tool: "Online Scheduler"
+      purpose: "Self-scheduling option"
+      features:
+        - "15-minute intervals"
+        - "Mobile-optimized"
+        - "Minimal steps"
+
+    - tool: "Local Area Code Wrapping"
+      purpose: "Higher pick-up rates"
+      features:
+        - "Dynamic area code matching"
+        - "Compliance tracking"
+
+  recommended:
+    - tool: "iPhone Fleet"
+      purpose: "Blue messages = higher trust"
+
+    - tool: "Call Recording"
+      purpose: "Training and coaching"
+
+    - tool: "Lead Scoring AI"
+      purpose: "Automated R/Y/G classification"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GAPS TO RESOLVE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Specific lead scoring criteria questions"
+    severity: Medium
+    clarification_needed: "What exact questions determine Red/Yellow/Green?"
+
+  - id: GAP-002
+    description: "Long-term nurture sequence details"
+    severity: Low
+    note: "Covered in separate playbook"
+
+  - id: GAP-003
+    description: "Incentive budget per lead"
+    severity: Medium
+    clarification_needed: "ROI calculation for gift cards by lead value"
+
+  - id: GAP-004
+    description: "Legal compliance by jurisdiction"
+    severity: High
+    clarification_needed: "Contact frequency laws by state/country"
+
+  - id: GAP-005
+    description: "Specific CRM/dialer recommendations"
+    severity: Medium
+    clarification_needed: "Preferred software stack"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VALIDATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 6
+  workflows_documented: 4
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

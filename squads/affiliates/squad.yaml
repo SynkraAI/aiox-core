@@ -1,0 +1,46 @@
+metadata:
+  version: 1.0.0
+  created: '2026-02-19'
+  generated_by: sync-ide-command.py
+  squad: affiliates
+  status: REGISTERED
+squad:
+  name: affiliates
+  title: Affiliates
+  version: 1.0.0
+  slashPrefix: Affiliates
+  entry_agent: affiliates-chief
+  description: "17 agents especializados para pesquisar, gerir e executar neg\xF3\
+    cios de afiliados em Amazon, Shopee, Mercado Livre, mesas propriet\xE1rias, Hotmart,\
+    \ Kiwify e plataformas internacionais"
+components:
+  agents:
+  - affiliate-br
+  - affiliate-strategist
+  - affiliates-chief
+  - authority-builder
+  - content-authority
+  - copy-vendas
+  - email-nurture
+  - funnel-architect
+  - growth-optimizer
+  - marketplace-ops
+  - niche-ops
+  - performance-analyst
+  - prop-trading-affiliate
+  - seo-affiliate
+  - seo-content
+  - social-hooks
+  - social-strategist
+  counts:
+    agents: 17
+    tasks: 73
+    workflows: 12
+    templates: 20
+    checklists: 10
+    data_files: 15
+ide_sync:
+  targets:
+  - claude
+  slashPrefix: Affiliates
+  command_pattern: /Affiliates:agents:{agent_name}

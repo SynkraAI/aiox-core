@@ -1,0 +1,53 @@
+# ===============================================================================
+# STT Corrections — Curator Squad
+# Version: 1.0.0
+# Purpose: Known speech-to-text error patterns for automated correction
+# Used by: squads/curator/scripts/apply_stt_corrections.py
+# Source: mine-transcript.md Pass 4.5.2 (extracted for CODE > LLM)
+# ===============================================================================
+
+# Auto-apply corrections: simple find/replace, no context needed
+# These are ALWAYS wrong in this domain — safe to auto-correct
+corrections:
+  # AIOS & Tools
+  - wrong: "cólica"
+    correct: "Claude Code"
+  - wrong: "colica"
+    correct: "Claude Code"
+  - wrong: "Claudio Code"
+    correct: "Claude Code"
+  - wrong: "Cloud Code"
+    correct: "Claude Code"
+  - wrong: "Ios"
+    correct: "AIOS"
+  - wrong: "ios"
+    correct: "AIOS"
+  - wrong: "qos"
+    correct: "AIOS"
+  - wrong: "tokins"
+    correct: "tokens"
+  - wrong: "squats"
+    correct: "squads"
+  - wrong: "Api"
+    correct: "API"
+  - wrong: "Pm"
+    correct: "PM"
+  - wrong: "Qa"
+    correct: "QA"
+  - wrong: "fátum"
+    correct: "Fathom"
+  - wrong: "prouni"
+    correct: "prompt"
+
+# Contextual corrections: require LLM judgment (context-dependent)
+# Script flags these for human/LLM review instead of auto-replacing
+contextual:
+  - wrong: "barra"
+    correct: "/"
+    context: "When clearly referring to slash commands (e.g. 'barra copywriter')"
+  - wrong: "arroba"
+    correct: "@"
+    context: "When clearly referring to agent references (e.g. 'arroba curator')"
+  - wrong: "Marx"
+    correct: "Max"
+    context: "When referring to subscriptions/limits (e.g. 'plano Marx')"

@@ -1,0 +1,556 @@
+# WF-7: Diagnóstico do Negócio
+# Duration: 1-2h
+# Best for: Diagnóstico completo do negócio atual e prescrição para o modelo Money Machine
+# Key Agents: vtd-chief → pesquisador-ia → monetizador
+
+workflow:
+  id: wf-diagnostico
+  name: "Diagnóstico do Negócio"
+  duration: "1-2h"
+  trigger: "*diagnostico {negocio}"
+  description: |
+    Workflow de diagnóstico estruturado para identificar gaps entre o modelo atual
+    do negócio e o modelo Money Machine ideal do Natanael Oliveira.
+
+    MODELO MONEY MACHINE (referência ideal):
+    ✓ Cronograma de 54 campanhas/ano (1/semana)
+    ✓ Empilhamento diário (manhã/tarde/noite) com múltiplos produtos
+    ✓ Mix de produtos (low/mid/high ticket balanceado)
+    ✓ Funil perpétuo funcionando (aquisição constante sem lançamento)
+    ✓ Email automático rodando 365 dias (NO-F049)
+    ✓ Sequência pós-compra com próximo passo (NO-F021)
+    ✓ Canal de escala escalável (livro Amazon, app IA, etc.)
+    ✓ Custo fixo controlado, escala no variável (NO-F033)
+
+    O diagnóstico compara a realidade atual com este modelo e prescreve:
+    - O que falta
+    - Em qual ordem implementar (quick wins primeiro)
+    - Quanto tempo vai levar para atingir o modelo completo
+
+    OUTPUT PRINCIPAL: diagnostico-{negocio}.md
+
+  best_for:
+    - "Expert que não sabe por onde começar"
+    - "Negócio que fatura mas não tem previsibilidade"
+    - "Quem depende de lançamentos e quer ir para perpétuo"
+    - "Diagnóstico após Brownfield Discovery de negócio existente"
+    - "Onboarding de novo cliente/aluno no método Natanael"
+
+  decision_matrix_fit:
+    awareness: "qualquer estágio"
+    sophistication: "qualquer estágio"
+    price_point: "qualquer ticket (diagnóstico é transversal)"
+    traffic_temp: "irrelevante (diagnóstico interno)"
+    primary_output: "diagnostico-{negocio}.md"
+
+  clone_combinations:
+    primary: "vtd-chief → pesquisador-ia → monetizador"
+    secondary:
+      - "arquiteto-funil (se gap principal for funil)"
+      - "escalador (se gap principal for escala)"
+      - "copy-andromeda (se gap principal for copy/conteúdo)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 1: COLETA DE DADOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-1
+    name: "Coleta de Dados"
+    days: "1"
+    tier: 0
+    description: |
+      Coleta estruturada de dados do negócio atual.
+      O vtd-chief conduz a sessão, pesquisador-ia registra e organiza.
+
+      DADOS ESSENCIAIS A COLETAR:
+
+      1. MODELO ATUAL DE MONETIZAÇÃO:
+         - Como ganha dinheiro hoje? (principais fontes de receita)
+         - Qual o faturamento médio mensal?
+         - Quanto vem de lançamento vs perpétuo?
+         - Qual a margem atual? (receita - custo)
+
+      2. PRODUTOS E OFERTAS:
+         - Lista completa de produtos com preço
+         - Quais estão ativos? Quais pausados?
+         - Mix atual (low/mid/high)?
+         - Taxa de conversão de cada produto (se disponível)
+
+      3. FUNIS ATIVOS:
+         - Quantos funis de aquisição rodando?
+         - Qual o CPL atual?
+         - Taxa de conversão do lead para cliente?
+         - Há funil perpétuo ou só lançamento?
+
+      4. EMAIL E COMUNICAÇÃO:
+         - Tamanho da lista de email
+         - Frequência de envio (emails/semana)
+         - Taxa de abertura média
+         - Tem automação? Quantas sequências?
+
+      5. CUSTO FIXO vs VARIÁVEL:
+         - Qual o custo fixo mensal? (ferramentas, equipe fixa, infraestrutura)
+         - Qual o custo variável? (tráfego pago, freelancers por projeto)
+         - Qual a proporção? Meta: custo fixo < 40% da receita (NO-F033)
+
+    tasks:
+      - task_id: entrevista-diagnostico
+        agent: vtd-chief
+        required: true
+        description: |
+          Conduzir entrevista estruturada com o empreendedor:
+          - Fazer as perguntas do elicitation de forma conversacional
+          - Ir além das perguntas quando identificar gaps importantes
+          - Registrar respostas literalmente (sem interpretar antes)
+          - Identificar inconsistências ou lacunas nas respostas
+          - Tom: consultor que quer ajudar, não auditor que quer julgar
+        output: "entrevista-raw-{negocio}.md"
+
+      - task_id: pesquisa-presenca-digital
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Pesquisar presença digital do negócio:
+          - Seguidores no Instagram/YouTube/TikTok
+          - Frequência de publicação (posts/semana últimos 30 dias)
+          - Engajamento médio (likes, comentários, compartilhamentos)
+          - Presença na Amazon? Algum livro publicado?
+          - Tem canal no YouTube? Frequência?
+          - Anúncios rodando? (verificar via Meta Ads Library)
+        output: "presenca-digital-{negocio}.md"
+
+      - task_id: consolidar-dados
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Consolidar todos os dados coletados em formato estruturado:
+          - Tabela: fonte de receita + valor + % do faturamento total
+          - Tabela: produto + ticket + status + conversão
+          - Tabela: canal de aquisição + CPL + volume
+          - Tabela: custo fixo + custo variável + margem
+          - Identificar dados faltantes (o que não foi possível coletar)
+        output: "dados-consolidados-{negocio}.yaml"
+
+    elicitation:
+      required: true
+      questions:
+        - id: nome_negocio
+          question: "Qual o nome do negócio ou projeto? (para identificação)"
+          type: text
+          required: true
+
+        - id: nicho
+          question: "Qual o nicho/tema do negócio? (ex: emagrecimento, finanças, confeitaria)"
+          type: text
+          required: true
+
+        - id: faturamento_mensal
+          question: "Qual o faturamento médio mensal atual? (aproximado em R$)"
+          type: text
+          required: true
+
+        - id: fontes_receita
+          question: |
+            Como o negócio ganha dinheiro hoje?
+            (ex: curso online, mentoria, consultoria, afiliados, publicidade)
+          type: text
+          required: true
+
+        - id: produtos_lista
+          question: "Liste todos os produtos com nome e preço (um por linha)"
+          type: text
+          required: true
+
+        - id: tamanho_lista_email
+          question: "Tamanho da lista de email: (número aproximado de contatos)"
+          type: number
+          required: true
+
+        - id: emails_por_semana
+          question: "Quantos emails manda por semana em média? (0 se nunca manda)"
+          type: number
+          required: true
+
+        - id: funis_ativos
+          question: "Tem algum funil de aquisição ativo? Quantos e quais?"
+          type: text
+          required: true
+
+        - id: custo_fixo_mensal
+          question: "Qual o custo fixo mensal estimado? (ferramentas, equipe, estrutura)"
+          type: text
+          required: true
+
+        - id: maior_dor_atual
+          question: "Na sua visão, qual é o maior problema do negócio hoje?"
+          type: text
+          required: true
+
+    checkpoint:
+      criteria:
+        - "Faturamento mensal documentado (mesmo que aproximado)"
+        - "Lista completa de produtos com tickets"
+        - "Fontes de receita identificadas e percentualizadas"
+        - "Dados de email (tamanho e frequência) coletados"
+        - "Custo fixo vs variável estimado"
+        - "Presença digital pesquisada"
+      human_review: true
+      message: "Coleta de dados concluída. Revisar dados antes de análise."
+      veto_conditions:
+        - "SE faturamento não informado → BLOQUEIA. Sem número base, diagnóstico é genérico."
+        - "SE lista de produtos vazia → BLOQUEIA. Não tem produto = problema diferente."
+        - "SE dados contraditórios → SINALIZAR ao humano antes de avançar."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2: ANÁLISE DE GAPS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Análise de Gaps"
+    days: "1"
+    tier: 1
+    description: |
+      Comparar o estado atual com o modelo Money Machine ideal.
+
+      CHECKLIST DO MODELO MONEY MACHINE (marcar cada item):
+
+      CRONOGRAMA:
+      [ ] Tem 54 campanhas/ano planejadas? (1/semana)
+      [ ] Segue cronograma ou só faz campanha quando lembra?
+
+      EMPILHAMENTO:
+      [ ] Tem sistema de empilhamento diário? (manhã/tarde/noite)
+      [ ] Oferece produtos diferentes em horários diferentes?
+
+      MIX DE PRODUTOS:
+      [ ] Tem mix balanceado low/mid/high?
+      [ ] Tem pelo menos 1 produto de alto ticket (> R$500)?
+      [ ] Tem produto de baixo ticket para entrada (< R$100)?
+
+      FUNIL PERPÉTUO:
+      [ ] Tem funil de aquisição rodando 24h? (não depende de lançamento)
+      [ ] Tem ManyChat ou automação de captação?
+      [ ] CPL dentro do benchmark? (R$1-4)
+
+      EMAIL AUTOMÁTICO:
+      [ ] Tem sequência automática para novos leads?
+      [ ] Manda email para a base pelo menos 2x/semana?
+      [ ] Tem sequência de reengajamento para inativos?
+
+      PRÓXIMO PASSO:
+      [ ] Todo produto tem próximo passo definido? (NO-F021)
+      [ ] 98% que não compraram recebem nova oferta? (NO-F022)
+
+      ESCALA:
+      [ ] Tem canal de escala (livro Amazon, app IA, canal YouTube)?
+      [ ] Tem pelo menos 1 fonte de receita escalável (sem troca de tempo)?
+
+      CUSTO:
+      [ ] Custo fixo < 40% da receita? (NO-F033)
+      [ ] Escala é no variável, não no fixo?
+
+    tasks:
+      - task_id: checklist-money-machine
+        agent: monetizador
+        required: true
+        description: |
+          Aplicar checklist do modelo Money Machine nos dados coletados:
+          - Marcar cada item: Sim / Não / Parcial
+          - Para cada Não ou Parcial: estimar impacto no faturamento
+          - Calcular score atual (% de itens completos)
+          - Priorizar gaps por impacto x esforço de implementação
+        output: "checklist-money-machine-{negocio}.md"
+
+      - task_id: calculo-dinheiro-na-mesa
+        agent: monetizador
+        required: true
+        description: |
+          Calcular o "dinheiro na mesa" em cada gap:
+          - SE tem lista de 5k e não manda email → calcular receita potencial
+          - SE não tem empilhamento → calcular tickets deixados de faturar
+          - SE não tem mix de high ticket → calcular impacto no faturamento
+          - SE não tem funil perpétuo → quanto paga em lançamento vs perpetuo
+          Usar números reais ou estimativas conservadoras.
+        output: "dinheiro-na-mesa-{negocio}.md"
+
+      - task_id: mapa-gaps-priorizados
+        agent: vtd-chief
+        required: true
+        description: |
+          Criar mapa de gaps priorizados por:
+          - Impacto: quanto vai aumentar o faturamento
+          - Esforço: quanto tempo/recurso para implementar
+          - Sequência: o que precisa ser feito antes do quê
+          Resultado: matriz 2x2 (impacto alto/baixo x esforço alto/baixo)
+          Quick wins = alto impacto + baixo esforço (fazer primeiro)
+        output: "mapa-gaps-priorizados-{negocio}.md"
+
+    checkpoint:
+      criteria:
+        - "Checklist Money Machine preenchido para todos os itens"
+        - "Score atual calculado (% de itens completos)"
+        - "Dinheiro na mesa estimado por gap"
+        - "Mapa de gaps priorizados (impacto x esforço)"
+        - "Quick wins identificados (alto impacto + baixo esforço)"
+      human_review: true
+      message: "Análise de gaps completa. Revisar priorização antes de prescrever."
+      veto_conditions:
+        - "SE todos os itens marcados como Sim → SUSPEITO. Refazer diagnóstico com mais profundidade."
+        - "SE dinheiro na mesa = R$0 → SUSPEITO. Todo negócio tem oportunidade inexplorada."
+        - "SE quick wins não identificados → INCOMPLETO. Sempre há algo de baixo esforço."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3: PRESCRIÇÃO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Prescrição"
+    days: "1"
+    tier: 2
+    description: |
+      Transformar o diagnóstico em plano de ação concreto.
+
+      ESTRUTURA DA PRESCRIÇÃO:
+
+      1. RESUMO EXECUTIVO (1 página):
+         - Estado atual do negócio (nota de 0-10 no modelo Money Machine)
+         - Top 3 oportunidades imediatas
+         - Potencial de crescimento estimado com implementação
+
+      2. QUICK WINS (Semanas 1-4):
+         - Ações de alto impacto e baixo esforço
+         - Exemplos típicos: começar a mandar email 2x/semana,
+           criar 1 produto de alto ticket, configurar próximo passo em produto existente
+
+      3. IMPLEMENTAÇÃO ESTRUTURAL (Meses 2-3):
+         - Itens que precisam de mais esforço mas são críticos
+         - Exemplos: configurar ManyChat, criar funil perpétuo, empilhamento
+
+      4. ESCALA (Meses 4-6):
+         - Canal de escala (livro, app, YouTube)
+         - Automações avançadas
+         - Expansão de mix de produtos
+
+      5. MODELO MONEY MACHINE ADAPTADO:
+         - Como o modelo Money Machine ideal se aplica a ESTE negócio
+         - Números-alvo para 6 meses e 12 meses
+         - KPIs a monitorar mensalmente
+
+    tasks:
+      - task_id: prescricao-quick-wins
+        agent: monetizador
+        required: true
+        description: |
+          Criar lista de quick wins com passo a passo:
+          Para cada quick win:
+          - Ação específica (não genérica)
+          - Prazo de implementação (em dias)
+          - Agente ou workflow recomendado para executar
+          - Impacto esperado (estimativa de receita incremental)
+          Ordenar por impacto imediato / facilidade de implementação.
+          Máximo 5 quick wins (para não sobrecarregar).
+        output: "quick-wins-{negocio}.md"
+
+      - task_id: timeline-prescricao
+        agent: monetizador
+        required: true
+        description: |
+          Criar timeline de correção de 6 meses:
+          Mês 1: {quick wins + primeiros estruturais}
+          Mês 2: {implementação funil + email automático}
+          Mês 3: {empilhamento + mix de produtos}
+          Mês 4: {canal de escala}
+          Mês 5: {otimização + automações avançadas}
+          Mês 6: {expansão + próximo nível}
+          Para cada mês: resultado esperado no faturamento.
+        output: "timeline-prescricao-{negocio}.md"
+
+      - task_id: relatorio-diagnostico-final
+        agent: vtd-chief
+        required: true
+        description: |
+          Consolidar tudo no diagnóstico final (diagnostico-{negocio}.md):
+          1. Capa: nome, data, score atual (X/10 no Money Machine)
+          2. Resumo executivo
+          3. Dados do negócio atual (tabelas)
+          4. Checklist Money Machine com score
+          5. Dinheiro na mesa identificado
+          6. Top 5 quick wins (ação + prazo + impacto)
+          7. Timeline de 6 meses
+          8. Modelo Money Machine adaptado para o negócio
+          9. Próximos passos imediatos (o que fazer esta semana)
+          Formato: documento de consultor, linguagem clara, sem jargão.
+        output: "diagnostico-{negocio}.md"
+
+    checkpoint:
+      criteria:
+        - "Score no Money Machine calculado (0-10)"
+        - "Mínimo 3 quick wins com passo a passo"
+        - "Timeline de 6 meses com resultados esperados"
+        - "Relatório final consolidado e legível"
+        - "Próximos passos imediatos definidos (o que fazer esta semana)"
+        - "Modelo Money Machine adaptado ao negócio específico"
+      human_review: true
+      message: "Diagnóstico completo. Relatório final pronto para entrega."
+      veto_conditions:
+        - "SE prescrição genérica (não específica ao negócio) → VETO. Adaptar ao contexto real."
+        - "SE timeline sem números de faturamento esperado → ALERTA. Prescrição sem ROI é consultoria vaga."
+        - "SE próximos passos vazios → VETO. Diagnóstico sem ação imediata não gera resultado."
+        - "SE quick wins levam > 2 semanas para implementar → REVISAR. Quick wins são rápidos."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_stakeholders: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHECKPOINT CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+checkpoint_config:
+  - phase: PHASE-1
+    heuristic: "NO-H001 + NO-H002"
+    criteria: "Dados reais coletados, não estimativas do empreendedor sem base"
+    veto_condition: "Dados sem número = diagnóstico sem base"
+
+  - phase: PHASE-2
+    heuristic: "NO-F022 + NO-F033"
+    criteria: "Gaps identificados com impacto financeiro estimado"
+    veto_condition: "Gap sem impacto financeiro = priorização impossível"
+
+  - phase: PHASE-3
+    heuristic: "NO-F021 + NO-F049"
+    criteria: "Quick wins com passo a passo + timeline com resultados esperados"
+    veto_condition: "Prescrição genérica = diagnóstico inútil"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMPLETION SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+completion_signal: "<promise>COMPLETE</promise>"
+checkpoint_signal: "<promise>CHECKPOINT:PHASE-X</promise>"
+blocked_signal: "<promise>BLOCKED:T-X.Y</promise>"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT ARTIFACTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  coleta:
+    - "entrevista-raw-{negocio}.md — Respostas brutas da entrevista"
+    - "presenca-digital-{negocio}.md — Dados de redes sociais e presença online"
+    - "dados-consolidados-{negocio}.yaml — Dados estruturados para análise"
+
+  analise:
+    - "checklist-money-machine-{negocio}.md — Score por pilar do modelo"
+    - "dinheiro-na-mesa-{negocio}.md — Oportunidades financeiras quantificadas"
+    - "mapa-gaps-priorizados-{negocio}.md — Matriz impacto x esforço"
+
+  prescricao:
+    - "quick-wins-{negocio}.md — 5 ações de alto impacto e baixo esforço"
+    - "timeline-prescricao-{negocio}.md — Plano de 6 meses"
+    - "diagnostico-{negocio}.md — Relatório final completo"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  coleta:
+    - "[ ] Faturamento mensal documentado"
+    - "[ ] Lista de produtos com tickets"
+    - "[ ] Dados de email (tamanho + frequência)"
+    - "[ ] Custo fixo vs variável estimado"
+    - "[ ] Presença digital pesquisada"
+
+  analise:
+    - "[ ] Checklist Money Machine (todos os itens avaliados)"
+    - "[ ] Score calculado (X/10)"
+    - "[ ] Dinheiro na mesa estimado por gap"
+    - "[ ] Matriz impacto x esforço preenchida"
+    - "[ ] Quick wins identificados"
+
+  prescricao:
+    - "[ ] Mínimo 3 quick wins com passo a passo"
+    - "[ ] Timeline 6 meses com resultados esperados"
+    - "[ ] Relatório final legível e específico ao negócio"
+    - "[ ] Próximos passos desta semana definidos"
+    - "[ ] Money Machine adaptado ao contexto do negócio"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GOVERNANCE GATE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+governance_gate:
+  required_checks:
+    - "Dados reais coletados (não estimativas sem base — NO-H001/NO-H002)"
+    - "Gaps quantificados com impacto financeiro (dinheiro na mesa)"
+    - "Quick wins específicos ao negócio (não genéricos)"
+    - "Timeline com resultados esperados por mês"
+    - "Próximos passos imediatos definidos (esta semana)"
+    - "Modelo Money Machine completamente coberto no checklist"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MODELO MONEY MACHINE — REFERÊNCIA COMPLETA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+money_machine_reference:
+  pillars:
+    cronograma:
+      ideal: "54 campanhas/ano, 1/semana, sem semana vazia"
+      indicadores: "campanhas_por_mes >= 4"
+
+    empilhamento:
+      ideal: "3 ofertas/dia: manhã low, tarde high, noite cross-sell"
+      indicadores: "touchpoints_diarios >= 3"
+
+    mix_produtos:
+      ideal: "low (R$9-97) + mid (R$97-497) + high (R$497+)"
+      indicadores: "tem_low AND tem_high"
+
+    funil_perpetuo:
+      ideal: "CPL R$1-4, funil rodando 24h sem lançamento"
+      indicadores: "cpl_medio <= 4 AND funis_ativos >= 1"
+
+    email_automatico:
+      ideal: "email 2x/semana para base + sequências automáticas por produto"
+      indicadores: "emails_por_semana >= 2 AND sequencias_automaticas >= 1"
+
+    proximo_passo:
+      ideal: "todo produto tem upsell/next step definido (NO-F021)"
+      indicadores: "produtos_sem_proximo_passo == 0"
+
+    escala:
+      ideal: "1+ canal escalável: livro Amazon, app IA, YouTube"
+      indicadores: "canais_escaláveis >= 1"
+
+    custo:
+      ideal: "custo_fixo < 40% da receita, escala no variável (NO-F033)"
+      indicadores: "percentual_custo_fixo <= 0.40"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  framework: "AIOS Squad Creator"
+  created: "2026-02-21"
+  primary_use_case: "Diagnóstico completo e prescrição para o modelo Money Machine"
+  source_mind: "natanael-oliveira"
+  key_difference: |
+    Único workflow que faz diagnóstico sistemático contra o modelo Money Machine.
+    Orquestra 3 agentes em sequência: vtd-chief (coleta) → pesquisador-ia (análise) → monetizador (prescrição).
+    Quantifica o dinheiro na mesa por gap, priorizando quick wins de alto impacto.

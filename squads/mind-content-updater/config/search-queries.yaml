@@ -1,0 +1,105 @@
+# Search Query Templates
+# Used by discover-sources task to find content for a person
+#
+# Variables: {name} = full name, {slug} = snake_case, {handle} = social handle
+
+search_categories:
+
+  written_content:
+    priority: 1
+    description: "Blog posts, essays, newsletters, personal writing"
+    exa_queries:
+      - "{name} blog posts essays writing"
+      - "{name} articles published author"
+      - "{name} newsletter substack medium writing"
+      - "{name} personal website blog"
+    web_queries:
+      - "{name} official blog website"
+      - "{name} substack newsletter"
+      - "{name} medium articles"
+      - "site:medium.com {name}"
+
+  books_courses:
+    priority: 1
+    description: "Published books, online courses, workshops"
+    exa_queries:
+      - "{name} books author published"
+      - "{name} course masterclass workshop"
+    web_queries:
+      - "{name} books amazon goodreads"
+      - "{name} online course"
+      - "{name} published author ISBN"
+
+  interviews_podcasts:
+    priority: 2
+    description: "Podcast appearances, long-form interviews"
+    exa_queries:
+      - "{name} interview podcast conversation"
+      - "{name} podcast appearance guest"
+      - "{name} long form interview deep dive"
+    web_queries:
+      - "{name} podcast episodes guest"
+      - "{name} interview transcript"
+      - "{name} Lex Fridman Joe Rogan Tim Ferriss"
+
+  video_talks:
+    priority: 2
+    description: "YouTube videos, conference talks, keynotes"
+    exa_queries:
+      - "{name} keynote talk conference presentation"
+      - "{name} YouTube best talks"
+    web_queries:
+      - "{name} YouTube channel"
+      - "{name} TED talk"
+      - "{name} conference presentation video"
+
+  frameworks_thinking:
+    priority: 2
+    description: "Mental models, frameworks, methodology, philosophy"
+    exa_queries:
+      - "{name} framework methodology approach"
+      - "{name} mental model principles"
+      - "{name} philosophy beliefs decision making"
+      - "{name} advice lessons learned"
+      - "{name} rules principles guidelines"
+    web_queries:
+      - "{name} framework approach"
+      - "{name} principles philosophy"
+
+  social_media:
+    priority: 3
+    description: "Twitter/X threads, LinkedIn posts, social content"
+    exa_queries:
+      - "{name} twitter threads best insights"
+      - "{name} linkedin posts"
+      - "{name} social media best posts"
+    web_queries:
+      - "{name} twitter X account"
+      - "{name} linkedin profile"
+      - "site:twitter.com {name}"
+      - "site:x.com {name}"
+
+# Language-specific query additions
+language_modifiers:
+  pt:
+    suffix_queries:
+      - "{name} blog artigos portugues"
+      - "{name} entrevista podcast brasileiro"
+      - "{name} canal YouTube"
+      - "{name} palestra conferencia"
+  es:
+    suffix_queries:
+      - "{name} blog articulos espanol"
+      - "{name} entrevista podcast"
+      - "{name} canal YouTube"
+
+# Exa search configuration
+exa_config:
+  default_num_results: 10
+  max_num_results: 20
+  type: "auto"
+  use_autoprompt: true
+
+# WebSearch configuration
+web_search_config:
+  max_results_per_query: 10

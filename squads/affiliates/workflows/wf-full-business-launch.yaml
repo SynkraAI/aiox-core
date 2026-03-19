@@ -1,0 +1,181 @@
+# Full Affiliate Business Launch Workflow
+# Master workflow que orquestra os sub-workflows para lançamento completo
+# Source: @architect research — Composição de wf-1 + wf-3 + wf-6 + wf-7 + wf-5
+# Version: 1.0.0
+
+id: wf-full-business-launch
+name: "Full Affiliate Business Launch"
+version: "1.0.0"
+duration: "8-12 weeks"
+description: |
+  Master workflow para lançar negócio de afiliados completo.
+  Orquestra 5 sub-workflows em sequência.
+
+  FILOSOFIA: "Build foundations first, then layer channels. Never rush to revenue."
+
+  RESULTADO: Negócio de afiliados operacional com site, funnel, email, social e review mensal.
+
+best_for:
+  - "Lançar negócio de afiliados do zero (full stack)"
+  - "Reestruturar operação completa"
+
+decision_matrix_fit:
+  complexity: very_high
+  agents_required: 10+
+  estimated_duration: "8-12 weeks"
+  user_involvement: "high"
+  prerequisites:
+    - "Comprometimento de 8-12 semanas"
+    - "Budget para ferramentas (hosting, email, SEO tools)"
+    - "Nicho em mente (ou Phase 1 ajudará a definir)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ORCHESTRATION: SUB-WORKFLOWS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+orchestration:
+  type: "sequential"
+  description: "Cada sub-workflow completa antes do próximo iniciar."
+
+phases:
+  - id: PHASE-0
+    name: "Site Foundation"
+    weeks: "Weeks 1-4"
+    tier: 0
+    description: "Criar site de afiliados com nicho validado, topical map, content plan."
+    sub_workflow: "wf-new-affiliate-site"
+    ref: "wf-new-affiliate-site.yaml"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Site Foundation Complete"
+      criteria:
+        - "wf-new-affiliate-site completed"
+        - "Nicho validado (scorecard >= 10/15)"
+        - "Site live com primeiros artigos"
+      human_review: true
+      message: "Site foundation completa. Prosseguir para funnel?"
+
+  - id: PHASE-1
+    name: "Funnel System"
+    weeks: "Weeks 3-6"
+    tier: 1
+    description: "Criar funil de afiliados com value ladder, bridge page e email."
+    sub_workflow: "wf-new-affiliate-funnel"
+    ref: "wf-new-affiliate-funnel.yaml"
+    overlap_note: "Pode iniciar na semana 3 se site foundation está avançada."
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Funnel System Complete"
+      criteria:
+        - "wf-new-affiliate-funnel completed"
+        - "Funnel live e testado end-to-end"
+        - "Email automation ativa"
+      human_review: true
+      message: "Funnel operacional. Prosseguir para email nurture?"
+
+  - id: PHASE-2
+    name: "Email Nurture"
+    weeks: "Weeks 5-7"
+    tier: 1
+    description: "Expandir email marketing com SOS, segmentação e broadcast calendar."
+    sub_workflow: "wf-email-nurture-setup"
+    ref: "wf-email-nurture-setup.yaml"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Email Nurture Complete"
+      criteria:
+        - "wf-email-nurture-setup completed"
+        - "SOS sequence ativa"
+        - "Broadcast calendar 4 semanas pronto"
+      human_review: false
+
+  - id: PHASE-3
+    name: "Social Channels"
+    weeks: "Weeks 6-9"
+    tier: 2
+    description: "Lançar presença social com content pyramid, hooks e video scripts."
+    sub_workflow: "wf-social-channel-launch"
+    ref: "wf-social-channel-launch.yaml"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Social Channels Live"
+      criteria:
+        - "wf-social-channel-launch completed"
+        - "Mínimo 1 plataforma ativa com 10+ posts"
+      human_review: true
+      message: "Social channels ativos. Prosseguir para primeiro review?"
+
+  - id: PHASE-4
+    name: "First Portfolio Review"
+    weeks: "Weeks 10-12"
+    tier: 2
+    description: "Primeira revisão mensal de portfolio para otimizar e realocar."
+    sub_workflow: "wf-monthly-portfolio-review"
+    ref: "wf-monthly-portfolio-review.yaml"
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Business Launch Complete"
+      criteria:
+        - "wf-monthly-portfolio-review completed"
+        - "SMPK decisions tomadas"
+        - "ICE priorities definidas para mês 2"
+        - "Revenue baseline documentado"
+      human_review: true
+      message: |
+        Negócio de afiliados lançado.
+        Site + Funnel + Email + Social operacionais.
+        Próximo: executar Monthly Portfolio Review todo mês.
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - halt_workflow: false
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "affiliates-chief"
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-full-business-launch"
+      status: "completed"
+      sub_workflows_completed:
+        - "wf-new-affiliate-site"
+        - "wf-new-affiliate-funnel"
+        - "wf-email-nurture-setup"
+        - "wf-social-channel-launch"
+        - "wf-monthly-portfolio-review"
+
+outputs:
+  final_deliverable:
+    name: "Full Business Launch Package"
+    location: "outputs/business-launch/{id}/"
+    contents:
+      - "README.md — Business overview"
+      - "site/ — Site blueprint"
+      - "funnel/ — Funnel package"
+      - "email/ — Email system"
+      - "social/ — Social channels"
+      - "review/ — First portfolio review"
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-18"
+  author: "squad-architect"
+  source_frameworks:
+    - "Composite: all affiliate frameworks"
+  priority: 3
+  quality_gate: "SC_WFL_001"
+  sub_workflows:
+    - "wf-new-affiliate-site"
+    - "wf-new-affiliate-funnel"
+    - "wf-email-nurture-setup"
+    - "wf-social-channel-launch"
+    - "wf-monthly-portfolio-review"

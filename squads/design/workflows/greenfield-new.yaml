@@ -1,0 +1,234 @@
+workflow:
+  id: design-system-greenfield-new
+  name: Design System Greenfield New
+  description: "Greenfield workflow: start fresh with token-based design system, build production components from scratch. Mandatory governance protocol: squads/design/protocols/ai-first-governance.md"
+  version: 2.0.0
+  type: sequential
+  sequence:
+    - step: step-1-setup
+      id: step-1-setup
+      phase: 1
+      phase_name: Initialize Design System Structure
+      agent: brad-frost
+      action: setup
+      outputs:
+        - tokens_yaml
+        - structure_created
+        - state_file
+      next: step-2-build-atoms
+    - step: step-2-build-atoms
+      id: step-2-build-atoms
+      phase: 2
+      phase_name: Build Atomic Components
+      agent: brad-frost
+      action: build
+      outputs:
+        - atoms
+      next: step-3-compose-molecules
+    - step: step-3-compose-molecules
+      id: step-3-compose-molecules
+      phase: 3
+      phase_name: Compose Molecule Components
+      agent: brad-frost
+      action: compose
+      outputs:
+        - molecules
+      next: step-4-compose-organisms
+    - step: step-4-compose-organisms
+      id: step-4-compose-organisms
+      phase: 4
+      phase_name: Compose Organism Components (Optional)
+      agent: brad-frost
+      action: compose
+      outputs:
+        - organisms
+      next: step-5-document
+    - step: step-5-document
+      id: step-5-document
+      phase: 5
+      phase_name: Generate Pattern Library Documentation
+      agent: brad-frost
+      action: document
+      outputs:
+        - documentation
+        - storybook
+        - readme
+      next: step-6-promote-to-workspace
+    - step: step-6-promote-to-workspace
+      id: step-6-promote-to-workspace
+      phase: 6
+      phase_name: Promote Outputs to Workspace Canonical Locations
+      agent: brad-frost
+      action: sync-registry
+      outputs:
+        - tokens_promoted
+        - registry_updated
+        - metadata_updated
+    - workflow_end:
+        id: complete
+        action: workflow_complete
+metadata:
+  author: Brad (Design System Architect)
+  created_date: "2025-10-27"
+  last_modified: "2026-02-16"
+  tags:
+    - design-system
+    - greenfield
+    - components
+    - brad
+inputs:
+  project_name:
+    type: string
+    description: Project name for output organization
+    required: true
+    default: my-app
+  tokens_source:
+    type: string
+    description: Path to existing tokens.yaml (optional - will generate starter tokens if not provided)
+    required: false
+  framework:
+    type: string
+    description: Component framework (react, vue, svelte)
+    required: true
+    default: react
+    validation: "Must be: react, vue, or svelte"
+steps:
+  - id: step_1_setup
+    name: Initialize Design System Structure
+    type: agent
+    agent: brad-frost
+    command: "*setup"
+    inputs:
+      project_name: "{{project_name}}"
+      tokens_source: "{{tokens_source}}"
+      framework: "{{framework}}"
+    outputs:
+      tokens_yaml: outputs/design-system/{{project_name}}/tokens/tokens.yaml
+      structure_created: outputs/design-system/{{project_name}}/
+      state_file: outputs/design-system/{{project_name}}/.state.yaml
+    error_handling:
+      strategy: fail
+  - id: step_2_build_atoms
+    name: Build Atomic Components
+    type: agent
+    agent: brad-frost
+    command: "*build"
+    inputs:
+      tokens: "{{step_1_setup.tokens_yaml}}"
+      patterns: button,input,label,icon,badge,avatar,spinner
+    outputs:
+      atoms: outputs/design-system/{{project_name}}/components/atoms/
+    error_handling:
+      strategy: fail
+  - id: step_3_compose_molecules
+    name: Compose Molecule Components
+    type: agent
+    agent: brad-frost
+    command: "*compose"
+    inputs:
+      atoms: "{{step_2_build_atoms.atoms}}"
+      patterns: form-field,card,alert,breadcrumb,pagination
+    outputs:
+      molecules: outputs/design-system/{{project_name}}/components/molecules/
+    error_handling:
+      strategy: fail
+  - id: step_4_compose_organisms
+    name: Compose Organism Components (Optional)
+    type: agent
+    agent: brad-frost
+    command: "*compose"
+    inputs:
+      atoms: "{{step_2_build_atoms.atoms}}"
+      molecules: "{{step_3_compose_molecules.molecules}}"
+      patterns: form,table,modal,navigation
+    outputs:
+      organisms: outputs/design-system/{{project_name}}/components/organisms/
+    error_handling:
+      strategy: skip
+  - id: step_5_document
+    name: Generate Pattern Library Documentation
+    type: agent
+    agent: brad-frost
+    command: "*document"
+    inputs:
+      components: outputs/design-system/{{project_name}}/components/
+      tokens: "{{step_1_setup.tokens_yaml}}"
+    outputs:
+      documentation: outputs/design-system/{{project_name}}/docs/
+      storybook: outputs/design-system/{{project_name}}/.storybook/
+      readme: outputs/design-system/{{project_name}}/README.md
+    error_handling:
+      strategy: skip
+  - id: step_6_promote_to_workspace
+    name: Promote Outputs to Workspace Canonical Locations
+    type: agent
+    agent: brad-frost
+    command: "*sync-registry"
+    description: Move outputs from outputs/ to workspace canonical paths
+    inputs:
+      tokens_source: "{{step_1_setup.tokens_yaml}}"
+      components_source: outputs/design-system/{{project_name}}/components/
+    outputs:
+      tokens_promoted: workspace/system/tokens/
+      registry_updated: workspace/ui/registry.json
+      metadata_updated: workspace/domains/design-system/metadata/components.json
+    promotion_map:
+      - from: outputs/design-system/{{project_name}}/tokens/tokens.json
+        to: workspace/system/tokens/primitive.tokens.json
+      - from: outputs/design-system/{{project_name}}/tokens/tokens.yaml
+        to: squads/design/data/design-tokens-spec.yaml
+      - from: outputs/design-system/{{project_name}}/components/
+        to: workspace/ui/components/
+    validation:
+      - workspace/ui/registry.json updated with new components
+      - workspace/domains/design-system/metadata/components.json reflects changes
+      - squads/design/scripts/design-system/validate_components_metadata.cjs passes
+    error_handling:
+      strategy: fail
+outputs:
+  design_system_complete:
+    type: boolean
+    description: Workflow completed successfully
+    source: step_6_promote_to_workspace.success
+  tokens_location:
+    type: string
+    description: Path to design tokens
+    source: step_1_setup.tokens_yaml
+  components_location:
+    type: string
+    description: Path to generated components
+    source: outputs/design-system/{{project_name}}/components/
+  documentation_location:
+    type: string
+    description: Path to pattern library documentation
+    source: step_5_document.documentation
+  storybook_location:
+    type: string
+    description: Path to Storybook configuration
+    source: step_5_document.storybook
+global_error_handling:
+  on_error: abort
+  notification:
+    enabled: true
+    channels:
+      - console
+security:
+  authorization_required: false
+  audit_logging: true
+quality_gates:
+  internal_quality_chain:
+    required:
+      - node squads/design/scripts/design-system/generate_components_metadata.cjs
+      - node squads/design/scripts/design-system/validate_components_metadata.cjs
+      - node squads/design/scripts/design-system/sync_design_manifest.cjs
+      - node squads/design/scripts/design-system/validate_design_manifest_drift.cjs
+      - node squads/design/scripts/design-system/validate_task_checklist_bindings.cjs
+      - node squads/design/scripts/design-system/validate_mcp_skeleton.cjs
+    optional:
+      - node squads/design/scripts/design-system/test_mcp_tools.cjs
+    blocking: true
+    policy: internal-first
+    exception:
+      external_tool_allowed_with:
+        - capability_gap_documented
+        - rationale_recorded

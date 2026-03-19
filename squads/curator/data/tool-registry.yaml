@@ -1,0 +1,305 @@
+# Tool Registry — Curator Squad
+# Version: 1.1.0
+# Purpose: Catalog all external tools, scripts, and MCPs used by the Curator squad
+# Adapted from: ETL mcp-registry.yaml pattern
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SCRIPTS (Local — project scripts/)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+scripts:
+  generate_compact_mining:
+    path: "squads/curator/scripts/generate_compact_mining.py"
+    status: active
+    priority: required
+    purpose: "Generate compact momentos.md (top 50) from merged moments"
+    used_by: ["mine-transcript (Pass 4)", "resume-mining (Phase 4)"]
+    inputs: "all_moments_merged.md, source_name, duration_seconds"
+    outputs: "output/curated/{source-slug}/momentos.md"
+
+  generate_annotated_transcript:
+    path: "squads/curator/scripts/generate_annotated_transcript.py"
+    status: active
+    priority: required
+    purpose: "Generate annotated transcript with KEEP/REMOVE/BRIDGE markers"
+    used_by: ["mine-transcript (Pass 4.6)", "resume-mining (Phase 4)"]
+    inputs: "transcript_raw.txt, momentos.md, source_name"
+    outputs: "output/curated/{source-slug}/transcricao_anotada.md"
+
+  validate_timestamps:
+    path: "squads/curator/scripts/validate_timestamps.py"
+    status: active
+    priority: required
+    purpose: "Validate extracted timestamps against raw transcript (Pass 4.7)"
+    used_by: ["mine-transcript", "resume-mining", "validate-curation"]
+    inputs: "momentos.md, transcript_raw.txt"
+    outputs: "exit code 0 (pass) or 1 (fail) + report"
+
+  validate_transcription:
+    path: "squads/curator/scripts/validate_transcription.py"
+    status: active
+    priority: required
+    purpose: "Detect transcription drift via fuzzy matching"
+    used_by: ["mine-transcript (Pass 4.7)", "validate-curation"]
+    inputs: "momentos.md, transcript_raw.txt"
+    outputs: "drift report"
+
+  _validation_common:
+    path: "squads/curator/scripts/_validation_common.py"
+    status: active
+    priority: required
+    purpose: "Shared parsing module for validation scripts"
+    used_by: ["validate_timestamps.py", "validate_transcription.py"]
+
+  generate_source_index:
+    path: "squads/curator/scripts/generate_source_index.py"
+    status: active
+    priority: recommended
+    purpose: "Generate INDEX.md for a curated source"
+    used_by: ["mine-transcript (Pass 6)"]
+    outputs: "output/curated/{source-slug}/INDEX.md"
+
+  generate_editor_guide:
+    path: "squads/curator/scripts/generate_editor_guide.py"
+    status: active
+    priority: recommended
+    purpose: "Generate GUIA_EDITOR.md from YAML cut files"
+    used_by: ["generate-editor-guide task", "curator-chief *editor-guide"]
+    outputs: "{filename}_GUIA_EDITOR.md alongside each YAML"
+
+  merge_mining_parts:
+    path: "squads/curator/scripts/merge_mining_parts.py"
+    status: active
+    priority: required
+    purpose: "Merge sub-agent mining parts into single file"
+    used_by: ["mine-transcript (Step 4)", "resume-mining (Phase 4)"]
+    outputs: "_temp/mining/{source-slug}/all_moments_merged.md"
+
+  apply_stt_corrections:
+    path: "squads/curator/scripts/apply_stt_corrections.py"
+    status: active
+    priority: recommended
+    purpose: "Apply STT error corrections to transcriptions"
+    used_by: ["mine-transcript (Pass 4.5)"]
+    inputs: "momentos.md, stt-corrections.yaml"
+
+  transcribe_local:
+    path: "scripts/transcribe_local.py"
+    status: planned
+    priority: recommended
+    purpose: "Local Whisper transcription with hardware auto-detection"
+    used_by: ["curator-chief (transcript acquisition)", "Tier -1 pipeline"]
+    inputs: "audio/video file (mp4, mp3, wav, webm, mkv, m4a)"
+    outputs: ".vtt (WebVTT) + .md (Markdown with [HH:MM:SS])"
+    story: "plan/stories/story-whisper-local-transcription.md"
+    notes: "Auto-detects GPU/VRAM/RAM, selects model automatically. Groq cloud fallback."
+
+  catalog_transcript:
+    path: "squads/curator/scripts/catalog_transcript.py"
+    status: active
+    priority: required
+    purpose: "Parse & normalize transcripts, build YAML index"
+    used_by: ["mine-transcript (input parsing)", "validate-curation"]
+    inputs: ".vtt or .md transcript"
+    outputs: "parsed transcript data"
+
+  execute_ffmpeg_cuts:
+    path: "squads/curator/scripts/execute_ffmpeg_cuts.py"
+    status: active
+    priority: required
+    purpose: "Execute FFmpeg cuts from validated YAML cut scripts"
+    used_by: ["execute-cut task", "ffmpeg-cutter agent"]
+    inputs: "video file, roteiro_corte.yaml (QG-004 passed)"
+    outputs: "rendered video segments + render_report.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXTERNAL TOOLS (System-level dependencies)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+external_tools:
+  ffmpeg:
+    type: cli
+    status: required
+    purpose: "Audio extraction from video, format conversion, resampling to 16kHz mono"
+    used_by: ["transcribe_local.py"]
+    detection: "shutil.which('ffmpeg') or Remotion bundled"
+    install:
+      win32: "choco install ffmpeg  OR  winget install ffmpeg"
+      darwin: "brew install ffmpeg"
+      linux: "sudo apt install ffmpeg"
+    cost: free
+
+  yt_dlp:
+    type: cli
+    status: recommended
+    purpose: "Download video/audio from YouTube and 1000+ sites"
+    used_by: ["transcript acquisition (Tier -1)"]
+    detection: "shutil.which('yt-dlp') or pip show yt-dlp"
+    install: "pip install yt-dlp"
+    cost: free
+    notes: "Requires JS runtime for YouTube in 2026. Alternative to /youtube agent for batch downloads."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PYTHON LIBRARIES (pip installable)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+python_libraries:
+  faster_whisper:
+    type: library
+    status: recommended
+    priority: required
+    purpose: "Local Whisper transcription — 4x faster than openai-whisper, 60% less VRAM"
+    used_by: ["transcribe_local.py"]
+    install: "pip install faster-whisper>=1.0.0"
+    cost: free
+    gpu_support:
+      nvidia: "CUDA auto-detected via torch.cuda"
+      apple: "No Metal — falls back to CPU int8"
+      amd: "ROCm via ctranslate2 build"
+    model_selection:
+      vram_lt_4gb: "tiny (int8)"
+      vram_4_6gb: "small (float16)"
+      vram_6_8gb: "medium (float16)"
+      vram_gt_8gb: "large-v3 (float16)"
+      cpu_only: "small (int8)"
+
+  whisperx:
+    type: library
+    status: optional
+    purpose: "Word-level alignment + speaker diarization (extends faster-whisper)"
+    install: "pip install whisperx"
+    cost: free
+    notes: "Use when speaker identification needed. Requires pyannote HF token for diarization."
+    depends_on: ["faster-whisper", "pyannote.audio"]
+
+  pyannote_audio:
+    type: library
+    status: optional
+    purpose: "Speaker diarization — identifies WHO is speaking"
+    install: "pip install pyannote.audio"
+    cost: free
+    notes: "Requires Hugging Face token. Useful for multi-speaker lives/interviews."
+
+  psutil:
+    type: library
+    status: recommended
+    purpose: "System hardware detection (RAM, CPU)"
+    install: "pip install psutil>=5.9.0"
+    cost: free
+    used_by: ["transcribe_local.py (detect_hardware)"]
+
+  pydub:
+    type: library
+    status: optional
+    purpose: "High-level audio manipulation (split, merge, effects)"
+    install: "pip install pydub"
+    cost: free
+    notes: "Simpler API than raw ffmpeg for audio processing tasks."
+
+  pyscenedetect:
+    type: library
+    status: optional
+    purpose: "Automatic scene/cut detection in video files"
+    install: "pip install scenedetect"
+    cost: free
+    notes: "Future: auto-detect scene changes for cut script optimization."
+
+  sentence_transformers:
+    type: library
+    status: optional
+    purpose: "Semantic embeddings for moment similarity search"
+    install: "pip install sentence-transformers"
+    cost: free
+    notes: "Future: semantic search across moments, find similar content across sources."
+
+  bertopic:
+    type: library
+    status: optional
+    purpose: "Transformer-based topic modeling from transcript content"
+    install: "pip install bertopic"
+    cost: free
+    notes: "Future: auto-detect topics/themes across multiple transcripts."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CLOUD APIs (Pay-per-use)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+cloud_apis:
+  groq_whisper:
+    type: api
+    status: recommended
+    priority: optional
+    purpose: "Cloud Whisper transcription — 216x realtime, fallback for no-GPU machines"
+    used_by: ["transcribe_local.py (--cloud mode)"]
+    cost: "$0.04/hour (whisper-large-v3-turbo)"
+    models:
+      - "whisper-large-v3 (best accuracy, $0.04/h)"
+      - "whisper-large-v3-turbo (balanced, $0.04/h)"
+      - "distil-whisper (fastest, $0.02/h)"
+    limits: "100 MB per file (auto-split if larger)"
+    auth: "GROQ_API_KEY env var"
+    install: "pip install groq"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXTERNAL AGENTS (AIOS ecosystem)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+external_agents:
+  youtube_orbit:
+    agent: "/youtube"
+    name: "Orbit"
+    status: recommended
+    priority: required
+    purpose: "Transcript acquisition from YouTube"
+    when: "No transcript provided, need to fetch from video"
+    cost: free
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MCPs (Available via Docker or direct)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+mcps:
+  exa:
+    status: recommended
+    priority: optional
+    purpose: "Web search for data-curator enrichment (news, trends, statistics)"
+    used_by: ["data-curator"]
+    access: "mcp__docker-gateway__web_search_exa"
+    cost: "per query"
+
+  context7:
+    status: optional
+    priority: optional
+    purpose: "Library documentation lookup (if scripts need framework docs)"
+    access: "mcp__context7__resolve-library-id"
+    cost: free
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DATA FILES (Squad knowledge)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+data_files:
+  moment_types:
+    path: "squads/curator/data/moment-types.yaml"
+    purpose: "Moment type classification (hook, insight, story, quote, transition, b_roll_cue)"
+    used_by: ["mine-transcript (Pass 2)"]
+
+  viral_triggers:
+    path: "squads/curator/data/viral-triggers.yaml"
+    purpose: "Viral trigger detection (lacuna, quebra, pico, etc.)"
+    used_by: ["mine-transcript (Pass 2)"]
+
+  moment_quality_rubric:
+    path: "squads/curator/data/moment-quality-rubric.yaml"
+    purpose: "MQR scoring dimensions and formula"
+    used_by: ["mine-transcript (Pass 2)"]
+
+  stt_corrections:
+    path: "squads/curator/data/stt-corrections.yaml"
+    purpose: "STT error correction patterns"
+    used_by: ["apply_stt_corrections.py"]
+
+  matthew_dicks_dna:
+    path: "squads/curator/data/matthew-dicks-dna.yaml"
+    purpose: "Matthew Dicks mind DNA for narrative agent"
+    used_by: ["matthew-dicks agent"]

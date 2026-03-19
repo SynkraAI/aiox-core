@@ -1,0 +1,35 @@
+smoke_test:
+  expert: "{expert_name}"
+  mind_slug: "{mind_slug}"
+  date: "{date}"
+  tester: "{user_name_or_anonymous}"
+  results:
+    domain_knowledge:
+      question: "{question_asked}"
+      score: 0
+      status: "PASS|FAIL"
+      notes: ""
+    decision_making:
+      scenario: "{scenario_presented}"
+      score: 0
+      status: "PASS|FAIL"
+      notes: ""
+    objection_response:
+      objection: "{objection_raised}"
+      score: 0
+      status: "PASS|FAIL"
+      notes: ""
+  overall:
+    passed: "0/3"
+    status: "APPROVED|NEEDS_REWORK|FAILED"
+    average_score: 0
+    recommendations: []
+  diagnostic:
+    triggered: false
+    # If any test failed, diagnostic framework results go here:
+    # root_cause: ""
+    # heuristics_violated: []
+    # red_flags: []
+    # corrective_action: ""
+    # effort_estimate: "Low|Medium|High"
+    # phases_to_rerun: []

@@ -1,0 +1,357 @@
+# Content Map - OPES Marketing Arm
+# Baseado no framework "The Content Map" de Dan Koe
+# Version: 2.0.0
+# Atualizado: 2026-02-01 — Reposicionamento estratégico
+# Mudanças v2: Eliminados TDAH/neurodivergência/nexialismo. Tom Naval → Dan Koe.
+# Novos territórios: Build in Public, Filosofia do One-Person, Instalação Premium, Jornada Real.
+
+---
+
+# MISSÃO: De onde → Para onde
+mission:
+  anti_vision: |
+    Empresário solo que fatura R$30-200k/mês mas trabalha 14h/dia.
+    Já tentou Zapier, ChatGPT, freelancer dev. Nada integrado.
+    Sabe que precisa de sistemas mas não confia em agência genérica.
+    Quer alguém que instale a máquina — não quer aprender a fazer.
+
+  vision: |
+    One Person Enterprise System — 1 pessoa operando como empresa de 6 via IA.
+    Sistema instalado que produz, distribui e analisa enquanto você dorme.
+    O arquiteto do OPES não ensina. Ele instala empresas.
+    Percepção: "Esse cara é um gênio e é caro."
+
+  tom_referencia: |
+    Dan Koe — construtor que pensa em voz alta.
+    Filosófico mas com dados concretos. Opinião forte com evidência.
+    Mostra o processo, não apenas o resultado.
+    Vulnerável mas competente. Confessa o erro, mostra a correção.
+
+# TERRITÓRIOS: 4 pilares
+topics:
+
+  # ─────────────────────────────────────────
+  # TERRITÓRIO 1: BUILD IN PUBLIC (40%)
+  # ─────────────────────────────────────────
+  - name: "Build in Public"
+    description: "Construção do OPES em tempo real. Cada post é um log de construção."
+    weight: 35  # Reduzido de 40 → 35 (2026-02-18 rebuild). Mais tensão por post, menos volume monotemático.
+    tom: "Construtor mostrando a obra. Não oráculo — engenheiro."
+    sub_topics:
+      - name: "Sistema do Dia"
+        ideas:
+          - "Hoje automatizei X. Economizei Y horas. Aqui está o pipeline."
+          - "Meu sistema gerou este post. Vou te mostrar como."
+          - "Ontem rodei /daily-content. Isso é o que saiu em 3 minutos."
+          - "Hoje meu 'time de marketing' gerou 3 posts enquanto eu tomava café"
+
+      - name: "Stack & Ferramentas"
+        ideas:
+          - "Meu stack completo custa R$X/mês. Substitui equipe de 6. Aqui está cada peça."
+          - "Contratei 0 pessoas e opero como 6. O 'como' é mais simples do que parece."
+          - "Mostro meu organograma: cada 'funcionário' é um agente IA."
+
+      - name: "Agentes em Ação"
+        ideas:
+          - "A reunião de alinhamento do meu time acontece em 3 segundos."
+          - "Meu CMO de IA reprovou 3 posts antes de aprovar esse."
+          - "O que IA faz melhor que humano (e o que nunca vai fazer)."
+
+      - name: "Decisões de Arquitetura"
+        ideas:
+          - "Escolhi X em vez de Y. Aqui está por quê."
+          - "Refiz o sistema inteiro em 1 semana. Custou R$0. Com equipe custaria R$30k."
+          - "Não substitui equipe. Multiplica. A diferença importa."
+
+  # ─────────────────────────────────────────
+  # TERRITÓRIO 2: FILOSOFIA DO ONE-PERSON (25%)
+  # ─────────────────────────────────────────
+  - name: "Filosofia do One-Person"
+    description: "A tese ideológica. Por que o modelo de 1 pessoa é superior."
+    weight: 30  # Aumentado de 25 → 30 (2026-02-18 rebuild). Território mais Purple Cow e mais negligenciado.
+    tom: "Dan Koe puro — filosófico mas com dados concretos. Opinião forte com evidência."
+    sub_topics:
+      - name: "Tese Central"
+        ideas:
+          - "1 pessoa com IA > equipe de 6. Dados + argumento."
+          - "Dario Amodei previu a empresa de $1B com 1 pessoa para 2026. Eu já estou construindo as de R$1M."
+          - "20% dos solopreneurs faturam $100k-300k/ano sem funcionários. O stack inteiro custa $3-12k/ano."
+
+      - name: "Futuro do Trabalho"
+        ideas:
+          - "YC Winter 2025: 25% do batch com codebase 95% AI-generated. O gargalo não é mais código — é visão."
+          - "Cursor vale $9.9B com 50 funcionários. Equipe grande é legacy."
+          - "Sam Altman, Dario Amodei, Mike Krieger — todos dizem a mesma coisa."
+
+      - name: "Self-Education > Contratação"
+        ideas:
+          - "Aprendi X em Y dias. Contratar custaria Z."
+          - "2015: construir era difícil, lançar era fácil. 2026: construir é fácil, ser notado é o desafio."
+          - "O conteúdo não é marketing — é o produto."
+
+      - name: "Anti-Corporativo"
+        ideas:
+          - "Equipe grande é legacy. Sistema inteligente é o novo."
+          - "A pergunta não é 'IA substitui equipe?' — é 'por que você ainda tem uma?'"
+          - "Agências de IA cobram por hora. Eu cobro por resultado. Adivinhe quem entrega mais."
+
+  # ─────────────────────────────────────────
+  # TERRITÓRIO 3: INSTALAÇÃO PREMIUM (15%)
+  # ─────────────────────────────────────────
+  - name: "Instalação Premium"
+    description: "Prova de que o serviço funciona. Sem vender — mostrar."
+    weight: 15
+    tom: "CEO que mostra resultado. Sem pitch — o resultado fala."
+    sub_topics:
+      - name: "Antes/Depois"
+        ideas:
+          - "O que acontece quando instalo um OPES em alguém: antes vs depois em 30 dias."
+          - "Cliente X: antes 14h/dia, depois 6h/dia. Sistema rodando."
+          - "Agências de IA cobram $30k-150k com margem de 60-70%. Eu: margem de 95%."
+
+      - name: "Recusas Estratégicas"
+        ideas:
+          - "Recusei 4 clientes essa semana. Escassez não é marketing — é filtro."
+          - "Eu não ensino IA. Eu instalo empresas. A diferença custa R$30k."
+          - "NINGUÉM no Brasil ocupa o espaço de 'pessoa que instala OPES por preço premium'."
+
+      - name: "Anatomia da Instalação"
+        ideas:
+          - "O que um OPES instalado produz em 30 dias."
+          - "Quanto custaria 6 funcionários? Eu entrego o mesmo com 0."
+          - "O pipeline completo: da ideia ao post publicado em 3 minutos."
+
+  # ─────────────────────────────────────────
+  # TERRITÓRIO 4: JORNADA REAL (20%)
+  # ─────────────────────────────────────────
+  - name: "Jornada Real"
+    description: "Bastidores de construir um one-person enterprise. Erros, decisões, números reais."
+    weight: 20
+    tom: "Vulnerável mas competente. Confessa o erro, mostra a correção."
+    sub_topics:
+      - name: "Erros de Sistema"
+        ideas:
+          - "Ontem meu sistema quebrou às 3h da manhã. Vou contar o que fiz."
+          - "Meu agente fez merda. Vou contar."
+          - "O dia que meu advisory board de IA foi mais sincero que meus amigos."
+
+      - name: "Decisões Difíceis"
+        ideas:
+          - "Gastei 6 meses construindo algo que ninguém queria comprar."
+          - "Desisti de X para focar em Y. O que mudou."
+          - "Produtividade ≠ progresso. Aprendi isso do jeito caro."
+
+      - name: "Números Reais"
+        ideas:
+          - "Meu custo operacional esse mês: R$X. Faturamento: R$Y."
+          - "O que minha esposa acha de eu trabalhar com 'robôs invisíveis'."
+          - "41.8M solopreneurs nos EUA, $1.3T de contribuição econômica. Eu sou 1."
+
+      - name: "Skill Stacking"
+        ideas:
+          - "Em 2015 eu apontava câmera. Em 2026 eu aponto agentes IA."
+          - "A habilidade de TV que mais me ajuda com IA (não é o que você pensa)."
+          - "Jornalismo + IA + sistemas: como 10 anos de TV me prepararam para isso."
+
+# ============================================
+# REGRAS OPERACIONAIS (v3 — 2026-02-18)
+# ============================================
+# Adicionadas pela sessão @brand + @cmo (Content Strategy Rebuild)
+# Ref: docs/logs/2026-02-18_content-strategy-rebuild.md
+
+regras_operacionais:
+
+  regra_feed_limpo:
+    descricao: "Separação cirúrgica entre feed premium e stories humanizados"
+    feed:
+      permitido:
+        - "Build in Public (sistema, dados, pipeline)"
+        - "Filosofia One-Person (tese, opinião forte, dados)"
+        - "Instalação Premium (recusas, antes/depois, prova social)"
+        - "Jornada Real ON-BRAND (erros técnicos, decisões de arquitetura)"
+      proibido:
+        - "Lifestyle pessoal (piscina, família, viagem) → vai para Stories"
+        - "Motivacional genérico"
+        - "Qualquer conteúdo que não passe no Swap Test"
+    stories:
+      permitido:
+        - "Lifestyle humanizado (família, dia a dia)"
+        - "Bastidores não-editados"
+        - "Enquetes para mover N2→N3"
+        - "Reposts de menções"
+
+  regra_tensao_obrigatoria:
+    descricao: "Todo post deve ter tensão — dados sozinhos não geram DM"
+    tipos_tensao:
+      - "Opinião contrarian (1 pessoa > equipe de 6)"
+      - "Provocação (Você tem 6 funcionários ou trabalha por 6?)"
+      - "Confissão + correção (Meu sistema quebrou. Vou contar o que fiz.)"
+      - "Dado surpreendente com contexto humano"
+    exemplo_errado: "154 mil linhas de código, 40 commits num sábado"
+    exemplo_certo: "154 mil linhas de código. Minha esposa perguntou: 'mas o que você FAZ o dia inteiro?'"
+
+  regra_15_862:
+    descricao: "15 likes do público certo > 862 likes do público errado"
+    filtro: "Antes de postar: 'As 15 pessoas que eu QUERO que vejam isso, veriam?'"
+    origem: "Brand Audit 2026-02-18 — Contagion ativo no reel piscina"
+
+  regra_purple_cow_minimo:
+    descricao: "Todo post deve pontuar >= 3.5/5 no filtro Purple Cow antes de publicar"
+    criterios:
+      - "Compartilhável sem pedir?"
+      - "Gera conversa ou apenas concordância?"
+      - "Tem opinião forte ou é safe?"
+      - "É específico do José ou qualquer coach postaria?"
+      - "Provoca tensão produtiva?"
+    threshold: 3.5
+
+# TEMAS ELIMINADOS (v2 — 2026-02-01)
+# Documentado para histórico. NÃO usar em conteúdo.
+temas_eliminados:
+  - nome: "TDAH como Superpoder"
+    razao: "Não reforça 'gênio e caro'. Atrai público de self-help, não empresário."
+  - nome: "Neurodivergência"
+    razao: "Identidade médica ≠ identidade profissional. Dilui posicionamento."
+  - nome: "Nexialismo (como conceito nomeado)"
+    razao: "Jargão que ninguém busca. A prática vive como 'skill stacking' em Jornada Real."
+  - nome: "Genius Zone Analysis"
+    razao: "Cheira a coaching. Substituído por 'foco no que só eu faço' dentro de Build in Public."
+  - nome: "Tom Naval (oráculo aphorístico)"
+    razao: "Frases soltas sem contexto. Substituído por tom Dan Koe (construtor que explica o processo)."
+
+# IDEAS QUEUE (próximos posts a serem usados)
+# Reconstruída em 2026-02-18 pela sessão @brand + @cmo (Content Strategy Rebuild)
+# Ref: docs/logs/2026-02-18_content-strategy-rebuild.md
+# Queue anterior (03-09/fev) parcialmente executada (~43%). Nova queue começa 19/fev.
+#
+# REGRAS DA NOVA QUEUE:
+# - Balanceamento: 35% Build in Public / 30% Filosofia / 15% Instalação / 20% Jornada Real
+# - Todo post com tensão (opinião forte, provocação, confissão técnica)
+# - Zero lifestyle no feed (Stories only)
+# - Purple Cow >= 3.5/5 antes de publicar
+
+queue:
+
+  # ─── SEMANA 1: 19-23/fev ───
+
+  - topic: "Filosofia do One-Person"
+    sub_topic: "Tese Central"
+    idea: "Dario Amodei previu a empresa de $1B com 1 pessoa para 2026. Eu já estou construindo as de R$1M."
+    angle: "Dados da pesquisa + posicionamento contrarian. Fonte: Anthropic CEO + Inc Magazine."
+    format: "F3"
+    tension: "Contrarian: enquanto todos ensinam IA, alguém já instala empresas inteiras"
+    day: "2026-02-19"
+    source: "research-2026-02-01"
+
+  - topic: "Build in Public"
+    sub_topic: "Stack & Ferramentas"
+    idea: "Meu organograma: 6 posições, 0 funcionários. Cada 'braço' é um agente IA. Aqui está cada um deles."
+    angle: "Stack real com nomes e funções — total transparência"
+    format: "F2"
+    tension: "Provocação: 'Você tem 6 funcionários ou trabalha por 6?'"
+    day: "2026-02-20"
+
+  - topic: "Instalação Premium"
+    sub_topic: "Recusas Estratégicas"
+    idea: "Essa semana recusei [X]. Não é marketing de escassez — é filtro de arquitetura. Instalar OPES em quem não está pronto é garantia de sistema subutilizado."
+    angle: "Escassez real como prova de que o sistema funciona — não aceitar qualquer um"
+    format: "F1"
+    tension: "A recusa É o produto. Quem recusa tem mais demanda do que oferta."
+    day: "2026-02-21"
+
+  # ─── SEMANA 2: 24-28/fev ───
+
+  - topic: "Build in Public"
+    sub_topic: "Agentes em Ação"
+    idea: "Meu CMO de IA reprovou 3 posts antes de aprovar esse. O crivo é mais alto que o de qualquer equipe humana."
+    angle: "Build in public do processo real de aprovação — sistema tem padrão de qualidade"
+    format: "F3"
+    tension: "Provocação: 'Sua equipe de marketing recusa conteúdo medíocre — ou publica tudo?'"
+    day: "2026-02-24"
+
+  - topic: "Filosofia do One-Person"
+    sub_topic: "Self-Education > Contratação"
+    idea: "2015: construir era difícil, lançar era fácil. 2026: construir é fácil, ser notado é o desafio. Por isso meu conteúdo não é marketing — é o produto."
+    angle: "Inversão de paradigma. Fonte: Evartology 2026."
+    format: "F3"
+    tension: "Opinião forte: conteúdo É o produto, não canal de venda"
+    day: "2026-02-25"
+    source: "research-2026-02-01"
+
+  - topic: "Jornada Real"
+    sub_topic: "Erros de Sistema"
+    idea: "Ontem meu sistema gerou um post com erro factual. Publiquei sem revisar. Vou contar o que mudei no pipeline para isso nunca mais acontecer."
+    angle: "Confessional técnico: erro + diagnóstico + correção implementada"
+    format: "F4"
+    tension: "Confissão: o sistema falha, a diferença é o que você faz depois"
+    day: "2026-02-26"
+
+  - topic: "Build in Public"
+    sub_topic: "Stack & Ferramentas"
+    idea: "Stack completo 2026: R$X/mês. Substitui equipe que custaria R$Y/mês. Aqui está cada peça, com nome e preço."
+    angle: "Dados reais + transparência total. Mostrar o stack inteiro."
+    format: "F2"
+    tension: "Números concretos: quanto custa operar como 6 pessoas sozinho"
+    day: "2026-02-27"
+    source: "research-2026-02-01"
+
+  - topic: "Instalação Premium"
+    sub_topic: "Antes/Depois"
+    idea: "Agências de IA cobram $30k-150k com margem de 60-70%. Eu faço isso sozinho. Zero equipe. Mesma entrega. Margem de 95%."
+    angle: "Dados do mercado global + prova pessoal. Fonte: AI Agency Pricing Guide 2025."
+    format: "F1"
+    tension: "Comparação direta com mercado: agência vs one-person enterprise"
+    day: "2026-02-28"
+    source: "research-2026-02-01"
+
+# ============================================
+# RESEARCH BANK (matéria-prima de conteúdo)
+# ============================================
+# Pesquisas realizadas que alimentam ideias futuras.
+# Cada entry tem data, fonte e insights extraídos.
+
+research_bank:
+
+  - id: "research-2026-02-01"
+    date: "2026-02-01"
+    title: "Pesquisa Tripla: AI-as-a-Service + One Person Business + Perfis Premium BR"
+    insights:
+      mercado_global:
+        - "AI Automation Builds: $2.500-$15.000 | Custom AI Dev: $30k-$150k | Consulting: $30k-$150k (60-70% margin)"
+        - "95% dos pilotos de IA generativa NÃO atingem impacto mensurável no P&L — gap de implementação é enorme"
+        - "Mercado de agentes IA: $8B (2025) → $11.78B (2026). Hiper-automação: $249B até 2032"
+        - "Shift de pricing: de horas faturáveis para performance/resultado"
+        - "AI Audits como entry point: $5k-$15k → upsell de $10k-$100k+"
+      solopreneur_trend:
+        - "Dario Amodei (CEO Anthropic): empresa de $1B com 1 pessoa em 2026 (70-80% confiança)"
+        - "Sam Altman tem aposta com amigos CEOs sobre isso"
+        - "Mike Krieger (IG co-founder): 'Construí empresa de bilhão com 13 pessoas'"
+        - "41.8M solopreneurs nos EUA, $1.3T de contribuição econômica"
+        - "20% dos solopreneurs faturam $100k-300k/ano sem funcionários"
+        - "Stack completo 2026: $3k-12k/ano (redução de 95-98% vs equipe)"
+        - "Solo founders gerando $7M/ano do laptop"
+        - "YC Winter 2025: 25% do batch com codebase 95% AI-generated"
+        - "Cursor: $9.9B valuation com ~50 funcionários"
+        - "2015: build hard, launch easy. 2026: build easy, get noticed hard."
+        - "Empresas solo mais fortes operam como media company first"
+      brasil:
+        - "78% empresas BR planejam ampliar investimentos em IA"
+        - "Brasil é 3º maior usuário ChatGPT (140M msgs/dia)"
+        - "Busca por profissionais com IA cresceu 306%"
+        - "R$23B investimento governamental até 2028"
+        - "NINGUÉM no BR ocupa o espaço de 'pessoa que instala OPES por preço premium'"
+        - "Existem agências IA (empresas) e gurus IA (curso R$97) — gap no meio"
+      referências:
+        - "Dan Koe: micro-niche + specialized knowledge → premium pricing"
+        - "Justin Welsh: 162M+ impressões LinkedIn → consistência + sistemas"
+        - "Alex Hormozi: 2.97M cópias em 1 dia → oferta irresistível + prova massiva"
+    sources:
+      - "https://www.inc.com/ben-sherry/anthropic-ceo-dario-amodei-predicts-the-first-billion-dollar-solopreneur-by-2026/91193609"
+      - "https://evartology.substack.com/p/the-2026-solopreneur-playbook-building-million-dollar-one-person-businesses"
+      - "https://prometai.app/blog/solopreneur-tech-stack-2026"
+      - "https://www.aifire.co/p/ai-automation-agency-predictions-for-2026-the-new-roi-era"
+      - "https://digitalagencynetwork.com/ai-agency-pricing/"
+      - "https://iaexpert.academy/2026/01/08/inteligencia-artificial-no-brasil-em-2025/"
+      - "https://www.alura.com.br/artigos/mercado-de-ia-2025"
+      - "https://blog.4linux.com.br/ia-para-maiores-previsoes-ia-2026-especialistas-brasileiros/"
+      - "https://www.projectfresh.com/the-ai-powered-billion-dollar-solopreneur/"

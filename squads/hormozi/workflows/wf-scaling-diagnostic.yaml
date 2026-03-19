@@ -1,0 +1,636 @@
+# Scaling Diagnostic Workflow
+# Based on Alex Hormozi's Scaling Methodology
+# Source: 9-Stage Scaling Roadmap + More Better New Framework
+# Version: 1.0.0
+
+id: wf-scaling-diagnostic
+name: "Scaling Diagnostic"
+version: "1.0.0"
+duration: "2-3 days"
+description: |
+  Workflow para diagnosticar estágio atual e criar roadmap de scaling.
+  Identifica bottlenecks e prioriza ações usando More Better New.
+
+  FILOSOFIA: "Scaling is not about doing more. It's about doing the
+  right things in the right order at the right stage."
+
+  RESULTADO: Diagnóstico claro do estágio + roadmap priorizado de ações.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Identificar por que o negócio parou de crescer"
+  - "Priorizar próximos passos de scaling"
+  - "Diagnosticar bottlenecks"
+  - "Planejar transição entre estágios"
+  - "Evitar erros de timing (fazer coisa certa na hora errada)"
+
+not_for:
+  - "Negócios sem product-market fit (valide primeiro)"
+  - "Negócios sem histórico de vendas"
+  - "Quem quer atalhos (scaling takes time)"
+
+decision_matrix_fit:
+  complexity: medium
+  agents_required: 4
+  estimated_duration: "2-3 days"
+  user_involvement: "high (dados e decisões estratégicas)"
+  prerequisites:
+    - "Negócio operando com vendas"
+    - "Acesso a métricas financeiras"
+    - "Disposição para mudanças"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: hormozi-chief
+      role: "Business snapshot, metrics collection"
+      phases: [0]
+
+    - agent: hormozi-audit
+      role: "Current stage identification, bottleneck analysis"
+      phases: [1]
+
+    - agent: hormozi-scale
+      role: "Scaling roadmap, More Better New prioritization"
+      phases: [2]
+
+    - agent: hormozi-advisor
+      role: "Strategic recommendations, action plan"
+      phases: [3]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# THE 9 STAGES OF SCALING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+nine_stages:
+  description: "Os 9 estágios de crescimento de um negócio"
+  stages:
+    - stage: 1
+      name: "$0 - $100k"
+      focus: "Product + First Sales"
+      key_metrics: ["First 10 customers", "Product-market fit signals"]
+      bottleneck: "Usually: No offer or wrong market"
+      priority: "Validate offer, get 10 paying customers manually"
+
+    - stage: 2
+      name: "$100k - $300k"
+      focus: "Repeatability"
+      key_metrics: ["Conversion rate", "CAC", "Retention"]
+      bottleneck: "Usually: Inconsistent sales process"
+      priority: "Document what works, make it repeatable"
+
+    - stage: 3
+      name: "$300k - $1M"
+      focus: "Scale What Works"
+      key_metrics: ["Lead volume", "Close rate", "LTV:CAC"]
+      bottleneck: "Usually: Lead flow or sales capacity"
+      priority: "More of what works, not new things"
+
+    - stage: 4
+      name: "$1M - $3M"
+      focus: "Build Team"
+      key_metrics: ["Revenue per employee", "Manager span"]
+      bottleneck: "Usually: Founder doing too much"
+      priority: "Hire and delegate, create SOPs"
+
+    - stage: 5
+      name: "$3M - $10M"
+      focus: "Systems & Processes"
+      key_metrics: ["Profit margin", "Customer satisfaction"]
+      bottleneck: "Usually: Chaos, no systems"
+      priority: "Systematize everything, hire managers"
+
+    - stage: 6
+      name: "$10M - $30M"
+      focus: "Leadership Team"
+      key_metrics: ["Team performance", "Culture"]
+      bottleneck: "Usually: Wrong leaders"
+      priority: "Upgrade talent, build leadership team"
+
+    - stage: 7
+      name: "$30M - $100M"
+      focus: "Enterprise Value"
+      key_metrics: ["EBITDA", "Growth rate", "Defensibility"]
+      bottleneck: "Usually: Lack of differentiation"
+      priority: "Build moat, optimize for exit"
+
+    - stage: 8
+      name: "$100M+"
+      focus: "Portfolio/Platform"
+      key_metrics: ["Multiple businesses", "Synergies"]
+      bottleneck: "Usually: Distraction"
+      priority: "Strategic acquisitions, platform plays"
+
+    - stage: 9
+      name: "Legacy"
+      focus: "Impact Beyond Business"
+      key_metrics: ["Lives changed", "Industry impact"]
+      bottleneck: "Usually: Meaning"
+      priority: "Give back, mentor, create change"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 0: DISCOVERY
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-0
+    name: "Discovery & Business Snapshot"
+    days: "Day 0"
+    tier: 0  # Foundation
+    description: |
+      Coleta de todos os dados necessários para diagnóstico.
+
+      PRINCÍPIO: "You can't optimize what you don't measure."
+
+    agent: hormozi-chief
+
+    tasks:
+      - task_id: T0.1
+        name: "Coletar Métricas Financeiras"
+        required: true
+        description: "Revenue, profit, CAC, LTV, churn"
+        output: "financial_metrics.yaml"
+
+      - task_id: T0.2
+        name: "Mapear Estrutura Atual"
+        required: true
+        description: "Team, processes, channels"
+        output: "business_structure.yaml"
+
+      - task_id: T0.3
+        name: "Identificar Revenue Atual"
+        required: true
+        description: "Determinar faixa de revenue"
+        output: "revenue_classification.yaml"
+
+      - task_id: T0.4
+        name: "Listar Desafios Percebidos"
+        required: true
+        description: "O que o founder acha que é o problema"
+        output: "perceived_challenges.yaml"
+
+    inline_structures:
+      financial_snapshot:
+        description: "Snapshot financeiro"
+        metrics:
+          - name: "Revenue Anual"
+            question: "Qual foi o revenue dos últimos 12 meses?"
+            format: "R$"
+
+          - name: "Lucro Líquido"
+            question: "Qual a margem de lucro líquido?"
+            format: "%"
+
+          - name: "CAC"
+            question: "Quanto custa adquirir um cliente?"
+            format: "R$"
+
+          - name: "LTV"
+            question: "Quanto um cliente vale ao longo do tempo?"
+            format: "R$"
+
+          - name: "Churn Mensal"
+            question: "Qual % de clientes cancela por mês?"
+            format: "%"
+
+          - name: "Número de Funcionários"
+            question: "Quantas pessoas no time?"
+            format: "número"
+
+          - name: "Revenue por Funcionário"
+            question: "Revenue / Número de funcionários"
+            format: "R$"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Snapshot Complete"
+      criteria:
+        - "Métricas financeiras coletadas"
+        - "Estrutura mapeada"
+        - "Revenue classificado por estágio"
+        - "Desafios listados"
+      human_review: true
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 1: DIAGNOSTIC
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-1
+    name: "Diagnostic: Current Stage Identification"
+    days: "Day 1"
+    tier: 0  # Diagnostic
+    description: |
+      Identificação precisa do estágio atual e bottlenecks.
+
+      PRINCÍPIO: "The bottleneck changes at every stage.
+      Solving yesterday's bottleneck doesn't help today."
+
+    agent: hormozi-audit
+
+    tasks:
+      - task_id: T1.1
+        name: "Identificar Estágio Atual"
+        required: true
+        description: "Em qual dos 9 estágios está?"
+        output: "current_stage.yaml"
+
+      - task_id: T1.2
+        name: "Comparar com Benchmarks"
+        required: true
+        description: "Métricas vs. benchmarks do estágio"
+        output: "benchmark_comparison.yaml"
+
+      - task_id: T1.3
+        name: "Identificar Bottleneck Principal"
+        required: true
+        description: "O que está travando o crescimento?"
+        output: "bottleneck_analysis.yaml"
+
+      - task_id: T1.4
+        name: "Listar Sintomas vs. Causas"
+        required: true
+        description: "Separar o que parece problema do que é problema"
+        output: "symptoms_vs_causes.yaml"
+
+    inline_structures:
+      stage_identification:
+        description: "Como identificar o estágio"
+        primary_indicator: "Revenue anual"
+        secondary_indicators:
+          - "Número de funcionários"
+          - "Complexidade das operações"
+          - "Tipo de problemas enfrentados"
+
+      bottleneck_types:
+        description: "Tipos comuns de bottleneck por estágio"
+        bottlenecks:
+          - stage: "1-2"
+            common_bottleneck: "Oferta ou mercado"
+            symptoms: ["Poucos leads", "Baixa conversão", "Alto churn"]
+
+          - stage: "3-4"
+            common_bottleneck: "Lead flow ou sales capacity"
+            symptoms: ["Demanda inconsistente", "Founder esgotado"]
+
+          - stage: "5-6"
+            common_bottleneck: "Pessoas e sistemas"
+            symptoms: ["Caos operacional", "Dependência do founder"]
+
+          - stage: "7+"
+            common_bottleneck: "Liderança e diferenciação"
+            symptoms: ["Crescimento estagnado", "Commodity"]
+
+      benchmark_reference:
+        description: "Benchmarks por estágio"
+        metrics:
+          ltv_cac:
+            healthy: ">3:1"
+            warning: "2-3:1"
+            critical: "<2:1"
+
+          profit_margin:
+            healthy: ">20%"
+            warning: "10-20%"
+            critical: "<10%"
+
+          revenue_per_employee:
+            target_by_stage:
+              "$1M": "$200k+"
+              "$3M": "$250k+"
+              "$10M": "$300k+"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Diagnostic Complete"
+      criteria:
+        - "Estágio identificado com evidências"
+        - "Benchmarks comparados"
+        - "Bottleneck principal identificado"
+        - "Sintomas separados de causas"
+      human_review: true
+      veto_conditions:
+        - condition: "Estágio inconsistente com métricas"
+          action: "BLOCK - Verificar dados"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 2: ANALYSIS (More Better New)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Analysis: More Better New Framework"
+    days: "Day 1-2"
+    tier: 1  # Analysis
+    description: |
+      Aplicação do framework More Better New para priorização.
+
+      PRINCÍPIO: "MORE of what works > BETTER execution > NEW things.
+      Most founders do this backwards."
+
+    agent: hormozi-scale
+
+    tasks:
+      - task_id: T2.1
+        name: "Identificar O que Funciona"
+        required: true
+        description: "Listar canais/atividades com ROI positivo"
+        output: "what_works.yaml"
+
+      - task_id: T2.2
+        name: "Aplicar MORE"
+        required: true
+        description: "Onde fazer mais do que já funciona?"
+        output: "more_opportunities.yaml"
+
+      - task_id: T2.3
+        name: "Aplicar BETTER"
+        required: true
+        description: "Onde melhorar execução do que funciona?"
+        output: "better_opportunities.yaml"
+
+      - task_id: T2.4
+        name: "Avaliar NEW"
+        required: true
+        description: "Novidades apenas se MORE e BETTER esgotados"
+        output: "new_considerations.yaml"
+
+    inline_structures:
+      more_better_new_framework:
+        description: "Framework de priorização"
+        priority_order:
+          1:
+            name: "MORE"
+            question: "Posso fazer mais do que já funciona?"
+            examples:
+              - "Dobrar budget de ads que funcionam"
+              - "Contratar mais vendedores"
+              - "Criar mais conteúdo no canal que converte"
+            rule: "Se funciona, faça mais antes de qualquer outra coisa"
+
+          2:
+            name: "BETTER"
+            question: "Posso fazer melhor o que já funciona?"
+            examples:
+              - "Melhorar scripts de vendas"
+              - "Otimizar landing pages"
+              - "Treinar time existente"
+            rule: "Só otimize depois de maximizar volume"
+
+          3:
+            name: "NEW"
+            question: "Preciso de algo novo?"
+            examples:
+              - "Novo canal de aquisição"
+              - "Novo produto"
+              - "Novo mercado"
+            rule: "Novo só quando MORE e BETTER esgotados"
+
+        anti_pattern: |
+          ❌ Founder faz: NEW → BETTER → MORE (errado)
+          ✅ Deveria fazer: MORE → BETTER → NEW (certo)
+
+          Por quê? Novo é arriscado. Mais do que funciona é certo.
+
+      scaling_levers:
+        description: "Alavancas de escala por área"
+        areas:
+          leads:
+            more: "Aumentar budget, mais conteúdo, mais outreach"
+            better: "Melhorar targeting, hooks, landing pages"
+            new: "Novo canal, novo avatar"
+
+          sales:
+            more: "Mais vendedores, mais calls"
+            better: "Melhores scripts, mais treinamento"
+            new: "Novo modelo de vendas, self-serve"
+
+          product:
+            more: "Mais features do que clientes pedem"
+            better: "Melhorar entrega existente"
+            new: "Novo produto para mesma audiência"
+
+          team:
+            more: "Contratar mais pessoas"
+            better: "Treinar melhor, promover internamente"
+            new: "Reestruturar organização"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Analysis Complete"
+      criteria:
+        - "O que funciona identificado"
+        - "Oportunidades MORE listadas"
+        - "Oportunidades BETTER listadas"
+        - "NEW avaliado criticamente"
+      human_review: true
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 3: ROADMAP & ACTION PLAN
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Roadmap & Action Plan"
+    days: "Day 2-3"
+    tier: 2  # Strategy
+    description: |
+      Criação do roadmap priorizado com ações específicas.
+
+      PRINCÍPIO: "Strategy without execution is hallucination.
+      Execution without strategy is chaos."
+
+    agent: hormozi-advisor
+
+    tasks:
+      - task_id: T3.1
+        name: "Priorizar Ações (ICE Score)"
+        required: true
+        description: "Impact, Confidence, Ease"
+        output: "action_priority.yaml"
+
+      - task_id: T3.2
+        name: "Criar 90-Day Roadmap"
+        required: true
+        description: "Plano trimestral de execução"
+        output: "ninety_day_roadmap.yaml"
+
+      - task_id: T3.3
+        name: "Definir Métricas de Sucesso"
+        required: true
+        description: "KPIs para cada ação"
+        output: "success_metrics.yaml"
+
+      - task_id: T3.4
+        name: "Identificar Recursos Necessários"
+        required: true
+        description: "Pessoas, tempo, dinheiro"
+        output: "resource_requirements.yaml"
+
+    inline_structures:
+      ice_scoring:
+        description: "Framework ICE para priorização"
+        components:
+          impact:
+            question: "Qual o impacto potencial?"
+            scale: "1-10"
+            high: "Muda significativamente métricas-chave"
+            low: "Melhoria incremental"
+
+          confidence:
+            question: "Quão confiante que vai funcionar?"
+            scale: "1-10"
+            high: "Já testado, dados provam"
+            low: "Hipótese não testada"
+
+          ease:
+            question: "Quão fácil de implementar?"
+            scale: "1-10"
+            high: "Pode fazer esta semana"
+            low: "Requer meses e recursos"
+
+        formula: "ICE Score = (Impact + Confidence + Ease) / 3"
+        interpretation:
+          above_8: "Fazer imediatamente"
+          6_to_8: "Prioridade alta"
+          4_to_6: "Considerar"
+          below_4: "Desprioritizar"
+
+      ninety_day_roadmap_template:
+        description: "Template de roadmap 90 dias"
+        structure:
+          month_1:
+            focus: "Quick wins + Foundational"
+            deliverables:
+              - "Implementar #1 MORE action"
+              - "Fix critical bottleneck"
+              - "Setup tracking"
+
+          month_2:
+            focus: "Acceleration"
+            deliverables:
+              - "Scale o que funcionou no M1"
+              - "Implementar BETTER actions"
+              - "Review e ajustes"
+
+          month_3:
+            focus: "Optimization + Planning"
+            deliverables:
+              - "Otimizar resultados"
+              - "Avaliar NEW se necessário"
+              - "Planejar próximo quarter"
+
+      stage_specific_advice:
+        description: "Conselho específico por estágio"
+        advice:
+          stage_1_2:
+            do:
+              - "Foque em 1 canal de aquisição"
+              - "Faça vendas você mesmo"
+              - "Itere a oferta rapidamente"
+            dont:
+              - "Não contrate ainda"
+              - "Não diversifique canais"
+              - "Não otimize prematuramente"
+
+          stage_3_4:
+            do:
+              - "Documente o que funciona"
+              - "Contrate para replicar você"
+              - "Invista em leads"
+            dont:
+              - "Não deixe de vender pessoalmente"
+              - "Não crie produtos novos"
+              - "Não diversifique mercados"
+
+          stage_5_6:
+            do:
+              - "Crie sistemas e processos"
+              - "Contrate managers"
+              - "Delegue completamente"
+            dont:
+              - "Não seja o bottleneck"
+              - "Não microgerencie"
+              - "Não economize em talentos"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Roadmap Complete"
+      criteria:
+        - "Ações priorizadas com ICE"
+        - "90-day roadmap criado"
+        - "Métricas de sucesso definidas"
+        - "Recursos mapeados"
+      human_review: true
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  phase_0:
+    - "financial_metrics.yaml"
+    - "business_structure.yaml"
+    - "revenue_classification.yaml"
+    - "perceived_challenges.yaml"
+
+  phase_1:
+    - "current_stage.yaml"
+    - "benchmark_comparison.yaml"
+    - "bottleneck_analysis.yaml"
+    - "symptoms_vs_causes.yaml"
+
+  phase_2:
+    - "what_works.yaml"
+    - "more_opportunities.yaml"
+    - "better_opportunities.yaml"
+    - "new_considerations.yaml"
+
+  phase_3:
+    - "action_priority.yaml"
+    - "ninety_day_roadmap.yaml"
+    - "success_metrics.yaml"
+    - "resource_requirements.yaml"
+
+  final_deliverable:
+    name: "Scaling Diagnostic Report"
+    location: "outputs/diagnostics/{business_id}/"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS BY PHASE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents_by_phase:
+  PHASE-0:
+    primary: ["hormozi-chief"]
+
+  PHASE-1:
+    primary: ["hormozi-audit"]
+
+  PHASE-2:
+    primary: ["hormozi-scale"]
+
+  PHASE-3:
+    primary: ["hormozi-advisor"]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-10"
+  author: "squad-architect"
+  source_frameworks:
+    - "9_STAGE_SCALING_ROADMAP"
+    - "MORE_BETTER_NEW"
+    - "ICE_SCORING"
+  source_mind: "alex_hormozi"
+  lines: 600+
+  quality_gate: "SC_WFL_001"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

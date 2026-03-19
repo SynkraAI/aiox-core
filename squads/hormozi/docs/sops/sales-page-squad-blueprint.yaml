@@ -1,0 +1,1096 @@
+# Sales Page Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: Blueprint PV - Os 17 Elementos da Pagina Matadora - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: sales-page
+  purpose: "Build high-converting sales pages using the 17 Elements framework"
+  domain: conversion-optimization
+  source_playbook: "Blueprint PV - Os 17 Elementos da Pagina Matadora"
+
+  core_equation: |
+    Value = (Dream Outcome x Perceived Likelihood) / (Time Delay x Effort & Sacrifice)
+
+    17 Elements systematically:
+    - Section A (5): First impression - stay or leave
+    - Section B (9): Build logical + emotional case
+    - Section C (3): Remove final friction
+
+  core_philosophy: |
+    "A pagina nao vende. A pagina remove as razoes para NAO comprar."
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: page-architect
+      role: "Orchestrate 17 Elements workflow and optimize conversion"
+      decisions:
+        - "Element priority and sequencing"
+        - "A/B test prioritization"
+        - "Conversion bottleneck identification"
+      kpis:
+        - "Overall conversion rate"
+        - "Section-by-section performance"
+        - "Element completion score"
+
+  tier_0_diagnosis:
+    - agent: value-equation-analyst
+      role: "Analyze offer through Value Equation lens"
+      inputs:
+        - "Product/service details"
+        - "Pricing information"
+        - "Competitor positioning"
+      outputs:
+        - "Value Equation score by variable"
+        - "Element priority recommendations"
+        - "Gap analysis"
+
+    - agent: conversion-auditor
+      role: "Audit existing pages for 17 Elements compliance"
+      inputs:
+        - "Page URL or content"
+        - "Analytics data"
+        - "Heatmap data"
+      outputs:
+        - "Element completion checklist"
+        - "Conversion leak identification"
+        - "Optimization priority list"
+
+  tier_1_execution:
+    - agent: above-fold-crafter
+      role: "Create Section A: Above the Fold elements (1-5)"
+      specialization: "Os 3 Segundos Criticos"
+      elements:
+        - "1. Headline Principal"
+        - "2. Subheadline"
+        - "3. CTA Principal #1"
+        - "4. Prova Social Imediata"
+        - "5. Urgencia/Escassez"
+      techniques:
+        - "Dream Outcome maximization"
+        - "Specificity + mechanism"
+        - "Loss aversion triggers"
+
+    - agent: persuasion-builder
+      role: "Create Section B: Main Body elements (6-14)"
+      specialization: "A Jornada de Persuasao"
+      elements:
+        - "6. VSL ou Imagem Hero"
+        - "7. Bullets de Beneficios"
+        - "8. Para Quem E"
+        - "9. Para Quem NAO E"
+        - "10. Stack de Valor Visual"
+        - "11. Comparacao de Preco"
+        - "12. FAQ 5 Objecoes"
+        - "13. Garantia Destacada"
+        - "14. Sobre o Criador"
+      techniques:
+        - "Benefit stacking"
+        - "Strategic qualification"
+        - "Price anchoring"
+        - "Objection elimination"
+        - "Authority transfer"
+
+    - agent: friction-remover
+      role: "Create Section C: Conversion elements (15-17)"
+      specialization: "Os Multiplicadores Silenciosos"
+      elements:
+        - "15. Barra de Progresso"
+        - "16. Selos de Seguranca"
+        - "17. Chat/Suporte Visivel"
+      techniques:
+        - "Checkout anxiety reduction"
+        - "Fear removal"
+        - "Support availability signaling"
+
+  tier_2_judgment:
+    - agent: ab-test-strategist
+      role: "Plan and prioritize A/B tests"
+      inputs:
+        - "Current conversion data"
+        - "Heatmap analysis"
+        - "Element performance"
+      outputs:
+        - "Test hypothesis ranking"
+        - "Statistical significance targets"
+        - "Test execution plan"
+
+    - agent: copy-optimizer
+      role: "Optimize copy for conversion"
+      inputs:
+        - "Draft copy"
+        - "Avatar pain points"
+        - "Competitor messaging"
+      outputs:
+        - "Optimized headlines (variants)"
+        - "Benefit-focused bullets"
+        - "Objection-handling FAQs"
+
+    - agent: proof-curator
+      role: "Curate and position social proof"
+      inputs:
+        - "Testimonials library"
+        - "Case study data"
+        - "Results metrics"
+      outputs:
+        - "Matched proof by demographic"
+        - "Trust badge placement"
+        - "Authority positioning"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  page-architect:
+    id: page-architect
+    title: "Sales Page Orchestrator"
+    tier: orchestrator
+    icon: "🏗️"
+
+    purpose: |
+      Coordinate the 17 Elements framework to build high-converting sales pages.
+      Ensure systematic attack on all Value Equation variables.
+
+    core_frameworks:
+      - name: "17 Elements"
+        sections: ["Above Fold (5)", "Main Body (9)", "Conversion (3)"]
+      - name: "Value Equation"
+        formula: "(Dream Outcome x Likelihood) / (Time x Effort)"
+      - name: "Show Don't Tell"
+        principle: "Proof for claims, benefits for features, solutions for objections"
+
+    decision_authority:
+      - "Element sequencing and priority"
+      - "A/B test approval"
+      - "Launch readiness assessment"
+      - "Optimization focus areas"
+
+    inputs:
+      - "Offer documentation"
+      - "Avatar profile"
+      - "Available proof/testimonials"
+      - "Competitive landscape"
+
+    outputs:
+      - "17 Elements execution plan"
+      - "Section-by-section review"
+      - "Launch checklist status"
+      - "Optimization roadmap"
+
+    success_metrics:
+      primary:
+        - name: "Scroll Rate"
+          target: ">40%"
+          section: "Above Fold"
+        - name: "Conversion Rate"
+          target: ">3%"
+          traffic: "Cold"
+        - name: "Checkout Abandon"
+          target: "<25%"
+          section: "Checkout"
+      secondary:
+        - "All 17 elements implemented"
+        - "Mobile responsive"
+        - "Load time <3s"
+
+  value-equation-analyst:
+    id: value-equation-analyst
+    title: "Value Equation Specialist"
+    tier: tier_0
+    icon: "📊"
+
+    purpose: |
+      Analyze offers through the Value Equation lens.
+      Identify which elements will have highest impact on each variable.
+
+    value_equation:
+      numerator:
+        dream_outcome:
+          elements: [1, 7, 10]
+          question: "What's the best possible result they could get?"
+        perceived_likelihood:
+          elements: [2, 4, 8, 12, 13]
+          question: "Do they believe they can achieve it with this?"
+      denominator:
+        time_delay:
+          elements: [1, 5]
+          question: "How long until they see results?"
+        effort_sacrifice:
+          elements: [3, 9, 15, 16, 17]
+          question: "How hard is it to get started and succeed?"
+
+    analysis_outputs:
+      - "Variable scores (1-10)"
+      - "Weakest variable identification"
+      - "Element priority ranking"
+      - "Improvement recommendations"
+
+    gap_analysis:
+      dream_outcome_gaps:
+        - "Headline not specific enough"
+        - "Benefits lack emotional payoff"
+        - "Value stack not visualized"
+      likelihood_gaps:
+        - "Insufficient social proof"
+        - "Mechanism not explained"
+        - "Guarantee too weak"
+      time_gaps:
+        - "No timeframe mentioned"
+        - "Process seems lengthy"
+      effort_gaps:
+        - "CTA unclear"
+        - "Process seems complex"
+        - "Support not visible"
+
+  conversion-auditor:
+    id: conversion-auditor
+    title: "Page Audit Specialist"
+    tier: tier_0
+    icon: "🔍"
+
+    purpose: |
+      Audit existing pages for 17 Elements compliance.
+      Identify conversion leaks and optimization opportunities.
+
+    audit_framework:
+      section_a:
+        elements: [1, 2, 3, 4, 5]
+        weight: 0.35
+        critical_metric: "Scroll rate >40%"
+      section_b:
+        elements: [6, 7, 8, 9, 10, 11, 12, 13, 14]
+        weight: 0.45
+        critical_metric: "Time on page, scroll depth"
+      section_c:
+        elements: [15, 16, 17]
+        weight: 0.20
+        critical_metric: "Checkout abandon <25%"
+
+    element_scoring:
+      - score: 0
+        meaning: "Missing entirely"
+      - score: 1
+        meaning: "Present but poor execution"
+      - score: 2
+        meaning: "Present with adequate execution"
+      - score: 3
+        meaning: "Present with excellent execution"
+
+    audit_outputs:
+      - "Element completion matrix"
+      - "Section scores"
+      - "Priority fix list"
+      - "Quick wins vs long-term optimizations"
+
+    red_flags:
+      - "Headline is feature-focused"
+      - "No social proof above fold"
+      - "CTA says 'Buy Now' instead of benefit"
+      - "No guarantee visible"
+      - "FAQ doesn't address objections"
+      - "No urgency mechanism"
+      - "Checkout missing trust badges"
+
+  above-fold-crafter:
+    id: above-fold-crafter
+    title: "Above the Fold Specialist"
+    tier: tier_1
+    icon: "⬆️"
+
+    purpose: |
+      Create the critical first 600px that decides stay or leave.
+      Win the 3-second battle for attention.
+
+    elements:
+      element_1:
+        name: "Headline Principal"
+        value_variable: "Dream Outcome"
+        formula: |
+          "Como [RESULTADO ESPECIFICO] em [TIMEFRAME]
+          Sem [DOR #1] ou [DOR #2]"
+        quality_spectrum:
+          ruim: "Curso de Marketing Digital"
+          bom: "Aprenda Marketing Digital"
+          matador: "Como Conseguir 30 Clientes High-Ticket em 90 Dias..."
+        ab_test_priority:
+          - "Pain vs Desire variant"
+          - "Specificity level"
+          - "Question vs Statement"
+
+      element_2:
+        name: "Subheadline"
+        value_variable: "Perceived Likelihood"
+        template: |
+          "O [MECANISMO UNICO] usado por [NUMERO] [AVATAR]
+          para [RESULTADO] - Agora disponivel para [QUALIFICACAO]"
+        positioning: "Below headline, 60% font size"
+
+      element_3:
+        name: "CTA Principal #1"
+        value_variable: "Effort & Sacrifice"
+        specs:
+          color: "3:1 contrast minimum"
+          size: "200px width minimum (mobile)"
+          text: "Benefit-oriented, not action"
+        hack: "Arrow (->) increases CTR 12-26%"
+        quality_spectrum:
+          ruim: "Comprar Agora"
+          matador: "Sim! Quero 30 Clientes em 90 Dias ->"
+
+      element_4:
+        name: "Prova Social Imediata"
+        value_variable: "Perceived Likelihood"
+        format: "⭐⭐⭐⭐⭐ [NUMBER]+ [USERS] | [SATISFACTION]% | [GUARANTEE]"
+        position: "Below CTA or in header"
+
+      element_5:
+        name: "Urgencia/Escassez"
+        value_variable: "Loss Aversion (multiplier)"
+        types:
+          - "Countdown Timer: Oferta Expira em 23:47:32"
+          - "Limited Spots: 7 de 25 Vagas Restantes"
+          - "Expiring Bonus: Bonus de R$2000 Apenas Hoje"
+        critical_rule: "MUST BE REAL - False scarcity destroys trust"
+
+    success_metric: "Scroll rate >40%"
+
+  persuasion-builder:
+    id: persuasion-builder
+    title: "Persuasion Journey Specialist"
+    tier: tier_1
+    icon: "🎯"
+
+    purpose: |
+      Build the logical and emotional case for purchase.
+      Stack value until the decision becomes obvious.
+
+    elements:
+      element_6:
+        name: "VSL ou Imagem Hero"
+        purpose: "Control exposure time to message"
+        vsl_specs:
+          thumbnail: "Play button + benefit text"
+          duration_cold: "8-15 minutes"
+          duration_warm: "15-45 minutes"
+          aspect_ratio: "16:9 responsive"
+        image_alternative:
+          - "Product/result mockup"
+          - "After transformation photo"
+          - "Always with benefit caption"
+
+      element_7:
+        name: "Bullets de Beneficios"
+        value_variable: "Dream Outcome"
+        formula: "✓ [RESULTADO] para que voce possa [BENEFICIO EMOCIONAL]"
+        quantity: "5-7 bullets (more dilutes impact)"
+        quality_spectrum:
+          ruim: "10 Modulos de Conteudo"
+          matador: "✓ Domine o Pixel em 48h para que voce pare de desperdicar 73%..."
+
+      element_8:
+        name: "Para Quem E"
+        value_variable: "Perceived Likelihood"
+        template: |
+          Este [PRODUTO] e PERFEITO para voce se:
+          ☑️ [SITUACAO ESPECIFICA]
+          ☑️ [DOR ESPECIFICA]
+          ☑️ [DESEJO ESPECIFICO]
+        psychology: "Qualification = 'this was made for me'"
+
+      element_9:
+        name: "Para Quem NAO E"
+        value_variable: "Exclusivity (desire amplifier)"
+        template: |
+          ATENCAO: Isso NAO e para voce se:
+          ❌ [DESQUALIFICADOR #1]
+          ❌ [DESQUALIFICADOR #2]
+        psychology: "Strategic disqualification INCREASES desire"
+
+      element_10:
+        name: "Stack de Valor Visual"
+        purpose: "Make price-value gap obvious"
+        structure: |
+          COMPONENTE #1 .............. Valor R$ X
+          BONUS #1 ................... Valor R$ Y
+                  VALOR TOTAL: R$ Z
+                  SEU INVESTIMENTO: R$ A
+                  VOCE ECONOMIZA: R$ B
+        design: "Table or cards, cross out individual values, highlight savings"
+
+      element_11:
+        name: "Comparacao de Preco"
+        purpose: "Anchor against expensive alternatives"
+        matrix: |
+          ALTERNATIVA A (Agencia): R$ X/mes
+          ALTERNATIVA B (Consultor): R$ Y + %
+          ALTERNATIVA C (DIY): Z anos
+          NOSSA SOLUCAO: R$ A uma vez
+
+      element_12:
+        name: "FAQ 5 Objecoes"
+        value_variable: "Perceived Likelihood"
+        universal_objections:
+          - "Funciona para [minha situacao]?"
+          - "Quanto tempo para resultados?"
+          - "E se nao funcionar?"
+          - "Preciso de [X] para funcionar?"
+          - "Como e o suporte?"
+        format: "Question bold, answer ends reinforcing benefit"
+
+      element_13:
+        name: "Garantia Destacada"
+        value_variable: "Perceived Likelihood (~100%)"
+        template: |
+          GARANTIA TRIPLA DE 30 DIAS
+          ✓ Garantia #1: Resultados em 14 dias ou dinheiro de volta
+          ✓ Garantia #2: Se implementar e nao funcionar, devolvemos 2X
+          ✓ Garantia #3: Pode cancelar por qualquer motivo
+        design: "Highlighted box, seal/badge, contrasting color"
+
+      element_14:
+        name: "Sobre o Criador"
+        purpose: "Transfer authority to product"
+        elements:
+          - "Professional photo"
+          - "2-3 quantifiable credentials"
+          - "1 strategic vulnerability"
+          - "Clear mission"
+        script_pattern: "Depois de [FAILURE]... descobri [SYSTEM]... Hoje, apos ajudar [NUMBER]..."
+
+  friction-remover:
+    id: friction-remover
+    title: "Conversion Friction Specialist"
+    tier: tier_1
+    icon: "🚀"
+
+    purpose: |
+      Remove final friction at checkout.
+      These silent multipliers reduce abandonment.
+
+    elements:
+      element_15:
+        name: "Barra de Progresso"
+        value_variable: "Effort & Sacrifice"
+        implementation:
+          - "Passo 1: Informacoes Basicas"
+          - "Passo 2: Pagamento"
+          - "Passo 3: Confirmacao"
+        impact: "Reduces cart abandonment 18-30%"
+        psychology: "Seeing the end reduces anxiety"
+
+      element_16:
+        name: "Selos de Seguranca"
+        value_variable: "Effort & Sacrifice (fear)"
+        essential_seals:
+          - "SSL/Lock icon"
+          - "Card brand logos"
+          - "Compra Segura badge"
+          - "Privacy guarantee"
+        position: "On checkout AND near main CTAs"
+
+      element_17:
+        name: "Chat/Suporte Visivel"
+        value_variable: "Effort & Sacrifice"
+        options:
+          - "Floating WhatsApp"
+          - "Integrated chat"
+          - "Phone number visible"
+        script: "Oi! Vi que esta na pagina ha X minutos. Posso tirar alguma duvida?"
+        psychology: "Help availability reduces action anxiety"
+
+    success_metric: "Checkout abandon <25%"
+
+  ab-test-strategist:
+    id: ab-test-strategist
+    title: "A/B Test Specialist"
+    tier: tier_2
+    icon: "🔬"
+
+    purpose: |
+      Plan and prioritize A/B tests for continuous optimization.
+      Focus on highest-impact elements first.
+
+    test_priority_order:
+      - priority: 1
+        element: "Headline"
+        variants: ["Pain vs Desire", "Specificity level", "Question vs Statement"]
+        traffic_required: "500 visitors minimum"
+
+      - priority: 2
+        element: "CTA Text"
+        variants: ["Benefit focus", "Urgency level", "Arrow vs No arrow"]
+        traffic_required: "500 visitors"
+
+      - priority: 3
+        element: "Social Proof"
+        variants: ["Numbers", "Testimonial format", "Position"]
+        traffic_required: "500 visitors"
+
+      - priority: 4
+        element: "Guarantee"
+        variants: ["Duration", "Structure", "Visual treatment"]
+        traffic_required: "1000 visitors"
+
+    statistical_requirements:
+      confidence_level: "95%"
+      minimum_conversions: "100 per variant"
+      test_duration: "7-14 days minimum"
+
+    analysis_framework:
+      - "Hypothesis clearly stated"
+      - "Single variable isolated"
+      - "Success metric defined"
+      - "Statistical significance calculated"
+      - "Winner implemented or learning documented"
+
+  copy-optimizer:
+    id: copy-optimizer
+    title: "Conversion Copy Specialist"
+    tier: tier_2
+    icon: "✍️"
+
+    purpose: |
+      Optimize copy for maximum conversion.
+      Apply Hormozi formulas to every element.
+
+    headline_optimization:
+      formula: "Como [RESULTADO] em [TIMEFRAME] Sem [DOR #1] ou [DOR #2]"
+      checklist:
+        - "Specific result mentioned"
+        - "Timeframe included"
+        - "Pain points addressed"
+        - "Scroll-stopping power"
+
+    bullet_optimization:
+      formula: "✓ [RESULTADO] para que voce possa [BENEFICIO EMOCIONAL]"
+      checklist:
+        - "Tangible outcome stated"
+        - "Emotional benefit connected"
+        - "Specificity (numbers, percentages)"
+
+    faq_optimization:
+      structure: "Question (bold) -> Answer -> Benefit reinforcement"
+      checklist:
+        - "Real objection addressed"
+        - "Direct answer given"
+        - "Ends with benefit"
+
+    golden_rule: |
+      "Show, don't tell"
+      - For each claim: show proof
+      - For each feature: show benefit
+      - For each objection: show solution
+
+  proof-curator:
+    id: proof-curator
+    title: "Social Proof Specialist"
+    tier: tier_2
+    icon: "⭐"
+
+    purpose: |
+      Curate and position social proof for maximum impact.
+      Match proof to target demographics.
+
+    proof_types:
+      immediate_proof:
+        position: "Above fold (Element 4)"
+        format: "Stars + Numbers + Guarantee"
+        example: "⭐⭐⭐⭐⭐ 2.847+ Alunos | 98% Satisfacao"
+
+      testimonial_proof:
+        position: "Throughout body"
+        matching: "Demographics match target avatar"
+        format: "Photo + Name + Result + Quote"
+
+      authority_proof:
+        position: "Element 14 (Sobre)"
+        elements: ["Credentials", "Numbers helped", "Media mentions"]
+
+      result_proof:
+        position: "Element 7 (Bullets), Element 12 (FAQ)"
+        format: "Specific outcomes with numbers"
+
+    demographic_matching:
+      principle: "Show proof from people like the prospect"
+      variables:
+        - "Age range"
+        - "Gender"
+        - "Industry"
+        - "Company size"
+        - "Problem type"
+
+    proof_library_organization:
+      by_demographic: true
+      by_result_type: true
+      by_objection_addressed: true
+      freshness: "Updated monthly"
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Section A: Above the Fold
+  - task: "Write headline variants"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Must follow formula, AI generates, human selects"
+
+  - task: "Write subheadline"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Must include mechanism + social proof + qualification"
+
+  - task: "Design CTA button"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Benefit-oriented text, 3:1 contrast, 200px minimum"
+
+  - task: "Pull social proof metrics"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Numbers must be real and current"
+
+  - task: "Implement urgency element"
+    executor: Worker
+    automation: HIGH
+    guardrails: "MUST be real scarcity"
+
+  # Section B: Main Body
+  - task: "Produce VSL"
+    executor: Human
+    automation: LOW
+    guardrails: "Match duration to traffic temperature"
+
+  - task: "Write benefit bullets"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Result + emotional benefit formula"
+
+  - task: "Create qualification sections"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Based on ideal customer profile"
+
+  - task: "Build value stack visual"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Values must be defensible"
+
+  - task: "Create price comparison"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Real alternatives researched"
+
+  - task: "Write FAQ answers"
+    executor: Human
+    automation: LOW
+    guardrails: "Based on real customer objections"
+
+  - task: "Design guarantee section"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Legally deliverable"
+
+  - task: "Write about section"
+    executor: Human
+    automation: LOW
+    guardrails: "Authority + vulnerability balance"
+
+  # Section C: Conversion
+  - task: "Implement progress bar"
+    executor: Worker
+    automation: HIGH
+    guardrails: "3 steps maximum"
+
+  - task: "Add security badges"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Only display earned certifications"
+
+  - task: "Configure chat/support"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Must actually be responsive"
+
+  # Optimization
+  - task: "Run A/B tests"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Statistical significance required"
+
+  - task: "Analyze heatmaps"
+    executor: Human
+    automation: LOW
+    guardrails: "Identify scroll drop-off points"
+
+  - task: "Optimize copy iterations"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Single variable per test"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Scroll Rate Gate"
+    transition: "Page Load -> Scroll"
+    condition: "scroll_rate > 40%"
+    type: blocking
+    failure_action: "Optimize headline and CTA"
+
+  QG-002:
+    name: "Conversion Rate Gate"
+    transition: "Visit -> Purchase (cold)"
+    condition: "conversion_rate > 3%"
+    type: warning
+    failure_action: "Full page audit"
+
+  QG-003:
+    name: "Checkout Abandon Gate"
+    transition: "Start Checkout -> Complete"
+    condition: "abandon_rate < 25%"
+    type: warning
+    failure_action: "Optimize Section C elements"
+
+  QG-004:
+    name: "Element Completion Gate"
+    transition: "Draft -> Launch"
+    condition: "elements_complete >= 14/17"
+    type: blocking
+    failure_action: "Complete missing elements"
+
+  QG-005:
+    name: "Mobile Responsive Gate"
+    transition: "Desktop -> Mobile"
+    condition: "mobile_score >= 90"
+    type: blocking
+    failure_action: "Fix mobile layout issues"
+
+  QG-006:
+    name: "Load Time Gate"
+    transition: "Request -> Render"
+    condition: "load_time < 3s"
+    type: warning
+    failure_action: "Optimize images and scripts"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  new_page_workflow:
+    trigger: "New sales page request"
+    steps:
+      - step: 1
+        agent: value-equation-analyst
+        action: "Analyze offer through Value Equation"
+        output: "Element priority ranking"
+
+      - step: 2
+        agent: page-architect
+        action: "Create 17 Elements execution plan"
+        output: "Sequenced task list"
+
+      - step: 3
+        agent: above-fold-crafter
+        action: "Create Section A elements (1-5)"
+        output: "Above fold complete"
+        parallel_tasks:
+          - "Headline variants"
+          - "Subheadline"
+          - "CTA"
+          - "Social proof"
+          - "Urgency element"
+
+      - step: 4
+        agent: proof-curator
+        action: "Curate and match social proof"
+        output: "Proof library matched"
+        parallel_to: "step 3"
+
+      - step: 5
+        agent: persuasion-builder
+        action: "Create Section B elements (6-14)"
+        output: "Main body complete"
+        sequential_tasks:
+          - "VSL/Hero image"
+          - "Benefit bullets"
+          - "Qualification sections"
+          - "Value stack"
+          - "Price comparison"
+          - "FAQ"
+          - "Guarantee"
+          - "About section"
+
+      - step: 6
+        agent: friction-remover
+        action: "Create Section C elements (15-17)"
+        output: "Conversion elements complete"
+
+      - step: 7
+        agent: conversion-auditor
+        action: "Audit complete page"
+        output: "Launch readiness score"
+
+      - step: 8
+        agent: page-architect
+        action: "Final review and launch approval"
+        condition: "If score >= 14/17 elements"
+
+  optimization_workflow:
+    trigger: "Conversion below target OR scheduled review"
+    steps:
+      - step: 1
+        agent: conversion-auditor
+        action: "Run full 17 Elements audit"
+        output: "Element scores and gaps"
+
+      - step: 2
+        agent: ab-test-strategist
+        action: "Identify highest-impact test"
+        output: "Test hypothesis"
+
+      - step: 3
+        agent: copy-optimizer
+        action: "Create test variants"
+        output: "A/B test ready"
+
+      - step: 4
+        agent: page-architect
+        action: "Launch test and monitor"
+        output: "Test running"
+
+      - step: 5
+        agent: ab-test-strategist
+        action: "Analyze results at significance"
+        output: "Winner or learning"
+
+      - step: 6
+        agent: page-architect
+        action: "Implement winner or iterate"
+        output: "Page updated"
+
+  section_a_emergency_workflow:
+    trigger: "Scroll rate drops below 30%"
+    steps:
+      - step: 1
+        agent: conversion-auditor
+        action: "Emergency Section A audit"
+        output: "Critical issue identification"
+        sla: "Same day"
+
+      - step: 2
+        agent: above-fold-crafter
+        action: "Create new headline variants"
+        output: "3 new headlines"
+
+      - step: 3
+        agent: ab-test-strategist
+        action: "Launch rapid test"
+        output: "Test live"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    scroll_rate:
+      formula: "Scrolled / Total Visitors"
+      target: ">40%"
+      section: "A - Above Fold"
+
+    conversion_rate:
+      formula: "Purchases / Total Visitors"
+      target: ">3%"
+      traffic_type: "Cold"
+
+    checkout_abandon:
+      formula: "Started but not completed / Started"
+      target: "<25%"
+      section: "C - Conversion"
+
+  secondary:
+    element_completion:
+      formula: "Elements present / 17"
+      target: "17/17"
+      minimum: "14/17"
+
+    time_on_page:
+      formula: "Average session duration"
+      target: ">3 minutes"
+
+    scroll_depth:
+      formula: "Average scroll percentage"
+      target: ">70%"
+
+  by_section:
+    section_a:
+      - "Scroll rate"
+      - "CTA click rate"
+      - "Bounce rate"
+    section_b:
+      - "Time on page"
+      - "Scroll depth"
+      - "FAQ interaction"
+    section_c:
+      - "Checkout starts"
+      - "Checkout completion"
+      - "Support chat engagement"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Low scroll rate (<40%)"
+    possible_causes:
+      - "Headline doesn't hook"
+      - "CTA unclear"
+      - "No proof above fold"
+    diagnosis:
+      - "Review headline against formula"
+      - "Check CTA text (benefit vs action)"
+      - "Verify social proof present"
+    solutions:
+      - "A/B test headline variants"
+      - "Change CTA to benefit-oriented"
+      - "Add immediate social proof"
+
+  - symptom: "Low conversion (<3%)"
+    possible_causes:
+      - "Value proposition unclear"
+      - "Objections not addressed"
+      - "Price-value gap not obvious"
+    diagnosis:
+      - "Audit all 17 elements"
+      - "Review FAQ against real objections"
+      - "Check value stack visibility"
+    solutions:
+      - "Complete missing elements"
+      - "Strengthen guarantee"
+      - "Improve value stack visual"
+
+  - symptom: "High checkout abandon (>25%)"
+    possible_causes:
+      - "Trust missing at checkout"
+      - "Process seems complex"
+      - "Support not visible"
+    diagnosis:
+      - "Check security badges present"
+      - "Review progress bar implementation"
+      - "Verify chat/support visible"
+    solutions:
+      - "Add all security seals"
+      - "Simplify to 3 steps max"
+      - "Make support obvious"
+
+  - symptom: "Good traffic, no clicks"
+    possible_causes:
+      - "CTA not visible"
+      - "CTA text weak"
+      - "No urgency"
+    diagnosis:
+      - "Check CTA contrast (3:1)"
+      - "Review CTA text"
+      - "Check urgency element"
+    solutions:
+      - "Increase CTA contrast"
+      - "Use benefit-oriented text with arrow"
+      - "Add real scarcity mechanism"
+
+# ===============================================================================
+# TECHNOLOGY REQUIREMENTS
+# ===============================================================================
+
+technology:
+  required:
+    - tool: "Analytics Platform"
+      purpose: "Track conversion funnel"
+      features:
+        - "Page-level conversion tracking"
+        - "Event tracking (CTA clicks)"
+        - "Funnel visualization"
+
+    - tool: "Heatmap Tool"
+      purpose: "Visual behavior analysis"
+      features:
+        - "Click heatmaps"
+        - "Scroll depth tracking"
+        - "Session recordings"
+      recommendations: ["Hotjar", "Microsoft Clarity"]
+
+    - tool: "A/B Testing Platform"
+      purpose: "Test element variations"
+      features:
+        - "Split testing"
+        - "Statistical significance"
+        - "Multi-variant testing"
+
+    - tool: "Page Builder"
+      purpose: "Rapid page creation"
+      features:
+        - "Responsive design"
+        - "Template library"
+        - "Integration capabilities"
+
+  recommended:
+    - tool: "Countdown Timer"
+      purpose: "Real urgency element"
+
+    - tool: "Chat Widget"
+      purpose: "Element 17 implementation"
+
+    - tool: "SSL Certificate"
+      purpose: "Security badge (Element 16)"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "VSL script framework not detailed"
+    severity: Medium
+    note: "Blueprint focuses on page structure, not video content"
+
+  - id: GAP-002
+    description: "Specific A/B test sample sizes"
+    severity: Low
+    note: "Varies by traffic volume"
+
+  - id: GAP-003
+    description: "Industry-specific adaptations"
+    severity: Medium
+    clarification_needed: "How to adapt 17 elements for different verticals"
+
+  - id: GAP-004
+    description: "Multi-language page considerations"
+    severity: Low
+    note: "Blueprint in Portuguese, principles universal"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 6
+  workflows_documented: 3
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

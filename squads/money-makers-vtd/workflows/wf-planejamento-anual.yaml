@@ -1,0 +1,607 @@
+# WF-9: Planejamento Anual 12/54/27
+# Duration: 2-4h
+# Best for: Planejamento estratégico anual de monetização perpétua
+# Key Agents: vtd-chief, pesquisador-ia, monetizador, copy-andromeda, escalador
+
+workflow:
+  id: wf-planejamento-anual
+  name: "Planejamento Anual 12/54/27"
+  duration: "2-4h"
+  trigger: "*plano-anual {nicho}"
+  description: |
+    Workflow master que orquestra o modelo 12/54/27 do Natanael Oliveira:
+    - 12 funis novos/ano (1 funil novo por mês)
+    - 54 campanhas/ano (1 campanha por semana)
+    - 27 novas fontes de lucro/ano (1 produto novo a cada ~2 semanas)
+
+    "Quem tem cronograma tem caixa."
+
+    Este workflow gera o PLANO ANUAL completo — o documento-mãe que alimenta
+    todos os outros workflows do squad (campanhas, funis, produtos).
+
+    Este workflow produz:
+    - Calendário de 12 funis distribuídos no ano
+    - Cronograma de 54 campanhas semanais com gatilhos
+    - Roadmap de 27 produtos priorizados por ticket e ciclo
+    - Dashboard de metas mensais com números reais
+    - Funil americano integrado (oferta imediata + ancoragem high ticket)
+
+  best_for:
+    - "Início de ano/trimestre — planejar a máquina de monetização"
+    - "Expert que quer sair do lançamento e ir para perpétuo"
+    - "Negócio existente que precisa de estrutura 12/54/27"
+    - "Diagnóstico apontou falta de cronograma"
+
+  decision_matrix_fit:
+    awareness: "solution-aware"
+    sophistication: "stage-3-tired"
+    price_point: "mix low/mid/high"
+    traffic_temp: "warm + cold"
+    primary_output: "plano-anual-12-54-27.md"
+
+  clone_combinations:
+    primary: "vtd-chief + monetizador"
+    secondary:
+      - "pesquisador-ia (fase de inventário)"
+      - "copy-andromeda (temas de campanhas)"
+      - "escalador (roadmap de produtos escaláveis)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 1: INVENTÁRIO & DIAGNÓSTICO (Hora 1)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-1
+    name: "Inventário & Diagnóstico"
+    days: "1"
+    tier: 0
+    description: |
+      Levantamento completo do estado atual:
+      - Produtos existentes (mapear mix low/mid/high)
+      - Funis ativos (quantos rodando, CPL, conversão)
+      - Campanhas feitas nos últimos 12 meses
+      - Fontes de receita atuais
+      - Meta de faturamento anual
+
+      Aplica diagnóstico: onde estão os gaps no modelo 12/54/27?
+      "98% não compraram — o que você fez com eles?" (NO-F022)
+
+    tasks:
+      - task_id: inventario-produtos
+        agent: monetizador
+        required: true
+        description: "Mapear todos os produtos atuais por ticket (low/mid/high)"
+        output: "inventario-produtos.yaml"
+
+      - task_id: inventario-funis
+        agent: arquiteto-funil
+        required: true
+        description: "Mapear funis ativos, CPL, taxa conversão, status"
+        output: "inventario-funis.yaml"
+
+      - task_id: diagnostico-gaps
+        agent: vtd-chief
+        required: true
+        description: "Cruzar inventário com modelo 12/54/27, identificar gaps"
+        output: "diagnostico-gaps.md"
+
+    elicitation:
+      required: true
+      questions:
+        - id: nicho
+          question: "Qual o nicho/tema principal do negócio?"
+          type: text
+          required: true
+
+        - id: produtos_atuais
+          question: "Quais produtos você já vende hoje? (liste com preços)"
+          type: text
+          required: true
+
+        - id: funis_ativos
+          question: "Quantos funis de aquisição estão rodando agora?"
+          type: number
+          required: true
+
+        - id: meta_faturamento
+          question: "Qual a meta de faturamento anual? (ex: R$500k, R$1M)"
+          type: text
+          required: true
+
+        - id: campanhas_recentes
+          question: "Quantas campanhas de venda você fez nos últimos 3 meses?"
+          type: number
+          required: true
+
+    checkpoint:
+      criteria:
+        - "Mix de produtos mapeado com tickets (low/mid/high)"
+        - "Funis ativos identificados com métricas"
+        - "Gaps no modelo 12/54/27 quantificados"
+        - "Meta anual definida e decomposta em meta diária"
+      human_review: true
+      message: "Inventário completo. Revisar gaps antes de planejar."
+      veto_conditions:
+        - "SE não tem meta de faturamento definida → BLOQUEIA. Sem meta não tem plano."
+        - "SE não listou produtos atuais → BLOQUEIA. Precisa saber o que existe antes de criar."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2: CALENDÁRIO 12 FUNIS (Hora 1-2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Calendário 12 Funis"
+    days: "1"
+    tier: 1
+    description: |
+      Distribuir 12 funis novos ao longo do ano.
+      Cada funil = 1 porta de entrada nova para o ecossistema.
+
+      Tipos de funil:
+      - Funil Instagram perpétuo (perfil → ManyChat → WhatsApp → email)
+      - Funil livro Amazon (livro → email → aula → venda)
+      - Funil desafio gratuito (desafio → email → oferta)
+      - Funil app IA (app → uso → upsell)
+      - Funil aula ao vivo (tráfego → aula → oferta)
+      - Funil lead magnet (material gratuito → email → sequência)
+
+      REGRA FUNIL AMERICANO:
+      Todo funil DEVE ter oferta imediata (mesmo para lead frio).
+      "Só vende quem oferece" — não esperar nutrição para ofertar.
+      High ticket aparece ANTES de low ticket (Efeito Chanel / NO-F012).
+
+    tasks:
+      - task_id: pesquisa-sazonalidade
+        agent: pesquisador-ia
+        required: true
+        description: "IA pesquisa sazonalidade do nicho, melhores meses por tipo de funil"
+        output: "pesquisa-sazonalidade.md"
+
+      - task_id: distribuir-12-funis
+        agent: arquiteto-funil
+        required: true
+        description: "Distribuir 12 funis no calendário anual, 1 por mês, tipo adequado"
+        output: "calendario-12-funis.yaml"
+
+      - task_id: funil-americano-regras
+        agent: monetizador
+        required: true
+        description: "Definir regras de oferta imediata e ancoragem para cada funil"
+        output: "regras-funil-americano.md"
+        notes: |
+          Para CADA funil criado, definir:
+          1. Oferta imediata (o que oferece no primeiro contato)
+          2. High ticket de ancoragem (aparece ANTES do low ticket)
+          3. Sequência de follow-up (98% não compraram — o que fazer?)
+          Referência: NO-F012 (Efeito Chanel), NO-F022 (98% sem oferta = dinheiro na mesa)
+
+    checkpoint:
+      criteria:
+        - "12 funis distribuídos no ano (1/mês)"
+        - "Cada funil tem tipo definido e lead magnet"
+        - "Sazonalidade respeitada (IA validou)"
+        - "Regras de funil americano aplicadas em todos"
+        - "Todo funil tem oferta imediata definida"
+        - "Ancoragem high ticket presente em cada funil"
+      human_review: true
+      message: "12 funis planejados. Validar distribuição e tipos."
+      veto_conditions:
+        - "SE algum funil não tem oferta imediata → VETO. Funil americano obrigatório."
+        - "SE nenhum funil mostra high ticket antes → VETO. Efeito Chanel obrigatório."
+        - "SE não pesquisou sazonalidade com IA → VETO. Dados > intuição (NO-H001)."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3: CRONOGRAMA 54 CAMPANHAS (Hora 2-3)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Cronograma 54 Campanhas"
+    days: "1"
+    tier: 1
+    description: |
+      Criar cronograma de 54 campanhas semanais.
+      Cada semana = 1 campanha com gatilho do Sistema de Recompensa Central.
+
+      7 GATILHOS (rodam em ciclo):
+      1. Novidade — algo que nunca viram
+      2. Facilidade — algo útil, que simplifica
+      3. Erro — aponte um erro que o público comete
+      4. Exclusividade/Lisonja — "quase ninguém conhece"
+      5. Alívio imediato — mensagem que causa alívio
+      6. Demonstração — ao vivo, ativa neurônio espelho
+      7. Prova/Estudo de caso
+
+      Hook→Punch→Premissa integrado em cada campanha:
+      - Hook: gancho que para o scroll (vinculado ao gatilho da semana)
+      - Punch: impacto emocional que mantém atenção
+      - Premissa: argumento central que sustenta a oferta
+
+      EMPILHAMENTO DIÁRIO dentro de cada campanha:
+      - Manhã: email/oferta low ticket
+      - Tarde: email/oferta high ticket
+      - Noite: outro produto (cross-sell)
+
+    tasks:
+      - task_id: mapear-54-campanhas
+        agent: monetizador
+        required: true
+        description: "Distribuir 54 campanhas no ano, gatilho por semana, produto por campanha"
+        output: "cronograma-54-campanhas.yaml"
+        notes: |
+          Formato por semana:
+          - semana: 1
+            mes: Janeiro
+            gatilho: "Novidade"
+            produto: "{nome do produto}"
+            ticket: "low/mid/high"
+            hook: "{gancho da campanha}"
+            punch: "{impacto emocional}"
+            premissa: "{argumento central}"
+            empilhamento:
+              manha: "{oferta low ticket}"
+              tarde: "{oferta high ticket}"
+              noite: "{cross-sell}"
+
+      - task_id: temas-copy-campanhas
+        agent: copy-andromeda
+        required: true
+        description: "Definir tema de copy por sentimento para cada mês (Andromeda)"
+        output: "temas-copy-mensal.yaml"
+        notes: |
+          Variar por SENTIMENTO, não por demografia (NO-H014):
+          - Jan: Renovação/Oportunidade
+          - Fev: Urgência/Escassez
+          - Mar: Prova Social/Cases
+          - (e assim por diante, baseado no ciclo emocional do público)
+
+    checkpoint:
+      criteria:
+        - "54 campanhas mapeadas (1/semana, sem semana vazia)"
+        - "Cada campanha tem gatilho do Sistema de Recompensa Central"
+        - "Hook→Punch→Premissa definido por campanha"
+        - "Empilhamento diário (manhã/tarde/noite) em cada campanha"
+        - "Temas de copy por sentimento definidos (Andromeda)"
+        - "Mix de produtos equilibrado ao longo do ano"
+      human_review: true
+      message: "54 campanhas cronogramadas. Validar distribuição de gatilhos e produtos."
+      veto_conditions:
+        - "SE campanha sem gatilho definido → VETO. Todo gatilho vem do Sistema de Recompensa Central."
+        - "SE copy variada por DEMOGRAFIA e não por SENTIMENTO → VETO. Andromeda obrigatório."
+        - "SE semana sem empilhamento → VETO. Empilhar é a regra, não exceção."
+        - "SE escassez na sexta → ALERTA. Domingo à noite converte mais (NO-H006)."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 4: ROADMAP 27 PRODUTOS (Hora 3-4)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-4
+    name: "Roadmap 27 Produtos"
+    days: "1"
+    tier: 1
+    description: |
+      Planejar 27 novas fontes de lucro ao longo do ano.
+      ~1 produto novo a cada 2 semanas.
+
+      Mix de tipos (referência Natanael):
+      - Ebooks R$9-14
+      - Apps IA R$50-247
+      - Livros Amazon R$24-44
+      - Desafios R$97-197
+      - Workshops R$197-297
+      - Cursos R$297
+      - Imersões R$997
+      - Mentorias R$2.5k-5k
+
+      REGRA: "Você está montando uma empresa de educação, não um infoproduto" (NO-F037)
+
+      Cada produto é pesquisado com IA ANTES de criar (NO-H001).
+      1 produto = 1 problema (NO-H003).
+
+    tasks:
+      - task_id: pesquisa-27-temas
+        agent: pesquisador-ia
+        required: true
+        description: "IA pesquisa 27 temas com potencial no nicho (tendências, dores, ciclo)"
+        output: "pesquisa-27-temas.md"
+
+      - task_id: priorizar-27-produtos
+        agent: monetizador
+        required: true
+        description: "Priorizar 27 produtos por ticket, esforço, sazonalidade e mix"
+        output: "roadmap-27-produtos.yaml"
+        notes: |
+          Para cada produto, definir:
+          - nome_produto: "{nome}"
+            tipo: "ebook|desafio|workshop|curso|imersao|livro|app_ia|mentoria"
+            ticket: "R$XX"
+            categoria: "low|mid|high"
+            mes_lancamento: "Mês X"
+            problema_resolve: "{1 problema específico}"
+            proximo_passo: "{o que vem depois da compra}"
+            pesquisa_ia: true
+            funil_americano:
+              oferta_imediata: "{oferta no primeiro contato}"
+              ancoragem: "{high ticket que aparece antes}"
+
+      - task_id: produtos-escalaveis
+        agent: escalador
+        required: true
+        description: "Identificar quais dos 27 podem ser escaláveis (livros Amazon, apps IA)"
+        output: "produtos-escalaveis.md"
+
+    checkpoint:
+      criteria:
+        - "27 produtos mapeados com nome, tipo, ticket e mês"
+        - "Mix equilibrado: low/mid/high ticket"
+        - "Cada produto resolve 1 problema específico (NO-H003)"
+        - "Cada produto tem próximo passo definido (NO-F021)"
+        - "Produtos escaláveis identificados (Amazon + apps IA)"
+        - "Pesquisa IA planejada para cada produto (NO-H001)"
+        - "Funil americano definido por produto"
+      human_review: true
+      message: "27 produtos planejados. Validar mix e priorização."
+      veto_conditions:
+        - "SE produto sem problema específico → VETO. 1 produto = 1 problema."
+        - "SE produto sem próximo passo → VETO. NUNCA sem follow-up (NO-F021)."
+        - "SE zero produtos escaláveis → ALERTA. Precisa de pelo menos 3 (livros/apps)."
+        - "SE custo fixo subindo com novos produtos → VETO. Escalar no variável (NO-F033)."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 5: DASHBOARD & METAS (Final)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-5
+    name: "Dashboard & Metas"
+    days: "1"
+    tier: 2
+    description: |
+      Consolidar tudo num dashboard executável com metas mensuráveis.
+
+      Inclui:
+      - Meta diária decomposta (ex: 10x R$27 + 5x R$97 + 2x R$297 = R$1.350/dia)
+      - Plano de 1K/dia personalizado para o nicho
+      - KPIs por mês (funis lançados, campanhas feitas, produtos criados)
+      - Budget de tráfego mensal (80% visita perfil, 20% conversão)
+      - Projeção de lucro (meta 50-60% - NO-F033)
+
+    tasks:
+      - task_id: meta-diaria
+        agent: monetizador
+        required: true
+        description: "Calcular plano 1K/dia com mix de produtos do nicho"
+        output: "meta-diaria.md"
+
+      - task_id: dashboard-anual
+        agent: vtd-chief
+        required: true
+        description: "Consolidar calendário 12 + cronograma 54 + roadmap 27 em dashboard"
+        output: "dashboard-plano-anual.md"
+
+      - task_id: budget-trafego
+        agent: arquiteto-funil
+        required: true
+        description: "Calcular budget de tráfego mensal baseado em metas (80/20 perfil/conversão)"
+        output: "budget-trafego.md"
+
+    checkpoint:
+      criteria:
+        - "Meta diária calculada com mix real de produtos"
+        - "Dashboard consolida 12 + 54 + 27 em visão única"
+        - "Budget de tráfego definido com split 80/20"
+        - "Projeção de lucro >= 50%"
+        - "KPIs mensais mensuráveis definidos"
+      human_review: true
+      message: "Plano anual 12/54/27 completo. Dashboard pronto para execução."
+      veto_conditions:
+        - "SE projeção de lucro < 50% → ALERTA. Revisar custos (NO-F033)."
+        - "SE sem budget de tráfego → VETO. Orgânico é consequência, não estratégia."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_stakeholders: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHECKPOINT CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+checkpoint_config:
+  - phase: PHASE-1
+    heuristic: "NO-H001"
+    criteria: "Inventário completo com métricas reais"
+    veto_condition: "Sem meta de faturamento = sem plano"
+
+  - phase: PHASE-2
+    heuristic: "NO-F012"
+    criteria: "12 funis com oferta imediata e ancoragem"
+    veto_condition: "Funil sem oferta imediata = funil americano violado"
+
+  - phase: PHASE-3
+    heuristic: "NO-H014"
+    criteria: "54 campanhas com gatilhos e copy por sentimento"
+    veto_condition: "Copy por demografia = Andromeda violado"
+
+  - phase: PHASE-4
+    heuristic: "NO-H003"
+    criteria: "27 produtos, cada um resolve 1 problema"
+    veto_condition: "Produto multi-funcional = cortar"
+
+  - phase: PHASE-5
+    heuristic: "NO-F033"
+    criteria: "Dashboard com projeção de lucro >= 50%"
+    veto_condition: "Custo fixo subindo = parar e revisar"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMPLETION SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+completion_signal: "<promise>COMPLETE</promise>"
+checkpoint_signal: "<promise>CHECKPOINT:PHASE-X</promise>"
+blocked_signal: "<promise>BLOCKED:T-X.Y</promise>"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT ARTIFACTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  inventario:
+    - "inventario-produtos.yaml — Produtos atuais mapeados"
+    - "inventario-funis.yaml — Funis ativos com métricas"
+    - "diagnostico-gaps.md — Gaps no modelo 12/54/27"
+
+  planejamento:
+    - "calendario-12-funis.yaml — 12 funis distribuidos no ano"
+    - "regras-funil-americano.md — Regras de oferta imediata + ancoragem"
+    - "cronograma-54-campanhas.yaml — 54 campanhas com gatilhos e empilhamento"
+    - "temas-copy-mensal.yaml — Temas Andromeda por sentimento"
+    - "roadmap-27-produtos.yaml — 27 produtos priorizados"
+    - "produtos-escalaveis.md — Produtos com potencial de escala"
+
+  dashboard:
+    - "meta-diaria.md — Plano 1K/dia personalizado"
+    - "dashboard-plano-anual.md — Visão consolidada 12/54/27"
+    - "budget-trafego.md — Budget mensal com split 80/20"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENT ASSIGNMENTS BY PHASE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents_by_phase:
+  PHASE-1:
+    primary:
+      - "vtd-chief"
+      - "monetizador"
+    secondary:
+      - "arquiteto-funil"
+  PHASE-2:
+    primary:
+      - "arquiteto-funil"
+    secondary:
+      - "pesquisador-ia"
+      - "monetizador"
+  PHASE-3:
+    primary:
+      - "monetizador"
+    secondary:
+      - "copy-andromeda"
+  PHASE-4:
+    primary:
+      - "monetizador"
+      - "pesquisador-ia"
+    secondary:
+      - "escalador"
+  PHASE-5:
+    primary:
+      - "vtd-chief"
+    secondary:
+      - "monetizador"
+      - "arquiteto-funil"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  inventario:
+    - "[ ] Todos os produtos atuais listados com preço"
+    - "[ ] Funis ativos com CPL e taxa de conversão"
+    - "[ ] Gaps quantificados (quantos funis faltam, campanhas, produtos)"
+    - "[ ] Meta anual definida e decomposta"
+
+  calendario_12:
+    - "[ ] 12 funis distribuídos (1/mês, sem mês vazio)"
+    - "[ ] Tipos variados (Instagram, Amazon, desafio, app, aula)"
+    - "[ ] Sazonalidade respeitada"
+    - "[ ] Funil americano aplicado em todos (oferta imediata + ancoragem)"
+
+  cronograma_54:
+    - "[ ] 54 campanhas (sem semana vazia)"
+    - "[ ] Todos os 7 gatilhos usados em ciclo"
+    - "[ ] Hook→Punch→Premissa em cada campanha"
+    - "[ ] Empilhamento diário (manhã/tarde/noite)"
+    - "[ ] Copy por sentimento, não demografia"
+    - "[ ] Escassez no domingo (NO-H006)"
+
+  roadmap_27:
+    - "[ ] 27 produtos com nome, tipo, ticket, mês"
+    - "[ ] Mix low/mid/high equilibrado"
+    - "[ ] 1 produto = 1 problema"
+    - "[ ] Próximo passo definido para cada"
+    - "[ ] Mínimo 3 produtos escaláveis"
+
+  dashboard:
+    - "[ ] Meta diária calculada (Plano 1K/dia)"
+    - "[ ] Budget de tráfego com split 80/20"
+    - "[ ] Projeção de lucro >= 50%"
+    - "[ ] KPIs mensais mensuráveis"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GOVERNANCE GATE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+governance_gate:
+  required_checks:
+    - "Modelo 12/54/27 integralmente coberto"
+    - "Heurísticas do Natanael referenciadas em cada veto condition"
+    - "Funil americano integrado (oferta imediata + ancoragem)"
+    - "Hook→Punch→Premissa integrado nas campanhas"
+    - "Números reais usados (CPL, conversão, budget baseados em benchmarks)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT EXAMPLE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+output_example: |
+  ## Plano Anual 12/54/27 — Nicho: Confeitaria Lucrativa
+
+  ### Meta Anual: R$500.000 (R$1.370/dia)
+
+  **Plano 1K/dia:**
+  10 ebooks R$14,90 + 3 desafios R$97 + 1 workshop R$297 + 0.5 mentoria R$2.500/semana
+  = R$1.435/dia → Meta: R$523.775/ano
+
+  ### Calendário 12 Funis
+  | Mês | Funil | Lead Magnet | Oferta Imediata | Ancoragem |
+  |-----|-------|-------------|-----------------|-----------|
+  | Jan | Instagram perpétuo | Planilha precificação | Ebook R$14,90 | Mentoria R$2.500 |
+  | Fev | Desafio gratuito | "Precifique em 7 dias" | Desafio premium R$97 | Imersão R$997 |
+  | Mar | Livro Amazon | "Confeitaria Lucrativa" | Kit receitas R$44,90 | Curso completo R$297 |
+  | ... | ... | ... | ... | ... |
+
+  ### Cronograma Semana 1 (exemplo)
+  - Gatilho: NOVIDADE
+  - Hook: "Descobri um modelo que confeiteiras estão usando para faturar R$5k/mês"
+  - Punch: "E o melhor: sem precisar de loja física"
+  - Premissa: "Precificação inteligente = margem de 60% em cada encomenda"
+  - Empilhamento:
+    - Manhã: Email ebook "50 Receitas Lucrativas" R$14,90
+    - Tarde: Email mentoria "Confeitaria 5K" R$2.500
+    - Noite: Email app "Calculadora de Preços IA" R$60
+
+  Faz muita diferença, gente. Bora nessa?
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  framework: "AIOS Squad Creator"
+  created: "2026-02-21"
+  primary_use_case: "Planejamento anual de monetização perpétua (modelo 12/54/27)"
+  source_mind: "natanael-oliveira"
+  key_difference: |
+    Único workflow que consolida os 3 calendários (12/54/27) numa visão integrada.
+    Integra funil americano e Hook→Punch→Premissa como elementos obrigatórios.
+    Cada veto condition rastreia a heurística original do Natanael.

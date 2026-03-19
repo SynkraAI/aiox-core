@@ -1,0 +1,119 @@
+workflow:
+  id: wf-sop-creation-pipeline
+  name: "SOP Creation Pipeline"
+  version: "1.0.0"
+  orchestrator: sop-chief
+  mode: interactive
+
+  description: |
+    Complete SOP creation pipeline following the Juran Quality Trilogy approach.
+    Phase 1 (Quality Planning): Gather requirements, define scope, identify audience.
+    Phase 2 (Quality Creation): Draft SOP in chosen format(s).
+    Phase 3 (Quality Control): Review, validate, and audit the SOP.
+    Phase 4 (Quality Improvement): Incorporate feedback and finalize.
+    Supports dual-output: human-readable AND AI/ML-readable formats.
+
+  phases:
+    phase_0:
+      name: "Requirements Gathering"
+      agent: sop-chief
+      steps:
+        - id: "0.1"
+          name: "Identify Process"
+          action: "Ask user to describe the process to document"
+          elicit: true
+        - id: "0.2"
+          name: "Define Audience"
+          action: "Determine target audience (human operators, AI agents, or both)"
+          elicit: true
+        - id: "0.3"
+          name: "Select Output Format"
+          action: "Choose: human-only, ML-only, or dual-format"
+          elicit: true
+        - id: "0.4"
+          name: "Identify Compliance Requirements"
+          action: "Determine applicable standards (ISO 9001, FDA/GMP, OSHA, none)"
+          elicit: true
+        - id: "0.5"
+          name: "Route to Creator(s)"
+          action: "Delegate to sop-creator and/or sop-ml-architect based on format choice"
+
+    phase_1:
+      name: "SOP Drafting"
+      steps:
+        - id: "1.1"
+          name: "Create Human SOP"
+          agent: sop-creator
+          condition: "format in ['human', 'dual']"
+          action: "Execute create-sop-human task"
+        - id: "1.2"
+          name: "Create ML SOP"
+          agent: sop-ml-architect
+          condition: "format in ['ml', 'dual']"
+          action: "Execute create-sop-ml task"
+
+    phase_2:
+      name: "Internal Review"
+      steps:
+        - id: "2.1"
+          name: "Self-Review Against Quality Checklist"
+          action: "Run sop-quality-checklist against draft"
+        - id: "2.2"
+          name: "Analyze Draft Score"
+          agent: sop-analyst
+          action: "Execute analyze-sop on draft, must score >= 70"
+        - id: "2.3"
+          name: "Iterate if Needed"
+          action: "If score < 70, return to phase_1 with remediation notes"
+          max_iterations: 3
+
+    phase_3:
+      name: "Audit & Certification"
+      agent: sop-auditor
+      steps:
+        - id: "3.1"
+          name: "Full Audit"
+          action: "Execute audit-sop with applicable compliance standards"
+        - id: "3.2"
+          name: "Verdict Check"
+          action: "Must achieve APPROVED or CERTIFIED verdict"
+
+    phase_4:
+      name: "Finalize & Publish"
+      agent: sop-chief
+      steps:
+        - id: "4.1"
+          name: "Generate Checklist"
+          action: "Create operational checklist from final SOP"
+        - id: "4.2"
+          name: "Save Artifacts"
+          action: "Save all outputs to outputs/sop-factory/"
+        - id: "4.3"
+          name: "Generate Scorecard"
+          action: "Create one-page scorecard summary"
+
+  quality_gate:
+    id: "QG-SOP-001"
+    name: "SOP Publication Quality Gate"
+    transition: "Draft -> Published"
+    type: blocking
+    criteria:
+      - "SOP Quality Checklist passed (all items checked)"
+      - "Analyst score >= 70 (C grade minimum)"
+      - "Auditor verdict: APPROVED or CERTIFIED"
+      - "All placeholder text resolved"
+      - "Version and metadata complete"
+    veto_conditions:
+      - "Score < 60 -> HALT, major rewrite needed"
+      - "Compliance violations -> HALT, cannot publish"
+      - "Missing RACI matrix -> HALT, accountability gap"
+
+  output:
+    format: "SOP Package"
+    location: "outputs/sop-factory/"
+    artifacts:
+      - human_sop: "human/{process-name}-sop-v{version}.md"
+      - ml_sop: "ml/{process-name}-sop-v{version}.yaml"
+      - checklist: "checklists/{process-name}-checklist.md"
+      - scorecard: "scorecards/{process-name}-scorecard.md"
+      - analysis: "analysis/{process-name}-analysis.md"

@@ -1,0 +1,193 @@
+{
+  "metadata": {
+    "total_trilhas": 4,
+    "publico_alvo": "Palestrantes, coaches, consultores, educadores",
+    "versao": "1.0"
+  },
+  "trilhas": [
+    {
+      "id": "trilha-iniciante",
+      "nome": "Fundamentos de Palestra Impactante",
+      "descricao": "Para quem nunca deu palestras ou está começando",
+      "nivel": "Iniciante",
+      "duracao_estimada": "15-20 horas",
+      "modulos_inclusos": [1, 2, 3],
+      "prerequisitos": [],
+      "objetivos": [
+        "Dominar abertura que gera conexão",
+        "Aprender a vender o resultado antes do conteúdo",
+        "Estruturar conteúdo em passos memoráveis"
+      ],
+      "sequencia_aprendizado": [
+        {
+          "ordem": 1,
+          "item": "Módulo 1: Conexão Inicial",
+          "tempo": "4-5h",
+          "exercicios": ["ex-mod1-01", "ex-mod1-02", "ex-mod1-03", "ex-mod1-04"]
+        },
+        {
+          "ordem": 2,
+          "item": "Módulo 2: Promoção do Conteúdo",
+          "tempo": "5-7h",
+          "exercicios": ["ex-mod2-01", "ex-mod2-02", "ex-mod2-03", "ex-mod2-04"]
+        },
+        {
+          "ordem": 3,
+          "item": "Módulo 3: Entrega Estruturada",
+          "tempo": "6-8h",
+          "exercicios": ["ex-mod3-01", "ex-mod3-02", "ex-mod3-03", "ex-mod3-04"]
+        }
+      ],
+      "entrega_final": "Palestra técnica de 20 minutos (sem história pessoal)",
+      "proxima_trilha": "trilha-intermediario"
+    },
+    {
+      "id": "trilha-intermediario",
+      "nome": "Storytelling e Conexão Emocional",
+      "descricao": "Para quem já dá palestras e quer adicionar storytelling autêntico",
+      "nivel": "Intermediário",
+      "duracao_estimada": "25-30 horas",
+      "modulos_inclusos": [1, 2, 3, 4, 5],
+      "prerequisitos": ["Experiência prévia dando palestras OU trilha-iniciante completa"],
+      "objetivos": [
+        "Dominar todos os 5 passos do método",
+        "Contar história pessoal com autenticidade",
+        "Criar vídeo recapitulativo emocional"
+      ],
+      "sequencia_aprendizado": [
+        {
+          "ordem": 1,
+          "item": "Revisão Módulos 1-3",
+          "tempo": "3-4h",
+          "exercicios": ["Revisão conceitual, sem exercícios novos"]
+        },
+        {
+          "ordem": 2,
+          "item": "Módulo 4: História de Essência",
+          "tempo": "8-10h",
+          "exercicios": ["ex-mod4-01", "ex-mod4-02", "ex-mod4-03", "ex-mod4-04", "ex-mod4-05"]
+        },
+        {
+          "ordem": 3,
+          "item": "Módulo 5: Finalização Emocional",
+          "tempo": "5-7h",
+          "exercicios": ["ex-mod5-01", "ex-mod5-02", "ex-mod5-03", "ex-mod5-04", "ex-mod5-05"]
+        },
+        {
+          "ordem": 4,
+          "item": "Integração: Palestra Completa",
+          "tempo": "8-10h",
+          "exercicios": ["Prática integrada de todos os módulos"]
+        }
+      ],
+      "entrega_final": "Palestra completa de 40 minutos com história e vídeo",
+      "proxima_trilha": "trilha-master"
+    },
+    {
+      "id": "trilha-master",
+      "nome": "Método Completo + Projeto Real",
+      "descricao": "Aplicação profissional do método em evento real",
+      "nivel": "Avançado",
+      "duracao_estimada": "50-60 horas",
+      "modulos_inclusos": [1, 2, 3, 4, 5],
+      "prerequisitos": ["trilha-intermediario completa"],
+      "objetivos": [
+        "Domínio completo do Método 'Aplauda de Pé'",
+        "Apresentar em evento real com 50+ pessoas",
+        "Alcançar aplauso de pé genuíno"
+      ],
+      "sequencia_aprendizado": [
+        {
+          "ordem": 1,
+          "item": "Todos os Módulos 1-5",
+          "tempo": "30-35h",
+          "exercicios": ["Todos os exercícios de ex-mod1-01 até ex-mod5-05"]
+        },
+        {
+          "ordem": 2,
+          "item": "Projeto Final: Palestra Real",
+          "tempo": "20-25h",
+          "exercicios": ["ex-projeto-final"]
+        }
+      ],
+      "entrega_final": "Palestra de 60 minutos em evento profissional real, gravada, com feedback da audiência",
+      "proxima_trilha": null
+    },
+    {
+      "id": "trilha-express",
+      "nome": "Método Rápido (Crash Course)",
+      "descricao": "Versão condensada para quem tem evento em menos de 2 semanas",
+      "nivel": "Todos os níveis",
+      "duracao_estimada": "8-12 horas",
+      "modulos_inclusos": [1, 2, 3],
+      "prerequisitos": ["Urgência: evento confirmado em <2 semanas"],
+      "observacao": "IMPORTANTE: Esta trilha sacrifica profundidade por velocidade. Recomendamos fortemente fazer trilha completa depois do evento.",
+      "objetivos": [
+        "Aplicar framework mínimo viável para palestra funcional",
+        "Criar abertura + promoção + entrega estruturada",
+        "Sobreviver ao evento com dignidade"
+      ],
+      "sequencia_aprendizado": [
+        {
+          "ordem": 1,
+          "item": "Módulo 1 (Express): Abertura",
+          "tempo": "2h",
+          "exercicios": ["ex-mod1-01", "ex-mod1-02"]
+        },
+        {
+          "ordem": 2,
+          "item": "Módulo 2 (Express): Promoção",
+          "tempo": "2h",
+          "exercicios": ["ex-mod2-01", "ex-mod2-03"]
+        },
+        {
+          "ordem": 3,
+          "item": "Módulo 3 (Express): Entrega",
+          "tempo": "3h",
+          "exercicios": ["ex-mod3-01", "ex-mod3-02"]
+        },
+        {
+          "ordem": 4,
+          "item": "Prática Intensiva",
+          "tempo": "3-5h",
+          "exercicios": ["Praticar palestra completa 5+ vezes"]
+        }
+      ],
+      "entrega_final": "Palestra funcional de 20-30 minutos (sem história pessoal)",
+      "proxima_trilha": "trilha-intermediario (ALTAMENTE recomendado após o evento)"
+    }
+  ],
+  "recomendacoes_por_perfil": {
+    "nunca_deu_palestra": {
+      "trilha_recomendada": "trilha-iniciante",
+      "tempo_dedicacao": "2-3 meses (5h/semana)"
+    },
+    "palestra_tecnica_sem_storytelling": {
+      "trilha_recomendada": "trilha-intermediario",
+      "tempo_dedicacao": "1-2 meses (8h/semana)"
+    },
+    "quer_dominio_completo": {
+      "trilha_recomendada": "trilha-master",
+      "tempo_dedicacao": "3-4 meses (10h/semana)"
+    },
+    "evento_urgente": {
+      "trilha_recomendada": "trilha-express",
+      "tempo_dedicacao": "1 semana intensiva (10-12h total)",
+      "aviso": "Faça trilha completa depois!"
+    }
+  },
+  "metricas_progresso": {
+    "iniciante_completo": {
+      "criterio": "Módulos 1-3 completos + palestra técnica de 20 min gravada",
+      "proxima_meta": "Adicionar história pessoal (Módulo 4)"
+    },
+    "intermediario_completo": {
+      "criterio": "Módulos 1-5 completos + palestra de 40 min com vídeo",
+      "proxima_meta": "Apresentar em evento real (50+ pessoas)"
+    },
+    "master_completo": {
+      "criterio": "Palestra real de 60 min + aplauso de pé + feedback positivo 80%+",
+      "proxima_meta": "Ensinar o método para outros ou criar sua própria variação"
+    }
+  }
+}

@@ -1,0 +1,215 @@
+# Hormozi Squad — Handoff Context Template
+# MANDATORY for specialist-to-specialist transfers
+# Version: 1.0.0
+# Created: 2026-02-10
+# Pattern: SC-TMPL-HANDOFF-001
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PURPOSE: Garantir que contexto NAO se perde entre agents
+# RULE: Este template DEVE ser preenchido antes de qualquer handoff
+# VETO: VT3-001 bloqueia handoff sem este template completo
+# ═══════════════════════════════════════════════════════════════════════════════
+
+handoff:
+  # ───────────────────────────────────────────────────────────────────────────
+  # SECTION 1: TRANSFER INFO (Obrigatorio)
+  # ───────────────────────────────────────────────────────────────────────────
+  transfer:
+    source_agent: ""          # Ex: hormozi-offers
+    target_agent: ""          # Ex: hormozi-pricing
+    timestamp: ""             # YYYY-MM-DD HH:MM
+    workflow_id: ""           # Ex: wf-grand-slam-offer
+    current_phase: ""         # Ex: PHASE-2
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # SECTION 2: MVN STATUS (Obrigatorio)
+  # ───────────────────────────────────────────────────────────────────────────
+  mvn_status:
+    completeness: ""          # X/7 (ex: 7/7)
+    items_collected:
+      ticket_atual: ""        # R$ ou "MISSING"
+      cac: ""                 # R$ ou "MISSING"
+      ltv: ""                 # R$ ou "MISSING"
+      taxa_conversao: ""      # % ou "MISSING"
+      churn_retencao: ""      # % ou "MISSING"
+      volume_leads: ""        # N/mes ou "MISSING"
+      margem_lucro: ""        # % ou "MISSING"
+    vertical: ""              # PHYSICAL/RESTAURANT/MANUFACTURING/DIGITAL/HIBRIDO
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # SECTION 3: VALUE EQUATION STATUS (Obrigatorio se apos PHASE-1)
+  # ───────────────────────────────────────────────────────────────────────────
+  value_equation:
+    scored: false             # true/false
+    scores:
+      dream_outcome: ""       # 0-3 ou "NOT_SCORED"
+      perceived_likelihood: "" # 0-3 ou "NOT_SCORED"
+      time_delay: ""          # 0-3 ou "NOT_SCORED"
+      effort_sacrifice: ""    # 0-3 ou "NOT_SCORED"
+    weakest_link: ""          # Ex: "effort_sacrifice"
+    leverage_identified: ""   # Descricao da alavanca principal
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # SECTION 4: KEY DECISIONS MADE (Obrigatorio)
+  # ───────────────────────────────────────────────────────────────────────────
+  key_decisions:
+    - decision: ""
+      rationale: ""
+      decided_by: ""          # agent ou user
+    # Adicionar mais conforme necessario
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # SECTION 5: ARTIFACTS PRODUCED (Obrigatorio)
+  # ───────────────────────────────────────────────────────────────────────────
+  artifacts:
+    - name: ""                # Ex: "value_stack.yaml"
+      location: ""            # Path relativo
+      status: ""              # COMPLETE/PARTIAL/DRAFT
+    # Adicionar mais conforme necessario
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # SECTION 6: BLOCKERS & OPEN QUESTIONS (Obrigatorio)
+  # ───────────────────────────────────────────────────────────────────────────
+  blockers:
+    - blocker: ""
+      severity: ""            # HIGH/MEDIUM/LOW
+      proposed_resolution: ""
+    # Adicionar mais conforme necessario
+
+  open_questions:
+    - question: ""
+      requires_user_input: false
+    # Adicionar mais conforme necessario
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # SECTION 7: CONTEXT FOR TARGET AGENT (Obrigatorio)
+  # ───────────────────────────────────────────────────────────────────────────
+  context_for_target:
+    primary_objective: ""     # O que o target agent deve fazer
+    constraints: []           # Restricoes identificadas
+    user_preferences: []      # Preferencias expressas pelo user
+    dont_repeat: []           # O que NAO precisa ser feito de novo
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # SECTION 8: VETO CONDITIONS CHECK (Obrigatorio)
+  # ───────────────────────────────────────────────────────────────────────────
+  veto_check:
+    all_phase_vetos_passed: false  # true/false
+    vetos_triggered: []            # Lista de vetos que foram triggered (se algum)
+    vetos_resolved: []             # Lista de vetos que foram resolvidos
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VALIDATION RULES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+validation:
+  mandatory_fields:
+    - "transfer.source_agent"
+    - "transfer.target_agent"
+    - "transfer.current_phase"
+    - "mvn_status.completeness"
+    - "key_decisions"         # Pelo menos 1
+    - "context_for_target.primary_objective"
+    - "veto_check.all_phase_vetos_passed"
+
+  conditional_fields:
+    - field: "value_equation.scored"
+      required_if: "current_phase >= PHASE-1"
+    - field: "value_equation.weakest_link"
+      required_if: "value_equation.scored == true"
+
+  veto_on_failure:
+    id: "VT3-001"
+    message: "Handoff sem contexto. Preencher template antes de transferir."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXAMPLE (Para referencia)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+example:
+  transfer:
+    source_agent: "hormozi-offers"
+    target_agent: "hormozi-pricing"
+    timestamp: "2026-02-10 14:30"
+    workflow_id: "wf-grand-slam-offer"
+    current_phase: "PHASE-2"
+
+  mvn_status:
+    completeness: "7/7"
+    items_collected:
+      ticket_atual: "R$2.997"
+      cac: "R$150"
+      ltv: "R$8.000"
+      taxa_conversao: "5%"
+      churn_retencao: "85% retencao 90d"
+      volume_leads: "500/mes"
+      margem_lucro: "65%"
+    vertical: "DIGITAL"
+
+  value_equation:
+    scored: true
+    scores:
+      dream_outcome: "3"
+      perceived_likelihood: "2"
+      time_delay: "2"
+      effort_sacrifice: "1"
+    weakest_link: "effort_sacrifice"
+    leverage_identified: "Mover de DWY para DFY para reduzir esforco do cliente"
+
+  key_decisions:
+    - decision: "Foco em reduzir Effort & Sacrifice (elo mais fraco)"
+      rationale: "Value Equation mostra score 1/3 em effort"
+      decided_by: "hormozi-offers"
+    - decision: "Target price R$4.997"
+      rationale: "Premium pricing para financiar entrega DFY"
+      decided_by: "user"
+
+  artifacts:
+    - name: "value_stack.yaml"
+      location: "outputs/offers/coach-accelerator/value_stack.yaml"
+      status: "COMPLETE"
+    - name: "dream_outcome.md"
+      location: "outputs/offers/coach-accelerator/dream_outcome.md"
+      status: "COMPLETE"
+
+  blockers:
+    - blocker: "Garantia precisa validacao legal"
+      severity: "MEDIUM"
+      proposed_resolution: "Revisao por advogado antes de lancar"
+
+  open_questions:
+    - question: "Escassez sera por vagas ou por prazo?"
+      requires_user_input: true
+
+  context_for_target:
+    primary_objective: "Definir estrategia de ancoragem e sequencia de preco"
+    constraints:
+      - "Margem minima 60%"
+      - "Ticket final entre R$4k-6k"
+    user_preferences:
+      - "Preferencia por garantia condicional"
+      - "Nao quer countdown timer"
+    dont_repeat:
+      - "MVN ja coletado"
+      - "Value Equation ja diagnosticada"
+
+  veto_check:
+    all_phase_vetos_passed: true
+    vetos_triggered: []
+    vetos_resolved:
+      - "VT1-005: Value Stack tinha 4 componentes, adicionado 5o"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-10"
+  author: "@pedro-valerio"
+  purpose: "Garantir contexto preservado em handoffs entre specialists"
+  linked_veto: "VT3-001"
+  enforcement: "mandatory"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

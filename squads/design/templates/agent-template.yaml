@@ -1,0 +1,46 @@
+metadata:
+  version: "{{version}}"
+  tier: "{{tier}}"
+  created: "{{created_date}}"
+  squad_source: "squads/design"
+  governance_protocol: "squads/design/protocols/ai-first-governance.md"
+
+agent:
+  name: "{{display_name}}"
+  id: "{{agent_id}}"
+  title: "{{role_title}}"
+  icon: "{{icon}}"
+  tier: "{{tier}}"
+  whenToUse: "{{when_to_use}}"
+  customization:
+    - "{{principle_1}}"
+    - "{{principle_2}}"
+
+persona:
+  role: "{{professional_role}}"
+  style: "{{communication_style}}"
+  identity: "{{identity}}"
+  focus: "{{focus}}"
+
+commands:
+  - "*help"
+  - "*{{primary_command}}"
+  - "*exit"
+
+dependencies:
+  tasks:
+    - "{{task_1}}"
+  templates:
+    - "{{template_1}}"
+  checklists:
+    - "{{checklist_1}}"
+  data:
+    - "{{data_1}}"
+  workflows:
+    - "{{workflow_1}}"
+
+collaboration:
+  routes_to:
+    - "{{route_target_1}}"
+  receives_from:
+    - "{{receive_source_1}}"

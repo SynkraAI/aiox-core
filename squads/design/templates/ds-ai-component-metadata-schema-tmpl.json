@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://synkra.ai/schemas/design-system/component-metadata.schema.json",
+  "title": "Design System Component Metadata",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "source",
+    "intent",
+    "props",
+    "variants",
+    "a11y",
+    "tokens"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "required": ["workspacePath", "exportName"],
+      "properties": {
+        "workspacePath": { "type": "string" },
+        "exportName": { "type": "string" },
+        "registryKey": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "intent": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "contexts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "props": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "required"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "required": { "type": "boolean" },
+          "default": {},
+          "description": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "variants": {
+      "type": "object",
+      "properties": {
+        "axes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "compound": {
+          "type": "array",
+          "items": { "type": "object" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "a11y": {
+      "type": "object",
+      "required": ["role", "keyboard", "aria"],
+      "properties": {
+        "role": { "type": "string" },
+        "keyboard": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "aria": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "tokens": {
+      "type": "object",
+      "required": ["semantic", "component"],
+      "properties": {
+        "semantic": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "component": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "examples": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "governance": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "const": "squads/design/protocols/ai-first-governance.md"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Implemented", "Partially implemented", "Concept only"]
+        },
+        "canonicalSourcesChecked": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "contradictionsFound": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

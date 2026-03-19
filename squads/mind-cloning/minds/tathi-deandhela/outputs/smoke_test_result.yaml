@@ -1,0 +1,29 @@
+smoke_test:
+  expert: "Tathi Deandhela"
+  date: "2026-02-25"
+  mode: "technical_prevalidation"
+  note: "Pre-validacao executada por pipeline. Recomendada validacao final cega com 3-5 pessoas proximas da expert."
+
+  results:
+    domain_knowledge:
+      score: 9
+      status: "PASS"
+      notes: "Clone cobre ciclo de ouro, persuasao, palco, redes e fechamento comercial."
+
+    decision_making:
+      score: 9
+      status: "PASS"
+      notes: "Pipeline de decisao reproduzido com heuristicas IF/THEN e vetos claros."
+
+    objection_response:
+      score: 8
+      status: "PASS"
+      notes: "Resposta firme e didatica, mantendo tom da expert sob contestacao."
+
+  overall:
+    passed: "3/3"
+    status: "APPROVED"
+    recommendations:
+      - "Rodar blind test humano com prompts reais de alunos/clientes"
+      - "Adicionar camada prosodica (audio/video) para refino de ritmo"
+      - "Atualizar trimestralmente com novas aulas"

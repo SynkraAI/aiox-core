@@ -1,0 +1,268 @@
+# ===============================================================================
+# MOMENT QUALITY RUBRIC (MQR) - Structured Scoring for Mining
+# Version: 1.0.0
+# Squad: curator
+# Used by: content-miner-pro (Pass 2), generate_compact_mining.py
+# Referenced from: mine-transcript.md, mining-quality.md, config.yaml
+#
+# PURPOSE:
+#   Replace vague 1-10 scoring with a 4-dimension rubric derived from
+#   Berger (STEPPS) and Kane (Hook Point). Applied DURING Pass 2 mining,
+#   not after. Produces compact notation (H8/E7/S9/C6) and a weighted
+#   composite impact_score.
+#
+# PROBLEM SOLVED:
+#   content-miner-pro assigned impact_score 1-10 using vague labels
+#   ("scroll-stopping", "share-worthy"). Production output showed ALL
+#   50 moments scored 10/10 — classic inflation. MQR forces dimensional
+#   evaluation with anti-inflation guards.
+#
+# FORMULA:
+#   impact_score = round(H × 0.35 + E × 0.25 + S × 0.25 + C × 0.15)
+#
+# COMPACT NOTATION:
+#   H8/E7/S9/C6 (fits in a table cell, instantly readable)
+# ===============================================================================
+
+# ===============================================================================
+# DIMENSIONS
+# ===============================================================================
+
+dimensions:
+
+  # ---------------------------------------------------------------------------
+  # H — Hook Strength (Weight: 0.35)
+  # Source: Brendan Kane (Hook Point) — 10 criteria distilled to 5 yes/no
+  # ---------------------------------------------------------------------------
+  - code: H
+    name: "Hook Strength"
+    weight: 0.35
+    source: "Brendan Kane — Hook Point"
+    method: "5 yes/no questions × 2 pts each = 0-10"
+    questions:
+      - id: H1
+        question: "Does it stop the scroll in <3 seconds?"
+        description: "Would someone mid-scroll pause on this? Tests pattern-interrupt."
+      - id: H2
+        question: "Does it create a curiosity gap or open loop?"
+        description: "Does the audience NEED to know what comes next?"
+      - id: H3
+        question: "Does it challenge a common belief or expectation?"
+        description: "Counter-intuitive, contrarian, or surprising angle?"
+      - id: H4
+        question: "Is the core idea graspable without prior context?"
+        description: "Could a stranger understand the hook without the rest?"
+      - id: H5
+        question: "Does it promise a specific, desirable outcome?"
+        description: "Is there a clear payoff signal (learn X, avoid Y, gain Z)?"
+    scoring:
+      yes: 2
+      no: 0
+      range: "0-10"
+      example: "3 yes + 2 no = H6"
+
+  # ---------------------------------------------------------------------------
+  # E — Emotional Arousal (Weight: 0.25)
+  # Source: Jonah Berger (Contagious) — high-arousal emotions spread
+  # ---------------------------------------------------------------------------
+  - code: E
+    name: "Emotional Arousal"
+    weight: 0.25
+    source: "Jonah Berger — Contagious (Chapter: Emotion)"
+    method: "Arousal map lookup — match dominant emotion to scale"
+    arousal_map:
+      high_arousal:
+        score_range: "8-10"
+        emotions:
+          - "Awe / astonishment"
+          - "Anger / outrage"
+          - "Anxiety / fear"
+          - "Excitement / enthusiasm"
+          - "Hilarity (genuine laughter)"
+        description: "Activating emotions that drive sharing. Score 10 only if visceral."
+      medium_arousal:
+        score_range: "5-7"
+        emotions:
+          - "Surprise (mild)"
+          - "Hope / optimism"
+          - "Empathy / connection"
+          - "Curiosity (intellectual)"
+          - "Pride / validation"
+        description: "Engaging but not activating. Common in educational content."
+      low_arousal:
+        score_range: "1-4"
+        emotions:
+          - "Contentment / calm"
+          - "Sadness (without resolution)"
+          - "Boredom"
+          - "Confusion (without payoff)"
+        description: "Deactivating emotions. Low share/engagement potential."
+    scoring:
+      identify_dominant_emotion: "What emotion does the audience feel?"
+      map_to_band: "Match to high/medium/low arousal band"
+      assign_within_band: "Place within range based on intensity"
+      example: "Speaker confesses a failure → empathy (medium) → E6"
+
+  # ---------------------------------------------------------------------------
+  # S — Shareability (Weight: 0.25)
+  # Source: Jonah Berger (Social Currency + Practical Value)
+  # ---------------------------------------------------------------------------
+  - code: S
+    name: "Shareability"
+    weight: 0.25
+    source: "Jonah Berger — Contagious (Social Currency + Practical Value)"
+    method: "5 yes/no questions × 2 pts each = 0-10"
+    questions:
+      - id: S1
+        question: "Does sharing this make the sharer look smart or in-the-know?"
+        description: "Social currency — insider knowledge, contrarian take, exclusive info."
+      - id: S2
+        question: "Does it contain a specific, actionable takeaway?"
+        description: "Practical value — could someone DO something with this immediately?"
+      - id: S3
+        question: "Is it easily quotable or screenshot-worthy?"
+        description: "Format fit — would it work as a tweet, quote card, or story share?"
+      - id: S4
+        question: "Does it tap into an ongoing conversation or trend?"
+        description: "Public relevance — is there an existing audience for this topic?"
+      - id: S5
+        question: "Would you tag someone or send this to a friend?"
+        description: "The ultimate litmus test — does it trigger the 'X needs to see this' reflex?"
+    scoring:
+      yes: 2
+      no: 0
+      range: "0-10"
+      example: "4 yes + 1 no = S8"
+
+  # ---------------------------------------------------------------------------
+  # C — Standalone Clarity (Weight: 0.15)
+  # Source: Brendan Kane (standalone test) — content must work alone
+  # ---------------------------------------------------------------------------
+  - code: C
+    name: "Standalone Clarity"
+    weight: 0.15
+    source: "Brendan Kane — Hook Point (standalone principle)"
+    method: "Context dependency scale (inverse: less dependency = higher score)"
+    scale:
+      - score: 10
+        label: "Fully standalone"
+        description: "Makes complete sense with zero context. Ready to publish as-is."
+      - score: 8
+        label: "Minimal context needed"
+        description: "One sentence of setup makes it fully clear."
+      - score: 6
+        label: "Moderate context"
+        description: "Needs 2-3 sentences of context or a brief intro."
+      - score: 4
+        label: "Heavy context"
+        description: "Requires understanding the broader topic or preceding conversation."
+      - score: 2
+        label: "Completely dependent"
+        description: "Meaningless without full surrounding content. Inside joke or callback."
+    scoring:
+      pick_closest: "Select the level that best describes how much context is required"
+      interpolate: "Use odd numbers (3, 5, 7, 9) for in-between cases"
+      example: "Insight that needs knowing the speaker's framework → C4"
+
+# ===============================================================================
+# FORMULA
+# ===============================================================================
+
+formula:
+  equation: "impact_score = round(H × 0.35 + E × 0.25 + S × 0.25 + C × 0.15)"
+  weights:
+    H: 0.35
+    E: 0.25
+    S: 0.25
+    C: 0.15
+  output_range: "1-10 (integer, rounded)"
+  compact_notation:
+    format: "H{n}/E{n}/S{n}/C{n}"
+    example: "H8/E7/S9/C6"
+    calculation: "round(8×0.35 + 7×0.25 + 9×0.25 + 6×0.15) = round(2.8+1.75+2.25+0.9) = round(7.7) = 8"
+
+# ===============================================================================
+# ANTI-INFLATION GUARD
+# ===============================================================================
+
+anti_inflation:
+  description: >-
+    MQR is designed to produce realistic score distributions.
+    If the average is too high, the miner is being too generous.
+
+  expected_distribution:
+    average_range: "5.5-6.5"
+    median_range: "5-7"
+    scores_9_10_percent: "<= 15%"
+    scores_1_3_percent: ">= 10%"
+
+  score_10_requirements:
+    description: "Score 10 is nearly impossible. ALL of these must be true:"
+    conditions:
+      - "H >= 9 (stops scroll AND opens loop AND challenges belief)"
+      - "E >= 8 (high-arousal emotion: awe, anger, excitement)"
+      - "S >= 9 (quotable, actionable, tag-worthy, trend-relevant)"
+      - "C >= 8 (works standalone with minimal context)"
+    note: "If ANY dimension < threshold, score cannot be 10."
+
+  recalibration_trigger:
+    condition: "batch_average > 7.5"
+    action: |
+      STOP. Recalibrate before continuing.
+      1. Re-read the arousal map — most educational content is medium (5-7), not high (8-10)
+      2. Re-read the Hook questions — most moments fail H1 (scroll-stop) and H3 (challenge belief)
+      3. Re-score the top 5 moments FIRST, then use as anchors for the rest
+      4. Expected result: ~30% of moments drop 1-2 points
+
+  calibration_anchors:
+    description: >-
+      Use these as mental calibration points when scoring a batch.
+    anchors:
+      - score: 10
+        what: "Once-in-a-career confession with universal truth, perfect phrasing, zero context needed"
+        frequency: "0-1 per transcript"
+      - score: 8
+        what: "Strong hook with clear curiosity gap, emotional peak, highly shareable"
+        frequency: "3-5 per transcript"
+      - score: 6
+        what: "Solid educational moment, useful insight, needs some context"
+        frequency: "10-15 per transcript (most common)"
+      - score: 4
+        what: "Supporting moment, helps narrative flow, low standalone value"
+        frequency: "5-10 per transcript"
+      - score: 2
+        what: "Filler, repetition, or tangent with minimal audience value"
+        frequency: "3-5 per transcript"
+
+# ===============================================================================
+# QUICK REFERENCE (for inline use in sub-agent instructions)
+# ===============================================================================
+
+quick_reference:
+  description: >-
+    Compact version of MQR for embedding in sub-agent prompts.
+    Use this when the full rubric would be too long.
+  inline_instructions: |
+    SCORING: Use MQR (Moment Quality Rubric) — 4 dimensions:
+    - H (Hook Strength, ×0.35): 5 yes/no — stops scroll? curiosity gap? challenges belief? no context needed? promises outcome? (each yes = 2pts)
+    - E (Emotional Arousal, ×0.25): high=8-10 (awe/anger/excitement), medium=5-7 (surprise/hope/curiosity), low=1-4 (calm/bored)
+    - S (Shareability, ×0.25): 5 yes/no — makes sharer look smart? actionable? quotable? trending topic? tag-worthy? (each yes = 2pts)
+    - C (Standalone Clarity, ×0.15): 10=fully standalone, 8=one sentence setup, 6=moderate context, 4=heavy context, 2=dependent
+    Formula: impact_score = round(H×0.35 + E×0.25 + S×0.25 + C×0.15)
+    Notation: H8/E7/S9/C6
+    ANTI-INFLATION: Average should be 5.5-6.5. If avg > 7.5, recalibrate. Score 10 requires H≥9 AND E≥8 AND S≥9 AND C≥8.
+
+# ===============================================================================
+# CHANGELOG
+# ===============================================================================
+
+changelog:
+  - version: "1.0.0"
+    date: "2026-02-05"
+    changes:
+      - "Initial creation — 4-dimension MQR (Hook, Emotion, Shareability, Clarity)"
+      - "Derived from Berger (STEPPS) + Kane (Hook Point) at Tier 2 level"
+      - "Anti-inflation guard with recalibration trigger"
+      - "Compact notation format (H8/E7/S9/C6)"
+      - "Quick reference for sub-agent inline embedding"
+      - "Calibration anchors for score 2/4/6/8/10"

@@ -1,0 +1,213 @@
+# Story Sequence Bank — OPES Marketing
+# Banco de dados para Holistic Story Sequence Strategy (Nicolas Clay)
+# Referencia: outputs/research/biblioteca-maas/holistic-story-sequence-nicolas-clay.md
+
+version: 1.0.0
+last_updated: 2026-02-02
+
+# ============================================
+# PROOF BANK — Screenshots e resultados
+# ============================================
+# Cada prova deve ser REAL e ter screenshot disponivel.
+# Nunca usar prova sem evidencia visual.
+
+proof_bank:
+
+  # Provas pessoais (para terca — YOUR PROOF)
+  personal:
+    - id: pp-001
+      title: "Sistema OPES operando com 6 agentes IA"
+      type: screenshot
+      description: "Print do terminal mostrando 6 agentes executando em paralelo"
+      tags: [opes, sistema, agentes, automacao]
+      used_dates: []
+
+    - id: pp-002
+      title: "Faturamento solo sem equipe humana"
+      type: metric
+      description: "Dashboard mostrando receita gerada por 1 pessoa + IA"
+      tags: [faturamento, solo, resultado]
+      used_dates: []
+
+    # Adicionar mais provas pessoais aqui...
+
+  # Provas de clientes (para quarta — CLIENT PROOF)
+  clients:
+    - id: cp-001
+      title: "Cliente X — antes vs depois do OPES"
+      type: testimonial
+      description: "[Preencher com case real]"
+      client_profile: "[Quem e, o que faz]"
+      tags: [cliente, transformacao, resultado]
+      used_dates: []
+
+    # Adicionar mais provas de clientes aqui...
+
+  # Provas genericas (para qualquer dia)
+  general:
+    - id: gp-001
+      title: "Resultado de automacao especifica"
+      type: screenshot
+      description: "[Preencher]"
+      tags: [automacao, resultado]
+      used_dates: []
+
+    # Adicionar mais provas genericas aqui...
+
+# ============================================
+# STORY BANK — Historias pessoais e de clientes
+# ============================================
+# Cada historia deve ser REAL. Nunca fabricar.
+
+story_bank:
+
+  # Historias pessoais (para terca + domingo)
+  personal:
+    - id: sp-001
+      title: "Como comecei a usar IA para substituir uma equipe"
+      type: origin
+      emotion: vulnerabilidade
+      tags: [origem, decisao, risco]
+      used_dates: []
+
+    - id: sp-002
+      title: "O dia em que percebi que nao precisava de equipe"
+      type: epiphany
+      emotion: revelacao
+      tags: [insight, solopreneur, IA]
+      used_dates: []
+
+    - id: sp-003
+      title: "Erro que quase custou um cliente"
+      type: failure
+      emotion: humildade
+      tags: [erro, aprendizado, vulnerabilidade]
+      used_dates: []
+
+    # Adicionar mais historias pessoais aqui...
+
+  # Historias de clientes (para quarta + quinta)
+  clients:
+    - id: sc-001
+      title: "[Nome do cliente] — de [antes] para [depois]"
+      type: transformation
+      client_profile: "[Preencher]"
+      tags: [cliente, transformacao]
+      used_dates: []
+
+    # Adicionar mais historias de clientes aqui...
+
+# ============================================
+# OBJECTION TRACKER — Objecoes do avatar OPES
+# ============================================
+# Usado na quinta-feira (BREAK OBJECTION sequence).
+# Cada objecao so deve ser abordada 1x a cada 4 semanas.
+
+objection_tracker:
+
+  objections:
+    - id: obj-001
+      text: "Nao tenho tempo para aprender IA"
+      category: tempo
+      counter_argument: "Voce nao aprende — eu instalo. Tempo zero seu."
+      addressed_dates: []
+
+    - id: obj-002
+      text: "IA e muito caro para implementar"
+      category: preco
+      counter_argument: "Custo de 1 funcionario < custo de nao ter sistema"
+      addressed_dates: []
+
+    - id: obj-003
+      text: "Ja tentei ChatGPT e nao funcionou"
+      category: ceticismo
+      counter_argument: "ChatGPT sozinho ≠ sistema integrado. Diferenca entre ter martelo e ter casa."
+      addressed_dates: []
+
+    - id: obj-004
+      text: "Meu negocio e diferente, IA nao se aplica"
+      category: relevancia
+      counter_argument: "[Historia de cliente em nicho improvavel]"
+      addressed_dates: []
+
+    - id: obj-005
+      text: "Prefiro contratar uma equipe real"
+      category: preferencia
+      counter_argument: "Equipe de 5 = R$30k/mes + gestao. Sistema = R$Xk unico + autonomia."
+      addressed_dates: []
+
+    - id: obj-006
+      text: "E se a IA errar e prejudicar meu negocio?"
+      category: medo
+      counter_argument: "Gate de qualidade humano em todo output critico. IA executa, voce valida."
+      addressed_dates: []
+
+    - id: obj-007
+      text: "Nao confio em depender de tecnologia"
+      category: confianca
+      counter_argument: "Voce ja depende (email, WhatsApp, banco). A questao e depender com ou sem estrategia."
+      addressed_dates: []
+
+    - id: obj-008
+      text: "Sera que funciona para quem nao e tech?"
+      category: capacidade
+      counter_argument: "[Historia de cliente nao-tech que implementou]"
+      addressed_dates: []
+
+  # Regras de rotacao
+  rotation_rules:
+    min_gap_weeks: 4
+    priority_order: "menos recente primeiro"
+    max_per_week: 1
+
+# ============================================
+# HOOK BANK — Hooks classificados por tipo
+# ============================================
+
+hook_bank:
+
+  pain_hooks:
+    - "Voce esta fazendo [X] sozinho. E por isso que nao escala."
+    - "O maior erro de quem fatura [X]k/mes: achar que precisa de equipe."
+    - "3 sinais de que seu negocio esta te escravizando (e voce nem percebe)"
+    # Adicionar mais...
+
+  curiosity_hooks:
+    - "Todo mundo acredita que [mito]. Mas a verdade e..."
+    - "Eu recusei [X]. As pessoas acharam que eu era louco."
+    - "O que ninguem te conta sobre [X]..."
+    # Adicionar mais...
+
+  personal_win_hooks:
+    - "Hoje meu negocio faturou [X] enquanto eu [atividade pessoal]."
+    - "Ha 1 ano eu trabalhava 14h/dia. Hoje, [resultado contraste]."
+    - "Essa semana eu [resultado impressionante] com 0 funcionarios."
+    # Adicionar mais...
+
+  client_win_hooks:
+    - "[Nome] me mandou isso ontem a noite. [screenshot]"
+    - "Quando [cliente] comecou, ele [situacao antes]. Agora..."
+    - "Esse print e de um aluno que [resultado surpreendente]."
+    # Adicionar mais...
+
+  authentic_hooks:
+    - "Vou ser honesto sobre algo que nao conto muito..."
+    - "Sabado de manha. [Cena real do momento]."
+    - "Uma coisa que aprendi essa semana (da forma mais dificil)..."
+    # Adicionar mais...
+
+  storytelling_hooks:
+    - "2 anos atras eu estava [cena]..."
+    - "Deixa eu contar o que aconteceu com [pessoa]..."
+    - "Eu lembro exatamente do dia em que [momento]."
+    # Adicionar mais...
+
+# ============================================
+# CONFIGURACAO DE RITMO
+# ============================================
+
+rhythm:
+  heavy_days: [terca, quarta, quinta]
+  light_days: [segunda, sexta, sabado, domingo]
+  ratio: "3H / 4L"
+  rule: "Dias Heavy = copy afiada, conversao. Dias Light = casual, humano, respiro."

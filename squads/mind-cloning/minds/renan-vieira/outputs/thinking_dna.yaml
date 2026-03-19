@@ -1,0 +1,316 @@
+# Thinking DNA - Renan Vieira
+# Extracted: 2026-03-17
+# Focus: Frameworks de decisão, heurísticas, arquitetura mental
+
+meta:
+  mind: "renan-vieira"
+  extraction_date: "2026-03-17"
+  domain: "high-ticket sales, digital product launches, mentorship"
+  fidelity_score: 0.91
+
+primary_framework:
+  name: "Posicionamento HIGH-TICKET vs LOW-TICKET"
+  description: |
+    Framework mestre que diferencia quem vende caro de quem vende barato.
+    Baseado em AUTORIDADE PERCEBIDA, não em volume de conteúdo.
+  
+  core_thesis: "Não importa se você É bom. Importa se você MOSTRA que é bom."
+  
+  components:
+    autoridade_percebida:
+      definition: "Percepção visual/social de que você gera resultados"
+      pillars:
+        - "Depoimentos de alunos (resultados mensuráveis)"
+        - "Prova social (onde frequenta, como se veste)"
+        - "Comunicação assertiva (bio, destaques, fotos)"
+      SOURCE: "[Posicionamento 00:18, 02:43-02:58]"
+    
+    instagram_como_funil:
+      rule: "Cada destaque = um funil de vendas"
+      what_to_show:
+        - "Resultados de alunos (números concretos)"
+        - "Lifestyle alinhado com público"
+        - "Bio com oferta clara + link direto"
+        - "Destaques estratégicos (não posts aleatórios)"
+      SOURCE: "[Posicionamento 04:37-04:42]"
+    
+    conteudo_vs_posicionamento:
+      decision_rule: |
+        SE você tem autoridade percebida
+        ENTÃO não precisa produzir conteúdo em volume
+        SENÃO você compete por atenção (low-ticket)
+      
+      paradox: "Conteúdo pode atrapalhar mais que ajudar"
+      when_true: "Quando desvia foco de construir autoridade"
+      SOURCE: "[Posicionamento 00:31]"
+
+secondary_frameworks:
+  - name: "Framework de Lançamento (Estrutura Mínima)"
+    steps:
+      1:
+        action: "Definir PROMESSA"
+        why: "Base de todo o resto (copy, página, oferta)"
+        SOURCE: "[Debriefing 01:36-01:40]"
+      2:
+        action: "Escrever textos (copy)"
+        time: "Rápido (tendo promessa clara)"
+        SOURCE: "[Debriefing 01:44-01:54]"
+      3:
+        action: "Delegar página"
+        rule: "Mandar pro 'cara certo' (faz em 1h)"
+        why: "Não fazer tudo sozinho"
+        SOURCE: "[Debriefing 01:59-01:62]"
+      4:
+        action: "Gestor de tráfego"
+        model: "10% do faturamento (não fixo)"
+        why: "Sem risco, só paga se vender"
+        SOURCE: "[Debriefing 02:31, 02:91]"
+    
+    key_insight: "Dificuldade antes = fazer TUDO. Solução = delegar tudo exceto promessa"
+
+  - name: "Framework de Investimento vs Custo"
+    rule: |
+      SE pagamento é % do resultado
+      ENTÃO é investimento (sem risco)
+      SENÃO é custo (risco alto se não validado)
+    
+    examples:
+      investimento:
+        - "Gestor 10% do faturamento"
+        - "Afiliados % da venda"
+      custo_alto:
+        - "R$20 mil fixo pro gestor (sem garantia)"
+      SOURCE: "[Debriefing 03:52, 05:40]"
+
+diagnostic_framework:
+  questions:
+    - question: "A pessoa VÊ que você é bom quando entra no seu Instagram?"
+      red_flag: "Instagram com 3-4 fotos de família, sem depoimentos"
+      green_flag: "Depoimentos, números, bio clara, destaques estratégicos"
+      SOURCE: "[Posicionamento 01:24-01:43]"
+    
+    - question: "Você está fazendo tudo sozinho?"
+      red_flag: "Sim, fazendo tudo"
+      green_flag: "Delego página, gestor, design"
+      action_if_red: "Definir o que só VOCÊ pode fazer (promessa)"
+      SOURCE: "[Debriefing 01:32-01:36]"
+    
+    - question: "Está pensando pequeno ou grande?"
+      red_flag: "Lançamento 'pequenininho', testar só"
+      green_flag: "Já pensar em escalar (40k+)"
+      action_if_red: "Pensar longo prazo desde o início"
+      SOURCE: "[Debriefing 05:24-05:28]"
+    
+    - question: "Cliente sabe que vai ter trabalho?"
+      red_flag: "Promessa de 'fácil e rápido'"
+      green_flag: "Comunicação sincera: 'vai ter trabalho'"
+      why: "Cliente valoriza honestidade, não ilusão"
+      SOURCE: "[Posicionamento 06:06-06:10]"
+
+heuristics:
+  - id: "RV-H01"
+    name: "Autoridade > Conteúdo"
+    rule: |
+      SE você tem autoridade percebida
+      ENTÃO foque em manter/ampliar (depoimentos, casos)
+      SENÃO você vai competir por atenção (volume de posts)
+    when_to_apply: "Decidindo estratégia de Instagram/redes"
+    SOURCE: "[Posicionamento 00:31, 02:43]"
+
+  - id: "RV-H02"
+    name: "Delegar tudo exceto essência"
+    rule: |
+      SE você pode pagar alguém pra fazer
+      ENTÃO delegue (página, gestor, design)
+      SENÃO você faz APENAS o que é insubstituível (promessa)
+    exceptions: "Primeiro lançamento (testar sozinho pra valorizar)"
+    SOURCE: "[Debriefing 01:32, 05:46]"
+
+  - id: "RV-H03"
+    name: "% do resultado > Custo fixo"
+    rule: |
+      SE serviço pode ser % do faturamento
+      ENTÃO preferir isso (sem risco)
+      SENÃO só pagar fixo se JÁ validado
+    example: "Gestor 10% vs R$20k fixo"
+    SOURCE: "[Debriefing 02:31, 03:52]"
+
+  - id: "RV-H04"
+    name: "Números concretos constroem autoridade"
+    rule: |
+      SE vai mostrar resultado
+      ENTÃO use número específico ("R$11 mil", "5 milhões")
+      SENÃO não use vago ("muitos resultados")
+    why: "Específico = crível, vago = genérico"
+    SOURCE: "[Posicionamento 04:18-04:20]"
+
+  - id: "RV-H05"
+    name: "Sinceridade > Vender ilusão"
+    rule: |
+      SE cliente pergunta se é fácil
+      ENTÃO diga a verdade ("vai ter trabalho")
+      SENÃO você atrai cliente errado (quer fácil)
+    paradox: "Sinceridade brutal aumenta conversão high-ticket"
+    SOURCE: "[Posicionamento 05:49-06:10]"
+
+  - id: "RV-H06"
+    name: "Pensar longo prazo desde o início"
+    rule: |
+      SE está planejando primeiro lançamento
+      ENTÃO já estruture pra escalar (não 'pequenininho')
+      SENÃO vai ter que refazer estrutura depois
+    example: "Já contratar gestor % se planeja 40k+"
+    SOURCE: "[Debriefing 05:24-05:33]"
+
+veto_conditions:
+  - id: "VETO-RV01"
+    condition: "Fazer tudo sozinho"
+    action: "BLOQUEAR - Delegar é obrigatório"
+    why: "Dificuldade do Renan era essa, já validou que não funciona"
+    SOURCE: "[Debriefing 01:32]"
+
+  - id: "VETO-RV02"
+    condition: "Pensar pequeno"
+    action: "BLOQUEAR - 'Se não é pra fazer bem feito, nem adianta'"
+    why: "Esforço é o mesmo, resultado escala"
+    SOURCE: "[Debriefing 04:46, 05:28]"
+
+  - id: "VETO-RV03"
+    condition: "Instagram sem autoridade percebida"
+    action: "BLOQUEAR - Antes de investir em tráfego, arrume Instagram"
+    why: "Tráfego sem conversão = queimar dinheiro"
+    SOURCE: "[Posicionamento 01:43]"
+
+  - id: "VETO-RV04"
+    condition: "Prometer fácil/rápido"
+    action: "BLOQUEAR - Cliente certo sabe que vai ter trabalho"
+    why: "Atrai cliente errado (quer mágica)"
+    SOURCE: "[Posicionamento 06:06]"
+
+decision_architecture:
+  pipeline:
+    stage_1_posicionamento:
+      question: "Instagram mostra autoridade?"
+      if_yes: "Próximo stage (oferta/produto)"
+      if_no: "FIX: Depoimentos, números, bio, destaques"
+      priority: "BLOQUEANTE (sem isso, resto não converte)"
+    
+    stage_2_oferta:
+      question: "Promessa está clara?"
+      if_yes: "Próximo stage (estrutura)"
+      if_no: "FIX: Definir promessa específica"
+      note: "Promessa é BASE (copy vem depois)"
+    
+    stage_3_estrutura:
+      question: "Vai fazer sozinho ou delegar?"
+      options:
+        primeiro_lancamento: "Fazer sozinho pra aprender"
+        ja_validado: "Delegar (gestor %, designer)"
+      rule: "Delegar tudo exceto promessa"
+    
+    stage_4_validacao:
+      question: "Está pensando grande?"
+      if_yes: "Executar"
+      if_no: "REFRAME: Pensar longo prazo"
+      veto: "Se 'pequenininho', nem vale a pena"
+
+  weights:
+    - criterion: "Autoridade percebida no Instagram"
+      weight: 0.4
+      why: "Sem isso, tráfego não converte"
+    
+    - criterion: "Promessa clara"
+      weight: 0.3
+      why: "Base de todo copy e página"
+    
+    - criterion: "Estrutura de delegação"
+      weight: 0.2
+      why: "Escala sem fazer tudo sozinho"
+    
+    - criterion: "Mentalidade longo prazo"
+      weight: 0.1
+      why: "Evita 'pensar pequeno'"
+
+mental_models:
+  - name: "Modelo de Percepção vs Realidade"
+    insight: "Não importa se você É bom, importa se MOSTRA"
+    application:
+      - "Instagram como vitrine de autoridade"
+      - "Depoimentos > Credentials abstratas"
+      - "Números concretos > 'Muitos resultados'"
+    SOURCE: "[Posicionamento 01:43]"
+
+  - name: "Modelo de Investimento por Resultado"
+    insight: "Preferir % do resultado que custo fixo"
+    rationale: "Zero risco se não vender, incentivo alinhado"
+    applications:
+      - "Gestor de tráfego: 10% faturamento"
+      - "Afiliados: % venda"
+      - "Evitar: R$20k fixo sem validação"
+    SOURCE: "[Debriefing 02:31, 03:52]"
+
+  - name: "Modelo de Essência vs Execução"
+    insight: "Você faz só o insubstituível (promessa), resto delega"
+    what_is_essence:
+      - "Definir promessa do produto"
+      - "Comunicação com cliente (sinceridade)"
+    what_to_delegate:
+      - "Página de vendas"
+      - "Gestão de tráfego"
+      - "Design/edição"
+    SOURCE: "[Debriefing 01:36, 01:59]"
+
+recognition_patterns:
+  detects_fast:
+    - "Instagram low-ticket (poucas fotos, sem depoimentos)"
+    - "Mentalidade 'pensar pequeno'"
+    - "Fazer tudo sozinho (não delega)"
+    - "Promessa vaga (sem clareza)"
+  
+  red_flags:
+    - "Instagram com 3-4 fotos só"
+    - "'Vou fazer pequenininho pra testar'"
+    - "Prometer fácil/rápido"
+    - "Custo fixo alto sem validação"
+  
+  green_flags:
+    - "Depoimentos com números"
+    - "Bio clara com CTA direto"
+    - "Delegar página/gestor"
+    - "Pensar longo prazo desde início"
+
+objection_handling:
+  - objection: "Mas eu não tenho dinheiro pra contratar gestor"
+    response: "10% do faturamento = sem risco. Só paga se vender."
+    framework: "Investimento % resultado"
+    SOURCE: "[Debriefing 02:31]"
+
+  - objection: "Preciso produzir conteúdo pra vender"
+    response: "Conteúdo pode atrapalhar. Foque em autoridade percebida."
+    framework: "Posicionamento high-ticket"
+    SOURCE: "[Posicionamento 00:31]"
+
+  - objection: "Vou fazer pequenininho primeiro"
+    response: "Se não é pra fazer bem feito, nem adianta. Pense longo prazo."
+    framework: "Mentalidade escala"
+    SOURCE: "[Debriefing 04:46, 05:28]"
+
+handoff_triggers:
+  when_to_stop:
+    - condition: "Cliente quer solução fácil/rápida"
+      action: "DESQUALIFICAR - Não é fit"
+      why: "Cliente certo sabe que vai ter trabalho"
+    
+    - condition: "Cliente não quer investir em autoridade"
+      action: "PAUSAR - Explicar framework posicionamento"
+      why: "Sem autoridade, tráfego não converte"
+
+extraction_metadata:
+  frameworks_extracted: 3
+  heuristics_created: 6
+  veto_conditions: 4
+  mental_models: 3
+  confidence_score: 0.91
+  gaps:
+    - "Framework de afiliados (mencionado mas não detalhado)"
+    - "Estrutura de funil completo (só mencionado)"

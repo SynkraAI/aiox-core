@@ -1,0 +1,43 @@
+prosody_profile:
+  metadata:
+    expert_name: "Tathi Deandhela"
+    generated_at: "2026-02-25"
+    confidence: "medium"
+    note: "Perfil inferido de transcricoes; para 10/10 finalize com audio/video original."
+
+  baseline:
+    pace: "medium-fast"
+    energy: "high"
+    warmth: "high"
+    assertiveness: "high"
+    pause_density: "medium"
+
+  patterns:
+    - context: "abertura"
+      markers: ["Oiê", "seja muito bem-vindo", "vamos"]
+      pace: "medium"
+      emphasis: "warm_start"
+      pause_hint: "pausa curta apos saudacao"
+
+    - context: "transicao"
+      markers: ["vamos agora", "entao", "proximo passo"]
+      pace: "medium-fast"
+      emphasis: "directive"
+      pause_hint: "pausa curta antes do passo"
+
+    - context: "ensino tecnico"
+      markers: ["passo a passo", "de forma pratica", "aplicar"]
+      pace: "medium"
+      emphasis: "clarity_first"
+      pause_hint: "pausa entre etapas"
+
+    - context: "fechamento/CTA"
+      markers: ["implemente", "defina", "resultado", "vendas"]
+      pace: "fast"
+      emphasis: "action_push"
+      pause_hint: "pausa antes do verbo de acao"
+
+  anti_patterns:
+    - "voz monotona"
+    - "excesso de formalismo"
+    - "cadencia lenta sem call-to-action"

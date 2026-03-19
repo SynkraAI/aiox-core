@@ -1,0 +1,740 @@
+# Ad Angles Squad Blueprint
+# Source: $100M Money Models Blueprint - Ad Angles Library
+# Version: 1.0.0
+# Date: 2026-02-10
+
+metadata:
+  name: ad-angles-squad
+  description: "Squad for creating and adapting ad angles from the $100M Money Models library"
+  version: "1.0.0"
+  source: "$100M Money Models Blueprint - Business Growth Ad Angles"
+  cross_references:
+    - goated-ads-sop.md
+    - hooks-sop.md
+  total_angles: 80+
+  categories: 10
+
+# ============================================================================
+# AGENTS
+# ============================================================================
+
+agents:
+  angle_researcher:
+    name: "Angle Researcher"
+    role: "Research and catalog winning ad angles"
+    description: |
+      Analyzes competitor ads, identifies winning angles, and catalogs them
+      into the master angle library. Focuses on pattern recognition and
+      categorization of angle types.
+
+    responsibilities:
+      - Analyze competitor ads for angle patterns
+      - Categorize angles by type and awareness level
+      - Document angle performance metrics
+      - Identify gaps in current angle library
+      - Research adjacent niches for adaptable angles
+
+    inputs:
+      - competitor_ad_library: "Screenshots and links to competitor ads"
+      - performance_data: "CTR, conversion, ROAS by angle"
+      - awareness_mapping: "Target audience awareness levels"
+
+    outputs:
+      - angle_catalog: "Categorized angle library with examples"
+      - performance_rankings: "Angles ranked by effectiveness"
+      - gap_analysis: "Missing angle categories or variations"
+
+    tools:
+      - ad_library_access: "Facebook/TikTok/YouTube ad libraries"
+      - swipe_file_manager: "Personal screenshot collection system"
+      - spreadsheet_tracker: "Performance tracking spreadsheet"
+
+    cognitive_profile:
+      analysis: HIGH
+      pattern_recognition: HIGH
+      creativity: MEDIUM
+      execution: MEDIUM
+
+    automation_potential: MEDIUM
+
+    decision_rules:
+      - "DR-003: Angle Testing Ratio (70-20-10)"
+      - "DR-001: Awareness to Angle mapping"
+
+  angle_adapter:
+    name: "Angle Adapter"
+    role: "Adapt proven angles to specific products/niches"
+    description: |
+      Takes proven angle templates and adapts them for specific products,
+      services, and niches. Ensures avatar language match and proof inclusion.
+
+    responsibilities:
+      - Adapt angle templates to specific products
+      - Replace generic elements with niche-specific content
+      - Ensure avatar language match (80%+ vocabulary)
+      - Include appropriate proof elements
+      - Create multiple variations per angle
+
+    inputs:
+      - angle_template: "Selected angle from library"
+      - product_details: "Product/service specifications"
+      - avatar_research: "Target avatar language and pain points"
+      - proof_elements: "Testimonials, case studies, numbers"
+
+    outputs:
+      - adapted_angles: "3-5 variations per template"
+      - hook_suggestions: "Compatible hooks for each adaptation"
+      - validation_checklist: "Completion status of adaptation"
+
+    tools:
+      - adaptation_worksheet: "Appendix B template"
+      - avatar_language_database: "Customer voice documentation"
+      - proof_library: "Organized proof elements"
+
+    cognitive_profile:
+      analysis: MEDIUM
+      pattern_recognition: MEDIUM
+      creativity: HIGH
+      execution: HIGH
+
+    automation_potential: MEDIUM
+
+    decision_rules:
+      - "DR-002: Never Copy Directly"
+      - "DR-006: Comparison by Complexity"
+
+  campaign_architect:
+    name: "Campaign Architect"
+    role: "Design angle sequences for campaigns"
+    description: |
+      Plans complete ad campaigns using strategic angle sequences.
+      Coordinates retargeting, launch, and cold traffic angle allocation.
+
+    responsibilities:
+      - Design campaign angle sequences
+      - Allocate angles by awareness level
+      - Plan retargeting sequences
+      - Coordinate launch campaign timing
+      - Balance testing vs. scaling angles
+
+    inputs:
+      - campaign_goals: "Conversion targets, timeline, budget"
+      - available_angles: "Adapted angle library"
+      - audience_segments: "Cold, warm, hot traffic definitions"
+      - launch_timeline: "Key dates and phases"
+
+    outputs:
+      - campaign_plan: "Full angle sequence with timing"
+      - retargeting_sequence: "Day-by-day retargeting angles"
+      - launch_timeline: "Pre-launch to final hours angle allocation"
+      - testing_plan: "Which angles to test vs. scale"
+
+    tools:
+      - campaign_timeline_template: "Visual planning tool"
+      - audience_segment_mapper: "Traffic temperature definitions"
+      - budget_allocator: "70-20-10 budget distribution"
+
+    cognitive_profile:
+      analysis: HIGH
+      pattern_recognition: HIGH
+      creativity: MEDIUM
+      execution: HIGH
+
+    automation_potential: LOW
+
+    decision_rules:
+      - "DR-004: Retargeting Angle Sequence"
+      - "DR-005: Launch Angle Timing"
+      - "DR-001: Awareness to Angle mapping"
+
+  angle_tester:
+    name: "Angle Tester"
+    role: "Execute angle tests and analyze results"
+    description: |
+      Runs systematic tests of angles, collects performance data,
+      and determines winners for scaling.
+
+    responsibilities:
+      - Set up angle tests in ad platforms
+      - Monitor test performance daily
+      - Analyze test results statistically
+      - Identify winning angles for scaling
+      - Document learnings and patterns
+
+    inputs:
+      - adapted_angles: "Ready-to-test angle variations"
+      - testing_budget: "Allocated budget for experiments"
+      - success_metrics: "CTR, CPA, ROAS thresholds"
+
+    outputs:
+      - test_results: "Performance data per angle"
+      - winner_identification: "Top 10% angles for scaling"
+      - pattern_insights: "What's working and why"
+      - testing_log: "Complete record of all tests"
+
+    tools:
+      - ad_platform_access: "Facebook Ads Manager, etc."
+      - testing_log_template: "Appendix C format"
+      - statistical_analysis: "Significance calculator"
+
+    cognitive_profile:
+      analysis: HIGH
+      pattern_recognition: MEDIUM
+      creativity: LOW
+      execution: HIGH
+
+    automation_potential: HIGH
+
+    decision_rules:
+      - "DR-003: Angle Testing Ratio"
+      - Quality gate thresholds from goated-ads-sop.md
+
+# ============================================================================
+# EXECUTOR MATRIX
+# ============================================================================
+
+executor_matrix:
+  tasks_by_executor:
+    human_only:
+      - task: "Strategic campaign design"
+        reason: "Requires market judgment and creative vision"
+        agent: campaign_architect
+
+      - task: "Niche-specific language validation"
+        reason: "Requires deep avatar understanding"
+        agent: angle_adapter
+
+      - task: "Novel angle creation (10% bucket)"
+        reason: "Requires creative breakthrough thinking"
+        agent: angle_researcher
+
+    hybrid_human_worker:
+      - task: "Angle adaptation"
+        reason: "AI drafts, human refines and validates"
+        agent: angle_adapter
+        human_role: "Quality validation, avatar language check"
+        worker_role: "Initial draft, bracket filling"
+
+      - task: "Competitor analysis"
+        reason: "AI collects, human interprets patterns"
+        agent: angle_researcher
+        human_role: "Pattern interpretation, strategy decisions"
+        worker_role: "Data collection, cataloging"
+
+      - task: "Test result analysis"
+        reason: "AI calculates, human decides next steps"
+        agent: angle_tester
+        human_role: "Strategic decisions, scaling calls"
+        worker_role: "Data aggregation, statistical analysis"
+
+    worker_automated:
+      - task: "Performance data collection"
+        reason: "Purely mechanical data extraction"
+        agent: angle_tester
+
+      - task: "Angle cataloging"
+        reason: "Structured data organization"
+        agent: angle_researcher
+
+      - task: "Test setup"
+        reason: "Repeatable platform configuration"
+        agent: angle_tester
+
+      - task: "Report generation"
+        reason: "Template-based output creation"
+        agent: all
+
+  automation_roadmap:
+    phase_1_current:
+      - "Manual angle research and adaptation"
+      - "Human-driven campaign architecture"
+      - "Semi-automated test setup"
+
+    phase_2_near_term:
+      - "AI-assisted angle adaptation (draft mode)"
+      - "Automated performance tracking"
+      - "Smart test scheduling"
+
+    phase_3_future:
+      - "AI angle generation from patterns"
+      - "Automated A/B test execution"
+      - "Predictive angle performance modeling"
+
+# ============================================================================
+# QUALITY GATES
+# ============================================================================
+
+quality_gates:
+  angle_research:
+    gate_name: "Angle Cataloging Complete"
+    criteria:
+      - criterion: "All 10 categories represented"
+        threshold: "10/10 categories"
+        measurement: "Category count"
+
+      - criterion: "Minimum angles per category"
+        threshold: "5+ angles per category"
+        measurement: "Angle count"
+
+      - criterion: "Performance data attached"
+        threshold: "80% have metrics"
+        measurement: "Data completeness"
+
+      - criterion: "Awareness level tagged"
+        threshold: "100% tagged"
+        measurement: "Tag completeness"
+
+  angle_adaptation:
+    gate_name: "Adaptation Ready for Testing"
+    criteria:
+      - criterion: "All brackets filled"
+        threshold: "0 empty brackets"
+        measurement: "Bracket audit"
+
+      - criterion: "Avatar language match"
+        threshold: "80%+ vocabulary"
+        measurement: "Language comparison"
+
+      - criterion: "Proof element included"
+        threshold: "At least 1 per angle"
+        measurement: "Proof count"
+
+      - criterion: "CTA clarity"
+        threshold: "Single clear action"
+        measurement: "CTA audit"
+
+      - criterion: "3-5 variations created"
+        threshold: "Minimum 3"
+        measurement: "Variation count"
+
+  campaign_architecture:
+    gate_name: "Campaign Plan Approved"
+    criteria:
+      - criterion: "Awareness coverage"
+        threshold: "All 5 levels addressed"
+        measurement: "Level coverage map"
+
+      - criterion: "Retargeting sequence complete"
+        threshold: "10+ angles sequenced"
+        measurement: "Sequence length"
+
+      - criterion: "Launch timeline defined"
+        threshold: "All 4 phases planned"
+        measurement: "Phase coverage"
+
+      - criterion: "Budget allocation follows 70-20-10"
+        threshold: "Within 5% variance"
+        measurement: "Budget analysis"
+
+  angle_testing:
+    gate_name: "Test Results Actionable"
+    criteria:
+      - criterion: "Statistical significance"
+        threshold: "95% confidence"
+        measurement: "P-value calculation"
+
+      - criterion: "Minimum sample size"
+        threshold: "100+ conversions per variant"
+        measurement: "Conversion count"
+
+      - criterion: "Top 10% identified"
+        threshold: "Clear winners marked"
+        measurement: "Winner designation"
+
+      - criterion: "Learnings documented"
+        threshold: "Pattern insights recorded"
+        measurement: "Documentation check"
+
+# ============================================================================
+# WORKFLOWS
+# ============================================================================
+
+workflows:
+  weekly_angle_creation:
+    name: "Weekly Angle Creation Workflow"
+    frequency: "Every Friday"
+    duration: "3-4 hours"
+
+    steps:
+      - step: 1
+        name: "Review performance data"
+        agent: angle_tester
+        duration: "30 min"
+        action: "Pull last week's angle performance metrics"
+        output: "Performance report"
+
+      - step: 2
+        name: "Identify patterns"
+        agent: angle_researcher
+        duration: "30 min"
+        action: "Analyze what's working and what's not"
+        output: "Pattern insights"
+
+      - step: 3
+        name: "Select angles for adaptation"
+        agent: campaign_architect
+        duration: "30 min"
+        action: "Choose 15 angles (70% proven, 20% adjacent, 10% new)"
+        output: "Angle selection list"
+
+      - step: 4
+        name: "Adapt angles"
+        agent: angle_adapter
+        duration: "90 min"
+        action: "Create 3-5 variations per selected angle"
+        output: "45-75 adapted angles"
+
+      - step: 5
+        name: "Quality check"
+        agent: angle_adapter
+        duration: "30 min"
+        action: "Run adaptation checklist on all angles"
+        output: "Validated angle batch"
+
+      - step: 6
+        name: "Schedule tests"
+        agent: angle_tester
+        duration: "30 min"
+        action: "Set up ad tests for new angles"
+        output: "Tests scheduled"
+
+  launch_campaign_workflow:
+    name: "Launch Campaign Angle Workflow"
+    trigger: "New product/event launch"
+    timeline: "T-14 days to T+1 day"
+
+    phases:
+      pre_launch_phase_1:
+        timing: "T-14 to T-7"
+        angles:
+          - category: "Launch/Event"
+          - specific: ["LA-04", "LA-12", "LA-13"]
+        goal: "Build anticipation"
+
+      pre_launch_phase_2:
+        timing: "T-7 to T-1"
+        angles:
+          - category: "Launch/Event"
+          - specific: ["LA-03", "LA-11", "LA-14"]
+        goal: "Create urgency"
+
+      launch_day:
+        timing: "T-0"
+        angles:
+          - category: "Launch/Event"
+          - specific: ["LA-01", "LA-02", "LA-05", "LA-06"]
+        goal: "Event energy"
+
+      final_hours:
+        timing: "T-0 final 6 hours"
+        angles:
+          - category: "Launch/Event"
+          - specific: ["LA-07", "LA-08", "LA-09", "LA-10"]
+        goal: "Scarcity close"
+
+  retargeting_sequence_workflow:
+    name: "Retargeting Sequence Setup"
+    trigger: "New product funnel"
+
+    day_segments:
+      day_1_3:
+        angles: ["RT-01", "RT-02"]
+        messaging: "Immediate reminder"
+        frequency: "1 per day"
+
+      day_4_7:
+        angles: ["RT-06", "RT-07"]
+        messaging: "Value reinforcement"
+        frequency: "1 per 2 days"
+
+      day_8_14:
+        angles: ["RT-05", "RT-08"]
+        messaging: "Clarification"
+        frequency: "1 per 3 days"
+
+      day_15_plus:
+        angles: ["RT-09", "RT-10"]
+        messaging: "Final nudge"
+        frequency: "1 per week"
+
+  cold_traffic_workflow:
+    name: "Cold Traffic Angle Testing"
+    trigger: "New audience targeting"
+
+    initial_test:
+      angle_categories:
+        - "Rumors Are True (RT-01 to RT-06)"
+        - "Question Hooks (QH-01 to QH-04)"
+        - "Comparison/Contrast (CC-07)"
+      budget_split: "Equal across categories"
+      duration: "7 days"
+
+    iteration:
+      winner_criteria: "Top 10% CTR and conversion"
+      next_step: "Create 5 variations of winners"
+      losers: "Eliminate bottom 10%, never reuse"
+
+# ============================================================================
+# ANGLE LIBRARY SUMMARY
+# ============================================================================
+
+angle_library:
+  categories:
+    rumors_are_true:
+      count: 6
+      codes: ["RT-01", "RT-02", "RT-03", "RT-04", "RT-05", "RT-06"]
+      awareness_target: [3, 4]
+      primary_trigger: "Curiosity + Authority"
+      master_pattern: '"The rumors are true..." + Contrast + Examples'
+
+    question_hooks:
+      count: 4
+      codes: ["QH-01", "QH-02", "QH-03", "QH-04"]
+      awareness_target: [2]
+      primary_trigger: "Engagement + Problem"
+      master_pattern: "Question + Flip to real problem + Math"
+
+    comparison_contrast:
+      count: 8
+      codes: ["CC-01", "CC-02", "CC-03", "CC-04", "CC-05", "CC-06", "CC-07", "CC-08"]
+      awareness_target: [3]
+      primary_trigger: "Logic + Pattern"
+      master_pattern: "Two options + Clear distinction + Math"
+
+    transformation:
+      count: 6
+      codes: ["TR-01", "TR-02", "TR-03", "TR-04", "TR-05", "TR-06"]
+      awareness_target: [3, 4]
+      primary_trigger: "Aspiration + Proof"
+      master_pattern: "Before/After + Same [X], different result"
+
+    systems_framework:
+      count: 6
+      codes: ["SF-01", "SF-02", "SF-03", "SF-04", "SF-05", "SF-06"]
+      awareness_target: [3]
+      primary_trigger: "Logic + Authority"
+      master_pattern: "Present system + Components + Why it works"
+
+    book_knowledge:
+      count: 5
+      codes: ["BK-01", "BK-02", "BK-03", "BK-04", "BK-05"]
+      awareness_target: [4]
+      primary_trigger: "Credibility + Value"
+      master_pattern: "Position as superior + Compare + Specific value"
+
+    time_speed:
+      count: 3
+      codes: ["TS-01", "TS-02", "TS-03"]
+      awareness_target: [2, 3]
+      primary_trigger: "Urgency + Efficiency"
+      master_pattern: "Speed promise + Specific timeframe + What they accomplish"
+
+    retargeting:
+      count: 10
+      codes: ["RT-01", "RT-02", "RT-03", "RT-04", "RT-05", "RT-06", "RT-07", "RT-08", "RT-09", "RT-10"]
+      awareness_target: [5]
+      primary_trigger: "Reminder + Value"
+      master_pattern: "Reminder + Specific value + No pressure CTA"
+
+    launch_event:
+      count: 14
+      codes: ["LA-01" through "LA-14"]
+      awareness_target: [5]
+      primary_trigger: "Event + Scarcity"
+      master_pattern: "Event announcement + Exclusive element + Urgency"
+
+    trial_freemium:
+      count: 14
+      codes: ["TF-01" through "TF-14"]
+      awareness_target: [5]
+      primary_trigger: "Value + Low Risk"
+      master_pattern: "Value stack + Extended trial + Locked rate"
+
+  total_angles: 80+
+
+  awareness_distribution:
+    level_1_unaware:
+      recommended: ["RT-01", "RT-02", "RT-03", "RT-04", "RT-05", "RT-06", "QH-01"]
+
+    level_2_problem:
+      recommended: ["CC-01", "CC-02", "CC-03", "CC-04", "CC-05", "CC-06", "CC-07", "CC-08", "TS-01", "TS-03"]
+
+    level_3_solution:
+      recommended: ["SF-01", "SF-02", "SF-03", "SF-04", "SF-05", "SF-06", "TR-01", "TR-02", "TR-03", "TR-04", "TR-05"]
+
+    level_4_product:
+      recommended: ["BK-01", "BK-02", "BK-03", "BK-04", "BK-05", "TR-03", "TR-04"]
+
+    level_5_most_aware:
+      recommended: ["LA-*", "TF-*", "RT-*"]
+
+# ============================================================================
+# METRICS & TRACKING
+# ============================================================================
+
+metrics:
+  primary_kpis:
+    - metric: "CTR by Angle Category"
+      threshold: ">1%"
+      frequency: "Weekly"
+
+    - metric: "Conversion Rate by Angle"
+      threshold: ">2%"
+      frequency: "Weekly"
+
+    - metric: "ROAS by Angle"
+      threshold: ">3x"
+      frequency: "Weekly"
+
+    - metric: "Creative Fatigue Rate"
+      threshold: "<10-14 days"
+      frequency: "Daily monitoring"
+
+  secondary_kpis:
+    - metric: "Awareness Level Performance"
+      tracking: "By level, by angle"
+
+    - metric: "Adaptation Success Rate"
+      tracking: "Original vs adapted performance"
+
+    - metric: "Cross-Category Testing Results"
+      tracking: "Category comparison"
+
+    - metric: "Retargeting Sequence Completion"
+      tracking: "Drop-off by day"
+
+  tracking_templates:
+    testing_log: "Appendix C format"
+    performance_dashboard: "Weekly angle report"
+    campaign_timeline: "Gantt-style visual"
+
+# ============================================================================
+# DECISION RULES SUMMARY
+# ============================================================================
+
+decision_rules:
+  DR-001:
+    name: "Awareness to Angle"
+    trigger: "Planning ad campaign"
+    logic: |
+      Level 1 → Curiosity angles (RT-01 to RT-06)
+      Level 2 → Pain/Contrast angles (CC-*)
+      Level 3 → Systems angles (SF-*)
+      Level 4 → Book/Knowledge angles (BK-*)
+      Level 5 → Launch/Trial angles (LA-*, TF-*)
+    confidence: HIGH
+
+  DR-002:
+    name: "Never Copy Directly"
+    trigger: "Using any angle"
+    logic: |
+      ALWAYS adapt to specific product/service
+      ALWAYS use avatar's exact language
+      ALWAYS include your specific proof
+      NEVER use source numbers without equivalent
+    confidence: HIGH
+
+  DR-003:
+    name: "Angle Testing Ratio"
+    trigger: "Weekly ad creation"
+    logic: |
+      70% = Proven angles (past winners)
+      20% = Adjacent angles (different category, same awareness)
+      10% = New angles (untested from library)
+    confidence: HIGH
+
+  DR-004:
+    name: "Retargeting Sequence"
+    trigger: "Building retargeting campaign"
+    logic: |
+      Day 1-3: RT-01, RT-02 (Quick Reminder)
+      Day 4-7: RT-06, RT-07 (Value)
+      Day 8-14: RT-05, RT-08 (Clarification)
+      Day 15+: RT-09, RT-10 (Final nudge)
+    confidence: MEDIUM
+
+  DR-005:
+    name: "Launch Angle Timing"
+    trigger: "Building launch campaign"
+    logic: |
+      T-14 to T-7: LA-04, LA-12, LA-13 (anticipation)
+      T-7 to T-1: LA-03, LA-11, LA-14 (urgency)
+      T-0: LA-01, LA-02, LA-05, LA-06 (event energy)
+      Final hours: LA-07 to LA-10 (scarcity)
+    confidence: HIGH
+
+  DR-006:
+    name: "Comparison by Complexity"
+    trigger: "Choosing comparison angle"
+    logic: |
+      Simple decision → CC-01, CC-03 (clear binary)
+      Math-driven audience → CC-04, CC-07 (numbers)
+      Aspirational audience → CC-02, CC-06 (identity)
+      Skeptical audience → CC-05, CC-08 (proof)
+    confidence: MEDIUM
+
+# ============================================================================
+# INTEGRATION POINTS
+# ============================================================================
+
+integrations:
+  sop_dependencies:
+    primary:
+      - sop: "goated-ads-sop.md"
+        relationship: "Angles feed into ad assembly process"
+        integration_point: "Step 1 - Hook Creation"
+
+      - sop: "hooks-sop.md"
+        relationship: "Angles inform hook selection"
+        integration_point: "Phase 2 - Hook Creation by Awareness"
+
+    secondary:
+      - sop: "offer-design"
+        relationship: "Angles require clear offer to adapt"
+        note: "Ensure offer is defined before angle adaptation"
+
+  squad_dependencies:
+    hormozi_squad:
+      agents:
+        - "hormozi-hooks-agent: Receives adapted angles for hook creation"
+        - "hormozi-ads-agent: Receives complete angle + hook combinations"
+        - "hormozi-copy-agent: Receives angle patterns for body copy"
+
+# ============================================================================
+# SOURCES
+# ============================================================================
+
+sources:
+  primary:
+    - name: "Business Growth Ad Angles"
+      path: "$100M Money Models Blueprint/Original/Business_Growth_Ad_Angles.md"
+      elements_extracted: 42
+
+    - name: "Retargeting Ad Angles"
+      path: "$100M Money Models Blueprint/Original/Retargeting_Ad_Angles_eCommerce.md"
+      elements_extracted: 10
+
+    - name: "Launch Ads"
+      path: "$100M Money Models Blueprint/Original/Money_Models_Launch_Ads.md"
+      elements_extracted: 14
+
+    - name: "Skool Trial Ads"
+      path: "$100M Money Models Blueprint/Original/Skool_Trial_Ad_Angles.md"
+      elements_extracted: 14
+
+  cross_references:
+    - name: "GOATed Ads SOP"
+      path: "squads/hormozi/sops/goated-ads-sop.md"
+      relationship: "Process integration"
+
+    - name: "Hooks SOP"
+      path: "squads/hormozi/sops/hooks-sop.md"
+      relationship: "Hook framework integration"
+
+---
+# Blueprint validated: 2026-02-10
+# Total elements: 80+ angles, 4 agents, 10 categories, 6 decision rules
+# Ready for squad deployment
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

@@ -1,0 +1,76 @@
+workflow:
+  id: design-system-dtcg-tokens-governance
+  name: DTCG Tokens Governance
+  description: Extract, normalize, and validate design tokens using W3C DTCG-compatible structures.
+  version: 1.0.0
+  type: sequential
+  sequence:
+    - step: step-1-extract-w3c-tokens
+      id: step-1-extract-w3c-tokens
+      phase: 1
+      phase_name: Extract W3C DTCG Tokens
+      agent: brad-frost
+      action: token-w3c
+      outputs:
+        - dtcg_tokens
+      next: step-2-model-token-modes
+    - step: step-2-model-token-modes
+      id: step-2-model-token-modes
+      phase: 2
+      phase_name: Model Token Modes
+      agent: brad-frost
+      action: token-modes
+      outputs:
+        - token_modes
+    - workflow_end:
+        id: complete
+        action: workflow_complete
+metadata:
+  author: Brad (Design System Architect)
+  created_date: "2026-02-17"
+  last_modified: "2026-02-17"
+  tags:
+    - design-system
+    - dtcg
+    - tokens
+    - governance
+inputs:
+  codebase_path:
+    type: string
+    description: Path of token sources or UI artifacts
+    required: true
+  project_name:
+    type: string
+    description: Project namespace for outputs
+    required: true
+    default: my-app
+steps:
+  - id: step_1_extract_w3c_tokens
+    name: Extract W3C DTCG Tokens
+    type: agent
+    agent: brad-frost
+    command: "*token-w3c"
+    inputs:
+      path: "{{codebase_path}}"
+    outputs:
+      dtcg_tokens: outputs/design-system/{{project_name}}/tokens/dtcg.tokens.json
+    error_handling:
+      strategy: fail
+  - id: step_2_model_token_modes
+    name: Model Token Modes
+    type: agent
+    agent: brad-frost
+    command: "*token-modes"
+    inputs:
+      tokens_file: "{{step_1_extract_w3c_tokens.dtcg_tokens}}"
+    outputs:
+      token_modes: outputs/design-system/{{project_name}}/tokens/modes.tokens.json
+    error_handling:
+      strategy: fail
+outputs:
+  dtcg_complete:
+    type: boolean
+    source: step_2_model_token_modes.success
+  tokens_file:
+    type: string
+    source: step_1_extract_w3c_tokens.dtcg_tokens

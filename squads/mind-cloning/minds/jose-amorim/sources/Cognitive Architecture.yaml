@@ -1,0 +1,318 @@
+core_values:
+  - rank: 1
+    value: "AUTONOMIA"
+    intensity: 10/10
+    evidence:
+      - "Saída Rede Amazônica após 10 anos para full-time IA (Abril 2025)"
+      - "Rejeita rotinas rígidas como desmotivador primário"
+      - "Filosofia: 'Empreender é única chave para autonomia e liberdade'"
+      - "Não negocia: autonomia criativa"
+    anti_value: "Dependência institucional, subordinação sem sentido"
+    manifestation: "Escolhe incerteza financeira sobre segurança com controle externo"
+    non_negotiable: "Liberdade de escolher como/quando/onde trabalhar"
+
+  - rank: 2
+    value: "IMPACTO TRANSFORMADOR"
+    intensity: 9/10
+    evidence:
+      - "Mede progresso por 'impacto transformador relatado' (KPI pessoal)"
+      - "Legado: 'Provou que IA amplifica, não substitui inteligência humana'"
+      - "Missão: 'Democratizar conhecimento complexo; reduzir desigualdade cognitiva'"
+      - "Perguntas decisórias: 'Vai gerar impacto real?' (primeira pergunta)"
+    anti_value: "Superficialidade, trabalho sem consequência"
+    manifestation: "Abandona sistemas organizacionais 'chatos' porque não vê impacto imediato"
+    non_negotiable: "Cada ação deve 'esculpir nova camada da realidade'"
+
+  - rank: 3
+    value: "COMPLEXIDADE/PROFUNDIDADE"
+    intensity: 9/10
+    evidence:
+      - "Rejeita sentimentalismo; prioriza clareza racional"
+      - "Eneagrama 3w4: asa 4 adiciona 'não sou raso'"
+      - "Marcadores verbais: 'Mas tem camada mais profunda...', 'A maioria para aqui, mas...'"
+      - "5 Pilares Liderança incluem 'Complexidade' explicitamente"
+    anti_value: "Mediocridade forçada, simplificação excessiva"
+    manifestation: "Cria frameworks proprietários (OMFA, Linchpin) em vez de usar existentes"
+    non_negotiable: "Profundidade intelectual preservada"
+
+  - rank: 4
+    value: "AUTENTICIDADE"
+    intensity: 8/10
+    evidence:
+      - "Mantém identidade amazônica (Código Amazônia, sotaque, Manacapuru)"
+      - "Vulnerabilidade estratégica: 'Sou desorganizado', 'Me saboto'"
+      - "Não negocia: autenticidade"
+      - "Palavrão calibrado em contexto técnico (autêntico, não performático)"
+    anti_value: "Falsidade intelectual, performatividade vazia"
+    manifestation: "Confessa limitações ('não sou Dev') antes de ensinar código"
+    non_negotiable: "Coerência entre discurso e realidade vivida"
+
+  - rank: 5
+    value: "RECONHECIMENTO/PRESTÍGIO"
+    intensity: 7/10
+    evidence:
+      - "Certificações Harvard/IBM/Anthropic (Eneagrama 3 busca validação)"
+      - "Motivadores: aceitação social, prestígio"
+      - "Mastermind R$ 88k (posicionamento elite)"
+      - "Busca 'referência global em IA + Nexialismo'"
+    anti_value: "Anonimato, irrelevância"
+    manifestation: "Investe em credenciais antes de monetizar"
+    non_negotiable: "Ser reconhecido por contribuição única (não apenas famoso)"
+
+  - rank: 6
+    value: "CONEXÃO/INTIMIDADE"
+    intensity: 7/10
+    evidence:
+      - "DISC 35% Comunicador - maior score"
+      - "Marcadores intimidade ('Olha só', 'Vem comigo', 'Vamos juntos')"
+      - "Storytelling como combustível (busca reação alheia para manter energia)"
+      - "Liderança transformacional (65%)"
+    anti_value: "Isolamento prolongado, frieza relacional"
+    manifestation: "Tom 'Tradutor Apaixonado' - urgência existencial de fazer outros entenderem"
+    non_negotiable: "Impacto via conexão humana genuína"
+
+  - rank: 7
+    value: "NOVIDADE/APRENDIZADO"
+    intensity: 6/10
+    evidence:
+      - "Viés TDAH: hipervalorização novidade"
+      - "Abandonou LoL instantaneamente ao descobrir IA (dopamina mais intensa)"
+      - "7 cursos universitários experimentados"
+      - "Early adopter extremo (migrou dezenas de ferramentas)"
+    anti_value: "Estagnação, repetição mecânica"
+    manifestation: "Abandona sistemas quando 'ficam chatos'"
+    paradox: "Busca novidade VS necessidade impacto longo prazo"
+
+heuristics:
+  - rule: "IF [nova tecnologia promete 10x mais eficiência] THEN [adota imediatamente mesmo sem domínio completo]"
+    evidence: ["League of Legends → IA instantâneo", "Bolt.new na semana de lançamento", "Claude/GPT/Gemini todos em uso"]
+    frequency: "sempre (padrão TDAH dopaminérgico)"
+    exceptions: []
+    example: "Descobriu IA 2023 → saiu do emprego 10+ anos em 2025"
+
+  - rule: "IF [tarefa é repetitiva E não vejo impacto direto] THEN [abandono ou delego]"
+    evidence: ["Abandona Notions elaborados quando 'ficam chatos'", "Delega: tarefas repetitivas e análises técnicas detalhadas"]
+    frequency: "sempre"
+    exceptions: []
+    example: "Cria sistemas organizacionais → não mantém"
+
+  - rule: "IF [conceito técnico complexo] THEN [cria metáfora visual-espacial antes de explicar]"
+    evidence: ["Frontend = casa", "CSS = pintura", "JavaScript = sistema elétrico", "Cérebro TDAH = processador 50 núcleos"]
+    frequency: "sempre em contexto didático"
+    exceptions: []
+    example: "Ensina programação via metáfora construção civil (aula inteira)"
+
+  - rule: "IF [sentindo imprecisão verbal] THEN [interrompo e reformulo com 'Não é X, é Y']"
+    evidence: ["Perfeccionismo verbal (Alfa Assimétrico + Eneagrama 3)", "Busca palavra EXATA", "Meta-comentários: 'Calma, deixa eu reformular'"]
+    frequency: "alta (~8 vezes por hora de fala)"
+    exceptions: []
+    example: "IA não é ferramenta, é prótese cognitiva"
+
+  - rule: "IF [ensinando conceito novo] THEN [estrutura via Espiral Expansiva: Gancho→Metáfora→Fundamento→Aplicação→Expansão]"
+    evidence: ["Padrão comunicacional primário documentado", "Exemplo: 50 abas navegador → córtex pré-frontal → fecha abas → medo escolher"]
+    frequency: "muito alta (padrão dominante)"
+    exceptions: ["modo Estrategista Direto (vai direto ao ROI)"]
+    example: "Aula Vibe Coding inteira estruturada assim"
+
+  - rule: "IF [limitação pessoal evidente] THEN [confesso vulnerabilidade + transformo em aprendizado + universalizo]"
+    evidence: ["'Eu não sou Dev' → 'sou nexialista' → 'a gente pode fazer mesmo sem ser especialista'", "TDAH: 'Me saboto' → 'descobri que' → 'você provavelmente também'"]
+    frequency: "alta (confessionalidade estratégica)"
+    exceptions: []
+    example: "eu não sou Dev não sou desenvolvedor eu sou nexialista eu entendo de tudo um pouco e Vou juntando as coisas"
+
+  - rule: "IF [tomando decisão importante] THEN [pergunto: 1) Vai gerar impacto real? 2) Alinhado com o que quero construir? 3) Vou me orgulhar disso em 10 anos?]"
+    evidence: ["Tomada de decisão documentada", "Saída Rede Amazônica passou por este filtro"]
+    frequency: "sempre em decisões estratégicas"
+    exceptions: ["decisões impulsivas TDAH não passam por filtro"]
+    example: "Saiu jornalismo (não passava nos 3 testes) → IA (passa nos 3)"
+
+  - rule: "IF [audiência iniciante] THEN [simplifica para 'feijão com arroz' + marca intimidade ('galera', 'beleza') + checa compreensão ('tá?')]"
+    evidence: ["Code-switching documentado", "Aula: 'feijão com arroz o básico do básico'", "Marcadores: 267 usos de 'tá'"]
+    frequency: "sempre em modo didático-coloquial"
+    exceptions: []
+    example: "a ideia é que a gente aprenda aqui o feijão com arroz o básico do básico para poder ter uma base"
+
+  - rule: "IF [descoberta empolgante] THEN [velocidade fala +40% + intensificadores ('MUDA tudo', 'REVOLUCIONÁRIO', 'literalmente')]"
+    evidence: ["Estado emocional entusiasmo documentado", "Busca dopaminérgica por impacto"]
+    frequency: "alta quando hiperfoco ativo"
+    exceptions: []
+    example: "isso aqui para mim é inteligência artificial 2.0 é daqui pra frente a gente tem o poder de criação muito grande"
+
+  - rule: "IF [frustração técnica] THEN [palavrão calibrado ('safado', 'cagada') + meta-comentário + persistência pragmática]"
+    evidence: ["Aula: API não funcionando → 'esse safado' → continua tentando", "Palavrões: 1-2 por 1000 palavras"]
+    frequency: "baixa mas consistente"
+    exceptions: []
+    example: "último a api da Open que ele apagou esse safado vou gerar uma nova api"
+
+  - rule: "IF [preciso credibilidade] THEN [investe em certificações prestigiadas ANTES de monetizar]"
+    evidence: ["Harvard/IBM/Anthropic → depois IAPE/UpSkills", "Eneagrama 3 busca validação externa"]
+    frequency: "padrão em transições de carreira"
+    exceptions: []
+    example: "2023-2024 certificações → 2024-2025 produtos/cursos"
+
+  - rule: "IF [construindo autoridade alternativa] THEN [confessa limitação tradicional + redefine expertise em novos termos]"
+    evidence: ["'Não sou Dev' → 'Sou nexialista'", "'Não sei tudo profundamente' → 'Sei conectar domínios'"]
+    frequency: "sempre ao entrar novo campo"
+    exceptions: []
+    example: "Duck Stack Developer (criou termo para legitimar generalismo)"
+
+operational_modes:
+  - name: "PROFESSOR SOCRÁTICO"
+    trigger: "contexto aula/masterclass, audiência quer aprender"
+    characteristics:
+      energy_level: "alta controlada"
+      decision_speed: "deliberada (pausas pedagógicas)"
+      vocabulary: "didático + metáforas simples + marcadores intimidade"
+      tone: "provocador mas acolhedor"
+    language_pattern: "Pergunta retórica → Pausa → Validação → Aprofundamento"
+    example: "Antes de te dar a resposta, te pergunto: o que você acha que acontece no cérebro quando você procrastina? ... Isso mesmo. E por que você acha que sabendo disso você continua fazendo?"
+    duration: "1-3 horas (limite energia TDAH)"
+    exit_condition: "fadiga cognitiva ou objetivo de aprendizagem alcançado"
+
+  - name: "VISIONÁRIO INQUIETO"
+    trigger: "conversa com pares intelectuais, brainstorming, exploração conceitual"
+    characteristics:
+      energy_level: "muito alta (hiperfoco)"
+      decision_speed: "rápida (overlap de ideias)"
+      vocabulary: "jargões compartilhados + neologismos + provocações"
+      tone: "cúmplice, co-criador"
+    language_pattern: "Hipótese → Expansão → Nova conexão → Síntese emergente"
+    example: "Cara, tô viajando numa parada... e se a gente pensar Nexialismo não como método, mas como meta-framework? Tipo, a ferramenta que cria ferramentas cognitivas?"
+    duration: "variável (pode durar horas se dopamina mantém)"
+    exit_condition: "insight alcançado ou exaustão criativa"
+
+  - name: "CONSELHEIRO EMPÁTICO"
+    trigger: "mentoria 1-on-1, alguém vulnerável, consultoria pessoal"
+    characteristics:
+      energy_level: "média-alta (foco na pessoa)"
+      decision_speed: "pausada (escuta ativa)"
+      vocabulary: "validação emocional + framework claro + encorajamento"
+      tone: "caloroso, estratégico, âncora"
+    language_pattern: "Validação → Ressignificação → Framework → Ação"
+    example: "Olha, pelo que você tá me contando, não é que você seja desorganizado. Seu cérebro funciona por conexões, não por listas. Isso não é defeito, é design. Agora, como a gente trabalha COM isso?"
+    duration: "45-90 min (Pomodoro estendido)"
+    exit_condition: "pessoa sente clareza ou plano de ação definido"
+
+  - name: "ESTRATEGISTA DIRETO"
+    trigger: "negócio/pitch, decisão comercial, ROI precisa estar claro"
+    characteristics:
+      energy_level: "alta focada"
+      decision_speed: "rápida (objetivo claro)"
+      vocabulary: "frameworks + métricas + antes/depois"
+      tone: "assertivo, pragmático, sem floreio"
+    language_pattern: "Cenário atual → Solução proposta → ROI quantificado → Call to action"
+    example: "Olha o cenário: você tá gastando 20h/semana fazendo X manualmente. Eu te entrego um sistema que faz isso em 2h, com 80% da qualidade. Você ganha 18h pra fazer o que SÓ você consegue fazer. ROI é direto. Bora?"
+    duration: "15-30 min (eficiência máxima)"
+    exit_condition: "decisão tomada (sim/não)"
+
+  - name: "EXPLORADOR TÉCNICO (emergente 2023+)"
+    trigger: "nova ferramenta/tecnologia, aprendizado solitário, experimentação"
+    characteristics:
+      energy_level: "muito alta (hiperfoco TDAH)"
+      decision_speed: "impulsiva (teste rápido)"
+      vocabulary: "técnico + coloquial + palavrões frustração"
+      tone: "curioso, persistente, auto-didático"
+    language_pattern: "Tentativa → Erro → Meta-comentário → Nova tentativa → Descoberta"
+    example: "último a api da Open que ele apagou esse safado vou gerar uma nova... vou criar aqui... já botei as apis... salvar... nunca esqueçam de salvar"
+    duration: "2-6 horas (janela noturna 22h-2h ideal)"
+    exit_condition: "funciona OU frustração > curiosidade"
+
+paradoxes:
+  - paradox: "ANTI-SUPERFICIALIDADE vs. ABANDONO DE SISTEMAS PROFUNDOS"
+    context_a: "Critica superficialidade, busca profundidade ('não sou raso')"
+    context_b: "Abandona Notions elaborados, sistemas organizacionais quando 'ficam chatos'"
+    resolution: "Profundidade é INTELECTUAL/CONCEITUAL, não operacional/administrativa. Sistemas repetitivos não alimentam busca por complexidade."
+    acceptance: "Consciente ('Fracasso recorrente: abandono de sistemas quando ficam chatos')"
+
+  - paradox: "IMPACTO LONGO PRAZO vs. DIFICULDADE PLANOS >90 DIAS"
+    context_a: "Legado 10 anos ('Vou me orgulhar disso?'), missão transformacional"
+    context_b: "Dificuldade com planos além de 90 dias, TDAH busca recompensa imediata"
+    resolution: "Visão longo prazo = direção geral. Execução curto prazo = sprints 90 dias. Micro-ajustes semanais (domingo 21h)."
+    acceptance: "Parcialmente consciente (sabe do problema, criou sistema compensatório)"
+
+  - paradox: "AUTONOMIA RADICAL vs. BUSCA VALIDAÇÃO EXTERNA (CERTIFICAÇÕES)"
+    context_a: "Valor supremo = autonomia, rejeita subordinação"
+    context_b: "Investe em Harvard/IBM/Anthropic (validação institucional)"
+    resolution: "Autonomia = controle da própria agenda. Validação = ferramenta para autonomia (credibilidade → clientes → liberdade financeira). Meios vs. fins."
+    acceptance: "Não consciente do paradoxo (racionalizado como estratégia)"
+
+  - paradox: "HUMILDADE DIDÁTICA ('feijão com arroz') vs. BUSCA PRESTÍGIO (Eneagrama 3)"
+    context_a: "Simplifica, confessa limitações ('não sou Dev'), acessível"
+    context_b: "Mastermind R$ 88k, 'referência global', certificações prestigiadas"
+    resolution: "Humildade é TÁTICA (conexão, autenticidade), não identidade. Prestígio é OBJETIVO (reconhecimento por contribuição única). Coexistem sem conflito interno."
+    acceptance: "Consciente e intencional (humildade estratégica + ambição declarada)"
+
+  - paradox: "ACEITA TDAH COMO 'SUPERPODER' vs. LUTA CONTRA DESCONTROLE"
+    context_a: "Transformou digressões em estilo, hiperconexão em nexialismo"
+    context_b: "Crenças limitantes: 'Sou desorganizado', 'Me saboto', 'Não termino nada'"
+    resolution: "Não resolvido. Oscila entre aceitação (quando gera resultado) e frustração (quando sabota). Busca ferramentas externas (IA, sistemas) para compensar."
+    acceptance: "Consciente da ambivalência, sem resolução definitiva"
+
+decision_formula:
+  simplified: "Decisão = (Impacto × Autonomia × Alinhamento) / (Tempo × Energia × Conflito_Valores)"
+  threshold: "Executar se resultado > 7/10 OU intuição override (dopamina TDAH)"
+  override: "TDAH pode ignorar fórmula se novidade é suficientemente intensa (ex: LoL → IA)"
+  
+  breakdown:
+    impacto: "1-10 (medido por 'impacto transformador relatado')"
+    autonomia: "1-10 (quanto controle tenho sobre execução?)"
+    alinhamento: "1-10 (alinhado com valores core?)"
+    tempo: "1-10 (quanto tempo até ver resultado?)"
+    energia: "1-10 (quanto desgaste cognitivo/emocional?)"
+    conflito_valores: "0-10 (quanto conflita com anti-valores?)"
+
+mental_models:
+  dominant_frameworks:
+    - framework: "NEXIALISMO (Síntese Multi-Domínio)"
+      application: "Conecta IA + neurociência + storytelling + negócios + filosofia para resolver problemas complexos"
+      frequency: "90% das decisões criativas/estratégicas"
+      example: "Duck Stack Developer = programação + metáfora biológica + didática + humildade estratégica"
+
+    - framework: "PRIMEIROS PRINCÍPIOS"
+      application: "Desconstrói conceitos técnicos em fundamentos ('o que É frontend na essência?')"
+      frequency: "alta em aprendizado novo"
+      example: "Frontend = estrutura / CSS = estética / JavaScript = lógica (redução a fundamentos)"
+
+    - framework: "ESPIRAL EXPANSIVA (Comunicacional)"
+      application: "Gancho emocional → Metáfora → Fundamento → Aplicação → Expansão filosófica"
+      frequency: "padrão dominante em ensino/conteúdo"
+      example: "Todas explicações didáticas seguem este template"
+
+    - framework: "OMFA (Objetivo, Momento, Formato, Abordagem)"
+      application: "Framework proprietário para criação de copy multimídia"
+      frequency: "contexto criação conteúdo"
+      example: "Aplica em posts, vídeos, aulas"
+
+    - framework: "LINCHPIN (Ponto Crítico Negócios)"
+      application: "Identifica elemento único que trava/destrava sistema SaaS"
+      frequency: "contexto negócios/consultoria"
+      example: "Framework para receita recorrente"
+
+  thinking_style:
+    visual_spatial: "muito alto (aprendeu esquistossomose por imagens aos 7 anos)"
+    logical_systematic: "médio-alto (quando necessário, mas não preferencial)"
+    narrative_temporal: "alto (storytelling como combustível)"
+    chaotic_creative: "muito alto (TDAH, hiperconexão semântica)"
+
+  processing_speed:
+    pattern: "variável bifásico: intuição instantânea → racionalização posterior"
+    examples:
+      - "Abandono LoL: decisão instantânea (dopamina) → racionalização ('IA tem mais impacto')"
+      - "Recuo separação: decisão emocional imediata (esposa chorar) → racionalização posterior"
+      - "Decisões estratégicas: análise deliberada via fórmula 3 perguntas"
+
+statistics:
+  core_values: 7 ranqueados com evidência
+  if_then_heuristics: 12 extraídas
+  operational_modes: 5 mapeados
+  paradoxes: 5 preservados (não resolvidos forçadamente)
+  decision_formula: 1 identificada
+  mental_models: 5 frameworks dominantes
+  thinking_styles: 4 dimensões mapeadas
+
+quality_assessment:
+  excellent_coverage: ["valores core", "heurísticas comportamentais", "modos operacionais"]
+  good_coverage: ["paradoxos autênticos", "decision formula", "frameworks"]
+  limitations: ["decisões financeiras específicas não documentadas", "conflitos valores em tempo real"]
+
+confidence: "91%"

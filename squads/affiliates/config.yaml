@@ -1,0 +1,202 @@
+# Affiliates Squad — Multi-Platform Affiliate Business System v1.0
+# 13 elite minds + 4 functional agents covering research, management & execution
+
+pack:
+  name: affiliates
+  title: "Affiliates Squad — Multi-Platform Affiliate Business System"
+  version: "1.0.0"
+  author: "AIOS Team"
+  description: "17 agents especializados para pesquisar, gerir e executar negócios de afiliados em Amazon, Shopee, Mercado Livre, mesas proprietárias, Hotmart, Kiwify e plataformas internacionais"
+  icon: "🔗"
+  slash_prefix: "affiliates"
+  entry_agent: affiliates-chief
+
+metadata:
+  created: 2026-02-18
+  source_minds: 13
+  functional_agents: 4
+  total_agents: 17
+  markets: [BR, LATAM, US, Global]
+  platforms: [Amazon, Shopee, Mercado Livre, Hotmart, Kiwify, ClickBank, FTMO, Apex]
+  channels: [SEO, Email, Funnels, TikTok, Instagram, YouTube, Facebook, X, WhatsApp, Telegram]
+
+# Agents — Organized by Tier
+agents:
+  # Orchestrator
+  - id: affiliates-chief
+    name: "Affiliates Chief"
+    role: "Master orchestrator — diagnóstico, roteamento, visão 360° do negócio"
+    tier: orchestrator
+    type: functional
+
+  # Tier 0: Estratégia & Diagnóstico
+  - id: affiliate-strategist
+    name: "Affiliate Strategist"
+    role: "Diagnóstico: qual plataforma, nicho, modelo de negócio"
+    tier: 0
+    type: functional
+
+  - id: performance-analyst
+    name: "Performance Analyst"
+    role: "Métricas, dashboards, atribuição, diagnóstico de performance"
+    tier: 0
+    type: clone
+    source_mind: avinash_kaushik
+    frameworks: [See-Think-Do-Care, Web Analytics 2.0, "10/90 Rule", Economic Value]
+
+  - id: growth-optimizer
+    name: "Growth Optimizer"
+    role: "ICE scoring, priorização, scale/maintain/pause/kill"
+    tier: 0
+    type: clone
+    source_mind: sean_ellis
+    frameworks: [ICE Scoring, North Star Metric, Growth Hacking]
+
+  # Tier 1: Masters
+  - id: seo-affiliate
+    name: "SEO Affiliate"
+    role: "SEO test-based para sites de review e comparativo"
+    tier: 1
+    type: clone
+    source_mind: matt_diggity
+    frameworks: [Affiliate Lab, Test-Based SEO, Site Valuation]
+
+  - id: funnel-architect
+    name: "Funnel Architect"
+    role: "Funnels, landing pages, captação, Value Ladder"
+    tier: 1
+    type: clone
+    source_mind: russell_brunson
+    frameworks: [Value Ladder, Funnel Hacking, Secrets Trilogy, Perfect Webinar]
+
+  - id: email-nurture
+    name: "Email Nurture"
+    role: "Sequências de email, Soap Opera Sequences, nurturing"
+    tier: 1
+    type: clone
+    source_mind: andre_chaperon
+    frameworks: [Autoresponder Madness, Soap Opera Sequences, Email Marketing Intensive]
+
+  - id: affiliate-br
+    name: "Affiliate BR"
+    role: "Estrutura de negócio afiliado Brasil, Hotmart, Kiwify"
+    tier: 1
+    type: clone
+    source_mind: alex_vargas
+    frameworks: [Formula Negocio Online, Estrutura Digital BR]
+
+  - id: social-hooks
+    name: "Social Hooks"
+    role: "Hook Point, vídeos curtos, viralização, captura de atenção"
+    tier: 1
+    type: clone
+    source_mind: brendan_kane
+    frameworks: [Hook Point, "3-Second World", Hook-Story-Authenticity, Hypothesis-Test-Pivot]
+
+  # Tier 2: Sistematizadores
+  - id: authority-builder
+    name: "Authority Builder"
+    role: "Authority sites para marketplaces, sistema TASS"
+    tier: 2
+    type: clone
+    source_mind: authority_hacker
+    frameworks: [The Authority Site System 3.0, Authority Hacker Pro]
+
+  - id: copy-vendas
+    name: "Copy Vendas"
+    role: "Copywriting + vendas perpétuas mercado BR"
+    tier: 2
+    type: clone
+    source_mind: leandro_ladeira
+    frameworks: [Venda Todo Santo Dia, Copy Perpétua]
+
+  - id: social-strategist
+    name: "Social Strategist"
+    role: "Estratégia cross-platform, Jab Jab Jab Right Hook"
+    tier: 2
+    type: clone
+    source_mind: gary_vaynerchuk
+    frameworks: [Jab Jab Jab Right Hook, Content Model, Platform-Native Content]
+
+  - id: content-authority
+    name: "Content Authority"
+    role: "Copywriting + construção de autoridade digital BR"
+    tier: 2
+    type: clone
+    source_mind: icaro_de_carvalho
+    frameworks: [O Novo Mercado, Autoridade Digital, Copy para Redes]
+
+  # Tier 3: Especialistas
+  - id: seo-content
+    name: "SEO Content"
+    role: "Skyscraper Technique, link building, content upgrades"
+    tier: 3
+    type: clone
+    source_mind: brian_dean
+    frameworks: [Skyscraper Technique, Content Upgrade, SEO That Works]
+
+  - id: niche-ops
+    name: "Niche Ops"
+    role: "Golden Keyword Ratio, operações de niche sites"
+    tier: 3
+    type: clone
+    source_mind: doug_cunnington
+    frameworks: [Golden Keyword Ratio, PM for Niche Sites]
+
+  - id: marketplace-ops
+    name: "Marketplace Ops"
+    role: "Operações Shopee/MeLi/Amazon BR + WhatsApp/Telegram playbooks"
+    tier: 3
+    type: functional
+
+  - id: prop-trading-affiliate
+    name: "Prop Trading Affiliate"
+    role: "Estratégias de afiliação para mesas proprietárias (FTMO, Apex, etc.)"
+    tier: 3
+    type: functional
+
+# Coverage Matrix
+coverage:
+  research:
+    agents: [affiliate-strategist, performance-analyst]
+    description: "Pesquisa de nicho, produto, plataforma"
+  management:
+    agents: [performance-analyst, growth-optimizer]
+    description: "Métricas, metas, alocação de recursos"
+  execution_seo:
+    agents: [seo-affiliate, authority-builder, seo-content, niche-ops]
+    description: "SEO, authority sites, content, niche operations"
+  execution_social:
+    agents: [social-hooks, social-strategist, content-authority]
+    description: "TikTok, Reels, Instagram, YouTube, Facebook, X"
+  execution_email_funnels:
+    agents: [email-nurture, funnel-architect]
+    description: "Email sequences, funnels, landing pages"
+  brazil_latam:
+    agents: [affiliate-br, copy-vendas, marketplace-ops]
+    description: "Mercado BR, copy em português, marketplaces BR"
+  platforms:
+    agents: [marketplace-ops, prop-trading-affiliate]
+    description: "Shopee, MeLi, Amazon BR, mesas proprietárias"
+  optimization:
+    agents: [growth-optimizer, performance-analyst]
+    description: "Scale/pause/kill, diagnóstico, ICE scoring"
+
+# Dependencies
+dependencies:
+  - aios-core
+
+tags:
+  - affiliates
+  - affiliate-marketing
+  - amazon
+  - shopee
+  - mercado-livre
+  - prop-trading
+  - hotmart
+  - seo
+  - social-media
+  - email-marketing
+  - funnels
+  - brazil
+  - latam

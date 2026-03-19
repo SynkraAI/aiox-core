@@ -1,0 +1,95 @@
+workflow:
+  id: design-system-agentic-readiness
+  name: Design System Agentic Readiness
+  description: Audit and setup machine-readable artifacts so AI agents can safely consume the design system.
+  version: 1.0.0
+  type: sequential
+  sequence:
+    - step: step-1-agentic-audit
+      id: step-1-agentic-audit
+      phase: 1
+      phase_name: Audit Agentic Readiness
+      agent: brad-frost
+      action: agentic-audit
+      outputs:
+        - report
+      next: step-2-agentic-setup
+    - step: step-2-agentic-setup
+      id: step-2-agentic-setup
+      phase: 2
+      phase_name: Setup Agentic Foundations
+      agent: brad-frost
+      action: agentic-setup
+      outputs:
+        - setup_report
+        - metadata_file
+    - workflow_end:
+        id: complete
+        action: workflow_complete
+metadata:
+  author: Brad (Design System Architect)
+  created_date: "2026-02-17"
+  last_modified: "2026-02-17"
+  tags:
+    - design-system
+    - agentic
+    - metadata
+    - governance
+inputs:
+  codebase_path:
+    type: string
+    description: Path to evaluate for agentic readiness
+    required: true
+  project_name:
+    type: string
+    description: Project namespace for outputs
+    required: true
+    default: my-app
+steps:
+  - id: step_1_agentic_audit
+    name: Audit Agentic Readiness
+    type: agent
+    agent: brad-frost
+    command: "*agentic-audit"
+    inputs:
+      path: "{{codebase_path}}"
+    outputs:
+      report: outputs/design-system/{{project_name}}/agentic/agentic-audit.md
+    error_handling:
+      strategy: fail
+  - id: step_2_agentic_setup
+    name: Setup Agentic Foundations
+    type: agent
+    agent: brad-frost
+    command: "*agentic-setup"
+    inputs:
+      audit_report: "{{step_1_agentic_audit.report}}"
+    outputs:
+      setup_report: outputs/design-system/{{project_name}}/agentic/agentic-setup.md
+      metadata_file: workspace/domains/design-system/metadata/components.json
+    error_handling:
+      strategy: fail
+outputs:
+  readiness_complete:
+    type: boolean
+    source: step_2_agentic_setup.success
+  readiness_report:
+    type: string
+    source: step_2_agentic_setup.setup_report
+quality_gates:
+  internal_quality_chain:
+    required:
+      - node squads/design/scripts/design-system/generate_components_metadata.cjs
+      - node squads/design/scripts/design-system/validate_components_metadata.cjs
+      - node squads/design/scripts/design-system/sync_design_manifest.cjs
+      - node squads/design/scripts/design-system/validate_design_manifest_drift.cjs
+      - node squads/design/scripts/design-system/validate_task_checklist_bindings.cjs
+      - node squads/design/scripts/design-system/validate_mcp_skeleton.cjs
+    optional:
+      - node squads/design/scripts/design-system/test_mcp_tools.cjs
+    blocking: true
+    policy: internal-first
+    exception:
+      external_tool_allowed_with:
+        - capability_gap_documented
+        - rationale_recorded

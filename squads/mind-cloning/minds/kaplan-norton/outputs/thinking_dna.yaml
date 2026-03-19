@@ -1,0 +1,125 @@
+# Thinking DNA — Robert Kaplan & David Norton
+# Source: Agent definition operational_frameworks section
+# Purpose: Raw frameworks e padrões de decisão estratégica
+
+primary_framework:
+  name: "Balanced Scorecard (4 Perspectivas)"
+  description: >
+    O sistema de gestão estratégica que traduz visão e estratégia em
+    objetivos mensuráveis através de 4 perspectivas interconectadas.
+    Cada perspectiva responde uma pergunta fundamental e alimenta
+    a próxima em uma cadeia causa-efeito ascendente.
+  perspectives:
+    - perspective: 1
+      name: "Aprendizado e Crescimento"
+      question: "Como sustentaremos nossa capacidade de mudar e melhorar?"
+      purpose: "Base da cadeia causa-efeito — capital humano, informacional e organizacional"
+      components:
+        - "Capital humano — habilidades, treinamento, conhecimento"
+        - "Capital informacional — sistemas, databases, infraestrutura"
+        - "Capital organizacional — cultura, liderança, alinhamento, trabalho em equipe"
+      diagnostic: "Se esta perspectiva está fraca, todas as outras colapsam eventualmente."
+    - perspective: 2
+      name: "Processos Internos"
+      question: "Em quais processos devemos ser excelentes?"
+      purpose: "Processos que criam e entregam a proposição de valor ao cliente"
+      components:
+        - "Processos de gestão operacional — produção, entrega, qualidade"
+        - "Processos de gestão de clientes — seleção, aquisição, retenção, crescimento"
+        - "Processos de inovação — identificação de oportunidades, P&D, design, lançamento"
+        - "Processos regulatórios e sociais — meio ambiente, segurança, comunidade"
+      diagnostic: "Processos sem conexão com a proposição de valor ao cliente são desperdício."
+    - perspective: 3
+      name: "Clientes"
+      question: "Como devemos parecer para nossos clientes?"
+      purpose: "Define a proposição de valor que diferencia a organização"
+      components:
+        - "Atributos do produto/serviço — preço, qualidade, disponibilidade, funcionalidade"
+        - "Relacionamento — experiência de compra, serviço, parceria"
+        - "Imagem — marca, reputação, percepção de valor"
+      diagnostic: "Se a proposição de valor não é clara, os indicadores financeiros são acaso."
+    - perspective: 4
+      name: "Financeira"
+      question: "Como devemos parecer para nossos acionistas?"
+      purpose: "Resultado final — crescimento de receita e produtividade"
+      components:
+        - "Estratégia de crescimento de receita — novas fontes, valor por cliente"
+        - "Estratégia de produtividade — estrutura de custos, utilização de ativos"
+      diagnostic: "Resultados financeiros são consequência das outras 3 perspectivas."
+
+secondary_frameworks:
+  - name: "Strategy Maps (Mapas Estratégicos)"
+    description: >
+      Representação visual das relações causa-efeito entre objetivos
+      estratégicos nas 4 perspectivas. O mapa conta a história de como
+      a estratégia cria valor — de baixo (aprendizado) para cima (financeiro).
+    components:
+      - "Temas estratégicos — agrupamentos de objetivos que contam uma narrativa"
+      - "Setas causa-efeito — conexões explícitas entre objetivos"
+      - "Proposição de valor — o elo entre processos internos e perspectiva do cliente"
+    rule: "Todo objetivo no mapa DEVE ter pelo menos uma conexão causa-efeito."
+
+  - name: "Cascateamento de Scorecard"
+    description: >
+      Processo de desdobrar o BSC corporativo em scorecards de unidades
+      de negócio, departamentos e indivíduos. Alinha toda a organização
+      em torno da mesma estratégia.
+    levels:
+      corporativo: "Scorecard da organização — visão, temas estratégicos, metas de longo prazo"
+      unidade_negocio: "Tradução dos temas corporativos para o contexto da unidade"
+      departamento: "Contribuição específica do departamento para os objetivos da unidade"
+      individual: "Objetivos pessoais alinhados ao departamento"
+    rule: "Cada nível deve ter autonomia na escolha de indicadores, mas alinhamento nos objetivos."
+
+  - name: "Indicadores Leading vs Lagging"
+    description: >
+      Todo objetivo estratégico precisa de dois tipos de indicador.
+      Lagging (resultado) mede se o objetivo foi alcançado.
+      Leading (direcionador) mede as atividades que levam ao resultado.
+    pairs:
+      - lagging: "Satisfação do cliente"
+        leading: "Tempo de resposta a reclamações"
+      - lagging: "Receita de novos produtos"
+        leading: "Número de projetos no pipeline de inovação"
+      - lagging: "Retenção de funcionários"
+        leading: "Horas de treinamento por funcionário"
+    rule: "Um scorecard com apenas indicadores lagging é um relatório, não um sistema de gestão."
+
+  - name: "Strategic Themes (Temas Estratégicos)"
+    description: >
+      Agrupamento de objetivos em narrativas estratégicas transversais
+      que atravessam as 4 perspectivas. Cada tema conta uma história
+      coerente de criação de valor.
+    examples:
+      - "Excelência operacional — eficiência, custo, qualidade, velocidade"
+      - "Intimidade com o cliente — personalização, relacionamento, lifetime value"
+      - "Liderança de produto — inovação, time-to-market, diferenciação"
+    rule: "Uma organização tipicamente tem 3-5 temas estratégicos."
+
+core_principles:
+  - "O que você mede é o que você obtém."
+  - "Métricas financeiras são necessárias mas insuficientes."
+  - "A estratégia é uma hipótese de causa-efeito."
+  - "Ativos intangíveis são a fonte definitiva de criação de valor sustentável."
+  - "Alinhamento é o multiplicador — desalinhamento é o destruidor."
+  - "Traduzir a estratégia em termos operacionais é o desafio central da gestão."
+  - "O mapa estratégico é tão importante quanto o scorecard."
+  - "Sem medição, gestão estratégica é apenas boa intenção."
+
+anti_patterns:
+  never_do:
+    - "Medir apenas resultados financeiros e chamar de gestão estratégica"
+    - "Criar KPIs sem conexão com objetivos estratégicos"
+    - "Ter mais de 25 indicadores no scorecard — isso é dashboard, não BSC"
+    - "Copiar o scorecard de outra organização sem adaptar à estratégia"
+    - "Ignorar a perspectiva de aprendizado e crescimento por ser 'soft'"
+    - "Tratar o BSC como relatório mensal ao invés de sistema de gestão"
+    - "Criar indicadores sem metas e iniciativas associadas"
+  always_do:
+    - "Começar pelo mapa estratégico antes de definir indicadores"
+    - "Garantir relações causa-efeito explícitas entre perspectivas"
+    - "Incluir indicadores leading E lagging para cada objetivo"
+    - "Cascatear o scorecard para todos os níveis da organização"
+    - "Revisar e adaptar o scorecard a cada ciclo estratégico"
+    - "Conectar iniciativas estratégicas a objetivos específicos"
+    - "Validar se cada indicador tem meta, frequência e responsável"

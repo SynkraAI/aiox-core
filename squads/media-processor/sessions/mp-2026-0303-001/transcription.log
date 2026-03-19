@@ -1,0 +1,70 @@
+[01:14:28] [INFO] ═══════════════════════════════════════════════
+[01:14:28] [INFO]   ATLAS TRANSCRIPTION PIPELINE
+[01:14:28] [INFO]   Session: mp-2026-0303-001
+[01:14:28] [INFO]   Started: 2026-03-04 01:14:28
+[01:14:28] [INFO]   Model: Whisper medium
+[01:14:28] [INFO] ═══════════════════════════════════════════════
+[01:14:28] [INFO] ═══ BATCH 1: RENAN VIEIRA — 73 arquivos ═══
+[01:14:28] [INFO] 
+[1/73] Como Estruturar Time Comercial/05 - Script de vendas de mentoria/video.m4a
+[01:14:28] [INFO]   Transcrevendo: video.m4a → video.md
+[03:02:53] [INFO]   OK: video.md (52573 palavras, 6505s)
+[03:02:53] [INFO] 
+[2/73] Como Estruturar Time Comercial/06 - Pitch de vendas por vídeo NO ZOOM/video.m4a
+[03:02:53] [INFO]   Transcrevendo: video.m4a → video.md
+[03:20:20] [INFO]   OK: video.md (9056 palavras, 1048s)
+[03:20:20] [INFO] 
+[3/73] Funil 50k por Manychat/19 - Como Criar uma campanha de anúncios no manychat/XicA8lj1Cxo - Como Criar uma campanha de anúncios no manychat.m4a
+[03:20:20] [INFO]   Transcrevendo: XicA8lj1Cxo - Como Criar uma campanha de anúncios no manychat.m4a → XicA8lj1Cxo - Como Criar uma campanha de anúncios no manychat.md
+[03:24:20] [INFO]   OK: XicA8lj1Cxo - Como Criar uma campanha de anúncios no manychat.md (2160 palavras, 240s)
+[03:24:20] [INFO] 
+[4/73] Funil Método 30D/06 - Como gravar a aula/video.m4a
+[03:24:20] [INFO]   Transcrevendo: video.m4a → video.md
+[03:25:00] [INFO]   OK: video.md (455 palavras, 41s)
+[03:25:00] [INFO] 
+[5/73] Funil Método 30D/07 - A minha aula que eu utilizo como isca digital/video.m4a
+[03:25:00] [INFO]   Transcrevendo: video.m4a → video.md
+[03:26:50] [INFO]   OK: video.md (1288 palavras, 110s)
+[03:26:50] [INFO] 
+[6/73] Funil Projeto 100K - Lançamento/30 - Gravação dos Criativos/video.m4a
+[03:26:50] [INFO]   Transcrevendo: video.m4a → video.md
+[03:52:08] [INFO]   OK: video.md (14902 palavras, 1518s)
+[03:52:08] [INFO] 
+[7/73] Mentoria 50k - Encontros ao Vivo/04 - Social Selling/iuV5Dt_T3q0 - MENTORIA 30K.m4a
+[03:52:08] [INFO]   Transcrevendo: iuV5Dt_T3q0 - MENTORIA 30K.m4a → iuV5Dt_T3q0 - MENTORIA 30K.md
+[04:09:45] [INFO]   OK: iuV5Dt_T3q0 - MENTORIA 30K.md (10250 palavras, 1057s)
+[04:09:45] [INFO] 
+[8/73] Mentoria 50k - Encontros ao Vivo/06 - Pitch de vendas de mentoria/lTw403V1N_4 - Pitch de vendas de mentoria.m4a
+[04:09:45] [INFO]   Transcrevendo: lTw403V1N_4 - Pitch de vendas de mentoria.m4a → lTw403V1N_4 - Pitch de vendas de mentoria.md
+[04:43:40] [INFO]   OK: lTw403V1N_4 - Pitch de vendas de mentoria.md (20088 palavras, 2034s)
+[04:43:40] [INFO] 
+[9/73] Mentoria 50k - Encontros ao Vivo/06 - Pitch de vendas de mentoria/video.m4a
+[04:43:40] [INFO]   Transcrevendo: video.m4a → video.md
+[05:20:17] [INFO]   OK: video.md (20277 palavras, 2197s)
+[05:20:17] [INFO] 
+[10/73] Mentoria 50k - Encontros ao Vivo/10 - Do zero aos 170k em 6 meses/Nq7auHE4H9U - Mentoria Mentoria 50k.m4a
+[05:20:17] [INFO]   Transcrevendo: Nq7auHE4H9U - Mentoria Mentoria 50k.m4a → Nq7auHE4H9U - Mentoria Mentoria 50k.md
+[05:35:49] [INFO]   OK: Nq7auHE4H9U - Mentoria Mentoria 50k.md (9069 palavras, 933s)
+[05:35:49] [INFO] 
+[11/73] Mentoria 50k - Encontros ao Vivo/11 - Gerenciamento de redes sociais Vini Pietro/neODQBLtDws - gerenciamento de redes sociais Vini Pietro.m4a
+[05:35:49] [INFO]   Transcrevendo: neODQBLtDws - gerenciamento de redes sociais Vini Pietro.m4a → neODQBLtDws - gerenciamento de redes sociais Vini Pietro.md
+[05:55:10] [INFO]   OK: neODQBLtDws - gerenciamento de redes sociais Vini Pietro.md (11810 palavras, 1161s)
+[05:55:10] [INFO] 
+[12/73] Mentoria 50k - Encontros ao Vivo/11 - Gerenciamento de redes sociais Vini Pietro/video.m4a
+[05:55:10] [INFO]   Transcrevendo: video.m4a → video.md
+[06:17:27] [INFO]   OK: video.md (12465 palavras, 1337s)
+[06:17:27] [INFO] 
+[13/73] Mentoria 50k - Encontros ao Vivo/12 - Script de vendas/NCldsI54bpA - Estou ao vivo - SCRIPT DE VENDAS.m4a
+[06:17:27] [INFO]   Transcrevendo: NCldsI54bpA - Estou ao vivo - SCRIPT DE VENDAS.m4a → NCldsI54bpA - Estou ao vivo - SCRIPT DE VENDAS.md
+[07:01:23] [INFO]   OK: NCldsI54bpA - Estou ao vivo - SCRIPT DE VENDAS.md (27206 palavras, 2636s)
+[07:01:23] [INFO] 
+[14/73] Mentoria 50k - Encontros ao Vivo/12 - Script de vendas/video.m4a
+[07:01:23] [INFO]   Transcrevendo: video.m4a → video.md
+[07:47:12] [INFO]   OK: video.md (27904 palavras, 2749s)
+[07:47:12] [INFO] 
+[15/73] Mentoria 50k - Encontros ao Vivo/13 - Posicionamento high ticket/GC3RCPtnH_U - Mentoria 17 03 2024 - Posicionamento high ticket.m4a
+[07:47:12] [INFO]   Transcrevendo: GC3RCPtnH_U - Mentoria 17 03 2024 - Posicionamento high ticket.m4a → GC3RCPtnH_U - Mentoria 17 03 2024 - Posicionamento high ticket.md
+[08:46:19] [INFO]   OK: GC3RCPtnH_U - Mentoria 17 03 2024 - Posicionamento high ticket.md (34748 palavras, 3547s)
+[08:46:19] [INFO] 
+[16/73] Mentoria 50k - Encontros ao Vivo/13 - Posicionamento high ticket/video.m4a
+[08:46:19] [INFO]   Transcrevendo: video.m4a → video.md

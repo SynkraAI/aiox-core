@@ -1,0 +1,81 @@
+name: seo
+display_name: "SEO Expert Squad"
+version: "1.0.0"
+domain: seo
+description: "Post-design SEO optimization squad. Evaluates websites (0-100 score), optimizes all SEO factors, and shows before/after improvement. Works like Yoast/RankMath but as intelligent agents."
+
+keywords:
+  - seo
+  - search engine optimization
+  - meta tags
+  - structured data
+  - schema markup
+  - core web vitals
+  - on-page seo
+  - technical seo
+  - e-e-a-t
+  - generative engine optimization
+
+tier_structure:
+  tier_0:
+    role: "Diagnosis & Orchestration"
+    agents: ["seo-chief"]
+  tier_1:
+    role: "Core Specialists"
+    agents: ["on-page-optimizer", "technical-auditor", "schema-architect"]
+  tier_2:
+    role: "Advanced Specialists"
+    agents: ["content-quality-assessor", "performance-engineer", "ai-visibility-optimizer", "site-architect"]
+
+scoring_system:
+  total: 100
+  categories:
+    on_page_seo:
+      weight: 25
+      agent: "on-page-optimizer"
+      checks: "Meta tags, titles, headings, keyword placement, readability, content length"
+    technical_seo:
+      weight: 20
+      agent: "technical-auditor"
+      checks: "Crawlability, indexability, broken links, canonicals, redirects, sitemaps, robots.txt"
+    schema_structured_data:
+      weight: 15
+      agent: "schema-architect"
+      checks: "JSON-LD presence, validation, rich result eligibility, entity linking"
+    content_quality:
+      weight: 15
+      agent: "content-quality-assessor"
+      checks: "E-E-A-T signals, trust markers, content depth, topical authority"
+    performance:
+      weight: 10
+      agent: "performance-engineer"
+      checks: "LCP, INP, CLS, Lighthouse score, image optimization"
+    ai_visibility:
+      weight: 10
+      agent: "ai-visibility-optimizer"
+      checks: "Machine readability, GEO signals, llms.txt, citation worthiness"
+    site_architecture:
+      weight: 5
+      agent: "site-architect"
+      checks: "URL structure, internal linking, navigation hierarchy, content siloing"
+
+  grade_scale:
+    excellent: { min: 90, label: "A+" }
+    great: { min: 80, label: "A" }
+    good: { min: 70, label: "B" }
+    needs_work: { min: 50, label: "C" }
+    poor: { min: 30, label: "D" }
+    critical: { min: 0, label: "F" }
+
+workflow:
+  primary: "wf-seo-full-cycle.yaml"
+  phases:
+    - "Phase 1: AUDIT - Evaluate current SEO, score 0-100"
+    - "Phase 2: OPTIMIZE - Apply all fixes and improvements"
+    - "Phase 3: REPORT - Re-evaluate, show before/after improvement"
+
+entry_points:
+  full_cycle: "*seo-audit-optimize"
+  audit_only: "*seo-evaluate"
+  optimize_only: "*seo-optimize"
+  report_only: "*seo-report"

@@ -1,0 +1,794 @@
+# Squad Blueprint: Offer Architecture (Money Models Framework)
+# Extraído de: $100M Modelos
+# Versão: 1.0
+# Data: 2026-02-10
+
+metadata:
+  name: offer-architecture-squad
+  version: "1.0"
+  domain: "Sales & Revenue Optimization"
+  source: "$100M Modelos (Alex Hormozi)"
+  sop_reference: "offer-architecture-sop.md"
+
+# ============================================================================
+# AGENTS
+# ============================================================================
+agents:
+  # --------------------------------------------------------------------------
+  # AGENT 1: Attraction Offer Architect
+  # --------------------------------------------------------------------------
+  - id: attraction-offer-architect
+    name: "Attraction Offer Architect"
+    role: "Designs offers that transform strangers into customers"
+    description: |
+      Especialista em criar ofertas de atração que geram leads e convertem
+      em clientes cobrindo CAC + COGs em 30 dias ou menos.
+
+    capabilities:
+      - "Design 5 tipos de ofertas de atração"
+      - "Criar critérios para 'Ganhe Seu Dinheiro de Volta'"
+      - "Estruturar ofertas isca vs premium"
+      - "Configurar ofertas 'Compre X, Ganhe Y Grátis'"
+      - "Desenvolver ofertas 'Pague Menos Agora'"
+      - "Calcular precificação para cobertura de CAC"
+
+    knowledge_sources:
+      - "Seção 2: Ofertas de Atração"
+      - "Framework Completo: Estágio 1 - Get Money"
+
+    decision_rules:
+      - rule: "DR-001"
+        description: "Ofertas de atração cobrem CAC + COGs em 30 dias"
+      - rule: "DR-002"
+        description: "Gratuito e desconto são intercambiáveis"
+      - rule: "DR-003"
+        description: "Mais coisas grátis > menos coisas grátis"
+
+    input_schema:
+      type: object
+      required: [business_type, target_audience, current_cac, product_description]
+      properties:
+        business_type:
+          type: string
+          enum: [service, local_business, physical_product, digital_product]
+        target_audience:
+          type: string
+        current_cac:
+          type: number
+        product_description:
+          type: string
+        desired_offer_type:
+          type: string
+          enum: [money_back, sweepstakes, bait_offer, buy_x_get_y, pay_less_now]
+
+    output_schema:
+      type: object
+      properties:
+        offer_name:
+          type: string
+        offer_type:
+          type: string
+        pricing_structure:
+          type: object
+        qualification_criteria:
+          type: array
+        expected_conversion:
+          type: number
+        30_day_profit_projection:
+          type: number
+        implementation_script:
+          type: string
+
+  # --------------------------------------------------------------------------
+  # AGENT 2: Upsell Strategist
+  # --------------------------------------------------------------------------
+  - id: upsell-strategist
+    name: "Upsell Strategist"
+    role: "Maximizes profit per customer through strategic upsells"
+    description: |
+      Especialista em identificar problemas criados por soluções e oferecer
+      upsells no momento de maior necessidade, multiplicando valor por cliente.
+
+    capabilities:
+      - "Mapear problema-solução para identificar upsells"
+      - "Criar scripts de upsell clássico"
+      - "Desenvolver menu upsells (4 táticas)"
+      - "Estruturar anchor upsells"
+      - "Implementar rollover upsells"
+      - "Calcular precificação de upsells"
+
+    knowledge_sources:
+      - "Seção 3: Ofertas de Upsell"
+      - "Framework Completo: Estágio 2 - More Money"
+
+    decision_rules:
+      - rule: "DR-004"
+        description: "Toda solução cria próximo problema = próximo upsell"
+      - rule: "DR-005"
+        description: "Ofereça upsells mais lucrativos primeiro"
+      - rule: "DR-006"
+        description: "Upsell no momento de maior necessidade"
+      - rule: "DR-007"
+        description: "BAMFAM - sempre agende próximo encontro"
+
+    input_schema:
+      type: object
+      required: [main_offer, problems_created, available_products]
+      properties:
+        main_offer:
+          type: string
+        problems_created:
+          type: array
+          items:
+            type: string
+        available_products:
+          type: array
+        upsell_type:
+          type: string
+          enum: [classic, menu, anchor, rollover]
+        current_ltv:
+          type: number
+
+    output_schema:
+      type: object
+      properties:
+        upsell_sequence:
+          type: array
+        scripts:
+          type: object
+        expected_take_rate:
+          type: number
+        ltv_multiplier:
+          type: number
+        implementation_timing:
+          type: string
+
+  # --------------------------------------------------------------------------
+  # AGENT 3: Downsell Recovery Specialist
+  # --------------------------------------------------------------------------
+  - id: downsell-recovery-specialist
+    name: "Downsell Recovery Specialist"
+    role: "Transforms 'nos' into 'yeses' through strategic downsells"
+    description: |
+      Especialista em recuperar vendas perdidas através de downsells
+      estratégicos que mantêm valor enquanto ajustam termos ou recursos.
+
+    capabilities:
+      - "Aplicar 6 regras do downselling"
+      - "Estruturar downsell de plano de pagamento (7 passos)"
+      - "Criar trial com penalidade"
+      - "Desenvolver downsell de recursos"
+      - "Calcular breakeven de downsells"
+
+    knowledge_sources:
+      - "Seção 4: Ofertas de Downsell"
+      - "Framework Completo: Regras de Decisão"
+
+    decision_rules:
+      - rule: "DR-008"
+        description: "Não = não para ESTA oferta, não todas"
+      - rule: "DR-009"
+        description: "NUNCA baixe preço da mesma coisa"
+      - rule: "DR-010"
+        description: "Personalize, não pressione"
+      - rule: "DR-011"
+        description: "100 formas de oferecer > 100 produtos"
+
+    input_schema:
+      type: object
+      required: [rejected_offer, rejection_reason, customer_budget]
+      properties:
+        rejected_offer:
+          type: object
+        rejection_reason:
+          type: string
+          enum: [price, timing, features, trust, unclear]
+        customer_budget:
+          type: number
+        desire_score:
+          type: number
+          minimum: 1
+          maximum: 10
+        available_alternatives:
+          type: array
+
+    output_schema:
+      type: object
+      properties:
+        downsell_type:
+          type: string
+          enum: [payment_plan, trial_penalty, resource_reduction]
+        downsell_sequence:
+          type: array
+        scripts:
+          type: object
+        expected_recovery_rate:
+          type: number
+        final_offer_value:
+          type: number
+
+  # --------------------------------------------------------------------------
+  # AGENT 4: Continuity Architect
+  # --------------------------------------------------------------------------
+  - id: continuity-architect
+    name: "Continuity Architect"
+    role: "Builds recurring revenue through continuity offers"
+    description: |
+      Especialista em criar ofertas de continuidade que maximizam LTV
+      através de bônus, descontos e estruturas de compromisso.
+
+    capabilities:
+      - "Estruturar bônus de continuidade"
+      - "Calcular precificação continuidade vs independente"
+      - "Criar ofertas de taxa dispensada"
+      - "Desenvolver estratégias de retenção"
+      - "Otimizar churn por frequência de cobrança"
+
+    knowledge_sources:
+      - "Seção 5: Ofertas de Continuidade"
+      - "Framework Completo: Estágio 3 - Max Money"
+
+    decision_rules:
+      - rule: "DR-012"
+        description: "Bônus > primeiro pagamento em valor"
+      - rule: "DR-013"
+        description: "Taxa dispensada = 3-5x mensalidade"
+      - rule: "DR-014"
+        description: "Custo de sair > custo de ficar = retenção"
+
+    input_schema:
+      type: object
+      required: [monthly_price, available_bonuses, target_continuity_percentage]
+      properties:
+        monthly_price:
+          type: number
+        available_bonuses:
+          type: array
+        target_continuity_percentage:
+          type: number
+          minimum: 50
+          maximum: 90
+        commitment_length:
+          type: number
+        current_churn:
+          type: number
+
+    output_schema:
+      type: object
+      properties:
+        continuity_offer:
+          type: object
+        standalone_price:
+          type: number
+        waived_fee_structure:
+          type: object
+        expected_ltv:
+          type: number
+        projected_churn:
+          type: number
+
+  # --------------------------------------------------------------------------
+  # AGENT 5: Money Model Orchestrator
+  # --------------------------------------------------------------------------
+  - id: money-model-orchestrator
+    name: "Money Model Orchestrator"
+    role: "Integrates all offers into a complete money model"
+    description: |
+      Orquestra a integração dos 4 estágios em um modelo de dinheiro
+      completo, garantindo lucro em 30 dias e escalabilidade.
+
+    capabilities:
+      - "Integrar 4 estágios do modelo de dinheiro"
+      - "Calcular lucro de 30 dias"
+      - "Otimizar sequência de ofertas"
+      - "Identificar gargalos no funil"
+      - "Planejar evolução por trimestre"
+
+    knowledge_sources:
+      - "Seção 6: Faça seu Modelo de Dinheiro"
+      - "Framework Completo: Processo Sequencial"
+
+    decision_rules:
+      - rule: "DR-015"
+        description: "Aperfeiçoe uma oferta de cada vez"
+      - rule: "DR-016"
+        description: "Simples escala, sofisticado falha"
+      - rule: "DR-017"
+        description: "Medir em trimestres, não semanas"
+
+    input_schema:
+      type: object
+      required: [business_stage, current_metrics, available_offers]
+      properties:
+        business_stage:
+          type: string
+          enum: [pre_validation, stage_1, stage_2, stage_3, optimizing]
+        current_metrics:
+          type: object
+          properties:
+            cac:
+              type: number
+            ltv_30:
+              type: number
+            conversion_rate:
+              type: number
+            churn:
+              type: number
+        available_offers:
+          type: object
+
+    output_schema:
+      type: object
+      properties:
+        complete_money_model:
+          type: object
+        implementation_roadmap:
+          type: array
+        30_day_profit_calculation:
+          type: object
+        next_optimization:
+          type: string
+        quarterly_targets:
+          type: object
+
+# ============================================================================
+# EXECUTOR MATRIX
+# ============================================================================
+executor_matrix:
+  # Mapeamento de tarefas para tipo de executor
+  tasks:
+    # Estágio 1: Atração
+    - task: "select_attraction_offer_type"
+      cognitive_type: "judgment"
+      executor: "human"
+      rationale: "Decisão estratégica de posicionamento"
+
+    - task: "design_money_back_criteria"
+      cognitive_type: "synthesis"
+      executor: "hybrid"
+      rationale: "Criatividade + validação de métricas"
+
+    - task: "calculate_cac_coverage"
+      cognitive_type: "analysis"
+      executor: "agent"
+      rationale: "Cálculo matemático determinístico"
+
+    - task: "write_attraction_scripts"
+      cognitive_type: "synthesis"
+      executor: "agent"
+      rationale: "Baseado em templates validados"
+
+    # Estágio 2: Upsell
+    - task: "map_problem_solution_chain"
+      cognitive_type: "analysis"
+      executor: "hybrid"
+      rationale: "Análise requer conhecimento de domínio"
+
+    - task: "prioritize_upsells_by_profit"
+      cognitive_type: "analysis"
+      executor: "agent"
+      rationale: "Ordenação por métricas"
+
+    - task: "create_menu_upsell_sequence"
+      cognitive_type: "synthesis"
+      executor: "agent"
+      rationale: "Template estruturado"
+
+    - task: "design_anchor_pricing"
+      cognitive_type: "judgment"
+      executor: "human"
+      rationale: "Percepção de mercado necessária"
+
+    # Estágio 3: Downsell
+    - task: "assess_rejection_reason"
+      cognitive_type: "judgment"
+      executor: "human"
+      rationale: "Leitura de contexto em tempo real"
+
+    - task: "select_downsell_path"
+      cognitive_type: "judgment"
+      executor: "hybrid"
+      rationale: "Árvore de decisão + julgamento"
+
+    - task: "generate_payment_plan_options"
+      cognitive_type: "analysis"
+      executor: "agent"
+      rationale: "Cálculos determinísticos"
+
+    - task: "create_trial_penalty_structure"
+      cognitive_type: "synthesis"
+      executor: "agent"
+      rationale: "Template com parâmetros"
+
+    # Estágio 4: Continuidade
+    - task: "calculate_continuity_vs_standalone_pricing"
+      cognitive_type: "analysis"
+      executor: "agent"
+      rationale: "Fórmula documentada"
+
+    - task: "design_bonus_stack"
+      cognitive_type: "synthesis"
+      executor: "hybrid"
+      rationale: "Criatividade + constraints de custo"
+
+    - task: "structure_waived_fee_offer"
+      cognitive_type: "synthesis"
+      executor: "agent"
+      rationale: "Template estruturado"
+
+    - task: "optimize_billing_frequency"
+      cognitive_type: "analysis"
+      executor: "agent"
+      rationale: "Dados de churn documentados"
+
+    # Orquestração
+    - task: "integrate_money_model"
+      cognitive_type: "synthesis"
+      executor: "hybrid"
+      rationale: "Visão sistêmica + cálculos"
+
+    - task: "identify_funnel_bottleneck"
+      cognitive_type: "analysis"
+      executor: "agent"
+      rationale: "Comparação com benchmarks"
+
+    - task: "plan_quarterly_evolution"
+      cognitive_type: "judgment"
+      executor: "human"
+      rationale: "Decisão estratégica de negócio"
+
+# ============================================================================
+# QUALITY GATES
+# ============================================================================
+quality_gates:
+  # Gate 1: Validação de Oferta de Atração
+  - id: "QG-ATTRACTION"
+    name: "Attraction Offer Validation"
+    stage: "post_stage_1"
+    criteria:
+      - criterion: "CAC coverage in 30 days"
+        metric: "30_day_profit >= CAC"
+        threshold: ">= 0"
+        measurement: "Lucro 30 dias calculado"
+
+      - criterion: "Conversion rate acceptable"
+        metric: "conversion_rate"
+        threshold: ">= 10%"
+        measurement: "Leads → Clientes"
+
+      - criterion: "Scripts validated"
+        metric: "script_test_count"
+        threshold: ">= 10 clientes"
+        measurement: "Testes reais"
+
+    actions_on_fail:
+      - "Revisar critérios de qualificação"
+      - "Ajustar precificação"
+      - "Testar tipo alternativo de oferta"
+
+  # Gate 2: Validação de Upsell
+  - id: "QG-UPSELL"
+    name: "Upsell Effectiveness Validation"
+    stage: "post_stage_2"
+    criteria:
+      - criterion: "Upsell take rate"
+        metric: "upsell_acceptance"
+        threshold: ">= 30%"
+        measurement: "Clientes → Upsell"
+
+      - criterion: "LTV multiplier"
+        metric: "ltv_30_days / initial_purchase"
+        threshold: ">= 2x"
+        measurement: "Multiplicação de valor"
+
+      - criterion: "Problem-solution mapping"
+        metric: "problems_mapped"
+        threshold: ">= 3"
+        measurement: "Upsells identificados"
+
+    actions_on_fail:
+      - "Revisar timing do upsell"
+      - "Verificar relevância do problema"
+      - "Testar scripts alternativos"
+
+  # Gate 3: Validação de Downsell
+  - id: "QG-DOWNSELL"
+    name: "Downsell Recovery Validation"
+    stage: "post_stage_3"
+    criteria:
+      - criterion: "Recovery rate"
+        metric: "recovered_sales / total_rejections"
+        threshold: ">= 40%"
+        measurement: "Nãos → Sins"
+
+      - criterion: "Total conversion"
+        metric: "total_conversion_rate"
+        threshold: ">= 50%"
+        measurement: "Leads → Qualquer compra"
+
+      - criterion: "Trust maintained"
+        metric: "refund_rate"
+        threshold: "<= 5%"
+        measurement: "Reembolsos pós-downsell"
+
+    actions_on_fail:
+      - "Verificar regras de downselling"
+      - "Ajustar planos de pagamento"
+      - "Revisar downsell de recursos"
+
+  # Gate 4: Validação de Continuidade
+  - id: "QG-CONTINUITY"
+    name: "Continuity Offer Validation"
+    stage: "post_stage_4"
+    criteria:
+      - criterion: "Continuity adoption"
+        metric: "continuity_percentage"
+        threshold: ">= 60%"
+        measurement: "Clientes em recorrência"
+
+      - criterion: "Monthly churn"
+        metric: "monthly_churn_rate"
+        threshold: "<= 5%"
+        measurement: "Cancelamentos mensais"
+
+      - criterion: "Bonus effectiveness"
+        metric: "bonus_value / first_payment"
+        threshold: ">= 1.5x"
+        measurement: "Valor percebido"
+
+    actions_on_fail:
+      - "Aumentar valor dos bônus"
+      - "Ajustar precificação standalone"
+      - "Implementar taxa dispensada"
+
+  # Gate 5: Validação de Modelo Completo
+  - id: "QG-COMPLETE"
+    name: "Complete Money Model Validation"
+    stage: "model_complete"
+    criteria:
+      - criterion: "30-day profitability"
+        metric: "30_day_profit"
+        threshold: "> 0"
+        measurement: "Lucro de 30 dias"
+
+      - criterion: "LTV to CAC ratio"
+        metric: "ltv_30 / cac"
+        threshold: ">= 3x"
+        measurement: "Retorno sobre aquisição"
+
+      - criterion: "Scalability"
+        metric: "operational_capacity"
+        threshold: ">= 2x current"
+        measurement: "Capacidade de escala"
+
+      - criterion: "Model documentation"
+        metric: "documentation_complete"
+        threshold: "100%"
+        measurement: "Scripts e processos"
+
+    actions_on_fail:
+      - "Identificar gargalo principal"
+      - "Otimizar estágio com pior performance"
+      - "Considerar ajuste de preços"
+
+# ============================================================================
+# WORKFLOWS
+# ============================================================================
+workflows:
+  # Workflow Principal: Construção de Money Model
+  - id: "build-money-model"
+    name: "Build Complete Money Model"
+    description: "Construção sequencial de modelo de dinheiro em 4 estágios"
+
+    stages:
+      - stage: 1
+        name: "Get Money"
+        agent: "attraction-offer-architect"
+        duration: "4-12 semanas"
+        outputs:
+          - "Oferta de atração validada"
+          - "Scripts de conversão"
+          - "CAC documentado"
+        quality_gate: "QG-ATTRACTION"
+
+      - stage: 2
+        name: "More Money"
+        agent: "upsell-strategist"
+        duration: "4-8 semanas"
+        outputs:
+          - "Sequência de upsells"
+          - "Menu upsell configurado"
+          - "Scripts de upsell"
+        quality_gate: "QG-UPSELL"
+
+      - stage: 3
+        name: "Recover Money"
+        agent: "downsell-recovery-specialist"
+        duration: "4-8 semanas"
+        outputs:
+          - "Processo de downsell (7 passos)"
+          - "Trial com penalidade"
+          - "Downsells de recursos"
+        quality_gate: "QG-DOWNSELL"
+
+      - stage: 4
+        name: "Max Money"
+        agent: "continuity-architect"
+        duration: "4-12 semanas"
+        outputs:
+          - "Oferta de continuidade"
+          - "Precificação otimizada"
+          - "Taxa dispensada"
+        quality_gate: "QG-CONTINUITY"
+
+      - stage: 5
+        name: "Integration"
+        agent: "money-model-orchestrator"
+        duration: "2-4 semanas"
+        outputs:
+          - "Modelo completo integrado"
+          - "Dashboard de métricas"
+          - "Roadmap de otimização"
+        quality_gate: "QG-COMPLETE"
+
+  # Workflow de Otimização
+  - id: "optimize-money-model"
+    name: "Optimize Existing Money Model"
+    description: "Otimização trimestral de modelo existente"
+
+    steps:
+      - step: 1
+        name: "Audit Current Performance"
+        agent: "money-model-orchestrator"
+        action: "Analisar métricas atuais vs benchmarks"
+
+      - step: 2
+        name: "Identify Bottleneck"
+        agent: "money-model-orchestrator"
+        action: "Encontrar estágio com pior performance"
+
+      - step: 3
+        name: "Optimize Specific Stage"
+        agent: "[agent do estágio identificado]"
+        action: "Aplicar melhorias específicas"
+
+      - step: 4
+        name: "Validate Improvement"
+        agent: "money-model-orchestrator"
+        action: "Medir impacto das mudanças"
+
+# ============================================================================
+# METRICS & BENCHMARKS
+# ============================================================================
+metrics:
+  leading_indicators:
+    daily:
+      - name: "offers_made"
+        target: ">= 10"
+      - name: "show_up_rate"
+        target: ">= 80%"
+      - name: "stage_1_conversion"
+        target: ">= 25%"
+      - name: "first_upsell_acceptance"
+        target: ">= 30%"
+
+  lagging_indicators:
+    monthly:
+      - name: "cac"
+        target: "< $500"
+      - name: "ltv_30_days"
+        target: "> $1,500"
+      - name: "30_day_profit"
+        target: "> $1,000"
+      - name: "monthly_churn"
+        target: "< 5%"
+
+  benchmarks:
+    performance_levels:
+      bad: "30_day_profit < 0"
+      average: "30_day_profit = 1x CAC"
+      good: "30_day_profit = 2x CAC"
+      excellent: "30_day_profit >= 3x CAC"
+
+    churn_by_billing:
+      monthly: "10.7%"
+      quarterly: "5.0%"
+      annual: "2.0%"
+
+    conversion_rates:
+      cold_offer: "10-25%"
+      first_upsell: "30-50%"
+      downsell_recovery: "40-60%"
+      continuity_adoption: "60-80%"
+
+# ============================================================================
+# INTEGRATION
+# ============================================================================
+integration:
+  required_tools:
+    - name: "CRM"
+      purpose: "Tracking de pipeline e automação"
+      examples: ["ActiveCampaign", "HubSpot"]
+
+    - name: "Payment Processor"
+      purpose: "Processamento de planos e recorrência"
+      requirements: ["Suporte a assinaturas", "Retry automático"]
+
+    - name: "Attribution Tracking"
+      purpose: "Medir ROI real de publicidade"
+      examples: ["Hyros"]
+
+    - name: "Journey Mapping"
+      purpose: "Visualizar fluxo do cliente"
+      examples: ["Miro", "Whimsical"]
+
+  related_sops:
+    - "pricing-framework-sop.md"
+    - "[INFERRED] sales-scripts-sop.md"
+    - "[INFERRED] customer-journey-sop.md"
+
+# ============================================================================
+# IMPLEMENTATION NOTES
+# ============================================================================
+implementation:
+  timeline:
+    stage_1: "1-3 meses para estabilizar"
+    stage_2: "2-4 meses para otimizar"
+    stage_3: "1-2 meses para implementar"
+    stage_4: "3-6 meses para escalar"
+    complete_model: "6-12 meses funcionando suave"
+
+  critical_rules:
+    - "Aperfeiçoe uma oferta de cada vez"
+    - "Meça em trimestres, não semanas"
+    - "Simples escala, sofisticado falha"
+    - "Construir certo > Construir rápido"
+
+  red_flags:
+    - condition: "Conversão < 10%"
+      diagnosis: "Oferta não resolve problema real"
+    - condition: "Upsell < 20%"
+      diagnosis: "Timing errado ou irrelevante"
+    - condition: "Downsell < 30%"
+      diagnosis: "Ainda muito caro ou complexo"
+    - condition: "Churn > 10%"
+      diagnosis: "Expectativas desalinhadas"
+    - condition: "Lucro negativo"
+      diagnosis: "Aumentar preços ou cortar custos"
+
+# ============================================================================
+# SOURCE REFERENCES
+# ============================================================================
+source_references:
+  primary_source: "$100M Modelos (Alex Hormozi)"
+  sections_used:
+    - "Framework Completo de Implementação"
+    - "Seção 1: O que é um Modelo de Dinheiro?"
+    - "Seção 2: Ofertas de Atração"
+    - "Seção 3: Ofertas de Upsell"
+    - "Seção 4: Ofertas de Downsell"
+    - "Seção 5: Ofertas de Continuidade"
+    - "Seção 6: Faça seu Modelo de Dinheiro"
+
+  key_frameworks:
+    - name: "GMMM (Get Money, More Money, Max Money)"
+      source: "Framework Completo"
+    - name: "4 Tipos de Ofertas"
+      source: "Seção 1"
+    - name: "Matriz de Ofertas 4x3"
+      source: "Framework Completo"
+    - name: "7 Passos de Downsell"
+      source: "Seção 4"
+    - name: "Precificação Continuidade"
+      source: "Seção 5"
+
+  case_studies:
+    - name: "Gym Launch"
+      result: "$0 → $4.4M/mês em 20 meses"
+    - name: "Locadora de Carros"
+      result: "5x ticket ($19 → $100)"
+    - name: "Boot Factory"
+      result: "5x volume, mesma margem"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

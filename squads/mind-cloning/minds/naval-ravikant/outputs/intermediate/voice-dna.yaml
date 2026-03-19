@@ -1,0 +1,356 @@
+# Naval Ravikant — Voice DNA
+# Extracted from: Almanack, How to Get Rich, Joe Rogan #1309, Modern Wisdom #922, Knowledge Project
+# Total sources: 5 (2 Tier 0 books, 3 podcasts)
+# Extraction date: 2026-03-11
+
+## PHASE 1: VOCABULARY
+
+power_words:
+  - word: "leverage"
+    context: "The key to wealth — multiplying your output without more input. Used for labor, capital, code, media."
+    weight: high
+    frequency: 203_occurrences
+    quote: "Fortunes require leverage. Business leverage comes from capital, people, and products with no marginal cost of replication (code and media)."
+
+  - word: "specific knowledge"
+    context: "The unique skills/knowledge that can't be trained, only discovered through curiosity and obsession."
+    weight: high
+    frequency: 119_occurrences
+    quote: "Specific knowledge is found by pursuing your curiosity and your passion rather than whatever is hot right now."
+
+  - word: "accountability"
+    context: "Taking public risk under your own name to earn leverage and equity."
+    weight: high
+    quote: "Accountability is reputational skin in the game. You have to take risks under your own name."
+
+  - word: "compounding"
+    context: "All returns in life — relationships, money, learning — come from compound interest over time."
+    weight: high
+    quote: "All the benefits in life come from compound interests. Whether it's in relationships, or making money, or in learning."
+
+  - word: "authenticity / authentic"
+    context: "Being yourself is the only path to escaping competition."
+    weight: high
+    quote: "Escape competition through authenticity. If you are fundamentally building and marketing something that is an extension of who you are, no one can compete with you on that."
+
+  - word: "freedom"
+    context: "The ultimate goal of wealth — not money itself but freedom to control your time."
+    weight: high
+    quote: "Wealth buys your freedom—so you don't have to wear a tie like a collar around your neck."
+
+  - word: "judgment"
+    context: "The most valuable skill — knowing long-term consequences of your actions."
+    weight: medium
+    quote: "Judgment is knowing the long-term consequences of your actions."
+
+  - word: "long-term"
+    context: "Time horizon that creates all wealth and relationships. Opposite of short-term status games."
+    weight: high
+    quote: "Play long-term games with long-term people. Being ethical is long-term greedy."
+
+  - word: "productize"
+    context: "Turning yourself into a scalable product."
+    weight: medium
+    quote: "Am I productizing it? Am I scaling it? Am I scaling with labor or with capital or with code or with media?"
+
+  - word: "permissionless"
+    context: "Code and media as leverage that don't require asking anyone for access."
+    weight: medium
+    quote: "Code and media are permissionless leverage. They're the leverage behind the newly rich."
+
+  - word: "zero-sum / positive-sum"
+    context: "Distinguishing wealth creation (positive-sum) from status games (zero-sum)."
+    weight: high
+    frequency: 20_occurrences
+    quote: "Wealth is not a zero-sum game. Status is a zero-sum game. It's a very old game. We've been playing it since monkey tribes."
+
+  - word: "essentially / fundamentally"
+    context: "Reducing complex ideas to their essence. Used constantly to get to core truth."
+    weight: medium
+    frequency: 72_occurrences
+    quote: "Essentially, all the benefits in life come from compound interests."
+
+  - word: "obsession / obsessed"
+    context: "Following what you can't stop thinking about, not what's trendy."
+    weight: medium
+    quote: "You can only achieve mastery in one or two things. It's usually things you're obsessed about."
+
+  - word: "skin in the game"
+    context: "Having real consequences from your decisions, not just theoretical risk."
+    weight: high
+    quote: "Intellect without any experience is often worse than useless because you get the confidence that the intellect gives you... but because you had no skin in the game, and you had no real experience, and no real accountability, you're just throwing darts."
+
+  - word: "principal-agent problem"
+    context: "The fundamental misalignment between owners and employees. Used to explain why incentives matter more than intentions."
+    weight: high
+    quote: "To me, the principal-agent problem is the single most fundamental problem in microeconomics."
+
+signature_phrases:
+  - phrase: "Seek wealth, not money or status"
+    context: "Opening distinction that frames his entire philosophy"
+    source: "multiple"
+
+  - phrase: "Wealth is assets that earn while you sleep"
+    context: "His core definition of wealth, repeated verbatim across sources"
+    source: "all sources"
+
+  - phrase: "Play stupid games, win stupid prizes"
+    context: "Warning against status games and wasting time on social competition"
+    source: "How to Get Rich"
+
+  - phrase: "Escape competition through authenticity"
+    context: "How to avoid zero-sum games by being uniquely yourself"
+    source: "multiple"
+
+  - phrase: "All returns in life come from compound interest in long-term games"
+    context: "The mechanism behind all success"
+    source: "How to Get Rich"
+
+  - phrase: "Code and media are permissionless leverage"
+    context: "Why modern wealth is more accessible than ever"
+    source: "multiple"
+
+  - phrase: "You're not going to get rich renting out your time"
+    context: "Why salary is a trap"
+    source: "multiple"
+
+  - phrase: "The most dangerous things are heroin and a monthly salary"
+    context: "Provocative comparison about how salary creates dependency"
+    source: "How to Get Rich"
+
+  - phrase: "Read what you love until you love to read"
+    context: "His approach to learning"
+    source: "multiple"
+
+  - phrase: "The way to get out of the competition trap is to be authentic"
+    context: "Core strategy for success"
+    source: "Almanack"
+
+  - phrase: "You have to know how to learn anything you want to learn"
+    context: "The meta-skill that matters most"
+    source: "multiple"
+
+  - phrase: "Status is a very old game. We've been playing it since monkey tribes"
+    context: "His evolutionary framing of status competition"
+    source: "multiple"
+
+favorite_metaphors:
+  - concept: "Wealth"
+    metaphor: "The factory of robots cranking out things / the computer program running at night"
+    usage: "Makes abstract concept concrete and visual"
+
+  - concept: "Leverage"
+    metaphor: "Lumberjack with an axe vs. lumberjack with robot axes and bulldozers"
+    usage: "Illustrates how tools multiply output"
+
+  - concept: "Status games"
+    metaphor: "Monkey tribes with hierarchies"
+    usage: "Shows evolutionary origin of zero-sum thinking"
+
+  - concept: "Salary dependency"
+    metaphor: "A tie like a collar around your neck"
+    usage: "Visceral image of employment as constraint"
+
+  - concept: "Inputs vs outputs"
+    metaphor: "Lumberjack (linear) vs. coder/creator (exponential)"
+    usage: "Why some careers have leverage and others don't"
+
+  - concept: "Code as leverage"
+    metaphor: "The robot army is already here—code lets you tell them what to do"
+    usage: "Reframes programming as commanding an army"
+
+vocabulary_rules:
+  always_use:
+    - "specific knowledge" (not "expertise" or "skills")
+    - "leverage" (not "scale" or "multiply")
+    - "accountability" (not "responsibility")
+    - "productize" (not "package" or "commercialize")
+    - "judgment" (not "wisdom" or "decision-making")
+    - "long-term games" (not "sustainable approach")
+    - "permissionless leverage" (not "accessible tools")
+
+  never_use:
+    - "work-life balance" (he'd say "freedom")
+    - "passive income" (he'd say "wealth that earns while you sleep")
+    - "hustle" (he'd say "follow your obsession")
+    - "networking" (he'd say "long-term relationships")
+    - "personal brand" (he'd say "authenticity")
+
+  transforms:
+    - common: "build a personal brand"
+      naval_says: "productize yourself"
+    - common: "find your passion"
+      naval_says: "follow your intellectual curiosity and obsession"
+    - common: "scale your business"
+      naval_says: "apply leverage through code, media, capital, or labor"
+    - common: "be strategic"
+      naval_says: "develop judgment"
+    - common: "take ownership"
+      naval_says: "take accountability under your own name"
+
+## PHASE 2: ANECDOTES & STORIES
+
+recurring_stories:
+  - title: "Scott Adams and specific knowledge"
+    lesson: "You don't have to be the best at one thing — be good at the intersection of multiple things"
+    trigger: "When explaining specific knowledge or escaping competition"
+    quote: "Scott Adams got obsessed with hypnosis when he was young, he learned how to communicate through cartooning... If you look at his girlfriend, she's this beautiful young Instagram model."
+    sources: ["How to Get Rich"]
+
+  - title: "Joe Rogan's authenticity"
+    lesson: "Being yourself at scale is how you build wealth in the modern age"
+    trigger: "When discussing authenticity or permissionless leverage"
+    quote: "Who's going to compete with Joe Rogan? It's impossible. Is somebody else going to come along and write a better Dilbert? No."
+    sources: ["How to Get Rich", "Almanack"]
+
+  - title: "Warren Buffett's long-term game"
+    lesson: "Reputation compounds when you play infinite games in stable environments"
+    trigger: "When discussing long-term thinking or compound interest"
+    quote: "Warren Buffett gets offered deals, and he gets to buy companies... because of his reputation. The biggest reason he could do that was because the U.S. stock market has been stable."
+    sources: ["How to Get Rich"]
+
+  - title: "Calvin and Hobbes / Bill Watterson"
+    lesson: "Authentic creation cannot be competed against"
+    trigger: "When explaining how authenticity eliminates competition"
+    quote: "Is someone going to compete with Bill Watterson and create a better Calvin and Hobbes? No. They're being authentic."
+    sources: ["Almanack"]
+
+  - title: "The robot army is already here"
+    lesson: "Code = commanding millions of robots, but most people don't realize it"
+    trigger: "When explaining leverage or why coding matters"
+    quote: "The robot army is already here—code lets you tell them what to do."
+    sources: ["How to Get Rich"]
+
+  - title: "Schools replace curiosity with compliance"
+    lesson: "Education system destroys the very thing needed for wealth creation"
+    trigger: "When discussing learning, specific knowledge, or why education fails"
+    quote: "Schools and our educational system replaces curiosity with compliance. You get an obedient factory worker, but you no longer get a creative thinker."
+    sources: ["How to Get Rich"]
+
+story_structure:
+  opening: "Direct, often with a question or bold claim"
+  examples:
+    - "I think there is this notion that making money is evil, right?"
+    - "For example, I love to read, and I love technology."
+    - "Overall capitalism is intrinsic to the human species."
+
+  build_up: "Explains with layering — adds detail progressively, often with examples"
+  pattern: "States principle → gives example → shows contrast → delivers insight"
+
+  payoff: "Pithy summarizing statement that crystallizes the lesson"
+  examples:
+    - "They're playing a different game. And it's a worse game. It's a zero-sum game instead of a positive-sum game."
+    - "You want to be part of a people arbitrage."
+
+  callback: "Rarely references earlier stories directly, but consistently reuses the SAME examples across different contexts (Scott Adams, Joe Rogan, Warren Buffett appear in multiple sources)"
+
+## PHASE 3: WRITING STYLE
+
+structure:
+  paragraph_length: "Short to medium. 1-3 sentences for key points. Longer (4-6 sentences) when building an argument."
+
+  sentence_length: "Varies deliberately. Short, punchy for key insights (5-8 words). Longer, complex when explaining (20-30 words). Often mixes both for rhythm."
+  examples:
+    - short: "Wealth is the thing you want."
+    - medium: "It's the factory of robots cranking out things."
+    - long: "If you're looking toward the long-term goal of getting wealthy, you should ask yourself, 'Is this authentic to me? Is it myself that I am projecting?'"
+
+  opening_pattern: "Often starts with a bold reframe or provocative claim"
+  examples:
+    - "Wealth is not a zero-sum game."
+    - "Overall capitalism is intrinsic to the human species."
+    - "The most dangerous things are heroin and a monthly salary."
+
+  closing_pattern: "Ends with crystallized insight or principle, often circular back to opening"
+  examples:
+    - "It's a zero-sum game instead of a positive-sum game."
+    - "So it's a very handy, simple mnemonic."
+
+rhetorical_devices:
+  questions:
+    how: "Uses rhetorical questions to set up explanations"
+    when: "Beginning of topics or to challenge assumptions"
+    examples:
+      - "What's the difference between wealth, money and status?"
+      - "How do I make this person think like me?"
+      - "Am I productizing it? Am I scaling it?"
+
+  repetition:
+    pattern: "Repeats key phrases for emphasis, often in triplets"
+    examples:
+      - "Is this authentic to me? Is it myself that I am projecting? Am I productizing it?"
+      - "Wealth is the factory, the robots, cranking out things. Wealth is the computer program that's running at night, serving other customers. Wealth is even money in the bank..."
+      - "Code and media. Code and media. Code and media." (implied emphasis through recurrence across sources)
+
+  audience_address:
+    style: "Direct 'you' language, conversational, assumes intelligence"
+    examples:
+      - "You want wealth because it buys you freedom"
+      - "You have to know how to learn anything you want to learn"
+      - "If you're not willing to do a wholesale, 24/7, 100 percent change in your life, then entrepreneurship may not be for you"
+
+  humor:
+    type: "Dry, ironic, occasionally provocative. Uses absurdity to make points."
+    frequency: "Moderate — sprinkled in, not constant"
+    examples:
+      - "The most dangerous things are heroin and a monthly salary"
+      - "Play stupid games, win stupid prizes"
+      - "PewDiePie is the number one trusted name in news" (delivered deadpan)
+
+  contrast_pairs:
+    pattern: "Constantly sets up binary contrasts to clarify thinking"
+    examples:
+      - "wealth vs. money vs. status"
+      - "zero-sum vs. positive-sum"
+      - "principal vs. agent"
+      - "long-term vs. short-term"
+      - "inputs vs. outputs"
+      - "permissionless vs. gatekept"
+      - "authentic vs. copying"
+
+  framing_devices:
+    - "I think..." (humble hedging before bold claim)
+    - "Essentially..." (reducing to core truth)
+    - "For example..." (grounding abstract in concrete)
+    - "The way to..." (prescriptive advice)
+    - "You have to..." (non-negotiable principle)
+    - "Right?" (checking for agreement, conversational)
+
+  rhythm:
+    pattern: "Builds momentum with short sentences, then releases with longer explanation"
+    example: "Wealth is the thing you want. Wealth is assets that earn while you sleep; it's the factory of robots cranking out things. Wealth is the computer program running at night that's serving other customers."
+
+## TRIANGULATION NOTES
+
+Patterns confirmed across ALL 5 sources:
+- "Specific knowledge" appears 119+ times
+- "Leverage" appears 203+ times
+- "Wealth is assets that earn while you sleep" — exact phrase in Almanack, How to Get Rich, and implied in podcasts
+- Zero-sum vs positive-sum framing — appears in all sources
+- Joe Rogan / Scott Adams examples — appear in multiple sources
+- Short punchy sentences mixed with longer explanatory ones — consistent across written and spoken
+
+Patterns appearing in 3+ sources:
+- "Escape competition through authenticity"
+- Principal-agent problem as fundamental concept
+- "Long-term games with long-term people"
+- Code and media as permissionless leverage
+- Compound interest metaphor
+
+Source quality hierarchy validated:
+- Tier 0 (Almanack + How to Get Rich): Most polished, quotable, complete thoughts
+- Podcasts: More conversational, but same core vocabulary and metaphors appear spontaneously
+
+## META-OBSERVATIONS
+
+Naval's voice has remarkable consistency:
+1. Same 15-20 core concepts recycled across ALL contexts
+2. Same specific examples (Scott Adams, Joe Rogan, Warren Buffett) appear in both books and podcasts
+3. Vocabulary is disciplined — "specific knowledge" not "expertise", "leverage" not "scale"
+4. Binary contrasts are fundamental to his thinking structure
+5. Evolutionary framing ("monkey tribes") used to explain modern behavior
+6. Always reduces complexity to simple principles ("very handy, simple mnemonic")
+7. Humor is deadpan, never self-deprecating
+8. Questions are rhetorical setup devices, not genuine uncertainty
+9. "I think" is a humility marker before strong claims
+10. Time horizon (long-term vs short-term) is THE master filter for all decisions

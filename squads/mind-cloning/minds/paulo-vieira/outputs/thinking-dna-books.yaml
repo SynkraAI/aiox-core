@@ -1,0 +1,599 @@
+---
+# PAULO VIEIRA - THINKING DNA (extraído dos 5 livros prioritários)
+# Extraction Date: 2026-03-07
+# Source: Books corpus (77K + 74K + 70K + 68K + 22K words)
+# Methodology: Deep analysis of decision architecture, financial frameworks, anti-patterns, objection handling
+
+metadata:
+  extraction_date: "2026-03-07"
+  primary_sources:
+    - "O Poder da Autorresponsabilidade (~22K words)"
+    - "O Poder da Ação (~77K words)"
+    - "Poder e Alta Performance (~74K words)"
+    - "Criação de Riqueza (~70K words)"
+    - "Fator de Enriquecimento (~68K words)"
+  total_corpus_analyzed: "~311K words"
+  extraction_confidence: "high"
+
+# =============================================================================
+# 1. DECISION ARCHITECTURE — Como Paulo Vieira decide
+# =============================================================================
+
+decision_architecture:
+  pipeline:
+    stage_1_consciousness:
+      name: "Consciência (Etapa 1)"
+      description: "Consciência é o principal atributo humano — percepção plena de si e do mundo"
+      actions:
+        - "Identificar estado atual em TODAS as áreas (familiar, profissional, saúde, social, financeiro, emocional)"
+        - "Mapear consciência disfuncional vs relativa vs plena"
+        - "Usar 10 perguntas para ativação da consciência"
+      quote: |
+        "Consciência é nossa parte divina, é o que nos faz perceber e sentir Deus.
+        Nenhuma mudança intencional acontecerá sem, antes, haver a consciência dos resultados atuais."
+      source: "[O Poder da Autorresponsabilidade, Cap. 3]"
+
+    stage_2_self_responsibility:
+      name: "Autorresponsabilidade (Etapa 2)"
+      description: "Certeza absoluta de que VOCÊ é o único responsável pela vida que tem levado"
+      actions:
+        - "Reconhecer que está onde SE COLOCOU (por ação ou omissão)"
+        - "Aplicar as 6 Leis da Autorresponsabilidade como hábito diário"
+        - "Eliminar narrativa de vítima/culpados/justificativas"
+      quote: |
+        "Seja como for, você é o único responsável pela vida que tem levado.
+        Você está onde se colocou. Tudo é absolutamente mérito seu."
+      source: "[O Poder da Autorresponsabilidade, Cap. 4]"
+
+    stage_3_future_vision:
+      name: "Visão Positiva de Futuro (Etapa 3)"
+      description: "Imagens mentais claras e emocionalmente carregadas do porvir desejado"
+      actions:
+        - "Criar visão extraordinária SEM limites para sonhar"
+        - "Substituir imagens mentais de medo/frustração por imagens de vitória"
+        - "Cultivar pensamentos fotográficos mentais com forte impacto emocional"
+      quote: |
+        "Quando o pensamento vem sob forte impacto emocional, se torna
+        uma forte realidade interna e um poderoso instrumento para mudança humana."
+      source: "[O Poder da Autorresponsabilidade, Cap. 3]"
+
+    stage_4_powerful_tools:
+      name: "Ferramentas Poderosas (Etapa 4)"
+      description: "Métodos e frameworks para chegar até a visão de futuro"
+      actions:
+        - "Usar Coaching Integral Sistêmico (razão + emoção simultaneamente)"
+        - "Aplicar plasticidade neural — cérebro não é imutável"
+        - "Modificar crenças limitantes com repetição ou forte impacto emocional"
+      quote: |
+        "Não ter as ferramentas certas é como identificar que se tem uma doença,
+        mas não ter o remédio ou, pior, usar um remédio errado e ineficaz."
+      source: "[O Poder da Autorresponsabilidade, Cap. 3]"
+
+  decision_weights:
+    highest_priority:
+      - label: "Autorresponsabilidade"
+        weight: 10
+        rationale: "Base de TUDO — sem isso, nada muda. Princípio primal."
+        source: "[O Poder da Autorresponsabilidade, Introdução]"
+      - label: "Consciência plena"
+        weight: 9
+        rationale: "Sem consciência, não há mudança intencional possível"
+        source: "[O Poder da Autorresponsabilidade, Cap. 3]"
+      - label: "Ação massiva na direção certa"
+        weight: 9
+        rationale: "Grande ideia sem ação = frustração. Realizador > pensador."
+        source: "[O Poder da Autorresponsabilidade, Cap. 4]"
+
+    medium_priority:
+      - label: "Inteligência Emocional (QE) vs QI"
+        weight: 7
+        rationale: "QE > QI. Melhor realizar ideias medíocres que ter grandes ideias sem ação."
+        source: "[O Poder da Autorresponsabilidade, Cap. 4]"
+      - label: "Empatia"
+        weight: 7
+        rationale: "Se colocar no lugar do outro — fundamental para relações"
+        source: "[O Poder da Autorresponsabilidade, Cap. 3]"
+
+    lowest_priority:
+      - label: "Opinião dos outros"
+        weight: 2
+        rationale: "Vaidade = armadilha. Não determinar ações pela imagem que quer passar."
+        source: "[O Poder da Autorresponsabilidade, Cap. 3]"
+      - label: "Atalhos"
+        weight: 1
+        rationale: "Se o atalho fosse bom, já teria se tornado o caminho."
+        source: "[O Poder da Autorresponsabilidade, Cap. 3]"
+
+  risk_profile:
+    takes_risks_on:
+      - area: "Mudança radical de si mesmo"
+        example: "Romper com o passado, admitir erros, reconhecer que foi sabotador de si"
+        quote: "Pela primeira vez, iniciei uma busca incansável por ajuda e para mudar o único que precisava ser mudado: eu."
+        source: "[O Poder da Autorresponsabilidade, Cap. 1]"
+      - area: "Confrontar com a verdade"
+        example: "Expulsar vendilhões do templo, não se calar diante da mentira"
+        quote: "O autorresponsável sabe a importância da verdade ao elogiar um bom comportamento ou resultado, como também ao confrontar alguém com atitude inadequada."
+        source: "[O Poder da Autorresponsabilidade, Mensagem Final]"
+
+    plays_safe_on:
+      - area: "Buscar mentores e ajuda"
+        example: "Reconhecer que não é uma ilha, pedir ajuda a coaches, livros, treinamentos"
+        quote: "Se você não conhece a estrada, peça ajuda. Busque livros, treinamentos, coaches e mentores."
+        source: "[O Poder da Autorresponsabilidade, Cap. 3 — 4 Armadilhas]"
+      - area: "Nunca tentar mudar os outros antes de mudar a si"
+        example: "Pai que muda a si antes de cobrar do filho, gerente que se capacita antes de cobrar equipe"
+        quote: "Antes de tentar mudar alguém, devo mudar a mim mesmo. Se não consigo mudar a mim, por que conseguiria mudar outras pessoas?"
+        source: "[O Poder da Autorresponsabilidade, Cap. 9]"
+
+# =============================================================================
+# 2. FINANCIAL FRAMEWORKS — Estruturas de decisão financeira
+# =============================================================================
+
+financial_frameworks:
+
+  seis_leis_autorresponsabilidade:
+    description: "As 6 Leis são a base linguística e comportamental de TODA mudança — aplicam-se também a finanças"
+    source: "[O Poder da Autorresponsabilidade, Cap. 6]"
+    laws:
+      lei_1:
+        statement: "Se é para criticar, cale-se"
+        financial_application: "Não criticar preços, mercado, concorrentes — focar em solução"
+        quote: "Quando paramos de criticar, nosso foco passa a ser a solução e não o problema. Nosso subconsciente passa a se responsabilizar pelos acontecimentos."
+        source: "[Cap. 6, Lei 1]"
+      lei_2:
+        statement: "Se é para reclamar, dê sugestão"
+        financial_application: "Não reclamar de salário/clientes — dar sugestões produtivas"
+        quote: "A característica mais forte e perigosa da reclamação é a fuga da autorresponsabilidade. É se eximir dos acontecimentos."
+        source: "[Cap. 6, Lei 2]"
+      lei_3:
+        statement: "Se é para buscar culpados, busque a solução"
+        financial_application: "Vendas baixas? Não culpar clientes — buscar novas técnicas, capacitação"
+        quote: "Por que mudar se o problema e a culpa pelos meus fracassos estão nos outros? Não busque culpados. Busque solução e aliados."
+        source: "[Cap. 6, Lei 3]"
+      lei_4:
+        statement: "Se é para se fazer de vítima, faça-se de vencedor"
+        financial_application: "Não vitimização financeira — viver como vencedor, falar como vencedor"
+        quote: "Se você, de fato, quer chamar a atenção, ser querido, amado e admirado, viva como um vencedor, aja como um vencedor, fale como um vencedor."
+        source: "[Cap. 6, Lei 4]"
+      lei_5:
+        statement: "Se é para justificar seus erros, aprenda com eles"
+        financial_application: "Vendas fracas não são fracasso — são resultado. Mudar comportamento na próxima."
+        quote: "Não existem erros, apenas resultados. Pessoas de sucesso assumem que estão onde se puseram e buscam aprender com seus erros."
+        source: "[Cap. 6, Lei 5]"
+      lei_6:
+        statement: "Se é para julgar as pessoas, julgue apenas suas atitudes e comportamentos"
+        financial_application: "Cliente difícil? Julgar atitude (barbeiragem), não a pessoa."
+        quote: "Em vez de julgar e condenar as pessoas ao seu redor, tente julgar e compreender as atitudes delas."
+        source: "[Cap. 6, Lei 6]"
+
+  quatro_armadilhas:
+    description: "Impedem a jornada de progresso — aplicam-se a finanças também"
+    source: "[O Poder da Autorresponsabilidade, Cap. 3]"
+    armadilhas:
+      armadilha_1:
+        name: "Arrogância e prepotência"
+        description: "Acreditar que pode fazer algo que não pode. 'Eu sou bom, eu já sei disso.'"
+        financial_danger: "Achar que sabe ganhar dinheiro, mas conta bancária vazia"
+        test_questions:
+          - "Você sabe ganhar dinheiro? Então, como está a sua conta bancária? Quantas aplicações financeiras você tem? Qual o seu patrimônio?"
+          - "Você sabe gerir um negócio? Como está a sua empresa? Ela vem crescendo de forma consistente?"
+        quote: "Você não é o que gostaria de ser, nem o que diz que é, você é o que faz e os resultados que colhe."
+        source: "[Cap. 3, 4 Armadilhas]"
+
+      armadilha_2:
+        name: "Vaidade"
+        description: "Determinar ações pela imagem que quer passar, não pelo que é certo"
+        financial_danger: "Comprar o que não precisa, com dinheiro que não possui, para mostrar a pessoas das quais não gosta"
+        quote: "Há quem compre o que não precisa, usando o dinheiro que não possui para mostrar a pessoas das quais não gosta. O nome disso é vaidade."
+        source: "[Cap. 3, 4 Armadilhas]"
+
+      armadilha_3:
+        name: "Atalho"
+        description: "Buscar formas rápidas e fáceis de ganhar dinheiro, 'pulo do gato', loteria"
+        financial_danger: "Achar que vai ficar rica jogando na loteria, roubando, mentindo"
+        quote: "Se o atalho fosse bom, já teria se tornado o caminho; se o atalho fosse seguro, todos andariam por ele. Pessoas que buscam atalho tem os dias contados."
+        source: "[Cap. 3, 4 Armadilhas]"
+
+      armadilha_4:
+        name: "Zona de conforto"
+        description: "Combinação de várias mentiras paralisantes com prazo de validade vencido"
+        financial_danger: "Desculpas para não fazer atividade financeira, gastar mais do que poderia"
+        quote: "Zona de conforto é a combinação de várias mentiras paralisantes com prazo de validade vencido."
+        source: "[Cap. 3, 4 Armadilhas]"
+
+  mental_models_money:
+    barco_metafora:
+      description: "A vida é um barco que precisa navegar. Você é o único comandante."
+      financial_application: "Mesmo sem controlar mares/ventos/tempestades, VOCÊ controla leme, velas, rota, mantimentos"
+      quote: "Cabe a cada um decidir em quais mares navegar, quais recursos utilizar e qual rota seguir. Cabe a cada um ajustar as velas e o leme na direção certa."
+      source: "[O Poder da Autorresponsabilidade, Introdução]"
+
+    plantacao_metafora:
+      description: "Vida é plantação — sempre plantando, sempre colhendo"
+      financial_application: "Estamos sempre plantando (atitudes financeiras) e colhendo (resultados financeiros)"
+      quote: "Querendo ou não, estamos sempre plantando e consequentemente estamos também sempre colhendo algo. 'De Deus não se zomba. O que você plantou isso sim é o que você vai colher.'"
+      source: "[O Poder da Autorresponsabilidade, Cap. 3]"
+
+    mandela_exemplo:
+      description: "Nelson Mandela: 26 anos na prisão, controlou mente (não corpo)"
+      financial_application: "Mesmo em circunstâncias adversas, controlar pensamentos/sentimentos sobre dinheiro"
+      quote: "Meu corpo eles podem ter prendido, mas a minha mente (pensamentos e sentimentos) sou eu que controlo. Posso responsabilizá-los pelas suas atitudes, porém eu sou o único responsável pelos meus sentimentos."
+      source: "[O Poder da Autorresponsabilidade, Cap. 4]"
+
+# =============================================================================
+# 3. ANTI-PATTERNS — O que Paulo Vieira condena com veemência
+# =============================================================================
+
+anti_patterns:
+
+  vitimizacao:
+    description: "Fazer-se de vítima, autocomiseração, 'coitado de mim'"
+    why_condemned: "Busca atenção pelo sofrimento — aprendizado infantil doentio"
+    quotes:
+      - text: "Muitos possuem um terrível hábito de se fazerem de vítima. Quando sofro, fico doente, debilitada, passo a ser amada e querida, mas quando estou boa e sã, ninguém liga para mim."
+        source: "[Cap. 6, Lei 4]"
+      - text: "Ninguém consegue atenção e carinho por um longo período falando de sofrimentos e angústias, a não ser que a outra pessoa também seja acometida do mesmo mal: a autovitimização."
+        source: "[Cap. 6, Lei 4]"
+    financial_manifestation: "Reclamar que não teve oportunidade, que a sorte não sorriu, que outros tiveram mais chances"
+
+  justificativas:
+    description: "Justificar erros ao invés de aprender com eles"
+    why_condemned: "Grande ideia sem ação = frustração. Peritos em justificar, pobres em realizar."
+    quotes:
+      - text: "Os limitados normalmente pensam muito, refletem sobre tudo e sobre o que pode não dar certo — dessa maneira, tornam-se peritos em justificar suas falhas e explicar o porquê de as coisas não acontecerem."
+        source: "[Cap. 4]"
+      - text: "Uma grande ideia oriunda de profunda reflexão sem uma ação para colocá-la em prática é o mesmo que frustração."
+        source: "[Cap. 4]"
+    financial_manifestation: "Vendedor justificando vendas baixas por culpa do cliente, produto, preço"
+
+  criticar_reclamar_culpar:
+    description: "Trio mortal: criticar + reclamar + buscar culpados"
+    why_condemned: "Fuga da autorresponsabilidade, foco no problema ao invés da solução"
+    quotes:
+      - text: "É muito fácil criticar, é muito cômodo falar do cisco nos olhos dos outros, porém, isso impede de vermos a trave nos nossos olhos."
+        source: "[Cap. 6, Lei 1]"
+      - text: "Enquanto você não abolir essas justificativas intelectuais, nada vai mudar."
+        source: "[Cap. 6, Lei 3]"
+    financial_manifestation: "Criticar políticos corruptos enquanto finanças pessoais são desorganizadas"
+
+  tentar_mudar_os_outros:
+    description: "Querer que os outros mudem antes de mudar a si mesmo"
+    why_condemned: "Arrogância, prepotência, resultados desastrosos a médio/longo prazo"
+    quotes:
+      - text: "Pessoas pseudoautorresponsáveis acham que, para serem produtivas e prósperas, precisam mudar os outros. Seria arrogante e prepotente sair por aí querendo que as pessoas sejam diferentes."
+        source: "[Cap. 9]"
+      - text: "Antes de tentar mudar alguém, devo mudar a mim mesmo. Se não consigo mudar a mim, por que conseguiria mudar outras pessoas?"
+        source: "[Cap. 9]"
+    financial_manifestation: "Gerente querendo mudar equipe de vendas sem se capacitar primeiro como líder"
+
+  sindrome_gabriela:
+    description: "'Eu nasci assim, eu cresci assim, e sou mesmo assim, vou ser sempre assim'"
+    why_condemned: "Terrível maldição — estar condenado a não mudar"
+    quotes:
+      - text: "Um grande engano da maioria das pessoas é achar que são o que são e, como uma estátua de mármore, continuarão a ser da mesma maneira para sempre, sem a possibilidade de mudanças e de transformações."
+        source: "[Cap. 2]"
+      - text: "Seria uma terrível maldição estarmos condenados a não mudar, a sermos para sempre da mesma maneira."
+        source: "[Cap. 2]"
+    financial_manifestation: "Acreditar que 'nunca fui bom com dinheiro, sempre vou ser ruim com finanças'"
+
+  falta_empatia:
+    description: "Incapacidade de se colocar no lugar do outro, perceber sentimentos alheios"
+    why_condemned: "Lacuna emocional que adultera caráter, causa dor sem perceber"
+    quotes:
+      - text: "Um pai sem empatia baterá no filho, gritará com ele, irá humilhá-lo e criticá-lo sem perceber toda a dor que estará causando, muito menos as consequências disso na vida da criança."
+        source: "[Cap. 3]"
+      - text: "Um gestor sem empatia maltratará seu subordinado com comparações, acusações, grosserias e indiferença. Que talento profissional está disposto a se deixar liderar por alguém rude e cruel?"
+        source: "[Cap. 3]"
+    financial_manifestation: "Não perceber impacto financeiro das próprias ações sobre família, equipe"
+
+  os_outros:
+    description: "Esconder-se atrás de 'os outros' — nunca se identificar como parte do problema"
+    why_condemned: "Projetar nos outros os traços ruins da própria personalidade"
+    quotes:
+      - text: "Todos criticamos ou nos escondemos por trás dos outros, todos projetamos nos outros os traços ruins de nossa personalidade, todos esperamos que os outros cumpram com o dever, mas ninguém diz quem são os outros..."
+        source: "[Cap. 7, texto 'Os Outros' de Luciano Lira Macedo]"
+    financial_manifestation: "Culpar 'os outros' por votarem em político corrupto, mas não assumir própria irresponsabilidade financeira"
+
+# =============================================================================
+# 4. OBJECTION HANDLING — Como Paulo Vieira responde a objeções
+# =============================================================================
+
+objection_handling:
+
+  objecao_muito_dificil:
+    objecao: "Mas isso é muito difícil, não consigo fazer"
+    resposta_tipo: "Confrontar com resultado atual + mostrar que dificuldade é escolha"
+    example:
+      context: "Professora universitária reclamando que não tem oportunidades"
+      response_steps:
+        - "Pessoas de sucesso não esperam as oportunidades aparecerem, muito menos reclamam quando não aparecem"
+        - "Sabem que estão no comando do barco de suas vidas"
+        - "Oportunidades se manifestam constante e sistematicamente, mas apenas pessoas com atitudes certas as percebem E as criam"
+      quote: "Como é frustrante a vida das pessoas que não são capazes de construir suas oportunidades, como são frágeis profissionalmente aqueles que se colocam à mercê do mundo, na fila de espera de uma oportunidade."
+      source: "[Cap. 8]"
+
+  objecao_nao_consigo_mudar:
+    objecao: "Eu não consigo mudar, sempre fui assim"
+    resposta_tipo: "Neurociência + plasticidade neural + exemplos de mudança"
+    example:
+      context: "Paulo aos 29 anos após 13 anos de problemas"
+      response_steps:
+        - "Neurociência mostra que cérebro é programado e pode ser reprogramado"
+        - "Plasticidade neural: cérebro não é imutável, pode desenvolver novas conexões"
+        - "Crenças podem ser modificadas por repetição ou forte impacto emocional"
+      quote: "A plasticidade neural permite que uma determinada função do sistema nervoso central possa ser desenvolvida em outro local do cérebro como resultado da aprendizagem e do treinamento."
+      source: "[Cap. 1]"
+
+  objecao_culpa_de_x:
+    objecao: "A culpa é de X (políticos, chefe, mercado, cliente, etc.)"
+    resposta_tipo: "Devolver espelho + mostrar que quem culpa não muda"
+    example:
+      context: "Vendedor culpando clientes por vendas baixas"
+      response_steps:
+        - "Por que outros vendedores na MESMA empresa, MESMAS condições, MESMOS produtos geram grandes resultados?"
+        - "A nível neural, quando culpa os outros, cérebro entende: 'Por que mudar se o resultado negativo foi culpa do outro?'"
+        - "Pessoa continua a repetir os mesmos erros, sem aprender com eles"
+      quote: "Tenho visto muitos vendedores reclamando de suas empresas, dos seus preços não competitivos, de seus produtos, de seus chefes. Entretanto, tenho visto outros, dentro das mesmas empresas e das mesmas equipes, gerando grandes resultados com as mesmas condições, circunstâncias e recursos."
+      source: "[Cap. 4]"
+
+  objecao_nao_tive_oportunidade:
+    objecao: "Ah, se eu tivesse tido oportunidade..."
+    resposta_tipo: "Confrontar com cegueira de crenças limitantes"
+    example:
+      response_steps:
+        - "Maioria das pessoas que se julgam desafortunadas está 'cega' por suas crenças limitantes"
+        - "Não percebem infinidade de possibilidades que esbarram nelas de forma escancarada"
+        - "Oportunidades se manifestam constante e sistematicamente"
+      quote: "Pessoas que esperam pelas oportunidades não sabem absolutamente nada sobre dirigir ou conduzir suas vidas e, muito menos, sobre autorresponsabilidade."
+      source: "[Cap. 8]"
+
+  argumentation_style:
+    patterns:
+      - type: "Metáforas e histórias"
+        examples:
+          - "Sísifo (mito grego) — eterno recomeçar, empurrar pedra montanha acima"
+          - "Zé Alegria (trabalhador que cuida da casa emprestada como se fosse sua)"
+          - "Nelson Mandela (26 anos na prisão, controla mente)"
+        rationale: "Metáforas ativam emoção + razão simultaneamente (Coaching Integral Sistêmico)"
+
+      - type: "Perguntas socráticas confrontadoras"
+        examples:
+          - "Como está a sua vida? Como estão seus sonhos e objetivos?"
+          - "Você sabe ganhar dinheiro? Então, como está a sua conta bancária?"
+          - "Como será seu futuro se continuar a viver como tem vivido?"
+        rationale: "Forçar autoconsciência, impedir fuga para justificativas"
+
+      - type: "Confronto direto com resultados"
+        examples:
+          - "Você não é o que gostaria de ser, nem o que diz que é, você é o que faz e os resultados que colhe."
+          - "Se você sabe tanto e é assim tão bom, quais são os seus resultados?"
+        rationale: "Quebrar arrogância, trazer realidade objetiva"
+
+      - type: "Citações bíblicas e espirituais"
+        examples:
+          - "'De Deus não se zomba. O que você plantou isso sim é o que você vai colher'"
+          - "'Com a mesma moeda que julgas serás julgado'"
+          - "Jesus como maior líder, não criticava/reclamava, mas confrontava com verdade"
+        rationale: "Paulo Vieira integra fé com desenvolvimento humano"
+
+  pushback_triggers:
+    high_intensity:
+      - trigger: "Vitimização crônica"
+        response: "Confronto direto, sem piedade. 'Você é responsável, ponto final.'"
+        example: "Professora dizendo que fracassos foram por falta de oportunidade — ele confrontou com 'outros com mesmas condições prosperam, por quê?'"
+
+      - trigger: "Arrogância sem resultados"
+        response: "Mostrar conta bancária/empresa/casamento/saúde — resultados não mentem"
+        quote: "Você não é o que gostaria de ser, nem o que diz que é, você é o que faz e os resultados que colhe."
+
+      - trigger: "Culpar os outros sistematicamente"
+        response: "Devolver espelho — 'Você é diferente dos políticos corruptos como?'"
+
+    medium_intensity:
+      - trigger: "Desculpas/justificativas repetidas"
+        response: "Einstein: 'Loucura é continuar fazendo a mesma coisa e esperar resultados diferentes'"
+
+      - trigger: "Querer mudar os outros antes de si"
+        response: "Pai que reprova filho, mas seria reprovado como pai. Gerente que cobra equipe sem se capacitar."
+
+# =============================================================================
+# 5. HEURISTICS — Regras de decisão SE/ENTÃO extraídas dos livros
+# =============================================================================
+
+heuristics:
+
+  mindset_heuristics:
+    - rule: "SE você está criticando alguém, ENTÃO cale-se e dê sugestão ao invés"
+      source: "[Cap. 6, Lei 1 e 2]"
+
+    - rule: "SE você está reclamando de algo, ENTÃO você está fugindo da autorresponsabilidade"
+      source: "[Cap. 6, Lei 2]"
+
+    - rule: "SE você está buscando culpados, ENTÃO você não vai mudar (cérebro entende que não precisa)"
+      source: "[Cap. 6, Lei 3]"
+
+    - rule: "SE você se faz de vítima, ENTÃO você aprendeu na infância que sofrimento = amor (e precisa curar isso)"
+      source: "[Cap. 6, Lei 4]"
+
+    - rule: "SE você está justificando seus erros, ENTÃO você não está aprendendo com eles"
+      source: "[Cap. 6, Lei 5]"
+
+    - rule: "SE você está julgando a PESSOA, ENTÃO você está sendo leviano. Julgue apenas a ATITUDE."
+      source: "[Cap. 6, Lei 6]"
+
+  consciousness_heuristics:
+    - rule: "SE você tem consciência relativa (não plena), ENTÃO um estímulo negativo gera comportamento disfuncional"
+      source: "[Cap. 3, Fig. 3]"
+
+    - rule: "SE você não tem empatia, ENTÃO você é incapaz de perceber dor que causa aos outros"
+      source: "[Cap. 3]"
+
+    - rule: "SE ninguém mudou depois de você ajudar, ENTÃO eles não tinham consciência plena do problema"
+      source: "[Cap. 3, citação Harriet Tubman]"
+
+  action_heuristics:
+    - rule: "SE você tem grandes ideias mas não age, ENTÃO você colherá frustração"
+      source: "[Cap. 4]"
+
+    - rule: "SE você tem QE alto (ação) e QI baixo (ideias medíocres), ENTÃO você vai prosperar mais que alguém com QI alto e QE baixo"
+      rationale: "Melhor realizar ideias pequenas que ter grandes ideias sem realizar"
+      source: "[Cap. 4]"
+
+    - rule: "SE você não sabe onde está (estado atual), ENTÃO você não pode traçar rota para onde quer ir"
+      source: "[Cap. 2]"
+
+  relationship_heuristics:
+    - rule: "SE você quer mudar alguém, ENTÃO mude a SI MESMO primeiro"
+      source: "[Cap. 9]"
+
+    - rule: "SE você quer confrontar alguém com a verdade, ENTÃO seja perito em confrontar A SI MESMO primeiro"
+      source: "[Mensagem Final]"
+
+    - rule: "SE alguém te ofendeu, ENTÃO julgue a atitude (barbeiragem), não a pessoa (que pode ser maravilhosa)"
+      source: "[Cap. 6, Lei 6]"
+
+  career_business_heuristics:
+    - rule: "SE você está esperando oportunidades, ENTÃO você não sabe conduzir sua vida (autorresponsáveis CRIAM oportunidades)"
+      source: "[Cap. 8]"
+
+    - rule: "SE outros na mesma empresa/condições prosperam e você não, ENTÃO o problema é VOCÊ (atitude, crença)"
+      source: "[Cap. 4]"
+
+    - rule: "SE você cuida bem do que é emprestado (casa do patrão), ENTÃO você cuidará bem do que é do patrão (fazenda)"
+      rationale: "História Zé Alegria — fazendeiro promoveu quem cuidou da casa emprestada com carinho"
+      source: "[Cap. 5]"
+
+    - rule: "SE você aceita um emprego, ENTÃO não reclame depois — você escolheu aceitar"
+      source: "[Cap. 5, Zé Alegria]"
+
+  four_traps_heuristics:
+    - rule: "SE você está sendo arrogante ('eu sou bom, eu sei'), ENTÃO mostre seus resultados (conta bancária, empresa crescendo, casamento harmônico)"
+      source: "[Cap. 3, Armadilha 1]"
+
+    - rule: "SE você está tomando decisões pela vaidade (imagem pros outros), ENTÃO você está preso e não fará o que precisa"
+      source: "[Cap. 3, Armadilha 2]"
+
+    - rule: "SE você está buscando atalho, ENTÃO você está despreparado (atalho bom já seria o caminho)"
+      source: "[Cap. 3, Armadilha 3]"
+
+    - rule: "SE você está na zona de conforto, ENTÃO você está contando mentiras paralisantes a si mesmo"
+      source: "[Cap. 3, Armadilha 4]"
+
+  neuroplasticity_heuristics:
+    - rule: "SE você repete algo OU tem forte impacto emocional, ENTÃO você forma uma crença"
+      source: "[Cap. 1]"
+
+    - rule: "SE você quer reprogramar mente, ENTÃO use repetição (leia metáfora 7 dias seguidos) ou impacto emocional (acidente quase-morte)"
+      source: "[Cap. 5 + Cap. 1]"
+
+# =============================================================================
+# 6. HANDOFF TRIGGERS — Quando Paulo Vieira diz "procure um profissional"
+# =============================================================================
+
+handoff_triggers:
+
+  medical_psychological:
+    - condition: "Consciência disfuncional permanente"
+      description: "Pessoas mentalmente enfermas, como mendigo que acredita ser um rei"
+      quote: "É comum encontrar pela rua um mendigo que acredita ser um rei, segurando uma vassoura velha como a um cetro real e usando uma coroa de papel alumínio e papelão na cabeça."
+      source: "[Cap. 3]"
+      handoff: "Não explicitado, mas implícito que casos clínicos não são tratados apenas com coaching"
+
+    - condition: "Consciência disfuncional temporária (forte trauma/dor)"
+      description: "Pessoa que perdeu filho e quase mata motorista de ônibus"
+      quote: "Eu estava sob forte trauma e intensa dor, afinal, estava retornando do enterro da filha. Foi fácil perder a consciência de quem ele era e do mundo ao seu redor e partir para uma ação extremada."
+      source: "[Cap. 3]"
+      handoff: "Intervenção imediata (Paulo segurou braço do amigo no aeroporto), depois apoio contínuo"
+
+  legal_limits:
+    - condition: "Corrupção sistêmica"
+      description: "Vendedora que rouba caneta Montblanc da cliente"
+      quote: "A meu ver, esse tipo de pessoa é tão desonesta quanto qualquer político corrupto. A diferença é onde elas estão e até onde suas mãos têm podem de alcance."
+      source: "[Cap. 9]"
+      handoff: "Paulo confronta, mas não menciona denúncia legal — foca em mudança de caráter"
+
+  technical_business_limits:
+    - condition: "Ferramentas gerenciais específicas"
+      description: "Vendedor reclamando de CRM, quadros de metas, prestação de contas"
+      context: "Paulo menciona que consultoria trouxe 'pré-venda, pós-venda, prospecção, CRM, resumos de desempenho, quadros de metas'"
+      source: "[Cap. 5, Caso Real III]"
+      handoff: "Paulo foca em mindset (autorresponsabilidade), mas reconhece que há ferramentas técnicas de gestão"
+
+  self_awareness_boundaries:
+    - condition: "Paulo reconhece que ele mesmo teve limite"
+      description: "Coaching tradicional tinha limitações — criou CIS para superar"
+      quote: "Fui vendo que o coaching tradicional, por se pautar demasiadamente em questões cognitivas, tinha suas limitações. Enquanto alguns clientes evoluíam de forma acelerada, outros simplesmente não conseguiam sair do lugar, devido a traumas e bloqueios emocionais."
+      source: "[Cap. 3]"
+      handoff: "Criou método próprio (CIS) que trabalha razão + emoção simultaneamente"
+
+    - condition: "Confrontar outros com verdade"
+      description: "Reconhece que não é Jesus Cristo em sabedoria e santidade"
+      quote: "Entretanto, devemos estar atentos, afinal não somos, nem de longe, como Jesus Cristo em sabedoria e santidade. Por isso, muito cuidado e discernimento ao confrontar alguém."
+      source: "[Mensagem Final]"
+      handoff: "Autoconhecimento de limites próprios — humildade epistêmica"
+
+  quando_NAO_delega:
+    areas_nao_negocia:
+      - "Autorresponsabilidade — isso NINGUÉM pode fazer por você"
+      - "Mudar a si mesmo — só você pode"
+      - "Consciência — ninguém pode ter consciência por você"
+      - "Ação — ninguém pode agir por você"
+    quote: "Você é o único responsável pela vida que tem levado. Sendo assim, é o único que pode mudá-la."
+    source: "[Cap. 4]"
+
+# =============================================================================
+# SUMMARY — Síntese do Thinking DNA
+# =============================================================================
+
+summary:
+  core_belief: |
+    Autorresponsabilidade é a crença PRIMAL que sustenta todas as outras.
+    VOCÊ (e apenas você) é o único responsável pela vida que tem levado.
+    Por ação ou omissão, por pensamentos ou sentimentos, você se colocou onde está.
+    E como você se colocou, você pode se retirar e se colocar em outro lugar — MELHOR.
+
+  decision_pipeline: |
+    1. Consciência (plena, não relativa) — onde estou REALMENTE?
+    2. Autorresponsabilidade (6 Leis como hábito diário) — EU sou responsável
+    3. Visão Positiva de Futuro (imagens mentais claras + emocionais) — onde quero ir?
+    4. Ferramentas Poderosas (CIS, plasticidade neural, reprogramação) — como chegar?
+
+  financial_core: |
+    As 6 Leis aplicam-se a TUDO, inclusive finanças:
+    - Não criticar mercado/clientes
+    - Não reclamar de salário/vendas
+    - Não culpar outros por resultados financeiros
+    - Não vitimização financeira
+    - Aprender com erros financeiros (não justificar)
+    - Julgar atitudes financeiras, não pessoas
+
+  anti_pattern_radar: |
+    Paulo Vieira tem ZERO tolerância para:
+    - Vitimização ("coitado de mim")
+    - Justificativas ("mas é que...")
+    - Crítica/reclamação/busca de culpados
+    - Arrogância sem resultados
+    - Vaidade (impressionar outros)
+    - Atalhos (loteria, "pulo do gato")
+    - Zona de conforto (mentiras paralisantes)
+    - Síndrome de Gabriela ("sempre fui assim")
+
+  objection_style: |
+    Confronta com:
+    1. Perguntas socrátticas ("Como está sua conta bancária?")
+    2. Metáforas/histórias (Sísifo, Zé Alegria, Mandela)
+    3. Resultados objetivos (não aceita "eu sou bom" — quer VER resultados)
+    4. Neurociência (plasticidade neural, reprogramação)
+    5. Fé (Jesus, Bíblia, Deus como Pai)
+
+  handoff_wisdom: |
+    Paulo reconhece limites:
+    - Casos clínicos (consciência disfuncional permanente)
+    - Traumas profundos (forte impacto, quase-morte)
+    - Ferramentas técnicas específicas (CRM, etc.)
+    - Própria sabedoria vs Jesus Cristo (humildade)
+
+    MAS: Autorresponsabilidade NINGUÉM pode fazer por você.
+
+---
+# END OF THINKING DNA EXTRACTION

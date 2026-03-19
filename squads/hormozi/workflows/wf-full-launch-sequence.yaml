@@ -1,0 +1,995 @@
+# Full Launch Sequence Workflow
+# Based on Alex Hormozi's $100M Launch Playbook + Lead Nurture SOP
+# Source: Launch Playbook + 10 Papéis Críticos + Lead Nurture Four Pillars
+# Version: 1.0.0
+
+id: wf-full-launch-sequence
+name: "Full Launch Sequence"
+version: "1.0.0"
+duration: "7-14 days"
+description: |
+  Workflow completo para orquestrar lançamento de 7-14 dias com todas as fases,
+  papéis críticos e nurture de leads para maximizar throughput.
+
+  FILOSOFIA: "A launch is not an event. It's a machine with 10 roles,
+  8 phases, and precise timing."
+
+  RESULTADO: Lançamento coordenado com show rate >70% e close rate >25%.
+
+  FÓRMULA CORE:
+  - Throughput = Schedule Rate × Show Rate
+  - 20-40% increase in show rate = 2-3x profit increase
+  - Speed + Availability + Personalization + Volume = Success
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Lançamento de produto/programa novo"
+  - "Relançamento com nova oferta"
+  - "Lançamento de versão premium"
+  - "Live launch com janela de inscrição"
+  - "Event-driven sales (workshop, webinar)"
+
+not_for:
+  - "Evergreen funnels (outro workflow)"
+  - "Sem oferta validada (use WF-1 primeiro)"
+  - "Sem capacidade de atender demanda"
+  - "Sem time para os 10 papéis críticos"
+
+decision_matrix_fit:
+  complexity: very_high
+  agents_required: 5
+  estimated_duration: "7-14 days launch + 2-4 weeks prep"
+  user_involvement: "very high (daily execution)"
+  prerequisites:
+    - "Grand Slam Offer criada (WF-1 completo)"
+    - "Audiência existente OU budget para ads"
+    - "Time para os 10 papéis críticos"
+    - "Capacidade de entrega pós-launch"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: hormozi-chief
+      role: "Launch calendar, team roles, strategic oversight, war room"
+      phases: [0]
+
+    - agent: hormozi-copy
+      role: "Email sequences, landing pages, sales pages"
+      phases: [1]
+
+    - agent: hormozi-launch
+      role: "Daily execution, live events, timing"
+      phases: [2]
+
+    - agent: hormozi-ads
+      role: "Paid traffic, urgency campaigns"
+      phases: [3]
+
+    - agent: hormozi-closer
+      role: "Final push, objection handling"
+      phases: [4]
+
+    - agent: hormozi-retention
+      role: "Onboarding, nurture, post-launch"
+      phases: [5]
+
+  synergies:
+    - agents: [hormozi-launch, hormozi-copy]
+      pattern: "Launch coordinates timing, Copy provides ammunition"
+
+    - agents: [hormozi-closer, hormozi-retention]
+      pattern: "Closer converts, Retention retains"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# THE 10 CRITICAL ROLES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+critical_roles:
+  description: "Os 10 papéis críticos de um lançamento"
+  roles:
+    - id: ROLE_001
+      name: "Launch Lead"
+      responsibility: "Overall coordination, timeline, decisions"
+      time_commitment: "Full-time during launch"
+
+    - id: ROLE_002
+      name: "Copywriter"
+      responsibility: "All written content, emails, pages"
+      time_commitment: "Heavy pre-launch, lighter during"
+
+    - id: ROLE_003
+      name: "Ads Manager"
+      responsibility: "Paid traffic, retargeting, budgets"
+      time_commitment: "Full-time during launch"
+
+    - id: ROLE_004
+      name: "Tech Lead"
+      responsibility: "Pages, automations, integrations"
+      time_commitment: "Heavy pre-launch, on-call during"
+
+    - id: ROLE_005
+      name: "Sales Lead"
+      responsibility: "Closer coordination, scripts, objections"
+      time_commitment: "Full-time during launch"
+
+    - id: ROLE_006
+      name: "Operations"
+      responsibility: "Logistics, payments, fulfillment prep"
+      time_commitment: "Heavy post-close"
+
+    - id: ROLE_007
+      name: "Customer Support"
+      responsibility: "Questions, issues, escalations"
+      time_commitment: "Full-time during and after"
+
+    - id: ROLE_008
+      name: "Content/Social"
+      responsibility: "Organic content, community management"
+      time_commitment: "Full-time during launch"
+
+    - id: ROLE_009
+      name: "Analytics"
+      responsibility: "Tracking, reporting, optimization signals"
+      time_commitment: "Full-time during launch"
+
+    - id: ROLE_010
+      name: "War Room Commander"
+      responsibility: "Real-time decisions, escalations, pivots"
+      time_commitment: "Full-time cart open period"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 0: PREPARATION (2-4 weeks before)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-0
+    name: "Preparation"
+    days: "Weeks -4 to -1"
+    tier: 0  # Foundation
+    description: |
+      Preparação completa antes do lançamento.
+      O lançamento é ganho ou perdido na preparação.
+
+      PRINCÍPIO: "Failing to prepare is preparing to fail."
+
+    agent: hormozi-chief
+
+    tasks:
+      - task_id: T0.1
+        name: "Definir Launch Calendar"
+        required: true
+        description: "Cronograma completo com todas as datas"
+        output: "launch_calendar.yaml"
+
+      - task_id: T0.2
+        name: "Atribuir 10 Papéis Críticos"
+        required: true
+        description: "Quem faz o quê"
+        output: "role_assignments.yaml"
+
+      - task_id: T0.3
+        name: "Preparar War Room"
+        required: true
+        description: "Setup de comunicação e decisão em tempo real"
+        output: "war_room_setup.yaml"
+
+      - task_id: T0.4
+        name: "Preparar Contingências"
+        required: true
+        description: "Planos B, C, D para cenários"
+        output: "contingency_plans.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Launch Calendar
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      launch_calendar_template:
+        description: "Template de cronograma de lançamento"
+        pre_launch:
+          week_minus_4:
+            - "Finalizar oferta e pricing"
+            - "Criar sales page draft"
+            - "Definir copy themes"
+
+          week_minus_3:
+            - "Finalizar sales page"
+            - "Criar email sequences"
+            - "Setup automations"
+
+          week_minus_2:
+            - "Criar landing pages"
+            - "Setup ads e audiences"
+            - "Test all tech"
+
+          week_minus_1:
+            - "Pre-launch content"
+            - "Build anticipation"
+            - "Final QA everything"
+
+        launch_week:
+          day_0: "Cart Open"
+          day_1_3: "Initial Push"
+          day_4_5: "Social Proof Wave"
+          day_6: "Deadline Warning"
+          day_7: "Cart Close"
+
+      war_room_setup:
+        description: "Setup do War Room"
+        components:
+          communication:
+            - "Slack channel #launch-war-room"
+            - "Video call sempre aberto"
+            - "Decision log compartilhado"
+
+          dashboards:
+            - "Revenue tracker (real-time)"
+            - "Ads performance"
+            - "Email metrics"
+            - "Sales pipeline"
+
+          escalation_paths:
+            - "Tech issues → Tech Lead → Launch Lead"
+            - "Sales objections → Sales Lead → War Room"
+            - "Budget decisions → Ads Manager → Launch Lead"
+
+      contingency_plans:
+        description: "Planos de contingência"
+        scenarios:
+          tech_failure:
+            trigger: "Página cai, automação quebra"
+            response: "Tech Lead alerta, backup page live, extend deadline"
+
+          low_sales:
+            trigger: "Vendas 50% abaixo do projetado"
+            response: "Increase ads, add bonus, extend deadline"
+
+          overwhelming_demand:
+            trigger: "Mais vendas que capacidade"
+            response: "Add waitlist, increase price, limit spots"
+
+          team_burnout:
+            trigger: "Membro key fica doente/indisponível"
+            response: "Backup assignments, reduce scope if needed"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Preparation Complete"
+      criteria:
+        - "Launch calendar finalizado"
+        - "10 papéis atribuídos com backups"
+        - "War room setup e testado"
+        - "Contingências documentadas"
+        - "Toda tech testada end-to-end"
+      human_review: true
+      message: "Revise preparação antes de iniciar pre-launch."
+      veto_conditions:
+        - condition: "Papel crítico sem responsável"
+          action: "HALT - Não lance sem todos os papéis cobertos"
+        - condition: "Tech não testada"
+          action: "BLOCK - QA completo obrigatório"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 1: PRE-LAUNCH (Days -7 to 0)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-1
+    name: "Pre-Launch"
+    days: "Days -7 to 0"
+    tier: 1  # Build anticipation
+    description: |
+      Construir antecipação e preparar audiência.
+      Aquecer leads antes do cart open.
+
+      PRINCÍPIO: "Pre-launch determines launch success.
+      Warm audiences convert 10x better than cold."
+
+    agent: hormozi-copy
+
+    tasks:
+      - task_id: T1.1
+        name: "Criar Email Sequence Pre-Launch"
+        required: true
+        description: "7 emails de aquecimento"
+        output: "prelaunch_emails/"
+
+      - task_id: T1.2
+        name: "Criar Landing Pages"
+        required: true
+        description: "Waitlist page + Early bird page"
+        output: "landing_pages/"
+
+      - task_id: T1.3
+        name: "Criar Conteúdo de Antecipação"
+        required: true
+        description: "Posts, stories, teases"
+        output: "anticipation_content/"
+
+      - task_id: T1.4
+        name: "Setup Ads Pre-Launch"
+        required: true
+        description: "Audiências, retargeting, teasers"
+        output: "prelaunch_ads.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Pre-Launch Sequences
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      prelaunch_email_sequence:
+        description: "7 emails de pre-launch"
+        emails:
+          - day: -7
+            subject: "Algo grande está chegando..."
+            purpose: "Tease + curiosity"
+            content: "Problem awareness + hint at solution"
+
+          - day: -5
+            subject: "A história por trás de [PRODUTO]"
+            purpose: "Origin story + credibility"
+            content: "Your journey, why you created this"
+
+          - day: -4
+            subject: "O que [AVATARES] estão dizendo"
+            purpose: "Social proof"
+            content: "Testimonials, results, excitement"
+
+          - day: -3
+            subject: "Revelar: O que é [PRODUTO]"
+            purpose: "Product reveal"
+            content: "Full description, what's included"
+
+          - day: -2
+            subject: "Perguntas frequentes sobre [PRODUTO]"
+            purpose: "Objection handling"
+            content: "FAQ format addressing concerns"
+
+          - day: -1
+            subject: "Amanhã abre (por tempo limitado)"
+            purpose: "Urgency + anticipation"
+            content: "Deadline + what happens tomorrow"
+
+          - day: 0
+            subject: "🔥 ABERTO: [PRODUTO] disponível agora"
+            purpose: "Cart open"
+            content: "Direct to sales page, CTA strong"
+
+      anticipation_content_calendar:
+        description: "Conteúdo de antecipação por dia"
+        day_minus_7:
+          - "Post: Problema que você vai resolver"
+          - "Story: Behind the scenes"
+
+        day_minus_5:
+          - "Post: Sua história de origem"
+          - "Story: Teaser do produto"
+
+        day_minus_3:
+          - "Post: Resultados de beta testers"
+          - "Live: Q&A sobre o tema"
+
+        day_minus_1:
+          - "Post: Countdown"
+          - "Story: Last chance para waitlist"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Pre-Launch Complete"
+      criteria:
+        - "7 emails agendados"
+        - "Landing pages live e testadas"
+        - "Conteúdo de antecipação criado"
+        - "Ads configurados e aprovados"
+        - "Waitlist com leads aquecidos"
+      human_review: true
+      message: "Revise pre-launch antes de abrir carrinho."
+      veto_conditions:
+        - condition: "Menos de 100 leads na waitlist"
+          action: "WARNING - Considere extended pre-launch"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 2: LAUNCH WEEK EXECUTION (Days 1-3)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Launch Week - Initial Push"
+    days: "Days 1-3"
+    tier: 1  # Core execution
+    description: |
+      Execução dos primeiros dias de launch.
+      Maximize momentum inicial.
+
+      PRINCÍPIO: "Day 1 sets the tone. Strong start = strong finish."
+
+    agent: hormozi-launch
+
+    tasks:
+      - task_id: T2.1
+        name: "Executar Cart Open"
+        required: true
+        description: "Email + social + ads simultâneos"
+        output: "day1_execution.yaml"
+
+      - task_id: T2.2
+        name: "Setup Lead Nurture (Four Pillars)"
+        required: true
+        description: "Availability, Speed, Personalization, Volume"
+        output: "lead_nurture_setup.yaml"
+
+      - task_id: T2.3
+        name: "Daily Email Sequence"
+        required: true
+        description: "3 emails: Day 1, Day 2, Day 3"
+        output: "daily_emails/"
+
+      - task_id: T2.4
+        name: "Monitor e Ajustar"
+        required: true
+        description: "War room decisions"
+        output: "day1_3_decisions.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Four Pillars of Lead Nurture
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      four_pillars_implementation:
+        description: "Implementação dos 4 Pilares do Lead Nurture"
+        pillar_1_availability:
+          principle: "More slots = More shows"
+          actions:
+            - "7 dias/semana de disponibilidade"
+            - "6am-6pm PST mínimo (9am-9pm EST)"
+            - "Slots a cada 15 minutos"
+            - "Self-scheduling + outbound + inbound"
+
+        pillar_2_speed:
+          principle: "Faster = More shows"
+          actions:
+            - "Contato em <5 minutos do opt-in"
+            - "Appointment em <72 horas"
+            - "Pull forward appointments"
+            - "Response time tracking"
+          stats:
+            - "391% increase se contato em 60 segundos"
+            - "7x mais qualificados vs 1 hora depois"
+            - "78% compram do primeiro respondente"
+
+        pillar_3_personalization:
+          principle: "More relevant = More shows"
+          actions:
+            - "Multi-channel blast (call + text + DM + email)"
+            - "Lead scoring (Red/Yellow/Green)"
+            - "Route best leads to best closers"
+            - "Incentivos (push + pull)"
+            - "Proof matching demographics"
+
+        pillar_4_volume:
+          principle: "More attempts = More shows"
+          actions:
+            - "7+ reach-outs na primeira semana"
+            - "Auto reminders: instant, 24h, 12h, 3h"
+            - "Manual reminders: night before, morning of, 60min"
+            - "BAMFAM: sempre agendar próximo call"
+
+      day_1_contact_cadence:
+        description: "Cadência de contato Day 1 (opt-in)"
+        sequence:
+          - "Minuto 1: Call imediato"
+          - "Minuto 2: Double-dial"
+          - "Minuto 3: Voicemail"
+          - "Minuto 4: Text após voicemail"
+          - "Hora 2-3: Double-dial + text"
+          - "Hora 4-5: Double-dial + text"
+
+      show_rate_targets:
+        description: "Targets de show rate"
+        metrics:
+          schedule_rate: ">40%"
+          show_rate: ">70%"
+          throughput: ">28%"
+          close_rate: ">25%"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Initial Push Complete"
+      criteria:
+        - "Day 1 revenue tracking ativo"
+        - "Lead nurture four pillars implementados"
+        - "Show rate monitorado"
+        - "Daily emails enviados"
+      human_review: true
+      message: "Review Day 1-3 antes de social proof wave."
+      veto_conditions:
+        - condition: "Show rate <50%"
+          action: "WARNING - Revisar speed e volume"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 3: CART OPEN - Social Proof & Ads Push (Days 4-5)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Social Proof & Ads Push"
+    days: "Days 4-5"
+    tier: 2  # Acceleration
+    description: |
+      Amplificação com prova social e ads mais agressivos.
+
+      PRINCÍPIO: "Social proof removes skepticism.
+      Seeing others buy gives permission to buy."
+
+    agents:
+      primary: hormozi-ads
+      secondary: hormozi-copy
+
+    tasks:
+      - task_id: T3.1
+        name: "Publicar Social Proof"
+        required: true
+        description: "Screenshots, testimonials, numbers"
+        output: "social_proof_content/"
+
+      - task_id: T3.2
+        name: "Escalar Ads Vencedores"
+        required: true
+        description: "Increase budget em winners"
+        output: "ads_scale_decisions.yaml"
+
+      - task_id: T3.3
+        name: "Emails de Prova Social"
+        required: true
+        description: "Case studies, resultados"
+        output: "social_proof_emails/"
+
+      - task_id: T3.4
+        name: "Retargeting Agressivo"
+        required: true
+        description: "Ads para quem visitou mas não comprou"
+        output: "retargeting_campaign.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Social Proof Strategy
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      social_proof_types:
+        description: "Tipos de prova social para usar"
+        types:
+          - type: "Purchase Screenshots"
+            format: "Screenshot de vendas em tempo real"
+            example: "🔥 Acabou de entrar: João de São Paulo"
+
+          - type: "Testimonials"
+            format: "Depoimentos de compradores"
+            example: "Video de cliente contando experiência"
+
+          - type: "Numbers"
+            format: "Métricas do lançamento"
+            example: "327 pessoas já garantiram sua vaga"
+
+          - type: "FOMO Content"
+            format: "O que estão perdendo"
+            example: "Enquanto você pensa, outros estão implementando"
+
+      retargeting_angles:
+        description: "Ângulos para retargeting"
+        angles:
+          - name: "Quick Reminder"
+            copy: "Você estava olhando [PRODUTO]... ainda está disponível"
+
+          - name: "Social Proof"
+            copy: "327 pessoas entraram desde que você viu..."
+
+          - name: "Deadline Warning"
+            copy: "Última chance: fecha em X horas"
+
+          - name: "New Bonus"
+            copy: "Adicionamos um bônus novo..."
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Social Proof Wave Complete"
+      criteria:
+        - "Social proof publicado em todos canais"
+        - "Ads escalados com data"
+        - "Retargeting ativo"
+        - "Revenue tracking atualizado"
+      human_review: true
+      message: "Review mid-launch antes do push final."
+      veto_conditions:
+        - condition: "Vendas 70% abaixo do projetado"
+          action: "WARNING - Considerar contingência"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 4: CART CLOSE - Final Push (Days 6-7)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-4
+    name: "Cart Close - Final Push"
+    days: "Days 6-7"
+    tier: 2  # Maximum intensity
+    description: |
+      Push final com urgência real e objection handling.
+
+      PRINCÍPIO: "Deadlines create decisions.
+      More revenue is generated in the last 48 hours than the previous 5 days."
+
+    agent: hormozi-closer
+
+    tasks:
+      - task_id: T4.1
+        name: "Deadline Warning Emails"
+        required: true
+        description: "Urgency sequence: 48h, 24h, 12h, 6h, 1h"
+        output: "deadline_emails/"
+
+      - task_id: T4.2
+        name: "Objection Handling"
+        required: true
+        description: "Scripts para objeções comuns"
+        output: "objection_scripts/"
+
+      - task_id: T4.3
+        name: "Final Push Calls"
+        required: true
+        description: "Ligar para leads quentes não convertidos"
+        output: "final_push_calls.yaml"
+
+      - task_id: T4.4
+        name: "Cart Close Execution"
+        required: true
+        description: "Fechar carrinho pontualmente"
+        output: "cart_close.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Deadline Sequence
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      deadline_email_sequence:
+        description: "Sequência de urgência"
+        emails:
+          - timing: "48h before"
+            subject: "Aviso: [PRODUTO] fecha em 48 horas"
+            content: "Recap do valor + deadline"
+
+          - timing: "24h before"
+            subject: "Última chance amanhã"
+            content: "Social proof + what they'll miss"
+
+          - timing: "12h before"
+            subject: "12 horas restantes"
+            content: "Final objection handling"
+
+          - timing: "6h before"
+            subject: "Fechando esta noite"
+            content: "Last testimonial + direct CTA"
+
+          - timing: "1h before"
+            subject: "🚨 1 HORA - [PRODUTO] fecha em 60 minutos"
+            content: "Pure urgency + link"
+
+          - timing: "Cart close"
+            subject: "Fechou. Aqui está o que acontece agora..."
+            content: "Confirm closed + waitlist for next"
+
+      objection_scripts:
+        description: "Scripts para objeções comuns"
+        objections:
+          price:
+            objection: "É muito caro"
+            response: |
+              "Entendo. Deixa eu perguntar: quanto está custando
+              NÃO resolver [PROBLEMA] por mês? [espera resposta]
+              Então em X meses você perde R$Y. O investimento de R$Z
+              se paga em [tempo]. Faz sentido?"
+
+          timing:
+            objection: "Não é o momento certo"
+            response: |
+              "Quando seria o momento certo? [espera]
+              O que mudaria entre agora e [data]?
+              Na verdade, o melhor momento é quando você
+              está sentindo a dor. E você está sentindo agora."
+
+          need_to_think:
+            objection: "Preciso pensar"
+            response: |
+              "Totalmente justo. O que especificamente
+              você precisa pensar? [espera]
+              [address specific concern]
+              Isso faz sentido agora?"
+
+          spouse:
+            objection: "Preciso falar com meu parceiro"
+            response: |
+              "Claro. Qual você acha que seria a principal
+              preocupação dele/dela? [espera]
+              O que você diria para responder isso?"
+
+      final_push_script:
+        description: "Script para calls de push final"
+        script: |
+          "Hey [NAME], aqui é [YOU] da [COMPANY].
+
+          Vi que você demonstrou interesse em [PRODUTO] mas ainda
+          não garantiu sua vaga. Queria checar se posso ajudar
+          com alguma dúvida antes de fecharmos esta noite.
+
+          O que te faria decidir agora?
+
+          [Address objection]
+
+          Olha, baseado no que você me disse, [PRODUTO] é exatamente
+          o que você precisa para [RESULTADO]. E se eu [offer small bonus
+          or payment plan], você consegue começar hoje?"
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Cart Close Complete"
+      criteria:
+        - "Deadline emails enviados"
+        - "Final push calls executados"
+        - "Carrinho fechado no horário"
+        - "Revenue final contabilizado"
+      human_review: true
+      message: "Review cart close e preparar onboarding."
+      veto_conditions:
+        - condition: "Carrinho fechou com pedidos pendentes"
+          action: "WARNING - Processar antes de mover para Phase 5"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 5: POST-LAUNCH (Days 8+)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-5
+    name: "Post-Launch: Onboarding & Nurture"
+    days: "Days 8+"
+    tier: 3  # Retention
+    description: |
+      Onboarding de novos clientes e nurture dos não convertidos.
+
+      PRINCÍPIO: "The launch ends. The relationship begins.
+      Retention starts at onboarding."
+
+    agent: hormozi-retention
+
+    tasks:
+      - task_id: T5.1
+        name: "Executar Onboarding"
+        required: true
+        description: "Welcome sequence para compradores"
+        output: "onboarding_sequence/"
+
+      - task_id: T5.2
+        name: "Nurture Não-Convertidos"
+        required: true
+        description: "Sequence para quem não comprou"
+        output: "non_buyer_nurture/"
+
+      - task_id: T5.3
+        name: "Post-Launch Analysis"
+        required: true
+        description: "Review completo do lançamento"
+        output: "launch_analysis.yaml"
+
+      - task_id: T5.4
+        name: "Preparar Próximo Lançamento"
+        required: true
+        description: "Learnings e melhorias"
+        output: "next_launch_improvements.md"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Post-Launch
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      onboarding_sequence:
+        description: "Sequência de onboarding"
+        emails:
+          - day: 0
+            subject: "Bem-vindo! Seu próximo passo"
+            content: "Login + primeiro passo claro"
+
+          - day: 1
+            subject: "Quick win: Faça isso primeiro"
+            content: "Uma ação simples para momentum"
+
+          - day: 3
+            subject: "Como está indo?"
+            content: "Check-in + offer help"
+
+          - day: 7
+            subject: "Sua primeira semana"
+            content: "Review + next milestone"
+
+      non_buyer_nurture:
+        description: "Nurture para quem não comprou"
+        emails:
+          - day: 1
+            subject: "Obrigado por participar"
+            content: "Agradecer interesse + value content"
+
+          - day: 7
+            subject: "Enquanto isso..."
+            content: "Free resource relacionado"
+
+          - day: 14
+            subject: "Resultado de quem entrou"
+            content: "Social proof dos compradores"
+
+          - day: 30
+            subject: "Interesse em [PRODUTO]?"
+            content: "Soft CTA para waitlist do próximo"
+
+      launch_analysis_template:
+        description: "Template de análise pós-launch"
+        sections:
+          metrics:
+            - "Revenue total: R$___"
+            - "Número de vendas: ___"
+            - "Ticket médio: R$___"
+            - "Conversion rate: ___%"
+            - "Show rate: ___%"
+            - "Close rate: ___%"
+
+          channel_performance:
+            - "Email revenue: R$___"
+            - "Ads revenue: R$___"
+            - "Organic revenue: R$___"
+
+          learnings:
+            - "O que funcionou: ___"
+            - "O que não funcionou: ___"
+            - "Surpresas: ___"
+
+          next_launch:
+            - "Melhorias: ___"
+            - "Manter: ___"
+            - "Testar: ___"
+
+    checkpoint:
+      id: CP_PHASE_5
+      name: "Post-Launch Complete"
+      criteria:
+        - "Todos os compradores em onboarding"
+        - "Non-buyers em nurture"
+        - "Analysis documentado"
+        - "Improvements identificados"
+      human_review: true
+      message: "Review final do lançamento."
+      veto_conditions:
+        - condition: "Onboarding não iniciado"
+          action: "BLOCK - Retenção em risco"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - activate_contingency: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - escalate_to_war_room: true
+    - max_retries: 1  # Launch is time-sensitive
+
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "hormozi-chief"
+    - document_reason: true
+    - require_human_override: true
+
+  common_failures:
+    - failure: "Tech failure cart open"
+      phase: 2
+      resolution: "Backup page + extend deadline"
+
+    - failure: "Low show rate"
+      phase: 2
+      resolution: "Increase volume pillar + add incentives"
+
+    - failure: "Sales below projection"
+      phase: 3
+      resolution: "Add bonus + increase ads + extend deadline"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  phase_0:
+    - "launch_calendar.yaml"
+    - "role_assignments.yaml"
+    - "war_room_setup.yaml"
+    - "contingency_plans.yaml"
+
+  phase_1:
+    - "prelaunch_emails/"
+    - "landing_pages/"
+    - "anticipation_content/"
+    - "prelaunch_ads.yaml"
+
+  phase_2:
+    - "day1_execution.yaml"
+    - "lead_nurture_setup.yaml"
+    - "daily_emails/"
+    - "day1_3_decisions.yaml"
+
+  phase_3:
+    - "social_proof_content/"
+    - "ads_scale_decisions.yaml"
+    - "social_proof_emails/"
+    - "retargeting_campaign.yaml"
+
+  phase_4:
+    - "deadline_emails/"
+    - "objection_scripts/"
+    - "final_push_calls.yaml"
+    - "cart_close.yaml"
+
+  phase_5:
+    - "onboarding_sequence/"
+    - "non_buyer_nurture/"
+    - "launch_analysis.yaml"
+    - "next_launch_improvements.md"
+
+  final_deliverable:
+    name: "Launch Package"
+    location: "outputs/launches/{launch_id}/"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS BY PHASE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents_by_phase:
+  PHASE-0:
+    primary: ["hormozi-chief"]
+    secondary: []
+
+  PHASE-1:
+    primary: ["hormozi-copy"]
+    secondary: ["hormozi-ads"]
+
+  PHASE-2:
+    primary: ["hormozi-launch"]
+    secondary: []
+
+  PHASE-3:
+    primary: ["hormozi-ads"]
+    secondary: ["hormozi-copy"]
+
+  PHASE-4:
+    primary: ["hormozi-closer"]
+    secondary: []
+
+  PHASE-5:
+    primary: ["hormozi-retention"]
+    secondary: []
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-10"
+  author: "squad-architect"
+  source_frameworks:
+    - "100M_LAUNCH_PLAYBOOK"
+    - "10_CRITICAL_ROLES"
+    - "LEAD_NURTURE_FOUR_PILLARS"
+    - "LEAD_NURTURE_SOP"
+  source_mind: "alex_hormozi"
+  lines: 900+
+  quality_gate: "SC_WFL_001"
+  dependencies:
+    - workflow: "wf-grand-slam-offer"
+      required: true
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

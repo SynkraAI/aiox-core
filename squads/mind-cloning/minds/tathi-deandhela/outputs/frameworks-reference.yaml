@@ -1,0 +1,192 @@
+# Frameworks Reference — Tathi Deandhela Squad v2
+# Total: 20 frameworks (6 v1 + 14 v2 delta)
+
+frameworks:
+  # === v1: Extraídos de transcrições ===
+
+  - id: F1
+    name: "Focused Positioning Loop"
+    type: "PRINCIPLES"
+    version: "v1"
+    domain: "positioning"
+    rule: "Escolher 1 tema principal por ciclo de crescimento"
+
+  - id: F2
+    name: "Roteiro de Palestra Memorável"
+    type: "METHODOLOGY"
+    version: "v1"
+    domain: "keynote-design"
+    rule: "Toda palestra precisa de início, meio e fim com linha de raciocínio"
+
+  - id: F3
+    name: "Design Sensorial de Ambiente"
+    type: "METHODOLOGY"
+    version: "v1"
+    domain: "stage-design"
+    rule: "Preparação emocional do ambiente começa antes da fala"
+
+  - id: F4
+    name: "Sales as Process (Not Event)"
+    type: "METHODOLOGY"
+    version: "v1"
+    domain: "sales"
+    rule: "Venda é sequência de etapas; pular etapa derruba eficácia"
+
+  - id: F5
+    name: "Persuasion Ethics Filter"
+    type: "FILTER"
+    version: "v1"
+    domain: "persuasion"
+    rule: "Toda influência deve manter benefício mútuo e horizonte longo"
+
+  - id: F6
+    name: "Authority Construction Model"
+    type: "MODEL"
+    version: "v1"
+    domain: "authority"
+    rule: "Autoridade sustentável = caráter + competência"
+
+  # === v2 Delta: Extraídos de 21 MDs complementares ===
+
+  - id: F7
+    name: "Time Model Canvas"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "time-management"
+    blocks: 12
+    rule: "Framework visual de gestão de tempo com post-its"
+    ecosystem_role: "Gestão (meio do ecossistema)"
+    source: "bonus-ebook-time-model-canvas.md"
+
+  - id: F8
+    name: "Progressive Regressive Visualization"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "planning"
+    steps: 10
+    rule: "Brainstorm → Meditação → 10a→5a→1a→6m→3m→1m→15d→1sem"
+    source: "bonus-ebook-time-model-canvas.md"
+
+  - id: F9
+    name: "Pedras Grandes Prioritization"
+    type: "ADAPTED"
+    version: "v2"
+    domain: "prioritization"
+    origin: "Stephen Covey"
+    rule: "Pedras grandes → Cascalho → Areia → Água. Pareto: 80% = 20%"
+    source: "bonus-ebook-time-model-canvas.md"
+
+  - id: F10
+    name: "Delegation Protocol (WHY + HOW)"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "delegation"
+    rule: "Explicar POR QUE + COMO, não apenas O QUE"
+    source: "bonus-ebook-time-model-canvas.md"
+
+  - id: F11
+    name: "Elimination Test"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "prioritization"
+    rule: "Deixar de fazer vai atrapalhar? SE não → eliminar"
+    source: "bonus-ebook-time-model-canvas.md"
+
+  - id: F12
+    name: "Guardian Accountability System"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "accountability"
+    rule: "2-3 guardians + rewards + penalties para cada meta SMART"
+    source: "bonus-ebook-time-model-canvas.md"
+
+  - id: F13
+    name: "5% Behavior Change Rule"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "behavior-change"
+    rule: "5% dos comportamentos = transformação extraordinária"
+    source: "bonus-ebook-time-model-canvas.md"
+
+  - id: F14
+    name: "Contingency Planning (Goal-Preserving)"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "planning"
+    rule: "Plano B não é mudar a meta"
+    source: "bonus-ebook-time-model-canvas.md"
+
+  - id: F15
+    name: "Speaker Canvas"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "keynote-design"
+    blocks: 11
+    rule: "Transforma improviso em arquitetura de palestra"
+    ecosystem_role: "Planejamento (fim do ecossistema)"
+    source: "bonus-speaker-canvas.md"
+
+  - id: F16
+    name: "Ciclo de Ouro do Palestrante"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "career-evolution"
+    stages: 5
+    bonus: "Abundância"
+    rule: "5 estágios de evolução do palestrante"
+    note: "Versão simplificada — F17 (Roda 10 áreas) é superior"
+    source: "00-roda-ciclo-de-ouro-do-palestrante.md"
+
+  - id: F17
+    name: "Roda do Palestrante Notável"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "diagnostic"
+    areas: 10
+    scale: "0-10"
+    rule: "Diagnóstico mensurável, replicável"
+    ecosystem_role: "Diagnóstico (início do ecossistema)"
+    note: "Versão SUPERIOR à Roda 6 áreas (F16). Usar como padrão."
+    source: "mc-roda-do-palestrante-notavel.md"
+
+  - id: F18
+    name: "4 Técnicas de Abertura"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "keynote-design"
+    techniques: 4
+    rule: "4 formas de abrir palestra para capturar atenção imediata"
+    source: "bonus-ferramenta-aula1-do-zero-ao-palestrante.md"
+
+  - id: F19
+    name: "Agency Prospecting Funnel"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "business-development"
+    phases: 3
+    rule: "Base → Expansão → Consolidação"
+    caveat: "Dados de 2018 — validar antes de usar"
+    source: "mc-agencia-de-palestrantes.md"
+
+  - id: F20
+    name: "International Event Replication Model"
+    type: "PROPRIETÁRIO"
+    version: "v2"
+    domain: "events"
+    rule: "100 pessoas + 3-4 speakers + sponsor tiers"
+    source: "mc-evento-empreendedorismo-florida/londres.md"
+
+# Ecosystem Map
+ecosystem:
+  description: "3 frameworks proprietários formam um ecossistema integrado"
+  flow: "F17 (Diagnóstico) → F7 (Gestão) → F15 (Planejamento)"
+  detail:
+    - step: 1
+      framework: F17
+      role: "Diagnostica onde você está (10 áreas, 0-10)"
+    - step: 2
+      framework: F7
+      role: "Organiza tempo e prioridades (12 blocos)"
+    - step: 3
+      framework: F15
+      role: "Arquiteta cada palestra individual (11 blocos)"

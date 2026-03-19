@@ -1,0 +1,196 @@
+---
+# LLM LANGUAGE BLACKLIST — José Carlos Amorim
+# Fonte: expansion-packs/newsletter-growth-dankoe/data/author-profile.yaml
+# Severidade: CRÍTICO — Rejeitar QUALQUER texto que contenha estes padrões
+# Uso: @marketing-production DEVE verificar contra esta lista antes de finalizar
+# Gerado: 2026-02-01
+
+severity: "CRITICO"
+source: "newsletter-growth-dankoe/data/author-profile.yaml"
+
+# ============================================
+# CATEGORIAS DE PADRÕES PROIBIDOS
+# ============================================
+
+nao_e_sobre_x_e_sobre_y:
+  exemplos:
+    - "Não é sobre X, é sobre Y"
+    - "não é sobre falar bonito — é sobre ser entendido"
+    - "não é sobre o destino, é sobre a jornada"
+    - "não é sobre perfeição, é sobre progresso"
+  alternativa: "Seja direto. Diga o que É, sem negação retórica."
+
+transicoes_artificiais:
+  exemplos:
+    - "Deixa eu te contar uma coisa..."
+    - "Aqui está a verdade..."
+    - "A verdade é que..."
+    - "O segredo é..."
+    - "A chave é..."
+    - "O ponto é..."
+    - "A questão é..."
+    - "No final das contas..."
+    - "No fim do dia..."
+    - "Em última análise..."
+    - "Dito isso..."
+    - "Com isso em mente..."
+    - "Tendo dito isso..."
+
+intensificadores_vazios:
+  exemplos:
+    - "verdadeiramente"
+    - "genuinamente"
+    - "absolutamente"
+    - "incrivelmente"
+    - "extremamente"
+    - "profundamente transformador"
+    - "verdadeiramente revolucionário"
+    - "genuinamente acredito"
+    - "absolutamente essencial"
+    - "incrivelmente poderoso"
+    - "brutal"
+    - "diferença brutal"
+
+listas_narrativas_falsas:
+  exemplos:
+    - "Primeiro, ... Segundo, ... Terceiro, ..."
+    - "Por um lado... Por outro lado..."
+    - "Não apenas X, mas também Y"
+    - "Tanto X quanto Y"
+    - "X e, mais importante, Y"
+
+frases_guru:
+  exemplos:
+    - "Sua jornada é única"
+    - "Cada pessoa tem seu próprio caminho"
+    - "Não existe certo ou errado"
+    - "Tudo acontece por uma razão"
+    - "Você é capaz de mais do que imagina"
+    - "O único limite é você mesmo"
+    - "Acredite no processo"
+    - "Confie na jornada"
+    - "Você já tem todas as respostas dentro de você"
+    - "É uma jornada, não um destino"
+
+pseudo_profundidade:
+  exemplos:
+    - "Mas aqui está o que ninguém te conta..."
+    - "O que a maioria das pessoas não entende é..."
+    - "Poucos percebem que..."
+    - "O que realmente importa é..."
+    - "No fundo, todos nós..."
+    - "Se você pensar bem..."
+    - "Quando você para pra pensar..."
+
+validacoes_excessivas:
+  exemplos:
+    - "E tudo bem!"
+    - "E está tudo bem com isso"
+    - "Isso é completamente normal"
+    - "Você não está sozinho nisso"
+    - "Muitas pessoas passam por isso"
+    - "É perfeitamente natural"
+    - "Não há nada de errado com você"
+
+conclusoes_genericas:
+  exemplos:
+    - "E é isso que faz toda a diferença"
+    - "E essa é a verdadeira lição"
+    - "E no final, é disso que se trata"
+    - "Isso muda tudo"
+    - "E isso é o que realmente importa"
+
+perguntas_retoricas_vazias:
+  exemplos:
+    - "Faz sentido?"
+    - "Você consegue ver?"
+    - "Percebe a diferença?"
+    - "Entende o que quero dizer?"
+    - "Consegue imaginar?"
+
+metaforas_gastas:
+  exemplos:
+    - "é uma maratona, não um sprint"
+    - "plantar sementes"
+    - "colher os frutos"
+    - "a ponta do iceberg"
+    - "conectar os pontos"
+    - "pensar fora da caixa"
+    - "sair da zona de conforto"
+    - "dar o próximo passo"
+    - "virar a chave"
+    - "mudar o jogo"
+    - "elevar o nível"
+
+aberturas_llm:
+  exemplos:
+    - "Imagine..."
+    - "Imagine por um momento..."
+    - "Deixa eu pintar um cenário..."
+    - "Vamos explorar..."
+    - "Vamos mergulhar em..."
+    - "Vamos falar sobre..."
+    - "Hoje quero compartilhar..."
+    - "Neste artigo, vamos..."
+
+empatia_artificial:
+  exemplos:
+    - "Eu entendo como você se sente"
+    - "Sei exatamente pelo que você está passando"
+    - "Posso imaginar como deve ser difícil"
+    - "Deve ser frustrante quando..."
+
+preenchimento:
+  exemplos:
+    - "basicamente"
+    - "essencialmente"
+    - "fundamentalmente"
+    - "literalmente" # usado incorretamente
+    - "de certa forma"
+    - "de alguma maneira"
+    - "por assim dizer"
+    - "se você quiser"
+    - "digamos assim"
+
+falsa_humildade:
+  exemplos:
+    - "Não sou especialista, mas..."
+    - "Posso estar errado, mas..."
+    - "Na minha humilde opinião..."
+    - "Longe de mim dizer que..."
+    - "Sem querer ser..."
+
+clickbait_textual:
+  exemplos:
+    - "A resposta pode te surpreender..."
+    - "O que descobri vai te chocar..."
+    - "Prepare-se para..."
+    - "Você não vai acreditar..."
+    - "Spoiler: ..."
+
+fechamentos_genericos:
+  exemplos:
+    - "Até a próxima!"
+    - "Nos vemos em breve!"
+    - "Continue brilhando!"
+    - "Siga em frente!"
+    - "Bons ventos!"
+    - "Sucesso!"
+
+# ============================================
+# INSTRUÇÕES DE DETECÇÃO
+# ============================================
+instrucoes: |
+  ANTES de finalizar qualquer texto:
+  1. Faça CTRL+F para cada padrão desta blacklist
+  2. Se encontrar QUALQUER um, reescreva o trecho
+  3. Substitua por linguagem específica, concreta, com detalhes reais
+  4. Na dúvida, seja mais direto e menos "filosófico"
+
+principio_reescrita: |
+  LLMs usam estruturas genéricas porque não têm experiência real.
+  José TEM experiência real. Use DETALHES ESPECÍFICOS:
+  - Números reais (18 meses, 11 anos, R$ 88k)
+  - Nomes reais (Naval Ravikant, Alan Nicolas)
+  - Situações específicas (saí da Rede Amazônica, tinha TDAH)
+  - Metáforas ORIGINAIS (não as gastas da lista)

@@ -1,0 +1,159 @@
+---
+# José Amorim - Sources Inventory
+# Updated: 2026-02-01 (Instagram scrape added)
+
+mind: "jose_amorim"
+created_at: "2025-10-15"
+updated_at: "2026-02-01"
+status: "active"
+
+sources:
+  - id: livro-nexialismo
+    type: book
+    tier: 1
+    title: "Nexialismo: A Última Inteligência"
+    description: "Livro autoral publicado na Amazon. 200+ páginas. Fonte primária de voz, filosofia, e framework nexialista."
+    path: "sources/books/Livro_ Nexialismo - A última inteligência (5).txt"
+    metadata:
+      author: "José Carlos Amorim"
+      year: "2025"
+      category: "self-authored"
+      priority: 1
+      word_count: ~40000
+      quality: "excellent — voz autêntica não filtrada"
+
+  - id: aula-vibe-coding
+    type: video
+    tier: 1
+    title: "Aula Vibe Coding (Transcrição)"
+    description: "Transcrição de aula ao vivo (~2h). Fonte primária de fala informal, didática, e interação com alunos."
+    path: "sources/videos/Aula Vibe Coding Transcrita.txt"
+    metadata:
+      author: "José Carlos Amorim"
+      year: "2025"
+      category: "self-authored"
+      priority: 1
+      word_count: ~8000
+      quality: "excellent — fala ao vivo, sem edição"
+
+  - id: entrevista-jose
+    type: interview
+    tier: 2
+    title: "Entrevista Estruturada"
+    description: "Entrevista para extração de perfil cognitivo, valores, e padrões comportamentais."
+    path: "sources/interviews/entrevista.md"
+    metadata:
+      author: "José Carlos Amorim"
+      year: "2025"
+      category: "structured-interview"
+      priority: 2
+
+  - id: geral-compilacao
+    type: interview
+    tier: 2
+    title: "Compilação Geral"
+    description: "Compilação de dados pessoais, profissionais e cognitivos extraídos de múltiplas interações."
+    path: "sources/geral.md"
+    metadata:
+      author: "synthetic"
+      year: "2025"
+      category: "compiled"
+      priority: 2
+
+  - id: cognitive-architecture
+    type: pdf
+    tier: 2
+    title: "Cognitive Architecture"
+    description: "Análise de arquitetura cognitiva pré-compilada."
+    path: "sources/Cognitive Architecture.yaml"
+    metadata:
+      category: "synthetic-analysis"
+      priority: 3
+
+  - id: linguistic-forensics
+    type: pdf
+    tier: 2
+    title: "Linguistic Forensics"
+    description: "Análise forense linguística pré-compilada."
+    path: "sources/Linguistic Forensics.yaml"
+    metadata:
+      category: "synthetic-analysis"
+      priority: 3
+
+  - id: perfil-psicometrico
+    type: pdf
+    tier: 2
+    title: "Perfil Psicométrico"
+    description: "Perfil psicométrico detalhado em formato JSON."
+    path: "sources/jose_amorim_perfil_psicometrico.json"
+    metadata:
+      category: "synthetic-analysis"
+      priority: 3
+
+  - id: voice-library
+    type: pdf
+    tier: 2
+    title: "Voice Library"
+    description: "Biblioteca de voz compilada."
+    path: "sources/voice_library.json"
+    metadata:
+      category: "synthetic-analysis"
+      priority: 3
+
+  - id: language-forensics-md
+    type: pdf
+    tier: 2
+    title: "Language Forensics (MD)"
+    description: "Forense linguística em formato markdown."
+    path: "sources/language_forensics.md"
+    metadata:
+      category: "synthetic-analysis"
+      priority: 3
+
+  - id: mental-arqueology
+    type: pdf
+    tier: 2
+    title: "Mental Arqueology"
+    description: "Arqueologia mental - padrões profundos."
+    path: "sources/mental_arqueology.yaml"
+    metadata:
+      category: "synthetic-analysis"
+      priority: 3
+
+  # === NEW: Instagram Scrape (2026-02-01) ===
+  - id: instagram-scrape-2026-02
+    type: social_media
+    tier: 1
+    title: "Instagram Scrape — @josecarlosamorim.ai (50 posts)"
+    description: |
+      50 posts do Instagram coletados via Apify (Out 2024 – Jan 2026).
+      Inclui captions, likes, comments, views. Fonte primária de voz
+      informal pública, hooks, CTAs, e padrões de engajamento.
+    path: "sources/instagram/instagram-scrape-2026-02-01.md"
+    metadata:
+      author: "José Carlos Amorim"
+      year: "2024-2026"
+      category: "social-media"
+      priority: 1
+      post_count: 50
+      period: "Oct 2024 - Jan 2026"
+      top_post_likes: 10989
+      median_likes: 40
+      scrape_tool: "Apify Instagram Scraper"
+      dataset_id: "3Z3fg2QnQwMjUrMNr"
+      quality: "excellent — voz pública real, sem filtro editorial"
+
+statistics:
+  total_sources: 11
+  by_tier:
+    tier_1: 3  # livro + aula + instagram
+    tier_2: 8
+    tier_3: 0
+  by_type:
+    book: 1
+    video: 1
+    interview: 2
+    pdf: 5
+    social_media: 1
+    article: 0
+    youtube: 0

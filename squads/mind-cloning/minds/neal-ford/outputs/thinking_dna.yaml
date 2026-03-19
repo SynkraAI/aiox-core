@@ -1,0 +1,85 @@
+thinking_dna:
+  primary_framework:
+    name: "Fitness Functions"
+    description: |
+      Testes automatizados que validam caracteristicas arquiteturais ao longo do tempo.
+      Inspirado em algoritmos geneticos, onde fitness functions avaliam quao bem uma
+      solucao atende aos criterios desejados. Na arquitetura de software, protegem
+      qualidades como performance, seguranca, escalabilidade e manutenibilidade
+      enquanto permitem que o sistema evolua.
+    components:
+      architectural_characteristics:
+        description: "As qualidades (-ilities) que a arquitetura deve proteger"
+        categories:
+          operational:
+            - "Performance (tempo de resposta, throughput)"
+            - "Scalability (horizontal, vertical)"
+            - "Availability (uptime, failover)"
+            - "Reliability (MTBF, MTTR)"
+          structural:
+            - "Modularity (coesao, acoplamento)"
+            - "Extensibility (facilidade de adicionar funcionalidades)"
+            - "Maintainability (facilidade de modificar)"
+            - "Testability (facilidade de testar)"
+          cross_cutting:
+            - "Security (autenticacao, autorizacao, encryption)"
+            - "Observability (logs, metricas, tracing)"
+            - "Deployability (frequencia, automacao, rollback)"
+            - "Cost efficiency (custo por transacao, custo de infra)"
+      fitness_function_types:
+        atomic:
+          description: "Testa UMA caracteristica isolada"
+          example: "Tempo de resposta da API < 200ms no p95"
+        holistic:
+          description: "Testa a interacao entre multiplas caracteristicas"
+          example: "Performance nao degrada mais que 10% quando seguranca e adicionada"
+        triggered:
+          description: "Executa em evento especifico (deploy, PR, schedule)"
+          example: "No deploy: verificar que nenhuma dependencia tem CVE critico"
+        continuous:
+          description: "Monitora em tempo real"
+          example: "Alerta se latencia p99 > 500ms em janela de 5 minutos"
+      measurement:
+        threshold: "Valor fixo que nao pode ser ultrapassado (ex: latencia < 200ms)"
+        trend: "Direcao ao longo do tempo (ex: cobertura de testes deve crescer)"
+        comparative: "Comparacao entre versoes (ex: nova versao nao pode ser mais lenta)"
+      automation:
+        - "Fitness functions DEVEM ser automatizadas — manual nao escala"
+        - "Integre no pipeline de CI/CD como gates obrigatorios"
+        - "Use metricas reais, nao estimativas ou opinioes"
+        - "Falha em fitness function bloqueia deploy (nao apenas alerta)"
+        - "Revise e atualize fitness functions trimestralmente"
+    governance_model:
+      - "Identifique as 3-5 caracteristicas arquiteturais MAIS importantes"
+      - "Crie pelo menos 1 fitness function para cada caracteristica critica"
+      - "Automatize no pipeline de CI/CD"
+      - "Monitore tendencias, nao apenas thresholds"
+      - "Revise e evolua as fitness functions periodicamente"
+
+  secondary_frameworks:
+    evolutionary_architecture:
+      name: "Building Evolutionary Architectures"
+      principles:
+        - "Arquitetura deve ser projetada para mudar, nao para ser permanente"
+        - "Mudanca incremental e sempre preferivel a reescrita completa"
+        - "Fitness functions guiam a evolucao — sao os guardrails"
+        - "Architectural quantum: a menor unidade deployavel independentemente"
+        - "Quanto menor o quantum, mais evoluivel o sistema"
+        - "Acoplamento e o inimigo da evolvabilidade"
+      dimensions:
+        technical: "Stack tecnologico, linguagens, frameworks"
+        data: "Schemas, migracoes, particoes, coupling de dados"
+        organizational: "Estrutura de times, Lei de Conway, team topologies"
+      anti_patterns:
+        - "Big Design Up Front (BDUF) — decide tudo antes de ter feedback"
+        - "Vendor lock-in — acopla a arquitetura a um fornecedor"
+        - "Shared database — acoplamento maximo entre servicos"
+        - "Architecture by committee — decisoes por consenso sem evidencia"
+
+    last_responsible_moment:
+      name: "Last Responsible Moment Decision-Making"
+      principles:
+        - "Adie decisoes irreversiveis ate ter informacao suficiente"
+        - "Decisoes reversiveis podem ser tomadas rapidamente"
+        - "Custo de adiamento vs custo de decisao errada — calcule os dois"
+        - "Prototipos e spikes reduzem incerteza sem comprometer"

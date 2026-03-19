@@ -1,0 +1,511 @@
+# Opportunity Screening Workflow
+# Based on Alex Hormozi's $100M Offers methodology
+# Source: 01_FRAMEWORKS_OPERACIONAIS + 05_ANTIPATTERN_SHIELDS
+# Version: 1.0.0
+
+id: wf-opportunity-screening
+name: "Opportunity Screening"
+version: "1.0.0"
+duration: "20-30 min"
+description: |
+  Workflow de VETO para validação de oportunidades ANTES de criar ofertas.
+  Este é um GATE obrigatório - nenhuma oferta deve ser criada sem passar por aqui.
+
+  FILOSOFIA: "Uma ótima oferta para um mercado ruim sempre falhará."
+
+  RESULTADO: Decisão PASS/FAIL com justificativa documentada.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Antes de criar qualquer nova oferta"
+  - "Antes de pivotar para novo mercado"
+  - "Quando cliente pede ajuda com negócio"
+  - "Validação de ideia de negócio"
+  - "Due diligence de oportunidade"
+
+decision_matrix_fit:
+  complexity: low
+  agents_required: 1
+  estimated_duration: "20-30 min"
+  user_involvement: "medium (responde perguntas)"
+  prerequisites:
+    - "Ideia de mercado/negócio definida"
+    - "Acesso ao potencial cliente (para validação)"
+
+trigger_points:
+  - "Usuário pede para criar oferta"
+  - "Usuário quer entrar em novo mercado"
+  - "hormozi-chief recebe consulta de novo negócio"
+  - "Decisão NOVO no wf-growth-decision"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: hormozi-offers
+      role: "Validação de mercado e screening de antipatterns"
+      phases: [0, 1, 2]
+
+  integration:
+    checklists_required:
+      - "checklists/market-validation-veto.md"
+      - "checklists/antipattern-screening.md"
+
+    data_required:
+      - "data/antipatterns-database.yaml"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 0: MARKET VALIDATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-0
+    name: "Market Validation"
+    duration: "10-15 min"
+    tier: 0
+    description: |
+      Validação dos 4 indicadores de mercado (Starving Crowd).
+      QUALQUER indicador = 0 → VETO IMEDIATO.
+
+    agent: hormozi-offers
+
+    tasks:
+      - task_id: T0.1
+        name: "Avaliar Dor Massiva"
+        required: true
+        description: "O público precisa DESESPERADAMENTE de solução?"
+        output: "pain_assessment.yaml"
+
+      - task_id: T0.2
+        name: "Avaliar Poder de Compra"
+        required: true
+        description: "O público tem dinheiro para pagar?"
+        output: "purchasing_power.yaml"
+
+      - task_id: T0.3
+        name: "Avaliar Acessibilidade"
+        required: true
+        description: "O público é fácil de atingir?"
+        output: "accessibility.yaml"
+
+      - task_id: T0.4
+        name: "Avaliar Crescimento"
+        required: true
+        description: "O mercado está crescendo?"
+        output: "growth.yaml"
+
+    inline_structures:
+      four_indicators:
+        name: "Os 4 Indicadores de um Mercado Vencedor"
+        source: "$100M Offers - Chapter 4"
+
+        indicators:
+          - id: IND_001
+            name: "Dor Massiva"
+            question: "O público precisa DESESPERADAMENTE de uma solução?"
+            diagnostic_questions:
+              - "Quanto custa NÃO resolver esse problema?"
+              - "O problema afeta a vida diária?"
+              - "Eles já tentaram resolver antes?"
+              - "Quanto pagariam para resolver HOJE?"
+            scoring:
+              3: "Dor aguda, urgência diária, custoso não resolver"
+              2: "Dor moderada, inconveniência significativa"
+              1: "Dor leve, 'seria bom ter'"
+              0: "Sem dor real identificada"
+            minimum: 2
+            veto_at: 0
+
+          - id: IND_002
+            name: "Poder de Compra"
+            question: "O público tem dinheiro (ou acesso) para pagar?"
+            diagnostic_questions:
+              - "Qual a renda média do avatar?"
+              - "Eles têm autoridade de compra?"
+              - "Podem acessar crédito se necessário?"
+              - "Já gastam dinheiro em soluções similares?"
+            scoring:
+              3: "Budget disponível, decisão própria"
+              2: "Budget apertado, mas prioriza"
+              1: "Precisa aprovação de terceiros"
+              0: "Sem recursos financeiros"
+            minimum: 2
+            veto_at: 0
+
+          - id: IND_003
+            name: "Fácil de Atingir"
+            question: "O público está concentrado em lugares acessíveis?"
+            diagnostic_questions:
+              - "Onde eles se reúnem online?"
+              - "Existem associações/grupos do setor?"
+              - "Há listas de email disponíveis?"
+              - "Posso encontrar 1000 deles em 1 hora?"
+            scoring:
+              3: "Grupos, associações, listas claras"
+              2: "Disperso mas identificável"
+              1: "Difícil de encontrar"
+              0: "Sem concentração identificável"
+            minimum: 2
+            veto_at: 0
+
+          - id: IND_004
+            name: "Crescendo"
+            question: "O mercado está em crescimento?"
+            diagnostic_questions:
+              - "O setor está expandindo ou contraindo?"
+              - "Há novos entrantes no mercado?"
+              - "A demanda está aumentando?"
+              - "Tendências apontam para cima?"
+            scoring:
+              3: "Crescimento acelerado (+20%/ano)"
+              2: "Crescimento moderado (+5-20%/ano)"
+              1: "Estável"
+              0: "Em declínio"
+            minimum: 1
+            veto_at: 0
+
+        total_scoring:
+          max: 12
+          pass: ">= 8"
+          warning: "6-7"
+          fail: "< 6 ou qualquer indicador = 0"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Market Validation Gate"
+      criteria:
+        - "4 indicadores avaliados"
+        - "Nenhum indicador = 0"
+        - "Total >= 8/12"
+      human_review: false
+      auto_veto: true
+      veto_conditions:
+        - condition: "Qualquer indicador = 0"
+          action: "VETO IMEDIATO - Mercado inviável"
+          message: "Não prosseguir. Mercado falha em critério fundamental."
+
+        - condition: "Total < 6/12"
+          action: "VETO - Mercado fraco demais"
+          message: "Mercado não tem potencial suficiente para investimento."
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 1: ANTIPATTERN SCREENING
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-1
+    name: "Antipattern Screening"
+    duration: "10-15 min"
+    tier: 0
+    description: |
+      Screening para antipatterns conhecidos que indicam problemas estruturais.
+      Estes são problemas que NÃO se resolvem com melhor oferta ou marketing.
+
+    agent: hormozi-offers
+
+    tasks:
+      - task_id: T1.1
+        name: "Screening de Churn Estrutural"
+        required: true
+        description: "Há churn inevitável pela natureza do negócio?"
+        output: "churn_screening.yaml"
+
+      - task_id: T1.2
+        name: "Screening de Comoditização"
+        required: true
+        description: "O mercado compete apenas em preço?"
+        output: "commoditization_screening.yaml"
+
+      - task_id: T1.3
+        name: "Screening de Ciclo de Caixa"
+        required: true
+        description: "O ciclo de caixa é sustentável?"
+        output: "cash_cycle_screening.yaml"
+
+      - task_id: T1.4
+        name: "Screening de Dependência"
+        required: true
+        description: "Há dependência crítica de fatores externos?"
+        output: "dependency_screening.yaml"
+
+    inline_structures:
+      antipattern_screening:
+        source: "data/antipatterns-database.yaml"
+
+        critical_antipatterns:
+          - id: AP_CHURN_001
+            name: "Churn Estrutural"
+            description: "Modelo de negócio com churn inevitável"
+            trigger_questions:
+              - "O cliente resolve o problema e vai embora?"
+              - "O sucesso do cliente significa que ele não precisa mais de você?"
+              - "A retenção depende de falha do cliente?"
+            examples:
+              - "Curso de casamento (cliente casa e vai embora)"
+              - "Consultoria de implementação única"
+              - "Serviço de mudança residencial"
+            veto: true
+            antidote: "Reenquadrar oferta para resultado contínuo ou criar produtos adjacentes"
+
+          - id: AP_COMMODITY_001
+            name: "Comoditização"
+            description: "Produto/serviço indistinguível da concorrência"
+            trigger_questions:
+              - "O cliente compara você com outros apenas por preço?"
+              - "Você é facilmente substituível?"
+              - "Não há mecanismo único identificável?"
+            examples:
+              - "Agência de marketing genérica"
+              - "Consultoria sem metodologia proprietária"
+              - "Produto sem diferencial claro"
+            veto: true
+            antidote: "Criar mecanismo único + nichar profundamente"
+
+          - id: AP_CASH_001
+            name: "Ciclo de Caixa Invertido"
+            description: "Custos antes de receita em escala"
+            trigger_questions:
+              - "Você paga antes de receber?"
+              - "O tempo entre custo e receita é longo?"
+              - "Escalar exige mais capital do que gera?"
+            examples:
+              - "Infoproduto com alto CAC e parcelamento longo"
+              - "Serviço com entrega antes do pagamento"
+            veto: false
+            warning: true
+            antidote: "Reestruturar pagamento ou modelo de entrega"
+
+          - id: AP_DEPENDENCY_001
+            name: "Dependência de Plataforma"
+            description: "Negócio depende de plataforma externa"
+            trigger_questions:
+              - "Seu tráfego vem de uma única fonte?"
+              - "Uma mudança de algoritmo pode quebrar você?"
+              - "Você não possui sua lista de clientes?"
+            examples:
+              - "100% dependente de Instagram"
+              - "Afiliado de único produto"
+            veto: false
+            warning: true
+            antidote: "Diversificar canais + construir lista própria"
+
+        screening_protocol:
+          for_each_antipattern:
+            - "Fazer perguntas trigger"
+            - "Se QUALQUER trigger = SIM → investigar profundamente"
+            - "Se antipattern confirmado → aplicar antídoto ou VETO"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Antipattern Gate"
+      criteria:
+        - "Todos os antipatterns críticos screenados"
+        - "Nenhum antipattern VETO ativo"
+        - "Antipatterns WARNING documentados com antídoto"
+      human_review: false
+      auto_veto: true
+      veto_conditions:
+        - condition: "Churn Estrutural confirmado sem antídoto viável"
+          action: "VETO - Modelo de negócio insustentável"
+
+        - condition: "Comoditização confirmada sem diferenciação possível"
+          action: "VETO - Não há como criar valor diferenciado"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 2: DECISION
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Decision"
+    duration: "5 min"
+    tier: 1
+    description: |
+      Decisão final de PASS ou FAIL com documentação completa.
+
+    agent: hormozi-offers
+
+    tasks:
+      - task_id: T2.1
+        name: "Compilar Resultado"
+        required: true
+        description: "Consolidar assessments em decisão final"
+        output: "screening_decision.md"
+
+      - task_id: T2.2
+        name: "Documentar Justificativa"
+        required: true
+        description: "Se FAIL, documentar razões e alternativas"
+        output: "screening_rationale.md"
+
+    inline_structures:
+      decision_output:
+        pass_template: |
+          # SCREENING RESULT: ✅ PASS
+
+          ## Market Validation
+          - Dor Massiva: X/3
+          - Poder de Compra: X/3
+          - Acessibilidade: X/3
+          - Crescimento: X/3
+          - **Total: X/12**
+
+          ## Antipattern Screening
+          - Churn Estrutural: ❌ Não detectado
+          - Comoditização: ❌ Não detectado
+          - Ciclo de Caixa: ⚠️/❌ [status]
+          - Dependência: ⚠️/❌ [status]
+
+          ## Warnings (se houver)
+          [Lista de warnings com antídotos]
+
+          ## Próximo Passo
+          → Prosseguir para criação de oferta via `wf-grand-slam-offer`
+
+        fail_template: |
+          # SCREENING RESULT: ❌ FAIL
+
+          ## Razão do Veto
+          [Indicador ou antipattern que causou VETO]
+
+          ## Market Validation
+          - Dor Massiva: X/3
+          - Poder de Compra: X/3
+          - Acessibilidade: X/3
+          - Crescimento: X/3
+          - **Total: X/12**
+
+          ## Antipatterns Detectados
+          [Lista de antipatterns com status]
+
+          ## Alternativas Sugeridas
+          1. [Alternativa 1 - pivô de mercado]
+          2. [Alternativa 2 - reenquadramento de oferta]
+          3. [Alternativa 3 - mercado adjacente]
+
+          ## Próximo Passo
+          → NÃO prosseguir com criação de oferta
+          → Considerar alternativas ou abandonar oportunidade
+
+        rejection_script: |
+          # Script de Rejeição Educacional
+
+          "Analisei essa oportunidade e infelizmente ela não passa nos critérios
+          de validação. O problema principal é [RAZÃO].
+
+          Isso significa que mesmo com a melhor oferta possível, o negócio
+          enfrentará [CONSEQUÊNCIA].
+
+          Alternativas que sugiro considerar:
+          1. [Alternativa com justificativa]
+          2. [Alternativa com justificativa]
+
+          Prefiro te poupar meses de trabalho agora do que te ver frustrado
+          depois. Se quiser explorar essas alternativas, estou aqui."
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Final Decision"
+      criteria:
+        - "Decisão PASS ou FAIL documentada"
+        - "Justificativa completa"
+        - "Se FAIL, alternativas sugeridas"
+      human_review: true
+      message: "Revise o resultado do screening antes de prosseguir ou rejeitar."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ROUTING RULES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+routing:
+  on_pass:
+    next_workflow: "wf-grand-slam-offer"
+    message: "Mercado validado. Prosseguindo para criação de oferta."
+
+  on_fail:
+    options:
+      - action: "pivot_market"
+        description: "Re-rodar screening com mercado alternativo"
+        workflow: "wf-opportunity-screening"
+
+      - action: "abandon"
+        description: "Abandonar oportunidade"
+        workflow: null
+
+      - action: "consult_chief"
+        description: "Escalar para hormozi-chief para análise adicional"
+        agent: "hormozi-chief"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VETO CONDITIONS (CRÍTICO)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+veto_conditions:
+  automatic_veto:
+    - id: VETO_MARKET_001
+      trigger: "Qualquer indicador de mercado = 0"
+      action: "VETO IMEDIATO"
+      rationale: "Mercado falha em critério fundamental"
+
+    - id: VETO_MARKET_002
+      trigger: "Total de indicadores < 6/12"
+      action: "VETO"
+      rationale: "Mercado não tem potencial mínimo"
+
+    - id: VETO_AP_001
+      trigger: "Churn Estrutural confirmado"
+      action: "VETO"
+      rationale: "Modelo de negócio insustentável"
+
+    - id: VETO_AP_002
+      trigger: "Comoditização confirmada"
+      action: "VETO"
+      rationale: "Não há como criar valor diferenciado"
+
+  warning_only:
+    - id: WARN_CASH_001
+      trigger: "Ciclo de Caixa Invertido"
+      action: "WARNING + documentar antídoto"
+
+    - id: WARN_DEP_001
+      trigger: "Dependência de Plataforma"
+      action: "WARNING + documentar antídoto"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  final_deliverable:
+    name: "Opportunity Screening Report"
+    contents:
+      - "screening_decision.md - Decisão PASS/FAIL"
+      - "market_validation.yaml - 4 indicadores scorados"
+      - "antipattern_report.yaml - Antipatterns detectados"
+      - "screening_rationale.md - Justificativa completa"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-10"
+  author: "pedro-valerio"
+  source_frameworks:
+    - "01_FRAMEWORKS_OPERACIONAIS"
+    - "05_ANTIPATTERN_SHIELDS"
+    - "prompts-joao KB v2.0"
+  source_mind: "alex_hormozi"
+  extraction_batch: "Batch 2 - Workflows de Decisão"
+  related_checklists:
+    - "checklists/market-validation-veto.md"
+    - "checklists/antipattern-screening.md"
+  related_data:
+    - "data/antipatterns-database.yaml"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

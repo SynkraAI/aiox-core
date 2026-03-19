@@ -1,0 +1,319 @@
+# Especificações Técnicas por Plataforma Social
+# Atualizado: 2026-02 | Fonte: centros de ajuda oficiais das plataformas + pesquisa de mercado
+# Uso: agente social-strategist e social-hooks para produção de conteúdo correto
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  notes: >
+    Specs mudam com frequência. Sempre verifique as diretrizes oficiais antes de
+    produzir conteúdo em escala. Horários de melhor desempenho são referências
+    para BR (BRT/UTC-3) e podem variar por audiência.
+
+platforms:
+
+  tiktok:
+    display_name: "TikTok"
+    content_type: short_video
+    aspect_ratio: "9:16"
+    resolution_recommended: "1080x1920"
+    max_duration_seconds: 600
+    optimal_duration_seconds:
+      range: "15-60"
+      sweet_spot: 30
+      notes: "Vídeos de 15-30s têm melhor completion rate. Tutoriais aceitam até 60s."
+    caption_limit_chars: 2200
+    caption_recommended_chars: 150
+    hashtag_limit: 30
+    hashtag_recommended: 5
+    best_posting_times_br:
+      - "06:00-08:00"
+      - "12:00-13:00"
+      - "19:00-21:00"
+    best_posting_days:
+      - tuesday
+      - thursday
+      - saturday
+    link_options:
+      bio_link: true
+      story_link: false
+      caption_link: false
+      notes: "Link apenas na bio (1 link). Ferramentas como Linktree permitem múltiplos links."
+    affiliate_friendly: medium
+    affiliate_notes: >
+      Proibido disclosure enganoso. Requer '#ad' ou '#publi' em posts pagos.
+      Conteúdo orgânico com afiliado permitido com transparência.
+      TikTok Shop cresce como alternativa — comissões diretas dentro do app.
+    cta_best_practices:
+      - "Link na bio!"
+      - "Acessa meu link na bio"
+      - "Deixa o like se quiser o link"
+    format_tips:
+      - "Hook nos primeiros 3 segundos é crucial"
+      - "Texto na tela aumenta watch time"
+      - "Áudio trending amplifica alcance orgânico"
+
+  instagram_reels:
+    display_name: "Instagram Reels"
+    content_type: short_video
+    aspect_ratio: "9:16"
+    resolution_recommended: "1080x1920"
+    max_duration_seconds: 90
+    optimal_duration_seconds:
+      range: "15-45"
+      sweet_spot: 25
+      notes: "Reels curtos têm mais chance de viralizar no Explore."
+    caption_limit_chars: 2200
+    caption_recommended_chars: 125
+    hashtag_limit: 30
+    hashtag_recommended: 8
+    best_posting_times_br:
+      - "07:00-09:00"
+      - "11:00-13:00"
+      - "18:00-21:00"
+    best_posting_days:
+      - wednesday
+      - friday
+      - sunday
+    link_options:
+      bio_link: true
+      story_link: false
+      caption_link: false
+      notes: "1 link na bio. Stories com link desbloqueado para qualquer conta desde 2021."
+    affiliate_friendly: medium
+    affiliate_notes: >
+      Instagram exige disclosure de parceria paga via ferramenta nativa 'Parceria paga'.
+      Afiliados orgânicos devem usar '#publi' ou '#ad'. Conteúdo UGC bem aceito.
+    cta_best_practices:
+      - "Link na bio ↑"
+      - "Salva esse vídeo para não esquecer"
+      - "Marca um amigo que precisa ver isso"
+    format_tips:
+      - "Hook visual nos primeiros 2s (sem intro lenta)"
+      - "Legenda/captions ajudam acessibilidade e watch time"
+      - "Transições e trending audio impulsionam no algoritmo"
+
+  instagram_feed:
+    display_name: "Instagram Feed (Carrossel e Foto)"
+    content_type: image_carousel
+    aspect_ratio: "1:1 ou 4:5 (melhor para feed)"
+    resolution_recommended: "1080x1080 ou 1080x1350"
+    max_slides_carousel: 20
+    optimal_slides_carousel: 7
+    caption_limit_chars: 2200
+    caption_recommended_chars: 300
+    hashtag_limit: 30
+    hashtag_recommended: 12
+    best_posting_times_br:
+      - "08:00-10:00"
+      - "12:00-14:00"
+      - "17:00-19:00"
+    best_posting_days:
+      - tuesday
+      - wednesday
+      - friday
+    link_options:
+      bio_link: true
+      caption_link: false
+      notes: "Links clicáveis só na bio. Carrosséis: 'Acesse o link na bio'."
+    affiliate_friendly: medium
+    affiliate_notes: >
+      Carrosséis educativos com CTA para bio são formato mais eficaz para
+      tráfego de afiliados. Alta taxa de salvamento = distribuição orgânica maior.
+    cta_best_practices:
+      - "Salva para usar depois!"
+      - "Link completo na bio"
+      - "Arrasta para ver mais →"
+    format_tips:
+      - "Primeiro slide deve ser headline forte (não se vê o resto sem clicar)"
+      - "Carrosséis têm mais reach que fotos isoladas"
+      - "7-10 slides é o sweet spot de engajamento"
+
+  instagram_stories:
+    display_name: "Instagram Stories"
+    content_type: ephemeral_vertical
+    aspect_ratio: "9:16"
+    resolution_recommended: "1080x1920"
+    max_duration_seconds: 60
+    optimal_duration_seconds:
+      range: "5-15"
+      notes: "Stories têm taxa de abandono alta. Seja direto."
+    caption_limit_chars: 250
+    hashtag_limit: 10
+    hashtag_recommended: 3
+    best_posting_times_br:
+      - "07:00-09:00"
+      - "12:00-13:00"
+      - "20:00-22:00"
+    best_posting_days:
+      - monday
+      - wednesday
+      - friday
+    link_options:
+      sticker_link: true
+      notes: "Link Sticker disponível para qualquer conta. Sem limite de links."
+    affiliate_friendly: high
+    affiliate_notes: >
+      Canal mais eficaz para afiliados no Instagram. Link sticker nativo com
+      rastreamento. Swipe-up tracking via UTM. Conteúdo mais direto e 'vendedor'
+      é aceito aqui vs feed. Usado para conversão direta.
+    cta_best_practices:
+      - "Toca no link acima ↑"
+      - "Acessa o link e garante o desconto"
+      - "Arrasta para cima"
+    format_tips:
+      - "Sequência de 3-5 stories contando uma história converte melhor"
+      - "Polls e perguntas aumentam engajamento e ranking nos stories"
+      - "Destaques permitem conteúdo permanente de afiliados"
+
+  youtube_shorts:
+    display_name: "YouTube Shorts"
+    content_type: short_video
+    aspect_ratio: "9:16"
+    resolution_recommended: "1080x1920"
+    max_duration_seconds: 60
+    optimal_duration_seconds:
+      range: "30-58"
+      notes: "Próximo do limite (58-59s) tende a ter mais watch time relativo."
+    caption_limit_chars: 100
+    description_limit_chars: 5000
+    hashtag_limit: 15
+    hashtag_recommended: 3
+    best_posting_times_br:
+      - "07:00-09:00"
+      - "12:00-14:00"
+      - "18:00-20:00"
+    best_posting_days:
+      - tuesday
+      - thursday
+      - saturday
+    link_options:
+      description_link: true
+      pinned_comment_link: true
+      cards: false
+      notes: "Links na description e comentários fixados. Sem cards em Shorts."
+    affiliate_friendly: high
+    affiliate_notes: >
+      YouTube permite links de afiliado na descrição com disclosure.
+      Shorts também aparecem em busca do YouTube. Canais grandes ganham via
+      YouTube Shopping + afiliado. Boa opção para direcionar ao canal long-form.
+    cta_best_practices:
+      - "Link na descrição abaixo!"
+      - "Acessa o canal para o vídeo completo"
+      - "Se inscrevê e comenta 'quero saber mais'"
+    format_tips:
+      - "Shorts bem rankeados aparecem no feed de Shorts e na busca"
+      - "Use title otimizado como se fosse SEO regular"
+      - "Repurpose de TikTok funciona (remover watermark)"
+
+  youtube_long:
+    display_name: "YouTube Long-Form"
+    content_type: long_video
+    aspect_ratio: "16:9"
+    resolution_recommended: "1920x1080 (1080p mínimo)"
+    max_duration_seconds: null
+    optimal_duration_seconds:
+      range: "480-1800"
+      sweet_spot: 900
+      notes: "Vídeos de 8-12 min têm melhor equilíbrio de watch time e monetização."
+    title_limit_chars: 100
+    description_limit_chars: 5000
+    tags_limit: 500
+    tags_recommended: 15
+    best_posting_times_br:
+      - "12:00-14:00"
+      - "17:00-19:00"
+    best_posting_days:
+      - friday
+      - saturday
+      - sunday
+    link_options:
+      description_link: true
+      cards: true
+      end_screens: true
+      pinned_comment: true
+      notes: "Cards e end screens são ferramentas nativas de CTA. Use para direcionar ao afiliado."
+    affiliate_friendly: very_high
+    affiliate_notes: >
+      Canal de maior conversão para afiliados. Description com links rastreados
+      (UTM). Requer disclosure verbal e na descrição. Vídeos de review e comparativo
+      têm intenção de compra altíssima. Conteúdo indexado no Google + YouTube.
+    cta_best_practices:
+      - "Link na descrição e no primeiro comentário fixado"
+      - "Mencionar o link verbalmente (e apontar para 'descrição abaixo')"
+      - "Cards interativos durante menção do produto"
+    format_tips:
+      - "Thumbnail é 80% do CTR — invista em design e A/B teste"
+      - "Timestamps melhora watch time e UX"
+      - "Review + Unboxing + Tutorial = combo de máxima conversão"
+
+  facebook:
+    display_name: "Facebook"
+    content_type: mixed
+    aspect_ratio: "1:1 para feed, 9:16 para Reels, 16:9 para vídeo"
+    resolution_recommended: "1200x628 (links), 1080x1080 (feed)"
+    max_duration_video_seconds: 14400
+    optimal_video_duration_seconds:
+      range: "60-300"
+    caption_limit_chars: 63206
+    caption_recommended_chars: 400
+    hashtag_recommended: 3
+    best_posting_times_br:
+      - "08:00-11:00"
+      - "13:00-16:00"
+    best_posting_days:
+      - wednesday
+      - thursday
+      - friday
+    link_options:
+      caption_link: true
+      notes: "Links clicáveis na legenda e compartilhamento de URL com preview automático."
+    affiliate_friendly: medium
+    affiliate_notes: >
+      Orgânico do Facebook caiu muito (reach <2% para páginas). Grupos são
+      o canal orgânico mais eficaz. Tráfego pago (Meta Ads) é o principal uso
+      para afiliados — necessário verificar políticas por nicho (saúde e finanças
+      têm restrições extras).
+    cta_best_practices:
+      - "Acesse o link abaixo para mais informações"
+      - "Comenta aqui que te mando o link"
+      - "Compartilha com alguém que precisa ver"
+    format_tips:
+      - "Grupos do Facebook têm reach orgânico 10x maior que páginas"
+      - "Vídeo nativo tem preferência algorítmica sobre link posts"
+      - "Lives têm notificações para seguidores — bom para lançamentos"
+
+  x_twitter:
+    display_name: "X (Twitter)"
+    content_type: text_image_video
+    aspect_ratio: "16:9 para imagem/vídeo"
+    resolution_recommended: "1280x720"
+    max_duration_video_seconds: 140
+    tweet_limit_chars: 280
+    tweet_premium_limit_chars: 25000
+    hashtag_recommended: 2
+    best_posting_times_br:
+      - "08:00-10:00"
+      - "12:00-14:00"
+      - "17:00-19:00"
+    best_posting_days:
+      - tuesday
+      - wednesday
+      - thursday
+    link_options:
+      tweet_link: true
+      notes: "Links clicáveis diretamente nos tweets. URL conta como ~23 caracteres."
+    affiliate_friendly: medium
+    affiliate_notes: >
+      Nicho financeiro (fintwit), crypto e tecnologia têm forte presença.
+      Links de afiliado permitidos com disclosure. X Premium (verificado) tem
+      maior alcance. Threads são o formato mais eficaz para conteúdo longo.
+      Programa de monetização de creators (ads revenue share) para contas verificadas.
+    cta_best_practices:
+      - "Link no primeiro comentário ↓"
+      - "RT se achar útil"
+      - "Thread completa abaixo 🧵"
+    format_tips:
+      - "Threads de 5-10 tweets têm melhor engajamento que tweets únicos"
+      - "Imagem no primeiro tweet aumenta impressões"
+      - "Evite links no tweet principal (reduz alcance algoritmo) — coloque no reply"

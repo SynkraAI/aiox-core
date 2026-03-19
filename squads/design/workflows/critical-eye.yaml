@@ -1,0 +1,224 @@
+workflow:
+  id: design-system-critical-eye
+  name: Critical Eye — Continuous DS Curation
+  description: "Recurring workflow that evaluates all pattern variants across categories, scores them (0-100), and promotes/demotes through lifecycle states (CANDIDATE → EXPERIMENTAL → STABLE → CANONICAL → DEPRECATED). Runs after each extraction cycle. Mandatory governance protocol: squads/design/protocols/ai-first-governance.md"
+  version: 1.0.0
+  type: sequential
+  sequence:
+    - step: step-1-inventory
+      id: step-1-inventory
+      phase: 1
+      phase_name: Inventory All Variants Per Category
+      agent: brad-frost
+      action: ds-critical-eye-inventory
+      outputs:
+        - inventory
+      next: step-2-score
+    - step: step-2-score
+      id: step-2-score
+      phase: 2
+      phase_name: Score Each Variant Using 5 Dimensions
+      agent: brad-frost
+      action: ds-critical-eye-score
+      outputs:
+        - scored_variants
+      next: step-3-compare
+    - step: step-3-compare
+      id: step-3-compare
+      phase: 3
+      phase_name: Compare and Rank Variants Within Category
+      agent: brad-frost
+      action: ds-critical-eye-compare
+      outputs:
+        - rankings
+      next: step-4-decide
+    - step: step-4-decide
+      id: step-4-decide
+      phase: 4
+      phase_name: Make Lifecycle Transition Decisions
+      agent: brad-frost
+      action: ds-critical-eye-decide
+      outputs:
+        - decisions
+        - proposals
+        - updated_catalog
+        - updated_decisions_log
+      next: step-5-review
+    - step: step-5-review
+      id: step-5-review
+      phase: 5
+      phase_name: Human Review for Canonical Promotions
+      agent: design-chief
+      action: ds-critical-eye-review-checklist
+      outputs:
+        - review_decisions
+      next: step-6-report
+    - step: step-6-report
+      id: step-6-report
+      phase: 6
+      phase_name: Generate Cycle Report
+      agent: brad-frost
+      action: ds-critical-eye-report
+      outputs:
+        - report
+    - workflow_end:
+        id: complete
+        action: workflow_complete
+  handoff_prompts:
+    brad-frost_to_design-chief: Handoff context from brad-frost to design-chief. Preserve outputs, risks, and open decisions.
+    design-chief_to_brad-frost: Handoff context from design-chief to brad-frost. Preserve outputs, risks, and open decisions.
+metadata:
+  author: Brad Frost (Design System Architect)
+  created_date: "2026-02-18"
+  last_modified: "2026-02-18"
+  tags:
+    - design-system
+    - curation
+    - critical-eye
+    - scoring
+    - lifecycle
+    - governance
+    - brad
+inputs:
+  catalog_path:
+    type: string
+    description: Path to the pattern catalog JSON
+    required: true
+    default: workspace/ui/pattern-catalog.json
+  scoring_rules_path:
+    type: string
+    description: Path to the scoring rules YAML
+    required: true
+    default: squads/design/data/critical-eye-scoring-rules.yaml
+  decisions_log_path:
+    type: string
+    description: Path to the append-only decisions log
+    required: true
+    default: workspace/ui/canonical-decisions.json
+  cycle_number:
+    type: integer
+    description: Current evaluation cycle (auto-incremented from catalog.evaluationCycle)
+    required: false
+  categories_filter:
+    type: array
+    description: "Optional: evaluate only specific categories (empty = all)"
+    required: false
+    default: []
+steps:
+  - id: step_1_inventory
+    name: Inventory All Variants Per Category
+    type: agent
+    agent: brad-frost
+    task: ds-critical-eye-inventory
+    description: Scan pattern-catalog.json and group all variants by category. Detect new variants from latest extraction. Cross-reference with registry.json and metadata.
+    inputs:
+      catalog: "{{catalog_path}}"
+      categories_filter: "{{categories_filter}}"
+    outputs:
+      inventory: outputs/design-system/critical-eye/cycle-{{cycle_number}}/inventory.json
+    error_handling:
+      strategy: fail
+  - id: step_2_score
+    name: Score Each Variant Using 5 Dimensions
+    type: agent
+    agent: brad-frost
+    task: ds-critical-eye-score
+    description: Apply scoring engine (breadth 25 + quality 30 + consistency 20 + maturity 15 + simplicity 10 = 100) to every variant. Check a11y blocker (score=0 → auto-REJECT).
+    inputs:
+      inventory: "{{step_1_inventory.inventory}}"
+      scoring_rules: "{{scoring_rules_path}}"
+    outputs:
+      scored_variants: outputs/design-system/critical-eye/cycle-{{cycle_number}}/scored.json
+    error_handling:
+      strategy: fail
+  - id: step_3_compare
+    name: Compare and Rank Variants Within Category
+    type: agent
+    agent: brad-frost
+    task: ds-critical-eye-compare
+    description: Within each category, rank variants by total score. Apply tiebreaker rule (breadth wins within 10% margin). Identify top candidate per category.
+    inputs:
+      scored_variants: "{{step_2_score.scored_variants}}"
+      scoring_rules: "{{scoring_rules_path}}"
+    outputs:
+      rankings: outputs/design-system/critical-eye/cycle-{{cycle_number}}/rankings.json
+    error_handling:
+      strategy: fail
+  - id: step_4_decide
+    name: Make Lifecycle Transition Decisions
+    type: agent
+    agent: brad-frost
+    task: ds-critical-eye-decide
+    description: Apply lifecycle transition rules. Auto-transitions (CANDIDATE→EXPERIMENTAL, EXPERIMENTAL→STABLE) execute immediately. Checkpoint transitions (STABLE→CANONICAL, CANONICAL→DEPRECATED) generate proposals for design-chief review.
+    inputs:
+      rankings: "{{step_3_compare.rankings}}"
+      catalog: "{{catalog_path}}"
+      decisions_log: "{{decisions_log_path}}"
+    outputs:
+      decisions: outputs/design-system/critical-eye/cycle-{{cycle_number}}/decisions.json
+      proposals: outputs/design-system/critical-eye/cycle-{{cycle_number}}/proposals.json
+      updated_catalog: "{{catalog_path}}"
+      updated_decisions_log: "{{decisions_log_path}}"
+    error_handling:
+      strategy: fail
+  - id: step_5_review
+    name: Human Review for Canonical Promotions
+    type: checkpoint
+    agent: design-chief
+    task: ds-critical-eye-review-checklist
+    description: Design Chief reviews proposals for STABLE→CANONICAL and CANONICAL→DEPRECATED transitions. Uses review checklist. Required only when proposals exist.
+    condition: "{{step_4_decide.proposals}} is not empty"
+    inputs:
+      proposals: "{{step_4_decide.proposals}}"
+      rankings: "{{step_3_compare.rankings}}"
+    outputs:
+      review_decisions: outputs/design-system/critical-eye/cycle-{{cycle_number}}/review-decisions.json
+    error_handling:
+      strategy: wait
+  - id: step_6_report
+    name: Generate Cycle Report
+    type: agent
+    agent: brad-frost
+    task: ds-critical-eye-report
+    description: "Compile comprehensive cycle report: summary stats, all scores, transitions executed, proposals pending, category health."
+    inputs:
+      inventory: "{{step_1_inventory.inventory}}"
+      scored_variants: "{{step_2_score.scored_variants}}"
+      rankings: "{{step_3_compare.rankings}}"
+      decisions: "{{step_4_decide.decisions}}"
+      review_decisions: "{{step_5_review.review_decisions}}"
+      cycle_number: "{{cycle_number}}"
+    outputs:
+      report: outputs/design-system/critical-eye/cycle-{{cycle_number}}/report.md
+    error_handling:
+      strategy: skip
+outputs:
+  cycle_complete:
+    type: boolean
+    description: Critical Eye cycle completed successfully
+    source: step_6_report.success
+  catalog_updated:
+    type: string
+    description: Updated pattern catalog with new scores and lifecycle states
+    source: "{{catalog_path}}"
+  decisions_logged:
+    type: string
+    description: Append-only decisions log with new entries
+    source: "{{decisions_log_path}}"
+  report_location:
+    type: string
+    description: Path to the cycle report
+    source: step_6_report.report
+  pending_proposals:
+    type: integer
+    description: Number of proposals awaiting human review
+    source: step_4_decide.proposals.length
+global_error_handling:
+  on_error: abort
+  notification:
+    enabled: true
+    channels:
+      - console
+security:
+  authorization_required: false
+  audit_logging: true

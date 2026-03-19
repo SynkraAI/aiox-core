@@ -1,0 +1,295 @@
+{
+  "language": "pt",
+  "original_segments": 44,
+  "cleaned_segments": 36,
+  "segments": [
+    {
+      "start": 0.9400000000000001,
+      "end": 5.76,
+      "start_formatted": "00:00",
+      "end_formatted": "00:05",
+      "text": "Então vamos lá, nada mais é do que isso aqui, do que um funil de vendas, Renan, como assim um funil de vendas?",
+      "type": "speech"
+    },
+    {
+      "start": 5.88,
+      "end": 11.56,
+      "start_formatted": "00:05",
+      "end_formatted": "00:11",
+      "text": "Isso aqui é um funil de vendas, a pessoa vê o anúncio, vê o anúncio, algumas pessoas clicam,",
+      "type": "speech"
+    },
+    {
+      "start": 11.86,
+      "end": 20.02,
+      "start_formatted": "00:11",
+      "end_formatted": "00:20",
+      "text": "então aqui já teve 10 mil cliques, o custo por clique 3,49, a taxa, o CTR, o meu CTR é acima de 1%,",
+      "type": "speech"
+    },
+    {
+      "start": 20.02,
+      "end": 26.7,
+      "start_formatted": "00:20",
+      "end_formatted": "00:26",
+      "text": "então o CTR, o ideal é que ele seja acima de 1%, se tu olhar nos últimos 7 dias, ele está mais baixo.",
+      "type": "speech"
+    },
+    {
+      "start": 26.7,
+      "end": 31.5,
+      "start_formatted": "00:26",
+      "end_formatted": "00:31",
+      "text": "Renan, por que está mais baixo? Porque esse meu anúncio aqui, só nessa campanha aqui,",
+      "type": "speech"
+    },
+    {
+      "start": 31.88,
+      "end": 43.66,
+      "start_formatted": "00:31",
+      "end_formatted": "00:43",
+      "text": "eu já investi mais de 37 mil reais, só aqui, então por isso que ele já está ficando cansado e vou ter que fazer novos anúncios.",
+      "type": "speech"
+    },
+    {
+      "start": 44.32,
+      "end": 48.72,
+      "start_formatted": "00:44",
+      "end_formatted": "00:48",
+      "text": "A visualizações da página de destino, 9 mil pessoas chegaram, e aqui a porcentagem,",
+      "type": "speech"
+    },
+    {
+      "start": 49.14,
+      "end": 54.92,
+      "start_formatted": "00:49",
+      "end_formatted": "00:54",
+      "text": "está vendo aqui que ficou 0,86, porque eu esqueci de configurar aqui e colocar em porcentagem,",
+      "type": "speech"
+    },
+    {
+      "start": 54.92,
+      "end": 56.44,
+      "start_formatted": "00:54",
+      "end_formatted": "00:56",
+      "text": "então eu venho e clico aqui em editar.",
+      "type": "speech"
+    },
+    {
+      "start": 56.7,
+      "end": 65.04,
+      "start_formatted": "00:56",
+      "end_formatted": "01:05",
+      "text": "E eu venho e coloco aqui em porcentagem, pronto, salvar, deu, já ficou em porcentagem, então 86%.",
+      "type": "speech"
+    },
+    {
+      "start": 65.04,
+      "end": 69.42,
+      "start_formatted": "01:05",
+      "end_formatted": "01:09",
+      "text": "Renan, que métrica, qual é a métrica? A minha métrica, o que significa isso aqui?",
+      "type": "speech"
+    },
+    {
+      "start": 69.8,
+      "end": 74.68,
+      "start_formatted": "01:09",
+      "end_formatted": "01:14",
+      "text": "Que a minha página, ela está muito veloz, então o que você tem que estar olhando?",
+      "type": "speech"
+    },
+    {
+      "start": 75.04,
+      "end": 82.78,
+      "start_formatted": "01:15",
+      "end_formatted": "01:22",
+      "text": "O teu CTR, se o teu CTR está abaixo de 1%, significa que cada mil pessoas,",
+      "type": "speech"
+    },
+    {
+      "start": 83.34,
+      "end": 86.66,
+      "start_formatted": "01:23",
+      "end_formatted": "01:26",
+      "text": "menos de 10 pessoas estão clicando, ou seja, ele está muito ruim.",
+      "type": "speech"
+    },
+    {
+      "start": 86.7,
+      "end": 93.44,
+      "start_formatted": "01:26",
+      "end_formatted": "01:33",
+      "text": "O meu aqui é cada mil pessoas, 14 clica, então não é a maravilha de CTR, tá?",
+      "type": "speech"
+    },
+    {
+      "start": 94.46000000000001,
+      "end": 99.14,
+      "start_formatted": "01:34",
+      "end_formatted": "01:39",
+      "text": "Então eu posso fazer anúncios melhores? Posso, mas o meu anúncio é bem específico, tá?",
+      "type": "speech"
+    },
+    {
+      "start": 99.24000000000001,
+      "end": 107.72,
+      "start_formatted": "01:39",
+      "end_formatted": "01:47",
+      "text": "O custo por clique, cada clique meu está R$3,49, então assim, são N fatores que a gente tem que testar,",
+      "type": "speech"
+    },
+    {
+      "start": 107.86,
+      "end": 110.02000000000001,
+      "start_formatted": "01:47",
+      "end_formatted": "01:50",
+      "text": "por isso que é importante a gente sempre estar testando novos anúncios.",
+      "type": "speech"
+    },
+    {
+      "start": 110.58,
+      "end": 114.98,
+      "start_formatted": "01:50",
+      "end_formatted": "01:54",
+      "text": "Quantos cadastros eu já tive só nesse aqui? 1.100, 1.100 cadastros,",
+      "type": "speech"
+    },
+    {
+      "start": 114.98,
+      "end": 116.68,
+      "start_formatted": "01:54",
+      "end_formatted": "01:56",
+      "text": "e qual é a taxa de pessoas?",
+      "type": "speech"
+    },
+    {
+      "start": 116.7,
+      "end": 120.42,
+      "start_formatted": "01:56",
+      "end_formatted": "02:00",
+      "text": "1.100 pessoas que se cadastraram, tá? Em 12%, ó, também esqueci de colocar porcentagem,",
+      "type": "speech"
+    },
+    {
+      "start": 120.48,
+      "end": 125.34,
+      "start_formatted": "02:00",
+      "end_formatted": "02:05",
+      "text": "eu venho aqui, clico em editar, e vou colocar aqui, ó, porcentagem, pronto,",
+      "type": "speech"
+    },
+    {
+      "start": 125.4,
+      "end": 128.78,
+      "start_formatted": "02:05",
+      "end_formatted": "02:08",
+      "text": "já vai dar um número aqui que é 12%, pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 129.84,
+      "end": 134.02,
+      "start_formatted": "02:09",
+      "end_formatted": "02:14",
+      "text": "Então eu posso salvar essa pré-definição aqui novamente, que eu não sei se vai ficar,",
+      "type": "speech"
+    },
+    {
+      "start": 134.68,
+      "end": 136.38,
+      "start_formatted": "02:14",
+      "end_formatted": "02:16",
+      "text": "ah não, ali já vai ficar certo, pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 137.12,
+      "end": 143.9,
+      "start_formatted": "02:17",
+      "end_formatted": "02:23",
+      "text": "Então, olha o meu custo, a minha, quais são todos os números aqui que eu coloquei,",
+      "type": "speech"
+    },
+    {
+      "start": 143.9,
+      "end": 145.0,
+      "start_formatted": "02:23",
+      "end_formatted": "02:25",
+      "text": "são importantes, ó.",
+      "type": "speech"
+    },
+    {
+      "start": 146.7,
+      "end": 155.38,
+      "start_formatted": "02:26",
+      "end_formatted": "02:35",
+      "text": "Por cadastro meu, tá R$33,00, mas se você olhar nos últimos 7 dias, ó, R$43,00 é o custo de cada lead",
+      "type": "speech"
+    },
+    {
+      "start": 155.38,
+      "end": 160.28,
+      "start_formatted": "02:35",
+      "end_formatted": "02:40",
+      "text": "nos últimos 7 dias, isso que eu estou pagando, R$43,00 pelo lead qualificado,",
+      "type": "speech"
+    },
+    {
+      "start": 160.35999999999999,
+      "end": 163.51999999999998,
+      "start_formatted": "02:40",
+      "end_formatted": "02:43",
+      "text": "então o custo ele está bom, se eu tiver um time comercial de vendas bom,",
+      "type": "speech"
+    },
+    {
+      "start": 163.83999999999997,
+      "end": 167.42,
+      "start_formatted": "02:43",
+      "end_formatted": "02:47",
+      "text": "eu faço muitas vendas com esse custo de lead aí.",
+      "type": "speech"
+    },
+    {
+      "start": 167.94,
+      "end": 172.83999999999997,
+      "start_formatted": "02:47",
+      "end_formatted": "02:52",
+      "text": "Então é isso, espero que tenha ajudado esse vídeo, aqui abaixo desse vídeo eu vou deixar",
+      "type": "speech"
+    },
+    {
+      "start": 172.83999999999997,
+      "end": 175.83999999999997,
+      "start_formatted": "02:52",
+      "end_formatted": "02:55",
+      "text": "essa fórmula aqui, ó, para você seguir, então você...",
+      "type": "speech"
+    },
+    {
+      "start": 176.7,
+      "end": 180.16,
+      "start_formatted": "02:56",
+      "end_formatted": "03:00",
+      "text": "só tem que seguir o que está, que eu estou mostrando aqui abaixo, tá bom?",
+      "type": "speech"
+    },
+    {
+      "start": 180.44,
+      "end": 183.17999999999998,
+      "start_formatted": "03:00",
+      "end_formatted": "03:03",
+      "text": "Qualquer coisa, deixa a sua pergunta aqui e até a próxima aula.",
+      "type": "speech"
+    },
+    {
+      "start": 191.07999999999998,
+      "end": 193.83999999999997,
+      "start_formatted": "03:11",
+      "end_formatted": "03:13",
+      "text": "E aí",
+      "type": "speech"
+    }
+  ]
+}

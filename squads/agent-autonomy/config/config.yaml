@@ -1,0 +1,147 @@
+# Agent Autonomy Squad Configuration
+# Version: 1.0.1
+
+squad_config:
+  name: agent-autonomy
+  version: 1.0.1
+  description: "Squad para auditar, criar, diagnosticar e otimizar agentes autônomos"
+  author: "Luiz Fosc"
+  slash_prefix: "agentAutonomy"
+  pattern_prefix: "AA"
+
+  # =========================================
+  # Agent Registry
+  # =========================================
+  agents:
+    orchestrator:
+      - id: autonomy-chief
+        file: agents/autonomy-chief.md
+        tier: orchestrator
+        minds: ["Erik Schluntz", "Lilian Weng"]
+
+    tier_0:
+      - id: autonomy-auditor
+        file: agents/autonomy-auditor.md
+        tier: 0
+        minds: ["Lilian Weng", "Beth Barnes"]
+
+    tier_1:
+      - id: agent-architect
+        file: agents/agent-architect.md
+        tier: 1
+        minds: ["Erik Schluntz", "Harrison Chase"]
+
+      - id: reasoning-engineer
+        file: agents/reasoning-engineer.md
+        tier: 1
+        minds: ["Shunyu Yao", "Noah Shinn", "Andy Zhou"]
+
+    tier_2:
+      - id: tool-smith
+        file: agents/tool-smith.md
+        tier: 2
+        minds: ["Shawn Wang (swyx)", "Simon Willison"]
+
+      - id: ecosystem-scout
+        file: agents/ecosystem-scout.md
+        tier: 2
+        minds: ["Andrew Ng", "João Moura"]
+
+  # =========================================
+  # Use Cases Coverage
+  # =========================================
+  use_cases:
+    - id: UC1
+      name: "Auditar agente existente"
+      primary_agent: autonomy-auditor
+    - id: UC2
+      name: "Criar agente autônomo"
+      primary_agent: agent-architect
+    - id: UC3
+      name: "Diagnosticar falhas de autonomia"
+      primary_agent: autonomy-auditor
+    - id: UC4
+      name: "Otimizar agente existente"
+      primary_agent: agent-architect
+      secondary: reasoning-engineer
+    - id: UC5
+      name: "Sugerir construção de tools"
+      primary_agent: tool-smith
+    - id: UC6
+      name: "Recomendar repos GitHub open-source"
+      primary_agent: ecosystem-scout
+    - id: UC7
+      name: "Ensinar COMO o agente deve atuar"
+      primary_agent: reasoning-engineer
+    - id: UC8
+      name: "Análise determinístico vs probabilístico"
+      primary_agent: autonomy-auditor
+      secondary: agent-architect
+    - id: UC9
+      name: "Construção de docs .md auxiliares"
+      primary_agent: tool-smith
+    - id: UC10
+      name: "Construção de scripts auxiliares"
+      primary_agent: tool-smith
+    - id: UC11
+      name: "Buscar bibliotecas Python para autonomia"
+      primary_agent: ecosystem-scout
+
+  # =========================================
+  # Quality Gates
+  # =========================================
+  quality_gates:
+    - id: QG-001
+      name: "Request Classification"
+      owner: autonomy-chief
+      type: routing
+    - id: QG-002
+      name: "Diagnosis Complete"
+      owner: autonomy-auditor
+      type: blocking
+    - id: QG-003
+      name: "Architecture Review"
+      owner: agent-architect
+      type: blocking
+    - id: QG-004
+      name: "Reasoning Validated"
+      owner: reasoning-engineer
+      type: blocking
+    - id: QG-005
+      name: "Tool Quality"
+      owner: tool-smith
+      type: blocking
+    - id: QG-006
+      name: "Final Validation"
+      owner: autonomy-chief
+      type: blocking
+    - id: QG-SCOUT
+      name: "Research Quality"
+      owner: ecosystem-scout
+      type: advisory
+
+  # =========================================
+  # Research Foundation
+  # =========================================
+  research_foundation:
+    minds_count: 14
+    key_frameworks:
+      - "Weng's 3 Pillars (Planning, Memory, Tool Use)"
+      - "Schluntz's ACI (Agent-Computer Interface)"
+      - "Knight Institute Autonomy Levels (L1-L5)"
+      - "ReAct (Thought → Action → Observation)"
+      - "Reflexion (Verbal Reinforcement Learning)"
+      - "IMPACT Framework (Intent, Memory, Planning, Control Flow, Authority, Tools)"
+      - "4 Failure Modes (Context Saturation, Tool Brittleness, Reasoning Drift, Evaluator Absence)"
+      - "Rule Maker Pattern (LLM generates rules, code executes)"
+
+  # =========================================
+  # Paths
+  # =========================================
+  paths:
+    squad_root: "squads/agent-autonomy"
+    agents: "squads/agent-autonomy/agents"
+    tasks: "squads/agent-autonomy/tasks"
+    workflows: "squads/agent-autonomy/workflows"
+    checklists: "squads/agent-autonomy/checklists"
+    data: "squads/agent-autonomy/data"

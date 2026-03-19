@@ -1,0 +1,367 @@
+name: wf-multiplicar
+description: "*multiplicar — transforma 1 conteudo longo (live, aula, podcast, YouTube) em 30+ micro-pecas com qualidade garantida (carrosseis, reels, stories, frases de impacto, cortes de video, briefs de email)"
+version: "2.0"
+command: "*multiplicar"
+trigger: "Quando usuario digitar *multiplicar ou pedir para atomizar/multiplicar conteudo longo"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# REGRAS INVIOLAVEIS DO *multiplicar
+# ═══════════════════════════════════════════════════════════════════════════════
+
+regras_inviolaveis:
+  - id: RI-01
+    regra: "Toda peca passa pelo Oraculo — SEM EXCECAO"
+    detalhe: "Nao importa o tempo, nao importa a quantidade. NUNCA oferecer pular validacao."
+
+  - id: RI-02
+    regra: "Todo conteudo sai da transcricao — nada inventado"
+    detalhe: "Cada frase, insight ou dado deve ser rastreavel a um trecho da transcricao original."
+
+  - id: RI-03
+    regra: "Mostrar resumo antes de criar"
+    detalhe: "Para cada peca: 2-3 opcoes de titulo + preview dos primeiros 2-3 slides/segundos. Usuario aprova ANTES de criar."
+
+  - id: RI-04
+    regra: "Qualidade > velocidade"
+    detalhe: "Se precisar de 50 dias, leva 50 dias. Fazer rapido e refazer e PIOR do que fazer certo de primeira."
+
+  - id: RI-05
+    regra: "Proporcionalidade entre formatos"
+    detalhe: "Se tem 24 carrosseis, deve ter proporcionalmente emails, stories, frases. Nao faz sentido 24 carrosseis e 1 email."
+
+  - id: RI-06
+    regra: "Mapear cortes de video"
+    detalhe: "Timestamps de inicio/fim para trechos que funcionam isolados. 10-15 cortes por hora de video."
+
+  - id: RI-07
+    regra: "Salvar transcricao como artefato permanente"
+    detalhe: "Transcricao completa salva no output final. Nunca descartar."
+
+  - id: RI-08
+    regra: "Transcricao nativa do YouTube"
+    detalhe: "Usar transcricao nativa (publica) como fonte primaria. yt-text como backup. Whisper como ultimo recurso."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FASES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: ingestao
+    name: Ingestao do Conteudo Pilar
+    agent: content-chief
+    task: ingest-pillar
+    description: Receber fonte (YouTube URL, texto, arquivo), gerar transcricao limpa e estruturada
+    elicit: true
+    steps:
+      - Perguntar fonte do conteudo (1. YouTube URL, 2. Texto, 3. Arquivo)
+      - "Se YouTube:"
+      - "  PRIORIDADE 1: Transcricao nativa do YouTube (publica, mais precisa)"
+      - "  PRIORIDADE 2: yt-text (legendas + Gemini)"
+      - "  PRIORIDADE 3: Whisper API (ultimo recurso)"
+      - Se texto → receber e processar
+      - Se arquivo → processar conforme tipo
+      - Limpar transcricao (remover muletas, repeticoes, gaguejos)
+      - Estruturar em blocos tematicos com titulos
+      - "OBRIGATORIO: Salvar transcricao completa no output como artefato permanente"
+      - Apresentar resumo ao usuario para confirmacao
+    inputs:
+      - fonte_conteudo
+      - tipo_fonte
+    outputs:
+      - transcricao_limpa
+      - transcricao_bruta
+      - blocos_tematicos
+      - tema_central
+      - duracao_extensao
+    checkpoint: Transcricao limpa e estruturada, usuario confirmou qualidade
+    veto_condition: Conteudo < 5 minutos ou < 500 palavras — avisar e perguntar se quer continuar
+
+  - id: extracao
+    name: Extracao de Atomos + Cortes + Resumos
+    agent: content-chief
+    task: atomize-content
+    description: "Extrair TODOS os atomos, TODAS as frases quotable, mapear cortes de video e gerar resumos pre-criacao"
+    depends_on: [ingestao]
+    elicit: true
+    steps:
+      - Ler transcricao limpa completa COM CALMA — qualidade > velocidade
+      - "EXTRAIR ATOMOS:"
+      - "  Insights acionaveis"
+      - "  Quotes de impacto — TODAS as frases quotable (15-25 por hora de video)"
+      - "  Dados, estatisticas e provas"
+      - "  Historias e exemplos"
+      - "  Provocacoes e crencas quebradas"
+      - "  Frameworks e processos explicados"
+      - "EXTRAIR CORTES DE VIDEO (se fonte for video):"
+      - "  Timestamp inicio (min:seg) e fim (min:seg)"
+      - "  Duracao estimada"
+      - "  Tema/ideia central do corte"
+      - "  Por que funciona isolado"
+      - "  Objetivo: 10-15 cortes por hora de video"
+      - "GERAR RESUMO PRE-CRIACAO para cada atomo:"
+      - "  2-3 opcoes de titulo"
+      - "  Preview dos primeiros 2-3 slides (carrossel) ou 3-6 segundos (reels)"
+      - "  Angulo de abordagem em 1 linha"
+      - Classificar cada atomo por tipo
+      - Apresentar lista ao usuario (1. Confirmar, 2. Ajustar, 3. Adicionar)
+    inputs:
+      - transcricao_limpa
+      - tema_central
+    outputs:
+      - lista_atomos_classificados
+      - total_atomos
+      - tipo_por_atomo
+      - cortes_video_mapeados
+      - resumos_pre_criacao
+    checkpoint: "Minimo 10 atomos + cortes mapeados + resumos pre-criacao gerados"
+    veto_condition: "Conteudo nao tem substancia (< 3 insights acionaveis) — VETO. Video de 1h+ com < 20 atomos — revisar extracao."
+
+  - id: planejamento
+    name: Planejamento de Formatos e Aprovacao
+    agent: content-planner
+    description: Mapear cada atomo para formato ideal, garantir proporcionalidade e pedir aprovacao do usuario
+    depends_on: [extracao]
+    elicit: true
+    steps:
+      - Mapear cada atomo para formato mais adequado
+      - "Formatos disponiveis:"
+      - "  Carrossel — insights, frameworks, passo-a-passo (create-carousel)"
+      - "  Reel — historias, provocacoes, dados impactantes (create-reels)"
+      - "  Corte de video — trecho original do video com timestamp (mapeamento)"
+      - "  Stories — bastidores, enquetes, fragmentos, sequencias (create-stories)"
+      - "  Frase de impacto — quotes fortes para quote card feed + stories (create-impact-phrases)"
+      - "  Email — insights profundos, historias → HANDOFF Squad Copywriters (gerar brief)"
+      - Definir prioridade de criacao (alto impacto primeiro)
+      - Definir tipo de post e framework de copy por peca
+      - Definir intencao (atracao, consciencia, aquecimento, venda)
+      - "PROPORCIONALIDADE: garantir equilibrio entre formatos"
+      - "  Se tem X carrosseis, ter proporcionalmente X briefs de email"
+      - "  Se tem X reels, ter proporcionalmente X stories"
+      - "  Max 40% no mesmo formato"
+      - Agrupar atomos que formam series conectadas
+      - "Apresentar MAPA COMPLETO ao usuario:"
+      - "  Tabela com: atomo | formato | tipo | intencao | titulo (2-3 opcoes) | preview (primeiros slides/segundos)"
+      - "  Resumo quantitativo (total por formato)"
+      - "  Cortes de video com timestamps"
+      - "  Series identificadas"
+      - "  Briefs de email (handoff copywriters)"
+      - "  Perguntar: 1. Aprovar e criar, 2. Ajustar mapa, 3. Redistribuir formatos"
+    inputs:
+      - lista_atomos_classificados
+      - cortes_video_mapeados
+      - resumos_pre_criacao
+    outputs:
+      - mapa_multiplicacao_aprovado
+      - briefs_email_para_copywriters
+      - series_identificadas
+      - prioridade_criacao
+    checkpoint: "Usuario APROVOU o mapa completo ANTES de seguir para criacao — NUNCA criar sem aprovacao"
+    veto_condition: |
+      - Mais de 40% dos atomos no mesmo formato → redistribuir
+      - Mapa nao aprovado pelo usuario → NAO seguir para criacao
+      - Zero frases de impacto extraidas quando havia quotes → revisar extracao
+      - Desproporcao gritante entre formatos (ex: 24 carrosseis e 1 email) → redistribuir
+
+  - id: criacao
+    name: Criacao das Micro-Pecas
+    agents: [carousel-creator, reels-creator, stories-strategist]
+    description: "Produzir cada peca conforme mapa aprovado. QUALIDADE > VELOCIDADE. Cada peca deve sair da transcricao."
+    depends_on: [planejamento]
+    elicit: true
+    batch_size: 5
+    steps:
+      - Ordenar pecas por prioridade (alta primeiro)
+      - "CRIAR EM LOTES DE 5 PECAS:"
+      - "  Lote 1: 5 pecas de prioridade mais alta"
+      - "  Apresentar lote ao usuario"
+      - "  Aguardar aprovacao (1. Aprovar lote, 2. Ajustar peca especifica)"
+      - "  So avancar para lote seguinte apos aprovacao"
+      - "  Repetir ate todas as pecas serem criadas"
+      - ""
+      - "ROUTING POR FORMATO:"
+      - "  Carrossel → carousel-creator (task create-carousel)"
+      - "  Reel → reels-creator (task create-reels)"
+      - "  Stories → stories-strategist (task create-stories)"
+      - "  Frase de impacto → carousel-creator (task create-impact-phrases)"
+      - "  Email → NAO CRIAR — gerar brief de handoff para Squad Copywriters"
+      - "  Corte de video → NAO CRIAR — apenas registrar timestamps no mapa"
+      - ""
+      - "REGRAS DE CRIACAO:"
+      - "  Cada peca funciona ISOLADA (sem depender do pilar)"
+      - "  Todo conteudo SAI DA TRANSCRICAO — nada inventado"
+      - "  Manter tom imperial e identidade em todas as pecas"
+      - "  QUALIDADE > VELOCIDADE — nao apressar a criacao"
+    task_routing:
+      carrossel: create-carousel
+      reels: create-reels
+      stories: create-stories
+      frase_impacto: create-impact-phrases
+      email: gerar_brief_handoff
+      corte_video: registrar_timestamps
+    inputs:
+      - mapa_multiplicacao_aprovado
+      - atomos_classificados
+      - transcricao_limpa
+    outputs:
+      - pecas_criadas
+      - frases_de_impacto
+      - briefs_email
+      - total_pecas
+    checkpoint: Todos os lotes criados e aprovados pelo usuario (aprovacao incremental por lote de 5)
+    veto_condition: |
+      - Peca parece copia direta do pilar em vez de adaptacao — reescrever com angulo proprio
+      - Conteudo inventado que nao esta na transcricao — VETO, reescrever usando fonte original
+
+  - id: validacao
+    name: Validacao pelo Oraculo (OBRIGATORIA)
+    agent: content-validator
+    description: "Validar CADA micro-peca pelo Oraculo. SEM EXCECAO. Nao importa o tempo."
+    depends_on: [criacao]
+    elicit: false
+    obrigatoria: true
+    steps:
+      - "REGRA INVIOLAVEL: TODA peca passa pelo Oraculo — sem excecao"
+      - "NUNCA oferecer pular esta fase, mesmo que o usuario peca"
+      - Aplicar oraculo-posts para carrosseis, posts unicos e frases de impacto
+      - Aplicar oraculo-reels para roteiros de reels
+      - Aplicar criterios de qualidade para stories
+      - Verificar tom imperial e concisao
+      - Verificar que cada peca tem identidade propria
+      - Verificar rastreabilidade — conteudo veio da transcricao?
+      - Calcular score individual por peca
+      - Reescrever pecas com score < 80%
+    task: audit-content
+    retry_on_fail: true
+    max_retries: 3
+    inputs:
+      - pecas_criadas
+      - frases_de_impacto
+    outputs:
+      - scores_individuais
+      - pecas_validadas
+      - frases_validadas
+      - feedback_por_peca
+    checkpoint: "TODAS as pecas com score >= 80% no Oraculo — ZERO excecoes"
+    veto_condition: "Score < 80% apos 3 tentativas — escalar para content-chief para reescrita completa. NUNCA entregar peca com score < 80%."
+
+  - id: entrega
+    name: Entrega Final + Calendario + Handoff
+    agent: content-planner
+    description: Distribuir pecas no calendario, entregar briefs de email e resumo final
+    depends_on: [validacao]
+    elicit: true
+    steps:
+      - Definir periodo de distribuicao (dias/semanas)
+      - Espacar pecas do mesmo tema para nao saturar
+      - Alternar formatos ao longo da semana
+      - Garantir que pecas de venda estao cercadas por pecas de valor
+      - Incluir horarios ideais por formato
+      - "Salvar TODOS os artefatos no output:"
+      - "  outputs/copys/{cliente}/multiplicar-{slug}/transcricao/transcricao-completa.md"
+      - "  outputs/copys/{cliente}/multiplicar-{slug}/carrosseis/"
+      - "  outputs/copys/{cliente}/multiplicar-{slug}/reels/"
+      - "  outputs/copys/{cliente}/multiplicar-{slug}/cortes/"
+      - "  outputs/copys/{cliente}/multiplicar-{slug}/frases/"
+      - "  outputs/copys/{cliente}/multiplicar-{slug}/stories/"
+      - "  outputs/copys/{cliente}/multiplicar-{slug}/emails/"
+      - "  outputs/copys/{cliente}/multiplicar-{slug}/README.md"
+      - "Entregar pacote final:"
+      - "  1. Calendario com todas as pecas distribuidas"
+      - "  2. Frases de impacto prontas (quote cards + stories)"
+      - "  3. Cortes de video com timestamps"
+      - "  4. Briefs de email salvos (informar caminho ao usuario)"
+      - "  5. Series de conteudo identificadas"
+      - "  6. Resumo quantitativo (total por formato, por intencao)"
+      - "  7. Instrucao de handoff: como ativar Squad Copywriters com os briefs"
+      - "  8. Transcricao completa salva como artefato permanente"
+      - "Apresentar calendario ao usuario (1. Confirmar, 2. Ajustar, 3. Reordenar)"
+    inputs:
+      - pecas_validadas
+      - frases_validadas
+      - briefs_email
+      - cortes_video
+      - periodo_desejado
+    outputs:
+      - calendario_publicacao
+      - pacote_frases_impacto
+      - cortes_video_finais
+      - briefs_email_finais
+      - resumo_quantitativo
+      - transcricao_salva
+    checkpoint: Calendario aprovado com todas as pecas distribuidas
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT PATH
+# ═══════════════════════════════════════════════════════════════════════════════
+
+output_path:
+  padrao: "outputs/copys/{cliente}/multiplicar-{slug}/"
+  estrutura:
+    - "transcricao/transcricao-completa.md"
+    - "transcricao/transcricao-bruta.txt"
+    - "carrosseis/{id}-{titulo-slug}.md"
+    - "reels/{id}-{titulo-slug}.md"
+    - "cortes/mapa-cortes.md"
+    - "frases/{id}-{titulo-slug}.md"
+    - "stories/{id}-{titulo-slug}.md"
+    - "emails/brief-{numero}.md"
+    - "atomos.md"
+    - "README.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# HANDOFF EMAIL
+# ═══════════════════════════════════════════════════════════════════════════════
+
+handoff_email:
+  destino: Squad Copywriters
+  output_path: "outputs/copys/{cliente}/multiplicar-{slug}/emails/"
+  output_naming: "brief-{numero}.md"
+  instrucao_usuario: |
+    Os briefs de email foram salvos em:
+    outputs/copys/{cliente}/multiplicar-{slug}/emails/
+
+    Para criar os emails, ative o Squad Copywriters e passe os briefs:
+    "Leia os briefs em outputs/copys/{cliente}/multiplicar-{slug}/emails/ e crie os emails"
+
+    O Squad Copywriters decide o formato (daily email, sequence, etc.)
+  formato_brief: |
+    # Brief de Email — Handoff do *multiplicar
+
+    **Origem:** Conteudo pilar — [titulo/URL]
+    **Data:** [data da multiplicacao]
+
+    ## Atomo
+    [insight/historia/provocacao extraida — texto completo da transcricao]
+
+    ## Citacao Original
+    [trecho exato da transcricao de onde saiu este atomo]
+
+    ## Contexto
+    [contexto do pilar — sobre o que era o conteudo]
+
+    ## Angulo Sugerido
+    [como abordar no email — provocacao, narrativa, educativo]
+
+    ## Tom Sugerido
+    [imperial/provocativo/narrativo]
+
+    ## Intencao
+    [atracao/consciencia/aquecimento/venda]
+
+    ## Notas
+    Squad Copywriters decide formato (daily email, sequence, etc.)
+    Este brief e SUGESTAO — o copywriter tem autonomia para adaptar.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METRICAS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metricas:
+  score_minimo_oraculo: 80
+  max_retries_validacao: 3
+  minimo_atomos: 10
+  minimo_atomos_video_1h: 30
+  max_mesmo_formato_pct: 40
+  minimo_cortes_por_hora: 10
+  minimo_frases_impacto_por_hora: 15
+  formatos_suportados: [carrossel, reels, corte-video, stories, frase-impacto, email-brief]

@@ -1,0 +1,403 @@
+# Brazilian Market Entry Workflow
+# Pipeline para entrada no mercado de afiliados brasileiro
+# Source: @architect research — Alex Vargas FNO + Hotmart/Kiwify + WhatsApp/Telegram
+# Version: 1.0.0
+
+id: wf-br-market-entry
+name: "Brazilian Market Entry"
+version: "1.0.0"
+duration: "1-2 weeks"
+description: |
+  Workflow completo para entrar no mercado de afiliados brasileiro.
+  Do setup de plataforma até distribuição via WhatsApp/Telegram.
+
+  FILOSOFIA: "O BR é mobile-first, WhatsApp-first, parcelamento-first."
+
+  RESULTADO: Operação de afiliados BR ativa com produto validado e canais de distribuição.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Primeira operação de afiliados no Brasil"
+  - "Expandir de global para mercado BR"
+  - "Montar canal de produtos digitais BR"
+
+decision_matrix_fit:
+  complexity: medium
+  agents_required: 3
+  estimated_duration: "1-2 weeks"
+  user_involvement: "medium"
+  prerequisites:
+    - "CPF/CNPJ para cadastro em plataformas"
+    - "Conta bancária ou PIX para recebimento"
+    - "Nicho definido (execute wf-new-affiliate-site primeiro se necessário)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: affiliate-br
+      role: "Setup plataformas, validação de produtos, campanhas BR"
+      phases: [0, 1, 2]
+
+    - agent: copy-vendas
+      role: "Copy em PT-BR nativo, campanhas persuasivas"
+      phases: [2]
+
+    - agent: marketplace-ops
+      role: "Setup WhatsApp e Telegram"
+      phases: [3, 4]
+
+  synergies:
+    - agents: [affiliate-br, copy-vendas]
+      pattern: "BR seleciona produto, Copy cria campanha nativa"
+
+    - agents: [affiliate-br, marketplace-ops]
+      pattern: "BR valida oferta, Marketplace distribui"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 0: PLATFORM SETUP
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-0
+    name: "Platform Setup"
+    days: "Days 1-2"
+    tier: 0
+    description: |
+      Setup de contas nas plataformas de afiliados BR.
+      Hotmart (maior marketplace) + Kiwify (taxas menores).
+
+      HOTMART: Comissão 10-80% (típico 30-60%), cookie 30 dias.
+      KIWIFY: Taxa 3.49% + R$1.50 (vs Hotmart 9.9%).
+
+    agent: affiliate-br
+
+    tasks:
+      - task_id: T0.1
+        name: "Setup Hotmart Affiliate"
+        task_ref: setup-hotmart-affiliate.md
+        required: true
+        description: "Criar conta, explorar marketplace, aplicar para programas"
+        output: "hotmart_setup.yaml"
+
+      - task_id: T0.2
+        name: "Setup Kiwify Affiliate"
+        task_ref: setup-kiwify-affiliate.md
+        required: true
+        description: "Criar conta, networking com produtores"
+        output: "kiwify_setup.yaml"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Platforms Ready"
+      criteria:
+        - "Conta Hotmart ativa e aprovada"
+        - "Conta Kiwify ativa"
+        - "Dados de pagamento configurados (PIX)"
+      human_review: false
+      message: "Plataformas configuradas. Prosseguindo para validação de produto."
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 1: PRODUCT VALIDATION
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-1
+    name: "Product Validation"
+    days: "Days 3-5"
+    tier: 0
+    description: |
+      Validação rigorosa de produtos digitais para promoção.
+      Score: gravity, comissão, reputação, refund rate.
+
+      PRINCÍPIO: "Refund rate > 10% = red flag. Gravity < 50 = pouca demanda."
+
+    agent: affiliate-br
+
+    tasks:
+      - task_id: T1.1
+        name: "Validar Produtos Digitais"
+        task_ref: validate-produto-digital.md
+        required: true
+        description: "Score produtos: gravity, comissão, reputação, refund rate"
+        output: "product_validation.yaml"
+
+    inline_structures:
+      product_score:
+        dimensions:
+          - id: PROD_001
+            name: "Gravity / Popularidade"
+            max_points: 3
+            scoring:
+              3: "Top 10 no nicho, 100+ afiliados ativos"
+              2: "Top 50, 30-100 afiliados"
+              1: "Pouco promovido, < 30 afiliados"
+              0: "Produto novo sem histórico"
+
+          - id: PROD_002
+            name: "Comissão"
+            max_points: 3
+            scoring:
+              3: ">= 50% ou >= R$100/venda"
+              2: "30-49% ou R$50-99/venda"
+              1: "10-29% ou R$20-49/venda"
+              0: "< 10% ou < R$20/venda"
+
+          - id: PROD_003
+            name: "Reputação do Produtor"
+            max_points: 3
+            scoring:
+              3: "Nota >= 4.5, suporte ativo, materiais para afiliado"
+              2: "Nota 3.5-4.4, suporte razoável"
+              1: "Nota 2.5-3.4, pouco suporte"
+              0: "Nota < 2.5 ou reclamações graves"
+
+          - id: PROD_004
+            name: "Refund Rate"
+            max_points: 3
+            scoring:
+              3: "< 3%"
+              2: "3-5%"
+              1: "5-10%"
+              0: "> 10% (red flag)"
+
+        decision:
+          PROMOTE: ">= 9/12"
+          CAUTIOUS: "6-8/12"
+          SKIP: "< 6/12"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Products Validated"
+      criteria:
+        - "Mínimo 3 produtos score >= 9/12"
+        - "Mix de ticket (low + mid + high)"
+        - "Materiais de afiliado disponíveis"
+        - "Refund rate < 10% em todos"
+      human_review: true
+      message: "Revise os produtos selecionados antes de criar campanhas."
+      veto_conditions:
+        - condition: "Todos os produtos com refund rate > 10%"
+          action: "HALT — Produtos de baixa qualidade, buscar alternativas"
+        - condition: "Nenhum produto com comissão >= 30%"
+          action: "WARNING — Margens baixas, avaliar viabilidade"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 2: CAMPAIGN CREATION
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-2
+    name: "Campaign Creation"
+    days: "Days 6-9"
+    tier: 1
+    description: |
+      Criação de campanha completa em PT-BR nativo.
+      Copy, criativos, funis adaptados ao mercado brasileiro.
+
+      PRINCÍPIO: "PT-BR nativo, não traduzido. Mobile-first. PIX + parcelamento."
+
+    agents:
+      primary: affiliate-br
+      secondary: copy-vendas
+
+    tasks:
+      - task_id: T2.1
+        name: "Criar Campanha BR Completa"
+        task_ref: create-campanha-br.md
+        required: true
+        description: "Copy + criativos + funis em PT-BR nativo"
+        output: "campanha_br.yaml"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Campaign Ready"
+      criteria:
+        - "Copy em PT-BR nativo (não traduzido)"
+        - "Criativos adaptados para mobile"
+        - "PIX e parcelamento mencionados"
+        - "LGPD compliance verificado"
+        - "Landing page responsiva"
+      human_review: true
+      message: "Revise a campanha antes de ativar distribuição."
+      veto_conditions:
+        - condition: "Copy não é PT-BR nativo"
+          action: "BLOCK — Reescrever com linguagem brasileira"
+        - condition: "Sem menção a PIX/parcelamento"
+          action: "WARNING — Perde conversão no BR"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 3: WHATSAPP SETUP
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-3
+    name: "WhatsApp Distribution"
+    days: "Days 10-11"
+    tier: 2
+    description: |
+      Setup de lista de broadcast WhatsApp para distribuição.
+      WhatsApp tem 98% de penetração no Brasil.
+
+      PRINCÍPIO: "WhatsApp = fechamento. Telegram = broadcast. Não misture."
+
+    agent: marketplace-ops
+
+    tasks:
+      - task_id: T3.1
+        name: "Setup Lista WhatsApp"
+        task_ref: setup-whatsapp-lista.md
+        required: true
+        description: "Broadcast list + templates de mensagem"
+        output: "whatsapp_setup.yaml"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "WhatsApp Ready"
+      criteria:
+        - "Lista de broadcast configurada"
+        - "Templates de mensagem prontos"
+        - "Consentimento LGPD documentado"
+      human_review: false
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 4: TELEGRAM SETUP
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-4
+    name: "Telegram Channel"
+    days: "Days 12-14"
+    tier: 2
+    description: |
+      Setup de canal Telegram para ofertas.
+      Telegram: 22M users BR, broadcast ilimitado, sem algoritmo.
+
+      PRINCÍPIO: "Telegram = alcance sem algoritmo. Ideal para ofertas diárias."
+
+    agent: marketplace-ops
+
+    tasks:
+      - task_id: T4.1
+        name: "Setup Canal Telegram"
+        task_ref: setup-telegram-canal.md
+        required: true
+        description: "Canal de ofertas + automação"
+        output: "telegram_setup.yaml"
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Telegram Ready"
+      criteria:
+        - "Canal criado com branding"
+        - "Bot de automação configurado (se aplicável)"
+        - "Primeiras 5 ofertas agendadas"
+      human_review: true
+      message: "Revise o canal Telegram antes de iniciar distribuição."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "affiliates-chief"
+    - document_reason: true
+    - require_human_override: true
+
+  common_failures:
+    - failure: "Conta Hotmart não aprovada"
+      phase: 0
+      resolution: "Verificar documentação, contatar suporte"
+
+    - failure: "Nenhum produto com score >= 9"
+      phase: 1
+      resolution: "Expandir busca para nichos adjacentes"
+
+    - failure: "Copy parece traduzido"
+      phase: 2
+      resolution: "Reescrever com copy-vendas usando gírias e expressões BR"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-br-market-entry"
+      status: "completed"
+      outputs:
+        - "hotmart_setup.yaml"
+        - "kiwify_setup.yaml"
+        - "product_validation.yaml"
+        - "campanha_br.yaml"
+        - "whatsapp_setup.yaml"
+        - "telegram_setup.yaml"
+
+  checkpoint:
+    type: "checkpoint_reached"
+    payload:
+      phase_id: "PHASE-{N}"
+      status: "awaiting_review"
+
+  blocked:
+    type: "workflow_blocked"
+    payload:
+      phase_id: "PHASE-{N}"
+      reason: "veto_condition_triggered"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  phase_0:
+    - "hotmart_setup.yaml"
+    - "kiwify_setup.yaml"
+  phase_1:
+    - "product_validation.yaml"
+  phase_2:
+    - "campanha_br.yaml"
+  phase_3:
+    - "whatsapp_setup.yaml"
+  phase_4:
+    - "telegram_setup.yaml"
+
+  final_deliverable:
+    name: "BR Market Entry Package"
+    location: "outputs/campaigns/br-entry-{id}/"
+    contents:
+      - "README.md — Overview da operação BR"
+      - "product_validation.yaml — Produtos validados"
+      - "campanha_br.yaml — Campanha completa"
+      - "distribution_setup.yaml — WhatsApp + Telegram"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-18"
+  author: "squad-architect"
+  source_frameworks:
+    - "Alex Vargas FNO"
+    - "Hotmart Affiliate System"
+    - "Kiwify Growth Model"
+    - "WhatsApp Business Broadcasting"
+  priority: 1
+  quality_gate: "SC_WFL_001"

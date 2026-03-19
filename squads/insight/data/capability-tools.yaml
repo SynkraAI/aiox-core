@@ -1,0 +1,126 @@
+# Capability → Tools Mapping — Insight Squad
+# Generated: 2026-02-11 by @squad-chief (wf-discover-tools v2.0)
+# Source: tool-discovery-report.md
+
+version: "1.0"
+last_updated: "2026-02-11"
+domain: market-intelligence
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CAPABILITY MAPPING BY AGENT
+# ═══════════════════════════════════════════════════════════════════════════════
+
+digital_profiler:
+  site_performance:
+    primary: { tool: lighthouse_cli, type: cli, install: "npm i -g lighthouse", cost: free }
+    fallback: { tool: google_pagespeed_api, type: api, cost: "free (25K/dia)" }
+    mcp: { tool: lighthouse_mcp, type: mcp, install: "npx @danielsogl/lighthouse-mcp@latest" }
+
+  seo_audit:
+    primary: { tool: seoq, type: cli, install: "npx seoq analyze <url>", cost: free }
+    fallback: { tool: pyseoanalyzer, type: library, install: "pip install pyseoanalyzer", cost: free }
+    reference: { tool: lighthouse_cli, type: cli, note: "--preset=desktop --only-categories=seo" }
+
+  google_maps_data:
+    primary: { tool: google_places_api, type: api, cost: "free (10K/mês)" }
+    mcp: { tool: mcp_google_map, type: mcp, install: "npx -y @cablate/mcp-google-map" }
+    scraping: { tool: apify_google_maps_actor, type: mcp, cost: "free ($5/mês credits)" }
+    reviews: { tool: outscraper, type: api, cost: "free (500/mês)" }
+
+  social_instagram:
+    primary: { tool: instaloader, type: library, install: "pip install instaloader", cost: free }
+    scraping: { tool: apify_instagram_actor, type: mcp, cost: "free credits" }
+    api: { tool: instagram_graph_api, type: api, cost: free, note: "OAuth + Meta App Review" }
+
+  social_facebook:
+    primary: { tool: facebook_scraper, type: library, install: "pip install facebook-scraper", cost: free }
+    api: { tool: meta_graph_api, type: api, cost: free, note: "OAuth + Meta App Review" }
+
+  reputation:
+    reclame_aqui: { tool: playwright_mcp, type: mcp, note: "Custom script, no public API" }
+    google_reviews: { tool: outscraper, type: api, cost: "free (500/mês)" }
+    fallback: { tool: google_places_api, type: api, note: "Limited to 5 reviews/place" }
+
+  screenshots:
+    primary: { tool: shot_scraper, type: cli, install: "pip install shot-scraper", cost: free }
+    mcp: { tool: playwright_mcp, type: mcp, note: "Built-in screenshot capability" }
+
+  niche_portals:
+    primary: { tool: playwright_mcp, type: mcp, note: "Navigate + scrape any portal" }
+    actors: { tool: apify_mcp, type: mcp, note: "2000+ ready-made scrapers" }
+    note: "iFood, Doctoralia, ZAP — no public APIs, scraping is the only route"
+
+market_scout:
+  keyword_research:
+    primary: { tool: dataforseo, type: api, cost: "$50 depósito único", note: "PT-BR volume, CPC, competition" }
+    free: { tool: seo_keyword_research_tool, type: github, note: "Google Autocomplete + People Also Ask" }
+    trends: { tool: trendspyg, type: library, install: "pip install trendspyg", note: "Beta v0.3.0" }
+
+  serp_analysis:
+    primary: { tool: brave_search_api, type: api, cost: "free (2K/mês)" }
+    semantic: { tool: exa_mcp, type: mcp, status: installed }
+    premium: { tool: serper_api, type: api, cost: "2.5K buscas grátis" }
+
+  competitive_analysis:
+    primary: { tool: exa_mcp, type: mcp, status: installed }
+    github: { tool: company_researcher, type: github, note: "Uses Exa API" }
+    social: { tool: social_analyzer, type: github, note: "1000+ platforms, 21K stars" }
+
+  google_maps_local:
+    primary: { tool: google_places_api, type: api }
+    scraping: { tool: google_maps_scraper, type: github, note: "gosom/google-maps-scraper, Go binary" }
+
+data_storyteller:
+  pdf_generation:
+    primary: { tool: md_to_pdf, type: cli, install: "npm i -g md-to-pdf", cost: free }
+    python: { tool: fpdf2, type: library, install: "pip install fpdf2", cost: free }
+    multi_format: { tool: pandoc, type: cli, install: "scoop install pandoc" }
+
+  data_visualization:
+    primary: { tool: plotly_kaleido, type: library, install: "pip install plotly kaleido", cost: free }
+    note: "Export charts as PNG/SVG for embedding in Markdown reports"
+
+insight_chief:
+  notifications:
+    whatsapp: { tool: pywa, type: library, install: "pip install pywa", cost: "free (1K msgs/mês)" }
+    mcp: { tool: notifyme_mcp, type: mcp, note: "Desktop notifications" }
+
+  pipeline_crm:
+    backlog: { tool: hubspot_mcp, type: mcp, cost: "free (1K contacts)" }
+    note: "Manual tracking via outputs/ directory until volume justifies CRM"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COST SUMMARY
+# ═══════════════════════════════════════════════════════════════════════════════
+
+cost_tiers:
+  tier_0_free:
+    monthly_cost: "$0"
+    capacity: "~50 leads/mês"
+    tools:
+      - lighthouse_cli
+      - google_pagespeed_api
+      - google_places_api
+      - brave_search_api
+      - exa_mcp
+      - playwright_mcp
+      - instaloader
+      - shot_scraper
+      - md_to_pdf
+      - seoq
+
+  tier_1_low:
+    monthly_cost: "~$50 único"
+    capacity: "50-200 leads/mês"
+    additions:
+      - dataforseo
+      - outscraper
+      - apify_mcp
+
+  tier_2_scale:
+    monthly_cost: "~$50/mês"
+    capacity: "200+ leads/mês"
+    additions:
+      - serper_api
+      - whatsapp_cloud
+      - hubspot_mcp

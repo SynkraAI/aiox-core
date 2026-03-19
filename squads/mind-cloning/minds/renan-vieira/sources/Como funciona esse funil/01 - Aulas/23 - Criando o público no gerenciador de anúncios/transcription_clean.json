@@ -1,0 +1,1143 @@
+{
+  "language": "pt",
+  "original_segments": 300,
+  "cleaned_segments": 142,
+  "segments": [
+    {
+      "start": 0.26,
+      "end": 6.7,
+      "start_formatted": "00:00",
+      "end_formatted": "00:06",
+      "text": "Chegou a hora de a gente criar os públicos para nós fazer a campanha de anúncios no Instagram e no Facebook.",
+      "type": "speech"
+    },
+    {
+      "start": 7.0600000000000005,
+      "end": 9.58,
+      "start_formatted": "00:07",
+      "end_formatted": "00:09",
+      "text": "E a gente vai criar público quente só, Renan.",
+      "type": "speech"
+    },
+    {
+      "start": 9.66,
+      "end": 10.94,
+      "start_formatted": "00:09",
+      "end_formatted": "00:10",
+      "text": "Renan, o que é um público quente?",
+      "type": "speech"
+    },
+    {
+      "start": 11.08,
+      "end": 15.92,
+      "start_formatted": "00:11",
+      "end_formatted": "00:15",
+      "text": "Público quente é todo mundo que já se envolveu com você, de alguma forma.",
+      "type": "speech"
+    },
+    {
+      "start": 16.32,
+      "end": 21.68,
+      "start_formatted": "00:16",
+      "end_formatted": "00:21",
+      "text": "No site, no Instagram, Facebook, tudo. É isso que você vai fazer.",
+      "type": "speech"
+    },
+    {
+      "start": 21.86,
+      "end": 24.02,
+      "start_formatted": "00:21",
+      "end_formatted": "00:24",
+      "text": "Então, a gente vai criar o público quente.",
+      "type": "speech"
+    },
+    {
+      "start": 24.18,
+      "end": 26.0,
+      "start_formatted": "00:24",
+      "end_formatted": "00:26",
+      "text": "Se tiver lista de e-mail, nós vamos criar.",
+      "type": "speech"
+    },
+    {
+      "start": 26.400000000000002,
+      "end": 27.48,
+      "start_formatted": "00:26",
+      "end_formatted": "00:27",
+      "text": "Por que isso é importante?",
+      "type": "speech"
+    },
+    {
+      "start": 27.48,
+      "end": 32.16,
+      "start_formatted": "00:27",
+      "end_formatted": "00:32",
+      "text": "Isso é importante que essas pessoas são as primeiras pessoas que vão comprar de você.",
+      "type": "speech"
+    },
+    {
+      "start": 32.3,
+      "end": 34.120000000000005,
+      "start_formatted": "00:32",
+      "end_formatted": "00:34",
+      "text": "São as pessoas mais fáceis.",
+      "type": "speech"
+    },
+    {
+      "start": 34.38,
+      "end": 36.36,
+      "start_formatted": "00:34",
+      "end_formatted": "00:36",
+      "text": "Renan, mas eu tenho pouco público quente.",
+      "type": "speech"
+    },
+    {
+      "start": 36.5,
+      "end": 37.32,
+      "start_formatted": "00:36",
+      "end_formatted": "00:37",
+      "text": "Não se preocupa.",
+      "type": "speech"
+    },
+    {
+      "start": 37.68,
+      "end": 41.42,
+      "start_formatted": "00:37",
+      "end_formatted": "00:41",
+      "text": "Eu vou te ensinar a esquentar esse público frio em público quente.",
+      "type": "speech"
+    },
+    {
+      "start": 41.52,
+      "end": 46.58,
+      "start_formatted": "00:41",
+      "end_formatted": "00:46",
+      "text": "O que você precisa fazer é ajustar o teu Instagram que eu ensinei no módulo anterior.",
+      "type": "speech"
+    },
+    {
+      "start": 47.22,
+      "end": 48.56,
+      "start_formatted": "00:47",
+      "end_formatted": "00:48",
+      "text": "Porque você precisa deixar.",
+      "type": "speech"
+    },
+    {
+      "start": 48.88,
+      "end": 53.66,
+      "start_formatted": "00:48",
+      "end_formatted": "00:53",
+      "text": "Se as pessoas vão chegar no seu Instagram e você precisa estar com o Instagram preparado.",
+      "type": "speech"
+    },
+    {
+      "start": 54.06,
+      "end": 57.3,
+      "start_formatted": "00:54",
+      "end_formatted": "00:57",
+      "text": "Então, vamos aqui para o que interessa. Eu vou vir aqui em gerenciar.",
+      "type": "speech"
+    },
+    {
+      "start": 57.48,
+      "end": 60.62,
+      "start_formatted": "00:57",
+      "end_formatted": "01:00",
+      "text": "Gerenciador de anúncios. Vou minimizar aqui para ficar certinho.",
+      "type": "speech"
+    },
+    {
+      "start": 62.059999999999995,
+      "end": 64.97999999999999,
+      "start_formatted": "01:02",
+      "end_formatted": "01:04",
+      "text": "Pronto. Então, eu vou vir aqui em gerenciador.",
+      "type": "speech"
+    },
+    {
+      "start": 65.7,
+      "end": 70.22,
+      "start_formatted": "01:05",
+      "end_formatted": "01:10",
+      "text": "Vou clicar aqui e vou vir em públicos. Renan, não sei achar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 70.82,
+      "end": 74.6,
+      "start_formatted": "01:10",
+      "end_formatted": "01:14",
+      "text": "Só de tu digitar. É como criar público lá no Google.",
+      "type": "speech"
+    },
+    {
+      "start": 74.69999999999999,
+      "end": 78.58,
+      "start_formatted": "01:14",
+      "end_formatted": "01:18",
+      "text": "Já vai direto. Vai achar o link e você clica.",
+      "type": "speech"
+    },
+    {
+      "start": 78.72,
+      "end": 80.4,
+      "start_formatted": "01:18",
+      "end_formatted": "01:20",
+      "text": "Você vai vir aqui em públicos.",
+      "type": "speech"
+    },
+    {
+      "start": 81.14,
+      "end": 83.58,
+      "start_formatted": "01:21",
+      "end_formatted": "01:23",
+      "text": "E a gente vai criar o primeiro público quente.",
+      "type": "speech"
+    },
+    {
+      "start": 83.75999999999999,
+      "end": 87.08,
+      "start_formatted": "01:23",
+      "end_formatted": "01:27",
+      "text": "Qual público a gente vai criar? O público que visitou o site.",
+      "type": "speech"
+    },
+    {
+      "start": 87.48,
+      "end": 88.48,
+      "start_formatted": "01:27",
+      "end_formatted": "01:28",
+      "text": "Mas eu tenho o público.",
+      "type": "speech"
+    },
+    {
+      "start": 88.58,
+      "end": 90.76,
+      "start_formatted": "01:28",
+      "end_formatted": "01:30",
+      "text": "Se você tiver, você vai criar o público.",
+      "type": "speech"
+    },
+    {
+      "start": 91.14,
+      "end": 95.4,
+      "start_formatted": "01:31",
+      "end_formatted": "01:35",
+      "text": "Eu fiz a minha estrutura. Criei de 180 dias, 30 dias e tal.",
+      "type": "speech"
+    },
+    {
+      "start": 95.64,
+      "end": 100.46000000000001,
+      "start_formatted": "01:35",
+      "end_formatted": "01:40",
+      "text": "Como você vai fazer o primeiro, eu acho que o interessante é você pegar o máximo de público.",
+      "type": "speech"
+    },
+    {
+      "start": 100.58,
+      "end": 104.56,
+      "start_formatted": "01:40",
+      "end_formatted": "01:44",
+      "text": "Porque você tem pouco. Talvez você pode ter pouca audiência.",
+      "type": "speech"
+    },
+    {
+      "start": 104.98,
+      "end": 108.2,
+      "start_formatted": "01:44",
+      "end_formatted": "01:48",
+      "text": "Então, o que você faz? Coloca aqui. 365 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 110.36,
+      "end": 116.0,
+      "start_formatted": "01:50",
+      "end_formatted": "01:56",
+      "text": "365 dias. Ou 180 dias. Pessoas que se envolveram 180 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 116.06,
+      "end": 119.48,
+      "start_formatted": "01:56",
+      "end_formatted": "01:59",
+      "text": "Foi o que eu fiz na primeira vez. Tá? 180 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 121.24000000000001,
+      "end": 121.74000000000001,
+      "start_formatted": "02:01",
+      "end_formatted": "02:01",
+      "text": "Pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 121.98,
+      "end": 123.9,
+      "start_formatted": "02:01",
+      "end_formatted": "02:03",
+      "text": "Então, eu vou vir aqui no gerenciador de anúncios.",
+      "type": "speech"
+    },
+    {
+      "start": 124.16,
+      "end": 129.04,
+      "start_formatted": "02:04",
+      "end_formatted": "02:09",
+      "text": "E vou criar primeiro público que se envolveu no meu Instagram 180 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 129.14000000000001,
+      "end": 132.54,
+      "start_formatted": "02:09",
+      "end_formatted": "02:12",
+      "text": "Eu vou vir aqui. Criar público personalizado.",
+      "type": "speech"
+    },
+    {
+      "start": 132.64000000000001,
+      "end": 135.18,
+      "start_formatted": "02:12",
+      "end_formatted": "02:15",
+      "text": "Renan, que público é esse? Vou vir aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 135.76,
+      "end": 138.54,
+      "start_formatted": "02:15",
+      "end_formatted": "02:18",
+      "text": "Clicar em conta do Instagram. Show de bola.",
+      "type": "speech"
+    },
+    {
+      "start": 138.64000000000001,
+      "end": 140.52,
+      "start_formatted": "02:18",
+      "end_formatted": "02:20",
+      "text": "Olha como é simples. Eu vou colocar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 140.62,
+      "end": 144.04000000000002,
+      "start_formatted": "02:20",
+      "end_formatted": "02:24",
+      "text": "Selecionar o meu Instagram. Todos que se engajaram.",
+      "type": "speech"
+    },
+    {
+      "start": 144.14000000000001,
+      "end": 146.98000000000002,
+      "start_formatted": "02:24",
+      "end_formatted": "02:26",
+      "text": "Aqui está 365 dias. Eu vou colocar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 146.98,
+      "end": 153.48,
+      "start_formatted": "02:26",
+      "end_formatted": "02:33",
+      "text": "Olha. 180 dias. 180. Opa. Só 180. E aqui eu vou botar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 153.57999999999998,
+      "end": 158.67999999999998,
+      "start_formatted": "02:33",
+      "end_formatted": "02:38",
+      "text": "IG 180 dias. Então, geralmente a gente coloca assim.",
+      "type": "speech"
+    },
+    {
+      "start": 158.78,
+      "end": 164.98,
+      "start_formatted": "02:38",
+      "end_formatted": "02:44",
+      "text": "Coloca um colchete. IG. E aqui coloca 180 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 165.07999999999998,
+      "end": 169.07999999999998,
+      "start_formatted": "02:45",
+      "end_formatted": "02:49",
+      "text": "No caso aqui, como é curso. Aí eu vou pegar e vou colocar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 169.17999999999998,
+      "end": 174.28,
+      "start_formatted": "02:49",
+      "end_formatted": "02:54",
+      "text": "Curso. E vou criar. Aí eu aperto no botão criar.",
+      "type": "speech"
+    },
+    {
+      "start": 174.38,
+      "end": 177.28,
+      "start_formatted": "02:54",
+      "end_formatted": "02:57",
+      "text": "Feito isso. O que você vai fazer? Você vai...",
+      "type": "speech"
+    },
+    {
+      "start": 177.38,
+      "end": 180.28,
+      "start_formatted": "02:57",
+      "end_formatted": "03:00",
+      "text": "Pode criar um outro público com menos tempo.",
+      "type": "speech"
+    },
+    {
+      "start": 180.38,
+      "end": 185.68,
+      "start_formatted": "03:00",
+      "end_formatted": "03:05",
+      "text": "Tá? Aqui eu já criaria 30 dias. Você que está começando.",
+      "type": "speech"
+    },
+    {
+      "start": 185.78,
+      "end": 189.08,
+      "start_formatted": "03:05",
+      "end_formatted": "03:09",
+      "text": "Cria dois públicos. Um de 180 dias e um de 30 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 189.18,
+      "end": 191.98000000000002,
+      "start_formatted": "03:09",
+      "end_formatted": "03:11",
+      "text": "Pronto. Vai... Depois de você criar os 180.",
+      "type": "speech"
+    },
+    {
+      "start": 192.08,
+      "end": 195.08,
+      "start_formatted": "03:12",
+      "end_formatted": "03:15",
+      "text": "Você vai vir fazer a mesma coisa. E vir aqui colocar 30 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 195.18,
+      "end": 196.78,
+      "start_formatted": "03:15",
+      "end_formatted": "03:16",
+      "text": "O que que vai acontecer? Vai apertar no criar.",
+      "type": "speech"
+    },
+    {
+      "start": 196.88,
+      "end": 200.18,
+      "start_formatted": "03:16",
+      "end_formatted": "03:20",
+      "text": "E vai criar. E daí vai ficar assim. Vai ficar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 200.28,
+      "end": 204.48000000000002,
+      "start_formatted": "03:20",
+      "end_formatted": "03:24",
+      "text": "Esse aqui é site. No site, site. Vai ficar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 204.58,
+      "end": 209.38000000000002,
+      "start_formatted": "03:24",
+      "end_formatted": "03:29",
+      "text": "IG 30 dias. E IG 180 dias. Então você vai fazer duas vezes.",
+      "type": "speech"
+    },
+    {
+      "start": 209.48000000000002,
+      "end": 212.18,
+      "start_formatted": "03:29",
+      "end_formatted": "03:32",
+      "text": "Depois que feito isso. A gente vai vir aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 212.28,
+      "end": 215.98000000000002,
+      "start_formatted": "03:32",
+      "end_formatted": "03:35",
+      "text": "Qual é o outro? 95% vídeo-view. Renan, como assim?",
+      "type": "speech"
+    },
+    {
+      "start": 216.08,
+      "end": 218.18,
+      "start_formatted": "03:36",
+      "end_formatted": "03:38",
+      "text": "Se você é uma pessoa que produz muito conteúdo.",
+      "type": "speech"
+    },
+    {
+      "start": 218.28,
+      "end": 221.88000000000002,
+      "start_formatted": "03:38",
+      "end_formatted": "03:41",
+      "text": "Você tem um público muito qualificado. Todo mundo que assistiu os seus vídeos.",
+      "type": "speech"
+    },
+    {
+      "start": 221.98000000000002,
+      "end": 223.08,
+      "start_formatted": "03:41",
+      "end_formatted": "03:43",
+      "text": "É um público qualificado.",
+      "type": "speech"
+    },
+    {
+      "start": 223.18,
+      "end": 226.48000000000002,
+      "start_formatted": "03:43",
+      "end_formatted": "03:46",
+      "text": "Você vai vir aqui em público personalizado.",
+      "type": "speech"
+    },
+    {
+      "start": 226.58,
+      "end": 229.98000000000002,
+      "start_formatted": "03:46",
+      "end_formatted": "03:49",
+      "text": "Olha como é simples. Vai vir aqui. Vamos ver aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 230.08,
+      "end": 234.28,
+      "start_formatted": "03:50",
+      "end_formatted": "03:54",
+      "text": "Vídeo. Fontes da meta. Vídeo. Avançar.",
+      "type": "speech"
+    },
+    {
+      "start": 236.08,
+      "end": 241.98000000000002,
+      "start_formatted": "03:56",
+      "end_formatted": "04:01",
+      "text": "Vai aparecer aqui. Calma aí. Meu Deus. Por que que saiu?",
+      "type": "speech"
+    },
+    {
+      "start": 242.08,
+      "end": 247.28,
+      "start_formatted": "04:02",
+      "end_formatted": "04:07",
+      "text": "Sumiu? Meu computador hoje não está ajudando.",
+      "type": "speech"
+    },
+    {
+      "start": 247.38000000000002,
+      "end": 269.38,
+      "start_formatted": "04:07",
+      "end_formatted": "04:29",
+      "text": "Vou atualizar aqui. É isso. O Facebook às vezes dá uma travada.",
+      "type": "speech"
+    },
+    {
+      "start": 269.47999999999996,
+      "end": 271.38,
+      "start_formatted": "04:29",
+      "end_formatted": "04:31",
+      "text": "Para a gente ver que não é só maravilha.",
+      "type": "speech"
+    },
+    {
+      "start": 271.47999999999996,
+      "end": 272.18,
+      "start_formatted": "04:31",
+      "end_formatted": "04:32",
+      "text": "É assim.",
+      "type": "speech"
+    },
+    {
+      "start": 272.28,
+      "end": 274.38,
+      "start_formatted": "04:32",
+      "end_formatted": "04:34",
+      "text": "Acontece na prática aqui na hora da aula.",
+      "type": "speech"
+    },
+    {
+      "start": 274.47999999999996,
+      "end": 280.08,
+      "start_formatted": "04:34",
+      "end_formatted": "04:40",
+      "text": "Criar público personalizado. Vou vir aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 280.18,
+      "end": 284.88,
+      "start_formatted": "04:40",
+      "end_formatted": "04:44",
+      "text": "Vídeo. Avançar. Agora já apareceu. Então vou colocar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 284.97999999999996,
+      "end": 290.18,
+      "start_formatted": "04:44",
+      "end_formatted": "04:50",
+      "text": "75%. Pode colocar 75%. Pronto. Quanto tempo?",
+      "type": "speech"
+    },
+    {
+      "start": 290.28,
+      "end": 293.18,
+      "start_formatted": "04:50",
+      "end_formatted": "04:53",
+      "text": "180 dias. Então o que que tu vai colocar?",
+      "type": "speech"
+    },
+    {
+      "start": 293.28,
+      "end": 295.78,
+      "start_formatted": "04:53",
+      "end_formatted": "04:55",
+      "text": "180. E daí você vai colocar aqui. Vídeo.",
+      "type": "speech"
+    },
+    {
+      "start": 296.08,
+      "end": 298.88,
+      "start_formatted": "04:56",
+      "end_formatted": "04:58",
+      "text": "Você pode botar algo que você identifica.",
+      "type": "speech"
+    },
+    {
+      "start": 298.97999999999996,
+      "end": 305.88,
+      "start_formatted": "04:58",
+      "end_formatted": "05:05",
+      "text": "Você pode botar vídeo. 75%. Pronto. 180 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 305.97999999999996,
+      "end": 309.08,
+      "start_formatted": "05:05",
+      "end_formatted": "05:09",
+      "text": "Como que eu vou botar? Cochetezinho. 180.",
+      "type": "speech"
+    },
+    {
+      "start": 309.18,
+      "end": 313.18,
+      "start_formatted": "05:09",
+      "end_formatted": "05:13",
+      "text": "D. E outro cochete. Vou deixar bonitão. Padrão.",
+      "type": "speech"
+    },
+    {
+      "start": 313.28,
+      "end": 317.08,
+      "start_formatted": "05:13",
+      "end_formatted": "05:17",
+      "text": "Pronto. Agora vou ter que escolher os vídeos.",
+      "type": "speech"
+    },
+    {
+      "start": 317.18,
+      "end": 319.97999999999996,
+      "start_formatted": "05:17",
+      "end_formatted": "05:19",
+      "text": "Eu vou vir aqui. E você vai selecionar. Página do Facebook.",
+      "type": "speech"
+    },
+    {
+      "start": 320.08,
+      "end": 322.97999999999996,
+      "start_formatted": "05:20",
+      "end_formatted": "05:22",
+      "text": "Eu vou colocar Instagram. Perfil empresarial.",
+      "type": "speech"
+    },
+    {
+      "start": 323.08,
+      "end": 328.97999999999996,
+      "start_formatted": "05:23",
+      "end_formatted": "05:28",
+      "text": "Instagram. Vou selecionar todos os vídeos.",
+      "type": "speech"
+    },
+    {
+      "start": 329.08,
+      "end": 335.47999999999996,
+      "start_formatted": "05:29",
+      "end_formatted": "05:35",
+      "text": "Pa, pa, pa, pa. Então vou selecionar todos os vídeos.",
+      "type": "speech"
+    },
+    {
+      "start": 335.58,
+      "end": 340.97999999999996,
+      "start_formatted": "05:35",
+      "end_formatted": "05:40",
+      "text": "Criei todos os vídeos. Legal. Deixa eu ver o que que tá.",
+      "type": "speech"
+    },
+    {
+      "start": 341.08,
+      "end": 345.58,
+      "start_formatted": "05:41",
+      "end_formatted": "05:45",
+      "text": "Apareceu o botão aqui que não tá aparecendo.",
+      "type": "speech"
+    },
+    {
+      "start": 345.68,
+      "end": 353.97999999999996,
+      "start_formatted": "05:45",
+      "end_formatted": "05:53",
+      "text": "Ó, o botão tá aqui embaixo. Caramba. O que que é isso aí?",
+      "type": "speech"
+    },
+    {
+      "start": 354.08,
+      "end": 360.68,
+      "start_formatted": "05:54",
+      "end_formatted": "06:00",
+      "text": "Caramba. O botão tá aqui embaixo. Então vou ter que ser.",
+      "type": "speech"
+    },
+    {
+      "start": 360.78,
+      "end": 366.58,
+      "start_formatted": "06:00",
+      "end_formatted": "06:06",
+      "text": "É isso, né? Faz parte. Vamos lá. Instagram.",
+      "type": "speech"
+    },
+    {
+      "start": 366.68,
+      "end": 369.97999999999996,
+      "start_formatted": "06:06",
+      "end_formatted": "06:09",
+      "text": "Cadê? Instagram. Vou selecionar os vídeos.",
+      "type": "speech"
+    },
+    {
+      "start": 370.08,
+      "end": 372.88,
+      "start_formatted": "06:10",
+      "end_formatted": "06:12",
+      "text": "O botão não está aparecendo na tela, tá?",
+      "type": "speech"
+    },
+    {
+      "start": 372.97999999999996,
+      "end": 374.88,
+      "start_formatted": "06:12",
+      "end_formatted": "06:14",
+      "text": "Não tá aparecendo na tela que ele tá aqui no cantinho.",
+      "type": "speech"
+    },
+    {
+      "start": 374.97999999999996,
+      "end": 378.47999999999996,
+      "start_formatted": "06:14",
+      "end_formatted": "06:18",
+      "text": "Vou mostrar aqui, ó. Vou tirar minha foto só pra te ver.",
+      "type": "speech"
+    },
+    {
+      "start": 378.58,
+      "end": 382.88,
+      "start_formatted": "06:18",
+      "end_formatted": "06:22",
+      "text": "Pra vocês verem. Ó, tá aqui, ó. Botão tá aqui no cantinho aqui, ó.",
+      "type": "speech"
+    },
+    {
+      "start": 382.97999999999996,
+      "end": 387.38,
+      "start_formatted": "06:22",
+      "end_formatted": "06:27",
+      "text": "Confirmar. E deu. Selecionei os vídeos. E agora ele vai criar o público.",
+      "type": "speech"
+    },
+    {
+      "start": 387.48,
+      "end": 391.68,
+      "start_formatted": "06:27",
+      "end_formatted": "06:31",
+      "text": "Ó, vídeo views 75. Vou botar aqui, ó. Teste curso.",
+      "type": "speech"
+    },
+    {
+      "start": 391.78000000000003,
+      "end": 393.78000000000003,
+      "start_formatted": "06:31",
+      "end_formatted": "06:33",
+      "text": "Só pra eu saber depois que eu vou apagar.",
+      "type": "speech"
+    },
+    {
+      "start": 393.88,
+      "end": 396.68,
+      "start_formatted": "06:33",
+      "end_formatted": "06:36",
+      "text": "Pronto. Criar público. E agora o que que vai acontecer?",
+      "type": "speech"
+    },
+    {
+      "start": 396.78000000000003,
+      "end": 398.78000000000003,
+      "start_formatted": "06:36",
+      "end_formatted": "06:38",
+      "text": "O Instagram vai começar a preencher esse público.",
+      "type": "speech"
+    },
+    {
+      "start": 398.88,
+      "end": 402.18,
+      "start_formatted": "06:38",
+      "end_formatted": "06:42",
+      "text": "Concluído. Ó, ele tá preenchendo aqui. Beleza.",
+      "type": "speech"
+    },
+    {
+      "start": 402.28000000000003,
+      "end": 405.68,
+      "start_formatted": "06:42",
+      "end_formatted": "06:45",
+      "text": "Ele tá criando esse público aqui. Depois o que que eu vou fazer?",
+      "type": "speech"
+    },
+    {
+      "start": 405.78000000000003,
+      "end": 409.58000000000004,
+      "start_formatted": "06:45",
+      "end_formatted": "06:49",
+      "text": "Engajamento no Instagram. Vou voltar lá.",
+      "type": "speech"
+    },
+    {
+      "start": 409.68,
+      "end": 410.58000000000004,
+      "start_formatted": "06:49",
+      "end_formatted": "06:50",
+      "text": "Vou voltar.",
+      "type": "speech"
+    },
+    {
+      "start": 410.68,
+      "end": 414.98,
+      "start_formatted": "06:50",
+      "end_formatted": "06:54",
+      "text": "E agora eu vou criar um público personalizado.",
+      "type": "speech"
+    },
+    {
+      "start": 414.98,
+      "end": 421.58000000000004,
+      "start_formatted": "06:54",
+      "end_formatted": "07:01",
+      "text": "Que se engajou na conta do Instagram. Ah, a gente já fez um, né?",
+      "type": "speech"
+    },
+    {
+      "start": 421.68,
+      "end": 425.68,
+      "start_formatted": "07:01",
+      "end_formatted": "07:05",
+      "text": "Então eu vou botar ali, ó. Todos que se engajaram.",
+      "type": "speech"
+    },
+    {
+      "start": 425.78000000000003,
+      "end": 427.98,
+      "start_formatted": "07:05",
+      "end_formatted": "07:07",
+      "text": "Ah, eu não sei se eu fiz todos engajaram.",
+      "type": "speech"
+    },
+    {
+      "start": 428.08000000000004,
+      "end": 432.58000000000004,
+      "start_formatted": "07:08",
+      "end_formatted": "07:12",
+      "text": "Eu fiz qual o outro que eu tinha feito? Deixa eu ver qual era o outro.",
+      "type": "speech"
+    },
+    {
+      "start": 432.68,
+      "end": 439.28000000000003,
+      "start_formatted": "07:12",
+      "end_formatted": "07:19",
+      "text": "O outro. Ah, tá. Eu tinha feito do engajamento.",
+      "type": "speech"
+    },
+    {
+      "start": 439.38,
+      "end": 441.38,
+      "start_formatted": "07:19",
+      "end_formatted": "07:21",
+      "text": "Agora então vamos voltar e vamos fazer do site.",
+      "type": "speech"
+    },
+    {
+      "start": 441.48,
+      "end": 444.08000000000004,
+      "start_formatted": "07:21",
+      "end_formatted": "07:24",
+      "text": "Que que é o site? Eu vou vir aqui, selecionar o site.",
+      "type": "speech"
+    },
+    {
+      "start": 444.18,
+      "end": 447.38,
+      "start_formatted": "07:24",
+      "end_formatted": "07:27",
+      "text": "O meu site. Ele tem um pixel. O que que acontece?",
+      "type": "speech"
+    },
+    {
+      "start": 447.48,
+      "end": 450.28000000000003,
+      "start_formatted": "07:27",
+      "end_formatted": "07:30",
+      "text": "Então, ó. O pixel da Masterclass.",
+      "type": "speech"
+    },
+    {
+      "start": 450.38,
+      "end": 452.88,
+      "start_formatted": "07:30",
+      "end_formatted": "07:32",
+      "text": "O pixel que eu já ensinei você a instalar.",
+      "type": "speech"
+    },
+    {
+      "start": 452.98,
+      "end": 456.28000000000003,
+      "start_formatted": "07:32",
+      "end_formatted": "07:36",
+      "text": "Então o que que você vai fazer? Você vai vir aqui e vai colocar.",
+      "type": "speech"
+    },
+    {
+      "start": 456.38,
+      "end": 461.98,
+      "start_formatted": "07:36",
+      "end_formatted": "07:41",
+      "text": "Criar 180 dias. Visitou o site. Visitou o site.",
+      "type": "speech"
+    },
+    {
+      "start": 462.08000000000004,
+      "end": 467.38,
+      "start_formatted": "07:42",
+      "end_formatted": "07:47",
+      "text": "Ou pode colocar site. Que é mais fácil de entender.",
+      "type": "speech"
+    },
+    {
+      "start": 467.48,
+      "end": 475.28000000000003,
+      "start_formatted": "07:47",
+      "end_formatted": "07:55",
+      "text": "180 dias. Pronto. Vou botar aqui. Curso.",
+      "type": "speech"
+    },
+    {
+      "start": 475.38,
+      "end": 478.98,
+      "start_formatted": "07:55",
+      "end_formatted": "07:58",
+      "text": "Pra eu saber. Criando esse público aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 479.08000000000004,
+      "end": 480.38,
+      "start_formatted": "07:59",
+      "end_formatted": "08:00",
+      "text": "Que que eu vou fazer depois?",
+      "type": "speech"
+    },
+    {
+      "start": 480.48,
+      "end": 483.58000000000004,
+      "start_formatted": "08:00",
+      "end_formatted": "08:03",
+      "text": "Eu vou vir aqui e vou criar um outro público concluído.",
+      "type": "speech"
+    },
+    {
+      "start": 483.68,
+      "end": 487.38,
+      "start_formatted": "08:03",
+      "end_formatted": "08:07",
+      "text": "Olha, ele tá preenchendo lá o público. Vou criar um outro público.",
+      "type": "speech"
+    },
+    {
+      "start": 487.48,
+      "end": 491.28000000000003,
+      "start_formatted": "08:07",
+      "end_formatted": "08:11",
+      "text": "Público personalizado. 180 dias. E eu vou colocar agora.",
+      "type": "speech"
+    },
+    {
+      "start": 491.38,
+      "end": 498.98,
+      "start_formatted": "08:11",
+      "end_formatted": "08:18",
+      "text": "180 dias. E eu vou colocar aqui 60 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 499.08000000000004,
+      "end": 504.98,
+      "start_formatted": "08:19",
+      "end_formatted": "08:24",
+      "text": "30 dias. 30 dias. E vou botar aqui ó. 30 dias.",
+      "type": "speech"
+    },
+    {
+      "start": 505.08000000000004,
+      "end": 509.58000000000004,
+      "start_formatted": "08:25",
+      "end_formatted": "08:29",
+      "text": "Pronto. Então já criei um novo público de site.",
+      "type": "speech"
+    },
+    {
+      "start": 509.68,
+      "end": 511.68,
+      "start_formatted": "08:29",
+      "end_formatted": "08:31",
+      "text": "30 dias. Todo mundo que visitou meu site.",
+      "type": "speech"
+    },
+    {
+      "start": 511.78000000000003,
+      "end": 517.58,
+      "start_formatted": "08:31",
+      "end_formatted": "08:37",
+      "text": "Engajamento. E a outra coisa. Eu posso subir uma lista de e-mail.",
+      "type": "speech"
+    },
+    {
+      "start": 517.6800000000001,
+      "end": 520.48,
+      "start_formatted": "08:37",
+      "end_formatted": "08:40",
+      "text": "Como é que eu posso subir? Você vem aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 520.58,
+      "end": 523.88,
+      "start_formatted": "08:40",
+      "end_formatted": "08:43",
+      "text": "Cria um público. É um público.",
+      "type": "speech"
+    },
+    {
+      "start": 523.98,
+      "end": 525.28,
+      "start_formatted": "08:43",
+      "end_formatted": "08:45",
+      "text": "Deixa eu ver se é um público salvo aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 525.38,
+      "end": 527.08,
+      "start_formatted": "08:45",
+      "end_formatted": "08:47",
+      "text": "Porque as vezes não lembro tudo de cabeça.",
+      "type": "speech"
+    },
+    {
+      "start": 527.1800000000001,
+      "end": 536.88,
+      "start_formatted": "08:47",
+      "end_formatted": "08:56",
+      "text": "Não. Público salvo não. Beleza. Público personalizado.",
+      "type": "speech"
+    },
+    {
+      "start": 536.98,
+      "end": 540.58,
+      "start_formatted": "08:56",
+      "end_formatted": "09:00",
+      "text": "Lista de clientes. Então eu venho aqui. Coloco a lista de clientes.",
+      "type": "speech"
+    },
+    {
+      "start": 540.6800000000001,
+      "end": 544.48,
+      "start_formatted": "09:00",
+      "end_formatted": "09:04",
+      "text": "Eu subo uma lista de e-mail aqui. Nome, e-mail, telefone.",
+      "type": "speech"
+    },
+    {
+      "start": 544.58,
+      "end": 548.58,
+      "start_formatted": "09:04",
+      "end_formatted": "09:08",
+      "text": "Só o telefone e o e-mail. E o Facebook vai achar essas pessoas.",
+      "type": "speech"
+    },
+    {
+      "start": 548.6800000000001,
+      "end": 549.38,
+      "start_formatted": "09:08",
+      "end_formatted": "09:09",
+      "text": "E sincronizar.",
+      "type": "speech"
+    },
+    {
+      "start": 549.48,
+      "end": 551.38,
+      "start_formatted": "09:09",
+      "end_formatted": "09:11",
+      "text": "E você vai poder anunciar pra elas também.",
+      "type": "speech"
+    },
+    {
+      "start": 551.48,
+      "end": 555.38,
+      "start_formatted": "09:11",
+      "end_formatted": "09:15",
+      "text": "Fechou. Então é isso. Primeira parte que a gente já criou.",
+      "type": "speech"
+    },
+    {
+      "start": 555.48,
+      "end": 560.08,
+      "start_formatted": "09:15",
+      "end_formatted": "09:20",
+      "text": "Público quente. Beleza. Então vamos para a próxima aula.",
+      "type": "speech"
+    },
+    {
+      "start": 560.1800000000001,
+      "end": 562.98,
+      "start_formatted": "09:20",
+      "end_formatted": "09:22",
+      "text": "Até lá. Tchau.",
+      "type": "speech"
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+pack:
+  name: presenca-digital
+  version: 1.0.0
+  short-title: Presença Digital Squad
+  description: >-
+    Squad de execução de conteúdo multi-plataforma para presença digital contínua.
+    Cria posts, reels, carrosseis, stories, scripts de vídeo, blog posts, newsletters
+    e campanhas de email. Consome brand guidelines do squad brand (upstream) como
+    fundação para consistência. Cada agente é clonado de um elite mind real com
+    framework documentado e replicável.
+  author: Synkra AIOX
+  icon: "📱"
+  slashPrefix: presencaDigital
+  upstream_squads:
+    - name: branding
+      consumes:
+        - "Brand Book"
+        - "Positioning Canvas"
+        - "Brand Voice Guidelines"
+        - "Brand Soul Canvas"
+
+# Pattern Library
+pattern_library:
+  prefix: PD
+  naming_convention:
+    format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+    example: "PD-TP-001"
+  categories:
+    - id: TP
+      name: "Task Patterns"
+      description: "Patterns for content creation task structure"
+    - id: EP
+      name: "Executor Patterns"
+      description: "Patterns for content executor types"
+    - id: PP
+      name: "Process Patterns"
+      description: "Patterns for content workflow processes"
+    - id: CP
+      name: "Content Patterns"
+      description: "Reusable content formats and structures"
+    - id: DP
+      name: "Distribution Patterns"
+      description: "Patterns for multi-platform distribution"
+    - id: HP
+      name: "Hook Patterns"
+      description: "Patterns for attention capture (3-second rule)"
+  patterns: []
+
+# Task Standards
+task_standards:
+  enforce_anatomy: true
+  validator: "PD-TP-001"
+  required_fields:
+    - task_name
+    - status
+    - responsible_executor
+    - execution_type
+    - input
+    - output
+    - action_items
+    - acceptance_criteria
+  optional_fields:
+    - estimated_time
+    - dependencies
+    - templates
+    - quality_gate
+    - handoff
+
+# Executor Types
+executor_types:
+  human:
+    id: "PD-EP-001"
+    name: "Human Executor"
+    use_for:
+      - "Final content approval"
+      - "Brand voice override"
+      - "Creative direction"
+  agent:
+    id: "PD-EP-002"
+    name: "Agent Executor (AI)"
+    use_for:
+      - "Content strategy"
+      - "Post writing"
+      - "Script generation"
+      - "Hook creation"
+      - "Content repurposing"
+      - "Calendar planning"
+  hybrid:
+    id: "PD-EP-003"
+    name: "Hybrid Executor"
+    use_for:
+      - "Video script review"
+      - "Campaign copy review"
+      - "Visual content briefing"
+  worker:
+    id: "PD-EP-004"
+    name: "Worker Executor"
+    use_for:
+      - "Format adaptation"
+      - "Hashtag generation"
+      - "SEO metadata"
+      - "Platform specs lookup"
+
+executor_selection:
+  requires_creativity: human
+  requires_judgment: [human, hybrid]
+  requires_speed: [agent, worker]
+  requires_consistency: worker
+  requires_validation: hybrid
+  requires_learning: agent
+
+# Workflow Configuration
+workflow_config:
+  checkpoint_policy: always_active
+  checkpoint_modes:
+    always_active: "Every checkpoint MUST pass"
+    skip_on_override: "Can skip with manual approval"
+    advisory: "Only alerts, doesn't block"
+  fail_fast: true
+  allow_manual_override: false
+
+# Agent Tiers
+tier_system:
+  tier_0:
+    name: "Strategy & Orchestration"
+    agents:
+      - presenca-digital-chief
+      - paulo-cuenca
+  tier_1:
+    name: "Execution Systems"
+    agents:
+      - justin-welsh
+      - ross-simmonds
+      - natanael-oliveira
+      - brendan-kane
+  tier_2:
+    name: "Specialists"
+    agents:
+      - nicolas-cole
+      - camilo-coutinho
+      - vanessa-lau
+
+# Squad Settings
+settings:
+  greeting: named
+  language: pt-BR
+  max_context_files: 5
+
+# Platform Coverage
+platforms:
+  - id: instagram
+    formats: [post, reel, story, carousel, live]
+  - id: linkedin
+    formats: [post, article, carousel, newsletter]
+  - id: tiktok
+    formats: [video, carousel, live]
+  - id: youtube
+    formats: [long_form, shorts, live, community]
+  - id: x
+    formats: [post, thread]
+  - id: facebook
+    formats: [post, reel, story]
+  - id: blog
+    formats: [article, seo_post]
+  - id: newsletter
+    formats: [email, sequence, campaign]
+  - id: whatsapp
+    formats: [broadcast, manychat_automation]
+
+# Content Cadence (default)
+cadence:
+  weekly:
+    posts: 12-15
+    reels: 3-5
+    stories: daily
+    blog: 1-2
+    newsletter: 1
+    youtube: 1
+  batch_session: "4h/week (Justin Welsh Content OS)"

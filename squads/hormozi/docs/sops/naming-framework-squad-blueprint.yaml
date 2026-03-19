@@ -1,0 +1,543 @@
+# Naming Framework Squad Blueprint
+# Source: $100M Offers (Cap. 16) + Swipefile Master Definitivo - Alex Hormozi
+# Version: 1.0.0
+# Created: 2026-02-10
+
+metadata:
+  name: naming-framework-squad
+  description: Squad for creating high-converting product, offer, and brand names using Hormozi's MAGICO framework
+  version: "1.0.0"
+  source_documents:
+    - "$100M Offers - Chapter 16: Rename"
+    - "Swipefile Master Definitivo: A Psicologia dos Nomes Bilionarios"
+  total_revenue_documented: "$178.5+ billion"
+  cases_analyzed: "500+"
+
+# ============================================================================
+# AGENTS
+# ============================================================================
+agents:
+  # Primary Naming Agent
+  hormozi_naming_strategist:
+    name: "Hormozi Naming Strategist"
+    role: "Create high-converting names using MAGICO framework"
+    description: |
+      Expert in Hormozi's naming methodology. Creates product, offer, and brand
+      names that command attention, communicate value instantly, and convert at
+      higher rates. Specializes in making offers appear NEW and UNIQUE.
+
+    core_principles:
+      - "Especificidade faz com que pareca real" (Cap. 16)
+      - "Diferente e melhor. Novo e melhor." (Cap. 16)
+      - "O nome faz o marketing 10X mais facil ou 10X mais dificil" (Swipefile)
+      - "Nome 80% bom lancado hoje > nome 100% perfeito nunca lancado" (Lei 7)
+
+    primary_tasks:
+      - Apply MAGICO framework to generate name candidates
+      - Match naming archetype to context and ICP
+      - Score candidates against 20-question test
+      - Optimize names for price tier psychology
+
+    tools:
+      - MAGICO Framework Template
+      - 10 Archetypes Reference
+      - Price Tier Naming Matrix
+      - 20-Question Validation Test
+      - Power Words Library
+
+    voice_characteristics:
+      style: "Direct, specific, outcome-focused"
+      examples:
+        - "Generic 'Fitness Program' → Specific 'P90X' = 10X memorability"
+        - "Never use 'Version 2.0' - it carries past failure association"
+        - "Broken numbers (19, 67, 93) convert more than round numbers"
+
+  # Swipefile Analyst Agent
+  swipefile_analyst:
+    name: "Swipefile Analyst"
+    role: "Reference billion-dollar naming patterns and case studies"
+    description: |
+      Deep knowledge of 500+ analyzed naming cases totaling $178.5B+ in documented
+      revenue. Provides relevant examples, patterns, and anti-patterns for any
+      naming context.
+
+    knowledge_base:
+      categories:
+        - "Names That Became Verbs (Google, Uber, Zoom, Photoshop, Venmo)"
+        - "Billion-Dollar SaaS (Canva, HubSpot, Notion, Slack, ClickFunnels)"
+        - "High-Ticket Coaching (Platinum Partnership, 10X, Inner Circle)"
+        - "Brazilian Info Products (Formula de Lancamento, Desafio 19 Dias)"
+        - "DTC Disruptors (Dollar Shave Club, Warby Parker, Gymshark)"
+        - "Mobile Apps (Candy Crush, Clash of Clans, Angry Birds)"
+        - "Fintech (Chime, Robinhood, Cash App)"
+        - "EdTech (Coursera, MasterClass, Duolingo)"
+        - "Fitness (P90X, Calm, 75 Hard, AG1)"
+        - "Creator Economy (OnlyFans, Patreon, Substack)"
+
+    primary_tasks:
+      - Identify relevant case studies for given context
+      - Extract applicable patterns from swipefile
+      - Warn against documented naming failures
+      - Provide social proof through documented results
+
+    failure_cases:
+      quibi: "$1.75B lost - feature name ≠ benefit name"
+      google_glass: "$1B+ lost - negative connotations (voyeurism)"
+      new_coke: "Billions in damage - invalidated heritage"
+      microsoft_zune: "$289M lost - meaningless sound"
+      cnn_plus: "$300M in 3 weeks - copied model without value"
+
+  # Quality Gate Agent
+  naming_quality_gate:
+    name: "Naming Quality Gate"
+    role: "Validate names against Hormozi standards"
+    description: |
+      Ensures all generated names pass rigorous quality standards including
+      the 20-question test, 7 immutable laws, and practical validation.
+
+    validation_frameworks:
+      - 20-Question Name Test (15+ required to pass)
+      - 7 Immutable Laws Check
+      - MAGICO Component Verification (2+ required)
+      - Price Tier Alignment Check
+      - Market Timing Assessment
+
+    quality_thresholds:
+      unicorn_potential: 20  # points
+      launch_ready: 15       # points minimum
+      needs_refinement: 10   # points
+      restart_required: 9    # points (below this)
+
+    blocking_conditions:
+      - Score < 15 on 20-question test
+      - Zero MAGICO components present
+      - Price tier mismatch
+      - Trademark conflict identified
+      - Fails drunk test (hard to say/spell)
+
+# ============================================================================
+# WORKFLOWS
+# ============================================================================
+workflows:
+  # Main naming workflow
+  create_offer_name:
+    name: "Create Offer Name"
+    description: "End-to-end workflow for creating high-converting offer names"
+
+    steps:
+      - step: 1
+        name: "Define Specificity Elements"
+        agent: hormozi_naming_strategist
+        actions:
+          - "Quantify exact outcome (23.5 lbs in 17 weeks, not 10-30 lbs)"
+          - "Define time component (prefer broken numbers)"
+          - "Identify unique mechanism (the 'how')"
+        outputs:
+          - outcome_statement
+          - time_element
+          - mechanism_name
+
+      - step: 2
+        name: "Select Naming Archetype"
+        agent: swipefile_analyst
+        inputs:
+          - icp_profile
+          - price_tier
+          - category_maturity
+        actions:
+          - "Match one of 10 archetypes to context"
+          - "Pull relevant case studies"
+          - "Identify applicable patterns"
+        outputs:
+          - selected_archetype
+          - reference_examples
+          - anti_patterns
+
+      - step: 3
+        name: "Generate Candidates"
+        agent: hormozi_naming_strategist
+        inputs:
+          - specificity_elements
+          - selected_archetype
+          - price_tier
+        actions:
+          - "Generate 10+ candidates using MAGICO"
+          - "Apply power words"
+          - "Create variations"
+        outputs:
+          - candidate_list_10plus
+
+      - step: 4
+        name: "Validate Candidates"
+        agent: naming_quality_gate
+        inputs:
+          - candidate_list
+        actions:
+          - "Score each against 20-question test"
+          - "Check 7 laws compliance"
+          - "Verify MAGICO components"
+          - "Check market timing fit"
+        outputs:
+          - scored_candidates
+          - top_3_recommendations
+
+      - step: 5
+        name: "Finalize Selection"
+        agent: hormozi_naming_strategist
+        inputs:
+          - scored_candidates
+          - market_conditions
+        actions:
+          - "Select winning name"
+          - "Name all bonuses using same process"
+          - "Document rationale"
+        outputs:
+          - final_name
+          - bonus_names
+          - name_documentation
+
+  # Quick rename workflow (for rebranding)
+  rebrand_offer:
+    name: "Rebrand Existing Offer"
+    description: "Rename a failed or stale offer to reset prospect perception"
+
+    trigger_conditions:
+      - "Offer associated with past failure"
+      - "Commodity perception in market"
+      - "Market confused by positioning"
+      - "Version 2.0 insufficient"
+
+    steps:
+      - step: 1
+        name: "Audit Current Name"
+        actions:
+          - "Document current associations"
+          - "Identify failure points"
+          - "Map competitor naming"
+
+      - step: 2
+        name: "Execute Full MAGICO Process"
+        reference: create_offer_name
+
+      - step: 3
+        name: "Ensure Maximum Differentiation"
+        actions:
+          - "Verify zero similarity to old name"
+          - "Test for fresh perception"
+          - "Validate 'new opportunity' feeling"
+
+# ============================================================================
+# EXECUTOR MATRIX
+# ============================================================================
+executor_matrix:
+  step_1_1_quantify_outcome:
+    cognitive_type: "Analysis + Synthesis"
+    automation_potential: "LOW"
+    executor: "Human"
+    rationale: "Requires deep customer research and outcome validation"
+
+  step_1_2_define_time:
+    cognitive_type: "Analysis"
+    automation_potential: "LOW"
+    executor: "Human"
+    rationale: "Must know realistic delivery timeframe"
+
+  step_1_3_identify_mechanism:
+    cognitive_type: "Synthesis + Creativity"
+    automation_potential: "LOW"
+    executor: "Human"
+    rationale: "Requires understanding actual differentiation"
+
+  step_2_1_select_archetype:
+    cognitive_type: "Pattern Recognition + Judgment"
+    automation_potential: "MEDIUM"
+    executor: "Hybrid"
+    rationale: "Can suggest based on inputs, human validates"
+
+  step_2_2_match_price_tier:
+    cognitive_type: "Pattern Matching"
+    automation_potential: "HIGH"
+    executor: "Worker"
+    rationale: "Formulaic mapping from price to naming patterns"
+
+  step_3_1_generate_candidates:
+    cognitive_type: "Creativity + Synthesis"
+    automation_potential: "MEDIUM"
+    executor: "Hybrid"
+    rationale: "Can generate variations, human curates"
+
+  step_3_2_apply_power_words:
+    cognitive_type: "Pattern Application"
+    automation_potential: "HIGH"
+    executor: "Worker"
+    rationale: "Systematic word substitution from library"
+
+  step_4_1_validate_20_questions:
+    cognitive_type: "Analysis + Judgment"
+    automation_potential: "MEDIUM"
+    executor: "Hybrid"
+    rationale: "Checklist automatable, some questions need judgment"
+
+  step_5_1_market_timing_check:
+    cognitive_type: "Judgment"
+    automation_potential: "LOW"
+    executor: "Human"
+    rationale: "Requires reading current market psychology"
+
+  step_5_2_final_selection:
+    cognitive_type: "Judgment"
+    automation_potential: "LOW"
+    executor: "Human"
+    rationale: "Final decision requires holistic assessment"
+
+# ============================================================================
+# QUALITY GATES
+# ============================================================================
+quality_gates:
+  gate_1_magico_components:
+    name: "MAGICO Component Check"
+    threshold: "2+ components present"
+    action_if_failed: "Add missing elements"
+    blocking: true
+
+  gate_2_20_question_score:
+    name: "20-Question Validation"
+    threshold: "15+ points"
+    action_if_failed: "Revise or regenerate candidates"
+    blocking: true
+
+  gate_3_archetype_alignment:
+    name: "Archetype Match"
+    threshold: "Clear alignment with selected archetype"
+    action_if_failed: "Reassess ICP and context"
+    blocking: false
+
+  gate_4_price_alignment:
+    name: "Price Tier Match"
+    threshold: "Naming language matches price psychology"
+    action_if_failed: "Adjust naming vocabulary"
+    blocking: true
+
+  gate_5_specificity:
+    name: "Specificity Level"
+    threshold: "Contains quantified claim"
+    action_if_failed: "Add numbers and specific details"
+    blocking: false
+
+  gate_6_drunk_test:
+    name: "Drunk Test"
+    threshold: "Easy to say and spell after one hearing"
+    action_if_failed: "Simplify name"
+    blocking: true
+
+  gate_7_legal_clear:
+    name: "Legal Availability"
+    threshold: "Trademark available or acquirable"
+    action_if_failed: "Choose alternative candidate"
+    blocking: true
+
+# ============================================================================
+# DECISION RULES
+# ============================================================================
+decision_rules:
+  dr_001_program_vs_product:
+    rule: "TERMINOLOGY_SELECTION"
+    trigger: "Naming a service or deliverable"
+    condition: "IF service-based THEN use 'Program'"
+    rationale: "Da a impressao de que e abrangente e que eles estao sendo aceitos (Cap. 16)"
+
+  dr_002_specificity:
+    rule: "SPECIFICITY_OVER_GENERIC"
+    trigger: "Choosing between general and specific claims"
+    condition: "IF can be specific THEN always choose specific"
+    rationale: "Quanto mais especifico, mais real se torna para o prospect (Cap. 16)"
+
+  dr_003_archetype_selection:
+    rule: "ARCHETYPE_MATCH"
+    trigger: "Selecting naming archetype"
+    conditions:
+      literal_extremo: "non-technical audience AND complex category"
+      verbo_cultural: "creating new behavior"
+      estado_desejado: "emotional transformation"
+      numerico_especifico: "time/quantity differentiator"
+      paradoxo_intrigante: "commodity category"
+      tribal_identifier: "community focus"
+      metafora_visual: "visual/physical benefit"
+      status_signal: "premium pricing"
+      inventor_friendly: "new category"
+      heritage_fabricado: "trust barrier"
+
+  dr_004_price_tier:
+    rule: "PRICE_NAME_ALIGNMENT"
+    trigger: "Naming at specific price point"
+    conditions:
+      under_100: "use urgency words (Quick, Instant, Hack)"
+      100_to_1000: "use value words (System, Formula, Accelerator)"
+      1000_to_10000: "use transformation words (Intensive, Certification)"
+      over_10000: "use status words (Inner Circle, Mastermind, Partnership)"
+
+  dr_005_rebrand_trigger:
+    rule: "WHEN_TO_RENAME"
+    trigger: "Evaluating existing offer performance"
+    conditions:
+      - "associated with past failure → rename required"
+      - "commodity perception → rename required"
+      - "market confused → rename required"
+      - "version 2.0 insufficient → full rename required"
+    rationale: "Uma nova oportunidade e...bem...nova e talvez esta funcione (Cap. 16)"
+
+  dr_006_seven_laws:
+    rule: "SEVEN_IMMUTABLE_LAWS"
+    trigger: "Final name validation"
+    laws:
+      law_1: "Simplicidade > Criatividade"
+      law_2: "Beneficio > Feature"
+      law_3: "Emocao > Logica"
+      law_4: "Especifico > Generico"
+      law_5: "Curto > Longo (7.3 chars avg unicorn)"
+      law_6: "Historia > Descricao"
+      law_7: "Timing > Perfeicao"
+
+# ============================================================================
+# TEMPLATES
+# ============================================================================
+templates:
+  magico_worksheet:
+    name: "MAGICO Framework Worksheet"
+    fields:
+      m_mechanism: "What unique mechanism/method delivers the result?"
+      a_target: "What is the attractive target outcome?"
+      g_spelling: "What creative spelling/format makes it stand out?"
+      i_idea: "What solution concept/theme does it represent?"
+      c_time: "What time element creates urgency?"
+      o_objective: "What is the dream result/final goal?"
+
+  candidate_scorecard:
+    name: "Name Candidate Scorecard"
+    sections:
+      basic:
+        - "Passes drunk test (easy to say/spell)"
+        - "Domain available < $10K"
+        - "Trademark free globally"
+        - "Works in 3+ languages"
+        - "Social handles available"
+      strategic:
+        - "Communicates or creates category"
+        - "Allows product expansion"
+        - "Different from Google page 1"
+        - "Potential to become verb"
+        - "Pleasant sound when spoken"
+      psychological:
+        - "Evokes instant emotion"
+        - "Suggests desired transformation"
+        - "Reduces purchase anxiety"
+        - "Creates immediate curiosity"
+        - "Memorable after 1 mention"
+      commercial:
+        - "Enables premium pricing"
+        - "Works on outdoor/audio"
+        - "Viral hashtag potential"
+        - "Interesting story/origin"
+        - "Desire scale 8+/10"
+
+  name_documentation:
+    name: "Final Name Documentation"
+    structure: |
+      ## OFFER NAME DOCUMENTATION
+
+      **Final Name:** [SELECTED NAME]
+      **Score:** [X/20]
+
+      ### MAGICO Breakdown
+      - M (Mechanism): [element]
+      - A (Target): [element]
+      - G (Spelling): [element]
+      - I (Idea): [element]
+      - C (Time): [element]
+      - O (Objective): [element]
+
+      ### Classification
+      - Archetype: [Selected archetype]
+      - Price Tier: [Tier and rationale]
+      - Key Power Words: [Words used]
+
+      ### Validation
+      [Full 20-question scorecard results]
+
+      ### Rejected Alternatives
+      1. [Name] - Score [X/20] - Reason [why rejected]
+      2. [Name] - Score [X/20] - Reason [why rejected]
+      3. [Name] - Score [X/20] - Reason [why rejected]
+
+# ============================================================================
+# APPENDICES
+# ============================================================================
+appendices:
+  power_words:
+    conversion_multipliers_2_5x:
+      - "Blueprint"
+      - "System"
+      - "Formula"
+      - "Framework"
+      - "Accelerator"
+      - "Intensive"
+      - "Revolution"
+      - "Breakthrough"
+
+    price_multipliers_3_10x:
+      - "Platinum"
+      - "Elite"
+      - "Mastermind"
+      - "Certification"
+      - "Authority"
+      - "Inner Circle"
+      - "Advisory"
+      - "Concierge"
+
+    risk_reducers:
+      - "Proven"
+      - "Guaranteed"
+      - "Certified"
+      - "Scientific"
+      - "Tested"
+      - "Trusted"
+      - "Safe"
+      - "Simple"
+
+  timing_matrix:
+    bull_market:
+      style: "Aspirational names"
+      examples: ["Millionaire", "10X", "Unicorn"]
+      note: "Aggressive promises convert"
+
+    bear_market:
+      style: "Conservative names"
+      examples: ["Safe", "Proven", "Guaranteed"]
+      note: "Value propositions must show ROI"
+
+    category_start:
+      style: "Educational names"
+      examples: ["The [New Thing] Company"]
+      note: "Must explain what it is"
+
+    category_mature:
+      style: "Differentiation names"
+      examples: ["Liquid Death", "Drunk Elephant"]
+      note: "Paradoxes and controversy work"
+
+    disruption_coming:
+      style: "Radical simplicity"
+      examples: ["One word names"]
+      note: "Focus on benefit, not feature"
+
+# ============================================================================
+# VALIDATION
+# ============================================================================
+validation:
+  sop_parts_complete: 11
+  step_anatomy_fields: 8
+  source_references: "100+"
+  status: "COMPLETE"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

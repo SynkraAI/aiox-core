@@ -1,0 +1,156 @@
+# Platform Specifications - OPES Marketing Arm
+# Version: 2.0.0
+
+---
+
+instagram:
+  max_chars: 2200
+  optimal_chars: 1500-2000
+  hashtags:
+    min: 10
+    max: 15
+    strategy: "Mix de nicho (70%) + alcance (30%)"
+    core_hashtags:
+      - "#onepersonbusiness"
+      - "#iaparaempreendedores"
+      - "#nexialismo"
+      - "#ceoaugmentado"
+      - "#aiosystem"
+      - "#empreendedordigital"
+      - "#inteligenciaartificial"
+      - "#produtividade"
+      - "#onepersonenterprise"
+      - "#iagenerativa"
+  tone: "Casual, confessional, visual-first"
+  visual:
+    post_portrait: "1080×1350px (4:5) — preferido"
+    post_square: "1080×1080px (1:1)"
+    carousel: "1080×1350px (4:5), 5-10 slides"
+    story: "1080×1920px (9:16)"
+    reel_cover: "1080×1920px (9:16)"
+    file_formats: ["JPG", "PNG"]
+    max_file_size: "8MB por imagem"
+    visual_priority: "alta — IG é visual-first"
+  format:
+    - "Parágrafos curtos (1-3 linhas)"
+    - "Emojis estratégicos (1-3 por post, nunca excessivo)"
+    - "Hook forte na primeira linha"
+    - "Line break após hook"
+    - "CTA no final"
+  cta_options:
+    - "Salva esse post pra aplicar depois"
+    - "Manda pra alguém que precisa ouvir isso"
+    - "Comenta 'OPES' que te conto mais"
+    - "Link na bio"
+  avoid:
+    - "Posts genéricos sem opinião"
+    - "Excesso de emojis (não é perfil de coach)"
+    - "Frases de efeito sem substância"
+    - "Tom professoral/acadêmico"
+
+linkedin:
+  max_chars: 3000
+  optimal_chars: 1800-2500
+  hashtags:
+    min: 3
+    max: 5
+    core_hashtags:
+      - "#InteligenciaArtificial"
+      - "#OnePersonBusiness"
+      - "#Empreendedorismo"
+      - "#IAGenerativa"
+      - "#Produtividade"
+  tone: "Profissional + autêntico, thought leadership com vulnerabilidade"
+  visual:
+    post_image: "1200×627px (1.91:1) — preferido"
+    post_square: "1080×1080px (1:1)"
+    document_carousel: "1080×1350px (PDF), max 300 páginas"
+    cover_image: "1584×396px"
+    file_formats: ["JPG", "PNG", "PDF"]
+    visual_priority: "baixa — LI é text-first, visual de suporte"
+  format:
+    - "Parágrafos curtos (2-4 linhas)"
+    - "Sem emojis (ou máximo 1-2 pontuais)"
+    - "Hook forte na primeira linha"
+    - "Estrutura: Hook → Contexto → Insight → CTA"
+    - "Pode ser mais longo e detalhado que IG"
+  cta_options:
+    - "Concorda? Discorda? Comenta aí."
+    - "Se isso ressoou, compartilha no seu feed."
+    - "Me chama no DM que te explico como funciona."
+    - "Reposta se conhece alguém nessa situação."
+  avoid:
+    - "Tom corporativo/buzzwords (sinergia, stakeholder)"
+    - "Posts motivacionais rasos"
+    - "Excesso de formatação (bold, italic)"
+    - "Pedir like/compartilhamento de forma desesperada"
+
+voice_jose_amorim:
+  characteristics:
+    - "Confessional: compartilha vulnerabilidades reais"
+    - "Visual: metáforas antes de conceitos"
+    - "Direto: sem rodeios, sem floreios"
+    - "Nexialista: conecta domínios que ninguém conecta"
+    - "TDAH-aware: normaliza neurodiversidade como superpoder"
+
+  anti_patterns_llm:
+    - "Não é sobre X, é sobre Y"
+    - "Aqui está a verdade..."
+    - "O ponto é..."
+    - "verdadeiramente"
+    - "genuinamente"
+    - "é uma maratona, não um sprint"
+    - "Nesse mundo acelerado"
+    - "Vou ser honesto com você"
+    - "Deixa eu te contar um segredo"
+    - "O futuro é agora"
+
+  signature_elements:
+    - "Começa com cena/bastidor real (não teoria)"
+    - "Usa 'tu' ou 'você' para intimidade"
+    - "Referências a TV/jornalismo como metáfora"
+    - "AIOS como personagem (não ferramenta)"
+    - "Números reais (não arredondados)"
+    - "Admite erro antes de ensinar"
+
+content_calendar:
+  posting_frequency:
+    instagram: "1x/dia (seg-sex), stories opcionais"
+    linkedin: "1x/dia (seg-sex)"
+  best_times:
+    instagram: "08:00-09:00 ou 18:00-19:00"
+    linkedin: "07:30-08:30 ou 12:00-13:00"
+  weekly_theme_rotation:
+    monday: "OPES na Prática (como funciona)"
+    tuesday: "Nexialismo Aplicado (conectar domínios)"
+    wednesday: "Jornada Real (bastidores, erros)"
+    thursday: "OPES na Prática (tutorial/demonstração)"
+    friday: "Reflexão/Provocação (contrarian take)"
+
+# ============================================
+# FORMATO VISUAL — REGRAS DEFINITIVAS
+# ============================================
+# Specs completos: data/brand-guide.yaml → formatos
+formato_visual:
+  proporcao_unica_ig: "4:5 (1080×1350px) — TODO conteúdo Instagram é 4:5. Sem exceção."
+  proporcao_linkedin: "1.91:1 (1200×627px) para imagem ou 4:5 para PDF/documento"
+
+  formatos_disponiveis:
+    - id: "F1"
+      nome: "Post Estático"
+      frequencia: "1x/semana"
+    - id: "F2"
+      nome: "Carrossel Padrão"
+      frequencia: "1-2x/semana"
+    - id: "F3"
+      nome: "Carrossel Twitter"
+      frequencia: "2-3x/semana"
+      nota: "FORMATO PADRÃO — na dúvida, usa F3"
+    - id: "F4"
+      nome: "Texto Puro"
+      frequencia: "1x/semana"
+    - id: "F5"
+      nome: "Imagem Conceitual"
+      frequencia: "0-1x/semana"
+
+  regra_ouro: "Carrossel Twitter (F3) é o default. É o formato que mais performa."

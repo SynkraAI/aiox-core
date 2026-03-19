@@ -1,0 +1,228 @@
+# Benchmarks de Email Marketing por Tipo de Sequência
+# Atualizado: 2026-02 | Fonte: Campaign Monitor, Mailchimp, HubSpot, ActiveCampaign relatórios 2024-2025
+# Uso: agentes email-nurture e performance-analyst
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  currency: BRL
+  note: >
+    Benchmarks globais convertidos para contexto BR onde aplicável.
+    Open rates variam significativamente por ferramenta (Apple MPP infla open rates desde 2021).
+    Use CTR e CR como métricas primárias mais confiáveis.
+  apple_mpp_note: >
+    Apple Mail Privacy Protection (desde set/2021) pré-carrega pixels de rastreamento,
+    inflando open rates artificialmente. Open rates acima de 50% em listas mistas
+    geralmente indicam distorção por MPP. Foque em cliques e conversões.
+
+definitions:
+  open_rate: "Percentual de destinatários únicos que abriram o email"
+  ctr: "Click-Through Rate — percentual de cliques únicos sobre emails entregues"
+  ctor: "Click-To-Open Rate — percentual de cliques sobre emails abertos (qualidade do conteúdo)"
+  cr: "Conversion Rate — percentual de cliques que resultam em ação desejada (compra, cadastro)"
+  unsubscribe_rate: "Percentual de desinscrições sobre emails entregues (saudável: <0.5%)"
+
+sequences:
+
+  welcome_series:
+    display_name: "Série de Boas-Vindas"
+    description: >
+      Sequência enviada imediatamente após inscrição. Define o relacionamento e
+      apresenta a proposta de valor. Geralmente 3-7 emails em 7-14 dias.
+    avg_open_rate_pct: 52
+    avg_ctr_pct: 8.5
+    avg_ctor_pct: 16.3
+    avg_cr_pct: 3.2
+    avg_unsubscribe_rate_pct: 0.8
+    best_send_time: "09:00-11:00"
+    best_send_day: "qualquer dia (automação baseada em inscrição)"
+    recommended_cadence:
+      - "Email 1: imediato após inscrição (< 5 min)"
+      - "Email 2: Dia 2"
+      - "Email 3: Dia 4"
+      - "Email 4: Dia 7"
+      - "Email 5: Dia 14"
+    subject_line_tips:
+      - "Personalize com primeiro nome"
+      - "Prometa o valor imediato ('Seu guia gratuito está aqui')"
+      - "Curto e direto (máx. 6 palavras)"
+    content_structure:
+      email_1: "Entrega do lead magnet + quem você é + o que esperar"
+      email_2: "Maior dor do avatar + sua história de como você resolveu"
+      email_3: "Conteúdo de alto valor (guia, video, checklist)"
+      email_4: "Prova social (resultados de outros, depoimentos)"
+      email_5: "Primeira oferta soft (produto mais acessível ou trial)"
+    affiliate_tips: >
+      Email 5 é o momento de apresentar o produto afiliado pela primeira vez.
+      Contextualize como solução natural para o problema apresentado nos emails anteriores.
+    notes: >
+      Série de boas-vindas tem os maiores open rates de qualquer sequência —
+      expectativa máxima do assinante. Emails de boas-vindas têm 4x mais
+      opens e 5x mais cliques que emails regulares.
+
+  soap_opera:
+    display_name: "Soap Opera Sequence (SOS)"
+    description: >
+      Sequência narrativa de 5 emails inspirada em telenovelas. Cada email termina
+      com cliffhanger que força abertura do próximo. Cria conexão emocional profunda.
+      Método popularizado por Andre Chaperon e Russell Brunson.
+    avg_open_rate_pct: 45
+    avg_ctr_pct: 7.2
+    avg_ctor_pct: 16.0
+    avg_cr_pct: 4.8
+    avg_unsubscribe_rate_pct: 1.2
+    best_send_time: "08:00-10:00"
+    best_send_day: "segunda a sexta"
+    recommended_cadence:
+      - "Email 1: Dia 1 — A Grande Promessa (setup)"
+      - "Email 2: Dia 2 — Backstory de Alta Dramas"
+      - "Email 3: Dia 3 — Epifania (hero's journey)"
+      - "Email 4: Dia 4 — O Segredo Oculto"
+      - "Email 5: Dia 5 — O Chamado à Ação"
+    content_structure:
+      email_1: "Apresentação dramática do problema + teaser da solução"
+      email_2: "Sua história de fracasso/luta + cliffhanger ('amanhã te conto como virei tudo')"
+      email_3: "Momento de virada + produto como catalisador da mudança"
+      email_4: "Mecanismo único do produto + prova social específica"
+      email_5: "Urgência + CTA direto + garantia para reduzir risco"
+    affiliate_tips: >
+      SOS funciona muito bem para produtos de maior ticket (R$297+).
+      O investimento emocional ao longo da sequência pré-qualifica compradores.
+      Produto afiliado deve aparecer naturalmente como a ferramenta que 'mudou tudo'.
+    notes: >
+      CR mais alto que broadcast por conta do investimento emocional acumulado.
+      Unsubscribe rate ligeiramente maior — seleciona leads mais qualificados.
+      Pode ser combinada com a welcome series (emails 3-7 da welcome = SOS).
+
+  broadcast_value:
+    display_name: "Broadcast de Valor (Newsletter)"
+    description: >
+      Emails regulares sem pitch de venda. Conteúdo educativo, entretenimento ou
+      curadoria. Mantém a lista aquecida e reduz unsubscribes entre lançamentos.
+    avg_open_rate_pct: 28
+    avg_ctr_pct: 3.5
+    avg_ctor_pct: 12.5
+    avg_cr_pct: 0.4
+    avg_unsubscribe_rate_pct: 0.2
+    best_send_time: "07:00-09:00"
+    best_send_day:
+      - tuesday
+      - wednesday
+      - thursday
+    recommended_frequency: "1-2x por semana"
+    content_types:
+      - "Tutorial ou how-to"
+      - "Curadoria de conteúdo do nicho"
+      - "Opinião ou perspectiva única"
+      - "Case study ou resultado real"
+      - "Ferramentas e recursos úteis"
+    affiliate_tips: >
+      Inclua 1 link de afiliado contextual por email no máximo.
+      Nunca force o afiliado — mencione apenas quando genuinamente relevante.
+      Proporção ideal: 4 emails de valor : 1 email de oferta.
+    notes: >
+      Emails de valor constroem a 'conta bancária emocional' com a lista.
+      Quanto mais valor entregue, mais tolerância para emails de oferta.
+      Frequência maior que 3x/semana geralmente aumenta unsubscribes sem ROI proporcional.
+
+  broadcast_pitch:
+    display_name: "Broadcast de Oferta (Pitch)"
+    description: >
+      Emails com CTA de venda direta. Usados em campanhas específicas,
+      lançamentos de produtos ou promoções sazonais.
+    avg_open_rate_pct: 22
+    avg_ctr_pct: 5.8
+    avg_ctor_pct: 26.4
+    avg_cr_pct: 2.1
+    avg_unsubscribe_rate_pct: 0.6
+    best_send_time: "09:00-11:00 ou 14:00-16:00"
+    best_send_day:
+      - tuesday
+      - wednesday
+      - thursday
+    recommended_cadence_campaign:
+      - "Email 1 (Dia 1): Apresentação da oferta + benefícios"
+      - "Email 2 (Dia 3): Prova social + FAQ"
+      - "Email 3 (Dia 5): Urgência + escassez"
+      - "Email 4 (Dia 7): Último aviso (last call)"
+    content_structure:
+      subject_line: "Urgência ou curiosidade — nunca 'Compre X'"
+      opening: "História ou dado que contextualiza o problema"
+      offer: "Produto + benefícios principais (não features)"
+      proof: "Depoimentos, resultados, social proof"
+      cta: "Um único CTA claro e repetido 2-3x no email"
+      ps: "PS com resumo da oferta — muito lido"
+    affiliate_tips: >
+      Para afiliados: use deadline real (fim de promoção, bônus por tempo limitado).
+      Urgência falsa destrói credibilidade. Adicione bônus exclusivo para compras
+      pelo seu link — diferencial do afiliado sobre compra direta.
+    notes: >
+      CTOR alto (26%) indica que quem abre quer comprar — o problema é open rate.
+      Invista no subject line. Envie versão de reenvio para não-abridores com subject diferente.
+
+  re_engagement:
+    display_name: "Reativação de Lista (Win-Back)"
+    description: >
+      Sequência para reativar assinantes inativos (sem abertura há 90-180 dias).
+      Objetivo: identificar quem ainda tem interesse vs quem deve ser removido.
+    avg_open_rate_pct: 12
+    avg_ctr_pct: 1.8
+    avg_ctor_pct: 15.0
+    avg_cr_pct: 0.8
+    avg_unsubscribe_rate_pct: 3.5
+    best_send_time: "10:00-12:00"
+    best_send_day:
+      - tuesday
+      - thursday
+    recommended_cadence:
+      - "Email 1: Reconhecimento de inatividade + curiosidade"
+      - "Email 2 (3 dias): Oferta de valor + pergunta direta"
+      - "Email 3 (7 dias): Último aviso ('preciso saber se ficamos')"
+      - "Email 4 (10 dias): Confirmação de desinscrição (se sem resposta)"
+    subject_line_examples:
+      - "Você ainda está aí?"
+      - "Deveria te excluir da lista?"
+      - "Última tentativa, {nome}"
+      - "Ficou com raiva de mim?"
+    affiliate_tips: >
+      Email 2 pode incluir oferta exclusiva para reativação (cupom ou bônus).
+      Assinantes reativados têm engajamento mais alto nos 30 dias seguintes.
+      Remova quem não respondeu — lista limpa melhora deliverability geral.
+    notes: >
+      Unsubscribe rate alto é esperado e desejável — elimina inatividade.
+      Lista menor e engajada > lista grande e inativa.
+      Deliverability melhora significativamente após limpeza de inativos.
+
+  product_launch:
+    display_name: "Sequência de Lançamento"
+    description: >
+      Sequência completa para lançamento de produto (próprio ou afiliado).
+      Baseada no modelo de Jeff Walker (Product Launch Formula) adaptado para afiliados.
+    avg_open_rate_pct: 42
+    avg_ctr_pct: 9.5
+    avg_ctor_pct: 22.6
+    avg_cr_pct: 5.5
+    avg_unsubscribe_rate_pct: 1.5
+    best_send_time: "09:00-11:00"
+    best_send_day: "segunda a sexta (evite fins de semana para carrinho)"
+    recommended_cadence:
+      - "7 dias antes: Pré-aquecimento (conteúdo de valor relacionado)"
+      - "5 dias antes: Abertura de lista de espera / inscrição"
+      - "3 dias antes: Conteúdo de pre-launch (video 1 ou post de valor)"
+      - "2 dias antes: Conteúdo de pre-launch (video 2 — deeper dive)"
+      - "1 dia antes: Conteúdo de pre-launch (video 3 — prova social)"
+      - "Dia de abertura (manhã): CARRINHO ABERTO — email de apresentação"
+      - "Dia de abertura (tarde): FAQ e objeções"
+      - "Dia 2: Depoimentos e prova social adicional"
+      - "Dia 4: Urgência — metade do prazo"
+      - "Dia 6 (manhã): Último dia — alerta"
+      - "Dia 6 (tarde): Últimas horas"
+      - "Dia 6 (noite): Carrinho fechando em X horas"
+    affiliate_tips: >
+      Em lançamentos como afiliado, coordene com o produtor as datas de envio.
+      Evite enviar emails no mesmo horário que o produtor envia para a lista dele.
+      Bônus exclusivo do afiliado deve ser apresentado no primeiro email de carrinho aberto.
+    notes: >
+      CR mais alto de todas as sequências em períodos de lançamento.
+      Depende de pré-aquecimento e relacionamento com a lista.
+      Lista fria + lançamento = baixa conversão. Construa a lista 90+ dias antes.

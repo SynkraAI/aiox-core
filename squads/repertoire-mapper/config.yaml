@@ -1,0 +1,133 @@
+pack:
+  name: repertoire-mapper
+  title: Repertoire Mapper
+  version: 1.0.0
+  author: MMOS
+  description: >
+    Squad dedicado ao mapeamento completo de repertórios pessoais.
+    Extrai conhecimento tácito e explícito de múltiplas fontes (livros, vídeos,
+    lives, redes sociais, mentorias, Q&A interativo) e organiza em outputs
+    acionáveis: manual operacional, grafo de conhecimento, frameworks de decisão.
+    Baseado em 9 mentes elite em extração de conhecimento tácito, PKM e
+    ciência cognitiva.
+  icon: "🧠"
+  slash_prefix: RepertoireMapper
+  pattern_prefix: RM
+  target_user: "Qualquer pessoa que queira mapear seus próprios repertórios"
+
+agents:
+  orchestrator:
+    - repertoire-chief
+  tier_0:
+    - polanyi
+    - collins
+  tier_1:
+    - klein
+    - leonard
+    - kelly
+  tier_2:
+    - nonaka
+    - argyris
+  tier_3:
+    - chin
+    - forte
+
+workflows:
+  - full-mapping-pipeline
+  - quick-qa-session
+  - source-ingestion
+  - repertoire-validation
+  - knowledge-graph-update
+
+tasks:
+  - diagnose-repertoire
+  - extract-from-source
+  - run-qa-session
+  - build-repertory-grid
+  - map-deep-smarts
+  - convert-seci
+  - validate-gaps
+  - organize-para
+  - translate-output
+  - generate-manifest
+  - generate-operating-manual
+  - update-knowledge-graph
+
+templates:
+  - repertoire-manifest
+  - operating-manual
+  - expertise-profile
+  - qa-session-guide
+  - gap-analysis-report
+
+checklists:
+  - squad-checklist
+  - extraction-quality
+  - validation-quality
+
+quality_gates:
+  - id: QG-001
+    name: Source Classification
+    transition: "Input → Tier 0"
+    type: routing
+    criteria: "Fontes identificadas, objetivo claro"
+
+  - id: QG-002
+    name: Diagnosis Complete
+    transition: "Tier 0 → Tier 1"
+    type: blocking
+    criteria: "Diagnóstico completo (tipo + nível por área)"
+
+  - id: QG-003
+    name: Extraction Quality
+    transition: "Tier 1 → Tier 2"
+    type: blocking
+    criteria: "Mínimo 10 itens de repertório extraídos com evidência"
+
+  - id: QG-004
+    name: Systematization Review
+    transition: "Tier 2 → Validation"
+    type: advisory
+    criteria: "SECI cycle completo, itens categorizados"
+
+  - id: QG-005
+    name: Final Validation
+    transition: "Validation → Output"
+    type: blocking
+    criteria: "Argyris gap-check passado, sem contradições críticas"
+
+embedded_tools:
+  dreyfus_stage_classifier:
+    description: "Classifica nível de expertise (Novice→Expert) por área"
+    source: "Dreyfus Five-Stage Model (1980)"
+    stages: [Novice, Advanced Beginner, Competent, Proficient, Expert]
+
+  ericsson_quality_benchmark:
+    description: "Avalia qualidade de representações mentais"
+    source: "Anders Ericsson - Peak (2016)"
+    metrics: [mental_representations, deliberate_practice_hours, performance_level]
+
+  lakoff_metaphor_analyzer:
+    description: "Identifica metáforas conceituais que estruturam pensamento"
+    source: "George Lakoff - Metaphors We Live By (1980)"
+    types: [structural, orientational, ontological]
+
+  codex_vitae_template:
+    description: "Template de documentação pessoal de crenças e conhecimento"
+    source: "Buster Benson - Codex Vitae (2012)"
+    sections: [beliefs, strategies, predictions, life_hacks]
+
+dependencies:
+  external_packs:
+    - etl-data-collector  # Coleta de fontes digitais
+    - mmos-mind-mapper    # Patterns de extração cognitiva
+  tools:
+    - web_search          # Para pesquisa complementar
+    - file_read_write     # Para processar documentos
+
+use_cases:
+  - "Extrair repertórios de conteúdo existente (livro, YouTube, lives, social)"
+  - "Mapear conhecimento tácito via Q&A guiado de baixa fricção"
+  - "Cross-referenciar e conectar nós de conhecimento em grafo pessoal"
+  - "Gerar outputs acionáveis (manual operacional, frameworks de decisão)"
+  - "Alimentar outros squads (MMOS self-clone, Content Distillery)"

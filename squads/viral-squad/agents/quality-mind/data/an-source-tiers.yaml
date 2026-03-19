@@ -1,0 +1,119 @@
+# an-source-tiers.yaml
+# Source classification and decision pipeline for mind cloning
+# Loaded by: *extract-dna, *assess-sources, *source-audit, *curadoria-score, *clone-review
+
+source_classification:
+  ouro:
+    description: "Fontes de alta autenticidade - pensamento real, espontaneo"
+    types:
+      - type: "Respostas em comentarios"
+        why: "Pensamento real, sem script, resposta direta a pergunta real"
+        weight: 1.0
+        example: "Resposta longa no Instagram sobre como decide preco"
+      - type: "Entrevistas longas"
+        why: "Perguntas dificeis forcam pensamento real, sem decorar"
+        weight: 0.95
+        example: "Podcast de 2h onde entrevistador pressiona"
+      - type: "Stories respondendo perguntas"
+        why: "Espontaneo, linguagem natural, sem edicao"
+        weight: 0.9
+        example: "Stories de caixinha de perguntas"
+      - type: "Livros escritos pela pessoa"
+        why: "Pensamento estruturado profundo, frameworks proprios"
+        weight: 0.85
+        example: "Livro com metodologia original"
+      - type: "Analise de cases reais"
+        why: "Mostra processo de decisao real, nao teorico"
+        weight: 0.9
+        example: "Post detalhando como resolveu problema real de cliente"
+
+  bronze:
+    description: "Fontes de baixa autenticidade - decorado, generico, desatualizado"
+    types:
+      - type: "Conteudo antigo (desatualizado)"
+        why: "Pessoa pode ter mudado de opiniao, metodo evoluiu"
+        risk: "Clone replica versao obsoleta da mente"
+      - type: "Material generico (nao diferenciador)"
+        why: "Nao captura o que torna a pessoa UNICA"
+        risk: "Clone fica generico, indistinguivel de chatbot"
+      - type: "Palestras repetitivas (decoradas)"
+        why: "Performance, nao pensamento real. Frases prontas."
+        risk: "Clone repete frases mas nao pensa"
+      - type: "Conteudo de terceiros sobre a pessoa"
+        why: "Filtro de outra pessoa, nao voz original"
+        risk: "Clone replica interpretacao, nao original"
+
+  rule: "Menos material ouro > muito material bronze"
+  mantra: "Se entrar coco, sai coco do outro lado"
+
+decision_pipeline:
+  - stage: "1. Source Assessment"
+    action: "Classificar TODAS as fontes em ouro vs bronze"
+    output: "Lista priorizada com justificativa por fonte"
+    time_allocation: "40% do tempo total"
+
+  - stage: "2. Extraction"
+    action: "Extrair Playbook + Framework + Swipe de cada fonte ouro"
+    tools: ["IA extratora de frameworks", "analise manual de entrevistas"]
+    output: "Trindade por fonte"
+
+  - stage: "3. Architecture"
+    action: "Definir se clone precisa de estagios"
+    criteria:
+      - "Comportamento muda por contexto?"
+      - "Tem modos diferentes (ensino vs venda vs suporte)?"
+      - "Reage diferente a tipos de pessoa?"
+    output: "Blueprint de estagios ou single-mode"
+
+  - stage: "4. Training"
+    action: "Alimentar clone com trindade curada"
+    time_allocation: "20% do tempo total"
+
+  - stage: "5. Validation"
+    action: "Testar com pessoas, hackear, refinar"
+    iterations: "Versao 1.0 → 2.0 → 3.0+"
+    time_allocation: "40% do tempo total"
+
+weights:
+  - criterion: "Qualidade das fontes"
+    weight: "VETO - bloqueante"
+    note: "Se fontes sao lixo, para tudo"
+
+  - criterion: "Trindade completa"
+    weight: "alto"
+    note: "Playbook + Framework + Swipe File"
+
+  - criterion: "Teste com humanos"
+    weight: "alto"
+    note: "5-10 pessoas sem saber que e IA"
+
+  - criterion: "Prompt elaborado"
+    weight: "medio"
+    note: "Nao compensa conteudo ruim"
+
+risk_profile:
+  tolerance: "zero para fontes lixo"
+  risk_seeking: ["novas tecnicas de extracao", "estagios experimentais"]
+  risk_averse: ["volume sem curadoria", "atalhos na qualidade"]
+
+curadoria_scoring:
+  dimensions:
+    - name: "Autenticidade"
+      question: "Fonte mostra pensamento real ou performance?"
+      score_guide: "1=decorado, 5=pensamento espontaneo"
+    - name: "Profundidade"
+      question: "Fonte revela frameworks/decisoes ou so superficie?"
+      score_guide: "1=superficial, 5=frameworks completos"
+    - name: "Atualidade"
+      question: "Fonte reflete pensamento atual da pessoa?"
+      score_guide: "1=desatualizado, 5=recente e relevante"
+    - name: "Unicidade"
+      question: "Fonte mostra o que torna pessoa UNICA?"
+      score_guide: "1=generico, 5=diferenciador claro"
+    - name: "Completude"
+      question: "Fonte cobre Playbook + Framework + exemplos?"
+      score_guide: "1=so teoria, 5=trindade completa"
+  threshold:
+    ouro: "media >= 4.0"
+    bronze: "media < 3.0"
+    mixed: "3.0-3.9 (usar com cautela, complementar)"

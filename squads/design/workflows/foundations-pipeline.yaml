@@ -1,0 +1,240 @@
+workflow:
+  id: foundations-pipeline
+  name: Design System Foundations Pipeline
+  description: |
+    Pipeline sequencial para adaptar shadcn/UI default para o design system do produto. Figma e a fonte de verdade. Cada fase tem QA gate bloqueante.
+  version: 1.0.0
+  type: sequential
+  sequence:
+    - step: step-1-ingest-tokens
+      id: step-1-ingest-tokens
+      phase: 1
+      phase_name: Ingest Figma Tokens
+      agent: ds-foundations-lead
+      action: squads-design-tasks-f1-ingest-figma-tokens-md
+      outputs:
+        - normalized_tokens
+      next: step-2-map-tokens
+    - step: step-2-map-tokens
+      id: step-2-map-tokens
+      phase: 2
+      phase_name: Map Tokens to shadcn CSS Variables
+      agent: ds-foundations-lead
+      action: squads-design-tasks-f1-map-tokens-to-shadcn-md
+      outputs:
+        - token_mapping
+      next: step-3-apply-foundations
+    - step: step-3-apply-foundations
+      id: step-3-apply-foundations
+      phase: 3
+      phase_name: Apply Foundations to globals.css
+      agent: ds-foundations-lead
+      action: squads-design-tasks-f1-apply-foundations-md
+      outputs:
+        - globals_css
+      next: step-4-qa-foundations
+    - step: step-4-qa-foundations
+      id: step-4-qa-foundations
+      phase: 4
+      phase_name: QA Gate — Foundations
+      agent: ds-foundations-lead
+      action: squads-design-tasks-f1-qa-foundations-md
+      next: step-5-ingest-components
+    - step: step-5-ingest-components
+      id: step-5-ingest-components
+      phase: 5
+      phase_name: Ingest Base Component Specs from Figma
+      agent: ds-foundations-lead
+      action: squads-design-tasks-f2-ingest-base-components-md
+      outputs:
+        - component_specs
+      next: step-6-adapt-components
+    - step: step-6-adapt-components
+      id: step-6-adapt-components
+      phase: 6
+      phase_name: Adapt shadcn Base Components
+      agent: ds-foundations-lead
+      action: squads-design-tasks-f2-adapt-shadcn-components-md
+      outputs:
+        - adapted_components
+      next: step-7-qa-base-components
+    - step: step-7-qa-base-components
+      id: step-7-qa-base-components
+      phase: 7
+      phase_name: QA Gate — Base Components
+      agent: ds-foundations-lead
+      action: squads-design-tasks-f2-qa-base-components-md
+      next: step-8-derive-components
+    - step: step-8-derive-components
+      id: step-8-derive-components
+      phase: 8
+      phase_name: Derive Remaining Components
+      agent: ds-foundations-lead
+      action: squads-design-tasks-f3-derive-components-md
+      outputs:
+        - all_components
+      next: step-9-qa-final
+    - step: step-9-qa-final
+      id: step-9-qa-final
+      phase: 9
+      phase_name: QA Gate — Final (All Components)
+      agent: ds-foundations-lead
+      action: squads-design-tasks-f3-qa-derived-components-md
+    - workflow_end:
+        id: complete
+        action: workflow_complete
+metadata:
+  author: Foundations Lead
+  created_date: "2026-02-21"
+  last_modified: "2026-02-21"
+  tags:
+    - design-system
+    - foundations
+    - tokens
+    - shadcn
+    - figma
+inputs:
+  figma_tokens:
+    type: string
+    description: Raw token input from Figma (CSS, JSON, or manual text)
+    required: true
+  figma_components:
+    type: string
+    description: Component specs from Figma Dev Mode (CSS + screenshots)
+    required: false
+steps:
+  - id: step_1_ingest_tokens
+    name: Ingest Figma Tokens
+    phase: 1
+    type: agent
+    agent: ds-foundations-lead
+    task: squads/design/tasks/f1-ingest-figma-tokens.md
+    inputs:
+      raw_input: "{{figma_tokens}}"
+    outputs:
+      normalized_tokens: squads/design/data/tokens-normalized.json
+    error_handling:
+      strategy: fail
+  - id: step_2_map_tokens
+    name: Map Tokens to shadcn CSS Variables
+    phase: 1
+    type: agent
+    agent: ds-foundations-lead
+    task: squads/design/tasks/f1-map-tokens-to-shadcn.md
+    inputs:
+      normalized_tokens: "{{step_1_ingest_tokens.normalized_tokens}}"
+    outputs:
+      token_mapping: squads/design/data/token-mapping-reference.md
+    error_handling:
+      strategy: fail
+  - id: step_3_apply_foundations
+    name: Apply Foundations to globals.css
+    phase: 1
+    type: agent
+    agent: ds-foundations-lead
+    task: squads/design/tasks/f1-apply-foundations.md
+    inputs:
+      token_mapping: "{{step_2_map_tokens.token_mapping}}"
+    outputs:
+      globals_css: app/app/globals.css
+    error_handling:
+      strategy: fail
+  - id: step_4_qa_foundations
+    name: QA Gate — Foundations
+    phase: 1
+    type: gate
+    agent: ds-foundations-lead
+    task: squads/design/tasks/f1-qa-foundations.md
+    blocking: true
+    checklist: squads/design/checklists/token-mapping-checklist.md
+    verdicts:
+      PASS: Proceed to Phase 2
+      FAIL: Return to step_3 with fixes
+    error_handling:
+      strategy: fail
+  - id: step_5_ingest_components
+    name: Ingest Base Component Specs from Figma
+    phase: 2
+    type: agent
+    agent: ds-foundations-lead
+    task: squads/design/tasks/f2-ingest-base-components.md
+    inputs:
+      figma_specs: "{{figma_components}}"
+    outputs:
+      component_specs: squads/design/data/component-specs.json
+    error_handling:
+      strategy: fail
+  - id: step_6_adapt_components
+    name: Adapt shadcn Base Components
+    phase: 2
+    type: agent
+    agent: ds-foundations-lead
+    task: squads/design/tasks/f2-adapt-shadcn-components.md
+    inputs:
+      component_specs: "{{step_5_ingest_components.component_specs}}"
+      token_mapping: "{{step_2_map_tokens.token_mapping}}"
+    outputs:
+      adapted_components: components/ui/
+    error_handling:
+      strategy: fail
+  - id: step_7_qa_base_components
+    name: QA Gate — Base Components
+    phase: 2
+    type: gate
+    agent: ds-foundations-lead
+    task: squads/design/tasks/f2-qa-base-components.md
+    blocking: true
+    checklist: squads/design/checklists/component-adaptation-checklist.md
+    verdicts:
+      PASS: Proceed to Phase 3
+      FAIL: Return to step_6 with fixes
+    error_handling:
+      strategy: fail
+  - id: step_8_derive_components
+    name: Derive Remaining Components
+    phase: 3
+    type: agent
+    agent: ds-foundations-lead
+    task: squads/design/tasks/f3-derive-components.md
+    inputs:
+      adapted_components: "{{step_6_adapt_components.adapted_components}}"
+      token_mapping: "{{step_2_map_tokens.token_mapping}}"
+    outputs:
+      all_components: components/ui/
+    error_handling:
+      strategy: fail
+  - id: step_9_qa_final
+    name: QA Gate — Final (All Components)
+    phase: 3
+    type: gate
+    agent: ds-foundations-lead
+    task: squads/design/tasks/f3-qa-derived-components.md
+    blocking: true
+    checklist: squads/design/checklists/component-adaptation-checklist.md
+    verdicts:
+      PASS: Pipeline complete
+      FAIL: Return to step_8 with fixes
+    error_handling:
+      strategy: fail
+outputs:
+  pipeline_complete:
+    type: boolean
+    description: All 3 phases passed QA gates
+    source: step_9_qa_final.success
+  token_mapping:
+    type: string
+    description: Token mapping reference document
+    source: step_2_map_tokens.token_mapping
+  modified_files:
+    type: array
+    description: All files modified during the pipeline
+    source: aggregated
+global_error_handling:
+  on_error: abort
+  notification:
+    enabled: true
+    channels:
+      - console
+security:
+  authorization_required: false
+  audit_logging: true

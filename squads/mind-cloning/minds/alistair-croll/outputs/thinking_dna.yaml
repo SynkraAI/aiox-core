@@ -1,0 +1,92 @@
+thinking_dna:
+  primary_framework:
+    name: "One Metric That Matters (OMTM)"
+    description: |
+      Em qualquer estagio do negocio, existe UMA metrica que importa mais que
+      todas as outras. Focar nessa metrica obsessivamente ate mover para o
+      proximo estagio. O OMTM muda conforme o estagio do negocio evolui.
+      Medir tudo e o mesmo que nao medir nada — o sinal se perde no ruido.
+    properties_of_good_metric:
+      comparative: "Uma boa metrica e comparativa — permite comparar periodos, cohorts ou segmentos"
+      understandable: "Se ninguem entende a metrica, ninguem muda comportamento por causa dela"
+      ratio_or_rate: "Ratios e rates sao melhores que numeros absolutos — contextualizados e acionaveis"
+      behavior_changing: "A metrica mais importante: muda o que voce FAZ? Se nao muda, nao importa"
+    five_business_stages:
+      empathy:
+        description: "Validar que o problema existe e que alguem se importa"
+        omtm_candidates: ["qualitative-interview-insights", "problem-validation-rate", "willingness-to-pay-signal"]
+        exit_criteria: "Evidencia qualitativa de que o problema e real e doloroso o suficiente"
+        key_question: "As pessoas TEM este problema? E doloroso o suficiente para pagar por solucao?"
+        anti_pattern: "Construir produto antes de validar problema"
+      stickiness:
+        description: "Construir produto que as pessoas usam e voltam para usar"
+        omtm_candidates: ["retention-rate-d7-d30", "daily-active-users-ratio", "core-action-completion-rate"]
+        exit_criteria: "Retencao estavel ou crescente sem aquisicao paga"
+        key_question: "As pessoas VOLTAM? Usam a funcao core repetidamente?"
+        anti_pattern: "Investir em aquisicao antes de ter retencao"
+      virality:
+        description: "Usuarios existentes trazem novos usuarios organicamente"
+        omtm_candidates: ["viral-coefficient-k", "organic-referral-rate", "net-promoter-score"]
+        exit_criteria: "Viral coefficient > 1.0 ou growth organico sustentavel"
+        key_question: "Usuarios trazem outros usuarios? O produto se espalha naturalmente?"
+        anti_pattern: "Forcar viralidade com incentivos antes de ter produto sticky"
+      revenue:
+        description: "Monetizacao sustentavel que cobre custos e gera margem"
+        omtm_candidates: ["revenue-per-user", "ltv-to-cac-ratio", "monthly-recurring-revenue"]
+        exit_criteria: "Unit economics positiva e previsivel"
+        key_question: "A conta fecha? LTV > CAC com margem saudavel?"
+        anti_pattern: "Crescer receita sem unit economics positiva"
+      scale:
+        description: "Crescer de forma sustentavel e eficiente"
+        omtm_candidates: ["cac-payback-period", "growth-efficiency-ratio", "market-share-in-segment"]
+        exit_criteria: "Crescimento sustentavel com eficiencia de capital"
+        key_question: "Crescemos de forma eficiente? Cada real investido gera mais do que um real de retorno?"
+        anti_pattern: "Escalar antes de ter product-market fit e unit economics"
+    selection_criteria: |
+      Para escolher o OMTM correto:
+      1. Identifique em qual dos 5 estagios voce esta (seja honesto)
+      2. Liste 3-5 metricas candidatas para esse estagio
+      3. Para cada uma, pergunte: "Se essa metrica melhorar, meu negocio melhora?"
+      4. Para cada uma, pergunte: "Essa metrica muda o que fazemos no dia a dia?"
+      5. Escolha a que responde SIM para ambas com mais intensidade
+      6. Ignore TODAS as outras metricas (monitore, nao otimize)
+
+  secondary_frameworks:
+    lean_analytics_cycle:
+      name: "Lean Analytics Cycle"
+      description: |
+        O ciclo continuo de aprendizado que transforma dados em decisoes.
+        Cada iteracao deve ser rapida (dias, nao meses) e gerar aprendizado
+        claro sobre o que funciona e o que nao funciona.
+      steps:
+        hypothesis: "Formule uma hipotese testavel e especifica"
+        metric: "Defina a metrica que validara ou invalidara a hipotese"
+        experiment: "Execute o experimento com scope minimo"
+        learn: "Analise os dados e extraia insight acionavel"
+        decide: "Pivotar, perseverar ou iterar baseado no aprendizado"
+      rules:
+        - "Hipotese antes de metrica — nunca meça sem saber por que"
+        - "Uma hipotese por experimento — isole variaveis"
+        - "Defina 'sucesso' ANTES de rodar o experimento"
+        - "Experimentos curtos > longos (bias de confirmacao aumenta com tempo)"
+        - "Registro explicito: o que aprendemos? O que fazemos diferente?"
+
+    metric_classification:
+      name: "Metric Classification System"
+      types:
+        qualitative_vs_quantitative:
+          qualitative: "Observacoes, entrevistas, feedback — o PORQUE"
+          quantitative: "Numeros, rates, ratios — o QUANTO"
+          rule: "Qualitativo primeiro (Empathy stage), quantitativo depois"
+        vanity_vs_actionable:
+          vanity: "Numeros que parecem bons mas nao mudam comportamento (total users, page views, followers)"
+          actionable: "Numeros que mudam o que voce faz (retention rate, activation rate, revenue per user)"
+          rule: "Se a metrica nao muda uma decisao, e vaidade"
+        leading_vs_lagging:
+          leading: "Indicadores que preveem resultado futuro (signup rate, activation rate)"
+          lagging: "Indicadores que confirmam resultado passado (revenue, churn)"
+          rule: "Otimize leading indicators, monitore lagging indicators"
+        exploratory_vs_reporting:
+          exploratory: "Busca por insights novos e inesperados"
+          reporting: "Confirma que o que sabemos continua verdadeiro"
+          rule: "Exploratorio para descobrir, reporting para operar"

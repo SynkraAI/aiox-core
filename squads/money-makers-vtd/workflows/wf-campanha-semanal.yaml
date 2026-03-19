@@ -1,0 +1,551 @@
+# WF-4: Campanha Semanal
+# Duration: 1-2h
+# Best for: Criar e executar 1 campanha completa por semana (54/ano)
+# Key Agents: monetizador + copy-andromeda
+
+workflow:
+  id: wf-campanha-semanal
+  name: "Campanha Semanal"
+  duration: "1-2h"
+  trigger: "*campanha {tipo}"
+  description: |
+    Workflow para criar e executar 1 campanha completa por semana.
+    Meta anual: 54 campanhas (1 por semana) — pilar do modelo 12/54/27.
+
+    "Quem tem cronograma tem caixa."
+
+    Cada campanha tem:
+    - 1 gatilho do Sistema de Recompensa Central (7 opções)
+    - Copy variada por EMOÇÃO (Andromeda), não por demografia (NO-H014)
+    - 30-70 criativos variados por sentimento
+    - Sequência de 3 emails (abertura + conteúdo + escassez)
+    - Empilhamento diário (manhã low ticket / tarde high ticket / noite outro produto)
+    - Hook→Punch→Premissa integrado em todos os criativos
+
+    TIPOS DE CAMPANHA (parâmetro {tipo}):
+    - sazonal: aproveitando data/evento específico
+    - lancamento-produto: novo produto ou relançamento
+    - reengajamento: lista fria ou inativa
+    - cross-sell: produto complementar para compradores existentes
+    - evergreen: campanha perpétua que roda indefinidamente
+
+  best_for:
+    - "Executar a campanha da semana dentro do cronograma 54"
+    - "Relançar produto existente com novo ângulo"
+    - "Reativar lista de emails fria"
+    - "Cross-sell para base de clientes"
+    - "Criar campanha sazonal (datas comemorativas)"
+
+  decision_matrix_fit:
+    awareness: "problem-aware a most-aware"
+    sophistication: "stage-2 a stage-5"
+    price_point: "mix low/mid/high (empilhamento)"
+    traffic_temp: "warm (base existente) + cold (tráfego)"
+    primary_output: "campanha-semana-{numero}.md"
+
+  clone_combinations:
+    primary: "monetizador + copy-andromeda"
+    secondary:
+      - "arquiteto-funil (sequência de email)"
+      - "pesquisador-ia (ângulo e dados de mercado)"
+      - "vtd-chief (revisão estratégica)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 1: GATILHO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-1
+    name: "Gatilho"
+    days: "1"
+    tier: 0
+    description: |
+      Escolher 1 dos 7 gatilhos do Sistema de Recompensa Central.
+      Cada semana usa 1 gatilho predominante (podem se combinar, mas 1 lidera).
+      Os 7 gatilhos rodam em ciclo ao longo do ano — sem repetição consecutiva.
+
+      OS 7 GATILHOS:
+      1. NOVIDADE — Algo que nunca viram antes no nicho
+         "Descobri uma forma de [resultado] que ninguém está usando ainda"
+         Melhor para: lançamento de produto, nova metodologia
+
+      2. FACILIDADE — Algo útil que simplifica
+         "Como fazer [resultado] em [tempo menor] sem [dificuldade]"
+         Melhor para: produtos que reduzem esforço, ferramentas, templates
+
+      3. ERRO — Apontar um erro que o público comete
+         "O erro que impede [público] de [resultado desejado]"
+         Melhor para: reengajamento, quebra de objeções, reposicionamento
+
+      4. EXCLUSIVIDADE/LISONJA — "Quase ninguém conhece"
+         "Para quem realmente quer [resultado] (não é para todo mundo)"
+         Melhor para: high ticket, grupos exclusivos, comunidades
+
+      5. ALÍVIO IMEDIATO — Mensagem que causa alívio
+         "Finalmente: como resolver [dor específica] de uma vez"
+         Melhor para: público exausto, problema crônico, promessa rápida
+
+      6. DEMONSTRAÇÃO — Ao vivo, ativa neurônio espelho
+         "Veja ao vivo como [resultado] acontece em tempo real"
+         Melhor para: aulas ao vivo, tutoriais, webinars, antes/depois
+
+      7. PROVA/ESTUDO DE CASO — Resultado real de aluno/cliente
+         "[Nome] fez [resultado específico] em [tempo] usando [método]"
+         Melhor para: escalar produto validado, superar objeção de ceticismo
+
+    tasks:
+      - task_id: escolher-gatilho
+        agent: monetizador
+        required: true
+        description: |
+          Selecionar o gatilho da semana com base em:
+          - Qual produto será vendido esta semana
+          - Qual gatilho foi usado nas últimas 2 semanas (não repetir consecutivo)
+          - Temperatura da base (fria = Erro/Alívio, quente = Novidade/Prova)
+          - Cronograma anual de gatilhos (distribuição equilibrada)
+          Justificar a escolha com base nos critérios acima.
+        output: "gatilho-semana-{numero}.md"
+
+      - task_id: angulo-campanha
+        agent: monetizador
+        required: true
+        description: |
+          Definir o ângulo específico da campanha:
+          - Qual produto principal está em oferta?
+          - Qual o ticket? (low/mid/high)
+          - Qual o empilhamento? (o que roda manhã/tarde/noite)
+          - Qual é o próximo passo após a compra? (NO-F021)
+          - Qual escassez é real? (data limite, vagas, bônus)
+        output: "angulo-campanha-semana-{numero}.md"
+
+    elicitation:
+      required: true
+      questions:
+        - id: numero_semana
+          question: "Qual o número desta campanha no cronograma anual? (ex: semana 12)"
+          type: number
+          required: true
+
+        - id: produto_principal
+          question: "Qual produto será promovido nesta campanha? (nome e preço)"
+          type: text
+          required: true
+
+        - id: tipo_campanha
+          question: "Tipo: sazonal / lancamento-produto / reengajamento / cross-sell / evergreen"
+          type: text
+          required: true
+
+        - id: escassez_real
+          question: "Qual é a escassez REAL desta campanha? (data, vagas, bônus)"
+          type: text
+          required: true
+
+        - id: gatilho_ultimas_semanas
+          question: "Quais gatilhos foram usados nas últimas 2 semanas? (para não repetir)"
+          type: text
+          required: false
+
+    checkpoint:
+      criteria:
+        - "1 gatilho escolhido com justificativa"
+        - "Produto, ticket e empilhamento definidos"
+        - "Escassez real documentada (não artificial)"
+        - "Próximo passo pós-compra definido"
+        - "Ângulo diferente de campanhas recentes"
+      human_review: true
+      message: "Gatilho e ângulo definidos. Validar antes de criar copy."
+      veto_conditions:
+        - "SE sem escassez real → VETO. Escassez falsa destrói credibilidade."
+        - "SE mesmo gatilho de semana anterior → VETO. Variar ciclo de gatilhos."
+        - "SE sem próximo passo pós-compra → VETO. Nunca sem follow-up (NO-F021)."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2: COPY POR SENTIMENTO (ANDROMEDA)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Copy por Sentimento — Andromeda"
+    days: "1"
+    tier: 1
+    description: |
+      Criar 30-70 criativos variados por EMOÇÃO, não por demografia (NO-H014).
+
+      SISTEMA ANDROMEDA — PRINCÍPIO CENTRAL:
+      O mesmo produto pode ser comprado por razões emocionais completamente
+      diferentes. Copy que varia por SENTIMENTO alcança muito mais gente do
+      que copy que varia por "mulher 35-45 anos com filhos".
+
+      SENTIMENTOS A TRABALHAR (não exclusivos):
+      - Medo de perder: "Você ainda vai continuar fazendo [erro]?"
+      - Desejo de ter: "Como seria [resultado sonhado] a partir de [hoje]?"
+      - Vergonha superada: "Nunca mais passe por [situação embaraçosa]"
+      - Orgulho/status: "Seja reconhecido como [identidade desejada]"
+      - Alívio: "Finalmente: acabe com [dor específica]"
+      - Surpresa: "Ninguém me contou isso antes de [evento relevante]"
+      - Esperança: "[Resultado] é possível mesmo que [crença limitante]"
+
+      HOOK→PUNCH→PREMISSA em cada criativo:
+      - Hook: primeiros 3 segundos que param o scroll (vinculado ao sentimento)
+      - Punch: impacto emocional que mantém atenção por mais 10-15 segundos
+      - Premissa: argumento central que sustenta a oferta
+
+      VETO HARD (NO-H014): Copy sem variação por sentimento = BLOCK imediato.
+
+    tasks:
+      - task_id: criativos-redes-sociais
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar 30-70 criativos para redes sociais variando por sentimento:
+          - Mínimo 5 sentimentos diferentes representados
+          - Cada sentimento: 5-10 criativos com hooks diferentes
+          - Formatos: Reels (15s, 30s, 60s), Stories, Posts estáticos
+          - Hook→Punch→Premissa em todos
+          - Linguagem do público (usar glossário da pesquisa de mercado)
+          NUNCA usar jargão do expert. SEMPRE usar como o público fala.
+        output: "criativos-redes-sociais-semana-{numero}.md"
+
+      - task_id: copy-anuncio-pago
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar copy específica para anúncios pagos (Meta Ads):
+          - Headline (até 40 caracteres)
+          - Texto principal (até 125 caracteres para mobile)
+          - Descrição (até 30 caracteres)
+          - CTA (escolher: Saiba Mais / Comprar Agora / Inscrever-se)
+          Mínimo 10 variações de anúncio por sentimento.
+          Testar: medo vs desejo vs transformação como sentimentos principais.
+        output: "copy-anuncio-pago-semana-{numero}.md"
+
+      - task_id: copy-organica
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar copy para conteúdo orgânico da campanha:
+          - 3 Reels de conteúdo + CTA (não vendas diretas)
+          - 5 Stories com enquetes/perguntas (engajamento + qualificação)
+          - 2 posts carrossel (conteúdo educacional com gancho de produto)
+          - Legenda de lançamento para feed (copy completa)
+          Todo conteúdo orgânico deve conectar ao produto da campanha.
+        output: "copy-organica-semana-{numero}.md"
+
+    checkpoint:
+      criteria:
+        - "Mínimo 30 criativos criados"
+        - "Mínimo 5 sentimentos diferentes representados"
+        - "Hook→Punch→Premissa presente em todos"
+        - "Linguagem do público (sem jargão técnico)"
+        - "Variações de formato (Reel, Story, Post, Anúncio)"
+        - "Copy de anúncio pago com mínimo 10 variações"
+      human_review: true
+      message: "Copy por sentimento criada. Validar variedade emocional e linguagem."
+      veto_conditions:
+        - "SE copia varia apenas por produto → VETO. Andromeda exige variação por SENTIMENTO (NO-H014)."
+        - "SE menos de 5 sentimentos → VETO. Ampliar cobertura emocional."
+        - "SE linguagem do expert (jargão técnico) → VETO. Usar glossário do público."
+        - "SE sem Hook nos primeiros 3 segundos → VETO. Sem hook, sem parada do scroll."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3: SEQUÊNCIA DE EMAIL
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Sequência de Email"
+    days: "1"
+    tier: 1
+    description: |
+      Criar os 3 emails da campanha semanal:
+      - Email 1: Abertura (lançar o tema, criar expectativa)
+      - Email 2: Conteúdo (entrega de valor, posiciona a oferta)
+      - Email 3: Escassez (último chamado, deadline real)
+
+      REGRA DO EMAIL (NO-F049): Nunca parar de mandar email.
+      A lista é ativo do negócio. Email vai para quem já deu permissão.
+      "98% não compraram essa semana — mas podem comprar na próxima." (NO-F022)
+
+      TIMING RECOMENDADO:
+      - Email 1: Segunda-feira manhã (abertura de semana)
+      - Email 2: Quarta-feira (meio da semana, conteúdo de valor)
+      - Email 3: Domingo à noite (maior taxa de conversão — NO-H006)
+
+      EMPILHAMENTO NOS EMAILS:
+      - Manhã: email foca em low ticket
+      - Tarde: email foca em high ticket
+      - Noite: outro produto (cross-sell)
+
+    tasks:
+      - task_id: email-abertura
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar email de abertura da campanha (Email 1 — Segunda):
+          - Assunto: gancho poderoso (não genérico, não clickbait vazio)
+          - Preview text: complementa o assunto
+          - Abertura: história ou dado surpreendente (conecta ao gatilho)
+          - Corpo: apresenta o tema da semana
+          - CTA: um único CTA claro (não vender ainda, criar expectativa)
+          Tom: amigo que tem algo importante para contar.
+        output: "email-1-abertura-semana-{numero}.md"
+
+      - task_id: email-conteudo
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar email de conteúdo + posicionamento da oferta (Email 2 — Quarta):
+          - Assunto: promessa de valor (o que o leitor vai aprender/conseguir)
+          - Conteúdo: entrega valor REAL (não teaser, não introdução de intro)
+          - No final do conteúdo: transição natural para a oferta
+          - Apresentar a oferta como solução natural do conteúdo
+          - CTA: único, claro, com urgência suave
+          Proporção: 70% conteúdo / 30% oferta.
+        output: "email-2-conteudo-semana-{numero}.md"
+
+      - task_id: email-escassez
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar email de escassez final (Email 3 — Domingo à noite):
+          - Assunto: urgência real (prazo, vagas, bônus expirando)
+          - Abertura: reconhecer que o leitor ainda não comprou
+          - Resumir os benefícios principais (não listar features)
+          - Reforçar a escassez real (não inventada)
+          - CTA: único e direto. Nada além do botão de compra.
+          Domingo à noite = maior taxa de conversão do email (NO-H006).
+        output: "email-3-escassez-semana-{numero}.md"
+
+    checkpoint:
+      criteria:
+        - "3 emails criados (abertura, conteúdo, escassez)"
+        - "Assuntos não genéricos, não clickbait vazio"
+        - "Email 2 com 70% conteúdo / 30% oferta"
+        - "Email 3 com escassez real (não artificial)"
+        - "CTA único em cada email"
+        - "Email 3 programado para domingo à noite"
+      human_review: true
+      message: "Sequência de 3 emails criada. Validar assuntos e escassez."
+      veto_conditions:
+        - "SE escassez falsa ou artificial → VETO. Destrói credibilidade."
+        - "SE múltiplos CTAs no mesmo email → VETO. 1 email = 1 ação."
+        - "SE email de conteúdo sem conteúdo real → VETO. 70% conteúdo é obrigatório."
+        - "SE email 3 programado para outro dia → ALERTA. Domingo à noite converte mais (NO-H006)."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 4: MÉTRICAS & AJUSTE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-4
+    name: "Métricas & Ajuste"
+    days: "1"
+    tier: 2
+    description: |
+      Definir as métricas da campanha e o processo de análise/ajuste.
+
+      META SEMANAL DE REFERÊNCIA (ajustar por nicho):
+      - Taxa de abertura de email: >= 30%
+      - CTR de email: >= 3%
+      - Taxa de conversão de lead para comprador: >= 1-3%
+      - ROAS de anúncio pago: >= 3x
+      - CPV (custo por venda): <= 30% do ticket
+
+      EMPILHAMENTO DIÁRIO DENTRO DA CAMPANHA:
+      - Manhã: email/post focan em produto low ticket
+      - Tarde: email/post focam em high ticket
+      - Noite: email/post de outro produto (cross-sell ou upsell)
+      "Nunca deixe o dia passar sem fazer uma oferta." — Natanael
+
+      ANÁLISE PÓS-CAMPANHA:
+      - O que funcionou? (criativo vencedor, sentimento que converteu)
+      - O que não funcionou? (pausar, documentar)
+      - Qual insight para próxima semana?
+      - Registrar no cronograma 54 campanhas
+
+    tasks:
+      - task_id: definir-metas-semana
+        agent: monetizador
+        required: true
+        description: |
+          Definir metas específicas para esta campanha:
+          - Meta de faturamento semanal (R$ específico)
+          - Meta de abertura de email (%)
+          - Meta de conversão (%)
+          - Meta de novos leads (número)
+          - ROAS mínimo aceitável para anúncio pago
+          - Budget de tráfego para a campanha
+        output: "metas-semana-{numero}.md"
+
+      - task_id: cronograma-empilhamento
+        agent: monetizador
+        required: true
+        description: |
+          Criar calendário de empilhamento da semana:
+          Segunda: manhã={produto_low}, tarde={produto_high}, noite={cross_sell}
+          Terça: manhã=..., tarde=..., noite=...
+          Quarta: manhã=..., tarde=..., noite=...
+          Quinta: manhã=..., tarde=..., noite=...
+          Sexta: manhã=..., tarde=..., noite=...
+          Sábado: manhã=..., tarde=..., noite=...
+          Domingo: manhã=..., tarde=..., noite={escassez_final}
+          Nenhum período vazio. 98% não compraram → oferece algo (NO-F022).
+        output: "cronograma-empilhamento-semana-{numero}.yaml"
+
+      - task_id: template-analise-pos-campanha
+        agent: monetizador
+        required: true
+        description: |
+          Criar template de análise pós-campanha para preencher após execução:
+          - Faturamento real vs meta
+          - Criativo vencedor (registrar para usar como referência)
+          - Sentimento que mais converteu
+          - Taxa de abertura real vs meta
+          - Insights para próxima campanha
+          - Ajustes no cronograma anual se necessário
+        output: "template-analise-pos-campanha.md"
+
+    checkpoint:
+      criteria:
+        - "Metas específicas definidas (faturamento, abertura, conversão)"
+        - "Cronograma de empilhamento completo (7 dias, manhã/tarde/noite)"
+        - "Nenhum período vazio no empilhamento"
+        - "Template de análise pronto para preencher após execução"
+        - "Budget de tráfego definido"
+      human_review: true
+      message: "Campanha semanal completa e pronta para execução."
+      veto_conditions:
+        - "SE algum período sem oferta → VETO. Empilhamento é regra (NO-F022)."
+        - "SE sem meta de faturamento → VETO. Campanha sem meta não tem resultado."
+        - "SE sem análise pós-campanha planejada → ALERTA. Aprendizado acumula semana a semana."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_stakeholders: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHECKPOINT CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+checkpoint_config:
+  - phase: PHASE-1
+    heuristic: "NO-F021"
+    criteria: "Gatilho + ângulo + escassez real + próximo passo definidos"
+    veto_condition: "Escassez artificial = credibilidade destruída"
+
+  - phase: PHASE-2
+    heuristic: "NO-H014"
+    criteria: "30+ criativos, 5+ sentimentos, Hook→Punch→Premissa"
+    veto_condition: "Copy por demografia = Andromeda violado"
+
+  - phase: PHASE-3
+    heuristic: "NO-F049 + NO-H006"
+    criteria: "3 emails: abertura + conteúdo + escassez domingo à noite"
+    veto_condition: "Escassez falsa ou sem email 3 no domingo"
+
+  - phase: PHASE-4
+    heuristic: "NO-F022"
+    criteria: "Empilhamento completo 7 dias manhã/tarde/noite sem vazio"
+    veto_condition: "98% não compraram → sempre há produto para oferecer"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMPLETION SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+completion_signal: "<promise>COMPLETE</promise>"
+checkpoint_signal: "<promise>CHECKPOINT:PHASE-X</promise>"
+blocked_signal: "<promise>BLOCKED:T-X.Y</promise>"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT ARTIFACTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  gatilho:
+    - "gatilho-semana-{numero}.md — Gatilho escolhido com justificativa"
+    - "angulo-campanha-semana-{numero}.md — Produto, ticket, empilhamento"
+
+  copy:
+    - "criativos-redes-sociais-semana-{numero}.md — 30-70 criativos por sentimento"
+    - "copy-anuncio-pago-semana-{numero}.md — 10+ variações de anúncio"
+    - "copy-organica-semana-{numero}.md — Reels, Stories, Posts"
+
+  email:
+    - "email-1-abertura-semana-{numero}.md — Email Segunda-feira"
+    - "email-2-conteudo-semana-{numero}.md — Email Quarta-feira"
+    - "email-3-escassez-semana-{numero}.md — Email Domingo à noite"
+
+  metricas:
+    - "metas-semana-{numero}.md — Metas específicas da campanha"
+    - "cronograma-empilhamento-semana-{numero}.yaml — 7 dias, 3 períodos"
+    - "template-analise-pos-campanha.md — Análise após execução"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  gatilho:
+    - "[ ] 1 gatilho dos 7 escolhido com justificativa"
+    - "[ ] Não é o mesmo dos últimos 2 semanas"
+    - "[ ] Produto, ticket e empilhamento definidos"
+    - "[ ] Escassez real documentada"
+    - "[ ] Próximo passo pós-compra definido"
+
+  copy:
+    - "[ ] Mínimo 30 criativos criados"
+    - "[ ] Mínimo 5 sentimentos diferentes"
+    - "[ ] Hook→Punch→Premissa em todos"
+    - "[ ] Sem jargão técnico do expert"
+    - "[ ] Variações de formato (Reel, Story, Post, Anúncio)"
+
+  email:
+    - "[ ] Email 1 (abertura) com assunto não genérico"
+    - "[ ] Email 2 com 70% conteúdo real"
+    - "[ ] Email 3 com escassez real"
+    - "[ ] Email 3 programado para domingo à noite"
+    - "[ ] CTA único em cada email"
+
+  metricas:
+    - "[ ] Meta de faturamento semanal definida"
+    - "[ ] Empilhamento 7 dias sem vazio (manhã/tarde/noite)"
+    - "[ ] Budget de tráfego definido"
+    - "[ ] Template de análise pronto"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GOVERNANCE GATE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+governance_gate:
+  required_checks:
+    - "1 dos 7 gatilhos do Sistema de Recompensa Central (não inventar novo)"
+    - "Copy por SENTIMENTO, nunca por demografia (NO-H014)"
+    - "30+ criativos com variação emocional real"
+    - "Escassez real em email 3 (não fabricada)"
+    - "Email 3 no domingo à noite (NO-H006)"
+    - "Empilhamento completo sem vazio (NO-F022)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  framework: "AIOS Squad Creator"
+  created: "2026-02-21"
+  primary_use_case: "Criação e execução de 1 campanha completa por semana (54/ano)"
+  source_mind: "natanael-oliveira"
+  key_difference: |
+    Único workflow com os 7 gatilhos do Sistema de Recompensa Central codificados.
+    Integra Andromeda (copy por sentimento) com empilhamento diário completo.
+    Cobre criativo orgânico + pago + email numa sequência integrada de 3 emails.

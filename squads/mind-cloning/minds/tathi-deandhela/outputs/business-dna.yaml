@@ -1,0 +1,148 @@
+# Business DNA — Tathi Deandhela / Instituto Deândhela
+# Source: 21 MDs complementares do curso VPO
+# Category: NOVA (não existia no DNA v1 baseado em transcrições)
+
+sops:
+  - id: SOP-01
+    name: "Pre-Event Checklist"
+    description: "5 categorias de verificação antes do evento"
+    source: "mc-checklist-cliente-contratar-palestra.md"
+    categories: 5
+
+  - id: SOP-02
+    name: "Contract Template"
+    description: "Modelo de contrato de palestra"
+    source: "mc-modelo-contrato-palestra.md"
+    clauses: 11
+    payment: "50% adiantamento + 50% pós-evento"
+    cancellation: "72h de antecedência"
+
+  - id: SOP-03
+    name: "Proposal Template"
+    description: "Modelo de proposta comercial para palestras"
+    source: "mc-modelo-proposta-palestra.md"
+    sections: 7
+
+  - id: SOP-04
+    name: "Agency Prospecting 3-Phase"
+    description: "Funil de prospecção via agências de palestrantes"
+    source: "mc-agencia-de-palestrantes.md"
+    phases:
+      - "Base: construir portfólio e credenciais"
+      - "Expansão: networking ativo com agências"
+      - "Consolidação: contratos recorrentes"
+    caveat: "Dados de 2018 — validar antes de usar"
+
+  - id: SOP-05
+    name: "International Event Protocol"
+    description: "Modelo para replicar eventos internacionais"
+    source: "mc-evento-empreendedorismo-florida/londres.md"
+    model: "100 pessoas + 3-4 speakers + sponsor tiers"
+
+  - id: SOP-06
+    name: "Gamification 12 Acts"
+    description: "Tabuleiro gamificado do programa Vivendo de Palestra"
+    source: "mc-tabuleiro-vivendo-de-palestra-a3.md"
+    acts: 12
+
+commercial_templates:
+  - id: CT-01
+    name: "Pricing Table"
+    description: "Tabela de preços por modalidade e duração"
+    types:
+      - "Palestra"
+      - "Workshop"
+      - "Treinamento"
+    dimensions: "modalidade × duração"
+
+  - id: CT-02
+    name: "Press Kit"
+    description: "Kit de apresentação profissional"
+    components:
+      - "Credenciais e certificações"
+      - "Bio profissional"
+      - "Depoimentos de clientes"
+    source: "mc-apresentacao-tathiane-deandhela.md"
+
+  - id: CT-03
+    name: "Sebrae Engagement Models"
+    description: "4 modelos de contratação via Sebrae"
+    types:
+      - "Credenciamento"
+      - "Cotação"
+      - "Licitação"
+      - "Demanda direta"
+
+org_model:
+  entity: "Instituto Deândhela"
+  source: "mod5-atribuicoes-cargos-instituto-deandhela.md"
+  roles:
+    - title: "CEO (Tathi)"
+      responsibilities:
+        - "Estratégia e direcionamento"
+        - "Atendimento key clients"
+        - "Gestão de marca pessoal"
+        - "Aprovação de conteúdo"
+
+    - title: "Diretor Comercial"
+      responsibilities:
+        - "Prospecção ativa"
+        - "Propostas e contratos"
+        - "Follow-up e fechamento"
+
+    - title: "Gerente de Marketing"
+      responsibilities:
+        - "Redes sociais e email marketing"
+        - "Materiais promocionais"
+        - "Gestão de eventos"
+
+    - title: "Administrativo"
+      responsibilities:
+        - "Faturamento e NF"
+        - "Compliance e documentação"
+
+    - title: "Logística"
+      responsibilities:
+        - "Viagens e hospedagem"
+        - "Venue e equipamentos"
+
+    - title: "Produtor de Conteúdo"
+      responsibilities:
+        - "Vídeos e edição"
+        - "Slides e apresentações"
+        - "Workbooks e materiais"
+
+proprietary_tools:
+  - name: "Time Model Canvas"
+    blocks: 12
+    type: "Gestão de tempo visual"
+    framework_id: F7
+
+  - name: "Speaker Canvas"
+    blocks: 11
+    type: "Planejamento de palestra"
+    framework_id: F15
+
+  - name: "Roda do Palestrante Notável"
+    areas: 10
+    scale: "0-10"
+    type: "Diagnóstico mensurável"
+    framework_id: F17
+
+  - name: "Ciclo de Ouro do Palestrante"
+    stages: 5
+    bonus: "Abundância"
+    type: "Evolução de carreira"
+    framework_id: F16
+
+  - name: "Progressive Regressive Visualization"
+    steps: 10
+    type: "Planejamento reverso"
+    framework_id: F8
+
+  - name: "200+ Values List"
+    rule: "Choose MAX 3"
+    type: "Priorização de valores"
+
+  - name: "7 Erros Comuns de Planejamento"
+    type: "Checklist de validação"

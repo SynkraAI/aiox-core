@@ -1,0 +1,17 @@
+# Output Index — site-performance-audit
+# Auto-updated by *save command. Do NOT edit manually.
+#
+# Schema:
+#   outputs: list of output entries
+#   Each entry:
+#     file: filename (relative to this directory)
+#     command: command that generated the output (without *)
+#     id: sanitized identifier (URL, client, etc.)
+#     date: ISO date (YYYY-MM-DD)
+#     time: short timestamp (HHmm)
+#     url: original URL (if applicable)
+#     strategy: mobile|desktop|both (if applicable)
+#     format: file extension (md, yaml, json)
+#     summary: one-line summary of the output (max 120 chars)
+
+outputs: []

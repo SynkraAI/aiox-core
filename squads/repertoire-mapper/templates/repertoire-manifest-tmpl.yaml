@@ -1,0 +1,359 @@
+# =============================================================================
+# REPERTOIRE MANIFEST TEMPLATE
+# =============================================================================
+# Template para o manifesto completo de repertorio pessoal.
+#
+# Este arquivo e o output principal do squad Repertoire Mapper.
+# Contem TODOS os itens de repertorio mapeados, classificados e validados.
+#
+# Gerado por: @forte (organize-para) + @chin (translate-output)
+# Validado por: @argyris (validate-gaps)
+#
+# USO: Copie este arquivo, remova os exemplos e preencha com dados reais.
+#       Os comentarios explicam cada campo -- remova-os no manifesto final
+#       ou mantenha para referencia.
+#
+# CONVENCOES:
+#   - IDs seguem o padrao RM-{dominio-abrev}-{seq} (ex: RM-FIN-001)
+#   - Confidence: 0.0 a 1.0 (baseado em triangulacao de fontes)
+#   - Dreyfus stages: novice | advanced_beginner | competent | proficient | expert
+#   - SECI stages: socialization | externalization | combination | internalization
+#   - Tags usam kebab-case (ex: pattern-recognition, decision-making)
+# =============================================================================
+
+# ---------------------------------------------------------------------------
+# METADATA
+# Informacoes gerais sobre o sujeito e o processo de mapeamento.
+# ---------------------------------------------------------------------------
+metadata:
+  # Identificador unico do manifesto
+  manifest_id: "RM-MANIFEST-{YYYY-MM-DD}-{SEQ}"
+
+  # Versao do manifesto (incrementar a cada atualizacao significativa)
+  version: "1.0.0"
+
+  # Dados do sujeito mapeado
+  subject:
+    name: "{Nome Completo}"
+    alias: "{Como prefere ser chamado}"
+    context: "{Contexto profissional principal -- ex: Mentor de Negocios, Tech Lead}"
+
+  # Datas do processo
+  dates:
+    started: "{YYYY-MM-DD}"        # Inicio do mapeamento
+    last_updated: "{YYYY-MM-DD}"   # Ultima atualizacao
+    next_review: "{YYYY-MM-DD}"    # Proxima revisao planejada
+
+  # Fontes utilizadas no mapeamento
+  sources_summary:
+    total_sources: 0               # Numero total de fontes processadas
+    source_types:                   # Tipos de fontes e quantidade de cada
+      transcriptions: 0            # Transcricoes de lives, mentorias, videos
+      documents: 0                 # PDFs, artigos, posts escritos
+      qa_sessions: 0               # Sessoes de Q&A (Repertory Grid)
+      observations: 0              # Observacoes diretas de pratica
+      social_media: 0              # Posts em redes sociais
+
+  # Metricas gerais do mapeamento
+  stats:
+    total_items: 0                 # Total de itens de repertorio mapeados
+    domains_mapped: 0              # Numero de dominios cobertos
+    explicit_items: 0              # Itens de conhecimento explicito
+    tacit_items: 0                 # Itens de conhecimento tacito identificado
+    validated_items: 0             # Itens validados por @argyris
+    gaps_found: 0                  # Gaps detectados (espoused vs actual)
+
+  # Agentes que participaram do mapeamento
+  pipeline:
+    diagnosis:
+      polanyi: true                # Classificacao epistemologica
+      collins: true                # Diagnostico de expertise
+    extraction:
+      klein: false                 # CDM -- Critical Decision Method
+      leonard: false               # Deep Smarts mapping
+      kelly: false                 # Repertory Grid sessions
+    systematization:
+      nonaka: false                # SECI conversion
+      argyris: false               # Gap validation
+    specialization:
+      chin: false                  # Practical translation
+      forte: false                 # PARA organization
+
+# ---------------------------------------------------------------------------
+# DOMAINS
+# Cada dominio agrupa itens de repertorio por area de expertise.
+# Um sujeito pode ter multiplos dominios (ex: "financas", "lideranca", "tecnologia").
+# ---------------------------------------------------------------------------
+domains:
+
+  # ===========================================================================
+  # EXEMPLO 1: Dominio de Mentoria de Negocios (preenchido como referencia)
+  # ===========================================================================
+  - id: "DOM-MENT"
+    label: "Mentoria de Negocios"
+    description: "Conhecimentos, habilidades e frameworks relacionados a pratica de mentoria empresarial"
+
+    # Nivel de expertise geral neste dominio (Collins Periodic Table)
+    # Valores: beer_mat | popular_understanding | primary_source | interactional | contributory
+    expertise_level: "contributory"
+
+    # Tipo de expertise (Collins)
+    # I = Interactional (fala sobre, nao faz)
+    # C = Contributory (pratica e contribui originalmente)
+    expertise_type: "C"
+
+    # Dreyfus stage geral do dominio
+    dreyfus_stage: "expert"
+
+    # Tipo predominante de conhecimento tacito (Collins taxonomy)
+    # R = Relational, S = Somatic, C = Collective
+    primary_tacit_type: "CTK"
+
+    # Itens de repertorio neste dominio
+    items:
+
+      # -----------------------------------------------------------------------
+      # EXEMPLO DE ITEM: Heuristica de Diagnostico
+      # -----------------------------------------------------------------------
+      - id: "RM-MENT-001"
+
+        # Tipo do item de repertorio
+        # Valores possiveis:
+        #   heuristic       -- Regra de polegar, atalho decisorio
+        #   mental_model    -- Framework mental, modelo de pensamento
+        #   skill           -- Habilidade pratica
+        #   principle       -- Principio orientador, crenca operacional
+        #   pattern         -- Padrao reconhecido (pattern recognition)
+        #   framework       -- Framework formal ou semi-formal
+        #   construct       -- Construto pessoal bipolar (Kelly)
+        #   decision_rule   -- Regra de decisao (if-then)
+        #   tacit_knowledge -- Conhecimento tacito identificado mas nao articulado
+        #   value           -- Valor pessoal que guia comportamento
+        type: "heuristic"
+
+        # Label curto e descritivo do item
+        label: "Diagnostico em 3 Perguntas"
+
+        # Descricao completa do item em linguagem pratica (traduzido por @chin)
+        content: >
+          Ao encontrar um mentorado pela primeira vez, sempre faco 3 perguntas
+          antes de qualquer analise: (1) O que te tira o sono? (2) Se pudesse
+          mudar UMA coisa no negocio, qual seria? (3) Quando foi a ultima vez
+          que sentiu que o negocio estava no caminho certo? As respostas revelam
+          o problema emocional, o problema pratico e o benchmark de sucesso
+          do mentorado.
+
+        # Fonte primaria de onde este item foi extraido
+        # Formato: "{tipo}:{referencia}" -- ex: "transcription:live-2024-03-15"
+        source: "transcription:mentoria-onboarding-2024-01"
+
+        # Nivel de confianca na precisao do item mapeado (0.0 a 1.0)
+        # 0.0-0.3: Inferido, pouca evidencia
+        # 0.4-0.6: Evidencia parcial, precisa validacao
+        # 0.7-0.9: Evidencia solida, triangulado
+        # 1.0: Confirmado pelo sujeito
+        confidence: 0.85
+
+        # Estagio Dreyfus para este item especifico
+        # novice           -- Segue regras rigidas, sem contexto
+        # advanced_beginner -- Reconhece aspectos situacionais
+        # competent        -- Planeja conscientemente, prioriza
+        # proficient       -- Ve situacoes holisticamente, sabe o que e importante
+        # expert           -- Age intuitivamente, transcende regras
+        dreyfus_stage: "expert"
+
+        # Estagio SECI atual deste item (Nonaka)
+        # socialization    -- Tacito→Tacito (aprendido por experiencia compartilhada)
+        # externalization  -- Tacito→Explicito (articulado em modelo/metafora)
+        # combination      -- Explicito→Explicito (sistematizado em base de conhecimento)
+        # internalization  -- Explicito→Tacito (incorporado pela pratica)
+        seci_stage: "externalization"
+
+        # Evidencias que sustentam a existencia e precisao deste item
+        # Cada evidencia tem: tipo, referencia e citacao/observacao relevante
+        evidence:
+          - type: "quote"              # Tipos: quote, observation, pattern, inference
+            source: "transcription:mentoria-onboarding-2024-01"
+            content: "Eu sempre comeco com tres perguntas. Sempre. Nao importa o tamanho da empresa."
+          - type: "pattern"
+            source: "transcription:mentoria-onboarding-2024-03"
+            content: "Mesmo padrao de 3 perguntas observado em sessao diferente, com variacao minima."
+          - type: "observation"
+            source: "qa-session:kelly-grid-001"
+            content: "Construto extraido: 'diagnostico estruturado vs diagnostico por feeling' -- sujeito associa fortemente com resultado positivo."
+
+        # Tags para indexacao e busca
+        # Use kebab-case, termos em ingles para interoperabilidade
+        tags:
+          - "diagnosis"
+          - "onboarding"
+          - "questioning-technique"
+          - "pattern-recognition"
+          - "first-session"
+
+        # Conexoes com outros itens do manifesto
+        # Formato: ID do item conectado + tipo de relacao
+        connections:
+          - target: "RM-MENT-003"
+            relation: "enables"        # Tipos: enables, requires, contradicts, extends, refines, exemplifies
+          - target: "RM-MENT-007"
+            relation: "extends"
+
+      # -----------------------------------------------------------------------
+      # EXEMPLO DE ITEM: Construto Pessoal (Kelly)
+      # -----------------------------------------------------------------------
+      - id: "RM-MENT-002"
+        type: "construct"
+        label: "Construto: Problema Real vs Sintoma"
+        content: >
+          Construto bipolar central: o sujeito distingue fortemente entre
+          'problema real' (causa raiz que, se resolvida, muda o jogo) e
+          'sintoma' (manifestacao superficial que volta se tratada isoladamente).
+          Este construto aparece em TODOS os dominios e e nuclear no
+          Repertory Grid -- explica 38% da variancia.
+          Polo emergente: Problema real (causa raiz).
+          Polo implicito: Sintoma (manifestacao superficial).
+        source: "qa-session:kelly-grid-001"
+        confidence: 0.92
+        dreyfus_stage: "expert"
+        seci_stage: "externalization"
+        evidence:
+          - type: "quote"
+            source: "qa-session:kelly-grid-001"
+            content: "Triada [Caso A, Caso B, Caso C]: A e B sao parecidos porque nos dois eu achei a causa raiz. C foi frustrante porque ficamos tratando sintomas."
+          - type: "pattern"
+            source: "transcription:live-2024-05-10"
+            content: "Usa metafora medica repetidamente: 'nao adianta tratar a febre se a infeccao continua.'"
+        tags:
+          - "core-construct"
+          - "diagnosis"
+          - "root-cause"
+          - "kelly-grid"
+          - "nuclear-construct"
+        connections:
+          - target: "RM-MENT-001"
+            relation: "enables"
+          - target: "RM-FIN-004"
+            relation: "extends"
+
+      # -----------------------------------------------------------------------
+      # EXEMPLO DE ITEM: Mental Model
+      # -----------------------------------------------------------------------
+      - id: "RM-MENT-003"
+        type: "mental_model"
+        label: "Funil de Priorizacao de Problemas"
+        content: >
+          Modelo mental de 3 filtros para priorizar problemas do mentorado:
+          (1) Impacto financeiro direto? (2) Impacto em pessoas-chave?
+          (3) Reversibilidade -- se errar, da pra consertar? Problemas que
+          passam nos 3 filtros sao atacados primeiro. O sujeito aplica este
+          modelo automaticamente, sem pensar -- indicativo de Dreyfus expert.
+        source: "cdm:klein-incident-005"
+        confidence: 0.78
+        dreyfus_stage: "expert"
+        seci_stage: "externalization"
+        evidence:
+          - type: "inference"
+            source: "cdm:klein-incident-005"
+            content: "Incidente critico revelou priorizacao implicita por impacto financeiro, seguido de impacto em pessoas."
+        tags:
+          - "prioritization"
+          - "decision-making"
+          - "mental-model"
+          - "tacit-to-explicit"
+        connections:
+          - target: "RM-MENT-001"
+            relation: "requires"
+
+  # ===========================================================================
+  # EXEMPLO 2: Dominio vazio (template para preencher)
+  # ===========================================================================
+  - id: "DOM-{ABREV}"
+    label: "{Nome do Dominio}"
+    description: "{Descricao do dominio de expertise}"
+    expertise_level: "{beer_mat|popular_understanding|primary_source|interactional|contributory}"
+    expertise_type: "{I|C}"
+    dreyfus_stage: "{novice|advanced_beginner|competent|proficient|expert}"
+    primary_tacit_type: "{RTK|STK|CTK}"
+
+    items:
+      - id: "RM-{ABREV}-001"
+        type: "{heuristic|mental_model|skill|principle|pattern|framework|construct|decision_rule|tacit_knowledge|value}"
+        label: "{Label curto e descritivo}"
+        content: >
+          {Descricao completa em linguagem pratica.
+          O que e este item? Como o sujeito usa?
+          Em que contexto aparece? Que resultado produz?}
+        source: "{tipo}:{referencia}"
+        confidence: 0.0
+        dreyfus_stage: "{stage}"
+        seci_stage: "{socialization|externalization|combination|internalization}"
+        evidence:
+          - type: "{quote|observation|pattern|inference}"
+            source: "{referencia-da-fonte}"
+            content: "{Citacao, observacao ou padrao que sustenta este item}"
+        tags:
+          - "{tag-1}"
+          - "{tag-2}"
+        connections:
+          - target: "RM-{ABREV}-{NNN}"
+            relation: "{enables|requires|contradicts|extends|refines|exemplifies}"
+
+# ---------------------------------------------------------------------------
+# CROSS-DOMAIN CONNECTIONS
+# Conexoes entre itens de dominios DIFERENTES.
+# Estas conexoes sao especialmente valiosas -- revelam transferencia
+# de conhecimento e padroes transversais.
+# ---------------------------------------------------------------------------
+cross_domain_connections:
+  - source: "RM-MENT-002"
+    target: "RM-FIN-004"
+    relation: "extends"
+    description: "O construto 'problema real vs sintoma' da mentoria se estende para analise financeira -- o sujeito busca causas raiz em demonstracoes financeiras da mesma forma."
+
+  - source: "{RM-XXX-NNN}"
+    target: "{RM-YYY-NNN}"
+    relation: "{tipo}"
+    description: "{Explicacao da conexao cross-domain}"
+
+# ---------------------------------------------------------------------------
+# VALIDATION SUMMARY
+# Resumo da validacao feita por @argyris (gap analysis)
+# ---------------------------------------------------------------------------
+validation:
+  validator: "@argyris"
+  date: "{YYYY-MM-DD}"
+  status: "validated"              # Valores: pending | in_progress | validated | needs_review
+
+  gaps_summary:
+    critical: 0                    # Gaps criticos (espoused vs actual com impacto alto)
+    significant: 0                 # Gaps significativos (padroes inconsistentes)
+    minor: 0                      # Gaps menores (lacunas de documentacao)
+    blind_spots: 0                 # Pontos cegos identificados
+
+  contradictions: []               # Lista de contradicoes detectadas
+  # Exemplo:
+  # - item_a: "RM-MENT-001"
+  #   item_b: "RM-MENT-015"
+  #   description: "Sujeito diz valorizar dados mas decide por intuicao em 80% dos casos observados"
+
+  hidden_expertise: []             # Expertise que o sujeito nao reconhece possuir
+  # Exemplo:
+  # - id: "RM-MENT-020"
+  #   description: "Pattern recognition em dinamica de grupo -- o sujeito faz mas nao identifica como habilidade"
+
+# ---------------------------------------------------------------------------
+# CHANGELOG
+# Historico de alteracoes no manifesto (append-only)
+# ---------------------------------------------------------------------------
+changelog:
+  - date: "{YYYY-MM-DD}"
+    author: "{agente ou usuario}"
+    action: "created"
+    description: "Manifesto inicial criado com {N} itens em {N} dominios"
+
+  # Exemplo de entrada de update:
+  # - date: "2024-04-15"
+  #   author: "@forte"
+  #   action: "updated"
+  #   description: "Adicionados 5 novos itens ao dominio DOM-MENT apos sessao Kelly #3"

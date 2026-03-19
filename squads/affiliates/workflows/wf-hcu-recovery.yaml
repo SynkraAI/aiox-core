@@ -1,0 +1,205 @@
+# HCU Recovery Workflow
+# Pipeline para recuperação de penalidade Google Helpful Content Update
+# Source: @architect research — Google HCU 2024-2025 + E-E-A-T + Content Pruning
+# Version: 1.0.0
+
+id: wf-hcu-recovery
+name: "HCU Recovery"
+version: "1.0.0"
+duration: "3-6 months (recovery timeline YMYL)"
+description: |
+  Workflow para recuperação de site afetado por Google Helpful Content Update.
+  Diagnóstico → plano de conteúdo → audit técnico → link strategy.
+
+  FILOSOFIA: "HCU recovery exige patience. YMYL: 6-12 meses. Non-YMYL: 3-6 meses."
+
+  RESULTADO: Plano de recuperação completo com E-E-A-T, content pruning e link cleanup.
+
+best_for:
+  - "Site afetado por HCU (tráfego caiu > 30%)"
+  - "Recuperação de penalidade de thin affiliate content"
+  - "Migração para E-E-A-T compliance"
+
+decision_matrix_fit:
+  complexity: high
+  agents_required: 2
+  estimated_duration: "3-6 months"
+  user_involvement: "high"
+  prerequisites:
+    - "Site com queda documentada pós-HCU"
+    - "Google Search Console access"
+    - "Ferramentas SEO (Ahrefs ou SEMrush)"
+
+clone_combinations:
+  primary:
+    - agent: seo-affiliate
+      role: "HCU audit, content plan, site audit, link strategy"
+      phases: [0, 1, 2, 3]
+
+    - agent: authority-builder
+      role: "E-E-A-T strategy, author entity building"
+      phases: [1]
+
+phases:
+  - id: PHASE-0
+    name: "HCU Diagnosis"
+    days: "Weeks 1-2"
+    tier: 0
+    description: |
+      Diagnóstico completo: timing, impacto, padrões.
+      Thin affiliate content caiu até 71%.
+      Recovery exige: first-hand experience, author entity, E-E-A-T, content pruning.
+
+    agent: seo-affiliate
+
+    tasks:
+      - task_id: T0.1
+        name: "HCU Recovery Audit"
+        task_ref: hcu-recovery-audit.md
+        required: true
+        description: "Diagnóstico HCU + plano E-E-A-T"
+        output: "hcu_audit.yaml"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Diagnosis Complete"
+      criteria:
+        - "Timeline de queda mapeado (correlação com updates)"
+        - "Páginas afetadas identificadas"
+        - "Padrão de thin content quantificado"
+        - "E-E-A-T gaps documentados"
+      human_review: true
+      message: "Revise diagnóstico — recovery plan depende de diagnóstico preciso."
+      veto_conditions:
+        - condition: "Queda não correlaciona com HCU dates"
+          action: "WARNING — Pode ser outro problema (technical, manual penalty)"
+
+  - id: PHASE-1
+    name: "Content Recovery Plan"
+    days: "Weeks 3-4"
+    tier: 1
+    description: |
+      Plano de conteúdo focado em recovery: prune, rewrite, create.
+      Prune: remover/noindex thin content.
+      Rewrite: adicionar first-hand experience.
+      Create: novo conteúdo E-E-A-T compliant.
+
+    agents:
+      primary: seo-affiliate
+      secondary: authority-builder
+
+    tasks:
+      - task_id: T1.1
+        name: "Content Plan (Recovery)"
+        task_ref: content-plan.md
+        required: true
+        agent: seo-affiliate
+        description: "Prune + rewrite + create plan"
+        output: "recovery_content_plan.yaml"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Content Plan Ready"
+      criteria:
+        - "Lista de páginas para prune/noindex"
+        - "Lista de páginas para rewrite (add first-hand experience)"
+        - "Novos artigos planejados (E-E-A-T)"
+        - "Author entity strategy definida"
+      human_review: true
+      message: "Revise content plan de recovery."
+      veto_conditions:
+        - condition: "Zero content pruning"
+          action: "WARNING — HCU recovery quase sempre requer pruning"
+
+  - id: PHASE-2
+    name: "Technical Audit"
+    days: "Weeks 5-6"
+    tier: 1
+    description: |
+      Audit técnico focado em recovery signals.
+      Core Web Vitals, schema markup, author pages, disclosure.
+
+    agent: seo-affiliate
+
+    tasks:
+      - task_id: T2.1
+        name: "Site Audit (Recovery)"
+        task_ref: site-audit.md
+        required: true
+        description: "Technical audit focado em HCU signals"
+        output: "recovery_site_audit.yaml"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Technical Audit Complete"
+      criteria:
+        - "Core Web Vitals green"
+        - "Author pages criadas"
+        - "Schema markup (Article, Author, FAQ)"
+        - "Disclosure de afiliado em todas as páginas"
+      human_review: false
+
+  - id: PHASE-3
+    name: "Link Cleanup & Strategy"
+    days: "Weeks 7-8+"
+    tier: 2
+    description: |
+      Cleanup de link profile + nova estratégia de links.
+      Disavow toxic links. Build topically relevant links.
+
+    agent: seo-affiliate
+
+    tasks:
+      - task_id: T3.1
+        name: "Link Strategy (Recovery)"
+        task_ref: link-strategy.md
+        required: true
+        description: "Cleanup toxic + build topically relevant"
+        output: "recovery_link_strategy.yaml"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Link Strategy Ready"
+      criteria:
+        - "Toxic links identified"
+        - "Disavow file prepared (se necessário)"
+        - "New link strategy focada em topical relevance"
+        - "Timeline 3-6 meses"
+      human_review: true
+      message: "Revise link strategy de recovery. Disavow é action séria."
+      veto_conditions:
+        - condition: "Disavow sem análise cuidadosa"
+          action: "WARNING — Disavow errado pode piorar"
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - halt_workflow: false
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "affiliates-chief"
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-hcu-recovery"
+      status: "completed"
+
+outputs:
+  phase_0: ["hcu_audit.yaml"]
+  phase_1: ["recovery_content_plan.yaml"]
+  phase_2: ["recovery_site_audit.yaml"]
+  phase_3: ["recovery_link_strategy.yaml"]
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-18"
+  author: "squad-architect"
+  source_frameworks:
+    - "Google HCU 2024-2025"
+    - "E-E-A-T Framework"
+    - "Content Pruning Strategy"
+  priority: 3
+  quality_gate: "SC_WFL_001"

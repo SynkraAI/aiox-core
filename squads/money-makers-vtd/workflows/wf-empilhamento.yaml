@@ -1,0 +1,462 @@
+# WF-5: Empilhamento de Monetização
+# Duration: 1-2h
+# Best for: Maximizar receita por dia usando múltiplos produtos em horários estratégicos
+# Key Agent: monetizador
+
+workflow:
+  id: wf-empilhamento
+  name: "Empilhamento de Monetização"
+  duration: "1-2h"
+  trigger: "*monetiza-empilhar"
+  description: |
+    Workflow para implementar o sistema de Empilhamento de Monetização do Natanael Oliveira.
+
+    PRINCÍPIO CENTRAL (NO-F022):
+    "SE 98% não compraram → ENTÃO oferece algo. NUNCA deixa dinheiro na mesa."
+
+    Empilhamento é o sistema de múltiplas ofertas diárias, estrategicamente
+    posicionadas por horário e produto, para monetizar o máximo da base existente.
+
+    REGRA DO EMPILHAMENTO:
+    - Manhã: oferta de produto LOW ticket (decisão de baixo risco, início do dia)
+    - Tarde: oferta de produto HIGH ticket (máximo de energia e decisão)
+    - Noite: outro produto (cross-sell, complementar, ou reengajamento)
+
+    AUTOMAÇÃO DE EMAIL (NO-F049):
+    Sequências automáticas para cada produto, rodando 365 dias.
+    "Nunca parar de mandar email" — a lista trabalha enquanto você dorme.
+
+    RESULTADO ESPERADO:
+    O mesmo lead que não comprou o produto A pode comprar B, C, ou D.
+    Maximizar o LTV (valor do cliente no tempo) sem aumentar custo de aquisição.
+
+  best_for:
+    - "Negócio com múltiplos produtos mas sem sistema de ofertas organizado"
+    - "Quem manda email só quando lança produto (não usa a lista)"
+    - "Quem depende de lançamento e não tem receita recorrente entre lançamentos"
+    - "Expert que quer parar de deixar dinheiro na mesa"
+    - "Implementar o modelo Money Machine com cronograma de ofertas"
+
+  decision_matrix_fit:
+    awareness: "product-aware a most-aware"
+    sophistication: "stage-3 a stage-5"
+    price_point: "mix obrigatório low/mid/high"
+    traffic_temp: "warm (base existente)"
+    primary_output: "calendario-empilhamento-{mes}.yaml"
+
+  clone_combinations:
+    primary: "monetizador"
+    secondary:
+      - "copy-andromeda (copy das sequências automáticas)"
+      - "arquiteto-funil (estrutura das sequências de email)"
+      - "vtd-chief (validação estratégica)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 1: INVENTÁRIO DE OFERTAS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-1
+    name: "Inventário de Ofertas"
+    days: "1"
+    tier: 0
+    description: |
+      Antes de empilhar, é preciso saber O QUÊ empilhar.
+
+      Listar TODOS os produtos existentes e classificar por categoria:
+
+      LOW TICKET (R$9 - R$97):
+      - Ebooks
+      - Templates
+      - Mini-cursos
+      - Checklists premium
+      - Apps de entrada
+
+      MID TICKET (R$97 - R$497):
+      - Cursos completos
+      - Workshops
+      - Desafios pagos
+      - Mentorias em grupo
+      - Ferramentas avançadas
+
+      HIGH TICKET (R$497 - R$5.000+):
+      - Imersões presenciais
+      - Mentorias individuais
+      - Consultorias
+      - Programas anuais
+      - Masterminds
+
+      Para cada produto, identificar:
+      - Público que já comprou (para cross-sell)
+      - Público que NÃO comprou (para oferta futura)
+      - Qual produto antecede (upsell natural)
+      - Qual produto sucede (próximo passo — NO-F021)
+
+    tasks:
+      - task_id: listar-todos-produtos
+        agent: monetizador
+        required: true
+        description: |
+          Listar todos os produtos existentes com:
+          - Nome do produto
+          - Ticket (preço)
+          - Categoria (low/mid/high)
+          - Status (ativo, pausado, descontinuado)
+          - Total de compradores (se disponível)
+          - Taxa de conversão histórica (se disponível)
+          Incluir produtos digitais, físicos, serviços e mentorias.
+        output: "inventario-produtos.yaml"
+
+      - task_id: mapa-upsell-crosssell
+        agent: monetizador
+        required: true
+        description: |
+          Criar mapa de upsell e cross-sell para cada produto:
+          - Produto A → Upsell natural (produto B, ticket maior)
+          - Produto A → Cross-sell (produto C, complementar)
+          - Produto A → Downsell (produto D, para quem não comprou A)
+          Cada produto deve ter pelo menos 1 próximo passo definido (NO-F021).
+          Identificar lacunas: produtos sem próximo passo óbvio.
+        output: "mapa-upsell-crosssell.yaml"
+
+      - task_id: diagnostico-empilhamento-atual
+        agent: monetizador
+        required: true
+        description: |
+          Diagnosticar o estado atual do empilhamento:
+          - Quantas ofertas por dia em média?
+          - Quais horários estão sendo usados?
+          - Quais produtos nunca são ofertados para base existente?
+          - Quanto da base nunca recebeu oferta de high ticket?
+          - Calcular "dinheiro na mesa" estimado (98% rule — NO-F022)
+        output: "diagnostico-empilhamento-atual.md"
+
+    elicitation:
+      required: true
+      questions:
+        - id: produtos_existentes
+          question: "Liste todos os seus produtos com nome e preço (um por linha)"
+          type: text
+          required: true
+
+        - id: frequencia_email_atual
+          question: "Quantos emails você manda por semana para sua base? (0 = nunca)"
+          type: number
+          required: true
+
+        - id: tamanho_lista
+          question: "Qual o tamanho aproximado da sua lista de email? (ex: 1.200, 5k, 20k)"
+          type: text
+          required: true
+
+        - id: faturamento_mensal_atual
+          question: "Qual o faturamento médio mensal atual? (aproximado)"
+          type: text
+          required: true
+
+        - id: produto_mais_vendido
+          question: "Qual produto mais vende hoje? Por quê? (intuição aceita)"
+          type: text
+          required: false
+
+    checkpoint:
+      criteria:
+        - "Todos os produtos listados com ticket e categoria"
+        - "Mapa de upsell/cross-sell para cada produto"
+        - "Diagnóstico do estado atual documentado"
+        - "Lacunas identificadas (produtos sem próximo passo)"
+        - "Estimativa de dinheiro na mesa calculada"
+      human_review: true
+      message: "Inventário completo. Revisar mapa de upsell/cross-sell antes de empilhar."
+      veto_conditions:
+        - "SE produto sem próximo passo → SINALIZAR. Criar upsell antes de empilhar (NO-F021)."
+        - "SE lista de email nunca usada → PRIORIDADE. Base ignorada é dinheiro na mesa (NO-F022)."
+        - "SE sem produtos high ticket → ALERTA. Empilhamento sem high ticket tem teto baixo."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2: CALENDÁRIO DE EMPILHAMENTO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Calendário de Empilhamento"
+    days: "1"
+    tier: 1
+    description: |
+      Criar o calendário de empilhamento mensal.
+
+      ESTRUTURA DIÁRIA (obrigatória):
+      - Manhã (7h-12h): oferta low ticket (decisão leve, baixo risco)
+      - Tarde (12h-18h): oferta high ticket (momento de maior disposição para decidir)
+      - Noite (18h-22h): outro produto (cross-sell, complementar, ou conteúdo com CTA)
+
+      REGRA DO CALENDÁRIO:
+      - Produtos alternados ao longo da semana (não repetir mesmo produto 2x seguidas)
+      - High ticket aparece toda tarde (mesmo que em diferentes produtos)
+      - Semana temática: cada semana tem 1 produto principal + empilhamento
+      - Nenhum dia sem oferta: 7 dias, 3 períodos = 21 touchpoints/semana
+
+      REGRA 98% (NO-F022):
+      Se 98% da base não comprou um produto, ela pode comprar outro.
+      O calendário garante que SEMPRE há algo relevante para oferecer.
+
+      PRODUTOS ALTERNADOS — EXEMPLO:
+      Segunda manhã: Ebook R$14 / Tarde: Mentoria R$2.500 / Noite: App R$60
+      Terça manhã: Mini-curso R$47 / Tarde: Imersão R$997 / Noite: Desafio R$97
+      ...e assim por diante, sem repetição consecutiva.
+
+    tasks:
+      - task_id: calendario-mensal
+        agent: monetizador
+        required: true
+        description: |
+          Criar calendário de empilhamento para 30 dias:
+          Para cada dia:
+            manha: produto={nome}, ticket=R$X, categoria=low
+            tarde: produto={nome}, ticket=R$X, categoria=high
+            noite: produto={nome}, ticket=R$X, categoria=low/mid
+          Garantir:
+          - Nenhum produto se repete no mesmo horário em dias consecutivos
+          - Pelo menos 3 produtos diferentes por semana em cada período
+          - High ticket presente em TODAS as tardes
+          - Campanha da semana integrada ao empilhamento
+        output: "calendario-empilhamento-30-dias.yaml"
+
+      - task_id: regras-empilhamento
+        agent: monetizador
+        required: true
+        description: |
+          Documentar as regras operacionais do empilhamento:
+          - Como decidir o produto de cada período
+          - O que fazer quando produto não tem oferta pronta
+          - Como adaptar em semanas de lançamento especial
+          - Regra para datas comemorativas e sazonalidade
+          - O que medir para saber se o empilhamento está funcionando
+        output: "regras-empilhamento.md"
+
+      - task_id: segmentacao-por-comportamento
+        agent: monetizador
+        required: true
+        description: |
+          Definir segmentação de lista para empilhamento inteligente:
+          - Compradores do produto A → não recebem oferta de A novamente
+          - Compradores de low ticket → priorizar high ticket na tarde
+          - Quem nunca comprou → empilhamento de entrada com low ticket
+          - Inativos (>30 dias sem abrir email) → sequência de reengajamento
+          Cada segmento recebe empilhamento diferente, mesmo calendário base.
+        output: "segmentacao-lista-empilhamento.yaml"
+
+    checkpoint:
+      criteria:
+        - "Calendário 30 dias completo (nenhum período vazio)"
+        - "High ticket em todas as tardes"
+        - "Produtos alternados (sem repetição consecutiva)"
+        - "Regras operacionais documentadas"
+        - "Segmentação por comportamento definida"
+      human_review: true
+      message: "Calendário de empilhamento criado. Validar distribuição e segmentação."
+      veto_conditions:
+        - "SE algum período sem oferta → VETO. 21 touchpoints/semana é obrigatório (NO-F022)."
+        - "SE high ticket ausente em alguma tarde → VETO. Tarde = momento de decisão maior."
+        - "SE sem segmentação de compradores → ALERTA. Oferecer produto já comprado frustra o cliente."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3: AUTOMAÇÃO DE EMAIL
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Automação de Email"
+    days: "1"
+    tier: 2
+    description: |
+      Configurar sequências automáticas para cada produto no calendário.
+
+      PRINCÍPIO FUNDAMENTAL (NO-F049):
+      "Nunca parar de mandar email."
+      Email é o canal mais previsível e próprio do negócio.
+      Sequências automáticas = receita enquanto você dorme.
+
+      TIPOS DE SEQUÊNCIA AUTOMÁTICA:
+      1. Sequência de boas-vindas (para todo novo lead)
+      2. Sequência pós-compra por produto (nurturing + upsell)
+      3. Sequência de reengajamento (inativos > 30 dias)
+      4. Sequência de empilhamento (ofertas rotativas por produto)
+      5. Sequência evergreen de produto (roda perpetuamente)
+
+      REGRA DA AUTOMAÇÃO:
+      Cada produto do calendário deve ter UMA sequência automática básica:
+      - Email 1: Entrega/boas-vindas
+      - Email 2: Conteúdo de valor
+      - Email 3: Oferta do próximo passo (NO-F021)
+
+      A base NUNCA fica sem sequência rodando.
+      Mesmo quando o expert não produz conteúdo, o email trabalha.
+
+    tasks:
+      - task_id: sequencias-por-produto
+        agent: copy-andromeda
+        required: true
+        description: |
+          Para cada produto do inventário, criar sequência de 3 emails automáticos:
+          Email 1: Entrega/boas-vindas (tom caloroso, pessoal)
+          Email 2: Conteúdo de valor relacionado ao produto (D+2)
+          Email 3: Oferta do próximo passo (D+5, com CTA claro)
+          Sequências evergreen: não mencionam datas, funcionam qualquer dia.
+          Linguagem: como o público fala (usar glossário da pesquisa de mercado).
+        output: "sequencias-email-por-produto.md"
+
+      - task_id: sequencia-reengajamento
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar sequência de reengajamento para inativos (> 30 dias sem abrir):
+          Email 1: "Tudo bem?" — mensagem simples e pessoal (reaquecer)
+          Email 2: Conteúdo de alto valor (motivo para voltar a abrir)
+          Email 3: Oferta especial "para quem estava ausente" (criar urgência)
+          Email 4: Último email antes de mover para lista fria
+          Objetivo: reativar o máximo antes de limpar lista.
+        output: "sequencia-reengajamento.md"
+
+      - task_id: configuracao-automacao
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Documentar configuração técnica das automações:
+          - Plataforma de email recomendada (ActiveCampaign, Klaviyo, MailerLite)
+          - Tags e segmentos necessários
+          - Triggers para cada sequência (compra, optin, inatividade)
+          - Regras de exclusão (quem não deve receber qual sequência)
+          - Relatórios a acompanhar semanalmente
+          - Quando pausar, ajustar ou substituir sequência
+        output: "configuracao-automacao-email.md"
+
+    checkpoint:
+      criteria:
+        - "Sequência de 3 emails para cada produto do inventário"
+        - "Sequência de reengajamento completa (4 emails)"
+        - "Todas as sequências são evergreen (sem datas fixas)"
+        - "Configuração técnica documentada"
+        - "Triggers e segmentos definidos"
+        - "Regras de exclusão estabelecidas"
+      human_review: true
+      message: "Automação de email configurada. Validar sequências e triggers."
+      veto_conditions:
+        - "SE algum produto sem sequência automática → VETO. Todo produto precisa de sequência (NO-F049)."
+        - "SE sequência menciona data específica → VETO. Evergreen não tem data, funciona sempre."
+        - "SE sem segmentação de compradores → VETO. Oferecer produto já comprado gera descadastro."
+        - "SE sem sequência de reengajamento → ALERTA. Lista inativa = dinheiro dormindo (NO-F022)."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_stakeholders: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHECKPOINT CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+checkpoint_config:
+  - phase: PHASE-1
+    heuristic: "NO-F021 + NO-F022"
+    criteria: "Inventário completo com mapa de upsell/cross-sell"
+    veto_condition: "Produto sem próximo passo = teto de receita arbitrário"
+
+  - phase: PHASE-2
+    heuristic: "NO-F022"
+    criteria: "Calendário 30 dias, 3 períodos/dia, sem vazio"
+    veto_condition: "SE 98% não compraram e você não ofereceu → dinheiro na mesa"
+
+  - phase: PHASE-3
+    heuristic: "NO-F049"
+    criteria: "Sequências automáticas para todos os produtos + reengajamento"
+    veto_condition: "Lista sem sequência rodando = base dormindo"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMPLETION SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+completion_signal: "<promise>COMPLETE</promise>"
+checkpoint_signal: "<promise>CHECKPOINT:PHASE-X</promise>"
+blocked_signal: "<promise>BLOCKED:T-X.Y</promise>"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT ARTIFACTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  inventario:
+    - "inventario-produtos.yaml — Todos os produtos classificados"
+    - "mapa-upsell-crosssell.yaml — Próximos passos por produto"
+    - "diagnostico-empilhamento-atual.md — Estado atual + dinheiro na mesa"
+
+  calendario:
+    - "calendario-empilhamento-30-dias.yaml — 30 dias, 3 períodos/dia"
+    - "regras-empilhamento.md — Regras operacionais"
+    - "segmentacao-lista-empilhamento.yaml — Segmentos por comportamento"
+
+  automacao:
+    - "sequencias-email-por-produto.md — Sequências de 3 emails por produto"
+    - "sequencia-reengajamento.md — 4 emails para inativos"
+    - "configuracao-automacao-email.md — Setup técnico"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  inventario:
+    - "[ ] Todos os produtos listados com ticket e categoria"
+    - "[ ] Mapa de upsell/cross-sell completo"
+    - "[ ] Cada produto tem pelo menos 1 próximo passo"
+    - "[ ] Dinheiro na mesa estimado calculado"
+
+  calendario:
+    - "[ ] 30 dias completos (nenhum período vazio)"
+    - "[ ] High ticket em todas as tardes"
+    - "[ ] Produtos alternados sem repetição consecutiva"
+    - "[ ] Segmentação por comportamento definida"
+
+  automacao:
+    - "[ ] Sequência de 3 emails para cada produto"
+    - "[ ] Sequência de reengajamento (4 emails)"
+    - "[ ] Todas as sequências são evergreen"
+    - "[ ] Triggers e segmentos configurados"
+    - "[ ] Regras de exclusão definidas"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GOVERNANCE GATE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+governance_gate:
+  required_checks:
+    - "Todo produto tem próximo passo (NO-F021)"
+    - "Calendário sem vazio — 21 touchpoints/semana (NO-F022)"
+    - "98% que não compraram sempre têm próxima oferta disponível"
+    - "Sequências automáticas para todos os produtos (NO-F049)"
+    - "Email nunca para — sequência evergreen funcionando"
+    - "Segmentação impede oferta de produto já comprado"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  framework: "AIOS Squad Creator"
+  created: "2026-02-21"
+  primary_use_case: "Maximizar receita com empilhamento estratégico de múltiplos produtos"
+  source_mind: "natanael-oliveira"
+  key_difference: |
+    Único workflow focado exclusivamente em monetizar a BASE EXISTENTE.
+    Implementa a regra 98% de forma sistemática com calendário completo.
+    Configura automações evergreen que geram receita sem intervenção manual.

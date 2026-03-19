@@ -1,0 +1,342 @@
+workflow:
+  id: design-system-brownfield-complete
+  name: Design System Brownfield Complete
+  description: "Complete workflow for brownfield projects: audit UI chaos, consolidate patterns, extract tokens, plan migration, then build production components. Mandatory governance protocol: squads/design/protocols/ai-first-governance.md"
+  version: 2.0.0
+  type: sequential
+  sequence:
+    - step: step-1-audit
+      id: step-1-audit
+      phase: 1
+      phase_name: Audit Codebase for Pattern Redundancy
+      agent: brad-frost
+      action: audit
+      outputs:
+        - inventory_report
+        - state_file
+      next: step-2-consolidate
+    - step: step-2-consolidate
+      id: step-2-consolidate
+      phase: 2
+      phase_name: Consolidate Patterns Using Clustering
+      agent: brad-frost
+      action: consolidate
+      outputs:
+        - consolidation_report
+        - reduction_metrics
+      next: step-3-tokenize
+    - step: step-3-tokenize
+      id: step-3-tokenize
+      phase: 3
+      phase_name: Extract Design Tokens
+      agent: brad-frost
+      action: tokenize
+      outputs:
+        - tokens_yaml
+        - tokens_json
+        - tokens_css
+        - tokens_tailwind
+      next: step-4-migrate
+    - step: step-4-migrate
+      id: step-4-migrate
+      phase: 4
+      phase_name: Generate Migration Strategy
+      agent: brad-frost
+      action: migrate
+      outputs:
+        - migration_plan
+      next: step-5-shock-report
+    - step: step-5-shock-report
+      id: step-5-shock-report
+      phase: 5
+      phase_name: Generate Shock Report (Optional)
+      agent: brad-frost
+      action: shock-report
+      outputs:
+        - shock_report
+      next: step-6-calculate-roi
+    - step: step-6-calculate-roi
+      id: step-6-calculate-roi
+      phase: 6
+      phase_name: Calculate ROI (Optional)
+      agent: brad-frost
+      action: calculate-roi
+      outputs:
+        - roi_report
+      next: step-7-build-atoms
+    - step: step-7-build-atoms
+      id: step-7-build-atoms
+      phase: 7
+      phase_name: Build Atomic Components
+      agent: brad-frost
+      action: build
+      outputs:
+        - components
+      next: step-8-compose-molecules
+    - step: step-8-compose-molecules
+      id: step-8-compose-molecules
+      phase: 8
+      phase_name: Compose Molecule Components
+      agent: brad-frost
+      action: compose
+      outputs:
+        - molecules
+      next: step-9-document
+    - step: step-9-document
+      id: step-9-document
+      phase: 9
+      phase_name: Generate Pattern Library Documentation
+      agent: brad-frost
+      action: document
+      outputs:
+        - documentation
+        - storybook
+      next: step-10-promote-to-workspace
+    - step: step-10-promote-to-workspace
+      id: step-10-promote-to-workspace
+      phase: 10
+      phase_name: Promote Outputs to Workspace Canonical Locations
+      agent: brad-frost
+      action: sync-registry
+      outputs:
+        - tokens_promoted
+        - registry_updated
+        - metadata_updated
+      next: step-11-critical-eye
+    - step: step-11-critical-eye
+      id: step-11-critical-eye
+      phase: 11
+      phase_name: Run Critical Eye Curation Cycle
+      agent: brad-frost
+      action: workflow
+      outputs:
+        - catalog_updated
+        - cycle_report
+    - workflow_end:
+        id: complete
+        action: workflow_complete
+metadata:
+  author: Brad (Design System Architect)
+  created_date: "2025-10-27"
+  last_modified: "2026-02-16"
+  tags:
+    - design-system
+    - brownfield
+    - audit
+    - consolidation
+    - components
+    - brad
+inputs:
+  codebase_path:
+    type: string
+    description: Path to codebase for audit (e.g., ./src)
+    required: true
+    validation: Must be valid directory path
+  project_name:
+    type: string
+    description: Project name for output organization
+    required: true
+    default: my-app
+steps:
+  - id: step_1_audit
+    name: Audit Codebase for Pattern Redundancy
+    type: agent
+    agent: brad-frost
+    command: "*audit"
+    inputs:
+      path: "{{codebase_path}}"
+    outputs:
+      inventory_report: outputs/design-system/{{project_name}}/audit/inventory.yaml
+      state_file: outputs/design-system/{{project_name}}/.state.yaml
+    error_handling:
+      strategy: fail
+  - id: step_2_consolidate
+    name: Consolidate Patterns Using Clustering
+    type: agent
+    agent: brad-frost
+    command: "*consolidate"
+    inputs:
+      inventory: "{{step_1_audit.inventory_report}}"
+    outputs:
+      consolidation_report: outputs/design-system/{{project_name}}/consolidation/decisions.yaml
+      reduction_metrics: outputs/design-system/{{project_name}}/consolidation/metrics.yaml
+    error_handling:
+      strategy: fail
+  - id: step_3_tokenize
+    name: Extract Design Tokens
+    type: agent
+    agent: brad-frost
+    command: "*tokenize"
+    inputs:
+      consolidation: "{{step_2_consolidate.consolidation_report}}"
+    outputs:
+      tokens_yaml: outputs/design-system/{{project_name}}/tokens/tokens.yaml
+      tokens_json: outputs/design-system/{{project_name}}/tokens/tokens.json
+      tokens_css: outputs/design-system/{{project_name}}/tokens/tokens.css
+      tokens_tailwind: outputs/design-system/{{project_name}}/tokens/tokens.tailwind.js
+    error_handling:
+      strategy: fail
+  - id: step_4_migrate
+    name: Generate Migration Strategy
+    type: agent
+    agent: brad-frost
+    command: "*migrate"
+    inputs:
+      tokens: "{{step_3_tokenize.tokens_yaml}}"
+      consolidation: "{{step_2_consolidate.consolidation_report}}"
+    outputs:
+      migration_plan: outputs/design-system/{{project_name}}/migration/plan.md
+    error_handling:
+      strategy: fail
+  - id: step_5_shock_report
+    name: Generate Shock Report (Optional)
+    type: agent
+    agent: brad-frost
+    command: "*shock-report"
+    inputs:
+      inventory: "{{step_1_audit.inventory_report}}"
+      consolidation: "{{step_2_consolidate.consolidation_report}}"
+    outputs:
+      shock_report: outputs/design-system/{{project_name}}/reports/shock-report.html
+    error_handling:
+      strategy: skip
+  - id: step_6_calculate_roi
+    name: Calculate ROI (Optional)
+    type: agent
+    agent: brad-frost
+    command: "*calculate-roi"
+    inputs:
+      consolidation: "{{step_2_consolidate.consolidation_report}}"
+    outputs:
+      roi_report: outputs/design-system/{{project_name}}/reports/roi.yaml
+    error_handling:
+      strategy: skip
+  - id: step_7_build_atoms
+    name: Build Atomic Components
+    type: agent
+    agent: brad-frost
+    command: "*build"
+    inputs:
+      tokens: "{{step_3_tokenize.tokens_yaml}}"
+      patterns: button,input,label,icon
+    outputs:
+      components: outputs/design-system/{{project_name}}/components/atoms/
+    error_handling:
+      strategy: fail
+  - id: step_8_compose_molecules
+    name: Compose Molecule Components
+    type: agent
+    agent: brad-frost
+    command: "*compose"
+    inputs:
+      atoms: "{{step_7_build_atoms.components}}"
+      patterns: form-field,card,alert
+    outputs:
+      molecules: outputs/design-system/{{project_name}}/components/molecules/
+    error_handling:
+      strategy: fail
+  - id: step_9_document
+    name: Generate Pattern Library Documentation
+    type: agent
+    agent: brad-frost
+    command: "*document"
+    inputs:
+      components: outputs/design-system/{{project_name}}/components/
+      tokens: "{{step_3_tokenize.tokens_yaml}}"
+    outputs:
+      documentation: outputs/design-system/{{project_name}}/docs/
+      storybook: outputs/design-system/{{project_name}}/.storybook/
+    error_handling:
+      strategy: skip
+  - id: step_10_promote_to_workspace
+    name: Promote Outputs to Workspace Canonical Locations
+    type: agent
+    agent: brad-frost
+    command: "*sync-registry"
+    description: Move outputs from outputs/ to workspace canonical paths
+    inputs:
+      tokens_source: "{{step_3_tokenize.tokens_yaml}}"
+      components_source: outputs/design-system/{{project_name}}/components/
+    outputs:
+      tokens_promoted: workspace/system/tokens/
+      registry_updated: workspace/ui/registry.json
+      metadata_updated: workspace/domains/design-system/metadata/components.json
+    promotion_map:
+      - from: outputs/design-system/{{project_name}}/tokens/tokens.json
+        to: workspace/system/tokens/primitive.tokens.json
+      - from: outputs/design-system/{{project_name}}/tokens/tokens.yaml
+        to: squads/design/data/design-tokens-spec.yaml
+      - from: outputs/design-system/{{project_name}}/components/
+        to: workspace/ui/components/
+    validation:
+      - workspace/ui/registry.json updated with new components
+      - workspace/domains/design-system/metadata/components.json reflects changes
+      - squads/design/scripts/design-system/validate_components_metadata.cjs passes
+    error_handling:
+      strategy: fail
+  - id: step_11_critical_eye
+    name: Run Critical Eye Curation Cycle
+    type: workflow
+    agent: brad-frost
+    workflow: critical-eye
+    description: Evaluate all promoted patterns through the Critical Eye scoring engine. Scores variants (0-100), applies lifecycle transitions, generates proposals for canonical promotion. Non-blocking — brownfield completes even if curation is skipped.
+    inputs:
+      catalog: workspace/ui/pattern-catalog.json
+      scoring_rules: squads/design/data/critical-eye-scoring-rules.yaml
+      decisions_log: workspace/ui/canonical-decisions.json
+    outputs:
+      catalog_updated: workspace/ui/pattern-catalog.json
+      cycle_report: outputs/design-system/critical-eye/cycle-{{cycle_number}}/report.md
+    error_handling:
+      strategy: skip
+outputs:
+  design_system_complete:
+    type: boolean
+    description: Workflow completed successfully
+    source: step_10_promote_to_workspace.success
+  tokens_location:
+    type: string
+    description: Path to design tokens
+    source: step_3_tokenize.tokens_yaml
+  components_location:
+    type: string
+    description: Path to generated components
+    source: outputs/design-system/{{project_name}}/components/
+  migration_plan_location:
+    type: string
+    description: Path to migration plan
+    source: step_4_migrate.migration_plan
+  shock_report_location:
+    type: string
+    description: Path to shock report (if generated)
+    source: step_5_shock_report.shock_report
+  roi_metrics:
+    type: string
+    description: ROI calculation results
+    source: step_6_calculate_roi.roi_report
+global_error_handling:
+  on_error: abort
+  notification:
+    enabled: true
+    channels:
+      - console
+security:
+  authorization_required: false
+  audit_logging: true
+quality_gates:
+  internal_quality_chain:
+    required:
+      - node squads/design/scripts/design-system/generate_components_metadata.cjs
+      - node squads/design/scripts/design-system/validate_components_metadata.cjs
+      - node squads/design/scripts/design-system/sync_design_manifest.cjs
+      - node squads/design/scripts/design-system/validate_design_manifest_drift.cjs
+      - node squads/design/scripts/design-system/validate_task_checklist_bindings.cjs
+      - node squads/design/scripts/design-system/validate_mcp_skeleton.cjs
+    optional:
+      - node squads/design/scripts/design-system/test_mcp_tools.cjs
+    blocking: true
+    policy: internal-first
+    exception:
+      external_tool_allowed_with:
+        - capability_gap_documented
+        - rationale_recorded

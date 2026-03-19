@@ -1,0 +1,1276 @@
+# Launch Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Launch Playbook, $100M Money Models Launch, 10 Papeis Criticos
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: launch
+  purpose: "Orquestrar lancamentos que convertem atencao em receita dentro de janelas de tempo comprimidas usando sistemas replicaveis"
+  domain: launch-operations
+  source_playbooks:
+    - "$100M Launch Playbook"
+    - "$100M Money Models Launch"
+    - "10 Papeis Criticos do Lancamento"
+
+  core_equation: |
+    SUCESSO = (Historia Irresistivel x Escassez Real x Oferta Incomparavel) ^ Energia do Evento
+                                        /
+                                Friccao de Compra
+
+  philosophy: |
+    "Um lancamento e um sistema, nao um evento. Se voce nao consegue replicar, voce nao possui."
+    "De tudo gratis para 99%, monetize 1% a 600X o valor."
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: launch-coordinator
+      role: "Orquestrar o framework E.V.E.N.T.O e coordenar as 8 fases cronologicas"
+      decisions:
+        - "Classificar tamanho do lancamento (Micro/Small/Medium/Large/Mega)"
+        - "Rotear tarefas para os 10 papeis criticos"
+        - "Monitorar KPIs em tempo real e escalar problemas"
+        - "Aprovar mudancas de estrategia durante execucao"
+      kpis:
+        - "Receita total vs meta"
+        - "Timeline compliance"
+        - "Budget variance"
+        - "Team coordination score"
+
+  tier_0_diagnosis:
+    - agent: launch-auditor
+      role: "Auditar readiness e identificar gaps antes do lancamento"
+      inputs:
+        - "E.V.E.N.T.O framework coverage"
+        - "8 phases completeness"
+        - "10 roles staffing"
+        - "Contingency matrix"
+      outputs:
+        - "Launch readiness score (0-100)"
+        - "Gap prioritization list"
+        - "Risk assessment"
+        - "Go/No-Go recommendation"
+
+    - agent: sizing-analyst
+      role: "Dimensionar recursos e budget para o tamanho do lancamento"
+      inputs:
+        - "Meta de vendas"
+        - "Conversao esperada por tipo"
+        - "Recursos disponiveis"
+      outputs:
+        - "Registros necessarios"
+        - "Budget allocation"
+        - "Team sizing"
+        - "Timeline recommendation"
+
+  tier_1_execution:
+    - agent: evento-architect
+      role: "Aplicar framework E.V.E.N.T.O ao lancamento"
+      specialization: "Framework E.V.E.N.T.O"
+      components:
+        escassez:
+          types: ["Temporal", "Quantitativa", "Exclusividade"]
+          anti_pattern: "NUNCA usar escassez falsa"
+        valor_empilhado:
+          target: "10X o preco minimo"
+          stack: ["Core", "Bonus 1 (objecao)", "Bonus 2 (aceleracao)", "Bonus 3 (seguranca)", "Surpresa"]
+        escada_compromisso:
+          flow: "Register -> Show Up -> Engage -> Consider -> Buy Core -> Upsell -> Advocate"
+        network_effect:
+          tiers: ["Embaixadores (1%)", "Advogados (10%)", "Amplificadores (Todos)"]
+        tensao_narrativa:
+          formula: "Ha [tempo] eu [problema]. Depois de [jornada], descobri [solucao]. Agora, pela primeira vez, vou [revelacao]."
+        oferta_irrecusavel:
+          components: ["Valor 10X", "Garantia risk-reversal", "Escassez genuina", "Urgencia real"]
+
+    - agent: phase-manager
+      role: "Gerenciar execucao das 8 fases cronologicas"
+      specialization: "8-Phase Chronology"
+      phases:
+        - id: 1
+          name: "Preparacao"
+          timing: "6 semanas antes"
+          duration: "2-3 semanas"
+          deliverables: ["1000+ ads", "7 funnel pages", "30+ email sequences", "Infrastructure setup"]
+        - id: 2
+          name: "Kickoff Afiliados"
+          timing: "6 semanas antes"
+          duration: "Continuo"
+          deliverables: ["Affiliate list activation", "Tracking platform", "Affiliate resources"]
+        - id: 3
+          name: "Anuncio Publico"
+          timing: "4 semanas antes"
+          duration: "1 semana"
+          deliverables: ["Announcement video", "Initial ads $10K/day", "5 organic videos", "4-5 podcasts"]
+        - id: 4
+          name: "Aquecimento"
+          timing: "3 semanas antes"
+          duration: "3 semanas"
+          deliverables: ["Scale to 1M+ registrations", "Ads $50K->$250K/day", "7-7-7 omnipresence"]
+        - id: 5
+          name: "Evento Ao Vivo"
+          timing: "Dia D"
+          duration: "4+ horas"
+          deliverables: ["Live event execution", "War room command", "Real-time metrics"]
+        - id: 6
+          name: "Facilitacao de Vendas"
+          timing: "Durante evento"
+          duration: "24 horas"
+          deliverables: ["300 sellers active", ">15% conversion", "Support queue <30"]
+        - id: 7
+          name: "Cart Close"
+          timing: "3 dias apos"
+          duration: "72 horas"
+          deliverables: ["Recovery sequences", "Degraded offers", "Final urgency"]
+        - id: 8
+          name: "PR e Maximizacao"
+          timing: "Pos-lancamento"
+          duration: "2-4 semanas"
+          deliverables: ["Post-mortem 4 sessions", "Buyer onboarding", "Next launch preview"]
+
+    - agent: team-builder
+      role: "Estruturar e gerenciar os 10 papeis criticos"
+      specialization: "10 Critical Launch Roles"
+      roles:
+        - id: 1
+          name: "Dono do Projeto"
+          profile: "2+ launches 7-figures, systems thinker, fast decision-maker"
+          kpis: ["Revenue $8.5M+", "Timeline 95%+", "Budget +/-10%", "Team retention 100%"]
+        - id: 2
+          name: "Lider de Vendas"
+          profile: "5+ years inside sales, managed 50+ sellers"
+          kpis: ["Conversion >15%", "Ticket medio +50%", "Calls/hour/rep 10+", "Abandono <5%"]
+        - id: 3
+          name: "Dono do E-commerce"
+          profile: "DevOps, scaling, payment processing"
+          kpis: ["100K concurrent users", "500 transactions/sec", "Response <2s", "Error <0.1%"]
+        - id: 4
+          name: "Gerente de Midia"
+          profile: "Creative direction, video production"
+          kpis: ["1000+ ad variations", "Content calendar complete", "Live stream quality"]
+        - id: 5
+          name: "Gerente de Marketing"
+          profile: "Performance marketing, multi-channel"
+          kpis: ["1M+ registrations", "CPL <$10", "ROAS >3x", "Affiliate activation"]
+        - id: 6
+          name: "Gerente de Logistica"
+          profile: "Supply chain, fulfillment"
+          kpis: ["1.5M units ready", "SLA 24h processing", "Stock-out zero"]
+        - id: 7
+          name: "Lider de Suporte"
+          profile: "Customer experience, crisis management"
+          kpis: ["Wait <30s", "Resolution <5min", "First contact >80%", "NPS >8"]
+        - id: 8
+          name: "Montagem do Estudio"
+          profile: "AV production, technical setup"
+          kpis: ["LED wall 6x4m", "4 cameras", "3 platforms", "Backup generator"]
+        - id: 9
+          name: "Facilities do Evento"
+          profile: "Event production, hospitality"
+          kpis: ["Green room ready", "Catering schedule", "Speaker VIP protocol"]
+        - id: 10
+          name: "Infraestrutura Tech"
+          profile: "DevOps, cloud architecture, SRE"
+          kpis: ["Uptime 99.9%", "Load tested 10X", "Disaster recovery <5min"]
+
+  tier_2_judgment:
+    - agent: war-room-commander
+      role: "Comandar operacoes da sala de guerra durante D-Day"
+      responsibilities:
+        - "Real-time metrics monitoring"
+        - "Escalation protocol execution"
+        - "Team coordination"
+        - "Decision-making under pressure"
+      communication_hierarchy:
+        critical: "< 1 min - Phone + WhatsApp war room"
+        urgent: "< 15 min - Slack #emergency + SMS"
+        important: "< 1 hour - Slack channel + Email"
+        regular: "< 4 hours - Project management + Docs"
+      dashboard_metrics:
+        - metric: "Registros"
+          update: "Real-time"
+          alert: "<90% expected/hour"
+        - metric: "Conversao"
+          update: "5 min"
+          alert: "<1%"
+        - metric: "Faturamento"
+          update: "1 min"
+          alert: "<$X/min target"
+        - metric: "Support queue"
+          update: "Real-time"
+          alert: ">50 in queue"
+        - metric: "Uptime"
+          update: "Real-time"
+          alert: "<99.9%"
+
+    - agent: contingency-handler
+      role: "Gerenciar matriz de contingencia e planos de backup"
+      contingency_matrix:
+        - problem: "Site down"
+          probability: "Low"
+          impact: "Critical"
+          action: "Failover to backup"
+          escalation: "CEO in 5min"
+        - problem: "Payment fail"
+          probability: "Medium"
+          impact: "High"
+          action: "Activate backup gateway"
+          escalation: "CFO in 15min"
+        - problem: "Low conversion"
+          probability: "High"
+          impact: "Medium"
+          action: "Adjust copy/offer"
+          escalation: "CMO in 30min"
+        - problem: "Ad account ban"
+          probability: "Medium"
+          impact: "High"
+          action: "Switch to backup"
+          escalation: "CMO immediate"
+        - problem: "Supply shortage"
+          probability: "Low"
+          impact: "Medium"
+          action: "Communicate + compensate"
+          escalation: "COO in 1h"
+        - problem: "PR crisis"
+          probability: "Low"
+          impact: "High"
+          action: "Holding statement"
+          escalation: "CEO immediate"
+      escalation_protocol:
+        level_1: "Operational: Team Lead -> 15min solution"
+        level_2: "Tactical: Area Leader -> 30min solution"
+        level_3: "Strategic: Project Owner -> 1h solution"
+        level_4: "Critical: CEO/Board -> Immediate decision"
+
+    - agent: post-launch-analyst
+      role: "Conduzir post-mortem e documentar learnings"
+      post_mortem_framework:
+        session_1:
+          name: "NUMEROS"
+          duration: "2h"
+          focus: ["Revenue vs meta", "Custos vs budget", "Conversoes por canal", "LTV vs CAC"]
+        session_2:
+          name: "QUALITATIVO"
+          duration: "2h"
+          focus: ["O que funcionou", "O que nao funcionou", "O que fariamos diferente", "Surpresas"]
+        session_3:
+          name: "PESSOAS"
+          duration: "1h"
+          focus: ["MVPs", "Gaps de competencia", "Necessidades de treinamento", "Mudancas organizacionais"]
+        session_4:
+          name: "PROXIMOS PASSOS"
+          duration: "1h"
+          focus: ["Quick wins", "Mudancas estruturais", "SOPs", "Roadmap proximo lancamento"]
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  launch-coordinator:
+    id: launch-coordinator
+    title: "Launch Operations Orchestrator"
+    tier: orchestrator
+    icon: "🚀"
+
+    purpose: |
+      Orquestrar lancamentos completos usando o framework E.V.E.N.T.O,
+      coordenar as 8 fases cronologicas, e gerenciar os 10 papeis criticos.
+
+    core_frameworks:
+      - name: "E.V.E.N.T.O"
+        components: ["Escassez", "Valor", "Escada", "Network", "Tensao", "Oferta"]
+      - name: "8-Phase Chronology"
+        phases: 8
+      - name: "10 Critical Roles"
+        roles: 10
+      - name: "T.E.A.M Framework"
+        components: ["Talentos", "Escalabilidade", "Autonomia", "Metricas"]
+
+    decision_authority:
+      - "Launch size classification"
+      - "Resource allocation"
+      - "Timeline approval"
+      - "Go/No-Go decision"
+      - "Emergency pivots"
+
+    inputs:
+      - "Product/offer to launch"
+      - "Launch size target"
+      - "D-Day date"
+      - "Available resources"
+
+    outputs:
+      - "Complete launch playbook"
+      - "Team structure"
+      - "Timeline with milestones"
+      - "Contingency matrix"
+      - "KPIs and benchmarks"
+
+    success_metrics:
+      primary:
+        - name: "Revenue vs Target"
+          benchmark: ">100%"
+        - name: "ROI"
+          benchmark: ">131% (2.3X)"
+      secondary:
+        - "Timeline compliance >95%"
+        - "Budget variance <10%"
+        - "Show-up rate >30%"
+
+  launch-auditor:
+    id: launch-auditor
+    title: "Launch Readiness Auditor"
+    tier: tier_0
+    icon: "🔍"
+
+    purpose: |
+      Auditar preparacao do lancamento e identificar gaps criticos.
+      Score de 0-100 com Go/No-Go recommendation.
+
+    audit_checklist:
+      evento_framework:
+        - "Escassez defined (temporal, quantitative, exclusive)"
+        - "Valor stacked (10X minimum)"
+        - "Escada de compromisso mapped"
+        - "Network effect activated"
+        - "Tensao narrativa crafted"
+        - "Oferta irrecusavel designed"
+
+      phases_coverage:
+        - "Phase 1: Infrastructure ready"
+        - "Phase 2: Affiliates activated"
+        - "Phase 3: Announcement prepared"
+        - "Phase 4: Warmup scheduled"
+        - "Phase 5: Event structure defined"
+        - "Phase 6: Sales team trained"
+        - "Phase 7: Recovery sequences ready"
+        - "Phase 8: Post-mortem planned"
+
+      roles_staffing:
+        - "Project Owner hired"
+        - "Revenue Lead hired"
+        - "E-commerce Owner hired"
+        - "Media Manager hired"
+        - "Marketing Manager hired"
+        - "Logistics Manager hired"
+        - "Support Lead hired"
+        - "Studio Setup hired"
+        - "Facilities hired"
+        - "Tech Infrastructure hired"
+
+      contingency_matrix:
+        - "Site down plan"
+        - "Payment fail plan"
+        - "Low conversion plan"
+        - "Ad account ban plan"
+        - "Supply shortage plan"
+        - "PR crisis plan"
+
+    scoring_system:
+      90_100: "GO - Ready to launch"
+      70_89: "CONDITIONAL GO - Minor gaps to close"
+      50_69: "DELAY RECOMMENDED - Significant gaps"
+      0_49: "NO GO - Critical gaps, not ready"
+
+    outputs:
+      - "Readiness score"
+      - "Gap prioritization"
+      - "Risk assessment"
+      - "Go/No-Go recommendation"
+      - "Action plan for gaps"
+
+  evento-architect:
+    id: evento-architect
+    title: "E.V.E.N.T.O Framework Architect"
+    tier: tier_1
+    icon: "🎯"
+
+    purpose: |
+      Aplicar o framework E.V.E.N.T.O a cada elemento do lancamento.
+      Garantir que todos os 6 componentes estao presentes e otimizados.
+
+    frameworks:
+      escassez:
+        description: "Crie um momento unico e irrepetivel no tempo"
+        types:
+          temporal: "Janela de 24-72 horas"
+          quantitativa: "Limite real ou percebido de unidades"
+          exclusividade: "Acesso apenas para registrados"
+        applications:
+          produto_fisico: "Lote limitado da primeira producao"
+          servico: "Apenas X vagas com founder/criador"
+          b2b: "Piloto exclusivo para primeiros clientes"
+          local: "Soft opening apenas para lista VIP"
+        anti_pattern: "NUNCA usar escassez falsa"
+
+      valor_empilhado:
+        description: "Stack de ofertas que supera o preco em 10X"
+        architecture: |
+          Produto Core: Valor $X
+          + Bonus 1: Valor $Y (Remove objecao principal)
+          + Bonus 2: Valor $Z (Acelera resultado)
+          + Bonus 3: Valor $W (Seguranca/garantia)
+          + Surpresa: Priceless (So hoje)
+          = Total: $X+Y+Z+W
+          Preco Hoje: $X/3
+
+      escada_compromisso:
+        description: "Micro-compromissos levando a grande conversao"
+        flow: "Register (Free) -> Show Up -> Engage -> Consider -> Buy Core -> Upsell -> Advocate"
+
+      network_effect:
+        description: "Transforme compradores em promotores instantaneos"
+        tiers:
+          embaixadores: "Top 1% - Acesso antecipado + co-criacao"
+          advogados: "Top 10% - Preco especial + bonus exclusivos"
+          amplificadores: "Todos - Ganhe ao compartilhar"
+
+      tensao_narrativa:
+        description: "Historia com inicio, meio e climax emocional"
+        formula: |
+          "Ha [tempo] eu [problema doloroso].
+          Depois de [jornada/tentativas], descobri [solucao].
+          Agora, pela primeira vez, vou [grande revelacao]."
+        triggers: ["Curiosidade", "Identificacao", "Autoridade"]
+
+      oferta_irrecusavel:
+        description: "Inversao de risco + garantias impossiveis"
+        components: ["Valor 10X", "Garantia risk-reversal", "Escassez genuina", "Urgencia real"]
+
+  phase-manager:
+    id: phase-manager
+    title: "8-Phase Execution Manager"
+    tier: tier_1
+    icon: "📅"
+
+    purpose: |
+      Gerenciar execucao sequencial das 8 fases cronologicas.
+      Garantir que cada fase entrega seus deliverables no tempo.
+
+    phases:
+      phase_1:
+        name: "Preparacao"
+        timing: "6 semanas antes"
+        duration: "2-3 semanas"
+        objective: "Construir toda infraestrutura e ativos"
+        deliverables:
+          - "1000+ variacoes de ads + 2 hero ads"
+          - "7 paginas de funil"
+          - "30+ sequencias de email"
+          - "Infrastructure (LED Wall, estudio virtual)"
+          - "Load testing para 1M+ acessos"
+          - "10+ pessoas core contratadas"
+        triggers: ["Antecipacao", "Curiosidade"]
+        resources: "$500K setup"
+
+      phase_2:
+        name: "Kickoff Afiliados"
+        timing: "6 semanas antes"
+        duration: "Continuo ate lancamento"
+        objective: "Ativar exercito de promotores com gamificacao"
+        deliverables:
+          - "Email para lista de afiliados anteriores"
+          - "Plataforma de tracking configurada"
+          - "Recursos para afiliados (swipes, ads, videos)"
+        triggers: ["Competicao", "Exclusividade", "Recompensa"]
+        incentive_tiers:
+          top_10: "Jantar privado + Fireside chat + Workshop presencial"
+          top_50: "Workshop presencial + Q&A grupo"
+          10_signups: "Sorteio para workshop + Audiobook exclusivo"
+          all: "$100M Ads Folder + Blackbook + Gravacao HD"
+
+      phase_3:
+        name: "Anuncio Publico"
+        timing: "4 semanas antes"
+        duration: "1 semana"
+        objective: "Criar buzz e iniciar registros"
+        deliverables:
+          - "Video announcement no YouTube"
+          - "Ads iniciados com $10K/dia"
+          - "5 videos organicos"
+          - "4-5 podcasts estrategicos"
+        triggers: ["Prova Social", "Autoridade", "FOMO"]
+
+      phase_4:
+        name: "Aquecimento"
+        timing: "3 semanas antes"
+        duration: "3 semanas"
+        objective: "Escalar registros para 1M+ pessoas"
+        deliverables:
+          - "Escalonamento de ads $10K -> $250K/dia"
+          - "1M+ registros"
+          - "Regra 7-7-7 omnipresenca"
+        content_strategy:
+          week_3: "PROBLEMA - Dados, casos, controversias"
+          week_2: "POSSIBILIDADE - Demonstracoes, bastidores, teasers"
+          week_1: "PROMESSA - Countdown, social proof, urgencia"
+        metrics:
+          target: "1M+ registros, CAC < $3"
+        resources: "$3M budget de ads"
+
+      phase_5:
+        name: "Evento Ao Vivo"
+        timing: "Dia D"
+        duration: "4+ horas"
+        objective: "Converter massa em compradores"
+        structure:
+          block_1: "90 min - Webinar principal"
+          block_2: "60-90 min - 6 Guest speakers surpresa"
+          block_3: "30+ min - Giveaways e FAQ"
+        triggers: ["Reciprocidade", "Autoridade", "Escassez", "Prova Social"]
+        streaming:
+          - "YouTube Principal (publico geral)"
+          - "YouTube VIP (acesso exclusivo)"
+          - "Zoom Backup (contingencia)"
+          - "Gravacao 4K"
+
+      phase_6:
+        name: "Facilitacao de Vendas"
+        timing: "Durante evento"
+        duration: "24 horas"
+        objective: "Maximizar conversao com suporte"
+        team_structure:
+          senior_closers: "10 pessoas - high-ticket $5,998+"
+          mid_closers: "40 pessoas - mid-ticket $450"
+          sdrs_chat: "250 pessoas - core offer $30"
+        shifts:
+          morning: "06:00-14:00 (125 pessoas)"
+          peak: "12:00-20:00 (300 pessoas)"
+          night: "18:00-02:00 (125 pessoas)"
+        metrics:
+          conversion: ">15%"
+          queue_wait: "<30 calls"
+          abandonment: "<5%"
+
+      phase_7:
+        name: "Cart Close"
+        timing: "3 dias apos"
+        duration: "72 horas"
+        objective: "Urgencia final e recuperacao"
+        recovery_sequence:
+          during_event: "Email 'Voce saiu antes da melhor parte' + SMS extending offer"
+          day_1: "Oferta degradada + Depoimentos de compradores"
+          day_2: "Preco aumenta + Remove bonus"
+          day_3: "FECHANDO EM 1 HORA"
+        insight: "50-60% de todas as vendas acontecem nas ultimas 4 horas"
+
+      phase_8:
+        name: "PR e Maximizacao"
+        timing: "Pos-lancamento"
+        duration: "2-4 semanas"
+        objective: "Capitalizar em autoridade e recordes"
+        post_launch_actions:
+          immediate: "Onboarding memoravel, Surprise & delight, Pedido de depoimento"
+          first_week: "Caso de sucesso, Comunidade exclusiva, Upsell"
+          first_month: "Evento para compradores, Preview proximo lancamento, Programa embaixadores"
+
+  team-builder:
+    id: team-builder
+    title: "10 Critical Roles Builder"
+    tier: tier_1
+    icon: "👥"
+
+    purpose: |
+      Estruturar e dimensionar os 10 papeis criticos para o tamanho do lancamento.
+      Definir KPIs, hiring timeline, e protocolos de coordenacao.
+
+    sizing_by_launch:
+      micro:
+        registrations: "10K"
+        budget: "$10K"
+        team: "3 pessoas"
+        duration: "2 semanas"
+        roles: ["Project Owner (simplified)", "Sales/Marketing", "Tech/Support"]
+      small:
+        registrations: "50K"
+        budget: "$50K"
+        team: "5 pessoas"
+        duration: "3 semanas"
+        roles: ["Project Owner", "Sales Lead", "Marketing", "Tech", "Support"]
+      medium:
+        registrations: "250K"
+        budget: "$250K"
+        team: "10 pessoas"
+        duration: "4 semanas"
+        roles: "All 10 roles (1 per role)"
+      large:
+        registrations: "500K"
+        budget: "$1M"
+        team: "20 pessoas"
+        duration: "5 semanas"
+        roles: "All 10 roles (2 per role average)"
+      mega:
+        registrations: "1M+"
+        budget: "$3M+"
+        team: "30+ pessoas"
+        duration: "6 semanas"
+        roles: "All 10 roles (3+ per role)"
+
+    hiring_timeline:
+      s_12: "Aprovacao headcount e budget"
+      s_10: "Job descriptions e divulgacao"
+      s_8: "Primeira rodada entrevistas"
+      s_6: "Entrevistas finais e ofertas"
+      s_4: "Onboarding e treinamento"
+      s_2: "Simulacoes e role-play"
+      s_1: "War games e briefing final"
+
+    onboarding_program:
+      day_1: "CONTEXTO - Visao, historico, cultura, conhecer time"
+      day_2: "PRODUTO - Oferta, USPs, personas, competidores"
+      day_3: "PROCESSOS - Ferramentas, SOPs, workflows, comunicacao"
+      day_4: "PRATICA - Shadowing, exercicios, simulacoes, feedback"
+      day_5: "CERTIFICACAO - Teste, role-play avaliado, certificacao, go-live"
+
+  war-room-commander:
+    id: war-room-commander
+    title: "War Room Operations Commander"
+    tier: tier_2
+    icon: "🎖️"
+
+    purpose: |
+      Comandar operacoes da sala de guerra durante D-Day.
+      Monitorar metricas em tempo real e executar protocolo de escalacao.
+
+    war_room_essentials:
+      - "WAR ROOM BIBLE - Documento unico com tudo"
+      - "CONTACT MATRIX - Telefones, WhatsApp, responsabilidades"
+      - "DYNAMIC FAQ - Atualizado em tempo real"
+      - "SCRIPTS BOOK - Todos os scripts por situacao"
+      - "EMERGENCY PROCEDURES - Passo a passo para cada crise"
+      - "VENDOR CONTACTS - Fornecedores com SLAs"
+      - "LEGAL CLEARANCES - Aprovacoes e disclaimers"
+      - "BACKUP PLANS - Plano B para cada sistema"
+
+    d_day_timeline:
+      "05:00": "Chegada e setup inicial"
+      "06:00": "Checagem de todos os sistemas"
+      "07:00": "Briefing geral com 200+ pessoas"
+      "08:00": "Ensaio final"
+      "09:00": "INICIO DO EVENTO"
+      "12:00": "Status update"
+      "15:00": "Numeros parciais"
+      "18:00": "Ajustes evening"
+      "21:00": "Wrap up e preparacao dia seguinte"
+
+    meeting_cadence:
+      during_launch:
+        - "06:00 - Pre-flight check (30min)"
+        - "09:00 - Go-live briefing (15min)"
+        - "12:00 - Status update (10min)"
+        - "15:00 - Numeros parciais (10min)"
+        - "18:00 - Ajustes evening (15min)"
+        - "21:00 - Wrap-up do dia (30min)"
+        - "00:00 - Overnight briefing (15min)"
+
+    command_center_dashboard:
+      metrics:
+        - name: "Registros"
+          update: "Real-time"
+          visual: "Counter"
+          alert: "<90% expected/hour"
+        - name: "Conversao"
+          update: "5 min"
+          visual: "Grafico"
+          alert: "<1%"
+        - name: "Faturamento"
+          update: "1 min"
+          visual: "Ticker"
+          alert: "<target/min"
+        - name: "Support Queue"
+          update: "Real-time"
+          visual: "Queue"
+          alert: ">50 in queue"
+        - name: "Uptime"
+          update: "Real-time"
+          visual: "Status"
+          alert: "<99.9%"
+        - name: "Ad Spend"
+          update: "15 min"
+          visual: "Burn rate"
+          alert: ">110% budget/hour"
+        - name: "Refunds"
+          update: "30 min"
+          visual: "Numero"
+          alert: ">2%"
+
+  contingency-handler:
+    id: contingency-handler
+    title: "Contingency & Crisis Manager"
+    tier: tier_2
+    icon: "🚨"
+
+    purpose: |
+      Gerenciar matriz de contingencia e executar planos de backup.
+      Protocolo de escalacao em 4 niveis.
+
+    contingency_matrix:
+      - problem: "Site down"
+        probability: "Baixa"
+        impact: "Critico"
+        immediate_action: "Failover para backup"
+        responsible: "Tech Lead"
+        escalation: "CEO em 5min"
+      - problem: "Payment fail"
+        probability: "Media"
+        impact: "Alto"
+        immediate_action: "Ativar gateway backup"
+        responsible: "Tech + Finance"
+        escalation: "CFO em 15min"
+      - problem: "Low conversion"
+        probability: "Alta"
+        impact: "Medio"
+        immediate_action: "Ajustar copy/oferta"
+        responsible: "Revenue + Product"
+        escalation: "CMO em 30min"
+      - problem: "Ad account ban"
+        probability: "Media"
+        impact: "Alto"
+        immediate_action: "Switch para backup"
+        responsible: "Marketing"
+        escalation: "CMO imediato"
+      - problem: "Supply shortage"
+        probability: "Baixa"
+        impact: "Medio"
+        immediate_action: "Comunicar + compensar"
+        responsible: "Ops + CS"
+        escalation: "COO em 1h"
+      - problem: "PR crisis"
+        probability: "Baixa"
+        impact: "Alto"
+        immediate_action: "Holding statement"
+        responsible: "PR + Legal"
+        escalation: "CEO imediato"
+
+    escalation_protocol:
+      level_1:
+        name: "Operacional"
+        flow: "Problema -> Team Lead -> Solucao em 15min"
+      level_2:
+        name: "Tatico"
+        flow: "Team Lead -> Lider de Area -> Solucao em 30min"
+      level_3:
+        name: "Estrategico"
+        flow: "Lider de Area -> Project Owner -> Solucao em 1h"
+      level_4:
+        name: "Critico"
+        flow: "Project Owner -> CEO/Board -> Decisao imediata"
+
+    disaster_recovery:
+      level_1: "CDN alternativo (30 seg)"
+      level_2: "Servidor backup (2 min)"
+      level_3: "Regiao alternativa (5 min)"
+      level_4: "Processamento manual (10 min)"
+      level_5: "Pagina estatica emergencial"
+
+  post-launch-analyst:
+    id: post-launch-analyst
+    title: "Post-Launch Analysis Specialist"
+    tier: tier_2
+    icon: "📊"
+
+    purpose: |
+      Conduzir post-mortem estruturado e documentar learnings.
+      Garantir que cada lancamento alimenta o proximo.
+
+    post_mortem_framework:
+      session_1_numbers:
+        duration: "2h"
+        agenda:
+          - "Revenue vs Meta"
+          - "Custos vs Budget"
+          - "Conversoes por canal"
+          - "LTV vs CAC"
+          - "KPIs por fase"
+          - "Metricas por papel"
+
+      session_2_qualitative:
+        duration: "2h"
+        agenda:
+          - "O que funcionou?"
+          - "O que nao funcionou?"
+          - "O que fariamos diferente?"
+          - "Surpresas positivas"
+          - "Surpresas negativas"
+          - "Feedback do time"
+
+      session_3_people:
+        duration: "1h"
+        agenda:
+          - "MVPs do lancamento"
+          - "Gaps de competencia"
+          - "Necessidades de treinamento"
+          - "Mudancas organizacionais"
+          - "Score cards por papel"
+          - "Bonuses e reconhecimento"
+
+      session_4_next_steps:
+        duration: "1h"
+        agenda:
+          - "Quick wins para implementar"
+          - "Mudancas estruturais necessarias"
+          - "SOPs a criar/atualizar"
+          - "Roadmap proximo lancamento"
+          - "Calendario tentativo"
+          - "Recursos necessarios"
+
+    score_card_template: |
+      NOME: [Nome]
+      FUNCAO: [Cargo]
+      PERIODO: [Lancamento X]
+
+      KPIs PRIMARIOS (70% peso):
+      - KPI 1: [Meta] vs [Realizado] = ___%
+      - KPI 2: [Meta] vs [Realizado] = ___%
+      - KPI 3: [Meta] vs [Realizado] = ___%
+
+      KPIs SECUNDARIOS (20% peso):
+      - Colaboracao: [1-10]
+      - Proatividade: [1-10]
+      - Problem-solving: [1-10]
+
+      WILD CARDS (10% peso):
+      - Ideias implementadas: ___
+      - Crises resolvidas: ___
+      - Acima e alem: ___
+
+      SCORE FINAL: ___/100
+      RANKING: ___/[Total team]
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # E.V.E.N.T.O Framework
+  - task: "Design escassez strategy"
+    executor: Human
+    automation: LOW
+    guardrails: "Must be genuine scarcity, never fake"
+
+  - task: "Build valor stack"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Must exceed 10X price"
+
+  - task: "Map escada de compromisso"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Each step leads to next"
+
+  - task: "Activate network effect"
+    executor: Hybrid
+    automation: HIGH
+    guardrails: "Affiliate tracking platform required"
+
+  - task: "Craft tensao narrativa"
+    executor: Human
+    automation: LOW
+    guardrails: "Must follow formula"
+
+  - task: "Design oferta irrecusavel"
+    executor: Human
+    automation: LOW
+    guardrails: "Risk reversal required"
+
+  # 8 Phases Execution
+  - task: "Phase 1: Produce 1000+ ads"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "10 headlines x 5 copies x 20 formats x 5 CTAs"
+
+  - task: "Phase 2: Activate affiliates"
+    executor: Hybrid
+    automation: HIGH
+    guardrails: "Tracking platform configured"
+
+  - task: "Phase 3: Launch announcement"
+    executor: Human
+    automation: LOW
+    guardrails: "Video + ads + podcasts"
+
+  - task: "Phase 4: Scale ads"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "$10K -> $250K/day scaling"
+
+  - task: "Phase 5: Execute live event"
+    executor: Human
+    automation: LOW
+    guardrails: "4+ hours, 3 blocks"
+
+  - task: "Phase 6: Manage sales floor"
+    executor: Human
+    automation: LOW
+    guardrails: "300 sellers, 3 shifts"
+
+  - task: "Phase 7: Cart close recovery"
+    executor: Hybrid
+    automation: HIGH
+    guardrails: "72h sequence automated"
+
+  - task: "Phase 8: Post-mortem"
+    executor: Human
+    automation: LOW
+    guardrails: "4 sessions framework"
+
+  # War Room Operations
+  - task: "Monitor real-time metrics"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Dashboard updated per second"
+
+  - task: "Execute escalation protocol"
+    executor: Human
+    automation: LOW
+    guardrails: "4-level protocol"
+
+  - task: "Activate contingency plans"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Pre-defined playbooks"
+
+  - task: "Coordinate team communication"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Hierarchy of urgency"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Launch Readiness Gate"
+    transition: "Planning -> Execution"
+    condition: "readiness_score >= 70"
+    type: blocking
+    failure_action: "Delay launch, close gaps"
+
+  QG-002:
+    name: "E.V.E.N.T.O Completeness Gate"
+    transition: "Framework Design -> Announcement"
+    condition: "all_6_components_defined == true"
+    type: blocking
+    failure_action: "Complete missing components"
+
+  QG-003:
+    name: "Team Readiness Gate"
+    transition: "Hiring -> Training"
+    condition: "10_roles_filled AND training_complete"
+    type: blocking
+    failure_action: "Expedite hiring or training"
+
+  QG-004:
+    name: "Tech Load Test Gate"
+    transition: "Setup -> Launch"
+    condition: "load_test_passed_10x"
+    type: blocking
+    failure_action: "Scale infrastructure"
+
+  QG-005:
+    name: "Contingency Test Gate"
+    transition: "Preparation -> D-Day"
+    condition: "all_contingencies_tested"
+    type: warning
+    failure_action: "Complete contingency drills"
+
+  QG-006:
+    name: "Registration Target Gate"
+    transition: "Warmup -> Event"
+    condition: "registrations >= target * 0.9"
+    type: warning
+    failure_action: "Increase ad spend or extend warmup"
+
+  QG-007:
+    name: "Post-Mortem Completion Gate"
+    transition: "Launch -> Next Launch Planning"
+    condition: "4_sessions_complete AND learnings_documented"
+    type: blocking
+    failure_action: "Complete post-mortem before next launch"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  launch_planning_workflow:
+    trigger: "New launch requested"
+    steps:
+      - step: 1
+        agent: sizing-analyst
+        action: "Classify launch size (Micro/Small/Medium/Large/Mega)"
+        output: "Size classification"
+
+      - step: 2
+        agent: evento-architect
+        action: "Apply E.V.E.N.T.O framework"
+        output: "Complete framework design"
+
+      - step: 3
+        agent: phase-manager
+        action: "Create 8-phase timeline"
+        output: "Timeline with milestones"
+
+      - step: 4
+        agent: team-builder
+        action: "Define 10 roles for size"
+        output: "Team structure"
+
+      - step: 5
+        agent: contingency-handler
+        action: "Build contingency matrix"
+        output: "Complete contingency plan"
+
+      - step: 6
+        agent: launch-auditor
+        action: "Audit readiness"
+        output: "Readiness score and Go/No-Go"
+
+  execution_workflow:
+    trigger: "Go decision approved"
+    phases:
+      - phase: "Preparation"
+        duration: "2-3 weeks"
+        agents: ["team-builder", "evento-architect"]
+        deliverables: ["Infrastructure", "Ads", "Funnels", "Emails"]
+
+      - phase: "Affiliate Kickoff"
+        duration: "Continuous"
+        agents: ["phase-manager"]
+        deliverables: ["Affiliate activation", "Tracking", "Resources"]
+
+      - phase: "Announcement"
+        duration: "1 week"
+        agents: ["phase-manager"]
+        deliverables: ["Video", "Ads", "Podcasts"]
+
+      - phase: "Warmup"
+        duration: "3 weeks"
+        agents: ["phase-manager"]
+        deliverables: ["1M+ registrations", "Ad scaling"]
+
+      - phase: "Live Event"
+        duration: "4+ hours"
+        agents: ["war-room-commander"]
+        deliverables: ["Event execution", "Real-time coordination"]
+
+      - phase: "Sales Facilitation"
+        duration: "24 hours"
+        agents: ["war-room-commander"]
+        deliverables: ["Sales conversion", "Support"]
+
+      - phase: "Cart Close"
+        duration: "72 hours"
+        agents: ["phase-manager"]
+        deliverables: ["Recovery", "Final urgency"]
+
+      - phase: "PR & Maximization"
+        duration: "2-4 weeks"
+        agents: ["post-launch-analyst"]
+        deliverables: ["Post-mortem", "Learnings", "Next launch preview"]
+
+  contingency_workflow:
+    trigger: "Problem detected"
+    steps:
+      - step: 1
+        agent: war-room-commander
+        action: "Identify problem severity"
+        output: "Severity classification"
+
+      - step: 2
+        agent: contingency-handler
+        action: "Look up contingency plan"
+        output: "Pre-defined response"
+
+      - step: 3
+        agent: war-room-commander
+        action: "Execute immediate action"
+        output: "Action taken"
+
+      - step: 4
+        agent: contingency-handler
+        action: "Escalate if needed"
+        condition: "If not resolved in SLA"
+
+      - step: 5
+        agent: war-room-commander
+        action: "Document and report"
+        output: "Incident report"
+
+  post_launch_workflow:
+    trigger: "Launch completed"
+    steps:
+      - step: 1
+        agent: post-launch-analyst
+        action: "Session 1: Numbers analysis"
+        duration: "2h"
+
+      - step: 2
+        agent: post-launch-analyst
+        action: "Session 2: Qualitative review"
+        duration: "2h"
+
+      - step: 3
+        agent: post-launch-analyst
+        action: "Session 3: People assessment"
+        duration: "1h"
+
+      - step: 4
+        agent: post-launch-analyst
+        action: "Session 4: Next steps"
+        duration: "1h"
+
+      - step: 5
+        agent: launch-coordinator
+        action: "Document learnings for replicable system"
+        output: "Updated SOPs and playbooks"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    revenue:
+      formula: "Total sales"
+      target: ">=100% of goal"
+      example: "$8.5M for Mega launch"
+
+    roi:
+      formula: "(Revenue - Investment) / Investment"
+      target: ">=131% (2.3X)"
+
+  secondary:
+    registrations:
+      target_by_size:
+        micro: "10K"
+        small: "50K"
+        medium: "250K"
+        large: "500K"
+        mega: "1M+"
+
+    show_up_rate:
+      formula: "Show ups / Registrations"
+      target: ">30%"
+
+    conversion_rate:
+      formula: "Sales / Show ups"
+      target: ">1%"
+      by_type:
+        produto_fisico_b2c: "0.5-2%"
+        servico_premium: "0.3-1%"
+        b2b_enterprise: "0.1-0.5%"
+        local_experiencia: "1-3%"
+
+  operational:
+    timeline_compliance:
+      target: ">95%"
+    budget_variance:
+      target: "<10%"
+    team_retention:
+      target: "100%"
+    contingency_response:
+      target: "Within SLA"
+
+# ===============================================================================
+# TECHNOLOGY REQUIREMENTS
+# ===============================================================================
+
+technology:
+  required:
+    - tool: "Funnel Builder"
+      purpose: "7 funnel pages"
+      examples: ["Shopify", "ClickFunnels", "WordPress"]
+
+    - tool: "Email Platform"
+      purpose: "30+ sequences, 1M/day capacity"
+      examples: ["ActiveCampaign", "Klaviyo", "Mailchimp"]
+
+    - tool: "Payment Gateway"
+      purpose: "500 transactions/sec, multiple backups"
+      examples: ["Stripe", "PayPal", "Hotmart"]
+
+    - tool: "Affiliate Tracking"
+      purpose: "Track and attribute affiliate sales"
+      examples: ["First Promoter", "Tapfiliate", "Post Affiliate Pro"]
+
+    - tool: "Live Streaming"
+      purpose: "3 platforms simultaneously"
+      examples: ["YouTube", "Zoom", "StreamYard"]
+
+    - tool: "CDN/DDoS Protection"
+      purpose: "100K+ concurrent users"
+      examples: ["CloudFlare", "AWS CloudFront"]
+
+    - tool: "CRM"
+      purpose: "Lead management, sales tracking"
+      examples: ["HubSpot", "Pipedrive", "Monday"]
+
+    - tool: "Analytics Dashboard"
+      purpose: "Real-time metrics"
+      examples: ["Google Data Studio", "Looker", "Mixpanel"]
+
+  recommended:
+    - tool: "Auto Dialer"
+      purpose: "300 seller efficiency"
+
+    - tool: "AI Chatbot"
+      purpose: "70% support deflection"
+
+    - tool: "SMS Platform"
+      purpose: "High open rate communication"
+
+# ===============================================================================
+# CULTURE CODE
+# ===============================================================================
+
+culture_code:
+  principles:
+    - principle: "RESULTADO > EGO"
+      meaning: "Decisoes pelo lancamento, nao por politica"
+
+    - principle: "TRANSPARENCIA RADICAL"
+      meaning: "Problemas na mesa, solucoes em conjunto"
+
+    - principle: "VELOCIDADE > PERFEICAO"
+      meaning: "70% pronto hoje > 100% amanha"
+
+    - principle: "OWNERSHIP TOTAL"
+      meaning: "Seu problema = Meu problema"
+
+    - principle: "ENERGIA INFINITA"
+      meaning: "Cansaco e temporario, resultado e forever"
+
+    - principle: "CELEBRATE SMALL WINS"
+      meaning: "Cada vitoria importa e energiza"
+
+    - principle: "FAIL FAST, LEARN FASTER"
+      meaning: "Erro nao e problema, nao aprender e"
+
+  mantra: |
+    "Clareza no papel, obsessao na execucao, resultado extraordinario.
+    Cada pessoa sabe exatamente o que fazer, quando fazer e como fazer.
+    O sucesso e a soma de pequenas execucoes perfeitas."
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 10
+  executor_matrix_complete: true
+  quality_gates_defined: 7
+  workflows_documented: 4
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

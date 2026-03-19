@@ -1,0 +1,447 @@
+# New Affiliate Funnel Workflow
+# Pipeline para criar funil de afiliados completo
+# Source: @architect research — Brunson Value Ladder + Chaperon SOS + Bridge Funnel
+# Version: 1.0.0
+
+id: wf-new-affiliate-funnel
+name: "New Affiliate Funnel"
+version: "1.0.0"
+duration: "1-2 weeks"
+description: |
+  Workflow completo para criar funil de afiliados: da Value Ladder
+  ao bridge page + email automation.
+
+  FILOSOFIA: "O afiliado não é dono da escada, mas controla a entrada."
+
+  RESULTADO: Funil operacional com opt-in, bridge page, email sequence e automação.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Criar funil de afiliados do zero"
+  - "Montar bridge funnel para produto específico"
+  - "Ativar email marketing para lista existente"
+
+decision_matrix_fit:
+  complexity: medium-high
+  agents_required: 3
+  estimated_duration: "1-2 weeks"
+  user_involvement: "medium"
+  prerequisites:
+    - "Produto de afiliado selecionado"
+    - "Plataforma de email marketing (ActiveCampaign recomendada)"
+    - "Landing page builder ou site WordPress"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: funnel-architect
+      role: "Value ladder, funil design, bridge page, lead magnet"
+      phases: [0, 1, 2, 3]
+
+    - agent: email-nurture
+      role: "Soap Opera Sequence, email automation"
+      phases: [1, 4]
+
+  synergies:
+    - agents: [funnel-architect, email-nurture]
+      pattern: "Funnel captures lead, Email nurtures to conversion"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 0: VALUE LADDER MAPPING
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-0
+    name: "Value Ladder"
+    days: "Days 1-2"
+    tier: 0
+    description: |
+      Mapeamento da Value Ladder para o contexto de afiliados.
+      Bait (lead magnet) → Frontend (tripwire $7-27) → Core (main affiliate product)
+      → Backend (premium/recurring).
+
+      PRINCÍPIO (Brunson): "Cada degrau aumenta valor E comprometimento."
+
+    agent: funnel-architect
+
+    tasks:
+      - task_id: T0.1
+        name: "Mapear Value Ladder"
+        task_ref: design-value-ladder.md
+        required: true
+        description: "Bait → Frontend → Core → Backend para afiliados"
+        output: "value_ladder.yaml"
+
+    inline_structures:
+      value_ladder_affiliate:
+        levels:
+          - id: BAIT
+            name: "Lead Magnet (Bait)"
+            price: "Grátis"
+            purpose: "Capturar email + demonstrar expertise"
+            examples:
+              - "Checklist PDF (ex: '10 Melhores Produtos para [Nicho]')"
+              - "Mini-curso email (3-5 dias)"
+              - "Planilha/calculadora útil"
+              - "Guia comparativo de produtos"
+            conversion_target: "25-45% opt-in rate"
+
+          - id: FRONTEND
+            name: "Tripwire"
+            price: "R$7-47 (ou comissão de produto low-ticket)"
+            purpose: "Converter lead em comprador, offset ad spend"
+            examples:
+              - "Produto digital low-ticket próprio"
+              - "Affiliate offer low-ticket na thank you page"
+            conversion_target: "5-15% da lista"
+
+          - id: CORE
+            name: "Main Affiliate Offer"
+            price: "R$97-497 (comissão 30-60%)"
+            purpose: "Revenue principal, produto que resolve o problema core"
+            conversion_target: "1-5% da lista"
+
+          - id: BACKEND
+            name: "Premium / Recurring"
+            price: "R$497+ ou assinatura mensal"
+            purpose: "LTV, receita recorrente"
+            examples:
+              - "Mentoria ou mastermind"
+              - "Software SaaS affiliate"
+              - "Membership com comissão recorrente"
+            conversion_target: "0.5-2% da lista"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Value Ladder Mapped"
+      criteria:
+        - "4 níveis definidos com produtos/ofertas"
+        - "Preços e comissões estimadas"
+        - "Flow lógico do lead magnet ao backend"
+      human_review: true
+      message: "Revise a Value Ladder antes de criar assets."
+      veto_conditions:
+        - condition: "Sem lead magnet definido"
+          action: "BLOCK — Funil sem entrada não funciona"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 1: LEAD MAGNET + OPT-IN
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-1
+    name: "Lead Magnet"
+    days: "Days 3-5"
+    tier: 1
+    description: |
+      Criação do lead magnet + opt-in page.
+      Dedicated opt-in > homepage. Thank you page redirect.
+
+      PRINCÍPIO: "Lead magnet resolve UM problema específico, rápido."
+
+    agents:
+      primary: funnel-architect
+      secondary: email-nurture
+
+    tasks:
+      - task_id: T1.1
+        name: "Design Lead Magnet"
+        task_ref: design-lead-magnet.md
+        required: true
+        agent: funnel-architect
+        description: "Lead magnet + opt-in page + thank you page"
+        output: "lead_magnet.yaml"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Lead Magnet Ready"
+      criteria:
+        - "Lead magnet criado e entregável"
+        - "Opt-in page com headline + benefícios + form"
+        - "Thank you page com redirect ou tripwire"
+        - "Mobile-first design (>65% mobile BR)"
+      human_review: true
+      message: "Revise lead magnet e opt-in page antes de publicar."
+      veto_conditions:
+        - condition: "Lead magnet genérico sem valor específico"
+          action: "BLOCK — Refazer com foco em problema específico"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 2: FUNNEL DESIGN
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-2
+    name: "Funnel Design"
+    days: "Days 6-8"
+    tier: 1
+    description: |
+      Design do funil completo: tipo + páginas + fluxo.
+
+      TIPOS:
+      1. Bridge Funnel (mais versátil): opt-in → bridge pre-sell → merchant
+      2. Review Funnel: SEO review → comparison → product page
+      3. Lead Magnet Funnel: recurso grátis → email 5-21 dias → pitch
+
+    agent: funnel-architect
+
+    tasks:
+      - task_id: T2.1
+        name: "Design Affiliate Funnel"
+        task_ref: design-affiliate-funnel.md
+        required: true
+        description: "Funil completo opt-in → conversão"
+        output: "funnel_design.yaml"
+
+      - task_id: T2.2
+        name: "Build Bridge Page"
+        task_ref: build-bridge-page.md
+        required: true
+        description: "Bridge/pre-sell page com story + credibility + soft CTA"
+        output: "bridge_page.md"
+
+    inline_structures:
+      bridge_page_anatomy:
+        sections:
+          - id: HOOK
+            name: "Hook / Headline"
+            purpose: "Capturar atenção, alinhar com o problema"
+            example: "Descobri como [RESULTADO] sem [OBJEÇÃO] — e quero compartilhar."
+
+          - id: STORY
+            name: "Story / Pre-sell"
+            purpose: "Construir rapport, demonstrar que entende o problema"
+            elements:
+              - "Situação antes (relatable)"
+              - "Descoberta / turning point"
+              - "Resultado após usar [produto]"
+
+          - id: CREDIBILITY
+            name: "Social Proof / Credibilidade"
+            purpose: "Eliminar ceticismo"
+            elements:
+              - "Resultados pessoais ou de outros"
+              - "Screenshots, números reais"
+              - "Disclosure de afiliado (obrigatório)"
+
+          - id: CTA
+            name: "Call to Action"
+            purpose: "Transição suave para merchant"
+            types:
+              cold_traffic: "CTA suave, mais contexto"
+              warm_traffic: "CTA direto, menos friction"
+
+      hot_vs_cold_bridge:
+        cold:
+          traffic_source: "SEO, ads, social (desconhecido)"
+          bridge_length: "Longo — story completa, case study"
+          credibility: "Alta — precisa construir confiança"
+          cta: "Suave — 'veja mais detalhes'"
+        hot:
+          traffic_source: "Email list, seguidores (já conhecem)"
+          bridge_length: "Curto — 1-2 parágrafos"
+          credibility: "Mínima — já confia"
+          cta: "Direto — 'clique aqui para aproveitar'"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Funnel Designed"
+      criteria:
+        - "Tipo de funil selecionado e justificado"
+        - "Todas as páginas wireframed"
+        - "Bridge page com story + credibility + CTA"
+        - "Disclosure de afiliado presente"
+        - "Mobile-optimized"
+      human_review: true
+      message: "Revise o funil completo antes de ativar automação."
+      veto_conditions:
+        - condition: "Sem disclosure de afiliado"
+          action: "BLOCK — Obrigatório por lei (FTC/CONAR)"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 3: FUNNEL BUILD
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-3
+    name: "Funnel Build"
+    days: "Days 8-10"
+    tier: 1
+    description: |
+      Construção e publicação das páginas do funil.
+      Opt-in → Thank You → Bridge → Merchant redirect.
+
+    agent: funnel-architect
+
+    tasks:
+      - task_id: T3.1
+        name: "Construir e Publicar Funil"
+        required: true
+        description: "Build all pages, connect tracking, test flow"
+        output: "funnel_live.yaml"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Funnel Live"
+      criteria:
+        - "Todas as páginas publicadas"
+        - "Tracking UTM configurado"
+        - "Flow testado end-to-end (opt-in → merchant)"
+        - "Pixel/tracking instalado"
+      human_review: false
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 4: EMAIL AUTOMATION
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-4
+    name: "Email Automation"
+    days: "Days 10-14"
+    tier: 2
+    description: |
+      Setup de automação de email: Soap Opera Sequence + triggers.
+
+      CHAPERON SOS:
+      Email 1 (D0): Set the stage — entregar lead magnet + tease drama
+      Email 2 (D1): High drama — problema/tensão
+      Email 3 (D2): Epiphany — descoberta (intro affiliate)
+      Email 4 (D3): Hidden benefits — valor secundário
+      Email 5 (D4): Urgency + CTA
+
+      RESULTADO: $126K/30 dias com 1000 subscribers (Chaperon case).
+
+    agent: email-nurture
+
+    tasks:
+      - task_id: T4.1
+        name: "Setup Email Automation"
+        task_ref: setup-email-automation.md
+        required: true
+        description: "Triggers, segments, flows conectados ao funil"
+        output: "email_automation.yaml"
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Email Automation Live"
+      criteria:
+        - "Welcome sequence 5-7 emails configurada"
+        - "Triggers por opt-in, click, purchase ativos"
+        - "SPF/DKIM/DMARC configurados"
+        - "Unsubscribe link funcional"
+        - "LGPD compliance"
+      human_review: true
+      message: "Revise automação de email antes de ativar tráfego."
+      veto_conditions:
+        - condition: "Sem SPF/DKIM configurado"
+          action: "WARNING — Emails irão para spam"
+        - condition: "Sem unsubscribe"
+          action: "BLOCK — Violação legal (CAN-SPAM/LGPD)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "affiliates-chief"
+    - document_reason: true
+    - require_human_override: true
+
+  common_failures:
+    - failure: "Opt-in rate < 15%"
+      phase: 1
+      resolution: "Revisar headline + lead magnet value proposition"
+
+    - failure: "Bridge CTR < 5%"
+      phase: 2
+      resolution: "Rewrite story, adicionar social proof"
+
+    - failure: "Email deliverability < 90%"
+      phase: 4
+      resolution: "Verificar SPF/DKIM, warm up domain"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-new-affiliate-funnel"
+      status: "completed"
+      outputs:
+        - "value_ladder.yaml"
+        - "lead_magnet.yaml"
+        - "funnel_design.yaml"
+        - "bridge_page.md"
+        - "email_automation.yaml"
+
+  checkpoint:
+    type: "checkpoint_reached"
+    payload:
+      phase_id: "PHASE-{N}"
+      status: "awaiting_review"
+
+  blocked:
+    type: "workflow_blocked"
+    payload:
+      phase_id: "PHASE-{N}"
+      reason: "veto_condition_triggered"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  phase_0:
+    - "value_ladder.yaml"
+  phase_1:
+    - "lead_magnet.yaml"
+  phase_2:
+    - "funnel_design.yaml"
+    - "bridge_page.md"
+  phase_3:
+    - "funnel_live.yaml"
+  phase_4:
+    - "email_automation.yaml"
+
+  final_deliverable:
+    name: "Affiliate Funnel Package"
+    location: "outputs/funnels/{funnel_id}/"
+    contents:
+      - "README.md — Overview do funil"
+      - "value_ladder.yaml — Value Ladder mapping"
+      - "funnel_design.yaml — Design completo"
+      - "bridge_page.md — Bridge page copy"
+      - "email_automation.yaml — Email sequences"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-18"
+  author: "squad-architect"
+  source_frameworks:
+    - "Russell Brunson Value Ladder"
+    - "Andre Chaperon Soap Opera Sequence"
+    - "Bridge Funnel Architecture"
+    - "Autoresponder Madness"
+  priority: 1
+  quality_gate: "SC_WFL_001"

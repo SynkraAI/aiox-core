@@ -1,0 +1,1230 @@
+# Downsell Strategy Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Modelos: Seção 4 Ofertas de Downsell - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: downsell-strategy
+  purpose: "Capture revenue from customers who said NO by adjusting offers to find the best value-budget match"
+  domain: sales-recovery
+  source_playbook: "$100M Modelos: Seção 4 Ofertas de Downsell"
+
+  core_principle: |
+    "Any offer you make after someone says no is a downsell."
+    Two levers: HOW they pay (payment plans, trials) and WHAT they get (features)
+    Target: Double close rates (25% → 50%+) through systematic downselling
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIER STRUCTURE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+tier_structure:
+  orchestrator:
+    - agent: downsell-coordinator
+      role: "Route rejected leads to appropriate downsell process"
+      decisions:
+        - "Determine primary objection type"
+        - "Select appropriate downsell process"
+        - "Escalate complex cases"
+      kpis:
+        - "Downsell conversion rate"
+        - "30-day cash collected"
+        - "Customer lifetime value by entry method"
+
+  tier_0_diagnosis:
+    - agent: objection-classifier
+      role: "Identify the true reason for rejection"
+      inputs:
+        - "Customer rejection statement"
+        - "Previous offer details"
+        - "Customer qualification data"
+      outputs:
+        - "Primary objection type (price/value/timing)"
+        - "Recommended downsell process"
+        - "Desire level assessment"
+
+    - agent: payment-analyzer
+      role: "Assess customer payment capacity and preferences"
+      inputs:
+        - "Payment history"
+        - "Stated budget constraints"
+        - "Pay schedule information"
+      outputs:
+        - "Optimal payment structure"
+        - "Risk assessment"
+        - "Collection probability"
+
+  tier_1_execution:
+    - agent: payment-plan-specialist
+      role: "Execute 7-step payment plan downsell process"
+      specialization: "Process I: Payment Plan Downsells"
+      techniques:
+        - "Prepay discount framing"
+        - "Third-party financing presentation"
+        - "Paycheck alignment strategy"
+        - "Desire check gate"
+        - "Seesaw downselling"
+
+    - agent: trial-architect
+      role: "Structure and sell penalty trials"
+      specialization: "Process II: Trial com Penalidade"
+      capabilities:
+        - "Trial criteria design"
+        - "Penalty fee structuring"
+        - "Card capture process"
+        - "Commitment extraction"
+        - "Check-in scheduling"
+
+    - agent: feature-sculptor
+      role: "Craft feature-reduced offers that maintain value"
+      specialization: "Process III: Feature Downsells"
+      techniques:
+        - "Strategic feature removal"
+        - "Quality tier adjustments"
+        - "Quantity reduction offers"
+        - "DIY alternative presentation"
+
+  tier_2_judgment:
+    - agent: value-reframer
+      role: "Help customers see value through strategic feature removal"
+      insights:
+        - "Remove high-value features first to demonstrate worth"
+        - "Use downsell to re-upsell to main offer"
+        - "Match removed features to customer preferences"
+
+    - agent: trust-guardian
+      role: "Maintain pricing integrity and customer trust"
+      responsibilities:
+        - "Prevent pure discounting"
+        - "Ensure consistent pricing"
+        - "Monitor customer sentiment"
+        - "Flag trust-eroding patterns"
+
+    - agent: collection-optimizer
+      role: "Maximize payment plan success and minimize defaults"
+      focus_areas:
+        - "Payment timing optimization"
+        - "Default prediction"
+        - "Recovery strategies"
+        - "Churn prevention"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENT DEFINITIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents:
+  downsell-coordinator:
+    id: downsell-coordinator
+    title: "Downsell Strategy Orchestrator"
+    tier: orchestrator
+    icon: "🔄"
+
+    purpose: |
+      Route rejected customers to the optimal downsell process based on their
+      objection type. Maximize recovery rate while maintaining trust and integrity.
+
+    core_frameworks:
+      - name: "Three Downsell Processes"
+        components: ["Payment Plans", "Penalty Trials", "Feature Downsells"]
+      - name: "Six Rules of Downselling"
+        principles:
+          - "No to this offer, not all offers"
+          - "Downsells are trades"
+          - "Personalize, don't pressure"
+          - "Same thing, new ways"
+          - "Never just lower price"
+          - "Customers talk about price"
+
+    decision_authority:
+      - "Objection-to-process routing"
+      - "Escalation trigger assessment"
+      - "Process abandonment decisions"
+      - "Customer experience protection"
+
+    inputs:
+      - "Customer rejection and objection"
+      - "Original offer details"
+      - "Customer history and profile"
+      - "Available downsell options"
+
+    outputs:
+      - "Selected downsell process"
+      - "Customized offer parameters"
+      - "Agent assignment"
+      - "Success probability estimate"
+
+    success_metrics:
+      primary:
+        - name: "Downsell Conversion Rate"
+          target: ">40%"
+          calculation: "Downsells Closed / Total Rejections"
+        - name: "30-Day Cash Collected"
+          target: "Track against baseline"
+      secondary:
+        - "Full Payment Ratio maintained"
+        - "Trial-to-Paid Conversion >50%"
+        - "Customer Satisfaction maintained"
+
+  objection-classifier:
+    id: objection-classifier
+    title: "Objection Analysis Specialist"
+    tier: tier_0
+    icon: "🔍"
+
+    purpose: |
+      Identify the TRUE reason behind customer rejection.
+      Surface vs. stated objections often differ.
+
+    objection_types:
+      price_objection:
+        indicators:
+          - "Too expensive"
+          - "Can't afford it"
+          - "Not in budget"
+        recommended_process: "Payment Plan Downsell"
+        source: "Seção 4, p.70-71"
+
+      value_objection:
+        indicators:
+          - "Not sure it's worth it"
+          - "Need to think about it"
+          - "Not convinced"
+        recommended_process: "Feature Downsell (remove to demonstrate value)"
+        source: "Seção 4, p.253-254"
+
+      timing_objection:
+        indicators:
+          - "Not ready yet"
+          - "Maybe later"
+          - "Need more time"
+        recommended_process: "Trial with Penalty"
+        source: "Seção 4, p.154-156"
+
+      fit_objection:
+        indicators:
+          - "Not sure it's for me"
+          - "My situation is different"
+          - "I don't need all that"
+        recommended_process: "Feature Downsell (customize)"
+        source: "Seção 4, p.21"
+
+    diagnostic_questions:
+      - "What specifically made you say no?"
+      - "Is it the price or the offer itself?"
+      - "What would need to be different for you to say yes?"
+      - "On a scale of 1-10, how much do you want this?"
+
+    outputs:
+      - "Primary objection classification"
+      - "Confidence level"
+      - "Recommended downsell process"
+      - "Key talking points"
+
+  payment-analyzer:
+    id: payment-analyzer
+    title: "Payment Capacity Analyst"
+    tier: tier_0
+    icon: "💳"
+
+    purpose: |
+      Assess customer's actual payment capacity and optimal payment structure.
+      Align payment timing with income timing for maximum success.
+
+    analysis_dimensions:
+      capacity:
+        questions:
+          - "When do you get paid?"
+          - "What's the most you can put down today?"
+          - "Do you have a credit card you can use?"
+        source: "Seção 4, p.94"
+
+      risk_factors:
+        indicators:
+          - "Inability to put any money down"
+          - "Unstable income"
+          - "Previous payment issues"
+        mitigation: "Layaway or card on file required"
+
+      timing_optimization:
+        rule: "Align payments with paydays"
+        benefit: "Higher completion rates"
+        source: "Seção 4, p.111"
+
+    outputs:
+      - "Recommended payment structure"
+      - "Optimal payment timing"
+      - "Risk level (Low/Medium/High)"
+      - "Collection probability %"
+
+  payment-plan-specialist:
+    id: payment-plan-specialist
+    title: "Payment Plan Downsell Expert"
+    tier: tier_1
+    icon: "📅"
+
+    purpose: |
+      Execute the 7-step payment plan downsell process to capture customers
+      who want the offer but can't pay full price upfront.
+
+    seven_step_process:
+      step_1:
+        name: "Reward for Prepay"
+        action: "Present price with interest included, offer discount for prepay"
+        script: "It's $15, but it's $10 if you prepay. You save $5."
+        source: "Seção 4, p.86-87"
+
+      step_2:
+        name: "Third-Party Options"
+        options:
+          - type: "Third-party financing"
+            description: "Company pays you now, customer pays them over time"
+          - type: "Credit card"
+            script: "Do you prefer I decide your payment terms or you decide?"
+          - type: "Layaway"
+            description: "Pay before receiving, flexible terms"
+        source: "Seção 4, p.88-93"
+
+      step_3:
+        name: "Half Now, Half Later"
+        script: |
+          "When is the next time you get paid?"
+          "Want to put half today and the rest when you get paid?"
+          "What's the most you can put down today?"
+        source: "Seção 4, p.94"
+
+      step_4:
+        name: "Desire Check"
+        script: "On a scale of 1-10, how much do you want to do this?"
+        decision_tree:
+          "8-10": "Continue to step 5"
+          "<8": "Ask 'Why not a 10?' then pivot to feature downsell"
+        source: "Seção 4, p.96-97"
+
+      step_5:
+        name: "Three Payments"
+        structure: "1/3 now, 1/3 next payday, 1/3 following payday"
+        source: "Seção 4, p.98"
+
+      step_6:
+        name: "Spread Evenly"
+        example: "16-week program = 16 weekly payments"
+        source: "Seção 4, p.100"
+
+      step_7:
+        name: "Free Trial"
+        action: "Transition to Process II (Trial with Penalty)"
+        source: "Seção 4, p.102"
+
+    alternative_process:
+      name: "Seesaw Downselling"
+      description: "Simplified version for less experienced salespeople"
+      script: |
+        "Would you rather have giant monthly payments or small ones?"
+        [They say small]
+        "Normally it's X, and if you prepay today, you get a huge discount
+        and zero monthly payments. Does that work?"
+      source: "Seção 4, p.107-108"
+
+    upsell_opportunities:
+      during_plan: |
+        "Make periodic offers for the original prepay discount during the
+        payment plan. If they pay off the balance, they still get the discount."
+      source: "Seção 4, p.109"
+
+  trial-architect:
+    id: trial-architect
+    title: "Penalty Trial Specialist"
+    tier: tier_1
+    icon: "🎯"
+
+    purpose: |
+      Structure and execute penalty trials that convert free trial customers
+      into paying customers through action-based requirements.
+
+    trial_definition: |
+      "Customers can try your product or service for free AS LONG AS they
+      meet your terms. If they don't meet terms, they pay the penalty fee."
+      Source: Seção 4, p.154
+
+    five_step_process:
+      step_1:
+        name: "Offer Trial Last"
+        rule: "Only after customer clearly rejected main offer and payment plans"
+        script: |
+          "Hmm, that's really a problem. Tell you what, how about we start
+          you for free? Would you be okay with that? We can just help you
+          out and if you like it, you can stay. Let me get your ID and
+          we can start the process. Fair?"
+        source: "Seção 4, p.175"
+
+      step_2:
+        name: "Always Get a Card"
+        rule: "No card = no trial"
+        response_to_resistance: "It's just how we've always done it."
+        hard_rule: "If they won't put card down AND commit to work = walk away"
+        source: "Seção 4, p.176-177"
+
+      step_3:
+        name: "Sell Staying and Paying"
+        question: "If this program gets you the result, will you stay long-term?"
+        integrity_script: |
+          "I don't want you to just try, I want you to get results. Being
+          honest, you won't reach your long-term goals during this trial,
+          but you'll establish the habits to help you achieve them. And
+          we'll help you do that for free. But if you want your long-term
+          results, you'll have to continue after."
+        source: "Seção 4, p.178-179"
+
+      step_4:
+        name: "Explain Fees After Card"
+        timing: "Always AFTER getting card, not before"
+        script: |
+          "We'll do our part as long as you do yours. That's fair, right?
+          So now I just ask you to bet on yourself. If you miss or skip
+          anything, your results will suffer. We charge to keep you on
+          track. If you mess up, no problem. You get charged a small fee,
+          but it puts you back on track. If you comply, you get all of
+          this for free. Best of both worlds."
+        source: "Seção 4, p.179-180"
+
+      step_5:
+        name: "Make Check-Ins Mandatory"
+        purpose: "Built-in upsell opportunities"
+        template: |
+          "Yes, and you agree to attend each of these three check-ins:
+          First, we do X so that you can...
+          Second, we do Y so that you can...
+          Third, we do Z so that you can...
+          Obviously, we charge if you miss these because it's the only
+          way to get results."
+        source: "Seção 4, p.181"
+
+    fee_structure_options:
+      split_fees:
+        description: "$50 per missed item rather than $500 for first failure"
+        benefit: "More people agree to terms"
+        source: "Seção 4, p.171"
+
+      single_fee:
+        when: "When single failure truly derails results"
+        source: "Seção 4, p.171"
+
+    trial_outcomes:
+      liked:
+        action: "They're already on auto-billing. Offer higher-tier option."
+        source: "Seção 4, p.184"
+
+      hated:
+        script: |
+          "Ask what they'd like different. Say you're right and you're
+          annoyed you missed that. Don't blame them. Only one person can
+          be angry and it needs to be you. Ask if they'll give you a
+          chance to make it right. Offer your higher-tier thing."
+        close_rate: "~50%"
+        source: "Seção 4, p.185"
+
+      didnt_use:
+        action: |
+          "Contact multiple times before getting here. Offer to waive fee
+          if they meet with you. Try to get them back on track or offer
+          something more suitable."
+        note: "A small fee isn't worth a one-star review"
+        source: "Seção 4, p.186"
+
+    naming_rule: "Just call it a 'free trial' even though it has penalties"
+    source: "Seção 4, p.191"
+
+  feature-sculptor:
+    id: feature-sculptor
+    title: "Feature Downsell Specialist"
+    tier: tier_1
+    icon: "✂️"
+
+    purpose: |
+      Craft feature-reduced offers that lower price while maintaining
+      perceived value. Use strategic removal to demonstrate feature worth.
+
+    core_formula: |
+      "Take something out, lower the price, and ask 'How about now?'"
+      Source: Seção 4, p.253
+
+    key_insight: |
+      "People will see the value in the thing you removed AFTER they see
+      the price difference. This can make MORE people buy the full-price
+      offer."
+      Source: Seção 4, p.253-254
+
+    removal_order_rule: |
+      "Remove features from HIGHEST to LOWEST value. Removing high-value
+      features makes customers re-upsell themselves to the premium offer."
+      Source: Seção 4, p.254
+
+    downsell_types:
+      quantity_product:
+        example: "Instead of a three-month supply, start with just one?"
+        source: "Seção 4, p.257"
+
+      quantity_service:
+        example: "Instead of four sessions per month, start with two?"
+        source: "Seção 4, p.257"
+
+      quality_product:
+        example: "Instead of leather seats, we can do vinyl. Sound good?"
+        source: "Seção 4, p.261"
+
+      quality_service:
+        dimensions:
+          - "Time availability: Specific hours vs anytime"
+          - "Days: Mon/Wed/Fri vs any day"
+          - "Response speed: Overnight vs 5 minutes"
+          - "Delivery speed: Next week vs same day"
+          - "Ratio: 1-to-many vs 1-to-1"
+          - "Method: Text vs video call"
+          - "Provider: New employee vs owner"
+          - "Live vs recorded"
+          - "DIY vs Done-With-You vs Done-For-You"
+          - "Expiration: Limited time vs forever"
+          - "Customization: Generic vs personalized"
+          - "Insurance/guarantee duration and coverage"
+        source: "Seção 4, p.267-281"
+
+      remove_feature_entirely:
+        example: "Keep chat and email, drop the calls"
+        source: "Seção 4, p.282-284"
+
+      diy_alternative:
+        examples:
+          - "Chiropractor → Foam rollers, massage tools, mats"
+          - "Painter → Rent spray machine, sell paint"
+          - "Agency → Join a workshop instead"
+        source: "Seção 4, p.285-290"
+
+    guarantee_removal_example:
+      before: "25% close rate"
+      after: "75% close rate (35 premium + 40 downsell)"
+      how: "Remove full money-back guarantee for lower price"
+      why: "Removing shows value of guarantee, many re-upsell to keep it"
+      source: "Seção 4, p.217-248"
+
+  value-reframer:
+    id: value-reframer
+    title: "Value Perception Specialist"
+    tier: tier_2
+    icon: "💎"
+
+    purpose: |
+      Help customers see true value through strategic positioning.
+      Use downsell as a tool to close at full price.
+
+    reframing_strategies:
+      contrast_principle:
+        description: "Make premium vs basic contrast enormous"
+        rule: "Make decoy as basic as possible, premium as amazing as possible"
+        source: "Seção 4, p.307"
+
+      permission_approach:
+        script: "Are you here for free stuff or lasting results?"
+        effect: "Most say 'results', which gives permission to sell premium"
+        source: "Seção 4, p.313"
+
+      assumptive_presentation:
+        style: |
+          "Operate from a position of 'this is what everyone does, this is
+          just a formality.' Friendly, almost bored disposition of how
+          regularly people buy."
+        source: "Seção 4, p.315-316"
+
+      surprise_upgrade:
+        when: "Customer takes decoy option"
+        action: "Surprise them with some zero-to-low cost premium features"
+        benefit: "Builds goodwill, increases upsell probability"
+        source: "Seção 4, p.317"
+
+  trust-guardian:
+    id: trust-guardian
+    title: "Pricing Integrity Protector"
+    tier: tier_2
+    icon: "🛡️"
+
+    purpose: |
+      Prevent trust-eroding practices like pure discounting.
+      Ensure consistent pricing and customer experience.
+
+    anti_patterns:
+      car_salesman_trap:
+        description: "Lowering price for same thing"
+        example: "$5,000 → $3,000 → $1,000 → $400 for same insurance"
+        result: "Customer said no to ALL and questioned car price"
+        source: "Seção 4, p.11-14"
+
+      moment_discounting:
+        rule: "Never charge less in the moment because you're scared"
+        why: "Customers talk. Different prices = upset customers."
+        source: "Seção 4, p.27-28"
+
+    integrity_rules:
+      - rule: "Every price reduction must have corresponding value reduction"
+        source: "Seção 4, p.25"
+
+      - rule: "Test prices with specific number of people ahead of time"
+        source: "Seção 4, p.27"
+
+      - rule: "Personalize offer, not discount price"
+        source: "Seção 4, p.21"
+
+  collection-optimizer:
+    id: collection-optimizer
+    title: "Payment Collection Specialist"
+    tier: tier_2
+    icon: "💰"
+
+    purpose: |
+      Maximize payment plan success and minimize defaults.
+      Optimize collection timing and recovery strategies.
+
+    optimization_strategies:
+      paycheck_alignment:
+        rule: "Charge on days people get paid"
+        benefit: "Higher likelihood of payment"
+        source: "Seção 4, p.111"
+
+      multiple_passes:
+        strategy: "If declined first, run card multiple times that day"
+        result: "Recover 1/3 of declined payments"
+        source: "Seção 4, p.111"
+
+      frequency_impact:
+        data:
+          monthly: "10.7% monthly churn"
+          quarterly: "5% monthly churn"
+          annual: "2% monthly churn"
+        insight: "Fewer, larger payments = lower churn"
+        source: "Seção 4, p.115 (ProfitWell data)"
+
+    health_check:
+      success_criteria: |
+        "Payment plans make money when:
+        - Total closes increase
+        - Full payment percentage stays same
+        - New downsell customers ADDED to full-pay customers
+
+        BAD SIGN:
+        - Full payment customers moving to payment plans
+        - Payment plans failing before profit point"
+      source: "Seção 4, p.113-114"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXECUTOR MATRIX
+# ═══════════════════════════════════════════════════════════════════════════════
+
+executor_matrix:
+  # Diagnosis Tasks
+  - task: "Classify objection type"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Human validates AI classification"
+
+  - task: "Assess payment capacity"
+    executor: Human
+    automation: LOW
+    guardrails: "Sensitive financial conversation"
+
+  - task: "Calculate payment options"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Pre-approved terms only"
+
+  # Payment Plan Process
+  - task: "Present prepay discount"
+    executor: Human
+    automation: LOW
+    guardrails: "Frame as reward, not punishment"
+
+  - task: "Offer third-party financing"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Partner integrations configured"
+
+  - task: "Process credit card option"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Secure processing required"
+
+  - task: "Structure layaway terms"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Clear delivery conditions"
+
+  - task: "Conduct desire check (1-10)"
+    executor: Human
+    automation: LOW
+    guardrails: "If <8, pivot to feature downsell"
+
+  - task: "Calculate payment splits"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Align with pay schedule"
+
+  - task: "Execute seesaw downselling"
+    executor: Human
+    automation: LOW
+    guardrails: "Simplified script available"
+
+  # Trial Process
+  - task: "Present trial offer"
+    executor: Human
+    automation: LOW
+    guardrails: "Only after main offer rejected"
+
+  - task: "Capture card for trial"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "No card = no trial"
+
+  - task: "Extract continuation commitment"
+    executor: Human
+    automation: LOW
+    guardrails: "Use integrity script"
+
+  - task: "Explain penalty fees"
+    executor: Human
+    automation: LOW
+    guardrails: "After card captured, separate initial"
+
+  - task: "Schedule mandatory check-ins"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Build in upsell opportunities"
+
+  - task: "Process penalty charges"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Per agreed terms only"
+
+  - task: "Offer makeup opportunity"
+    executor: Human
+    automation: LOW
+    guardrails: "For engaged customers"
+
+  # Feature Downsell Process
+  - task: "Present quantity reduction"
+    executor: Human
+    automation: LOW
+    guardrails: "Maintain core value"
+
+  - task: "Present quality tier options"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Pre-built tier menu"
+
+  - task: "Execute strategic feature removal"
+    executor: Human
+    automation: LOW
+    guardrails: "Remove high-value first to demonstrate worth"
+
+  - task: "Present DIY alternative"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Products support same outcome"
+
+  - task: "Apply surprise upgrade"
+    executor: Human
+    automation: LOW
+    guardrails: "Zero-to-low cost features only"
+
+  # Collection & Monitoring
+  - task: "Schedule payments to paydays"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Customer confirms pay dates"
+
+  - task: "Process scheduled payments"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Multiple retry attempts"
+
+  - task: "Send payment reminders"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Before charge date"
+
+  - task: "Handle declined payments"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Multiple passes same day"
+
+  - task: "Monitor full-payment ratio"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Alert if declining"
+
+  - task: "Track churn by entry method"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Compare across segments"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  QG-001:
+    name: "Objection Identification Gate"
+    transition: "Rejection → Downsell Process"
+    condition: "objection_type_identified == true"
+    type: blocking
+    failure_action: "Return to discovery questions"
+
+  QG-002:
+    name: "Desire Check Gate"
+    transition: "Payment Plan Step 3 → Step 5"
+    condition: "desire_score >= 8"
+    type: blocking
+    failure_action: "Ask 'Why not 10?' then pivot to feature downsell"
+    source: "Seção 4, p.96-97"
+
+  QG-003:
+    name: "Card Capture Gate"
+    transition: "Trial Agreement → Trial Start"
+    condition: "card_on_file == true"
+    type: blocking
+    failure_action: "End conversation politely"
+    source: "Seção 4, p.176-177"
+
+  QG-004:
+    name: "Continuation Commitment Gate"
+    transition: "Card Captured → Fee Explanation"
+    condition: "verbal_commitment_to_stay == true"
+    type: blocking
+    failure_action: "No trial without commitment"
+    source: "Seção 4, p.178"
+
+  QG-005:
+    name: "Fee Acknowledgment Gate"
+    transition: "Fee Explanation → Trial Start"
+    condition: "fees_acknowledged AND fee_clause_initialed"
+    type: blocking
+    failure_action: "Re-explain fees, get initials"
+    source: "Seção 4, p.180"
+
+  QG-006:
+    name: "Value Reduction Gate"
+    transition: "Price Reduction Request → Implementation"
+    condition: "corresponding_value_reduction_identified"
+    type: blocking
+    failure_action: "Block pure discounting"
+    source: "Seção 4, p.25"
+
+  QG-007:
+    name: "Full Payment Ratio Gate"
+    transition: "Payment Plan Implementation → Continue"
+    condition: "full_payment_percentage >= baseline"
+    type: warning
+    failure_action: "Investigate cannibalization"
+    source: "Seção 4, p.113-114"
+
+  QG-008:
+    name: "Trust Consistency Gate"
+    transition: "Price Quote → Customer"
+    condition: "price_matches_standard_terms"
+    type: blocking
+    failure_action: "Use standard pricing only"
+    source: "Seção 4, p.27-28"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  rejection_recovery_workflow:
+    trigger: "Customer says NO to main offer"
+    steps:
+      - step: 1
+        agent: objection-classifier
+        action: "Identify true objection type"
+        output: "Objection classification"
+
+      - step: 2
+        agent: downsell-coordinator
+        action: "Route to appropriate downsell process"
+        decision_tree:
+          price_objection: "Payment Plan Process"
+          value_objection: "Feature Downsell Process"
+          timing_objection: "Trial Process"
+
+      - step: 3
+        agent: "[Selected specialist]"
+        action: "Execute downsell process"
+        output: "Sale or escalation"
+
+      - step: 4
+        agent: trust-guardian
+        action: "Verify pricing integrity maintained"
+        validation: "No pure discounting occurred"
+
+  payment_plan_workflow:
+    trigger: "Price objection identified"
+    steps:
+      - step: 1
+        agent: payment-plan-specialist
+        action: "Present prepay discount"
+        decision: "If accepted → Complete, else → Step 2"
+
+      - step: 2
+        agent: payment-plan-specialist
+        action: "Offer third-party options"
+        options: ["Financing", "Credit Card", "Layaway"]
+        decision: "If accepted → Complete, else → Step 3"
+
+      - step: 3
+        agent: payment-plan-specialist
+        action: "Offer half now, half later"
+        decision: "If accepted → Complete, else → Step 4"
+
+      - step: 4
+        agent: payment-plan-specialist
+        action: "Desire check (1-10)"
+        gate: "QG-002"
+        decision: "If >= 8 → Step 5, else → Feature Downsell"
+
+      - step: 5
+        agent: payment-plan-specialist
+        action: "Offer three-payment split"
+        decision: "If accepted → Complete, else → Step 6"
+
+      - step: 6
+        agent: payment-plan-specialist
+        action: "Offer spread payments evenly"
+        decision: "If accepted → Complete, else → Step 7"
+
+      - step: 7
+        agent: trial-architect
+        action: "Transition to trial process"
+        handoff: "Trial Workflow"
+
+  trial_workflow:
+    trigger: "Customer declined payment plans OR timing objection"
+    steps:
+      - step: 1
+        agent: trial-architect
+        action: "Present trial offer"
+        script: "How about we start you for free?"
+
+      - step: 2
+        agent: trial-architect
+        action: "Capture card"
+        gate: "QG-003"
+
+      - step: 3
+        agent: trial-architect
+        action: "Get continuation commitment"
+        gate: "QG-004"
+        script: "If this gets you results, will you stay long-term?"
+
+      - step: 4
+        agent: trial-architect
+        action: "Explain penalty fees"
+        gate: "QG-005"
+
+      - step: 5
+        agent: trial-architect
+        action: "Schedule mandatory check-ins"
+        output: "Trial enrollment complete"
+
+      - step: 6
+        agent: collection-optimizer
+        action: "Monitor trial progress"
+        triggers: ["Completion", "Penalty event", "Non-engagement"]
+
+  feature_downsell_workflow:
+    trigger: "Value objection OR low desire score"
+    steps:
+      - step: 1
+        agent: feature-sculptor
+        action: "Identify highest-value feature to remove"
+        strategy: "Remove high-value first to demonstrate worth"
+
+      - step: 2
+        agent: value-reframer
+        action: "Present feature-reduced offer with price"
+        check: "Did removing feature re-upsell them?"
+        decision: "If upsold to main → Complete, else → Step 3"
+
+      - step: 3
+        agent: feature-sculptor
+        action: "Present quantity reduction"
+        decision: "If accepted → Complete, else → Step 4"
+
+      - step: 4
+        agent: feature-sculptor
+        action: "Present quality tier reduction"
+        decision: "If accepted → Complete, else → Step 5"
+
+      - step: 5
+        agent: feature-sculptor
+        action: "Present DIY alternative"
+        decision: "If accepted → Complete, else → End"
+
+  collection_workflow:
+    trigger: "Payment plan or trial enrolled"
+    steps:
+      - step: 1
+        agent: collection-optimizer
+        action: "Align payments with paydays"
+        source: "Customer pay schedule"
+
+      - step: 2
+        agent: collection-optimizer
+        action: "Schedule payment reminders"
+        timing: "Before each charge date"
+
+      - step: 3
+        agent: collection-optimizer
+        action: "Process scheduled payment"
+        on_decline: "Multiple passes same day"
+
+      - step: 4
+        agent: payment-plan-specialist
+        action: "Offer prepay discount for remaining balance"
+        timing: "During plan lifecycle"
+
+      - step: 5
+        agent: collection-optimizer
+        action: "Monitor completion and churn"
+        output: "Performance metrics"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# KPIs & SUCCESS METRICS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+kpis:
+  primary:
+    downsell_conversion_rate:
+      formula: "Downsells Closed / Total Rejections"
+      target: ">40%"
+      benchmark: "25% → 75% in example case"
+      source: "Seção 4, p.217"
+
+    thirty_day_cash:
+      formula: "Cash collected in 30 days post-sale"
+      target: "Increase vs baseline"
+      impact: "Explodes 30-day profits"
+      source: "Seção 4, p.30"
+
+  secondary:
+    full_payment_ratio:
+      formula: "Full Payments / Total Sales"
+      target: "Maintain baseline %"
+      critical: "Must not decline when adding downsells"
+      source: "Seção 4, p.113-114"
+
+    trial_to_paid:
+      formula: "Trials Converted / Trials Started"
+      target: ">50%"
+      source: "Seção 4, p.156"
+
+    payment_plan_completion:
+      formula: "Plans Completed / Plans Started"
+      target: ">70%"
+      optimization: "Align with pay schedules"
+
+  by_process:
+    payment_plans:
+      - "Steps to close (avg)"
+      - "Prepay discount uptake %"
+      - "Third-party financing %"
+      - "Completion rate by frequency"
+      - "Churn by billing frequency"
+
+    trials:
+      - "Trial acceptance rate"
+      - "Penalty fee collection rate"
+      - "Check-in attendance rate"
+      - "Trial-to-paid conversion"
+      - "Upsell rate from trials"
+
+    feature_downsells:
+      - "Re-upsell rate (back to premium)"
+      - "Feature reduction acceptance"
+      - "DIY conversion rate"
+      - "LTV by entry method"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TROUBLESHOOTING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+troubleshooting:
+  - symptom: "Low downsell acceptance rate"
+    possible_causes:
+      - "Leading with downsell instead of main offer"
+      - "Downsell not matching objection type"
+      - "Terms too restrictive"
+    diagnosis:
+      - "Review objection classification accuracy"
+      - "Check downsell sequencing"
+      - "Compare terms to market"
+    solutions:
+      - "Always present main offer first"
+      - "Match downsell process to objection type"
+      - "Adjust terms based on acceptance data"
+
+  - symptom: "Full payment ratio declining"
+    possible_causes:
+      - "Payment plans cannibalizing full payments"
+      - "Too easy to get payment plan"
+      - "Prepay discount not compelling"
+    diagnosis:
+      - "Compare before/after full payment %"
+      - "Review step progression data"
+      - "Survey full-pay vs plan customers"
+    solutions:
+      - "Increase prepay discount value"
+      - "Add friction to payment plan path"
+      - "Review step 4 desire check compliance"
+
+  - symptom: "High trial penalty charges but low retention"
+    possible_causes:
+      - "Penalties too harsh"
+      - "Requirements unrealistic"
+      - "Not enough support during trial"
+    diagnosis:
+      - "Review penalty frequency distribution"
+      - "Survey churned trial customers"
+      - "Audit check-in quality"
+    solutions:
+      - "Split fees into smaller amounts"
+      - "Adjust requirements to be achievable"
+      - "Increase support touchpoints"
+
+  - symptom: "Feature downsell re-upsell rate low"
+    possible_causes:
+      - "Removing wrong features"
+      - "Price difference not meaningful"
+      - "Feature value not clear to customer"
+    diagnosis:
+      - "Analyze which features being removed"
+      - "Check price-value gap perception"
+      - "Review sales conversation recordings"
+    solutions:
+      - "Remove highest-value features first"
+      - "Increase price difference"
+      - "Better articulate what's being lost"
+
+  - symptom: "Payment plan defaults high"
+    possible_causes:
+      - "Not aligned with pay schedule"
+      - "Customers over-committed"
+      - "No reminder system"
+    diagnosis:
+      - "Check payment timing vs paydays"
+      - "Review customer capacity assessments"
+      - "Audit reminder delivery"
+    solutions:
+      - "Align all payments with paydays"
+      - "Strengthen capacity assessment"
+      - "Implement payment reminders"
+      - "Add multiple retry passes"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TECHNOLOGY REQUIREMENTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+technology:
+  required:
+    - tool: "Payment Processing System"
+      purpose: "Store cards, schedule payments, handle retries"
+      features:
+        - "Card on file capability"
+        - "Scheduled charging"
+        - "Multiple retry attempts"
+        - "Pay schedule alignment"
+
+    - tool: "CRM with Downsell Tracking"
+      purpose: "Track downsell journey and conversions"
+      features:
+        - "Objection classification"
+        - "Downsell step tracking"
+        - "Conversion attribution"
+        - "LTV by entry method"
+
+    - tool: "Contract/Agreement System"
+      purpose: "Document terms and get acknowledgments"
+      features:
+        - "Separate fee initials"
+        - "Commitment documentation"
+        - "Trial terms capture"
+
+    - tool: "Payment Calculator"
+      purpose: "Generate payment options in real-time"
+      features:
+        - "Multiple split options"
+        - "Interest/discount calculations"
+        - "Pay schedule alignment"
+
+  recommended:
+    - tool: "Third-Party Financing Integration"
+      purpose: "Offer financing without carrying risk"
+      benefit: "Get paid today, customer pays them"
+
+    - tool: "Trial Management System"
+      purpose: "Track requirements, trigger penalties"
+      features:
+        - "Checklist tracking"
+        - "Automated penalty processing"
+        - "Check-in scheduling"
+        - "Makeup opportunity tracking"
+
+    - tool: "Churn Analysis Dashboard"
+      purpose: "Compare performance by entry method"
+      metrics:
+        - "LTV by acquisition type"
+        - "Churn by payment frequency"
+        - "Completion rates"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GAPS TO RESOLVE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Specific third-party financing partner recommendations"
+    severity: Medium
+    clarification_needed: "Industry-specific financing options"
+
+  - id: GAP-002
+    description: "Trial penalty fee optimal amounts"
+    severity: Medium
+    clarification_needed: "What fee amounts maximize compliance without friction"
+
+  - id: GAP-003
+    description: "Feature value rankings by industry"
+    severity: Medium
+    clarification_needed: "Which features to remove first by business type"
+
+  - id: GAP-004
+    description: "Legal compliance for penalty trials"
+    severity: High
+    clarification_needed: "Consumer protection laws by jurisdiction"
+
+  - id: GAP-005
+    description: "Churn thresholds for billing frequency"
+    severity: Low
+    note: "ProfitWell data provided, but industry variation exists"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VALIDATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 8
+  workflows_documented: 5
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

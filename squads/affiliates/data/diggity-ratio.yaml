@@ -1,0 +1,215 @@
+# Distribuição de Anchor Text — Método Diggity
+# Atualizado: 2026-02 | Fonte: Matt Diggity (Diggity Marketing), pesquisa pública
+# Uso: referência para agentes seo-affiliate e authority-builder
+# Contexto: distribuição recomendada para link building sustentável pós-Penguin
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  source: "Matt Diggity — Diggity Marketing. Análise de 2019-2025."
+  url: "https://diggitymarketing.com"
+  warning: >
+    Esta distribuição é um guia, não uma fórmula rígida. Analise sempre o
+    perfil dos seus concorrentes rankeados com ferramentas como Ahrefs ou Semrush.
+    Ajuste baseado no nicho e no histórico do domínio.
+
+philosophy: >
+  A distribuição ideal de anchor text imita o perfil natural de um site que
+  recebe links orgânicos. Sites com muitos exact-match anchors são flag de
+  manipulação. O objetivo é diversidade com intenção estratégica.
+
+anchor_types:
+
+  exact_match:
+    name: "Exact Match"
+    description: "Anchor text idêntico à keyword-alvo principal da página"
+    recommended_range_pct:
+      min: 5
+      max: 10
+      target: 7
+    examples:
+      - keyword: "melhores colchões"
+        anchor: "melhores colchões"
+      - keyword: "best vpn 2025"
+        anchor: "best vpn 2025"
+      - keyword: "cartão de crédito sem anuidade"
+        anchor: "cartão de crédito sem anuidade"
+    when_to_use:
+      - links de alta autoridade (DR 50+)
+      - sites editoriais relevantes ao nicho
+      - maximum 1 exact-match por domínio linking
+    risk_level: high
+    notes: >
+      Anchor mais poderoso mas também o mais arriscado. Overuse é sinal claro
+      de manipulação para o Google Penguin. Reserve para links de maior qualidade.
+      Nunca ultrapasse 10% do perfil total. Em nichos YMYL, mantenha abaixo de 7%.
+
+  partial_match:
+    name: "Partial Match"
+    description: "Anchor que contém a keyword-alvo mais palavras adicionais"
+    recommended_range_pct:
+      min: 15
+      max: 25
+      target: 20
+    examples:
+      - keyword: "melhores colchões"
+        anchors:
+          - "confira os melhores colchões para dormir bem"
+          - "guia completo de melhores colchões"
+          - "melhores colchões de espuma"
+      - keyword: "best vpn 2025"
+        anchors:
+          - "the best vpn services of 2025"
+          - "best vpn for streaming"
+          - "find the best vpn for your needs"
+      - keyword: "cartão de crédito sem anuidade"
+        anchors:
+          - "os melhores cartões de crédito sem anuidade do Brasil"
+          - "cartão de crédito sem anuidade para iniciantes"
+    when_to_use:
+      - guest posts e links editoriais
+      - mix principal da estratégia off-page
+      - links de DR 30-60
+    risk_level: medium
+    notes: >
+      O workhouse do link building moderno. Confere relevância semântica sem
+      parecer manipulado. Varie sempre o texto ao redor da keyword.
+      É o maior percentual da estratégia por um motivo: funciona e é seguro.
+
+  branded:
+    name: "Branded"
+    description: "Anchor com o nome da marca, domínio ou variações do nome do site"
+    recommended_range_pct:
+      min: 30
+      max: 40
+      target: 35
+    examples:
+      - brand: "ColchãoGuia"
+        anchors:
+          - "ColchãoGuia"
+          - "colchaogua.com.br"
+          - "site ColchãoGuia"
+          - "equipe do ColchãoGuia"
+          - "segundo o ColchãoGuia"
+      - brand: "VPNReview"
+        anchors:
+          - "VPNReview"
+          - "vpnreview.com"
+          - "the team at VPNReview"
+    when_to_use:
+      - press releases
+      - menções de marca em artigos
+      - links em páginas de parceiros
+      - links em diretórios e listas
+    risk_level: low
+    notes: >
+      O maior percentual do perfil. Sites legítimos recebem muitos links com
+      o próprio nome. Branded anchors constroem autoridade de marca e têm
+      risco zero de penalização. Construir brand awareness facilita o acúmulo
+      natural deste tipo de anchor.
+
+  naked_url:
+    name: "Naked URL"
+    description: "URL completa como anchor text, sem texto descritivo"
+    recommended_range_pct:
+      min: 15
+      max: 20
+      target: 17
+    examples:
+      - "https://www.seusite.com"
+      - "https://www.seusite.com/melhor-colchao/"
+      - "www.seusite.com.br"
+      - "seusite.com"
+    when_to_use:
+      - fóruns e comunidades
+      - comentários em blogs
+      - diretórios de empresas
+      - citações e referências técnicas
+    risk_level: low
+    notes: >
+      Muito natural — como pessoas compartilham links em mensagens e fóruns.
+      Mix entre homepage URL e URLs de páginas internas.
+      Naked URLs para páginas internas (deep links) ajudam a distribuir link equity.
+
+  generic:
+    name: "Generic"
+    description: "Texto genérico sem relação com keyword ou marca"
+    recommended_range_pct:
+      min: 10
+      max: 15
+      target: 12
+    examples:
+      - "clique aqui"
+      - "saiba mais"
+      - "acesse aqui"
+      - "veja mais"
+      - "leia mais"
+      - "clique aqui para mais informações"
+      - "neste artigo"
+      - "aqui"
+      - "este site"
+      - "fonte"
+      - "referência"
+      - "click here"
+      - "read more"
+      - "learn more"
+      - "source"
+      - "this article"
+    when_to_use:
+      - links em comentários de blogs
+      - assinaturas de fórum
+      - links em recursos/wikis
+    risk_level: very_low
+    notes: >
+      Completamente seguro. Cada perfil natural contém links com texto genérico.
+      Não ajuda diretamente com rankings mas compõe um perfil diverso e saudável.
+      Não exagere — mais de 15% pode sinalizar spam de comentários.
+
+  image_alt:
+    name: "Image (Alt Text)"
+    description: "Links em imagens onde o alt text serve como anchor"
+    recommended_range_pct:
+      min: 3
+      max: 8
+      target: 5
+    examples:
+      - alt_text: "logo ColchãoGuia"
+      - alt_text: "foto do autor João Silva"
+      - alt_text: "banner de afiliado"
+    notes: >
+      Não incluído nas distribuições clássicas mas presente em todo site real.
+      O alt text da imagem linkada funciona como anchor. Google processa
+      normalmente. Inclua variações branded aqui.
+
+ratio_summary:
+  exact_match: "5-10%"
+  partial_match: "15-25%"
+  branded: "30-40%"
+  naked_url: "15-20%"
+  generic: "10-15%"
+  image_alt: "3-8%"
+
+implementation_tips:
+  - >
+    Analyze competitors before building: export the anchor profile of the top 3
+    ranking pages with Ahrefs → match their distribution, not this template.
+  - >
+    Diversify over time: don't hit target ratios in a single month.
+    Build links gradually to mimic natural growth.
+  - >
+    Vary link velocity: 5-15 links/month for new sites, up to 30-50/month for
+    established sites. Spikes trigger manual reviews.
+  - >
+    Monitor with Google Search Console: sudden ranking drops after link building
+    may indicate anchor over-optimization.
+  - >
+    Country matters: Brazilian sites (.com.br) can include Portuguese anchors
+    naturally. Mix pt-BR and pt-PT for international reach.
+
+audit_checklist:
+  - "Exportar anchor text profile completo no Ahrefs"
+  - "Calcular percentuais atuais por tipo"
+  - "Comparar com distribuição dos top 3 concorrentes"
+  - "Identificar tipos com sobre-representação (risco)"
+  - "Planejar próximos 90 dias de link building para corrigir desvios"
+  - "Verificar se há anchors suspeitos (spam) para disavow"

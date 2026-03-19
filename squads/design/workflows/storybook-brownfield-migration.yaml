@@ -1,0 +1,485 @@
+workflow:
+  id: wf-storybook-brownfield-migration
+  name: Storybook Brownfield Migration Pipeline
+  version: "1.0"
+  orchestrator: "@storybook-expert"
+  duration: 1-3 sessions
+  description: |
+    End-to-end pipeline for migrating brownfield codebases into Storybook.
+    Takes ANY existing React/Next.js project and produces:
+    - Complete component inventory with atomic classification
+    - Dependency graph showing component relationships
+    - Phased migration plan (atoms → molecules → organisms → templates → pages)
+    - Story files for EVERY component
+    - Mock decorators for context-dependent components
+    - Adaptation report documenting all changes
+
+    Supports same-project (add stories) and cross-project (copy + add stories) modes.
+  best_for:
+    - Existing project with 20-200+ undocumented components
+    - Migrating components from one project to another
+    - Design system adoption in legacy codebases
+    - Component library documentation from scratch
+    - Atomization of monolithic UI code
+  decision_matrix_fit:
+    awareness: Migration
+    sophistication: Advanced
+    primary_output: Complete Storybook with brownfield component stories
+  migration_modes:
+    same_project:
+      description: Add stories co-located with existing components
+      when: Project already has Storybook or components stay in place
+      output: "*.stories.tsx next to each component"
+    cross_project:
+      description: Copy components to target project, adapt imports, add stories
+      when: Building a separate design system package
+      output: Components + stories in target project
+  type: legacy
+  sequence:
+    - step: phase-1
+      id: phase-1
+      phase: 1
+      phase_name: Scan & Classify Components
+      agent: storybook-expert
+      action: execute_walk-the-source-codebase-and-produce-a-complete-component-invent
+      next: phase-2
+    - step: phase-2
+      id: phase-2
+      phase: 2
+      phase_name: Prepare Storybook Environment
+      agent: storybook-expert
+      action: execute_ensure-target-project-has-storybook-installed-and-configured
+      next: phase-3
+    - step: phase-3
+      id: phase-3
+      phase: 3
+      phase_name: Rename Existing Stories to Atomic Design
+      agent: storybook-expert
+      action: execute_if-the-project-already-has-storybook-stories-with-flat-or-legacy
+      next: phase-4
+    - step: phase-4
+      id: phase-4
+      phase: 4
+      phase_name: Migrate Atoms & Primitives
+      agent: storybook-expert
+      action: execute_migrate-all-atom-level-components-first
+      next: phase-5
+    - step: phase-5
+      id: phase-5
+      phase: 5
+      phase_name: Migrate Molecules
+      agent: storybook-expert
+      action: execute_migrate-molecule-level-components
+      next: phase-6
+    - step: phase-6
+      id: phase-6
+      phase: 6
+      phase_name: Migrate Organisms & Features
+      agent: storybook-expert
+      action: execute_migrate-organism-level-components
+      next: phase-7
+    - step: phase-7
+      id: phase-7
+      phase: 7
+      phase_name: Extract Shared Molecules
+      agent: brad-frost
+      action: execute_after-organisms-are-migrated-analyze-them-for-inline-patterns-th
+      next: phase-8
+    - step: phase-8
+      id: phase-8
+      phase: 8
+      phase_name: Migrate Templates & Pages
+      agent: storybook-expert
+      action: execute_migrate-template-and-page-level-components
+      next: phase-9
+    - step: phase-9
+      id: phase-9
+      phase: 9
+      phase_name: Verify Complete Migration
+      agent: storybook-expert
+      action: execute_final-verification-of-the-complete-brownfield-migration
+    - workflow_end:
+        id: complete
+        action: workflow_complete
+  handoff_prompts:
+    storybook-expert_to_brad-frost: Handoff context from storybook-expert to brad-frost. Preserve outputs, risks, and open decisions.
+    brad-frost_to_storybook-expert: Handoff context from brad-frost to storybook-expert. Preserve outputs, risks, and open decisions.
+phases:
+  - id: PHASE-1
+    name: Scan & Classify Components
+    tier: 0
+    description: |
+      Walk the source codebase and produce a complete component inventory.
+      Classify each component by atomic level (atom/molecule/organism/template/page),
+      map dependencies between components, and generate a phased migration plan
+      ordered by dependency tree.
+    tasks:
+      - task_file: sb-brownfield-scan.md
+        agent: "@storybook-expert"
+        required: true
+        description: Inventory all components, classify, build dependency graph
+        output: component-inventory.json, migration-plan.md, dependency-graph.json
+    checkpoint:
+      criteria:
+        - All component files scanned and classified
+        - Dependency graph has no unresolved references
+        - Migration plan has at least 2 phases
+        - Atomic distribution covers atom through organism minimum
+      human_review: true
+      message: |
+        Scan complete. Review the migration plan before proceeding.
+        - Total components: {total_components}
+        - Atoms: {atoms} | Molecules: {molecules} | Organisms: {organisms}
+        - Already have stories: {with_stories}
+        - Need stories: {migration_gap}
+        Approve to proceed with migration, or adjust plan.
+  - id: PHASE-2
+    name: Prepare Storybook Environment
+    tier: 0
+    description: |
+      Ensure target project has Storybook installed and configured.
+      If not present, run sb-install and sb-configure. If present,
+      verify stories glob covers brownfield component locations.
+    tasks:
+      - task_file: sb-install.md
+        agent: "@storybook-expert"
+        required: false
+        description: Install Storybook if not present (skip if exists)
+        output: installed_packages
+        notes: |
+          CONDITIONAL: Only execute if target project has no Storybook.
+          Check for .storybook/ directory and storybook in devDependencies.
+      - task_file: sb-configure.md
+        agent: "@storybook-expert"
+        required: false
+        description: Configure Storybook if not configured (skip if exists)
+        output: .storybook/main.ts, .storybook/preview.ts
+        notes: |
+          CONDITIONAL: Only execute if .storybook/main.ts doesn't exist.
+          If exists, verify stories glob covers component paths.
+    checkpoint:
+      criteria:
+        - Storybook is installed and configured
+        - Stories glob covers all component locations from scan
+        - Storybook dev server starts without errors
+      human_review: false
+      message: Storybook environment ready. Starting migration.
+  - id: PHASE-3
+    name: Rename Existing Stories to Atomic Design
+    tier: 0
+    description: |
+      If the project already has Storybook stories with flat or legacy titles
+      (e.g., "UI/Button", "Base Components/Card"), rename them to Atomic Design
+      hierarchy before creating new stories. This ensures consistent naming
+      across old and new stories.
+
+      Title convention:
+      - Atoms/{Subcategory}/{Name}    (Forms, Data Display, Layout, Feedback)
+      - Molecules/{Subcategory}/{Name} (Overlays, Navigation, Forms, Data Display, Content)
+      - Organisms/{Domain}/{Name}      (grouped by domain directory)
+      - Templates/{Name}               (flat)
+      - Pages/{Name}                   (flat)
+    tasks:
+      - task_file: sb-atomic-rename.md
+        agent: "@storybook-expert"
+        required: false
+        description: Rename existing story titles to Atomic Design hierarchy
+        output: renamed_stories, rename_report
+        notes: |
+          CONDITIONAL: Only execute if project has existing stories with non-Atomic titles.
+          If all stories already use Atoms/Molecules/Organisms prefix, skip this phase.
+    checkpoint:
+      criteria:
+        - Zero stories with legacy title prefix (UI/, Base Components/, Core Components/)
+        - All stories use {AtomicLevel}/{Subcategory}/{Name} pattern
+        - TypeScript typecheck passes
+      human_review: false
+      message: Story titles migrated to Atomic Design hierarchy.
+  - id: PHASE-4
+    name: Migrate Atoms & Primitives
+    tier: 1
+    description: |
+      Migrate all atom-level components first. These have zero internal
+      dependencies and form the foundation for all other components.
+      Typically: buttons, badges, avatars, inputs, labels, separators, icons.
+    tasks:
+      - task_file: sb-brownfield-migrate.md
+        agent: "@storybook-expert"
+        required: true
+        description: Generate stories for all atom components
+        output: story_files (atoms)
+        notes: |
+          Execute with: phase_filter="1" (atoms phase from migration plan)
+          These components should need NO mocks or decorators.
+          Strategy: args-driven stories with Default + Variants + Gallery.
+    checkpoint:
+      criteria:
+        - All atom components have stories
+        - npm run typecheck passes
+        - All atoms render in Storybook without errors
+      human_review: false
+      message: Atoms migrated. Foundation complete.
+  - id: PHASE-5
+    name: Migrate Molecules
+    tier: 1
+    description: |
+      Migrate molecule-level components. These compose 2-3 atoms into
+      reusable patterns. May need render functions to show composition.
+      Typically: InputWithLabel, CardHeader, NavItem, SearchBar.
+    tasks:
+      - task_file: sb-brownfield-migrate.md
+        agent: "@storybook-expert"
+        required: true
+        description: Generate stories for all molecule components
+        output: story_files (molecules)
+        notes: |
+          Execute with: phase_filter matching molecule phases from migration plan.
+          Strategy: render function stories showing composition.
+    checkpoint:
+      criteria:
+        - All molecule components have stories
+        - npm run typecheck passes
+        - Molecules render correctly (atoms are available)
+      human_review: false
+      message: Molecules migrated.
+  - id: PHASE-6
+    name: Migrate Organisms & Features
+    tier: 2
+    description: |
+      Migrate organism-level components. These are section-level components
+      with business logic, context dependencies, and multiple internal deps.
+      This phase typically requires the most adaptations (mock providers,
+      stub data, decorator wrappers).
+
+      Includes: AgentCard, KanbanColumn, ChatContainer, Sidebar, etc.
+    tasks:
+      - task_file: sb-brownfield-migrate.md
+        agent: "@storybook-expert"
+        required: true
+        description: Generate stories for organisms with necessary mocks
+        output: story_files (organisms), mock_files
+        notes: |
+          Execute with: phase_filter matching organism phases.
+          Strategy: render function + decorators for context.
+          Create mock providers in .storybook/mocks/ as needed.
+          Document every adaptation in the report.
+    checkpoint:
+      criteria:
+        - All organism components have stories
+        - Mock decorators created for context-dependent components
+        - npm run typecheck passes
+        - All adaptations documented in report
+      human_review: true
+      message: |
+        Organisms migrated. This phase had the most adaptations.
+        Review mock files and adaptations before proceeding to molecule extraction.
+  - id: PHASE-7
+    name: Extract Shared Molecules
+    tier: 2
+    description: |
+      After organisms are migrated, analyze them for inline patterns that
+      should be extracted as reusable molecules. When 2+ organisms share
+      the same composed UI pattern (ProgressRing, UserChip, StatCard, etc.),
+      extract it into a standalone molecule with its own story.
+
+      This enforces Atomic Design composition rules:
+      - Organisms compose molecules + atoms
+      - Organisms should NOT inline what could be a molecule
+      - Shared patterns become molecules, reducing duplication
+    tasks:
+      - task_file: sb-extract-molecules.md
+        agent: "@brad-frost"
+        required: false
+        description: Extract shared patterns from organisms into molecules
+        output: new_molecules, updated_organisms, extraction_report
+        notes: |
+          CONDITIONAL: Only execute if scan identified shared patterns across organisms.
+          If no shared patterns found, skip this phase.
+    checkpoint:
+      criteria:
+        - All identified shared patterns extracted
+        - New molecules have stories with Molecules/ prefix
+        - Updated organisms still render correctly
+        - TypeScript typecheck passes
+      human_review: true
+      message: |
+        Molecule extraction complete. Review new molecules and verify
+        organisms still render identically.
+  - id: PHASE-8
+    name: Migrate Templates & Pages
+    tier: 2
+    description: |
+      Migrate template and page-level components. These are full layouts
+      and pages that compose organisms. Need layout: "fullscreen" parameter
+      and comprehensive mock data.
+    tasks:
+      - task_file: sb-brownfield-migrate.md
+        agent: "@storybook-expert"
+        required: true
+        description: Generate stories for templates and pages
+        output: story_files (templates, pages)
+        notes: |
+          Execute with: phase_filter matching template/page phases.
+          Use parameters: { layout: "fullscreen" } for layout components.
+          May need mock routing, mock API responses, mock global state.
+    checkpoint:
+      criteria:
+        - All template and page components have stories
+        - Layout stories use fullscreen layout
+        - npm run typecheck passes
+      human_review: false
+      message: Templates and pages migrated. Running final verification.
+  - id: PHASE-9
+    name: Verify Complete Migration
+    tier: 2
+    description: |
+      Final verification of the complete brownfield migration.
+      Runs typecheck, lint, build, story coverage check, and
+      generates the final adaptation report.
+    tasks:
+      - task_file: sb-verify.md
+        agent: "@storybook-expert"
+        required: true
+        description: Run all verification checks
+        output: verification_report
+    checkpoint:
+      criteria:
+        - "TypeScript: zero errors"
+        - "Lint: zero errors"
+        - "Build: succeeds"
+        - "Coverage: 100% of planned components"
+        - Adaptation report complete
+      human_review: true
+      message: Migration complete. Review final report.
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_stakeholders: false
+    - create_remediation_task: false
+    - halt_workflow: true
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: false
+    - max_retries: 3
+  phase_specific:
+    PHASE-6_organisms:
+      description: Organisms phase most likely to fail due to context deps
+      on_failure: Create mock for failing component, document in report, continue
+      max_component_retries: 2
+    PHASE-7_extract_molecules:
+      description: Extraction may break organism rendering if not careful
+      on_failure: Revert organism changes, keep molecule as standalone, document in report
+      max_component_retries: 1
+completion_signal: <promise>COMPLETE</promise>
+checkpoint_signal: <promise>CHECKPOINT:PHASE-X</promise>
+blocked_signal: <promise>BLOCKED:T-X.Y</promise>
+outputs:
+  scan_results:
+    - outputs/design-system/{project}/brownfield/component-inventory.json
+    - outputs/design-system/{project}/brownfield/dependency-graph.json
+    - outputs/design-system/{project}/brownfield/migration-plan.md
+  rename_results:
+    - outputs/design-system/{project}/brownfield/rename-report.md
+  stories:
+    - src/components/**/*.stories.tsx (one per component)
+  mocks:
+    - .storybook/mocks/*.tsx (provider mocks)
+    - .storybook/decorators/*.tsx (story decorators)
+  extracted_molecules:
+    - src/components/ui/*.tsx (new molecule components)
+    - src/components/ui/*.stories.tsx (new molecule stories)
+  reports:
+    - outputs/design-system/{project}/brownfield/adaptation-report.md
+    - outputs/design-system/{project}/brownfield/extraction-report.md
+    - Verification report (typecheck, lint, build, coverage)
+agents_by_phase:
+  PHASE-1:
+    primary:
+      - "@storybook-expert"
+    secondary:
+      - "@brad-frost"
+  PHASE-2:
+    primary:
+      - "@storybook-expert"
+  PHASE-3:
+    primary:
+      - "@storybook-expert"
+    secondary:
+      - "@brad-frost"
+  PHASE-4:
+    primary:
+      - "@storybook-expert"
+  PHASE-5:
+    primary:
+      - "@storybook-expert"
+  PHASE-6:
+    primary:
+      - "@storybook-expert"
+    secondary:
+      - "@brad-frost"
+  PHASE-7:
+    primary:
+      - "@brad-frost"
+    secondary:
+      - "@storybook-expert"
+  PHASE-8:
+    primary:
+      - "@storybook-expert"
+  PHASE-9:
+    primary:
+      - "@storybook-expert"
+quality_checklist:
+  scan:
+    - "[ ] All component files discovered"
+    - "[ ] Atomic classification applied to every component"
+    - "[ ] Dependency graph is complete and acyclic"
+    - "[ ] Migration plan phases ordered by dependency"
+  atomic_rename:
+    - "[ ] Zero stories with legacy title prefix (UI/, Base Components/, Core Components/)"
+    - "[ ] All stories use {AtomicLevel}/{Subcategory}/{Name} pattern"
+    - "[ ] No changes to story files besides title string"
+  atoms:
+    - "[ ] All atoms have stories"
+    - "[ ] Stories are args-driven (no unnecessary render functions)"
+    - "[ ] Gallery stories for multi-variant atoms"
+    - "[ ] Titles use Atoms/{Subcategory}/{Name} pattern"
+  molecules:
+    - "[ ] All molecules have stories"
+    - "[ ] Composition patterns shown in render functions"
+    - "[ ] Titles use Molecules/{Subcategory}/{Name} pattern"
+  organisms:
+    - "[ ] All organisms have stories"
+    - "[ ] Context dependencies mocked"
+    - "[ ] Adaptations documented"
+    - "[ ] Titles use Organisms/{Domain}/{Name} pattern"
+  extract_molecules:
+    - "[ ] Shared patterns across 2+ organisms identified"
+    - "[ ] Extracted molecules have stories with Molecules/ prefix"
+    - "[ ] Organisms updated to import new molecules"
+    - "[ ] No visual regressions in updated organisms"
+  templates_pages:
+    - "[ ] All templates/pages have stories"
+    - "[ ] Layout stories use fullscreen"
+    - "[ ] Mock data is representative"
+    - "[ ] Templates use Templates/{Name}, Pages use Pages/{Name}"
+  verification:
+    - "[ ] npm run typecheck — zero errors"
+    - "[ ] npm run lint — zero errors"
+    - "[ ] npm run build-storybook — succeeds"
+    - "[ ] Coverage: 100% of planned components"
+    - "[ ] Adaptation report complete"
+    - "[ ] All story titles follow Atomic Design hierarchy"
+metadata:
+  version: "1.0"
+  framework: AIOX Design Squad
+  created: "2026-02-25"
+  primary_use_case: Brownfield component migration to Storybook
+  key_difference: |
+    Unlike storybook-full-setup (greenfield), this workflow handles
+    EXISTING codebases with scattered, undocumented components.
+    Key capabilities:
+    - Component discovery and atomic classification
+    - Dependency-aware migration ordering
+    - Context isolation (mock providers, stub data)
+    - Same-project and cross-project modes
+    - Adaptation tracking and reporting

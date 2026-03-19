@@ -1,0 +1,118 @@
+squad:
+  name: brand
+  display_name: "Brand Squad"
+  description: "Elite brand building squad — strategy, positioning, naming, visual identity, logo design, movement architecture"
+  icon: "💎"
+  domain: brand_identity
+  version: "1.0.0"
+
+agents:
+  - id: brand-chief
+    name: "Brand Chief"
+    file: agents/brand-chief.md
+    tier: 0
+    role: orchestrator
+    description: "Squad orchestrator — routes requests, coordinates agents, ensures quality"
+
+  - id: marty-neumeier
+    name: "Marty Neumeier"
+    file: agents/marty-neumeier.md
+    tier: 0
+    role: brand-strategist
+    description: "Brand strategy & diagnosis — The Brand Gap, Zag, onliness, charismatic brands"
+
+  - id: april-dunford
+    name: "April Dunford"
+    file: agents/april-dunford.md
+    tier: 1
+    role: positioning-master
+    description: "Product positioning — Obviously Awesome canvas, competitive alternatives, market category"
+
+  - id: michael-johnson
+    name: "Michael Johnson"
+    file: agents/michael-johnson.md
+    tier: 1
+    role: identity-architect
+    description: "Visual identity — 5.5 Steps, typography, color systems, brand guidelines"
+
+  - id: sagi-haviv
+    name: "Sagi Haviv"
+    file: agents/sagi-haviv.md
+    tier: 1
+    role: logo-master
+    description: "Logo design logic — CGH methodology, simplicity test, logo categories"
+
+  - id: alexandra-watkins
+    name: "Alexandra Watkins"
+    file: agents/alexandra-watkins.md
+    tier: 1
+    role: naming-alchemist
+    description: "Brand naming — SMILE/SCRATCH frameworks, name storming, taglines"
+
+  - id: emily-heyward
+    name: "Emily Heyward"
+    file: agents/emily-heyward.md
+    tier: 2
+    role: brand-builder
+    description: "Brand building & movements — Obsessed framework, emotional hooks, tribe architecture"
+
+workflows:
+  - id: wf-brand-from-zero
+    file: workflows/wf-brand-from-zero.yaml
+    description: "Complete brand creation from scratch (strategy→position→name→identity→launch)"
+
+  - id: wf-brand-audit
+    file: workflows/wf-brand-audit.yaml
+    description: "Comprehensive brand audit across all dimensions"
+
+tasks:
+  - brand-diagnosis.md
+  - positioning-exercise.md
+  - naming-exercise.md
+  - visual-identity-brief.md
+  - logo-evaluation.md
+  - brand-book-creation.md
+  - brand-audit.md
+  - brand-touchpoint-audit.md
+  - movement-architecture.md
+  - coherence-check.md
+
+templates:
+  - positioning-canvas-tmpl.md
+  - brand-book-tmpl.md
+  - brand-soul-canvas-tmpl.md
+  - naming-brief-tmpl.md
+  - visual-identity-brief-tmpl.md
+
+checklists:
+  - brand-strategy-checklist.md
+  - positioning-checklist.md
+  - naming-checklist.md
+  - visual-identity-checklist.md
+  - brand-book-checklist.md
+  - brand-launch-checklist.md
+  - smoke-tests.md
+
+data:
+  - brand-archetypes.md
+  - color-psychology.md
+  - brand-pantheon.md
+  - brand-voice-matrix.md
+  - brand-audit-methodology.md
+
+keywords:
+  - brand
+  - branding
+  - brand strategy
+  - positioning
+  - naming
+  - logo
+  - visual identity
+  - brand guidelines
+  - brand book
+  - color psychology
+  - brand voice
+  - brand archetype
+  - movement
+  - DTC brand
+  - brand audit

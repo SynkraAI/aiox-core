@@ -1,0 +1,240 @@
+# Critical Eye — Scoring Rules
+# Version: 1.0.0
+# Owner: Design Squad / Brad Frost
+# Purpose: Regras declarativas de scoring para curadoria de patterns.
+#          Permite ajustar pesos sem mudar implementacao.
+# Authority: Nathan Curtis/EightShapes, GOV.UK, USWDS, Brad Frost, Salesforce, Adobe Spectrum
+
+version: "1.0.0"
+last_updated: "2026-02-17"
+
+# ═══════════════════════════════════════════════════════════════
+# SCORING ENGINE — 5 dimensoes, 100 pontos totais
+# ═══════════════════════════════════════════════════════════════
+
+scoring:
+
+  breadth:
+    weight: 25
+    description: "Em quantas fontes/brands este pattern aparece?"
+    authority: "Nathan Curtis / EightShapes — Usage Breadth Scale"
+    rules:
+      - sources: 1
+        points: 0
+        label: "snowflake"
+      - sources: 2
+        points: 10
+        label: "discuss"
+      - sources: 3
+        points: 15
+        label: "probable_canonical"
+      - sources: 4
+        points: 20
+        label: "strong_candidate"
+      - sources: "5+"
+        points: 25
+        label: "confirmed_canonical"
+
+  quality:
+    weight: 30
+    description: "Qualidade tecnica mensuravel do pattern"
+    authority: "EightShapes Component QA 8+1 Dimensions"
+    dimensions:
+      token_compliance:
+        points: 5
+        description: "Todos valores via CSS custom properties, zero hardcoded"
+        evaluation: |
+          5: Zero hardcoded values
+          3: < 5 hardcoded (minor: shadows, transitions)
+          1: 5-10 hardcoded
+          0: > 10 hardcoded
+      states_coverage:
+        points: 5
+        description: "States interativas cobertas"
+        reference_states: [default, hover, focus, disabled, error, loading]
+        evaluation: "Prorated: (states_implemented / 6) * 5"
+      accessibility:
+        points: 5
+        blocker: true
+        description: "WCAG AA obrigatorio — se 0, pattern e REJECT automatico"
+        evaluation: |
+          5: Contrast AA + ARIA completo + keyboard navigable + focus-visible
+          3: Contrast AA + ARIA parcial
+          1: Contrast AA only
+          0: Falha contrast → REJECT AUTOMATICO
+        authority: "WCAG 2.2 / Todos os DS enterprises"
+      responsiveness:
+        points: 5
+        description: "Funciona em todos breakpoints"
+        breakpoints:
+          mobile: { min: 0, max: 639 }
+          tablet: { min: 640, max: 1023 }
+          desktop: { min: 1024 }
+        evaluation: |
+          5: Todos 3 breakpoints
+          3: 2 breakpoints
+          1: 1 breakpoint
+          0: Fixed width only
+      composability:
+        points: 5
+        description: "Compoe bem com outros canonicals"
+        evaluation: |
+          5: Compoe com 3+ canonicals sem hack
+          3: Compoe com 1-2
+          1: Requer adaptacao
+          0: Incompativel
+      resilience:
+        points: 5
+        description: "Lida com conteudo edge-case"
+        edge_cases: [empty_content, very_long_text, overflow, missing_image, RTL]
+        evaluation: |
+          5: Todos edge cases tratados
+          3: 3+ tratados
+          1: 1-2 tratados
+          0: Nenhum
+
+  consistency:
+    weight: 20
+    description: "Aderencia aos padroes do design system"
+    authority: "GOV.UK Contribution Criteria — Consistent"
+    dimensions:
+      naming:
+        points: 5
+        description: "Segue naming conventions (kebab-case, prefixos semanticos)"
+        evaluation: |
+          5: 100% aderente ao naming guide
+          3: Minor desvios (1-2 nomes fora do padrao)
+          0: Naming proprio/inconsistente
+      api_patterns:
+        points: 5
+        description: "Props/variants seguem padroes do DS"
+        evaluation: |
+          5: Usa CVA + variant pattern + slot pattern
+          3: CVA mas sem slots ou com props customizadas
+          0: API completamente diferente
+      visual_harmony:
+        points: 10
+        description: "Harmonia visual com o restante do DS"
+        evaluation: |
+          10: Indistinguivel do restante do DS
+          7: Pequenas diferencas esteticas
+          4: Reconhecivelmente diferente
+          0: Conflita visualmente
+
+  maturity:
+    weight: 15
+    description: "Maturidade e estabilidade do pattern"
+    authority: "USWDS Component Lifecycle"
+    dimensions:
+      stability:
+        points: 5
+        description: "Sem breaking changes recentes"
+        evaluation: |
+          5: Sem mudancas em 3+ ciclos
+          3: Minor changes no ultimo ciclo
+          1: Major changes recentes
+          0: Recentemente criado (1 ciclo)
+      documentation:
+        points: 5
+        description: "Documentacao completa"
+        evaluation: |
+          5: Guidelines + API + examples + do/dont
+          3: Guidelines + API
+          1: Apenas JSDoc/inline
+          0: Sem documentacao
+      tests:
+        points: 5
+        description: "Cobertura de testes"
+        evaluation: |
+          5: Unit + visual regression + a11y
+          3: Unit tests only
+          1: Smoke test only
+          0: Sem testes
+
+  simplicity:
+    weight: 10
+    description: "Simplicidade e minimalismo"
+    authority: "Brad Frost — Death to Complexity"
+    dimensions:
+      complexity:
+        points: 5
+        description: "Menos LOC e branches = melhor"
+        evaluation: |
+          5: < 50 LOC, logica direta
+          3: 50-150 LOC
+          1: 150-300 LOC
+          0: > 300 LOC ou logica convoluta
+      dependencies:
+        points: 5
+        description: "Menos dependencias externas = melhor"
+        evaluation: |
+          5: 0 deps (apenas React + CVA)
+          3: 1-2 deps (@radix, etc)
+          1: 3-5 deps
+          0: 6+ deps
+
+# ═══════════════════════════════════════════════════════════════
+# LIFECYCLE — Regras de transicao
+# ═══════════════════════════════════════════════════════════════
+
+lifecycle:
+  states: [CANDIDATE, EXPERIMENTAL, STABLE, CANONICAL, DEPRECATED, REJECT]
+
+  transitions:
+    - from: CANDIDATE
+      to: EXPERIMENTAL
+      auto: true
+      condition: "breadth_score >= 10 (aparece em 2+ sources)"
+      description: "Pattern observado em multiplas fontes"
+
+    - from: EXPERIMENTAL
+      to: STABLE
+      auto: true
+      condition: "total_score >= 60"
+      description: "Pattern passou quality gates basicos"
+
+    - from: STABLE
+      to: CANONICAL
+      auto: false
+      condition: "total_score >= 80 AND highest_in_category"
+      checkpoint: "design-chief approval via ds-critical-eye-review-checklist"
+      description: "Melhor pattern da categoria, requer aprovacao humana"
+
+    - from: CANONICAL
+      to: DEPRECATED
+      auto: false
+      condition: "new_canonical_score > current_score + 10"
+      checkpoint: "design-chief approval required"
+      description: "Substituido por pattern superior com margem significativa"
+
+    - from: ANY
+      to: REJECT
+      auto: true
+      condition: "accessibility_score == 0"
+      blocker: true
+      description: "Blocker absoluto — sem acessibilidade = fora do sistema"
+
+  thresholds:
+    canonical: 80
+    stable: 60
+    experimental: 40
+    reject_a11y: 0
+
+  tiebreaker:
+    rule: "breadth_score"
+    description: "Se scores dentro de 10%, o com maior abrangencia vence (efeito rede)"
+    margin_percent: 10
+    authority: "Nathan Curtis — network effect favors broader adoption"
+
+# ═══════════════════════════════════════════════════════════════
+# CATEGORIES — Categorias de patterns avaliadas
+# Alinhadas com entities.yaml Component.category + Pattern.category
+# ═══════════════════════════════════════════════════════════════
+
+categories:
+  base: [button, input, textarea, badge, label, icon, avatar, toggle, checkbox, radio]
+  core: [card, form-field, accordion, tabs, dropdown, select, dialog, popover]
+  layout: [sidebar, header, footer, grid, container, stack, split-view]
+  navigation: [menu, breadcrumb, pagination, stepper, nav-bar, drawer]
+  feedback: [toast, alert, progress, skeleton, spinner, tooltip, banner]
+  data: [table, list, chart, stat-card, data-grid, tree-view]

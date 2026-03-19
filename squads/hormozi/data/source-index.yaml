@@ -1,0 +1,215 @@
+# Hormozi Squad — Source Material Index v1.0
+# Maps all 165+ files to their target agents
+# Generated: 2026-02-09
+
+version: 1.0
+total_files: 165+
+total_size_mb: 165
+
+paths:
+  minds: squads/mind-cloning/minds/alex_hormozi
+  prompts: docs/projects/hormozi-squad/prompts
+  books: squads/mind-cloning/minds/alex_hormozi/sources/01 Livros
+  playbooks: squads/mind-cloning/minds/alex_hormozi/sources/02 Playbooks
+  programs: squads/mind-cloning/minds/alex_hormozi/sources/03 Programas
+  artifacts: squads/mind-cloning/minds/alex_hormozi/artifacts
+
+# Agent → Source mapping
+agents:
+  hormozi-chief:
+    primary:
+      - prompts/Hormozi/00_COGNITIVE_OS.md
+      - prompts/Hormozi/08_INDUSTRY_ADAPTATION.md
+      - artifacts/mental_models.yaml
+    secondary:
+      - artifacts/cognitive_architecture.yaml
+      - artifacts/cognitive-spec.yaml
+      - artifacts/identity-core.yaml
+      - artifacts/unique-algorithm.yaml
+      - artifacts/frameworks.yaml
+      - artifacts/phase5_meta_frameworks.yaml
+      - artifacts/core-obsessions.yaml
+      - prompts/Hormozi/04_COMMUNICATION_DNA.md
+    shared:
+      - artifacts/phase5_voice_profile.yaml
+      - artifacts/phase5_signature_phrases.yaml
+      - artifacts/linguistic_patterns.yaml
+
+  hormozi-offers:
+    primary:
+      - prompts/offers.md
+      - prompts/Hormozi/02_VALUE_EQUATION_ENGINE.md
+      - prompts/Hormozi/03_OFFER_CREATION_SYSTEM.md
+    secondary:
+      - books/Livro 100M Ofertas/CAPITULO 6 A EQUACAO DE VALOR.md
+      - books/Livro 100M Ofertas/CAPITULO 10 APARAR E EMPILHAR.md
+      - books/Livro 100M Ofertas/CAPITULO 11 APRIMORANDO A OFERTA.md
+      - books/Livro 100M Ofertas/CAPITULO 12 ESCASSEZ.md
+      - books/Livro 100M Ofertas/CAPITULO 13 URGENCIA.md
+      - books/Livro 100M Ofertas/CAPITULO 14 BONUS.md
+      - books/Livro 100M Ofertas/CAPITULO 15 GARANTIAS.md
+      - books/Livro 100M Ofertas/CAPITULO 16 RENAME.md
+      - books/Livro 100M Ofertas/FRAMEWORK DE IMPLEMENTACAO.md
+      - playbooks/Ofertas/Checklist de Oferta.md
+      - playbooks/Fast Cash/
+      - playbooks/Naming/swipefile-master-integrado.md
+    shared:
+      - prompts/Hormozi/04_COMMUNICATION_DNA.md
+      - prompts/Hormozi/06_CASE_LIBRARY_DENSE.md
+
+  hormozi-leads:
+    primary:
+      - prompts/leads.md
+      - books/Livro 100M Leads/Secao III Consiga Leads.md
+      - books/Livro 100M Leads/Secao IV Consiga Pessoas.md
+    secondary:
+      - books/Livro 100M Leads/Secao I Comece Aqui.md
+      - books/Livro 100M Leads/Secao II Entenda.md
+      - books/Livro 100M Leads/Secao V Comece.md
+      - books/Livro 100M Leads/Capitulos Bonus.md
+      - playbooks/Marketing Machine/
+      - playbooks/Lead Nurture/
+    shared:
+      - prompts/Hormozi/04_COMMUNICATION_DNA.md
+      - prompts/Hormozi/06_CASE_LIBRARY_DENSE.md
+
+  hormozi-models:
+    primary:
+      - prompts/money.md
+      - books/Livro 100m Modelos/Framework Completo.md
+      - books/Livro 100m Modelos/Secao 1 FRAMEWORK ATRACAO.md
+    secondary:
+      - books/Livro 100m Modelos/Secao 2 Ofertas de Atracao.md
+      - books/Livro 100m Modelos/Secao 3 Ofertas de Upsell.md
+      - books/Livro 100m Modelos/Secao 4 Ofertas de Downsell.md
+      - books/Livro 100m Modelos/Secao 5 Ofertas de Recorrencia.md
+      - books/Livro 100m Modelos/Secao 6 Seu Modelo.md
+      - books/Livro 100m Money Models/
+      - programs/100M Models/
+      - programs/Blueprint $100M Money Models/
+    shared:
+      - prompts/Hormozi/04_COMMUNICATION_DNA.md
+      - prompts/Hormozi/06_CASE_LIBRARY_DENSE.md
+
+  hormozi-hooks:
+    primary:
+      - prompts/hooks.md
+      - playbooks/Hooks/$100M Hooks Playbook.md
+      - playbooks/Hooks/FRAMEWORK HOOKS.md
+    secondary:
+      - playbooks/Hooks/$100M Hooks Playbook_PT-BR.md
+      - playbooks/Hooks/Checklist de Hooks.md
+      - playbooks/Hooks/Hooks RMKT.md
+      - playbooks/Hooks/Hooks Convite para Evento.md
+      - playbooks/Hooks/40 Melhores Hooks de David Ogilvy.md
+
+  hormozi-ads:
+    primary:
+      - prompts/ads.md
+      - playbooks/Ads/$100M Goated Ads Playbook.md
+      - playbooks/Ads/FRAMEWORK - GOATed Ads.md
+    secondary:
+      - playbooks/Ads/$100M Goated Ads Playbook_PT-BR.md
+      - playbooks/Ads/Swipe File Ads Hormozi.md
+      - playbooks/Ads/Checklist de ads.md
+      - programs/Blueprint $100M Money Models/Business_Growth_Ad_Angles.md
+      - programs/Blueprint $100M Money Models/Money_Models_Launch_Ads.md
+      - programs/Blueprint $100M Money Models/Retargeting_Ad_Angles_eCommerce.md
+
+  hormozi-pricing:
+    primary:
+      - playbooks/Pricing/$100M Pricing Playbook.md
+      - playbooks/Price Raise/$100M Price Raise Playbook.md
+    secondary:
+      - playbooks/Pricing/$100M Pricing Playbook_PT-BR.md
+      - playbooks/Price Raise/$100M Price Raise Playbook_PT-BR.md
+      - books/Livro 100M Ofertas/CAPITULO 4 PRECOS.md
+      - books/Livro 100M Ofertas/CAPITULO 5 COBRE.md
+
+  hormozi-copy:
+    primary:
+      - playbooks/Copy/BLUEPRINT UPSELL.md
+      - playbooks/Copy/BLUEPRINT PV.md
+    secondary:
+      - playbooks/Copy/Checklist LP.md
+      - programs/Blueprint $100M Money Models/Email_SMS_Copy_and_Mailers.md
+      - programs/Blueprint $100M Money Models/VIP_VSL_and_OTO_Content.md
+      - programs/Blueprint $100M Money Models/Landing_Pages_Navigation_Index.md
+      - programs/Blueprint $100M Money Models/Main_Offer_Landing_Page.md
+      - programs/Blueprint $100M Money Models/Registration_Page_Content.md
+
+  hormozi-launch:
+    primary:
+      - playbooks/Launch/$ 100M Playbook Lauch.md
+      - playbooks/Launch/$ 100M Playbook Lauch - Replicavel.md
+    secondary:
+      - playbooks/Launch/10 PAPEIS CRITICOS DO LANCAMENTO.md
+      - playbooks/Launch/Prompts Launch.md
+      - programs/Blueprint $100M Money Models/Launch_Recap_Page_Content.md
+
+  hormozi-retention:
+    primary:
+      - playbooks/Retention/$100M Retention Playbook.md
+      - playbooks/Lifetime Value/$100M Lifetime Value Playbook.md
+      - playbooks/Lead Nurture/$100M Lead Nurture Playbook.md
+    secondary:
+      - books/Livro 100m Modelos/Secao 5 Ofertas de Recorrencia.md
+      - programs/100M Models/26. Continuity Offers.md
+      - programs/100M Models/27. Continuity Bonus Offer.md
+      - programs/100M Models/28. Continuity Discount Offer.md
+      - programs/100M Models/29. Continuity Waive Fee Offer.md
+
+  hormozi-advisor:
+    primary:
+      - artifacts/cognitive_architecture.yaml
+      - artifacts/belief-system.yaml
+      - artifacts/values-hierarchy.yaml
+    secondary:
+      - artifacts/psychometric_profile.yaml
+      - artifacts/trait_behavioral_alignment.yaml
+      - artifacts/contradictions.yaml
+      - prompts/Hormozi/00_COGNITIVE_OS.md
+
+  hormozi-audit:
+    primary:
+      - prompts/Hormozi/05_ANTIPATTERN_SHIELDS.md
+      - playbooks/Ofertas/Checklist de Oferta.md
+      - playbooks/Copy/Checklist LP.md
+    secondary:
+      - playbooks/Ads/Checklist de ads.md
+      - playbooks/Hooks/Checklist de Hooks.md
+      - playbooks/Prova/$100M Proof Checklist Playbook.pdf
+
+  hormozi-closer:
+    primary:
+      - playbooks/Fechamento/$100M Closing Playbook.pdf
+    secondary:
+      - prompts/Hormozi/04_COMMUNICATION_DNA.md
+
+  hormozi-scale:
+    primary:
+      - playbooks/Scaling Roadmap/
+    secondary:
+      - programs/Blueprint $100M Money Models/ACQ_Scale_Advisory_Skool_Training.md
+      - playbooks/Branding/$100M Branding Playbook.md
+
+  hormozi-workshop:
+    primary:
+      - playbooks/Workshops/$ 100M Workshop Playbook.md
+      - playbooks/Workshops/FRAMEWORK WORKSHOP HORMOZI.md
+    secondary:
+      - playbooks/Workshops/ANALISE DO FRAMEWORK DO WORKSHOP.md
+      - playbooks/Workshops/PLAYBOOK DE CONTEUDO E SLIDES.md
+      - playbooks/Workshops/CHECKLIST COMPLETO WORKSHOP.md
+      - playbooks/Workshops/Transcricao Workshop $ 100M Money Leads.md
+      - programs/Clube $100M/WORKSHOP DOS MODELOS DE DINHEIRO.md
+
+  hormozi-content:
+    primary:
+      - books/Livro 100M Leads/Postar Conteudo Gratuito Parte I.md
+    secondary:
+      - programs/Blueprint $100M Money Models/Marketing_Content_Large_Collection.md
+      - playbooks/Marketing Machine/
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

@@ -1,0 +1,196 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# TEMPLATE: Roteiro de Corte
+# Purpose: Final output for video editors
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ROTEIRO DE CORTE
+# Arquivo final para o editor de vídeo
+# Todos os timestamps são EXATOS - corte direto
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADADOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  titulo: "{TITULO_DO_CORTE}"
+  fonte_original: "{URL_OU_NOME_DO_VIDEO}"
+  duracao_original: "{HH:MM:SS}"
+  duracao_alvo: "{MM:SS}"
+  formato: "{shorts | longform | documentary}"
+  plataforma: "{tiktok | reels | youtube_shorts | youtube_main}"
+  data_geracao: "{YYYY-MM-DD}"
+  gerado_por: "curator squad v1.0"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MOMENTOS (em ordem de MONTAGEM, não cronológica)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+momentos:
+  # Momento 1 - HOOK
+  - id: 1
+    ordem_montagem: 1
+    tipo: "hook"
+
+    # TIMESTAMPS EXATOS (corte direto aqui)
+    timestamp_inicio: "00:12:34"
+    timestamp_fim: "00:12:58"
+    duracao_segundos: 24
+
+    # TRANSCRIÇÃO EXATA (palavra por palavra)
+    transcricao: |
+      Tudo que você aprendeu sobre produtividade está errado.
+      E eu vou te provar isso agora.
+
+    # CONTEXTO PARA O EDITOR
+    contexto_antes: "[silêncio após piada]"
+    contexto_depois: "Deixa eu te contar uma história..."
+
+    # TRANSIÇÕES
+    transicao_antes: null  # É o início
+    transicao_depois: "natural"  # Flui naturalmente para próximo
+
+    # INSTRUÇÕES ESPECÍFICAS
+    notas_editor: |
+      - Hook de abertura, NÃO adicionar vinheta antes
+      - Começar com close-up se possível
+      - Cortar EXATAMENTE no timestamp indicado
+
+  # Momento 2 - STORY
+  - id: 2
+    ordem_montagem: 2
+    tipo: "story"
+
+    timestamp_inicio: "00:05:12"
+    timestamp_fim: "00:06:45"
+    duracao_segundos: 93
+
+    transcricao: |
+      Tinha um cliente meu que trabalhava 16 horas por dia.
+      Literalmente. Acordava 5 da manhã, dormia meia-noite.
+      Todo santo dia. E sabe o que aconteceu?
+
+    contexto_antes: "...vou te provar isso agora."
+    contexto_depois: "Ele não foi promovido..."
+
+    transicao_antes: "natural"
+    transicao_depois: "natural"
+
+    notas_editor: |
+      - História de setup, manter energia
+      - Não cortar no meio de frase
+      - Deixar respirar no final
+
+  # Momento 3 - INSIGHT
+  - id: 3
+    ordem_montagem: 3
+    tipo: "insight"
+
+    timestamp_inicio: "00:15:30"
+    timestamp_fim: "00:16:15"
+    duracao_segundos: 45
+
+    transcricao: |
+      70% do resultado vem do contexto mental, não das técnicas.
+      Você pode ter a melhor técnica do mundo, mas se sua mente
+      não está no lugar certo, não vai funcionar.
+
+    contexto_antes: "...ele não foi promovido."
+    contexto_depois: "[pausa para impacto]"
+
+    transicao_antes: "natural"
+    transicao_depois: "pausa_intencional"
+
+    notas_editor: |
+      - MOMENTO CHAVE - deixar respirar
+      - Adicionar 2-3 segundos de pausa após
+      - Pode adicionar zoom sutil
+
+  # ... continua com mais momentos
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CURADORIA (dados externos para enriquecer)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+curadoria:
+  - id: 1
+    tipo: "estatistica"
+    conteudo: "Segundo Gallup, 67% dos funcionários estão desengajados"
+    fonte: "Gallup State of Global Workplace 2024"
+    fonte_url: "https://..."
+    data: "2024"
+    encaixe_sugerido: "overlay após momento #3"
+    confianca: "alta"
+
+  - id: 2
+    tipo: "noticia"
+    conteudo: "Microsoft reporta aumento de 40% em produtividade com semana de 4 dias"
+    fonte: "BBC News"
+    fonte_url: "https://..."
+    data: "2024-03-15"
+    encaixe_sugerido: "menção após momento #5"
+    confianca: "alta"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# INSTRUÇÕES PARA O EDITOR
+# ═══════════════════════════════════════════════════════════════════════════════
+
+instrucoes_editor:
+  gerais:
+    - "Timestamps são EXATOS - cortar diretamente nos pontos indicados"
+    - "A ordem de montagem NÃO é cronológica - seguir ordem_montagem"
+    - "Cortar silêncios maiores que 2 segundos"
+    - "Manter energia consistente nos primeiros 10 segundos"
+
+  sobre_transicoes:
+    - "transicao_antes: null = é o início, não precisa de transição"
+    - "transicao_depois: natural = flui naturalmente"
+    - "transicao_depois: pausa_intencional = adicionar 2-3s de respiro"
+    - "Se precisar de frase de transição, está indicado abaixo"
+
+  transicoes_necessarias:
+    - entre: [2, 3]
+      sugestao: "E é por isso que eu digo..."
+      nota: "Pode usar do próprio vídeo em 00:08:45"
+
+  sobre_audio:
+    - "Manter áudio original"
+    - "Música de fundo APENAS onde indicado"
+    - "Não adicionar efeitos sonoros"
+
+  sobre_visual:
+    - "Preferir close-up no hook"
+    - "Cortes a cada 3-5 segundos para manter energia"
+    - "Zoom sutil em momentos de insight"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SUMÁRIO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+sumario:
+  total_momentos: 6
+  duracao_final_estimada: "3:45"
+  estrutura:
+    - "Hook (0:00-0:24)"
+    - "Story setup (0:24-1:57)"
+    - "Insight principal (1:57-2:42)"
+    - "Aplicação (2:42-3:20)"
+    - "CTA (3:20-3:45)"
+
+  momentos_por_tipo:
+    hook: 1
+    story: 2
+    insight: 2
+    cta: 1
+
+  curadoria_sugerida: 2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHECKLIST PRÉ-ENTREGA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+checklist:
+  - "[ ] Todos os timestamps verificados"
+  - "[ ] Ordem de montagem faz sentido narrativo"
+  - "[ ] Transições identificadas"
+  - "[ ] Instruções específicas claras"
+  - "[ ] Curadoria com fontes verificadas"

@@ -1,0 +1,203 @@
+############################################################
+# KNOWLEDGE-BASE-BUILDER SQUAD CONFIGURATION
+############################################################
+
+# Top-level fields for registry compatibility
+name: "knowledge-base-builder"
+version: "1.0.0"
+slashPrefix: "kbb"
+title: "Knowledge Base Builder Squad"
+description: "Transform complete libraries of course materials (PDFs, transcripts, documents) into structured knowledge bases and interactive learning applications. Two-phase system: Phase 1 builds navigable knowledge base with taxonomy and concept graphs; Phase 2 delivers dual-stack interactive apps (Next.js + Obsidian)."
+author: "AIOS Community"
+created: "2026-02-13"
+icon: null
+type: expert
+entry_agent: "kb-chief"
+
+tags:
+  - "knowledge-base"
+  - "document-processing"
+  - "taxonomy"
+  - "concept-extraction"
+  - "knowledge-graph"
+  - "obsidian"
+  - "nextjs"
+  - "learning"
+  - "course-materials"
+  - "pdf-extraction"
+  - "transcript-processing"
+
+activation:
+  slash_command: "kbb"
+  aliases:
+    - "knowledge-builder"
+  example_activation: "@kb-chief"
+  pattern_prefix: "KB"
+
+architecture:
+  tier_structure:
+    orchestrator:
+      - id: "kb-chief"
+        role: "Squad Coordinator & Pipeline Manager"
+        commands:
+          - "*help - List all capabilities and workflows"
+          - "*ingest - Start material ingestion pipeline"
+          - "*build - Build knowledge base from processed materials"
+          - "*app - Generate interactive application (Phase 2)"
+          - "*status - Show pipeline progress"
+          - "*validate - Run quality validation on knowledge base"
+
+    tier_0_processing:
+      - id: "doc-parser"
+        framework: "Multi-Format Document Processing Pipeline"
+        description: "Parses all input formats (PDF, DOCX, TXT, SRT, VTT, PPTX) into normalized text with metadata"
+      - id: "content-analyzer"
+        framework: "Content Structure Analysis & Pattern Detection"
+        description: "Analyzes normalized text to identify structure, topics, patterns, and content types"
+
+    tier_1_extraction:
+      - id: "concept-extractor"
+        framework: "Entity-Relation-Concept Extraction Pipeline"
+        description: "Extracts key concepts, definitions, relationships, and builds concept graph"
+      - id: "taxonomy-architect"
+        framework: "Hierarchical Taxonomy & Ontology Design"
+        description: "Designs category hierarchy, tags, and organizational structure"
+      - id: "knowledge-linker"
+        framework: "Source Traceability & Cross-Reference System"
+        description: "Links every concept back to source (file, page, timestamp) and builds cross-references"
+
+    tier_2_product:
+      - id: "app-architect"
+        framework: "Dual-Stack Application Architecture (Next.js + Obsidian)"
+        description: "Designs and builds interactive learning application in both Next.js and Obsidian formats"
+      - id: "quality-validator"
+        framework: "Knowledge Base Quality Assurance & Completeness Verification"
+        description: "Validates completeness, accuracy, and navigability of knowledge base"
+
+workflows:
+  - id: "wf-full-pipeline"
+    name: "Full Knowledge Base Pipeline (Phase 1 + Phase 2)"
+    duration_hours: "4-8"
+    agents_involved: 8
+    phases: 6
+    quality_gates: 8
+
+  - id: "wf-phase1-knowledge-base"
+    name: "Phase 1: Knowledge Base Construction"
+    duration_hours: "2-4"
+    agents_involved: 6
+    phases: 4
+    quality_gates: 5
+
+  - id: "wf-phase2-app-builder"
+    name: "Phase 2: Interactive App Builder"
+    duration_hours: "2-4"
+    agents_involved: 3
+    phases: 3
+    quality_gates: 3
+
+  - id: "wf-ingest-materials"
+    name: "Material Ingestion & Normalization"
+    duration_hours: "1-2"
+    agents_involved: 2
+    phases: 2
+    quality_gates: 2
+
+quality_gates:
+  total_gates: 8
+  blocking_gates: 6
+  warning_gates: 2
+
+validation_framework:
+  accuracy: "All extracted concepts verified against source materials"
+  coherence: "Taxonomy hierarchy is consistent and navigable"
+  strategic_alignment: "Covers all input materials completely"
+  operational_excellence: "Both output stacks functional and deployable"
+  innovation_capacity: "Extensible to new material formats and output formats"
+  risk_management: "Source traceability prevents hallucinated knowledge"
+
+core_principles:
+  - "Source traceability above all: every concept must link to origin"
+  - "Phase 1 must be validated before Phase 2 begins"
+  - "Multi-format support: no material left behind"
+  - "Dual-stack delivery: Next.js for web, Obsidian for local"
+  - "Quality-first: deep extraction over shallow coverage"
+  - "Human validation at phase boundaries"
+  - "Preserve original context alongside structured data"
+  - "Graph relationships reveal hidden connections"
+
+tool_integrations:
+  existing_tools:
+    - tool: "tools/document-processing/"
+      capabilities: ["DOCX parsing", "PPTX parsing", "XLSX parsing"]
+      integration: "Direct file system access"
+    - tool: "tools/aios-transcriber/"
+      capabilities: ["Video to transcript", "Audio processing"]
+      integration: "Pre-processing for video materials"
+
+  recommended_libraries:
+    python:
+      - "pymupdf (fitz): PDF text extraction with layout preservation"
+      - "pdfplumber: PDF table extraction"
+      - "python-docx: DOCX reading and metadata"
+      - "subtitle-parser: SRT/VTT transcript parsing"
+      - "spacy: NLP concept extraction and entity recognition"
+      - "networkx: Knowledge graph construction"
+      - "markitdown: Microsoft's multi-format to Markdown converter"
+    node:
+      - "pdf-parse: Node.js PDF text extraction"
+      - "mammoth: DOCX to HTML/Markdown"
+      - "subtitle: SRT/VTT stream parser"
+      - "gray-matter: Markdown frontmatter parsing"
+
+  output_formats:
+    - "JSON: Structured data for app consumption"
+    - "Markdown: Human-readable with frontmatter"
+    - "Obsidian Vault: Wikilinks, tags, graph-ready"
+    - "SQLite: Optional database for search"
+
+integration_notes:
+  dependencies:
+    - "All 8 agents must be loaded"
+    - "Input materials path must be provided"
+    - "tools/document-processing/ available for DOCX/PPTX/XLSX"
+    - "Python 3.13+ with pymupdf, pdfplumber, spacy"
+  preconditions:
+    - "Input materials organized in accessible directory"
+    - "User has validated material completeness"
+    - "Sufficient disk space for processing (2x input size)"
+
+usage_recommendations:
+  best_for:
+    - "Course creators wanting to structure video course content"
+    - "Educators building navigable knowledge bases from textbooks"
+    - "Organizations structuring training materials"
+    - "Authors creating interactive versions of their books"
+    - "Teams building internal knowledge bases from documents"
+  when_not_to_use:
+    - "Single document summarization (overkill)"
+    - "Real-time content processing (batch-oriented)"
+    - "Materials under 10 pages (insufficient for taxonomy)"
+
+activation_workflow:
+  step_1: "Activate @kb-chief"
+  step_2: "Provide materials path and learning domain context"
+  step_3: "Chief routes to Phase 1 ingestion pipeline"
+  step_4: "Review and validate knowledge base (Phase 1 gate)"
+  step_5: "Approve Phase 2 app generation"
+  step_6: "Receive dual-stack deliverables"
+  estimated_total_time: "4-8 hours depending on material volume"
+
+performance_metrics:
+  target_extraction_coverage: ">=95% of source materials processed"
+  target_concept_accuracy: ">=90% concepts correctly attributed"
+  target_traceability: "100% concepts linked to source"
+  target_taxonomy_depth: ">=3 levels of hierarchy"
+  target_graph_connectivity: ">=80% concepts have 2+ relationships"
+  overall_quality_threshold: ">=8.0/10"
+
+maintenance:
+  format_updates: "Add new format parsers as needed"
+  taxonomy_refinement: "User feedback improves categorization"
+  app_template_updates: "Keep Next.js and Obsidian templates current"
+  library_updates: "Track pymupdf, spacy, pdfplumber releases"

@@ -1,0 +1,462 @@
+template:
+  id: grand-slam-offer-output
+  name: Grand Slam Offer Generator
+  version: "1.0.0"
+  squad: hormozi
+  agents: [hormozi-offers, hormozi-chief]
+  workflows: [wf-grand-slam-offer]
+  output:
+    format: markdown
+    filename: "outputs/{{business_slug}}-grand-slam-offer.md"
+    title: "Grand Slam Offer — {{business_name}}"
+
+workflow:
+  mode: interactive
+  elicitation: advanced-elicitation
+  custom_elicitation:
+    title: "Grand Slam Offer Elicitation"
+    sections:
+      - id: business-type
+        options:
+          - "Digital (courses, coaching, SaaS, info-products)"
+          - "Physical (gym, restaurant, retail, clinic)"
+          - "Hybrid (digital product + physical service)"
+          - "Agency/Service (done-for-you, consulting)"
+
+      - id: price-tier
+        options:
+          - "Low ticket (<$100)"
+          - "Mid ticket ($100-$2,000)"
+          - "High ticket ($2,000-$10,000)"
+          - "Premium ($10,000+)"
+
+sections:
+  # ─────────────────────────────────────────────────────
+  # SECTION 1: MARKET VALIDATION (Elicit from user)
+  # ─────────────────────────────────────────────────────
+  - id: market-validation
+    title: "Phase 0 — Market Validation"
+    instruction: |
+      Before building the offer, validate the market. A Grand Slam Offer
+      cannot save a bad market.
+
+      Ask the user these questions (do NOT skip):
+      1. What do you sell? (product/service description)
+      2. Who do you sell it to? (specific avatar, not "everyone")
+      3. What do you currently charge?
+      4. How do you get customers today? (which of the Core Four)
+      5. What is your monthly revenue?
+
+      Then score the 4 Market Indicators (0-10 each):
+      - Massive Pain: Does the audience desperately need this?
+      - Purchasing Power: Can they afford it?
+      - Easy to Target: Can you find and reach them?
+      - Growing: Is this market expanding?
+
+      GATE: All 4 indicators must be >= 7 to proceed.
+      If any < 5: STOP and recommend market pivot.
+    elicit: true
+    template: |
+      ## Market Validation
+
+      **Business:** {{business_name}}
+      **Avatar:** {{avatar_description}}
+      **Current Price:** {{current_price}}
+      **Acquisition:** {{current_channels}}
+      **Monthly Revenue:** {{monthly_revenue}}
+
+      | Indicator | Score | Assessment |
+      |-----------|-------|------------|
+      | Massive Pain | {{pain_score}}/10 | {{pain_assessment}} |
+      | Purchasing Power | {{power_score}}/10 | {{power_assessment}} |
+      | Easy to Target | {{target_score}}/10 | {{target_assessment}} |
+      | Growing | {{growth_score}}/10 | {{growth_assessment}} |
+
+      **Market Verdict:** {{market_verdict}}
+    examples:
+      - |
+        ## Market Validation
+
+        **Business:** Online fitness coaching for busy executives
+        **Avatar:** Male executives 35-50, $150K+ income, no time to train
+        **Current Price:** $297/month
+        **Acquisition:** Instagram content + warm outreach
+        **Monthly Revenue:** $12,000
+
+        | Indicator | Score | Assessment |
+        |-----------|-------|------------|
+        | Massive Pain | 9/10 | Health anxiety + vanity + status = desperate |
+        | Purchasing Power | 10/10 | $150K+ income, price is trivial |
+        | Easy to Target | 8/10 | LinkedIn, exec communities, gyms near offices |
+        | Growing | 9/10 | Remote work increased sedentary lifestyle |
+
+        **Market Verdict:** PROCEED — All indicators >= 8. Starving crowd confirmed.
+
+  # ─────────────────────────────────────────────────────
+  # SECTION 2: VALUE EQUATION DIAGNOSTIC
+  # ─────────────────────────────────────────────────────
+  - id: value-equation
+    title: "Phase 1 — Value Equation Diagnostic"
+    instruction: |
+      Score the current offer (or proposed offer) against the Value Equation:
+      Value = (Dream Outcome x Perceived Likelihood) / (Time Delay + Effort & Sacrifice)
+
+      For each variable, score 1-10 using these anchors:
+
+      Dream Outcome:
+        1-3: Vague promise, no transformation
+        4-6: Clear benefit, no status/emotional connection
+        7-8: Vivid transformation with status implications
+        9-10: "People will ask what happened to you" level
+
+      Perceived Likelihood:
+        1-3: No proof, no guarantee, trust me bro
+        4-6: Some testimonials, weak guarantee
+        7-8: Strong case studies, performance guarantee
+        9-10: "30 clients in 30 days or you don't pay" level
+
+      Time Delay (inverted — lower delay = higher score):
+        1-3: Months to first result
+        4-6: Weeks to first result
+        7-8: Days to first tangible outcome
+        9-10: Immediate value upon purchase
+
+      Effort & Sacrifice (inverted — lower effort = higher score):
+        1-3: Client does all the work (DIY)
+        4-6: Guided, significant effort required
+        7-8: Done-with-you, minimal effort
+        9-10: Done-for-you, client does almost nothing
+
+      Identify the WEAKEST variable — that is the highest leverage fix.
+    elicit: true
+    template: |
+      ## Value Equation Diagnostic
+
+      ```
+      Value = (Dream Outcome x Perceived Likelihood) / (Time Delay + Effort)
+      Value = ({{dream_score}} x {{likelihood_score}}) / ({{time_score}} + {{effort_score}})
+      Value = {{numerator}} / {{denominator}} = {{composite_score}}
+      ```
+
+      | Variable | Score | Assessment |
+      |----------|-------|------------|
+      | Dream Outcome | {{dream_score}}/10 | {{dream_assessment}} |
+      | Perceived Likelihood | {{likelihood_score}}/10 | {{likelihood_assessment}} |
+      | Time Delay | {{time_score}}/10 | {{time_assessment}} |
+      | Effort & Sacrifice | {{effort_score}}/10 | {{effort_assessment}} |
+
+      **Weakest Variable:** {{weakest_variable}}
+      **Highest Leverage Move:** {{leverage_recommendation}}
+    examples:
+      - |
+        ## Value Equation Diagnostic
+
+        ```
+        Value = (Dream Outcome x Perceived Likelihood) / (Time Delay + Effort)
+        Value = (9 x 5) / (4 + 7)
+        Value = 45 / 11 = 4.1
+        ```
+
+        | Variable | Score | Assessment |
+        |----------|-------|------------|
+        | Dream Outcome | 9/10 | "Get the body of a 25-year-old at 45" — vivid, status-loaded |
+        | Perceived Likelihood | 5/10 | Only 3 testimonials, no guarantee. Trust gap. |
+        | Time Delay | 4/10 | First visible results in 6 weeks. Too slow. |
+        | Effort & Sacrifice | 7/10 | Custom meal plans delivered, workouts programmed. Low effort. |
+
+        **Weakest Variable:** Time Delay (4/10)
+        **Highest Leverage Move:** Add a "First 48h Win" — body composition scan + personalized action plan delivered within 2 hours of purchase. Score jumps from 4 to 7.
+
+  # ─────────────────────────────────────────────────────
+  # SECTION 3: OFFER ENGINEERING
+  # ─────────────────────────────────────────────────────
+  - id: offer-engineering
+    title: "Phase 2 — Grand Slam Offer Engineering"
+    instruction: |
+      Build the complete offer stack. For each component, the agent must:
+      1. Define the core offer (primary deliverable)
+      2. List ALL problems the avatar faces (minimum 10)
+      3. For each problem, create a solution
+      4. Bundle solutions into delivery vehicles (courses, tools, access, services)
+      5. Trim to highest-value components
+      6. Design bonuses (each resolves a specific remaining objection)
+      7. Design guarantee (unconditional, conditional, or performance)
+      8. Define real scarcity mechanism
+      9. Define real urgency mechanism
+
+      CRITICAL: Every bonus must resolve a SPECIFIC objection. Never add bonuses
+      for the sake of adding value. Each bonus answers "But what about [objection]?"
+
+      Price must create minimum 10:1 value-to-price ratio.
+    elicit: true
+    template: |
+      ## Grand Slam Offer Stack
+
+      ### Core Offer
+      **Deliverable:** {{core_deliverable}}
+      **Dream Outcome:** {{dream_outcome_statement}}
+      **Format:** {{delivery_format}}
+
+      ### Problem → Solution → Vehicle Map
+
+      | # | Problem | Solution | Vehicle | Value |
+      |---|---------|----------|---------|-------|
+      {{#each problem_solution_map}}
+      | {{index}} | {{problem}} | {{solution}} | {{vehicle}} | {{perceived_value}} |
+      {{/each}}
+
+      ### Bonus Stack
+      {{#each bonuses}}
+      **Bonus {{index}}: {{bonus_name}}**
+      - Objection it resolves: "{{objection}}"
+      - What they get: {{description}}
+      - Perceived value: {{value}}
+      {{/each}}
+
+      ### Guarantee
+      - **Type:** {{guarantee_type}}
+      - **Terms:** {{guarantee_terms}}
+      - **Risk reversal:** {{risk_reversal_statement}}
+
+      ### Scarcity
+      - **Type:** {{scarcity_type}}
+      - **Mechanism:** {{scarcity_mechanism}}
+      - **Real constraint:** {{scarcity_proof}}
+
+      ### Urgency
+      - **Type:** {{urgency_type}}
+      - **Deadline:** {{urgency_deadline}}
+      - **Consequence of inaction:** {{urgency_consequence}}
+
+  # ─────────────────────────────────────────────────────
+  # SECTION 4: NAMING (MAGICO Framework)
+  # ─────────────────────────────────────────────────────
+  - id: naming
+    title: "Phase 3 — MAGICO Naming"
+    instruction: |
+      Apply the MAGICO naming framework to create the offer name.
+      Generate 3-5 name options using the formula:
+
+      M — Magnet (attention-grabbing word)
+      A — Avatar (who it is for)
+      G — Goal (what they achieve)
+      I — Interval (time frame)
+      C — Container (format: challenge, system, program, accelerator)
+      O — Outcome (specific measurable result)
+
+      Example: "The Executive Body Reboot: 6-Week Transformation System
+      for Busy Leaders Who Want to Look 10 Years Younger"
+
+      Select the strongest name. It must pass the "would I click on this?" test.
+    template: |
+      ## MAGICO Naming
+
+      | Component | Value |
+      |-----------|-------|
+      | **M** — Magnet | {{magnet}} |
+      | **A** — Avatar | {{avatar}} |
+      | **G** — Goal | {{goal}} |
+      | **I** — Interval | {{interval}} |
+      | **C** — Container | {{container}} |
+      | **O** — Outcome | {{outcome}} |
+
+      ### Name Options
+      1. {{name_option_1}}
+      2. {{name_option_2}}
+      3. {{name_option_3}}
+
+      **Selected:** {{final_name}}
+      **Tagline:** "{{tagline}}"
+    examples:
+      - |
+        ## MAGICO Naming
+
+        | Component | Value |
+        |-----------|-------|
+        | **M** — Magnet | "Reboot" (implies reset, fresh start) |
+        | **A** — Avatar | Busy executives 35-50 |
+        | **G** — Goal | Look and feel 10 years younger |
+        | **I** — Interval | 6 weeks |
+        | **C** — Container | Transformation System |
+        | **O** — Outcome | Visible body transformation + energy |
+
+        ### Name Options
+        1. The Executive Body Reboot: 6-Week Transformation System
+        2. The CEO Physique Protocol: From Boardroom to Beach Body in 42 Days
+        3. The High-Performance Body System for Leaders Who Refuse to Settle
+
+        **Selected:** The Executive Body Reboot: 6-Week Transformation System
+        **Tagline:** "Get the body your success deserves — without sacrificing a single meeting."
+
+  # ─────────────────────────────────────────────────────
+  # SECTION 5: PRICING & VALUE RATIO
+  # ─────────────────────────────────────────────────────
+  - id: pricing
+    title: "Phase 4 — Pricing & Anchoring"
+    instruction: |
+      Calculate the value-to-price ratio and build the anchoring sequence.
+
+      1. Sum all perceived values (core + bonuses)
+      2. Set price point based on price tier and market
+      3. Calculate ratio: total perceived value / price
+      4. Build anchoring sequence showing value before revealing price
+      5. Verify margins >= 80% for services
+
+      GATE: Value-to-price ratio must be >= 10:1.
+      If below 10:1, go back to offer engineering and add more value.
+    template: |
+      ## Pricing & Value Ratio
+
+      | Component | Perceived Value |
+      |-----------|----------------|
+      | Core Offer | {{core_value}} |
+      {{#each bonuses}}
+      | Bonus {{index}}: {{name}} | {{value}} |
+      {{/each}}
+      | **Total Perceived Value** | **{{total_value}}** |
+
+      **Price:** {{price}}
+      **Value-to-Price Ratio:** {{ratio}}:1
+      **Margin:** {{margin}}%
+
+      ### Anchoring Sequence
+      {{anchoring_narrative}}
+
+  # ─────────────────────────────────────────────────────
+  # SECTION 6: ANTIPATTERN CHECK
+  # ─────────────────────────────────────────────────────
+  - id: antipattern-check
+    title: "Phase 5 — Antipattern Validation"
+    instruction: |
+      Run the complete antipattern scan on the finished offer.
+      Every check must PASS before the offer is approved.
+
+      If any antipattern triggers, the offer must be revised.
+      Do NOT deliver an offer with active antipatterns.
+    template: |
+      ## Antipattern Scan
+
+      | Check | Status | Notes |
+      |-------|--------|-------|
+      | Commoditization risk | {{commoditization_status}} | {{commoditization_notes}} |
+      | False scarcity/urgency | {{false_scarcity_status}} | {{false_scarcity_notes}} |
+      | Price competition | {{price_competition_status}} | {{price_competition_notes}} |
+      | Low margins (<80%) | {{margins_status}} | {{margins_notes}} |
+      | Structural churn | {{churn_status}} | {{churn_notes}} |
+      | Bloated offer | {{bloated_status}} | {{bloated_notes}} |
+      | Key-man dependency | {{keyman_status}} | {{keyman_notes}} |
+
+      **Verdict:** {{antipattern_verdict}}
+
+  # ─────────────────────────────────────────────────────
+  # SECTION 7: FINAL SUMMARY
+  # ─────────────────────────────────────────────────────
+  - id: final-summary
+    title: "Grand Slam Offer — Final Document"
+    instruction: |
+      Compile the complete offer into a final deliverable document.
+      Include all sections above plus a "stupid to say no" test:
+      Ask: "Would the avatar feel stupid saying no to this?"
+      If the answer is not an immediate YES, the offer needs more work.
+    template: |
+      # {{final_name}}
+
+      > "{{tagline}}"
+
+      **Price:** {{price}} | **Value:** {{total_value}} | **Ratio:** {{ratio}}:1
+
+      ## The Offer
+      {{core_deliverable_summary}}
+
+      ## What You Get
+      {{complete_value_stack}}
+
+      ## Guarantee
+      {{guarantee_statement}}
+
+      ## Why Now
+      - **Scarcity:** {{scarcity_statement}}
+      - **Urgency:** {{urgency_statement}}
+
+      ## Value Equation Score
+      ```
+      Dream Outcome:        {{dream_score}}/10
+      Perceived Likelihood:  {{likelihood_score}}/10
+      Time Delay:            {{time_score}}/10
+      Effort & Sacrifice:    {{effort_score}}/10
+      Composite:             {{composite_score}}
+      ```
+
+      ---
+      *Generated by hormozi-offers | {{date}}*
+      *Frameworks: VALUE_EQUATION_ENGINE, OFFER_CREATION_SYSTEM*
+
+  # ─────────────────────────────────────────────────────
+  # VALIDATION
+  # ─────────────────────────────────────────────────────
+  - id: validation
+    title: Validation Gate
+    instruction: |
+      Validate the completed offer against these criteria:
+
+      BLOCKING (must all pass):
+      - [ ] Market validation: all 4 indicators >= 7
+      - [ ] Value Equation: all 4 variables scored with data
+      - [ ] Value-to-price ratio >= 10:1
+      - [ ] Antipattern scan: zero violations
+      - [ ] MAGICO naming applied
+      - [ ] Guarantee defined (not "satisfaction guaranteed" — specific terms)
+      - [ ] Scarcity is REAL (not fabricated)
+      - [ ] Urgency is REAL (not fake countdown)
+
+      QUALITY (should pass):
+      - [ ] Minimum 3 bonuses, each resolving a specific objection
+      - [ ] Problem-solution map has 10+ entries
+      - [ ] Margins >= 80%
+      - [ ] "Stupid to say no" test: immediate YES
+
+      If any BLOCKING check fails, return to the relevant section.
+
+# ─────────────────────────────────────────────────────
+# PLACEHOLDERS DOCUMENTATION
+# ─────────────────────────────────────────────────────
+placeholders:
+  # Market Validation
+  business_name: "Name of the business"
+  business_slug: "kebab-case business identifier for filename"
+  avatar_description: "Specific avatar description (who, age, income, pain)"
+  current_price: "Current price point"
+  current_channels: "Which Core Four channels active"
+  monthly_revenue: "Current monthly revenue"
+  pain_score: "Massive Pain score 1-10"
+  power_score: "Purchasing Power score 1-10"
+  target_score: "Easy to Target score 1-10"
+  growth_score: "Growing market score 1-10"
+
+  # Value Equation
+  dream_score: "Dream Outcome score 1-10"
+  likelihood_score: "Perceived Likelihood score 1-10"
+  time_score: "Time Delay score 1-10 (inverted)"
+  effort_score: "Effort & Sacrifice score 1-10 (inverted)"
+  composite_score: "Calculated composite value score"
+
+  # Offer Components
+  core_deliverable: "Primary deliverable description"
+  bonuses: "Array of bonus objects (name, objection, description, value)"
+  guarantee_type: "Unconditional | Conditional | Performance"
+  guarantee_terms: "Specific guarantee language"
+  scarcity_type: "Capacity | Cohort | Time-limited"
+  urgency_type: "Event | Deadline | Price increase"
+
+  # Naming
+  final_name: "Selected MAGICO-generated offer name"
+  tagline: "One-line offer tagline"
+
+  # Pricing
+  price: "Final price point"
+  total_value: "Sum of all perceived values"
+  ratio: "Value-to-price ratio (target 10:1+)"
+  margin: "Gross margin percentage"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

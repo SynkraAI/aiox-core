@@ -1,0 +1,193 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Shorts Pipeline
+# Version: 1.0.0
+# Purpose: Optimized pipeline for sub-60-second content
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflow-id: wf-shorts-pipeline
+name: Shorts Pipeline
+version: 1.0.0
+estimated-time: 15-25 minutes
+complexity: low-medium
+
+description: |
+  Streamlined pipeline for creating short-form content (<60s).
+  Optimized for TikTok, Instagram Reels, YouTube Shorts.
+  Skips full narrative phase — goes directly from mining to format optimization.
+
+  Pipeline:
+  [Input] → Mine (hooks focus) → Hook Optimization → Shorts Structure → [Output]
+
+inputs:
+  required:
+    - content: "{source-slug}/momentos.md OR raw transcript"
+    - platform: "tiktok | reels | youtube_shorts"
+  optional:
+    - duration: "content-driven (default) — Duration Intelligence calculates optimal duration from content structure + platform sweet spots. User can override with explicit seconds."
+    - enrich: "true | false (default: false)"
+    - hook_style: "counter-intuitive | question | shock-stat | visual"
+
+phases:
+
+  - phase: 0
+    name: Source Preparation
+    duration: 2-5 min
+    agent: "content-miner-pro"
+    skip_if: "{source-slug}/momentos.md already provided"
+
+    steps:
+      - step: 1
+        action: "Mine transcript with focus on hooks and short moments"
+        params: "--focus hooks,quotes --target shorts"
+
+    checkpoint:
+      gate: "QG-002"
+      criteria:
+        - "{source-slug}/momentos.md exists"
+        - "At least 3 hooks identified"
+      blocking: true
+
+    output:
+      files:
+        - "{source-slug}/momentos.md"
+        - "{source-slug}/transcricao_anotada.md"
+
+  - phase: 1
+    name: Hook Selection & Optimization
+    duration: 3-5 min
+    agent: "brendan-kane"
+
+    steps:
+      - step: 1
+        action: "Analyze all hooks from banco_momentos"
+      - step: 2
+        action: "Apply Hook Point methodology"
+        select: "Top 3 hook candidates"
+      - step: 3
+        action: "Optimize selected hook for 1-second capture"
+
+    checkpoint:
+      criteria:
+        - "Hook selected with 1-second capture strategy"
+        - "Hook type defined (visual, verbal, both)"
+      blocking: true
+
+    output:
+      file: "hook_selection.yaml"
+
+  - phase: 2
+    name: Shorts Structure
+    duration: 5-10 min
+    agent: "mrbeast"
+
+    steps:
+      - step: 1
+        action: "Build 5-beat structure (Hook, Context, Value, Payoff, Loop/CTA)"
+      - step: 2
+        action: "Define cut frequency (every 2-4 seconds)"
+      - step: 3
+        action: "Add text overlay plan"
+      - step: 4
+        action: "Create loop ending or CTA"
+      - step: 5
+        action: "Generate platform adaptations"
+
+    checkpoint:
+      gate: "QG-004"
+      criteria:
+        - "All 5 beats defined with timestamps"
+        - "Total duration within platform limit"
+        - "Loop or CTA ending defined"
+      blocking: true
+
+    output:
+      file: "shorts_cut.yaml"
+
+  - phase: 3
+    name: Final Validation
+    duration: 2-3 min
+    agent: "curator-chief"
+
+    steps:
+      - step: 1
+        action: "Validate shorts_cut.yaml"
+      - step: 2
+        action: "Verify platform compliance"
+      - step: 3
+        action: "Generate editor instructions"
+
+    output:
+      files:
+        - "shorts_cut.yaml"
+        - "editor_instructions.md"
+
+quality_gates:
+  summary:
+    - gate: QG-002
+      phase: 0
+      blocking: true
+      criteria: "banco_momentos exists with hooks"
+    - gate: QG-004
+      phase: 2
+      blocking: true
+      criteria: "5-beat structure complete, duration valid"
+
+execution:
+  command: "*shorts {input} {platform}"
+  example: "*shorts {source-slug}/momentos.md tiktok"
+  shortcuts:
+    tiktok: "*shorts {input} tiktok"
+    reels: "*shorts {input} reels"
+    youtube: "*shorts {input} youtube_shorts"
+  note: "Duration is calculated by Duration Intelligence based on content structure and platform sweet spots. No hardcoded defaults."
+
+  parallel_execution:
+    enabled: false
+    reason: "Sequential dependencies (mining → hook → structure)"
+
+  rollback:
+    phase_0_fail: "Fix mining parameters, retry"
+    phase_1_fail: "Select alternative hook from banco_momentos"
+    phase_2_fail: "Adjust structure, verify duration constraints"
+
+notes: |
+  **When to use:**
+  - Short-form content prioritized over long-form
+  - Fast turnaround needed (<30 min)
+  - Platform-first strategy (TikTok, Reels, Shorts)
+
+  **When NOT to use:**
+  - Content requires deep narrative structure
+  - Multiple format outputs needed (use wf-multi-format)
+  - Educational/documentary style (use wf-longform-pipeline)
+
+  **Platform differences (Duration Intelligence sweet spots):**
+  - TikTok: Max 60s. Viral sweet spot: 24-38s. Value sweet spot: 60-90s. Loop endings preferred, trending sounds important.
+  - Instagram Reels: Max 90s. Viral sweet spot: 7-15s. Value sweet spot: 30-45s. Strong visual hook critical. Looping at 7-15s drives 300%+ retention.
+  - YouTube Shorts: Max 60s. Optimal: 50-58s. Watch time is #1 ranking factor.
+
+  **Duration is content-driven, NOT fixed buckets.** Completion rate > arbitrary length.
+  A 45s video watched fully outperforms a 15s video with 40% retention.
+  See: .dispatch/research/curator-cut-customization-research.md (Section 3)
+
+dependencies:
+  tasks:
+    - "mine-transcript.md"
+  agents:
+    - "content-miner-pro"
+    - "brendan-kane"
+    - "mrbeast"
+    - "curator-chief"
+  templates:
+    - "templates/banco-momentos-tmpl.md"
+    - "templates/shorts-cut-tmpl.yaml"
+
+  # Render Phase
+  # For video rendering, use wf-mine-to-cut Phase 5 or invoke ffmpeg-cutter directly:
+  # *render --input VIDEO --cut-yaml YAML
+  # See: squads/curator/tasks/execute-cut.md
+
+version_history:
+  - version: 1.0.0
+    date: 2026-02-05
+    changes: "Initial workflow creation"

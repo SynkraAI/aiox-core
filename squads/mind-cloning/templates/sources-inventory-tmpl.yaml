@@ -1,0 +1,67 @@
+# Template: Sources Inventory
+# Usage: Output of collect-sources task
+# Fill all fields during Phase 1 of mind cloning
+
+sources_inventory:
+  metadata:
+    mind_name: "{expert_name}"
+    mind_slug: "{mind_slug}"
+    domain: "{domain}"
+    extraction_date: "{date}"
+    total_sources: 0
+    tier_0_count: 0
+    tier_1_count: 0
+    tier_2_count: 0
+    tier_3_count: 0
+    quality_status: "GO|CONDITIONAL|NO-GO"
+
+  tier_0_user_materials:
+    - id: "S00"
+      title: ""
+      type: "pdf|book|transcription|notes|course"
+      provided_by: "user"
+      estimated_volume: ""
+      key_topics: []
+      notes: ""
+
+  tier_1_primary:
+    - id: "S01"
+      title: ""
+      type: "book|interview|article|video|course|podcast"
+      year: ""
+      url: ""
+      estimated_volume: ""
+      key_topics: []
+      triangulates: []
+
+  tier_2_secondary:
+    - id: "S20"
+      title: ""
+      type: "biography|case_study|profile|analysis"
+      year: ""
+      url: ""
+      estimated_volume: ""
+      key_topics: []
+
+  tier_3_tertiary:
+    - id: "S30"
+      title: ""
+      type: "wikipedia|summary|compilation|quote_list"
+      year: ""
+      url: ""
+      estimated_volume: ""
+
+  validation:
+    total_sources: 0
+    tier_1_count: 0
+    type_diversity: 0
+    content_volume: ""
+    framework_triangulated: false
+    triangulation_score: ""
+    checks_passed: "0/5"
+
+  decision:
+    status: "GO|CONDITIONAL|NO-GO"
+    ready_for_extraction: false
+    gaps: []
+    acquisition_plan: ""

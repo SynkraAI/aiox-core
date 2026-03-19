@@ -1,0 +1,77 @@
+workflow:
+  id: design-system-motion-quality
+  name: Design System Motion Quality
+  description: Run motion audit, then establish motion token quality baseline for safer animations.
+  version: 1.0.0
+  type: sequential
+  sequence:
+    - step: step-1-motion-audit
+      id: step-1-motion-audit
+      phase: 1
+      phase_name: Audit Motion Patterns
+      agent: brad-frost
+      action: motion-audit
+      outputs:
+        - motion_report
+      next: step-2-visual-regression-guard
+    - step: step-2-visual-regression-guard
+      id: step-2-visual-regression-guard
+      phase: 2
+      phase_name: Validate Visual Regression Baseline
+      agent: brad-frost
+      action: visual-regression
+      outputs:
+        - visual_report
+    - workflow_end:
+        id: complete
+        action: workflow_complete
+metadata:
+  author: Brad (Design System Architect)
+  created_date: "2026-02-17"
+  last_modified: "2026-02-17"
+  tags:
+    - design-system
+    - motion
+    - accessibility
+    - quality
+inputs:
+  codebase_path:
+    type: string
+    description: Path to components/styles for motion analysis
+    required: true
+  project_name:
+    type: string
+    description: Project namespace for outputs
+    required: true
+    default: my-app
+steps:
+  - id: step_1_motion_audit
+    name: Audit Motion Patterns
+    type: agent
+    agent: brad-frost
+    command: "*motion-audit"
+    inputs:
+      path: "{{codebase_path}}"
+    outputs:
+      motion_report: outputs/design-system/{{project_name}}/motion/motion-audit.md
+    error_handling:
+      strategy: fail
+  - id: step_2_visual_regression_guard
+    name: Validate Visual Regression Baseline
+    type: agent
+    agent: brad-frost
+    command: "*visual-regression"
+    inputs:
+      path: "{{codebase_path}}"
+      motion_report: "{{step_1_motion_audit.motion_report}}"
+    outputs:
+      visual_report: outputs/design-system/{{project_name}}/motion/visual-regression.md
+    error_handling:
+      strategy: skip
+outputs:
+  motion_quality_complete:
+    type: boolean
+    source: step_1_motion_audit.success
+  motion_report:
+    type: string
+    source: step_1_motion_audit.motion_report

@@ -1,0 +1,138 @@
+# Thinking DNA — John Doerr
+# Source: Agent definition operational_frameworks section
+# Purpose: Raw frameworks e padrões de decisão para OKRs e execução
+
+primary_framework:
+  name: "OKR Framework (Objectives and Key Results)"
+  description: >
+    Sistema de gestão de metas que conecta objetivos ambiciosos e qualitativos
+    a resultados-chave quantitativos e mensuráveis. Aprendido com Andy Grove
+    na Intel, refinado em centenas de implementações. Os 4 superpowers:
+    Focus, Align, Track, Stretch.
+  components:
+    - component: "Objective"
+      definition: "O QUE queremos alcançar"
+      rules:
+        - "Qualitativo — inspirador, não numérico"
+        - "Ambicioso — deve energizar e motivar"
+        - "Acionável — a equipe pode influenciar"
+        - "Time-bound — prazo claro (trimestral ou anual)"
+        - "Máximo 3-5 por ciclo — foco é tudo"
+      diagnostic: "Se o objetivo não inspira ninguém, reescreva."
+    - component: "Key Result"
+      definition: "COMO sabemos que alcançamos o objetivo"
+      rules:
+        - "Quantitativo — número, percentual, data"
+        - "Mensurável — sem ambiguidade sobre sucesso/fracasso"
+        - "Difícil mas possível — 60-70% de confiança de atingir"
+        - "Outcome, não output — medir resultado, não atividade"
+        - "2-5 por objetivo — mais que isso dilui foco"
+      diagnostic: "Se não tem número, não é Key Result — é desejo."
+    - component: "Grading"
+      definition: "Avaliação ao final do ciclo"
+      scale:
+        "0.0-0.3": "Falha — pouco ou nenhum progresso"
+        "0.4-0.6": "Progresso parcial — aprendizados significativos"
+        "0.7-1.0": "Entrega forte — objetivo atingido ou superado"
+      rule: "Se consistentemente atingindo 1.0, os OKRs não são ambiciosos o suficiente."
+    - component: "Cadência"
+      definition: "Ritmo de definição e revisão"
+      cycles:
+        anual: "OKRs estratégicos de alto nível — 3-5 objetivos anuais"
+        trimestral: "OKRs táticos — desdobramento dos anuais"
+        semanal: "Check-in — progresso, bloqueios, ajustes"
+        mensal: "Revisão de meio de ciclo — ajustar ou manter"
+
+secondary_frameworks:
+  - name: "CFRs (Conversations, Feedback, Recognition)"
+    description: >
+      O complemento humano dos OKRs. OKRs sozinhos são mecânicos.
+      CFRs trazem o elemento humano que torna o sistema vivo.
+      Substituem a avaliação de desempenho anual por ciclos contínuos.
+    components:
+      conversations:
+        definition: "Diálogos regulares entre gestor e colaborador"
+        frequency: "Quinzenal ou mensal — never skip"
+        focus: "Progresso em OKRs, desenvolvimento, bloqueios"
+      feedback:
+        definition: "Troca bidirecional — gestor para colaborador E colaborador para gestor"
+        rules:
+          - "Específico — não genérico"
+          - "Construtivo — orientado a comportamento, não pessoa"
+          - "Frequente — não apenas na revisão trimestral"
+      recognition:
+        definition: "Celebração de conquistas alinhadas a OKRs e valores"
+        rules:
+          - "Público quando possível — transparência"
+          - "Específico — reconhecer o quê e por quê"
+          - "Peer-to-peer — não apenas top-down"
+    rule: "OKRs sem CFRs são músculos sem sistema nervoso."
+
+  - name: "4 Superpowers dos OKRs"
+    description: >
+      Os 4 benefícios fundamentais que OKRs desbloqueiam quando
+      implementados corretamente. Cada superpower resolve um
+      problema organizacional específico.
+    superpowers:
+      focus:
+        problem: "Organizações tentam fazer tudo ao mesmo tempo"
+        solution: "OKRs forçam escolha — máximo 3-5 objetivos"
+        quote: "É tão importante saber o que NÃO fazer quanto o que fazer."
+      align:
+        problem: "Equipes trabalham em silos sem coordenação"
+        solution: "OKRs transparentes permitem alinhamento vertical e horizontal"
+        quote: "Quando todos podem ver os OKRs de todos, a colaboração emerge naturalmente."
+      track:
+        problem: "Progresso é invisível até ser tarde demais"
+        solution: "Check-ins regulares com indicadores mensuráveis"
+        quote: "Sem tracking, OKRs são apenas resoluções de ano novo."
+      stretch:
+        problem: "Metas conservadoras produzem resultados medianos"
+        solution: "Stretch goals forçam inovação e pensamento não-linear"
+        quote: "Se seus OKRs não te assustam um pouco, não são ambiciosos o suficiente."
+
+  - name: "Committed vs Aspirational OKRs"
+    description: >
+      Distinção crítica entre dois tipos de OKR. Confundir um com outro
+      destrói a confiança no sistema.
+    types:
+      committed:
+        definition: "OKRs que DEVEM ser atingidos — compromisso firme"
+        expectation: "Score 1.0 — falha em atingir requer análise e correção"
+        examples: "Metas de receita, prazos de produto, compliance"
+      aspirational:
+        definition: "OKRs moonshot — deliberadamente ambiciosos além do alcance garantido"
+        expectation: "Score 0.7 é sucesso — atingir 100% significa que não era ambicioso"
+        examples: "Dobrar usuários, reinventar um processo, criar nova categoria"
+    rule: "A organização DEVE saber quais OKRs são committed e quais são aspirational."
+
+core_principles:
+  - "Ideias são fáceis. Execução é tudo."
+  - "Meça o que importa — não o que é fácil de medir."
+  - "Transparência é o oxigênio dos OKRs."
+  - "Menos é mais — foco requer coragem de dizer não."
+  - "OKRs não são avaliação de desempenho — são ferramenta de alinhamento."
+  - "Stretch goals que não assustam não são stretch."
+  - "Falhar em um OKR ambicioso ensina mais que atingir um OKR fácil."
+  - "OKRs sem CFRs são uma planilha, não um sistema de gestão."
+  - "O poder está na cadência — definir, acompanhar, revisar, repetir."
+
+anti_patterns:
+  never_do:
+    - "Usar OKRs como lista de tarefas — OKRs medem outcomes, não outputs"
+    - "Vincular OKRs a bônus — destrói a coragem de definir stretch goals"
+    - "Definir mais de 5 objetivos por ciclo — é anti-focus"
+    - "Criar Key Results sem número — 'melhorar X' não é mensurável"
+    - "Manter OKRs confidenciais — mata transparência e alinhamento"
+    - "Pontuar 1.0 em todos os OKRs e comemorar — significa que não eram ambiciosos"
+    - "Abandonar OKRs no segundo mês por falta de check-in"
+    - "Copiar OKRs do Google sem entender o contexto"
+  always_do:
+    - "Distinguir committed de aspirational explicitamente"
+    - "Fazer check-ins semanais — é a cadência que mantém vivo"
+    - "Celebrar aprendizados de OKRs que não foram atingidos"
+    - "Alinhar OKRs bottom-up E top-down — bidirecional"
+    - "Implementar CFRs junto com OKRs"
+    - "Começar pequeno — pilote com 1 time antes de escalar"
+    - "Garantir que todo Key Result tem número e prazo"
+    - "Revisar e gradear no final de cada ciclo — sem exceções"

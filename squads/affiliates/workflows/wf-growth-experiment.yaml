@@ -1,0 +1,228 @@
+# Growth Experiment Workflow
+# Pipeline para design e execução de experimentos de crescimento
+# Source: @architect research — Ellis ICE + North Star + A/B Testing
+# Version: 1.0.0
+
+id: wf-growth-experiment
+name: "Growth Experiment"
+version: "1.0.0"
+duration: "4-6 weeks (setup + run + analyze)"
+description: |
+  Workflow para design, execução e análise de experimentos de crescimento.
+  North star setup → ICE scoring → experiment design → A/B test → análise.
+
+  FILOSOFIA: "Data-driven decisions. Minimum 30 days data. p < 0.05."
+
+  RESULTADO: Experimento validado com resultado estatisticamente significativo.
+
+best_for:
+  - "Testar nova hipótese de crescimento"
+  - "Otimizar conversão de funil ou conteúdo"
+  - "Validar mudança antes de escalar"
+
+decision_matrix_fit:
+  complexity: medium-high
+  agents_required: 2
+  estimated_duration: "4-6 weeks"
+  user_involvement: "medium"
+  prerequisites:
+    - "Operação com tráfego mínimo (100+ visitors/day)"
+    - "Tracking configurado"
+    - "North Star metric definida (ou será definida na Phase 0)"
+
+clone_combinations:
+  primary:
+    - agent: growth-optimizer
+      role: "North star, ICE, experiment design, A/B test"
+      phases: [0, 1, 2, 3]
+
+    - agent: performance-analyst
+      role: "North star tracking, análise de resultados"
+      phases: [0, 4]
+
+phases:
+  - id: PHASE-0
+    name: "North Star Setup"
+    days: "Days 1-2"
+    tier: 0
+    description: |
+      Definir North Star metric + tracking.
+      RPV (Revenue Per Visitor) = melhor métrica única para affiliates (Ellis).
+
+    agents:
+      primary: growth-optimizer
+      secondary: performance-analyst
+
+    tasks:
+      - task_id: T0.1
+        name: "Setup North Star"
+        task_ref: north-star-setup.md
+        required: true
+        description: "Definir north star + tracking + baseline"
+        output: "north_star.yaml"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "North Star Defined"
+      criteria:
+        - "North Star metric definida (recomendado: RPV)"
+        - "Baseline 30 dias documentado"
+        - "Tracking funcional"
+      human_review: true
+      message: "Confirme North Star metric antes de prosseguir."
+
+  - id: PHASE-1
+    name: "ICE Scoring"
+    days: "Days 3-4"
+    tier: 1
+    description: |
+      ICE scoring de hipóteses de experimento.
+      Impact + Confidence + Ease / 3. Execute ICE >= 7.0 primeiro.
+
+    agent: growth-optimizer
+
+    tasks:
+      - task_id: T1.1
+        name: "ICE Prioritization"
+        task_ref: ice-prioritization.md
+        required: true
+        description: "Score ICE para hipóteses identificadas"
+        output: "ice_scoring.yaml"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Hypothesis Selected"
+      criteria:
+        - "Top hypothesis com ICE >= 7.0"
+        - "Hypothesis clara: 'If [change], then [metric] will [direction] by [amount]'"
+      human_review: true
+      message: "Confirme hipótese antes de design do experimento."
+      veto_conditions:
+        - condition: "ICE < 5.0 para top hypothesis"
+          action: "WARNING — Baixo potencial, considerar brainstorm adicional"
+
+  - id: PHASE-2
+    name: "Experiment Design"
+    days: "Days 5-7"
+    tier: 1
+    description: |
+      Design do MVE (Minimum Viable Experiment).
+      Hypothesis, control, variation, metrics, timeline, sample size.
+
+    agent: growth-optimizer
+
+    tasks:
+      - task_id: T2.1
+        name: "Design Growth Experiment"
+        task_ref: growth-experiment-design.md
+        required: true
+        description: "MVE: hypothesis → metrics → timeline → sample"
+        output: "experiment_design.yaml"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Experiment Designed"
+      criteria:
+        - "Hypothesis documentada"
+        - "Control e variation definidos"
+        - "Success metric = North Star ou proxy"
+        - "Sample size calculado"
+        - "Timeline: mínimo 2 semanas run"
+      human_review: true
+      message: "Revise design do experimento antes de lançar."
+      veto_conditions:
+        - condition: "Timeline < 14 dias"
+          action: "WARNING — Dados insuficientes para significância"
+
+  - id: PHASE-3
+    name: "A/B Test Execution"
+    days: "Days 8-28 (2-4 weeks run)"
+    tier: 2
+    description: |
+      Execução do A/B test.
+      NÃO alterar nada durante o teste. Monitorar apenas.
+
+    agent: growth-optimizer
+
+    tasks:
+      - task_id: T3.1
+        name: "A/B Test Affiliate Content"
+        task_ref: ab-test-affiliate-content.md
+        required: true
+        description: "Launch + monitor A/B test"
+        output: "ab_test_results.yaml"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Test Complete"
+      criteria:
+        - "Mínimo 14 dias de dados"
+        - "Sample size atingido"
+        - "p < 0.05 (ou declare inconclusive)"
+      human_review: false
+
+  - id: PHASE-4
+    name: "Results Analysis"
+    days: "Days 29-31"
+    tier: 2
+    description: |
+      Análise de resultados e decisão.
+      Winner → deploy. Loser → document learnings. Inconclusive → extend or pivot.
+
+    agent: performance-analyst
+
+    tasks:
+      - task_id: T4.1
+        name: "Análise de Performance"
+        task_ref: run-performance-analysis.md
+        required: true
+        description: "Análise de resultados do experimento"
+        output: "experiment_analysis.yaml"
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Analysis Complete"
+      criteria:
+        - "Resultado estatisticamente significativo (ou declarado inconclusive)"
+        - "Learnings documentados"
+        - "Decisão: deploy winner / pivot / extend"
+        - "Post-mortem em 7 dias"
+      human_review: true
+      message: "Revise resultados e decisão antes de deploy."
+      veto_conditions:
+        - condition: "Deploy winner sem p < 0.05"
+          action: "BLOCK — Resultado não significativo"
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - halt_workflow: false
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "affiliates-chief"
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-growth-experiment"
+      status: "completed"
+
+outputs:
+  phase_0: ["north_star.yaml"]
+  phase_1: ["ice_scoring.yaml"]
+  phase_2: ["experiment_design.yaml"]
+  phase_3: ["ab_test_results.yaml"]
+  phase_4: ["experiment_analysis.yaml"]
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-18"
+  author: "squad-architect"
+  source_frameworks:
+    - "Sean Ellis ICE Scoring"
+    - "North Star Metric Framework"
+    - "Statistical A/B Testing"
+  priority: 2
+  quality_gate: "SC_WFL_001"

@@ -1,0 +1,475 @@
+# =============================================================================
+# SOP Standards Reference - Cross-Reference Database
+# =============================================================================
+# Used by: sop-auditor (audit-sop task), sop-analyst (compliance scoring)
+# Version: 1.0.0
+#
+# Purpose:
+#   Maps regulatory and quality framework requirements to specific SOP sections.
+#   During an audit, each applicable standard's requirements are checked against
+#   the SOP to determine compliance coverage.
+#
+# Criticality Levels:
+#   mandatory   - Failure to comply results in audit finding / regulatory action
+#   recommended - Industry best practice, expected but not legally required
+#   optional    - Enhancement that demonstrates maturity
+# =============================================================================
+
+standards_reference:
+  version: "1.0.0"
+  last_updated: "2026-03-09"
+
+  standards:
+
+    # =========================================================================
+    # ISO 9001:2015 - Quality Management Systems
+    # =========================================================================
+    - standard_id: "ISO-9001"
+      standard_name: "ISO 9001:2015 - Quality Management Systems"
+      version: "2015"
+      issuing_body: "International Organization for Standardization"
+      scope: "Quality management systems for organizations of any size"
+      applicability: "General quality management, manufacturing, services"
+
+      requirements:
+        - id: "ISO-9001-4.4"
+          clause: "4.4"
+          title: "Quality Management System and Its Processes"
+          description: "Organization shall establish, implement, maintain and continually improve a QMS including needed processes and their interactions."
+          sop_section_mapping:
+            - "Purpose and Scope"
+            - "Process Flow / Procedure Steps"
+            - "References (to related processes)"
+          criticality: mandatory
+          audit_question: "Does the SOP define the process inputs, outputs, sequence, and interactions with other processes?"
+          evidence_required: "Process map or flow showing inputs/outputs and touchpoints"
+
+        - id: "ISO-9001-7.1.6"
+          clause: "7.1.6"
+          title: "Organizational Knowledge"
+          description: "Organization shall determine the knowledge necessary for the operation of its processes."
+          sop_section_mapping:
+            - "Prerequisites"
+            - "Definitions"
+            - "Training Requirements"
+          criticality: mandatory
+          audit_question: "Does the SOP capture the knowledge required to execute the process?"
+          evidence_required: "Prerequisites section listing required knowledge, training, and competencies"
+
+        - id: "ISO-9001-7.5"
+          clause: "7.5"
+          title: "Documented Information"
+          description: "QMS shall include documented information required by the standard and determined necessary for QMS effectiveness."
+          sop_section_mapping:
+            - "Document Header (ID, version, date)"
+            - "Revision History"
+            - "Approval signatures"
+          criticality: mandatory
+          audit_question: "Does the SOP have proper document control (unique ID, version, date, approval, revision history)?"
+          evidence_required: "Document header with all control fields populated"
+
+        - id: "ISO-9001-8.1"
+          clause: "8.1"
+          title: "Operational Planning and Control"
+          description: "Organization shall plan, implement, and control the processes needed to meet requirements for provision of products and services."
+          sop_section_mapping:
+            - "Procedure Steps"
+            - "Quality Criteria"
+            - "KPIs / Measurability"
+          criticality: mandatory
+          audit_question: "Does the SOP define criteria for the process, acceptance criteria, and required resources?"
+          evidence_required: "Acceptance criteria documented, resources listed, process criteria defined"
+
+        - id: "ISO-9001-8.5.1"
+          clause: "8.5.1"
+          title: "Control of Production and Service Provision"
+          description: "Production and service provision shall be implemented under controlled conditions."
+          sop_section_mapping:
+            - "Procedure Steps"
+            - "Verification Checkpoints"
+            - "Monitoring and Measurement"
+          criticality: mandatory
+          audit_question: "Does the SOP include monitoring and measurement activities at appropriate stages?"
+          evidence_required: "Verification checkpoints within procedure, measurement criteria defined"
+
+        - id: "ISO-9001-8.7"
+          clause: "8.7"
+          title: "Control of Nonconforming Outputs"
+          description: "Organization shall ensure outputs not conforming to requirements are identified and controlled."
+          sop_section_mapping:
+            - "Exception Handling"
+            - "Escalation Procedures"
+            - "Nonconformance Handling"
+          criticality: mandatory
+          audit_question: "Does the SOP define what to do when output does not meet acceptance criteria?"
+          evidence_required: "Exception handling section with nonconformance procedures"
+
+        - id: "ISO-9001-9.1"
+          clause: "9.1"
+          title: "Monitoring, Measurement, Analysis and Evaluation"
+          description: "Organization shall determine what needs to be monitored and measured."
+          sop_section_mapping:
+            - "KPIs"
+            - "Quality Criteria"
+            - "Reporting Requirements"
+          criticality: mandatory
+          audit_question: "Does the SOP define KPIs and how process effectiveness is measured?"
+          evidence_required: "KPI definitions with targets, measurement frequency, and reporting"
+
+        - id: "ISO-9001-10.2"
+          clause: "10.2"
+          title: "Nonconformity and Corrective Action"
+          description: "Organization shall react to nonconformity, evaluate need for action, implement action, review effectiveness."
+          sop_section_mapping:
+            - "Exception Handling"
+            - "Root Cause Analysis"
+            - "Corrective Action Procedures"
+          criticality: mandatory
+          audit_question: "Does the SOP include corrective action procedures and root cause analysis guidance?"
+          evidence_required: "Corrective action workflow documented, RCA method referenced"
+
+    # =========================================================================
+    # FDA 21 CFR Part 11 - Electronic Records; Electronic Signatures
+    # =========================================================================
+    - standard_id: "FDA-21CFR11"
+      standard_name: "21 CFR Part 11 - Electronic Records; Electronic Signatures"
+      version: "2003 (current)"
+      issuing_body: "U.S. Food and Drug Administration"
+      scope: "Electronic records and signatures in FDA-regulated industries"
+      applicability: "Pharmaceutical, biotech, medical devices, food production"
+
+      requirements:
+        - id: "FDA-11.10a"
+          clause: "11.10(a)"
+          title: "System Validation"
+          description: "Systems used to manage electronic records shall be validated to ensure accuracy, reliability, and consistent intended performance."
+          sop_section_mapping:
+            - "Prerequisites (system validation status)"
+            - "Tools and Systems"
+            - "References (validation documentation)"
+          criticality: mandatory
+          audit_question: "Does the SOP reference validated systems and their validation status?"
+          evidence_required: "System references with validation status documented"
+
+        - id: "FDA-11.10b"
+          clause: "11.10(b)"
+          title: "Record Generation"
+          description: "Ability to generate accurate and complete copies of records in human-readable and electronic form."
+          sop_section_mapping:
+            - "Output Artifacts"
+            - "Record-Keeping Requirements"
+            - "Reporting"
+          criticality: mandatory
+          audit_question: "Does the SOP define what records are generated and how they are preserved?"
+          evidence_required: "Record generation steps with format and storage requirements"
+
+        - id: "FDA-11.10c"
+          clause: "11.10(c)"
+          title: "Record Protection"
+          description: "Protection of records to enable their accurate and ready retrieval throughout the records retention period."
+          sop_section_mapping:
+            - "Record Retention"
+            - "Data Backup"
+            - "Access Controls"
+          criticality: mandatory
+          audit_question: "Does the SOP address record protection, retention period, and retrieval procedures?"
+          evidence_required: "Retention policy referenced, backup procedures, access controls"
+
+        - id: "FDA-11.10d"
+          clause: "11.10(d)"
+          title: "System Access Controls"
+          description: "Limiting system access to authorized individuals."
+          sop_section_mapping:
+            - "Roles and Responsibilities"
+            - "Prerequisites (access requirements)"
+            - "Security Controls"
+          criticality: mandatory
+          audit_question: "Does the SOP define who has access and how access is controlled?"
+          evidence_required: "Role-based access documented, access request/revocation procedures"
+
+        - id: "FDA-11.10e"
+          clause: "11.10(e)"
+          title: "Audit Trail"
+          description: "Use of secure, computer-generated, time-stamped audit trails to record date/time of operator entries and actions."
+          sop_section_mapping:
+            - "Procedure Steps (logging requirements)"
+            - "Audit Trail"
+            - "Record-Keeping"
+          criticality: mandatory
+          audit_question: "Does the SOP require audit trail entries for all critical actions?"
+          evidence_required: "Audit trail requirements at each critical step, timestamp requirements"
+
+        - id: "FDA-11.10k"
+          clause: "11.10(k)"
+          title: "Device Controls"
+          description: "Use of appropriate controls over systems documentation including change control procedures."
+          sop_section_mapping:
+            - "Revision History"
+            - "Change Control"
+            - "Document Approval"
+          criticality: mandatory
+          audit_question: "Does the SOP have change control procedures for document updates?"
+          evidence_required: "Change control process documented, approval workflow defined"
+
+    # =========================================================================
+    # Six Sigma - DMAIC Control Phase
+    # =========================================================================
+    - standard_id: "SIX-SIGMA"
+      standard_name: "Six Sigma DMAIC - Control Phase Requirements"
+      version: "General"
+      issuing_body: "Industry Standard (ASQ, IASSC)"
+      scope: "Process control and standardization in the Control phase of DMAIC"
+      applicability: "Manufacturing, services, any process improvement initiative"
+
+      requirements:
+        - id: "SS-CTRL-01"
+          clause: "Control Plan"
+          title: "Process Control Plan"
+          description: "A documented plan for controlling critical-to-quality (CTQ) characteristics."
+          sop_section_mapping:
+            - "Quality Criteria"
+            - "KPIs"
+            - "Monitoring and Measurement"
+          criticality: mandatory
+          audit_question: "Does the SOP define CTQ characteristics and how they are monitored?"
+          evidence_required: "CTQ definitions, control limits, monitoring frequency"
+
+        - id: "SS-CTRL-02"
+          clause: "Statistical Process Control"
+          title: "SPC Implementation"
+          description: "Use of control charts or statistical methods to monitor process performance."
+          sop_section_mapping:
+            - "KPIs"
+            - "Monitoring Tools"
+            - "Response Plan (out-of-control)"
+          criticality: recommended
+          audit_question: "Does the SOP reference SPC tools or statistical monitoring methods?"
+          evidence_required: "Control chart references, out-of-control action plan"
+
+        - id: "SS-CTRL-03"
+          clause: "Standardized Work"
+          title: "Process Standardization"
+          description: "SOPs are the primary deliverable of the Control phase, ensuring gains are locked in."
+          sop_section_mapping:
+            - "Procedure Steps (standardized)"
+            - "One Best Way documentation"
+            - "Variation Reduction measures"
+          criticality: mandatory
+          audit_question: "Does the SOP represent the standardized best-known method?"
+          evidence_required: "Standard method documented, deviation handling defined"
+
+        - id: "SS-CTRL-04"
+          clause: "Response Plan"
+          title: "Out-of-Control Response Plan"
+          description: "Documented response when process goes out of statistical control."
+          sop_section_mapping:
+            - "Exception Handling"
+            - "Escalation Procedures"
+            - "Corrective Action"
+          criticality: mandatory
+          audit_question: "Does the SOP define what to do when key metrics go out of spec?"
+          evidence_required: "Response plan with triggers, actions, and escalation"
+
+        - id: "SS-CTRL-05"
+          clause: "Mistake-Proofing"
+          title: "Poka-Yoke Implementation"
+          description: "Error-proofing mechanisms built into the process."
+          sop_section_mapping:
+            - "Verification Checkpoints"
+            - "Validation Rules"
+            - "Safeguards"
+          criticality: recommended
+          audit_question: "Does the SOP include mistake-proofing mechanisms?"
+          evidence_required: "Poka-yoke descriptions, validation checks, safeguards"
+
+    # =========================================================================
+    # Toyota Production System (TPS) - Standardized Work
+    # =========================================================================
+    - standard_id: "TOYOTA-TPS"
+      standard_name: "Toyota Production System - Standardized Work"
+      version: "General (Ohno/Shingo methodology)"
+      issuing_body: "Toyota Motor Corporation (Industry Standard)"
+      scope: "Standardized work documentation for lean manufacturing"
+      applicability: "Manufacturing, lean operations, continuous improvement"
+
+      requirements:
+        - id: "TPS-SW-01"
+          clause: "Takt Time"
+          title: "Takt Time Definition"
+          description: "The rate at which work must be completed to meet demand."
+          sop_section_mapping:
+            - "KPIs (cycle time, throughput)"
+            - "Time Estimates"
+            - "Capacity Planning"
+          criticality: recommended
+          audit_question: "Does the SOP define the expected pace of work (takt time or equivalent)?"
+          evidence_required: "Time per cycle, throughput target, or capacity reference"
+
+        - id: "TPS-SW-02"
+          clause: "Work Sequence"
+          title: "Standard Work Sequence"
+          description: "The precise order of operations that an operator performs within takt time."
+          sop_section_mapping:
+            - "Procedure Steps (ordered)"
+            - "Step Dependencies"
+            - "Process Flow"
+          criticality: mandatory
+          audit_question: "Does the SOP define a precise, repeatable sequence of steps?"
+          evidence_required: "Numbered steps in defined order, dependencies documented"
+
+        - id: "TPS-SW-03"
+          clause: "Standard WIP"
+          title: "Standard Work-in-Process"
+          description: "The minimum quantity of work-in-process needed to maintain flow."
+          sop_section_mapping:
+            - "Prerequisites (materials, inputs)"
+            - "Inventory/Queue levels"
+            - "Buffer management"
+          criticality: recommended
+          audit_question: "Does the SOP define required inputs and work-in-process levels?"
+          evidence_required: "Input requirements quantified, buffer/queue guidance"
+
+        - id: "TPS-SW-04"
+          clause: "Visual Management"
+          title: "Visual Controls"
+          description: "Visual indicators that make the standard visible and deviations obvious."
+          sop_section_mapping:
+            - "Visual Design (flowcharts, diagrams)"
+            - "Status Indicators"
+            - "Andon/Alert mechanisms"
+          criticality: recommended
+          audit_question: "Does the SOP use visual aids and define visual management at the workplace?"
+          evidence_required: "Flowcharts, status boards, visual indicators documented"
+
+        - id: "TPS-SW-05"
+          clause: "Kaizen Integration"
+          title: "Continuous Improvement Linkage"
+          description: "Standardized work is the baseline for kaizen; improvements update the standard."
+          sop_section_mapping:
+            - "Revision History"
+            - "Improvement Suggestions"
+            - "Review Schedule"
+          criticality: mandatory
+          audit_question: "Does the SOP include a mechanism for capturing and incorporating improvements?"
+          evidence_required: "Review schedule, improvement suggestion process, version history"
+
+        - id: "TPS-SW-06"
+          clause: "Jidoka"
+          title: "Built-in Quality (Stop and Fix)"
+          description: "Operators are empowered and expected to stop the process when a defect is detected."
+          sop_section_mapping:
+            - "Exception Handling"
+            - "Stop Conditions"
+            - "Escalation"
+          criticality: mandatory
+          audit_question: "Does the SOP define conditions where the operator must stop the process?"
+          evidence_required: "Stop conditions listed, escalation path for quality issues"
+
+    # =========================================================================
+    # Gawande Checklist Manifesto Principles
+    # =========================================================================
+    - standard_id: "GAWANDE-CHECKLIST"
+      standard_name: "Checklist Manifesto Principles"
+      version: "2009 (Atul Gawande)"
+      issuing_body: "Industry Best Practice"
+      scope: "Checklist design for complex, high-stakes processes"
+      applicability: "Healthcare, aviation, construction, any safety-critical domain"
+
+      requirements:
+        - id: "GAW-01"
+          clause: "DO-CONFIRM vs READ-DO"
+          title: "Checklist Type Declaration"
+          description: "Checklist must declare whether it is DO-CONFIRM (do from memory, then confirm) or READ-DO (read and do each step)."
+          sop_section_mapping:
+            - "Purpose and Scope (checklist type)"
+            - "Usage Instructions"
+          criticality: mandatory
+          audit_question: "Does the SOP/checklist declare its usage type (DO-CONFIRM or READ-DO)?"
+          evidence_required: "Explicit statement of checklist type in header or instructions"
+
+        - id: "GAW-02"
+          clause: "Brevity"
+          title: "Killer Items Only"
+          description: "Checklist should contain only critical steps that are commonly missed, not every step."
+          sop_section_mapping:
+            - "Checklist Section"
+            - "Critical Steps Highlighted"
+          criticality: mandatory
+          audit_question: "If a checklist is generated, does it focus on critical/commonly-missed items rather than listing everything?"
+          evidence_required: "Checklist with curated critical items, not a verbatim copy of all steps"
+
+        - id: "GAW-03"
+          clause: "Pause Points"
+          title: "Natural Pause Points"
+          description: "Checklist should be used at natural pause points in the workflow, not continuously."
+          sop_section_mapping:
+            - "Verification Checkpoints"
+            - "Phase Transitions"
+            - "Sign-off Points"
+          criticality: recommended
+          audit_question: "Does the SOP define natural pause points where checklists should be reviewed?"
+          evidence_required: "Checkpoint markers at logical transition points"
+
+        - id: "GAW-04"
+          clause: "5-9 Items"
+          title: "Working Memory Limit"
+          description: "Each checklist section should have 5-9 items (human working memory limit)."
+          sop_section_mapping:
+            - "Checklist Sections"
+            - "Phase Groupings"
+          criticality: recommended
+          audit_question: "Are checklist sections grouped into 5-9 items per group?"
+          evidence_required: "Checklist groups with item counts within working memory range"
+
+        - id: "GAW-05"
+          clause: "Simple Language"
+          title: "Exact and Simple Wording"
+          description: "Use simple, exact language that fits on one line. No ambiguity."
+          sop_section_mapping:
+            - "Checklist Items"
+            - "Step Descriptions"
+          criticality: mandatory
+          audit_question: "Are checklist items single-line, unambiguous statements?"
+          evidence_required: "Each item fits one line, uses simple language, no interpretation needed"
+
+        - id: "GAW-06"
+          clause: "Real-World Testing"
+          title: "Tested in Practice"
+          description: "Checklist must be tested with actual users in real conditions."
+          sop_section_mapping:
+            - "Validation Record"
+            - "Teach-Back Results"
+            - "Pilot Test Notes"
+          criticality: recommended
+          audit_question: "Has the SOP/checklist been tested with actual users (teach-back, pilot)?"
+          evidence_required: "Test records, teach-back results, or pilot deployment notes"
+
+        - id: "GAW-07"
+          clause: "Communication Checks"
+          title: "Team Communication Steps"
+          description: "Include explicit communication steps (briefings, read-backs, handoffs)."
+          sop_section_mapping:
+            - "RACI Matrix"
+            - "Handoff Points"
+            - "Communication Requirements"
+          criticality: recommended
+          audit_question: "Does the SOP include explicit team communication steps at critical points?"
+          evidence_required: "Briefing steps, read-back requirements, handoff communication"
+
+  audit_matrix_template:
+    description: |
+      Template for generating the compliance audit matrix.
+      For each applicable standard, create a row per requirement.
+    columns:
+      - "Requirement ID"
+      - "Requirement Title"
+      - "Criticality"
+      - "SOP Section(s)"
+      - "Coverage (Full / Partial / None)"
+      - "Evidence Notes"
+      - "Finding (Compliant / Gap / N/A)"
+    scoring:
+      full_coverage: "Requirement fully addressed with evidence"
+      partial_coverage: "Requirement partially addressed, gaps identified"
+      no_coverage: "Requirement not addressed"
+      not_applicable: "Requirement does not apply to this SOP's scope"

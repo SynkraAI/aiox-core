@@ -1,0 +1,1206 @@
+# Scarcity & Urgency Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Offers - Chapters 12 & 13 - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: scarcity-urgency
+  purpose: "Deploy ethical scarcity and urgency levers to accelerate purchase decisions and unlock premium pricing"
+  domain: offer-enhancement
+  source_playbook: "$100M Offers - Chapters 12 (Scarcity) & 13 (Urgency)"
+
+  core_distinction: |
+    SCARCITY = Function of QUANTITY (limited supply)
+    URGENCY = Function of TIME (limited window)
+    COMBINED = Accelerated decision + Premium pricing
+
+  key_insight: |
+    "O medo da perda e mais forte que o desejo de ganho."
+    "A pessoa que precisa menos da troca sempre tem a vantagem."
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: scarcity-urgency-coordinator
+      role: "Orchestrate combined scarcity-urgency deployment for maximum offer power"
+      decisions:
+        - "Select appropriate scarcity type for business model"
+        - "Select appropriate urgency mechanism for campaign"
+        - "Determine when to stack both levers"
+        - "Monitor ethical boundaries"
+      kpis:
+        - "Sell-out rate per campaign"
+        - "Decision speed (time from contact to close)"
+        - "Price resistance reduction"
+        - "Compound effectiveness over time"
+
+  tier_0_diagnosis:
+    - agent: capacity-analyzer
+      role: "Analyze true business capacity and constraints"
+      inputs:
+        - "Current client/customer count"
+        - "Operational capacity limits"
+        - "Historical demand patterns"
+        - "Service delivery constraints"
+      outputs:
+        - "Maximum capacity assessment"
+        - "Recommended scarcity limits"
+        - "Honest capacity percentage"
+        - "Growth rate recommendations"
+
+    - agent: offer-auditor
+      role: "Audit existing offers for scarcity-urgency opportunities"
+      inputs:
+        - "Current offer structure"
+        - "Delivery model (cohort, rolling, one-time)"
+        - "Pricing tiers"
+        - "Bonus inventory"
+      outputs:
+        - "Scarcity-fit analysis"
+        - "Urgency-fit analysis"
+        - "Stacking recommendations"
+        - "Ethical boundary check"
+
+  tier_1_execution:
+    - agent: scarcity-architect
+      role: "Design and implement scarcity mechanisms"
+      specialization: "Chapter 12: Scarcity"
+      scarcity_types:
+        physical_product:
+          description: "Limited releases (flavors, colors, designs, sizes)"
+          rule: "Better to consistently sell out than over-order"
+          frequency: "Once per month optimal"
+          critical: "ANNOUNCE when sold out"
+        total_business_limit:
+          description: "Cap on total clients served"
+          example: "My agency serves only 25 clients total"
+          strategy: "Create waitlist, periodically expand 10-20%"
+        growth_rate_limit:
+          description: "Cap on NEW clients per period"
+          example: "We accept only 5 new clients per week"
+          benefit: "Let prospects know openings remaining"
+        cohort_limit:
+          description: "Cap per class/cohort start"
+          example: "We accept 100 clients 4 times per year"
+          power: "Compound strategy - increases effectiveness over time"
+        extreme_scarcity:
+          description: "Ultra-exclusive 1-on-1 access"
+          instruction: "Limit to tiny number, price very high"
+          note: "These tend to be the best clients"
+        exit_barrier:
+          description: "Once you leave, you can never return"
+          caveat: "Works best with small groups"
+
+    - agent: urgency-architect
+      role: "Design and implement urgency mechanisms"
+      specialization: "Chapter 13: Urgency"
+      urgency_types:
+        cohort_based:
+          description: "Rolling deadlines based on cohort starts"
+          power: "Less frequent starts = more powerful urgency"
+          script_basic: "Sign up today for Monday's group, otherwise wait for next start"
+          script_advanced: "Had a cancellation, opening in next cohort starting Monday"
+        seasonal_rotating:
+          description: "Time-bound promotions tied to seasons/events"
+          examples:
+            - "New Year Promo ends January 30th"
+            - "Valentine's Lovers Promo ends February 28th"
+            - "Spring Sexy Special ends March 31st"
+            - "April Fools in Love Promo ends April 30th"
+          insight: "Same promo, different name = real differentiator with start/end"
+          pro_tip: "Strategy #1 for local businesses"
+        price_bonus:
+          description: "Urgency through expiring prices or bonuses"
+          application: "Creates fear of losing the promotion, not the service"
+          interchangeable: ["Price discount", "Free installation", "Extra workshop", "Bonus bundle"]
+        price_increase:
+          description: "Announce upcoming price increase to clear pipeline"
+          rule: "NEVER raise prices without telling people first"
+          effect: "Shows position of strength, brings fence-sitters in"
+        exploding_opportunity:
+          description: "Opportunities that decay with time"
+          examples: ["Market arbitrage", "New platforms", "First-mover advantages"]
+          mechanism: "Every second of delay = disproportionate loss"
+
+    - agent: announcement-specialist
+      role: "Execute scarcity-urgency communications"
+      responsibilities:
+        - "Craft capacity percentage announcements"
+        - "Execute sell-out notifications"
+        - "Create deadline visibility across channels"
+        - "Manage waitlist communications"
+      key_rule: |
+        "Voce tambem deve deixar todos saberem que esgotou.
+        Isso e parte do que faz funcionar tao bem."
+
+  tier_2_judgment:
+    - agent: ethics-guardian
+      role: "Ensure all scarcity-urgency claims are honest and enforceable"
+      responsibilities:
+        - "Verify all limits are real"
+        - "Prevent fake scarcity deployment"
+        - "Ensure deadline enforcement"
+        - "Audit credibility maintenance"
+      key_rule: |
+        "Se [os limites] nao forem [reais], voce perdera credibilidade
+        e parecera como qualquer outro wannabe marketer."
+      enforcement:
+        - "100% of stated limits must be enforced"
+        - "No exceptions to closed deadlines"
+        - "Honest scarcity always available as fallback"
+
+    - agent: compound-tracker
+      role: "Track long-term effectiveness of scarcity-urgency strategies"
+      metrics:
+        - "Sell-out rate trend over time"
+        - "Time-to-sell-out improvement"
+        - "Repeat buyer rate post-scarcity exposure"
+        - "Price tolerance increase"
+      key_insight: |
+        "Esta e uma estrategia composta que aumenta em eficacia
+        ao longo do tempo. Uma das poucas no arsenal de marketing."
+
+    - agent: exception-handler
+      role: "Handle edge cases and customer challenges"
+      scenarios:
+        missed_deadline:
+          response: "Do NOT reopen - breaks future credibility"
+          script: "Unfortunately the promotion ended. Next opportunity is [date]."
+        scarcity_challenge:
+          response: "Show proof of constraints"
+          evidence: ["Real capacity", "Waitlist length", "Sell-out history"]
+        late_cohort_join:
+          option_1: "Personalized catch-up onboarding as bonus"
+          option_2: "Extended runway advantage + extended payment plan"
+        demand_exceeds_capacity:
+          response: "Periodically increase 10-20%, then limit again"
+          rule: "Always leave some demand unmet"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  scarcity-urgency-coordinator:
+    id: scarcity-urgency-coordinator
+    title: "Scarcity-Urgency Orchestrator"
+    tier: orchestrator
+    icon: "hourglass"
+
+    purpose: |
+      Coordinate the deployment of scarcity and urgency levers to accelerate
+      purchase decisions and unlock premium pricing power while maintaining
+      ethical standards.
+
+    core_frameworks:
+      - name: "Scarcity-Urgency Distinction"
+        scarcity: "Function of QUANTITY (limited supply)"
+        urgency: "Function of TIME (limited window)"
+      - name: "Loss Aversion Lever"
+        principle: "Fear of loss > Desire for gain"
+      - name: "Compound Strategy"
+        insight: "Effectiveness increases over time with consistent execution"
+
+    decision_authority:
+      - "Which scarcity type fits business model"
+      - "Which urgency mechanism fits campaign"
+      - "When to stack both levers"
+      - "When to announce sell-out"
+      - "When to create/open waitlists"
+
+    inputs:
+      - "Business model analysis"
+      - "Campaign objectives"
+      - "Current capacity status"
+      - "Historical sell-out data"
+
+    outputs:
+      - "Scarcity-urgency strategy"
+      - "Implementation timeline"
+      - "Communication plan"
+      - "Compound tracking metrics"
+
+    success_metrics:
+      primary:
+        - name: "Sell-Out Rate"
+          target: ">80% of limited offers"
+          calculation: "Sold / Available"
+        - name: "Decision Speed"
+          target: "Faster than baseline"
+          measurement: "Avg time from contact to close"
+      secondary:
+        - "Last-day sales spike >30%"
+        - "Waitlist growth rate"
+        - "Price resistance reduction"
+
+  capacity-analyzer:
+    id: capacity-analyzer
+    title: "Capacity & Constraint Analyst"
+    tier: tier_0
+    icon: "gauge"
+
+    purpose: |
+      Analyze true business capacity and constraints to enable
+      honest scarcity claims. "A estrategia de escassez mais facil e a honestidade."
+
+    analysis_framework:
+      honest_capacity:
+        question: "You probably couldn't handle 1,000 clients tomorrow, right?"
+        follow_up: "But how many COULD you handle? 5? 10? 25?"
+        output: "Real capacity number for scarcity claims"
+
+      capacity_percentage:
+        example: "Currently at 81% capacity"
+        effect: "People more likely to sign up before they lose the chance"
+        social_proof: "If you're at 81%, a decent number of people decided to work with you"
+
+    outputs:
+      - capacity_report:
+          current_clients: "Number"
+          max_capacity: "Number"
+          percentage_full: "Percentage"
+          weekly_capacity: "New clients per week"
+          recommendation: "Scarcity messaging"
+
+  offer-auditor:
+    id: offer-auditor
+    title: "Offer Scarcity-Urgency Auditor"
+    tier: tier_0
+    icon: "search"
+
+    purpose: |
+      Audit existing offers to identify optimal scarcity and urgency
+      opportunities based on delivery model and business structure.
+
+    audit_dimensions:
+      delivery_model:
+        cohort: "Strong fit for both cohort scarcity and urgency"
+        rolling: "Better fit for growth rate limits and seasonal urgency"
+        one_time: "Perfect for 'never available again' scarcity"
+        high_touch: "Ideal for total business limit and premium access"
+
+      pricing_structure:
+        single_tier: "Add premium access scarcity tier"
+        multiple_tiers: "Apply exit barrier to highest tier"
+        bonuses: "Limit bonus quantities"
+
+      campaign_calendar:
+        seasonal: "Map to seasonal urgency rotation"
+        launches: "Apply cohort-based urgency"
+        evergreen: "Implement price/bonus urgency cycles"
+
+    outputs:
+      - "Scarcity-fit score by type"
+      - "Urgency-fit score by type"
+      - "Stacking opportunity analysis"
+      - "Ethical risk assessment"
+
+  scarcity-architect:
+    id: scarcity-architect
+    title: "Scarcity Design Specialist"
+    tier: tier_1
+    icon: "box"
+
+    purpose: |
+      Design and implement scarcity mechanisms that are honest,
+      effective, and compound in effectiveness over time.
+
+    design_principles:
+      always_sell_out: |
+        "Para utilizar adequadamente este metodo, voce deve sempre esgotar.
+        E melhor esgotar consistentemente do que fazer pedidos excessivos."
+
+      announce_sell_out: |
+        "Voce tambem deve deixar todos saberem que esgotou.
+        Mesmo as pessoas em cima do muro, quando veem que esgotou,
+        da prova social de que outras pessoas acharam que valia a pena."
+
+      compound_effect: |
+        "Esta e uma estrategia composta que aumenta em eficacia ao
+        longo do tempo. Uma das poucas no arsenal de marketing."
+
+      less_than_expected: |
+        "Sempre lembre-se de ter menos vagas disponiveis do que
+        voce acha que pode vender."
+
+    implementation_by_type:
+      physical_product:
+        steps:
+          - "Determine release type (flavors, colors, designs, sizes)"
+          - "Set quantity BELOW expected demand"
+          - "Announce the limit publicly"
+          - "Sell until sold out"
+          - "ANNOUNCE that you sold out (critical!)"
+          - "Repeat monthly (optimal frequency)"
+        example: "Chanel sends only 1-2 of each piece per store"
+
+      total_business_limit:
+        steps:
+          - "Determine maximum clients for service quality"
+          - "Announce cap publicly"
+          - "Create waitlist when approaching capacity"
+          - "Periodically increase 10-20%, then cap again"
+          - "Always leave some demand unmet"
+        script: "My agency serves only 25 clients total. Period."
+
+      growth_rate_limit:
+        steps:
+          - "Determine weekly/monthly onboarding capacity"
+          - "Communicate openings remaining"
+          - "Let prospects know competitive status"
+        script: |
+          "We accept only 5 new clients per week and already have
+          the first 3 spots filled. I have 6 more calls this week,
+          so you can take the spot or wait until we reopen."
+
+      cohort_limit:
+        steps:
+          - "Define cohort size below demand"
+          - "Set cohort start dates"
+          - "Open and close enrollment clearly"
+          - "Track for compound effectiveness"
+        script: "We accept 100 clients 4 times per year. Doors open then close."
+
+      extreme_scarcity:
+        steps:
+          - "Choose delivery method you don't hate"
+          - "Limit to tiny number (3-5)"
+          - "Price VERY high"
+          - "Tell people about it"
+        note: "The cream of the crop (top 1% of 1%) will adjust and act"
+
+      exit_barrier:
+        application: "Small groups and premium tiers"
+        caveat: "Loses teeth as groups get larger"
+        implementation: "Clearly communicate 'once you leave, you can never return'"
+
+  urgency-architect:
+    id: urgency-architect
+    title: "Urgency Design Specialist"
+    tier: tier_1
+    icon: "clock"
+
+    purpose: |
+      Design and implement urgency mechanisms that drive faster
+      decisions without being fake or losing credibility.
+
+    design_principles:
+      deadlines_drive_decisions: |
+        "Prazos. Impulsionam. Decisoes."
+
+      last_day_phenomenon: |
+        "As maiores vendas em uma campanha acontecem nas ultimas
+        4 horas do ultimo dia (ate 50-60%). Os ultimos 3% do tempo
+        criam 50-60% das vendas."
+
+      fear_is_unfounded: |
+        "Sempre ha o medo de que voce ganhara menos dinheiro.
+        Todo profissional de marketing experiente lhe dira -
+        e um medo infundado."
+
+      real_countdowns: |
+        "Ter contagens regressivas reais e muito util.
+        Mas certifique-se de que sejam reais. Se nao forem,
+        voce perdera credibilidade."
+
+    implementation_by_type:
+      cohort_based:
+        basic_script: |
+          "If you sign up today, I can put you in our next group
+          starting Monday, otherwise you'll have to wait for our
+          next start date."
+        advanced_script: |
+          "Actually, I had a client who signed up a few weeks ago
+          who dropped out, so I have an opening for our next cohort
+          starting Monday. If you're fairly sure you're going to do
+          this sooner or later, might as well get in now to start
+          reaping the rewards sooner."
+        power_rule: "Less frequent starts = more powerful urgency"
+        handling_late_join:
+          option_1: "Personalized catch-up onboarding as bonus"
+          option_2: "Extended runway + extended payment plan"
+
+      seasonal_rotating:
+        rotation:
+          january: "New Year Promo ends January 30th"
+          february: "Valentine's Lovers Promo ends February 28th"
+          march: "Spring Sexy Special ends March 31st"
+          april: "April Fools in Love Promo ends April 30th"
+        key_insight: "Same promo, different name = real differentiator"
+        pro_tip: "Strategy #1 for local businesses - vary marketing more often"
+        implementation:
+          - "Create landing page with visible dates"
+          - "Run ads with deadline in copy"
+          - "Track conversions by deadline proximity"
+
+      price_bonus:
+        mechanism: "Fear of losing promotion, not service"
+        script: |
+          "Yes, we'll get you started today so you can take advantage
+          of the discount you came in for. I'm not sure how long we'll
+          run it since we change every 4 weeks or so, and this is one
+          of the best we've run in a while."
+        interchangeable:
+          - "Price discount"
+          - "Free installation/integration"
+          - "Extra workshop (valued at $X)"
+          - "Bonus product bundle"
+
+      price_increase:
+        rule: "NEVER raise prices without telling people"
+        script: "Prices are going up! Get in now!"
+        effect: "Shows position of strength, brings in fence-sitters"
+        timing: "Always before price change, not after"
+
+      exploding_opportunity:
+        definition: "Opportunities where delay = disproportionate loss"
+        examples:
+          - "Market arbitrage (eBay to Amazon)"
+          - "New advertising platforms before competitors"
+          - "First-mover advantages"
+          - "Employment offers that decrease daily"
+        instruction: "If you find yourself with such opportunity, emphasize it!"
+
+  announcement-specialist:
+    id: announcement-specialist
+    title: "Scarcity-Urgency Communications Specialist"
+    tier: tier_1
+    icon: "megaphone"
+
+    purpose: |
+      Execute all scarcity-urgency communications to maximize
+      psychological impact while maintaining honesty.
+
+    announcement_types:
+      capacity_status:
+        template: "Currently at [X]% capacity. [Y] spots remaining."
+        frequency: "Real-time updates to sales team, periodic to market"
+        channels: ["Sales scripts", "Landing pages", "Email", "Social"]
+
+      sell_out_notification:
+        importance: "This is PART of what makes it work so well"
+        template: |
+          Subject: [Offer] SOLD OUT in [time]
+
+          We just sold out of [product/service].
+          [X] people secured their spot in [time].
+
+          If you missed out this time:
+          1. Join the waitlist: [link]
+          2. Be notified first next opening
+          3. Next opportunity will be [estimated date]
+
+          Thank you to everyone who trusted us.
+        effect: "Even fence-sitters, when they see it sold out, get social proof"
+        psychology: "Now that the choice was made for them, they want it more"
+
+      deadline_visibility:
+        requirement: "Dates visible everywhere"
+        locations: ["Landing pages", "Ads", "Sales copy", "Email sequences"]
+        format: "Countdown timers where possible"
+
+      waitlist_communications:
+        opening_alert: "A spot just opened. You're first in line."
+        general_update: "Still [X] people ahead of you on the waitlist."
+        preparation: "Next opening expected [date]. Get ready."
+
+  ethics-guardian:
+    id: ethics-guardian
+    title: "Scarcity-Urgency Ethics Guardian"
+    tier: tier_2
+    icon: "shield"
+
+    purpose: |
+      Ensure all scarcity-urgency claims are honest, enforceable,
+      and don't damage long-term credibility.
+
+    ethical_standards:
+      honesty_first: |
+        "A estrategia de escassez mais facil e a honestidade."
+        If you can't honestly limit, use honest scarcity instead.
+
+      real_countdowns: |
+        "Certifique-se de que sejam reais. Se nao forem, voce
+        perdera credibilidade e parecera como qualquer outro
+        wannabe marketer."
+
+      deadline_enforcement: |
+        Once a deadline passes or capacity fills:
+        - DO NOT reopen
+        - DO NOT make exceptions
+        - Future credibility depends on this
+
+    audit_checklist:
+      - question: "Is this limit real and enforceable?"
+        pass: "Proceed"
+        fail: "Use honest scarcity instead"
+      - question: "Can we actually deliver at this capacity?"
+        pass: "Proceed"
+        fail: "Lower the limit"
+      - question: "Will we honor the deadline no matter what?"
+        pass: "Proceed"
+        fail: "Don't set the deadline"
+      - question: "Is this the same fake scarcity everyone uses?"
+        pass: "Proceed with real scarcity"
+        fail: "Redesign or abandon"
+
+    enforcement_actions:
+      fake_scarcity_detected: "BLOCK - Do not deploy"
+      deadline_exception_requested: "DENY - Offer next opportunity instead"
+      capacity_exceeded: "STOP sales - Honor limit"
+      credibility_at_risk: "Escalate to business owner"
+
+  compound-tracker:
+    id: compound-tracker
+    title: "Compound Effectiveness Analyst"
+    tier: tier_2
+    icon: "trending-up"
+
+    purpose: |
+      Track the compound effectiveness of scarcity-urgency strategies
+      over time. "Uma das poucas [estrategias] no arsenal de marketing"
+      that compounds.
+
+    tracking_dimensions:
+      sell_out_metrics:
+        - "Sell-out rate per campaign"
+        - "Time-to-sell-out trend"
+        - "Demand vs capacity ratio"
+
+      decision_speed:
+        - "Average time from contact to close"
+        - "Percentage of last-day purchases"
+        - "Response time to scarcity announcements"
+
+      price_tolerance:
+        - "Price objection frequency"
+        - "Premium tier conversion rate"
+        - "Discount request frequency"
+
+      repeat_behavior:
+        - "Repeat buyer rate post-scarcity exposure"
+        - "Waitlist-to-purchase conversion"
+        - "Speed of repeat purchases"
+
+    compound_indicators:
+      improving:
+        - "Sell-out time decreasing"
+        - "Waitlist growing"
+        - "Price objections decreasing"
+        - "Repeat purchase speed increasing"
+      stagnant:
+        - "Metrics flat over 3+ campaigns"
+        - "Action: Review and refresh approach"
+      declining:
+        - "Sell-out rate dropping"
+        - "Waitlist shrinking"
+        - "Action: Audit for credibility damage"
+
+    reporting:
+      frequency: "Per campaign + quarterly roll-up"
+      audience: "Strategy team, business owner"
+      format: "Trend analysis with recommendations"
+
+  exception-handler:
+    id: exception-handler
+    title: "Edge Case & Exception Specialist"
+    tier: tier_2
+    icon: "help-circle"
+
+    purpose: |
+      Handle edge cases while preserving long-term credibility
+      and maintaining ethical standards.
+
+    exception_protocols:
+      missed_deadline:
+        trigger: "Customer wants to buy after deadline"
+        response: "Do NOT reopen"
+        script: |
+          "Unfortunately the promotion ended. The next opportunity
+          will be [date]. Would you like to be notified first?"
+        rationale: "Breaking deadlines destroys future credibility"
+
+      scarcity_challenge:
+        trigger: "Customer says 'I don't believe you're limited'"
+        response: "Show proof"
+        evidence:
+          - "Current capacity utilization"
+          - "Waitlist length"
+          - "Historical sell-out records"
+          - "Operational constraints explanation"
+
+      late_cohort_join:
+        trigger: "Customer wants to buy but cohort just started"
+        option_1:
+          name: "Catch-up bonus"
+          script: |
+            "We can offer personalized catch-up onboarding to get
+            you up to speed as a bonus for signing up today."
+        option_2:
+          name: "Extended runway (preferred)"
+          script: |
+            "Since the next group starts in a while, you'll have
+            the advantage of more time to review materials and
+            talk with your team. Plus, we can offer an extended
+            payment plan since the start date is so far out -
+            an advantage most clients don't get."
+
+      demand_exceeds_capacity:
+        trigger: "Consistent demand overflow"
+        response:
+          - "Periodically increase capacity 10-20%"
+          - "Then limit again"
+          - "Always leave some demand unmet"
+        rationale: "Unmet demand = continued scarcity power"
+
+      small_to_large_group_transition:
+        trigger: "Exit barrier losing power as group grows"
+        response: "Reserve exit barrier for premium tiers only"
+        source: "Works best with small groups... loses teeth as groups get larger"
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Tier 0: Analysis
+  - task: "Analyze true business capacity"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Must reflect real operational limits"
+
+  - task: "Calculate honest capacity percentage"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Real-time tracking of current vs max"
+
+  - task: "Audit offer for scarcity-urgency fit"
+    executor: Human
+    automation: LOW
+    guardrails: "Strategic decision on business model"
+
+  # Tier 1: Scarcity Implementation
+  - task: "Design physical product limited release"
+    executor: Human
+    automation: LOW
+    guardrails: "Set quantity BELOW expected demand"
+
+  - task: "Set total business client limit"
+    executor: Human
+    automation: LOW
+    guardrails: "Must maintain service quality at capacity"
+
+  - task: "Track capacity and openings"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Real-time updates"
+
+  - task: "Create and manage waitlist"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Notify when spots open"
+
+  - task: "Announce sell-out status"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Must actually be sold out"
+
+  - task: "Implement exit barrier policy"
+    executor: Human
+    automation: LOW
+    guardrails: "Small groups only, must enforce"
+
+  # Tier 1: Urgency Implementation
+  - task: "Set cohort start dates"
+    executor: Human
+    automation: LOW
+    guardrails: "Operational alignment required"
+
+  - task: "Create deadline countdowns"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Must be real dates"
+
+  - task: "Rotate seasonal promotion names"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "New landing page per promotion"
+
+  - task: "Execute price increase announcement"
+    executor: Human
+    automation: LOW
+    guardrails: "Price must actually increase after"
+
+  - task: "Identify exploding opportunities"
+    executor: Human
+    automation: LOW
+    guardrails: "Must be genuinely time-sensitive"
+
+  # Tier 1: Communications
+  - task: "Craft scarcity messaging"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "All claims must be verifiable"
+
+  - task: "Send automated deadline reminders"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Escalate as deadline approaches"
+
+  - task: "Update capacity status communications"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Match real numbers"
+
+  # Tier 2: Oversight
+  - task: "Verify all limits are real"
+    executor: Human
+    automation: LOW
+    guardrails: "100% must be verifiable"
+
+  - task: "Enforce deadline closure"
+    executor: Human
+    automation: LOW
+    guardrails: "No exceptions"
+
+  - task: "Track compound effectiveness"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Per campaign + quarterly"
+
+  - task: "Handle missed deadline requests"
+    executor: Human
+    automation: LOW
+    guardrails: "Always redirect to next opportunity"
+
+  - task: "Handle scarcity challenges"
+    executor: Human
+    automation: LOW
+    guardrails: "Provide evidence, maintain credibility"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Honesty Gate"
+    transition: "Before ANY scarcity-urgency deployment"
+    condition: "limit_is_real AND deadline_is_enforceable"
+    type: blocking
+    failure_action: "Use honest scarcity or do not deploy"
+
+  QG-002:
+    name: "Sell-Out Gate"
+    transition: "End of limited campaign"
+    condition: "sold_out == true"
+    type: warning
+    failure_action: "Reduce limit next time"
+
+  QG-003:
+    name: "Deadline Enforcement Gate"
+    transition: "Post-deadline purchase request"
+    condition: "deadline_honored == true (no exceptions)"
+    type: blocking
+    failure_action: "Redirect to next opportunity"
+
+  QG-004:
+    name: "Announcement Gate"
+    transition: "Post sell-out"
+    condition: "sell_out_announced == true"
+    type: warning
+    failure_action: "Announce immediately - this is part of the strategy"
+
+  QG-005:
+    name: "Credibility Gate"
+    transition: "Campaign review"
+    condition: "no_fake_scarcity_claims AND all_limits_honored"
+    type: blocking
+    failure_action: "Audit and correct before next campaign"
+
+  QG-006:
+    name: "Compound Effect Gate"
+    transition: "Quarterly review"
+    condition: "effectiveness_improving OR stable"
+    type: warning
+    failure_action: "Strategy refresh required"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  scarcity_deployment_workflow:
+    trigger: "New offer or campaign requiring scarcity"
+    steps:
+      - step: 1
+        agent: offer-auditor
+        action: "Audit offer for scarcity type fit"
+        output: "Recommended scarcity type"
+
+      - step: 2
+        agent: capacity-analyzer
+        action: "Determine real capacity limits"
+        output: "Honest capacity numbers"
+
+      - step: 3
+        agent: ethics-guardian
+        action: "Verify all claims can be honestly made"
+        gate: "QG-001 Honesty Gate"
+
+      - step: 4
+        agent: scarcity-architect
+        action: "Design scarcity mechanism"
+        output: "Scarcity implementation plan"
+
+      - step: 5
+        agent: announcement-specialist
+        action: "Create scarcity communications"
+        output: "Scripts, landing pages, email copy"
+
+      - step: 6
+        agent: compound-tracker
+        action: "Set up tracking for compound effect"
+        output: "Baseline metrics established"
+
+  urgency_deployment_workflow:
+    trigger: "New campaign requiring urgency"
+    steps:
+      - step: 1
+        agent: offer-auditor
+        action: "Audit offer for urgency type fit"
+        output: "Recommended urgency type"
+
+      - step: 2
+        agent: ethics-guardian
+        action: "Verify deadlines are real and enforceable"
+        gate: "QG-001 Honesty Gate"
+
+      - step: 3
+        agent: urgency-architect
+        action: "Design urgency mechanism"
+        output: "Urgency implementation plan"
+
+      - step: 4
+        agent: announcement-specialist
+        action: "Create deadline communications"
+        output: "Countdown pages, reminder sequences"
+
+      - step: 5
+        agent: ethics-guardian
+        action: "Confirm enforcement commitment"
+        gate: "QG-003 Deadline Enforcement Gate"
+
+  sell_out_workflow:
+    trigger: "Capacity reached"
+    steps:
+      - step: 1
+        agent: scarcity-architect
+        action: "Confirm genuine sell-out"
+        verification: "Real numbers match claims"
+
+      - step: 2
+        agent: announcement-specialist
+        action: "Execute sell-out announcement"
+        gate: "QG-004 Announcement Gate"
+        channels: ["Email", "Social", "Landing page update"]
+
+      - step: 3
+        agent: exception-handler
+        action: "Create waitlist for overflow demand"
+        output: "Waitlist active"
+
+      - step: 4
+        agent: compound-tracker
+        action: "Record sell-out metrics"
+        output: "Campaign data logged"
+
+  deadline_closure_workflow:
+    trigger: "Deadline reached"
+    steps:
+      - step: 1
+        agent: urgency-architect
+        action: "Close enrollment/promotion"
+        enforcement: "No exceptions"
+
+      - step: 2
+        agent: ethics-guardian
+        action: "Enforce deadline"
+        gate: "QG-003 Deadline Enforcement Gate"
+
+      - step: 3
+        agent: exception-handler
+        action: "Handle late requests"
+        response: "Redirect to next opportunity"
+
+      - step: 4
+        agent: compound-tracker
+        action: "Record last-day sales percentage"
+        benchmark: "Target >30% in final day"
+
+  compound_review_workflow:
+    trigger: "Quarterly review"
+    steps:
+      - step: 1
+        agent: compound-tracker
+        action: "Compile campaign metrics"
+        output: "Quarterly trend report"
+
+      - step: 2
+        agent: compound-tracker
+        action: "Assess compound effectiveness"
+        gate: "QG-006 Compound Effect Gate"
+
+      - step: 3
+        agent: scarcity-urgency-coordinator
+        action: "Review and adjust strategy"
+        output: "Optimization recommendations"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    sell_out_rate:
+      formula: "Campaigns sold out / Total limited campaigns"
+      target: ">80%"
+      benchmark: "If not selling out, limit is too high"
+
+    decision_speed:
+      formula: "Avg time from first contact to purchase"
+      target: "Faster than baseline"
+      measurement: "Track trend over time"
+
+  secondary:
+    last_day_sales:
+      formula: "Sales in final 24h / Total campaign sales"
+      target: ">30%"
+      insight: "Urgency working if 50-60% (source benchmark)"
+
+    waitlist_conversion:
+      formula: "Waitlist purchases / Total waitlist signups"
+      target: ">50%"
+      indication: "Scarcity credibility maintained"
+
+    price_resistance:
+      formula: "Price objections / Total sales conversations"
+      target: "Decreasing trend"
+      indication: "Scarcity power increasing"
+
+    compound_score:
+      components:
+        - "Time-to-sell-out improvement"
+        - "Repeat buyer rate post-exposure"
+        - "Waitlist growth rate"
+      target: "Positive trend over 4+ campaigns"
+
+  by_scarcity_type:
+    physical_product:
+      - "Sell-out time"
+      - "Announcement reach"
+      - "Next-release pre-orders"
+    total_limit:
+      - "Waitlist length"
+      - "Capacity utilization"
+      - "Churn prevention"
+    cohort_limit:
+      - "Fill rate per cohort"
+      - "Early vs late enrollment ratio"
+      - "Compound effectiveness"
+    premium_access:
+      - "Conversion at premium price"
+      - "Client quality score"
+      - "Referral rate"
+
+  by_urgency_type:
+    cohort_based:
+      - "Enrollment by deadline proximity"
+      - "Cohort fill time"
+    seasonal:
+      - "Conversion by promotion name"
+      - "Campaign-over-campaign comparison"
+    price_increase:
+      - "Pipeline clearing rate"
+      - "Post-increase sales impact"
+    exploding:
+      - "Decision speed"
+      - "Opportunity capture rate"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Not selling out"
+    possible_causes:
+      - "Limit set too high"
+      - "Insufficient demand for offer"
+      - "Scarcity not communicated effectively"
+    diagnosis:
+      - "Review demand vs capacity ratio"
+      - "Audit scarcity messaging visibility"
+      - "Check offer value proposition"
+    solutions:
+      - "Lower the limit"
+      - "Improve offer value first"
+      - "Increase scarcity communication"
+
+  - symptom: "Customers don't believe scarcity"
+    possible_causes:
+      - "History of fake scarcity"
+      - "Scarcity too similar to competitors"
+      - "No proof of constraints"
+    diagnosis:
+      - "Audit past claims vs reality"
+      - "Review competitor tactics"
+      - "Check if proof is visible"
+    solutions:
+      - "Rebuild credibility with honest scarcity"
+      - "Show real waitlists and sell-outs"
+      - "Document and display constraints"
+
+  - symptom: "Low last-day sales spike"
+    possible_causes:
+      - "Deadline not visible enough"
+      - "Customers don't believe deadline is real"
+      - "Urgency messaging weak"
+    diagnosis:
+      - "Check deadline visibility across channels"
+      - "Review deadline enforcement history"
+      - "Audit urgency copy"
+    solutions:
+      - "Add countdown timers everywhere"
+      - "Enforce deadlines strictly"
+      - "Strengthen urgency messaging"
+
+  - symptom: "Compound effect not appearing"
+    possible_causes:
+      - "Inconsistent execution"
+      - "Breaking limits/deadlines"
+      - "Not announcing sell-outs"
+    diagnosis:
+      - "Review campaign-to-campaign consistency"
+      - "Audit deadline enforcement"
+      - "Check sell-out announcement rate"
+    solutions:
+      - "Execute consistently every campaign"
+      - "Never break limits or deadlines"
+      - "Always announce sell-outs"
+
+  - symptom: "Credibility damage"
+    possible_causes:
+      - "Used fake scarcity"
+      - "Reopened after deadline"
+      - "Limits not honored"
+    diagnosis:
+      - "Review customer feedback"
+      - "Audit exception history"
+      - "Check public perception"
+    solutions:
+      - "Stop all fake scarcity immediately"
+      - "Publicly commit to honest scarcity"
+      - "Rebuild trust over multiple campaigns"
+
+# ===============================================================================
+# TECHNOLOGY REQUIREMENTS
+# ===============================================================================
+
+technology:
+  required:
+    - tool: "Capacity Tracking System"
+      purpose: "Real-time client/inventory count"
+      features:
+        - "Current vs max capacity"
+        - "Percentage utilization"
+        - "Automatic alerts at thresholds"
+
+    - tool: "Countdown Timer Software"
+      purpose: "Visible deadline countdowns"
+      features:
+        - "Landing page integration"
+        - "Email countdown GIFs"
+        - "Real-time sync"
+
+    - tool: "Waitlist Management"
+      purpose: "Capture and notify overflow demand"
+      features:
+        - "Signup capture"
+        - "Position tracking"
+        - "Automated notifications"
+
+    - tool: "Campaign Analytics"
+      purpose: "Track scarcity-urgency effectiveness"
+      features:
+        - "Sell-out rate tracking"
+        - "Time-to-close analysis"
+        - "Last-day spike measurement"
+
+  recommended:
+    - tool: "Landing Page Builder"
+      purpose: "Quick deadline/promo page updates"
+      note: "Takes 5 minutes to update dates"
+
+    - tool: "Email Automation"
+      purpose: "Deadline reminder sequences"
+      features:
+        - "Automated reminders at intervals"
+        - "Sell-out announcements"
+        - "Waitlist notifications"
+
+    - tool: "CRM with Pipeline Tracking"
+      purpose: "Track decision speed by lead"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Specific thresholds for capacity percentage messaging"
+    severity: Low
+    note: "81% example given, but flexible"
+
+  - id: GAP-002
+    description: "Optimal frequency for seasonal promotions by industry"
+    severity: Medium
+    clarification_needed: "Monthly mentioned for local, varies by industry"
+
+  - id: GAP-003
+    description: "Legal compliance for scarcity claims"
+    severity: High
+    clarification_needed: "FTC guidelines for limited offers"
+
+  - id: GAP-004
+    description: "Cohort size optimization formula"
+    severity: Medium
+    clarification_needed: "How to determine optimal cohort size vs demand"
+
+  - id: GAP-005
+    description: "Exit barrier effectiveness decline point"
+    severity: Low
+    note: "Works with small groups, loses teeth when larger - specific number unclear"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 6
+  workflows_documented: 5
+  scarcity_types_documented: 6
+  urgency_types_documented: 5
+  source_references: 65+
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

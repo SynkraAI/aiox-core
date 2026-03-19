@@ -1,0 +1,207 @@
+# Social Channel Launch Workflow
+# Pipeline para lançar canal social para afiliados
+# Source: @architect research — Kane Hook Point + GaryVee Content Pyramid + TikTok/Reels
+# Version: 1.0.0
+
+id: wf-social-channel-launch
+name: "Social Channel Launch"
+version: "1.0.0"
+duration: "1-2 weeks"
+description: |
+  Workflow para lançar presença em social media para afiliados.
+  Calendário → content pyramid → hooks → scripts de vídeo.
+
+  FILOSOFIA: "Platform-native, não cross-post. Jab Jab Jab Right Hook (3:1)."
+
+  RESULTADO: Calendário editorial + conteúdo pyramid + hooks testáveis.
+
+best_for:
+  - "Lançar canal social do zero"
+  - "Ativar TikTok/Reels/Shorts para afiliados"
+  - "Montar content system multi-plataforma"
+
+decision_matrix_fit:
+  complexity: medium
+  agents_required: 3
+  estimated_duration: "1-2 weeks"
+  user_involvement: "medium"
+  prerequisites:
+    - "Nicho definido"
+    - "Produto de afiliado selecionado"
+    - "Contas em plataformas criadas"
+
+clone_combinations:
+  primary:
+    - agent: social-strategist
+      role: "Calendário, content pyramid, plataform strategy"
+      phases: [0, 1]
+
+    - agent: social-hooks
+      role: "Hook creation, video scripts"
+      phases: [2, 3]
+
+    - agent: content-authority
+      role: "Content pyramid, pillar content"
+      phases: [1]
+
+  synergies:
+    - agents: [social-strategist, social-hooks]
+      pattern: "Strategist plans, Hooks executes with attention-grabbing content"
+
+    - agents: [social-strategist, content-authority]
+      pattern: "Strategist distributes, Authority creates pillar content"
+
+phases:
+  - id: PHASE-0
+    name: "Social Calendar"
+    days: "Days 1-3"
+    tier: 0
+    description: |
+      Calendário editorial mensal por plataforma.
+      Platform-native — adaptar formato, não cross-post.
+
+    agent: social-strategist
+
+    tasks:
+      - task_id: T0.1
+        name: "Design Social Calendar"
+        task_ref: design-social-calendar.md
+        required: true
+        description: "Calendário editorial mensal multi-plataforma"
+        output: "social_calendar.yaml"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Calendar Ready"
+      criteria:
+        - "4 semanas planejadas"
+        - "Content por plataforma (não cross-post)"
+        - "Ratio 3:1 valor:pitch"
+        - "Posting times otimizados por plataforma"
+      human_review: true
+      message: "Revise calendário social."
+
+  - id: PHASE-1
+    name: "Content Pyramid"
+    days: "Days 4-6"
+    tier: 1
+    description: |
+      GaryVee Content Pyramid: Long-form pillar → micro-content por plataforma.
+      1 pillar piece → 10+ micro-content adaptados.
+
+    agents:
+      primary: social-strategist
+      secondary: content-authority
+
+    tasks:
+      - task_id: T1.1
+        name: "Build Content Pyramid"
+        task_ref: build-content-pyramid.md
+        required: true
+        description: "Pillar → micro-content por plataforma"
+        output: "content_pyramid.yaml"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Pyramid Built"
+      criteria:
+        - "Mínimo 2 pillar pieces definidos"
+        - "10+ micro-contents derivados"
+        - "Adaptação por plataforma documentada"
+      human_review: true
+      message: "Revise content pyramid antes de criar hooks."
+
+  - id: PHASE-2
+    name: "Hook Creation"
+    days: "Days 7-9"
+    tier: 2
+    description: |
+      Brendan Kane Hook Point: primeiros 3s definem tudo.
+      5 variações por conteúdo. Hypothesis-Test-Pivot.
+
+    agent: social-hooks
+
+    tasks:
+      - task_id: T2.1
+        name: "Create Hook Sets"
+        task_ref: create-hook-set.md
+        required: true
+        description: "5 variações de hook por conteúdo"
+        output: "hook_sets.yaml"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Hooks Created"
+      criteria:
+        - "5 variações por hook"
+        - "Mix de categorias: curiosity, fear, desire, surprise, social proof"
+        - "Prontos para teste A/B"
+      human_review: false
+
+  - id: PHASE-3
+    name: "Video Scripts"
+    days: "Days 10-14"
+    tier: 2
+    description: |
+      Scripts para short videos (TikTok/Reels/Shorts).
+      Hook → Problem → Agitate → Solution → CTA em 15-60s.
+
+    agent: social-hooks
+
+    tasks:
+      - task_id: T3.1
+        name: "Script Short Videos"
+        task_ref: script-short-video.md
+        required: true
+        description: "Scripts Hook → Problem → Solution → CTA"
+        output: "video_scripts.yaml"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Scripts Ready"
+      criteria:
+        - "Mínimo 10 scripts prontos"
+        - "Cada script 15-60s"
+        - "Hook nos primeiros 3s"
+        - "CTA claro no final"
+        - "Disclosure de afiliado"
+      human_review: true
+      message: "Revise scripts antes de gravar."
+      veto_conditions:
+        - condition: "Script > 60s sem justificativa"
+          action: "WARNING — Short-form performa melhor < 60s"
+        - condition: "Sem disclosure de afiliado"
+          action: "BLOCK — Obrigatório por lei"
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - halt_workflow: false
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "affiliates-chief"
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-social-channel-launch"
+      status: "completed"
+
+outputs:
+  phase_0: ["social_calendar.yaml"]
+  phase_1: ["content_pyramid.yaml"]
+  phase_2: ["hook_sets.yaml"]
+  phase_3: ["video_scripts.yaml"]
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-18"
+  author: "squad-architect"
+  source_frameworks:
+    - "Brendan Kane Hook Point"
+    - "GaryVee Content Pyramid"
+    - "TikTok/Reels 2025-2026 Best Practices"
+  priority: 2
+  quality_gate: "SC_WFL_001"

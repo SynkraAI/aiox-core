@@ -1,0 +1,149 @@
+# Full Harvest Workflow
+# Orchestrates the complete source harvesting pipeline
+#
+# Usage: Referenced by harvest-full-pipeline.md task
+# Trigger: *harvest {mind} command
+
+name: wf-harvest
+version: 1.0.0
+description: "Complete source harvesting pipeline: discover -> collect -> analyze -> inventory"
+agent: mind-content-updater
+
+inputs:
+  mind_name:
+    type: string
+    required: true
+    description: "Full name of the person"
+  mind_slug:
+    type: string
+    required: true
+    description: "Snake_case identifier"
+  language:
+    type: string
+    default: "en"
+  checkpoints:
+    type: boolean
+    default: true
+    description: "Pause between phases for user review"
+
+phases:
+  - id: setup
+    name: "Phase 0: Setup"
+    steps:
+      - action: ensure_directory
+        path: "squads/mmos-squad/minds/{mind_slug}/sources/blogs/"
+      - action: ensure_directory
+        path: "squads/mmos-squad/minds/{mind_slug}/sources/youtube/"
+      - action: ensure_directory
+        path: "squads/mmos-squad/minds/{mind_slug}/sources/articles/"
+      - action: ensure_directory
+        path: "squads/mmos-squad/minds/{mind_slug}/sources/interviews/"
+      - action: ensure_directory
+        path: "squads/mmos-squad/minds/{mind_slug}/sources/social/"
+      - action: ensure_directory
+        path: "squads/mmos-squad/minds/{mind_slug}/sources/manual/"
+      - action: ensure_directory
+        path: "squads/mmos-squad/minds/{mind_slug}/docs/logs/"
+      - action: check_tools
+        tools:
+          - name: "exa"
+            type: "mcp"
+            required: false
+            fallback: "WebSearch only"
+          - name: "aios-transcriber"
+            type: "cli"
+            required: false
+            fallback: "Skip YouTube videos"
+          - name: "youtube-captions"
+            type: "cli"
+            required: false
+            fallback: "WebSearch for YouTube only"
+          - name: "WebFetch"
+            type: "builtin"
+            required: true
+          - name: "WebSearch"
+            type: "builtin"
+            required: true
+
+  - id: discover
+    name: "Phase 1: Discover"
+    task: discover-sources.md
+    inputs:
+      mind_name: "{mind_name}"
+      mind_slug: "{mind_slug}"
+      language: "{language}"
+    checkpoint:
+      enabled: "{checkpoints}"
+      message: "Discovery complete. Review results before collection."
+      options:
+        - "CONTINUE to Phase 2 (Collection)"
+        - "ADD more URLs before collecting"
+        - "SKIP certain sources"
+        - "ABORT pipeline"
+
+  - id: collect
+    name: "Phase 2: Collect"
+    task: collect-content.md
+    depends_on: discover
+    inputs:
+      mind_slug: "{mind_slug}"
+      source: "discovery_report"
+      batch: "all"
+      language: "{language}"
+    checkpoint:
+      enabled: "{checkpoints}"
+      message: "Collection complete. Review results before analysis."
+      options:
+        - "CONTINUE to Phase 3 (Analysis)"
+        - "RETRY failed sources"
+        - "ADD manual sources"
+        - "ABORT pipeline"
+
+  - id: analyze
+    name: "Phase 3: Analyze"
+    task: analyze-sources.md
+    depends_on: collect
+    inputs:
+      mind_slug: "{mind_slug}"
+      scope: "all"
+    checkpoint:
+      enabled: "{checkpoints}"
+      message: "Analysis complete. Review extracted insights."
+      options:
+        - "CONTINUE to Phase 4 (Inventory)"
+        - "RE-ANALYZE with different depth"
+        - "COLLECT more sources to fill gaps"
+        - "ABORT pipeline"
+
+  - id: inventory
+    name: "Phase 4: Inventory"
+    task: generate-inventory.md
+    depends_on: analyze
+    inputs:
+      mind_slug: "{mind_slug}"
+      mode: "generate"
+
+  - id: summary
+    name: "Final Summary"
+    depends_on: inventory
+    action: present_summary
+    template: |
+      HARVEST COMPLETE - {mind_name}
+      =================================
+      Discover: {discover.sources_found} sources found
+      Collect:  {collect.success}/{collect.total} sources ({collect.percentage}%)
+      Analyze:  {analyze.frameworks} frameworks, {analyze.phrases} phrases
+      Inventory: sources_master.yaml generated
+
+      Next: @mind-mapper *map {mind_slug}
+
+error_handling:
+  phase_failure:
+    action: "Present error and recovery options to user"
+    options:
+      - "Retry failed phase"
+      - "Skip phase and continue"
+      - "Abort pipeline"
+  resume:
+    enabled: true
+    check: "Look for existing report files in docs/logs/ to determine completed phases"

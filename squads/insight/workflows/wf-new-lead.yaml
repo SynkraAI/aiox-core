@@ -1,0 +1,379 @@
+# Workflow: New Lead Diagnosis
+# Triggered when a new lead enters the pipeline
+# Full parallel diagnosis → narrative report → QA → operator
+
+workflow:
+  id: wf-new-lead
+  name: "New Lead — Complete Diagnosis"
+  version: "1.0"
+  trigger: "New lead enters pipeline"
+  orchestrator: "@insight-chief"
+  estimated_time: "45-90 min"
+  phases: 5  # 0: Triage, 1: Parallel Diagnosis, 1.5: QA Gate, 2: Narrative, 3: Final QA + Delivery
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# INPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+inputs:
+  required:
+    - name: business_name
+      type: string
+      example: "Clínica Sorrir"
+    - name: city
+      type: string
+      example: "Campinas/SP"
+    - name: niche
+      type: string
+      example: "odontologia"
+  optional:
+    - name: url
+      type: string
+      example: "https://clinicasorrir.com.br"
+    - name: social_profiles
+      type: list
+      example: ["@clinicasorrir"]
+    - name: services
+      type: list
+      example: ["implante", "clareamento"]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 0: TRIAGE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: phase_0_triage
+    name: "Triage & Setup"
+    executor: "@insight-chief"
+    duration: "2-5 min"
+
+    steps:
+      - action: "Validate inputs (business_name, city, niche required)"
+      - action: "Load niche config from data/niche-config.yaml"
+      - action: "Identify niche-specific portals and metrics"
+      - action: "Prepare parallel dispatch for Phase 1"
+
+    checkpoint:
+      id: "IN-WF-001"
+      name: "Triage Complete"
+      blocking: true
+      criteria:
+        - "All required inputs present"
+        - "Niche config loaded"
+      veto:
+        - "Missing business_name or city → ABORT"
+
+    output:
+      profiler_input:
+        business_name: "{business_name}"
+        city: "{city}"
+        niche: "{niche}"
+        url: "{url}"
+        social_profiles: "{social_profiles}"
+      scout_input:
+        niche: "{niche}"
+        city: "{city}"
+        services: "{services}"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 1: PARALLEL DIAGNOSIS (profiler + scout)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: phase_1_parallel_diagnosis
+    name: "Parallel Diagnosis"
+    duration: "15-30 min"
+    execution: parallel  # CRITICAL: both run simultaneously
+
+    parallel_agents:
+      - agent: "@digital-profiler"
+        task: "tasks/run-profiler.md"
+        input: "{profiler_input}"
+        output_key: "dossier"
+        timeout: "30 min"
+
+      - agent: "@market-scout"
+        task: "tasks/run-scout.md"
+        input: "{scout_input}"
+        output_key: "opportunity_map"
+        timeout: "30 min"
+
+    checkpoint:
+      id: "IN-WF-002"
+      name: "Diagnosis Complete"
+      blocking: true
+      criteria:
+        - "Dossier score calculated (0-100)"
+        - "Opportunity map with ICE scores"
+        - "Both agents completed without errors"
+      veto:
+        - "Either agent failed → retry once, then escalate"
+        - "Dossier without score → BLOCK"
+        - "Map without priorities → BLOCK"
+
+    output:
+      dossier: "{from digital-profiler}"
+      opportunity_map: "{from market-scout}"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 1.5: QA GATE — DIAGNOSIS OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: phase_1b_qa_diagnosis
+    name: "QA Gate — Validate Diagnosis Outputs"
+    executor: "@insight-chief"
+    task: "tasks/qa-checkpoint.md"
+    duration: "5-10 min"
+    depends_on: [phase_1_parallel_diagnosis]
+
+    rationale: |
+      QA do profiler + scout DEVE rodar ANTES do storyteller.
+      Storyteller que recebe input ruim gera report ruim.
+      Detectar cedo = corrigir barato.
+
+    steps:
+      - action: "Run QA on dossier (IN-QA-001)"
+        input: { output_type: "dossier", output_data: "{dossier}" }
+      - action: "Run QA on map (IN-QA-002)"
+        input: { output_type: "map", output_data: "{opportunity_map}" }
+      - action: "Calculate diagnosis confidence score"
+
+    checkpoint:
+      id: "IN-WF-002b"
+      name: "Diagnosis QA Gate"
+      blocking: true
+      criteria:
+        - "Dossier passes IN-QA-001 (all blocking checks)"
+        - "Map passes IN-QA-002 (all blocking checks)"
+        - "Diagnosis confidence >= 70"
+      veto:
+        - "Any blocking check in IN-QA-001 fails → new profiler cycle (max 2)"
+        - "Any blocking check in IN-QA-002 fails → new scout cycle (max 2)"
+        - "Confidence < 50 → escalate to operator, DO NOT proceed"
+
+    on_failure:
+      strategy: "forward_retry"
+      max_cycles: 2
+      steps:
+        - action: "Identify failing output (dossier, map, or both)"
+        - action: "Create NEW task instance for failing agent with feedback context"
+          note: "New forward cycle — previous output archived as attempt_N"
+        - action: "Agent produces new output → re-enter Phase 1.5 QA"
+        - action: "If 2 cycles fail → ESCALATE to operator with both attempts attached"
+
+    output:
+      dossier_validated: "{dossier after QA PASS}"
+      opportunity_map_validated: "{opportunity_map after QA PASS}"
+      diagnosis_confidence: "{calculated score}"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2: NARRATIVE REPORT (storyteller)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: phase_2_narrative
+    name: "Impact Report (Pre-sales)"
+    executor: "@data-storyteller"
+    task: "tasks/run-storyteller.md"
+    duration: "15-30 min"
+    depends_on: [phase_1b_qa_diagnosis]  # Needs QA-VALIDATED inputs
+
+    input:
+      report_type: "impact"
+      business_name: "{business_name}"
+      dossier: "{dossier_validated}"
+      opportunity_map: "{opportunity_map_validated}"
+
+    checkpoint:
+      id: "IN-WF-003"
+      name: "Report Quality"
+      blocking: true
+      criteria:
+        - "ABT structure present"
+        - "Non-technical language"
+        - "CTA defined"
+        - "Triad balanced (Dykes)"
+        - "No chartjunk (Tufte)"
+      veto:
+        - "Numbers listed without narrative → REJECT"
+        - "Technical jargon → REJECT"
+        - "Data distortion detected → REJECT"
+
+    output:
+      impact_report: "{from data-storyteller}"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3: FINAL QA & DELIVERY
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: phase_3_qa_delivery
+    name: "Final QA — Report + Package & Delivery"
+    executor: "@insight-chief"
+    task: "tasks/qa-checkpoint.md"
+    duration: "5-10 min"
+    depends_on: [phase_2_narrative]
+
+    rationale: |
+      Phase 3 foca APENAS no output do storyteller (IN-QA-003).
+      Dossiê e mapa já passaram QA na Phase 1.5.
+      Aqui: validar report + empacotar + entregar.
+
+    steps:
+      - action: "Run QA on report (IN-QA-003)"
+        input: { output_type: "report", output_data: "{impact_report}" }
+      - action: "Calculate final confidence score (diagnosis + report)"
+      - action: "Apply autonomy level decision"
+
+    checkpoint:
+      id: "IN-WF-004"
+      name: "Final QA"
+      blocking: true
+      criteria:
+        - "Report passes IN-QA-003 (all blocking checks)"
+        - "Overall confidence >= 70 (avg of diagnosis + report)"
+      veto:
+        - "Any blocking check in IN-QA-003 fails → new storyteller cycle (max 2)"
+        - "Overall confidence < 50 → escalate to operator"
+
+    on_success:
+      - action: "Package deliverables (dossier + map + report)"
+      - action: "Deliver to operator"
+      - action: "Log in pipeline (lead status: diagnosed)"
+
+    on_failure:
+      strategy: "forward_retry"
+      max_cycles: 2
+      steps:
+        - action: "Create NEW storyteller task instance with feedback context"
+          note: "Previous report archived as attempt_N. New cycle uses same validated inputs."
+        - action: "Storyteller produces new report → re-enter Phase 3 QA"
+        - action: "If 2 cycles fail → ESCALATE to operator with all attempts attached"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  deliverables:
+    - name: "Digital Presence Dossier"
+      format: "Markdown / Google Doc"
+      content: "Score 0-100, breakdown, gaps, competitors"
+
+    - name: "Market Opportunity Map"
+      format: "Markdown / Google Sheet"
+      content: "Keywords, ICE scores, quick wins"
+
+    - name: "Impact Report (Pre-sales)"
+      format: "Markdown / Google Doc"
+      content: "Narrative report for sales conversation"
+
+  next_steps:
+    if_lead_converts:
+      action: "Run prepare-handoff task"
+      task: "tasks/prepare-handoff.md"
+      target_squads: ["production", "automation", "operations"]
+
+    if_lead_does_not_convert:
+      action: "Archive diagnostics"
+      follow_up: "Schedule re-contact in 30 days"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FLOW DIAGRAM
+# ═══════════════════════════════════════════════════════════════════════════════
+
+flow: |
+  Lead enters (name + city + niche + URL + social)
+      │
+      ▼
+  [Phase 0] insight-chief: Triage & Setup
+      │
+      ├──────────────────────┐
+      ▼                      ▼
+  [Phase 1a]             [Phase 1b]
+  digital-profiler       market-scout
+  (dossiê)               (mapa)
+      │                      │
+      └──────────┬───────────┘
+                 ▼
+  [Phase 1.5] insight-chief: QA Gate (IN-QA-001 + IN-QA-002)
+                 │
+          ┌──────┴──────┐
+          ▼             ▼
+        PASS          FAIL → forward retry (max 2 cycles)
+          │                   → escalate se 2x fail
+          ▼
+  [Phase 2] data-storyteller: Impact Report (inputs QA-validated)
+                 │
+                 ▼
+  [Phase 3] insight-chief: Final QA (IN-QA-003) + Package
+                 │
+          ┌──────┴──────┐
+          ▼             ▼
+        PASS          FAIL → forward retry (max 2 cycles)
+          │
+          ▼
+  Operator receives package → uses as sales weapon
+                 │
+        ┌────────┴────────┐
+        ▼                 ▼
+  Lead converts      Lead doesn't convert
+        │                 │
+        ▼                 ▼
+  prepare-handoff    Archive + follow-up 30d
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OPERATOR GUIDE — EXECUÇÃO PRÁTICA NO CLAUDE CODE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+operator_guide:
+  context: |
+    No Claude Code, apenas 1 agente roda por vez numa sessão.
+    "Parallel execution" significa que profiler e scout são INDEPENDENTES —
+    podem rodar em qualquer ordem, sem dependência entre si.
+    O operador executa sequencialmente mas os agents NÃO precisam
+    do output um do outro pra funcionar.
+
+  step_by_step:
+    - step: 1
+      action: "Ativar @insight-chief"
+      command: "@insight-chief *new-lead '{nome}' {cidade} {nicho}"
+      result: "Chief faz triage, valida inputs, prepara dispatch"
+      tip: "Anote os inputs estruturados que o chief retorna"
+
+    - step: 2
+      action: "Ativar @digital-profiler (Phase 1a)"
+      command: "@digital-profiler *profile '{nome}' {cidade} {nicho}"
+      result: "Dossiê salvo em outputs/insight/{client-slug}/dossie-presenca-digital.md"
+      tip: "Pode rodar antes do scout — são independentes"
+
+    - step: 3
+      action: "Ativar @market-scout (Phase 1b)"
+      command: "@market-scout *scout {nicho} {cidade}"
+      result: "Mapa salvo em outputs/insight/{client-slug}/mapa-oportunidades.md"
+      tip: "Ordem entre step 2 e 3 não importa — ambos usam só os inputs do triage"
+
+    - step: 4
+      action: "Reativar @insight-chief (Phase 1.5 — QA Gate)"
+      command: "@insight-chief *review dossiê-{client-slug}"
+      then: "@insight-chief *review mapa-{client-slug}"
+      result: "QA PASS ou FAIL com feedback"
+      tip: "Se FAIL → reativar agent que falhou com feedback, gerar novo output"
+
+    - step: 5
+      action: "Ativar @data-storyteller (Phase 2)"
+      command: "@data-storyteller *report-impact '{nome}'"
+      result: "Report salvo em outputs/insight/{client-slug}/report-impacto.md"
+      prerequisite: "Steps 2+3 aprovados no QA (step 4)"
+
+    - step: 6
+      action: "Reativar @insight-chief (Phase 3 — Final QA)"
+      command: "@insight-chief *review report-{client-slug}"
+      result: "Package completo aprovado e entregue"
+      tip: "Chief embala dossiê + mapa + report como arma de vendas"
+
+  total_agent_activations: 6  # chief(1) + profiler(2) + scout(3) + chief-qa(4) + storyteller(5) + chief-final(6)
+  estimated_time: "45-90 min (depende de ferramentas e nicho)"
+
+  tips:
+    - "Mantenha uma mesma sessão Claude Code para contexto — ou salve outputs em arquivos"
+    - "Se usar sessões separadas, sempre passe o path do output anterior como referência"
+    - "Os 3 outputs finais ficam SEMPRE em outputs/insight/{client-slug}/"
+    - "Para leads simples, use *profile-quick em vez de *profile (3 canais vs 7)"

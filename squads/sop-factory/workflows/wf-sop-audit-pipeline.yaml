@@ -1,0 +1,304 @@
+workflow:
+  id: wf-sop-audit-pipeline
+  name: "SOP Audit Pipeline"
+  version: "1.0.0"
+  orchestrator: sop-auditor
+  mode: interactive
+
+  description: |
+    Comprehensive SOP audit workflow based on Philip Crosby's Quality Management
+    principles combined with the Deming cycle. Performs a multi-dimensional audit
+    across structural integrity, content quality, compliance adherence, and risk
+    assessment. Produces a scored audit report with prioritized remediation plan.
+
+    Audit philosophy: "Quality is conformance to requirements" (Crosby).
+    Every SOP is measured against explicit, verifiable criteria -- never subjective
+    opinion. The 14-point Crosby maturity overlay ensures the SOP reflects
+    organizational quality maturity, not just document formatting.
+
+    Supports auditing both human-readable (Markdown) and ML-readable (YAML) SOPs.
+
+  phases:
+    phase_0:
+      name: "Ingest & Detect"
+      agent: sop-auditor
+      steps:
+        - id: "0.1"
+          name: "Receive SOP"
+          action: "Accept SOP document path or content from user"
+          elicit: true
+        - id: "0.2"
+          name: "Detect Format"
+          action: "Determine if SOP is human-readable (Markdown), ML-readable (YAML), or dual-format"
+        - id: "0.3"
+          name: "Identify Applicable Standards"
+          action: "Ask user which compliance standards apply, or auto-detect from SOP metadata"
+          elicit: true
+        - id: "0.4"
+          name: "Load Reference Data"
+          action: "Load sop-scoring-rubric.yaml and sop-standards-reference.yaml"
+        - id: "0.5"
+          name: "Establish Audit Scope"
+          action: "Define audit boundaries: full audit, compliance-only, or structural-only"
+          elicit: true
+
+    phase_1:
+      name: "Structural Audit"
+      agent: sop-auditor
+      steps:
+        - id: "1.1"
+          name: "Section Completeness Check"
+          action: |
+            Verify all required sections are present:
+            - Title, document ID, version, date
+            - Purpose and scope
+            - Definitions and abbreviations
+            - Roles and responsibilities (RACI)
+            - Prerequisites and materials
+            - Procedure steps (numbered)
+            - Quality criteria / acceptance standards
+            - Exception handling
+            - References and related documents
+            - Revision history
+        - id: "1.2"
+          name: "Formatting Consistency"
+          action: |
+            Check formatting standards:
+            - Consistent heading hierarchy
+            - Numbered steps (not bullets for procedures)
+            - Tables used for structured data
+            - Code blocks for commands/scripts
+            - Consistent terminology throughout
+        - id: "1.3"
+          name: "Cross-Reference Integrity"
+          action: "Verify all internal references resolve, no broken links, no orphan sections"
+        - id: "1.4"
+          name: "Metadata Validation"
+          action: "Validate version format, date format, document ID uniqueness, owner assignment"
+        - id: "1.5"
+          name: "ML Schema Validation"
+          condition: "format in ['ml', 'dual']"
+          action: "Validate ML SOP against sop-ml-schema.yaml, check required fields, type conformance"
+
+    phase_2:
+      name: "Content Audit"
+      agent: sop-auditor
+      steps:
+        - id: "2.1"
+          name: "Readability Assessment"
+          action: |
+            Evaluate language quality:
+            - Flesch-Kincaid grade level (target: 8th grade or below)
+            - Sentence length (target: < 25 words average)
+            - Passive voice usage (target: < 15%)
+            - Jargon density (flag undefined technical terms)
+        - id: "2.2"
+          name: "Clarity Analysis"
+          action: |
+            Check for ambiguity:
+            - Every step starts with an action verb
+            - No vague words (appropriate, adequate, sufficient, etc.)
+            - Quantitative criteria where possible (not "wait a while" but "wait 30 seconds")
+            - Single action per step (no compound instructions)
+        - id: "2.3"
+          name: "Executability Test"
+          action: |
+            Perform mental walk-through:
+            - Can a new employee follow this without asking questions?
+            - Are all decision points explicit (IF/THEN/ELSE)?
+            - Are all tools and materials listed in prerequisites?
+            - Is the expected outcome of each step stated?
+        - id: "2.4"
+          name: "Completeness Review"
+          action: |
+            Verify coverage:
+            - Happy path fully documented
+            - Error/exception paths documented
+            - Edge cases addressed
+            - Rollback/recovery procedures included
+            - Escalation path defined
+        - id: "2.5"
+          name: "Consistency Check"
+          action: |
+            Verify internal consistency:
+            - Terminology used consistently
+            - Role names match RACI matrix
+            - Time estimates are realistic and consistent
+            - Referenced documents exist
+
+    phase_3:
+      name: "Compliance Audit"
+      agent: sop-auditor
+      steps:
+        - id: "3.1"
+          name: "Standards Mapping"
+          action: "Map SOP sections to applicable standard requirements using sop-standards-reference.yaml"
+        - id: "3.2"
+          name: "Gap Identification"
+          action: "Identify requirements from applicable standards not addressed in the SOP"
+        - id: "3.3"
+          name: "Evidence Check"
+          action: |
+            For each compliance requirement:
+            - Is the requirement addressed? (Y/N)
+            - Where in the SOP? (section reference)
+            - Is the coverage adequate? (Full/Partial/None)
+            - Evidence notes for audit trail
+        - id: "3.4"
+          name: "Regulatory Language Review"
+          action: "Verify mandatory language (shall, must) vs advisory (should, may) is used correctly"
+
+    phase_4:
+      name: "Risk Assessment"
+      agent: sop-auditor
+      steps:
+        - id: "4.1"
+          name: "Failure Mode Identification"
+          action: |
+            For each major step, identify:
+            - What could go wrong?
+            - What is the impact? (Safety/Quality/Compliance/Operational)
+            - Is there a mitigation documented in the SOP?
+        - id: "4.2"
+          name: "Risk Severity Classification"
+          action: |
+            Classify each identified risk:
+            - Critical: Safety hazard or regulatory violation
+            - High: Quality impact or data loss
+            - Medium: Operational inefficiency
+            - Low: Cosmetic or minor inconvenience
+        - id: "4.3"
+          name: "Mitigation Coverage"
+          action: "Score percentage of identified risks that have documented mitigations"
+        - id: "4.4"
+          name: "Risk Heat Map"
+          action: "Generate risk summary matrix: likelihood vs impact for unmitigated risks"
+
+    phase_5:
+      name: "Scoring & Verdict"
+      agent: sop-auditor
+      steps:
+        - id: "5.1"
+          name: "10-Dimension Scoring"
+          action: |
+            Score SOP on each dimension from sop-scoring-rubric.yaml:
+            1. Clarity (10%)
+            2. Completeness (15%)
+            3. Executability (15%)
+            4. Measurability (10%)
+            5. Compliance (10%)
+            6. Maintainability (10%)
+            7. Accessibility (10%)
+            8. Error Handling (10%)
+            9. Visual Design (5%)
+            10. AI-Readiness (5%)
+            Each dimension scored 0-100 with evidence citations.
+        - id: "5.2"
+          name: "Crosby 14-Point Maturity Overlay"
+          action: |
+            Assess SOP against Crosby's 14 Steps to Quality Improvement:
+            1. Management Commitment - Is ownership clearly defined?
+            2. Quality Improvement Team - Are review roles assigned?
+            3. Quality Measurement - Are KPIs defined and measurable?
+            4. Cost of Quality - Are failure costs acknowledged?
+            5. Quality Awareness - Is training/onboarding addressed?
+            6. Corrective Action - Are feedback loops documented?
+            7. Zero Defects Planning - Is the target standard explicit?
+            8. Supervisor Training - Is train-the-trainer covered?
+            9. Zero Defects Day - Is rollout/go-live planned?
+            10. Goal Setting - Are improvement targets set?
+            11. Error Cause Removal - Is root cause analysis referenced?
+            12. Recognition - Is compliance recognition mentioned?
+            13. Quality Councils - Is governance structure defined?
+            14. Do It Over Again - Is continuous improvement scheduled?
+            Rate each: Absent / Emerging / Established / Mature
+        - id: "5.3"
+          name: "Calculate Weighted Score"
+          action: "Compute final weighted score from 10 dimensions, apply Crosby maturity modifier"
+        - id: "5.4"
+          name: "Determine Verdict"
+          action: |
+            Issue verdict based on score and compliance:
+            - CERTIFIED (90+, no compliance gaps, Crosby >= 10 Established)
+            - APPROVED (70-89, no critical compliance gaps)
+            - CONDITIONAL (60-69, remediation plan required within 30 days)
+            - REJECTED (< 60, major rewrite required)
+            - BLOCKED (any critical compliance violation, regardless of score)
+
+    phase_6:
+      name: "Remediation Planning"
+      agent: sop-auditor
+      steps:
+        - id: "6.1"
+          name: "Prioritize Findings"
+          action: |
+            Rank all findings by priority:
+            P0 - Blocker: Must fix before any use (safety, compliance)
+            P1 - Critical: Must fix within 7 days
+            P2 - Major: Must fix within 30 days
+            P3 - Minor: Fix in next scheduled review
+            P4 - Enhancement: Nice-to-have improvement
+        - id: "6.2"
+          name: "Generate Remediation Items"
+          action: |
+            For each finding, document:
+            - Finding ID and description
+            - Affected section(s)
+            - Priority level
+            - Specific remediation action
+            - Estimated effort (hours)
+            - Responsible role
+        - id: "6.3"
+          name: "Create Remediation Roadmap"
+          action: "Organize remediation items into a sequenced plan with dependencies"
+
+    phase_7:
+      name: "Report Generation"
+      agent: sop-auditor
+      steps:
+        - id: "7.1"
+          name: "Compile Audit Report"
+          action: |
+            Generate comprehensive audit report containing:
+            - Executive summary with verdict
+            - SOP metadata and audit scope
+            - Structural audit results
+            - Content audit results
+            - Compliance audit results (with evidence matrix)
+            - Risk assessment summary and heat map
+            - 10-dimension scorecard with per-dimension breakdown
+            - Crosby maturity assessment
+            - Prioritized remediation plan
+            - Appendix: raw scoring data
+        - id: "7.2"
+          name: "Generate One-Page Scorecard"
+          action: "Create visual scorecard summary for quick reference"
+        - id: "7.3"
+          name: "Save Artifacts"
+          action: "Save audit report and scorecard to outputs/sop-factory/audits/"
+
+  quality_gate:
+    id: "QG-AUDIT-001"
+    name: "Audit Completeness Gate"
+    transition: "Audit In Progress -> Audit Complete"
+    type: blocking
+    criteria:
+      - "All 8 phases completed without skips"
+      - "Every dimension score has at least one evidence citation"
+      - "Compliance matrix fully populated for all applicable standards"
+      - "Risk assessment covers all critical and high-risk steps"
+      - "Remediation plan includes effort estimates and owners"
+      - "Verdict is consistent with score and compliance findings"
+    veto_conditions:
+      - "Phase skipped without justification -> HALT"
+      - "Score assigned without evidence -> HALT, scores must be justified"
+      - "Compliance finding without standard reference -> HALT"
+
+  output:
+    format: "Audit Package"
+    location: "outputs/sop-factory/audits/"
+    artifacts:
+      - audit_report: "audit-{sop-id}-{date}.md"
+      - scorecard: "scorecard-{sop-id}-{date}.md"
+      - remediation_plan: "remediation-{sop-id}-{date}.md"
+      - compliance_matrix: "compliance-matrix-{sop-id}-{date}.md"

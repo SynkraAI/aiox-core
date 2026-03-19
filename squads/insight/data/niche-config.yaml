@@ -1,0 +1,223 @@
+# Niche Configuration — Insight Squad
+# Maps business niches to relevant portals, metrics, and channel weights
+# Used by @digital-profiler to adapt analysis per niche
+# Version: 1.0
+
+niches:
+  saude:
+    label: "Saúde (médicos, dentistas, clínicas)"
+    aliases: [odontologia, medicina, fisioterapia, psicologia, nutrição, dermatologia]
+    portals:
+      - name: Doctoralia
+        url: "https://www.doctoralia.com.br"
+        metrics: [profile_exists, completeness, reviews, photos, agenda_online, convenios]
+      - name: BoaConsulta
+        url: "https://www.boaconsulta.com.br"
+        metrics: [profile_exists, completeness, reviews]
+    extra_metrics:
+      - "CRM/CFO registro ativo?"
+      - "Convênios listados em todos os canais?"
+      - "Horário de atendimento consistente?"
+    channel_weights:
+      google_maps: critical
+      instagram: high
+      doctoralia: high
+      reclame_aqui: high
+      site: medium
+      facebook: low
+
+  juridico:
+    label: "Jurídico (advogados, escritórios)"
+    aliases: [advocacia, direito, advogado]
+    portals:
+      - name: JusBrasil
+        url: "https://www.jusbrasil.com.br"
+        metrics: [profile_exists, articles_published, followers]
+      - name: OAB Consulta
+        url: "https://cna.oab.org.br"
+        metrics: [registro_ativo, situacao]
+    extra_metrics:
+      - "Registro OAB ativo e regular?"
+      - "Artigos/publicações em portais jurídicos?"
+      - "Especialização declarada?"
+    channel_weights:
+      linkedin: critical
+      google_maps: high
+      site: high
+      jusbrasil: medium
+      instagram: medium
+      reclame_aqui: medium
+
+  restaurantes_food:
+    label: "Restaurantes, Bares, Cafés, Food"
+    aliases: [restaurante, bar, café, hamburgueria, pizzaria, padaria, confeitaria]
+    portals:
+      - name: iFood
+        url: "https://www.ifood.com.br"
+        metrics: [profile_exists, rating, reviews, delivery_active, menu_complete]
+      - name: TripAdvisor
+        url: "https://www.tripadvisor.com.br"
+        metrics: [profile_exists, ranking, reviews, photos]
+      - name: TheFork
+        url: "https://www.thefork.com.br"
+        metrics: [profile_exists, reviews, reservation_active]
+    extra_metrics:
+      - "Cardápio online atualizado?"
+      - "Fotos profissionais dos pratos?"
+      - "Delivery ativo (iFood, Rappi)?"
+      - "Horário happy hour divulgado?"
+    channel_weights:
+      google_maps: critical
+      instagram: critical
+      ifood: critical
+      tripadvisor: high
+      reclame_aqui: high
+      site: medium
+
+  imobiliario:
+    label: "Imobiliário (imobiliárias, corretores)"
+    aliases: [imobiliaria, corretor, imoveis]
+    portals:
+      - name: ZAP Imóveis
+        url: "https://www.zapimoveis.com.br"
+        metrics: [profile_exists, listings_count, photos, response_time]
+      - name: OLX Imóveis
+        url: "https://www.olx.com.br/imoveis"
+        metrics: [listings_count, response_time]
+      - name: VivaReal
+        url: "https://www.vivareal.com.br"
+        metrics: [profile_exists, listings_count]
+    extra_metrics:
+      - "Portfólio online com fotos profissionais?"
+      - "Tour virtual disponível?"
+      - "CRECI ativo?"
+    channel_weights:
+      zap_imoveis: critical
+      google_maps: high
+      instagram: high
+      site: high
+      facebook: medium
+
+  estetica_bem_estar:
+    label: "Estética e Bem-estar (salões, spas, clínicas)"
+    aliases: [estetica, salao, spa, barbearia, manicure, massagem]
+    portals:
+      - name: Fresha
+        url: "https://www.fresha.com"
+        metrics: [profile_exists, services_listed, reviews, booking_active]
+      - name: Treatwell
+        url: "https://www.treatwell.com.br"
+        metrics: [profile_exists, reviews]
+    extra_metrics:
+      - "Agendamento online ativo?"
+      - "Galeria antes/depois?"
+      - "Preços visíveis?"
+    channel_weights:
+      instagram: critical
+      google_maps: critical
+      reclame_aqui: high
+      site: medium
+      facebook: medium
+
+  educacao:
+    label: "Educação (escolas, cursos, academias)"
+    aliases: [escola, curso, faculdade, academia, aula]
+    portals: []  # Google Reviews + Reclame Aqui com peso maior
+    extra_metrics:
+      - "Grade curricular/programação online?"
+      - "Depoimentos de alunos?"
+      - "Certificações/credenciamentos?"
+    channel_weights:
+      google_maps: critical
+      reclame_aqui: critical
+      instagram: high
+      site: high
+      youtube: medium
+      linkedin: medium
+
+  home_services:
+    label: "Serviços para Casa (encanador, eletricista, reformas)"
+    aliases: [encanador, eletricista, pintor, reforma, marcenaria, limpeza, dedetizacao]
+    portals:
+      - name: GetNinjas
+        url: "https://www.getninjas.com.br"
+        metrics: [profile_exists, reviews, response_time, portfolio]
+      - name: Habitissimo
+        url: "https://www.habitissimo.com.br"
+        metrics: [profile_exists, reviews, projects]
+    extra_metrics:
+      - "Portfólio de trabalhos realizados?"
+      - "Orçamento online disponível?"
+    channel_weights:
+      google_maps: critical
+      getninjas: high
+      reclame_aqui: high
+      instagram: medium
+      site: medium
+
+  automotivo:
+    label: "Automotivo (oficinas, concessionárias, lava-car)"
+    aliases: [oficina, mecanico, concessionaria, lava_car, funilaria, autopeças]
+    portals:
+      - name: iCarros
+        url: "https://www.icarros.com.br"
+        metrics: [profile_exists, listings, reviews]
+      - name: OLX Autos
+        url: "https://www.olx.com.br/autos-e-pecas"
+        metrics: [listings_count]
+    extra_metrics:
+      - "Estoque/serviços online?"
+      - "Tabela FIPE referenciada?"
+    channel_weights:
+      google_maps: critical
+      reclame_aqui: high
+      instagram: medium
+      site: medium
+
+  hoteis_turismo:
+    label: "Hotéis, Pousadas, Turismo"
+    aliases: [hotel, pousada, hostel, turismo, agencia_viagem]
+    portals:
+      - name: Booking
+        url: "https://www.booking.com"
+        metrics: [profile_exists, rating, reviews, photos, response_rate]
+      - name: TripAdvisor
+        url: "https://www.tripadvisor.com.br"
+        metrics: [ranking, reviews, photos, certificates]
+      - name: Google Hotels
+        url: "https://www.google.com/travel/hotels"
+        metrics: [listed, pricing, availability]
+    extra_metrics:
+      - "Fotos profissionais dos quartos/espaços?"
+      - "Responde reviews (positivos e negativos)?"
+      - "Preço competitivo vs portais?"
+    channel_weights:
+      booking: critical
+      tripadvisor: critical
+      google_maps: critical
+      instagram: high
+      site: high
+      reclame_aqui: medium
+
+  geral:
+    label: "Geral (sem nicho específico)"
+    aliases: []
+    portals: []
+    extra_metrics: []
+    channel_weights:
+      google_maps: critical
+      instagram: high
+      reclame_aqui: high
+      site: medium
+      facebook: medium
+      linkedin: low
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# LOOKUP RULES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+lookup_rules:
+  - "Match niche name or alias (case-insensitive)"
+  - "If no match found → use 'geral'"
+  - "Operator can override niche config per client"
+  - "New niches can be added by extending this file"

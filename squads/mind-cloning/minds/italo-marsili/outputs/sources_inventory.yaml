@@ -1,0 +1,182 @@
+# Sources Inventory — Italo Marsili (Guerrilha Way)
+# Phase 1: Collect & Classify Sources
+# Status: GO (5/5 criteria passed)
+# Generated: 2026-02-19
+# Agent: @mind-cloner (Helix) + @oalanicolas (Alan Nicolas)
+
+expert:
+  name: "Italo Marsili"
+  domain: "Psiquiatria, Filosofia Aplicada, Educação Familiar, Desenvolvimento Pessoal"
+  slug: "italo-marsili"
+
+source_location: "/Users/luizfosc/Dropbox/Dropbox Particular Fosc/+PROJETOS Palestras + Mágicas/LUIZFOSC/CURSOS E TRANSCRIÇÕES/Italo Marsili - Guerrilha Way/"
+
+summary:
+  total_sources: 281
+  total_lines: 48477
+  total_size_mb: 8.8
+  estimated_tokens: "2-3M"
+  gold_percentage: 94
+  bronze_percentage: 6
+  tier_distribution:
+    tier_0: 281  # All user-provided
+    tier_1: 0
+    tier_2: 0
+    tier_3: 0
+  source_types:
+    - curso_estruturado
+    - workshop_presencial
+    - programa_semanal
+    - live_diaria
+    - q_and_a
+    - masterclass
+
+blocking_gate:
+  decision: GO
+  criteria:
+    total_sources_10_plus:
+      required: 10
+      actual: 281
+      status: PASS
+    tier_1_sources_5_plus:
+      required: 5
+      actual: "281 (Tier 0 — superior to Tier 1)"
+      status: PASS
+    source_types_3_plus:
+      required: 3
+      actual: 6
+      status: PASS
+    volume_5h_or_200_pages:
+      required: "5h OR 200 pages"
+      actual: "~116-232 hours estimated"
+      status: PASS
+    framework_triangulated:
+      required: "1 framework in 3+ sources"
+      actual: "6 frameworks triangulated"
+      status: PASS
+  quality_signals:
+    book_by_expert: "Multiple courses (equivalent)"
+    longform_interview: "Workshop de 3 dias (9.652 linhas)"
+    unscripted_sources: "242+ (lives + workshop)"
+    multi_year_span: "2017-2019 (3 anos)"
+    gold_bronze_ratio: "94% gold"
+
+pareto_ao_cubo:
+  genialidade_0_8_pct:
+    description: "Curso Presencial + Aulas Especiais (12 camadas + contemplação)"
+    sources: ["CP-01 to CP-10", "AE-09 to AE-13"]
+    action: PROTEGER
+  excelencia_4_pct:
+    description: "4 Temperamentos + GW frameworks (Dote/Chamado/Circunstância)"
+    sources: ["4T-01 to 4T-09", "GW-S1-03", "GW-S2-04"]
+    action: AMPLIFICAR
+  impacto_20_pct:
+    description: "AMFDM episódios-marco + AE restantes + GW restante"
+    sources: ["AMFDM-001", "AMFDM-050", "AMFDM-100", "AE-01 to AE-08"]
+    action: USAR
+  volume_80_pct:
+    description: "AMFDM bulk (episódios diários comuns)"
+    sources: "~212 episódios AMFDM"
+    action: MINERAR
+
+frameworks_triangulated:
+  - name: "4 Temperamentos"
+    description: "Colérico/Melancólico/Fleumático/Sanguíneo — tipologia clássica com abordagem simbólica"
+    sources: ["4T (9 aulas)", "AE", "CP", "AMFDM"]
+    triangulation: confirmed
+
+  - name: "12 Camadas da Personalidade"
+    description: "Teoria de Olavo de Carvalho — motivações humanas por etapa de desenvolvimento"
+    sources: ["AE-10", "AE-11/12/13", "CP-10", "AMFDM"]
+    triangulation: confirmed
+
+  - name: "Ritual dos 90 Minutos"
+    description: "Protocolo matinal — os primeiros 90 minutos determinam o dia"
+    sources: ["AMFDM-10", "GW-S1", "AE-01"]
+    triangulation: confirmed
+
+  - name: "Dote + Chamado + Circunstância"
+    description: "3 eixos que definem a forma da vida humana (vocação)"
+    sources: ["GW-S1-03", "AMFDM", "AE"]
+    triangulation: confirmed
+
+  - name: "Anti-complexidade"
+    description: "'A vida é simples, cacetinho' — rejeição de complexidade artificial"
+    sources: ["GW-S1-01", "CP", "AMFDM"]
+    triangulation: confirmed
+
+  - name: "Contemplação Amorosa"
+    description: "Filosofia aplicada baseada em apostila de Olavo de Carvalho (1995)"
+    sources: ["AE-05", "AE-06", "AE-07", "AE-08"]
+    triangulation: confirmed
+
+modules:
+  - id: AE
+    name: "Aulas Especiais"
+    path: "Aulas Especiais/"
+    files: 15
+    lines: 4059
+    gold_pct: 100
+    key_content:
+      - "12 camadas de personalidade"
+      - "Contemplação amorosa (4 partes)"
+      - "4ª camada e amadurecimento"
+      - "Mito de Narciso"
+      - "A força da Personalidade"
+
+  - id: 4T
+    name: "Curso - Os 4 Temperamentos"
+    path: "Curso - Os 4 Temperamentos/"
+    files: 9
+    lines: 1973
+    gold_pct: 100
+    key_content:
+      - "Introdução Poética (4 partes — fundação filosófica)"
+      - "Colérico (fogo, quente+seco)"
+      - "Melancólico (terra, frio+seco)"
+      - "Fleumático (água, frio+úmido)"
+      - "Sanguíneo (ar, quente+úmido)"
+      - "Q&A aplicado"
+
+  - id: CP
+    name: "Curso Presencial para coaches, psicólogos e intrometidos"
+    path: "Curso Presencial para coaches psicologos e intrometidos/"
+    files: 10
+    lines: 9652
+    gold_pct: 100
+    key_content:
+      - "Órgãos de apreensão da realidade"
+      - "Forma, matéria, privação (Aristóteles)"
+      - "Simbólica profunda"
+      - "Antifrágil e Freud"
+      - "Stories pessoais autênticas"
+      - "Humor ácido máximo"
+
+  - id: GW
+    name: "GW (Guerrilha Way)"
+    path: "GW/"
+    files: 15
+    lines: 2793
+    gold_pct: 100
+    key_content:
+      - "Caderno de Ativação (metodologia)"
+      - "Dote + Chamado + Circunstância"
+      - "Paciência e tempo realista"
+      - "Viktor Frankl e sentido"
+      - "Extrinsicidade (amor)"
+      - "Lobo/Pastor/Ovelha"
+
+  - id: AMFDM
+    name: "Videos - A melhor família do mundo"
+    path: "Videos - A melhor familia do mundo/"
+    files: 232
+    lines: 30000
+    gold_pct: 93
+    key_content:
+      - "Programa diário (nov/2017 - dez/2018)"
+      - "Lives interativas com audiência"
+      - "Filosofia aplicada ao cotidiano"
+      - "Educação de filhos"
+      - "Marcos celebrativos (#1, #50, #100)"
+
+curadoria_score: 9.5  # Alan Nicolas assessment

@@ -1,0 +1,54 @@
+squad:
+  name: jose-amorim
+  version: "1.0.0"
+  description: "Mind clone de alta fidelidade de José Carlos Amorim — Tradutor Nexialista, educador em IA, nexialista multi-domínio"
+  created: "2026-03-08"
+
+  agents:
+    - id: jose-amorim
+      name: José Amorim
+      role: "Tradutor Nexialista — educação em IA, nexialismo, TDAH, tradução de complexidade"
+      file: agents/jose-amorim.md
+      tier: 1
+      whenToUse: "Tradução de conceitos complexos, criação de conteúdo educacional, mentoria TDAH/neurodivergência, estratégia de IA para negócios, síntese multi-domínio (nexialismo)"
+
+  workflows:
+    - id: wf-conteudo-educacional
+      name: "Pipeline de Conteúdo Educacional"
+      file: workflows/wf-conteudo-educacional.yaml
+      phases: 4
+      duration: "30-45 min"
+
+  tasks:
+    - id: explicar-conceito
+      name: "Explicar Conceito via Espiral Expansiva"
+      file: tasks/explicar-conceito.md
+    - id: criar-conteudo
+      name: "Criar Conteúdo Educacional"
+      file: tasks/criar-conteudo.md
+    - id: mentoria-tdah
+      name: "Mentoria TDAH como Configuração Cognitiva"
+      file: tasks/mentoria-tdah.md
+    - id: estrategia-ia
+      name: "Consultoria Estratégica de IA para Negócios"
+      file: tasks/estrategia-ia.md
+    - id: nexializar
+      name: "Nexializar — Resolver Problema Cross-Domain"
+      file: tasks/nexializar.md
+
+  data:
+    knowledge_base:
+      - data/knowledge-base/
+    source_mind:
+      - squads/squad-creator/data/minds/jose_amorim/
+
+  metadata:
+    source_mind: jose_amorim
+    source_count: 35
+    extraction_date: "2026-01-31"
+    fidelity_estimate: "85-90%"
+    coverage:
+      books: ["Nexialismo: A Última Inteligência"]
+      courses: ["Masterminds Academia Lendária"]
+      certifications: ["Harvard", "IBM", "Anthropic"]
+      frameworks: ["Espiral Expansiva", "Nexialismo", "Three-Question Filter", "OMFA", "Primeiros Princípios"]

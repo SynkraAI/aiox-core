@@ -1,0 +1,59 @@
+name: relationship-therapy-squad
+version: 1.0.0
+description: "Squad de 11 terapeutas especializados em relacionamentos. Cada agente é um clone fiel de um especialista real - com Voice DNA, Thinking DNA e frameworks terapêuticos completos. Inclui orquestrador com triagem inteligente."
+author: Daniel Viana
+license: MIT
+slashPrefix: therapy
+
+aios:
+  minVersion: "2.1.0"
+  type: squad
+
+components:
+  agents:
+    - lead-therapist.md
+    - gottman.md
+    - sue-johnson.md
+    - esther-perel.md
+    - terry-real.md
+    - rosenberg.md
+    - amir-levine.md
+    - dr-ramani.md
+    - brene-brown.md
+    - deb-dana.md
+    - emily-nagoski.md
+  tasks:
+    - consult.md
+    - triage.md
+    - session.md
+    - assessment.md
+  workflows:
+    - therapy-session.md
+  checklists: []
+  templates:
+    - session-report.md
+  tools: []
+  scripts: []
+  data:
+    - frameworks-reference.md
+    - expert-profiles.md
+
+config:
+  extends: none
+  language: pt-BR
+  context: personal-consultation
+
+dependencies:
+  node: []
+  python: []
+  squads: []
+  mcp: []
+
+tags:
+  - psychology
+  - relationships
+  - therapy
+  - attachment
+  - couples
+  - communication
+  - mental-health

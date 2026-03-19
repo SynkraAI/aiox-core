@@ -1,0 +1,1147 @@
+# Lead Magnet Pipeline Workflow
+# Based on Alex Hormozi's $100M Leads methodology
+# Source: Core Four + Rule of 100 + Lead Magnet Types
+# Version: 1.0.0
+
+id: wf-lead-magnet-pipeline
+name: "Lead Magnet Pipeline"
+version: "1.0.0"
+duration: "5-7 days"
+description: |
+  Workflow completo para criar lead magnets que atraem leads qualificados
+  usando Core Four, Rule of 100 e os 7 tipos de lead magnet do Hormozi.
+
+  FILOSOFIA: "You're not in the business of selling products.
+  You're in the business of acquiring customers profitably."
+
+  RESULTADO: Pipeline de geração de leads orgânica que alimenta o funil 24/7.
+
+  FÓRMULA CORE:
+  - Core Four: Warm Outreach, Cold Outreach, Content, Paid Ads
+  - Rule of 100: 100 actions/day = inevitable growth
+  - Lead Magnet: Solve one narrow problem completely
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Criar pipeline de leads orgânicos"
+  - "Desenvolver lead magnet de alta conversão"
+  - "Implementar estratégia Core Four"
+  - "Gerar leads sem gastar em ads"
+  - "Construir audiência de forma sustentável"
+
+not_for:
+  - "Paid ads campaigns (use WF-7)"
+  - "Negócios sem oferta definida (use WF-1 primeiro)"
+  - "Quem quer resultados overnight (orgânico leva tempo)"
+
+decision_matrix_fit:
+  complexity: high
+  agents_required: 4
+  estimated_duration: "5-7 days (setup) + ongoing"
+  user_involvement: "high (execução diária necessária)"
+  prerequisites:
+    - "Grand Slam Offer criada (WF-1 completo)"
+    - "Avatar definido com dor clara"
+    - "Capacidade de criar conteúdo (você ou time)"
+    - "Comprometimento com Rule of 100"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: hormozi-chief
+      role: "Audience definition, Core Four selection, strategic oversight"
+      phases: [0]
+
+    - agent: hormozi-leads
+      role: "Lead magnet design, Core Four strategy, Rule of 100 implementation"
+      phases: [1, 2]
+
+    - agent: hormozi-hooks
+      role: "Hook creation for content, headlines for lead magnets"
+      phases: [2]
+
+    - agent: hormozi-content
+      role: "Content strategy, distribution plan"
+      phases: [3]
+
+    - agent: hormozi-audit
+      role: "Conversion optimization, quality validation"
+      phases: [4]
+
+  synergies:
+    - agents: [hormozi-leads, hormozi-hooks]
+      pattern: "Leads defines strategy, Hooks creates attention-grabbers"
+
+    - agents: [hormozi-content, hormozi-audit]
+      pattern: "Content executes, Audit optimizes conversion"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 0: DISCOVERY & AUDIENCE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-0
+    name: "Discovery & Audience Definition"
+    days: "Day 0"
+    tier: 0  # Foundation
+    description: |
+      Definição precisa do avatar e seleção dos canais Core Four.
+      Nenhum lead magnet deve ser criado sem esta fundação.
+
+      PRINCÍPIO: "A lead magnet que resolve o problema errado
+      atrai os leads errados."
+
+    agent: hormozi-chief
+
+    tasks:
+      - task_id: T0.1
+        name: "Definir Avatar Engaged"
+        required: true
+        description: "Quem exatamente queremos atrair?"
+        output: "engaged_avatar.yaml"
+
+      - task_id: T0.2
+        name: "Mapear Problema #1"
+        required: true
+        description: "Qual a dor mais urgente do avatar?"
+        output: "problem_map.yaml"
+
+      - task_id: T0.3
+        name: "Selecionar Core Four Mix"
+        required: true
+        description: "Quais canais usar e em que proporção?"
+        output: "core_four_selection.yaml"
+
+      - task_id: T0.4
+        name: "Definir Rule of 100 Commitment"
+        required: true
+        description: "Compromisso diário com ações"
+        output: "rule_100_plan.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Core Four Framework
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      core_four_framework:
+        description: "Os 4 canais de aquisição de leads"
+        channels:
+          - id: CF_001
+            name: "Warm Outreach"
+            type: "1-to-1"
+            cost: "$0"
+            speed: "Fast"
+            scale: "Low"
+            description: "Contato com pessoas que já te conhecem"
+            examples:
+              - "Lista de contatos pessoais"
+              - "Amigos e família"
+              - "Ex-colegas de trabalho"
+              - "Conexões de LinkedIn"
+            best_for: "Primeiros 10-50 clientes"
+            script: |
+              "Hey [NAME], tenho trabalhado em [PROJETO] e achei que
+              você conhece alguém que poderia se beneficiar.
+              Conhece alguém que [PROBLEMA]?
+              Se sim, ficaria confortável em me conectar?"
+
+          - id: CF_002
+            name: "Cold Outreach"
+            type: "1-to-1"
+            cost: "$0 (or low)"
+            speed: "Medium"
+            scale: "Medium"
+            description: "Contato com estranhos qualificados"
+            examples:
+              - "Cold email"
+              - "Cold DM (LinkedIn, Instagram)"
+              - "Cold calling"
+              - "Door-to-door"
+            best_for: "Scale inicial, B2B"
+            rule: "100 outreaches/day = Rule of 100"
+
+          - id: CF_003
+            name: "Content (Free)"
+            type: "1-to-many"
+            cost: "$0"
+            speed: "Slow"
+            scale: "High"
+            description: "Conteúdo que atrai audiência"
+            examples:
+              - "Posts em redes sociais"
+              - "YouTube videos"
+              - "Podcast"
+              - "Blog posts"
+              - "Newsletter"
+            best_for: "Long-term authority building"
+            rule: "1 piece of content/day (minimum)"
+
+          - id: CF_004
+            name: "Paid Ads"
+            type: "1-to-many"
+            cost: "$$$"
+            speed: "Fast"
+            scale: "High"
+            description: "Tráfego pago para lead magnets"
+            examples:
+              - "Facebook/Meta Ads"
+              - "Google Ads"
+              - "YouTube Ads"
+              - "LinkedIn Ads"
+            best_for: "Scaling after organic validation"
+            prerequisite: "Produto validado + margem para CAC"
+
+        selection_matrix:
+          no_money_no_audience:
+            primary: "Warm Outreach"
+            secondary: "Cold Outreach"
+            content: "Start building"
+
+          no_money_has_audience:
+            primary: "Content"
+            secondary: "Warm Outreach"
+            action: "Monetize existing audience"
+
+          has_money_no_audience:
+            primary: "Paid Ads"
+            secondary: "Content"
+            action: "Buy traffic while building organic"
+
+          has_money_has_audience:
+            primary: "Paid Ads + Content"
+            secondary: "All four"
+            action: "Full acceleration"
+
+      rule_of_100:
+        description: "100 ações diárias = crescimento inevitável"
+        principle: |
+          "Se você fizer 100 ações de lead generation por dia,
+          durante 100 dias, é matematicamente impossível não crescer."
+        examples:
+          outreach_100:
+            - "100 cold DMs/day"
+            - "100 cold emails/day"
+            - "100 cold calls/day"
+
+          content_100:
+            - "100 minutes of content creation/day"
+            - "100 comments em posts relevantes/day"
+            - "100 responses to DMs/day"
+
+          mixed_100:
+            - "50 cold outreaches + 50 min content"
+            - "30 warm + 30 cold + 40 min content"
+
+        commitment_levels:
+          minimum: "100 total actions/day (any mix)"
+          recommended: "100 primary + 50 secondary"
+          aggressive: "200+ actions/day"
+
+      engaged_avatar_template:
+        description: "Template para definir avatar engajado"
+        fields:
+          - "Who: Quem exatamente?"
+          - "Where: Onde eles estão? (platforms, communities)"
+          - "What: O que consomem? (content, influencers)"
+          - "Why: Por que se importariam com você?"
+          - "Problem: Qual o problema #1 urgente?"
+          - "Language: Como descrevem o problema?"
+          - "Objection: Por que não resolveriam sozinhos?"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Foundation Complete"
+      criteria:
+        - "Avatar Engaged definido com especificidade"
+        - "Problema #1 identificado com linguagem do avatar"
+        - "Core Four mix selecionado"
+        - "Commitment Rule of 100 definido"
+      human_review: true
+      message: "Revise o avatar e estratégia antes de criar lead magnet."
+      veto_conditions:
+        - condition: "Avatar genérico (ex: 'empreendedores')"
+          action: "BLOCK - Nichou mais, seja específico"
+        - condition: "Sem commitment Rule of 100"
+          action: "WARNING - Resultados serão lentos"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 1: LEAD MAGNET DESIGN
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-1
+    name: "Lead Magnet Design"
+    days: "Days 1-2"
+    tier: 1  # Core execution
+    description: |
+      Design do lead magnet que resolve UM problema completamente.
+      Escolha entre os 7 tipos de lead magnet do Hormozi.
+
+      PRINCÍPIO: "Solve one narrow problem completely, rather than
+      many problems incompletely."
+
+    agent: hormozi-leads
+
+    tasks:
+      - task_id: T1.1
+        name: "Selecionar Tipo de Lead Magnet"
+        required: true
+        description: "Escolher entre os 7 tipos"
+        output: "lead_magnet_type.yaml"
+
+      - task_id: T1.2
+        name: "Definir Promessa Específica"
+        required: true
+        description: "O que o lead magnet entrega exatamente?"
+        output: "lead_magnet_promise.yaml"
+
+      - task_id: T1.3
+        name: "Criar Estrutura do Lead Magnet"
+        required: true
+        description: "Outline completo do conteúdo"
+        output: "lead_magnet_structure.yaml"
+
+      - task_id: T1.4
+        name: "Definir Nome Magnético"
+        required: true
+        description: "Nome que atrai e comunica valor"
+        output: "lead_magnet_name.md"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Lead Magnet Types
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      lead_magnet_types:
+        description: "Os 7 tipos de lead magnet"
+        types:
+          - id: LM_001
+            name: "Cheat Sheet / Checklist"
+            description: "Lista condensada de passos/itens"
+            time_to_create: "2-4 hours"
+            time_to_consume: "5-10 minutes"
+            best_for: "Processos com múltiplos passos"
+            example: "O Checklist de 47 Pontos para Landing Pages de Alta Conversão"
+            format: "PDF 1-2 páginas"
+
+          - id: LM_002
+            name: "Template / Swipe File"
+            description: "Modelo pronto para usar"
+            time_to_create: "4-8 hours"
+            time_to_consume: "10-30 minutes"
+            best_for: "Quando audiência precisa de shortcut"
+            example: "Os 50 Melhores Hooks de Email (Copy+Cole)"
+            format: "PDF, Notion, Google Doc"
+
+          - id: LM_003
+            name: "Calculator / Tool"
+            description: "Ferramenta interativa"
+            time_to_create: "8-20 hours"
+            time_to_consume: "5-10 minutes"
+            best_for: "Quando resultado depende de números"
+            example: "Calculadora de ROI para Paid Ads"
+            format: "Spreadsheet, Web app"
+
+          - id: LM_004
+            name: "Mini-Course / Video Training"
+            description: "Série de vídeos educacionais"
+            time_to_create: "20-40 hours"
+            time_to_consume: "1-4 hours"
+            best_for: "Quando processo precisa ser mostrado"
+            example: "Masterclass Gratuita: Como Fechar Clientes High-Ticket"
+            format: "Video series (3-5 videos)"
+
+          - id: LM_005
+            name: "Free Trial / Sample"
+            description: "Acesso temporário ao produto"
+            time_to_create: "Variable"
+            time_to_consume: "Variable"
+            best_for: "SaaS, memberships, serviços"
+            example: "7 Dias Grátis do Software Completo"
+            format: "Product access"
+
+          - id: LM_006
+            name: "Quiz / Assessment"
+            description: "Diagnóstico personalizado"
+            time_to_create: "8-16 hours"
+            time_to_consume: "5-15 minutes"
+            best_for: "Quando resultado varia por pessoa"
+            example: "Descubra Seu Perfil de Vendedor (e Como Melhorar)"
+            format: "Interactive quiz"
+
+          - id: LM_007
+            name: "Webinar / Workshop"
+            description: "Evento ao vivo ou gravado"
+            time_to_create: "10-20 hours"
+            time_to_consume: "45-90 minutes"
+            best_for: "High-ticket offers, complex topics"
+            example: "Workshop: Como Criar Ofertas Irresistíveis (Ao Vivo)"
+            format: "Live or recorded video"
+
+      lead_magnet_selection_matrix:
+        description: "Como escolher o tipo certo"
+        criteria:
+          speed_priority:
+            recommendation: "Cheat Sheet ou Template"
+            reason: "Fastest to create and consume"
+
+          authority_building:
+            recommendation: "Mini-Course ou Webinar"
+            reason: "Demonstrates expertise deeply"
+
+          high_conversion:
+            recommendation: "Quiz ou Calculator"
+            reason: "Personalization increases conversion"
+
+          saas_product:
+            recommendation: "Free Trial"
+            reason: "Let product sell itself"
+
+      lead_magnet_naming:
+        description: "Fórmula para nomes magnéticos"
+        formula: "[RESULTADO] + [PRAZO] + [OBSTÁCULO REMOVIDO]"
+        templates:
+          - "O [ADJ] [ASSET] de [NÚMERO] [UNIDADES] para [RESULTADO]"
+          - "Como [RESULTADO] em [PRAZO] Sem [OBSTÁCULO]"
+          - "Os [NÚMERO] [COISAS] que [AVATAR] Usam para [RESULTADO]"
+          - "[NÚMERO] [TIPO] [TEMPLATES/SCRIPTS] que [RESULTADO]"
+
+        examples:
+          - "O Checklist Definitivo de 47 Pontos para Landing Pages que Convertem"
+          - "Como Fechar 5 Clientes High-Ticket em 30 Dias Sem Cold Calls"
+          - "Os 7 Scripts de Email que Top Closers Usam para Dobrar Conversões"
+          - "50 Templates de Post que Geram Engajamento 10x Maior"
+
+      lead_magnet_quality_criteria:
+        description: "Critérios de qualidade"
+        must_have:
+          - "Resolve UM problema específico completamente"
+          - "Entrega valor ANTES de pedir qualquer coisa"
+          - "Pode ser consumido em < 1 hora"
+          - "Gera 'Aha moment' claro"
+          - "Leva naturalmente para oferta paga"
+
+        avoid:
+          - "Resolver muitos problemas superficialmente"
+          - "Conteúdo genérico disponível em qualquer lugar"
+          - "Muito longo para consumir"
+          - "Não conectado com oferta principal"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Lead Magnet Designed"
+      criteria:
+        - "Tipo selecionado com justificativa"
+        - "Promessa específica (resultado + prazo)"
+        - "Estrutura completa (outline)"
+        - "Nome magnético seguindo fórmula"
+      human_review: true
+      message: "Revise o design antes de criar conteúdo."
+      veto_conditions:
+        - condition: "Promessa genérica"
+          action: "BLOCK - Seja mais específico no resultado"
+        - condition: "Lead magnet não conecta com oferta"
+          action: "BLOCK - Deve levar naturalmente para próximo passo"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 2: CONTENT CREATION
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Content Creation"
+    days: "Days 3-4"
+    tier: 1  # Core execution
+    description: |
+      Criação do lead magnet + conteúdo de suporte para distribuição.
+
+      PRINCÍPIO: "O lead magnet é o primeiro passo. O conteúdo de suporte
+      é o combustível que alimenta a distribuição."
+
+    agents:
+      primary: hormozi-leads
+      secondary: hormozi-hooks
+
+    tasks:
+      - task_id: T2.1
+        name: "Criar Lead Magnet"
+        required: true
+        description: "Produzir o lead magnet completo"
+        output: "lead_magnet_final/"
+
+      - task_id: T2.2
+        name: "Criar Landing Page Copy"
+        required: true
+        description: "Copy para página de captura"
+        output: "landing_page_copy.md"
+
+      - task_id: T2.3
+        name: "Criar Hooks para Distribuição"
+        required: true
+        description: "10+ hooks para promover o lead magnet"
+        output: "distribution_hooks.yaml"
+
+      - task_id: T2.4
+        name: "Criar Email de Entrega"
+        required: true
+        description: "Email que entrega o lead magnet"
+        output: "delivery_email.md"
+
+      - task_id: T2.5
+        name: "Criar Sequência de Nurture"
+        required: true
+        description: "3-5 emails pós-download"
+        output: "nurture_sequence/"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Landing Page & Nurture
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      landing_page_template:
+        description: "Template de landing page para lead magnet"
+        sections:
+          - section: "Headline"
+            content: "Promessa principal (resultado + prazo)"
+            example: "Descubra os 47 Pontos que Fazem Landing Pages Converter 3x Mais"
+
+          - section: "Subheadline"
+            content: "Amplifica ou qualifica"
+            example: "O mesmo checklist que usei para gerar R$2.3M em vendas"
+
+          - section: "Visual"
+            content: "Mockup do lead magnet"
+            requirement: "Faça parecer premium"
+
+          - section: "Bullets"
+            content: "3-5 benefícios específicos"
+            format: "O que você vai aprender/receber"
+
+          - section: "Social Proof"
+            content: "Números ou depoimentos"
+            example: "Já baixado por 4.382 profissionais de marketing"
+
+          - section: "Form"
+            content: "Nome + Email (mínimo)"
+            rule: "Quanto menos campos, maior conversão"
+
+          - section: "CTA"
+            content: "Botão com ação específica"
+            example: "BAIXAR MEU CHECKLIST GRÁTIS"
+
+        metrics:
+          good_conversion: ">25%"
+          great_conversion: ">40%"
+          benchmark: "30-35%"
+
+      delivery_email_template:
+        description: "Template do email de entrega"
+        structure:
+          - element: "Subject"
+            content: "Direto ao ponto"
+            example: "Seu Checklist de 47 Pontos está aqui 👇"
+
+          - element: "Opening"
+            content: "Confirma decisão"
+            example: "Ótima escolha! Você está a um clique de..."
+
+          - element: "Delivery"
+            content: "Link claro para download"
+            example: "→ BAIXAR CHECKLIST AGORA"
+
+          - element: "Quick Win"
+            content: "Uma dica para usar imediatamente"
+            example: "Dica rápida: Comece pelo item #7..."
+
+          - element: "Next Step"
+            content: "O que fazer depois"
+            example: "Nas próximas mensagens, vou te mostrar como..."
+
+          - element: "Signature"
+            content: "Pessoal, não corporativo"
+
+      nurture_sequence_template:
+        description: "Sequência de 5 emails pós-download"
+        emails:
+          - email: 1
+            timing: "Day 1 (after delivery)"
+            subject: "Você já baixou? (Importante)"
+            purpose: "Garantir consumo"
+            content: "Check if downloaded + reminder of value"
+
+          - email: 2
+            timing: "Day 2"
+            subject: "O erro #1 que [AVATARS] cometem"
+            purpose: "Education + authority"
+            content: "Teach one valuable lesson"
+
+          - email: 3
+            timing: "Day 4"
+            subject: "Case Study: Como [RESULT]"
+            purpose: "Proof + inspiration"
+            content: "Real result from lead magnet user"
+
+          - email: 4
+            timing: "Day 6"
+            subject: "Pergunta rápida..."
+            purpose: "Engagement + segmentation"
+            content: "Ask about their #1 challenge"
+
+          - email: 5
+            timing: "Day 8"
+            subject: "Próximo passo para [AVATAR]"
+            purpose: "Transition to offer"
+            content: "Introduce core offer naturally"
+
+      hooks_for_lead_magnet:
+        description: "Hooks para promover lead magnet"
+        categories:
+          curiosity:
+            - "I spent 2 years figuring this out. You can get it in 5 minutes."
+            - "This checklist has generated over R$2M in sales."
+            - "47 things your landing page is missing (most people stop at #12)"
+
+          pain_agitate:
+            - "Your landing page isn't converting? It's probably missing these..."
+            - "I used to wonder why my pages didn't convert. Then I found these 47 items."
+            - "Stop guessing. Here's exactly what works."
+
+          result:
+            - "How I 3x'd conversion rate with a simple checklist"
+            - "The exact 47 points that separate high-converting pages from failures"
+            - "Free: The checklist I use for every landing page I create"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Content Created"
+      criteria:
+        - "Lead magnet completo e formatado"
+        - "Landing page copy pronta"
+        - "10+ hooks de distribuição"
+        - "Email de entrega criado"
+        - "Sequência de nurture (5 emails)"
+      human_review: true
+      message: "Revise o conteúdo antes de iniciar distribuição."
+      veto_conditions:
+        - condition: "Lead magnet sem formatação profissional"
+          action: "WARNING - Percepção de valor afetada"
+        - condition: "Menos de 10 hooks"
+          action: "BLOCK - Insuficiente para teste de mensagens"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 3: DISTRIBUTION STRATEGY
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Distribution Strategy"
+    days: "Day 5"
+    tier: 2  # Execution
+    description: |
+      Plano de distribuição usando Core Four selecionado.
+      Implementação do Rule of 100.
+
+      PRINCÍPIO: "O melhor lead magnet do mundo não vale nada
+      se ninguém sabe que ele existe."
+
+    agent: hormozi-content
+
+    tasks:
+      - task_id: T3.1
+        name: "Criar Plano Core Four"
+        required: true
+        description: "Detalhamento de cada canal"
+        output: "core_four_plan.yaml"
+
+      - task_id: T3.2
+        name: "Criar Calendário Rule of 100"
+        required: true
+        description: "Compromisso diário por canal"
+        output: "rule_100_calendar.yaml"
+
+      - task_id: T3.3
+        name: "Criar Templates de Outreach"
+        required: true
+        description: "Scripts para warm e cold outreach"
+        output: "outreach_templates/"
+
+      - task_id: T3.4
+        name: "Criar Content Calendar"
+        required: true
+        description: "30 dias de conteúdo planejado"
+        output: "content_calendar.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Distribution Templates
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      warm_outreach_templates:
+        description: "Scripts para contatos quentes"
+        templates:
+          - name: "The Referral Ask"
+            script: |
+              Hey [NAME]!
+
+              Rápida pergunta - tenho trabalhado em algo para ajudar
+              [AVATAR] com [PROBLEMA] e achei que você conhece pessoas assim.
+
+              Criei um [LEAD MAGNET] grátis que [RESULTADO].
+
+              Conhece alguém que poderia se beneficiar?
+              Fico feliz em enviar para eles.
+
+              Abraço,
+              [YOU]
+
+          - name: "The Direct Share"
+            script: |
+              [NAME]!
+
+              Lembrei de você porque sei que [CONTEXTO/CONEXÃO].
+
+              Acabei de criar um [LEAD MAGNET] que [RESULTADO]
+              e acho que você vai curtir.
+
+              Quer que eu envie o link?
+
+          - name: "The Value First"
+            script: |
+              Hey [NAME], vi que você [AÇÃO RECENTE] e pensei em você.
+
+              Criei esse [LEAD MAGNET] que resolve exatamente [PROBLEMA].
+              Já ajudou [NÚMERO] pessoas a [RESULTADO].
+
+              Quer dar uma olhada? [LINK]
+
+      cold_outreach_templates:
+        description: "Scripts para contatos frios"
+        templates:
+          - name: "The DM Template"
+            script: |
+              Hey [NAME]!
+
+              Percebi que você [OBSERVAÇÃO ESPECÍFICA].
+
+              Criei um [LEAD MAGNET] grátis que ajuda [AVATAR]
+              a [RESULTADO] sem [OBSTÁCULO].
+
+              Já ajudou [NÚMERO] pessoas.
+              Quer o link?
+
+          - name: "The Email Template"
+            subject: "[RESULTADO] grátis para [AVATAR]"
+            script: |
+              Oi [NAME],
+
+              Vi que você [OBSERVAÇÃO] e achei que isso poderia ajudar.
+
+              Criei um [LEAD MAGNET] que mostra exatamente
+              como [RESULTADO] em [PRAZO].
+
+              [SOCIAL PROOF - ex: "Já foi baixado 2.000+ vezes"]
+
+              Quer o link? Só responder "sim".
+
+              [YOU]
+
+          - name: "The Comment + DM"
+            comment: "Adiciono valor genuíno no post deles"
+            dm_after: |
+              Hey! Adorei seu post sobre [TEMA].
+
+              Tenho um [LEAD MAGNET] grátis que complementa
+              o que você falou - mostra como [RESULTADO].
+
+              Acho que você ia curtir. Quer dar uma olhada?
+
+      content_distribution_plan:
+        description: "Plano de distribuição por plataforma"
+        platforms:
+          linkedin:
+            frequency: "1 post/day"
+            types:
+              - "Carousel com dicas do lead magnet"
+              - "Story pessoal + CTA para lead magnet"
+              - "Numbered list posts"
+              - "Polls relacionados ao problema"
+            cta_frequency: "Every 3rd post"
+
+          instagram:
+            frequency: "1 post + 3-5 stories/day"
+            types:
+              - "Carousel educacional"
+              - "Reels curtos (hooks)"
+              - "Stories mostrando bastidores"
+              - "Link in bio para lead magnet"
+
+          youtube:
+            frequency: "1-2 videos/week"
+            types:
+              - "Tutorial expandindo tema do lead magnet"
+              - "Case study de resultado"
+              - "Q&A sobre o problema"
+            cta: "Link na descrição + pinned comment"
+
+          email_list:
+            frequency: "2-3x/week"
+            types:
+              - "Tips relacionados ao lead magnet"
+              - "Case studies"
+              - "Behind the scenes"
+
+      rule_100_daily_tracker:
+        description: "Tracker diário para Rule of 100"
+        template:
+          date: "[DATE]"
+          channels:
+            warm_outreach:
+              target: 20
+              completed: 0
+              notes: ""
+            cold_outreach:
+              target: 30
+              completed: 0
+              notes: ""
+            content_creation:
+              target: "50 min"
+              completed: 0
+              notes: ""
+            engagement:
+              target: 50
+              completed: 0
+              notes: ""
+          total_actions: 0
+          leads_generated: 0
+          conversion_rate: "0%"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Distribution Ready"
+      criteria:
+        - "Core Four plan detalhado"
+        - "Rule of 100 calendar criado"
+        - "Templates de outreach prontos"
+        - "Content calendar 30 dias"
+      human_review: true
+      message: "Revise o plano antes de começar execução."
+      veto_conditions:
+        - condition: "Rule of 100 < 100 actions/day"
+          action: "WARNING - Resultados serão proporcionalmente menores"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 4: LAUNCH & OPTIMIZATION
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-4
+    name: "Launch & Optimization"
+    days: "Days 6-7 + Ongoing"
+    tier: 2  # Execution
+    description: |
+      Lançamento do lead magnet e otimização contínua.
+
+      PRINCÍPIO: "Launch é o começo, não o fim.
+      Os primeiros 30 dias são para otimização."
+
+    agents:
+      primary: hormozi-audit
+      secondary: hormozi-leads
+
+    tasks:
+      - task_id: T4.1
+        name: "Lançar Lead Magnet"
+        required: true
+        description: "Publicar e iniciar distribuição"
+        output: "launch_checklist.yaml"
+
+      - task_id: T4.2
+        name: "Configurar Tracking"
+        required: true
+        description: "Setup de analytics e métricas"
+        output: "tracking_setup.yaml"
+
+      - task_id: T4.3
+        name: "Primeira Semana de Dados"
+        required: true
+        description: "Coletar e analisar dados iniciais"
+        output: "week1_report.yaml"
+
+      - task_id: T4.4
+        name: "Plano de Otimização"
+        required: true
+        description: "Baseado nos dados, o que melhorar"
+        output: "optimization_plan.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Metrics & Optimization
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      metrics_to_track:
+        description: "Métricas essenciais"
+        funnel_metrics:
+          - metric: "Landing Page Views"
+            source: "Analytics"
+
+          - metric: "Landing Page Conversion Rate"
+            formula: "Downloads / Views"
+            benchmark: "30-40%"
+
+          - metric: "Email Open Rate"
+            benchmark: ">40%"
+
+          - metric: "Email Click Rate"
+            benchmark: ">5%"
+
+          - metric: "Lead to Customer"
+            formula: "Customers / Total Leads"
+            benchmark: "2-5%"
+
+        activity_metrics:
+          - metric: "Daily Actions (Rule of 100)"
+            target: 100
+
+          - metric: "Outreach Response Rate"
+            benchmark: ">10%"
+
+          - metric: "Content Engagement"
+            benchmark: ">5%"
+
+      optimization_framework:
+        description: "Framework para otimizar"
+        priority_order:
+          1:
+            focus: "Landing Page Conversion"
+            if_below: "<25%"
+            actions:
+              - "Test different headline"
+              - "Improve social proof"
+              - "Simplify form"
+              - "Better lead magnet preview"
+
+          2:
+            focus: "Traffic Volume"
+            if_below: "<100 views/day"
+            actions:
+              - "Increase Rule of 100 actions"
+              - "Test new distribution channels"
+              - "Improve hooks"
+
+          3:
+            focus: "Email Engagement"
+            if_below: "<30% open rate"
+            actions:
+              - "Test subject lines"
+              - "Improve preview text"
+              - "Check sender reputation"
+
+          4:
+            focus: "Lead to Customer"
+            if_below: "<1%"
+            actions:
+              - "Improve nurture sequence"
+              - "Better CTA alignment"
+              - "Qualify leads earlier"
+
+      weekly_review_template:
+        description: "Template de review semanal"
+        sections:
+          wins:
+            question: "O que funcionou esta semana?"
+          losses:
+            question: "O que não funcionou?"
+          learnings:
+            question: "O que aprendemos?"
+          next_week:
+            question: "O que vamos testar/mudar?"
+          metrics:
+            - "Total leads gerados"
+            - "Conversion rate"
+            - "Best performing channel"
+            - "Best performing hook"
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Launch Complete"
+      criteria:
+        - "Lead magnet publicado e acessível"
+        - "Tracking configurado e funcionando"
+        - "Primeira semana de dados coletados"
+        - "Plano de otimização criado"
+      human_review: true
+      message: "Review dos primeiros resultados."
+      veto_conditions:
+        - condition: "Conversion rate < 15%"
+          action: "WARNING - Landing page precisa otimização"
+        - condition: "0 leads em 7 dias"
+          action: "HALT - Revisar distribuição urgentemente"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "hormozi-chief"
+    - document_reason: true
+    - require_human_override: true
+
+  common_failures:
+    - failure: "Avatar genérico"
+      phase: 0
+      resolution: "Nichou mais específico"
+
+    - failure: "Lead magnet não conecta com oferta"
+      phase: 1
+      resolution: "Redesenhar como ponte para oferta"
+
+    - failure: "Baixa conversion rate"
+      phase: 4
+      resolution: "A/B test headline e hooks"
+
+    - failure: "Poucos leads"
+      phase: 4
+      resolution: "Aumentar Rule of 100 ou melhorar hooks"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  phase_0:
+    - "engaged_avatar.yaml"
+    - "problem_map.yaml"
+    - "core_four_selection.yaml"
+    - "rule_100_plan.yaml"
+
+  phase_1:
+    - "lead_magnet_type.yaml"
+    - "lead_magnet_promise.yaml"
+    - "lead_magnet_structure.yaml"
+    - "lead_magnet_name.md"
+
+  phase_2:
+    - "lead_magnet_final/"
+    - "landing_page_copy.md"
+    - "distribution_hooks.yaml"
+    - "delivery_email.md"
+    - "nurture_sequence/"
+
+  phase_3:
+    - "core_four_plan.yaml"
+    - "rule_100_calendar.yaml"
+    - "outreach_templates/"
+    - "content_calendar.yaml"
+
+  phase_4:
+    - "launch_checklist.yaml"
+    - "tracking_setup.yaml"
+    - "week1_report.yaml"
+    - "optimization_plan.yaml"
+
+  final_deliverable:
+    name: "Lead Magnet Pipeline Package"
+    location: "outputs/lead_magnets/{magnet_id}/"
+    contents:
+      - "README.md - Overview"
+      - "lead_magnet/ - Asset final"
+      - "landing_page.md - Copy"
+      - "emails/ - Delivery + Nurture"
+      - "distribution/ - Templates e calendário"
+      - "metrics.yaml - Tracking setup"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS BY PHASE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents_by_phase:
+  PHASE-0:
+    primary: ["hormozi-chief"]
+    secondary: []
+
+  PHASE-1:
+    primary: ["hormozi-leads"]
+    secondary: []
+
+  PHASE-2:
+    primary: ["hormozi-leads"]
+    secondary: ["hormozi-hooks"]
+
+  PHASE-3:
+    primary: ["hormozi-content"]
+    secondary: []
+
+  PHASE-4:
+    primary: ["hormozi-audit"]
+    secondary: ["hormozi-leads"]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  phase_0:
+    - "[ ] Avatar específico definido"
+    - "[ ] Problema #1 identificado"
+    - "[ ] Core Four selecionado"
+    - "[ ] Rule of 100 commitment"
+
+  phase_1:
+    - "[ ] Tipo de lead magnet escolhido"
+    - "[ ] Promessa específica"
+    - "[ ] Estrutura completa"
+    - "[ ] Nome magnético"
+
+  phase_2:
+    - "[ ] Lead magnet criado"
+    - "[ ] Landing page copy"
+    - "[ ] 10+ hooks"
+    - "[ ] Email delivery"
+    - "[ ] 5 emails nurture"
+
+  phase_3:
+    - "[ ] Core Four plan"
+    - "[ ] Rule of 100 calendar"
+    - "[ ] Outreach templates"
+    - "[ ] Content calendar 30d"
+
+  phase_4:
+    - "[ ] Lançado"
+    - "[ ] Tracking funcionando"
+    - "[ ] Dados coletados"
+    - "[ ] Otimização planejada"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-10"
+  author: "squad-architect"
+  source_frameworks:
+    - "CORE_FOUR"
+    - "RULE_OF_100"
+    - "LEAD_MAGNET_TYPES"
+    - "100M_LEADS"
+  source_mind: "alex_hormozi"
+  lines: 1000+
+  quality_gate: "SC_WFL_001"
+  quality_score: "PENDING"
+  dependencies:
+    - workflow: "wf-grand-slam-offer"
+      required: true
+      reason: "Oferta validada é pré-requisito"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

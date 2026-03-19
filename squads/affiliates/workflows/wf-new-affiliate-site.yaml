@@ -1,0 +1,492 @@
+# New Affiliate Site Workflow
+# Pipeline completo para criar site de afiliados do zero
+# Source: @architect research — Diggity Test-Based SEO + TASS 3.0 + Topical Authority
+# Version: 1.0.0
+
+id: wf-new-affiliate-site
+name: "New Affiliate Site"
+version: "1.0.0"
+duration: "2-4 weeks"
+description: |
+  Workflow completo para criar um site de afiliados rentável do zero.
+  Da validação de nicho até a estratégia de monetização.
+
+  FILOSOFIA: "Validate before you build — um site sem nicho validado é desperdício."
+
+  RESULTADO: Site de afiliados com topical authority, conteúdo planejado e monetização definida.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Criar novo site de afiliados do zero"
+  - "Pivotar site existente para novo nicho"
+  - "Expandir portfolio com novo domínio"
+
+decision_matrix_fit:
+  complexity: high
+  agents_required: 5
+  estimated_duration: "2-4 weeks"
+  user_involvement: "medium (checkpoints require approval)"
+  prerequisites:
+    - "Domínio disponível ou existente"
+    - "Budget mínimo para hosting + ferramentas SEO"
+    - "Disponibilidade para criação de conteúdo"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: affiliate-strategist
+      role: "Niche validation, program stack audit"
+      phases: [0]
+
+    - agent: authority-builder
+      role: "Topical map, hub-spoke architecture"
+      phases: [1]
+
+    - agent: seo-affiliate
+      role: "Content plan, site audit, link strategy, monetization"
+      phases: [2, 3, 4, 5]
+
+    - agent: niche-ops
+      role: "KGR keyword batching, low-competition targeting"
+      phases: [2]
+
+    - agent: seo-content
+      role: "Link building support, skyscraper execution"
+      phases: [4]
+
+  synergies:
+    - agents: [affiliate-strategist, seo-affiliate]
+      pattern: "Strategist validates market, SEO validates search opportunity"
+
+    - agents: [authority-builder, seo-content]
+      pattern: "Authority designs map, Content fills gaps with linkable assets"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 0: NICHE VALIDATION
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-0
+    name: "Niche Validation"
+    days: "Days 1-3"
+    tier: 0
+    description: |
+      Validação rigorosa do nicho antes de qualquer investimento.
+      Scorecard 15 pontos: Commission Rate + Search Demand + Competition DR
+      + Seasonality + Program Diversity + EPC Potential.
+
+      PRINCÍPIO: "GO >= 10/15, Soft GO 7-9, NO-GO < 7."
+
+    agent: affiliate-strategist
+
+    tasks:
+      - task_id: T0.1
+        name: "Analisar Nicho (Scorecard 15pts)"
+        task_ref: analyze-niche.md
+        required: true
+        description: "Multi-Dimensional Scorecard com GO/NO-GO"
+        output: "niche_scorecard.yaml"
+
+      - task_id: T0.2
+        name: "Validar Stack de Programas"
+        task_ref: validate-program-stack.md
+        required: true
+        description: "Audit de programas de afiliados disponíveis no nicho"
+        output: "program_stack.yaml"
+
+    inline_structures:
+      niche_scorecard:
+        dimensions:
+          - id: DIM_001
+            name: "Commission Rate"
+            max_points: 3
+            scoring:
+              3: ">= 30% ou >= $50/sale"
+              2: "15-29% ou $20-49/sale"
+              1: "5-14% ou $5-19/sale"
+              0: "< 5% ou < $5/sale"
+
+          - id: DIM_002
+            name: "Search Demand"
+            max_points: 3
+            scoring:
+              3: ">= 10K monthly searches (main cluster)"
+              2: "5K-9.9K monthly searches"
+              1: "1K-4.9K monthly searches"
+              0: "< 1K monthly searches"
+
+          - id: DIM_003
+            name: "Competition DR"
+            max_points: 3
+            scoring:
+              3: "Top 10 avg DR < 30"
+              2: "Top 10 avg DR 30-50"
+              1: "Top 10 avg DR 50-70"
+              0: "Top 10 avg DR > 70"
+
+          - id: DIM_004
+            name: "Seasonality"
+            max_points: 2
+            scoring:
+              2: "Evergreen (< 20% variance)"
+              1: "Seasonal with peaks (20-50% variance)"
+              0: "Highly seasonal (> 50% variance)"
+
+          - id: DIM_005
+            name: "Program Diversity"
+            max_points: 2
+            scoring:
+              2: ">= 5 programs with different commission models"
+              1: "2-4 programs"
+              0: "1 program or monopoly"
+
+          - id: DIM_006
+            name: "EPC Potential"
+            max_points: 2
+            scoring:
+              2: "Avg EPC > $1.00"
+              1: "Avg EPC $0.30-$1.00"
+              0: "Avg EPC < $0.30"
+
+        decision:
+          GO: ">= 10/15"
+          SOFT_GO: "7-9/15 (proceed with caution)"
+          NO_GO: "< 7/15 (pivot niche)"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Niche Validated"
+      criteria:
+        - "Scorecard >= 10/15 (GO) ou 7-9 com justificativa"
+        - "Mínimo 3 programas de afiliados viáveis"
+        - "Search demand confirmada via ferramentas"
+      human_review: true
+      message: "Revise a validação do nicho antes de investir em infraestrutura."
+      veto_conditions:
+        - condition: "Scorecard < 7/15"
+          action: "HALT — Nicho inviável, pivotar antes de prosseguir"
+        - condition: "Zero programas de afiliados encontrados"
+          action: "HALT — Sem monetização possível"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 1: TOPICAL MAP
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-1
+    name: "Topical Map"
+    days: "Days 4-6"
+    tier: 0
+    description: |
+      Construção do mapa topical completo: hub-and-spoke architecture.
+      Pillar pages (3000-5000 words) + cluster articles.
+
+      PRINCÍPIO (TASS 3.0): "Topical authority > domain authority."
+
+    agent: authority-builder
+
+    tasks:
+      - task_id: T1.1
+        name: "Criar Topical Map Hub-Spoke"
+        task_ref: topical-map.md
+        required: true
+        description: "Mapa completo: pillars, clusters, internal linking"
+        output: "topical_map.yaml"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Topical Map Complete"
+      criteria:
+        - "Mínimo 3 pillar pages definidas"
+        - "Mínimo 25 cluster articles mapeados"
+        - "Internal linking structure documentada"
+        - "Hub-spoke relationships claras"
+      human_review: true
+      message: "Revise o mapa topical — é a fundação da autoridade do site."
+      veto_conditions:
+        - condition: "< 3 pillars"
+          action: "BLOCK — Insuficiente para topical authority"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 2: CONTENT PLAN
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-2
+    name: "Content Plan"
+    days: "Days 7-10"
+    tier: 1
+    description: |
+      Plano de conteúdo: keyword research → clusters → 30-50 artigos priorizados.
+      Inclui KGR batch para identificar quick wins.
+
+      PRINCÍPIO: "KGR < 0.25 com volume < 250/mo = quick win."
+
+    agents:
+      primary: seo-affiliate
+      secondary: niche-ops
+
+    tasks:
+      - task_id: T2.1
+        name: "Criar Content Plan 30-50 Artigos"
+        task_ref: content-plan.md
+        required: true
+        agent: seo-affiliate
+        description: "Keyword → clusters → artigos priorizados por oportunidade"
+        output: "content_plan.yaml"
+
+      - task_id: T2.2
+        name: "KGR Keyword Batch (50+ keywords)"
+        task_ref: kgr-keyword-batch.md
+        required: true
+        agent: niche-ops
+        description: "Batch KGR para identificar low-competition targets"
+        output: "kgr_batch.yaml"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Content Plan Complete"
+      criteria:
+        - "30-50 artigos planejados com keywords"
+        - "KGR batch com 10+ keywords < 0.25"
+        - "Mix de content types: reviews, best-of, how-to, vs"
+        - "Priorização por oportunidade (traffic × conversion potential)"
+      human_review: true
+      message: "Revise o plano de conteúdo antes de iniciar produção."
+      veto_conditions:
+        - condition: "< 20 artigos planejados"
+          action: "BLOCK — Volume insuficiente para authority building"
+        - condition: "Zero keywords KGR < 0.25"
+          action: "WARNING — Sem quick wins, crescimento será lento"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 3: SITE AUDIT (Technical Foundation)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-3
+    name: "Site Audit"
+    days: "Days 11-13"
+    tier: 1
+    description: |
+      Audit técnico + conteúdo + link profile do site.
+      Para sites novos: define baseline técnica.
+      Para sites existentes: identifica gaps e problemas.
+
+      PRINCÍPIO: "Core Web Vitals + E-E-A-T são table stakes, não diferencial."
+
+    agent: seo-affiliate
+
+    tasks:
+      - task_id: T3.1
+        name: "Site Audit Completo"
+        task_ref: site-audit.md
+        required: true
+        description: "Technical + Content + Link Profile audit"
+        output: "site_audit.yaml"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Site Audit Complete"
+      criteria:
+        - "Core Web Vitals baseline documentado"
+        - "Technical issues listados e priorizados"
+        - "E-E-A-T gaps identificados"
+        - "Link profile status (new site = baseline zero)"
+      human_review: false
+      message: "Audit técnico completo. Prosseguindo para link strategy."
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 4: LINK STRATEGY
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-4
+    name: "Link Strategy"
+    days: "Days 14-17"
+    tier: 2
+    description: |
+      Estratégia de link building em 3 fases seguindo Diggity Ratio.
+      Anchor text distribution: exact 5-10%, partial 15-20%, brand 30-40%,
+      naked 15-20%, generic 10-15%.
+
+      PRINCÍPIO: "Links sem autoridade topical são noise."
+
+    agents:
+      primary: seo-affiliate
+      secondary: seo-content
+
+    tasks:
+      - task_id: T4.1
+        name: "Definir Link Strategy 3-Fase"
+        task_ref: link-strategy.md
+        required: true
+        agent: seo-affiliate
+        description: "Foundation → Growth → Authority com Diggity Ratio"
+        output: "link_strategy.yaml"
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Link Strategy Complete"
+      criteria:
+        - "3 fases documentadas com metas por fase"
+        - "Anchor text ratio seguindo Diggity"
+        - "Link targets identificados (20+)"
+        - "Budget estimado por fase"
+      human_review: true
+      message: "Revise link strategy — links errados podem penalizar o site."
+      veto_conditions:
+        - condition: "Exact match anchors > 15%"
+          action: "WARNING — Risco de penalidade por over-optimization"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 5: MONETIZATION STRATEGY
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-5
+    name: "Monetization"
+    days: "Days 18-21"
+    tier: 2
+    description: |
+      Definição do stack de monetização: affiliate programs + display ads
+      + email list + diversificação.
+
+      PRINCÍPIO: "Não dependa de um único programa — diversifique receita."
+
+    agents:
+      primary: seo-affiliate
+      secondary: authority-builder
+
+    tasks:
+      - task_id: T5.1
+        name: "Definir Stack de Monetização"
+        task_ref: monetize-site.md
+        required: true
+        description: "Programs + ads + email + diversification"
+        output: "monetization_strategy.yaml"
+
+    checkpoint:
+      id: CP_PHASE_5
+      name: "Monetization Complete"
+      criteria:
+        - "Mínimo 3 fontes de receita planejadas"
+        - "Affiliate programs confirmados e aplicados"
+        - "Revenue projection 6-12 meses"
+        - "Fallback strategy se programa principal fechar"
+      human_review: true
+      message: "Revise estratégia de monetização — esta é a engine de receita."
+      veto_conditions:
+        - condition: "Dependência de programa único > 80% receita"
+          action: "WARNING — Single point of failure, diversificar"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "affiliates-chief"
+    - document_reason: true
+    - require_human_override: true
+
+  common_failures:
+    - failure: "Nicho com scorecard < 7"
+      phase: 0
+      resolution: "Pivotar nicho, re-executar Phase 0"
+
+    - failure: "Zero keywords KGR < 0.25"
+      phase: 2
+      resolution: "Expandir para long-tail ou sub-nicho"
+
+    - failure: "Site com Core Web Vitals red"
+      phase: 3
+      resolution: "Fix técnico antes de prosseguir"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-new-affiliate-site"
+      status: "completed"
+      outputs:
+        - "niche_scorecard.yaml"
+        - "topical_map.yaml"
+        - "content_plan.yaml"
+        - "site_audit.yaml"
+        - "link_strategy.yaml"
+        - "monetization_strategy.yaml"
+
+  checkpoint:
+    type: "checkpoint_reached"
+    payload:
+      phase_id: "PHASE-{N}"
+      status: "awaiting_review"
+
+  blocked:
+    type: "workflow_blocked"
+    payload:
+      phase_id: "PHASE-{N}"
+      reason: "veto_condition_triggered"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  phase_0:
+    - "niche_scorecard.yaml"
+    - "program_stack.yaml"
+  phase_1:
+    - "topical_map.yaml"
+  phase_2:
+    - "content_plan.yaml"
+    - "kgr_batch.yaml"
+  phase_3:
+    - "site_audit.yaml"
+  phase_4:
+    - "link_strategy.yaml"
+  phase_5:
+    - "monetization_strategy.yaml"
+
+  final_deliverable:
+    name: "Affiliate Site Blueprint"
+    location: "outputs/sites/{site_id}/"
+    contents:
+      - "README.md — Overview do site"
+      - "niche_scorecard.yaml — Validação do nicho"
+      - "topical_map.yaml — Mapa topical completo"
+      - "content_plan.yaml — 30-50 artigos planejados"
+      - "link_strategy.yaml — Estratégia de links 3-fase"
+      - "monetization_strategy.yaml — Stack de receita"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-18"
+  author: "squad-architect"
+  source_frameworks:
+    - "Diggity Test-Based SEO"
+    - "TASS 3.0 (Authority Hacker)"
+    - "Topical Authority / Hub-and-Spoke"
+    - "KGR (Cunnington)"
+  priority: 1
+  quality_gate: "SC_WFL_001"

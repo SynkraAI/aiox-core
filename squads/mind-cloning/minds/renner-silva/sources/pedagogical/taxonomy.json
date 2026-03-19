@@ -1,0 +1,337 @@
+{
+  "curso": {
+    "titulo": "Método 'Aplauda de Pé' - Palestras que Transformam",
+    "autor": "Renner Silva",
+    "filosofia": "Simples, mas não é fácil. Conexão emocional e autenticidade são os pilares.",
+    "principio_central": "Uma palestra não é sobre o que você conquistou. É sobre quem você se tornou.",
+    "estrutura": "5 módulos sequenciais baseados nos 5 passos do método",
+    "prerequisitos": [
+      "Ter uma história pessoal verdadeira para contar",
+      "Disposição para ser autêntico e vulnerável",
+      "Desejo de conectar emocionalmente com a audiência"
+    ],
+    "modulos": [
+      {
+        "id": "mod-1",
+        "numero": 1,
+        "titulo": "Conexão Inicial - Faça as Pessoas Gostarem de Você",
+        "objetivo_aprendizado": "Dominar técnicas de abertura que criam conexão imediata e autêntica com a plateia",
+        "duracao_estimada": "2-3 horas",
+        "nivel_dificuldade": "Iniciante",
+        "conceitos_chave": [
+          {
+            "id": "c1-humildade-estrategica",
+            "nome": "Humildade Estratégica",
+            "definicao": "Não começar com currículo para criar percepção de acessibilidade",
+            "importancia": "A atenção do público é escassa. Pessoas dão mais ouvidos a quem gostam.",
+            "exemplos_praticos": ["Deixar MC apresentar credenciais", "Foco em conexão humana vs autoridade"]
+          },
+          {
+            "id": "c1-imprevisibilidade",
+            "nome": "Imprevisibilidade e Curiosidade",
+            "definicao": "Primeira parte não deve parecer palestra. Confundir a mente para gerar curiosidade.",
+            "importancia": "Imprevisível surpreende e ativa gatilho de curiosidade. Previsível não gera engajamento.",
+            "exemplos_praticos": ["Humor", "Truque de mágica", "Dinâmica inusitada", "Piada"]
+          },
+          {
+            "id": "c1-dopamina",
+            "nome": "Liberação de Dopamina",
+            "definicao": "Conectar através de humor e elementos inesperados para liberar dopamina",
+            "importancia": "Dopamina cria prazer e associa orador a experiência positiva",
+            "exemplos_praticos": ["Risadas", "Surpresas", "Momentos de alegria genuína"]
+          }
+        ],
+        "tecnicas": [
+          "Não começar com currículo (deixar MC fazer)",
+          "Usar humor logo no início",
+          "Criar elementos de surpresa",
+          "Contar piadas regionais (com cautela e bom gosto)",
+          "Fazer dinâmicas interativas",
+          "Truques ou demonstrações criativas"
+        ],
+        "exercicios": [
+          "Criar 3 aberturas criativas diferentes para sua palestra",
+          "Praticar quebra-gelo em 60 segundos",
+          "Mapear elementos de humor pessoal (histórias engraçadas autênticas)",
+          "Testar abertura com grupo pequeno e coletar feedback"
+        ],
+        "exemplos_lives": [
+          {
+            "fonte": "Palestra Romani (Esqueleto)",
+            "referencia": "Abertura com mágica + piadas de mineiro",
+            "timestamp": "Início da palestra",
+            "descricao": "Renner usa mágica, humor sobre ser mineiro, e estabelece conexão antes de falar de currículo"
+          }
+        ],
+        "armadilhas_comuns": [
+          "Começar com currículo extenso",
+          "Ser previsível demais",
+          "Forçar humor que não é autêntico",
+          "Alongar demais a abertura"
+        ]
+      },
+      {
+        "id": "mod-2",
+        "numero": 2,
+        "titulo": "Promoção do Conteúdo - Crie Desejo pelo Conhecimento",
+        "objetivo_aprendizado": "Aprender a criar necessidade e comprometimento antes de ensinar o 'como'",
+        "duracao_estimada": "2-3 horas",
+        "nivel_dificuldade": "Intermediário",
+        "conceitos_chave": [
+          {
+            "id": "c2-venda-resultado",
+            "nome": "Vender o Resultado, Não o Conteúdo",
+            "definicao": "Mostrar POR QUE os passos são necessários antes de explicar o QUE fazer",
+            "importancia": "Criar desejo profundo, sede pelo conhecimento",
+            "exemplos_praticos": ["Demonstrar que conteúdo é ferramenta para alcançar sonho", "Mostrar caminho mais rápido"]
+          },
+          {
+            "id": "c2-prova-social",
+            "nome": "Contexto e Prova Social",
+            "definicao": "Apresentar casos de sucesso e fracasso para validar a tese",
+            "importancia": "Cria necessidade e comprometimento antes do ensino",
+            "exemplos_praticos": ["Mostrar quem aplicou e prosperou", "Mostrar quem não aplicou e fracassou"]
+          }
+        ],
+        "tecnicas": [
+          "Evitar ir direto para explicação de passos",
+          "Demonstrar valor do conteúdo através de resultados",
+          "Usar estatísticas e pesquisas (ex: Harvard, estudos de caso)",
+          "Criar contraste entre sucesso e fracasso",
+          "Conectar conteúdo ao sonho da plateia"
+        ],
+        "exercicios": [
+          "Mapear 3 benefícios emocionais do seu conteúdo",
+          "Encontrar 2 casos de sucesso e 2 de fracasso",
+          "Criar script de 'venda de resultado' em 2 minutos",
+          "Identificar pesquisas/estatísticas que validam seu método"
+        ],
+        "exemplos_lives": [
+          {
+            "fonte": "Palestra Romani (Esqueleto)",
+            "referencia": "Introdução sobre empresários - 87% demissões comportamentais",
+            "timestamp": "Após abertura, antes dos 3 passos",
+            "descricao": "Renner usa estatística de Harvard, contrasta empresas de sucesso vs fracasso, cria necessidade"
+          }
+        ],
+        "armadilhas_comuns": [
+          "Ir direto para o 'como' sem criar desejo",
+          "Não usar prova social",
+          "Não conectar conteúdo ao sonho da plateia",
+          "Falar só de features, não de benefícios"
+        ]
+      },
+      {
+        "id": "mod-3",
+        "numero": 3,
+        "titulo": "Entrega Estruturada - Conteúdo em Passos",
+        "objetivo_aprendizado": "Estruturar e entregar conteúdo de forma simples, clara e memorável",
+        "duracao_estimada": "3-4 horas",
+        "nivel_dificuldade": "Intermediário",
+        "conceitos_chave": [
+          {
+            "id": "c3-estrutura-passos",
+            "nome": "Estrutura em 3-5 Passos",
+            "definicao": "Entregar conteúdo em passos simples para evitar ansiedade e facilitar assimilação",
+            "importancia": "Organiza informação na mente do público, facilita aprendizado",
+            "exemplos_praticos": ["3 passos para sucesso empresarial", "5 pilares de X"]
+          },
+          {
+            "id": "c3-quatro-estagios",
+            "nome": "4 Estágios de Entrega por Passo",
+            "definicao": "Nome → Definição → Contexto → Ferramenta (opcional)",
+            "importancia": "Estrutura repetível que maximiza clareza e aplicabilidade",
+            "exemplos_praticos": [
+              "Nome: 'Mentalidade'",
+              "Definição: Frase curta que gera curiosidade",
+              "Contexto: Narrativa, metáfora, dinâmica ou slides",
+              "Ferramenta: Dica prática aplicável imediatamente"
+            ]
+          }
+        ],
+        "tecnicas": [
+          "Limitar conteúdo a 3-5 passos principais",
+          "Nomear cada passo claramente",
+          "Dar definição em uma frase",
+          "Usar histórias/metáforas para contextualizar",
+          "Fornecer ferramentas práticas acionáveis",
+          "Repetir estrutura para criar previsibilidade"
+        ],
+        "exercicios": [
+          "Estruturar seu conteúdo em 3-5 passos",
+          "Aplicar os 4 estágios a cada passo",
+          "Criar 2 metáforas para conceitos abstratos",
+          "Identificar 1 ferramenta prática por passo",
+          "Praticar entrega com cronômetro (tempo por passo)"
+        ],
+        "exemplos_lives": [
+          {
+            "fonte": "LIVE DIA 21-24",
+            "referencia": "Fórmula Mágica do Sucesso - 3 passos",
+            "timestamp": "Seção central das lives",
+            "descricao": "Renner aplica 4 estágios: nome, definição, contexto com história, ferramenta"
+          }
+        ],
+        "armadilhas_comuns": [
+          "Entregar muitos passos (>5) gerando ansiedade",
+          "Pular direto para ferramenta sem contexto",
+          "Não usar narrativa para ilustrar conceito",
+          "Definições longas e confusas"
+        ]
+      },
+      {
+        "id": "mod-4",
+        "numero": 4,
+        "titulo": "História de Essência - A Jornada de Transformação",
+        "objetivo_aprendizado": "Contar sua história pessoal de forma que faça o público SENTIR o que você sentiu",
+        "duracao_estimada": "4-5 horas",
+        "nivel_dificuldade": "Avançado",
+        "conceitos_chave": [
+          {
+            "id": "c4-conquistar-direito",
+            "nome": "Conquistar o Direito de Contar",
+            "definicao": "História não vai no início. Você conquista o direito após gerar conexão e entregar valor.",
+            "importancia": "Audiência precisa estar pronta para ouvir. Timing é crucial.",
+            "exemplos_praticos": ["Contar depois de módulos 1, 2 e 3", "Quando plateia já confia e se importa"]
+          },
+          {
+            "id": "c4-estrutura-jornada",
+            "nome": "Estrutura da Jornada (4 Etapas)",
+            "definicao": "Início → Queda → Decisão → Vitória",
+            "importancia": "Estrutura repetível que cria arco emocional",
+            "exemplos_praticos": [
+              "Início: Vida normal",
+              "Queda: Problema/dor/ponto de virada",
+              "Decisão: O que você escolheu fazer",
+              "Vitória: Momento de orgulho de quem se tornou"
+            ]
+          },
+          {
+            "id": "c4-memorias-emocionais",
+            "nome": "Compartilhar Memórias Emocionais",
+            "definicao": "Público não tem suas memórias. Você deve contar ANTES do ápice para transmitir emoção.",
+            "importancia": "Emoção só é transmitida quando compartilha verdade das memórias",
+            "exemplos_praticos": ["Ex-morador de rua + loteria: adicionar contexto de luta, fé, caráter antes do prêmio"]
+          },
+          {
+            "id": "c4-autenticidade",
+            "nome": "100% Verdadeiro",
+            "definicao": "Método só funciona se história for autêntica. Não inventar ou exagerar.",
+            "importancia": "Autenticidade é o que gera verdadeira conexão. Emoção é a 'cola' da informação.",
+            "exemplos_praticos": ["Não seguir Jornada do Herói se forçar fatos", "Contar o que realmente aconteceu"]
+          }
+        ],
+        "tecnicas": [
+          "Não contar história no início da palestra",
+          "Usar estrutura Início → Queda → Decisão → Vitória",
+          "Compartilhar memórias emocionais antes do clímax",
+          "Evitar fotos durante narrativa (usar só no final)",
+          "Manter contato visual durante história",
+          "Ser 100% autêntico (não inventar ou exagerar)"
+        ],
+        "exercicios": [
+          "Mapear sua jornada pessoal usando as 4 etapas",
+          "Identificar 3-5 memórias emocionais-chave",
+          "Escrever história completa (500-1000 palavras)",
+          "Praticar contando sem slides ou fotos",
+          "Gravar e assistir para verificar autenticidade"
+        ],
+        "exemplos_lives": [
+          {
+            "fonte": "Palestra Romani (Esqueleto)",
+            "referencia": "História do Renner como mágico",
+            "timestamp": "Após entregar conteúdo",
+            "descricao": "Renner conta Início (mágico de família), Queda (péssimo mágico), Decisão (primeiro passo), Vitória (programas de TV)"
+          }
+        ],
+        "armadilhas_comuns": [
+          "Contar história no início sem conquistar direito",
+          "Usar fotos durante narrativa (distrai)",
+          "Pular para vitória sem contar memórias",
+          "Inventar ou exagerar fatos (perde autenticidade)",
+          "Seguir Jornada do Herói forçadamente"
+        ]
+      },
+      {
+        "id": "mod-5",
+        "numero": 5,
+        "titulo": "Finalização Emocional - Vídeo e Aplauso de Pé",
+        "objetivo_aprendizado": "Selar a emoção e tornar a experiência inesquecível através do vídeo recapitulativo",
+        "duracao_estimada": "2-3 horas",
+        "nivel_dificuldade": "Intermediário",
+        "conceitos_chave": [
+          {
+            "id": "c5-video-recapitulativo",
+            "nome": "Vídeo Recapitulativo",
+            "definicao": "Videoclipe de 2 minutos com fotos em ordem cronológica, música de fundo, sem narração",
+            "importancia": "Reforça pontos emocionais da história. Valida a jornada.",
+            "exemplos_praticos": ["Fotos de infância, família, momentos-chave", "Música emocional apropriada"]
+          },
+          {
+            "id": "c5-emocao-como-memoria",
+            "nome": "O Que as Pessoas Lembram",
+            "definicao": "Pessoas lembram do que sentiram, não do que ouviram",
+            "importancia": "Final sela a emoção e reforça a mensagem",
+            "exemplos_praticos": ["Aplauso de pé = gratidão pela vulnerabilidade e inspiração"]
+          },
+          {
+            "id": "c5-essencia-metodo",
+            "nome": "Essência do Método",
+            "definicao": "Palestra não é sobre o que você conquistou. É sobre quem você se tornou.",
+            "importancia": "Shift de foco: conquistas → transformação pessoal",
+            "exemplos_praticos": ["Público aplaude a pessoa, não o conteúdo"]
+          }
+        ],
+        "tecnicas": [
+          "Criar vídeo de 2 minutos com fotos cronológicas",
+          "Escolher música emocional (sem narração)",
+          "Incluir fotos de infância, família, momentos-chave",
+          "Reforçar visualmente a jornada contada",
+          "Deixar emoção falar mais alto",
+          "Não explicar o vídeo, apenas mostrar"
+        ],
+        "exercicios": [
+          "Selecionar 15-20 fotos da sua jornada",
+          "Organizar em ordem cronológica",
+          "Escolher 2-3 músicas candidatas",
+          "Criar protótipo do vídeo (2 min máx)",
+          "Testar com grupo pequeno para verificar impacto emocional"
+        ],
+        "exemplos_lives": [
+          {
+            "fonte": "Descrição no Método",
+            "referencia": "Vídeo final com música",
+            "timestamp": "Final da palestra",
+            "descricao": "Renner descreve vídeo com fotos cronológicas, música de fundo, sem narração"
+          }
+        ],
+        "armadilhas_comuns": [
+          "Vídeo muito longo (>3 min)",
+          "Música inadequada ou muito alta",
+          "Narração durante o vídeo (distrai da emoção)",
+          "Fotos fora de ordem cronológica",
+          "Não incluir momentos-chave da jornada"
+        ]
+      }
+    ],
+    "jornada_completa": {
+      "fase_1": "Módulos 1-2: Conexão e Desejo (4-6h)",
+      "fase_2": "Módulo 3: Estruturação de Conteúdo (3-4h)",
+      "fase_3": "Módulos 4-5: História e Finalização (6-8h)",
+      "total_estimado": "13-18 horas de aprendizado",
+      "projeto_final": "Palestra completa de 30-60 minutos aplicando os 5 passos"
+    },
+    "recursos_adicionais": {
+      "prompt_introducao": "Template de introdução ao tema (incluído no Método)",
+      "lives_referencia": "4 lives completas com exemplos práticos",
+      "palestra_modelo": "Transcrição completa da palestra Romani (esqueleto)"
+    }
+  },
+  "metadata": {
+    "versao": "1.0",
+    "criado_em": "2026-02-13",
+    "fonte": "Renner Silva - Imersão Palestras Poderosas",
+    "tipo_produto": "Curso educacional para alunos/clientes",
+    "formato_entrega": "Dual-stack (Next.js + Obsidian)"
+  }
+}

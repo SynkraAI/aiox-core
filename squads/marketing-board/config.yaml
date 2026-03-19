@@ -1,0 +1,545 @@
+name: marketing-opes
+version: 1.1.0
+title: "Marketing OPES — Board Estratégico + Marketing Arm"
+short-title: "OPES"
+description: |
+  Board estratégico pessoal (3 conselheiros + 1 agente chefe) +
+  braço de marketing completo (6 agentes) com publicação automática.
+
+  Board: Conselheiros (pensam) → Agente Chefe (decide + executa)
+  Marketing: CMO → Ideação (IG/LI/YT) → Produção → Designer → Distribuição → Publicação
+
+  Pipeline end-to-end: da ideia ao post publicado no IG + LinkedIn via API.
+
+author: "José Carlos Amorim"
+icon: "👑"
+created: 2026-01-31
+slash_prefix: "MarketingOpes"
+
+domain: "Strategic Advisory / Decision Making / Premium AI Systems Installation"
+target_users:
+  - "José Carlos Amorim (owner/CEO)"
+
+# ============================================
+# POSICIONAMENTO PREMIUM (v2 — 2026-02-01)
+# ============================================
+positioning:
+  tagline: "Eu não ensino IA. Eu instalo empresas."
+  identity: "Arquiteto do One Person Enterprise System"
+  category: "AI Systems Installation (Premium / Done-for-You)"
+  narrative: |
+    José Carlos Amorim é o primeiro profissional no Brasil a operar como empresa
+    de 6 pessoas usando exclusivamente agentes de IA — e a instalar esse mesmo
+    sistema em outros profissionais por preço premium.
+    Ele não vende curso. Ele não ensina. Ele instala.
+
+  sva_premium:
+    description: "Profissional solo ou micro (1-5 pessoas) que já fatura e quer sistema, não conhecimento"
+    perfil:
+      faturamento: "R$30k-200k/mês"
+      idade: "28-50 anos"
+      dor: "Sabe que precisa de sistemas IA mas não confia em agência genérica e não quer equipe tech"
+      desejo: "Alguém que entenda negócio + IA e instale a máquina. Não quer aprender a fazer."
+      sinal: "Já tentou Zapier, ChatGPT, freelancer dev. Nada integrado."
+      identidade: "Se vê como empresário, não como aluno"
+    exclusoes:
+      - "Quem quer aprender a fazer sozinho (esses compram produto de R$97-497)"
+      - "Programadores e devs (já sabem implementar)"
+      - "Empresas com equipe tech interna"
+      - "Curiosos sem negócio próprio"
+      - "Quem busca 'curso de IA'"
+
+  sva_produto_automatico:
+    description: "Público dos produtos self-serve (R$97-497) — NÃO aparece no conteúdo orgânico"
+    perfil:
+      faturamento: "R$5k-30k/mês"
+      dor: "Quer aprender a montar seu próprio sistema"
+      canal: "Tráfego pago + funil separado — NUNCA contamina a marca premium"
+
+  revenue_model:
+    premium:
+      tipo: "Instalação de OPES (done-for-you)"
+      faixa: "R$15k-50k+ por projeto"
+      canal: "Conteúdo orgânico → DM → call → proposta"
+    passivo:
+      tipo: "Produtos digitais automatizados"
+      faixa: "R$97-497"
+      canal: "Tráfego pago → landing page → checkout automático"
+    regra: "Palco público = premium. Funil pago = produto. NUNCA misturar."
+
+  percepcao_alvo:
+    primaria: "Esse cara é um gênio"
+    secundaria: "Isso é caro"
+    terciaria: "Eu preciso disso"
+
+key_capabilities:
+  - "Consulta estratégica com perspectivas múltiplas"
+  - "Avaliação de deals e parcerias"
+  - "Revisão estratégica periódica"
+  - "Priorização implacável de tempo e recursos"
+  - "Debate entre conselheiros com visões divergentes"
+  - "Marketing arm: conteúdo diário IG + LinkedIn (OPES) com publicação automática via API"
+
+# ============================================
+# BOARD COMPOSITION
+# ============================================
+board:
+  chief_agent:
+    id: elon-musk
+    mind_slug: elon_musk
+    role: "Agente Chefe - CEO Multi-Venture Executor"
+    trigger: "Decisões operacionais, priorização, coordenação multi-venture"
+    key_question: "Qual é o caminho crítico? Remova tudo que não é essencial."
+
+  advisors:
+    - id: naval-ravikant
+      mind_slug: naval_ravikant
+      role: "Conselheiro 1 - Arquiteto de Riqueza"
+      domain: "Leverage, equity, specific knowledge, wealth creation"
+      trigger: "Negociação de parcerias, estruturação de deals, renda passiva"
+      key_question: "Essa atividade escala sem sua presença?"
+
+    - id: alex-hormozi
+      mind_slug: alex_hormozi
+      role: "Conselheiro 2 - Motor de Receita"
+      domain: "Offers, unit economics, scaling math, monetization"
+      trigger: "Pricing, criação de produtos, offer stacking, LTV"
+      key_question: "Quanto vale sua hora? Essa atividade paga esse valor?"
+
+    - id: peter-thiel
+      mind_slug: peter_thiel
+      role: "Conselheiro 3 - Pensador Contrarian"
+      domain: "Monopólio, 0-to-1, contrarian thinking, competition avoidance"
+      trigger: "Posicionamento, diferenciação, comparação com mercado"
+      key_question: "Você está competindo ou criando?"
+
+# ============================================
+# COMPONENTS
+# ============================================
+agents:
+  - id: board-orchestrator
+    file: agents/board-orchestrator.md
+    name: "Board Orchestrator"
+    role: "Orquestra sessões do board, canaliza conselheiros, sintetiza decisões"
+
+  # OPES Marketing Arm
+  - id: marketing-cmo
+    file: agents/marketing-cmo.md
+    name: "Marketing CMO"
+    role: "Chief Marketing Officer — posicionamento, SVA, filtro Purple Cow (Seth Godin)"
+    mind_source: seth_godin
+
+  - id: marketing-ideation
+    file: agents/marketing-ideation.md
+    name: "Marketing Ideation (DEPRECATED)"
+    role: "DEPRECATED — substituído por ideation-ig, ideation-li, ideation-yt"
+    mind_source: dan_koe
+    deprecated: true
+    replaced_by: [marketing-ideation-ig, marketing-ideation-li, marketing-ideation-yt]
+
+  - id: marketing-ideation-ig
+    file: agents/marketing-ideation-ig.md
+    name: "Marketing Ideation — Instagram"
+    role: "Ideação nativa para Instagram: hooks visuais, carousels, reels (Dan Koe)"
+    mind_source: dan_koe
+
+  - id: marketing-ideation-li
+    file: agents/marketing-ideation-li.md
+    name: "Marketing Ideation — LinkedIn"
+    role: "Ideação nativa para LinkedIn: hooks textuais, autoridade, polarização (Dan Kennedy)"
+    mind_source: dan_kennedy
+
+  - id: marketing-ideation-yt
+    file: agents/marketing-ideation-yt.md
+    name: "Marketing Ideation — YouTube"
+    role: "Ideação nativa para YouTube: títulos, thumbnails, retenção minuto-a-minuto (MrBeast)"
+    mind_source: mr_beast
+
+  - id: marketing-production
+    file: agents/marketing-production.md
+    name: "Marketing Production"
+    role: "Escreve posts na voz autêntica do José (Pedro Valério systems)"
+    mind_source: [pedro_valerio, jose_amorim]
+
+  - id: marketing-designer
+    file: agents/marketing-designer.md
+    name: "Marketing Designer"
+    role: "Direção visual — formato, carrosseis, prompts de imagem (brand guide)"
+
+  - id: marketing-distribution
+    file: agents/marketing-distribution.md
+    name: "Marketing Distribution"
+    role: "Adapta conteúdo para Instagram + LinkedIn em paralelo"
+
+  - id: marketing-metrics
+    file: agents/marketing-metrics.md
+    name: "Marketing Metrics"
+    role: "Análise semanal de performance via Apify + input manual"
+
+  - id: marketing-brand
+    file: agents/marketing-brand.md
+    name: "Marketing Brand Specialist"
+    role: "Arquitetura de marca — onlyness, brand gap analysis, brand architecture (Marty Neumeier)"
+    mind_source: marty_neumeier
+
+tasks:
+  - id: consult-board
+    file: tasks/consult-board.md
+    name: "Consultar o Board"
+    purpose: "Submeter questão estratégica ao board e receber recomendação unificada"
+
+  - id: evaluate-deal
+    file: tasks/evaluate-deal.md
+    name: "Avaliar Deal/Parceria"
+    purpose: "Avaliar oportunidade de parceria/sociedade com perspectiva dos 3 conselheiros"
+
+  - id: strategic-review
+    file: tasks/strategic-review.md
+    name: "Revisão Estratégica"
+    purpose: "Revisão periódica de progresso, prioridades e trajectory para liberdade financeira"
+
+  - id: pipeline-board-100
+    file: tasks/pipeline-board-100.md
+    name: "Pipeline Board 100%"
+    purpose: "Pipeline para completar todas as 4 minds do board de estado atual para 100% operacional"
+
+  # OPES Marketing Arm
+  - id: daily-content
+    file: tasks/daily-content.md
+    name: "Daily Content"
+    purpose: "Pipeline end-to-end: ideação → produção → distribuição → publicação automática IG + LinkedIn"
+
+  - id: weekly-content-plan
+    file: tasks/weekly-content-plan.md
+    name: "Weekly Content Plan"
+    purpose: "Planejar 7 dias de conteúdo, popular queue do Content Map"
+
+  - id: metrics-weekly
+    file: tasks/metrics-weekly.md
+    name: "Metrics Weekly"
+    purpose: "Análise semanal de performance com insights acionáveis"
+
+  - id: weekly-story-sequence
+    file: tasks/weekly-story-sequence.md
+    name: "Weekly Story Sequence"
+    purpose: "Gerar 7 sequencias de IG Stories por semana — Holistic Story Sequence Strategy (Nicolas Clay)"
+
+checklists:
+  - id: board-decision-quality
+    file: checklists/board-decision-quality.md
+    name: "Qualidade de Decisão do Board"
+
+templates:
+  - id: board-session-report
+    file: templates/board-session-report.md
+    name: "Relatório de Sessão do Board"
+
+  - id: daily-content-output
+    file: templates/daily-content-output.md
+    name: "Output Diário de Conteúdo"
+
+  - id: story-sequence-output
+    file: templates/story-sequence-output.md
+    name: "Output Semanal de Story Sequence"
+
+workflows:
+  - id: daily-content-pipeline
+    file: workflows/daily-content-pipeline.md
+    name: "Daily Content Pipeline"
+    purpose: "Fluxo visual do pipeline diario: ideacao → gates → producao → publicacao API"
+
+  - id: weekly-marketing-cycle
+    file: workflows/weekly-marketing-cycle.md
+    name: "Weekly Marketing Cycle"
+    purpose: "Ciclo semanal: planejamento → execucao diaria → metricas → feedback loop"
+
+  - id: board-consultation
+    file: workflows/board-consultation.md
+    name: "Board Consultation"
+    purpose: "Fluxo unificado do advisory board: 3 advisors → convergencia → chief decides"
+
+  - id: story-sequence-pipeline
+    file: workflows/story-sequence-pipeline.md
+    name: "Story Sequence Pipeline"
+    purpose: "Pipeline semanal de 7 IG Stories com framework psicologico diario (Nicolas Clay)"
+
+data:
+  - id: decision-frameworks
+    file: data/decision-frameworks.yaml
+    name: "Frameworks de Decisão por Conselheiro"
+
+  # OPES Marketing Arm
+  - id: content-map
+    file: data/content-map.yaml
+    name: "Content Map OPES"
+
+  - id: platform-specs
+    file: data/platform-specs.yaml
+    name: "Platform Specs (IG + LinkedIn)"
+
+  - id: brand-guide
+    file: data/brand-guide.yaml
+    name: "Brand Guide Visual (paleta, tipografia, estilo)"
+
+  - id: story-sequence-bank
+    file: data/story-sequence-bank.yaml
+    name: "Story Sequence Bank (provas, historias, objecoes, hooks)"
+
+# ============================================
+# DEPENDENCIES
+# ============================================
+dependencies:
+  - name: mmos-mind-mapper
+    path: ../mmos-mind-mapper
+    required: false
+    description: "Para criar/atualizar system prompts das minds do board"
+
+  - name: newsletter-growth-dankoe
+    path: ../newsletter-growth-dankoe
+    required: false
+    description: "Frameworks Dan Koe, content derivation, anti-LLM blacklist"
+
+  - name: insta-personal-trainer
+    path: ../insta-personal-trainer
+    required: false
+    description: "Hook formulas, Stories 10X, Instagram coaching"
+
+  - name: nano-banana-pro
+    path: ../nano-banana-pro
+    required: true
+    description: "Geração de imagens via Gemini 3 Pro (cover images para posts)"
+
+  - name: biblioteca-maas
+    path: ../biblioteca-maas
+    required: false
+    description: "Referência teórica: Holistic Story Sequence Strategy (Nicolas Clay) mapeada"
+
+mmos_integration:
+  enabled: true
+  fallback_behavior: "graceful"
+  mind_mapping:
+    naval-ravikant: naval_ravikant
+    alex-hormozi: alex_hormozi
+    peter-thiel: peter_thiel
+    elon-musk: elon_musk
+    seth-godin: seth_godin
+    marty-neumeier: marty_neumeier
+    dan-kennedy: dan_kennedy
+    mr-beast: mr_beast
+
+tags:
+  - advisory
+  - strategy
+  - board
+  - decision-making
+  - wealth
+  - leverage
+  - scaling
+
+# ============================================
+# MARKETING ARM — OWNERSHIP
+# ============================================
+marketing_ownership:
+  arquitetura_marca:
+    dono: marketing-brand
+    veto: marketing-cmo
+    descricao: "Brand architecture, onlyness, brand gap analysis, naming strategy, brand commitment"
+
+  estrategia_macro:
+    dono: marketing-cmo
+    veto: jose_amorim
+    descricao: "Posicionamento, fases (generosidade→oferta), pivots, SVA"
+
+  calendario_editorial:
+    dono: [marketing-ideation-ig, marketing-ideation-li, marketing-ideation-yt]
+    veto: marketing-cmo
+    descricao: "Temas da semana por plataforma: IG (Dan Koe), LI (Dan Kennedy), YT (MrBeast)"
+
+  voz_execucao:
+    dono: marketing-production
+    veto: marketing-cmo
+    descricao: "Como escrever, voz do José, autenticidade"
+
+  direcao_visual:
+    dono: marketing-designer
+    veto: marketing-cmo
+    descricao: "Formato visual, carrosseis, prompts de imagem, brand guide"
+
+  adaptacao_plataforma:
+    dono: marketing-distribution
+    veto: null
+    descricao: "Formatação IG vs LinkedIn, hashtags, char limits, integração visual"
+
+  dados_analise:
+    dono: marketing-metrics
+    veto: null
+    descricao: "Coleta, cálculo de KPIs, atualização do Content Map"
+
+# ============================================
+# MARKETING ARM — 3 KPIs OFICIAIS
+# ============================================
+marketing_kpis:
+  cobrado_por: jose_amorim
+  cobrado_de: marketing-cmo
+  revisao: semanal
+
+  kpis:
+    - id: save-rate
+      nome: "Save Rate (Remarkability Index)"
+      formula_ig: "(saves + shares) / alcance × 100"
+      formula_li: "reposts / impressions × 100"
+      meta_ig: "≥ 3%"
+      meta_li: "≥ 2%"
+      fonte: "Apify (IG) + manual (LI)"
+
+    - id: dms-semana
+      nome: "DMs por Semana (Permission Index)"
+      formula: "contagem bruta de DMs novas recebidas"
+      meta_fase1: "≥ 5/semana (semanas 1-4)"
+      meta_fase2: "≥ 15/semana (semanas 5-8)"
+      fonte: "input manual José"
+
+    - id: purple-cow-avg
+      nome: "Purple Cow Average (Quality Gate)"
+      formula: "média semanal dos scores /5 do Gate 2.5"
+      meta: "≥ 4.0/5"
+      fonte: "registro do CMO Gate em daily-content"
+
+# ============================================
+# MARKETING ARM — QA GATES
+# ============================================
+marketing_qa_gates:
+  - id: gate-pre-production
+    nome: "CMO Validation (Gate 2.5)"
+    quando: "Após ideação, antes de produção"
+    dono: marketing-cmo
+    acao_falha: "Devolver para @ideation (máx 2 loops)"
+
+  - id: gate-auto-publish
+    nome: "Auto-Publish (Gate 6)"
+    quando: "Após distribuição, antes de métricas"
+    dono: publish.py
+    acao_falha: "Registrar erro da API, tentar novamente ou fallback manual"
+
+  - id: gate-post-confirmation
+    nome: "Post-Publish Confirmation (Gate 7)"
+    quando: "Após publicação automática"
+    dono: jose_amorim
+    acao_falha: "Registrar alteração ou motivo de remoção"
+
+  - id: gate-feedback-loop
+    nome: "Forced Feedback Loop"
+    quando: "Final do relatório semanal"
+    dono: marketing-metrics
+    aprovador: marketing-cmo
+    acao_falha: "Semana seguinte usa queue antiga + flag de falha"
+
+# ============================================
+# OUTPUT
+# ============================================
+output:
+  board:
+    directory: "docs/logs/"
+    naming: "YYYY-MM-DD_board-session.md"
+  marketing:
+    directory: "outputs/hubs/marketing/"
+    naming: "YYYY-MM-DD.md"
+    images: "outputs/hubs/marketing/YYYY-MM-DD-cover.png"
+    metrics: "docs/logs/YYYY-MM-DD_marketing-metrics.md"
+
+# ============================================
+# PUBLISHING AUTOMATION
+# ============================================
+publishing:
+  script: scripts/publish.py
+  credentials: "~/.config/aios/credentials.yaml"
+  platforms:
+    linkedin:
+      api: "/v2/ugcPosts"
+      auth: "Bearer token (60 dias)"
+      format: "text"
+    instagram:
+      api: "Content Publishing API (graph.facebook.com/v21.0)"
+      auth: "Page token (permanente)"
+      format: "image + caption"
+      image_gen: "Nano Banana Pro (gemini-3-pro-image-preview)"
+      image_host: "catbox.moe (free, no auth)"
+    whatsapp:
+      api: "UazAPI"
+      purpose: "Confirmação de publicação"
+  token_renewal:
+    linkedin: "~60 dias (manual OAuth re-auth)"
+    instagram: "Page token permanente (expires_at: 0)"
+  token_monitoring:
+    enabled: true
+    check_frequency: "semanal (via metrics-weekly Step 5.5)"
+    alert_threshold_days: 10
+    warning_threshold_days: 20
+    tracking_field: "linkedin.token_renewed_at em credentials.yaml"
+
+# ============================================
+# TREND SNIPER — Real-time Trend Monitoring
+# ============================================
+trend_sniper:
+  enabled: true
+  version: "1.0.0"
+  script: scripts/trend_sniper.py
+  description: |
+    Monitora trending topics do Twitter/X no Brasil via Apify,
+    filtra por relevancia SVA e envia alertas WhatsApp.
+    Estrategia SNIPER (nao SURFER) — so dispara quando trend passa nos 3 filtros.
+
+  schedule:
+    frequency: "a cada 30 min"
+    window_brt: "08:00-22:00"
+    cron: "*/30 8-21 * * *"
+
+  data_source:
+    provider: "Apify"
+    actor: "early_kiosk/google-trends-scraper"
+    geo: "BR"
+    language: "pt-BR"
+    cost_estimate: "$0.04/scan (~$35/mes com 28 scans/dia)"
+    note: |
+      Google Trends "Trending Now" (nao Twitter/X — X restringiu acesso a trends).
+      Vantagem: captura o que pessoas BUSCAM (intent), nao so o que tuitam.
+      Inclui related queries para matching mais rico contra keyword layers.
+      Upgrade futuro: adicionar xAI Grok (grok_x_trends) para dados nativos do X.
+
+  keyword_layers:
+    layer_1_direct:
+      description: "Keywords diretas do nicho IA"
+      examples: ["inteligência artificial", "ChatGPT", "agentes IA", "automação"]
+    layer_2_business:
+      description: "Keywords de negocio/empreendedorismo"
+      examples: ["empreendedor", "escalar", "demiti", "sozinho", "solopreneur"]
+    layer_3_contrast:
+      description: "Keywords de anti-padrao (oportunidade de contraste)"
+      examples: ["curso de IA", "agência de IA", "equipe tech", "bootcamp"]
+
+  scoring:
+    score_3: "L1+L2+L3 → ALERTA MAXIMO (WhatsApp imediato)"
+    score_2: "L1+L2 → TREND ALERT | L1+L3 → CONTRAST ALERT"
+    score_1: "LOG (monitorar, nao agir)"
+    score_0: "IGNORAR"
+    alert_threshold: 2
+    dedup_window_hours: 6
+
+  output:
+    alerts_dir: "outputs/hubs/marketing/trends/"
+    log_file: "outputs/hubs/marketing/trends/trend-sniper.jsonl"
+    format: "post texto simples (resposta rapida < 2h)"
+
+  integration:
+    whatsapp: true
+    big_brother: true
+    ideation_handoff: "Brief .md salvo em trends/ para consumo do @ideation"
+
+  response_flow: |
+    Trend detectado (score >= 2)
+    → WhatsApp para Jose (GO/SKIP)
+    → Se GO: @ideation gera Big Idea
+    → @cmo valida (Gate 2.5)
+    → @production texto simples
+    → @distribution publica (IG + LI)
+    Tempo total target: < 2h

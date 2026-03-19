@@ -1,0 +1,165 @@
+# Brazilian Market Context — Insight Squad
+# Non-negotiable rules for analyzing Brazilian local businesses
+# Used by @market-scout and all agents for BR-specific context
+# Version: 1.0
+
+context:
+  name: "Brazilian Local Business Market"
+  scope: "Negócios locais brasileiros, 5-30 funcionários"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHANNEL RULES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+channels:
+  primary:
+    whatsapp:
+      penetration: "99%"
+      business_usage: "70% das empresas usam para vendas"
+      rule: "WhatsApp-first — sempre verificar se está visível e funcional"
+      priority: critical
+
+    google:
+      market_share: "95%+"
+      rule: "Google é o único buscador relevante no Brasil (Bing/Yahoo irrelevantes)"
+      products: [search, maps, ads, my_business]
+      priority: critical
+
+    instagram:
+      role: "Hub de conteúdo principal para negócios locais"
+      rule: "Instagram > Blog/Site para descoberta de negócios locais"
+      priority: critical
+
+  trust_signals:
+    reclame_aqui:
+      influence: "53% dos consumidores consultam antes de comprar"
+      url: "https://www.reclameaqui.com.br"
+      rule: "Sempre analisar — decisor de compra para brasileiro"
+      priority: critical
+
+    google_reviews:
+      influence: "Principal fator de decisão no Maps"
+      rule: "Quantidade + nota + taxa de resposta"
+      priority: critical
+
+  payment:
+    pix:
+      penetration: "80%+ das transações digitais"
+      rule: "PIX como opção de pagamento é esperado"
+    parcelamento:
+      usage: "80% das compras online são parceladas"
+      rule: "Oferecer parcelamento é quase obrigatório"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SEASONAL CALENDAR
+# ═══════════════════════════════════════════════════════════════════════════════
+
+seasonal_calendar:
+  janeiro:
+    events: ["Volta às aulas", "Resoluções de Ano Novo"]
+    niches_impacted: [educacao, saude, estetica_bem_estar]
+    notes: "Pico de matrícula e busca por saúde/estética"
+
+  fevereiro:
+    events: ["Carnaval (data móvel)"]
+    niches_impacted: [hoteis_turismo, restaurantes_food, estetica_bem_estar]
+    notes: "Semana de Carnaval = queda generalizada em serviços; turismo em alta"
+
+  marco:
+    events: ["Dia da Mulher (8/Mar)", "Dia do Consumidor (15/Mar)"]
+    niches_impacted: [estetica_bem_estar, restaurantes_food]
+    notes: "Dia do Consumidor virou 'Black Friday do 1º semestre'"
+
+  abril:
+    events: ["Páscoa (data móvel)"]
+    niches_impacted: [restaurantes_food]
+    notes: "Páscoa e Semana Santa — relevante para food e turismo"
+
+  maio:
+    events: ["Dia das Mães (2º domingo)"]
+    niches_impacted: [restaurantes_food, estetica_bem_estar, hoteis_turismo]
+    notes: "Segunda data mais forte do varejo brasileiro (depois do Natal)"
+
+  junho:
+    events: ["Dia dos Namorados (12/Jun)", "Festa Junina"]
+    niches_impacted: [restaurantes_food, estetica_bem_estar, hoteis_turismo]
+    notes: "IMPORTANTE: Dia dos Namorados = 12 de JUNHO (NÃO 14 de Fevereiro)"
+
+  julho:
+    events: ["Férias escolares"]
+    niches_impacted: [hoteis_turismo, educacao]
+    notes: "Turismo em alta; serviços B2B em baixa"
+
+  agosto:
+    events: ["Dia dos Pais (2º domingo)"]
+    niches_impacted: [restaurantes_food, automotivo]
+    notes: "Menor que Dia das Mães mas relevante"
+
+  setembro:
+    events: ["Dia do Cliente (15/Set)"]
+    niches_impacted: ["todos"]
+    notes: "Oportunidade de fidelização e promoções"
+
+  outubro:
+    events: ["Dia das Crianças (12/Out)"]
+    niches_impacted: [educacao, restaurantes_food]
+    notes: "Forte para varejo infantil e entretenimento"
+
+  novembro:
+    events: ["Black Friday BR (última sexta)"]
+    niches_impacted: ["todos"]
+    notes: "Maior evento de vendas online do Brasil. Semana inteira."
+
+  dezembro:
+    events: ["Natal", "Ano Novo"]
+    niches_impacted: ["todos"]
+    notes: "Maior mês de faturamento para a maioria dos nichos"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMMUNICATION STYLE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+communication:
+  approach: "Emocional > Racional"
+  identification: "Pessoal — brasileiro compra de quem confia/conhece"
+  formality: "Semi-formal — profissional mas acessível (não usar 'vossa senhoria')"
+  currency: "R$ (Real brasileiro)"
+  number_format: "1.000,00 (ponto para milhar, vírgula para decimal)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# BENCHMARK SOURCES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+benchmarks:
+  - name: "Sebrae"
+    url: "https://www.sebrae.com.br"
+    data: "IMD, dados de PMEs, tendências por setor"
+    priority: high
+
+  - name: "IBGE"
+    url: "https://www.ibge.gov.br"
+    data: "Dados demográficos, econômicos"
+    priority: medium
+
+  - name: "Google Think"
+    url: "https://www.thinkwithgoogle.com/intl/pt-br/"
+    data: "Tendências digitais, comportamento de busca"
+    priority: high
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DIRECTORY LISTINGS (BR)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+directories:
+  - name: "Apontador"
+    url: "https://www.apontador.com.br"
+    listings: "23M+"
+    priority: medium
+
+  - name: "GuiaMais"
+    url: "https://www.guiamais.com.br"
+    priority: low
+
+  - name: "iLocal"
+    url: "https://www.ilocal.com.br"
+    priority: low

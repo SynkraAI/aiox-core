@@ -1,0 +1,404 @@
+# Antipatterns Database - Hormozi Squad
+# Source: $100M Offers + prompts-joao KB/v2.0/05_ANTIPATTERN_SHIELDS.md
+# Version: 1.0.0
+# Created: 2026-02-10
+# Purpose: Catalogo de antipatterns com triggers, consequencias e antidotos
+
+---
+
+metadata:
+  name: Hormozi Antipatterns Database
+  description: Biblioteca de ameacas ao modelo de negocio com diagnostico e antidotos
+  version: 1.0.0
+  source: $100M Offers + KB Antipattern Shields
+  usage: Reference for antipattern-screening.md checklist
+
+---
+
+# ==========================================
+# CATEGORIA 1: ANTIPADROES DE OFERTA
+# ==========================================
+
+offer_antipatterns:
+
+  - id: AP-OFF-001
+    name: Comoditizacao
+    severity: CRITICA
+    category: offer
+
+    definition: |
+      Oferecer produto/servico percebido como "praticamente igual"
+      a outras opcoes, forcando decisao de compra baseada em PRECO.
+
+    triggers:
+      - Cliente pergunta "quanto custa?" antes de entender valor
+      - Competidores oferecem "a mesma coisa" mais barato
+      - Nao existe diferenciador claro alem de preco
+      - Cliente faz shopping de propostas
+      - Descricao poderia ser de qualquer concorrente
+
+    principle_violated: Circulo Virtuoso da Precificacao Premium
+
+    consequences:
+      - Corrida para o fundo do poco (race to bottom)
+      - Margens destruidas
+      - Incapacidade de entregar valor excepcional
+      - Morte lenta do negocio
+
+    antidote:
+      description: Engenharia de Grand Slam Offer para criar "categoria de um"
+      task_ref: tasks/create-grand-slam-offer.md
+      checklist_ref: checklists/value-equation-checklist.md
+
+    example_case:
+      problem: "Agencia de marketing cobrando $2k/mes igual a todas as outras"
+      solution: "Criar modelo de revenue share com garantia de resultado"
+      result: "Preco premium justificado, clientes auto-selecionados, margens 80%+"
+
+  - id: AP-OFF-002
+    name: Oferta Inchada (Bloated Offer)
+    severity: MEDIA
+    category: offer
+
+    definition: |
+      Oferta com tantos componentes que a confusao aumenta o
+      "Esforco e Sacrificio" cognitivo do cliente.
+
+    triggers:
+      - Mais de 10 bonus listados
+      - Cliente nao consegue explicar o que esta comprando
+      - Paralisia de analise reportada em vendas
+      - Tempo de apresentacao > 30 minutos
+      - Prospect precisa "pensar" demais
+
+    principle_violated: Equacao de Valor - Minimizacao do Denominador
+
+    consequences:
+      - Paralisia de analise
+      - Baixas taxas de conversao
+      - Clientes confusos pos-compra
+      - Suporte sobrecarregado
+
+    antidote:
+      description: Simplificar para minimo de "crencas necessarias" para compra
+      action: Focar nos 3-5 componentes de maior impacto
+      principle: "Less is more quando aumenta clareza"
+
+    example_case:
+      problem: "Curso com 47 bonus - conversao caiu 60%"
+      solution: "Reduzir para 5 bonus que resolvem maiores objecoes"
+      result: "Conversao voltou ao normal, satisfacao aumentou"
+
+  - id: AP-OFF-003
+    name: Troca de Valor Injusta
+    severity: ALTA
+    category: offer
+
+    definition: |
+      Valor percebido da oferta e menor que 10x o preco cobrado.
+
+    triggers:
+      - Cliente hesita no preco mesmo entendendo a oferta
+      - Alta taxa de pedidos de desconto
+      - Refund rate > 10%
+      - Feedback "nao valeu o que paguei"
+
+    principle_violated: Equacao de Valor - Numerador insuficiente
+
+    consequences:
+      - Dificuldade de venda
+      - Alto churn
+      - Reputacao negativa
+      - Word-of-mouth negativo
+
+    antidote:
+      description: Empilhar valor ate ratio >= 10x preco
+      task_ref: tasks/create-bonus-stack.md
+      checklist_ref: checklists/bonuses-checklist.md
+
+# ==========================================
+# CATEGORIA 2: ANTIPADROES DE MODELO
+# ==========================================
+
+business_model_antipatterns:
+
+  - id: AP-MOD-001
+    name: Churn Estrutural
+    severity: CRITICA
+    category: business_model
+
+    definition: |
+      Atender segmento de clientes com taxa de falencia ou
+      desistencia inerentemente alta - independente da qualidade do servico.
+
+    triggers:
+      - Clientes sao iniciantes em algo (alta desistencia natural)
+      - Setor do cliente tem mortalidade > 20%/ano
+      - Clientes frequentemente mudam de carreira/nicho
+      - Clientes sao temporarios por natureza
+
+    canonical_example: |
+      "Vender software de CRM para novas academias - mercado onde
+      1/3 dos negocios falha anualmente. Nao importa quao bom
+      seja seu produto, voce PERDE 33% dos clientes todo ano."
+
+    principle_violated: Estabilidade da Base de Clientes
+
+    consequences:
+      - Colapso do modelo de recorrencia
+      - CAC:LTV perpetuamente ruim
+      - Treadmill de aquisicao constante
+      - Impossibilidade de escalar lucrativamente
+
+    antidote:
+      description: Mudar foco para segmento mais estavel
+      examples:
+        - from: "Personal trainers iniciantes"
+          to: "Personal trainers com >3 anos de atuacao"
+        - from: "Startups pre-revenue"
+          to: "Empresas com faturamento >$1M"
+        - from: "Novas academias"
+          to: "Academias com >2 anos operando"
+
+  - id: AP-MOD-002
+    name: Buraco no Modelo (Entrega Desalinhada)
+    severity: ALTA
+    category: business_model
+
+    definition: |
+      Modelo onde quem vende nao tem controle total ou
+      incentivo alinhado com quem entrega o servico.
+
+    triggers:
+      - Vendedor ganha comissao, entregador ganha salario fixo
+      - Parceiro de entrega lucra com reembolsos/cancelamentos
+      - Franqueado nao tem stake nos resultados do cliente
+      - Terceiro pode sabotar entrega sem consequencia
+
+    canonical_example: |
+      "Modelo original de flipping de academias do Hormozi -
+      parceiros eram incentivados a dar reembolsos porque
+      ganhavam de qualquer jeito e se livravam do trabalho."
+
+    principle_violated: Alinhamento de Incentivos
+
+    consequences:
+      - Sabotagem da entrega
+      - Colapso do modelo
+      - Danos a reputacao
+      - Clientes insatisfeitos
+
+    antidote:
+      description: Reestruturar modelo para alinhar incentivos
+      principles:
+        - "Sucesso do cliente = sucesso financeiro de TODAS as partes"
+        - Revenue share > salario fixo para entrega
+        - Skin in the game obrigatorio
+
+  - id: AP-MOD-003
+    name: Ciclo de Caixa Quebrado
+    severity: CRITICA
+    category: business_model
+
+    definition: |
+      CAC > Receita da primeira transacao, exigindo capital
+      externo para crescer.
+
+    triggers:
+      - FECC:CAC < 1
+      - Precisa de investimento para escalar
+      - Fluxo de caixa negativo em meses de crescimento
+      - Dependencia de credito/investidores
+
+    principle_violated: Auto-financiamento do Crescimento
+
+    consequences:
+      - Crescimento limitado por capital
+      - Dependencia de investidores
+      - Perda de controle
+      - Risco de colapso se funding seca
+
+    antidote:
+      description: Garantir FECC:CAC >= 2
+      actions:
+        - Criar oferta front-end que liquida CAC
+        - Adicionar order bumps e upsells imediatos
+        - Reduzir CAC via canais organicos
+      checklist_ref: checklists/golden-ratios-veto.md
+
+# ==========================================
+# CATEGORIA 3: ANTIPADROES DE TATICAS
+# ==========================================
+
+tactics_antipatterns:
+
+  - id: AP-TAC-001
+    name: Falsa Escassez
+    severity: ALTA
+    category: tactics
+
+    definition: |
+      Usar escassez artificial que o cliente eventualmente
+      descobre que e falsa.
+
+    triggers:
+      - Contador que reseta quando expira
+      - "Ultimas vagas" que nunca acabam
+      - Preco "especial" disponivel toda semana
+      - Bonus "exclusivo" dado a todos
+
+    principle_violated: Preservacao de Ativos de Longo Prazo (Confianca)
+
+    consequences:
+      - Erosao sistematica da confianca
+      - Ceticismo do comprador aumenta
+      - LTV diminui (clientes nao confiam em futuras ofertas)
+      - Reputacao de "scammy"
+
+    antidote:
+      description: Usar escassez GENUINA
+      examples:
+        genuine:
+          - "Vagas limitadas por capacidade real de entrega"
+          - "Bonus fisicos com estoque limitado"
+          - "Deadline real de lancamento"
+          - "Aumento de preco programado e cumprido"
+      checklist_ref: checklists/scarcity-urgency-checklist.md
+
+  - id: AP-TAC-002
+    name: Promessas Irrealistas
+    severity: ALTA
+    category: tactics
+
+    definition: |
+      Fazer promessas de resultado que voce sabe que a
+      maioria dos clientes nao conseguira atingir.
+
+    triggers:
+      - "Fique rico rapido" messaging
+      - Resultados excepcionais apresentados como tipicos
+      - Sem disclaimers honestos
+      - Taxa de sucesso real < 30%
+
+    principle_violated: Transparencia e Gerenciamento de Expectativas
+
+    consequences:
+      - Perda total de credibilidade
+      - Altas taxas de reembolso
+      - Risco legal (FTC, Procon)
+      - Reviews negativas
+
+    antidote:
+      description: Promessas calibradas + provas reais
+      principles:
+        - "Mostrar resultados TIPICOS, nao excepcionais"
+        - "Disclaimer honesto sobre o que e necessario"
+        - "Case studies com contexto completo"
+
+# ==========================================
+# CATEGORIA 4: ANTIPADROES DE LIDERANCA
+# ==========================================
+
+leadership_antipatterns:
+
+  - id: AP-LED-001
+    name: Reatividade Emocional
+    severity: MEDIA
+    category: leadership
+
+    definition: |
+      Tomar decisoes estrategicas baseado no estado emocional
+      momentaneo em vez de dados e logica.
+
+    triggers:
+      - Muda estrategia baseado em como "se sente" no dia
+      - Decisoes impulsivas sem analisar dados
+      - Nao separa feedback do produto de feedback pessoal
+      - Pivota rapidamente sem validacao
+
+    principle_violated: Tomada de Decisao Logica e Desapegada
+
+    consequences:
+      - Estrategia erratica
+      - Confusao na equipe
+      - Progresso inconsistente
+      - Perda de momentum
+
+    antidote:
+      description: Divorciar sentimentos do negocio
+      practices:
+        - "Decisoes baseadas em metricas, nao sentimentos"
+        - "Periodo de cooling-off antes de grandes mudancas"
+        - "Validacao por terceiros antes de pivotar"
+        - "Regra dos 100 antes de declarar que nao funciona"
+
+  - id: AP-LED-002
+    name: Niche Slapping Fallacy
+    severity: MEDIA
+    category: leadership
+
+    definition: |
+      Pular de nicho em nicho achando que o problema e o
+      mercado, quando na verdade e falta de comprometimento.
+
+    triggers:
+      - Tentou < 90 dias antes de declarar "nao funciona"
+      - Nao fez Regra dos 100 antes de desistir
+      - Acha que outro nicho sera "mais facil"
+      - Ja pivotou 3+ vezes no ultimo ano
+
+    principle_violated: Foco e Resiliencia
+
+    consequences:
+      - Nenhum projeto atinge massa critica
+      - Recursos desperdicados em multiplos comecos
+      - Expertise nunca se desenvolve
+      - Frustracao cronica
+
+    antidote:
+      description: Escolher mercado que atende 4 indicadores e COMPROMETER
+      principle: |
+        "Sucesso vem da iteracao DENTRO de um nicho,
+        nao da busca por um nicho 'perfeito'."
+      checklist_ref: checklists/market-validation-veto.md
+
+# ==========================================
+# MATRIZ DE SEVERIDADE
+# ==========================================
+
+severity_matrix:
+  CRITICA:
+    description: Veto absoluto - nao prosseguir
+    action: Resolver ANTES de qualquer acao
+    examples: [AP-OFF-001, AP-MOD-001, AP-MOD-003]
+
+  ALTA:
+    description: Modificacao obrigatoria
+    action: Ajustar antes de prosseguir
+    examples: [AP-OFF-003, AP-MOD-002, AP-TAC-001, AP-TAC-002]
+
+  MEDIA:
+    description: Alerta - monitorar e planejar correcao
+    action: Pode prosseguir com plano de mitigacao
+    examples: [AP-OFF-002, AP-LED-001, AP-LED-002]
+
+# ==========================================
+# PROTOCOLO DE COMUNICACAO
+# ==========================================
+
+rejection_protocol:
+  template: |
+    1. RECONHECIMENTO: "Compreendo a logica por tras dessa abordagem..."
+    2. DIAGNOSTICO: "No entanto, isso ativa o antipattern de [NOME],
+       porque viola o principio de [PRINCIPIO]."
+    3. CONSEQUENCIA: "A consequencia previsivel de longo prazo e [CONSEQUENCIA]."
+    4. ANTIDOTO: "Uma abordagem mais robusta seria [ANTIDOTO], porque [BENEFICIO]."
+
+  principles:
+    - Critique o sistema/ideia, nunca a pessoa
+    - Cada rejeicao e um momento de ensino
+    - Forneca caminho claro para correcao
+    - Use dados e exemplos, nao opiniao
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

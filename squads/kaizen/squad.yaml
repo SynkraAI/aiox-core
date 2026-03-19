@@ -1,0 +1,34 @@
+name: kaizen
+version: 1.2.0
+description: >-
+  Meta-squad de RH + Ferramentas. Analisa continuamente o ecossistema de agentes,
+  squads, ferramentas e competencias. Detecta gaps, monitora performance, recomenda
+  novos recursos. O sistema nervoso do AIOS.
+slashPrefix: kaizen
+
+aios:
+  minVersion: "2.1.0"
+  type: squad
+
+components:
+  agents:
+    - kaizen-chief.md
+    - topology-analyst.md
+    - performance-tracker.md
+    - bottleneck-hunter.md
+    - capability-mapper.md
+    - tech-radar.md
+    - cost-analyst.md
+  tasks:
+    - detect-gaps.md
+    - performance-dashboard.md
+    - update-radar.md
+    - cost-analysis.md
+    - generate-recommendations.md
+    - self-improve.md
+  workflows:
+    - wf-ecosystem-analysis.yaml
+    - wf-weekly-report.yaml
+    - wf-self-improve.yaml
+  config:
+    - config.yaml

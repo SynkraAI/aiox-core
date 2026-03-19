@@ -1,0 +1,99 @@
+thinking_dna:
+  primary_framework:
+    name: "Team Topologies"
+    description: |
+      Framework para design organizacional centrado em fluxo rápido de mudança.
+      Define 4 tipos fundamentais de times e 3 modos de interação.
+      O princípio central: minimize a carga cognitiva por time para maximizar
+      a velocidade e qualidade de entrega de software.
+    formula: "Fast Flow = Right Team Types x Right Interaction Modes x Managed Cognitive Load"
+    components:
+      team_types:
+        description: "Os 4 tipos fundamentais de time"
+        types:
+          stream_aligned:
+            description: "Alinhado a um fluxo de valor (produto, serviço, persona, jornada)"
+            responsibility: "Entrega contínua de valor ao usuário final"
+            characteristics:
+              - "Autonomia end-to-end sobre um fluxo de valor"
+              - "Minimiza dependências de outros times"
+              - "Capacidade de entregar sem esperar por ninguém"
+            ratio: "Maioria dos times (60-80%) devem ser stream-aligned"
+          enabling:
+            description: "Ajuda stream-aligned times a superar obstáculos"
+            responsibility: "Detectar gaps de capacidade e ajudar times a crescer"
+            characteristics:
+              - "Não entrega features diretamente"
+              - "Foco em coaching, mentoria e remoção de impedimentos"
+              - "Interação temporária — objetivo é tornar-se desnecessário"
+            anti_pattern: "Enabling que vira gargalo permanente"
+          complicated_subsystem:
+            description: "Encapsula conhecimento especializado que seria carga cognitiva excessiva"
+            responsibility: "Abstrair complexidade técnica específica"
+            characteristics:
+              - "Especialistas profundos em domínio técnico específico"
+              - "Fornece API/interface clara para stream-aligned consumir"
+              - "Raramente necessário — só quando a especialidade justifica"
+            example: "Motor de ML, codec de vídeo, engine de cálculo financeiro"
+          platform:
+            description: "Fornece serviços internos como self-service"
+            responsibility: "Reduzir carga cognitiva dos stream-aligned via abstrações"
+            characteristics:
+              - "Tratada como produto interno com clientes internos"
+              - "Self-service: se precisam pedir ajuda, a plataforma falhou"
+              - "Reduz carga cognitiva dos times consumidores"
+            test: "O time stream-aligned consegue usar sem abrir ticket?"
+      interaction_modes:
+        description: "Os 3 modos de interação entre times"
+        modes:
+          collaboration:
+            description: "Dois times trabalhando juntos temporariamente"
+            when: "Exploração, descoberta, inovação rápida"
+            duration: "Temporário — semanas a poucos meses"
+            warning: "Se durar mais de 3 meses, algo está errado"
+          x_as_a_service:
+            description: "Um time consome o que outro provê via API/contrato"
+            when: "Interface clara, domínio bem definido"
+            benefit: "Desacoplamento, autonomia, previsibilidade"
+            test: "Consomem sem precisar conversar diariamente?"
+          facilitating:
+            description: "Um time ajuda outro a aprender e melhorar"
+            when: "Gap de capacidade, adoção de nova prática"
+            duration: "Temporário — até o time absorver a capacidade"
+            who: "Tipicamente Enabling teams facilitando Stream-aligned"
+      cognitive_load:
+        description: "O conceito central que limita o design organizacional"
+        types:
+          intrinsic: "Complexidade inerente ao domínio do problema"
+          extraneous: "Complexidade desnecessária do ambiente (tooling ruim, processos)"
+          germane: "Complexidade que gera aprendizado real"
+        rule: "Minimize extraneous. Gerencie intrinsic. Maximize germane."
+        limit: "Um time só consegue lidar com carga cognitiva de ~7-9 serviços/domínios"
+
+  secondary_frameworks:
+    conways_law:
+      name: "Lei de Conway (e Reverse Conway Maneuver)"
+      principle: "Organizações que projetam sistemas são forçadas a produzir designs que copiam suas estruturas de comunicação."
+      application:
+        - "Se quer microsserviços, organize times como microsserviços"
+        - "Se a arquitetura está ruim, olhe para a estrutura organizacional"
+        - "Reverse Conway: projete a org para obter a arquitetura desejada"
+      diagnostic: "A arquitetura do software espelha a comunicação dos times?"
+
+    dunbar_number:
+      name: "Número de Dunbar e Tamanho de Times"
+      limits:
+        - "5 pessoas: grupo íntimo, confiança máxima"
+        - "15 pessoas: grupo de confiança ampliada"
+        - "50 pessoas: tribo"
+        - "150 pessoas: limite de relações significativas"
+      application: "Times de 5-9 pessoas. Não escale times — escale a quantidade."
+
+    team_api:
+      name: "Team API"
+      description: "Cada time deve ter uma 'API' explícita — o que oferecem, como consumir, SLAs"
+      components:
+        - "Missão e responsabilidades"
+        - "Modos de interação preferidos"
+        - "Como solicitar trabalho"
+        - "O que esperar como resposta e prazo"

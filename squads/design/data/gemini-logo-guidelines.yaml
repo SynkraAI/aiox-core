@@ -1,0 +1,345 @@
+# Gemini Logo Generation Guidelines
+# ============================================================================
+# Best practices for generating logos with Google Gemini models
+# Primary: Gemini CLI (terminal) | Fallback: OpenRouter REST API
+# ============================================================================
+
+version: "3.0.0"
+created: "2026-02-28"
+updated: "2026-02-28"
+used_by: ["nano-banana-generator", "logo-prompt-engineering"]
+
+# Execution Priority
+# ============================================================================
+# Gemini CLI é o método PRIMÁRIO. OpenRouter é apenas fallback.
+#
+# Gemini CLI (gemini -p) → mesmo conceito do cli-router:
+#   pipe agent persona + prompt → gemini executa → output
+#
+# OpenRouter REST API → só quando CLI falha ou não está disponível.
+
+execution:
+  primary:
+    name: "Gemini CLI"
+    binary: "gemini"
+    install: "npm i -g @google/gemini-cli"
+    version_min: "0.31.0"
+    env_var: "GEMINI_API_KEY"
+    extension:
+      name: "nanobanana"
+      install: "gemini extensions install https://github.com/gemini-cli-extensions/nanobanana"
+      commands:
+        generate: "/generate — Create images from text descriptions"
+        edit: "/edit — Modify existing images with natural language"
+        restore: "/restore — Enhance and repair old or damaged photos"
+        icon: "/icon — Generate app icons, favicons, UI elements"
+        pattern: "/pattern — Create seamless patterns and textures"
+        diagram: "/diagram — Create technical diagrams and flowcharts"
+        nanobanana: "/nanobanana — Natural language open-ended requests"
+
+    execution_patterns:
+      extension_generate:
+        description: "Preferred — uses Nano Banana extension /generate command"
+        command: |
+          gemini -p "/generate {scds_prompt}. Negative: {negative_prompt}. --aspect {aspect_ratio} --output {output_path}" --yolo
+        when: "Extension nanobanana is installed"
+
+      extension_icon:
+        description: "Specialized for icons/favicons"
+        command: |
+          gemini -p "/icon {scds_prompt}. --sizes 32,64,128,256,512 --output {output_path}" --yolo
+        when: "Generating app icons or favicons"
+
+      native_prompt:
+        description: "Fallback — no extension, direct prompt"
+        command: |
+          gemini -p "Generate an image: [SUBJECT]: {subject} [SETTING]: {setting} [STYLE]: {style} [TECHNICAL]: {aspect_ratio}, {resolution}. Negative: {negative_prompt}. Save to {output_path}" --yolo
+        when: "Extension not available"
+
+      pipe_pattern:
+        description: "cli-router style — pipe agent persona + task"
+        command: |
+          cat squads/design/agents/nano-banana-generator.md | gemini -p "{instruction}" --yolo
+        when: "Need full agent persona context"
+
+    advantages:
+      - "Direct terminal execution (same pattern as cli-router)"
+      - "No HTTP requests needed"
+      - "Nano Banana extension provides specialized commands"
+      - "/icon command for multi-size favicon/app icon generation"
+      - "Free tier: 1000 requests/day"
+      - "Interactive editing via multi-turn conversation"
+      - "Auto-preview with --preview flag"
+
+  fallback:
+    name: "OpenRouter REST API"
+    env_var: "OPENROUTER_API_KEY"
+    endpoint: "https://openrouter.ai/api/v1/chat/completions"
+    auth_header: "Authorization: Bearer"
+    when_to_use:
+      - "gemini CLI not installed"
+      - "GEMINI_API_KEY not available"
+      - "Gemini CLI returns error/timeout"
+    request_format: |
+      curl -s -X POST "https://openrouter.ai/api/v1/chat/completions" \
+        -H "Authorization: Bearer $OPENROUTER_API_KEY" \
+        -H "Content-Type: application/json" \
+        -d '{
+          "model": "google/{model}",
+          "messages": [{"role": "user", "content": "{prompt}"}],
+          "modalities": ["image", "text"],
+          "image_config": {"aspect_ratio": "{ratio}", "image_size": "{size}"}
+        }'
+
+  selection_logic: |
+    IF which gemini AND GEMINI_API_KEY → use Gemini CLI (primary)
+      ON FAIL → IF OPENROUTER_API_KEY → fallback to OpenRouter REST
+    ELSE IF OPENROUTER_API_KEY → use OpenRouter REST (only option)
+    ELSE → ABORT
+
+# Model Selection
+# ============================================================================
+models:
+  flash_latest:
+    id: "gemini-3.1-flash-image-preview"
+    cli_default: true
+    openrouter_available: false
+    best_for:
+      - "Speed-optimized generation"
+      - "Batch exploration (highest throughput)"
+      - "Default for Gemini CLI"
+    when_to_use: "Default for all CLI generation. Speed > quality."
+
+  flash:
+    id: "gemini-2.5-flash-image"
+    openrouter_id: "google/gemini-2.5-flash-image"
+    openrouter_available: true
+    best_for:
+      - "Exploration and rapid prototyping"
+      - "Batch variations (cost-effective)"
+      - "Simple icon/symbol logos"
+    when_to_use: "Phase 4 (initial generation) and batch exploration"
+
+  pro:
+    id: "gemini-3-pro-image-preview"
+    openrouter_id: "google/gemini-3-pro-image-preview"
+    openrouter_available: true
+    best_for:
+      - "Final refinement and high-quality output"
+      - "Wordmarks and lettermarks (text-heavy)"
+      - "Complex emblems with fine detail"
+      - "Typography rendering"
+    when_to_use: "Phase 6 (refinement) and final deliverable"
+
+  cli_model_flag: |
+    Use -m flag to override default model:
+      gemini -m gemini-3-pro-image-preview -p "/generate ..." --yolo
+
+# Aspect Ratios by Logo Type
+# ============================================================================
+aspect_ratios:
+  icon_symbol:
+    ratio: "1:1"
+    use_for: ["App icon", "Favicon", "Social avatar", "Watermark"]
+
+  lettermark:
+    ratio: "1:1"
+    use_for: ["Monogram", "Single letter mark", "Initials"]
+
+  wordmark:
+    ratio: "16:9"
+    use_for: ["Full brand name", "Logotype", "Website header"]
+
+  combination_mark:
+    ratio: "16:9"
+    use_for: ["Icon + text horizontal", "Primary brand lockup"]
+
+  combination_mark_stacked:
+    ratio: "4:3"
+    use_for: ["Icon + text stacked vertically"]
+
+  emblem:
+    ratio: "1:1"
+    use_for: ["Badge", "Seal", "Crest", "Contained mark"]
+
+  abstract_mark:
+    ratio: "1:1"
+    use_for: ["Geometric mark", "Abstract shape", "Brand pattern element"]
+
+  ultra_wide:
+    ratio: "21:9"
+    cli_only: true
+    use_for: ["Banner logos", "Website hero", "Cinematic presentation"]
+
+# Resolution Strategy
+# ============================================================================
+resolution_strategy:
+  exploration:
+    size: "1K"
+    purpose: "Initial concept exploration and batch variations"
+
+  refinement:
+    size: "2K"
+    purpose: "Refined versions of selected concepts"
+
+  final:
+    size: "4K"
+    purpose: "Final deliverable for client presentation"
+
+# Prompt Engineering Do's and Don'ts
+# ============================================================================
+prompt_engineering:
+  dos:
+    - "Always use SCDS framework for structured prompts"
+    - "Specify exact aspect ratio and resolution"
+    - "Include negative prompts to avoid common issues"
+    - "Use 'flat design' or 'vector illustration' for clean logos"
+    - "Specify 'white background' explicitly"
+    - "Include 'centered composition' for icon/symbol marks"
+    - "Use 'professional logo design' as a style anchor"
+    - "Reference design movements: Swiss, Bauhaus, Modernist"
+    - "Specify 'simple shapes' and 'minimal detail' for scalable logos"
+    - "Include color specifications: 'monochrome', 'two-color', etc."
+    - "Add 'clean lines' and 'precise geometry' for quality"
+    - "Use --yolo flag for non-interactive CLI execution"
+
+  donts:
+    - "Never send raw/unstructured descriptions"
+    - "Never use '3D render' or 'photorealistic' for logos"
+    - "Never request 'transparent background' (generates flat images)"
+    - "Avoid 'multiple logos' in a single prompt"
+    - "Never use 'clip art' or 'stock' in prompts"
+    - "Avoid overly complex scenes"
+    - "Never use OpenRouter when Gemini CLI is available"
+
+# Negative Prompts
+# ============================================================================
+negative_prompts:
+  universal:
+    - "blurry"
+    - "low quality"
+    - "pixelated"
+    - "watermark"
+    - "signature"
+    - "text overlay"
+    - "border"
+    - "frame"
+    - "gradient background"
+    - "shadow"
+    - "noise"
+    - "artifact"
+
+  logo_specific:
+    - "photographic"
+    - "photorealistic"
+    - "3D render"
+    - "3D perspective"
+    - "clip art"
+    - "cartoon"
+    - "sketch"
+    - "hand-drawn"
+    - "watercolor"
+    - "grunge"
+    - "vintage texture"
+    - "multiple logos"
+    - "mockup"
+    - "business card"
+
+  typography_specific:
+    - "distorted text"
+    - "warped letters"
+    - "illegible text"
+    - "misspelled"
+    - "overlapping letters"
+    - "decorative font"
+    - "cursive"
+
+  by_logo_type:
+    wordmark:
+      - "icon"
+      - "symbol"
+      - "pictorial element"
+      - "illustration alongside text"
+    icon:
+      - "text"
+      - "letters"
+      - "words"
+      - "typography"
+    emblem:
+      - "open composition"
+      - "floating elements"
+      - "disconnected parts"
+
+# Logo-Specific CLI Commands
+# ============================================================================
+logo_commands:
+  generate_icon_logo:
+    description: "Use /icon for app icons and favicons"
+    command: 'gemini -p "/icon {scds_prompt} --sizes 32,64,128,256,512" --yolo'
+    when: "Generating icon/symbol marks that need multi-size output"
+
+  generate_logo:
+    description: "Use /generate for general logo generation"
+    command: 'gemini -p "/generate {scds_prompt}. Negative: {negative}. --aspect {ratio} --style flat-vector" --yolo'
+    when: "Default logo generation"
+
+  edit_logo:
+    description: "Use /edit for iterative logo refinement"
+    command: 'gemini -p "/edit {image_path} Make the lines thicker and change color to navy blue" --yolo'
+    when: "Refining an existing generated logo"
+
+  generate_with_model:
+    description: "Use pro model for text-heavy logos"
+    command: 'gemini -m gemini-3-pro-image-preview -p "/generate {scds_prompt}" --yolo'
+    when: "Wordmarks, lettermarks, or text-heavy logos"
+
+# Quality Checklist
+# ============================================================================
+quality_checklist:
+  before_generation:
+    - "SCDS prompt is complete with all 4 components"
+    - "Aspect ratio matches logo type"
+    - "Negative prompts include universal + type-specific"
+    - "Resolution matches phase (exploration=1K, refinement=2K, final=4K)"
+    - "User has approved the prompt"
+    - "Gemini CLI checked first, OpenRouter only as fallback"
+    - "Nano Banana extension installed if using CLI"
+
+  after_generation:
+    - "Logo is centered and well-composed"
+    - "Background is clean (no artifacts)"
+    - "Shapes are clean with precise edges"
+    - "Color palette is intentional"
+    - "If text: legible and properly rendered"
+    - "Would work at small sizes (favicon test)"
+    - "Provider + method logged in generation-log.yaml"
+
+# Setup Guide
+# ============================================================================
+setup:
+  steps:
+    - step: 1
+      action: "Install Gemini CLI"
+      command: "npm i -g @google/gemini-cli"
+      verify: "gemini --version"
+
+    - step: 2
+      action: "Set API key"
+      command: 'echo "GEMINI_API_KEY=your-key-here" >> .env'
+      note: "Get key from https://aistudio.google.com/apikey"
+
+    - step: 3
+      action: "Install Nano Banana extension"
+      command: "gemini extensions install https://github.com/gemini-cli-extensions/nanobanana"
+      verify: "gemini extensions list"
+
+    - step: 4
+      action: "Test generation"
+      command: 'gemini -p "/generate A simple blue circle logo on white background --aspect 1:1" --yolo'
+      verify: "Check output image file"
+
+  optional:
+    - step: 5
+      action: "Set OpenRouter fallback"
+      command: 'echo "OPENROUTER_API_KEY=your-key-here" >> .env'
+      note: "Only needed as fallback if Gemini CLI fails"

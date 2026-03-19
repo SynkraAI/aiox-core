@@ -1,0 +1,449 @@
+# Calendário de Sazonalidade Brasileiro — Mês a Mês
+# Atualizado: 2026-02 | Fonte: pesquisa de mercado, dados do Serasa Experian, IBGE, Ebit/Nielsen
+# Uso: agentes affiliate-strategist, niche-ops e marketplace-ops para planejamento de campanhas
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  currency: BRL
+  notes: >
+    Dados baseados em comportamento de consumo histórico BR 2022-2025.
+    Datas comemorativas de 2026 usadas quando relevante.
+    Ad cost trend: custo relativo de anúncios pagos (Meta Ads, Google Ads) no período.
+
+months:
+
+  january:
+    name: "Janeiro"
+    ad_cost_trend: high
+    ad_cost_notes: >
+      Concorrência alta de anunciantes com budget de início de ano.
+      CPM e CPC sobem 20-40% vs dezembro.
+    events:
+      - name: "Ano Novo"
+        date: "01/01"
+        commercial_relevance: medium
+        notes: "Pico de buscas por 'resolução de ano novo' — saúde, fitness, finanças"
+      - name: "Volta às Aulas (1ª fase)"
+        date: "segunda quinzena"
+        commercial_relevance: very_high
+        notes: "Maior pico de material escolar. Lojas físicas e online concorrem."
+      - name: "Dia de Reis"
+        date: "06/01"
+        commercial_relevance: low
+        notes: "Pouca relevância comercial no Brasil (mais forte no Sul com imigrantes europeus)"
+      - name: "Verão (pico)"
+        date: "todo janeiro"
+        commercial_relevance: high
+        notes: "Pico de turismo, praia, produtos de verão"
+    categories_hot:
+      - material_escolar
+      - moda_praia
+      - fitness_academia
+      - turismo_viagem
+      - saude_emagrecimento
+      - financas_pessoais
+      - idiomas
+    marketplace_promos:
+      mercado_livre: "Janeiro Amarelo — eletrodomésticos e eletrônicos"
+      shopee: "Shopee Queima de Estoque"
+    content_opportunities:
+      - "'Metas de 2026: [nicho]' — busca por renovação e metas"
+      - "'Como economizar em 2026' — alta busca em finanças pessoais"
+      - "'Melhores cursos de inglês' — pico anual de busca"
+      - "'Dieta para emagrecer' — resolução de ano novo"
+    affiliate_strategy: >
+      Foco em conteúdo de transformação e novos começos. Produtos de saúde,
+      finanças e educação têm pico de intenção de compra. Evite datas comemorativas
+      específicas — explore o clima de 'recomeço' do mês inteiro.
+
+  february:
+    name: "Fevereiro"
+    ad_cost_trend: high
+    ad_cost_notes: "Carnaval eleva CPM mas reduz conversão no período. Cuidado com timing."
+    events:
+      - name: "Carnaval"
+        date: "variável (2026: 16-22/02)"
+        commercial_relevance: medium
+        notes: "Conversão cai durante o Carnaval. Prepare campanhas para antes e depois."
+      - name: "Dia dos Namorados (pré)"
+        date: "N/A (é em junho)"
+        commercial_relevance: low
+      - name: "Volta às Aulas (2ª fase / cursinho pré-vestibular)"
+        date: "início do mês"
+        commercial_relevance: medium
+    categories_hot:
+      - fantasia_carnaval
+      - moda_praia
+      - bebidas
+      - viagem_carnaval
+      - saude_beleza
+      - emagrecimento_pos_carnaval
+    marketplace_promos:
+      mercado_livre: "Campanhas pré e pós-carnaval"
+      shopee: "Semana do Carnaval"
+    content_opportunities:
+      - "'Fantasia de carnaval faça você mesmo'"
+      - "'Dieta pós-carnaval' (conteúdo para publicar na semana seguinte)"
+      - "'Como se preparar para o ENEM 2026'"
+    affiliate_strategy: >
+      Pause ou reduza paid media durante os dias de Carnaval (taxa de conversão despenca).
+      Prepare conteúdo de "pós-carnaval" para publicar na quarta de cinzas — tema de
+      recomeço e saúde funciona muito bem neste momento.
+
+  march:
+    name: "Março"
+    ad_cost_trend: medium
+    events:
+      - name: "Dia da Mulher"
+        date: "08/03"
+        commercial_relevance: very_high
+        notes: "Terceira data mais importante do varejo BR depois de Natal e Black Friday."
+      - name: "Início do Outono"
+        date: "20/03"
+        commercial_relevance: low
+      - name: "Semana do Consumidor"
+        date: "15/03 (antecipação de promoções)"
+        commercial_relevance: high
+    categories_hot:
+      - beleza_feminina
+      - moda_feminina
+      - saude_mulher
+      - flores_presentes
+      - livros
+      - cursos_feminismo_empoderamento
+    marketplace_promos:
+      amazon_br: "Semana do Consumidor (15/03)"
+      mercado_livre: "Semana do Consumidor + Dia da Mulher"
+      shopee: "Shopee 3.3 — Dia da Mulher"
+    content_opportunities:
+      - "Presentes para o Dia da Mulher sob [valor]"
+      - "Melhores livros de mulheres que inspiram"
+      - "Cursos para mulheres empreendedoras"
+    affiliate_strategy: >
+      Shopee e Amazon têm campanhas agressivas no 3.3 (03/03) e na semana do 8/3.
+      Conteúdo de presentes com curadoria por faixa de preço converte bem.
+      Comece a preparar conteúdo de Páscoa para publicação em março (se Páscoa em abril).
+
+  april:
+    name: "Abril"
+    ad_cost_trend: medium
+    events:
+      - name: "Páscoa"
+        date: "variável (2026: 05/04)"
+        commercial_relevance: very_high
+        notes: "2ª maior data do varejo alimentar. Chocolate e turismo religioso."
+      - name: "Tiradentes"
+        date: "21/04"
+        commercial_relevance: medium
+        notes: "Feriado prolongado — turismo doméstico e viagens."
+      - name: "Shopee 4.4"
+        date: "04/04"
+        commercial_relevance: medium
+    categories_hot:
+      - chocolate_pascoa
+      - viagem_turismo
+      - artesanato_diy
+      - decoracao_pascoa
+      - moda_outono
+    marketplace_promos:
+      shopee: "Shopee 4.4"
+      mercado_livre: "Campanhas de Páscoa"
+      amazon_br: "Páscoa"
+    content_opportunities:
+      - "Melhores cestas de Páscoa online"
+      - "Viagens de Tiradentes: destinos e preços"
+      - "Receitas de Páscoa (YouTube/TikTok com produto afiliado)"
+    affiliate_strategy: >
+      Páscoa: conteúdo de curadoria de presentes e cestas de chocolate.
+      Feriado de Tiradentes: oportunidade para nichos de viagem com foco
+      em destinos de curta distância (Minas, Serra Gaúcha, etc.).
+
+  may:
+    name: "Maio"
+    ad_cost_trend: very_high
+    ad_cost_notes: "Dia das Mães é a 2ª maior data do varejo. CPM sobe 50-80% na semana antes."
+    events:
+      - name: "Dia das Mães"
+        date: "2º domingo (2026: 10/05)"
+        commercial_relevance: very_high
+        notes: "Maior data de presente do ano. Supera Natal em algumas categorias."
+      - name: "Shopee 5.5"
+        date: "05/05"
+        commercial_relevance: high
+    categories_hot:
+      - presentes_maes
+      - joias_bijuterias
+      - perfumes
+      - beleza_skincare
+      - eletronicos_premium
+      - flores_e_arranjos
+      - gastronomia
+    marketplace_promos:
+      shopee: "Shopee 5.5 + Semana das Mães"
+      mercado_livre: "Mês das Mães"
+      amazon_br: "Dia das Mães"
+    content_opportunities:
+      - "Melhores presentes para o Dia das Mães por faixa de preço"
+      - "Presentes de última hora para o Dia das Mães"
+      - "Experiências para presentear mães"
+    affiliate_strategy: >
+      Comece a publicar conteúdo de presentes 3-4 semanas antes.
+      Guias "melhores presentes para mães que [característica]" convertem muito bem.
+      Pague atenção ao tráfego orgânico que chega 10-15 dias antes da data
+      (intenção de compra com tempo para entrega).
+
+  june:
+    name: "Junho"
+    ad_cost_trend: medium
+    events:
+      - name: "Dia dos Namorados"
+        date: "12/06"
+        commercial_relevance: very_high
+        notes: "BR comemora em junho (não em fevereiro como EUA). Data muito comercial."
+      - name: "Festa Junina"
+        date: "todo o mês"
+        commercial_relevance: medium
+        notes: "Turismo cultural, moda caipira, alimentos típicos"
+      - name: "Shopee 6.6"
+        date: "06/06"
+        commercial_relevance: high
+    categories_hot:
+      - presentes_namorados
+      - joias_rosas
+      - perfumes
+      - experiencias_gastronomia
+      - moda_junina
+      - turismo_cultural
+    marketplace_promos:
+      shopee: "Shopee 6.6 + Semana dos Namorados"
+      mercado_livre: "Dia dos Namorados"
+      amazon_br: "Dia dos Namorados"
+    content_opportunities:
+      - "Ideias de presentes para o Dia dos Namorados"
+      - "Jantares românticos: onde ir nas principais cidades"
+      - "Viagens de casais: destinos românticos no Brasil"
+    affiliate_strategy: >
+      Dia dos Namorados tem ticket médio mais alto que Dia das Mães.
+      Casais tendem a trocar presentes mutuamente — audiência dobrada.
+      Experiências (jantares, viagens) têm demanda crescente vs presentes físicos.
+
+  july:
+    name: "Julho"
+    ad_cost_trend: medium
+    events:
+      - name: "Férias Escolares"
+        date: "todo julho"
+        commercial_relevance: very_high
+        notes: "Maior pico de turismo familiar do ano."
+      - name: "Shopee 7.7"
+        date: "07/07"
+        commercial_relevance: high
+      - name: "Amazon Prime Day (global)"
+        date: "meados de julho (varia)"
+        commercial_relevance: high
+    categories_hot:
+      - turismo_familiar
+      - moda_inverno
+      - educacao_cursos
+      - brinquedos
+      - eletronicos
+    marketplace_promos:
+      shopee: "Shopee 7.7"
+      amazon_br: "Prime Day (quando disponível para BR)"
+      mercado_livre: "Férias de Julho"
+    content_opportunities:
+      - "Melhores destinos para férias de julho em família"
+      - "Cursos de inglês para aproveitar as férias"
+      - "Roupas de inverno: melhores compras online"
+    affiliate_strategy: >
+      Nicho de turismo e educação têm pico real em julho.
+      Cursos online tem demanda alta de crianças e adultos em férias.
+      Prime Day da Amazon pode gerar comissões significativas — prepare conteúdo.
+
+  august:
+    name: "Agosto"
+    ad_cost_trend: medium
+    events:
+      - name: "Dia dos Pais"
+        date: "2º domingo (2026: 09/08)"
+        commercial_relevance: very_high
+        notes: "3ª ou 4ª maior data do varejo BR."
+      - name: "Shopee 8.8"
+        date: "08/08"
+        commercial_relevance: high
+      - name: "Agosto Lilás (prevenção à violência)"
+        date: "todo agosto"
+        commercial_relevance: low
+    categories_hot:
+      - presentes_pais
+      - eletronicos_masculinos
+      - ferramentas_casa
+      - bebidas_premium
+      - esportes
+      - moda_masculina
+    marketplace_promos:
+      shopee: "Shopee 8.8 + Semana dos Pais"
+      mercado_livre: "Dia dos Pais"
+      amazon_br: "Dia dos Pais"
+    content_opportunities:
+      - "Melhores presentes para pais que [hobby]"
+      - "Presentes tecnológicos para o Dia dos Pais"
+      - "Kits de churrasco e cervejaria para presentear"
+    affiliate_strategy: >
+      Ticket médio do Dia dos Pais tende a ser menor que Dia das Mães.
+      Eletrônicos, ferramentas e itens de hobby masculinos convertem bem.
+      Shopee 8.8 é a maior mega-sale do segundo semestre antes da Black Friday.
+
+  september:
+    name: "Setembro"
+    ad_cost_trend: low
+    events:
+      - name: "Dia do Cliente"
+        date: "15/09"
+        commercial_relevance: high
+        notes: "Data criada pelo varejo BR. Promoções generosas."
+      - name: "Início da Primavera"
+        date: "22/09"
+        commercial_relevance: low
+      - name: "Shopee 9.9"
+        date: "09/09"
+        commercial_relevance: high
+    categories_hot:
+      - eletronicos
+      - moda_primavera
+      - beleza
+      - casa_e_decoracao
+    marketplace_promos:
+      shopee: "Shopee 9.9 + Dia do Cliente"
+      mercado_livre: "Dia do Cliente"
+      amazon_br: "Dia do Cliente"
+    content_opportunities:
+      - "Melhores ofertas do Dia do Cliente [categoria]"
+      - "Moda primavera: o que comprar"
+    affiliate_strategy: >
+      Setembro tem ad cost baixo — excelente para publicar conteúdo evergreen
+      sem concorrência inflada. Dia do Cliente (15/09) tem boas promoções com
+      menor concorrência que Black Friday. Prepare conteúdo de Halloween para
+      audiências bilíngues (nichos de idiomas).
+
+  october:
+    name: "Outubro"
+    ad_cost_trend: medium
+    events:
+      - name: "Dia das Crianças"
+        date: "12/10"
+        commercial_relevance: very_high
+        notes: "Uma das maiores datas do varejo BR."
+      - name: "Halloween"
+        date: "31/10"
+        commercial_relevance: medium
+        notes: "Crescendo no Brasil. Forte em fantasias e doces."
+      - name: "Shopee 10.10"
+        date: "10/10"
+        commercial_relevance: high
+    categories_hot:
+      - brinquedos
+      - jogos_videogame
+      - fantasias_halloween
+      - doces_confeitaria
+      - roupas_infantis
+    marketplace_promos:
+      shopee: "Shopee 10.10 + Dia das Crianças"
+      mercado_livre: "Dia das Crianças"
+      amazon_br: "Dia das Crianças"
+    content_opportunities:
+      - "Melhores brinquedos para crianças de [faixa etária]"
+      - "Presentes tecnológicos para o Dia das Crianças"
+      - "Fantasias de Halloween DIY"
+    affiliate_strategy: >
+      Dia das Crianças: brinquedos e eletrônicos (games, tablets) lideram.
+      Comece a publicar conteúdo de Black Friday em meados de outubro para
+      capturar tráfego SEO antes do pico de busca em novembro.
+
+  november:
+    name: "Novembro"
+    ad_cost_trend: very_high
+    ad_cost_notes: "Black Friday e Cyber Monday. CPM pode dobrar em relação a meses normais."
+    events:
+      - name: "Black Friday"
+        date: "4ª sexta-feira (2026: 27/11)"
+        commercial_relevance: very_high
+        notes: "Maior data do e-commerce no Brasil."
+      - name: "Cyber Monday"
+        date: "2026: 30/11"
+        commercial_relevance: high
+      - name: "Black November"
+        date: "todo novembro"
+        commercial_relevance: very_high
+        notes: "Muitas lojas estendem promoções para o mês todo."
+      - name: "Shopee 11.11"
+        date: "11/11"
+        commercial_relevance: very_high
+        notes: "Single's Day — maior venda online global. Shopee e AliExpress são fortes."
+    categories_hot:
+      - eletronicos
+      - eletrodomesticos
+      - moda
+      - informatica
+      - beleza
+      - cursos_online
+      - jogos
+    marketplace_promos:
+      shopee: "Shopee 11.11 (Single's Day) + Black Friday"
+      mercado_livre: "Black November + Black Friday"
+      amazon_br: "Black Friday + Cyber Monday"
+    content_opportunities:
+      - "Melhores ofertas da Black Friday [categoria]"
+      - "Black Friday: vale a pena ou é furada? [produto]"
+      - "Preço histórico: [produto] está em promoção real?"
+      - "Shopee 11.11: os melhores cupons"
+    affiliate_strategy: >
+      MAIOR mês do ano para afiliados. Publique conteúdo de Black Friday em outubro
+      para rankar no Google antes do pico. Single's Day (11/11) no Shopee pode
+      superar o volume da Black Friday para afiliados de nicho. Cursos online têm
+      promoções agressivas na Hotmart/Kiwify — excelente para afiliados de infoproduto.
+
+  december:
+    name: "Dezembro"
+    ad_cost_trend: very_high
+    ad_cost_notes: >
+      Natal é a maior data de compras do ano. CPM altíssimo mas conversão também alta.
+      Prazo de entrega é fator crítico — conteúdo deve mencionar datas limite.
+    events:
+      - name: "Natal"
+        date: "25/12"
+        commercial_relevance: very_high
+        notes: "Maior data do varejo. Todo o mês é de alta."
+      - name: "Reveillon"
+        date: "31/12"
+        commercial_relevance: medium
+        notes: "Moda branca, viagens, entretenimento, bebidas."
+      - name: "Shopee 12.12"
+        date: "12/12"
+        commercial_relevance: very_high
+        notes: "Última mega-sale antes do Natal."
+    categories_hot:
+      - presentes_natal
+      - eletronicos
+      - brinquedos
+      - joias
+      - moda
+      - perfumes
+      - gastronomia_premium
+      - moda_branca_reveillon
+    marketplace_promos:
+      shopee: "Shopee 12.12"
+      mercado_livre: "Mega Natal"
+      amazon_br: "Natal"
+    content_opportunities:
+      - "Melhores presentes de Natal sob R$[valor]"
+      - "Ideias de presentes para [pessoa]: marido, esposa, filho"
+      - "Presentes de última hora — entrega garantida até Natal"
+      - "Moda branca para o Reveillon: onde comprar"
+    affiliate_strategy: >
+      Conteúdo de presentes com curadoria por valor e perfil do presenteado.
+      Alerta de prazo de entrega cria urgência legítima.
+      Shopee 12.12 pode ser ainda mais lucrativo que Black Friday por menor
+      concorrência de anunciantes. Prepare sequência de email para listas
+      com curadoria de presentes de Natal por perfil.

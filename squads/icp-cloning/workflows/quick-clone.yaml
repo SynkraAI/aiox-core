@@ -1,0 +1,62 @@
+# Quick Clone - Versão Simplificada (6-8 horas)
+
+name: quick-clone
+version: "1.0.0"
+description: |
+  Processo simplificado de clonagem para quando tempo é limitado.
+  Mantém qualidade mas reduz profundidade em algumas camadas.
+
+metadata:
+  estimated_time: "6-8 hours"
+  difficulty: intermediate
+  output_quality: "85-90% fidelity"
+  phases: 4
+
+phases:
+  - phase: 1
+    name: "Entrada & Extração Essencial"
+    duration: "2-3 hours"
+    steps:
+      - Briefing ICP (30 min)
+      - P0 + P0B (fundação)
+      - P1 + P2 + P3 (psicologia essencial)
+      - P7 (comportamento de compra)
+      - P13 (heurísticas)
+
+  - phase: 2
+    name: "Processamento SYNAPSE Lite"
+    duration: "1.5-2 hours"
+    steps:
+      - Consolidação rápida (3 módulos ao invés de 4)
+      - TSM simplificado (5 triplets ao invés de 8)
+      - MCC básico (5 domínios ao invés de 7)
+      - PSH shell (4 camadas ao invés de 6)
+
+  - phase: 3
+    name: "Humanização Core"
+    duration: "1.5-2 hours"
+    layers:
+      - Paradoxos (4 ao invés de 6)
+      - Memórias (5-7 ao invés de 10+)
+      - Meta-Axiomas (6 ao invés de 9)
+
+  - phase: 4
+    name: "Geração & Validação"
+    duration: "1.5-2 hours"
+    steps:
+      - System Prompt simplificado (600-800 linhas)
+      - KB essencial (6 docs ao invés de 12)
+      - Validação rápida (15Q + checklist 50)
+
+final_deliverables:
+  - SYSTEM_PROMPT_LITE.md (600-800 linhas)
+  - knowledge-base-lite/ (6 docs essenciais)
+  - validation-report-quick.md
+
+success_criteria:
+  - Checklist 50 score >= 85/100
+  - Fidelity score >= 85
+  - Funcional para uso geral
+
+estimated_total_time: "6-8 hours"
+quality_target: "85-90% fidelity (bom para MVP)"

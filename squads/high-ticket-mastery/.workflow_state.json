@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "workflow": "end-to-end-launch",
+  "started_at": null,
+  "completed_at": null,
+  "phases_completed": [],
+  "current_phase": null,
+  "vetos_triggered": [],
+  "red_flags": [],
+  "context_snapshot": {}
+}

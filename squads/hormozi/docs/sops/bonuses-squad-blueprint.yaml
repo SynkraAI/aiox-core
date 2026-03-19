@@ -1,0 +1,994 @@
+# Bonuses Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Offers - Alex Hormozi (Chapters 10 & 14)
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: bonuses
+  purpose: "Stack bonuses that expand price-value discrepancy until prospects cannot refuse"
+  domain: offer-creation
+  source_playbook: "$100M Offers - Chapters 10 & 14"
+
+  core_principle: |
+    A single offer is less valuable than the same offer broken into
+    component parts and stacked as bonuses. Each bonus increases the
+    discrepancy until it becomes "too good to refuse."
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: bonus-architect
+      role: "Design and orchestrate complete bonus stack for offers"
+      decisions:
+        - "Which deliverables become bonuses vs core offer"
+        - "Bonus sequencing and presentation order"
+        - "Partner bonus integration"
+      kpis:
+        - "Total bonus value vs main offer price"
+        - "Close rate improvement from bonuses"
+        - "Partner commission revenue"
+
+  tier_0_diagnosis:
+    - agent: asset-auditor
+      role: "Inventory existing assets that can become bonuses"
+      inputs:
+        - "Workshop/webinar recordings"
+        - "Tools, templates, checklists"
+        - "Partner relationships"
+        - "Customer obstacles list"
+      outputs:
+        - "Bonus candidate inventory"
+        - "Asset-to-obstacle mapping"
+        - "Gap analysis for missing bonuses"
+
+    - agent: obstacle-mapper
+      role: "Map customer obstacles to potential bonus solutions"
+      inputs:
+        - "Customer problem list"
+        - "Sales objection data"
+        - "Post-purchase feedback"
+      outputs:
+        - "Obstacle-bonus mapping"
+        - "Objection-specific bonus recommendations"
+        - "Next logical problem predictions"
+
+  tier_1_execution:
+    - agent: bonus-namer
+      role: "Create benefit-driven names for each bonus"
+      specialization: "Naming with benefit in title"
+      techniques:
+        - "Outcome-first naming"
+        - "Transformation language"
+        - "Value equation alignment"
+      examples:
+        - "Foolproof Budget Grocery System"
+        - "Never-Quit Accountability System"
+        - "Live-It-Up-While-You-Slim-Down Eating Out System"
+
+    - agent: proof-packager
+      role: "Create proof elements for each bonus"
+      specialization: "Statistics, testimonials, origin stories"
+      capabilities:
+        - "Find relevant statistics"
+        - "Gather customer results"
+        - "Craft origin stories"
+        - "Price justification"
+
+    - agent: future-pacer
+      role: "Paint vivid mental pictures of life with bonus benefits"
+      specialization: "Value equation alignment"
+      focus_areas:
+        - "Faster results visualization"
+        - "Easier process description"
+        - "Less sacrifice framing"
+        - "Higher success likelihood"
+
+  tier_2_judgment:
+    - agent: partner-negotiator
+      role: "Secure partner bonuses and commission deals"
+      capabilities:
+        - "Identify adjacent businesses"
+        - "Negotiate product/service trades"
+        - "Establish referral commissions"
+        - "Create group discount arrangements"
+      outcomes:
+        - "Partner bonus inventory"
+        - "Commission revenue streams"
+        - "Exclusive discount access"
+
+    - agent: scarcity-enhancer
+      role: "Add scarcity and urgency to bonuses"
+      techniques:
+        scarcity:
+          - "Exclusive to this program"
+          - "Limited quantity"
+          - "Never available elsewhere"
+        urgency:
+          - "Buy today bonus"
+          - "Action-taker rewards"
+          - "Time-limited inclusion"
+
+    - agent: stack-optimizer
+      role: "Optimize final bonus stack for maximum impact"
+      responsibilities:
+        - "Ensure value eclipses main offer"
+        - "Sequence for maximum psychological impact"
+        - "Balance tools vs trainings (70%+ tools)"
+        - "Validate obstacle coverage"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  bonus-architect:
+    id: bonus-architect
+    title: "Bonus Stack Orchestrator"
+    tier: orchestrator
+    icon: "🏗️"
+
+    purpose: |
+      Design complete bonus stacks that make offers irresistible.
+      Orchestrate the process from asset inventory to final presentation.
+
+    core_frameworks:
+      - name: "Price-Value Discrepancy"
+        principle: "Each bonus increases the gap until it snaps"
+      - name: "Tools > Training"
+        principle: "Lower effort = higher perceived value"
+      - name: "Eclipse Principle"
+        principle: "Bonus value should exceed main offer value"
+
+    decision_authority:
+      - "Bonus vs core offer classification"
+      - "Partner bonus inclusion"
+      - "Scarcity/urgency application"
+      - "Final stack composition"
+
+    inputs:
+      - "Complete offer structure"
+      - "Asset inventory"
+      - "Obstacle mapping"
+      - "Partner opportunities"
+
+    outputs:
+      - "Complete bonus stack"
+      - "Presentation scripts"
+      - "Partner agreements"
+      - "Value calculation"
+
+    success_metrics:
+      primary:
+        - name: "Bonus-to-Price Ratio"
+          target: ">2:1"
+          calculation: "Total bonus value / Main offer price"
+        - name: "Close Rate Improvement"
+          target: ">20%"
+      secondary:
+        - "All obstacles addressed by bonuses"
+        - "Tools/checklists >70% of bonuses"
+        - "Partner commission revenue"
+
+  asset-auditor:
+    id: asset-auditor
+    title: "Bonus Asset Auditor"
+    tier: tier_0
+    icon: "📦"
+
+    purpose: |
+      Inventory all existing assets that can become high-value bonuses.
+      Identify gaps that need new asset creation.
+
+    asset_categories:
+      recordings:
+        types: ["Workshops", "Webinars", "Events", "Interviews"]
+        value: "High perceived value, zero marginal cost"
+
+      tools:
+        types: ["Calculators", "Spreadsheets", "Software access"]
+        value: "HIGHEST value (lowest customer effort)"
+
+      templates:
+        types: ["Scripts", "Swipe files", "Email sequences", "Frameworks"]
+        value: "High value (work already done for them)"
+
+      checklists:
+        types: ["Step-by-step guides", "Quality checklists", "Audit templates"]
+        value: "High value (condenses complexity)"
+
+    audit_outputs:
+      - "Complete asset inventory"
+      - "Value assessment per asset"
+      - "Obstacle mapping potential"
+      - "Gap analysis for missing assets"
+      - "Creation priority recommendations"
+
+    source_quote: |
+      "Create the habit of recording every workshop, every webinar,
+      every event, every interview and use them as additional bonuses."
+
+  obstacle-mapper:
+    id: obstacle-mapper
+    title: "Obstacle-to-Bonus Mapper"
+    tier: tier_0
+    icon: "🗺️"
+
+    purpose: |
+      Map every customer obstacle to a potential bonus that proves
+      their limiting belief incorrect or solves their next problem.
+
+    mapping_principles:
+      obstacle_types:
+        - "Limiting beliefs about ability to succeed"
+        - "Perceived next problems they'll face"
+        - "Specific objections raised in sales"
+        - "Post-purchase concerns"
+
+      solution_requirements:
+        - "Bonus must directly address the obstacle"
+        - "Must prove limiting belief incorrect"
+        - "Must solve problem before they encounter it"
+
+    mapping_outputs:
+      - "Obstacle inventory"
+      - "Bonus-to-obstacle mapping"
+      - "Gap identification"
+      - "Priority ranking by impact"
+
+    source_quote: |
+      "Each [bonus] should address a specific concern/obstacle in the
+      prospects' minds about why they can't or won't have success
+      (the bonus should prove that their belief is incorrect)."
+
+  bonus-namer:
+    id: bonus-namer
+    title: "Benefit-Driven Naming Specialist"
+    tier: tier_1
+    icon: "✨"
+
+    purpose: |
+      Create compelling bonus names that communicate transformation
+      and benefit directly in the title.
+
+    naming_formula:
+      structure: "[Outcome/Benefit] + [Descriptive Name]"
+      examples:
+        - "Foolproof Budget Grocery System"
+        - "Finger-Lickin' Custom Meal Plan"
+        - "Live-It-Up-While-You-Slim-Down Eating Out System"
+        - "Never-Quit Accountability System"
+        - "Ultimate Tone-While-Travel Blueprint"
+
+    naming_principles:
+      - "Benefit must be in the name"
+      - "Name sells transformation, not the thing"
+      - "Use emotional/aspirational language"
+      - "Make outcome obvious from name alone"
+
+    quality_criteria:
+      - "Can reader understand benefit without explanation?"
+      - "Does it address a specific pain/desire?"
+      - "Is it memorable and shareable?"
+      - "Does it differentiate from generic names?"
+
+    source_quote: |
+      "Give them a special name that has a benefit in the title."
+
+  proof-packager:
+    id: proof-packager
+    title: "Bonus Proof Element Creator"
+    tier: tier_1
+    icon: "📊"
+
+    purpose: |
+      Create credible proof elements that demonstrate each bonus
+      delivers real value.
+
+    proof_types:
+      statistics:
+        description: "Data showing effectiveness"
+        example: "Users of this checklist complete projects 47% faster"
+
+      client_results:
+        description: "Testimonials and case studies"
+        example: "Sarah used this template to close her first $10k deal"
+
+      personal_experience:
+        description: "Creator's own results"
+        example: "I used this exact process to scale from $0 to $100M"
+
+      origin_story:
+        description: "How the bonus was created/discovered"
+        example: "I developed this after failing 17 times..."
+
+    proof_requirements:
+      - "Every bonus must have at least one proof element"
+      - "Proof must be credible and verifiable"
+      - "Match proof type to audience preferences"
+      - "Include specific numbers when possible"
+
+    source_quote: |
+      "Provide some proof (can be a stat, a past client, or personal
+      experience) to prove that this thing is valuable."
+
+  future-pacer:
+    id: future-pacer
+    title: "Future Pacing Specialist"
+    tier: tier_1
+    icon: "🔮"
+
+    purpose: |
+      Paint vivid mental pictures of life after using each bonus,
+      aligned with the Value Equation pillars.
+
+    value_equation_alignment:
+      faster:
+        description: "Achieve results in less time"
+        language: ["You'll achieve X in half the time", "Cuts weeks off your timeline"]
+
+      easier:
+        description: "Simpler process to follow"
+        language: ["Instead of struggling, you'll simply...", "No more confusion about..."]
+
+      less_sacrifice:
+        description: "Keep what they value"
+        language: ["Without giving up...", "You won't have to sacrifice..."]
+
+      higher_likelihood:
+        description: "Increased certainty of success"
+        language: ["Virtually guarantees...", "Makes it nearly impossible to fail..."]
+
+    future_pacing_structure:
+      - "Acknowledge current pain"
+      - "Describe life after using bonus"
+      - "Emphasize specific value equation benefit"
+      - "Make them feel the transformation"
+
+    source_quote: |
+      "Paint a vivid mental picture of what their life will be like
+      assuming they have already used it and are experiencing the benefits."
+
+  partner-negotiator:
+    id: partner-negotiator
+    title: "Partner Bonus Negotiator"
+    tier: tier_2
+    icon: "🤝"
+
+    purpose: |
+      Identify, approach, and negotiate with partner businesses
+      to create high-value bonuses at zero cost.
+
+    partner_identification:
+      criteria:
+        - "Not a direct competitor"
+        - "Serves same customer demographic"
+        - "Solves next logical problem"
+        - "Has products/services with clear value"
+
+      question: |
+        "What is the next natural thing they will want?"
+
+    negotiation_structure:
+      initial_trade:
+        offer: "Free exposure to your best prospects (paying customers)"
+        receive: "Products/services to include as bonuses"
+
+      commission_deal:
+        offer: "Qualified customer referrals"
+        receive: "Percentage or flat fee per referral"
+
+      group_discount:
+        offer: "Volume of customers at once"
+        receive: "Exclusive discount your customers can't get elsewhere"
+
+    example_partner_stack:
+      pain_clinic:
+        - partner: "Massage therapist"
+          bonus: "1-2 free massages"
+          commission: "$100 per person"
+        - partner: "Chiropractor"
+          bonus: "Two free adjustments"
+          value: "$100"
+        - partner: "Food company"
+          bonus: "Product discounts"
+          commission: "Free food for you"
+        - partner: "Health club"
+          bonus: "Free training + pool access"
+          commission: "$50 per signup"
+
+    triple_win_framework:
+      customer_wins: "Gets exclusive discounts/bonuses"
+      partner_wins: "Gets free marketing to qualified buyers"
+      you_win: "Better offer + commission revenue"
+
+    source_quote: |
+      "You can get other businesses to give you their services and
+      products as part of your bonuses in exchange for exposure to
+      your clients for free."
+
+  scarcity-enhancer:
+    id: scarcity-enhancer
+    title: "Scarcity & Urgency Specialist"
+    tier: tier_2
+    icon: "⏰"
+
+    purpose: |
+      Apply scarcity and urgency to bonuses to dramatically
+      increase their perceived value and conversion impact.
+
+    scarcity_techniques:
+      exclusive_access:
+        description: "Available only through this offer"
+        script: |
+          "Only people who sign up for program XYZ will have access
+          to my Bonuses #1, 2, 3 that are never for sale or available
+          anywhere else other than through this program."
+
+      limited_quantity:
+        description: "Physical or practical limits"
+        script: |
+          "I have 3 remaining tickets for my $5,000 virtual event,
+          if you buy this program, you can get one of the last 3
+          tickets as a bonus."
+
+    urgency_techniques:
+      today_only:
+        description: "Time-limited bonus inclusion"
+        script: |
+          "If you buy today, I will add the XYZ bonus which normally
+          costs $1,000, for free. And I'll do this because I want to
+          reward the action-takers."
+
+    key_distinction: |
+      Scarcity = Not time-limited but exclusively available
+      Urgency = Time-limited, buy TODAY or lose it
+
+    source_quote: |
+      "You can further enhance the value of your bonuses by adding
+      scarcity and urgency to the bonuses themselves (which puts
+      this technique on steroids)."
+
+  stack-optimizer:
+    id: stack-optimizer
+    title: "Bonus Stack Optimizer"
+    tier: tier_2
+    icon: "📈"
+
+    purpose: |
+      Optimize the final bonus stack for maximum psychological
+      impact and conversion effectiveness.
+
+    optimization_criteria:
+      value_ratio:
+        rule: "Bonus value must eclipse main offer value"
+        target: "2x-5x main offer price"
+        psychology: |
+          "If these are the bonuses, the main thing must be
+          even MORE valuable, right?"
+
+      tool_to_training_ratio:
+        rule: "Tools/checklists > additional training"
+        target: ">70% tools/templates"
+        reason: "Lower effort = higher perceived value"
+
+      obstacle_coverage:
+        rule: "Every major obstacle addressed"
+        validation: "Map each bonus to specific objection"
+
+      sequencing:
+        rule: "Order for maximum impact"
+        approach: "Build value progressively"
+
+    final_validation:
+      - "Every bonus has benefit-driven name"
+      - "Every bonus maps to an obstacle"
+      - "Every bonus has proof element"
+      - "Every bonus has justified price"
+      - "Total value exceeds main offer"
+      - "Scarcity/urgency applied where appropriate"
+
+    source_quote: |
+      "The value of the bonuses should eclipse the value of the
+      core offer. Psychologically, as you continue adding offers,
+      you keep expanding the price to value discrepancy."
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Phase I: Bonus Creation
+  - task: "Inventory existing assets"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Creative assessment required"
+
+  - task: "Create checklists/tools"
+    executor: Human
+    automation: LOW
+    guardrails: "Expertise required"
+
+  - task: "Record workshop/webinar"
+    executor: Human
+    automation: LOW
+    guardrails: "Quality production required"
+
+  - task: "Map obstacles to bonuses"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Must address real objections"
+
+  - task: "Classify bonus vs core offer"
+    executor: Human
+    automation: LOW
+    guardrails: "Wow factor assessment"
+
+  # Phase II: Bonus Presentation
+  - task: "Create benefit-driven names"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Benefit must be in title"
+
+  - task: "Write problem connection"
+    executor: Hybrid
+    automation: HIGH
+    guardrails: "Must be relevant to stated concern"
+
+  - task: "Describe bonus deliverable"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Be specific about what they receive"
+
+  - task: "Craft origin story"
+    executor: Human
+    automation: LOW
+    guardrails: "Must be authentic"
+
+  - task: "Write future pacing"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Align with value equation"
+
+  - task: "Create proof element"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Must be credible"
+
+  - task: "Assign and justify price"
+    executor: Human
+    automation: LOW
+    guardrails: "Must be believable"
+
+  # Phase III: 1-on-1 Presentation
+  - task: "Ask for sale first"
+    executor: Human
+    automation: LOW
+    guardrails: "Only in 1-on-1 context"
+
+  - task: "Reveal surprise bonuses post-purchase"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Automated delivery sequence"
+
+  - task: "Match bonus to objection"
+    executor: Human
+    automation: LOW
+    guardrails: "Real-time judgment required"
+
+  - task: "Add bonuses instead of discount"
+    executor: Human
+    automation: LOW
+    guardrails: "Never discount main offer"
+
+  # Phase IV: Bonus Enhancement
+  - task: "Add scarcity to bonuses"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Scarcity must be genuine"
+
+  - task: "Add urgency to bonuses"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Urgency must be genuine"
+
+  # Phase V: Partner Bonuses
+  - task: "Identify adjacent businesses"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Not direct competitors"
+
+  - task: "Negotiate partner bonuses"
+    executor: Human
+    automation: LOW
+    guardrails: "Win-win required"
+
+  - task: "Negotiate referral commissions"
+    executor: Human
+    automation: LOW
+    guardrails: "Track ROI"
+
+  - task: "Negotiate group discounts"
+    executor: Human
+    automation: LOW
+    guardrails: "Must be exclusive"
+
+  - task: "Create grand slam partner offers"
+    executor: Human
+    automation: LOW
+    guardrails: "Apply full framework to each"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Benefit Name Gate"
+    transition: "Asset → Named Bonus"
+    condition: "name_contains_benefit == true"
+    type: blocking
+    failure_action: "Rewrite name with benefit"
+
+  QG-002:
+    name: "Obstacle Mapping Gate"
+    transition: "Bonus → Presentation"
+    condition: "maps_to_specific_obstacle == true"
+    type: blocking
+    failure_action: "Identify obstacle or remove bonus"
+
+  QG-003:
+    name: "Proof Element Gate"
+    transition: "Bonus → Final Stack"
+    condition: "has_proof_element == true"
+    type: blocking
+    failure_action: "Create proof (stat, testimonial, or story)"
+
+  QG-004:
+    name: "Price Justification Gate"
+    transition: "Bonus → Final Stack"
+    condition: "price_justified == true"
+    type: warning
+    failure_action: "Research market pricing"
+
+  QG-005:
+    name: "Value Eclipse Gate"
+    transition: "Stack → Offer Integration"
+    condition: "total_bonus_value > main_offer_price"
+    type: warning
+    failure_action: "Add more bonuses or increase justified prices"
+
+  QG-006:
+    name: "Tool Ratio Gate"
+    transition: "Stack → Offer Integration"
+    condition: "tools_and_checklists >= 70%"
+    type: warning
+    failure_action: "Convert trainings to tools where possible"
+
+  QG-007:
+    name: "No Discount Gate"
+    transition: "Objection → Response"
+    condition: "response != price_reduction"
+    type: blocking
+    failure_action: "Add bonus instead of discounting"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  bonus_creation_workflow:
+    trigger: "New offer being created or existing offer being enhanced"
+    steps:
+      - step: 1
+        agent: asset-auditor
+        action: "Inventory all existing assets"
+        output: "Asset inventory list"
+
+      - step: 2
+        agent: obstacle-mapper
+        action: "Map customer obstacles"
+        output: "Obstacle list with priority ranking"
+
+      - step: 3
+        agent: obstacle-mapper
+        action: "Match assets to obstacles"
+        output: "Asset-obstacle mapping"
+
+      - step: 4
+        agent: bonus-architect
+        action: "Identify gaps and prioritize creation"
+        output: "Asset creation priorities"
+
+      - step: 5
+        agent: bonus-architect
+        action: "Classify bonus vs core offer"
+        output: "Final bonus candidate list"
+
+  bonus_presentation_workflow:
+    trigger: "Bonus candidates identified"
+    steps:
+      - step: 1
+        agent: bonus-namer
+        action: "Create benefit-driven name"
+        gate: QG-001
+
+      - step: 2
+        agent: obstacle-mapper
+        action: "Write problem connection"
+        gate: QG-002
+
+      - step: 3
+        agent: proof-packager
+        action: "Craft origin story"
+        output: "Origin narrative"
+
+      - step: 4
+        agent: future-pacer
+        action: "Write future pacing"
+        output: "Transformation description"
+
+      - step: 5
+        agent: proof-packager
+        action: "Create proof element"
+        gate: QG-003
+
+      - step: 6
+        agent: bonus-architect
+        action: "Assign and justify price"
+        gate: QG-004
+
+  partner_bonus_workflow:
+    trigger: "Seeking additional high-value bonuses at zero cost"
+    steps:
+      - step: 1
+        agent: partner-negotiator
+        action: "Identify adjacent businesses"
+        output: "Partner prospect list"
+
+      - step: 2
+        agent: partner-negotiator
+        action: "Initial outreach"
+        output: "Partner responses"
+
+      - step: 3
+        agent: partner-negotiator
+        action: "Negotiate product/service trade"
+        output: "Partner bonus agreement"
+
+      - step: 4
+        agent: partner-negotiator
+        action: "Negotiate referral commission"
+        output: "Commission agreement"
+
+      - step: 5
+        agent: partner-negotiator
+        action: "Negotiate group discount"
+        output: "Exclusive discount access"
+
+      - step: 6
+        agent: bonus-architect
+        action: "Apply grand slam framework to partner bonus"
+        output: "Enhanced partner bonus presentation"
+
+  stack_optimization_workflow:
+    trigger: "All bonuses created and presented"
+    steps:
+      - step: 1
+        agent: stack-optimizer
+        action: "Calculate total bonus value"
+        gate: QG-005
+
+      - step: 2
+        agent: stack-optimizer
+        action: "Verify tool/training ratio"
+        gate: QG-006
+
+      - step: 3
+        agent: stack-optimizer
+        action: "Verify obstacle coverage"
+        output: "Coverage report"
+
+      - step: 4
+        agent: scarcity-enhancer
+        action: "Apply scarcity to appropriate bonuses"
+        output: "Scarcity-enhanced bonuses"
+
+      - step: 5
+        agent: scarcity-enhancer
+        action: "Apply urgency to appropriate bonuses"
+        output: "Urgency-enhanced bonuses"
+
+      - step: 6
+        agent: stack-optimizer
+        action: "Determine optimal sequencing"
+        output: "Final bonus stack with presentation order"
+
+  one_on_one_sales_workflow:
+    trigger: "1-on-1 sales conversation"
+    steps:
+      - step: 1
+        action: "Present core offer"
+        executor: Human
+        output: "Initial close attempt"
+
+      - step: 2
+        condition: "IF prospect says YES"
+        action: "Reveal bonuses as surprise"
+        executor: Worker
+        output: "Wow experience, reinforced decision"
+
+      - step: 3
+        condition: "IF prospect says NO"
+        action: "Identify specific objection"
+        executor: Human
+        output: "Objection identified"
+
+      - step: 4
+        action: "Match bonus to objection"
+        executor: Human
+        output: "Targeted bonus offer"
+
+      - step: 5
+        action: "Ask 'Fair enough?'"
+        executor: Human
+        output: "Second close attempt"
+
+      - step: 6
+        condition: "IF still no"
+        action: "Add another matching bonus"
+        gate: QG-007
+        output: "Third close attempt"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    bonus_to_price_ratio:
+      formula: "Total Bonus Value / Main Offer Price"
+      target: ">2:1"
+      excellent: ">5:1"
+
+    close_rate_improvement:
+      formula: "(Close Rate with Bonuses - Close Rate without) / Close Rate without"
+      target: ">20%"
+
+  secondary:
+    obstacle_coverage:
+      formula: "Obstacles Addressed / Total Obstacles"
+      target: "100%"
+
+    tool_ratio:
+      formula: "Tools and Checklists / Total Bonuses"
+      target: ">70%"
+
+    partner_commission_revenue:
+      formula: "Monthly revenue from partner referrals"
+      target: "Incremental profit stream"
+
+  by_phase:
+    creation:
+      - "Assets inventoried"
+      - "Obstacles mapped"
+      - "Gaps identified"
+
+    presentation:
+      - "All bonuses named with benefits"
+      - "All bonuses have proof"
+      - "All prices justified"
+
+    optimization:
+      - "Value exceeds main offer"
+      - "Scarcity/urgency applied"
+      - "Optimal sequencing determined"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Bonuses not improving close rate"
+    possible_causes:
+      - "Bonuses don't address real obstacles"
+      - "Names don't communicate value"
+      - "Proof elements not credible"
+    diagnosis:
+      - "Survey lost prospects on objections"
+      - "Test name recognition"
+      - "Verify proof sources"
+    solutions:
+      - "Remap bonuses to actual objections"
+      - "Rewrite names with benefits"
+      - "Add stronger proof elements"
+
+  - symptom: "Prospects only want bonuses"
+    possible_causes:
+      - "Core offer perceived as weak"
+      - "Bonuses eclipsing too much"
+      - "Scarcity not properly applied"
+    diagnosis:
+      - "Compare core offer value perception"
+      - "Evaluate bonus prominence"
+    solutions:
+      - "Strengthen core offer presentation"
+      - "Apply exclusive scarcity to bonuses"
+      - "Rebalance presentation emphasis"
+
+  - symptom: "Partners not agreeing to deals"
+    possible_causes:
+      - "Poor value proposition for partner"
+      - "Approaching competitors"
+      - "Customer quality concerns"
+    diagnosis:
+      - "Review pitch effectiveness"
+      - "Verify non-competing status"
+      - "Share customer demographics"
+    solutions:
+      - "Lead with exposure value"
+      - "Target truly adjacent businesses"
+      - "Provide customer quality proof"
+
+  - symptom: "Too many bonuses overwhelming presentation"
+    possible_causes:
+      - "No prioritization of bonuses"
+      - "Including low-value items"
+      - "Poor sequencing"
+    diagnosis:
+      - "Rank bonuses by impact"
+      - "Evaluate value of each"
+    solutions:
+      - "Lead with highest-impact bonuses"
+      - "Save extras for post-purchase surprise"
+      - "Remove low-impact bonuses"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Specific price justification formulas"
+    severity: Medium
+    clarification_needed: "How to calculate believable bonus prices"
+
+  - id: GAP-002
+    description: "Partner outreach templates"
+    severity: Low
+    note: "Basic framework provided, specifics context-dependent"
+
+  - id: GAP-003
+    description: "Commission rate benchmarks by industry"
+    severity: Medium
+    clarification_needed: "Standard referral rates for different niches"
+
+  - id: GAP-004
+    description: "Bonus delivery systems"
+    severity: Medium
+    clarification_needed: "Technical implementation for bonus access"
+
+  - id: GAP-005
+    description: "Legal considerations for partner agreements"
+    severity: High
+    clarification_needed: "Contract templates and compliance requirements"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 7
+  workflows_documented: 5
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

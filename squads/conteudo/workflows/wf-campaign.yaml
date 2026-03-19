@@ -1,0 +1,125 @@
+name: wf-campaign
+description: Workflow de criacao de campanha multi-formato — do planejamento a entrega coerente com calendario
+version: "2.0"
+
+phases:
+  - id: planejamento
+    name: Planejamento da Campanha
+    agent: content-chief
+    description: Coletar briefing completo e definir estrategia da campanha multi-formato
+    elicit: true
+    steps:
+      - Perguntar tema central da campanha
+      - Perguntar publico-alvo e avatar especifico
+      - Perguntar intencao principal (lancamento, nurture, conversao, awareness)
+      - Perguntar oferta e CTA principal
+      - Definir duracao da campanha (dias/semanas)
+      - Definir formatos inclusos (carrossel + reels + stories)
+      - Mapear narrativa unificada que conecta todas as pecas
+      - Apresentar plano ao usuario (1. Confirmar, 2. Ajustar, 3. Repensar)
+    task: plan-content
+    outputs:
+      - tema_central
+      - publico_alvo
+      - intencao
+      - oferta
+      - duracao
+      - formatos_definidos
+      - narrativa_unificada
+    checkpoint: Plano da campanha aprovado pelo usuario
+    veto_condition: Narrativa unificada ausente — nao criar pecas sem fio condutor
+
+  - id: criacao_multi_formato
+    name: Criacao Multi-Formato
+    agent: dynamic
+    description: Criar todas as pecas da campanha em paralelo com coerencia narrativa
+    depends_on: [planejamento]
+    elicit: true
+    steps:
+      - Criar carrossel principal da campanha (hook + argumentacao + CTA)
+      - Criar roteiro de Reels complementar (angulo diferente, mesmo tema)
+      - Criar sequencia de Stories de suporte (bastidores, prova social, urgencia)
+      - Garantir que cada peca reforce a narrativa central
+      - Apresentar todas as pecas ao usuario para aprovacao
+    task_routing:
+      carrossel: create-carousel
+      reels: create-reels
+      stories: create-stories
+    tasks:
+      - create-hook-batch
+    outputs:
+      - carrossel_campanha
+      - roteiro_reels
+      - sequencia_stories
+    checkpoint: Todas as pecas criadas e aprovadas pelo usuario
+    veto_condition: Usuario rejeitou alguma peca — ajustar antes de validar
+
+  - id: validacao_cruzada
+    name: Validacao Cruzada pelo Oraculo
+    agent: content-validator
+    description: Validar cada peca individualmente pelos padroes do oraculo
+    depends_on: [criacao_multi_formato]
+    elicit: false
+    steps:
+      - Aplicar oraculo-posts no carrossel
+      - Aplicar oraculo-reels no roteiro de reels
+      - Verificar tom imperial e concisao em todas as pecas
+      - Verificar progressao emocional em cada formato
+      - Calcular score individual por peca
+      - Reescrever pecas com score < 80%
+    task: audit-content
+    retry_on_fail: true
+    max_retries: 3
+    outputs:
+      - scores_individuais
+      - pecas_validadas
+      - feedback_por_peca
+    checkpoint: Todas as pecas com score >= 80% no oraculo
+    veto_condition: Qualquer peca com score < 80% apos 3 tentativas — escalar para content-chief
+
+  - id: coerencia
+    name: Verificacao de Coerencia
+    agent: content-chief
+    description: Garantir que todas as pecas funcionam como campanha unificada
+    depends_on: [validacao_cruzada]
+    elicit: false
+    steps:
+      - Verificar alinhamento de tom entre carrossel, reels e stories
+      - Verificar que a narrativa central esta presente em todas as pecas
+      - Verificar que CTAs se complementam (nao competem entre si)
+      - Verificar progressao logica da campanha (awareness → interesse → acao)
+      - Ajustar inconsistencias encontradas
+      - Validar que cada formato cumpre seu papel na campanha
+    outputs:
+      - relatorio_coerencia
+      - ajustes_realizados
+      - aprovacao_campanha
+    checkpoint: Campanha coerente e alinhada em todos os formatos
+    veto_condition: Inconsistencia critica entre pecas — voltar para criacao
+
+  - id: entrega
+    name: Entrega Final da Campanha
+    agent: content-chief
+    description: Entregar campanha completa com calendario de publicacao e metricas esperadas
+    depends_on: [coerencia]
+    elicit: false
+    steps:
+      - Montar calendario de publicacao (dia, horario, formato, plataforma)
+      - Formatar cada peca no padrao de entrega
+      - Incluir notas de execucao por formato (dimensoes, hashtags, musica)
+      - Definir metricas esperadas por peca (alcance, engajamento, conversao)
+      - Sugerir proximos passos pos-campanha (retargeting, remarketing, nurture)
+    outputs:
+      - campanha_completa
+      - calendario_publicacao
+      - metricas_esperadas
+      - proximos_passos
+    checkpoint: Campanha entregue com calendario e metricas definidos
+    veto_condition: Pecas nao validadas pelo oraculo ou coerencia nao verificada — nao entregar sem validacao completa
+
+metricas:
+  score_minimo_oraculo: 80
+  max_retries_validacao: 3
+  formatos_obrigatorios: [carrossel, reels, stories]
+  coerencia_narrativa: obrigatoria
+  calendario_publicacao: obrigatorio

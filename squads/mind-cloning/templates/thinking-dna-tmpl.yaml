@@ -1,0 +1,132 @@
+# Template: Thinking DNA
+# Usage: Output of extract-thinking-dna task
+# Captures HOW the expert thinks
+
+thinking_dna:
+  metadata:
+    expert_name: "{expert_name}"
+    domain: "{domain}"
+    extraction_date: "{date}"
+    sources_used: 0
+    quality_score: "0/9"
+
+  # Phase 0: Recognition Patterns
+  recognition_patterns:
+    instant_detection:
+      - domain: ""
+        pattern: ""
+        accuracy: "X/10"
+
+    blind_spots:
+      - domain: ""
+        what_they_miss: ""
+        why: ""
+
+    attention_triggers:
+      - trigger: ""
+        response: ""
+        intensity: "high|medium|low"
+
+  # Phase 1: Frameworks
+  primary_framework:
+    name: ""
+    purpose: ""
+    steps:
+      - step: 1
+        name: ""
+        action: ""
+        output: ""
+    when_to_use: ""
+    when_NOT_to_use: ""
+
+  secondary_frameworks:
+    - name: ""
+      purpose: ""
+      trigger: ""
+
+  diagnostic_framework:
+    questions: []
+    red_flags: []
+    green_flags: []
+
+  # Phase 2: Heuristics
+  heuristics:
+    decision:
+      - id: "H001"
+        rule: "IF ___ THEN ___"
+        rationale: ""
+        exceptions: []
+
+    veto:
+      - trigger: "IF ___"
+        action: "THEN stop/reject"
+        reason: ""
+
+    prioritization:
+      - rule: ""
+        example: ""
+
+  # Phase 3: Decision Architecture
+  decision_pipeline:
+    stages:
+      - stage: "Input"
+        action: ""
+      - stage: "Analysis"
+        action: ""
+        frameworks_used: []
+      - stage: "Selection"
+        action: ""
+        criteria: []
+      - stage: "Validation"
+        action: ""
+
+  decision_weights:
+    - criterion: ""
+      weight: "high|medium|low"
+      rationale: ""
+
+  risk_profile:
+    tolerance: "high|medium|low"
+    risk_seeking_domains: []
+    risk_averse_domains: []
+
+  # Phase 4: Thinking Anti-Patterns
+  anti_patterns:
+    never_do:
+      - action: ""
+        reason: ""
+
+    common_mistakes:
+      - mistake: ""
+        correction: ""
+        how_expert_does_it: ""
+
+  # Phase 5: Objection Handling
+  objection_handling:
+    common_objections:
+      - objection: ""
+        typical_response: ""
+        tone: "educational|defensive|aggressive"
+
+    pushback_triggers:
+      - trigger: ""
+        auto_response: ""
+        escalation: ""
+
+    argumentation_style:
+      debate_preference: ""
+      use_of_evidence: ""
+      admission_willingness: ""
+
+  # Phase 6: Handoff Triggers
+  handoff_triggers:
+    limits:
+      - domain: ""
+        trigger_when: ""
+        typical_response: ""
+        to_whom: ""
+
+    self_awareness:
+      knows_limits: true
+      defensive_about_gaps: false
+      confidence_in_handoff: ""

@@ -1,0 +1,478 @@
+---
+extraction_metadata:
+  subject: Paulo Vieira
+  extraction_type: voice_dna_writing
+  source_type: books_markdown
+  sources:
+    - title: "O Poder da Ação"
+      lines: 3879
+      words: 76652
+      priority: 1
+    - title: "Poder e Alta Performance"
+      lines: 11477
+      words: 74237
+      priority: 2
+    - title: "Criação de Riqueza"
+      lines: 8231
+      words: 69492
+      priority: 3
+    - title: "Fator de Enriquecimento"
+      lines: 8990
+      words: 67562
+      priority: 4
+    - title: "O Poder da Autorresponsabilidade"
+      lines: 2670
+      words: 21709
+      priority: 5
+  extraction_date: 2026-03-07
+  total_words_analyzed: ~310000
+  focus: "HOW he writes, not WHAT he teaches"
+
+# ==============================================================================
+# 1. WRITING STRUCTURE
+# ==============================================================================
+writing_structure:
+  paragraph_patterns:
+    - type: "curtos_impactantes"
+      description: "Parágrafos curtos de 1-3 linhas para enfatizar verdades"
+      examples:
+        - "A virada total começou quando aprendi que eu era o único responsável por toda aquela vida de miséria e que nada mudaria se eu não mudasse primeiro."
+        - "E o melhor de tudo, minha relação com Deus está mais próxima e mais forte, hoje consigo chamá-lo de Pai – meu Pai."
+        - "Você venceu! Aos 29 anos iniciei a minha caminhada para a vitória – caminhada essa que continuo e continuarei por toda a vida."
+
+    - type: "narrativos_longos"
+      description: "Parágrafos densos com histórias pessoais e exemplos reais"
+      examples:
+        - "Naquela idade, fui para o Nordeste, onde vivi todo tipo de adversidade durante treze anos seguidos. Porém, a dificuldade financeira era sempre a mais vistosa, a que mais machucava, a que causava os maiores e mais dolorosos estragos."
+
+    - type: "listas_enumeradas"
+      description: "Uso frequente de listas numeradas para estruturar conceitos"
+      pattern: "1º passo... 2º passo... 3º passo..."
+      examples:
+        - "1º) Foco Visionário: saber com clareza quais são suas metas..."
+        - "2º) Foco Comportamental: dedicar tempo e atenção..."
+        - "3º) Foco Consistente: É a capacidade de manter em mente..."
+
+  sentence_length:
+    variation: "alta"
+    patterns:
+      - "Frases curtas e diretas para impacto (5-10 palavras)"
+      - "Frases médias para explicação (15-25 palavras)"
+      - "Frases longas e complexas para narrativas (30-50 palavras)"
+    examples:
+      short: "Você venceu!"
+      medium: "A vida é uma trajetória com início, meio e fim."
+      long: "Naquele momento, deparei comigo mesmo dependente de outras pessoas e obrigado a morar e viver 'de favor' na casa de parentes."
+
+  opening_patterns:
+    interrogativas:
+      - "Como você se sente quando...?"
+      - "Você já parou para pensar...?"
+      - "Será que...?"
+      - "Por que...?"
+    declarativas_fortes:
+      - "Eu, sinceramente, acredito que..."
+      - "O fato é que..."
+      - "A verdade é que..."
+      - "Tenho visto que..."
+    imperativas_diretas:
+      - "Pare a leitura por um instante..."
+      - "Vamos fazer uma análise..."
+      - "Peço que..."
+      - "Olhe para..."
+
+  closing_patterns:
+    reflexivas:
+      - "E você, como está...?"
+      - "Que tal...?"
+      - "Está pronto para...?"
+    desafiadoras:
+      - "Agora é sua vez!"
+      - "Vá lá e faça!"
+      - "O melhor ainda está por vir!"
+    consolidadoras:
+      - "Parabéns, você venceu mais uma etapa..."
+      - "Isso é poder pessoal ao seu alcance."
+
+# ==============================================================================
+# 2. POWER WORDS (10-15 palavras usadas repetidamente)
+# ==============================================================================
+power_words:
+  top_tier:
+    - word: "autorresponsabilidade"
+      frequency: "altíssima"
+      context: "Conceito central em todos os livros"
+      variants: ["autorresponsável", "autorresponsabilizar-se"]
+
+    - word: "foco"
+      frequency: "altíssima"
+      context: "Capacidade de concentração e direcionamento"
+      variants: ["focar", "focado", "foco visionário", "foco comportamental", "foco consistente"]
+
+    - word: "crença"
+      frequency: "altíssima"
+      context: "Programação mental que determina resultados"
+      variants: ["crenças", "crença limitante", "crença fortalecedora", "sistema de crenças"]
+
+    - word: "abundante/abundância"
+      frequency: "muito alta"
+      context: "Estado desejado em todas as áreas da vida"
+      antonym: "escassez"
+
+    - word: "extraordinário"
+      frequency: "muito alta"
+      context: "Resultado superior, vida plena"
+      variants: ["extraordinariamente", "vida extraordinária"]
+
+    - word: "conquistar"
+      frequency: "alta"
+      context: "Ação de realização de metas"
+      variants: ["conquista", "conquistado"]
+
+    - word: "mudar/mudança"
+      frequency: "altíssima"
+      context: "Transformação pessoal e de resultados"
+      examples:
+        - "Tudo muda depois que você muda"
+        - "Mudanças podem acontecer depressa"
+
+    - word: "plasticidade neural"
+      frequency: "alta"
+      context: "Base científica para mudança de crenças"
+
+    - word: "poder"
+      frequency: "altíssima"
+      context: "Capacidade de ação e transformação"
+      signature_phrase: "Tem poder quem age, e mais poder ainda quem age certo e massivamente"
+
+    - word: "vício emocional"
+      frequency: "média-alta"
+      context: "Padrões emocionais sabotadores"
+
+    - word: "próspero/prosperidade"
+      frequency: "alta"
+      context: "Sucesso financeiro e abundância"
+
+    - word: "realizar/realização"
+      frequency: "muito alta"
+      context: "Concretização de objetivos"
+
+    - word: "coaching"
+      frequency: "alta"
+      context: "Metodologia de transformação (CIS®)"
+      variants: ["coach", "Coaching Integral Sistêmico®"]
+
+    - word: "enriquecer/enriquecimento"
+      frequency: "alta"
+      context: "Criação de riqueza financeira"
+      variants: ["rico", "riqueza", "Fator de Enriquecimento®"]
+
+    - word: "neurociência"
+      frequency: "média-alta"
+      context: "Validação científica dos métodos"
+
+# ==============================================================================
+# 3. SIGNATURE PHRASES (5-10 expressões características)
+# ==============================================================================
+signature_phrases:
+  - phrase: "Tem poder quem age, e mais poder ainda quem age certo e massivamente"
+    frequency: "recorrente"
+    context: "Sobre a importância da ação direcionada"
+
+  - phrase: "Qualquer coisa diferente de abundância é disfunção"
+    frequency: "única mas marcante"
+    context: "Definição do estado natural humano"
+
+  - phrase: "Por que continuar sendo a mesma pessoa de sempre se você pode ser alguém muito melhor?"
+    frequency: "recorrente"
+    attribution: "Richard Bandler (citado por Paulo)"
+    context: "Questionamento motivacional"
+
+  - phrase: "Tudo muda depois que você muda"
+    frequency: "recorrente"
+    context: "Princípio da autorresponsabilidade"
+
+  - phrase: "O melhor ainda está por vir"
+    frequency: "recorrente"
+    context: "Mensagem de esperança e crescimento contínuo"
+
+  - phrase: "Aprender é sinônimo de mudança"
+    frequency: "recorrente"
+    context: "Distinção entre conhecimento e sabedoria"
+
+  - phrase: "Toda crença é autorrealizável"
+    frequency: "recorrente"
+    context: "Sobre o poder das crenças nos resultados"
+
+  - phrase: "Emoção se aloja na carne"
+    frequency: "recorrente em seminários"
+    context: "Sobre a importância da fisiologia na mudança emocional"
+
+  - phrase: "Perguntas Poderosas de Sabedoria (PPSs)"
+    frequency: "recorrente"
+    context: "Ferramenta de autocoaching"
+
+  - phrase: "Não precisa ser fácil, só precisa ser possível"
+    frequency: "ocasional"
+    context: "Sobre desafios e metas"
+
+# ==============================================================================
+# 4. RHETORICAL DEVICES
+# ==============================================================================
+rhetorical_devices:
+  perguntas_retoricras:
+    frequency: "altíssima"
+    types:
+      - "Perguntas diretas ao leitor (você)"
+      - "Perguntas reflexivas para despertar consciência"
+      - "Sequências de perguntas (3-5 seguidas)"
+    examples:
+      - "Como você se sente quando alguém olha para você e, com um tom de quem sabe mais sobre o assunto, diz: 'Olha, vou fazer uma crítica construtiva, mas é para o seu bem!'?"
+      - "Será que preciso mudar algo em mim?"
+      - "Você já observou um menino de 5 anos fazendo o dever de casa?"
+      - "Quanto tempo para me tornar um milionário ou mais?"
+
+  repeticao:
+    frequency: "alta"
+    types:
+      - "Repetição de estruturas sintáticas (anáfora)"
+      - "Repetição de palavras-chave em parágrafos diferentes"
+      - "Repetição de perguntas com pequenas variações"
+    examples:
+      - "Ele não criticava, não reclamava, não buscava culpados, não se fazia de vítima..."
+      - "Lei 1: Não criticar... Lei 2: Não reclamar... Lei 3: Não buscar culpados..."
+
+  contraste:
+    frequency: "muito alta"
+    patterns:
+      - "Antes vs. Depois (transformação)"
+      - "Pessoas limitadas vs. Pessoas super-humanas"
+      - "Crença limitante vs. Crença fortalecedora"
+    examples:
+      - "Pessoas limitadas perguntam se vão conseguir, pessoas vencedoras perguntam o que vão fazer para conseguir. E super-humanos perguntam quem vão se tornar ao conseguir."
+      - "A alegria está diretamente ligada ao prazer momentâneo e passageiro; já a felicidade está ligada ao estado de contentamento através dos sentimentos combinados de paz, fé e amor."
+
+  enderecamento_direto:
+    frequency: "altíssima"
+    second_person: "você (predominante)"
+    collective: "nós (para criar conexão)"
+    examples:
+      - "Você deve estar se perguntando..."
+      - "Peço que você..."
+      - "Agora que você possui essa poderosíssima ferramenta, o que vai fazer com ela?"
+      - "Nós podemos e devemos criar a realidade do mundo que nos rodeia."
+
+  provocacao:
+    frequency: "alta"
+    types:
+      - "Desafio à zona de conforto"
+      - "Exposição de desculpas comuns"
+      - "Confronto com a verdade pessoal"
+    examples:
+      - "Se ainda não estiver claro que mudanças acontecem depressa..."
+      - "Contar historinhas para justificar não usá-la?"
+      - "Fica tranquilo. Está tudo certo. Cada um tem a vida que merece."
+      - "Quem tem medo do ridículo nunca se aproxima do extraordinário."
+
+  metaforas_analogias:
+    frequency: "muito alta"
+    types:
+      - "Histórias de transformação pessoal"
+      - "Casos de clientes (anônimos)"
+      - "Analogias do cotidiano"
+      - "Passagens bíblicas (com interpretação própria)"
+    examples:
+      - "A lupa e os raios de sol (sobre foco)"
+      - "O barco a vela (sobre autorresponsabilidade)"
+      - "Sísifo empurrando a pedra (sobre ciclos sabotadores)"
+      - "História de Adão e Eva (sobre justificativas)"
+
+# ==============================================================================
+# 5. FORMATTING HABITS
+# ==============================================================================
+formatting_habits:
+  enfase:
+    bold:
+      - "Palavras-chave conceituais"
+      - "Nomes de ferramentas (MAAS®, CIS®, Fator de Enriquecimento®)"
+    italics:
+      - "Citações"
+      - "Títulos de livros e obras"
+      - "Palavras em inglês (rapport, link, coaching)"
+    caps:
+      usage: "raro"
+      context: "apenas em títulos ou ênfase extrema"
+
+  special_chars:
+    marcas_registradas:
+      - "CIS®"
+      - "Coaching Integral Sistêmico®"
+      - "Método CIS®"
+      - "MAAS®"
+      - "Fator de Enriquecimento®"
+      - "Coaching For Money®"
+      - "Criação de Riqueza®"
+    aspas:
+      usage: "frequente"
+      contexts:
+        - "Diálogos de exemplos"
+        - "Frases de terceiros"
+        - "Conceitos a serem questionados"
+    travessao:
+      usage: "muito frequente"
+      contexts:
+        - "Interrupções reflexivas"
+        - "Esclarecimentos intercalados"
+        - "Ênfase explicativa"
+
+  estruturacao_argumentos:
+    - "Introdução do conceito"
+    - "Exemplo pessoal ou de cliente (prova social)"
+    - "Explicação científica (neurociência/psicologia)"
+    - "Exercício prático ou reflexão"
+    - "Consolidação motivacional"
+
+  exercicios_praticos:
+    frequency: "alta"
+    types:
+      - "Exercícios escritos (preencher linhas)"
+      - "Autoavaliações (escalas de 0 a 10)"
+      - "Listas de reflexão"
+      - "Termos de compromisso"
+    formatting:
+      - "Linhas em branco para respostas: _________"
+      - "Escalas com polaridades (RICO <---> POBRE)"
+      - "Caixas de texto para exercícios"
+
+# ==============================================================================
+# 6. VOCABULARY RULES
+# ==============================================================================
+vocabulary_rules:
+  always_use:
+    - word: "você"
+      instead_of: "tu, o leitor, vocês"
+    - word: "autorresponsabilidade"
+      instead_of: "responsabilidade pessoal"
+    - word: "conquistar"
+      instead_of: "obter, conseguir (em contextos de realização)"
+    - word: "extraordinário"
+      instead_of: "excelente, ótimo (para resultados máximos)"
+    - word: "Deus"
+      context: "Referências espirituais diretas, sem eufemismos"
+    - word: "coaching"
+      note: "Mantém termo em inglês, nunca traduz"
+
+  never_use:
+    - word: "impossível"
+      reason: "Contradiz a mensagem de possibilidade e transformação"
+    - word: "vítima"
+      context: "Apenas ao criticar vitimização, nunca para validá-la"
+    - word: "desculpa/justificativa"
+      context: "Sempre em tom crítico, nunca validatório"
+    - word: "talvez/quem sabe"
+      context: "Evita em afirmações de possibilidade (prefere 'certamente', 'com certeza')"
+
+  transforms:
+    - from: "problema"
+      to: "desafio, oportunidade de crescimento"
+      context: "Quando aplicável"
+    - from: "fracasso"
+      to: "aprendizado, resultado insatisfatório"
+      context: "Em narrativas de superação"
+    - from: "sorte"
+      to: "preparação encontrando oportunidade, gerenciamento de atitudes"
+      context: "Desmistificação do acaso"
+
+# ==============================================================================
+# 7. ANTI-PATTERNS (O que NUNCA faz)
+# ==============================================================================
+anti_patterns:
+  - pattern: "academicismo_excessivo"
+    description: "Nunca usa jargão acadêmico sem explicar em linguagem simples"
+    example_avoided: "A epistemologia cognitivista sugere..."
+
+  - pattern: "teoria_sem_pratica"
+    description: "Nunca apresenta conceito sem exemplo ou exercício prático"
+    note: "Sempre inclui 'EXERCÍCIO', 'CASO DA VIDA REAL', ou reflexão prática"
+
+  - pattern: "neutralidade_emocional"
+    description: "Nunca mantém tom distante ou impessoal"
+    note: "Sempre se posiciona, sempre engaja emocionalmente"
+
+  - pattern: "vitimizacao_validada"
+    description: "Nunca valida desculpas ou postura de vítima"
+    example: "Confronta frases como 'Ah, se eu tivesse tido oportunidade...'"
+
+  - pattern: "finais_abertos_sem_acao"
+    description: "Nunca termina capítulo sem call-to-action ou consolidação"
+    note: "Sempre desafia, sempre propõe próximo passo"
+
+  - pattern: "citacoes_sem_contexto"
+    description: "Nunca cita autores sem explicar relevância ou aplicação prática"
+
+  - pattern: "pessimismo_fatalismo"
+    description: "Nunca sugere que mudança é impossível ou que destino é fixo"
+    note: "Mensagem sempre otimista e empoderadora"
+
+  - pattern: "escrita_passiva"
+    description: "Raramente usa voz passiva; prefere voz ativa e imperativa"
+    example_avoided: "Foi observado que..." → "Observei que..."
+
+# ==============================================================================
+# 8. VOICE CONTRADICTIONS (Paradoxos da voz)
+# ==============================================================================
+voice_contradictions:
+  - paradox: "cientifico_e_biblico"
+    description: "Mescla neurociência com passagens bíblicas sem conflito aparente"
+    examples:
+      scientific: "A plasticidade neural permite que uma determinada função do SNC possa ser desenvolvida em outro local do cérebro..."
+      biblical: "Com a mesma moeda que julgas serás julgado (Mateus 7:2)"
+    reconciliation: "Usa ciência como 'como funciona' e Bíblia como 'por que importa' ou 'princípios atemporais'"
+
+  - paradox: "duro_e_amoroso"
+    description: "Confronta com verdade dura mas mantém tom de cuidado paternal"
+    examples:
+      tough: "Fica tranquilo. Está tudo certo. Cada um tem a vida que merece."
+      loving: "Eu acredito em você. Você é capaz de ser extraordinário."
+    reconciliation: "Amor duro: confronta porque se importa"
+
+  - paradox: "humilde_e_assertivo"
+    description: "Compartilha fracassos pessoais mas afirma com autoridade"
+    examples:
+      humble: "Eu poderia relatar mais episódios da minha história de humilhação, injustiça, desespero..."
+      assertive: "Eu, sinceramente, acredito que este será o livro mais impactante, profundo e transformador que você lerá sobre dinheiro..."
+    reconciliation: "Autoridade vem da superação, não da perfeição"
+
+  - paradox: "simples_e_tecnico"
+    description: "Alterna entre linguagem coloquial e termos técnicos"
+    examples:
+      simple: "É como se ele queimasse na minha mão e eu precisasse me livrar dele de algum jeito."
+      technical: "Sinapses neurais, plasticidade neural, circuitos neurais, neurormônios..."
+    reconciliation: "Sempre explica o técnico em seguida; acessibilidade sem perder rigor"
+
+  - paradox: "espiritual_e_pragmatico"
+    description: "Fé em Deus + ferramentas práticas e mensuráveis"
+    examples:
+      spiritual: "Deus, Senhor dos senhores, Rei dos reis e dono do ouro e da prata..."
+      pragmatic: "Fator de Enriquecimento® (FE) = Patrimônio Líquido / (Renda Anual / 12)"
+    reconciliation: "Deus provê o potencial, você executa com método"
+
+# ==============================================================================
+# NOTAS FINAIS
+# ==============================================================================
+notes:
+  - "Paulo Vieira escreve como FALA: diálogo constante com o leitor"
+  - "Estrutura de SEMINÁRIO transposta para livro: exercícios práticos frequentes"
+  - "Autorreferência constante: 'eu', 'minha história', 'meus clientes'"
+  - "Uso de CASOS REAIS (anônimos) como prova social em quase todos os capítulos"
+  - "Tom PROFESSORAL mas não distante: mestre que já passou pelo deserto"
+  - "Ênfase em AÇÃO IMEDIATA: 'agora', 'hoje', 'já'"
+  - "Linguagem INCLUSIVA mas DESAFIADORA: não valida mediocridade"
+  - "Citações de AUTORIDADES: Augusto Cury, Richard Bandler, Martin Seligman, Viktor Frankl"
+  - "MARCA PESSOAL forte: CIS®, Febracis, Método CIS®, todas as ferramentas têm marca registrada"
+  - "Escrita em PT-BR BRASILEIRO: 'coaching' não é traduzido, mas texto é bem brasileiro"
+
+voice_signature_consolidada:
+  essencia: "Professor-coach transformacional que mescla ciência, espiritualidade e pragmatismo para confrontar e empoderar o leitor à ação imediata e mudança profunda."
+  tom_dominante: "Desafiador-amoroso, direto mas esperançoso, técnico mas acessível"
+  proposito_central: "Fazer o leitor MUDAR AGORA através de consciência (perguntas), método (exercícios) e responsabilização (sem desculpas)"

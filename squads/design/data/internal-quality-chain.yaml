@@ -1,0 +1,48 @@
+version: "1.0.0"
+updated: "2026-02-17"
+owner: "design-chief"
+policy: "internal-first"
+
+description: >
+  Cadeia minima obrigatoria de validacoes internas para concluir entregas do
+  squad de design system.
+
+required_commands:
+  - id: ds_qc_001
+    command: "node squads/design/scripts/design-system/generate_components_metadata.cjs"
+    purpose: "Regenerar catalogo de componentes"
+  - id: ds_qc_002
+    command: "node squads/design/scripts/design-system/validate_components_metadata.cjs"
+    purpose: "Validar consistencia dos metadados de componentes"
+  - id: ds_qc_003
+    command: "node squads/design/scripts/design-system/sync_design_manifest.cjs"
+    purpose: "Sincronizar manifest de design com squad.yaml"
+  - id: ds_qc_004
+    command: "node squads/design/scripts/design-system/validate_design_manifest_drift.cjs"
+    purpose: "Bloquear drift entre manifest e configuracao"
+  - id: ds_qc_005
+    command: "node squads/design/scripts/design-system/validate_task_checklist_bindings.cjs"
+    purpose: "Garantir binding task-checklist"
+  - id: ds_qc_006
+    command: "node squads/design/scripts/design-system/validate_mcp_skeleton.cjs"
+    purpose: "Validar presenca de skeleton MCP"
+
+optional_commands:
+  - id: ds_qc_opt_001
+    command: "node squads/design/scripts/design-system/test_mcp_tools.cjs"
+    purpose: "Healthcheck de ferramentas MCP do design system"
+
+gate:
+  mode: blocking
+  require_all_required_commands: true
+  release_condition: "all_required_passed"
+
+exception_policy:
+  external_tool_allowed_when:
+    - "capability_not_covered_internally"
+    - "internal_path_unavailable_or_insufficient_with_evidence"
+  requirements:
+    - "document capability gap"
+    - "document selected external tool and rationale"
+    - "record fallback or rollback path"
+  enforcement: "external_allowed_with_justification"

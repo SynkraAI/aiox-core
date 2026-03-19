@@ -1,0 +1,49 @@
+# Negotiate Deal Workflow (focused on active negotiation)
+workflow:
+  id: wf-negotiate-deal
+  name: "Active Deal Negotiation"
+  version: "1.0.0"
+  orchestrator: negotiation-chief
+  description: |
+    Focused workflow for when you have an active deal to negotiate.
+    Combines buyer profiling, strategic planning, tactical execution, and closing.
+
+phases:
+  phase_1:
+    name: "Buyer DNA Analysis"
+    executor: robert-cialdini
+    task: "tasks/profile-buyer.md"
+    elicit: true
+    output: "Buyer influence profile"
+    checkpoint:
+      gate: "Influence levers identified"
+
+  phase_2:
+    name: "Strategic Plan"
+    executor: william-ury
+    task: "tasks/plan-negotiation.md"
+    elicit: true
+    input_from: ["phase_1"]
+    output: "BATNA, interests map, creative options"
+    checkpoint:
+      gate: "BATNA defined for both sides"
+
+  phase_3:
+    name: "Tactical Playbook"
+    executor: chris-voss
+    task: "tasks/negotiate-deal.md"
+    elicit: true
+    input_from: ["phase_1", "phase_2"]
+    output: "Accusation audit, calibrated Qs, labels, Ackerman plan"
+    checkpoint:
+      gate: "Complete playbook with scripts"
+
+  phase_4:
+    name: "Close"
+    executor: jim-camp
+    task: "tasks/close-deal.md"
+    elicit: true
+    input_from: ["phase_3"]
+    output: "Closing strategy"
+    checkpoint:
+      gate: "Mission defined, neediness eliminated"

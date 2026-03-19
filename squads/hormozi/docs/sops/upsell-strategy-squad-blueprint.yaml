@@ -1,0 +1,1245 @@
+# Upsell Strategy Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Modelos - Secao 3: Ofertas de Upsell - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+# Related: upsell-page-squad-blueprint.yaml (for PAGE implementation)
+
+squad:
+  name: upsell-strategy
+  purpose: "Maximize revenue per customer through strategic upsells - what to offer, when, and how"
+  domain: revenue-optimization
+  source_playbook: "$100M Modelos - Secao 3: Ofertas de Upsell"
+
+  core_equation: |
+    Profit Multiplier = Base Offer Profit + Sum(Upsell Profits)
+
+    McDonald's Model:
+    - Hamburger: $0.25 profit
+    - + Fries: $0.75
+    - + Drink: $1.75
+    - + Supersize: $1.00
+    - = $3.00 total (11.6x increase)
+
+  guiding_philosophy: |
+    "Se o McDonald's nao fizesse upsell de batatas fritas e refrigerante,
+    nao haveria McDonald's. Se voce quer vencer, tem que descobrir sua
+    versao de 'Voce quer batatas fritas com isso?'"
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: upsell-strategist
+      role: "Design and orchestrate upsell strategy across all four types"
+      decisions:
+        - "Which upsell type fits the situation"
+        - "Sequence and timing of upsell offers"
+        - "Pricing strategy for each upsell"
+      kpis:
+        - "Overall upsell take rate"
+        - "Average Order Value (AOV)"
+        - "Profit per customer"
+
+  tier_0_diagnosis:
+    - agent: problem-mapper
+      role: "Map problem-solution chains for Classic Upsells"
+      inputs:
+        - "Core offer details"
+        - "Customer feedback data"
+        - "Support ticket analysis"
+      outputs:
+        - "Problem-solution chain document"
+        - "Upsell opportunity identification"
+        - "Timing recommendations"
+
+    - agent: customer-segmenter
+      role: "Identify upsell candidates and hyper-buyers"
+      inputs:
+        - "Purchase history"
+        - "Behavioral signals"
+        - "Life event indicators"
+      outputs:
+        - "Customer segments"
+        - "Hyper-buyer flags"
+        - "Rollover candidates list"
+
+  tier_1_execution:
+    - agent: classic-upsell-executor
+      role: "Execute immediate problem-solution upsells"
+      specialization: "Type I: Classic Upsell"
+      techniques:
+        - "You can't have X without Y positioning"
+        - "Say No to Say Yes closing"
+        - "Surprise and delight delivery"
+        - "BAMFAM scheduling"
+      target_conversion: ">30%"
+
+    - agent: menu-upsell-executor
+      role: "Execute multi-option upsells with prescription approach"
+      specialization: "Type II: Menu Upsell"
+      techniques:
+        - "Unselling (what they don't need)"
+        - "Prescribing (what they do need)"
+        - "A/B choice presentation"
+        - "Card on file closing"
+      target_items_per_sale: ">1.5"
+
+    - agent: anchor-upsell-executor
+      role: "Execute premium-first pricing psychology"
+      specialization: "Type III: Anchor Upsell"
+      techniques:
+        - "5-10x premium presentation"
+        - "The gasp recognition"
+        - "Come to rescue positioning"
+        - "Main offer as bargain close"
+      target_premium_rate: ">5%"
+
+    - agent: rollover-upsell-executor
+      role: "Execute credit-based upsells and reactivation"
+      specialization: "Type IV: Rollover Upsell"
+      techniques:
+        - "Win-back campaigns"
+        - "Refund-to-rollover conversion"
+        - "Competitor customer theft"
+        - "Gift card referral plays"
+      target_reactivation: ">15%"
+
+  tier_2_judgment:
+    - agent: pricing-optimizer
+      role: "Optimize upsell pricing and margin protection"
+      inputs:
+        - "Unit economics"
+        - "Conversion data"
+        - "Margin requirements"
+      outputs:
+        - "Optimal pricing recommendations"
+        - "Anchor ratio validation"
+        - "Rollover credit limits"
+      key_rules:
+        - "Anchor must be 5-10x main offer"
+        - "Rollover credit max 25% of upsell"
+        - "Present highest margin first"
+
+    - agent: bundle-architect
+      role: "Design and name upsell bundles"
+      inputs:
+        - "Individual upsell items"
+        - "Customer outcomes"
+        - "Margin requirements"
+      outputs:
+        - "Named bundles"
+        - "Bundle pricing"
+        - "Downsell variants"
+
+    - agent: integration-designer
+      role: "Integrate upsells into core product delivery"
+      responsibilities:
+        - "Embed upsell triggers in fulfillment"
+        - "Design bonus-to-upsell flows"
+        - "Create natural upsell moments"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  upsell-strategist:
+    id: upsell-strategist
+    title: "Upsell Strategy Orchestrator"
+    tier: orchestrator
+    icon: "💰"
+
+    purpose: |
+      Design and coordinate upsell strategy using the four Hormozi upsell types.
+      Ensure maximum revenue extraction while maintaining customer value.
+
+    core_frameworks:
+      - name: "Four Upsell Types"
+        components: ["Classic", "Menu", "Anchor", "Rollover"]
+      - name: "Problem-Solution Chain"
+        principle: "Every offer reveals a problem; upsell solves it"
+      - name: "Profit Ordering"
+        rule: "Present highest margin upsells first"
+
+    decision_authority:
+      - "Select upsell type for situation"
+      - "Approve pricing and anchor ratios"
+      - "Design upsell sequences"
+      - "Authorize rollover credit amounts"
+
+    inputs:
+      - "Customer purchase data"
+      - "Product catalog"
+      - "Margin requirements"
+      - "Conversion metrics"
+
+    outputs:
+      - "Upsell strategy document"
+      - "Pricing recommendations"
+      - "Sequence design"
+      - "Performance reports"
+
+    success_metrics:
+      primary:
+        - name: "Average Order Value (AOV)"
+          target: "1.5-2x baseline"
+        - name: "Upsell Take Rate"
+          target: ">25% overall"
+      secondary:
+        - "Profit per customer"
+        - "Type-specific conversion rates"
+        - "BAMFAM compliance"
+
+  problem-mapper:
+    id: problem-mapper
+    title: "Problem-Solution Chain Analyst"
+    tier: tier_0
+    icon: "🔍"
+
+    purpose: |
+      Identify what problems each offer reveals and map the solution chain.
+      Foundation for Classic Upsell strategy.
+
+    analysis_framework:
+      step_1: "What problem does the core offer solve?"
+      step_2: "What NEW problem does solving that create?"
+      step_3: "What product/service solves the new problem?"
+      step_4: "Repeat for each upsell"
+
+    pattern_template: |
+      "You can't have [Core Benefit] without [Upsell Benefit]"
+
+      Examples:
+      - "You can't have a clean car without sealant"
+      - "You can't have a bike without a helmet"
+      - "You can't out-exercise a bad diet (need nutrition course)"
+
+    data_sources:
+      - "Customer support tickets"
+      - "Common questions after purchase"
+      - "Return/refund reasons"
+      - "Competitor upsell analysis"
+
+    outputs:
+      - "Problem-solution chain map"
+      - "Upsell opportunity list"
+      - "Timing recommendations"
+      - "Script templates"
+
+  customer-segmenter:
+    id: customer-segmenter
+    title: "Customer Upsell Segmentation Specialist"
+    tier: tier_0
+    icon: "👥"
+
+    purpose: |
+      Identify and segment customers for optimal upsell targeting.
+      Detect hyper-buyers and rollover candidates.
+
+    segmentation_criteria:
+      hyper_buyers:
+        definition: "In peak spending mode due to life event"
+        triggers:
+          - "Wedding planning"
+          - "New baby"
+          - "Moving to new home"
+          - "Starting new hobby"
+          - "New business venture"
+          - "Health transformation"
+        action: "Increase upsell presentation - don't hold back"
+
+      rollover_candidates:
+        dormant:
+          definition: "6+ months since last purchase"
+          action: "Win-back campaign with credit offer"
+        upset:
+          definition: "Complained or requested refund"
+          action: "Rollover instead of refund"
+        competitor_refugees:
+          definition: "Left negative reviews on competitors"
+          action: "Credit their competitor spend toward you"
+
+      current_buyers:
+        definition: "Just purchased, still in buying mode"
+        action: "Immediate upsell sequence"
+
+    outputs:
+      - "Segmented customer lists"
+      - "Hyper-buyer alerts"
+      - "Rollover candidate reports"
+      - "Segment-specific messaging"
+
+  classic-upsell-executor:
+    id: classic-upsell-executor
+    title: "Classic Upsell Specialist"
+    tier: tier_1
+    icon: "🎯"
+
+    purpose: |
+      Execute immediate problem-solution upsells right after purchase.
+      "You can't have X without Y" approach.
+
+    core_principle: |
+      "Sua oferta principal resolve um problema e cria outro.
+      Seu upsell imediatamente resolve esse proximo problema."
+
+    techniques:
+      say_no_to_say_yes:
+        script: "Voce nao quer mais nada, quer?"
+        psychology: "Customer says 'no' but means 'yes' to upsell"
+        source: "Fur coat storage story"
+
+      profit_ordering:
+        rule: "Present highest margin upsells first"
+        rationale: "If they say yes early, you maximize profit"
+
+      surprise_delight:
+        rule: "Give all bonuses even if customer agreed early"
+        rationale: "Avoid FOMO complaints, delight customer"
+
+      bamfam:
+        full_name: "Book-A-Meeting-From-A-Meeting"
+        rule: "Never end interaction without scheduling next"
+        script: "Antes de encerrarmos, vamos agendar nosso proximo encontro. Quando funciona melhor - [A] ou [B]?"
+
+      hyper_buyer_capture:
+        trigger: "Life event detected"
+        action: "Increase upsell offers - they're in spending mode"
+
+      access_acceleration:
+        principle: "Deliver upsell value as fast as possible"
+        rationale: "$10,000 now > $10,000 later"
+
+    execution_sequence:
+      - step: 1
+        action: "Identify revealed problem from purchase"
+      - step: 2
+        action: "Match to available upsell solution"
+      - step: 3
+        action: "Order by profit margin (highest first)"
+      - step: 4
+        action: "Present with 'You can't have X without Y'"
+      - step: 5
+        action: "Use Say No technique for closing"
+      - step: 6
+        action: "Apply Surprise & Delight on acceptance"
+      - step: 7
+        action: "BAMFAM before ending interaction"
+
+  menu-upsell-executor:
+    id: menu-upsell-executor
+    title: "Menu Upsell Specialist"
+    tier: tier_1
+    icon: "📋"
+
+    purpose: |
+      Execute multi-option upsells using the four-tactic approach:
+      Unsell, Prescribe, A/B, Card on File.
+
+    core_philosophy: |
+      "Em vez de perguntar se clientes querem comprar produto sim ou nao,
+      perguntamos qual produto preferem, A ou B."
+
+    four_tactics:
+      unselling:
+        definition: "Tell customers what they DON'T need"
+        purpose: "Builds trust, emphasizes what they DO need"
+        example: |
+          "Voce nao vai precisar deste saco pequeno ou dessas coisas de filhote.
+          Voce tem um cachorro grande."
+        pro_tip: "Keep products just to cross them out"
+
+      prescribing:
+        definition: "Tell customers exactly what to buy and how"
+        components:
+          - "How it integrates with previous purchase"
+          - "Personalized usage instructions"
+        example: |
+          "Voce vai querer dar ao seu cachorro um desses mastigaveis para
+          articulacoes em cada refeicao. E a cada 90 dias, de a eles um
+          desses wafers para vermes do coracao."
+
+      ab_choice:
+        definition: "Offer two options, both are purchases"
+        categories:
+          - "Quantity: Uma ou duas?"
+          - "Timing: Amanha ou segunda?"
+          - "Payment: Dinheiro ou cartao?"
+          - "Flavor: Chocolate ou baunilha?"
+          - "Time: Manha ou tarde?"
+          - "Size: Pequeno ou medio?"
+          - "Color: Preto ou branco?"
+          - "Personnel: Joao ou Sara?"
+        nudge_scripts:
+          - "Este e meu favorito"
+          - "X geralmente e uma aposta segura"
+          - "Muitas pessoas adoram isso"
+
+      card_on_file:
+        script: "Quer usar o cartao que tem em arquivo?"
+        psychology: "Removes friction of payment decision"
+        for_first_purchase: "Qual cartao voce quer usar?"
+
+    execution_sequence:
+      - step: 1
+        tactic: "UNSELL"
+        action: "Cross out what they don't need"
+      - step: 2
+        tactic: "PRESCRIBE"
+        action: "Tell them what they need with instructions"
+      - step: 3
+        tactic: "A/B"
+        action: "Ask preference between two options"
+      - step: 4
+        tactic: "CARD ON FILE"
+        action: "Close with stored payment method"
+
+    employee_guidance:
+      rule: "Encourage staff to help customers 'beat the system'"
+      rationale: "Builds trust, increases long-term value"
+      quote: "Funcionarios frequentemente gostam de ajudar clientes a burlar o sistema. Deixe-os."
+
+  anchor-upsell-executor:
+    id: anchor-upsell-executor
+    title: "Anchor Upsell Specialist"
+    tier: tier_1
+    icon: "⚓"
+
+    purpose: |
+      Execute premium-first pricing to make main offers look like bargains.
+      "Get the gasp, come to the rescue."
+
+    opening_quote: |
+      "A unica coisa pior do que fazer uma oferta de mil dolares para uma
+      pessoa com orcamento de cem dolares e fazer uma oferta de cem dolares
+      para alguem com orcamento de mil dolares."
+
+    core_mechanics:
+      anchor_ratio:
+        minimum: "5x main offer price"
+        optimal: "10x main offer price"
+        example: "$2,200 suit anchored by $16,000 suit"
+
+      feature_strategy:
+        primary_features: "Keep the SAME in both offers"
+        secondary_features: "Change these for the anchor"
+        example: |
+          Primary: "It's a suit" (same)
+          Secondary: Designer, fabric, custom fit (different)
+
+    five_step_process:
+      step_1:
+        name: "Present the Anchor"
+        action: "Show the premium option first"
+        requirement: "Must be genuine offer you'd fulfill"
+
+      step_2:
+        name: "Get the Gasp"
+        action: "Wait for customer price shock"
+        insight: "Quanto maior o engasgo, mais eles compravam"
+
+      step_3:
+        name: "Come to the Rescue"
+        script: "Voce se importa muito com [premium feature]?"
+        expected_response: "Nem um pouco."
+
+      step_4:
+        name: "Present Main Offer"
+        positioning: "Now looks like incredible value"
+        psychology: "Same primary features, fraction of price"
+
+      step_5:
+        name: "Close with Card"
+        script: "Quer usar o cartao em arquivo?"
+
+    critical_rules:
+      - rule: "Never treat anchor as fake"
+        consequence: "Customer will treat it fake too, lose trust"
+      - rule: "Actually want people to buy premium"
+        consequence: "Some will - disproportionate profits"
+      - rule: "Don't gasp when they buy premium"
+        consequence: "You'll lose the sale"
+
+    examples:
+      lawn_care:
+        premium: "My cell, premium mulch, natural pest control - $1,000/week"
+        main: "Team number, generic mulch, normal pest control - $200/week"
+
+      painting:
+        premium: "Super protective packaging, 20-year insurance - $1,000"
+        main: "Normal packaging, 1-year insurance - $200"
+
+      newsletter:
+        premium: "All archives, early access - $199/month"
+        main: "New editions only - $19/month"
+
+  rollover-upsell-executor:
+    id: rollover-upsell-executor
+    title: "Rollover Upsell Specialist"
+    tier: tier_1
+    icon: "🔄"
+
+    purpose: |
+      Execute credit-based upsells that apply previous purchases
+      to new, higher-value offers.
+
+    opening_quote: "Quer apenas rolar para frente?"
+
+    core_mechanism: |
+      Credit part or all of previous purchase toward a larger,
+      more valuable offer. Works especially well for:
+      - Dormant customers (win-back)
+      - Upset customers (refund alternative)
+      - Competitor customers (theft)
+      - Current customers (immediate upsell)
+
+    four_candidate_types:
+      dormant_reactivation:
+        definition: "6+ months since last purchase"
+        script: |
+          "Oi [Nome], queria devolver seu dinheiro. Tem um minuto?
+          Como forma de agradecer, quero dar [X] do seu dinheiro de volta
+          como credito para [resultado desejado]. Isso te interessa?"
+        roi_example: |
+          200 personalized videos × $4,000 credit offers
+          = 20% acceptance rate
+          = $1.9M additional ARR from one day of work
+
+      refund_conversion:
+        trigger: "Customer requests refund"
+        rule: "Always offer rollover BEFORE refund"
+        script: |
+          "Antes de processarmos o reembolso, posso oferecer uma opcao?
+          Esse valor pode ser creditado para [alternativa] que pode
+          resolver melhor seu problema. Interessado em saber mais?"
+
+      competitor_theft:
+        trigger: "Competitor has upset customers"
+        source: "Negative reviews, complaints"
+        script: |
+          "Oi [Nome], vi sua avaliacao negativa sobre o produto deles e
+          realmente me chateou. Para compensar, vou creditar quaisquer
+          pagamentos que voce ainda tem com eles para mudar para nos."
+        lead_gen_hack: "Create platform for industry complaints, then rollover all"
+
+      current_customer:
+        trigger: "Just made a purchase"
+        technique: "Spread credit over longer commitment"
+        example: "$600 purchase → $50/month discount × 12 months"
+
+    pricing_rules:
+      minimum_ratio: "Upsell must be 4x the credit amount"
+      maximum_discount: "25% off upsell price"
+      example: "$200 credit → $800+ upsell price"
+
+    urgency_technique:
+      rule: "Make rollover a one-time offer"
+      script: "Esta oferta e valida apenas agora. Se sair desta pagina, o preco volta ao normal."
+      principle: "Voce quer surpreender e encantar"
+
+    gift_card_play:
+      description: "Paid referral mechanism using rollover"
+      offer: "$200 gift cards for $20 (90% off)"
+      rules:
+        - "Limit 2 per customer"
+        - "Can only use on others (referral)"
+      process:
+        - step: 1
+          action: "Customer buys gift card for friend"
+        - step: 2
+          action: "Ask who they're giving it to, get introduction"
+        - step: 3
+          action: "When friend comes, roll $200 toward $1,000+ offer"
+      result: "Customers pay you to refer their friends"
+
+  pricing-optimizer:
+    id: pricing-optimizer
+    title: "Upsell Pricing Optimization Specialist"
+    tier: tier_2
+    icon: "💹"
+
+    purpose: |
+      Optimize upsell pricing for maximum profit while maintaining
+      conversion rates and customer value perception.
+
+    pricing_rules:
+      profit_ordering:
+        rule: "Present highest margin upsells first"
+        rationale: "If they say yes early, maximize profit"
+
+      anchor_ratio:
+        minimum: "5x main offer"
+        optimal: "10x main offer"
+        validation: "Check if premium actually gets gasp"
+
+      rollover_credit:
+        maximum_discount: "25%"
+        minimum_ratio: "4x credit to upsell price"
+        formula: "upsell_price >= credit × 4"
+
+      bundle_pricing:
+        target_value_perception: "5-10x actual price"
+        naming_strategy: "Based on outcome or customer type"
+
+    economist_technique:
+      description: "Three-option pricing with decoy"
+      structure:
+        option_a: "Cheaper option (digital only) - $59"
+        option_b: "Expensive option alone (print only) - $125 [DECOY]"
+        option_c: "Both options (digital + print) - $125"
+      result: "Customers choose C - both for price of B alone"
+      validation: "Options must preserve margins"
+
+    validation_checklist:
+      - "Is anchor 5-10x main offer?"
+      - "Is rollover credit max 25% of upsell?"
+      - "Are highest-margin items presented first?"
+      - "Does value stack show 5-10x price?"
+      - "Is Economist technique applicable?"
+
+  bundle-architect:
+    id: bundle-architect
+    title: "Upsell Bundle Design Specialist"
+    tier: tier_2
+    icon: "📦"
+
+    purpose: |
+      Design and name upsell bundles that make buying easy.
+      "It's easier to sell one thing than nine things."
+
+    bundling_principles:
+      simplification:
+        quote: "E mais facil vender uma coisa para alguem do que nove coisas"
+        result: "One question = nine sales"
+
+      naming_strategies:
+        by_outcome:
+          - "Pacote de Resultados Mais Rapidos"
+          - "Pacote de Transformacao"
+        by_customer_type:
+          - "Pacote Iniciante"
+          - "Pacote Profissional"
+        by_commitment:
+          - "Pacote Minimo"
+          - "Pacote Completo"
+
+      downsell_creation:
+        method: "Remove some products/features from bundle"
+        purpose: "Capture value from price-sensitive customers"
+
+    bundle_components:
+      core_item: "Main upsell product"
+      bonus_1: "Accelerator or convenience add"
+      bonus_2: "Complementary item or support"
+      total_value: "Must be 5-10x bundle price"
+
+    integration_design:
+      principle: "Make upsells part of how you deliver other offers"
+      examples:
+        - "Meal plans include optional supplement suggestions"
+        - "Sales training suggests optional software tools"
+      result: "Customers naturally ask about upsells"
+
+  integration-designer:
+    id: integration-designer
+    title: "Upsell Integration Specialist"
+    tier: tier_2
+    icon: "🔗"
+
+    purpose: |
+      Design upsell triggers that integrate naturally into
+      product delivery and customer experience.
+
+    integration_strategies:
+      bonus_problem_creation:
+        principle: "Free bonuses reveal problems upsells solve"
+        example: |
+          Offer: Free ear muffs with coat storage
+          Problem created: Need to store the ear muffs
+          Upsell: "$30 to store these too"
+        result: "Customers pay to store free items"
+
+      delivery_embedding:
+        principle: "Make upsells part of core product experience"
+        examples:
+          meal_plans:
+            embedding: "Optional supplement suggestions in plans"
+            trigger: "Customers ask about supplements during review"
+          training_programs:
+            embedding: "Optional software mentioned in training"
+            trigger: "Students see tools and want to buy"
+
+      access_acceleration:
+        principle: "Deliver upsell value instantly if possible"
+        psychology: "$10,000 now > $10,000 later"
+        tactic: "Put it in their hands before they say yes"
+        result: "Harder to return something you already have"
+
+      guarantee_monetization:
+        principle: "Charge for what you used to give free"
+        example: |
+          Before: Replace damaged portraits free
+          After: "Pay 10% for damage guarantee"
+          Result: 30% of customers buy - pure profit
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Strategy & Analysis
+  - task: "Map problem-solution chain"
+    executor: Human
+    automation: LOW
+    guardrails: "Requires deep business understanding"
+
+  - task: "Identify hyper-buyer triggers"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Data flags, human confirms"
+
+  - task: "Segment rollover candidates"
+    executor: Worker
+    automation: HIGH
+    guardrails: "CRM rule-based"
+
+  # Classic Upsell Execution
+  - task: "Order upsells by profit margin"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Spreadsheet calculation"
+
+  - task: "Present 'You can't have X without Y'"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Scripts available, delivery human"
+
+  - task: "Execute Say No to Say Yes"
+    executor: Human
+    automation: LOW
+    guardrails: "Requires timing and tone"
+
+  - task: "Deploy Surprise & Delight"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Rule-based fulfillment"
+
+  - task: "Execute BAMFAM"
+    executor: Human
+    automation: LOW
+    guardrails: "Calendar integration"
+
+  # Menu Upsell Execution
+  - task: "Unsell inappropriate options"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Scripts for common scenarios"
+
+  - task: "Prescribe with instructions"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Templates available"
+
+  - task: "Present A/B choices"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Scripted options"
+
+  - task: "Close with card on file"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Payment system integration"
+
+  # Anchor Upsell Execution
+  - task: "Present premium option first"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Sequence automated"
+
+  - task: "Recognize the gasp"
+    executor: Human
+    automation: LOW
+    guardrails: "Emotional reading required"
+
+  - task: "Execute rescue script"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Script prepared"
+
+  - task: "Close main offer as bargain"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Positioning scripted"
+
+  # Rollover Upsell Execution
+  - task: "Send win-back outreach"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Automated send, personalized message"
+
+  - task: "Convert refund to rollover"
+    executor: Human
+    automation: LOW
+    guardrails: "Situation specific"
+
+  - task: "Execute competitor theft campaign"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Lead gen automated, outreach hybrid"
+
+  - task: "Process gift card rollover"
+    executor: Worker
+    automation: HIGH
+    guardrails: "E-commerce system"
+
+  # Pricing & Bundling
+  - task: "Validate anchor ratio (5-10x)"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Formula validation"
+
+  - task: "Calculate rollover credit limits"
+    executor: Worker
+    automation: HIGH
+    guardrails: "4x minimum ratio"
+
+  - task: "Design named bundles"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Template + customization"
+
+  - task: "Implement Economist technique"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Pricing structure"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Problem-Solution Chain Gate"
+    transition: "Core Offer → Upsell Design"
+    condition: "problem_revealed == true AND solution_identified == true"
+    type: blocking
+    failure_action: "Return to problem mapping"
+
+  QG-002:
+    name: "Profit Ordering Gate"
+    transition: "Upsell List → Presentation Sequence"
+    condition: "upsells_ordered_by_margin == true"
+    type: blocking
+    failure_action: "Re-sort by margin"
+
+  QG-003:
+    name: "Anchor Ratio Gate"
+    transition: "Anchor Design → Deployment"
+    condition: "anchor_price >= main_price × 5"
+    type: blocking
+    failure_action: "Increase anchor price or create premium offer"
+
+  QG-004:
+    name: "Rollover Credit Gate"
+    transition: "Credit Calculation → Offer"
+    condition: "upsell_price >= credit × 4"
+    type: blocking
+    failure_action: "Reduce credit or increase upsell price"
+
+  QG-005:
+    name: "BAMFAM Compliance Gate"
+    transition: "Interaction End → Close"
+    condition: "next_meeting_scheduled == true"
+    type: warning
+    failure_action: "Schedule follow-up before ending"
+
+  QG-006:
+    name: "Bundle Value Gate"
+    transition: "Bundle Design → Pricing"
+    condition: "perceived_value >= price × 5"
+    type: warning
+    failure_action: "Add value or reduce price"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  classic_upsell_workflow:
+    trigger: "Customer completes purchase"
+    steps:
+      - step: 1
+        agent: problem-mapper
+        action: "Identify problem revealed by purchase"
+        output: "Problem identification"
+
+      - step: 2
+        agent: pricing-optimizer
+        action: "Order available upsells by margin"
+        output: "Prioritized upsell list"
+
+      - step: 3
+        agent: classic-upsell-executor
+        action: "Present with 'You can't have X without Y'"
+        technique: "Say No to Say Yes"
+
+      - step: 4
+        agent: classic-upsell-executor
+        action: "Apply Surprise & Delight if accepted"
+        output: "All bonuses delivered"
+
+      - step: 5
+        agent: classic-upsell-executor
+        action: "BAMFAM - schedule next interaction"
+        gate: "QG-005"
+
+  menu_upsell_workflow:
+    trigger: "Multiple upsell options available"
+    steps:
+      - step: 1
+        agent: menu-upsell-executor
+        action: "UNSELL - cross out what they don't need"
+        output: "Filtered options"
+
+      - step: 2
+        agent: menu-upsell-executor
+        action: "PRESCRIBE - tell what they need with instructions"
+        output: "Prescribed items"
+
+      - step: 3
+        agent: menu-upsell-executor
+        action: "A/B - ask preference between two options"
+        output: "Customer preference"
+
+      - step: 4
+        agent: menu-upsell-executor
+        action: "Close with card on file"
+        output: "Payment processed"
+
+  anchor_upsell_workflow:
+    trigger: "Premium version exists"
+    steps:
+      - step: 1
+        agent: pricing-optimizer
+        action: "Validate anchor ratio (5-10x)"
+        gate: "QG-003"
+
+      - step: 2
+        agent: anchor-upsell-executor
+        action: "Present premium option first"
+        output: "Premium presented"
+
+      - step: 3
+        agent: anchor-upsell-executor
+        action: "Recognize the gasp"
+        branching:
+          if_gasp: "Continue to step 4"
+          if_no_gasp: "Close premium sale"
+
+      - step: 4
+        agent: anchor-upsell-executor
+        action: "Come to rescue"
+        script: "Voce se importa com [premium feature]?"
+
+      - step: 5
+        agent: anchor-upsell-executor
+        action: "Present main offer as bargain"
+        output: "Sale closed"
+
+  rollover_upsell_workflow:
+    trigger: "Rollover candidate identified"
+    steps:
+      - step: 1
+        agent: customer-segmenter
+        action: "Classify candidate type"
+        output: "Dormant | Upset | Competitor | Current"
+
+      - step: 2
+        agent: pricing-optimizer
+        action: "Calculate rollover credit"
+        gate: "QG-004"
+
+      - step: 3
+        agent: rollover-upsell-executor
+        action: "Execute type-specific outreach"
+        branching:
+          dormant: "Win-back campaign"
+          upset: "Refund-to-rollover"
+          competitor: "Theft campaign"
+          current: "Immediate upsell"
+
+      - step: 4
+        agent: rollover-upsell-executor
+        action: "Add urgency (one-time offer)"
+        output: "Time-limited offer presented"
+
+      - step: 5
+        agent: rollover-upsell-executor
+        action: "Process acceptance or note for follow-up"
+        output: "Sale or nurture sequence"
+
+  win_back_campaign_workflow:
+    trigger: "Dormant customers identified (6+ months)"
+    steps:
+      - step: 1
+        agent: customer-segmenter
+        action: "Pull list of dormant customers"
+        output: "Candidate list with purchase history"
+
+      - step: 2
+        agent: pricing-optimizer
+        action: "Calculate credit offers per customer"
+        output: "Personalized credit amounts"
+
+      - step: 3
+        agent: rollover-upsell-executor
+        action: "Create personalized outreach"
+        format: "Video or personalized message"
+
+      - step: 4
+        agent: rollover-upsell-executor
+        action: "Execute outreach campaign"
+        tracking: "Response rates"
+
+      - step: 5
+        agent: rollover-upsell-executor
+        action: "Convert responders to sales"
+        kpi: "Target 15-20% acceptance"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    average_order_value:
+      formula: "Total Revenue / Number of Orders"
+      target: "1.5-2x baseline"
+      impact: "Direct revenue increase"
+
+    upsell_take_rate:
+      formula: "Upsells Accepted / Upsells Offered"
+      target: ">25% overall"
+      by_type:
+        classic: ">30%"
+        menu: ">1.5 items per sale"
+        anchor: ">5% premium, >40% main"
+        rollover: ">15% reactivation"
+
+    profit_per_customer:
+      formula: "Total Profit / Number of Customers"
+      target: "Increase with each upsell type"
+
+  secondary:
+    bamfam_compliance:
+      formula: "Interactions with Next Meeting / Total Interactions"
+      target: "100%"
+
+    anchor_gasp_rate:
+      formula: "Gasps / Anchor Presentations"
+      target: ">80%"
+
+    rollover_roi:
+      formula: "Revenue from Rollover / Cost of Campaign"
+      target: ">5x"
+
+    gift_card_conversion:
+      formula: "Gift Card Redemptions / Gift Cards Sold"
+      target: ">70%"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Low classic upsell conversion"
+    possible_causes:
+      - "Problem-solution chain unclear"
+      - "Timing wrong (problem not yet felt)"
+      - "Wrong upsell for the situation"
+    diagnosis:
+      - "Review problem mapping"
+      - "Check timing of presentation"
+      - "Validate offer-problem fit"
+    solutions:
+      - "Remap problem-solution chain"
+      - "Delay upsell until problem emerges"
+      - "Test different upsell offers"
+
+  - symptom: "Menu upsell items per sale too low"
+    possible_causes:
+      - "Not unselling effectively"
+      - "Prescriptions too vague"
+      - "A/B choices unclear"
+    diagnosis:
+      - "Listen to sales calls"
+      - "Review prescription scripts"
+      - "Check A/B option clarity"
+    solutions:
+      - "Train on unselling technique"
+      - "Make prescriptions more specific"
+      - "Simplify A/B choices"
+
+  - symptom: "Anchor not getting gasps"
+    possible_causes:
+      - "Premium price too low (not 5-10x)"
+      - "Premium offer not genuine"
+      - "Customer actually wants premium"
+    diagnosis:
+      - "Check anchor ratio"
+      - "Verify premium is sellable"
+      - "Review customer segments"
+    solutions:
+      - "Increase anchor price"
+      - "Create genuine premium offer"
+      - "Close premium sales when no gasp"
+
+  - symptom: "Rollover campaign low acceptance"
+    possible_causes:
+      - "Credit amount too small"
+      - "Offer not compelling"
+      - "Outreach not personalized"
+    diagnosis:
+      - "Check credit-to-value ratio"
+      - "Review upsell offer"
+      - "Audit outreach personalization"
+    solutions:
+      - "Increase credit offer"
+      - "Improve upsell value proposition"
+      - "Personalize outreach (video works)"
+
+  - symptom: "BAMFAM compliance low"
+    possible_causes:
+      - "Not trained on technique"
+      - "No calendar integration"
+      - "Treating it as optional"
+    diagnosis:
+      - "Review training materials"
+      - "Check tool availability"
+      - "Audit culture reinforcement"
+    solutions:
+      - "Retrain team on BAMFAM"
+      - "Integrate calendar into workflow"
+      - "Make BAMFAM a tracked KPI"
+
+# ===============================================================================
+# TECHNOLOGY REQUIREMENTS
+# ===============================================================================
+
+technology:
+  required:
+    - tool: "CRM with Purchase History"
+      purpose: "Track customer purchases for rollover and segmentation"
+      features:
+        - "Purchase timeline"
+        - "Segment tagging"
+        - "Rollover credit tracking"
+
+    - tool: "Payment System with Saved Cards"
+      purpose: "Enable card-on-file closing"
+      features:
+        - "Tokenized storage"
+        - "One-click purchase"
+        - "Subscription management"
+
+    - tool: "Calendar/Scheduling System"
+      purpose: "BAMFAM execution"
+      features:
+        - "Real-time availability"
+        - "Automated reminders"
+        - "Integration with CRM"
+
+    - tool: "Pricing Calculator"
+      purpose: "Validate anchor ratios and rollover credits"
+      features:
+        - "Margin calculation"
+        - "Ratio validation"
+        - "Bundle pricing"
+
+  recommended:
+    - tool: "Video Recording for Win-Back"
+      purpose: "Personalized rollover outreach"
+
+    - tool: "Competitor Review Scraper"
+      purpose: "Find competitor's upset customers"
+
+    - tool: "Gift Card System"
+      purpose: "Gift card rollover play"
+
+# ===============================================================================
+# CROSS-REFERENCES
+# ===============================================================================
+
+cross_references:
+  related_sops:
+    - name: "upsell-page-sop.md"
+      relationship: "PAGE implementation for post-purchase upsells"
+      use_when: "Designing the actual upsell page layout"
+
+    - name: "upsell-page-checklist.md"
+      relationship: "Validation for upsell page elements"
+      use_when: "Quality checking upsell pages"
+
+    - name: "upsell-sequence-checklist.md"
+      relationship: "Multi-step upsell sequence validation"
+      use_when: "Designing upsell funnels"
+
+  source_material:
+    book: "$100M Modelos"
+    section: "Secao 3: Ofertas de Upsell"
+    pages: "Approximately 30 pages"
+    key_stories:
+      - "Fur coat storage (Classic - Say No to Say Yes)"
+      - "Supplement sales journey (Menu - discovery of 4 tactics)"
+      - "$16,000 suit (Anchor - get the gasp)"
+      - "Gym Launch earn-back (Rollover - discovery)"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Industry-specific upsell examples"
+    severity: Medium
+    clarification_needed: "More verticals beyond book examples"
+
+  - id: GAP-002
+    description: "Digital vs physical upsell timing"
+    severity: Medium
+    clarification_needed: "Checkout vs post-delivery timing"
+
+  - id: GAP-003
+    description: "B2B vs B2C upsell differences"
+    severity: Medium
+    clarification_needed: "Enterprise upsell cycle specifics"
+
+  - id: GAP-004
+    description: "Subscription upsell strategies"
+    severity: Low
+    clarification_needed: "Monthly vs annual upsell patterns"
+
+  - id: GAP-005
+    description: "International rollover complications"
+    severity: Low
+    clarification_needed: "Currency and payment method issues"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 6
+  workflows_documented: 5
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

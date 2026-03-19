@@ -1,0 +1,761 @@
+# =============================================================================
+# Design System Squad - V2 Format
+# =============================================================================
+# Updated: 2026-02-25
+# Focus: Design System only (tokens, components, accessibility, DesignOps)
+# =============================================================================
+
+metadata:
+  score: 10.0
+  name: design
+  display_name: "Design System Squad"
+  version: "2.1.0"
+  domain: design-system
+  created_at: "2026-02-02"
+  last_updated: "2026-02-25"
+  status: active
+  author: "Alan Nicolas <alan@synkra.ai>"
+  license: MIT
+
+description: |
+  Squad focado exclusivamente em Design System.
+  Especializado em tokens, componentes, acessibilidade, registry,
+  metadata machine-readable e DesignOps.
+
+objectives:
+  - Construir e evoluir design systems de forma escalavel
+  - Reduzir redundancia de UI com consolidacao de patterns
+  - Garantir acessibilidade e governanca continua
+  - Sincronizar registry, metadata e documentacao
+  - Operar migracoes com baixo risco e alta previsibilidade
+
+key_capabilities:
+  - Design system architecture (Atomic Design)
+  - Token extraction and DTCG exports
+  - Component build and composition
+  - Registry-first distribution
+  - AI-readable metadata generation
+  - Accessibility governance (WCAG)
+  - DesignOps maturity and process optimization
+
+workspace_integration:
+  level: controlled_runtime_consumer
+  rationale: >-
+    Design squad depende de contexto canônico de Design System por BU/app, mas
+    não é owner da integração com workspace. O gate de readiness vem do COO e o
+    squad só expande contexto local depois de receber liberação.
+  read_paths:
+    - workspace/workspace.yaml
+    - workspace/businesses/
+  write_paths: []
+  readiness_owner: coo-orchestrator
+  readiness_resolver: squads/c-level/scripts/resolve-squad-workspace-readiness.cjs
+
+tier_system:
+  orchestrator:
+    name: "Orchestration"
+    purpose: "Routing and coordination"
+    agents:
+      - design-chief
+  tier_0_operations:
+    name: "Operations"
+    purpose: "DesignOps and scaling"
+    agents:
+      - dave-malouf
+      - dan-mall
+  tier_1_architecture:
+    name: "Architecture"
+    purpose: "System and components"
+    agents:
+      - brad-frost
+      - page-composer
+      - nano-banana-generator
+      - ds-token-architect
+      - ds-foundations-lead
+      - storybook-expert
+
+agents:
+  - id: design-chief
+    name: Design Chief
+    role: "Design System Orchestrator"
+    file: agents/design-chief.md
+    tier: orchestrator
+    description: "Roteia e coordena execucao no squad de design system."
+
+  - id: brad-frost
+    name: Brad Frost
+    role: "Design System Architect"
+    file: agents/brad-frost.md
+    tier: 1
+    description: "Arquitetura de design system, atomic design e componentes."
+
+  - id: dave-malouf
+    name: Dave Malouf
+    role: "DesignOps Specialist"
+    file: agents/dave-malouf.md
+    tier: 0
+    description: "Operacoes, maturidade, processos e escalabilidade."
+
+  - id: dan-mall
+    name: Dan Mall
+    role: "Design System Adoption Specialist"
+    file: agents/dan-mall.md
+    tier: 0
+    description: "Buy-in de stakeholders e narrativa de adocao para design system."
+
+  - id: nano-banana-generator
+    name: Nano Banana Generator
+    role: "Visual Utility Specialist"
+    file: agents/nano-banana-generator.md
+    tier: 1
+    description: "Suporte visual utilitario para artefatos do design system."
+
+  - id: ds-token-architect
+    name: Atlas
+    role: "Design System Token Architect"
+    file: agents/ds-token-architect.md
+    tier: 1
+    description: "Transforma entradas do Figma (variables/styles/components) em artefatos tokens/componentes para integracao com shadcn."
+
+  - id: ds-foundations-lead
+    name: Foundations Lead
+    role: "Design System Foundations Pipeline Lead"
+    file: agents/ds-foundations-lead.md
+    tier: 1
+    description: "Orquestra o pipeline de foundations: tokens, componentes base e derivados."
+
+  - id: storybook-expert
+    name: Storybook Expert
+    role: "Component Story Architect & Documentation Specialist"
+    file: agents/storybook-expert.md
+    tier: 1
+    description: "Especialista em Storybook: stories CSF3, interaction testing, visual regression, a11y testing, documentacao de componentes."
+
+  - id: page-composer
+    name: Page Composer
+    role: "Page Composition & Layout Specialist"
+    file: agents/page-composer.md
+    tier: 1
+    description: "Composicao de paginas completas: layout, tipografia, spacing, copy-to-layout. Completa o ciclo Atomic Design (templates/pages)."
+
+workflows:
+  - id: audit-only
+    name: "Design System Audit-Only"
+    file: workflows/audit-only.yaml
+    trigger: manual
+    description: "Auditoria e diagnostico sem construcao."
+
+  - id: brownfield-complete
+    name: "Design System Brownfield Complete"
+    file: workflows/brownfield-complete.yaml
+    trigger: manual
+    description: "Fluxo completo para sistemas existentes."
+
+  - id: greenfield-new
+    name: "Design System Greenfield New"
+    file: workflows/greenfield-new.yaml
+    trigger: manual
+    description: "Fluxo para construir design system do zero."
+
+  - id: self-healing-workflow
+    name: "Self-Healing Design System"
+    file: workflows/self-healing-workflow.yaml
+    trigger: automatic
+    description: "Auto-correcao de problemas recorrentes."
+
+  - id: agentic-readiness
+    name: "Agentic Readiness Design System"
+    file: workflows/agentic-readiness.yaml
+    trigger: manual
+    description: "Preparar design system para consumo confiavel por agentes."
+
+  - id: dtcg-tokens-governance
+    name: "DTCG Tokens Governance"
+    file: workflows/dtcg-tokens-governance.yaml
+    trigger: manual
+    description: "Padronizar e governar tokens no formato W3C DTCG."
+
+  - id: motion-quality
+    name: "Motion Quality Design System"
+    file: workflows/motion-quality.yaml
+    trigger: manual
+    description: "Auditar e padronizar motion tokens com acessibilidade."
+
+  - id: foundations-pipeline
+    name: "Foundations Pipeline"
+    file: workflows/foundations-pipeline.yaml
+    trigger: manual
+    description: "Pipeline sequencial de 3 fases: Foundations → Base Components → Derived Components."
+
+  - id: page-composition
+    name: "Page Composition Workflow"
+    file: workflows/page-composition.yaml
+    trigger: manual
+    description: "Fluxo deterministico de 9 fases para compor paginas completas com page-composer."
+
+  - id: critical-eye
+    name: "Critical Eye — Continuous DS Curation"
+    file: workflows/critical-eye.yaml
+    trigger: manual
+    description: "Curadoria continua: scoring 0-100, lifecycle CANDIDATE→CANONICAL, roda pos-extracao."
+
+tasks:
+  - id: ds-audit-codebase
+    file: tasks/ds-audit-codebase.md
+    agents: [brad-frost]
+    description: "Auditar padroes e redundancias do codebase."
+
+  - id: ds-build-component
+    file: tasks/ds-build-component.md
+    agents: [brad-frost]
+    description: "Construir componente de design system."
+
+  - id: ds-build-mcp-server
+    file: tasks/ds-build-mcp-server.md
+    agents: [brad-frost]
+    description: "Definir servidor MCP para design system."
+
+  - id: ds-calculate-roi
+    file: tasks/ds-calculate-roi.md
+    agents: [brad-frost]
+    description: "Calcular ROI da consolidacao."
+
+  - id: ds-compose-molecule
+    file: tasks/ds-compose-molecule.md
+    agents: [brad-frost]
+    description: "Compor molecules a partir de atoms."
+
+  - id: ds-consolidate-patterns
+    file: tasks/ds-consolidate-patterns.md
+    agents: [brad-frost]
+    description: "Consolidar patterns redundantes."
+
+  - id: ds-context-contract
+    file: tasks/ds-context-contract.md
+    agents: [design-chief]
+    description: "Contrato minimo de contexto por task."
+
+  - id: ds-extend-pattern
+    file: tasks/ds-extend-pattern.md
+    agents: [brad-frost]
+    description: "Estender pattern sem quebrar consistencia."
+
+  - id: ds-extract-tokens
+    file: tasks/ds-extract-tokens.md
+    agents: [brad-frost]
+    description: "Extrair tokens a partir do sistema atual."
+
+  - id: ds-generate-ai-metadata
+    file: tasks/ds-generate-ai-metadata.md
+    agents: [brad-frost]
+    description: "Gerar metadata de componentes para agentes."
+
+  - id: ds-generate-documentation
+    file: tasks/ds-generate-documentation.md
+    agents: [brad-frost]
+    description: "Gerar documentacao de design system."
+
+  - id: ds-generate-migration-strategy
+    file: tasks/ds-generate-migration-strategy.md
+    agents: [brad-frost]
+    description: "Gerar estrategia de migracao faseada."
+
+  - id: ds-generate-shock-report
+    file: tasks/ds-generate-shock-report.md
+    agents: [brad-frost]
+    description: "Gerar report visual de caos e desperdicio."
+
+  - id: ds-govern-a11y-compliance
+    file: tasks/ds-govern-a11y-compliance.md
+    agents: [brad-frost]
+    description: "Governanca e gate de acessibilidade."
+
+  - id: ds-health-metrics
+    file: tasks/ds-health-metrics.md
+    agents: [brad-frost]
+    description: "Calcular health score do design system."
+
+  - id: ds-integrate-squad
+    file: tasks/ds-integrate-squad.md
+    agents: [design-chief]
+    description: "Integrar squad com ecossistema AIOX."
+
+  - id: ds-integrate-workspace
+    file: tasks/ds-integrate-workspace.md
+    agents: [brad-frost]
+    description: "Integrar design system ao workspace."
+
+  - id: ds-legacy-modernization
+    file: tasks/ds-legacy-modernization.md
+    agents: [brad-frost, design-chief]
+    description: "Modernizar legado para stack de design system."
+
+  - id: ds-parallelization-gate
+    file: tasks/ds-parallelization-gate.md
+    agents: [design-chief]
+    description: "Gate de dependencia para paralelizacao."
+
+  - id: ds-rebuild-artifact
+    file: tasks/ds-rebuild-artifact.md
+    agents: [brad-frost]
+    description: "Reconstruir artefato de design system."
+
+  - id: ds-reverse-engineer
+    file: tasks/ds-reverse-engineer.md
+    agents: [brad-frost]
+    description: "Extrair padroes de sistemas validados."
+
+  - id: ds-scan-artifact
+    file: tasks/ds-scan-artifact.md
+    agents: [brad-frost]
+    description: "Escanear artefato visual para diagnostico."
+
+  - id: ds-setup-design-system
+    file: tasks/ds-setup-design-system.md
+    agents: [brad-frost]
+    description: "Setup inicial de design system."
+
+  - id: ds-sync-registry
+    file: tasks/ds-sync-registry.md
+    agents: [brad-frost]
+    description: "Sincronizar registry, metadata e docs."
+
+  - id: ds-generate-cursor-rules
+    file: tasks/ds-generate-cursor-rules.md
+    agents: [brad-frost]
+    description: "Gerar regras de IDE a partir do design system."
+
+  - id: ds-mcp-status
+    file: tasks/ds-mcp-status.md
+    agents: [brad-frost]
+    description: "Auditar status e disponibilidade do MCP do design system."
+
+  - id: ds-query
+    file: tasks/ds-query.md
+    agents: [brad-frost]
+    description: "Consultar design system via interface MCP interativa."
+
+  - id: ds-validate-ai-readiness
+    file: tasks/ds-validate-ai-readiness.md
+    agents: [brad-frost]
+    description: "Validar prontidao AI dos artefatos de design system."
+
+  - id: ds-agentic-audit
+    file: tasks/ds-agentic-audit.md
+    agents: [brad-frost]
+    description: "Auditar prontidao agentic do design system."
+
+  - id: ds-agentic-setup
+    file: tasks/ds-agentic-setup.md
+    agents: [brad-frost]
+    description: "Estruturar fundamentos de DS para agentes AI."
+
+  - id: ds-token-w3c-extract
+    file: tasks/ds-token-w3c-extract.md
+    agents: [brad-frost]
+    description: "Extrair tokens no padrao W3C DTCG."
+
+  - id: ds-token-modes
+    file: tasks/ds-token-modes.md
+    agents: [brad-frost]
+    description: "Modelar modos de tokens (tema, contexto, brand)."
+
+  - id: ds-motion-audit
+    file: tasks/ds-motion-audit.md
+    agents: [brad-frost]
+    description: "Auditar motion e animacoes com governanca."
+
+  - id: ds-visual-regression
+    file: tasks/ds-visual-regression.md
+    agents: [brad-frost]
+    description: "Validar regressao visual por baseline comparativa."
+
+  - id: ds-fluent-audit
+    file: tasks/ds-fluent-audit.md
+    agents: [brad-frost]
+    description: "Auditar aderencia a principios Fluent 2."
+
+  - id: ds-fluent-build
+    file: tasks/ds-fluent-build.md
+    agents: [brad-frost]
+    description: "Construir componentes com blueprint Fluent 2."
+
+  - id: ds-theme-multi-brand
+    file: tasks/ds-theme-multi-brand.md
+    agents: [brad-frost]
+    description: "Definir theming multi-brand orientado a tokens."
+
+  - id: ds-multi-framework
+    file: tasks/ds-multi-framework.md
+    agents: [brad-frost]
+    description: "Planejar componentes para multiplos frameworks."
+
+  - id: ds-governance
+    file: tasks/ds-governance.md
+    agents: [brad-frost]
+    description: "Definir modelo de governanca e contribuicao do design system."
+
+  - id: ds-designops
+    file: tasks/ds-designops.md
+    agents: [dave-malouf, brad-frost]
+    description: "Estruturar operacao DesignOps com metricas e playbook."
+
+  - id: ds-critical-eye-inventory
+    file: tasks/ds-critical-eye-inventory.md
+    agents: [brad-frost]
+    description: "Inventariar variantes por categoria para curadoria."
+
+  - id: ds-critical-eye-score
+    file: tasks/ds-critical-eye-score.md
+    agents: [brad-frost]
+    description: "Pontuar variantes nas 5 dimensoes (100 pts)."
+
+  - id: ds-critical-eye-compare
+    file: tasks/ds-critical-eye-compare.md
+    agents: [brad-frost]
+    description: "Comparar e ranquear variantes dentro de categoria."
+
+  - id: ds-critical-eye-decide
+    file: tasks/ds-critical-eye-decide.md
+    agents: [brad-frost]
+    description: "Executar transicoes de lifecycle e gerar proposals."
+
+  - id: ds-critical-eye-report
+    file: tasks/ds-critical-eye-report.md
+    agents: [brad-frost]
+    description: "Gerar relatorio de ciclo do Critical Eye."
+
+  - id: ds-figma-pipeline
+    file: tasks/ds-figma-pipeline.md
+    agents: [brad-frost]
+    description: "Configurar pipeline Figma MCP para design-to-code."
+
+  - id: f1-ingest-figma-tokens
+    file: tasks/f1-ingest-figma-tokens.md
+    agents: [ds-foundations-lead]
+    description: "Receber e normalizar tokens do Figma."
+
+  - id: f1-map-tokens-to-shadcn
+    file: tasks/f1-map-tokens-to-shadcn.md
+    agents: [ds-foundations-lead]
+    description: "Mapear tokens Figma para CSS vars shadcn em OKLch."
+
+  - id: f1-apply-foundations
+    file: tasks/f1-apply-foundations.md
+    agents: [ds-foundations-lead]
+    description: "Aplicar tokens mapeados no globals.css e @theme inline."
+
+  - id: f1-qa-foundations
+    file: tasks/f1-qa-foundations.md
+    agents: [ds-foundations-lead]
+    description: "QA gate de foundations e tokens."
+
+  - id: f2-ingest-base-components
+    file: tasks/f2-ingest-base-components.md
+    agents: [ds-foundations-lead]
+    description: "Receber especificacoes visuais de componentes do Figma."
+
+  - id: f2-adapt-shadcn-components
+    file: tasks/f2-adapt-shadcn-components.md
+    agents: [ds-foundations-lead]
+    description: "Adaptar componentes shadcn para o visual do Figma."
+
+  - id: f2-qa-base-components
+    file: tasks/f2-qa-base-components.md
+    agents: [ds-foundations-lead]
+    description: "QA gate de base components."
+
+  - id: f3-derive-components
+    file: tasks/f3-derive-components.md
+    agents: [ds-foundations-lead]
+    description: "Derivar componentes restantes seguindo padroes estabelecidos."
+
+  - id: f3-qa-derived-components
+    file: tasks/f3-qa-derived-components.md
+    agents: [ds-foundations-lead]
+    description: "QA gate final de todos os componentes."
+
+  - id: a11y-audit
+    file: tasks/a11y-audit.md
+    agents: [brad-frost]
+    description: "Auditoria geral de acessibilidade."
+
+  - id: aria-audit
+    file: tasks/aria-audit.md
+    agents: [brad-frost]
+    description: "Auditoria de atributos ARIA."
+
+  - id: contrast-matrix
+    file: tasks/contrast-matrix.md
+    agents: [brad-frost]
+    description: "Matriz de contraste WCAG."
+
+  - id: focus-order-audit
+    file: tasks/focus-order-audit.md
+    agents: [brad-frost]
+    description: "Auditoria de ordem de foco."
+
+  - id: atomic-refactor-plan
+    file: tasks/atomic-refactor-plan.md
+    agents: [brad-frost]
+    description: "Planejar refactor atomic."
+
+  - id: atomic-refactor-execute
+    file: tasks/atomic-refactor-execute.md
+    agents: [brad-frost]
+    description: "Executar refactor atomic."
+
+  - id: audit-reading-experience
+    file: tasks/audit-reading-experience.md
+    agents: [brad-frost]
+    description: "Auditar legibilidade e experiencia de leitura."
+
+  - id: audit-tailwind-config
+    file: tasks/audit-tailwind-config.md
+    agents: [brad-frost]
+    description: "Auditar configuracao Tailwind."
+
+  - id: bootstrap-shadcn-library
+    file: tasks/bootstrap-shadcn-library.md
+    agents: [brad-frost]
+    description: "Bootstrap de biblioteca Shadcn."
+
+  - id: bundle-audit
+    file: tasks/bundle-audit.md
+    agents: [brad-frost]
+    description: "Auditar impacto de bundle."
+
+  - id: dead-code-detection
+    file: tasks/dead-code-detection.md
+    agents: [brad-frost]
+    description: "Detectar codigo morto."
+
+  - id: design-compare
+    file: tasks/design-compare.md
+    agents: [brad-frost]
+    description: "Comparar implementacoes de design."
+
+  - id: export-design-tokens-dtcg
+    file: tasks/export-design-tokens-dtcg.md
+    agents: [brad-frost]
+    description: "Exportar tokens no padrao DTCG."
+
+  - id: tailwind-upgrade
+    file: tasks/tailwind-upgrade.md
+    agents: [brad-frost]
+    description: "Atualizar Tailwind com governanca."
+
+  - id: token-usage-analytics
+    file: tasks/token-usage-analytics.md
+    agents: [brad-frost]
+    description: "Analisar uso de tokens no codebase."
+
+  - id: ux-rewrite-sixth-grade
+    file: tasks/ux-rewrite-sixth-grade.md
+    agents: [brad-frost]
+    description: "Reescrever UX copy para leitura simplificada."
+
+  - id: validate-design-fidelity
+    file: tasks/validate-design-fidelity.md
+    agents: [brad-frost]
+    description: "Validar fidelidade visual implementada."
+
+  - id: designops-maturity-assessment
+    file: tasks/designops-maturity-assessment.md
+    agents: [dave-malouf]
+    description: "Diagnostico de maturidade DesignOps."
+
+  - id: designops-metrics-setup
+    file: tasks/designops-metrics-setup.md
+    agents: [dave-malouf]
+    description: "Setup de metricas DesignOps."
+
+  - id: design-team-scaling
+    file: tasks/design-team-scaling.md
+    agents: [dave-malouf]
+    description: "Escalar time de design de forma sustentavel."
+
+  - id: design-tooling-audit
+    file: tasks/design-tooling-audit.md
+    agents: [dave-malouf]
+    description: "Auditoria de stack e tooling de design."
+
+  - id: design-process-optimization
+    file: tasks/design-process-optimization.md
+    agents: [dave-malouf]
+    description: "Otimizar processo de trabalho de design."
+
+  - id: design-triage
+    file: tasks/design-triage.md
+    agents: [dave-malouf]
+    description: "Triagem e priorizacao de demandas."
+
+  - id: design-review-orchestration
+    file: tasks/design-review-orchestration.md
+    agents: [design-chief, dave-malouf]
+    description: "Orquestrar review de design com governanca."
+
+  - id: create-doc
+    file: tasks/create-doc.md
+    agents: [design-chief]
+    description: "Criacao guiada de documentacao."
+
+  - id: execute-checklist
+    file: tasks/execute-checklist.md
+    agents: [design-chief]
+    description: "Executar checklist com evidencias."
+
+checklists:
+  - id: atomic-refactor-checklist
+    file: checklists/atomic-refactor-checklist.md
+  - id: ds-accessibility-wcag-checklist
+    file: checklists/ds-accessibility-wcag-checklist.md
+  - id: ds-a11y-release-gate-checklist
+    file: checklists/ds-a11y-release-gate-checklist.md
+  - id: ds-component-quality-checklist
+    file: checklists/ds-component-quality-checklist.md
+  - id: ds-migration-readiness-checklist
+    file: checklists/ds-migration-readiness-checklist.md
+  - id: ds-pattern-audit-checklist
+    file: checklists/ds-pattern-audit-checklist.md
+  - id: token-mapping-checklist
+    file: checklists/token-mapping-checklist.md
+  - id: component-adaptation-checklist
+    file: checklists/component-adaptation-checklist.md
+  - id: design-fidelity-checklist
+    file: checklists/design-fidelity-checklist.md
+  - id: reading-accessibility-checklist
+    file: checklists/reading-accessibility-checklist.md
+  - id: design-handoff-checklist
+    file: checklists/design-handoff-checklist.md
+  - id: design-team-health-checklist
+    file: checklists/design-team-health-checklist.md
+  - id: designops-maturity-checklist
+    file: checklists/designops-maturity-checklist.md
+  - id: ds-critical-eye-review-checklist
+    file: checklists/ds-critical-eye-review-checklist.md
+  - id: page-composition-checklist
+    file: checklists/page-composition-checklist.md
+
+templates:
+  - id: component-prompt-injection-tmpl
+    file: templates/component-prompt-injection-tmpl.md
+  - id: component-visual-spec-tmpl
+    file: templates/component-visual-spec-tmpl.md
+  - id: design-fidelity-report-tmpl
+    file: templates/design-fidelity-report-tmpl.md
+  - id: ds-artifact-analysis
+    file: templates/ds-artifact-analysis.md
+  - id: ds-health-report-tmpl
+    file: templates/ds-health-report-tmpl.md
+  - id: ds-migration-strategy-tmpl
+    file: templates/ds-migration-strategy-tmpl.md
+  - id: ds-state-persistence-tmpl
+    file: templates/ds-state-persistence-tmpl.yaml
+  - id: ds-tokens-schema-tmpl
+    file: templates/ds-tokens-schema-tmpl.yaml
+  - id: ds-ai-component-metadata-schema-tmpl
+    file: templates/ds-ai-component-metadata-schema-tmpl.json
+  - id: migration-strategy-tmpl
+    file: templates/migration-strategy-tmpl.md
+  - id: state-persistence-tmpl
+    file: templates/state-persistence-tmpl.yaml
+  - id: tokens-schema-tmpl
+    file: templates/tokens-schema-tmpl.yaml
+  - id: reading-design-tokens
+    file: templates/reading-design-tokens.css
+  - id: agent-template
+    file: templates/agent-template.yaml
+  - id: clone-mind-template
+    file: templates/clone-mind-template.md
+  - id: critical-eye-cycle-report-tmpl
+    file: templates/critical-eye-cycle-report-tmpl.md
+
+data:
+  - id: atomic-design-principles
+    file: data/atomic-design-principles.md
+  - id: atomic-refactor-rules
+    file: data/atomic-refactor-rules.md
+  - id: consolidation-algorithms
+    file: data/consolidation-algorithms.md
+  - id: design-token-best-practices
+    file: data/design-token-best-practices.md
+  - id: design-tokens-spec
+    file: data/design-tokens-spec.yaml
+  - id: high-retention-reading-guide
+    file: data/high-retention-reading-guide.md
+  - id: integration-patterns
+    file: data/integration-patterns.md
+  - id: roi-calculation-guide
+    file: data/roi-calculation-guide.md
+  - id: wcag-compliance-guide
+    file: data/wcag-compliance-guide.md
+  - id: agentic-design-systems-guide
+    file: data/agentic-design-systems-guide.md
+  - id: agentic-ds-principles
+    file: data/agentic-ds-principles.md
+  - id: ds-reference-architectures
+    file: data/ds-reference-architectures.md
+  - id: fluent2-design-principles
+    file: data/fluent2-design-principles.md
+  - id: motion-tokens-guide
+    file: data/motion-tokens-guide.md
+  - id: w3c-dtcg-spec-reference
+    file: data/w3c-dtcg-spec-reference.md
+  - id: brad-frost-dna
+    file: data/brad-frost-dna.yaml
+  - id: brad-frost-analysis-extract-implicit
+    file: data/brad-frost-analysis-extract-implicit.yaml
+  - id: brad-frost-analysis-find-0.8
+    file: data/brad-frost-analysis-find-0.8.yaml
+  - id: brad-frost-analysis-qa-report
+    file: data/brad-frost-analysis-qa-report.yaml
+  - id: token-mapping-reference
+    file: data/token-mapping-reference.md
+  - id: figma-tokens-raw
+    file: data/figma-tokens-raw.md
+  - id: figma-base-components-raw
+    file: data/figma-base-components-raw.md
+  - id: base-component-specs
+    file: data/base-component-specs.md
+  - id: component-adaptation-changelog
+    file: data/component-adaptation-changelog.md
+  - id: f2-qa-report
+    file: data/f2-qa-report.md
+  - id: f3-derived-components-changelog
+    file: data/f3-derived-components-changelog.md
+  - id: f3-qa-report
+    file: data/f3-qa-report.md
+  - id: critical-eye-scoring-rules
+    file: data/critical-eye-scoring-rules.yaml
+  - id: page-layout-framework
+    file: data/page-layout-framework.md
+    description: "Grid systems, breakpoints, responsive techniques, 5 layout patterns com wireframe ASCII e Tailwind classes."
+  - id: page-type-patterns
+    file: data/page-type-patterns.md
+    description: "6 page templates (landing, product, dashboard, auth, content, settings) com secoes, componentes shadcn e wireframes."
+  - id: typography-hierarchy-rules
+    file: data/typography-hierarchy-rules.md
+    description: "Modular type scale 1.25, tokens semanticos, vertical rhythm 24px, responsive type scale."
+  - id: spacing-rhythm-system
+    file: data/spacing-rhythm-system.md
+    description: "4px baseline grid, spacing tokens space-0 a space-24, lei de proximidade, 3 whitespace strategies."
+  - id: copy-to-layout-bridge
+    file: data/copy-to-layout-bridge.md
+    description: "Mapeamento AIDA/PAS/StoryBrand para secoes visuais, eye patterns, visual weight rules, briefing template."
+  - id: component-index
+    file: data/component-index.json
+    description: "Indice machine-readable de 46 componentes shadcn/ui com props, variants, page_sections e guidance."
+
+tags:
+  - design-system
+  - tokens
+  - components
+  - accessibility
+  - wcag
+  - atomic-design
+  - tailwind-v4
+  - shadcn-registry
+  - machine-readable
+  - mcp
+  - designops

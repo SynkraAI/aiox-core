@@ -1,0 +1,1631 @@
+{
+  "language": "pt",
+  "original_segments": 292,
+  "cleaned_segments": 203,
+  "segments": [
+    {
+      "start": 0.32,
+      "end": 4.96,
+      "start_formatted": "00:00",
+      "end_formatted": "00:04",
+      "text": "Chegou a hora de a gente fazer o nosso anúncio e a gente vai escrever a copy, Renan, o que é copy?",
+      "type": "speech"
+    },
+    {
+      "start": 5.08,
+      "end": 8.88,
+      "start_formatted": "00:05",
+      "end_formatted": "00:08",
+      "text": "Copy é o texto persuasivo para se comunicar com o nosso cliente.",
+      "type": "speech"
+    },
+    {
+      "start": 9.16,
+      "end": 13.700000000000001,
+      "start_formatted": "00:09",
+      "end_formatted": "00:13",
+      "text": "E a grande dificuldade das pessoas aqui é fazer uma copy, Renan, e como que eu faço uma copy?",
+      "type": "speech"
+    },
+    {
+      "start": 14.26,
+      "end": 20.8,
+      "start_formatted": "00:14",
+      "end_formatted": "00:20",
+      "text": "Sendo assertivo. Você não pode dar volta. Se você for gravar um vídeo, você tem que ser direto ao ponto,",
+      "type": "speech"
+    },
+    {
+      "start": 20.88,
+      "end": 26.38,
+      "start_formatted": "00:20",
+      "end_formatted": "00:26",
+      "text": "não falar, olá, eu sou o Renan Vieira. Quem quer saber quem é o Renan Vieira?",
+      "type": "speech"
+    },
+    {
+      "start": 26.38,
+      "end": 30.46,
+      "start_formatted": "00:26",
+      "end_formatted": "00:30",
+      "text": "Ninguém quer nem saber quem é o Renan. As pessoas querem saber o quê?",
+      "type": "speech"
+    },
+    {
+      "start": 30.7,
+      "end": 35.72,
+      "start_formatted": "00:30",
+      "end_formatted": "00:35",
+      "text": "O que ajuda a pessoa a solucionar o problema. Pensa, as pessoas são egoístas, elas não te conhecem.",
+      "type": "speech"
+    },
+    {
+      "start": 36.1,
+      "end": 39.16,
+      "start_formatted": "00:36",
+      "end_formatted": "00:39",
+      "text": "Elas vão querer o quê? A solução do problema. Então vamos lá.",
+      "type": "speech"
+    },
+    {
+      "start": 39.66,
+      "end": 43.66,
+      "start_formatted": "00:39",
+      "end_formatted": "00:43",
+      "text": "Existe dentro do processo de mentoria, o que eu quero que você entenda?",
+      "type": "speech"
+    },
+    {
+      "start": 44.06,
+      "end": 48.92,
+      "start_formatted": "00:44",
+      "end_formatted": "00:48",
+      "text": "Vou citar um exemplo de médicos. Médicos que podem ser mentores.",
+      "type": "speech"
+    },
+    {
+      "start": 49.4,
+      "end": 53.54,
+      "start_formatted": "00:49",
+      "end_formatted": "00:53",
+      "text": "Dentro do nicho médicos, existe aquele médico que ele é bom pra caramba,",
+      "type": "speech"
+    },
+    {
+      "start": 53.54,
+      "end": 56.16,
+      "start_formatted": "00:53",
+      "end_formatted": "00:56",
+      "text": "ele trabalha na profissão dele.",
+      "type": "speech"
+    },
+    {
+      "start": 56.38,
+      "end": 61.88,
+      "start_formatted": "00:56",
+      "end_formatted": "01:01",
+      "text": "Só que nunca passou na cabeça dele em vender mentoria.",
+      "type": "speech"
+    },
+    {
+      "start": 62.32,
+      "end": 69.5,
+      "start_formatted": "01:02",
+      "end_formatted": "01:09",
+      "text": "Ou seja, se eu pegar e fazer assim, você já pensou, você gostaria de vender na internet seu conhecimento médico?",
+      "type": "speech"
+    },
+    {
+      "start": 70.54,
+      "end": 76.80000000000001,
+      "start_formatted": "01:10",
+      "end_formatted": "01:16",
+      "text": "Ele, ah, será? Ah, esse cara vai dar muito trabalho de vender, porque eu vou ter que convencer ele.",
+      "type": "speech"
+    },
+    {
+      "start": 76.88,
+      "end": 82.28,
+      "start_formatted": "01:16",
+      "end_formatted": "01:22",
+      "text": "Sabe aquele tio chato médico que tu conversa? Não, o digital, dá isso, dá aquilo.",
+      "type": "speech"
+    },
+    {
+      "start": 82.28,
+      "end": 86.36,
+      "start_formatted": "01:22",
+      "end_formatted": "01:26",
+      "text": "Esse cara, ele pode ser bom, pode ser um baita doente.",
+      "type": "speech"
+    },
+    {
+      "start": 86.38,
+      "end": 88.58,
+      "start_formatted": "01:26",
+      "end_formatted": "01:28",
+      "text": "Ele pode ser um baita doente, mas ele não tá pronto pra comprar.",
+      "type": "speech"
+    },
+    {
+      "start": 89.0,
+      "end": 94.02,
+      "start_formatted": "01:29",
+      "end_formatted": "01:34",
+      "text": "Quando eu ia lá pra Santa Catarina, quando eu comecei a minha trajetória, minha família toda contra.",
+      "type": "speech"
+    },
+    {
+      "start": 94.36,
+      "end": 98.44,
+      "start_formatted": "01:34",
+      "end_formatted": "01:38",
+      "text": "O meu cunhado, eu falei, nunca sei, eu achei que essa porra aí nunca ia dar certo.",
+      "type": "speech"
+    },
+    {
+      "start": 98.86,
+      "end": 102.53999999999999,
+      "start_formatted": "01:38",
+      "end_formatted": "01:42",
+      "text": "O meu cunhado Tiago sempre falou, não achei que isso ia dar certo, cara.",
+      "type": "speech"
+    },
+    {
+      "start": 103.03999999999999,
+      "end": 105.08,
+      "start_formatted": "01:43",
+      "end_formatted": "01:45",
+      "text": "Nunca apostei, cara. Nossa, errei, hein?",
+      "type": "speech"
+    },
+    {
+      "start": 105.44,
+      "end": 111.91999999999999,
+      "start_formatted": "01:45",
+      "end_formatted": "01:51",
+      "text": "Então o que acontece? Convencer o Tiago, sabe, é igual o São Tomé, tem que ver para crer, entendeu?",
+      "type": "speech"
+    },
+    {
+      "start": 112.38,
+      "end": 115.19999999999999,
+      "start_formatted": "01:52",
+      "end_formatted": "01:55",
+      "text": "Então esse cara não é o cara que a gente quer.",
+      "type": "speech"
+    },
+    {
+      "start": 115.56,
+      "end": 117.58,
+      "start_formatted": "01:55",
+      "end_formatted": "01:57",
+      "text": "A gente quer o cara. O cara pronto pra comprar.",
+      "type": "speech"
+    },
+    {
+      "start": 118.08,
+      "end": 124.64,
+      "start_formatted": "01:58",
+      "end_formatted": "02:04",
+      "text": "Ou o cara que ele já sabe do problema, e o principal que a gente quer fazer um anúncio é o de consideração e decisão.",
+      "type": "speech"
+    },
+    {
+      "start": 124.74,
+      "end": 129.28,
+      "start_formatted": "02:04",
+      "end_formatted": "02:09",
+      "text": "Por exemplo, então existe outro médico, e ele, pô, de repente algum amigo falou,",
+      "type": "speech"
+    },
+    {
+      "start": 129.42,
+      "end": 130.92,
+      "start_formatted": "02:09",
+      "end_formatted": "02:10",
+      "text": "tu já pensou em vender alguma coisa digital?",
+      "type": "speech"
+    },
+    {
+      "start": 131.42,
+      "end": 137.1,
+      "start_formatted": "02:11",
+      "end_formatted": "02:17",
+      "text": "Pô, legal, esse cara legal, ai, eu posso, cara, eu posso ensinar isso, né?",
+      "type": "speech"
+    },
+    {
+      "start": 137.62,
+      "end": 142.84,
+      "start_formatted": "02:17",
+      "end_formatted": "02:22",
+      "text": "Então é um cara que ele vai dar menos trabalho do que aquele tio chato lá, médico, que não sabe nada.",
+      "type": "speech"
+    },
+    {
+      "start": 143.16,
+      "end": 145.84,
+      "start_formatted": "02:23",
+      "end_formatted": "02:25",
+      "text": "Depois nós temos o cara que considerou.",
+      "type": "speech"
+    },
+    {
+      "start": 145.84,
+      "end": 152.58,
+      "start_formatted": "02:25",
+      "end_formatted": "02:32",
+      "text": "Esse cara já viu, ele já tá decidido, ele tá procurando quem é o mentor dele, quem vai ser.",
+      "type": "speech"
+    },
+    {
+      "start": 152.66,
+      "end": 158.22,
+      "start_formatted": "02:32",
+      "end_formatted": "02:38",
+      "text": "Eu acabei de falar hoje com uma pessoa que ela está procurando, ela tá decidindo, ela falou que vai viver na internet.",
+      "type": "speech"
+    },
+    {
+      "start": 158.88,
+      "end": 163.96,
+      "start_formatted": "02:38",
+      "end_formatted": "02:43",
+      "text": "Então ela está no momento de decisão, se ela vai entrar ou não vai entrar na minha mentoria.",
+      "type": "speech"
+    },
+    {
+      "start": 164.28,
+      "end": 166.56,
+      "start_formatted": "02:44",
+      "end_formatted": "02:46",
+      "text": "Esse é o melhor público, é o público que eu quero.",
+      "type": "speech"
+    },
+    {
+      "start": 166.98000000000002,
+      "end": 168.58,
+      "start_formatted": "02:46",
+      "end_formatted": "02:48",
+      "text": "Então o que que eu, olha a diferença.",
+      "type": "speech"
+    },
+    {
+      "start": 169.58,
+      "end": 174.68,
+      "start_formatted": "02:49",
+      "end_formatted": "02:54",
+      "text": "Então o meu anúncio, ele já disse assim, ó, como vender de 10 a 30 mentorias.",
+      "type": "speech"
+    },
+    {
+      "start": 174.68,
+      "end": 180.84,
+      "start_formatted": "02:54",
+      "end_formatted": "03:00",
+      "text": "De 2.997 por mês, em um vídeo de 30 minutos, entendeu?",
+      "type": "speech"
+    },
+    {
+      "start": 181.54000000000002,
+      "end": 182.82,
+      "start_formatted": "03:01",
+      "end_formatted": "03:02",
+      "text": "Com um vídeo de 10 minutos.",
+      "type": "speech"
+    },
+    {
+      "start": 183.24,
+      "end": 188.96,
+      "start_formatted": "03:03",
+      "end_formatted": "03:08",
+      "text": "Então, cara, eu já tô sendo muito direto ao ponto, já tô falando, cara, como vender de 10 a 30 mentorias.",
+      "type": "speech"
+    },
+    {
+      "start": 189.52,
+      "end": 191.26000000000002,
+      "start_formatted": "03:09",
+      "end_formatted": "03:11",
+      "text": "Simples assim, show de bola.",
+      "type": "speech"
+    },
+    {
+      "start": 193.06,
+      "end": 195.12,
+      "start_formatted": "03:13",
+      "end_formatted": "03:15",
+      "text": "Não é mentor, mas ele pode ser mentor.",
+      "type": "speech"
+    },
+    {
+      "start": 195.22,
+      "end": 200.06,
+      "start_formatted": "03:15",
+      "end_formatted": "03:20",
+      "text": "Então assim, ó, dentro desse nicho, por exemplo, o dentista, eu acho que posso ser mentor.",
+      "type": "speech"
+    },
+    {
+      "start": 200.36,
+      "end": 203.0,
+      "start_formatted": "03:20",
+      "end_formatted": "03:23",
+      "text": "E ele quer ser mentor, está procurando uma solução.",
+      "type": "speech"
+    },
+    {
+      "start": 203.0,
+      "end": 204.54000000000002,
+      "start_formatted": "03:23",
+      "end_formatted": "03:24",
+      "text": "Então a gente vai fazer um anúncio.",
+      "type": "speech"
+    },
+    {
+      "start": 204.68,
+      "end": 208.08,
+      "start_formatted": "03:24",
+      "end_formatted": "03:28",
+      "text": "Tu tem que pensar que essa pessoa, ela está na tua frente.",
+      "type": "speech"
+    },
+    {
+      "start": 208.20000000000002,
+      "end": 210.42000000000002,
+      "start_formatted": "03:28",
+      "end_formatted": "03:30",
+      "text": "Você tem que falar o problema dela e qual é a solução.",
+      "type": "speech"
+    },
+    {
+      "start": 210.56,
+      "end": 211.52,
+      "start_formatted": "03:30",
+      "end_formatted": "03:31",
+      "text": "É isso o anúncio.",
+      "type": "speech"
+    },
+    {
+      "start": 211.8,
+      "end": 216.38,
+      "start_formatted": "03:31",
+      "end_formatted": "03:36",
+      "text": "E eu vejo cada anúncio mal feito, eu já sei se o público vai chegar certo ou não.",
+      "type": "speech"
+    },
+    {
+      "start": 216.70000000000002,
+      "end": 217.38,
+      "start_formatted": "03:36",
+      "end_formatted": "03:37",
+      "text": "Então o que tu vai fazer?",
+      "type": "speech"
+    },
+    {
+      "start": 217.48000000000002,
+      "end": 221.74,
+      "start_formatted": "03:37",
+      "end_formatted": "03:41",
+      "text": "Se tu tá dentro da mentoria, você vai fazer o seu anúncio, a cópia do anúncio, só escrever.",
+      "type": "speech"
+    },
+    {
+      "start": 222.14000000000001,
+      "end": 223.82,
+      "start_formatted": "03:42",
+      "end_formatted": "03:43",
+      "text": "E vai mandar lá no grupo pra gente analisar.",
+      "type": "speech"
+    },
+    {
+      "start": 224.18,
+      "end": 228.8,
+      "start_formatted": "03:44",
+      "end_formatted": "03:48",
+      "text": "Vai pedir a opinião primeiro dos nossos colegas, dos nossos mentorados.",
+      "type": "speech"
+    },
+    {
+      "start": 229.18,
+      "end": 229.52,
+      "start_formatted": "03:49",
+      "end_formatted": "03:49",
+      "text": "Pra quê?",
+      "type": "speech"
+    },
+    {
+      "start": 229.64000000000001,
+      "end": 232.08,
+      "start_formatted": "03:49",
+      "end_formatted": "03:52",
+      "text": "Pra eles interagirem com você, fazer network.",
+      "type": "speech"
+    },
+    {
+      "start": 232.32,
+      "end": 234.66,
+      "start_formatted": "03:52",
+      "end_formatted": "03:54",
+      "text": "Isso é muito importante. Depois eu vou dar a minha opinião.",
+      "type": "speech"
+    },
+    {
+      "start": 234.68,
+      "end": 237.68,
+      "start_formatted": "03:54",
+      "end_formatted": "03:57",
+      "text": "Fechou? Então não é só o Renan.",
+      "type": "speech"
+    },
+    {
+      "start": 237.68,
+      "end": 241.18,
+      "start_formatted": "03:57",
+      "end_formatted": "04:01",
+      "text": "A mentoria é lá de sua, o grupo é de você.",
+      "type": "speech"
+    },
+    {
+      "start": 241.18,
+      "end": 244.68,
+      "start_formatted": "04:01",
+      "end_formatted": "04:04",
+      "text": "Seu. Então tá. Então ficou claro isso.",
+      "type": "speech"
+    },
+    {
+      "start": 244.68,
+      "end": 248.18,
+      "start_formatted": "04:04",
+      "end_formatted": "04:08",
+      "text": "Então dentro existe o cara que ele tá descobrindo.",
+      "type": "speech"
+    },
+    {
+      "start": 248.18,
+      "end": 250.68,
+      "start_formatted": "04:08",
+      "end_formatted": "04:10",
+      "text": "Ele pode ser mentor, mas ele nem sabe. Esse cara eu não quero.",
+      "type": "speech"
+    },
+    {
+      "start": 250.68,
+      "end": 253.18,
+      "start_formatted": "04:10",
+      "end_formatted": "04:13",
+      "text": "Eu já quero o cara que tá pronto pra comprar.",
+      "type": "speech"
+    },
+    {
+      "start": 253.18,
+      "end": 256.18,
+      "start_formatted": "04:13",
+      "end_formatted": "04:16",
+      "text": "Porque eu quero fazer uma venda rápida. É assim que a gente vende.",
+      "type": "speech"
+    },
+    {
+      "start": 256.18,
+      "end": 262.18,
+      "start_formatted": "04:16",
+      "end_formatted": "04:22",
+      "text": "Esse cara aqui da descoberta, ele vai começar a conhecer o nosso Instagram.",
+      "type": "speech"
+    },
+    {
+      "start": 262.18,
+      "end": 264.18,
+      "start_formatted": "04:22",
+      "end_formatted": "04:24",
+      "text": "E daqui dois, três meses ele vai comprar, tá?",
+      "type": "speech"
+    },
+    {
+      "start": 264.68,
+      "end": 265.68,
+      "start_formatted": "04:24",
+      "end_formatted": "04:25",
+      "text": "Então vamos lá.",
+      "type": "speech"
+    },
+    {
+      "start": 265.68,
+      "end": 273.18,
+      "start_formatted": "04:25",
+      "end_formatted": "04:33",
+      "text": "Dentro do nicho mentoria, tem vários sub nichos.",
+      "type": "speech"
+    },
+    {
+      "start": 273.18,
+      "end": 274.68,
+      "start_formatted": "04:33",
+      "end_formatted": "04:34",
+      "text": "Tem médicos que querem vender mentorias.",
+      "type": "speech"
+    },
+    {
+      "start": 274.68,
+      "end": 276.68,
+      "start_formatted": "04:34",
+      "end_formatted": "04:36",
+      "text": "Tem dentista que quer vender mentorias.",
+      "type": "speech"
+    },
+    {
+      "start": 276.68,
+      "end": 282.68,
+      "start_formatted": "04:36",
+      "end_formatted": "04:42",
+      "text": "Esse médico e dentista aqui, esse próprio anúncio, ele já atrai o médico, já atrai",
+      "type": "speech"
+    },
+    {
+      "start": 282.68,
+      "end": 284.18,
+      "start_formatted": "04:42",
+      "end_formatted": "04:44",
+      "text": "o dentista, já atrai o psicólogo.",
+      "type": "speech"
+    },
+    {
+      "start": 284.18,
+      "end": 286.18,
+      "start_formatted": "04:44",
+      "end_formatted": "04:46",
+      "text": "Porque eu tô falando como vender mentoria.",
+      "type": "speech"
+    },
+    {
+      "start": 286.18,
+      "end": 290.18,
+      "start_formatted": "04:46",
+      "end_formatted": "04:50",
+      "text": "Mas por exemplo, o cara que quer escalar mentorias, eu não atrai o tanto.",
+      "type": "speech"
+    },
+    {
+      "start": 290.18,
+      "end": 292.18,
+      "start_formatted": "04:50",
+      "end_formatted": "04:52",
+      "text": "Por quê? Porque eu tô falando como vender.",
+      "type": "speech"
+    },
+    {
+      "start": 292.18,
+      "end": 294.18,
+      "start_formatted": "04:52",
+      "end_formatted": "04:54",
+      "text": "É. Se ele tá vendendo duas, três, quatro.",
+      "type": "speech"
+    },
+    {
+      "start": 294.18,
+      "end": 297.18,
+      "start_formatted": "04:54",
+      "end_formatted": "04:57",
+      "text": "Eu também atraio esse cara que quer escalar as mentorias.",
+      "type": "speech"
+    },
+    {
+      "start": 297.18,
+      "end": 301.18,
+      "start_formatted": "04:57",
+      "end_formatted": "05:01",
+      "text": "Mas eu não atraio, por exemplo, o cara que tá atraindo só leads desqualificados.",
+      "type": "speech"
+    },
+    {
+      "start": 301.18,
+      "end": 304.18,
+      "start_formatted": "05:01",
+      "end_formatted": "05:04",
+      "text": "Então, dentro aqui, o que que é isso aqui?",
+      "type": "speech"
+    },
+    {
+      "start": 304.18,
+      "end": 305.18,
+      "start_formatted": "05:04",
+      "end_formatted": "05:05",
+      "text": "Leads desqualificados.",
+      "type": "speech"
+    },
+    {
+      "start": 305.18,
+      "end": 307.18,
+      "start_formatted": "05:05",
+      "end_formatted": "05:07",
+      "text": "Eu posso atrair o público pelos sintomas.",
+      "type": "speech"
+    },
+    {
+      "start": 307.18,
+      "end": 310.18,
+      "start_formatted": "05:07",
+      "end_formatted": "05:10",
+      "text": "Renan, o que que seria os sintomas?",
+      "type": "speech"
+    },
+    {
+      "start": 310.18,
+      "end": 314.18,
+      "start_formatted": "05:10",
+      "end_formatted": "05:14",
+      "text": "Quando a pessoa tá com um problema aqui, ó, tem os sintomas.",
+      "type": "speech"
+    },
+    {
+      "start": 314.18,
+      "end": 317.18,
+      "start_formatted": "05:14",
+      "end_formatted": "05:17",
+      "text": "Qual o problema que ela tem na vida dela?",
+      "type": "speech"
+    },
+    {
+      "start": 317.18,
+      "end": 319.18,
+      "start_formatted": "05:17",
+      "end_formatted": "05:19",
+      "text": "Os sintomas. Só vem lead desqualificado.",
+      "type": "speech"
+    },
+    {
+      "start": 319.18,
+      "end": 323.18,
+      "start_formatted": "05:19",
+      "end_formatted": "05:23",
+      "text": "Tá difícil de vender. Não sabe vender. O cara não aparece na call.",
+      "type": "speech"
+    },
+    {
+      "start": 323.18,
+      "end": 326.18,
+      "start_formatted": "05:23",
+      "end_formatted": "05:26",
+      "text": "Então, tudo isso é o sintoma.",
+      "type": "speech"
+    },
+    {
+      "start": 326.18,
+      "end": 330.18,
+      "start_formatted": "05:26",
+      "end_formatted": "05:30",
+      "text": "Então, eu fazendo um anúncio pra esse público aqui é muito importante.",
+      "type": "speech"
+    },
+    {
+      "start": 330.18,
+      "end": 336.18,
+      "start_formatted": "05:30",
+      "end_formatted": "05:36",
+      "text": "Outra coisa muito importante do anúncio, o anúncio, ele tem que tá comunicando com o vídeo de vendas.",
+      "type": "speech"
+    },
+    {
+      "start": 336.18,
+      "end": 338.18,
+      "start_formatted": "05:36",
+      "end_formatted": "05:38",
+      "text": "Por isso que eu falei pra você fazer o vídeo de vendas antes.",
+      "type": "speech"
+    },
+    {
+      "start": 338.18,
+      "end": 342.18,
+      "start_formatted": "05:38",
+      "end_formatted": "05:42",
+      "text": "Agora que você fez o vídeo de vendas, você vai assim, ó.",
+      "type": "speech"
+    },
+    {
+      "start": 342.18,
+      "end": 344.18,
+      "start_formatted": "05:42",
+      "end_formatted": "05:44",
+      "text": "Você vai fazer um anúncio de acordo com o seu vídeo de vendas.",
+      "type": "speech"
+    },
+    {
+      "start": 344.18,
+      "end": 345.18,
+      "start_formatted": "05:44",
+      "end_formatted": "05:45",
+      "text": "Então, clicou aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 345.18,
+      "end": 348.18,
+      "start_formatted": "05:45",
+      "end_formatted": "05:48",
+      "text": "Como vender de 10 a 30 mentorias, o cara vai vir pro anúncio.",
+      "type": "speech"
+    },
+    {
+      "start": 348.18,
+      "end": 352.18,
+      "start_formatted": "05:48",
+      "end_formatted": "05:52",
+      "text": "A página vai tá escrita aqui, ó. Então, é importante que você tenha...",
+      "type": "speech"
+    },
+    {
+      "start": 352.18,
+      "end": 355.18,
+      "start_formatted": "05:52",
+      "end_formatted": "05:55",
+      "text": "Seja claro, quando eu começo a minha cópia aqui, ó.",
+      "type": "speech"
+    },
+    {
+      "start": 355.18,
+      "end": 356.18,
+      "start_formatted": "05:55",
+      "end_formatted": "05:56",
+      "text": "Mais de 10 mil reais.",
+      "type": "speech"
+    },
+    {
+      "start": 356.18,
+      "end": 359.18,
+      "start_formatted": "05:56",
+      "end_formatted": "05:59",
+      "text": "Que desejam crescer para 50, 100 mil reais.",
+      "type": "speech"
+    },
+    {
+      "start": 359.18,
+      "end": 361.18,
+      "start_formatted": "05:59",
+      "end_formatted": "06:01",
+      "text": "Lá em cima, eu falo, ó.",
+      "type": "speech"
+    },
+    {
+      "start": 361.18,
+      "end": 365.18,
+      "start_formatted": "06:01",
+      "end_formatted": "06:05",
+      "text": "Plano que eu utilizo para vender de 10 a 30 mentorias de 3 mil reais todos os meses.",
+      "type": "speech"
+    },
+    {
+      "start": 365.18,
+      "end": 371.18,
+      "start_formatted": "06:05",
+      "end_formatted": "06:11",
+      "text": "Então, desde o começo, desde o anúncio até o vídeo, eu tô comunicando tudo a mesma coisa.",
+      "type": "speech"
+    },
+    {
+      "start": 371.18,
+      "end": 375.18,
+      "start_formatted": "06:11",
+      "end_formatted": "06:15",
+      "text": "Não adianta você fazer um anúncio e trazer pra outro público.",
+      "type": "speech"
+    },
+    {
+      "start": 375.18,
+      "end": 378.18,
+      "start_formatted": "06:15",
+      "end_formatted": "06:18",
+      "text": "Então, você tem que tá tudo isso bem alinhado.",
+      "type": "speech"
+    },
+    {
+      "start": 378.18,
+      "end": 381.18,
+      "start_formatted": "06:18",
+      "end_formatted": "06:21",
+      "text": "Tudo isso tem que tá bem amarrado que a pessoa vai chegar lá e vai chegar ao público certo.",
+      "type": "speech"
+    },
+    {
+      "start": 381.18,
+      "end": 385.18,
+      "start_formatted": "06:21",
+      "end_formatted": "06:25",
+      "text": "Fechou? Então, ó. Aqui, como que você vai fazer?",
+      "type": "speech"
+    },
+    {
+      "start": 385.18,
+      "end": 388.18,
+      "start_formatted": "06:25",
+      "end_formatted": "06:28",
+      "text": "Você vai pegar esse texto aqui. Já vou abrindo o Canva aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 388.18,
+      "end": 392.18,
+      "start_formatted": "06:28",
+      "end_formatted": "06:32",
+      "text": "E é muito simples. Pelo amor do meu senhor.",
+      "type": "speech"
+    },
+    {
+      "start": 392.18,
+      "end": 395.18,
+      "start_formatted": "06:32",
+      "end_formatted": "06:35",
+      "text": "Não tem coisa mais simples. É um anúncio.",
+      "type": "speech"
+    },
+    {
+      "start": 395.18,
+      "end": 398.18,
+      "start_formatted": "06:35",
+      "end_formatted": "06:38",
+      "text": "Escrever um textinho. Envia mensagem ali, ó.",
+      "type": "speech"
+    },
+    {
+      "start": 398.18,
+      "end": 400.18,
+      "start_formatted": "06:38",
+      "end_formatted": "06:40",
+      "text": "Então, aqui abaixo dessa aula vai ter um modelo.",
+      "type": "speech"
+    },
+    {
+      "start": 400.18,
+      "end": 403.18,
+      "start_formatted": "06:40",
+      "end_formatted": "06:43",
+      "text": "Ai, Renan, eu quero fazer um vídeo em...",
+      "type": "speech"
+    },
+    {
+      "start": 403.18,
+      "end": 407.18,
+      "start_formatted": "06:43",
+      "end_formatted": "06:47",
+      "text": "Eu quero fazer um vídeo. Legal. Ó. Aqui eu botei vários ganchos.",
+      "type": "speech"
+    },
+    {
+      "start": 407.18,
+      "end": 410.18,
+      "start_formatted": "06:47",
+      "end_formatted": "06:50",
+      "text": "Você pode dizer... Utilizar o gatilho da autoridade.",
+      "type": "speech"
+    },
+    {
+      "start": 410.18,
+      "end": 415.18,
+      "start_formatted": "06:50",
+      "end_formatted": "06:55",
+      "text": "Você pode fazer uma pergunta. Está travada as vendas da sua mentoria?",
+      "type": "speech"
+    },
+    {
+      "start": 415.18,
+      "end": 419.18,
+      "start_formatted": "06:55",
+      "end_formatted": "06:59",
+      "text": "Está com problema no seu casamento? Eu tenho a solução.",
+      "type": "speech"
+    },
+    {
+      "start": 419.18,
+      "end": 423.18,
+      "start_formatted": "06:59",
+      "end_formatted": "07:03",
+      "text": "Cara, eu preparei um vídeo que mostra como você pode salvar o seu casamento.",
+      "type": "speech"
+    },
+    {
+      "start": 423.18,
+      "end": 424.18,
+      "start_formatted": "07:03",
+      "end_formatted": "07:04",
+      "text": "Entendeu?",
+      "type": "speech"
+    },
+    {
+      "start": 424.18,
+      "end": 428.18,
+      "start_formatted": "07:04",
+      "end_formatted": "07:08",
+      "text": "Então, cara, eu já vou direto e mostro lá o que que a pessoa tem que fazer.",
+      "type": "speech"
+    },
+    {
+      "start": 428.18,
+      "end": 432.18,
+      "start_formatted": "07:08",
+      "end_formatted": "07:12",
+      "text": "Ou você vai acabar com o seu casamento. Exclusividade.",
+      "type": "speech"
+    },
+    {
+      "start": 432.18,
+      "end": 433.18,
+      "start_formatted": "07:12",
+      "end_formatted": "07:13",
+      "text": "Prova social.",
+      "type": "speech"
+    },
+    {
+      "start": 433.18,
+      "end": 436.18,
+      "start_formatted": "07:13",
+      "end_formatted": "07:16",
+      "text": "Eu posso fazer um vídeo só com prova social.",
+      "type": "speech"
+    },
+    {
+      "start": 436.18,
+      "end": 440.18,
+      "start_formatted": "07:16",
+      "end_formatted": "07:20",
+      "text": "Vendi 40 mil reais. Vendi 50 mil reais. E jogo pra esse vídeo.",
+      "type": "speech"
+    },
+    {
+      "start": 440.18,
+      "end": 443.18,
+      "start_formatted": "07:20",
+      "end_formatted": "07:23",
+      "text": "E jogo pra essa página. Entendeu? Então, o segredo.",
+      "type": "speech"
+    },
+    {
+      "start": 443.18,
+      "end": 446.18,
+      "start_formatted": "07:23",
+      "end_formatted": "07:26",
+      "text": "Promessa. Gatilho de curiosidade. Controversa.",
+      "type": "speech"
+    },
+    {
+      "start": 446.18,
+      "end": 449.18,
+      "start_formatted": "07:26",
+      "end_formatted": "07:29",
+      "text": "Inimigo. O que que é o inimigo? Cara, o site...",
+      "type": "speech"
+    },
+    {
+      "start": 449.18,
+      "end": 450.18,
+      "start_formatted": "07:29",
+      "end_formatted": "07:30",
+      "text": "Então, assim, eu peguei alguns exemplos aqui, tá?",
+      "type": "speech"
+    },
+    {
+      "start": 450.18,
+      "end": 452.18,
+      "start_formatted": "07:30",
+      "end_formatted": "07:32",
+      "text": "Instruções. O que que é as instruções?",
+      "type": "speech"
+    },
+    {
+      "start": 452.18,
+      "end": 453.18,
+      "start_formatted": "07:32",
+      "end_formatted": "07:33",
+      "text": "Pra você fazer em vídeo, eu fiz um mapa aqui, ó.",
+      "type": "speech"
+    },
+    {
+      "start": 453.18,
+      "end": 455.18,
+      "start_formatted": "07:33",
+      "end_formatted": "07:35",
+      "text": "Que vai estar aqui debaixo. Que mapa é esse?",
+      "type": "speech"
+    },
+    {
+      "start": 455.18,
+      "end": 457.18,
+      "start_formatted": "07:35",
+      "end_formatted": "07:37",
+      "text": "Ai, Renan, eu quero gravar um vídeo. Então, ó.",
+      "type": "speech"
+    },
+    {
+      "start": 457.18,
+      "end": 460.18,
+      "start_formatted": "07:37",
+      "end_formatted": "07:40",
+      "text": "Instruções. Público. Você vai falar com o público.",
+      "type": "speech"
+    },
+    {
+      "start": 460.18,
+      "end": 462.18,
+      "start_formatted": "07:40",
+      "end_formatted": "07:42",
+      "text": "Por exemplo, se eu vou ensinar aqui, ó. Se eu vou ensinar aqui, ó.",
+      "type": "speech"
+    },
+    {
+      "start": 470.18,
+      "end": 473.36,
+      "start_formatted": "07:50",
+      "end_formatted": "07:53",
+      "text": "Se eu vou falar com mulheres casadas. Todo mundo.",
+      "type": "speech"
+    },
+    {
+      "start": 473.36,
+      "end": 476.12,
+      "start_formatted": "07:53",
+      "end_formatted": "07:56",
+      "text": "Quantas pessoas hoje vivem com problema no casamento?",
+      "type": "speech"
+    },
+    {
+      "start": 476.12,
+      "end": 478.56,
+      "start_formatted": "07:56",
+      "end_formatted": "07:58",
+      "text": "Muitas problemas, né? Muitas pessoas.",
+      "type": "speech"
+    },
+    {
+      "start": 478.56,
+      "end": 480.56,
+      "start_formatted": "07:58",
+      "end_formatted": "08:00",
+      "text": "Boa parte das pessoas não estão felizes no casamento.",
+      "type": "speech"
+    },
+    {
+      "start": 480.56,
+      "end": 485.42,
+      "start_formatted": "08:00",
+      "end_formatted": "08:05",
+      "text": "Renan, como que eu vou atingir um público que tem problema no casamento e é bem financeiramente?",
+      "type": "speech"
+    },
+    {
+      "start": 485.42,
+      "end": 488.48,
+      "start_formatted": "08:05",
+      "end_formatted": "08:08",
+      "text": "Cara, eu vou falar com o médico?",
+      "type": "speech"
+    },
+    {
+      "start": 488.48,
+      "end": 492.3,
+      "start_formatted": "08:08",
+      "end_formatted": "08:12",
+      "text": "Se eu vou falar com o médico, o médico ganha 20, 50, 100, mil reais.",
+      "type": "speech"
+    },
+    {
+      "start": 492.3,
+      "end": 493.3,
+      "start_formatted": "08:12",
+      "end_formatted": "08:13",
+      "text": "O que que eu vou falar pra ele?",
+      "type": "speech"
+    },
+    {
+      "start": 493.3,
+      "end": 495.74,
+      "start_formatted": "08:13",
+      "end_formatted": "08:15",
+      "text": "Cara, médico, tá com problema no seu casamento?",
+      "type": "speech"
+    },
+    {
+      "start": 495.74,
+      "end": 498.24,
+      "start_formatted": "08:15",
+      "end_formatted": "08:18",
+      "text": "Cara, eu te mostro. Ou você...",
+      "type": "speech"
+    },
+    {
+      "start": 498.24,
+      "end": 500.16,
+      "start_formatted": "08:18",
+      "end_formatted": "08:20",
+      "text": "Eu preparei um vídeo como salvar o seu casamento.",
+      "type": "speech"
+    },
+    {
+      "start": 500.16,
+      "end": 504.34000000000003,
+      "start_formatted": "08:20",
+      "end_formatted": "08:24",
+      "text": "Ou desista do seu casamento. Sei lá. Entendeu?",
+      "type": "speech"
+    },
+    {
+      "start": 504.34000000000003,
+      "end": 505.66,
+      "start_formatted": "08:24",
+      "end_formatted": "08:25",
+      "text": "E daí vai lá nesse vídeo.",
+      "type": "speech"
+    },
+    {
+      "start": 505.66,
+      "end": 510.02000000000004,
+      "start_formatted": "08:25",
+      "end_formatted": "08:30",
+      "text": "Eu vou falar todos os problemas que o médico tem no casamento.",
+      "type": "speech"
+    },
+    {
+      "start": 510.02000000000004,
+      "end": 513.0600000000001,
+      "start_formatted": "08:30",
+      "end_formatted": "08:33",
+      "text": "Fica fazendo plantão. Não dá atenção pra família.",
+      "type": "speech"
+    },
+    {
+      "start": 513.0600000000001,
+      "end": 516.4200000000001,
+      "start_formatted": "08:33",
+      "end_formatted": "08:36",
+      "text": "Não cuida do corpo. Não se... E blá, blá, blá, blá.",
+      "type": "speech"
+    },
+    {
+      "start": 516.4200000000001,
+      "end": 519.4200000000001,
+      "start_formatted": "08:36",
+      "end_formatted": "08:39",
+      "text": "Aquela coisa toda. Isso. Então o que eu vou fazer?",
+      "type": "speech"
+    },
+    {
+      "start": 519.4200000000001,
+      "end": 520.4200000000001,
+      "start_formatted": "08:39",
+      "end_formatted": "08:40",
+      "text": "Seleciono.",
+      "type": "speech"
+    },
+    {
+      "start": 520.4200000000001,
+      "end": 526.58,
+      "start_formatted": "08:40",
+      "end_formatted": "08:46",
+      "text": "Você pode, dentro do seu público, procura escolher um cara que tem dinheiro.",
+      "type": "speech"
+    },
+    {
+      "start": 526.58,
+      "end": 530.14,
+      "start_formatted": "08:46",
+      "end_formatted": "08:50",
+      "text": "Por exemplo, pessoal que é educador e financeiros.",
+      "type": "speech"
+    },
+    {
+      "start": 530.14,
+      "end": 535.26,
+      "start_formatted": "08:50",
+      "end_formatted": "08:55",
+      "text": "Cara, escolhe empresário. Empresário acima de 10 funcionários.",
+      "type": "speech"
+    },
+    {
+      "start": 535.26,
+      "end": 539.38,
+      "start_formatted": "08:55",
+      "end_formatted": "08:59",
+      "text": "Cara, esse cara fatura 70, 100 mil reais por mês e ele vai ter condições de pagar uma",
+      "type": "speech"
+    },
+    {
+      "start": 539.38,
+      "end": 541.8199999999999,
+      "start_formatted": "08:59",
+      "end_formatted": "09:01",
+      "text": "mentoria de 3 mil, 5 mil, 10 mil.",
+      "type": "speech"
+    },
+    {
+      "start": 541.8199999999999,
+      "end": 544.1999999999999,
+      "start_formatted": "09:01",
+      "end_formatted": "09:04",
+      "text": "Então seleciona um público que tem dinheiro.",
+      "type": "speech"
+    },
+    {
+      "start": 544.1999999999999,
+      "end": 545.28,
+      "start_formatted": "09:04",
+      "end_formatted": "09:05",
+      "text": "Para pra pensar.",
+      "type": "speech"
+    },
+    {
+      "start": 545.28,
+      "end": 550.26,
+      "start_formatted": "09:05",
+      "end_formatted": "09:10",
+      "text": "Se você quer salvar o cara das dívidas, o cara tá endividado, tu não vai conseguir",
+      "type": "speech"
+    },
+    {
+      "start": 550.26,
+      "end": 554.3199999999999,
+      "start_formatted": "09:10",
+      "end_formatted": "09:14",
+      "text": "vender mentoria de 3 mil, 5 mil se o cara tá fudido, entendeu?",
+      "type": "speech"
+    },
+    {
+      "start": 554.3199999999999,
+      "end": 558.46,
+      "start_formatted": "09:14",
+      "end_formatted": "09:18",
+      "text": "Então eu digo que a gente, quando a gente vai criar um processo de mentoria ou qualquer",
+      "type": "speech"
+    },
+    {
+      "start": 558.46,
+      "end": 559.52,
+      "start_formatted": "09:18",
+      "end_formatted": "09:19",
+      "text": "produto digital.",
+      "type": "speech"
+    },
+    {
+      "start": 559.52,
+      "end": 563.92,
+      "start_formatted": "09:19",
+      "end_formatted": "09:23",
+      "text": "A gente pode escolher pra quem tem dinheiro e a gente pode escolher falar com os fudidos.",
+      "type": "speech"
+    },
+    {
+      "start": 563.92,
+      "end": 565.4,
+      "start_formatted": "09:23",
+      "end_formatted": "09:25",
+      "text": "E tá tudo bem.",
+      "type": "speech"
+    },
+    {
+      "start": 565.4,
+      "end": 567.16,
+      "start_formatted": "09:25",
+      "end_formatted": "09:27",
+      "text": "Eu gosto de falar com quem tem dinheiro.",
+      "type": "speech"
+    },
+    {
+      "start": 567.16,
+      "end": 571.4,
+      "start_formatted": "09:27",
+      "end_formatted": "09:31",
+      "text": "Que a pessoa compra mentoria de 2 mil, 3 mil, 10 mil, 15 mil, 30 mil.",
+      "type": "speech"
+    },
+    {
+      "start": 571.4,
+      "end": 574.12,
+      "start_formatted": "09:31",
+      "end_formatted": "09:34",
+      "text": "E é isso que eu quero te ensinar aqui. Então aqui ó.",
+      "type": "speech"
+    },
+    {
+      "start": 574.12,
+      "end": 576.8,
+      "start_formatted": "09:34",
+      "end_formatted": "09:36",
+      "text": "Você vai selecionar o público.",
+      "type": "speech"
+    },
+    {
+      "start": 576.8,
+      "end": 580.62,
+      "start_formatted": "09:36",
+      "end_formatted": "09:40",
+      "text": "Eu vou deixar alguns exemplos de vídeo aqui embaixo também, tá?",
+      "type": "speech"
+    },
+    {
+      "start": 580.62,
+      "end": 585.0799999999999,
+      "start_formatted": "09:40",
+      "end_formatted": "09:45",
+      "text": "Pra você ter exemplos de anúncios em vídeos que eu gravei.",
+      "type": "speech"
+    },
+    {
+      "start": 585.0799999999999,
+      "end": 587.28,
+      "start_formatted": "09:45",
+      "end_formatted": "09:47",
+      "text": "Eu não tô utilizando pra esse funil em vídeo.",
+      "type": "speech"
+    },
+    {
+      "start": 587.28,
+      "end": 589.16,
+      "start_formatted": "09:47",
+      "end_formatted": "09:49",
+      "text": "Só tô utilizando imagem. Renan, por quê?",
+      "type": "speech"
+    },
+    {
+      "start": 589.16,
+      "end": 590.16,
+      "start_formatted": "09:49",
+      "end_formatted": "09:50",
+      "text": "Porque eu não tive tempo.",
+      "type": "speech"
+    },
+    {
+      "start": 590.16,
+      "end": 594.2199999999999,
+      "start_formatted": "09:50",
+      "end_formatted": "09:54",
+      "text": "Tô dando aula, tô gravando os cursos e tudo.",
+      "type": "speech"
+    },
+    {
+      "start": 594.2199999999999,
+      "end": 595.66,
+      "start_formatted": "09:54",
+      "end_formatted": "09:55",
+      "text": "Então eu tô deixando isso meio de lado.",
+      "type": "speech"
+    },
+    {
+      "start": 595.66,
+      "end": 598.1999999999999,
+      "start_formatted": "09:55",
+      "end_formatted": "09:58",
+      "text": "Tô procurando focar mais nas vendas e deu.",
+      "type": "speech"
+    },
+    {
+      "start": 598.1999999999999,
+      "end": 601.66,
+      "start_formatted": "09:58",
+      "end_formatted": "10:01",
+      "text": "E montar o meu time comercial. Então aqui tem vários exemplos.",
+      "type": "speech"
+    },
+    {
+      "start": 601.66,
+      "end": 604.16,
+      "start_formatted": "10:01",
+      "end_formatted": "10:04",
+      "text": "Selecionei o público. Você é casada financeiramente?",
+      "type": "speech"
+    },
+    {
+      "start": 604.16,
+      "end": 605.16,
+      "start_formatted": "10:04",
+      "end_formatted": "10:05",
+      "text": "Bem sucedida?",
+      "type": "speech"
+    },
+    {
+      "start": 605.16,
+      "end": 607.7199999999999,
+      "start_formatted": "10:05",
+      "end_formatted": "10:07",
+      "text": "No final você sempre tem que colocar o CTA.",
+      "type": "speech"
+    },
+    {
+      "start": 607.7199999999999,
+      "end": 610.48,
+      "start_formatted": "10:07",
+      "end_formatted": "10:10",
+      "text": "Renan, o que que é o CTA?",
+      "type": "speech"
+    },
+    {
+      "start": 610.48,
+      "end": 614.5799999999999,
+      "start_formatted": "10:10",
+      "end_formatted": "10:14",
+      "text": "Aperte no botão aqui para assistir um vídeo de 10 minutos que eu te mostro como salvar",
+      "type": "speech"
+    },
+    {
+      "start": 614.5799999999999,
+      "end": 615.5799999999999,
+      "start_formatted": "10:14",
+      "end_formatted": "10:15",
+      "text": "o seu casamento.",
+      "type": "speech"
+    },
+    {
+      "start": 615.5799999999999,
+      "end": 617.16,
+      "start_formatted": "10:15",
+      "end_formatted": "10:17",
+      "text": "Aperte no botão aqui que eu te mostro como você pode vender de 10 a 30 mentoria.",
+      "type": "speech"
+    },
+    {
+      "start": 617.16,
+      "end": 618.16,
+      "start_formatted": "10:17",
+      "end_formatted": "10:18",
+      "text": "Então, eu vou te mostrar como você pode vender de 10 a 30 mentoria.",
+      "type": "speech"
+    },
+    {
+      "start": 618.16,
+      "end": 619.16,
+      "start_formatted": "10:18",
+      "end_formatted": "10:19",
+      "text": "Então, eu vou te mostrar como você pode vender de 10 a 30 mentoria.",
+      "type": "speech"
+    },
+    {
+      "start": 619.16,
+      "end": 620.16,
+      "start_formatted": "10:19",
+      "end_formatted": "10:20",
+      "text": "Cada aurípio.",
+      "type": "speech"
+    },
+    {
+      "start": 649.16,
+      "end": 652.06,
+      "start_formatted": "10:49",
+      "end_formatted": "10:52",
+      "text": "Foca nesse cara aqui, no cara que está pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 652.5799999999999,
+      "end": 654.12,
+      "start_formatted": "10:52",
+      "end_formatted": "10:54",
+      "text": "Não foca em falar aberto.",
+      "type": "speech"
+    },
+    {
+      "start": 654.6,
+      "end": 656.42,
+      "start_formatted": "10:54",
+      "end_formatted": "10:56",
+      "text": "Esquece essa ideia de falar com todo mundo.",
+      "type": "speech"
+    },
+    {
+      "start": 656.8199999999999,
+      "end": 658.76,
+      "start_formatted": "10:56",
+      "end_formatted": "10:58",
+      "text": "Quem fala com todo mundo não fala com ninguém.",
+      "type": "speech"
+    },
+    {
+      "start": 659.14,
+      "end": 662.14,
+      "start_formatted": "10:59",
+      "end_formatted": "11:02",
+      "text": "Ai, Renan, eu consigo salvar todo mundo.",
+      "type": "speech"
+    },
+    {
+      "start": 662.28,
+      "end": 666.0,
+      "start_formatted": "11:02",
+      "end_formatted": "11:06",
+      "text": "Tu não vai se salvar, não vai vender. Então o que tu vai fazer?",
+      "type": "speech"
+    },
+    {
+      "start": 666.06,
+      "end": 668.38,
+      "start_formatted": "11:06",
+      "end_formatted": "11:08",
+      "text": "Vai falar com o público pronto para comprar a sua mentoria.",
+      "type": "speech"
+    },
+    {
+      "start": 668.76,
+      "end": 671.4399999999999,
+      "start_formatted": "11:08",
+      "end_formatted": "11:11",
+      "text": "Se tu vender 10 mentorias de R$1.000, já bota R$10.000 no bolso.",
+      "type": "speech"
+    },
+    {
+      "start": 671.8,
+      "end": 674.72,
+      "start_formatted": "11:11",
+      "end_formatted": "11:14",
+      "text": "Vender 10 mentorias de R$2.000, bota R$20.000 no bolso.",
+      "type": "speech"
+    },
+    {
+      "start": 675.02,
+      "end": 676.4399999999999,
+      "start_formatted": "11:15",
+      "end_formatted": "11:16",
+      "text": "Vender 10 de R$3.000, R$30.000.",
+      "type": "speech"
+    },
+    {
+      "start": 676.44,
+      "end": 682.62,
+      "start_formatted": "11:16",
+      "end_formatted": "11:22",
+      "text": "Eu vendi 23 mentorias de R$3.000 e mais duas individuais de R$12.000",
+      "type": "speech"
+    },
+    {
+      "start": 682.62,
+      "end": 687.98,
+      "start_formatted": "11:22",
+      "end_formatted": "11:27",
+      "text": "nos últimos 30 dias, fiz R$90.000. Tá bom, né? R$90.000 tá bom.",
+      "type": "speech"
+    },
+    {
+      "start": 688.2800000000001,
+      "end": 690.7600000000001,
+      "start_formatted": "11:28",
+      "end_formatted": "11:30",
+      "text": "Então é isso que você pode fazer. Fechou? Então vai lá.",
+      "type": "speech"
+    },
+    {
+      "start": 691.1800000000001,
+      "end": 692.7,
+      "start_formatted": "11:31",
+      "end_formatted": "11:32",
+      "text": "Pode deixar suas perguntas aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 693.0200000000001,
+      "end": 696.1800000000001,
+      "start_formatted": "11:33",
+      "end_formatted": "11:36",
+      "text": "Se você está dentro da mentoria, lá no grupo do WhatsApp, pode perguntar.",
+      "type": "speech"
+    },
+    {
+      "start": 696.74,
+      "end": 699.08,
+      "start_formatted": "11:36",
+      "end_formatted": "11:39",
+      "text": "Compartilha o seu anúncio, compartilha a cópia lá,",
+      "type": "speech"
+    },
+    {
+      "start": 699.34,
+      "end": 700.58,
+      "start_formatted": "11:39",
+      "end_formatted": "11:40",
+      "text": "que eu vou te ajudar nessa jornada.",
+      "type": "speech"
+    },
+    {
+      "start": 700.86,
+      "end": 702.6800000000001,
+      "start_formatted": "11:40",
+      "end_formatted": "11:42",
+      "text": "E curta a jornada. Vamos para a próxima aula.",
+      "type": "speech"
+    }
+  ]
+}

@@ -1,0 +1,1445 @@
+# Pricing Framework Squad Blueprint
+# Pattern: HO-SB-002 (Hormozi Squad Blueprint Standard)
+# Source: $100M Offers, $100M Price Raise Playbook - Alex Hormozi
+# Version: 2.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: pricing-framework
+  purpose: "Determine maximum price the market will pay while maximizing perceived value and profit"
+  domain: pricing-strategy
+  source_playbook: "$100M Offers, $100M Price Raise Playbook"
+
+  core_equation: |
+    VALUE = (Dream Outcome x Perceived Likelihood) / (Time Delay x Effort/Sacrifice)
+    TARGET: Price < Perceived Value ALWAYS
+    IMPACT: 2x price = 6x profit (at typical margins)
+
+  guiding_principle: |
+    "Profit is unnatural. You must force it into existence."
+    - Alex Hormozi
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIER STRUCTURE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+tier_structure:
+  orchestrator:
+    - agent: pricing-coordinator
+      role: "Orchestrate the 7-Step Pricing Process and optimize price-value ratio"
+      decisions:
+        - "Validate market readiness for premium pricing"
+        - "Sequence pricing steps appropriately"
+        - "Escalate edge cases requiring human judgment"
+      kpis:
+        - "Price-to-value ratio"
+        - "Customer ROI threshold (>300%)"
+        - "Churn rate post-increase"
+
+  tier_0_diagnosis:
+    - agent: market-validator
+      role: "Score market on 4 Indicators (Dor Massiva, Poder de Compra, Fácil de Atingir, Crescendo)"
+      inputs:
+        - "Market research data"
+        - "Competitor pricing analysis"
+        - "Customer demographic data"
+      outputs:
+        - "Market Score (0-12, threshold ≥8)"
+        - "Indicator breakdown report"
+        - "Go/No-Go recommendation"
+
+    - agent: value-equation-analyzer
+      role: "Calculate and optimize the Value Equation variables"
+      inputs:
+        - "Product/service outcomes"
+        - "Customer feedback data"
+        - "Time-to-result metrics"
+      outputs:
+        - "Value Equation score"
+        - "Optimization recommendations per variable"
+        - "Perceived value estimate"
+
+  tier_1_execution:
+    - agent: niche-definer
+      role: "Define ultra-specific niche using Dan Kennedy framework (Levels 0-3)"
+      specialization: "Step 3: Niching"
+      targets:
+        minimum_niche_level: "Level 2 (5-10x multiplier)"
+        commitment_period: "6 months minimum"
+      techniques:
+        - "Profissão → Subnicho → Ultra-específico progression"
+        - "Multiplier calculation (1x → 100x)"
+        - "Market size validation"
+
+    - agent: price-tester
+      role: "Execute price testing protocol on new customers"
+      specialization: "Step 4: Testing"
+      capabilities:
+        - "Piloto phase execution (2-4 weeks)"
+        - "Breakeven calculation"
+        - "Conversion rate analysis"
+        - "LTV projection"
+
+    - agent: roi-validator
+      role: "Validate price-value discrepancy meets threshold"
+      specialization: "Step 5: ROI Validation"
+      targets:
+        minimum_roi: "300%"
+        calculation: "ROI = (Expected Result - Price) / Price x 100%"
+      techniques:
+        - "Customer outcome documentation"
+        - "ROI threshold verification"
+        - "Case study compilation"
+
+  tier_2_judgment:
+    - agent: conviction-tester
+      role: "Guide personal conviction assessment (Teste do Espelho)"
+      inputs:
+        - "Personal belief assessment"
+        - "Documented results history"
+        - "Family test scenario"
+      outputs:
+        - "Conviction score (Pass/Fail)"
+        - "Belief gaps identified"
+        - "Confidence-building recommendations"
+
+    - agent: rollout-manager
+      role: "Manage price increase rollout to existing customers"
+      triggers:
+        - "New price validated with new customers"
+        - "Breakeven confirmed positive"
+        - "Conviction test passed"
+      techniques:
+        - "RAISE letter preparation (5 sections)"
+        - "Loyalty discount deployment (3-6 months)"
+        - "3-type response handling"
+        - "90-day churn monitoring"
+
+    - agent: exception-handler
+      role: "Handle price increase exceptions and escalations"
+      responsibilities:
+        - "Tipo 1 response: Accept without action"
+        - "Tipo 2 response: Extend discount 3-6 months"
+        - "Tipo 3 response: Accept churn as pulled forward"
+        - "PS Statement deployment for edge cases"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENT DEFINITIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents:
+  pricing-coordinator:
+    id: pricing-coordinator
+    title: "Premium Pricing Orchestrator"
+    tier: orchestrator
+    icon: "💰"
+
+    purpose: |
+      Coordinate the 7-Step Pricing Process to maximize price while maintaining
+      value perception. Ensure ROI > 300% for customers.
+
+    core_frameworks:
+      - name: "7-Step Pricing Process"
+        components: ["Market Validation", "Value Equation", "Niche Definition", "Price Testing", "ROI Validation", "Conviction Test", "Implementation"]
+      - name: "Value Equation"
+        equation: "(Dream Outcome x Perceived Likelihood) / (Time Delay x Effort/Sacrifice)"
+      - name: "4 Market Indicators"
+        origin: "$100M Offers Chapter 4"
+
+    decision_authority:
+      - "Go/No-Go on market readiness"
+      - "Niche level selection"
+      - "Price increase magnitude"
+      - "Rollout timing and approach"
+
+    inputs:
+      - "Market validation scores"
+      - "Value equation analysis"
+      - "Test results from new customers"
+      - "Conviction assessment"
+
+    outputs:
+      - "Final price recommendation"
+      - "Rollout strategy"
+      - "Exception protocols"
+      - "Monitoring plan"
+
+    success_metrics:
+      primary:
+        - name: "Customer ROI"
+          target: ">300%"
+          calculation: "(Result - Price) / Price x 100%"
+        - name: "Price-Value Gap"
+          target: "Price < Perceived Value"
+      secondary:
+        - "Churn rate post-increase <20% Month 1"
+        - "Conversion rate drop <30%"
+        - "Revenue increase >60% at 2x price"
+
+  market-validator:
+    id: market-validator
+    title: "Market Indicator Specialist"
+    tier: tier_0
+    icon: "🎯"
+
+    purpose: |
+      Score markets on the 4 Hormozi Indicators to validate premium pricing potential.
+      Threshold: Score ≥8/12 to proceed.
+
+    scoring_system:
+      dor_massiva:
+        definition: "Is the problem painful enough to pay premium?"
+        score_range: "0-3"
+        indicators:
+          - "Customer urgency level"
+          - "Emotional intensity of problem"
+          - "Frequency of pain occurrence"
+          - "Cost of NOT solving"
+
+      poder_de_compra:
+        definition: "Does the audience have money to pay premium?"
+        score_range: "0-3"
+        indicators:
+          - "Average income/revenue"
+          - "Budget allocation history"
+          - "Price sensitivity data"
+          - "Premium purchase history"
+
+      facil_de_atingir:
+        definition: "Can I find these people congregated?"
+        score_range: "0-3"
+        indicators:
+          - "Known gathering places"
+          - "Active communities"
+          - "Accessible channels"
+          - "Cost to reach"
+
+      crescendo:
+        definition: "Is the market expanding?"
+        score_range: "0-3"
+        indicators:
+          - "Year-over-year growth rate"
+          - "New entrants trending"
+          - "Investment activity"
+          - "Media attention"
+
+    threshold: 8
+    action_on_below_threshold: "Do not proceed with premium pricing strategy"
+
+    outputs:
+      - "Total Market Score (0-12)"
+      - "Individual indicator scores"
+      - "Gap analysis"
+      - "Go/No-Go recommendation"
+
+  value-equation-analyzer:
+    id: value-equation-analyzer
+    title: "Value Equation Optimization Specialist"
+    tier: tier_0
+    icon: "📊"
+
+    purpose: |
+      Calculate and optimize the Value Equation to maximize perceived value.
+      Focus on increasing numerator, decreasing denominator.
+
+    equation:
+      formula: "VALUE = (Dream Outcome x Perceived Likelihood) / (Time Delay x Effort/Sacrifice)"
+
+      variables:
+        dream_outcome:
+          direction: "INCREASE"
+          optimization:
+            - "Connect to status desires"
+            - "Tap into deep emotional needs"
+            - "Quantify outcome in dollars/time"
+            - "Make outcome aspirational yet believable"
+
+        perceived_likelihood:
+          direction: "INCREASE"
+          optimization:
+            - "Stack social proof"
+            - "Offer guarantees"
+            - "Document track record"
+            - "Show process transparency"
+
+        time_delay:
+          direction: "DECREASE"
+          optimization:
+            - "Create quick wins"
+            - "Show immediate results"
+            - "Reduce time-to-first-value"
+            - "Milestone celebrations"
+
+        effort_sacrifice:
+          direction: "DECREASE"
+          optimization:
+            - "Done-for-you options"
+            - "Simplify processes"
+            - "Remove friction points"
+            - "Handle objections proactively"
+
+    delivery_vehicle_spectrum:
+      low_value: "DIY (Do It Yourself)"
+      medium_value: "DWY (Done With You)"
+      high_value: "DFY (Done For You)"
+      strategy: "Move up the spectrum to justify higher prices"
+
+    outputs:
+      - "Value Equation score"
+      - "Variable-by-variable analysis"
+      - "Optimization roadmap"
+      - "Delivery vehicle recommendation"
+
+  niche-definer:
+    id: niche-definer
+    title: "Niche Strategy Specialist"
+    tier: tier_1
+    icon: "🎪"
+
+    purpose: |
+      Define ultra-specific niche using Dan Kennedy framework to maximize
+      price multiplier. Target Level 2-3 for premium pricing.
+
+    niche_levels:
+      level_0:
+        type: "Genérico"
+        multiplier: "1x"
+        example: "Gestão de Tempo ($19)"
+        recommendation: "Too broad for premium"
+
+      level_1:
+        type: "Por Profissão"
+        multiplier: "2-5x"
+        example: "Gestão de Tempo para Vendedores ($99)"
+        recommendation: "Minimum for premium"
+
+      level_2:
+        type: "Por Subnicho"
+        multiplier: "5-10x"
+        example: "Gestão de Tempo para Vendedores B2B Outbound ($499)"
+        recommendation: "Sweet spot"
+
+      level_3:
+        type: "Ultra-específico"
+        multiplier: "10-100x"
+        example: "Gestão de Tempo para Vendedores B2B de Ferramentas Elétricas ($2.000)"
+        recommendation: "Maximum premium potential"
+
+    commitment_rule: |
+      "Commit for minimum 6 months before pivoting.
+      Niche switching too early = missed opportunity."
+
+    validation_criteria:
+      - "Market size adequate for revenue goals"
+      - "Can become known as THE expert"
+      - "Language/problems deeply understood"
+      - "Competition cannot easily follow"
+
+    outputs:
+      - "Recommended niche level"
+      - "Target niche definition"
+      - "Price multiplier estimate"
+      - "6-month commitment plan"
+
+  price-tester:
+    id: price-tester
+    title: "Price Testing Specialist"
+    tier: tier_1
+    icon: "🧪"
+
+    purpose: |
+      Execute scientific price testing with new customers only.
+      Calculate breakeven before rolling out to existing base.
+
+    testing_protocol:
+      piloto:
+        duration: "2-4 weeks"
+        target_audience: "NEW customers only"
+        metric: "Conversion rate not dropping >30%"
+        sample_size: "Minimum 30 new leads"
+
+      analysis:
+        duration: "1 week"
+        metric: "LTV projection positive"
+        calculation: "Compare new price LTV vs old price LTV"
+
+      breakeven:
+        formula: "Breakeven = (Old Revenue) / (New Price x (1 - Expected Churn Increase))"
+        threshold: "Must be positive"
+
+    decision_rules:
+      dr_008: |
+        "2x price + -20% conversion = FAZER (if +60% revenue)"
+        Example:
+        - $10 price → 5% conv → $500/100 clicks
+        - $20 price → 4% conv → $800/100 clicks (+60%)
+
+    key_insight: |
+      "Pricing improvement by 1% is twice as efficient at increasing profit
+      as improving retention, and 4x as efficient as acquisition."
+      - Profitwell Study (512 companies)
+
+    outputs:
+      - "Test results (conversion rate change)"
+      - "Revenue impact projection"
+      - "Breakeven analysis"
+      - "Go/No-Go for rollout"
+
+  roi-validator:
+    id: roi-validator
+    title: "Customer ROI Validation Specialist"
+    tier: tier_1
+    icon: "✅"
+
+    purpose: |
+      Validate that customer ROI exceeds 300% threshold.
+      Price must always be significantly less than value delivered.
+
+    roi_formula:
+      equation: "ROI_CLIENTE = (Expected_Result - Price) / Price x 100%"
+      threshold: ">300%"
+      interpretation: "Customer gains 3-10x what they pay"
+
+    reference_case:
+      name: "Gym Launch"
+      investment: "$42,000"
+      return: "$239,000/year"
+      roi: "469%"
+      status: "PASS"
+
+    validation_checklist:
+      - "Expected outcome quantified in dollars"
+      - "Time to achieve outcome documented"
+      - "Customer testimonials confirm results"
+      - "ROI calculation exceeds 300%"
+
+    warning_signs:
+      - "ROI < 300% = price too high or value too low"
+      - "Customers complaining about price = perception problem"
+      - "High churn = delivery not matching promise"
+
+    outputs:
+      - "ROI calculation"
+      - "Pass/Fail against threshold"
+      - "Supporting evidence"
+      - "Optimization recommendations"
+
+  conviction-tester:
+    id: conviction-tester
+    title: "Personal Conviction Specialist"
+    tier: tier_2
+    icon: "🪞"
+
+    purpose: |
+      Guide the Mirror Test (Dan Kennedy) to ensure personal belief
+      in the price. You cannot sell what you don't believe in.
+
+    mirror_test:
+      quote: |
+        "Charge the highest price you can say out loud without laughing."
+        - Dan Kennedy
+
+    conviction_checklist:
+      question_1:
+        test: "Would you look in the mirror tonight and believe it's worth this price?"
+        pass_criteria: "Genuine yes without hesitation"
+
+      question_2:
+        test: "Do you have documented results proving effectiveness?"
+        pass_criteria: "3+ case studies with quantified results"
+
+      question_3:
+        test: "Would you be comfortable if a family member paid this price?"
+        pass_criteria: "Genuine yes without guilt"
+
+    failure_actions:
+      - "Document more results before raising price"
+      - "Improve product until belief is genuine"
+      - "Start with smaller increase"
+      - "Add more value to justify price"
+
+    human_only: true
+    rationale: "This is a judgment call only a human can make"
+
+    outputs:
+      - "Conviction score (Pass/Fail)"
+      - "Belief gaps identified"
+      - "Action plan for gaps"
+
+  rollout-manager:
+    id: rollout-manager
+    title: "Price Increase Rollout Specialist"
+    tier: tier_2
+    icon: "📈"
+
+    purpose: |
+      Manage price increase communication and rollout to existing customers.
+      Minimize churn while maximizing revenue.
+
+    raise_letter_template:
+      name: "RAISE Framework"
+      sections:
+        R_remind:
+          purpose: "Remind of value delivered"
+          content: |
+            "In the last [X] months, we've added value:
+            • [Result 1 achieved]
+            • [Feature/benefit used]
+            • [Other value delivered]"
+
+        A_address:
+          purpose: "Address the increase directly"
+          content: |
+            "To continue investing in [PRODUCT] for you,
+            we need to increase our prices."
+
+        I_invest:
+          purpose: "Explain future investments"
+          content: |
+            "With these resources, we will:
+            • [Planned improvement 1]
+            • [Planned improvement 2]
+            • [Planned improvement 3]"
+
+        S_soften:
+          purpose: "Soften with loyalty discount"
+          content: |
+            "You've been loyal for [X] months.
+            New customers pay full price, but you get
+            [3-6 months] at current rate."
+
+        E_explain:
+          purpose: "Explain and offer support"
+          content: |
+            "Questions? Reply directly to me.
+            PS - If this materially affects you, let me know."
+
+    loyalty_discount:
+      duration: "3-6 months"
+      calculation: "New Price - Old Price = Credit"
+      messaging: "Grandfathered rate as thank you"
+
+    churn_pattern:
+      month_1: "Increase (pulled forward churn)"
+      month_2: "Decrease (below normal)"
+      month_3: "Return to baseline"
+      monitoring_period: "90 days minimum"
+
+    outputs:
+      - "RAISE letter draft"
+      - "Loyalty discount terms"
+      - "Rollout timeline"
+      - "Churn monitoring dashboard"
+
+  exception-handler:
+    id: exception-handler
+    title: "Price Exception Specialist"
+    tier: tier_2
+    icon: "🛡️"
+
+    purpose: |
+      Handle the 3 types of customer responses to price increases.
+      Apply appropriate response protocol for each type.
+
+    response_types:
+      tipo_1:
+        description: "See the value, don't like it, but accept"
+        action: "None - proceed normally"
+        frequency: "60-70%"
+
+      tipo_2:
+        description: "Really affected financially"
+        action: "Extend discount 3-6 months"
+        script: |
+          "Don't worry, we got you. Why don't we extend your
+          discount another 6 months, then reach out then.
+          Is that fair?"
+        frequency: "20-30%"
+
+      tipo_3:
+        description: "Were going to cancel anyway"
+        action: "Accept churn as 'pulled forward'"
+        rationale: "Would have left eventually"
+        frequency: "10-15%"
+
+    ps_statements:
+      b2c: "If this materially affects your ability to buy groceries, let me know and we'll figure it out."
+      b2b: "If this materially impacts your business, let me know and we'll figure it out."
+
+    escalation_triggers:
+      - condition: "Increase >50%"
+        action: "Mandatory individual meetings"
+      - condition: "Churn >20% in Month 1"
+        action: "Pause rollout, analyze"
+      - condition: "Massive negative feedback"
+        action: "Implement stair-step increases"
+
+    outputs:
+      - "Response classification"
+      - "Recommended action"
+      - "Script for communication"
+      - "Escalation flag if needed"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXECUTOR MATRIX
+# ═══════════════════════════════════════════════════════════════════════════════
+
+executor_matrix:
+  # Step 1: Market Validation
+  - task: "Collect market research data"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Use verified data sources"
+
+  - task: "Score Dor Massiva indicator"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Human validates scoring"
+
+  - task: "Score Poder de Compra indicator"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Verify with actual purchase data"
+
+  - task: "Score Fácil de Atingir indicator"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Document congregation points"
+
+  - task: "Score Crescendo indicator"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Use recent trend data"
+
+  - task: "Make Go/No-Go decision"
+    executor: Human
+    automation: LOW
+    guardrails: "Score ≥8/12 required"
+
+  # Step 2: Value Equation
+  - task: "Document Dream Outcome"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Use customer language"
+
+  - task: "Calculate Perceived Likelihood"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Based on proof available"
+
+  - task: "Measure Time Delay"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Track actual time-to-result"
+
+  - task: "Assess Effort/Sacrifice"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Survey customers"
+
+  - task: "Recommend delivery vehicle (DIY/DWY/DFY)"
+    executor: Human
+    automation: LOW
+    guardrails: "Strategic decision"
+
+  # Step 3: Niche Definition
+  - task: "Identify current niche level"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Use Dan Kennedy framework"
+
+  - task: "Research potential sub-niches"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Document market size each"
+
+  - task: "Select target niche level"
+    executor: Human
+    automation: LOW
+    guardrails: "Strategic commitment"
+
+  - task: "Define 6-month commitment plan"
+    executor: Human
+    automation: LOW
+    guardrails: "No pivoting before 6 months"
+
+  # Step 4: Price Testing
+  - task: "Set up A/B price test"
+    executor: Worker
+    automation: HIGH
+    guardrails: "New customers only"
+
+  - task: "Run pilot phase (2-4 weeks)"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Minimum 30 leads"
+
+  - task: "Calculate conversion rate change"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Threshold: <30% drop"
+
+  - task: "Calculate breakeven point"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Use breakeven formula"
+
+  - task: "Project LTV at new price"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Include churn projections"
+
+  - task: "Make test Go/No-Go decision"
+    executor: Human
+    automation: LOW
+    guardrails: "Revenue increase must be positive"
+
+  # Step 5: ROI Validation
+  - task: "Quantify expected customer outcome"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Use actual customer data"
+
+  - task: "Calculate customer ROI"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Threshold: >300%"
+
+  - task: "Document case studies"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Minimum 3 case studies"
+
+  - task: "Validate ROI threshold met"
+    executor: Human
+    automation: LOW
+    guardrails: "Pass/Fail decision"
+
+  # Step 6: Conviction Test
+  - task: "Conduct Mirror Test"
+    executor: Human
+    automation: NONE
+    guardrails: "Human only - personal belief"
+
+  - task: "Review documented results"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Evidence supports conviction"
+
+  - task: "Family test scenario"
+    executor: Human
+    automation: NONE
+    guardrails: "Human only - personal ethics"
+
+  - task: "Make conviction Go/No-Go"
+    executor: Human
+    automation: NONE
+    guardrails: "Must pass all 3 questions"
+
+  # Step 7: Implementation
+  - task: "Draft RAISE letter"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "All 5 sections required"
+
+  - task: "Define loyalty discount"
+    executor: Human
+    automation: LOW
+    guardrails: "3-6 months standard"
+
+  - task: "Prepare PS statement"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "B2B or B2C version"
+
+  - task: "Send communications"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Batch send, track responses"
+
+  - task: "Classify response types (1/2/3)"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Human validates classification"
+
+  - task: "Handle Tipo 2 exceptions"
+    executor: Human
+    automation: LOW
+    guardrails: "Extend discount per script"
+
+  - task: "Monitor churn for 90 days"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Alert if >20% Month 1"
+
+  - task: "Analyze churn pattern"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Expect high→low→normal"
+
+  # Ongoing Audit
+  - task: "Schedule annual price review"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Calendar ≤12 months"
+
+  - task: "Identify opportunistic review triggers"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "New launches, inflation >5%"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  QG-001:
+    name: "Market Validation Gate"
+    transition: "Start → Niche Definition"
+    condition: "market_score >= 8"
+    type: blocking
+    failure_action: "Do not proceed with premium pricing"
+
+  QG-002:
+    name: "Value Equation Gate"
+    transition: "Analysis → Testing"
+    condition: "value_equation_calculated AND optimization_plan_exists"
+    type: blocking
+    failure_action: "Complete value analysis before testing"
+
+  QG-003:
+    name: "Niche Commitment Gate"
+    transition: "Niche → Testing"
+    condition: "niche_level >= 2 AND commitment_6_months"
+    type: warning
+    failure_action: "Recommend higher niche level"
+
+  QG-004:
+    name: "Price Test Gate"
+    transition: "Testing → Validation"
+    condition: "conversion_drop < 30% AND revenue_increase > 0"
+    type: blocking
+    failure_action: "Adjust price or add value"
+
+  QG-005:
+    name: "ROI Threshold Gate"
+    transition: "Validation → Conviction"
+    condition: "customer_roi > 300%"
+    type: blocking
+    failure_action: "Lower price or increase value delivered"
+
+  QG-006:
+    name: "Conviction Gate"
+    transition: "Conviction → Implementation"
+    condition: "mirror_test_passed AND documented_results AND family_test_passed"
+    type: blocking
+    failure_action: "Do not implement until genuine belief achieved"
+
+  QG-007:
+    name: "Communication Gate"
+    transition: "Draft → Send"
+    condition: "raise_letter_complete (5 sections) AND loyalty_discount_defined AND ps_statement_ready"
+    type: blocking
+    failure_action: "Complete all communication materials"
+
+  QG-008:
+    name: "Churn Monitoring Gate"
+    transition: "Month 1 → Month 2"
+    condition: "churn_rate < 20%"
+    type: warning
+    failure_action: "Pause rollout if exceeded, analyze root cause"
+
+  QG-009:
+    name: "Escalation Gate"
+    transition: "Any → Escalation"
+    condition: "increase_magnitude > 50%"
+    type: blocking
+    failure_action: "Require individual customer meetings"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  new_pricing_workflow:
+    trigger: "New product/service needs pricing"
+    steps:
+      - step: 1
+        agent: market-validator
+        action: "Score market on 4 indicators"
+        output: "Market Score (Go/No-Go)"
+        gate: QG-001
+
+      - step: 2
+        agent: value-equation-analyzer
+        action: "Calculate Value Equation"
+        output: "Value optimization plan"
+        gate: QG-002
+
+      - step: 3
+        agent: niche-definer
+        action: "Define niche level (2-3)"
+        output: "Niche definition + commitment plan"
+        gate: QG-003
+
+      - step: 4
+        agent: price-tester
+        action: "Execute price test on new customers"
+        output: "Test results + breakeven"
+        gate: QG-004
+
+      - step: 5
+        agent: roi-validator
+        action: "Validate ROI > 300%"
+        output: "ROI Pass/Fail"
+        gate: QG-005
+
+      - step: 6
+        agent: conviction-tester
+        action: "Conduct conviction assessment"
+        output: "Conviction Pass/Fail"
+        gate: QG-006
+
+      - step: 7
+        agent: pricing-coordinator
+        action: "Set final price"
+        output: "Validated price"
+
+  price_increase_workflow:
+    trigger: "Annual review OR opportunistic trigger"
+    steps:
+      - step: 1
+        agent: pricing-coordinator
+        action: "Identify increase trigger"
+        output: "Trigger classification"
+
+      - step: 2
+        agent: price-tester
+        action: "Test new price on NEW customers only"
+        output: "Test results"
+        gate: QG-004
+
+      - step: 3
+        agent: roi-validator
+        action: "Validate ROI at new price"
+        output: "ROI validation"
+        gate: QG-005
+
+      - step: 4
+        agent: conviction-tester
+        action: "Re-confirm conviction at new price"
+        output: "Conviction validation"
+        gate: QG-006
+
+      - step: 5
+        agent: rollout-manager
+        action: "Prepare RAISE letter and materials"
+        output: "Communication package"
+        gate: QG-007
+
+      - step: 6
+        agent: rollout-manager
+        action: "Send to existing customer base"
+        output: "Communications sent"
+
+      - step: 7
+        agent: exception-handler
+        action: "Handle responses by type"
+        output: "Exception resolutions"
+
+      - step: 8
+        agent: rollout-manager
+        action: "Monitor churn for 90 days"
+        output: "Churn analysis"
+        gate: QG-008
+
+  exception_handling_workflow:
+    trigger: "Customer response to price increase"
+    steps:
+      - step: 1
+        agent: exception-handler
+        action: "Classify response (Tipo 1/2/3)"
+        output: "Classification"
+
+      - step: 2
+        agent: exception-handler
+        action: "Execute response protocol"
+        condition: "Based on type"
+        outputs:
+          tipo_1: "No action needed"
+          tipo_2: "Extend discount 3-6 months"
+          tipo_3: "Accept churn"
+
+      - step: 3
+        agent: exception-handler
+        action: "Check for escalation triggers"
+        condition: "If increase >50% or churn >20%"
+        gate: QG-009
+
+      - step: 4
+        agent: pricing-coordinator
+        action: "Document learnings"
+        output: "Exception log"
+
+  annual_audit_workflow:
+    trigger: "Anniversary of last increase OR opportunistic trigger"
+    steps:
+      - step: 1
+        agent: pricing-coordinator
+        action: "Check for audit triggers"
+        triggers:
+          - "Anniversary date reached"
+          - "New product launch (within 90 days)"
+          - "Significant value increase delivered"
+          - "Inflation >5%"
+
+      - step: 2
+        agent: value-equation-analyzer
+        action: "Re-analyze Value Equation"
+        output: "Updated value assessment"
+
+      - step: 3
+        agent: roi-validator
+        action: "Re-calculate customer ROI"
+        output: "Current ROI"
+
+      - step: 4
+        agent: pricing-coordinator
+        action: "Recommend increase magnitude"
+        output: "Increase recommendation"
+
+      - step: 5
+        agent: pricing-coordinator
+        action: "Initiate price_increase_workflow if recommended"
+        output: "Workflow trigger"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DECISION RULES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+decision_rules:
+  # Market Rules
+  DR-001:
+    name: "Dor Massiva → Premium Price"
+    rule: "Price proportional to pain intensity"
+    application: "Higher pain = higher willingness to pay"
+
+  DR-002:
+    name: "Poder de Compra Verification"
+    rule: "Verify actual capacity to pay, not stated"
+    application: "Check purchase history, not surveys"
+
+  DR-003:
+    name: "Congregation Requirement"
+    rule: "Market must be easy to find congregated"
+    application: "Known places, active communities"
+
+  DR-004:
+    name: "Market Growth"
+    rule: "Prefer growing markets (wind at back)"
+    application: "Avoid markets declining >25%/year"
+
+  # Niche Rules
+  DR-005:
+    name: "6-Month Commitment"
+    rule: "Minimum 6 months before pivoting niche"
+    application: "No early pivots, even if challenging"
+
+  # Value Rules
+  DR-006:
+    name: "ROI Threshold"
+    rule: "Customer ROI must exceed 300%"
+    application: "Customer gains 3-10x what they pay"
+
+  DR-007:
+    name: "Price < Perceived Value"
+    rule: "Price must always be less than perceived value"
+    application: "Create obvious value gap"
+
+  # Testing Rules
+  DR-008:
+    name: "2x Price + -20% Conversion = Go"
+    rule: "If 2x price with -20% conversion = +60% revenue, DO IT"
+    application: "Revenue trumps conversion rate"
+
+  DR-009:
+    name: "Annual Review Mandatory"
+    rule: "Review pricing minimum annually + opportunistic triggers"
+    application: "Never go >12 months without review"
+
+  # Response Rules
+  DR-010:
+    name: "3 Response Protocols"
+    rule: "Apply specific protocol per response type"
+    application: "Tipo 1: None, Tipo 2: Extend, Tipo 3: Accept"
+
+  DR-011:
+    name: "Testing Sequence"
+    rule: "Test new → Breakeven → Rollout → Optimize"
+    application: "Never test on existing customers first"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# KPIs & SUCCESS METRICS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+kpis:
+  primary:
+    customer_roi:
+      formula: "(Expected Result - Price) / Price x 100%"
+      target: ">300%"
+      impact: "Ensures sustainable premium pricing"
+
+    revenue_per_customer:
+      formula: "Price x Conversion Rate"
+      target: "Increase >60% when 2x price"
+      benchmark:
+        minimum: ">0% increase"
+        target: ">60% increase"
+
+  secondary:
+    conversion_rate_change:
+      formula: "(New Conv - Old Conv) / Old Conv"
+      target: "<30% decrease"
+      warning: ">30% decrease"
+
+    churn_rate_month_1:
+      formula: "Churned / Total Existing"
+      target: "<20%"
+      warning: ">20% = pause rollout"
+
+    price_increase_frequency:
+      formula: "Months since last increase"
+      target: "≤12 months"
+      reference: "See's Candies: 50+ years consistent"
+
+  by_step:
+    market_validation:
+      - "Market Score (0-12)"
+      - "Individual indicator scores"
+      - "Go/No-Go rate"
+
+    value_equation:
+      - "Dream Outcome clarity score"
+      - "Perceived Likelihood (proof count)"
+      - "Time Delay (days to first result)"
+      - "Effort/Sacrifice (complexity score)"
+
+    niche_definition:
+      - "Niche Level achieved (0-3)"
+      - "Price multiplier realized"
+      - "6-month commitment adherence"
+
+    price_testing:
+      - "Test conversion rate"
+      - "Breakeven point"
+      - "Revenue projection accuracy"
+
+    implementation:
+      - "RAISE letter completion"
+      - "Response rate by type"
+      - "90-day churn pattern"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TROUBLESHOOTING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+troubleshooting:
+  - symptom: "Market Score <8"
+    possible_causes:
+      - "Wrong market selected"
+      - "Pain not intense enough"
+      - "Audience lacks purchasing power"
+    diagnosis:
+      - "Review each indicator score"
+      - "Interview target customers"
+      - "Research competitor success"
+    solutions:
+      - "Select different market"
+      - "Find sub-segment with higher pain"
+      - "Target higher-value customers"
+
+  - symptom: "Conviction test fails"
+    possible_causes:
+      - "Insufficient proof of results"
+      - "Price increase too aggressive"
+      - "Product quality gaps"
+    diagnosis:
+      - "Count documented case studies"
+      - "Compare to competitor pricing"
+      - "Review customer feedback"
+    solutions:
+      - "Document more results before increasing"
+      - "Start with smaller increase"
+      - "Improve product before raising price"
+
+  - symptom: "Conversion drops >30%"
+    possible_causes:
+      - "Price too high for value delivered"
+      - "Communication not highlighting value"
+      - "Wrong niche/audience"
+    diagnosis:
+      - "Calculate actual ROI"
+      - "Review sales messaging"
+      - "Analyze who is converting vs not"
+    solutions:
+      - "Add more value to offer"
+      - "Improve value communication"
+      - "Narrow niche further"
+
+  - symptom: "Churn >20% Month 1"
+    possible_causes:
+      - "Increase too aggressive"
+      - "Communication poorly received"
+      - "Value not being perceived"
+    diagnosis:
+      - "Survey churned customers"
+      - "Review RAISE letter feedback"
+      - "Compare churn by customer tenure"
+    solutions:
+      - "Pause rollout"
+      - "Extend loyalty discounts"
+      - "Implement stair-step increases"
+
+  - symptom: "Customers complaining but not churning"
+    possible_causes:
+      - "Tipo 1 responses (normal)"
+      - "Value still exceeds price"
+      - "No alternatives available"
+    diagnosis:
+      - "Track complaint-to-churn ratio"
+      - "Survey customer satisfaction"
+      - "Monitor competitor activity"
+    solutions:
+      - "Acknowledge - this is expected"
+      - "Continue delivering value"
+      - "Document for future reference"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TEMPLATES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+templates:
+  raise_letter:
+    name: "RAISE Price Increase Letter"
+    format: |
+      Dear [NAME],
+
+      **R - REMIND (Value Delivered)**
+      In the last [X] months, we've added significant value to [PRODUCT]:
+      • [Result 1 you helped achieve]
+      • [Feature/benefit they use]
+      • [Other value delivered]
+
+      **A - ADDRESS (The Increase)**
+      To continue investing in [PRODUCT] for you and team [COMPANY],
+      we need to increase our prices.
+
+      **I - INVEST (Future Plans)**
+      With these resources, we will:
+      • [Planned improvement 1]
+      • [Planned improvement 2]
+      • [Planned improvement 3]
+
+      **S - SOFTEN (Loyalty Reward)**
+      You've been incredibly loyal, using our services for the last [X] months.
+      Starting today, new customers pay the full price, but because you're
+      special, we'll keep your current plan for the next [3-6 MONTHS].
+      We're giving you a [$XXX] credit as a thank you
+      (after which we'll adjust to the new price of $XXX).
+
+      **E - EXPLAIN (Support)**
+      Thank you for letting us be part of [COMPANY]'s mission.
+      If you have any questions, let me know. All replies come directly to me.
+
+      [YOUR NAME]
+
+      PS - [B2C: If this materially affects your ability to buy groceries, let me know and we'll figure it out.]
+      PS - [B2B: If this materially impacts your business, let me know and we'll figure it out.]
+
+  tipo_2_response:
+    name: "Extension Response Script"
+    format: |
+      "Don't worry, we got you. Why don't we extend your
+      discount another 6 months, then reach out then.
+      Is that fair?"
+
+  breakeven_calculation:
+    name: "Breakeven Formula"
+    format: |
+      Breakeven = (Old Revenue) / (New Price × (1 - Expected Churn Increase))
+
+      Example:
+      - Old Revenue: $50,000/month
+      - New Price: 2x old price
+      - Expected Churn Increase: 5%
+      - Breakeven = $50,000 / (2 × 0.95) = $26,316
+      - If you keep >$26,316 in revenue, you win
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 10 PRICING PLAYS (from $100M Price Raise Playbook)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+pricing_plays:
+  play_1:
+    name: "28-Day Billing Cycles"
+    description: "Change from monthly to 28-day billing"
+    impact: "13 billing cycles per year instead of 12"
+    source: "Playbook p.22-23"
+
+  play_2:
+    name: "Processing Fees"
+    description: "Pass processing fees to customer"
+    impact: "2-4% revenue increase"
+    source: "Playbook p.24-26"
+
+  play_3:
+    name: "Sales Tax Separation"
+    description: "Charge and display sales tax separately"
+    impact: "Price appears lower, tax is expected"
+    source: "Playbook p.27-29"
+
+  play_4:
+    name: "Annual Price Increases"
+    description: "See's Candies model - consistent annual increases"
+    impact: "50+ years, avg 10%/year, up to 17%"
+    source: "Playbook p.30-32"
+
+  play_5:
+    name: "Annual Billing Option"
+    description: "Offer discount for annual prepay"
+    impact: "Improved cash flow, reduced churn"
+    source: "Playbook p.33-35"
+
+  play_6:
+    name: "Round Up"
+    description: "Round prices to nearest $5 or $10"
+    impact: "Incremental revenue"
+    source: "Playbook p.36-38"
+
+  play_7:
+    name: "Annual Renewal Fee"
+    description: "Add annual fee on top of monthly"
+    impact: "Additional revenue stream"
+    source: "Playbook p.39-42"
+
+  play_8:
+    name: "Automatic Continuity"
+    description: "Auto-renew subscriptions"
+    impact: "Reduced friction, higher retention"
+    source: "Playbook p.43-47"
+
+  play_9:
+    name: "Ultra High Ticket Anchor"
+    description: "Show expensive option first"
+    impact: "Makes standard price seem reasonable"
+    source: "Playbook p.48-49"
+
+  play_10:
+    name: "Guarantee Upsells"
+    description: "Sell extended warranties/guarantees"
+    impact: "Additional revenue on existing sales"
+    source: "Playbook p.50-53"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# THREE PRICING MODELS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+pricing_models:
+  cost_plus:
+    name: "Cost Plus Pricing"
+    description: "Whatever your costs are plus an arbitrarily added margin"
+    limitation: "Doesn't account for customer willingness to pay"
+    source: "Playbook p.12"
+
+  competitor_based:
+    name: "Competitor Based Pricing"
+    description: "Whatever the average of what everyone else is charging"
+    limitation: "Race to the bottom, commoditization"
+    source: "Playbook p.12-13"
+
+  value_based:
+    name: "Value Based Pricing"
+    description: "Based on what a customer is willing to pay (WTP)"
+    advantage: "Captures maximum value"
+    recommendation: "USE THIS MODEL"
+    source: "Playbook p.13-14"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SOURCE REFERENCES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+source_references:
+  primary_sources:
+    - source: "$100M Price Raise Playbook"
+      usage: "Pricing Plays #1-10, Communication Templates, Models"
+    - source: "$100M Offers"
+      usage: "Value Equation, 4 Indicators, Niche Framework"
+
+  key_concepts:
+    - element: "Value Equation"
+      source: "$100M Offers Chapter 5"
+      citation: "Value = (Dream Outcome × Perceived Likelihood) ÷ (Time Delay × Effort/Sacrifice)"
+
+    - element: "4 Market Indicators"
+      source: "$100M Offers Chapter 4"
+      citation: "Dor Massiva, Poder de Compra, Fácil de Atingir, Crescendo"
+
+    - element: "Niche Framework (Dan Kennedy)"
+      source: "$100M Offers"
+      citation: "Níveis 0-3: Genérico → Ultra-específico (1x → 100x)"
+
+    - element: "RAISE Template"
+      source: "$100M Price Raise Playbook p.32"
+      citation: "Remind, Address, Invest, Soften, Explain"
+
+    - element: "2x Price = 6x Profit"
+      source: "$100M Price Raise Playbook p.7-9"
+      citation: "If we 2x prices and nothing else changes, we 6x profit"
+
+    - element: "Genie Story"
+      source: "$100M Price Raise Playbook p.1"
+      citation: "I can double one aspect of your business... Which do you choose?"
+
+  case_references:
+    - case: "See's Candies (Warren Buffett)"
+      insight: "50+ years of consistent increases, avg 10%/year, up to 17%"
+      source: "Price Raise Playbook p.30-31"
+
+    - case: "Profitwell Study (512 companies)"
+      insight: "1% pricing improvement = 2x efficiency vs retention, 4x vs acquisition"
+      source: "Price Raise Playbook p.10"
+
+    - case: "Gym Launch ROI"
+      insight: "$42K invested → $239K/year = 469% ROI"
+      source: "Price Raise Playbook p.5-6"
+
+  statistics:
+    - stat: "1% pricing = 2x retention efficiency"
+      source: "Profitwell"
+    - stat: "1% pricing = 4x acquisition efficiency"
+      source: "Profitwell"
+    - stat: "3.5x profit from 2x customers"
+      source: "Genie calculation p.4"
+    - stat: "3.5x profit from 2x purchases"
+      source: "Genie calculation p.6"
+    - stat: "6x profit from 2x price"
+      source: "Genie calculation p.7-9"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VALIDATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 11
+  executor_matrix_complete: true
+  quality_gates_defined: 9
+  workflows_documented: 4
+  pricing_plays_included: 10
+  source_references_mapped: 50+
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

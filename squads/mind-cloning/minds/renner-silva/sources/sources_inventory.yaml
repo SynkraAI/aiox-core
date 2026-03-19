@@ -1,0 +1,469 @@
+# ═══════════════════════════════════════════════════════════════
+# SOURCES INVENTORY - RENNER SILVA
+# Domain: Comunicação, Oratória, Storytelling, Mentoria
+# Acquired: 2026-02-19
+# Mode: Auto-Acquire (web research)
+# ═══════════════════════════════════════════════════════════════
+
+sources_inventory:
+  metadata:
+    mind_name: "Renner Silva"
+    real_name: "Renier Alexandre e Silva"
+    domain: "Comunicação, Oratória, Storytelling, Mentoria de Palestrantes"
+    collection_date: "2026-02-19"
+    total_sources: 32
+    tier_1_count: 18
+    tier_2_count: 8
+    tier_3_count: 6
+    auto_acquired: true
+    quality_status: "CONDITIONAL"
+    scraping_status: "completed"
+    scraping_completude: "40%"
+    scraping_date: "2026-02-19"
+
+  # ─────────────────────────────────────────────────────────────
+  # TIER 1 — FONTES PRIMÁRIAS (do próprio expert)
+  # ─────────────────────────────────────────────────────────────
+
+  tier_1_primary:
+    # === LIVRO ===
+    - id: "BK01"
+      title: "Porque é tão difícil mudar meus hábitos e resultados"
+      type: "book"
+      year: null
+      url: "https://www.amazon.com.br/DIFÍCIL-MUDAR-HÁBITOS-RESULTADOS-COMPORTAMENTOS-ebook/dp/B0898WYJQQ"
+      format: "ebook (Kindle)"
+      estimated_volume: "~150 páginas"
+      key_topics: ["hábitos", "neurociência", "mudança comportamental", "crenças"]
+      triangulates: ["framework", "methodology", "principles"]
+      status: "disponível"
+      acquisition_action: "download_kindle_sample"
+
+    # === SITES OFICIAIS ===
+    - id: "WEB01"
+      title: "Site Oficial - rennersilva.com.br"
+      type: "website"
+      url: "https://rennersilva.com.br/"
+      estimated_volume: "~20 páginas"
+      key_topics: ["posicionamento", "método", "palestras", "conversão"]
+      triangulates: ["framework", "methodology"]
+      status: "scrapeable"
+      acquisition_action: "web_scrape"
+
+    - id: "WEB02"
+      title: "Método S.I.M. - metodosim.com.br"
+      type: "website"
+      url: "https://metodosim.com.br/"
+      estimated_volume: "~10 páginas"
+      key_topics: ["método S.I.M.", "framework proprietário"]
+      triangulates: ["framework", "methodology"]
+      status: "scrapeable"
+      acquisition_action: "web_scrape"
+
+    - id: "WEB03"
+      title: "Blog Oficial Renner Silva"
+      type: "blog"
+      url: "https://rennersilva.com.br/blog/"
+      estimated_volume: "múltiplos artigos"
+      key_topics: ["cultura da felicidade", "oratória", "desenvolvimento"]
+      triangulates: ["principles", "voice_dna"]
+      status: "scrapeable"
+      acquisition_action: "web_scrape"
+
+    # === REDES SOCIAIS ===
+    - id: "SOC01"
+      title: "Instagram @rennersilvaoficial"
+      type: "social_media"
+      url: "https://www.instagram.com/rennersilvaoficial/"
+      followers: "140K+"
+      estimated_volume: "500+ posts/reels"
+      key_topics: ["oratória", "mentoria", "storytelling", "comunicação diária"]
+      triangulates: ["voice_dna", "principles"]
+      status: "parcial (reels não scrapeable)"
+      acquisition_action: "manual_curation"
+
+    - id: "SOC02"
+      title: "LinkedIn - Renner Silva"
+      type: "social_media"
+      url: "https://www.linkedin.com/in/rennersilvaoficial/"
+      estimated_volume: "~50 posts"
+      key_topics: ["posicionamento B2B", "thought leadership"]
+      triangulates: ["voice_dna", "methodology"]
+      status: "parcial"
+      acquisition_action: "manual_curation"
+
+    # === CANAL YOUTUBE ===
+    - id: "YT01"
+      title: "Canal YouTube - Renner Silva"
+      type: "youtube_channel"
+      url: "https://www.youtube.com/channel/UCAyyyfkJg5Sw35NJfk4OZeg"
+      youtube_user: "magicorennersite"
+      estimated_volume: "múltiplos vídeos"
+      key_topics: ["palestras", "motivação", "oratória"]
+      triangulates: ["voice_dna", "framework", "methodology"]
+      status: "confirmado"
+      acquisition_action: "youtube_transcript_extraction"
+
+    - id: "YT02"
+      title: "A Fórmula Mágica do Sucesso (palestra completa)"
+      type: "youtube_video"
+      url: "https://www.youtube.com/watch?v=3UMJFEBOEss"
+      duration: "01:50:48"
+      views: "45K+"
+      key_topics: ["história de vida", "framework principal", "hábitos", "neurociência"]
+      triangulates: ["voice_dna", "framework", "methodology", "principles"]
+      status: "disponível - TRANSCRIÇÃO PENDENTE"
+      priority: "CRÍTICA"
+      acquisition_action: "video_transcribe"
+
+    - id: "YT03"
+      title: "Os 8 Passos do Roteiro Perfeito"
+      type: "youtube_video"
+      url: "https://www.youtube.com/watch?v=Cx7A7pYZcqw"
+      duration: "02:24:53"
+      date: "2024-12-04"
+      key_topics: ["roteiro", "8 passos", "técnica palestra", "storytelling"]
+      triangulates: ["framework", "methodology", "voice_dna"]
+      status: "disponível - TRANSCRIÇÃO PENDENTE"
+      priority: "CRÍTICA"
+      acquisition_action: "video_transcribe"
+
+    # === CURSO ONLINE ===
+    - id: "CRS01"
+      title: "Palestras Poderosas e Lucrativas (Hotmart)"
+      type: "online_course"
+      url: "https://hotmart.com/pt-br/marketplace/produtos/palestras-matadoras-com-renner-silva/I81145272J"
+      estimated_volume: "múltiplas horas de vídeo"
+      key_topics: ["técnicas de palestra", "posicionamento", "comunicação"]
+      triangulates: ["framework", "methodology", "voice_dna"]
+      status: "pago (requer acesso)"
+      acquisition_action: "check_user_access"
+
+    # === ENTREVISTAS ===
+    - id: "INT01"
+      title: "Entrevista - TV Corporativa Gestão RH"
+      type: "interview"
+      url: "https://tv.grupogestaorh.com.br/videos/programas/resiliencia-emprendedora/344-entrevista-com-renner-silva-palestrante-motivacional"
+      estimated_volume: "~30 min"
+      key_topics: ["resiliência", "motivação", "trajetória"]
+      triangulates: ["voice_dna", "principles"]
+      status: "disponível (vídeo)"
+      acquisition_action: "video_transcript"
+
+    - id: "INT02"
+      title: "Bate-papo SBT - Programa Silvio Santos"
+      type: "tv_appearance"
+      url: "https://tv.sbt.com.br/programas/auditorio/programa-silvio-santos/noticia/150657-confira-o-bate-papo-entre-aline-serrano-e-o-magico-renner-silva"
+      estimated_volume: "~15 min"
+      key_topics: ["personalidade", "comunicação informal"]
+      triangulates: ["voice_dna"]
+      status: "disponível (vídeo)"
+      acquisition_action: "video_transcript"
+
+    # === PALESTRA GOVERNAMENTAL ===
+    - id: "PAL01"
+      title: "Palestra Ministério da Infraestrutura"
+      type: "keynote"
+      url: "https://www.gov.br/infraestrutura/pt-br/servicos/gestao-de-pessoas/noticias-cogep/palestra-motivacional-a-formula-magica-do-sucesso"
+      youtube_channel: "Capacita MInfra"
+      estimated_volume: "~60 min"
+      key_topics: ["Fórmula Mágica do Sucesso", "motivação", "hábitos"]
+      triangulates: ["framework", "methodology", "voice_dna"]
+      status: "possível no YouTube"
+      acquisition_action: "youtube_search_extract"
+
+    # === FRAMEWORKS DOCUMENTADOS ===
+    - id: "FW01"
+      title: "Método Aplauda de Pé"
+      type: "framework_reference"
+      url: "https://pt.linkedin.com/pulse/aplauda-de-p%C3%A9-geerleson-barrim-de-souza"
+      key_topics: ["reconhecimento", "gestão humana", "feedback"]
+      pilares:
+        - "Reconhecimento genuíno"
+        - "Timing apropriado"
+        - "Reconhecimento público"
+        - "Democratização (qualquer pessoa pode)"
+      triangulates: ["methodology", "principles"]
+      status: "disponível"
+      acquisition_action: "web_scrape"
+
+    - id: "FW02"
+      title: "Body Reading Inner Vision"
+      type: "framework_reference"
+      url: "https://expoempreendedor.com.br/2026/palestrante/renner-silva"
+      key_topics: ["comunicação completa", "leitura corporal"]
+      status: "mencionado, sem detalhamento"
+      acquisition_action: "deep_research"
+
+    - id: "FW03"
+      title: "Namastê Training"
+      type: "framework_reference"
+      key_topics: ["competência emocional", "autoliderança"]
+      status: "mencionado, sem detalhamento"
+      acquisition_action: "deep_research"
+
+  # ─────────────────────────────────────────────────────────────
+  # TIER 2 — FONTES SECUNDÁRIAS (sobre o expert)
+  # ─────────────────────────────────────────────────────────────
+
+  tier_2_secondary:
+    - id: "BIO01"
+      title: "Perfil - Polo Palestrantes"
+      type: "biography"
+      url: "https://polopalestrantes.com.br/palestrantes/renner-silva"
+      key_topics: ["biografia completa", "formação", "prêmios"]
+      status: "scrapeable"
+
+    - id: "BIO02"
+      title: "Perfil - Palestras de Sucesso"
+      type: "biography"
+      url: "https://palestrasdesucesso.com.br/palestrante/renner-silva/"
+      key_topics: ["trajetória", "números", "temas"]
+      status: "scrapeable"
+
+    - id: "BIO03"
+      title: "Perfil - Fadel Palestrantes"
+      type: "biography"
+      url: "https://fadelpalestrantes.com.br/palestrante/magico-renner/"
+      key_topics: ["especializações", "PNL", "hipnose", "PUC Minas"]
+      status: "scrapeable"
+
+    - id: "BIO04"
+      title: "Perfil - Expo Empreendedor 2026"
+      type: "event_profile"
+      url: "https://expoempreendedor.com.br/2026/palestrante/renner-silva"
+      key_topics: ["bio atualizada", "técnicas", "treinamentos"]
+      status: "scrapeable"
+
+    - id: "ART01"
+      title: "Cobertura - A Notícia Online"
+      type: "article"
+      url: "https://anoticiaonline.com.br/site/a-formula-magica-do-sucesso-renner-silva-ministra-palestra-para-centenas-de-pessoas/"
+      key_topics: ["palestra", "impacto"]
+      status: "scrapeable"
+
+    - id: "ART02"
+      title: "Fórum Empresarial ACIMACAR 2022"
+      type: "article"
+      url: "https://acimacar.com.br/post/3491/palestra-com-renner-silva-abre-forum-empresarial-2022-da-acimacar"
+      key_topics: ["evento", "palestra"]
+      status: "scrapeable"
+
+    - id: "ART03"
+      title: "4º Empreenda Caraguatatuba"
+      type: "article"
+      url: "https://empreenda.caraguatatuba.sp.gov.br/2022/10/20/com-a-formula-magica-do-sucesso-palestra-de-renner-silva-abre-4o-empreenda-caraguatatuba/"
+      key_topics: ["Fórmula Mágica", "evento municipal"]
+      status: "scrapeable"
+
+    - id: "ART04"
+      title: "LinkedIn Pulse - Aplauda de Pé (por aluno)"
+      type: "article"
+      url: "https://pt.linkedin.com/pulse/aplauda-de-p%C3%A9-geerleson-barrim-de-souza"
+      key_topics: ["framework Aplauda de Pé", "perspectiva de aluno"]
+      status: "scrapeable"
+
+  # ─────────────────────────────────────────────────────────────
+  # TIER 3 — FONTES TERCIÁRIAS
+  # ─────────────────────────────────────────────────────────────
+
+  tier_3_tertiary:
+    - id: "AGN01"
+      title: "Perfil - Dialethos Eventos"
+      type: "agency_profile"
+      url: "https://www.dialethoseventos.com.br/palestrante/2164/magico-renner-sipat-seguranca-no-trabaho"
+
+    - id: "AGN02"
+      title: "Expo Empreendedor 2025"
+      type: "event_listing"
+      url: "https://expoempreendedor.com.br/2025/palestrante/renner-silva"
+
+    - id: "REF01"
+      title: "ZoomInfo - Renner Silva"
+      type: "directory"
+      url: "https://www.zoominfo.com/p/Renner-Silva/6324170676"
+
+    - id: "REF02"
+      title: "Social Blade - YouTube Stats"
+      type: "analytics"
+      url: "https://socialblade.com/youtube/user/magicorennersite"
+
+    - id: "BK02"
+      title: "Livros com conflito de autoria (verificar)"
+      type: "book_disputed"
+      note: "3 livros atribuídos a Renner mas possivelmente de Eduardo Shinyashiki"
+      status: "REQUER VERIFICAÇÃO"
+
+  # ─────────────────────────────────────────────────────────────
+  # PODCASTS MENCIONADOS (não confirmados)
+  # ─────────────────────────────────────────────────────────────
+
+  podcasts_mentioned:
+    note: "Mencionados em biografias oficiais mas episódios específicos não localizados"
+    items:
+      - show: "PrimoCast"
+        host: "Primo Rico"
+        status: "não confirmado"
+      - show: "Os Sócios"
+        hosts: "Bruno Perini e Malu Perini"
+        status: "não confirmado"
+      - show: "The Noite"
+        host: "Danilo Gentili"
+        status: "não confirmado"
+      - show: "Pânico"
+        platform: "Jovem Pan"
+        status: "não confirmado"
+
+  # ─────────────────────────────────────────────────────────────
+  # DADOS BIOGRÁFICOS EXTRAÍDOS
+  # ─────────────────────────────────────────────────────────────
+
+  biographical_data:
+    nome_completo: "Renier Alexandre e Silva"
+    nome_artistico: "Mágico Renner / Renner Silva"
+    nascimento: "12 de janeiro de 1980"
+    cidade: "Belo Horizonte, MG"
+    formacao:
+      - "Engenharia de Minas - UFMG"
+      - "Mestre em Ciências da Educação"
+      - "Pesquisador de Neurociência"
+      - "Programador Neurolinguístico"
+      - "Hipnólogo Clínico"
+    docencia: "Professor PUC Minas (Ciência da Felicidade e Bem-estar)"
+    empresa: "Escola de Palestras (CEO)"
+    numeros:
+      palestras: "1.450+"
+      paises: 7
+      pessoas_impactadas: "1.000.000+"
+      empresas_atendidas: "600+"
+      alunos_treinados: "1.000+"
+    premios:
+      - "Gold Star (Dubai)"
+      - "Top of Mind 3x (Londres)"
+      - "Melhor Palestrante do Brasil"
+      - "Palestra para ONU"
+    turning_point: "Aos 23 anos começou a entender que só ele podia mudar a sua difícil história"
+    frase_manifesto: "O homem é o que ele quer ser"
+
+  # ─────────────────────────────────────────────────────────────
+  # FRAMEWORKS IDENTIFICADOS
+  # ─────────────────────────────────────────────────────────────
+
+  frameworks_identified:
+    confirmed:
+      - name: "A Fórmula Mágica do Sucesso"
+        type: "palestra flagship"
+        documentation_level: "baixo (conteúdo proprietário)"
+      - name: "Método S.I.M."
+        type: "framework proprietário"
+        documentation_level: "site existe (metodosim.com.br)"
+      - name: "Aplauda de Pé"
+        type: "framework de gestão"
+        documentation_level: "médio (artigo de aluno documenta pilares)"
+      - name: "Body Reading Inner Vision"
+        type: "técnica comunicação"
+        documentation_level: "baixo (apenas mencionado)"
+      - name: "Namastê Training"
+        type: "treinamento emocional"
+        documentation_level: "baixo (apenas mencionado)"
+      - name: "Power Professional"
+        type: "treinamento empoderamento"
+        documentation_level: "baixo (apenas mencionado)"
+
+  # ─────────────────────────────────────────────────────────────
+  # VALIDAÇÃO & QUALITY GATE
+  # ─────────────────────────────────────────────────────────────
+
+  validation:
+    total_sources: 28
+    tier_1_count: 15
+    tier_2_count: 8
+    tier_3_count: 5
+    type_diversity: 7  # book, website, social, video, interview, article, course
+    content_volume:
+      hours_estimated: 3  # apenas confirmados (entrevista + palestra gov)
+      pages_estimated: 150  # livro + sites + blog
+    temporal_periods: ["2009 (SBT)", "2020s (ativo)", "2022 (eventos)", "2026 (atual)"]
+    triangulation:
+      formula_magica: "4+ fontes ✅"
+      metodo_sim: "2 fontes ⚠️"
+      aplauda_de_pe: "3 fontes ✅"
+
+  go_no_go:
+    checks:
+      - check: "10+ fontes totais"
+        result: "28 ✅"
+        blocking: true
+      - check: "5+ fontes Tier 1"
+        result: "15 ✅"
+        blocking: true
+      - check: "3+ tipos diferentes"
+        result: "7 tipos ✅"
+        blocking: true
+      - check: "5+ horas áudio/vídeo OU 200+ páginas"
+        result: "~3h + ~150pp ⚠️ (abaixo do ideal)"
+        blocking: true
+      - check: "Framework principal em 3+ fontes"
+        result: "Fórmula Mágica: 4+ ✅"
+        blocking: true
+
+    blocking_passed: "4/5"
+    status: "CONDITIONAL"
+    conditions:
+      - "Volume de conteúdo ABAIXO do ideal (3h vs 5h recomendadas)"
+      - "YouTube requer investigação direta para extrair transcrições"
+      - "Curso Hotmart pode preencher gap se acessível"
+      - "Podcasts mencionados mas não confirmados"
+
+    ready_for_extraction: true
+    extraction_quality_estimate: "70-80% fidelidade (vs 85-95% com fontes completas)"
+
+  # ─────────────────────────────────────────────────────────────
+  # GAPS & PLANO DE AQUISIÇÃO
+  # ─────────────────────────────────────────────────────────────
+
+  gaps:
+    critical:
+      - gap: "Volume de áudio/vídeo insuficiente"
+        risk: "alto"
+        mitigation: "Extrair transcrições YouTube + buscar podcasts específicos"
+      - gap: "Método S.I.M. não detalhado publicamente"
+        risk: "alto"
+        mitigation: "Scrape metodosim.com.br + buscar conteúdo curso Hotmart"
+
+    important:
+      - gap: "Podcasts não confirmados"
+        risk: "médio"
+        mitigation: "Buscar diretamente no Spotify/YouTube"
+      - gap: "Body Reading Inner Vision sem detalhamento"
+        risk: "médio"
+        mitigation: "Deep research específico"
+
+    nice_to_have:
+      - gap: "Artigos acadêmicos não encontrados"
+        risk: "baixo"
+        mitigation: "Buscar Google Scholar / repositório PUC Minas"
+
+  # ─────────────────────────────────────────────────────────────
+  # PRÓXIMOS PASSOS
+  # ─────────────────────────────────────────────────────────────
+
+  next_steps:
+    priority_1_immediate:
+      - action: "Scrape sites oficiais (rennersilva.com.br, metodosim.com.br)"
+        status: "EM ANDAMENTO"
+      - action: "Buscar canal YouTube diretamente e extrair transcrições"
+        status: "pendente"
+      - action: "Scrape perfis biográficos (Tier 2)"
+        status: "EM ANDAMENTO"
+
+    priority_2_if_available:
+      - action: "Acessar curso Hotmart (se usuário tiver acesso)"
+      - action: "Buscar podcasts no Spotify/Apple Podcasts"
+      - action: "Coletar Instagram Reels (conteúdo rico em voice DNA)"
+
+    priority_3_enrichment:
+      - action: "Google Scholar para artigos acadêmicos"
+      - action: "Confirmar autoria dos 3 livros disputados"
+
+# ═══════════════════════════════════════════════════════════════

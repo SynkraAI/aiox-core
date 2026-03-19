@@ -1,0 +1,92 @@
+workflow:
+  id: wf-quick-audit
+  name: "Quick Performance Audit"
+  version: "1.0.0"
+  description: >-
+    Auditoria rapida usando apenas PageSpeed Insights API.
+    Coleta scores, classifica Core Web Vitals, e lista top issues.
+    Ideal para verificacao rapida ou triagem inicial.
+  trigger: "*quick-audit {url}"
+  estimated_duration: "2-5 min"
+  executor: "site-performance-audit-chief"
+
+  input:
+    required:
+      - name: url
+        type: string
+      - name: strategy
+        type: enum
+        values: [mobile, desktop, both]
+        default: both
+
+  phases:
+    phase_1:
+      name: "PSI Collection"
+      executor: worker
+      duration: "30s-2min"
+      steps:
+        - id: "1.1"
+          name: "PageSpeed Insights — Mobile"
+          task: "tasks/collect-psi.md"
+          params: { strategy: mobile }
+          parallel_with: "1.2"
+        - id: "1.2"
+          name: "PageSpeed Insights — Desktop"
+          task: "tasks/collect-psi.md"
+          params: { strategy: desktop }
+      checkpoint:
+        name: "CP-1: PSI Data"
+        gate: "PA-QG-002"
+        criteria: ["At least one PSI response received"]
+        veto_conditions:
+          - "PSI API returns error → STOP, check API key"
+          - "Rate limit hit → WAIT 100s, retry"
+        on_pass: "Proceed to Phase 2"
+        on_fail: "Report missing data, suggest alternatives"
+
+    phase_2:
+      name: "CWV Classification & Report"
+      executor: agent
+      agent: "addy-osmani"
+      duration: "1-2 min"
+      steps:
+        - id: "2.1"
+          name: "Classify Core Web Vitals"
+          output: |
+            | Metric | Mobile | Desktop | Status |
+            |--------|:------:|:-------:|:------:|
+        - id: "2.2"
+          name: "Top 5 Lighthouse Opportunities"
+          output: "Ranked list with estimated savings"
+        - id: "2.3"
+          name: "Generate Report"
+          template: "templates/quick-audit-report-tmpl.md"
+          output: "Quick audit report following template structure"
+        - id: "2.4"
+          name: "Offer Save"
+          action: "Present report on screen, then offer *save"
+          task: "tasks/save-report.md"
+          protocol: "protocols/output-standard.md"
+          note: "Heuristic PAC-H-008 — always offer *save after generating output"
+          enforcement: |
+            When user accepts *save:
+            - MUST load and follow tasks/save-report.md steps 1-6 exactly
+            - Target dir: docs/outputs/squads/site-performance-audit/
+            - Filename: {YYYY-MM-DD}-{HHmm}-quick-audit-{sanitized_id}.md
+            - MUST update _index.yaml
+            - NEVER use docs/audits/ or any other path
+      checkpoint:
+        name: "CP-2: Classification Complete"
+        gate: "PA-QG-003"
+        criteria:
+          - "CWV classified (Good/NI/Poor)"
+          - "Top issues identified"
+          - "Report follows quick-audit-report-tmpl.md structure"
+        on_pass: "DELIVER report and offer *save"
+
+  output:
+    template: "templates/quick-audit-report-tmpl.md"
+    save_protocol: "protocols/output-standard.md"
+    save_path: "docs/outputs/squads/site-performance-audit/"
+    save_filename: "{YYYY-MM-DD}-{HHmm}-quick-audit-{sanitized_id}.md"
+    save_note: "NEVER save to squads/*/data/ or docs/audits/. Read tasks/save-report.md for full steps."

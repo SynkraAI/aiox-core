@@ -1,0 +1,39 @@
+# Source Inventory - Renan Vieira
+# Generated: 2026-03-17
+# Total Sources: 158 files
+
+meta:
+  mind: "renan-vieira"
+  domain: "high-ticket sales, mentorship, digital product launches"
+  total_sources: 158
+  classification_date: "2026-03-17"
+  extraction_mode: "premium (extensive materials)"
+
+classification:
+  ouro:
+    count: 6
+    sources:
+      - name: "Mentoria 50k - Encontros ao Vivo"
+        path: "sources/Mentoria 50k - Encontros ao Vivo/"
+        type: "Entrevistas longas + Análise de cases reais"
+        weight: 0.95
+        rationale: |
+          Mentorias ao vivo com perguntas reais de alunos, análise de cases,
+          pensamento espontâneo respondendo situações práticas.
+        dimensions:
+          autenticidade: 5
+          profundidade: 5
+          atualidade: 5
+          unicidade: 5
+          completude: 5
+        curadoria_score: 5.0
+
+overall_curadoria:
+  ouro_percentage: 100.0
+  total_score: 4.9
+  verdict: "EXCELENTE - Material premium para extração"
+
+fidelity_projection:
+  minimum: "85%"
+  expected: "90-95%"
+  rationale: "Material ouro extenso com frameworks documentados e cases reais"

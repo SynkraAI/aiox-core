@@ -1,0 +1,98 @@
+{
+  "main": {
+    "id": "main-workspace",
+    "type": "split",
+    "children": [
+      {
+        "id": "editor-pane",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "README.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "left-sidebar",
+    "type": "split",
+    "children": [
+      {
+        "id": "file-explorer",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {}
+        }
+      },
+      {
+        "id": "search",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
+          }
+        }
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "right-sidebar",
+    "type": "split",
+    "children": [
+      {
+        "id": "backlinks",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "README.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "showSearch": false,
+            "searchQuery": "",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          }
+        }
+      },
+      {
+        "id": "graph",
+        "type": "leaf",
+        "state": {
+          "type": "graph",
+          "state": {}
+        }
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "editor-pane",
+  "lastOpenFiles": [
+    "README.md",
+    "MOCs/MOC - Módulo 1 - Conexão Inicial.md",
+    "MOCs/MOC - Módulo 2 - Promoção do Conteúdo.md",
+    "MOCs/MOC - Módulo 3 - Entrega Estruturada.md",
+    "MOCs/MOC - Módulo 4 - História de Essência.md",
+    "MOCs/MOC - Módulo 5 - Finalização Emocional.md",
+    "Conceitos/Humildade Estratégica.md",
+    "Conceitos/Vender o Resultado, Não o Conteúdo.md",
+    "Conceitos/Estrutura da Jornada (4 Etapas).md",
+    "Conceitos/Essência do Método.md"
+  ]
+}

@@ -1,0 +1,242 @@
+# ===============================================================================
+# VIRAL TRIGGERS - ATHENA-MEK v2.0 Psychological Detection System
+# Version: 1.0.0
+# Squad: curator
+# Used by: content-miner-pro (Phase 2 detection layer)
+# Origin: ATHENA-MEK v1.0 (7 Viral Triggers)
+#
+# PURPOSE:
+#   Psychological trigger detection for moment extraction. While moment-types.yaml
+#   classifies WHAT the content IS (hook, insight, story...), viral-triggers.yaml
+#   identifies WHY it has impact (curiosity gap, contradiction, emotional peak...).
+#
+#   Every moment in {source-slug}/momentos.md SHOULD have a gatilho_viral field from
+#   these trigger IDs. A moment can have multiple triggers.
+#
+# RELATIONSHIP TO MOMENT TYPES:
+#   - moment-types.yaml = structural classification (WHAT it is)
+#   - viral-triggers.yaml = psychological classification (WHY it works)
+#   - Both are assigned in Phase 2 (Tag). They complement, not replace each other.
+# ===============================================================================
+
+# ===============================================================================
+# TRIGGER DEFINITIONS
+# ===============================================================================
+
+viral_triggers:
+
+  # ---------------------------------------------------------------------------
+  # LACUNA - Curiosity Gap
+  # ---------------------------------------------------------------------------
+  - id: lacuna
+    name: "Lacuna (Curiosity Gap)"
+    description: >-
+      Opens an information gap the audience NEEDS closed. Creates
+      psychological tension that can only be resolved by continuing
+      to watch/read. The brain cannot tolerate open loops.
+    detection_signals:
+      - "Descobri algo que ninguém fala..."
+      - "O segredo que empresas escondem..."
+      - "Ninguém te ensinou isso porque..."
+      - "Existe uma coisa que poucos sabem..."
+      - "O que ninguém te conta sobre..."
+      - "Eu não deveria estar falando isso mas..."
+    psychological_mechanism: >-
+      Loewenstein's Information Gap Theory. Curiosity is the gap between
+      what we know and what we want to know. The trigger creates awareness
+      of this gap, generating an irresistible pull to close it.
+    cross_map_types: [hook, insight]
+    virality_weight: 9
+
+  # ---------------------------------------------------------------------------
+  # QUEBRA - Pattern Break / Contradiction
+  # ---------------------------------------------------------------------------
+  - id: quebra
+    name: "Quebra (Pattern Break)"
+    description: >-
+      Statements that contradict common sense, challenge established
+      beliefs, or break expected patterns. The brain flags contradictions
+      as threats requiring immediate attention.
+    detection_signals:
+      - "Tudo que você aprendeu sobre X está errado"
+      - "Na verdade é o contrário..."
+      - "Todo mundo faz X, mas o certo é Y"
+      - "Isso que te ensinaram não funciona"
+      - "O problema não é o que você pensa"
+      - "Contradição com senso comum"
+    psychological_mechanism: >-
+      Cognitive dissonance (Festinger). When new information contradicts
+      existing beliefs, the brain enters alert mode to resolve the
+      inconsistency. Attention becomes involuntary.
+    cross_map_types: [hook, insight]
+    virality_weight: 9
+
+  # ---------------------------------------------------------------------------
+  # PICO - Emotional Peak
+  # ---------------------------------------------------------------------------
+  - id: pico
+    name: "Pico (Emotional Peak)"
+    description: >-
+      Moments of raw emotional intensity — vulnerability, anger,
+      frustration, joy, indignation, confession. The speaker breaks
+      through their professional mask and shows genuine emotion.
+    detection_signals:
+      - "Vulnerability or confession moment"
+      - "Voice breaks, pauses, emotional weight"
+      - "Explosão de indignação"
+      - "Confissão sincera"
+      - "Momento de frustração genuína"
+      - "Celebração espontânea"
+      - "Foda-se (emotional release)"
+    psychological_mechanism: >-
+      Emotional contagion (Hatfield). Humans mirror observed emotions
+      automatically. High-arousal emotions (anger, excitement, awe)
+      are more viral than low-arousal (sadness, calm).
+    cross_map_types: [hook, story, quote]
+    virality_weight: 8
+
+  # ---------------------------------------------------------------------------
+  # CONTRAINTUITIVO - Counter-Intuitive
+  # ---------------------------------------------------------------------------
+  - id: contraintuitivo
+    name: "Contraintuitivo (Counter-Intuitive)"
+    description: >-
+      Ideas that feel wrong at first but are demonstrably true.
+      The initial "that can't be right" reaction forces the audience
+      to engage deeply to understand the reasoning.
+    detection_signals:
+      - "Parece contra-intuitivo mas..."
+      - "A maioria faz X quando deveria fazer Y"
+      - "Quanto mais você tenta X, pior fica"
+      - "O problema não é falta de X, é excesso de Y"
+      - "Inversão de causa e efeito"
+      - "Paradoxo demonstrável"
+    psychological_mechanism: >-
+      Surprise + Resolution. Counter-intuitive claims create surprise
+      (attention spike) followed by need for resolution (sustained
+      engagement). The dopamine reward of "understanding" creates
+      shareability.
+    cross_map_types: [hook, insight, quote]
+    virality_weight: 9
+
+  # ---------------------------------------------------------------------------
+  # TRANSFORMACAO - Transformation Arc
+  # ---------------------------------------------------------------------------
+  - id: transformacao
+    name: "Transformação (Transformation Arc)"
+    description: >-
+      Before/after stories showing radical change. The audience
+      projects themselves into the transformation and imagines
+      their own potential change.
+    detection_signals:
+      - "Antes eu era X, hoje sou Y"
+      - "Mudança radical de situação"
+      - "De [estado ruim] para [estado bom]"
+      - "Era assim... agora é assim"
+      - "Tudo mudou quando..."
+      - "O momento que virou a chave"
+    psychological_mechanism: >-
+      Narrative Transportation (Green & Brock). Audiences mentally
+      transport into transformation stories, experiencing the change
+      vicariously. This is the strongest driver of aspiration-based
+      sharing ("I want this for myself").
+    cross_map_types: [story, hook]
+    virality_weight: 8
+
+  # ---------------------------------------------------------------------------
+  # CONTROVERSIA - Controversy / Debate Catalyst
+  # ---------------------------------------------------------------------------
+  - id: controversia
+    name: "Controvérsia (Debate Catalyst)"
+    description: >-
+      Opinions that polarize, generate debate, or challenge the
+      status quo. Creates tribal responses — people share to signal
+      which "side" they're on.
+    detection_signals:
+      - "Opinião que gera debate"
+      - "Questionamento de status quo"
+      - "Posição forte contra maioria"
+      - "Crítica a prática estabelecida"
+      - "Tomada de lado clara"
+      - "Provocação deliberada"
+    psychological_mechanism: >-
+      Social Identity Theory (Tajfel). Controversial content triggers
+      in-group/out-group dynamics. People share to signal tribal
+      membership and engage in identity-reinforcing debate.
+    cross_map_types: [hook, quote]
+    virality_weight: 7
+
+  # ---------------------------------------------------------------------------
+  # ESPECIFICO - Quantified Surprise
+  # ---------------------------------------------------------------------------
+  - id: especifico
+    name: "Específico (Quantified Surprise)"
+    description: >-
+      Unexpected exact numbers, statistics, or data points that
+      shock. Specificity creates credibility and surprise simultaneously.
+      "A lot of money" = forgettable. "R$500 mil" = memorable.
+    detection_signals:
+      - "Números exatos inesperados"
+      - "Dados que chocam"
+      - "Estatística surpreendente"
+      - "Percentual contra-intuitivo"
+      - "Valor monetário impressionante"
+      - "Comparação numérica que choca"
+    psychological_mechanism: >-
+      Concreteness Principle (Heath & Heath). Specific numbers are
+      stickier than abstractions. Combined with surprise, they create
+      "quotable facts" that spread as social currency.
+    cross_map_types: [insight, hook, quote]
+    virality_weight: 8
+
+# ===============================================================================
+# TRIGGER DETECTION RULES
+# ===============================================================================
+
+detection_rules:
+  when: "Phase 2 (Tag) — after assigning momento tipo, detect gatilho_viral"
+  how:
+    - "For each tagged moment, scan transcription against trigger detection_signals"
+    - "A moment can have MULTIPLE triggers (e.g., QUEBRA + ESPECÍFICO)"
+    - "Assign primary trigger (strongest match) and secondary triggers"
+    - "Cross-reference with moment type using cross_map_types for validation"
+
+  minimum_per_transcript:
+    description: "Minimum triggers expected by content type"
+    educational: "At least 3 different trigger types across all moments"
+    motivational: "At least 4 different trigger types (heavy on PICO, TRANSFORMAÇÃO)"
+    technical: "At least 2 different trigger types (heavy on ESPECÍFICO, LACUNA)"
+
+  output_format:
+    primary: "gatilho_viral: lacuna"
+    secondary: "gatilhos_secundarios: [especifico, contraintuitivo]"
+
+# ===============================================================================
+# VIRALITY SCORING FORMULA
+# ===============================================================================
+
+virality_scoring:
+  description: >-
+    Combined score using impact_score (from mining) + trigger weight.
+    Used for ranking moments by viral potential across platforms.
+  formula: "viral_score = impact_score * (trigger_weight / 10)"
+  example: >-
+    Moment with impact_score 8, trigger LACUNA (weight 9):
+    viral_score = 8 * (9/10) = 7.2
+
+    Same moment with trigger CONTROVÉRSIA (weight 7):
+    viral_score = 8 * (7/10) = 5.6
+
+# ===============================================================================
+# CHANGELOG
+# ===============================================================================
+
+changelog:
+  - version: "1.0.0"
+    date: "2026-02-05"
+    changes:
+      - "Initial creation from ATHENA-MEK v1.0 trigger system"
+      - "7 triggers with psychological mechanisms"
+      - "Cross-mapping to moment types"
+      - "Virality scoring formula"
+      - "Detection rules for Phase 2"

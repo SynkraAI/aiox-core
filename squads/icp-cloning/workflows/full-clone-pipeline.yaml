@@ -1,0 +1,518 @@
+# Full ICP Clone Pipeline - Processo Completo de Clonagem Cognitiva
+# 6 Fases | Tempo: 12-16 horas | Fidelidade: 100%
+
+name: full-clone-pipeline
+version: "1.0.0"
+description: |
+  Workflow completo de clonagem cognitiva de ICP em 6 fases científicas.
+  Transforma dados básicos em clone conversacional com 100% de fidelidade.
+
+metadata:
+  estimated_time: "12-16 hours"
+  difficulty: advanced
+  output_quality: "100% fidelity"
+  phases: 6
+
+phases:
+  # ═══════════════════════════════════════════════════════════════════════════
+  # FASE 1: ENTRADA DE DADOS (30 min)
+  # ═══════════════════════════════════════════════════════════════════════════
+  - phase: 1
+    name: "Entrada de Dados"
+    description: "Coletar informações básicas do ICP via briefing estruturado"
+    duration: "30 min"
+
+    steps:
+      - step: 1.1
+        name: "Abrir Template de Briefing"
+        agent: synapse-architect
+        task: collect-icp-briefing
+        action: |
+          Usar template `briefing-icp-template.md` para coletar dados do ICP.
+
+      - step: 1.2
+        name: "Preencher Dados Obrigatórios"
+        checklist:
+          - Demografia (idade, gênero, localização, estado civil)
+          - Profissão (ocupação, setor, senioridade)
+          - Contexto de Vida (filhos, moradia, rotina)
+          - Financeiro (faixa de renda mínima)
+
+      - step: 1.3
+        name: "Preencher Dados Recomendados"
+        optional: true
+        items:
+          - Dores e frustrações
+          - Objetivos e aspirações
+          - Padrões de comportamento
+          - Linguagem característica
+          - Contexto relacional
+
+      - step: 1.4
+        name: "Validação do Briefing"
+        checkpoint: true
+        validation: pre-validation-checklist
+        gate: |
+          Dados mínimos obrigatórios preenchidos? Se não, PARE e complete.
+
+    outputs:
+      - briefing-icp-filled.md
+
+    next_phase: 2
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # FASE 2: EXTRAÇÃO PROFUNDA (4-5 horas)
+  # ═══════════════════════════════════════════════════════════════════════════
+  - phase: 2
+    name: "Extração Profunda"
+    description: "Executar 15 prompts de extração (P0-P14) em 5 blocos"
+    duration: "4-5 hours"
+    agent: extractor-deep
+
+    blocks:
+      - block: "Fundação Demográfica"
+        duration: "50 min"
+        steps:
+          - step: 2.1
+            name: "P0: Demografia & Contexto"
+            task: extract-p0-demografia
+            output: P0_OUTPUT.md
+
+          - step: 2.2
+            name: "P0B: Realidade Financeira"
+            task: extract-p0b-realidade
+            output: P0B_OUTPUT.md
+
+      - block: "Perfil Psicológico"
+        duration: "2 hours"
+        steps:
+          - step: 2.3
+            name: "P1: Psicometria (Big Five + 30 facetas)"
+            task: extract-p1-psicometria
+            output: P1_OUTPUT.md
+            depth_markers:
+              - Exemplos comportamentais por faceta
+              - Contradições entre facetas identificadas
+
+          - step: 2.4
+            name: "P2: Assinatura Linguística (1500+ exemplos)"
+            task: extract-p2-assinatura
+            output: P2_OUTPUT.md
+            target: "Mínimo 1500 expressões reais"
+
+          - step: 2.5
+            name: "P3: Valores & Trade-offs"
+            task: extract-p3-valores
+            output: P3_OUTPUT.md
+
+      - block: "Contexto Social"
+        duration: "1.5 hours"
+        steps:
+          - step: 2.6
+            name: "P4: Comunidade & Tribos"
+            task: extract-p4-comunidade
+            output: P4_OUTPUT.md
+
+          - step: 2.7
+            name: "P5: Neuropsico - Triggers & Respostas"
+            task: extract-p5-neuropsico
+            output: P5_OUTPUT.md
+
+          - step: 2.8
+            name: "P6: Hábitos Digitais & Jornada"
+            task: extract-p6-hábitos
+            output: P6_OUTPUT.md
+
+      - block: "Decisão & Expectativas"
+        duration: "1.5 hours"
+        steps:
+          - step: 2.9
+            name: "P7: Comportamento de Compra (5-Gate)"
+            task: extract-p7-comportamento
+            output: P7_OUTPUT.md
+
+          - step: 2.10
+            name: "P8: Narrativas & Arquétipos"
+            task: extract-p8-narrativas
+            output: P8_OUTPUT.md
+
+          - step: 2.11
+            name: "P9: Expectativas & Critérios de Sucesso"
+            task: extract-p9-expectativas
+            output: P9_OUTPUT.md
+
+      - block: "Decision Intelligence"
+        duration: "2 hours"
+        steps:
+          - step: 2.12
+            name: "P10: Decision Context"
+            task: extract-p10-decision
+            output: P10_OUTPUT.md
+
+          - step: 2.13
+            name: "P11: Action Triggers"
+            task: extract-p11-action
+            output: P11_OUTPUT.md
+
+          - step: 2.14
+            name: "P12: Objection & Friction"
+            task: extract-p12-objection
+            output: P12_OUTPUT.md
+
+          - step: 2.15
+            name: "P13: Decision Heuristics"
+            task: extract-p13-decision
+            output: P13_OUTPUT.md
+
+          - step: 2.16
+            name: "P14: Outcome Learning"
+            task: extract-p14-outcome
+            output: P14_OUTPUT.md
+
+    checkpoint:
+      name: "Validação de Profundidade"
+      validation: depth-markers-checklist
+      gate: |
+        Todas as 15 extrações têm profundidade adequada?
+        - Exemplos concretos (mín. 3 por padrão)
+        - Especificidade (não genérico)
+        - Rastreabilidade
+
+    outputs:
+      - 15 documentos de extração (P0-P14)
+
+    next_phase: 3
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # FASE 3: PROCESSAMENTO SYNAPSE (2-3 horas)
+  # ═══════════════════════════════════════════════════════════════════════════
+  - phase: 3
+    name: "Processamento SYNAPSE"
+    description: "Consolidação + Framework SYNAPSE v6.0"
+    duration: "2-3 hours"
+    agent: synapse-processor
+
+    sub_phases:
+      - sub_phase: 3.1
+        name: "Consolidação"
+        duration: "1.5 hours"
+        steps:
+          - step: 3.1.1
+            name: "Consolidar Base Psicológica (P0-P3)"
+            task: consolidate-base-psicologica
+            output: BASE_PSICOLOGICA.md
+
+          - step: 3.1.2
+            name: "Consolidar Contexto Social (P4-P6)"
+            task: consolidate-contexto-social
+            output: CONTEXTO_SOCIAL.md
+
+          - step: 3.1.3
+            name: "Consolidar Decisão & Expectativas (P7-P9)"
+            task: consolidate-decisao-expectativas
+            output: DECISAO_EXPECTATIVAS.md
+
+          - step: 3.1.4
+            name: "Consolidar Decision Intelligence (P10-P14)"
+            task: consolidate-decision-intelligence
+            output: DECISION_INTELLIGENCE.md
+
+      - sub_phase: 3.2
+        name: "Framework SYNAPSE v6.0"
+        duration: "1.5 hours"
+        steps:
+          - step: 3.2.1
+            name: "Gerar TSM Triplets (8 cadeias)"
+            task: generate-tsm-triplets
+            output: TSM_TRIPLETS.md
+            framework: "Trigger → State → Manifestation"
+
+          - step: 3.2.2
+            name: "Gerar APR Rules (5 cenários)"
+            task: generate-apr-rules
+            output: APR_RULES.md
+            framework: "Adaptive Plasticity Rules"
+
+          - step: 3.2.3
+            name: "Gerar MCC Costs (7 domínios)"
+            task: generate-mcc-costs
+            output: MCC_COSTS.md
+            framework: "Mental Computational Cost"
+
+          - step: 3.2.4
+            name: "Criar PSH Shell (integração final)"
+            task: create-psh-shell
+            output: PSH_SHELL.md
+            framework: "Psychographic Shell (6 camadas)"
+
+      - sub_phase: 3.3
+        name: "Validação de Coerência"
+        duration: "30 min"
+        steps:
+          - step: 3.3.1
+            name: "Validar Coerência SYNAPSE"
+            task: validate-synapse-coherence
+            checkpoint: true
+            minimum_score: 90
+            gate: |
+              Score de coerência >= 90/100? Se não, revisar e resolver contradições.
+
+    outputs:
+      - 4 módulos consolidados
+      - 4 componentes SYNAPSE (TSM, APR, MCC, PSH)
+      - Relatório de coerência
+
+    next_phase: 4
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # FASE 4: HUMANIZAÇÃO AVANÇADA (2-3 horas)
+  # ═══════════════════════════════════════════════════════════════════════════
+  - phase: 4
+    name: "Humanização Avançada"
+    description: "Adicionar 6 camadas de autenticidade humana"
+    duration: "2-3 hours"
+    agent: humanizer
+
+    layers:
+      - layer: 1
+        name: "Blind Spots"
+        duration: "25-30 min"
+        step: 4.1
+        task: generate-blind-spots
+        output: BLIND_SPOTS.md
+        target: "8 pontos cegos distribuídos"
+
+      - layer: 2
+        name: "Paradoxos Produtivos"
+        duration: "25-30 min"
+        step: 4.2
+        task: generate-paradoxos
+        output: PARADOXOS_PRODUTIVOS.md
+        target: "6 paradoxos não resolvidos"
+
+      - layer: 3
+        name: "Fingerprints Únicos"
+        duration: "25-30 min"
+        step: 4.3
+        task: generate-fingerprints
+        output: FINGERPRINTS_UNICOS.md
+        target: "7 assinaturas comportamentais"
+
+      - layer: 4
+        name: "Memórias Episódicas"
+        duration: "30-40 min"
+        step: 4.4
+        task: generate-memorias-episodicas
+        output: MEMORIAS_EPISODICAS.md
+        target: "10-20 memórias formadoras"
+
+      - layer: 5
+        name: "Sistema Imunológico"
+        duration: "25-30 min"
+        step: 4.5
+        task: generate-sistema-imunologico
+        output: SISTEMA_IMUNOLOGICO.md
+        target: "3 níveis de rejeição"
+
+      - layer: 6
+        name: "Meta-Axiomas"
+        duration: "30-35 min"
+        step: 4.6
+        task: generate-meta-axiomas
+        output: META_AXIOMAS.md
+        target: "9 princípios pré-conscientes"
+
+    checkpoint:
+      name: "Validação de Autenticidade"
+      gate: |
+        Camadas de humanização são autênticas (não forçadas)?
+        Rastreáveis a dados P0-P14?
+
+    outputs:
+      - 6 documentos de humanização
+
+    next_phase: 5
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # FASE 5: GERAÇÃO FINAL (2-3 horas)
+  # ═══════════════════════════════════════════════════════════════════════════
+  - phase: 5
+    name: "Geração Final"
+    description: "Gerar System Prompt + 12 Knowledge Base docs"
+    duration: "2-3 hours"
+    agent: clone-generator
+
+    steps:
+      - step: 5.1
+        name: "Gerar System Prompt (1000+ linhas)"
+        task: generate-system-prompt
+        duration: "1-1.5 hours"
+        output: SYSTEM_PROMPT.md
+        sections:
+          - Core Identity & Role
+          - Persona Fundamentals
+          - Linguistic Patterns
+          - Value Hierarchy
+          - Behavioral Patterns (TSM)
+          - Decision Framework (MCC + Heuristics)
+          - Social Interface
+          - Adaptation Rules (APR)
+          - Humanization Layers (6 camadas)
+          - Knowledge Base References
+          - Operational Guidelines
+          - Example Conversations
+
+      - step: 5.2
+        name: "Gerar Knowledge Base (12 docs)"
+        duration: "1-1.5 hours"
+        parallel: true
+        tasks:
+          - generate-kb-01-biografia
+          - generate-kb-02-linguagem
+          - generate-kb-03-frameworks
+          - generate-kb-04-memorias
+          - generate-kb-05-axiomas
+          - generate-kb-06-paradoxos
+          - generate-kb-07-fingerprints
+          - generate-kb-08-blind-spots
+          - generate-kb-09-imunologico
+          - generate-kb-10-synapse
+          - generate-kb-11-decision-intelligence
+          - generate-kb-12-evolution-toolkit
+        outputs:
+          - KB01_BIOGRAFIA_COMPLETA.md
+          - KB02_LINGUAGEM_SWIPE_FILE.md
+          - KB03_FRAMEWORKS_PENSAMENTO.md
+          - KB04_MEMORIAS_EPISODICAS.md
+          - KB05_META_AXIOMAS.md
+          - KB06_PARADOXOS_PRODUTIVOS.md
+          - KB07_FINGERPRINTS_UNICOS.md
+          - KB08_BLIND_SPOTS.md
+          - KB09_SISTEMA_IMUNOLOGICO.md
+          - KB10_FRAMEWORK_SYNAPSE.md
+          - KB11_DECISION_INTELLIGENCE.md
+          - KB12_EVOLUTION_TOOLKIT.md
+
+    outputs:
+      - SYSTEM_PROMPT.md (1000+ linhas)
+      - 12 Knowledge Base docs
+
+    next_phase: 6
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # FASE 6: VALIDAÇÃO (1-2 horas)
+  # ═══════════════════════════════════════════════════════════════════════════
+  - phase: 6
+    name: "Validação"
+    description: "Testes conversacionais + Checklist 100 + Fidelity score"
+    duration: "1-2 hours"
+    agent: clone-validator
+
+    steps:
+      - step: 6.1
+        name: "Teste de 30 Perguntas Conversacionais"
+        task: validate-conversational-30q
+        duration: "30-45 min"
+        categories:
+          - Identidade & Auto-percepção (5Q)
+          - Valores & Decisões (5Q)
+          - Comportamento & Padrões (5Q)
+          - Linguagem & Expressão (5Q)
+          - Relacionamentos & Social (5Q)
+          - Edge Cases & Stress (5Q)
+        output: 30Q_TEST_REPORT.md
+
+      - step: 6.2
+        name: "Checklist de 100 Pontos"
+        task: validate-checklist-100
+        duration: "30-40 min"
+        output: CHECKLIST_100_REPORT.md
+        minimum_score: 90
+
+      - step: 6.3
+        name: "Fidelity Score (5 dimensões)"
+        task: validate-fidelity-score
+        duration: "20-30 min"
+        dimensions:
+          - Linguistic Match
+          - Behavioral Prediction
+          - Value Alignment
+          - Decision Modeling
+          - Emotional Authenticity
+        output: FIDELITY_SCORE.md
+        targets:
+          elite: 95+
+          excellent: 90-94
+          good: 85-89
+          needs_refinement: <85
+
+      - step: 6.4
+        name: "Testes de Edge Cases"
+        task: test-edge-cases
+        duration: "20-25 min"
+        optional: true
+        output: EDGE_CASES_REPORT.md
+
+      - step: 6.5
+        name: "Refinamento (se necessário)"
+        task: refine-clone
+        conditional: "Score < 90"
+        iterative: true
+        output: REFINEMENT_LOG.md
+
+    checkpoint:
+      name: "Gate Final de Qualidade"
+      gate: |
+        Clone aprovado? Critérios:
+        - Score Checklist >= 90/100
+        - Fidelity Score >= 90
+        - 30Q passa critérios de autenticidade
+
+        Se NÃO aprovado: Refinamento iterativo até aprovação.
+
+    outputs:
+      - 30Q_TEST_REPORT.md
+      - CHECKLIST_100_REPORT.md
+      - FIDELITY_SCORE.md
+      - EDGE_CASES_REPORT.md (opcional)
+      - REFINEMENT_LOG.md (se necessário)
+
+    completion: true
+
+# ═══════════════════════════════════════════════════════════════════════════
+# OUTPUTS FINAIS
+# ═══════════════════════════════════════════════════════════════════════════
+
+final_deliverables:
+  core:
+    - file: SYSTEM_PROMPT.md
+      size: "1000+ linhas"
+      description: "System prompt executável para LLM"
+
+    - folder: knowledge-base/
+      files: 12
+      description: "12 documentos especializados de KB"
+
+  documentation:
+    - extraction/  # 15 outputs P0-P14
+    - consolidation/  # 4 módulos
+    - synapse/  # TSM, APR, MCC, PSH
+    - humanization/  # 6 camadas
+    - validation/  # Relatórios de qualidade
+
+  package:
+    - clone-package.zip
+      contents:
+        - SYSTEM_PROMPT.md
+        - knowledge-base/ (12 docs)
+        - documentation/ (todos outputs intermediários)
+        - validation-reports/ (30Q, checklist, fidelity)
+
+success_criteria:
+  - Checklist 100 score >= 90/100
+  - Fidelity score >= 90
+  - 30Q passa critérios de autenticidade
+  - Clone conversacional indistinguível de pessoa real
+
+estimated_total_time: "12-16 hours"
+quality_target: "100% fidelity"

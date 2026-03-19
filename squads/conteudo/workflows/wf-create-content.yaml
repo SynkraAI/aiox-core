@@ -1,0 +1,124 @@
+name: wf-create-content
+description: Workflow completo de criacao de conteudo — do briefing a entrega validada pelo oraculo
+version: "2.0"
+
+phases:
+  - id: briefing
+    name: Briefing e Coleta
+    agent: content-chief
+    description: Coletar informacoes completas do usuario para direcionar a criacao
+    elicit: true
+    steps:
+      - Perguntar tema/assunto principal do conteudo
+      - Perguntar publico-alvo especifico (avatar)
+      - Perguntar intencao (educar, vender, engajar, converter, doutrinar)
+      - Perguntar formato desejado (carrossel, reels, stories)
+      - Identificar oferta ou CTA desejado
+      - Confirmar tom de voz (imperial padrao ou variacao)
+    outputs:
+      - tema
+      - publico_alvo
+      - intencao
+      - formato
+      - oferta_cta
+      - tom_voz
+    checkpoint: Briefing completo com todas as 6 informacoes coletadas
+    veto_condition: Formato indefinido ou intencao ausente — nao avancar sem ambos
+
+  - id: pesquisa_contexto
+    name: Pesquisa e Contexto
+    agent: content-chief
+    description: Diagnosticar configuracao ideal e reunir contexto para criacao
+    depends_on: [briefing]
+    elicit: true
+    steps:
+      - Selecionar tipo de post ideal (7 tipos disponiveis)
+      - Selecionar framework de copy adequado (9 frameworks)
+      - Definir tamanho e estrutura (numero de slides, duracao, sequencia)
+      - Pesquisar hooks relevantes no banco de hooks
+      - Definir abertura e angulo de abordagem
+      - Apresentar configuracao ao usuario (1. Confirmar, 2. Ajustar, 3. Trocar)
+    task: plan-content
+    outputs:
+      - tipo_post
+      - framework_copy
+      - tamanho_estrutura
+      - hooks_selecionados
+      - angulo_abordagem
+    checkpoint: Configuracao confirmada pelo usuario
+    veto_condition: Usuario nao aprovou a configuracao — nao iniciar criacao
+
+  - id: criacao
+    name: Criacao de Conteudo
+    agent: dynamic
+    description: Criar conteudo completo com base no formato e configuracao definidos
+    depends_on: [pesquisa_contexto]
+    elicit: true
+    steps:
+      - Gerar headlines e hook de abertura
+      - Construir argumentacao com progressao emocional
+      - Desenvolver corpo do conteudo no formato escolhido
+      - Criar CTA alinhado com a intencao definida
+      - Gerar caption otimizada para engajamento
+      - Apresentar peca ao usuario para aprovacao
+    task_routing:
+      carrossel: create-carousel
+      reels: create-reels
+      stories: create-stories
+    tasks:
+      - create-hook-batch
+    outputs:
+      - conteudo_bruto
+      - headlines
+      - caption
+      - cta
+    checkpoint: Peca criada e aprovada pelo usuario
+    veto_condition: Usuario rejeitou a peca — voltar para ajustes antes de validar
+
+  - id: validacao
+    name: Validacao pelo Oraculo
+    agent: content-validator
+    description: Validar a peca pelos padroes de qualidade do oraculo
+    depends_on: [criacao]
+    elicit: false
+    steps:
+      - Aplicar oraculo-posts para carrosseis
+      - Aplicar oraculo-reels para roteiros de reels
+      - Verificar tom imperial e concisao
+      - Verificar progressao emocional e estrutura
+      - Calcular score final
+      - Reescrever peca se score < 80%
+    task: audit-content
+    retry_on_fail: true
+    max_retries: 3
+    outputs:
+      - score_oraculo
+      - peca_validada
+      - feedback_ajustes
+    checkpoint: Peca com score >= 80% no oraculo
+    veto_condition: Score < 80% apos 3 tentativas — escalar para content-chief
+
+  - id: entrega
+    name: Entrega Final
+    agent: content-chief
+    description: Entregar conteudo formatado com sugestoes de repurpose e proximos passos
+    depends_on: [validacao]
+    elicit: false
+    steps:
+      - Formatar conteudo final no padrao de entrega
+      - Gerar sugestoes de repurpose (carrossel → reels, reels → stories, etc.)
+      - Incluir notas de execucao (horario ideal, hashtags, formato visual)
+      - Sugerir proximos conteudos relacionados
+    task: repurpose-content
+    outputs:
+      - conteudo_final
+      - caption_final
+      - sugestoes_repurpose
+      - notas_execucao
+    checkpoint: Entrega formatada e pronta para publicacao
+    veto_condition: Peca nao validada pelo oraculo (score < 80%) ou nao aprovada pelo usuario — nao entregar sem validacao completa
+
+metricas:
+  score_minimo_oraculo: 80
+  max_retries_validacao: 3
+  formatos_suportados: [carrossel, reels, stories]

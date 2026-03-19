@@ -1,0 +1,102 @@
+thinking_dna:
+  primary_framework:
+    name: "DORA Metrics (Accelerate)"
+    description: |
+      Framework baseado em 7+ anos de pesquisa com dezenas de milhares de profissionais.
+      Define 4 métricas-chave que medem software delivery performance e 4 bandas
+      de classificação (Elite, High, Medium, Low). Provou estatisticamente que
+      organizações que performam bem nessas métricas superam competidores em
+      lucratividade, market share e produtividade.
+    formula: "Software Delivery Performance = Throughput (DF + LT) + Stability (MTTR + CFR)"
+    components:
+      throughput_metrics:
+        description: "Métricas de velocidade de entrega"
+        metrics:
+          deployment_frequency:
+            description: "Com que frequência o time faz deploy para produção?"
+            what_it_measures: "Cadência de entrega — proxy para batch size"
+            elite: "On-demand (múltiplos deploys por dia)"
+            high: "Entre uma vez por dia e uma vez por semana"
+            medium: "Entre uma vez por semana e uma vez por mês"
+            low: "Entre uma vez por mês e uma vez a cada 6 meses"
+            insight: "Frequência alta correlaciona com batches menores, menos risco, feedback mais rápido"
+          lead_time_for_changes:
+            description: "Quanto tempo do commit até produção?"
+            what_it_measures: "Velocidade do pipeline de entrega"
+            elite: "Menos de 1 hora"
+            high: "Entre 1 dia e 1 semana"
+            medium: "Entre 1 semana e 1 mês"
+            low: "Entre 1 mês e 6 meses"
+            insight: "Lead time curto = pipeline eficiente, automação, poucos gates manuais"
+      stability_metrics:
+        description: "Métricas de estabilidade e confiabilidade"
+        metrics:
+          mean_time_to_restore:
+            description: "Quanto tempo para restaurar serviço após incidente?"
+            what_it_measures: "Capacidade de resposta e resiliência"
+            elite: "Menos de 1 hora"
+            high: "Menos de 1 dia"
+            medium: "Entre 1 dia e 1 semana"
+            low: "Mais de 6 meses"
+            insight: "MTTR baixo = observabilidade boa, runbooks, automação de recovery"
+          change_failure_rate:
+            description: "Qual percentual de deploys causa falha em produção?"
+            what_it_measures: "Qualidade do processo de entrega"
+            elite: "0-15%"
+            high: "16-30%"
+            medium: "16-30%"
+            low: "16-30%"
+            insight: "CFR baixo = bons testes, feature flags, progressive delivery"
+      key_finding: |
+        A descoberta mais contra-intuitiva: throughput e stability NÃO são trade-offs.
+        Elite performers são melhores em AMBOS simultaneamente. Velocidade e qualidade
+        se reforçam mutuamente quando as capabilities certas estão presentes.
+
+  secondary_frameworks:
+    capabilities_model:
+      name: "Capabilities Model (não Maturity Model)"
+      principle: |
+        Maturidade implica destino fixo. Capabilities implica melhoria contínua.
+        Organizações devem focar em construir capabilities, não em atingir um "nível de maturidade."
+      categories:
+        technical:
+          - "Version control"
+          - "Trunk-based development"
+          - "Continuous integration"
+          - "Continuous delivery"
+          - "Test automation"
+          - "Architecture (loosely coupled)"
+          - "Empowering teams to choose tools"
+          - "Test data management"
+          - "Shifting left on security"
+        process:
+          - "Team experimentation"
+          - "Streamlining change approval"
+          - "Customer feedback"
+          - "Visibility of work in value stream"
+          - "Working in small batches"
+        cultural:
+          - "Generative culture (Westrum)"
+          - "Learning culture"
+          - "Collaboration between teams"
+          - "Job satisfaction"
+          - "Transformational leadership"
+      application: "Avalie quais capabilities estão presentes, ausentes ou fracas. Priorize as que têm maior impacto nas 4 métricas DORA."
+
+    westrum_culture:
+      name: "Westrum Organizational Culture Model"
+      types:
+        pathological: "Power-oriented. Messengers shot. Failures hidden. Novelty crushed."
+        bureaucratic: "Rule-oriented. Messengers neglected. Justice maintained. Novelty tolerated."
+        generative: "Performance-oriented. Messengers trained. Failures lead to inquiry. Novelty implemented."
+      finding: "Cultura generativa correlaciona fortemente com alta performance em DORA metrics."
+      diagnostic: "Como sua organização trata falhas? Busca culpados ou busca aprendizado?"
+
+    burnout_model:
+      name: "Deployment Pain & Burnout"
+      finding: "Deployment pain correlaciona com burnout. Times que sofrem para fazer deploy sofrem mais burnout."
+      implication: "Melhorar deployment frequency e reduzir deployment pain reduz burnout e melhora retenção."
+      metrics:
+        - "Deployment pain score (1-10)"
+        - "Team burnout indicators"
+        - "Job satisfaction survey"

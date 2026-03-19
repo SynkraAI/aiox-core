@@ -1,0 +1,211 @@
+name: design
+version: 2.1.0
+slashPrefix: DS
+title: Design System Squad
+description: Squad focado exclusivamente em Design System. Especializado em tokens, componentes, acessibilidade, registry,
+author: AIOX Team
+icon: 🎨
+type: specialist
+entry_agent: design-chief
+settings:
+  activation:
+    show_context_report: true
+    show_preload_report: true
+    show_quick_commands: true
+    quick_commands_limit: 6
+  preload:
+    max_token_files: 5
+    max_blueprint_files: 3
+independence: true
+independence_details: |
+  This squad is completely self-contained:
+  - No database required
+  - No external APIs
+  - Works with any codebase (React, Vue, HTML/CSS)
+  - All operations are filesystem-based
+dependencies:
+  optional:
+    - name: Node.js
+      version: '>=18.0'
+      description: For component generation and npm packages
+    - name: Tailwind CSS
+      version: '>=4.0.0'
+      description: CSS-first token system with @theme
+    - name: shadcn/ui CLI
+      version: latest
+      description: Registry-first component distribution
+metadata:
+  version: 2.1.0
+  score: 10
+workspace_integration:
+  level: controlled_runtime_consumer
+  rationale: >-
+    Design squad depende de contexto canônico de Design System por BU/app, mas não é owner da integração com workspace.
+    O gate de readiness vem do COO e o squad só expande contexto local depois de receber liberação.
+  read_paths:
+    - workspace/workspace.yaml
+    - workspace/businesses/
+  write_paths: []
+  readiness_owner: coo-orchestrator
+  readiness_resolver: squads/c-level/scripts/resolve-squad-workspace-readiness.cjs
+tier_system:
+  tier_0_foundation:
+    description: Entry point agents for operations and adoption strategy
+    agents: []
+  tier_1_masters:
+    description: Execution masters with specialist practices
+    agents: []
+  tier_2_specialists:
+    description: Deep specialists for DS implementation
+    agents: []
+  orchestrator:
+    description: Routes requests
+    agent: design-chief
+agents:
+  - design-chief
+  - brad-frost
+  - dave-malouf
+  - dan-mall
+  - nano-banana-generator
+  - ds-token-architect
+  - ds-foundations-lead
+  - storybook-expert
+  - page-composer
+tasks:
+  - ds-audit-codebase
+  - ds-build-component
+  - ds-build-mcp-server
+  - ds-calculate-roi
+  - ds-compose-molecule
+  - ds-consolidate-patterns
+  - ds-context-contract
+  - ds-extend-pattern
+  - ds-extract-tokens
+  - ds-generate-ai-metadata
+  - ds-generate-documentation
+  - ds-generate-migration-strategy
+  - ds-generate-shock-report
+  - ds-govern-a11y-compliance
+  - ds-health-metrics
+  - ds-integrate-squad
+  - ds-integrate-workspace
+  - ds-legacy-modernization
+  - ds-parallelization-gate
+  - ds-rebuild-artifact
+  - ds-reverse-engineer
+  - ds-scan-artifact
+  - ds-setup-design-system
+  - ds-sync-registry
+  - ds-generate-cursor-rules
+  - ds-mcp-status
+  - ds-query
+  - ds-validate-ai-readiness
+  - ds-agentic-audit
+  - ds-agentic-setup
+  - ds-token-w3c-extract
+  - ds-token-modes
+  - ds-motion-audit
+  - ds-visual-regression
+  - ds-fluent-audit
+  - ds-fluent-build
+  - ds-theme-multi-brand
+  - ds-multi-framework
+  - ds-governance
+  - ds-designops
+  - ds-critical-eye-inventory
+  - ds-critical-eye-score
+  - ds-critical-eye-compare
+  - ds-critical-eye-decide
+  - ds-critical-eye-report
+  - ds-figma-pipeline
+  - f1-ingest-figma-tokens
+  - f1-map-tokens-to-shadcn
+  - f1-apply-foundations
+  - f1-qa-foundations
+  - f2-ingest-base-components
+  - f2-adapt-shadcn-components
+  - f2-qa-base-components
+  - f3-derive-components
+  - f3-qa-derived-components
+  - a11y-audit
+  - aria-audit
+  - contrast-matrix
+  - focus-order-audit
+  - atomic-refactor-plan
+  - atomic-refactor-execute
+  - audit-reading-experience
+  - audit-tailwind-config
+  - bootstrap-shadcn-library
+  - bundle-audit
+  - dead-code-detection
+  - design-compare
+  - export-design-tokens-dtcg
+  - tailwind-upgrade
+  - token-usage-analytics
+  - ux-rewrite-sixth-grade
+  - validate-design-fidelity
+  - designops-maturity-assessment
+  - designops-metrics-setup
+  - design-team-scaling
+  - design-tooling-audit
+  - design-process-optimization
+  - design-triage
+  - design-review-orchestration
+  - create-doc
+  - execute-checklist
+templates:
+  - component-prompt-injection-tmpl
+  - component-visual-spec-tmpl
+  - design-fidelity-report-tmpl
+  - ds-artifact-analysis
+  - ds-health-report-tmpl
+  - ds-migration-strategy-tmpl
+  - ds-state-persistence-tmpl
+  - ds-tokens-schema-tmpl
+  - ds-ai-component-metadata-schema-tmpl
+  - migration-strategy-tmpl
+  - state-persistence-tmpl
+  - tokens-schema-tmpl
+  - reading-design-tokens
+  - agent-template
+  - clone-mind-template
+  - critical-eye-cycle-report-tmpl
+checklists:
+  - atomic-refactor-checklist
+  - ds-accessibility-wcag-checklist
+  - ds-a11y-release-gate-checklist
+  - ds-component-quality-checklist
+  - ds-migration-readiness-checklist
+  - ds-pattern-audit-checklist
+  - token-mapping-checklist
+  - component-adaptation-checklist
+  - design-fidelity-checklist
+  - reading-accessibility-checklist
+  - design-handoff-checklist
+  - design-team-health-checklist
+  - designops-maturity-checklist
+  - ds-critical-eye-review-checklist
+  - page-composition-checklist
+workflows:
+  - audit-only
+  - brownfield-complete
+  - greenfield-new
+  - self-healing-workflow
+  - agentic-readiness
+  - dtcg-tokens-governance
+  - motion-quality
+  - foundations-pipeline
+  - page-composition
+  - critical-eye
+tags:
+  - design-system
+  - tokens
+  - components
+  - accessibility
+  - wcag
+  - atomic-design
+  - tailwind-v4
+  - shadcn-registry
+  - machine-readable
+  - mcp
+  - designops

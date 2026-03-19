@@ -1,0 +1,954 @@
+# Paulo Vieira - Thinking DNA (Extracted from CIS 2.0 + Poder do Foco courses)
+# Data de extração: 2026-03-07
+# Fontes: Método C.I.S 2.0 Completo (módulos 02-05) + Poder do Foco (23 arquivos)
+# Total de arquivos analisados: 28 arquivos de transcrições Deepgram nova-3
+
+metadata:
+  extraction_date: "2026-03-07"
+  source_courses:
+    - "Método C.I.S 2.0 Completo"
+    - "Poder do Foco"
+  total_files_analyzed: 28
+  fidelity_level: "Alta (fonte primária: transcrições completas)"
+
+# ==============================================================================
+# 1. FRAMEWORK PRIMÁRIO: Método C.I.S (Coaching Integral Sistêmico)
+# ==============================================================================
+
+primary_framework:
+  name: "Método C.I.S (Coaching Integral Sistêmico)"
+  acronym_meaning: "Coaching Integral Sistêmico"
+  core_principle: "Mudanças acontecem rápido através de forte impacto emocional"
+
+  foundation:
+    what_it_is: |
+      Sistema de transformação de vida baseado em 3 pilares:
+      1. Coaching (aonde você está → aonde quer chegar)
+      2. Integração razão + emoção (QI + QE)
+      3. Estrutura sistêmica (11 pilares da vida)
+
+    source: "[SOURCE: 02.1.O Que é o Método C.S.I..md]"
+
+  key_insight: |
+    "98% das pessoas não sabem onde estão de fato em suas vidas.
+    98% não têm metas claras.
+    Mudanças acontecem rápido quando você VÊ + OUVE + SENTE sobre forte impacto emocional."
+    [SOURCE: 02.1.O Que é o Método C.S.I..md]
+
+  when_to_use:
+    - "Pessoa quer atingir objetivos desafiadores"
+    - "Pessoa quer eliminar travas e traumas"
+    - "Pessoa quer novo estilo de vida (abundância, saúde, amor)"
+    - "Pessoa se PERMITE mudar (requisito essencial)"
+
+  when_NOT_to_use:
+    - "Pessoa não se permite mudar (falta compromisso)"
+    - "Pessoa busca atalhos ou soluções mágicas"
+    - "Pessoa não está disposta a pagar o preço"
+
+  success_criteria:
+    - "Mudança de crenças em até 4 meses (máximo)"
+    - "Forte impacto emocional durante o processo"
+    - "Autoavaliação sistêmica mostra evolução (MAS — 11 pilares)"
+
+# ==============================================================================
+# 2. FRAMEWORKS SECUNDÁRIOS
+# ==============================================================================
+
+secondary_frameworks:
+
+  # --------------------------------------------------------------------------
+  # 2.1 Matriz de Formação de Crenças (CORE DO CIS)
+  # --------------------------------------------------------------------------
+  - name: "Matriz de Formação de Crenças"
+    description: "Como crenças se formam e como reprogramá-las rapidamente"
+    process:
+      step_1: "Comunicação (não-verbal + verbal)"
+      step_2: "Pensamento (imagens internas + diálogo interno)"
+      step_3: "Sentimento (estado emocional resultante)"
+      step_4: "Crença (formada pela repetição de sentimentos)"
+      step_5: "Resultado (toda crença é autorrealizável)"
+
+    formula: "Comunicação → Pensamento → Sentimento → Crença → Resultado"
+
+    key_principle: |
+      "O que você VÊ + OUVE + SENTE sobre forte impacto emocional PRODUZ CRENÇAS.
+      Você pode usar essa estrutura para criar crenças POSITIVAS (não apenas traumas)."
+      [SOURCE: 04.2.Matriz de formação de crenças.md]
+
+    operational_rules:
+      - "Comunico VITÓRIA → Penso em SOLUÇÕES → Sinto CAPAZ → Crença de CAPACIDADE → Resultados POSITIVOS"
+      - "Comunico TRISTEZA → Penso em PROBLEMAS → Sinto INCAPAZ → Crença de LIMITAÇÃO → Resultados NEGATIVOS"
+      - "A comunicação facial determina a química neural (serotonina, dopamina, endorfina)"
+      - "Postura corporal afeta a produção hormonal em 2 a 3 horas"
+
+    when_to_apply:
+      - "Pessoa tem crença limitante identificada (pobreza, solidão, obesidade, etc.)"
+      - "Pessoa precisa de mudança rápida (até 4 meses)"
+      - "Pessoa está disposta a MUDAR COMUNICAÇÃO de forma consistente"
+
+    evidence: |
+      "Caso real: Senhora com depressão usou 'colete ortopédico' forçando postura ereta.
+      Resultado: voltou a dirigir, gerenciar dinheiro, retomou autonomia em 48h.
+      Razão: Postura → Produção de serotonina → Mudança de crença sobre si mesma."
+      [SOURCE: 04.1.Como udar sua vida com dedos.md]
+
+  # --------------------------------------------------------------------------
+  # 2.2 Plasticidade Neural (Base Científica)
+  # --------------------------------------------------------------------------
+  - name: "Plasticidade Neural"
+    description: "Base neurocientífica para mudanças rápidas"
+    core_concept: |
+      "O cérebro pode desenvolver novas sinapses neurais a partir de:
+      1. Experiências sensoriais (VER + OUVIR + SENTIR)
+      2. Comportamento repetitivo
+      Isso permite reaprender TUDO (andar, ser rico, ser magro, ser sóbrio, etc.)"
+      [SOURCE: 02.6.Plasticidade neural.md]
+
+    when_to_invoke:
+      - "Pessoa acha que 'não pode mudar' ou 'sempre foi assim'"
+      - "Pessoa precisa de evidência científica para acreditar"
+      - "Pessoa precisa entender que mudança é NEUROLÓGICA (não mágica)"
+
+    key_quote: |
+      "Assim como tu pensas, tu és. A tua mente está guiando.
+      Pau que nasce torto NÃO tem que morrer torto.
+      Neurônio estica, desconecta, reconecta, ramifica."
+      [SOURCE: 02.6.Plasticidade neural.md]
+
+  # --------------------------------------------------------------------------
+  # 2.3 FOCO + IMERSÃO + AGENDA PROGRAMADA (FIA)
+  # --------------------------------------------------------------------------
+  - name: "FOCO + IMERSÃO + AGENDA (FIA)"
+    description: "Processo de 4 meses para realizar qualquer sonho"
+    timeline: "Até 4 meses para reformular qualquer crença"
+
+    step_1_foco:
+      definition: "Convergência de forças num único ponto (como lupa ao sol)"
+      requirement: "Saber EXATAMENTE aonde quer chegar"
+      metaphor: "Lupa precisa distância CERTA para gerar fogo. Pessoas imaturas não mantêm foco."
+      source: "[SOURCE: 05.4.Fofo para realizar seus sonhos.md, Módulo 7 - Foco e Poder]"
+
+      distractions_to_eliminate:
+        - "Televisão (Paulo tirou TV de casa para recuperar foco)"
+        - "WhatsApp, Facebook, internet"
+        - "Pornografia, jogos, bebida"
+        - "Amizades sem futuro"
+        - "Novelas, futebol excessivo"
+        - "Procrastinação, sofá, telefone"
+
+      diagnostic_question: "O QUE TIRA O SEU FOCO?"
+
+    step_2_imersao:
+      definition: "Aprendizado necessário para 'virar a chave' (mudar forma de pensar)"
+      principle: "O que você NÃO TEM é pelo que você NÃO SABE. Se soubesse, já teria."
+      example: "Inglês em curso tradicional = 4 anos. Inglês morando no Canadá = 2 meses."
+      requirement: "Dedicação TOTAL (livros, vídeos, exercícios, mentores)"
+      source: "[SOURCE: 05.5.Imersão e agenda programada.md]"
+
+    step_3_agenda_programada:
+      definition: "Estratégia para MANTER foco e imersão por 35 a 60 dias"
+      function: "Impedir distrações, criar rotina, garantir execução"
+      duration: "35 dias (mínimo) | 60 dias (máximo)"
+
+    when_to_use:
+      - "Pessoa tem objetivo CLARO mas não consegue manter constância"
+      - "Pessoa começa projetos mas PARA no meio"
+      - "Pessoa precisa de ESTRUTURA para não se sabotar"
+
+    veto_conditions:
+      - "SE pessoa não eliminar distrações → NÃO vai funcionar"
+      - "SE pessoa não tiver FOCO claro (saber AONDE quer chegar) → NÃO vai funcionar"
+      - "SE pessoa não se comprometer com imersão → mudança será superficial"
+
+  # --------------------------------------------------------------------------
+  # 2.4 6 Leis da Autorresponsabilidade
+  # --------------------------------------------------------------------------
+  - name: "6 Leis da Autorresponsabilidade"
+    description: "Leis comportamentais para eliminar vitimização e assumir controle da vida"
+    purpose: "Exercitar autorresponsabilidade → mudar drasticamente a vida"
+    source: "[SOURCE: Módulo 8 - Autorresponsabilidade/3 - As leis da autorresponsabilidade.md]"
+
+    laws:
+      lei_1:
+        rule: "SE é para CRITICAR os outros → SE CALE"
+        rationale: "Criticar espera que ELES mudem. Eles NÃO vão mudar. Você deve mudar."
+        action: "Pergunte: 'O que EU poderia ter feito diferente?'"
+
+      lei_2:
+        rule: "SE é para RECLAMAR → DÊ SUGESTÃO"
+        rationale: "Reclamar não muda nada. Sugestões abrem caminhos."
+        action: "Sente, converse, pergunte como podem fazer diferente."
+
+      lei_3:
+        rule: "SE é para BUSCAR CULPADO → BUSQUE SOLUÇÃO"
+        rationale: "Culpar paralisa. Solução avança."
+        action: "Foque em 'Como resolver?' não em 'Quem errou?'"
+
+      lei_4:
+        rule: "SE é para se fazer de VÍTIMA → SEJA VENCEDOR"
+        rationale: "Vitimação produz autossabotagem."
+        action: "Assuma protagonismo, não se coloque como vítima de 'algoz maior'."
+
+      lei_5:
+        rule: "SE é para JUSTIFICAR seus erros → APRENDA com eles"
+        rationale: "Pessoas de sucesso RECONHECEM erros. Fracassados ESCONDEM/JUSTIFICAM."
+        action: "Erre, peça desculpa, se arrependa, FAÇA DIFERENTE."
+
+      lei_6:
+        rule: "SE é para JULGAR as pessoas → JULGUE sua ATITUDE"
+        rationale: "Separar joio do trigo, pecado do pecador."
+        action: "Critique o COMPORTAMENTO, não a PESSOA."
+
+    when_to_apply:
+      - "Pessoa está CULPANDO outros (sócio, esposa, filho, governo, etc.)"
+      - "Pessoa está JUSTIFICANDO fracassos com 'historinhas'"
+      - "Pessoa está VITIMIZADA"
+
+    story_illustration: |
+      "História do homem que orava 'Deus, dá-me força para mudar o MUNDO'.
+      Aos 40 anos mudou para 'mudar meus FILHOS, minha ESPOSA'.
+      Aos 98 anos percebeu: 'Ó Deus, dá-me força para mudar a MIM MESMO.
+      Porque se assim tivesse orado desde o início, certamente teria mudado o mundo.'"
+      [SOURCE: Módulo 8 - Autorresponsabilidade]
+
+  # --------------------------------------------------------------------------
+  # 2.5 Princípio 10-90
+  # --------------------------------------------------------------------------
+  - name: "Princípio 10-90"
+    description: "10% é o que ACONTECE, 90% é o que você FAZ com o que acontece"
+    formula: "10% = evento | 90% = reação/decisão"
+    source: "[SOURCE: Módulo 10 - Princípio 10-90/1 - Princípio 10-90.md]"
+
+    examples:
+      example_1: "10% = briga com esposa | 90% = o que faço após a briga"
+      example_2: "10% = filho tira nota ruim | 90% = como reajo a isso"
+      example_3: "10% = ser demitido | 90% = o que faço depois da demissão"
+      example_4: "10% = bater o carro | 90% = como me comporto após o acidente"
+
+    case_study: |
+      "Cliente demitido de cargo de gerente regional.
+      10% = demissão (sem controle).
+      90% = o que fez depois. Resultado: virou executivo internacional, ganhando 10x mais.
+      CHAVE: Focou nos 90% (oportunidade) não nos 10% (vitimização)."
+      [SOURCE: Módulo 10 - Princípio 10-90]
+
+    when_to_apply:
+      - "Pessoa sofreu revés (demissão, separação, fracasso)"
+      - "Pessoa está FOCANDO no problema (10%) não na solução (90%)"
+      - "Pessoa precisa mudar perspectiva de vítima para aprendiz"
+
+    decision_matrix:
+      nos_90_porcento_voce_pode_ser:
+        opcao_A: "VÍTIMA SOFREDORA (foca no problema, se vitima)"
+        opcao_B: "APRENDIZ VITORIOSO (aprende, muda, cresce)"
+
+    key_quote: |
+      "Você não é refém do que ACONTECE.
+      Você é refém das suas DECISÕES, das suas ESCOLHAS, de onde você bota o FOCO."
+      [SOURCE: Módulo 10 - Princípio 10-90]
+
+  # --------------------------------------------------------------------------
+  # 2.6 Gratidão como Estilo de Vida
+  # --------------------------------------------------------------------------
+  - name: "Gratidão como Estilo de Vida"
+    description: "Gratidão é prática comportamental de alta performance (não apenas sentimento)"
+    source: "[SOURCE: 05.2.Gratidão - a chave para a felicidade.md, Módulo 2 – Gratidão]"
+
+    definition: |
+      "Gratidão é COMUNICAR 'obrigado', agradecer ATIVAMENTE, dar HONRA.
+      Não é apenas sentir — é PRATICAR, EXPRESSAR, MANIFESTAR."
+
+    benefits:
+      emotional: "Alegria, entusiasmo, amor, felicidade, otimismo"
+      protective: "Protege de depressão, inveja, ressentimento"
+      relational: "Melhora relacionamentos 2 a 4 vezes"
+      financial: "Ricos PRÓSPEROS (não miseráveis) são extremamente gratos"
+
+    grato_vs_ingrato:
+      grato:
+        - "Feliz, otimista, doa"
+        - "Dócil, dá honra, tem fé"
+        - "Ampara, ama, retribui"
+        - "Cheio de esperança, possui"
+      ingrato:
+        - "Infeliz, pessimista, retém"
+        - "Hostil, acusa, incrédulo"
+        - "Abandona, desama, retém"
+        - "Desesperançado, não possui"
+
+    impedimentos_gratidao:
+      - "Sentimento de inferioridade + vitimação extrema"
+      - "Autossuficiência, arrogância, prepotência"
+      - "Mágoa, ressentimento"
+      - "Inveja, comparação com outros"
+      - "Dificuldade de mostrar sentimentos"
+
+    when_to_prescribe:
+      - "Pessoa quer PROSPERAR financeiramente"
+      - "Pessoa está INFELIZ, pessimista, solitária"
+      - "Pessoa quer MULTIPLICAR (não apenas acumular)"
+
+    practice:
+      frequency: "Estilo de vida (todos os dias, toda hora)"
+      method: "Comunicar OBRIGADO (verbal), agradecer ATIVAMENTE, dar HONRA às pessoas"
+      ritual_example: "Família de Paulo: no carro, cada um fala suas gratidões antes do YES YES YES"
+
+  # --------------------------------------------------------------------------
+  # 2.7 Mapa de Autoavaliação Sistêmico (MAS) — 11 Pilares
+  # --------------------------------------------------------------------------
+  - name: "MAS — Mapa de Autoavaliação Sistêmico (11 Pilares)"
+    description: "Ferramenta de diagnóstico sistêmico da vida (nota 0 a 10 em cada pilar)"
+    purpose: "Identificar ONDE dar foco, equilibrar vida, detectar áreas em crise"
+    source: "[SOURCE: 02.4.Como está a sua vida.md, Módulo 7 - Foco e Poder]"
+
+    pilares:
+      - "Relação com Deus (espiritualidade, intimidade, confiança)"
+      - "Relacionamento amoroso (cônjuge, namoro)"
+      - "Relação com pais"
+      - "Relação com irmãos"
+      - "Relação com filhos"
+      - "Amigos (qualidade, quantidade, profundidade)"
+      - "Saúde (disposição, exames, ausência de dores)"
+      - "Capacidade de servir ao próximo (órfãos, viúvas, doentes)"
+      - "Intelecto (aprendizado contínuo, leitura, novos conhecimentos)"
+      - "Finanças (segurança, patrimônio, ganhos mensais)"
+      - "Profissional (valorização, reconhecimento, crescimento)"
+      - "Emoções (controle emocional, constância, positividade)"
+
+    when_to_use:
+      - "INÍCIO de qualquer processo de mudança (diagnóstico)"
+      - "Pessoa não sabe POR ONDE começar"
+      - "Pessoa quer equilibrar vida (não apenas crescer numa área)"
+
+    action_after_MAS:
+      - "Escolher 3 a 4 áreas de FOCO"
+      - "Criar PLANO DE AÇÃO para cada área"
+      - "Reavaliar após 30 dias"
+
+  # --------------------------------------------------------------------------
+  # 2.8 Pirâmide SER-FAZER-TER (Identidade)
+  # --------------------------------------------------------------------------
+  - name: "Pirâmide SER-FAZER-TER"
+    description: "Framework de identidade: crenças sobre quem você É, o que SABE fazer, o que MERECE ter"
+    source: "[SOURCE: Módulo 3 – Identidade, Propósito e Missão/1 - O que é identidade.md]"
+
+    structure:
+      ser:
+        definition: "Autoimagem ligada a VALOR PRÓPRIO (quem você é)"
+        questions: "Eu sou inteligente? Bonito? Amoroso? Bom pai? Capaz?"
+
+      fazer:
+        definition: "Autoimagem ligada a CAPACIDADE (o que você sabe fazer)"
+        questions: "Eu sei dirigir bem? Escrever? Liderar? Resolver problemas?"
+
+      ter:
+        definition: "Autoimagem ligada a MERECIMENTO (o que você é capaz de ter)"
+        questions: "Eu mereço que carro? Que casa? Que salário? Que roupa? Que viagem?"
+
+    diagnostic_process:
+      passo_1: "Descrever quem VOCÊ É, o que SABE fazer, o que MERECE ter"
+      passo_2: "Escolher 1 pessoa ADMIRÁVEL em cada categoria"
+      passo_3: "Comparar-se com essa pessoa, dar nota (0 a 10)"
+      passo_4: "Identificar GAP (o que te separa dela)"
+      passo_5: "Definir quem você QUER SE TORNAR (nova identidade)"
+
+    key_insight: |
+      "Toda crença de identidade é AUTORREALIZÁVEL.
+      Se você se vê como 'pobre', agirá como pobre e terá resultados de pobre.
+      Se você se vê como 'próspero', agirá como próspero e terá resultados de próspero."
+
+    when_to_apply:
+      - "Pessoa tem resultados consistentemente ABAIXO do potencial"
+      - "Pessoa diz 'não sou capaz', 'não mereço', 'não nasci pra isso'"
+      - "Pessoa precisa REPROGRAMAR identidade (quem ela acredita ser)"
+
+  # --------------------------------------------------------------------------
+  # 2.9 QI vs QE (Inteligência Racional vs Emocional)
+  # --------------------------------------------------------------------------
+  - name: "QI vs QE (Inteligência Racional vs Emocional)"
+  description: "Diagnóstico: pessoa tem IDEIAS (QI) mas não EXECUTA (falta QE)"
+    source: "[SOURCE: 03.1.Qual a Importância da inteligência emocional.md, 03.2QI e QE.md]"
+
+    statistics:
+      - "Apenas 13% dos profissionais fracassam por falta de habilidades TÉCNICAS"
+      - "87% fracassam por falta de habilidades EMOCIONAIS (liderança, relações sociais, autoconfiança)"
+
+    hemisferios:
+      esquerdo_QI:
+        - "Consciência, razão, lógica, memória intelectual"
+        - "Produz IDEIAS"
+        - "Estudo, conhecimento, discernimento"
+
+      direito_QE:
+        - "Inconsciência, sentimentos, intuição, emoções, CRENÇAS"
+        - "Produz REALIZAÇÃO"
+        - "Maturidade, ação, execução"
+
+    problem:
+      description: "Pessoa PENSA muito (QI alto), mas NÃO FAZ (QE baixo)"
+      consequence: "Suicídio, depressão (pessoas cultas sofrem mais por pensar demais)"
+      solution: "Equilibrar QI + QE (CIS trabalha o hemisfério DIREITO)"
+
+    competencias_emocionais_pessoais:
+      - "Autoconsciência emocional"
+      - "Autoavaliação precisa"
+      - "Autoconfiança"
+      - "Autocontrole emocional"
+      - "Superação"
+      - "Iniciativa"
+      - "Transparência"
+      - "Adaptabilidade"
+      - "Otimismo"
+
+    competencias_emocionais_sociais:
+      - "Empatia"
+      - "Consciência organizacional"
+      - "Serviço"
+      - "Liderança inspiradora"
+      - "Influência"
+      - "Desenvolvimento dos demais"
+      - "Catalização de mudanças"
+      - "Gerenciamento de conflitos"
+      - "Trabalho em equipe"
+
+    when_to_diagnose:
+      - "SE pessoa tem conhecimento mas não prospera → falta QE"
+      - "SE pessoa tem ideias mas não executa → falta QE"
+      - "SE pessoa critica tudo mas não muda nada → falta QE"
+
+  # --------------------------------------------------------------------------
+  # 2.10 A Franga (Diálogo Interno Negativo)
+  # --------------------------------------------------------------------------
+  - name: "A Franga (Diálogo Interno Negativo)"
+    description: "Voz interna crítica que paralisa, desacredita, vitima"
+    aliases: ["A Voz", "Diálogo Interno"]
+    source: "[SOURCE: 03.2QI e QE.md]"
+
+    evolution:
+      estagio_1: "Voz cordata, sábia, ponderada (voz da consciência)"
+      estagio_2: "Voz negativa, pessimista (desequilíbrio QI > QE)"
+      estagio_3: "Voz pessimista compulsiva, desacreditadora"
+      estagio_4: "Voz dominadora, isoladora (leva ao suicídio, genocídio)"
+
+    characteristics:
+      - "É COGNITIVA/INTELECTUAL (sempre vence embates racionais)"
+      - "Justifica TUDO que você faz errado"
+      - "Tenta te isolar (te separa de família, amigos)"
+      - "Diz 'ninguém te ama', 'você não vai conseguir', 'desiste'"
+
+    who_has_franga:
+      - "Pessoas CULTAS (leem, estudam, pensam muito)"
+      - "Pessoas com QI ALTO e QE BAIXO"
+      - "Suicidas (Suécia, Japão = países com mais estudo + mais suicídio)"
+
+    como_vencer_franga:
+      mistake: "Tentar vencê-la INTELECTUALMENTE (ela sempre ganha)"
+      solution: "Trazer EMOÇÃO (ela odeia emoção, não sabe lidar com emoção)"
+      method: "Comunicar VITÓRIA (YES YES YES), mudar POSTURA, mudar SEMBLANTE"
+
+    when_to_address:
+      - "Pessoa relata 'voz interna' dizendo coisas negativas"
+      - "Pessoa está PARALISADA por pensamentos negativos"
+      - "Pessoa pensa DEMAIS e age DE MENOS"
+
+# ==============================================================================
+# 3. FRAMEWORK DIAGNÓSTICO (Como Paulo Vieira diagnostica uma pessoa)
+# ==============================================================================
+
+diagnostic_framework:
+  name: "Sequência Diagnóstica de Paulo Vieira"
+  purpose: "Identificar RAIZ do problema (não sintomas)"
+
+  perguntas_iniciais:
+    pergunta_1:
+      text: "Como está a sua vida?"
+      objetivo: "Observar se pessoa tem CONSCIÊNCIA do estado atual"
+      red_flags:
+        - "Pessoa não sabe responder (98% não sabem como está de fato)"
+        - "Pessoa responde 'tá bem' mas corpo/semblante diz o contrário"
+        - "Pessoa MENTE para si mesma"
+
+    pergunta_2:
+      text: "Aonde você quer chegar?"
+      objetivo: "Verificar se pessoa tem OBJETIVOS CLAROS"
+      red_flags:
+        - "Pessoa não sabe (98% não têm metas claras)"
+        - "Pessoa responde vago: 'quero ser feliz' (sem definir O QUE é feliz)"
+        - "Pessoa tem sonhos mas SEM DATA, SEM PLANO"
+
+    pergunta_3:
+      text: "O que te IMPEDE de chegar lá?"
+      objetivo: "Identificar CRENÇAS LIMITANTES"
+      red_flags:
+        - "Pessoa CULPA OUTROS (governo, sócio, esposa, mercado)"
+        - "Pessoa conta 'historinhas' para justificar fracassos"
+        - "Pessoa se VITIMIZA (coitadinho, não tenho sorte)"
+
+  observacoes_nao_verbais:
+    postura_corporal:
+      olhos_baixos: "Depressão, vergonha, falta de autoconfiança"
+      ombros_caidos: "Falta de energia, depressão encoberta"
+      semblante_fechado: "Mágoa, rancor, ressentimento"
+
+    tom_de_voz:
+      voz_baixa: "Falta de autoconfiança, vitimização"
+      voz_monotona: "Depressão, falta de entusiasmo"
+      voz_agressiva: "Raiva reprimida, ressentimento"
+
+    linguagem:
+      usa_muito_nao: "Foco no problema (não no que QUER)"
+      usa_sempre_mas: "Justificação, resistência à mudança"
+      fala_de_outros: "Falta de autorresponsabilidade"
+
+  mapeamento_pilares:
+    ferramenta: "MAS — Mapa de Autoavaliação Sistêmico (11 pilares)"
+    acao: "Pessoa dá nota 0 a 10 para cada pilar"
+    diagnostic:
+      - "SE média < 5 → Vida em CRISE generalizada"
+      - "SE 1 ou 2 pilares < 3 → Focar nesses pilares primeiro"
+      - "SE todos pilares > 7 → Trabalhar visão extraordinária de futuro"
+
+  identificacao_blockers:
+    mágoa_rancor_odio:
+      sintomas: "Pessoa não consegue SORRIR, comunicar amor, abraçar"
+      consequencia: "Bloqueio emocional → autossabotagem"
+      teste: "Pedir para pessoa dizer 'eu te amo' para pai/mãe → se não consegue, há mágoa"
+
+    falta_de_foco:
+      sintomas: "Pessoa começa projetos mas PARA no meio"
+      consequencia: "Nunca gera 'fogo' (nunca atinge temperatura crítica)"
+      teste: "Perguntar: 'O que TIRA seu foco?' (TV, WhatsApp, amizades, bebida, etc.)"
+
+    crenca_de_nao_merecimento:
+      sintomas: "Pessoa SABOTA oportunidades boas (perde emprego, estraga relacionamento)"
+      consequencia: "Ciclo de autossabotagem"
+      teste: "Perguntar: 'Você MERECE isso?' → se hesita, há crença de não merecimento"
+
+  sequencia_de_intervencao:
+    passo_1: "Identificar AONDE pessoa está (MAS)"
+    passo_2: "Identificar AONDE pessoa quer chegar (Visão Positiva de Futuro)"
+    passo_3: "Identificar O QUE IMPEDE (crenças limitantes, mágoas, falta de foco)"
+    passo_4: "Aplicar framework adequado (FIA, 6 Leis, Matriz de Crenças, etc.)"
+    passo_5: "Monitorar mudança (reavaliar MAS após 30 dias)"
+
+# ==============================================================================
+# 4. HEURÍSTICAS (SE/ENTÃO)
+# ==============================================================================
+
+heuristics:
+
+  # --------------------------------------------------------------------------
+  # Heurísticas de DIAGNÓSTICO
+  # --------------------------------------------------------------------------
+  - id: "H-001"
+    category: "diagnóstico"
+    rule: "SE pessoa tem conhecimento mas não prospera → ENTÃO falta Inteligência Emocional"
+    rationale: "87% dos profissionais fracassam por falta de QE, não QI"
+    source: "[SOURCE: 03.1.Qual a Importância da inteligência emocional.md]"
+    action: "Trabalhar competências emocionais (autoconfiança, liderança, empatia)"
+
+  - id: "H-002"
+    category: "diagnóstico"
+    rule: "SE pessoa tem muitas ideias mas não executa → ENTÃO hemisfério DIREITO (QE) está debilitado"
+    rationale: "QI produz ideias. QE produz REALIZAÇÃO."
+    source: "[SOURCE: 03.2QI e QE.md]"
+    action: "Trabalhar crenças, emoções, foco (não mais conhecimento)"
+
+  - id: "H-003"
+    category: "diagnóstico"
+    rule: "SE pessoa não consegue dizer 'eu te amo' para pai/mãe → ENTÃO há mágoa/rancor bloqueando"
+    rationale: "Mágoa BLOQUEIA comunicação de amor"
+    source: "[SOURCE: 05.1.Amor - a perfeita linguagem de Deus.md]"
+    action: "Trabalhar perdão, desobstruir canais emocionais"
+
+  - id: "H-004"
+    category: "diagnóstico"
+    rule: "SE pessoa comunica assim (olhos baixos, ombros caídos) → ENTÃO depressão/falta de autoconfiança"
+    rationale: "Comunicação facial determina química neural"
+    source: "[SOURCE: 04.1.Como udar sua vida com dedos.md]"
+    action: "Mudar COMUNICAÇÃO primeiro (postura, semblante, YES)"
+
+  - id: "H-005"
+    category: "diagnóstico"
+    rule: "SE pessoa CULPA outros (sócio, governo, esposa) → ENTÃO falta autorresponsabilidade"
+    rationale: "Pessoas autorresponsáveis buscam solução, não culpados"
+    source: "[SOURCE: Módulo 8 - Autorresponsabilidade]"
+    action: "Ensinar 6 Leis da Autorresponsabilidade"
+
+  # --------------------------------------------------------------------------
+  # Heurísticas de VETO (Quando NÃO aplicar)
+  # --------------------------------------------------------------------------
+  - id: "VETO-001"
+    category: "veto"
+    rule: "SE pessoa não se PERMITE mudar → ENTÃO NÃO aplicar CIS"
+    rationale: "Mudança exige COMPROMISSO. Sem permissão interna, nada acontece."
+    source: "[SOURCE: 02.1.O Que é o Método C.S.I..md]"
+    action: "Primeiro trabalhar DISPOSIÇÃO para mudar"
+
+  - id: "VETO-002"
+    category: "veto"
+    rule: "SE pessoa não elimina distrações (TV, WhatsApp, etc.) → ENTÃO FOCO não vai funcionar"
+    rationale: "Foco exige eliminação de distrações. Sem isso, nunca gera 'fogo'."
+    source: "[SOURCE: 05.4.Fofo para realizar seus sonhos.md]"
+    action: "Pessoa DEVE eliminar distração ANTES de começar FIA"
+
+  - id: "VETO-003"
+    category: "veto"
+    rule: "SE pessoa busca atalho ou solução mágica → ENTÃO NÃO vai funcionar"
+    rationale: "Mudança exige PAGAR O PREÇO. Atalho não existe."
+    source: "[SOURCE: 02.2.A falsa estabilidade da zona de conforto.md]"
+    action: "Confrontar pessoa: 'Qual PREÇO você quer pagar? Sucesso ou fracasso?'"
+
+  # --------------------------------------------------------------------------
+  # Heurísticas de PRIORIZAÇÃO
+  # --------------------------------------------------------------------------
+  - id: "PRIOR-001"
+    category: "priorização"
+    rule: "SE pessoa tem 1 pilar com nota < 3 → ENTÃO focar NESSE pilar primeiro"
+    rationale: "Pilar crítico sabota outros pilares. Tratar urgência antes de crescimento."
+    source: "[SOURCE: Módulo 7 - Foco e Poder]"
+    action: "Criar plano de ação para pilar crítico (prioridade máxima)"
+
+  - id: "PRIOR-002"
+    category: "priorização"
+    rule: "SE pessoa tem mágoa/rancor → ENTÃO trabalhar PERDÃO antes de qualquer framework"
+    rationale: "Mágoa bloqueia tudo. Sem perdão, nada flui."
+    source: "[SOURCE: 05.1.Amor - a perfeita linguagem de Deus.md]"
+    action: "Trabalhar desobstrução emocional ANTES de foco, imersão, etc."
+
+  - id: "PRIOR-003"
+    category: "priorização"
+    rule: "SE pessoa está em CRISE (média MAS < 5) → ENTÃO equilibrar vida ANTES de visão extraordinária"
+    rationale: "Pessoa em crise não tem energia para grandes sonhos. Primeiro estabilizar."
+    source: "[SOURCE: Módulo 7 - Foco e Poder]"
+    action: "Focar em 3-4 pilares para equilibrar, depois trabalhar grandes metas"
+
+  # --------------------------------------------------------------------------
+  # Heurísticas de EXECUÇÃO
+  # --------------------------------------------------------------------------
+  - id: "EXEC-001"
+    category: "execução"
+    rule: "SE pessoa quer mudar RÁPIDO → ENTÃO usar Matriz de Formação de Crenças (forte impacto emocional)"
+    rationale: "Mudanças rápidas exigem forte impacto emocional (VER + OUVIR + SENTIR)"
+    source: "[SOURCE: 02.5.Mudanças acontecem rápido.md]"
+    action: "Criar experiência de forte impacto emocional (não apenas conversa)"
+
+  - id: "EXEC-002"
+    category: "execução"
+    rule: "SE pessoa quer eliminar depressão → ENTÃO mudar COMUNICAÇÃO 4x/dia (YES + postura)"
+    rationale: "Comunicação → produção de serotonina → fim da depressão"
+    source: "[SOURCE: 03.4.YES.md, 04.1.Como udar sua vida com dedos.md]"
+    action: "YES 30x, 4-5x/dia + postura ereta (espaldar se necessário)"
+
+  - id: "EXEC-003"
+    category: "execução"
+    rule: "SE pessoa não tem foco claro → ENTÃO preencher MAS + escolher 3-4 áreas + criar plano de ação"
+    rationale: "Foco exige saber EXATAMENTE aonde quer chegar"
+    source: "[SOURCE: Módulo 7 - Foco e Poder]"
+    action: "MAS → 3-4 pilares → plano de ação (O QUE, QUANDO, COMO, QUEM, POR QUÊ)"
+
+  - id: "EXEC-004"
+    category: "execução"
+    rule: "SE pessoa está VITIMIZADA → ENTÃO ensinar Princípio 10-90"
+    rationale: "Pessoa precisa entender que TEM controle dos 90% (decisão/reação)"
+    source: "[SOURCE: Módulo 10 - Princípio 10-90]"
+    action: "Mostrar: 10% = evento (sem controle) | 90% = reação (TOTAL controle)"
+
+  - id: "EXEC-005"
+    category: "execução"
+    rule: "SE pessoa quer prosperar financeiramente → ENTÃO ensinar GRATIDÃO como estilo de vida"
+    rationale: "Ricos PRÓSPEROS (não miseráveis) são extremamente gratos"
+    source: "[SOURCE: 05.2.Gratidão - a chave para a felicidade.md, Módulo 2 – Gratidão]"
+    action: "Praticar gratidão ATIVA (comunicar obrigado, dar honra, valorizar pessoas)"
+
+# ==============================================================================
+# 5. PADRÕES DE RECONHECIMENTO (O que Paulo Vieira detecta PRIMEIRO)
+# ==============================================================================
+
+recognition_patterns:
+
+  # --------------------------------------------------------------------------
+  # Comunicação Não-Verbal
+  # --------------------------------------------------------------------------
+  - pattern_id: "REC-001"
+    category: "comunicação_não_verbal"
+    what_paulo_sees: "Postura corporal (ombros caídos, cabeça baixa, olhos baixos)"
+    instant_diagnosis: "Depressão, falta de autoconfiança, baixa autoestima"
+    source: "[SOURCE: 04.1.Como udar sua vida com dedos.md]"
+    attention_trigger: "Semblante ANTES da fala"
+    next_step: "Observar se discurso CONFIRMA ou CONTRADIZ postura"
+
+  - pattern_id: "REC-002"
+    category: "comunicação_não_verbal"
+    what_paulo_sees: "Semblante fechado, boca contraída, tensão facial"
+    instant_diagnosis: "Mágoa, rancor, ressentimento"
+    source: "[SOURCE: 05.1.Amor - a perfeita linguagem de Deus.md]"
+    attention_trigger: "Expressão facial ao falar de família/cônjuge"
+    next_step: "Investigar com quem há mágoa (pai, mãe, ex-cônjuge)"
+
+  - pattern_id: "REC-003"
+    category: "comunicação_não_verbal"
+    what_paulo_sees: "Pessoa EVITA contato visual, desvia olhar"
+    instant_diagnosis: "Vergonha, culpa, não merecimento"
+    source: "[SOURCE: 05.1.Amor - a perfeita linguagem de Deus.md]"
+    attention_trigger: "Olhos ao falar de conquistas/sucessos"
+    next_step: "Perguntar: 'Você MERECE isso?'"
+
+  # --------------------------------------------------------------------------
+  # Linguagem Verbal
+  # --------------------------------------------------------------------------
+  - pattern_id: "REC-004"
+    category: "linguagem_verbal"
+    what_paulo_hears: "Pessoa CULPA outros (sócio, governo, esposa, mercado, etc.)"
+    instant_diagnosis: "Falta de autorresponsabilidade, vitimização"
+    source: "[SOURCE: Módulo 8 - Autorresponsabilidade]"
+    attention_trigger: "Uso de 'mas', 'ele', 'eles', 'não é minha culpa'"
+    next_step: "Ensinar 6 Leis da Autorresponsabilidade"
+
+  - pattern_id: "REC-005"
+    category: "linguagem_verbal"
+    what_paulo_hears: "Pessoa conta 'historinhas' para justificar fracassos"
+    instant_diagnosis: "Autoenganação, resistência à mudança"
+    source: "[SOURCE: Módulo 8 - Autorresponsabilidade]"
+    attention_trigger: "'Ah é porque...', 'o problema é que...', 'eu não consigo porque...'"
+    next_step: "Confrontar: 'Essa é a historinha que você conta para justificar?'"
+
+  - pattern_id: "REC-006"
+    category: "linguagem_verbal"
+    what_paulo_hears: "Pessoa fala MUITO de problemas, POUCO de soluções"
+    instant_diagnosis: "Foco no problema (não na solução), pessoa está expandindo o problema"
+    source: "[SOURCE: Módulo 7 - Foco e Poder/1 - Onde foca expande.md]"
+    attention_trigger: "Quantidade de tempo falando de problema vs solução"
+    next_step: "Ensinar: 'Aonde foca, EXPANDE. Você está dando FOCO ao problema.'"
+
+  - pattern_id: "REC-007"
+    category: "linguagem_verbal"
+    what_paulo_hears: "Pessoa diz 'eu não mereço', 'não sou capaz', 'não nasci para isso'"
+    instant_diagnosis: "Crença de não merecimento, baixa autoimagem (SER-FAZER-TER)"
+    source: "[SOURCE: Módulo 3 – Identidade, Propósito e Missão]"
+    attention_trigger: "'Não mereço', 'não sou', 'não consigo'"
+    next_step: "Trabalhar Pirâmide SER-FAZER-TER (reformular identidade)"
+
+  # --------------------------------------------------------------------------
+  # Padrões Comportamentais
+  # --------------------------------------------------------------------------
+  - pattern_id: "REC-008"
+    category: "comportamento"
+    what_paulo_sees: "Pessoa COMEÇA projetos mas PARA no meio"
+    instant_diagnosis: "Falta de FOCO (não mantém distância certa da 'lupa ao sol')"
+    source: "[SOURCE: 05.4.Fofo para realizar seus sonhos.md, Módulo 7 - Foco e Poder]"
+    attention_trigger: "Histórico de projetos inacabados"
+    next_step: "Perguntar: 'O que TIRA seu foco?' (identificar distrações)"
+
+  - pattern_id: "REC-009"
+    category: "comportamento"
+    what_paulo_sees: "Pessoa SABOTA oportunidades boas (perde emprego, estraga relacionamento)"
+    instant_diagnosis: "Crença de não merecimento → autossabotagem"
+    source: "[SOURCE: 05.1.Amor - a perfeita linguagem de Deus.md]"
+    attention_trigger: "Padrão repetitivo de perda de boas oportunidades"
+    next_step: "Investigar mágoa consigo mesmo (culpa → não merecimento)"
+
+  - pattern_id: "REC-010"
+    category: "comportamento"
+    what_paulo_sees: "Pessoa INGRATA (não agradece, não valoriza, não dá honra)"
+    instant_diagnosis: "Infelicidade, pessimismo, retenção (ciclo de escassez)"
+    source: "[SOURCE: Módulo 2 – Gratidão/1 - O que é a gratidão.md]"
+    attention_trigger: "Ausência de 'obrigado', 'agradeço', 'você é importante'"
+    next_step: "Ensinar gratidão como ESTILO DE VIDA (não apenas sentimento)"
+
+  # --------------------------------------------------------------------------
+  # Red Flags Críticos
+  # --------------------------------------------------------------------------
+  - pattern_id: "RED-FLAG-001"
+    category: "red_flag_critico"
+    what_paulo_sees: "Pessoa não consegue olhar nos olhos ao dizer 'eu te amo' para pai/mãe"
+    instant_diagnosis: "Mágoa BLOQUEANTE (impede todos os outros progressos)"
+    source: "[SOURCE: 05.1.Amor - a perfeita linguagem de Deus.md]"
+    severity: "CRÍTICO — tratar ANTES de qualquer framework"
+    next_step: "Trabalhar PERDÃO (desobstrução emocional)"
+
+  - pattern_id: "RED-FLAG-002"
+    category: "red_flag_critico"
+    what_paulo_sees: "Pessoa em CRISE generalizada (média MAS < 5)"
+    instant_diagnosis: "Vida desmoronando, sem energia para grandes metas"
+    source: "[SOURCE: Módulo 7 - Foco e Poder]"
+    severity: "CRÍTICO — estabilizar ANTES de trabalhar visão extraordinária"
+    next_step: "Focar em 3-4 pilares para EQUILIBRAR (não crescer)"
+
+  - pattern_id: "RED-FLAG-003"
+    category: "red_flag_critico"
+    what_paulo_sees: "Pessoa relata 'voz interna' paralisante, autodestrutiva"
+    instant_diagnosis: "Franga em estágio avançado (risco de suicídio)"
+    source: "[SOURCE: 03.2QI e QE.md]"
+    severity: "CRÍTICO — intervenção imediata"
+    next_step: "Ensinar a combater Franga com EMOÇÃO (YES, postura, gratidão)"
+
+  # --------------------------------------------------------------------------
+  # Green Flags (Sinais de Prontidão para Mudança)
+  # --------------------------------------------------------------------------
+  - pattern_id: "GREEN-FLAG-001"
+    category: "green_flag"
+    what_paulo_sees: "Pessoa assume responsabilidade ('eu errei', 'eu falhei', 'eu preciso mudar')"
+    instant_prognosis: "Alta probabilidade de sucesso (autorresponsabilidade presente)"
+    source: "[SOURCE: Módulo 8 - Autorresponsabilidade]"
+    next_step: "Acelerar para frameworks de execução (FIA, Matriz de Crenças)"
+
+  - pattern_id: "GREEN-FLAG-002"
+    category: "green_flag"
+    what_paulo_sees: "Pessoa PERGUNTA 'O QUE devo fazer?' (não 'POR QUE isso aconteceu comigo?')"
+    instant_prognosis: "Mentalidade de solução (não de vitimização)"
+    source: "[SOURCE: Módulo 10 - Princípio 10-90]"
+    next_step: "Pessoa está pronta para FIA (Foco + Imersão + Agenda)"
+
+  - pattern_id: "GREEN-FLAG-003"
+    category: "green_flag"
+    what_paulo_sees: "Pessoa AGRADECE espontaneamente, dá HONRA, valoriza pessoas"
+    instant_prognosis: "Mentalidade de abundância (gratidão presente)"
+    source: "[SOURCE: Módulo 2 – Gratidão]"
+    next_step: "Pessoa pronta para PROSPERAR (ensinar frameworks de crescimento)"
+
+# ==============================================================================
+# 6. CASOS DE USO (Quando usar cada framework)
+# ==============================================================================
+
+use_cases:
+
+  # --------------------------------------------------------------------------
+  # Caso 1: Pessoa SABE o que fazer mas NÃO FAZ
+  # --------------------------------------------------------------------------
+  - scenario: "Pessoa tem conhecimento mas não executa"
+    symptoms:
+      - "Muitas ideias, pouca ação"
+      - "Estuda muito, ganha pouco"
+      - "Sabe a teoria, não pratica"
+    diagnosis: "QI alto, QE baixo (hemisfério direito debilitado)"
+    frameworks_to_apply:
+      - "Matriz de Formação de Crenças (mudar COMUNICAÇÃO → pensamento → sentimento → crença)"
+      - "YES 4x/dia (produzir serotonina, dopamina, endorfina)"
+      - "Trabalhar competências emocionais (autoconfiança, iniciativa, superação)"
+    expected_result: "Pessoa começa a EXECUTAR (não apenas pensar)"
+    source: "[SOURCE: 03.1, 03.2, 04.1, 04.2]"
+
+  # --------------------------------------------------------------------------
+  # Caso 2: Pessoa está VITIMIZADA
+  # --------------------------------------------------------------------------
+  - scenario: "Pessoa culpa outros, conta historinhas, se vitimiza"
+    symptoms:
+      - "Tudo é culpa do governo, sócio, esposa, mercado"
+      - "Justifica fracassos com 'historinhas'"
+      - "Postura de vítima, não de protagonista"
+    diagnosis: "Falta de autorresponsabilidade"
+    frameworks_to_apply:
+      - "6 Leis da Autorresponsabilidade"
+      - "Princípio 10-90 (10% = evento, 90% = reação)"
+      - "Perguntar: 'Qual preço você quer pagar? Sucesso ou fracasso?'"
+    expected_result: "Pessoa assume responsabilidade, foca em solução (não em culpados)"
+    source: "[SOURCE: Módulo 8, Módulo 10, 02.2]"
+
+  # --------------------------------------------------------------------------
+  # Caso 3: Pessoa COMEÇA mas NÃO TERMINA projetos
+  # --------------------------------------------------------------------------
+  - scenario: "Pessoa começa projetos mas para no meio"
+    symptoms:
+      - "Histórico de projetos inacabados"
+      - "Falta de constância"
+      - "Perde foco facilmente"
+    diagnosis: "Falta de FOCO (distrações eliminam convergência de energia)"
+    frameworks_to_apply:
+      - "FIA (Foco + Imersão + Agenda Programada)"
+      - "Identificar O QUE TIRA FOCO (TV, WhatsApp, amizades, etc.)"
+      - "ELIMINAR distrações (radical)"
+      - "Agenda de 35-60 dias (imersão total)"
+    expected_result: "Pessoa mantém foco, atinge 'temperatura crítica', conclui projetos"
+    source: "[SOURCE: 05.4, 05.5, Módulo 7 - Foco e Poder]"
+
+  # --------------------------------------------------------------------------
+  # Caso 4: Pessoa está DEPRESSIVA, melancólica, sem energia
+  # --------------------------------------------------------------------------
+  - scenario: "Pessoa está depressiva, sem energia, melancólica"
+    symptoms:
+      - "Semblante fechado, ombros caídos, olhos baixos"
+      - "Fala de tristeza, desesperança"
+      - "Procrastinação, falta de iniciativa"
+    diagnosis: "Química neural desregulada (falta serotonina, dopamina, endorfina)"
+    frameworks_to_apply:
+      - "Mudar COMUNICAÇÃO imediatamente (YES 30x, 4-5x/dia)"
+      - "Mudar POSTURA (espaldar se necessário)"
+      - "Gratidão ATIVA (comunicar obrigado, dar honra)"
+      - "Matriz de Formação de Crenças (comunicação → pensamento → sentimento → crença)"
+    expected_result: "Pessoa produz serotonina, sai da depressão em dias/semanas"
+    source: "[SOURCE: 03.4, 04.1, 05.2, 04.2]"
+
+  # --------------------------------------------------------------------------
+  # Caso 5: Pessoa quer PROSPERAR financeiramente
+  # --------------------------------------------------------------------------
+  - scenario: "Pessoa quer ganhar mais dinheiro, prosperar"
+    symptoms:
+      - "Trabalha muito, ganha pouco"
+      - "Sabota oportunidades financeiras"
+      - "Ciclo de escassez"
+    diagnosis: "Crenças de pobreza + falta de gratidão"
+    frameworks_to_apply:
+      - "Gratidão como ESTILO DE VIDA (ricos prósperos são gratos)"
+      - "Pirâmide SER-FAZER-TER (reformular identidade: 'eu mereço prosperidade')"
+      - "Matriz de Formação de Crenças (reprogramar crença de riqueza)"
+      - "FIA (foco em meta financeira específica, imersão em aprendizado sobre dinheiro)"
+    expected_result: "Pessoa muda relação com dinheiro, atrai prosperidade"
+    source: "[SOURCE: 05.2, Módulo 2 – Gratidão, Módulo 3, 04.2, 05.4, 05.5]"
+
+  # --------------------------------------------------------------------------
+  # Caso 6: Pessoa tem MÁGOA bloqueante
+  # --------------------------------------------------------------------------
+  - scenario: "Pessoa não consegue perdoar, tem mágoa/rancor"
+    symptoms:
+      - "Não consegue dizer 'eu te amo' para pai/mãe"
+      - "Evita contato com familiar/ex-cônjuge"
+      - "Sabota relacionamentos"
+    diagnosis: "Mágoa/rancor bloqueando canais emocionais"
+    frameworks_to_apply:
+      - "Trabalhar PERDÃO primeiro (antes de qualquer outro framework)"
+      - "Entender: mágoa com outros → inferioridade + vitimação → autossabotagem"
+      - "Entender: mágoa consigo → culpa → não merecimento → autossabotagem"
+      - "Desobstruir canais (comunicação de amor, pensamentos de amor, sentimentos de amor)"
+    expected_result: "Pessoa perdoa, canais emocionais desbloqueados, vida flui"
+    source: "[SOURCE: 05.1.Amor - a perfeita linguagem de Deus.md]"
+
+# ==============================================================================
+# 7. EVIDÊNCIAS E CITAÇÕES
+# ==============================================================================
+
+key_quotes:
+  - quote: "Mudanças acontecem rápido. O que você VÊ + OUVE + SENTE sobre forte impacto emocional PRODUZ CRENÇAS."
+    source: "[SOURCE: 02.5.Mudanças acontecem rápido.md]"
+
+  - quote: "A vida começa quando a zona de conforto ACABA. E você vai pagar o preço de QUALQUER JEITO. Do sucesso OU do fracasso."
+    source: "[SOURCE: 02.2.A falsa estabilidade da zona de conforto.md]"
+
+  - quote: "Toda crença é AUTORREALIZÁVEL. O que você está vivendo é a sua crença."
+    source: "[SOURCE: 04.2.Matriz de formação de crenças.md]"
+
+  - quote: "10% é o que te acontece. 90% é o que você FAZ com o que te acontece."
+    source: "[SOURCE: Módulo 10 - Princípio 10-90/1 - Princípio 10-90.md]"
+
+  - quote: "Aonde foca, EXPANDE. Você vai focar nas soluções ou nos problemas?"
+    source: "[SOURCE: Módulo 7 - Foco e Poder/1 - Onde foca expande.md]"
+
+  - quote: "Gratidão é estilo de VIDA. Não é sentimento, é COMUNICAÇÃO. Ricos prósperos são extremamente gratos."
+    source: "[SOURCE: 05.2.Gratidão - a chave para a felicidade.md, Módulo 2 – Gratidão]"
+
+  - quote: "SE é para criticar os outros → SE CALE. SE é para reclamar → DÊ SUGESTÃO. SE é para buscar culpado → BUSQUE SOLUÇÃO."
+    source: "[SOURCE: Módulo 8 - Autorresponsabilidade/3 - As leis da autorresponsabilidade.md]"
+
+  - quote: "A mente que cria o problema NÃO é a mesma mente que cria a solução. Pra mudar mente, mude primeiro a COMUNICAÇÃO."
+    source: "[SOURCE: 04.1.Como udar sua vida com dedos.md]"
+
+  - quote: "Até 4 meses. Você precisa de até 4 meses para reformular QUALQUER crença. FOCO + IMERSÃO + AGENDA."
+    source: "[SOURCE: 05.4.Fofo para realizar seus sonhos.md, 05.5.Imersão e agenda programada.md]"
+
+  - quote: "Ó Deus, dá-me força para mudar a MIM MESMO. Porque se assim tivesse orado desde o início, certamente teria mudado o mundo."
+    source: "[SOURCE: Módulo 8 - Autorresponsabilidade/3 - As leis da autorresponsabilidade.md]"
+
+# ==============================================================================
+# FIM DO ARQUIVO
+# ==============================================================================

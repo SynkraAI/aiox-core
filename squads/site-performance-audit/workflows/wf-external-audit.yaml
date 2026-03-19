@@ -1,0 +1,342 @@
+workflow:
+  id: wf-external-audit
+  name: "External Performance Audit"
+  version: "1.0.0"
+  description: >-
+    Pipeline completo de auditoria externa de performance web.
+    Coleta dados via APIs gratuitas (PSI, CrUX, WPT), diagnostica bottlenecks,
+    formula hipoteses de causa-raiz e prioriza por impacto no negocio.
+  trigger: "*audit {url}"
+  estimated_duration: "15-30 min"
+  executor: "site-performance-audit-chief (orchestrates)"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # INPUT
+  # ═══════════════════════════════════════════════════════════════════════════
+  input:
+    required:
+      - name: url
+        type: string
+        description: "URL da pagina a ser auditada"
+        validation: "Must be a valid HTTP/HTTPS URL"
+      - name: strategy
+        type: enum
+        values: [mobile, desktop, both]
+        default: both
+        description: "Tipo de dispositivo para teste"
+    optional:
+      - name: competitor_urls
+        type: array
+        description: "URLs de concorrentes para benchmarking"
+        max_items: 5
+      - name: industry
+        type: string
+        description: "Setor do site (e-commerce, SaaS, media, etc.)"
+      - name: business_context
+        type: string
+        description: "Contexto de negocio para priorizar recomendacoes"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASES
+  # ═══════════════════════════════════════════════════════════════════════════
+  phases:
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # PHASE 1: DATA COLLECTION (Worker — zero LLM)
+    # ─────────────────────────────────────────────────────────────────────────
+    phase_1:
+      name: "Data Collection"
+      executor: worker
+      duration: "2-5 min"
+      description: >-
+        Coleta automatizada de dados via APIs gratuitas.
+        Nenhuma interpretacao nesta fase — apenas coleta bruta.
+
+      steps:
+        - id: "1.1"
+          name: "PageSpeed Insights — Mobile"
+          task: "tasks/collect-psi.md"
+          params:
+            strategy: mobile
+          output: "data/psi-mobile-{url_slug}.json"
+          api: "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
+          cost: "1 quota unit"
+
+        - id: "1.2"
+          name: "PageSpeed Insights — Desktop"
+          task: "tasks/collect-psi.md"
+          params:
+            strategy: desktop
+          output: "data/psi-desktop-{url_slug}.json"
+          api: "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
+          cost: "1 quota unit"
+          parallel_with: "1.1"
+
+        - id: "1.3"
+          name: "CrUX Field Data"
+          task: "tasks/collect-crux.md"
+          output: "data/crux-{url_slug}.json"
+          api: "https://chromeuxreport.googleapis.com/v1/records:queryRecord"
+          cost: "1 quota unit"
+          parallel_with: "1.1"
+
+        - id: "1.4"
+          name: "WebPageTest Deep Dive"
+          task: "tasks/collect-wpt.md"
+          condition: "Only when deep_dive=true OR PSI score < 50"
+          output: "data/wpt-{url_slug}.json"
+          api: "https://www.webpagetest.org/runtest.php"
+          cost: "1 of 300 monthly free tests"
+          note: "Optional — uses limited free quota"
+
+        - id: "1.5"
+          name: "Competitor CrUX (if provided)"
+          task: "tasks/collect-crux.md"
+          condition: "Only if competitor_urls provided"
+          output: "data/crux-competitor-{n}.json"
+          parallel_with: "1.4"
+
+      checkpoint:
+        name: "CP-1: Data Completeness"
+        gate: "PA-PP-001"
+        criteria:
+          - "PSI mobile response received (HTTP 200)"
+          - "PSI desktop response received (HTTP 200)"
+          - "CrUX data available (may be empty for low-traffic sites)"
+        veto_conditions:
+          - "PSI API returns error → STOP, check API key"
+          - "Rate limit hit → WAIT 100s, retry"
+        on_pass: "Proceed to Phase 2"
+        on_fail: "Report missing data, suggest alternatives"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # PHASE 2: SCORE INTERPRETATION (Agent — addy-osmani + steve-souders)
+    # ─────────────────────────────────────────────────────────────────────────
+    phase_2:
+      name: "Score Interpretation & Metric Analysis"
+      executor: agent
+      agents: ["addy-osmani", "steve-souders"]
+      duration: "3-5 min"
+      description: >-
+        Interpretar scores, metricas e oportunidades.
+        Classificar cada metrica como Good/Needs Improvement/Poor.
+        Aplicar frameworks de Osmani (Core Web Vitals) e Souders (14 Rules).
+
+      steps:
+        - id: "2.1"
+          name: "Core Web Vitals Assessment"
+          agent: "addy-osmani"
+          input: ["psi-mobile.json", "psi-desktop.json", "crux.json"]
+          output: "Core Web Vitals report card (LCP, CLS, INP)"
+          framework: "CWV Thresholds + Lab vs Field comparison"
+
+        - id: "2.2"
+          name: "Lighthouse Opportunity Analysis"
+          agent: "addy-osmani"
+          input: ["psi-mobile.json", "psi-desktop.json"]
+          output: "Ranked list of Lighthouse opportunities with estimated savings"
+          framework: "Lighthouse scoring weights"
+
+        - id: "2.3"
+          name: "Fundamental Rules Check"
+          agent: "steve-souders"
+          input: ["psi-mobile.json", "psi-desktop.json"]
+          output: "14 Rules compliance matrix"
+          framework: "Souders 14 Rules for High Performance"
+
+      checkpoint:
+        name: "CP-2: Metric Clarity"
+        gate: "PA-PP-002"
+        criteria:
+          - "All 3 CWV metrics classified (Good/NI/Poor)"
+          - "Top 5 Lighthouse opportunities identified"
+          - "14 Rules compliance assessed"
+        veto_conditions:
+          - "CWV data missing for both lab AND field → Flag as low-traffic site"
+        on_pass: "Proceed to Phase 3"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # PHASE 3: DEEP DIAGNOSTICS (Agent — patrick-meenan + harry-roberts)
+    # ─────────────────────────────────────────────────────────────────────────
+    phase_3:
+      name: "Deep Diagnostics & Root Cause Analysis"
+      executor: agent
+      agents: ["patrick-meenan", "harry-roberts", "tim-kadlec"]
+      duration: "5-8 min"
+      description: >-
+        Analise profunda dos dados para identificar causas-raiz.
+        Waterfall analysis, third-party impact, resource loading issues.
+
+      steps:
+        - id: "3.1"
+          name: "Waterfall & Loading Sequence Analysis"
+          agent: "patrick-meenan"
+          input: ["psi data", "wpt data (if available)"]
+          output: "Loading sequence diagnosis with bottleneck identification"
+          framework: "WebPageTest waterfall analysis methodology"
+
+        - id: "3.2"
+          name: "Resource Loading Audit"
+          agent: "harry-roberts"
+          input: ["psi diagnostics", "resource details"]
+          output: "Resource loading recommendations (preload, defer, async, fonts, images)"
+          framework: "CSS Wizardry audit methodology"
+
+        - id: "3.3"
+          name: "JavaScript & Third-Party Impact"
+          agent: "tim-kadlec"
+          input: ["psi diagnostics", "script details"]
+          output: "JS bundle analysis + third-party script impact assessment"
+          framework: "Bundle analysis + 3rd-party assessment"
+
+      checkpoint:
+        name: "CP-3: Root Causes Identified"
+        gate: "PA-PP-003"
+        criteria:
+          - "At least 3 root causes identified with evidence"
+          - "Each root cause linked to specific CWV metric impact"
+          - "Third-party scripts catalogued with blocking assessment"
+        veto_conditions:
+          - "Root causes are generic (e.g., 'optimize images') without specifics → REWORK"
+          - "No evidence from actual data → REWORK"
+        on_pass: "Proceed to Phase 4"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # PHASE 4: HYPOTHESIS & PRIORITIZATION (Agent — tammy-everts + barry-pollard)
+    # ─────────────────────────────────────────────────────────────────────────
+    phase_4:
+      name: "Hypothesis Generation & Business Prioritization"
+      executor: agent
+      agents: ["tammy-everts", "barry-pollard"]
+      duration: "3-5 min"
+      description: >-
+        Formular hipoteses de causa-raiz priorizadas por impacto no negocio.
+        Benchmark contra dados de industria. Quantificar impacto potencial.
+
+      steps:
+        - id: "4.1"
+          name: "Industry Benchmarking"
+          agent: "barry-pollard"
+          input: ["crux data", "competitor crux (if available)"]
+          output: "Benchmark comparison (site vs industry vs competitors)"
+          framework: "Web Almanac + CrUX percentile analysis"
+
+        - id: "4.2"
+          name: "Business Impact Quantification"
+          agent: "tammy-everts"
+          input: ["root causes from Phase 3", "benchmark data", "business context"]
+          output: "Each fix quantified by estimated business impact"
+          framework: "Time Is Money — performance-to-business correlation"
+
+        - id: "4.3"
+          name: "Hypothesis Matrix"
+          agent: "tammy-everts"
+          input: ["all previous phases"]
+          output: "Prioritized hypothesis matrix (impact x effort)"
+          format: |
+            | # | Hipotese | Metrica Impactada | Impacto Estimado | Esforco | Prioridade |
+            |---|---------|-------------------|------------------|---------|------------|
+
+      checkpoint:
+        name: "CP-4: Hypotheses Validated"
+        gate: "PA-PP-004"
+        criteria:
+          - "At least 5 hypotheses formulated"
+          - "Each hypothesis has impact estimation"
+          - "Priority order defined (High/Medium/Low)"
+          - "Quick wins identified (high impact, low effort)"
+        veto_conditions:
+          - "Hypotheses without data backing → REWORK"
+          - "No quick wins identified → Review Phase 3 findings"
+        on_pass: "Proceed to Phase 5"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # PHASE 5: REPORT GENERATION (Agent — site-performance-audit-chief)
+    # ─────────────────────────────────────────────────────────────────────────
+    phase_5:
+      name: "Report Consolidation & Delivery"
+      executor: agent
+      agent: "site-performance-audit-chief"
+      duration: "3-5 min"
+      description: >-
+        Consolidar todos os achados em relatorio executivo com
+        diagnostico, hipoteses e plano de acao priorizado.
+
+      steps:
+        - id: "5.1"
+          name: "Executive Summary"
+          template: "templates/audit-report-tmpl.md"
+          output: "1-page summary for stakeholders"
+
+        - id: "5.2"
+          name: "Technical Deep Dive"
+          output: "Detailed findings with evidence"
+
+        - id: "5.3"
+          name: "Action Plan"
+          output: "Prioritized action items with estimated impact"
+          format: |
+            ## Quick Wins (1-2 dias)
+            ## Medium Term (1-2 semanas)
+            ## Strategic (1+ mes)
+
+        - id: "5.4"
+          name: "Offer Save"
+          action: "Present report on screen, then offer *save"
+          task: "tasks/save-report.md"
+          protocol: "protocols/output-standard.md"
+          note: "Heuristic PAC-H-008 — always offer *save after generating output"
+          enforcement: |
+            When user accepts *save:
+            - MUST load and follow tasks/save-report.md steps 1-6 exactly
+            - Target dir: docs/outputs/squads/site-performance-audit/
+            - Filename: {YYYY-MM-DD}-{HHmm}-audit-{sanitized_id}.md
+            - MUST update _index.yaml
+            - NEVER use docs/audits/ or any other path
+
+      checkpoint:
+        name: "CP-5: Report Quality"
+        gate: "PA-PP-005"
+        criteria:
+          - "Executive summary under 1 page"
+          - "All hypotheses included with evidence"
+          - "Action plan has at least 3 quick wins"
+          - "CWV scores clearly displayed"
+          - "Report follows audit-report-tmpl.md template structure"
+        on_pass: "DELIVER report and offer *save (on *save: MUST save to docs/outputs/squads/site-performance-audit/ following output-standard.md)"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # OUTPUT
+  # ═══════════════════════════════════════════════════════════════════════════
+  output:
+    primary: "Performance Audit Report (Markdown)"
+    sections:
+      - "Executive Summary (scores, status, top issues)"
+      - "Core Web Vitals Report Card (LCP, CLS, INP — mobile & desktop)"
+      - "Field vs Lab Data Comparison (CrUX vs Lighthouse)"
+      - "Root Cause Analysis (with evidence from waterfall/diagnostics)"
+      - "Industry Benchmark Comparison"
+      - "Hypothesis Matrix (prioritized by business impact)"
+      - "Action Plan (quick wins, medium term, strategic)"
+    format: "templates/audit-report-tmpl.md"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # ERROR HANDLING
+  # ═══════════════════════════════════════════════════════════════════════════
+  error_handling:
+    api_key_missing:
+      action: "Load key from project .env file first, then guide if missing"
+      load_method: "Bash call 1: source .env (from project root). Bash call 2: use GOOGLE_PSI_API_KEY. NEVER chain with && or ;"
+      instruction: "If not in .env: Visit https://console.cloud.google.com → APIs → Enable PageSpeed Insights API → Create Key → Add to .env"
+
+    crux_no_data:
+      action: "Skip CrUX, note in report as 'Low-traffic site — field data unavailable'"
+      fallback: "Rely on Lighthouse lab data only"
+
+    wpt_quota_exhausted:
+      action: "Skip WPT deep-dive, note in report"
+      fallback: "Use PSI waterfall data instead"
+
+    rate_limit:
+      action: "Wait 100 seconds and retry"
+      max_retries: 3

@@ -1,0 +1,126 @@
+# Template: Voice DNA
+# Usage: Output of extract-voice-dna task
+# Captures HOW the expert communicates
+
+voice_dna:
+  metadata:
+    expert_name: "{expert_name}"
+    domain: "{domain}"
+    extraction_date: "{date}"
+    sources_used: 0
+    quality_score: "0/10"
+
+  # Phase 1: Vocabulary
+  vocabulary:
+    power_words:
+      - word: ""
+        context: ""
+        weight: "high|medium"
+
+    signature_phrases:
+      - phrase: ""
+        use_when: ""
+
+    metaphors:
+      - concept: ""
+        metaphor: ""
+
+    rules:
+      always_use: []
+      never_use: []
+      transforms:
+        - from: ""
+          to: ""
+
+  # Phase 2: Storytelling
+  storytelling:
+    recurring_stories:
+      - title: ""
+        lesson: ""
+        trigger: ""
+
+    story_structure:
+      opening: ""
+      build_up: ""
+      payoff: ""
+      callback: ""
+
+  # Phase 3: Writing Style
+  writing_style:
+    structure:
+      paragraph_length: "short|medium|long"
+      sentence_length: "short|medium|long"
+      opening_pattern: ""
+      closing_pattern: ""
+
+    rhetorical_devices:
+      questions: ""
+      repetition: ""
+      direct_address: ""
+      humor: ""
+
+    formatting:
+      emphasis: "bold|italic|CAPS"
+      special_chars: []
+
+  # Phase 4: Tone
+  tone:
+    dimensions:
+      warmth_distance: 5
+      direct_indirect: 5
+      formal_casual: 5
+      complex_simple: 5
+      emotional_rational: 5
+      humble_confident: 5
+      serious_playful: 5
+
+    by_context:
+      teaching: ""
+      persuading: ""
+      criticizing: ""
+      celebrating: ""
+
+  # Phase 5: Communication Anti-Patterns
+  anti_patterns:
+    never_say:
+      - term: ""
+        reason: ""
+        substitute: ""
+
+    never_do:
+      - behavior: ""
+        reason: ""
+        workaround: ""
+
+  # Phase 6: Immune System
+  immune_system:
+    automatic_rejections:
+      - trigger: ""
+        response_speed: "immediate|fast"
+        typical_response: ""
+        tone_shift: ""
+
+    emotional_boundaries:
+      - boundary: ""
+        auto_defense: ""
+        intensity: 5
+
+    fierce_defenses:
+      - value: ""
+        how_hard: ""
+        cost_acceptable: ""
+
+  # Phase 7: Voice Contradictions
+  voice_contradictions:
+    paradoxes:
+      - paradox: ""
+        how_appears: ""
+        trigger_for_switch: ""
+        clone_instruction: "DO NOT RESOLVE - preserve"
+
+    preservation_note: |
+      Contradictions are features, not bugs.
+      A "too consistent" clone is a fake clone.
+
+  # Phase 8: Identity Statement
+  identity_statement: "{expert_name} writes/speaks like ________________"

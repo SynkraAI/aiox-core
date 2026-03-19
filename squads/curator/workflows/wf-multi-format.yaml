@@ -1,0 +1,226 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Multi-Format Pipeline
+# Version: 1.0.0
+# Purpose: Generate multiple format outputs from single mining
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflow-id: wf-multi-format
+name: Multi-Format Pipeline
+version: 1.0.0
+estimated-time: 45-75 minutes
+complexity: high
+
+description: |
+  Mine once, format many. Generates shorts + longform + social clips
+  from a single banco_momentos. Maximizes content reuse.
+
+  Pipeline:
+  [Input] → Mine → PARALLEL: [Shorts Pipeline + Longform Pipeline + Social Clips]
+
+inputs:
+  required:
+    - content: "URL or transcript"
+  optional:
+    - formats: "List of formats (default: all)"
+    - enrich: "true | false (default: true)"
+    - longform_style: "blind-assembly | rule-of-six | 5-second (default: blind-assembly)"
+    - shorts_platform: "tiktok | reels | youtube_shorts (default: all)"
+
+phases:
+
+  - phase: 0
+    name: Unified Mining
+    duration: 10-15 min
+    agent: "content-miner-pro"
+
+    steps:
+      - step: 1
+        action: "Full Paper Edit mining (comprehensive — all moment types)"
+        note: "Extract hooks, stories, insights, quotes, stats, transitions"
+      - step: 2
+        action: "Generate {source-slug}/momentos.md"
+        note: "Must include sufficient variety for multiple formats"
+
+    checkpoint:
+      gate: "QG-002"
+      criteria:
+        - "{source-slug}/momentos.md exists"
+        - "At least 10 moments extracted"
+        - "Multiple moment types present (hooks, stories, insights, quotes)"
+      blocking: true
+
+    output:
+      files:
+        - "{source-slug}/momentos.md"
+        - "{source-slug}/transcricao_anotada.md"
+
+  - phase: 1
+    name: Parallel Format Generation
+    duration: 20-40 min
+    mode: "PARALLEL"
+    note: "All tracks run simultaneously, using same banco_momentos"
+
+    parallel_tracks:
+      - track: A
+        name: "Shorts Track"
+        workflow: "wf-shorts-pipeline"
+        input: "{source-slug}/momentos.md"
+        params:
+          platform: "tiktok"
+          duration: "content-driven"  # Duration Intelligence calculates from content + platform sweet spots
+        output: "shorts_cut.yaml"
+        estimated_time: 15-20 min
+
+      - track: B
+        name: "Longform Track"
+        workflow: "wf-longform-pipeline"
+        input: "{source-slug}/momentos.md"
+        params:
+          style: "blind-assembly"
+          enrich: true
+        output: "longform_cut.yaml"
+        estimated_time: 30-40 min
+
+      - track: C
+        name: "Social Clips Track"
+        agent: "brendan-kane + jonah-berger"
+        input: "{source-slug}/momentos.md"
+        steps:
+          - "Apply STEPPS framework to identify top 5 shareable moments"
+          - "Optimize hooks for each moment (Hook Point methodology)"
+          - "Generate clip scripts with timestamps"
+          - "Suggest platform adaptations (LinkedIn, Instagram feed, Twitter)"
+        output: "social_clips.yaml"
+        estimated_time: 10-15 min
+
+    checkpoint:
+      criteria:
+        - "All tracks complete"
+        - "No duplicate moments across formats"
+        - "All outputs valid"
+      blocking: true
+
+  - phase: 2
+    name: Consolidation
+    duration: 5-10 min
+    agent: "curator-chief"
+
+    steps:
+      - step: 1
+        action: "Collect all track outputs"
+        gather: ["shorts_cut.yaml", "longform_cut.yaml", "social_clips.yaml"]
+
+      - step: 2
+        action: "Verify no duplicate moments across formats"
+        note: "Same moment used differently is OK, exact duplication is not"
+
+      - step: 3
+        action: "Generate consolidated report"
+        include:
+          - "Moment usage map (which moments used where)"
+          - "Platform distribution strategy"
+          - "Content calendar suggestion"
+
+      - step: 4
+        action: "Create editor package"
+        include:
+          - "All cut files"
+          - "Priority order (which to produce first)"
+          - "Dependencies (if any)"
+
+    output:
+      files:
+        - "shorts_cut.yaml"
+        - "longform_cut.yaml"
+        - "social_clips.yaml"
+        - "consolidated_report.md"
+        - "editor_package.md"
+
+quality_gates:
+  summary:
+    - gate: QG-002
+      phase: 0
+      blocking: true
+      criteria: "Comprehensive mining with variety"
+    - gate: QG-PARALLEL
+      phase: 1
+      blocking: true
+      criteria: "All parallel tracks complete successfully"
+
+execution:
+  command: "*multi-format {input}"
+  example: "*multi-format https://youtube.com/watch?v=xxx"
+  shortcuts:
+    all: "*multi-format {input} --formats shorts,longform,social"
+    video_first: "*multi-format {input} --formats longform,shorts"
+    social_first: "*multi-format {input} --formats shorts,social"
+    no_enrich: "*multi-format {input} --enrich false"
+
+  parallel_execution:
+    enabled: true
+    max_concurrent: 3
+    note: "All 3 format tracks run simultaneously after mining complete"
+
+  rollback:
+    phase_0_fail: "Fix mining parameters, ensure comprehensive extraction"
+    track_A_fail: "Continue with B and C, retry A separately"
+    track_B_fail: "Continue with A and C, retry B separately"
+    track_C_fail: "Continue with A and B, retry C separately"
+
+notes: |
+  **When to use:**
+  - Need content for multiple platforms from single source
+  - Maximize ROI from one recording/transcript
+  - Content strategy requires format diversity
+  - Want to test which format performs best
+
+  **When NOT to use:**
+  - Only need one format (use format-specific workflow)
+  - Source material insufficient for multiple formats
+  - Tight deadline (single format faster)
+
+  **Content reuse strategy:**
+  - Longform uses full narrative arc
+  - Shorts pull strongest standalone moments
+  - Social clips target virality (STEPPS-optimized)
+  - No exact duplication, but moments can appear across formats with different framing
+
+  **Platform distribution:**
+  - YouTube: Longform (main) + Shorts (discovery)
+  - Instagram: Reels + Feed clips
+  - TikTok: Shorts optimized
+  - LinkedIn: Social clips (professional tone)
+  - Twitter: Social clips (concise, punchy)
+
+  **Production priority:**
+  1. Longform (anchor content)
+  2. Shorts (discovery driver)
+  3. Social clips (amplification)
+
+dependencies:
+  workflows:
+    - "wf-shorts-pipeline.yaml"
+    - "wf-longform-pipeline.yaml"
+  tasks:
+    - "mine-transcript.md"
+    - "curate-data.md"
+  agents:
+    - "content-miner-pro"
+    - "curator-chief"
+    - "brendan-kane"
+    - "jonah-berger"
+  templates:
+    - "templates/banco-momentos-tmpl.md"
+    - "templates/shorts-cut-tmpl.yaml"
+    - "templates/longform-cut-tmpl.yaml"
+    - "templates/social-clips-tmpl.yaml"
+
+  # Render Phase
+  # For video rendering, use wf-mine-to-cut Phase 5 or invoke ffmpeg-cutter directly:
+  # *render --input VIDEO --cut-yaml YAML
+  # See: squads/curator/tasks/execute-cut.md
+
+version_history:
+  - version: 1.0.0
+    date: 2026-02-05
+    changes: "Initial workflow creation"

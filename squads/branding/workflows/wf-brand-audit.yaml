@@ -1,0 +1,148 @@
+workflow:
+  id: wf-brand-audit
+  name: "Brand Audit"
+  description: "Comprehensive multi-dimensional brand audit — 6 dimensions, 6 agents"
+  version: "1.0.0"
+  estimated_duration: "2-4 hours"
+  orchestrator: brand-chief
+
+phases:
+  - id: phase_1_collect
+    name: "COLLECT — Gather Brand Materials"
+    agent: brand-chief
+    description: "Collect all existing brand assets and context"
+    duration: "15-30 min"
+
+    inputs:
+      - "Current brand name"
+      - "Logo files"
+      - "Brand guidelines (if they exist)"
+      - "Website URL"
+      - "Marketing materials"
+      - "Competitor list"
+
+    outputs:
+      - "Brand materials inventory"
+      - "Context brief for auditors"
+
+    checkpoint:
+      question: "Do we have enough materials to audit?"
+      pass_criteria:
+        - "Brand name is known"
+        - "At least logo and website are available"
+
+  - id: phase_2a_strategy
+    name: "AUDIT 2a — Strategy Baseline"
+    agent: marty-neumeier
+    description: "Strategy audit runs FIRST as baseline for all other dimensions"
+    duration: "15-30 min"
+    depends_on: phase_1_collect
+    execution: sequential
+
+    dimension: "Strategy"
+    checks: ["Onliness", "Brand Gap", "Charisma Test", "Purpose", "Values"]
+    output: "Strategy audit score + findings"
+
+    checkpoint:
+      question: "Is the Strategy baseline complete?"
+      pass_criteria:
+        - "Strategy score is between 1-10"
+        - "Strategy findings are documented with rationale"
+      veto_conditions:
+        - condition: "Strategy scores below 3/10 without root cause identified"
+          action: "VETO — low strategy score requires diagnosis before other dimensions proceed"
+
+  - id: phase_2b_dimensions
+    name: "AUDIT 2b — Remaining Dimensions (Parallel)"
+    agents:
+      - april-dunford
+      - alexandra-watkins
+      - michael-johnson
+      - sagi-haviv
+      - emily-heyward
+    description: "5 remaining specialists audit their dimensions in parallel, informed by Strategy baseline"
+    duration: "45-90 min"
+    depends_on: phase_2a_strategy
+    execution: parallel
+
+    sub_phases:
+      - agent: april-dunford
+        dimension: "Positioning"
+        checks: ["Competitive Alternatives", "Value Clarity", "Target", "Category", "One-Word Test"]
+        output: "Positioning audit score + findings"
+
+      - agent: alexandra-watkins
+        dimension: "Naming"
+        checks: ["SMILE (5 criteria)", "SCRATCH (7 tests)"]
+        output: "Naming audit score + findings"
+
+      - agent: michael-johnson
+        dimension: "Visual Identity"
+        checks: ["Consistency", "Color Strategy", "Typography", "Imagery", "Guidelines", "Scalability"]
+        output: "Visual identity audit score + findings"
+
+      - agent: sagi-haviv
+        dimension: "Logo"
+        checks: ["Simplicity", "Distinctiveness", "Versatility", "Timelessness", "Appropriateness"]
+        output: "Logo audit score + findings"
+
+      - agent: emily-heyward
+        dimension: "Brand Experience"
+        checks: ["Emotional Hook", "Touchpoint Coherence", "Movement Potential", "Brand Tension", "Shared Enemy"]
+        output: "Experience audit score + findings"
+
+    checkpoint:
+      question: "Are all 6 dimensions audited?"
+      pass_criteria:
+        - "All 6 dimension scores are between 1-10"
+        - "Each dimension has specific findings documented"
+        - "Other dimensions reference Strategy baseline where relevant"
+      veto_conditions:
+        - condition: "Any dimension scores below 3/10 without root cause identified"
+          action: "VETO — low scores require diagnosis before proceeding to synthesis"
+        - condition: "Audit conducted on fewer than 4 of 6 dimensions"
+          action: "VETO — partial audit creates blind spots. All 6 dimensions required."
+        - condition: "Scoring inconsistency across dimensions (same issue, different scores)"
+          action: "FLAG — escalate to brand-chief for calibration before synthesis"
+
+  - id: phase_3_synthesize
+    name: "SYNTHESIZE — Report & Recommendations"
+    agent: brand-chief
+    description: "Compile audit results into actionable report"
+    duration: "30-60 min"
+    depends_on: phase_2b_dimensions
+
+    steps:
+      - "Compile scores from all 6 dimensions"
+      - "Calculate overall brand score"
+      - "Identify weakest dimensions (priority)"
+      - "Generate recommended actions per dimension"
+      - "Create action priority matrix"
+      - "Assign recommended agent per action"
+
+    outputs:
+      - "Brand Audit Report"
+      - "Score dashboard (6 dimensions + overall)"
+      - "Priority action list"
+      - "Recommended next steps with agent assignments"
+
+    veto_conditions:
+      - condition: "Synthesis report lacks prioritized action plan"
+        action: "VETO — audit without actionable priorities is academic exercise"
+      - condition: "Recommendations don't map to responsible agents"
+        action: "VETO — every fix must have an owner (agent or human)"
+
+templates:
+  - templates/positioning-canvas-tmpl.md
+  - templates/brand-book-tmpl.md
+  - templates/brand-soul-canvas-tmpl.md
+
+completion:
+  deliverables:
+    - "Brand Audit Report (6 dimensions scored)"
+    - "Action Priority Matrix"
+    - "Recommended Next Steps"
+  success_criteria:
+    - "All 6 dimensions have scores with rationale"
+    - "Actions are prioritized in correct order (strategy first)"
+    - "Each action has an assigned specialist agent"

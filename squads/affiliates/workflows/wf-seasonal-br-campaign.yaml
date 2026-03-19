@@ -1,0 +1,198 @@
+# Seasonal BR Campaign Workflow
+# Pipeline para campanhas sazonais no mercado brasileiro
+# Source: @architect research — Sazonalidade BR + Marketplaces + Copy BR
+# Version: 1.0.0
+
+id: wf-seasonal-br-campaign
+name: "Seasonal BR Campaign"
+version: "1.0.0"
+duration: "2-3 weeks (start 2 weeks before event)"
+description: |
+  Workflow para criar campanhas sazonais no mercado BR.
+  Black Friday, Dia das Mães, Natal, promos 9.9/10.10/11.11/12.12.
+
+  FILOSOFIA: "Preparar 2 semanas antes. No dia, só executar."
+
+  RESULTADO: Campanha sazonal completa com copy BR, criativos e distribuição.
+
+best_for:
+  - "Black Friday / Cyber Monday BR"
+  - "Datas comemorativas (Mães, Pais, Namorados, Natal)"
+  - "Promos marketplace (9.9, 10.10, 11.11, 12.12)"
+
+decision_matrix_fit:
+  complexity: medium
+  agents_required: 4
+  estimated_duration: "2-3 weeks"
+  user_involvement: "medium"
+  prerequisites:
+    - "Operação BR ativa (execute wf-br-market-entry)"
+    - "Canais de distribuição ativos (WhatsApp/Telegram)"
+    - "Calendário sazonal BR consultado"
+
+clone_combinations:
+  primary:
+    - agent: affiliate-strategist
+      role: "Mapeamento sazonal, seleção de oportunidades"
+      phases: [0]
+
+    - agent: marketplace-ops
+      role: "Setup campanha sazonal, ofertas"
+      phases: [1]
+
+    - agent: affiliate-br
+      role: "Campanha BR completa"
+      phases: [2]
+
+    - agent: performance-analyst
+      role: "ROI e performance tracking"
+      phases: [3]
+
+phases:
+  - id: PHASE-0
+    name: "Seasonal Mapping"
+    days: "Days 1-3 (T-14)"
+    tier: 0
+    description: |
+      Mapeamento de oportunidades sazonais usando sazonalidade-br data.
+      Identificar evento, produtos-chave, timing.
+
+    agent: affiliate-strategist
+
+    tasks:
+      - task_id: T0.1
+        name: "Mapear Sazonalidade"
+        task_ref: seasonality-map.md
+        required: true
+        description: "Google Trends 5 anos + calendário BR"
+        output: "seasonal_map.yaml"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Seasonal Map Ready"
+      criteria:
+        - "Evento sazonal identificado"
+        - "Produtos-chave selecionados"
+        - "Timeline definida (prep → launch → peak → wind-down)"
+      human_review: true
+      message: "Confirme evento e timing antes de preparar campanha."
+
+  - id: PHASE-1
+    name: "Seasonal Campaign Setup"
+    days: "Days 4-7 (T-10)"
+    tier: 1
+    description: |
+      Preparação da campanha sazonal: ofertas, preços, estoque.
+      Verificar promos dos marketplaces (cupons, cashback).
+
+    agent: marketplace-ops
+
+    tasks:
+      - task_id: T1.1
+        name: "Setup Campanha Sazonal"
+        task_ref: seasonal-campaign-marketplace.md
+        required: true
+        description: "Ofertas + cupons + timing por marketplace"
+        output: "seasonal_campaign.yaml"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Campaign Prepared"
+      criteria:
+        - "Ofertas selecionadas por marketplace"
+        - "Cupons/promos confirmados"
+        - "Estoque verificado"
+      human_review: false
+
+  - id: PHASE-2
+    name: "Campaign Creation"
+    days: "Days 8-11 (T-6)"
+    tier: 1
+    description: |
+      Criação de campanha BR completa: copy, criativos, mensagens.
+      PT-BR nativo, urgência real (data do evento).
+
+    agents:
+      primary: affiliate-br
+      secondary: copy-vendas
+
+    tasks:
+      - task_id: T2.1
+        name: "Criar Campanha BR Sazonal"
+        task_ref: create-campanha-br.md
+        required: true
+        description: "Copy + criativos sazonais em PT-BR"
+        output: "campanha_sazonal_br.yaml"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Campaign Created"
+      criteria:
+        - "Copy sazonal em PT-BR nativo"
+        - "Criativos adaptados ao evento"
+        - "Urgência genuína (data real)"
+        - "LGPD/CONAR compliance"
+      human_review: true
+      message: "Revise campanha antes de agendar distribuição."
+      veto_conditions:
+        - condition: "Urgência falsa (deadline que não existe)"
+          action: "BLOCK — Usar deadline real do evento"
+
+  - id: PHASE-3
+    name: "ROI Tracking"
+    days: "Days 12-14 + post-event"
+    tier: 2
+    description: |
+      Setup de tracking e cálculo de ROI da campanha sazonal.
+      Comissão vs custo tráfego vs margem.
+
+    agent: performance-analyst
+
+    tasks:
+      - task_id: T3.1
+        name: "Cálculo ROI Campanha"
+        task_ref: calculo-roi-campanha.md
+        required: true
+        description: "ROI: comissão, custo tráfego, margem"
+        output: "roi_campanha.yaml"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "ROI Tracked"
+      criteria:
+        - "Tracking UTM ativo"
+        - "Baseline pre-campaign documentado"
+        - "Post-mortem agendado (7 dias após evento)"
+      human_review: false
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - halt_workflow: false
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "affiliates-chief"
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-seasonal-br-campaign"
+      status: "completed"
+
+outputs:
+  phase_0: ["seasonal_map.yaml"]
+  phase_1: ["seasonal_campaign.yaml"]
+  phase_2: ["campanha_sazonal_br.yaml"]
+  phase_3: ["roi_campanha.yaml"]
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-18"
+  author: "squad-architect"
+  source_frameworks:
+    - "Brazilian Seasonal Calendar"
+    - "Marketplace Promo Timing"
+  priority: 2
+  quality_gate: "SC_WFL_001"

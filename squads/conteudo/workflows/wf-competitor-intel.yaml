@@ -1,0 +1,104 @@
+name: wf-competitor-intel
+description: Workflow de inteligencia competitiva — discovery, coleta, analise profunda e geracao de conteudo baseado em insights
+version: "1.0"
+
+phases:
+  - id: discovery
+    name: Discovery de Concorrentes
+    agent: strategist
+    description: Mapear e ranquear concorrentes relevantes nos mercados BR e US
+    veto_condition: "Nicho nao definido ou plataformas alvo nao especificadas -> VETO"
+    elicit: true
+    task: research-competitors
+    steps:
+      - Definir nicho e plataformas alvo
+      - Mapear 5-10 concorrentes BR (sweet spot 10k-500k seguidores)
+      - Mapear 5-10 concorrentes US (mesma faixa)
+      - Coletar dados base por concorrente (handle, seguidores, formatos, tom, oferta)
+      - Ranquear por relevancia e performance
+      - Selecionar top 3-5 para analise profunda
+    outputs:
+      - lista_concorrentes_br
+      - lista_concorrentes_us
+      - ranking_relevancia
+      - selecionados_analise_profunda
+    checkpoint: Top 3-5 concorrentes selecionados para analise profunda
+
+  - id: collection
+    name: Coleta de Conteudo
+    agent: content-chief
+    description: Coletar e transcrever conteudo top dos concorrentes selecionados
+    veto_condition: "Nenhum concorrente selecionado para analise profunda ou lista com menos de 3 concorrentes -> VETO"
+    depends_on: [discovery]
+    elicit: true
+    steps:
+      - Coletar top 10 posts por engajamento de cada concorrente (ultimos 90 dias)
+      - Coletar top 5 reels por views de cada concorrente
+      - Transcrever videos mais relevantes (task transcribe-content)
+      - Copiar textos de carrosseis mais engajados
+      - Capturar sequencias de stories (se identificadas como estrategia)
+      - Organizar acervo por concorrente
+    tasks:
+      - transcribe-content
+    outputs:
+      - acervo_posts_por_concorrente
+      - transcricoes_videos
+      - textos_carrosseis
+      - sequencias_stories
+    checkpoint: Acervo completo de conteudo coletado e organizado
+    ferramentas:
+      - Apify (scraping Instagram/TikTok)
+      - Playwright (screenshots e navegacao)
+      - EXA (pesquisa complementar)
+
+  - id: analysis
+    name: Analise Profunda
+    agent: content-validator
+    description: Analisar padroes de conteudo e extrair insights aplicaveis
+    veto_condition: "Acervo de conteudo vazio ou transcricoes de videos nao realizadas -> VETO"
+    depends_on: [collection]
+    elicit: false
+    task: analyze-competitor
+    steps:
+      - Analisar hooks dos posts mais engajados por concorrente
+      - Identificar tipos de post e frameworks de copy usados
+      - Analisar CTAs e taxas de conversao
+      - Mapear tom de voz por concorrente
+      - Comparar formatos (carrossel vs reels vs stories)
+      - Identificar temas recorrentes que geram engajamento
+      - Extrair principios (nao copiar — entender o PORQUE funciona)
+      - Cruzar padroes entre concorrentes BR e US
+      - Identificar gaps e oportunidades no nicho
+    outputs:
+      - padroes_hooks
+      - padroes_estrutura
+      - padroes_cta
+      - padroes_tom
+      - gaps_identificados
+      - oportunidades
+      - relatorio_por_concorrente
+    checkpoint: Analise completa com padroes e insights documentados
+
+  - id: generation
+    name: Geracao de Conteudo
+    agent: content-chief
+    description: Gerar conteudo original baseado nos insights da analise
+    veto_condition: "Padroes de hooks/estrutura/CTA nao identificados ou analise sem insights acionaveis -> VETO"
+    depends_on: [analysis]
+    elicit: true
+    steps:
+      - Selecionar top 10 principios extraidos da analise
+      - Adaptar cada principio pro tom Imperial/Torriani
+      - Gerar 3 variacoes por principio usando frameworks proprios (7 tipos + 9 frameworks)
+      - Validar cada peca pelo oraculo (score >= 80%)
+      - Organizar por formato (carrossel, reels, stories)
+      - Sugerir calendario de publicacao
+      - Entregar pacote completo de conteudo
+    tasks:
+      - create-hook-batch
+      - audit-content
+    outputs:
+      - conteudos_gerados
+      - calendario_publicacao
+      - banco_hooks_atualizado
+    checkpoint: Conteudo original gerado, validado e pronto para publicacao

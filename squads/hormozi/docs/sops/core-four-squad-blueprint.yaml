@@ -1,0 +1,1205 @@
+# Core Four Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Leads - Alex Hormozi (Sections II-III)
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: core-four
+  purpose: "Execute the four fundamental advertising methods to generate unlimited leads"
+  domain: lead-acquisition
+  source_playbook: "$100M Leads - Core Four"
+
+  core_equation: |
+    Advertising = Making Known
+    Engaged Leads = People Who Show Interest
+    More Advertising → More Leads → More Money
+
+    Master ONE method = Never go hungry
+    Master ALL FOUR = $100M lead machine
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: core-four-coordinator
+      role: "Orchestrate all four advertising methods and optimize lead flow"
+      decisions:
+        - "Which Core Four method to prioritize"
+        - "Resource allocation across methods"
+        - "When to apply More-Better-New framework"
+        - "Scaling decisions for winning methods"
+      kpis:
+        - "Total leads generated"
+        - "Cost per lead by channel"
+        - "Lead quality distribution"
+        - "Method efficiency comparison"
+
+  tier_0_diagnosis:
+    - agent: lead-auditor
+      role: "Assess current lead generation state and identify gaps"
+      inputs:
+        - "Current contact lists"
+        - "Existing content inventory"
+        - "Historical lead data"
+        - "Resource availability (time vs money)"
+      outputs:
+        - "Method priority recommendation"
+        - "List size by platform"
+        - "Gap analysis report"
+        - "Resource-to-method mapping"
+
+    - agent: offer-validator
+      role: "Ensure lead magnet or offer is ready before advertising"
+      inputs:
+        - "Current offer description"
+        - "Value equation elements"
+        - "Lead magnet assets"
+      outputs:
+        - "Offer readiness score"
+        - "Value equation assessment"
+        - "Improvement recommendations"
+
+  tier_1_execution:
+    - agent: warm-outreach-engine
+      role: "Execute systematic warm outreach to known contacts"
+      specialization: "Core Four #1: Warm Outreach"
+      targets:
+        daily_outreach: "100 per day"
+        duration: "100 days"
+        response_rate: ">20%"
+      techniques:
+        - "A-C-A Framework (Acknowledge-Compliment-Ask)"
+        - "Value Equation offer structure"
+        - "9-word re-engagement emails"
+        - "Price escalation strategy"
+
+    - agent: content-engine
+      role: "Create and distribute content that builds audience"
+      specialization: "Core Four #2: Post Free Content"
+      capabilities:
+        - "Hook-Retain-Reward content creation"
+        - "Platform format matching"
+        - "Give:Ask ratio management"
+        - "Depth-first or breadth-first scaling"
+      content_unit:
+        hook: "Topics, Headlines, Format"
+        retain: "Lists, Steps, Stories"
+        reward: "Satisfy the promise"
+
+    - agent: cold-outreach-engine
+      role: "Execute automated outreach to strangers at scale"
+      specialization: "Core Four #3: Cold Outreach"
+      targets:
+        daily_outreach: "100+ per day (automated)"
+        response_rate: ">5%"
+      techniques:
+        - "List building and verification"
+        - "Message template optimization"
+        - "Multi-channel automation"
+        - "Response handling workflow"
+
+    - agent: paid-ads-engine
+      role: "Run profitable paid advertising campaigns"
+      specialization: "Core Four #4: Paid Ads"
+      phases:
+        phase_1: "Track Money - Set up tracking"
+        phase_2: "Lose Money - Test and learn"
+        phase_3: "Print Money - Scale winners"
+      metrics:
+        - "LTGP:CAC ratio (target >3:1)"
+        - "30-day payback"
+        - "Cost per lead"
+        - "Cost per customer"
+
+  tier_2_judgment:
+    - agent: method-optimizer
+      role: "Apply More-Better-New framework to improve results"
+      framework:
+        more: "Increase volume of what's working"
+        better: "Test one thing per week per platform"
+        new: "New placements → New platforms → New Core Four"
+      priorities:
+        - "Exhaust MORE and BETTER before NEW"
+        - "Focus on constraints (biggest drop-off points)"
+        - "Track all tests in testing log"
+
+    - agent: conversion-analyst
+      role: "Analyze lead quality and conversion patterns"
+      inputs:
+        - "Lead source data"
+        - "Conversion rates by method"
+        - "Customer lifetime value"
+        - "Response patterns"
+      outputs:
+        - "Method ROI comparison"
+        - "Quality score by source"
+        - "Optimization recommendations"
+
+    - agent: scaling-strategist
+      role: "Determine when and how to scale winning methods"
+      decisions:
+        - "When to add staff/automation"
+        - "Budget allocation adjustments"
+        - "Platform expansion timing"
+        - "Method stacking strategy"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  core-four-coordinator:
+    id: core-four-coordinator
+    title: "Core Four Orchestrator"
+    tier: orchestrator
+    icon: "4"
+
+    purpose: |
+      Coordinate the four fundamental advertising methods to maximize lead generation.
+      Ensure consistent execution while optimizing resource allocation.
+
+    core_frameworks:
+      - name: "Core Four Matrix"
+        components: ["Warm Outreach", "Post Content", "Cold Outreach", "Paid Ads"]
+      - name: "More Better New"
+        sequence: ["More", "Better", "New Placements", "New Platforms", "New Core Four"]
+      - name: "Rule of 100"
+        commitment: "100 primary actions per day for 100 days"
+
+    decision_authority:
+      - "Method prioritization"
+      - "Resource allocation"
+      - "Scaling decisions"
+      - "Testing cadence"
+
+    inputs:
+      - "Current lead metrics"
+      - "Resource availability"
+      - "Method performance data"
+      - "Business goals"
+
+    outputs:
+      - "Method priority matrix"
+      - "Resource allocation plan"
+      - "Scaling recommendations"
+      - "Optimization roadmap"
+
+    success_metrics:
+      primary:
+        - name: "Total Engaged Leads"
+          target: "Growing month-over-month"
+        - name: "Lead Cost"
+          target: "Decreasing over time"
+      secondary:
+        - "Method diversity (using 2+ methods)"
+        - "Consistency (Rule of 100 adherence)"
+
+  warm-outreach-engine:
+    id: warm-outreach-engine
+    title: "Warm Outreach Specialist"
+    tier: tier_1
+    icon: "W"
+
+    purpose: |
+      Execute systematic outreach to people who already know you.
+      The cheapest and most reliable way to get your first leads.
+
+    core_mantra: |
+      "To get what you want, you have to deserve what you want." - Charlie Munger
+
+    process_steps:
+      step_1:
+        name: "Build Your List"
+        action: "Export contacts from ALL sources"
+        sources:
+          - "Phone contacts"
+          - "All email accounts"
+          - "Facebook friends"
+          - "Instagram followers"
+          - "LinkedIn connections"
+          - "Twitter/X followers"
+          - "Any other platform"
+        output: "Total contact count"
+
+      step_2:
+        name: "Choose Platform"
+        action: "Start with most contacts, then move to next"
+        rule: "Will hit all platforms eventually"
+
+      step_3:
+        name: "Personalize Messages"
+        action: "Use something you know about them"
+        technique: "Check social profiles for recent life events"
+        example: "I saw you just had a baby! Congratulations!"
+
+      step_4:
+        name: "Execute 100/Day"
+        action: "Reach 100 people per day"
+        follow_up: "Three attempts max (1/day for 3 days)"
+        duration: "100 days straight"
+
+      step_5:
+        name: "Warm Them Up"
+        action: "Use A-C-A Framework when they respond"
+        framework:
+          acknowledge: "Rephrase what they said"
+          compliment: "Tie to positive character trait"
+          ask: "Guide toward your offer topic"
+        exchanges: "3-4 before making offer"
+
+      step_6:
+        name: "Invite Friends"
+        action: "Ask who they KNOW, not if THEY need help"
+        psychology: "Most people identify themselves"
+
+      step_7:
+        name: "Make Free Offer"
+        action: "First 5 clients are free"
+        commitments:
+          - "Use it"
+          - "Give feedback"
+          - "Leave killer review if deserved"
+
+      step_8:
+        name: "Start Over"
+        action: "Move to next platform"
+        cycle: "Continue until all exhausted"
+
+      step_9:
+        name: "Start Charging"
+        trigger: "When referrals start coming"
+        escalation: "80% off → 60% off → 40% off → 20% off → Full price"
+        rule: "Increase by 20% every 5 clients"
+
+      step_10:
+        name: "Keep List Warm"
+        action: "Regular value delivery"
+        technique: "9-word email to probe interest"
+        template: "Are you still looking for [4-word desire]?"
+
+    scripts:
+      value_equation_offer: |
+        "By the way, do you know anyone who is (describe struggles)
+        looking for (dream outcome) in (time delay)?
+
+        I'm taking on five case studies for free because it's all I can
+        handle. I just want to get some testimonials.
+
+        I help them (dream outcome) without (effort and sacrifice). It works.
+        I even guarantee people get (dream outcome) or I work with them
+        until they do.
+
+        I just had a girl named XXX who (dream outcome) even though she
+        (describe the same struggle). I also had another guy who
+        (dream outcome) and it was his first time.
+
+        I'd just like more testimonials. Does anyone you like come to mind?
+        ...Haha, well... does anyone you hate come to mind?"
+
+      free_acceptance: |
+        "As I'm taking only five people, I can give all the attention
+        you need to get brag-worthy results. And I'll give everything
+        for free, as long as you promise:
+        1) Use it
+        2) Give me feedback
+        3) Leave a killer review if you think it deserves it
+        Does that sound fair?"
+
+      nine_word_email: |
+        "Are you still looking for [4-word desire]?"
+
+    benchmarks:
+      response_rate: "~20%"
+      free_acceptance_rate: "20% of respondents"
+      free_to_paid_conversion: "25%"
+      leads_per_100_outreaches: "20 responses → 4 free → 1 paid"
+
+    math_example: |
+      500 reach outs/week = 5 customers/week
+      $400 product × 5 customers = $2000/week
+      $2000/week × 52 weeks = $104,000/year
+
+  content-engine:
+    id: content-engine
+    title: "Content Creation Specialist"
+    tier: tier_1
+    icon: "C"
+
+    purpose: |
+      Create content that builds a growing warm audience.
+      The content you create is not the asset that compounds - the AUDIENCE is.
+
+    core_insight: |
+      "It wasn't about the content - it was about the audience.
+      Even though content may disappear, your audience keeps growing."
+
+    unit_of_content:
+      hook:
+        goal: "Give them a reason to notice"
+        measure: "% who start consuming"
+        components:
+          topics:
+            - name: "Distant Past"
+              description: "Important life lessons"
+            - name: "Recent Past"
+              description: "Things that happened recently"
+            - name: "Present"
+              description: "Ideas as they come"
+            - name: "Trends"
+              description: "What's trending now"
+            - name: "Manufactured"
+              description: "Create experience, then share"
+
+          headlines:
+            elements:
+              - "Recency (as recent as possible)"
+              - "Relevance (personally significant)"
+              - "Celebrity (prominent people)"
+              - "Proximity (close to home)"
+              - "Conflict (opposing ideas/people)"
+              - "Unusual (weird, unique, rare)"
+              - "Ongoing (stories still in progress)"
+            rule: "Include 2+ elements"
+
+          format:
+            rule: "Match what performs well on the platform"
+            insight: "Make content LOOK like things they've liked before"
+
+      retain:
+        goal: "Keep them consuming"
+        measure: "% who keep going"
+        engines:
+          lists:
+            description: "Items presented one after another with a theme"
+            examples:
+              - "7 Ways I Invested $1000 That Paid Off"
+              - "28 Ways to Go Broke"
+          steps:
+            description: "Actions in order to achieve a goal"
+            examples:
+              - "3 Steps to Create a Great Hook"
+              - "The Morning Routine That Doubled My Productivity"
+          stories:
+            description: "Events with lessons/conclusions"
+            examples:
+              - "My journey from sleeping under a gym to a 5-star penthouse"
+
+      reward:
+        goal: "Satisfy the reason they started"
+        measure: "Do they share? Do they want more?"
+        test: "Fully satisfy the promise made in the hook"
+        truth: "The audience decides. If audience grows, you're doing well."
+
+    give_ask_ratio:
+      minimum: "3:1 (like TV/Facebook)"
+      growing_platforms: "Much higher give ratio"
+      recommended: "Give give give... give give give... maybe ask"
+      optimal: "Give until they ask"
+
+      cta_strategies:
+        integrated:
+          description: "Brief ads within content"
+          example: "58 min value : 2 min ask in 60 min podcast"
+          placement: "After valuable moments or at end"
+
+        intermittent:
+          description: "Mostly pure give, occasional ask"
+          example: "10 posts of give, 1 post of ask"
+          best_for: "Short-form platforms"
+
+    scaling_approaches:
+      depth_first:
+        description: "Maximize one platform, then add next"
+        steps:
+          - "Post on one platform"
+          - "Post regularly"
+          - "Maximize quality AND quantity"
+          - "Add another platform"
+          - "Repeat"
+        advantages:
+          - "Leverage compound growth"
+          - "Less resources needed"
+        disadvantages:
+          - "Platform dependency risk"
+          - "Slower initial breadth"
+
+      breadth_first:
+        description: "Get on all platforms, then maximize together"
+        steps:
+          - "Post on one platform"
+          - "Post regularly"
+          - "Add another platform (before maximizing)"
+          - "Continue until on all platforms"
+          - "Then maximize all at once"
+        advantages:
+          - "Repurpose content across platforms"
+          - "Omnipresence feeling"
+        disadvantages:
+          - "Risk of mediocre content everywhere"
+          - "More resources required"
+
+    lessons:
+      - lesson: "Change 'How to' to 'How I'"
+        example: "How I Built My Agency vs How to Build an Agency"
+      - lesson: "Need to be reminded more than taught"
+        action: "Keep repeating - most haven't seen it"
+      - lesson: "Pools, Ponds, Lakes, Oceans"
+        action: "Narrow focus first, expand over time"
+      - lesson: "Content creates sales tools"
+        action: "Build 'greatest hits' library for sales team"
+      - lesson: "Free content retains paid customers"
+        insight: "They include free content in their ROI calculation"
+      - lesson: "Shorter attention = higher standards"
+        truth: "No such thing as too long, only too boring"
+      - lesson: "Avoid pre-scheduling"
+        insight: "Manual posting performs better (more care)"
+
+    benchmarks:
+      audience_growth: "Month-over-month increase"
+      engagement_rate: "Platform-specific benchmarks"
+      content_consumed_before_purchase: "78% consume 2+ pieces before buying"
+
+  cold-outreach-engine:
+    id: cold-outreach-engine
+    title: "Cold Outreach Specialist"
+    tier: tier_1
+    icon: "CO"
+
+    purpose: |
+      Execute scaled outreach to strangers using automation.
+      Lower response rate than warm, but unlimited pool of prospects.
+
+    key_differences_from_warm:
+      - "Lower response rate (5-10% vs 20%)"
+      - "MUST use automation"
+      - "Need stronger hooks"
+      - "Compliance considerations"
+      - "Volume compensates for lower conversion"
+
+    process_steps:
+      step_1:
+        name: "Build Target List"
+        methods:
+          - "Purchased lists"
+          - "Scraped data (LinkedIn, directories)"
+          - "Industry databases"
+          - "Conference attendee lists"
+          - "Association member lists"
+          - "Social media searches"
+        rule: "Quality > quantity; verify accuracy"
+
+      step_2:
+        name: "Craft Cold Message"
+        elements:
+          - "Relevance: Why contacting THEM specifically"
+          - "Value: What's in it for them"
+          - "Credibility: Why they should believe you"
+          - "CTA: Clear, low-friction next step"
+        rule: "Lead with value, not with pitch"
+
+      step_3:
+        name: "Execute 100+/Day"
+        requirement: "Use automation tools"
+        channels:
+          - "Cold email"
+          - "Cold text"
+          - "Cold DM"
+          - "Cold call"
+          - "Flyers"
+        tracking: "Track response rates obsessively"
+
+      step_4:
+        name: "Convert Responses"
+        action: "Use A-C-A framework from warm outreach"
+        rule: "Response from stranger = treat like gold"
+
+    rule_of_100: "100 cold reach outs per day (automated)"
+
+    benchmarks:
+      response_rate: "5-10%"
+      conversion_rate: "Varies by offer"
+
+  paid-ads-engine:
+    id: paid-ads-engine
+    title: "Paid Advertising Specialist"
+    tier: tier_1
+    icon: "PA"
+
+    purpose: |
+      Trade money for leads at scale. Fastest way to scale lead acquisition.
+      Efficiency matters more than creativity.
+
+    core_insight: |
+      "Paid ads are all about ROI. You put in X dollars and get Y dollars back.
+      Good enough is good enough - you just need to make it profitable enough to scale."
+
+    three_phases:
+      phase_1_track:
+        name: "Track Money"
+        action: "Set up tracking before spending a single dollar"
+        rule: "If you don't track, you'll get cleaned out"
+
+      phase_2_lose:
+        name: "Lose Money (Invest)"
+        action: "Test and learn"
+        expectation: "Lose more times than win"
+        budget_rule: "2x 30-day profit per test"
+        cutoff_rule: "If zero leads at 1x 30-day profit, turn off"
+        insight: "Lose nine times, win once - but win BIG"
+
+      phase_3_print:
+        name: "Print Money"
+        action: "Scale winners aggressively"
+        question: "If machine gave $10 for every $1, what's your budget?"
+        answer: "All of it"
+        scaling_formula: "(Desired Customers × CAC) × 1.2"
+
+    metrics:
+      ltgp:
+        name: "Lifetime Gross Profit"
+        formula: "Total Revenue - Total Delivery Cost"
+        example: |
+          Customer pays $15/month, costs $5 to deliver
+          Gross profit = $10/month
+          Stays 10 months
+          LTGP = $100
+
+      cac:
+        name: "Customer Acquisition Cost"
+        formula: "Total Ad Spend / Customers Acquired"
+
+      ltgp_cac_ratio:
+        name: "LTGP:CAC Ratio"
+        target: ">3:1"
+        insight: "Every struggling portfolio company had ratio <3:1"
+
+      diagnostic:
+        if_cac_high: "Fix ads (CAC > 3x industry average)"
+        if_cac_normal: "Fix model (LTGP too low)"
+        insight: "CAC between competitors is closer than you'd think. Difference is LTGP."
+
+    customer_financed_acquisition:
+      definition: "Customer pays you back within 30 days"
+      why_30_days: "Any business can get interest-free money for 30 days (credit card)"
+      result: "Zero debt + new customer + unlimited scale"
+
+      example:
+        problem: |
+          CAC = $30
+          First month profit = $10
+          Breakeven = 3 months (cash flow problem)
+
+        solution: |
+          Add $100 upsell (100% margin), 20% accept
+          Average upsell = $20
+          30-day profit = $10 + $20 = $30
+          Breakeven = Day 1 (unlimited scale)
+
+    lessons:
+      - lesson: "Don't confuse sales problems with ad problems"
+        insight: "If qualified leads aren't buying, it's sales, not ads"
+      - lesson: "Best free content makes best paid ads"
+        action: "Turn high-performing content into ads"
+      - lesson: "UGC (User Generated Content) is powerful"
+        action: "System to encourage customer testimonials"
+
+    scaling_budget: |
+      Budget = (Desired Customers × CAC) × 1.2
+
+      Example:
+      - Want 100 customers
+      - CAC = $100
+      - Base budget = $10,000
+      - Add 20% buffer = $12,000
+      - Daily = $400
+
+  method-optimizer:
+    id: method-optimizer
+    title: "More-Better-New Optimizer"
+    tier: tier_2
+    icon: "MBN"
+
+    purpose: |
+      Apply the More-Better-New framework to continuously improve results.
+      "What's stopping them from doing 10x what they're currently doing?"
+
+    framework:
+      more:
+        definition: "Do more of what's already working"
+        action: "Double your inputs"
+        insight: "Even without improvements, 2x inputs = more leads"
+        rule_of_100: |
+          Warm: 100 reach outs/day
+          Content: 100 minutes/day
+          Cold: 100 reach outs/day
+          Ads: 100 minutes/day working on ads
+          Duration: 100 days straight
+
+      better:
+        definition: "Improve efficiency through testing"
+        action: "Test one thing per week per platform"
+        focus: "Constraints (biggest drop-off points)"
+
+        testing_cadence:
+          monday: "Start new split test per platform"
+          week: "Let test run"
+          next_monday:
+            - "Pick winner"
+            - "Log results in test register"
+            - "Create next test to beat current best"
+
+        constraint_example: |
+          30% Optin
+          5% Sign Up ← Biggest drop-off = constraint
+          50% Schedule
+
+          5% improvement to constraint = 100% more leads
+          5% improvement elsewhere = 10-16% more leads
+
+        rule: "If can't beat current version in 4 tries, move to next constraint"
+
+      new:
+        definition: "New placements, platforms, or Core Four methods"
+        when: "Only when MORE and BETTER returns are lower than NEW returns"
+
+        priority_order:
+          1: "New placements on same platform"
+          2: "Same approach on new platform"
+          3: "New Core Four method entirely"
+
+        pie_size_fallacy: |
+          Small business thinks they "saturated the market"
+          But they're only using 1 method, 1 platform, 1 approach
+          The market is MUCH bigger than their small slice
+
+    decision_tree: |
+      Q: What's stopping 10x current activity?
+
+      IF nothing → Just do MORE
+      IF something → Fix constraint first (BETTER)
+      IF MORE+BETTER exhausted → Try NEW
+
+      Priority: MORE → BETTER → NEW PLACEMENTS → NEW PLATFORMS → NEW CORE FOUR
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Lead Audit
+  - task: "Export contact lists"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Include ALL platforms"
+
+  - task: "Count contacts by platform"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Use as priority ranking"
+
+  - task: "Assess resource availability"
+    executor: Human
+    automation: LOW
+    guardrails: "Honest time vs money assessment"
+
+  # Warm Outreach
+  - task: "Personalize outreach messages"
+    executor: Human
+    automation: LOW
+    guardrails: "Check social for recent events"
+
+  - task: "Execute 100 daily outreaches"
+    executor: Human
+    automation: LOW
+    guardrails: "Must feel personal"
+
+  - task: "A-C-A conversation flow"
+    executor: Human
+    automation: LOW
+    guardrails: "3-4 exchanges before offer"
+
+  - task: "Track responses and conversions"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Log in CRM"
+
+  - task: "Send 9-word emails"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Template + personalization"
+
+  # Content
+  - task: "Create hooks (topics/headlines)"
+    executor: Human
+    automation: LOW
+    guardrails: "Include 2+ headline elements"
+
+  - task: "Create retention structure"
+    executor: Human
+    automation: LOW
+    guardrails: "Use lists, steps, or stories"
+
+  - task: "Format for platform"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Match top performers"
+
+  - task: "Post content"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Manual posting may perform better"
+
+  - task: "Track audience growth"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Monthly reporting"
+
+  # Cold Outreach
+  - task: "Build target lists"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Quality verification required"
+
+  - task: "Craft cold message templates"
+    executor: Human
+    automation: LOW
+    guardrails: "Test multiple variations"
+
+  - task: "Send cold outreach"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Follow platform rules"
+
+  - task: "Handle responses"
+    executor: Human
+    automation: LOW
+    guardrails: "Use A-C-A framework"
+
+  # Paid Ads
+  - task: "Set up tracking"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Before spending any money"
+
+  - task: "Create ad variations"
+    executor: Human
+    automation: LOW
+    guardrails: "Multiple versions for testing"
+
+  - task: "Set budget parameters"
+    executor: Human
+    automation: LOW
+    guardrails: "2x 30-day profit per test"
+
+  - task: "Monitor ad performance"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Cutoff at 1x if zero leads"
+
+  - task: "Calculate LTGP:CAC"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Track by channel"
+
+  - task: "Scale winning ads"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Add 20% buffer to budget"
+
+  # Optimization
+  - task: "Identify constraints"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Find biggest drop-off"
+
+  - task: "Design tests"
+    executor: Human
+    automation: LOW
+    guardrails: "One test per week per platform"
+
+  - task: "Analyze test results"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Log in test register"
+
+  - task: "Decide MORE vs BETTER vs NEW"
+    executor: Human
+    automation: LOW
+    guardrails: "Follow priority order"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Offer Ready Gate"
+    transition: "Start → Advertising"
+    condition: "lead_magnet_or_offer_validated == true"
+    type: blocking
+    failure_action: "Create/improve offer first"
+
+  QG-002:
+    name: "Rule of 100 Gate"
+    transition: "Daily Execution"
+    condition: "daily_actions >= 100"
+    type: warning
+    failure_action: "Increase effort until hitting 100"
+
+  QG-003:
+    name: "Response Rate Gate - Warm"
+    transition: "Outreach → Response"
+    condition: "warm_response_rate >= 15%"
+    type: warning
+    failure_action: "Improve personalization"
+
+  QG-004:
+    name: "Response Rate Gate - Cold"
+    transition: "Outreach → Response"
+    condition: "cold_response_rate >= 5%"
+    type: warning
+    failure_action: "Improve targeting/message"
+
+  QG-005:
+    name: "Audience Growth Gate"
+    transition: "Content → Audience"
+    condition: "month_over_month_growth > 0"
+    type: warning
+    failure_action: "Improve content quality"
+
+  QG-006:
+    name: "Paid Ads Efficiency Gate"
+    transition: "Spending → Returns"
+    condition: "ltgp_cac_ratio >= 3.0"
+    type: blocking
+    failure_action: "Fix model or ads before scaling"
+
+  QG-007:
+    name: "Testing Cadence Gate"
+    transition: "Weekly Optimization"
+    condition: "one_test_per_week_per_platform == true"
+    type: warning
+    failure_action: "Design and launch test"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  method_selection_workflow:
+    trigger: "Starting lead generation"
+    steps:
+      - step: 1
+        agent: lead-auditor
+        action: "Assess current state"
+        output: "Contact counts, resources available"
+
+      - step: 2
+        agent: offer-validator
+        action: "Validate offer/lead magnet"
+        output: "Readiness score"
+
+      - step: 3
+        agent: core-four-coordinator
+        action: "Select priority method"
+        logic:
+          more_time_than_money: "Start with warm outreach"
+          more_money_than_time: "Start with cold outreach or paid ads"
+          want_compound_growth: "Add content"
+
+      - step: 4
+        agent: "[selected-method-engine]"
+        action: "Begin execution"
+        commitment: "Rule of 100"
+
+  warm_outreach_workflow:
+    trigger: "Warm outreach selected"
+    steps:
+      - step: 1
+        agent: warm-outreach-engine
+        action: "Build master contact list"
+        output: "Total count by platform"
+
+      - step: 2
+        agent: warm-outreach-engine
+        action: "Select highest-count platform"
+        output: "Priority platform"
+
+      - step: 3
+        agent: warm-outreach-engine
+        action: "Execute 100 personalized outreaches"
+        daily: true
+        duration: "100 days"
+
+      - step: 4
+        agent: warm-outreach-engine
+        action: "Apply A-C-A to responses"
+        output: "Qualified prospects"
+
+      - step: 5
+        agent: warm-outreach-engine
+        action: "Make free offer to first 5"
+        output: "Free clients"
+
+      - step: 6
+        agent: warm-outreach-engine
+        action: "Start charging when referrals begin"
+        escalation: "80% → 60% → 40% → 20% → Full price"
+
+      - step: 7
+        agent: warm-outreach-engine
+        action: "Move to next platform"
+        trigger: "Current platform exhausted"
+
+  content_workflow:
+    trigger: "Content method selected"
+    steps:
+      - step: 1
+        agent: content-engine
+        action: "Select scaling approach"
+        options: ["Depth-first", "Breadth-first"]
+
+      - step: 2
+        agent: content-engine
+        action: "Create content unit"
+        structure:
+          - "Choose topic"
+          - "Craft hook with 2+ elements"
+          - "Build retention (lists/steps/stories)"
+          - "Ensure reward matches promise"
+
+      - step: 3
+        agent: content-engine
+        action: "Format for platform"
+        rule: "Match top performers"
+
+      - step: 4
+        agent: content-engine
+        action: "Post consistently"
+        minimum: "Daily posting"
+        target: "100 minutes/day"
+
+      - step: 5
+        agent: content-engine
+        action: "Give until they ask"
+        alternative: "Minimum 3:1 give:ask ratio"
+
+      - step: 6
+        agent: content-engine
+        action: "Track audience growth"
+        frequency: "Monthly"
+
+  paid_ads_workflow:
+    trigger: "Paid ads selected"
+    steps:
+      - step: 1
+        agent: paid-ads-engine
+        action: "Set up tracking"
+        type: blocking
+        rule: "Before spending any money"
+
+      - step: 2
+        agent: paid-ads-engine
+        action: "Create ad variations"
+        minimum: 10
+        expectation: "9 will fail"
+
+      - step: 3
+        agent: paid-ads-engine
+        action: "Set test budget"
+        formula: "2x 30-day profit per ad"
+
+      - step: 4
+        agent: paid-ads-engine
+        action: "Launch and monitor"
+        cutoff: "1x 30-day profit if zero leads"
+
+      - step: 5
+        agent: paid-ads-engine
+        action: "Identify winners"
+        condition: "LTGP:CAC >= 3:1"
+
+      - step: 6
+        agent: paid-ads-engine
+        action: "Scale winners"
+        formula: "(Desired Customers × CAC) × 1.2"
+
+  optimization_workflow:
+    trigger: "Method plateauing"
+    steps:
+      - step: 1
+        agent: method-optimizer
+        action: "Ask: What's stopping 10x?"
+        output: "Blocker identification"
+
+      - step: 2
+        agent: method-optimizer
+        action: "Try MORE first"
+        condition: "If nothing blocking volume"
+
+      - step: 3
+        agent: method-optimizer
+        action: "Find constraint for BETTER"
+        technique: "Identify biggest drop-off point"
+
+      - step: 4
+        agent: method-optimizer
+        action: "Run weekly test"
+        cadence: "One test per week per platform"
+
+      - step: 5
+        agent: method-optimizer
+        action: "Log results"
+        output: "Test register entry"
+
+      - step: 6
+        agent: method-optimizer
+        action: "Consider NEW"
+        trigger: "4 failed tests at constraint OR MORE+BETTER exhausted"
+        priority: "New placement → New platform → New Core Four"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    total_engaged_leads:
+      formula: "Count of people who show interest"
+      target: "Growing month-over-month"
+
+    cost_per_lead:
+      formula: "Total Spend / Total Leads"
+      target: "Decreasing over time"
+
+    method_diversity:
+      formula: "Count of active Core Four methods"
+      minimum: 1
+      target: 2+
+
+  by_method:
+    warm_outreach:
+      - "Daily outreach count (target: 100)"
+      - "Response rate (target: >20%)"
+      - "Free client conversions"
+      - "Free-to-paid conversion (target: >25%)"
+      - "Referrals generated"
+
+    content:
+      - "Posts per day/week"
+      - "Audience size by platform"
+      - "Audience growth rate (MoM %)"
+      - "Engagement rate"
+      - "Leads attributed to content"
+
+    cold_outreach:
+      - "Daily outreach count (target: 100+)"
+      - "Response rate (target: >5%)"
+      - "Conversion rate"
+
+    paid_ads:
+      - "Ad spend"
+      - "Cost per lead"
+      - "CAC"
+      - "LTGP:CAC ratio (target: >3:1)"
+      - "30-day payback status"
+
+  optimization:
+    - "Tests run per week"
+    - "Win rate of tests"
+    - "Constraint improvement rate"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Zero leads after 30 days"
+    possible_causes:
+      - "Not doing Rule of 100"
+      - "Offer not compelling"
+      - "Wrong targeting"
+    diagnosis:
+      - "Check daily action count"
+      - "Review offer value equation"
+      - "Verify audience targeting"
+    solutions:
+      - "Commit to Rule of 100"
+      - "Improve offer with $100M Offers framework"
+      - "Narrow targeting to ideal customer"
+
+  - symptom: "Low warm outreach response rate"
+    possible_causes:
+      - "Not enough personalization"
+      - "Reaching out too many times"
+      - "Wrong platforms"
+    diagnosis:
+      - "Review message quality"
+      - "Check follow-up cadence"
+      - "Verify contact list quality"
+    solutions:
+      - "Add personal details from social profiles"
+      - "Limit to 3 attempts (1/day for 3 days)"
+      - "Prioritize platforms with real relationships"
+
+  - symptom: "Content not growing audience"
+    possible_causes:
+      - "Hook not strong enough"
+      - "Not satisfying promises"
+      - "Wrong format for platform"
+    diagnosis:
+      - "Review hook elements"
+      - "Check if reward matches promise"
+      - "Compare format to top performers"
+    solutions:
+      - "Include 2+ headline elements"
+      - "Fully deliver on hook promise"
+      - "Match platform format norms"
+
+  - symptom: "Paid ads losing money"
+    possible_causes:
+      - "Bad ads (high CAC)"
+      - "Bad model (low LTGP)"
+      - "Poor tracking"
+    diagnosis:
+      - "Compare CAC to industry average"
+      - "Calculate LTGP accurately"
+      - "Verify tracking is complete"
+    solutions:
+      - "If CAC > 3x industry: Fix ads"
+      - "If CAC normal: Fix model (increase LTGP)"
+      - "Implement customer-financed acquisition"
+
+  - symptom: "Hit plateau, can't grow more"
+    possible_causes:
+      - "Not doing enough (MORE)"
+      - "Not optimizing (BETTER)"
+      - "Need expansion (NEW)"
+    diagnosis:
+      - "Check if at max volume"
+      - "Check if testing weekly"
+      - "Check if all placements/platforms used"
+    solutions:
+      - "Try MORE first"
+      - "Then focus on BETTER at constraints"
+      - "Then try NEW (placements → platforms → methods)"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 7
+  workflows_documented: 5
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

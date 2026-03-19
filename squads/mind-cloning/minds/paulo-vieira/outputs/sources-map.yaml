@@ -1,0 +1,469 @@
+# Paulo Vieira — Sources Map
+# Generated: 2026-03-07
+# Mode: QUALITY (89 source files, 54K+ lines)
+# Status: Phase 1 Complete — Source Curation
+
+meta:
+  expert: Paulo Vieira
+  domain: Coaching, Desenvolvimento Pessoal, Alta Performance, Criação de Riqueza
+  total_files: 224
+  total_lines: ~97000
+  total_words: ~750000
+  quality_mode: QUALITY
+  expected_fidelity: "85-95%"
+  sources_breakdown:
+    courses: 80  # CIS 2.0 (56) + Poder do Foco (24)
+    books: 9
+    youtube: 135  # @paulovcoach channel (>= 5min videos)
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SOURCE 1: MÉTODO C.I.S 2.0 COMPLETO (56 files, ~35K lines)
+# ═══════════════════════════════════════════════════════════════════════════
+source_cis_2_0:
+  name: "Método C.I.S 2.0 Completo"
+  type: course_transcription
+  files: 56
+  lines: ~35000
+  quality_avg: 4.2
+  gold_files: 35
+  bronze_files: 8
+  path: "/Users/luizfosc/Dropbox/Dropbox Particular Fosc/+PROJETOS Palestras + Mágicas/LUIZFOSC/CURSOS E TRANSCRIÇÕES/Paulo Vieira/Método C.I.S 2.0 Completo/"
+
+  modules:
+    - id: "mod-01"
+      name: "Introdução"
+      files: 7
+      quality: [3, 5, 4, 5, 2, 2, 1]
+      domains: [metodologia, mindset, transformacao, crencas, testemunhos]
+      gold_files: ["01.2", "01.4"]
+
+    - id: "mod-02"
+      name: "Diagnóstico Inicial"
+      files: 6
+      quality: [5, 5, 4, 4, 5, 5]
+      domains: [metodologia_cis, zona_conforto, autoavaliacao, neurociencia]
+      gold_files: ["02.1", "02.2", "02.5", "02.6"]
+
+    - id: "mod-03"
+      name: "Inteligência Emocional"
+      files: 4
+      quality: [5, 5, 5, 4]
+      domains: [inteligencia_emocional, comunicacao]
+      gold_files: ["03.1", "03.2", "03.3"]
+
+    - id: "mod-04"
+      name: "Emoções e Crenças"
+      files: 7
+      quality: [5, 5, 5, 4, 5, 4, 1]
+      domains: [neurofisiologia, crencas, resiliencia, bioquimica]
+      gold_files: ["04.1", "04.2", "04.3", "04.5"]
+
+    - id: "mod-05"
+      name: "Amor, Gratidão e Realizações"
+      files: 5
+      quality: [5, 5, 4, 5, 5]
+      domains: [gratidao, amor, estrategia, foco]
+      gold_files: ["05.1", "05.2", "05.4", "05.5"]
+
+    - id: "mod-06"
+      name: "Poder das Palavras"
+      files: 5
+      domains: [comunicacao, linguagem, profecias]
+      status: partially_analyzed
+
+    - id: "mod-07"
+      name: "Realidade e Comunicação"
+      files: 6
+      domains: [fisica_quantica, comunicacao, sentimentos]
+      status: partially_analyzed
+
+    - id: "mod-08"
+      name: "Transformações e Depoimentos"
+      files: 4
+      quality: [2, 2, 2, 2]
+      domains: [testemunhos]
+      note: "Filler — testimonials only"
+
+    - id: "mod-09"
+      name: "Autoestima e Identidade"
+      files: 8
+      domains: [autoestima, identidade, crencas, pertencimento]
+      status: partially_analyzed
+
+    - id: "mod-10"
+      name: "Perdão e Comprometimento"
+      files: 6
+      domains: [perdao, comprometimento, mudanca]
+      status: partially_analyzed
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SOURCE 2: PODER DO FOCO (24 files, ~3.1K lines)
+# ═══════════════════════════════════════════════════════════════════════════
+source_poder_foco:
+  name: "Poder do Foco"
+  type: course_transcription
+  files: 23
+  lines: ~3146
+  quality_avg: 4.6
+  gold_files: 18
+  bronze_files: 0
+  path: "/Users/luizfosc/Dropbox/Dropbox Particular Fosc/+PROJETOS Palestras + Mágicas/LUIZFOSC/CURSOS E TRANSCRIÇÕES/Paulo Vieira/+Poder do Foco/"
+
+  modules:
+    - { id: "pf-01", name: "Benefício da Felicidade", files: 2, quality: [5, 4], domains: [felicidade, gratidao] }
+    - { id: "pf-02", name: "Gratidão", files: 4, quality: [5, 4, 5, 4], domains: [gratidao] }
+    - { id: "pf-03", name: "Identidade, Propósito e Missão", files: 3, quality: [5, 5, 4], domains: [identidade, proposito] }
+    - { id: "pf-04", name: "Visão Positiva de Futuro", files: 2, quality: [5, 5], domains: [visao_futuro, planejamento] }
+    - { id: "pf-05", name: "A Pergunta Certa", files: 1, quality: [5], domains: [autocoaching] }
+    - { id: "pf-06", name: "Estilo de Reciprocidade", files: 2, quality: [5, 4], domains: [reciprocidade, valor_pessoal] }
+    - { id: "pf-07", name: "Foco e Poder", files: 2, quality: [5, 5], domains: [foco, poder, estrategia] }
+    - { id: "pf-08", name: "Autorresponsabilidade", files: 2, quality: [5, 5], domains: [autorresponsabilidade] }
+    - { id: "pf-09", name: "Pagar o Preço", files: 1, quality: [5], domains: [mudanca, zona_conforto] }
+    - { id: "pf-10", name: "Princípio 10-90", files: 1, quality: [5], domains: [adversidades, resiliencia] }
+    - { id: "pf-11", name: "Gerenciando Frustração e Rejeição", files: 1, quality: [5], domains: [adversidades] }
+    - { id: "pf-12", name: "Contágio Social", files: 1, quality: [4], domains: [influencia_social] }
+    - { id: "pf-13", name: "Livre-arbítrio e Valores Campeões", files: 1, quality: [5], domains: [valores, principios] }
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SOURCE 3: LIVROS (9 books, ~48.8K lines, ~391K words)
+# ═══════════════════════════════════════════════════════════════════════════
+source_livros:
+  name: "Livros Paulo Vieira"
+  type: book_extraction
+  files: 9
+  lines: 48856
+  words: 391589
+  quality_avg: 4.5
+  path: "/Users/luizfosc/Dropbox/Dropbox Particular Fosc/+PROJETOS Palestras + Mágicas/LUIZFOSC/CURSOS E TRANSCRIÇÕES/Paulo Vieira/Livros/"
+
+  books:
+    - title: "O Poder da Ação"
+      lines: 3879
+      words: 76688
+      cis_mentions: 48
+      quality: 5
+      domains: [autorresponsabilidade, acao, crencas, coaching]
+      frameworks: ["6 Leis da Autorresponsabilidade", "Padrão Linguístico", "PPS"]
+      key_book: true
+
+    - title: "Poder e Alta Performance"
+      lines: 11477
+      words: 74299
+      cis_mentions: 30
+      quality: 5
+      domains: [alta_performance, pilares_vida, autorresponsabilidade, habitos]
+      frameworks: ["6 Leis", "11 Pilares (MAS)", "Reprogramação de Crenças"]
+      key_book: true
+
+    - title: "Criação de Riqueza"
+      lines: 8231
+      words: 69526
+      cis_mentions: 13
+      quality: 5
+      domains: [riqueza, financas, condutas, armadilhas]
+      frameworks: ["5 Condutas da Riqueza", "6 Armadilhas", "11 Pilares", "5 Princípios"]
+      key_book: true
+
+    - title: "Fator de Enriquecimento"
+      lines: 8990
+      words: 67606
+      cis_mentions: 13
+      quality: 5
+      domains: [enriquecimento, financas, condutas]
+      frameworks: ["11 Pilares", "5 Condutas", "6 Armadilhas"]
+      key_book: true
+
+    - title: "Business High Performance"
+      lines: 6699
+      words: 31704
+      cis_mentions: 175
+      quality: 4
+      domains: [negocios, lideranca, alta_performance]
+      frameworks: ["6 Leis", "3 Modelos", "12 Princípios"]
+
+    - title: "O Poder da Autorresponsabilidade"
+      lines: 2670
+      words: 21753
+      cis_mentions: 18
+      quality: 5
+      domains: [autorresponsabilidade, coaching]
+      frameworks: ["6 Leis", "4 Armadilhas", "Modelo Mental"]
+      key_book: true
+
+    - title: "12 Princípios para uma Vida Extraordinária"
+      lines: 1381
+      words: 22333
+      cis_mentions: 14
+      quality: 4
+      domains: [vida_extraordinaria, principios]
+      frameworks: ["12 Princípios", "6 Leis", "12 Passos"]
+
+    - title: "Vida Extraordinária na Prática"
+      lines: 5244
+      words: 26004
+      cis_mentions: 4
+      quality: 4
+      domains: [vida_extraordinaria, pratica]
+      frameworks: ["4 Passos", "6 Passos"]
+
+    - title: "4 Atitudes Diárias de Inteligência Emocional"
+      lines: 285
+      words: 1676
+      cis_mentions: 8
+      quality: 3
+      domains: [inteligencia_emocional, atitudes]
+      frameworks: ["4 Atitudes", "6 Leis"]
+      note: "Shortest book — summary format"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SOURCE 4: YOUTUBE (@paulovcoach) — 135 videos, ~354K words
+# ═══════════════════════════════════════════════════════════════════════════
+source_youtube:
+  name: "YouTube — Canal @paulovcoach"
+  type: youtube_subtitles
+  files: 135
+  words: 354590
+  quality_avg: 3.5  # Auto-generated subs, good but not perfect
+  channel: "@paulovcoach"
+  channel_total_videos: 614
+  filtered_criteria: ">= 5 minutes duration"
+  path: "/Users/luizfosc/Dropbox/Dropbox Particular Fosc/+PROJETOS Palestras + Mágicas/LUIZFOSC/CURSOS E TRANSCRIÇÕES/Paulo Vieira/Transcrição videos YT/"
+
+  content_types:
+    pvcast_interviews: ~50  # Long-form interviews with guests
+    solo_teachings: ~45     # Paulo Vieira solo educational content
+    lifestyle_vlogs: ~20    # Day-in-life, trips, mansion tours
+    event_highlights: ~10   # CIS Method events, conferences
+    business_content: ~10   # Entrepreneurship, investment
+
+  key_themes:
+    - inteligencia_emocional
+    - riqueza_financas
+    - autorresponsabilidade
+    - empreendedorismo
+    - alta_performance
+    - mentalidade_vencedora
+    - comunicacao
+    - lideranca
+    - fe_espiritualidade
+
+  extraction_method: "YouTube auto-generated subtitles (pt) via yt-dlp → SRT → MD with deduplication"
+  extraction_date: "2026-03-07"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# CONSOLIDATED FRAMEWORKS MAP
+# ═══════════════════════════════════════════════════════════════════════════
+frameworks:
+  core_framework:
+    name: "Método C.I.S (Coaching Integral Sistêmico)"
+    description: "Framework principal de Paulo Vieira — coaching que integra razão + emoção de forma sistêmica"
+    pillars: ["Coaching (onde está → onde quer)", "Integral (razão + emoção)", "Sistêmico (todos os pilares da vida)"]
+    sources: [cis_2_0, livros]
+    cross_source_count: 9
+
+  primary_frameworks:
+    - name: "6 Leis da Autorresponsabilidade"
+      content:
+        - "1. Se é pra criticar, SE CALE"
+        - "2. Se é pra reclamar, DÊ SUGESTÃO"
+        - "3. Se é pra buscar culpados, BUSQUE SOLUÇÃO"
+        - "4. Se é pra se fazer de vítima, SEJA VENCEDOR"
+        - "5. Se é pra justificar erros, APRENDA COM ELES"
+        - "6. Se é pra julgar pessoas, JULGUE SUAS ATITUDES"
+      sources: ["Poder da Ação", "Poder e Alta Performance", "Poder do Foco Mod 8", "CIS 2.0", "Criação de Riqueza", "Business HP", "12 Princípios"]
+      ubiquity: "Presente em 7+ fontes — framework mais repetido"
+
+    - name: "Matriz de Formação de Crenças"
+      content: "COMUNICAÇÃO → PENSAMENTO → SENTIMENTO → CRENÇA → RESULTADO (auto-realizável)"
+      sources: ["CIS 2.0 Mod 04", "Poder da Ação", "Poder e Alta Performance"]
+
+    - name: "11 Pilares (MAS — Mapa de Autoavaliação Sistêmico)"
+      content: ["Espiritual", "Parentes", "Conjugal", "Filhos", "Social", "Saúde", "Servir", "Intelectual", "Financeiro", "Profissional", "Emocional"]
+      sources: ["Poder e Alta Performance", "Poder do Foco Mod 3", "Criação de Riqueza", "Fator de Enriquecimento"]
+
+    - name: "Pirâmide Ser-Fazer-Ter"
+      content: "Base: SER (identidade) → Meio: FAZER (habilidades) → Topo: TER (consequência)"
+      sources: ["Poder do Foco Mod 3"]
+
+    - name: "Princípio 10-90"
+      content: "10% é o que acontece, 90% é o que você FAZ em relação ao que acontece"
+      sources: ["Poder do Foco Mod 10"]
+
+    - name: "Foco-Imersão-Agenda Programada"
+      content: "Trilogia de mudança: FOCO (definir área) + IMERSÃO (14 livros, 25 vídeos) + AGENDA (execução seg-sex)"
+      sources: ["Poder do Foco Mod 7", "CIS 2.0 Mod 05"]
+
+  financial_frameworks:
+    - name: "5 Condutas da Riqueza"
+      sources: ["Criação de Riqueza", "Fator de Enriquecimento"]
+
+    - name: "6 Armadilhas da Riqueza"
+      sources: ["Criação de Riqueza", "Fator de Enriquecimento"]
+
+    - name: "5 Princípios da Riqueza"
+      sources: ["Criação de Riqueza"]
+
+  tools:
+    - name: "35 Perguntas Focais (Autocoaching)"
+      source: "Poder do Foco Mod 5"
+
+    - name: "PPS — Perguntas Poderosas de Sabedoria"
+      sources: ["4 Atitudes", "12 Princípios", "Poder da Autorresponsabilidade", "Poder da Ação"]
+
+    - name: "Exercício YES (Ancoragem Emocional)"
+      source: "CIS 2.0 Mod 03-04"
+
+    - name: "Mural da Vida Extraordinária"
+      source: "Poder do Foco Mod 4"
+
+    - name: "Agenda Comparada da Vida Extraordinária"
+      source: "Poder do Foco Mod 7"
+
+    - name: "200 Motivos de Gratidão"
+      source: "Poder do Foco Mod 2"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SIGNATURE PHRASES (cross-source validated)
+# ═══════════════════════════════════════════════════════════════════════════
+signature_phrases:
+  mantras:
+    - phrase: "Onde foca, expande"
+      sources: ["CIS 2.0", "Poder do Foco", "4 Atitudes"]
+    - phrase: "Toda crença é autorrealizável"
+      sources: ["CIS 2.0", "Poder da Autorresponsabilidade", "Criação de Riqueza", "Fator de Enriquecimento", "Poder e Alta Performance"]
+    - phrase: "A vida começa quando a zona de conforto acaba"
+      sources: ["CIS 2.0", "Poder do Foco"]
+    - phrase: "Mudanças acontecem rápido"
+      sources: ["CIS 2.0 Mod 02"]
+    - phrase: "Felicidade se conquista de segunda a sexta"
+      sources: ["Poder do Foco Mod 7"]
+    - phrase: "Oportunidade se constrói, não se espera!"
+      sources: ["4 Atitudes", "Poder da Ação"]
+    - phrase: "Se alguém pôde, você também pode"
+      sources: ["4 Atitudes", "Poder da Ação", "Poder da Autorresponsabilidade", "Poder e Alta Performance"]
+    - phrase: "A boca fala sobre o que o coração está cheio"
+      sources: ["4 Atitudes", "Poder da Ação", "Criação de Riqueza", "Fator de Enriquecimento", "Poder e Alta Performance"]
+    - phrase: "Aprender é sinônimo de mudança"
+      sources: ["Criação de Riqueza", "Fator de Enriquecimento"]
+    - phrase: "Se atalho fosse bom, seria caminho"
+      sources: ["Poder do Foco Mod 13"]
+
+  perguntas_provocativas:
+    - "Quem é você?"
+    - "Como está a tua vida? Sinceramente, como está a tua vida?"
+    - "Até quando fingir que está tudo bem?"
+    - "Qual é a historinha que você conta pra justificar?"
+    - "Aonde você coloca o teu foco?"
+
+  calls_to_action:
+    - "Paga o preço, amigo. Paga o preço."
+    - "Comunica a gratidão. Comunica a gratidão."
+    - "Venha participar da comunidade das pessoas que realizam"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# STORIES & ANECDOTES INDEX (30+ documented)
+# ═══════════════════════════════════════════════════════════════════════════
+stories:
+  personal:
+    - { id: "ST-01", title: "O Piratinha (8 anos)", source: "CIS Mod 02", theme: "origin_story" }
+    - { id: "ST-02", title: "Acidente na Raul Barbosa", source: "CIS Mod 02", theme: "despertar" }
+    - { id: "ST-03", title: "Pobreza aos 30 anos", source: "CIS Mod 01", theme: "transformacao" }
+    - { id: "ST-04", title: "Vício em TV", source: "Poder do Foco Mod 7", theme: "foco" }
+    - { id: "ST-05", title: "Imersão Financeira 2004", source: "Poder do Foco Mod 7", theme: "foco_imersao" }
+    - { id: "ST-06", title: "Perda de 12kg", source: "Poder do Foco Mod 7", theme: "saude" }
+    - { id: "ST-07", title: "Mateus e o Batman", source: "CIS Mod 04", theme: "identidade" }
+    - { id: "ST-08", title: "Privação dos 18-30 anos", source: "Poder do Foco Mod 11", theme: "formacao" }
+
+  clients:
+    - { id: "ST-09", title: "Homem Suicida (11h da Noite)", source: "CIS Mod 04", theme: "transformacao" }
+    - { id: "ST-10", title: "Mulher do Carro (Iguatemi 2008)", source: "CIS Mod 04", theme: "comunicacao" }
+    - { id: "ST-11", title: "Senhora com Depressão e Espaldar", source: "CIS Mod 04", theme: "postura" }
+    - { id: "ST-12", title: "Ovelha Negra → 8 Franquias", source: "Poder do Foco Mod 9", theme: "transformacao" }
+    - { id: "ST-13", title: "Irmão da Tainá (BMW em 8 meses)", source: "CIS Mod 05", theme: "foco" }
+    - { id: "ST-14", title: "Demissão vira Revolução", source: "Poder do Foco Mod 10", theme: "principio_10_90" }
+
+  parables:
+    - { id: "ST-15", title: "Homem da Oração (18→40→98 anos)", source: "Poder do Foco Mod 8", theme: "autorresponsabilidade" }
+    - { id: "ST-16", title: "Experimento Marshmallow (Stanford)", source: "Poder do Foco Mod 9", theme: "prazer_imediato" }
+    - { id: "ST-17", title: "Viktor Frankl — Auschwitz", source: "Poder do Foco Mod 4/13", theme: "proposito" }
+    - { id: "ST-18", title: "Yale — 2% com metas escritas", source: "Poder do Foco Mod 4", theme: "visao_futuro" }
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DOMAIN CLASSIFICATION (thematic clusters)
+# ═══════════════════════════════════════════════════════════════════════════
+domains:
+  - name: "Autorresponsabilidade"
+    weight: 25%
+    sources_count: 7+
+    key_framework: "6 Leis"
+
+  - name: "Crenças e Reprogramação Mental"
+    weight: 20%
+    sources_count: 6+
+    key_framework: "Matriz C→P→S→Crença→Resultado"
+
+  - name: "Inteligência Emocional"
+    weight: 15%
+    sources_count: 5+
+    key_framework: "18 Competências (Goleman)"
+
+  - name: "Foco e Estratégia"
+    weight: 10%
+    sources_count: 4+
+    key_framework: "Foco-Imersão-Agenda"
+
+  - name: "Criação de Riqueza"
+    weight: 10%
+    sources_count: 3
+    key_framework: "5 Condutas + 6 Armadilhas"
+
+  - name: "Gratidão e Felicidade"
+    weight: 8%
+    sources_count: 4+
+    key_framework: "Grato/Ingrato/Não-Grato"
+
+  - name: "Identidade e Propósito"
+    weight: 7%
+    sources_count: 3+
+    key_framework: "Ser-Fazer-Ter + MAS"
+
+  - name: "Espiritualidade e Fé"
+    weight: 5%
+    sources_count: 5+
+    note: "Blend estratégico ciência + bíblia — aspecto central da voz"
+
+# ═══════════════════════════════════════════════════════════════════════════
+# VOICE DNA PREVIEW (pre-extraction)
+# ═══════════════════════════════════════════════════════════════════════════
+voice_preview:
+  tone: "Afetuoso mas imperativo"
+  style: "Confrontacional com amor — 'amigo, amiga' + 'paga o preço'"
+  structure: "Conceito → Evidência científica → Story → Ferramenta → Call to action"
+  blend: "Ciência + Bíblia (referências bíblicas são parte integral, não opcionais)"
+  repetition: "Enfática — repete frases-chave 3-5x para ancoragem"
+  questions: "Perguntas retóricas provocativas como ferramenta principal"
+  vocabulary:
+    always_uses: ["amigo/amiga", "vida extraordinária", "alta performance", "zona de conforto", "pagar o preço", "autorresponsabilidade"]
+    never_uses: ["motivação" (usa "transformação"), "autoajuda" (usa "coaching")]
+
+# ═══════════════════════════════════════════════════════════════════════════
+# SCIENTIFIC/BIBLIOGRAPHIC REFERENCES
+# ═══════════════════════════════════════════════════════════════════════════
+references:
+  scientists: ["Shawn Achor (Harvard)", "Robert A. Emmons", "Viktor Frankl", "Adam Grant", "Christakis & Fowler", "Daniel Goleman", "Fritjof Capra", "Brian Greene"]
+  biblical: ["Habacuque 2:2", "Tiago 1:2", "Provérbios 1-9", "Gálatas 6:7"]
+  books_cited: ["O Jeito Harvard de Ser Feliz", "Em Busca de Sentido", "Dar e Receber", "O Poder das Conexões"]
+
+# ═══════════════════════════════════════════════════════════════════════════
+# NEXT STEPS
+# ═══════════════════════════════════════════════════════════════════════════
+next_steps:
+  phase_2_voice_dna: "Extract from ALL sources: vocabulary, sentence patterns, emotional states, immune system"
+  phase_3_thinking_dna: "Extract: decision heuristics, diagnostic framework, veto conditions, handoff triggers"
+  phase_4_agent: "Create agents based on extracted DNA"
+  phase_5_squad: "Assemble squad with config, workflows, tasks"
+  phase_6_validation: "3 smoke tests per agent, quality dashboard"
+
+  priority_sources_for_dna:
+    voice_dna: ["CIS 2.0 (all modules)", "Poder do Foco (all modules)"]
+    thinking_dna: ["Poder da Ação (livro)", "Poder e Alta Performance (livro)", "Criação de Riqueza (livro)"]

@@ -1,0 +1,206 @@
+# Social & Web Extraction — Gui Ávila
+# Sources: guiavila.com (blog, landing pages, palestras), palestrasdesucesso.com
+# Extraction Date: 2026-03-07
+# Instagram: NOT extracted (login wall, Apify unavailable)
+
+blog_posts:
+  - title: "A Fórmula Secreta: o que os 'Gênios' Não te Contam"
+    url: "guiavila.com/blog/..."
+    category: "PalestrasCorporativas"
+    summary: >
+      Após anos como empreendedor, ilusionista e palestrante, descobriu que
+      não existe fórmula mágica pro sucesso. O que existe é algo muito mais
+      acessível e prático.
+    voice_pattern: "Desmistificação (destruir o mito do gênio)"
+
+  - title: "O Maior Segredo da Mágica: 5 Insights que Vão Transformar Sua Vida"
+    url: "guiavila.com/blog/..."
+    category: "PalestrasCorporativas"
+    summary: >
+      Após 20+ anos de mágica, descobriu que o verdadeiro poder está na forma
+      como os ilusionistas pensam. Esse pensamento pode ser aplicado por
+      qualquer pessoa.
+    voice_pattern: "Transferência de framework (mágica → vida)"
+
+  - title: "O Segredo para Reuniões 10x Mais Produtivas com IA | Tutorial TLDV"
+    url: "guiavila.com/blog/o-segredo-para-reunioes-10x-mais-produtivas-com-ia-tutorial-tldv/"
+    category: "Produtividade"
+    summary: >
+      Tutorial prático sobre TLDV para gravar, transcrever e analisar reuniões
+      com IA. Começou a usar e ficou impressionado. Compara a ter um assistente
+      pessoal cuidando de tudo.
+    voice_pattern: "Tutorial prático (passo-a-passo gratuito)"
+
+  - title: "Descubra o Poder do ClickUp"
+    url: "guiavila.com/blog/descubra-o-poder-do-clickup/"
+    category: "Produtividade"
+    summary: >
+      Em evento de marketing em São Paulo, apresentou ClickUp para pessoas que
+      iam gastar fortunas criando plataforma do zero. Ferramenta gratuita que
+      centraliza tudo.
+    voice_pattern: "Storytelling de evento real + solução prática"
+
+  - title: "Utilize esta ferramenta para otimizar seu tempo com vídeos"
+    url: "guiavila.com/blog/utilize-esta-ferramenta-para-otimizar-seu-tempo-com-videos/"
+    category: "Produtividade"
+    summary: >
+      Frustração pessoal levou a descobrir ferramenta para controlar velocidade
+      de vídeos. 300 palavras/min leitura vs 150 palavras/min fala = ajuste
+      essencial.
+    voice_pattern: "Problema pessoal → solução universal"
+
+  - title: "Essas 2 coisas me impediam de começar no Youtube"
+    url: "guiavila.com/blog/..."
+    category: "Desenvolvimento Pessoal"
+    summary: >
+      Vulnerabilidade: adiou projeto dos sonhos por barreiras psicológicas.
+      Documenta o primeiro passo na jornada que vinha adiando.
+    voice_pattern: "Vulnerabilidade controlada (eu também sinto isso)"
+
+  - title: "A Área de Membros que vai Vender seu Infoproduto como Mágica"
+    url: "guiavila.com/blog/a-area-de-membros-que-vai-vender-seu-infoproduto-como-magica/"
+    category: "Ensinio"
+    summary: >
+      Showcase da Ensinio: experiência Netflix para cursos, app próprio na
+      Play Store/App Store, gamificação, comunidade exclusiva. Foco em LTV e
+      experiência visual.
+    voice_pattern: "Product-led storytelling (usa próprio produto como exemplo)"
+
+landing_pages:
+  automacoes_pro:
+    url: "lp.guiavila.com/automacoes"
+    headline: "Agentes de IA e automações que devolvem seu tempo livre"
+    rating: "4.8/5 - 906 avaliações"
+    positioning: "Gestor de Automações Full Stack"
+    method: "Método do Gui Ávila"
+    format: "Aulas com exemplos práticos e templates prontos"
+    cta: "Garantir minha vaga!"
+    depoimentos_youtube:
+      - name: "Felipe Falcone"
+        text: "Mesmo já tendo um nível de aprendizado sobre o Manychat fiquei até o final assistindo seu vídeo mano, muito bom!"
+      - name: "Raquel Costa"
+        text: "Gui, parabéns pela didática! Sou totalmente leiga no assunto e consegui entender perfeitamente."
+      - name: "Gracie Morumbi"
+        text: "Gui, parabéns pela didática fantástica! Sensacional, você entrega os conhecimentos e técnicas para serem colocados em prática imediatamente!!"
+
+  cursos_consultoria:
+    url: "lp.guiavila.com/"
+    bio_key_phrases:
+      - "Sou um ilusionista que adora construir sistemas inteligentes"
+      - "Obsessão minha, eu sei rsrs!"
+      - "Toda semana eu entrego o ouro no meu canal do Youtube"
+      - "Antes de automatizar é preciso sistematizar"
+      - "Método Sistemas Reverso"
+      - "A Ensinio só surgiu por conta da mágica, olha que doideira!"
+      - "Isso é história para um cafézinho"
+    products:
+      - "Automações PRO"
+      - "ClickUp 8x"
+      - "Consultoria"
+      - "Livros"
+      - "Agente de IA em 1 minuto"
+
+palestras:
+  url: "guiavila.com/palestras/"
+  since: 2010
+  headline: "A palestra certa para seu evento corporativo ser inesquecível!"
+  bio_summary: >
+    Desde 2010 ajuda empresas a desenvolver e inspirar pessoas, transmitindo
+    sua mensagem por meio da mágica.
+  corporate_testimonials:
+    - name: "Antônio Claret"
+      role: "Presidente da Infraero"
+      quote: "Fantástico, Gui Ávila. Obrigado pela palestra. Era o que precisávamos!"
+    - name: "Katia Balbino"
+      role: "Juíza e diretora do foro da Seção Jurídica do DF"
+      quote: "Gui, sua palestra foi um verdadeiro PRESENTE para todos nós!"
+    - name: "José Sérgio"
+      role: "Reitor e Diretor de Educação"
+      quote: "Você conseguiu sintetizar muito conteúdo em uma palestra dinâmica que envolve o público. Fantástico!"
+    - name: "Marly Vieira Freire"
+      role: "Equipe de Desenvolvimento"
+      quote: "A ideia era contratar apenas 1 palestra. Devido ao grande sucesso, contratamos 5! Superou nossas expectativas!"
+    - name: "Isabel Regina"
+      role: "Analista VII – VIGE"
+      quote: "Ótima palestra, Gui. Conteúdo, interatividade, mágica e muito carisma. Foi excelente!"
+    - name: "Alline de Souza Leite"
+      role: "Gerente Comercial"
+      quote: "A galera foi ao delírio com você, cara! Foi MUITO bom."
+    - name: "Pierre Gonçalves"
+      role: "Gerente de Área – Cenop"
+      quote: "Agradecemos pela palestra, os comentários foram muito positivos. Todo mundo adorou!"
+    - name: "Sandra Regina"
+      role: "Assistente Sênior"
+      quote: "Gui, quero te agradecer pela belíssima apresentação e pelos momentos de pura utopia!"
+
+  palestras_de_sucesso_quote: >
+    "A mágica é minha ferramenta para transmitir minha mensagem e gerar
+    resultados. Eu acredito que quando as pessoas mudam, o mundo muda. Meu
+    foco é entregar às pessoas informações específicas para ação, para que
+    elas possam, imediatamente, colocar em prática um conhecimento que as
+    levará a alcançar resultados superiores!"
+
+  palestras_style:
+    - "Interatividade e energia"
+    - "Conteúdo atualizado"
+    - "Metodologia didática com ferramentas lúdicas"
+    - "Números de ilusionismo para causar impacto"
+    - "Foco em alta performance"
+
+new_voice_patterns_discovered:
+  - pattern: "Provocação inversa"
+    example: "'te ajude a ter ideias ruins' (inverte expectativa)"
+    frequency: medium
+    already_in_clone: false
+
+  - pattern: "Vulnerabilidade controlada"
+    example: "'Eu também já passei por isso' + solução"
+    frequency: high
+    already_in_clone: true  # partially
+
+  - pattern: "Storytelling de evento real"
+    example: "Evento em SP, conversa casual → insight → ferramenta"
+    frequency: high
+    already_in_clone: true
+
+  - pattern: "Product-led content"
+    example: "Usa Ensinio como case study natural, sem forçar"
+    frequency: medium
+    already_in_clone: partially
+
+  - pattern: "Template sharing generosity"
+    example: "'só copiar para seu negócio' — dá o mapa pronto"
+    frequency: high
+    already_in_clone: true
+
+  - pattern: "Cafézinho promise"
+    example: "'Isso é história para um cafézinho' — cria intimidade"
+    frequency: low
+    already_in_clone: false
+
+new_thinking_patterns_discovered:
+  - pattern: "Sistematizar antes de automatizar"
+    description: "Princípio filosófico: ordem mental precede automação técnica"
+    source: "Landing page pessoal"
+    already_in_clone: true
+
+  - pattern: "Efeito Netflix para cursos"
+    description: "Benchmark de UX: experiência de streaming aplicada a educação"
+    source: "Blog post Ensinio"
+    already_in_clone: false
+
+  - pattern: "Leitura 300wpm vs Fala 150wpm"
+    description: "Quantifica intuitivamente por que acelerar vídeos é essencial"
+    source: "Blog post otimizar vídeos"
+    already_in_clone: false
+
+  - pattern: "Contrate 1, resultado leva a 5"
+    description: "Meta-prova social: qualidade gera recompra espontânea"
+    source: "Depoimento Marly Vieira"
+    already_in_clone: false
+
+instagram_status: "NOT_EXTRACTED"
+instagram_reason: >
+  Instagram requer login para visualizar perfil @guiavila52.
+  Docker MCP browser falhou (EOF). Apify API key não configurada.
+  Recomendação: configurar Apify ou login manual via browser local.

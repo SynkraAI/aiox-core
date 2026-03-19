@@ -1,0 +1,253 @@
+workflow:
+  id: wf-storybook-full-setup
+  name: Storybook Full Setup Pipeline
+  version: "1.0"
+  orchestrator: "@storybook-expert"
+  duration: 1 session
+  description: |
+    End-to-end pipeline that takes a project from zero Storybook to fully
+    configured with stories for every component. Handles:
+    - Package installation (Storybook v10 + addons)
+    - Configuration (.storybook/main.ts, preview.ts, theme, CSS)
+    - shadcn/ui component expansion (full catalog ~45 components)
+    - Story generation for ALL components (CSF3, TypeScript strict, autodocs)
+    - Verification (typecheck, lint, build, functional)
+
+    This workflow produces:
+    - Complete Storybook installation and configuration
+    - All shadcn/ui components installed
+    - Story files for every component
+    - Verification report confirming zero errors
+  best_for:
+    - New project needs Storybook from scratch
+    - Existing project needs stories for all components
+    - Design system documentation setup
+    - Component library quality gate setup
+  decision_matrix_fit:
+    awareness: Setup
+    sophistication: Standard
+    primary_output: Complete Storybook with all stories
+  type: legacy
+  sequence:
+    - step: phase-1
+      id: phase-1
+      phase: 1
+      phase_name: Install Storybook Packages
+      agent: storybook-expert
+      action: execute_install-storybook-core-framework-adapter-and-all-recommended-add
+      next: phase-2
+    - step: phase-2
+      id: phase-2
+      phase: 2
+      phase_name: Configure Storybook
+      agent: storybook-expert
+      action: execute_create
+      next: phase-3
+    - step: phase-3
+      id: phase-3
+      phase: 3
+      phase_name: Expand shadcn Component Library
+      agent: storybook-expert
+      action: execute_install-all-shadcn-ui-components-via-cli
+      next: phase-4
+    - step: phase-4
+      id: phase-4
+      phase: 4
+      phase_name: Generate Stories for All Components
+      agent: storybook-expert
+      action: execute_generate
+      next: phase-5
+    - step: phase-5
+      id: phase-5
+      phase: 5
+      phase_name: Verify Complete Setup
+      agent: storybook-expert
+      action: execute_final-verification-gate
+    - workflow_end:
+        id: complete
+        action: workflow_complete
+phases:
+  - id: PHASE-1
+    name: Install Storybook Packages
+    tier: 0
+    description: |
+      Install Storybook core, framework adapter, and all recommended addons
+      as devDependencies. Detect project framework, select correct adapter,
+      add npm scripts.
+    tasks:
+      - task_file: sb-install.md
+        agent: "@storybook-expert"
+        required: true
+        description: Install all Storybook packages and add scripts
+        output: installed_packages, framework_adapter
+    checkpoint:
+      criteria:
+        - All packages in devDependencies
+        - storybook and build-storybook scripts in package.json
+        - npx storybook --version returns installed version
+      human_review: false
+      message: Packages installed. Proceeding to configuration.
+  - id: PHASE-2
+    name: Configure Storybook
+    tier: 0
+    description: |
+      Create .storybook/main.ts and preview.ts. Configure framework adapter,
+      stories glob, addons, theme toggle, global CSS import. Update .gitignore
+      and ESLint config.
+    tasks:
+      - task_file: sb-configure.md
+        agent: "@storybook-expert"
+        required: true
+        description: Create config files and verify Storybook starts
+        output: .storybook/main.ts, .storybook/preview.ts
+    checkpoint:
+      criteria:
+        - .storybook/main.ts exists with correct framework
+        - .storybook/preview.ts exists with theme config
+        - storybook-static in .gitignore
+        - Storybook dev server starts without errors
+      human_review: false
+      message: Configuration complete. Storybook starts successfully.
+  - id: PHASE-3
+    name: Expand shadcn Component Library
+    tier: 1
+    description: |
+      Install ALL shadcn/ui components via CLI. Detect existing components,
+      install missing ones, apply known fixes (sidebar purity, etc.),
+      preserve custom component customizations.
+    tasks:
+      - task_file: sb-expand-shadcn.md
+        agent: "@storybook-expert"
+        required: true
+        description: Install all shadcn components and apply fixes
+        output: installed_components, applied_fixes
+    checkpoint:
+      criteria:
+        - All target components exist in src/components/ui/
+        - npm run typecheck passes
+        - npm run lint passes
+        - Known shadcn bugs fixed
+      human_review: false
+      message: All components installed. Proceeding to story generation.
+  - id: PHASE-4
+    name: Generate Stories for All Components
+    tier: 1
+    description: |
+      Generate .stories.tsx files for EVERY component. CSF3 format with
+      satisfies Meta<typeof Component>, TypeScript strict, autodocs tags,
+      Portuguese content. Handles simple, compound, form, layout, and
+      custom components with appropriate story strategies.
+    tasks:
+      - task_file: sb-generate-all-stories.md
+        agent: "@storybook-expert"
+        required: true
+        description: Write story files for all components
+        output: story_files, coverage_report
+    checkpoint:
+      criteria:
+        - Every component has a .stories.tsx file
+        - npm run typecheck passes
+        - npm run lint passes
+        - All stories use satisfies Meta pattern
+        - All content in Portuguese
+      human_review: false
+      message: All stories generated. Running final verification.
+  - id: PHASE-5
+    name: Verify Complete Setup
+    tier: 2
+    description: |
+      Final verification gate. Runs typecheck, lint, build-storybook,
+      dev server smoke test, and story coverage check. Produces verification
+      report with PASS/FAIL per check.
+    tasks:
+      - task_file: sb-verify.md
+        agent: "@storybook-expert"
+        required: true
+        description: Run all verification checks and produce report
+        output: verification_report
+    checkpoint:
+      criteria:
+        - "TypeScript: zero errors"
+        - "Lint: zero errors"
+        - "Build: succeeds"
+        - "Coverage: 100%"
+        - "Dev server: HTTP 200"
+      human_review: true
+      message: Verification complete. Review report before finalizing.
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_stakeholders: false
+    - create_remediation_task: false
+    - halt_workflow: true
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: false
+    - max_retries: 2
+completion_signal: <promise>COMPLETE</promise>
+checkpoint_signal: <promise>CHECKPOINT:PHASE-X</promise>
+blocked_signal: <promise>BLOCKED:T-X.Y</promise>
+outputs:
+  configuration:
+    - .storybook/main.ts
+    - .storybook/preview.ts
+    - package.json (updated devDependencies + scripts)
+    - .gitignore (storybook-static)
+  components:
+    - src/components/ui/*.tsx (all shadcn components)
+  stories:
+    - src/components/ui/*.stories.tsx (one per component)
+  reports:
+    - Verification report (typecheck, lint, build, coverage)
+agents_by_phase:
+  PHASE-1:
+    primary:
+      - "@storybook-expert"
+  PHASE-2:
+    primary:
+      - "@storybook-expert"
+  PHASE-3:
+    primary:
+      - "@storybook-expert"
+    secondary:
+      - "@brad-frost"
+  PHASE-4:
+    primary:
+      - "@storybook-expert"
+  PHASE-5:
+    primary:
+      - "@storybook-expert"
+quality_checklist:
+  installation:
+    - "[ ] All Storybook packages installed as devDependencies"
+    - "[ ] Framework adapter matches project framework"
+    - "[ ] npm scripts added (storybook, build-storybook)"
+  configuration:
+    - "[ ] main.ts has correct stories glob"
+    - "[ ] preview.ts imports global CSS"
+    - "[ ] Theme toggle works (dark/light)"
+    - "[ ] storybook-static in .gitignore"
+  components:
+    - "[ ] All target shadcn components installed"
+    - "[ ] Known generated code bugs fixed"
+    - "[ ] Custom components preserved"
+  stories:
+    - "[ ] Every component has .stories.tsx"
+    - "[ ] All use satisfies Meta<typeof Component>"
+    - "[ ] All have tags: ['autodocs']"
+    - "[ ] Content in Portuguese (pt-BR)"
+  verification:
+    - "[ ] npm run typecheck — zero errors"
+    - "[ ] npm run lint — zero errors"
+    - "[ ] npm run build-storybook — succeeds"
+    - "[ ] Dev server responds HTTP 200"
+metadata:
+  version: "1.0"
+  framework: AIOX Design Squad
+  created: "2026-02-25"
+  primary_use_case: Complete Storybook setup from zero to production-ready
+  key_difference: |
+    Unlike individual story writing (*write-story), this workflow handles
+    the ENTIRE pipeline from package installation to full verification.
+    Based on real-world execution experience with Storybook v10 + shadcn/ui
+    + Tailwind v4 + Next.js.

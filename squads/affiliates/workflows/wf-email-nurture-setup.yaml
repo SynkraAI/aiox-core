@@ -1,0 +1,199 @@
+# Email Nurture Setup Workflow
+# Pipeline para montar sistema de email marketing para afiliados
+# Source: @architect research — Chaperon SOS + Autoresponder Madness + Segmentation
+# Version: 1.0.0
+
+id: wf-email-nurture-setup
+name: "Email Nurture Setup"
+version: "1.0.0"
+duration: "1-2 weeks"
+description: |
+  Workflow para montar sistema completo de email marketing para afiliados.
+  Soap Opera Sequence → automação → segmentação → calendário de broadcasts.
+
+  FILOSOFIA: "Email é o ativo que você controla. SEO e social mudam, sua lista fica."
+
+  RESULTADO: Sistema de email com SOS, automação, segmentação e calendário mensal.
+
+best_for:
+  - "Montar email marketing do zero para afiliados"
+  - "Ativar lista existente que está parada"
+  - "Implementar Soap Opera Sequence"
+
+decision_matrix_fit:
+  complexity: medium
+  agents_required: 2
+  estimated_duration: "1-2 weeks"
+  user_involvement: "medium"
+  prerequisites:
+    - "Plataforma de email (ActiveCampaign recomendada)"
+    - "Lead magnet definido (execute wf-new-affiliate-funnel)"
+    - "Produto de afiliado selecionado"
+
+clone_combinations:
+  primary:
+    - agent: email-nurture
+      role: "SOS, welcome series, automação, segmentação, calendário"
+      phases: [0, 1, 2, 3]
+
+    - agent: performance-analyst
+      role: "Segmentação baseada em dados"
+      phases: [2]
+
+  synergies:
+    - agents: [email-nurture, performance-analyst]
+      pattern: "Nurture cria sequences, Analyst define segments por comportamento"
+
+phases:
+  - id: PHASE-0
+    name: "Soap Opera Sequence"
+    days: "Days 1-3"
+    tier: 0
+    description: |
+      Criação da Soap Opera Sequence (5 emails).
+      Chaperon SOS: Set stage → High drama → Epiphany → Hidden benefits → Urgency+CTA.
+      Open loops forçam próximo email.
+
+    agent: email-nurture
+
+    tasks:
+      - task_id: T0.1
+        name: "Criar Soap Opera Sequence"
+        task_ref: create-soap-opera-sequence.md
+        required: true
+        description: "5-email SOS com open loops"
+        output: "soap_opera_sequence.yaml"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "SOS Ready"
+      criteria:
+        - "5 emails escritos com open loops"
+        - "Cada email tem hook + story + cliffhanger"
+        - "Email 3 introduz affiliate offer naturalmente"
+        - "Email 5 tem urgência + CTA claro"
+      human_review: true
+      message: "Revise a Soap Opera Sequence — é o core da conversão."
+      veto_conditions:
+        - condition: "Pitch no email 1"
+          action: "BLOCK — Email 1 é APENAS entrega + tease. Nunca vender."
+
+  - id: PHASE-1
+    name: "Email Automation"
+    days: "Days 4-6"
+    tier: 1
+    description: |
+      Setup de automação: triggers, flows, welcome sequence.
+      Welcome (5-7 emails SOS) → Nurture broadcast → Click trigger → Purchase trigger.
+
+    agent: email-nurture
+
+    tasks:
+      - task_id: T1.1
+        name: "Setup Email Automation"
+        task_ref: setup-email-automation.md
+        required: true
+        description: "Triggers, segments, flows"
+        output: "email_automation.yaml"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Automation Live"
+      criteria:
+        - "Welcome sequence configurada"
+        - "Triggers por opt-in e click ativos"
+        - "SPF/DKIM/DMARC configurados"
+        - "Test email enviado com sucesso"
+      human_review: false
+
+  - id: PHASE-2
+    name: "Segmentation"
+    days: "Days 7-9"
+    tier: 2
+    description: |
+      Segmentação da lista por intent stage, traffic source, engagement.
+      Segmentos: awareness/consideration/decision, SEO/social/paid, 30/90 dias.
+
+    agents:
+      primary: email-nurture
+      secondary: performance-analyst
+
+    tasks:
+      - task_id: T2.1
+        name: "Segmentar Email List"
+        task_ref: segment-email-list.md
+        required: true
+        description: "Regras de segmentação por comportamento e intent"
+        output: "email_segments.yaml"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Segments Defined"
+      criteria:
+        - "Mínimo 4 segmentos definidos"
+        - "Regras de automação por segmento"
+        - "Content strategy diferenciada por segmento"
+      human_review: true
+      message: "Revise segmentação antes de ativar broadcasts."
+
+  - id: PHASE-3
+    name: "Broadcast Calendar"
+    days: "Days 10-14"
+    tier: 2
+    description: |
+      Calendário mensal de broadcasts. Ratio valor:pitch = 3:1.
+      2-3x/semana.
+
+    agent: email-nurture
+
+    tasks:
+      - task_id: T3.1
+        name: "Criar Broadcast Calendar"
+        task_ref: create-broadcast-calendar.md
+        required: true
+        description: "Calendário mensal com ratio 3:1 valor:pitch"
+        output: "broadcast_calendar.yaml"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Calendar Ready"
+      criteria:
+        - "4 semanas planejadas"
+        - "Ratio 3:1 (valor:pitch) respeitado"
+        - "Frequência 2-3x/semana"
+        - "Subject lines rascunhadas"
+      human_review: true
+      message: "Revise calendário de broadcasts."
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - halt_workflow: false
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "affiliates-chief"
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-email-nurture-setup"
+      status: "completed"
+
+outputs:
+  phase_0: ["soap_opera_sequence.yaml"]
+  phase_1: ["email_automation.yaml"]
+  phase_2: ["email_segments.yaml"]
+  phase_3: ["broadcast_calendar.yaml"]
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-18"
+  author: "squad-architect"
+  source_frameworks:
+    - "Andre Chaperon Soap Opera Sequence"
+    - "Autoresponder Madness"
+    - "Behavioral Segmentation"
+  priority: 2
+  quality_gate: "SC_WFL_001"

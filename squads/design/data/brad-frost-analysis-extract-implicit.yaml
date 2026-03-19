@@ -1,0 +1,270 @@
+# Analise de Conhecimento Implicito: Brad Frost
+# Extraido por analise cruzada de DNA + Agent v5.0.1
+# Foco: o que ele ASSUME, OMITE e DECIDE sem verbalizar
+
+metadata:
+  fonte: "Brad Frost DNA v1.1.0 + Agent v5.0.1"
+  data: "2026-02-16"
+  metodo: "Analise cruzada de premissas, lacunas e padroes decisorios implicitos"
+
+premissas_nao_declaradas:
+
+  - id: P1
+    nome: "Organizacao madura como pre-requisito"
+    evidencia: "Governance Pipeline assume que existe um 'DS team' dedicado para avaliar requests, que ha roadmap, e que equipes tem canal claro de escalation. Nenhuma orientacao para orgs sem DS team."
+    source: "[SOURCE: brad-frost-dna.yaml, secondary_frameworks.Governance Pipeline]"
+    o_que_assume: "Que a organizacao ja tem maturidade organizacional suficiente para ter um time de DS dedicado, roadmap, e processos de comunicacao funcionais."
+    impacto_se_falsa: "CRITICO"
+    pergunta: "O que acontece em startups ou equipes pequenas sem DS team dedicado? O modelo de governance colapsa?"
+
+  - id: P2
+    nome: "Colaboracao design-dev como estado natural"
+    evidencia: "Repete 'design systems are about human relationships' como axioma, mas nunca oferece framework concreto para CONSTRUIR essa colaboracao quando ela nao existe. Assume como ponto de partida, nao como resultado."
+    source: "[SOURCE: Design Better Podcast, Apr 2025 - designbetterpodcast.com/p/brad-frost]"
+    o_que_assume: "Que designers e desenvolvedores QUEREM colaborar e que a resistencia eh apenas estrutural, nunca cultural ou politica."
+    impacto_se_falsa: "ALTO"
+    pergunta: "Como implementar DS quando design e dev estao em guerra territorial ou quando ha assimetria de poder entre as funcoes?"
+
+  - id: P3
+    nome: "Web como plataforma dominante"
+    evidencia: "Todo o framework Atomic Design usa HTML tags como exemplo de atoms. Door analogy separa structure de styling assumindo modelo DOM. Nenhuma discussao sobre native mobile, embedded UI, voice interfaces, ou spatial computing."
+    source: "[SOURCE: Atomic Design, Ch. 2 - atomicdesign.bradfrost.com/chapter-2/]"
+    o_que_assume: "Que design systems operam primariamente em contexto web/HTML. A metodologia eh implicitamente web-first."
+    impacto_se_falsa: "ALTO"
+    pergunta: "Como Atomic Design se aplica a SwiftUI, Jetpack Compose, ou interfaces conversacionais onde 'atoms' nao mapeiam para HTML tags?"
+
+  - id: P4
+    nome: "Componentes como unidade atomica de valor"
+    evidencia: "Todo o framework gira em torno de componentes como artefato central. Decision weights: real product need 0.30, reusability 0.25, single responsibility 0.20. Nao ha peso para patterns, guidelines, ou content strategy."
+    source: "[SOURCE: brad-frost-dna.yaml, decision_architecture.weights]"
+    o_que_assume: "Que o valor de um DS se materializa primariamente em componentes reutilizaveis, nao em patterns de interacao, content guidelines, ou princípios de design."
+    impacto_se_falsa: "MEDIO"
+    pergunta: "E quando o maior gap de consistencia esta em patterns de interacao ou tom de voz, nao em componentes?"
+
+  - id: P5
+    nome: "Ingles como lingua franca da equipe"
+    evidencia: "Naming rules ('name by structure not context') e toda discussao de taxonomia assume que o time compartilha vocabulario tecnico em ingles. Nenhuma consideracao sobre equipes multilingues ou contextos culturais onde metaforas de quimica nao ressoam."
+    source: "[SOURCE: Atomic Design, Ch. 2 - atomicdesign.bradfrost.com/chapter-2/]"
+    o_que_assume: "Que a equipe opera em ingles e que metaforas ocidentais (quimica, receitas) sao universalmente compreensíveis."
+    impacto_se_falsa: "MEDIO"
+    pergunta: "Como adaptar a comunicacao do DS para equipes globais onde 'atoms' e 'molecules' nao carregam significado intuitivo?"
+
+  - id: P6
+    nome: "Escala como contexto implicito"
+    evidencia: "Governance, multi-team reuse, e DS+AI so fazem sentido com escala significativa. Decision heuristic 'Is it needed by multiple products/teams?' assume multiplos produtos. Porem diz 'every website benefits from component-driven architecture'."
+    source: "[SOURCE: brad-frost-dna.yaml, heuristics.decision]"
+    o_que_assume: "Que o publico-alvo opera em escala enterprise com multiplos produtos e times, apesar de retoricamente incluir todos."
+    impacto_se_falsa: "ALTO"
+    pergunta: "O framework realmente funciona para um unico produto com 3 devs, ou eh implicitamente enterprise-only?"
+
+premissas_nao_declaradas_count: 6
+
+heuristicas_ocultas:
+
+  - id: H1
+    nome: "Regra do abandono como termometro"
+    padrao: "SE equipes estao hackeando estilos fora do DS -> ENTAO o problema eh governance ou gaps no DS, NUNCA indisciplina dos times"
+    evidencia: "Red flag 'Product teams hacking styles outside DS' tem diagnosis 'DS doesn't meet needs OR governance unclear'. Nunca considera que times podem ser simplesmente negligentes ou que a cultura ignora padroes."
+    source: "[SOURCE: bradfrost.com 'The design system isn't working for me!' 2024]"
+    deveria_formalizar: true
+    justificativa: "Essa heuristica eh generosa mas pode mascarar problemas reais de disciplina organizacional. Formalizar permitiria distinguir entre gaps legítimos do DS e resistencia cultural."
+
+  - id: H2
+    nome: "Filtro de single responsibility como veto automatico"
+    padrao: "SE componente faz mais de uma coisa -> ENTAO vetar e quebrar em componentes menores, SEM avaliar custo de composicao"
+    evidencia: "Veto BF_VT_001: 'Adding component that violates single responsibility' -> 'Break it down'. Nao ha threshold para quando a composicao de muitos componentes pequenos cria mais complexidade que um componente coeso."
+    source: "[SOURCE: brad-frost-dna.yaml, heuristics.veto]"
+    deveria_formalizar: true
+    justificativa: "Single responsibility pode levar a 'component explosion' (que ele proprio identifica como red flag). Falta criterio para equilibrar granularidade vs pragmatismo."
+
+  - id: H3
+    nome: "Naming estrutural como proxy de qualidade"
+    padrao: "SE componente tem nome contextual (ex: 'homepage-hero') -> ENTAO componente eh inflexivel e precisa renomear"
+    evidencia: "Veto BF_VT_002 e red flag BF_RF_002 tratam naming contextual como defeito automatico. Nao considera que nomes contextuais podem ser mais comunicativos para o time."
+    source: "[SOURCE: Atomic Design, Ch. 2 - atomicdesign.bradfrost.com/chapter-2/]"
+    deveria_formalizar: true
+    justificativa: "Naming estrutural aumenta reuso mas pode reduzir legibilidade. 'MediaBlock' eh menos comunicativo que 'ProductCard' para stakeholders. Trade-off nao explicitado."
+
+  - id: H4
+    nome: "Grounding test como criterio de admissao"
+    padrao: "SE componente nao eh usado em produto real -> ENTAO nao deveria estar no DS"
+    evidencia: "Decision weight 'Real product need' = 0.30 (maior peso). Anti-pattern 'Build design system before understanding product needs'. Mas nao define o que conta como 'real' - um prototipo validado conta? Um produto em beta?"
+    source: "[SOURCE: Atomic Design, Ch. 4 - atomicdesign.bradfrost.com/chapter-4/]"
+    deveria_formalizar: true
+    justificativa: "Impede inovacao proativa no DS. Se so admite componentes ja usados, DS sempre sera reativo ao produto. Falta framework para componentes prospectivos."
+
+  - id: H5
+    nome: "AI como amplificador, nunca como criador"
+    padrao: "SE AI gera UI -> ENTAO DEVE ser constrangida por materiais do DS existente. SE nao -> ENTAO eh 'vibe coding' (pejorativo)"
+    evidencia: "Toda discussao DS+AI posiciona AI como montador de componentes existentes, nunca como co-criador de novos patterns. 'Constrained generation' eh o unico modo aceitavel."
+    source: "[SOURCE: bradfrost.com 'Agentic Design Systems in 2026' 2025-12]"
+    deveria_formalizar: true
+    justificativa: "Exclui cenarios onde AI poderia propor novos patterns que humanos validam. Assume que o catalogo existente eh suficiente e que inovacao vem apenas de humanos."
+
+  - id: H6
+    nome: "Acessibilidade como baseline nao-negociavel mas com peso minimo"
+    padrao: "SE componente nao tem a11y -> ENTAO eh risco inaceitavel. MAS weight de a11y na decisao = apenas 0.10"
+    evidencia: "Accessibility compliance weight = 0.10, o menor peso. Ao mesmo tempo, 'Launching inaccessible components' esta em unacceptable_risks. Contradicao entre discurso ('non-negotiable') e peso real na tomada de decisao."
+    source: "[SOURCE: brad-frost-dna.yaml, decision_architecture.weights e risk_profile]"
+    deveria_formalizar: true
+    justificativa: "Se a11y eh realmente non-negotiable, deveria ser gate (pass/fail), nao fator ponderado com peso 0.10. O modelo atual permite que a11y seja superada pela soma dos outros fatores."
+
+heuristicas_ocultas_count: 6
+
+pontos_cegos:
+
+  - id: PC1
+    nome: "Deprecacao e sunset de componentes"
+    o_que_nao_discute: "Como remover componentes do DS. Todo o framework fala sobre ADICIONAR (governance pipeline, decision architecture) mas nenhum mecanismo para deprecar, versionar breaking changes, ou fazer sunset de componentes obsoletos."
+    evidencia_ausencia: "Nenhuma mention de deprecation, versioning strategy, breaking changes, ou migration paths em todo o DNA. Governance Pipeline tem apenas 'build into system, approve one-off, or find alternative'."
+    impacto: "CRITICO"
+    cenario_risco: "E se o DS acumula 500+ componentes em 3 anos, muitos obsoletos, e ninguem sabe quais remover sem quebrar consumers?"
+    pergunta: "Qual eh a estrategia de lifecycle management para componentes? Existe politica de sunset?"
+
+  - id: PC2
+    nome: "Metricas e medicao de sucesso"
+    o_que_nao_discute: "Como medir se o DS esta funcionando. Nenhum KPI, metric framework, ou criterio quantitativo. Diagnostico eh puramente qualitativo (red flags / green flags baseados em observacao)."
+    evidencia_ausencia: "diagnostic_framework usa apenas perguntas qualitativas. Nenhuma mention de adoption rate, coverage percentage, time-to-market impact, developer satisfaction scores, ou component usage analytics."
+    impacto: "CRITICO"
+    cenario_risco: "E se stakeholders pedem ROI do investimento em DS e nao ha dados? Como justificar budget continuado?"
+    pergunta: "Quais metricas Brad usaria para provar que o DS esta gerando valor? Como defender o investimento com dados?"
+
+  - id: PC3
+    nome: "Conflito de prioridades entre times"
+    o_que_nao_discute: "Como resolver quando dois product teams precisam de versoes diferentes do mesmo componente. Governance Pipeline tem 'reach out to DS team' mas nao aborda disputas de prioridade ou alocacao de recursos quando demanda excede capacidade."
+    evidencia_ausencia: "Nenhum framework de priorizacao entre requests concorrentes. 'Multiple teams use it' eh criterio de admissao mas nao mecanismo de arbitragem."
+    impacto: "ALTO"
+    cenario_risco: "E se Time A precisa de DatePicker com timezone support urgentemente e Time B precisa do mesmo DatePicker com range selection, e DS team so tem capacity para um?"
+    pergunta: "Como arbitrar demandas concorrentes ao DS quando recursos sao limitados?"
+
+  - id: PC4
+    nome: "Design tokens alem do visual"
+    o_que_nao_discute: "Design tokens para motion, spacing systems, responsive breakpoints, z-index strategy, ou timing. Door analogy limita tokens a 'paint and hardware' (cores, tipografia). Nao aborda a complexidade moderna de token architecture."
+    evidencia_ausencia: "Door analogy: 'Design tokens = paint colors and hardware choices'. Nenhuma discussao sobre tokens semanticos, tokens de decisao, multi-theme, multi-brand, dark mode, ou token federation entre plataformas."
+    impacto: "ALTO"
+    cenario_risco: "E se a org tem 3 brands, dark/light mode, e 4 plataformas? A analogia da porta nao escala para esse nivel de complexidade em tokens."
+    pergunta: "Como Brad abordaria token architecture para multi-brand, multi-platform, multi-theme?"
+
+  - id: PC5
+    nome: "Contribuicao externa ao DS"
+    o_que_nao_discute: "Como product teams CONTRIBUEM componentes de volta ao DS. Governance Pipeline eh unidirecional: DS team decide, product teams consomem. Nao ha inner-source model, contribution guidelines, ou processo de promocao de componente de produto para DS."
+    evidencia_ausencia: "Governance Pipeline: 'Default to DS -> if not found -> reach out to DS team -> DS team evaluates'. Fluxo eh sempre produto-para-DS como request, nunca como contribution."
+    impacto: "ALTO"
+    cenario_risco: "E se um product team cria um componente excelente que deveria ser promovido ao DS? Nao ha caminho formalizado para isso."
+    pergunta: "Como escalar o DS quando product teams sao os maiores criadores de componentes?"
+
+  - id: PC6
+    nome: "Performance e bundle size"
+    o_que_nao_discute: "Impacto de performance dos componentes do DS. Nenhuma consideracao sobre tree-shaking, bundle size, lazy loading, ou core web vitals. Component quality questions focam em responsibility, naming, composition, a11y - nunca performance."
+    evidencia_ausencia: "component_quality questions nao incluem performance. decision_architecture.weights nao tem fator de performance. Nenhuma mention de performance budget."
+    impacto: "ALTO"
+    cenario_risco: "E se adotar o DS inteiro adiciona 500KB ao bundle porque nao ha tree-shaking? Times vao abandonar por performance, nao por governance."
+    pergunta: "Performance deveria ser um criterio de qualidade de componente tao fundamental quanto a11y?"
+
+pontos_cegos_count: 6
+
+decisoes_implicitas:
+
+  - id: D1
+    nome: "Bottom-up como unica direcao de composicao"
+    escolhido_por_omissao: "Atomic Design eh inerentemente bottom-up: atoms -> molecules -> organisms -> templates -> pages. Nao ha framework top-down (partir da page e decompor) exceto 'pages' como stage de teste."
+    alternativas_nao_consideradas:
+      - "Top-down decomposition (user journey -> screens -> sections -> components)"
+      - "Middle-out (organisms como ponto de partida, expandir para cima e para baixo)"
+      - "Domain-driven (agrupar por dominio de negocio, nao por granularidade)"
+    evidencia: "Atomic Design steps vao de Atoms ate Pages sequencialmente. Embora diga 'not linear', a metafora quimica implica composicao ascendente."
+    source: "[SOURCE: Atomic Design, Ch. 2 - atomicdesign.bradfrost.com/chapter-2/]"
+    impacto: "ALTO"
+    pergunta: "Por que nao oferecer um framework complementar top-down para equipes que pensam em user journeys antes de componentes?"
+
+  - id: D2
+    nome: "Storybook como infraestrutura implicita"
+    escolhido_por_omissao: "DS+AI framework menciona 'Storybook' como exemplo de machine-readable infrastructure. Nenhuma alternativa mencionada (Figma, Zeroheight, Supernova, custom docs)."
+    alternativas_nao_consideradas:
+      - "Figma como source of truth com code generation"
+      - "Custom documentation sites"
+      - "Design API approach (headless DS)"
+    evidencia: "Medium priority includes 'Storybook or similar component explorer' mas DS+AI components list 'Machine-readable infrastructure (Storybook, tokens, docs)' com Storybook em primeiro."
+    source: "[SOURCE: brad-frost-dna.yaml, secondary_frameworks.DS+AI]"
+    impacto: "MEDIO"
+    pergunta: "O framework DS+AI funciona com qualquer tool ou eh implicitamente dependente de Storybook como runtime?"
+
+  - id: D3
+    nome: "Code-first sem design-first como alternativa"
+    escolhido_por_omissao: "Todo o framework assume que componentes existem em codigo. Door analogy separa structure (code) de style (tokens). DS+AI assume component library como source of truth em code. Nenhuma consideracao para design-first workflows onde Figma eh source of truth."
+    alternativas_nao_consideradas:
+      - "Design-first: Figma components como source of truth, code gerado"
+      - "Dual source of truth: Figma + Code sincronizados"
+      - "Spec-first: especificacao abstrata que gera design E code"
+    evidencia: "'Robust design system component library (source of truth)' em DS+AI. Handoff triggers defers to 'Frontend infrastructure specialist' para build systems, nao a design tools."
+    source: "[SOURCE: brad-frost-dna.yaml, secondary_frameworks.DS+AI e handoff_triggers]"
+    impacto: "ALTO"
+    pergunta: "Em equipes design-heavy onde Figma eh a verdade, como o modelo de Brad se adapta? Ou ele assume que code sempre lidera?"
+
+  - id: D4
+    nome: "Monorepo implicito para DS"
+    escolhido_por_omissao: "A nocao de 'one DS team', 'one governance pipeline', 'one source of truth' implica modelo centralizado. Nenhuma discussao sobre DS federados, DS distribuidos, ou micro-frontends com DS fragmentados."
+    alternativas_nao_consideradas:
+      - "Federated DS (cada squad contribui e mantem seus componentes)"
+      - "DS distribuido (core tokens + domain-specific libraries)"
+      - "Multi-DS (DS por produto com shared foundation)"
+    evidencia: "Governance Pipeline assume um unico DS team que avalia todas as requests. Decision pipeline assume um unico ponto de decisao. Nenhuma mention de federation."
+    source: "[SOURCE: bradfrost.com 'A Design System Governance Process' 2023-05-05]"
+    impacto: "CRITICO"
+    pergunta: "Como o modelo funciona quando a org tem 50+ squads e um unico DS team se torna bottleneck? Federation eh necessaria?"
+
+  - id: D5
+    nome: "React/component-framework como runtime implicito"
+    escolhido_por_omissao: "Single responsibility, composition, props-based thinking - todo o modelo mental mapeia para component frameworks como React/Vue/Angular. Nenhuma consideracao para server-rendered (HTMX), web components nativos, ou CSS-only DS."
+    alternativas_nao_consideradas:
+      - "Web Components como formato agnostico de framework"
+      - "CSS-only design systems (utility-first como Tailwind)"
+      - "Server-side component models (Hotwire, HTMX)"
+    evidencia: "Component composition patterns, single responsibility para UI, molecules como 'form label + input + button' - tudo mapeia para JSX/template mental model."
+    source: "[SOURCE: Atomic Design, Ch. 2 - atomicdesign.bradfrost.com/chapter-2/]"
+    impacto: "ALTO"
+    pergunta: "Atomic Design funciona para equipes que usam Tailwind + HTMX sem component framework? Ou eh implicitamente React-centric?"
+
+decisoes_implicitas_count: 5
+
+sintese:
+  top_5_criticos:
+    - tipo: "PC"
+      item: "PC1 - Deprecacao e sunset de componentes"
+      impacto: "CRITICO"
+      pergunta: "Sem lifecycle management, como evitar que o DS se torne um cemiterio de componentes obsoletos?"
+
+    - tipo: "PC"
+      item: "PC2 - Metricas e medicao de sucesso"
+      impacto: "CRITICO"
+      pergunta: "Como defender investimento em DS sem dados quantitativos de impacto?"
+
+    - tipo: "D"
+      item: "D4 - Monorepo implicito / centralizacao"
+      impacto: "CRITICO"
+      pergunta: "O modelo de governance centralizado escala para organizacoes com 50+ squads?"
+
+    - tipo: "P"
+      item: "P1 - Organizacao madura como pre-requisito"
+      impacto: "CRITICO"
+      pergunta: "O framework colapsa para orgs sem DS team dedicado?"
+
+    - tipo: "H"
+      item: "H6 - A11y non-negotiable mas peso 0.10"
+      impacto: "CRITICO"
+      pergunta: "Se acessibilidade eh inegociavel, por que eh o fator de menor peso no decision model?"
+
+  padroes_meta:
+    - "Brad opera com vies de consultor enterprise: assume organizacoes grandes, maduras, com times dedicados. Seu framework eh menos aplicavel a startups, equipes pequenas, ou contextos nao-web."
+    - "Existe uma tensao nao-resolvida entre flexibilidade retorica ('adapt to your context') e rigidez estrutural (single responsibility como veto automatico, naming estrutural como regra). O discurso eh mais flexivel que as heuristicas."
+    - "O modelo eh overwhelmingly ADITIVO - fala muito sobre criar, adicionar, compor - e quase nada sobre remover, deprecar, simplificar. Isso sugere um ponto cego sobre sustentabilidade de longo prazo."
+    - "AI eh tratada como tool de montagem, nunca como co-designer. Isso pode limitar a evolucao do framework conforme AI generativa amadurece."
+    - "A separacao structure/style (door analogy) eh elegante mas insuficiente para a complexidade moderna de multi-brand, multi-theme, multi-platform token architecture."
+
+  proximos_passos:
+    - "Confrontar Brad com cenarios de orgs pequenas sem DS team - como adaptar governance?"
+    - "Desenvolver framework de metricas que Brad nao fornece - adoption rate, coverage, time savings"
+    - "Criar modelo de lifecycle management (deprecation policy, migration paths, sunset criteria)"
+    - "Explorar modelo de DS federado como extensao da governance pipeline"
+    - "Resolver contradicao a11y: transformar de fator ponderado em quality gate binario"
+    - "Testar Atomic Design em contextos nao-web (mobile native, voice, spatial) para validar universalidade"

@@ -1,0 +1,1150 @@
+# Email Campaign Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Money Models Blueprint: Email/SMS Copy and Mailers - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: email-campaign
+  purpose: "Execute complete email and SMS campaign sequences for product launches, event registrations, and buyer nurturing"
+  domain: marketing-automation
+  source_playbook: "$100M Money Models Blueprint: Email/SMS Copy"
+
+  core_equation: |
+    Campaign ROI = (Registrations × VIP Rate × Show Rate × Purchase Rate) × LTV
+    Target: 20-40% conversion from registration to purchase
+    Impact: Properly executed sequences drive multi-million dollar launches
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: campaign-coordinator
+      role: "Orchestrate email/SMS sequences across all campaign phases"
+      decisions:
+        - "Campaign phase transitions"
+        - "Sequence timing adjustments"
+        - "Emergency send holds"
+        - "A/B test routing"
+      kpis:
+        - "Overall campaign conversion rate"
+        - "Sequence completion rate"
+        - "Revenue per email sent"
+
+  tier_0_diagnosis:
+    - agent: list-segmenter
+      role: "Segment lists based on behavior and purchase status"
+      inputs:
+        - "Registration data"
+        - "Purchase history"
+        - "Cart abandonment status"
+        - "Affiliate status"
+      outputs:
+        - "Segment assignment"
+        - "Exclusion lists"
+        - "Merge variable population"
+
+    - agent: deliverability-monitor
+      role: "Monitor and protect email deliverability"
+      inputs:
+        - "Bounce rates"
+        - "Spam complaints"
+        - "Open rate trends"
+        - "Blacklist checks"
+      outputs:
+        - "Deliverability health score"
+        - "Send throttle recommendations"
+        - "List hygiene alerts"
+
+  tier_1_execution:
+    - agent: sequence-writer
+      role: "Write email/SMS copy following proven templates"
+      specialization: "Phase-specific copywriting"
+      templates:
+        registration: ["confirmation", "vip_upsell", "affiliate_invite"]
+        pre_launch: ["announcement", "invitation", "value_reveal", "countdown"]
+        abandoned_cart: ["immediate", "comparison", "deadline"]
+        event_reminder: ["48h", "24h", "1h"]
+        post_event: ["confirmation", "redemption", "upsell"]
+        affiliate: ["recruitment", "welcome", "leaderboard"]
+
+    - agent: automation-builder
+      role: "Build and configure email automation workflows"
+      specialization: "HubSpot/Marketing Automation"
+      capabilities:
+        - "Trigger configuration"
+        - "Delay sequencing"
+        - "Conditional branching"
+        - "Smart link generation"
+        - "A/B test setup"
+
+    - agent: sms-specialist
+      role: "Execute SMS campaigns with compliance"
+      specialization: "SMS marketing"
+      capabilities:
+        - "Opt-out handling"
+        - "Character limit optimization"
+        - "Timing optimization"
+        - "Compliance monitoring"
+
+  tier_2_judgment:
+    - agent: conversion-optimizer
+      role: "Optimize sequences based on performance data"
+      inputs:
+        - "Open rates by subject line"
+        - "Click rates by CTA"
+        - "Conversion by sequence"
+        - "Revenue attribution"
+      outputs:
+        - "Subject line recommendations"
+        - "CTA optimization"
+        - "Timing adjustments"
+        - "Sequence modifications"
+
+    - agent: urgency-calibrator
+      role: "Calibrate urgency and scarcity messaging"
+      inputs:
+        - "Days to deadline"
+        - "Inventory levels"
+        - "Conversion velocity"
+      outputs:
+        - "Urgency level (1-5)"
+        - "Scarcity messaging"
+        - "Deadline specificity"
+
+    - agent: personalization-engine
+      role: "Enhance personalization across sequences"
+      responsibilities:
+        - "Merge variable selection"
+        - "Segment-specific variations"
+        - "Behavioral triggers"
+        - "Dynamic content blocks"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  campaign-coordinator:
+    id: campaign-coordinator
+    title: "Email Campaign Orchestrator"
+    tier: orchestrator
+    icon: "📧"
+
+    purpose: |
+      Coordinate all email/SMS campaign sequences to maximize conversions
+      across the full customer journey from registration to purchase.
+
+    core_frameworks:
+      - name: "Campaign Phases"
+        components: ["Registration", "Pre-Launch", "Launch", "Post-Launch"]
+      - name: "AIDA-U Pattern"
+        components: ["Attention", "Interest", "Desire", "Action", "Urgency"]
+      - name: "Sequence Architecture"
+        principle: "Right message, right time, right segment"
+
+    decision_authority:
+      - "Phase transition timing"
+      - "Emergency send holds"
+      - "A/B test decisions"
+      - "Sequence pause/resume"
+
+    inputs:
+      - "Campaign calendar"
+      - "Conversion metrics"
+      - "List health data"
+      - "Event timeline"
+
+    outputs:
+      - "Send schedules"
+      - "Phase status reports"
+      - "Performance dashboards"
+      - "Optimization recommendations"
+
+    success_metrics:
+      primary:
+        - name: "Registration to Purchase Rate"
+          target: ">20%"
+        - name: "VIP Upgrade Rate"
+          target: ">15%"
+      secondary:
+        - "Open Rate >30%"
+        - "Click Rate >5%"
+        - "Cart Recovery >20%"
+
+  list-segmenter:
+    id: list-segmenter
+    title: "List Segmentation Specialist"
+    tier: tier_0
+    icon: "📋"
+
+    purpose: |
+      Ensure every email reaches the right audience by maintaining
+      accurate segmentation based on behavior and purchase status.
+
+    segmentation_rules:
+      registration_status:
+        registered_not_purchased:
+          criteria: "opted_in = true AND purchased = false AND abandoned = false"
+          receives: ["vip_upsell", "pre_launch", "event_reminder"]
+
+        registered_purchased:
+          criteria: "opted_in = true AND purchased = true"
+          receives: ["buyer_sequence", "event_reminder", "post_event"]
+
+        cart_abandoner:
+          criteria: "cart_created = true AND purchased = false"
+          receives: ["cart_recovery"]
+          exclude_from: ["vip_upsell"]
+
+        affiliate:
+          criteria: "affiliate_registered = true"
+          receives: ["affiliate_sequence"]
+          note: "May also receive customer sequences"
+
+      purchase_tier:
+        vip_only: "$29.99 single book VIP"
+        vip_15: "$479.84 VIP + 15 books"
+        bundle_200: "$2,999 200-book bundle"
+        bundle_800: "$17,994 800-book advisory"
+
+    data_sources:
+      - "HubSpot contact properties"
+      - "Shopify purchase data"
+      - "Cart abandonment webhooks"
+      - "Affiliate registration system"
+
+    outputs:
+      - "Segment assignment"
+      - "Exclusion lists"
+      - "Merge variables populated"
+      - "Duplicate detection"
+
+  deliverability-monitor:
+    id: deliverability-monitor
+    title: "Email Deliverability Guardian"
+    tier: tier_0
+    icon: "🛡️"
+
+    purpose: |
+      Protect sender reputation and ensure emails reach inboxes,
+      not spam folders.
+
+    monitoring_metrics:
+      critical:
+        - metric: "Bounce Rate"
+          threshold: "<2%"
+          action: "List cleaning if exceeded"
+        - metric: "Spam Complaint Rate"
+          threshold: "<0.1%"
+          action: "Immediate send hold if exceeded"
+        - metric: "Unsubscribe Rate"
+          threshold: "<0.5%"
+          action: "Review content frequency"
+
+      warning:
+        - metric: "Open Rate Decline"
+          threshold: ">10% drop"
+          action: "Subject line review"
+        - metric: "Click Rate Decline"
+          threshold: ">15% drop"
+          action: "CTA/content review"
+
+    actions:
+      list_cleaning:
+        trigger: "High bounce rate"
+        process: ["Remove hard bounces", "Suppress soft bounces >3", "Re-engagement campaign"]
+
+      warm_up:
+        trigger: "New IP/domain"
+        process: ["Gradual volume increase", "Best engagers first", "Monitor closely"]
+
+    outputs:
+      - "Daily health score"
+      - "Send throttle recommendations"
+      - "Blacklist alerts"
+      - "List hygiene reports"
+
+  sequence-writer:
+    id: sequence-writer
+    title: "Email Sequence Copywriter"
+    tier: tier_1
+    icon: "✍️"
+
+    purpose: |
+      Write compelling email and SMS copy that follows proven Hormozi
+      templates while adapting to specific campaign needs.
+
+    writing_frameworks:
+      aida_u:
+        attention: "Subject line that demands open"
+        interest: "First line hooks with relevance"
+        desire: "Value stack and social proof"
+        action: "Single, clear CTA"
+        urgency: "Deadline or scarcity element"
+
+      hormozi_patterns:
+        personal_tone: "Write like Alex, not corporate"
+        value_first: "Lead with benefit, not feature"
+        proof_heavy: "Statistics and stories"
+        cta_everywhere: "Primary CTA + PS CTA"
+        mystery_tease: "Better than NFT, less than Bitcoin"
+
+    template_library:
+      registration:
+        - "b1: You're registered (confirmation)"
+        - "b2: in case you missed this (15min upsell)"
+        - "b3: Get your book first (24h upsell)"
+        - "b4: Win a day with me (48h affiliate)"
+        - "b5: Free Audiobook (72h affiliate follow)"
+
+      pre_launch:
+        - "1: I've got a new book (45d)"
+        - "2: [Your Invite Inside] (41d)"
+        - "3: What's a money model? (35d)"
+        - "4: [new pic] - shipment (28d)"
+        - "5: I'm giving something HUGE (19d)"
+        - "6: Bigger than... (14d)"
+        - "7: 5 Mystery headliners (11d)"
+        - "8: Money Models (sneak peek) (9d)"
+        - "9: Did you miss this? (7d)"
+
+      abandoned_cart:
+        - "Abandon 1: Pre-order checkout failed (20min)"
+        - "Abandon 2: checkout failed x 2 (24h)"
+        - "Abandon 3: Smart link expires tonight (48h)"
+
+      event_reminder:
+        - "48 Hours Until..."
+        - "Final Countdown..."
+        - "goes live in 1 hour!"
+
+      post_event:
+        - "$1: VIP Pre-Order Confirmation"
+        - "$2: Purchase Confirmation"
+        - "$3: Bundle Confirmation"
+        - "Redemption Code emails"
+
+      affiliate:
+        - "#1: Full List Blast"
+        - "#2: Follow-up"
+        - "#3: Previous affiliates"
+        - "#4: Last chance"
+        - "Welcome + goodie"
+        - "Leaderboard updates"
+
+    subject_line_patterns:
+      direct_benefit: "Get your book first + VIP Livestream"
+      curiosity_gap: "I'm giving something HUGE away...LIVE"
+      personal: "Because you referred friends last time..."
+      urgency: "[FINAL NOTICE] Cart closes at 11:59 pm"
+      status: "You're registered. (Save this email)"
+      pattern_interrupt: "Did you miss this?"
+
+  automation-builder:
+    id: automation-builder
+    title: "Marketing Automation Engineer"
+    tier: tier_1
+    icon: "⚙️"
+
+    purpose: |
+      Build and configure email automation workflows that deliver
+      the right message at the right time to the right segment.
+
+    workflow_types:
+      trigger_based:
+        - trigger: "Form submission"
+          action: "Registration confirmation"
+          delay: "Immediate"
+
+        - trigger: "No purchase + 15 min"
+          action: "VIP upsell"
+          condition: "purchased = false"
+
+        - trigger: "Cart abandonment"
+          action: "Recovery sequence"
+          delays: ["20min", "24h", "48h"]
+
+      time_based:
+        - trigger: "Days before event"
+          sequence: ["45d", "41d", "35d", "28d", "19d", "14d", "11d", "9d", "7d"]
+
+        - trigger: "Hours before event"
+          sequence: ["48h", "24h", "1h"]
+
+      behavior_based:
+        - trigger: "Affiliate registration"
+          action: "Affiliate welcome sequence"
+          frequency: "Weekly updates"
+
+    configuration:
+      delays:
+        immediate: "0 minutes"
+        quick_follow: "15 minutes"
+        standard: "24 hours"
+        extended: "48-72 hours"
+
+      conditions:
+        - "purchased = true/false"
+        - "cart_abandoned = true/false"
+        - "affiliate = true/false"
+        - "segment = [segment_name]"
+
+      smart_links:
+        format: "{{smart_link}}"
+        includes: ["cart_contents", "user_data", "utm_parameters"]
+
+    outputs:
+      - "Configured workflows"
+      - "Test sends"
+      - "Automation logs"
+      - "Error alerts"
+
+  sms-specialist:
+    id: sms-specialist
+    title: "SMS Marketing Specialist"
+    tier: tier_1
+    icon: "📱"
+
+    purpose: |
+      Execute compliant SMS campaigns that complement email
+      with high-urgency, time-sensitive messages.
+
+    sms_guidelines:
+      compliance:
+        - "Include opt-out in first message"
+        - "Reply STOP to stop"
+        - "Respect quiet hours"
+        - "Verify consent"
+
+      character_limits:
+        standard: "160 characters"
+        with_link: "120 characters + URL"
+        extended: "320 characters (2 segments)"
+
+      timing:
+        best_times: "10am-8pm local time"
+        avoid: "Before 9am, after 9pm"
+        urgency_window: "24h before deadline"
+
+    template_library:
+      registration:
+        template: |
+          Hey {Name}, it's Alex Hormozi - you'll get 6 more launch texts:
+          3 reminders + 3 goodies. Check email for details. Reply "Stop" to stop.
+        characters: 147
+
+      announcement:
+        template: |
+          {Name}, it's Hormozi. Big news. New book(!): 100M Money Models.
+          Live launch: Aug 16. Register for free -> signup.acq.com
+          Reply Stop to Stop.
+        characters: 149
+
+      affiliate:
+        template: |
+          Alex Hormozi here. You referred friends last book launch.
+          This year, the prizes are even juicier. See prizes here:
+          refers.acq.com
+        characters: 142
+
+      cart_close:
+        template: |
+          Final hours. After 11:59pm PST tonight. Grab your 90 days
+          free on Skool + Lifetime $9/mo: {insert link}
+        characters: 105
+
+    outputs:
+      - "SMS copy within limits"
+      - "Compliance verification"
+      - "Delivery reports"
+      - "Opt-out processing"
+
+  conversion-optimizer:
+    id: conversion-optimizer
+    title: "Email Conversion Optimizer"
+    tier: tier_2
+    icon: "📈"
+
+    purpose: |
+      Analyze campaign performance and optimize sequences
+      for maximum conversion at every stage.
+
+    optimization_areas:
+      subject_lines:
+        metrics: ["open_rate", "unique_opens"]
+        tests: ["curiosity_vs_benefit", "personalized_vs_generic", "length"]
+        target: ">30% open rate"
+
+      cta_optimization:
+        metrics: ["click_rate", "conversion_rate"]
+        tests: ["button_vs_text", "single_vs_multiple", "placement"]
+        target: ">5% click rate"
+
+      timing_optimization:
+        metrics: ["engagement_by_hour", "conversion_by_delay"]
+        tests: ["send_time", "sequence_spacing"]
+
+      segment_optimization:
+        metrics: ["conversion_by_segment"]
+        tests: ["messaging_variations", "offer_variations"]
+
+    analysis_framework:
+      step_1: "Identify lowest converting step"
+      step_2: "Hypothesize cause"
+      step_3: "Design A/B test"
+      step_4: "Implement winner"
+      step_5: "Document learning"
+
+    outputs:
+      - "Performance reports"
+      - "A/B test recommendations"
+      - "Winning variations"
+      - "Optimization playbook"
+
+  urgency-calibrator:
+    id: urgency-calibrator
+    title: "Urgency & Scarcity Calibrator"
+    tier: tier_2
+    icon: "⏰"
+
+    purpose: |
+      Calibrate urgency and scarcity messaging to maximize
+      action without eroding trust.
+
+    urgency_levels:
+      level_1_awareness:
+        days_out: ">14 days"
+        tone: "Exciting news, save the date"
+        scarcity: "None"
+
+      level_2_anticipation:
+        days_out: "7-14 days"
+        tone: "Getting real, don't miss"
+        scarcity: "Limited VIP slots"
+
+      level_3_countdown:
+        days_out: "3-7 days"
+        tone: "Final week, act now"
+        scarcity: "Spots filling"
+
+      level_4_urgency:
+        days_out: "1-3 days"
+        tone: "Last chance"
+        scarcity: "Almost full"
+
+      level_5_deadline:
+        days_out: "<24 hours"
+        tone: "Hours left, now or never"
+        scarcity: "Closes at [specific time]"
+
+    scarcity_types:
+      time_based: "Offer ends [date/time]"
+      quantity_based: "Only [X] spots left"
+      bonus_based: "VIP bonuses disappear"
+      access_based: "Registration closes"
+
+    calibration_rules:
+      - "Never fake scarcity"
+      - "Specific deadlines > vague urgency"
+      - "Countdown to actual events"
+      - "Match urgency to actual constraints"
+
+    outputs:
+      - "Urgency level assignment"
+      - "Scarcity messaging"
+      - "Deadline copy"
+      - "Countdown timers"
+
+  personalization-engine:
+    id: personalization-engine
+    title: "Email Personalization Engine"
+    tier: tier_2
+    icon: "🎯"
+
+    purpose: |
+      Enhance email relevance through smart personalization
+      beyond basic merge fields.
+
+    personalization_levels:
+      basic:
+        fields: ["{FNAME}", "{Name}", "{{first_name}}"]
+        usage: "Greeting, sign-off"
+
+      behavioral:
+        fields: ["{{smart_link}}", "{{purchase_history}}", "{{last_action}}"]
+        usage: "Dynamic CTAs, relevant offers"
+
+      segment_based:
+        fields: ["{{segment_content}}", "{{segment_offer}}"]
+        usage: "Different value props by segment"
+
+      advanced:
+        fields: ["{{ai_recommendation}}", "{{predicted_interest}}"]
+        usage: "Hyper-relevant content"
+
+    dynamic_content:
+      by_purchase_tier:
+        non_purchaser: "Pre-order now"
+        vip: "Your VIP access"
+        bundle_200: "Your 200-book order"
+        bundle_800: "Your Scale Advisory access"
+
+      by_engagement:
+        high_engager: "As one of our most engaged..."
+        new_subscriber: "Welcome to the..."
+        dormant: "We miss you..."
+
+    outputs:
+      - "Merge variable mapping"
+      - "Dynamic content blocks"
+      - "Segment-specific variations"
+      - "Personalization audit"
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Registration Phase
+  - task: "Send registration confirmation"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Trigger immediately on form submit"
+
+  - task: "Send VIP upsell (15min)"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Exclude purchasers and cart abandoners"
+
+  - task: "Send affiliate invitation (48h)"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Exclude previous affiliates"
+
+  # Pre-Launch Phase
+  - task: "Send pre-launch sequence emails"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Follow campaign calendar"
+
+  - task: "Write announcement email copy"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Use proven templates, customize for offer"
+
+  - task: "Configure countdown automations"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Test triggers before launch"
+
+  # Abandoned Cart
+  - task: "Trigger cart abandonment email 1"
+    executor: Worker
+    automation: HIGH
+    guardrails: "20 min delay from abandon"
+
+  - task: "Send comparison email (24h)"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Include smart link"
+
+  - task: "Send deadline email (48h)"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Specific time deadline"
+
+  # Event Reminders
+  - task: "Send 48h reminder"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Include all event details"
+
+  - task: "Send 24h reminder"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Personal touch"
+
+  - task: "Send 1h reminder"
+    executor: Worker
+    automation: HIGH
+    guardrails: "High energy, short"
+
+  # Post-Event
+  - task: "Send purchase confirmation"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Segment by purchase tier"
+
+  - task: "Send redemption codes"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Unique codes per buyer"
+
+  - task: "Send bonus access links"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Verify links before send"
+
+  # Affiliate
+  - task: "Send affiliate welcome sequence"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Include blackbook link"
+
+  - task: "Generate leaderboard email"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Manual data, automated send"
+
+  - task: "Send affiliate reward notifications"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Verify winner eligibility"
+
+  # SMS
+  - task: "Send SMS notifications"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Compliance check, opt-out included"
+
+  # Optimization
+  - task: "Analyze campaign performance"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Weekly review minimum"
+
+  - task: "Run A/B tests"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Statistical significance required"
+
+  - task: "Optimize subject lines"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Test against baseline"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "List Segmentation Gate"
+    transition: "Campaign Build -> Send"
+    condition: "segments_verified = true AND exclusions_applied = true"
+    type: blocking
+    failure_action: "Review segmentation rules"
+
+  QG-002:
+    name: "Subject Line Gate"
+    transition: "Copy -> Automation"
+    condition: "subject_length < 60 AND preview_text_set = true"
+    type: warning
+    failure_action: "Shorten subject, add preview"
+
+  QG-003:
+    name: "Deliverability Gate"
+    transition: "Test -> Send"
+    condition: "spam_score < 5 AND links_validated = true"
+    type: blocking
+    failure_action: "Fix spam triggers, validate links"
+
+  QG-004:
+    name: "Personalization Gate"
+    transition: "Template -> Send"
+    condition: "merge_fields_populated = true AND fallbacks_set = true"
+    type: warning
+    failure_action: "Add fallback values"
+
+  QG-005:
+    name: "Compliance Gate"
+    transition: "SMS Build -> Send"
+    condition: "opt_out_included = true AND consent_verified = true"
+    type: blocking
+    failure_action: "Add opt-out, verify consent"
+
+  QG-006:
+    name: "Timing Gate"
+    transition: "Scheduled -> Send"
+    condition: "send_time_optimal = true AND no_conflicts = true"
+    type: warning
+    failure_action: "Adjust timing"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  registration_workflow:
+    trigger: "New registration form submission"
+    steps:
+      - step: 1
+        agent: list-segmenter
+        action: "Assign to registration segment"
+        output: "Contact segmented"
+
+      - step: 2
+        agent: automation-builder
+        action: "Trigger confirmation email"
+        timing: "Immediate"
+
+      - step: 3
+        agent: sms-specialist
+        action: "Send welcome SMS"
+        timing: "Immediate"
+        condition: "phone_number_present"
+
+      - step: 4
+        agent: automation-builder
+        action: "Queue VIP upsell"
+        timing: "15 minutes"
+        condition: "purchased = false"
+
+      - step: 5
+        agent: automation-builder
+        action: "Queue affiliate invite"
+        timing: "48 hours"
+        condition: "not_previous_affiliate"
+
+  abandoned_cart_workflow:
+    trigger: "Cart abandoned"
+    steps:
+      - step: 1
+        agent: list-segmenter
+        action: "Flag as cart abandoner"
+        output: "Abandon status set"
+
+      - step: 2
+        agent: automation-builder
+        action: "Trigger recovery email 1"
+        timing: "20 minutes"
+
+      - step: 3
+        agent: automation-builder
+        action: "Trigger recovery email 2"
+        timing: "24 hours"
+        condition: "still_abandoned"
+
+      - step: 4
+        agent: automation-builder
+        action: "Trigger recovery email 3"
+        timing: "48 hours"
+        condition: "still_abandoned"
+
+  pre_launch_workflow:
+    trigger: "Campaign start date"
+    steps:
+      - step: 1
+        agent: sequence-writer
+        action: "Prepare announcement email"
+        timing: "D-45"
+
+      - step: 2
+        agent: automation-builder
+        action: "Schedule full sequence"
+        timing: "D-45 through D-1"
+
+      - step: 3
+        agent: conversion-optimizer
+        action: "Monitor and optimize"
+        timing: "Ongoing"
+
+      - step: 4
+        agent: urgency-calibrator
+        action: "Escalate urgency"
+        timing: "D-14, D-7, D-3, D-1"
+
+  event_reminder_workflow:
+    trigger: "48 hours before event"
+    steps:
+      - step: 1
+        agent: automation-builder
+        action: "Send 48h reminder"
+        timing: "48 hours before"
+
+      - step: 2
+        agent: automation-builder
+        action: "Send 24h reminder"
+        timing: "24 hours before"
+
+      - step: 3
+        agent: automation-builder
+        action: "Send 1h reminder"
+        timing: "1 hour before"
+
+      - step: 4
+        agent: sms-specialist
+        action: "Send SMS reminders"
+        timing: "Parallel to emails"
+
+  post_event_workflow:
+    trigger: "Event completed"
+    steps:
+      - step: 1
+        agent: list-segmenter
+        action: "Segment by purchase tier"
+        output: "Tier-specific lists"
+
+      - step: 2
+        agent: automation-builder
+        action: "Send tier-appropriate confirmations"
+        timing: "Immediate"
+
+      - step: 3
+        agent: automation-builder
+        action: "Send redemption codes"
+        timing: "Immediate for bundles"
+
+      - step: 4
+        agent: automation-builder
+        action: "Queue upsell sequence"
+        timing: "24-72 hours"
+
+  affiliate_workflow:
+    trigger: "Affiliate registration"
+    steps:
+      - step: 1
+        agent: list-segmenter
+        action: "Add to affiliate segment"
+        output: "Affiliate status set"
+
+      - step: 2
+        agent: automation-builder
+        action: "Send welcome + blackbook"
+        timing: "Immediate"
+
+      - step: 3
+        agent: automation-builder
+        action: "Queue weekly updates"
+        timing: "Weekly"
+
+      - step: 4
+        agent: conversion-optimizer
+        action: "Generate leaderboard"
+        timing: "Weekly"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    registration_to_purchase:
+      formula: "Purchasers / Registrants"
+      target: ">20%"
+      impact: "Core conversion metric"
+
+    vip_upgrade_rate:
+      formula: "VIP Purchases / Registrations"
+      target: ">15%"
+      impact: "Premium tier conversion"
+
+    campaign_roi:
+      formula: "Revenue / Campaign Cost"
+      target: ">10x"
+      impact: "Overall profitability"
+
+  secondary:
+    open_rate:
+      formula: "Unique Opens / Delivered"
+      target: ">30%"
+      benchmark:
+        minimum: "20%"
+        good: "30%"
+        excellent: "45%"
+
+    click_rate:
+      formula: "Unique Clicks / Delivered"
+      target: ">5%"
+      benchmark:
+        minimum: "2%"
+        good: "5%"
+        excellent: "10%"
+
+    cart_recovery:
+      formula: "Recovered / Abandoned"
+      target: ">20%"
+      benchmark:
+        minimum: "10%"
+        good: "20%"
+        excellent: "30%"
+
+    event_show_rate:
+      formula: "Attendees / Registrants"
+      target: ">40%"
+
+  by_sequence:
+    registration:
+      - "Confirmation open rate >70%"
+      - "VIP upsell conversion >10%"
+      - "Affiliate signup >5%"
+
+    pre_launch:
+      - "Average open rate >30%"
+      - "Progressive engagement"
+      - "Registration growth"
+
+    abandoned_cart:
+      - "Email 1 recovery >10%"
+      - "Email 2 recovery >5%"
+      - "Email 3 recovery >3%"
+
+    event_reminder:
+      - "48h open rate >60%"
+      - "Show rate improvement >10%"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Low open rates (<20%)"
+    possible_causes:
+      - "Weak subject lines"
+      - "Poor sender reputation"
+      - "Wrong send time"
+      - "List fatigue"
+    diagnosis:
+      - "A/B test subject lines"
+      - "Check spam score"
+      - "Analyze best send times"
+      - "Review send frequency"
+    solutions:
+      - "Implement winning subject patterns"
+      - "Warm up IP/domain"
+      - "Optimize send timing"
+      - "Reduce frequency, improve content"
+
+  - symptom: "Low click rates (<2%)"
+    possible_causes:
+      - "Unclear CTAs"
+      - "Misaligned content/audience"
+      - "Too many CTAs"
+      - "Broken links"
+    diagnosis:
+      - "Review CTA placement"
+      - "Check segmentation"
+      - "Audit link functionality"
+    solutions:
+      - "Single, clear CTA"
+      - "Improve segmentation"
+      - "Validate all links"
+
+  - symptom: "High unsubscribe rate (>0.5%)"
+    possible_causes:
+      - "Over-mailing"
+      - "Irrelevant content"
+      - "Wrong expectations"
+    diagnosis:
+      - "Review send frequency"
+      - "Analyze unsub by email type"
+      - "Check opt-in messaging"
+    solutions:
+      - "Reduce frequency"
+      - "Improve relevance"
+      - "Set clear expectations"
+
+  - symptom: "Cart recovery not working"
+    possible_causes:
+      - "Timing off"
+      - "Weak urgency"
+      - "Smart links broken"
+    diagnosis:
+      - "Test timing variations"
+      - "Check link functionality"
+      - "Review copy"
+    solutions:
+      - "Optimize timing (20min/24h/48h)"
+      - "Strengthen urgency/scarcity"
+      - "Validate smart links"
+
+# ===============================================================================
+# TECHNOLOGY REQUIREMENTS
+# ===============================================================================
+
+technology:
+  required:
+    - tool: "HubSpot Marketing Hub"
+      purpose: "Email automation and CRM"
+      features:
+        - "Workflow automation"
+        - "List segmentation"
+        - "A/B testing"
+        - "Smart content"
+
+    - tool: "Shopify + Cart Abandonment"
+      purpose: "E-commerce and abandonment tracking"
+      features:
+        - "Purchase tracking"
+        - "Cart webhooks"
+        - "Smart link generation"
+
+    - tool: "SMS Platform (Twilio/SMSBump)"
+      purpose: "SMS marketing"
+      features:
+        - "Opt-out management"
+        - "Delivery tracking"
+        - "Compliance tools"
+
+    - tool: "Calendar Integration"
+      purpose: "Add-to-calendar functionality"
+      features:
+        - "Google Calendar"
+        - "Apple Calendar"
+        - "Outlook"
+
+  recommended:
+    - tool: "Litmus/Email on Acid"
+      purpose: "Email preview testing"
+
+    - tool: "SpamAssassin"
+      purpose: "Spam score checking"
+
+    - tool: "Google Analytics"
+      purpose: "Conversion tracking"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Specific A/B test results from campaign"
+    severity: Medium
+    note: "Templates provided, test data not included"
+
+  - id: GAP-002
+    description: "International SMS compliance by country"
+    severity: High
+    clarification_needed: "GDPR, TCPA, CASL requirements"
+
+  - id: GAP-003
+    description: "Exact HubSpot workflow configurations"
+    severity: Low
+    note: "Logic provided, implementation varies by setup"
+
+  - id: GAP-004
+    description: "Smart link technical implementation"
+    severity: Medium
+    clarification_needed: "Shopify app configuration"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 5
+  executor_matrix_complete: true
+  quality_gates_defined: 6
+  workflows_documented: 6
+  templates_included: 50+
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

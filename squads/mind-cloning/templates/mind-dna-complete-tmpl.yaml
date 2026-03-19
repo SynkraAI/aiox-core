@@ -1,0 +1,145 @@
+# Template: Complete Mind DNA
+# Usage: Output of synthesize-mind task
+# Combined Voice DNA + Thinking DNA + Synthesis
+
+mind_dna:
+  metadata:
+    expert_name: "{expert_name}"
+    mind_slug: "{mind_slug}"
+    domain: "{domain}"
+    extraction_date: "{date}"
+    fidelity_level: "Basic|Intermediate|Premium|Elite"
+    fidelity_percentage: "0%"
+    voice_score: "0/10"
+    thinking_score: "0/9"
+    total_sources: 0
+    version: "1.0.0"
+    dna_mental_coverage:
+      layer_1_behavioral_patterns: false    # → voice_dna.writing_style + tone.by_context
+      layer_2_communication_style: false     # → voice_dna.vocabulary + storytelling + tone
+      layer_3_routines_habits: false         # → thinking_dna.recognition_patterns
+      layer_4_recognition_patterns: false    # → thinking_dna.recognition_patterns.instant_detection
+      layer_5_mental_models: false           # → thinking_dna.frameworks + heuristics
+      layer_6_values_hierarchy: false        # → voice_dna.immune_system + anti_patterns
+      layer_7_core_obsessions: false         # → thinking_dna.anti_patterns + attention_triggers
+      layer_8_productive_paradoxes: false    # → synthesis.voice_thinking_tensions
+      layers_covered: "0/8"
+
+  identity_statement: "{expert_name} writes/speaks like ________________"
+
+  voice:
+    vocabulary:
+      power_words: []
+      signature_phrases: []
+      metaphors: []
+      rules:
+        always_use: []
+        never_use: []
+        transforms: []
+
+    storytelling:
+      recurring_stories: []
+      story_structure:
+        opening: ""
+        build_up: ""
+        payoff: ""
+        callback: ""
+
+    writing_style:
+      structure: {}
+      rhetorical_devices: {}
+      formatting: {}
+
+    tone:
+      dimensions: {}
+      by_context: {}
+
+    anti_patterns:
+      never_say: []
+      never_do: []
+
+    immune_system:
+      automatic_rejections: []
+      emotional_boundaries: []
+      fierce_defenses: []
+
+    contradictions:
+      paradoxes: []
+      preservation_note: "Contradictions are features, not bugs."
+
+  thinking:
+    recognition_patterns:
+      instant_detection: []
+      blind_spots: []
+      attention_triggers: []
+
+    frameworks:
+      primary: {}
+      secondary: []
+      diagnostic: {}
+
+    heuristics:
+      decision: []
+      veto: []
+      prioritization: []
+
+    decision_architecture:
+      pipeline: []
+      weights: []
+      risk_profile: {}
+
+    anti_patterns:
+      never_do: []
+      common_mistakes: []
+
+    objection_handling:
+      common_objections: []
+      pushback_triggers: []
+      argumentation_style: {}
+
+    handoff_triggers:
+      limits: []
+      self_awareness: {}
+
+  stages:
+    has_stages: false
+    rationale: ""  # Why stages are/aren't needed
+    architecture: []
+    # If has_stages: true, architecture contains:
+    # - id: "{stage_id}"
+    #   name: "{stage_name}"
+    #   trigger: "{activation_condition}"
+    #   behavior: "{behavior_description}"
+    #   voice_overrides: {}
+    #   transitions:
+    #     - to: "{next_stage_id}"
+    #       when: "{condition}"
+
+  synthesis:
+    voice_thinking_alignment:
+      - observation: ""
+        voice_element: ""
+        thinking_element: ""
+
+    voice_thinking_tensions:
+      - tension: ""
+        voice_says: ""
+        thinking_does: ""
+        clone_instruction: "Preserve tension - do not resolve"
+
+    reinforcement_patterns:
+      - pattern: ""
+        voice_aspect: ""
+        thinking_aspect: ""
+
+    overall_coherence: "0/10"
+    diagnostic_notes: ""  # Notes from diagnostic framework if smoke-test failed
+
+  sources:
+    total: 0
+    tier_distribution:
+      tier_0: 0
+      tier_1: 0
+      tier_2: 0
+      tier_3: 0
+    key_sources: []

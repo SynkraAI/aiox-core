@@ -1,0 +1,545 @@
+# WF-6: Escala Amazon KDP
+# Duration: 3-4h
+# Best for: Publicar livros na Amazon como canal de aquisição perpétua + funil de backend
+# Key Agent: escalador
+
+workflow:
+  id: wf-escala-amazon
+  name: "Escala Amazon KDP"
+  duration: "3-4h"
+  trigger: "*escala-amazon"
+  description: |
+    Workflow para criar e escalar livros na Amazon KDP como canal de aquisição
+    e monetização do modelo do Natanael Oliveira.
+
+    CASE DE REFERÊNCIA — NÉSIO FERNANDES:
+    "Encontrei um nicho com poucos concorrentes e um bestseller com poucas vendas.
+    Entrei nesse nicho e meu livro ficou entre os mais vendidos."
+    Resultado: livros gerando leads 24h/dia sem custo de tráfego.
+
+    DIFERENÇA LIVRO vs EBOOK (NO-F045):
+    - Livro físico/Kindle: R$44,90 → comprador de livro tem perfil diferente
+    - Ebook direto: R$9,90-R$14,90 → público casual, menor comprometimento
+    - Livro = autoridade percebida muito maior
+    - Livro físico na estante = reminder permanente da marca
+
+    META DO MODELO (NO-F046):
+    1 livro por mês = 12 livros por ano = 12 canais de aquisição perpétua
+
+    NÚMEROS DO CASE:
+    1.790 livros vendidos = ~R$45.000 em receita de livros
+    + Backend: cada leitor pode se tornar aluno de curso/mentoria
+    "O livro não é o produto final — é a porta de entrada." (NO-F050)
+
+    VETO HARD (NO-F050): Livro sem modelo de negócio de backend = BLOCK.
+
+  best_for:
+    - "Expert que quer autoridade sem lançamentos"
+    - "Quem quer aquisição de leads a custo zero (Amazon traz tráfego)"
+    - "Negócio que quer presença permanente em nicho"
+    - "Quem quer construir marca pessoal escalável"
+    - "Adicionar canal perpétuo ao modelo 12/54/27"
+
+  decision_matrix_fit:
+    awareness: "unaware a problem-aware"
+    sophistication: "stage-1 a stage-2"
+    price_point: "livro R$44,90 → backend R$97-R$5.000"
+    traffic_temp: "cold (Amazon) + warm (leitores convertidos)"
+    primary_output: "plano-livro-amazon-{nicho}.md"
+
+  clone_combinations:
+    primary: "escalador"
+    secondary:
+      - "pesquisador-ia (pesquisa de nicho e categoria)"
+      - "copy-andromeda (copy da capa, sinopse e marketing)"
+      - "monetizador (estrutura do funil de backend)"
+      - "arquiteto-funil (funil pós-livro)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 1: PESQUISA DE CATEGORIA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-1
+    name: "Pesquisa de Categoria"
+    days: "1"
+    tier: 0
+    description: |
+      A pesquisa de categoria é o diferencial que separa quem vende de quem não vende.
+
+      ESTRATÉGIA DO NATANAEL (case Nésio):
+      Não entre em categorias saturadas. Encontre subcategorias onde:
+      - O bestseller tem poucas vendas (< 10k BSR na subcategoria)
+      - Poucos concorrentes com avaliações altas (< 50 reviews no top 5)
+      - Demanda comprovada (categoria existe e tem compradores reais)
+      - Seu expertise cobre o tema
+
+      CRITÉRIOS DE SELEÇÃO DE NICHO:
+      1. BSR (Best Seller Rank): menor número = mais vendas. Nicho ideal: BSR < 50.000
+      2. Concorrência: livros no top 10 com < 100 reviews = nicho acessível
+      3. Relevância: você tem autoridade real no tema (NO-H001: dados > achismo)
+      4. Potencial de backend: tema permite vender curso/mentoria depois
+
+      FERRAMENTAS DE PESQUISA:
+      - Amazon KDP Rocket ou Publisher Rocket
+      - Amazon próprio (pesquisa manual de categorias)
+      - Google Trends para validar demanda
+      - Pesquisador-IA para análise comparativa
+
+    tasks:
+      - task_id: pesquisa-categorias-amazon
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Pesquisar subcategorias da Amazon brasileira relevantes ao nicho:
+          - Mapear 10 subcategorias potenciais
+          - Para cada categoria: BSR do top 1, número de reviews do top 5
+          - Identificar as 3 categorias com menor resistência
+          - Verificar se há livros em português (concorrência reduzida)
+          - Validar demanda com Google Trends para os termos da categoria
+        output: "pesquisa-categorias-amazon-{nicho}.md"
+
+      - task_id: analise-concorrentes-amazon
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Para as 3 categorias selecionadas, analisar os top 5 concorrentes:
+          - Título e subtítulo (que ângulos estão usando?)
+          - Reviews: quantidade, nota, comentários de 1-2 estrelas (dores não atendidas)
+          - Preço (Kindle + físico)
+          - Sinopse: que promessa fazem?
+          - Capas: padrão visual, cores dominantes
+          - Gaps: o que nenhum livro faz ainda?
+        output: "analise-concorrentes-amazon-{nicho}.md"
+
+      - task_id: escolha-nicho-final
+        agent: escalador
+        required: true
+        description: |
+          Com base nas pesquisas, selecionar O nicho e categoria:
+          - Justificar com dados (BSR, reviews, gaps)
+          - Definir título provisório do livro
+          - Definir ângulo de diferenciação (o que seu livro fará que os outros não fazem)
+          - Confirmar potencial de backend (curso, mentoria, evento relacionado)
+        output: "escolha-nicho-livro-{nicho}.md"
+
+    elicitation:
+      required: true
+      questions:
+        - id: nicho_expertise
+          question: "Em qual área você tem expertise real para escrever um livro?"
+          type: text
+          required: true
+
+        - id: publico_alvo
+          question: "Para quem é o livro? (descreva o leitor ideal)"
+          type: text
+          required: true
+
+        - id: resultado_prometido
+          question: "Qual resultado o leitor vai obter ao ler seu livro?"
+          type: text
+          required: true
+
+        - id: backend_existente
+          question: "Qual produto/serviço de backend você venderá para os leitores?"
+          type: text
+          required: true
+
+        - id: formato_preferido
+          question: "Formato preferido: Kindle + físico / apenas Kindle / apenas físico?"
+          type: text
+          required: true
+
+    checkpoint:
+      criteria:
+        - "3 categorias analisadas com BSR e reviews documentados"
+        - "Top 5 concorrentes analisados em cada categoria"
+        - "Categoria final escolhida com justificativa"
+        - "Gaps identificados (o que os livros existentes não fazem)"
+        - "Backend definido antes de começar o manuscrito"
+      human_review: true
+      message: "Pesquisa de categoria concluída. Validar escolha antes de escrever."
+      veto_conditions:
+        - "SE categoria com BSR > 100.000 → ALERTA. Pode não ter demanda suficiente."
+        - "SE top 5 com > 500 reviews cada → ALERTA. Categoria muito saturada, buscar subcategoria."
+        - "SE sem backend definido → VETO. Livro sem modelo de negócio = BLOCK (NO-F050)."
+        - "SE nicho sem expertise real → VETO. IA auxilia, humano define estrutura (NO-F046)."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2: MANUSCRITO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Manuscrito"
+    days: "1"
+    tier: 1
+    description: |
+      Criar o manuscrito com suporte de IA, mas com estrutura e voz do autor humano.
+
+      MODELO DE PRODUÇÃO (NO-F045 + NO-F046):
+      - 1 livro por mês é possível com este método
+      - IA: pesquisa, dados, referências, rascunhos de seções
+      - Humano: estrutura, exemplos reais, voz autoral, revisão final
+      - Meta: 20.000-40.000 palavras (livro de negócios/autoajuda típico)
+      - Tempo médio com método: 4-6 semanas para primeira versão
+
+      ESTRUTURA RECOMENDADA PARA LIVROS DE NEGÓCIOS/EDUCAÇÃO:
+      1. Introdução: Promessa + História do autor + Por que este livro agora?
+      2. Parte 1: O problema (valida a dor do leitor — linguagem do público)
+      3. Parte 2: A solução (metodologia, framework, passo a passo)
+      4. Parte 3: Implementação (como fazer na prática, exemplos reais)
+      5. Conclusão: Próximo passo → CTA para backend
+
+      CTA NO LIVRO (OBRIGATÓRIO — NO-F050):
+      - No final de cada capítulo: mini-CTA suave (link para recurso gratuito)
+      - Na conclusão: CTA principal para o backend (curso, mentoria, comunidade)
+      - Página de recursos: link para grupo, aula gratuita, ou bônus exclusivo
+
+    tasks:
+      - task_id: estrutura-livro
+        agent: escalador
+        required: true
+        description: |
+          Criar estrutura completa do livro:
+          - Título definitivo + subtítulo (inclui palavra-chave da categoria)
+          - Sumário detalhado (capítulos + tópicos de cada capítulo)
+          - Promessa de cada capítulo (o que o leitor vai aprender)
+          - Onde encaixam os CTAs internos
+          - Recursos/bônus vinculados ao livro (para coletar email dos leitores)
+        output: "estrutura-livro-{nicho}.md"
+
+      - task_id: manuscrito-ia
+        agent: pesquisador-ia
+        required: true
+        description: |
+          IA auxilia na pesquisa e rascunho por capítulo:
+          - Pesquisa de dados, estudos, referências para cada capítulo
+          - Rascunho inicial de cada seção (base para revisão humana)
+          - Exemplos e casos reais a incluir
+          - Sugestões de histórias e analogias
+          IMPORTANTE: O humano revisa 100% do conteúdo.
+          IA é pesquisadora e rascunhadora — não autora.
+        output: "manuscrito-rascunho-{nicho}.md"
+
+      - task_id: copy-capa-sinopse
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar copy de marketing do livro:
+          - Título + subtítulo (inclui palavra-chave principal)
+          - Sinopse (140-200 palavras, como promessa de transformação)
+          - Bio do autor (autoridade + credibilidade específica)
+          - 5 bullet points de benefícios (para página Amazon)
+          - Copy de anúncio pago (quando promover o livro)
+          Sinopse usa Hook→Punch→Premissa adaptado para livro.
+        output: "copy-capa-sinopse-{nicho}.md"
+
+    checkpoint:
+      criteria:
+        - "Estrutura completa com sumário detalhado"
+        - "CTAs internos mapeados (por capítulo + conclusão)"
+        - "Rascunho por capítulo disponível para revisão humana"
+        - "Copy de capa e sinopse criada"
+        - "Recurso gratuito vinculado ao livro (para coletar email)"
+      human_review: true
+      message: "Estrutura e rascunho do manuscrito prontos. Revisão humana necessária."
+      veto_conditions:
+        - "SE sem CTAs internos → VETO. Livro sem CTA = leitor sem próximo passo (NO-F050)."
+        - "SE IA escreveu sem revisão humana → VETO. Humano define estrutura e voz (NO-F046)."
+        - "SE sinopse não usa linguagem do público → VETO. Jargão técnico mata conversão."
+        - "SE sem recurso gratuito para coletar email → VETO. Leitor sem email = lead perdido."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3: FUNIL PÓS-LIVRO
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Funil Pós-Livro"
+    days: "1"
+    tier: 1
+    description: |
+      O livro é apenas a porta de entrada — o funil de backend é onde está o dinheiro.
+
+      FUNIL PÓS-LIVRO COMPLETO:
+      Amazon → Leitor compra livro
+      → CTA no livro: acessa página de bônus (coleta email)
+      → Email: sequência de valor + convite para aula ao vivo
+      → Aula ao vivo: aprofunda metodologia do livro
+      → Oferta: curso/mentoria/imersão (backend principal)
+
+      POR QUE AULA AO VIVO (NO-F046)?
+      "O livro cria autoridade. A aula ao vivo cria conexão. A conexão vende."
+      Leitor já conhece seu método pelo livro → aula é continuação natural.
+
+      MÉTRICAS DO FUNIL PÓS-LIVRO:
+      - Taxa de acesso ao bônus: 15-30% dos compradores (benchmark)
+      - Taxa de abertura de email: 35-45% (leitores são mais engajados)
+      - Taxa de presença na aula: 20-40% dos inscritos
+      - Taxa de conversão da aula: 5-15% para backend
+      Exemplo: 1.000 livros → 200 leads → 50 na aula → 5 clientes de R$2.500 = R$12.500
+
+    tasks:
+      - task_id: pagina-bonus
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Criar página de bônus para leitores do livro:
+          - URL simples para mencionar no livro (ex: seudominio.com/bonus)
+          - Opt-in simples: nome + email
+          - Entrega imediata: bônus exclusivo para leitores
+          - Bônus deve ser complementar ao livro (extensão natural)
+          - Sequência de email automática após opt-in
+        output: "pagina-bonus-leitores-{nicho}.md"
+
+      - task_id: sequencia-email-leitores
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar sequência de email para leitores do livro (5 emails):
+          Email 1 (imediato): Entrega do bônus + boas-vindas pessoal
+          Email 2 (D+3): Conteúdo que aprofunda capítulo mais importante do livro
+          Email 3 (D+7): Estudo de caso de quem aplicou o método
+          Email 4 (D+10): Convite para aula ao vivo (ou aula gravada)
+          Email 5 (D+14): Oferta do backend com ancoragem
+          Tom: continuação da leitura, não email de marketing genérico.
+        output: "sequencia-email-leitores-{nicho}.md"
+
+      - task_id: aula-vivo-backend
+        agent: monetizador
+        required: true
+        description: |
+          Estruturar aula ao vivo de conversão para leitores:
+          - Título da aula (extensão natural do livro)
+          - Estrutura: recap do livro (20%) + aprofundamento (50%) + oferta (30%)
+          - O que ensinar que o livro não ensinou (criar desejo do próximo nível)
+          - Pitch do backend: como posicionar o livro como base, backend como acelerador
+          - Frequência recomendada: 1x por mês para novos leitores
+        output: "estrutura-aula-backend-{nicho}.md"
+
+    checkpoint:
+      criteria:
+        - "Página de bônus desenhada com opt-in claro"
+        - "Bônus definido e complementar ao livro"
+        - "Sequência de 5 emails para leitores"
+        - "Estrutura da aula ao vivo documentada"
+        - "Funil completo: livro → email → aula → venda"
+        - "Backend claramente posicionado como próximo passo"
+      human_review: true
+      message: "Funil pós-livro desenhado. Validar sequência e oferta de backend."
+      veto_conditions:
+        - "SE sem página de bônus → VETO. Sem coleta de email, leitor é anônimo (NO-F050)."
+        - "SE backend não é próximo passo natural do livro → ALERTA. Repositionar oferta."
+        - "SE aula ao vivo sem oferta → VETO. Aula sem pitch = evento de custo sem retorno."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 4: ESCALA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-4
+    name: "Escala"
+    days: "1"
+    tier: 2
+    description: |
+      Após publicar o livro 1, escalar com Amazon Ads e planejar o livro 2.
+
+      ESCALA AMAZON KDP:
+      - Amazon Ads: anúncios dentro da própria plataforma Amazon
+      - Tipos: Sponsored Products, Sponsored Brands, Display
+      - Target: palavras-chave da categoria + livros concorrentes
+      - Budget inicial: R$30-50/dia (testar, ajustar, escalar vencedores)
+
+      RANKING NA AMAZON:
+      - Reviews são o principal fator de ranking
+      - Estratégia para obter reviews: pedir no livro + pedir via email aos leitores
+      - BSR melhora com vendas consistentes (não com pico e queda)
+
+      PRÓXIMO LIVRO (NO-F046 — 1 livro por mês):
+      - Livro 2: mesmo nicho, ângulo complementar
+      - Ou: subnicho adjacente com baixa concorrência
+      - Livros se referenciam (cria ecossistema de autoridade)
+      - Cada livro = novo funil de backend funcionando em paralelo
+
+    tasks:
+      - task_id: estrategia-amazon-ads
+        agent: escalador
+        required: true
+        description: |
+          Criar estratégia de Amazon Ads para o livro:
+          - Palavras-chave principais e secundárias
+          - Lista de livros concorrentes para target (aparecer na página deles)
+          - Budget inicial e meta de ROAS
+          - Estrutura de campanha (automática → manual refinada)
+          - Quando escalar vs quando pausar ad
+          - Meta de ranking por palavra-chave
+        output: "estrategia-amazon-ads-{nicho}.md"
+
+      - task_id: estrategia-reviews
+        agent: escalador
+        required: true
+        description: |
+          Criar estratégia para obter reviews honestos:
+          - CTA dentro do livro pedindo review (tom certo — não pedir 5 estrelas)
+          - Email para leitores solicitando review (timing: D+14 após compra)
+          - O que fazer com reviews negativos (responder ou ignorar?)
+          - Meta de reviews por mês
+          - Quando ter reviews suficientes para otimizar cover e sinopse
+        output: "estrategia-reviews-{nicho}.md"
+
+      - task_id: planejamento-proximo-livro
+        agent: escalador
+        required: true
+        description: |
+          Planejar o livro 2 com base nos aprendizados do livro 1:
+          - Qual ângulo complementar explorar?
+          - Qual subcategoria atacar (diferente ou adjacente)?
+          - Como referenciar o livro 1 dentro do livro 2?
+          - Timeline: iniciar pesquisa do livro 2 enquanto livro 1 ganha tração
+          - Calendário anual: 12 livros planejados com categorias e nichos
+        output: "planejamento-proximo-livro-{nicho}.md"
+
+    checkpoint:
+      criteria:
+        - "Estratégia de Amazon Ads documentada com budget e meta de ROAS"
+        - "Estratégia de reviews com CTA e timing definidos"
+        - "Planejamento do livro 2 iniciado"
+        - "Timeline de publicação definida"
+        - "KPIs de escala (BSR, reviews, ROAS) estabelecidos"
+      human_review: true
+      message: "Estratégia de escala definida. Pronto para publicação e escala."
+      veto_conditions:
+        - "SE sem Amazon Ads planejado → ALERTA. Orgânico leva mais tempo para tração."
+        - "SE sem estratégia de reviews → VETO. Reviews são combustível do algoritmo Amazon."
+        - "SE sem planejamento do livro 2 → ALERTA. Modelo de 1 livro/mês precisa de pipeline."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_stakeholders: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHECKPOINT CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+checkpoint_config:
+  - phase: PHASE-1
+    heuristic: "NO-F050 + NO-H001"
+    criteria: "Nicho com dados de BSR, backend definido antes do manuscrito"
+    veto_condition: "Livro sem modelo de negócio = BLOCK"
+
+  - phase: PHASE-2
+    heuristic: "NO-F045 + NO-F046"
+    criteria: "Manuscrito com IA auxiliando, humano estruturando, CTAs internos"
+    veto_condition: "IA sem revisão humana = BLOCK. Sem CTA no livro = BLOCK."
+
+  - phase: PHASE-3
+    heuristic: "NO-F050 + NO-F021"
+    criteria: "Funil pós-livro com coleta de email + sequência + aula + backend"
+    veto_condition: "Leitor sem email coletado = lead perdido"
+
+  - phase: PHASE-4
+    heuristic: "NO-F046"
+    criteria: "Ads + reviews + planejamento do próximo livro"
+    veto_condition: "Livro único sem pipeline = modelo incompleto"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMPLETION SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+completion_signal: "<promise>COMPLETE</promise>"
+checkpoint_signal: "<promise>CHECKPOINT:PHASE-X</promise>"
+blocked_signal: "<promise>BLOCKED:T-X.Y</promise>"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT ARTIFACTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  pesquisa:
+    - "pesquisa-categorias-amazon-{nicho}.md — 10 categorias analisadas"
+    - "analise-concorrentes-amazon-{nicho}.md — Top 5 concorrentes por categoria"
+    - "escolha-nicho-livro-{nicho}.md — Decisão final com justificativa"
+
+  manuscrito:
+    - "estrutura-livro-{nicho}.md — Sumário detalhado + CTAs mapeados"
+    - "manuscrito-rascunho-{nicho}.md — Rascunho por capítulo (IA + revisão humana)"
+    - "copy-capa-sinopse-{nicho}.md — Título, sinopse, bio, bullet points"
+
+  funil:
+    - "pagina-bonus-leitores-{nicho}.md — Página de opt-in + bônus"
+    - "sequencia-email-leitores-{nicho}.md — 5 emails para leitores"
+    - "estrutura-aula-backend-{nicho}.md — Aula ao vivo de conversão"
+
+  escala:
+    - "estrategia-amazon-ads-{nicho}.md — Ads + budget + ROAS"
+    - "estrategia-reviews-{nicho}.md — Como obter reviews honestos"
+    - "planejamento-proximo-livro-{nicho}.md — Pipeline de livros"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  pesquisa:
+    - "[ ] 3 categorias analisadas com dados de BSR"
+    - "[ ] Top 5 concorrentes analisados"
+    - "[ ] Gaps identificados nos livros existentes"
+    - "[ ] Backend definido antes do manuscrito"
+
+  manuscrito:
+    - "[ ] Sumário com CTAs mapeados por capítulo"
+    - "[ ] Rascunho disponível para revisão humana"
+    - "[ ] Recurso gratuito para coleta de email"
+    - "[ ] Sinopse com linguagem do público"
+
+  funil:
+    - "[ ] Página de bônus com opt-in"
+    - "[ ] Sequência de 5 emails para leitores"
+    - "[ ] Estrutura de aula com oferta de backend"
+    - "[ ] Funil completo: livro → email → aula → venda"
+
+  escala:
+    - "[ ] Estratégia Amazon Ads com budget definido"
+    - "[ ] Estratégia de reviews com timing"
+    - "[ ] Próximo livro planejado"
+    - "[ ] KPIs de escala definidos"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GOVERNANCE GATE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+governance_gate:
+  required_checks:
+    - "Backend definido ANTES de escrever (NO-F050)"
+    - "IA auxilia, humano estrutura e revisa (NO-F045/NO-F046)"
+    - "CTAs dentro do livro para coletar email de leitores"
+    - "Funil pós-livro completo (email + aula + backend)"
+    - "Livro R$44,90 vs ebook R$9,90 — diferença de posicionamento preservada"
+    - "Pipeline de próximos livros para atingir 1/mês"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  framework: "AIOS Squad Creator"
+  created: "2026-02-21"
+  primary_use_case: "Publicação e escala de livros Amazon KDP como canal de aquisição perpétua"
+  source_mind: "natanael-oliveira"
+  reference_case: "Nésio Fernandes — 1.790 livros vendidos, nicho específico + bestseller com poucas vendas"
+  key_difference: |
+    Único workflow que integra Amazon KDP com funil de backend completo.
+    Garante que o livro seja porta de entrada, não produto final (NO-F050).
+    Cobre pesquisa de nicho, manuscrito com IA, funil pós-livro e escala com ads.

@@ -1,0 +1,142 @@
+workflow:
+  id: wf-weekly-content-batch
+  name: "Weekly Content Batch"
+  description: "Batch semanal de criação de conteúdo multi-plataforma em sessão de 4 horas (sistema Justin Welsh)"
+  squad: presenca-digital
+  version: 1.0.0
+  trigger: "Início de cada semana — conforme batch-schedule.md gerado por wf-content-from-brand"
+  estimated_duration: "4h"
+  depends_on: wf-content-from-brand
+  flow: unidirectional
+
+phases:
+  - id: phase-1
+    name: "Weekly Brief"
+    agent: presenca-digital-chief
+    description: "Puxa o calendário editorial da semana, define scope do batch e alinha prioridades com campanha ativa (se houver)"
+    inputs:
+      - editorial-calendar-monthly.md
+      - hook-patterns.md
+      - brand-voice-guidelines.md
+    outputs:
+      - weekly-brief.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "Escopo da semana definido: quais peças, quais plataformas, quais pilares"
+        - "Campanha ativa da semana identificada (se houver integração com wf-campaign-week)"
+        - "Brief distribuído aos agentes antes do início do batch"
+      veto_conditions:
+        - "Calendário editorial ausente — executar wf-content-from-brand primeiro"
+        - "Brand voice guidelines não disponíveis — bloqueio total"
+    next: phase-2
+
+  - id: phase-2
+    name: "Write Batch"
+    agent: nicolas-cole
+    description: "Escreve todas as peças textuais da semana: posts, captions e carrosséis usando o método Atomic Essays (ideia única, máxima clareza)"
+    inputs:
+      - weekly-brief.md
+      - content-pillars.md
+      - brand-voice-guidelines.md
+    outputs:
+      - batch-texts-raw.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "Todas as peças textuais do brief escritas"
+        - "Cada post tem uma ideia central (Atomic Essay principle)"
+        - "Voz alinhada ao brand voice guidelines"
+        - "Captions com CTA claro em cada plataforma"
+      veto_conditions:
+        - "Peças com mais de uma ideia central — simplificar antes de avançar"
+        - "Voz desalinhada com brand guidelines — reescrever"
+    next: phase-3
+
+  - id: phase-3
+    name: "Hook Polish"
+    agent: brendan-kane
+    description: "Aplica Hook Point em todas as peças: refina a abertura de cada conteúdo para capturar atenção nos primeiros 3 segundos"
+    inputs:
+      - batch-texts-raw.md
+      - hook-patterns.md
+    outputs:
+      - batch-texts-hooked.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "Todas as peças revisadas com hook aplicado"
+        - "Abertura de cada peça passa no teste dos 3 segundos"
+        - "Variações de hook A/B criadas para posts principais (mínimo 2 variações)"
+      veto_conditions:
+        - "Hooks genéricos reutilizados sem adaptação — retrabalhar"
+        - "Alguma peça sem revisão de hook — bloquear avanço"
+    next: phase-4
+
+  - id: phase-4
+    name: "Video Scripts"
+    agent: camilo-coutinho
+    description: "Cria roteiros de vídeo (Reels/Shorts) usando Roteiro Chicote: 6 perguntas + estrutura CEQCOM para máxima retenção"
+    inputs:
+      - batch-texts-hooked.md
+      - weekly-brief.md
+      - hook-patterns.md
+    outputs:
+      - video-scripts-batch.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "Roteiro para cada vídeo do brief criado"
+        - "Estrutura CEQCOM aplicada: Contexto, Estratégia, Questão, Conflito, Opções, Moral"
+        - "6 perguntas do Roteiro Chicote respondidas por roteiro"
+        - "Hook de abertura do vídeo alinhado com hook-patterns.md"
+      veto_conditions:
+        - "Roteiro sem estrutura CEQCOM — retrabalhar antes de avançar"
+        - "Abertura do vídeo sem hook definido — bloqueio"
+    next: phase-5
+
+  - id: phase-5
+    name: "Repurpose Matrix"
+    agent: vanessa-lau
+    description: "Aplica Content Matrix para adaptar cada peça original para todos os formatos e plataformas relevantes"
+    inputs:
+      - batch-texts-hooked.md
+      - video-scripts-batch.md
+      - content-os.md
+    outputs:
+      - batch-repurposed.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "Cada peça original adaptada para mínimo 3 formatos/plataformas"
+        - "Content Matrix preenchida para a semana"
+        - "Adaptações mantêm essência da ideia original sem copiar literalmente"
+        - "Formatos curtos derivados dos vídeos longos (quando aplicável)"
+      veto_conditions:
+        - "Adaptações são cópias diretas sem contexto de plataforma — retrabalhar"
+    next: phase-6
+
+  - id: phase-6
+    name: "Quality Gate"
+    agent: presenca-digital-chief
+    description: "Verificação final de coerência: todo o batch contra brand voice, pilares e calendário editorial"
+    inputs:
+      - batch-repurposed.md
+      - video-scripts-batch.md
+      - brand-voice-guidelines.md
+      - editorial-calendar-monthly.md
+    outputs:
+      - weekly-batch-approved.md
+      - batch-qa-report.md
+    checkpoint:
+      type: human
+      criteria:
+        - "100% das peças revisadas contra brand voice guidelines"
+        - "Nenhum pilar ausente no batch (cobertura conforme calendário)"
+        - "Todas as plataformas do calendário cobertas"
+        - "batch-qa-report.md assinado pelo chief"
+      veto_conditions:
+        - "Peça com voz desalinhada ao brand — retornar à phase-2"
+        - "Pilar do calendário sem nenhuma peça — retornar à phase-2"
+        - "Mais de 20% das peças reprovadas — revisar brief e reiniciar"
+    next: END

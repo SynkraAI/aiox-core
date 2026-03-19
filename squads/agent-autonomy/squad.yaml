@@ -1,0 +1,33 @@
+name: agent-autonomy
+version: 1.0.1
+description: >-
+  Squad para auditar, criar, diagnosticar e otimizar agentes autônomos.
+  Aplica frameworks como Weng's 3 Pillars, ACI, ReAct/Reflexion,
+  e IMPACT para garantir autonomia real dos agentes.
+slashPrefix: agentAutonomy
+
+aios:
+  minVersion: "2.1.0"
+  type: squad
+
+components:
+  agents:
+    - autonomy-chief.md
+    - autonomy-auditor.md
+    - agent-architect.md
+    - reasoning-engineer.md
+    - tool-smith.md
+    - ecosystem-scout.md
+  tasks:
+    - audit-agent.md
+    - create-autonomous-agent.md
+    - diagnose-autonomy-failure.md
+    - optimize-agent.md
+    - search-ecosystem.md
+    - suggest-tools.md
+    - teach-reasoning.md
+  workflows:
+    - audit-optimize-cycle.md
+    - create-agent-flow.md
+  config:
+    - config.yaml

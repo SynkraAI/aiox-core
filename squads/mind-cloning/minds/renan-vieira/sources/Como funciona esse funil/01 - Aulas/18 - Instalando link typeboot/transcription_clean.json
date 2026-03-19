@@ -1,0 +1,15 @@
+{
+  "language": "pt",
+  "original_segments": 1,
+  "cleaned_segments": 1,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 29.98,
+      "start_formatted": "00:00",
+      "end_formatted": "00:29",
+      "text": "E aí",
+      "type": "speech"
+    }
+  ]
+}

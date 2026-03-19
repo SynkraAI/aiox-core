@@ -1,0 +1,1144 @@
+# Lead Magnet Creation Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Leads - Alex Hormozi, Section II
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: lead-magnet
+  purpose: "Create lead magnets that get more engaged leads and customers for less money"
+  domain: marketing-strategy
+  source_playbook: "$100M Leads - Section II: Engaje Seus Leads"
+
+  core_definition: |
+    Lead Magnet = Complete solution to narrow problem
+               + Reveals problem solved by core offer
+               + Valuable enough to charge for (given free/low-cost)
+
+  business_impact: |
+    - 10x more engaged leads for same ad spend
+    - 3x reduction in customer acquisition cost
+    - 2-4x consumption rates with multi-format delivery
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: magnet-architect
+      role: "Orchestrate 7-step lead magnet creation process"
+      decisions:
+        - "Guide problem selection through Problem-Solution Cycle"
+        - "Ensure type matches offer structure"
+        - "Coordinate testing and iteration"
+      kpis:
+        - "Lead magnet to core offer conversion rate"
+        - "Cost per engaged lead"
+        - "Time to winning variant"
+
+  tier_0_diagnosis:
+    - agent: problem-mapper
+      role: "Map Problem-Solution Cycles and identify narrow problems"
+      inputs:
+        - "Core offer description"
+        - "Target customer profile"
+        - "Customer problems list"
+      outputs:
+        - "Problem-Solution Cycle diagram"
+        - "Ranked list of narrow problems"
+        - "Next-problem-revealed validation"
+
+    - agent: type-selector
+      role: "Select optimal lead magnet type"
+      inputs:
+        - "Selected narrow problem"
+        - "Core offer structure"
+        - "Audience awareness level"
+      outputs:
+        - "Recommended type (Reveal/Sample/OneStep)"
+        - "Rationale documentation"
+        - "Alternative types if primary fails"
+
+  tier_1_execution:
+    - agent: delivery-designer
+      role: "Design delivery methods and create 12-variant matrix"
+      specialization: "Step 3: Delivery Method Selection"
+      capabilities:
+        - "Map single problem to all 4 delivery methods"
+        - "Prioritize based on feasibility and audience preference"
+        - "Create rotation schedule for testing"
+
+    - agent: name-tester
+      role: "Test titles, images, and subtitles systematically"
+      specialization: "Step 4: Name Testing"
+      capabilities:
+        - "Design A/B test sequences"
+        - "Analyze engagement data"
+        - "Identify 'mega winner' signals"
+      techniques:
+        - "Poll audiences (social, DM, email)"
+        - "A/B test on ad platforms"
+        - "Iterative elimination rounds"
+
+    - agent: format-multiplier
+      role: "Package lead magnets in multiple consumption formats"
+      specialization: "Step 5: Easy Consumption"
+      capabilities:
+        - "Convert content to video, audio, text, images"
+        - "Optimize for mobile and desktop"
+        - "Reduce friction in access/delivery"
+
+    - agent: cta-crafter
+      role: "Create compelling Calls To Action with reasons"
+      specialization: "Step 7: CTA Creation"
+      capabilities:
+        - "Write clear action statements"
+        - "Apply scarcity (ethical/real)"
+        - "Apply urgency (time-limited)"
+        - "Invent compelling reasons (Frat Party Host)"
+
+  tier_2_judgment:
+    - agent: quality-guardian
+      role: "Ensure lead magnets are 'charge-worthy' quality"
+      specialization: "Step 6: Quality Assurance"
+      responsibilities:
+        - "Validate 'could charge for this' bar"
+        - "Ensure secrets given, not withheld"
+        - "Check value exceeds core offer cost perception"
+      philosophy: |
+        "Give away the secrets, sell the implementation.
+        99% won't buy but will create/destroy your reputation."
+
+    - agent: cycle-validator
+      role: "Validate Problem-Solution Cycle completion"
+      responsibilities:
+        - "Confirm narrow problem is truly narrow"
+        - "Confirm solution reveals core offer problem"
+        - "Ensure no cycle breaks in the logic"
+      checklist:
+        - "Problem is specific, not broad"
+        - "Solution is complete for that problem"
+        - "New problem revealed is real"
+        - "Core offer solves revealed problem"
+
+    - agent: roi-analyst
+      role: "Calculate and track lead magnet ROI"
+      responsibilities:
+        - "Calculate cost per engaged lead"
+        - "Compare with/without lead magnet CAC"
+        - "Identify highest ROI variants"
+        - "Recommend budget allocation"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  magnet-architect:
+    id: magnet-architect
+    title: "Lead Magnet Architect"
+    tier: orchestrator
+    icon: "magnet"
+
+    purpose: |
+      Guide the complete 7-step lead magnet creation process.
+      Ensure each step builds on the previous and maintains
+      alignment with the Problem-Solution Cycle.
+
+    core_frameworks:
+      - name: "7 Steps to Effective Lead Magnets"
+        source: "$100M Leads p.123-126"
+        steps:
+          - "Discover problem to solve and for whom"
+          - "Figure out how to solve it"
+          - "Figure out how to deliver it"
+          - "Test how to name it"
+          - "Make it easy to consume"
+          - "Make it really good"
+          - "Make it easy to say they want more"
+
+      - name: "Problem-Solution Cycle"
+        source: "$100M Leads p.133-138"
+        principle: "Every problem has solution. Every solution reveals more problems."
+
+      - name: "Grand Slam Offers for Free"
+        source: "$100M Leads p.127-128"
+        principle: "Make lead magnet so good they feel stupid saying no"
+
+    decision_authority:
+      - "Approve problem selection"
+      - "Validate type selection"
+      - "Approve for testing"
+      - "Declare winning variant"
+
+    inputs:
+      - "Core offer documentation"
+      - "Target customer profile"
+      - "Available resources/budget"
+      - "Testing platform access"
+
+    outputs:
+      - "Approved lead magnet concept"
+      - "Testing schedule"
+      - "Winning variant declaration"
+      - "ROI report"
+
+  problem-mapper:
+    id: problem-mapper
+    title: "Problem-Solution Cycle Specialist"
+    tier: tier_0
+    icon: "map"
+
+    purpose: |
+      Map the Problem-Solution Cycle for any business and identify
+      the best narrow problems for lead magnets.
+
+    methodology:
+      step_1: "Document core offer (what broad problem it solves)"
+      step_2: "List all steps/problems before that broad solution"
+      step_3: "For each narrow problem, validate it reveals core offer problem"
+      step_4: "Rank by: narrowness, significance, revelation strength"
+
+    source_example: |
+      Real Estate Example (p.140-142):
+      Core Offer: Help sell houses
+      Narrow Problems: home value, increasing value, photos, cleaning,
+      landscaping, repairs, moving, staging
+      Each solves specific problem -> Reveals "still need to sell"
+
+    outputs:
+      - format: "Problem-Solution Cycle Diagram"
+        content:
+          - "Core offer (broad solution)"
+          - "All narrow problems identified"
+          - "Arrows showing revelation flow"
+          - "Recommended problem highlighted"
+
+      - format: "Problem Ranking Matrix"
+        content:
+          - "Problem name"
+          - "Narrowness score (1-5)"
+          - "Significance score (1-5)"
+          - "Revelation strength (1-5)"
+          - "Total score"
+
+    validation_questions:
+      - "Is this problem narrow enough? (Not broad like 'sell house')"
+      - "Is this problem significant? (People care about solving it)"
+      - "Does solving it reveal the core offer problem?"
+      - "Can we solve it completely with a lead magnet?"
+
+  type-selector:
+    id: type-selector
+    title: "Lead Magnet Type Specialist"
+    tier: tier_0
+    icon: "category"
+
+    purpose: |
+      Select the optimal lead magnet type based on audience awareness,
+      problem nature, and core offer structure.
+
+    type_definitions:
+      reveal_problems:
+        name: "Reveal Problems (Diagnosis)"
+        source: "$100M Leads p.151-158"
+        best_when: "Problems worsen over time; audience unaware of gap"
+        examples:
+          - "Speed test showing 30% below standard"
+          - "Posture analysis showing ideal vs current"
+          - "Termite inspection revealing damage/risk"
+        mechanism: "Show gap between where they are and should be"
+
+      samples_trials:
+        name: "Samples & Trials"
+        source: "$100M Leads p.160-167"
+        best_when: "Core offer solves recurring problem with recurring solution"
+        examples:
+          - "Free trial of faster server"
+          - "Free chiropractic adjustment"
+          - "Sample-size consumables (Costco model)"
+        mechanism: "Full access, limited time or uses"
+
+      one_step:
+        name: "One Step of Multi-Step Process"
+        source: "$100M Leads p.169-176"
+        best_when: "Core offer is complex multi-step process"
+        examples:
+          - "This book (step to $1M, reveals scaling problems)"
+          - "First coat of 3-coat sealer system"
+          - "Free finance course revealing time investment"
+        mechanism: "Give valuable step, sell the rest"
+
+    selection_algorithm:
+      - condition: "Audience doesn't know they have the problem"
+        recommendation: "Reveal Problems"
+        rationale: "Must create awareness before solution desire"
+
+      - condition: "Core offer is recurring solution to recurring problem"
+        recommendation: "Samples & Trials"
+        rationale: "Let them experience full value, want to continue"
+
+      - condition: "Core offer has multiple steps"
+        recommendation: "One Step of Multi-Step"
+        rationale: "Prove value on one step, they'll want the rest"
+
+    outputs:
+      - "Primary type recommendation with rationale"
+      - "Secondary type if primary doesn't test well"
+      - "Type-specific implementation notes"
+
+  delivery-designer:
+    id: delivery-designer
+    title: "Delivery Method Designer"
+    tier: tier_1
+    icon: "package"
+
+    purpose: |
+      Design all possible delivery methods for a lead magnet
+      and create the 12-variant testing matrix.
+
+    delivery_methods:
+      software:
+        description: "Give them a tool (spreadsheet, calculator, app)"
+        source: "$100M Leads p.184"
+        examples:
+          - "Dashboard with stats and industry comparison"
+          - "Calculator for their specific situation"
+          - "Assessment tool with scoring"
+        best_for: "Data-driven problems, comparison needs"
+
+      information:
+        description: "Teach them something"
+        source: "$100M Leads p.186"
+        formats: ["Courses", "Lessons", "Interviews", "Presentations",
+                  "Live events", "Mistakes/pitfalls", "Hacks/tips"]
+        examples:
+          - "Mini course on specific skill"
+          - "Expert interview compilation"
+          - "Mistakes to avoid guide"
+        best_for: "Knowledge gaps, skill development"
+
+      services:
+        description: "Do free work for them"
+        source: "$100M Leads p.188"
+        examples:
+          - "Run their ads free for 30 days"
+          - "Free audit/analysis"
+          - "First session/adjustment free"
+        best_for: "Demonstrating expertise, removing risk"
+
+      physical_products:
+        description: "Give something they can hold"
+        source: "$100M Leads p.190-191"
+        examples:
+          - "Book on their topic"
+          - "Sample products"
+          - "Assessment charts/materials"
+        best_for: "Tangible value perception, retention"
+
+    matrix_creation:
+      source: "$100M Leads p.192"
+      principle: "3 types x 4 methods = up to 12 lead magnets for single problem"
+
+      template: |
+        For problem: [INSERT PROBLEM]
+
+        | Type/Method     | Software | Information | Services | Physical |
+        |-----------------|----------|-------------|----------|----------|
+        | Reveal Problems | Idea 1   | Idea 2      | Idea 3   | Idea 4   |
+        | Samples/Trials  | Idea 5   | Idea 6      | Idea 7   | Idea 8   |
+        | One Step        | Idea 9   | Idea 10     | Idea 11  | Idea 12  |
+
+    rotation_strategy:
+      source: "$100M Leads p.193-195"
+      principle: |
+        "Make as many versions as you can and rotate them.
+        Keeps advertising fresh with little effort.
+        See which work best. Results often surprising."
+
+    outputs:
+      - "12-variant matrix populated"
+      - "Feasibility assessment per variant"
+      - "Prioritized testing order"
+      - "Rotation schedule"
+
+  name-tester:
+    id: name-tester
+    title: "Name Testing Specialist"
+    tier: tier_1
+    icon: "flask"
+
+    purpose: |
+      Systematically test titles, images, and subtitles to find
+      the winning combination that maximizes engagement.
+
+    ogilvy_principle:
+      source: "$100M Leads p.199-200"
+      quote: |
+        "When you've written your headline, you've spent 80 cents
+        of your (advertising) dollar... 5x more people read your
+        headline than any other part of your promotion."
+
+    impact_range:
+      source: "$100M Leads p.200"
+      potential: "2x, 3x, or 10x engagement from name improvement"
+
+    testing_order:
+      - priority: 1
+        element: "Title"
+        rationale: "Most important - test first"
+        minimum_variations: 3
+
+      - priority: 2
+        element: "Image"
+        rationale: "Second most important"
+        minimum_variations: 2
+
+      - priority: 3
+        element: "Subtitle"
+        rationale: "Third - refines the hook"
+        minimum_variations: 3
+
+    real_example:
+      source: "$100M Leads p.206-228"
+      book: "$100M Leads"
+
+      title_tests:
+        - round: 1
+          options: ["Advertising", "Promotion"]
+          winner: "Advertising"
+        - round: 2
+          options: ["Advertising", "Leads"]
+          winner: "Leads"
+        - round: 3
+          options: ["Marketing", "Leads"]
+          winner: "Leads"
+
+      image_tests:
+        - options: ["Real photo", "Cartoon"]
+          winner: "Real photo"
+
+      subtitle_tests:
+        - round: 1
+          options:
+            - "How to make more people want to buy your stuff"
+            - "How to make strangers want to buy your stuff"
+          winner: "strangers"
+        - round: 2
+          options:
+            - "How to make more strangers want to buy your stuff"
+            - "How to make strangers want to buy your stuff"
+          winner: "removing 'more'"
+          insight: "Small changes = big differences"
+
+    testing_methods:
+      polls:
+        description: "Ask audience to vote"
+        source: "$100M Leads p.236"
+        format: "Post options, ask for 1 or 2"
+
+      dm_outreach:
+        description: "Message people directly"
+        source: "$100M Leads p.236"
+        format: "Ask individuals for gut reaction"
+
+      ad_platform:
+        description: "Run actual A/B tests"
+        format: "Split traffic between variants"
+
+    winner_signals:
+      good_winner:
+        source: "$100M Leads p.236"
+        signal: "People engage in mass"
+
+      mega_winner:
+        source: "$100M Leads p.238-239"
+        signal: "People respond AND ask when they can get it"
+
+    outputs:
+      - "Test plan with variants and timeline"
+      - "Round-by-round results"
+      - "Winning title/image/subtitle combination"
+      - "Statistical confidence notes"
+
+  format-multiplier:
+    id: format-multiplier
+    title: "Multi-Format Packaging Specialist"
+    tier: tier_1
+    icon: "layers"
+
+    purpose: |
+      Package lead magnets in all consumption formats to maximize
+      uptake and consumption rates.
+
+    core_principle:
+      source: "$100M Leads p.241"
+      quote: "People prefer to do things that require less effort."
+
+    impact:
+      source: "$100M Leads p.242-243"
+      potential: "2x, 3x, even 4x+ in acceptance and consumption rates"
+
+    format_guidelines:
+      software:
+        source: "$100M Leads p.244"
+        rule: "Accessible on phones, computers, multiple formats"
+        tactics:
+          - "Mobile app version"
+          - "Desktop version"
+          - "Web-based version"
+          - "Exportable formats"
+
+      information:
+        source: "$100M Leads p.246"
+        rule: "Video + Text + Audio + Images - offer ALL"
+        tactics:
+          - "Video version for watchers"
+          - "Written version for readers"
+          - "Audio version for listeners"
+          - "Visual summaries/infographics"
+
+      services:
+        source: "$100M Leads p.248"
+        rule: "More hours, more days, more channels"
+        tactics:
+          - "Extended availability hours"
+          - "Multiple day options"
+          - "Video call, phone, in-person options"
+
+      physical:
+        source: "$100M Leads p.250"
+        rule: "Easy to order, fast delivery, simple to use"
+        tactics:
+          - "One-click ordering"
+          - "Fast shipping"
+          - "Clear instructions"
+          - "Quality packaging"
+
+    real_example:
+      source: "$100M Leads p.253-255"
+      product: "$100M Offers book"
+      split: "Almost perfect 1/4, 1/4, 1/4, 1/4"
+      formats: ["Ebook", "Physical book", "Audiobook", "Video (free on site)"]
+      result: "2-3-4x the leads for same work"
+
+    outputs:
+      - "Format availability checklist"
+      - "Conversion plan for each format"
+      - "Accessibility audit"
+      - "Friction reduction recommendations"
+
+  quality-guardian:
+    id: quality-guardian
+    title: "Lead Magnet Quality Guardian"
+    tier: tier_2
+    icon: "shield"
+
+    purpose: |
+      Ensure every lead magnet meets the "charge-worthy" quality bar.
+      Guard against value withholding that destroys reputation.
+
+    quality_standard:
+      source: "$100M Leads p.257-259"
+      principle: |
+        "You want your lead magnet to provide so much value that
+        people feel obligated to pay you. The goal is to provide
+        more value than the cost of your core offer before they buy."
+
+    fear_of_secrets:
+      source: "$100M Leads p.260-261"
+      warning: |
+        "If you're afraid to give away your secrets, imagine the alternative:
+        You give away worthless crap. Then people who could have become
+        customers think 'this person is terrible!' Then they buy from
+        someone else. Not only that, they tell others not to buy from you.
+        It's a vicious cycle."
+
+    philosophy:
+      source: "$100M Leads p.266-267"
+      principle: |
+        "99% of people won't buy, but they will create (or destroy)
+        your reputation based on the value of your free stuff.
+        So make your lead magnets as good as your paid stuff."
+
+    validation_checklist:
+      - question: "Could we charge money for this?"
+        pass_if: "Yes, and it would sell"
+
+      - question: "Does it feel like giving away too much?"
+        pass_if: "Yes - that's the right feeling"
+
+      - question: "Are we withholding secrets?"
+        pass_if: "No - secrets given, implementation sold"
+
+      - question: "Would consuming this make someone more likely to buy?"
+        pass_if: "Yes - value delivered builds trust"
+
+      - question: "Would someone recommend this even if they don't buy?"
+        pass_if: "Yes - reputation building"
+
+    outputs:
+      - "Quality assessment score"
+      - "Value density analysis"
+      - "Recommendation (pass/revise)"
+      - "Revision notes if needed"
+
+  cta-crafter:
+    id: cta-crafter
+    title: "Call To Action Specialist"
+    tier: tier_1
+    icon: "zap"
+
+    purpose: |
+      Create compelling CTAs that tell people exactly what to do
+      and give them reasons to do it now.
+
+    cta_components:
+      source: "$100M Leads p.269-273"
+      required:
+        - element: "What to do"
+          description: "Clear, simple, direct action"
+          examples: ["Call now", "Click here", "Book a call", "Sign up"]
+          rule: "Not 'don't delay' but 'call now'"
+
+        - element: "Reasons to do it now"
+          description: "Why not delay"
+          types: ["Scarcity", "Urgency", "Invented reasons"]
+
+    scarcity:
+      source: "$100M Leads p.276-282"
+      definition: "Limited quantity of something"
+      best_strategy: "Reality - advertise your actual limitations"
+      examples:
+        - script: "The most convenient class times fill up fast. Call now to get the one you want."
+          source: "p.278-279"
+        - script: "I can only handle five people per week, so if you want to solve this soon, do xyz..."
+          source: "p.280"
+        - script: "We only printed one batch of shirts and will never reprint this design..."
+          source: "p.281-282"
+
+    urgency:
+      source: "$100M Leads p.284-290"
+      definition: "Limited time to act"
+      mechanism: "Less time = faster action"
+      examples:
+        - script: "Our July 4th promotion ends Monday at midnight, so if you want it, act now."
+          source: "p.286-287"
+        - script: "Our Black Friday promotion ends at midnight. Only four hours left."
+          source: "p.288"
+        - script: "Until Friday, I'll also throw in a free hat for anyone who buys 3+ books."
+          source: "p.289-290"
+
+    invented_reasons:
+      source: "$100M Leads p.292-297"
+      nickname: "Frat Party Host"
+      principle: "Fraternities don't need reasons to party but they invent crazy ones"
+      harvard_study: "People more likely to let someone cut in line if given ANY reason"
+      examples:
+        - "Because... moms know best."
+        - "Because... your country needs you."
+        - "Because... it's my birthday, and I want you to celebrate with me."
+
+    action_step:
+      source: "$100M Leads p.298-299"
+      rule: |
+        "Give a clear, simple, action-oriented CTA. Then give them
+        a 'reason' using scarcity, urgency, and any other reasons
+        you can think of. And do it often. Don't be clever, be clear."
+
+    outputs:
+      - "CTA statement (clear action)"
+      - "Scarcity element (if applicable)"
+      - "Urgency element (if applicable)"
+      - "Additional reason(s)"
+      - "Placement recommendations (where/when to show)"
+
+  roi-analyst:
+    id: roi-analyst
+    title: "Lead Magnet ROI Analyst"
+    tier: tier_2
+    icon: "chart"
+
+    purpose: |
+      Calculate and track the ROI of lead magnets vs direct
+      core offer advertising.
+
+    roi_framework:
+      source: "$100M Leads p.302-311"
+
+      without_lead_magnet:
+        example:
+          profit_per_customer: "$10,000"
+          ad_cost_per_call: "$1,000"
+          close_rate: "1 in 3"
+          cac: "$3,000 (3 calls x $1,000)"
+          profit_after_cac: "$7,000"
+
+      with_lead_magnet:
+        example:
+          lead_magnet_delivery_cost: "$25"
+          ad_cost_per_call: "$75 (lower because free = more engagement)"
+          total_cost_per_call: "$100"
+          close_rate: "1 in 10"
+          cac: "$1,000 (10 calls x $100)"
+          improvement: "3x reduction in CAC"
+          same_budget_result: "3x business growth"
+
+    key_insight:
+      source: "$100M Leads p.309-311"
+      principle: |
+        "With a $25 budget to deliver your lead magnet, you can provide
+        A LOT more value than a $0 budget. You attract more customers
+        because your lead magnet is more valuable than others."
+
+    metrics_to_track:
+      - name: "Cost per engaged lead"
+        formula: "Ad spend / engaged leads"
+        comparison: "With vs without lead magnet"
+
+      - name: "Lead magnet to call rate"
+        formula: "Calls scheduled / lead magnet consumers"
+
+      - name: "Customer acquisition cost"
+        formula: "Total cost / customers acquired"
+
+      - name: "ROI per variant"
+        formula: "(Revenue - Cost) / Cost"
+
+    outputs:
+      - "ROI comparison report"
+      - "Variant performance ranking"
+      - "Budget allocation recommendations"
+      - "Scaling projections"
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Step 1: Problem Discovery
+  - task: "Document core offer and broad problem it solves"
+    executor: Human
+    automation: LOW
+    guardrails: "Must be clear, single sentence"
+
+  - task: "List all narrow problems before broad solution"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "AI can suggest, human validates relevance"
+
+  - task: "Validate each problem reveals core offer problem"
+    executor: Human
+    automation: LOW
+    guardrails: "Logic must be airtight"
+
+  - task: "Rank problems by narrowness, significance, revelation"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Human approves final ranking"
+
+  # Step 2: Type Selection
+  - task: "Assess audience awareness level"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Use customer research data"
+
+  - task: "Match problem to lead magnet type"
+    executor: Human
+    automation: LOW
+    guardrails: "Strategic decision"
+
+  - task: "Document rationale for type selection"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Template-based"
+
+  # Step 3: Delivery Method
+  - task: "Brainstorm all 4 delivery methods for problem"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "AI generates, human evaluates"
+
+  - task: "Populate 12-variant matrix"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "At least 4 viable variants"
+
+  - task: "Assess feasibility per variant"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Resource and capability check"
+
+  - task: "Prioritize testing order"
+    executor: Human
+    automation: LOW
+    guardrails: "Strategic decision"
+
+  # Step 4: Name Testing
+  - task: "Generate title variations"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "AI suggests, human curates"
+
+  - task: "Create poll/test structure"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Follow A/B test best practices"
+
+  - task: "Run tests on platforms"
+    executor: Hybrid
+    automation: HIGH
+    guardrails: "Minimum sample sizes"
+
+  - task: "Analyze results and declare winner"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Statistical significance required"
+
+  - task: "Test images and subtitles"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Only after title winner declared"
+
+  # Step 5: Format Multiplication
+  - task: "Identify all possible consumption formats"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Checklist-based"
+
+  - task: "Convert content to each format"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Quality check each conversion"
+
+  - task: "Optimize for mobile/desktop"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Accessibility standards"
+
+  - task: "Reduce access/delivery friction"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "User testing recommended"
+
+  # Step 6: Quality Assurance
+  - task: "Validate 'could charge for it' bar"
+    executor: Human
+    automation: LOW
+    guardrails: "Expert judgment required"
+
+  - task: "Check for withheld secrets"
+    executor: Human
+    automation: LOW
+    guardrails: "Mindset shift may be needed"
+
+  - task: "Assess reputation impact"
+    executor: Human
+    automation: LOW
+    guardrails: "Consider non-buyer perception"
+
+  # Step 7: CTA Creation
+  - task: "Write clear action statement"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Simple, direct language"
+
+  - task: "Identify real scarcity elements"
+    executor: Human
+    automation: LOW
+    guardrails: "Must be truthful"
+
+  - task: "Design urgency mechanics"
+    executor: Human
+    automation: LOW
+    guardrails: "Must be legitimate"
+
+  - task: "Create compelling reasons"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Can be invented but authentic"
+
+  - task: "Place CTAs throughout journey"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Frequency guidelines"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Problem Narrowness Gate"
+    transition: "Problem Selection -> Type Selection"
+    condition: "problem_is_narrow AND problem_reveals_core_offer_problem"
+    type: blocking
+    failure_action: "Return to problem mapping, narrow further"
+    source: "$100M Leads p.138-144"
+
+  QG-002:
+    name: "Type-Problem Match Gate"
+    transition: "Type Selection -> Delivery Design"
+    condition: "type_matches_audience_awareness AND type_matches_offer_structure"
+    type: blocking
+    failure_action: "Re-evaluate type selection"
+    source: "$100M Leads p.147-178"
+
+  QG-003:
+    name: "Delivery Feasibility Gate"
+    transition: "Delivery Design -> Name Testing"
+    condition: "at_least_one_variant_feasible"
+    type: blocking
+    failure_action: "Simplify delivery or increase resources"
+    source: "$100M Leads p.180-197"
+
+  QG-004:
+    name: "Name Winner Gate"
+    transition: "Name Testing -> Format Multiplication"
+    condition: "clear_winner_identified OR mega_winner_signal"
+    type: blocking
+    failure_action: "Continue testing or pivot problem"
+    source: "$100M Leads p.199-239"
+
+  QG-005:
+    name: "Format Accessibility Gate"
+    transition: "Format Multiplication -> Quality Check"
+    condition: "at_least_two_formats_available"
+    type: warning
+    failure_action: "Add more formats before launch"
+    source: "$100M Leads p.241-255"
+
+  QG-006:
+    name: "Quality Bar Gate"
+    transition: "Quality Check -> CTA Creation"
+    condition: "could_charge_for_it AND secrets_not_withheld"
+    type: blocking
+    failure_action: "Increase value until passing"
+    source: "$100M Leads p.257-267"
+
+  QG-007:
+    name: "CTA Completeness Gate"
+    transition: "CTA Creation -> Launch"
+    condition: "clear_action AND at_least_one_reason"
+    type: blocking
+    failure_action: "Add missing CTA elements"
+    source: "$100M Leads p.269-299"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  lead_magnet_creation:
+    trigger: "New lead magnet needed"
+    steps:
+      - step: 1
+        name: "Problem Discovery"
+        agent: problem-mapper
+        action: "Map Problem-Solution Cycle, identify narrow problems"
+        output: "Ranked problem list"
+        gate: QG-001
+
+      - step: 2
+        name: "Type Selection"
+        agent: type-selector
+        action: "Select optimal lead magnet type"
+        output: "Type with rationale"
+        gate: QG-002
+
+      - step: 3
+        name: "Delivery Design"
+        agent: delivery-designer
+        action: "Create 12-variant matrix, prioritize testing"
+        output: "Delivery variants and test order"
+        gate: QG-003
+
+      - step: 4
+        name: "Name Testing"
+        agent: name-tester
+        action: "Test titles, images, subtitles systematically"
+        output: "Winning name combination"
+        gate: QG-004
+
+      - step: 5
+        name: "Format Multiplication"
+        agent: format-multiplier
+        action: "Package in multiple consumption formats"
+        output: "Multi-format lead magnet"
+        gate: QG-005
+
+      - step: 6
+        name: "Quality Validation"
+        agent: quality-guardian
+        action: "Validate charge-worthy quality"
+        output: "Quality certification"
+        gate: QG-006
+
+      - step: 7
+        name: "CTA Creation"
+        agent: cta-crafter
+        action: "Create CTAs with reasons to act now"
+        output: "CTA copy and placement plan"
+        gate: QG-007
+
+  lead_magnet_optimization:
+    trigger: "Existing lead magnet underperforming"
+    steps:
+      - step: 1
+        agent: roi-analyst
+        action: "Diagnose performance gaps"
+        output: "Gap analysis report"
+
+      - step: 2
+        agent: cycle-validator
+        action: "Validate Problem-Solution Cycle integrity"
+        output: "Cycle validation report"
+
+      - step: 3
+        agent: name-tester
+        action: "Re-test naming if engagement low"
+        condition: "If engagement metrics below threshold"
+
+      - step: 4
+        agent: quality-guardian
+        action: "Re-assess quality if conversion low"
+        condition: "If consumption-to-conversion below threshold"
+
+      - step: 5
+        agent: cta-crafter
+        action: "Strengthen CTAs if conversion low"
+        condition: "If conversion metrics below threshold"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    engagement_rate:
+      formula: "Engaged leads / Total impressions"
+      target: "Higher than core offer direct"
+      source: "$100M Leads - engagement principle"
+
+    consumption_rate:
+      formula: "Consumers / Engaged leads"
+      target: ">50%"
+      source: "$100M Leads p.241-243 (2-4x with easy consumption)"
+
+    cost_per_engaged_lead:
+      formula: "Ad spend / Engaged leads"
+      target: "Lower than without lead magnet"
+      source: "$100M Leads p.302-307"
+
+  secondary:
+    lead_magnet_to_call_rate:
+      formula: "Calls / Lead magnet consumers"
+      benchmark: "1 in 10 (10%)"
+      source: "$100M Leads p.305"
+
+    customer_acquisition_cost:
+      formula: "Total cost / Customers"
+      target: "3x lower than without lead magnet"
+      source: "$100M Leads p.306-307"
+
+    roi_per_variant:
+      formula: "(Revenue - Cost) / Cost"
+      tracking: "Compare all 12 variants"
+
+  by_step:
+    step_1_problem:
+      - "Problem narrowness score"
+      - "Revelation clarity score"
+
+    step_4_naming:
+      - "Title test engagement rates"
+      - "Subtitle test engagement rates"
+      - "Time to winner identification"
+
+    step_5_formats:
+      - "Format split percentage"
+      - "Consumption rate by format"
+
+    step_7_cta:
+      - "Click-through rate"
+      - "Conversion rate by CTA variant"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Low engagement on lead magnet"
+    possible_causes:
+      - "Name/title not compelling"
+      - "Problem not relevant to audience"
+      - "Delivery method mismatch"
+    diagnosis:
+      - "Check name test results"
+      - "Validate problem with audience research"
+      - "Survey for format preferences"
+    solutions:
+      - "Re-run name testing with more variations"
+      - "Return to problem mapping"
+      - "Try different delivery method"
+
+  - symptom: "High engagement, low consumption"
+    possible_causes:
+      - "Too difficult to access"
+      - "Too long/complex"
+      - "Wrong format for audience"
+    diagnosis:
+      - "Audit access friction"
+      - "Check completion rates by section"
+      - "Survey format preferences"
+    solutions:
+      - "Add more formats (2-4x potential)"
+      - "Simplify/shorten"
+      - "Create summary version"
+
+  - symptom: "High consumption, low conversion to core offer"
+    possible_causes:
+      - "Problem doesn't reveal core offer need"
+      - "Quality not high enough"
+      - "CTA weak or missing"
+    diagnosis:
+      - "Re-validate Problem-Solution Cycle"
+      - "Quality audit (could charge?)"
+      - "CTA presence/strength audit"
+    solutions:
+      - "Choose different narrow problem"
+      - "Increase value until 'too much'"
+      - "Add scarcity/urgency/reasons"
+
+  - symptom: "High CAC despite lead magnet"
+    possible_causes:
+      - "Lead magnet attracting wrong audience"
+      - "Core offer mismatch"
+      - "Competition in space"
+    diagnosis:
+      - "Analyze lead quality"
+      - "Check offer-magnet alignment"
+      - "Competitive analysis"
+    solutions:
+      - "Narrow targeting"
+      - "Realign or change lead magnet"
+      - "Increase value differentiation"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  step_anatomy_fields: 8/8
+  decision_rules_documented: 7
+  executor_matrix_complete: true
+  quality_gates_defined: 7
+  workflows_documented: 2
+  problem_solution_cycle_documented: true
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

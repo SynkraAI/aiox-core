@@ -1,0 +1,135 @@
+pack:
+  name: brand
+  version: 1.0.0
+  short-title: Brand Squad
+  description: >-
+    Elite brand building squad powered by documented frameworks from the world's
+    greatest branding minds. Covers brand strategy, positioning, naming, visual
+    identity, logo design, brand building, and movement architecture. Every agent
+    is cloned from a real expert with skin in the game and battle-tested methodology.
+  author: Synkra AIOX
+  icon: "💎"
+  slashPrefix: brand
+
+# Pattern Library
+pattern_library:
+  prefix: BR
+  naming_convention:
+    format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+    example: "BR-TP-001"
+  categories:
+    - id: TP
+      name: "Task Patterns"
+      description: "Patterns for brand task structure and execution"
+    - id: EP
+      name: "Executor Patterns"
+      description: "Patterns for brand executor types and selection"
+    - id: PP
+      name: "Process Patterns"
+      description: "Patterns for brand workflow processes"
+    - id: IP
+      name: "Integration Patterns"
+      description: "Patterns for external integrations"
+    - id: BP
+      name: "Brand Patterns"
+      description: "Reusable brand strategy and identity patterns"
+    - id: DP
+      name: "Documentation Patterns"
+      description: "Patterns for brand documentation and guidelines"
+  patterns: []
+
+# Task Standards
+task_standards:
+  enforce_anatomy: true
+  validator: "BR-TP-001"
+  required_fields:
+    - task_name
+    - status
+    - responsible_executor
+    - execution_type
+    - input
+    - output
+    - action_items
+    - acceptance_criteria
+  optional_fields:
+    - estimated_time
+    - dependencies
+    - templates
+    - quality_gate
+    - handoff
+
+# Executor Types
+executor_types:
+  human:
+    id: "BR-EP-001"
+    name: "Human Executor"
+    use_for:
+      - "Final brand approval"
+      - "Stakeholder presentations"
+      - "Creative direction override"
+  agent:
+    id: "BR-EP-002"
+    name: "Agent Executor (AI)"
+    use_for:
+      - "Brand strategy analysis"
+      - "Positioning exercises"
+      - "Name generation"
+      - "Brand audit"
+      - "Guidelines documentation"
+  hybrid:
+    id: "BR-EP-003"
+    name: "Hybrid Executor"
+    use_for:
+      - "Visual identity review"
+      - "Logo evaluation"
+      - "Brand book validation"
+  worker:
+    id: "BR-EP-004"
+    name: "Worker Executor"
+    use_for:
+      - "Color code conversion"
+      - "Typography specification export"
+      - "Design token generation"
+
+executor_selection:
+  requires_creativity: human
+  requires_judgment: [human, hybrid]
+  requires_speed: [agent, worker]
+  requires_consistency: worker
+  requires_validation: hybrid
+  requires_learning: agent
+
+# Workflow Configuration
+workflow_config:
+  checkpoint_policy: always_active
+  checkpoint_modes:
+    always_active: "Every checkpoint MUST pass"
+    skip_on_override: "Can skip with manual approval"
+    advisory: "Only alerts, doesn't block"
+  fail_fast: true
+  allow_manual_override: false
+
+# Agent Tiers
+tier_system:
+  tier_0:
+    name: "Diagnosis & Orchestration"
+    agents:
+      - brand-chief
+      - marty-neumeier
+  tier_1:
+    name: "Masters"
+    agents:
+      - april-dunford
+      - michael-johnson
+      - sagi-haviv
+      - alexandra-watkins
+  tier_2:
+    name: "Systematizers"
+    agents:
+      - emily-heyward
+
+# Squad Dependencies
+settings:
+  greeting: named
+  language: en
+  max_context_files: 5

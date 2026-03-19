@@ -1,0 +1,279 @@
+# ICP Cloning Squad - Cognitive Clone Generation System
+# Based on Framework SYNAPSE v6.0
+# Version: 1.0.0
+# Created: 2026-02-13
+
+# Top-level fields (standard AIOS format)
+name: icp-cloning
+version: "1.0.0"
+entry_agent: synapse-architect
+
+squad:
+  name: icp-cloning
+  display_name: "ICP Cognitive Cloning System"
+  version: "1.0.0"
+  domain: "persona cloning, psychographic modeling, ICP development, cognitive modeling"
+  description: |
+    Sistema de clonagem cognitiva profunda de ICPs (Ideal Customer Profiles) com 100% de eficácia.
+    Transforma dados básicos de persona em clone conversacional humanizado usando Framework SYNAPSE v6.0.
+    Processo em 6 fases: Extração → Processamento → Humanização → Geração → Validação → Evolução.
+    Resultado: System Prompt (1000+ linhas) + 12 documentos Knowledge Base.
+
+  context: |
+    Sistema baseado na metodologia que criou a persona "Marina" com sucesso total.
+    Utiliza Framework SYNAPSE v6.0 (TSM, APR, MCC, PSH) para modelagem cognitiva.
+    Tempo total: 12-16 horas de processamento guiado.
+
+    Fases do processo:
+    - Fase 1 (30 min): Entrada de dados - Briefing ICP
+    - Fase 2 (4-5h): Extração profunda - 15 prompts (P0-P14)
+    - Fase 3 (2-3h): Processamento SYNAPSE - Consolidação + Framework
+    - Fase 4 (2-3h): Humanização avançada - Blind spots, paradoxos, memórias
+    - Fase 5 (2-3h): Geração final - System Prompt + 12 KB docs
+    - Fase 6 (1-2h): Validação - Testes conversacionais + refinamento
+
+    Framework SYNAPSE v6.0 components:
+    - TSM (Trigger-State-Manifestation): 8 cadeias comportamentais
+    - APR (Adaptive Plasticity Rules): 5 cenários de plasticidade
+    - MCC (Mental Computational Cost): 7 quantificações de custo mental
+    - PSH (Psychographic Shell): Integração final de todos módulos
+
+    Outputs finais:
+    - 1 System Prompt completo (1000+ linhas)
+    - 12 documentos Knowledge Base especializados
+    - Clone conversacional com profundidade psicológica e autenticidade linguística
+
+  keywords:
+    - icp cloning
+    - cognitive modeling
+    - persona development
+    - psychographic profiling
+    - SYNAPSE framework
+    - behavioral modeling
+    - decision intelligence
+    - conversational AI
+    - system prompt generation
+    - knowledge base
+    - humanization
+    - blind spots
+    - paradoxos produtivos
+
+orchestrator:
+  agent: synapse-architect
+  file: agents/synapse-architect.md
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# 3-LAYER ARCHITECTURE (Following Framework Phases)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+layers:
+  # CAMADA 1: EXTRAÇÃO PROFUNDA (Fase 2 - P0 a P14)
+  extraction:
+    description: "Extração profunda de 15 dimensões do ICP usando prompts especializados"
+    phases:
+      - name: "Fundação Demográfica"
+        prompts: [P0, P0B]
+        description: "Demografia, contexto socioeconômico, realidade financeira"
+
+      - name: "Perfil Psicológico"
+        prompts: [P1, P2, P3]
+        description: "Psicometria (Big Five + 30 facetas), assinatura linguística, valores"
+
+      - name: "Contexto Social"
+        prompts: [P4, P5, P6]
+        description: "Comunidade, neuropsico triggers, hábitos digitais"
+
+      - name: "Decisão & Expectativas"
+        prompts: [P7, P8, P9]
+        description: "Comportamento de compra, narrativas, expectativas"
+
+      - name: "Decision Intelligence"
+        prompts: [P10, P11, P12, P13, P14]
+        description: "Contexto decisório, triggers, objeções, heurísticas, aprendizado"
+
+    agents:
+      - id: extractor-deep
+        name: Deep Extraction Specialist
+        role: Multi-Dimensional ICP Data Extraction
+        file: agents/extractor-deep.md
+        frameworks: [15-Layer Extraction, Big Five Psychometrics, Linguistic Fingerprinting, 5-Gate Purchase Model]
+        phases_covered: "P0-P14"
+
+  # CAMADA 2: PROCESSAMENTO & HUMANIZAÇÃO (Fases 3-4)
+  processing:
+    description: "Processamento SYNAPSE v6.0 + Humanização avançada"
+    phases:
+      - name: "Consolidação"
+        description: "Integração de outputs P0-P14 em módulos coerentes"
+        modules: [Base Psicológica, Contexto Social, Decisão & Expectativas, Decision Intelligence]
+
+      - name: "Framework SYNAPSE"
+        description: "Aplicação dos 4 componentes do Framework SYNAPSE v6.0"
+        components: [TSM Triplets, APR Rules, MCC Costs, PSH Shell]
+
+      - name: "Humanização"
+        description: "Adição de camadas de autenticidade humana"
+        layers: [Blind Spots, Paradoxos Produtivos, Fingerprints Únicos, Memórias Episódicas, Sistema Imunológico, Meta-Axiomas]
+
+    agents:
+      - id: synapse-processor
+        name: SYNAPSE Framework Processor
+        role: Integration & Framework Application
+        file: agents/synapse-processor.md
+        frameworks: [SYNAPSE v6.0, TSM Chains, APR Plasticity, MCC Quantification, PSH Integration]
+        phases_covered: "Consolidação + SYNAPSE"
+
+      - id: humanizer
+        name: Persona Humanization Specialist
+        role: Authenticity & Depth Injection
+        file: agents/humanizer.md
+        frameworks: [Blind Spots Engineering, Productive Paradoxes, Episodic Memory, Immunological System, Meta-Axioms]
+        phases_covered: "Humanização"
+
+  # CAMADA 3: GERAÇÃO & VALIDAÇÃO (Fases 5-6)
+  generation:
+    description: "Geração de outputs finais e validação de qualidade"
+    phases:
+      - name: "Geração System Prompt"
+        description: "Criação do system prompt completo (1000+ linhas)"
+
+      - name: "Geração Knowledge Base"
+        description: "Criação de 12 documentos KB especializados"
+
+      - name: "Validação Conversacional"
+        description: "Testes de 30 perguntas + checklist 100 pontos"
+
+      - name: "Evolução Contínua"
+        description: "Sistema de atualização e refinamento do clone"
+
+    agents:
+      - id: clone-generator
+        name: Clone Generation Specialist
+        role: System Prompt & KB Documentation
+        file: agents/clone-generator.md
+        frameworks: [12-Doc KB Structure, System Prompt Architecture, Documentation Standards]
+        phases_covered: "Geração"
+
+      - id: clone-validator
+        name: Clone Quality Validator
+        role: Conversational Testing & Quality Assurance
+        file: agents/clone-validator.md
+        frameworks: [30-Question Test Protocol, 100-Point Checklist, Fidelity Scoring]
+        phases_covered: "Validação"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  main:
+    - id: full-clone-pipeline
+      name: "Full ICP Clone Pipeline"
+      file: workflows/full-clone-pipeline.yaml
+      description: "Complete 6-phase cloning process (12-16 hours)"
+      phases: [entrada, extração, processamento, humanização, geração, validação]
+
+  quick:
+    - id: quick-clone
+      name: "Quick Clone (Simplified)"
+      file: workflows/quick-clone.yaml
+      description: "Simplified 4-phase process (6-8 hours)"
+      phases: [entrada, extração-básica, processamento-light, geração]
+
+  maintenance:
+    - id: update-clone
+      name: "Clone Evolution & Update"
+      file: workflows/update-clone.yaml
+      description: "Update existing clone with new data"
+      phases: [análise-drift, atualização, re-validação]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TASKS MAPPING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+tasks:
+  extraction:
+    - collect-icp-briefing
+    - extract-p0-demografia
+    - extract-p0b-financeiro
+    - extract-p1-psicometria
+    - extract-p2-linguagem
+    - extract-p3-valores
+    - extract-p4-comunidade
+    - extract-p5-neuropsico
+    - extract-p6-digital
+    - extract-p7-compra
+    - extract-p8-narrativas
+    - extract-p9-expectativas
+    - extract-p10-decision-context
+    - extract-p11-action-triggers
+    - extract-p12-objections
+    - extract-p13-heuristics
+    - extract-p14-outcome-learning
+
+  processing:
+    - consolidate-base-psicologica
+    - consolidate-contexto-social
+    - consolidate-decisao-expectativas
+    - consolidate-decision-intelligence
+    - generate-tsm-triplets
+    - generate-apr-rules
+    - generate-mcc-costs
+    - create-psh-shell
+    - validate-synapse-coherence
+
+  humanization:
+    - generate-blind-spots
+    - generate-paradoxos
+    - generate-fingerprints
+    - generate-memorias-episodicas
+    - generate-sistema-imunologico
+    - generate-meta-axiomas
+
+  generation:
+    - generate-system-prompt
+    - generate-kb-01-biografia
+    - generate-kb-02-linguagem
+    - generate-kb-03-frameworks
+    - generate-kb-04-memorias
+    - generate-kb-05-axiomas
+    - generate-kb-06-paradoxos
+    - generate-kb-07-fingerprints
+    - generate-kb-08-blind-spots
+    - generate-kb-09-imunologico
+    - generate-kb-10-synapse
+    - generate-kb-11-decision-intelligence
+    - generate-kb-12-evolution-toolkit
+
+  validation:
+    - validate-conversational-30q
+    - validate-checklist-100
+    - validate-fidelity-score
+    - test-edge-cases
+    - refine-clone
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  created: "2026-02-13"
+  author: "AIOS Master (Orion)"
+  based_on: "Framework SYNAPSE v6.0 - Sistema de Clonagem Cognitiva"
+  source_framework: "clone_ICP_system_synapse_v1.0"
+  reference_clone: "Marina (100% success rate)"
+  estimated_time: "12-16 hours"
+  output_quality: "100% fidelity"
+
+  credits:
+    framework_author: "Unknown (SYNAPSE v6.0 creator)"
+    methodology: "15-layer extraction + SYNAPSE processing + humanization"
+    validation: "30-question protocol + 100-point checklist"
+
+  tags:
+    - icp-cloning
+    - cognitive-modeling
+    - synapse-framework
+    - persona-development
+    - decision-intelligence
+    - conversational-ai

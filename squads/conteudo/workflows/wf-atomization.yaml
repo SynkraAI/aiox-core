@@ -1,0 +1,137 @@
+name: wf-atomization
+description: Workflow de atomizacao de conteudo — transforma 1 conteudo pilar em 30+ micro-pecas para diferentes formatos
+version: "1.0"
+
+phases:
+  - id: extracao
+    name: Extracao de Atomos
+    agent: content-chief
+    description: Analisar o conteudo pilar e identificar atomos de conteudo (insights, quotes, dados, historias)
+    elicit: true
+    steps:
+      - Receber conteudo pilar (video, live, artigo, podcast, post longo)
+      - Se video/audio, solicitar ou gerar transcricao completa
+      - Identificar todos os insights acionaveis do conteudo
+      - Extrair quotes memoraveis e frases de impacto
+      - Listar dados, estatisticas e provas mencionadas
+      - Mapear historias e exemplos contados
+      - Identificar crencas quebradas e provocacoes
+      - Classificar cada atomo por tipo (insight, quote, dado, historia, provocacao)
+      - Apresentar lista de atomos ao usuario (1. Confirmar, 2. Ajustar, 3. Adicionar mais)
+    inputs:
+      - conteudo_pilar
+      - transcricao_se_video
+      - tema_central
+    outputs:
+      - lista_atomos_classificados
+      - total_atomos_extraidos
+      - tipo_por_atomo
+    checkpoint: Minimo 10 atomos identificados e classificados
+    veto_condition: Conteudo pilar nao tem substancia suficiente (< 3 insights acionaveis) — VETO e solicitar conteudo mais robusto
+
+  - id: planejamento
+    name: Planejamento de Formatos
+    agent: content-planner
+    description: Definir qual atomo vira qual formato e planejar a distribuicao
+    depends_on: [extracao]
+    elicit: true
+    steps:
+      - Mapear cada atomo para o formato mais adequado (carrossel, reels, stories, post unico)
+      - Definir prioridade de criacao (alto impacto primeiro)
+      - Agrupar atomos que podem virar serie de conteudo
+      - Definir angulo de abordagem para cada peca
+      - Selecionar tipo de post para cada peca (7 tipos disponiveis)
+      - Definir intencao de cada peca (atracao, consciencia, aquecimento, venda)
+      - Garantir proporcao equilibrada entre formatos
+      - Apresentar mapa de atomizacao ao usuario (1. Confirmar, 2. Ajustar, 3. Redistribuir)
+    inputs:
+      - lista_atomos_classificados
+    outputs:
+      - mapa_atomizacao
+      - prioridade_criacao
+      - formato_por_atomo
+      - intencao_por_peca
+    checkpoint: Cada atomo tem formato, tipo de post e intencao definidos
+    veto_condition: Mais de 70% dos atomos mapeados para o mesmo formato — redistribuir para variedade
+
+  - id: criacao
+    name: Criacao das Micro-Pecas
+    agents: [carousel-creator, reels-creator, stories-strategist]
+    description: Produzir cada peca de micro-conteudo conforme o mapa de atomizacao
+    depends_on: [planejamento]
+    elicit: true
+    steps:
+      - Criar carrosseis a partir dos atomos mapeados (usar task create-carousel)
+      - Criar roteiros de reels a partir dos atomos mapeados (usar task create-reels)
+      - Criar sequencias de stories a partir dos atomos mapeados (usar task create-stories)
+      - Criar posts unicos para atomos simples
+      - Garantir que cada peca funciona isoladamente (sem depender do pilar)
+      - Manter tom imperial e identidade consistente em todas as pecas
+      - Apresentar pecas ao usuario em lotes para aprovacao
+    task_routing:
+      carrossel: create-carousel
+      reels: create-reels
+      stories: create-stories
+    inputs:
+      - mapa_atomizacao
+      - atomos_classificados
+    outputs:
+      - pecas_criadas
+      - total_pecas
+    checkpoint: Todas as pecas do mapa criadas e aprovadas pelo usuario
+    veto_condition: Peca parece copia direta do pilar em vez de adaptacao para o formato — reescrever com angulo proprio
+
+  - id: validacao
+    name: Validacao pelo Oraculo
+    agent: content-validator
+    description: Validar cada micro-peca pelos padroes de qualidade do oraculo
+    depends_on: [criacao]
+    elicit: false
+    steps:
+      - Aplicar oraculo-posts para carrosseis e posts
+      - Aplicar oraculo-reels para roteiros de reels
+      - Verificar tom imperial e concisao em todas as pecas
+      - Verificar que cada peca tem identidade propria (nao parece "pedaco" do pilar)
+      - Calcular score individual por peca
+      - Reescrever pecas com score < 80%
+    task: audit-content
+    retry_on_fail: true
+    max_retries: 3
+    inputs:
+      - pecas_criadas
+    outputs:
+      - scores_individuais
+      - pecas_validadas
+      - feedback_por_peca
+    checkpoint: Todas as pecas com score >= 80% no oraculo
+    veto_condition: Score < 80% apos 3 tentativas — escalar para content-chief para reescrita completa
+
+  - id: programacao
+    name: Distribuicao no Calendario
+    agent: content-planner
+    description: Distribuir as micro-pecas no calendario editorial com espacamento estrategico
+    depends_on: [validacao]
+    elicit: true
+    steps:
+      - Definir periodo de distribuicao (quantos dias/semanas para espalhar as pecas)
+      - Espacar pecas do mesmo tema para nao saturar audiencia
+      - Alternar formatos ao longo da semana (carrossel, reels, stories)
+      - Garantir que pecas de venda estejam cercadas por pecas de valor
+      - Incluir horarios ideais de publicacao por formato
+      - Apresentar calendario ao usuario (1. Confirmar, 2. Ajustar datas, 3. Reordenar)
+    inputs:
+      - pecas_validadas
+      - periodo_desejado
+    outputs:
+      - calendario_atomizacao
+      - cronograma_publicacao
+      - notas_execucao
+    checkpoint: Calendario aprovado pelo usuario com todas as pecas distribuidas
+    veto_condition: Pecas nao validadas pelo oraculo (score < 80%) ou usuario nao aprovou calendario — nao finalizar sem validacao completa
+
+metricas:
+  score_minimo_oraculo: 80
+  max_retries_validacao: 3
+  minimo_atomos: 10
+  formatos_suportados: [carrossel, reels, stories, post-unico]
+  proporcao_maxima_formato: 70

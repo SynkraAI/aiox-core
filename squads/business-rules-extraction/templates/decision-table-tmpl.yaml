@@ -1,0 +1,75 @@
+# Decision Table Template — Standard Format
+# Based on Barbara von Halle's Decision Model + Jan Vanthienen's verification
+
+table:
+  id: "DT-{MODULE}-{SEQ}"
+  name: "{Descriptive name}"
+  version: "1.0"
+  rule_family: "{Rule family this table belongs to}"
+
+  # Conclusion (what this table determines)
+  conclusion:
+    name: "{conclusion variable}"
+    type: "numeric|categorical|boolean|date"
+    possible_values: ["{val1}", "{val2}", "{val3}"]
+
+  # Conditions
+  conditions:
+    - name: "{condition_1}"
+      type: "numeric|categorical|boolean|date"
+      domain: "{possible values or range}"
+    - name: "{condition_2}"
+      type: "numeric|categorical|boolean|date"
+      domain: "{possible values or range}"
+
+  # Decision Table (limited-entry format)
+  # Y = condition is true, N = condition is false, - = irrelevant
+  rules:
+    headers:
+      conditions: ["{condition_1}", "{condition_2}"]
+      conclusion: "{conclusion}"
+    rows:
+      - id: 1
+        conditions: ["Y", "Y"]
+        conclusion: "{result_1}"
+      - id: 2
+        conditions: ["Y", "N"]
+        conclusion: "{result_2}"
+      - id: 3
+        conditions: ["N", "-"]
+        conclusion: "{result_3}"
+
+  # Verification (Jan Vanthienen methodology)
+  verification:
+    completeness:
+      status: "complete|incomplete"
+      missing_combinations: []
+      notes: ""
+    consistency:
+      status: "consistent|contradictory"
+      contradictions: []
+      notes: ""
+    redundancy:
+      status: "minimal|redundant"
+      redundant_rows: []
+      notes: ""
+    contraction:
+      applied: false
+      original_rows: 0
+      contracted_rows: 0
+
+  # Normalization (von Halle)
+  normalization:
+    first_normal_form: true   # All conditions are atomic
+    second_normal_form: true  # No redundant conditions
+    third_normal_form: true   # No transitive dependencies
+
+  # Traceability
+  source_rules: ["BR-{MODULE}-{SEQ}"]
+  source_system: "{system name}"
+
+  # Metadata
+  metadata:
+    created: "YYYY-MM-DD"
+    verified_by: "{agent}"
+    verification_date: "YYYY-MM-DD"

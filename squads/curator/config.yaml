@@ -1,0 +1,557 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# CURATOR SQUAD - Configuration
+# Version: 3.0.0
+# Purpose: Content curation, mining, and assembly for video/content production
+# ═══════════════════════════════════════════════════════════════════════════════
+
+name: curator
+version: 3.4.0
+
+pack:
+  name: curator
+  version: 3.4.0
+  short-title: Curator Squad
+  description: >-
+    Squad especializado em curadoria de conteúdo existente. Minera transcrições,
+    identifica momentos de alto impacto, monta roteiros de corte com timestamps
+    EXATOS, e enriquece com dados/notícias relevantes. NUNCA inventa texto -
+    apenas MONTA o que já existe.
+  author: AIOS
+  icon: "🎬"
+  slashPrefix: curator
+
+entry_agent: curator-chief
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CORE PRINCIPLES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+core_principles:
+  - name: "ZERO INVENTION"
+    rule: "Curator MONTA texto existente, NUNCA inventa. Copy CRIA texto novo."
+
+  - name: "EXACT TIMESTAMPS"
+    rule: "Timestamps devem ser EXATOS (MM:SS ou HH:MM:SS). Traceable to source blocks."
+
+  - name: "ATHENA-MEK RIGOR"
+    rule: "Mining uses 3-pass methodology: Anchor → Extract → Audit. Anti-laziness (min moments), territorial completeness (>40% coverage, quartiles), quality report."
+
+  - name: "VIRAL TRIGGER DETECTION"
+    rule: "Every moment gets structural type (moment-types.yaml) AND psychological trigger (viral-triggers.yaml). Both classifications are mandatory."
+
+  - name: "LARGE FILE PROTOCOL"
+    rule: "Transcripts >2000 lines MUST be split into ~1000 line chunks for parallel sub-agent processing. Consolidation via CODE, never LLM."
+
+  - name: "NARRATIVE COHERENCE"
+    rule: "Output deve fazer sentido do começo ao fim. Não pode parecer picotado."
+
+  - name: "REAL DATA ONLY"
+    rule: "Curadoria de dados = notícias/tendências REAIS com fonte. Não inventar."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIER STRUCTURE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+tier_structure:
+  orchestrator:
+    agent: curator-chief
+    role: "Route requests, coordinate tiers, manage context"
+
+  tier_minus_1:
+    name: "Acquisition"
+    agents: []  # Uses external /youtube (Orbit)
+    external_dependency: "/youtube"
+    purpose: "Acquire transcripts from YouTube/video sources"
+
+  tier_0:
+    name: "Mining & Cataloging"
+    agents:
+      - content-miner-pro
+      - timestamp-cataloger
+    purpose: "Extract moments, catalog with exact timestamps"
+    output: "output/curated/{source-slug}/momentos.md"
+
+  tier_0_5:
+    name: "Data Curation"
+    agents:
+      - data-curator
+    purpose: "Enrich with news, trends, statistics (parallel)"
+    output: "curadoria.yaml"
+    runs_parallel_to: "tier_1"
+
+  tier_1:
+    name: "Narrative"
+    agents:
+      - ken-burns
+      - walter-murch
+      - matthew-dicks
+      - robert-mckee
+    purpose: "Build narrative structure, determine assembly order, scene-level analysis"
+    output: "narrative_structure.yaml"
+
+  tier_2:
+    name: "Formats & Viral"
+    agents:
+      - brendan-kane
+      - jonah-berger
+      - mrbeast
+      - ffmpeg-cutter
+    purpose: "Optimize for specific formats, viral potential, and retention"
+    output: "roteiro_corte.yaml"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PATTERN LIBRARY
+# ═══════════════════════════════════════════════════════════════════════════════
+
+pattern_library:
+  prefix: CU
+  naming_convention:
+    format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+    example: "CU-TP-001"
+  categories:
+    - id: TP
+      name: "Task Patterns"
+      description: "Patterns for curation task structure"
+    - id: EP
+      name: "Executor Patterns"
+      description: "Patterns for executor selection"
+    - id: NP
+      name: "Narrative Patterns"
+      description: "Patterns for narrative assembly"
+    - id: VP
+      name: "Viral Patterns"
+      description: "Patterns for viral optimization"
+    - id: DP
+      name: "Data Patterns"
+      description: "Patterns for data curation"
+  patterns:
+    - id: CU-NP-001
+      name: "Blind Assembly"
+      description: "Ken Burns method - build audio first, test without visual"
+      source: "Ken Burns / Craig Mellish"
+    - id: CU-NP-002
+      name: "Rule of Six"
+      description: "Walter Murch hierarchy - Emotion 51%, Story, Rhythm, Eye Trace, 2D, 3D"
+      source: "Walter Murch"
+    - id: CU-NP-003
+      name: "5-Second Moment"
+      description: "Matthew Dicks method - identify THE moment of change"
+      source: "Matthew Dicks"
+    - id: CU-VP-001
+      name: "Hook Point"
+      description: "Brendan Kane 160+ viral templates"
+      source: "Brendan Kane"
+    - id: CU-VP-002
+      name: "STEPPS"
+      description: "Jonah Berger virality framework"
+      source: "Jonah Berger"
+    - id: CU-VP-003
+      name: "MQR (Moment Quality Rubric)"
+      description: "4-dimension scoring (Hook, Emotion, Shareability, Clarity) derived from Kane + Berger for Tier 0 mining"
+      source: "Brendan Kane (Hook Point) + Jonah Berger (Contagious)"
+    - id: CU-DP-001
+      name: "I Am the Algorithm"
+      description: "Dave Pell method - 75 sources → 10 stories"
+      source: "Dave Pell"
+    - id: CU-DP-002
+      name: "Haystack Method"
+      description: "Rohit Bhargava - find non-obvious patterns"
+      source: "Rohit Bhargava"
+    - id: CU-NP-004
+      name: "Story Structure"
+      description: "Robert McKee scene analysis — beat → scene → sequence → act, value charges, the Gap, controlling idea"
+      source: "Robert McKee"
+    - id: CU-VP-004
+      name: "Retention Architecture"
+      description: "MrBeast minute-by-minute framework — first minute engineering, re-engagement every 3 min, zero dead time"
+      source: "MrBeast (Jimmy Donaldson)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TASK STANDARDS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+task_standards:
+  enforce_anatomy: true
+  validator: "CU-TP-001"
+  required_fields:
+    - task_name
+    - status
+    - responsible_executor
+    - execution_type
+    - input
+    - output
+    - action_items
+    - acceptance_criteria
+  optional_fields:
+    - estimated_time
+    - dependencies
+    - templates
+    - quality_gate
+    - handoff
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXECUTOR TYPES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+executor_types:
+  human:
+    id: "CU-EP-001"
+    name: "Human Executor"
+    use_for:
+      - "Final approval of cut sequence"
+      - "Creative direction decisions"
+      - "Transition text approval"
+  agent:
+    id: "CU-EP-002"
+    name: "Agent Executor (AI)"
+    use_for:
+      - "Transcript mining"
+      - "Moment identification"
+      - "Narrative structure suggestion"
+      - "Data curation research"
+  hybrid:
+    id: "CU-EP-003"
+    name: "Hybrid Executor"
+    use_for:
+      - "Timestamp validation"
+      - "Narrative coherence review"
+      - "Cut order approval"
+  worker:
+    id: "CU-EP-004"
+    name: "Worker Executor"
+    use_for:
+      - "Transcript fetching"
+      - "File format conversion"
+      - "Timestamp extraction"
+      - "Transcript parsing & normalization (catalog_transcript.py parse)"
+      - "Index building & YAML generation (catalog_transcript.py index)"
+      - "QG-CAT automated validation"
+
+executor_selection:
+  requires_creativity: human
+  requires_judgment: [human, hybrid]
+  requires_speed: [agent, worker]
+  requires_consistency: worker
+  requires_validation: hybrid
+  requires_learning: agent
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflow_config:
+  checkpoint_policy: always_active
+  checkpoint_modes:
+    always_active: "Every checkpoint MUST pass"
+    skip_on_override: "Can skip with manual approval"
+    advisory: "Only alerts, doesn't block"
+  fail_fast: true
+  allow_manual_override: false
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  - id: "QG-001"
+    name: "Transcript Acquired"
+    transition: "External → Tier 0"
+    type: "blocking"
+    criteria:
+      - "Transcript exists and is readable"
+      - "Duration/length known"
+      - "Speaker attribution if multiple"
+    if_fails:
+      action: "Transcript not acquired — offer fallback options"
+      options:
+        - "Retry: /youtube *download {url}"
+        - "Manual: paste transcript directly into *mine command"
+        - "Check: verify video is public and URL is correct"
+      rework_limit: 2
+
+  - id: "QG-002"
+    name: "Mining Complete (ATHENA-MEK + MQR)"
+    transition: "Tier 0 → Tier 1"
+    type: "blocking"
+    criteria:
+      - "{source-slug}/momentos.md exists in output/curated/{source-slug}/ (v3.0 compact MD format)"
+      - "All moments have exact timestamps"
+      - "Moments tagged by type AND viral trigger"
+      - "All moments scored via MQR (H/E/S/C sub-scores + composite impact_score)"
+      - "MQR compact notation present (H{n}/E{n}/S{n}/C{n})"
+      - "Batch average impact_score between 5.5-6.5 (anti-inflation)"
+      - "Anti-laziness: moments >= duration_seconds / 180"
+      - "Territorial coverage >= 40%"
+      - "Each quartile >= 10% of moments"
+      - "Quality report section included"
+      - "{source-slug}/transcricao_anotada.md exists in output/curated/{source-slug}/"
+      - "mining-quality.md checklist passes (mandatory 100%, quality 80%)"
+
+  - id: "QG-CFG"
+    name: "Cut Configuration Confirmed"
+    transition: "Tier 0 → Tier 1 (after mining, before narrative)"
+    type: "blocking"
+    criteria:
+      - "Duration Intelligence breakdown calculated from content (not fixed buckets)"
+      - "Platform sweet spot alignment assessed"
+      - "Style preset selected with pacing parameters"
+      - "Multi-variant config valid (if num_variants > 1: sufficient unique hooks)"
+      - "User confirmed configuration"
+    if_fails:
+      action: "Re-present configuration with adjustments"
+      agents: ["curator-chief"]
+      rework_limit: 2
+
+  - id: "QG-003"
+    name: "Narrative Validated"
+    transition: "Tier 1 → Tier 2"
+    type: "blocking"
+    criteria:
+      - "Assembly order makes sense"
+      - "No narrative gaps"
+      - "Transitions identified"
+    if_fails:
+      action: "Return to Tier 1 narrative agents to fix gaps"
+      agents: ["ken-burns", "walter-murch", "matthew-dicks", "robert-mckee"]
+      rework_limit: 2
+
+  - id: "QG-004"
+    name: "Output Formatted"
+    transition: "Tier 2 → Delivery"
+    type: "blocking"
+    criteria:
+      - "roteiro_corte.yaml complete"
+      - "All timestamps exact"
+      - "Instructions for editor clear"
+    if_fails:
+      action: "Return to Tier 2 format agent to fix formatting/timestamp issues"
+      agents: ["mrbeast"]
+      rework_limit: 2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXTERNAL DEPENDENCIES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+dependencies:
+  external_agents:
+    - agent: "/youtube"
+      name: "Orbit"
+      purpose: "Transcript acquisition from YouTube"
+      when: "No transcript provided, need to fetch from video"
+
+  scripts:
+    - script: "squads/curator/scripts/execute_ffmpeg_cuts.py"
+      purpose: "Execute FFmpeg cuts from validated YAML cut scripts"
+      when: "After QG-004 passes, to render video segments"
+    - script: "squads/curator/scripts/validate_timestamps.py"
+      purpose: "Pass 4.7 — Validate extracted timestamps against raw transcript"
+      when: "After mining, before Phase 5 (Radio Cut)"
+    - script: "squads/curator/scripts/validate_transcription.py"
+      purpose: "Pass 4.7 — Detect transcription drift via fuzzy matching"
+      when: "After mining, before Phase 5 (Radio Cut)"
+    - script: "squads/curator/scripts/_validation_common.py"
+      purpose: "Shared parsing module for validation scripts"
+      when: "Imported by validate_timestamps.py and validate_transcription.py"
+
+  new_in_v3_2:
+    tasks:
+      - "tasks/resume-mining.md — Resume interrupted mining from checkpoint"
+      - "tasks/validate-curation.md — Standalone end-to-end validation"
+    checklists:
+      - "checklists/security-validation.md — Security & compliance for data curation"
+    data:
+      - "data/tool-registry.yaml — Catalog of all tools, scripts, MCPs"
+
+  replaces:
+    - agent: "/content-miner"
+      name: "Orion / ATHENA"
+      replaced_by: "content-miner-pro"
+      reason: "curator:content-miner-pro merges ATHENA-MEK v1.0 precision (3-pass, anti-laziness, territorial audit, viral triggers, large file protocol) with Paper Edit methodology"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT FORMATS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+output_formats:
+  banco_momentos:
+    description: "Top 50 mined moments — compact MD, human-readable"
+    template: "templates/banco-momentos-tmpl.md"
+    output_path: "output/curated/{source-slug}/momentos.md"
+    archive_path: "_temp/mining/{source-slug}/all_moments_merged.md"
+
+  transcricao_anotada:
+    description: "Full transcript annotated with KEEP/REMOVE/BRIDGE markers"
+    template: "templates/transcricao-anotada-tmpl.md"
+    output_path: "output/curated/{source-slug}/transcricao_anotada.md"
+    script: "squads/curator/scripts/generate_annotated_transcript.py"
+    parameters:
+      bridge_threshold_seconds: 30
+      context_window_seconds: 2
+
+  curadoria:
+    description: "External data enrichment (news, trends, stats)"
+    template: "templates/curadoria-tmpl.yaml"
+
+  roteiro_corte:
+    description: "Final cut script for editor"
+    templates:
+      shorts: "templates/shorts-cut-tmpl.yaml"
+      longform: "templates/longform-cut-tmpl.yaml"
+      longform_simple: "templates/longform-simple-cut-tmpl.yaml"
+    output_paths:
+      longform: "output/curated/{source-slug}/cortes/longform/{NN}_{titulo_sanitizado}.yaml"
+      longform_simple: "output/curated/{source-slug}/cortes/longform/{NN}_{titulo_sanitizado}.yaml"
+      shorts: "output/curated/{source-slug}/cortes/shorts/{NN}_{titulo_sanitizado}.yaml"
+    required_fields:
+      - titulo
+      - momentos (with exact timestamps)
+      - ordem_montagem
+      - transicoes
+      - instrucoes_editor
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CUT CUSTOMIZATION (Story #2 — Duration Intelligence + Style + Multi-Variant)
+# Reference: .dispatch/research/curator-cut-customization-research.md
+# ═══════════════════════════════════════════════════════════════════════════════
+
+cut_customization:
+  duration_mode: "content-driven"
+  description: |
+    Duration is determined by content rhythm, NOT fixed buckets (15/30/60).
+    Platform limits act as ceilings, not selection criteria.
+    Completion rate > absolute length.
+
+  style_presets:
+    viral:
+      pacing: "fast"
+      cut_frequency: "every 2-4s"
+      overlay_density: "high"
+      energy: "high throughout"
+      hook_strategy: "pattern-interrupt or bold-claim"
+      best_for: "TikTok, Reels, entertainment content"
+    educational:
+      pacing: "moderate"
+      cut_frequency: "every 5-8s"
+      overlay_density: "medium"
+      energy: "rising with plateaus"
+      hook_strategy: "question or counter-intuitive"
+      best_for: "YouTube Shorts, LinkedIn, knowledge content"
+    emotional:
+      pacing: "slow-build"
+      cut_frequency: "every 8-15s"
+      overlay_density: "low"
+      energy: "wave pattern (build → release)"
+      hook_strategy: "personal-story or vulnerability"
+      best_for: "Reels, TikTok storytelling, testimonials"
+    entertaining:
+      pacing: "variable"
+      cut_frequency: "every 3-6s"
+      overlay_density: "high"
+      energy: "re-engagement every 3min (MrBeast pattern)"
+      hook_strategy: "surprise or spectacle"
+      best_for: "YouTube main, longform entertainment"
+    conversational:
+      pacing: "natural"
+      cut_frequency: "only at REMOVE gaps (jump cuts)"
+      overlay_density: "minimal"
+      energy: "natural flow, engineered opening only"
+      hook_strategy: "strongest moment from anywhere in source"
+      best_for: "YouTube main, longform simple, conversation-based content"
+
+  platform_sweet_spots:
+    tiktok:
+      viral: "24-38s"
+      value: "60-90s"
+      max: "10m"
+      algorithm_priority: "completion rate"
+    reels:
+      viral: "7-15s"
+      value: "30-45s"
+      max: "90s"
+      algorithm_priority: "saves + loop count"
+    youtube_shorts:
+      optimal: "50-58s"
+      max: "60s"
+      algorithm_priority: "watch time"
+    linkedin:
+      optimal: "60-90s"
+      max: "10m"
+      algorithm_priority: "engagement rate"
+    twitter_x:
+      optimal: "20-45s"
+      max: "140s"
+      algorithm_priority: "completion + shares"
+
+  duration_intelligence:
+    shorts:
+      hook: "1-7s"
+      hook_types:
+        pattern_interrupt: "1-3s"
+        question: "3-5s"
+        story: "3-7s"
+      core_value: "10-40s"
+      core_value_types:
+        single_insight: "10-20s"
+        multi_point: "20-40s"
+        story_arc: "15-30s"
+      payoff: "2-7s"
+      payoff_types:
+        punchline: "2-5s"
+        emotional_beat: "3-7s"
+      cta_loop: "1-3s"
+      formula: "hook + core_value + payoff + cta_loop = recommended_duration"
+    longform:
+      intro: "10-30s"
+      transitions: "2-5s per transition"
+      outro: "15-30s"
+      formula: "intro + sum(chapter_durations) + sum(transitions) + outro = recommended_duration"
+    longform_simple:
+      abertura: "~120s (hook + 2-3 dense opening moments)"
+      janela_limpa: "~18-23 min (window content after REMOVE cleanup)"
+      insercoes: "0-3 point insertions from outside window"
+      source_window: "~30-35 min raw -> ~20-25 min after cleanup"
+      formula: "abertura + janela_limpa + insercoes = recommended_duration"
+      target: "20-25 min"
+
+  variant_config:
+    max_variants: 5
+    min_hook_diversity: true
+    diversity_requirements:
+      - "Each variant MUST use a different hook"
+      - "Each variant SHOULD use different supporting moments"
+      - "Each variant MAY use different pacing/style"
+    diminishing_returns:
+      high_value: "2-3 variants"
+      moderate_value: "4-5 variants"
+      low_value: "6+ variants (not recommended)"
+    constraint: "If fewer unique hooks than requested variants, cap at available hooks"
+    output_naming: "roteiro_corte_v{N}.yaml"
+
+  viability_thresholds:
+    strong: 7
+    possible: 5
+    not_viable_below: 5
+    description: |
+      Moment viability scoring (from MQR composite):
+      - score >= 7: "Strong cut candidate" (recommend)
+      - score 5-6: "Possible with editing" (show but flag)
+      - score < 5: "Not viable" (show grayed out / deprioritized)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# HANDOFFS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+handoffs:
+  receives_from:
+    - agent: "user"
+      what: "Video URL or transcript"
+    - agent: "/youtube"
+      what: "Transcript with timestamps"
+
+  delivers_to:
+    - agent: "editor (human)"
+      what: "roteiro_corte.yaml"
+    - agent: "@copy"
+      what: "High-impact moments for repurposing"
+    - agent: "@newsletter"
+      what: "Key insights for newsletter content"

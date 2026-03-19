@@ -1,0 +1,353 @@
+# Comparativo de ESPs (Email Service Providers) — Foco no Mercado BR
+# Atualizado: 2026-02 | Fonte: sites oficiais, G2, Capterra, comunidades de marketing BR
+# Uso: agente email-nurture para seleção de plataforma por projeto
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  currency: BRL
+  note: >
+    Preços verificados em fev/2026. Cotação USD/BRL usada: R$5,80.
+    Planos e preços mudam frequentemente — confirme no site oficial antes de contratar.
+  rating_scale: "1-5 (5 = excelente)"
+
+platforms:
+
+  activecampaign:
+    display_name: "ActiveCampaign"
+    url: https://www.activecampaign.com
+    origin: USA
+    price_start_brl: 174
+    price_notes: "Plano Starter: 1.000 contatos / $29 USD ≈ R$174/mês. Escala com contatos."
+    free_tier: false
+    free_trial_days: 14
+    pricing_model: per_contact
+    pricing_tiers:
+      - contacts: 1000
+        price_usd: 29
+        price_brl: 168
+      - contacts: 2500
+        price_usd: 49
+        price_brl: 284
+      - contacts: 5000
+        price_usd: 79
+        price_brl: 458
+      - contacts: 10000
+        price_usd: 139
+        price_brl: 807
+    automation: 5
+    automation_notes: >
+      O mais poderoso do mercado. Automações visuais com condições complexas,
+      split testing de automações, goals e CRM integrado.
+    segmentation: 5
+    segmentation_notes: >
+      Segmentação avançada por comportamento, tags, campos customizados, lead scoring.
+    integrations_br:
+      hotmart: native
+      kiwify: via_zapier
+      memberkit: via_zapier
+      herospark: via_zapier
+      mercado_pago: via_zapier
+    language_pt: partial
+    language_pt_notes: "Interface parcialmente em português. Suporte em inglês e espanhol."
+    deliverability_rating: 4.5
+    support_quality: 4
+    ease_of_use: 3.5
+    rating: 4.5
+    best_for:
+      - automações complexas e funis avançados
+      - empresas com listas de 5.000+ contatos
+      - operações que precisam de CRM + email
+    weaknesses:
+      - preço alto para iniciantes
+      - curva de aprendizado íngreme
+      - suporte sem português nativo
+    affiliate_suitability: high
+    notes: >
+      Padrão ouro para email marketing avançado. Sequências de Soap Opera,
+      lead scoring e automações condicionais funcionam excepcionalmente bem.
+      Vale o custo para operações estabelecidas com lista > 5.000 contatos.
+
+  kit:
+    display_name: "Kit (ex-ConvertKit)"
+    url: https://kit.com
+    origin: USA
+    price_start_brl: 0
+    price_notes: "Free até 10.000 inscritos (com limitações). Creator: $25/mês para 1.000."
+    free_tier: true
+    free_tier_limit_contacts: 10000
+    free_tier_limitations:
+      - "Sem automações avançadas no free"
+      - "Sem sequências de email no free"
+      - "Sem relatórios avançados"
+    pricing_model: per_subscriber
+    pricing_tiers:
+      - subscribers: 1000
+        plan: creator
+        price_usd: 25
+        price_brl: 145
+      - subscribers: 5000
+        plan: creator
+        price_usd: 66
+        price_brl: 383
+      - subscribers: 10000
+        plan: creator
+        price_usd: 100
+        price_brl: 580
+    automation: 4
+    automation_notes: >
+      Automações visuais sólidas. Menos complexo que ActiveCampaign mas
+      suficiente para a maioria dos criadores de conteúdo.
+    segmentation: 4
+    segmentation_notes: >
+      Tags e segments. Simplicidade como ponto forte — evita complexidade desnecessária.
+    integrations_br:
+      hotmart: native
+      kiwify: native
+      memberkit: native
+      herospark: via_zapier
+      mercado_pago: via_zapier
+    language_pt: false
+    language_pt_notes: "Interface apenas em inglês. Sem suporte em português."
+    deliverability_rating: 4.5
+    support_quality: 3.5
+    ease_of_use: 4.5
+    rating: 4.2
+    best_for:
+      - criadores de conteúdo e infoprodutores
+      - quem está começando (free tier generoso)
+      - newsletters e comunidades
+    weaknesses:
+      - sem interface em português
+      - menos recursos de CRM que ActiveCampaign
+      - relatórios básicos no plano creator
+    affiliate_suitability: high
+    notes: >
+      Favorito da comunidade de criadores de conteúdo global. Free tier com 10.000
+      contatos é o mais generoso do mercado. Ótima integração com Hotmart e Kiwify.
+      Recomendado para quem está construindo lista do zero em português.
+
+  herospark:
+    display_name: "HeroSpark"
+    url: https://herospark.com
+    origin: Brasil
+    price_start_brl: 0
+    price_notes: "Plano gratuito disponível. Plano Creator: R$147/mês."
+    free_tier: true
+    free_tier_limit_contacts: 500
+    free_tier_limitations:
+      - "500 contatos apenas"
+      - "Sem automações"
+      - "1 funil"
+    pricing_tiers:
+      - plan: creator
+        contacts: 5000
+        price_brl: 147
+      - plan: pro
+        contacts: 20000
+        price_brl: 297
+      - plan: business
+        contacts: unlimited
+        price_brl: 497
+    automation: 3
+    automation_notes: >
+      Automações básicas de email marketing. Foco maior em funis de vendas e
+      páginas de captura integradas do que em sofisticação de automação.
+    segmentation: 3
+    segmentation_notes: "Segmentação básica por tags e campos. Suficiente para operações simples."
+    integrations_br:
+      hotmart: native
+      kiwify: native
+      memberkit: native
+      herospark: native
+      mercado_pago: native
+    language_pt: true
+    language_pt_notes: "Interface 100% em português. Suporte em português."
+    deliverability_rating: 3.5
+    support_quality: 4
+    ease_of_use: 4.5
+    rating: 3.8
+    best_for:
+      - negócios brasileiros que precisam de tudo integrado
+      - criadores iniciantes que querem plataforma em português
+      - funis simples com checkout integrado
+    weaknesses:
+      - automações menos sofisticadas que concorrentes internacionais
+      - deliverability pode ser problemática em alguns casos
+      - relatórios limitados
+    affiliate_suitability: medium
+    notes: >
+      Solução all-in-one brasileira: email + funil + página de captura + checkout.
+      Ideal para quem quer simplicidade e português nativo. Não compete com
+      ActiveCampaign em automações avançadas mas entrega bem para operações simples.
+
+  memberkit:
+    display_name: "MemberKit"
+    url: https://memberkit.com.br
+    origin: Brasil
+    price_start_brl: 97
+    price_notes: "Plano Basic: R$97/mês para até 1.000 membros."
+    free_tier: false
+    free_trial_days: 7
+    pricing_tiers:
+      - plan: basic
+        members: 1000
+        price_brl: 97
+      - plan: professional
+        members: 5000
+        price_brl: 197
+      - plan: enterprise
+        members: unlimited
+        price_brl: 397
+    automation: 2.5
+    automation_notes: >
+      Email marketing não é o foco principal. MemberKit é primariamente uma
+      plataforma de área de membros com email como funcionalidade de suporte.
+    segmentation: 3
+    segmentation_notes: "Segmentação por produto/curso adquirido. Integra com ESPs para avançado."
+    integrations_br:
+      hotmart: native
+      kiwify: native
+      activecampaign: native
+      kit: native
+      mailchimp: native
+    language_pt: true
+    language_pt_notes: "100% em português. Suporte em português."
+    deliverability_rating: 3
+    support_quality: 4
+    ease_of_use: 4
+    rating: 3.5
+    best_for:
+      - infoprodutores com área de membros
+      - cursos online com comunicação integrada
+      - combinação com ActiveCampaign ou Kit para email avançado
+    weaknesses:
+      - não é um ESP dedicado — email é secundário
+      - deliverability inferior a ESPs especializados
+      - automações muito limitadas para afiliados
+    affiliate_suitability: low
+    notes: >
+      Usar MemberKit como plataforma de área de membros + integrar com
+      ActiveCampaign ou Kit para sequências de email. Não usar como ESP principal.
+
+  mailchimp:
+    display_name: "Mailchimp"
+    url: https://mailchimp.com
+    origin: USA
+    price_start_brl: 0
+    price_notes: "Free até 500 contatos/1.000 envios mês. Essentials: $13/mês para 500."
+    free_tier: true
+    free_tier_limit_contacts: 500
+    free_tier_limitations:
+      - "500 contatos apenas"
+      - "1.000 envios/mês"
+      - "Sem automações avançadas"
+      - "Branding Mailchimp no rodapé"
+    pricing_tiers:
+      - plan: essentials
+        contacts: 500
+        price_usd: 13
+        price_brl: 75
+      - plan: standard
+        contacts: 500
+        price_usd: 20
+        price_brl: 116
+      - plan: premium
+        contacts: 10000
+        price_usd: 350
+        price_brl: 2030
+    automation: 3.5
+    automation_notes: >
+      Automações Customer Journey (planos Standard+). Interface visual boa.
+      Menos poderoso que ActiveCampaign mas mais acessível para iniciantes.
+    segmentation: 3.5
+    segmentation_notes: "Segmentação por comportamento, tags, campos customizados. Adequado."
+    integrations_br:
+      hotmart: via_zapier
+      kiwify: via_zapier
+      memberkit: native
+      herospark: via_zapier
+      mercado_pago: via_zapier
+    language_pt: partial
+    language_pt_notes: "Interface em inglês. Suporte em inglês e espanhol."
+    deliverability_rating: 4
+    support_quality: 3
+    ease_of_use: 4.5
+    rating: 3.7
+    best_for:
+      - pequenas empresas iniciando email marketing
+      - projetos que usam muitas integrações (Zapier)
+      - e-commerce com Shopify/WooCommerce
+    weaknesses:
+      - preço escala rapidamente com lista grande
+      - proibição de afiliados em alguns casos (política específica)
+      - sem português nativo
+    affiliate_suitability: medium
+    affiliate_warning: >
+      ATENÇÃO: Mailchimp proíbe especificamente alguns tipos de conteúdo de afiliado
+      em seus termos de uso. Leia a política antes de usar para email marketing de afiliados.
+      Risco de suspensão de conta.
+    notes: >
+      Mais conhecido do mundo mas não necessariamente o melhor para afiliados brasileiros.
+      Cuidado com política de afiliados. Para e-commerce global é excelente.
+
+  rdstation:
+    display_name: "RD Station Marketing"
+    url: https://www.rdstation.com
+    origin: Brasil (Resultados Digitais, Florianópolis)
+    price_start_brl: 59
+    price_notes: "Plano Basic: R$59/mês para até 1.000 contatos. Planos maiores sobem rapidamente."
+    free_tier: false
+    free_trial_days: 10
+    pricing_tiers:
+      - plan: basic
+        contacts: 1000
+        price_brl: 59
+      - plan: pro
+        contacts: 5000
+        price_brl: 369
+      - plan: enterprise
+        contacts: custom
+        price_brl: null
+        notes: "Sob consulta — geralmente R$1.000+"
+    automation: 3.5
+    automation_notes: >
+      Automações visuais boas. Integração com CRM RD Station CRM.
+      Melhor para B2B e inbound marketing do que para infoprodutos.
+    segmentation: 4
+    segmentation_notes: "Lead scoring nativo, segmentação comportamental. Forte em B2B."
+    integrations_br:
+      hotmart: native
+      kiwify: via_zapier
+      memberkit: via_zapier
+      herospark: via_zapier
+      mercado_pago: native
+    language_pt: true
+    language_pt_notes: "100% em português. Suporte em português. Empresa brasileira."
+    deliverability_rating: 4
+    support_quality: 4.5
+    ease_of_use: 4
+    rating: 4.0
+    best_for:
+      - empresas B2B brasileiras
+      - operações de inbound marketing
+      - quem precisa de suporte premium em português
+    weaknesses:
+      - preço alto para o que oferece vs concorrentes
+      - menos features para afiliados que ActiveCampaign
+      - foco em B2B — recursos para afiliados B2C são secundários
+    affiliate_suitability: medium
+    notes: >
+      Líder de mercado em automação de marketing no Brasil corporativo.
+      Excelente para empresas B2B. Para afiliados B2C em nichos de info produto,
+      ActiveCampaign ou Kit entregam mais por um custo similar ou menor.
+
+comparison_matrix:
+  best_for_beginners: kit
+  best_for_automation: activecampaign
+  best_for_portuguese: herospark
+  best_for_enterprise_br: rdstation
+  best_for_cost_benefit: kit
+  best_free_tier: kit
+  most_affiliate_friendly: activecampaign
+  best_hotmart_integration: kit

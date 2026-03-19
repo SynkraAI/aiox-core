@@ -1,0 +1,180 @@
+# Content Type Definitions
+# Defines how each content type is discovered, collected, and stored
+
+content_types:
+  blog:
+    label: "Blog Post / Essay"
+    description: "Personal blog posts, essays, written content on their own platform"
+    default_tier: "T1"
+    discovery_tools: ["exa", "web_search"]
+    collection_tool: "web_fetch"
+    output_path: "sources/blogs/{slug}.md"
+    file_format: "markdown_with_frontmatter"
+    url_patterns:
+      - "*/blog/*"
+      - "*/posts/*"
+      - "*/p/*"
+      - "medium.com/*"
+      - "substack.com/*"
+
+  article:
+    label: "Web Article"
+    description: "Articles on external publications (Forbes, HBR, TechCrunch, etc.)"
+    default_tier: "T2"
+    discovery_tools: ["exa", "web_search"]
+    collection_tool: "web_fetch"
+    output_path: "sources/articles/{slug}.md"
+    file_format: "markdown_with_frontmatter"
+    url_patterns:
+      - "forbes.com/*"
+      - "hbr.org/*"
+      - "techcrunch.com/*"
+      - "wired.com/*"
+
+  interview:
+    label: "Interview / Podcast Transcript"
+    description: "Interview transcripts, podcast appearances (text format)"
+    default_tier: "T2"
+    discovery_tools: ["exa", "web_search"]
+    collection_tool: "web_fetch"
+    output_path: "sources/interviews/{slug}.md"
+    file_format: "markdown_with_frontmatter"
+    url_patterns:
+      - "*interview*"
+      - "*podcast*"
+      - "*conversation*"
+      - "*transcript*"
+
+  youtube:
+    label: "YouTube Video"
+    description: "YouTube videos requiring transcription"
+    default_tier: "T2"
+    discovery_tools: ["web_search", "youtube_captions"]
+    collection_tool: "aios_transcriber"
+    output_path: "sources/youtube/{slug}/"
+    file_format: "directory_with_transcript"
+    url_patterns:
+      - "youtube.com/watch*"
+      - "youtu.be/*"
+    collection_command: "python3 tools/aios-transcriber/aios_transcriber.py youtube '{url}' -o '{output_dir}'"
+    discovery_command: "python3 tools/youtube-captions/youtube_captions.py --search '{query}' --max 100 -o '{output_dir}'"
+    output_files:
+      - "metadata.json"
+      - "transcription_clean.md"
+      - "transcription.json"
+      - "transcription_clean.json"
+      - "stats.json"
+      - "chunks/"
+      - "source.md"
+
+  social:
+    label: "Social Media Post / Thread"
+    description: "Twitter/X threads, LinkedIn posts, social media content"
+    default_tier: "T3"
+    discovery_tools: ["exa"]
+    collection_tool: "web_fetch"
+    output_path: "sources/social/{slug}.md"
+    file_format: "markdown_with_frontmatter"
+    url_patterns:
+      - "twitter.com/*"
+      - "x.com/*"
+      - "linkedin.com/*"
+    collection_notes: "Social media content may be unreliable via WebFetch due to dynamic loading"
+
+  book:
+    label: "Published Book"
+    description: "Books authored by the person (requires manual PDF)"
+    default_tier: "T1"
+    discovery_tools: ["web_search"]
+    collection_tool: "manual"
+    output_path: "sources/manual/{slug}.pdf"
+    file_format: "pdf"
+    collection_notes: "User must provide PDF manually. Search finds title/ISBN for reference."
+
+  course:
+    label: "Course / Workshop Material"
+    description: "Online courses, workshops, masterclass content"
+    default_tier: "T1"
+    discovery_tools: ["web_search"]
+    collection_tool: "manual"
+    output_path: "sources/manual/{slug}/"
+    file_format: "varies"
+    collection_notes: "Usually behind paywall. User may provide transcripts or notes."
+
+  talk:
+    label: "Conference Talk / Keynote"
+    description: "Conference presentations, TED talks, keynote speeches"
+    default_tier: "T2"
+    discovery_tools: ["exa", "web_search", "youtube_captions"]
+    collection_tool: "aios_transcriber"
+    output_path: "sources/youtube/{slug}/"
+    file_format: "directory_with_transcript"
+    collection_notes: "Often on YouTube - treated same as youtube type for collection"
+
+  about:
+    label: "About Page / Bio"
+    description: "Personal website about page, official bio"
+    default_tier: "T2"
+    discovery_tools: ["web_search"]
+    collection_tool: "web_fetch"
+    output_path: "sources/articles/{slug}.md"
+    file_format: "markdown_with_frontmatter"
+
+# Tier classification rules
+tier_rules:
+  T1:
+    label: "Authoritative"
+    description: "Primary sources with highest confidence"
+    criteria:
+      - "Content authored directly by the person"
+      - "Official publications (books, blog)"
+      - "Courses they created"
+      - "Personal website content"
+    min_for_viable: 5
+
+  T2:
+    label: "Valuable"
+    description: "High-quality secondary sources"
+    criteria:
+      - "Long-form interviews (30+ minutes)"
+      - "Conference talks and keynotes"
+      - "Guest articles and op-eds"
+      - "Well-curated social threads"
+    min_for_viable: 5
+
+  T3:
+    label: "Supplementary"
+    description: "Supporting sources for triangulation"
+    criteria:
+      - "Brief social media posts"
+      - "Third-party analyses"
+      - "News articles about the person"
+      - "Short interviews or quotes"
+    min_for_viable: 0
+
+# Slug generation rules
+slug_rules:
+  format: "lowercase-hyphenated-descriptive"
+  max_length: 80
+  remove:
+    - "the"
+    - "a"
+    - "an"
+    - "in"
+    - "on"
+    - "at"
+    - "to"
+    - "for"
+    - "of"
+    - "with"
+    - "and"
+    - "or"
+  examples:
+    - input: "How to Be Successful - Sam Altman"
+      slug: "how-to-be-successful"
+    - input: "Lex Fridman Podcast #367 - Sam Altman: Future of AI"
+      slug: "lex-fridman-367-future-of-ai"
+    - input: "Congressional Testimony May 16, 2023"
+      slug: "congressional-testimony-2023-05-16"
+    - input: "Twitter Thread: The Most Important Thing I've Learned"
+      slug: "twitter-most-important-thing-learned"

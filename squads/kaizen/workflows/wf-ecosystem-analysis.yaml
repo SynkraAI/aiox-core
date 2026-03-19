@@ -1,0 +1,240 @@
+# Workflow: Full Ecosystem Analysis
+# ID: wf-ecosystem-analysis
+# Version: 1.0.0
+# Purpose: Orchestrate all 6 Kaizen Squad agents for comprehensive ecosystem analysis
+# Orchestrator: kaizen-chief
+# Mode: Autonomous (YOLO)
+
+workflow_name: full_ecosystem_analysis
+description: >-
+  Orchestrate all 6 Kaizen Squad agents for comprehensive ecosystem analysis.
+  Executes in 5 phases: data collection, Tier 0 diagnosis (parallel), Tier 1 analysis
+  (parallel), Tier 2 cost specialist, and synthesis with RULE-RD-001 enforcement.
+agent_sequence:
+  - kaizen-chief  # Phase 0: data collection (worker)
+  - topology-analyst    # Phase 1: parallel with performance-tracker
+  - performance-tracker # Phase 1: parallel with topology-analyst
+  - bottleneck-hunter   # Phase 2: parallel with capability-mapper and tech-radar
+  - capability-mapper   # Phase 2: parallel with bottleneck-hunter and tech-radar
+  - tech-radar          # Phase 2: parallel with bottleneck-hunter and capability-mapper
+  - cost-analyst        # Phase 3: sequential
+  - kaizen-chief  # Phase 4: synthesis and report
+success_indicators:
+  - "Report has all 6 dimensions analyzed"
+  - "Max 5 prioritized recommendations (RULE-RD-001: N>=3 enforced)"
+  - "Each recommendation has evidence + action + cost + ROI"
+  - "All quality gates (QG-KZ-001 through QG-KZ-003) passed"
+
+workflow:
+  id: wf-ecosystem-analysis
+  name: "Full Ecosystem Analysis"
+  version: "1.0.0"
+  orchestrator: kaizen-chief
+  mode: autonomous
+  estimated_duration: "10-20 minutes"
+
+  triggers:
+    proactive:
+      - event: "git commit in squads/"
+        cadence: "on change"
+      - event: "weekly schedule"
+        cadence: "every Sunday 20:00 BRT"
+    reactive:
+      - command: "*analyze"
+
+  phases:
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 0: DATA COLLECTION
+    # ═══════════════════════════════════════════════════════════════════════════
+    phase_0:
+      name: "Data Collection"
+      executor: worker
+      duration: "1-2 minutes"
+      checkpoint: "QG-KZ-001"
+
+      steps:
+        - id: "0.1"
+          name: "Scan squad registry"
+          action: "Read squads/squad-creator/data/squad-registry.yaml"
+          output: "squad_list"
+
+        - id: "0.2"
+          name: "Scan active squads"
+          action: "Glob squads/*/config/*.yaml"
+          output: "active_squads"
+
+        - id: "0.3"
+          name: "Count agents per squad"
+          action: "Glob squads/*/agents/*.md per squad"
+          output: "agent_counts"
+
+        - id: "0.4"
+          name: "Scan stories/epics"
+          action: "Glob docs/stories/*.md + docs/prd/*.md"
+          output: "stories_epics"
+
+        - id: "0.5"
+          name: "Collect recent git activity"
+          action: "git log --oneline -50"
+          output: "recent_changes"
+
+      checkpoint_criteria:
+        - "squad_list retrieved"
+        - "active_squads scanned"
+        - "agent_counts calculated"
+      veto_conditions:
+        - "IF no squads found → ABORT with 'Empty ecosystem'"
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 1: TIER 0 DIAGNOSIS (parallel)
+    # ═══════════════════════════════════════════════════════════════════════════
+    phase_1:
+      name: "Tier 0 Diagnosis"
+      execution: parallel
+      duration: "3-5 minutes"
+      checkpoint: "QG-KZ-002"
+
+      agents:
+        - agent: topology-analyst
+          task: "Analyze squad structure, types, interaction modes, cognitive load"
+          input: "phase_0 outputs"
+          output: "topology_report"
+          framework: "Team Topologies (4 types + 3 modes + cognitive load)"
+
+        - agent: performance-tracker
+          task: "Calculate DORA metrics, BSC perspectives, OKR status per squad"
+          input: "phase_0 outputs + historical data"
+          output: "performance_report"
+          framework: "DORA + BSC + OKR"
+
+      checkpoint_criteria:
+        - "topology_report has squad type assignments"
+        - "performance_report has DORA metrics per squad"
+        - "Both reports have findings with evidence"
+      veto_conditions:
+        - "IF topology_report is empty → RETRY once, then ABORT"
+        - "IF performance data unavailable → SKIP metrics, note in report"
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 2: TIER 1 ANALYSIS (parallel)
+    # ═══════════════════════════════════════════════════════════════════════════
+    phase_2:
+      name: "Tier 1 Analysis"
+      execution: parallel
+      duration: "3-5 minutes"
+      depends_on: phase_1
+
+      agents:
+        - agent: bottleneck-hunter
+          task: "Identify system constraints using TOC 5 Focusing Steps"
+          input: "topology_report + performance_report"
+          output: "bottleneck_report"
+          framework: "TOC + OMTM"
+
+        - agent: capability-mapper
+          task: "Map capabilities, identify gaps, recommend resources"
+          input: "phase_0 outputs + topology_report"
+          output: "capability_report"
+          framework: "Wardley Maps + 4R Model"
+
+        - agent: tech-radar
+          task: "Evaluate tools/APIs/MCPs, update radar, run fitness functions"
+          input: "phase_0 outputs + capability_report"
+          output: "radar_report"
+          framework: "Technology Radar + Fitness Functions"
+
+      checkpoint_criteria:
+        - "bottleneck_report identifies top constraint"
+        - "capability_report lists gaps with recommendations"
+        - "radar_report has updated quadrants"
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 3: TIER 2 SPECIALIST
+    # ═══════════════════════════════════════════════════════════════════════════
+    phase_3:
+      name: "Tier 2 Cost Analysis"
+      execution: sequential
+      duration: "2-3 minutes"
+      depends_on: phase_2
+
+      agents:
+        - agent: cost-analyst
+          task: "Calculate costs, ROI per squad, identify waste"
+          input: "All previous reports"
+          output: "cost_report"
+          framework: "FinOps + BSC Financial Perspective"
+
+      checkpoint_criteria:
+        - "cost_report has spend per squad"
+        - "ROI calculated for each recommendation"
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # PHASE 4: SYNTHESIS & REPORT
+    # ═══════════════════════════════════════════════════════════════════════════
+    phase_4:
+      name: "Synthesis & Report Generation"
+      executor: kaizen-chief
+      duration: "2-3 minutes"
+      depends_on: phase_3
+
+      steps:
+        - id: "4.1"
+          name: "Merge all findings"
+          action: "Combine 6 reports into unified findings list"
+
+        - id: "4.1.5"
+          name: "Enforce RULE-RD-001 (N<3 validation)"
+          action: |
+            For each finding in unified list:
+            1. Count N = number of independent evidence occurrences across source reports
+            2. IF N >= 3 → KEEP as actionable finding
+            3. IF N < 3 → DOWNGRADE level to MONITORAR (do NOT promote to recommendation)
+            4. Log all downgrades: "{finding} downgraded: N={N}, sources={list}"
+          veto: "IF any recommendation with N<3 passes to step 4.3 → BLOCK and re-run 4.1.5"
+          output: "validated_findings (only N>=3 proceed to ranking)"
+
+        - id: "4.2"
+          name: "Rank by impact"
+          action: "Score each validated finding: impact (1-10) x urgency (1-10) x feasibility (1-10)"
+          criteria: "Top 5 by composite score"
+          input: "validated_findings from 4.1.5 (pre-filtered by N>=3)"
+
+        - id: "4.3"
+          name: "Generate recommendations"
+          action: "For each top finding: action + evidence + cost + ROI"
+
+        - id: "4.4"
+          name: "Format report"
+          action: "Apply templates/weekly-report-tmpl.md"
+          output: "Weekly Kaizen Report"
+
+        - id: "4.5"
+          name: "Save report"
+          action: "Write to data/reports/week-{N}-{date}.md"
+
+      checkpoint_criteria:
+        - "Report has all 6 dimensions"
+        - "Max 5 prioritized recommendations"
+        - "Each recommendation has evidence + action + cost"
+      veto_conditions:
+        - "IF any recommendation lacks evidence → REMOVE from report"
+        - "IF >5 recommendations → CUT lowest impact"
+
+  # Output
+  output:
+    primary: "data/reports/week-{N}-{date}.md"
+    format: "Weekly Kaizen Report (Markdown)"
+    distribution:
+      - "Display to user"
+      - "Save to data/reports/"
+
+  # Error Handling
+  error_handling:
+    agent_timeout:
+      threshold: "5 minutes per agent"
+      action: "Skip agent, note gap in report"
+    agent_failure:
+      action: "Retry once, then skip with note"
+    data_unavailable:
+      action: "Report with available data, note gaps"

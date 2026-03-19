@@ -1,0 +1,1230 @@
+# WF-MASTER: Money Machine Completa
+# Duration: 4-8h
+# Best for: Construção do sistema completo de vendas perpétuas do zero
+# Key Agents: pesquisador-ia, monetizador, arquiteto-funil, copy-andromeda, escalador, vtd-chief
+
+workflow:
+  id: wf-money-machine
+  name: "Money Machine Completa"
+  duration: "4-8h"
+  trigger: "*money-machine {nicho}"
+  description: |
+    Workflow MASTER que constrói a máquina completa de vendas perpétuas do Natanael Oliveira.
+    Do zero ao sistema funcionando: pesquisa, produtos, funil, campanhas, escala e dashboard.
+
+    "Só vende quem oferece." — Natanael Oliveira
+    "Quem tem cronograma tem caixa." — Natanael Oliveira
+    "Empilhamento de ofertas." — Natanael Oliveira
+
+    Este é o workflow de entrada para experts que ainda não têm a máquina montada ou
+    que precisam reconstruir o sistema do zero em um novo nicho.
+
+    Diferença do wf-planejamento-anual:
+    - Planejamento anual = ajuste fino do sistema que já existe (12/54/27)
+    - Money Machine = CONSTRUÇÃO do sistema do zero com pesquisa de mercado inclusa
+
+    Este workflow produz:
+    - Pesquisa de mercado com tendências, dores e linguagem do público (IA-first)
+    - Mix de produtos low/mid/high ticket com plano 1K/dia
+    - Funil de aquisição completo (Instagram + ManyChat + tráfego 80/20)
+    - Cronograma de 54 campanhas com 7 gatilhos e empilhamento diário
+    - Plano de escala (Amazon, apps IA, mineração de dados)
+    - Dashboard final consolidado com metas, budget e projeção de lucro
+
+  best_for:
+    - "Expert que está começando a estruturar vendas perpétuas"
+    - "Negócio que quer entrar em um novo nicho do zero"
+    - "Expert que só faz lançamento e quer transição para perpétuo"
+    - "Sistema de vendas inconsistente — reconstruir do zero"
+    - "Diagnóstico apontou ausência total de máquina de vendas"
+
+  decision_matrix_fit:
+    awareness: "unaware até product-aware"
+    sophistication: "stage-1 até stage-3"
+    price_point: "mix low/mid/high (obrigatório)"
+    traffic_temp: "cold + warm"
+    primary_output: "money-machine-{nicho}.md"
+
+  clone_combinations:
+    primary: "vtd-chief + monetizador"
+    secondary:
+      - "pesquisador-ia (fase 1 — pesquisa de mercado)"
+      - "arquiteto-funil (fase 3 — funil de aquisição)"
+      - "copy-andromeda (fase 4 — copy e campanhas)"
+      - "escalador (fase 5 — escala)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 1: PESQUISA DE MERCADO (Hora 1-2)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-1
+    name: "Pesquisa de Mercado"
+    hours: "1-2"
+    tier: 0
+    agent: pesquisador-ia
+    description: |
+      IA pesquisa o mercado ANTES de qualquer decisão de produto ou funil.
+      Princípio fundamental: "Dados > intuição" (NO-H001 — Pesquisa Antes de Criar).
+
+      Esta fase mapeia:
+      - Tendências atuais no nicho (o que está crescendo, o que está morrendo)
+      - Ciclo do produto: o que o público compra primeiro, segundo, terceiro
+      - Dores na linguagem REAL do público (não o que o expert acha que é a dor)
+      - Termos, expressões e metáforas que o público usa naturalmente
+      - Concorrência: o que existe, o que está saturado, onde há espaço
+
+      A pesquisa é feita com IA antes de abrir qualquer planilha ou documento.
+      NUNCA criar produto sem pesquisa — é o erro mais comum que destrói o caixa.
+
+      Heurísticas aplicadas:
+      - NO-H001: Pesquisar com IA antes de criar qualquer produto
+      - NO-H002: Usar a linguagem do público, não do expert
+
+    tasks:
+      - task_id: pesquisa-tendencias
+        agent: pesquisador-ia
+        required: true
+        description: |
+          IA pesquisa tendências do nicho nos últimos 6-12 meses.
+          Inclui: o que está crescendo, picos sazonais, temas emergentes.
+          Fontes: Google Trends, YouTube, Instagram, Amazon bestsellers.
+        output: "tendencias-{nicho}.md"
+        notes: |
+          Formato esperado:
+          - top_tendencias: [lista de tendências com descrição]
+          - picos_sazonais: [meses com maior volume de busca]
+          - temas_emergentes: [assuntos novos com potencial]
+          - temas_saturados: [evitar — muito concorrido sem diferenciação possível]
+
+      - task_id: pesquisa-dores
+        agent: pesquisador-ia
+        required: true
+        description: |
+          IA mapeia as dores reais do público na LINGUAGEM DELES.
+          Pesquisa comentários, avaliações Amazon, grupos, fóruns.
+          Objetivo: capturar as palavras exatas que o público usa para descrever o problema.
+        output: "dores-linguagem-{nicho}.md"
+        notes: |
+          Formato esperado:
+          - dores_primarias: [dores mais frequentes com citações reais]
+          - dores_secundarias: [dores latentes, menos óbvias]
+          - linguagem_publica: [termos, expressões, metáforas que o público usa]
+          - frases_prontas: [frases que podem virar hooks diretamente]
+          Referência: NO-H002 — copy soa falso quando usa linguagem de expert, não do público.
+
+      - task_id: pesquisa-ciclo-produto
+        agent: pesquisador-ia
+        required: true
+        description: |
+          IA mapeia o ciclo de compra do público no nicho.
+          O que compra primeiro? Qual a jornada natural de consumo?
+          Qual produto é porta de entrada vs produto de continuidade?
+        output: "ciclo-produto-{nicho}.md"
+        notes: |
+          Formato esperado:
+          - porta_entrada: [produto que compra primeiro — geralmente low ticket]
+          - sequencia_natural: [produto 2, produto 3 em ordem de jornada]
+          - ancoragem: [produto high ticket que ancora a percepção de valor]
+          - frequencia_compra: [com que frequência o público compra no nicho]
+          Este ciclo define a estrutura do mix de produtos na PHASE-2.
+
+      - task_id: consolidar-pesquisa
+        agent: pesquisador-ia
+        required: true
+        description: |
+          Consolidar pesquisa de tendências, dores e ciclo num único documento.
+          Extrair os insights mais relevantes para decisões de produto e copy.
+        output: "market-research.md"
+        notes: |
+          Documento final de pesquisa. Alimenta todas as fases seguintes.
+          Deve conter: resumo executivo, top insights, linguagem do público,
+          ciclo de produto recomendado, oportunidades identificadas.
+
+    elicitation:
+      required: true
+      questions:
+        - id: nicho
+          question: "Qual o nicho exato? (ex: confeitaria para iniciantes, finanças para autônomos)"
+          type: text
+          required: true
+
+        - id: publico_alvo
+          question: "Descreva o público-alvo: quem são, qual problema têm, onde estão online?"
+          type: text
+          required: true
+
+        - id: experiencia_previa
+          question: "O expert já vendeu algo neste nicho? Se sim, o que funcionou e o que não funcionou?"
+          type: text
+          required: false
+
+        - id: concorrentes
+          question: "Quem são os principais concorrentes ou referências no nicho que você conhece?"
+          type: text
+          required: false
+
+    checkpoint:
+      criteria:
+        - "Tendências do nicho mapeadas com dados de IA (não opinião)"
+        - "Dores documentadas na linguagem real do público (citações diretas)"
+        - "Ciclo de produto identificado (sequência natural de compra)"
+        - "market-research.md consolidado e revisado"
+        - "Oportunidades e gaps no mercado identificados"
+      human_review: true
+      message: "Pesquisa de mercado completa. Revisar insights antes de montar o mix de produtos."
+      veto_conditions:
+        - "SE não há dados de tendência validados por IA → BLOCK. Dados > intuição (NO-H001). Refazer pesquisa."
+        - "SE dores estão escritas na linguagem do expert (não do público) → BLOCK. Refazer com citações reais (NO-H002)."
+        - "SE ciclo de produto não foi mapeado → BLOCK. Sem ciclo não há mix coerente."
+        - "SE pesquisa foi pulada ou feita sem IA → BLOCK. Violação de NO-H001 — ponto inegociável."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2: MIX DE PRODUTOS (Hora 2-3)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Mix de Produtos"
+    hours: "2-3"
+    tier: 1
+    agent: monetizador
+    description: |
+      Criar o mix completo de produtos baseado na pesquisa da PHASE-1.
+      O mix DEVE ter três camadas: low ticket, mid ticket e high ticket.
+
+      REGRA ABSOLUTA — Efeito Chanel (NO-F012):
+      O high ticket aparece ANTES do low ticket. Sempre.
+      Mostrar o produto mais caro primeiro ancora a percepção de valor.
+      Quem vê R$2.500 primeiro acha R$97 barato. Quem vê R$27 primeiro acha R$297 caro.
+
+      Mix de referência (Natanael):
+      - Low ticket: R$9 até R$97 (ebooks, apps básicos, templates)
+      - Mid ticket: R$97 até R$497 (desafios, workshops, cursos)
+      - High ticket: R$997 até R$5.000+ (imersões, mentorias, consultoria)
+
+      Cada produto resolve 1 problema específico (NO-H003).
+      Produto que resolve tudo não vende nada.
+
+      O Plano 1K/dia é calculado aqui com o mix real do nicho.
+      Benchmark: "10x R$27 + 5x R$97 + 2x R$297 = ~R$1.350/dia"
+
+      Heurísticas aplicadas:
+      - NO-H003: 1 produto = 1 problema específico
+      - NO-F012: Efeito Chanel — high ticket sempre antes
+      - NO-F033: Custo variável > custo fixo (meta: 50-60% de lucro)
+      - NO-F021: Todo produto tem próximo passo definido (sem dead end)
+
+    tasks:
+      - task_id: definir-low-ticket
+        agent: monetizador
+        required: true
+        description: |
+          Criar portfólio de produtos low ticket baseado nas dores e linguagem pesquisadas.
+          Porta de entrada do funil. Preço que remove a barreira de experimentação.
+          Tipos: ebooks, templates, apps IA básicos, mini-cursos, checklists.
+        output: "produtos-low-ticket.yaml"
+        notes: |
+          Para cada produto:
+          - nome: "{nome do produto}"
+            ticket: "R$XX"
+            categoria: "low"
+            problema_resolve: "{1 problema específico da pesquisa}"
+            publico: "{segmento do público que tem essa dor}"
+            formato: "ebook|template|app_ia|mini-curso|checklist"
+            tempo_producao: "{horas estimadas}"
+            proximo_passo: "{o que compra depois deste produto}"
+          Referência: Ebooks R$9-14, mini-cursos R$27-47, apps básicos R$50-97.
+
+      - task_id: definir-mid-ticket
+        agent: monetizador
+        required: true
+        description: |
+          Criar portfólio de produtos mid ticket.
+          Produtos de maior comprometimento e resultado mais rápido.
+          Tipos: desafios pagos, workshops ao vivo, cursos completos.
+        output: "produtos-mid-ticket.yaml"
+        notes: |
+          Para cada produto:
+          - nome: "{nome do produto}"
+            ticket: "R$XX"
+            categoria: "mid"
+            problema_resolve: "{1 problema específico}"
+            formato: "desafio|workshop_ao_vivo|curso_gravado|grupo_acompanhamento"
+            duracao: "{dias ou semanas}"
+            proximo_passo: "{upsell para high ticket}"
+          Referência: Desafios R$97-197, workshops R$197-297, cursos R$297-497.
+
+      - task_id: definir-high-ticket
+        agent: monetizador
+        required: true
+        description: |
+          Criar portfólio de produtos high ticket para ancoragem e receita concentrada.
+          Aparecem ANTES dos low/mid ticket no funil (Efeito Chanel — NO-F012).
+          Tipos: imersões presenciais ou online, mentoria em grupo, consultoria individual.
+        output: "produtos-high-ticket.yaml"
+        notes: |
+          Para cada produto:
+          - nome: "{nome do produto}"
+            ticket: "R$XX"
+            categoria: "high"
+            problema_resolve: "{transformação específica e mensurável}"
+            formato: "imersao|mentoria_grupo|consultoria|mastermind"
+            duracao: "{meses ou semanas}"
+            limite_vagas: "{número máximo de alunos}"
+            ancoragem: true
+            nota: "Aparece ANTES dos outros no funil americano"
+          Referência: Imersões R$997, mentorias R$2.500-5.000, mastermind R$5.000+.
+
+      - task_id: plano-1k-dia
+        agent: monetizador
+        required: true
+        description: |
+          Calcular o Plano 1K/dia personalizado para o nicho com o mix criado.
+          Decompor a meta diária em combinações reais de vendas dos produtos definidos.
+          Meta: demonstrar que R$1.000/dia é alcançável com o mix do nicho.
+        output: "plano-1k-dia.md"
+        notes: |
+          Benchmark de referência: "10x R$27 + 5x R$97 + 2x R$297 = ~R$1.350/dia"
+          Adaptar para os produtos REAIS criados nesta fase.
+          Calcular também: plano R$500/dia (entrada) e plano R$3K/dia (escala).
+          Incluir: número de leads necessários, taxa de conversão estimada, budget de tráfego.
+
+      - task_id: ancoragem-funil
+        agent: monetizador
+        required: true
+        description: |
+          Definir a estrutura de ancoragem para cada entrada no funil.
+          Efeito Chanel: sequência de apresentação de preços.
+          Garantir que high ticket aparece ANTES do low ticket em todo ponto de contato.
+        output: "ancoragem-funil.md"
+        notes: |
+          Para cada porta de entrada no funil:
+          - ponto_contato: "{onde o lead encontra o produto}"
+            sequencia_apresentacao:
+              1: "{high ticket com preço — ex: Mentoria R$2.500}"
+              2: "{mid ticket como alternativa — ex: Workshop R$297}"
+              3: "{low ticket como porta de entrada — ex: Ebook R$27}"
+            justificativa: "Efeito Chanel — âncora de valor define percepção de preço"
+
+    checkpoint:
+      criteria:
+        - "Mix completo: mínimo 3 produtos low, 2 mid, 1 high ticket"
+        - "Cada produto resolve 1 problema específico (sem produto genérico)"
+        - "High ticket definido e configurado como âncora (NO-F012)"
+        - "Cada produto tem próximo passo definido (sem dead end — NO-F021)"
+        - "Plano 1K/dia calculado com números reais do mix"
+        - "Ancoragem de funil documentada (high antes de low em toda entrada)"
+        - "Custo de produção vs receita revisado (meta 50-60% lucro — NO-F033)"
+      human_review: true
+      message: "Mix de produtos definido. Validar ancoragem e Plano 1K/dia antes de montar o funil."
+      veto_conditions:
+        - "SE não tem produto high ticket → BLOCK. Sem âncora, Efeito Chanel não funciona (NO-F012)."
+        - "SE algum produto resolve mais de 1 problema → BLOCK. 1 produto = 1 problema (NO-H003)."
+        - "SE algum produto não tem próximo passo → BLOCK. NUNCA um dead end (NO-F021)."
+        - "SE custo fixo cresce com cada produto novo → BLOCK. Escalar no variável (NO-F033)."
+        - "SE Plano 1K/dia não está calculado → BLOCK. Sem números reais não tem meta."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3: FUNIL DE AQUISIÇÃO (Hora 3-4)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Funil de Aquisição"
+    hours: "3-4"
+    tier: 1
+    agent: arquiteto-funil
+    description: |
+      Montar o funil completo de aquisição de clientes.
+      O funil conecta o lead frio ao primeiro produto comprado.
+
+      ESTRUTURA BASE (modelo Natanael):
+      - Instagram como hub de conteúdo e tráfego orgânico
+      - ManyChat como automação de conversão no DM
+      - WhatsApp e email como canais de follow-up
+      - Tráfego pago com split 80/20 (80% visita de perfil / 20% conversão direta)
+
+      FUNIL AMERICANO (regra inviolável):
+      Todo lead novo recebe oferta imediata — não esperar nutrição.
+      "Só vende quem oferece." Nutrição E oferta simultâneas.
+      High ticket aparece PRIMEIRO (Efeito Chanel — NO-F012).
+      Depois de não comprar: sequência de follow-up imediata (98% não compraram — NO-F022).
+
+      BENCHMARKS DE REFERÊNCIA (Natanael):
+      - CPC visita de perfil: R$0,25-0,30
+      - CPC conversão direta: R$1-4 dependendo do nicho
+      - CPL (custo por lead): R$3-15 no mercado digital brasileiro
+      - Taxa de conversão funil aquecido: 2-5%
+
+      Heurísticas aplicadas:
+      - NO-F021: Todo funil tem próximo passo definido
+      - NO-F022: 98% não compraram — o que você fez com eles?
+      - NO-F012: Efeito Chanel em toda entrada do funil
+
+    tasks:
+      - task_id: lead-magnet
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Criar o lead magnet principal para cada ponto de entrada do funil.
+          Lead magnet deve resolver 1 dor específica identificada na pesquisa.
+          Deve ter alto valor percebido e baixo custo de produção.
+        output: "lead-magnets.yaml"
+        notes: |
+          Para cada lead magnet:
+          - nome: "{nome do lead magnet}"
+            formato: "ebook|checklist|video|ferramenta|planilha|mini-aula"
+            dor_que_resolve: "{dor específica da pesquisa de mercado}"
+            entrega: "imediata|email|ManyChat"
+            oferta_imediata_pos: "{o que oferece logo após o download}"
+            ancoragem: "{high ticket que mostra ANTES da oferta de baixo ticket}"
+          Princípio: lead magnet entrega valor real, não teaser. Quem entrega valor ganha confiança.
+
+      - task_id: manychat-setup
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Definir a estrutura de automação ManyChat para conversão no Instagram DM.
+          ManyChat é o motor de conversão do funil de Instagram perpétuo.
+          Mapear: palavra-gatilho, sequência de mensagens, oferta, follow-up.
+        output: "manychat-fluxo.yaml"
+        notes: |
+          Estrutura base por fluxo:
+          - fluxo: "{nome do fluxo}"
+            trigger: "{palavra-gatilho nos comentários ou DM direto}"
+            mensagem_1: "{boas-vindas + entrega do lead magnet}"
+            mensagem_2: "{história ou prova social — 5 minutos depois}"
+            mensagem_3: "{apresentação high ticket primeiro — Efeito Chanel}"
+            mensagem_4: "{apresentação low ticket — alternativa de entrada}"
+            follow_up_24h: "{mensagem de follow-up para quem não comprou}"
+            follow_up_72h: "{último follow-up com escassez ou bônus}"
+          Referência: 98% não compram na primeira mensagem (NO-F022). Follow-up é obrigatório.
+
+      - task_id: trafego-8020
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Definir estratégia de tráfego pago com split 80/20.
+          80% do budget em anúncios que direcionam para o perfil do Instagram.
+          20% do budget em anúncios que convertem diretamente (ManyChat ou link de venda).
+        output: "estrategia-trafego.md"
+        notes: |
+          Benchmarks obrigatórios a incluir:
+          - cpc_visita_perfil: "R$0,25-0,30"
+          - cpc_conversao_direta: "R$1-4"
+          - split_budget: "80% perfil / 20% conversão"
+          - objetivo_80: "aumentar audiência qualificada no perfil"
+          - objetivo_20: "converter leads quentes em compradores"
+          Calcular: budget mínimo para meta do Plano 1K/dia.
+          Incluir: estratégia de remarketing para quem visitou perfil mas não seguiu.
+
+      - task_id: instagram-perfil
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Definir otimização do perfil Instagram como hub do funil.
+          Bio, destaques, link na bio, estética — tudo orientado a conversão.
+          Instagram não é rede social — é funil de vendas com curadoria de conteúdo.
+        output: "instagram-funil.md"
+        notes: |
+          Definir:
+          - bio_otimizada: "{bio com 3 elementos: problema, solução, CTA}"
+          - link_bio: "{link único — Linktree ou ManyChat direto}"
+          - destaques_estrategicos: [lista de destaques orientados a conversão]
+          - frequencia_posts: "{mínimo de posts/reels por semana}"
+          - cta_padrao: "{chamada para ação padrão em todo post}"
+          - palavra_gatilho_manychat: "{palavra que ativa automação nos comentários}"
+
+      - task_id: funil-americano
+        agent: arquiteto-funil
+        required: true
+        description: |
+          Documentar o funil americano completo com oferta imediata em cada ponto de entrada.
+          Funil americano = oferta aparece no primeiro contato, não depois de semanas de nutrição.
+          Incluir: sequência pós-compra e pós-não-compra.
+        output: "funil-americano.md"
+        notes: |
+          Para cada entrada do funil:
+          - entrada: "{como o lead chega — post, anuncio, comentario, DM}"
+            passo_1_oferta_high: "{high ticket que mostra primeiro — ex: Mentoria R$2.500}"
+            passo_2_alternativa_mid: "{mid ticket — ex: Workshop R$297}"
+            passo_3_entrada_low: "{low ticket — ex: Ebook R$27}"
+            pos_compra: "{o que acontece depois da compra — upsell, onboarding, próximo passo}"
+            pos_nao_compra: "{sequência de follow-up — 24h, 72h, 7 dias}"
+          Princípio: 98% não compraram na primeira visita. Funil americano não para na não-compra (NO-F022).
+
+    checkpoint:
+      criteria:
+        - "Lead magnet criado com entrega imediata e oferta pós-download"
+        - "Fluxo ManyChat mapeado com gatilho, sequência e follow-up"
+        - "Estratégia de tráfego 80/20 calculada com benchmarks reais"
+        - "Perfil Instagram otimizado para conversão (bio, CTA, destaques)"
+        - "Funil americano documentado com oferta imediata em toda entrada"
+        - "Próximo passo definido em cada etapa do funil (NO-F021)"
+        - "Sequência de follow-up para não-compradores definida (NO-F022)"
+      human_review: true
+      message: "Funil de aquisição montado. Revisar funil americano e benchmarks de tráfego."
+      veto_conditions:
+        - "SE não há próximo passo após cada etapa → BLOCK. NUNCA dead end (NO-F021)."
+        - "SE funil não tem oferta imediata no primeiro contato → BLOCK. Funil americano obrigatório."
+        - "SE não há follow-up para não-compradores → BLOCK. 98% não compram na primeira (NO-F022)."
+        - "SE high ticket não aparece antes do low ticket → BLOCK. Efeito Chanel violado (NO-F012)."
+        - "SE tráfego é 100% orgânico sem estratégia paga → ALERTA. Orgânico sozinho não é estratégia."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 4: CRONOGRAMA DE CAMPANHAS (Hora 4-5)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-4
+    name: "Cronograma de Campanhas"
+    hours: "4-5"
+    tier: 1
+    agents:
+      primary: monetizador
+      secondary: copy-andromeda
+    description: |
+      Criar o cronograma de 54 campanhas/ano — 1 campanha por semana, sem parar.
+      "Quem tem cronograma tem caixa." — Natanael Oliveira
+
+      7 GATILHOS DO SISTEMA DE RECOMPENSA CENTRAL (em ciclo semanal):
+      1. Novidade — algo que o público nunca viu antes
+      2. Facilidade — algo que simplifica a vida deles
+      3. Erro — aponte um erro que o público comete sem saber
+      4. Exclusividade/Lisonja — "quase ninguém sabe disso"
+      5. Alívio imediato — mensagem que causa alívio físico ou emocional
+      6. Demonstração — ao vivo, ativa o neurônio espelho (ver alguém fazendo)
+      7. Prova/Estudo de caso — resultado real de alguém do público
+
+      EMPILHAMENTO DIÁRIO (dentro de cada campanha semanal):
+      - Manhã: oferta low ticket via email/stories
+      - Tarde: oferta high ticket via email/reels
+      - Noite: outro produto (cross-sell ou diferente segmento)
+      "Empilhamento de ofertas" — a regra que multiplica o faturamento sem mais leads.
+
+      COPY ANDROMEDA (por sentimento, não por demografia):
+      Variar copy por SENTIMENTO do público em cada período.
+      Andromeda: 30-70 criativos variados por campanha, não um único criativo.
+      Copy que fala com o sentimento vende mais que copy que fala com o perfil demográfico.
+
+      FRAMEWORK HOOK→PUNCH→PREMISSA:
+      Todo criativo, todo email, todo post começa com:
+      - Hook: para o scroll — vinculado ao gatilho da semana
+      - Punch: impacto emocional — mantém atenção
+      - Premissa: argumento central — sustenta a oferta
+
+      Heurísticas aplicadas:
+      - NO-H006: Escassez no domingo à noite converte mais
+      - NO-H014: Copy por sentimento, não por demografia
+      - NO-H002: Linguagem do público (dados da pesquisa — PHASE-1)
+
+    tasks:
+      - task_id: cronograma-54-campanhas
+        agent: monetizador
+        required: true
+        description: |
+          Distribuir 54 campanhas no calendário anual, 1 por semana.
+          Cada campanha tem: gatilho, produto, ticket, hook, punch, premissa, empilhamento.
+          Os 7 gatilhos rodam em ciclo — nenhum gatilho fica sem usar mais de 2 semanas.
+        output: "cronograma-campanhas.md"
+        notes: |
+          Formato por campanha (repetir 54x):
+          - semana: 1
+            mes: "Janeiro"
+            gatilho: "Novidade|Facilidade|Erro|Exclusividade|Alivio|Demonstracao|Prova"
+            produto_principal: "{nome do produto}"
+            ticket: "low|mid|high"
+            hook: "{gancho que para o scroll — específico para este gatilho}"
+            punch: "{impacto emocional em 1-2 frases}"
+            premissa: "{argumento central que sustenta a oferta}"
+            empilhamento:
+              manha:
+                produto: "{produto low ticket}"
+                canal: "email|stories"
+                horario: "07:00-09:00"
+              tarde:
+                produto: "{produto high ticket}"
+                canal: "email|reels"
+                horario: "13:00-15:00"
+              noite:
+                produto: "{produto cross-sell}"
+                canal: "email|WhatsApp"
+                horario: "19:00-21:00"
+            escassez:
+              ativa: true|false
+              tipo: "vagas|tempo|bonus"
+              timing: "domingo 20:00 (NO-H006)"
+
+      - task_id: copy-andromeda-campanhas
+        agent: copy-andromeda
+        required: true
+        description: |
+          Definir tema de copy por sentimento para cada mês do ano.
+          Variar os criativos por sentimento predominante do público em cada período.
+          Criar variações: 30-70 criativos distintos por campanha (não 1 criativo único).
+        output: "copy-andromeda-calendario.yaml"
+        notes: |
+          Por mês, definir:
+          - mes: "Janeiro"
+            sentimento_predominante: "{o que o público sente neste período}"
+            tom_copy: "{como a copy deve soar para ressoar com este sentimento}"
+            temas_variacao: [lista de 5-7 temas para variação de criativos]
+            exemplo_hook: "{exemplo de hook que usa este sentimento}"
+            evitar: "{o que NÃO usar neste mês — sentimentos opostos}"
+          Referência: NO-H014 — copy por SENTIMENTO converte mais que por demografia.
+          Andromeda: 30-70 criativos variados por campanha — não um único ângulo.
+
+      - task_id: hook-punch-premissa
+        agent: copy-andromeda
+        required: true
+        description: |
+          Criar biblioteca de Hooks, Punches e Premissas para cada gatilho do Sistema de Recompensa Central.
+          O framework Hook→Punch→Premissa deve estar integrado em todo criativo das campanhas.
+        output: "biblioteca-hpp.yaml"
+        notes: |
+          Para cada gatilho (7 no total), criar banco com 5+ exemplos de cada:
+          - gatilho: "Novidade"
+            hooks:
+              - "{hook 1 vinculado à novidade}"
+              - "{hook 2 — variação do ângulo}"
+            punches:
+              - "{punch emocional 1 — ativa curiosidade}"
+            premissas:
+              - "{argumento central que sustenta a oferta nova}"
+          Os exemplos devem usar a linguagem do público coletada na PHASE-1.
+          Variações garantem que o algoritmo distribui mais (Andromeda — NO-H014).
+
+    checkpoint:
+      criteria:
+        - "54 campanhas definidas (sem semana vazia no ano)"
+        - "Todos os 7 gatilhos usados em ciclo equilibrado"
+        - "Hook→Punch→Premissa presente em cada campanha"
+        - "Empilhamento diário definido (manhã/tarde/noite) em cada campanha"
+        - "Copy Andromeda com temas por sentimento em cada mês"
+        - "Escassez posicionada no domingo à noite (NO-H006)"
+        - "Biblioteca de HPP criada para os 7 gatilhos"
+      human_review: true
+      message: "Cronograma de 54 campanhas pronto. Validar gatilhos, empilhamento e copy Andromeda."
+      veto_conditions:
+        - "SE alguma semana sem campanha definida → BLOCK. 54 campanhas = 54 semanas, sem exceção."
+        - "SE algum dos 7 gatilhos não aparece no ciclo → BLOCK. Sistema de Recompensa Central violado."
+        - "SE copy varia por DEMOGRAFIA (faixa etária, gênero) → BLOCK. Andromeda varia por SENTIMENTO (NO-H014)."
+        - "SE campanha sem empilhamento diário → BLOCK. Empilhamento é a regra, não exceção."
+        - "SE escassez posicionada na sexta-feira ou sábado → ALERTA. Domingo à noite converte mais (NO-H006)."
+        - "SE hook não está vinculado ao gatilho da semana → VETO. Hook e gatilho devem ser coerentes."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 5: ESCALA (Hora 5-7)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-5
+    name: "Escala"
+    hours: "5-7"
+    tier: 1
+    agent: escalador
+    description: |
+      Planejar as fontes de escala que multiplicam receita sem aumentar custo fixo.
+      Escalar no variável, não no fixo. (NO-F033)
+
+      TRÊS PILARES DE ESCALA (modelo Natanael):
+      1. Amazon KDP — 1 livro novo por mês, distribuição global, royalties perpétuos
+         Livro é funil de baixo custo de aquisição que alimenta o ecossistema principal.
+         Modelo: livro de R$24-44 → email → aula gratuita → oferta mid/high ticket.
+
+      2. Apps IA — criar apps com inteligência artificial sem programar
+         Apps IA como produto standalone (R$50-247) ou como ferramenta dentro de curso.
+         Custo de produção quase zero. Margem altíssima.
+         Escala global: o mesmo app vende para qualquer país.
+
+      3. Mineração de Dados — extrair insights do próprio negócio para otimização
+         Quais produtos vendem mais? Qual campanha gerou mais caixa?
+         Dados do próprio funil usados para priorizar esforço e budget.
+         Modelo: dados → insights → decisão → mais resultado com menos esforço.
+
+      MODELO FINANCEIRO DE ESCALA:
+      Meta: 50-60% de margem líquida em todos os produtos escaláveis.
+      Custo variável cresce com receita, custo fixo permanece estável.
+      Amazon e apps IA: custo de manutenção próximo de zero após criação.
+
+      Heurísticas aplicadas:
+      - NO-F050: Livro sem modelo de negócio = livro por vaidade, não por estratégia
+      - NO-F033: Custo variável > custo fixo em produtos escaláveis
+
+    tasks:
+      - task_id: plano-amazon
+        agent: escalador
+        required: true
+        description: |
+          Definir estratégia de publicação Amazon KDP com 1 livro/mês.
+          Cada livro tem tema da pesquisa de mercado (PHASE-1) e modelo de negócio definido.
+          O livro NÃO é o produto final — é a porta de entrada para o ecossistema.
+        output: "plano-amazon.md"
+        notes: |
+          Para cada livro planejado:
+          - titulo: "{título do livro — baseado em dores da pesquisa}"
+            tema: "{problema específico que resolve}"
+            preco_kindle: "R$9,90-14,90"
+            preco_fisico: "R$24-44"
+            modelo_negocio:
+              oferta_pos_leitura: "{o que o leitor encontra depois do livro}"
+              funil_pos_compra: "{email → aula gratuita → oferta mid/high}"
+              receita_estimada: "{royalties estimados com volume conservador}"
+            mes_publicacao: "{mês planejado}"
+          REGRA: livro sem funil após compra = livro por vaidade (NO-F050). Bloqueado.
+          Meta: 1 livro/mês = 12 livros/ano = 12 novos funis de baixo custo.
+
+      - task_id: plano-apps-ia
+        agent: escalador
+        required: true
+        description: |
+          Planejar criação de apps IA como produto standalone ou ferramenta complementar.
+          Apps IA criados com plataformas no-code/low-code para o nicho.
+          Preço: R$50-247 dependendo da complexidade e valor entregue.
+        output: "plano-apps-ia.md"
+        notes: |
+          Para cada app planejado:
+          - nome: "{nome do app}"
+            problema_resolve: "{1 problema específico do nicho}"
+            plataforma: "{ferramenta para construção — ex: Glide, Bubble, GPT personalizado}"
+            preco: "R$XX"
+            monetizacao: "venda_unica|assinatura_mensal"
+            custo_manutencao: "{horas/mês estimadas}"
+            margem_estimada: "{percentual de lucro}"
+            integracao_ecossistema: "{como alimenta outros produtos do mix}"
+          Meta: margem mínima de 70% em cada app IA. Custo de manutenção < 4h/mês.
+
+      - task_id: mineracao-dados
+        agent: escalador
+        required: true
+        description: |
+          Definir sistema de mineração de dados do próprio negócio.
+          Quais métricas monitorar? Com qual frequência? Para quais decisões?
+          Dados do funil usados para priorizar produtos, campanhas e budget de tráfego.
+        output: "sistema-dados.md"
+        notes: |
+          Definir painel de métricas com:
+          - metricas_produto: [produtos com maior taxa de recompra, maior LTV, maior margem]
+          - metricas_funil: [CPL por canal, taxa de conversão por oferta, velocidade de decisão]
+          - metricas_campanha: [gatilho que mais converte, dia/hora com mais vendas]
+          - frequencia_revisao: "semanal|quinzenal|mensal"
+          - decisao_guiada_por_dado: [lista de decisões que devem ser baseadas em dados]
+          Regra: dados internos > benchmarks externos quando o histórico é suficiente.
+
+      - task_id: modelo-financeiro-escala
+        agent: escalador
+        required: true
+        description: |
+          Calcular modelo financeiro de escala com projeção de 12 meses.
+          Separar receita de produtos escaláveis (Amazon, apps) vs produtos principais.
+          Garantir que custo fixo não cresce proporcionalmente com receita.
+        output: "modelo-financeiro.md"
+        notes: |
+          Incluir:
+          - receita_atual_estimada: "{baseline antes da escala}"
+          - receita_amazon_12m: "{projeção conservadora com 12 livros}"
+          - receita_apps_ia_12m: "{projeção com N apps publicados}"
+          - receita_total_12m: "{soma de todas as fontes}"
+          - custo_fixo_atual: "{custo fixo mensal}"
+          - custo_fixo_12m: "{custo fixo após escala — deve crescer pouco}"
+          - margem_meta: "50-60%"
+          - lucro_liquido_12m: "{projeção de lucro líquido}"
+          Referência: NO-F033 — custo variável > custo fixo. Margem mínima 50%.
+
+    checkpoint:
+      criteria:
+        - "Plano Amazon com 12 livros planejados (1/mês) e modelo de negócio definido"
+        - "Plano de apps IA com N apps, preço e margem definidos"
+        - "Cada livro tem funil pós-compra (não é livro por vaidade — NO-F050)"
+        - "Sistema de mineração de dados definido com métricas e frequência"
+        - "Modelo financeiro de 12 meses com projeção de lucro >= 50%"
+        - "Custo fixo projetado cresce menos que receita"
+      human_review: true
+      message: "Plano de escala definido. Validar modelo de negócio dos livros e margem dos apps."
+      veto_conditions:
+        - "SE livro Amazon sem funil pós-compra definido → BLOCK. Livro por vaidade, não estratégia (NO-F050)."
+        - "SE margem projetada < 50% nos produtos escaláveis → BLOCK. Revisar custo (NO-F033)."
+        - "SE custo fixo cresce proporcionalmente com receita → BLOCK. Escalar no variável."
+        - "SE apps IA sem problema específico definido → BLOCK. 1 app = 1 problema (NO-H003)."
+        - "SE sem sistema de mineração de dados → ALERTA. Decisão sem dado = desperdício de budget."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 6: DASHBOARD & METAS (Hora 7-8)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-6
+    name: "Dashboard & Metas"
+    hours: "7-8"
+    tier: 2
+    agent: vtd-chief
+    description: |
+      Consolidar todos os outputs das 5 fases anteriores em um único documento executável.
+      O dashboard é o "mapa da máquina" — tudo que o expert precisa para operar o sistema.
+
+      Inclui:
+      - Meta 1K/dia decomposta em vendas reais dos produtos do nicho
+      - Budget de tráfego calculado com split 80/20 e benchmarks reais
+      - Projeção de lucro mensal e anual com margem mínima de 50%
+      - KPIs de acompanhamento (o que medir todo dia, toda semana, todo mês)
+      - Checklist de operação semanal (o que fazer para manter a máquina rodando)
+
+      BENCHMARK META 1K/DIA (referência Natanael):
+      "10x R$27 + 5x R$97 + 2x R$297 = ~R$1.350/dia"
+      Adaptar para o mix real de produtos criados neste workflow.
+
+      O documento final é: money-machine-{nicho}.md
+      Este é o documento que o expert abre toda segunda-feira para saber o que fazer.
+
+    tasks:
+      - task_id: consolidar-outputs
+        agent: vtd-chief
+        required: true
+        description: |
+          Consolidar todos os outputs das fases anteriores em estrutura navegável.
+          Resumir decisões principais, não repetir documentos longos.
+          O dashboard deve caber em 1 leitura de 10 minutos.
+        output: "consolidacao-outputs.md"
+        notes: |
+          Por fase, resumir:
+          - PHASE-1 Pesquisa: top 3 insights de mercado, linguagem do público (5 frases reais)
+          - PHASE-2 Produtos: mix completo com preços e Plano 1K/dia
+          - PHASE-3 Funil: funil americano resumido, CTA principal, gatilho ManyChat
+          - PHASE-4 Campanhas: cronograma resumido (1ª semana detalhada, demais em tabela)
+          - PHASE-5 Escala: plano Amazon (próximo livro), próximo app IA, métricas prioritárias
+
+      - task_id: meta-diaria-decomposta
+        agent: vtd-chief
+        required: true
+        description: |
+          Calcular e decompor a meta diária com o mix real de produtos criados neste workflow.
+          Mostrar três cenários: conservador (R$500/dia), meta (R$1K/dia), escala (R$3K/dia).
+          Cada cenário com o número exato de vendas necessárias por produto.
+        output: "metas-decomposta.md"
+        notes: |
+          Formato por cenário:
+          - cenario: "Meta 1K/dia"
+            benchmark_referencia: "10x R$27 + 5x R$97 + 2x R$297 = ~R$1.350/dia"
+            mix_real:
+              - produto: "{nome do produto low ticket}"
+                preco: "R$XX"
+                vendas_dia: X
+                receita_dia: "R$XX"
+              - produto: "{nome do produto mid ticket}"
+                preco: "R$XX"
+                vendas_dia: X
+                receita_dia: "R$XX"
+              - produto: "{nome do produto high ticket}"
+                preco: "R$XX"
+                vendas_dia: X (pode ser semanal)
+                receita_dia: "R$XX (média diária)"
+            total_receita_dia: "R$X.XXX"
+            leads_necessarios: "{com taxa de conversão de 2-5%}"
+            budget_trafego_dia: "R$XX (para gerar esses leads)"
+            lucro_estimado_dia: "R$XX (meta >= 50% de margem)"
+
+      - task_id: budget-trafego
+        agent: vtd-chief
+        required: true
+        description: |
+          Calcular budget de tráfego mensal baseado nas metas definidas.
+          Split 80/20 aplicado: 80% em visita de perfil, 20% em conversão direta.
+          Usar benchmarks reais: R$0,25-0,30 por visita de perfil, R$1-4 por conversão.
+        output: "budget-trafego.md"
+        notes: |
+          Calcular:
+          - meta_leads_mes: "{leads necessários para meta 1K/dia}"
+          - cpl_estimado: "R$3-15 dependendo do nicho"
+          - budget_total_mes: "{investimento mensal necessário}"
+          - split:
+              perfil_80pct: "R$XX — visita de perfil"
+              conversao_20pct: "R$XX — conversão direta"
+          - cpc_referencia_perfil: "R$0,25-0,30"
+          - cpc_referencia_conversao: "R$1-4"
+          - roas_minimo: "3x (para cada R$1 investido, retornar mínimo R$3)"
+
+      - task_id: kpis-operacionais
+        agent: vtd-chief
+        required: true
+        description: |
+          Definir KPIs de acompanhamento diário, semanal e mensal da máquina.
+          Cada KPI com meta, frequência de medição e ação quando fora do target.
+        output: "kpis-operacionais.yaml"
+        notes: |
+          Por frequência:
+          - diario:
+              - kpi: "Vendas (quantidade e valor)"
+                meta: "{do Plano 1K/dia}"
+                alerta: "< 50% da meta por 3 dias seguidos"
+                acao: "revisar copy da campanha ativa, checar ManyChat"
+              - kpi: "Novos leads/dia"
+                meta: "{calculado pelo budget de tráfego}"
+              - kpi: "CPL médio"
+                meta: "R$3-15"
+          - semanal:
+              - kpi: "Campanha executada (sim/não)"
+                meta: "100% — sem semana sem campanha"
+              - kpi: "Posts publicados"
+              - kpi: "ROAS da semana"
+          - mensal:
+              - kpi: "Margem líquida"
+                meta: ">= 50%"
+              - kpi: "Novos produtos publicados"
+              - kpi: "Livros Amazon publicados"
+
+      - task_id: documento-final
+        agent: vtd-chief
+        required: true
+        description: |
+          Gerar o documento final money-machine-{nicho}.md consolidando toda a máquina.
+          Este é o documento operacional master — o expert abre toda semana para operar.
+          Deve ser autoexplicativo, sem necessidade de consultar outros documentos.
+        output: "money-machine-{nicho}.md"
+        notes: |
+          Estrutura do documento final:
+          1. Sumário executivo (1 página)
+          2. Mix de produtos com preços e Plano 1K/dia
+          3. Funil americano em 1 diagrama simples
+          4. Cronograma de campanhas (12 semanas em detalhe, 54 em tabela)
+          5. Checklist operacional semanal
+          6. KPIs diários/semanais/mensais
+          7. Plano de escala (Amazon + apps IA)
+          8. Budget de tráfego com split 80/20
+          9. Metas: R$500/dia → R$1K/dia → R$3K/dia
+          10. Frases-âncora do método para manter o mindset operando
+          Incluir quotes: "Só vende quem oferece", "Quem tem cronograma tem caixa",
+          "Empilhamento de ofertas" em posições estratégicas do documento.
+
+    checkpoint:
+      criteria:
+        - "Dashboard consolida outputs das 6 fases em documento único"
+        - "Meta 1K/dia decomposta com mix real dos produtos do nicho"
+        - "Benchmark incluso: '10x R$27 + 5x R$97 + 2x R$297 = ~R$1.350/dia'"
+        - "Budget de tráfego calculado com split 80/20"
+        - "Benchmarks de CPC incluídos: R$0,25-0,30 perfil / R$1-4 conversão"
+        - "Projeção de lucro >= 50% de margem"
+        - "KPIs diários, semanais e mensais definidos"
+        - "money-machine-{nicho}.md gerado e autoexplicativo"
+      human_review: true
+      message: "Money Machine Completa montada. Documento final pronto para operação."
+      veto_conditions:
+        - "SE projeção de lucro < 50% → BLOCK. Revisar custos antes de operar (NO-F033)."
+        - "SE sem budget de tráfego definido → BLOCK. Orgânico é consequência, não estratégia."
+        - "SE documento final não menciona funil americano → BLOCK. Fundamento inviolável."
+        - "SE KPIs não incluem margem líquida → BLOCK. Faturamento sem margem é vaidade."
+        - "SE Plano 1K/dia não foi calculado com mix REAL do nicho → BLOCK. Números genéricos não servem."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_stakeholders: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+  on_veto_triggered:
+    - halt_current_phase: true
+    - document_veto_reason: true
+    - require_human_resolution: true
+    - do_not_proceed_until_resolved: true
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHECKPOINT CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+checkpoint_config:
+  - phase: PHASE-1
+    heuristic: "NO-H001 + NO-H002"
+    criteria: "Pesquisa de mercado com IA, dores na linguagem do público"
+    veto_condition: "Sem dados de tendência validados por IA = BLOCK"
+
+  - phase: PHASE-2
+    heuristic: "NO-F012 + NO-H003 + NO-F021 + NO-F033"
+    criteria: "Mix low/mid/high com high ticket como âncora e Plano 1K/dia"
+    veto_condition: "Sem high ticket = Efeito Chanel violado = BLOCK"
+
+  - phase: PHASE-3
+    heuristic: "NO-F021 + NO-F022 + NO-F012"
+    criteria: "Funil americano com oferta imediata e follow-up para não-compradores"
+    veto_condition: "Sem próximo passo em qualquer etapa = BLOCK"
+
+  - phase: PHASE-4
+    heuristic: "NO-H006 + NO-H014 + NO-H002"
+    criteria: "54 campanhas com 7 gatilhos, empilhamento e copy Andromeda por sentimento"
+    veto_condition: "Copy por demografia = Andromeda violado = BLOCK"
+
+  - phase: PHASE-5
+    heuristic: "NO-F050 + NO-F033 + NO-H003"
+    criteria: "Livros Amazon com modelo de negócio, apps IA com margem >= 70%"
+    veto_condition: "Livro sem funil = livro por vaidade = BLOCK"
+
+  - phase: PHASE-6
+    heuristic: "NO-F033"
+    criteria: "Dashboard com margem >= 50%, KPIs e documento final operacional"
+    veto_condition: "Margem < 50% = revisar custos antes de operar"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMPLETION SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+completion_signal: "<promise>COMPLETE</promise>"
+checkpoint_signal: "<promise>CHECKPOINT:PHASE-X</promise>"
+blocked_signal: "<promise>BLOCKED:T-X.Y</promise>"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT ARTIFACTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  pesquisa:
+    - "tendencias-{nicho}.md — Tendências atuais pesquisadas com IA"
+    - "dores-linguagem-{nicho}.md — Dores na linguagem real do público"
+    - "ciclo-produto-{nicho}.md — Ciclo de compra e sequência natural do nicho"
+    - "market-research.md — Consolidação completa da pesquisa de mercado"
+
+  produtos:
+    - "produtos-low-ticket.yaml — Portfólio low ticket (R$9-97)"
+    - "produtos-mid-ticket.yaml — Portfólio mid ticket (R$97-497)"
+    - "produtos-high-ticket.yaml — Portfólio high ticket (R$997+)"
+    - "plano-1k-dia.md — Plano 1K/dia com mix real do nicho"
+    - "ancoragem-funil.md — Sequência Efeito Chanel por ponto de entrada"
+
+  funil:
+    - "lead-magnets.yaml — Lead magnets com oferta pós-download"
+    - "manychat-fluxo.yaml — Automação DM com sequência e follow-up"
+    - "estrategia-trafego.md — Split 80/20 com benchmarks de CPC"
+    - "instagram-funil.md — Perfil otimizado para conversão"
+    - "funil-americano.md — Funil completo com oferta imediata e pós-compra"
+
+  campanhas:
+    - "cronograma-campanhas.md — 54 campanhas com gatilhos e empilhamento"
+    - "copy-andromeda-calendario.yaml — Temas por sentimento (12 meses)"
+    - "biblioteca-hpp.yaml — Biblioteca Hook→Punch→Premissa por gatilho"
+
+  escala:
+    - "plano-amazon.md — 12 livros/ano com modelo de negócio"
+    - "plano-apps-ia.md — Apps IA com preço, margem e integração"
+    - "sistema-dados.md — Mineração de dados e métricas prioritárias"
+    - "modelo-financeiro.md — Projeção 12 meses com margem >= 50%"
+
+  dashboard:
+    - "consolidacao-outputs.md — Resumo executivo de todas as fases"
+    - "metas-decomposta.md — Meta 1K/dia decomposta em vendas reais"
+    - "budget-trafego.md — Budget mensal com split 80/20 e ROAS"
+    - "kpis-operacionais.yaml — KPIs diários, semanais e mensais"
+    - "money-machine-{nicho}.md — DOCUMENTO FINAL — máquina completa operacional"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENT ASSIGNMENTS BY PHASE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents_by_phase:
+  PHASE-1:
+    primary:
+      - "pesquisador-ia"
+    secondary:
+      - "vtd-chief"
+  PHASE-2:
+    primary:
+      - "monetizador"
+    secondary:
+      - "pesquisador-ia"
+      - "arquiteto-funil"
+  PHASE-3:
+    primary:
+      - "arquiteto-funil"
+    secondary:
+      - "monetizador"
+  PHASE-4:
+    primary:
+      - "monetizador"
+      - "copy-andromeda"
+    secondary:
+      - "vtd-chief"
+  PHASE-5:
+    primary:
+      - "escalador"
+    secondary:
+      - "monetizador"
+  PHASE-6:
+    primary:
+      - "vtd-chief"
+    secondary:
+      - "monetizador"
+      - "escalador"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  pesquisa_mercado:
+    - "[ ] Pesquisa feita com IA antes de qualquer decisão (NO-H001)"
+    - "[ ] Dores documentadas na linguagem do público (citações reais — NO-H002)"
+    - "[ ] Ciclo de produto mapeado (sequência natural de compra)"
+    - "[ ] Tendências do nicho validadas com dados"
+    - "[ ] market-research.md consolidado"
+
+  mix_produtos:
+    - "[ ] Mínimo 3 produtos low ticket definidos"
+    - "[ ] Mínimo 2 produtos mid ticket definidos"
+    - "[ ] Mínimo 1 produto high ticket definido (âncora — NO-F012)"
+    - "[ ] Cada produto resolve 1 problema (NO-H003)"
+    - "[ ] Cada produto tem próximo passo (NO-F021)"
+    - "[ ] Plano 1K/dia calculado com mix real"
+    - "[ ] Ancoragem high→mid→low definida por ponto de entrada"
+
+  funil_aquisicao:
+    - "[ ] Lead magnet criado com oferta pós-download"
+    - "[ ] ManyChat mapeado com sequência e follow-up"
+    - "[ ] Tráfego 80/20 calculado com benchmarks"
+    - "[ ] Perfil Instagram otimizado para conversão"
+    - "[ ] Funil americano com oferta imediata definido"
+    - "[ ] Follow-up para não-compradores mapeado (NO-F022)"
+
+  campanhas:
+    - "[ ] 54 campanhas cronogramadas (sem semana vazia)"
+    - "[ ] 7 gatilhos usados em ciclo equilibrado"
+    - "[ ] Hook→Punch→Premissa em cada campanha"
+    - "[ ] Empilhamento diário manhã/tarde/noite"
+    - "[ ] Copy por sentimento (Andromeda — NO-H014)"
+    - "[ ] Escassez no domingo à noite (NO-H006)"
+    - "[ ] 30-70 criativos variados por campanha"
+
+  escala:
+    - "[ ] 12 livros Amazon planejados com modelo de negócio (NO-F050)"
+    - "[ ] Apps IA com margem >= 70%"
+    - "[ ] Sistema de mineração de dados definido"
+    - "[ ] Modelo financeiro com projeção 12 meses"
+    - "[ ] Custo fixo não cresce proporcionalmente (NO-F033)"
+
+  dashboard:
+    - "[ ] Meta 1K/dia decomposta (benchmark: 10x R$27 + 5x R$97 + 2x R$297)"
+    - "[ ] Budget com split 80/20 e benchmarks CPC"
+    - "[ ] Projeção de lucro >= 50%"
+    - "[ ] KPIs diários, semanais e mensais definidos"
+    - "[ ] money-machine-{nicho}.md gerado e autoexplicativo"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GOVERNANCE GATE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+governance_gate:
+  required_checks:
+    - "Pesquisa de mercado com IA obrigatória antes de qualquer produto (NO-H001)"
+    - "Heurísticas do Natanael referenciadas em cada veto condition"
+    - "Funil americano integrado com oferta imediata em toda entrada"
+    - "Efeito Chanel aplicado: high ticket sempre antes (NO-F012)"
+    - "Hook→Punch→Premissa integrado em todas as campanhas"
+    - "Copy Andromeda por sentimento — nunca por demografia (NO-H014)"
+    - "Plano 1K/dia calculado com benchmark: '10x R$27 + 5x R$97 + 2x R$297'"
+    - "Livros Amazon com modelo de negócio — nunca por vaidade (NO-F050)"
+    - "Margem >= 50% em todos os cálculos de lucro (NO-F033)"
+    - "Quotes do Natanael integradas no documento final"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT EXAMPLE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+output_example: |
+  ## Money Machine Completa — Nicho: Produtividade para Autônomos
+
+  > "Só vende quem oferece." — Natanael Oliveira
+
+  ---
+
+  ### Pesquisa de Mercado (Resumo)
+  **Top insights:**
+  1. "Autônomos não têm problema de competência — têm problema de organização de agenda"
+  2. Tendência: IA para automação de tarefas repetitivas crescendo 340% nas buscas
+  3. Linguagem do público: "perco cliente porque esqueço de responder", "odeio cobrar"
+
+  **Ciclo de produto:**
+  Planilha de controle (low) → Curso organização (mid) → Mentoria 1:1 (high)
+
+  ---
+
+  ### Mix de Produtos + Plano 1K/Dia
+
+  **Plano 1K/dia personalizado:**
+  10x Planilha Autônomo Organizado R$27 = R$270
+  5x Curso Agenda Lucrativa R$197 = R$985
+  1x Mentoria 90 dias R$2.500/semana = R$357/dia (média)
+  **Total: ~R$1.612/dia** ✓
+
+  **Benchmark de referência Natanael:** "10x R$27 + 5x R$97 + 2x R$297 = ~R$1.350/dia"
+
+  ---
+
+  ### Funil Americano (entrada via Instagram)
+  1. Reels com gatilho "Erro" → comentam "AGENDA" → ManyChat
+  2. ManyChat msg 1: entrega e-book grátis "7 Erros que Fazem Autônomo Perder Dinheiro"
+  3. ManyChat msg 2 (5min depois): apresenta Mentoria 90 dias R$2.500 PRIMEIRO (Efeito Chanel)
+  4. ManyChat msg 3 (1h depois): Curso Agenda Lucrativa R$197 como alternativa
+  5. ManyChat msg 4 (1h depois): Planilha R$27 como porta de entrada
+
+  ---
+
+  ### Semana 1 — Campanha Exemplo
+  - Gatilho: NOVIDADE
+  - Hook: "Descobri como autônomos top faturam R$1k/dia sem trabalhar mais horas"
+  - Punch: "Não é sobre trabalhar mais — é sobre vender enquanto você trabalha"
+  - Premissa: "Quem tem cronograma tem caixa. Autônomo sem cronograma tem seco."
+  - Empilhamento:
+    - Manhã 8h: Email com Planilha Autônomo Organizado R$27
+    - Tarde 14h: Email com Mentoria 90 dias R$2.500
+    - Noite 20h: Email cross-sell App IA Agenda Inteligente R$97
+
+  ---
+
+  ### Budget de Tráfego Mensal
+  - Meta: 500 leads/mês
+  - CPL estimado: R$8
+  - Budget total: R$4.000/mês
+  - Split: R$3.200 (80% perfil) + R$800 (20% conversão direta)
+  - CPC perfil: R$0,28 | CPC conversão: R$2,50
+  - ROAS mínimo: 3x (R$4k investido → R$12k receita)
+
+  ---
+
+  > "Quem tem cronograma tem caixa." — Natanael Oliveira
+  > "Empilhamento de ofertas." — Natanael Oliveira
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  framework: "AIOS Squad Creator"
+  created: "2026-02-21"
+  primary_use_case: "Construção da máquina completa de vendas perpétuas do zero"
+  source_mind: "natanael-oliveira"
+  workflow_type: "MASTER — construção from scratch"
+  related_workflows:
+    - "wf-planejamento-anual (ajuste fino do sistema que já existe)"
+    - "wf-campanha-semanal (execução de 1 campanha do cronograma)"
+  key_difference: |
+    wf-money-machine: constrói a máquina do ZERO com pesquisa de mercado inclusa.
+    wf-planejamento-anual: ajusta e planeja um sistema que já existe (12/54/27).
+    Use money-machine para nicho novo ou reconstrução completa.
+    Use planejamento-anual para planejamento anual de negócio existente.
+  natanael_quotes:
+    - "Só vende quem oferece"
+    - "Quem tem cronograma tem caixa"
+    - "Empilhamento de ofertas"
+  key_heuristics:
+    - "NO-H001: Pesquisa com IA antes de criar"
+    - "NO-H002: Linguagem do público, não do expert"
+    - "NO-H003: 1 produto = 1 problema"
+    - "NO-H006: Escassez no domingo à noite"
+    - "NO-H014: Copy por sentimento (Andromeda)"
+    - "NO-F012: Efeito Chanel — high ticket antes"
+    - "NO-F021: Todo produto tem próximo passo"
+    - "NO-F022: 98% não compraram — o que você fez com eles?"
+    - "NO-F033: Custo variável > fixo, margem >= 50%"
+    - "NO-F050: Livro sem modelo de negócio = vaidade"

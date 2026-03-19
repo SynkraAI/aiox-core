@@ -1,0 +1,37 @@
+config:
+  squad_id: luiz-fosc
+  version: "3.0.0"
+
+  agent_loader:
+    primary: ".claude/commands/luiz-fosc/luiz-fosc.md"
+    note: "Agent definition lives in slash commands for direct activation"
+
+  execution:
+    default_mode: interactive
+    elicit_by_default: true
+    max_session_duration: "60min"
+
+  mbti:
+    enabled: true
+    data_path: "squads/luiz-fosc/data/mbti/"
+    source_profiles_path: "squads/luiz-fosc/data/mbti/sources/personalities/"
+    max_source_files_per_task: 2
+    curated_data_first: true
+
+  voice_dna:
+    source: "squads/mind-cloning/minds/luiz-fosc/"
+    enforce_fidelity: true
+    immune_system: true
+
+  quality:
+    checklist_required: true
+    min_diagnostic_questions: 3
+    content_review_before_publish: true
+
+  handoff:
+    marketing_granular: "growth-specialist"
+    legal: "external"
+    audiovisual: "external"
+    design: "external"
+    copywriting: "copywriting-squad"
+    storytelling_deep: "storytelling-masters-fosc"

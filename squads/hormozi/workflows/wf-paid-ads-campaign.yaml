@@ -1,0 +1,1204 @@
+# Paid Ads Campaign Workflow
+# Based on Alex Hormozi's $100M GOATed Ads methodology
+# Source: GOATed Ads SOP + Squad Blueprint + $100M Hooks Playbook
+# Version: 1.0.0
+
+id: wf-paid-ads-campaign
+name: "Paid Ads Campaign"
+version: "1.0.0"
+duration: "5-7 days"
+description: |
+  Workflow completo para criar campanha de paid ads end-to-end usando
+  o processo de Ad Assembly do Hormozi: Oferta → Hooks → Ads → Teste → Escala.
+
+  FILOSOFIA: "You haven't saturated Facebook. But you have gotten all the
+  low hanging fruit. You've hit a wall with your ad quality, not with the market."
+
+  RESULTADO: 150-750 ads por semana usando o processo de montagem.
+
+  OUTPUT MATEMÁTICO:
+  - 50 Hooks × 3-5 Meats × 1-3 CTAs = 150-750 Ads/semana
+  - 600 ads/mês × 12 meses = 7.200 ads/ano (vs. 60 do método tradicional = 120x mais)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Escalar campanhas de paid ads além do 'teto de saturação'"
+  - "Criar volume de criativos para teste A/B"
+  - "Sistematizar produção semanal de ads"
+  - "Otimizar ROAS através de volume e qualidade"
+  - "Quebrar platô de performance em Meta/YouTube/TikTok"
+
+not_for:
+  - "Google Search Ads (texto puro)"
+  - "Ads sem capacidade de teste A/B"
+  - "Orçamentos <$50/dia por conjunto"
+  - "Ofertas não validadas (use WF-1 primeiro)"
+
+decision_matrix_fit:
+  complexity: high
+  agents_required: 4
+  estimated_duration: "5-7 days (setup) + ongoing weekly"
+  user_involvement: "medium (checkpoints require approval)"
+  prerequisites:
+    - "Grand Slam Offer criada (WF-1 completo)"
+    - "Budget mínimo: $50/dia por ad set"
+    - "Pixel instalado e eventos configurados"
+    - "Landing page com conversão mínima 2%"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: hormozi-chief
+      role: "Offer validation, strategic oversight, math validation"
+      phases: [0]
+
+    - agent: hormozi-hooks
+      role: "Hook creation (50+ per session), awareness level distribution"
+      phases: [1]
+
+    - agent: hormozi-ads
+      role: "Ad script creation, meat formats, CTA crafting, testing, optimization"
+      phases: [2, 3, 4]
+
+    - agent: hormozi-audit
+      role: "Quality validation, anti-pattern check"
+      phases: [4]
+
+  synergies:
+    - agents: [hormozi-hooks, hormozi-ads]
+      pattern: "Hooks provides raw material, Ads assembles combinations"
+
+    - agents: [hormozi-ads, hormozi-audit]
+      pattern: "Ads creates, Audit validates against KPI thresholds"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 0: OFFER CHECK & MATH
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-0
+    name: "Offer Check & Math"
+    days: "Day 0"
+    tier: 0  # Foundation - must complete first
+    description: |
+      Validação da oferta e matemática fundamental antes de gastar em ads.
+      NENHUMA campanha deve iniciar sem esta fundação.
+
+      PRINCÍPIO: "Six-Pack-Abs are made in the kitchen, not in the gym.
+      And like six-packs, ads are made in research, not in recording."
+
+    agent: hormozi-chief
+
+    tasks:
+      - task_id: T0.1
+        name: "Validar Grand Slam Offer Existe"
+        required: true
+        description: "Verificar se WF-1 foi executado com sucesso"
+        output: "offer_validation.yaml"
+
+      - task_id: T0.2
+        name: "Calcular Matemática Fundamental"
+        required: true
+        description: "CAC máximo, break-even, budget teste"
+        output: "ads_math.yaml"
+
+      - task_id: T0.3
+        name: "Pesquisar Competidores"
+        required: true
+        description: "Analisar 10 competidores no Ad Library"
+        output: "competitor_analysis.yaml"
+
+      - task_id: T0.4
+        name: "Definir Avatar Cirúrgico"
+        required: true
+        description: "Dor #1, linguagem exata, nível de awareness"
+        output: "avatar_surgical.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Math Validation
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      ads_math_template:
+        description: "Matemática fundamental antes de gastar em ads"
+        fields:
+          - id: MATH_001
+            name: "CAC Máximo"
+            formula: "LTGP ÷ 3"
+            question: "Qual o máximo que pode pagar por cliente?"
+            format: "R$ X.XXX"
+            why: "Define teto de gasto em aquisição"
+
+          - id: MATH_002
+            name: "Break-even em Dias"
+            target: "<30 dias"
+            question: "Em quantos dias recupera o investimento em ads?"
+            format: "X dias"
+            why: "Determina velocidade de reinvestimento"
+
+          - id: MATH_003
+            name: "Budget Teste"
+            formula: "10x CPA esperado"
+            question: "Quanto investir para validar?"
+            format: "R$ X.XXX"
+            why: "Volume mínimo para significância estatística"
+
+          - id: MATH_004
+            name: "Margem Pós-Ads"
+            target: ">30%"
+            question: "Quanto sobra depois dos ads?"
+            format: "X%"
+            why: "Viabilidade do modelo"
+
+      competitor_analysis_template:
+        description: "10 competidores analisados no Ad Library"
+        per_competitor:
+          - "Nome do competidor"
+          - "Hook usado (primeiros 3 segundos)"
+          - "Formato de Meat (demo/testimonial/education/story/faceless)"
+          - "Estilo de CTA"
+          - "Estimativa de performance (tempo ativo)"
+          - "Ângulo/promessa principal"
+        sources:
+          - "Facebook Ad Library"
+          - "TikTok Creative Center"
+          - "YouTube Ad Transparency"
+
+      avatar_surgical_template:
+        description: "Avatar cirúrgico para ads"
+        fields:
+          - id: AVATAR_001
+            name: "Dor #1"
+            question: "Qual problema tira o sono do avatar?"
+            requirement: "Específico, não genérico"
+
+          - id: AVATAR_002
+            name: "Linguagem Exata"
+            question: "Como o avatar descreve o problema nas próprias palavras?"
+            source: "Prints de comentários, reviews, entrevistas"
+
+          - id: AVATAR_003
+            name: "Nível de Awareness (Eugene Schwartz)"
+            options:
+              5: "Most Aware - conhece você e seu produto"
+              4: "Product-Aware - conhece soluções, não a sua"
+              3: "Solution-Aware - sabe que existem soluções"
+              2: "Problem-Aware - sente a dor, não sabe de soluções"
+              1: "Unaware - não sabe que tem problema"
+
+          - id: AVATAR_004
+            name: "Poder de Compra"
+            question: "Pode pagar pelo produto/serviço?"
+            validation: "Sim/Não + evidência"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Foundation Complete"
+      criteria:
+        - "Grand Slam Offer validada (WF-1 output existe)"
+        - "Matemática fundamental calculada (CAC, break-even, budget)"
+        - "10 competidores analisados"
+        - "Avatar cirúrgico definido com linguagem exata"
+      human_review: true
+      message: "Revise a matemática e pesquisa antes de criar hooks."
+      veto_conditions:
+        - condition: "Grand Slam Offer não existe"
+          action: "HALT - Execute WF-1 primeiro"
+        - condition: "CAC máximo < Budget mínimo por ad set"
+          action: "BLOCK - Modelo não viável para paid ads"
+        - condition: "Margem pós-ads < 20%"
+          action: "WARNING - Risco de não ser sustentável"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 1: HOOKS (80% do esforço)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-1
+    name: "Hook Creation"
+    days: "Days 1-2"
+    tier: 1  # Core execution
+    description: |
+      Criação de 50+ hooks distribuídos pelos 5 níveis de awareness.
+      Esta é a fase mais crítica - 80% do esforço vai aqui.
+
+      PRINCÍPIO: "Se não passa do hook, nada mais importa."
+
+      DISTRIBUIÇÃO DE TEMPO:
+      - Hooks: 80%
+      - Meat: 20%
+      - CTAs: ~0%
+
+    agent: hormozi-hooks
+
+    tasks:
+      - task_id: T1.1
+        name: "Coletar Hooks Vencedores"
+        required: true
+        description: "Minerar hooks de 5 fontes prioritárias"
+        output: "hook_swipe_file.yaml"
+
+      - task_id: T1.2
+        name: "Criar 50 Hooks (Mínimo)"
+        required: true
+        description: "Hooks distribuídos pelos 5 níveis de awareness"
+        output: "hooks_created.yaml"
+
+      - task_id: T1.3
+        name: "Validar Distribuição 70-20-10"
+        required: true
+        description: "Garantir hooks em todos os níveis"
+        output: "hooks_distribution.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Hook Creation System
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      hook_sources_priority:
+        description: "Fontes de hooks em ordem de prioridade"
+        sources:
+          - priority: 1
+            name: "Hooks vencedores de ads anteriores"
+            rationale: "Já validados com dinheiro real"
+            action: "Reutilize winners"
+
+          - priority: 2
+            name: "Hooks de conteúdo orgânico próprio"
+            rationale: "Longs, shorts, tweets, emails que performaram"
+            action: "Adapte para formato de ad"
+
+          - priority: 3
+            name: "Hooks de ads de outros"
+            rationale: "Salve em álbum no celular"
+            action: "Adapte para seu contexto"
+
+          - priority: 4
+            name: "Hooks de conteúdo viral de outros"
+            rationale: "Views = validação de mercado"
+            action: "Cross-industry hooks funcionam"
+
+          - priority: 5
+            name: "Ad Libraries"
+            rationale: "Último recurso - difícil saber o que funciona"
+            action: "Use para inspiração, não cópia"
+
+      awareness_levels_hooks:
+        description: "5 níveis de awareness com templates de hooks"
+        levels:
+          - level: 5
+            name: "Most Aware"
+            type: "Oferta"
+            audience_size: "Menor (quente)"
+            templates:
+              - "50% off nosso [PRODUTO] mais vendido até [DATA]"
+              - "[PRODUTO]: Nova fórmula com 25% mais [BENEFÍCIO]"
+              - "Última chance: [OFERTA] expira em [TEMPO]"
+            example: "50% off no Sistema de Vendas até sexta"
+
+          - level: 4
+            name: "Product-Aware"
+            type: "Prova"
+            audience_size: "↓"
+            templates:
+              - "Descubra por que [NÚMERO] pessoas escolheram [PRODUTO]"
+              - "Veja como [PRODUTO] aumentou [RESULTADO] em [%] para [AVATAR]"
+              - "[NÚMERO] [AVATARES] já [RESULTADO] com [PRODUTO]"
+            example: "Descubra por que 10.000 coaches escolheram o Sistema no último mês"
+
+          - level: 3
+            name: "Solution-Aware"
+            type: "Promessa"
+            audience_size: "↓"
+            templates:
+              - "O jeito mais rápido de [RESULTADO] - apresentando [PRODUTO]"
+              - "Dobre suas [MÉTRICA] em [TEMPO] com nossa estratégia"
+              - "Como [RESULTADO] sem [OBJEÇÃO PRINCIPAL]"
+            example: "O jeito mais rápido de fechar clientes high-ticket"
+
+          - level: 2
+            name: "Problem-Aware"
+            type: "Dor"
+            audience_size: "↓"
+            templates:
+              - "Cansado de [PROBLEMA ESPECÍFICO]? Existe um jeito melhor"
+              - "Seu [COISA] não está [RESULTADO]? Você pode estar perdendo isso"
+              - "Por que [PROBLEMA] continua acontecendo (e como parar)"
+            example: "Cansado de ligações de vendas que não fecham?"
+
+          - level: 1
+            name: "Unaware"
+            type: "Curiosidade"
+            audience_size: "Maior (frio)"
+            templates:
+              - "O perigo escondido na sua [ROTINA] que está custando [$/tempo/saúde]"
+              - "O jeito inesperado que seu [COISA] está perdendo [VALOR]"
+              - "A razão #1 por que [AVATARES] falham em [RESULTADO]"
+            example: "O perigo escondido no seu funil que está custando R$10k/mês"
+
+      distribution_70_20_10:
+        description: "Distribuição recomendada de hooks por awareness"
+        distribution:
+          broad_cold: 70%
+          warm_medium: 20%
+          hot_aware: 10%
+        rule: |
+          DR-001: "Se 90% dos hooks estão em 'Most Aware', espalhe para capturar fatia maior"
+          DR-002: "Na dúvida, vá um pouco mais broad - você ainda pega audiência quente + atrai fria"
+
+      meme_strategy:
+        description: "Memes como estratégia de hook"
+        principle: "Memes or meme-like content attract the largest percentage of your audience."
+        tactics:
+          - "Para nichos específicos, use memes culture-specific"
+          - "Memes funcionam melhor para awareness levels 1-2"
+          - "Adapte memes virais para seu contexto de negócio"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Hook Volume Gate"
+      criteria:
+        - "50+ hooks criados"
+        - "Distribuição em todos 5 níveis de awareness"
+        - "Swipe file de referência documentado"
+        - "Distribuição 70-20-10 validada"
+      human_review: true
+      message: "Revise os hooks antes de criar os meats."
+      veto_conditions:
+        - condition: "Menos de 50 hooks"
+          action: "BLOCK - Volume insuficiente para teste"
+        - condition: "100% hooks em um único awareness level"
+          action: "BLOCK - Sem diversidade de abordagem"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 2: AD ASSEMBLY (Hooks + Meat + CTA)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Ad Assembly"
+    days: "Days 3-4"
+    tier: 1  # Core execution
+    description: |
+      Montagem dos ads combinando Hooks + Meats + CTAs.
+      O objetivo é criar 150-750 combinações testáveis.
+
+      FÓRMULA: 50 Hooks × 3-5 Meats × 1-3 CTAs = 150-750 Ads
+
+      PRINCÍPIO: "Volume é o segredo para encontrar vencedores.
+      80% do resultado vem de 20% dos ads."
+
+    agent: hormozi-ads
+
+    tasks:
+      - task_id: T2.1
+        name: "Criar 3-5 Meats"
+        required: true
+        description: "Scripts de ad meat em formatos diferentes"
+        output: "ad_meats.yaml"
+
+      - task_id: T2.2
+        name: "Criar 1-3 CTAs"
+        required: true
+        description: "CTAs com anatomia completa"
+        output: "ad_ctas.yaml"
+
+      - task_id: T2.3
+        name: "Montar Combinações"
+        required: true
+        description: "Combinar hooks × meats × CTAs"
+        output: "ad_combinations.yaml"
+
+      - task_id: T2.4
+        name: "Definir Assets Necessários"
+        required: true
+        description: "Lista de gravações, imagens, B-roll necessários"
+        output: "assets_required.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Ad Meat Formats
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      meat_formats:
+        description: "Os 5 formatos de Ad Meat"
+        formats:
+          - id: FORMAT_001
+            name: "Demonstration"
+            when_use: "Produto físico, resultado visual"
+            types:
+              - "Unboxing"
+              - "Before/After"
+              - "Hero ads (Dollar Shave Club style)"
+              - "Live use ou reactions"
+              - "Service demonstration"
+            example: "Vídeo mostrando antes/depois de usar o produto"
+
+          - id: FORMAT_002
+            name: "Testimonial"
+            when_use: "Prova social forte disponível"
+            types:
+              - "User-generated content (UGC)"
+              - "Direct to camera"
+              - "Podcast style (clipes de entrevistas)"
+              - "Professional testimonials"
+              - "Raw iPhone style"
+              - "Walk 'n talk rants"
+              - "Group testimonials"
+              - "Lifecycle ads"
+              - "Man-on-the-street interviews"
+              - "Influencer collabs"
+              - "Parade of Proof (múltiplos em sequência)"
+            example: "Compilação de 5 depoimentos de 15s cada"
+
+          - id: FORMAT_003
+            name: "Education"
+            when_use: "Solução complexa precisa explicação"
+            types:
+              - "Explainer videos"
+              - "How-to listicles"
+              - "Whiteboard explainer"
+              - "High performing organic content repurposed"
+            example: "Whiteboard explicando o framework em 60s"
+
+          - id: FORMAT_004
+            name: "Story"
+            when_use: "Conexão emocional necessária"
+            types:
+              - "Storytelling/narrative"
+              - "Lifestyle"
+              - "Warnings and opportunities"
+              - "Documentary style"
+              - "Skits"
+              - "Brand manifestos"
+              - "Problem-solution"
+            example: "História de origem do fundador em 90s"
+
+          - id: FORMAT_005
+            name: "Faceless"
+            when_use: "Sem apresentador, baixo custo"
+            types:
+              - "Screenshots de comentários/textos"
+              - "Text only"
+              - "Slide shows"
+              - "Animations"
+              - "Cartoon ads"
+              - "Visual effect based ads"
+            example: "Slides com prints de resultados de clientes"
+
+      video_structure:
+        description: "Estrutura de timing do vídeo"
+        timeline:
+          - time: "0-3s"
+            element: "HOOK"
+            purpose: "Pattern interrupt - parar o scroll"
+            requirements:
+              - "Problema específico mencionado"
+              - "Número na primeira linha"
+              - "Pattern interrupt visual"
+              - "Avatar falando com avatar"
+
+          - time: "3-10s"
+            element: "Agitar problema"
+            purpose: "Conectar com a dor"
+
+          - time: "10-20s"
+            element: "Apresentar solução"
+            purpose: "Mostrar o caminho"
+
+          - time: "20-27s"
+            element: "Prova social"
+            purpose: "Credibilidade"
+
+          - time: "27-30s"
+            element: "CTA claro"
+            purpose: "Próximo passo"
+
+      cta_anatomy:
+        description: "Anatomia de um CTA completo"
+        components:
+          - element: "O que fazer"
+            description: "Ação específica"
+            example: "Aproveite essa oferta"
+
+          - element: "Como fazer"
+            description: "Instrução clara"
+            example: "tocando no botão abaixo"
+
+          - element: "Quando fazer"
+            description: "Urgência"
+            example: "antes que expire"
+
+          - element: "O que ganha"
+            description: "Benefício"
+            example: "e receba $1000 em bônus grátis"
+
+          - element: "O que acontece"
+            description: "Próximo passo"
+            example: "entregue direto no seu email"
+
+        principle: "Clear > Clever"
+        demonstration_rule: |
+          Show AND tell them what to do next.
+          Demonstre visualmente o que acontece ao clicar.
+          Mostre a landing page, o formulário, o botão de submit.
+
+        examples:
+          - "Start free on the next page"
+          - "Grab your 14-day free trial on the next page"
+          - "Get started on the next page free"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Assembly Complete"
+      criteria:
+        - "3-5 meats criados em formatos diferentes"
+        - "1-3 CTAs com anatomia completa"
+        - "150+ combinações mapeadas"
+        - "Assets necessários listados"
+        - "Landing page match verificado"
+      human_review: true
+      message: "Revise as combinações antes de lançar."
+      veto_conditions:
+        - condition: "Menos de 150 combinações"
+          action: "BLOCK - Volume insuficiente para teste"
+        - condition: "Landing page não match com ad"
+          action: "BLOCK - Incongruência quebra conversão"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 3: TESTING (48-72h rounds)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Testing Rounds"
+    days: "Days 5-6"
+    tier: 2  # Execution
+    description: |
+      Testes A/B em rounds de 48-72h para identificar vencedores.
+
+      ROUNDS:
+      1. Test Hooks → Kill bottom 50%, identify top 3
+      2. Test Meat → Identify winning format
+      3. Test Awareness → Allocate budget by performance
+
+      PRINCÍPIO: "Não bateu? Mata e recomeça. Sem ego."
+
+    agent: hormozi-ads
+
+    tasks:
+      - task_id: T3.1
+        name: "Configurar Campanhas"
+        required: true
+        description: "Setup no ads manager com estrutura correta"
+        output: "campaign_setup.yaml"
+
+      - task_id: T3.2
+        name: "Lançar Round 1 (Hooks)"
+        required: true
+        description: "Testar hooks com meat fixo"
+        output: "round1_results.yaml"
+
+      - task_id: T3.3
+        name: "Lançar Round 2 (Meat)"
+        required: true
+        description: "Testar meats com hook vencedor"
+        output: "round2_results.yaml"
+
+      - task_id: T3.4
+        name: "Aplicar Kill Decisions"
+        required: true
+        description: "Matar perdedores, escalar vencedores"
+        output: "kill_scale_decisions.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Testing Protocol
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      campaign_setup_checklist:
+        description: "Configuração correta de campanha"
+        setup:
+          - "CBO ligado (deixa algoritmo trabalhar)"
+          - "3-5 conjuntos de anúncios máximo"
+          - "Budget mínimo: $50/dia por conjunto"
+          - "Pixel instalado e eventos configurados"
+        targeting:
+          - "Broad targeting (3-10% da população)"
+          - "SEM interesses empilhados"
+          - "Idade: range de 10 anos mínimo"
+          - "Lookalike 1% da lista de clientes"
+        copy_elements:
+          - "Headline: Resultado específico + tempo"
+          - "Primary text: <125 caracteres"
+          - "Descrição: Benefício principal"
+          - "CTA: Verbos de ação (Garantir, Começar, Acessar)"
+        math: "Broad audiences = 40% lower CPM"
+
+      kpis_day_1:
+        description: "KPIs primeiras 24h"
+        metrics:
+          - metric: "CTR"
+            threshold: ">1%"
+            if_fail: "Hook ruim"
+
+          - metric: "CPM"
+            threshold: "<$30"
+            if_fail: "Criativo ruim"
+
+          - metric: "CPC"
+            threshold: "<$3"
+            if_fail: "Relevância baixa"
+
+          - metric: "Link CTR"
+            threshold: ">0.8%"
+            if_fail: "Copy fraca"
+
+      kpis_day_2:
+        description: "KPIs segundo dia"
+        metrics:
+          - metric: "Frequência"
+            threshold: "<2"
+            if_fail: "Saturação"
+
+          - metric: "CPL"
+            threshold: "<50% do target"
+            if_fail: "Mata e recomeça"
+
+          - metric: "Add to Cart"
+            threshold: ">5%"
+            if_fail: "Página quebrada"
+
+          - metric: "Video Views 3s"
+            threshold: ">30%"
+            if_fail: "Hook fraco"
+
+      testing_rounds:
+        description: "Estrutura dos rounds de teste"
+        rounds:
+          - round: 1
+            name: "Test Hooks"
+            duration: "48-72h"
+            variable: "Hooks diferentes, mesmo meat"
+            action: "Kill bottom 50%, identify top 3"
+
+          - round: 2
+            name: "Test Meat"
+            duration: "48-72h"
+            variable: "Meats diferentes, hook vencedor"
+            action: "Identify winning format"
+
+          - round: 3
+            name: "Test Awareness"
+            duration: "48-72h"
+            variable: "Níveis de awareness"
+            action: "Allocate budget by performance"
+
+      decision_rules:
+        description: "Regras de decisão para kill/scale"
+        kill_signals:
+          - rule: "DR-010"
+            condition: "CTR <0.5%"
+            action: "MATA"
+
+          - rule: "DR-011"
+            condition: "CPA dobrou"
+            action: "PAUSA"
+
+          - rule: "DR-012"
+            condition: "Frequência >10"
+            action: "REFRESH"
+
+          - rule: "DR-013"
+            condition: "ROAS <2x por 3 dias"
+            action: "ANÁLISE"
+
+        quick_decision: "Não bateu? Mata e recomeça. Sem ego."
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Testing Complete"
+      criteria:
+        - "Round 1 executado (hooks testados)"
+        - "Round 2 executado (meats testados)"
+        - "Top performers identificados"
+        - "Kill decisions aplicadas"
+        - "Budget realocado para vencedores"
+      human_review: true
+      message: "Revise os resultados antes de escalar."
+      veto_conditions:
+        - condition: "Nenhum ad com CTR >1%"
+          action: "BLOCK - Voltar para Phase 1, revisar hooks"
+        - condition: "CPA 3x acima do target"
+          action: "WARNING - Revisar oferta ou landing page"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 4: OPTIMIZATION & SCALE
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-4
+    name: "Optimization & Scale"
+    days: "Day 7 + Ongoing"
+    tier: 2  # Execution
+    description: |
+      Otimização e escala dos vencedores.
+
+      REGRA DE SCALE: Nunca scale sem 100 conversões.
+
+      MÉTODOS DE SCALE:
+      - Vertical: +20% budget a cada 48h
+      - Horizontal: Novas audiências
+      - Surfing: Pausa sexta, reativa segunda
+      - Day-parting: Desliga madrugada se B2B
+
+    agents:
+      primary: hormozi-ads
+      secondary: hormozi-audit
+
+    tasks:
+      - task_id: T4.1
+        name: "Validar Scale Readiness"
+        required: true
+        description: "Verificar critérios mínimos para escalar"
+        output: "scale_readiness.yaml"
+
+      - task_id: T4.2
+        name: "Definir Estratégia de Scale"
+        required: true
+        description: "Vertical, horizontal, ou combinado"
+        output: "scale_strategy.yaml"
+
+      - task_id: T4.3
+        name: "Implementar Otimização Semanal"
+        required: true
+        description: "Checklist de otimização contínua"
+        output: "weekly_optimization.yaml"
+
+      - task_id: T4.4
+        name: "Criar Sistema de Produção Semanal"
+        required: true
+        description: "Cadência de criação de novos ads"
+        output: "weekly_production.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Scale & Optimization
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      scale_readiness_gate:
+        description: "Critérios para escalar"
+        criteria:
+          - "ROAS >3x por 7 dias seguidos"
+          - "CPA estável por 500+ conversões"
+          - "Frequência <3 após 14 dias"
+          - "CTR mantém >1%"
+        rule: "Nunca scale sem 100 conversões"
+
+      scale_methods:
+        description: "Métodos de escala"
+        methods:
+          - method: "Regra 20%"
+            description: "Aumenta budget 20% a cada 48h"
+            type: "Vertical"
+
+          - method: "Novos conjuntos"
+            description: "Mesma copy, nova audiência"
+            type: "Horizontal"
+
+          - method: "Surfing"
+            description: "Pausa sexta, reativa segunda"
+            type: "Timing"
+
+          - method: "Day-parting"
+            description: "Desliga madrugada se B2B"
+            type: "Timing"
+
+      budget_allocation:
+        description: "Alocação de budget"
+        distribution:
+          proven_campaigns: "70%"
+          new_tests: "20%"
+          retargeting: "10%"
+
+      weekly_optimization_checklist:
+        description: "Checklist de otimização semanal"
+        week_1:
+          - "[ ] Matar ads com CPA >150% do target"
+          - "[ ] Duplicar budget dos vencedores"
+          - "[ ] Testar 3 novos criativos"
+          - "[ ] Ajustar bid cap se necessário"
+        week_2:
+          - "[ ] Criar lookalike dos compradores"
+          - "[ ] Testar novo ângulo de copy"
+          - "[ ] Adicionar retargeting"
+          - "[ ] Implementar exclusões de audiência"
+        week_3_4:
+          - "[ ] Scale vertical (aumentar budget 20%/dia)"
+          - "[ ] Scale horizontal (novas audiências)"
+          - "[ ] Testar novos formatos (carousel, collection)"
+          - "[ ] Adicionar novos geos/demos"
+
+      daily_check_5min:
+        description: "Check diário de 5 minutos"
+        checks:
+          - "[ ] CPA ontem vs hoje"
+          - "[ ] Frequência <5"
+          - "[ ] Comentários respondidos"
+          - "[ ] Competidores checados"
+          - "[ ] Budget utilization >90%"
+
+      weekly_production_cadence:
+        description: "Cadência de produção semanal"
+        friday:
+          name: "Dia de Advertising"
+          duration: "~3 horas"
+          output:
+            hooks: 50
+            meats: "3-5"
+            ctas: "1-3"
+            total_ads: "150-750"
+        annual_math: |
+          600 ads/mês × 12 meses = 7.200 ads/ano
+          (vs. 60 ads/ano do método tradicional = 120x mais)
+
+      troubleshooting_matrix:
+        description: "Troubleshooting comum"
+        issues:
+          high_cpm:
+            causes:
+              - "Criativo cansou (frequência >7)"
+              - "Relevance score <6"
+              - "Competição aumentou (Q4, Black Friday)"
+              - "Conta com penalidade"
+            actions:
+              - "Refresh creative"
+              - "Check relevance score"
+              - "Adjust targeting"
+
+          rising_cpa:
+            causes:
+              - "Landing page convertendo menos"
+              - "Oferta perdeu força"
+              - "Competidor com oferta melhor"
+              - "Mudança no algoritmo"
+            actions:
+              - "Test new landing page"
+              - "Refresh offer"
+              - "Analyze competitors"
+
+          low_ctr:
+            causes:
+              - "Hook fraco"
+              - "Visual genérico"
+              - "Copy não ressoa"
+              - "Saturação de mercado"
+            actions:
+              - "Test new hooks"
+              - "Improve visual"
+              - "Update copy with fresh language"
+
+      golden_rules:
+        description: "Regras de ouro"
+        rules:
+          - "Nunca scale sem 100 conversões"
+          - "Creative fatigue = 10-14 dias"
+          - "80% do resultado vem de 20% dos ads"
+          - "Teste preço antes de mudar tudo"
+          - "iOS mata 30% do tracking (calcule isso)"
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Scale Ready"
+      criteria:
+        - "Scale readiness validado"
+        - "Estratégia de scale definida"
+        - "Sistema de produção semanal documentado"
+        - "Checklist de otimização implementado"
+      human_review: true
+      message: "Aprovação final para escalar campanhas."
+      veto_conditions:
+        - condition: "Menos de 100 conversões"
+          action: "BLOCK - Continuar testing antes de scale"
+        - condition: "ROAS <2x"
+          action: "WARNING - Scale pode não ser sustentável"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES (from Squad Blueprint)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  QG-001:
+    name: "Pre-Launch Math Gate"
+    transition: "Start → Research"
+    conditions:
+      - "CAC máximo calculado"
+      - "Break-even definido"
+      - "Budget teste = 10x CPA"
+    type: "blocking"
+
+  QG-002:
+    name: "Research Completeness Gate"
+    transition: "Research → Creation"
+    conditions:
+      - "10 competitors analyzed"
+      - "Avatar language collected"
+      - "Awareness level mapped"
+    type: "blocking"
+
+  QG-003:
+    name: "Hook Volume Gate"
+    transition: "Creation → Assembly"
+    conditions:
+      - "50+ hooks written"
+      - "Distribution across 5 levels"
+    type: "blocking"
+
+  QG-004:
+    name: "Assembly Completeness Gate"
+    transition: "Assembly → Launch"
+    conditions:
+      - "150+ ad combinations ready"
+      - "Landing page match verified"
+      - "Tracking configured"
+    type: "blocking"
+
+  QG-005:
+    name: "Day 1 Performance Gate"
+    transition: "Launch → Continue"
+    conditions:
+      - "CTR >1%"
+      - "CPM <$30"
+    type: "warning"
+    action_if_fail: "Kill and restart"
+
+  QG-006:
+    name: "Scale Readiness Gate"
+    transition: "Optimize → Scale"
+    conditions:
+      - "ROAS >3x for 7 days"
+      - "100+ conversions"
+      - "CPA stable"
+    type: "blocking"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "hormozi-chief"
+    - document_reason: true
+    - require_human_override: true
+
+  common_failures:
+    - failure: "Oferta não validada"
+      phase: 0
+      resolution: "Executar WF-1 primeiro"
+
+    - failure: "Volume de hooks insuficiente"
+      phase: 1
+      resolution: "Sessão adicional de criação de hooks"
+
+    - failure: "Nenhum ad com performance"
+      phase: 3
+      resolution: "Revisar hooks e landing page"
+
+    - failure: "CPA acima do target"
+      phase: 4
+      resolution: "Revisar oferta ou otimizar funil"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-paid-ads-campaign"
+      status: "completed"
+      outputs:
+        - "ads_package/"
+        - "scale_strategy.yaml"
+
+  checkpoint:
+    type: "checkpoint_reached"
+    payload:
+      phase_id: "PHASE-{N}"
+      status: "awaiting_review"
+      requires: "human_approval"
+
+  blocked:
+    type: "workflow_blocked"
+    payload:
+      phase_id: "PHASE-{N}"
+      reason: "veto_condition_triggered"
+      veto: "{veto_description}"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  phase_0:
+    - "offer_validation.yaml"
+    - "ads_math.yaml"
+    - "competitor_analysis.yaml"
+    - "avatar_surgical.yaml"
+
+  phase_1:
+    - "hook_swipe_file.yaml"
+    - "hooks_created.yaml"
+    - "hooks_distribution.yaml"
+
+  phase_2:
+    - "ad_meats.yaml"
+    - "ad_ctas.yaml"
+    - "ad_combinations.yaml"
+    - "assets_required.yaml"
+
+  phase_3:
+    - "campaign_setup.yaml"
+    - "round1_results.yaml"
+    - "round2_results.yaml"
+    - "kill_scale_decisions.yaml"
+
+  phase_4:
+    - "scale_readiness.yaml"
+    - "scale_strategy.yaml"
+    - "weekly_optimization.yaml"
+    - "weekly_production.yaml"
+
+  final_deliverable:
+    name: "Paid Ads Campaign Package"
+    location: "outputs/campaigns/{campaign_id}/"
+    contents:
+      - "README.md - Overview da campanha"
+      - "hooks_library.yaml - 50+ hooks categorizados"
+      - "ad_scripts/ - Scripts de meats"
+      - "combinations.yaml - Matriz de combinações"
+      - "results.yaml - Dados de performance"
+      - "scale_plan.md - Plano de escala"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS BY PHASE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents_by_phase:
+  PHASE-0:
+    primary: ["hormozi-chief"]
+    secondary: []
+
+  PHASE-1:
+    primary: ["hormozi-hooks"]
+    secondary: []
+
+  PHASE-2:
+    primary: ["hormozi-ads"]
+    secondary: []
+
+  PHASE-3:
+    primary: ["hormozi-ads"]
+    secondary: []
+
+  PHASE-4:
+    primary: ["hormozi-ads"]
+    secondary: ["hormozi-audit"]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  phase_0:
+    - "[ ] Grand Slam Offer validada"
+    - "[ ] Matemática fundamental calculada"
+    - "[ ] 10 competidores analisados"
+    - "[ ] Avatar cirúrgico definido"
+
+  phase_1:
+    - "[ ] 50+ hooks criados"
+    - "[ ] Hooks em 5 níveis de awareness"
+    - "[ ] Distribuição 70-20-10"
+    - "[ ] Swipe file documentado"
+
+  phase_2:
+    - "[ ] 3-5 meats em formatos diferentes"
+    - "[ ] 1-3 CTAs com anatomia completa"
+    - "[ ] 150+ combinações"
+    - "[ ] Assets listados"
+
+  phase_3:
+    - "[ ] Campanhas configuradas corretamente"
+    - "[ ] Round 1 (hooks) executado"
+    - "[ ] Round 2 (meats) executado"
+    - "[ ] Kill decisions aplicadas"
+
+  phase_4:
+    - "[ ] Scale readiness validado"
+    - "[ ] Estratégia de scale definida"
+    - "[ ] Sistema de produção semanal"
+    - "[ ] Checklist de otimização"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# RETARGETING SWIPE FILE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+swipe_files:
+  retargeting_angles:
+    - "Quick Reminder"
+    - "Still There For You"
+    - "What You Saw"
+    - "Worth Remembering"
+    - "In Case You Forgot"
+    - "The Real Value"
+    - "What You Get"
+    - "Just Clarifying"
+    - "Your Benefits"
+    - "Simple Reminder"
+
+  trial_offer_angles:
+    - "The Complete Free Stack"
+    - "X Days to Build Your Empire"
+    - "From Theory to Reality"
+    - "The $XXK Value Stack"
+    - "Everything You Need to Start"
+    - "X% Make Sales Month One"
+    - "The Platform Built for X"
+    - "Don't Give Up - Get X Days"
+    - "Free Tech + Free Training"
+    - "The Head Start You Need"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-10"
+  author: "squad-architect"
+  source_frameworks:
+    - "GOATED_ADS_SOP"
+    - "GOATED_ADS_SQUAD_BLUEPRINT"
+    - "100M_HOOKS_PLAYBOOK"
+  source_mind: "alex_hormozi"
+  lines: 1100+
+  quality_gate: "SC_WFL_001"
+  quality_score: "PENDING"
+  dependencies:
+    - workflow: "wf-grand-slam-offer"
+      required: true
+      reason: "Oferta validada é pré-requisito"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

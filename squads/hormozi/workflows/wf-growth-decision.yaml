@@ -1,0 +1,135 @@
+# Growth Decision Workflow - Mais, Melhor ou Novo
+# Source: KB/v2.0/01_FRAMEWORKS_OPERACIONAIS - Section 5.5
+# Version: 1.0.0
+
+id: wf-growth-decision
+name: "Growth Decision - Mais, Melhor ou Novo"
+version: "1.0.0"
+duration: "30-60 min"
+description: |
+  Workflow de DECISÃO ESTRATÉGICA para crescimento.
+  Evita o erro mais comum: fazer "novo" quando deveria fazer "mais" do que funciona.
+  PRINCÍPIO: "Volume → Eficiência → Inovação. Nesta ordem."
+
+best_for:
+  - "Decidir próximo investimento de recursos"
+  - "Avaliar se deve escalar ou otimizar"
+  - "Priorizar entre múltiplas iniciativas"
+
+clone_combinations:
+  primary:
+    - agent: hormozi-chief
+      role: "Strategic decision, data analysis"
+      phases: [0, 1, 2]
+
+  handoff_rules:
+    - decision: "MAIS"
+      handoff_to: hormozi-leads
+    - decision: "MELHOR"
+      handoff_to: hormozi-pricing
+    - decision: "NOVO"
+      handoff_to: hormozi-offers
+
+phases:
+  - id: PHASE-0
+    name: "Data Collection"
+    duration: "10 min"
+    agent: hormozi-chief
+    tasks:
+      - task_id: T0.1
+        name: "Mapear Canais Atuais"
+        required: true
+      - task_id: T0.2
+        name: "Coletar Métricas por Canal"
+        required: true
+
+    inline_structures:
+      channel_metrics:
+        fields:
+          - "Canal (ex: Instagram Ads)"
+          - "Volume Mensal (leads)"
+          - "Taxa de Conversão (%)"
+          - "CAC (R$)"
+          - "Tempo em Operação"
+          - "Otimizações já feitas"
+
+  - id: PHASE-1
+    name: "Analysis"
+    duration: "15 min"
+    agent: hormozi-chief
+
+    inline_structures:
+      mais_criteria:
+        name: "Critérios para MAIS"
+        signals:
+          positive:
+            - "Audiência > 10x volume atual"
+            - "CAC estável até 2x budget"
+            - "Capacidade de entrega OK"
+          decision: "Escalar volume ANTES de otimizar"
+
+      melhor_criteria:
+        name: "Critérios para MELHOR"
+        signals:
+          positive:
+            - "CVR < benchmark da indústria"
+            - "< 10 testes A/B feitos"
+            - "Gargalos óbvios não otimizados"
+          decision: "Otimizar eficiência"
+
+      novo_criteria:
+        name: "Critérios para NOVO"
+        veto_conditions:
+          - "SOMENTE se MAIS saturado (dados provam)"
+          - "SOMENTE se MELHOR esgotado (> 30 testes)"
+        decision: "Último recurso - evitar shiny object syndrome"
+
+      decision_matrix:
+        rows:
+          - scenario: "Volume escala, CAC estável"
+            decision: "MAIS"
+          - scenario: "Volume satura, CVR baixo"
+            decision: "MELHOR"
+          - scenario: "Volume satura, CVR otimizado"
+            decision: "NOVO"
+          - scenario: "Sem dados suficientes"
+            decision: "MAIS (para gerar dados)"
+
+  - id: PHASE-2
+    name: "Decision & Routing"
+    duration: "5 min"
+    agent: hormozi-chief
+
+    inline_structures:
+      routing_rules:
+        - decision: "MAIS"
+          agent: hormozi-leads
+          tasks: ["execute-rule-of-100", "create-lead-magnet"]
+        - decision: "MELHOR"
+          agent: hormozi-pricing
+          tasks: ["diagnose-value-equation", "create-guarantee-stack"]
+        - decision: "NOVO"
+          agent: hormozi-offers
+          tasks: ["validate-market-selection", "create-grand-slam-offer"]
+          veto: "Confirmar MAIS e MELHOR esgotados primeiro"
+
+    checkpoint:
+      id: CP_FINAL
+      human_review: true
+      veto_conditions:
+        - condition: "NOVO sem MAIS e MELHOR esgotados"
+          action: "BLOCK - Voltar para MAIS ou MELHOR"
+
+error_handling:
+  on_insufficient_data:
+    recommendation: "MAIS (para gerar dados)"
+  on_novo_premature:
+    block: true
+    return_to: "PHASE-1"
+
+metadata:
+  created: "2026-02-10"
+  source: "KB/v2.0/01_FRAMEWORKS_OPERACIONAIS"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

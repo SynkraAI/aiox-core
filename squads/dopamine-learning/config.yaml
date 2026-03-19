@@ -1,0 +1,160 @@
+############################################################
+# DOPAMINE-LEARNING SQUAD CONFIGURATION
+############################################################
+
+# Top-level fields for registry compatibility
+name: "dopamine-learning"
+version: "1.0.0"
+slashPrefix: "dopamineLearning"
+title: "Dopamine Learning Squad"
+description: "Transform boring questions into immersive, dopamine-optimized learning experiences using neuroscience-backed gamification frameworks"
+author: "Jose Carlos Amorim"
+created: "2026-02-12"
+icon: null
+type: expert
+entry_agent: "dopamine-learning-chief"
+
+tags:
+  - "dopamine"
+  - "gamification"
+  - "learning-design"
+  - "neuroscience"
+  - "flow-state"
+  - "behavior-design"
+  - "engagement"
+
+activation:
+  slash_command: "dopamine"
+  example_activation: "@dopamine-learning-chief"
+  pattern_prefix: "DL"
+
+architecture:
+  tier_structure:
+    orchestrator:
+      - id: "dopamine-learning-chief"
+        role: "Squad Coordinator & Router"
+        commands:
+          - "*help - List all capabilities"
+          - "*route - Route to appropriate agent"
+          - "*status - Show current workflow status"
+          - "*handoff - Transfer to specific agent"
+
+    tier_0_diagnostic:
+      - id: "schultz-dopamine-analyst"
+        framework: "Reward Prediction Error (RPE) Model"
+      - id: "fogg-behavior-diagnostician"
+        framework: "B=MAP (Motivation × Ability × Prompt)"
+      - id: "chou-core-drives-mapper"
+        framework: "Octalysis - 8 Core Drives"
+      - id: "csikszentmihalyi-flow-calibrator"
+        framework: "Flow State Theory"
+      - id: "deterding-intrinsic-validator"
+        framework: "Skill Atoms & Self-Determination"
+
+    tier_1_execution:
+      - id: "gee-learning-architect"
+        framework: "36 Learning Principles in Games"
+      - id: "eyal-engagement-designer"
+        framework: "Hook Model (Trigger→Action→Reward→Investment)"
+      - id: "mcgonigal-resilience-storyteller"
+        framework: "Hero's Journey & Gameful Resilience"
+      - id: "kapp-instructional-integrator"
+        framework: "Gamification of Learning & Instruction"
+
+workflows:
+  - id: "workflow-quiz-immersivo"
+    name: "Quiz Imersivo para Onboarding"
+    duration_hours: "4-6"
+    agents_involved: 10
+    phases: 4
+    quality_gates: 5
+
+  - id: "workflow-challenge-aprendizado"
+    name: "Challenge de Aprendizado"
+    duration_hours: "3-5"
+    agents_involved: 10
+    phases: 5
+    quality_gates: 6
+
+  - id: "workflow-assessment-feedback-realtime"
+    name: "Assessment com Feedback em Tempo Real"
+    duration_hours: "2-4"
+    agents_involved: 10
+    phases: 4
+    quality_gates: 4
+
+quality_gates:
+  total_gates: 15
+  blocking_gates: 14
+  warning_gates: 1
+
+validation_framework:
+  accuracy: "All agents based on real, documented elite minds"
+  coherence: "All frameworks interconnected through dopamine mechanisms"
+  strategic_alignment: "Covers all 3 use cases completely"
+  operational_excellence: "All workflows immediately deployable"
+  innovation_capacity: "Extensible to new formats and domains"
+  risk_management: "Deterding ethical gate prevents exploitationware"
+
+core_principles:
+  - "Intrinsic motivation over extrinsic rewards"
+  - "Flow state calibration at all difficulty levels"
+  - "Dopamine prediction error as learning signal"
+  - "Meaningful choices and agency throughout"
+  - "Narrative framing as hero's journey"
+  - "Scaffolding that fades as mastery increases"
+  - "Real-time feedback integrated without disruption"
+  - "Ethical design validation (no dark patterns)"
+
+integration_notes:
+  dependencies:
+    - "All 10 agents must be loaded"
+    - "All 3 workflows must be accessible"
+    - "All 12 tasks must be runnable"
+    - "Knowledge base must be indexed"
+
+  preconditions:
+    - "Learner profile collection capability"
+    - "Question/challenge content available"
+    - "Feedback system capability (or specification)"
+    - "Learning objective clarity"
+
+usage_recommendations:
+  best_for:
+    - "Technical education (IA, Claude Code, programming)"
+    - "Compliance/onboarding training"
+    - "Knowledge assessment and progression"
+    - "Learning challenge creation"
+
+  when_not_to_use:
+    - "Simple FAQs (overkill for trivial content)"
+    - "When intrinsic motivation doesn't matter"
+    - "For pure information transfer without behavior change goal"
+
+activation_workflow:
+  step_1: "Activate @dopamine-learning-chief"
+  step_2: "Provide learning context (objective, learner, domain)"
+  step_3: "Chief routes to appropriate workflow"
+  step_4: "Follow workflow phases and quality gates"
+  step_5: "Agents deliver implementation-ready specifications"
+  estimated_total_time: "2-6 hours depending on workflow"
+
+performance_metrics:
+  target_dopamine_score: ">=8.0/10"
+  target_learning_outcome: ">=8.0/10"
+  target_engagement_score: ">=8.0/10"
+  target_ethics_score: ">=9.0/10"
+  target_flow_score: ">=8.0/10"
+  overall_quality_threshold: ">=8.0/10"
+
+maintenance:
+  framework_updates: "Monitor new research in gamification/dopamine/flow"
+  agent_improvements: "Add new execution patterns as use cases emerge"
+  workflow_optimization: "Reduce timeline estimates based on actual usage"
+  knowledge_base_refresh: "Quarterly review of domain knowledge"
+
+support_and_escalation:
+  design_conflict: "Escalate to dopamine-learning-chief for arbitration"
+  ethical_concerns: "Deterding validator can block with redesign requirements"
+  quality_failure: "Return to specific agent with feedback for iteration"
+  novel_use_case: "Route to appropriate agents for adaptation"

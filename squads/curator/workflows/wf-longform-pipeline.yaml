@@ -1,0 +1,370 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Longform Pipeline
+# Version: 1.0.0
+# Purpose: Optimized pipeline for 10+ minute content
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflow-id: wf-longform-pipeline
+name: Longform Pipeline
+version: 1.1.0
+estimated-time: 35-50 minutes
+complexity: medium-high
+
+description: |
+  Full pipeline for long-form content (10+ minutes).
+  Includes cut configuration (Duration Intelligence + style presets),
+  narrative structuring, retention management, and chapter architecture.
+  Optimized for YouTube main channel, documentaries, educational content.
+
+  Pipeline:
+  [Input] → Mine → Cut Config → Narrative (Tier 1) → Longform Structure → Shareability → [Output]
+              ↓ parallel
+           Curation (optional)
+
+inputs:
+  required:
+    - content: "{source-slug}/momentos.md OR raw transcript"
+    - style: "blind-assembly | rule-of-six | 5-second"
+  optional:
+    - target_duration: "Target in minutes (default: from content)"
+    - enrich: "true | false (default: true)"
+    - platform: "youtube_main | podcast_video | course (default: youtube_main)"
+
+phases:
+
+  - phase: 0
+    name: Source Preparation
+    duration: 5-10 min
+    agent: "content-miner-pro"
+    skip_if: "{source-slug}/momentos.md already provided"
+
+    steps:
+      - step: 1
+        action: "Full Paper Edit mining"
+      - step: 2
+        action: "Generate {source-slug}/momentos.md"
+
+    checkpoint:
+      gate: "QG-002"
+      blocking: true
+
+    output:
+      files:
+        - "{source-slug}/momentos.md"
+        - "{source-slug}/transcricao_anotada.md"
+
+    parallel_trigger:
+      if: "enrich == true"
+      start: "Phase 0.5 (Curation)"
+
+  - phase: 0.5
+    name: Data Curation
+    duration: 5-10 min
+    agent: "data-curator"
+    parallel_to: "Phase 1"
+    skip_if: "enrich == false"
+
+    steps:
+      - step: 1
+        action: "Extract topics from banco_momentos"
+      - step: 2
+        action: "Curate external data (news, stats, trends)"
+      - step: 3
+        action: "Generate curadoria.yaml"
+
+    checkpoint:
+      gate: "QG-CUR"
+      blocking: false
+      note: "Can proceed without curation if unavailable"
+
+    output:
+      file: "curadoria.yaml"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 0.8: CUT CONFIGURATION (Duration Intelligence + Style)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 0.8
+    name: Cut Configuration
+    duration: 3-5 min
+    agent: "curator-chief"
+    depends_on: "Phase 0 (banco_momentos ready)"
+
+    description: |
+      Configure cut parameters using Duration Intelligence and style presets
+      BEFORE narrative assembly. Content-driven duration replaces fixed buckets.
+      Reference: .dispatch/research/curator-cut-customization-research.md
+
+    steps:
+      - step: 1
+        action: "Load {source-slug}/momentos.md and assess content density"
+        output: "Total moments count, top-scored moments, hook inventory"
+
+      - step: 2
+        action: "Apply Duration Intelligence for longform"
+        duration_intelligence:
+          intro: "10-30s (cold open from best moment)"
+          transitions: "2-5s per transition point"
+          outro: "15-30s (CTA + wrap)"
+          chapter_time: "Sum of selected moment durations per chapter"
+          total: "intro + sum(chapters) + sum(transitions) + outro"
+        note: "Duration is content-driven. Calculate from actual moment durations, NOT fixed buckets."
+
+      - step: 3
+        action: "Select style preset"
+        style_presets:
+          viral:
+            pacing: "fast"
+            cut_frequency: "every 2-4s"
+            overlay_density: "high"
+            energy: "high throughout"
+          educational:
+            pacing: "moderate"
+            cut_frequency: "every 5-8s"
+            overlay_density: "medium"
+            energy: "rising with plateaus"
+          emotional:
+            pacing: "slow-build"
+            cut_frequency: "every 8-15s"
+            overlay_density: "low"
+            energy: "wave pattern (build → release)"
+          entertaining:
+            pacing: "variable"
+            cut_frequency: "every 3-6s"
+            overlay_density: "high"
+            energy: "re-engagement every 3min (MrBeast pattern)"
+        default: "educational (for longform)"
+
+      - step: 4
+        action: "Generate chapter breakdown with duration estimates"
+        chapter_breakdown:
+          format: |
+            Chapter N: [title]
+              Moments: [list of moment IDs]
+              Estimated duration: [sum of moment durations + transitions]
+              Style notes: [pacing/energy for this chapter]
+          note: "Each chapter is a mini-arc with its own hook and payoff"
+
+      - step: 5
+        action: "Present configuration for user confirmation"
+        presents:
+          - "Total estimated duration with breakdown (intro + chapters + transitions + outro)"
+          - "Style preset and pacing parameters"
+          - "Chapter breakdown with moment assignments"
+          - "Platform target (youtube_main, podcast_video, course)"
+
+    checkpoint:
+      gate: "QG-CFG"
+      criteria:
+        - "Duration breakdown calculated from content (not fixed buckets)"
+        - "Style preset selected with pacing parameters"
+        - "Chapter breakdown generated with moment assignments"
+        - "User confirmed configuration"
+      blocking: true
+
+    output:
+      file: "cut_configuration.yaml"
+      pass_to: "Phase 1"
+
+  - phase: 1
+    name: Narrative Structure
+    duration: 10-15 min
+    agent: "Selected Tier 1 agent"
+
+    agent_selection:
+      - condition: "style == 'blind-assembly'"
+        agent: "ken-burns"
+      - condition: "style == 'rule-of-six'"
+        agent: "walter-murch"
+      - condition: "style == '5-second'"
+        agent: "matthew-dicks"
+      - condition: "default"
+        agent: "ken-burns"
+
+    steps:
+      - step: 1
+        action: "Load {source-slug}/momentos.md"
+      - step: 2
+        action: "Build narrative structure from moments"
+      - step: 3
+        action: "Determine assembly order"
+      - step: 4
+        action: "Identify transitions"
+      - step: 5
+        action: "Generate narrative_structure.yaml"
+
+    checkpoint:
+      gate: "QG-003"
+      blocking: true
+
+    output:
+      file: "narrative_structure.yaml"
+
+  - phase: 2
+    name: Longform Architecture
+    duration: 5-10 min
+    agent: "mrbeast"
+
+    steps:
+      - step: 1
+        action: "Load narrative_structure.yaml"
+      - step: 2
+        action: "Build chapter structure with internal arcs"
+      - step: 3
+        action: "Define cold open from best moment"
+      - step: 4
+        action: "Place retention hooks at predicted valleys"
+      - step: 5
+        action: "Generate energy map"
+      - step: 6
+        action: "Create YouTube chapters for description"
+      - step: 7
+        action: "Merge curadoria.yaml if available"
+
+    checkpoint:
+      gate: "QG-004"
+      criteria:
+        - "Chapter structure complete"
+        - "Cold open defined"
+        - "Retention hooks at every valley"
+        - "Energy map generated"
+      blocking: true
+
+    output:
+      file: "longform_cut.yaml"
+
+  - phase: 3
+    name: Shareability Analysis
+    duration: 3-5 min
+    agent: "jonah-berger"
+
+    steps:
+      - step: 1
+        action: "Load longform_cut.yaml"
+      - step: 2
+        action: "Apply STEPPS framework to content"
+      - step: 3
+        action: "Identify most shareable moments"
+      - step: 4
+        action: "Suggest clip-outs for social media"
+
+    checkpoint:
+      criteria:
+        - "STEPPS analysis complete"
+        - "At least 3 shareable moments identified"
+
+    output:
+      file: "shareability_analysis.yaml"
+
+  - phase: 4
+    name: Final Validation
+    duration: 2-5 min
+    agent: "curator-chief"
+
+    steps:
+      - step: 1
+        action: "Validate longform_cut.yaml"
+      - step: 2
+        action: "Verify all quality gates passed"
+      - step: 3
+        action: "Generate editor instructions"
+      - step: 4
+        action: "Create summary report"
+
+    output:
+      files:
+        - "longform_cut.yaml"
+        - "shareability_analysis.yaml"
+        - "editor_instructions.md"
+
+quality_gates:
+  summary:
+    - gate: QG-002
+      phase: 0
+      blocking: true
+      criteria: "banco_momentos complete"
+    - gate: QG-CUR
+      phase: 0.5
+      blocking: false
+      criteria: "curadoria complete (optional)"
+    - gate: QG-CFG
+      phase: 0.8
+      blocking: true
+      criteria: "cut configuration confirmed (duration intelligence + style + chapter breakdown)"
+    - gate: QG-003
+      phase: 1
+      blocking: true
+      criteria: "narrative structure validated"
+    - gate: QG-004
+      phase: 2
+      blocking: true
+      criteria: "longform architecture complete"
+
+execution:
+  command: "*longform {input} {style}"
+  example: "*longform {source-slug}/momentos.md blind-assembly"
+  shortcuts:
+    documentary: "*longform {input} blind-assembly --enrich true"
+    educational: "*longform {input} 5-second --enrich true"
+    sophisticated: "*longform {input} rule-of-six"
+
+  parallel_execution:
+    enabled: true
+    phases: ["Phase 0.5 runs parallel to Phase 1"]
+    note: "Curation can run while narrative structure is being built"
+
+  rollback:
+    phase_0_fail: "Fix mining parameters, retry"
+    phase_1_fail: "Try alternative Tier 1 agent or adjust style"
+    phase_2_fail: "Adjust chapter structure or retention hooks"
+
+notes: |
+  **When to use:**
+  - Content 10+ minutes
+  - Requires narrative arc and retention management
+  - Educational, documentary, or sophisticated content
+  - YouTube main channel or premium placements
+
+  **When NOT to use:**
+  - Short-form content (<3 min) — use wf-shorts-pipeline
+  - Need multiple format outputs — use wf-multi-format
+  - Simple clip compilation — use direct tier_2 agents
+
+  **Style selection guide:**
+  - **blind-assembly** (Ken Burns): Documentary, investigative, sophisticated
+  - **rule-of-six** (Walter Murch): Emotional depth, cinematic, multi-layered
+  - **5-second** (Matthew Dicks): Educational, storytelling, relatable
+
+  **Curation integration:**
+  - If enrich=true, Phase 0.5 runs parallel to Phase 1
+  - curadoria.yaml merged in Phase 2 (mrbeast)
+  - Enrichment optional but recommended for educational content
+
+dependencies:
+  tasks:
+    - "mine-transcript.md"
+    - "curate-data.md"
+  agents:
+    - "content-miner-pro"
+    - "data-curator"
+    - "ken-burns | walter-murch | matthew-dicks | robert-mckee"
+    - "mrbeast"
+    - "jonah-berger"
+    - "curator-chief"
+  templates:
+    - "templates/banco-momentos-tmpl.md"
+    - "templates/curadoria-tmpl.yaml"
+    - "templates/narrative-structure-tmpl.yaml"
+    - "templates/longform-cut-tmpl.yaml"
+
+  # Render Phase
+  # For video rendering, use wf-mine-to-cut Phase 5 or invoke ffmpeg-cutter directly:
+  # *render --input VIDEO --cut-yaml YAML
+  # See: squads/curator/tasks/execute-cut.md
+
+version_history:
+  - version: 1.0.0
+    date: 2026-02-05
+    changes: "Initial workflow creation"
+  - version: 1.1.0
+    date: 2026-02-06
+    changes: "Story #2 Phase 6: Added Phase 0.8 (Cut Configuration) with Duration Intelligence for longform, style presets, chapter breakdown output, and QG-CFG gate"

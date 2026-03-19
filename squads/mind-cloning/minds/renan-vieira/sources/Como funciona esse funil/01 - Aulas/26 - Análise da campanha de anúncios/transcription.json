@@ -1,0 +1,1318 @@
+{
+  "language": "pt",
+  "full_text": " Chegou a hora de a gente fazer uma análise na sua campanha de anúncios. Então a primeira coisa que a gente vai fazer é criar uma pré-definição. Essa aula é extremamente importante para você ter a... identificar aonde que é os gargalos, aonde que você está tendo problema para você melhorar e fazer seus 30, 40, 50 mil reais, tá? Então é muito importante. Você vai vir aqui no anúncios, aonde está aqui, você vai criar uma nova pré-definição. Nós vamos organizar essas colunas aqui para depois a gente fazer uma análise. Então você vai vir aqui, personalizar colunas. Opa, voltando aqui. Você vai vir aqui e vai criar uma nova pré-definição. Vai criar uma pré-definição. Clicando em criar pré-definição, eu vou limpar tudo isso aqui para você não se atrapalhar. Vou limpar tudo. E vamos começar do zero. Primeira coisa que a gente vai fazer, a gente vai colocar o CPM. O que é o CPM? CPM é o custo por mil impressões. Então eu coloquei o CPM aqui. Depois de colocar o CPM, eu vou colocar cliques no link. Vou digitar aqui, cliques no link. Aqui o meu tem cliques no link, únicos. Eu vou colocar únicos. Depois a gente tem o custo por clique. O que é o custo por clique? É o CPC. CPC. O custo por clique. Clique no link. Depois a gente tem o CTR. O que é o CTR? É a taxa de quantas pessoas clicam a cada mil. CTR, taxa de cliques no link. E depois eu tenho a visualizações da página de destino. O que é visualizações? Quantas pessoas chegou na nossa página? Visualizações, aqui. Visualizações da página de destino. Agora, a gente vai clicar aqui. A gente vai criar uma métrica personalizada. Que é o quê? A porcentagem de pessoas que chegaram na página. Então, aqui está a fórmula. Visualizações da página de destino, dividido por cliques no link. Então, vamos botar porcentagem. Você pode colocar aqui. Porcentagem. Porcentagem. Ou pode colocar aqui, porcento. Que chegou na página. Chegou na página. Então, o que você vai fazer? Você vai... Pegar aqui. Visualizações da página de destino, dividido por cliques no link. Visualizações. Visualizações da página de destino, dividido por cliques no link. Cliques no link. Ou pode ser cliques no link únicos. Botar cliques no link. Pronto. Vou criar a métrica personalizada. Pronto. Já chegou aqui. Aqui está ficando um monte de coisa. Aqui eu vou ter que tirar tudo isso aqui. Vou deixar cadastro. Vamos ver como é que vai ficar. Depois a gente vem aqui e organiza isso aqui. Vou clicar em compras. Isso. Já veio um monte de coisa aqui. Depois eu vou limpar tudo isso. O que eu vou fazer? Vou limpar tudo isso aqui. Porque quando eu criar... Essa métrica... Eu vou limpar tudo isso aqui. Essa métrica é personalizada. Agora eu vou colocar cadastro. Vou criar isso aqui. Cadastro. Quantas pessoas se cadastraram? É cadastro dividido por visualizações da página de destino. Então eu vou botar aqui. Criar métrica personalizada. Porcentagem de cadastros. Qual é a porcentagem de pessoas que chegaram na página? Porcentagem de cadastro de quem chegou na página. Como que eu faço? Eu faço cadastros dividido por visualizações da página de destino. Pronto. Deixa eu só ver aqui. É isso aí mesmo. Pronto. Criei a métrica personalizada. Fechou. Agora, como ele puxou tudo aqui, eu vou apagar tudo isso aqui de novo. E vou colocar um por um. Para ficar bonitinho aqui. Então vamos vir aqui. Vou apagar tudo isso aqui. E vamos lá. Você pode colocar outras métricas se você quiser. Então botou CPM. Custo por mil impressões. Já veio ali o CPM. Cliques no link. Cliques no link. Já apareceu aqui. CPC, que é o custo por clique. CPC. Custo por clique. CPC. CTR, taxa de pessoas. CTR. Taxa de pessoas que clicaram no link. Visualizações da página de destino. Só colocar aqui destino. Quantas pessoas visualizaram a página de destino. Porcentagem que chegou na página. Lembra que eu botei aquela porcentagem, que é aquela métrica. Porcentagem que chegou na página. Pronto. Cadastro. Cadastro. Cadastro. Quantos cadastros teve? Pronto. Aí é cadastro no site. Eu vou tirar as outras métricas que não precisa. Acho que não precisa nem essa aqui. Então vou deixar. Vou tirar essa aqui também, que acho que não precisa. Cadastro. Porcentagem que se cadastrou. Só botar porcentagem. Qual é a porcentagem que chegou na página e se cadastrou. E o custo por cadastro. Custo por cadastro. Aqui, ó. Custo por cadastro. Pronto. E o valor usado. Valor usado. Valor usado. Pronto. Agora eu vou vir aqui e salvar nova predefinição. No meu caso aqui, eu vou botar aqui. Aula. Aula. Funil. Vídeo de vendas. Pronto. Pronto. O que vai acontecer? Apliquei e já ficou aqui tudo que eu preciso. Então agora a gente vai fazer uma análise. Eu vou fazer a próxima... Vou dividir esse vídeo para não ficar comprido. E na próxima aula a gente faz uma análise desses números aqui. E aí",
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 6.82,
+      "start_formatted": "00:00",
+      "end_formatted": "00:06",
+      "text": "Chegou a hora de a gente fazer uma análise na sua campanha de anúncios.",
+      "type": "speech"
+    },
+    {
+      "start": 6.96,
+      "end": 9.66,
+      "start_formatted": "00:06",
+      "end_formatted": "00:09",
+      "text": "Então a primeira coisa que a gente vai fazer é criar uma pré-definição.",
+      "type": "speech"
+    },
+    {
+      "start": 10.16,
+      "end": 14.76,
+      "start_formatted": "00:10",
+      "end_formatted": "00:14",
+      "text": "Essa aula é extremamente importante para você ter a...",
+      "type": "speech"
+    },
+    {
+      "start": 14.76,
+      "end": 18.66,
+      "start_formatted": "00:14",
+      "end_formatted": "00:18",
+      "text": "identificar aonde que é os gargalos, aonde que você está tendo problema",
+      "type": "speech"
+    },
+    {
+      "start": 18.66,
+      "end": 22.52,
+      "start_formatted": "00:18",
+      "end_formatted": "00:22",
+      "text": "para você melhorar e fazer seus 30, 40, 50 mil reais, tá?",
+      "type": "speech"
+    },
+    {
+      "start": 22.82,
+      "end": 23.7,
+      "start_formatted": "00:22",
+      "end_formatted": "00:23",
+      "text": "Então é muito importante.",
+      "type": "speech"
+    },
+    {
+      "start": 23.7,
+      "end": 26.68,
+      "start_formatted": "00:23",
+      "end_formatted": "00:26",
+      "text": "Você vai vir aqui no anúncios, aonde está aqui,",
+      "type": "speech"
+    },
+    {
+      "start": 26.76,
+      "end": 28.42,
+      "start_formatted": "00:26",
+      "end_formatted": "00:28",
+      "text": "você vai criar uma nova pré-definição.",
+      "type": "speech"
+    },
+    {
+      "start": 28.42,
+      "end": 31.840000000000003,
+      "start_formatted": "00:28",
+      "end_formatted": "00:31",
+      "text": "Nós vamos organizar essas colunas aqui para depois a gente fazer uma análise.",
+      "type": "speech"
+    },
+    {
+      "start": 32.22,
+      "end": 34.800000000000004,
+      "start_formatted": "00:32",
+      "end_formatted": "00:34",
+      "text": "Então você vai vir aqui, personalizar colunas.",
+      "type": "speech"
+    },
+    {
+      "start": 36.18,
+      "end": 38.0,
+      "start_formatted": "00:36",
+      "end_formatted": "00:38",
+      "text": "Opa, voltando aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 38.24,
+      "end": 42.400000000000006,
+      "start_formatted": "00:38",
+      "end_formatted": "00:42",
+      "text": "Você vai vir aqui e vai criar uma nova pré-definição.",
+      "type": "speech"
+    },
+    {
+      "start": 43.68,
+      "end": 46.06,
+      "start_formatted": "00:43",
+      "end_formatted": "00:46",
+      "text": "Vai criar uma pré-definição.",
+      "type": "speech"
+    },
+    {
+      "start": 47.040000000000006,
+      "end": 48.68000000000001,
+      "start_formatted": "00:47",
+      "end_formatted": "00:48",
+      "text": "Clicando em criar pré-definição,",
+      "type": "speech"
+    },
+    {
+      "start": 48.68000000000001,
+      "end": 54.120000000000005,
+      "start_formatted": "00:48",
+      "end_formatted": "00:54",
+      "text": "eu vou limpar tudo isso aqui para você não se atrapalhar.",
+      "type": "speech"
+    },
+    {
+      "start": 55.36,
+      "end": 56.620000000000005,
+      "start_formatted": "00:55",
+      "end_formatted": "00:56",
+      "text": "Vou limpar tudo.",
+      "type": "speech"
+    },
+    {
+      "start": 57.34,
+      "end": 58.400000000000006,
+      "start_formatted": "00:57",
+      "end_formatted": "00:58",
+      "text": "E vamos começar do zero.",
+      "type": "speech"
+    },
+    {
+      "start": 58.42,
+      "end": 61.52,
+      "start_formatted": "00:58",
+      "end_formatted": "01:01",
+      "text": "Primeira coisa que a gente vai fazer, a gente vai colocar o CPM.",
+      "type": "speech"
+    },
+    {
+      "start": 61.620000000000005,
+      "end": 62.52,
+      "start_formatted": "01:01",
+      "end_formatted": "01:02",
+      "text": "O que é o CPM?",
+      "type": "speech"
+    },
+    {
+      "start": 63.06,
+      "end": 66.4,
+      "start_formatted": "01:03",
+      "end_formatted": "01:06",
+      "text": "CPM é o custo por mil impressões.",
+      "type": "speech"
+    },
+    {
+      "start": 66.54,
+      "end": 67.72,
+      "start_formatted": "01:06",
+      "end_formatted": "01:07",
+      "text": "Então eu coloquei o CPM aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 68.24000000000001,
+      "end": 70.86,
+      "start_formatted": "01:08",
+      "end_formatted": "01:10",
+      "text": "Depois de colocar o CPM, eu vou colocar cliques no link.",
+      "type": "speech"
+    },
+    {
+      "start": 71.4,
+      "end": 73.8,
+      "start_formatted": "01:11",
+      "end_formatted": "01:13",
+      "text": "Vou digitar aqui, cliques no link.",
+      "type": "speech"
+    },
+    {
+      "start": 74.82,
+      "end": 79.42,
+      "start_formatted": "01:14",
+      "end_formatted": "01:19",
+      "text": "Aqui o meu tem cliques no link, únicos.",
+      "type": "speech"
+    },
+    {
+      "start": 80.04,
+      "end": 81.0,
+      "start_formatted": "01:20",
+      "end_formatted": "01:21",
+      "text": "Eu vou colocar únicos.",
+      "type": "speech"
+    },
+    {
+      "start": 82.5,
+      "end": 84.68,
+      "start_formatted": "01:22",
+      "end_formatted": "01:24",
+      "text": "Depois a gente tem o custo por clique.",
+      "type": "speech"
+    },
+    {
+      "start": 84.8,
+      "end": 86.02000000000001,
+      "start_formatted": "01:24",
+      "end_formatted": "01:26",
+      "text": "O que é o custo por clique?",
+      "type": "speech"
+    },
+    {
+      "start": 86.1,
+      "end": 86.76,
+      "start_formatted": "01:26",
+      "end_formatted": "01:26",
+      "text": "É o CPC.",
+      "type": "speech"
+    },
+    {
+      "start": 86.76,
+      "end": 86.84,
+      "start_formatted": "01:26",
+      "end_formatted": "01:26",
+      "text": "CPC.",
+      "type": "speech"
+    },
+    {
+      "start": 87.18,
+      "end": 88.4,
+      "start_formatted": "01:27",
+      "end_formatted": "01:28",
+      "text": "O custo por clique.",
+      "type": "speech"
+    },
+    {
+      "start": 88.42,
+      "end": 89.08,
+      "start_formatted": "01:28",
+      "end_formatted": "01:29",
+      "text": "Clique no link.",
+      "type": "speech"
+    },
+    {
+      "start": 90.12,
+      "end": 92.4,
+      "start_formatted": "01:30",
+      "end_formatted": "01:32",
+      "text": "Depois a gente tem o CTR.",
+      "type": "speech"
+    },
+    {
+      "start": 92.5,
+      "end": 93.42,
+      "start_formatted": "01:32",
+      "end_formatted": "01:33",
+      "text": "O que é o CTR?",
+      "type": "speech"
+    },
+    {
+      "start": 93.48,
+      "end": 98.68,
+      "start_formatted": "01:33",
+      "end_formatted": "01:38",
+      "text": "É a taxa de quantas pessoas clicam a cada mil.",
+      "type": "speech"
+    },
+    {
+      "start": 99.74000000000001,
+      "end": 101.9,
+      "start_formatted": "01:39",
+      "end_formatted": "01:41",
+      "text": "CTR, taxa de cliques no link.",
+      "type": "speech"
+    },
+    {
+      "start": 104.6,
+      "end": 107.8,
+      "start_formatted": "01:44",
+      "end_formatted": "01:47",
+      "text": "E depois eu tenho a visualizações da página de destino.",
+      "type": "speech"
+    },
+    {
+      "start": 107.88,
+      "end": 108.8,
+      "start_formatted": "01:47",
+      "end_formatted": "01:48",
+      "text": "O que é visualizações?",
+      "type": "speech"
+    },
+    {
+      "start": 108.92,
+      "end": 110.68,
+      "start_formatted": "01:48",
+      "end_formatted": "01:50",
+      "text": "Quantas pessoas chegou na nossa página?",
+      "type": "speech"
+    },
+    {
+      "start": 112.42,
+      "end": 113.5,
+      "start_formatted": "01:52",
+      "end_formatted": "01:53",
+      "text": "Visualizações, aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 114.24000000000001,
+      "end": 116.26,
+      "start_formatted": "01:54",
+      "end_formatted": "01:56",
+      "text": "Visualizações da página de destino.",
+      "type": "speech"
+    },
+    {
+      "start": 117.3,
+      "end": 118.26,
+      "start_formatted": "01:57",
+      "end_formatted": "01:58",
+      "text": "Agora, a gente vai clicar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 118.26,
+      "end": 121.24000000000001,
+      "start_formatted": "01:58",
+      "end_formatted": "02:01",
+      "text": "A gente vai criar uma métrica personalizada.",
+      "type": "speech"
+    },
+    {
+      "start": 121.34,
+      "end": 121.7,
+      "start_formatted": "02:01",
+      "end_formatted": "02:01",
+      "text": "Que é o quê?",
+      "type": "speech"
+    },
+    {
+      "start": 121.76,
+      "end": 124.54,
+      "start_formatted": "02:01",
+      "end_formatted": "02:04",
+      "text": "A porcentagem de pessoas que chegaram na página.",
+      "type": "speech"
+    },
+    {
+      "start": 125.28,
+      "end": 126.28,
+      "start_formatted": "02:05",
+      "end_formatted": "02:06",
+      "text": "Então, aqui está a fórmula.",
+      "type": "speech"
+    },
+    {
+      "start": 126.66000000000001,
+      "end": 129.56,
+      "start_formatted": "02:06",
+      "end_formatted": "02:09",
+      "text": "Visualizações da página de destino, dividido por cliques no link.",
+      "type": "speech"
+    },
+    {
+      "start": 130.14000000000001,
+      "end": 132.42000000000002,
+      "start_formatted": "02:10",
+      "end_formatted": "02:12",
+      "text": "Então, vamos botar porcentagem.",
+      "type": "speech"
+    },
+    {
+      "start": 133.20000000000002,
+      "end": 134.36,
+      "start_formatted": "02:13",
+      "end_formatted": "02:14",
+      "text": "Você pode colocar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 135.78,
+      "end": 136.22,
+      "start_formatted": "02:15",
+      "end_formatted": "02:16",
+      "text": "Porcentagem.",
+      "type": "speech"
+    },
+    {
+      "start": 137.1,
+      "end": 137.54000000000002,
+      "start_formatted": "02:17",
+      "end_formatted": "02:17",
+      "text": "Porcentagem.",
+      "type": "speech"
+    },
+    {
+      "start": 138.36,
+      "end": 140.68,
+      "start_formatted": "02:18",
+      "end_formatted": "02:20",
+      "text": "Ou pode colocar aqui, porcento.",
+      "type": "speech"
+    },
+    {
+      "start": 141.0,
+      "end": 142.46,
+      "start_formatted": "02:21",
+      "end_formatted": "02:22",
+      "text": "Que chegou na página.",
+      "type": "speech"
+    },
+    {
+      "start": 143.26,
+      "end": 144.16,
+      "start_formatted": "02:23",
+      "end_formatted": "02:24",
+      "text": "Chegou na página.",
+      "type": "speech"
+    },
+    {
+      "start": 144.16,
+      "end": 145.64000000000001,
+      "start_formatted": "02:24",
+      "end_formatted": "02:25",
+      "text": "Então, o que você vai fazer?",
+      "type": "speech"
+    },
+    {
+      "start": 146.56,
+      "end": 147.16,
+      "start_formatted": "02:26",
+      "end_formatted": "02:27",
+      "text": "Você vai...",
+      "type": "speech"
+    },
+    {
+      "start": 148.26,
+      "end": 150.07999999999998,
+      "start_formatted": "02:28",
+      "end_formatted": "02:30",
+      "text": "Pegar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 150.5,
+      "end": 152.94,
+      "start_formatted": "02:30",
+      "end_formatted": "02:32",
+      "text": "Visualizações da página de destino, dividido por cliques no link.",
+      "type": "speech"
+    },
+    {
+      "start": 155.42,
+      "end": 155.85999999999999,
+      "start_formatted": "02:35",
+      "end_formatted": "02:35",
+      "text": "Visualizações.",
+      "type": "speech"
+    },
+    {
+      "start": 158.5,
+      "end": 163.32,
+      "start_formatted": "02:38",
+      "end_formatted": "02:43",
+      "text": "Visualizações da página de destino, dividido por cliques no link.",
+      "type": "speech"
+    },
+    {
+      "start": 163.82,
+      "end": 166.32,
+      "start_formatted": "02:43",
+      "end_formatted": "02:46",
+      "text": "Cliques no link.",
+      "type": "speech"
+    },
+    {
+      "start": 167.57999999999998,
+      "end": 170.01999999999998,
+      "start_formatted": "02:47",
+      "end_formatted": "02:50",
+      "text": "Ou pode ser cliques no link únicos.",
+      "type": "speech"
+    },
+    {
+      "start": 170.68,
+      "end": 171.6,
+      "start_formatted": "02:50",
+      "end_formatted": "02:51",
+      "text": "Botar cliques no link.",
+      "type": "speech"
+    },
+    {
+      "start": 172.06,
+      "end": 172.39999999999998,
+      "start_formatted": "02:52",
+      "end_formatted": "02:52",
+      "text": "Pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 172.39999999999998,
+      "end": 175.29999999999998,
+      "start_formatted": "02:52",
+      "end_formatted": "02:55",
+      "text": "Vou criar a métrica personalizada.",
+      "type": "speech"
+    },
+    {
+      "start": 177.14,
+      "end": 177.7,
+      "start_formatted": "02:57",
+      "end_formatted": "02:57",
+      "text": "Pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 177.7,
+      "end": 178.45999999999998,
+      "start_formatted": "02:57",
+      "end_formatted": "02:58",
+      "text": "Já chegou aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 179.33999999999997,
+      "end": 180.88,
+      "start_formatted": "02:59",
+      "end_formatted": "03:00",
+      "text": "Aqui está ficando um monte de coisa.",
+      "type": "speech"
+    },
+    {
+      "start": 182.0,
+      "end": 183.54,
+      "start_formatted": "03:02",
+      "end_formatted": "03:03",
+      "text": "Aqui eu vou ter que tirar tudo isso aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 183.64,
+      "end": 184.6,
+      "start_formatted": "03:03",
+      "end_formatted": "03:04",
+      "text": "Vou deixar cadastro.",
+      "type": "speech"
+    },
+    {
+      "start": 186.06,
+      "end": 187.22,
+      "start_formatted": "03:06",
+      "end_formatted": "03:07",
+      "text": "Vamos ver como é que vai ficar.",
+      "type": "speech"
+    },
+    {
+      "start": 187.35999999999999,
+      "end": 189.01999999999998,
+      "start_formatted": "03:07",
+      "end_formatted": "03:09",
+      "text": "Depois a gente vem aqui e organiza isso aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 190.54,
+      "end": 192.22,
+      "start_formatted": "03:10",
+      "end_formatted": "03:12",
+      "text": "Vou clicar em compras.",
+      "type": "speech"
+    },
+    {
+      "start": 197.22,
+      "end": 197.62,
+      "start_formatted": "03:17",
+      "end_formatted": "03:17",
+      "text": "Isso.",
+      "type": "speech"
+    },
+    {
+      "start": 197.72,
+      "end": 198.98,
+      "start_formatted": "03:17",
+      "end_formatted": "03:18",
+      "text": "Já veio um monte de coisa aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 198.98,
+      "end": 204.35999999999999,
+      "start_formatted": "03:18",
+      "end_formatted": "03:24",
+      "text": "Depois eu vou limpar tudo isso.",
+      "type": "speech"
+    },
+    {
+      "start": 204.45999999999998,
+      "end": 205.0,
+      "start_formatted": "03:24",
+      "end_formatted": "03:25",
+      "text": "O que eu vou fazer?",
+      "type": "speech"
+    },
+    {
+      "start": 205.04,
+      "end": 205.94,
+      "start_formatted": "03:25",
+      "end_formatted": "03:25",
+      "text": "Vou limpar tudo isso aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 206.14,
+      "end": 206.98,
+      "start_formatted": "03:26",
+      "end_formatted": "03:26",
+      "text": "Porque quando eu criar...",
+      "type": "speech"
+    },
+    {
+      "start": 206.98,
+      "end": 199.98,
+      "start_formatted": "03:26",
+      "end_formatted": "03:19",
+      "text": "Essa métrica...",
+      "type": "speech"
+    },
+    {
+      "start": 199.98,
+      "end": 207.67999999999998,
+      "start_formatted": "03:19",
+      "end_formatted": "03:27",
+      "text": "Eu vou limpar tudo isso aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 207.7,
+      "end": 208.66,
+      "start_formatted": "03:27",
+      "end_formatted": "03:28",
+      "text": "Essa métrica é personalizada.",
+      "type": "speech"
+    },
+    {
+      "start": 209.39999999999998,
+      "end": 210.66,
+      "start_formatted": "03:29",
+      "end_formatted": "03:30",
+      "text": "Agora eu vou colocar cadastro.",
+      "type": "speech"
+    },
+    {
+      "start": 210.72,
+      "end": 211.35999999999999,
+      "start_formatted": "03:30",
+      "end_formatted": "03:31",
+      "text": "Vou criar isso aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 211.78,
+      "end": 212.29999999999998,
+      "start_formatted": "03:31",
+      "end_formatted": "03:32",
+      "text": "Cadastro.",
+      "type": "speech"
+    },
+    {
+      "start": 213.39999999999998,
+      "end": 215.1,
+      "start_formatted": "03:33",
+      "end_formatted": "03:35",
+      "text": "Quantas pessoas se cadastraram?",
+      "type": "speech"
+    },
+    {
+      "start": 215.23999999999998,
+      "end": 219.78,
+      "start_formatted": "03:35",
+      "end_formatted": "03:39",
+      "text": "É cadastro dividido por visualizações da página de destino.",
+      "type": "speech"
+    },
+    {
+      "start": 219.85999999999999,
+      "end": 220.39999999999998,
+      "start_formatted": "03:39",
+      "end_formatted": "03:40",
+      "text": "Então eu vou botar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 220.6,
+      "end": 222.39999999999998,
+      "start_formatted": "03:40",
+      "end_formatted": "03:42",
+      "text": "Criar métrica personalizada.",
+      "type": "speech"
+    },
+    {
+      "start": 223.33999999999997,
+      "end": 225.6,
+      "start_formatted": "03:43",
+      "end_formatted": "03:45",
+      "text": "Porcentagem de cadastros.",
+      "type": "speech"
+    },
+    {
+      "start": 227.94,
+      "end": 230.72,
+      "start_formatted": "03:47",
+      "end_formatted": "03:50",
+      "text": "Qual é a porcentagem de pessoas que chegaram na página?",
+      "type": "speech"
+    },
+    {
+      "start": 231.38,
+      "end": 234.29999999999998,
+      "start_formatted": "03:51",
+      "end_formatted": "03:54",
+      "text": "Porcentagem de cadastro de quem chegou na página.",
+      "type": "speech"
+    },
+    {
+      "start": 234.29999999999998,
+      "end": 236.88,
+      "start_formatted": "03:54",
+      "end_formatted": "03:56",
+      "text": "Como que eu faço?",
+      "type": "speech"
+    },
+    {
+      "start": 236.88,
+      "end": 245.2,
+      "start_formatted": "03:56",
+      "end_formatted": "04:05",
+      "text": "Eu faço cadastros dividido por visualizações da página de destino.",
+      "type": "speech"
+    },
+    {
+      "start": 247.6,
+      "end": 248.07999999999998,
+      "start_formatted": "04:07",
+      "end_formatted": "04:08",
+      "text": "Pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 248.7,
+      "end": 249.84,
+      "start_formatted": "04:08",
+      "end_formatted": "04:09",
+      "text": "Deixa eu só ver aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 250.6,
+      "end": 251.28,
+      "start_formatted": "04:10",
+      "end_formatted": "04:11",
+      "text": "É isso aí mesmo.",
+      "type": "speech"
+    },
+    {
+      "start": 251.42,
+      "end": 251.74,
+      "start_formatted": "04:11",
+      "end_formatted": "04:11",
+      "text": "Pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 252.35999999999999,
+      "end": 253.6,
+      "start_formatted": "04:12",
+      "end_formatted": "04:13",
+      "text": "Criei a métrica personalizada.",
+      "type": "speech"
+    },
+    {
+      "start": 253.7,
+      "end": 254.12,
+      "start_formatted": "04:13",
+      "end_formatted": "04:14",
+      "text": "Fechou.",
+      "type": "speech"
+    },
+    {
+      "start": 254.76,
+      "end": 258.76,
+      "start_formatted": "04:14",
+      "end_formatted": "04:18",
+      "text": "Agora, como ele puxou tudo aqui, eu vou apagar tudo isso aqui de novo.",
+      "type": "speech"
+    },
+    {
+      "start": 260.82,
+      "end": 262.28,
+      "start_formatted": "04:20",
+      "end_formatted": "04:22",
+      "text": "E vou colocar um por um.",
+      "type": "speech"
+    },
+    {
+      "start": 262.28,
+      "end": 265.74,
+      "start_formatted": "04:22",
+      "end_formatted": "04:25",
+      "text": "Para ficar bonitinho aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 266.88,
+      "end": 271.94,
+      "start_formatted": "04:26",
+      "end_formatted": "04:31",
+      "text": "Então vamos vir aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 272.1,
+      "end": 273.08,
+      "start_formatted": "04:32",
+      "end_formatted": "04:33",
+      "text": "Vou apagar tudo isso aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 274.26,
+      "end": 275.14,
+      "start_formatted": "04:34",
+      "end_formatted": "04:35",
+      "text": "E vamos lá.",
+      "type": "speech"
+    },
+    {
+      "start": 276.52,
+      "end": 278.5,
+      "start_formatted": "04:36",
+      "end_formatted": "04:38",
+      "text": "Você pode colocar outras métricas se você quiser.",
+      "type": "speech"
+    },
+    {
+      "start": 278.64,
+      "end": 279.74,
+      "start_formatted": "04:38",
+      "end_formatted": "04:39",
+      "text": "Então botou CPM.",
+      "type": "speech"
+    },
+    {
+      "start": 280.62,
+      "end": 281.62,
+      "start_formatted": "04:40",
+      "end_formatted": "04:41",
+      "text": "Custo por mil impressões.",
+      "type": "speech"
+    },
+    {
+      "start": 281.7,
+      "end": 282.64,
+      "start_formatted": "04:41",
+      "end_formatted": "04:42",
+      "text": "Já veio ali o CPM.",
+      "type": "speech"
+    },
+    {
+      "start": 283.46,
+      "end": 284.3,
+      "start_formatted": "04:43",
+      "end_formatted": "04:44",
+      "text": "Cliques no link.",
+      "type": "speech"
+    },
+    {
+      "start": 285.86,
+      "end": 287.44,
+      "start_formatted": "04:45",
+      "end_formatted": "04:47",
+      "text": "Cliques no link.",
+      "type": "speech"
+    },
+    {
+      "start": 288.64,
+      "end": 289.92,
+      "start_formatted": "04:48",
+      "end_formatted": "04:49",
+      "text": "Já apareceu aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 291.28,
+      "end": 293.21999999999997,
+      "start_formatted": "04:51",
+      "end_formatted": "04:53",
+      "text": "CPC, que é o custo por clique.",
+      "type": "speech"
+    },
+    {
+      "start": 293.86,
+      "end": 294.38,
+      "start_formatted": "04:53",
+      "end_formatted": "04:54",
+      "text": "CPC.",
+      "type": "speech"
+    },
+    {
+      "start": 295.0,
+      "end": 296.18,
+      "start_formatted": "04:55",
+      "end_formatted": "04:56",
+      "text": "Custo por clique.",
+      "type": "speech"
+    },
+    {
+      "start": 296.88,
+      "end": 297.88,
+      "start_formatted": "04:56",
+      "end_formatted": "04:57",
+      "text": "CPC.",
+      "type": "speech"
+    },
+    {
+      "start": 297.88,
+      "end": 299.32,
+      "start_formatted": "04:57",
+      "end_formatted": "04:59",
+      "text": "CTR, taxa de pessoas.",
+      "type": "speech"
+    },
+    {
+      "start": 300.62,
+      "end": 301.1,
+      "start_formatted": "05:00",
+      "end_formatted": "05:01",
+      "text": "CTR.",
+      "type": "speech"
+    },
+    {
+      "start": 302.68,
+      "end": 306.04,
+      "start_formatted": "05:02",
+      "end_formatted": "05:06",
+      "text": "Taxa de pessoas que clicaram no link.",
+      "type": "speech"
+    },
+    {
+      "start": 309.52,
+      "end": 310.94,
+      "start_formatted": "05:09",
+      "end_formatted": "05:10",
+      "text": "Visualizações da página de destino.",
+      "type": "speech"
+    },
+    {
+      "start": 311.08,
+      "end": 312.3,
+      "start_formatted": "05:11",
+      "end_formatted": "05:12",
+      "text": "Só colocar aqui destino.",
+      "type": "speech"
+    },
+    {
+      "start": 314.6,
+      "end": 316.74,
+      "start_formatted": "05:14",
+      "end_formatted": "05:16",
+      "text": "Quantas pessoas visualizaram a página de destino.",
+      "type": "speech"
+    },
+    {
+      "start": 318.5,
+      "end": 319.71999999999997,
+      "start_formatted": "05:18",
+      "end_formatted": "05:19",
+      "text": "Porcentagem que chegou na página.",
+      "type": "speech"
+    },
+    {
+      "start": 319.82,
+      "end": 323.02,
+      "start_formatted": "05:19",
+      "end_formatted": "05:23",
+      "text": "Lembra que eu botei aquela porcentagem, que é aquela métrica.",
+      "type": "speech"
+    },
+    {
+      "start": 323.62,
+      "end": 324.9,
+      "start_formatted": "05:23",
+      "end_formatted": "05:24",
+      "text": "Porcentagem que chegou na página.",
+      "type": "speech"
+    },
+    {
+      "start": 325.36,
+      "end": 325.78,
+      "start_formatted": "05:25",
+      "end_formatted": "05:25",
+      "text": "Pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 326.88,
+      "end": 327.38,
+      "start_formatted": "05:26",
+      "end_formatted": "05:27",
+      "text": "Cadastro.",
+      "type": "speech"
+    },
+    {
+      "start": 327.38,
+      "end": 327.88,
+      "start_formatted": "05:27",
+      "end_formatted": "05:27",
+      "text": "Cadastro.",
+      "type": "speech"
+    },
+    {
+      "start": 327.88,
+      "end": 328.88,
+      "start_formatted": "05:27",
+      "end_formatted": "05:28",
+      "text": "Cadastro.",
+      "type": "speech"
+    },
+    {
+      "start": 328.88,
+      "end": 330.4,
+      "start_formatted": "05:28",
+      "end_formatted": "05:30",
+      "text": "Quantos cadastros teve?",
+      "type": "speech"
+    },
+    {
+      "start": 333.14,
+      "end": 333.62,
+      "start_formatted": "05:33",
+      "end_formatted": "05:33",
+      "text": "Pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 334.0,
+      "end": 335.4,
+      "start_formatted": "05:34",
+      "end_formatted": "05:35",
+      "text": "Aí é cadastro no site.",
+      "type": "speech"
+    },
+    {
+      "start": 335.48,
+      "end": 337.36,
+      "start_formatted": "05:35",
+      "end_formatted": "05:37",
+      "text": "Eu vou tirar as outras métricas que não precisa.",
+      "type": "speech"
+    },
+    {
+      "start": 337.46,
+      "end": 338.68,
+      "start_formatted": "05:37",
+      "end_formatted": "05:38",
+      "text": "Acho que não precisa nem essa aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 339.3,
+      "end": 339.78,
+      "start_formatted": "05:39",
+      "end_formatted": "05:39",
+      "text": "Então vou deixar.",
+      "type": "speech"
+    },
+    {
+      "start": 342.1,
+      "end": 344.3,
+      "start_formatted": "05:42",
+      "end_formatted": "05:44",
+      "text": "Vou tirar essa aqui também, que acho que não precisa.",
+      "type": "speech"
+    },
+    {
+      "start": 345.46,
+      "end": 345.94,
+      "start_formatted": "05:45",
+      "end_formatted": "05:45",
+      "text": "Cadastro.",
+      "type": "speech"
+    },
+    {
+      "start": 346.36,
+      "end": 347.65999999999997,
+      "start_formatted": "05:46",
+      "end_formatted": "05:47",
+      "text": "Porcentagem que se cadastrou.",
+      "type": "speech"
+    },
+    {
+      "start": 348.12,
+      "end": 349.3,
+      "start_formatted": "05:48",
+      "end_formatted": "05:49",
+      "text": "Só botar porcentagem.",
+      "type": "speech"
+    },
+    {
+      "start": 350.1,
+      "end": 353.14,
+      "start_formatted": "05:50",
+      "end_formatted": "05:53",
+      "text": "Qual é a porcentagem que chegou na página e se cadastrou.",
+      "type": "speech"
+    },
+    {
+      "start": 353.14,
+      "end": 355.56,
+      "start_formatted": "05:53",
+      "end_formatted": "05:55",
+      "text": "E o custo por cadastro.",
+      "type": "speech"
+    },
+    {
+      "start": 356.88,
+      "end": 360.56,
+      "start_formatted": "05:56",
+      "end_formatted": "06:00",
+      "text": "Custo por cadastro.",
+      "type": "speech"
+    },
+    {
+      "start": 361.32,
+      "end": 362.32,
+      "start_formatted": "06:01",
+      "end_formatted": "06:02",
+      "text": "Aqui, ó.",
+      "type": "speech"
+    },
+    {
+      "start": 362.58,
+      "end": 363.9,
+      "start_formatted": "06:02",
+      "end_formatted": "06:03",
+      "text": "Custo por cadastro.",
+      "type": "speech"
+    },
+    {
+      "start": 364.1,
+      "end": 364.44,
+      "start_formatted": "06:04",
+      "end_formatted": "06:04",
+      "text": "Pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 365.65999999999997,
+      "end": 366.68,
+      "start_formatted": "06:05",
+      "end_formatted": "06:06",
+      "text": "E o valor usado.",
+      "type": "speech"
+    },
+    {
+      "start": 366.92,
+      "end": 367.71999999999997,
+      "start_formatted": "06:06",
+      "end_formatted": "06:07",
+      "text": "Valor usado.",
+      "type": "speech"
+    },
+    {
+      "start": 368.38,
+      "end": 369.98,
+      "start_formatted": "06:08",
+      "end_formatted": "06:09",
+      "text": "Valor usado.",
+      "type": "speech"
+    },
+    {
+      "start": 370.82,
+      "end": 371.2,
+      "start_formatted": "06:10",
+      "end_formatted": "06:11",
+      "text": "Pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 371.9,
+      "end": 374.3,
+      "start_formatted": "06:11",
+      "end_formatted": "06:14",
+      "text": "Agora eu vou vir aqui e salvar nova predefinição.",
+      "type": "speech"
+    },
+    {
+      "start": 374.44,
+      "end": 375.82,
+      "start_formatted": "06:14",
+      "end_formatted": "06:15",
+      "text": "No meu caso aqui, eu vou botar aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 376.5,
+      "end": 376.94,
+      "start_formatted": "06:16",
+      "end_formatted": "06:16",
+      "text": "Aula.",
+      "type": "speech"
+    },
+    {
+      "start": 378.26,
+      "end": 378.98,
+      "start_formatted": "06:18",
+      "end_formatted": "06:18",
+      "text": "Aula.",
+      "type": "speech"
+    },
+    {
+      "start": 380.4,
+      "end": 381.15999999999997,
+      "start_formatted": "06:20",
+      "end_formatted": "06:21",
+      "text": "Funil.",
+      "type": "speech"
+    },
+    {
+      "start": 382.8,
+      "end": 384.2,
+      "start_formatted": "06:22",
+      "end_formatted": "06:24",
+      "text": "Vídeo de vendas.",
+      "type": "speech"
+    },
+    {
+      "start": 384.8,
+      "end": 385.14,
+      "start_formatted": "06:24",
+      "end_formatted": "06:25",
+      "text": "Pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 385.14,
+      "end": 385.21999999999997,
+      "start_formatted": "06:25",
+      "end_formatted": "06:25",
+      "text": "Pronto.",
+      "type": "speech"
+    },
+    {
+      "start": 386.88,
+      "end": 387.65999999999997,
+      "start_formatted": "06:26",
+      "end_formatted": "06:27",
+      "text": "O que vai acontecer?",
+      "type": "speech"
+    },
+    {
+      "start": 387.94,
+      "end": 391.58,
+      "start_formatted": "06:27",
+      "end_formatted": "06:31",
+      "text": "Apliquei e já ficou aqui tudo que eu preciso.",
+      "type": "speech"
+    },
+    {
+      "start": 392.18,
+      "end": 394.65999999999997,
+      "start_formatted": "06:32",
+      "end_formatted": "06:34",
+      "text": "Então agora a gente vai fazer uma análise.",
+      "type": "speech"
+    },
+    {
+      "start": 395.28,
+      "end": 396.38,
+      "start_formatted": "06:35",
+      "end_formatted": "06:36",
+      "text": "Eu vou fazer a próxima...",
+      "type": "speech"
+    },
+    {
+      "start": 396.38,
+      "end": 398.36,
+      "start_formatted": "06:36",
+      "end_formatted": "06:38",
+      "text": "Vou dividir esse vídeo para não ficar comprido.",
+      "type": "speech"
+    },
+    {
+      "start": 398.54,
+      "end": 403.02,
+      "start_formatted": "06:38",
+      "end_formatted": "06:43",
+      "text": "E na próxima aula a gente faz uma análise desses números aqui.",
+      "type": "speech"
+    },
+    {
+      "start": 403.02,
+      "end": 404.02,
+      "start_formatted": "06:43",
+      "end_formatted": "06:44",
+      "text": "E aí",
+      "type": "speech"
+    }
+  ]
+}

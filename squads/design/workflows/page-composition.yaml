@@ -1,0 +1,372 @@
+workflow:
+  id: page-composition
+  name: Page Composition Workflow
+  description: |
+    Compose complete pages using a deterministic 9-phase chain: page type detection, template selection, optional copy bridge, layout/typography/spacing application, component selection, code generation, and quality validation.
+  version: 1.0.0
+  type: sequential
+  sequence:
+    - step: step-1-identify-and-constrain
+      id: step-1-identify-and-constrain
+      phase: 1
+      phase_name: Validate brief, identify page type, and apply constraints
+      agent: page-composer
+      action: compose-page
+      outputs:
+        - page_type_decision
+        - resolved_constraints
+        - brief_validation
+      next: step-2-select-template-base
+    - step: step-2-select-template-base
+      id: step-2-select-template-base
+      phase: 2
+      phase_name: Select template base
+      agent: page-composer
+      action: compose-page
+      outputs:
+        - template_selection
+      next: step-3-apply-copy-layout-bridge
+    - step: step-3-apply-copy-layout-bridge
+      id: step-3-apply-copy-layout-bridge
+      phase: 3
+      phase_name: Apply copy-to-layout bridge (conditional)
+      agent: page-composer
+      action: copy-layout
+      outputs:
+        - bridge_map
+      next: step-4-apply-layout-framework
+    - step: step-4-apply-layout-framework
+      id: step-4-apply-layout-framework
+      phase: 4
+      phase_name: Apply layout framework
+      agent: page-composer
+      action: compose-page
+      outputs:
+        - layout_spec
+      next: step-5-apply-typography-hierarchy
+    - step: step-5-apply-typography-hierarchy
+      id: step-5-apply-typography-hierarchy
+      phase: 5
+      phase_name: Apply typography hierarchy
+      agent: page-composer
+      action: typography-map
+      outputs:
+        - typography_map
+      next: step-6-apply-spacing-rhythm
+    - step: step-6-apply-spacing-rhythm
+      id: step-6-apply-spacing-rhythm
+      phase: 6
+      phase_name: Apply spacing rhythm
+      agent: page-composer
+      action: spacing-check
+      outputs:
+        - spacing_spec
+      next: step-7-select-shadcn-components
+    - step: step-7-select-shadcn-components
+      id: step-7-select-shadcn-components
+      phase: 7
+      phase_name: Select shadcn components
+      agent: page-composer
+      action: compose-page
+      outputs:
+        - component_plan
+      next: step-8-generate-react-tailwind-shadcn-code
+    - step: step-8-generate-react-tailwind-shadcn-code
+      id: step-8-generate-react-tailwind-shadcn-code
+      phase: 8
+      phase_name: Generate React + Tailwind + shadcn code with SEO and states
+      agent: page-composer
+      action: compose-page
+      outputs:
+        - page_code
+        - implementation_notes
+      next: step-9-validate-quality-gate
+    - step: step-9-validate-quality-gate
+      id: step-9-validate-quality-gate
+      phase: 9
+      phase_name: Validate page composition quality gate (10 sections)
+      agent: page-composer
+      action: squads-design-tasks-execute-checklist-md
+      outputs:
+        - validation_report
+        - qa_verdict
+    - workflow_end:
+        id: complete
+        action: workflow_complete
+metadata:
+  author: Page Composer
+  created_date: "2026-03-06"
+  last_modified: "2026-03-06"
+  tags:
+    - design-system
+    - page-composition
+    - page-composer
+    - shadcn
+    - workflow
+inputs:
+  project_name:
+    type: string
+    description: Project namespace used in output paths.
+    required: true
+    default: page-composition
+  page_brief:
+    type: string
+    description: Business intent and page objective.
+    required: true
+  product_surface:
+    type: string
+    description: "3-Input Framework (v0): specific components, data fields, and user actions."
+    required: false
+  context_of_use:
+    type: string
+    description: "3-Input Framework (v0): who uses it, when, to make what decision."
+    required: false
+  constraints:
+    type: string
+    description: "3-Input Framework (v0): device, visual tone (buzzwords), palette, layout restrictions."
+    required: false
+  page_type:
+    type: string
+    description: Optional explicit page type. If empty, detect from page_brief.
+    required: false
+  template_choice:
+    type: string
+    description: Template variant approved by user in phase 2.
+    required: false
+  copy_briefing:
+    type: string
+    description: Optional copy briefing (AIDA/PAS/StoryBrand).
+    required: false
+  target_route:
+    type: string
+    description: Route or file target for generated page.
+    required: false
+    default: app/page.tsx
+steps:
+  - id: step_1_identify_and_constrain
+    name: Validate brief, identify page type, and apply constraints
+    phase: 1
+    type: agent
+    agent: page-composer
+    command: "*compose-page"
+    description: |
+      FIRST: Validates brief against brief-validation-checklist.md (8-point check). If score < 5/8, BLOCKS composition and asks user for missing inputs. THEN: Identifies page type AND processes constraints upfront (constraint-first pattern). If 3-Input brief provided (product_surface + context_of_use + constraints), extract page type, design tone buzzwords, and device/layout constraints. If brief is vague, ask user for the 3 inputs before proceeding. Design tone buzzwords are resolved to concrete decisions using KB2 Section 0 (Design Tone Vocabulary) and carried through all subsequent phases. Optionally references prompt-templates-library.md to suggest a matching template.
+    knowledge_base:
+      - squads/design/data/page-type-patterns.md
+      - squads/design/data/prompt-templates-library.md
+    checklists:
+      - squads/design/checklists/brief-validation-checklist.md
+    inputs:
+      page_brief: "{{page_brief}}"
+      product_surface: "{{product_surface}}"
+      context_of_use: "{{context_of_use}}"
+      constraints: "{{constraints}}"
+      explicit_type: "{{page_type}}"
+    outputs:
+      page_type_decision: outputs/design-system/{{project_name}}/page-composition/step-1-page-type.yaml
+      resolved_constraints: outputs/design-system/{{project_name}}/page-composition/step-1-constraints.yaml
+      brief_validation: outputs/design-system/{{project_name}}/page-composition/step-1-brief-validation.yaml
+    error_handling:
+      strategy: fail
+  - id: step_2_select_template_base
+    name: Select template base
+    phase: 2
+    type: agent
+    agent: page-composer
+    command: "*compose-page"
+    elicitation:
+      required: true
+      prompt: Confirm the template to use for the selected page type.
+      options_source: squads/design/data/page-type-patterns.md
+    knowledge_base:
+      - squads/design/data/page-type-patterns.md
+    inputs:
+      selected_page_type: "{{step_1_identify_and_constrain.page_type_decision}}"
+      template_choice: "{{template_choice}}"
+    outputs:
+      template_selection: outputs/design-system/{{project_name}}/page-composition/step-2-template-selection.yaml
+    error_handling:
+      strategy: fail
+  - id: step_3_apply_copy_layout_bridge
+    name: Apply copy-to-layout bridge (conditional)
+    phase: 3
+    type: agent
+    agent: page-composer
+    command: "*copy-layout"
+    conditional:
+      when: "{{copy_briefing}}"
+      behavior:
+        on_truthy: execute
+        on_falsy: skip
+      skip_output:
+        bridge_map: outputs/design-system/{{project_name}}/page-composition/step-3-copy-bridge-skipped.yaml
+      skip_reason: No copy briefing provided; continue with structural composition only.
+    knowledge_base:
+      - squads/design/data/copy-to-layout-bridge.md
+    inputs:
+      copy_briefing: "{{copy_briefing}}"
+      page_type: "{{step_1_identify_and_constrain.page_type_decision}}"
+      template: "{{step_2_select_template_base.template_selection}}"
+    outputs:
+      bridge_map: outputs/design-system/{{project_name}}/page-composition/step-3-copy-bridge.yaml
+    error_handling:
+      strategy: skip
+  - id: step_4_apply_layout_framework
+    name: Apply layout framework
+    phase: 4
+    type: agent
+    agent: page-composer
+    command: "*compose-page"
+    knowledge_base:
+      - squads/design/data/page-layout-framework.md
+    inputs:
+      template_selection: "{{step_2_select_template_base.template_selection}}"
+      copy_mapping: "{{step_3_apply_copy_layout_bridge.bridge_map}}"
+      resolved_constraints: "{{step_1_identify_and_constrain.resolved_constraints}}"
+    outputs:
+      layout_spec: outputs/design-system/{{project_name}}/page-composition/step-4-layout-spec.yaml
+    error_handling:
+      strategy: fail
+  - id: step_5_apply_typography_hierarchy
+    name: Apply typography hierarchy
+    phase: 5
+    type: agent
+    agent: page-composer
+    command: "*typography-map"
+    knowledge_base:
+      - squads/design/data/typography-hierarchy-rules.md
+    inputs:
+      layout_spec: "{{step_4_apply_layout_framework.layout_spec}}"
+      page_type: "{{step_1_identify_and_constrain.page_type_decision}}"
+    outputs:
+      typography_map: outputs/design-system/{{project_name}}/page-composition/step-5-typography-map.yaml
+    error_handling:
+      strategy: fail
+  - id: step_6_apply_spacing_rhythm
+    name: Apply spacing rhythm
+    phase: 6
+    type: agent
+    agent: page-composer
+    command: "*spacing-check"
+    knowledge_base:
+      - squads/design/data/spacing-rhythm-system.md
+    inputs:
+      layout_spec: "{{step_4_apply_layout_framework.layout_spec}}"
+      typography_map: "{{step_5_apply_typography_hierarchy.typography_map}}"
+    outputs:
+      spacing_spec: outputs/design-system/{{project_name}}/page-composition/step-6-spacing-spec.yaml
+    error_handling:
+      strategy: fail
+  - id: step_7_select_shadcn_components
+    name: Select shadcn components
+    phase: 7
+    type: agent
+    agent: page-composer
+    command: "*compose-page"
+    data_sources:
+      - squads/design/data/component-index.json
+      - shadcn blocks skill (DS-PC-6)
+    inputs:
+      page_type: "{{step_1_identify_and_constrain.page_type_decision}}"
+      layout_spec: "{{step_4_apply_layout_framework.layout_spec}}"
+      bridge_map: "{{step_3_apply_copy_layout_bridge.bridge_map}}"
+      spacing_spec: "{{step_6_apply_spacing_rhythm.spacing_spec}}"
+    outputs:
+      component_plan: outputs/design-system/{{project_name}}/page-composition/step-7-component-plan.yaml
+    error_handling:
+      strategy: fail
+  - id: step_8_generate_react_tailwind_shadcn_code
+    name: Generate React + Tailwind + shadcn code with SEO and states
+    phase: 8
+    type: agent
+    agent: page-composer
+    command: "*compose-page"
+    description: |
+      Assembles all phase outputs into production-ready page code. INCLUDES: SEO metadata generation (title, description, JSON-LD, canonical) per seo-rules.md, and component states (loading/empty/error) for all data-dependent sections per compose-component-states.md.
+    knowledge_base:
+      - squads/design/data/seo-rules.md
+      - squads/design/data/anti-ai-look-patterns.md
+    inputs:
+      layout_spec: "{{step_4_apply_layout_framework.layout_spec}}"
+      typography_map: "{{step_5_apply_typography_hierarchy.typography_map}}"
+      spacing_spec: "{{step_6_apply_spacing_rhythm.spacing_spec}}"
+      component_plan: "{{step_7_select_shadcn_components.component_plan}}"
+      resolved_constraints: "{{step_1_identify_and_constrain.resolved_constraints}}"
+      target_route: "{{target_route}}"
+    outputs:
+      page_code: outputs/design-system/{{project_name}}/page-composition/step-8-page.tsx
+      implementation_notes: outputs/design-system/{{project_name}}/page-composition/step-8-implementation-notes.md
+    error_handling:
+      strategy: fail
+  - id: step_9_validate_quality_gate
+    name: Validate page composition quality gate (10 sections)
+    phase: 9
+    type: gate
+    agent: page-composer
+    task: squads/design/tasks/execute-checklist.md
+    checklist: squads/design/checklists/page-composition-checklist.md
+    description: |
+      Validates against the full 10-section checklist: 1. Layout Grid, 2. Typography, 3. Spacing, 4. Responsive, 5. CTA Contrast, 6. Copy-to-Layout, 7. Accessibility, 8. Anti-AI Look, 9. SEO Metadata, 10. Component States. Also validates brief was validated (Prerequisites section).
+    knowledge_base:
+      - squads/design/checklists/page-composition-checklist.md
+      - squads/design/checklists/seo-meta-checklist.md
+      - squads/design/data/anti-ai-look-patterns.md
+    inputs:
+      page_code: "{{step_8_generate_react_tailwind_shadcn_code.page_code}}"
+      layout_spec: "{{step_4_apply_layout_framework.layout_spec}}"
+      typography_map: "{{step_5_apply_typography_hierarchy.typography_map}}"
+      spacing_spec: "{{step_6_apply_spacing_rhythm.spacing_spec}}"
+      component_plan: "{{step_7_select_shadcn_components.component_plan}}"
+      brief_validation: "{{step_1_identify_and_constrain.brief_validation}}"
+    outputs:
+      validation_report: outputs/design-system/{{project_name}}/page-composition/step-9-validation-report.md
+      qa_verdict: outputs/design-system/{{project_name}}/page-composition/step-9-verdict.yaml
+    verdicts:
+      PASS: Workflow complete
+      CONCERNS: Workflow complete with non-blocking recommendations
+      FAIL: Return to step_4_apply_layout_framework with fixes
+    error_handling:
+      strategy: fail
+outputs:
+  composition_complete:
+    type: boolean
+    description: True when step 9 passes gate criteria.
+    source: step_9_validate_quality_gate.success
+  selected_page_type:
+    type: string
+    description: Final selected page type.
+    source: step_1_identify_and_constrain.page_type_decision
+  selected_template:
+    type: string
+    description: Template base approved in elicitation phase.
+    source: step_2_select_template_base.template_selection
+  generated_page_code:
+    type: string
+    description: Generated React page implementation.
+    source: step_8_generate_react_tailwind_shadcn_code.page_code
+  validation_report:
+    type: string
+    description: Quality gate output report.
+    source: step_9_validate_quality_gate.validation_report
+global_error_handling:
+  on_error: abort
+  notification:
+    enabled: true
+    channels:
+      - console
+security:
+  authorization_required: false
+  audit_logging: true
+quality_gates:
+  internal_quality_chain:
+    required:
+      - node squads/design/scripts/design-system/generate_components_metadata.cjs
+      - node squads/design/scripts/design-system/validate_components_metadata.cjs
+      - node squads/design/scripts/design-system/sync_design_manifest.cjs
+      - node squads/design/scripts/design-system/validate_design_manifest_drift.cjs
+      - node squads/design/scripts/design-system/validate_task_checklist_bindings.cjs
+      - node squads/design/scripts/design-system/validate_mcp_skeleton.cjs
+    optional:
+      - node squads/design/scripts/design-system/test_mcp_tools.cjs
+    blocking: true
+    policy: internal-first

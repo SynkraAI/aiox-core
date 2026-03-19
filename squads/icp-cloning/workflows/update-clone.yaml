@@ -1,0 +1,113 @@
+# Update Clone - Evolução Contínua
+
+name: update-clone
+version: "1.0.0"
+description: |
+  Workflow para atualizar clone existente com novos dados ou corrigir drift.
+  Não recria do zero - apenas atualiza componentes afetados.
+
+metadata:
+  estimated_time: "2-4 hours (dependendo do escopo)"
+  difficulty: intermediate
+  use_case: "Manutenção e evolução de clones existentes"
+
+trigger_scenarios:
+  - Novos dados disponíveis (entrevista, observação)
+  - Drift detectado (clone não reflete mais a pessoa)
+  - Mudança significativa na persona (novo emprego, mudança de vida)
+  - Feedback de baixa fidelidade em uso
+
+phases:
+  - phase: 1
+    name: "Diagnóstico de Drift"
+    duration: "30-45 min"
+    steps:
+      - step: 1.1
+        name: "Análise de Drift"
+        description: "Identificar o que mudou ou está desalinhado"
+        inputs:
+          - Clone atual
+          - Novos dados / Feedback
+        outputs:
+          - Relatório de drift
+          - Componentes afetados identificados
+
+      - step: 1.2
+        name: "Scope de Atualização"
+        description: "Decidir quais camadas precisam atualização"
+        decision_tree:
+          linguistic_drift: "Atualizar P2 + KB02"
+          value_shift: "Atualizar P3 + PSH Core"
+          behavioral_change: "Atualizar TSM + APR"
+          new_memories: "Adicionar a KB04"
+          decision_patterns: "Atualizar P13 + MCC"
+
+  - phase: 2
+    name: "Re-extração Direcionada"
+    duration: "1-2 hours"
+    description: "Re-executar apenas camadas afetadas"
+    steps:
+      - Executar prompts P{X} necessários
+      - Coletar novos dados específicos
+      - Documentar mudanças
+
+  - phase: 3
+    name: "Re-processamento Parcial"
+    duration: "30-60 min"
+    steps:
+      - Re-consolidar módulos afetados
+      - Atualizar componentes SYNAPSE impactados
+      - Adicionar/atualizar camadas de humanização
+      - Manter componentes não afetados intactos
+
+  - phase: 4
+    name: "Merge & Validação"
+    duration: "45-60 min"
+    steps:
+      - step: 4.1
+        name: "Merge com Clone Existente"
+        description: "Integrar atualizações sem perder histórico"
+        strategy: "Incremental merge preservando contexto"
+
+      - step: 4.2
+        name: "Re-validação"
+        tests:
+          - Teste de regressão (funcionalidades antigas ainda funcionam?)
+          - Teste de novos comportamentos
+          - Fidelity check (drift corrigido?)
+
+      - step: 4.3
+        name: "Versionamento"
+        outputs:
+          - clone-v{N+1}/
+          - CHANGELOG.md (o que mudou)
+          - Backup de clone-v{N}/
+
+outputs:
+  - clone-updated/
+    - SYSTEM_PROMPT_v{N+1}.md
+    - knowledge-base/ (docs atualizados)
+    - CHANGELOG_v{N}_to_v{N+1}.md
+    - drift-analysis-report.md
+    - validation-regression-test.md
+
+  - backups/
+    - clone-v{N}/ (versão anterior preservada)
+
+best_practices:
+  - Sempre versionar antes de atualizar
+  - Manter changelog detalhado
+  - Testar regressão (comportamentos antigos preservados?)
+  - Validar que drift foi corrigido
+  - Preservar histórico de evolução
+
+update_frequency:
+  recommended:
+    - Minor updates: A cada 3-6 meses (novos dados)
+    - Major updates: A cada 1-2 anos (mudanças significativas)
+    - Emergency: Quando drift crítico detectado
+
+estimated_time_by_scope:
+  minor_update: "2-3 hours (1-2 camadas)"
+  moderate_update: "3-4 hours (3-5 camadas)"
+  major_update: "5-8 hours (re-processamento extenso)"

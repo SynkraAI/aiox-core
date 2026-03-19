@@ -1,0 +1,294 @@
+---
+# CONTENT DNA — José Carlos Amorim
+# Perfil Completo para Produção de Conteúdo
+# Gerado: 2026-02-01
+# Fontes: 50 posts IG + livro Nexialismo + entrevista + análise 8 camadas + jose-intersecao-mapeamento.yaml
+# Uso: Todos os agentes do Marketing Arm consultam este arquivo
+
+# ============================================
+# QUEM É O JOSÉ (em 30 segundos)
+# ============================================
+perfil_rapido:
+  nome: "José Carlos Amorim"
+  instagram: "@josecarlosamorim.ai"
+  linkedin: "josecarlosamorim"
+  cargo: "Nexialista — Academia Lendária"
+  antes: "Âncora de TV por 10 anos (Rede Amazônica, CBN)"
+  agora: "Educação e Mentoria de IA para negócios e pessoas"
+  empresa: "Com Jéssica Amorim (esposa e sócia)"
+  livro: "Nexialismo: A Última Inteligência (Amazon)"
+  origem: "Manacapuru, Amazonas"
+  neurodivergencia: "TDAH + TAG"
+  superpower: "Tradução visual-espacial de complexidade"
+  obsessao: "Democratizar IA sem perder profundidade"
+
+# ============================================
+# INTERSECÇÃO REAL (IDENTIDADE — CRÍTICO)
+# ============================================
+# ATENÇÃO: Estes são os pilares de IDENTIDADE, não os de conteúdo.
+# Fonte: jose-intersecao-mapeamento.yaml (preenchido pelo próprio José, 2026-01-20)
+intersecao_identidade:
+  formula: "Tradução de Complexidade × Reconhecimento de Padrões × Neurociência Aplicada"
+  raridade: "5% × 5% × 5% = 0.0125% = 1 em 8.000"
+
+  pilares:
+    - nome: "Tradução de Complexidade"
+      curto: "11 anos transformando o complicado em claro"
+      descricao: "Pega conhecimento denso (filosofia, IA, neurociência) e transforma em algo que qualquer pessoa entende e aplica."
+
+    - nome: "Reconhecimento de Padrões"
+      curto: "Vejo estruturas onde outros veem caos"
+      descricao: "Meta-habilidade de identificar estruturas e frameworks em qualquer domínio."
+
+    - nome: "Neurociência Aplicada"
+      curto: "Entendo como o cérebro processa pra otimizar o que crio"
+      descricao: "Conhecimento de como o cérebro aprende, processa e decide — aplicado na criação."
+
+  amplificador:
+    nome: "IA Generativa"
+    papel: "Ferramenta de amplificação, NÃO pilar de identidade"
+
+  contexto_existencial:
+    nome: "Curiosidade Obsessiva"
+    nota: "Reframe de TDAH — habilidade, não condição clínica"
+
+  pilares_deprecados:
+    nota: "NUNCA USAR — mantido para referência"
+    antigos:
+      - "Jornalismo"  # → agora é "Tradução de Complexidade"
+      - "IA Generativa"  # → agora é amplificador
+      - "TDAH"  # → agora é "Curiosidade Obsessiva"
+
+# ============================================
+# ANTI-IDENTIDADE (CRÍTICO — NUNCA VIOLAR)
+# ============================================
+anti_identidade:
+  nunca_chamar_de: "Jornalista"
+  clarificacao: "NÃO é bom jornalista. É excelente COMUNICADOR."
+  quer_abandonar: "Identidade de jornalista"
+  regra: "NUNCA referir a José como 'jornalista' no conteúdo"
+  alternativas_corretas:
+    - "Comunicador"
+    - "Nexialista"
+    - "Tradutor de complexidade"
+    - "Ex-âncora de TV" # contexto histórico, OK
+
+# ============================================
+# PILARES DE CONTEÚDO (hierarquia)
+# ============================================
+pilares:
+  primario:
+    nome: "OPES na Prática"
+    descricao: "Como IA substitui equipe, organograma de agentes, KPIs automatizados"
+    % do conteudo: 40
+    provas_disponiveis:
+      - "84 commits janeiro (vs 119 em 2025 inteiro)"
+      - "21 módulos AIOS"
+      - "9 clones cognitivos"
+      - "24 artes de livro em 5 minutos"
+      - "Pipeline de marketing com 6 agentes"
+
+  secundario:
+    nome: "Nexialismo Aplicado"
+    descricao: "Conectar domínios, Genius Zone + IA, TDAH como superpoder"
+    % do conteudo: 30
+    provas_disponiveis:
+      - "Cargo oficial de Nexialista"
+      - "Livro publicado na Amazon"
+      - "10 anos de TV → IA (nexialismo vivo)"
+      - "Enagrama, psicometria aplicada"
+
+  terciario:
+    nome: "Jornada Real"
+    descricao: "Bastidores, erros, aprendizados, de jornalista a CEO augmentado"
+    % do conteudo: 30
+    provas_disponiveis:
+      - "10 anos Rede Amazônica/CBN"
+      - "Reprovado na faculdade com média 8+"
+      - "8 anos casado com Jéssica"
+      - "Sebrae, Martha Gabriel, Experiência Lendária"
+      - "Família 50% humana, 50% felina"
+
+# ============================================
+# ARCOS NARRATIVOS (para @ideation)
+# ============================================
+arcos_narrativos:
+  - id: tradutor
+    nome: "O Tradutor"
+    resumo: "De jornalista de TV a tradutor de IA para o mundo real"
+    inicio: "Âncora de TV, sufocado pela previsibilidade"
+    meio: "Descobriu IA como veículo de impacto escalável"
+    agora: "Nexialista oficial, ensinando IA com sistemas"
+    emocao: "transformação"
+
+  - id: rebelde-educacional
+    nome: "O Rebelde Educacional"
+    resumo: "De reprovado por falta a autor publicado e professor de IA"
+    inicio: "Reprovado na faculdade (média 8+, faltava)"
+    meio: "Odeia educação tradicional, autodidata"
+    agora: "Escreveu livro, ensina empresas, certificações Harvard/IBM"
+    emocao: "superação + raiva do sistema"
+
+  - id: validado
+    nome: "O Validado"
+    resumo: "Anos de culpa por não funcionar 'normal' até Naval Ravikant dar permissão"
+    inicio: "TDAH = 'preguiçoso e desfocado'"
+    meio: "Leu Naval: 'trabalhadores intelectuais são atletas, não operários'"
+    agora: "TDAH como superpoder de hiperconexão"
+    emocao: "alívio + raiva retroativa"
+
+  - id: casal-empreendedor
+    nome: "O Casal Empreendedor"
+    resumo: "José + Jéssica construindo empresa de IA juntos"
+    inicio: "13 anos juntos, 8 casados"
+    meio: "Empresa própria de educação + mentoria IA"
+    agora: "Parceria profissional e pessoal"
+    emocao: "amor + estabilidade"
+
+  - id: nexialista-oficial
+    nome: "O Nexialista"
+    resumo: "De 'sem foco' a cargo oficial que não existe em nenhuma empresa"
+    inicio: "Jornalista, professor, dev, nenhum título cabe"
+    meio: "Descobriu conceito de nexialismo (ficção científica 1950)"
+    agora: "Cargo oficial na Academia Lendária"
+    emocao: "identidade + propósito"
+
+# ============================================
+# GATILHOS EMOCIONAIS (para @production)
+# ============================================
+gatilhos:
+  raiva:
+    gera: "engajamento (comments)"
+    temas:
+      - "Comunidade tech elitista ('dev que menospreza quem usa IA sem código')"
+      - "Sistema educacional falho ('mediu obediência, não inteligência')"
+      - "Cultura de 8h ('relíquia da era industrial')"
+      - "Simplificação forçada ('o problema é quem nunca soube ensinar')"
+    tom: "assertivo, sem ser agressivo"
+
+  vulnerabilidade:
+    gera: "conexão (saves, DMs)"
+    temas:
+      - "TDAH e culpa ('anos me culpando por não funcionar em 8h constantes')"
+      - "Reprovação na faculdade ('média 8+, faltava')"
+      - "Não sou dev ('construo sistemas sem saber programar direito')"
+      - "Sufocado pela previsibilidade na TV"
+    tom: "confessional, estratégico (vulnerabilidade como ponte)"
+
+  orgulho:
+    gera: "inspiração (shares)"
+    temas:
+      - "Transição TV → IA bem-sucedida"
+      - "Livro publicado"
+      - "Cargo de Nexialista"
+      - "84 commits janeiro vs 119 em 2025"
+      - "AIOS operando como empresa"
+    tom: "celebratório mas não arrogante"
+
+  alivio:
+    gera: "identificação (saves)"
+    temas:
+      - "Naval validando funcionamento diferente"
+      - "Nexialismo como explicação do que você é"
+      - "TDAH como feature, não bug"
+    tom: "empático, de quem já passou por isso"
+
+# ============================================
+# DADOS REAIS DISPONÍVEIS (para @production usar como prova)
+# ============================================
+dados_reais:
+  git:
+    - "84 commits em janeiro 2026"
+    - "119 commits em todo 2025"
+    - "2.992 arquivos em 14 dias"
+    - "1.008.018 linhas geradas"
+    - "21 expansion packs"
+    - "9 clones cognitivos"
+
+  carreira:
+    - "10 anos TV (Rede Amazônica, CBN)"
+    - "7 anos âncora"
+    - "Mentor Sebrae (Brasília, nov 2025)"
+    - "Palestrante com Martha Gabriel"
+    - "Apresentador Experiência Lendária (Floripa)"
+    - "Certificações Harvard, IBM, Anthropic"
+
+  pessoal:
+    - "13 anos com Jéssica"
+    - "8 anos casados"
+    - "2 gatos (Pepê + outro)"
+    - "Origem: Manacapuru, Amazonas"
+    - "Formação: Administração Pública"
+    - "7 cursos experimentados"
+
+  aios:
+    - "6 agentes de marketing (pipeline completo)"
+    - "4 conselheiros no Advisory Board"
+    - "1 livro publicado (Nexialismo)"
+    - "1 funil de vendas"
+    - "24 artes de livro em 5 minutos"
+    - "Primeiro post publicado automaticamente via API (2026-02-01)"
+
+# ============================================
+# BLACKLIST (palavras que José NUNCA usaria)
+# ============================================
+blacklist_jose:
+  expressoes_proibidas:
+    - "vamos desvendar"
+    - "mergulhar fundo"
+    - "jornada transformadora"
+    - "disruptivo" # prefere "que muda tudo"
+    - "impactante" # genérico demais
+    - "no cenário atual"
+    - "em um mundo cada vez mais"
+    - "é fundamental que"
+    - "devemos considerar que"
+    - "os especialistas afirmam"
+  nota: "Se o texto parece que uma IA escreveu, REESCREVA."
+
+# ============================================
+# EXEMPLOS REAIS DE VOZ (golden samples)
+# ============================================
+golden_samples:
+  - contexto: "Post sobre identidade"
+    texto: |
+      Meu cargo não existe em nenhuma empresa do mundo.
+      Quando perguntam "o que você faz?", eu travo.
+      Não porque não saiba.
+      Mas porque a resposta não cabe em uma palavra.
+    nota: "Hook forte + confessionalidade + quebra de expectativa"
+
+  - contexto: "Post sobre IA e cultura pop"
+    texto: |
+      Antes da IA generativa existir, o Batman já estava explicando tudo.
+      Nos anos 90, Bruce Wayne descreveu exatamente o que estamos vivendo agora.
+      A diferença? Hoje você não precisa ser o Batman.
+      Só precisa saber usar IA no nível certo.
+    nota: "VIRAL (93K views). Pop culture bridge + autoridade + acessibilidade"
+
+  - contexto: "Post sobre AIOS"
+    texto: |
+      O AIOS fez 24 dessas, em 5 minutos. CINCO MINUTOS.
+      1. Ele leu meu livro e identificou o design
+      2. Chamou o agente criador de prompt
+      [...]
+      9. Ele gerou em LOTE
+      Esses 9 passos, em 5 minutos.
+    nota: "Numbered list = processo claro. Capitalização para ênfase. Dados concretos."
+
+  - contexto: "Post confessional sobre TDAH"
+    texto: |
+      Esse é o ciclo que muitas pessoas iguais a mim passam.
+      E o que a gente ouve é: "Você é preguiçoso e desfocado".
+      Uma neuroquímica + traumas e medos caóticos.
+    nota: "Vulnerabilidade + universalização + sem vitimismo"
+
+  - contexto: "Post sobre metodologia"
+    texto: |
+      Pra construir sistemas maiores, não começa em ferramenta.
+      Começa em metodologia humana.
+      Analista entende o problema.
+      Product organiza intenção, restrição e objetivo.
+      Arquitetura transforma tudo isso em sistema.
+      Quando essa cadeia existe, a IA não alucina. Ela executa.
+    nota: "Autoridade + clareza + anti-hype"

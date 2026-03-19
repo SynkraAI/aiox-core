@@ -1,0 +1,236 @@
+# Tool Strategies — Digital Profiler
+# Defines PRIMARY → FALLBACK → UNAVAILABLE for each analysis step
+# Used by: @digital-profiler via run-profiler task
+# Purpose: Eliminate "tool not available" dead ends
+# Version: 2.0
+
+# RULES:
+# - ALWAYS try primary first
+# - If primary fails, try ALL fallbacks in order
+# - If all fail, follow unavailable_action (NEVER skip the channel)
+# - Log which strategy was used in Metadados section of dossiê
+
+version: "2.0"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TOOL AVAILABILITY (current environment)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+available_tools:
+  always:
+    - name: WebSearch
+      type: "Claude Code native"
+      cost: "Included"
+      limits: "Rate limited, no login"
+    - name: WebFetch
+      type: "Claude Code native"
+      cost: "Included"
+      limits: "Public pages only, HTML to markdown"
+    - name: Exa MCP
+      type: "MCP server"
+      cost: "Credits included"
+      limits: "Semantic search, no scraping"
+
+  optional_not_installed:
+    - name: Lighthouse CLI
+      install: "npm install -g lighthouse"
+      status: NOT_INSTALLED
+    - name: Google PageSpeed API
+      endpoint: "https://www.googleapis.com/pagespeedonline/v5/runPagespeed"
+      status: NOT_CONFIGURED
+    - name: Google Places API
+      status: NOT_CONFIGURED
+    - name: Apify MCP
+      type: "MCP in Docker"
+      status: AVAILABLE_IN_DOCKER
+      note: "Pode extrair dados de Instagram, Facebook, Google Maps via Actors"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# STRATEGIES BY CHANNEL
+# ═══════════════════════════════════════════════════════════════════════════════
+
+strategies:
+
+  # ─── SITE ANALYSIS ────────────────────────────────────────────────────────
+  site_analysis:
+    purpose: "Analisar site do negócio (SSL, mobile, meta, CTA, tracking, etc.)"
+    primary:
+      tool: WebFetch
+      action: "Fetch URL do site e analisar HTML retornado"
+      extracts: [title, meta_description, og_tags, ssl, schema_org, gtm_ga4, whatsapp, ctas, headings]
+    fallback_1:
+      tool: Exa MCP
+      action: "Buscar '{url}' para obter dados cached do site"
+      when: "WebFetch falha (timeout, 403, 5xx)"
+    fallback_2:
+      tool: WebSearch
+      action: "Buscar 'site:{domain}' para ver páginas indexadas e meta dados do SERP"
+      when: "WebFetch + Exa falham"
+    unavailable_action: "Marcar site como 'inacessível em {data}', score = 0, flag na seção Limitações"
+
+  # ─── PAGESPEED ────────────────────────────────────────────────────────────
+  pagespeed:
+    purpose: "Medir velocidade e mobile-friendliness do site"
+    primary:
+      tool: WebFetch
+      action: "Fetch 'https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url={url}&strategy=mobile&category=performance'"
+      extracts: [performance_score, fcp, lcp, cls, tbt]
+      note: "API pública, não precisa de key para uso básico"
+    fallback_1:
+      tool: WebFetch
+      action: "Analisar HTML do site diretamente para sinais técnicos"
+      extracts: [lazy_load, critical_css, cdn_headers, compression, image_optimization]
+      scoring: "Avaliar score por sinais técnicos observáveis (ver scoring-rubric)"
+    fallback_2:
+      tool: WebSearch
+      action: "Buscar 'PageSpeed {domain}' ou '{domain} site speed test'"
+      when: "Pode encontrar relatórios de terceiros ou cache"
+    unavailable_action: "Avaliar por sinais técnicos do HTML. Score com ~ prefix. Documentar em Limitações."
+
+  # ─── GOOGLE MAPS ──────────────────────────────────────────────────────────
+  google_maps:
+    purpose: "Analisar perfil do Google Business Profile"
+    primary:
+      tool: Exa MCP
+      action: "Buscar 'google.com/maps/place {nome} {cidade}' para dados do perfil"
+      extracts: [exists, rating, review_count, categories, address]
+    fallback_1:
+      tool: WebSearch
+      action: "Buscar '{nome} {cidade} Google Maps reviews' + '{nome} {cidade} avaliações google'"
+      extracts: [rating_from_serp, review_count_from_serp, address]
+    fallback_2:
+      tool: WebSearch
+      action: "Buscar em diretórios: '{nome} {cidade} site:apontador.com.br OR site:benditoguia.com.br OR site:guiamais.com.br'"
+      when: "Maps direto não retorna dados"
+      extracts: [exists_confirmed, address, phone]
+    fallback_3:
+      tool: Exa MCP
+      action: "Buscar '{nome} reviews {cidade}' de forma mais ampla"
+      when: "Buscas anteriores não retornaram reviews"
+    unavailable_action: |
+      Após esgotar 4 tentativas:
+      1. Confirmar existência do perfil (sim/não baseado em indícios)
+      2. Score = estimativa conservadora com ~ prefix
+      3. Flag: "⚠️ VERIFICAÇÃO MANUAL NECESSÁRIA"
+      4. Adicionar recomendação: "Verificar perfil diretamente em maps.google.com"
+      5. Listar na seção Limitações
+
+  # ─── INSTAGRAM ────────────────────────────────────────────────────────────
+  instagram:
+    purpose: "Analisar perfil comercial no Instagram"
+    primary:
+      tool: WebSearch
+      action: "Buscar 'site:instagram.com {nome} {cidade}' para encontrar handle"
+      extracts: [handle, exists]
+    fallback_1:
+      tool: Exa MCP
+      action: "Buscar 'instagram.com/{handle}' para dados públicos"
+      extracts: [bio, posts_recent, followers_estimate]
+    fallback_2:
+      tool: WebFetch
+      action: "Fetch 'https://www.instagram.com/{handle}/' para dados do meta/OG"
+      note: "Instagram bloqueia na maioria dos casos, mas meta tags podem conter dados"
+    fallback_3:
+      tool: WebSearch
+      action: "Buscar '{nome} instagram followers {cidade}' em sites que rastreiam métricas"
+      when: "Scraping direto bloqueado"
+    unavailable_action: |
+      1. Confirmar existência do perfil (handle encontrado = exists: sim)
+      2. Se bio visível em buscas, extrair CTA e info
+      3. Marcar engagement/followers como "dados indisponíveis via web"
+      4. Score mínimo = 1 se perfil existe
+      5. Adicionar à seção Limitações com recomendação de verificação manual
+
+  # ─── FACEBOOK ─────────────────────────────────────────────────────────────
+  facebook:
+    purpose: "Analisar página empresarial no Facebook"
+    primary:
+      tool: WebSearch
+      action: "Buscar 'site:facebook.com {nome} {cidade}'"
+      extracts: [page_url, exists, type_page_or_profile]
+    fallback_1:
+      tool: Exa MCP
+      action: "Buscar 'facebook.com/pages {nome}'"
+      extracts: [exists, category, likes_estimate]
+    unavailable_action: |
+      1. Confirmar existência (sim/não)
+      2. Se existe: score mínimo 1
+      3. Marcar detalhes como indisponíveis (login wall)
+      4. Listar em Limitações
+
+  # ─── LINKEDIN ─────────────────────────────────────────────────────────────
+  linkedin:
+    purpose: "Verificar Company Page no LinkedIn"
+    primary:
+      tool: WebSearch
+      action: "Buscar 'site:linkedin.com/company {nome}'"
+      extracts: [company_page_url, exists]
+    fallback_1:
+      tool: Exa MCP
+      action: "Buscar 'linkedin.com {nome} {cidade}'"
+    unavailable_action: "Se nenhuma Company Page encontrada, score = 0. Sem fallback necessário."
+
+  # ─── RECLAME AQUI ─────────────────────────────────────────────────────────
+  reclame_aqui:
+    purpose: "Analisar reputação no Reclame Aqui"
+    primary:
+      tool: WebSearch
+      action: "Buscar 'site:reclameaqui.com.br {nome}'"
+      extracts: [profile_url, exists]
+    fallback_1:
+      tool: WebFetch
+      action: "Fetch URL do perfil encontrado para extrair dados"
+      extracts: [score, reputation_status, response_rate, complaint_count]
+      note: "RA frequentemente bloqueia scraping. WebFetch pode funcionar parcialmente."
+    fallback_2:
+      tool: Exa MCP
+      action: "Buscar 'reclameaqui.com.br {nome} reputação'"
+      when: "WebFetch bloqueado"
+    unavailable_action: |
+      1. Se perfil encontrado mas dados bloqueados: score = 2 (existe sem dados)
+      2. Se perfil não encontrado: score = 1 (neutro, sem reclamações)
+      3. Listar em Limitações com link para verificação manual
+
+  # ─── PORTAIS DE NICHO ─────────────────────────────────────────────────────
+  niche_portals:
+    purpose: "Analisar presença em portais específicos do nicho"
+    strategy_per_portal:
+      primary:
+        tool: WebSearch
+        action: "Buscar 'site:{portal_url} {nome} {cidade}'"
+      fallback_1:
+        tool: Exa MCP
+        action: "Buscar '{portal_name} {nome} {cidade}'"
+      fallback_2:
+        tool: WebFetch
+        action: "Fetch URL do portal + busca interna (se disponível)"
+      unavailable_action: "Score = 0 para o portal. Documentar em Limitações."
+
+  # ─── DADOS CADASTRAIS ─────────────────────────────────────────────────────
+  cadastral_data:
+    purpose: "Obter CNPJ, razão social, sócios, capital social, CNAE"
+    primary:
+      tool: WebSearch
+      action: "Buscar '{nome} CNPJ {cidade}'"
+      extracts: [cnpj, razao_social, nome_fantasia, data_abertura, porte, capital_social, cnae, socios]
+    fallback_1:
+      tool: Exa MCP
+      action: "Buscar 'cnpj {nome} {cidade} econodata OR casadosdados OR cnpj.biz'"
+    fallback_2:
+      tool: WebFetch
+      action: "Fetch sites de consulta CNPJ com o número encontrado"
+    unavailable_action: "Marcar como 'Dados cadastrais não encontrados'. NÃO inventar CNPJ."
+
+  # ─── CONCORRENTES ─────────────────────────────────────────────────────────
+  competitors:
+    purpose: "Identificar e analisar top 3 concorrentes"
+    primary:
+      tool: WebSearch
+      action: "Buscar '{nicho} {cidade}' + '{serviço} {cidade} melhores'"
+      extracts: [competitor_names, competitor_urls]
+    complement:
+      tool: Exa MCP
+      action: "Buscar '{nicho} {cidade}' para complementar lista"
+    analysis:
+      rule: "Para cada concorrente, fazer quick scan: Site (WebFetch) + Maps (WebSearch) + RA (WebSearch). Score estimado."
+    unavailable_action: "Se < 3 concorrentes encontrados, listar os encontrados. Mínimo 1."

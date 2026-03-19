@@ -1,0 +1,124 @@
+workflow:
+  id: wf-video-content
+  name: "Video Content Pipeline"
+  description: "Pipeline completo de conteúdo em vídeo: estratégia → roteiro → hook → distribuição → repurposing"
+  squad: presenca-digital
+  version: 1.0.0
+  trigger: "Demanda de vídeo identificada no calendário editorial ou campanha ativa"
+  estimated_duration: "2-3h por vídeo principal"
+  depends_on: wf-content-from-brand
+  flow: unidirectional
+
+phases:
+  - id: phase-1
+    name: "Video Strategy"
+    agent: paulo-cuenca
+    description: "Define qual tópico, qual pilar, qual plataforma-alvo e qual objetivo estratégico do vídeo usando a visão da Cordilheira"
+    inputs:
+      - content-pillars.md
+      - editorial-calendar-monthly.md
+      - brand-brief.md
+    outputs:
+      - video-brief.md
+    checkpoint:
+      type: human
+      criteria:
+        - "Tópico do vídeo definido e rastreado a um pilar de conteúdo"
+        - "Plataforma-alvo especificada (YouTube, Instagram Reels, TikTok, LinkedIn Video)"
+        - "Objetivo claro: autoridade, alcance, conversão ou engajamento"
+        - "Ângulo único do vídeo documentado (diferenciador vs. conteúdo comum)"
+        - "Formato definido: talking-head, tutorial, storytelling, etc."
+      veto_conditions:
+        - "Tópico não conectado a nenhum pilar estratégico — rejeitar e escolher outro"
+        - "Sem ângulo único definido — vídeo genérico, não produzir"
+        - "Plataforma-alvo não especificada — cada plataforma tem formato diferente"
+    next: phase-2
+
+  - id: phase-2
+    name: "Script Draft"
+    agent: camilo-coutinho
+    description: "Escreve o roteiro completo com Roteiro Chicote: 6 perguntas estruturantes e framework CEQCOM para máxima retenção"
+    inputs:
+      - video-brief.md
+      - brand-voice-guidelines.md
+    outputs:
+      - video-script-draft.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "6 perguntas do Roteiro Chicote respondidas: Por quê? Para quem? O quê? Como? Quando? E daí?"
+        - "Estrutura CEQCOM presente: Contexto, Estratégia, Questão, Conflito, Opções, Moral"
+        - "Roteiro dentro do tempo-alvo da plataforma (Reels: 30-90s, YouTube: 5-15min)"
+        - "Linguagem alinhada à brand voice"
+        - "CTA final explícito e único"
+      veto_conditions:
+        - "Roteiro sem conflito/tensão narrativa — reescrever (CEQCOM violado)"
+        - "CTA ausente ou múltiplos CTAs — definir apenas um"
+        - "Tempo do roteiro incompatível com a plataforma-alvo — ajustar"
+    next: phase-3
+
+  - id: phase-3
+    name: "Hook Layer"
+    agent: brendan-kane
+    description: "Aplica a 3-second rule: cria múltiplas variações de hook de abertura para capturar atenção imediatamente"
+    inputs:
+      - video-script-draft.md
+      - hook-patterns.md
+    outputs:
+      - video-script-hooked.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "Mínimo 3 variações de hook de abertura criadas (testar qual performa melhor)"
+        - "Hook principal integrado ao roteiro na versão final"
+        - "Os primeiros 3 segundos do vídeo capturam atenção sem contexto externo"
+        - "Hook visual descrito (o que o espectador VÊ nos primeiros 3 segundos)"
+      veto_conditions:
+        - "Hook começa com 'Olá' ou apresentação pessoal — proibido, reiniciar"
+        - "Hook pressupõe que o espectador já conhece o criador — reescrever"
+        - "Menos de 3 variações de hook — insuficiente para teste"
+    next: phase-4
+
+  - id: phase-4
+    name: "Distribution Plan"
+    agent: ross-simmonds
+    description: "Aplica o DREAM framework para definir onde e como distribuir o vídeo: plataformas, timing, formatos complementares"
+    inputs:
+      - video-brief.md
+      - video-script-hooked.md
+      - content-os.md
+    outputs:
+      - video-distribution-plan.md
+    checkpoint:
+      type: auto
+      criteria:
+        - "DREAM framework aplicado: Distribute, Repurpose, Engage, Automate, Monitor"
+        - "Plataformas de distribuição primária e secundária definidas"
+        - "Timing de publicação recomendado por plataforma"
+        - "Métricas de monitoramento definidas (views, retenção, CTR)"
+      veto_conditions:
+        - "Distribuição limitada a uma única plataforma sem justificativa — revisar"
+        - "Sem métricas de monitoramento definidas — adicionar antes de avançar"
+    next: phase-5
+
+  - id: phase-5
+    name: "Repurpose Cascade"
+    agent: vanessa-lau
+    description: "Aplica Content Matrix para derivar peças do vídeo principal: vídeo longo → shorts, carrossel, post, newsletter snippet"
+    inputs:
+      - video-script-hooked.md
+      - video-distribution-plan.md
+      - content-os.md
+    outputs:
+      - repurpose-cascade.md
+    checkpoint:
+      type: human
+      criteria:
+        - "Mínimo 5 peças derivadas do vídeo principal documentadas"
+        - "Cada peça derivada adaptada ao formato da plataforma (não apenas cortada)"
+        - "Content Matrix preenchida para este vídeo"
+        - "Cronograma de publicação das peças derivadas definido"
+      veto_conditions:
+        - "Peças derivadas são cópias diretas sem adaptação — retrabalhar"
+        - "Repurposing não aproveita os pontos mais fortes do roteiro — revisar seleção"
+    next: END

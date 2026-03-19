@@ -1,0 +1,55 @@
+# Workflow: Single File Rule Extraction
+# Extract business rules from a single legacy source file
+
+workflow:
+  id: wf-extract-single
+  name: "Single File Rule Extraction"
+  trigger: "*extract {file}"
+  executor: archaeologist
+
+  phases:
+    - phase: 1
+      name: "Classify"
+      action: |
+        Detect file language from extension.
+        Verify file is readable and not binary.
+        Determine analysis depth (default: standard).
+
+    - phase: 2
+      name: "Extract"
+      task: extract-rules-from-file
+      delegated_to: decoder
+      input:
+        file_path: "{file}"
+      checkpoint:
+        condition: "rule_count > 0"
+        on_fail: "WARN: No rules found. File may not contain business logic."
+
+    - phase: 3
+      name: "Classify Rules"
+      task: classify-rule
+      delegated_to: cartographer
+      input:
+        rules: "{extracted_rules}"
+      action: |
+        Assign domain, module, ID, and severity to each rule.
+
+    - phase: 4
+      name: "Validate"
+      task: validate-extraction-quality
+      delegated_to: auditor
+      input:
+        rules: "{classified_rules}"
+        source_file: "{file}"
+      checkpoint:
+        condition: "quality_score >= 6.0"
+        on_fail: "WARN: Low quality score. Review recommended."
+
+    - phase: 5
+      name: "Output"
+      action: |
+        Save rules-{filename}.md to output directory.
+        Display summary: rule count, types, confidence distribution.
+
+  quality_gates:
+    - QG-LRE-001

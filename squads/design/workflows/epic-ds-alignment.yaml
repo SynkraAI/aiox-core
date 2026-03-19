@@ -1,0 +1,520 @@
+workflow:
+  id: epic-ds-alignment
+  name: Epic Design System Alignment
+  description: |
+    Quality gate workflow that validates epics with UI/frontend stories against the existing
+    Design System. Catches component duplication, token gaps, missing blueprint references,
+    routing errors, and DS workflow disconnects BEFORE stories are drafted.
+
+    This workflow is framework-agnostic. It resolves DS context via BU/app first, then scans
+    the configured implementation paths for components, tokens, themes, and blueprints.
+  version: 1.3.0
+  type: sequential
+  sequence:
+    - step: step-0-resolve-config
+      id: step-0-resolve-config
+      phase: 1
+      phase_name: Resolve — Auto-Discover DS Configuration
+      agent: design-chief
+      action: resolve-ds-business-slug-or-app-id
+      outputs:
+        - resolved_config
+        - status
+        - business_slug
+        - app_root
+        - component_dirs
+        - token_files
+        - blueprint_pages
+        - framework
+      next: step-1-triage
+    - step: step-1-triage
+      id: step-1-triage
+      phase: 2
+      phase_name: Triage — Classify Epic for DS Review
+      agent: design-chief
+      action: design-triage
+      outputs:
+        - triage_result
+      next: step-1b-applicability-gate
+    - step: step-1b-applicability-gate
+      id: step-1b-applicability-gate
+      phase: 3
+      phase_name: Gate — DS Applicability
+      agent: aiox-master
+      action: checkpoint
+      next: step-2-component-scan
+    - step: step-2-component-scan
+      id: step-2-component-scan
+      phase: 4
+      phase_name: Scan — Inventory Existing Components
+      agent: brad-frost
+      action: audit
+      outputs:
+        - component_inventory
+      next: step-3-token-scan
+    - step: step-3-token-scan
+      id: step-3-token-scan
+      phase: 5
+      phase_name: Scan — Map Available Tokens, Animations, Patterns
+      agent: brad-frost
+      action: tokenize
+      outputs:
+        - token_map
+        - animation_map
+        - pattern_map
+      next: step-4-reference-audit
+    - step: step-4-reference-audit
+      id: step-4-reference-audit
+      phase: 6
+      phase_name: Audit — Analyze Reference Implementation (conditional)
+      agent: brad-frost
+      action: audit
+      outputs:
+        - reference_audit
+      next: step-5-cross-reference
+    - step: step-5-cross-reference
+      id: step-5-cross-reference
+      phase: 7
+      phase_name: Cross-Reference — Diff Epic vs Inventory
+      agent: design-chief
+      action: review-epic-ds
+      outputs:
+        - diff_report
+        - coverage_gaps
+      next: step-6-checklist
+    - step: step-6-checklist
+      id: step-6-checklist
+      phase: 8
+      phase_name: Score — Execute DS Alignment Checklist
+      agent: design-chief
+      action: execute-checklist-epic-ds-alignment-checklist
+      outputs:
+        - checklist_result
+        - verdict
+      next: step-7-verdict-gate
+    - step: step-7-verdict-gate
+      id: step-7-verdict-gate
+      phase: 9
+      phase_name: Gate — Verdict Decision
+      agent: aiox-master
+      action: checkpoint
+      next: step-8-auto-fix
+    - step: step-8-auto-fix
+      id: step-8-auto-fix
+      phase: 10
+      phase_name: Fix — Auto-Correct Gaps in EPIC.md
+      agent: design-chief
+      action: review-epic-ds-fix
+      outputs:
+        - fixed_epic
+        - fix_log
+        - updated_verdict
+      next: step-9-report
+    - step: step-9-report
+      id: step-9-report
+      phase: 11
+      phase_name: Report — Generate DS Review Report
+      agent: design-chief
+      action: review-epic-ds-report
+      outputs:
+        - review_report
+        - updated_epic
+      next: step-10-handoff
+    - step: step-10-handoff
+      id: step-10-handoff
+      phase: 12
+      phase_name: Handoff — Route to Next Agent
+      agent: aiox-master
+      action: checkpoint
+    - workflow_end:
+        id: complete
+        action: workflow_complete
+  handoff_prompts:
+    design-chief_to_aiox-master: Handoff context from design-chief to aiox-master. Preserve outputs, risks, and open decisions.
+    aiox-master_to_brad-frost: Handoff context from aiox-master to brad-frost. Preserve outputs, risks, and open decisions.
+    brad-frost_to_design-chief: Handoff context from brad-frost to design-chief. Preserve outputs, risks, and open decisions.
+    aiox-master_to_design-chief: Handoff context from aiox-master to design-chief. Preserve outputs, risks, and open decisions.
+metadata:
+  author: Design Chief
+  created_date: "2026-03-08"
+  tags:
+    - epic
+    - design-system
+    - alignment
+    - quality-gate
+    - brownfield
+    - review
+execution_modes:
+  - mode: yolo
+    description: Automated scan + auto-fix, minimal prompts
+    prompts: 0-1
+    default: false
+  - mode: interactive
+    description: Scan with confirmations at key decisions
+    prompts: 3-5
+    default: true
+  - mode: preflight
+    description: Full review with discussion at each phase
+    prompts: 5-10
+    default: false
+inputs:
+  epic_path:
+    type: string
+    description: Path to EPIC.md file
+    required: true
+    validation: Must be valid file path ending in .md
+  business_slug:
+    type: string
+    description: Business slug matching workspace/workspace.yaml -> businesses.{slug}. Preferred.
+    required: false
+    default: null
+    examples:
+      - aiox
+      - academia_lendaria
+  app_id:
+    type: string
+    description: App identifier declared inside workspace/businesses/{bu}/design-system/config.yaml.
+    required: false
+    default: null
+    examples:
+      - site-aiox
+      - aios-platform
+      - brandbook
+  codebase_path:
+    type: string
+    description: Path to target app's component directory. Optional if app_id is provided.
+    required: false
+    validation: Must be valid directory containing components
+  reference_path:
+    type: string
+    description: Path to reference implementation being ported (if migrating)
+    required: false
+    default: null
+  auto_fix:
+    type: boolean
+    description: Enable auto-fix for GAPS verdict (max 2 iterations)
+    required: false
+    default: true
+  max_fix_iterations:
+    type: integer
+    description: Maximum auto-fix iterations before escalating
+    required: false
+    default: 2
+steps:
+  - id: step_0_resolve_config
+    name: Resolve — Auto-Discover DS Configuration
+    type: agent
+    agent: design-chief
+    command: "*resolve-ds {business_slug_or_app_id}"
+    description: |
+      Resolve DS context through the canonical workspace resolver.
+      Resolution order:
+      1. If business_slug provided → run squads/design/scripts/design-system/resolve_business_design_system.cjs --bu={slug}
+      2. If app_id provided → resolve BU via squads/design/scripts/design-system/resolve_business_design_system.cjs --app={id}
+      3. If no BU/app available → heuristic scan of codebase_path for common patterns
+
+      If the BU is configured, load workspace/businesses/{bu}/design-system/config.yaml and
+      resolve: source, themes, component_dirs, token_files, blueprint files, routing, framework,
+      ui_primitives, and constraints.
+
+      If the BU is not_applicable, skip DS review and do not request DS creation.
+      If the BU is not_configured, stop and return remediation.
+    inputs:
+      business_slug: "{{business_slug}}"
+      app_id: "{{app_id}}"
+      codebase_path: "{{codebase_path}}"
+    outputs:
+      resolved_config: outputs/design-system/epic-review/resolved-config.yaml
+      status: configured|not_configured|not_applicable
+      business_slug: resolved business slug
+      app_root: resolved app root path
+      component_dirs: resolved component directories
+      token_files: resolved token file paths
+      blueprint_pages: resolved catalog/blueprint pages
+      framework: resolved framework name
+      ui_primitives: resolved UI primitives library
+      token_prefix: resolved token naming prefix
+    error_handling:
+      strategy: fail
+  - id: step_1_triage
+    name: Triage — Classify Epic for DS Review
+    type: task
+    agent: design-chief
+    task: design-triage
+    description: Determine if epic has UI/frontend work that requires DS alignment review
+    inputs:
+      request: Review epic at {{epic_path}} for design system alignment
+      context: Epic with UI stories targeting business={{business_slug}} app={{app_id}} codebase={{codebase_path}}
+    outputs:
+      triage_result: outputs/design-system/epic-review/triage.yaml
+    error_handling:
+      strategy: fail
+    post_condition: triage_result.scope == 'in_scope'
+    skip_message: Epic has no UI work — DS review not needed
+  - id: step_1b_applicability_gate
+    name: Gate — DS Applicability
+    type: checkpoint
+    description: |
+      Respect the BU DS status before scanning:
+      - configured: continue to DS review
+      - not_applicable: skip DS review entirely
+      - not_configured: stop and return remediation to configure the BU DS
+    inputs:
+      status: "{{step_0_resolve_config.status}}"
+    decision:
+      configured:
+        next: step_2_component_scan
+        message: BU/app has configured DS. Continuing.
+      not_applicable:
+        next: step_10_handoff
+        message: BU DS is not applicable. Skip DS review.
+      not_configured:
+        next: step_9_report
+        message: BU requires DS configuration before epic review can continue.
+    error_handling:
+      strategy: fail
+  - id: step_2_component_scan
+    name: Scan — Inventory Existing Components
+    type: agent
+    agent: brad-frost
+    command: "*audit"
+    description: |
+      Scan the target codebase for all existing components across the resolved
+      component directories (from workspace/businesses/{bu}/design-system/config.yaml).
+      Build a full inventory with component names, paths, props, and variants.
+    inputs:
+      path: "{{step_0_resolve_config.app_root}}"
+      subdirs: "{{step_0_resolve_config.component_dirs}}"
+    outputs:
+      component_inventory: outputs/design-system/epic-review/component-inventory.yaml
+    error_handling:
+      strategy: fail
+  - id: step_3_token_scan
+    name: Scan — Map Available Tokens, Animations, Patterns
+    type: agent
+    agent: brad-frost
+    command: "*tokenize"
+    description: |
+      Extract all available design tokens from the resolved token files
+      (from workspace/businesses/{bu}/design-system/config.yaml). Map CSS keyframes,
+      transition classes, pattern classes, easing tokens, and duration tokens.
+    inputs:
+      files: "{{step_0_resolve_config.token_files}}"
+    outputs:
+      token_map: outputs/design-system/epic-review/token-map.yaml
+      animation_map: outputs/design-system/epic-review/animation-map.yaml
+      pattern_map: outputs/design-system/epic-review/pattern-map.yaml
+    error_handling:
+      strategy: fail
+  - id: step_4_reference_audit
+    name: Audit — Analyze Reference Implementation (conditional)
+    type: agent
+    agent: brad-frost
+    command: "*audit"
+    description: |
+      If a reference implementation exists, audit it for DO/DON'T patterns,
+      edge cases, a11y gaps, and performance issues. Extract lessons learned.
+    condition: "{{reference_path}} != null"
+    inputs:
+      path: "{{reference_path}}"
+    outputs:
+      reference_audit: outputs/design-system/epic-review/reference-audit.yaml
+    error_handling:
+      strategy: skip
+  - id: step_5_cross_reference
+    name: Cross-Reference — Diff Epic vs Inventory
+    type: agent
+    agent: design-chief
+    command: "*review-epic-ds"
+    description: |
+      Parse the EPIC.md and cross-reference every proposed component against the
+      scanned inventory. Identify: duplicates (components that already exist),
+      adaptable (exist but need modification), and truly new (gap to fill).
+      Also cross-reference token usage, animation strategy, and pattern assignments.
+    inputs:
+      epic: "{{epic_path}}"
+      inventory: "{{step_2_component_scan.component_inventory}}"
+      tokens: "{{step_3_token_scan.token_map}}"
+      animations: "{{step_3_token_scan.animation_map}}"
+      patterns: "{{step_3_token_scan.pattern_map}}"
+      reference: "{{step_4_reference_audit.reference_audit}}"
+    outputs:
+      diff_report: outputs/design-system/epic-review/component-diff.yaml
+      coverage_gaps: outputs/design-system/epic-review/coverage-gaps.yaml
+    error_handling:
+      strategy: fail
+  - id: step_6_checklist
+    name: Score — Execute DS Alignment Checklist
+    type: agent
+    agent: design-chief
+    command: "*execute-checklist epic-ds-alignment-checklist"
+    description: |
+      Score the epic against the 52-point DS alignment checklist.
+      7 sections: Component Inventory (12), Token Coverage (10), Reference Analysis (8),
+      Architecture (6), DS Workflow (6), Accessibility (6), Dependencies (4).
+      Check section minimums. Determine verdict.
+    inputs:
+      epic: "{{epic_path}}"
+      diff: "{{step_5_cross_reference.diff_report}}"
+      gaps: "{{step_5_cross_reference.coverage_gaps}}"
+    outputs:
+      checklist_result: outputs/design-system/epic-review/checklist-result.yaml
+      verdict: outputs/design-system/epic-review/verdict.yaml
+    error_handling:
+      strategy: fail
+  - id: step_7_verdict_gate
+    name: Gate — Verdict Decision
+    type: checkpoint
+    description: |
+      Based on checklist score, determine next action:
+      - ALIGNED (>=85%): Proceed to report
+      - GAPS (70-84%): Proceed to auto-fix if enabled, else report
+      - MISALIGNED (60-69%): Proceed to report with remediation
+      - FAIL (<60%): Proceed to report with escalation
+    inputs:
+      verdict: "{{step_6_checklist.verdict}}"
+      auto_fix: "{{auto_fix}}"
+    decision:
+      ALIGNED:
+        next: step_9_report
+        message: Epic is DS-aligned. Proceeding to report.
+      GAPS:
+        next: step_8_auto_fix
+        condition: "{{auto_fix}} == true"
+        fallback: step_9_report
+        message: Gaps found. Attempting auto-fix.
+      MISALIGNED:
+        next: step_9_report
+        message: Epic misaligned with DS. Generating remediation report.
+      FAIL:
+        next: step_9_report
+        message: Epic fails DS alignment. Major rework required.
+    error_handling:
+      strategy: fail
+  - id: step_8_auto_fix
+    name: Fix — Auto-Correct Gaps in EPIC.md
+    type: agent
+    agent: design-chief
+    command: "*review-epic-ds --fix"
+    description: |
+      For GAPS verdict, attempt to auto-fix the EPIC.md:
+      1. Add missing component inventory section
+      2. Add token mapping references
+      3. Add DS commands per story
+      4. Add color scheme alternation mapping
+      5. Re-run checklist (up to max_fix_iterations)
+
+      Non-auto-fixable items (architecture, scope, wave structure) are
+      reported as remaining gaps for @pm to address.
+    inputs:
+      epic: "{{epic_path}}"
+      gaps: "{{step_5_cross_reference.coverage_gaps}}"
+      inventory: "{{step_2_component_scan.component_inventory}}"
+      tokens: "{{step_3_token_scan.token_map}}"
+      max_iterations: "{{max_fix_iterations}}"
+    outputs:
+      fixed_epic: "{{epic_path}}"
+      fix_log: outputs/design-system/epic-review/auto-fix-log.yaml
+      updated_verdict: outputs/design-system/epic-review/verdict-post-fix.yaml
+    error_handling:
+      strategy: fail
+    loop:
+      max: "{{max_fix_iterations}}"
+      exit_on: verdict == ALIGNED
+      escalate_on: iteration == max AND verdict != ALIGNED
+      escalate_to: MISALIGNED
+  - id: step_9_report
+    name: Report — Generate DS Review Report
+    type: agent
+    agent: design-chief
+    command: "*review-epic-ds --report"
+    description: |
+      Generate the final review report and write it to the epic directory.
+      Update the EPIC.md revision log with the review verdict.
+      Communicate next action to appropriate agent.
+    inputs:
+      epic: "{{epic_path}}"
+      checklist: "{{step_6_checklist.checklist_result}}"
+      verdict: "{{step_6_checklist.verdict}}"
+      diff: "{{step_5_cross_reference.diff_report}}"
+      fix_log: "{{step_8_auto_fix.fix_log}}"
+    outputs:
+      review_report: docs/stories/epics/{{epic_id}}/ds-review.md
+      updated_epic: "{{epic_path}}"
+    error_handling:
+      strategy: fail
+  - id: step_10_handoff
+    name: Handoff — Route to Next Agent
+    type: checkpoint
+    description: |
+      Based on final verdict, handoff to the appropriate agent:
+      - ALIGNED: @sm for story drafting
+      - GAPS (post-fix): @pm to address remaining gaps
+      - MISALIGNED: @pm with detailed remediation
+      - FAIL: @pm + @design-chief joint review
+    inputs:
+      verdict: "{{step_9_report.final_verdict}}"
+    decision:
+      ALIGNED:
+        handoff_to: "@sm"
+        message: Epic DS-aligned. Ready for story drafting.
+        action: "*draft"
+      GAPS:
+        handoff_to: "@pm"
+        message: Remaining gaps after auto-fix. Address non-auto-fixable items.
+        action: Review ds-review.md and fix listed gaps
+      MISALIGNED:
+        handoff_to: "@pm"
+        message: Epic misaligned. Remediation report generated.
+        action: Major revisions needed per ds-review.md
+      FAIL:
+        handoff_to: "@pm"
+        escalate: "@design-chief"
+        message: Epic fails DS alignment. Joint review required.
+        action: Schedule @pm + @design-chief review session
+    error_handling:
+      strategy: fail
+outputs:
+  verdict:
+    type: string
+    description: Final alignment verdict
+    source: "{{step_6_checklist.verdict}}"
+  score:
+    type: object
+    description: Detailed scoring breakdown
+    source: "{{step_6_checklist.checklist_result}}"
+  review_report:
+    type: string
+    description: Path to generated review report
+    source: "{{step_9_report.review_report}}"
+  component_diff:
+    type: object
+    description: Proposed vs existing components diff
+    source: "{{step_5_cross_reference.diff_report}}"
+  next_agent:
+    type: string
+    description: Agent to handoff to based on verdict
+    source: "{{step_10_handoff.handoff_to}}"
+global_error_handling:
+  on_error: abort
+  notification:
+    enabled: true
+    channels:
+      - console
+security:
+  authorization_required: false
+  audit_logging: true
+quality_gates:
+  ds_alignment_gate:
+    checklist: squads/design/checklists/epic-ds-alignment-checklist.md
+    threshold: 70%
+    section_minimums:
+      component_inventory: 8
+      token_coverage: 6
+      architecture: 4
+    blocking: true
+    verdict_mapping:
+      ALIGNED: proceed
+      GAPS: fix-and-recheck
+      MISALIGNED: return-to-pm
+      FAIL: major-rework

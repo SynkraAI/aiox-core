@@ -1,0 +1,318 @@
+# Scoring Rubric — Digital Profiler
+# Provides EXACT scoring criteria for each channel
+# Used by: @digital-profiler via run-profiler task
+# Purpose: Eliminate subjective scoring, ensure consistency across outputs
+# Version: 2.0
+
+# RULES:
+# - EVERY score MUST reference this rubric
+# - Use "~" prefix for estimated scores (data unavailable): "~12/20"
+# - Use exact number for verified scores: "12/20"
+# - If data unavailable, use scoring_when_unavailable rules
+# - NEVER invent data to justify a score
+
+version: "2.0"
+
+total:
+  max: 100
+  formula: "Sum of all channel scores (already weighted)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHANNEL 1: SITE (weight: 20 points)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+site:
+  max: 20
+  metrics:
+    ssl_https:
+      max: 2
+      "2": "HTTPS ativo com certificado válido"
+      "1": "HTTPS com warnings ou mixed content"
+      "0": "HTTP ou certificado expirado/inválido"
+
+    mobile_responsivo:
+      max: 3
+      "3": "Responsivo + viewport meta + tap targets adequados"
+      "2": "Responsivo mas com problemas menores"
+      "1": "Semi-responsivo (layout quebra em mobile)"
+      "0": "Não responsivo"
+
+    pagespeed_mobile:
+      max: 3
+      "3": "Score 70+ OU sinais fortes de otimização (lazy load + critical CSS + CDN)"
+      "2": "Score 50-69 OU otimização parcial"
+      "1": "Score 30-49 OU sem otimização visível"
+      "0": "Score < 30 OU site extremamente lento"
+      note: "Se PageSpeed API indisponível, avaliar por sinais técnicos observáveis"
+
+    meta_tags:
+      max: 2
+      "2": "Title otimizado + meta description + OG tags"
+      "1": "Apenas title OU title com problemas (sem acentos, genérico)"
+      "0": "Sem meta tags significativas"
+
+    heading_structure:
+      max: 1
+      "1": "H1 presente + hierarquia H2/H3 correta + Schema.org"
+      "0": "Sem H1 ou hierarquia quebrada"
+
+    cta_visible:
+      max: 2
+      "2": "CTA acima do fold + WhatsApp button visível"
+      "1": "CTA existe mas abaixo do fold OU sem WhatsApp"
+      "0": "Sem CTA visível"
+
+    tracking:
+      max: 2
+      "2": "GA4 ou GTM instalado e funcionando"
+      "1": "Apenas Facebook Pixel ou analytics parcial"
+      "0": "Sem tracking detectável"
+
+    whatsapp_button:
+      max: 2
+      "2": "WhatsApp button visível na home (floating ou header)"
+      "1": "WhatsApp apenas na página de contato"
+      "0": "Sem WhatsApp"
+
+    blog_conteudo:
+      max: 3
+      "3": "Blog ativo com posts < 3 meses + conteúdo relevante"
+      "2": "Blog existe com posts < 6 meses"
+      "1": "Blog existe mas abandonado (> 6 meses)"
+      "0": "Sem blog ou conteúdo"
+
+  scoring_when_unavailable:
+    no_site: "Score = 0. Marcar 'Site: Não encontrado'"
+    site_down: "Score = 0. Flag: 'Site offline em {data}'. VERIFICAR novamente antes de entregar."
+    pagespeed_blocked: "Avaliar por sinais técnicos visíveis no HTML: lazy load, critical CSS, CDN, compression. Prefixar score com ~"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHANNEL 2: GOOGLE MAPS (weight: 20 points)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+google_maps:
+  max: 20
+  metrics:
+    profile_claimed:
+      max: 3
+      "3": "Perfil reivindicado e verificado (badge visível)"
+      "1": "Perfil existe mas não verificado / gerado automaticamente"
+      "0": "Sem perfil ou não encontrado"
+
+    completeness:
+      max: 3
+      "3": "80%+ campos (endereço, telefone, horários, categorias, descrição, website)"
+      "2": "50-79% (faltam 1-2 itens importantes)"
+      "1": "< 50% (apenas informações básicas)"
+      "0": "Perfil vazio ou inexistente"
+
+    reviews_count:
+      max: 4
+      "4": "50+ reviews"
+      "3": "20-49 reviews"
+      "2": "5-19 reviews"
+      "1": "1-4 reviews"
+      "0": "0 reviews"
+
+    reviews_rating:
+      max: 3
+      "3": "4.5+ estrelas"
+      "2": "4.0-4.4 estrelas"
+      "1": "3.0-3.9 estrelas"
+      "0": "< 3.0 estrelas ou sem rating"
+
+    photos:
+      max: 3
+      "3": "10+ fotos (mix de profissionais + usuários)"
+      "2": "5-9 fotos"
+      "1": "1-4 fotos"
+      "0": "Sem fotos"
+
+    posts_recent:
+      max: 2
+      "2": "Posts nos últimos 30 dias"
+      "1": "Posts nos últimos 90 dias"
+      "0": "Sem posts ou > 90 dias"
+
+    hours_description:
+      max: 2
+      "2": "Horários atualizados + descrição otimizada com keywords"
+      "1": "Apenas horários OU apenas descrição"
+      "0": "Nenhum dos dois"
+
+  scoring_when_unavailable:
+    api_blocked: |
+      1. Buscar via WebSearch: "{nome} {cidade} Google Maps reviews"
+      2. Buscar via Exa: "google.com/maps {nome} {cidade}"
+      3. Verificar menções em diretórios (BenditoGuia, Apontador, etc.)
+      4. Se dados insuficientes após 3 tentativas:
+         - Marcar como "⚠️ VERIFICAÇÃO MANUAL NECESSÁRIA"
+         - Score = estimativa conservadora com ~ prefix
+         - Adicionar à seção Limitações do dossiê
+    estimation_rules:
+      - "Se mencionado em diretórios → profile_claimed mínimo 1"
+      - "Se reviews citados em sites terceiros → estimar range"
+      - "SEMPRE usar ~ prefix para scores estimados"
+      - "NUNCA inventar número exato de reviews"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHANNEL 3: REDES SOCIAIS (weight: 20 points)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+social_media:
+  max: 20
+  # Distribuição padrão. Niche_config pode alterar os pesos.
+  default_distribution:
+    instagram: 8
+    facebook: 4
+    linkedin: 3
+    tiktok: 2
+    youtube: 3
+
+  niche_overrides:
+    # Se niche_config define channel_weights diferentes, redistribuir
+    # Exemplo: B2B → LinkedIn 6, Instagram 5, Facebook 4, YouTube 3, TikTok 2
+    rule: "Se niche_config.channel_weights define prioridades, redistribuir os 20 pontos proporcionalmente"
+
+  metrics:
+    instagram:
+      "8": "Perfil ativo (< 7 dias), 3+/semana, bio com CTA, destaques, engagement visível"
+      "6": "Perfil ativo (< 30 dias), 1-2/semana, bio com CTA"
+      "4": "Perfil ativo (< 90 dias), posts irregulares"
+      "2": "Perfil existe mas inativo (> 90 dias)"
+      "1": "Perfil existe mas abandonado"
+      "0": "Sem perfil"
+
+    facebook:
+      "4": "Página ativa com info completa, reviews, posts recentes"
+      "3": "Página ativa com posts recentes"
+      "2": "Página existe com info básica"
+      "1": "Página existe mas abandonada / é perfil pessoal"
+      "0": "Sem página"
+
+    linkedin:
+      "3": "Company Page ativa com posts, funcionários vinculados"
+      "2": "Company Page com info básica"
+      "1": "Company Page existe mas vazia"
+      "0": "Sem Company Page"
+
+    tiktok:
+      "2": "Perfil ativo com conteúdo relevante ao nicho"
+      "1": "Perfil existe com pouco conteúdo"
+      "0": "Sem perfil"
+
+    youtube:
+      "3": "Canal ativo com vídeos de serviços/educacionais"
+      "2": "Canal com alguns vídeos"
+      "1": "Canal existe mas vazio ou 1-2 vídeos"
+      "0": "Sem canal"
+
+  scoring_when_unavailable:
+    scraping_blocked: |
+      1. Buscar via WebSearch: "{nome} Instagram {cidade}"
+      2. Buscar via Exa: "instagram.com/{handle}"
+      3. Verificar bio/posts visíveis sem login
+      4. Se bloqueado:
+         - Confirmar existência: "Perfil existe" (sim/não)
+         - Se existe: score mínimo 1, marcar "dados de engagement indisponíveis"
+         - Adicionar à seção Limitações
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHANNEL 4: REPUTACAO (weight: 15 points)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+reputation:
+  max: 15
+  metrics:
+    reclame_aqui:
+      max: 8
+      "8": "Nota 8+ com selo 'Otimo' ou 'RA1000', > 70% resposta"
+      "6": "Nota 7+ com selo e taxa de resposta > 50%"
+      "4": "Perfil com reputação calculada (qualquer nota)"
+      "2": "Perfil existe sem reputação calculada (< 10 avaliações)"
+      "1": "Sem perfil (neutro: sem reclamações, mas sem presença proativa)"
+      "0": "Perfil com reputação 'Ruim' ou 'Não Recomendada'"
+
+    google_reviews:
+      max: 7
+      "7": "4.5+ estrelas com 20+ reviews e > 50% respondidos"
+      "5": "4.0+ estrelas com 10+ reviews"
+      "3": "Qualquer rating com 5+ reviews"
+      "1": "< 5 reviews ou rating < 3.0"
+      "0": "Sem reviews no Google"
+
+  note: "Google Reviews pode usar dados do canal google_maps (reviews_count + reviews_rating). Não duplicar análise."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHANNEL 5: PORTAIS DE NICHO (weight: 15 points)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+niche_portals:
+  max: 15
+  metrics:
+    per_portal:
+      max: 5  # Até 3 portais prioritários = 15 pontos
+      "5": "Perfil completo com reviews, fotos, features ativas (agenda, delivery, etc.)"
+      "3": "Perfil existe com informações básicas preenchidas"
+      "1": "Perfil existe mas praticamente vazio"
+      "0": "Sem presença no portal"
+
+  scoring_when_no_portals:
+    rule: |
+      Se niche_config não define portais (ou portals: []):
+      Redistribuir 15 pontos: +8 para Google Maps (total 28), +7 para Reputação (total 22).
+      NÃO criar portais fictícios.
+
+  scoring_when_few_portals:
+    rule: |
+      Se nicho tem menos de 3 portais:
+      Dividir 15 pontos igualmente entre os portais existentes.
+      Exemplo: 2 portais = 7.5 pontos cada (arredondar para cima no primeiro).
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHANNEL 6: CONSISTENCIA NAP (weight: 10 points)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+consistency_nap:
+  max: 10
+  metrics:
+    name:
+      max: 3
+      "3": "Idêntico em todos os canais encontrados"
+      "2": "Variação menor (acentos, abreviações: Ltda/Ltd, cj/conj)"
+      "1": "Variação significativa (nome diferente em algum canal)"
+      "0": "Inconsistente (nomes diferentes)"
+
+    address:
+      max: 3
+      "3": "Endereço idêntico em todos os canais"
+      "2": "Variação menor (sala vs conj, número do complemento)"
+      "1": "Bairro ou número diferente em algum canal"
+      "0": "Endereços completamente diferentes"
+
+    phone:
+      max: 2
+      "2": "Mesmo telefone/WhatsApp em todos os canais"
+      "1": "Fixo e celular diferentes mas ambos válidos"
+      "0": "Telefones inconsistentes ou desatualizados"
+
+    hours:
+      max: 2
+      "2": "Horários consistentes em todos os canais que listam"
+      "1": "Parcialmente consistente (1-2 canais divergem)"
+      "0": "Inconsistente ou ausente na maioria dos canais"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SCORE DISPLAY FORMAT
+# ═══════════════════════════════════════════════════════════════════════════════
+
+display_format:
+  verified: "{score}/100"
+  estimated: "~{score}/100"
+  rule: |
+    Score é ESTIMADO (~) se QUALQUER canal tem dados indisponíveis.
+    Score é VERIFICADO (sem ~) se TODOS os canais foram analisados com dados diretos.
+    Na tabela de breakdown, prefixar cada sub-score individual:
+      - "13/20" = dados verificados
+      - "~10/20" = contém estimativas
+    SEMPRE explicar na seção Limitações quais dados foram estimados e por quê.

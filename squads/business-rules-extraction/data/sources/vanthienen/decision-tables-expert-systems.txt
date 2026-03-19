@@ -1,0 +1,885 @@
+I DATA
+&
+KNOWLEDGE
+ENGINEERING
+ELSEVIER
+
+Data & Knowledge Engineering 13 (1994) 265-282
+
+From decision tables to expert system shells
+J. Vanthienen*, G. Wets
+Katholieke Universiteit Leuven, Department of Applied Economic Sciences, Naamsestraat 69, B-3000 Leuven,
+Belgium
+Received 19 January 1993; revised manuscript received 15 October 1993; accepted 7 July 1994
+Abstract
+
+Building and maintaining high quality knowledge based systems is not a trivial task. Decision tables have
+sometimes been recommended in this process, mainly in verification and validation. In this paper, however, it is
+shown how decision tables can also be used to generate, and not just to validate, knowledge bases and how the
+transformation process from decision tables to knowledge bases can be organized. Several options to generate rules
+or other knowledge representations from decision tables are described and evaluated.
+The proposed generation strategy enables the knowledge engineer to concentrate on the acquisition and
+modeling issues and allows him to isolate the knowledge body from its implementation. The generation process has
+been implemented for two commercial tools, AionDS and KBMS and has been applied to real world applications.
+
+Keywords: Expert systems; Decision tables; Decision trees; Knowledge acquisition; Verification & validation; Rule
+minimization
+
+O. Introduction
+While decision tables were originally used as a technique to support programming, in the
+mid-80s the A.I.-community started to show some interest in them because of their ability to
+detect incompleteness and inconsistency. Since then they have occasionally been applied
+mainly in verification and validation of knowledge based systems. In the 90s, decision tables
+have been recommended as a fast way of executing the expert system and also some initial
+efforts were made to use decision tables in the knowledge acquisition phase. In this paper, it
+will b e i n d i c a t e d h o w k n o w l e d g e c a n b e m o d e l e d a n d v e r i f i e d using d e c i s i o n t a b l e s a n d h o w
+t h e s e d e c i s i o n t a b l e s c a n b e t r a n s f o r m e d into a k n o w l e d g e b a s e d a p p l i c a t i o n w i t h p r o p e r
+c o n s u l t a t i o n facilities.
+In S e c t i o n 1, t h e d e c i s i o n t a b l e r e p r e s e n t a t i o n a n d t h e c u r r e n t use o f d e c i s i o n t a b l e s in t h e
+
+* Corresponding author. Email: jan.vanthienen@econ.kuleuven.ac.be
+0169-023X/94/$07.00 t~ 1994 Elsevier Science B.V. All rights reserved
+SSDI: 0 1 6 9 - 0 2 3 X ( 9 4 ) 0 0 0 2 0 - 4
+
+266
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+context of knowledge based systems are briefly described. In Section 2, it is proposed how the
+use of decision tables in the different domains of knowledge based systems can be integrated.
+Section 3 deals with the modeling issues of the integrated approach including verification and
+validation. Section 4 analyzes how the decision tables can be transformed for use in an expert
+system shell. In Section 5, this transformation is elaborated for a specific tool, AionDS.
+Section 6 briefly covers some applications. In Section 7, the proposed approach is evaluated.
+Finally our major findings are summarized.
+
+1. Decision tables and Knowledge Based Systems
+"A decision table is a table, representing the exhaustive set of mutual exclusive conditional
+expressions, within a predefined problem area." [31]
+The tabular representation of the decision situation is characterized by the separation between
+conditions and actions, on one hand, and between subjects and conditional expressions
+(states), on the other hand. Every table column (decision column) indicates which actions
+should (or should not) be executed for a specific combination of condition states. In this
+definition, the decision table concept is deliberately restricted to the so called single-hit table,
+where columns are mutually exclusive. Only this type of table allows easy checking for
+consistency and completeness.
+If each column only contains simple states (no contractions or irrelevant conditions), the
+table is called an expanded decision table, in the other case the table is called a contracted
+decision table. The translation from one form to the other is defined as expansion and
+contraction respectively.
+In Fig. 1 an example of an expanded decision table is given.
+Decision tables and knowledge based systems show some striking similarities, although both
+approaches put strongly different emphases. Moreover, a lot of expert systems built nowadays
+are propositional expert systems, which are equivalent to decision tables [1]. While decision
+tables traditionally stress the representation facilities (with the resulting additional checking
+capabilities for completeness, consistency and correctness), knowledge based systems are
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+7
+
+8
+
+Fig. 1. Expanded table. Note: The decision table concept in this paper is by no means restricted to limited-entry
+tables. Only, this example happens to consist of limited entries.
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+267
+
+mainly dealing with knowledge formulation (modularity, flexibility) and consultation (inference, user friendliness).
+Currently, in the context of knowledge based systems, there are three domains where
+decision tables are encountered: mainly during the verification and validation process, but also
+as a fast way of executing the expert system and during the knowledge acquisition phase.
+1.1. Verification and validation using decision tables
+Knowledge acquisition is one of the main problems in building knowledge based systems,
+and usually, after the knowledge acquisition process is finished, a lot of contradictions and
+insufficiencies remain to be detected and solved. Also, maintaining the knowledge base is not
+a trivial task which often introduces unnoticed inconsistencies or contradictions. Therefore
+verification and validation of knowledge based systems are receiving increased attention [4, 5,
+8, 15, 16, 23].
+The emerging problems of validation and verification have led to the occasional use of
+schemes, tables or similar techniques in knowledge representation and validation. It has been
+reported earlier [3, 17, 24], that, in a vast majority of cases, the decision table technique is
+able to provide for extensive validation and verification assistance. Most of the common
+verification and validation problems (consistency and correctness of knowledge, non-redundancy of knowledge, completeness of knowledge [13]) can easily be solved using decision
+tables [25].
+1.2. Using decision tables for fast execution
+As already mentioned, a large class of current expert systems are propositional systems,
+equivalent to decision tables. In [1], such expert systems are transformed into decision tables,
+because execution of decision tables proved to be much faster than execution of the original
+expert system. This execution efficiency can even be optimized further as indicated in the
+section on optimization.
+1.3. Acquiring knowledge using decision tables
+Decision tables offer more than validation and verification or a fast execution mechanism.
+Instead of building or generating decision tables only during the validation and verification
+process, they have also significant advantages in the knowledge acquisition phase itself, in
+which all the information has to be transformed into a coherent substance [12]. In the
+knowledge acquisition stage, knowledge will be modeled in a series of decision tables, as
+already indicated in [25] (see also [19]).
+
+2. An integrated approach
+In this paper, it is argued that there is no need to restrict the usage to the transformation
+from expert system to decision tables, in order to obtain smooth validation or execution
+
+268
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+Prologa
+
+KBMS
+
+g
+e
+
+Table-file~-- n
+e
+r
+a
+Explanationl
+,t
+file
+[7'
+o
+r__
+
+AionDS
+
+Soare
+le
+
+Spare
+Table
+Decision
+Centre
+
+:ision
+itre
+isultation
+lager
+
+Consultation
+Manager
+
+Fig. 2. AionDS and KBMS generation facility.
+
+efficiency. In our point of view it is clearly superior to model the knowledge by means of
+decision tables from the start (including validation & verification), and then to implement the
+system ( i n a n optimized way), e.g. using an expert system shell. In other words, the path from
+decision tables to knowledge based systems is as relevant as the reverse direction.
+• Decision table construction, verification and validation are briefly discussed in Section 3.
+• When the decision tables are transformed for use in an expert system shell, this can be done
+using if-then-else statements or by using rules, as will be indicated in Section 4.
+It is important to notice that after this transformation process, a mapping between the decision
+tables and the expert system will always remain. Changes will be made to the decision table(s)
+and a new generation step will update the system accordingly. Because of this generation step,
+the application can easily be transported to other tools or platforms.
+The generation process has been implemented for two commercial tools, AionDS and
+KBMS from Trinzic Corporation (Fig. 2). AionDS is an object oriented, knowledge based
+development environment to build complex business policies and procedures. KBMS is a
+similar tool, with emphasis on ease and speed of development (e.g. providing a natural
+language for data access).
+
+3. Knowledge acquisition and verification & validation
+3. I. Modeling with decision tables
+In this phase, a set of decision tables will be built modeling the domain knowledge. These
+tables constitute a hierarchy, as each condition or action in a decision table might be
+elaborated in a lower condition or action subtable respectively.
+A number of manual methods for the construction of decision tables exist. Choosing an
+appropriate method will simplify the construction process and will increase both its efficiency
+and effectiveness. Depending on the characteristics of the problem domain, several methods
+can be distinguished [31], dealing with comparable stages when analyzing the problem. The
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+269
+
+main difference between them is the order in which these stages are treated and the way they
+are worked out. The following stages can be distinguished:
+(1) obtain conditions, condition states and actions of the decision situation;
+(2) specify the problem in terms of decision rules;
+(3) fill the decision table based on the rules;
+(4) check for completeness, correctness and contradictions;
+(5) simplify the decision table and display it.
+Building decision tables manually can be a cumbersome process, therefore the PROLOGA
+(PROcedural LOGic Analyzer) system, an interactive rule-based design tool for computersupported construction and manipulation of decision tables [24-26] was built. This decision
+table engineering workbench incorporates powerful rule based knowledge acquisition and
+representation, table based verification, and adequate consultation interfaces to common
+shells and languages.
+In Prologa, the construction process largely follows the same steps as described in the
+manual construction method. When building decision tables, the designer essentially provides
+the system with a list of conditions with their states, a list of actions and a list of relations
+between condition states and actions (in the form of logical expressions or rules). Based on
+these rules the decision table will be constructed.
+To express the relations between condition states and actions, a powerful specification
+language is provided. Designing the procedural decision situation requires a specification
+language which closely matches natural language and its nuances. A decision situation usually
+does not consist of a collection of independent descriptions, but contains several levels of
+structure, e.g. general rules, exceptions, . . . . Logical expressions can therefore be assigned
+different levels of significance, in the sense that certain expressions (general rules) can be
+overruled by later specifications (exceptions), or that a (definite) expression can not be
+neutralized.
+
+3.2. Integrated verification and validation
+One of the major advantages of the integrated decision table approach is that checking for
+completeness and consistency can already be performed during the design of the knowledge
+based system. At the moment validation and verification of knowledge bases commonly take
+place after the construction process. It is a clearly better solution to detect errors as soon as
+possible. Because the application is generated from the decision tables, knowledge maintenance largely means table maintenance and the application can easily be transported to other
+tools or platforms.
+Integrated verification & validation using some form of decision tables has also been
+adopted to integrate the rule sets of multiple experts in the knowledge acquisition phase [14].
+
+4. Transformation framework
+
+After the knowledge has been modeled using decision tables, including proper verification
+and validation, they need to be implemented e.g. using an expert system shell. This
+transformation consists of three steps. First the different optimizations which can be applied
+
+270
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+1
+
+2
+
+3
+
+4
+
+5
+
+6
+
+Fig. 3. Table contraction.
+
+will be described. Then the transformation from optimized decision tables to expert system
+shells will be explained. Finally the consultation environment is added.
+4.1. Optimizations used in the transformation
+
+In the remainder of this section the simple decision table of Fig. 1 will be used as a starting
+point. The following optimizations can be performed starting from this expanded decision
+table:
+• Table contraction: minimizing the number of columns for a given condition order (e.g. first
+test the condition Absence < = 5, then the condition Seniority > = 10 and, finally, the
+condition Evaluation), by combining columns which lead to the same action configuration
+(Fig. 3) [24];
+• R o w order optimization: determination of the condition order which results in the minimum
+number of columns. For a table with k conditions, this implies a choice between k!
+alternative condition orders, some of which might be impossible because of precedence
+constraints. E.g., the table in Fig. 3 with 6 columns is optimized in Fig. 4. Now it only
+shows 4 columns because condition 3 is examined first.
+To enhance the effectiveness of the decision table in the user interface of a decision making
+system [22] or to facilitate decision making [32], table contraction and row order
+optimization are important.
+
+123
+
+Fig. 4. Row order optimization.
+
+4
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+271
+
+• Execution time optimization: depending on the purpose of the decision table, it might be
+transformed into optimal test sequences, taking into account the test time for each
+condition and column frequencies. For each column one has to specify how frequently this
+column is expected to occur. This figure can be obtained using statistical analysis.
+In decision table research, a lot of effort has been spent on generating this optimal tree [7],
+[10], [20], [30]. For a table with k limited entry conditions, this implies a choice between
+/'/;=1 J 2(k-j) decision trees.
+In this optimal solution, it is possible that conditions are not always tested in the same
+order. As a consequence it will, in general, not be possible to present the optimal solution
+as a decision table, therefore the optimal solution will be presented as an unbalanced tree,
+meaning that conditions are not always examined in the same order.
+For the decision table of Fig. 3 (assuming equal column frequencies and equal condition
+test times), the optimal execution tree is displayed in Fig. 5. In this (exceptional) case, the
+tree is a balanced tree, meaning that the conditions are always examined in the same order.
+Note that generating the optimal tree may suffer from some major drawbacks and
+difficulties:
+(1) How to determine testing costs of conditions?
+(2) How to determine column frequencies?
+(3) The performance of the conversion algorithm.
+If testing costs and column frequencies are not available, they are supposed to be equal. In
+that case, execution time optimization minimizes the average number of questions needed
+to make a decision.
+• Minimization of expressions governing the same action:
+This optimization tries to determine a minimal expression for each action. This kind of
+optimization can be useful when we want to reconstruct a specification based on actions
+(e.g. when rewriting legal texts).
+A lot of research has already been performed in this area especially in the field of switching
+circuits. In this section, a short overview of the techniques we use will be given.
+In the 1950s, the starting years of digital design, logical gates were expensive. It was
+therefore necessary to produce, for a certain logic circuit, an equivalent circuit but with less
+electronic components. At that time simplifications of logic functions became a hot topic.
+First Karnaugh developed a pictorial method to obtain minimum logic functions. A similar
+c3
+I
+
+¢~
+
+/2
+
+I
+
+c~I
+
+~3
+
+P1
+P3
+
+Fig. 5. Optimal execution tree.
+
+272
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+method was developed by Veitch. These methods where convenient for problems up to 6
+variables. Later on, more sophisticated methods where developed by Quine and McCluskey: the Quine-McCluskey method and the consensus method [11]. These methods involve
+two major steps:
+First, all prime implicants are generated. Let A be a logical expression. A fundamental
+conjunction ~Ois said to be a prime implicant of A if q, logically implies A while any other
+fundamental conjunction obtained by eliminating literals from q, does not logically imply A.
+A statement X logically implies a statement Y if and only if every assignment of truth
+values making X true also makes Y true.
+The second step extracts a minimum prime cover. This is defined as a sum of product terms
+which has a minimum number of terms and of all those which have the same number of
+terms has a minimum number of assertions.
+These methods were only practical for small problems (max. 10 variables). To solve more
+realistic problems, heuristics were developed. Two approaches can be distinguished here.
+One approach generates all prime applicants, like the Quine-McCluskey method, but
+instead of generating a minimum cover a nearly minimum cover is generated heuristically.
+A second approach tries to simultaneously identify and select implicants for the cover.
+While originally research about this subject was conducted in the field of micro-electronics,
+in the '70s, also the decision table community started to show some interest in this problem.
+In decision tables, reduction of rules governing the same action was investigated when
+minimizing a decision grid chart. The decision grid chart is a special kind of multiple hit
+table, in which the rules are grouped by action.
+Strunz [21] applied the Quine-McCluskey algorithm to obtain a minimum decision grid
+chart to facilitate conversion into a contracted decision table. Applying this means that first
+a full expansion of the decision grid chart is necessary (containing no dashes as entries). To
+avoid this problem, Maes [9] used the consensus method instead of the Quine-McCluskey
+method to find the prime implicants.
+In our approach, research now focuses on the transformation from decision tables to
+minimal expressions, instead of the decision table construction process. This research on
+optimization of expressions governing the same action, for the above example, yields the
+following minimal expressions:
+cl = y ^ c3 = pos--> pl
+c3 = neg--> p2
+
+((cl = y ^ c2 = y) v cl = n) ^ c3 = pos--> p3
+4.2. From decision tables to expert system shells
+
+When designing or generating an application for an existing knowledge based tool,
+conditions, condition states, conclusions and table references have to be transformed to the
+available modeling facilities. This transition will not be considered here, as it is rather specific
+to the target environment. See Section 5 for a transition to AionDS.
+After this transition, the main problem is how to implement the decision logic. The
+implementation of the decision logic can be realized in two different ways, depending on the
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+!
+
+Y
+c~
+
+c1
+I
+
+43
+
+I
+
+I
+
+273
+
+I
+
+I
+
+POSNeg Pos Neg
+P3
+Fig. 6. D e c i s i o n t r e e o f t h e c o n t r a c t e d
+
+table.
+
+problem characteristics. Firstly it is possible to convert the decision tables to a decision tree or
+to code using a nested if-then-else structure. The second way of implementing the decision
+tables is to convert them to a set of rules. Of course, a combination of both can sometimes be
+useful.
+4.2.1. Conversion o f decision tables to a decision tree or to code
+
+Knowledge can sometimes be transformed into a tree structure. The table might be
+transformed into a nested if-then-else structure, where the outcome of the decision is obtained
+by repeatedly choosing the appropriate branch in the selection. The decision logic can also be
+represented as a tree structure for pictorial reasons.
+Within this option, several types of trees might be the result of the conversion: balanced
+trees (where conditions, if they are relevant in the tree, are always examined in the same
+order) and unbalanced trees (where the order in which conditions are evaluated might differ
+between different branches). It will be clear that unbalanced trees offer more flexibility, but
+constitute a more complex optimization challenge. The different kinds of optimizations were
+treated more formally in Section 4.1.
+(1) A naive balanced tree
+This is the most straightforward way to transform a decision table into a tree. In this case,
+the (contracted) decision table is simply transformed into a tree from left to right, each
+column giving rise to a new leaf of the tree. The decision table in Fig. 3 will then be
+transformed to the following balanced tree (Fig. 6). Note that the condition C2 is irrelevant in
+the right branch.
+The corresponding if-then-else structure is shown in Fig. 7
+if ci = y
+then if c2 = y
+then if c3 =pos
+then pl
+
+p3
+else p2
+else
+
+274
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+if c3 = pos
+then pl
+else p2
+else
+if c3 = pos
+then p3
+else p2
+Fig. 7. If-then-else structure of the contracted table.
+
+(2) A minimal node (balanced) tree
+This tree is similar, but has been optimized with respect to the number of leafs. This means
+that the minimal node tree is the tree resulting from the table with the minimum number of
+columns, selected from all feasible condition orderings. In this tree, conditions are still always
+examined in the same order, but the order might be different from that of the original decision
+table. This structure corresponds with the decision table in Fig. 4 and is displayed in Fig. 8:
+C3
+
+I
+~eg
+
+~os
+I
+
+c~I
+Y ~
+
+;3
+
+I
+
+I
+
+Pl
+P3
+
+I
+
+P1
+
+Fig. 8. Minimal node tree.
+
+The if-then-else structure of this tree is shown in Fig. 9.
+if c3 = pos
+then if cl = y
+then if c2 = y
+then p l
+
+p3
+else p l
+else p3
+else p2
+Fig. 9. Minimal node conversion.
+
+(3) Optimal unbalanced tree
+This is the result of the execution time optimization from 4.1. In this exceptional case, the
+optimal unbalanced tree happens to be the same as the minimal node balanced tree (Fig. 8)
+and therefore this figure will not be repeated.
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+275
+
+4.2.2. Conversion of decision tables to a set of rules
+In a lot of cases, conversion to a decision tree is not flexible e n o u g h to deal with the
+k n o w l e d g e in the k n o w l e d g e base. It will sometimes be necessary to allow the user to supply
+an u n k n o w n value to a question. This might be the case w h e n a user cannot answer a question
+or simply b e c a u s e he does not want to answer a particular question. W h e n a tree is used as
+r e p r e s e n t a t i o n mechanism, one might run into problems because if u n k n o w n values are
+allowed, the user will be stuck in the tree. T h e r e f o r e when using trees, u n k n o w n values are
+not allowed. A n o t h e r p r o b l e m of trees is that they cannot handle multiple answers to a
+question. A third p r o b l e m of trees occurs w h e n the k n o w l e d g e in the tree has to be linked
+with o t h e r parts of the knowledge base. This p r o b l e m occurs because trees act like a black
+box. If certain p a r a m e t e r s are known, trees give an o u t c o m e , but the w a y they reach this
+o u t c o m e is fixed. It cannot be influenced by the inference engine.
+Several alternatives to transform the decision table into a set of rules are available:
+
+(1) Entry (x) based translation
+This translation derives one rule for each x in the table. Walking through the decision table
+t o p d o w n , from left to right, the contracted table of Fig. 3 will then be t r a n s f o r m e d to the
+following 7 rules (figure 10):
+cl = y ^ c2 = y A C3 =y---~pl
+cl = y A C2 = y ^ C3 = y--~ p3
+cl = y ^ C2 = y ^ C3 = n---~ p2
+cl = y ^ c2 = n A C3 = y---~ p l
+cl = y A C2 = n A C3 = n---~ p2
+cl = n ^ c3 = y---~ p3
+cl = n ^ c3 = n ~ p 2
+Fig. 10. Entry based translation.
+
+This m e t h o d leads to several rules with the same premise, but different conclusions, if m o r e
+then o n e action has to be p e r f o r m e d for a certain combination of attributes. A l t h o u g h this
+usually results in a decrease in p e r f o r m a n c e , it might be useful to divide the k n o w l e d g e base in
+e l e m e n t a r y chunks of knowledge.
+(2) Column (case) based translation
+This translation generates one rule for each column of the decision table. T h e following
+rules (Fig. 11) can be d e d u c e d from the decision table in Fig. 4.
+c3 = pos ^ c2 = y ^ cl = y---~ p l ^ p3
+c3 = pos A C2 = n ^ cl = y---~ p l
+c3 = pos ^ cl = n---~ p3
+c3 = neg ~ p2
+Fig. 11. Column based translation.
+
+276
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+T h e optimizations in Section 4.1 (table contraction and row o r d e r optimization) can be used
+as a basis for rule generation. As each leaf in the decision tree will be r e p r e s e n t e d by a single
+rule, minimizing the n u m b e r of leaves will decrease the n u m b e r of rules.
+(3) Row (action) based translation
+This translation generates one rule for each relevant action (or n o n - e m p t y row). As a
+starting point for this translation, we can take the rules obtained by entry based translation or
+by c o l u m n based translation. These rules are g r o u p e d by action. Finally rules for the same
+action have to be combined. In this example (Fig. 12), the optimization of the rules governing
+the same action can be readily deduced. In m o r e difficult examples, however, optimization
+algorithms will be used to obtain the optimal rule set (Section 4.1). Minimization of
+expressions governing the same action.
+W h e n applying this m e t h o d , the n u m b e r of rules is usually very low, but the left h a n d side
+of the rules tends to be complex. Note that this specification corresponds well to the
+k n o w l e d g e acquisition stage, as it describes the entire application field of a conclusion or an
+action. Rewriting specifications, therefore, is a typical application area.
+cl = y A C2 = y A C3 = pos---~ p l
+cl = y A C2 = n A C3 = pos---~ p l
+c l = y A e3 = pos---~ p l
+cl = y A C2 = y A C3 = neg---~ p2
+cl = y A C2 = n A C3 = neg---~ p2
+cl = n A C3 = neg---~ p2
+e3 = neg ~
+
+p2
+
+cl = y A C2 = y A C3 = pos---~ p3
+cl = n A C3 = pos---~ p3
+( ( e l = y A C2 = y ) V e l = n) A C3 = pos---> p 3
+Fig. 12. Row based translation.
+
+4.3. Consultation environment
+T h e consultation e n v i r o n m e n t offers the necessary user and system interfaces to p r o d u c e a
+working application. Its implementation will d e p e n d on the tool used, but is not problemspecific.
+T h e following d e m a n d s will have to be met by the consultation environment:
+• T h e consultation e n v i r o n m e n t has to be as i n d e p e n d e n t as possible from the decision tables.
+T h e r e f o r e the e n v i r o n m e n t can be built in a generic way and according to specific user
+interface standards.
+• A t any m o m e n t , a list of questions and supplied answers can be shown with the ability to
+change previous answers and restart the reasoning process from the specified point ( W H A T
+IF simulations).
+• Maintaining the knowledge base must be easy. It should, for instance, be possible to plug in
+an u p d a t e d decision table without having to generate the complete application again.
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994)265-282
+
+277
+
+• At any moment, it must be possible to leave the application (saving the current contents of
+the consultation) and restart it later. This also enables to store a list of prototype cases
+which can be adapted using the selective change facility.
+• Prompt and help texts should be available for conditions, condition states and actions, to
+explain the meaning of questions and conclusions.
+• The user interface must allow easy communication with the user, e.g. using multiple
+windows, mouse support, etc.
+The hierarchy of decision tables, which were transformed in decision trees or rules (see
+previous section), is translated into a question and answer interface. The user, however, need
+not be aware of the existence of the decision tables or any relations between them. In
+translating the hierarchy, attention must be paid that no circular inferencing arises, that
+recursive table calls remain possible and that condition subtable results are properly assigned
+to the calling conditions.
+
+5. An example: The transformation Prologa-AionDS
+The above transformation process has been implemented in the decision table engineering
+workbench PROLOGA (PROcedural LOGic Analyzer, [25]). An interface [6] was built
+between P~OLO6A and AionDS. This enables the knowledge engineer to model and validate
+the knowledge in the form of decision tables and generate a complete consultation application
+in AionDS. An interface between Prologa and KBMS is described in [2].
+5.1. K n o w l e d g e structure
+5.1.1. Available source elements
+
+When transforming the decision tables, the following information is available:
+• Names of conditions, condition states and actions. References to subtables are indicated in
+the condition or action names.
+• The (contracted) decision tables on a column by column basis, where every column
+indicates a combination of conditions with the resulting action configuration.
+• Every table can also be provided with an explanation file containing prompts, help texts o r
+other information specific to the consultation. The explanation file is basically independent
+from the decision logic, such that the decision table can be altered without having to update
+the help information.
+AionDS, being object oriented, uses the concept of classes consisting of a set of objects which
+have attributes called slots and methods containing functions and procedures. An AionDS
+application is a hierarchy of states. A state contains an agenda and rules. An agenda, which
+directs the inference engine, defines high level instructions. It is possible in the agenda to call
+other states.
+
+278
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+5.1.2. Generation of a decision centre
+Each decision table is converted to a class and condition and action variables are converted
+to slots, which may be linked to other conditions or actions. The decision table logic is
+converted to if-then-else code as a function in a class. All subtables in a hierarchy are
+generated and linked automatically.
+In this implementation, decision tables are transformed to if-then-else code. Depending on
+the problems characteristics, it could be preferable to transform the decision tables to rules
+(cf. supra). The implementation of these rules in an expert system shell is straightforward, but
+it triggers other common problems of rule based implementation (e.g. when is a breath first
+search appropriate?).
+5.2. Implementation of the knowledge structure
+The interface offers three related generation options: a decision centre, the consultation
+manager and the spare table option.
+5.2.1. Decision centre
+This option only generates the basic knowledge structure: a class with the converted actions,
+condition variables and decision table logic. No additional consultation facilities are provided.
+This option can be used if consultation options are offered by the expert system shell itself or
+if a own specific environment will be used.
+5.2.2. The consultation manager
+A full consultation environment is built together with the decision table application. This
+includes the following facilities:
+• View: a list of all variables with their values.
+• Footsteps: a chronological survey of the questions asked, with the answer and the
+conclusions reached by the expert system.
+• Whatlf-mode and Reconsider: offers the possibility in Footsteps or View to change one or
+more answers and restart the reasoning process.
+5.2.3. Spare table
+This option enables the designer to plug in the decision logic of an updated table into an
+existing application, without having to repeat the entire generation process. The rest of the
+application remains intact.
+6. Applications
+
+We have used decision tables in a large number of applications and environments. Some
+examples of the more common areas of experience include:
+• modeling and verification of complex managerial decision situations in general;
+• calculation of rates and premiums in banks and insurance companies;
+• verification and visualization of legal procedures;
+• help desk applications;
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+279
+
+The use of decision tables in legal procedures is illustrated in the Handipak system [18], a
+knowledge based system with regard to financial benefits for the disabled in Belgium. Its main
+goal is to support first line social workers when helping the disabled with the introduction of
+their applications for benefits.
+HANDIPAK is an operational system, developed by Infosoc (research group on information systems and social security, Institute of Social Law, K.U. Leuven) using the
+decision table workbench Prologa. The first version of this system was developed in 1987 by
+order of the former State Secretary for the Disabled, at a time when Belgium was drawing up
+a new regulation with regard to the financial benefits for the disabled. In 1991 a new and more
+comprehensive version was elaborated using AionDS. The analysis of the proposed regulation
+by means of the decision table technique enabled the authors to eliminate a considerable
+number of ambiguities in the bill before it was published. The development of the system thus
+increased the internal coherence of the proposed regulation.
+HANDIPAK helps to accurately complete the applications by guiding the user through the
+relevant regulations; it also gives an idea of what probably will be the outcome of the demand.
+Concretely, HANDIPAK is a kind of question-answer game that gives a personalized and
+motivated conclusion based on the answers given. HANDIPAK comprises an extensive on-line
+textbook and context-sensitive help screens. Answers can be altered at any time, which
+permits 'what-if'-simulations.
+The knowledge base of the HANDIPAK advisory system was developed by using the
+Prologa tool. The relevant law was couched in 45 mutually related decision tables. The
+relations between the different tables were specified in a number of control tables. First the
+regulation to be represented was split up into a number of regulatory subunits dealing with the
+same subject. The regulation with regard to financial benefits for the disabled was divided into
+subunits, that respectively concern: the validity of the application; the applicability with regard
+to nationality, age, and residence; the granting conditions with regard to category or other
+social benefits; the calculation of the maximal benefit and the revenues to be deduced; the
+modalities of the payment. For each of the regulatory subunits, one or more mutually related
+decision tables were developed using Prologa.
+
+7. Evaluation of the proposed approach
+According to numerous experiences, the ability of decision tables to represent complex
+decision situations with easy checking for completeness and consistency, makes it a very
+inviting technique. Besides these classical arguments for the use of decision tables in
+knowledge based systems, a number of less known advantages have been revealed by these
+applications:
+- Decision tables act as a bridge between modular and partial decision rule specifications (as in
+expert systems) and efficient condition oriented execution (as in classical programs). They
+offer a uniform technique for the whole lifecycle of a decision system, going from the
+specification phase down to the implementation and maintenance phase, and this for a
+variety of application areas (management, law, procedures . . . . );
+
+280
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+- Even when the knowledge engineer has very limited knowledge of the problem domain (e.g.
+in medical or legal applications), as an interviewer he is able to ask relevant questions,
+compare patterns, come up with exceptions, etc., because decision tables easily allow the
+designers to focus on specific situations (columns) and therefore act as a good medium of
+communication when negotiating, discussing or checking a complex decision situation. As
+decision tables can be used in two directions: data-driven (determining which actions to
+undertake in a given situation), and goal directed (specifying under which conditions an
+action should be undertaken), wild discussions about exceptions, criteria, cases are
+immediately brought down to a surveyable representation.
+- B e c a u s e the decision logic is represented by the table structure, translation from one
+language to another is easy and only implies translating some terms, not complex logical
+formulations. In multilingual communities (e.g. the EEC), this constitutes a large advantage.
+Although the proposed approach has a lot of advantages the methodology can still be refined:
+- F i r s t and foremost, modeling the time dependence of decisions within decision tables is
+rather difficult. Decision tables are very appropriate to represent argumentations which lead
+to punctual decisions, but are less suited to represent decision making processes regarding
+evolutive data. However, this kind of processes frequently occurs. Legal decisions, e.g.,
+often take into account values or regulations at a given moment or during a given period in
+the past.
+- M o r e o v e r , decision tables are most suited for the representation of decision making
+processes using selections. It is more difficult (and not appropriate) to represent iterative
+and, in some way, sequential structures in this manner. This implies that decision tables are
+particularly useful for domains where most of the knowledge takes the form of conditional
+expressions.
+- It would also be useful to support the decision of spreading the knowledge to be represented
+over different decision tables. Presently, the decision to create subtables is based upon
+certain rules of thumb or on the experience of the knowledge engineer. It is obvious that this
+practical and implicit knowledge can form the basis for a more systematical approach, which
+is subject of current research [28].
+- T h e proposed approach only deals with deterministic knowledge. Topics for future research
+include how the methodology can be extended to non-deterministic knowledge.
+
+8.
+
+Conclusion
+
+In this paper it has been shown that decision tables offer more than verification and
+validation. A transformation framework was developed to incorporate the decision tables in
+expert system shells. This transformation framework was first explained theoretically. The
+different optimizations which can be applied, the different ways of implementing the
+knowledge structure and the consultation environment were described. It was shown how this
+transformation framework could be implemented for the specific expert system shell AionDS.
+Finally the proposed approach was evaluated based on experiences while developing
+applications. It was concluded that, although some refinements are possible, there is a large
+class of applications where the proposed approach can be successfully adopted.
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+281
+
+Acknowledgements
+T h e authors wish to t h a n k M. Verhelst for his c o m m e n t s on an earlier version of this paper.
+T h e y also greatly acknowledge the invaluable assistance of S. Jans, P. M e r l e v e d e , and G. Van
+H u m b e e c k . This research was conducted in the context of L I R I S ( L e u v e n Institute for
+R e s e a r c h on I n f o r m a t i o n Systems).
+
+References
+[1] R. Colomb and C. Chung, Very fast decision table execution of propositional expert systems, Proc. A A A I 9 0
+(1990) 671-676.
+[2] B. Coucke, Ontwikketing van een interface Prologa-KBMS (Knowledge Base Management System),
+K.U.Leuven TEW dissertation, 1992.
+[3] B. Cragun and H. Steudel, A decision-table based processor for checking completeness and consistency in
+rule-based expert systems, Int. J. of Man-Machine Studies 5 (1987) 633-648.
+[4] D. Hamilton, K. Kelley and C. Culbert, State-of-the-practice in knowledge-based system verification and
+validation, Expert Systems with Applications 4 (1991) 403-410.
+[5] T. Hoppe and P. Meseguer, VVT terminology: A proposal, IEEE Expert 3 (1993), 48-55.
+[6] S. Jans, Een interface tussen Prologa en AionDS, Toepassing van de beslissingstabellenbenadering bij het
+ontwerp en de implementatie van een kennissysteem, K.U.Leuven TEW dissertation, 1992.
+[7] A. Lew, Optimal conversion of extended-entry decision tables with general cost criteria, Comm. A C M 4
+(1978) 269-279.
+[8] D. Loveland and M. Valtorta, Detecting ambiguity: An example in knowledge evaluation, in: Proc. Eighth Int.
+Joint Conf. on Artificial Intelligence, Vol. 1, Karlsruhe (Aug. 1983), 182-184.
+[9] R. Maes, On minimizing decision grid charts, Angewandte Informatik 9 (1982) 451-456.
+[10] A. Martelli and U. Montanari, Optimizing decision trees through heuristically guided search, Comm. A C M 12
+(1978) 1025-1039.
+[11] E. J. McCluskey, Introduction to the Theory of Switching Circuits (Mc.Graw-Hill, New York, 1965).
+[12] E Merlevede and J. Vanthienen, A structured approach to formalization and validation of knowledge, in Proc
+I E E E / A C M Int. Con. on Developing and Managing Expert System Programs, Washington, DC (1991),
+149-158.
+[13] T. Nguyen, W. Perkins, T. Laffey and D. Pecora, Knowledge base verification, A I Mag. 2 (1987) 69-75.
+[14] O. K. Ngwenyama and N. Bryson, A formal method for analyzing and integrating the rule-sets of multiple
+experts, Informat. Sys. 1 (1992) 1-16.
+[15] H. Nonfjall and H. Larsen, Detection of potential inconsistencies in knowledge bases, Int. J. Intelligent Sys. 7
+(1992) 81-96.
+[16] T. O'Leary and M. Goul et al., Validating expert systems, IEEE Expert 3 (1990) 51-58.
+[17] S. Puuronen, A tabular rule checking method, in: Proc. Avignon87, Vol. 1 (1987) 257-268.
+[18] F. Robben, HANDIPAK: computeradviessysteem m.b.t, de financi61e tegemoetkomingen aan gehandicapten,
+in B. Van Buggenhout, F. Robben, I. Leus, H. Casteleyn, G. Hertecant, W. en Demeester, Her Nieuw
+Gehandicaptenrecht. Commentaar bij de Nieuwe Wetgeving en Recente Evoluties in het Beleid, Recht en Sociale
+Hulpverlening (Brugge, Die Keure, 1988) 21-26.
+[19] L. Santos-Gomez and M. Darnell, Empirical evaluation of decision tables for constructing and comprehending
+expert system rules, Knowledge Acquisition 4 (1992) 427-444.
+[20] I. Sethi and B. Chatterjee, Conversion of decision tables to efficient sequential testing procedures, Comm.
+A C M 5 (1980) 279-285.
+[21] H. Strunz, Grundlagen und Anwendingsm6glichkeiten der Entscheidungs-tabellentechnik bei der Gestaltung
+rechnergestiintzter Informationsysteme, University of K61n, 1975.
+
+282
+
+J. Vanthienen, G. Wets / Data & Knowledge Engineering 13 (1994) 265-282
+
+[22] G.H. Subramanian and J. Nosek et al., A comparison of the decision table and tree, Comm. A C M 1 (1992)
+89-94.
+[23] M. Suwa, A. Scott and E. Shortliffe, Completeness and consistency in a rule-based system, in: Buchanan &
+Shortliffe 159-170.
+[24] J. Vanthienen, Automatiseringsaspecten van de specificatie, constructie en manipulatie van beslissingstabellen,
+K.U.Leuven Dept. Applied Econ. Doctoral Dissertation, 1986.
+[25] J. Vanthienen, Knowledge acquisition and validation using a decision table engineering workbench, The World
+Congress on Expert Systems (Pergamon Press, Orlando, FL 1991), 1861-1868.
+[26] J. Vanthienen and E. Dries, Illustration of a decision table tool for specifying and implementing knowledge
+based systems, Proc. Fifth Int. Conf. on Tools with Artificial Intelligence (TAI), Boston, M A (1993) 198-205.
+[27] J. Vanthienen and F. Robben, Developing legal knowledge based systems using decision tables, Proc. Fourth
+Int. Conf. on A.I. and Law, Amsterdam (1993) 282-291.
+[28] J. Vanthienen and M. Snoeck, Knowledge factoring using normalisation theory, Int. Symp. on the Management
+of Industrial and Corporate Knowledge (ISMICK'93) Compi~gne (1993).
+[29] J. Var~thienen and G. Wets, Building intelligent systems for management applications using decision tables,
+Proc. Fifth Annual Conf. on Intelligent Systems in Accounting, Finance and Management, Stanford (1993) 16
+PP.
+[30] M. Verhelst, The conversion of limited-entry decision tables to optimal and near-optimal flowcharts: Two new
+algorithms, Comm. A C M 11 (1972) 974-980.
+[31] M. Verhelst, De Praktijk van BeslissingstabeUen (Kluwer, Deventer/Antwerpen, 1980).
+[32] I. Vessey and R. Weber, Structured tools and conditional logic: An empirical investigation, Comm. A C M 1
+(1986) 48-57.
+Jan Vanthienen is associate professor
+
+of information systems at K.U.
+Leuven, Department of Applied
+Economic Sciences. His main research areas are knowledge based
+systems and expert systems, decision
+tables, information systems analysis
+and design. He is a founding member
+of: Leuven Institute for Research in
+Information Systems (LIRIS), and
+Interfaculty Center for Law and Informatics (ICRI), both of K.U.
+Leuven.
+
+Geert Wets is research assistant at
+
+K.U. Leuven, Department of Applied Economic Sciences, focusing on
+the area of decision tables and expert
+systems. He received a BSc of commercial engineer, major informatics
+at K.U. Leuven in 1991.
+
+

@@ -1,0 +1,168 @@
+# SEO A/B Test Log — Template e Exemplos
+# Atualizado: 2026-02
+# Uso: agentes seo-affiliate e growth-optimizer devem registrar todos os testes SEO aqui
+# Metodologia: Cada teste segue princípios de SEO split testing (ferramenta: SplitSignal, Wynter, ou manual)
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  instructions: >
+    Adicione novos testes ao array `tests` abaixo. Nunca edite entradas com status `completed`.
+    Testes ativos devem ter status `running`. Use IDs sequenciais por site (ex: SEO-001, SEO-002).
+  minimum_sample: "300 sessões orgânicas por variação antes de declarar vencedor"
+  stat_significance: "95% de confiança mínima para declarar resultado"
+
+tests:
+
+  - id: SEO-001
+    site: colchoes-guia.com.br
+    hypothesis: >
+      Adicionar o ano atual ao title tag de páginas de review ('Melhores Colchões [YEAR]')
+      aumentará o CTR orgânico em páginas de ranking, pois usuários preferem resultados recentes.
+    page_type: category_review
+    target_pages:
+      - /melhores-colchoes/
+      - /melhores-colchoes-de-espuma/
+      - /colchao-de-mola-x-espuma/
+    control:
+      title_format: "Melhores Colchões — Guia Completo | ColchãoGuia"
+      meta_description: "Descubra os melhores colchões do mercado. Comparamos X modelos testados."
+    variation:
+      title_format: "Melhores Colchões 2025 — Guia Completo | ColchãoGuia"
+      meta_description: "Melhores colchões de 2025 testados e comparados. Veja o ranking atualizado."
+    metric:
+      primary: ctr_organic
+      secondary:
+        - avg_position
+        - sessions_organic
+    tool: google_search_console
+    start_date: "2025-03-01"
+    end_date: "2025-04-15"
+    duration_days: 45
+    status: completed
+    result:
+      ctr_change_pct: +18.3
+      position_change: -0.4
+      sessions_change_pct: +22.1
+      winner: variation
+      confidence_pct: 97
+    learnings: >
+      Adicionar o ano ao title tag gerou +18% de CTR e +22% de sessões orgânicas.
+      O impacto foi maior em mobile (CTR +24%) que desktop (+12%). Meses de
+      janeiro e fevereiro provavelmente amplificam o efeito (usuários buscam
+      conteúdo atualizado no início do ano). Replicar em todos os sites do portfolio.
+    next_action: "Aplicar em todos os hubs de review. Testar com mês além do ano."
+    tags:
+      - title_tag
+      - ctr
+      - freshness
+
+  - id: SEO-002
+    site: vpn-compare.com
+    hypothesis: >
+      Adicionar uma tabela comparativa com ratings e badges 'Melhor para X' no topo
+      da página de pillar content aumentará o tempo na página e reduzirá a taxa de
+      rejeição, sinalizando maior qualidade para o Google.
+    page_type: pillar_content
+    target_pages:
+      - /best-vpn/
+    control:
+      description: "Introdução de 300 palavras + lista de VPNs em texto corrido"
+      avg_time_on_page_seconds: 95
+      bounce_rate_pct: 68
+    variation:
+      description: >
+        Introdução de 150 palavras + tabela comparativa interativa (Top 5 VPNs com
+        rating, preço, e badge 'Melhor para [uso]') antes do conteúdo principal
+      avg_time_on_page_seconds: null
+      bounce_rate_pct: null
+    metric:
+      primary: time_on_page
+      secondary:
+        - bounce_rate
+        - scroll_depth
+        - conversion_rate_affiliate
+    tool: ga4_manual_split
+    start_date: "2025-06-15"
+    end_date: "2025-07-31"
+    duration_days: 46
+    status: completed
+    result:
+      time_on_page_change_pct: +34.2
+      bounce_rate_change_pct: -19.8
+      scroll_depth_change_pct: +28.0
+      conversion_rate_change_pct: +11.5
+      winner: variation
+      confidence_pct: 96
+    learnings: >
+      Tabela comparativa no topo reduziu bounce rate em 20% e aumentou tempo
+      na página em 34%. Usuários que chegam via query comparativa (best X vs Y)
+      engajam mais com conteúdo visual de decisão rápida. Conversão de afiliado
+      também subiu 11.5% — a tabela funciona como CTA implícito. Padrão de
+      'tabela no topo' deve ser template padrão para pillar pages de review.
+    next_action: >
+      Implementar tabela comparativa em todas as pillar pages do portfolio.
+      Próximo teste: testar tabela estática vs tabela com filtro interativo.
+    tags:
+      - ux
+      - engagement
+      - conversion
+      - table_layout
+
+  - id: SEO-003
+    site: colchoes-guia.com.br
+    hypothesis: >
+      Adicionar FAQ schema markup (5-8 perguntas) em posts de review aumentará
+      a presença em featured snippets e aumentará CTR por ocupar mais espaço no SERP.
+    page_type: review_post
+    target_pages:
+      - /colchao-castor/
+      - /colchao-ortobom/
+      - /colchao-americanflex/
+    control:
+      description: "Review com schema Article padrão. Sem FAQ schema."
+    variation:
+      description: "Review com schema Article + FAQ schema (6 perguntas baseadas em People Also Ask)"
+    metric:
+      primary: rich_result_presence
+      secondary:
+        - ctr_organic
+        - impressions
+    tool: google_search_console
+    start_date: "2026-01-10"
+    end_date: null
+    duration_days: null
+    status: running
+    result: null
+    learnings: null
+    next_action: "Aguardar 60 dias para coleta de dados suficiente."
+    tags:
+      - schema_markup
+      - rich_results
+      - faq
+      - featured_snippet
+
+template_empty:
+  - id: "SEO-XXX"
+    site: "domain.com"
+    hypothesis: >
+      [Descreva a hipótese em formato: SE [mudança] ENTÃO [resultado] PORQUE [razão]]
+    page_type: "pillar_content | category_review | review_post | landing_page"
+    target_pages:
+      - "/url-da-pagina/"
+    control:
+      description: "Estado atual da página"
+    variation:
+      description: "O que será mudado"
+    metric:
+      primary: "ctr_organic | time_on_page | conversion_rate | position"
+      secondary: []
+    tool: "google_search_console | ga4 | splitsignal | manual"
+    start_date: "YYYY-MM-DD"
+    end_date: null
+    duration_days: null
+    status: "planned | running | completed | cancelled"
+    result: null
+    learnings: null
+    next_action: null
+    tags: []

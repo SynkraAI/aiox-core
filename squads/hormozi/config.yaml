@@ -1,0 +1,323 @@
+# Hormozi Squad — The $100M Mind System v1.0
+# One mind, multiple specialties. Methodology consistency with brutal depth.
+
+pack:
+  name: hormozi
+  title: "Hormozi Squad — The $100M Mind System"
+  version: "1.0.0"
+  author: "AIOS Team"
+  description: "15 specialized Alex Hormozi agents, each mastering one aspect of his methodology"
+  icon: "💰"
+  slash_prefix: "hormozi"
+  entry_agent: hormozi-chief
+
+metadata:
+  created: 2026-02-09
+  source_mind: alex_hormozi
+  fidelity_target: 0.90
+  total_source_files: 165
+  total_source_size_mb: 165
+  mmos_artifacts: 70
+  mental_models: 8
+
+# MMOS Integration
+mmos_integration:
+  enabled: true
+  log_source: true
+  fallback_behavior: "graceful"
+  mind_mapping:
+    hormozi-chief: alex_hormozi
+    hormozi-offers: alex_hormozi
+    hormozi-leads: alex_hormozi
+    hormozi-models: alex_hormozi
+    hormozi-hooks: alex_hormozi
+    hormozi-ads: alex_hormozi
+    hormozi-pricing: alex_hormozi
+    hormozi-copy: alex_hormozi
+    hormozi-launch: alex_hormozi
+    hormozi-retention: alex_hormozi
+    hormozi-advisor: alex_hormozi
+    hormozi-audit: alex_hormozi
+    hormozi-closer: alex_hormozi
+    hormozi-scale: alex_hormozi
+    hormozi-workshop: alex_hormozi
+    hormozi-content: alex_hormozi
+
+# Agents — Organized by Tier
+agents:
+  # Tier 0: Orchestrator
+  - id: hormozi-chief
+    name: "Hormozi Chief"
+    role: "Master orchestrator — routing, strategy, coordination"
+    tier: 0
+    primary_sources:
+      - prompts/Hormozi/00_COGNITIVE_OS.md
+      - prompts/Hormozi/08_INDUSTRY_ADAPTATION.md
+      - artifacts/mental_models.yaml
+
+  # Tier 1: Core Specialists (Books)
+  - id: hormozi-offers
+    name: "Hormozi Offers"
+    role: "Grand Slam Offers, Value Equation, offer engineering"
+    tier: 1
+    primary_sources:
+      - prompts/offers.md
+      - prompts/Hormozi/02_VALUE_EQUATION_ENGINE.md
+      - prompts/Hormozi/03_OFFER_CREATION_SYSTEM.md
+
+  - id: hormozi-leads
+    name: "Hormozi Leads"
+    role: "Core Four, lead magnets, content strategy"
+    tier: 1
+    primary_sources:
+      - prompts/leads.md
+      - sources/01 Livros/Livro 100M Leads/
+
+  - id: hormozi-models
+    name: "Hormozi Models"
+    role: "Money Models, upsells, downsells, continuity"
+    tier: 1
+    primary_sources:
+      - prompts/money.md
+      - sources/01 Livros/Livro 100m Modelos/
+
+  # Tier 2: Execution Specialists (Playbooks)
+  - id: hormozi-hooks
+    name: "Hormozi Hooks"
+    role: "Hook creation, 121 formulas, first 5 seconds"
+    tier: 2
+    primary_sources:
+      - prompts/hooks.md
+      - sources/02 Playbooks/Hooks/
+
+  - id: hormozi-ads
+    name: "Hormozi Ads"
+    role: "GOATed ads, scripts, angles"
+    tier: 2
+    primary_sources:
+      - prompts/ads.md
+      - sources/02 Playbooks/Ads/
+
+  - id: hormozi-pricing
+    name: "Hormozi Pricing"
+    role: "Pricing strategy, anchoring, raises"
+    tier: 2
+    primary_sources:
+      - sources/02 Playbooks/Pricing/
+      - sources/02 Playbooks/Price Raise/
+
+  - id: hormozi-copy
+    name: "Hormozi Copy"
+    role: "Sales copy, LPs, VSLs"
+    tier: 2
+    primary_sources:
+      - sources/02 Playbooks/Copy/
+      - sources/03 Programas/Blueprint $100M Money Models/
+
+  - id: hormozi-launch
+    name: "Hormozi Launch"
+    role: "Launch sequences, timelines"
+    tier: 2
+    primary_sources:
+      - sources/02 Playbooks/Launch/
+
+  - id: hormozi-retention
+    name: "Hormozi Retention"
+    role: "LTV, retention, nurture, continuity"
+    tier: 2
+    primary_sources:
+      - sources/02 Playbooks/Retention/
+      - sources/02 Playbooks/Lead Nurture/
+      - sources/02 Playbooks/Lifetime Value/
+
+  # Tier 3: Strategic Specialists
+  - id: hormozi-advisor
+    name: "Hormozi Advisor"
+    role: "Strategic counsel, Q&A"
+    tier: 3
+    primary_sources:
+      - artifacts/cognitive_architecture.yaml
+      - artifacts/belief-system.yaml
+
+  - id: hormozi-audit
+    name: "Hormozi Audit"
+    role: "Offer/LP audits, diagnostics"
+    tier: 3
+    primary_sources:
+      - prompts/Hormozi/05_ANTIPATTERN_SHIELDS.md
+      - sources/02 Playbooks/Ofertas/
+      - sources/02 Playbooks/Prova/
+
+  - id: hormozi-closer
+    name: "Hormozi Closer"
+    role: "Sales scripts, objection handling"
+    tier: 3
+    primary_sources:
+      - sources/02 Playbooks/Fechamento/
+
+  - id: hormozi-scale
+    name: "Hormozi Scale"
+    role: "Scaling strategy, 9-stage roadmap"
+    tier: 3
+    primary_sources:
+      - sources/02 Playbooks/Scaling Roadmap/
+
+  - id: hormozi-workshop
+    name: "Hormozi Workshop"
+    role: "Workshop design, frameworks"
+    tier: 3
+    primary_sources:
+      - sources/02 Playbooks/Workshops/
+
+  - id: hormozi-content
+    name: "Hormozi Content"
+    role: "Content strategy, creation"
+    tier: 3
+    primary_sources:
+      - sources/01 Livros/Livro 100M Leads/Postar Conteudo Gratuito Parte I.md
+
+# Sources
+sources:
+  minds_path: squads/mind-cloning/minds/alex_hormozi
+  prompts_path: docs/projects/hormozi-squad/prompts
+  artifacts_path: squads/mind-cloning/minds/alex_hormozi/artifacts
+
+# Mental Models (8 confirmed)
+mental_models:
+  - id: MM_001
+    name: "Value Equation"
+    formula: "Value = (Dream Outcome x Likelihood) / (Time + Effort)"
+    type: universal
+    transferability: 0.95
+
+  - id: MM_002
+    name: "Grand Slam Offer"
+    insight: "Offer so good people feel stupid saying no"
+    type: domain
+    transferability: 0.85
+
+  - id: MM_003
+    name: "Framework-First Reasoning"
+    insight: "Convert all problems to systematic frameworks"
+    type: universal
+    transferability: 0.60
+
+  - id: MM_004
+    name: "External Metrics as Reality Anchor"
+    insight: "If unmeasurable, doesn't exist"
+    type: universal
+
+  - id: MM_005
+    name: "Core Four Lead Generation"
+    insight: "Warm, Content, Cold, Paid"
+    type: domain
+
+  - id: MM_006
+    name: "Rule of 100"
+    insight: "Daily volume commitment"
+    type: domain
+
+  - id: MM_007
+    name: "More, Better, New"
+    insight: "Growth prioritization sequence"
+    type: domain
+
+  - id: MM_008
+    name: "LTV:CAC 3:1"
+    insight: "Unit economics benchmark"
+    type: domain
+
+# Workflows
+workflows:
+  - id: wf-grand-slam-offer
+    name: "Grand Slam Offer Creation"
+    version: "1.0.0"
+    duration: "3-5 days"
+    phases: 5
+    description: "Create irresistible offers using Hormozi methodology"
+    agents_involved:
+      - hormozi-chief
+      - hormozi-offers
+      - hormozi-pricing
+      - hormozi-copy
+      - hormozi-audit
+    source_frameworks:
+      - "OFFER_CREATION_SYSTEM"
+      - "VALUE_EQUATION_ENGINE"
+    quality_score: "PASS"
+    lines: 1135
+
+# Shared Data Files (DNA Extracted from Sources)
+shared_data:
+  voice_dna: ../mind-cloning/minds/hormozi/outputs/hormozi-voice-dna.yaml
+  thinking_dna: ../mind-cloning/minds/hormozi/outputs/hormozi-thinking-dna.yaml
+  case_library: data/hormozi-case-library.yaml
+
+  # Per-agent DNA (specialized extractions)
+  agent_dna:
+    hormozi-offers: ../mind-cloning/minds/hormozi/outputs/hormozi-offers_dna.yaml
+    hormozi-leads: ../mind-cloning/minds/hormozi/outputs/hormozi-leads_dna.yaml
+    hormozi-models: ../mind-cloning/minds/hormozi/outputs/hormozi-models_dna.yaml
+    hormozi-hooks: ../mind-cloning/minds/hormozi/outputs/hormozi-hooks_dna.yaml
+    hormozi-ads: ../mind-cloning/minds/hormozi/outputs/hormozi-ads_dna.yaml
+    hormozi-pricing: ../mind-cloning/minds/hormozi/outputs/hormozi-pricing_dna.yaml
+    hormozi-copy: ../mind-cloning/minds/hormozi/outputs/hormozi-copy_dna.yaml
+    hormozi-launch: ../mind-cloning/minds/hormozi/outputs/hormozi-launch_dna.yaml
+    hormozi-retention: ../mind-cloning/minds/hormozi/outputs/hormozi-retention_dna.yaml
+    hormozi-advisor: ../mind-cloning/minds/hormozi/outputs/hormozi-advisor_dna.yaml
+    hormozi-audit: ../mind-cloning/minds/hormozi/outputs/hormozi-audit_dna.yaml
+    hormozi-closer: ../mind-cloning/minds/hormozi/outputs/hormozi-closer_dna.yaml
+    hormozi-scale: ../mind-cloning/minds/hormozi/outputs/hormozi-scale_dna.yaml
+    hormozi-workshop: ../mind-cloning/minds/hormozi/outputs/hormozi-workshop_dna.yaml
+    hormozi-content: ../mind-cloning/minds/hormozi/outputs/hormozi-content_dna.yaml
+
+# Veto Conditions (Centralized)
+veto_conditions:
+  config_file: config/veto-conditions.yaml
+  enforcement: strict
+  tiers:
+    tier_0_universal: 3   # Apply to ALL agents
+    tier_1_workflow: 8    # Apply to wf-grand-slam-offer
+    tier_2_agent_specific: 6  # Per-agent rules
+    tier_3_handoff: 1     # Specialist-to-specialist
+  handoff_template: templates/handoff-context-tmpl.yaml
+  mandatory_checklists:
+    antipattern: checklists/antipattern-screening.md
+    market_validation: checklists/market-validation-veto.md
+    golden_ratios: checklists/golden-ratios-veto.md
+
+# Validation Scripts (Tools for Agents)
+validation_scripts:
+  mvn_validator:
+    path: scripts/validate-mvn.py
+    usage: "python squads/hormozi/scripts/validate-mvn.py --inline 'ticket:X,cac:X,...'"
+    trigger: "Before any calculation involving price, ROI, LTV, CAC"
+    returns: "PASS (exit 0) or FAIL (exit 1)"
+
+  handoff_validator:
+    path: scripts/validate-handoff.py
+    usage: "python squads/hormozi/scripts/validate-handoff.py <file.yaml>"
+    trigger: "Before any specialist-to-specialist handoff"
+    returns: "PASS (exit 0) or FAIL (exit 1)"
+
+  antipattern_validator:
+    path: scripts/validate-antipattern.py
+    usage: "python squads/hormozi/scripts/validate-antipattern.py --interactive"
+    trigger: "Before approving offer for launch"
+    returns: "PASS (exit 0) or VETO (exit 1)"
+
+# Dependencies
+dependencies:
+  - aios-core
+
+tags:
+  - hormozi
+  - offers
+  - leads
+  - money-models
+  - business-strategy
+  - scaling
+  - direct-response
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

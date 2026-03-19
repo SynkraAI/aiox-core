@@ -1,0 +1,117 @@
+# Negotiation Squad - Elite Negotiators & Sales Closers
+# 7 elite minds + 1 orchestrator for the complete sales negotiation pipeline
+# Version: 1.0.0
+# Created: 2026-03-11
+
+name: negotiation
+version: "1.0.0"
+entry_agent: negotiation-chief
+
+squad:
+  name: negotiation
+  display_name: "Negotiation Squad"
+  version: "1.0.0"
+  domain: "negotiation, sales, closing, prospecting, deal-making, persuasion"
+  description: |
+    Squad de 7 elite minds reais para o pipeline completo de negociacao:
+    desde analise do perfil do comprador, identificacao de clientes ideais,
+    prospecao, pitch, descoberta, negociacao tatica ate fechamento estrategico.
+    Cada agente tem framework documentado com skin in the game.
+    Fluxo unidirecional: Profile → Prospect → Contact → Pitch → Discover → Negotiate → Close.
+
+  pipeline_flow:
+    - phase: "buyer-profiling"
+      agent: "robert-cialdini"
+      description: "Analyze buyer psychology using 7 Principles of Influence"
+    - phase: "client-identification"
+      agent: "chet-holmes"
+      description: "Identify Dream 100 ideal clients"
+    - phase: "prospecting"
+      agent: "jeb-blount"
+      description: "Multi-channel outreach and pipeline building"
+    - phase: "pitching"
+      agent: "oren-klaff"
+      description: "Frame control and STRONG method pitch"
+    - phase: "discovery"
+      agent: "neil-rackham"
+      description: "SPIN Selling qualification and needs analysis"
+    - phase: "negotiation"
+      agent: "chris-voss"
+      description: "Tactical empathy negotiation"
+    - phase: "closing"
+      agent: "jim-camp"
+      description: "Strategic closing with Start With No system"
+
+  strategic_advisor:
+    agent: "william-ury"
+    description: "Principled negotiation advisor, BATNA analysis, breakthrough strategy"
+
+  keywords:
+    - negotiation
+    - sales
+    - closing
+    - prospecting
+    - pitch
+    - deal-making
+    - persuasion
+    - influence
+    - buyer psychology
+    - B2B sales
+    - SPIN selling
+    - tactical empathy
+    - Dream 100
+
+# Pattern Library
+pattern_library:
+  prefix: NG
+  naming_convention:
+    format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+    example: "NG-TP-001"
+  categories:
+    - id: TP
+      name: "Task Patterns"
+      description: "Patterns for negotiation task structure"
+    - id: EP
+      name: "Executor Patterns"
+      description: "Patterns for executor selection"
+    - id: PP
+      name: "Process Patterns"
+      description: "Patterns for negotiation workflows"
+    - id: NP
+      name: "Negotiation Patterns"
+      description: "Patterns for negotiation tactics and strategies"
+
+# Task Standards
+task_standards:
+  enforce_anatomy: true
+  validator: "NG-TP-001"
+  required_fields:
+    - task_name
+    - status
+    - responsible_executor
+    - execution_type
+    - input
+    - output
+    - action_items
+    - acceptance_criteria
+
+# Executor Types
+executor_types:
+  human:
+    id: "NG-EP-001"
+    use_for: ["Real negotiations", "Client meetings", "Final deal signing"]
+  agent:
+    id: "NG-EP-002"
+    use_for: ["Buyer profiling", "Strategy generation", "Proposal drafting", "Objection prep"]
+  hybrid:
+    id: "NG-EP-003"
+    use_for: ["Negotiation coaching", "Deal review", "Pipeline analysis"]
+  worker:
+    id: "NG-EP-004"
+    use_for: ["CRM updates", "Contact enrichment", "Follow-up scheduling"]
+
+# Workflow Configuration
+workflow_config:
+  checkpoint_policy: always_active
+  fail_fast: true
+  allow_manual_override: false

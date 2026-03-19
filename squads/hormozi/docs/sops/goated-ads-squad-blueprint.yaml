@@ -1,0 +1,627 @@
+# Squad Blueprint: GOATed Ads Framework
+# Extracted from: $100M GOATed Ads Playbook
+# Version: 1.0
+# Date: 2026-02-10
+
+squad:
+  name: hormozi-ads
+  purpose: "Create 150-750 ads per week using the GOATed Ads assembly process to scale paid advertising beyond the 'saturation ceiling'"
+  extracted_from: "goated-ads-sop.md"
+
+  philosophy: |
+    "Six-Pack-Abs are made in the kitchen, not in the gym. And like six-packs,
+    ads are made in research, not in recording."
+    - 80% time on hooks, 20% on meat, ~0% on CTAs
+    - Volume is the secret to finding winners
+    - Better ads = bigger audience converted
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIER STRUCTURE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+tier_structure:
+  orchestrator:
+    - ads-strategist
+    # Coordinates weekly ad creation and optimization
+
+  tier_0_research:
+    - market-researcher
+    - hook-hunter
+    # Pre-production research and hook collection
+
+  tier_1_creation:
+    - hook-writer
+    - meat-scripter
+    - cta-crafter
+    # Core creative production
+
+  tier_2_execution:
+    - campaign-launcher
+    - performance-optimizer
+    # Campaign setup and optimization
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENT DEFINITIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents:
+  ads-strategist:
+    role: "Orchestrator"
+    description: "Coordinates the GOATed Ads assembly process"
+    cognitive_type: "Judgment + Synthesis"
+    executor_type: "Hybrid"
+
+    responsibilities:
+      - "Define weekly ad production targets"
+      - "Allocate hooks across awareness levels"
+      - "Approve final ad combinations"
+      - "Decide kill/scale based on metrics"
+
+    weekly_cadence:
+      friday: "Ad production day"
+      daily: "5-minute performance check"
+      weekly: "Optimization decisions"
+
+    decision_rules:
+      - "DR-001: 90% hooks em Most Aware → espalhar"
+      - "DR-006: 80% resultado vem de 20% dos ads"
+      - "DR-009: Regra 20% para scale"
+
+  market-researcher:
+    role: "Tier 0 - Research"
+    description: "Analyzes competitors and market landscape"
+    cognitive_type: "Analysis"
+    executor_type: "Agent"
+
+    inputs:
+      - "Industry/niche"
+      - "Competitor list"
+      - "Ad libraries access"
+
+    outputs:
+      - "10 competitor ad analyses"
+      - "5 working angles identified"
+      - "3 dominant offers mapped"
+      - "Market gaps documented"
+
+    tools:
+      - "Facebook Ad Library"
+      - "TikTok Creative Center"
+      - "YouTube Ad Transparency"
+
+    deliverables:
+      competitor_analysis:
+        fields:
+          - "Brand name"
+          - "Hook used"
+          - "Meat format"
+          - "CTA style"
+          - "Estimated performance"
+
+  hook-hunter:
+    role: "Tier 0 - Research"
+    description: "Collects winning hooks from multiple sources"
+    cognitive_type: "Perception + Analysis"
+    executor_type: "Agent"
+
+    sources_priority:
+      1: "Previous winning ads (own)"
+      2: "Own organic content winners"
+      3: "Competitor ads"
+      4: "Viral content in niche"
+      5: "Ad libraries (last resort)"
+
+    outputs:
+      - "Hook swipe file (50+ per week)"
+      - "Hook categorization by awareness level"
+      - "Performance notes where available"
+
+    collection_rules:
+      - "Save all ads you like in phone album"
+      - "Note the hook separately from the ad"
+      - "Cross-industry hooks often work"
+
+  hook-writer:
+    role: "Tier 1 - Creation"
+    description: "Writes 50 hooks per week across awareness levels"
+    cognitive_type: "Creativity + Synthesis"
+    executor_type: "Agent"
+
+    inputs:
+      - "Hook swipe file from hook-hunter"
+      - "Awareness level distribution targets"
+      - "Avatar language/pain points"
+
+    outputs:
+      - "50 hooks minimum per session"
+      - "Distribution across 5 awareness levels"
+      - "Variations of proven winners"
+
+    frameworks:
+      awareness_templates:
+        most_aware: "Offer-driven hooks"
+        product_aware: "Proof-driven hooks"
+        solution_aware: "Promise-driven hooks"
+        problem_aware: "Pain-driven hooks"
+        unaware: "Curiosity-driven hooks"
+
+    distribution_rule: |
+      If 90% of hooks are in "Most Aware" bucket,
+      spread them out to capture bigger slice.
+      When in doubt, go a little broader.
+
+  meat-scripter:
+    role: "Tier 1 - Creation"
+    description: "Creates 3-5 ad meat scripts per session"
+    cognitive_type: "Creativity + Synthesis"
+    executor_type: "Agent"
+
+    inputs:
+      - "Product/service details"
+      - "Available assets (testimonials, demos)"
+      - "Proof points"
+
+    outputs:
+      - "3-5 meat scripts"
+      - "Format specification for each"
+      - "Asset requirements list"
+
+    formats:
+      demonstration:
+        types: ["unboxing", "before/after", "hero ad", "live use"]
+        when: "Physical product, visual result"
+
+      testimonial:
+        types: ["UGC", "podcast clip", "parade of proof", "walk n talk"]
+        when: "Strong social proof available"
+
+      education:
+        types: ["whiteboard", "how-to", "explainer"]
+        when: "Complex solution needs explanation"
+
+      story:
+        types: ["lifestyle", "documentary", "manifesto"]
+        when: "Emotional connection needed"
+
+      faceless:
+        types: ["screenshots", "text only", "animation"]
+        when: "No presenter, low budget"
+
+    video_structure:
+      - "0-3s: Hook"
+      - "3-10s: Agitate problem"
+      - "10-20s: Present solution"
+      - "20-27s: Social proof"
+      - "27-30s: Clear CTA"
+
+  cta-crafter:
+    role: "Tier 1 - Creation"
+    description: "Creates 1-3 CTAs per session"
+    cognitive_type: "Synthesis"
+    executor_type: "Worker"
+
+    inputs:
+      - "Offer details"
+      - "Landing page URL"
+      - "Conversion goal"
+
+    outputs:
+      - "1-3 CTA variations"
+      - "Visual demonstration script"
+
+    cta_anatomy:
+      what_to_do: "Action verb"
+      how_to_do: "Specific instruction"
+      when_to_do: "Urgency element"
+      what_they_get: "Benefit"
+      what_happens_next: "Next step preview"
+
+    principle: "Clear > Clever"
+
+    demonstration_rule: |
+      Show AND tell them what to do next.
+      Demonstrate visually what happens when they click.
+      Show the landing page, the form, the submit button.
+
+  campaign-launcher:
+    role: "Tier 2 - Execution"
+    description: "Sets up and launches ad campaigns"
+    cognitive_type: "Execution"
+    executor_type: "Worker"
+
+    inputs:
+      - "Approved hook+meat+CTA combinations"
+      - "Budget allocation"
+      - "Audience targeting specs"
+
+    outputs:
+      - "Live campaigns"
+      - "Proper tracking setup"
+      - "Initial performance baseline"
+
+    setup_checklist:
+      - "CBO enabled"
+      - "3-5 ad sets maximum"
+      - "Budget min $50/day per ad set"
+      - "Pixel + events configured"
+
+    targeting_rules:
+      - "Broad targeting (3-10% of population)"
+      - "NO stacked interests"
+      - "Age range: 10 years minimum"
+      - "Lookalike 1% from customer list"
+
+    math: "Broad audiences = 40% lower CPM"
+
+  performance-optimizer:
+    role: "Tier 2 - Execution"
+    description: "Monitors and optimizes campaign performance"
+    cognitive_type: "Analysis + Judgment"
+    executor_type: "Hybrid"
+
+    inputs:
+      - "Campaign performance data"
+      - "KPI thresholds"
+      - "Budget constraints"
+
+    outputs:
+      - "Kill/scale decisions"
+      - "Optimization recommendations"
+      - "Winner identification"
+
+    kpis_day_1:
+      CTR: ">1% (else hook ruim)"
+      CPM: "<$30 (else criativo ruim)"
+      CPC: "<$3 (else relevância baixa)"
+      link_CTR: ">0.8%"
+
+    kpis_day_2:
+      frequency: "<2"
+      CPL: "<50% of target"
+      add_to_cart: ">5%"
+      video_views_3s: ">30%"
+
+    decision_rules:
+      kill:
+        - "CTR <0.5%"
+        - "CPA doubled"
+        - "ROAS <2x for 3 days"
+        - "Relevance score <4"
+
+      scale:
+        - "ROAS >3x for 7 days"
+        - "CPA stable for 500+ conversions"
+        - "Frequency <3 after 14 days"
+        - "CTR maintains >1%"
+
+      refresh:
+        - "Frequency >10"
+        - "Creative fatigue (10-14 days)"
+
+    scale_methods:
+      rule_20: "Increase budget 20% every 48h"
+      horizontal: "Same copy, new audiences"
+      surfing: "Pause Friday, reactivate Monday"
+      day_parting: "Turn off overnight if B2B"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXECUTOR MATRIX
+# ═══════════════════════════════════════════════════════════════════════════════
+
+executor_matrix:
+  - task: "Competitor Analysis"
+    executor: "Agent"
+    automation: "HIGH"
+    guardrails: "Human reviews insights"
+
+  - task: "Hook Collection"
+    executor: "Agent"
+    automation: "HIGH"
+    guardrails: "Human curates final list"
+
+  - task: "Hook Writing"
+    executor: "Agent"
+    automation: "HIGH"
+    guardrails: "Human approves variations"
+
+  - task: "Meat Scripting"
+    executor: "Agent"
+    automation: "MEDIUM"
+    guardrails: "Human reviews scripts"
+
+  - task: "CTA Creation"
+    executor: "Worker"
+    automation: "HIGH"
+    guardrails: "Template-based"
+
+  - task: "Campaign Setup"
+    executor: "Worker"
+    automation: "HIGH"
+    guardrails: "Checklist validation"
+
+  - task: "Kill/Scale Decisions"
+    executor: "Hybrid"
+    automation: "MEDIUM"
+    guardrails: "Human approves major changes"
+
+  - task: "Creative Direction"
+    executor: "Human"
+    automation: "LOW"
+    guardrails: "Strategic decisions"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  QG-001:
+    name: "Pre-Launch Math Gate"
+    transition: "Start → Research"
+    conditions:
+      - "CAC máximo calculado"
+      - "Break-even definido"
+      - "Budget teste = 10x CPA"
+    type: "blocking"
+
+  QG-002:
+    name: "Research Completeness Gate"
+    transition: "Research → Creation"
+    conditions:
+      - "10 competitors analyzed"
+      - "Avatar language collected"
+      - "Awareness level mapped"
+    type: "blocking"
+
+  QG-003:
+    name: "Hook Volume Gate"
+    transition: "Creation → Assembly"
+    conditions:
+      - "50+ hooks written"
+      - "Distribution across 5 levels"
+    type: "blocking"
+
+  QG-004:
+    name: "Assembly Completeness Gate"
+    transition: "Assembly → Launch"
+    conditions:
+      - "150+ ad combinations ready"
+      - "Landing page match verified"
+      - "Tracking configured"
+    type: "blocking"
+
+  QG-005:
+    name: "Day 1 Performance Gate"
+    transition: "Launch → Continue"
+    conditions:
+      - "CTR >1%"
+      - "CPM <$30"
+    type: "warning"
+    action_if_fail: "Kill and restart"
+
+  QG-006:
+    name: "Scale Readiness Gate"
+    transition: "Optimize → Scale"
+    conditions:
+      - "ROAS >3x for 7 days"
+      - "100+ conversions"
+      - "CPA stable"
+    type: "blocking"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  weekly_ad_production:
+    trigger: "Every Friday"
+    duration: "~3 hours"
+
+    steps:
+      - agent: "market-researcher"
+        action: "Update competitive landscape"
+        duration: "30 min"
+        parallel: true
+
+      - agent: "hook-hunter"
+        action: "Collect new winning hooks"
+        duration: "30 min"
+        parallel: true
+
+      - agent: "hook-writer"
+        action: "Write 50 hooks"
+        duration: "1-2 hours"
+        gate: "QG-003"
+
+      - agent: "meat-scripter"
+        action: "Create 3-5 meat scripts"
+        duration: "1 hour"
+
+      - agent: "cta-crafter"
+        action: "Create 1-3 CTAs"
+        duration: "5 min"
+
+      - agent: "ads-strategist"
+        action: "Approve combinations"
+        gate: "QG-004"
+
+      - agent: "campaign-launcher"
+        action: "Launch campaigns"
+
+    output: "150-750 new ads live"
+
+  daily_optimization:
+    trigger: "Daily (5 min)"
+
+    steps:
+      - agent: "performance-optimizer"
+        action: "Check KPIs"
+        checks:
+          - "CPA today vs yesterday"
+          - "Frequency <5"
+          - "Budget utilization >90%"
+
+      - agent: "performance-optimizer"
+        action: "Execute kill decisions"
+        conditions:
+          - "CTR <0.5% → KILL"
+          - "CPA doubled → PAUSE"
+          - "Frequency >10 → REFRESH"
+
+      - agent: "ads-strategist"
+        action: "Note winners for next week"
+
+  scale_workflow:
+    trigger: "When QG-006 passes"
+
+    steps:
+      - agent: "performance-optimizer"
+        action: "Confirm scale readiness"
+        gate: "QG-006"
+
+      - agent: "ads-strategist"
+        action: "Approve scale approach"
+        options:
+          - "Vertical: +20% budget every 48h"
+          - "Horizontal: New audiences"
+          - "Both: Combined approach"
+
+      - agent: "campaign-launcher"
+        action: "Execute scale"
+        monitoring: "Daily for 2 weeks"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# BUDGET ALLOCATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+budget_allocation:
+  proven_campaigns: 70%
+  new_tests: 20%
+  retargeting: 10%
+
+  minimum_per_ad_set: "$50/day"
+  test_budget: "10x expected CPA"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METRICS & KPIs
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metrics:
+  production:
+    - name: "Ads Created per Week"
+      target: "150-750"
+    - name: "Hook Distribution"
+      target: "Spread across 5 awareness levels"
+
+  performance:
+    - name: "CTR"
+      threshold: ">1%"
+      kill_threshold: "<0.5%"
+    - name: "CPM"
+      threshold: "<$30"
+    - name: "ROAS"
+      scale_threshold: ">3x for 7 days"
+    - name: "Frequency"
+      refresh_threshold: ">10"
+
+  efficiency:
+    - name: "Winner Rate"
+      expected: "20% of ads drive 80% of results"
+    - name: "Creative Fatigue"
+      typical: "10-14 days"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TROUBLESHOOTING MATRIX
+# ═══════════════════════════════════════════════════════════════════════════════
+
+troubleshooting:
+  high_cpm:
+    causes:
+      - "Creative fatigue (frequency >7)"
+      - "Relevance score <6"
+      - "High competition period (Q4, Black Friday)"
+      - "Account penalty"
+    actions:
+      - "Refresh creative"
+      - "Check relevance score"
+      - "Adjust targeting"
+
+  rising_cpa:
+    causes:
+      - "Landing page converting less"
+      - "Offer lost power"
+      - "Competitor has better offer"
+      - "Algorithm change"
+    actions:
+      - "Test new landing page"
+      - "Refresh offer"
+      - "Analyze competitors"
+
+  low_ctr:
+    causes:
+      - "Weak hook"
+      - "Generic visual"
+      - "Copy doesn't resonate"
+      - "Market saturation"
+    actions:
+      - "Test new hooks"
+      - "Improve visual"
+      - "Update copy with fresh language"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SWIPE FILE CATEGORIES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+swipe_categories:
+  retargeting_angles:
+    - "Quick Reminder"
+    - "Still There For You"
+    - "What You Saw"
+    - "Worth Remembering"
+    - "In Case You Forgot"
+    - "The Real Value"
+    - "What You Get"
+    - "Just Clarifying"
+    - "Your Benefits"
+    - "Simple Reminder"
+
+  trial_offer_angles:
+    - "The Complete Free Stack"
+    - "X Days to Build Your Empire"
+    - "From Theory to Reality"
+    - "The $XXK Value Stack"
+    - "Everything You Need to Start"
+    - "X% Make Sales Month One"
+    - "The Platform Built for X"
+    - "Don't Give Up - Get X Days"
+    - "Free Tech + Free Training"
+    - "The Head Start You Need"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DEPENDENCIES & INTEGRATIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+dependencies:
+  sops:
+    - "goated-ads-sop.md"
+    - "pricing-framework-sop.md"  # For offer optimization
+
+  tools:
+    - "Facebook Ads Manager"
+    - "Facebook Ad Library"
+    - "TikTok Creative Center"
+    - "Video editing software"
+    - "Screenshot capture tools"
+
+  templates:
+    - "Hook swipe file template"
+    - "Meat script template"
+    - "CTA formula template"
+    - "Performance tracking sheet"
+
+integrations:
+  content_team: "Provides organic winners for hook mining"
+  sales_team: "Provides customer language for copy"
+  analytics: "Provides performance data for optimization"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

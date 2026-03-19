@@ -1,0 +1,55 @@
+squad:
+  name: luiz-fosc
+  display_name: "Luiz Fosc — O Realizador Antifrágil"
+  version: "3.0.0"
+  icon: "🎩"
+  description: >
+    Mind clone de Luiz Fosc — ilusionista profissional, palestrante com 500+ palestras,
+    recordista do Guinness World Records, co-founder do Ensinio, mentor de palestrantes.
+    Especialista em Mentoria Palestra de Elite (Método FOSC), storytelling cinematográfico,
+    diagnóstico narrativo, posicionamento de marca e MBTI aplicado.
+
+  type: stream-aligned
+  tier: standalone
+
+  agents:
+    - luiz-fosc  # T0 — Único agente, diagnóstico + execução
+
+  capabilities:
+    - mentoria-palestra-elite
+    - storytelling-cinematografico
+    - diagnostico-narrativo
+    - posicionamento-mercado
+    - criacao-conteudo
+    - mbti-analysis
+
+  domains:
+    primary: "public-speaking, authority-building"
+    secondary: "personal-branding, mbti, storytelling"
+
+  integrations:
+    - squad: storytelling-masters-fosc
+      type: collaboration
+      when: "Multi-expert storytelling consultation"
+    - squad: copywriting-squad
+      type: handoff
+      when: "Professional sales copy needed"
+    - squad: content-engine
+      type: handoff
+      when: "Content planning and distribution"
+
+  data_sources:
+    - squads/mind-cloning/minds/luiz-fosc/  # Voice DNA, Thinking DNA
+    - squads/luiz-fosc/data/mbti/  # MBTI reference data
+
+  metadata:
+    created: "2024-06-15"
+    upgraded: "2026-03-09"
+    mind_clone_version: "3.0.0"
+    certifications:
+      - "MBTI Step I & II (Fellipelli)"
+      - "Master Coach (Marc Savard Institute)"
+      - "Master Hypnotist (Marc Savard Institute)"
+    records:
+      - "Guinness World Record: 5,568 Faro shuffles in 12h (2017)"
+      - "Guinness World Record: 77 Faro cycles in 1h (2025)"

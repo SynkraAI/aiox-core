@@ -1,0 +1,270 @@
+# Programas de Afiliados — Marketplaces Brasileiros
+# Atualizado: 2026-02 | Fonte: sites oficiais dos programas + pesquisa de mercado
+# Uso: agente marketplace-ops e affiliate-strategist
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  currency: BRL
+  note: >
+    Comissões variam por categoria e são alteradas periodicamente pelos marketplaces.
+    Confirme sempre nas plataformas oficiais antes de produzir conteúdo.
+
+marketplaces:
+
+  amazon_br:
+    name: "Amazon Brasil"
+    url: https://www.amazon.com.br
+    affiliate_program_url: https://associados.amazon.com.br
+    affiliate_program_name: "Amazon Associados"
+    market_share_br_pct: 15
+    product_catalog_size: "500M+ (inclui marketplace third-party)"
+    cookie_duration_days: 1
+    cookie_notes: >
+      24 horas após clique. 90 dias se o produto for adicionado ao carrinho
+      durante a sessão de clique. Compras de assinaturas Prime têm cookie diferente.
+    payment_method:
+      - pix
+      - transferencia_bancaria
+      - cartao_presente_amazon
+    payment_frequency: monthly
+    payment_day: "dia 20 do mês seguinte ao mês de 60 dias atrás"
+    payment_notes: "Pagamento após 2 meses da compra (para cobrir período de devolução)."
+    minimum_payout_brl: 30
+    commission_by_category:
+      moda_roupas: 10.0
+      moda_calcados: 10.0
+      moda_bolsas: 10.0
+      joias_relogios: 10.0
+      beleza: 5.0
+      saude_cuidados_pessoais: 5.0
+      alimentos_bebidas: 5.0
+      casa_decoracao: 4.0
+      jardim_ferramentas: 4.0
+      eletrodomesticos: 3.0
+      informatica: 3.0
+      eletronicos: 3.0
+      celulares_tablets: 3.0
+      games_consoles: 2.0
+      games_digital: 2.0
+      livros: 4.5
+      kindle_livros_digitais: 5.0
+      brinquedos: 4.0
+      esportes_fitness: 4.5
+      automoveis_pecas: 3.0
+      pet_shop: 4.0
+      ferramentas_construcao: 3.5
+      musica_instrumentos: 4.0
+      other: 2.0
+    special_programs:
+      amazon_prime:
+        commission_new_member: 3.00
+        commission_notes: "R$3 por nova assinatura Prime via link de afiliado."
+      kindle_unlimited:
+        commission_new_subscriber: 2.00
+    deep_link: true
+    native_ads: true
+    native_ads_notes: "Amazon Native Shopping Ads — anúncios de produtos contextuais para blog."
+    strengths:
+      - maior variedade de produtos do mercado BR
+      - marca de altíssima confiança (alta conversão)
+      - cookie de carrinho de 90 dias compensa o cookie curto de 24h
+      - relatórios detalhados com dados de categorias e produtos
+      - Native Ads para monetização sem links manuais
+    weaknesses:
+      - comissões baixas comparado a Shopee e afiliados diretos
+      - cookie de 24h para compra direta é muito curto
+      - regras de uso de marca rígidas
+      - proibição de uso da marca em domínios de sites de afiliado
+    best_niches:
+      - livros_e_ebooks
+      - moda_e_acessorios
+      - pet_shop
+      - fitness_e_esportes
+      - beleza_e_saude
+    notes: >
+      Amazon BR é a escolha padrão para sites de review de produtos físicos.
+      A confiança da marca compensa as comissões menores. Foco em produtos
+      com ticket médio acima de R$150 para comissões significativas.
+      Native Ads e OneLink (para leitores internacionais) são diferenciais importantes.
+
+  shopee_br:
+    name: "Shopee Brasil"
+    url: https://shopee.com.br
+    affiliate_program_url: https://shopee.com.br/m/programa-de-afiliados
+    affiliate_program_name: "Shopee Afiliados"
+    market_share_br_pct: 35
+    market_share_notes: "Shopee é o marketplace com maior número de transações no Brasil em 2025."
+    product_catalog_size: "200M+ (estimativa)"
+    cookie_duration_days: 7
+    cookie_notes: >
+      7 dias após clique — melhor que Amazon. Last-click attribution.
+    payment_method:
+      - pix
+      - transferencia_bancaria
+    payment_frequency: monthly
+    payment_day: "dia 20 do mês seguinte"
+    minimum_payout_brl: 50
+    commission_by_category:
+      moda_feminina: 7.0
+      moda_masculina: 7.0
+      calcados: 7.0
+      bolsas_acessorios: 7.0
+      beleza_cuidados: 6.0
+      saude_bem_estar: 5.0
+      casa_cozinha: 5.0
+      eletronicos: 3.0
+      celulares: 3.0
+      informatica: 3.0
+      eletrodomesticos: 3.0
+      pet_shop: 5.0
+      brinquedos: 5.0
+      esportes: 5.0
+      livros: 4.0
+      automotivo: 4.0
+      ferramentas: 4.0
+      alimentos: 4.0
+      games: 3.0
+      other: 3.0
+    commission_notes: >
+      Comissões Shopee tendem a ser maiores que Amazon em moda e beleza.
+      Mega-sales (11.11, 12.12, etc.) têm comissões elevadas temporariamente.
+    special_programs:
+      shopee_vouchers:
+        notes: "Vouchers exclusivos para afiliados aumentam conversão."
+      mega_sales:
+        events:
+          - "3.3 (Dia da Mulher)"
+          - "5.5"
+          - "6.6"
+          - "7.7"
+          - "8.8"
+          - "9.9"
+          - "10.10"
+          - "11.11 (Single's Day)"
+          - "12.12"
+        commission_boost: "Comissões e bônus aumentados durante mega-sales"
+    deep_link: true
+    native_ads: false
+    strengths:
+      - maior tráfego de e-commerce no Brasil
+      - cookie de 7 dias (melhor que Amazon)
+      - mega-sales mensais criam picos de conversão
+      - comissões maiores em moda e beleza que Amazon
+      - produtos de baixo ticket têm volume alto
+      - geração Z e millennials preferem Shopee
+    weaknesses:
+      - qualidade variável dos vendedores (afeta credibilidade do afiliado)
+      - produtos importados têm prazo de entrega longo (impacta conversão)
+      - menor confiança de marca que Amazon em tickets altos
+      - plataforma de afiliados menos robusta em relatórios
+    best_niches:
+      - moda_e_acessorios
+      - beleza_e_skincare
+      - casa_e_decoracao
+      - brinquedos
+      - eletronicos_entrada
+    affiliate_platform: "Shopee Affiliates (app mobile + web)"
+    notes: >
+      Shopee é essencial para afiliados no Brasil em 2025-2026.
+      Volume massivo de transações + cookie maior que Amazon = receita significativa.
+      Funciona melhor para audiência mais jovem e produtos de moda/beleza.
+      Mega-sales mensais criam oportunidades de conteúdo recorrente.
+
+  mercado_livre_br:
+    name: "Mercado Livre Brasil"
+    url: https://www.mercadolivre.com.br
+    affiliate_program_url: https://www.mercadolivre.com.br/afiliados
+    affiliate_program_name: "Mercado Livre Afiliados (via Tray Commerce ou direto)"
+    market_share_br_pct: 40
+    market_share_notes: "Maior marketplace do Brasil por GMV. Liderança especialmente em eletrônicos e usados."
+    product_catalog_size: "250M+ listagens ativas"
+    cookie_duration_days: 30
+    cookie_notes: >
+      30 dias após clique — melhor cookie dos principais marketplaces BR.
+      Attribution modelo: last-click.
+    payment_method:
+      - pix
+      - transferencia_bancaria
+    payment_frequency: monthly
+    payment_day: "variável por parceria (geralmente dia 15)"
+    minimum_payout_brl: 50
+    commission_by_category:
+      moda: 8.0
+      calcados: 8.0
+      esportes_fitness: 7.0
+      casa_moveis: 6.0
+      eletrodomesticos: 5.0
+      celulares: 4.0
+      eletronicos: 4.0
+      informatica: 4.0
+      games_consoles: 3.0
+      games_fisicos: 4.0
+      automotivo: 5.0
+      pet_shop: 6.0
+      brinquedos: 6.0
+      beleza: 6.0
+      saude: 5.0
+      livros: 5.0
+      ferramentas: 5.0
+      alimentos: 4.0
+      ingressos_eventos: 5.0
+      imoveis: 2.0
+      other: 4.0
+    commission_notes: >
+      ML tem comissões variáveis por vendedor também. Pode haver bônus por categoria.
+      Produtos do Mercado Livre direto podem ter comissões diferentes de third-party.
+    special_programs:
+      mercado_pago:
+        notes: "Afiliados podem ganhar por novos cadastros no Mercado Pago (fintech)."
+      mercado_livre_ads:
+        notes: "Sistema de anúncios para sellers — não para afiliados diretamente."
+      full_category_events:
+        - "Dia das Mães"
+        - "Dia dos Pais"
+        - "Black November"
+        - "Cyber Monday"
+        - "Natal"
+    deep_link: true
+    native_ads: false
+    strengths:
+      - maior GMV do Brasil (maior confiança de marca)
+      - cookie de 30 dias — melhor dos três principais
+      - forte em eletrônicos, carros e produtos de alto ticket
+      - Mercado Envios com logística rápida (Mercado Livre Full)
+      - programa de fidelidade Mercado Pontos atrativo para usuários
+      - mercado de usados único no Brasil (recondicionados)
+    weaknesses:
+      - plataforma de afiliados menos desenvolvida que Amazon
+      - UI mais complexa para criação de links de afiliado
+      - menor categoria de moda/beleza vs Shopee
+      - alguns sellers têm preços mais altos que Shopee por taxas maiores
+    best_niches:
+      - eletronicos_e_informatica
+      - automotivo
+      - eletrodomesticos
+      - ferramentas_e_construcao
+      - produtos_de_alto_ticket
+    notes: >
+      Mercado Livre é obrigatório para afiliados de eletrônicos, automotivo e
+      produtos de alto ticket no Brasil. Cookie de 30 dias é significativo —
+      permite capturar compradores que pesquisam por semanas.
+      Fintechs concorrentes (Mercado Pago) criam oportunidade adicional de afiliado.
+
+comparison_summary:
+  best_cookie: mercado_livre_br
+  best_commission_fashion: shopee_br
+  best_commission_electronics: mercado_livre_br
+  most_trusted_brand: mercado_livre_br
+  highest_volume_transactions: shopee_br
+  best_for_premium_products: mercado_livre_br
+  best_for_young_audience: shopee_br
+  best_affiliate_platform: amazon_br
+
+recommended_strategy: >
+  Para máxima receita, promova os três marketplaces simultaneamente:
+  1. Amazon BR: livros, pet, fitness, beleza (cookie carrinho 90 dias)
+  2. Shopee: moda, beleza, casa para audiência jovem + mega-sales mensais
+  3. Mercado Livre: eletrônicos, auto, produtos de alto ticket (cookie 30 dias)
+  Use deep links específicos por produto e crie conteúdo de comparativo de preços
+  entre marketplaces — alta intenção de compra e diferencial para SEO.

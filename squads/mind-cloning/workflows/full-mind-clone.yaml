@@ -1,0 +1,209 @@
+workflow:
+  id: "full-mind-clone"
+  name: "Full Mind Clone"
+  description: "Complete mind cloning pipeline: Collect Sources → Extract Voice DNA → Extract Thinking DNA → Synthesize → Smoke Test"
+  version: "1.1.0"
+  type: "sequential"
+
+metadata:
+  author: "Helix (Mind Cloner)"
+  created_date: "2026-02-06"
+  estimated_time: "2-4 hours (Premium/Elite)"
+  tags:
+    - mind-cloning
+    - expert-extraction
+    - voice-dna
+    - thinking-dna
+
+inputs:
+  expert_name:
+    type: "string"
+    required: true
+    description: "Name of the expert to clone"
+
+  domain:
+    type: "string"
+    required: true
+    description: "Expert's primary domain"
+
+  target_fidelity:
+    type: "string"
+    required: false
+    default: "Intermediate"
+    validation: "Must be: Basic, Intermediate, Premium, or Elite"
+
+  materials_path:
+    type: "string"
+    required: false
+    description: "Path to user-provided materials (Tier 0)"
+
+  output_dir:
+    type: "string"
+    required: false
+    default: "squads/mind-cloning/minds/{mind_slug}/"
+
+steps:
+  - id: "phase_1_sources"
+    name: "Collect & Validate Sources"
+    type: "agent"
+    agent: "mind-cloner"
+    command: "*collect-sources"
+    inputs:
+      expert_name: "{{expert_name}}"
+      domain: "{{domain}}"
+      materials_path: "{{materials_path}}"
+    outputs:
+      sources_inventory: "{{output_dir}}/sources_inventory.yaml"
+      decision: "GO|CONDITIONAL|NO-GO"
+    gate:
+      type: "blocking"
+      condition: "decision != NO-GO"
+      on_fail: "abort"
+      message: "Insufficient sources for extraction. Expert may be too obscure."
+    error_handling:
+      strategy: "fail"
+
+  - id: "phase_2_voice"
+    name: "Extract Voice DNA"
+    type: "agent"
+    agent: "mind-cloner"
+    command: "*extract-voice-dna"
+    depends_on: ["phase_1_sources"]
+    inputs:
+      expert_name: "{{expert_name}}"
+      sources: "{{phase_1_sources.sources_inventory}}"
+    input_validation:
+      - field: "sources"
+        required: true
+        type: "file_path"
+    outputs:
+      voice_dna: "{{output_dir}}/voice_dna.yaml"
+      voice_score: "X/10"
+    gate:
+      type: "blocking"
+      condition: "voice_score >= 8/10"
+      on_fail: "retry"
+      message: "Voice DNA score below 8/10. Re-extract weak phases before proceeding."
+    error_handling:
+      strategy: "fail"
+    fallback:
+      on_veto: "re-extract weak phases with additional sources"
+      on_timeout: "save partial voice_dna, flag gaps, continue with warning"
+
+  - id: "phase_3_thinking"
+    name: "Extract Thinking DNA"
+    type: "agent"
+    agent: "mind-cloner"
+    command: "*extract-thinking-dna"
+    depends_on: ["phase_1_sources"]
+    parallel_with: ["phase_2_voice"]  # Can run in parallel with Voice
+    inputs:
+      expert_name: "{{expert_name}}"
+      sources: "{{phase_1_sources.sources_inventory}}"
+    input_validation:
+      - field: "sources"
+        required: true
+        type: "file_path"
+    outputs:
+      thinking_dna: "{{output_dir}}/thinking_dna.yaml"
+      thinking_score: "X/9"
+    gate:
+      type: "blocking"
+      condition: "thinking_score >= 7/9"
+      on_fail: "retry"
+      message: "Thinking DNA score below 7/9. Re-extract weak phases before proceeding."
+    error_handling:
+      strategy: "fail"
+    fallback:
+      on_veto: "re-extract weak phases with additional sources"
+      on_timeout: "save partial thinking_dna, flag gaps, continue with warning"
+
+  - id: "phase_4_synthesis"
+    name: "Synthesize Mind DNA"
+    type: "agent"
+    agent: "mind-cloner"
+    command: "*synthesize-mind"
+    depends_on: ["phase_2_voice", "phase_3_thinking"]
+    inputs:
+      voice_dna: "{{phase_2_voice.voice_dna}}"
+      thinking_dna: "{{phase_3_thinking.thinking_dna}}"
+    input_validation:
+      - field: "voice_dna"
+        required: true
+        type: "file_path"
+      - field: "thinking_dna"
+        required: true
+        type: "file_path"
+    outputs:
+      mind_dna: "{{output_dir}}/mind_dna_complete.yaml"
+      quality_dashboard: "{{output_dir}}/quality_dashboard.md"
+      fidelity_level: "Basic|Intermediate|Premium|Elite"
+      layers_covered: "X/8"
+      has_stages: false
+    gate:
+      type: "blocking"
+      condition: "layers_covered >= 6/8"
+      on_fail: "retry"
+      message: "DNA Mental coverage below 6/8 layers. Re-extract missing layers."
+    substeps:
+      - id: "evaluate_stages"
+        name: "Evaluate Stage Architecture"
+        description: "Consult data/clone-stages-guide.md to determine if clone needs context-dependent stages"
+        reference: "squads/mind-cloning/data/clone-stages-guide.md"
+        heuristic: "AN004"
+    error_handling:
+      strategy: "fail"
+    fallback:
+      on_veto: "identify missing layers, re-run targeted extraction"
+      on_timeout: "save partial synthesis, flag incomplete layers"
+
+  - id: "phase_5_smoke_test"
+    name: "Smoke Test Clone"
+    type: "agent"
+    agent: "mind-cloner"
+    command: "*smoke-test"
+    depends_on: ["phase_4_synthesis"]
+    inputs:
+      mind_dna: "{{phase_4_synthesis.mind_dna}}"
+    outputs:
+      smoke_test: "{{output_dir}}/smoke_test_result.yaml"
+      tests_passed: "X/3"
+    gate:
+      type: "blocking"
+      condition: "tests_passed == 3/3"
+      on_fail: "diagnostic"
+      on_fail_action:
+        run_step: "5.5"
+        reference: "squads/mind-cloning/data/diagnostic-framework.md"
+        heuristics_ref: "squads/mind-cloning/data/heuristics-catalog.md"
+        description: "Run 6 diagnostic questions, identify root cause, generate corrective action plan"
+      message: "Clone did not pass all smoke tests. Running diagnostic framework..."
+    error_handling:
+      strategy: "fail"
+
+outputs:
+  clone_complete:
+    type: "boolean"
+    source: "phase_5_smoke_test.tests_passed"
+
+  files_generated:
+    - "sources_inventory.yaml"
+    - "voice_dna.yaml"
+    - "thinking_dna.yaml"
+    - "mind_dna_complete.yaml"
+    - "smoke_test_result.yaml"
+    - "quality_dashboard.md"
+
+enforcement:
+  checkpoint_policy: "no_phase_skip"
+  veto_behavior: "blocking"
+  max_retries: 2
+  fallback_on_max_retries: "escalate_to_human"
+
+global_error_handling:
+  on_error: "abort"
+  max_pipeline_duration_seconds: 14400  # 4 hours
+  notification:
+    enabled: true
+    channels:
+      - console

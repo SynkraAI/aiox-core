@@ -1,0 +1,1100 @@
+# Upsell Page Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: BLUEPRINT UPSELL: A ARQUITETURA DA MULTIPLICACAO DE AOV - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: upsell-page
+  purpose: "Multiply AOV through strategic post-purchase upsell pages that maintain psychological momentum"
+  domain: conversion-optimization
+  source_playbook: "BLUEPRINT UPSELL"
+
+  core_equation: |
+    AOV Multiplier = Main Product + (Upsell Take Rate x Upsell Price) + (Downsell Take Rate x Downsell Price)
+    Target: 1.8-2.5x main product value
+    Example: 100 buyers x R$997 + 30 upsells x R$497 + 15 downsells x R$197 = R$117,565 (17.8% increase)
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: upsell-architect
+      role: "Design and orchestrate complete upsell page flow"
+      decisions:
+        - "Upsell sequence logic (accept/reject paths)"
+        - "Value stack composition"
+        - "Timing and urgency calibration"
+      kpis:
+        - "Overall take rate >25%"
+        - "AOV multiplier 1.8-2.5x"
+        - "Time on page <90 seconds"
+
+  tier_0_diagnosis:
+    - agent: psychology-analyzer
+      role: "Analyze and leverage post-purchase mental state"
+      inputs:
+        - "Customer purchase data"
+        - "Product type and price"
+        - "Customer segment"
+      outputs:
+        - "Psychological state assessment"
+        - "Optimal urgency level"
+        - "Continuity angle recommendation"
+
+    - agent: value-calculator
+      role: "Calculate and validate value stack ratios"
+      inputs:
+        - "Upsell components and values"
+        - "Main product price"
+        - "Target take rate"
+      outputs:
+        - "Value stack (5-10x ratio validation)"
+        - "Pricing recommendations"
+        - "Perceived value score"
+
+  tier_1_execution:
+    - agent: headline-crafter
+      role: "Create continuity headlines that maintain momentum"
+      specialization: "Section A: Critical Top"
+      constraints:
+        - "NEVER question previous purchase"
+        - "NEVER create new anxiety"
+        - "NEVER imply main product insufficient"
+      techniques:
+        - "Continuity not interruption"
+        - "Personalization with name"
+        - "Social proof integration"
+
+    - agent: body-builder
+      role: "Construct lean persuasive body elements"
+      specialization: "Section B: Persuasive Body"
+      capabilities:
+        - "VSL script (2-4 min structure)"
+        - "Com vs Sem comparison graphics"
+        - "Mini value stack (max 3 components)"
+        - "Upsell-specific social proof"
+        - "Stacked guarantee copy"
+
+    - agent: conversion-optimizer
+      role: "Implement rapid conversion elements"
+      specialization: "Section C: Quick Conversion"
+      elements:
+        - "Binary choice buttons (Yes/No)"
+        - "Price micro-comparison"
+        - "Ultra-specific FAQ (3 questions only)"
+        - "Reassurance bar"
+        - "Exit intent downsell modal"
+
+    - agent: sequence-engineer
+      role: "Design and implement multi-upsell sequences"
+      specialization: "Section D: Multiple Upsells"
+      logic:
+        upsell_1:
+          pricing: "30-50% of main"
+          target: "30% conversion"
+          type: "Complemento direto"
+        upsell_2_declined:
+          pricing: "15-25% of main"
+          target: "20% conversion"
+          type: "Versao lite"
+        upsell_3_accepted:
+          pricing: "50-100% of main"
+          target: "15% conversion"
+          type: "Complemento premium"
+
+  tier_2_judgment:
+    - agent: friction-hunter
+      role: "Identify and eliminate conversion friction"
+      triggers:
+        - "Take rate below 15%"
+        - "Time on page >120 seconds"
+        - "Exit intent conversion <5%"
+      techniques:
+        - "One-click payment audit"
+        - "Element-by-element friction analysis"
+        - "Mobile experience review"
+        - "VSL drop-off analysis"
+
+    - agent: split-test-designer
+      role: "Design and analyze upsell experiments"
+      capabilities:
+        - "Headline variations"
+        - "Price point testing"
+        - "VSL vs no-VSL comparison"
+        - "Timer duration testing"
+        - "Button copy optimization"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  upsell-architect:
+    id: upsell-architect
+    title: "Upsell Page Orchestrator"
+    tier: orchestrator
+    icon: "🏗️"
+
+    purpose: |
+      Design and orchestrate complete upsell page flows that maximize AOV
+      while maintaining the customer's elevated psychological state.
+
+    core_frameworks:
+      - name: "Peak-End Rule"
+        application: "Leverage peak emotional state of purchase"
+      - name: "Four Sections"
+        components: ["Critical Top", "Persuasive Body", "Quick Conversion", "Multiple Upsells"]
+      - name: "Golden Window"
+        timing: "3-7 seconds before dopamine drops"
+
+    decision_authority:
+      - "Upsell sequence design"
+      - "Value stack approval"
+      - "Timing and urgency settings"
+      - "Price point validation"
+
+    inputs:
+      - "Main product details and price"
+      - "Available upsell products"
+      - "Customer segment data"
+      - "Historical take rate data"
+
+    outputs:
+      - "Complete upsell page architecture"
+      - "Sequence flow diagram"
+      - "Element specifications"
+      - "Performance targets"
+
+    success_metrics:
+      primary:
+        - name: "Upsell #1 Take Rate"
+          target: ">25%"
+        - name: "AOV Multiplier"
+          target: "1.8-2.5x"
+        - name: "Time on Page"
+          target: "<90 seconds"
+      secondary:
+        - "Exit intent conversion >10%"
+        - "Downsell take rate >15%"
+        - "Technical success rate >99%"
+
+  psychology-analyzer:
+    id: psychology-analyzer
+    title: "Post-Purchase Psychology Specialist"
+    tier: tier_0
+    icon: "🧠"
+
+    purpose: |
+      Analyze and leverage the unique psychological state of post-purchase
+      customers to maximize upsell effectiveness.
+
+    psychological_states:
+      dopamine_elevated:
+        description: "Brain rewarding the purchase decision"
+        leverage: "Act quickly, maintain positive momentum"
+
+      cognitive_consistency:
+        description: "Tendency to maintain 'yes' pattern"
+        leverage: "Frame upsell as continuation, not new decision"
+
+      payment_barrier_overcome:
+        description: "Card already in hand, friction eliminated"
+        leverage: "One-click purchase, no re-entry"
+
+      maximum_trust:
+        description: "Just trusted you with money"
+        leverage: "Strong guarantees, social proof"
+
+    golden_window:
+      definition: "3-7 seconds before dopamine starts dropping"
+      implication: "Page must capture attention immediately"
+      tactics:
+        - "Above-fold impact"
+        - "Progress bar visibility"
+        - "Instant value recognition"
+
+    continuity_principles:
+      required:
+        - "Validate the purchase just made"
+        - "Position upsell as accelerator"
+        - "Maintain celebration tone"
+      forbidden:
+        - "Question previous decision"
+        - "Create new anxiety"
+        - "Imply insufficiency"
+
+  value-calculator:
+    id: value-calculator
+    title: "Value Stack Calculator"
+    tier: tier_0
+    icon: "🧮"
+
+    purpose: |
+      Calculate and validate value stacks to ensure 5-10x perceived value
+      ratio against upsell price.
+
+    value_stack_rules:
+      minimum_ratio: 5
+      optimal_ratio: 10
+      max_components: 3
+
+      structure:
+        - component: "Main Component"
+          value_assignment: "Highest value"
+        - component: "Bonus #1"
+          value_assignment: "Supporting value"
+        - component: "Bonus #2"
+          value_assignment: "Additional value"
+
+    pricing_guidelines:
+      upsell_1:
+        range: "30-50% of main product"
+        example: "Main R$997 → Upsell R$297-497"
+
+      upsell_2_lite:
+        range: "15-25% of main product"
+        example: "Main R$997 → Downsell R$149-249"
+
+      upsell_3_premium:
+        range: "50-100% of main product"
+        example: "Main R$997 → Premium R$497-997"
+
+    validation_checks:
+      - check: "Perceived value >= 5x price"
+        action: "If fail, add value or reduce price"
+      - check: "Max 3 components"
+        action: "If exceed, consolidate"
+      - check: "Clear value communication"
+        action: "Ensure each component has dollar value"
+
+  headline-crafter:
+    id: headline-crafter
+    title: "Continuity Headline Specialist"
+    tier: tier_1
+    icon: "✍️"
+
+    purpose: |
+      Create headlines that maintain the 'yes' momentum instead of
+      interrupting it with a new pitch.
+
+    headline_types:
+      continuity_confirmation:
+        template: "ESPERE! Sua compra foi confirmada, mas..."
+        psychology: "Confirms action, creates bridge"
+
+      exclusive_unlock:
+        template: "[Nome], voce desbloqueou uma oferta exclusiva"
+        psychology: "Personalization + exclusivity"
+
+      before_access:
+        template: "Parabens! Antes de acessar seu [produto], veja isso..."
+        psychology: "Celebration + anticipation"
+
+      social_proof_integration:
+        template: "[Nome], Sua Inscricao Foi Confirmada! Mas 87% dos Alunos Que Pegaram Este Upgrade Tiveram Resultados 3x Mais Rapidos..."
+        psychology: "Confirmation + FOMO + specific claim"
+
+    forbidden_patterns:
+      - pattern: "Questioning purchase"
+        example: "Tem certeza que nao quer mais?"
+        why_bad: "Breaks momentum, creates doubt"
+
+      - pattern: "Creating new anxiety"
+        example: "Mas voce esta perdendo algo importante..."
+        why_bad: "Negative emotion, trust damage"
+
+      - pattern: "Implying insufficiency"
+        example: "O programa sozinho nao e suficiente..."
+        why_bad: "Buyer's remorse trigger"
+
+    subheadline_formula: |
+      "Adicione [RESULTADO ESPECIFICO] ao que voce acabou de comprar
+      e [BENEFICIO MULTIPLICADOR] - Oferta valida apenas agora"
+
+  body-builder:
+    id: body-builder
+    title: "Persuasive Body Specialist"
+    tier: tier_1
+    icon: "📝"
+
+    purpose: |
+      Construct lean, high-impact body elements that communicate value
+      without causing post-purchase fatigue.
+
+    vsl_structure:
+      duration: "2-4 minutes maximum"
+      segments:
+        - time: "0-10s"
+          content: "Parabenizar e validar compra"
+          tone: "Celebratory"
+        - time: "10-30s"
+          content: "Revelar o 'gap' que o upsell preenche"
+          tone: "Discovery"
+        - time: "30-90s"
+          content: "Demonstrar o resultado adicional"
+          tone: "Proof-driven"
+        - time: "90-180s"
+          content: "Stack de valor rapido"
+          tone: "Value accumulation"
+        - time: "180-240s"
+          content: "CTA com urgencia"
+          tone: "Action-oriented"
+
+      opening_script: |
+        "Parabens! Voce acabou de tomar a melhor decisao para [resultado].
+        Mas descobri que alunos que tambem pegam [upsell] conseguem
+        [resultado 3x maior]. Deixe-me mostrar rapidamente..."
+
+    comparison_graphic:
+      format: "Side-by-side Com vs Sem"
+      elements:
+        - "Time to result"
+        - "Support level"
+        - "Resources included"
+        - "Implementation method"
+        - "Learning curve"
+      footer: "Velocidade: 1x vs Velocidade: 3-5x"
+
+    social_proof:
+      quantity: "2-3 testimonials"
+      requirement: "Must be specific to upsell, not main product"
+      format: |
+        "93% dos alunos que pegaram o [Upsell] dizem que
+        foi a melhor decisao que tomaram..."
+
+        [Foto] "O [upsell] cortou meu tempo de implementacao
+        em 75%. Resultados na primeira semana!" - Maria Silva
+
+    stacked_guarantee: |
+      "Sua garantia original CONTINUA VALENDO, e ainda adiciono:
+      Se o [Upsell] nao acelerar seus resultados em pelo menos 2x,
+      devolvemos 100% do valor do upgrade - e voce fica com tudo."
+
+  conversion-optimizer:
+    id: conversion-optimizer
+    title: "Quick Conversion Specialist"
+    tier: tier_1
+    icon: "⚡"
+
+    purpose: |
+      Implement rapid conversion elements that simplify the decision
+      to a clear binary choice.
+
+    button_design:
+      yes_button:
+        text: "SIM! Quero Resultados 3x Mais Rapidos →"
+        style: "Verde, Grande"
+        position: "Primary"
+
+      no_button:
+        text: "Nao, prefiro ir mais devagar"
+        style: "Cinza, Menor"
+        position: "Secondary"
+
+      mobile: "Fixos no rodape"
+
+    price_anchoring: |
+      Voce acabou de investir R$ 997 no programa principal.
+      Por apenas R$ 297 a mais (menos de 30% extra),
+      voce multiplica seus resultados por 3.
+
+      E como comprar um carro e deixar de pegar o seguro.
+
+    faq_specification:
+      count: "Exactly 3 questions"
+      questions:
+        - q: "Preciso disso agora ou posso pegar depois?"
+          a: "Este preco e exclusivo para agora. Depois volta para R$ 997"
+        - q: "Isso nao deveria estar incluido no principal?"
+          a: "O principal resolve [problema A]. Isso acelera e automatiza"
+        - q: "E se eu me arrepender?"
+          a: "Mesma garantia do principal + 30 dias extras so pro upgrade"
+
+    reassurance_bar: |
+      🔒 Compra Segura | Mesmo cartao ja cadastrado |
+      Garantia Total | Acesso Imediato
+
+    exit_intent:
+      trigger: "Mouse toward X or back button"
+      script: |
+        "ULTIMA CHANCE!
+        Ok, entendo que R$ 497 pode ser demais agora...
+        Que tal levar o mesmo upgrade por 3x de R$ 197?"
+        [SIM, QUERO PARCELADO] [Nao, obrigado]
+
+  sequence-engineer:
+    id: sequence-engineer
+    title: "Multi-Upsell Sequence Engineer"
+    tier: tier_1
+    icon: "🔄"
+
+    purpose: |
+      Design and implement intelligent upsell sequences based on
+      customer responses.
+
+    sequence_logic:
+      upsell_1:
+        name: "Complemento Direto"
+        pricing: "30-50% of main product value"
+        purpose: "Accelerate main product results"
+        target_conversion: "30%"
+        if_accepted: "Show Upsell 3 (Premium)"
+        if_rejected: "Show Upsell 2 (Lite)"
+
+      upsell_2:
+        name: "Versao Lite"
+        pricing: "15-25% of main product value"
+        purpose: "Lower barrier entry to value"
+        target_conversion: "20%"
+        if_accepted: "Show Thank You Page"
+        if_rejected: "Show Thank You Page"
+
+      upsell_3:
+        name: "Complemento Premium"
+        pricing: "50-100% of main product value"
+        purpose: "Maximize value for committed buyers"
+        target_conversion: "15% of Upsell 1 buyers"
+        if_accepted: "Show Thank You Page"
+        if_rejected: "Show Thank You Page"
+
+    thank_you_page:
+      required_elements:
+        - "Confirmacao visual da compra total"
+        - "Proximos passos numerados"
+        - "Link direto para area de membros"
+        - "Video de onboarding (2 min)"
+        - "Oferta de 'Refer a Friend' com incentivo"
+
+    one_click_technical:
+      implementation:
+        - "Use token from first purchase"
+        - "Single click = instant processing"
+        - "No re-entry of payment data"
+      conversion_increase: "40-60% vs re-checkout"
+      critical_note: |
+        "Configure o one-click upsell ANTES de criar a pagina.
+        A friccao tecnica mata mais upsells que copy ruim."
+
+  friction-hunter:
+    id: friction-hunter
+    title: "Conversion Friction Hunter"
+    tier: tier_2
+    icon: "🔍"
+
+    purpose: |
+      Identify and eliminate any friction preventing customers
+      from completing upsell purchases.
+
+    alert_triggers:
+      - trigger: "Take rate <15%"
+        severity: "High"
+        action: "Full page audit"
+      - trigger: "Time on page >120s"
+        severity: "Medium"
+        action: "VSL and copy review"
+      - trigger: "Exit intent <5%"
+        severity: "Medium"
+        action: "Downsell offer review"
+      - trigger: "Technical failures >1%"
+        severity: "Critical"
+        action: "Immediate tech review"
+
+    audit_checklist:
+      technical:
+        - "Is one-click working?"
+        - "Are tokens being stored correctly?"
+        - "Is payment processing fast (<3s)?"
+        - "Are error messages clear?"
+
+      psychological:
+        - "Is headline creating continuity?"
+        - "Is timer too aggressive (trust issue)?"
+        - "Is value stack compelling (5-10x)?"
+        - "Is guarantee removing risk?"
+
+      ux:
+        - "Is mobile experience optimized?"
+        - "Are buttons visible without scroll?"
+        - "Is progress bar clear?"
+        - "Is VSL autoplaying correctly?"
+
+    diagnosis_questions:
+      low_take_rate:
+        - "Is one-click working? (Technical friction)"
+        - "Is timer too aggressive? (Trust issue)"
+        - "Is value stack strong enough? (Value perception)"
+        - "Is headline creating interruption? (Momentum broken)"
+        - "Is VSL too long? (Fatigue)"
+
+  split-test-designer:
+    id: split-test-designer
+    title: "Upsell A/B Test Designer"
+    tier: tier_2
+    icon: "🧪"
+
+    purpose: |
+      Design and analyze experiments to continuously improve
+      upsell page performance.
+
+    test_categories:
+      headlines:
+        - "Confirmation vs Exclusive unlock"
+        - "With vs without social proof stat"
+        - "Name personalization impact"
+
+      pricing:
+        - "30% vs 40% vs 50% of main"
+        - "Round numbers vs specific (R$497 vs R$497)"
+        - "Payment plan visibility"
+
+      format:
+        - "VSL vs no VSL"
+        - "VSL length (2min vs 4min)"
+        - "Video thumbnail variations"
+
+      urgency:
+        - "Timer duration (5min vs 10min vs 15min)"
+        - "Sound on timer vs silent"
+        - "Countdown vs static deadline"
+
+      buttons:
+        - "Yes button copy variations"
+        - "No button psychology (shame vs neutral)"
+        - "Button color impact"
+
+    test_protocol:
+      minimum_sample: "200 purchases per variant"
+      significance: "95% confidence"
+      primary_metric: "Take rate"
+      secondary_metrics:
+        - "Time on page"
+        - "Scroll depth"
+        - "VSL completion"
+        - "Exit intent trigger rate"
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Section A: Critical Top
+  - task: "Create continuity headline"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Pass continuity validation (no questioning, anxiety, insufficiency)"
+
+  - task: "Create subheadline"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Include time-limit indicator"
+
+  - task: "Implement progress bar"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Step 1 must have green checkmark"
+
+  - task: "Configure timer"
+    executor: Worker
+    automation: HIGH
+    guardrails: "10 min max, sound at 60s"
+
+  # Section B: Persuasive Body
+  - task: "Write VSL script"
+    executor: Human
+    automation: LOW
+    guardrails: "Follow 5-segment structure, max 4 min"
+
+  - task: "Record VSL"
+    executor: Human
+    automation: LOW
+    guardrails: "Must follow script structure"
+
+  - task: "Create Com vs Sem graphic"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Include velocity multiplier footer"
+
+  - task: "Build value stack"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Max 3 components, 5-10x ratio"
+
+  - task: "Collect upsell testimonials"
+    executor: Human
+    automation: LOW
+    guardrails: "Must be specific to upsell"
+
+  - task: "Write stacked guarantee"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Reference original guarantee"
+
+  # Section C: Quick Conversion
+  - task: "Design binary buttons"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Yes green/large, No gray/small"
+
+  - task: "Write price comparison"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Include percentage and metaphor"
+
+  - task: "Create 3-question FAQ"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Exactly 3 questions"
+
+  - task: "Configure reassurance bar"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Mention 'same card registered'"
+
+  - task: "Configure exit intent"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Trigger on close/back"
+
+  # Section D: Multiple Upsells
+  - task: "Design upsell sequence"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Follow pricing ratios per type"
+
+  - task: "Configure routing logic"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Accept/reject paths correct"
+
+  - task: "Build thank you page"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Include all 5 required elements"
+
+  - task: "Implement one-click payment"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Test before page goes live"
+
+  # Optimization
+  - task: "Run take rate audit"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Check all friction points"
+
+  - task: "Design A/B test"
+    executor: Human
+    automation: LOW
+    guardrails: "One variable per test"
+
+  - task: "Analyze test results"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "95% confidence required"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Headline Continuity Gate"
+    transition: "Headline Creation → Publication"
+    condition: "headline_passes_continuity_check == true"
+    type: blocking
+    failure_action: "Rewrite headline using approved templates"
+
+  QG-002:
+    name: "Value Stack Ratio Gate"
+    transition: "Value Stack → Publication"
+    condition: "perceived_value >= price × 5"
+    type: blocking
+    failure_action: "Add value or reduce price"
+
+  QG-003:
+    name: "VSL Length Gate"
+    transition: "VSL → Publication"
+    condition: "vsl_duration <= 240_seconds"
+    type: blocking
+    failure_action: "Edit to reduce length"
+
+  QG-004:
+    name: "One-Click Technical Gate"
+    transition: "Page → Go Live"
+    condition: "one_click_tested == true AND success_rate >= 99%"
+    type: blocking
+    failure_action: "Debug payment integration"
+
+  QG-005:
+    name: "FAQ Count Gate"
+    transition: "FAQ → Publication"
+    condition: "faq_count == 3"
+    type: blocking
+    failure_action: "Adjust to exactly 3 questions"
+
+  QG-006:
+    name: "Take Rate Performance Gate"
+    transition: "Live → Optimization"
+    condition: "take_rate >= 0.25"
+    type: warning
+    failure_action: "Trigger full page audit"
+
+  QG-007:
+    name: "Time on Page Gate"
+    transition: "Live → Optimization"
+    condition: "avg_time_on_page <= 90_seconds"
+    type: warning
+    failure_action: "Review for decision paralysis"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  new_upsell_page_workflow:
+    trigger: "New upsell page request"
+    steps:
+      - step: 1
+        agent: upsell-architect
+        action: "Define upsell strategy and sequence"
+        output: "Page architecture document"
+
+      - step: 2
+        agent: value-calculator
+        action: "Calculate and validate value stack"
+        output: "Approved value stack (5-10x ratio)"
+
+      - step: 3
+        agent: headline-crafter
+        action: "Create continuity headline and subheadline"
+        output: "Approved headlines"
+
+      - step: 4
+        agent: body-builder
+        action: "Create VSL script and body elements"
+        outputs:
+          - "VSL script"
+          - "Com vs Sem graphic"
+          - "Social proof section"
+          - "Stacked guarantee"
+
+      - step: 5
+        agent: conversion-optimizer
+        action: "Implement conversion elements"
+        outputs:
+          - "Binary buttons"
+          - "Price comparison"
+          - "3-question FAQ"
+          - "Reassurance bar"
+          - "Exit intent modal"
+
+      - step: 6
+        agent: sequence-engineer
+        action: "Configure upsell sequence and routing"
+        output: "Complete page flow"
+
+      - step: 7
+        agent: sequence-engineer
+        action: "Test one-click payment"
+        gate: "QG-004 must pass"
+
+      - step: 8
+        agent: upsell-architect
+        action: "Final review and approval"
+        output: "Page ready for launch"
+
+  optimization_workflow:
+    trigger: "Take rate <25% OR time on page >90s"
+    steps:
+      - step: 1
+        agent: friction-hunter
+        action: "Run full page audit"
+        output: "Friction report"
+
+      - step: 2
+        agent: friction-hunter
+        action: "Diagnose root cause"
+        output: "Priority issues list"
+
+      - step: 3
+        agent: split-test-designer
+        action: "Design test for top issue"
+        output: "Test specification"
+
+      - step: 4
+        agent: relevant-tier-1-agent
+        action: "Implement test variant"
+        output: "Variant live"
+
+      - step: 5
+        agent: split-test-designer
+        action: "Analyze results at significance"
+        output: "Winner declaration"
+
+      - step: 6
+        agent: relevant-tier-1-agent
+        action: "Implement winning variant"
+        output: "Optimization complete"
+
+  customer_journey_workflow:
+    trigger: "Customer completes main purchase"
+    steps:
+      - step: 1
+        action: "Load upsell page 1"
+        timing: "Immediate (Golden Window)"
+
+      - step: 2
+        action: "Customer views page"
+        elements: ["Headline", "Progress bar", "Timer starts"]
+
+      - step: 3
+        decision: "Customer clicks Yes or No"
+        if_yes: "Process one-click payment → Step 4a"
+        if_no: "Check for exit intent → Step 4b"
+
+      - step: 4a
+        action: "Show Upsell 3 (Premium)"
+        condition: "Accepted Upsell 1"
+
+      - step: 4b
+        action: "Show Upsell 2 (Lite)"
+        condition: "Rejected Upsell 1"
+
+      - step: 5
+        action: "Process response to Upsell 2 or 3"
+
+      - step: 6
+        action: "Redirect to Thank You Page"
+        elements: ["Confirmation", "Next steps", "Onboarding video", "Referral offer"]
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    take_rate:
+      formula: "Upsell Purchases / Main Purchases"
+      target: ">25%"
+      source: "Metrica de Sucesso"
+
+    aov_multiplier:
+      formula: "Total Revenue / (Main Purchases × Main Price)"
+      target: "1.8-2.5x"
+      source: "Metrica de Sucesso"
+
+    time_on_page:
+      formula: "Average seconds on upsell page"
+      target: "<90 seconds"
+      source: "Metrica de Sucesso"
+      rationale: "Quick decision = good page"
+
+  secondary:
+    downsell_take_rate:
+      formula: "Downsell Purchases / Upsell Declines"
+      target: ">15%"
+
+    exit_intent_conversion:
+      formula: "Exit Intent Purchases / Exit Intent Triggers"
+      target: ">10%"
+
+    vsl_completion:
+      formula: "Completed VSL Views / Started VSL Views"
+      target: ">70%"
+
+    technical_success:
+      formula: "Successful Payments / Payment Attempts"
+      target: ">99%"
+
+  by_section:
+    section_a:
+      - "Headline engagement (scroll past fold)"
+      - "Timer visibility during decision"
+      - "Progress bar comprehension"
+
+    section_b:
+      - "VSL completion rate"
+      - "Com vs Sem graphic engagement"
+      - "Testimonial scroll depth"
+
+    section_c:
+      - "Button click distribution (Yes vs No)"
+      - "FAQ expansion rate"
+      - "Exit intent trigger rate"
+
+    section_d:
+      - "Upsell 2/3 take rates"
+      - "Sequence completion rate"
+      - "Thank you page engagement"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Take rate <15%"
+    possible_causes:
+      - "One-click not working (technical friction)"
+      - "Timer too aggressive (trust issue)"
+      - "Value stack weak (<5x ratio)"
+      - "Headline breaking momentum"
+      - "VSL too long (fatigue)"
+    diagnosis:
+      - "Test one-click payment flow"
+      - "Review timer settings"
+      - "Calculate value stack ratio"
+      - "Audit headline for continuity"
+      - "Check VSL length"
+    solutions:
+      - "Fix payment integration"
+      - "Extend timer to 10 min"
+      - "Add value to stack"
+      - "Rewrite headline using templates"
+      - "Edit VSL to <4 min"
+
+  - symptom: "Time on page >120s"
+    possible_causes:
+      - "VSL too long"
+      - "Too many elements causing paralysis"
+      - "Unclear CTA"
+      - "FAQ expanding unnecessarily"
+    diagnosis:
+      - "Check VSL duration"
+      - "Count above-fold elements"
+      - "Review button visibility"
+      - "Check FAQ interaction rate"
+    solutions:
+      - "Cut VSL to 2-4 min"
+      - "Simplify above-fold"
+      - "Make buttons more prominent"
+      - "Limit FAQ to 3 questions"
+
+  - symptom: "High drop-off at exit intent"
+    possible_causes:
+      - "Downsell not compelling"
+      - "Payment plan not attractive"
+      - "Modal design issues"
+    diagnosis:
+      - "Review downsell offer"
+      - "Check payment plan terms"
+      - "Test modal on mobile"
+    solutions:
+      - "Improve downsell value"
+      - "Offer better payment terms"
+      - "Redesign modal for mobile"
+
+  - symptom: "Technical payment failures"
+    possible_causes:
+      - "Token not stored correctly"
+      - "Gateway timeout"
+      - "Card declined"
+    diagnosis:
+      - "Check token storage"
+      - "Review gateway logs"
+      - "Analyze decline reasons"
+    solutions:
+      - "Fix token implementation"
+      - "Optimize gateway settings"
+      - "Add backup payment method"
+
+# ===============================================================================
+# TECHNOLOGY REQUIREMENTS
+# ===============================================================================
+
+technology:
+  required:
+    - tool: "One-Click Payment Gateway"
+      purpose: "Tokenized instant payments"
+      features:
+        - "Token storage from first purchase"
+        - "Single-click processing"
+        - "PCI compliance"
+
+    - tool: "Exit Intent Detection"
+      purpose: "Trigger downsell modal"
+      features:
+        - "Mouse movement tracking"
+        - "Back button detection"
+        - "Mobile swipe detection"
+
+    - tool: "Countdown Timer"
+      purpose: "Create urgency"
+      features:
+        - "Configurable duration"
+        - "Audio alert capability"
+        - "Redirect on expiry"
+
+    - tool: "Video Hosting"
+      purpose: "VSL delivery"
+      features:
+        - "Autoplay support"
+        - "Completion tracking"
+        - "Mobile optimization"
+
+    - tool: "A/B Testing Platform"
+      purpose: "Continuous optimization"
+      features:
+        - "Traffic splitting"
+        - "Conversion tracking"
+        - "Statistical significance"
+
+  recommended:
+    - tool: "Heatmap Analytics"
+      purpose: "Understand page interaction"
+
+    - tool: "Session Recording"
+      purpose: "Debug friction points"
+
+    - tool: "Real-time Dashboard"
+      purpose: "Monitor take rates live"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Specific A/B test benchmarks for each element"
+    severity: Medium
+    clarification_needed: "What variations produce best results?"
+
+  - id: GAP-002
+    description: "Mobile vs desktop take rate differences"
+    severity: Low
+    note: "Source doesn't break down by device"
+
+  - id: GAP-003
+    description: "Downsell take rate targets"
+    severity: Medium
+    clarification_needed: "What is 'good' for exit intent conversion?"
+
+  - id: GAP-004
+    description: "VSL vs no-VSL comparison data"
+    severity: Medium
+    clarification_needed: "When to skip VSL entirely?"
+
+  - id: GAP-005
+    description: "International payment token support"
+    severity: Medium
+    note: "One-click support varies by country/gateway"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  elements_documented: 17/17
+  sections_covered: 4/4
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 7
+  workflows_documented: 3
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

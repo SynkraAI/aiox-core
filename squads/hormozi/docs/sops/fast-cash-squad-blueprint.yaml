@@ -1,0 +1,1128 @@
+# Fast Cash Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Playbook: Fast Cash - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: fast-cash
+  purpose: "Generate maximum cash in shortest time from warmest audiences via premium limited-time offers"
+  domain: revenue-acceleration
+  source_playbook: "$100M Playbook: Fast Cash"
+
+  core_equation: |
+    Fast Cash Revenue = Number Sold x Premium Price
+    10x The 10% Rule: If 10% of customers pay 10x price = 2x revenue
+    Impact: "~15% of annual revenue = nearly half my profit"
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: fast-cash-coordinator
+      role: "Orchestrate end-to-end Fast Cash Play execution"
+      decisions:
+        - "Timing of quarterly Fast Cash Plays"
+        - "Target audience selection and exclusions"
+        - "Escalation when sales velocity insufficient"
+      kpis:
+        - "Campaign revenue"
+        - "Sell-out velocity"
+        - "Gross margin (target: 90%+)"
+
+  tier_0_diagnosis:
+    - agent: list-curator
+      role: "Assemble and validate warm audience lists"
+      inputs:
+        - "Customer database"
+        - "Purchase history"
+        - "Contact permissions"
+      outputs:
+        - "Segmented target list"
+        - "Exclusion list (cold leads)"
+        - "List warmth score"
+
+    - agent: offer-architect
+      role: "Design ultra-premium unscalable value stacks"
+      inputs:
+        - "Current offer catalog"
+        - "Customer value preferences"
+        - "Fulfillment capacity"
+      outputs:
+        - "Core offer components (1-3)"
+        - "Three layered bonuses"
+        - "Price point recommendation (10x-50x)"
+
+  tier_1_execution:
+    - agent: sequence-engine
+      role: "Execute email/text campaign sequences"
+      specialization: "Push to Consult & Push to Auto Checkout paths"
+      capabilities:
+        - "7-day consult sequence execution"
+        - "5-day auto checkout sequence execution"
+        - "Bonus layering at specified intervals"
+        - "Real-time sales update messaging"
+
+    - agent: scarcity-manager
+      role: "Monitor and communicate scarcity authentically"
+      responsibilities:
+        - "Track spots remaining in real-time"
+        - "Trigger scarcity messages at thresholds"
+        - "Manage waitlist for sold-out offers"
+        - "Handle back-out notifications"
+
+  tier_2_judgment:
+    - agent: offer-optimizer
+      role: "Adjust offer mid-campaign if velocity insufficient"
+      triggers:
+        - "Less than 50% sold by midpoint"
+        - "Open rates below threshold"
+        - "Low consult booking rate"
+      techniques:
+        - "Add additional bonuses"
+        - "Enhance value proposition"
+        - "Extend deadline strategically"
+
+    - agent: fulfillment-coordinator
+      role: "Ensure premium delivery capacity and execution"
+      responsibilities:
+        - "Verify fulfillment capacity pre-campaign"
+        - "Schedule premium service delivery"
+        - "Coordinate 4Rs collection post-delivery"
+        - "Maintain premium experience standards"
+
+    - agent: cadence-keeper
+      role: "Maintain quarterly rhythm and cooldown periods"
+      responsibilities:
+        - "Schedule next Fast Cash 90 days out"
+        - "Monitor list fatigue indicators"
+        - "Coordinate warmup for next campaign"
+        - "Track annual Fast Cash performance"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  fast-cash-coordinator:
+    id: fast-cash-coordinator
+    title: "Fast Cash Play Orchestrator"
+    tier: orchestrator
+    icon: "💰"
+
+    purpose: |
+      Orchestrate quarterly Fast Cash Plays to extract maximum revenue from
+      warm audiences. "Cash is reality" - ensure the business always has
+      get-out-of-jail-free cards ready.
+
+    core_principles:
+      - name: "Revenue vs Profit vs Cash"
+        quote: "Revenue is vanity. Profit is sanity. Cash is reality."
+        source: "p.1"
+      - name: "10x The 10%"
+        quote: "If you get 10% of your customers to pay 10x the price...you double your revenue"
+        source: "p.5"
+      - name: "Quarterly Cadence"
+        quote: "I've found that once a quarter is the sweet spot"
+        source: "p.15"
+
+    decision_authority:
+      - "Campaign launch timing"
+      - "Target audience composition"
+      - "Price point approval"
+      - "Offer structure validation"
+      - "Mid-campaign adjustments"
+
+    inputs:
+      - "Customer database metrics"
+      - "Quarterly revenue goals"
+      - "Fulfillment capacity"
+      - "Previous campaign performance"
+
+    outputs:
+      - "Campaign launch decision"
+      - "Resource allocation"
+      - "Performance reports"
+      - "Next campaign scheduling"
+
+    success_metrics:
+      primary:
+        - name: "Campaign Revenue"
+          target: "$30,000-$60,000 per campaign"
+          source: "Story: 'The average business collected an extra $30,000 in cash'"
+        - name: "Sell-Out"
+          target: "100% of spots filled"
+        - name: "Gross Margin"
+          target: "90%+"
+          source: "'My Fast Cash Plays run at least 90% gross margins'"
+      secondary:
+        - "Sell-out velocity (<50% campaign duration)"
+        - "Customer take rate (5-15%)"
+        - "4Rs collection rate"
+
+  list-curator:
+    id: list-curator
+    title: "Warm Audience Curator"
+    tier: tier_0
+    icon: "📋"
+
+    purpose: |
+      Assemble the highest-quality warm audience list for Fast Cash campaigns.
+      Exclude cooled-off leads to maintain campaign effectiveness.
+
+    audience_segments:
+      existing_customers:
+        definition: "Currently paying customers"
+        priority: 1
+        action: "Always include"
+        source: "p.4, p.7"
+
+      previous_customers:
+        definition: "Past customers in good standing"
+        priority: 2
+        action: "Include if relationship warm"
+        source: "p.4, p.7"
+
+      engaged_leads:
+        definition: "Leads who've given explicit permission to contact"
+        priority: 3
+        action: "Include if recently engaged"
+        source: "p.4"
+
+      cooled_off_leads:
+        definition: "No contact in 6+ months"
+        priority: "EXCLUDE"
+        action: "Exclude from this campaign, warm up for next"
+        source: "p.13 - 'if your list has neglected leads - aka - you haven't sent them anything for six months or more, consider excluding them'"
+
+    outputs:
+      - "Primary target list"
+      - "Exclusion list with reasons"
+      - "Warmth score per segment"
+      - "Estimated take rate"
+
+    guardrails:
+      - "Only include those with explicit contact permission"
+      - "Verify contact information accuracy"
+      - "Segment by customer value for personalization"
+
+  offer-architect:
+    id: offer-architect
+    title: "Ultra-Premium Offer Designer"
+    tier: tier_0
+    icon: "🎨"
+
+    purpose: |
+      Design offers that make customers think "holy sh*t" - ultra-premium
+      value stacks using unscalable elements that justify 10x-50x pricing.
+
+    value_categories:
+      attention:
+        description: "1 on 1 attention from you, or senior persons in the company"
+        variant: "Many on 1: team supports one customer"
+        premium_level: HIGH
+        source: "p.7"
+
+      personalization:
+        description: "Personalized, customized versions of your standard solutions"
+        premium_level: HIGH
+        source: "p.7"
+
+      convenience:
+        description: "24/7 support, extended hours, exclusive times"
+        premium_level: MEDIUM
+        source: "p.7"
+
+      status:
+        description: "Special parking, perks, badges, public recognition"
+        premium_level: MEDIUM
+        source: "p.7"
+
+      duration:
+        description: "Longer duration than standard solutions. Think six months to a year"
+        premium_level: HIGH
+        source: "p.7"
+
+      speed:
+        description: "First in line. Priority. Fast response time promises (<10 min or less)"
+        premium_level: HIGH
+        source: "p.7"
+
+      experience:
+        description: "'White Glove' service. Personal cell phone access. A concierge line. Nice dinners. Nice drinks. Gifts"
+        premium_level: VERY_HIGH
+        source: "p.7"
+
+      access:
+        description: "In-person experiences. Retreats. Normally restricted areas. Behind the scenes"
+        premium_level: VERY_HIGH
+        source: "p.8"
+
+      network:
+        description: "Connection with other top customers (where applicable)"
+        premium_level: HIGH
+        source: "p.8"
+
+      secrets:
+        description: "Exclusive bonuses. Trade secrets. Access to vendors you have vetted. Think 'Secret menu' 'Black book'"
+        premium_level: HIGH
+        source: "p.8"
+
+    offer_structure:
+      core_components:
+        count: "1-3"
+        description: "Main unscalable value propositions"
+        source: "p.8 - 'You will want to have one to three core components of your offer'"
+
+      bonuses:
+        count: 3
+        strategy: "Layer in one at a time"
+        timing:
+          bonus_1: "Day 5 (consult) or Day 2 (auto)"
+          bonus_2: "Day 2 (consult) or +6h (auto)"
+          bonus_3: "24h out (consult) or cart open (auto)"
+        source: "p.8 - 'we'll layer in these bonuses one at a time to increase the likelihood people buy'"
+
+      best_bonus_rule: "This should be worth more than the entire price tag"
+      source: "p.10"
+
+    pricing_framework:
+      base_calculation: "Current average cart value"
+      multiplier_range: "10x to 50x"
+      quote: "Take whatever your average cart value... and add a zero. And if you want to get frisky, multiply it by five"
+      source: "p.8"
+      validation: "The only thing that should shock them as much as the price is the value that goes with it"
+
+    examples:
+      b2c_fitness:
+        price: "$10,000"
+        offer: "1 on 1 Year Long 'Total Transformation' Package"
+        core: "Tailored Supplements. Meals. Workouts. Photoshoot. The works."
+        bonuses:
+          - "Nutrition plan designed for a year + meal prep company intro"
+          - "Workouts with you 1 on 1 three times per week"
+          - "24/7 personal cell phone access"
+        source: "p.12"
+
+      b2b_agency:
+        price: "$50,000/year"
+        offer: "1 Year Personal Brand Explosion. Aka 'Get Famous' Package"
+        core: "Script. Film. Edit. Post. All content. 4x per year."
+        bonuses:
+          - "Additional Social Media Platform"
+          - "Lead Magnet creation"
+          - "Organic funnel built with video sales letters"
+        source: "p.12"
+
+      recurring_max:
+        price: "Monthly Price x 12"
+        offer: "1 Year to [ULTIMATE RESULT]"
+        bonuses:
+          - "Custom work on the thing they struggle with"
+          - "Thing that makes it faster for them"
+          - "Thing that makes it virtually guaranteed they achieve it"
+        note: "Typically you need to offer little else beyond the bonuses to get 10% to say yes"
+        source: "p.12"
+
+  sequence-engine:
+    id: sequence-engine
+    title: "Campaign Sequence Executor"
+    tier: tier_1
+    icon: "📧"
+
+    purpose: |
+      Execute email and text sequences that build tension, release bonuses
+      strategically, and drive urgency. "The texts draw attention to the emails."
+
+    philosophy: |
+      "I use a seven-day campaign so I meet with everyone to close them.
+      Any longer and it loses urgency. Any shorter and I miss out on sales."
+
+    sequence_paths:
+      push_to_consult:
+        duration: "7 days"
+        use_case: "High price points, limited sales staff"
+        strategy: "Spread appointments over campaign window"
+
+        timeline:
+          day_7:
+            action: "Primer text"
+            content: "Let them know something big is coming"
+            source: "p.9"
+
+          day_6:
+            action: "Announcement email + text"
+            content: "1-3 core components, price indication, deadline"
+            cta: "Schedule consult"
+            source: "p.9"
+
+          day_5:
+            action: "Recap email"
+            bonus_release: "Bonus 1 (Status type)"
+            source: "p.9"
+
+          day_3:
+            action: "Sales update email + text"
+            content: "How many sold, how many left, first-come-first-serve"
+            source: "p.9"
+
+          day_2:
+            action: "X Spots Left email + text"
+            bonus_release: "Bonus 2 (Secrets type)"
+            source: "p.10"
+
+          day_1_am:
+            action: "Warning email + text"
+            bonus_release: "Bonus 3 (Best - Access type)"
+            source: "p.10"
+
+          day_1_pm:
+            action: "Sold out notification"
+            source: "p.10"
+
+          optional:
+            action: "Back-out notification"
+            trigger: "Customer cancels"
+            source: "p.10"
+
+      push_to_auto_checkout:
+        duration: "5 days"
+        use_case: "Very strong brand, can create stampede"
+        strategy: "Build tension, stampede at cart open"
+
+        timeline:
+          day_5:
+            action: "Primer text"
+            content: "Something big coming"
+            source: "p.10"
+
+          day_4:
+            action: "Announcement email + text"
+            content: "Core components, price"
+            source: "p.10"
+
+          day_2:
+            action: "48h warning email + text"
+            bonus_release: "Bonus 1 (Personalization type)"
+            content: "Set alarm, first-come-first-serve"
+            source: "p.10"
+
+          day_1_60min:
+            action: "Final prep text"
+            content: "Have payment ready"
+            source: "p.10"
+
+          cart_open:
+            action: "Cart open email + text"
+            bonus_release: "Bonus 3 (Best - Experience type, immediate benefit)"
+            source: "p.10-11"
+
+          cart_60min:
+            action: "Sales update"
+            content: "How many sold, how many left"
+            source: "p.11"
+
+          cart_6h:
+            action: "X Spots Left + surprise bonus"
+            bonus_release: "Unlisted bonus (Convenience type)"
+            content: "This should close out the offer"
+            source: "p.11"
+
+          cart_12h:
+            action: "Sold out notification"
+            source: "p.11"
+
+          next_day:
+            action: "Back-out notification"
+            trigger: "Customer cancels"
+            source: "p.11"
+
+    email_subjects:
+      - "We need to talk"
+      - "best. deal. ever. [for 10 people only]"
+      - "how to [get dream result] and save money doing it"
+      - "2 spots left + game changer"
+      - "Saving $XXX ends tonight. Don't kick yourself tomorrow."
+      - "RE: your goals we set"
+      source: "p.21-26"
+
+    text_pairing: |
+      "I like pairing texts with emails. The texts draw attention to the emails.
+      The emails give the details. Pretty simple."
+      source: "p.19"
+
+  scarcity-manager:
+    id: scarcity-manager
+    title: "Scarcity & Urgency Specialist"
+    tier: tier_1
+    icon: "⏰"
+
+    purpose: |
+      Manage authentic scarcity and urgency throughout the campaign.
+      "You want to sell out fast. This makes your Fast Cash offer even more
+      compelling the next time you make it...selling out even faster."
+
+    scarcity_elements:
+      spots_limit:
+        calculation: "5-10% of customer base"
+        rationale: "Cap it to a number where you will absolutely sell out"
+        source: "p.8"
+
+      time_limit:
+        consult_path: "7 days or until sold out"
+        auto_path: "~12 hours from cart open"
+        source: "p.9-11"
+
+    communication_triggers:
+      sales_update:
+        trigger: "After first 2-3 sales"
+        content: "How many sold already, how many left"
+        source: "p.9, p.11"
+
+      x_spots_left:
+        trigger: "2-3 spots remaining"
+        content: "Spots running out"
+        source: "p.10, p.11"
+
+      sold_out:
+        trigger: "All spots filled"
+        content: "Shows the promo was justified"
+        source: "p.10, p.11"
+
+      back_out:
+        trigger: "Customer cancels"
+        content: "One spot opened up"
+        source: "p.10, p.11"
+
+    waitlist_management:
+      rule: "I'd rather you sell out and then waitlist people who already tried to buy"
+      process: "If they had payment ready and just got there a little too late, get permission to notify them if a spot opens up"
+      action: "charge them if it does"
+      source: "p.11"
+
+  offer-optimizer:
+    id: offer-optimizer
+    title: "Mid-Campaign Offer Optimizer"
+    tier: tier_2
+    icon: "🔧"
+
+    purpose: |
+      Monitor campaign velocity and adjust offer if not selling fast enough.
+      "Consider adding things to the offer to make it more compelling."
+
+    intervention_triggers:
+      - trigger: "Less than 50% sold by campaign midpoint"
+        source: "p.19 - 'If you haven't sold out, or at least a substantial percentage'"
+        action: "Add value to offer"
+
+      - trigger: "Low open rates"
+        action: "Adjust subject lines or send times"
+
+      - trigger: "High opens, low clicks"
+        action: "Strengthen offer or reduce friction"
+
+      - trigger: "High clicks, low bookings"
+        action: "Improve calendar experience or add urgency"
+
+    optimization_techniques:
+      add_bonus:
+        description: "Add unexpected bonus to remaining messages"
+        example: "GAME CHANGER I WAS SAVING UNTIL NOW"
+        source: "Email 4 template, p.24"
+
+      enhance_value:
+        description: "Expand existing components"
+        example: "Additional premium feature"
+
+      extend_deadline:
+        description: "Only if strategically justified"
+        caution: "Undermines scarcity if overused"
+
+    guardrails:
+      - "Never discount - add value instead"
+      - "Maintain scarcity integrity"
+      - "All adjustments benefit all buyers"
+
+  fulfillment-coordinator:
+    id: fulfillment-coordinator
+    title: "Premium Fulfillment Coordinator"
+    tier: tier_2
+    icon: "🎯"
+
+    purpose: |
+      Ensure premium delivery exceeds expectations. "You. Will. Work. More.
+      For. These. Customers. You will earn that money."
+
+    pre_campaign:
+      capacity_check:
+        description: "Verify can fulfill 5-10% of customer base"
+        timing: "Before campaign launch"
+        source: "p.8"
+
+      resource_allocation:
+        description: "Block time, prepare materials, brief team"
+        timing: "1 week before launch"
+
+    during_campaign:
+      tracking:
+        description: "Monitor sales vs. capacity"
+        action: "Stop campaign if capacity reached"
+
+    post_campaign:
+      delivery_execution:
+        principle: "You. Will. Work. More. For. These. Customers"
+        standard: "Ultra-premium white-glove experience"
+        source: "p.8"
+
+      four_rs_collection:
+        items:
+          - "Reviews"
+          - "Results"
+          - "Referrals"
+          - "Resells"
+        source: "p.18 - 'Collect the 4Rs at the end'"
+        timing: "After delivery complete"
+
+  cadence-keeper:
+    id: cadence-keeper
+    title: "Quarterly Rhythm Manager"
+    tier: tier_2
+    icon: "📅"
+
+    purpose: |
+      Maintain the quarterly Fast Cash rhythm and manage list health.
+      "Once a quarter is the sweet spot."
+
+    quarterly_benefits:
+      - benefit: "Cleans up your pipeline of qualified-but-on-the-fence leads"
+        source: "p.15"
+      - benefit: "Increases the value of every customer"
+        source: "p.15"
+      - benefit: "Shows there's something new and interesting going on"
+        source: "p.15"
+      - benefit: "Allows time to deliver and reset"
+        source: "p.15"
+      - benefit: "Revenue drops straight to the bottom line"
+        source: "p.15"
+
+    cadence_rules:
+      optimal: "Once per quarter"
+      minimum: "Twice per year"
+      maximum: "Monthly (not recommended)"
+      source: "p.15"
+
+    cooldown_management:
+      duration: "Minimum 90 days between campaigns"
+      activity: "Return to value-add content"
+      source: "p.18 - 'Cooldown your list. Get back to providing value'"
+
+    annual_planning:
+      q1_campaign: "Schedule by January 15"
+      q2_campaign: "Schedule by April 15"
+      q3_campaign: "Schedule by July 15"
+      q4_campaign: "Schedule by October 15"
+
+    list_warmup:
+      trigger: "Cooled-off leads identified"
+      action: "Start warming up for next campaign"
+      source: "p.13"
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Phase I: Preparation
+  - task: "Assemble target list"
+    executor: Worker
+    automation: HIGH
+    guardrails: "CRM query, exclude 6-month cold leads"
+    source: "p.18 - 'Pick and assemble the list'"
+
+  - task: "Design ultra-premium offer"
+    executor: Human
+    automation: LOW
+    guardrails: "Use unscalable value categories"
+    source: "p.7-8"
+
+  - task: "Set premium price"
+    executor: Human
+    automation: LOW
+    guardrails: "10x-50x current price"
+    source: "p.8"
+
+  - task: "Set quantity cap"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "5-10% of customer base"
+    source: "p.8"
+
+  - task: "Choose selling method"
+    executor: Human
+    automation: LOW
+    guardrails: "Consult vs auto based on price/capacity"
+    source: "p.8"
+
+  - task: "Prep all materials"
+    executor: Worker
+    automation: HIGH
+    guardrails: "All emails/texts ready before launch"
+    source: "p.13 - 'Prep all your emails and texts ahead of time'"
+
+  - task: "Verify fulfillment capacity"
+    executor: Human
+    automation: LOW
+    guardrails: "Can deliver to all potential buyers"
+    source: "p.8"
+
+  # Phase II: Execution - Consult Path
+  - task: "Send Day 7 primer text"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Build anticipation only"
+    source: "p.9"
+
+  - task: "Send Day 6 announcement"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Include price indication"
+    source: "p.9"
+
+  - task: "Send Day 5 recap + Bonus 1"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Layer bonus, explain benefits"
+    source: "p.9"
+
+  - task: "Send Day 3 sales update"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Real numbers only"
+    source: "p.9"
+
+  - task: "Send Day 2 scarcity + Bonus 2"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Authentic scarcity"
+    source: "p.10"
+
+  - task: "Send Day 1 AM warning + Best Bonus"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Best bonus worth more than price"
+    source: "p.10"
+
+  - task: "Send sold out notification"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Only when actually sold out"
+    source: "p.10"
+
+  - task: "Handle back-outs"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Notify waitlist first"
+    source: "p.10"
+
+  # Phase II: Execution - Auto Checkout Path
+  - task: "Send Day 5 primer text"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Build anticipation"
+    source: "p.10"
+
+  - task: "Send Day 4 announcement"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Include price"
+    source: "p.10"
+
+  - task: "Send Day 2 48h warning + Bonus 1"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Alarm reminder"
+    source: "p.10"
+
+  - task: "Send 60-min prep text"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Payment ready reminder"
+    source: "p.10"
+
+  - task: "Open cart + Best Bonus"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Immediate benefit bonus"
+    source: "p.10-11"
+
+  - task: "Send 60-min sales update"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Real numbers"
+    source: "p.11"
+
+  - task: "Send 6h scarcity + surprise bonus"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Close out offer"
+    source: "p.11"
+
+  # Phase III: Consults
+  - task: "Conduct sales consults"
+    executor: Human
+    automation: LOW
+    guardrails: "Spread over 7-day window"
+    source: "p.8"
+
+  - task: "Process payments"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Card on file or immediate collection"
+    source: "p.8"
+
+  # Phase IV: Fulfillment & Follow-up
+  - task: "Deliver premium service"
+    executor: Human
+    automation: LOW
+    guardrails: "Over-deliver on promise"
+    source: "p.8, p.18"
+
+  - task: "Collect 4Rs"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Reviews, Results, Referrals, Resells"
+    source: "p.18"
+
+  - task: "Cooldown list"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Return to value content"
+    source: "p.18"
+
+  - task: "Schedule next Fast Cash"
+    executor: Human
+    automation: LOW
+    guardrails: "90 days out minimum"
+    source: "p.18"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "List Warmth Gate"
+    transition: "Pre-launch → Launch"
+    condition: "No leads with >6 months no contact"
+    type: blocking
+    failure_action: "Exclude cold leads, start warming for next campaign"
+    source: "p.13"
+
+  QG-002:
+    name: "Offer Value Gate"
+    transition: "Design → Launch"
+    condition: "offer_includes_unscalable_elements AND price >= 10x_current"
+    type: blocking
+    failure_action: "Add premium elements or reduce quantity"
+    source: "p.7-8"
+
+  QG-003:
+    name: "Material Readiness Gate"
+    transition: "Prep → Launch"
+    condition: "all_emails_ready AND all_texts_ready AND bonuses_defined"
+    type: blocking
+    failure_action: "Complete all materials"
+    source: "p.13"
+
+  QG-004:
+    name: "Capacity Gate"
+    transition: "Pre-launch → Launch"
+    condition: "fulfillment_capacity >= spots_offered"
+    type: blocking
+    failure_action: "Reduce spots or add capacity"
+    source: "p.8"
+
+  QG-005:
+    name: "Velocity Gate"
+    transition: "Midpoint → Continuation"
+    condition: "sold_percentage >= 50%"
+    type: warning
+    failure_action: "Add value to offer"
+    source: "p.19"
+
+  QG-006:
+    name: "Cooldown Gate"
+    transition: "Post-campaign → Next campaign"
+    condition: "days_since_last_campaign >= 90"
+    type: blocking
+    failure_action: "Wait for cooldown period"
+    source: "p.15"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  fast_cash_campaign_workflow:
+    trigger: "Quarterly calendar or urgent cash need"
+    phases:
+      - phase: "Preparation"
+        steps:
+          - step: 1
+            agent: list-curator
+            action: "Assemble warm audience list"
+            output: "Target list, exclusions"
+
+          - step: 2
+            agent: offer-architect
+            action: "Design ultra-premium offer"
+            output: "Core components, 3 bonuses, price"
+
+          - step: 3
+            agent: fulfillment-coordinator
+            action: "Verify delivery capacity"
+            output: "Capacity confirmed"
+
+          - step: 4
+            agent: sequence-engine
+            action: "Prep all materials"
+            output: "Campaign loaded in CRM"
+
+      - phase: "Execution"
+        steps:
+          - step: 5
+            agent: sequence-engine
+            action: "Execute sequence (7-day consult or 5-day auto)"
+            output: "Messages sent per schedule"
+
+          - step: 6
+            agent: scarcity-manager
+            action: "Monitor and communicate scarcity"
+            output: "Real-time updates"
+
+          - step: 7
+            agent: offer-optimizer
+            action: "Intervene if velocity low"
+            condition: "If sold < 50% at midpoint"
+            output: "Enhanced offer"
+
+      - phase: "Fulfillment"
+        steps:
+          - step: 8
+            agent: fulfillment-coordinator
+            action: "Deliver premium service"
+            output: "Service delivered"
+
+          - step: 9
+            agent: fulfillment-coordinator
+            action: "Collect 4Rs"
+            output: "Reviews, Results, Referrals, Resells"
+
+      - phase: "Cooldown"
+        steps:
+          - step: 10
+            agent: cadence-keeper
+            action: "Return to value content"
+            output: "List in cooldown"
+
+          - step: 11
+            agent: cadence-keeper
+            action: "Schedule next Fast Cash"
+            output: "Next campaign dated"
+
+  mid_campaign_optimization_workflow:
+    trigger: "Less than 50% sold at midpoint"
+    steps:
+      - step: 1
+        agent: offer-optimizer
+        action: "Diagnose velocity issue"
+        output: "Root cause identified"
+
+      - step: 2
+        agent: offer-architect
+        action: "Design additional value"
+        output: "New bonus or enhancement"
+
+      - step: 3
+        agent: sequence-engine
+        action: "Update remaining messages"
+        output: "Enhanced offer in sequence"
+
+      - step: 4
+        agent: scarcity-manager
+        action: "Communicate added value"
+        output: "Message sent"
+
+  back_out_recovery_workflow:
+    trigger: "Customer cancels after purchase"
+    steps:
+      - step: 1
+        agent: scarcity-manager
+        action: "Verify cancellation"
+        output: "Spot confirmed open"
+
+      - step: 2
+        agent: scarcity-manager
+        action: "Check waitlist"
+        output: "Waitlist prioritized"
+
+      - step: 3
+        agent: sequence-engine
+        action: "Send back-out notification"
+        target: "Waitlist first, then full list"
+        output: "Notification sent"
+
+      - step: 4
+        agent: scarcity-manager
+        action: "Process replacement sale"
+        output: "Spot filled"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    campaign_revenue:
+      formula: "Number Sold x Premium Price"
+      benchmark: "$30,000-$60,000 per campaign"
+      source: "Story: 'The average business collected an extra $30,000'"
+
+    gross_margin:
+      target: "90%+"
+      source: "'My Fast Cash Plays run at least 90% gross margins'"
+
+    sell_out:
+      target: "100% of spots filled"
+      velocity_target: "<50% of campaign duration"
+
+  secondary:
+    customer_take_rate:
+      formula: "Buyers / Total Customers"
+      target: "5-15%"
+      source: "10x The 10% rule"
+
+    four_rs_collection:
+      items: ["Reviews", "Results", "Referrals", "Resells"]
+      target: ">75%"
+
+  annual:
+    fast_cash_revenue:
+      formula: "Sum of 4 quarterly campaigns"
+      benchmark: "$200k+ for $300k base business"
+      source: "ROI Benchmarks, p.15-16"
+
+    profit_contribution:
+      benchmark: "~50% of annual profit"
+      source: "'nearly half my profit'"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Not selling fast enough"
+    possible_causes:
+      - "Offer not compelling enough"
+      - "Price too high for value offered"
+      - "List too cold"
+      - "Messaging not resonating"
+    diagnosis:
+      - "Check open rates (list engagement)"
+      - "Check click rates (offer interest)"
+      - "Check booking/purchase rates (value perception)"
+    solutions:
+      - "Add more value to offer"
+      - "Add unexpected bonus"
+      - "Enhance messaging urgency"
+    source: "p.19"
+
+  - symptom: "High opens, low conversions"
+    possible_causes:
+      - "Offer unclear"
+      - "Price shock without value shock"
+      - "CTA friction"
+    diagnosis:
+      - "Review offer presentation"
+      - "Test different CTAs"
+    solutions:
+      - "Clarify value proposition"
+      - "Add payment flexibility (card on file)"
+      - "Simplify booking process"
+
+  - symptom: "Customers backing out"
+    possible_causes:
+      - "Buyer's remorse"
+      - "Delivery concerns"
+      - "Financial overextension"
+    diagnosis:
+      - "Review back-out reasons"
+      - "Check delivery communication"
+    solutions:
+      - "Improve onboarding"
+      - "Send reassurance content"
+      - "Offer payment plan (if appropriate)"
+
+  - symptom: "List fatigue"
+    possible_causes:
+      - "Too frequent campaigns"
+      - "Insufficient value content between campaigns"
+      - "Scarcity credibility damaged"
+    diagnosis:
+      - "Review campaign frequency"
+      - "Check engagement trends"
+    solutions:
+      - "Extend cooldown period"
+      - "Increase value content"
+      - "Rebuild scarcity credibility"
+    source: "p.15"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Specific pricing calculator for different industries"
+    severity: Medium
+    clarification_needed: "How to calculate 10x-50x for different business models"
+
+  - id: GAP-002
+    description: "Fulfillment capacity planning formulas"
+    severity: Medium
+    clarification_needed: "Time/resource requirements per premium customer"
+
+  - id: GAP-003
+    description: "A/B testing guidance for offers"
+    severity: Low
+    clarification_needed: "How to test offer elements between campaigns"
+
+  - id: GAP-004
+    description: "International considerations"
+    severity: Low
+    clarification_needed: "Timezone handling, currency, compliance"
+
+  - id: GAP-005
+    description: "Integration with Cash Calendar playbook"
+    severity: Medium
+    note: "Referenced but not detailed in Fast Cash playbook"
+    source: "p.16"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 6
+  workflows_documented: 3
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

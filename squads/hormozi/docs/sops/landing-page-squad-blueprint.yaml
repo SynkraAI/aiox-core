@@ -1,0 +1,1373 @@
+# Landing Page Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: Checklist LP - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: landing-page
+  purpose: "Create landing pages that remove every reason NOT to buy using the Value Equation"
+  domain: conversion-optimization
+  source_playbook: "Checklist LP - Alex Hormozi"
+
+  core_equation: |
+    Value = (Dream Outcome x Perceived Likelihood) / (Time Delay x Effort & Sacrifice)
+
+    LP Elements Attack Each Variable:
+    ├── Dream Outcome ↑: Headlines, benefícios, cases
+    ├── Probabilidade Percebida ↑: Prova social, garantias, autoridade
+    ├── Atraso Temporal ↓: Promessas de velocidade, vitórias rápidas
+    └── Esforço & Sacrifício ↓: UX simples, suporte visível, checkout fácil
+
+  philosophy: |
+    "Uma landing page não vende. Ela remove todas as razões para NÃO comprar."
+
+    "Sua página está pronta quando um prospect qualificado, após lê-la completamente,
+    não consegue articular uma razão lógica para não comprar - além de não ter o dinheiro."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIER STRUCTURE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+tier_structure:
+  orchestrator:
+    - agent: lp-coordinator
+      role: "Orchestrate the 10-phase landing page creation workflow"
+      decisions:
+        - "Phase sequencing and prioritization"
+        - "Quality gate enforcement"
+        - "Resource allocation across phases"
+      kpis:
+        - "Conversion rate (cold: >3%, warm: >8%)"
+        - "Scroll rate (>40%)"
+        - "Checkout abandonment (<25%)"
+
+  tier_0_diagnosis:
+    - agent: value-auditor
+      role: "Audit page against Value Equation variables"
+      inputs:
+        - "Current page content"
+        - "Conversion data"
+        - "Heatmap analysis"
+      outputs:
+        - "Value Equation score by variable"
+        - "Gap identification"
+        - "Priority recommendations"
+
+    - agent: objection-mapper
+      role: "Map customer objections and verify page addresses them"
+      inputs:
+        - "Customer feedback"
+        - "Sales call recordings"
+        - "Support tickets"
+      outputs:
+        - "Objection inventory"
+        - "Coverage analysis"
+        - "FAQ recommendations"
+
+  tier_1_execution:
+    - agent: above-fold-specialist
+      role: "Craft the critical first impression elements"
+      specialization: "Phase 1: Above the Fold"
+      deliverables:
+        - "Headline using 'Como [RESULTADO] em [TIMEFRAME] sem [DOR]' structure"
+        - "Subheadline using '[MECANISMO] usado por [NÚMERO] [AVATAR] para [RESULTADO]'"
+        - "Benefit-oriented CTA ('Quero [RESULTADO] →')"
+        - "Immediate social proof"
+        - "Real urgency indicators"
+      tests:
+        - "Read aloud test - must sound natural"
+        - "5-second test - can user identify offer?"
+        - "Mobile visibility without scroll"
+
+    - agent: mobile-optimizer
+      role: "Ensure 60%+ mobile traffic is served perfectly"
+      specialization: "Phase 2: Mobile Experience"
+      targets:
+        load_time: "<3 seconds on 3G"
+        pagespeed: ">90"
+        text_size: "minimum 16px"
+        button_size: "minimum 44px height"
+      techniques:
+        - "Image compression"
+        - "CDN implementation"
+        - "Lazy loading"
+        - "Real device testing"
+
+    - agent: persuasion-architect
+      role: "Structure the logical persuasion journey"
+      specialization: "Phase 3: Persuasion Structure"
+      elements:
+        hierarchy: "Headline → Subheadline → VSL/Image → Benefits → CTA"
+        vsl_duration:
+          cold_traffic: "8-15 min"
+          warm_traffic: "15-45 min"
+        bullet_formula: "✓ [RESULTADO] para que você possa [BENEFÍCIO EMOCIONAL]"
+        bullet_limit: "5-7 maximum"
+
+    - agent: qualification-specialist
+      role: "Create strategic qualification sections"
+      specialization: "Phase 4: Qualification & Objections"
+      sections:
+        para_quem_e:
+          structure: "Este [PRODUTO] é perfeito se: ☑️ [SITUAÇÃO] ☑️ [DOR] ☑️ [DESEJO]"
+          position: "After solution, before price"
+        para_quem_nao_e:
+          structure: "ATENÇÃO: Isso NÃO é para você se: ❌ [DESQUALIFICADOR]"
+          position: "Immediately after Para Quem É"
+        faq:
+          count: "5 biggest objections"
+          format: "Question bold, answer reinforces benefit"
+          universal_objections:
+            - "Funciona pra mim?"
+            - "Quanto tempo?"
+            - "E se não funcionar?"
+            - "Preciso de X?"
+            - "Como é o suporte?"
+
+    - agent: value-presenter
+      role: "Present pricing with proper context and anchoring"
+      specialization: "Phase 5: Value Structure"
+      sequence:
+        - step: 1
+          action: "Show value stack (total R$15.000+)"
+        - step: 2
+          action: "Compare alternatives (Agência vs Consultor vs DIY)"
+        - step: 3
+          action: "Present price"
+        - step: 4
+          action: "Reinforce with guarantee"
+        - step: 5
+          action: "Add urgency"
+      guarantee_template: |
+        GARANTIA TRIPLA "VITÓRIA CERTA":
+        ✓ Implemente por 21 dias. Sem resultados? Dinheiro de volta.
+        ✓ Não ficar satisfeito por qualquer motivo? Dinheiro de volta.
+        ✓ Aplicar tudo e não ter ROI positivo? Devolvemos 2X seu investimento.
+
+    - agent: authority-builder
+      role: "Build creator credibility and social proof"
+      specialization: "Phase 6: Authority & Trust"
+      creator_section:
+        elements:
+          - "Professional photo"
+          - "2-3 quantifiable credentials"
+          - "1 vulnerability"
+        script: "Story of failure → discovery → mission to help"
+        tone: "Human, not 'perfect guru'"
+      testimonials:
+        quantity: "3-5 cases with numerical results"
+        format: "Mix of text, video, before/after"
+        distribution: "Spread throughout page, not clustered"
+        matching: "Avatar identical to prospect"
+
+    - agent: conversion-optimizer
+      role: "Maximize checkout completion"
+      specialization: "Phase 7: Conversion & Checkout"
+      cta_strategy:
+        frequency: "Every 2-3 sections"
+        positions: ["Above fold", "After benefits", "After value", "After guarantee", "Final"]
+        design: "Identical color/format for consistency"
+        hack: "Arrow (→) increases CTR 12-26%"
+      checkout:
+        steps: "3 maximum (Info → Payment → Confirmation)"
+        progress_bar: "Reduces abandonment 18-30%"
+        security_seals: ["SSL", "Card logos", "Compra Segura", "Privacy"]
+
+  tier_2_judgment:
+    - agent: analytics-specialist
+      role: "Monitor, test, and optimize based on data"
+      specialization: "Phase 8: Optimization & Monitoring"
+      tools:
+        analytics: "Google Analytics 4 + Facebook Pixel"
+        heatmaps: "Hotjar or Microsoft Clarity"
+        ab_testing: "Google Optimize or native"
+      benchmarks:
+        scroll_rate: ">40% past above fold"
+        conversion_cold: ">3%"
+        conversion_warm: ">8%"
+        checkout_abandonment: "<25%"
+        mobile_vs_desktop: "Equal or better"
+
+    - agent: recovery-specialist
+      role: "Capture abandoning visitors and recover lost conversions"
+      specialization: "Phase 9: Support & Recovery"
+      support:
+        options: ["WhatsApp floating", "Integrated chat", "Phone highlighted"]
+        script: "Vi que está há X minutos. Posso tirar alguma dúvida?"
+        function: "Reduce Effort & Sacrifice"
+      exit_intent:
+        trigger: "Mouse leaving page"
+        offer: "Smaller discount or related lead magnet"
+        copy: "Espera! Antes de ir... + irresistible offer"
+      retargeting:
+        pixels: ["Facebook", "Google", "Other channels"]
+        audiences: ["Visitors", "Time on page", "Scroll depth"]
+
+    - agent: compliance-guardian
+      role: "Ensure legal compliance and technical reliability"
+      specialization: "Phase 10: Compliance & Protection"
+      disclaimers:
+        results: "Resultados não são típicos + real examples"
+        health: "Full medical disclaimer if applicable"
+        financial: "Investment disclaimer if applicable"
+        position: "Footer + near specific claims"
+      policies:
+        privacy: "LGPD compliant"
+        terms: "Lawyer-reviewed"
+        cookies: "Banner per legislation"
+      technical:
+        uptime: ">99.9%"
+        backup: "Daily automatic"
+        cdn: "Global speed"
+        monitoring: "Alerts if page goes down"
+
+    - agent: error-hunter
+      role: "Identify and fix the 5 Fatal Errors"
+      fatal_errors:
+        - error: "Selling features instead of results"
+          detection: "Copy lists features without emotional benefits"
+          fix: "Apply formula '...para que você possa [RESULTADO EMOCIONAL]'"
+        - error: "Multiple offers on same page"
+          detection: "More than one pricing option"
+          fix: "One page = one offer = one decision"
+        - error: "Weak or missing guarantee"
+          detection: "Generic 'satisfaction guaranteed' or none"
+          fix: "Create specific, conditional, even 'unfair' guarantee"
+        - error: "Price without context"
+          detection: "Price shown without value stack or comparisons"
+          fix: "Value → Comparisons → Price → Guarantee → Urgency"
+        - error: "Generic niche copy"
+          detection: "Phrases like 'Transforme sua vida', 'Alcance seus sonhos'"
+          fix: "Use exact language your avatar uses"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENT DEFINITIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents:
+  lp-coordinator:
+    id: lp-coordinator
+    title: "Landing Page Orchestrator"
+    tier: orchestrator
+    icon: "🎯"
+
+    purpose: |
+      Coordinate the 10-phase landing page creation process to maximize conversions.
+      Ensure all Value Equation variables are optimized.
+
+    core_frameworks:
+      - name: "Value Equation"
+        formula: "(Dream Outcome × Likelihood) / (Time × Effort)"
+      - name: "10-Phase Process"
+        phases:
+          - "Above the Fold"
+          - "Mobile Experience"
+          - "Persuasion Structure"
+          - "Qualification & Objections"
+          - "Value Structure"
+          - "Authority & Trust"
+          - "Conversion & Checkout"
+          - "Optimization & Monitoring"
+          - "Support & Recovery"
+          - "Compliance & Protection"
+
+    decision_authority:
+      - "Phase sequencing"
+      - "Resource allocation"
+      - "Quality gate enforcement"
+      - "Launch readiness"
+
+    inputs:
+      - "Offer definition"
+      - "Avatar profile"
+      - "Proof assets"
+      - "Technical requirements"
+
+    outputs:
+      - "Phase completion status"
+      - "Quality gate results"
+      - "Launch recommendation"
+      - "Optimization priorities"
+
+    success_metrics:
+      primary:
+        - name: "Conversion Rate"
+          target_cold: ">3%"
+          target_warm: ">8%"
+        - name: "Scroll Rate"
+          target: ">40%"
+      secondary:
+        - "Checkout abandonment <25%"
+        - "PageSpeed >90"
+        - "Mobile load <3s"
+
+  above-fold-specialist:
+    id: above-fold-specialist
+    title: "First Impression Specialist"
+    tier: tier_1
+    icon: "⚡"
+
+    purpose: |
+      Create the critical first 3-second impression that determines if visitors stay.
+      Every element must be visible without scroll.
+
+    deliverables:
+      headline:
+        structure: "Como [RESULTADO ESPECÍFICO] em [TIMEFRAME] sem [DOR PRIMÁRIA]"
+        test: "Read aloud - must sound natural"
+        benchmark: "Visitor thinks 'como assim?' or 'isso é possível?'"
+        position: "First visible, largest font"
+
+      subheadline:
+        formula: "O [MECANISMO] usado por [NÚMERO] [AVATAR] para [RESULTADO COMPROVADO]"
+        size: "60% smaller than headline"
+        red_flag: "Sounds like sales jargon = revise"
+
+      cta:
+        orientation: "Benefit, not action"
+        example_good: "Quero 30 Clientes em 90 Dias →"
+        example_bad: "Comprar"
+        design:
+          mobile_width: "minimum 200px"
+          contrast: "3:1"
+          color: "Must 'scream'"
+        hack: "Arrow (→) increases CTR 12-26%"
+
+      social_proof:
+        format: "⭐⭐⭐⭐⭐ X+ Alunos | Y% Satisfação | Resultados em Z dias"
+        rule: "Real numbers only, never estimates"
+        position: "Below CTA or integrated in header"
+
+      urgency:
+        types: ["Countdown timer", "Limited spots", "Expiring bonus"]
+        critical: "Must be 100% real - fake scarcity destroys long-term trust"
+        design: "Red or orange, visible but not aggressive"
+
+    tests:
+      - name: "5-Second Test"
+        process: "Show page to 5 people for 5 seconds each"
+        question: "O que está sendo vendido aqui?"
+        fail_condition: "Cannot answer clearly = headline weak"
+
+      - name: "Read Aloud Test"
+        process: "Read headline aloud"
+        fail_condition: "Doesn't sound natural = revise"
+
+  mobile-optimizer:
+    id: mobile-optimizer
+    title: "Mobile Experience Specialist"
+    tier: tier_1
+    icon: "📱"
+
+    purpose: |
+      Optimize for 60%+ of traffic that comes from mobile.
+      Mobile performance must be equal to or better than desktop.
+
+    targets:
+      load_speed:
+        metric: "<3 seconds"
+        condition: "On mobile with 3G connection"
+        test: "Use real mobile data, not simulators"
+
+      pagespeed:
+        metric: ">90"
+        tool: "Google PageSpeed Insights"
+
+      text:
+        minimum_size: "16px"
+        requirement: "Legible without zoom"
+
+      buttons:
+        minimum_height: "44px"
+        rationale: "Average finger size"
+
+      spacing:
+        rule: "Elements not 'stuck together'"
+        requirement: "Easy thumb navigation"
+
+    optimizations:
+      - "Compress images"
+      - "Enable CDN"
+      - "Implement lazy loading"
+      - "Correct input types (email, phone, number)"
+      - "Enable autocomplete on forms"
+      - "Real-time validation (not just on submit)"
+
+    form_rules:
+      fields: "Minimum absolute necessary"
+      lead_magnet: "Name + email only"
+      input_types: "Correct keyboard (email, phone, number)"
+      autocomplete: "Enabled for all fields"
+
+  persuasion-architect:
+    id: persuasion-architect
+    title: "Persuasion Structure Specialist"
+    tier: tier_1
+    icon: "🏗️"
+
+    purpose: |
+      Build the logical journey that leads visitors from interest to action.
+      Follow the neurociência da decisão de compra.
+
+    visual_hierarchy:
+      flow: "Headline → Subheadline → VSL/Image → Benefits → CTA"
+      sizes: "Headline largest, then subheadline, then body"
+      contrast: "Important elements stand out visually"
+      whitespace: "Breathing room between sections"
+
+    vsl_specs:
+      cold_traffic: "8-15 minutes"
+      warm_traffic: "15-45 minutes"
+      thumbnail:
+        - "Obvious play button"
+        - "Benefit text overlay"
+      alternative: "Mockup of result/transformation"
+      format: "Centered, 16:9, responsive"
+
+    benefit_bullets:
+      formula: "✓ [RESULTADO] para que você possa [BENEFÍCIO EMOCIONAL]"
+      quantity: "5-7 maximum (more dilutes impact)"
+      test: "Each bullet makes prospect think 'preciso disso'"
+      design:
+        checkmarks: "Green"
+        spacing: "Generous"
+
+    anti_patterns:
+      features_not_benefits:
+        bad: "10 módulos + 50 templates + grupo no Facebook"
+        correction: "Complete: '...para que você possa [RESULTADO EMOCIONAL]'"
+        example:
+          bad: "Acesso ao grupo VIP no Facebook"
+          good: "Rede de networking com outros donos de agência faturando 6-7 dígitos para que você nunca mais se sinta isolado construindo seu império"
+
+  qualification-specialist:
+    id: qualification-specialist
+    title: "Qualification & Objection Handler"
+    tier: tier_1
+    icon: "🎯"
+
+    purpose: |
+      Qualify visitors and preemptively address all objections.
+      If page doesn't answer 7/10 common objections, losing conversions.
+
+    para_quem_e:
+      structure: |
+        Este [PRODUTO] é perfeito se:
+        ☑️ [SITUAÇÃO específica]
+        ☑️ [DOR que sente]
+        ☑️ [DESEJO que tem]
+      function: "Increase Perceived Likelihood ('foi feito para mim')"
+      position: "After presenting solution, before price"
+      tone: "Specific and inclusive"
+
+    para_quem_nao_e:
+      structure: |
+        ATENÇÃO: Isso NÃO é para você se:
+        ❌ [DESQUALIFICADOR 1]
+        ❌ [DESQUALIFICADOR 2]
+        ❌ [DESQUALIFICADOR 3]
+      function: "Exclusivity increases desire + qualifies better customers"
+      position: "Immediately after Para Quem É"
+      tone: "Firm but respectful"
+
+    faq_section:
+      quantity: "5 biggest objections"
+      format: "Question in bold, answer ends reinforcing benefit"
+      position: "Before final CTA section"
+      language: "Use exact words customers use"
+      universal_objections:
+        - question: "Funciona pra mim?"
+          type: "Fit objection"
+        - question: "Quanto tempo leva?"
+          type: "Time objection"
+        - question: "E se não funcionar?"
+          type: "Risk objection"
+        - question: "Preciso de X primeiro?"
+          type: "Prerequisite objection"
+        - question: "Como é o suporte?"
+          type: "Support objection"
+
+    objection_mapping:
+      process:
+        - "Document 10 most common objections from sales"
+        - "Verify page answers at least 7"
+        - "Adjust copy as needed"
+
+  value-presenter:
+    id: value-presenter
+    title: "Value & Pricing Specialist"
+    tier: tier_1
+    icon: "💰"
+
+    purpose: |
+      Present pricing with context that makes it feel "obvious" and "cheap".
+      Price without context is always "expensive".
+
+    presentation_sequence:
+      - step: 1
+        action: "Show value stack"
+        example: "R$15.000 total value"
+      - step: 2
+        action: "Compare alternatives"
+        template: "Agência: R$5k/mês | Consultor: R$15k | Fazer Sozinho: 2 anos | Você: R$997"
+      - step: 3
+        action: "Present price"
+      - step: 4
+        action: "Reinforce with guarantee"
+      - step: 5
+        action: "Add urgency"
+
+    comparison_matrix:
+      structure: "Alternative A (expensive) vs B (complex) vs C (slow) vs Your Solution"
+      function: "Make your price seem 'obvious' and 'cheap'"
+      position: "Immediately before or after value stack"
+
+    guarantee:
+      structure: "Multiple guarantee (Results + Satisfaction + Cancellation)"
+      design:
+        - "Highlighted box"
+        - "Seal/badge"
+        - "Contrasting color"
+      examples:
+        - "30 dias, sem perguntas"
+        - "Resultados em X dias ou 2X seu dinheiro"
+      template: |
+        GARANTIA TRIPLA "VITÓRIA CERTA":
+        ✓ Implemente por 21 dias. Sem resultados? Dinheiro de volta.
+        ✓ Não ficar satisfeito por qualquer motivo? Dinheiro de volta.
+        ✓ Aplicar tudo e não ter ROI positivo? Devolvemos 2X seu investimento.
+      position: "Near final price and CTAs"
+
+    anti_patterns:
+      weak_guarantee:
+        bad: "Satisfação garantida"
+        worse: "No guarantee"
+        problem: "Without risk reversal, Perceived Likelihood stays low"
+      price_without_context:
+        bad: "Investimento: R$997"
+        problem: "Price without context is always 'expensive'"
+
+  authority-builder:
+    id: authority-builder
+    title: "Authority & Trust Builder"
+    tier: tier_1
+    icon: "🏆"
+
+    purpose: |
+      Transfer credibility from creator/brand to visitor.
+      Build trust through human connection, not guru positioning.
+
+    creator_section:
+      elements:
+        - "Professional photo"
+        - "2-3 quantifiable credentials"
+        - "1 vulnerability (humanizing)"
+      script: "Story of failure → discovery → mission to help"
+      position: "After presenting solution, before showing price"
+      tone: "Human, not 'perfect guru'"
+
+    testimonials:
+      quantity: "3-5 specific cases with numerical results"
+      format:
+        - "Text testimonials"
+        - "Video testimonials"
+        - "Before/after comparisons"
+      distribution: "Spread throughout page, not clustered"
+      matching_rule: "Testimonials from avatars identical to prospect"
+
+    logos_credentials:
+      media: "Appearances, mentions, certifications"
+      clients: "Known company logos (if B2B)"
+      numbers: "Impressive quantities (X clients, Y results)"
+      design: "Discreet but visible, not ostentatious"
+
+  conversion-optimizer:
+    id: conversion-optimizer
+    title: "Conversion & Checkout Specialist"
+    tier: tier_1
+    icon: "🛒"
+
+    purpose: |
+      Maximize the percentage of visitors who complete the desired action.
+      Remove every friction point in the final meters.
+
+    cta_strategy:
+      frequency: "Every 2-3 sections"
+      variation: "Same CTA with slightly different text"
+      positions:
+        - "Above fold"
+        - "After benefits"
+        - "After value"
+        - "After guarantee"
+        - "Final"
+      design: "All identical in color/format for consistency"
+      hack: "Use arrow (→) - increases CTR 12-26%"
+
+    checkout_optimization:
+      steps: "3 maximum"
+      flow: "Info → Payment → Confirmation"
+      progress_bar:
+        design: "Clear visual of current progress"
+        function: "Reduce anxiety and abandonment"
+        impact: "Reduces abandonment 18-30%"
+
+    security_seals:
+      essential:
+        - "SSL certificate"
+        - "Card brand logos"
+        - "Compra Segura badge"
+        - "Privacy statement"
+      position: "In checkout AND near main CTAs"
+      function: "Eliminate final transaction fear"
+
+  analytics-specialist:
+    id: analytics-specialist
+    title: "Analytics & Optimization Specialist"
+    tier: tier_2
+    icon: "📊"
+
+    purpose: |
+      Monitor, test, and continuously improve based on real data.
+      Identify and fix abandonment points.
+
+    tracking_setup:
+      analytics: "Google Analytics 4 + Facebook Pixel configured"
+      heatmaps: "Hotjar or Microsoft Clarity installed"
+      ab_testing: "Google Optimize or native tool"
+      conversions: "Events configured for each micro-conversion"
+
+    benchmarks:
+      above_fold_scroll: ">40% (people pass the top)"
+      conversion_cold: ">3%"
+      conversion_warm: ">8%"
+      checkout_abandonment: "<25%"
+      mobile_performance: "Equal or better than desktop"
+
+    abandonment_analysis:
+      identify: "Where people stop scrolling (heatmap)"
+      analyze: "Which element is causing friction"
+      correct: "A/B test the problematic element"
+      monitor: "Continuous improvement based on real data"
+
+  recovery-specialist:
+    id: recovery-specialist
+    title: "Support & Recovery Specialist"
+    tier: tier_2
+    icon: "🔄"
+
+    purpose: |
+      Capture abandoning visitors and provide second chances.
+      Reduce Effort & Sacrifice through visible support.
+
+    visible_support:
+      options:
+        - "Floating WhatsApp"
+        - "Integrated chat"
+        - "Highlighted phone"
+      script: "Vi que está há X minutos. Posso tirar alguma dúvida?"
+      hours: "Availability clearly stated"
+      function: "Reduce psychological Effort & Sacrifice"
+
+    exit_intent:
+      trigger: "Mouse leaving page"
+      offer: "Smaller discount OR related lead magnet"
+      design: "Simple, not aggressive"
+      copy: "'Espera! Antes de ir...' + irresistible offer"
+
+    retargeting:
+      pixels: "Facebook, Google, other relevant channels"
+      audiences:
+        - "Page visitors"
+        - "Time on page"
+        - "Scroll depth"
+      creatives: "Prepared for retargeting sequence"
+      budget: "Reserved for recapturing visitors"
+
+  compliance-guardian:
+    id: compliance-guardian
+    title: "Compliance & Protection Specialist"
+    tier: tier_2
+    icon: "🛡️"
+
+    purpose: |
+      Ensure legal compliance and technical reliability.
+      Protect the business and build trust.
+
+    disclaimers:
+      results:
+        text: "Resultados não são típicos"
+        requirement: "+ real examples"
+      health:
+        condition: "If health-related"
+        requirement: "Complete medical disclaimer"
+      financial:
+        condition: "If money-related"
+        requirement: "Investment disclaimer"
+      position: "Footer AND near specific claims"
+
+    legal_policies:
+      privacy:
+        requirement: "LGPD compliant"
+      terms:
+        requirement: "Reviewed by specialist lawyer"
+      cookies:
+        requirement: "Banner per legislation"
+      links: "All policies linked in footer"
+
+    technical_reliability:
+      hosting:
+        uptime: ">99.9% guaranteed"
+      backup:
+        frequency: "Daily automatic"
+      cdn:
+        purpose: "Global speed"
+      monitoring:
+        alerts: "If page goes down"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXECUTOR MATRIX
+# ═══════════════════════════════════════════════════════════════════════════════
+
+executor_matrix:
+  # Phase 1: Above the Fold
+  - task: "Write headline using 'Como [RESULTADO] em [TIMEFRAME] sem [DOR]' structure"
+    executor: Human
+    automation: LOW
+    guardrails: "Must pass read aloud test"
+    agent: above-fold-specialist
+
+  - task: "Write subheadline using '[MECANISMO] usado por [NÚMERO] [AVATAR]' formula"
+    executor: Human
+    automation: LOW
+    guardrails: "Red flag if sounds like sales jargon"
+    agent: above-fold-specialist
+
+  - task: "Create benefit-oriented CTA"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Minimum 200px mobile, contrast 3:1, use arrow"
+    agent: above-fold-specialist
+
+  - task: "Add immediate social proof"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Real numbers only"
+    agent: above-fold-specialist
+
+  - task: "Configure urgency indicator"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Must be 100% real"
+    agent: above-fold-specialist
+
+  # Phase 2: Mobile Experience
+  - task: "Compress and optimize images"
+    executor: Worker
+    automation: HIGH
+    guardrails: "PageSpeed >90"
+    agent: mobile-optimizer
+
+  - task: "Configure CDN"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Load <3s on 3G"
+    agent: mobile-optimizer
+
+  - task: "Implement lazy loading"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Test on real devices"
+    agent: mobile-optimizer
+
+  - task: "Optimize form fields"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Minimum fields, correct input types"
+    agent: mobile-optimizer
+
+  - task: "Test on multiple devices"
+    executor: Human
+    automation: LOW
+    guardrails: "3 different devices minimum"
+    agent: mobile-optimizer
+
+  # Phase 3: Persuasion Structure
+  - task: "Establish visual hierarchy"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Follow flow: Headline → Subheadline → VSL → Benefits → CTA"
+    agent: persuasion-architect
+
+  - task: "Create/embed VSL"
+    executor: Human
+    automation: LOW
+    guardrails: "8-15 min cold, 15-45 min warm"
+    agent: persuasion-architect
+
+  - task: "Write benefit bullets"
+    executor: Human
+    automation: LOW
+    guardrails: "5-7 max, use formula, not features"
+    agent: persuasion-architect
+
+  # Phase 4: Qualification
+  - task: "Write 'Para Quem É' section"
+    executor: Human
+    automation: LOW
+    guardrails: "Specific and inclusive tone"
+    agent: qualification-specialist
+
+  - task: "Write 'Para Quem NÃO É' section"
+    executor: Human
+    automation: LOW
+    guardrails: "Firm but respectful"
+    agent: qualification-specialist
+
+  - task: "Create FAQ for 5 objections"
+    executor: Human
+    automation: LOW
+    guardrails: "Use customer's exact language"
+    agent: qualification-specialist
+
+  # Phase 5: Value Structure
+  - task: "Build value stack"
+    executor: Human
+    automation: LOW
+    guardrails: "Show before price"
+    agent: value-presenter
+
+  - task: "Create comparison matrix"
+    executor: Human
+    automation: LOW
+    guardrails: "Make price seem obvious"
+    agent: value-presenter
+
+  - task: "Write guarantee section"
+    executor: Human
+    automation: LOW
+    guardrails: "Specific, conditional, even unfair"
+    agent: value-presenter
+
+  # Phase 6: Authority
+  - task: "Write creator section"
+    executor: Human
+    automation: LOW
+    guardrails: "Photo + credentials + vulnerability"
+    agent: authority-builder
+
+  - task: "Gather and place testimonials"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "3-5 cases, numerical results, spread on page"
+    agent: authority-builder
+
+  - task: "Add logos and credentials"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Discreet but visible"
+    agent: authority-builder
+
+  # Phase 7: Conversion
+  - task: "Place strategic CTAs"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Every 2-3 sections, identical design"
+    agent: conversion-optimizer
+
+  - task: "Implement checkout progress bar"
+    executor: Worker
+    automation: HIGH
+    guardrails: "3 steps max"
+    agent: conversion-optimizer
+
+  - task: "Add security seals"
+    executor: Worker
+    automation: HIGH
+    guardrails: "In checkout AND near CTAs"
+    agent: conversion-optimizer
+
+  # Phase 8: Optimization
+  - task: "Configure tracking tools"
+    executor: Worker
+    automation: HIGH
+    guardrails: "GA4 + Pixel + Heatmap"
+    agent: analytics-specialist
+
+  - task: "Set up conversion events"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Track each micro-conversion"
+    agent: analytics-specialist
+
+  - task: "Analyze heatmaps and optimize"
+    executor: Human
+    automation: LOW
+    guardrails: "A/B test problematic elements"
+    agent: analytics-specialist
+
+  # Phase 9: Recovery
+  - task: "Configure support chat"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Visible, clear hours"
+    agent: recovery-specialist
+
+  - task: "Set up exit-intent popup"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Simple, not aggressive"
+    agent: recovery-specialist
+
+  - task: "Configure retargeting pixels"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Facebook + Google + audiences"
+    agent: recovery-specialist
+
+  # Phase 10: Compliance
+  - task: "Add required disclaimers"
+    executor: Human
+    automation: LOW
+    guardrails: "Footer + near claims"
+    agent: compliance-guardian
+
+  - task: "Create/link legal policies"
+    executor: Human
+    automation: LOW
+    guardrails: "LGPD compliant, lawyer reviewed"
+    agent: compliance-guardian
+
+  - task: "Configure backup and monitoring"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Daily backup, uptime alerts"
+    agent: compliance-guardian
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  QG-001:
+    name: "Above Fold Gate"
+    transition: "Phase 1 → Phase 2"
+    conditions:
+      - "Headline visible without scroll"
+      - "Subheadline visible without scroll"
+      - "CTA visible without scroll"
+      - "Headline passes read aloud test"
+    type: blocking
+    failure_action: "Revise above fold elements"
+
+  QG-002:
+    name: "Mobile Performance Gate"
+    transition: "Phase 2 → Phase 3"
+    conditions:
+      - "PageSpeed >90"
+      - "Load time <3s on 3G"
+      - "Text >16px"
+      - "Buttons >44px"
+    type: blocking
+    failure_action: "Optimize assets and layout"
+
+  QG-003:
+    name: "5-Second Test Gate"
+    transition: "Phase 3 → Phase 4"
+    conditions:
+      - "5 people can identify offer in 5 seconds"
+    type: blocking
+    failure_action: "Revise headline and value proposition"
+
+  QG-004:
+    name: "Objection Coverage Gate"
+    transition: "Phase 4 → Phase 5"
+    conditions:
+      - "Para Quem É section complete"
+      - "Para Quem NÃO É section complete"
+      - "FAQ addresses 5 universal objections"
+    type: blocking
+    failure_action: "Add missing sections"
+
+  QG-005:
+    name: "Value Context Gate"
+    transition: "Phase 5 → Phase 6"
+    conditions:
+      - "Value shown before price"
+      - "Comparisons present"
+      - "Guarantee specific and highlighted"
+    type: blocking
+    failure_action: "Restructure pricing presentation"
+
+  QG-006:
+    name: "Fatal Error Gate"
+    transition: "Pre-launch"
+    conditions:
+      - "No features without emotional benefits"
+      - "Single offer only"
+      - "Guarantee is specific (not generic)"
+      - "Price has context"
+      - "Copy is niche-specific"
+    type: blocking
+    failure_action: "Fix fatal error before launch"
+
+  QG-007:
+    name: "48-Hour Validation Gate"
+    transition: "Launch readiness"
+    conditions:
+      - "Day 1 Technical audit passed"
+      - "Day 1 Copy audit passed"
+      - "Day 2 Conversion audit passed"
+      - "Day 2 Objection test passed"
+    type: blocking
+    failure_action: "Complete validation protocol"
+
+  QG-008:
+    name: "Conversion Performance Gate"
+    transition: "Post-launch optimization"
+    conditions:
+      - "Conversion rate cold: >3%"
+      - "Conversion rate warm: >8%"
+      - "Checkout abandonment: <25%"
+    type: warning
+    failure_action: "Full funnel audit"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflows:
+  new_landing_page_workflow:
+    trigger: "New landing page creation request"
+    estimated_time: "4 weeks"
+    steps:
+      - week: 1
+        phase: "Above the Fold"
+        agents: [above-fold-specialist, mobile-optimizer]
+        deliverables:
+          - "Headline (Como structure)"
+          - "Subheadline (Mecanismo formula)"
+          - "CTA (benefit-oriented)"
+          - "Social proof"
+          - "Urgency indicator"
+        gate: QG-001
+
+      - week: 2
+        phase: "Persuasion & Qualification"
+        agents: [persuasion-architect, qualification-specialist]
+        deliverables:
+          - "Visual hierarchy established"
+          - "VSL or hero image"
+          - "Benefit bullets (5-7)"
+          - "Para Quem É section"
+          - "Para Quem NÃO É section"
+          - "FAQ (5 objections)"
+        gates: [QG-003, QG-004]
+
+      - week: 3
+        phase: "Value & Authority"
+        agents: [value-presenter, authority-builder]
+        deliverables:
+          - "Value stack"
+          - "Comparison matrix"
+          - "Guarantee section"
+          - "Creator section"
+          - "Testimonials placed"
+          - "Logos and credentials"
+        gates: [QG-005, QG-006]
+
+      - week: 4
+        phase: "Conversion & Launch"
+        agents: [conversion-optimizer, analytics-specialist, recovery-specialist, compliance-guardian]
+        deliverables:
+          - "Strategic CTAs placed"
+          - "Checkout optimized"
+          - "Security seals"
+          - "Tracking configured"
+          - "Exit-intent popup"
+          - "Retargeting setup"
+          - "Disclaimers and policies"
+        gate: QG-007
+
+  optimization_workflow:
+    trigger: "Conversion rate below benchmark"
+    steps:
+      - step: 1
+        agent: analytics-specialist
+        action: "Analyze heatmaps for abandonment points"
+        output: "Problem identification"
+
+      - step: 2
+        agent: error-hunter
+        action: "Check for 5 Fatal Errors"
+        output: "Error diagnosis"
+
+      - step: 3
+        agent: lp-coordinator
+        action: "Prioritize fixes"
+        output: "Optimization plan"
+
+      - step: 4
+        agents: [phase-specific]
+        action: "Implement fixes"
+        output: "Updated page"
+
+      - step: 5
+        agent: analytics-specialist
+        action: "A/B test changes"
+        output: "Performance comparison"
+
+  validation_workflow:
+    trigger: "48 hours before launch"
+    steps:
+      - day: 1
+        shift: "Morning"
+        action: "Technical audit"
+        checks:
+          - "Test on 3 devices"
+          - "Load <3s mobile"
+          - "All links working"
+          - "Forms submitting"
+          - "Checkout processing"
+
+      - day: 1
+        shift: "Afternoon"
+        action: "Copy audit"
+        checks:
+          - "5-second test with 5 people"
+          - "Headline read aloud natural"
+          - "Each section answers objection"
+          - "CTA benefit-oriented"
+          - "Zero unnecessary jargon"
+
+      - day: 2
+        shift: "Morning"
+        action: "Conversion audit"
+        checks:
+          - "Heatmap working"
+          - "Conversion events firing"
+          - "Exit-intent tested"
+          - "Retargeting pixels active"
+          - "Baseline metrics defined"
+
+      - day: 2
+        shift: "Afternoon"
+        action: "Objection test"
+        checks:
+          - "Show to 3 avatar people"
+          - "Ask why NOT buy"
+          - "Document objections"
+          - "Verify page answers each"
+          - "Adjust copy as needed"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# KPIs & SUCCESS METRICS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+kpis:
+  primary:
+    conversion_rate:
+      cold_traffic:
+        target: ">3%"
+        formula: "Conversions / Cold Visitors"
+      warm_traffic:
+        target: ">8%"
+        formula: "Conversions / Warm Visitors"
+
+    scroll_rate:
+      target: ">40%"
+      formula: "Users past fold / Total visitors"
+
+    checkout_abandonment:
+      target: "<25%"
+      formula: "Abandoned / Started checkout"
+
+  secondary:
+    pagespeed:
+      target: ">90"
+      tool: "Google PageSpeed Insights"
+
+    mobile_load:
+      target: "<3 seconds"
+      condition: "On 3G connection"
+
+    cta_click_rate:
+      track: "Per CTA position"
+
+    form_completion:
+      track: "Started vs completed"
+
+    exit_intent_conversion:
+      track: "Popup shown vs converted"
+
+  by_phase:
+    above_fold:
+      - "Scroll rate >40%"
+      - "5-second test pass rate"
+
+    mobile:
+      - "PageSpeed score"
+      - "Load time"
+      - "Mobile vs desktop conversion"
+
+    persuasion:
+      - "Time on page"
+      - "Scroll depth"
+
+    qualification:
+      - "FAQ interaction rate"
+
+    value:
+      - "Price section scroll-through"
+      - "Guarantee view rate"
+
+    authority:
+      - "Testimonial engagement"
+
+    conversion:
+      - "CTA click rates by position"
+      - "Checkout completion"
+
+    optimization:
+      - "A/B test win rate"
+      - "Iteration velocity"
+
+    recovery:
+      - "Exit-intent conversion"
+      - "Support-assisted conversions"
+      - "Retargeting ROI"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TROUBLESHOOTING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+troubleshooting:
+  - symptom: "Low conversion rate (<3% cold)"
+    possible_causes:
+      - "Weak headline"
+      - "Missing social proof"
+      - "Price without context"
+      - "Weak guarantee"
+      - "Generic copy"
+    diagnosis:
+      - "Run 5-second test"
+      - "Check for 5 Fatal Errors"
+      - "Review heatmap"
+    solutions:
+      - "Revise headline structure"
+      - "Add immediate proof"
+      - "Build value before price"
+      - "Strengthen guarantee"
+      - "Use avatar's exact language"
+
+  - symptom: "High scroll rate but low conversion"
+    possible_causes:
+      - "CTA not visible enough"
+      - "Price shock"
+      - "Objections not addressed"
+      - "Checkout friction"
+    diagnosis:
+      - "Check CTA visibility"
+      - "Review price presentation"
+      - "List unanswered objections"
+      - "Audit checkout flow"
+    solutions:
+      - "Increase CTA contrast"
+      - "Build more value before price"
+      - "Add FAQ items"
+      - "Simplify checkout"
+
+  - symptom: "High checkout abandonment (>25%)"
+    possible_causes:
+      - "Checkout too complex"
+      - "Security concerns"
+      - "Surprise fees"
+      - "No progress indicator"
+    diagnosis:
+      - "Count checkout steps"
+      - "Check security seals"
+      - "Review price display"
+      - "Check for progress bar"
+    solutions:
+      - "Reduce to 3 steps"
+      - "Add security badges"
+      - "Show total early"
+      - "Add progress bar"
+
+  - symptom: "Low mobile conversion"
+    possible_causes:
+      - "Slow load time"
+      - "Small buttons"
+      - "Form friction"
+      - "Unreadable text"
+    diagnosis:
+      - "Run PageSpeed"
+      - "Check button sizes"
+      - "Count form fields"
+      - "Check text size"
+    solutions:
+      - "Optimize images, add CDN"
+      - "Increase to 44px"
+      - "Reduce to minimum"
+      - "Increase to 16px+"
+
+  - symptom: "Visitors leave after headline"
+    possible_causes:
+      - "Headline doesn't resonate"
+      - "No immediate proof"
+      - "Doesn't look credible"
+    diagnosis:
+      - "Read aloud test"
+      - "Check proof visibility"
+      - "Above fold review"
+    solutions:
+      - "Revise using Como structure"
+      - "Add immediate social proof"
+      - "Add subheadline with numbers"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# GAPS TO RESOLVE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Value stack detailed methodology"
+    severity: Low
+    note: "INFERRED from context - section 5.1 not explicit"
+
+  - id: GAP-002
+    description: "A/B testing statistical thresholds"
+    severity: Medium
+    clarification_needed: "Sample size and significance levels"
+
+  - id: GAP-003
+    description: "Heatmap analysis criteria"
+    severity: Medium
+    clarification_needed: "What patterns indicate problems"
+
+  - id: GAP-004
+    description: "Exit-intent offer optimization"
+    severity: Low
+    clarification_needed: "Best secondary offers by offer type"
+
+  - id: GAP-005
+    description: "International compliance variations"
+    severity: High
+    clarification_needed: "Laws vary by jurisdiction"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VALIDATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 9
+  executor_matrix_complete: true
+  quality_gates_defined: 8
+  workflows_documented: 3
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

@@ -1,0 +1,177 @@
+---
+# FRAMEWORKS PROPRIETÁRIOS — José Carlos Amorim
+# Fonte: newsletter-growth-dankoe/data/author-profile.yaml + business-context.yaml
+# Uso: @marketing-ideation e @marketing-production consultam para conteúdo
+# Gerado: 2026-02-01
+
+# ============================================
+# INTERSECÇÃO REAL (ATUALIZADA 2026-01-20)
+# ============================================
+intersecao:
+  versao: "2.0 — atualizada após mapeamento direto com José"
+  data_atualizacao: "2026-01-20"
+
+  pilares_reais:
+    - nome: "Tradução de Complexidade"
+      curto: "11 anos transformando o complicado em claro"
+      descricao: "Pega conhecimento denso (filosofia, IA, neurociência) e transforma em algo que qualquer pessoa entende e aplica."
+      evidencias:
+        - "11 anos traduzindo informação em TV para 300k pessoas/dia"
+        - "Democratizar conhecimento filosófico e técnico"
+        - "Dom nato de simplificar o complexo"
+
+    - nome: "Reconhecimento de Padrões"
+      curto: "Vejo estruturas onde outros veem caos"
+      descricao: "Meta-habilidade de identificar estruturas e frameworks em qualquer domínio."
+      evidencias:
+        - "Buscar padrões é meta-habilidade declarada"
+        - "Padrão: Gatilho > Filosofia"
+        - "Processo: elencar pontos > extrair > refinar com LLM"
+
+    - nome: "Neurociência Aplicada"
+      curto: "Entendo como o cérebro processa pra otimizar o que crio"
+      descricao: "Conhecimento de como o cérebro aprende, processa e decide — aplicado na criação."
+      evidencias:
+        - "Taxonomia de Bloom"
+        - "COMO O CÉREBRO FUNCIONA + adapta conteúdo"
+        - "IA é simulação de como processamos"
+
+  amplificador:
+    nome: "IA Generativa"
+    papel: "Ferramenta de amplificação, NÃO pilar de identidade"
+
+  contexto_existencial:
+    nome: "Curiosidade Obsessiva"
+    nota: "Reframe de TDAH — habilidade, não condição clínica"
+
+  formula: "Tradução de Complexidade x Reconhecimento de Padrões x Neurociência Aplicada"
+  raridade: "5% x 5% x 5% = 0.0125% = 1 em 8.000"
+
+  pilares_deprecados:
+    nota: "NÃO USAR — mantido para referência"
+    antigos:
+      - "Jornalismo" # → agora é "Tradução de Complexidade"
+      - "IA Generativa" # → agora é amplificador
+      - "TDAH" # → agora é "Curiosidade Obsessiva"
+
+# ============================================
+# FRAMEWORKS DE COMUNICAÇÃO
+# ============================================
+frameworks:
+  espiral_expansiva:
+    nome: "Espiral Expansiva"
+    tipo: "Comunicação"
+    descricao: "Estrutura em 5 camadas concêntricas"
+    camadas:
+      1: "GANCHO EMOCIONAL — Curiosidade/identificação"
+      2: "METÁFORA VISUAL — Complexidade em imagem mental"
+      3: "FUNDAMENTO CONCEITUAL — Rigor intelectual"
+      4: "APLICAÇÃO PRÁTICA — Como usar agora"
+      5: "EXPANSÃO FILOSÓFICA — Conectar a algo maior (legado, propósito)"
+    uso: "Aulas, newsletters, posts longos"
+
+  ppt:
+    nome: "PPT (Pessoas, Processos, Tecnologia)"
+    tipo: "Implementação"
+    descricao: "Tecnologia é sempre a ÚLTIMA camada, nunca a primeira"
+    ordem:
+      1: "Pessoas — Input/Output de cada pessoa"
+      2: "Processos — O que entra e sai de cada processo"
+      3: "Tecnologia — SOMENTE APÓS clareza 1 e 2"
+    frase: "'Automatizar a bagunça' só gera bagunça mais rápida."
+    uso: "Quando falar de IA para negócios"
+
+  primeiros_principios:
+    nome: "Primeiros Princípios"
+    tipo: "Análise"
+    descricao: "Desconstrói conceitos em componentes fundamentais"
+    pergunta: "O que É isso na ESSÊNCIA?"
+    exemplo: "IA = autocomplete MUITO sofisticado que entende contexto"
+    uso: "Explicar conceitos técnicos"
+
+  omfa:
+    nome: "OMFA (Objetivo, Momento, Formato, Abordagem)"
+    tipo: "Conteúdo"
+    descricao: "Framework para estruturar qualquer peça de conteúdo"
+    uso: "Planejar posts, newsletters, apresentações"
+
+  linchpin:
+    nome: "Linchpin"
+    tipo: "Diagnóstico"
+    descricao: "Identificar O ponto crítico que destrava tudo"
+    uso: "Diagnóstico de negócios, priorização"
+
+# ============================================
+# DECISION MAKING
+# ============================================
+tomada_decisao:
+  estilo: "Caótico-intuitivo, NÃO planejador"
+
+  black_swan_logic: |
+    José é produto da lógica do cisne negro — eventos imprevisíveis
+    que só fazem sentido olhando pra trás. Transição de carreira
+    não foi planejada, foi intuída.
+
+  naval_4_tipos_sorte:
+    - "1. Sorte cega (aleatória)"
+    - "2. Sorte por persistência (quem tenta mais, acha mais)"
+    - "3. Sorte por preparação (parece caos mas é acúmulo)"
+    - "4. Sorte por identidade (reputação atrai oportunidades)"
+  jose_tipo: "Tipo 3 — preparação que parece caos"
+
+  filtro_3_perguntas:
+    - "Vai gerar impacto real?"
+    - "Está alinhado com o que quero construir?"
+    - "Vou me orgulhar disso daqui a 10 anos?"
+
+  anti_patterns:
+    - "OKRs"
+    - "Roadmaps"
+    - "SWOT"
+    - "Planejamento estratégico tradicional"
+  alternativa: "Intuição, sorte preparada, 'ir na raça'"
+
+# ============================================
+# SPECIFIC KNOWLEDGE (Naval)
+# ============================================
+specific_knowledge:
+  definicao: "Conhecimento que não pode ser treinado. Se pode ser treinado, será automatizado."
+  jose:
+    - "Ver padrões/metodologias em qualquer conteúdo"
+    - "Extrair estrutura via LLM + prompt"
+    - "Montar meta-prompt que gera sistema"
+    - "43 minds criadas usando DNA Mental 8 layers"
+    - "11 anos traduzindo complexidade"
+    - "TDAH como pattern-matching acelerado"
+    - "Nexialismo: conectar domínios distintos"
+  moat: "Comunicador de TV + IA Generativa + Neurodiversidade. Não se treina. Se VIVE."
+
+# ============================================
+# VALUE LADDER
+# ============================================
+value_ladder:
+  nivel_1:
+    nome: "Newsletter Mind to App + Sociedade dos Nexialistas"
+    preco: "R$0"
+    promessa: "1 framework executável com IA por semana"
+  nivel_2:
+    nome: "O Sistema Content-to-App"
+    preco: "R$997"
+    promessa: "Transforme qualquer conteúdo em app de IA vendável"
+  nivel_3:
+    nome: "Mentoria Content-to-App"
+    preco: "R$4.500"
+    promessa: "Saia com seu primeiro app IA funcionando"
+  nivel_4:
+    nome: "Agência"
+    preco: "R$25.000+"
+    promessa: "Eu transformo SEU conteúdo em app IA"
+
+# ============================================
+# ANTI-IDENTIDADE (CRÍTICO)
+# ============================================
+anti_identidade:
+  nunca_chamar_de: "Jornalista"
+  clarificacao: "NÃO é bom jornalista. É excelente COMUNICADOR."
+  quer_abandonar: "Identidade de jornalista"
+  regra: "NUNCA referir a José como 'jornalista' no conteúdo"

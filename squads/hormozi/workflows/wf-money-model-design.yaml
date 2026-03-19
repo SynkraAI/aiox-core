@@ -1,0 +1,1168 @@
+# Money Model Design Workflow
+# Based on Alex Hormozi's $100M Money Models methodology
+# Source: GMMM Framework + D.I.E. Framework + Pricing SOP
+# Version: 1.0.0
+
+id: wf-money-model-design
+name: "Money Model Design"
+version: "1.0.0"
+duration: "3-5 days"
+description: |
+  Workflow completo para desenhar modelo de monetização usando GMMM Framework:
+  Get Money (Attraction) → More Money (Upsells/Downsells) → Max Money (Continuity).
+
+  FILOSOFIA: "A matemática não mente. 82% dos negócios morrem por falta de
+  cash flow, não de clientes. Se você não está recuperando seu CAC em 30 dias,
+  você está indo à falência lentamente."
+
+  RESULTADO: Money Model que recupera CAC em 30 dias e mantém LTGP:CAC >= 3:1.
+
+  FÓRMULA CORE:
+  - Lucro 30 dias = Revenue 30 dias - (CAC + COGs)
+  - LTGP:CAC >= 3:1 (target mínimo)
+  - Churn mensal < 5%
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Criar modelo de monetização completo do zero"
+  - "Diagnosticar e consertar cash flow negativo"
+  - "Aumentar LTV sem aumentar CAC"
+  - "Adicionar upsells/downsells/continuity ao modelo"
+  - "Transformar transação única em máquina de receita"
+
+not_for:
+  - "Negócios sem produto/serviço definido (use WF-1 primeiro)"
+  - "Negócios com CAC desconhecido"
+  - "Modelos de marketplace (mecânica diferente)"
+
+decision_matrix_fit:
+  complexity: high
+  agents_required: 5
+  estimated_duration: "3-5 days"
+  user_involvement: "high (dados financeiros necessários)"
+  prerequisites:
+    - "Grand Slam Offer criada (WF-1 completo)"
+    - "Acesso a dados financeiros (CAC, ticket, churn)"
+    - "Produto/serviço já vendendo (mesmo que pouco)"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: hormozi-chief
+      role: "Audit do modelo atual, strategic oversight"
+      phases: [0]
+
+    - agent: hormozi-models
+      role: "Money Model design, GMMM Framework, offer sequencing"
+      phases: [1]
+
+    - agent: hormozi-pricing
+      role: "Price points, anchoring, premium positioning"
+      phases: [2]
+
+    - agent: hormozi-copy
+      role: "Upsell/Downsell page copy, offer presentation"
+      phases: [3]
+
+    - agent: hormozi-audit
+      role: "LTV:CAC validation, final checklist"
+      phases: [4]
+
+  synergies:
+    - agents: [hormozi-models, hormozi-pricing]
+      pattern: "Models designs the flow, Pricing optimizes each price point"
+
+    - agents: [hormozi-copy, hormozi-audit]
+      pattern: "Copy creates presentation, Audit validates economics"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 0: DISCOVERY & AUDIT
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-0
+    name: "Discovery & Current Model Audit"
+    days: "Day 0"
+    tier: 0  # Foundation - must complete first
+    description: |
+      Auditoria completa do modelo atual de monetização.
+      Coleta de todos os dados financeiros necessários para diagnóstico.
+
+      PRINCÍPIO: "Você não pode consertar o que não mede.
+      Dados financeiros são o raio-X do seu negócio."
+
+    agent: hormozi-chief
+
+    tasks:
+      - task_id: T0.1
+        name: "Coletar Dados Financeiros Core"
+        required: true
+        description: "CAC, ticket médio, conversão, churn, billing cycle"
+        output: "financial_data.yaml"
+
+      - task_id: T0.2
+        name: "Mapear Modelo Atual"
+        required: true
+        description: "Fluxo atual de ofertas (se houver)"
+        output: "current_model_map.yaml"
+
+      - task_id: T0.3
+        name: "Calcular Health Check"
+        required: true
+        description: "LTGP:CAC ratio e 30-day CAC recovery"
+        output: "health_check.yaml"
+
+      - task_id: T0.4
+        name: "Identificar Gaps"
+        required: true
+        description: "O que falta no modelo atual"
+        output: "model_gaps.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Financial Data Collection
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      financial_data_template:
+        description: "Dados financeiros essenciais"
+        fields:
+          - id: FIN_001
+            name: "CAC (Customer Acquisition Cost)"
+            question: "Quanto custa adquirir um cliente?"
+            format: "R$ X.XXX"
+            calculation: "Total gasto em marketing / Novos clientes"
+
+          - id: FIN_002
+            name: "Ticket Médio Inicial"
+            question: "Qual o valor da primeira compra?"
+            format: "R$ X.XXX"
+
+          - id: FIN_003
+            name: "COGs (Cost of Goods Sold)"
+            question: "Quanto custa entregar o produto/serviço?"
+            format: "R$ X.XXX ou X%"
+
+          - id: FIN_004
+            name: "Taxa de Conversão"
+            question: "De 100 leads, quantos compram?"
+            format: "X%"
+
+          - id: FIN_005
+            name: "Churn Mensal"
+            question: "Quantos clientes cancelam por mês?"
+            format: "X%"
+            target: "<5%"
+
+          - id: FIN_006
+            name: "LTV Atual"
+            question: "Quanto um cliente vale ao longo do tempo?"
+            format: "R$ X.XXX"
+
+          - id: FIN_007
+            name: "Billing Cycle"
+            question: "Com que frequência cobra?"
+            options: ["Único", "Mensal", "Trimestral", "Anual"]
+
+          - id: FIN_008
+            name: "Dias para Recuperar CAC"
+            question: "Em quantos dias recupera o investimento em aquisição?"
+            format: "X dias"
+            target: "<30 dias"
+
+      health_check_calculator:
+        description: "Calculadora de saúde do Money Model"
+        metrics:
+          ltgp_cac_ratio:
+            formula: "LTGP / CAC"
+            interpretation:
+              below_1: "CRÍTICO - Perdendo dinheiro em cada cliente"
+              1_to_2: "ALERTA - Margem muito baixa"
+              2_to_3: "ACEITÁVEL - Pode melhorar"
+              above_3: "SAUDÁVEL - Target ideal"
+
+          thirty_day_cash:
+            formula: "Revenue 30 dias - (CAC + COGs)"
+            interpretation:
+              negative: "CRÍTICO - Cash flow negativo"
+              zero: "BREAK-EVEN - Não cresce"
+              positive: "SAUDÁVEL - Pode reinvestir"
+
+          churn_analysis:
+            by_billing:
+              monthly: "Esperado: 5-10%"
+              quarterly: "Esperado: 3-5%"
+              annual: "Esperado: <3%"
+
+      model_gaps_checklist:
+        description: "Checklist de gaps no Money Model"
+        gaps:
+          - id: GAP_001
+            area: "Attraction"
+            question: "Tem oferta que atrai novos clientes?"
+            examples: ["Lead magnet", "Trial", "Giveaway"]
+
+          - id: GAP_002
+            area: "Upsell"
+            question: "Oferece algo mais no momento da compra?"
+            examples: ["Order bump", "One-time offer", "Bundle"]
+
+          - id: GAP_003
+            area: "Downsell"
+            question: "Tem alternativa para quem diz não?"
+            examples: ["Payment plan", "Versão lite", "Trial"]
+
+          - id: GAP_004
+            area: "Continuity"
+            question: "Tem receita recorrente?"
+            examples: ["Assinatura", "Membership", "Maintenance"]
+
+          - id: GAP_005
+            area: "Cross-sell"
+            question: "Oferece produtos complementares?"
+            examples: ["Acessórios", "Serviços adicionais"]
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Audit Complete"
+      criteria:
+        - "Dados financeiros completos (8/8)"
+        - "Modelo atual mapeado (ou confirmado que não existe)"
+        - "Health check calculado"
+        - "Gaps identificados"
+      human_review: true
+      message: "Revise os dados antes de prosseguir."
+      veto_conditions:
+        - condition: "CAC desconhecido"
+          action: "BLOCK - Sem CAC, não há como calcular viabilidade"
+        - condition: "LTGP:CAC < 1"
+          action: "WARNING - Modelo atual não sustentável"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 1: ARCHITECTURE (GMMM Framework)
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-1
+    name: "Model Architecture (GMMM)"
+    days: "Days 1-2"
+    tier: 1  # Core execution
+    description: |
+      Design da arquitetura completa usando GMMM Framework:
+      - GET MONEY: Attraction Offers (recover CAC)
+      - MORE MONEY: Upsells + Downsells (maximize per customer)
+      - MAX MONEY: Continuity (predictable revenue)
+
+      PRINCÍPIO: "Em vez de uma transação, crie uma máquina de 5-10 ofertas."
+
+    agent: hormozi-models
+
+    tasks:
+      - task_id: T1.1
+        name: "Design Stage I: Attraction Offers"
+        required: true
+        description: "Ofertas para atrair e converter strangers em customers"
+        output: "stage1_attraction.yaml"
+
+      - task_id: T1.2
+        name: "Design Stage II: Upsells"
+        required: true
+        description: "Ofertas para aumentar ticket no momento da compra"
+        output: "stage2_upsells.yaml"
+
+      - task_id: T1.3
+        name: "Design Stage III: Downsells"
+        required: true
+        description: "Alternativas para quem diz não à oferta principal"
+        output: "stage3_downsells.yaml"
+
+      - task_id: T1.4
+        name: "Design Stage IV: Continuity"
+        required: true
+        description: "Ofertas de receita recorrente"
+        output: "stage4_continuity.yaml"
+
+      - task_id: T1.5
+        name: "Mapear Sequência Completa"
+        required: true
+        description: "Fluxo de ofertas de ponta a ponta"
+        output: "offer_sequence.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: GMMM Framework
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      gmmm_framework:
+        description: "Get Money, More Money, Max Money"
+        stages:
+          - stage: 1
+            name: "GET MONEY"
+            type: "Attraction Offers"
+            objective: "Transformar strangers em customers"
+            target: "Cover CAC + COGs"
+            kpi: "30-day profit > $0"
+            principle: "Lucratividade em 30 dias ou morte"
+
+          - stage: 2
+            name: "MORE MONEY"
+            type: "Upsells + Downsells"
+            objective: "Maximizar lucro por cliente"
+            target: "3-5x initial value"
+            kpi: "30-day LTV > 3x CAC"
+            principle: "Solução cria problema → próxima venda"
+
+          - stage: 3
+            name: "MAX MONEY"
+            type: "Continuity"
+            objective: "Receita recorrente previsível"
+            target: "80%+ em continuity"
+            kpi: "Churn < 5% mensal"
+            principle: "Compromisso = Retenção"
+
+      attraction_offers_menu:
+        description: "Menu de Attraction Offers"
+        offers:
+          - id: ATT_001
+            name: "Win Your Money Back"
+            description: "Oferta onde cliente pode recuperar o investimento"
+            mechanism: "Cumpra X critérios = crédito de Y"
+            example: "Assista 100% do curso em 30 dias = R$500 em crédito"
+            when_use: "Produtos de educação/transformação"
+
+          - id: ATT_002
+            name: "Giveaway"
+            description: "Sorteio ou presente que atrai leads"
+            mechanism: "Participe de X = chance de ganhar Y"
+            example: "Indique 3 amigos = concorra a iPhone"
+            when_use: "Geração de leads em volume"
+
+          - id: ATT_003
+            name: "Decoy Offer"
+            description: "Opção básica que faz premium parecer melhor"
+            mechanism: "Básico vs Premium lado a lado"
+            example: "PDF R$47 vs Curso completo R$497"
+            when_use: "Ancoragem de valor"
+
+          - id: ATT_004
+            name: "Buy X Get Y Free"
+            description: "Bônus por compra"
+            mechanism: "Compre X, ganhe Y grátis"
+            example: "Compre 3 meses, ganhe 1 grátis"
+            when_use: "Aumentar ticket inicial"
+            math: "25% desconto, mas parece mais valor"
+
+          - id: ATT_005
+            name: "Pay Less Now or More Later"
+            description: "Incentivo para decisão imediata"
+            mechanism: "Preço sobe em X dias"
+            example: "R$1.997 hoje, R$2.497 amanhã"
+            when_use: "Criar urgência genuína"
+
+      upsell_offers_menu:
+        description: "Menu de Upsell Offers"
+        offers:
+          - id: UPS_001
+            name: "Classic Upsell"
+            description: "Você não pode ter X sem Y"
+            mechanism: "Complemento natural da compra"
+            example: "Comprou curso → Mentoria em grupo"
+            timing: "Imediatamente após checkout"
+
+          - id: UPS_002
+            name: "Menu Upsell"
+            description: "Opções apresentadas como menu"
+            steps:
+              1: "Unsell - Mostre que não precisa de tudo"
+              2: "Prescribe - Recomende baseado no perfil"
+              3: "A/B Test - Ofereça 2 opções"
+              4: "Card on File - Checkout sem atrito"
+            example: "Qual desses 3 pacotes faz mais sentido?"
+
+          - id: UPS_003
+            name: "Anchor Upsell"
+            description: "Sempre apresente premium primeiro"
+            mechanism: "Mostre $10k antes de $2k"
+            principle: "Ancoragem faz core parecer barato"
+            example: "Mentoria 1:1 $10k → Grupo $2k → DIY $500"
+
+          - id: UPS_004
+            name: "Rollover Upsell"
+            description: "Crédito da compra anterior"
+            mechanism: "O que pagou vira crédito para upgrade"
+            example: "R$500 do curso básico = crédito no premium"
+            when_use: "Upgrade de planos"
+
+          - id: UPS_005
+            name: "Economist Play"
+            description: "A, B, ou A+B por pouco mais"
+            mechanism: "Bundle parece irresistível"
+            example: "Livro R$50, App R$50, Ambos R$59"
+            reference: "The Economist pricing study"
+
+      downsell_offers_menu:
+        description: "Menu de Downsell Offers"
+        principle: "'Não' significa não para ESTA oferta, não para TODAS"
+        offers:
+          - id: DOW_001
+            name: "Payment Plan"
+            description: "Divide o valor em parcelas"
+            steps:
+              1: "Pergunta por que não (dinheiro? timing? fit?)"
+              2: "Se dinheiro → oferece parcelamento"
+              3: "Mostra que parcela é menor que problema diário"
+              4: "Compara com gastos frívolos"
+              5: "Oferece garantia específica"
+              6: "Reframe como investimento"
+              7: "Pergunta o que mais impede"
+            example: "R$4.997 à vista ou 12x R$497"
+            math: "Pode cobrar 10-20% mais parcelado"
+
+          - id: DOW_002
+            name: "Trial with Penalty"
+            description: "Teste com compromisso"
+            mechanism: "7 dias por R$1, depois R$X se não cancelar"
+            example: "7 dias por R$7, depois R$97/mês"
+            when_use: "Produtos de experiência"
+
+          - id: DOW_003
+            name: "Feature Downsell"
+            description: "Remove features, reduz preço"
+            mechanism: "Versão lite com menos funcionalidades"
+            example: "Sem calls 1:1 = R$997 vs R$1.997"
+            principle: "Algo é melhor que nada"
+
+          - id: DOW_004
+            name: "Seesaw Technique"
+            description: "Balança entre price e features"
+            mechanism: |
+              - Não quer pagar R$2k? → Que tal R$1k sem X?
+              - Não quer sem X? → Então R$2k é justo
+            use: "Negotiation aikido"
+
+      continuity_offers_menu:
+        description: "Menu de Continuity Offers"
+        principle: "Compromisso financeiro = Retenção"
+        offers:
+          - id: CON_001
+            name: "Retention Bonus"
+            description: "Bônus por permanecer"
+            mechanism: "Complete X meses = ganhe Y"
+            example: "6 meses = acesso vitalício ao módulo bônus"
+            when_use: "Reduzir churn nos primeiros meses"
+
+          - id: CON_002
+            name: "Continuity Discount"
+            description: "Desconto por compromisso mais longo"
+            mechanism: "Pague anual = X meses grátis"
+            example: "Anual = 2 meses grátis (R$997 vs R$1.194)"
+            math: "16% desconto mas garantia de 12 meses"
+
+          - id: CON_003
+            name: "Waived Fee"
+            description: "Taxa de setup removida"
+            mechanism: "Taxa única removida com compromisso"
+            example: "Setup R$500 waived se assinar anual"
+            when_use: "Serviços com onboarding"
+
+          - id: CON_004
+            name: "Cause-Based Cancellation"
+            description: "Penalty por cancelamento"
+            mechanism: "Se cancelar, X vai para caridade"
+            example: "Cancelamento = R$100 doados para ONG"
+            psychology: "Shame commitment"
+
+        billing_frequency_impact:
+          monthly: "5-10% churn, mais flexível"
+          quarterly: "3-5% churn, melhor cash flow"
+          annual: "<3% churn, melhor LTV, mais commitment"
+          recommendation: "Sempre ofereça anual primeiro"
+
+      offer_4x3_matrix:
+        description: "Matriz 4x3 de Ofertas"
+        headers: ["", "Quantidade", "Qualidade", "Diferente"]
+        rows:
+          - type: "Attraction"
+            quantidade: "More"
+            qualidade: "Premium"
+            diferente: "New"
+
+          - type: "Upsell"
+            quantidade: "Double"
+            qualidade: "Better"
+            diferente: "Complementary"
+
+          - type: "Downsell"
+            quantidade: "Less"
+            qualidade: "Lower"
+            diferente: "Alternative"
+
+          - type: "Continuity"
+            quantidade: "Unlimited"
+            qualidade: "Maintained"
+            diferente: "Recurring"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Architecture Complete"
+      criteria:
+        - "Stage I (Attraction) definido com pelo menos 1 oferta"
+        - "Stage II (Upsells) definido com pelo menos 2 ofertas"
+        - "Stage III (Downsells) definido com pelo menos 1 alternativa"
+        - "Stage IV (Continuity) definido"
+        - "Sequência completa mapeada (fluxograma)"
+      human_review: true
+      message: "Revise a arquitetura antes de definir preços."
+      veto_conditions:
+        - condition: "Sem oferta de Continuity"
+          action: "WARNING - Money Model sem receita recorrente é frágil"
+        - condition: "Menos de 5 ofertas no total"
+          action: "BLOCK - Insuficiente para Money Model efetivo"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 2: PRICING & ANCHORING
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Pricing & Anchoring"
+    days: "Day 2-3"
+    tier: 1  # Core execution
+    description: |
+      Definição de preços e estratégia de ancoragem para cada oferta.
+      Aplicação da Value Equation para maximizar valor percebido.
+
+      PRINCÍPIO: "Preço deve ser fração do valor total empilhado (mínimo 10x ROI para cliente)"
+
+    agent: hormozi-pricing
+
+    tasks:
+      - task_id: T2.1
+        name: "Definir Price Points"
+        required: true
+        description: "Preço para cada oferta no Money Model"
+        output: "price_points.yaml"
+
+      - task_id: T2.2
+        name: "Criar Sequência de Ancoragem"
+        required: true
+        description: "Ordem de apresentação para maximizar conversão"
+        output: "anchoring_sequence.yaml"
+
+      - task_id: T2.3
+        name: "Calcular Unit Economics Final"
+        required: true
+        description: "Projeção de LTGP:CAC com novo modelo"
+        output: "unit_economics_final.yaml"
+
+      - task_id: T2.4
+        name: "Validar 30-Day Cash Flow"
+        required: true
+        description: "Garantir lucro em 30 dias"
+        output: "thirty_day_projection.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Pricing Frameworks
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      pricing_principles:
+        description: "Princípios de precificação premium"
+        principles:
+          - id: PRICE_001
+            principle: "Preço < Valor Percebido SEMPRE"
+            ratio: "10x ROI mínimo para cliente"
+            example: "R$2k preço = R$20k+ valor percebido"
+
+          - id: PRICE_002
+            principle: "Anchor High First"
+            method: "Apresente premium antes de core"
+            example: "$10k → $2k → $500 (não $500 → $2k → $10k)"
+
+          - id: PRICE_003
+            principle: "Nichamento aumenta preço"
+            multipliers:
+              generic: "1x"
+              profession: "2-5x"
+              sub_niche: "5-10x"
+              ultra_specific: "10-100x"
+            example: "Gestão de Tempo R$19 → para Vendedores B2B Outbound R$499"
+
+          - id: PRICE_004
+            principle: "Parcelado pode ser mais caro"
+            math: "10-20% premium por conveniência"
+            example: "R$4.997 à vista ou 12x R$497 (R$5.964 total)"
+
+      anchoring_template:
+        description: "Sequência de ancoragem"
+        steps:
+          - step: 1
+            action: "Liste cada componente separadamente"
+
+          - step: 2
+            action: "Atribua valor de mercado a cada um"
+
+          - step: 3
+            action: "Some todos os valores"
+
+          - step: 4
+            action: "Apresente o total como âncora"
+
+          - step: 5
+            action: "Revele o preço real como fração"
+
+        example: |
+          - Sistema de Aceleração de Vendas (valor R$2.000)
+          - Templates de Email que Convertem (valor R$500)
+          - Biblioteca de Scripts Testados (valor R$1.500)
+          - Acesso ao Grupo Mastermind (valor R$3.000)
+          - Sessões 1-on-1 Quinzenais (valor R$4.000)
+          - Garantia de Resultado (valor R$5.000)
+
+          VALOR TOTAL: R$16.000
+
+          Seu investimento hoje: apenas R$4.997
+
+      unit_economics_calculator:
+        description: "Calculadora de unit economics"
+        metrics:
+          - metric: "Revenue 30 dias"
+            formula: "Ticket inicial + Upsells + (Continuity × 1 mês)"
+
+          - metric: "COGS 30 dias"
+            formula: "Custo de entrega de todas as ofertas aceitas"
+
+          - metric: "Gross Profit 30 dias"
+            formula: "Revenue 30 dias - COGS 30 dias"
+
+          - metric: "Net Profit 30 dias"
+            formula: "Gross Profit 30 dias - CAC"
+
+          - metric: "LTGP:CAC Ratio"
+            formula: "(LTV × Gross Margin) / CAC"
+            target: ">= 3:1"
+
+          - metric: "Payback Period"
+            formula: "CAC / Monthly Gross Profit"
+            target: "< 30 dias"
+
+      cash_first_hierarchy:
+        description: "Hierarquia Cash First"
+        priority:
+          1: "Lucro em 30 dias → Pode reinvestir"
+          2: "LTGP:CAC >= 3:1 → Modelo sustentável"
+          3: "Churn < 5% → Receita previsível"
+          4: "LTV growing → Negócio escalável"
+        rule: "Resolva 1 antes de 2, 2 antes de 3..."
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Pricing Complete"
+      criteria:
+        - "Todos os price points definidos"
+        - "Sequência de ancoragem documentada"
+        - "Unit economics mostram LTGP:CAC >= 3:1"
+        - "30-day cash flow positivo"
+      human_review: true
+      message: "Revise os preços e projeções antes de criar copy."
+      veto_conditions:
+        - condition: "LTGP:CAC < 2:1"
+          action: "BLOCK - Modelo não sustentável, ajustar preços"
+        - condition: "30-day cash flow negativo"
+          action: "BLOCK - Não recupera CAC em 30 dias"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 3: COPY & PRESENTATION
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Copy & Presentation"
+    days: "Day 3-4"
+    tier: 2  # Advanced execution
+    description: |
+      Criação de copy para cada oferta no Money Model.
+      Foco em páginas de upsell, downsell e continuity.
+
+      PRINCÍPIO: "A comunicação do valor é tão importante quanto sua criação."
+
+    agent: hormozi-copy
+
+    tasks:
+      - task_id: T3.1
+        name: "Criar Copy de Upsell Pages"
+        required: true
+        description: "Copy para cada página de upsell"
+        output: "upsell_copy/"
+
+      - task_id: T3.2
+        name: "Criar Copy de Downsell Pages"
+        required: true
+        description: "Copy para alternativas"
+        output: "downsell_copy/"
+
+      - task_id: T3.3
+        name: "Criar Copy de Continuity Offer"
+        required: true
+        description: "Copy para oferta recorrente"
+        output: "continuity_copy.md"
+
+      - task_id: T3.4
+        name: "Criar Scripts de Apresentação"
+        required: true
+        description: "Scripts para vendedores/checkout"
+        output: "sales_scripts/"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Copy Templates
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      upsell_page_template:
+        description: "Template de página de upsell"
+        structure:
+          - section: "Hook"
+            content: "Parabéns! Mas antes de finalizar..."
+            timing: "Imediatamente após checkout principal"
+
+          - section: "Bridge"
+            content: "Você não pode ter X sem Y"
+            psychology: "Conexão lógica com compra anterior"
+
+          - section: "Offer"
+            content: "Por isso, criamos [UPSELL]"
+            elements:
+              - "Nome com resultado específico"
+              - "3-5 bullets de benefício"
+              - "Preço com desconto exclusivo"
+
+          - section: "Scarcity"
+            content: "Esta oferta desaparece em X minutos"
+            type: "Genuine - checkout timer"
+
+          - section: "CTA"
+            content: "Adicionar ao pedido (apenas R$X)"
+            design: "Botão grande, cor contrastante"
+
+        example: |
+          "Parabéns pela compra do Sistema de Vendas!
+
+          Mas existe um problema...
+
+          O Sistema ensina O QUE fazer.
+          Ele não faz POR VOCÊ.
+
+          Por isso, clientes que adicionam a IMPLEMENTAÇÃO
+          conseguem resultados 3x mais rápido.
+
+          HOJE APENAS: Adicione o Pacote de Implementação
+          por apenas R$497 (normal R$997).
+
+          [ ADICIONAR AO PEDIDO ]"
+
+      downsell_page_template:
+        description: "Template de página de downsell"
+        structure:
+          - section: "Acknowledgment"
+            content: "Entendo. Talvez não seja o momento para [OFERTA PRINCIPAL]"
+            psychology: "Não pressione, valide"
+
+          - section: "Alternative"
+            content: "Que tal começar com [DOWNSELL]?"
+            elements:
+              - "Versão menor/mais acessível"
+              - "Mesmo resultado, prazo maior"
+              - "Preço significativamente menor"
+
+          - section: "Comparison"
+            content: "Compare as opções"
+            format: "Tabela lado a lado"
+
+          - section: "Low Friction CTA"
+            content: "Começar com [DOWNSELL]"
+            design: "Menos urgência, mais conforto"
+
+      continuity_offer_template:
+        description: "Template de oferta de continuidade"
+        structure:
+          - section: "Result Extension"
+            content: "O que acontece DEPOIS do curso?"
+            problem: "A maioria para de implementar"
+
+          - section: "Solution"
+            content: "Por isso criamos [MEMBERSHIP]"
+            benefits:
+              - "Acesso contínuo a atualizações"
+              - "Comunidade de implementadores"
+              - "Suporte ongoing"
+              - "Accountability mensal"
+
+          - section: "Pricing Options"
+            format: "Anchor high → Annual → Monthly"
+            example:
+              annual: "R$997/ano (economize R$194)"
+              monthly: "R$99/mês"
+
+          - section: "Commitment Incentive"
+            content: "Anual: Bônus X + Acesso a Y"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Copy Complete"
+      criteria:
+        - "Copy de upsell para cada oferta"
+        - "Copy de downsell para alternativas"
+        - "Copy de continuity"
+        - "Scripts de apresentação"
+      human_review: true
+      message: "Revise a copy antes da validação final."
+      veto_conditions:
+        - condition: "Upsell sem bridge lógico"
+          action: "WARNING - Conexão fraca com compra anterior"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 4: VALIDATION & OPTIMIZATION
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-4
+    name: "Validation & Optimization"
+    days: "Day 4-5"
+    tier: 3  # Quality assurance
+    description: |
+      Validação final do Money Model contra critérios de sucesso.
+      Otimização baseada no D.I.E. Framework.
+
+      PRINCÍPIO: "A matemática não mente. Se os números não fecham, o modelo não funciona."
+
+    agents:
+      primary: hormozi-audit
+      secondary: hormozi-models
+
+    tasks:
+      - task_id: T4.1
+        name: "Validar LTGP:CAC Final"
+        required: true
+        description: "Confirmar ratio >= 3:1"
+        output: "ltgp_cac_validation.yaml"
+
+      - task_id: T4.2
+        name: "Validar 30-Day Cash Flow"
+        required: true
+        description: "Confirmar lucro em 30 dias"
+        output: "cash_flow_validation.yaml"
+
+      - task_id: T4.3
+        name: "Aplicar D.I.E. Framework"
+        required: true
+        description: "Diagnose → Implement → Evaluate"
+        output: "die_framework.yaml"
+
+      - task_id: T4.4
+        name: "Criar Plano de Otimização"
+        required: true
+        description: "Próximos passos para melhorar"
+        output: "optimization_plan.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Validation & DIE Framework
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      validation_checklist:
+        description: "Checklist de validação do Money Model"
+        items:
+          - id: VAL_001
+            check: "LTGP:CAC >= 3:1"
+            required: true
+
+          - id: VAL_002
+            check: "30-day cash flow positivo"
+            required: true
+
+          - id: VAL_003
+            check: "Pelo menos 5 ofertas na sequência"
+            required: true
+
+          - id: VAL_004
+            check: "Continuity offer presente"
+            required: true
+
+          - id: VAL_005
+            check: "Ancoragem 3x+ do preço"
+            required: true
+
+          - id: VAL_006
+            check: "Downsell para quem diz não"
+            required: true
+
+          - id: VAL_007
+            check: "Copy para todas as páginas"
+            required: true
+
+          - id: VAL_008
+            check: "Sequência de ofertas mapeada"
+            required: true
+
+      die_framework:
+        description: "Diagnose → Implement → Evaluate"
+        stages:
+          diagnose:
+            question: "Onde está o problema?"
+            metrics:
+              - "Conversão de cada oferta"
+              - "Drop-off entre passos"
+              - "Churn por período"
+              - "AOV (Average Order Value)"
+            tools:
+              - "Heat maps"
+              - "Session recordings"
+              - "Conversion funnel"
+
+          implement:
+            question: "O que mudar?"
+            priority: "Uma variável por vez"
+            options:
+              - "Preço (A/B test)"
+              - "Copy (headline, bullets)"
+              - "Sequência (ordem das ofertas)"
+              - "Design (botões, layout)"
+
+          evaluate:
+            question: "Funcionou?"
+            metrics:
+              - "Revenue por cliente"
+              - "Conversion rate"
+              - "LTGP:CAC"
+              - "Payback period"
+            rule: "Mínimo 100 conversões para significância"
+
+      optimization_opportunities:
+        description: "Oportunidades de otimização"
+        quick_wins:
+          - "Adicionar order bump (5-15% take rate)"
+          - "Testar preço mais alto (+20%)"
+          - "Adicionar urgência genuína"
+          - "Melhorar copy do CTA"
+
+        medium_effort:
+          - "Adicionar upsell pós-checkout"
+          - "Criar downsell para rejeições"
+          - "Implementar continuity"
+          - "Testar billing frequencies"
+
+        strategic:
+          - "Redesenhar sequência completa"
+          - "Adicionar novo tier de oferta"
+          - "Lançar oferta complementar"
+          - "Expandir para novo avatar"
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Validation Complete"
+      criteria:
+        - "LTGP:CAC >= 3:1 confirmado"
+        - "30-day cash flow positivo confirmado"
+        - "Checklist 8/8 validado"
+        - "D.I.E. Framework aplicado"
+        - "Plano de otimização criado"
+      human_review: true
+      message: "Aprovação final do Money Model."
+      veto_conditions:
+        - condition: "LTGP:CAC < 2:1 após otimização"
+          action: "HALT - Modelo não viável, revisar arquitetura"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "hormozi-chief"
+    - document_reason: true
+    - require_human_override: true
+
+  common_failures:
+    - failure: "CAC desconhecido"
+      phase: 0
+      resolution: "Implementar tracking de aquisição"
+
+    - failure: "LTGP:CAC < 2:1"
+      phase: 2
+      resolution: "Aumentar preços ou reduzir CAC"
+
+    - failure: "30-day cash negativo"
+      phase: 2
+      resolution: "Adicionar upsell ou reduzir COGs"
+
+    - failure: "Poucas ofertas"
+      phase: 1
+      resolution: "Brainstorm adicional de ofertas"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-money-model-design"
+      status: "completed"
+      outputs:
+        - "money_model_package/"
+
+  checkpoint:
+    type: "checkpoint_reached"
+    payload:
+      phase_id: "PHASE-{N}"
+      status: "awaiting_review"
+      requires: "human_approval"
+
+  blocked:
+    type: "workflow_blocked"
+    payload:
+      phase_id: "PHASE-{N}"
+      reason: "veto_condition_triggered"
+      veto: "{veto_description}"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  phase_0:
+    - "financial_data.yaml"
+    - "current_model_map.yaml"
+    - "health_check.yaml"
+    - "model_gaps.yaml"
+
+  phase_1:
+    - "stage1_attraction.yaml"
+    - "stage2_upsells.yaml"
+    - "stage3_downsells.yaml"
+    - "stage4_continuity.yaml"
+    - "offer_sequence.yaml"
+
+  phase_2:
+    - "price_points.yaml"
+    - "anchoring_sequence.yaml"
+    - "unit_economics_final.yaml"
+    - "thirty_day_projection.yaml"
+
+  phase_3:
+    - "upsell_copy/"
+    - "downsell_copy/"
+    - "continuity_copy.md"
+    - "sales_scripts/"
+
+  phase_4:
+    - "ltgp_cac_validation.yaml"
+    - "cash_flow_validation.yaml"
+    - "die_framework.yaml"
+    - "optimization_plan.yaml"
+
+  final_deliverable:
+    name: "Money Model Package"
+    location: "outputs/money_models/{model_id}/"
+    contents:
+      - "README.md - Overview do modelo"
+      - "offer_sequence.yaml - Fluxo completo"
+      - "pricing.yaml - Price points e ancoragem"
+      - "unit_economics.yaml - LTGP:CAC, 30-day cash"
+      - "copy/ - Todas as páginas de copy"
+      - "optimization.md - Próximos passos"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS BY PHASE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents_by_phase:
+  PHASE-0:
+    primary: ["hormozi-chief"]
+    secondary: []
+
+  PHASE-1:
+    primary: ["hormozi-models"]
+    secondary: []
+
+  PHASE-2:
+    primary: ["hormozi-pricing"]
+    secondary: []
+
+  PHASE-3:
+    primary: ["hormozi-copy"]
+    secondary: []
+
+  PHASE-4:
+    primary: ["hormozi-audit"]
+    secondary: ["hormozi-models"]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  phase_0:
+    - "[ ] Dados financeiros 8/8"
+    - "[ ] Modelo atual mapeado"
+    - "[ ] Health check calculado"
+    - "[ ] Gaps identificados"
+
+  phase_1:
+    - "[ ] Stage I (Attraction) definido"
+    - "[ ] Stage II (Upsells) definido"
+    - "[ ] Stage III (Downsells) definido"
+    - "[ ] Stage IV (Continuity) definido"
+    - "[ ] Sequência mapeada"
+
+  phase_2:
+    - "[ ] Price points definidos"
+    - "[ ] Ancoragem 3x+"
+    - "[ ] LTGP:CAC >= 3:1"
+    - "[ ] 30-day cash positivo"
+
+  phase_3:
+    - "[ ] Copy upsells"
+    - "[ ] Copy downsells"
+    - "[ ] Copy continuity"
+    - "[ ] Scripts vendas"
+
+  phase_4:
+    - "[ ] Validação 8/8"
+    - "[ ] D.I.E. aplicado"
+    - "[ ] Plano otimização"
+    - "[ ] Pacote final"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-10"
+  author: "squad-architect"
+  source_frameworks:
+    - "GMMM_FRAMEWORK"
+    - "DIE_FRAMEWORK"
+    - "PRICING_SOP"
+    - "CASH_FIRST_HIERARCHY"
+  source_mind: "alex_hormozi"
+  lines: 900+
+  quality_gate: "SC_WFL_001"
+  quality_score: "PENDING"
+  dependencies:
+    - workflow: "wf-grand-slam-offer"
+      required: true
+      reason: "Oferta validada é pré-requisito"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

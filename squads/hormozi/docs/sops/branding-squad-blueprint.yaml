@@ -1,0 +1,1107 @@
+# Branding Squad Blueprint
+# Pattern: HO-SB-001 (Hormozi Squad Blueprint Standard)
+# Source: $100M Playbook: Branding - Alex Hormozi
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: branding
+  purpose: "Build a brand that commands premium prices, attracts customers at lower costs, and creates lifelong loyalty through deliberate pairing"
+  domain: brand-strategy
+  source_playbook: "$100M Playbook: Branding"
+
+  core_equation: |
+    Good Branding = Pairing with things your ideal audience LIKES
+    Brand Measurement = REACH x INFLUENCE x DIRECTION
+    Target: Premium pricing power (2x-10x competitors)
+    Impact: Lower CAC + Higher LTV + Lower Risk
+
+# ==============================================================================
+# TIER STRUCTURE
+# ==============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: brand-coordinator
+      role: "Orchestrate the Four-Step Brand Framework and optimize associations"
+      decisions:
+        - "Avatar selection and validation"
+        - "Association quality assessment"
+        - "Market positioning direction"
+        - "Pivot execution decisions"
+      kpis:
+        - "Pricing power indicator"
+        - "Reach growth rate"
+        - "Net audience change per pivot"
+        - "Association quality score"
+
+  tier_0_diagnosis:
+    - agent: avatar-analyst
+      role: "Define and validate ideal customer profile against 4 criteria"
+      inputs:
+        - "Market data"
+        - "Customer demographics"
+        - "Pain point research"
+        - "Targeting feasibility"
+      outputs:
+        - "Avatar qualification score"
+        - "4-criteria assessment"
+        - "Target market recommendation"
+
+    - agent: likes-researcher
+      role: "Research and document what target audience likes"
+      inputs:
+        - "Avatar profile"
+        - "Customer interviews"
+        - "Market research"
+        - "Competitor analysis"
+      outputs:
+        - "Values inventory"
+        - "Admired figures list"
+        - "Desired outcomes inventory"
+        - "Experience preferences map"
+
+  tier_1_execution:
+    - agent: content-creator
+      role: "Create content geared toward target audience"
+      specialization: "Step 3: Association through content"
+      capabilities:
+        - "Video creation strategy"
+        - "Blog/article development"
+        - "Booklet/PDF creation"
+        - "Value-first content approach"
+      targets:
+        - "Content that makes their life better"
+        - "Consistent publishing cadence"
+        - "Audience-relevant topics only"
+
+    - agent: distribution-engine
+      role: "Maximize reach through content distribution"
+      specialization: "Reach building"
+      capabilities:
+        - "Multi-channel distribution"
+        - "Reach metrics tracking"
+        - "Channel performance analysis"
+        - "Audience growth tactics"
+
+    - agent: association-builder
+      role: "Create deliberate pairings with things audience likes"
+      specialization: "Step 3: Strategic associations"
+      techniques:
+        - "Product development alignment"
+        - "Strategic appearances"
+        - "People associations"
+        - "Experience creation"
+
+  tier_2_judgment:
+    - agent: positioning-strategist
+      role: "Determine and execute market positioning moves"
+      specialization: "Step 4: Optimization"
+      directions:
+        up_market: "Larger customers"
+        down_market: "Smaller customers"
+        adjacent: "Similar but different market"
+        broader: "Entire category"
+        narrower: "Slice of existing market"
+
+    - agent: pivot-executor
+      role: "Execute brand pivots while ensuring net positive outcomes"
+      responsibilities:
+        - "Net change assessment"
+        - "Bouquet adjustment strategy"
+        - "Audience gain/loss tracking"
+        - "Pivot rollback decisions"
+
+    - agent: recovery-specialist
+      role: "Recover from branding mistakes through overwhelming positivity"
+      techniques:
+        - "Bad pairing identification"
+        - "Positive association surge"
+        - "Reputation repair strategy"
+        - "Never eliminate, only overwhelm"
+
+    - agent: brand-auditor
+      role: "Monitor brand health and authority levels"
+      responsibilities:
+        - "Reach measurement"
+        - "Influence assessment"
+        - "Direction tracking"
+        - "Pricing power evaluation"
+
+# ==============================================================================
+# AGENT DEFINITIONS
+# ==============================================================================
+
+agents:
+  brand-coordinator:
+    id: brand-coordinator
+    title: "Brand Strategy Orchestrator"
+    tier: orchestrator
+    icon: "crown"
+
+    purpose: |
+      Orchestrate the Four-Step Brand Framework to build a premium brand
+      that commands higher prices and creates customer loyalty.
+
+    core_frameworks:
+      - name: "Four-Step Brand Framework"
+        steps: ["Define Who", "Research What They Like", "Associate", "Optimize"]
+      - name: "Brand Measurement"
+        variables: ["Reach", "Influence", "Direction"]
+      - name: "Branding Cycle"
+        levels: ["What You Say", "What Others Say", "What They Experience"]
+
+    decision_authority:
+      - "Avatar validation and selection"
+      - "Association approval/rejection"
+      - "Pivot go/no-go decisions"
+      - "Recovery strategy activation"
+
+    inputs:
+      - "Market research data"
+      - "Customer feedback"
+      - "Competitor analysis"
+      - "Performance metrics"
+
+    outputs:
+      - "Brand strategy direction"
+      - "Association recommendations"
+      - "Pivot decisions"
+      - "Resource allocation"
+
+    success_metrics:
+      primary:
+        - name: "Pricing Power"
+          indicator: "Can raise prices without losing business"
+        - name: "Net Audience Change"
+          target: "Positive on all pivots"
+      secondary:
+        - "Reach growth month-over-month"
+        - "Conversion rate above baseline"
+        - "Repeat purchase rate"
+
+  avatar-analyst:
+    id: avatar-analyst
+    title: "Ideal Customer Profile Specialist"
+    tier: tier_0
+    icon: "user-search"
+
+    purpose: |
+      Define and validate ideal customer profile using the four criteria:
+      Growing, Have Money, Easy to Target, In Pain.
+
+    four_criteria:
+      growing:
+        question: "Is the market growing, not shrinking or maintaining?"
+        assessment: "Compare market size trends over 3-5 years"
+        preference: "Growing > Stable > Shrinking"
+
+      have_money:
+        question: "Can they afford what you're selling?"
+        assessment: "Income levels, business revenue, budget availability"
+        preference: "Rich > Medium > Poor (for premium)"
+
+      easy_to_target:
+        question: "Can you put ads in front of them easily?"
+        assessment: "Platform targeting options, community presence"
+        preference: "Easy > Moderate > Hard"
+
+      in_pain:
+        question: "Do they desperately want what you sell?"
+        assessment: "Pain intensity, urgency, competition presence"
+        preference: "Desperate > Uncomfortable > Mild"
+
+    outputs:
+      - "4-criteria scorecard"
+      - "Avatar qualification decision"
+      - "Targeting feasibility report"
+      - "Market size estimate"
+
+    validation_rule: |
+      "If I could choose between hard and easy, I'd rather make it easy."
+      - All 4 criteria = IDEAL
+      - 3 of 4 criteria = ACCEPTABLE
+      - <3 criteria = RECONSIDER
+
+  likes-researcher:
+    id: likes-researcher
+    title: "Audience Preferences Researcher"
+    tier: tier_0
+    icon: "heart"
+
+    purpose: |
+      Research and document everything the target audience likes:
+      values, people, outcomes, and experiences.
+
+    research_categories:
+      values:
+        description: "Core values the audience prizes"
+        examples:
+          - "Making more money"
+          - "Getting more customers"
+          - "Building sellable business"
+          - "Fewer lawsuits"
+          - "Paying fewer taxes"
+
+      people:
+        description: "Figures and authorities they admire"
+        examples:
+          - "Industry leaders"
+          - "Successful peers"
+          - "Thought leaders"
+          - "Celebrities in their space"
+
+      outcomes:
+        description: "Specific results they want"
+        examples:
+          - "Revenue growth"
+          - "Time freedom"
+          - "Market leadership"
+          - "Lifestyle improvements"
+
+      experiences:
+        description: "Activities and consumption preferences"
+        examples:
+          - "Events they attend"
+          - "Content they consume"
+          - "Communities they belong to"
+          - "Products they buy"
+
+    research_methods:
+      - "Customer interviews"
+      - "Survey analysis"
+      - "Social media monitoring"
+      - "Competitor customer research"
+      - "Community observation"
+
+    outputs:
+      - "Values inventory (10+ items)"
+      - "Admired figures list"
+      - "Desired outcomes inventory"
+      - "Experience preferences map"
+      - "Association opportunity matrix"
+
+  content-creator:
+    id: content-creator
+    title: "Brand Content Strategist"
+    tier: tier_1
+    icon: "file-text"
+
+    purpose: |
+      Create content geared toward target audience that genuinely helps them
+      and creates positive brand associations.
+
+    content_philosophy: |
+      "When I start doing this, people are like, 'Wow, this stuff
+      really makes my life better.'...and who do they think of when
+      that happens? Our business." (p.22)
+
+    content_types:
+      - type: "Videos"
+        purpose: "Visual demonstration of expertise"
+        cadence: "Weekly minimum"
+
+      - type: "Blogs/Articles"
+        purpose: "Written thought leadership"
+        cadence: "2-3x weekly"
+
+      - type: "Booklets/PDFs"
+        purpose: "Deep-dive value delivery"
+        cadence: "Monthly"
+
+      - type: "Podcasts"
+        purpose: "Long-form relationship building"
+        cadence: "Weekly"
+
+    content_rules:
+      - "Content must genuinely help audience"
+      - "Focus on their problems, not your products"
+      - "Take their perspective always"
+      - "Give away the best stuff for free"
+
+    quality_check: |
+      Before publishing, ask: "Does this make their life better?"
+      If no, don't publish.
+
+  distribution-engine:
+    id: distribution-engine
+    title: "Reach Maximization Specialist"
+    tier: tier_1
+    icon: "share-2"
+
+    purpose: |
+      Maximize reach through multi-channel distribution.
+      "A brand can't exist without [reach], so reach is the primary
+      element of a brand." (p.8)
+
+    reach_principle: |
+      Advertising = Letting people know about your stuff
+      Good advertising = Everyone knows about your stuff
+      Reach = Primary brand element
+
+    distribution_strategy:
+      channels:
+        - "Social media platforms"
+        - "Email list"
+        - "Podcast appearances"
+        - "Speaking engagements"
+        - "Partnerships/collaborations"
+        - "Paid advertising"
+
+      optimization:
+        - "Track channel performance"
+        - "Double down on what works"
+        - "Test new channels"
+        - "Consistent presence across channels"
+
+    metrics:
+      primary: "Total reach (unique people)"
+      secondary:
+        - "Channel-specific reach"
+        - "Growth rate"
+        - "Engagement rate"
+        - "Cost per reach"
+
+  association-builder:
+    id: association-builder
+    title: "Strategic Association Architect"
+    tier: tier_1
+    icon: "link"
+
+    purpose: |
+      Create deliberate pairings between your brand and things
+      your ideal audience likes.
+
+    association_transfer_mechanism:
+      step_1: "Start with brand that means nothing (just a logo)"
+      step_2: "Pair it with stuff your customers like"
+      step_3: "Brand starts to mean 'thing customer likes' to them"
+      step_4: "Add brand to generic product = premium branded product"
+      step_5: "Customers want to associate with positively branded product"
+      step_6: "They exchange money for premium product"
+      step_7: "They get product AND association"
+      step_8: "You get higher profits from those associations"
+
+    association_types:
+      content_associations:
+        description: "Topics and themes you cover"
+        execution: "Create content around what they care about"
+
+      people_associations:
+        description: "Who you appear with"
+        execution: "Strategic collaborations, appearances, endorsements"
+
+      product_associations:
+        description: "What you sell"
+        execution: "Products aligned with audience values"
+
+      experience_associations:
+        description: "How they interact with you"
+        execution: "Customer experience design"
+
+    quality_gate: |
+      Before any association, ask:
+      "Does the majority of my ideal audience LIKE this?"
+      - YES = Execute
+      - NO = Reject
+      - UNCERTAIN = Test small first
+
+  positioning-strategist:
+    id: positioning-strategist
+    title: "Market Positioning Specialist"
+    tier: tier_2
+    icon: "compass"
+
+    purpose: |
+      Determine and execute market positioning moves to expand
+      addressable market while maintaining brand coherence.
+
+    five_directions:
+      up_market:
+        definition: "Target larger customers"
+        example: "Multi-location assisted living owners"
+        bouquet_shift: "Focus on problems larger players have"
+
+      down_market:
+        definition: "Target smaller customers"
+        example: "At-home care and mobile assisted living"
+        bouquet_shift: "Focus on problems smaller players have"
+
+      adjacent:
+        definition: "Similar but slightly different market"
+        example: "Rehab facilities instead of assisted living"
+        bouquet_shift: "Red roses to yellow roses"
+
+      broader:
+        definition: "Entire category"
+        example: "All senior living (hospice, end of life, retirement)"
+        bouquet_shift: "Add all types of flowers"
+
+      narrower:
+        definition: "Slice of existing market"
+        example: "Only assisted living with 100-500 residents"
+        bouquet_shift: "Only red roses, nothing else"
+
+    decision_framework: |
+      1. Identify current market position
+      2. Assess potential in each direction
+      3. Evaluate required association changes
+      4. Project net audience change
+      5. Recommend direction with highest profit potential
+
+  pivot-executor:
+    id: pivot-executor
+    title: "Brand Pivot Specialist"
+    tier: tier_2
+    icon: "refresh-cw"
+
+    purpose: |
+      Execute brand pivots while ensuring positive net outcomes.
+      "Only two things can happen: gain more than you lose,
+      or lose more than you gain." (p.27)
+
+    pivot_philosophy: |
+      Bouquet Metaphor:
+      - Individual elements = individual flowers
+      - Assembled together = brand bouquet
+      - What we include, from where, and how much = brand we create
+      - Bad pairings = sticks and weeds (distort clarity)
+
+    pivot_process:
+      step_1: "Document current associations (bouquet inventory)"
+      step_2: "Identify associations to add (new flowers)"
+      step_3: "Identify associations to reduce (trim existing)"
+      step_4: "Project audience impact (who gains, who loses)"
+      step_5: "Execute if net positive expected"
+      step_6: "Monitor actual results"
+      step_7: "Adjust or revert based on data"
+
+    net_change_rule: |
+      "Losing audience is a part of life. You just wanna make sure
+      you gain more than you lose. Don't let the five mean comments
+      stop you from gaining the 500 new people who like the new thing." (p.28)
+
+    case_studies:
+      positive_pivot:
+        example: "Small town band goes big"
+        outcome: "Lost some locals, gained much larger audience"
+
+      negative_pivot:
+        example: "Pepsi Kendall Jenner ad"
+        outcome: "More people hated it than liked it"
+
+  recovery-specialist:
+    id: recovery-specialist
+    title: "Brand Recovery Specialist"
+    tier: tier_2
+    icon: "shield"
+
+    purpose: |
+      Recover from branding mistakes by overwhelming bad pairings
+      with good ones, never by elimination.
+
+    recovery_philosophy: |
+      "Most people's brands happen by accident... They take every podcast.
+      They sell any customer. They talk about whatever's trending.
+      And, surprisingly to them, no one has any idea what they're about." (p.28)
+
+    mistake_impact: |
+      "One bad pairing can absolutely hurt a brand. Just like one ugly
+      flower messes up the whole bouquet." (p.29)
+
+    recovery_strategy:
+      principle: |
+        "We don't try and eliminate the DUI, we don't try and eliminate
+        the dead rose. It happened; there's nothing we can do about it.
+        But what we try to do is to just overwhelm it with way more of
+        the stuff that the majority of our people actually like." (p.29)
+
+      execution:
+        step_1: "Identify the bad pairing"
+        step_2: "Assess damage scope"
+        step_3: "Inventory positive associations available"
+        step_4: "Create surge of positive content/associations"
+        step_5: "Continue until bad pairing shrinks to irrelevance"
+
+    case_study:
+      name: "Kanye West"
+      description: |
+        "Kanye West... has said some things that people don't like,
+        but he also comes out with products that people love. He made
+        a Super Bowl ad, he sold shoes, he just came out with an album...
+        over successive pairings the good stuff minimizes the bad stuff
+        ...and people still buy." (p.30)
+
+  brand-auditor:
+    id: brand-auditor
+    title: "Brand Health Monitor"
+    tier: tier_2
+    icon: "activity"
+
+    purpose: |
+      Monitor brand health across reach, influence, and direction.
+      Evaluate pricing power as ultimate brand strength indicator.
+
+    measurement_framework:
+      reach:
+        definition: "How many people know about your stuff"
+        measurement: "Audience size, impressions, recognition surveys"
+        good: "Everyone in target market knows"
+        bad: "No one knows"
+
+      influence:
+        definition: "Chance it changes behavior when they see it"
+        measurement: "Engagement rates, action rates, conversion"
+        good: "High likelihood of behavior change"
+        bad: "No behavior change"
+
+      direction:
+        definition: "How behavior changes - towards or away"
+        measurement: "Sentiment analysis, purchase intent, referrals"
+        good: "Towards (they like and buy)"
+        bad: "Away (they hate and don't)"
+
+    pricing_power_test: |
+      Warren Buffett: "The single most important decision in evaluating
+      a business is pricing power. If you've got the power to raise prices
+      without losing business to a competitor, you've got a very good
+      business. And if you have to have a prayer session before raising
+      the price by 10%, then you've got a terrible business." (p.17)
+
+    health_indicators:
+      strong_brand:
+        - "Can raise prices without losing business"
+        - "Higher conversion than competitors"
+        - "Customers don't consider competition"
+        - "Word of mouth growing"
+        - "Best talent wants to work for you"
+
+      weak_brand:
+        - "Need prayer session before price increase"
+        - "Must compete on price"
+        - "High churn to competitors"
+        - "Negative word of mouth"
+        - "Struggle to attract talent"
+
+# ==============================================================================
+# EXECUTOR MATRIX
+# ==============================================================================
+
+executor_matrix:
+  # Step 1: Avatar Definition
+  - task: "Research market growth trends"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Use reliable data sources"
+
+  - task: "Assess target audience financial capacity"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Verify with actual customer data"
+
+  - task: "Evaluate targeting ease on platforms"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Check all major platforms"
+
+  - task: "Qualify pain level of audience"
+    executor: Human
+    automation: LOW
+    guardrails: "Requires qualitative research"
+
+  - task: "Final avatar selection decision"
+    executor: Human
+    automation: LOW
+    guardrails: "All 4 criteria must be assessed"
+
+  # Step 2: Likes Research
+  - task: "Survey audience values"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Large sample size required"
+
+  - task: "Identify admired figures"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Verify admiration vs awareness"
+
+  - task: "Document desired outcomes"
+    executor: Human
+    automation: LOW
+    guardrails: "Must be specific and measurable"
+
+  - task: "Map experience preferences"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Include both aspirational and current"
+
+  # Step 3: Association Building
+  - task: "Create content for audience"
+    executor: Human
+    automation: LOW
+    guardrails: "Must genuinely help them"
+
+  - task: "Distribute content across channels"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Track performance by channel"
+
+  - task: "Develop aligned products"
+    executor: Human
+    automation: LOW
+    guardrails: "Match brand promises"
+
+  - task: "Plan strategic appearances"
+    executor: Human
+    automation: LOW
+    guardrails: "Only with people audience likes"
+
+  - task: "Monitor audience response"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Measure behavior change, not sentiment"
+
+  # Step 4: Optimization
+  - task: "Assess market positioning options"
+    executor: Human
+    automation: LOW
+    guardrails: "Evaluate all 5 directions"
+
+  - task: "Project net audience change"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Must be positive to proceed"
+
+  - task: "Execute brand pivot"
+    executor: Human
+    automation: LOW
+    guardrails: "Monitor closely, ready to revert"
+
+  - task: "Track reach metrics"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Real-time dashboard"
+
+  - task: "Evaluate pricing power"
+    executor: Human
+    automation: LOW
+    guardrails: "Test with actual price changes"
+
+  # Recovery
+  - task: "Detect bad pairings"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Monitor sentiment and sales"
+
+  - task: "Execute recovery surge"
+    executor: Human
+    automation: LOW
+    guardrails: "Overwhelm, don't eliminate"
+
+  - task: "Track recovery progress"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Until bad pairing irrelevant"
+
+# ==============================================================================
+# QUALITY GATES
+# ==============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Avatar Validation Gate"
+    transition: "Research -> Avatar Definition"
+    condition: "all_four_criteria_assessed == true"
+    type: blocking
+    failure_action: "Complete missing criteria assessment"
+
+  QG-002:
+    name: "Likes Inventory Gate"
+    transition: "Avatar -> Association Planning"
+    condition: "likes_inventory_items >= 10_per_category"
+    type: blocking
+    failure_action: "Deepen research"
+
+  QG-003:
+    name: "Association Quality Gate"
+    transition: "Planning -> Execution"
+    condition: "majority_of_audience_likes == true"
+    type: blocking
+    failure_action: "Reject association, find alternative"
+
+  QG-004:
+    name: "Net Change Gate"
+    transition: "Current -> Pivot"
+    condition: "expected_gains > expected_losses"
+    type: blocking
+    failure_action: "Abort pivot or adjust scope"
+
+  QG-005:
+    name: "Pricing Power Gate"
+    transition: "Brand Building -> Premium Pricing"
+    condition: "can_raise_prices_without_losing_business == true"
+    type: warning
+    failure_action: "Strengthen associations before pricing"
+
+  QG-006:
+    name: "Content Quality Gate"
+    transition: "Creation -> Distribution"
+    condition: "content_genuinely_helps_audience == true"
+    type: blocking
+    failure_action: "Revise or reject content"
+
+# ==============================================================================
+# WORKFLOWS
+# ==============================================================================
+
+workflows:
+  brand_from_scratch_workflow:
+    trigger: "New brand initiative"
+    steps:
+      - step: 1
+        agent: avatar-analyst
+        action: "Assess market against 4 criteria"
+        output: "Avatar qualification score"
+
+      - step: 2
+        agent: avatar-analyst
+        action: "Select and document ideal customer"
+        output: "Avatar profile"
+
+      - step: 3
+        agent: likes-researcher
+        action: "Research values they hold"
+        output: "Values inventory"
+
+      - step: 4
+        agent: likes-researcher
+        action: "Identify people they admire"
+        output: "Admired figures list"
+
+      - step: 5
+        agent: likes-researcher
+        action: "Document desired outcomes"
+        output: "Outcomes inventory"
+
+      - step: 6
+        agent: likes-researcher
+        action: "Map experience preferences"
+        output: "Experience map"
+
+      - step: 7
+        agent: association-builder
+        action: "Plan association strategy"
+        output: "Association roadmap"
+
+      - step: 8
+        agent: content-creator
+        action: "Create content geared to audience"
+        output: "Content library"
+
+      - step: 9
+        agent: distribution-engine
+        action: "Distribute widely"
+        output: "Reach metrics"
+
+      - step: 10
+        agent: brand-auditor
+        action: "Monitor and iterate"
+        output: "Brand health report"
+
+  brand_pivot_workflow:
+    trigger: "Market repositioning decision"
+    steps:
+      - step: 1
+        agent: positioning-strategist
+        action: "Assess 5 positioning options"
+        output: "Options analysis"
+
+      - step: 2
+        agent: positioning-strategist
+        action: "Select direction"
+        output: "Direction recommendation"
+
+      - step: 3
+        agent: pivot-executor
+        action: "Project net audience change"
+        output: "Net change projection"
+
+      - step: 4
+        agent: brand-coordinator
+        action: "Go/no-go decision"
+        gate: "QG-004"
+
+      - step: 5
+        agent: pivot-executor
+        action: "Execute bouquet adjustment"
+        output: "Pivot execution"
+
+      - step: 6
+        agent: brand-auditor
+        action: "Monitor results"
+        output: "Actual vs projected"
+
+      - step: 7
+        agent: pivot-executor
+        action: "Adjust or revert based on data"
+        condition: "If net change negative"
+
+  brand_recovery_workflow:
+    trigger: "Bad pairing detected"
+    steps:
+      - step: 1
+        agent: brand-auditor
+        action: "Assess damage scope"
+        output: "Damage assessment"
+
+      - step: 2
+        agent: recovery-specialist
+        action: "Inventory positive associations"
+        output: "Available positive pairings"
+
+      - step: 3
+        agent: recovery-specialist
+        action: "Plan positive surge"
+        output: "Surge strategy"
+
+      - step: 4
+        agent: content-creator
+        action: "Create surge content"
+        output: "Positive content batch"
+
+      - step: 5
+        agent: distribution-engine
+        action: "Execute surge distribution"
+        output: "Reach metrics"
+
+      - step: 6
+        agent: brand-auditor
+        action: "Monitor recovery"
+        output: "Recovery progress"
+
+      - step: 7
+        agent: recovery-specialist
+        action: "Continue until irrelevance"
+        condition: "Until bad pairing forgotten"
+
+  content_creation_workflow:
+    trigger: "Content needed for association"
+    steps:
+      - step: 1
+        agent: likes-researcher
+        action: "Confirm topic alignment with audience likes"
+        output: "Topic validation"
+
+      - step: 2
+        agent: content-creator
+        action: "Create content draft"
+        output: "Draft content"
+
+      - step: 3
+        agent: content-creator
+        action: "Quality check: Does this help them?"
+        gate: "QG-006"
+
+      - step: 4
+        agent: distribution-engine
+        action: "Distribute across channels"
+        output: "Published content"
+
+      - step: 5
+        agent: brand-auditor
+        action: "Monitor response"
+        output: "Engagement metrics"
+
+      - step: 6
+        agent: content-creator
+        action: "Iterate based on response"
+        output: "Content optimization"
+
+# ==============================================================================
+# KPIs & SUCCESS METRICS
+# ==============================================================================
+
+kpis:
+  primary:
+    pricing_power:
+      test: "Can you raise prices without losing business?"
+      strong: "Yes, easily"
+      weak: "Need prayer session first"
+      source: "Warren Buffett quote, p.17"
+
+    net_audience_change:
+      formula: "New audience gained - Existing audience lost"
+      target: "Positive on every pivot"
+      impact: "Brand grows vs shrinks"
+
+  secondary:
+    reach:
+      definition: "How many people know about your stuff"
+      measurement: "Audience size, impressions"
+      target: "Growing month-over-month"
+
+    influence:
+      definition: "Likelihood of behavior change"
+      measurement: "Engagement, conversion rates"
+      target: "Above industry baseline"
+
+    direction:
+      definition: "Behavior change towards or away"
+      measurement: "Purchase intent, sentiment"
+      target: "Strongly towards"
+
+  business_impact:
+    cac_reduction:
+      benefit: "Convert higher % from advertising"
+      example: "Dwayne Johnson launches product, millions buy day one"
+
+    ltv_increase:
+      benefit: "Charge 2x-10x more for same thing"
+      example: "Starbucks $5 vs competitor $1 for coffee"
+
+    risk_reduction:
+      benefit: "Customers buy repeatedly without considering competition"
+      example: "Mac users only buy Apple for life"
+
+  by_step:
+    step_1:
+      - "Avatar meets all 4 criteria"
+      - "Market size validated"
+      - "Targeting feasibility confirmed"
+
+    step_2:
+      - "10+ items per likes category"
+      - "Values match brand capability"
+      - "Association opportunities identified"
+
+    step_3:
+      - "Content publishing consistency"
+      - "Reach growth rate"
+      - "Engagement metrics"
+      - "Association quality scores"
+
+    step_4:
+      - "Net positive on all pivots"
+      - "Pricing power maintained/improved"
+      - "Brand coherence preserved"
+
+# ==============================================================================
+# TROUBLESHOOTING
+# ==============================================================================
+
+troubleshooting:
+  - symptom: "Audience growth but wrong type of people"
+    cause: "Content/associations attracting non-ideal customers"
+    example: "Hormozi attracting wantrepreneurs instead of business owners"
+    solution:
+      - "Recenter content around ideal customer"
+      - "Prune associations that attract wrong audience"
+      - "Accept some audience loss for quality"
+
+  - symptom: "High reach, low influence"
+    cause: "People know you but don't change behavior"
+    solution:
+      - "Deepen engagement with target niche"
+      - "Strengthen emotional connection"
+      - "Increase product quality/promise match"
+
+  - symptom: "Competitor has 'cool factor' despite worse economics"
+    cause: "Brand not delivering intangible value"
+    example: "Hormozi supplements vs cool competitor"
+    solution:
+      - "Allocate budget specifically to brand building"
+      - "Not just product/economics"
+      - "Create associations that make people feel good"
+
+  - symptom: "Bad publicity event"
+    cause: "Single bad pairing damaging overall bouquet"
+    solution:
+      - "Don't try to eliminate or hide"
+      - "Overwhelm with positive associations"
+      - "Continue until bad pairing shrinks to irrelevance"
+
+  - symptom: "Pricing pressure from competitors"
+    cause: "Weak brand, commodity positioning"
+    solution:
+      - "Strengthen unique associations"
+      - "Increase reach + influence"
+      - "Deliver on promises consistently"
+
+  - symptom: "Pivot resulted in net audience loss"
+    cause: "Lost more than gained in repositioning"
+    solution:
+      - "Assess if loss is temporary vs permanent"
+      - "Consider partial revert"
+      - "Test smaller scope next time"
+
+# ==============================================================================
+# TIME REQUIREMENTS
+# ==============================================================================
+
+time_requirements:
+  patience_mandate: |
+    "Wait five years and don't give up." (One Page Checklist, p.33)
+
+    "Branding has higher returns than direct response advertising
+    if you measure over a longer period of time." (p.30)
+
+  milestones:
+    month_1_6: "Foundation building, avatar clarity, initial content"
+    month_6_12: "Reach building, association establishment"
+    year_1_2: "Brand recognition, 'they're the [X] company'"
+    year_2_3: "Premium pricing power emerging"
+    year_3_4: "Loyalty development, repeat purchase without shopping"
+    year_4_5: "Advocacy stage, unprompted recommendations"
+
+  realistic_expectations: |
+    "There is no magic here. It's teaching people what you are about.
+    And repeating it every day until the end of time. Because every day,
+    you'll have people who just found you and have no idea who you are.
+    And you have to serve them the same way you did your 'OGs.'" (p.31)
+
+# ==============================================================================
+# GAPS TO RESOLVE
+# ==============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Specific budget allocation between product vs brand"
+    severity: Medium
+    clarification_needed: "What percentage should go to brand building?"
+
+  - id: GAP-002
+    description: "Quantitative thresholds for influence measurement"
+    severity: Medium
+    clarification_needed: "What engagement rates indicate strong influence?"
+
+  - id: GAP-003
+    description: "Detailed content calendar framework"
+    severity: Low
+    note: "May be covered in content playbooks"
+
+  - id: GAP-004
+    description: "Specific criteria for 'majority of audience likes'"
+    severity: Medium
+    clarification_needed: "What percentage constitutes majority?"
+
+  - id: GAP-005
+    description: "Recovery timeline expectations"
+    severity: Medium
+    clarification_needed: "How long until bad pairing becomes irrelevant?"
+
+# ==============================================================================
+# VALIDATION
+# ==============================================================================
+
+validation:
+  sop_parts_complete: 11/11
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 6
+  executor_matrix_complete: true
+  quality_gates_defined: 6
+  workflows_documented: 4
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

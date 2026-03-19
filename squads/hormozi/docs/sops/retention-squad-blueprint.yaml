@@ -1,0 +1,1356 @@
+# Retention Squad Blueprint
+# Pattern: HO-SB-002 (Hormozi Squad Blueprint Standard)
+# Source: $100M Retention Playbook + $100M Lifetime Value Playbook + $100M Money Models (Continuity)
+# Version: 1.0.0
+# Generated: 2026-02-10
+
+squad:
+  name: retention-ltv
+  purpose: "Reduce churn, maximize LTV, and build compounding growth through systematic customer retention"
+  domain: customer-success
+  source_playbooks:
+    - "$100M Retention Playbook"
+    - "$100M Lifetime Value Playbook"
+    - "$100M Money Models - Continuity Offers"
+
+  core_equation: |
+    LTGP (Recurring) = Gross Profit / Churn Rate
+    Impact: 10% -> 3% churn = 3.3x LTV increase
+    Retention 5% improvement = 25-95% profit increase
+
+  golden_rules:
+    - "You're doing sales because you failed at marketing. You're doing marketing because you failed at product."
+    - "If churn > 10%, you have a product problem, not a growth problem"
+    - "It costs 5-25x more to acquire than to retain"
+    - "LTV can go infinitely up. Costs can only go to zero."
+    - "Think value per second, not seconds of value"
+
+# ===============================================================================
+# TIER STRUCTURE
+# ===============================================================================
+
+tier_structure:
+  orchestrator:
+    - agent: retention-coordinator
+      role: "Orchestrate retention & LTV maximization across all frameworks"
+      decisions:
+        - "Prioritize churn reduction vs LTV expansion"
+        - "Route customers to appropriate retention interventions"
+        - "Escalate high-value churn risks to human"
+        - "Balance acquisition vs retention investment"
+      kpis:
+        - "Overall churn rate trend"
+        - "LTV:CAC health ratio"
+        - "Engagement distribution across levels"
+
+  tier_0_diagnosis:
+    - agent: churn-diagnostician
+      role: "Calculate churn, identify root causes, predict at-risk customers"
+      inputs:
+        - "Customer activity data"
+        - "Cancellation history"
+        - "Engagement metrics"
+        - "Exit interview feedback"
+      outputs:
+        - "Churn rate calculation (cohort-based)"
+        - "Top 5 churn causes"
+        - "At-risk customer list"
+        - "Churn prediction scores"
+
+    - agent: ltv-calculator
+      role: "Calculate LTV, LTV:CAC ratios, and identify optimization levers"
+      inputs:
+        - "Revenue per customer"
+        - "Churn data"
+        - "Cost data (COGS, CAC)"
+        - "Transaction history"
+      outputs:
+        - "LTGP calculation"
+        - "LTV:CAC health assessment"
+        - "Crazy 8 lever priorities"
+        - "Price testing recommendations"
+
+    - agent: activation-mapper
+      role: "Identify and validate customer activation points"
+      inputs:
+        - "Top 20% customer behaviors"
+        - "Long-tenure customer patterns"
+        - "Product usage data"
+        - "Success milestone data"
+      outputs:
+        - "Activation point candidates (top 5)"
+        - "Validation test plan"
+        - "Onboarding optimization recommendations"
+        - "Messaging alignment for acquisition"
+
+  tier_1_execution:
+    - agent: onboarding-architect
+      role: "Design and optimize customer onboarding for activation"
+      specialization: "Step 2: Onboard Your Customers"
+      capabilities:
+        - "30-day onboarding sequence design"
+        - "Activation point acceleration"
+        - "First win engineering"
+        - "Handoff-to-success protocol"
+      hierarchy: |
+        Custom > Generic
+        Personal > Group
+        Live > Recorded
+        Carrots > Sticks
+        Something > Nothing
+
+    - agent: engagement-tracker
+      role: "Monitor customer engagement and trigger interventions"
+      specialization: "5 Horsemen: Track Attendance"
+      engagement_levels:
+        level_0:
+          name: "GHOST"
+          definition: "No activity 30+ days"
+          action: "Immediate reactivation campaign"
+          risk: "Extremely high"
+        level_1:
+          name: "PASSIVE"
+          definition: "Minimal activity, declining trend"
+          action: "Personal outreach (ACA), re-engagement incentive"
+          risk: "High"
+        level_2:
+          name: "ACTIVE"
+          definition: "Regular activity but not at activation point"
+          action: "Guide to activation, community linking"
+          risk: "Moderate"
+        level_3:
+          name: "ENGAGED"
+          definition: "At or above activation point"
+          action: "Maintain, request testimonial/referral, introduce upsell"
+          risk: "Low"
+        level_4:
+          name: "CHAMPION"
+          definition: "Above activation, refers others, advocates"
+          action: "Elevate as micro-celebrity, VIP invitation"
+          risk: "Very low"
+
+    - agent: touch-executor
+      role: "Execute 2x/week customer touch cadence"
+      specialization: "5 Horsemen: Reach Out 2x Per Week"
+      touch_types:
+        - type: "Progress praise"
+          frequency: "Weekly"
+          medium: "Text/DM"
+        - type: "Problem resolution"
+          frequency: "As needed"
+          medium: "Call/Video"
+        - type: "ACA check-in"
+          frequency: "Every 2-3 weeks"
+          template: "Acknowledge + Compliment + Ask"
+
+    - agent: event-coordinator
+      role: "Plan and execute member events"
+      specialization: "5 Horsemen: Member Events"
+      cadence: "Every 21, 42, or 63 days"
+      event_types:
+        - "Group onboarding cohorts (1-to-6)"
+        - "Community challenges"
+        - "Member spotlight calls"
+        - "Q&A sessions"
+        - "In-person meetups"
+
+    - agent: incentive-designer
+      role: "Create incentives for activation and retention"
+      specialization: "Step 3: Incentivize Customer Activation"
+      incentive_types:
+        - "Courses that unlock"
+        - "1-on-1 calls or bundles"
+        - "Live/virtual event tickets"
+        - "Higher-tier call access"
+        - "Custom badges, status indicators"
+        - "Lifetime access at high level achievement"
+      timing_rule: "Place incentives just after major churn points"
+
+  tier_2_judgment:
+    - agent: exit-interviewer
+      role: "Conduct exit interviews and save cancellations"
+      specialization: "5 Horsemen: Exit Interviews + Step 7"
+      statistics:
+        save_rate: "~50% of phone/email cancellations"
+        ltv_impact: "25% churn reduction = 33% LTV increase"
+      techniques:
+        let_vent:
+          description: "Let them share all complaints"
+          script: "Hey, no pressure. I would love to hear all the reasons you hate me."
+        match_indignation:
+          description: "Get more indignant than them"
+          script: "This is completely ridiculous. You're 100% correct."
+        ask_permission:
+          description: "Ask for second chance"
+          script: "Give me the opportunity to fix this?"
+        save_with_redo:
+          description: "Offer to restart/fix"
+          script: "Let me try again and I'll fix this."
+        save_with_upsell:
+          description: "Recognize they need more help"
+          script: "You should have been sold into this anyway. That's my fault."
+        resell_value:
+          description: "Remind what they lose"
+          items: ["URLs", "Posts", "Access", "Founder pricing", "Community status"]
+
+    - agent: winback-specialist
+      role: "Recover churned customers"
+      specialization: "90-Day Proof Recovery"
+      segmentation:
+        - segment: "Churned <30 days"
+          cause: "Activation failure"
+          approach: "Show how onboarding is different now"
+        - segment: "Churned 30-90 days"
+          cause: "Value perception"
+          approach: "Show what they missed"
+        - segment: "Churned 90+ days"
+          cause: "External factors"
+          approach: "Share results of peers who returned"
+      sequence:
+        day_1: "Personal acknowledgment (no sell)"
+        day_3: "Success story share"
+        day_7: "Specific return offer"
+        day_14: "Final outreach with limited incentive"
+        day_30: "Add to long-term nurture"
+        every_90_days: "Show results of people who signed when they left"
+
+    - agent: pricing-strategist
+      role: "Optimize pricing for LTV maximization"
+      specialization: "Crazy 8 #1: Increase Prices"
+      testing_protocol:
+        frequency: "Every quarter"
+        method: "Start low, raise 20% every 10 sales until dramatic drop"
+        formula: "Breakeven Conv Rate = Old Revenue / New Price"
+        decision: "If new conv rate > breakeven, winner"
+      annual_pricing:
+        standard: "Buy 10 months get 2 free (16% discount)"
+        rule: "If avg_months < 12, price annual ABOVE avg_months"
+        uptake: "10-20% take annual option"
+
+    - agent: community-linker
+      role: "Build relationships that make leaving hard"
+      specialization: "Step 4: Community Linking"
+      philosophy: |
+        "It's easy to quit a membership, it's hard to leave a relationship."
+        "They come for the bikini. They stay for the community."
+      tactics:
+        - "Group onboarding (1-to-6) to create connections"
+        - "Manual member-to-member introductions"
+        - "Community podcast featuring members"
+        - "Elevate micro-celebrities by expertise area"
+        - "Pin best 1-2 new posts daily"
+
+    - agent: continuity-architect
+      role: "Design continuity offers for recurring revenue"
+      specialization: "Continuity Offers"
+      offer_types:
+        bonus:
+          structure: "Give something incredible for signing up TODAY"
+          rule: "Bonus perceived value > first continuity payment"
+          examples:
+            - "Physical: $800 dog toys free with $59/mo food subscription"
+            - "Service: $1000 accelerator free when joining $100/mo membership"
+            - "Digital: All 40 past newsletters ($15,880 value) free with $399/mo sub"
+        discount:
+          structure: "Free time in exchange for longer commitment"
+          forms:
+            upfront: "Free months first (strong enforcement businesses)"
+            backloaded: "Free months after full payment (incentivize payment)"
+            spread: "Discount diluted across payments (steady cashflow)"
+            prepayment: "Pay first and last month at signup (CAC coverage)"
+        waived_fee:
+          structure: "Fee waived with commitment, owed if leave early"
+          fee_amount: "3-5x monthly rate"
+          psychology: "People sign to AVOID fee, fee motivates staying"
+          ideal_for: "High onboarding cost, long-term result services"
+
+    - agent: culture-guardian
+      role: "Fire bad customers, reinforce positive behaviors"
+      specialization: "Step 5: Fire or Correct Bad Customers"
+      framework:
+        - "Incentivize positive behaviors (pin posts, public praise)"
+        - "Give feedback on bad behaviors"
+        - "3 strikes = expulsion"
+        - "Pin best 1-2 new posts daily (signals what you reward)"
+        - "Create categories: wins, fun, discovered, meetups"
+
+# ===============================================================================
+# AGENT DEFINITIONS
+# ===============================================================================
+
+agents:
+  retention-coordinator:
+    id: retention-coordinator
+    title: "Retention & LTV Orchestrator"
+    tier: orchestrator
+    icon: "retention"
+
+    purpose: |
+      Coordinate all retention and LTV initiatives. Balance churn reduction
+      with LTV expansion. Ensure customer success compounds over time.
+
+    core_frameworks:
+      - name: "5 Horsemen of Retention"
+        components: ["Track Attendance", "Reach Out 2x/Week", "Handwritten Cards", "Member Events", "Exit Interviews"]
+      - name: "9-Step Churn Checklist"
+        components: ["Activation Points", "Onboarding", "Incentivize Activation", "Community Linking", "Fire Bad Customers", "Annual Pricing", "Exit Interviews", "Survey 2x/Year", "4-Step Journey"]
+      - name: "Crazy 8 LTV"
+        components: ["Increase Prices", "Decrease Costs", "Increase Purchases", "Cross-Sell", "Upsell Quantity", "Upsell Quality", "Downsell Quantity", "Downsell Quality"]
+
+    decision_authority:
+      - "Prioritize retention vs acquisition investment"
+      - "Route high-value at-risk customers to human"
+      - "Approve continuity offer structures"
+      - "Escalate product issues identified through churn"
+
+    inputs:
+      - "Churn metrics by cohort"
+      - "LTV:CAC ratios"
+      - "Engagement level distribution"
+      - "Exit interview themes"
+      - "Activation point data"
+
+    outputs:
+      - "Retention priority directives"
+      - "LTV optimization recommendations"
+      - "Product feedback from churn analysis"
+      - "Investment allocation guidance"
+
+    success_metrics:
+      primary:
+        - name: "Monthly Churn Rate"
+          target: "<5%"
+          excellent: "<3%"
+        - name: "LTV:CAC Ratio"
+          target: ">3:1"
+          excellent: ">5:1"
+      secondary:
+        - "Engagement Level 3+ Percentage >60%"
+        - "Exit Interview Save Rate >50%"
+        - "Activation Point Completion >80%"
+
+  churn-diagnostician:
+    id: churn-diagnostician
+    title: "Churn Analysis Specialist"
+    tier: tier_0
+    icon: "chart-down"
+
+    purpose: |
+      Calculate churn correctly, identify root causes, and predict at-risk customers
+      before they cancel. Use cohort-based analysis, not simple percentages.
+
+    calculation_rules:
+      churn_formula: |
+        Churn = Customers who left / Original customer pool (cohort)
+        NOTE: New customers do NOT affect churn calculation
+      example: "100 customers Jan 1, 95 on Feb 1 = 5/100 = 5% churn"
+
+    diagnosis_methods:
+      inverse_question:
+        prompt: "What can I do to churn 100% of my customers?"
+        purpose: "Surface hidden friction points"
+        output: "List of things to STOP doing"
+
+      top_20_analysis:
+        steps:
+          - "Find churned customers who stayed 3+ months"
+          - "Sort by total spend, take top 20%"
+          - "Learn everything about them (demographics, psychographics, usage)"
+          - "Find common factors = activation point candidates"
+
+    thresholds:
+      critical: ">25% monthly (crisis)"
+      warning: ">10% monthly (product problem)"
+      healthy: "5-10% monthly"
+      excellent: "<5% monthly"
+      suspect_floor: "<1% monthly (verify data)"
+
+    outputs:
+      - "Cohort-based churn calculation"
+      - "Top 5 churn causes (ranked)"
+      - "At-risk customer list with scores"
+      - "Activation point candidates"
+      - "Product improvement recommendations"
+
+  ltv-calculator:
+    id: ltv-calculator
+    title: "LTV & Monetization Analyst"
+    tier: tier_0
+    icon: "calculator"
+
+    purpose: |
+      Calculate lifetime value accurately for both recurring and transactional
+      businesses. Identify the highest-impact levers from the Crazy 8.
+
+    formulas:
+      recurring_business:
+        formula: "LTGP = Gross Profit (Monthly) / Churn Rate"
+        example: "$2,400 GP / 5% churn = $48,000 LTGP"
+
+      transactional_business:
+        formula: "LTGP = Gross Profit per Transaction x Average Transactions"
+        example: "$80 x 4 transactions = $320 LTGP"
+
+    ltv_cac_thresholds:
+      healthy:
+        ratio: ">=3:1"
+        action: "Scale aggressively"
+      warning:
+        ratio: "2:1 to 3:1"
+        action: "Thin margins, prioritize LTV improvement or CAC reduction"
+      critical:
+        ratio: "<2:1"
+        action: "STOP scaling, fix backend first"
+
+    crazy_8_analysis:
+      levers:
+        - lever: "Increase Prices"
+          impact: "Highest - directly affects gross profit"
+          math: "10% profit business + 20% price increase = 3x profit"
+
+        - lever: "Decrease Costs"
+          impact: "High - improves unit economics"
+          tactics: ["Increase employee ratio", "Offshore", "Productize", "Cap usage"]
+
+        - lever: "Increase Purchases"
+          impact: "High - compounds LTV"
+          methods: ["Add recurring", "Reduce churn", "Follow up"]
+
+        - lever: "Cross-Sell"
+          impact: "Medium-High"
+          formula: "New LTV = Original + (Conv Rate x Cross-Sell GP)"
+
+        - lever: "Upsell Quantity"
+          impact: "Medium"
+          types: ["Bulk", "More frequent", "Bigger package"]
+
+        - lever: "Upsell Quality"
+          impact: "Medium"
+          levers: 17
+          examples: ["Response time", "Availability", "Personnel quality", "1-on-1 vs group"]
+
+        - lever: "Downsell Quantity"
+          impact: "Low but preserves revenue"
+          rule: "ONLY for unqualified prospects"
+
+        - lever: "Downsell Quality"
+          impact: "Low but preserves revenue"
+          method: "Invert upsell quality list"
+
+  activation-mapper:
+    id: activation-mapper
+    title: "Activation Point Specialist"
+    tier: tier_0
+    icon: "target"
+
+    purpose: |
+      Identify what differentiates long-term customers from churned customers.
+      Find the magic moment that predicts retention.
+
+    definition: |
+      "Every customer that does (X thing) or gets (Y result) stays for longer
+      than customers that don't."
+
+    discovery_process:
+      step_1: "Find churned customers who stayed 3+ months"
+      step_2: "Sort by total spend, take top 20%"
+      step_3: "Learn everything about them (demographics, psychographics, usage)"
+      step_4: "Find common factors = activation point candidates"
+      step_5: "Reduce to 5 factors and test"
+      step_6: "Update messaging to attract better customers"
+      step_7: "Update onboarding to drive to activation point"
+      step_8: "Retest every 6-12 months"
+
+    examples:
+      - business: "B2B service"
+        activation: "First time they get leads"
+      - business: "Software"
+        activation: "First login and dashboard view"
+      - business: "Physical product"
+        activation: "First use of consumable"
+      - business: "Gym Launch"
+        activation: "Customers who recovered investment in first 30 days"
+        impact: "Churn went from 8% to 3%"
+
+    outputs:
+      - "Top 5 activation point candidates"
+      - "Validation test plan"
+      - "Onboarding alignment recommendations"
+      - "Acquisition messaging alignment"
+
+  onboarding-architect:
+    id: onboarding-architect
+    title: "Customer Onboarding Designer"
+    tier: tier_1
+    icon: "rocket"
+
+    purpose: |
+      Design and optimize customer onboarding to achieve activation points fast.
+      The goal is getting customers their first win as quickly as possible.
+
+    hierarchy:
+      effectiveness_order:
+        1: "Custom + Personal + Live = Maximum retention"
+        2: "Custom + Group + Live = Great retention, more scalable"
+        3: "Generic + Group + Recorded = Decent retention, most scalable"
+        4: "No onboarding = Maximum churn"
+
+      rules:
+        - "Custom > Generic"
+        - "Personal > Group"
+        - "Live > Recorded"
+        - "Carrots > Sticks"
+        - "Something > Nothing"
+
+    thirty_day_sequence:
+      day_0:
+        - "Personal welcome message"
+        - "Resell value"
+        - "Clear roadmap"
+        - "Define communication cadence"
+
+      days_1_3:
+        - "Push toward activation point"
+        - "First quick win"
+        - "Homework with 7-day deadline"
+
+      days_3_7:
+        - "Personal check-in"
+        - "Resolve friction"
+        - "Celebrate progress"
+
+      days_7_14:
+        - "Connect with successful members"
+        - "Share proof"
+        - "Second check-in"
+
+      days_14_21:
+        - "Introduce community events"
+        - "Facilitate 2-3 meaningful connections"
+
+      days_21_30:
+        - "Review progress"
+        - "Celebrate publicly"
+        - "Request testimonial"
+        - "Introduce future unlockables"
+
+    paid_onboarding:
+      strategy: "Sell onboarding separately"
+      impact: "25% boost in ascensions"
+      case: "Portfolio company: $2M/month to $2M/week after switching to 1-on-1 onboarding"
+
+  engagement-tracker:
+    id: engagement-tracker
+    title: "Customer Engagement Monitor"
+    tier: tier_1
+    icon: "pulse"
+
+    purpose: |
+      Track customer engagement, identify declining patterns, and trigger
+      interventions before churn happens. Usage churn precedes billing churn.
+
+    churn_pattern:
+      typical_decline:
+        week_1: "3 sessions"
+        week_2: "2 sessions <- ALERT"
+        week_3: "2 sessions"
+        week_4: "1 session"
+        week_5: "CANCELLATION"
+
+      rescue_pattern:
+        week_1: "3 sessions"
+        week_2: "2 sessions <- IMMEDIATE REACH OUT"
+        week_3: "3 sessions (back on track)"
+        week_4: "3 sessions"
+        week_5: "3 sessions"
+
+    rule: "If frequency drops to 2x/week, intervene immediately"
+
+    usage_churn_definition: |
+      "Usage churn = customer still subscribed but no longer uses the product.
+      This ALWAYS precedes billing churn. Intercept when they stop using."
+
+    metrics_to_track:
+      tier_1_survival:
+        frequency: "Weekly"
+        metrics:
+          - "Monthly churn rate (by cohort)"
+          - "Revenue churn rate (dollar-weighted)"
+          - "LTV (rolling 90-day average)"
+          - "LTV:CAC ratio"
+
+      tier_2_engagement:
+        frequency: "Daily/Weekly"
+        metrics:
+          - "Login/visit frequency"
+          - "Feature usage depth"
+          - "Content consumption rate"
+          - "Community participation"
+          - "Support ticket volume and sentiment"
+          - "NPS score (quarterly)"
+
+      tier_3_predictive:
+        frequency: "Build over time"
+        metrics:
+          - "Time since last login/purchase"
+          - "Engagement score trend"
+          - "Payment failure rate"
+          - "Outreach response rate"
+          - "Activation point completion percentage"
+
+  exit-interviewer:
+    id: exit-interviewer
+    title: "Cancellation Recovery Specialist"
+    tier: tier_2
+    icon: "phone"
+
+    purpose: |
+      Conduct exit interviews to save cancellations and gather product feedback.
+      Can save approximately 50% of phone/email cancellation requests.
+
+    statistics:
+      save_rate: "~50% of cancellations that reach interview"
+      ltv_impact: "Assuming half show up, cuts churn by 25% = 33% LTV increase"
+
+    protocol:
+      setup: "Establish exit interview expectation during onboarding"
+      trigger: "Cancellation notice initiates scheduling"
+
+    interview_flow:
+      step_1:
+        name: "Let them vent"
+        action: "Listen fully without defending"
+        script: "Hey, no pressure. I would love to hear all the reasons you hate me. This would really help me so in the future I can avoid this."
+
+      step_2:
+        name: "Match their indignation"
+        action: "Get MORE upset than they are"
+        script: "This is completely ridiculous. You're 100% correct."
+
+      step_3:
+        name: "Ask permission to fix"
+        action: "Request another chance"
+        script: "Give me the opportunity to fix this?"
+
+      step_4:
+        name: "Save attempt"
+        options:
+          redo: "Let me try again and I'll fix this."
+          upsell: "You should have been sold into this anyway. That's my fault."
+
+      step_5:
+        name: "Resell the value"
+        items:
+          - "Why staying helps achieve their goals"
+          - "What they lose: URLs, posts, access, founder pricing, community status"
+
+    high_volume_alternative:
+      method: "Cancellation video"
+      content:
+        - "Remind why they started"
+        - "Resell the value"
+        - "Remind what they risk losing"
+
+  winback-specialist:
+    id: winback-specialist
+    title: "Churned Customer Recovery Agent"
+    tier: tier_2
+    icon: "return"
+
+    purpose: |
+      Systematically recover churned customers through segmented campaigns.
+      Show them what they missed by not staying.
+
+    segmentation:
+      segment_1:
+        definition: "Churned <30 days"
+        probable_cause: "Activation failure"
+        approach: "I noticed we failed you. Here's how it's different now."
+
+      segment_2:
+        definition: "Churned 30-90 days"
+        probable_cause: "Value perception issue"
+        approach: "A lot has changed since you left. See what you missed."
+
+      segment_3:
+        definition: "Churned 90+ days"
+        probable_cause: "External factors or evolved needs"
+        approach: "People like you who came back saw X results in Y time."
+
+    sequence:
+      day_1:
+        action: "Personal email/text acknowledging they left"
+        rule: "No selling"
+
+      day_3:
+        action: "Share success story of someone in their situation"
+
+      day_7:
+        action: "Specific offer to return (discount, bonus, or waived fee)"
+
+      day_14:
+        action: "Final outreach with limited-time incentive"
+
+      day_30:
+        action: "Add to long-term nurture (quarterly value + soft CTA)"
+
+      every_90_days:
+        action: "Show results of people who signed up when they left"
+        psychology: "Makes them feel left behind but offers chance to recover"
+
+  pricing-strategist:
+    id: pricing-strategist
+    title: "Price & LTV Optimization Specialist"
+    tier: tier_2
+    icon: "dollar"
+
+    purpose: |
+      Optimize pricing for maximum LTV. Test prices quarterly.
+      Implement annual pricing options and continuity structures.
+
+    price_testing:
+      frequency: "Every quarter"
+      method:
+        step_1: "Start at current price"
+        step_2: "Raise 20% every 10 sales"
+        step_3: "Continue until dramatic drop in conversion"
+        step_4: "Return to sweet spot"
+
+      formula: "Breakeven Conv Rate = Old Revenue / New Price"
+      decision: "If new conversion rate > breakeven, it's a winner"
+
+    math_example:
+      premise: "10% profit margin business"
+      action: "20% price increase"
+      result: "3x profit (not 20%)"
+      explanation: "Price increases go straight to profit"
+
+    annual_pricing:
+      standard_offer: "Buy 10 months get 2 free (16% discount)"
+      uptake: "10-20% choose annual option"
+
+      pricing_rule:
+        if_avg_months_lt_12: "Price annual ABOVE avg_months"
+        if_avg_months_gte_12: "Use 'Buy 10 get 2 free'"
+
+      big_head_long_tail:
+        structure: "$6,800 upfront (education) + $199/mo (community)"
+        benefit: "Base keeps stacking"
+        ltv_example: "$6,800 -> $12,800+"
+
+      founder_rates:
+        structure: "50% discount for early commitment"
+        benefit: "Combines buy-in AND reward for staying"
+
+    continuity_pricing:
+      standalone_vs_continuity:
+        ratio_1_33x: "50% choose continuity"
+        ratio_2x: "70% choose continuity"
+        ratio_3x: "90% choose continuity"
+
+# ===============================================================================
+# EXECUTOR MATRIX
+# ===============================================================================
+
+executor_matrix:
+  # Diagnosis & Calculation
+  - task: "Calculate cohort-based churn rate"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Use cohort, not simple division"
+
+  - task: "Calculate LTV (recurring/transactional)"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Verify gross profit inputs"
+
+  - task: "Assess LTV:CAC health"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Human validates action recommendation"
+
+  - task: "Identify activation point candidates"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Human validates before testing"
+
+  - task: "Score at-risk customers"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Human reviews high-value at-risk"
+
+  # 5 Horsemen Execution
+  - task: "Track customer engagement/attendance"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Alert human when decline detected"
+
+  - task: "Execute 2x/week touch cadence"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Personalization required"
+
+  - task: "Send handwritten cards"
+    executor: Human
+    automation: LOW
+    guardrails: "Use established occasions"
+
+  - task: "Plan member events"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "21/42/63 day cadence"
+
+  - task: "Conduct exit interview"
+    executor: Human
+    automation: LOW
+    guardrails: "Follow full protocol"
+
+  # Onboarding & Activation
+  - task: "Send Day 0 welcome sequence"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Personal feel required"
+
+  - task: "Execute 30-day onboarding touchpoints"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Track activation point progress"
+
+  - task: "Connect customers for community linking"
+    executor: Human
+    automation: LOW
+    guardrails: "Match strategically"
+
+  - task: "Deploy activation incentives"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Time with churn points"
+
+  # LTV Optimization
+  - task: "Execute price test"
+    executor: Human
+    automation: LOW
+    guardrails: "Track conversion at each level"
+
+  - task: "Design annual pricing option"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Follow avg_months rule"
+
+  - task: "Create continuity offer"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Match offer type to business"
+
+  - task: "Design cross-sell/upsell structure"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Don't break core for trocados"
+
+  # Recovery
+  - task: "Execute winback sequence"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Segment by churn timing"
+
+  - task: "Send 90-day proof recovery"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Match proof to their cohort"
+
+  - task: "Reactivate dormant customers"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Use 3-touch framework"
+
+  # Culture & Quality
+  - task: "Fire/correct bad customers"
+    executor: Human
+    automation: LOW
+    guardrails: "3 strikes policy"
+
+  - task: "Survey customers (2x/year)"
+    executor: Hybrid
+    automation: MEDIUM
+    guardrails: "Use 2 essential questions"
+
+  - task: "Track customer journey milestones"
+    executor: Worker
+    automation: HIGH
+    guardrails: "Activate -> Testimonial -> Refer -> Ascend"
+
+# ===============================================================================
+# QUALITY GATES
+# ===============================================================================
+
+quality_gates:
+  QG-001:
+    name: "Churn Threshold Gate"
+    transition: "Any -> Scaling"
+    condition: "churn_rate < 10%"
+    type: blocking
+    failure_action: "Stop scaling, diagnose product"
+
+  QG-002:
+    name: "LTV:CAC Health Gate"
+    transition: "Any -> Scaling"
+    condition: "ltv_cac_ratio >= 3:1"
+    type: blocking
+    failure_action: "Fix backend before scaling"
+
+  QG-003:
+    name: "Activation Point Gate"
+    transition: "Onboarding -> Active"
+    condition: "activation_point_reached == true"
+    type: warning
+    failure_action: "Intensive intervention"
+
+  QG-004:
+    name: "Engagement Decline Gate"
+    transition: "Active -> At-Risk"
+    condition: "engagement_level >= 2"
+    type: warning
+    failure_action: "Trigger reactivation sequence"
+
+  QG-005:
+    name: "Exit Interview Gate"
+    transition: "Cancellation Request -> Processed"
+    condition: "exit_interview_offered == true"
+    type: blocking
+    failure_action: "Schedule exit interview first"
+
+  QG-006:
+    name: "Onboarding Completion Gate"
+    transition: "New -> Active"
+    condition: "day_30_onboarding_complete == true"
+    type: warning
+    failure_action: "Escalate to success manager"
+
+  QG-007:
+    name: "BAMFAM Gate"
+    transition: "Interaction End -> Next Action"
+    condition: "next_touchpoint_scheduled == true"
+    type: warning
+    failure_action: "Schedule follow-up immediately"
+
+# ===============================================================================
+# WORKFLOWS
+# ===============================================================================
+
+workflows:
+  new_customer_workflow:
+    trigger: "Customer signs up"
+    steps:
+      - step: 1
+        agent: onboarding-architect
+        action: "Send Day 0 welcome sequence"
+        output: "Welcome sent, roadmap shared"
+
+      - step: 2
+        agent: activation-mapper
+        action: "Set activation point target"
+        output: "Customer knows their activation goal"
+
+      - step: 3
+        agent: engagement-tracker
+        action: "Begin engagement monitoring"
+        continuous: true
+
+      - step: 4
+        agent: onboarding-architect
+        action: "Execute 30-day onboarding sequence"
+        checkpoints: ["Day 3", "Day 7", "Day 14", "Day 21", "Day 30"]
+
+      - step: 5
+        agent: community-linker
+        action: "Facilitate 2-3 meaningful connections"
+        timing: "Days 14-21"
+
+      - step: 6
+        agent: incentive-designer
+        action: "Introduce unlockables and milestones"
+        timing: "Day 21-30"
+
+  engagement_decline_workflow:
+    trigger: "Engagement drops below Level 2"
+    steps:
+      - step: 1
+        agent: engagement-tracker
+        action: "Flag customer as at-risk"
+        output: "At-risk status logged"
+
+      - step: 2
+        agent: touch-executor
+        action: "Send ACA check-in"
+        template: "Acknowledge + Compliment + Ask"
+
+      - step: 3
+        agent: community-linker
+        action: "Invite to upcoming event"
+        timing: "Within 48 hours"
+
+      - step: 4
+        agent: incentive-designer
+        action: "Offer reactivation incentive"
+        condition: "If no response after 72h"
+
+      - step: 5
+        agent: engagement-tracker
+        action: "Escalate to human"
+        condition: "If Level 0-1 persists 7+ days"
+
+  cancellation_request_workflow:
+    trigger: "Customer requests cancellation"
+    steps:
+      - step: 1
+        agent: exit-interviewer
+        action: "Schedule exit interview"
+        sla: "Within 24 hours"
+
+      - step: 2
+        agent: exit-interviewer
+        action: "Conduct interview"
+        protocol: "Vent -> Match indignation -> Ask permission -> Save attempt -> Resell"
+
+      - step: 3
+        agent: exit-interviewer
+        action: "Log feedback themes"
+        output: "Exit reasons documented"
+
+      - step: 4
+        agent: winback-specialist
+        action: "Add to winback sequence"
+        condition: "If cancellation proceeds"
+
+      - step: 5
+        agent: retention-coordinator
+        action: "Surface product feedback"
+        condition: "If pattern detected"
+
+  winback_workflow:
+    trigger: "Customer churned"
+    steps:
+      - step: 1
+        agent: winback-specialist
+        action: "Segment by churn timing"
+        output: "<30d / 30-90d / 90+d"
+
+      - step: 2
+        agent: winback-specialist
+        action: "Execute Day 1 - acknowledgment"
+        rule: "No selling"
+
+      - step: 3
+        agent: winback-specialist
+        action: "Execute Day 3 - success story"
+        match: "Demographics of churned customer"
+
+      - step: 4
+        agent: winback-specialist
+        action: "Execute Day 7 - return offer"
+        types: ["Discount", "Bonus", "Waived fee"]
+
+      - step: 5
+        agent: winback-specialist
+        action: "Execute Day 14 - final offer"
+        urgency: "Limited time"
+
+      - step: 6
+        agent: winback-specialist
+        action: "Add to long-term nurture"
+        cadence: "Quarterly value + soft CTA"
+
+      - step: 7
+        agent: winback-specialist
+        action: "90-day proof recovery"
+        content: "Results of people who signed when they left"
+        repeat: "Every 90 days"
+
+  ltv_optimization_workflow:
+    trigger: "Quarterly review"
+    steps:
+      - step: 1
+        agent: ltv-calculator
+        action: "Calculate current LTV by segment"
+        output: "LTV baseline"
+
+      - step: 2
+        agent: ltv-calculator
+        action: "Analyze Crazy 8 lever potential"
+        output: "Ranked lever opportunities"
+
+      - step: 3
+        agent: pricing-strategist
+        action: "Design price test"
+        condition: "If price lever prioritized"
+
+      - step: 4
+        agent: pricing-strategist
+        action: "Execute price test"
+        method: "+20% every 10 sales until drop"
+
+      - step: 5
+        agent: continuity-architect
+        action: "Evaluate continuity offer performance"
+        output: "Recommendations for optimization"
+
+      - step: 6
+        agent: retention-coordinator
+        action: "Update LTV projections"
+        output: "Next quarter targets"
+
+  customer_journey_workflow:
+    trigger: "Customer reaches milestone"
+    milestones:
+      activate:
+        trigger: "Activation point reached"
+        action: "Celebrate, unlock next level"
+        next: "testimonial"
+
+      testimonial:
+        trigger: "Customer reports success"
+        action: "Request and capture testimonial"
+        next: "refer"
+
+      refer:
+        trigger: "Testimonial captured"
+        action: "Request referrals at satisfaction peak"
+        next: "ascend"
+
+      ascend:
+        trigger: "Customer ready for more"
+        action: "Present upsell/cross-sell"
+        insight: "If they just bought, they're least likely to churn"
+
+# ===============================================================================
+# KPIs & SUCCESS METRICS
+# ===============================================================================
+
+kpis:
+  primary:
+    churn_rate:
+      formula: "Churned / Original Cohort"
+      target: "<5%"
+      excellent: "<3%"
+      critical: ">10%"
+      impact: "10% -> 3% = 3.3x LTV"
+
+    ltv:
+      formula_recurring: "Gross Profit / Churn"
+      formula_transactional: "GP x Avg Transactions"
+      target: "3x CAC minimum"
+
+    ltv_cac_ratio:
+      formula: "LTV / CAC"
+      healthy: ">=3:1"
+      warning: "2:1 to 3:1"
+      critical: "<2:1"
+
+  secondary:
+    activation_rate:
+      formula: "Activated / Total Customers"
+      target: ">80%"
+
+    engagement_distribution:
+      target: ">60% at Level 3+"
+
+    exit_save_rate:
+      formula: "Saved / Exit Interview Attempts"
+      target: ">50%"
+
+    onboarding_completion:
+      formula: "Completed 30-day / Started"
+      target: ">90%"
+
+  by_framework:
+    five_horsemen:
+      - "Average engagement frequency"
+      - "Touch cadence compliance (2x/week)"
+      - "Cards sent per customer per year"
+      - "Event attendance rate"
+      - "Exit interview completion rate"
+
+    churn_checklist:
+      - "Activation point achievement rate"
+      - "Onboarding NPS"
+      - "Community linking connections/customer"
+      - "Annual pricing uptake"
+      - "Survey response rate"
+
+    crazy_8:
+      - "Price test win rate"
+      - "Gross margin trend"
+      - "Cross-sell attach rate"
+      - "Upsell conversion rate"
+      - "Downsell save rate"
+
+# ===============================================================================
+# TROUBLESHOOTING
+# ===============================================================================
+
+troubleshooting:
+  - symptom: "Churn above 10%"
+    possible_causes:
+      - "Product not delivering value"
+      - "No clear activation point"
+      - "Onboarding failure"
+      - "Wrong customers being acquired"
+    diagnosis:
+      - "Review exit interview themes"
+      - "Analyze activation point completion"
+      - "Compare churned vs retained customer profiles"
+    solutions:
+      - "Identify and push to activation point"
+      - "Improve onboarding"
+      - "Refine acquisition messaging"
+
+  - symptom: "Low activation rate (<50%)"
+    possible_causes:
+      - "Activation point too hard to reach"
+      - "Onboarding not directing to it"
+      - "Time-to-value too long"
+    diagnosis:
+      - "Map customer journey to activation"
+      - "Interview successful customers"
+      - "Test different activation definitions"
+    solutions:
+      - "Simplify path to activation"
+      - "Create faster first win"
+      - "Add incentives for activation"
+
+  - symptom: "High churn despite good engagement"
+    possible_causes:
+      - "Price-value mismatch"
+      - "Competition"
+      - "Overwhelm (too many deliverables)"
+    diagnosis:
+      - "Review pricing vs perceived value"
+      - "Analyze competitive positioning"
+      - "Count deliverables per month (>5 = red flag)"
+    solutions:
+      - "Test lower price point"
+      - "Survey for core 2-3 valuable things"
+      - "Reduce and improve vs add more"
+
+  - symptom: "LTV:CAC ratio declining"
+    possible_causes:
+      - "CAC increasing (market competition)"
+      - "Churn increasing"
+      - "Gross margin declining"
+    diagnosis:
+      - "Break down ratio components"
+      - "Trend each component over 90 days"
+      - "Identify primary driver"
+    solutions:
+      - "Apply Crazy 8 levers"
+      - "Implement 9-Step Churn Checklist"
+      - "Review pricing strategy"
+
+  - symptom: "Exit interviews not saving customers"
+    possible_causes:
+      - "Interview happening too late"
+      - "Not following full protocol"
+      - "Product issues beyond repair"
+    diagnosis:
+      - "Review interview timing"
+      - "Audit protocol compliance"
+      - "Categorize reasons given"
+    solutions:
+      - "Trigger earlier on cancellation signals"
+      - "Train on full protocol"
+      - "Surface product feedback to team"
+
+# ===============================================================================
+# TECHNOLOGY REQUIREMENTS
+# ===============================================================================
+
+technology:
+  required:
+    - tool: "Customer Data Platform"
+      purpose: "Track engagement and predict churn"
+      features:
+        - "Cohort-based churn tracking"
+        - "Engagement scoring"
+        - "At-risk alerts"
+
+    - tool: "Communication Hub"
+      purpose: "Execute touch cadences"
+      features:
+        - "Multi-channel (email, SMS, in-app)"
+        - "Personalization"
+        - "Automation with human triggers"
+
+    - tool: "Survey Tool"
+      purpose: "Customer feedback (2x/year)"
+      features:
+        - "NPS tracking"
+        - "Custom questions"
+        - "Trend analysis"
+
+    - tool: "Community Platform"
+      purpose: "Build relationships"
+      features:
+        - "Member directory"
+        - "Event management"
+        - "Content pinning"
+
+  recommended:
+    - tool: "Cohort Analytics"
+      purpose: "Deep churn analysis"
+
+    - tool: "Testimonial Collection"
+      purpose: "Capture at peak satisfaction"
+
+    - tool: "Subscription Management"
+      purpose: "Annual pricing, continuity offers"
+
+    - tool: "Exit Interview Scheduling"
+      purpose: "Automate interview booking"
+
+# ===============================================================================
+# GAPS TO RESOLVE
+# ===============================================================================
+
+gaps_to_resolve:
+  - id: GAP-001
+    description: "Industry-specific activation point benchmarks"
+    severity: Medium
+    clarification_needed: "What activation points work for different verticals?"
+
+  - id: GAP-002
+    description: "Optimal survey questions by business type"
+    severity: Low
+    clarification_needed: "Beyond the 2 essential questions"
+
+  - id: GAP-003
+    description: "Winback offer ROI thresholds"
+    severity: Medium
+    clarification_needed: "How much to offer for different LTV segments?"
+
+  - id: GAP-004
+    description: "Event frequency optimization"
+    severity: Low
+    clarification_needed: "21 vs 42 vs 63 days - which works better when?"
+
+  - id: GAP-005
+    description: "Handwritten card templates"
+    severity: Low
+    clarification_needed: "Specific language for each occasion"
+
+# ===============================================================================
+# VALIDATION
+# ===============================================================================
+
+validation:
+  sop_parts_complete: 20/20
+  task_anatomy_fields: 8/8
+  decision_rules_documented: 13
+  executor_matrix_complete: true
+  quality_gates_defined: 7
+  workflows_documented: 6
+  source_references: 80+
+
+  blueprint_status: "READY FOR SQUAD CREATION"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

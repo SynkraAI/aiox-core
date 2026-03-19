@@ -1,0 +1,260 @@
+# Compliance Regulatório para Afiliados de Prop Trading
+# Atualizado: 2026-02 | Fonte: CFTC, FCA, ASIC, CVM, FTC guidelines
+# Uso: agente prop-trading-affiliate — consultar antes de produzir qualquer conteúdo
+# AVISO: Este documento é referência informativa. Consulte advogado especializado para compliance formal.
+
+metadata:
+  version: "1.0"
+  last_updated: "2026-02"
+  disclaimer: >
+    Este documento é referência informativa para criadores de conteúdo e afiliados.
+    Não constitui aconselhamento jurídico. Leis e regulações mudam. Consulte um
+    profissional jurídico no seu país para compliance formal.
+  context: >
+    Após ações da CFTC em 2024 contra firmas como My Forex Funds (encerrada) e
+    outras, o setor de prop trading passou por escrutínio regulatório aumentado.
+    Afiliados devem ser especialmente cuidadosos com claims de resultados e
+    descrição do modelo de negócio das firmas.
+
+countries:
+
+  us:
+    display_name: "Estados Unidos"
+    regulator: "CFTC (Commodity Futures Trading Commission) + FTC (Federal Trade Commission)"
+    regulator_url:
+      cftc: https://www.cftc.gov
+      ftc: https://www.ftc.gov
+    key_requirements:
+      - >
+        Afiliados DEVEM divulgar a relação comercial com a prop firm em todo conteúdo
+        patrocinado ou com link de afiliado (FTC 16 CFR Part 255).
+      - >
+        Não faça claims de ganhos específicos sem disclaimer de que resultados variam
+        e a maioria dos traders não tem lucro consistente.
+      - >
+        CFTC pode considerar prop firms como dealers não registrados se oferecerem
+        capital real para trading em mercados regulamentados. Verifique status da firma.
+      - >
+        Claims como "traders profissionais ganham X por dia" são potencialmente
+        enganosos sem dados de base para suportar a afirmação (FTC Section 5).
+      - >
+        Material de marketing não pode omitir taxas, condições ou restrições
+        relevantes para a decisão de compra.
+    disclaimers_required:
+      - "Disclosure de afiliado (paid partnership / affiliate link)"
+      - "Resultados passados não garantem resultados futuros"
+      - "Trading envolve risco substancial de perda"
+      - "Prop firms não são corretoras regulamentadas"
+    penalties:
+      ftc_enforcement: "Multas de até $50.120 por violação intencional"
+      cftc_enforcement: "Ação civil e criminal para operações ilegais de trading"
+    affiliate_specific_rules:
+      - >
+        Disclosure deve estar ANTES do conteúdo (não apenas no rodapé ou após o link).
+      - >
+        Hashtags como #ad, #sponsored devem ser visíveis sem necessidade de expandir o post.
+      - >
+        YouTube: use ferramenta nativa de 'Paid Promotion' além do disclosure verbal.
+      - >
+        TikTok e Instagram: use rótulo de 'Parceria Paga' nativo quando disponível.
+    example_disclosure_en: >
+      "Disclosure: This post contains affiliate links. If you purchase through my link,
+      I may earn a commission at no additional cost to you. Trading involves substantial
+      risk of loss. Past performance is not indicative of future results. Prop firms
+      are not regulated brokers."
+
+  uk:
+    display_name: "Reino Unido"
+    regulator: "FCA (Financial Conduct Authority)"
+    regulator_url: https://www.fca.org.uk
+    key_requirements:
+      - >
+        Comunicações financeiras (incluindo marketing de afiliados) devem ser
+        "fair, clear and not misleading" (FCA COBS 4.2).
+      - >
+        Redes sociais e influenciadores: FCA publicou guidance específico em 2023
+        para crypto e investimentos em redes sociais. Prop trading pode ser abrangido.
+      - >
+        Claims de performance histórica precisam de período mínimo de 5 anos de dados
+        e comparativo com benchmark relevante.
+      - >
+        Risk warnings obrigatórios em tamanho e destaque proporcional ao benefício anunciado.
+      - >
+        Desde 2024, influenciadores de finanças no UK precisam verificar se a empresa
+        que promovem tem FCA approval para o produto específico.
+    disclaimers_required:
+      - "Capital at risk. Past performance is not a guide to future performance."
+      - "Prop trading firms are not regulated by the FCA."
+      - "Don't invest money you can't afford to lose."
+      - "Affiliate relationship disclosure"
+    penalties:
+      fca_enforcement: "Multa ilimitada + possibilidade de processo criminal para promoção financeira ilegal"
+    affiliate_specific_rules:
+      - >
+        Influenciadores devem declarar CADA post/video com afiliado de forma clara.
+      - >
+        Claims de 'free money' ou 'no risk' são proibidos mesmo que tecnicamente defensáveis.
+      - >
+        Stories do Instagram que expiram não são aceitáveis como único canal de disclosure
+        (a FCA exige registro permanente de comunicações financeiras).
+    example_disclosure_en: >
+      "This is a paid promotion. Trading with a prop firm carries significant risk.
+      Most traders do not pass evaluations. This firm is not regulated by the FCA.
+      Capital at risk."
+
+  australia:
+    display_name: "Austrália"
+    regulator: "ASIC (Australian Securities and Investments Commission)"
+    regulator_url: https://www.asic.gov.au
+    key_requirements:
+      - >
+        ASIC classifica advice sobre produtos financeiros como 'financial product advice'
+        — pode exigir Australian Financial Services License (AFSL) dependendo do conteúdo.
+      - >
+        General advice (informação educativa sem recomendação específica) é mais seguro
+        que personal advice (recomendações personalizadas).
+      - >
+        Target Market Determination (TMD) requerida para produtos financeiros —
+        afiliados podem precisar verificar se a firma forneceu TMD.
+      - >
+        Testimonials em publicidade financeira são altamente regulados — use com cautela.
+    disclaimers_required:
+      - "General advice warning: This information is general in nature and does not consider your personal financial situation."
+      - "This firm is not regulated by ASIC."
+      - "Trading involves risk. You may lose more than your initial investment."
+      - "Affiliate disclosure"
+    penalties:
+      asic_enforcement: "Civil penalties de até $1.1M por pessoa física. Processo criminal possível."
+    affiliate_specific_rules:
+      - >
+        Conteúdo de comparativo deve ser factual e atualizado — ASIC tem autuado
+        sites de comparação com dados desatualizados.
+      - >
+        Influenciadores/afiliados que proveem 'personal advice' sem AFSL cometem infração.
+      - >
+        Review sites devem deixar claro se recebem remuneração por indicação.
+    example_disclosure_en: >
+      "Affiliate disclosure: I may earn a commission if you sign up through my link.
+      General advice warning: This information does not consider your personal circumstances.
+      This firm is not regulated by ASIC. Trading involves substantial risk of loss."
+
+  eu:
+    display_name: "União Europeia"
+    regulator: "ESMA (European Securities and Markets Authority) + reguladores nacionais"
+    regulator_url: https://www.esma.europa.eu
+    key_requirements:
+      - >
+        Diretiva MiFID II aplica-se a conteúdo sobre instrumentos financeiros.
+        Prop firms que operam com capital real podem ser classificadas como corretoras.
+      - >
+        Regra de comunicação de marketing: deve ser claramente identificada como
+        publicidade, não pode ser enganosa, deve apresentar riscos de forma igualmente
+        proeminente que benefícios.
+      - >
+        ESMA emitiu warnings sobre prop trading em 2024 — verifique país específico.
+      - >
+        Reguladores nacionais (BaFin, AMF, CNMV, etc.) podem ter regras adicionais.
+    disclaimers_required:
+      - "Este anúncio é uma comunicação de marketing."
+      - "Prop firms não são reguladas pela ESMA ou reguladores nacionais."
+      - "O trading de instrumentos financeiros envolve risco significativo de perda."
+      - "Os resultados passados não garantem resultados futuros."
+      - "Divulgação da relação de afiliado"
+    penalties:
+      esma_enforcement: "Varia por país. Multas e suspensão de atividade."
+    affiliate_specific_rules:
+      - >
+        GDPR: cuidado com cookies de rastreamento de afiliados — requer consent explícito.
+      - >
+        Países nórdicos têm regulamentação adicional sobre marketing de influenciadores.
+      - >
+        França: AMF tem regras específicas sobre endorsement de produtos financeiros.
+    example_disclosure_fr: >
+      "Lien affilié: je touche une commission si vous vous inscrivez via mon lien.
+      Avertissement: le trading implique un risque de perte. Les performances passées
+      ne garantissent pas les résultats futurs."
+
+  brazil:
+    display_name: "Brasil"
+    regulator: "CVM (Comissão de Valores Mobiliários) + BACEN (Banco Central do Brasil) + CONAR"
+    regulator_url:
+      cvm: https://www.cvm.gov.br
+      bacen: https://www.bcb.gov.br
+      conar: https://www.conar.org.br
+    key_requirements:
+      - >
+        CVM Resolução 62 (2022) regula influenciadores e analistas de valores mobiliários.
+        Influenciadores que recomendam investimentos precisam verificar se estão enquadrados
+        como Analistas de Valores Mobiliários (exige habilitação).
+      - >
+        Prop firms que operam com forex no Brasil podem estar em área regulatória cinza —
+        BACEN regula câmbio estrangeiro e operações de forex.
+      - >
+        CONAR proíbe publicidade enganosa e exige que patrocínio seja claramente sinalizado.
+      - >
+        CDC (Código de Defesa do Consumidor): publicidade de afiliado sem disclosure
+        pode ser caracterizada como publicidade enganosa (Art. 37).
+      - >
+        PROCON pode autuar em casos de publicidade enganosa — multas variáveis.
+    disclaimers_required:
+      - "#publi ou #publicidade em todos os posts com afiliado (exigência do CONAR)"
+      - "Resultados passados não são garantia de resultados futuros"
+      - "Prop firms não são corretoras regulamentadas no Brasil"
+      - "Trading em forex e futuros envolve risco significativo de perda"
+      - "Esta é uma indicação de afiliado — recebo comissão por indicações"
+    penalties:
+      cvm_enforcement: "Multa de até R$500.000 por infração. Inabilitação para atuar no mercado."
+      conar_enforcement: "Sustação da publicidade. Advertência. Sem multas diretas do CONAR."
+      procon_enforcement: "Multa de R$200 a R$3.000.000 dependendo do estado."
+      cdc_enforcement: "Processo civil por danos ao consumidor."
+    affiliate_specific_rules:
+      - >
+        '#publi' deve aparecer no início do post/caption, não apenas no final ou escondido.
+      - >
+        Em vídeos: disclosure verbal E textual são recomendados.
+      - >
+        CVM Resolução 62: influenciadores com mais de 500k seguidores que falam sobre
+        investimentos podem ser enquadrados como analistas e precisar de registro CVM.
+      - >
+        Prop firms estrangeiras não são reguladas pela CVM — mencione isso explicitamente.
+      - >
+        Evite claims de "renda garantida" ou "sem risco" — infração direta ao CDC.
+    example_disclosure_pt: >
+      "#publi — Parceria paga. Recebo comissão por indicações através dos meus links.
+      AVISO DE RISCO: Trading de forex e futuros envolve risco significativo de perda.
+      Esta firma não é regulada pela CVM. Resultados passados não garantem resultados futuros.
+      Não invista dinheiro que não pode perder."
+    specific_risks_for_br_affiliates:
+      - >
+        CVM tem investigado influenciadores que promovem plataformas de investimento
+        não reguladas. Prop trading fica em área cinza — seja conservador.
+      - >
+        Evite mostrar screenshots de ganhos reais sem contexto de risco (pode ser
+        interpretado como promessa de retorno pelo PROCON/CDC).
+      - >
+        Se usar Google Ads para promover prop trading, verifique políticas do Google
+        sobre "financial services" — requer certificação em alguns casos.
+
+universal_best_practices:
+  mandatory_elements:
+    - "Disclosure de afiliado claro e proeminente"
+    - "Aviso de risco financeiro"
+    - "Statement de que prop firms não são corretoras regulamentadas"
+    - "Disclaimer de que resultados individuais variam"
+  forbidden_claims:
+    - "Garantia de lucro ou renda"
+    - "Sem risco"
+    - "Todos passam na avaliação"
+    - "Renda passiva garantida"
+    - "Substitui emprego"
+    - Screenshots de ganhos sem contexto de risco
+  content_types_lower_risk:
+    - "Conteúdo educativo sobre como prop trading funciona"
+    - "Comparativo objetivo de taxas e condições"
+    - "Review com prós e contras reais"
+    - "Tutorial de como funciona o processo de avaliação"
+  content_types_higher_risk:
+    - "Testimonials de ganhos específicos sem dados de base"
+    - "Claims de 'facilidade' de aprovação"
+    - "Conteúdo que minimiza os riscos"
+    - "Urgência artificial baseada em promoções"

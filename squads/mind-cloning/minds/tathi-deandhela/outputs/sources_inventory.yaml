@@ -1,0 +1,347 @@
+# Tathi Deandhela - Source Inventory
+# Generated: 2026-02-25
+# Phase: 0 - Viability & Research
+# Status: GO (5/5 validation checks passed)
+
+metadata:
+  mind_slug: "tathi-deandhela"
+  expert_name: "Tathi Deandhela"
+  domain: "palestras, posicionamento, persuasao, vendas, marketing digital"
+  extraction_date: "2026-02-25"
+  total_sources: 16
+  tier_0_count: 1
+  tier_1_count: 10
+  tier_2_count: 4
+  tier_3_count: 1
+  validation_status: "GO"
+  validation_score: "5/5"
+
+# ============================================================================
+# TIER 0: User Materials (MAXIMUM CONFIDENCE)
+# ============================================================================
+
+tier_0:
+  - id: "S00"
+    title: "Corpus Final Mindclone - Palestrante Memoravel"
+    type: "course_corpus"
+    format: "markdown + refined knowledge base"
+    tier: 0
+    year: "2026"
+    path: "/Users/luizfosc/Dropbox/Dropbox Particular Fosc/+PROJETOS Palestras + Mágicas/LUIZFOSC/CURSOS E TRANSCRIÇÕES/Tathi Deândhela/Palestrante Memorável/corpus-final-mindclone"
+    estimated_volume: "79 transcricoes + 79 masterpieces + KB refinada"
+    key_topics:
+      - "Ciclo de Ouro do Palestrante"
+      - "Posicionamento e diferencial"
+      - "Principios de persuasao na pratica"
+      - "Como vender palestras para empresas"
+      - "LinkedIn e Instagram para gerar autoridade"
+      - "Time Model Canvas"
+    confidence: "MAXIMUM"
+    value: "GOLD"
+    triangulates: ["S01", "S02", "S03", "S04"]
+    notes: "Fonte principal fornecida pelo usuario com curadoria e deduplicacao ja realizadas."
+
+# ============================================================================
+# TIER 1: Primary Content (by Tathi) - HIGH CONFIDENCE
+# ============================================================================
+
+tier_1:
+  - id: "S01"
+    title: "Modulo 01 - Posicionar"
+    type: "course_module"
+    tier: 1
+    year: "2026"
+    url: "local://corpus-final-mindclone/transcricoes/01-posicionar__*"
+    estimated_volume: "8 aulas"
+    key_topics:
+      - "posicionamento"
+      - "ciclo de ouro"
+      - "definicao de tema"
+      - "diferencial"
+    confidence: "HIGH"
+    value: "GOLD"
+    triangulates: ["S04", "S10"]
+
+  - id: "S02"
+    title: "Modulo 02 - Empoderar"
+    type: "course_module"
+    tier: 1
+    year: "2026"
+    url: "local://corpus-final-mindclone/transcricoes/02-empoderar__*"
+    estimated_volume: "14 aulas"
+    key_topics:
+      - "autoridade como palestrante"
+      - "Instagram"
+      - "LinkedIn"
+      - "negocios a partir de conteudo"
+    confidence: "HIGH"
+    value: "GOLD"
+    triangulates: ["S07", "S08", "S11"]
+
+  - id: "S03"
+    title: "Modulo 03 - Aperfeicoar"
+    type: "course_module"
+    tier: 1
+    year: "2026"
+    url: "local://corpus-final-mindclone/transcricoes/03-aperfeicoar__*"
+    estimated_volume: "10 aulas"
+    key_topics:
+      - "estrutura de palestra"
+      - "roteiro"
+      - "slides"
+      - "storytelling"
+    confidence: "HIGH"
+    value: "GOLD"
+    triangulates: ["S04", "S06", "S10"]
+
+  - id: "S04"
+    title: "Modulo 04 - Vender"
+    type: "course_module"
+    tier: 1
+    year: "2026"
+    url: "local://corpus-final-mindclone/transcricoes/04-vender__*"
+    estimated_volume: "9 aulas"
+    key_topics:
+      - "reciprocidade"
+      - "afinidade"
+      - "autoridade"
+      - "coerencia"
+      - "escassez"
+      - "prova social"
+      - "vender para empresas"
+    confidence: "HIGH"
+    value: "GOLD"
+    triangulates: ["S01", "S02", "S03", "S10"]
+
+  - id: "S05"
+    title: "Modulo 05 - Consolidar"
+    type: "course_module"
+    tier: 1
+    year: "2026"
+    url: "local://corpus-final-mindclone/transcricoes/05-consolidar__*"
+    estimated_volume: "2 aulas"
+    key_topics:
+      - "consolidacao"
+      - "rotina operacional"
+    confidence: "HIGH"
+    value: "SILVER"
+    triangulates: ["S03", "S04"]
+
+  - id: "S06"
+    title: "Modulo 06 - Aulas Bonus"
+    type: "course_module"
+    tier: 1
+    year: "2026"
+    url: "local://corpus-final-mindclone/transcricoes/06-aulas-bonus__*"
+    estimated_volume: "10 aulas"
+    key_topics:
+      - "textos matadores"
+      - "marcas poderosas"
+      - "jeito disney"
+      - "afiliacao e parcerias"
+    confidence: "HIGH"
+    value: "SILVER"
+    triangulates: ["S03", "S04"]
+
+  - id: "S07"
+    title: "Modulo 07 - Zero ao Palestrante"
+    type: "course_module"
+    tier: 1
+    year: "2026"
+    url: "local://corpus-final-mindclone/transcricoes/07-bonus-zero-ao-palestrante__*"
+    estimated_volume: "4 aulas longas"
+    key_topics:
+      - "estrutura de palestra"
+      - "revisao de conteudos"
+      - "palestrante completo"
+    confidence: "HIGH"
+    value: "GOLD"
+    triangulates: ["S03", "S04", "S10"]
+
+  - id: "S08"
+    title: "Modulo 08 - Time Model Canvas"
+    type: "course_module"
+    tier: 1
+    year: "2026"
+    url: "local://corpus-final-mindclone/transcricoes/08-bonus-time-model-canvas__*"
+    estimated_volume: "16 aulas"
+    key_topics:
+      - "projeto pessoal e profissional"
+      - "metas"
+      - "priorizacao"
+      - "execucao"
+    confidence: "HIGH"
+    value: "GOLD"
+    triangulates: ["S01", "S03", "S05"]
+
+  - id: "S09"
+    title: "Modulo 09 - PGG Experience"
+    type: "course_module"
+    tier: 1
+    year: "2026"
+    url: "local://corpus-final-mindclone/transcricoes/09-pgg-experience__*"
+    estimated_volume: "3 aulas"
+    key_topics:
+      - "abertura"
+      - "palestra aplicada"
+      - "feedback"
+    confidence: "HIGH"
+    value: "SILVER"
+    triangulates: ["S03", "S04", "S07"]
+
+  - id: "S10"
+    title: "Masterpieces Curadas"
+    type: "curated_primary"
+    tier: 1
+    year: "2026"
+    url: "local://corpus-final-mindclone/masterpieces"
+    estimated_volume: "79 masterpieces"
+    key_topics:
+      - "resumos de alta densidade"
+      - "estruturas de aula"
+      - "mensagens nucleares"
+    confidence: "HIGH"
+    value: "GOLD"
+    triangulates: ["S01", "S02", "S03", "S04"]
+
+# ============================================================================
+# TIER 2: Secondary Content (about Tathi and curation) - MEDIUM CONFIDENCE
+# ============================================================================
+
+tier_2:
+  - id: "S11"
+    title: "KB Refined - Taxonomy"
+    type: "analysis"
+    tier: 2
+    year: "2026"
+    url: "local://corpus-final-mindclone/kb-refined/taxonomy-refined.yaml"
+    estimated_volume: "8 temas, 45 conceitos"
+    key_topics:
+      - "taxonomia de conceitos"
+      - "organizacao por temas"
+    confidence: "MEDIUM"
+    value: "SILVER"
+    triangulates: ["S02", "S04"]
+
+  - id: "S12"
+    title: "KB Refined - Knowledge Graph"
+    type: "analysis"
+    tier: 2
+    year: "2026"
+    url: "local://corpus-final-mindclone/kb-refined/knowledge-graph-refined.json"
+    estimated_volume: "grafo com themes->concepts"
+    key_topics:
+      - "relacoes entre temas"
+      - "conceitos centrais"
+    confidence: "MEDIUM"
+    value: "SILVER"
+    triangulates: ["S11", "S10"]
+
+  - id: "S13"
+    title: "KB Refined - Index"
+    type: "analysis"
+    tier: 2
+    year: "2026"
+    url: "local://corpus-final-mindclone/kb-refined/index-refined.md"
+    estimated_volume: "sumario de conceitos"
+    key_topics:
+      - "mapa geral"
+      - "densidade por tema"
+    confidence: "MEDIUM"
+    value: "SILVER"
+    triangulates: ["S11", "S12"]
+
+  - id: "S14"
+    title: "Refinement Summary"
+    type: "analysis"
+    tier: 2
+    year: "2026"
+    url: "local://corpus-final-mindclone/kb-refined/refinement-summary.json"
+    estimated_volume: "120->45 conceitos"
+    key_topics:
+      - "deduplicacao"
+      - "curadoria"
+    confidence: "MEDIUM"
+    value: "SILVER"
+    triangulates: ["S10", "S11", "S12"]
+
+# ============================================================================
+# TIER 3: Tertiary / Meta
+# ============================================================================
+
+tier_3:
+  - id: "S15"
+    title: "Manifest de Mapeamento do Corpus"
+    type: "compilation"
+    tier: 3
+    year: "2026"
+    url: "local://corpus-final-mindclone/manifest.csv"
+    estimated_volume: "79 linhas de mapeamento"
+    key_topics:
+      - "cobertura de modulos"
+      - "rastreabilidade arquivo-a-arquivo"
+    confidence: "MEDIUM"
+    value: "BRONZE"
+
+# ============================================================================
+# VALIDATION RESULTS
+# ============================================================================
+
+validation:
+  checklist:
+    total_sources:
+      required: 10
+      actual: 16
+      status: "PASS"
+
+    tier_1_primary:
+      required: 5
+      actual: 10
+      status: "PASS"
+
+    type_diversity:
+      required: 3
+      actual: 8
+      types:
+        - "course_corpus"
+        - "course_module"
+        - "curated_primary"
+        - "analysis"
+        - "compilation"
+        - "markdown"
+        - "yaml/json"
+        - "csv"
+      status: "PASS"
+
+    content_volume:
+      required: "5h or 200 pages equivalent"
+      actual: "79 transcricoes (~714k palavras) + 79 masterpieces (~717k palavras)"
+      status: "PASS"
+
+    framework_triangulation:
+      required: true
+      actual: true
+      frameworks_triangulated:
+        - "Ciclo de Ouro"
+        - "Principios de Persuasao"
+        - "Time Model Canvas"
+      status: "PASS"
+
+  total_checks_passed: "5/5"
+
+source_quality_assessment:
+  gold_sources: 11
+  silver_sources: 4
+  bronze_sources: 1
+  source_health: "EXCELLENT"
+  notes:
+    - "Corpus proprietario com alta profundidade"
+    - "Ha triangulacao interna forte entre modulos"
+    - "Nivel de fonte suporta alvo de fidelidade Elite"
+
+decision:
+  status: "GO"
+  ready_for_extraction: true
+  confidence: "HIGH"
+  gaps: []
+  acquisition_plan: "Nao necessario para iniciar. Upgrade opcional: adicionar video original para camada prosodica fina."

@@ -1,0 +1,1138 @@
+# Grand Slam Offer Creation Workflow
+# Based on Alex Hormozi's $100M Offers methodology
+# Source: OFFER_CREATION_SYSTEM + VALUE_EQUATION_ENGINE
+# Version: 1.0.0
+
+id: wf-grand-slam-offer
+name: "Grand Slam Offer Creation"
+version: "1.0.0"
+duration: "3-5 days"
+description: |
+  Workflow completo para criar ofertas Grand Slam usando a metodologia Hormozi.
+  Transforma uma ideia ou produto bruto em uma proposta de valor irresistível
+  e matematicamente superior.
+
+  FILOSOFIA: "A Oferta Resolve Todos os Problemas"
+
+  RESULTADO: Oferta que faz pessoas se sentirem estúpidas dizendo não.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Criar nova oferta do zero"
+  - "Reformular oferta existente que não converte"
+  - "Aumentar preço sem perder conversões"
+  - "Diferenciar de concorrentes comoditizados"
+  - "Lançar novo produto/serviço"
+
+decision_matrix_fit:
+  complexity: high
+  agents_required: 4
+  estimated_duration: "3-5 days"
+  user_involvement: "medium (checkpoints require approval)"
+  prerequisites:
+    - "Negócio existente OU ideia de negócio clara"
+    - "Acesso a dados de clientes (idealmente)"
+    - "Disponibilidade para sessões de elicitação"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: hormozi-chief
+      role: "Orchestration, MVN collection, strategic oversight"
+      phases: [0]
+
+    - agent: hormozi-offers
+      role: "Value Equation diagnosis, offer engineering"
+      phases: [1, 2]
+
+    - agent: hormozi-pricing
+      role: "Pricing strategy, anchoring, premium positioning"
+      phases: [2]
+
+    - agent: hormozi-copy
+      role: "Naming (MAGICO), value stack copy, presentation"
+      phases: [3]
+
+    - agent: hormozi-audit
+      role: "Anti-pattern validation, final checklist"
+      phases: [4]
+
+  synergies:
+    - agents: [hormozi-offers, hormozi-pricing]
+      pattern: "Offers defines value, Pricing defines capture strategy"
+
+    - agents: [hormozi-copy, hormozi-audit]
+      pattern: "Copy creates, Audit validates against anti-patterns"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 0: DISCOVERY
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-0
+    name: "Discovery"
+    days: "Day 0"
+    tier: 0  # Foundation - must complete first
+    description: |
+      Coleta de MVN (Minimum Viable Numbers) e validação do mercado.
+      NENHUMA oferta deve ser construída sem esta fundação.
+
+      PRINCÍPIO: "Uma ótima oferta para um mercado ruim sempre falhará."
+
+    agent: hormozi-chief
+
+    tasks:
+      - task_id: T0.1
+        name: "Coletar MVN Core"
+        required: true
+        description: "Coleta dos 7 números essenciais para diagnóstico"
+        output: "mvn_core.yaml"
+
+      - task_id: T0.2
+        name: "Validar 4 Indicadores de Mercado"
+        required: true
+        description: "Verificar se mercado é 'multidão faminta'"
+        output: "market_validation.yaml"
+
+      - task_id: T0.3
+        name: "Definir Declaração de Nicho"
+        required: true
+        description: "Template: Eu resolvo [PROBLEMA] para [AVATAR] através de [MECANISMO]"
+        output: "niche_statement.md"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: MVN Collection
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      mvn_core_template:
+        description: "7 números essenciais para diagnóstico de oferta"
+        fields:
+          - id: MVN_001
+            name: "Ticket Médio Atual"
+            question: "Qual o preço médio do seu produto/serviço?"
+            format: "R$ X.XXX"
+            why: "Base para cálculo de valor percebido"
+
+          - id: MVN_002
+            name: "Custo de Aquisição (CAC)"
+            question: "Quanto custa adquirir um cliente?"
+            format: "R$ X.XXX"
+            why: "Determina margem disponível para entrega"
+
+          - id: MVN_003
+            name: "Lifetime Value (LTV)"
+            question: "Quanto um cliente vale ao longo do tempo?"
+            format: "R$ X.XXX"
+            why: "Define teto de investimento em aquisição"
+
+          - id: MVN_004
+            name: "Taxa de Conversão"
+            question: "De 100 leads, quantos compram?"
+            format: "X%"
+            why: "Indica força atual da oferta"
+
+          - id: MVN_005
+            name: "Churn/Retenção"
+            question: "Quantos clientes permanecem após 90 dias?"
+            format: "X%"
+            why: "Indica qualidade de entrega"
+
+          - id: MVN_006
+            name: "Volume de Leads Mensal"
+            question: "Quantos leads entram por mês?"
+            format: "X leads/mês"
+            why: "Determina capacidade de teste"
+
+          - id: MVN_007
+            name: "Margem de Lucro"
+            question: "Qual a margem líquida atual?"
+            format: "X%"
+            why: "Espaço para investir em entrega"
+
+      market_validation_4_indicators:
+        description: "Os 4 indicadores de um mercado vencedor (Starving Crowd)"
+        indicators:
+          - id: IND_001
+            name: "Dor Massiva"
+            question: "O público precisa DESESPERADAMENTE de uma solução?"
+            scoring:
+              3: "Dor aguda, urgência diária"
+              2: "Dor moderada, inconveniência"
+              1: "Dor leve, 'seria bom ter'"
+              0: "Sem dor real identificada"
+            minimum: 2
+
+          - id: IND_002
+            name: "Poder de Compra"
+            question: "O público tem dinheiro (ou acesso) para pagar?"
+            scoring:
+              3: "Budget disponível, decisão própria"
+              2: "Budget apertado, mas prioriza"
+              1: "Precisa aprovação de terceiros"
+              0: "Sem recursos financeiros"
+            minimum: 2
+
+          - id: IND_003
+            name: "Fácil de Atingir"
+            question: "O público está concentrado em lugares acessíveis?"
+            scoring:
+              3: "Grupos, associações, listas claras"
+              2: "Disperso mas identificável"
+              1: "Difícil de encontrar"
+              0: "Sem concentração identificável"
+            minimum: 2
+
+          - id: IND_004
+            name: "Crescendo"
+            question: "O mercado está em crescimento?"
+            scoring:
+              3: "Crescimento acelerado (+20%/ano)"
+              2: "Crescimento moderado (+5-20%/ano)"
+              1: "Estável"
+              0: "Em declínio"
+            minimum: 1
+
+        veto_condition: "Se qualquer indicador < minimum → REPENSAR MERCADO antes de prosseguir"
+
+      niche_statement_template:
+        format: |
+          "Eu resolvo [PROBLEMA ESPECÍFICO] para [AVATAR ESPECÍFICO] através de [MECANISMO ÚNICO]."
+
+        examples:
+          - problem: "falta de leads qualificados"
+            avatar: "coaches de high-ticket que faturam R$50k+/mês"
+            mechanism: "sistema de conteúdo que atrai via autoridade"
+            statement: "Eu resolvo a falta de leads qualificados para coaches de high-ticket que faturam R$50k+/mês através de um sistema de conteúdo que atrai via autoridade."
+
+          - problem: "baixa conversão em vendas"
+            avatar: "consultores B2B que vendem para C-level"
+            mechanism: "framework de diagnóstico que vende por você"
+            statement: "Eu resolvo a baixa conversão em vendas para consultores B2B que vendem para C-level através de um framework de diagnóstico que vende por você."
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Foundation Complete"
+      criteria:
+        - "MVN Core 7/7 coletados"
+        - "4 Indicadores de Mercado >= 8/12 total"
+        - "Nenhum indicador < minimum"
+        - "Declaração de Nicho validada"
+      human_review: true
+      message: "Revise os dados de mercado antes de prosseguir para diagnóstico."
+      veto_conditions:
+        - condition: "Qualquer indicador de mercado = 0"
+          action: "HALT - Mercado inviável, repensar antes de construir oferta"
+        - condition: "MVN incompleto"
+          action: "BLOCK - Não é possível diagnosticar sem dados"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 1: DIAGNOSIS
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-1
+    name: "Diagnosis"
+    days: "Day 1"
+    tier: 0  # Foundation - diagnostic before creation
+    description: |
+      Aplicação da Value Equation para diagnóstico completo.
+      Identifica o "elo mais fraco" - ponto de maior alavancagem.
+
+      FÓRMULA: Value = (Dream Outcome × Likelihood) / (Time × Effort)
+
+      PRINCÍPIO: "Foco no denominador - as melhores empresas do mundo
+      focam em tornar produtos mais imediatos e sem esforço."
+
+    agent: hormozi-offers
+
+    tasks:
+      - task_id: T1.1
+        name: "Articular Dream Outcome"
+        required: true
+        description: "Definir transformação final em termos de STATUS"
+        output: "dream_outcome.md"
+
+      - task_id: T1.2
+        name: "Auditar Mecanismos de Probabilidade"
+        required: true
+        description: "Listar garantias, provas, demonstrações existentes"
+        output: "probability_audit.yaml"
+
+      - task_id: T1.3
+        name: "Mapear Jornada Temporal"
+        required: true
+        description: "Identificar tempo até primeira vitória"
+        output: "time_journey.yaml"
+
+      - task_id: T1.4
+        name: "Listar Custo de Esforço"
+        required: true
+        description: "Todas as coisas que cliente precisa fazer/sacrificar"
+        output: "effort_cost.yaml"
+
+      - task_id: T1.5
+        name: "Identificar Alavanca Principal"
+        required: true
+        description: "Qual variável é o elo mais fraco?"
+        output: "leverage_point.md"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Value Equation Diagnostic
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      value_equation:
+        formula: "Value = (Dream Outcome × Perceived Likelihood) / (Time Delay × Effort & Sacrifice)"
+        variables:
+          numerator:
+            - id: VAR_001
+              name: "Dream Outcome"
+              objective: "AUMENTAR"
+              definition: "Transformação final aspiracional ligada a STATUS"
+              diagnostic_question: "Qual é a transformação final, em termos de status, que esta oferta promete?"
+              tactics:
+                - "Enquadramento por Status Externo (como OUTROS perceberão)"
+                - "Foco na Transformação Total, não no processo"
+                - "Regra da Especificidade - quanto mais específico, maior valor"
+                - "Vender as Férias, não o Voo"
+
+            - id: VAR_002
+              name: "Perceived Likelihood"
+              objective: "AUMENTAR"
+              definition: "Convicção de que 'realmente funcionará para mim'"
+              diagnostic_question: "Quais mecanismos fazem o cliente acreditar na promessa?"
+              tactics:
+                - "Reversão de Risco (Garantias) - alavanca mais poderosa"
+                - "Prova Social quantificada"
+                - "Demonstrações e transparência"
+                - "Admissões Danosas (aumentam credibilidade)"
+
+          denominator:
+            - id: VAR_003
+              name: "Time Delay"
+              objective: "DIMINUIR"
+              definition: "Distância no tempo entre compra e benefício"
+              diagnostic_question: "Quando o cliente sente a primeira 'vitória'?"
+              tactics:
+                - "Entregar Vitórias Rápidas imediatas"
+                - "Manipular percepção de tempo (progresso visível)"
+                - "Onboarding instantâneo"
+              principle: "RÁPIDO SUPERA GRÁTIS - pessoas pagam pela velocidade"
+
+            - id: VAR_004
+              name: "Effort & Sacrifice"
+              objective: "DIMINUIR"
+              definition: "Custos não-monetários: esforço, inconveniência, vergonha"
+              diagnostic_question: "O que o cliente precisa fazer/sacrificar?"
+              tactics:
+                - "Mover no espectro DIY → DWY → DFY"
+                - "Remoção de atrito (cada passo)"
+                - "Prover ferramentas e templates"
+
+        scoring_template:
+          headers: ["Variável", "Oferta Atual", "Score 0-3", "Concorrente", "Score 0-3"]
+          scoring_guide:
+            3: "Excepcional - benchmark de mercado"
+            2: "Bom - acima da média"
+            1: "Mediano - na média"
+            0: "Fraco - abaixo da média"
+          example:
+            - ["Dream Outcome", "Perder peso", 1, "Transformação completa com fotos", 3]
+            - ["Likelihood", "Sem garantia", 0, "Garantia ou 2x dinheiro", 3]
+            - ["Time Delay", "6 meses", 0, "Vitória na primeira semana", 3]
+            - ["Effort", "Dieta rigorosa DIY", 0, "Refeições prontas DFY", 3]
+
+      dream_outcome_template:
+        principle: "SEMPRE enquadre em termos de como OUTRAS PESSOAS perceberão"
+        weak_example: "Este curso aumentará suas vendas em 40%"
+        strong_example: |
+          "Quando você implementar este sistema, suas vendas aumentarão 40%.
+          Seus colegas perguntarão o que mudou. Seu chefe notará.
+          Você será visto como o top performer do time."
+
+        format: |
+          DREAM OUTCOME:
+          - Transformação: [resultado concreto]
+          - Status Externo: [como outros perceberão]
+          - Emoção: [como cliente se sentirá]
+          - Timeline: [quando alcança]
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Diagnosis Complete"
+      criteria:
+        - "Dream Outcome articulado com enquadramento de status"
+        - "Todas 4 variáveis scoradas (0-3)"
+        - "Alavanca principal identificada (elo mais fraco)"
+        - "Gap analysis vs. concorrentes documentado"
+      human_review: true
+      message: "Confirme o diagnóstico antes de iniciar engenharia da oferta."
+      veto_conditions:
+        - condition: "Dream Outcome sem componente de STATUS"
+          action: "BLOCK - Reformular com enquadramento externo"
+        - condition: "Alavanca principal não identificada"
+          action: "BLOCK - Sem foco, engenharia será dispersa"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 2: ENGINEERING
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Engineering"
+    days: "Days 2-3"
+    tier: 1  # Core execution phase
+    description: |
+      Engenharia reversa do valor e arquitetura da oferta.
+      Fase mais intensiva - onde a Grand Slam Offer é construída.
+
+      PROCESSO:
+      1. Mapear TODOS os problemas (pensamento divergente)
+      2. Criar solução para CADA problema (Value Stack)
+      3. Trim & Stack (otimizar custo vs. valor percebido)
+      4. Construir Garantia de Reversão de Risco
+      5. Definir Preço Premium
+
+    agents:
+      primary: hormozi-offers
+      secondary: hormozi-pricing
+
+    tasks:
+      - task_id: T2.1
+        name: "Mapear Problemas Exaustivamente"
+        required: true
+        agent: hormozi-offers
+        description: "Listar TODOS problemas antes, durante e depois do resultado"
+        output: "problems_map.yaml"
+
+      - task_id: T2.2
+        name: "Criar Value Stack"
+        required: true
+        agent: hormozi-offers
+        description: "Transformar cada problema em solução nomeada"
+        output: "value_stack.yaml"
+
+      - task_id: T2.3
+        name: "Trim & Stack Optimization"
+        required: true
+        agent: hormozi-offers
+        description: "Avaliar valor percebido vs. custo de entrega"
+        output: "optimized_stack.yaml"
+
+      - task_id: T2.4
+        name: "Construir Garantia"
+        required: true
+        agent: hormozi-offers
+        description: "Criar garantia que reverte o maior medo"
+        output: "guarantee.md"
+
+      - task_id: T2.5
+        name: "Definir Preço Premium"
+        required: true
+        agent: hormozi-pricing
+        description: "Preço como fração do valor empilhado"
+        output: "pricing_strategy.yaml"
+
+      - task_id: T2.6
+        name: "Adicionar Escassez/Urgência Genuínas"
+        required: true
+        agent: hormozi-pricing
+        description: "Limites REAIS para incentivar decisão"
+        output: "scarcity_urgency.yaml"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Problem-Solution Matrix
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      problem_mapping_protocol:
+        principle: "Pensamento divergente - liste TUDO antes de filtrar"
+        temporal_framework:
+          before:
+            question: "O que impede o cliente de COMEÇAR?"
+            examples:
+              - "Não sei por onde começar"
+              - "Medo de errar"
+              - "Não tenho tempo"
+              - "Não tenho dinheiro"
+              - "Já tentei antes e não funcionou"
+
+          during:
+            question: "O que faz o cliente DESISTIR no meio?"
+            examples:
+              - "É mais difícil do que imaginei"
+              - "Não estou vendo resultados"
+              - "Estou sozinho nisso"
+              - "Surgiu algo mais urgente"
+              - "Perdi a motivação"
+
+          after:
+            question: "Quais NOVOS problemas surgem após o resultado inicial?"
+            examples:
+              - "Como manter o resultado?"
+              - "Agora tenho outro problema"
+              - "Preciso do próximo nível"
+              - "Como escalar isso?"
+
+      value_stack_matrix:
+        template:
+          headers:
+            - "Problema Identificado"
+            - "Nome da Solução"
+            - "Veículo de Entrega"
+            - "Valor Percebido (R$)"
+            - "Custo Real (R$)"
+
+        example:
+          - problem: "Não sei o que postar nas redes sociais"
+            solution_name: "O Arsenal de Conteúdo de 7 Minutos"
+            delivery: "Checklists PDF + Templates Notion"
+            perceived_value: 997
+            real_cost: 0
+
+          - problem: "Tenho medo de falar com clientes"
+            solution_name: "Scripts de Vendas de Confiança Instantânea"
+            delivery: "Guias em Vídeo + Role-playing Gravado"
+            perceived_value: 1497
+            real_cost: 200
+
+          - problem: "Não tenho tempo para fazer tudo"
+            solution_name: "Serviço de Implementação 'Mãos Livres'"
+            delivery: "DFY - Done For You"
+            perceived_value: 4997
+            real_cost: 1500
+
+        naming_guidelines:
+          - "Use números específicos (7 Minutos, 21 Dias, 5 Passos)"
+          - "Use palavras que evocam resultado (Arsenal, Sistema, Blueprint)"
+          - "Evite jargões técnicos"
+          - "Torne memorável e compartilhável"
+
+      trim_and_stack_matrix:
+        quadrants:
+          high_value_low_cost:
+            action: "STACK - Destaque como bônus principal"
+            examples: ["Checklists", "Templates", "Acesso a comunidade", "Gravações"]
+
+          high_value_high_cost:
+            action: "CORE - Mantenha no núcleo da oferta"
+            examples: ["Coaching 1-1", "Implementação DFY", "Software custom"]
+
+          low_value_low_cost:
+            action: "INCLUDE - Adicione sem destaque"
+            examples: ["PDFs básicos", "Acesso a grupo geral"]
+
+          low_value_high_cost:
+            action: "TRIM - Elimine ou substitua"
+            examples: ["Calls individuais não valorizadas", "Conteúdo genérico"]
+
+      guarantee_types:
+        unconditional:
+          name: "Garantia Incondicional"
+          template: "Experimente por [X] dias. Se não gostar, por qualquer motivo, devolvo seu dinheiro."
+          when_use: "Produtos digitais, baixo risco de abuso"
+          strength: "Medium"
+
+        conditional:
+          name: "Garantia Condicional (PREFERÍVEL)"
+          template: "Se você implementar [ações específicas] e não conseguir [resultado específico] em [prazo], não só devolvo seu dinheiro, como também [penalidade/bônus]."
+          when_use: "Serviços, programas, alto ticket"
+          strength: "Maximum"
+          example: "Se você aplicar os 5 módulos, participar das 4 calls e não conseguir pelo menos 5 novos clientes em 90 dias, devolvemos 100% + pagamos R$1000 pelo seu tempo."
+
+        anti_guarantee:
+          name: "Anti-Garantia (Sem Devolução)"
+          template: "Não oferecemos garantia porque [razão forte]. Se você precisa de garantia, este programa não é para você."
+          when_use: "Ultra high-ticket, posicionamento premium extremo"
+          strength: "Polarizing - use com cuidado"
+
+      pricing_framework:
+        principle: "Preço deve ser fração do valor total empilhado (mínimo 10x ROI)"
+
+        anchoring_template:
+          sequence:
+            - step: 1
+              action: "Liste cada componente separadamente"
+            - step: 2
+              action: "Atribua valor de mercado a cada um"
+            - step: 3
+              action: "Some todos os valores"
+            - step: 4
+              action: "Apresente o total como âncora"
+            - step: 5
+              action: "Revele o preço real como fração"
+
+          example: |
+            - Sistema de Aceleração de Vendas (valor R$2.000)
+            - Templates de Email que Convertem (valor R$500)
+            - Biblioteca de Scripts Testados (valor R$1.500)
+            - Acesso ao Grupo Mastermind (valor R$3.000)
+            - Sessões 1-on-1 Quinzenais (valor R$4.000)
+            - Garantia de Resultado (valor R$5.000)
+
+            VALOR TOTAL: R$16.000
+
+            Seu investimento hoje: apenas R$4.997
+
+        virtuous_cycle:
+          description: "Ciclo Virtuoso do Preço Premium"
+          steps:
+            - "Preço premium → Margem maior"
+            - "Margem maior → Pode investir em entrega excepcional"
+            - "Entrega excepcional → Mais resultados para clientes"
+            - "Mais resultados → Mais prova social"
+            - "Mais prova social → Justifica preço premium"
+            - "REPEAT"
+
+      scarcity_urgency_rules:
+        ethical_filter: "DEVE ser genuína - falsa escassez destrói confiança"
+
+        genuine_scarcity:
+          - "Vagas limitadas por capacidade de entrega"
+          - "Bônus físicos com estoque limitado"
+          - "Turmas com data de início fixa"
+          - "Acesso a pessoas específicas (CEO, expert)"
+
+        genuine_urgency:
+          - "Prazo real para inscrição"
+          - "Aumento de preço programado (e cumprido)"
+          - "Bônus que expiram em data específica"
+          - "Evento ao vivo com data marcada"
+
+        forbidden:
+          - "Contadores falsos que resetam"
+          - "Vagas limitadas inventadas"
+          - "Preço 'subindo' que nunca sobe"
+          - "Urgência perpétua"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Offer Architecture Complete"
+      criteria:
+        - "Mínimo 10 problemas mapeados (antes/durante/depois)"
+        - "Value Stack com 7+ componentes nomeados e valorados"
+        - "Trim & Stack executado - custo vs. valor otimizado"
+        - "Garantia definida (preferencialmente condicional)"
+        - "Preço premium com ancoragem 3x+ do preço"
+        - "Escassez/Urgência genuínas documentadas"
+      human_review: true
+      message: "Revise a arquitetura completa da oferta antes do empacotamento."
+      veto_conditions:
+        - condition: "Value Stack < 5 componentes"
+          action: "BLOCK - Insuficiente para criar ancoragem de valor"
+        - condition: "Sem garantia definida"
+          action: "WARNING - Oferta significativamente mais fraca"
+        - condition: "Preço sem cálculo de ancoragem"
+          action: "BLOCK - Não há justificativa matemática"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 3: PACKAGING
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-3
+    name: "Packaging"
+    days: "Day 4"
+    tier: 2  # Advanced - refining and polishing
+    description: |
+      Empacotamento e comunicação da oferta.
+      Onde a oferta ganha nome magnético e copy de apresentação.
+
+      PRINCÍPIO: "A comunicação do valor é tão importante quanto sua criação."
+
+    agent: hormozi-copy
+
+    tasks:
+      - task_id: T3.1
+        name: "Nomear Oferta (MAGICO)"
+        required: true
+        description: "Criar nome usando fórmula MAGICO"
+        output: "offer_name.md"
+
+      - task_id: T3.2
+        name: "Criar Copy de Empilhamento"
+        required: true
+        description: "Script de apresentação do Value Stack"
+        output: "value_stack_copy.md"
+
+      - task_id: T3.3
+        name: "Criar Headline Principal"
+        required: true
+        description: "Headline que encapsula a transformação"
+        output: "headline.md"
+
+      - task_id: T3.4
+        name: "Escrever Garantia (Copy)"
+        required: true
+        description: "Copy persuasivo da garantia"
+        output: "guarantee_copy.md"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: MAGICO Naming Formula
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      magico_formula:
+        name: "Fórmula MAGICO para Nomear Ofertas"
+        components:
+          M:
+            name: "Mecanismo Único"
+            description: "O que torna diferente"
+            examples: ["Sistema Neurológico", "Método 3R", "Protocolo Diamante"]
+
+          A:
+            name: "Alvo Atraente"
+            description: "Avatar ultra-específico"
+            examples: ["para Coaches High-Ticket", "para Mães Empreendedoras", "para CEOs de Tech"]
+
+          G:
+            name: "Grafia Diferente"
+            description: "Elemento memorável no nome"
+            examples: ["Uso de aliteração", "Número específico", "Palavra inventada"]
+
+          I:
+            name: "Ideia que Ajuda"
+            description: "Benefício claro no nome"
+            examples: ["de Vendas", "de Produtividade", "de Escala"]
+
+          C:
+            name: "Convergência Temporal"
+            description: "Prazo específico"
+            examples: ["em 90 Dias", "em 21 Dias", "em 4 Semanas"]
+
+          O:
+            name: "Objetivo Final"
+            description: "Resultado transformador"
+            examples: ["20 Clientes Premium", "R$100k MRR", "Time de 10 Pessoas"]
+
+        template: |
+          "[MECANISMO] [IDEIA] para [ALVO]: [OBJETIVO] em [TEMPO]"
+
+        examples:
+          - full_name: "O Sistema Neurológico de Vendas B2B para Coaches High-Ticket: 20 Clientes Premium em 90 Dias"
+            breakdown:
+              M: "Sistema Neurológico"
+              A: "Coaches High-Ticket"
+              G: "Neurológico (diferenciador)"
+              I: "Vendas B2B"
+              C: "90 Dias"
+              O: "20 Clientes Premium"
+
+          - full_name: "O Método 3R de Recrutamento para Agências Digitais: Time de 5 A-Players em 60 Dias"
+            breakdown:
+              M: "Método 3R"
+              A: "Agências Digitais"
+              G: "3R (aliteração)"
+              I: "Recrutamento"
+              C: "60 Dias"
+              O: "Time de 5 A-Players"
+
+      value_stack_copy_template:
+        structure:
+          intro: "Aqui está tudo o que você recebe quando entra no [NOME DA OFERTA]:"
+          per_component:
+            - "Primeiro, você recebe [COMPONENTE 1] (valor de R$X)..."
+            - "Isso resolve [PROBLEMA] porque [BENEFÍCIO]"
+            - "[PAUSA] Mas isso é só o começo..."
+          buildup: "Cada componente aumenta a tensão"
+          total_reveal: "Se você somasse tudo, o valor total seria R$[TOTAL]"
+          price_reveal: "Mas você não vai pagar R$[TOTAL]. Nem R$[ÂNCORA MÉDIA]. Seu investimento hoje é apenas R$[PREÇO]."
+
+        presentation_sequence:
+          - step: 1
+            instruction: "Comece pelo componente de MENOR valor"
+          - step: 2
+            instruction: "Construa momentum crescente"
+          - step: 3
+            instruction: "Termine com componente de MAIOR valor"
+          - step: 4
+            instruction: "Some todos os valores ANTES de revelar preço"
+          - step: 5
+            instruction: "Crie contraste dramático no reveal"
+
+      headline_templates:
+        formats:
+          how_to: "Como [AVATAR] Pode [RESULTADO] em [TEMPO] Sem [OBJEÇÃO PRINCIPAL]"
+          question: "[AVATAR], Você Gostaria de [RESULTADO] em Apenas [TEMPO]?"
+          statement: "O Sistema que Levou [NÚMERO] [AVATARES] a [RESULTADO]"
+          warning: "ATENÇÃO [AVATAR]: Não [AÇÃO COMUM] Até Ver Isso"
+
+        examples:
+          - "Como Coaches de High-Ticket Podem Fechar 20 Clientes Premium em 90 Dias Sem Cold Calls"
+          - "O Sistema Neurológico que Levou 147 Coaches a R$100k+ em 90 Dias"
+          - "ATENÇÃO Donos de Agência: Não Contrate Mais Ninguém Até Ver Este Método"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Packaging Complete"
+      criteria:
+        - "Nome da oferta segue MAGICO (mínimo 5/6 componentes)"
+        - "Copy de Value Stack com sequência crescente"
+        - "Headline testável documentada"
+        - "Copy da garantia impactante"
+      human_review: true
+      message: "Revise o empacotamento - este é o 'rosto' da oferta."
+      veto_conditions:
+        - condition: "Nome genérico sem MAGICO"
+          action: "BLOCK - Nome não é memorável nem diferenciador"
+        - condition: "Value Stack sem sequência de revelação"
+          action: "WARNING - Perde impacto de ancoragem"
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 4: VALIDATION
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-4
+    name: "Validation"
+    days: "Day 5"
+    tier: 3  # Polish - final quality assurance
+    description: |
+      Validação final contra anti-patterns e checklist de qualidade.
+      A oferta só está pronta quando TODOS os critérios passam.
+
+      PRINCÍPIO: "Uma oferta que viola princípios fundamentais
+      sempre falhará, não importa quão bem empacotada."
+
+    agent: hormozi-audit
+
+    tasks:
+      - task_id: T4.1
+        name: "Audit Anti-Patterns"
+        required: true
+        description: "Verificar violações de princípios"
+        output: "antipattern_audit.yaml"
+
+      - task_id: T4.2
+        name: "Checklist Final de Oferta"
+        required: true
+        description: "Validar 10 critérios obrigatórios"
+        output: "final_checklist.yaml"
+
+      - task_id: T4.3
+        name: "Score Final de Valor"
+        required: true
+        description: "Recalcular Value Equation com oferta final"
+        output: "final_value_score.yaml"
+
+      - task_id: T4.4
+        name: "Documentação de Entrega"
+        required: true
+        description: "Compilar todos os artefatos em pacote final"
+        output: "offer_package/"
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # INLINE STRUCTURE: Final Validation
+    # ─────────────────────────────────────────────────────────────────────────
+    inline_structures:
+      antipattern_checklist:
+        name: "Anti-Patterns de Oferta Hormozi"
+        items:
+          - id: AP_001
+            name: "Competição em Preço"
+            check: "A oferta compete em valor, não em preço baixo?"
+            violation: "Oferta é 'mais barata que concorrente'"
+            fix: "Aumentar valor percebido, não diminuir preço"
+
+          - id: AP_002
+            name: "Escassez Falsa"
+            check: "Toda escassez/urgência é genuína?"
+            violation: "Contador que reseta, vagas 'limitadas' infinitas"
+            fix: "Remover ou tornar genuína"
+
+          - id: AP_003
+            name: "Promessa sem Prova"
+            check: "Cada promessa tem mecanismo de prova?"
+            violation: "Claims sem dados, depoimentos, ou demonstração"
+            fix: "Adicionar prova ou reduzir promessa"
+
+          - id: AP_004
+            name: "Valor < 10x Preço"
+            check: "Valor percebido empilhado >= 10x preço?"
+            violation: "Stack soma R$5k, preço R$2k"
+            fix: "Aumentar stack ou reduzir preço"
+
+          - id: AP_005
+            name: "Mercado Fraco"
+            check: "Os 4 indicadores de mercado passam?"
+            violation: "Indicador crítico em 0 ou 1"
+            fix: "Repensar mercado antes de lançar"
+
+          - id: AP_006
+            name: "Dream Outcome Genérico"
+            check: "Outcome tem componente de STATUS?"
+            violation: "Resultado é feature, não transformação"
+            fix: "Reenquadrar com status externo"
+
+          - id: AP_007
+            name: "Sem Vitória Rápida"
+            check: "Cliente sente valor em < 7 dias?"
+            violation: "Primeira vitória em semanas/meses"
+            fix: "Engenheirar quick win no onboarding"
+
+          - id: AP_008
+            name: "Esforço Não Mapeado"
+            check: "Todos os passos do cliente estão listados?"
+            violation: "Esforço escondido que causa churn"
+            fix: "Mapear e eliminar/automatizar"
+
+      final_checklist:
+        name: "Checklist Final Grand Slam Offer"
+        items:
+          - id: CHK_001
+            question: "Resolve TODOS os problemas mapeados?"
+            required: true
+
+          - id: CHK_002
+            question: "É incomparável com a concorrência?"
+            required: true
+
+          - id: CHK_003
+            question: "Tem preço premium justificado matematicamente?"
+            required: true
+
+          - id: CHK_004
+            question: "Tem garantia que reverte o maior risco?"
+            required: true
+
+          - id: CHK_005
+            question: "Tem nome magnético (MAGICO)?"
+            required: true
+
+          - id: CHK_006
+            question: "Value Stack tem 7+ componentes nomeados?"
+            required: true
+
+          - id: CHK_007
+            question: "Ancoragem mostra 3x+ o preço em valor?"
+            required: true
+
+          - id: CHK_008
+            question: "Escassez/Urgência são genuínas?"
+            required: true
+
+          - id: CHK_009
+            question: "Dream Outcome enquadrado por STATUS?"
+            required: true
+
+          - id: CHK_010
+            question: "Vitória Rápida em < 7 dias?"
+            required: true
+
+        scoring:
+          10_of_10: "Grand Slam - pronta para teste"
+          8_9_of_10: "Boa - pequenos ajustes antes de lançar"
+          6_7_of_10: "Mediana - revisão significativa necessária"
+          below_6: "Fraca - voltar para Phase 2"
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Validation Complete"
+      criteria:
+        - "0 anti-patterns violados"
+        - "Checklist final 10/10"
+        - "Score de valor final calculado"
+        - "Pacote de entrega compilado"
+      human_review: true
+      message: "Aprovação final antes de lançar a oferta no mercado."
+      veto_conditions:
+        - condition: "Qualquer anti-pattern violado"
+          action: "HALT - Corrigir violação antes de lançar"
+        - condition: "Checklist < 8/10"
+          action: "BLOCK - Voltar para fase apropriada"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - create_remediation_task: true
+    - halt_workflow: false  # Allow continuation after fix
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "hormozi-chief"
+    - document_reason: true
+    - require_human_override: true
+
+  common_failures:
+    - failure: "MVN incompleto"
+      phase: 0
+      resolution: "Sessão adicional de coleta de dados"
+
+    - failure: "Mercado com indicador = 0"
+      phase: 0
+      resolution: "Workshop de pivotagem de mercado"
+
+    - failure: "Value Stack < 5 componentes"
+      phase: 2
+      resolution: "Brainstorm adicional de problema-solução"
+
+    - failure: "Anti-pattern violado"
+      phase: 4
+      resolution: "Correção específica + re-validação"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-grand-slam-offer"
+      status: "completed"
+      outputs:
+        - "offer_package/"
+        - "final_value_score.yaml"
+
+  checkpoint:
+    type: "checkpoint_reached"
+    payload:
+      phase_id: "PHASE-{N}"
+      status: "awaiting_review"
+      requires: "human_approval"
+
+  blocked:
+    type: "workflow_blocked"
+    payload:
+      phase_id: "PHASE-{N}"
+      reason: "veto_condition_triggered"
+      veto: "{veto_description}"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  phase_0:
+    - "mvn_core.yaml"
+    - "market_validation.yaml"
+    - "niche_statement.md"
+
+  phase_1:
+    - "dream_outcome.md"
+    - "probability_audit.yaml"
+    - "time_journey.yaml"
+    - "effort_cost.yaml"
+    - "leverage_point.md"
+
+  phase_2:
+    - "problems_map.yaml"
+    - "value_stack.yaml"
+    - "optimized_stack.yaml"
+    - "guarantee.md"
+    - "pricing_strategy.yaml"
+    - "scarcity_urgency.yaml"
+
+  phase_3:
+    - "offer_name.md"
+    - "value_stack_copy.md"
+    - "headline.md"
+    - "guarantee_copy.md"
+
+  phase_4:
+    - "antipattern_audit.yaml"
+    - "final_checklist.yaml"
+    - "final_value_score.yaml"
+    - "offer_package/"
+
+  final_deliverable:
+    name: "Grand Slam Offer Package"
+    location: "outputs/offers/{offer_id}/"
+    contents:
+      - "README.md - Overview da oferta"
+      - "offer_summary.yaml - Dados estruturados"
+      - "value_stack.md - Stack completo com copy"
+      - "pricing.md - Estratégia de preço"
+      - "guarantee.md - Garantia com copy"
+      - "validation.yaml - Scores e audits"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS BY PHASE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+agents_by_phase:
+  PHASE-0:
+    primary: ["hormozi-chief"]
+    secondary: []
+
+  PHASE-1:
+    primary: ["hormozi-offers"]
+    secondary: []
+
+  PHASE-2:
+    primary: ["hormozi-offers"]
+    secondary: ["hormozi-pricing"]
+
+  PHASE-3:
+    primary: ["hormozi-copy"]
+    secondary: []
+
+  PHASE-4:
+    primary: ["hormozi-audit"]
+    secondary: ["hormozi-chief"]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_checklist:
+  phase_0:
+    - "[ ] MVN 7/7 coletados"
+    - "[ ] Indicadores de mercado >= 8/12"
+    - "[ ] Nenhum indicador crítico = 0"
+    - "[ ] Declaração de nicho clara"
+
+  phase_1:
+    - "[ ] Dream Outcome com STATUS"
+    - "[ ] 4 variáveis scoradas"
+    - "[ ] Alavanca principal identificada"
+    - "[ ] Gap vs. concorrentes documentado"
+
+  phase_2:
+    - "[ ] 10+ problemas mapeados"
+    - "[ ] 7+ componentes no Value Stack"
+    - "[ ] Trim & Stack executado"
+    - "[ ] Garantia condicional definida"
+    - "[ ] Preço com ancoragem 3x+"
+    - "[ ] Escassez/Urgência genuínas"
+
+  phase_3:
+    - "[ ] Nome MAGICO (5/6 componentes)"
+    - "[ ] Copy de stack com sequência"
+    - "[ ] Headline testável"
+    - "[ ] Copy de garantia impactante"
+
+  phase_4:
+    - "[ ] 0 anti-patterns"
+    - "[ ] Checklist 10/10"
+    - "[ ] Score final calculado"
+    - "[ ] Pacote compilado"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-10"
+  author: "squad-architect"
+  source_frameworks:
+    - "OFFER_CREATION_SYSTEM"
+    - "VALUE_EQUATION_ENGINE"
+    - "ANTIPATTERN_SHIELDS"
+  source_mind: "alex_hormozi"
+  lines: 900+
+  quality_gate: "SC_WFL_001"
+  quality_score: "PENDING"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

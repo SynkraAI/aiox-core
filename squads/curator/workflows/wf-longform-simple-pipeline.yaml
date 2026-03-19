@@ -1,0 +1,424 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Longform Simple Pipeline
+# Version: 1.0.0
+# Purpose: Chronological cut with engineered opening for 20-25 min content
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflow-id: wf-longform-simple-pipeline
+name: Longform Simple Pipeline
+version: 1.0.0
+estimated-time: 20-35 minutes
+complexity: medium
+
+description: |
+  Pipeline for longform simple format — preserves chronological conversation order
+  with an engineered first 2 minutes for retention. Selects a continuous window
+  (~30-35 min raw → ~20 min after cleanup) based on KEEP density in transcricao_anotada.
+
+  Key differences from professional longform (wf-longform-pipeline):
+  - NO Tier 1 narrative restructuring (chronological order preserved)
+  - Window selection based on KEEP density analysis
+  - Opening engineering (first ~2 min) with hook from anywhere + dense moments
+  - 2-3 point insertions from outside window allowed
+  - transcricao_anotada.md is REQUIRED (not optional)
+
+  Pipeline:
+  [Input] → Mine → Window Selection → Opening Engineering → Simple Format → Validation
+              ↓ parallel
+           Curation (optional)
+
+  Golden rule: First 2 minutes VERY good. After that, flows naturally.
+
+inputs:
+  required:
+    - content: "{source-slug}/momentos.md AND {source-slug}/transcricao_anotada.md"
+    - target_format: "longform_simple"
+  optional:
+    - target_duration: "Target in minutes (default: 20-25 min from window)"
+    - enrich: "true | false (default: false)"
+    - platform: "youtube_main | podcast_video | course (default: youtube_main)"
+    - style_preset: "conversational (default) | educational | emotional"
+    - max_insertions: "0-3 point insertions from outside window (default: 3)"
+
+phases:
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 0: SOURCE PREPARATION (REUSE)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 0
+    name: Source Preparation
+    duration: 10-15 min
+    agent: "content-miner-pro"
+    skip_if: "momentos.md AND transcricao_anotada.md already provided"
+
+    steps:
+      - step: 1
+        action: "Full Paper Edit mining"
+      - step: 2
+        action: "Generate {source-slug}/momentos.md"
+      - step: 3
+        action: "Generate {source-slug}/transcricao_anotada.md"
+
+    checkpoint:
+      gate: "QG-002"
+      criteria:
+        - "{source-slug}/momentos.md exists"
+        - "{source-slug}/transcricao_anotada.md exists (BLOCKING for longform_simple)"
+        - "All moments have exact timestamps"
+        - "Annotated transcript has KEEP/REMOVE/BRIDGE markers"
+      blocking: true
+
+    output:
+      files:
+        - "{source-slug}/momentos.md"
+        - "{source-slug}/transcricao_anotada.md"
+
+    parallel_trigger:
+      if: "enrich == true"
+      start: "Phase 0.5 (Data Curation)"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 0.5: DATA CURATION (PARALLEL, OPTIONAL — REUSE)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 0.5
+    name: Data Curation
+    duration: 5-10 min
+    agent: "data-curator"
+    parallel_to: "Phase 0.8"
+    skip_if: "enrich == false"
+
+    steps:
+      - step: 1
+        action: "Extract key topics from momentos.md"
+      - step: 2
+        action: "Research news, trends, statistics"
+      - step: 3
+        action: "Generate curadoria.yaml"
+
+    checkpoint:
+      gate: "QG-CUR"
+      blocking: false
+
+    output:
+      file: "curadoria.yaml"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 0.8: WINDOW SELECTION (NEW — density-based)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 0.8
+    name: Window Selection
+    duration: 3-5 min
+    agent: "curator-chief"
+    depends_on: "Phase 0 (momentos.md + transcricao_anotada.md ready)"
+
+    description: |
+      Select the best continuous ~30-35 min window from the source based on
+      KEEP density analysis of transcricao_anotada.md. The window should have:
+      - Highest concentration of KEEP segments
+      - Strong thematic coherence (single topic thread)
+      - Natural conversation flow (not fragmented)
+
+      The window becomes the backbone of the cut. After REMOVE cleanup,
+      it should yield ~20-25 min of content.
+
+    steps:
+      - step: 1
+        action: "Parse transcricao_anotada.md for KEEP/REMOVE/BRIDGE segment density"
+        output: "Density map across source timeline"
+
+      - step: 2
+        action: "Identify candidate windows (~30-35 min raw each)"
+        criteria:
+          - "Slide window across timeline in 5-min increments"
+          - "Score each window by: KEEP density, moment count, thematic coherence"
+          - "Rank candidates"
+
+      - step: 3
+        action: "Select best window and calculate cleanup ratio"
+        output:
+          - "janela_temporal: inicio, fim, duracao_bruta"
+          - "duracao_limpa (after REMOVE segments removed)"
+          - "densidade_keep (ratio)"
+          - "tema_central (main topic/theme)"
+
+      - step: 4
+        action: "Identify potential point insertions from outside window"
+        criteria:
+          - "Moments outside window with impact_score >= 8"
+          - "Maximum 2-3 insertions"
+          - "Each must have clear thematic connection to window content"
+        output: "List of candidate insertions with insercao_motivo"
+
+      - step: 5
+        action: "Present window selection for user confirmation"
+        presents:
+          - "Selected window: [start] → [end] ({raw_duration})"
+          - "Estimated clean duration: {clean_duration}"
+          - "KEEP density: {density}%"
+          - "Central theme: {tema}"
+          - "Candidate insertions: {N} moments from outside window"
+
+    checkpoint:
+      gate: "QG-WIN"
+      criteria:
+        - "Window selected with inicio/fim timestamps"
+        - "KEEP density >= 50% within window"
+        - "Estimated clean duration within 18-27 min range"
+        - "Central theme identified"
+        - "Point insertions justified (if any)"
+        - "User confirmed window selection"
+      blocking: true
+
+    output:
+      data:
+        - "janela_temporal (inicio, fim, tema_central, densidade_keep)"
+        - "candidate_insertions (moment IDs with motivo)"
+      pass_to: "Phase 1"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 1: OPENING ENGINEERING (NEW — first 2 minutes)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 1
+    name: Opening Engineering
+    duration: 3-5 min
+    agent: "curator-chief"
+    depends_on: "Phase 0.8 (window selected)"
+
+    description: |
+      Engineer the first ~2 minutes of the cut for maximum retention.
+      The hook can come from ANYWHERE in the source (not just within window).
+      After hook, 2-3 dense moments establish value before natural flow begins.
+
+      Golden rule: First 2 minutes VERY good. After that, flows naturally.
+
+    steps:
+      - step: 1
+        action: "Select hook moment from entire source"
+        criteria:
+          - "Highest hook/impact score from momentos.md"
+          - "Must work without context (standalone clarity)"
+          - "Creates immediate curiosity"
+          - "Typically from outside the window (fora_janela: true)"
+
+      - step: 2
+        action: "Select 2-3 dense opening moments"
+        criteria:
+          - "High impact score"
+          - "Can be from window start or outside window"
+          - "Together with hook, fill ~120 seconds"
+          - "Establish value proposition quickly"
+
+      - step: 3
+        action: "Define transition from opening to chronological flow"
+        note: "Clear seam between engineered opening and natural conversation flow"
+
+    output:
+      data:
+        - "abertura_engenheirada (hook + momentos_abertura)"
+        - "Total opening duration (~120s)"
+      pass_to: "Phase 2"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 2: SIMPLE FORMAT (mrbeast light — chronological, no restructuring)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 2
+    name: Simple Format
+    duration: 5-10 min
+    agent: "mrbeast"
+    note: "Light mode — NO full retention architecture. Chronological order preserved."
+
+    description: |
+      Assemble the final cut in chronological order using transcricao_anotada as backbone.
+      KEEP segments = include. BRIDGE segments = preserve as connectors. REMOVE = jump cut.
+      Place point insertions where thematically relevant.
+      NO chapter structure. NO non-chronological reordering (except engineered opening).
+
+    steps:
+      - step: 1
+        action: "Load transcricao_anotada.md, momentos.md, janela_temporal, abertura_engenheirada"
+
+      - step: 2
+        action: "Build chronological moment list from window"
+        process:
+          - "Walk through window chronologically"
+          - "Include KEEP moments in order"
+          - "Preserve BRIDGE segments as connectors"
+          - "Mark REMOVE segments as gap_antes with jump_cut action"
+
+      - step: 3
+        action: "Place point insertions from outside window"
+        rules:
+          - "Maximum 2-3 insertions"
+          - "Place where thematically connected"
+          - "Mark fora_janela: true with insercao_motivo"
+          - "Use hard_cut transition to/from insertions"
+
+      - step: 4
+        action: "Merge curadoria if available"
+        skip_if: "curadoria.yaml not available"
+
+      - step: 5
+        action: "Generate longform_simple_cut.yaml using template"
+        template: "squads/curator/templates/longform-simple-cut-tmpl.yaml"
+        output: "output/curated/{source-slug}/cortes/longform/{NN}_{titulo_sanitizado}.yaml"
+
+      - step: 6
+        action: "Generate editor guide via CODE"
+        code: |
+          python squads/curator/scripts/generate_editor_guide.py output/curated/{source-slug}/cortes/longform/
+
+      - step: 7
+        action: "Validate timestamps in generated YAML (BLOCKING)"
+        code: |
+          python squads/curator/scripts/validate_timestamps.py output/curated/{source-slug}/cortes/longform/*.yaml --transcript _temp/mining/{source-slug}/transcript_raw.txt --tolerance 2
+        on_fail: "Exit code 1 = WRONG timestamps found in cut YAML. Fix before proceeding to Phase 3."
+        blocking: true
+
+    output:
+      files:
+        - "longform_simple_cut.yaml"
+        - "_GUIA_EDITOR.md"
+      pass_to: "Phase 3"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 3: FINAL VALIDATION (REUSE QG-004)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - phase: 3
+    name: Final Validation
+    duration: 2-5 min
+    agent: "curator-chief"
+
+    steps:
+      - step: 1
+        action: "Validate longform_simple_cut.yaml against template"
+        checks:
+          - "All timestamps exact"
+          - "Moments in chronological order (except engineered opening)"
+          - "Gap handling correct (REMOVE=jump_cut, BRIDGE=keep)"
+          - "Point insertions have insercao_motivo"
+          - "Editor instructions clear"
+
+      - step: 2
+        action: "Verify duration within 20-25 min target"
+
+      - step: 3
+        action: "Generate summary report"
+
+      - step: 4
+        action: "Update source INDEX.md"
+        code: |
+          python squads/curator/scripts/generate_source_index.py {source-slug}
+
+    checkpoint:
+      gate: "QG-004"
+      criteria:
+        - "longform_simple_cut.yaml complete and follows template"
+        - "All timestamps exact"
+        - "Chronological order preserved (except opening)"
+        - "Editor instructions clear"
+        - "Duration within 18-27 min range"
+        - "Editor guide MD exists alongside YAML"
+      blocking: true
+
+    output:
+      files:
+        - "longform_simple_cut.yaml"
+        - "_GUIA_EDITOR.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES SUMMARY
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  summary:
+    - gate: QG-002
+      phase: 0
+      blocking: true
+      criteria: "momentos.md + transcricao_anotada.md complete"
+    - gate: QG-CUR
+      phase: 0.5
+      blocking: false
+      criteria: "curadoria complete (optional)"
+    - gate: QG-WIN
+      phase: 0.8
+      blocking: true
+      criteria: "window selected with KEEP density >= 50%, clean duration 18-27 min, user confirmed"
+    - gate: QG-004
+      phase: 3
+      blocking: true
+      criteria: "final output complete, timestamps exact, chronological order preserved"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXECUTION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+execution:
+  command: "*create-cut longform_simple"
+  example: "*create-cut longform_simple --platform youtube_main"
+  shortcuts:
+    default: "*create-cut longform_simple"
+    enriched: "*create-cut longform_simple --enrich true"
+
+  parallel_execution:
+    enabled: true
+    phases: ["Phase 0.5 runs parallel to Phase 0.8"]
+    note: "Curation can run while window selection is happening"
+
+  rollback:
+    phase_0_fail: "Fix mining parameters, retry"
+    phase_0_8_fail: "Adjust window parameters or select alternative window"
+    phase_1_fail: "Select different hook or opening moments"
+    phase_2_fail: "Adjust gap handling or insertion placement"
+
+notes: |
+  **When to use:**
+  - Source has dense, naturally-flowing conversation segments
+  - Chronological order already works (no need for restructuring)
+  - Want natural conversation feel, not heavily edited
+  - Content is conversational (interviews, discussions, lectures)
+
+  **When NOT to use:**
+  - Content needs narrative restructuring → use wf-longform-pipeline
+  - Short-form content (<10 min) → use wf-shorts-pipeline
+  - Multiple non-related topics → use professional longform with chapters
+  - Highly fragmented source (low KEEP density) → use professional longform
+
+  **vs. Professional Longform:**
+  | Aspect | Professional | Simple |
+  |--------|-------------|--------|
+  | Order | Non-chronological | Chronological |
+  | Tier 1 | Full narrative | SKIPPED |
+  | Opening | Cold open + chapters | Engineered 2 min |
+  | Structure | Chapters + retention hooks | Window + natural flow |
+  | Insertions | Any reordering | Max 2-3 point insertions |
+  | Style | educational/emotional | conversational |
+  | Time to produce | 35-50 min | 20-35 min |
+
+dependencies:
+  tasks:
+    - "mine-transcript.md"
+    - "format-cut.md"
+    - "curate-data.md"
+  agents:
+    - "content-miner-pro"
+    - "data-curator"
+    - "mrbeast"
+    - "curator-chief"
+  templates:
+    - "templates/banco-momentos-tmpl.md"
+    - "templates/transcricao-anotada-tmpl.md"
+    - "templates/longform-simple-cut-tmpl.yaml"
+    - "templates/curadoria-tmpl.yaml"
+  checklists:
+    - "checklists/mining-quality.md"
+    - "checklists/output-quality.md"
+
+  # Render Phase
+  # For video rendering, use wf-mine-to-cut Phase 5 or invoke ffmpeg-cutter directly:
+  # *render --input VIDEO --cut-yaml YAML
+  # See: squads/curator/tasks/execute-cut.md
+
+version_history:
+  - version: 1.0.0
+    date: 2026-02-07
+    changes: "Initial workflow creation — Story #3 Longform Simple Format"

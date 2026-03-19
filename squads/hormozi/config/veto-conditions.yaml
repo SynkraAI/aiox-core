@@ -1,0 +1,324 @@
+# Hormozi Squad — Veto Conditions (Centralized)
+# These gates BLOCK execution. No exceptions. No "maybe". No "depende".
+# Version: 1.0.0
+# Created: 2026-02-10
+# Auditor: @pedro-valerio
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHILOSOPHY: "A melhor coisa e impossibilitar caminhos."
+# If executor CAN make a mistake, the process is broken.
+# ═══════════════════════════════════════════════════════════════════════════════
+
+veto_conditions:
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # TIER 0: UNIVERSAL VETOS (Apply to ALL agents)
+  # ───────────────────────────────────────────────────────────────────────────
+  tier_0_universal:
+    - id: "VT0-001"
+      name: "NO MVN = NO CALCULATIONS"
+      trigger: "Any request for pricing, projections, ROI, LTV, CAC calculations"
+      condition: "MVN_CORE < 5 items collected"
+      action: "BLOCK"
+      message: |
+        ⛔ VETO: Calculo sem dados e chute.
+        Coletando MVN primeiro. Preciso de:
+        - Ticket/Preco atual
+        - Custo de entrega
+        - Taxa de conversao
+        - CAC (ou proxies)
+        - Capacidade de entrega
+      enforcement: "runtime"
+      bypass: false
+
+    - id: "VT0-002"
+      name: "NO FAKE SCARCITY"
+      trigger: "Scarcity/urgency suggestions"
+      condition: "Scarcity is not genuine (countdown resets, fake limits)"
+      action: "BLOCK"
+      message: |
+        ⛔ VETO: Escassez falsa e antipattern.
+        "Escassez falsa destroi confianca. Vamos encontrar escassez genuina."
+      enforcement: "content_check"
+      bypass: false
+
+    - id: "VT0-003"
+      name: "NO NUMBERS WITHOUT BASE"
+      trigger: "Any derived number in output"
+      condition: "Number appears without 'Base do calculo:' immediately below"
+      action: "MODIFY"
+      message: "Adicionar 'Base do calculo: [formula] = [resultado]'"
+      enforcement: "output_validation"
+      bypass: false
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # TIER 1: WORKFLOW VETOS (Apply to wf-grand-slam-offer)
+  # ───────────────────────────────────────────────────────────────────────────
+  tier_1_workflow:
+    - id: "VT1-001"
+      name: "PHASE-0: MVN GATE"
+      checkpoint: "CP_PHASE_0"
+      condition: "MVN_CORE < 7/7 items"
+      action: "BLOCK_PHASE_1"
+      message: |
+        ⛔ VETO: Nao pode diagnosticar oferta sem dados.
+        MVN incompleto. Colete todos os 7 itens antes de prosseguir.
+      auto_check: true
+      auto_check_method: "count_mvn_fields"
+
+    - id: "VT1-002"
+      name: "PHASE-0: MARKET VALIDATION GATE"
+      checkpoint: "CP_PHASE_0"
+      condition: "Any market indicator < 7/10"
+      action: "BLOCK_PHASE_1"
+      message: |
+        ⛔ VETO: Mercado inviavel.
+        "Uma otima oferta para um mercado ruim sempre falhara."
+        Indicador [X] = [Y]/10. Minimo: 7/10.
+      auto_check: true
+      auto_check_method: "validate_market_indicators"
+
+    - id: "VT1-003"
+      name: "PHASE-1: DREAM OUTCOME GATE"
+      checkpoint: "CP_PHASE_1"
+      condition: "Dream Outcome sem componente de STATUS"
+      action: "BLOCK_PHASE_2"
+      message: |
+        ⛔ VETO: Dream Outcome generico.
+        Faltando enquadramento de status externo.
+        "Como OUTROS vao perceber o cliente apos a transformacao?"
+      auto_check: true
+      auto_check_method: "check_status_framing"
+
+    - id: "VT1-004"
+      name: "PHASE-1: LEVERAGE POINT GATE"
+      checkpoint: "CP_PHASE_1"
+      condition: "Alavanca principal nao identificada"
+      action: "BLOCK_PHASE_2"
+      message: |
+        ⛔ VETO: Sem foco de alavancagem.
+        Qual variavel da Value Equation e o elo mais fraco?
+        Sem identificar, engenharia sera dispersa.
+      auto_check: true
+      auto_check_method: "check_leverage_identified"
+
+    - id: "VT1-005"
+      name: "PHASE-2: VALUE STACK GATE"
+      checkpoint: "CP_PHASE_2"
+      condition: "Value Stack < 5 componentes nomeados"
+      action: "BLOCK_PHASE_3"
+      message: |
+        ⛔ VETO: Value Stack insuficiente.
+        Minimo 5 componentes para criar ancoragem de valor.
+        Atual: [N] componentes.
+      auto_check: true
+      auto_check_method: "count_value_stack"
+
+    - id: "VT1-006"
+      name: "PHASE-2: PRICING WITHOUT ANCHOR GATE"
+      checkpoint: "CP_PHASE_2"
+      condition: "Preco sugerido sem calculo de ancoragem (valor empilhado < 3x preco)"
+      action: "BLOCK_PHASE_3"
+      message: |
+        ⛔ VETO: Preco sem justificativa matematica.
+        Valor empilhado: R$[X]. Preco: R$[Y]. Ratio: [Z]x.
+        Minimo: 3x. Ideal: 10x.
+      auto_check: true
+      auto_check_method: "validate_price_anchor"
+
+    - id: "VT1-007"
+      name: "PHASE-3: NAMING GATE"
+      checkpoint: "CP_PHASE_3"
+      condition: "Nome da oferta sem MAGICO (< 5/6 componentes)"
+      action: "BLOCK_PHASE_4"
+      message: |
+        ⛔ VETO: Nome generico.
+        Faltando componentes MAGICO:
+        M - Mecanismo: [presente/ausente]
+        A - Alvo: [presente/ausente]
+        G - Grafia: [presente/ausente]
+        I - Ideia: [presente/ausente]
+        C - Convergencia temporal: [presente/ausente]
+        O - Objetivo: [presente/ausente]
+      auto_check: true
+      auto_check_method: "validate_magico_naming"
+
+    - id: "VT1-008"
+      name: "PHASE-4: ANTIPATTERN GATE"
+      checkpoint: "CP_PHASE_4"
+      condition: "Qualquer antipattern detectado no audit"
+      action: "HALT_WORKFLOW"
+      message: |
+        ⛔ VETO: Antipattern detectado.
+        [ANTIPATTERN_NAME]: [DESCRIPTION]
+        Nao pode lancar oferta ate corrigir.
+      auto_check: true
+      auto_check_method: "run_antipattern_screening"
+      mandatory_checklist: "checklists/antipattern-screening.md"
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # TIER 2: AGENT-SPECIFIC VETOS
+  # ───────────────────────────────────────────────────────────────────────────
+  tier_2_agent_specific:
+    hormozi-offers:
+      - id: "VT2-OFF-001"
+        name: "MVN BEFORE OFFER MODE"
+        trigger: "Entering OFFER mode"
+        condition: "MVN_CORE incomplete"
+        action: "FORCE_DISCOVERY_SPRINT"
+        message: "Entrando em Discovery Sprint. MVN incompleto."
+        enforcement: "mode_switch"
+
+      - id: "VT2-OFF-002"
+        name: "VALUE EQUATION BEFORE RECOMMENDATION"
+        trigger: "Any offer recommendation"
+        condition: "Value Equation not scored"
+        action: "FORCE_DIAGNOSTIC"
+        message: "Diagnosticando Value Equation primeiro."
+        enforcement: "pre_output"
+
+    hormozi-pricing:
+      - id: "VT2-PRI-001"
+        name: "NO DISCOUNT SUGGESTION"
+        trigger: "User asks to lower price"
+        condition: "Suggestion involves reducing price without value change"
+        action: "REDIRECT"
+        message: |
+          ⛔ VETO: Competir em preco e corrida pro fundo do poco.
+          A alavanca e aumentar valor, nao diminuir preco.
+        enforcement: "content_check"
+
+      - id: "VT2-PRI-002"
+        name: "MARGIN FLOOR CHECK"
+        trigger: "Any price suggestion"
+        condition: "Suggested ticket < COGS + delivery + direct labor"
+        action: "BLOCK"
+        message: "⛔ VETO: Margem impossivel. Ticket < custos."
+        enforcement: "calculation_check"
+
+    hormozi-hooks:
+      - id: "VT2-HOO-001"
+        name: "MINIMUM HOOK VOLUME"
+        trigger: "Hook creation request"
+        condition: "< 10 hook variations generated"
+        action: "CONTINUE_GENERATION"
+        message: "Gerando mais variacoes. Minimo: 10 hooks."
+        enforcement: "output_validation"
+
+    hormozi-audit:
+      - id: "VT2-AUD-001"
+        name: "MANDATORY BEFORE LAUNCH"
+        trigger: "Offer marked as 'ready to launch'"
+        condition: "antipattern-screening.md not executed"
+        action: "FORCE_AUDIT"
+        message: "⛔ VETO: Audit obrigatorio antes de lancar."
+        enforcement: "workflow_gate"
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # HANDOFF VETOS (Between Specialists)
+  # ───────────────────────────────────────────────────────────────────────────
+  tier_3_handoff:
+    - id: "VT3-001"
+      name: "HANDOFF CONTEXT REQUIRED"
+      trigger: "Specialist-to-specialist handoff"
+      condition: "Handoff template not populated"
+      action: "BLOCK_HANDOFF"
+      message: |
+        ⛔ VETO: Handoff sem contexto.
+        Preencher templates/handoff-context-tmpl.yaml antes de transferir.
+      mandatory_fields:
+        - "source_agent"
+        - "target_agent"
+        - "mvn_status"
+        - "current_phase"
+        - "key_decisions"
+        - "blockers"
+      enforcement: "handoff_validation"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ENFORCEMENT MATRIX
+# ═══════════════════════════════════════════════════════════════════════════════
+
+enforcement:
+  levels:
+    runtime:
+      description: "Checked at execution time, blocks immediately"
+      blocking: true
+      notification: "inline"
+
+    content_check:
+      description: "Checked in output content before delivery"
+      blocking: true
+      notification: "inline"
+
+    output_validation:
+      description: "Validated before final output"
+      blocking: false
+      notification: "warning"
+
+    mode_switch:
+      description: "Checked when switching operational modes"
+      blocking: true
+      notification: "inline"
+
+    pre_output:
+      description: "Forced before any recommendation"
+      blocking: true
+      notification: "inline"
+
+    calculation_check:
+      description: "Validated on any numeric calculation"
+      blocking: true
+      notification: "inline"
+
+    workflow_gate:
+      description: "Checked at workflow checkpoints"
+      blocking: true
+      notification: "checkpoint"
+
+    handoff_validation:
+      description: "Validated before agent handoff"
+      blocking: true
+      notification: "inline"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_veto_triggered:
+    - log_veto: true
+    - notify_user: true
+    - provide_remediation: true
+    - block_execution: true
+
+  veto_message_format: |
+    ⛔ VETO: [VETO_NAME]
+    Condicao violada: [CONDITION]
+    Acao: [ACTION]
+    Para resolver: [REMEDIATION]
+
+  escalation:
+    max_consecutive_vetos: 3
+    escalate_to: "hormozi-chief"
+    escalation_message: "Multiplos vetos consecutivos. Revisao de abordagem necessaria."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-10"
+  author: "@pedro-valerio"
+  purpose: "Centralizar veto conditions para impossibilitar caminhos errados"
+  audit_source: "Hormozi Squad Audit Report 2026-02-10"
+  total_vetos: 18
+  tiers:
+    tier_0_universal: 3
+    tier_1_workflow: 8
+    tier_2_agent_specific: 6
+    tier_3_handoff: 1
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

@@ -1,0 +1,573 @@
+{
+  "metadata": {
+    "total_conceitos": 15,
+    "categorias": ["Abertura", "Promocao", "Entrega", "Historia", "Finalizacao"],
+    "fonte_primaria": "Método Renner Silva + Palestra Romani",
+    "versao": "1.0"
+  },
+  "conceitos": [
+    {
+      "id": "c1-humildade-estrategica",
+      "modulo": 1,
+      "categoria": "Abertura",
+      "nome": "Humildade Estratégica",
+      "definicao": "Não começar com currículo para criar percepção de acessibilidade e humanidade",
+      "importancia": "A atenção do público é escassa. Pessoas dão mais ouvidos a quem gostam, não a autoridades distantes.",
+      "nivel_dificuldade": "Iniciante",
+      "tempo_dominio_estimado": "30 min teoria + 1h prática",
+      "como_aplicar": [
+        "Deixar mestre de cerimônias apresentar suas credenciais",
+        "Começar com conexão humana, não com conquistas",
+        "Evitar listar títulos e certificações logo no início",
+        "Focar em ser 'legal' antes de ser 'autoridade'"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Palestra Romani",
+          "descricao": "Renner começa com mágica e piadas, não com currículo. MC apresenta credenciais.",
+          "resultado": "Plateia já receptiva antes de saber quem ele é"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Começar com 'Olá, sou fulano, tenho X anos de experiência...'",
+        "Listar títulos e certificações nos primeiros 2 minutos",
+        "Parecer distante ou inatingível"
+      ],
+      "prerequisitos": [],
+      "relacionado_com": ["c1-imprevisibilidade", "c1-dopamina"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 18,
+        "secao": "Passo 1: Faça as Pessoas Gostarem de Você"
+      }
+    },
+    {
+      "id": "c1-imprevisibilidade",
+      "modulo": 1,
+      "categoria": "Abertura",
+      "nome": "Imprevisibilidade e Curiosidade",
+      "definicao": "Primeira parte não deve parecer palestra. Confundir a mente para gerar curiosidade.",
+      "importancia": "Imprevisível surpreende e ativa gatilho de curiosidade. Previsível não gera engajamento.",
+      "nivel_dificuldade": "Intermediário",
+      "tempo_dominio_estimado": "1h teoria + 3h prática",
+      "como_aplicar": [
+        "Usar humor logo no início",
+        "Fazer truque, dinâmica ou demonstração inesperada",
+        "Contar piada ou história engraçada",
+        "Quebrar expectativas de 'palestra tradicional'"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Palestra Romani",
+          "descricao": "Renner abre com truque de mágica e piadas regionais (mineirês) antes de falar do tema",
+          "resultado": "Plateia relaxada, rindo, curiosa sobre o que vem a seguir"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Ser previsível demais ('Bom dia, hoje vou falar sobre...')",
+        "Forçar humor que não é autêntico ao seu estilo",
+        "Alongar abertura imprevisível além de 5-7 minutos"
+      ],
+      "prerequisitos": [],
+      "relacionado_com": ["c1-humildade-estrategica", "c1-dopamina"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 19,
+        "secao": "Passo 1: Faça as Pessoas Gostarem de Você"
+      }
+    },
+    {
+      "id": "c1-dopamina",
+      "modulo": 1,
+      "categoria": "Abertura",
+      "nome": "Liberação de Dopamina",
+      "definicao": "Conectar através de humor e elementos inesperados para liberar dopamina no cérebro",
+      "importancia": "Dopamina cria sensação de prazer e associa orador a experiência positiva",
+      "nivel_dificuldade": "Iniciante",
+      "tempo_dominio_estimado": "30 min teoria + 2h prática",
+      "como_aplicar": [
+        "Criar momentos de risada genuína",
+        "Surpreender a plateia positivamente",
+        "Gerar momentos de alegria e leveza",
+        "Usar humor inteligente e apropriado"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Palestra Romani",
+          "descricao": "Piadas sobre ser mineiro, truques de mágica que falham de propósito",
+          "resultado": "Plateia rindo, dopamina liberada, associação positiva com Renner"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Humor ofensivo ou inapropriado",
+        "Forçar risadas sem naturalidade",
+        "Não ler a sala (público não está respondendo)"
+      ],
+      "prerequisitos": [],
+      "relacionado_com": ["c1-humildade-estrategica", "c1-imprevisibilidade"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 20,
+        "secao": "Passo 1: Faça as Pessoas Gostarem de Você"
+      }
+    },
+    {
+      "id": "c2-venda-resultado",
+      "modulo": 2,
+      "categoria": "Promocao",
+      "nome": "Vender o Resultado, Não o Conteúdo",
+      "definicao": "Mostrar POR QUE os passos são necessários antes de explicar O QUE fazer",
+      "importancia": "Criar desejo profundo, sede pelo conhecimento antes de ensinar",
+      "nivel_dificuldade": "Avançado",
+      "tempo_dominio_estimado": "2h teoria + 5h prática",
+      "como_aplicar": [
+        "Evitar ir direto para 'os 3 passos são...'",
+        "Demonstrar valor através de resultados alcançáveis",
+        "Conectar conteúdo ao sonho/objetivo da plateia",
+        "Mostrar caminho mais rápido/eficiente para o resultado"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Método Renner Silva.md",
+          "descricao": "Exemplo de empresários: mostrar que 80% falham, 87% demissões são comportamentais, ANTES de ensinar os 3 passos",
+          "resultado": "Plateia convencida de que precisa do conteúdo para não falhar"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Ir direto para explicação técnica",
+        "Não conectar ao sonho da plateia",
+        "Falar de features, não de benefícios"
+      ],
+      "prerequisitos": ["c1-humildade-estrategica", "c1-dopamina"],
+      "relacionado_com": ["c2-prova-social"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 26,
+        "secao": "Passo 2: Promova o Seu Conteúdo"
+      }
+    },
+    {
+      "id": "c2-prova-social",
+      "modulo": 2,
+      "categoria": "Promocao",
+      "nome": "Contexto e Prova Social",
+      "definicao": "Apresentar casos de sucesso E fracasso para validar a tese",
+      "importancia": "Cria necessidade e comprometimento antes mesmo de ensinar",
+      "nivel_dificuldade": "Intermediário",
+      "tempo_dominio_estimado": "1h teoria + 3h prática",
+      "como_aplicar": [
+        "Usar estatísticas e pesquisas (ex: Harvard, estudos de caso)",
+        "Mostrar quem aplicou o método e prosperou",
+        "Mostrar quem NÃO aplicou e fracassou",
+        "Criar contraste claro entre os dois caminhos"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Método Renner Silva.md",
+          "descricao": "Pesquisa Harvard: 87% demissões comportamentais. Empresas que seguem 3 passos prosperam, outras quebram.",
+          "resultado": "Validação científica + casos reais criam urgência"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Usar apenas casos de sucesso (não cria contraste)",
+        "Estatísticas sem fonte confiável",
+        "Prova social genérica ('muitas pessoas conseguiram')"
+      ],
+      "prerequisitos": ["c2-venda-resultado"],
+      "relacionado_com": ["c3-estrutura-passos"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 27,
+        "secao": "Passo 2: Promova o Seu Conteúdo"
+      }
+    },
+    {
+      "id": "c3-estrutura-passos",
+      "modulo": 3,
+      "categoria": "Entrega",
+      "nome": "Estrutura em 3-5 Passos",
+      "definicao": "Entregar conteúdo em passos simples para evitar ansiedade e facilitar assimilação",
+      "importancia": "Organiza informação na mente do público, facilita aprendizado e aplicação",
+      "nivel_dificuldade": "Intermediário",
+      "tempo_dominio_estimado": "1h teoria + 4h prática",
+      "como_aplicar": [
+        "Limitar conteúdo principal a 3-5 passos",
+        "Nomear cada passo claramente",
+        "Manter ordem lógica e sequencial",
+        "Evitar mais de 5 passos (gera ansiedade)"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Método Renner Silva.md",
+          "descricao": "Método Aplauda de Pé tem 5 passos claros, não 7 ou 10",
+          "resultado": "Fácil de lembrar, aplicar e ensinar"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Entregar 7, 10, 15 passos (sobrecarga cognitiva)",
+        "Passos sem ordem lógica",
+        "Nomes confusos ou abstratos demais"
+      ],
+      "prerequisitos": ["c2-venda-resultado", "c2-prova-social"],
+      "relacionado_com": ["c3-quatro-estagios"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 31,
+        "secao": "Passo 3: Entregue o Conteúdo em Passos"
+      }
+    },
+    {
+      "id": "c3-quatro-estagios",
+      "modulo": 3,
+      "categoria": "Entrega",
+      "nome": "4 Estágios de Entrega por Passo",
+      "definicao": "Para cada passo: Nome → Definição → Contexto → Ferramenta (opcional)",
+      "importancia": "Estrutura repetível que maximiza clareza, memorabilidade e aplicabilidade",
+      "nivel_dificuldade": "Avançado",
+      "tempo_dominio_estimado": "2h teoria + 6h prática",
+      "como_aplicar": [
+        "1. Nome: Dizer claramente o nome do passo",
+        "2. Definição: Uma frase curta que gera curiosidade",
+        "3. Contexto: Narrativa, metáfora, dinâmica ou slides para ilustrar",
+        "4. Ferramenta: Dica prática aplicável imediatamente (opcional)"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Método Renner Silva.md",
+          "descricao": "Nome: 'Mentalidade' | Definição: frase curta | Contexto: história que conecta | Ferramenta: exercício prático",
+          "resultado": "Plateia entende, lembra e consegue aplicar"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Pular direto para ferramenta sem contexto",
+        "Definições longas e confusas",
+        "Contexto abstrato que não conecta com realidade da plateia",
+        "Não fornecer ferramenta prática"
+      ],
+      "prerequisitos": ["c3-estrutura-passos"],
+      "relacionado_com": ["c4-conquistar-direito"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 33,
+        "secao": "Passo 3: Entregue o Conteúdo em Passos - 4 estágios"
+      }
+    },
+    {
+      "id": "c4-conquistar-direito",
+      "modulo": 4,
+      "categoria": "Historia",
+      "nome": "Conquistar o Direito de Contar",
+      "definicao": "História não vai no início. Você conquista o direito após gerar conexão e entregar valor.",
+      "importancia": "Audiência precisa estar pronta para ouvir. Timing é crucial para impacto emocional.",
+      "nivel_dificuldade": "Avançado",
+      "tempo_dominio_estimado": "1h teoria + 4h prática",
+      "como_aplicar": [
+        "Não contar história nos primeiros 5-10 minutos",
+        "Esperar completar módulos 1, 2 e 3 (conexão + valor)",
+        "Perceber quando plateia está receptiva e engajada",
+        "Só então introduzir narrativa pessoal"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Palestra Romani",
+          "descricao": "Renner conta história de mágico ruim apenas após abertura divertida e entrega de conteúdo",
+          "resultado": "Plateia já confia, se importa, e absorve a história com emoção"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Começar palestra com 'Deixa eu contar minha história...'",
+        "Contar antes de gerar conexão",
+        "Plateia ainda não se importa com você"
+      ],
+      "prerequisitos": ["c1-dopamina", "c2-venda-resultado", "c3-quatro-estagios"],
+      "relacionado_com": ["c4-estrutura-jornada", "c4-memorias-emocionais"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 42,
+        "secao": "Passo 4: Conte a Sua História de Essência"
+      }
+    },
+    {
+      "id": "c4-estrutura-jornada",
+      "modulo": 4,
+      "categoria": "Historia",
+      "nome": "Estrutura da Jornada (4 Etapas)",
+      "definicao": "Início → Queda → Decisão → Vitória",
+      "importancia": "Estrutura repetível que cria arco emocional e mantém atenção",
+      "nivel_dificuldade": "Avançado",
+      "tempo_dominio_estimado": "3h teoria + 8h prática",
+      "como_aplicar": [
+        "1. Início: Apresentar vida normal ou período tranquilo",
+        "2. Queda: Descrever problema/dor/ponto de virada",
+        "3. Decisão: Falar sobre escolha que você tomou",
+        "4. Vitória: Momento de orgulho de quem se tornou"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Palestra Romani",
+          "descricao": "Início: mágico de família | Queda: péssimo mágico, mágicas falhavam | Decisão: dar primeiro passo mesmo ruim | Vitória: TV nacional, Silvio Santos",
+          "resultado": "Arco emocional completo, plateia emocionada"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Pular etapas (ex: ir direto para vitória)",
+        "Não mostrar a queda de forma vulnerável",
+        "Vitória muito material (dinheiro) vs transformação pessoal"
+      ],
+      "prerequisitos": ["c4-conquistar-direito"],
+      "relacionado_com": ["c4-memorias-emocionais", "c4-autenticidade"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 44,
+        "secao": "Passo 4: Estrutura da História"
+      }
+    },
+    {
+      "id": "c4-memorias-emocionais",
+      "modulo": 4,
+      "categoria": "Historia",
+      "nome": "Compartilhar Memórias Emocionais",
+      "definicao": "Público não tem suas memórias. Contar memórias ANTES do ápice para transmitir emoção.",
+      "importancia": "Emoção só é transmitida quando compartilha verdade das memórias",
+      "nivel_dificuldade": "Master",
+      "tempo_dominio_estimado": "4h teoria + 10h prática",
+      "como_aplicar": [
+        "Identificar memórias-chave da sua jornada",
+        "Contar contexto emocional ANTES do evento principal",
+        "Exemplo: morador de rua + loteria = adicionar luta, fé, caráter ANTES do prêmio",
+        "Fazer plateia sentir o que você sentiu"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Método Renner Silva.md",
+          "descricao": "Ex-morador de rua que ganhou loteria: narrar anos de luta, fé, trabalho árduo ANTES de revelar o prêmio",
+          "resultado": "História ganha força emocional, não é apenas 'ganhou dinheiro'"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Ir direto para clímax sem contexto",
+        "Não compartilhar memórias vulneráveis",
+        "Plateia não sente nada porque não tem suas memórias"
+      ],
+      "prerequisitos": ["c4-conquistar-direito", "c4-estrutura-jornada"],
+      "relacionado_com": ["c4-autenticidade"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 49,
+        "secao": "Passo 4: O Segredo para Gerar Emoção"
+      }
+    },
+    {
+      "id": "c4-autenticidade",
+      "modulo": 4,
+      "categoria": "Historia",
+      "nome": "100% Verdadeiro",
+      "definicao": "Método só funciona se história for autêntica. Não inventar ou exagerar.",
+      "importancia": "Autenticidade gera verdadeira conexão. Emoção é a 'cola' que fixa informação.",
+      "nivel_dificuldade": "Master",
+      "tempo_dominio_estimado": "2h teoria + vida inteira de prática",
+      "como_aplicar": [
+        "Contar apenas o que realmente aconteceu",
+        "Não seguir Jornada do Herói se forçar fatos",
+        "Ser vulnerável com verdade, não com drama inventado",
+        "Aceitar que sua jornada é única e suficiente"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Método Renner Silva.md",
+          "descricao": "Renner não força Jornada do Herói clássica. Conta sua verdade: mágico ruim que virou famoso por conexão.",
+          "resultado": "Plateia sente autenticidade, confia, emociona-se de verdade"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Inventar detalhes para história 'ficar melhor'",
+        "Exagerar dificuldades ou vitórias",
+        "Seguir fórmulas que forçam mentiras",
+        "Achar que sua história não é 'boa o suficiente'"
+      ],
+      "prerequisitos": ["c4-conquistar-direito", "c4-estrutura-jornada", "c4-memorias-emocionais"],
+      "relacionado_com": ["c5-essencia-metodo"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 51,
+        "secao": "Passo 4: Não é a Jornada do Herói + autenticidade"
+      }
+    },
+    {
+      "id": "c4-sem-fotos",
+      "modulo": 4,
+      "categoria": "Historia",
+      "nome": "Sem Fotos Durante a Narrativa",
+      "definicao": "Fotos e slides distraem e competem pela atenção durante a história",
+      "importancia": "Foco deve ser contato visual e narrativa. Fotos vêm no final (vídeo).",
+      "nivel_dificuldade": "Intermediário",
+      "tempo_dominio_estimado": "30 min teoria + 2h prática",
+      "como_aplicar": [
+        "Remover todos os slides durante narrativa pessoal",
+        "Manter contato visual com plateia",
+        "Guardar fotos para vídeo recapitulativo final",
+        "Deixar história ser contada apenas com voz e presença"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Método Renner Silva.md",
+          "descricao": "Durante história, sem slides. Fotos só aparecem no vídeo final de 2 minutos.",
+          "resultado": "Plateia focada 100% na narrativa, sem distrações visuais"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Mostrar fotos slide a slide durante narrativa",
+        "Plateia se perde em detalhes da imagem",
+        "Perder conexão emocional por distração visual"
+      ],
+      "prerequisitos": ["c4-estrutura-jornada"],
+      "relacionado_com": ["c5-video-recapitulativo"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 50,
+        "secao": "Passo 4: Sem Fotos Durante a Narrativa"
+      }
+    },
+    {
+      "id": "c5-video-recapitulativo",
+      "modulo": 5,
+      "categoria": "Finalizacao",
+      "nome": "Vídeo Recapitulativo",
+      "definicao": "Videoclipe de 2 minutos com fotos em ordem cronológica, música de fundo, sem narração",
+      "importancia": "Reforça pontos emocionais da história. Valida a jornada visualmente.",
+      "nivel_dificuldade": "Intermediário",
+      "tempo_dominio_estimado": "1h teoria + 3h produção",
+      "como_aplicar": [
+        "Selecionar 15-20 fotos da jornada",
+        "Organizar em ordem cronológica",
+        "Escolher música emocional apropriada",
+        "Editar vídeo de 2 minutos máximo",
+        "Sem narração, apenas música de fundo"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Método Renner Silva.md",
+          "descricao": "Fotos de infância, família, momentos-chave, em ordem cronológica com música",
+          "resultado": "Plateia vê a jornada, emoção reforçada, aplauso de pé"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Vídeo muito longo (>3 min)",
+        "Música inadequada ou muito alta",
+        "Narração durante vídeo (distrai)",
+        "Fotos fora de ordem cronológica"
+      ],
+      "prerequisitos": ["c4-estrutura-jornada", "c4-sem-fotos"],
+      "relacionado_com": ["c5-emocao-como-memoria", "c5-essencia-metodo"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 57,
+        "secao": "Passo 5: Vídeo Recapitulativo"
+      }
+    },
+    {
+      "id": "c5-emocao-como-memoria",
+      "modulo": 5,
+      "categoria": "Finalizacao",
+      "nome": "O Que as Pessoas Lembram",
+      "definicao": "Pessoas lembram do que sentiram, não do que ouviram",
+      "importancia": "Final sela a emoção e reforça a mensagem de forma inesquecível",
+      "nivel_dificuldade": "Iniciante",
+      "tempo_dominio_estimado": "30 min teoria",
+      "como_aplicar": [
+        "Entender que emoção > informação para memória",
+        "Fazer final emocional, não lógico/racional",
+        "Deixar plateia SENTIR algo profundo",
+        "Aplauso de pé = gratidão pela vulnerabilidade"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Método Renner Silva.md",
+          "descricao": "Vídeo final com música gera emoção. Plateia aplaude emoção, não conteúdo técnico.",
+          "resultado": "Memória emocional duradoura da palestra"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Terminar com recapitulação técnica",
+        "Final racional sem emoção",
+        "Não deixar espaço para plateia sentir"
+      ],
+      "prerequisitos": ["c5-video-recapitulativo"],
+      "relacionado_com": ["c4-memorias-emocionais", "c5-essencia-metodo"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 54,
+        "secao": "Passo 5: O que as pessoas mais lembram"
+      }
+    },
+    {
+      "id": "c5-essencia-metodo",
+      "modulo": 5,
+      "categoria": "Finalizacao",
+      "nome": "Essência do Método",
+      "definicao": "Uma palestra não é sobre o que você conquistou. É sobre quem você se tornou.",
+      "importancia": "Shift de foco: conquistas materiais → transformação pessoal",
+      "nivel_dificuldade": "Master",
+      "tempo_dominio_estimado": "Compreensão filosófica profunda",
+      "como_aplicar": [
+        "Focar em quem você se tornou, não em troféus",
+        "Mostrar transformação de caráter, não apenas resultados",
+        "Plateia aplaude a pessoa, não o currículo",
+        "Vulnerabilidade > autopromoção"
+      ],
+      "exemplos_praticos": [
+        {
+          "fonte": "Método Renner Silva.md",
+          "descricao": "Renner não foca em 'ganhei X', foca em 'me tornei alguém que impacta vidas'",
+          "resultado": "Conexão profunda, inspiração genuína, aplauso de pé"
+        }
+      ],
+      "armadilhas_comuns": [
+        "Focar em conquistas materiais (carros, dinheiro, fama)",
+        "Autopromoção excessiva",
+        "Não mostrar transformação pessoal",
+        "Palestra sobre ego, não sobre serviço"
+      ],
+      "prerequisitos": ["c4-autenticidade", "c5-video-recapitulativo", "c5-emocao-como-memoria"],
+      "relacionado_com": ["c4-memorias-emocionais"],
+      "fonte_rastreabilidade": {
+        "documento": "Método Renner Silva.md",
+        "linha": 60,
+        "secao": "A essência do método"
+      }
+    }
+  ],
+  "mapa_dependencias": {
+    "modulo_1": {
+      "conceitos": ["c1-humildade-estrategica", "c1-imprevisibilidade", "c1-dopamina"],
+      "prerequisitos": [],
+      "proximos": ["modulo_2"]
+    },
+    "modulo_2": {
+      "conceitos": ["c2-venda-resultado", "c2-prova-social"],
+      "prerequisitos": ["c1-dopamina"],
+      "proximos": ["modulo_3"]
+    },
+    "modulo_3": {
+      "conceitos": ["c3-estrutura-passos", "c3-quatro-estagios"],
+      "prerequisitos": ["c2-venda-resultado", "c2-prova-social"],
+      "proximos": ["modulo_4"]
+    },
+    "modulo_4": {
+      "conceitos": ["c4-conquistar-direito", "c4-estrutura-jornada", "c4-memorias-emocionais", "c4-autenticidade", "c4-sem-fotos"],
+      "prerequisitos": ["c3-quatro-estagios"],
+      "proximos": ["modulo_5"]
+    },
+    "modulo_5": {
+      "conceitos": ["c5-video-recapitulativo", "c5-emocao-como-memoria", "c5-essencia-metodo"],
+      "prerequisitos": ["c4-estrutura-jornada", "c4-sem-fotos"],
+      "proximos": []
+    }
+  },
+  "niveis_dificuldade": {
+    "Iniciante": ["c1-humildade-estrategica", "c1-dopamina", "c5-emocao-como-memoria"],
+    "Intermediário": ["c1-imprevisibilidade", "c2-prova-social", "c3-estrutura-passos", "c4-sem-fotos", "c5-video-recapitulativo"],
+    "Avançado": ["c2-venda-resultado", "c3-quatro-estagios", "c4-conquistar-direito", "c4-estrutura-jornada"],
+    "Master": ["c4-memorias-emocionais", "c4-autenticidade", "c5-essencia-metodo"]
+  }
+}

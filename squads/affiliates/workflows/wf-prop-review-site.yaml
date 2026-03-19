@@ -1,0 +1,248 @@
+# Prop Trading Review Site Workflow
+# Pipeline para criar site de reviews de prop firms
+# Source: @architect research — Prop Firm Landscape + Compliance + SEO
+# Version: 1.0.0
+
+id: wf-prop-review-site
+name: "Prop Review Site"
+version: "1.0.0"
+duration: "2-3 weeks"
+description: |
+  Workflow para criar site de reviews de prop trading firms.
+  Validação → reviews → comparison → compliance → content calendar.
+
+  FILOSOFIA: "Trust-first. Audiência cética. NUNCA garantir lucros."
+
+  RESULTADO: Site de reviews compliant com reviews, comparações e calendário.
+
+best_for:
+  - "Criar site de reviews de prop firms"
+  - "Entrar no nicho prop trading affiliate"
+  - "Monetizar audiência de trading"
+
+decision_matrix_fit:
+  complexity: high
+  agents_required: 4
+  estimated_duration: "2-3 weeks"
+  user_involvement: "high (compliance review)"
+  prerequisites:
+    - "Conhecimento básico de prop trading"
+    - "Site/domínio disponível"
+    - "Registro em programas de afiliados de prop firms"
+
+clone_combinations:
+  primary:
+    - agent: prop-trading-affiliate
+      role: "Firm validation, reviews, compliance, calendar"
+      phases: [0, 1, 2, 3, 4]
+
+    - agent: seo-content
+      role: "Review content creation, SEO optimization"
+      phases: [1]
+
+    - agent: seo-affiliate
+      role: "Comparison page, site structure"
+      phases: [2]
+
+    - agent: social-strategist
+      role: "Content calendar, distribution"
+      phases: [4]
+
+phases:
+  - id: PHASE-0
+    name: "Firm Validation"
+    days: "Days 1-3"
+    tier: 0
+    description: |
+      Validação rigorosa de cada prop firm: regulação, payouts, refund, termos.
+      FTMO (ASIC/FCA/CySEC), Apex (US futures), Topstep, etc.
+
+    agent: prop-trading-affiliate
+
+    tasks:
+      - task_id: T0.1
+        name: "Validar Prop Firms"
+        task_ref: validate-prop-firm.md
+        required: true
+        description: "Avaliar: regulação, payouts, refund, termos"
+        output: "prop_firm_validation.yaml"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Firms Validated"
+      criteria:
+        - "Mínimo 5 firms validadas"
+        - "Regulação verificada"
+        - "Payout history documentado"
+        - "Red flags listadas"
+      human_review: true
+      message: "Revise validação — promover firm não confiável destrói credibilidade."
+      veto_conditions:
+        - condition: "Firm sem regulação e sem track record > 2 anos"
+          action: "BLOCK — Risco reputacional alto"
+
+  - id: PHASE-1
+    name: "Review Creation"
+    days: "Days 4-8"
+    tier: 1
+    description: |
+      Criação de reviews completas por firm.
+      Regras, fees, payouts, experiência, verdict.
+
+    agents:
+      primary: prop-trading-affiliate
+      secondary: seo-content
+
+    tasks:
+      - task_id: T1.1
+        name: "Criar Prop Reviews"
+        task_ref: create-prop-review.md
+        required: true
+        description: "Review completa: regras, fees, payouts, verdict"
+        output: "prop_reviews/"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Reviews Created"
+      criteria:
+        - "Mínimo 5 reviews completas"
+        - "Risk disclaimer presente em TODAS"
+        - "'Not financial advice' disclosure"
+        - "Affiliate disclosure"
+      human_review: true
+      message: "Revise reviews — compliance é crítico neste nicho."
+      veto_conditions:
+        - condition: "Review sem risk disclaimer"
+          action: "BLOCK — Obrigatório: 'Trading involves risk of loss'"
+        - condition: "Promessa de lucros"
+          action: "BLOCK — NUNCA garantir lucros em conteúdo de trading"
+
+  - id: PHASE-2
+    name: "Comparison Page"
+    days: "Days 9-11"
+    tier: 1
+    description: |
+      Página de comparação multi-firm.
+      Hub /best-prop-firms/ + tabela side-by-side.
+
+    agents:
+      primary: prop-trading-affiliate
+      secondary: seo-affiliate
+
+    tasks:
+      - task_id: T2.1
+        name: "Design Prop Comparison Page"
+        task_ref: design-prop-comparison-page.md
+        required: true
+        description: "Tabela multi-firm side-by-side"
+        output: "prop_comparison.md"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Comparison Ready"
+      criteria:
+        - "Tabela com 5+ firms"
+        - "Critérios objetivos (fees, rules, payouts)"
+        - "Disclosure presente"
+      human_review: false
+
+  - id: PHASE-3
+    name: "Compliance Review"
+    days: "Days 12-13"
+    tier: 2
+    description: |
+      Audit de compliance: disclosures, risk warnings, regulatory requirements.
+      ASIC, FCA, SEC/CFTC scrutiny crescente.
+
+    agent: prop-trading-affiliate
+
+    tasks:
+      - task_id: T3.1
+        name: "Compliance Review"
+        task_ref: compliance-review-prop.md
+        required: true
+        description: "Audit: disclosures, risk warnings, no guaranteed profits"
+        output: "compliance_audit.yaml"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "Compliance Passed"
+      criteria:
+        - "Risk disclaimer 12pt+ font em TODAS as páginas"
+        - "'Not financial advice' em TODAS as páginas"
+        - "Affiliate disclosure em TODAS as páginas"
+        - "Zero promessas de lucro"
+        - "Past performance disclaimer"
+      human_review: true
+      message: "Compliance é non-negotiable. Revise cuidadosamente."
+      veto_conditions:
+        - condition: "Qualquer página sem risk disclaimer"
+          action: "HALT — Adicionar disclaimer antes de publicar"
+        - condition: "Qualquer promessa implícita de lucro"
+          action: "HALT — Reescrever conteúdo"
+
+  - id: PHASE-4
+    name: "Content Calendar"
+    days: "Days 14-17"
+    tier: 2
+    description: |
+      Calendário mensal: reviews + educativo + promos.
+      Timing com janelas promocionais (flash sales 48-72h).
+
+    agents:
+      primary: prop-trading-affiliate
+      secondary: social-strategist
+
+    tasks:
+      - task_id: T4.1
+        name: "Prop Content Calendar"
+        task_ref: prop-content-calendar.md
+        required: true
+        description: "Calendário: reviews + educativo + promos"
+        output: "prop_content_calendar.yaml"
+
+    checkpoint:
+      id: CP_PHASE_4
+      name: "Calendar Ready"
+      criteria:
+        - "4 semanas planejadas"
+        - "Mix: reviews (30%) + educativo (50%) + promos (20%)"
+        - "Flash sale windows mapeadas"
+      human_review: true
+      message: "Revise calendário de conteúdo prop."
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - halt_workflow: false
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "affiliates-chief"
+    - document_reason: true
+    - require_human_override: true
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-prop-review-site"
+      status: "completed"
+
+outputs:
+  phase_0: ["prop_firm_validation.yaml"]
+  phase_1: ["prop_reviews/"]
+  phase_2: ["prop_comparison.md"]
+  phase_3: ["compliance_audit.yaml"]
+  phase_4: ["prop_content_calendar.yaml"]
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-18"
+  author: "squad-architect"
+  source_frameworks:
+    - "Prop Trading Compliance (ASIC/FCA/SEC)"
+    - "Trust-First Content Strategy"
+    - "SEO for Financial Affiliates"
+  priority: 2
+  quality_gate: "SC_WFL_001"

@@ -1,0 +1,142 @@
+pack:
+  name: site-performance-audit
+  version: 1.0.0
+  short-title: External Performance Audit Squad
+  description: >-
+    Squad de auditoria externa de performance web focado em analise sem acesso
+    interno. Utiliza PageSpeed Insights API, CrUX API e WebPageTest para
+    diagnosticos com hipoteses de causa-raiz e priorizacao por impacto no negocio.
+    Baseado em 7 elite minds com frameworks documentados em web performance.
+  author: OPB Hub
+  icon: "~"
+  slashPrefix: sitePerformanceAudit
+
+# Tool Infrastructure
+tool_infrastructure:
+  primary:
+    pagespeed_insights:
+      type: "Google API"
+      cost: "Free"
+      limit: "25,000 req/day (400/100s)"
+      requires: "Google Cloud API Key"
+      returns: ["Lighthouse scores", "Core Web Vitals", "Opportunities", "Diagnostics"]
+      modes: ["mobile", "desktop"]
+
+    crux_api:
+      type: "Google API"
+      cost: "Free"
+      limit: "150 req/min (~216K/day)"
+      requires: "Google Cloud API Key"
+      returns: ["Field LCP", "Field CLS", "Field INP", "p75 percentiles"]
+      note: "Real user data, not synthetic"
+
+  secondary:
+    webpagetest:
+      type: "REST API"
+      cost: "Free (300/month) | $15/mo (1K)"
+      limit: "300 tests/month free"
+      requires: "WPT API Key (free signup)"
+      returns: ["Waterfall", "Filmstrip", "Custom metrics", "Lighthouse"]
+      use_for: "Deep-dive diagnostics only"
+
+  optional:
+    gtmetrix:
+      type: "REST API"
+      cost: "From $10.67/mo"
+      limit: "0 API credits on free"
+      status: "OPTIONAL - requires paid plan"
+
+# Pattern Library
+pattern_library:
+  prefix: PA
+  naming_convention:
+    format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+    example: "PA-TP-001"
+  categories:
+    - id: TP
+      name: "Task Patterns"
+      description: "Patterns for audit task structure"
+    - id: EP
+      name: "Executor Patterns"
+      description: "Patterns for executor types"
+    - id: PP
+      name: "Process Patterns"
+      description: "Patterns for audit workflow"
+    - id: DP
+      name: "Diagnostic Patterns"
+      description: "Patterns for performance diagnosis"
+    - id: HP
+      name: "Hypothesis Patterns"
+      description: "Patterns for root-cause hypothesis generation"
+  patterns: []
+
+# Task Standards
+task_standards:
+  enforce_anatomy: true
+  validator: "PA-TP-001"
+  required_fields:
+    - task_name
+    - status
+    - responsible_executor
+    - execution_type
+    - input
+    - output
+    - action_items
+    - acceptance_criteria
+  optional_fields:
+    - estimated_time
+    - dependencies
+    - templates
+    - quality_gate
+    - handoff
+
+# Executor Types
+executor_types:
+  human:
+    id: "PA-EP-001"
+    name: "Human Executor"
+    use_for: ["Final report review", "Client presentation", "Strategic prioritization"]
+  agent:
+    id: "PA-EP-002"
+    name: "Agent Executor (AI)"
+    use_for: ["Score interpretation", "Hypothesis generation", "Waterfall analysis"]
+  hybrid:
+    id: "PA-EP-003"
+    name: "Hybrid Executor"
+    use_for: ["Report validation", "Priority review", "Recommendation refinement"]
+  worker:
+    id: "PA-EP-004"
+    name: "Worker Executor"
+    use_for: ["API calls (PSI/CrUX/WPT)", "Data collection", "Score aggregation"]
+
+executor_selection:
+  requires_creativity: human
+  requires_judgment: [human, hybrid]
+  requires_speed: [agent, worker]
+  requires_consistency: worker
+  requires_validation: hybrid
+  requires_learning: agent
+
+# Workflow Configuration
+workflow_config:
+  checkpoint_policy: always_active
+  fail_fast: true
+  allow_manual_override: false
+
+# Agent Tiers
+agent_tiers:
+  tier_0:
+    name: "Diagnostic Foundation"
+    agents: ["steve-souders"]
+    purpose: "Core rules and diagnostic fundamentals"
+  tier_1:
+    name: "Masters"
+    agents: ["patrick-meenan", "harry-roberts", "addy-osmani"]
+    purpose: "Deep diagnostic expertise"
+  tier_2:
+    name: "Specialists"
+    agents: ["tammy-everts", "tim-kadlec", "barry-pollard"]
+    purpose: "Domain-specific analysis"
+  orchestrator:
+    agents: ["site-performance-audit-chief"]
+    purpose: "Pipeline coordination and report generation"

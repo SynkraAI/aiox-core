@@ -1,0 +1,569 @@
+# Context Diagnosis Workflow
+# Based on Alex Hormozi's Industry Adaptation Framework
+# Source: 08_INDUSTRY_ADAPTATION + prompts-joao KB
+# Version: 1.0.0
+
+id: wf-context-diagnosis
+name: "Context Diagnosis"
+version: "1.0.0"
+duration: "15-20 min"
+description: |
+  Workflow de diagnóstico de contexto para routing inteligente de recomendações.
+  Adapta conselhos por INDÚSTRIA + FAIXA DE PREÇO + ESTÁGIO DO NEGÓCIO.
+
+  FILOSOFIA: "Conselho genérico é perigoso. Contexto é tudo."
+
+  RESULTADO: Perfil de contexto que determina quais frameworks e táticas aplicar.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Início de qualquer consulta estratégica"
+  - "Antes de dar recomendações de marketing/vendas"
+  - "Diagnóstico de novo cliente/projeto"
+  - "Calibração de conselho por contexto"
+
+decision_matrix_fit:
+  complexity: low
+  agents_required: 1
+  estimated_duration: "15-20 min"
+  user_involvement: "low (perguntas rápidas)"
+  prerequisites:
+    - "Negócio existente com dados básicos"
+
+trigger_points:
+  - "Primeira interação com usuário sobre negócio"
+  - "hormozi-chief recebe consulta genérica"
+  - "Usuário pede conselho sem dar contexto"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: hormozi-chief
+      role: "Diagnóstico de contexto e routing"
+      phases: [0, 1, 2]
+
+  integration:
+    data_required:
+      - "data/scaling-by-business-type.yaml"
+      - "data/hormozi-case-library.yaml"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 0: INDUSTRY DIAGNOSIS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  - id: PHASE-0
+    name: "Industry Diagnosis"
+    duration: "5-7 min"
+    tier: 0
+    description: |
+      Identificação da vertical de indústria e características específicas.
+      Cada indústria tem dinâmicas diferentes que afetam as recomendações.
+
+    agent: hormozi-chief
+
+    tasks:
+      - task_id: T0.1
+        name: "Classificar Tipo de Negócio"
+        required: true
+        description: "Identificar categoria principal do negócio"
+        output: "business_type.yaml"
+
+      - task_id: T0.2
+        name: "Identificar Características Setoriais"
+        required: true
+        description: "Mapear especificidades da indústria"
+        output: "industry_profile.yaml"
+
+    inline_structures:
+      business_type_classification:
+        categories:
+          - id: BT_SERVICE
+            name: "Serviços Profissionais"
+            examples:
+              - "Consultoria"
+              - "Agência"
+              - "Coaching"
+              - "Advocacia"
+              - "Contabilidade"
+            characteristics:
+              delivery: "High-touch, relationship-based"
+              scalability: "Limited by people"
+              pricing_model: "Project/retainer/hourly"
+              key_constraint: "Time of professionals"
+            recommended_focus:
+              primary: "Aumento de preço + niching"
+              secondary: "Productizing + leverage"
+
+          - id: BT_SAAS
+            name: "SaaS / Software"
+            examples:
+              - "App subscription"
+              - "Plataforma"
+              - "Ferramenta B2B/B2C"
+            characteristics:
+              delivery: "Low-touch, self-service"
+              scalability: "Infinite (marginal cost ~0)"
+              pricing_model: "Subscription/usage"
+              key_constraint: "Churn + CAC payback"
+            recommended_focus:
+              primary: "Retenção + LTV"
+              secondary: "Onboarding + activation"
+
+          - id: BT_ECOMMERCE
+            name: "E-commerce / Physical Products"
+            examples:
+              - "Loja online"
+              - "D2C brand"
+              - "Dropshipping"
+            characteristics:
+              delivery: "Physical fulfillment"
+              scalability: "Inventory + logistics constrained"
+              pricing_model: "Per-unit + AOV"
+              key_constraint: "Margins + inventory"
+            recommended_focus:
+              primary: "AOV + repeat purchase"
+              secondary: "Fulfillment efficiency"
+
+          - id: BT_INFO
+            name: "Infoprodutos / Education"
+            examples:
+              - "Cursos online"
+              - "Mentorias em grupo"
+              - "Memberships"
+              - "Communities"
+            characteristics:
+              delivery: "Digital, scalable"
+              scalability: "High (1-to-many)"
+              pricing_model: "One-time + subscription"
+              key_constraint: "Completion rate + transformation"
+            recommended_focus:
+              primary: "Oferta + transformação real"
+              secondary: "Community + retention"
+
+          - id: BT_LOCAL
+            name: "Negócio Local"
+            examples:
+              - "Restaurante"
+              - "Academia"
+              - "Clínica"
+              - "Salão de beleza"
+            characteristics:
+              delivery: "Physical location"
+              scalability: "Location-constrained"
+              pricing_model: "Per-visit + membership"
+              key_constraint: "Geography + capacity"
+            recommended_focus:
+              primary: "LTV + memberships"
+              secondary: "Referrals + local presence"
+
+          - id: BT_HYBRID
+            name: "Híbrido"
+            description: "Combinação de modelos"
+            note: "Identificar modelo DOMINANTE para routing"
+
+      industry_characteristics:
+        questions:
+          - id: IC_001
+            question: "Qual o ciclo de venda típico?"
+            options:
+              - "Imediato (impulso)"
+              - "Curto (dias)"
+              - "Médio (semanas)"
+              - "Longo (meses)"
+
+          - id: IC_002
+            question: "O cliente compra uma vez ou recorrente?"
+            options:
+              - "Única vez"
+              - "Ocasional"
+              - "Recorrente previsível"
+              - "Subscription"
+
+          - id: IC_003
+            question: "Quão comoditizado é o mercado?"
+            options:
+              - "Altamente diferenciado"
+              - "Moderadamente competitivo"
+              - "Altamente comoditizado"
+
+          - id: IC_004
+            question: "Qual o awareness médio do prospect?"
+            options:
+              - "Unaware (não sabe que tem problema)"
+              - "Problem-aware (sabe do problema)"
+              - "Solution-aware (conhece soluções)"
+              - "Product-aware (conhece você)"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Industry Profile Complete"
+      criteria:
+        - "Tipo de negócio classificado"
+        - "Características setoriais mapeadas"
+      human_review: false
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 1: PRICE TIER DIAGNOSIS
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-1
+    name: "Price Tier Diagnosis"
+    duration: "5-7 min"
+    tier: 0
+    description: |
+      Diagnóstico da faixa de preço e suas implicações estratégicas.
+      A variável dominante muda COMPLETAMENTE por faixa de preço.
+
+    agent: hormozi-chief
+
+    tasks:
+      - task_id: T1.1
+        name: "Identificar Faixa de Preço"
+        required: true
+        description: "Classificar ticket médio atual"
+        output: "price_tier.yaml"
+
+      - task_id: T1.2
+        name: "Mapear Variável Dominante"
+        required: true
+        description: "Qual variável mais impacta nessa faixa?"
+        output: "dominant_variable.yaml"
+
+    inline_structures:
+      price_tier_matrix:
+        name: "Matriz de Faixa de Preço"
+        source: "prompts-joao KB v2.0"
+
+        tiers:
+          - id: PT_LOW
+            name: "Low Ticket"
+            range: "< R$500"
+            dominant_variable: "Volume + Conversão"
+            buyer_psychology: "Impulso, conveniência, preço"
+            sales_model: "Self-service, automação"
+            key_metrics:
+              - "CVR (conversion rate)"
+              - "AOV (average order value)"
+              - "CAC:LTV ratio"
+            recommended_tactics:
+              - "Otimizar página de vendas"
+              - "Aumentar AOV com order bumps"
+              - "Automação de follow-up"
+            anti_tactics:
+              - "Calls de vendas 1:1 (CAC muito alto)"
+              - "Customização excessiva"
+
+          - id: PT_MID
+            name: "Mid Ticket"
+            range: "R$500 - R$5.000"
+            dominant_variable: "Likelihood (prova + garantia)"
+            buyer_psychology: "Avaliação, comparação, prova"
+            sales_model: "Híbrido (self-service + calls)"
+            key_metrics:
+              - "Show rate"
+              - "Close rate"
+              - "Refund rate"
+            recommended_tactics:
+              - "Webinars de conversão"
+              - "Casos de sucesso detalhados"
+              - "Garantias fortes"
+            anti_tactics:
+              - "Venda apenas por página (precisa de relacionamento)"
+              - "Pressa excessiva (precisa de educação)"
+
+          - id: PT_HIGH
+            name: "High Ticket"
+            range: "R$5.000 - R$25.000"
+            dominant_variable: "Relacionamento + Confiança"
+            buyer_psychology: "Personalização, exclusividade, resultado"
+            sales_model: "High-touch (calls, aplicação)"
+            key_metrics:
+              - "Application rate"
+              - "Qualified rate"
+              - "Close rate"
+              - "Fulfillment satisfaction"
+            recommended_tactics:
+              - "Processo de aplicação"
+              - "Calls de diagnóstico"
+              - "Prova de resultados específicos"
+            anti_tactics:
+              - "Venda direta sem qualificação"
+              - "Automação completa"
+
+          - id: PT_ULTRA
+            name: "Ultra High Ticket"
+            range: "> R$25.000"
+            dominant_variable: "Exclusividade + Transformação garantida"
+            buyer_psychology: "Resultado certo, acesso único, status"
+            sales_model: "Concierge (múltiplos touchpoints)"
+            key_metrics:
+              - "Pipeline value"
+              - "Close rate"
+              - "Implementation success"
+              - "Referral rate"
+            recommended_tactics:
+              - "Processo de seleção rigoroso"
+              - "Done-For-You elements"
+              - "Garantias de resultado"
+              - "Networking/access como parte da oferta"
+            anti_tactics:
+              - "Qualquer automação na venda"
+              - "Escassez artificial"
+
+        adaptation_rule: |
+          REGRA: Táticas de um tier NÃO funcionam em outro.
+          - Vender high-ticket como low-ticket = fracasso
+          - Vender low-ticket com calls = prejuízo
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Price Tier Profile Complete"
+      criteria:
+        - "Faixa de preço identificada"
+        - "Variável dominante mapeada"
+        - "Táticas recomendadas listadas"
+      human_review: false
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # PHASE 2: BUSINESS STAGE & CONTEXT SYNTHESIS
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: PHASE-2
+    name: "Stage & Synthesis"
+    duration: "5 min"
+    tier: 1
+    description: |
+      Diagnóstico do estágio do negócio e síntese do contexto completo.
+      Gera perfil que determina routing de recomendações.
+
+    agent: hormozi-chief
+
+    tasks:
+      - task_id: T2.1
+        name: "Identificar Estágio do Negócio"
+        required: true
+        description: "Overdelivery vs Sistematização vs Otimização"
+        output: "business_stage.yaml"
+
+      - task_id: T2.2
+        name: "Sintetizar Perfil de Contexto"
+        required: true
+        description: "Consolidar diagnósticos em perfil único"
+        output: "context_profile.md"
+
+      - task_id: T2.3
+        name: "Definir Routing de Agents"
+        required: true
+        description: "Quais agents e táticas são apropriados?"
+        output: "routing_map.yaml"
+
+    inline_structures:
+      business_stage:
+        name: "Estágios do Continuum Vendas-Cumprimento"
+        source: "03_OFFER_CREATION_SYSTEM"
+
+        stages:
+          - id: STAGE_1
+            name: "Overdelivery"
+            typical_timeline: "Meses 0-6"
+            indicators:
+              - "< 10 casos de sucesso documentados"
+              - "Processo de entrega ainda sendo definido"
+              - "Margem baixa ou negativa"
+              - "Foco em validação"
+            strategy: "Entregar 10x, aceitar margens baixas, criar casos"
+            dont_do:
+              - "Otimizar prematuramente"
+              - "Escalar antes de validar"
+              - "Automatizar o que não está funcionando"
+
+          - id: STAGE_2
+            name: "Sistematização"
+            typical_timeline: "Meses 6-12"
+            indicators:
+              - "10+ casos de sucesso"
+              - "Processo definido mas manual"
+              - "Margens positivas mas abaixo do potencial"
+              - "Foco em eficiência"
+            strategy: "Criar sistemas, automatizar, manter valor"
+            dont_do:
+              - "Aumentar preço sem melhorar entrega"
+              - "Contratar sem processos"
+
+          - id: STAGE_3
+            name: "Otimização"
+            typical_timeline: "Meses 12+"
+            indicators:
+              - "Processo sistematizado"
+              - "Resultados previsíveis"
+              - "Margem > 50%"
+              - "Foco em maximização"
+            strategy: "Adicionar atrito positivo, aumentar preços, escalar"
+            dont_do:
+              - "Comprometer qualidade por crescimento"
+              - "Perder foco no core"
+
+      context_profile_template:
+        format: |
+          # PERFIL DE CONTEXTO
+
+          ## Identificação
+          - Negócio: [nome]
+          - Data: [data]
+
+          ## Indústria
+          - Tipo: [categoria]
+          - Ciclo de venda: [curto/médio/longo]
+          - Modelo de receita: [one-time/recorrente]
+          - Comoditização: [baixa/média/alta]
+
+          ## Faixa de Preço
+          - Tier: [low/mid/high/ultra]
+          - Ticket médio: R$[valor]
+          - Variável dominante: [volume/likelihood/relacionamento/exclusividade]
+
+          ## Estágio
+          - Estágio atual: [overdelivery/sistematização/otimização]
+          - Casos documentados: [número]
+          - Margem atual: [%]
+
+          ## Routing Recomendado
+          - Agent primário: [agent]
+          - Workflows aplicáveis: [lista]
+          - Táticas recomendadas: [lista]
+          - Táticas a EVITAR: [lista]
+
+      routing_rules:
+        by_stage:
+          overdelivery:
+            focus: "Validação e casos de sucesso"
+            agent: "hormozi-offers"
+            workflows:
+              - "wf-grand-slam-offer"
+              - "wf-opportunity-screening"
+            avoid:
+              - "Otimização de preço prematura"
+              - "Scaling antes de validar"
+
+          sistematizacao:
+            focus: "Eficiência e sistemas"
+            agent: "hormozi-pricing"
+            workflows:
+              - "wf-growth-decision"
+            avoid:
+              - "Novas ofertas antes de sistematizar atual"
+
+          otimizacao:
+            focus: "Maximização e escala"
+            agent: "hormozi-chief"
+            workflows:
+              - "wf-scaling-diagnostic"
+              - "wf-growth-decision"
+            avoid:
+              - "Comprometer qualidade"
+
+        by_price_tier:
+          low:
+            agent: "hormozi-copy"
+            focus: "Conversão e automação"
+
+          mid:
+            agent: "hormozi-offers"
+            focus: "Prova e garantias"
+
+          high:
+            agent: "hormozi-pricing"
+            focus: "Relacionamento e processo"
+
+          ultra:
+            agent: "hormozi-chief"
+            focus: "Exclusividade e transformação"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "Context Profile Complete"
+      criteria:
+        - "Estágio do negócio identificado"
+        - "Perfil de contexto sintetizado"
+        - "Routing de agents definido"
+      human_review: true
+      message: "Confirme o perfil de contexto antes de prosseguir com recomendações."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ROUTING RULES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+routing:
+  on_complete:
+    action: "Route to appropriate agent based on context"
+    logic: |
+      1. Verificar estágio → determina TIPO de conselho
+      2. Verificar faixa de preço → determina TÁTICAS
+      3. Verificar indústria → determina EXEMPLOS e BENCHMARKS
+
+      Routing Matrix:
+      - Overdelivery + Qualquer tier → hormozi-offers (criar/validar oferta)
+      - Sistematização + Mid/High → hormozi-pricing (otimizar modelo)
+      - Otimização + High/Ultra → hormozi-chief (estratégia de escala)
+      - Qualquer + Needs Leads → hormozi-leads (aquisição)
+      - Qualquer + Needs Copy → hormozi-copy (comunicação)
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# VETO CONDITIONS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+veto_conditions:
+  - id: VETO_MISMATCH_001
+    trigger: "Conselho de tier alto para negócio low ticket"
+    action: "BLOCK - Adaptar conselho para tier correto"
+    example: "Não sugerir calls de venda para produto de R$97"
+
+  - id: VETO_MISMATCH_002
+    trigger: "Conselho de otimização para negócio em overdelivery"
+    action: "BLOCK - Foco em validação primeiro"
+    example: "Não sugerir automação para quem não tem casos de sucesso"
+
+  - id: VETO_GENERIC_001
+    trigger: "Conselho genérico sem considerar contexto"
+    action: "BLOCK - Rodar diagnóstico de contexto primeiro"
+    example: "Não dizer 'aumente o preço' sem saber o estágio"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  final_deliverable:
+    name: "Context Diagnosis Report"
+    contents:
+      - "context_profile.md - Perfil completo"
+      - "routing_map.yaml - Agents e workflows recomendados"
+      - "industry_profile.yaml - Características setoriais"
+      - "price_tier.yaml - Análise de faixa de preço"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-10"
+  author: "pedro-valerio"
+  source_frameworks:
+    - "08_INDUSTRY_ADAPTATION"
+    - "03_OFFER_CREATION_SYSTEM"
+    - "prompts-joao KB v2.0"
+  source_mind: "alex_hormozi"
+  extraction_batch: "Batch 2 - Workflows de Decisão"
+  related_data:
+    - "data/scaling-by-business-type.yaml"
+
+
+# Criado com Squad Creator do AIOSPRO por @oalanicolas e @pedrovalerio | 2026-02-10

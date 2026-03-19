@@ -1,0 +1,183 @@
+# Workflow: Self-Improvement (Meta-Análise)
+# ID: wf-self-improve
+# Version: 1.0.0
+# Purpose: O Kaizen Squad analisa e melhora a si mesmo
+# Orchestrator: kaizen-chief
+# Cadência: Semanal (junto com health check)
+
+workflow_name: self_improvement_meta_analysis
+description: >-
+  O Kaizen Squad analisa sua propria eficacia: quais analises geraram
+  valor real, quais foram ignoradas, onde as heuristicas falharam, e o que
+  precisa ser ajustado. Gera um plano de melhoria incremental (max 3 por ciclo).
+agent_sequence:
+  - kaizen-chief  # Phase 0: coleta de meta-dados (reports anteriores, usage, data health)
+  - kaizen-chief  # Phase 1: diagnostico de eficacia (4 dimensoes)
+  - kaizen-chief  # Phase 2: gerar plano de melhoria + auto-aplicar triviais
+success_indicators:
+  - "4 dimensoes avaliadas (taxa implementacao, cobertura, precisao gaps, atualidade baseline)"
+  - "Max 3 melhorias por ciclo"
+  - "Melhorias triviais auto-aplicadas com changelog"
+  - "Melhorias destrutivas reportadas para aprovacao humana"
+  - "Nenhum agente removido automaticamente"
+
+workflow:
+  id: wf-self-improve
+  name: "Self-Improvement — Meta-Análise do Próprio Squad"
+  version: "1.0.0"
+  orchestrator: kaizen-chief
+  mode: autonomous
+  estimated_duration: "5-10 minutes"
+
+  description: |
+    O Kaizen Squad analisa sua própria eficácia: quais análises geraram
+    valor real, quais foram ignoradas, onde as heurísticas falharam, e o que
+    precisa ser ajustado. Gera um plano de melhoria incremental.
+
+  triggers:
+    proactive:
+      - event: "weekly schedule"
+        cadence: "every Sunday 20:30 BRT (após health check semanal)"
+    reactive:
+      - command: "*self-improve"
+
+  phases:
+
+    # ═══════════════════════════════════════════════════════════════
+    # PHASE 0: COLETA DE EVIDÊNCIAS SOBRE SI MESMO
+    # ═══════════════════════════════════════════════════════════════
+    phase_0:
+      name: "Coleta de Meta-Dados"
+      duration: "1-2 minutes"
+
+      steps:
+        - id: "0.1"
+          name: "Ler relatórios anteriores"
+          action: "Glob squads/kaizen/data/reports/week-*.md"
+          output: "previous_reports"
+
+        - id: "0.2"
+          name: "Verificar quais recomendações foram implementadas"
+          action: |
+            Para cada recomendação dos relatórios anteriores:
+            1. Buscar evidência de implementação (git log, novos arquivos)
+            2. Classificar: IMPLEMENTADA / IGNORADA / PARCIAL / PENDENTE
+          output: "recommendation_tracking"
+
+        - id: "0.3"
+          name: "Analisar atividade do próprio squad"
+          action: |
+            1. git log com filtro squads/kaizen/ — frequência de uso
+            2. Quais comandos foram executados (chief, analyze, gaps, etc.)
+            3. Quais agentes nunca foram ativados
+          output: "usage_data"
+
+        - id: "0.4"
+          name: "Verificar saúde dos dados"
+          action: |
+            1. ecosystem-baseline.yaml está atualizado?
+            2. initial-radar.yaml reflete realidade?
+            3. Heurísticas precisam de calibração?
+          output: "data_health"
+
+    # ═══════════════════════════════════════════════════════════════
+    # PHASE 1: DIAGNÓSTICO DE EFICÁCIA
+    # ═══════════════════════════════════════════════════════════════
+    phase_1:
+      name: "Diagnóstico de Eficácia"
+      duration: "2-3 minutes"
+      depends_on: phase_0
+
+      analysis:
+        - dimension: "Taxa de implementação de recomendações"
+          healthy: ">= 60% implementadas"
+          warning: "30-59% implementadas"
+          critical: "< 30% implementadas"
+          action_if_critical: |
+            Recomendações não estão sendo úteis. Investigar:
+            - São muito genéricas? → Aumentar especificidade
+            - São irrelevantes? → Recalibrar frameworks
+            - São difíceis demais? → Ajustar feasibility threshold
+
+        - dimension: "Cobertura de análise"
+          healthy: "Todos os 6 agentes ativados pelo menos 1x/semana"
+          warning: "1-2 agentes nunca ativados"
+          critical: "3+ agentes nunca ativados"
+          action_if_critical: |
+            Agentes subutilizados. Investigar:
+            - O domínio é relevante? → Se não, considerar remoção
+            - O trigger é adequado? → Ajustar triggers no config
+            - O output é útil? → Reformular tasks
+
+        - dimension: "Precisão de detecção de gaps"
+          healthy: "Gaps detectados são confirmados em 2+ sprints"
+          warning: "Alguns gaps detectados eram falsos positivos"
+          critical: "Maioria dos gaps não se confirmou"
+          action_if_critical: |
+            Calibrar heurísticas:
+            - Aumentar threshold de N (Regra N<3 → N<5?)
+            - Adicionar mais veto conditions
+            - Revisar evidence classification
+
+        - dimension: "Atualidade do baseline"
+          healthy: "Atualizado nos últimos 7 dias"
+          warning: "8-14 dias desatualizado"
+          critical: "> 14 dias desatualizado"
+          action_if_critical: "Regenerar baseline automaticamente"
+
+    # ═══════════════════════════════════════════════════════════════
+    # PHASE 2: PLANO DE MELHORIA
+    # ═══════════════════════════════════════════════════════════════
+    phase_2:
+      name: "Gerar Plano de Melhoria"
+      duration: "2-3 minutes"
+      depends_on: phase_1
+
+      steps:
+        - id: "2.1"
+          name: "Listar melhorias identificadas"
+          action: |
+            Para cada dimensão em WARNING ou CRITICAL:
+            1. Descrever o problema com dados
+            2. Propor ação corretiva específica
+            3. Estimar esforço (P/M/G)
+
+        - id: "2.2"
+          name: "Priorizar por impacto"
+          action: |
+            Ranking: impacto na qualidade das análises × facilidade de implementação
+            Max 3 melhorias por ciclo (evitar over-engineering)
+
+        - id: "2.3"
+          name: "Gerar improvement plan"
+          action: |
+            Formato por melhoria:
+            - PROBLEMA: [descrição com dados]
+            - AÇÃO: [o que mudar — arquivo específico]
+            - TIPO: CALIBRAR_HEURÍSTICA | ADICIONAR_TRIGGER | ATUALIZAR_BASELINE | REFINAR_TEMPLATE | NOVO_AGENTE | REMOVER_AGENTE
+            - ESFORÇO: P | M | G
+            - EVIDÊNCIA: [dados que sustentam a mudança]
+
+        - id: "2.4"
+          name: "Auto-aplicar melhorias triviais"
+          action: |
+            Se a melhoria é tipo ATUALIZAR_BASELINE ou CALIBRAR_HEURÍSTICA com esforço P:
+            → Aplicar automaticamente e registrar no changelog
+            Senão:
+            → Reportar ao operador para aprovação
+
+  output:
+    primary: "data/reports/self-improve-{date}.md"
+    sections:
+      - meta_diagnostico (saúde do próprio squad)
+      - recomendações_implementadas_vs_ignoradas
+      - agentes_subutilizados
+      - melhorias_aplicadas_automaticamente
+      - melhorias_pendentes_aprovação
+
+  guardrails:
+    - "NUNCA remover agentes automaticamente — sempre pedir aprovação"
+    - "NUNCA modificar heurísticas de outros squads"
+    - "Max 3 melhorias por ciclo"
+    - "Melhorias destrutivas (remoção) SEMPRE requerem aprovação humana"
+    - "Manter changelog de TODAS as auto-modificações"

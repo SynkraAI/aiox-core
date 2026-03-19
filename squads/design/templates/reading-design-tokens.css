@@ -1,0 +1,26 @@
+/* Reading experience token template (pack-local).
+   Use as a baseline, then convert into your project's token format. */
+
+:root {
+  /* Measure */
+  --reading-max-width: 72ch;
+
+  /* Typography */
+  --reading-font-size: 16px;
+  --reading-line-height: 1.6;
+  --reading-letter-spacing: 0.01em;
+
+  /* Spacing */
+  --reading-paragraph-spacing: 1em;
+}
+
+.reading-prose {
+  max-width: var(--reading-max-width);
+  font-size: var(--reading-font-size);
+  line-height: var(--reading-line-height);
+  letter-spacing: var(--reading-letter-spacing);
+}
+
+.reading-prose p {
+  margin: 0 0 var(--reading-paragraph-spacing);
+}

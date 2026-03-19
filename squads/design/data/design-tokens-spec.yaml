@@ -1,0 +1,418 @@
+# Design Tokens Specification - Single Source of Truth
+# Version: 1.0.0
+# Last Updated: 2026-01-05
+#
+# IMPORTANT: This is the authoritative source for all design tokens.
+# All code must use values from this spec. Deviations are bugs.
+#
+# Usage:
+#   - *validate-tokens: Validates code against this spec
+#   - *contrast-check: Validates color contrast ratios
+#   - Subagents: Must read this file before creating components
+
+metadata:
+  version: "1.0.0"
+  brand: "Lendario"
+  theme: "dark"
+  wcag_target: "AA"  # AA = 4.5:1 normal, 3:1 large | AAA = 7:1 normal, 4.5:1 large
+
+# =============================================================================
+# COLORS
+# =============================================================================
+colors:
+  # Primary Brand Colors
+  primary:
+    gold:
+      value: "#D4AF37"
+      hsl: "45 75% 52%"
+      usage: "Primary actions, highlights, brand accent"
+      contrast_on_dark: "8.2:1"  # Passes AA & AAA
+    gold_dark:
+      value: "#B8962E"
+      hsl: "44 61% 45%"
+      usage: "Hover states, borders, secondary emphasis"
+      contrast_on_dark: "6.1:1"  # Passes AA
+    gold_light:
+      value: "#E4C84A"
+      hsl: "49 75% 59%"
+      usage: "Highlights, focus rings"
+      contrast_on_dark: "9.8:1"  # Passes AAA
+
+  # Background Colors
+  background:
+    base:
+      value: "#0A0A0F"
+      hsl: "240 20% 5%"
+      usage: "Main background"
+    elevated:
+      value: "#111116"
+      hsl: "240 14% 8%"
+      usage: "Cards, panels, elevated surfaces"
+    surface:
+      value: "#1a1a1f"
+      hsl: "240 8% 11%"
+      usage: "Interactive surfaces, inputs"
+    overlay:
+      value: "rgba(0, 0, 0, 0.8)"
+      usage: "Modal overlays, dropdowns"
+
+  # Text Colors
+  text:
+    primary:
+      value: "#FFFFFF"
+      opacity: "100%"
+      usage: "Headings, primary content"
+    secondary:
+      value: "#A1A1AA"
+      hsl: "240 5% 65%"
+      usage: "Body text, descriptions"
+    muted:
+      value: "#71717A"
+      hsl: "240 4% 46%"
+      usage: "Placeholders, disabled text, captions"
+    inverse:
+      value: "#0A0A0F"
+      usage: "Text on light backgrounds (buttons)"
+
+  # Semantic Colors
+  semantic:
+    success:
+      value: "#22C55E"
+      hsl: "142 71% 45%"
+      usage: "Success states, confirmations"
+    warning:
+      value: "#F59E0B"
+      hsl: "38 92% 50%"
+      usage: "Warnings, caution states"
+    error:
+      value: "#EF4444"
+      hsl: "0 84% 60%"
+      usage: "Errors, destructive actions"
+    info:
+      value: "#3B82F6"
+      hsl: "217 91% 60%"
+      usage: "Information, links"
+
+  # Border Colors
+  border:
+    default:
+      value: "rgba(255, 255, 255, 0.1)"
+      usage: "Default borders"
+    subtle:
+      value: "rgba(255, 255, 255, 0.05)"
+      usage: "Subtle separators"
+    emphasis:
+      value: "rgba(212, 175, 55, 0.3)"
+      usage: "Emphasized borders (primary color)"
+
+# =============================================================================
+# TYPOGRAPHY
+# =============================================================================
+typography:
+  # Font Families
+  families:
+    sans:
+      value: "'Inter', sans-serif"
+      usage: "Body text, UI elements"
+    serif:
+      value: "'Source Serif 4', serif"
+      usage: "Long-form content, articles"
+    display:
+      value: "'Rajdhani', sans-serif"
+      usage: "Headings, hero text"
+    mono:
+      value: "'JetBrains Mono', monospace"
+      usage: "Code, technical content"
+
+  # Font Sizes (rem based, 1rem = 16px)
+  sizes:
+    xs:
+      value: "0.75rem"    # 12px
+      line_height: "1rem"  # 16px
+      usage: "Captions, labels"
+    sm:
+      value: "0.875rem"   # 14px
+      line_height: "1.25rem"  # 20px
+      usage: "Secondary text, buttons"
+    base:
+      value: "1rem"       # 16px
+      line_height: "1.5rem"   # 24px
+      usage: "Body text"
+    lg:
+      value: "1.125rem"   # 18px
+      line_height: "1.75rem"  # 28px
+      usage: "Lead paragraphs"
+    xl:
+      value: "1.25rem"    # 20px
+      line_height: "1.75rem"  # 28px
+      usage: "Section headings"
+    2xl:
+      value: "1.5rem"     # 24px
+      line_height: "2rem"     # 32px
+      usage: "Page headings"
+    3xl:
+      value: "1.875rem"   # 30px
+      line_height: "2.25rem"  # 36px
+      usage: "Hero subheadings"
+    4xl:
+      value: "2.25rem"    # 36px
+      line_height: "2.5rem"   # 40px
+      usage: "Hero headings"
+    5xl:
+      value: "3rem"       # 48px
+      line_height: "1"
+      usage: "Display headings"
+
+  # Font Weights
+  weights:
+    normal:
+      value: "400"
+      usage: "Body text"
+    medium:
+      value: "500"
+      usage: "Emphasis, buttons"
+    semibold:
+      value: "600"
+      usage: "Headings, labels"
+    bold:
+      value: "700"
+      usage: "Strong emphasis"
+
+# =============================================================================
+# SPACING
+# =============================================================================
+spacing:
+  # Base unit: 4px (0.25rem)
+  scale:
+    0:
+      value: "0"
+      usage: "No spacing"
+    px:
+      value: "1px"
+      usage: "Hairline borders"
+    0.5:
+      value: "0.125rem"   # 2px
+      usage: "Micro spacing"
+    1:
+      value: "0.25rem"    # 4px
+      usage: "Tight spacing"
+    2:
+      value: "0.5rem"     # 8px
+      usage: "Small gaps"
+    3:
+      value: "0.75rem"    # 12px
+      usage: "Default gap"
+    4:
+      value: "1rem"       # 16px
+      usage: "Standard padding"
+    5:
+      value: "1.25rem"    # 20px
+      usage: "Medium padding"
+    6:
+      value: "1.5rem"     # 24px
+      usage: "Section padding"
+    8:
+      value: "2rem"       # 32px
+      usage: "Large padding"
+    10:
+      value: "2.5rem"     # 40px
+      usage: "XL padding"
+    12:
+      value: "3rem"       # 48px
+      usage: "Section margins"
+    16:
+      value: "4rem"       # 64px
+      usage: "Page sections"
+    20:
+      value: "5rem"       # 80px
+      usage: "Major sections"
+    24:
+      value: "6rem"       # 96px
+      usage: "Hero spacing"
+
+# =============================================================================
+# BORDERS & RADIUS
+# =============================================================================
+borders:
+  width:
+    none:
+      value: "0"
+    default:
+      value: "1px"
+    2:
+      value: "2px"
+      usage: "Emphasis borders"
+
+  radius:
+    none:
+      value: "0"
+    sm:
+      value: "0.25rem"    # 4px
+      usage: "Small elements (badges)"
+    md:
+      value: "0.375rem"   # 6px
+      usage: "Buttons, inputs"
+    lg:
+      value: "0.5rem"     # 8px
+      usage: "Cards"
+    xl:
+      value: "0.75rem"    # 12px
+      usage: "Larger cards"
+    2xl:
+      value: "1rem"       # 16px
+      usage: "Modal corners"
+    full:
+      value: "9999px"
+      usage: "Pills, avatars"
+
+# =============================================================================
+# SHADOWS
+# =============================================================================
+shadows:
+  none:
+    value: "none"
+  sm:
+    value: "0 1px 2px 0 rgba(0, 0, 0, 0.05)"
+    usage: "Subtle elevation"
+  md:
+    value: "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+    usage: "Cards, dropdowns"
+  lg:
+    value: "0 10px 15px -3px rgba(0, 0, 0, 0.1)"
+    usage: "Modals, popovers"
+  xl:
+    value: "0 20px 25px -5px rgba(0, 0, 0, 0.1)"
+    usage: "Floating elements"
+  glow:
+    value: "0 0 20px rgba(212, 175, 55, 0.3)"
+    usage: "Primary element glow"
+
+# =============================================================================
+# MOTION
+# =============================================================================
+motion:
+  duration:
+    instant:
+      value: "0ms"
+      usage: "No animation"
+    fast:
+      value: "100ms"
+      usage: "Micro-interactions"
+    normal:
+      value: "200ms"
+      usage: "Standard transitions"
+    slow:
+      value: "300ms"
+      usage: "Page transitions"
+    slower:
+      value: "500ms"
+      usage: "Complex animations"
+
+  easing:
+    linear:
+      value: "cubic-bezier(0, 0, 1, 1)"
+    ease_in:
+      value: "cubic-bezier(0.4, 0, 1, 1)"
+      usage: "Exit animations"
+    ease_out:
+      value: "cubic-bezier(0, 0, 0.2, 1)"
+      usage: "Enter animations"
+    ease_in_out:
+      value: "cubic-bezier(0.4, 0, 0.2, 1)"
+      usage: "Standard transitions"
+
+# =============================================================================
+# COMPONENT SPECS
+# =============================================================================
+components:
+  button:
+    padding:
+      sm: "0.5rem 1rem"     # py-2 px-4
+      md: "0.625rem 1.25rem" # py-2.5 px-5
+      lg: "0.75rem 1.5rem"   # py-3 px-6
+    border_radius: "0.375rem"  # rounded-md
+    font_size: "0.875rem"      # text-sm
+    font_weight: "500"         # font-medium
+    min_height:
+      sm: "2rem"      # 32px
+      md: "2.5rem"    # 40px
+      lg: "3rem"      # 48px
+    variants:
+      primary:
+        bg: "#D4AF37"
+        text: "#0A0A0F"
+        hover_bg: "#B8962E"
+      secondary:
+        bg: "#1a1a1f"
+        text: "#FFFFFF"
+        border: "rgba(255, 255, 255, 0.1)"
+      outline:
+        bg: "transparent"
+        text: "#D4AF37"
+        border: "rgba(212, 175, 55, 0.5)"
+      ghost:
+        bg: "transparent"
+        text: "#A1A1AA"
+        hover_bg: "rgba(255, 255, 255, 0.05)"
+      destructive:
+        bg: "#EF4444"
+        text: "#FFFFFF"
+        hover_bg: "#DC2626"
+
+  input:
+    height:
+      sm: "2rem"      # 32px
+      md: "2.5rem"    # 40px
+      lg: "3rem"      # 48px
+    padding: "0.5rem 0.75rem"  # py-2 px-3
+    border_radius: "0.375rem"   # rounded-md
+    border: "1px solid rgba(255, 255, 255, 0.1)"
+    bg: "#1a1a1f"
+    focus_ring: "2px solid rgba(212, 175, 55, 0.5)"
+
+  card:
+    padding:
+      sm: "1rem"      # p-4
+      md: "1.5rem"    # p-6
+      lg: "2rem"      # p-8
+    border_radius: "0.75rem"  # rounded-xl
+    bg: "#111116"
+    border: "1px solid rgba(255, 255, 255, 0.1)"
+
+  modal:
+    max_width:
+      sm: "24rem"     # 384px
+      md: "28rem"     # 448px
+      lg: "32rem"     # 512px
+      xl: "36rem"     # 576px
+    padding: "1.5rem"   # p-6
+    border_radius: "1rem"  # rounded-2xl
+    bg: "#111116"
+    overlay_bg: "rgba(0, 0, 0, 0.8)"
+
+# =============================================================================
+# VALIDATION RULES
+# =============================================================================
+validation:
+  # Colors that should NEVER be hardcoded
+  forbidden_hardcoded:
+    - "#D4AF37"  # Use: primary.gold or --primary-color
+    - "#B8962E"  # Use: primary.gold_dark or --primary-dark
+    - "#0A0A0F"  # Use: background.base or --background
+    - "#111116"  # Use: background.elevated or --card
+    - "#1a1a1f"  # Use: background.surface or --surface
+
+  # Allowed patterns for colors
+  allowed_patterns:
+    - "var(--"           # CSS variables
+    - "hsl(var("         # Tailwind CSS vars
+    - "colors."          # Token references
+    - "DS_"              # Design system constants
+    - "studio-"          # Dynamic studio colors
+    - "brand-"           # Brand palette
+
+  # Minimum contrast ratios (WCAG AA)
+  contrast_requirements:
+    normal_text: 4.5
+    large_text: 3.0      # 18px+ or 14px bold
+    ui_components: 3.0   # Non-text elements

@@ -1,0 +1,385 @@
+# Monthly Portfolio Review Workflow
+# Pipeline para revisão mensal do portfolio de afiliados
+# Source: @architect research — Kaushik STDC + Ellis ICE + Scale/Maintain/Pause/Kill
+# Version: 1.0.0
+
+id: wf-monthly-portfolio-review
+name: "Monthly Portfolio Review"
+version: "1.0.0"
+duration: "1-2 days"
+description: |
+  Workflow mensal para revisar performance do portfolio de afiliados.
+  Análise → classificação → decisão Scale/Maintain/Pause/Kill → priorização ICE.
+
+  FILOSOFIA: "Stars 60% budget, Cash Cows 30%, Problem Children 10%, Dogs = kill."
+
+  RESULTADO: Decisões claras por campanha + ICE scoring das próximas ações.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUANDO USAR ESTE WORKFLOW
+# ═══════════════════════════════════════════════════════════════════════════════
+
+best_for:
+  - "Revisão mensal de performance"
+  - "Decisão de alocação de budget"
+  - "Identificar campanhas para matar ou escalar"
+
+decision_matrix_fit:
+  complexity: medium
+  agents_required: 2
+  estimated_duration: "1-2 days"
+  user_involvement: "medium (decision approval)"
+  prerequisites:
+    - "Mínimo 30 dias de dados"
+    - "Dashboard de tracking configurado (execute wf-new-affiliate-site ou similar)"
+    - "Mínimo 2 campanhas/sites ativos"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS ENVOLVIDOS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+clone_combinations:
+  primary:
+    - agent: performance-analyst
+      role: "Análise de dados, benchmarking, diagnóstico"
+      phases: [0, 1]
+
+    - agent: growth-optimizer
+      role: "Decisão SMPK, ICE scoring, priorização"
+      phases: [2, 3]
+
+  synergies:
+    - agents: [performance-analyst, growth-optimizer]
+      pattern: "Analyst provides data, Optimizer makes decisions"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 0: PERFORMANCE ANALYSIS
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-0
+    name: "Performance Analysis"
+    days: "Day 1 (morning)"
+    tier: 0
+    description: |
+      Análise de performance semanal/mensal completa.
+      Framework See-Think-Do-Care aplicado a métricas de afiliados.
+
+      MÉTRICAS CORE:
+      - EPC (Earnings Per Click) = Comissões / Clicks
+      - CR (Conversion Rate) = Conversions / Clicks × 100
+      - RPV (Revenue Per Visitor) = Revenue / Visitors ← NORTH STAR
+      - ROAS = Revenue / Ad Spend
+
+    agent: performance-analyst
+
+    tasks:
+      - task_id: T0.1
+        name: "Run Performance Analysis"
+        task_ref: run-performance-analysis.md
+        required: true
+        description: "Análise completa: traffic, conversions, revenue, trends"
+        output: "performance_analysis.yaml"
+
+    inline_structures:
+      stdc_affiliate_kpis:
+        see:
+          metrics: ["Impressions", "Reach", "New Users", "Pageviews"]
+          benchmark: "MoM growth > 5%"
+
+        think:
+          metrics: ["Pages/Session", "Avg Session Duration", "Bounce Rate", "Email Subscribers"]
+          benchmark: "Pages/Session > 2, Bounce < 60%"
+
+        do:
+          metrics: ["EPC", "CR", "Revenue", "ROAS", "RPV"]
+          benchmark: "EPC > R$0.50 BR / > $0.80 US, CR 1-5%, ROAS > 3x"
+
+        care:
+          metrics: ["Repeat Visitors", "Email Engagement", "Referrals"]
+          benchmark: "Repeat > 20%, Email CTR > 2%"
+
+      benchmarks_2025:
+        epc:
+          good_br: "> R$0.50"
+          good_us: "> $0.80"
+          excellent: "> $2.00"
+        cr: "1-5% (varies by niche)"
+        roas:
+          minimum: "3x"
+          target: "5x+"
+        email_ctr: "2-5%"
+        opt_in_rate: "25-45% (landing page)"
+
+    checkpoint:
+      id: CP_PHASE_0
+      name: "Analysis Complete"
+      criteria:
+        - "Todas as campanhas analisadas"
+        - "KPIs STDC documentados"
+        - "Trends MoM identificados"
+        - "Anomalias flagged"
+      human_review: false
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 1: PORTFOLIO CLASSIFICATION
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-1
+    name: "Portfolio Classification"
+    days: "Day 1 (afternoon)"
+    tier: 1
+    description: |
+      Classificação de cada campanha/site no portfolio.
+      Stars (high growth + high revenue), Cash Cows (stable revenue),
+      Problem Children (high growth + low revenue), Dogs (declining).
+
+    agent: performance-analyst
+
+    tasks:
+      - task_id: T1.1
+        name: "Portfolio Review Classification"
+        task_ref: portfolio-review.md
+        required: true
+        description: "Classificar cada ativo: Star/Cow/Child/Dog"
+        output: "portfolio_classification.yaml"
+
+    inline_structures:
+      portfolio_matrix:
+        stars:
+          criteria: "Revenue growing + traffic growing"
+          budget_allocation: "60%"
+          action: "Scale aggressively"
+
+        cash_cows:
+          criteria: "Revenue stable + traffic stable"
+          budget_allocation: "30%"
+          action: "Maintain, optimize margins"
+
+        problem_children:
+          criteria: "Traffic growing + revenue low"
+          budget_allocation: "10%"
+          action: "Test optimization, set deadline"
+
+        dogs:
+          criteria: "Revenue declining + traffic declining"
+          budget_allocation: "0%"
+          action: "Kill — reallocate budget"
+
+    checkpoint:
+      id: CP_PHASE_1
+      name: "Classification Complete"
+      criteria:
+        - "Todos os ativos classificados"
+        - "Budget allocation proposta"
+        - "Dogs identified for killing"
+      human_review: true
+      message: "Revise classificação do portfolio antes de decisões de scale/kill."
+      veto_conditions:
+        - condition: "> 50% do portfolio classificado como Dog"
+          action: "WARNING — Portfolio em crise, investigar root cause"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 2: SCALE/MAINTAIN/PAUSE/KILL DECISIONS
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-2
+    name: "SMPK Decisions"
+    days: "Day 2 (morning)"
+    tier: 1
+    description: |
+      Decisão Scale/Maintain/Pause/Kill por campanha.
+
+      | Métrica | Scale | Maintain | Pause | Kill |
+      |---------|-------|----------|-------|------|
+      | ROAS    | >5x   | 3-5x     | 1-3x  | <1x  |
+      | EPC     | Rising| Stable   | Declining| Crashed|
+      | ICE     | >8    | 5-7      | 3-5   | <3   |
+
+    agent: growth-optimizer
+
+    tasks:
+      - task_id: T2.1
+        name: "Scale/Maintain/Pause/Kill Matrix"
+        task_ref: scale-maintain-pause-kill.md
+        required: true
+        description: "Decision matrix por campanha com justificativa"
+        output: "smpk_decisions.yaml"
+
+    checkpoint:
+      id: CP_PHASE_2
+      name: "SMPK Decisions Made"
+      criteria:
+        - "Cada campanha tem decisão SMPK"
+        - "Justificativa baseada em dados (não gut feeling)"
+        - "Budget reallocation calculado"
+        - "Timeline para ação definido"
+      human_review: true
+      message: "Confirme decisões de scale/kill — ações são irreversíveis."
+      veto_conditions:
+        - condition: "Decisão de Kill sem mínimo 30 dias de dados"
+          action: "BLOCK — Dados insuficientes para decisão definitiva"
+        - condition: "Scale com ROAS < 3x"
+          action: "WARNING — Margem insuficiente para escalar"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # PHASE 3: ICE PRIORITIZATION
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: PHASE-3
+    name: "ICE Prioritization"
+    days: "Day 2 (afternoon)"
+    tier: 2
+    description: |
+      ICE Scoring das próximas ações de otimização.
+      Impact (1-10) + Confidence (1-10) + Ease (1-10) / 3.
+      Priorizar ICE > 7.0.
+
+      PRINCÍPIO (Ellis): "Execute the highest ICE items first."
+
+    agent: growth-optimizer
+
+    tasks:
+      - task_id: T3.1
+        name: "ICE Prioritization"
+        task_ref: ice-prioritization.md
+        required: true
+        description: "Score ICE para todas as ações identificadas"
+        output: "ice_prioritization.yaml"
+
+    inline_structures:
+      ice_framework:
+        formula: "ICE = (Impact + Confidence + Ease) / 3"
+        dimensions:
+          impact:
+            question: "Se funcionar, quanto impacto terá na North Star (RPV)?"
+            scale: "1 (minimal) → 10 (game-changing)"
+
+          confidence:
+            question: "Quão confiante estou de que vai funcionar?"
+            scale: "1 (gut feeling) → 10 (data-backed evidence)"
+
+          ease:
+            question: "Quão fácil é implementar?"
+            scale: "1 (months + team) → 10 (minutes + solo)"
+
+        decision:
+          execute_now: "ICE >= 7.0"
+          schedule: "ICE 5.0-6.9"
+          backlog: "ICE 3.0-4.9"
+          discard: "ICE < 3.0"
+
+    checkpoint:
+      id: CP_PHASE_3
+      name: "ICE Prioritized"
+      criteria:
+        - "Todas as ações scoradas"
+        - "Top 5 ações para próximo mês definidas"
+        - "Owner e deadline para cada ação"
+        - "Expected impact estimado"
+      human_review: true
+      message: "Revise priorização ICE — estas serão as ações do próximo mês."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+error_handling:
+  on_phase_failure:
+    - log_error: true
+    - notify_user: true
+    - create_remediation_task: true
+    - halt_workflow: false
+
+  on_checkpoint_failure:
+    - log_failure_reason: true
+    - return_to_previous_phase: true
+    - max_retries: 2
+
+  on_veto_triggered:
+    - halt_immediately: true
+    - escalate_to: "affiliates-chief"
+    - document_reason: true
+    - require_human_override: true
+
+  common_failures:
+    - failure: "Dados insuficientes (< 30 dias)"
+      phase: 0
+      resolution: "Esperar mais dados ou usar proxy metrics"
+
+    - failure: "Todas as campanhas classificadas como Dog"
+      phase: 1
+      resolution: "Investigar causa raiz: mercado, produto, ou execução?"
+
+    - failure: "Nenhuma ação com ICE > 7"
+      phase: 3
+      resolution: "Revisar scoring ou considerar pivot estratégico"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SIGNALS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+signals:
+  completion:
+    type: "workflow_complete"
+    payload:
+      workflow_id: "wf-monthly-portfolio-review"
+      status: "completed"
+      outputs:
+        - "performance_analysis.yaml"
+        - "portfolio_classification.yaml"
+        - "smpk_decisions.yaml"
+        - "ice_prioritization.yaml"
+
+  checkpoint:
+    type: "checkpoint_reached"
+    payload:
+      phase_id: "PHASE-{N}"
+      status: "awaiting_review"
+
+  blocked:
+    type: "workflow_blocked"
+    payload:
+      phase_id: "PHASE-{N}"
+      reason: "veto_condition_triggered"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+outputs:
+  phase_0:
+    - "performance_analysis.yaml"
+  phase_1:
+    - "portfolio_classification.yaml"
+  phase_2:
+    - "smpk_decisions.yaml"
+  phase_3:
+    - "ice_prioritization.yaml"
+
+  final_deliverable:
+    name: "Monthly Portfolio Review"
+    location: "outputs/reviews/{YYYY-MM}/"
+    contents:
+      - "README.md — Executive summary"
+      - "performance_analysis.yaml — Dados completos"
+      - "portfolio_classification.yaml — Star/Cow/Child/Dog"
+      - "smpk_decisions.yaml — Scale/Maintain/Pause/Kill"
+      - "ice_prioritization.yaml — Top ações próximo mês"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0.0"
+  created: "2026-02-18"
+  author: "squad-architect"
+  source_frameworks:
+    - "Avinash Kaushik See-Think-Do-Care"
+    - "Sean Ellis ICE Scoring"
+    - "BCG Growth-Share Matrix (adapted)"
+    - "Scale/Maintain/Pause/Kill"
+  priority: 1
+  quality_gate: "SC_WFL_001"
+  recurrence: "Monthly (1st week)"
