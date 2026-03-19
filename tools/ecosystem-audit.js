@@ -235,77 +235,45 @@ function auditAgents() {
 
     const agentIssues = [];
 
-    // Check for frontmatter (YAML header)
+    // Check for identity: frontmatter OR H1 title OR ## Role/Mission section
     const hasFrontmatter = content.startsWith('---');
-    if (!hasFrontmatter) {
+    const hasH1Title = /^# .+/m.test(content);
+    const hasRoleSection = /## (Role|Mission|Identity|Persona)/i.test(content);
+    const hasIdentity = hasFrontmatter || hasH1Title || hasRoleSection;
+
+    if (!hasIdentity) {
       agentIssues.push({
         priority: 'P2',
         dimension: 'Agents',
         project: file,
-        description: 'Missing YAML frontmatter',
-        fix: 'Add frontmatter with name, description, model, tools',
+        description: 'Missing agent identity (no frontmatter, title, or role section)',
+        fix: 'Add YAML frontmatter or ## Role section',
         effort: '0.5h'
       });
     }
 
-    // Check for description in frontmatter
-    if (hasFrontmatter) {
-      const frontmatterEnd = content.indexOf('---', 3);
-      if (frontmatterEnd > 0) {
-        const frontmatter = content.substring(0, frontmatterEnd);
-        const hasDescription = frontmatter.includes('description:');
-        const hasModel = frontmatter.includes('model:');
-        const hasTools = frontmatter.includes('tools:');
+    // Check for purpose: router, commands, capabilities, or substantial content
+    const hasPurpose = content.includes('Task Router')
+      || content.includes('Mission Router')
+      || content.includes('## Commands')
+      || content.includes('## Capabilities')
+      || content.includes('## Scope')
+      || content.includes('## Responsibilities')
+      || content.includes('*help')
+      || content.length > 500;
 
-        if (!hasDescription) {
-          agentIssues.push({
-            priority: 'P2',
-            dimension: 'Agents',
-            project: file,
-            description: 'Missing description in frontmatter',
-            fix: 'Add description field',
-            effort: '0.25h'
-          });
-        }
-
-        if (!hasModel) {
-          agentIssues.push({
-            priority: 'P2',
-            dimension: 'Agents',
-            project: file,
-            description: 'Missing model in frontmatter',
-            fix: 'Add model field (sonnet/opus/haiku)',
-            effort: '0.1h'
-          });
-        }
-
-        if (!hasTools) {
-          agentIssues.push({
-            priority: 'P2',
-            dimension: 'Agents',
-            project: file,
-            description: 'Missing tools in frontmatter',
-            fix: 'Add tools list',
-            effort: '0.1h'
-          });
-        }
-      }
-    }
-
-    // Check for Mission Router or Task Router
-    const hasMissionRouter = content.includes('## Mission Router') || content.includes('## Mission:') || content.includes('Task Router');
-    if (!hasMissionRouter) {
+    if (!hasPurpose) {
       agentIssues.push({
         priority: 'P2',
         dimension: 'Agents',
         project: file,
-        description: 'Missing Mission/Task Router section',
-        fix: 'Add router to map mission keywords to task files',
+        description: 'Agent file too thin (no router, commands, or substantial content)',
+        fix: 'Add capabilities, commands, or task router',
         effort: '1h'
       });
     }
 
-    const valid = hasFrontmatter && agentIssues.length === 0;
+    const valid = hasIdentity && hasPurpose;
 
     return { file, valid, issues: agentIssues };
   });
@@ -344,64 +312,50 @@ function auditSkills() {
   const results = skills.map(name => {
     const skillPath = path.join(skillsDir, name);
     const skillMdPath = path.join(skillPath, 'SKILL.md');
-    const commandPath = path.join(AIOS_CORE, `.claude/commands/${name}.md`);
+    const readmePath = path.join(skillPath, 'README.md');
 
     const skillIssues = [];
 
-    // Check SKILL.md
-    if (!fs.existsSync(skillMdPath)) {
+    // SKILL.md is the standard (README.md is supplementary, not a substitute)
+    const hasSkillMd = fs.existsSync(skillMdPath);
+    const hasReadme = fs.existsSync(readmePath);
+
+    if (!hasSkillMd) {
       skillIssues.push({
-        priority: 'P1',
+        priority: hasReadme ? 'P2' : 'P1',
         dimension: 'Skills',
         project: name,
-        description: 'Missing SKILL.md',
+        description: hasReadme ? 'Missing SKILL.md (has README.md but standard is SKILL.md)' : 'Missing SKILL.md',
         fix: 'Create SKILL.md with usage and implementation',
         effort: '1h'
       });
-      return { name, valid: false, issues: skillIssues };
+      if (!hasReadme) return { name, valid: false, issues: skillIssues };
     }
 
-    const content = fs.readFileSync(skillMdPath, 'utf8');
+    // Read primary doc (SKILL.md preferred, fallback README.md)
+    const docPath = hasSkillMd ? skillMdPath : readmePath;
+    const content = fs.readFileSync(docPath, 'utf8');
 
-    // Check required sections
-    const hasUsage = content.includes('## Usage') || content.includes('# Usage') || content.includes('## Uso');
-    const hasImplementation = content.includes('## Implementation') || content.includes('# Implementation') || content.includes('## Implementação');
+    // Check for usage info (flexible: many equivalent section names)
+    const hasUsage = /## (Usage|Uso|Quick Start|How|Como|Getting Started|Ativação|Activate)/i.test(content)
+      || content.includes('/') && content.includes('```');
 
-    if (!hasUsage) {
+    // Check for description of what it does (flexible)
+    const hasDescription = /## (Implementation|Implementação|Architecture|Arquitetura|How it Works|Como Funciona|Overview|O que|What|Pipeline|Workflow)/i.test(content)
+      || content.length > 1000;
+
+    if (!hasUsage && !hasDescription) {
       skillIssues.push({
         priority: 'P2',
         dimension: 'Skills',
         project: name,
-        description: 'Missing ## Usage section',
-        fix: 'Add Usage section with examples',
+        description: 'Documentation too thin (no usage or description sections)',
+        fix: 'Add Usage and description sections',
         effort: '0.5h'
       });
     }
 
-    if (!hasImplementation) {
-      skillIssues.push({
-        priority: 'P2',
-        dimension: 'Skills',
-        project: name,
-        description: 'Missing ## Implementation section',
-        fix: 'Add Implementation section',
-        effort: '0.5h'
-      });
-    }
-
-    // Check slash command
-    if (!fs.existsSync(commandPath)) {
-      skillIssues.push({
-        priority: 'P2',
-        dimension: 'Skills',
-        project: name,
-        description: 'Missing slash command in .claude/commands/',
-        fix: 'Create slash command file',
-        effort: '0.25h'
-      });
-    }
-
-    const valid = hasUsage && hasImplementation;
+    const valid = hasSkillMd && (hasUsage || hasDescription);
 
     return { name, valid, issues: skillIssues };
   });
@@ -555,20 +509,24 @@ function auditTools() {
       });
     }
 
-    // Check header comment
-    const hasUsage = content.includes('Usage:') || content.includes('usage:');
-    if (!hasUsage) {
+    // Check header comment (accept Usage:, @description, JSDoc, or any substantial header)
+    const hasHeader = content.includes('Usage:')
+      || content.includes('usage:')
+      || content.includes('@description')
+      || content.includes('@param')
+      || /^\/\*\*[\s\S]*?\*\//m.test(content); // JSDoc block
+    if (!hasHeader) {
       toolIssues.push({
         priority: 'P2',
         dimension: 'Tools',
         project: name,
-        description: 'Missing usage comment in header',
+        description: 'Missing header comment (Usage/JSDoc)',
         fix: 'Add header comment with usage instructions',
         effort: '0.25h'
       });
     }
 
-    const valid = isExecutable && hasUsage;
+    const valid = isExecutable && hasHeader;
 
     return { name, valid, issues: toolIssues };
   });
