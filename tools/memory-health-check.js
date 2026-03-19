@@ -106,6 +106,31 @@ function checkSquadsConfig(memoryDir) {
   return { exists: true };
 }
 
+function checkHybridRules() {
+  // Check HYBRID projects have memory-protocol.md in .claude/rules/
+  if (!fs.existsSync(CODE_PROJECTS)) return { total: 0, withRule: 0, missing: [] };
+
+  let total = 0;
+  let withRule = 0;
+  const missing = [];
+
+  for (const name of fs.readdirSync(CODE_PROJECTS)) {
+    const full = path.join(CODE_PROJECTS, name);
+    if (!fs.statSync(full).isDirectory()) continue;
+    if (name.startsWith('.')) continue;
+    total++;
+
+    const rulePath = path.join(full, '.claude', 'rules', 'memory-protocol.md');
+    if (fs.existsSync(rulePath)) {
+      withRule++;
+    } else {
+      missing.push(name);
+    }
+  }
+
+  return { total, withRule, missing };
+}
+
 function checkAgentSpawnFiles() {
   const results = [];
   const agentFiles = [
@@ -207,6 +232,7 @@ function main() {
   const agents = checkAgentSpawnFiles();
   const rules = checkRules();
   const hooks = checkHooks();
+  const hybridRules = checkHybridRules();
   const tools = checkTools();
   const newProject = checkNewProject();
   const checkpoint = checkCheckpoint();
@@ -318,6 +344,17 @@ function main() {
   console.log(`     Registrado em settings.json?          ${hooks.hookRegistered ? 'PASS' : 'FAIL'}`);
   console.log(`Q15. /checkpoint atualiza memory?           ${checkpoint.hasMemoryStep ? 'PASS' : 'FAIL'}`);
 
+  // ── Q19: HYBRID Rules ─────────────────────────────────────
+
+  console.log('\n## HYBRID RULES (squads funcionam em projetos externos)\n');
+
+  const q19 = hybridRules.total === 0 || hybridRules.withRule === hybridRules.total;
+  console.log(`Q19. HYBRID têm memory-protocol.md?  ${q19 ? 'PASS' : 'FAIL'} (${hybridRules.withRule}/${hybridRules.total})`);
+  if (hybridRules.missing.length > 0) {
+    console.log(`\n   Sem memory-protocol.md:`);
+    hybridRules.missing.forEach(m => console.log(`     - ${m}`));
+  }
+
   // ── Q16-Q18: Manutenção ───────────────────────────────────
 
   console.log('\n## MANUTENÇÃO\n');
@@ -341,7 +378,7 @@ function main() {
   // ── SUMMARY ───────────────────────────────────────────────
 
   const autoChecks = [
-    q1, q4, q5, q9, q12,
+    q1, q4, q5, q9, q12, q19,
     hooks.hookExists, hooks.hookRegistered,
     checkpoint.hasMemoryStep,
     tools.auditTool, tools.bootstrapTool, tools.cleanupTool,

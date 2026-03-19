@@ -306,7 +306,9 @@ node ~/aios-core/tools/copy-project-config.js ~/CODE/Projects/meta-ads app "Meta
    - Se `--merge-types` for usado, faz deep merge dos settings.json de TODOS os tipos especificados
    - Arrays são combinados removendo duplicatas (ex: allow de app + allow de squad)
 3. Substitui todos os placeholders no `CLAUDE.md`
-4. Valida que todos os 4 arquivos obrigatórios foram criados
+4. **Copia `memory-protocol.md`** de `~/aios-core/.claude/rules/memory-protocol.md` para `{destination}/.claude/rules/`
+   - Isso garante que squads e agentes invocados no projeto saibam ler/gravar memória
+5. Valida que todos os arquivos obrigatórios foram criados
 
 **Saída esperada (modo normal):**
 ```
