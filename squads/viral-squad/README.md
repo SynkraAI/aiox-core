@@ -533,3 +533,7 @@ Squad pronto. Agentes prontos. Sistema de debate ativo.
 _Criado por: AIOS Elite Super Squad System_
 _Versão: 1.0_
 _Data: Janeiro 2026_
+
+---
+
+**tasks/**: Vazio por design. Este squad opera via workflows YAML (`workflows/`) e checklists (`checklists/`). Os 7 grupos de agentes são orquestrados pelo squad.yaml, não por task files individuais. Se no futuro o squad adotar tasks individuais, elas serão definidas ali.

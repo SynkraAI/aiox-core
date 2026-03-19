@@ -1,12 +1,16 @@
 # Audit Report — Project Configurations
 
-**Data:** 2026-03-18
-**Health Score:** 16/16 OK (100%)
+**Data:** 2026-03-19
+**Health Score:** 18/18 OK (100%)
 **Missing Config:** 0
 **Outdated/Incomplete:** 0
 **Issues by Severity:** CRITICAL: 0 | HIGH: 0 | MEDIUM: 0 | LOW: 0
 
-## OK (16 projetos)
+## Warnings (Parse Phase)
+
+- Linha ignorada (sem link INDEX válido): **aios-core (framework)**
+
+## OK (18 projetos)
 
 | # | Projeto | Modo | Config Path |
 |---|---------|------|-------------|
@@ -26,4 +30,6 @@
 | 13 | advisory-board | CENTRALIZED | ~/aios-core/docs/projects/advisor-board/.claude |
 | 14 | zeroaudio | HYBRID | ~/CODE/Projects/zeroaudio/.claude |
 | 15 | god-mode | CENTRALIZED | ~/aios-core/docs/projects/god-mode/.claude |
+| 19 | whatsapp-prospector | HYBRID | ~/CODE/Projects/whatsapp-prospector/.claude |
+| 20 | luiz-fosc-palestras-negocio | HYBRID | ~/CODE/Projects/luiz-fosc-palestras-negocio/.claude |
 

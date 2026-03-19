@@ -37,3 +37,7 @@ Media production squad for automated video generation using Remotion. Creates AI
 ## Notes
 
 This squad is a media production environment, not a traditional agent squad. Requires Node.js and Remotion dependencies installed.
+
+**agents/**: Vazio por design. A orquestração acontece via componentes React e scripts de rendering, não via agentes markdown. Se no futuro o squad evoluir para incluir agentes (ex: diretor criativo, editor de cortes), eles serão definidos ali.
+
+**tasks/**: Vazio por design. As "tasks" são scripts de rendering e composições React, não arquivos markdown. Se no futuro o squad adotar tasks estruturadas (ex: render-batch, generate-template), elas serão definidas ali.

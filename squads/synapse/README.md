@@ -32,3 +32,5 @@ CRUD command router for managing SYNAPSE domains, rules, and star-commands. Prov
 ## Notes
 
 This squad automates the management of Claude Code's custom rules and commands, ensuring consistent structure and reducing manual YAML/MD editing.
+
+**agents/**: Vazio por design. Este squad usa modelo de agente único: o `manager.md` na raiz funciona como router de comandos CRUD. Não há múltiplos agentes — o manager detecta a intenção e despacha para a task correspondente.
