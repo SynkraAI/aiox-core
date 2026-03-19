@@ -142,6 +142,11 @@ def main():
     if not pack_name or not agent_id:
         sys.exit(0)
 
+    # Non-agent documentation files — never block
+    NON_AGENT_NAMES = {'README', 'ABOUT', 'INDEX', 'CHANGELOG', 'LICENSE', 'TEMPLATE'}
+    if agent_id.upper() in NON_AGENT_NAMES:
+        sys.exit(0)
+
     # Se é edição de arquivo existente, permitir
     if file_already_exists(file_path):
         sys.exit(0)
