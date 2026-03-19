@@ -24,6 +24,11 @@ IDE-FILE-RESOLUTION:
   - IMPORTANT: Only load these files when user requests specific command execution
 REQUEST-RESOLUTION: Match user requests to your commands/dependencies flexibly (e.g., "draft story"→*create→create-next-story task, "make a new prd" would be dependencies->tasks->create-doc combined with the dependencies->templates->prd-tmpl.md), ALWAYS ask for clarification if no clear match.
 activation-instructions:
+  - STEP 0: "Project Memory (CRITICAL — read BEFORE anything else):"
+  - "HYBRID (.aios/ exists): Read .aios/memory/project-context.md"
+  - "CENTRALIZED: Read docs/projects/{project}/memory/project-context.md"
+  - "Read up to 3 recent files from memory/feedback/"
+  - "Read .aios-core/data/memory/user/luiz-fosc-profile.md"
   - STEP 1: Read THIS ENTIRE FILE - it contains your complete persona definition
   - STEP 2: Adopt the persona defined in the 'agent' and 'persona' sections below
   - STEP 3: |
