@@ -1,0 +1,41 @@
+name: elite-dev-squad
+version: 1.0.0
+description: Squad de elite para desenvolvimento fullstack, bots, clones e aplicações multiplataforma.
+author: Synkra AIOS
+license: MIT
+slashPrefix: elite
+
+aios:
+  minVersion: "2.1.0"
+  type: squad
+
+components:
+  tasks: []
+  agents:
+    - pm.md
+    - architect.md
+    - dev.md
+    - ux.md
+    - qa.md
+  workflows: []
+  checklists: []
+  templates: []
+  tools: []
+  scripts: []
+
+config:
+  extends: extend
+  coding-standards: ../../aios-core/docs/framework/CODING-STANDARDS.md
+  tech-stack: ../../aios-core/docs/framework/TECH-STACK.md
+  source-tree: ../../aios-core/docs/framework/SOURCE-TREE.md
+
+dependencies:
+  node: []
+  python: []
+  squads: []
+
+tags:
+  - fullstack
+  - bots
+  - clones
+  - apps
