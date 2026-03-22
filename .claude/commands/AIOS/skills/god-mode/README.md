@@ -1,1 +1,1 @@
-../../../../../.aios/skills/god-mode/SKILL.md
+../../../../skills/god-mode/SKILL.md

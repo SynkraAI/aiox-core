@@ -51,4 +51,4 @@ Na dúvida entre acentuar ou não: **ACENTUE**. Melhor sobre-acentuar que sub-ac
 ## Referência Completa
 
 Para lista exaustiva de 100+ palavras e regras detalhadas de crase/cedilha/acentuação:
-`.aios/skills/pt-br-accentuation/SKILL.md`
+`skills/pt-br-accentuation/SKILL.md`

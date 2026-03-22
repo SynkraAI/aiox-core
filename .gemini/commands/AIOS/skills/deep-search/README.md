@@ -1,1 +1,1 @@
-../../../../../.aios/skills/deep-search/SKILL.md
+../../../../skills/deep-search/SKILL.md

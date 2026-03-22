@@ -1,1 +1,1 @@
-../../../../../.aios/skills/decision-tree-generator/SKILL.md
+../../../../skills/decision-tree-generator/SKILL.md

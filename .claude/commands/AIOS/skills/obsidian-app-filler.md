@@ -1,1 +1,1 @@
-../../../../.aios/skills/obsidian-app-filler/README.md
+../../../../skills/obsidian-app-filler/README.md

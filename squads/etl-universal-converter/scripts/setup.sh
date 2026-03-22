@@ -85,7 +85,7 @@ else
 fi
 
 # Check book-to-markdown
-if [ -f "${SQUAD_DIR}/../../.aios/skills/book-to-markdown/convert.py" ]; then
+if [ -f "${SQUAD_DIR}/../skills/book-to-markdown/convert.py" ]; then
     echo -e "  ${GREEN}✓${NC} book-to-markdown skill found"
 else
     echo -e "  ${YELLOW}⚠${NC} book-to-markdown skill not found. PDF/EPUB delegation unavailable."

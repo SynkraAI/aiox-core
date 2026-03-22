@@ -1,63 +1,72 @@
 ---
 name: blotato
-description: >
-  Social media publishing and scheduling platform.
-  Publish and schedule posts across Instagram, LinkedIn, Twitter/X,
-  TikTok, YouTube, and more. Upload media and monitor post status.
-description_pt-BR: >
-  Plataforma de publicação e agendamento em redes sociais.
-  Publique e agende posts no Instagram, LinkedIn, Twitter/X,
-  TikTok, YouTube e mais. Faça upload de mídia e monitore o status dos posts.
-description_es: >
-  Plataforma de publicación y programación en redes sociales.
-  Publica y programa posts en Instagram, LinkedIn, Twitter/X,
-  TikTok, YouTube y más. Sube contenido multimedia y monitorea el estado de los posts.
-type: mcp
-version: "1.0.0"
+description: >-
+  Publicação e agendamento multi-plataforma em redes sociais.
+  Publica e agenda posts no Instagram, LinkedIn, Twitter/X, TikTok,
+  YouTube e mais via MCP HTTP. Upload de mídia e monitoramento de status.
+risk: safe
+source: opensquad
+paths:
+  - "skills/blotato/"
+lazy_load: true
+context_budget: 400
+env:
+  - BLOTATO_API_KEY
 mcp:
   server_name: blotato
   transport: http
   url: "https://mcp.blotato.com/mcp"
   headers:
     blotato-api-key: BLOTATO_API_KEY
-env:
-  - BLOTATO_API_KEY
-categories: [social-media, automation, publishing, scheduling]
 ---
 
 # Blotato Publisher
 
-## When to use
+Publicação e agendamento multi-plataforma. É como ter um assistente que posta em todas as redes de uma vez.
 
-Use Blotato when you need to publish or schedule social media posts across multiple platforms from a single interface. Blotato supports Instagram, LinkedIn, Twitter/X, TikTok, YouTube, and more. It handles media uploads, post scheduling, and status monitoring.
+## When to Use This Skill
 
-## Instructions
+- Publicar posts em múltiplas redes simultaneamente (IG, LinkedIn, X, TikTok, YouTube)
+- Agendar posts para horários específicos
+- Upload de mídia (imagens/vídeos) para posts
+- Monitorar status de publicação
 
-You have access to Blotato for social media publishing.
+## Do NOT Use This Skill When
 
-### Key workflow
+- Precisa apenas publicar carrosséis no Instagram (use instagram-publisher, mais controle)
+- Precisa interagir com posts existentes (comentar, curtir)
+- Precisa analytics detalhados (use as APIs nativas)
 
-1. Use `blotato_list_accounts` to get account IDs and platforms
-2. If post includes images or videos, upload them with `blotato_upload_media` first and use the returned media IDs in `blotato_create_post`
-3. Use `blotato_create_post` to publish or schedule
-4. Use `blotato_get_post_status` to confirm success
+## Prerequisites
 
-### Best practices
+- Conta Blotato ativa (blotato.com)
+- API key configurada: Blotato Settings > API section
+- MCP server configurado no projeto
 
-- Always call `blotato_list_accounts` first to get valid account IDs
-- For scheduled posts, use ISO 8601 format for datetime
-- After posting, poll `blotato_get_post_status` until status is "published" or "scheduled"
-- If status is "failed", report the error details to the user
+## Setup
 
-### Requirements
+1. Criar conta em blotato.com
+2. Conectar redes sociais no painel
+3. Ir em Settings > API > copiar API key
+4. Configurar env var `BLOTATO_API_KEY`
 
-- Blotato account required (blotato.com)
-- API key must be configured (Blotato Settings > API section)
+## Workflow
 
-## Available operations
+1. `blotato_list_accounts` — obter IDs das contas e plataformas conectadas
+2. `blotato_upload_media` — upload de imagens/vídeos (se necessário)
+3. `blotato_create_post` — publicar ou agendar o post
+4. `blotato_get_post_status` — confirmar publicação
 
-- **List Accounts** -- Retrieve connected social media accounts and their platform types
-- **Upload Media** -- Upload images and videos for use in posts
-- **Create Post** -- Publish or schedule a post to one or more platforms
-- **Get Post Status** -- Monitor publishing status (published, scheduled, failed)
-- **Multi-platform Publishing** -- Post the same content across Instagram, LinkedIn, Twitter/X, TikTok, YouTube simultaneously
+## Best Practices
+
+- Sempre chamar `blotato_list_accounts` primeiro para IDs válidos
+- Posts agendados: usar ISO 8601 para datetime (`2026-03-15T10:00:00-03:00`)
+- Após postar, poll `blotato_get_post_status` até "published" ou "scheduled"
+- Se status "failed", reportar detalhes do erro ao usuário
+
+## Available Operations
+
+- **List Accounts** — Contas conectadas e tipos de plataforma
+- **Upload Media** — Upload de imagens e vídeos
+- **Create Post** — Publicar ou agendar post em uma ou mais plataformas
+- **Get Post Status** — Monitorar status (published, scheduled, failed)

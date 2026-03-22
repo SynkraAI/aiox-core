@@ -1,1 +1,1 @@
-../../../../.aios/skills/sync-projects/SKILL.md
+../../../../skills/sync-projects/SKILL.md

@@ -127,7 +127,7 @@ Orquestra o pipeline completo: desde a classificação da fonte até a construç
 Após o sculptor gerar o masterpiece, aplicar skill `pt-br-accentuation`:
 - Corrigir acentos, cedilhas, tils ausentes (comum em output Whisper)
 - Zero tolerância para Top 20 erros críticos (não, você, são, ação, etc.)
-- Skill: `.aios/skills/pt-br-accentuation/SKILL.md`
+- Skill: `skills/pt-br-accentuation/SKILL.md`
 - Skip se conteúdo não for pt-BR
 
 **Checkpoint:**

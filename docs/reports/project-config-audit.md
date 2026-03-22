@@ -1,20 +1,20 @@
 # Audit Report — Project Configurations
 
-**Data:** 2026-03-19
-**Health Score:** 18/18 OK (100%)
+**Data:** 2026-03-21
+**Health Score:** 17/17 OK (100%)
 **Missing Config:** 0
 **Outdated/Incomplete:** 0
 **Issues by Severity:** CRITICAL: 0 | HIGH: 0 | MEDIUM: 0 | LOW: 0
 
 ## Warnings (Parse Phase)
 
+- Linha ignorada (sem link INDEX válido): ~~ensinio~~
 - Linha ignorada (sem link INDEX válido): **aios-core (framework)**
 
-## OK (18 projetos)
+## OK (17 projetos)
 
 | # | Projeto | Modo | Config Path |
 |---|---------|------|-------------|
-| 1 | ensinio | HYBRID | ~/CODE/Projects/whatsapp-prospector/.claude |
 | 2 | gui-avila-mind | CENTRALIZED | ~/aios-core/docs/projects/gui-avila-mind/.claude |
 | 3 | storytelling-masters-fosc | CENTRALIZED | ~/aios-core/docs/projects/storytelling-masters-fosc/.claude |
 | 4 | high-ticket-sales | CENTRALIZED | ~/aios-core/docs/projects/high-ticket-sales/.claude |

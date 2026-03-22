@@ -1,1 +1,0 @@
-../../../../../.aios/skills/dashboard-generator/SKILL.md

@@ -1,10 +1,10 @@
 # AIOX Catalog
 
-> Gerado automaticamente em 19/03/2026
+> Gerado automaticamente em 21/03/2026
 
 ---
 
-## Squads (61)
+## Squads (63)
 
 | Squad | Descrição | Ativação |
 |-------|-----------|----------|
@@ -37,6 +37,7 @@
 | italo-marsili | Squad: Italo Marsili | `/italo-marsili` |
 | jose-amorim | Squad José Amorim — O Tradutor Nexialista | `/jose-amorim` |
 | kaizen | >- | `/kaizen` |
+| kaizen-v2 | >- | `/kaizen-v2` |
 | knowledge-base-builder | Knowledge Base Builder Squad | `/knowledge-base-builder` |
 | leandro-ladeira | Squad: Leandro Ladeira | `/leandro-ladeira` |
 | legacy-rule-extractor | Legacy Rule Extractor | `/legacy-rule-extractor` |
@@ -52,6 +53,7 @@
 | negotiation | Negotiation Squad | `/negotiation` |
 | palestras-master | Palestras Master Federator | `/palestras-master` |
 | paulo-vieira | Squad Paulo Vieira | `/paulo-vieira` |
+| playwright-architect | Playwright Architect Squad | `/playwright-architect` |
 | presenca-digital | 📱 Presença Digital Squad | `/presenca-digital` |
 | relationship-therapy-squad | Squad de 11 terapeutas especializados em relacionamentos. Cada agente é um clone fiel de um especialista real - com Voice DNA, Thinking DNA e frameworks terapêuticos completos. Inclui orquestrador com | `/relationship-therapy-squad` |
 | renner-silva | Renner Silva — Squad Deployável | `/renner-silva` |
@@ -72,7 +74,7 @@
 
 ---
 
-## Skills (47)
+## Skills (48)
 
 | Skill | Descrição | Ativação |
 |-------|-----------|----------|
@@ -83,6 +85,7 @@
 | avalonia-viewmodels-zafiro | Avalonia ViewModels with Zafiro | `/AIOS:skills:avalonia-viewmodels-zafiro` |
 | blotato | Blotato Publisher | `/AIOS:skills:blotato` |
 | book-to-markdown | Book to Markdown | `/AIOS:skills:book-to-markdown` |
+| bulletproof-test | Bulletproof Test | `/AIOS:skills:bulletproof-test` |
 | canva | Canva Connect | `/AIOS:skills:canva` |
 | celf-context | CELF — Context Engineering Layered Framework | `/AIOS:skills:celf-context` |
 | cloud-penetration-testing | Cloud Penetration Testing | `/AIOS:skills:cloud-penetration-testing` |
@@ -117,7 +120,7 @@
 | smart-browser-playwright | Smart Browser Playwright | `/AIOS:skills:smart-browser-playwright` |
 | superpowers | Superpowers | `/AIOS:skills:superpowers` |
 | synapse | SYNAPSE Context Engine | `/AIOS:skills:synapse` |
-| sync-projects | Sync Projects — Bridge Doc Updater | `/AIOS:skills:sync-projects` |
+| sync-projects | Sync Projects — Project Pulse | `/AIOS:skills:sync-projects` |
 | system-prompt-architect | System Prompt Architect | `/AIOS:skills:system-prompt-architect` |
 | tech-search | Tech Research | `/AIOS:skills:tech-search` |
 | tokenizacao | Tokenização - Frontend Quality Audit 2025 | `/AIOS:skills:tokenizacao` |
@@ -197,8 +200,8 @@
 
 | Categoria | Total | Coverage |
 |-----------|-------|----------|
-| Squads | 61 | 100% |
-| Skills | 47 | 100% |
+| Squads | 63 | 100% |
+| Skills | 48 | 100% |
 | Tools | 15 | 100% |
 | Agents | 12 | 100% |
 

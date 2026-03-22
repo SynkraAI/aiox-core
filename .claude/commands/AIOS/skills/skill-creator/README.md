@@ -1,1 +1,0 @@
-../../../../../.aios/skills/skill-creator/SKILL.md

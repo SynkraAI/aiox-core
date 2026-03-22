@@ -1,1 +1,1 @@
-../../../../.aios/skills/angular-state-management/README.md
+../../../../skills/angular-state-management/README.md

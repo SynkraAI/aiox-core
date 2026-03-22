@@ -216,16 +216,16 @@ routing:
 
     book-to-markdown:
       trigger_extensions: [".pdf", ".epub", ".mobi", ".azw", ".docx", ".rtf", ".odt"]
-      command: "python3 .aios/skills/book-to-markdown/convert.py {path}"
+      command: "python3 skills/book-to-markdown/convert.py {path}"
       output_expected: "{filename}.md"
       contract:
         timeout: 300          # 5 min max for book conversion
         retry: 1
         dependency_check: |
           Before delegating, verify:
-          1. .aios/skills/book-to-markdown/convert.py exists
+          1. skills/book-to-markdown/convert.py exists
           2. python3 is available in PATH
-          If missing → SKIP with: "book-to-markdown skill not installed. See .aios/skills/book-to-markdown/README.md"
+          If missing → SKIP with: "book-to-markdown skill not installed. See skills/book-to-markdown/README.md"
         fallback: |
           On failure or timeout:
           1. Log: "{path} — book-to-markdown failed: {error}"
@@ -727,7 +727,7 @@ output_examples:
         Failed: 1 (report.pdf — book-to-markdown timeout after 300s)
 
         Failures requiring manual attention:
-          - report.pdf: book-to-markdown timed out. Try: python3 .aios/skills/book-to-markdown/convert.py ~/mixed/report.pdf
+          - report.pdf: book-to-markdown timed out. Try: python3 skills/book-to-markdown/convert.py ~/mixed/report.pdf
 
   - input: "*convert ~/scan/blurry.jpg (low OCR confidence)"
     output: |

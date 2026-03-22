@@ -56,7 +56,7 @@ python3 tools/aios-transcriber/aios_transcriber.py youtube --playlist "https://y
 
 ### Deepgram
 
-Configure in `.aios/skills/groq-transcriber/.env` or `.aios/skills/deepgram-transcriber/.env`:
+Configure in `skills/groq-transcriber/.env` or `skills/deepgram-transcriber/.env`:
 ```
 DEEPGRAM_API_KEY=your_key_here
 ```

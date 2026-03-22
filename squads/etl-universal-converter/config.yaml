@@ -230,9 +230,9 @@ dependencies:
       purpose: "Process video and audio files"
 
     - name: book-to-markdown
-      path: .aios/skills/book-to-markdown/
+      path: skills/book-to-markdown/
       purpose: "Convert PDF, EPUB, MOBI, DOCX to markdown"
-      cli: "python3 .aios/skills/book-to-markdown/convert.py"
+      cli: "python3 skills/book-to-markdown/convert.py"
 
     # Purpose-driven delegation targets (optional — graceful degradation if missing)
     - name: squad-creator-pro

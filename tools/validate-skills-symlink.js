@@ -35,7 +35,7 @@ console.log('✅ Diretório .aios/ existe');
 const skillsSymlink = path.join(aiosDir, 'skills');
 if (!fs.existsSync(skillsSymlink)) {
   console.error('❌ Symlink .aios/skills não encontrado');
-  console.error('   Execute: cd .aios && ln -s ~/aios-core/.aios/skills skills\n');
+  console.error('   Execute: cd .aios && ln -s ~/aios-core/skills skills\n');
   process.exit(1);
 }
 console.log('✅ Symlink .aios/skills existe');
@@ -44,7 +44,7 @@ console.log('✅ Symlink .aios/skills existe');
 const stats = fs.lstatSync(skillsSymlink);
 if (!stats.isSymbolicLink()) {
   console.error('❌ .aios/skills não é um symlink');
-  console.error('   Remova e crie novamente: ln -s ~/aios-core/.aios/skills .aios/skills\n');
+  console.error('   Remova e crie novamente: ln -s ~/aios-core/skills .aios/skills\n');
   exitCode = 1;
 } else {
   const linkTarget = fs.readlinkSync(skillsSymlink);
@@ -63,7 +63,7 @@ if (!stats.isSymbolicLink()) {
 // Check 4: target directory exists and is readable
 if (!fs.existsSync(skillsSymlink)) {
   console.error('❌ Destino do symlink não existe ou não é acessível');
-  console.error('   Verifique se ~/aios-core/.aios/skills existe\n');
+  console.error('   Verifique se ~/aios-core/skills existe\n');
   process.exit(1);
 }
 console.log('✅ Destino do symlink é acessível');

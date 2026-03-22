@@ -4,7 +4,7 @@ status:
     - .aios-core/data/catalog.md
     - .aios/project-status.yaml
     - .aios/session.json
-    - .aios/skills/sync-projects/SKILL.md
+    - skills/sync-projects/SKILL.md
     - .claude/commands/catalog.md
   modifiedFilesTotalCount: 48
   recentCommits:

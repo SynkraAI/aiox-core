@@ -149,7 +149,7 @@ Eles serão incluídos na seção "Arquivos Chave" do INDEX.md.
 4. **Criar symlinks de recursos globais:**
    ```bash
    # Skills globais
-   cd {project-path}/.aios && ln -s ~/aios-core/.aios/skills skills
+   cd {project-path}/.aios && ln -s ~/aios-core/skills skills
 
    # Commands globais (slash commands e squads)
    cd {project-path}/.claude && ln -s ~/aios-core/.claude/commands commands
@@ -177,7 +177,7 @@ Este projeto usa governança híbrida AIOX. INDEX, stories e sessions vivem loca
 - **INDEX.md:** `.aios/INDEX.md` (governança local)
 - **Stories ativas:** `.aios/stories/active/`
 - **Sessions:** `.aios/sessions/`
-- **Skills:** `.aios/skills` (symlink → `~/aios-core/.aios/skills` — acesso a todas as skills do framework)
+- **Skills:** `.aios/skills` (symlink → `~/aios-core/skills` — acesso a todas as skills do framework)
 - **ACTIVE.md:** `~/aios-core/docs/projects/ACTIVE.md` (registry central)
 - **Framework:** `~/aios-core/`
 
@@ -497,7 +497,7 @@ docs/projects/{nome}/
 {project-path}/
 ├── .aios/
 │   ├── INDEX.md
-│   ├── skills -> ~/aios-core/.aios/skills  # Symlink para skills globais
+│   ├── skills -> ~/aios-core/skills  # Symlink para skills globais
 │   ├── memory/
 │   │   ├── project-context.md   # Contexto persistente do projeto
 │   │   ├── agents-used.md       # Histórico de agents/squads

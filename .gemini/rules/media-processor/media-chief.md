@@ -162,7 +162,7 @@ pipeline:
       delegation: "/transcript-sculptor:process"
       post_process:
         - skill: "pt-br-accentuation"
-          path: ".aios/skills/pt-br-accentuation/SKILL.md"
+          path: "skills/pt-br-accentuation/SKILL.md"
           purpose: "Fix accents, cedillas, tildes in masterpiece (Whisper output often lacks them)"
           mandatory: true
           skip_if: "content language != pt-BR"

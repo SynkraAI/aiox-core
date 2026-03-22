@@ -1,1 +1,1 @@
-../../../../../.aios/skills/tokenizacao/README.md
+../../../../skills/tokenizacao/README.md

@@ -23,15 +23,15 @@
 - Includes `git_restrictions`, `tier_structure`, `minds` sections (ausentes no original)
 
 ## Arquivos (10 total)
-- `.aios/skills/god-mode/SKILL.md` — Core (13 seções, ~540 linhas)
-- `.aios/skills/god-mode/references/workflow-selector.md` — Complexity scoring
-- `.aios/skills/god-mode/references/agent-quick-ref.md` — Agent matrix
-- `.aios/skills/god-mode/references/agent-creation.md` — Schema + 18-point checklist
-- `.aios/skills/god-mode/references/task-creation.md` — Schema V1.0 + 12-point checklist
-- `.aios/skills/god-mode/references/workflow-creation.md` — YAML schema + 14-point checklist
-- `.aios/skills/god-mode/references/squad-creation.md` — Estrutura + config.yaml + 15-point checklist
-- `.aios/skills/god-mode/references/component-templates.md` — Checklists, templates, data, rules
-- `.aios/skills/god-mode/references/framework-map.md` — Component locator, handoff, rules
+- `skills/god-mode/SKILL.md` — Core (13 seções, ~540 linhas)
+- `skills/god-mode/references/workflow-selector.md` — Complexity scoring
+- `skills/god-mode/references/agent-quick-ref.md` — Agent matrix
+- `skills/god-mode/references/agent-creation.md` — Schema + 18-point checklist
+- `skills/god-mode/references/task-creation.md` — Schema V1.0 + 12-point checklist
+- `skills/god-mode/references/workflow-creation.md` — YAML schema + 14-point checklist
+- `skills/god-mode/references/squad-creation.md` — Estrutura + config.yaml + 15-point checklist
+- `skills/god-mode/references/component-templates.md` — Checklists, templates, data, rules
+- `skills/god-mode/references/framework-map.md` — Component locator, handoff, rules
 - `.claude/commands/god-mode.md` — Slash command
 
 ## Próximo Passo

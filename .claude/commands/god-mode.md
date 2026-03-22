@@ -7,7 +7,7 @@ Ative o God Mode v3.1 carregando a skill completa.
 
 ## Ativação (executar nesta ordem)
 
-1. **Leia** `.aios/skills/god-mode/SKILL.md` (core — 14 seções, ~350 linhas)
+1. **Leia** `skills/god-mode/SKILL.md` (core — 14 seções, ~350 linhas)
 2. **Internalize** as regras de:
    - Intent Classification (OPERATE / CREATE / CONFIGURE)
    - Agent Router (keyword → agent mapping)

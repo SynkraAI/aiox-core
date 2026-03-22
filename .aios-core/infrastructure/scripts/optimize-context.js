@@ -28,7 +28,7 @@ const LAZY_LOAD_THRESHOLD = 200;
 // Frontmatter template
 const FRONTMATTER_TEMPLATE = `---
 paths:
-  - ".aios/skills/{SKILL_NAME}/"
+  - "skills/{SKILL_NAME}/"
 lazy_load: true
 context_budget: {ESTIMATED_TOKENS}
 ---

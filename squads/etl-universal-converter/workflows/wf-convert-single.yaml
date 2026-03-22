@@ -30,7 +30,7 @@ workflow:
         on_fail: "WARN: media-processor not installed. Video/audio delegation unavailable."
         required: false
       - name: "book-to-markdown skill"
-        check: "file_exists: .aios/skills/book-to-markdown/convert.py"
+        check: "file_exists: skills/book-to-markdown/convert.py"
         on_fail: "WARN: book-to-markdown not installed. PDF/EPUB delegation unavailable."
         required: false
     behavior: |

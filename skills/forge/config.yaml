@@ -1,0 +1,45 @@
+# Forge Configuration
+# Default values for pipeline execution
+
+version: "1.0.0"
+
+# Retry limits
+retry:
+  max_per_story: 3          # Max retries for @dev before escalation
+  max_veto_fixes: 2         # Max veto fix attempts before sending to @qa
+  max_qa_loops: 5           # Max QA-Dev iterations (matches AIOS default)
+
+# Checkpoint intervals
+checkpoints:
+  stories_interval: 3       # Show checkpoint every N stories in Build Loop
+  always_checkpoint_phases:  # Phases that ALWAYS pause for user approval
+    - 0   # Discovery (confirm scope)
+    - 5   # Deploy (confirm push)
+
+# Agent dispatch
+agents:
+  default_mode: yolo         # Execution mode for agent dispatch (yolo/interactive)
+  dev_model: opus            # Model for @dev (heavy lifting)
+  qa_model: sonnet           # Model for @qa (review)
+  sm_model: sonnet           # Model for @sm (story creation)
+  po_model: sonnet           # Model for @po (validation)
+  devops_model: sonnet       # Model for @devops (deploy)
+
+# State management
+state:
+  runs_dir: ".aios/forge-runs"
+  state_file: "state.json"
+
+# Quality gates (veto conditions)
+quality:
+  run_lint: true
+  run_typecheck: true
+  run_tests: true
+  run_build: false           # Only in Phase 4 (Integration)
+
+# Ecosystem scanner (Sprint 2)
+# ecosystem:
+#   minds_index: "squads/mind-cloning/minds/INDEX.md"
+#   skills_dir: "skills/"
+#   squads_dir: "squads/"
+#   max_context_items: 5     # Max minds/skills injected per agent

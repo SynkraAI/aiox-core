@@ -1,1 +1,1 @@
-../../../../.aios/skills/smart-browser-playwright/SKILL.md
+../../../../skills/smart-browser-playwright/SKILL.md

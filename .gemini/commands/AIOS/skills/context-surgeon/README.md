@@ -1,1 +1,1 @@
-../../../../../.aios/skills/context-surgeon/SKILL.md
+../../../../skills/context-surgeon/SKILL.md

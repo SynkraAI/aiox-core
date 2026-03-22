@@ -47,7 +47,7 @@ Implementar skill `/ecosystem-audit` para análise completa do ecossistema AIOS 
 
 ### 3. Skill Definition
 
-**Arquivo:** `.aios/skills/ecosystem-audit/SKILL.md`
+**Arquivo:** `skills/ecosystem-audit/SKILL.md`
 
 Documentação completa:
 - Uso (`/ecosystem-audit`)
@@ -160,7 +160,7 @@ node tools/ecosystem-audit.js
 ```
 tools/ecosystem-audit.js            # Audit engine
 tools/fix-ecosystem-issues.js       # Auto-fix script
-.aios/skills/ecosystem-audit/       # Skill definition
+skills/ecosystem-audit/       # Skill definition
   └── SKILL.md
 .claude/commands/ecosystem-audit.md # Slash command
 docs/reports/ecosystem-audit-2026-03-18.md
@@ -287,7 +287,7 @@ Não aceitar PR sem documentação:
 
 - **Relatório completo:** `docs/reports/ecosystem-audit-2026-03-18.md`
 - **Executive summary:** `docs/reports/ecosystem-audit-executive-summary.md`
-- **Skill definition:** `.aios/skills/ecosystem-audit/SKILL.md`
+- **Skill definition:** `skills/ecosystem-audit/SKILL.md`
 - **Commit:** 720768c06
 
 ---

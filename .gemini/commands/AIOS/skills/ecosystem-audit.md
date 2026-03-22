@@ -1,1 +1,1 @@
-../../../../.aios/skills/ecosystem-audit/SKILL.md
+../../../../skills/ecosystem-audit/SKILL.md

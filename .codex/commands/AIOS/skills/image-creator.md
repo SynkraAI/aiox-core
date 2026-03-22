@@ -1,1 +1,1 @@
-../../../../.aios/skills/image-creator/SKILL.md
+../../../../skills/image-creator/SKILL.md

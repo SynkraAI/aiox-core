@@ -1,1 +1,1 @@
-../../../../.aios/skills/angular/README.md
+../../../../skills/angular/README.md

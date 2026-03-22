@@ -153,11 +153,11 @@ dependencies:
 
   skills:
     - name: groq-transcriber
-      path: .aios/skills/groq-transcriber/
+      path: skills/groq-transcriber/
       purpose: "Batch transcription via Groq Whisper (free, rate-limited)"
 
     - name: deepgram-transcriber
-      path: .aios/skills/deepgram-transcriber/
+      path: skills/deepgram-transcriber/
       purpose: "Batch transcription via Deepgram Nova-3 (paid, fast, parallel)"
 
   system:

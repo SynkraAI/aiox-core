@@ -1,1 +1,1 @@
-../../../../../.aios/skills/md-to-landing-page/SKILL.md
+../../../../skills/md-to-landing-page/SKILL.md

@@ -161,7 +161,7 @@ A tools/validate-active.js          (NOVO - 157 linhas)
 
 ### 🟡 Médio
 1. **validate-active.js não está integrado como skill**
-   - Arquivo existe, mas não tem `.aios/skills/validate-active/SKILL.md`
+   - Arquivo existe, mas não tem `skills/validate-active/SKILL.md`
    - Não aparece no autocomplete de `/`
    - Solução: criar skill wrapper
 

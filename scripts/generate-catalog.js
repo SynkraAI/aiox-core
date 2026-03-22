@@ -446,7 +446,7 @@ function syncCommands(squads) {
 }
 
 /**
- * Sync skill slash commands — symlinks from .claude/commands/AIOS/skills/ to .aios/skills/
+ * Sync skill slash commands — symlinks from .claude/commands/AIOS/skills/ to skills/
  * Also syncs to .gemini/ and .codex/
  */
 function syncSkillCommands(skills) {
@@ -464,17 +464,18 @@ function syncSkillCommands(skills) {
     return null;
   }
 
-  // Get subdirectories of a skill (only dirs with .md files)
+  // Get subdirectories of a skill (only dirs that actually contain .md files)
   function getSubdirs(skillName) {
     const skillPath = path.join(SKILLS_DIR, skillName);
     try {
       return fs.readdirSync(skillPath)
         .filter(item => {
           const fullPath = path.join(skillPath, item);
-          return fs.statSync(fullPath).isDirectory() &&
-                 !item.startsWith('.') &&
-                 !item.startsWith('__') &&
-                 item !== 'node_modules';
+          if (!fs.statSync(fullPath).isDirectory()) return false;
+          if (item.startsWith('.') || item.startsWith('__') || item === 'node_modules') return false;
+          // Only count as subdir if it actually contains .md files
+          const hasMdFiles = fs.readdirSync(fullPath).some(f => f.endsWith('.md'));
+          return hasMdFiles;
         });
     } catch (e) {
       return [];
@@ -501,6 +502,28 @@ function syncSkillCommands(skills) {
       fs.mkdirSync(skillsCmdDir, { recursive: true });
     }
 
+    // Clean stale entries: remove symlinks/dirs that no longer match a skill
+    const skillNames = new Set(skills.map(s => s.name));
+    try {
+      const existing = fs.readdirSync(skillsCmdDir);
+      existing.forEach(entry => {
+        const entryPath = path.join(skillsCmdDir, entry);
+        const baseName = entry.replace(/\.md$/, '');
+        // Skip if it matches a current skill
+        if (skillNames.has(baseName)) return;
+        // Remove stale entry (symlink, file, or directory)
+        try {
+          const stat = fs.lstatSync(entryPath);
+          if (stat.isDirectory()) {
+            fs.rmSync(entryPath, { recursive: true, force: true });
+          } else {
+            fs.unlinkSync(entryPath);
+          }
+          log(`🧹 ${model}: Removed stale entry: ${entry}`, 'yellow');
+        } catch (e) { /* ignore */ }
+      });
+    } catch (e) { /* dir doesn't exist yet, fine */ }
+
     skills.forEach(skill => {
       const mainDoc = getMainDoc(skill.name);
       if (!mainDoc) {
@@ -510,6 +533,22 @@ function syncSkillCommands(skills) {
 
       const subdirs = getSubdirs(skill.name);
       const isComplex = subdirs.length > 0;
+
+      // Clean conflicting entry type (dir exists but should be symlink, or vice-versa)
+      const simpleSymlink = path.join(skillsCmdDir, `${skill.name}.md`);
+      const complexDir = path.join(skillsCmdDir, skill.name);
+      if (isComplex && fs.existsSync(simpleSymlink)) {
+        fs.unlinkSync(simpleSymlink);
+        log(`🔄 ${model}: ${skill.name} changed simple→complex, cleaned old symlink`, 'cyan');
+      } else if (!isComplex && fs.existsSync(complexDir)) {
+        try {
+          const stat = fs.lstatSync(complexDir);
+          if (stat.isDirectory()) {
+            fs.rmSync(complexDir, { recursive: true, force: true });
+            log(`🔄 ${model}: ${skill.name} changed complex→simple, cleaned old dir`, 'cyan');
+          }
+        } catch (e) { /* ignore */ }
+      }
 
       if (isComplex) {
         // Complex skill: create folder with README symlink + subdir symlinks
@@ -521,7 +560,7 @@ function syncSkillCommands(skills) {
         // Main doc symlink
         const cmdReadme = path.join(cmdDir, 'README.md');
         if (!fs.existsSync(cmdReadme)) {
-          // ../../../../../.aios/skills/{name}/README.md
+          // ../../../../skills/{name}/README.md
           const relTarget = path.join('..', '..', '..', '..', '..', '.aios', 'skills', skill.name, mainDoc);
           fs.symlinkSync(relTarget, cmdReadme);
           modelCreated++;
@@ -540,7 +579,7 @@ function syncSkillCommands(skills) {
           mdFiles.forEach(mdFile => {
             const cmdFile = path.join(cmdSubdir, mdFile);
             if (!fs.existsSync(cmdFile)) {
-              // ../../../../../../.aios/skills/{name}/{subdir}/{file}.md
+              // ../../../../../skills/{name}/{subdir}/{file}.md
               const relTarget = path.join('..', '..', '..', '..', '..', '..', '.aios', 'skills', skill.name, subdir, mdFile);
               fs.symlinkSync(relTarget, cmdFile);
               modelCreated++;
@@ -551,7 +590,7 @@ function syncSkillCommands(skills) {
         // Simple skill: single symlink {name}.md
         const cmdFile = path.join(skillsCmdDir, `${skill.name}.md`);
         if (!fs.existsSync(cmdFile)) {
-          // ../../../../.aios/skills/{name}/README.md
+          // ../../../skills/{name}/README.md
           const relTarget = path.join('..', '..', '..', '..', '.aios', 'skills', skill.name, mainDoc);
           fs.symlinkSync(relTarget, cmdFile);
           modelCreated++;
@@ -574,6 +613,140 @@ function syncSkillCommands(skills) {
 }
 
 /**
+ * Sync skills to global user commands (~/.claude/commands/AIOS/skills/)
+ * This makes all skills available in EVERY project, not just aios-core.
+ */
+function syncGlobalSkillCommands(skills) {
+  log('🌐 Syncing global skill commands...', 'cyan');
+
+  const homeDir = require('os').homedir();
+  const globalSkillsDir = path.join(homeDir, '.claude', 'commands', 'AIOS', 'skills');
+  let created = 0;
+  let updated = 0;
+  let removed = 0;
+
+  // Ensure directory exists
+  if (!fs.existsSync(globalSkillsDir)) {
+    fs.mkdirSync(globalSkillsDir, { recursive: true });
+  }
+
+  // Clean stale entries
+  const skillNames = new Set(skills.map(s => s.name));
+  try {
+    const existing = fs.readdirSync(globalSkillsDir);
+    existing.forEach(entry => {
+      const baseName = entry.replace(/\.md$/, '');
+      if (skillNames.has(baseName)) return;
+      const entryPath = path.join(globalSkillsDir, entry);
+      try {
+        const stat = fs.lstatSync(entryPath);
+        if (stat.isDirectory()) {
+          fs.rmSync(entryPath, { recursive: true, force: true });
+        } else {
+          fs.unlinkSync(entryPath);
+        }
+        removed++;
+      } catch (e) { /* ignore */ }
+    });
+  } catch (e) { /* fine */ }
+
+  // Determine main doc file for a skill
+  function getMainDoc(skillName) {
+    const readmePath = path.join(SKILLS_DIR, skillName, 'README.md');
+    const skillMdPath = path.join(SKILLS_DIR, skillName, 'SKILL.md');
+    if (fs.existsSync(readmePath)) return 'README.md';
+    if (fs.existsSync(skillMdPath)) return 'SKILL.md';
+    return null;
+  }
+
+  // Get subdirectories with .md files
+  function getSubdirs(skillName) {
+    const skillPath = path.join(SKILLS_DIR, skillName);
+    try {
+      return fs.readdirSync(skillPath)
+        .filter(item => {
+          const fullPath = path.join(skillPath, item);
+          if (!fs.statSync(fullPath).isDirectory()) return false;
+          if (item.startsWith('.') || item === 'node_modules') return false;
+          return fs.readdirSync(fullPath).some(f => f.endsWith('.md'));
+        });
+    } catch (e) {
+      return [];
+    }
+  }
+
+  skills.forEach(skill => {
+    const mainDoc = getMainDoc(skill.name);
+    if (!mainDoc) return;
+
+    const subdirs = getSubdirs(skill.name);
+    const isComplex = subdirs.length > 0;
+    const absSkillDir = path.join(SKILLS_DIR, skill.name);
+
+    // Clean conflicting types
+    const simpleSymlink = path.join(globalSkillsDir, `${skill.name}.md`);
+    const complexDir = path.join(globalSkillsDir, skill.name);
+    if (isComplex && fs.existsSync(simpleSymlink)) {
+      fs.unlinkSync(simpleSymlink);
+    } else if (!isComplex && fs.existsSync(complexDir)) {
+      try {
+        if (fs.lstatSync(complexDir).isDirectory()) {
+          fs.rmSync(complexDir, { recursive: true, force: true });
+        }
+      } catch (e) { /* ignore */ }
+    }
+
+    if (isComplex) {
+      // Complex: directory with symlinks
+      if (!fs.existsSync(complexDir)) {
+        fs.mkdirSync(complexDir, { recursive: true });
+      }
+
+      // Main doc symlink (absolute path for global)
+      const cmdReadme = path.join(complexDir, 'README.md');
+      const absTarget = path.join(absSkillDir, mainDoc);
+      if (!fs.existsSync(cmdReadme)) {
+        fs.symlinkSync(absTarget, cmdReadme);
+        created++;
+      }
+
+      // Subdir symlinks
+      subdirs.forEach(subdir => {
+        const srcSubdir = path.join(absSkillDir, subdir);
+        const mdFiles = fs.readdirSync(srcSubdir).filter(f => f.endsWith('.md'));
+        if (mdFiles.length === 0) return;
+
+        const cmdSubdir = path.join(complexDir, subdir);
+        if (!fs.existsSync(cmdSubdir)) {
+          fs.mkdirSync(cmdSubdir, { recursive: true });
+        }
+
+        mdFiles.forEach(mdFile => {
+          const cmdFile = path.join(cmdSubdir, mdFile);
+          if (!fs.existsSync(cmdFile)) {
+            fs.symlinkSync(path.join(srcSubdir, mdFile), cmdFile);
+            created++;
+          }
+        });
+      });
+    } else {
+      // Simple: single symlink (absolute path for global)
+      if (!fs.existsSync(simpleSymlink)) {
+        fs.symlinkSync(path.join(absSkillDir, mainDoc), simpleSymlink);
+        created++;
+      }
+    }
+  });
+
+  if (removed > 0) log(`🧹 Removed ${removed} stale global command(s)`, 'yellow');
+  if (created > 0) {
+    log(`✓ Global: Created ${created} skill command(s)`, 'green');
+  } else {
+    log('✓ Global: All skill commands in sync', 'green');
+  }
+}
+
+/**
  * Main execution
  */
 function main() {
@@ -587,9 +760,12 @@ function main() {
     const tools = extractTools();
     const agents = extractAgents();
 
-    // Sync slash commands
+    // Sync slash commands (project-level)
     syncCommands(squads);
     syncSkillCommands(skills);
+
+    // Sync global commands (user-level — available in ALL projects)
+    syncGlobalSkillCommands(skills);
 
     // Generate markdown
     log('\n📝 Generating markdown...', 'cyan');

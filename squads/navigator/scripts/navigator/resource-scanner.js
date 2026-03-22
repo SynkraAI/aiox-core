@@ -111,7 +111,7 @@ function scanTools() {
 }
 
 /**
- * Scan .aios/skills/ directory for all available skills
+ * Scan skills/ directory for all available skills
  */
 function scanSkills() {
   const skillsDir = path.join(PROJECT_ROOT, '.aios/skills');

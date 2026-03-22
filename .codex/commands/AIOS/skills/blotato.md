@@ -1,1 +1,1 @@
-../../../../.aios/skills/blotato/SKILL.md
+../../../../skills/blotato/SKILL.md

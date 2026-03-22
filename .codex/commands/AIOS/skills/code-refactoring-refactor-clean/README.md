@@ -1,1 +1,1 @@
-../../../../../.aios/skills/code-refactoring-refactor-clean/SKILL.md
+../../../../skills/code-refactoring-refactor-clean/SKILL.md

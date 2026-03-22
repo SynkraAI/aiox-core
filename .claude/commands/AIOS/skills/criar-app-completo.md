@@ -1,1 +1,0 @@
-../../../../.aios/skills/criar-app-completo/README.md

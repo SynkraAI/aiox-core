@@ -1,1 +1,1 @@
-../../../../.aios/skills/canva/SKILL.md
+../../../../skills/canva/SKILL.md

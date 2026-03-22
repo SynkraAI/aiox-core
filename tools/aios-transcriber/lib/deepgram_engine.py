@@ -34,8 +34,8 @@ def load_api_key():
     """Load Deepgram API key from .env files or environment.
 
     Priority:
-    1. .aios/skills/deepgram-transcriber/.env
-    2. .aios/skills/groq-transcriber/.env (shared file)
+    1. skills/deepgram-transcriber/.env
+    2. skills/groq-transcriber/.env (shared file)
     3. Environment variable DEEPGRAM_API_KEY
     """
     env_paths = [
@@ -67,7 +67,7 @@ class DeepgramEngine:
         if not self.api_key:
             raise ValueError(
                 'No Deepgram API key found.\n'
-                '  Configure in: .aios/skills/deepgram-transcriber/.env\n'
+                '  Configure in: skills/deepgram-transcriber/.env\n'
                 '  Format: DEEPGRAM_API_KEY=your_key_here\n'
                 '  Or set DEEPGRAM_API_KEY environment variable.'
             )

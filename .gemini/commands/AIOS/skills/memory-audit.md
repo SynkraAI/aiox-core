@@ -1,1 +1,1 @@
-../../../../.aios/skills/memory-audit/SKILL.md
+../../../../skills/memory-audit/SKILL.md

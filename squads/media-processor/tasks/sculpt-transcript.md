@@ -132,7 +132,7 @@ Este passo aplica a skill pt-br-accentuation como pós-processamento obrigatóri
 
 **Protocolo:**
 1. Ler `{output_dir}/masterpiece.md`
-2. Carregar skill `pt-br-accentuation` (`.aios/skills/pt-br-accentuation/SKILL.md`)
+2. Carregar skill `pt-br-accentuation` (`skills/pt-br-accentuation/SKILL.md`)
 3. Aplicar o Protocolo de Auto-Verificação (10 passos):
    - Scan de tils (ã, õ) — terminações -ão, -ões
    - Scan de cedilhas (ç) — terminações -ção

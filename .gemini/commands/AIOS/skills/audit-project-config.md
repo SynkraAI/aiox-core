@@ -1,1 +1,1 @@
-../../../../.aios/skills/audit-project-config/SKILL.md
+../../../../skills/audit-project-config/SKILL.md

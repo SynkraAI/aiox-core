@@ -1,1 +1,1 @@
-../../../../../.aios/skills/superpowers/SKILL.md
+../../../../skills/superpowers/SKILL.md

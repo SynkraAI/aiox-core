@@ -37,7 +37,7 @@
 ### 2. ✅ Skills Criadas (2 skills)
 
 #### `/audit-project-config`
-- **Path:** `.aios/skills/audit-project-config/SKILL.md`
+- **Path:** `skills/audit-project-config/SKILL.md`
 - **Slash Command:** `/audit-project-config` ou `/audit-project-config --fix`
 - **Função:**
   - Wrapper interativo dos scripts de audit
@@ -46,14 +46,14 @@
 - **Status:** ✅ Skill criada, comando registrado
 
 #### `/ecosystem-audit`
-- **Path:** `.aios/skills/ecosystem-audit/SKILL.md`
+- **Path:** `skills/ecosystem-audit/SKILL.md`
 - **Slash Command:** `/ecosystem-audit` ou `/ecosystem-audit --scope=X`
 - **Função:**
   - Auditoria completa em 6 dimensões:
     1. Projects (configs .claude/)
     2. Squads (README, agents, tasks, workflows)
     3. Agents (definições em .aios-core/)
-    4. Skills (estrutura em .aios/skills/)
+    4. Skills (estrutura em skills/)
     5. Minds (clones em squads/mind-cloning/)
     6. Tools (scripts em tools/)
   - Gera score 0-10 para cada dimensão
@@ -117,8 +117,8 @@ Total Projetos: 17
 ### Novos Arquivos (8)
 1. `tools/audit-project-configs.js` — Script de audit
 2. `tools/fix-project-configs.js` — Script de auto-fix
-3. `.aios/skills/audit-project-config/SKILL.md` — Skill de audit
-4. `.aios/skills/ecosystem-audit/SKILL.md` — Skill de ecosystem audit
+3. `skills/audit-project-config/SKILL.md` — Skill de audit
+4. `skills/ecosystem-audit/SKILL.md` — Skill de ecosystem audit
 5. `.claude/commands/audit-project-config.md` — Slash command
 6. `.claude/commands/ecosystem-audit.md` — Slash command
 7. `.claude/hooks/pre-commit-audit.cjs` — Pre-commit hook
@@ -192,8 +192,8 @@ Total Projetos: 17
 
 - **Audit Script:** `tools/audit-project-configs.js`
 - **Fix Script:** `tools/fix-project-configs.js`
-- **Skill Audit:** `.aios/skills/audit-project-config/SKILL.md`
-- **Skill Ecosystem:** `.aios/skills/ecosystem-audit/SKILL.md`
+- **Skill Audit:** `skills/audit-project-config/SKILL.md`
+- **Skill Ecosystem:** `skills/ecosystem-audit/SKILL.md`
 - **Relatório:** `docs/reports/project-config-audit.md`
 
 ---

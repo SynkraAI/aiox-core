@@ -1,60 +1,61 @@
 ---
 name: canva
-description: >
-  Create, search, autofill, and export designs from Canva.
-  Enables agents to generate visual content, fill templates
-  with brand assets, and export in various formats.
-description_pt-BR: >
-  Crie, busque, preencha e exporte designs do Canva.
-  Permite que agentes gerem conteúdo visual, preencham templates
-  com assets da marca e exportem em diversos formatos.
-description_es: >
-  Crea, busca, completa y exporta diseños de Canva.
-  Permite que los agentes generen contenido visual, completen plantillas
-  con recursos de marca y exporten en diversos formatos.
-type: mcp
-version: "1.0.0"
+description: >-
+  Crie, busque, preencha templates e exporte designs do Canva via MCP.
+  OAuth oficial, suporta apresentações, posts sociais, logos e mais.
+  Autofill de templates com assets da marca.
+risk: safe
+source: opensquad
+paths:
+  - "skills/canva/"
+lazy_load: true
+context_budget: 400
 mcp:
   server_name: canva
   transport: http
   url: "https://mcp.canva.com/mcp"
-categories: [design, ui, assets, automation]
 ---
 
 # Canva Connect
 
-## When to use
+Integração oficial com Canva via MCP. É como ter acesso ao Canva direto do terminal.
 
-Use Canva when you need to create, search, or export visual designs. This skill connects to the user's Canva account via OAuth and enables agents to generate presentations, social media posts, logos, and other visual content. It also supports autofilling templates with brand assets and exporting designs in various formats.
+## When to Use This Skill
 
-## Instructions
+- Criar designs visuais (apresentações, posts sociais, logos)
+- Preencher templates do Canva com conteúdo gerado por agentes
+- Buscar designs existentes na conta do usuário
+- Exportar designs como PNG, PDF, JPG
 
-You have access to Canva through the Canva Connect MCP server.
+## Do NOT Use This Skill When
 
-### Key capabilities
+- Precisa de controle pixel-perfect (use image-creator com HTML)
+- Design precisa ser versionado em código (use HTML/CSS)
+- Usuário não tem conta Canva
 
-- Create new designs (presentations, social posts, logos, etc.)
-- Autofill templates with content (text, images, brand elements)
-- Search existing designs in the user's Canva account
-- Export designs as PDF or image files
+## Prerequisites
 
-### Best practices
+- Conta Canva (free ou paid)
+- OAuth autorizado no primeiro uso (popup no browser)
+- Autofill de templates requer plano pago
 
-- Use templates when possible -- faster and more on-brand
-- When autofilling, match content to template placeholder names
-- Export in the format most useful for the pipeline (PNG for social, PDF for documents)
-- Respect the user's Canva plan limitations (some features require paid plans)
+## Workflow
 
-### Requirements
+1. Buscar template adequado ou criar design do zero
+2. Preencher com conteúdo (texto, imagens, elementos de marca)
+3. Exportar no formato necessário (PNG para social, PDF para docs)
 
-- User needs a Canva account (free or paid)
-- OAuth authorization is required on first use (browser popup)
-- Autofill templates require a Canva paid plan
+## Best Practices
 
-## Available operations
+- Usar templates quando possível (mais rápido e on-brand)
+- Ao preencher, combinar conteúdo com nomes dos placeholders do template
+- Exportar no formato mais útil para o pipeline
+- Respeitar limitações do plano (autofill requer paid)
 
-- **Create Design** -- Generate new designs from scratch or templates
-- **Search Designs** -- Find existing designs in the user's Canva account
-- **Autofill Template** -- Fill template placeholders with text, images, and brand elements
-- **Export Design** -- Export designs as PDF, PNG, JPG, or other formats
-- **Browse Templates** -- Search Canva's template library for the right starting point
+## Available Operations
+
+- **Create Design** — Novo design do zero ou a partir de template
+- **Search Designs** — Buscar designs existentes na conta
+- **Autofill Template** — Preencher placeholders com texto, imagens e elementos
+- **Export Design** — Exportar como PDF, PNG, JPG
+- **Browse Templates** — Buscar templates na biblioteca do Canva

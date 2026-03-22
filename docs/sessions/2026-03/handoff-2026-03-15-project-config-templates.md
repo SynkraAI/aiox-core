@@ -39,7 +39,7 @@ Implementei sistema completo de templates `.claude/` para todos os projetos novo
 10. `tools/templates/project-configs/research/.claude/settings.json`
 11. `tools/templates/project-configs/README.md`
 12. `tools/copy-project-config.js` (executável)
-13. `.aios/skills/audit-project-config/SKILL.md`
+13. `skills/audit-project-config/SKILL.md`
 14. `tools/templates/EPIC-TEMPLATE.md`
 15. `tools/templates/STORY-TEMPLATE.md`
 
@@ -155,7 +155,7 @@ Todos os templates têm:
 ## 📚 Documentação
 
 - **Templates:** `tools/templates/project-configs/README.md`
-- **Skill:** `.aios/skills/audit-project-config/SKILL.md`
+- **Skill:** `skills/audit-project-config/SKILL.md`
 - **Guidelines:** `.aios-core/development/epics/GUIDELINES.md` (v1.1)
 - **Integration:** `.claude/commands/new-project.md` (Passo 2.8)
 

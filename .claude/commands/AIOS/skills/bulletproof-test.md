@@ -1,0 +1,1 @@
+../../../../skills/bulletproof-test/SKILL.md

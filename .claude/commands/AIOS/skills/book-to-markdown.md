@@ -1,1 +1,1 @@
-../../../../.aios/skills/book-to-markdown/SKILL.md
+../../../../skills/book-to-markdown/SKILL.md

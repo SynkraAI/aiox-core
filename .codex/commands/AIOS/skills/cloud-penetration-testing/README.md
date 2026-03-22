@@ -1,1 +1,1 @@
-../../../../../.aios/skills/cloud-penetration-testing/SKILL.md
+../../../../skills/cloud-penetration-testing/SKILL.md

@@ -200,7 +200,7 @@ See `config.yaml` for complete configuration options.
 
 ## Related Resources
 
-- **Based on:** `tech-search` skill (`.aios/skills/tech-search/`)
+- **Based on:** `tech-search` skill (`skills/tech-search/`)
 - **Similar squads:** N/A (first file-focused research squad)
 
 ## Version

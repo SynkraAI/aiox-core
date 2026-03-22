@@ -1,1 +1,1 @@
-../../../../.aios/skills/groq-transcriber/README.md
+../../../../skills/groq-transcriber/README.md

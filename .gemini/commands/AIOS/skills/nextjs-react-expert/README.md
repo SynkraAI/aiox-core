@@ -1,1 +1,0 @@
-../../../../../.aios/skills/nextjs-react-expert/SKILL.md

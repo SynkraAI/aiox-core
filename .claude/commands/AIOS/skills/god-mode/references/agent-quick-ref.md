@@ -1,1 +1,0 @@
-../../../../../../.aios/skills/god-mode/references/agent-quick-ref.md

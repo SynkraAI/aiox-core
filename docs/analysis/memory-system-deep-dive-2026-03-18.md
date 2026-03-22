@@ -602,7 +602,7 @@ Hoje: Workflow roda até o fim, ignorando feedback no meio.
 ### **Skills Existentes**
 - `/checkpoint` — `.claude/commands/checkpoint.md`
 - `/resume` — `.claude/commands/resume.md`
-- `/new-project` — `.aios/skills/new-project/SKILL.md` (assumindo)
+- `/new-project` — `skills/new-project/SKILL.md` (assumindo)
 
 ### **Stories/ADRs**
 - Story 9.4 — Gotchas Memory

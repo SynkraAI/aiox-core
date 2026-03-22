@@ -4,7 +4,7 @@
  * fix-hybrid-symlinks.js
  *
  * Migra projetos HYBRID existentes para incluir symlinks de recursos globais:
- * - .aios/skills → ~/aios-core/.aios/skills
+ * - .aios/skills → ~/aios-core/skills
  * - .claude/commands → ~/aios-core/.claude/commands
  *
  * Usage:

@@ -249,7 +249,7 @@ cd <PROJECT_ROOT>
 
 ### Verificar skills instaladas:
 ```bash
-ls -1 <PROJECT_ROOT>/.aios/skills/
+ls -1 <PROJECT_ROOT>/skills/
 ```
 
 ### Instalar book-to-markdown skill (se ausente):
@@ -264,7 +264,7 @@ dependencies:
   squads:
     - media-processor  # Path: squads/media-processor/
   skills:
-    - book-to-markdown  # Path: .aios/skills/book-to-markdown/
+    - book-to-markdown  # Path: skills/book-to-markdown/
 ```
 
 ---

@@ -71,7 +71,7 @@ Claude Code (Opus 4.6)
 - `.claude/rules/memory-protocol.md` — rule global (read + write + checkpoints)
 - `.aios-core/data/memory/user/luiz-fosc-profile.md` — user profile
 - `tools/memory-health-check.js` — script de auditoria (rodar para verificar)
-- `.aios/skills/memory-audit/SKILL.md` — skill para auditorias recorrentes
+- `skills/memory-audit/SKILL.md` — skill para auditorias recorrentes
 
 ## Decisões tomadas
 1. Memória vive no PROJETO, não nos agentes

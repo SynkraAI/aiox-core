@@ -1,1 +1,1 @@
-../../../../.aios/skills/sherlock-investigator/SKILL.md
+../../../../skills/sherlock-investigator/SKILL.md

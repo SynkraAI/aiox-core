@@ -2,7 +2,7 @@
 date: 2026-03-21
 capture_time: "2026-03-21T01:44:43.316Z"
 session_id: install-
-session_count: 5
+session_count: 40
 providers_active:
   - "claude-sonnet-4-6"
 activity_summary: Session completed (no commits)
@@ -78,3 +78,594 @@ decisions: []
 stories_touched: []
 learnings: []
 agents_involved: []
+
+# --- Session ca311d8c (2026-03-21T03:16:57.609Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T03:16:57.608Z"
+session_id: ca311d8c
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 98e7556c (2026-03-21T05:49:08.268Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T05:49:08.267Z"
+session_id: 98e7556c
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session d7b505e5 (2026-03-21T05:57:05.312Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T05:57:05.311Z"
+session_id: d7b505e5
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session d7b505e5 (2026-03-21T05:58:08.934Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T05:58:08.934Z"
+session_id: d7b505e5
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session d7b505e5 (2026-03-21T05:59:58.071Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T05:59:58.070Z"
+session_id: d7b505e5
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session d7b505e5 (2026-03-21T06:02:02.585Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T06:02:02.584Z"
+session_id: d7b505e5
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session d7b505e5 (2026-03-21T06:04:10.736Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T06:04:10.736Z"
+session_id: d7b505e5
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session d7b505e5 (2026-03-21T06:07:21.455Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T06:07:21.454Z"
+session_id: d7b505e5
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session d7b505e5 (2026-03-21T06:08:00.905Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T06:08:00.905Z"
+session_id: d7b505e5
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session d7b505e5 (2026-03-21T06:08:20.646Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T06:08:20.645Z"
+session_id: d7b505e5
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:05:51.654Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:05:51.653Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:07:13.419Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:07:13.419Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:19:06.847Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:19:06.846Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 1fbd3f75 (2026-03-21T13:23:29.081Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:23:29.081Z"
+session_id: 1fbd3f75
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 1fbd3f75 (2026-03-21T13:26:54.590Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:26:54.589Z"
+session_id: 1fbd3f75
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:26:57.062Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:26:57.062Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:33:49.213Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:33:49.212Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:39:03.180Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:39:03.180Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 1fbd3f75 (2026-03-21T13:39:07.182Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:39:07.182Z"
+session_id: 1fbd3f75
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:39:33.700Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:39:33.699Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:40:26.389Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:40:26.389Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:44:50.282Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:44:50.281Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:47:28.447Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:47:28.446Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:48:01.762Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:48:01.761Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:48:54.565Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:48:54.565Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:49:30.645Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:49:30.644Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:49:51.952Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:49:51.951Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:50:41.681Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:50:41.681Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T13:52:17.570Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T13:52:17.570Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T14:16:03.371Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T14:16:03.370Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T14:23:13.898Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T14:23:13.897Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T14:24:22.795Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T14:24:22.794Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 0ee33737 (2026-03-21T14:25:17.629Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T14:25:17.628Z"
+session_id: 0ee33737
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Bulletproof Test v2.1 Session (2026-03-21T17:30:00.000Z) ---
+date: "2026-03-21"
+capture_time: "2026-03-21T17:30:00.000Z"
+session_id: bulletproof-v2.1
+session_count: 1
+providers_active:
+  - claude-opus-4-6
+activity_summary: "Bulletproof-test v2.1: 604 scenarios, 30 new tests, 1196 → 1226 passing. Full 7-phase pipeline with SBTM."
+highlights:
+  - "SBTM Phase 2 discovered 12 risks that Phase 1 missed — chosenCalendarId never clears, addToolUse doesn't trim, short substring delete matches unintended events"
+  - "Production incident scenarios (from calendar-session-report.md) all verified as covered"
+  - "Context injector singleton cache shared across chatIds — documented risk for multi-chat setups"
+learnings:
+  - "chosenCalendarId Map in tool-executor.ts is module-level and never clears — once a calendar is chosen, it persists until PM2 restart. /clear doesn't reset it."
+  - "addToolUse in conversation.ts doesn't trim the history array — only addMessage trims. Heavy tool use can push history beyond MAX_MESSAGES (40)."
+  - "Short exact substring queries (2 chars like 'ab') in delete_event can match unintended events — 'ab' matches 'Isabelle', 'abstract', 'cab'. Not fuzzy but still risky for destructive operations."
+  - "removeTrackedEvent marks events as deleted but doesn't free the slot in the 20-entry array. Slots get wasted over time."
+  - "Context injector cache is a module-level singleton, not per-chat. Error responses get cached for 5 minutes even after API recovers."
+  - "Phase 2 SBTM is critical — it found patterns that static code analysis (Phase 1) completely missed. Never skip it."
+decisions:
+  - "Running Bulletproof Test v2.1 with all 7 phases enforced, no shortcuts"
+  - "Incremental mode reused existing 1196 tests as baseline"
+stories_touched: []
+agents_involved:
+  - analyst
+  - qa
+  - dev
+  - memory-keeper
+
+# --- Session b3c4797d (2026-03-21T21:02:33.695Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T21:02:33.695Z"
+session_id: b3c4797d
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Session 3208e2af (2026-03-21T22:49:42.891Z) ---
+# Kaizen v2 Daily Digest — 2026-03-21
+date: 2026-03-21
+capture_time: "2026-03-21T22:49:42.890Z"
+session_id: 3208e2af
+session_count: 1
+providers_active:
+  - "claude-sonnet-4-6"
+activity_summary: Session completed (no commits)
+highlights: []
+decisions: []
+stories_touched: []
+learnings: []
+agents_involved: []
+
+# --- Bulletproof Test toki-bot Session (2026-03-21T23:00:00.000Z) ---
+date: "2026-03-21"
+capture_time: "2026-03-21T23:00:00.000Z"
+session_id: bulletproof-toki-bot
+session_count: 1
+providers_active:
+  - claude-opus-4-6
+activity_summary: "Bulletproof-test toki-bot: 333 scenarios, 206 new tests, 0 → 206 passing"
+highlights:
+  - "Multimodal event handling bug: audio/photo/forward detect events but save as ideas instead of creating calendar events"
+  - "Recurring events ignore dayOfWeek and have month overflow bugs (31 jan → 3 mar via setMonth)"
+  - "In-memory Maps (pendingEvents/pendingBatchEvents) lost on restart/deploy — no persistence fallback"
+learnings:
+  - "Multimodal handlers (audio/photo/forward/link) detect event type but save as ideas — functional inconsistency where same content gets different treatment depending on input channel"
+  - "pendingEvents and pendingBatchEvents are in-memory Maps with no persistence. Any restart/deploy/crash loses all pending confirmations. Users clicking stale buttons get cryptic 'expirado' message."
+  - "JavaScript setMonth causes overflow for month-end dates: new Date('2026-01-31').setMonth(1) produces March 3, not Feb 28. Recurring monthly events on day 31 generate wrong dates for 5 months per year."
+  - "dayOfWeek from LLM classifier is received but completely ignored in recurring event generation. 'Toda sexta a partir de segunda' creates events on Mondays."
+  - "Link handler needed URL protocol normalization — URLs without https:// prefix fail silently or get treated as relative paths"
+  - "VPS with limited memory: tsc and drizzle-kit OOM without NODE_OPTIONS=--max-old-space-size. Solution: build locally and deploy compiled JS."
+  - "PM2 cluster mode conflicts with HTTP server for Google OAuth callback — multiple instances try to bind same port. Fork mode required."
+  - "PostgreSQL connection URL needs URL-encoding for special characters in password (e.g., @ becomes %40). Raw special chars cause parse errors."
+  - "Google OAuth requires 'Web Application' client type for redirect URIs. Desktop client type silently ignores redirect_uri parameter."
+  - "Google doesn't allow IP addresses in OAuth redirect URIs — needs localhost + SSH tunnel for VPS callback flow"
+  - "Config tests (dotenv) need mock before import — ESM hoists imports, so vi.mock must be called before the module under test loads"
+  - "grammY Context mocks need specific shape: message.from, message.chat, api.getFile, reply, etc. Partial mocks cause cryptic 'cannot read property of undefined' errors"
+  - "Date.now() as Map key causes collision when two events processed in same millisecond — UUID or atomic counter required for pending event keys"
+decisions:
+  - "All 73 P0 and 133 P1 scenarios covered — 99 P2 and 20 P3 deferred to future sprints"
+  - "Vitest chosen as test framework with ESM-native config for TypeScript project"
+  - "Behavioral/cross-feature tests added as separate suite (14 tests) to catch interaction bugs"
+stories_touched: []
+agents_involved:
+  - analyst
+  - qa
+  - dev
+  - memory-keeper

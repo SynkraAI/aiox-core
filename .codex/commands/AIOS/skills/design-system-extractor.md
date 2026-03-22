@@ -1,0 +1,1 @@
+../../../../skills/design-system-extractor/SKILL.md
