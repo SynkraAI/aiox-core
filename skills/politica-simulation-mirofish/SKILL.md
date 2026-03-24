@@ -1,5 +1,5 @@
 ---
-name: politica-app
+name: politica-simulation-mirofish
 description: |
   Motor de predicao por inteligencia de enxame para simulacao de opiniao publica.
   Cria painel virtual de agentes AI com perfis cognitivos diversos e os faz deliberar
@@ -12,22 +12,22 @@ category: simulation
 tags: [politica, simulacao, swarm-intelligence, opiniao-publica, predicao]
 ---
 
-# politica-app -- Motor de Predicao por Inteligencia de Enxame
+# politica-simulation-mirofish -- Motor de Predicao por Inteligencia de Enxame
 
 > "Nao e o que as pessoas dizem que pensam. E como formariam opiniao diante de novos estimulos."
 
 ## Como Rodar
 
 ```
-/politica-app "Tema ou pergunta politica"
-/politica-app "Reforma tributaria" --preset sp-capital --agents 30 --rounds 3
-/politica-app "Reducao da maioridade penal" --context docs/pesquisa-recente.md
+/politica-simulation-mirofish "Tema ou pergunta politica"
+/politica-simulation-mirofish "Reforma tributaria" --preset sp-capital --agents 30 --rounds 3
+/politica-simulation-mirofish "Reducao da maioridade penal" --context docs/pesquisa-recente.md
 
 # Reutilizar painel de simulacao anterior (Story 4.1)
-/politica-app "Reforma tributaria" --panel output/20260324-1530-reducao-maioridade/panel.yaml
+/politica-simulation-mirofish "Reforma tributaria" --panel output/20260324-1530-reducao-maioridade/panel.yaml
 
 # Modo comparativo: mesmo painel, temas diferentes (Story 4.2)
-/politica-app --compare "Reforma tributaria" "Privatizacao dos Correios" --panel output/20260324-1530-reducao-maioridade/panel.yaml
+/politica-simulation-mirofish --compare "Reforma tributaria" "Privatizacao dos Correios" --panel output/20260324-1530-reducao-maioridade/panel.yaml
 ```
 
 ## Pipeline de Fases
@@ -46,14 +46,14 @@ Tema + Preset >  | Ler docs |  >    | Gerar N |  ---->   | Rodada 1  |  ---->   
 
 ## Orchestration Pipeline (Complete)
 
-Ao receber o comando `/politica-app`, seguir TODOS os passos abaixo em ordem.
+Ao receber o comando `/politica-simulation-mirofish`, seguir TODOS os passos abaixo em ordem.
 Cada passo tem inputs, outputs e condicoes de erro. NAO pular passos.
 
 ### Passo 0: Parse de Input e Validacao
 
 1. Extrair do comando:
    - `topic` (obrigatorio, exceto em modo `--compare`): O tema/pergunta politica. Se ausente e nao for modo comparativo, PARAR com erro:
-     `"ERRO: Tema obrigatorio. Use: /politica-app \"Seu tema aqui\""`
+     `"ERRO: Tema obrigatorio. Use: /politica-simulation-mirofish \"Seu tema aqui\""`
    - `--preset` (default: `brasil-geral`): Preset demografico
    - `--agents` (default: valor do config.yaml `simulation.total_agents`): Numero de agentes
    - `--rounds` (default: valor do config.yaml `simulation.rounds`): Numero de rodadas
@@ -322,7 +322,7 @@ Se uma simulacao foi interrompida, e possivel retoma-la:
 
 **Como retomar:**
 ```
-/politica-app --resume {run_id}
+/politica-simulation-mirofish --resume {run_id}
 ```
 
 ### Passo 3: Agregacao
@@ -513,7 +513,7 @@ Pense assim: os presets prontos são como "personas" pré-montadas. Criar um pre
 **1. Copie o template base**
 
 ```bash
-cp skills/politica-app/presets/custom-template.yaml skills/politica-app/presets/meu-preset.yaml
+cp skills/politica-simulation-mirofish/presets/custom-template.yaml skills/politica-simulation-mirofish/presets/meu-preset.yaml
 ```
 
 **2. Defina o recorte demográfico**
@@ -536,10 +536,10 @@ Se não bater, o pipeline vai rejeitar o preset com erro.
 **5. Use o preset**
 
 ```bash
-/politica-app "Seu tema" --preset meu-preset
+/politica-simulation-mirofish "Seu tema" --preset meu-preset
 ```
 
-O arquivo deve estar em `skills/politica-app/presets/meu-preset.yaml`.
+O arquivo deve estar em `skills/politica-simulation-mirofish/presets/meu-preset.yaml`.
 
 ---
 
@@ -830,7 +830,7 @@ Para validar que o sistema de personas esta gerando perfis diversos e bem formad
 ### Como rodar o dry-run de painel
 
 ```
-/politica-app --dry-run --preset brasil-geral --agents 10
+/politica-simulation-mirofish --dry-run --preset brasil-geral --agents 10
 ```
 
 Ou manualmente, seguindo os passos abaixo:
@@ -942,7 +942,7 @@ e que o paralelismo funciona de forma estavel.
 ### Como rodar o spike
 
 ```
-/politica-app --spike-validation
+/politica-simulation-mirofish --spike-validation
 ```
 
 Ou manualmente, seguindo os 5 testes abaixo.
@@ -1087,13 +1087,13 @@ assembly + deliberacao + sumarizacao + checkpoints funcionam corretamente.
 ### Como rodar o dry-run E2E
 
 ```
-/politica-app --dry-run-e2e
+/politica-simulation-mirofish --dry-run-e2e
 ```
 
 Ou manualmente:
 
 ```
-/politica-app "Proposta de reducao da maioridade penal para 16 anos" --preset brasil-geral --agents 10 --rounds 2
+/politica-simulation-mirofish "Proposta de reducao da maioridade penal para 16 anos" --preset brasil-geral --agents 10 --rounds 2
 ```
 
 ### Parametros do Dry-Run
@@ -1158,7 +1158,7 @@ Se algum checkpoint falhar, diagnosticar antes de prosseguir.
 
 **Pre-requisito:** Todas as fases do pipeline (Assembly, Deliberacao, Agregacao, Relatorio) implementadas e testadas individualmente (dry-run E2E acima).
 
-Este cenario canonico serve como **benchmark qualitativo** — se esta simulacao produz output util, o politica-app esta pronto para uso real.
+Este cenario canonico serve como **benchmark qualitativo** — se esta simulacao produz output util, o politica-simulation-mirofish esta pronto para uso real.
 
 ### Cenario
 
@@ -1173,7 +1173,7 @@ Este cenario canonico serve como **benchmark qualitativo** — se esta simulacao
 ### Como rodar
 
 ```
-/politica-app "Proposta de reducao da maioridade penal para 16 anos" --preset brasil-geral --agents 20 --rounds 3 --context docs/contexto-maioridade-1.md docs/contexto-maioridade-2.md
+/politica-simulation-mirofish "Proposta de reducao da maioridade penal para 16 anos" --preset brasil-geral --agents 20 --rounds 3 --context docs/contexto-maioridade-1.md docs/contexto-maioridade-2.md
 ```
 
 ### Criterios de Aceite (Mensuraveis)
@@ -1232,7 +1232,7 @@ output/{YYYYMMDD-HHMM}-reducao-maioridade/
 ### Interpretacao
 
 Se **TODOS os criterios CR1-CR6 passarem:**
-- O politica-app esta funcional e pronto para uso com temas reais
+- O politica-simulation-mirofish esta funcional e pronto para uso com temas reais
 - O output pode ser apresentado a consultores politicos como demonstracao
 
 Se algum criterio falhar:
@@ -1247,6 +1247,6 @@ Se algum criterio falhar:
 
 ## Referencias
 
-- Spec completa: `.aios/forge-runs/forge-politica-app-20260323-2242/spec/spec-final.md`
-- Arquitetura: `.aios/forge-runs/forge-politica-app-20260323-2242/spec/architecture.md`
-- Research: `.aios/forge-runs/forge-politica-app-20260323-2242/spec/research.md`
+- Spec completa: `.aios/forge-runs/forge-politica-simulation-mirofish-20260323-2242/spec/spec-final.md`
+- Arquitetura: `.aios/forge-runs/forge-politica-simulation-mirofish-20260323-2242/spec/architecture.md`
+- Research: `.aios/forge-runs/forge-politica-simulation-mirofish-20260323-2242/spec/research.md`

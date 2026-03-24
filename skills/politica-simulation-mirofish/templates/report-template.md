@@ -353,7 +353,7 @@ dominantes e pontos de vulnerabilidade narrativa.
 
 ---
 
-*Gerado por politica-app | Simulacao exploratoria — nao substitui pesquisa de opiniao profissional*
+*Gerado por politica-simulation-mirofish | Simulacao exploratoria — nao substitui pesquisa de opiniao profissional*
 *Run ID: {run_id} | Data: {timestamp} | Painel: {preset_name} | Agentes: {total_agents}*
 ```
 

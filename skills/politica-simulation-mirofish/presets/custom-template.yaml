@@ -1,5 +1,5 @@
 # ============================================================================
-# TEMPLATE PARA PRESETS CUSTOMIZADOS — politica-app
+# TEMPLATE PARA PRESETS CUSTOMIZADOS — politica-simulation-mirofish
 # ============================================================================
 #
 # Use este arquivo como guia para criar seus próprios presets demográficos.
@@ -9,7 +9,7 @@
 #   2. Renomeie o arquivo para o slug do seu preset (ex: jovens-primeiro-voto.yaml)
 #   3. Preencha todos os campos marcados com TODO
 #   4. Valide antes de usar: verifique o checklist no final deste arquivo
-#   5. Use: /politica-app "Seu tema" --preset meu-preset
+#   5. Use: /politica-simulation-mirofish "Seu tema" --preset meu-preset
 #
 # REGRAS FUNDAMENTAIS:
 #   1. A soma de todos os `count` DEVE ser igual ao `total_agents`

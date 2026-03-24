@@ -1,6 +1,6 @@
 # Template: Agent Persona Generator
 
-<!-- Story 1.2 — Template principal da skill politica-app -->
+<!-- Story 1.2 — Template principal da skill politica-simulation-mirofish -->
 <!-- Transforma perfil YAML em system prompt único para cada agente do painel -->
 <!-- Referência: Architecture seção 4.4, Spec seção 9 (mitigação de viés do LLM) -->
 

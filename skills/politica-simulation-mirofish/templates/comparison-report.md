@@ -23,7 +23,7 @@ Ao gerar o relatório comparativo, usar exatamente esta estrutura:
 **Temas analisados:** {lista de temas}
 **Painel:** {panel_path} — {n} agentes
 **Data da simulação:** {data}
-**Simulação gerada por:** politica-app | Exploratório — não substitui pesquisa de opinião profissional
+**Simulação gerada por:** politica-simulation-mirofish | Exploratório — não substitui pesquisa de opinião profissional
 
 ---
 
@@ -147,7 +147,7 @@ Com base nos padrões observados entre os cenários:
 
 ## Metodologia
 
-Este relatório comparativo foi gerado pelo **politica-app** em modo `--compare`.
+Este relatório comparativo foi gerado pelo **politica-simulation-mirofish** em modo `--compare`.
 
 **Como funciona:**
 - O mesmo painel de {n} agentes virtuais foi submetido a {n_temas} simulações independentes
@@ -181,7 +181,7 @@ Este relatório comparativo foi gerado pelo **politica-app** em modo `--compare`
 
 ---
 
-*Gerado por politica-app | Simulação exploratória — não substitui pesquisa de opinião profissional*
+*Gerado por politica-simulation-mirofish | Simulação exploratória — não substitui pesquisa de opinião profissional*
 
 ---
 

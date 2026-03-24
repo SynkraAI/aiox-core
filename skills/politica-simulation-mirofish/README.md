@@ -1,4 +1,4 @@
-# politica-app
+# politica-simulation-mirofish
 
 Motor de predição por inteligência de enxame para simulação de opinião pública.
 
@@ -33,28 +33,28 @@ Input (tema + preset)  →  Assembly (gera painel)  →  Deliberação (3 rodada
 
 ```bash
 # Simulação básica
-/politica-app "Reforma tributária"
+/politica-simulation-mirofish "Reforma tributária"
 
 # Com preset específico e mais agentes
-/politica-app "Privatização dos Correios" --preset sp-capital --agents 30
+/politica-simulation-mirofish "Privatização dos Correios" --preset sp-capital --agents 30
 
 # Com documento de contexto
-/politica-app "Redução da maioridade penal" --context pesquisa-recente.md
+/politica-simulation-mirofish "Redução da maioridade penal" --context pesquisa-recente.md
 
 # Reutilizar painel de simulação anterior (Story 4.1)
-/politica-app "Reforma tributária" --panel output/20260324-1530-reducao-maioridade/panel.yaml
+/politica-simulation-mirofish "Reforma tributária" --panel output/20260324-1530-reducao-maioridade/panel.yaml
 
 # Cenários comparativos: mesmo painel, temas diferentes (Story 4.2)
-/politica-app --compare "Reforma tributária" "Privatização dos Correios" --panel output/20260324-1530/panel.yaml
+/politica-simulation-mirofish --compare "Reforma tributária" "Privatização dos Correios" --panel output/20260324-1530/panel.yaml
 
 # Preset customizado (Story 4.3)
-/politica-app "Tema" --preset jovens-primeiro-voto
+/politica-simulation-mirofish "Tema" --preset jovens-primeiro-voto
 ```
 
 ## Estrutura de arquivos
 
 ```
-skills/politica-app/
+skills/politica-simulation-mirofish/
 ├── SKILL.md                  # Entry point (orquestração)
 ├── config.yaml               # Configuração padrão
 ├── README.md                 # Este arquivo
@@ -83,7 +83,7 @@ skills/politica-app/
 
 | Funcionalidade | Comando | Epic |
 |---|---|---|
-| Simulação básica | `/politica-app "Tema"` | 1-3 |
+| Simulação básica | `/politica-simulation-mirofish "Tema"` | 1-3 |
 | Preset demográfico | `--preset nome` | 1 |
 | Contexto externo | `--context arquivo.md` | 3 |
 | Retomada | `--resume {run_id}` | 2 |

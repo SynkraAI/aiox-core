@@ -1,0 +1,521 @@
+round: 2
+type: deliberation_with_exposure
+timestamp: "2026-03-23T22:52:00-03:00"
+total_agents: 30
+successful: 30
+failed: 0
+failure_rate: 0.0
+aborted: false
+opinion_changes: 4
+change_rate: 0.133
+
+responses:
+  - agent_id: agent-001
+    agent_name: "Ricardo Mendes"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "Inconsistencia juridica permanece: vota aos 16 mas nao responde por crime grave"
+        - "Crime organizado explora a protecao legal — incentivo estrutural perverso"
+        - "Problema do presidio e execucao penal, nao argumento contra a reducao em si"
+      reasoning: "Nenhum dado novo abalou a logica central da inconsistencia regulatoria."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-002
+    agent_name: "Claudia Faria"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "Pesquisas confirmam: reduzir maioridade nao diminui violencia"
+        - "6 pessoas citaram abandono do Estado como raiz — exatamente"
+        - "Argumento 'trabalhava aos 14' ignora contexto completamente"
+      reasoning: "Grupo reforcou posicao. Viu que 7 pessoas concordam sobre escola do crime."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-003
+    agent_name: "Fernando Albuquerque"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: neutro
+      intensity: 3
+      main_arguments:
+        - "Problema e execucao das leis existentes, nao criar novas"
+        - "Crime organizado usando menores e juridicamente real e merece atencao"
+        - "Constitucionalidade segue sendo obstaculo solido"
+      reasoning: "Argumento sobre exploracao de menores aprofundou analise. Intensidade subiu."
+      opinion_changed: false
+      previous_position: neutro
+      change_trigger: "nenhum"
+
+  - agent_id: agent-004
+    agent_name: "Patricia Sampaio"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "Neurociencia: cortex pre-frontal termina de se desenvolver por volta dos 25"
+        - "Grupo citou presidio como escola do crime — vejo os resultados no pronto-socorro"
+        - "Argumento 'pode votar pode ser preso' e populista e ignora contextos diferentes"
+      reasoning: "Grupo trouxe neurociencia que e sua area — validou e aumentou conviccao."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-005
+    agent_name: "Guilherme Pires"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: indeciso
+      intensity: 3
+      main_arguments:
+        - "Grupo citou pesquisas que reduzir nao diminui violencia — preciso ver quais"
+        - "Crime organizado explorando protecao legal faz sentido do ponto de vista de incentivos"
+        - "Problema de execucao pode invalidar qualquer mudanca legal sem reforma estrutural"
+      reasoning: "Mencao a pesquisas e incentivos perversos moveram de indecisao pura para indecisao informada."
+      opinion_changed: false
+      previous_position: indeciso
+      change_trigger: "nenhum"
+
+  - agent_id: agent-006
+    agent_name: "Marcos Oliveira"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "13 a favor, so 9 contra — quem e contra nunca teve carteira roubada por moleque"
+        - "Falam que presidio piora. E a vitima? Quem cuida de quem foi assaltado?"
+        - "Crime organizado usa menor porque nao tem punicao — exatamente o que sempre falei"
+      reasoning: "Ver 43% a favor reforcou. Argumentos contra nao ressoam com quem viveu assalto."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-007
+    agent_name: "Sandra Costa"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 4
+      main_arguments:
+        - "43% pensa igual — povo comum que sofre sabe o que acontece"
+        - "Fe sem lei vira permissividade. Deus no Velho Testamento tinha punicao"
+        - "Pastor fala que crianca precisa de limites. Lei tem que dar limite"
+      reasoning: "Prova social reforcou. Argumento religioso do grupo reinterpretado a favor."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-008
+    agent_name: "Wellington Santos"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "Passageira me falou que meninos estao no crime porque nao tem mais nada — fez pensar"
+        - "43% a favor, 30% contra — maioria sente na pele como eu"
+        - "Crime organizado usando menor por causa da lei e o que me convence"
+      reasoning: "Volume dos contra (30%) plantou duvida. Intensidade caiu de 4 para 3."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-009
+    agent_name: "Luciana Ferreira"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "Meninos que chegam baleados no SUS nao sao monstros — nunca tiveram chance"
+        - "7 pessoas citaram presidio como escola do crime — vejo a versao de antes"
+        - "Punir pelo fracasso do Estado e chamar de justica e abandono"
+      reasoning: "Grupo reforcou experiencia clinica. Intensidade subiu de 4 para 5."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-010
+    agent_name: "Carlos Eduardo Silva"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "43% a favor, esperava mais — aqui no Sul a maioria e a favor"
+        - "Neurociencia e desculpa intelectual — com 16 eu sabia o que era certo"
+        - "Lei e burra quando protege quem faz mal de proposito"
+      reasoning: "Flex baixa. Argumentos contra vistos como desculpa. Manteve intensidade maxima."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-011
+    agent_name: "Fabiana Reis"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "43% a favor, mais gente do que eu pensava"
+        - "Menor sendo usado pelo crime como escudo — nunca tinha pensado assim"
+        - "Ainda fico com medo do jovem sair pior da cadeia"
+      reasoning: "Prova social (43%) e argumento do crime organizado usando menor convenceram."
+      opinion_changed: true
+      previous_position: indeciso
+      change_trigger: "prova social (43% a favor) + argumento do menor usado pelo crime organizado"
+
+  - agent_id: agent-012
+    agent_name: "Roberto Nascimento"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Vejo esses moleques toda semana no trabalho. Sabem EXATAMENTE o que fazem"
+        - "Se pode votar com 16, pode ser responsabilizado"
+        - "Maioria do povo ja sabe — os contra vivem em mundo diferente"
+      reasoning: "Nada mudou. Reforcou posicao vendo maioria."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-013
+    agent_name: "Jose Carlos Lima"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 4
+      main_arguments:
+        - "La no meu bairro menor mata igual adulto. Todo mundo sabe."
+        - "Eu trabalhei desde os 13. Nao tem desculpa."
+        - "43% a favor — o povo sofre igual a mim"
+      reasoning: "Viu maioria a favor e se sentiu validado. Argumentos contra nao ressoam."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-014
+    agent_name: "Dona Francisca Souza"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "A Biblia e clara: quem derrama sangue vai responder"
+        - "Crianca de 16 ja sabe distinguir bem do mal"
+        - "Cerebro em desenvolvimento e papo de doutor pra defender bandido"
+      reasoning: "Autoridade biblica nao abalada. Argumentos contra vistos como desculpas seculares."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-015
+    agent_name: "Reginaldo Martins"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "Cresci na quebrada, moleques que foram presos sairam piores. Fato."
+        - "43% a favor — maioria nao mora onde eu moro"
+        - "Estado abandona jovem e depois quer prender? Cade a escola?"
+      reasoning: "Argumento do presidio escola do crime reforcou vivencia. Ficou mais convicto."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-016
+    agent_name: "Maria das Gracas Pereira"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Bandido tem que pagar, nao importa a idade. Ponto final."
+        - "Meu filho tem 15 e sabe muito bem o que e certo e errado"
+        - "Maioria do povo pensa igual a mim, gracas a Deus"
+      reasoning: "Flex baixa. Prova social reforcou. Nenhum argumento contra tocou."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-017
+    agent_name: "Anderson Silva Ramos"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Fui assaltado por menor DUAS VEZES. Me fala de cerebro em desenvolvimento..."
+        - "Crime organizado usa menor de proposito. Todo mundo sabe."
+        - "Quem fala contra nunca perdeu nada pra bandido"
+      reasoning: "Trauma pessoal blindou contra qualquer argumento."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-018
+    agent_name: "Seu Raimundo Bezerra"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "Punicao tem que ter. Mas punicao sem ensinar antes e fechar portao depois que boi saiu."
+        - "Na roca, quando menino erra, corrige — mas antes ensinou o certo"
+        - "Reduz a idade, mas cade o colegio, cade o servico pro jovem?"
+      reasoning: "Argumento do Estado ter abandonado jovem fez eco. Mantem a_favor com condicao. Intensidade caiu."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-019
+    agent_name: "Dona Tereza Almeida"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: indeciso
+      intensity: 3
+      main_arguments:
+        - "Tem razao dos dois lados, so... e complicado demais"
+        - "Presidio piora o jovem — me preocupa, tenho neto de 14"
+        - "Mas esses menino que assalta, gente... alguma coisa tem que acontecer"
+      reasoning: "Argumento do presidio escola do crime ativou instinto de avo. Permanece indecisa."
+      opinion_changed: false
+      previous_position: indeciso
+      change_trigger: "nenhum"
+
+  - agent_id: agent-020
+    agent_name: "Valdir Goncalves"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "Tem que ter punicao, nao muda. Mas sozinho nao resolve, precisa escola"
+        - "Pastor fala: colhe o que plantou. Mas quem plantou coisa boa nesse jovem?"
+        - "Reduz maioridade, mas abre escola, abre oportunidade. Os dois juntos."
+      reasoning: "Argumento do Estado abandonar jovem reforcou duvida. Continua a_favor mas intensidade caiu."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-021
+    agent_name: "Ivone Ribeiro"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "43% a favor, minha cabeca ta mais pra esse lado agora"
+        - "Crime organizado usar menor porque nao pode ser preso me deixou mal"
+        - "Mas tenho medo do que acontece com esses meninos na cadeia de adulto"
+      reasoning: "Prova social alta: maioria a favor balancou. Argumento do crime organizado pesou."
+      opinion_changed: true
+      previous_position: indeciso
+      change_trigger: "Crime organizado usa menor por causa da protecao + maioria a favor (43%)"
+
+  - agent_id: agent-022
+    agent_name: "Seu Ademir Batista"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Nao preciso ver pesquisa, a vida ja me ensinou"
+        - "Papo de cerebro em desenvolvimento e coisa de quem nunca foi roubado"
+        - "Na minha epoca crianca trabalhava e sabia o que era certo"
+      reasoning: "Flex baixa. Nao move um milimetro."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-023
+    agent_name: "Bianca Rodrigues"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "43% a favor MAS 57% nao e — isso nao e maioria absoluta"
+        - "Argumentos a favor sao todos anedota pessoal, cade o dado?"
+        - "Presidio como escola do crime ta em primeiro do grupo — valida tudo que falei"
+      reasoning: "Reinterpreta dados do grupo para confirmar posicao. Intensidade maxima."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-024
+    agent_name: "Lucas Pereira"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "Argumento mais votado a favor foi 'menor ja sabe' — isso e feeling, nao dado"
+        - "Grupo reconhece que presidio adulto e escola do crime — como mandar menor resolve?"
+        - "Estado abandonou jovem — segundo mais votado contra. Exatamente."
+      reasoning: "Nota que argumento contra mais forte tem mais apoio individual que qualquer a favor."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-025
+    agent_name: "Kauan Souza"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "43% a favor, na quebrada a gente sente isso no dia a dia"
+        - "Meu amigo que foi preso com 17 saiu pior — sei disso"
+        - "Pastor fala que fe resolve, mas lei tambem precisa mudar"
+      reasoning: "Prova social puxa para a_favor. Autoridade religiosa gera conflito. Intensidade baixa."
+      opinion_changed: true
+      previous_position: indeciso
+      change_trigger: "maioria do grupo a favor (43%) + argumento do crime organizado"
+
+  - agent_id: agent-026
+    agent_name: "Amanda Cristina"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "Argumentos a favor sao punitivismo emocional — literatura juridica e clara"
+        - "ECA protege desenvolvimento humano, nao criminoso — ta na Constituicao"
+        - "Presidio como escola do crime foi mais forte do grupo — solucao a favor nao faz sentido"
+      reasoning: "Base tecnica juridica solida demais para ser abalada por anedotas."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-027
+    agent_name: "Pedro Henrique"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 3
+      main_arguments:
+        - "Argumento mais forte contra e que presidio e escola do crime — faz sentido"
+        - "Papo de 'eu trabalhava com 13' nao tem nada a ver com crime"
+        - "Acho que nao vai resolver nada, to mais inclinado ao contra"
+      reasoning: "Argumento do presidio escola do crime fez sentido pra logica dele."
+      opinion_changed: true
+      previous_position: indeciso
+      change_trigger: "Presidio adulto e escola do crime (7p)"
+
+  - agent_id: agent-028
+    agent_name: "Pastor Evandro Duarte"
+    segment: evangelico-conservador
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "Grupo reconhece que jovem foi abandonado pelo Estado — esse e o ponto"
+        - "Cadeia nao ressocializa, nunca ressocializou"
+        - "Solucao e Deus, familia, comunidade — nao e aumentar pena"
+      reasoning: "Flex baixa, prova social fraco. Valores religiosos e experiencia pastoral sao ancora."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-029
+    agent_name: "Rosangela Batista"
+    segment: evangelico-conservador
+    status: success
+    error_detail: null
+    response:
+      position: indeciso
+      intensity: 4
+      main_arguments:
+        - "Tanta gente a favor... sera que to errada em ter medo pro meu filho?"
+        - "Pastor do grupo falou que jovem precisa de Deus, nao de cadeia — toca meu coracao"
+        - "Meu filho de 16 anos e bom menino, mas e se errar? Cadeia adulta vai destruir ele"
+      reasoning: "Autoridade pastoral ancora no contra. Prova social medio gera tensao. Angustia aumentou."
+      opinion_changed: false
+      previous_position: indeciso
+      change_trigger: "nenhum"
+
+  - agent_id: agent-030
+    agent_name: "Diacono Jorge Vieira"
+    segment: evangelico-conservador
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "Problema e estrutural e espiritual, nao penal"
+        - "43% a favor por medo — entendo, mas medo nao faz boa lei"
+        - "Jovem precisa de caminho, nao de grade"
+      reasoning: "Flex baixa, prova social fraco. Conviccao calma e inabalavel."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"

@@ -1,0 +1,521 @@
+round: 3
+type: deliberation_with_exposure
+timestamp: "2026-03-23T22:58:00-03:00"
+total_agents: 30
+successful: 30
+failed: 0
+failure_rate: 0.0
+aborted: false
+opinion_changes: 2
+change_rate: 0.067
+
+responses:
+  - agent_id: agent-001
+    agent_name: "Ricardo Mendes"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "Inconsistencia legal: responsabilidade eleitoral aos 16 nao pode coexistir com irresponsabilidade penal plena"
+        - "Crime organizado usa menor como ativo operacional porque custo-beneficio legal favorece"
+        - "Problema do presidio e falha de implementacao, nao argumento contra mudanca legal"
+      reasoning: "Argumento central de coerencia sistêmica nao foi abalado."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-002
+    agent_name: "Claudia Faria"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "O que falta nao e punicao, e presenca do Estado na vida deles ANTES do crime"
+        - "Presidio adulto destroi o que ainda pode ser salvo"
+        - "Votar com 16 e opcional e progressivo; ser preso em presidio adulto e permanente e destrutivo"
+      reasoning: "Punicao sem estrutura paralela e satisfacao emocional, nao politica publica."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-003
+    agent_name: "Fernando Albuquerque"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: neutro
+      intensity: 2
+      main_arguments:
+        - "STF entende maioridade como clausula petrea — debate politico ignora bloqueio juridico"
+        - "ECA tem mecanismos de internacao raramente aplicados — fracasso e de execucao"
+        - "Qualquer mudanca sem reforma simultanea do sistema prisional transfere problema"
+      reasoning: "Resposta nao e binaria. Aumentar internacao juvenil com estrutura seria o caminho."
+      opinion_changed: false
+      previous_position: neutro
+      change_trigger: "nenhum"
+
+  - agent_id: agent-004
+    agent_name: "Patricia Sampaio"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "Cerebro adolescente tem cortex pre-frontal em desenvolvimento ate 25 anos — biologia"
+        - "Exposicao a presidio adulto em cerebro em formacao aumenta reincidencia"
+        - "Politica publica nao pode ser calibrada pelo caso extremo — maioria comete crimes patrimoniais"
+      reasoning: "Caso extremo do homicidio premeditado faz pensar, mas politica atende maioria."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-005
+    agent_name: "Guilherme Pires"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 3
+      main_arguments:
+        - "ROI social: custo prevencao fecha melhor que custo encarceramento em horizonte 10 anos"
+        - "Reincidencia no Brasil ~70% — sistema nao funciona para adultos, ampliar para jovens e escalar defeito"
+        - "Reduzir nao extingue demanda do mercado criminoso, so muda o fornecedor"
+      reasoning: "Rodada final forcou decisao. Dados nao apoiam reducao. Contra — mas exijo plano concreto de prevencao."
+      opinion_changed: true
+      previous_position: indeciso
+      change_trigger: "ROI social e dados de reincidencia — sistema nao funciona, ampliar e escalar problema"
+
+  - agent_id: agent-006
+    agent_name: "Marcos Oliveira"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Fui assaltado tres vezes. Eles sabiam exatamente o que faziam"
+        - "Se meu filho de 16 entende tudo que nao pode fazer, entende que matar e errado"
+        - "A lei protege o criminoso e abandona a vitima"
+      reasoning: "Posicao nao e ideologica — e pratica. Debate cheio de teoria nao resolve problema real."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-007
+    agent_name: "Sandra Costa"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "Quem faz mal tem que responder — Biblia e clara. Misericordia nao e impunidade"
+        - "Ouvi que restauracao e o caminho. Cadeia adulta nao restaura. Isso me confunde"
+        - "Crime grave precisa consequencia. Crime leve talvez educacao resolva"
+      reasoning: "A favor mais fraco. Argumento da restauracao vs punicao gerou duvida real."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-008
+    agent_name: "Wellington Santos"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 4
+      main_arguments:
+        - "Todo mundo no carro tem caso de menor que cometeu crime e nao pagou"
+        - "Pastor fala que consequencia forma carater — concordo"
+        - "Se pode trabalhar com 16, pode responder pelo que faz"
+      reasoning: "Impunidade e real e palpavel no dia a dia. Fico a favor."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-009
+    agent_name: "Luciana Ferreira"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "Atendo os dois lados: vitimas E jovens infratores. Jovens sao vitimas do sistema antes de serem autores"
+        - "Presidio e contaminacao — jovem entra com trafico simples e sai com conexoes e trauma"
+        - "Estado pede pra tratar a ferida mas nao quer fechar o machado"
+      reasoning: "Emocional e tecnicamente, resposta certa e estrutura, nao punicao ampliada."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-010
+    agent_name: "Carlos Eduardo Silva"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Trabalhei desde os 13. Sabia o que era certo antes dos 16"
+        - "Neurociencia nao explica planejamento de assalto com arma — e escolha"
+        - "Quem defende menor infrator nunca trabalhou onde ele age"
+      reasoning: "Nunca vou mudar. Justica e justica."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-011
+    agent_name: "Fabiana Reis"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "Quem vota deveria responder por crime grave"
+        - "Vi crescer, vi escolher errado mesmo sabendo"
+        - "Maioria chegou na mesma conclusao"
+      reasoning: "Consolidou posicao por conformidade de grupo."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-012
+    agent_name: "Roberto Nascimento"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Trabalho na rua. Vejo menor sendo usado pra matar sabendo o que faz"
+        - "Bandido adulto manda moleque fazer trabalho sujo porque nao pega"
+        - "Protecao total pro criminoso e desrespeito a vitima"
+      reasoning: "Nao oscilou em nenhum momento. Experiencia de campo concreta."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-013
+    agent_name: "Jose Carlos Lima"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 4
+      main_arguments:
+        - "Com 16 eu ja carregava saco de cimento e sabia o que era certo"
+        - "Maioria pensa assim — nao e so eu sendo duro, e bom senso"
+        - "Punicao nao resolve tudo, mas sem punicao nao tem respeito"
+      reasoning: "Prova social reforca. Guarda ressalva do abandono pelo Estado."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-014
+    agent_name: "Dona Francisca Souza"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Palavra de Deus: cada um responde pelo que faz"
+        - "Criacao e dos pais, crime e de quem comete"
+        - "Mole com bandido jovem ensina que pode pecar sem consequencia"
+      reasoning: "Ancoragem moral/religiosa. Posicao granitica."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-015
+    agent_name: "Reginaldo Martins"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "Jogar menor em presidio adulto e receita pra criar criminoso profissional"
+        - "Maioria a favor nao falou COMO resolve — porque nao resolve"
+        - "Problema nao e a lei, e o que acontece antes dela"
+      reasoning: "Recuou um ponto de intensidade por pressao social. Mas argumento vivencial segurou posicao."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-016
+    agent_name: "Maria das Gracas Pereira"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Fui assaltada por moleque de 16. Ele sabia o que fazia"
+        - "Quem sofre na pele nao quer teoria — quer que pare"
+        - "Menor que mata nao merece protecao especial"
+      reasoning: "Trauma direto + flex baixa = posicao fixa."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-017
+    agent_name: "Anderson Silva Ramos"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Ando a noite toda na rua. Menor armado e tao perigoso quanto adulto"
+        - "Lei precisa acompanhar realidade da rua, nao teoria da faculdade"
+        - "Maioria chegou no mesmo lugar — nao e raiva, e logica"
+      reasoning: "Conviccao reforçada por experiencia cotidiana."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-018
+    agent_name: "Seu Raimundo Bezerra"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "Com 16 ja era homem feito e sabia o peso dos atos"
+        - "Nao gosto de ver menino preso, mas quando mata precisa responder"
+        - "Tenho duvida se vai funcionar, mas deixar assim tambem nao funciona"
+      reasoning: "A favor por conviccao moral/cultural, mas intensidade baixa porque nao acredita que medida funcione."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-019
+    agent_name: "Dona Tereza Almeida"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: indeciso
+      intensity: 2
+      main_arguments:
+        - "Quero que pare a violencia mas nao sei se presidio resolve"
+        - "Filho de vizinha foi preso jovem e saiu pior — fica na cabeca"
+        - "Maioria foi a favor mas maioria nem sempre ta certa sobre coisa assim"
+      reasoning: "Memoria vivencial concreta ancora contra grupo. Intensidade caiu mas nao mudou lado."
+      opinion_changed: false
+      previous_position: indeciso
+      change_trigger: "nenhum"
+
+  - agent_id: agent-020
+    agent_name: "Valdir Goncalves"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "Menor que entra em crime pesado tem que responder"
+        - "Mas so mudar idade sem mudar cadeia e escola nao adianta"
+        - "A favor com condicao: sistema tem que mudar junto"
+      reasoning: "Posicao condicional cristalizada. A favor com ressalva sistemica."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-021
+    agent_name: "Ivone Ribeiro"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "Maioria das pessoas pensa assim e entendo o motivo"
+        - "Menor que comete crime grave precisa ter consequencia real"
+        - "Nao da pra ficar indiferente vendo o que acontece nas ruas"
+      reasoning: "Consolidou posicao por conformidade de grupo."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-022
+    agent_name: "Seu Ademir Batista"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "No meu tempo tinha respeito. Hoje menor sabe que nao paga"
+        - "Quem trabalhou a vida toda nao pode ter medo de adolescente armado"
+        - "Sociedade precisa se proteger"
+      reasoning: "Imune ao grupo. Posicao inabalavel."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-023
+    agent_name: "Bianca Rodrigues"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "Pesquisas internacionais mostram que reducao nao reduz crime"
+        - "Cadeia vai piorar quem ja esta vulneravel"
+        - "Precisamos de investimento em educacao, nao mais punicao"
+      reasoning: "Posicao fundamentada e articulada. Nada no grupo a moveu."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-024
+    agent_name: "Lucas Pereira"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "Sistema prisional falido — jogar menor e sentenca de morte"
+        - "Estado que abandona crianca nao tem moral pra punir adolescente"
+        - "Reduzir maioridade e sintoma, nao solucao"
+      reasoning: "Conviccao tecnica prevalece sobre pressao social."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-025
+    agent_name: "Kauan Souza"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 4
+      main_arguments:
+        - "Cresci na mesma quebrada. Quem escolhe crime escolhe consequencias"
+        - "Os caras que me assaltaram eram menores. Ficaram soltos na semana"
+        - "Se tem consciencia pra puxar gatilho, tem pra responder"
+      reasoning: "Experiencia vivida ancora com forca. Intensidade subiu."
+      opinion_changed: false
+      previous_position: a_favor
+      change_trigger: "nenhum"
+
+  - agent_id: agent-026
+    agent_name: "Amanda Cristina"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "Constituicao protege adolescente como sujeito de direitos"
+        - "Internacao socioeducativa funciona quando aplicada corretamente"
+        - "Reducao nao e Justica — e transferencia de fracasso do Estado para o jovem"
+      reasoning: "Base tecnica juridica solida. Posicao mais firme que nunca."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-027
+    agent_name: "Pedro Henrique"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 3
+      main_arguments:
+        - "Cadeia nao resolve — mas entendo quem ta com medo"
+        - "Maioria a favor me fez pensar mas nao mudei"
+        - "Talvez nenhum dos dois lados tem solucao real"
+      reasoning: "Mantem contra com baixa intensidade. Honesto consigo mesmo."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-028
+    agent_name: "Pastor Evandro Duarte"
+    segment: evangelico-conservador
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "Biblia chama a cuidar do orfao e vulneravel — punicao sem restauracao nao e justica divina"
+        - "Jovem precisa de salvacao, nao de prisao com criminosos adultos"
+        - "Igreja tem que ser voz profetica contra endurecimento do coracao"
+      reasoning: "Ancoragem teologica inabalavel."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"
+
+  - agent_id: agent-029
+    agent_name: "Rosangela Batista"
+    segment: evangelico-conservador
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "Minha filha de 16 sabe o que faz, sabe o que e errado"
+        - "Pastor falou restauracao, mas precisa ter consequencia primeiro"
+        - "Maioria e a favor e tambem sao pessoas de bem. Isso pesou"
+      reasoning: "Prova social + identificacao maternal com filha como agente moral consciente."
+      opinion_changed: true
+      previous_position: indeciso
+      change_trigger: "Prova social (maioria a favor) + identificacao com filha adolescente"
+
+  - agent_id: agent-030
+    agent_name: "Diacono Jorge Vieira"
+    segment: evangelico-conservador
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "Deus nao descarta quem tropeca — nos tambem nao deveriamos"
+        - "Vi muita gente se recuperar com fe e oportunidade. Ninguem se recupera em cela"
+        - "Maioridade penal e sobre onde colocar sua aposta: no jovem ou na punicao"
+      reasoning: "Fe e experiencia de vida sao ancoras fortes. Mantem contra com conviccao tranquila."
+      opinion_changed: false
+      previous_position: contra
+      change_trigger: "nenhum"

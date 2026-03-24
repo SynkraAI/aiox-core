@@ -1,12 +1,12 @@
 {
   "run_id": "forge-politica-app-20260323-2242",
   "mode": "FULL_APP",
-  "status": "running",
+  "status": "completed",
   "current_phase": 5,
   "description": "Motor de predição por inteligência de enxame para simulação de opinião pública. Produto para políticos. Roda 100% no Claude Code como Skill AIOS.",
   "project": {
     "name": "politica-app",
-    "path": "/Users/luizfosc/aios-core/skills/politica-app",
+    "path": "/Users/luizfosc/aios-core/skills/politica-simulation-mirofish",
     "type": "aios-skill"
   },
   "phases": {
@@ -15,9 +15,9 @@
     "2": { "status": "completed", "started_at": "2026-03-23T23:30:00Z", "completed_at": "2026-03-24T00:15:00Z", "total_stories": 19, "avg_po_score": 9.89 },
     "3": { "status": "completed", "started_at": "2026-03-24T00:15:00Z", "completed_at": "2026-03-24T01:30:00Z", "stories_completed": 19, "stories_total": 19 },
     "4": { "status": "completed", "started_at": "2026-03-24T01:30:00Z", "completed_at": "2026-03-24T01:35:00Z", "files_count": 21, "lines_total": 6271 },
-    "5": { "status": "pending" }
+    "5": { "status": "completed", "started_at": "2026-03-24T01:35:00Z", "completed_at": "2026-03-24T01:40:00Z", "commit": "1ff9d92ad", "branch": "chore/devops-10-improvements" }
   },
   "errors": [],
   "started_at": "2026-03-23T22:30:00Z",
-  "updated_at": "2026-03-24T01:35:00Z"
+  "completed_at": "2026-03-24T01:40:00Z"
 }

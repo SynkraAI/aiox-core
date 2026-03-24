@@ -1,0 +1,251 @@
+# aggregation.yaml
+# Gerado automaticamente pelo Motor de Agregacao
+
+simulation_id: "20260323-2242-reducao-maioridade"
+generated_at: "2026-03-23T23:00:00-03:00"
+total_agents: 30
+total_rounds: 3
+successful_agents_final_round: 30
+preset: "brasil-geral"
+
+# Etapa 1: Distribuicao de sentimento (rodada final)
+sentiment_distribution:
+  overall:
+    a_favor: 56.7
+    contra: 36.7
+    neutro: 3.3
+    indeciso: 3.3
+  by_segment:
+    classe-ab-urbano-sudeste:
+      segment_size: 5
+      a_favor: 20.0
+      contra: 60.0
+      neutro: 20.0
+      indeciso: 0.0
+    classe-c-urbano:
+      segment_size: 7
+      a_favor: 85.7
+      contra: 14.3
+      neutro: 0.0
+      indeciso: 0.0
+    classe-de-periferia:
+      segment_size: 5
+      a_favor: 80.0
+      contra: 20.0
+      neutro: 0.0
+      indeciso: 0.0
+    rural-interior:
+      segment_size: 5
+      a_favor: 80.0
+      contra: 0.0
+      neutro: 0.0
+      indeciso: 20.0
+    jovem-digital:
+      segment_size: 5
+      a_favor: 20.0
+      contra: 80.0
+      neutro: 0.0
+      indeciso: 0.0
+    evangelico-conservador:
+      segment_size: 3
+      a_favor: 33.3
+      contra: 66.7
+      neutro: 0.0
+      indeciso: 0.0
+
+# Etapa 2: Intensidade media por posicao
+intensity:
+  overall_average: 3.9
+  by_position:
+    a_favor: 4.1
+    contra: 4.3
+    neutro: 2.0
+    indeciso: 2.0
+
+# Etapa 3: Ranking de argumentos
+argument_ranking:
+  a_favor:
+    - argument: "Se pode votar com 16, pode responder por crime — inconsistencia da lei"
+      frequency: 12
+      impact_score: 1
+      segments_resonating: ["classe-c-urbano", "classe-de-periferia", "rural-interior"]
+    - argument: "Crime organizado usa menor como escudo/ferramenta por causa da protecao legal"
+      frequency: 10
+      impact_score: 3
+      segments_resonating: ["classe-c-urbano", "classe-de-periferia", "rural-interior", "jovem-digital"]
+    - argument: "Experiencia pessoal de assalto/roubo por menor que sabia estar protegido"
+      frequency: 8
+      impact_score: 0
+      segments_resonating: ["classe-c-urbano", "classe-de-periferia"]
+    - argument: "Eu trabalhava com 13/14/16 anos, sabia o que era certo e errado — nao tem desculpa"
+      frequency: 7
+      impact_score: 0
+      segments_resonating: ["classe-c-urbano", "classe-de-periferia", "rural-interior"]
+    - argument: "A Biblia/fe diz que quem faz o mal tem que responder — consequencia e divina"
+      frequency: 5
+      impact_score: 1
+      segments_resonating: ["evangelico-conservador", "classe-de-periferia", "classe-c-urbano"]
+    - argument: "Menor que mata nao e crianca — crianca e quem morreu"
+      frequency: 4
+      impact_score: 0
+      segments_resonating: ["classe-de-periferia", "classe-c-urbano"]
+  contra:
+    - argument: "Presidio adulto e escola do crime — jovem entra ruim e sai pior"
+      frequency: 12
+      impact_score: 2
+      segments_resonating: ["jovem-digital", "classe-ab-urbano-sudeste", "evangelico-conservador"]
+    - argument: "Estado abandonou o jovem ANTES — falta escola, saude, oportunidade"
+      frequency: 10
+      impact_score: 1
+      segments_resonating: ["jovem-digital", "classe-ab-urbano-sudeste", "classe-de-periferia"]
+    - argument: "Pesquisas e dados mostram que reduzir maioridade nao diminui violencia"
+      frequency: 7
+      impact_score: 1
+      segments_resonating: ["classe-ab-urbano-sudeste", "jovem-digital"]
+    - argument: "Jovem precisa de Deus/fe/comunidade/restauracao, nao de cadeia"
+      frequency: 5
+      impact_score: 0
+      segments_resonating: ["evangelico-conservador"]
+    - argument: "Cerebro adolescente em desenvolvimento ate 25 anos — neurociencia"
+      frequency: 5
+      impact_score: 0
+      segments_resonating: ["classe-ab-urbano-sudeste"]
+    - argument: "ROI social: custo de prevencao fecha melhor que custo de encarceramento"
+      frequency: 2
+      impact_score: 1
+      segments_resonating: ["classe-ab-urbano-sudeste"]
+
+# Etapa 4: Vulnerabilidades
+vulnerabilities:
+  - argument: "Presidio adulto e escola do crime — jovem entra ruim e sai pior"
+    segment_most_affected: "jovem-digital"
+    opinion_change_rate: 20.0
+    severity: "alta"
+    counter_narrative_recommendation: >
+      Apresentar modelo concreto de unidades prisionais separadas para jovens de 16-18 anos,
+      com programa de ressocializacao obrigatorio e monitoramento pos-saida. Citar exemplos
+      internacionais onde separacao etaria reduziu reincidencia. Transformar fraqueza em proposta:
+      "nao vamos jogar ninguem em presidio adulto — vamos criar sistema proprio."
+
+  - argument: "Crime organizado usa menor como escudo por causa da protecao legal"
+    segment_most_affected: "rural-interior"
+    opinion_change_rate: 20.0
+    severity: "alta"
+    counter_narrative_recommendation: >
+      Para quem e contra a reducao: demonstrar que o recrutamento de menores pelo crime
+      organizado nao e resolvido pela reducao da maioridade (o crime recrutaria menores de 14,
+      depois de 12). Apresentar alternativa: penas mais duras para ADULTOS que recrutam menores,
+      atacando a DEMANDA e nao a OFERTA.
+
+  - argument: "ROI social e dados de reincidencia — sistema nao funciona, ampliar e escalar problema"
+    segment_most_affected: "classe-ab-urbano-sudeste"
+    opinion_change_rate: 20.0
+    severity: "media"
+    counter_narrative_recommendation: >
+      Para quem e a favor: apresentar dados de custo por preso vs custo por aluno em escola
+      integral. Mostrar que a conta nao fecha: cada preso custa R$2.400/mes enquanto escola
+      integral custa R$800/mes. Argumento pragmatico que fala a lingua do empresario.
+
+  - argument: "Prova social — maioria do grupo e a favor, isso influencia indecisos"
+    segment_most_affected: "classe-c-urbano"
+    opinion_change_rate: 15.0
+    severity: "media"
+    counter_narrative_recommendation: >
+      Para quem e contra: evitar posicao defensiva ou academica. Usar linguagem popular e
+      historias reais de jovens recuperados para competir no campo emocional. Pesquisas e dados
+      nao vencem prova social — narrativas pessoais sim.
+
+# Etapa 5: Clusters semanticos
+clusters:
+  - name: "Pragmaticos da Seguranca"
+    size: 8
+    agent_ids: ["agent-006", "agent-008", "agent-010", "agent-012", "agent-013", "agent-016", "agent-017", "agent-022"]
+    shared_arguments:
+      - "Experiencia pessoal de vitimizacao por menor"
+      - "Se pode votar, pode ser preso"
+      - "A lei protege o criminoso"
+    predominant_position: "a_favor"
+    demographics_summary: "Classe C/D urbano e rural, 35-70 anos, maioria masculina, pragmaticos com trauma direto de violencia"
+
+  - name: "Progressistas Tecnicos"
+    size: 6
+    agent_ids: ["agent-002", "agent-004", "agent-005", "agent-023", "agent-024", "agent-026"]
+    shared_arguments:
+      - "Pesquisas mostram que reducao nao funciona"
+      - "Presidio e escola do crime"
+      - "Cerebro adolescente em desenvolvimento"
+    predominant_position: "contra"
+    demographics_summary: "Classe A/B/C, jovens digitais e profissionais com formacao superior, analiticos"
+
+  - name: "Fe como Caminho"
+    size: 4
+    agent_ids: ["agent-028", "agent-029", "agent-030", "agent-014"]
+    shared_arguments:
+      - "Jovem precisa de Deus/fe/comunidade"
+      - "Restauracao vs punicao"
+      - "A Biblia orienta sobre consequencia E misericordia"
+    predominant_position: "misto"
+    demographics_summary: "Evangelicos de diversas classes, 38-58 anos, forte ancoragem religiosa. Divididos: 2 contra (pastores), 1 a favor (fiel), 1 a favor (avo evangelica)"
+
+  - name: "Vitimas Indignadas"
+    size: 5
+    agent_ids: ["agent-006", "agent-007", "agent-012", "agent-014", "agent-017"]
+    shared_arguments:
+      - "Fui assaltado/roubado/ameacado por menor"
+      - "A lei protege o bandido e abandona a vitima"
+      - "Raiva real baseada em experiencia"
+    predominant_position: "a_favor"
+    demographics_summary: "Classe C/D, periferia urbana, 34-58 anos, vitimas diretas de violencia"
+
+  - name: "Conhecedores da Periferia"
+    size: 4
+    agent_ids: ["agent-015", "agent-025", "agent-027", "agent-009"]
+    shared_arguments:
+      - "Cresci/trabalho onde a violencia acontece"
+      - "Conheco quem foi preso menor e saiu pior"
+      - "O problema e o que acontece ANTES do crime"
+    predominant_position: "misto"
+    demographics_summary: "Classe C/D/E, periferia, 19-38 anos, vivencia direta com jovens no sistema. Divididos: 2 contra, 1 a favor, 1 contra"
+
+# Etapa 6: Dinamica de opiniao
+opinion_dynamics:
+  round_1_to_2:
+    total_changes: 4
+    change_rate: 13.3
+    direction_breakdown:
+      - from: indeciso
+        to: a_favor
+        count: 3
+      - from: indeciso
+        to: contra
+        count: 1
+    primary_trigger: "Prova social (43% a favor no sumario) + argumento do crime organizado usando menores"
+    notable_shifts: >
+      Tres indecisos com alta susceptibilidade a prova social (Fabiana, Ivone, Kauan)
+      migraram para a_favor influenciados pela maioria. Pedro Henrique migrou para contra
+      convencido pelo argumento do presidio como escola do crime.
+
+  round_2_to_3:
+    total_changes: 2
+    change_rate: 6.7
+    direction_breakdown:
+      - from: indeciso
+        to: contra
+        count: 1
+      - from: indeciso
+        to: a_favor
+        count: 1
+    primary_trigger: "Rodada de consolidacao: ROI social convenceu Guilherme (contra), prova social convenceu Rosangela (a_favor)"
+    notable_shifts: >
+      Guilherme Pires (empresario tech) decidiu pelo contra usando logica de ROI social
+      e dados de reincidencia. Rosangela Batista (evangelica) decidiu pelo a_favor por
+      identificacao maternal e pressao de maioria. Debate atingiu equilibrio — posicoes
+      endureceram sem mudancas entre campos ja definidos.
+
+  cumulative:
+    total_changes_all_rounds: 6
+    overall_change_rate: 20.0
+    most_volatile_segment: "jovem-digital"
+    most_stable_segment: "classe-de-periferia"
+
+warnings: []

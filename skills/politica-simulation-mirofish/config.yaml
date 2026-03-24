@@ -1,4 +1,4 @@
-# politica-app — Configuração Padrão
+# politica-simulation-mirofish — Configuração Padrão
 # Override via argumentos CLI: --agents 30 --rounds 5 --preset sp-capital
 
 # Simulação
@@ -29,7 +29,7 @@ aggregation:
 
 # Reutilização de Painel (Story 4.1)
 # Para reutilizar um painel gerado em simulação anterior, forneça o path via CLI:
-# /politica-app "Novo tema" --panel output/20260324-1530-reducao-maioridade/panel.yaml
+# /politica-simulation-mirofish "Novo tema" --panel output/20260324-1530-reducao-maioridade/panel.yaml
 panel:
   panel_path: null              # Path para panel.yaml existente (opcional)
                                 # Quando fornecido, fase de Assembly é pulada

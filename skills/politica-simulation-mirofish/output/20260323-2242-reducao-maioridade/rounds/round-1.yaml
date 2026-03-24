@@ -1,0 +1,429 @@
+round: 1
+type: individual
+timestamp: "2026-03-23T22:44:00-03:00"
+total_agents: 30
+successful: 30
+failed: 0
+failure_rate: 0.0
+aborted: false
+
+responses:
+  - agent_id: agent-001
+    agent_name: "Ricardo Mendes"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 3
+      main_arguments:
+        - "A legislacao atual cria um gap regulatorio explorado por organizacoes criminosas que recrutam menores sabendo que a punicao e assimetrica"
+        - "Aos 16 anos um individuo ja vota e trabalha com carteira — a inconsistencia juridica e evidente"
+        - "O problema nao e ideologico, e de incentivo estrutural: se o custo do crime e baixo, a taxa de crime sobe"
+      reasoning: "Nao tenho posicao ideologica forte. O que me incomoda e a incoerencia do sistema. A pergunta certa e qual regime de responsabilizacao gera menos reincidencia."
+
+  - agent_id: agent-002
+    agent_name: "Claudia Faria"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "A reducao e uma resposta emocional a um problema estrutural — pune o sintoma e ignora a etiologia da violencia juvenil"
+        - "A literatura criminologica internacional e categorica: encarceramento precoce aumenta reincidencia"
+        - "Estamos falando majoritariamente de jovens negros e perifericos — continuidade de um projeto historico de encarceramento seletivo"
+      reasoning: "Jogar adolescente de 16 anos no sistema prisional brasileiro — uma escola do crime — e abandonar esse jovem e a sociedade."
+
+  - agent_id: agent-003
+    agent_name: "Fernando Albuquerque"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: neutro
+      intensity: 2
+      main_arguments:
+        - "A inimputabilidade e clausula petrea — qualquer PEC e inconstitucional na origem"
+        - "O ECA ja preve medidas socioeducativas com privacao de liberdade de ate 3 anos para atos graves"
+        - "Colocar adolescente no sistema penitenciario adulto e juridicamente temerario e viola tratados internacionais"
+      reasoning: "O debate da maioridade penal sempre retorna em anos eleitorais porque e populista. O que precisa mudar e a execucao das medidas socioeducativas."
+
+  - agent_id: agent-004
+    agent_name: "Patricia Sampaio"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "O cerebro adolescente ainda esta em desenvolvimento ate os 25 anos — isso e neurociencia, nao opiniao"
+        - "Os adolescentes mais vulneraveis ja carregam traumas de abandono e violencia domestica — punicao sem tratamento nao resolve"
+        - "Minha preocupacao e o que vai acontecer com essa crianca dentro de uma penitenciaria adulta"
+      reasoning: "Como pediatra, como mae e como catolica, nao consigo concordar. Botar adolescente numa cadeia adulta nao protege a sociedade."
+
+  - agent_id: agent-005
+    agent_name: "Guilherme Pires"
+    segment: classe-ab-urbano-sudeste
+    status: success
+    error_detail: null
+    response:
+      position: indeciso
+      intensity: 2
+      main_arguments:
+        - "Em algum pais que reduziu a maioridade penal houve queda mensuravel nos indices de violencia juvenil?"
+        - "O sistema prisional brasileiro tem taxa de reincidencia absurda — jogar mais gente la parece escalar um produto que nao funciona"
+        - "O modelo atual claramente tambem nao esta funcionando — status quo nao e opcao defensavel"
+      reasoning: "Sou pragmatico. Nao vi estudo robusto mostrando resultado mensuravel. Parece mais produto politico que solucao real."
+
+  - agent_id: agent-006
+    agent_name: "Marcos Oliveira"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Menor de 16 que entra armado no meu comercio sabe muito bem o que ta fazendo"
+        - "Ja fui roubado tres vezes — na terceira o moleque ria na minha cara porque sabia que nao ia acontecer nada"
+        - "Se pode votar, pode ser preso. Simples assim"
+      reasoning: "Trabalho desde os 14 anos, nunca roubei ninguem. Esse negocio de 'a sociedade e culpada' — a sociedade sou eu que pago imposto."
+
+  - agent_id: agent-007
+    agent_name: "Sandra Costa"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 4
+      main_arguments:
+        - "Meus filho andam com medo de ir pra escola por causa de menino armado na rua"
+        - "O pastor falou no culto que a Biblia ensina que quem faz o mal tem que responder"
+        - "Como que um moleque que mata alguem fica solto porque e menor?"
+      reasoning: "Moro no Complexo do Alemao. Vejo todo dia menino de 14, 15 ano com fuzil. A lei protege ele? Meus filho merecem crescer sem medo."
+
+  - agent_id: agent-008
+    agent_name: "Wellington Santos"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 4
+      main_arguments:
+        - "Ja fui assaltado por moleque que claramente nao tinha nem 18 — e ele sabia que tava protegido"
+        - "Menor de idade hoje nao e crianca, e esperto, sabe o que faz"
+        - "Se a familia nao deu educacao e Deus no coracao, o Estado tem que dar consequencia"
+      reasoning: "Ando em todo canto dessa cidade. Nao tem lugar seguro. Todo dia peco protecao a Deus e fico de olho no retrovisor."
+
+  - agent_id: agent-009
+    agent_name: "Luciana Ferreira"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "Recebi menino baleado de 15 ano na minha mao. Nao era monstro — era menino que nunca teve chance"
+        - "Botar adolescente junto com preso adulto e sentenca de morte ou de formacao pro crime"
+        - "Precisamos de mais CAPS, escola integral, assistencia social — nao de cadeia pra adolescente"
+      reasoning: "Trabalho no SUS de Recife ha dez anos. A maioria veio de lugar que o Estado nunca apareceu. Punir sem cuidar nao e justica, e abandono."
+
+  - agent_id: agent-010
+    agent_name: "Carlos Eduardo Silva"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Com 16 anos eu ja trabalhava de carteira assinada e sabia muito bem o que era certo e errado"
+        - "Aqui no Sul a gente foi criado com responsabilidade — quem faz errado tem que pagar"
+        - "A lei antiga nao funciona mais, o mundo mudou, os crime ficaram mais grave"
+      reasoning: "Sou eletricista ha 25 anos. Meu pai me ensinou que homem assume o que faz. Menor que planeja assalto e adulto que usa a idade como desculpa."
+
+  - agent_id: agent-011
+    agent_name: "Fabiana Reis"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: indeciso
+      intensity: 2
+      main_arguments:
+        - "16 anos ja sabe o que ta fazendo ne? eu com 16 trabalhava, pagava conta"
+        - "Mas ai eu vejo video de menor explorado pelo trafico e fico: quem e o vilao aqui?"
+        - "O sistema ja e uma bagunca, jogar crianca no presidio adulto vai piorar tudo"
+      reasoning: "Sinceramente nao sei o que pensar. Um dia sou a favor, ai aparece uma historia triste no TikTok e mudo tudo."
+
+  - agent_id: agent-012
+    agent_name: "Roberto Nascimento"
+    segment: classe-c-urbano
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Trabalho noite. Vejo com meus proprios olhos quem entra aqui as tres da manha pra roubar. Menor nao e inocente, e treinado."
+        - "Esses meninos de 16 ja matam, ja estupram, ja comandam faccao. A lei fica protegendo?"
+        - "A Biblia diz que o homem colhe o que planta. Se plantou crime, tem que colher consequencia."
+      reasoning: "Sou cristao e acredito em misericordia, mas misericordia tem limite. Chega de fazer media com bandido."
+
+  - agent_id: agent-013
+    agent_name: "Jose Carlos Lima"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 4
+      main_arguments:
+        - "La no meu bairro moleque de 14 ja ta no crime. Com 16 ja mandou gente pro cemiterio."
+        - "Eu comecei a trabalhar com 13. Se eu podia trabalhar, ele pode responder."
+        - "Fica me falando de ressocializacao. Ressocializacao onde? No presidio que nao tem nem banheiro?"
+      reasoning: "Meu vizinho perdeu o filho pra um moleque de 17. O moleque saiu em dois anos. Isso nao ta certo nao."
+
+  - agent_id: agent-014
+    agent_name: "Dona Francisca Souza"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Meu neto tem 15 ano e eu fico de joelho todo dia pedindo pra Deus guardar ele"
+        - "Quem mata sabe o que ta fazendo. Nao importa a idade. So Deus sabe o que a gente passa aqui na favela."
+        - "A lei de Deus e clara: quem derrama sangue inocente vai responder. Aqui na terra e no ceu."
+      reasoning: "Criei quatro filho sozinha nessa periferia. Tem que ter responsabilidade. Deus perdoa, mas a lei da terra tem que funcionar."
+
+  - agent_id: agent-015
+    agent_name: "Reginaldo Martins"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "Mano, nao e assim que funciona nao. Joga o moleque no presidio adulto, ele vira gerente do crime em seis meses."
+        - "Eu cresci aqui. Conheco uns cinco caras que entraram menor e sairam pior."
+        - "Quer resolver? Para de matar escola publica, para de deixar familia passando fome."
+      reasoning: "Eu entendo a raiva, mas baixar a maioridade e remedio pra dor de cabeca que vem do estomago. Nao resolve."
+
+  - agent_id: agent-016
+    agent_name: "Maria das Gracas Pereira"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Minha filha, eu sei o que e isso. Criei quatro filho trabalhando desde os doze ano. Bandido tem que pagar."
+        - "Menor que mata nao e crianca nao. Crianca e o que morreu."
+        - "Deus e justo. Nao tem essa de proteger quem faz o mal so porque tem dezesseis ano."
+      reasoning: "Trabalho a vida toda, limpo casa dos outro pra criar os meus. Vem um moleque e acaba com a familia da pessoa? Tem que responder sim."
+
+  - agent_id: agent-017
+    agent_name: "Anderson Silva Ramos"
+    segment: classe-de-periferia
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Voce acha que isso e certo? Me roubaram tres vezes. Uma delas foi menino de 17 com faca no meu pescoco."
+        - "To cansado de trabalhar igual condenado e bandidinho ficar solto porque a lei protege mais ele do que eu."
+        - "Fala de direitos humanos pra familia de quem morreu. Vai la e fala."
+      reasoning: "Nao tenho paciencia pra conversa bonita. Ando de moto na madrugada. Menor armado e tao perigoso quanto adulto."
+
+  - agent_id: agent-018
+    agent_name: "Seu Raimundo Bezerra"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 4
+      main_arguments:
+        - "No meu tempo, menino de 16 ano ja casava, ja trabalhava a roca. Sabia o que era responsabilidade."
+        - "Menino sem rumo vira bicho brabo. E bicho brabo que morde tem que ser contido."
+        - "Quando nao tem limite, nao tem respeito. E sem respeito, nao tem paz."
+      reasoning: "Ja vi muita coisa nessa vida. Quem planta vento colhe tempestade. Mas punicao sem educar antes e fechar portao depois que o boi saiu."
+
+  - agent_id: agent-019
+    agent_name: "Dona Tereza Almeida"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: indeciso
+      intensity: 3
+      main_arguments:
+        - "Tem menino que e levado pro mal por gente grande, ne uai?"
+        - "Mas tambem tem vez que o crime e tao horrivel que a gente fica sem chao"
+        - "Tinha que ter um lugar separado, nao misturar com bandido adulto"
+      reasoning: "Sou mae e vo. Quero justica, mas tambem nao quero que crianca vire monstro dentro da cadeia. E complicado demais, so."
+
+  - agent_id: agent-020
+    agent_name: "Valdir Goncalves"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 4
+      main_arguments:
+        - "Filho meu com 16 ano ja consertava motor. Nao tem essa de nao saber o que faz."
+        - "Hoje virou moda usar menor pra cometer crime por causa dessa protecao."
+        - "Tem que mudar sim, mas tem que ter estrutura junto. Nao adianta prender se nao tem cadeia decente."
+      reasoning: "Sou evangelico e acredito que Deus quer ordem. Mas sozinho, baixar a maioridade nao resolve. Precisava de mais escola, mais oportunidade."
+
+  - agent_id: agent-021
+    agent_name: "Ivone Ribeiro"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: indeciso
+      intensity: 3
+      main_arguments:
+        - "Meus filhos tem 15 e 17 ano, fico com o coracao na mao todo dia"
+        - "Colocar menino de 16 no meio de bandido adulto — vai sair pior do que entrou"
+        - "Quem vai proteger esses menino la dentro? Cadeia nao e escola nao"
+      reasoning: "Oscila entre medo de ver filho virar vitima e pavor de ver filho virar numero numa cela."
+
+  - agent_id: agent-022
+    agent_name: "Seu Ademir Batista"
+    segment: rural-interior
+    status: success
+    error_detail: null
+    response:
+      position: a_favor
+      intensity: 5
+      main_arguments:
+        - "Menino de 16 ano ja sabe o que ta fazendo, pode me falar o que quiser"
+        - "No meu tempo com 14 ano eu ja trabalhava na roca, sustentava a familia"
+        - "Esse tal de ECA foi a desgraca desse pais. Acabou o respeito, acabou a redea curta"
+      reasoning: "Crime cometeu, cadeia tomou. Simples assim. Esse negocio de ficar com do de bandido novinho e que deixa o Brasil do jeito que ta."
+
+  - agent_id: agent-023
+    agent_name: "Bianca Rodrigues"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "Ja tem PESQUISA mostrando que isso nao reduz crime, para com isso"
+        - "Colocar adolescente em presidio adulto e literalmente escola do crime"
+        - "A galera quer punir o sintoma e ignorar o sistema que abandona esses moleques desde sempre"
+      reasoning: "Em 2026 a gente ainda debate isso? Paises que reduziram nao viram queda na violencia. E dado. E ciencia."
+
+  - agent_id: agent-024
+    agent_name: "Lucas Pereira"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "Reduzir maioridade e tipo tapar buraco de estrada com chiclete — resolve nada e fica feio"
+        - "O moleque de 16 no crime foi abandonado pelo Estado desde os 6. Cadeia vai consertar isso como?"
+        - "A violencia e real, mas a solucao nao pode ser jogar lenha em presidio superlotado"
+      reasoning: "E mais facil aplaudir punicao do que construir oportunidade. Menos glamour, mais trabalho."
+
+  - agent_id: agent-025
+    agent_name: "Kauan Souza"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: indeciso
+      intensity: 3
+      main_arguments:
+        - "O bagulho e mais complicado do que parece. Tenho amigo preso com 20 e entrou com 16."
+        - "Tambem tenho amigo que ficou firme na fe e hoje tem familia. A diferenca foi a escolha."
+        - "Deus me livrou da rua, mas eu tive quem me puxasse. Nem todo mundo tem isso."
+      reasoning: "Prender mais cedo nao resolve se a cadeia continuar sendo a maior faccao do Brasil. Mas nao da pra ficar de bracos cruzados."
+
+  - agent_id: agent-026
+    agent_name: "Amanda Cristina"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 5
+      main_arguments:
+        - "E clausula petrea, art. 228 da Constituicao — nao pode ser mudado nem por PEC"
+        - "O ECA nao e protecao ao criminoso, e protecao ao ser humano em desenvolvimento. Neurociencia confirma."
+        - "Brasil ja tem o quinto maior encarceramento do mundo. Mais prisao nunca foi solucao."
+      reasoning: "Raiva nao e politica publica. Reducao viola principio da protecao integral e ignora evidencias comparadas."
+
+  - agent_id: agent-027
+    agent_name: "Pedro Henrique"
+    segment: jovem-digital
+    status: success
+    error_detail: null
+    response:
+      position: indeciso
+      intensity: 2
+      main_arguments:
+        - "Ia ser otimo se prender resolvesse, mas aqui no Ceara a gente ja ta prendendo bastante e nao mudou nada"
+        - "O moleque de 16 que mata e o mesmo que aos 10 nao tinha escola boa nem saude"
+        - "Nao da pra dizer pro pai que perdeu filho que 'e so questao social', isso e desrespeito"
+      reasoning: "A diferenca entre o moleque que virou bandido e eu? Sorte, basicamente. Tive professora que me xingou na hora certa."
+
+  - agent_id: agent-028
+    agent_name: "Pastor Evandro Duarte"
+    segment: evangelico-conservador
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "A Palavra diz em Proverbios: 'instrui o jovem no caminho em que deve andar'. Nao diz joga na cadeia."
+        - "O jovem precisa de Deus, de familia, de comunidade — nao de presidio"
+        - "Ja recuperei dezenas de jovens na periferia. Nenhum foi salvo pela lei. Todos foram salvos pela fe."
+      reasoning: "O Estado quer construir mais cela. Eu quero construir mais carater. O sistema penal nao regenera, ele perverte."
+
+  - agent_id: agent-029
+    agent_name: "Rosangela Batista"
+    segment: evangelico-conservador
+    status: success
+    error_detail: null
+    response:
+      position: indeciso
+      intensity: 3
+      main_arguments:
+        - "So Deus pode mudar um coracao, e cadeia nao e lugar de encontrar Deus"
+        - "Mas sou mae, e quando vejo crianca sendo morta por menor, meu coracao parte"
+        - "Oro muito pelo meu filho de 15 ano. Peco protecao porque o mundo quer roubar nossos filhos."
+      reasoning: "Nao sei se reduzir resolve. Sei que nosso sistema prisional e horrivel. Entrego na mao de Deus."
+
+  - agent_id: agent-030
+    agent_name: "Diacono Jorge Vieira"
+    segment: evangelico-conservador
+    status: success
+    error_detail: null
+    response:
+      position: contra
+      intensity: 4
+      main_arguments:
+        - "O problema e espiritual, nao penal. Trabalhei 30 anos como porteiro, vi geracao atras de geracao"
+        - "Vi jovem de 17 que tinha tudo pra virar bandido encontrar Cristo e hoje e pai de familia"
+        - "Cadeia nao regenera, irmao. Cadeia forma faccao."
+      reasoning: "Nao sou contra punicao — sou a favor de punicao que funcione. Presidio nao funciona. Colocar menino la mais cedo e entregar pro crime organizado."

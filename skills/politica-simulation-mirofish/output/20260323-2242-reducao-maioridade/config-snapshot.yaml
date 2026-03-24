@@ -1,0 +1,9 @@
+simulation_id: "20260323-2242-reducao-maioridade"
+topic: "Redução da maioridade penal"
+preset: "brasil-geral"
+total_agents: 30
+rounds: 3
+batch_size: 10
+started_at: "2026-03-23T22:42:00-03:00"
+config_source: "config.yaml + CLI overrides"
+panel_source: "generated"
