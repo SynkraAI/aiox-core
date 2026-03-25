@@ -1,0 +1,32 @@
+schema: 1
+story: 'AIOX-HO-1'
+gate: PASS
+status_reason: 'Re-validation passed. All 3 issues from Review 1 fixed: modules moved to .claude/lib/handoff/ (tracked), duplicate tests deleted, YAML parser limitation documented. 71/71 tests pass. All 10 ACs verified. L1/L2 boundary clean.'
+reviewer: 'Quinn'
+updated: '2026-03-25T16:00:00Z'
+review_history:
+  - date: '2026-03-25T15:00:00Z'
+    gate: CONCERNS
+    reason: 'Core modules in gitignored .aiox/lib/handoff/ (ARCH-001 HIGH)'
+  - date: '2026-03-25T16:00:00Z'
+    gate: PASS
+    reason: 'All issues resolved. Modules at .claude/lib/handoff/ (tracked). 71/71 tests pass.'
+resolved_issues:
+  - id: 'ARCH-001'
+    severity: high
+    status: FIXED
+    resolution: 'Modules moved from .aiox/lib/handoff/ to .claude/lib/handoff/. .gitignore has !.claude/lib/ exception. All require() paths updated in hooks.'
+  - id: 'MNT-001'
+    severity: low
+    status: FIXED
+    resolution: 'Duplicate .aiox/lib/handoff/__tests__/ directory deleted. Canonical tests at tests/handoff/ only.'
+  - id: 'MNT-002'
+    severity: low
+    status: FIXED
+    resolution: 'Limitation comment added to session-state.js L9-13 documenting flat-only YAML parser constraint.'
+remaining_observations:
+  - id: 'OBS-001'
+    severity: low
+    type: cosmetic
+    finding: 'tests/handoff/integration.test.js L79-80 contains test fixture data strings referencing .aiox/lib/handoff/ as sample files_modified entries. Not functional -- purely cosmetic.'
+waiver: { active: false }

@@ -15,6 +15,7 @@ const fs = require('fs');
 const path = require('path');
 
 const hookPath = path.join(__dirname, 'precompact-session-digest.cjs');
+const handoffSaverPath = path.join(__dirname, 'handoff-saver.cjs');
 
 let stdinData = '';
 try {
@@ -25,6 +26,23 @@ try {
 
 if (!stdinData) process.exit(0);
 
+// --- Tier 3: Handoff Save (BEFORE digest) ---
+// Errors MUST NOT block PreCompact. Timeout: 5000ms.
+if (fs.existsSync(handoffSaverPath)) {
+  try {
+    execFileSync(process.execPath, [handoffSaverPath], {
+      input: stdinData,
+      timeout: 5000,
+      maxBuffer: 512 * 1024,
+      env: process.env,
+      stdio: ['pipe', 'pipe', 'pipe'],
+    });
+  } catch (_) {
+    // Silent failure -- handoff save errors never block PreCompact
+  }
+}
+
+// --- Session Digest (original behavior) ---
 try {
   const stdout = execFileSync(process.execPath, [hookPath], {
     input: stdinData,

@@ -1,4 +1,8 @@
-# Agent Handoff Protocol — Context Compaction
+> **DEPRECATED**: This rule is superseded by `.claude/rules/unified-handoff.md` (3-Tier Unified Handoff System).
+> Tier 1 (Micro-Handoff) replaces this file's agent handoff protocol with automatic hook-based persistence.
+> This file is kept for reference only. All new behavior follows `unified-handoff.md`.
+
+# Agent Handoff Protocol — Context Compaction (DEPRECATED)
 
 ## Purpose
 

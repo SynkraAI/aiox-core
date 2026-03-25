@@ -121,6 +121,7 @@ scripts/                      # Project-specific scripts (not part of core)
 security/                     # Security squad
 telemetry/                    # Telemetry squad
 tests/                        # Test files for expansion projects
+!tests/handoff/
 
 # AIOX Development Artifacts (generated during workflow execution)
 # These files are created by agents during development and should NOT be in version control
@@ -227,6 +228,8 @@ test-sample-*.md
 .aiox/project-status.yaml
 .aiox/notifications/
 .aiox/sessions/
+.aiox/current-session/
+.aiox/session-history/
 
 # ESLint cache
 .eslintcache
@@ -345,6 +348,7 @@ synapse-package.zip
 scripts/glue/
 .claude/skills/
 !.claude/hooks/
+!.claude/lib/
 .claude/templates/
 .claude/agents/
 .claude/agent-memory/
