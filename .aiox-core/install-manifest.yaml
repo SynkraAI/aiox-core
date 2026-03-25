@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-03-10T14:29:16.009Z"
+generated_at: "2026-03-25T22:46:17.332Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1091
 files:
@@ -421,9 +421,9 @@ files:
     type: core
     size: 11590
   - path: core/execution/predictive-pipeline.js
-    hash: sha256:a37f0ce4907299a78aaf33d842f8a366e93e698df42dfe90fbde2e60b57d167f
+    hash: sha256:c1f4d03e70a6d073fad99a453e3a2a381d13a1383b1ac4cfd17f594e8ff8992a
     type: core
-    size: 41437
+    size: 42131
   - path: core/execution/rate-limit-manager.js
     hash: sha256:1b6e2ca99cf59a9dfa5a4e48109d0a47f36262efcc73e69f11a1c0c727d48abb
     type: core
@@ -793,9 +793,9 @@ files:
     type: core
     size: 8850
   - path: core/memory/decision-memory.js
-    hash: sha256:7c9189410dffa771db9866e40f1ccb4b8c3bac5d57b4a20f2ef99235ae71ad42
+    hash: sha256:f5c89489dd01ccd7c91754754f4f331632e9ecc7fa6d788ed95cf2cce6ceab89
     type: core
-    size: 18911
+    size: 19230
   - path: core/memory/gotchas-memory.js
     hash: sha256:0063eff42caf0dda759c0390ac323e7b102f5507f27b8beb7b0acc2fbec407c4
     type: core
@@ -1229,9 +1229,9 @@ files:
     type: data
     size: 9575
   - path: data/entity-registry.yaml
-    hash: sha256:151aca46769c614f0238e7a8e2968884c3888b438ff1c634f0eeb2505e325b83
+    hash: sha256:b9291b845201a58d059c62eed6ef328686a9b163b5e651a553e74e279b76f9a6
     type: data
-    size: 521804
+    size: 523054
   - path: data/learned-patterns.yaml
     hash: sha256:24ac0b160615583a0ff783d3da8af80b7f94191575d6db2054ec8e10a3f945dc
     type: data
