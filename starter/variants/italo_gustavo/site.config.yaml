@@ -1,0 +1,54 @@
+# DS Factory — Site Config for italo_gustavo
+# Generated: 2026-03-19T16:55:00.596Z
+
+slug: "italo-gustavo"
+name: "italo_gustavo"
+language: "pt-BR"
+seo:
+  title: "italo_gustavo — Design System"
+  description: "Design System completo para italo_gustavo. Sistema de Gestao Financeira e Transacionamento."
+  og_image: "/variants/italo_gustavo/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "italo-gustavo"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "italo_gustavo"
+  logo_dark_alt: "italo_gustavo"
+  brandbook_tagline: "Sistema de Gestao Financeira e Transacionamento Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "italo_gustavo"
+    legal_name: "italo_gustavo"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/italo_gustavo/logo-light.svg"
+  logo_dark: "/variants/italo_gustavo/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/italo_gustavo/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

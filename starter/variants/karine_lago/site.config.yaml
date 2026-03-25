@@ -1,0 +1,55 @@
+# DS Factory — Site Config for Karine Lago EdTech
+# Generated: 2026-03-20T13:50:32.748Z
+
+slug: "karine-lago"
+name: "Karine Lago EdTech"
+language: "pt-BR"
+default_theme: "main"
+seo:
+  title: "Karine Lago EdTech — Design System"
+  description: "Design System completo para Karine Lago EdTech. Cursos de Dados e IA para mercado corporativo."
+  og_image: "/variants/karine_lago/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "karine-lago"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "Karine Lago EdTech"
+  logo_dark_alt: "Karine Lago EdTech"
+  brandbook_tagline: "Cursos de Dados e IA para mercado corporativo Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "Karine Lago EdTech"
+    legal_name: "Karine Lago EdTech"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/karine_lago/logo-light.svg"
+  logo_dark: "/variants/karine_lago/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/karine_lago/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

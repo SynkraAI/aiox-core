@@ -1,0 +1,54 @@
+# DS Factory — Site Config for Ecossistema Builder
+# Generated: 2026-03-19T16:55:00.592Z
+
+slug: "junior-lorenzi"
+name: "Ecossistema Builder"
+language: "pt-BR"
+seo:
+  title: "Ecossistema Builder — Design System"
+  description: "Design System completo para Ecossistema Builder. SaaS + Formacao para profissionais criativos."
+  og_image: "/variants/junior_lorenzi/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "junior-lorenzi"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "Ecossistema Builder"
+  logo_dark_alt: "Ecossistema Builder"
+  brandbook_tagline: "SaaS + Formacao para profissionais criativos Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "Ecossistema Builder"
+    legal_name: "Ecossistema Builder"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/junior_lorenzi/logo-light.svg"
+  logo_dark: "/variants/junior_lorenzi/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/junior_lorenzi/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

@@ -1,0 +1,60 @@
+/* ═══════════════════════════════════════════════════════════════
+ * DS Factory — Generated tokens for Unknown
+ * Workspace: unknown
+ * Generated: 2026-03-19T16:52:28.075Z
+ * Coverage: 0%
+ * Theme: native-dark
+ * ═══════════════════════════════════════════════════════════════ */
+
+@layer brandbook-bridge {
+  .brandbook-root {
+
+    /* PALETTE — Unknown */
+    --bb-accent: #DDD1BB;
+    --bb-dark: #050505;
+    --bb-surface: #0f0f0f;
+    --bb-surface-alt: #1a1a1a;
+    --bb-cream: rgb(244, 244, 232);
+    --bb-dim: rgba(244, 244, 232, 0.45);
+
+    /* ACCENT OPACITIES — Unknown */
+    --bb-accent-02: rgba(221, 209, 187, 0.02);
+    --bb-accent-05: rgba(221, 209, 187, 0.05);
+    --bb-accent-08: rgba(221, 209, 187, 0.08);
+    --bb-accent-10: rgba(221, 209, 187, 0.1);
+    --bb-accent-15: rgba(221, 209, 187, 0.15);
+    --bb-accent-20: rgba(221, 209, 187, 0.2);
+    --bb-accent-25: rgba(221, 209, 187, 0.25);
+    --bb-accent-30: rgba(221, 209, 187, 0.3);
+    --bb-accent-40: rgba(221, 209, 187, 0.4);
+
+    /* STATUS — Unknown */
+    --bb-blue: #0099FF;
+    --bb-flare: #d2ddbb;
+    --bb-error: #EF4444;
+    --bb-warning: #f59e0b;
+
+    /* BORDERS — Unknown */
+    --bb-border: rgba(244, 244, 232, 0.15);
+    --bb-border-hover: rgba(244, 244, 232, 0.24);
+
+    /* MAPS — Unknown */
+    --bb-map-land: #1a1a1a;
+    --bb-map-water: #050505;
+    --bb-map-marker: #DDD1BB;
+    --bb-map-land-hover: rgba(221, 209, 187, 0.15);
+
+    /* CHARTS — Unknown */
+    --bb-chart-1: #DDD1BB;
+    --bb-chart-2: #0099FF;
+    --bb-chart-3: #EF4444;
+    --bb-chart-4: #f59e0b;
+    --bb-chart-5: #8B5CF6;
+    --bb-chart-6: #06B6D4;
+
+    /* TYPOGRAPHY — Unknown */
+    --font-bb-sans: "Manrope", system-ui, sans-serif;
+    --font-bb-display: "Manrope", system-ui, sans-serif;
+    --font-bb-mono: "IBM Plex Mono", monospace;
+  }
+}

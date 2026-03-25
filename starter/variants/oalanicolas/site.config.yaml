@@ -1,0 +1,54 @@
+# DS Factory — Site Config for YOUR_BRAND_NAME_HERE
+# Generated: 2026-03-19T16:55:00.589Z
+
+slug: "oalanicolas"
+name: "YOUR_BRAND_NAME_HERE"
+language: "pt-BR"
+seo:
+  title: "YOUR_BRAND_NAME_HERE — Design System"
+  description: "Design System completo para YOUR_BRAND_NAME_HERE. Design System."
+  og_image: "/variants/oalanicolas/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "oalanicolas"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "YOUR_BRAND_NAME_HERE"
+  logo_dark_alt: "YOUR_BRAND_NAME_HERE"
+  brandbook_tagline: "Design System Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "YOUR_BRAND_NAME_HERE"
+    legal_name: "YOUR_BRAND_NAME_HERE"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/oalanicolas/logo-light.svg"
+  logo_dark: "/variants/oalanicolas/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/oalanicolas/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

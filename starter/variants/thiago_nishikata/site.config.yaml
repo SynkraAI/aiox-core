@@ -1,0 +1,54 @@
+# DS Factory — Site Config for Brasil em Dobro
+# Generated: 2026-03-19T16:55:00.587Z
+
+slug: "thiago-nishikata"
+name: "Brasil em Dobro"
+language: "pt-BR"
+seo:
+  title: "Brasil em Dobro — Design System"
+  description: "Design System completo para Brasil em Dobro. Tour Gastronomico Digital (App de Cupons)."
+  og_image: "/variants/thiago_nishikata/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "thiago-nishikata"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "Brasil em Dobro"
+  logo_dark_alt: "Brasil em Dobro"
+  brandbook_tagline: "Tour Gastronomico Digital (App de Cupons) Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "Brasil em Dobro"
+    legal_name: "Brasil em Dobro"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/thiago_nishikata/logo-light.svg"
+  logo_dark: "/variants/thiago_nishikata/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/thiago_nishikata/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

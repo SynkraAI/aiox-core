@@ -1,0 +1,54 @@
+# DS Factory — Site Config for Level 8 / Hero Base (Holding)
+# Generated: 2026-03-19T16:55:00.597Z
+
+slug: "joao-biggie-com-romulo-medeiros"
+name: "Level 8 / Hero Base (Holding)"
+language: "pt-BR"
+seo:
+  title: "Level 8 / Hero Base (Holding) — Design System"
+  description: "Design System completo para Level 8 / Hero Base (Holding). Publisher/Holding de Games."
+  og_image: "/variants/joao_biggie_com_romulo_medeiros/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "joao-biggie-com-romulo-medeiros"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "Level 8 / Hero Base (Holding)"
+  logo_dark_alt: "Level 8 / Hero Base (Holding)"
+  brandbook_tagline: "Publisher/Holding de Games Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "Level 8 / Hero Base (Holding)"
+    legal_name: "Level 8 / Hero Base (Holding)"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/joao_biggie_com_romulo_medeiros/logo-light.svg"
+  logo_dark: "/variants/joao_biggie_com_romulo_medeiros/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/joao_biggie_com_romulo_medeiros/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

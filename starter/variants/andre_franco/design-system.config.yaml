@@ -1,0 +1,79 @@
+# DS Factory — Design System Config for Andre Franco Design System
+# Generated: 2026-03-19T16:55:00.588Z
+
+id: "andre-franco"
+name: "Andre Franco Design System"
+owner_bu: "DS Factory"
+themes:
+  main:
+    label: "Andre Franco Main"
+    role: "primary"
+    status: "active"
+    description: "Primary theme for Andre Franco"
+    allowed_use_cases:
+      - "default_site"
+      - "landing_page"
+      - "product_page"
+      - "brandbook"
+    tokens:
+      primary: "tokens.css"
+      files: []
+      prefix: "--bb-"
+    brandbook:
+      picker_label: "Andre Franco"
+      accent_name: "Andre Franco Primary"
+      accent_hex: "#DDD1BB"
+      accent_rgb: "RGB 221,209,187"
+      accent_text_color: "var(--bb-dark)"
+      live_badge_color: "#DDD1BB"
+      legacy_ids: []
+  secondary:
+    label: "Andre Franco Secondary"
+    role: "secondary"
+    status: "restricted"
+    description: "Secondary accent theme for Andre Franco"
+    allowed_use_cases:
+      - "premium_offer"
+      - "premium_event"
+    forbidden_use_cases:
+      - "default_site"
+    tokens:
+      primary: "tokens.css"
+      files: []
+      prefix: "--bb-"
+    brandbook:
+      picker_label: "Andre Franco Accent"
+      accent_name: "Andre Franco Accent"
+      accent_hex: "#d2ddbb"
+      accent_rgb: "RGB 210,221,187"
+      accent_text_color: "var(--bb-dark)"
+      live_badge_color: "#d2ddbb"
+      legacy_ids: []
+governance:
+  requires_explicit_approval_for_theme_override: true
+  fallback_theme: "main"
+  validation_rules:
+    - "source_must_exist"
+    - "source_type_must_be_local_or_external"
+    - "default_theme_must_exist"
+    - "app_theme_must_exist"
+apps:
+  - id: "andre-franco-design-system"
+    root: "."
+    theme: "main"
+    framework: "next.js"
+    ui_primitives: "radix-ui"
+    components_root: "src/components"
+    component_dirs:
+    atoms: "brandbook/atoms"
+    molecules: "brandbook/molecules"
+    organisms: "brandbook/organisms"
+    chrome: "brandbook/chrome"
+    pages: "brandbook/pages"
+    token_files:
+    - "src/components/brandbook/styles/tokens.css"
+    - "src/components/brandbook/styles/keyframes.css"
+    - "src/components/brandbook/styles/patterns.css"
+    - "src/components/brandbook/styles/primitives.css"
+    - "src/components/brandbook/styles/components-lib.css"
+    - "src/components/brandbook/styles/editorial-lib.css"

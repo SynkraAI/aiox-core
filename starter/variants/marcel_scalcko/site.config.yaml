@@ -1,0 +1,54 @@
+# DS Factory — Site Config for Grupo Scalco
+# Generated: 2026-03-19T16:55:00.599Z
+
+slug: "marcel-scalcko"
+name: "Grupo Scalco"
+language: "pt-BR"
+seo:
+  title: "Grupo Scalco — Design System"
+  description: "Design System completo para Grupo Scalco. Desenvolvimento Humano (treinamentos vivenciais +."
+  og_image: "/variants/marcel_scalcko/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "marcel-scalcko"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "Grupo Scalco"
+  logo_dark_alt: "Grupo Scalco"
+  brandbook_tagline: "Desenvolvimento Humano (treinamentos vivenciais + Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "Grupo Scalco"
+    legal_name: "Grupo Scalco"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/marcel_scalcko/logo-light.svg"
+  logo_dark: "/variants/marcel_scalcko/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/marcel_scalcko/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

@@ -1,0 +1,113 @@
+# DS Factory — Design System Config for Karine Lago EdTech Design System
+# Generated: 2026-03-20T13:50:32.749Z
+
+id: "karine-lago"
+name: "Karine Lago EdTech Design System"
+status: "active"
+owner_bu: "ds-factory"
+source:
+  type: "local"
+  repo_root: "."
+  ds_root: "src/components/brandbook"
+default_theme: "main"
+runtime:
+  brand_data_module: "./karine-lago-brand-data"
+themes:
+  main:
+    label: "Karine Lago EdTech Main"
+    role: "primary"
+    status: "active"
+    description: "Primary theme for Karine Lago EdTech"
+    allowed_use_cases:
+      - "default_site"
+      - "landing_page"
+      - "product_page"
+      - "brandbook"
+    forbidden_use_cases: []
+    modes:
+      - "main"
+    tokens:
+      primary: "starter/variants/karine_lago/tokens.css"
+      files:
+        - "src/components/brandbook/styles/keyframes.css"
+        - "src/components/brandbook/styles/patterns.css"
+        - "src/components/brandbook/styles/primitives.css"
+        - "src/components/brandbook/styles/components-lib.css"
+        - "src/components/brandbook/styles/editorial-lib.css"
+      prefix: "--bb-"
+    brandbook:
+      picker_label: "Karine Lago EdTech"
+      accent_name: "Karine Lago EdTech Primary"
+      accent_hex: "#cd3829"
+      accent_rgb: "RGB 205,56,41"
+      accent_cmyk: "CMYK 0,73,80,20"
+      accent_text_color: "var(--bb-dark)"
+      live_badge_color: "var(--bb-accent)"
+      edition_label: "Karine Lago EdTech Design System Edition"
+      legacy_ids: []
+    patterns:
+      - "pattern-crosshair-grid"
+      - "pattern-dot-grid"
+    notes: "DS Factory generated"
+  secondary:
+    label: "Karine Lago EdTech Secondary"
+    role: "secondary"
+    status: "restricted"
+    description: "Secondary accent theme for Karine Lago EdTech"
+    allowed_use_cases:
+      - "premium_offer"
+      - "premium_event"
+    forbidden_use_cases:
+      - "default_site"
+    modes:
+      - "secondary"
+    tokens:
+      primary: "starter/variants/karine_lago/tokens.css"
+      files:
+        - "src/components/brandbook/styles/keyframes.css"
+        - "src/components/brandbook/styles/patterns.css"
+        - "src/components/brandbook/styles/primitives.css"
+        - "src/components/brandbook/styles/components-lib.css"
+        - "src/components/brandbook/styles/editorial-lib.css"
+      prefix: "--bb-"
+    brandbook:
+      picker_label: "Karine Lago EdTech Accent"
+      accent_name: "Karine Lago EdTech Accent"
+      accent_hex: "#a98822"
+      accent_rgb: "RGB 169,136,34"
+      accent_cmyk: "CMYK 0,20,80,34"
+      accent_text_color: "var(--bb-dark)"
+      live_badge_color: "#a98822"
+      edition_label: "Karine Lago EdTech Accent Edition"
+      legacy_ids: []
+    patterns:
+      - "frame-bracket"
+    notes: ""
+governance:
+  requires_explicit_approval_for_theme_override: true
+  fallback_theme: "main"
+  validation_rules:
+    - "source_must_exist"
+    - "source_type_must_be_local_or_external"
+    - "default_theme_must_exist"
+    - "app_theme_must_exist"
+apps:
+  - id: "karine-lago-design-system"
+    root: "."
+    theme: "main"
+    framework: "next.js"
+    ui_primitives: "radix-ui"
+    components_root: "src/components"
+    component_dirs:
+    atoms: "brandbook/atoms"
+    molecules: "brandbook/molecules"
+    organisms: "brandbook/organisms"
+    chrome: "brandbook/chrome"
+    pages: "brandbook/pages"
+    token_files:
+    - "starter/variants/karine_lago/tokens.css"
+    - "src/components/brandbook/styles/keyframes.css"
+    - "src/components/brandbook/styles/patterns.css"
+    - "src/components/brandbook/styles/primitives.css"
+    - "src/components/brandbook/styles/components-lib.css"
+    - "src/components/brandbook/styles/editorial-lib.css"

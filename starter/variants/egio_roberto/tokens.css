@@ -1,0 +1,222 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   BRANDBOOK BRIDGE — Unknown
+   DS Factory Generated: 2026-03-19T22:59:52.889Z
+   Workspace: unknown | Coverage: 0% | Theme: native-dark
+   Uses [data-bb-theme] attribute selector for higher specificity than globals.css .brandbook-root
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.brandbook-root[data-bb-theme] {
+    /* Core palette — direct values override globals.css defaults */
+    --bb-accent: #DDD1BB;
+    --bb-dark: #0a0a0a;
+    --bb-surface: #141414;
+    --bb-surface-alt: #1e1e1e;
+    --bb-cream: rgb(237, 237, 237);
+    --bb-cream-alt: rgb(237, 237, 237);
+    --bb-warm-white: #FFFFED;
+    --bb-dim: rgba(237, 237, 237, 0.45);
+    --bb-canvas: #0a0a0a;
+    --bb-surface-deep: #0a0a0a;
+    --bb-surface-overlay: rgba(18, 18, 19, 0.94);
+    --bb-surface-panel: #141414;
+    --bb-surface-console: #1e1e1e;
+    --bb-surface-hover-strong: #1e1e1e;
+    --bb-flare: #d2ddbb;
+    --bb-border: rgba(237, 237, 237, 0.15);
+    --bb-border-soft: rgba(237, 237, 237, 0.15);
+    --bb-border-strong: rgba(237, 237, 237, 0.24);
+    --bb-border-hover: rgba(237, 237, 237, 0.24);
+    --bb-border-input: rgba(237, 237, 237, 0.15);
+
+    /* Legacy aliases mapped to bb-* */
+    --lime: #DDD1BB;
+    --dark: #0a0a0a;
+    --void: #000000;
+    --surface: #141414;
+    --surface-alt: #1e1e1e;
+    --cream: rgb(237, 237, 237);
+    --cream-alt: rgb(237, 237, 237);
+    --warm-white: #FFFFED;
+
+    /* Neutral scale */
+    --gray-charcoal: var(--bb-gray-charcoal, #3D3D3D);
+    --gray-dim: var(--bb-gray-dim, #696969);
+    --gray-muted: var(--bb-gray-muted, #999999);
+    --gray-silver: var(--bb-gray-silver, #BDBDBD);
+    --gray-light: var(--bb-gray-light, #C2C2C2);
+
+    /* Accent colors — direct values */
+    --bb-blue: #0099FF;
+    --bb-error: #EF4444;
+    --bb-warning: #f59e0b;
+    --blue: #0099FF;
+    --flare: #d2ddbb;
+    --error: #EF4444;
+    --warning: #f59e0b;
+
+    /* Typography — direct values */
+    --font-bb-sans: "Inter", system-ui, sans-serif;
+    --font-bb-display: "Inter", system-ui, sans-serif;
+    --font-bb-mono: "IBM Plex Mono", monospace;
+    --font-sans: "Inter", system-ui, sans-serif;
+    --font-display: "Inter", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
+
+    --font-weight-thin: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+
+    /* Easing / motion */
+    --ease-spring: var(--bb-ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+    --ease-smooth: var(--bb-ease-smooth, cubic-bezier(0.25, 0.1, 0.25, 1));
+    --ease-decel: var(--bb-ease-decel, cubic-bezier(0, 0, 0.2, 1));
+    --ease-accel: var(--bb-ease-accel, cubic-bezier(0.4, 0, 1, 1));
+    --ease-expo: var(--bb-ease-expo, cubic-bezier(0.16, 1, 0.3, 1));
+
+    --motion-duration-slow: var(--bb-dur-slow, 0.7s);
+    --motion-duration-medium: var(--bb-dur-medium, 0.4s);
+    --motion-duration-fast: var(--bb-dur-fast, 0.2s);
+    --motion-easing-spring: var(--bb-ease-expo, cubic-bezier(0.16, 1, 0.3, 1));
+
+    /* Breakpoints */
+    --bp-desktop: 1200px;
+    --bp-tablet: 768px;
+    --bp-mobile: 767px;
+
+    /* Layering */
+    --layer-nav: 100;
+    --layer-dropdown: 200;
+    --layer-overlay: 300;
+    --layer-modal: 400;
+    --layer-toast: 500;
+
+    /* Border primitives */
+    --border-width-base: 2px;
+    --border-radius-none: 0px;
+
+    /* Semantic background */
+    --color-bg-void: var(--void);
+    --color-bg-base: var(--dark);
+    --color-bg-elevated: var(--surface-alt);
+    --color-bg-surface: var(--surface);
+    --color-bg-surface-alt: var(--surface-alt);
+    --color-bg-overlay: rgba(61, 61, 61, 0.5);
+
+    /* Semantic text */
+    --dim: var(--bb-dim, rgba(237, 237, 237, 0.45));
+    --color-text-base: var(--cream);
+    --color-text-secondary: rgba(221, 209, 187, 0.3);
+    --color-text-tertiary: rgba(221, 209, 187, 0.25);
+    --color-text-muted: var(--dim);
+    --cream-dim: var(--dim);
+
+    /* Brand / glow — direct values */
+    --color-brand: #DDD1BB;
+    --neon: #DDD1BB;
+    --neon-dim: rgba(221, 209, 187, 0.15);
+    --neon-glow: rgba(221, 209, 187, 0.4);
+    --lime-glow: rgba(221, 209, 187, 0.25);
+    --lime-glow-soft: rgba(221, 209, 187, 0.1);
+    --accent-glow: rgba(221, 209, 187, 0.25);
+    --accent-glow-soft: rgba(221, 209, 187, 0.1);
+
+    /* Semantic mappings */
+    --primary: #DDD1BB;
+    --primary-foreground: #0a0a0a;
+    --accent: rgba(221, 209, 187, 0.1);
+    --accent-foreground: #DDD1BB;
+    --ring: rgba(221, 209, 187, 0.4);
+    --background: #0a0a0a;
+    --foreground: rgb(237, 237, 237);
+    --card: #141414;
+    --card-foreground: rgb(237, 237, 237);
+    --popover: #141414;
+    --popover-foreground: rgb(237, 237, 237);
+    --secondary: #1e1e1e;
+    --secondary-foreground: rgb(237, 237, 237);
+    --muted: #141414;
+    --muted-foreground: rgba(237, 237, 237, 0.45);
+    --input: rgba(237, 237, 237, 0.15);
+    --destructive: #EF4444;
+
+    /* Accent opacities */
+    --bb-accent-02: rgba(221, 209, 187, 0.02);
+    --bb-accent-05: rgba(221, 209, 187, 0.05);
+    --bb-accent-08: rgba(221, 209, 187, 0.08);
+    --bb-accent-10: rgba(221, 209, 187, 0.1);
+    --bb-accent-15: rgba(221, 209, 187, 0.15);
+    --bb-accent-20: rgba(221, 209, 187, 0.2);
+    --bb-accent-25: rgba(221, 209, 187, 0.25);
+    --bb-accent-30: rgba(221, 209, 187, 0.3);
+    --bb-accent-40: rgba(221, 209, 187, 0.4);
+
+    /* Border semantics — direct values */
+    --border: rgba(237, 237, 237, 0.15);
+    --border-hover: rgba(237, 237, 237, 0.24);
+    --border-soft: var(--border);
+    --border-strong: var(--gray-charcoal);
+    --border-focus: var(--gray-silver);
+
+    /* Overlay / shadow */
+    --shadow: rgba(0, 0, 0, 0.2);
+    --overlay: rgba(61, 61, 61, 0.5);
+
+    /* Selection */
+    --selection-bg: var(--dark);
+    --selection-fg: var(--lime);
+
+    /* Warning states */
+    --warning-bg: rgba(245, 158, 11, 0.05);
+    --warning-border: rgba(245, 158, 11, 0.2);
+
+    /* Focus */
+    --focus-brand: var(--lime);
+    --focus-neutral: var(--gray-silver);
+
+    /* Chart palette — direct values */
+    --bb-chart-1: #DDD1BB;
+    --bb-chart-2: #0099FF;
+    --bb-chart-3: #EF4444;
+    --bb-chart-4: #f59e0b;
+    --bb-chart-5: #8B5CF6;
+    --bb-chart-6: #06B6D4;
+    --bb-chart-tooltip-bg: #141414;
+    --bb-chart-tooltip-border: rgba(237, 237, 237, 0.15);
+    --bb-chart-tooltip-text: rgb(237, 237, 237);
+    --bb-chart-grid: rgba(244, 244, 232, 0.06);
+    --bb-chart-axis: rgba(244, 244, 232, 0.3);
+    --bb-chart-ring-bg: rgba(244, 244, 232, 0.08);
+
+    /* Map palette — direct values */
+    --bb-map-land: #1e1e1e;
+    --bb-map-border: rgba(156, 156, 156, 0.12);
+    --bb-map-marker: #DDD1BB;
+    --bb-map-water: #0a0a0a;
+    --bb-map-land-hover: rgba(221, 209, 187, 0.08);
+
+    /* Legacy aliases */
+    --color-brand-primary: var(--lime);
+    --color-background-base: #F4F4F4;
+    --color-surface-grey: #D6D6D6;
+    --color-surface-dark: var(--surface);
+    --color-text-primary: var(--cream);
+    --color-text-inverse: #FFFFFF;
+    --font-family-sans: var(--font-sans);
+    --font-family-mono: var(--font-mono);
+    --letter-spacing-tight: -0.05em;
+    --letter-spacing-base: normal;
+    --border-color-default: var(--color-text-primary);
+}
+
+/* Ensure accent opacities and semantic tokens also override globals.css secondary theme */
+.brandbook-root[data-bb-theme="secondary"] {
+    --bb-accent: #d2ddbb;
+    --bb-accent-10: rgba(210, 221, 187, 0.1);
+    --bb-accent-15: rgba(210, 221, 187, 0.15);
+    --bb-accent-25: rgba(210, 221, 187, 0.25);
+    --bb-accent-40: rgba(210, 221, 187, 0.4);
+}

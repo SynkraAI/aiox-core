@@ -1,0 +1,54 @@
+# DS Factory — Site Config for Academia Lendária
+# Generated: 2026-03-19T16:55:00.585Z
+
+slug: "academia-lendaria"
+name: "Academia Lendária"
+language: "pt-BR"
+seo:
+  title: "Academia Lendária — Design System"
+  description: "Design System completo para Academia Lendária. Design System."
+  og_image: "/variants/academia_lendaria/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "academia-lendaria"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "Academia Lendária"
+  logo_dark_alt: "Academia Lendária"
+  brandbook_tagline: "Design System Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "Academia Lendária"
+    legal_name: "Academia Lendária"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/academia_lendaria/logo-light.svg"
+  logo_dark: "/variants/academia_lendaria/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/academia_lendaria/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

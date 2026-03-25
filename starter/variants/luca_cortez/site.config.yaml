@@ -1,0 +1,54 @@
+# DS Factory — Site Config for Optimus iSystem
+# Generated: 2026-03-19T16:55:00.598Z
+
+slug: "luca-cortez"
+name: "Optimus iSystem"
+language: "pt-BR"
+seo:
+  title: "Optimus iSystem — Design System"
+  description: "Design System completo para Optimus iSystem. SaaS de IA para analise de apostas esportivas."
+  og_image: "/variants/luca_cortez/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "luca-cortez"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "Optimus iSystem"
+  logo_dark_alt: "Optimus iSystem"
+  brandbook_tagline: "SaaS de IA para analise de apostas esportivas Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "Optimus iSystem"
+    legal_name: "Optimus iSystem"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/luca_cortez/logo-light.svg"
+  logo_dark: "/variants/luca_cortez/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/luca_cortez/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

@@ -1,0 +1,54 @@
+# DS Factory — Site Config for Omni Hypnosis
+# Generated: 2026-03-19T16:55:00.599Z
+
+slug: "rafaela-mendes-com-michel-arruda"
+name: "Omni Hypnosis"
+language: "pt-BR"
+seo:
+  title: "Omni Hypnosis — Design System"
+  description: "Design System completo para Omni Hypnosis. Educacao / Formacao Profissional em Hipnoterapia."
+  og_image: "/variants/rafaela_mendes_com_michel_arruda/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "rafaela-mendes-com-michel-arruda"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "Omni Hypnosis"
+  logo_dark_alt: "Omni Hypnosis"
+  brandbook_tagline: "Educacao / Formacao Profissional em Hipnoterapia Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "Omni Hypnosis"
+    legal_name: "Omni Hypnosis"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/rafaela_mendes_com_michel_arruda/logo-light.svg"
+  logo_dark: "/variants/rafaela_mendes_com_michel_arruda/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/rafaela_mendes_com_michel_arruda/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

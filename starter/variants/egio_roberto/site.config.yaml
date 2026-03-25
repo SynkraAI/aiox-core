@@ -1,0 +1,54 @@
+# DS Factory — Site Config for Conta Magic (Conta Online Magic)
+# Generated: 2026-03-19T16:55:00.594Z
+
+slug: "egio-roberto"
+name: "Conta Magic (Conta Online Magic)"
+language: "pt-BR"
+seo:
+  title: "Conta Magic (Conta Online Magic) — Design System"
+  description: "Design System completo para Conta Magic (Conta Online Magic). Equipamentos Medicos para Medicina Estetica."
+  og_image: "/variants/egio_roberto/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "egio-roberto"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "Conta Magic (Conta Online Magic)"
+  logo_dark_alt: "Conta Magic (Conta Online Magic)"
+  brandbook_tagline: "Equipamentos Medicos para Medicina Estetica Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "Conta Magic (Conta Online Magic)"
+    legal_name: "Conta Magic (Conta Online Magic)"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/egio_roberto/logo-light.svg"
+  logo_dark: "/variants/egio_roberto/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/egio_roberto/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

@@ -1,0 +1,54 @@
+# DS Factory — Site Config for Eduardo Colautti
+# Generated: 2026-03-19T16:55:00.592Z
+
+slug: "eduardo-colautti"
+name: "Eduardo Colautti"
+language: "pt-BR"
+seo:
+  title: "Eduardo Colautti — Design System"
+  description: "Design System completo para Eduardo Colautti. Direct Response Marketing (afiliacao)."
+  og_image: "/variants/eduardo_colautti/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "eduardo-colautti"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "Eduardo Colautti"
+  logo_dark_alt: "Eduardo Colautti"
+  brandbook_tagline: "Direct Response Marketing (afiliacao) Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "Eduardo Colautti"
+    legal_name: "Eduardo Colautti"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/eduardo_colautti/logo-light.svg"
+  logo_dark: "/variants/eduardo_colautti/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/eduardo_colautti/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

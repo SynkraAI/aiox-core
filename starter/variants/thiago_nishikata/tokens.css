@@ -1,0 +1,222 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   BRANDBOOK BRIDGE — Brasília em Dobro abre pré-venda com descontos exclusivos e sorteio de iPhone 17
+   DS Factory Generated: 2026-03-20T20:13:20.016Z
+   Workspace: unknown | Coverage: 0% | Theme: adapted-to-dark
+   Uses [data-bb-theme] attribute selector for higher specificity than globals.css .brandbook-root
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.brandbook-root[data-bb-theme] {
+    /* Core palette — direct values override globals.css defaults */
+    --bb-accent: #1e73be;
+    --bb-dark: #222222;
+    --bb-surface: #141414;
+    --bb-surface-alt: #1f1f1f;
+    --bb-cream: rgb(234, 234, 234);
+    --bb-cream-alt: rgb(234, 234, 234);
+    --bb-warm-white: #FFFFED;
+    --bb-dim: rgba(234, 234, 234, 0.45);
+    --bb-canvas: #222222;
+    --bb-surface-deep: #222222;
+    --bb-surface-overlay: rgba(18, 18, 19, 0.94);
+    --bb-surface-panel: #141414;
+    --bb-surface-console: #1f1f1f;
+    --bb-surface-hover-strong: #1f1f1f;
+    --bb-flare: #341ebe;
+    --bb-border: rgba(234, 234, 234, 0.15);
+    --bb-border-soft: rgba(234, 234, 234, 0.15);
+    --bb-border-strong: rgba(234, 234, 234, 0.24);
+    --bb-border-hover: rgba(234, 234, 234, 0.24);
+    --bb-border-input: rgba(234, 234, 234, 0.15);
+
+    /* Legacy aliases mapped to bb-* */
+    --lime: #1e73be;
+    --dark: #222222;
+    --void: #000000;
+    --surface: #141414;
+    --surface-alt: #1f1f1f;
+    --cream: rgb(234, 234, 234);
+    --cream-alt: rgb(234, 234, 234);
+    --warm-white: #FFFFED;
+
+    /* Neutral scale */
+    --gray-charcoal: var(--bb-gray-charcoal, #3D3D3D);
+    --gray-dim: var(--bb-gray-dim, #696969);
+    --gray-muted: var(--bb-gray-muted, #999999);
+    --gray-silver: var(--bb-gray-silver, #BDBDBD);
+    --gray-light: var(--bb-gray-light, #C2C2C2);
+
+    /* Accent colors — direct values */
+    --bb-blue: #0099FF;
+    --bb-error: #EF4444;
+    --bb-warning: #f59e0b;
+    --blue: #0099FF;
+    --flare: #341ebe;
+    --error: #EF4444;
+    --warning: #f59e0b;
+
+    /* Typography — direct values */
+    --font-bb-sans: "Big Shoulders Inline Text", system-ui, sans-serif;
+    --font-bb-display: "Open Sans", system-ui, sans-serif;
+    --font-bb-mono: "IBM Plex Mono", monospace;
+    --font-sans: "Big Shoulders Inline Text", system-ui, sans-serif;
+    --font-display: "Open Sans", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", monospace;
+
+    --font-weight-thin: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+
+    /* Easing / motion */
+    --ease-spring: var(--bb-ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1));
+    --ease-smooth: var(--bb-ease-smooth, cubic-bezier(0.25, 0.1, 0.25, 1));
+    --ease-decel: var(--bb-ease-decel, cubic-bezier(0, 0, 0.2, 1));
+    --ease-accel: var(--bb-ease-accel, cubic-bezier(0.4, 0, 1, 1));
+    --ease-expo: var(--bb-ease-expo, cubic-bezier(0.16, 1, 0.3, 1));
+
+    --motion-duration-slow: var(--bb-dur-slow, 0.7s);
+    --motion-duration-medium: var(--bb-dur-medium, 0.4s);
+    --motion-duration-fast: var(--bb-dur-fast, 0.2s);
+    --motion-easing-spring: var(--bb-ease-expo, cubic-bezier(0.16, 1, 0.3, 1));
+
+    /* Breakpoints */
+    --bp-desktop: 1200px;
+    --bp-tablet: 768px;
+    --bp-mobile: 767px;
+
+    /* Layering */
+    --layer-nav: 100;
+    --layer-dropdown: 200;
+    --layer-overlay: 300;
+    --layer-modal: 400;
+    --layer-toast: 500;
+
+    /* Border primitives */
+    --border-width-base: 2px;
+    --border-radius-none: 0px;
+
+    /* Semantic background */
+    --color-bg-void: var(--void);
+    --color-bg-base: var(--dark);
+    --color-bg-elevated: var(--surface-alt);
+    --color-bg-surface: var(--surface);
+    --color-bg-surface-alt: var(--surface-alt);
+    --color-bg-overlay: rgba(61, 61, 61, 0.5);
+
+    /* Semantic text */
+    --dim: var(--bb-dim, rgba(234, 234, 234, 0.45));
+    --color-text-base: var(--cream);
+    --color-text-secondary: rgba(30, 115, 190, 0.3);
+    --color-text-tertiary: rgba(30, 115, 190, 0.25);
+    --color-text-muted: var(--dim);
+    --cream-dim: var(--dim);
+
+    /* Brand / glow — direct values */
+    --color-brand: #1e73be;
+    --neon: #1e73be;
+    --neon-dim: rgba(30, 115, 190, 0.15);
+    --neon-glow: rgba(30, 115, 190, 0.4);
+    --lime-glow: rgba(30, 115, 190, 0.25);
+    --lime-glow-soft: rgba(30, 115, 190, 0.1);
+    --accent-glow: rgba(30, 115, 190, 0.25);
+    --accent-glow-soft: rgba(30, 115, 190, 0.1);
+
+    /* Semantic mappings */
+    --primary: #1e73be;
+    --primary-foreground: #222222;
+    --accent: rgba(30, 115, 190, 0.1);
+    --accent-foreground: #1e73be;
+    --ring: rgba(30, 115, 190, 0.4);
+    --background: #222222;
+    --foreground: rgb(234, 234, 234);
+    --card: #141414;
+    --card-foreground: rgb(234, 234, 234);
+    --popover: #141414;
+    --popover-foreground: rgb(234, 234, 234);
+    --secondary: #1f1f1f;
+    --secondary-foreground: rgb(234, 234, 234);
+    --muted: #141414;
+    --muted-foreground: rgba(234, 234, 234, 0.45);
+    --input: rgba(234, 234, 234, 0.15);
+    --destructive: #EF4444;
+
+    /* Accent opacities */
+    --bb-accent-02: rgba(30, 115, 190, 0.02);
+    --bb-accent-05: rgba(30, 115, 190, 0.05);
+    --bb-accent-08: rgba(30, 115, 190, 0.08);
+    --bb-accent-10: rgba(30, 115, 190, 0.1);
+    --bb-accent-15: rgba(30, 115, 190, 0.15);
+    --bb-accent-20: rgba(30, 115, 190, 0.2);
+    --bb-accent-25: rgba(30, 115, 190, 0.25);
+    --bb-accent-30: rgba(30, 115, 190, 0.3);
+    --bb-accent-40: rgba(30, 115, 190, 0.4);
+
+    /* Border semantics — direct values */
+    --border: rgba(234, 234, 234, 0.15);
+    --border-hover: rgba(234, 234, 234, 0.24);
+    --border-soft: var(--border);
+    --border-strong: var(--gray-charcoal);
+    --border-focus: var(--gray-silver);
+
+    /* Overlay / shadow */
+    --shadow: rgba(0, 0, 0, 0.2);
+    --overlay: rgba(61, 61, 61, 0.5);
+
+    /* Selection */
+    --selection-bg: var(--dark);
+    --selection-fg: var(--lime);
+
+    /* Warning states */
+    --warning-bg: rgba(245, 158, 11, 0.05);
+    --warning-border: rgba(245, 158, 11, 0.2);
+
+    /* Focus */
+    --focus-brand: var(--lime);
+    --focus-neutral: var(--gray-silver);
+
+    /* Chart palette — direct values */
+    --bb-chart-1: #1e73be;
+    --bb-chart-2: #0099FF;
+    --bb-chart-3: #EF4444;
+    --bb-chart-4: #f59e0b;
+    --bb-chart-5: #8B5CF6;
+    --bb-chart-6: #06B6D4;
+    --bb-chart-tooltip-bg: #141414;
+    --bb-chart-tooltip-border: rgba(234, 234, 234, 0.15);
+    --bb-chart-tooltip-text: rgb(234, 234, 234);
+    --bb-chart-grid: rgba(244, 244, 232, 0.06);
+    --bb-chart-axis: rgba(244, 244, 232, 0.3);
+    --bb-chart-ring-bg: rgba(244, 244, 232, 0.08);
+
+    /* Map palette — direct values */
+    --bb-map-land: #1f1f1f;
+    --bb-map-border: rgba(156, 156, 156, 0.12);
+    --bb-map-marker: #1e73be;
+    --bb-map-water: #222222;
+    --bb-map-land-hover: rgba(30, 115, 190, 0.08);
+
+    /* Legacy aliases */
+    --color-brand-primary: var(--lime);
+    --color-background-base: #F4F4F4;
+    --color-surface-grey: #D6D6D6;
+    --color-surface-dark: var(--surface);
+    --color-text-primary: var(--cream);
+    --color-text-inverse: #FFFFFF;
+    --font-family-sans: var(--font-sans);
+    --font-family-mono: var(--font-mono);
+    --letter-spacing-tight: -0.05em;
+    --letter-spacing-base: normal;
+    --border-color-default: var(--color-text-primary);
+}
+
+/* Ensure accent opacities and semantic tokens also override globals.css secondary theme */
+.brandbook-root[data-bb-theme="secondary"] {
+    --bb-accent: #341ebe;
+    --bb-accent-10: rgba(52, 30, 190, 0.1);
+    --bb-accent-15: rgba(52, 30, 190, 0.15);
+    --bb-accent-25: rgba(52, 30, 190, 0.25);
+    --bb-accent-40: rgba(52, 30, 190, 0.4);
+}

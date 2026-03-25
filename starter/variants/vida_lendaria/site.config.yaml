@@ -1,0 +1,54 @@
+# DS Factory — Site Config for Vida Lendaria
+# Generated: 2026-03-19T16:55:00.590Z
+
+slug: "vida-lendaria"
+name: "Vida Lendaria"
+language: "pt-BR"
+seo:
+  title: "Vida Lendaria — Design System"
+  description: "Design System completo para Vida Lendaria. Design System."
+  og_image: "/variants/vida_lendaria/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "vida-lendaria"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "Vida Lendaria"
+  logo_dark_alt: "Vida Lendaria"
+  brandbook_tagline: "Design System Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "Vida Lendaria"
+    legal_name: "Vida Lendaria"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/vida_lendaria/logo-light.svg"
+  logo_dark: "/variants/vida_lendaria/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/vida_lendaria/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true

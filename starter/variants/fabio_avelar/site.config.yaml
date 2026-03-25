@@ -1,0 +1,54 @@
+# DS Factory — Site Config for Grupo Fabio Avelar
+# Generated: 2026-03-19T16:55:00.595Z
+
+slug: "fabio-avelar"
+name: "Grupo Fabio Avelar"
+language: "pt-BR"
+seo:
+  title: "Grupo Fabio Avelar — Design System"
+  description: "Design System completo para Grupo Fabio Avelar. Ecossistema de Marketing e Tecnologia para Odontol."
+  og_image: "/variants/fabio_avelar/og.svg"
+  metadata_base: "http://localhost:3001"
+branding:
+  marketing_wordmark: "fabio-avelar"
+  home_aria_label: "Ir para a home"
+  logo_light_alt: "Grupo Fabio Avelar"
+  logo_dark_alt: "Grupo Fabio Avelar"
+  brandbook_tagline: "Ecossistema de Marketing e Tecnologia para Odontol Design System"
+  version_label: "v1.0"
+  edition_label: "DS Factory Edition"
+  footer_badges:
+    - "302 Components"
+    - "Token-driven"
+    - "WCAG AA"
+    - "DS Factory"
+navigation:
+  main:
+    - label: "Brandbook"
+      href: "/brandbook/guidelines"
+      surface: "brandbook"
+  cta:
+    label: "Contact"
+    href: "#"
+footer:
+  entity:
+    display_name: "Grupo Fabio Avelar"
+    legal_name: "Grupo Fabio Avelar"
+  contact:
+    email: ""
+    phone: ""
+    city: ""
+    region: ""
+    country: "Brazil"
+  socials: []
+assets:
+  logo_light: "/variants/fabio_avelar/logo-light.svg"
+  logo_dark: "/variants/fabio_avelar/logo-dark.svg"
+  favicon: "/icon.svg"
+  og_image: "/variants/fabio_avelar/og.svg"
+fonts:
+  external_stylesheets:
+    - "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+features:
+  newsletter_form: false
+  brandbook_theming: true
