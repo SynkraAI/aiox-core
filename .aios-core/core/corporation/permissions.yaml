@@ -1,0 +1,280 @@
+# permissions.yaml -- Corporation Permission Rules
+# Defines actions, risk levels, level requirements, and department overrides.
+#
+# @version 1.0.0
+# @story CORP-2 - PermissionEngine + permissions.yaml
+
+version: "1.0.0"
+
+# =====================================================
+# ACTION DEFINITIONS
+# Each action has: description, risk, min_level
+# Optional: restricted_to, requires_approval_from
+# =====================================================
+actions:
+  execute_task:
+    description: "Execute a task file"
+    risk: low
+    min_level: L0
+
+  create_story:
+    description: "Create a development story"
+    risk: medium
+    min_level: L2
+
+  approve_story:
+    description: "Approve a story for development"
+    risk: medium
+    min_level: L2
+
+  approve_prd:
+    description: "Approve a PRD document"
+    risk: high
+    min_level: L3
+
+  push_code:
+    description: "Push code to remote repository"
+    risk: high
+    min_level: L2
+    restricted_to: [devops]
+
+  deploy:
+    description: "Deploy to production"
+    risk: critical
+    min_level: L3
+    requires_approval_from: L4
+
+  create_agent:
+    description: "Create a new agent definition"
+    risk: high
+    min_level: L3
+
+  modify_org:
+    description: "Modify org-config.yaml"
+    risk: critical
+    min_level: L5
+
+  escalate:
+    description: "Escalate a task to higher level"
+    risk: low
+    min_level: L1
+
+  consult:
+    description: "Request expert consultation (Mega Brain)"
+    risk: low
+    min_level: L1
+
+  approve_budget:
+    description: "Approve resource allocation"
+    risk: high
+    min_level: L4
+
+  cross_dept_request:
+    description: "Request work from another department"
+    risk: medium
+    min_level: L2
+    requires_approval_from: dept_head
+
+  delete_file:
+    description: "Delete a project file"
+    risk: medium
+    min_level: L2
+
+  merge_pr:
+    description: "Merge a pull request"
+    risk: high
+    min_level: L2
+    restricted_to: [devops]
+
+  review_code:
+    description: "Review code for quality and correctness"
+    risk: low
+    min_level: L1
+
+  # --- External Tool Actions ---
+  use_external_tool:
+    description: "Use an external API or tool"
+    risk: low
+    min_level: L1
+
+  use_payment_tool:
+    description: "Execute payment or financial transaction via external API"
+    risk: critical
+    min_level: L3
+    requires_approval_from: L4
+
+  use_crm_write:
+    description: "Create or modify CRM records (contacts, deals)"
+    risk: medium
+    min_level: L2
+
+  use_analytics_read:
+    description: "Read analytics data from external tools"
+    risk: low
+    min_level: L1
+
+  publish_content:
+    description: "Publish content to external platforms (blog, social, newsletter)"
+    risk: high
+    min_level: L2
+    requires_approval_from: dept_head
+
+  send_communication:
+    description: "Send external communications (email, Slack, Discord)"
+    risk: high
+    min_level: L2
+    requires_approval_from: dept_head
+
+  run_security_scan:
+    description: "Execute security scan against target"
+    risk: medium
+    min_level: L2
+    restricted_to: [security]
+
+  modify_infrastructure:
+    description: "Modify cloud infrastructure, containers, or deployments"
+    risk: critical
+    min_level: L3
+    requires_approval_from: L4
+    restricted_to: [devops, platform]
+
+  access_health_data:
+    description: "Access or process health-related data"
+    risk: critical
+    min_level: L3
+    restricted_to: [health]
+
+  train_model:
+    description: "Train or fine-tune AI models"
+    risk: high
+    min_level: L2
+    restricted_to: [ai_strategy]
+
+# =====================================================
+# LEVEL-BASED RULES (Additive -- higher levels inherit lower)
+# =====================================================
+level_rules:
+  L0:
+    can: [execute_task]
+    cannot: [create_story, approve_story, approve_prd, push_code, deploy, modify_org]
+
+  L1:
+    inherits: L0
+    can: [escalate, consult, review_code]
+
+  L2:
+    inherits: L1
+    can: [create_story, approve_story, push_code, delete_file, merge_pr]
+
+  L3:
+    inherits: L2
+    can: [approve_prd, create_agent, deploy, cross_dept_request]
+
+  L4:
+    inherits: L3
+    can: [approve_budget]
+
+  L5:
+    inherits: L4
+    can: [modify_org]
+    override: true
+
+# =====================================================
+# DEPARTMENT-SPECIFIC OVERRIDES
+# =====================================================
+department_overrides:
+  engineering:
+    agent_overrides:
+      devops:
+        exclusive: [push_code, merge_pr]
+
+  product:
+    agent_overrides:
+      po:
+        can: [create_story, approve_story]
+      pm:
+        can: [approve_prd]
+
+  platform:
+    tools: [docker-api, k8s-api, terraform-cli, grafana-api, prometheus-api]
+    agent_overrides:
+      kelsey-hightower:
+        exclusive: [modify_infrastructure]
+      devops:
+        can: [modify_infrastructure, push_code]
+
+  security:
+    tools: [snyk-api, trivy-cli, virustotal-api, crowdsec-api]
+    agent_overrides:
+      bruce-schneier:
+        can: [run_security_scan]
+      kevin-mitnick:
+        can: [run_security_scan]
+      troy-hunt:
+        can: [run_security_scan]
+
+  sales:
+    tools: [hubspot-crm, stripe-api, apollo-api]
+    agent_overrides:
+      alex-hormozi:
+        can: [use_crm_write, use_payment_tool]
+
+  growth:
+    tools: [google-analytics-api, google-search-console, posthog-analytics, ahrefs-api, buffer-api]
+    agent_overrides:
+      seth-godin:
+        can: [publish_content]
+      neil-patel:
+        can: [use_analytics_read]
+
+  content:
+    tools: [languagetool-api, strapi-cms, ghost-api]
+    agent_overrides:
+      ann-handley:
+        can: [publish_content]
+
+  customer_success:
+    tools: [hubspot-crm, posthog-analytics, stripe-api]
+    agent_overrides:
+      lincoln-murphy:
+        can: [use_crm_write]
+
+  finance:
+    tools: [alpha-vantage-api, financial-modeling-prep, stripe-api]
+    agent_overrides:
+      aswath-damodaran:
+        can: [use_payment_tool]
+
+  health:
+    tools: [infermedica-api, fhir-server]
+    agent_overrides:
+      alison-darcy:
+        can: [access_health_data]
+
+  ai_strategy:
+    tools: [huggingface-api, ollama-api, langsmith-api]
+    agent_overrides:
+      demis-hassabis:
+        can: [train_model]
+
+  community:
+    tools: [github-api, discord-api]
+    agent_overrides:
+      sarah-drasner:
+        can: [send_communication, publish_content]
+
+  legal:
+    tools: [docassemble-api]
+
+# =====================================================
+# CROSS-DEPARTMENT RULES
+# =====================================================
+cross_department:
+  request_protocol:
+    requester_min_level: L2
+    approval_required_from:
+      - requester_dept_head
+      - target_dept_head
+    auto_approve_if:
+      requester_level: L4
+      escalated_from: L3

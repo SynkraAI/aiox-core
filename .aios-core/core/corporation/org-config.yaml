@@ -1,0 +1,1354 @@
+# =============================================================================
+# AIOX Corporation -- Organizational Configuration
+# =============================================================================
+# Defines the complete corporate hierarchy: levels, departments, and agents.
+# This file is the single source of truth for the OrgEngine.
+#
+# Story: CORP-1
+# Version: 1.0.0
+# Updated: 2026-03-14
+# =============================================================================
+
+version: "1.0.0"
+updated_at: "2026-03-14T00:00:00Z"
+
+# Feature flags
+enabled: true
+graceful_degradation: true
+
+# =====================================================
+# HIERARCHY LEVELS
+# =====================================================
+levels:
+  L5:
+    name: "CEO"
+    type: human
+    description: "Human operator -- ultimate authority"
+    max_agents: 1
+  L4:
+    name: "C-Suite"
+    type: ai
+    description: "Strategic leadership agents"
+    max_agents: 10
+  L3:
+    name: "VP / Chief"
+    type: ai
+    description: "Department heads and senior leadership"
+    max_agents: 20
+  L2:
+    name: "Senior"
+    type: ai
+    description: "Senior specialists and domain experts"
+    max_agents: 50
+  L1:
+    name: "Operator"
+    type: ai
+    description: "Execution agents and specialists"
+    max_agents: 80
+  L0:
+    name: "Tool"
+    type: tool
+    description: "Internal tools and utility agents"
+    max_agents: null
+
+# =====================================================
+# DEPARTMENTS
+# =====================================================
+departments:
+  engineering:
+    name: "Engineering"
+    icon: "wrench"
+    head: architect
+    description: "Software development, architecture, quality, and infrastructure"
+    sub_departments:
+      - frontend
+      - backend
+      - qa
+      - devops
+
+  product:
+    name: "Product"
+    icon: "clipboard"
+    head: pm
+    description: "Product strategy, requirements, and roadmap"
+    sub_departments:
+      - product-management
+      - product-ownership
+
+  design:
+    name: "Design"
+    icon: "palette"
+    head: ux-design-expert
+    description: "User experience, visual design, and design leadership"
+
+  data:
+    name: "Data & Analytics"
+    icon: "chart"
+    head: data-engineer
+    description: "Data engineering, analytics, and ML pipelines"
+
+  operations:
+    name: "Operations"
+    icon: "gear"
+    head: sm
+    description: "Agile process, delivery, and operational excellence"
+
+  research:
+    name: "Research & Innovation"
+    icon: "microscope"
+    head: analyst
+    description: "Market research, competitive analysis, and deep research"
+
+  security:
+    name: "Security"
+    icon: "shield"
+    head: bruce-schneier
+    description: "Application security, threat modeling, and compliance"
+
+  ai_strategy:
+    name: "AI Strategy"
+    icon: "brain"
+    head: demis-hassabis
+    description: "AI roadmap, model selection, and AI governance"
+
+  growth:
+    name: "Growth & Marketing"
+    icon: "rocket"
+    head: seth-godin
+    description: "Marketing, content, brand, and growth strategy"
+
+  sales:
+    name: "Sales"
+    icon: "handshake"
+    head: alex-hormozi
+    description: "Sales strategy, outreach, negotiation, and pipeline"
+
+  people:
+    name: "People & Culture"
+    icon: "people"
+    head: adam-grant
+    description: "Hiring, culture, talent development, and organizational psychology"
+
+  finance:
+    name: "Finance"
+    icon: "dollar"
+    head: aswath-damodaran
+    description: "Valuation, financial modeling, pricing, and investment"
+
+  legal:
+    name: "Legal & Compliance"
+    icon: "scale"
+    head: heather-meeker
+    description: "Open source licensing, IP, contracts, and regulatory"
+
+  education:
+    name: "Education"
+    icon: "book"
+    head: sal-khan
+    description: "Learning programs, training, and mastery-based education"
+
+  health:
+    name: "Health & Wellbeing"
+    icon: "heart"
+    head: alison-darcy
+    description: "Digital health, mental health technology, clinical research, and health policy"
+    sub_departments:
+      - mental-health
+      - clinical-research
+      - health-policy
+      - health-tech
+
+  customer_success:
+    name: "Customer Success"
+    icon: "star"
+    head: lincoln-murphy
+    description: "Customer retention, onboarding, expansion revenue, and health scores"
+    sub_departments:
+      - onboarding
+      - retention
+      - expansion
+
+  content:
+    name: "Content & Media"
+    icon: "pen"
+    head: ann-handley
+    description: "Content creation, copywriting, storytelling, and media production"
+    sub_departments:
+      - copywriting
+      - storytelling
+      - media-production
+
+  behavioral_science:
+    name: "Behavioral Science"
+    icon: "brain-circuit"
+    head: bj-fogg
+    description: "Behavior design, habit formation, nudge theory, and decision architecture"
+
+  community:
+    name: "Community & DevRel"
+    icon: "users"
+    head: sarah-drasner
+    description: "Developer relations, community building, open source engagement, and advocacy"
+
+  platform:
+    name: "Platform & Infrastructure"
+    icon: "server"
+    head: kelsey-hightower
+    description: "Cloud infrastructure, platform engineering, observability, and reliability"
+
+# =====================================================
+# AGENT ROSTER
+# =====================================================
+agents:
+  # --- L5: Human ---
+  human:
+    level: L5
+    department: null
+    type: human
+    title: "CEO"
+    description: "Human operator -- ultimate authority"
+    reports_to: null
+
+  # --- L4: C-Suite ---
+  aios-master:
+    level: L4
+    department: null
+    type: core
+    title: "Chief Operating Officer"
+    description: "System orchestration, cross-department coordination"
+    reports_to: human
+
+  architect:
+    level: L4
+    department: engineering
+    type: core
+    title: "Chief Technology Officer"
+    description: "Architecture, tech stack, system design"
+    reports_to: human
+
+  pm:
+    level: L4
+    department: product
+    type: core
+    title: "Chief Product Officer"
+    description: "Product strategy, PRDs, roadmap"
+    reports_to: human
+
+  aswath-damodaran:
+    level: L4
+    department: finance
+    type: mind_clone
+    title: "Chief Financial Officer"
+    description: "Valuation, financial modeling, pricing"
+    reports_to: human
+    source: mega_brain
+
+  seth-godin:
+    level: L4
+    department: growth
+    type: mind_clone
+    title: "Chief Marketing Officer"
+    description: "Marketing strategy, brand, tribe building"
+    reports_to: human
+    source: mega_brain
+
+  patty-mccord:
+    level: L4
+    department: people
+    type: mind_clone
+    title: "Chief Human Resources Officer"
+    description: "Culture, talent, radical candor in HR"
+    reports_to: human
+    source: mega_brain
+
+  alex-hormozi:
+    level: L4
+    department: sales
+    type: mind_clone
+    title: "Chief Strategy Officer"
+    description: "Growth strategy, offer creation, scaling"
+    reports_to: human
+    source: mega_brain
+
+  bruce-schneier:
+    level: L4
+    department: security
+    type: mind_clone
+    title: "Chief Information Security Officer"
+    description: "Security strategy, cryptography, threat modeling"
+    reports_to: human
+    source: mega_brain
+
+  # --- L3: VPs / Chiefs ---
+
+  # Engineering L3
+  will-larson:
+    level: L3
+    department: engineering
+    type: mind_clone
+    title: "VP of Engineering"
+    description: "Engineering management, staff+ career paths"
+    reports_to: architect
+    source: mega_brain
+
+  werner-vogels:
+    level: L3
+    department: engineering
+    type: mind_clone
+    title: "VP of Infrastructure"
+    description: "Distributed systems, cloud architecture"
+    reports_to: architect
+    source: mega_brain
+
+  martin-fowler:
+    level: L3
+    department: engineering
+    type: mind_clone
+    title: "VP of Software Practices"
+    description: "Refactoring, enterprise patterns, agile methodology"
+    reports_to: architect
+    source: mega_brain
+
+  # Product L3
+  april-dunford:
+    level: L3
+    department: product
+    type: mind_clone
+    title: "VP of Product Positioning"
+    description: "Positioning, category design, go-to-market"
+    reports_to: pm
+    source: mega_brain
+
+  don-norman:
+    level: L3
+    department: product
+    type: mind_clone
+    title: "VP of Human-Centered Design"
+    description: "Usability, cognitive design, human-centered principles"
+    reports_to: pm
+    source: mega_brain
+
+  # Operations L3
+  qa:
+    level: L3
+    department: operations
+    type: core
+    title: "VP of Quality Assurance"
+    description: "Testing, quality gates, code review"
+    reports_to: aios-master
+
+  devops:
+    level: L3
+    department: operations
+    type: core
+    title: "VP of DevOps"
+    description: "CI/CD, git operations, deployment"
+    reports_to: aios-master
+
+  # Design L3
+  julie-zhuo:
+    level: L3
+    department: design
+    type: mind_clone
+    title: "VP of Product Design"
+    description: "Design management, design critique, team building"
+    reports_to: ux-design-expert
+    source: mega_brain
+
+  john-maeda:
+    level: L3
+    department: design
+    type: mind_clone
+    title: "VP of Design & Technology"
+    description: "Simplicity, computational design, design leadership"
+    reports_to: ux-design-expert
+    source: mega_brain
+
+  # Data L3
+  data-engineer:
+    level: L3
+    department: data
+    type: core
+    title: "VP of Data Engineering"
+    description: "Database design, data pipelines, schema architecture"
+    reports_to: aios-master
+
+  # Research L3
+  analyst:
+    level: L3
+    department: research
+    type: core
+    title: "VP of Research"
+    description: "Market research, deep analysis, competitive intelligence"
+    reports_to: aios-master
+
+  # Design L3 (core)
+  ux-design-expert:
+    level: L3
+    department: design
+    type: core
+    title: "VP of Design"
+    description: "UX/UI design, user research, design systems"
+    reports_to: aios-master
+
+  # Security L3
+  daniel-miessler:
+    level: L3
+    department: security
+    type: mind_clone
+    title: "Director of Cybersecurity"
+    description: "Security analysis, AI security, threat intelligence"
+    reports_to: bruce-schneier
+    source: mega_brain
+
+  # AI Strategy L3
+  demis-hassabis:
+    level: L3
+    department: ai_strategy
+    type: mind_clone
+    title: "Chief AI Officer"
+    description: "AI strategy, scientific discovery, AGI research"
+    reports_to: aios-master
+    source: mega_brain
+
+  # Legal L3
+  heather-meeker:
+    level: L3
+    department: legal
+    type: mind_clone
+    title: "General Counsel"
+    description: "Open source licensing, IP, contracts"
+    reports_to: aios-master
+    source: mega_brain
+
+  # People L3
+  adam-grant:
+    level: L3
+    department: people
+    type: mind_clone
+    title: "VP of People & Organizational Psychology"
+    description: "Originality, giving culture, organizational psychology"
+    reports_to: patty-mccord
+    source: mega_brain
+
+  # Finance L3
+  morgan-housel:
+    level: L3
+    department: finance
+    type: mind_clone
+    title: "Director of Financial Strategy"
+    description: "Psychology of money, long-term investing"
+    reports_to: aswath-damodaran
+    source: mega_brain
+
+  # Education L3
+  sal-khan:
+    level: L3
+    department: education
+    type: mind_clone
+    title: "VP of Education"
+    description: "Mastery-based learning, education at scale"
+    reports_to: aios-master
+    source: mega_brain
+
+  # --- L2: Senior Specialists ---
+
+  # Engineering L2
+  dev:
+    level: L2
+    department: engineering
+    type: core
+    title: "Senior Developer"
+    description: "Code implementation, refactoring, debugging"
+    reports_to: architect
+
+  # (gene-kim moved to platform dept, kelsey-hightower promoted to VP Platform)
+
+  # Product L2
+  po:
+    level: L2
+    department: product
+    type: core
+    title: "Senior Product Owner"
+    description: "Stories, epics, acceptance criteria"
+    reports_to: pm
+
+  # Operations L2
+  sm:
+    level: L2
+    department: operations
+    type: core
+    title: "Senior Scrum Master"
+    description: "Agile process, sprint management, delivery"
+    reports_to: aios-master
+
+  squad-creator:
+    level: L2
+    department: operations
+    type: core
+    title: "Senior Squad Architect"
+    description: "Squad creation, team composition"
+    reports_to: sm
+
+  eliyahu-goldratt:
+    level: L2
+    department: operations
+    type: mind_clone
+    title: "Senior Operations Strategist"
+    description: "Theory of Constraints, bottleneck analysis"
+    reports_to: sm
+    source: mega_brain
+
+  eric-ries:
+    level: L2
+    department: operations
+    type: mind_clone
+    title: "Senior Lean Strategist"
+    description: "Lean startup, validated learning, innovation accounting"
+    reports_to: sm
+    source: mega_brain
+
+  # Sales L2
+  chris-voss:
+    level: L2
+    department: sales
+    type: mind_clone
+    title: "Senior Negotiation Specialist"
+    description: "Negotiation tactics, tactical empathy"
+    reports_to: alex-hormozi
+    source: mega_brain
+
+  jeb-blount:
+    level: L2
+    department: sales
+    type: mind_clone
+    title: "Senior Sales Development"
+    description: "Prospecting, sales EQ, objection handling"
+    reports_to: alex-hormozi
+    source: mega_brain
+
+  matt-dixon:
+    level: L2
+    department: sales
+    type: mind_clone
+    title: "Senior Sales Methodology"
+    description: "Challenger sale, customer effort, JOLT effect"
+    reports_to: alex-hormozi
+    source: mega_brain
+
+  guillaume-moubeche:
+    level: L2
+    department: sales
+    type: mind_clone
+    title: "Senior Growth Sales"
+    description: "Cold outreach, email sequences, SaaS growth"
+    reports_to: alex-hormozi
+    source: mega_brain
+
+  # (lincoln-murphy and nick-mehta moved to customer_success department)
+
+  patrick-campbell:
+    level: L2
+    department: sales
+    type: mind_clone
+    title: "Senior Pricing Strategist"
+    description: "SaaS pricing, monetization, willingness-to-pay"
+    reports_to: alex-hormozi
+    source: mega_brain
+
+  # Growth/Marketing L2
+  # (ann-handley moved to content department as VP)
+
+  gary-vaynerchuk:
+    level: L2
+    department: growth
+    type: mind_clone
+    title: "Senior Social Media Strategist"
+    description: "Social media, personal brand, attention marketing"
+    reports_to: seth-godin
+    source: mega_brain
+
+  rand-fishkin:
+    level: L2
+    department: growth
+    type: mind_clone
+    title: "Senior SEO & Analytics"
+    description: "SEO, audience intelligence, transparent marketing"
+    reports_to: seth-godin
+    source: mega_brain
+
+  # (joe-pulizzi, robert-mckee, charles-spurgeon, donald-miller moved to content department)
+
+  # AI Research L2
+  fei-fei-li:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior AI Research"
+    description: "Computer vision, human-centered AI"
+    reports_to: demis-hassabis
+    source: mega_brain
+
+  andrew-ng:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior ML Engineering"
+    description: "ML systems, AI transformation, data-centric AI"
+    reports_to: demis-hassabis
+    source: mega_brain
+
+  andrej-karpathy:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior Deep Learning"
+    description: "Neural networks, LLMs, AI infrastructure"
+    reports_to: demis-hassabis
+    source: mega_brain
+
+  chip-huyen:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior MLOps"
+    description: "ML systems design, real-time ML, MLOps"
+    reports_to: demis-hassabis
+    source: mega_brain
+
+  cassie-kozyrkov:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior Decision Science"
+    description: "Decision intelligence, statistical thinking"
+    reports_to: demis-hassabis
+    source: mega_brain
+
+  # (Health agents moved to health department below)
+
+  # People L2
+  laszlo-bock:
+    level: L2
+    department: people
+    type: mind_clone
+    title: "Senior People Operations"
+    description: "People analytics, hiring practices, Work Rules"
+    reports_to: adam-grant
+    source: mega_brain
+
+  josh-bersin:
+    level: L2
+    department: people
+    type: mind_clone
+    title: "Senior HR Analyst"
+    description: "HR technology, talent management trends"
+    reports_to: adam-grant
+    source: mega_brain
+
+  # Innovation L2
+  peter-diamandis:
+    level: L2
+    department: research
+    type: mind_clone
+    title: "Senior Exponential Innovation"
+    description: "Exponential organizations, moonshot thinking"
+    reports_to: analyst
+    source: mega_brain
+
+  clayton-christensen:
+    level: L2
+    department: research
+    type: mind_clone
+    title: "Senior Disruption Strategy"
+    description: "Disruptive innovation, jobs-to-be-done"
+    reports_to: analyst
+    source: mega_brain
+
+  scott-galloway:
+    level: L2
+    department: research
+    type: mind_clone
+    title: "Senior Market Analysis"
+    description: "Big tech analysis, market disruption, brand strategy"
+    reports_to: analyst
+    source: mega_brain
+
+  # (bj-fogg promoted to VP Behavioral Science dept)
+
+  # Legal L2
+  richard-susskind:
+    level: L2
+    department: legal
+    type: mind_clone
+    title: "Senior Legal Tech"
+    description: "Legal technology, future of legal services"
+    reports_to: heather-meeker
+    source: mega_brain
+
+  # Education L2
+  anders-ericsson:
+    level: L2
+    department: education
+    type: mind_clone
+    title: "Senior Deliberate Practice"
+    description: "Deliberate practice, expertise development"
+    reports_to: sal-khan
+    source: mega_brain
+
+  # (simon-willison moved to community dept, nir-eyal to behavioral_science)
+
+  mikko-hypponen:
+    level: L2
+    department: security
+    type: mind_clone
+    title: "Senior Threat Intelligence"
+    description: "Cybersecurity research, malware analysis"
+    reports_to: bruce-schneier
+    source: mega_brain
+
+  mariana-mazzucato:
+    level: L2
+    department: finance
+    type: mind_clone
+    title: "Senior Innovation Economics"
+    description: "Innovation economics, public value, mission-oriented policy"
+    reports_to: aswath-damodaran
+    source: mega_brain
+
+  # --- Reorganized: Health agents moved to health department ---
+
+  # Health L3 (promoted)
+  alison-darcy:
+    level: L3
+    department: health
+    type: mind_clone
+    title: "VP of Digital Health"
+    description: "Digital therapy, CBT, mental health technology"
+    reports_to: aios-master
+    source: mega_brain
+    tools:
+      - infermedica-api
+      - fhir-server
+      - phq9-scorer
+
+  # Health L2
+  kate-ryder:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Women's Health"
+    description: "Women's health, maternal care, family health"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  bakul-patel:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Health Regulation"
+    description: "Digital health regulation, FDA, medical devices"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  atul-butte:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Computational Health"
+    description: "Computational medicine, biomedical informatics"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  sean-duffy:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Chronic Care"
+    description: "Chronic condition management, remote monitoring"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  dena-bravata:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Clinical Research"
+    description: "Evidence-based medicine, clinical trials"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  lucia-savage:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Health Policy"
+    description: "Health privacy, HIPAA, policy development"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  micky-tripathi:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Health IT"
+    description: "Health information exchange, interoperability"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  stephen-hahn:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Regulatory Affairs"
+    description: "FDA leadership, drug approval, public health"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  halle-tecco:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Health Innovation"
+    description: "Health tech venture, digital health startups"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  johannes-thrul:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Digital Interventions"
+    description: "Digital mental health interventions, mHealth"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  eduardo-bunge:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Youth Mental Health"
+    description: "Child/adolescent psychology, digital therapy"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  david-ebersman:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Health Tech Finance"
+    description: "Health tech business strategy, IPOs"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  geoff-cook:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Social Health Platforms"
+    description: "Social platforms, community engagement"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  acacia-parks:
+    level: L2
+    department: health
+    type: mind_clone
+    title: "Senior Positive Psychology"
+    description: "Positive psychology, well-being science"
+    reports_to: alison-darcy
+    source: mega_brain
+
+  # --- Customer Success L3 (promoted) ---
+  lincoln-murphy:
+    level: L3
+    department: customer_success
+    type: mind_clone
+    title: "VP of Customer Success"
+    description: "Customer success strategy, expansion revenue, growth"
+    reports_to: alex-hormozi
+    source: mega_brain
+    tools:
+      - hubspot-crm
+      - posthog-analytics
+
+  nick-mehta:
+    level: L2
+    department: customer_success
+    type: mind_clone
+    title: "Senior Customer Success Leadership"
+    description: "CS strategy, customer-centric growth, health scores"
+    reports_to: lincoln-murphy
+    source: mega_brain
+
+  # --- Content & Media L3 (promoted) ---
+  ann-handley:
+    level: L3
+    department: content
+    type: mind_clone
+    title: "VP of Content"
+    description: "Content marketing, writing excellence, storytelling"
+    reports_to: seth-godin
+    source: mega_brain
+    tools:
+      - languagetool-api
+      - strapi-cms
+      - ghost-publishing
+
+  robert-mckee:
+    level: L2
+    department: content
+    type: mind_clone
+    title: "Senior Narrative Strategist"
+    description: "Story structure, narrative craft, storynomics"
+    reports_to: ann-handley
+    source: mega_brain
+
+  joe-pulizzi:
+    level: L2
+    department: content
+    type: mind_clone
+    title: "Senior Content Marketing"
+    description: "Content marketing, content business models, newsletters"
+    reports_to: ann-handley
+    source: mega_brain
+
+  donald-miller:
+    level: L2
+    department: content
+    type: mind_clone
+    title: "Senior Brand Storytelling"
+    description: "StoryBrand framework, messaging clarity"
+    reports_to: ann-handley
+    source: mega_brain
+
+  charles-spurgeon:
+    level: L2
+    department: content
+    type: mind_clone
+    title: "Senior Communication Specialist"
+    description: "Public speaking, persuasive communication"
+    reports_to: ann-handley
+    source: mega_brain
+
+  # --- Behavioral Science L3 (promoted) ---
+  bj-fogg:
+    level: L3
+    department: behavioral_science
+    type: mind_clone
+    title: "VP of Behavioral Science"
+    description: "Behavior design, Tiny Habits, persuasive technology"
+    reports_to: aios-master
+    source: mega_brain
+
+  nir-eyal:
+    level: L2
+    department: behavioral_science
+    type: mind_clone
+    title: "Senior Product Psychology"
+    description: "Habit-forming products, Hooked model, behavioral design"
+    reports_to: bj-fogg
+    source: mega_brain
+
+  # --- Community & DevRel L3 ---
+  sarah-drasner:
+    level: L3
+    department: community
+    type: mind_clone
+    title: "VP of Developer Relations"
+    description: "Developer advocacy, engineering leadership, open source"
+    reports_to: aios-master
+    source: mega_brain
+    tools:
+      - github-api
+      - discord-api
+
+  simon-willison:
+    level: L2
+    department: community
+    type: mind_clone
+    title: "Senior Developer Tooling"
+    description: "Developer tools, open data, LLM applications"
+    reports_to: sarah-drasner
+    source: mega_brain
+
+  # --- Platform & Infrastructure L3 (promoted) ---
+  kelsey-hightower:
+    level: L3
+    department: platform
+    type: mind_clone
+    title: "VP of Platform Engineering"
+    description: "Kubernetes, cloud-native, infrastructure as code"
+    reports_to: architect
+    source: mega_brain
+    tools:
+      - docker-api
+      - k8s-api
+      - terraform-cli
+
+  gene-kim:
+    level: L2
+    department: platform
+    type: mind_clone
+    title: "Senior DevOps Strategist"
+    description: "DevOps transformation, value streams, flow optimization"
+    reports_to: kelsey-hightower
+    source: mega_brain
+
+  # --- Design L2 (registering orphan agents) ---
+  dieter-rams:
+    level: L2
+    department: design
+    type: mind_clone
+    title: "Senior Industrial Design Philosophy"
+    description: "10 principles of good design, functionalism, less-but-better"
+    reports_to: ux-design-expert
+    source: mega_brain
+
+  erik-spiekermann:
+    level: L2
+    department: design
+    type: mind_clone
+    title: "Senior Typography & Brand"
+    description: "Typography, brand identity, information design"
+    reports_to: ux-design-expert
+    source: mega_brain
+
+  tobias-van-schneider:
+    level: L2
+    department: design
+    type: mind_clone
+    title: "Senior Product Design"
+    description: "Product design, side projects, design entrepreneurship"
+    reports_to: ux-design-expert
+    source: mega_brain
+
+  val-head:
+    level: L2
+    department: design
+    type: mind_clone
+    title: "Senior Motion Design"
+    description: "UI animation, motion design, interactive design"
+    reports_to: ux-design-expert
+    source: mega_brain
+
+  vitaly-friedman:
+    level: L2
+    department: design
+    type: mind_clone
+    title: "Senior Web Design Standards"
+    description: "Web design patterns, accessibility, Smashing Magazine"
+    reports_to: ux-design-expert
+    source: mega_brain
+
+  refika-anadol:
+    level: L2
+    department: design
+    type: mind_clone
+    title: "Senior AI Art & Data Visualization"
+    description: "AI art, data sculpture, immersive media"
+    reports_to: ux-design-expert
+    source: mega_brain
+
+  oli-gardner:
+    level: L2
+    department: growth
+    type: mind_clone
+    title: "Senior Conversion Optimization"
+    description: "Landing pages, CRO, attention-driven design"
+    reports_to: seth-godin
+    source: mega_brain
+
+  # =====================================================
+  # NEW AGENTS - EXPANSION 2026-03-24
+  # =====================================================
+
+  # --- NEW: Engineering L2 ---
+  kent-beck:
+    level: L2
+    department: engineering
+    type: mind_clone
+    title: "Senior Software Craftsmanship"
+    description: "TDD, XP, software design patterns, refactoring"
+    reports_to: martin-fowler
+    source: knowledge_base
+    tools:
+      - semgrep-cli
+      - sonarqube-api
+
+  uncle-bob-martin:
+    level: L2
+    department: engineering
+    type: mind_clone
+    title: "Senior Clean Architecture"
+    description: "Clean Code, SOLID principles, clean architecture"
+    reports_to: martin-fowler
+    source: knowledge_base
+
+  linus-torvalds:
+    level: L2
+    department: engineering
+    type: mind_clone
+    title: "Senior Systems Engineering"
+    description: "OS design, Git internals, systems programming, code review"
+    reports_to: architect
+    source: knowledge_base
+    tools:
+      - github-api
+
+  # --- NEW: Product L2 ---
+  teresa-torres:
+    level: L2
+    department: product
+    type: mind_clone
+    title: "Senior Product Discovery"
+    description: "Continuous discovery habits, opportunity solution trees"
+    reports_to: pm
+    source: knowledge_base
+
+  marty-cagan:
+    level: L2
+    department: product
+    type: mind_clone
+    title: "Senior Product Management"
+    description: "Empowered teams, product-led growth, Inspired/Empowered frameworks"
+    reports_to: pm
+    source: knowledge_base
+    tools:
+      - linear-api
+      - posthog-analytics
+
+  # --- NEW: Sales L2 ---
+  grant-cardone:
+    level: L2
+    department: sales
+    type: mind_clone
+    title: "Senior Sales Intensity"
+    description: "10X rule, aggressive sales strategy, pipeline velocity"
+    reports_to: alex-hormozi
+    source: knowledge_base
+
+  russell-brunson:
+    level: L2
+    department: sales
+    type: mind_clone
+    title: "Senior Funnel Architecture"
+    description: "Sales funnels, ClickFunnels methodology, traffic secrets"
+    reports_to: alex-hormozi
+    source: knowledge_base
+    tools:
+      - stripe-api
+
+  # --- NEW: Growth L2 ---
+  neil-patel:
+    level: L2
+    department: growth
+    type: mind_clone
+    title: "Senior Digital Marketing & SEO"
+    description: "SEO mastery, content marketing, growth hacking, analytics"
+    reports_to: seth-godin
+    source: knowledge_base
+    tools:
+      - google-search-console
+      - google-analytics-api
+      - ahrefs-api
+
+  ryan-holiday:
+    level: L2
+    department: growth
+    type: mind_clone
+    title: "Senior Growth Strategy & Stoicism"
+    description: "Growth hacking, perennial seller strategy, stoic philosophy in business"
+    reports_to: seth-godin
+    source: knowledge_base
+
+  # --- NEW: Finance L2 ---
+  ray-dalio:
+    level: L2
+    department: finance
+    type: mind_clone
+    title: "Senior Macro Economics & Principles"
+    description: "Economic principles, debt cycles, radical transparency"
+    reports_to: aswath-damodaran
+    source: knowledge_base
+    tools:
+      - alpha-vantage-api
+      - financial-modeling-prep
+
+  warren-buffett:
+    level: L2
+    department: finance
+    type: mind_clone
+    title: "Senior Value Investing"
+    description: "Value investing, moats, long-term compounding, annual letters wisdom"
+    reports_to: aswath-damodaran
+    source: knowledge_base
+
+  # --- NEW: Legal L2 ---
+  lawrence-lessig:
+    level: L2
+    department: legal
+    type: mind_clone
+    title: "Senior Digital Rights & IP"
+    description: "Creative Commons, digital rights, internet law, code is law"
+    reports_to: heather-meeker
+    source: knowledge_base
+    tools:
+      - docassemble-api
+
+  # --- NEW: People L2 ---
+  simon-sinek:
+    level: L2
+    department: people
+    type: mind_clone
+    title: "Senior Leadership & Purpose"
+    description: "Start With Why, infinite game, servant leadership"
+    reports_to: adam-grant
+    source: knowledge_base
+
+  brene-brown:
+    level: L2
+    department: people
+    type: mind_clone
+    title: "Senior Vulnerability & Leadership"
+    description: "Vulnerability in leadership, courage, organizational trust"
+    reports_to: adam-grant
+    source: knowledge_base
+
+  # --- NEW: Education L2 ---
+  sugata-mitra:
+    level: L2
+    department: education
+    type: mind_clone
+    title: "Senior Self-Organized Learning"
+    description: "Hole in the Wall, SOLE, minimally invasive education"
+    reports_to: sal-khan
+    source: knowledge_base
+
+  # --- NEW: AI Strategy L2 ---
+  ilya-sutskever:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior AI Safety & Alignment"
+    description: "AI alignment, superalignment, neural network scaling laws"
+    reports_to: demis-hassabis
+    source: knowledge_base
+    tools:
+      - huggingface-api
+      - ollama-api
+
+  yann-lecun:
+    level: L2
+    department: ai_strategy
+    type: mind_clone
+    title: "Senior Self-Supervised Learning"
+    description: "Self-supervised learning, world models, JEPA architecture"
+    reports_to: demis-hassabis
+    source: knowledge_base
+
+  # --- NEW: Security L2 ---
+  kevin-mitnick:
+    level: L2
+    department: security
+    type: mind_clone
+    title: "Senior Social Engineering & Pen Testing"
+    description: "Social engineering, penetration testing, art of deception"
+    reports_to: bruce-schneier
+    source: knowledge_base
+    tools:
+      - snyk-api
+      - trivy-cli
+      - virustotal-api
+
+  troy-hunt:
+    level: L2
+    department: security
+    type: mind_clone
+    title: "Senior Web Security & Data Breaches"
+    description: "Web security, data breach analysis, HIBP, security awareness"
+    reports_to: bruce-schneier
+    source: knowledge_base
+
+  # --- NEW: Customer Success L2 ---
+  jason-lemkin:
+    level: L2
+    department: customer_success
+    type: mind_clone
+    title: "Senior SaaS Growth"
+    description: "SaaS metrics, SaaStr, B2B growth, customer success at scale"
+    reports_to: lincoln-murphy
+    source: knowledge_base
+    tools:
+      - hubspot-crm
+      - stripe-api
+
+  # --- NEW: Behavioral Science L2 ---
+  daniel-kahneman:
+    level: L2
+    department: behavioral_science
+    type: mind_clone
+    title: "Senior Decision Science"
+    description: "Cognitive biases, System 1/2 thinking, prospect theory, noise"
+    reports_to: bj-fogg
+    source: knowledge_base
+
+  richard-thaler:
+    level: L2
+    department: behavioral_science
+    type: mind_clone
+    title: "Senior Nudge Theory"
+    description: "Nudge theory, libertarian paternalism, behavioral economics"
+    reports_to: bj-fogg
+    source: knowledge_base
+
+  # --- NEW: Community L2 ---
+  scott-hanselman:
+    level: L2
+    department: community
+    type: mind_clone
+    title: "Senior Developer Advocacy"
+    description: "Developer advocacy, productivity, tech community building"
+    reports_to: sarah-drasner
+    source: knowledge_base
+    tools:
+      - github-api
+      - discord-api
+
+  # --- NEW: Platform L2 ---
+  charity-majors:
+    level: L2
+    department: platform
+    type: mind_clone
+    title: "Senior Observability Engineering"
+    description: "Observability, production debugging, o11y culture"
+    reports_to: kelsey-hightower
+    source: knowledge_base
+    tools:
+      - grafana-api
+      - prometheus-api
+
+  # --- L0: Internal Tools ---
+  oalanicolas:
+    level: L0
+    department: null
+    type: tool
+    title: "Mind Cloning Architect"
+    description: "Voice DNA & Thinking DNA extraction, mind cloning tool"
+    reports_to: aios-master
+
+  pedro-valerio:
+    level: L0
+    department: null
+    type: tool
+    title: "Process Absolutist"
+    description: "Workflow auditor, veto conditions validator, failure path finder"
+    reports_to: aios-master
+
+  sop-extractor:
+    level: L0
+    department: null
+    type: tool
+    title: "SOP Extractor"
+    description: "Standard operating procedure extraction tool"
+    reports_to: aios-master

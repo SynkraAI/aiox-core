@@ -1,0 +1,329 @@
+# Corporation Scheduler -- Default Schedule Definitions
+#
+# Each schedule defines a recurring, one-time, or event-driven task.
+#
+# Types:
+#   cron  -- recurring via cron expression (min hour dom month dow)
+#   once  -- one-time execution at a specific datetime
+#   event -- reactive, triggered by named events
+#
+# Cron fields: minute hour day-of-month month day-of-week
+#   Supports: *, numbers, lists (1,3,5), ranges (1-5), steps (*/5)
+#   Day-of-week: 0=Sunday, 1=Monday, ... 6=Saturday
+#
+# @story CORP-7
+# @version 1.0.0
+
+schedules:
+  - name: daily-standup-report
+    type: cron
+    cron: "0 9 * * 1-5"
+    task:
+      type: standup
+      description: Generate daily standup report
+      department: operations
+      priority: high
+    level: L2
+    department: operations
+    enabled: true
+
+  - name: weekly-security-scan
+    type: cron
+    cron: "0 10 * * 1"
+    task:
+      type: security_audit
+      description: Weekly security scan
+      department: security
+      priority: medium
+    level: L2
+    department: security
+    enabled: true
+
+  - name: sprint-review
+    type: cron
+    cron: "0 16 * * 5"
+    task:
+      type: sprint_review
+      description: Sprint review and retrospective
+      department: operations
+      priority: high
+    level: L3
+    department: operations
+    enabled: true
+
+  - name: dependency-check
+    type: cron
+    cron: "0 3 * * *"
+    task:
+      type: dependency_audit
+      description: Check dependencies for updates and vulnerabilities
+      department: engineering
+      priority: low
+    level: L2
+    department: engineering
+    enabled: true
+
+  - name: code-quality-audit
+    type: cron
+    cron: "0 14 * * 5"
+    task:
+      type: qa
+      description: Automated code quality audit
+      department: engineering
+      priority: medium
+    level: L2
+    department: engineering
+    enabled: true
+
+  - name: pr-auto-review
+    type: event
+    event: new_pr
+    task:
+      type: review
+      description: Automatic PR review
+      department: engineering
+      priority: medium
+    level: L2
+    department: engineering
+    enabled: true
+
+  - name: issue-triage
+    type: event
+    event: new_issue
+    task:
+      type: standup
+      description: Triage incoming issue
+      department: operations
+      priority: medium
+    level: L2
+    department: operations
+    enabled: true
+
+  # === NEW DEPARTMENT SCHEDULES ===
+
+  # Customer Success
+  - name: daily-churn-monitor
+    type: cron
+    cron: "0 8 * * 1-5"
+    task:
+      type: churn
+      description: Monitor customer health scores and flag at-risk accounts
+      department: customer_success
+      priority: high
+    level: L2
+    department: customer_success
+    enabled: true
+
+  - name: weekly-nps-report
+    type: cron
+    cron: "0 9 * * 1"
+    task:
+      type: nps
+      description: Generate weekly NPS report and identify trends
+      department: customer_success
+      priority: medium
+    level: L2
+    department: customer_success
+    enabled: true
+
+  # Growth & Marketing
+  - name: daily-seo-check
+    type: cron
+    cron: "30 7 * * 1-5"
+    task:
+      type: seo
+      description: Check SEO rankings, indexing status, and search console alerts
+      department: growth
+      priority: medium
+    level: L2
+    department: growth
+    enabled: true
+
+  - name: weekly-analytics-report
+    type: cron
+    cron: "0 10 * * 1"
+    task:
+      type: marketing
+      description: Generate weekly marketing analytics report (traffic, conversions, CAC)
+      department: growth
+      priority: high
+    level: L3
+    department: growth
+    enabled: true
+
+  - name: daily-ads-monitor
+    type: cron
+    cron: "0 7 * * *"
+    task:
+      type: ads
+      description: Monitor Google Ads performance, flag anomalies, check budgets
+      department: growth
+      priority: high
+    level: L2
+    department: growth
+    enabled: true
+
+  # Content
+  - name: weekly-content-calendar
+    type: cron
+    cron: "0 9 * * 1"
+    task:
+      type: content
+      description: Review content calendar, suggest topics, assign writers
+      department: content
+      priority: medium
+    level: L3
+    department: content
+    enabled: true
+
+  # Sales
+  - name: daily-pipeline-review
+    type: cron
+    cron: "0 8 * * 1-5"
+    task:
+      type: pipeline
+      description: Review sales pipeline, update deal stages, flag stale deals
+      department: sales
+      priority: high
+    level: L2
+    department: sales
+    enabled: true
+
+  - name: weekly-revenue-report
+    type: cron
+    cron: "0 9 * * 1"
+    task:
+      type: financial
+      description: Generate weekly revenue, MRR, and churn metrics report
+      department: finance
+      priority: high
+    level: L3
+    department: finance
+    enabled: true
+
+  # AI Strategy
+  - name: weekly-model-eval
+    type: cron
+    cron: "0 10 * * 3"
+    task:
+      type: ai
+      description: Evaluate AI model performance, check for new releases, benchmark costs
+      department: ai_strategy
+      priority: medium
+    level: L2
+    department: ai_strategy
+    enabled: true
+
+  # Health
+  - name: weekly-clinical-review
+    type: cron
+    cron: "0 11 * * 2"
+    task:
+      type: clinical
+      description: Review clinical outcomes, safety signals, and user feedback
+      department: health
+      priority: high
+    level: L3
+    department: health
+    enabled: true
+
+  # Platform
+  - name: daily-infra-health
+    type: cron
+    cron: "0 6 * * *"
+    task:
+      type: infrastructure
+      description: Check infrastructure health, container status, resource usage
+      department: platform
+      priority: high
+    level: L2
+    department: platform
+    enabled: true
+
+  - name: weekly-cost-optimization
+    type: cron
+    cron: "0 10 * * 1"
+    task:
+      type: infrastructure
+      description: Analyze cloud costs, identify optimization opportunities
+      department: platform
+      priority: medium
+    level: L3
+    department: platform
+    enabled: true
+
+  # Community
+  - name: daily-community-pulse
+    type: cron
+    cron: "0 9 * * 1-5"
+    task:
+      type: community
+      description: Check GitHub issues, Discord activity, community sentiment
+      department: community
+      priority: medium
+    level: L2
+    department: community
+    enabled: true
+
+  # People
+  - name: monthly-culture-check
+    type: cron
+    cron: "0 10 1 * *"
+    task:
+      type: culture
+      description: Monthly culture assessment, agent performance review, team health
+      department: people
+      priority: medium
+    level: L3
+    department: people
+    enabled: true
+
+  # Behavioral Science
+  - name: weekly-behavior-insights
+    type: cron
+    cron: "0 14 * * 4"
+    task:
+      type: behavior
+      description: Analyze user behavior patterns, suggest nudges and habit loops
+      department: behavioral_science
+      priority: medium
+    level: L2
+    department: behavioral_science
+    enabled: true
+
+  # Cross-Department Events
+  - name: new-customer-onboarding
+    type: event
+    event: new_customer
+    task:
+      type: onboarding
+      description: Trigger customer onboarding workflow
+      department: customer_success
+      priority: high
+    level: L2
+    department: customer_success
+    enabled: true
+
+  - name: deal-closed-won
+    type: event
+    event: deal_closed
+    task:
+      type: financial
+      description: Process closed deal - update revenue, notify CS, create onboarding
+      department: sales
+      priority: high
+    level: L2
+    department: sales
+    enabled: true
+
+  - name: security-incident
+    type: event
+    event: security_alert
+    task:
+      type: security
+      description: Immediate security incident triage and response
+      department: security
+      priority: critical
+    level: L3
+    department: security
+    enabled: true

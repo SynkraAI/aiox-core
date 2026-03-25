@@ -1,0 +1,598 @@
+# =============================================================================
+# AIOX Corporation -- Tool Permission Matrix
+# =============================================================================
+# Maps agent hierarchy levels to external tool access rights.
+# Works in conjunction with tool-integrations.yaml and permissions.yaml.
+#
+# Version: 1.0.0
+# Updated: 2026-03-24
+# =============================================================================
+
+version: "1.0.0"
+updated_at: "2026-03-24T00:00:00Z"
+
+# =============================================================================
+# ACCESS LEVEL DEFINITIONS
+# =============================================================================
+access_levels:
+
+  L0:
+    name: "Tool"
+    tool_access: none
+    description: "No external tool access. Internal utility agents only."
+    capabilities: []
+
+  L1:
+    name: "Operator"
+    tool_access: read_only
+    description: "Read-only access to tools assigned to their department."
+    capabilities:
+      - read-data
+      - list-resources
+      - view-dashboards
+      - query-metrics
+      - search
+    restrictions:
+      - no-write-operations
+      - no-delete-operations
+      - no-configuration-changes
+      - no-payment-operations
+      - no-deployment-operations
+
+  L2:
+    name: "Senior"
+    tool_access: read_write
+    description: "Read and write access to department-assigned tools."
+    capabilities:
+      - read-data
+      - write-data
+      - create-resources
+      - update-resources
+      - list-resources
+      - view-dashboards
+      - query-metrics
+      - search
+      - run-scans
+      - generate-reports
+    restrictions:
+      - no-delete-operations-on-production
+      - no-payment-operations
+      - no-infrastructure-changes
+      - no-access-to-other-departments
+
+  L3:
+    name: "VP / Chief"
+    tool_access: full_department_plus_cross_read
+    description: "Full access to department tools. Read-only cross-department."
+    capabilities:
+      - read-data
+      - write-data
+      - create-resources
+      - update-resources
+      - delete-resources
+      - configure-tools
+      - manage-webhooks
+      - list-resources
+      - view-dashboards
+      - query-metrics
+      - search
+      - run-scans
+      - generate-reports
+      - cross-department-read
+    restrictions:
+      - no-payment-execution
+      - no-production-deployment-without-approval
+      - cross-department-write-requires-approval
+
+  L4:
+    name: "C-Suite"
+    tool_access: full_all
+    description: "Full access to all tools across all departments."
+    capabilities:
+      - read-data
+      - write-data
+      - create-resources
+      - update-resources
+      - delete-resources
+      - configure-tools
+      - manage-webhooks
+      - manage-integrations
+      - approve-sensitive-operations
+      - cross-department-full-access
+      - budget-approval
+      - list-resources
+      - view-dashboards
+      - query-metrics
+      - search
+      - run-scans
+      - generate-reports
+    restrictions:
+      - payment-execution-requires-dual-approval
+      - production-deployment-requires-qa-gate
+
+  L5:
+    name: "CEO"
+    tool_access: unrestricted
+    description: "Unrestricted access. Human operator with full override authority."
+    capabilities:
+      - all
+    restrictions: []
+
+# =============================================================================
+# DEPARTMENT TOOL ASSIGNMENTS
+# =============================================================================
+# Maps departments to their authorized tools and the access modes per level.
+# =============================================================================
+department_tools:
+
+  engineering:
+    tools:
+      - tool_id: github-api
+        min_level: L1
+        l1_access: [read-repos, list-issues, view-prs]
+        l2_access: [create-issues, create-prs, review-code, manage-labels]
+        l3_access: [merge-prs, manage-actions, manage-webhooks, manage-releases]
+      - tool_id: semgrep-cli
+        min_level: L1
+        l1_access: [run-scans, view-results]
+        l2_access: [create-rules, configure-policies]
+        l3_access: [manage-rulesets, enforce-policies]
+      - tool_id: sonarqube-api
+        min_level: L1
+        l1_access: [view-quality-reports, view-coverage]
+        l2_access: [create-quality-profiles, configure-gates]
+        l3_access: [manage-quality-gates, manage-permissions]
+      - tool_id: coderabbit-ai
+        min_level: L1
+        l1_access: [view-reviews]
+        l2_access: [configure-review-rules, trigger-reviews]
+        l3_access: [manage-org-settings]
+      - tool_id: docker-api
+        min_level: L2
+        l2_access: [list-containers, view-logs, inspect]
+        l3_access: [manage-containers, build-images, manage-networks]
+      - tool_id: grafana-api
+        min_level: L1
+        l1_access: [view-dashboards]
+        l2_access: [create-dashboards, create-alerts]
+        l3_access: [manage-data-sources, manage-users]
+      - tool_id: prometheus-api
+        min_level: L1
+        l1_access: [query-metrics]
+        l2_access: [create-alert-rules]
+        l3_access: [manage-targets, manage-federation]
+      - tool_id: snyk-api
+        min_level: L1
+        l1_access: [view-vulnerabilities]
+        l2_access: [run-scans, create-fix-prs]
+        l3_access: [manage-policies, manage-integrations]
+      - tool_id: trivy-cli
+        min_level: L1
+        l1_access: [run-scans]
+        l2_access: [configure-scanning, manage-policies]
+        l3_access: [full-access]
+
+  product:
+    tools:
+      - tool_id: linear-api
+        min_level: L1
+        l1_access: [view-issues, view-roadmap]
+        l2_access: [create-issues, manage-cycles, update-roadmap]
+        l3_access: [manage-teams, manage-workflows, manage-integrations]
+      - tool_id: github-projects-api
+        min_level: L1
+        l1_access: [view-projects, view-items]
+        l2_access: [create-items, update-items, manage-fields]
+        l3_access: [create-projects, manage-automations]
+      - tool_id: posthog-analytics
+        min_level: L1
+        l1_access: [view-dashboards, view-events]
+        l2_access: [create-insights, manage-feature-flags, create-experiments]
+        l3_access: [manage-data-management, manage-permissions]
+
+  marketing:
+    tools:
+      - tool_id: google-analytics-api
+        min_level: L1
+        l1_access: [view-reports, view-real-time]
+        l2_access: [create-custom-reports, manage-audiences]
+        l3_access: [manage-properties, manage-data-streams]
+      - tool_id: google-search-console
+        min_level: L1
+        l1_access: [view-performance, view-coverage]
+        l2_access: [submit-sitemaps, request-indexing]
+        l3_access: [manage-properties, manage-users]
+      - tool_id: google-ads-api
+        min_level: L2
+        l2_access: [view-campaigns, view-reports, view-keywords]
+        l3_access: [create-campaigns, manage-bidding, manage-budgets]
+      - tool_id: ahrefs-api
+        min_level: L1
+        l1_access: [view-backlinks, view-keywords]
+        l2_access: [run-site-audit, export-data]
+        l3_access: [manage-projects]
+      - tool_id: buffer-api
+        min_level: L2
+        l2_access: [schedule-posts, view-analytics]
+        l3_access: [manage-channels, manage-team]
+      - tool_id: hubspot-crm
+        min_level: L1
+        l1_access: [view-contacts, view-deals]
+        l2_access: [create-contacts, update-deals, manage-lists]
+        l3_access: [manage-workflows, manage-properties, manage-pipelines]
+
+  sales:
+    tools:
+      - tool_id: hubspot-crm
+        min_level: L1
+        l1_access: [view-contacts, view-deals, view-pipeline]
+        l2_access: [create-contacts, update-deals, send-emails, manage-sequences]
+        l3_access: [manage-pipelines, manage-workflows, manage-properties]
+      - tool_id: stripe-api
+        min_level: L2
+        l2_access: [view-payments, view-subscriptions, view-invoices]
+        l3_access: [create-payment-links, manage-products, manage-coupons]
+      - tool_id: apollo-api
+        min_level: L1
+        l1_access: [search-contacts, view-enrichment]
+        l2_access: [enrich-contacts, create-sequences]
+        l3_access: [manage-lists, manage-integrations]
+
+  finance:
+    tools:
+      - tool_id: stripe-api
+        min_level: L1
+        l1_access: [view-balance, view-transactions, view-reports]
+        l2_access: [create-invoices, manage-refunds, view-disputes]
+        l3_access: [manage-subscriptions, manage-products, manage-payouts]
+      - tool_id: alpha-vantage-api
+        min_level: L1
+        l1_access: [query-stock-data, query-forex, query-crypto]
+        l2_access: [full-access]
+        l3_access: [full-access]
+      - tool_id: financial-modeling-prep
+        min_level: L1
+        l1_access: [query-financials, view-ratios]
+        l2_access: [full-access]
+        l3_access: [full-access]
+      - tool_id: yahoo-finance
+        min_level: L1
+        l1_access: [query-market-data]
+        l2_access: [full-access]
+        l3_access: [full-access]
+
+  security:
+    tools:
+      - tool_id: snyk-api
+        min_level: L1
+        l1_access: [view-vulnerabilities, view-reports]
+        l2_access: [run-scans, create-fix-prs, manage-ignores]
+        l3_access: [manage-org-policies, manage-integrations]
+      - tool_id: trivy-cli
+        min_level: L1
+        l1_access: [run-scans]
+        l2_access: [configure-policies]
+        l3_access: [full-access]
+      - tool_id: virustotal-api
+        min_level: L2
+        l2_access: [scan-files, scan-urls, view-reports]
+        l3_access: [manage-api-usage, full-access]
+      - tool_id: crowdsec-api
+        min_level: L1
+        l1_access: [query-ip-reputation]
+        l2_access: [manage-decisions, manage-alerts]
+        l3_access: [manage-blocklists, manage-configurations]
+
+  design:
+    tools:
+      - tool_id: figma-api
+        min_level: L1
+        l1_access: [view-files, view-components, export-images]
+        l2_access: [post-comments, manage-components]
+        l3_access: [manage-projects, manage-team-library]
+      - tool_id: cloudinary-api
+        min_level: L1
+        l1_access: [view-assets, fetch-images]
+        l2_access: [upload-assets, transform-images]
+        l3_access: [manage-folders, manage-presets, manage-access]
+
+  data:
+    tools:
+      - tool_id: metabase-api
+        min_level: L1
+        l1_access: [view-dashboards, run-saved-queries]
+        l2_access: [create-questions, create-dashboards, run-sql]
+        l3_access: [manage-databases, manage-permissions, manage-collections]
+      - tool_id: duckdb-cli
+        min_level: L1
+        l1_access: [run-queries, read-files]
+        l2_access: [create-tables, import-data, export-data]
+        l3_access: [full-access]
+
+  ai_ml:
+    tools:
+      - tool_id: huggingface-api
+        min_level: L1
+        l1_access: [run-inference, search-models, view-datasets]
+        l2_access: [upload-models, create-spaces, manage-datasets]
+        l3_access: [manage-org, manage-billing]
+      - tool_id: ollama-api
+        min_level: L1
+        l1_access: [run-inference, list-models]
+        l2_access: [pull-models, create-modelfiles]
+        l3_access: [manage-server-config]
+      - tool_id: langsmith-api
+        min_level: L1
+        l1_access: [view-traces, view-evaluations]
+        l2_access: [create-datasets, run-evaluations, manage-prompts]
+        l3_access: [manage-projects, manage-api-keys]
+
+  health:
+    tools:
+      - tool_id: infermedica-api
+        min_level: L2
+        l2_access: [symptom-assessment, triage-queries]
+        l3_access: [manage-custom-evidence, full-access]
+      - tool_id: fhir-server
+        min_level: L2
+        l2_access: [read-resources, search-resources]
+        l3_access: [create-resources, update-resources, manage-server]
+
+  hr:
+    tools:
+      - tool_id: cal-com-api
+        min_level: L1
+        l1_access: [view-availability, view-bookings]
+        l2_access: [create-bookings, manage-event-types]
+        l3_access: [manage-team-scheduling, manage-integrations]
+
+  content:
+    tools:
+      - tool_id: languagetool-api
+        min_level: L1
+        l1_access: [check-text]
+        l2_access: [manage-dictionary, configure-rules]
+        l3_access: [full-access]
+      - tool_id: strapi-cms
+        min_level: L1
+        l1_access: [view-content, search-content]
+        l2_access: [create-content, update-content, upload-media]
+        l3_access: [manage-content-types, manage-roles, delete-content]
+      - tool_id: ghost-api
+        min_level: L2
+        l2_access: [create-posts, update-posts, manage-tags]
+        l3_access: [manage-members, manage-newsletters, manage-settings]
+
+  communication:
+    tools:
+      - tool_id: discord-api
+        min_level: L1
+        l1_access: [read-messages, view-channels]
+        l2_access: [send-messages, manage-webhooks]
+        l3_access: [manage-channels, manage-roles, manage-server]
+      - tool_id: slack-api
+        min_level: L1
+        l1_access: [read-messages, view-channels]
+        l2_access: [send-messages, manage-workflows]
+        l3_access: [manage-channels, manage-apps, manage-users]
+
+# =============================================================================
+# SENSITIVE OPERATIONS -- APPROVAL REQUIREMENTS
+# =============================================================================
+sensitive_operations:
+
+  payment_processing:
+    description: "Any operation that initiates or modifies a financial transaction"
+    affected_tools: [stripe-api]
+    operations:
+      - create-charge
+      - create-refund
+      - modify-subscription
+      - create-payout
+      - update-pricing
+    min_level: L3
+    approval_required: true
+    approval_chain:
+      - role: department_head
+        required: true
+      - role: cfo
+        required: true
+        for_amount_above: 1000
+      - role: ceo
+        required: true
+        for_amount_above: 10000
+    audit_log: mandatory
+    cooldown_period: "5 minutes"
+
+  production_deployment:
+    description: "Deploying code or configuration changes to production"
+    affected_tools: [github-api, docker-api]
+    operations:
+      - merge-to-main
+      - deploy-production
+      - update-production-config
+      - scale-production-services
+    min_level: L2
+    approval_required: true
+    approval_chain:
+      - role: qa
+        required: true
+        condition: "all tests pass"
+      - role: department_head
+        required: true
+      - role: cto
+        required: true
+        for_critical_services: true
+    prerequisite_gates:
+      - qa-gate-passed
+      - security-scan-clean
+      - code-review-approved
+    audit_log: mandatory
+
+  data_deletion:
+    description: "Permanent deletion of data from any system"
+    affected_tools:
+      - hubspot-crm
+      - stripe-api
+      - strapi-cms
+      - metabase-api
+      - fhir-server
+    operations:
+      - delete-customer-data
+      - purge-records
+      - drop-database
+      - remove-backups
+    min_level: L3
+    approval_required: true
+    approval_chain:
+      - role: department_head
+        required: true
+      - role: cto
+        required: true
+      - role: ceo
+        required: true
+        for_bulk_deletion: true
+    safeguards:
+      - backup-before-delete
+      - 24h-soft-delete-period
+      - confirmation-prompt
+    audit_log: mandatory
+
+  api_key_management:
+    description: "Creating, rotating, or revoking API keys and tokens"
+    affected_tools: [all]
+    operations:
+      - create-api-key
+      - rotate-api-key
+      - revoke-api-key
+      - update-oauth-credentials
+    min_level: L3
+    approval_required: true
+    approval_chain:
+      - role: devops
+        required: true
+      - role: ciso
+        required: true
+    audit_log: mandatory
+
+  infrastructure_changes:
+    description: "Modifying infrastructure configuration or scaling"
+    affected_tools: [docker-api, grafana-api, prometheus-api]
+    operations:
+      - modify-infrastructure
+      - scale-services
+      - change-network-config
+      - update-security-groups
+    min_level: L3
+    approval_required: true
+    approval_chain:
+      - role: devops
+        required: true
+      - role: cto
+        required: true
+    audit_log: mandatory
+
+  health_data_access:
+    description: "Accessing or modifying protected health information (PHI)"
+    affected_tools: [infermedica-api, fhir-server]
+    operations:
+      - read-patient-data
+      - write-patient-data
+      - export-health-records
+      - modify-clinical-data
+    min_level: L2
+    approval_required: true
+    approval_chain:
+      - role: department_head
+        required: true
+      - role: compliance_officer
+        required: true
+    compliance:
+      - hipaa
+      - lgpd
+      - gdpr
+    audit_log: mandatory
+    data_encryption: required
+
+  bulk_communication:
+    description: "Sending messages to large groups or public channels"
+    affected_tools: [discord-api, slack-api, ghost-api, buffer-api]
+    operations:
+      - send-mass-message
+      - publish-announcement
+      - send-newsletter
+      - broadcast-notification
+    min_level: L2
+    approval_required: true
+    approval_chain:
+      - role: department_head
+        required: true
+      - role: cmo
+        required: true
+        for_external_communication: true
+    audit_log: mandatory
+
+# =============================================================================
+# CROSS-DEPARTMENT TOOL ACCESS
+# =============================================================================
+cross_department_access:
+  description: "Rules for accessing tools outside an agent's primary department"
+
+  rules:
+    - level: L0
+      cross_access: none
+
+    - level: L1
+      cross_access: none
+
+    - level: L2
+      cross_access: none
+
+    - level: L3
+      cross_access: read_only
+      requires_approval: false
+      scope: "Any tool in tool-integrations.yaml"
+      restrictions:
+        - no-write-operations
+        - no-configuration-changes
+        - audit-log-required
+
+    - level: L4
+      cross_access: full
+      requires_approval: false
+      scope: "All tools"
+      restrictions:
+        - sensitive-operations-still-require-approval
+
+    - level: L5
+      cross_access: unrestricted
+      requires_approval: false
+      scope: "All tools, all operations"
+      restrictions: []
+
+# =============================================================================
+# AUDIT & COMPLIANCE
+# =============================================================================
+audit:
+  log_retention: "90 days"
+  log_format: "json"
+  log_location: ".aiox-core/logs/tool-access/"
+
+  mandatory_logging_for:
+    - all-write-operations
+    - all-delete-operations
+    - all-sensitive-operations
+    - all-cross-department-access
+    - all-L4-and-L5-operations
+
+  alert_triggers:
+    - unauthorized-access-attempt
+    - sensitive-operation-without-approval
+    - rate-limit-exceeded
+    - unusual-access-pattern
+    - api-key-usage-anomaly
+
+  review_schedule:
+    frequency: weekly
+    reviewer: devops
+    escalation: cto

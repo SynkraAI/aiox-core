@@ -1,0 +1,978 @@
+# =============================================================================
+# AIOX Corporation -- External Tool Integrations
+# =============================================================================
+# Defines all external tools that Corporation agents can use, organized by
+# category. Each tool specifies authentication, capabilities, consumers,
+# and operational limits.
+#
+# Version: 1.0.0
+# Updated: 2026-03-24
+# =============================================================================
+
+version: "1.0.0"
+updated_at: "2026-03-24T00:00:00Z"
+
+# =============================================================================
+# ENGINEERING TOOLS
+# =============================================================================
+engineering:
+
+  github-api:
+    name: "GitHub REST/GraphQL API"
+    type: api
+    description: "Source control, pull requests, issues, code review, Actions CI/CD"
+    auth_method: token
+    auth_env_var: GITHUB_TOKEN
+    base_url: "https://api.github.com"
+    capabilities:
+      - pull-request-management
+      - issue-tracking
+      - code-review
+      - actions-workflow-dispatch
+      - repository-management
+      - release-management
+      - webhook-management
+    departments: [engineering, product]
+    agents: [devops, dev, qa, architect, pm, po]
+    free_tier:
+      rate_limit: "5000 requests/hour (authenticated)"
+      notes: "Unlimited public repos, 2000 Actions min/month free"
+    priority: critical
+
+  semgrep-cli:
+    name: "Semgrep CLI"
+    type: cli
+    description: "Static analysis, security scanning, custom rule authoring"
+    auth_method: none
+    command: "semgrep"
+    install: "pip install semgrep"
+    capabilities:
+      - static-analysis
+      - security-vulnerability-detection
+      - custom-rule-engine
+      - autofix-suggestions
+      - sarif-output
+    departments: [engineering, security]
+    agents: [dev, qa, architect]
+    free_tier:
+      rate_limit: "Unlimited local scans"
+      notes: "Open-source CLI is free; Semgrep Cloud free for up to 10 devs"
+    priority: high
+
+  sonarqube-api:
+    name: "SonarQube API"
+    type: api
+    description: "Code quality metrics, coverage tracking, tech debt measurement"
+    auth_method: token
+    auth_env_var: SONARQUBE_TOKEN
+    base_url: "https://sonarcloud.io/api"
+    capabilities:
+      - code-quality-analysis
+      - coverage-tracking
+      - tech-debt-estimation
+      - code-smell-detection
+      - security-hotspot-review
+      - quality-gate-enforcement
+    departments: [engineering]
+    agents: [qa, dev, architect]
+    free_tier:
+      rate_limit: "Unlimited for public projects"
+      notes: "SonarCloud free for open-source; Community Edition self-hosted free"
+    priority: high
+
+  coderabbit-ai:
+    name: "CodeRabbit AI"
+    type: api
+    description: "AI-powered automated code review on pull requests"
+    auth_method: oauth
+    auth_env_var: CODERABBIT_API_KEY
+    base_url: "https://api.coderabbit.ai"
+    capabilities:
+      - ai-code-review
+      - pr-summary-generation
+      - incremental-review
+      - custom-review-instructions
+    departments: [engineering]
+    agents: [qa, dev, architect]
+    free_tier:
+      rate_limit: "Unlimited for open-source"
+      notes: "Free for public repos; Pro plan for private repos"
+    priority: medium
+
+# =============================================================================
+# MARKETING & GROWTH TOOLS
+# =============================================================================
+marketing_and_growth:
+
+  google-analytics-api:
+    name: "Google Analytics Data API"
+    type: api
+    description: "Web analytics, user behavior, conversion tracking, audience insights"
+    auth_method: oauth2-service-account
+    auth_env_var: GOOGLE_ANALYTICS_CREDENTIALS
+    base_url: "https://analyticsdata.googleapis.com"
+    capabilities:
+      - pageview-tracking
+      - user-behavior-analysis
+      - conversion-funnel-reporting
+      - audience-segmentation
+      - real-time-reporting
+      - custom-dimensions-metrics
+    departments: [marketing, product]
+    agents: [analyst, pm]
+    free_tier:
+      rate_limit: "10M hits/month (GA4 free)"
+      notes: "GA4 free tier is generous; BigQuery export available"
+    priority: critical
+
+  google-search-console:
+    name: "Google Search Console API"
+    type: api
+    description: "SEO performance, search indexing status, query analytics"
+    auth_method: oauth2-service-account
+    auth_env_var: GOOGLE_SEARCH_CONSOLE_CREDENTIALS
+    base_url: "https://searchconsole.googleapis.com"
+    capabilities:
+      - search-query-analytics
+      - index-coverage-monitoring
+      - sitemap-management
+      - mobile-usability-reports
+      - core-web-vitals
+    departments: [marketing]
+    agents: [analyst]
+    free_tier:
+      rate_limit: "Unlimited (Google free service)"
+      notes: "Completely free; 16 months of data retention"
+    priority: high
+
+  google-ads-api:
+    name: "Google Ads API"
+    type: api
+    description: "Ad campaign management, keyword planning, bidding optimization"
+    auth_method: oauth2
+    auth_env_var: GOOGLE_ADS_DEVELOPER_TOKEN
+    base_url: "https://googleads.googleapis.com"
+    capabilities:
+      - campaign-management
+      - keyword-research
+      - bid-optimization
+      - conversion-tracking
+      - audience-targeting
+      - performance-reporting
+    departments: [marketing, finance]
+    agents: [analyst]
+    free_tier:
+      rate_limit: "15000 requests/day (Basic access)"
+      notes: "Requires Developer Token approval; test accounts are free"
+    priority: high
+
+  posthog-analytics:
+    name: "PostHog"
+    type: api
+    description: "Product analytics, feature flags, session replay, A/B testing"
+    auth_method: token
+    auth_env_var: POSTHOG_API_KEY
+    base_url: "https://app.posthog.com/api"
+    capabilities:
+      - event-tracking
+      - feature-flag-management
+      - session-replay
+      - ab-testing
+      - funnel-analysis
+      - cohort-management
+    departments: [product, engineering, marketing]
+    agents: [pm, analyst, dev]
+    free_tier:
+      rate_limit: "1M events/month"
+      notes: "Generous free tier; self-hosted option available"
+    priority: high
+
+  ahrefs-api:
+    name: "Ahrefs API"
+    type: api
+    description: "SEO analysis, backlink auditing, keyword research, competitive analysis"
+    auth_method: token
+    auth_env_var: AHREFS_API_KEY
+    base_url: "https://api.ahrefs.com"
+    capabilities:
+      - backlink-analysis
+      - keyword-research
+      - site-audit
+      - rank-tracking
+      - content-gap-analysis
+      - competitive-analysis
+    departments: [marketing]
+    agents: [analyst]
+    free_tier:
+      rate_limit: "No free API tier"
+      notes: "Paid only; Lite plan starts at $99/mo; Webmaster Tools is free with limited data"
+    priority: medium
+
+  buffer-api:
+    name: "Buffer API"
+    type: api
+    description: "Social media scheduling, publishing, analytics across platforms"
+    auth_method: oauth2
+    auth_env_var: BUFFER_ACCESS_TOKEN
+    base_url: "https://api.bufferapp.com/1"
+    capabilities:
+      - social-media-scheduling
+      - multi-platform-publishing
+      - engagement-analytics
+      - content-calendar
+      - link-shortening
+    departments: [marketing]
+    agents: [analyst]
+    free_tier:
+      rate_limit: "3 social channels, 10 scheduled posts"
+      notes: "Free plan limited but functional for small operations"
+    priority: low
+
+# =============================================================================
+# SALES & CRM TOOLS
+# =============================================================================
+sales_and_crm:
+
+  hubspot-crm:
+    name: "HubSpot CRM API"
+    type: api
+    description: "Contact management, deal pipeline, email tracking, automation"
+    auth_method: token
+    auth_env_var: HUBSPOT_API_KEY
+    base_url: "https://api.hubapi.com"
+    capabilities:
+      - contact-management
+      - deal-pipeline-tracking
+      - email-tracking
+      - workflow-automation
+      - form-management
+      - meeting-scheduling
+      - reporting-dashboards
+    departments: [sales, marketing]
+    agents: [analyst]
+    free_tier:
+      rate_limit: "100 requests/10 seconds"
+      notes: "Free CRM with unlimited users; API access included"
+    priority: high
+
+  stripe-api:
+    name: "Stripe API"
+    type: api
+    description: "Payment processing, subscription management, revenue analytics"
+    auth_method: token
+    auth_env_var: STRIPE_SECRET_KEY
+    base_url: "https://api.stripe.com/v1"
+    capabilities:
+      - payment-processing
+      - subscription-management
+      - invoice-generation
+      - revenue-analytics
+      - refund-management
+      - webhook-events
+      - fraud-prevention
+    departments: [finance, sales]
+    agents: [analyst]
+    free_tier:
+      rate_limit: "100 requests/second (live); 25 requests/second (test)"
+      notes: "No monthly fee; 2.9% + 30c per transaction; test mode is free"
+    priority: critical
+    sensitive: true
+
+  apollo-api:
+    name: "Apollo.io API"
+    type: api
+    description: "Lead generation, email enrichment, prospecting automation"
+    auth_method: token
+    auth_env_var: APOLLO_API_KEY
+    base_url: "https://api.apollo.io/v1"
+    capabilities:
+      - lead-generation
+      - email-enrichment
+      - contact-search
+      - sequence-automation
+      - intent-signals
+    departments: [sales]
+    agents: [analyst]
+    free_tier:
+      rate_limit: "50 emails/month enrichment"
+      notes: "Free plan includes basic search and limited enrichment credits"
+    priority: medium
+
+# =============================================================================
+# FINANCE TOOLS
+# =============================================================================
+finance:
+
+  alpha-vantage-api:
+    name: "Alpha Vantage API"
+    type: api
+    description: "Stock data, forex rates, crypto prices, fundamental analysis"
+    auth_method: token
+    auth_env_var: ALPHA_VANTAGE_API_KEY
+    base_url: "https://www.alphavantage.co/query"
+    capabilities:
+      - stock-price-data
+      - forex-exchange-rates
+      - crypto-prices
+      - fundamental-data
+      - technical-indicators
+      - sector-performance
+    departments: [finance]
+    agents: [analyst]
+    free_tier:
+      rate_limit: "25 requests/day"
+      notes: "Free tier limited but sufficient for daily analysis"
+    priority: medium
+
+  financial-modeling-prep:
+    name: "Financial Modeling Prep API"
+    type: api
+    description: "Financial statements, DCF models, financial ratios, SEC filings"
+    auth_method: token
+    auth_env_var: FMP_API_KEY
+    base_url: "https://financialmodelingprep.com/api/v3"
+    capabilities:
+      - financial-statements
+      - dcf-valuation
+      - financial-ratios
+      - sec-filings
+      - stock-screener
+      - earnings-calendar
+    departments: [finance]
+    agents: [analyst]
+    free_tier:
+      rate_limit: "250 requests/day"
+      notes: "Free tier covers most analysis needs; historical data limited to 5 years"
+    priority: medium
+
+  yahoo-finance:
+    name: "Yahoo Finance (yfinance)"
+    type: cli
+    description: "Market data, historical prices, financial info via Python library"
+    auth_method: none
+    command: "python -m yfinance"
+    install: "pip install yfinance"
+    capabilities:
+      - historical-price-data
+      - real-time-quotes
+      - options-chain-data
+      - institutional-holdings
+      - earnings-data
+      - dividend-history
+    departments: [finance]
+    agents: [analyst]
+    free_tier:
+      rate_limit: "Unofficial API; rate limiting varies"
+      notes: "Free and open-source; no API key needed; may have reliability issues"
+    priority: low
+
+# =============================================================================
+# SECURITY TOOLS
+# =============================================================================
+security:
+
+  snyk-api:
+    name: "Snyk API"
+    type: api
+    description: "Dependency vulnerability scanning, container security, IaC scanning"
+    auth_method: token
+    auth_env_var: SNYK_TOKEN
+    base_url: "https://api.snyk.io/v1"
+    capabilities:
+      - dependency-vulnerability-scanning
+      - container-image-scanning
+      - iac-security-scanning
+      - license-compliance
+      - fix-pull-request-generation
+      - sbom-generation
+    departments: [security, engineering]
+    agents: [devops, qa, architect]
+    free_tier:
+      rate_limit: "200 tests/month"
+      notes: "Free for open-source; unlimited tests for public repos"
+    priority: critical
+
+  trivy-cli:
+    name: "Trivy CLI"
+    type: cli
+    description: "Open-source vulnerability scanner for containers, filesystems, repos"
+    auth_method: none
+    command: "trivy"
+    install: "brew install trivy (or scoop install trivy on Windows)"
+    capabilities:
+      - container-vulnerability-scanning
+      - filesystem-scanning
+      - repository-scanning
+      - sbom-generation
+      - iac-misconfiguration-detection
+      - secret-detection
+    departments: [security, engineering]
+    agents: [devops, qa]
+    free_tier:
+      rate_limit: "Unlimited (open-source)"
+      notes: "Completely free and open-source; maintained by Aqua Security"
+    priority: high
+
+  virustotal-api:
+    name: "VirusTotal API"
+    type: api
+    description: "Malware analysis, file/URL scanning, threat intelligence"
+    auth_method: token
+    auth_env_var: VIRUSTOTAL_API_KEY
+    base_url: "https://www.virustotal.com/api/v3"
+    capabilities:
+      - file-malware-scanning
+      - url-reputation-check
+      - domain-analysis
+      - ip-address-analysis
+      - threat-intelligence-feeds
+    departments: [security]
+    agents: [devops]
+    free_tier:
+      rate_limit: "4 requests/minute; 500 requests/day"
+      notes: "Free tier sufficient for on-demand scanning"
+    priority: medium
+
+  crowdsec-api:
+    name: "CrowdSec API"
+    type: api
+    description: "Collaborative threat intelligence, IP reputation, intrusion detection"
+    auth_method: token
+    auth_env_var: CROWDSEC_API_KEY
+    base_url: "https://cti.api.crowdsec.net/v2"
+    capabilities:
+      - ip-reputation-scoring
+      - threat-intelligence
+      - intrusion-detection
+      - community-blocklists
+      - attack-pattern-analysis
+    departments: [security]
+    agents: [devops]
+    free_tier:
+      rate_limit: "50 requests/day (CTI API)"
+      notes: "Open-source agent is free; CTI API has free tier"
+    priority: medium
+
+# =============================================================================
+# AI & ML TOOLS
+# =============================================================================
+ai_and_ml:
+
+  huggingface-api:
+    name: "Hugging Face Inference API"
+    type: api
+    description: "Model inference, datasets, model hub, Spaces"
+    auth_method: token
+    auth_env_var: HUGGINGFACE_TOKEN
+    base_url: "https://api-inference.huggingface.co"
+    capabilities:
+      - model-inference
+      - dataset-access
+      - model-hub-search
+      - text-generation
+      - image-generation
+      - embedding-generation
+      - fine-tuning
+    departments: [ai_ml, engineering]
+    agents: [dev, architect, analyst]
+    free_tier:
+      rate_limit: "Rate-limited inference on free models"
+      notes: "Free inference for many models; Spaces free tier available"
+    priority: high
+
+  ollama-api:
+    name: "Ollama API"
+    type: api
+    description: "Local LLM inference server for running open models on-device"
+    auth_method: none
+    base_url: "http://localhost:11434/api"
+    capabilities:
+      - local-llm-inference
+      - model-management
+      - embedding-generation
+      - streaming-responses
+      - custom-modelfile
+    departments: [ai_ml, engineering]
+    agents: [dev, architect]
+    free_tier:
+      rate_limit: "Unlimited (local)"
+      notes: "Completely free; limited by local hardware (RAM/GPU)"
+    priority: high
+
+  langsmith-api:
+    name: "LangSmith API"
+    type: api
+    description: "LLM application tracing, evaluation, monitoring, prompt management"
+    auth_method: token
+    auth_env_var: LANGSMITH_API_KEY
+    base_url: "https://api.smith.langchain.com"
+    capabilities:
+      - llm-trace-logging
+      - evaluation-datasets
+      - prompt-versioning
+      - latency-monitoring
+      - cost-tracking
+      - regression-testing
+    departments: [ai_ml, engineering]
+    agents: [dev, architect, qa]
+    free_tier:
+      rate_limit: "5000 traces/month"
+      notes: "Free developer plan; sufficient for development and testing"
+    priority: medium
+
+# =============================================================================
+# DESIGN TOOLS
+# =============================================================================
+design:
+
+  figma-api:
+    name: "Figma REST API"
+    type: api
+    description: "Design file access, component extraction, design token sync"
+    auth_method: token
+    auth_env_var: FIGMA_ACCESS_TOKEN
+    base_url: "https://api.figma.com/v1"
+    capabilities:
+      - design-file-access
+      - component-extraction
+      - design-token-export
+      - image-export
+      - comment-management
+      - version-history
+    departments: [design]
+    agents: [ux-design-expert, dev]
+    free_tier:
+      rate_limit: "Undocumented; generally generous"
+      notes: "Free plan includes 3 Figma files; API access included"
+    priority: high
+
+  cloudinary-api:
+    name: "Cloudinary API"
+    type: api
+    description: "Image and video transformation, CDN delivery, optimization"
+    auth_method: token
+    auth_env_var: CLOUDINARY_URL
+    base_url: "https://api.cloudinary.com/v1_1"
+    capabilities:
+      - image-transformation
+      - video-transformation
+      - cdn-delivery
+      - auto-optimization
+      - ai-background-removal
+      - responsive-image-generation
+    departments: [design, engineering]
+    agents: [ux-design-expert, dev]
+    free_tier:
+      rate_limit: "25 credits/month (~25K transformations)"
+      notes: "Free tier includes 25GB storage and 25GB bandwidth"
+    priority: medium
+
+# =============================================================================
+# DATA & ANALYTICS TOOLS
+# =============================================================================
+data_and_analytics:
+
+  metabase-api:
+    name: "Metabase API"
+    type: api
+    description: "BI dashboards, SQL query execution, embedded analytics"
+    auth_method: token
+    auth_env_var: METABASE_SESSION_TOKEN
+    base_url: "http://localhost:3000/api"
+    capabilities:
+      - dashboard-creation
+      - sql-query-execution
+      - data-visualization
+      - embedded-analytics
+      - scheduled-reports
+      - data-model-management
+    departments: [data, product, finance]
+    agents: [data-engineer, analyst, pm]
+    free_tier:
+      rate_limit: "Unlimited (self-hosted)"
+      notes: "Open-source edition is free; cloud plan available"
+    priority: high
+
+  duckdb-cli:
+    name: "DuckDB CLI"
+    type: cli
+    description: "In-process OLAP database for analytics on Parquet, CSV, JSON"
+    auth_method: none
+    command: "duckdb"
+    install: "brew install duckdb (or scoop install duckdb on Windows)"
+    capabilities:
+      - sql-analytics
+      - parquet-file-query
+      - csv-import-export
+      - json-processing
+      - in-memory-analytics
+      - s3-direct-query
+    departments: [data, engineering]
+    agents: [data-engineer, analyst, dev]
+    free_tier:
+      rate_limit: "Unlimited (open-source)"
+      notes: "Completely free and open-source; single-binary install"
+    priority: high
+
+# =============================================================================
+# PROJECT MANAGEMENT TOOLS
+# =============================================================================
+project_management:
+
+  linear-api:
+    name: "Linear API"
+    type: api
+    description: "Issue tracking, roadmaps, cycles, project management"
+    auth_method: token
+    auth_env_var: LINEAR_API_KEY
+    base_url: "https://api.linear.app/graphql"
+    capabilities:
+      - issue-management
+      - roadmap-planning
+      - cycle-tracking
+      - label-management
+      - workflow-automation
+      - integration-webhooks
+    departments: [product, engineering]
+    agents: [pm, po, sm, dev]
+    free_tier:
+      rate_limit: "Unlimited issues (free plan)"
+      notes: "Free for up to 250 issues; paid plan for unlimited"
+    priority: high
+
+  github-projects-api:
+    name: "GitHub Projects API"
+    type: api
+    description: "Kanban boards, project automation, custom fields"
+    auth_method: token
+    auth_env_var: GITHUB_TOKEN
+    base_url: "https://api.github.com"
+    capabilities:
+      - kanban-board-management
+      - project-item-tracking
+      - custom-field-management
+      - automation-workflows
+      - cross-repo-projects
+    departments: [product, engineering]
+    agents: [pm, po, sm, dev, devops]
+    free_tier:
+      rate_limit: "Included with GitHub free"
+      notes: "Free for public and private repos; uses same GitHub token"
+    priority: medium
+
+# =============================================================================
+# CONTENT TOOLS
+# =============================================================================
+content:
+
+  languagetool-api:
+    name: "LanguageTool API"
+    type: api
+    description: "Grammar checking, style suggestions, 30+ language support"
+    auth_method: token
+    auth_env_var: LANGUAGETOOL_API_KEY
+    base_url: "https://api.languagetoolplus.com/v2"
+    capabilities:
+      - grammar-checking
+      - style-suggestions
+      - multilingual-support
+      - custom-dictionary
+      - picky-mode
+    departments: [marketing, product]
+    agents: [analyst, pm]
+    free_tier:
+      rate_limit: "20 requests/minute; 75KB/request"
+      notes: "Free API with limited checks; self-hosted option available"
+    priority: medium
+
+  strapi-cms:
+    name: "Strapi CMS API"
+    type: api
+    description: "Headless CMS with content CRUD, media management, roles"
+    auth_method: token
+    auth_env_var: STRAPI_API_TOKEN
+    base_url: "http://localhost:1337/api"
+    capabilities:
+      - content-crud
+      - media-library
+      - role-based-access
+      - content-versioning
+      - webhook-triggers
+      - custom-content-types
+    departments: [marketing, product]
+    agents: [analyst, dev]
+    free_tier:
+      rate_limit: "Unlimited (self-hosted)"
+      notes: "Open-source and free to self-host; Strapi Cloud has free tier"
+    priority: medium
+
+  ghost-api:
+    name: "Ghost Admin + Content API"
+    type: api
+    description: "Publishing platform with content management and member features"
+    auth_method: token
+    auth_env_var: GHOST_ADMIN_API_KEY
+    base_url: "https://your-site.ghost.io/ghost/api"
+    capabilities:
+      - post-publishing
+      - page-management
+      - member-management
+      - newsletter-sending
+      - theme-management
+      - tag-organization
+    departments: [marketing]
+    agents: [analyst]
+    free_tier:
+      rate_limit: "Unlimited (self-hosted)"
+      notes: "Open-source and free to self-host; Ghost(Pro) starts at $9/mo"
+    priority: low
+
+# =============================================================================
+# HEALTH TOOLS
+# =============================================================================
+health:
+
+  infermedica-api:
+    name: "Infermedica API"
+    type: api
+    description: "Symptom assessment, medical triage, condition suggestions"
+    auth_method: token
+    auth_env_var: INFERMEDICA_API_KEY
+    base_url: "https://api.infermedica.com/v3"
+    capabilities:
+      - symptom-assessment
+      - medical-triage
+      - condition-suggestion
+      - risk-factor-analysis
+      - specialist-recommendation
+    departments: [health]
+    agents: [alison-darcy]
+    free_tier:
+      rate_limit: "100 calls/month (developer)"
+      notes: "Free developer plan for testing; production requires paid plan"
+    priority: high
+    sensitive: true
+
+  fhir-server:
+    name: "FHIR R4 Server"
+    type: api
+    description: "Healthcare data interoperability using HL7 FHIR standard"
+    auth_method: oauth2
+    auth_env_var: FHIR_SERVER_URL
+    base_url: "https://hapi.fhir.org/baseR4"
+    capabilities:
+      - patient-data-management
+      - clinical-resource-crud
+      - search-parameters
+      - bundle-transactions
+      - capability-statement
+      - data-export
+    departments: [health]
+    agents: [alison-darcy, data-engineer]
+    free_tier:
+      rate_limit: "Unlimited (HAPI public test server)"
+      notes: "HAPI test server is free; production requires own instance"
+    priority: medium
+    sensitive: true
+
+# =============================================================================
+# HR TOOLS
+# =============================================================================
+hr:
+
+  cal-com-api:
+    name: "Cal.com API"
+    type: api
+    description: "Scheduling, calendar management, booking automation"
+    auth_method: token
+    auth_env_var: CAL_API_KEY
+    base_url: "https://api.cal.com/v1"
+    capabilities:
+      - booking-management
+      - availability-configuration
+      - event-type-management
+      - calendar-integration
+      - webhook-notifications
+      - team-scheduling
+    departments: [hr, product]
+    agents: [sm, pm]
+    free_tier:
+      rate_limit: "Unlimited (self-hosted)"
+      notes: "Open-source and free to self-host; cal.com cloud has free tier with 1 calendar"
+    priority: medium
+
+# =============================================================================
+# COMMUNICATION TOOLS
+# =============================================================================
+communication:
+
+  discord-api:
+    name: "Discord Bot API"
+    type: api
+    description: "Community management, notifications, bot interactions"
+    auth_method: token
+    auth_env_var: DISCORD_BOT_TOKEN
+    base_url: "https://discord.com/api/v10"
+    capabilities:
+      - message-sending
+      - channel-management
+      - webhook-integration
+      - slash-commands
+      - role-management
+      - thread-management
+      - embed-messages
+    departments: [marketing, engineering]
+    agents: [devops, analyst]
+    free_tier:
+      rate_limit: "50 requests/second (global)"
+      notes: "Bot creation is free; generous rate limits"
+    priority: medium
+
+  slack-api:
+    name: "Slack Web API"
+    type: api
+    description: "Team communication, alerts, workflow automation"
+    auth_method: oauth2
+    auth_env_var: SLACK_BOT_TOKEN
+    base_url: "https://slack.com/api"
+    capabilities:
+      - message-sending
+      - channel-management
+      - file-sharing
+      - workflow-triggers
+      - interactive-messages
+      - scheduled-messages
+      - user-management
+    departments: [engineering, product, marketing]
+    agents: [devops, sm, pm]
+    free_tier:
+      rate_limit: "Tier 1-4 varies (1-100 req/min per method)"
+      notes: "Free plan with 90-day message history; bot access included"
+    priority: high
+
+# =============================================================================
+# INFRASTRUCTURE TOOLS
+# =============================================================================
+infrastructure:
+
+  docker-api:
+    name: "Docker Engine API"
+    type: api
+    description: "Container lifecycle management, image building, networking"
+    auth_method: none
+    base_url: "unix:///var/run/docker.sock"
+    capabilities:
+      - container-management
+      - image-building
+      - network-management
+      - volume-management
+      - compose-orchestration
+      - health-check-monitoring
+    departments: [engineering]
+    agents: [devops, dev]
+    free_tier:
+      rate_limit: "Unlimited (local)"
+      notes: "Docker Desktop free for personal use and small business (<250 employees)"
+    priority: critical
+
+  grafana-api:
+    name: "Grafana HTTP API"
+    type: api
+    description: "Dashboard management, alerting, data source configuration"
+    auth_method: token
+    auth_env_var: GRAFANA_API_KEY
+    base_url: "http://localhost:3000/api"
+    capabilities:
+      - dashboard-management
+      - alert-rule-configuration
+      - data-source-management
+      - annotation-creation
+      - team-management
+      - playlist-management
+    departments: [engineering]
+    agents: [devops, architect]
+    free_tier:
+      rate_limit: "Unlimited (self-hosted)"
+      notes: "Open-source and free; Grafana Cloud has free tier (10K metrics)"
+    priority: high
+
+  prometheus-api:
+    name: "Prometheus HTTP API"
+    type: api
+    description: "Metrics collection, querying, alerting rules"
+    auth_method: none
+    base_url: "http://localhost:9090/api/v1"
+    capabilities:
+      - metric-querying
+      - range-queries
+      - label-discovery
+      - target-health-monitoring
+      - alert-rule-management
+      - federation
+    departments: [engineering]
+    agents: [devops, architect]
+    free_tier:
+      rate_limit: "Unlimited (self-hosted)"
+      notes: "Open-source and free; Grafana Cloud includes hosted Prometheus free tier"
+    priority: high
+
+# =============================================================================
+# MCP SERVERS (Already Integrated)
+# =============================================================================
+mcp_servers:
+
+  aios-brain-bridge:
+    name: "AIOS Brain Bridge MCP"
+    type: mcp-server
+    description: "Integration with Mega Brain for expert consultations and knowledge sync"
+    auth_method: none
+    base_url: "stdio://D:/jarvis/mcp-bridge"
+    capabilities:
+      - expert-consultation
+      - conclave-reports
+      - insight-publishing
+      - knowledge-sync
+      - mind-clone-conversion
+      - feedback-loop
+    departments: [all]
+    agents: [all]
+    free_tier:
+      rate_limit: "Unlimited (local)"
+      notes: "Local MCP server; no external API costs"
+    priority: critical
+
+  exa-search:
+    name: "EXA Web Search MCP"
+    type: mcp-server
+    description: "Web search and research via Docker MCP gateway"
+    auth_method: token
+    auth_env_var: EXA_API_KEY
+    base_url: "docker://docker-gateway/exa"
+    capabilities:
+      - web-search
+      - research-queries
+      - company-analysis
+      - content-discovery
+    departments: [all]
+    agents: [analyst, architect, pm]
+    free_tier:
+      rate_limit: "1000 searches/month"
+      notes: "Free tier via Docker MCP Toolkit"
+    priority: high
+
+  context7:
+    name: "Context7 Docs MCP"
+    type: mcp-server
+    description: "Library documentation lookup via Docker MCP gateway"
+    auth_method: none
+    base_url: "docker://docker-gateway/context7"
+    capabilities:
+      - library-documentation
+      - api-reference-lookup
+      - framework-docs
+    departments: [engineering]
+    agents: [dev, architect]
+    free_tier:
+      rate_limit: "Unlimited"
+      notes: "Free via Docker MCP Toolkit"
+    priority: medium
