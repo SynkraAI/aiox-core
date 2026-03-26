@@ -19,6 +19,7 @@ const MAX_DECISIONS = 5;
 const MAX_FILES = 10;
 const MAX_BLOCKERS = 3;
 const MAX_UNCONSUMED = 3;
+const MAX_MEMORY_HINTS = 3;
 
 /**
  * Resolve the path to the micro-handoff JSON file.
@@ -55,6 +56,13 @@ function validateSchema(data) {
     validated.blockers = validated.blockers.slice(0, MAX_BLOCKERS);
   } else {
     validated.blockers = [];
+  }
+
+  // Memory hints (optional, max MAX_MEMORY_HINTS entries)
+  if (Array.isArray(validated.memory_hints)) {
+    validated.memory_hints = validated.memory_hints.slice(0, MAX_MEMORY_HINTS);
+  } else {
+    validated.memory_hints = [];
   }
 
   // Ensure required fields
@@ -232,4 +240,5 @@ module.exports = {
   MAX_FILES,
   MAX_BLOCKERS,
   MAX_UNCONSUMED,
+  MAX_MEMORY_HINTS,
 };

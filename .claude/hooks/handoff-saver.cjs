@@ -80,6 +80,51 @@ async function main() {
     return;
   }
 
+  // Generate agent activity summaries from Tier 2 session state (Story AIOX-HO-2.1)
+  let agentActivitySection = '';
+  try {
+    const sessionStateModule = require(path.join(projectRoot, '.claude', 'lib', 'handoff', 'session-state'));
+    const agentActivity = require(path.join(projectRoot, '.claude', 'lib', 'handoff', 'agent-activity'));
+    const sessionState = sessionStateModule.getSessionState(projectRoot);
+    if (sessionState && sessionState.events && sessionState.events.length > 0) {
+      const summaries = agentActivity.generateAgentSummary(sessionState);
+      agentActivitySection = agentActivity.formatSummaryForHandoff(summaries);
+    }
+  } catch (_) {
+    // Summary generation failure is non-blocking
+  }
+
+  // Inject Agent Activity section into existing handoff files
+  if (agentActivitySection) {
+    const allProjects = detectProjects(projectRoot);
+    for (const proj of allProjects) {
+      try {
+        const fp = crossSession.getHandoffFilePath(proj, projectRoot);
+        if (fs.existsSync(fp)) {
+          let content = fs.readFileSync(fp, 'utf8');
+          // Remove existing Agent Activity section if present
+          content = content.replace(/\n?## Agent Activity[\s\S]*?(?=\n## |\n---\n|$)/, '');
+          // Find insertion point: before Key Docs or How to Continue
+          const insertBefore = content.search(/\n## (Key Docs|Documentacao Chave|How to Continue|Como Continuar)/);
+          if (insertBefore > -1) {
+            content = content.slice(0, insertBefore) + '\n\n' + agentActivitySection.trim() + '\n' + content.slice(insertBefore);
+          } else {
+            // Append before footer
+            const footerIdx = content.lastIndexOf('\n---\n');
+            if (footerIdx > -1) {
+              content = content.slice(0, footerIdx) + '\n\n' + agentActivitySection.trim() + '\n' + content.slice(footerIdx);
+            } else {
+              content += '\n\n' + agentActivitySection.trim() + '\n';
+            }
+          }
+          fs.writeFileSync(fp, content, 'utf8');
+        }
+      } catch (_) {
+        // Individual project failure -- continue with others
+      }
+    }
+  }
+
   // Detect and trim all active project handoffs
   const projects = detectProjects(projectRoot);
   for (const project of projects) {

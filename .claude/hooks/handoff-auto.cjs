@@ -123,12 +123,35 @@ function main() {
   const { detected, agent } = detectAgentSwitch(prompt);
 
   if (detected) {
+    // Determine the outgoing agent from session state (last known agent_switch)
+    let fromAgent = 'unknown';
+    try {
+      const sessionState = require(path.join(projectRoot, '.claude', 'lib', 'handoff', 'session-state'));
+      const state = sessionState.getSessionState(projectRoot);
+      const agentEvents = (state.events || []).filter((e) => e.type === 'agent_switch' && e.agent);
+      if (agentEvents.length > 0) {
+        fromAgent = agentEvents[agentEvents.length - 1].agent;
+      }
+    } catch (_) {
+      // Session state not available -- use 'unknown'
+    }
+
+    // Extract memory hints from the outgoing agent's MEMORY.md (Story AIOX-HO-2.2)
+    let memoryHints = [];
+    try {
+      const memHints = require(path.join(projectRoot, '.claude', 'lib', 'handoff', 'memory-hints'));
+      memoryHints = memHints.extractMemoryHints(fromAgent, {
+        story_id: '',
+        current_task: '',
+      }, projectRoot);
+    } catch (_) {
+      // Memory hints module not available or error -- skip silently
+    }
+
     // Tier 1: Save micro-handoff
     try {
       const microHandoff = require(path.join(projectRoot, '.claude', 'lib', 'handoff', 'micro-handoff'));
-      // We don't know the "from" agent in the hook; save with to_agent only
-      // The actual from_agent gets populated by the agent's own handoff logic
-      microHandoff.saveMicroHandoff('unknown', agent, {
+      microHandoff.saveMicroHandoff(fromAgent, agent, {
         story_context: {
           story_id: '',
           story_path: '',
@@ -136,6 +159,7 @@ function main() {
           current_task: '',
           branch: '',
         },
+        memory_hints: memoryHints,
         next_action: `Agent switch to @${agent} detected`,
       }, projectRoot);
     } catch (_) {

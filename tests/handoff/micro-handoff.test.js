@@ -16,6 +16,7 @@ const {
   MAX_FILES,
   MAX_BLOCKERS,
   MAX_UNCONSUMED,
+  MAX_MEMORY_HINTS,
 } = require('../../.claude/lib/handoff/micro-handoff');
 
 describe('Tier 1: Micro-Handoff', () => {
@@ -80,6 +81,19 @@ describe('Tier 1: Micro-Handoff', () => {
     test('generates unique handoff ID', () => {
       const h = saveMicroHandoff('dev', 'qa', {}, tmpDir);
       expect(h.id).toMatch(/^handoff-dev-to-qa-/);
+    });
+
+    test('saves handoff with memory_hints field (Story AIOX-HO-2.2)', () => {
+      const result = saveMicroHandoff('dev', 'qa', {
+        memory_hints: ['Greeting System Architecture', 'Test Mocking Pattern'],
+        next_action: 'Review code',
+      }, tmpDir);
+
+      expect(result.memory_hints).toEqual(['Greeting System Architecture', 'Test Mocking Pattern']);
+
+      // Verify persisted
+      const all = readAllHandoffs(tmpDir);
+      expect(all[0].memory_hints).toEqual(['Greeting System Architecture', 'Test Mocking Pattern']);
     });
   });
 
@@ -179,6 +193,44 @@ describe('Tier 1: Micro-Handoff', () => {
       expect(result.consumed).toBe(false);
       expect(result.story_context).toBeDefined();
       expect(result.decisions).toEqual([]);
+      expect(result.memory_hints).toEqual([]);
+    });
+
+    test('truncates memory_hints to MAX_MEMORY_HINTS', () => {
+      const input = {
+        memory_hints: ['hint 1', 'hint 2', 'hint 3', 'hint 4', 'hint 5'],
+      };
+      const result = validateSchema(input);
+      expect(result.memory_hints.length).toBe(MAX_MEMORY_HINTS);
+    });
+
+    test('preserves valid memory_hints array', () => {
+      const input = {
+        memory_hints: ['Greeting System Architecture', 'Test Mocking Pattern'],
+      };
+      const result = validateSchema(input);
+      expect(result.memory_hints).toEqual(['Greeting System Architecture', 'Test Mocking Pattern']);
+    });
+
+    test('defaults memory_hints to empty array when not provided', () => {
+      const result = validateSchema({ decisions: ['d1'] });
+      expect(result.memory_hints).toEqual([]);
+    });
+
+    test('backward compatibility: older handoffs without memory_hints still validate', () => {
+      // Simulate an older handoff without memory_hints
+      const oldHandoff = {
+        version: '1.0',
+        from_agent: 'sm',
+        to_agent: 'dev',
+        decisions: ['decision1'],
+        files_modified: ['file.js'],
+        blockers: [],
+        next_action: 'implement',
+      };
+      const result = validateSchema(oldHandoff);
+      expect(result.memory_hints).toEqual([]);
+      expect(result.decisions).toEqual(['decision1']);
     });
   });
 

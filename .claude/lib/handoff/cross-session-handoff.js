@@ -56,6 +56,7 @@ function getArchiveDir(project, projectRoot) {
  * @param {string[]} [data.recentWork] - Recent work items (last 5)
  * @param {object} [data.keyDocs] - Key documentation links
  * @param {string} [data.howToContinue] - Resume prompt
+ * @param {string} [data.agentActivitySection] - Pre-formatted "## Agent Activity" markdown section
  * @param {string} [projectRoot] - Project root directory
  * @returns {string} Path to the saved file
  */
@@ -95,6 +96,12 @@ function saveHandoff(project, data, projectRoot) {
     items.forEach((item, i) => {
       lines.push(`${i + 1}. ${item}`);
     });
+    lines.push('');
+  }
+
+  // Agent Activity section (from Tier 2 summaries, Story AIOX-HO-2.1)
+  if (data.agentActivitySection) {
+    lines.push(data.agentActivitySection.trim());
     lines.push('');
   }
 
@@ -174,6 +181,7 @@ function trimHandoff(filePath, projectRoot) {
   const STORIES_PATTERNS = ['Estado Atual', 'Active Stories', 'Stories'];
   const WORK_PATTERNS = ['que foi feito', 'Recent Work', 'Sessao anterior', 'What was done'];
   const PLAN_PATTERNS = ['Plano de Execu', 'Execution Plan', 'Pendencias'];
+  const ACTIVITY_PATTERNS = ['Agent Activity', 'Atividade dos Agentes'];
   const DOCS_PATTERNS = ['Documentacao Chave', 'Key Docs', 'Documentacao'];
   const CONTINUE_PATTERNS = ['Como Continuar', 'How to Continue'];
 
@@ -235,7 +243,17 @@ function trimHandoff(filePath, projectRoot) {
     trimmedLines.push('');
   }
 
-  // 5. Key Docs section (keep as-is)
+  // 5. Agent Activity section (keep, max 30 lines -- Story AIOX-HO-2.1)
+  const activitySection = sections.sections.find((s) => matchSection(s.title, ACTIVITY_PATTERNS));
+  if (activitySection) {
+    const activityLines = activitySection.content.split('\n').filter((l) => l.trim()).slice(0, 30);
+    trimmedLines.push(`## ${activitySection.title}`);
+    trimmedLines.push('');
+    trimmedLines.push(...activityLines);
+    trimmedLines.push('');
+  }
+
+  // 6. Key Docs section (keep as-is)
   const docsSection = sections.sections.find((s) => matchSection(s.title, DOCS_PATTERNS));
   if (docsSection) {
     trimmedLines.push(`## ${docsSection.title}`);
@@ -244,7 +262,7 @@ function trimHandoff(filePath, projectRoot) {
     trimmedLines.push('');
   }
 
-  // 6. How to Continue section (keep as-is)
+  // 7. How to Continue section (keep as-is)
   const continueSection = sections.sections.find((s) => matchSection(s.title, CONTINUE_PATTERNS));
   if (continueSection) {
     trimmedLines.push(`## ${continueSection.title}`);
