@@ -34,11 +34,13 @@
 
     .viewport {
       flex: 1; position: relative;
-      overflow-x: auto; overflow-y: hidden;
+      overflow-x: scroll; overflow-y: hidden;
       cursor: crosshair;
-      scrollbar-width: none;
     }
-    .viewport::-webkit-scrollbar { display: none; }
+    .viewport::-webkit-scrollbar { height: 12px; }
+    .viewport::-webkit-scrollbar-track { background: #0a0a1a; }
+    .viewport::-webkit-scrollbar-thumb { background: #f5c542; border-radius: 6px; }
+    .viewport::-webkit-scrollbar-thumb:hover { background: #e94560; }
 
     .map-wrap { position: relative; display: inline-block; }
     .map-wrap img {
@@ -93,9 +95,9 @@
 </div>
 
 <div class="instructions" id="instr">
-  Clique no caminho da imagem para posicionar os dots.<br>
-  Use ◀ ▶ para trocar de phase. Clique para adicionar dots na phase atual.<br>
-  Quando terminar, clique EXPORTAR para copiar as coordenadas.
+  <b>Clique</b> = posicionar dot | <b>Scroll/wheel</b> = navegar lateralmente<br>
+  <b>Shift+drag</b> ou <b>botão direito+drag</b> = arrastar o mapa<br>
+  Use <b>◀ ▶</b> para trocar de phase. <b>EXPORTAR</b> copia as coordenadas.
 </div>
 
 <div class="output" id="output"><pre id="output-code"></pre></div>
@@ -142,8 +144,39 @@ img.onload = () => {
   setTimeout(() => instr.classList.add('off'), 5000);
 };
 
-// Click to add dot
+// Drag to scroll (right-click drag or middle-click drag)
+let dragging = false, dragStartX = 0, scrollStartX = 0;
+vp.addEventListener('mousedown', (e) => {
+  if (e.button === 1 || e.button === 2 || e.shiftKey) {
+    e.preventDefault();
+    dragging = true;
+    dragStartX = e.clientX;
+    scrollStartX = vp.scrollLeft;
+    vp.style.cursor = 'grabbing';
+  }
+});
+window.addEventListener('mousemove', (e) => {
+  if (dragging) {
+    vp.scrollLeft = scrollStartX - (e.clientX - dragStartX);
+  }
+});
+window.addEventListener('mouseup', () => {
+  if (dragging) {
+    dragging = false;
+    vp.style.cursor = 'crosshair';
+  }
+});
+vp.addEventListener('contextmenu', (e) => e.preventDefault());
+
+// Scroll with mouse wheel horizontally
+vp.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  vp.scrollLeft += e.deltaY || e.deltaX;
+}, { passive: false });
+
+// Click to add dot (left click only, no shift)
 canvas.addEventListener('click', (e) => {
+  if (e.shiftKey || dragging) return; // shift = drag mode
   const rect = canvas.getBoundingClientRect();
   const mx = e.clientX - rect.left;
   const my = e.clientY - rect.top;
