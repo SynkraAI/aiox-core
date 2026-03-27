@@ -87,7 +87,7 @@
 
 <div class="viewport" id="vp">
   <div class="map-wrap" id="wrap">
-    <img id="mapimg" src="/assets/sprites/pixel-overworld-map.png">
+    <img id="mapimg" src="/assets/sprites/chronicles-overworld-map.png">
     <canvas id="c"></canvas>
   </div>
 </div>
@@ -110,47 +110,25 @@ const vp = document.getElementById('vp');
 const instr = document.getElementById('instr');
 
 const PHASE_NAMES = [
-  'Green Plains', 'Enchanted Forest', 'Coastal Shores', 'Snow Mountains',
-  'Golden Desert', 'Dark Fortress', 'Mystic Portal', 'Watchtower'
+  'Green Plains (A Oficina)',
+  'Enchanted Forest (O Mapa do Tesouro)',
+  'Coastal Shores (A Planta da Fortaleza)',
+  'Snow Mountains (O Pergaminho das Stories)',
+  'Golden Desert (A Forja)',
+  'Dark Fortress (O Tribunal da Qualidade)',
+  'Crystal Caverns (O Salão dos Selos)',
+  'Mystic Portal (O Portal do Deploy)',
+  'Watchtower (A Torre de Vigia)'
 ];
 const PHASE_COLORS = [
   '#4ecca3', '#27763e', '#3498db', '#ecf0f1',
-  '#f0d9a0', '#e94560', '#9b59b6', '#2ecc71'
+  '#f0d9a0', '#e94560', '#9b59b6', '#7c3aed', '#2ecc71'
 ];
 
 let currentPhase = 0;
-// Pre-load existing NODE_POSITIONS from map.html
-let dots = {
-  0: [
-    {x:6.8,y:43.4},{x:8.6,y:53},{x:7,y:62.4},{x:6.5,y:73.9},
-    {x:9.4,y:80.7},{x:12.7,y:81},{x:15.9,y:81.4}
-  ],
-  1: [
-    {x:19.9,y:77.7},{x:23.5,y:65.8},{x:25.1,y:50.1},{x:20.1,y:34.8},{x:24.2,y:27.9}
-  ],
-  2: [
-    {x:27.5,y:27.5},{x:33.6,y:29.3},{x:34.6,y:46.2},{x:36.7,y:53.7},
-    {x:36.1,y:65.7},{x:40.1,y:63.2},{x:40.7,y:46.5},{x:41.3,y:29.6}
-  ],
-  3: [
-    {x:46.2,y:27.5},{x:43.8,y:39.5},{x:45.9,y:50.1},{x:47.1,y:66}
-  ],
-  4: [
-    {x:48.8,y:68.8},{x:50.2,y:74.6},{x:52.1,y:78.9},{x:55,y:80.7},
-    {x:58.1,y:81.1},{x:61.1,y:81.1},{x:63.3,y:81},{x:65.6,y:80}
-  ],
-  5: [
-    {x:68.5,y:69},{x:68.3,y:46.6},{x:64.9,y:31.8},{x:65.6,y:15.1},
-    {x:68.5,y:7.5},{x:71.1,y:13.6},{x:73.2,y:22.3},{x:73.2,y:45.2},{x:76.5,y:57.9}
-  ],
-  6: [
-    {x:78.8,y:59.3},{x:78.6,y:42.9},{x:81.2,y:34.5},{x:84.7,y:40.7},{x:85.2,y:58.7}
-  ],
-  7: [
-    {x:81.8,y:75.5},{x:85.2,y:84.1},{x:90.6,y:79.3},{x:95.7,y:69.9},
-    {x:90.7,y:52.3},{x:93.1,y:41.2}
-  ]
-};
+// Start fresh for the new 9-zone map
+let dots = {};
+for (let i = 0; i < 9; i++) dots[i] = [];
 
 let scale = 1;
 
@@ -181,7 +159,7 @@ function render() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   // Draw all dots from all phases
-  for (let p = 0; p < 8; p++) {
+  for (let p = 0; p < 9; p++) {
     const pts = dots[p];
     const col = PHASE_COLORS[p];
     const isCurrent = p === currentPhase;
@@ -234,7 +212,7 @@ function render() {
     }
 
     // Connect last dot of phase to first dot of next phase
-    if (p < 7 && pts.length > 0 && dots[p + 1].length > 0) {
+    if (p < 8 && pts.length > 0 && dots[p + 1].length > 0) {
       const last = pts[pts.length - 1];
       const first = dots[p + 1][0];
       ctx.strokeStyle = '#8892b0';
@@ -254,7 +232,7 @@ function render() {
 }
 
 function nextPhase() {
-  currentPhase = Math.min(7, currentPhase + 1);
+  currentPhase = Math.min(8, currentPhase + 1);
   updateUI();
 }
 function prevPhase() {
@@ -270,7 +248,8 @@ function clearPhase() {
   updateUI();
 }
 // Expected items per phase (from app-development.yaml)
-const PHASE_EXPECTED = [7, 5, 8, 4, 8, 24, 5, 6];
+// 9 worlds — World 5 split into 5 (12 items) + 6 (12 items)
+const PHASE_EXPECTED = [7, 5, 8, 4, 8, 12, 12, 5, 6];
 
 function updateUI() {
   document.getElementById('phase-label').textContent = `Phase ${currentPhase} — ${PHASE_NAMES[currentPhase]}`;
@@ -288,7 +267,7 @@ function updateUI() {
 
 function exportCoords() {
   let code = 'const NODE_POSITIONS = [\n';
-  for (let p = 0; p < 8; p++) {
+  for (let p = 0; p < 9; p++) {
     if (dots[p].length === 0) continue;
     code += `  // Phase ${p} — ${PHASE_NAMES[p]}\n`;
     dots[p].forEach((d, i) => {
