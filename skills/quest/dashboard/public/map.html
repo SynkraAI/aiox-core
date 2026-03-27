@@ -18,20 +18,34 @@
     /* HUD */
     .hud {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 16px; background: #16213e;
-      border-bottom: 3px solid #e94560; z-index: 20; font-size: 9px;
+      padding: 10px 20px; background: #16213e;
+      border-bottom: 3px solid #e94560; z-index: 20; font-size: 11px;
       flex-shrink: 0;
     }
-    .hud-l { display: flex; align-items: center; gap: 12px; }
-    .hud-r { display: flex; align-items: center; gap: 12px; }
-    .h-title { font-size: 11px; color: #f5c542; }
-    .h-lv { color: #4ecca3; }
-    .h-xp { color: #8892b0; }
-    .xp-w { width: 160px; height: 10px; background: #0a0a1a; border: 2px solid #8892b0; border-radius: 2px; overflow: hidden; }
+    .hud-l { display: flex; align-items: center; gap: 14px; }
+    .hud-r { display: flex; align-items: center; gap: 14px; }
+    .h-title { font-size: 13px; color: #f5c542; }
+    .h-lv { color: #4ecca3; font-size: 11px; }
+    .h-xp { color: #8892b0; font-size: 10px; }
+    .xp-w { width: 180px; height: 12px; background: #0a0a1a; border: 2px solid #8892b0; border-radius: 2px; overflow: hidden; }
     .xp-f { height: 100%; background: linear-gradient(90deg, #4ecca3, #f5c542); transition: width 0.8s; }
-    .h-back { color: #e94560; text-decoration: none; font-size: 9px; }
+    .h-back { color: #e94560; text-decoration: none; font-size: 11px; }
     .h-back:hover { color: #f5c542; }
-    select { background: #16213e; color: #eaeaea; border: 1px solid #8892b0; font-family: inherit; font-size: 7px; padding: 2px 4px; border-radius: 2px; }
+    select { background: #16213e; color: #eaeaea; border: 1px solid #8892b0; font-family: inherit; font-size: 11px; padding: 4px 8px; border-radius: 3px; cursor: pointer; }
+    select option { font-size: 11px; padding: 4px; }
+
+    /* Detail toggle */
+    .detail-toggle { display: flex; gap: 0; }
+    .detail-btn {
+      background: #0a0a1a; color: #8892b0; border: 1px solid #8892b0;
+      font-family: inherit; font-size: 9px; padding: 4px 10px; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .detail-btn:first-child { border-radius: 3px 0 0 3px; }
+    .detail-btn:last-child { border-radius: 0 3px 3px 0; }
+    .detail-btn:not(:first-child) { border-left: none; }
+    .detail-btn.active { background: #e94560; color: #fff; border-color: #e94560; }
+    .detail-btn:hover:not(.active) { background: #1a2744; color: #eaeaea; }
 
     /* Map viewport */
     .viewport {
@@ -64,14 +78,14 @@
     .tip {
       display: none; position: fixed;
       background: #16213e; border: 2px solid #f5c542;
-      padding: 8px 12px; font-size: 7px; line-height: 1.8;
-      max-width: 240px; z-index: 30; pointer-events: none;
+      padding: 10px 14px; font-size: 9px; line-height: 1.8;
+      max-width: 320px; z-index: 30; pointer-events: none;
       border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.7);
     }
     .tip.on { display: block; }
-    .tip-t { color: #f5c542; font-size: 9px; margin-bottom: 3px; }
-    .tip-c { color: #8892b0; font-size: 7px; }
-    .tip-s { margin-top: 3px; }
+    .tip-t { color: #f5c542; font-size: 11px; margin-bottom: 4px; }
+    .tip-c { color: #8892b0; font-size: 9px; }
+    .tip-s { margin-top: 4px; }
     .tip-s.done { color: #4ecca3; }
     .tip-s.pending { color: #8892b0; }
     .tip-s.skipped { color: #e94560; }
@@ -80,10 +94,10 @@
     .legend {
       position: fixed; bottom: 12px; right: 12px;
       background: rgba(22,33,62,0.92); border: 2px solid #8892b0;
-      padding: 8px 12px; font-size: 7px; line-height: 2.2;
+      padding: 10px 14px; font-size: 9px; line-height: 2.2;
       border-radius: 4px; z-index: 20;
     }
-    .ld { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: middle; }
+    .ld { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
     .ld.d { background: #4ecca3; }
     .ld.c { background: #f5c542; animation: gl 1s infinite; }
     .ld.p { background: rgba(255,255,255,0.4); }
@@ -104,6 +118,11 @@
     <span class="h-xp" id="h-xp">0 XP</span>
   </div>
   <div class="hud-r">
+    <div class="detail-toggle">
+      <button class="detail-btn active" data-level="clean">Clean</button>
+      <button class="detail-btn" data-level="medium">Medium</button>
+      <button class="detail-btn" data-level="full">Full</button>
+    </div>
     <select id="h-sel"></select>
     <span id="h-prog">0/0</span>
     <a href="/" class="h-back">[DASHBOARD]</a>
@@ -263,6 +282,10 @@ let scale = 1;
 let dragging = false, dragS = {x:0,y:0}, camS = {x:0,y:0};
 let hovered = null;
 let frame = 0;
+let detailLevel = 'clean'; // 'clean' | 'medium' | 'full'
+
+// Phase names for labels (populated from quest data)
+let phaseNames = {};
 
 // --------------------------------------------------------------------------
 // DATA
@@ -291,6 +314,15 @@ async function loadData() {
   questItems = items;
   questStats = parsed.stats || {};
   questName = proj.name;
+
+  // Extract phase names if available
+  phaseNames = {};
+  if (parsed.phases) {
+    for (const [key, phase] of Object.entries(parsed.phases)) {
+      const pIdx = parseInt(key, 10);
+      phaseNames[pIdx] = phase.name || phase.label || `Phase ${pIdx}`;
+    }
+  }
 
   const sel = document.getElementById('h-sel');
   sel.innerHTML = projects.map(p =>
@@ -463,6 +495,76 @@ function renderOverlay() {
     if (node.status === 'done') ctx.fillText('✓', px, py);
     else if (node.status === 'skipped') ctx.fillText('—', px, py);
     else if (isCur) ctx.fillText('!', px + 0.5, py);
+
+    // ---------- DETAIL LABELS ----------
+    if (detailLevel !== 'clean' && node.id) {
+      const labelFs = Math.max(8, 11 * scale);
+      const cmdFs = Math.max(7, 9 * scale);
+      const labelY = py + r + labelFs + 4;
+
+      // Background pill for readability
+      const drawLabel = (text, x, y, fontSize, color, maxW) => {
+        ctx.font = `${fontSize}px "Press Start 2P"`;
+        const measured = ctx.measureText(text);
+        const tw = Math.min(measured.width, maxW || 999);
+        const truncated = tw < measured.width;
+        let displayText = text;
+        if (truncated) {
+          while (ctx.measureText(displayText + '...').width > maxW && displayText.length > 3) {
+            displayText = displayText.slice(0, -1);
+          }
+          displayText += '...';
+        }
+        const pw = ctx.measureText(displayText).width + 8;
+        const ph = fontSize + 6;
+        ctx.fillStyle = 'rgba(10,10,26,0.85)';
+        ctx.beginPath();
+        ctx.roundRect(x - pw / 2, y - ph / 2, pw, ph, 3);
+        ctx.fill();
+        ctx.fillStyle = color;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(displayText, x, y);
+      };
+
+      // Item ID + short label (Medium + Full)
+      const idLabel = `${node.id}`;
+      const shortLabel = node.label.length > 20 ? node.label.slice(0, 18) + '..' : node.label;
+      const labelColor = node.status === 'done' ? '#4ecca3' : isCur ? '#f5c542' : '#8892b0';
+      drawLabel(`${idLabel} ${shortLabel}`, px, labelY, labelFs, labelColor, 280 * scale);
+
+      // Command text (Full only)
+      if (detailLevel === 'full' && node.command) {
+        const cmdText = node.command.length > 35 ? node.command.slice(0, 33) + '..' : node.command;
+        drawLabel(cmdText, px, labelY + labelFs + 8, cmdFs, 'rgba(255,255,255,0.6)', 300 * scale);
+      }
+    }
+
+    // ---------- PHASE START MARKER ----------
+    if (detailLevel !== 'clean' && node.idx === 0 && node.id) {
+      const pName = phaseNames[node.phase] || `World ${node.phase}`;
+      const markerFs = Math.max(9, 12 * scale);
+      const markerY = py - r - markerFs - 12;
+
+      // Phase banner
+      ctx.font = `bold ${markerFs}px "Press Start 2P"`;
+      const bannerText = `W${node.phase}: ${pName}`;
+      const bw = ctx.measureText(bannerText).width + 16;
+      const bh = markerFs + 10;
+
+      ctx.fillStyle = 'rgba(22,33,62,0.9)';
+      ctx.beginPath();
+      ctx.roundRect(px - bw / 2, markerY - bh / 2, bw, bh, 4);
+      ctx.fill();
+      ctx.strokeStyle = '#e94560';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      ctx.fillStyle = '#f5c542';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(bannerText, px, markerY);
+    }
   }
 
   // Hero at current node — draw ABOVE it with an arrow indicator too
@@ -585,6 +687,15 @@ function setupInput() {
   }
 
   window.addEventListener('resize', fitMap);
+
+  // Detail level toggle
+  for (const btn of document.querySelectorAll('.detail-btn')) {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.detail-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      detailLevel = btn.dataset.level;
+    });
+  }
 }
 
 // --------------------------------------------------------------------------
