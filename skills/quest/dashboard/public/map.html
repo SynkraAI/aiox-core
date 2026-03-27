@@ -4,48 +4,140 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quest Map — World Overview</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;600;700&family=Cinzel:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
   <style>
+    /* === THEME VARIABLES === */
+    :root, [data-theme="pixel"] {
+      --font-main: 'Press Start 2P', monospace;
+      --font-size-hud: 11px;
+      --font-size-title: 13px;
+      --bg-body: #0a0a1a;
+      --bg-hud: #16213e;
+      --bg-panel: rgba(22,33,62,0.92);
+      --bg-tooltip: #16213e;
+      --text-primary: #eaeaea;
+      --text-muted: #8892b0;
+      --accent-primary: #f5c542;
+      --accent-done: #4ecca3;
+      --accent-current: #f5c542;
+      --accent-danger: #e94560;
+      --accent-pending: rgba(255,255,255,0.5);
+      --border-hud: #e94560;
+      --border-tooltip: #f5c542;
+      --dot-border: rgba(255,255,255,0.7);
+      --map-brightness: 0.55;
+      --map-saturate: 0.8;
+      --image-rendering: pixelated;
+    }
+    [data-theme="cyberpunk"] {
+      --font-main: 'JetBrains Mono', monospace;
+      --font-size-hud: 12px;
+      --font-size-title: 14px;
+      --bg-body: #0d0221;
+      --bg-hud: #1a0a3e;
+      --bg-panel: rgba(26,10,62,0.94);
+      --bg-tooltip: #1a0a3e;
+      --text-primary: #e0e0ff;
+      --text-muted: #7b68ee;
+      --accent-primary: #00ffff;
+      --accent-done: #00ff88;
+      --accent-current: #ff00ff;
+      --accent-danger: #ff3366;
+      --accent-pending: rgba(0,255,255,0.3);
+      --border-hud: #ff00ff;
+      --border-tooltip: #00ffff;
+      --dot-border: rgba(0,255,255,0.6);
+      --map-brightness: 0.4;
+      --map-saturate: 0.6;
+      --image-rendering: auto;
+    }
+    [data-theme="parchment"] {
+      --font-main: 'Cinzel', serif;
+      --font-size-hud: 13px;
+      --font-size-title: 15px;
+      --bg-body: #1a1408;
+      --bg-hud: #2a1f0e;
+      --bg-panel: rgba(42,31,14,0.94);
+      --bg-tooltip: #2a1f0e;
+      --text-primary: #e8d5b0;
+      --text-muted: #a08860;
+      --accent-primary: #d4a846;
+      --accent-done: #7ab648;
+      --accent-current: #d4a846;
+      --accent-danger: #c45c3a;
+      --accent-pending: rgba(232,213,176,0.35);
+      --border-hud: #d4a846;
+      --border-tooltip: #d4a846;
+      --dot-border: rgba(212,168,70,0.6);
+      --map-brightness: 0.6;
+      --map-saturate: 0.65;
+      --image-rendering: auto;
+    }
+    [data-theme="minimal"] {
+      --font-main: 'Inter', sans-serif;
+      --font-size-hud: 13px;
+      --font-size-title: 15px;
+      --bg-body: #09090b;
+      --bg-hud: #18181b;
+      --bg-panel: rgba(24,24,27,0.95);
+      --bg-tooltip: #18181b;
+      --text-primary: #fafafa;
+      --text-muted: #71717a;
+      --accent-primary: #a78bfa;
+      --accent-done: #4ade80;
+      --accent-current: #a78bfa;
+      --accent-danger: #f87171;
+      --accent-pending: rgba(250,250,250,0.2);
+      --border-hud: #27272a;
+      --border-tooltip: #a78bfa;
+      --dot-border: rgba(250,250,250,0.3);
+      --map-brightness: 0.45;
+      --map-saturate: 0.3;
+      --image-rendering: auto;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: #0a0a1a; color: #eaeaea;
-      font-family: 'Press Start 2P', monospace;
+      background: var(--bg-body); color: var(--text-primary);
+      font-family: var(--font-main);
       overflow: hidden; height: 100vh;
       display: flex; flex-direction: column;
+      transition: background-color 0.3s, color 0.3s, font-family 0.3s;
     }
 
     /* HUD */
     .hud {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 20px; background: #16213e;
-      border-bottom: 3px solid #e94560; z-index: 20; font-size: 11px;
-      flex-shrink: 0;
+      padding: 10px 20px; background: var(--bg-hud);
+      border-bottom: 3px solid var(--border-hud); z-index: 20; font-size: var(--font-size-hud);
+      flex-shrink: 0; transition: all 0.3s;
     }
     .hud-l { display: flex; align-items: center; gap: 14px; }
     .hud-r { display: flex; align-items: center; gap: 14px; }
-    .h-title { font-size: 13px; color: #f5c542; }
-    .h-lv { color: #4ecca3; font-size: 11px; }
-    .h-xp { color: #8892b0; font-size: 10px; }
-    .xp-w { width: 180px; height: 12px; background: #0a0a1a; border: 2px solid #8892b0; border-radius: 2px; overflow: hidden; }
-    .xp-f { height: 100%; background: linear-gradient(90deg, #4ecca3, #f5c542); transition: width 0.8s; }
-    .h-back { color: #e94560; text-decoration: none; font-size: 11px; }
-    .h-back:hover { color: #f5c542; }
-    select { background: #16213e; color: #eaeaea; border: 1px solid #8892b0; font-family: inherit; font-size: 11px; padding: 4px 8px; border-radius: 3px; cursor: pointer; }
-    select option { font-size: 11px; padding: 4px; }
+    .h-title { font-size: var(--font-size-title); color: var(--accent-primary); }
+    .h-lv { color: var(--accent-done); font-size: var(--font-size-hud); }
+    .h-xp { color: var(--text-muted); font-size: calc(var(--font-size-hud) - 1px); }
+    .xp-w { width: 180px; height: 12px; background: var(--bg-body); border: 2px solid var(--text-muted); border-radius: 2px; overflow: hidden; }
+    .xp-f { height: 100%; background: linear-gradient(90deg, var(--accent-done), var(--accent-primary)); transition: width 0.8s; }
+    .h-back { color: var(--accent-danger); text-decoration: none; font-size: var(--font-size-hud); }
+    .h-back:hover { color: var(--accent-primary); }
+    select { background: var(--bg-hud); color: var(--text-primary); border: 1px solid var(--text-muted); font-family: inherit; font-size: var(--font-size-hud); padding: 4px 8px; border-radius: 3px; cursor: pointer; }
+    select option { font-size: var(--font-size-hud); padding: 4px; }
 
-    /* Detail toggle */
-    .detail-toggle { display: flex; gap: 0; }
-    .detail-btn {
-      background: #0a0a1a; color: #8892b0; border: 1px solid #8892b0;
+    /* Toggle buttons (detail + theme) */
+    .toggle-group { display: flex; gap: 0; }
+    .toggle-btn {
+      background: var(--bg-body); color: var(--text-muted); border: 1px solid var(--text-muted);
       font-family: inherit; font-size: 9px; padding: 4px 10px; cursor: pointer;
       transition: all 0.2s;
     }
-    .detail-btn:first-child { border-radius: 3px 0 0 3px; }
-    .detail-btn:last-child { border-radius: 0 3px 3px 0; }
-    .detail-btn:not(:first-child) { border-left: none; }
-    .detail-btn.active { background: #e94560; color: #fff; border-color: #e94560; }
-    .detail-btn:hover:not(.active) { background: #1a2744; color: #eaeaea; }
+    .toggle-btn:first-child { border-radius: 3px 0 0 3px; }
+    .toggle-btn:last-child { border-radius: 0 3px 3px 0; }
+    .toggle-btn:not(:first-child) { border-left: none; }
+    .toggle-btn.active { background: var(--accent-danger); color: #fff; border-color: var(--accent-danger); }
+    .toggle-btn:hover:not(.active) { background: var(--bg-hud); color: var(--text-primary); }
+    .hud-sep { width: 1px; height: 20px; background: var(--text-muted); opacity: 0.3; }
 
     /* Map viewport */
     .viewport {
@@ -63,9 +155,9 @@
     }
     .map-inner img {
       display: block;
-      image-rendering: pixelated;
-      image-rendering: crisp-edges;
-      filter: brightness(0.55) saturate(0.8);
+      image-rendering: var(--image-rendering);
+      filter: brightness(var(--map-brightness)) saturate(var(--map-saturate));
+      transition: filter 0.5s;
     }
 
     /* Canvas overlay for dots + hero — must exactly cover the image */
@@ -77,36 +169,37 @@
     /* Tooltip */
     .tip {
       display: none; position: fixed;
-      background: #16213e; border: 2px solid #f5c542;
+      background: var(--bg-tooltip); border: 2px solid var(--border-tooltip);
       padding: 12px 16px; font-size: 9px; line-height: 1.8;
       max-width: 420px; z-index: 30; pointer-events: none;
       border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+      transition: background 0.3s, border-color 0.3s;
     }
     .tip.on { display: block; }
-    .tip-t { color: #f5c542; font-size: 11px; margin-bottom: 4px; }
-    .tip-w { color: #e94560; font-size: 9px; margin-bottom: 2px; }
-    .tip-c { color: #8892b0; font-size: 9px; white-space: pre-wrap; word-break: break-word; }
-    .tip-p { color: #4ecca3; font-size: 8px; margin-top: 3px; font-style: italic; }
+    .tip-t { color: var(--accent-primary); font-size: 11px; margin-bottom: 4px; }
+    .tip-w { color: var(--accent-danger); font-size: 9px; margin-bottom: 2px; }
+    .tip-c { color: var(--text-muted); font-size: 9px; white-space: pre-wrap; word-break: break-word; }
+    .tip-p { color: var(--accent-done); font-size: 8px; margin-top: 3px; font-style: italic; }
     .tip-s { margin-top: 4px; }
-    .tip-s.done { color: #4ecca3; }
-    .tip-s.pending { color: #8892b0; }
-    .tip-s.skipped { color: #e94560; }
+    .tip-s.done { color: var(--accent-done); }
+    .tip-s.pending { color: var(--text-muted); }
+    .tip-s.skipped { color: var(--accent-danger); }
 
     /* Legend */
     .legend {
       position: fixed; bottom: 12px; right: 12px;
-      background: rgba(22,33,62,0.92); border: 2px solid #8892b0;
+      background: var(--bg-panel); border: 2px solid var(--text-muted);
       padding: 10px 14px; font-size: 9px; line-height: 2.2;
-      border-radius: 4px; z-index: 20;
+      border-radius: 4px; z-index: 20; transition: all 0.3s;
     }
     .ld { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
-    .ld.d { background: #4ecca3; }
-    .ld.c { background: #f5c542; animation: gl 1s infinite; }
-    .ld.p { background: rgba(255,255,255,0.4); }
-    .ld.s { background: #e94560; opacity: 0.6; }
-    @keyframes gl { 0%,100%{box-shadow:0 0 4px #f5c542}50%{box-shadow:0 0 12px #f5c542} }
+    .ld.d { background: var(--accent-done); }
+    .ld.c { background: var(--accent-current); animation: gl 1s infinite; }
+    .ld.p { background: var(--accent-pending); }
+    .ld.s { background: var(--accent-danger); opacity: 0.6; }
+    @keyframes gl { 0%,100%{box-shadow:0 0 4px var(--accent-current)}50%{box-shadow:0 0 12px var(--accent-current)} }
 
-    .loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #f5c542; z-index: 100; background: #0a0a1a; }
+    .loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--accent-primary); z-index: 100; background: var(--bg-body); }
     .loading.off { display: none; }
   </style>
 </head>
@@ -120,10 +213,17 @@
     <span class="h-xp" id="h-xp">0 XP</span>
   </div>
   <div class="hud-r">
-    <div class="detail-toggle">
-      <button class="detail-btn active" data-level="clean">Clean</button>
-      <button class="detail-btn" data-level="medium">Medium</button>
-      <button class="detail-btn" data-level="full">Full</button>
+    <div class="toggle-group" id="theme-toggle">
+      <button class="toggle-btn active" data-theme="pixel">Pixel</button>
+      <button class="toggle-btn" data-theme="cyberpunk">Cyber</button>
+      <button class="toggle-btn" data-theme="parchment">Parchment</button>
+      <button class="toggle-btn" data-theme="minimal">Minimal</button>
+    </div>
+    <div class="hud-sep"></div>
+    <div class="toggle-group" id="detail-toggle">
+      <button class="toggle-btn active" data-level="clean">Clean</button>
+      <button class="toggle-btn" data-level="medium">Medium</button>
+      <button class="toggle-btn" data-level="full">Full</button>
     </div>
     <select id="h-sel"></select>
     <span id="h-prog">0/0</span>
@@ -288,9 +388,38 @@ let dragging = false, dragS = {x:0,y:0}, camS = {x:0,y:0};
 let hovered = null;
 let frame = 0;
 let detailLevel = 'clean'; // 'clean' | 'medium' | 'full'
+let currentTheme = 'pixel';
 
 // Phase names for labels (populated from pack or quest data)
 let phaseNames = {};
+
+// Theme colors (read from CSS variables)
+function getThemeColors() {
+  const s = getComputedStyle(document.documentElement);
+  return {
+    done: s.getPropertyValue('--accent-done').trim(),
+    current: s.getPropertyValue('--accent-current').trim(),
+    danger: s.getPropertyValue('--accent-danger').trim(),
+    pending: s.getPropertyValue('--accent-pending').trim(),
+    primary: s.getPropertyValue('--accent-primary').trim(),
+    muted: s.getPropertyValue('--text-muted').trim(),
+    dotBorder: s.getPropertyValue('--dot-border').trim(),
+    bgPanel: s.getPropertyValue('--bg-panel').trim(),
+  };
+}
+
+function applyTheme(theme) {
+  currentTheme = theme;
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('quest-map-theme', theme);
+}
+
+// Restore saved theme
+const savedTheme = localStorage.getItem('quest-map-theme');
+if (savedTheme) {
+  applyTheme(savedTheme);
+  // Will update button state after DOM ready
+}
 
 // --------------------------------------------------------------------------
 // DATA
@@ -430,6 +559,7 @@ function renderOverlay() {
 
   const dotR = Math.max(12, 22 * scale);
   let currentNode = null;
+  const tc = getThemeColors();
 
   // Find first pending = current
   const firstPending = renderNodes.find(n => n.status === 'pending');
@@ -450,20 +580,20 @@ function renderOverlay() {
 
     if (i < firstPendingIdx - 1) {
       // Both done — completed path
-      ctx.strokeStyle = '#4ecca3';
+      ctx.strokeStyle = tc.done;
       ctx.globalAlpha = 0.7;
       ctx.lineWidth = Math.max(2, 3 * scale);
       ctx.setLineDash([Math.max(6, 10 * scale), Math.max(4, 6 * scale)]);
     } else if (i === firstPendingIdx - 1) {
       // Transition edge (last done → current) — animated dash
-      ctx.strokeStyle = '#f5c542';
+      ctx.strokeStyle = tc.current;
       ctx.globalAlpha = 0.8;
       ctx.lineWidth = Math.max(2, 3.5 * scale);
       ctx.setLineDash([Math.max(6, 10 * scale), Math.max(4, 6 * scale)]);
       ctx.lineDashOffset = -frame * 0.8; // animation
     } else {
       // Future path — dim
-      ctx.strokeStyle = 'rgba(255,255,255,0.25)';
+      ctx.strokeStyle = tc.pending;
       ctx.globalAlpha = 1;
       ctx.lineWidth = Math.max(1.5, 2 * scale);
       ctx.setLineDash([Math.max(4, 6 * scale), Math.max(6, 10 * scale)]);
@@ -493,7 +623,9 @@ function renderOverlay() {
       const gs = r + 6 + Math.sin(frame * 0.08) * 4;
       ctx.beginPath();
       ctx.arc(px, py, gs, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(245,197,66,${0.15 + Math.sin(frame * 0.08) * 0.08})`;
+      ctx.fillStyle = tc.current.startsWith('#')
+        ? tc.current + Math.round((0.15 + Math.sin(frame * 0.08) * 0.08) * 255).toString(16).padStart(2, '0')
+        : `rgba(245,197,66,${0.15 + Math.sin(frame * 0.08) * 0.08})`;
       ctx.fill();
     }
 
@@ -508,16 +640,16 @@ function renderOverlay() {
     ctx.arc(px, py, r, 0, Math.PI * 2);
     let col;
     switch (node.status) {
-      case 'done': col = '#4ecca3'; break;
-      case 'skipped': col = '#e94560'; break;
-      case 'pending': col = isCur ? '#f5c542' : 'rgba(255,255,255,0.5)'; break;
-      default: col = 'rgba(255,255,255,0.3)';
+      case 'done': col = tc.done; break;
+      case 'skipped': col = tc.danger; break;
+      case 'pending': col = isCur ? tc.current : tc.pending; break;
+      default: col = tc.pending;
     }
     ctx.fillStyle = col;
     ctx.fill();
 
-    // Border — thick white for visibility on the map
-    ctx.strokeStyle = hovered === node ? '#fff' : 'rgba(255,255,255,0.7)';
+    // Border
+    ctx.strokeStyle = hovered === node ? '#fff' : tc.dotBorder;
     ctx.lineWidth = hovered === node ? 3 : 2.5;
     ctx.stroke();
 
@@ -564,14 +696,14 @@ function renderOverlay() {
       // Item ID + short label (Medium + Full)
       const idLabel = `${node.id}`;
       const shortLabel = node.label.length > 20 ? node.label.slice(0, 18) + '..' : node.label;
-      const labelColor = node.status === 'done' ? '#4ecca3' : isCur ? '#f5c542' : '#8892b0';
+      const labelColor = node.status === 'done' ? tc.done : isCur ? tc.current : tc.muted;
       drawLabel(`${idLabel} ${shortLabel}`, px, labelY, labelFs, labelColor, 280 * scale);
 
       // Extra info (Full only) — who + XP on canvas, full command in tooltip
       if (detailLevel === 'full' && (node.who || node.xp)) {
         const extraY = labelY + labelFs + 8;
         const metaText = [node.who, node.xp ? `+${node.xp} XP` : ''].filter(Boolean).join('  ·  ');
-        drawLabel(metaText, px, extraY, cmdFs, '#e94560', 280 * scale);
+        drawLabel(metaText, px, extraY, cmdFs, tc.danger, 280 * scale);
       }
     }
 
@@ -591,11 +723,11 @@ function renderOverlay() {
       ctx.beginPath();
       ctx.roundRect(px - bw / 2, markerY - bh / 2, bw, bh, 4);
       ctx.fill();
-      ctx.strokeStyle = '#e94560';
+      ctx.strokeStyle = tc.danger;
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
-      ctx.fillStyle = '#f5c542';
+      ctx.fillStyle = tc.primary;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(bannerText, px, markerY);
@@ -610,7 +742,7 @@ function renderOverlay() {
     drawHeroAt(hx, hy);
 
     // Arrow pointing down to current node
-    ctx.fillStyle = '#f5c542';
+    ctx.fillStyle = tc.current;
     ctx.beginPath();
     ctx.moveTo(hx - 6, currentNode.py - dotR * 1.8);
     ctx.lineTo(hx + 6, currentNode.py - dotR * 1.8);
@@ -743,11 +875,20 @@ function setupInput() {
   window.addEventListener('resize', fitMap);
 
   // Detail level toggle
-  for (const btn of document.querySelectorAll('.detail-btn')) {
+  for (const btn of document.querySelectorAll('#detail-toggle .toggle-btn')) {
     btn.addEventListener('click', () => {
-      document.querySelectorAll('.detail-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('#detail-toggle .toggle-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       detailLevel = btn.dataset.level;
+    });
+  }
+
+  // Theme toggle
+  for (const btn of document.querySelectorAll('#theme-toggle .toggle-btn')) {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#theme-toggle .toggle-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyTheme(btn.dataset.theme);
     });
   }
 }
@@ -787,6 +928,13 @@ async function init() {
     fitMap();
     setupInput();
     setupWS();
+
+    // Restore saved theme button state
+    if (savedTheme) {
+      document.querySelectorAll('#theme-toggle .toggle-btn').forEach(b => {
+        b.classList.toggle('active', b.dataset.theme === savedTheme);
+      });
+    }
 
     ldEl.classList.add('off');
     renderOverlay();
