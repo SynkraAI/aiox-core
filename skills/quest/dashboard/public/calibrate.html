@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quest Map — Calibração de Dots</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #1a1a2e; color: #eaeaea;
+      font-family: 'Press Start 2P', monospace;
+      overflow: hidden; height: 100vh;
+      display: flex; flex-direction: column;
+    }
+    .toolbar {
+      padding: 8px 16px; background: #16213e;
+      border-bottom: 3px solid #f5c542;
+      display: flex; align-items: center; gap: 16px;
+      font-size: 9px; flex-shrink: 0; z-index: 10;
+    }
+    .toolbar button {
+      background: #e94560; color: #fff; border: none;
+      font-family: inherit; font-size: 8px; padding: 6px 12px;
+      cursor: pointer; border-radius: 3px;
+    }
+    .toolbar button:hover { background: #f5c542; color: #000; }
+    .toolbar button.green { background: #4ecca3; }
+    #phase-label { color: #f5c542; font-size: 11px; }
+    #count { color: #4ecca3; }
+    #coords-display {
+      color: #8892b0; font-size: 7px; max-width: 400px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+
+    .viewport {
+      flex: 1; position: relative;
+      overflow-x: auto; overflow-y: hidden;
+      cursor: crosshair;
+      scrollbar-width: none;
+    }
+    .viewport::-webkit-scrollbar { display: none; }
+
+    .map-wrap { position: relative; display: inline-block; }
+    .map-wrap img {
+      display: block;
+      image-rendering: pixelated;
+    }
+    .map-wrap canvas {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+    }
+
+    /* Output panel */
+    .output {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      background: rgba(22,33,62,0.95);
+      border-top: 2px solid #f5c542;
+      padding: 8px 16px; font-size: 7px;
+      max-height: 200px; overflow-y: auto;
+      z-index: 20; display: none;
+    }
+    .output.show { display: block; }
+    .output pre { color: #4ecca3; white-space: pre-wrap; }
+
+    .instructions {
+      position: fixed; top: 50px; left: 50%; transform: translateX(-50%);
+      background: rgba(22,33,62,0.9); border: 2px solid #f5c542;
+      padding: 12px 20px; font-size: 8px; line-height: 2;
+      border-radius: 6px; z-index: 15; max-width: 500px; text-align: center;
+    }
+    .instructions.off { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span id="phase-label">Phase 0</span>
+  <button onclick="prevPhase()">◀ Phase</button>
+  <button onclick="nextPhase()">Phase ▶</button>
+  <button onclick="undo()">Desfazer</button>
+  <button onclick="clearPhase()">Limpar Phase</button>
+  <button class="green" onclick="exportCoords()">Exportar</button>
+  <span id="count">0 dots</span>
+  <span id="needed" style="color:#e94560"></span>
+  <span id="coords-display"></span>
+</div>
+
+<div class="viewport" id="vp">
+  <div class="map-wrap" id="wrap">
+    <img id="mapimg" src="/assets/sprites/pixel-overworld-map.png">
+    <canvas id="c"></canvas>
+  </div>
+</div>
+
+<div class="instructions" id="instr">
+  Clique no caminho da imagem para posicionar os dots.<br>
+  Use ◀ ▶ para trocar de phase. Clique para adicionar dots na phase atual.<br>
+  Quando terminar, clique EXPORTAR para copiar as coordenadas.
+</div>
+
+<div class="output" id="output"><pre id="output-code"></pre></div>
+
+<script>
+'use strict';
+
+const img = document.getElementById('mapimg');
+const canvas = document.getElementById('c');
+const ctx = canvas.getContext('2d');
+const vp = document.getElementById('vp');
+const instr = document.getElementById('instr');
+
+const PHASE_NAMES = [
+  'Green Plains', 'Enchanted Forest', 'Coastal Shores', 'Snow Mountains',
+  'Golden Desert', 'Dark Fortress', 'Mystic Portal', 'Watchtower'
+];
+const PHASE_COLORS = [
+  '#4ecca3', '#27763e', '#3498db', '#ecf0f1',
+  '#f0d9a0', '#e94560', '#9b59b6', '#2ecc71'
+];
+
+let currentPhase = 0;
+// Pre-load existing NODE_POSITIONS from map.html
+let dots = {
+  0: [
+    {x:6.8,y:43.4},{x:8.6,y:53},{x:7,y:62.4},{x:6.5,y:73.9},
+    {x:9.4,y:80.7},{x:12.7,y:81},{x:15.9,y:81.4}
+  ],
+  1: [
+    {x:19.9,y:77.7},{x:23.5,y:65.8},{x:25.1,y:50.1},{x:20.1,y:34.8},{x:24.2,y:27.9}
+  ],
+  2: [
+    {x:27.5,y:27.5},{x:33.6,y:29.3},{x:34.6,y:46.2},{x:36.7,y:53.7},
+    {x:36.1,y:65.7},{x:40.1,y:63.2},{x:40.7,y:46.5},{x:41.3,y:29.6}
+  ],
+  3: [
+    {x:46.2,y:27.5},{x:43.8,y:39.5},{x:45.9,y:50.1},{x:47.1,y:66}
+  ],
+  4: [
+    {x:48.8,y:68.8},{x:50.2,y:74.6},{x:52.1,y:78.9},{x:55,y:80.7},
+    {x:58.1,y:81.1},{x:61.1,y:81.1},{x:63.3,y:81},{x:65.6,y:80}
+  ],
+  5: [
+    {x:68.5,y:69},{x:68.3,y:46.6},{x:64.9,y:31.8},{x:65.6,y:15.1},
+    {x:68.5,y:7.5},{x:71.1,y:13.6},{x:73.2,y:22.3},{x:73.2,y:45.2},{x:76.5,y:57.9}
+  ],
+  6: [
+    {x:78.8,y:59.3},{x:78.6,y:42.9},{x:81.2,y:34.5},{x:84.7,y:40.7},{x:85.2,y:58.7}
+  ],
+  7: [
+    {x:81.8,y:75.5},{x:85.2,y:84.1},{x:90.6,y:79.3},{x:95.7,y:69.9},
+    {x:90.7,y:52.3},{x:93.1,y:41.2}
+  ]
+};
+
+let scale = 1;
+
+img.onload = () => {
+  scale = vp.clientHeight / img.naturalHeight;
+  img.style.width = (img.naturalWidth * scale) + 'px';
+  img.style.height = (img.naturalHeight * scale) + 'px';
+  canvas.width = img.naturalWidth * scale;
+  canvas.height = img.naturalHeight * scale;
+  render();
+  setTimeout(() => instr.classList.add('off'), 5000);
+};
+
+// Click to add dot
+canvas.addEventListener('click', (e) => {
+  const rect = canvas.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  const xPct = (mx / canvas.width) * 100;
+  const yPct = (my / canvas.height) * 100;
+
+  dots[currentPhase].push({ x: Math.round(xPct * 10) / 10, y: Math.round(yPct * 10) / 10 });
+  updateUI();
+  render();
+});
+
+function render() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Draw all dots from all phases
+  for (let p = 0; p < 8; p++) {
+    const pts = dots[p];
+    const col = PHASE_COLORS[p];
+    const isCurrent = p === currentPhase;
+
+    for (let i = 0; i < pts.length; i++) {
+      const px = (pts[i].x / 100) * canvas.width;
+      const py = (pts[i].y / 100) * canvas.height;
+      const r = isCurrent ? 12 : 8;
+
+      // Shadow
+      ctx.beginPath();
+      ctx.arc(px + 1, py + 1, r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,0,0,0.4)';
+      ctx.fill();
+
+      // Dot
+      ctx.beginPath();
+      ctx.arc(px, py, r, 0, Math.PI * 2);
+      ctx.fillStyle = col;
+      ctx.globalAlpha = isCurrent ? 1 : 0.5;
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      // Index label
+      ctx.fillStyle = '#fff';
+      ctx.font = `${r * 0.8}px "Press Start 2P"`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(String(i), px, py);
+
+      // Connect to previous
+      if (i > 0) {
+        const prev = pts[i - 1];
+        const ppx = (prev.x / 100) * canvas.width;
+        const ppy = (prev.y / 100) * canvas.height;
+        ctx.strokeStyle = col;
+        ctx.lineWidth = 2;
+        ctx.globalAlpha = isCurrent ? 0.6 : 0.2;
+        ctx.setLineDash([4, 3]);
+        ctx.beginPath();
+        ctx.moveTo(ppx, ppy);
+        ctx.lineTo(px, py);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    // Connect last dot of phase to first dot of next phase
+    if (p < 7 && pts.length > 0 && dots[p + 1].length > 0) {
+      const last = pts[pts.length - 1];
+      const first = dots[p + 1][0];
+      ctx.strokeStyle = '#8892b0';
+      ctx.lineWidth = 1;
+      ctx.globalAlpha = 0.3;
+      ctx.setLineDash([2, 4]);
+      ctx.beginPath();
+      ctx.moveTo((last.x / 100) * canvas.width, (last.y / 100) * canvas.height);
+      ctx.lineTo((first.x / 100) * canvas.width, (first.y / 100) * canvas.height);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  requestAnimationFrame(render);
+}
+
+function nextPhase() {
+  currentPhase = Math.min(7, currentPhase + 1);
+  updateUI();
+}
+function prevPhase() {
+  currentPhase = Math.max(0, currentPhase - 1);
+  updateUI();
+}
+function undo() {
+  dots[currentPhase].pop();
+  updateUI();
+}
+function clearPhase() {
+  dots[currentPhase] = [];
+  updateUI();
+}
+// Expected items per phase (from app-development.yaml)
+const PHASE_EXPECTED = [7, 5, 8, 4, 8, 24, 5, 6];
+
+function updateUI() {
+  document.getElementById('phase-label').textContent = `Phase ${currentPhase} — ${PHASE_NAMES[currentPhase]}`;
+  document.getElementById('phase-label').style.color = PHASE_COLORS[currentPhase];
+  const total = Object.values(dots).reduce((s, a) => s + a.length, 0);
+  const have = dots[currentPhase].length;
+  const need = PHASE_EXPECTED[currentPhase];
+  document.getElementById('count').textContent = `${have} dots (${total} total)`;
+  const diff = need - have;
+  document.getElementById('needed').textContent = diff > 0 ? `Faltam ${diff} de ${need}` : diff === 0 ? `✓ ${need}/${need} completo` : `⚠ ${have}/${need} (${-diff} a mais)`;
+  document.getElementById('needed').style.color = diff > 0 ? '#e94560' : '#4ecca3';
+  const last = dots[currentPhase][dots[currentPhase].length - 1];
+  document.getElementById('coords-display').textContent = last ? `Último: x:${last.x}% y:${last.y}%` : '';
+}
+
+function exportCoords() {
+  let code = 'const NODE_POSITIONS = [\n';
+  for (let p = 0; p < 8; p++) {
+    if (dots[p].length === 0) continue;
+    code += `  // Phase ${p} — ${PHASE_NAMES[p]}\n`;
+    dots[p].forEach((d, i) => {
+      code += `  { phase: ${p}, idx: ${i}, x: ${d.x}, y: ${d.y} },\n`;
+    });
+    code += '\n';
+  }
+  code += '];';
+
+  document.getElementById('output-code').textContent = code;
+  document.getElementById('output').classList.add('show');
+
+  // Copy to clipboard
+  navigator.clipboard.writeText(code).then(() => {
+    document.getElementById('coords-display').textContent = 'COPIADO PARA O CLIPBOARD!';
+  });
+}
+
+updateUI();
+</script>
+</body>
+</html>
