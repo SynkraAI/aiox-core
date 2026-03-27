@@ -104,7 +104,7 @@ achievements:
   - id: "quality_freak"
     name: "Obcecado por Qualidade"
     icon: "diamond"
-    condition: "item_done:5.3 AND item_done:5.6"
+    condition: "item_done:5.3 AND item_done:6.2"
     xp_bonus: 25
     message: "Rodou vulnerability scanner + tier-s checklist"
 
