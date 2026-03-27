@@ -161,21 +161,29 @@ if (fs.existsSync(BROWSER_TOOL)) {
     // Try to extract JSON from output
     const jsonMatch = result.match(/\[[\s\S]*\]/);
     if (jsonMatch) {
-      const data = JSON.parse(jsonMatch[0]);
-      const outputPath = path.join(outputDir, `${source}.json`);
-      fs.writeFileSync(outputPath, JSON.stringify({
-        source,
-        url: recipe.url,
-        description: recipe.description,
-        scrapedAt: new Date().toISOString(),
-        count: data.length,
-        items: data,
-      }, null, 2));
-      console.log(`\n> Scraping complete!`);
-      console.log(`  Items: ${data.length}`);
-      console.log(`  Output: ${outputPath}`);
+      try {
+        const data = JSON.parse(jsonMatch[0]);
+        const outputPath = path.join(outputDir, `${source}.json`);
+        fs.writeFileSync(outputPath, JSON.stringify({
+          source,
+          url: recipe.url,
+          description: recipe.description,
+          scrapedAt: new Date().toISOString(),
+          count: data.length,
+          items: data,
+        }, null, 2));
+        console.log(`\n> Scraping complete!`);
+        console.log(`  Items: ${data.length}`);
+        console.log(`  Output: ${outputPath}`);
+      } catch {
+        // JSON found but malformed — save raw
+        const outputPath = path.join(outputDir, `${source}-raw.txt`);
+        fs.writeFileSync(outputPath, result);
+        console.log(`\n> Scraping complete (JSON found but malformed — saved raw)`);
+        console.log(`  Output: ${outputPath}`);
+      }
     } else {
-      // Save raw output
+      // No JSON found at all — save raw
       const outputPath = path.join(outputDir, `${source}-raw.txt`);
       fs.writeFileSync(outputPath, result);
       console.log(`\n> Scraping complete (raw output — no JSON detected)`);
