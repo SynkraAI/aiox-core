@@ -233,7 +233,7 @@
 
 <div class="viewport" id="vp">
   <div class="map-inner" id="inner">
-    <img id="mapimg" src="/assets/sprites/pixel-overworld-map.png" alt="Quest Map">
+    <img id="mapimg" src="/assets/sprites/chronicles-overworld-map.png" alt="Quest Map">
     <canvas id="overlay" class="overlay"></canvas>
   </div>
 </div>
@@ -284,8 +284,8 @@ const tipEl = document.getElementById('tip');
 const ldEl = document.getElementById('ld');
 
 // Map image natural dimensions
-const MAP_W = 8256;
-const MAP_H = 2048;
+const MAP_W = 4128;
+const MAP_H = 1024;
 
 // --------------------------------------------------------------------------
 // NODE POSITIONS — mapped to the dots visible in the map image
@@ -296,73 +296,90 @@ const MAP_H = 2048;
 // → Mountains (top) → Desert (top-right) → Fortress (bottom-right) → Portal → Tower
 
 const NODE_POSITIONS = [
-  // Phase 0 — Green Plains
-  { phase: 0, idx: 0, x: 6.8, y: 43.4 },
-  { phase: 0, idx: 1, x: 8.6, y: 53 },
-  { phase: 0, idx: 2, x: 7, y: 62.4 },
-  { phase: 0, idx: 3, x: 6.5, y: 73.9 },
-  { phase: 0, idx: 4, x: 9.4, y: 80.7 },
-  { phase: 0, idx: 5, x: 12.7, y: 81 },
-  { phase: 0, idx: 6, x: 15.9, y: 81.4 },
+  // Phase 0 — Green Plains (A Oficina)
+  { phase: 0, idx: 0, x: 5.3, y: 23.1 },
+  { phase: 0, idx: 1, x: 6.9, y: 32.8 },
+  { phase: 0, idx: 2, x: 6.6, y: 48.6 },
+  { phase: 0, idx: 3, x: 4.7, y: 63.6 },
+  { phase: 0, idx: 4, x: 9.3, y: 71.1 },
+  { phase: 0, idx: 5, x: 8.1, y: 85.6 },
+  { phase: 0, idx: 6, x: 12.9, y: 85.2 },
 
-  // Phase 1 — Enchanted Forest
-  { phase: 1, idx: 0, x: 19.9, y: 77.7 },
-  { phase: 1, idx: 1, x: 23.5, y: 65.8 },
-  { phase: 1, idx: 2, x: 25.1, y: 50.1 },
-  { phase: 1, idx: 3, x: 20.1, y: 34.8 },
-  { phase: 1, idx: 4, x: 24.2, y: 27.9 },
+  // Phase 1 — Enchanted Forest (O Mapa do Tesouro)
+  { phase: 1, idx: 0, x: 16.1, y: 80.5 },
+  { phase: 1, idx: 1, x: 18.6, y: 67.9 },
+  { phase: 1, idx: 2, x: 18, y: 51 },
+  { phase: 1, idx: 3, x: 20.8, y: 37.7 },
+  { phase: 1, idx: 4, x: 24.4, y: 47 },
 
-  // Phase 2 — Coastal Shores
-  { phase: 2, idx: 0, x: 27.5, y: 27.5 },
-  { phase: 2, idx: 1, x: 33.6, y: 29.3 },
-  { phase: 2, idx: 2, x: 34.6, y: 46.2 },
-  { phase: 2, idx: 3, x: 36.7, y: 53.7 },
-  { phase: 2, idx: 4, x: 36.1, y: 65.7 },
-  { phase: 2, idx: 5, x: 40.1, y: 63.2 },
-  { phase: 2, idx: 6, x: 40.7, y: 46.5 },
-  { phase: 2, idx: 7, x: 41.3, y: 29.6 },
+  // Phase 2 — Coastal Shores (A Planta da Fortaleza)
+  { phase: 2, idx: 0, x: 27.5, y: 51.4 },
+  { phase: 2, idx: 1, x: 30.6, y: 45.3 },
+  { phase: 2, idx: 2, x: 31.5, y: 34.5 },
+  { phase: 2, idx: 3, x: 35.6, y: 28 },
+  { phase: 2, idx: 4, x: 39.7, y: 24.9 },
+  { phase: 2, idx: 5, x: 39.3, y: 40.2 },
+  { phase: 2, idx: 6, x: 35.8, y: 63.6 },
+  { phase: 2, idx: 7, x: 40.1, y: 60.4 },
 
-  // Phase 3 — Snow Mountains
-  { phase: 3, idx: 0, x: 46.2, y: 27.5 },
-  { phase: 3, idx: 1, x: 43.8, y: 39.5 },
-  { phase: 3, idx: 2, x: 45.9, y: 50.1 },
-  { phase: 3, idx: 3, x: 47.1, y: 66 },
+  // Phase 3 — Snow Mountains (O Pergaminho das Stories)
+  { phase: 3, idx: 0, x: 42.7, y: 65.2 },
+  { phase: 3, idx: 1, x: 45, y: 53.6 },
+  { phase: 3, idx: 2, x: 48.2, y: 45.8 },
+  { phase: 3, idx: 3, x: 50.4, y: 56.9 },
 
-  // Phase 4 — Golden Desert
-  { phase: 4, idx: 0, x: 48.8, y: 68.8 },
-  { phase: 4, idx: 1, x: 50.2, y: 74.6 },
-  { phase: 4, idx: 2, x: 52.1, y: 78.9 },
-  { phase: 4, idx: 3, x: 55, y: 80.7 },
-  { phase: 4, idx: 4, x: 58.1, y: 81.1 },
-  { phase: 4, idx: 5, x: 61.1, y: 81.1 },
-  { phase: 4, idx: 6, x: 63.3, y: 81 },
-  { phase: 4, idx: 7, x: 65.6, y: 80 },
+  // Phase 4 — Golden Desert (A Forja)
+  { phase: 4, idx: 0, x: 51.3, y: 62.6 },
+  { phase: 4, idx: 1, x: 50.2, y: 76.6 },
+  { phase: 4, idx: 2, x: 51.2, y: 89.2 },
+  { phase: 4, idx: 3, x: 55.2, y: 88.7 },
+  { phase: 4, idx: 4, x: 58.3, y: 81.1 },
+  { phase: 4, idx: 5, x: 62.3, y: 87.5 },
+  { phase: 4, idx: 6, x: 65.4, y: 83.1 },
+  { phase: 4, idx: 7, x: 66.6, y: 72.6 },
 
-  // Phase 5 — Dark Fortress
-  { phase: 5, idx: 0, x: 68.5, y: 69 },
-  { phase: 5, idx: 1, x: 68.3, y: 46.6 },
-  { phase: 5, idx: 2, x: 64.9, y: 31.8 },
-  { phase: 5, idx: 3, x: 65.6, y: 15.1 },
-  { phase: 5, idx: 4, x: 68.5, y: 7.5 },
-  { phase: 5, idx: 5, x: 71.1, y: 13.6 },
-  { phase: 5, idx: 6, x: 73.2, y: 22.3 },
-  { phase: 5, idx: 7, x: 73.2, y: 45.2 },
-  { phase: 5, idx: 8, x: 76.5, y: 57.9 },
+  // Phase 5 — Dark Fortress (O Tribunal da Qualidade)
+  { phase: 5, idx: 0, x: 65.4, y: 64.5 },
+  { phase: 5, idx: 1, x: 61.4, y: 57.7 },
+  { phase: 5, idx: 2, x: 58.1, y: 54.1 },
+  { phase: 5, idx: 3, x: 57, y: 43.8 },
+  { phase: 5, idx: 4, x: 59.3, y: 34.5 },
+  { phase: 5, idx: 5, x: 58.5, y: 25.6 },
+  { phase: 5, idx: 6, x: 63.1, y: 24.2 },
+  { phase: 5, idx: 7, x: 65.6, y: 17.6 },
+  { phase: 5, idx: 8, x: 68.2, y: 24.7 },
+  { phase: 5, idx: 9, x: 68.7, y: 37.8 },
+  { phase: 5, idx: 10, x: 68.8, y: 53.6 },
+  { phase: 5, idx: 11, x: 71.1, y: 54 },
 
-  // Phase 6 — Mystic Portal
-  { phase: 6, idx: 0, x: 78.8, y: 59.3 },
-  { phase: 6, idx: 1, x: 78.6, y: 42.9 },
-  { phase: 6, idx: 2, x: 81.2, y: 34.5 },
-  { phase: 6, idx: 3, x: 84.7, y: 40.7 },
-  { phase: 6, idx: 4, x: 85.2, y: 58.7 },
+  // Phase 6 — Crystal Caverns (O Salão dos Selos)
+  { phase: 6, idx: 0, x: 72.8, y: 47.7 },
+  { phase: 6, idx: 1, x: 75.4, y: 41.7 },
+  { phase: 6, idx: 2, x: 74.5, y: 29.6 },
+  { phase: 6, idx: 3, x: 77.9, y: 19.9 },
+  { phase: 6, idx: 4, x: 82, y: 36.6 },
+  { phase: 6, idx: 5, x: 79.9, y: 50.7 },
+  { phase: 6, idx: 6, x: 76.8, y: 63.6 },
+  { phase: 6, idx: 7, x: 72.1, y: 73.6 },
+  { phase: 6, idx: 8, x: 71.5, y: 88.9 },
+  { phase: 6, idx: 9, x: 74.7, y: 92.1 },
+  { phase: 6, idx: 10, x: 75.1, y: 78.3 },
+  { phase: 6, idx: 11, x: 77.9, y: 84.9 },
 
-  // Phase 7 — Watchtower
-  { phase: 7, idx: 0, x: 81.8, y: 75.5 },
-  { phase: 7, idx: 1, x: 85.2, y: 84.1 },
-  { phase: 7, idx: 2, x: 90.6, y: 79.3 },
-  { phase: 7, idx: 3, x: 95.7, y: 69.9 },
-  { phase: 7, idx: 4, x: 90.7, y: 52.3 },
-  { phase: 7, idx: 5, x: 93.1, y: 41.2 },
+  // Phase 7 — Mystic Portal (O Portal do Deploy)
+  { phase: 7, idx: 0, x: 80.1, y: 95.9 },
+  { phase: 7, idx: 1, x: 81.3, y: 79.8 },
+  { phase: 7, idx: 2, x: 84.5, y: 78.2 },
+  { phase: 7, idx: 3, x: 87.6, y: 80.4 },
+  { phase: 7, idx: 4, x: 90.8, y: 88.4 },
+
+  // Phase 8 — Watchtower (A Torre de Vigia)
+  { phase: 8, idx: 0, x: 93.2, y: 82.6 },
+  { phase: 8, idx: 1, x: 96.6, y: 73.7 },
+  { phase: 8, idx: 2, x: 95.5, y: 62 },
+  { phase: 8, idx: 3, x: 93, y: 53.7 },
+  { phase: 8, idx: 4, x: 94.3, y: 43.1 },
+  { phase: 8, idx: 5, x: 95.2, y: 13.9 },
 ];
 
 // --------------------------------------------------------------------------
