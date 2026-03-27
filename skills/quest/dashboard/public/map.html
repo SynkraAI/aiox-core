@@ -273,9 +273,10 @@ function removeWhite(img) {
 // --------------------------------------------------------------------------
 // STATE
 // --------------------------------------------------------------------------
-let questItems = {};   // { "0.1": { status, label, ... } }
+let questItems = {};   // { "0.1": { status, label, command, who, tip, ... } }
 let questStats = {};
 let questName = '';
+let packData = null;   // pack YAML data for enrichment
 let renderNodes = [];  // merged: position + quest data
 let cam = { x: 0, y: 0 };
 let scale = 1;
@@ -284,7 +285,7 @@ let hovered = null;
 let frame = 0;
 let detailLevel = 'clean'; // 'clean' | 'medium' | 'full'
 
-// Phase names for labels (populated from quest data)
+// Phase names for labels (populated from pack or quest data)
 let phaseNames = {};
 
 // --------------------------------------------------------------------------
@@ -314,13 +315,39 @@ async function loadData() {
   questItems = items;
   questStats = parsed.stats || {};
   questName = proj.name;
+  packData = proj.pack_data || null;
 
-  // Extract phase names if available
+  // Build pack item index for enrichment: { "0.1": { command, who, tip, label, xp } }
+  const packItems = {};
   phaseNames = {};
-  if (parsed.phases) {
+  if (packData && packData.phases) {
+    for (const [pIdx, phase] of Object.entries(packData.phases)) {
+      const pi = parseInt(pIdx, 10);
+      phaseNames[pi] = phase.name || `Phase ${pi}`;
+      for (const item of (phase.items || [])) {
+        if (item.id) {
+          packItems[item.id] = item;
+        }
+      }
+    }
+  }
+  // Fallback: extract phase names from quest-log if pack not available
+  if (!Object.keys(phaseNames).length && parsed.phases) {
     for (const [key, phase] of Object.entries(parsed.phases)) {
       const pIdx = parseInt(key, 10);
       phaseNames[pIdx] = phase.name || phase.label || `Phase ${pIdx}`;
+    }
+  }
+
+  // Enrich quest items with pack data (command, who, tip, xp)
+  for (const [id, item] of Object.entries(questItems)) {
+    const packItem = packItems[id];
+    if (packItem) {
+      if (!item.command && packItem.command) item.command = packItem.command;
+      if (!item.who && packItem.who) item.who = packItem.who;
+      if (!item.tip && packItem.tip) item.tip = packItem.tip;
+      if (!item.label || item.label === id) item.label = packItem.label || item.label;
+      if (!item.xp && packItem.xp) item.xp = packItem.xp;
     }
   }
 
@@ -368,6 +395,9 @@ function mergeNodes() {
       status: item.status,
       label: item.label,
       command: item.command || '',
+      who: item.who || '',
+      tip: item.tip || '',
+      xp: item.xp || 0,
       required: item.required !== false,
     });
   }
@@ -533,10 +563,22 @@ function renderOverlay() {
       const labelColor = node.status === 'done' ? '#4ecca3' : isCur ? '#f5c542' : '#8892b0';
       drawLabel(`${idLabel} ${shortLabel}`, px, labelY, labelFs, labelColor, 280 * scale);
 
-      // Command text (Full only)
-      if (detailLevel === 'full' && node.command) {
-        const cmdText = node.command.length > 35 ? node.command.slice(0, 33) + '..' : node.command;
-        drawLabel(cmdText, px, labelY + labelFs + 8, cmdFs, 'rgba(255,255,255,0.6)', 300 * scale);
+      // Extra info (Full only)
+      if (detailLevel === 'full') {
+        let extraY = labelY + labelFs + 8;
+
+        // Who + XP line
+        if (node.who || node.xp) {
+          const metaText = [node.who, node.xp ? `+${node.xp} XP` : ''].filter(Boolean).join('  ·  ');
+          drawLabel(metaText, px, extraY, cmdFs, '#e94560', 280 * scale);
+          extraY += cmdFs + 6;
+        }
+
+        // Command text
+        if (node.command) {
+          const cmdText = node.command.length > 40 ? node.command.slice(0, 38) + '..' : node.command;
+          drawLabel(cmdText, px, extraY, cmdFs, 'rgba(255,255,255,0.6)', 320 * scale);
+        }
       }
     }
 

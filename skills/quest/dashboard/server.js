@@ -15,6 +15,7 @@ const PORT = parseInt(process.env.PORT, 10) || 5050;
 const PUBLIC_DIR = path.join(__dirname, 'public');
 const REGISTRY_PATH = path.join(os.homedir(), '.aios', 'quest-registry.yaml');
 const REGISTRY_DIR = path.join(os.homedir(), '.aios');
+const PACKS_DIR = path.join(__dirname, '..', 'packs');
 
 // --- MIME types ---
 const MIME = {
@@ -302,6 +303,19 @@ function getProjectStats(projectPath) {
   }
 }
 
+// --- Load pack YAML for enrichment ---
+function loadPackData(packId) {
+  if (!packId || packId === 'unknown') return null;
+  const packPath = path.join(PACKS_DIR, `${packId}.yaml`);
+  try {
+    if (!fs.existsSync(packPath)) return null;
+    const content = fs.readFileSync(packPath, 'utf8');
+    return parseYaml(content);
+  } catch {
+    return null;
+  }
+}
+
 // --- Validate registry: remove dead projects ---
 function validateRegistry(registry) {
   const validProjects = [];
@@ -531,12 +545,23 @@ function serveProjects(res) {
     const validated = validateRegistry(registry);
     const projects = [];
 
+    // Cache packs to avoid re-reading per project
+    const packCache = {};
+
     for (const project of validated.projects || []) {
       const stats = getProjectStats(project.path);
+      const packId = project.pack || 'unknown';
+
+      // Load pack data (cached)
+      if (!packCache[packId]) {
+        packCache[packId] = loadPackData(packId) || null;
+      }
+
       projects.push({
         name: project.project_name || path.basename(project.path),
         path: project.path,
-        pack: project.pack || 'unknown',
+        pack: packId,
+        pack_data: packCache[packId],
         theme: project.theme || 'cyberpunk',
         registered_at: project.registered_at,
         last_active: project.last_active,
