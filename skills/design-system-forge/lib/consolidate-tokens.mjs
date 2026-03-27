@@ -127,49 +127,70 @@ function deduplicateColors(colors, thresh) {
 
 function parseSimpleYaml(content) {
   const result = {};
-  let currentKey = null;
-  let currentArray = null;
+  let section = null;       // top-level key (colors, typography, etc.)
+  let subKey = null;        // nested key within section
+  let currentItem = null;   // current item being built
 
   for (const line of content.split('\n')) {
     const trimmed = line.trim();
     if (!trimmed || trimmed.startsWith('#')) continue;
 
-    // Top-level key
-    const keyMatch = trimmed.match(/^(\w[\w_]*):$/);
-    if (keyMatch) {
-      currentKey = keyMatch[1];
-      result[currentKey] = [];
-      currentArray = result[currentKey];
+    const indent = line.search(/\S/);
+
+    // Top-level section (indent 0): "colors:", "typography:", etc.
+    if (indent === 0 && trimmed.endsWith(':') && !trimmed.includes(' ')) {
+      section = trimmed.slice(0, -1);
+      result[section] = [];
+      subKey = null;
+      currentItem = null;
       continue;
     }
 
-    // Key: value (non-array)
-    const kvMatch = trimmed.match(/^(\w[\w_]*):\s+(.+)$/);
-    if (kvMatch && !trimmed.startsWith('-')) {
-      if (!currentKey) {
-        result[kvMatch[1]] = kvMatch[2].replace(/^["']|["']$/g, '');
+    // Sub-key within section (indent 2): "rgb_0_0_0_:", named entries
+    if (indent === 2 && trimmed.endsWith(':') && !trimmed.includes(' ') && section) {
+      subKey = trimmed.slice(0, -1).replace(/^["']|["']$/g, '');
+      currentItem = { name: subKey };
+      result[section].push(currentItem);
+      continue;
+    }
+
+    // Property within sub-key (indent 4+): "value: ...", "occurrences: ..."
+    if (indent >= 4 && currentItem && section) {
+      const kvMatch = trimmed.match(/^(\w[\w_]*):\s*["']?(.+?)["']?$/);
+      if (kvMatch) {
+        const key = kvMatch[1];
+        const val = kvMatch[2];
+        if (key === 'value') currentItem.value = val;
+        if (key === 'occurrences' || key === 'count') currentItem.count = parseInt(val);
+        if (key === 'font_family' || key === 'fontFamily') currentItem.fontFamily = val;
+        if (key === 'font_size' || key === 'fontSize') currentItem.fontSize = val;
+        if (key === 'font_weight' || key === 'fontWeight') currentItem.fontWeight = val;
+        continue;
       }
+    }
+
+    // Array item: "- value: ..." (indent 2-4)
+    if (trimmed.startsWith('- value:') && section) {
+      const value = trimmed.replace(/^- value:\s*["']?/, '').replace(/["']$/, '');
+      currentItem = { value };
+      result[section].push(currentItem);
       continue;
     }
 
-    // Array item with value
-    const arrayValMatch = trimmed.match(/^-\s+value:\s*["']?(.+?)["']?$/);
-    if (arrayValMatch && currentArray) {
-      currentArray.push({ value: arrayValMatch[1] });
+    // Array item: "- name: ..."
+    if (trimmed.startsWith('- name:') && section) {
+      const name = trimmed.replace(/^- name:\s*["']?/, '').replace(/["']$/, '');
+      currentItem = { name };
+      result[section].push(currentItem);
       continue;
     }
 
-    // Array item count (attach to last item)
-    const countMatch = trimmed.match(/^count:\s*(\d+)$/);
-    if (countMatch && currentArray && currentArray.length > 0) {
-      currentArray[currentArray.length - 1].count = parseInt(countMatch[1]);
+    // Simple array item: "- "value""
+    if (trimmed.startsWith('- "') && section) {
+      const value = trimmed.replace(/^- ["']/, '').replace(/["']$/, '');
+      result[section].push(value);
+      currentItem = null;
       continue;
-    }
-
-    // Simple array item
-    const simpleArrayMatch = trimmed.match(/^-\s+["']?(.+?)["']?$/);
-    if (simpleArrayMatch && currentArray) {
-      currentArray.push(simpleArrayMatch[1]);
     }
   }
 

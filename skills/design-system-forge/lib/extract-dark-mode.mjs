@@ -92,12 +92,12 @@ async function main() {
 
   try {
     await page.goto(target, {
-      waitUntil: 'networkidle',
+      waitUntil: 'domcontentloaded',
       timeout: timeout * 1000,
     });
 
-    // Wait for JS to render dark mode
-    await page.waitForTimeout(2000);
+    // Wait for JS to render dark mode (SPAs)
+    await page.waitForTimeout(5000);
 
     // Screenshot in dark mode
     const screenshotPath = path.join(screenshotsDir, 'screenshot-dark-desktop.png');

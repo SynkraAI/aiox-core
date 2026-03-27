@@ -90,12 +90,12 @@ async function main() {
 
   try {
     await page.goto(target, {
-      waitUntil: 'networkidle',
+      waitUntil: 'domcontentloaded',
       timeout: timeout * 1000,
     });
 
-    // Wait for JS to render
-    await page.waitForTimeout(2000);
+    // Wait for JS to render (SPAs, lazy-loaded content)
+    await page.waitForTimeout(5000);
 
     // Find interactive elements
     const elements = await page.evaluate((styleProps) => {
