@@ -15,16 +15,26 @@ You receive two data sources:
 
 ## 2. Calculate `total_xp`
 
-Sum the `xp` value from the pack for every item whose status in the quest-log is `done`.
+Sum the `xp` value from the pack for every item whose status in the quest-log is `done`, **plus** the `xp_bonus` from ALL previously unlocked achievements.
 
 ```
 total_xp = 0
+
+// Base XP from completed items
 for each item in pack.phases[*].items:
   if quest_log.items[item.id].status == "done":
     total_xp += item.xp
+
+// Add XP bonus from ALREADY unlocked achievements (not just newly unlocked)
+for each achievement in quest_log.achievements:
+  pack_achievement = find achievement in pack.achievements where id == achievement.id
+  if pack_achievement and pack_achievement.xp_bonus:
+    total_xp += pack_achievement.xp_bonus
 ```
 
 Items with status `pending` or `skipped` contribute 0 XP.
+
+**IMPORTANT:** Achievement bonuses must be included in the base calculation because stats are recalculated from scratch on every read (checklist.md §3). Without this, previously earned bonus XP would vanish on the next session.
 
 ---
 
@@ -133,9 +143,8 @@ For each achievement in the pack, evaluate its `condition`. If the condition is 
 
 When unlocking:
 1. Add `{ id, unlocked_at: <now> }` to `quest_log.achievements[]`
-2. Add the achievement's `xp_bonus` (if any) to `total_xp`
-3. Recalculate level after adding bonus XP
-4. Return the achievement in the `newly_unlocked` list for celebration
+2. The achievement's `xp_bonus` is already included in `total_xp` via section 2 (which sums ALL unlocked achievements). No need to add it again here — just recalculate level from the current `total_xp`.
+3. Return the achievement in the `newly_unlocked` list for celebration
 
 ### Supported Conditions
 
@@ -334,9 +343,9 @@ If `xp_bonus` is 0 or absent, omit the bonus line.
 
 When the engine calls the XP system (after any status change), execute in this exact order:
 
-1. Calculate `total_xp` (section 2)
-2. Evaluate achievements — add `xp_bonus` to `total_xp` for newly unlocked (section 7)
-3. Determine `level` and `level_name` from final `total_xp` (section 3)
+1. Evaluate achievements — add newly unlocked to `quest_log.achievements[]` (section 7)
+2. Calculate `total_xp` including all achievement bonuses (section 2 — already sums both item XP and all unlocked achievement bonuses)
+3. Determine `level` and `level_name` from `total_xp` (section 3)
 4. Calculate `streak` (section 4)
 5. Calculate counters: `items_done`, `items_total`, `items_skipped`, `percent` (section 5)
 6. Assemble stats object (section 6)

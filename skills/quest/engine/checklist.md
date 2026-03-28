@@ -77,8 +77,9 @@ items:
    - `last_updated`: same as `created`
 3. Build the `items` map: iterate ALL phases in the pack, for each item add an entry keyed by `item.id` with `{ status: pending }`.
 4. Initialize `achievements` as an empty list `[]`.
-5. Calculate `stats` by calling the xp-system (see `engine/xp-system.md`). Pass the pack and the quest-log items. On a fresh quest-log all items are pending, so: `total_xp: 0`, `level: 1`, `level_name: <level 1 name from pack>`, `streak: 0`, `items_done: 0`, `items_total: <count of all items>`, `items_skipped: 0`, `percent: 0`.
-6. Write the YAML file to `.aios/quest-log.yaml`.
+5. Initialize `integration_results` as an empty map `{}`.
+6. Calculate `stats` by calling the xp-system (see `engine/xp-system.md`). Pass the pack and the quest-log items. On a fresh quest-log all items are pending, so: `total_xp: 0`, `level: 1`, `level_name: <level 1 name from pack>`, `streak: 0`, `items_done: 0`, `items_total: <count of all items>`, `items_skipped: 0`, `percent: 0`.
+7. Write the YAML file to `.aios/quest-log.yaml`.
 
 ---
 

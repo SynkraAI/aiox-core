@@ -65,9 +65,9 @@ pack:
   name: string       # REQUIRED
 detection:
   rules: []          # REQUIRED (array, can be empty)
-levels: {}           # REQUIRED
-phases: []           # REQUIRED
-  # Each phase supports:
+levels: {}           # REQUIRED (map keyed by level number)
+phases: {}           # REQUIRED (map keyed by phase index: 0, 1, 2, ...)
+  # Each phase (keyed by index) supports:
   #   name: string (REQUIRED)
   #   description: string
   #   unlock_message: string
@@ -79,7 +79,7 @@ phases: []           # REQUIRED
   #     Each check: { name, type, command|glob }
   #     Types: "command" (runs shell, expects exit 0), "file_exists" (glob match)
   #     See guide.md section 2.5 for full spec.
-  #   items: [] (REQUIRED)
+  #   items: [] (REQUIRED — array of item objects within the phase)
 ```
 
 **Validation procedure:**
@@ -88,7 +88,7 @@ phases: []           # REQUIRED
 2. Check `pack.id`, `pack.version`, `pack.name` exist and are non-empty strings
 3. Check `detection` exists and has `rules` (array)
 4. Check `levels` exists and is a map
-5. Check `phases` exists and is an array
+5. Check `phases` exists and is a map (keyed by phase index: 0, 1, 2, ...)
 
 If validation fails, **do NOT evaluate** that pack. Record the error:
 
