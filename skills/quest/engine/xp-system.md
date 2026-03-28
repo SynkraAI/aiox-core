@@ -227,6 +227,8 @@ Parse N from the condition string (e.g., `"consecutive_completions >= 5"` → N 
 
 The player's XP from completed items, before achievement bonuses (`base_item_xp` from section 2), meets or exceeds N.
 
+**Note:** Despite the condition name `total_xp`, this evaluates `base_item_xp` (items only, no achievement bonuses). This prevents circular dependencies where an achievement's own XP bonus could trigger another achievement. Pack authors should be aware that the threshold refers to item XP earned, not the final displayed total.
+
 ```
 base_item_xp >= N
 ```
