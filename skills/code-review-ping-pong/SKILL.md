@@ -3,7 +3,7 @@ name: code-review-ping-pong
 description: "Cross-AI code review protocol between Codex (reviewer), Claude Code (fixer), and Gemini (auditor). Ping-pong cycle with optional audit: Codex reviews, Claude fixes, Gemini audits both. Repeat until 10/10. Triggers: pingpong, code-review-ping-pong, bate-bola, cross-review."
 ---
 
-# Code Review Ping-Pong v3 — Cross-AI Review Protocol
+# Code Review Ping-Pong v3.1 — Cross-AI Review Protocol
 
 A protocol where three AIs collaborate through shared files with structured metadata.
 One reviews, another fixes, a third audits. They alternate until the code reaches 10/10.
@@ -52,15 +52,19 @@ This is mandatory:
    - whose turn it is now
    - exact command/mode to run next
    - exact file that should exist after that next step
-5. **Emit a copy-paste handoff block** for the next agent, so the operator can paste one message and continue the cycle with no ambiguity.
+5. **Emit a copy-paste handoff block** for the next agent, so the operator can paste one message and continue the cycle with no ambiguity. **Skip this step when the cycle is COMPLETE** (`next_agent: NONE`) — there is no next agent to hand off to.
 
 The user should never have to infer whether the cycle is waiting on REVIEW, FIX, or AUDIT.
 If the expected next artifact does not exist, the current agent MUST say so plainly.
 
-### Copy-paste handoff block (MANDATORY)
+### Copy-paste handoff block (MANDATORY — except when cycle is COMPLETE)
 
 After the banner and status block, every mode MUST include a copy-pasteable handoff message
 for the next agent. This block is mandatory and must be self-contained.
+
+**Exception:** When the cycle is COMPLETE (`next_agent: NONE`, verdict `PERFECT`), do NOT
+emit the copy-paste block. There is no next agent to paste to. Show only the 🏆 banner,
+the status block, and the numbered options.
 
 Use this exact structure (the box banner + "FIM DO BLOCO" delimiter are MANDATORY):
 
@@ -353,12 +357,17 @@ All files live in `.code-review-ping-pong/` at the project root.
 
 | File | Author | Purpose |
 |------|--------|---------|
-| `session.md` | User | Scope, goals, constraints (recommended) |
+| `session.md` | User / Agent | Scope, goals, constraints (auto-generated in multi-stage mode) |
 | `round-{N}.md` | Reviewer (Codex) | Review with YAML metadata + Markdown detail |
 | `round-{N}-fixed.md` | Fixer (Claude Code) | Fix report with YAML metadata + Markdown detail |
 | `round-{N}-audit.md` | Auditor (Gemini) | Cross-cutting audit with process health score |
 | `next-step.md` | Current agent | Single source of truth for the exact next move in the cycle |
-| `validate.cjs` | Auto-generated | Validates round file YAML structure |
+| `validate.cjs` | Auto-generated | Validates round files and multi-stage YAML |
+| `multi-stage.cjs` | Auto-generated | Multi-stage orchestration script |
+| `stages.yml` | User | Multi-stage config (optional — activates multi-stage mode) |
+| `progress.yml` | Agent (auto-generated) | Cross-stage progress tracker |
+| `archive/stage-{id}-{slug}/` | Agent | Archived rounds from completed stages |
+| `archive/stage-{id}-{slug}/summary.yml` | Agent | Final stats for completed stage |
 
 ## Bootstrapping
 
@@ -386,6 +395,28 @@ To start a new ping-pong cycle:
 
 To reset a cycle: delete all `round-*.md` files in `.code-review-ping-pong/`.
 
+### Multi-Stage Bootstrapping
+
+To start a multi-stage review of a large codebase:
+
+1. Create `.code-review-ping-pong/` directory if it does not exist.
+2. Copy `validate.cjs` and `multi-stage.cjs` from `scripts/` in this skill.
+3. Create `stages.yml` using the template from `references/stages-template.yml`.
+   - Define all stages with their files, goals, and constraints.
+   - Set the first stage to `status: active`, all others to `pending`.
+4. Validate: `node validate.cjs stages.yml`
+5. Initialize: `node multi-stage.cjs init` (generates `session.md` from active stage)
+6. Run REVIEW mode — step 0 will detect `stages.yml` and use the generated `session.md`.
+
+**Multi-stage script commands:**
+```bash
+node multi-stage.cjs status            # Show all stages and current state
+node multi-stage.cjs init              # Generate session.md from active stage
+node multi-stage.cjs activate <id>     # Activate a stage (deactivates current)
+node multi-stage.cjs archive           # Archive completed stage (must be 10/10)
+node multi-stage.cjs progress          # Regenerate progress.yml
+```
+
 ## Tips
 
 - **Scope is mandatory.** Without session.md or explicit scope, the reviewer must ask before proceeding.
@@ -393,6 +424,280 @@ To reset a cycle: delete all `round-*.md` files in `.code-review-ping-pong/`.
 - **Git anchoring prevents drift.** Both sides record commit_sha to ensure they review/fix the same code.
 - **YAML is the contract, Markdown is the explanation.** Parse YAML for automation, read Markdown for context.
 - **Add `.code-review-ping-pong/` to `.gitignore`** if review files should not be committed.
+
+---
+
+## Multi-Stage Protocol
+
+For large codebases, a single scope is too broad. The multi-stage protocol allows splitting
+a full code review into independent stages, each with its own scope and cycle.
+
+### Activation
+
+Multi-stage mode is **activated by the presence of `stages.yml`** in `.code-review-ping-pong/`.
+If `stages.yml` does not exist, everything works exactly as before (backwards compatible).
+
+### `stages.yml` Format
+
+Created by the user. Defines all stages, their scopes, and status.
+
+```yaml
+protocol: code-review-ping-pong
+version: 1
+project: "{project name}"
+created: "{YYYY-MM-DD}"
+
+stages:
+  - id: 1
+    slug: "{url-safe-short-name}"
+    name: "{Stage Display Name}"
+    description: "{one-line description}"
+    status: active          # pending | active | complete
+    files:
+      - "{path/to/file1.ts}"
+      - "{path/to/file2.ts}"
+    goals:
+      - "{goal 1}"
+    constraints:
+      - "{constraint 1}"
+  - id: 2
+    slug: "{url-safe-short-name}"
+    name: "{Stage Display Name}"
+    description: "{one-line description}"
+    status: pending
+    files:
+      - "{path/to/file3.ts}"
+    goals:
+      - "{goal 1}"
+    constraints: []
+```
+
+**Rules:**
+- Only **one stage** can have `status: active` at a time.
+- `id` is an integer, sequential, immutable. Never reuse IDs.
+- `slug` is URL-safe, immutable. Used in archive directory names.
+- `status` flow: `pending` → `active` → `complete`. Only move forward.
+- `files` must be non-empty for every stage.
+- Template: `references/stages-template.yml`
+- Validate: `node validate.cjs stages.yml`
+
+### `progress.yml` Format
+
+**Auto-generated** by the agent at the end of every REVIEW, FIX, or AUDIT round.
+Do NOT edit manually — it is regenerated from `stages.yml` + round files + archive.
+
+```yaml
+protocol: code-review-ping-pong
+updated: "{YYYY-MM-DD}"
+
+summary:
+  total_stages: 9
+  completed: 1
+  active: 1
+  pending: 7
+  completion_pct: 11
+  total_issues_found: 15
+  total_issues_fixed: 15
+  total_rounds: 4
+
+stages:
+  - id: 1
+    slug: scraping-apify
+    status: complete
+    final_score: 10
+    rounds: 4
+    issues_found: 15
+    issues_fixed: 15
+    archived_at: "2026-03-29"
+    archive_path: archive/stage-1-scraping-apify/
+  - id: 2
+    slug: workers
+    status: active
+    current_round: 2
+    latest_score: 8
+    issues_found: 7
+    issues_fixed: 5
+```
+
+**Rules:**
+- `completion_pct` = `floor(completed / total_stages * 100)`
+- `completed + active + pending` must equal `total_stages`
+- Template: `references/progress-template.yml`
+- Validate: `node validate.cjs progress.yml`
+
+### Archiving
+
+When a stage reaches **10/10** (verdict `PERFECT`), the completing agent archives it.
+This can be done manually or via the helper script: `node multi-stage.cjs archive`
+
+**Steps:**
+
+1. Create directory `archive/stage-{id}-{slug}/`
+2. Move all `round-*.md` from root into the archive
+3. Move `session.md` into the archive (it was auto-generated for this stage)
+4. Generate `archive/stage-{id}-{slug}/summary.yml` with final stats
+5. Update `stages.yml`: set the stage's status to `complete`
+6. Regenerate `progress.yml`
+7. **Write a new `next-step.md` in root** using the protocol's mandatory format:
+   ```markdown
+   # Next Step
+
+   - current_round: {N}
+   - current_mode: REVIEW
+   - cycle_state: COMPLETE
+   - next_agent: NONE
+   - next_mode: none
+   - expected_artifact: none
+   - blocking_reason: Stage {id} ({name}) complete and archived
+
+   ## Operator Prompt
+
+   Stage {id} finalizado. Próximo stage pendente: {next_id} — {next_name}.
+   Rode: `node multi-stage.cjs activate {next_id}`
+   ```
+   This uses `cycle_state: COMPLETE` with `next_agent: NONE` — the standard
+   protocol values for a finished cycle. The Operator Prompt section tells the
+   user how to proceed to the next stage.
+
+**Archive summary format (`summary.yml`):**
+
+```yaml
+protocol: code-review-ping-pong
+type: stage-summary
+stage_id: 1
+stage_slug: scraping-apify
+stage_name: "Scraping — Apify Adapter"
+completed_at: "2026-03-29"
+total_rounds: 4
+final_score: 10
+total_issues_found: 15
+total_issues_fixed: 15
+total_issues_skipped: 0
+files_in_scope:
+  - src/modules/scraping/apify/actors.ts
+rounds:
+  - file: round-1.md
+    type: review
+    score: 7
+    issues: 6
+  - file: round-1-fixed.md
+    type: fix
+    fixed: 6
+    skipped: 0
+```
+
+- `final_score` must be 10 (stage was PERFECT)
+- Template: `references/stage-summary-template.yml`
+- Validate: `node validate.cjs archive/stage-{id}-{slug}/summary.yml`
+
+**Resulting directory tree:**
+
+```
+.code-review-ping-pong/
+  stages.yml              ← stage config (user-managed)
+  progress.yml            ← auto-generated tracker
+  validate.cjs            ← copied from skill
+  multi-stage.cjs         ← copied from skill
+  session.md              ← auto-generated from active stage
+  round-1.md              ← active stage's round files
+  round-1-fixed.md
+  archive/
+    stage-1-scraping-apify/
+      summary.yml
+      session.md
+      round-1.md
+      round-1-fixed.md
+      round-2.md
+      round-2-fixed.md
+      round-3.md           ← the PERFECT round
+```
+
+### Step 0 — Detect Multi-Stage Mode (ALL modes)
+
+Every mode (REVIEW, FIX, AUDIT) MUST insert this step **before step 1**:
+
+```
+0. Detect multi-stage mode — Check if `.code-review-ping-pong/stages.yml` exists.
+   - If YES: read it. Find the stage with status: active.
+     - No active stage found → tell user:
+       "Nenhum stage ativo. Rode: node multi-stage.cjs activate <id>"
+       Stop execution.
+     - Active stage found → run `node multi-stage.cjs init` (or generate
+       session.md manually from the stage's files, goals, and constraints).
+       Proceed with step 1 using this session.md as scope.
+   - If NO: proceed with existing logic (legacy single-cycle mode).
+```
+
+**Implementation:** The `multi-stage.cjs` script handles session.md generation,
+archiving, and progress tracking operationally. Agents can call the script
+directly or perform the equivalent file operations manually.
+
+### REVIEW Mode — Additional Step on PERFECT (multi-stage only)
+
+When verdict is `PERFECT` and multi-stage mode is active, **after writing the PERFECT round file**:
+
+1. Run `node multi-stage.cjs archive` (or perform the archiving steps manually)
+2. Display the **Stage Complete** banner (see below)
+3. Add an option to the numbered prompt: "Ativar próximo stage"
+
+### FIX and AUDIT Modes — Additional Final Step (multi-stage only)
+
+After writing the fix/audit report, **regenerate `progress.yml`** by running
+`node multi-stage.cjs progress` (or performing the equivalent: read stages.yml,
+scan round files, scan archives, write progress.yml).
+
+### AUDIT Mode — Cross-Stage Analysis (optional)
+
+In multi-stage mode, the auditor may optionally read archived stages' rounds
+for deeper cross-stage pattern analysis. This is advisory — the auditor should
+mention if the same type of issue appears across different stages.
+
+### Handoff Banners — Multi-Stage Addition
+
+When multi-stage mode is active, add a stage line to ALL handoff banners:
+
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 🟢 PRÓXIMO: CODEX (REVIEW)           ┃
+┃ 📋 Stage 2/9: Workers                ┃
+┃ 👉 Abra o Codex e rode: review mode  ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+```
+
+### Stage Complete Banner (new)
+
+When a stage reaches 10/10 in multi-stage mode:
+
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ ✅ STAGE COMPLETE: {name} (10/10)           ┃
+┃ 📊 Progresso: {X}/{Y} stages ({Z}%)        ┃
+┃ 📁 Arquivado em: archive/stage-{id}-{slug}/ ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+```
+
+### All Stages Complete Banner (new)
+
+When the last stage reaches 10/10:
+
+```
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ 🏆 ALL STAGES COMPLETE: {Y}/{Y} (100%)        ┃
+┃ ✅ Full codebase review done                   ┃
+┃ 📊 {total_issues} issues found, {fixed} fixed  ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+```
+
+### Multi-Stage Tips
+
+- **Keep stages focused.** 5-15 files per stage is ideal. More than 20 files risks too many issues per round.
+- **Group by domain.** Stage boundaries should follow module/layer boundaries in the codebase.
+- **Order matters.** Review foundational layers first (db, lib) before higher layers (api, components) so fixes propagate correctly.
+- **One active at a time.** Complete a stage before starting the next. This prevents context fragmentation.
+- **Archive is read-only.** Never modify files in `archive/`. They are historical records.
+- **3-5 rounds per stage is typical.** If a stage exceeds 7 rounds, consider splitting it into smaller stages.
+
+---
 
 ## User Interaction Rule
 
@@ -417,6 +722,10 @@ Every mode MUST end with a prompt presenting numbered options.
 Every mode MUST end with a handoff banner indicating whose turn is next.
 These banners are mandatory and must be displayed BEFORE the numbered options.
 Copy them exactly — they must be visually unmistakable.
+
+**IMPORTANT:** When the cycle is COMPLETE (🏆 banner), do NOT emit the copy-paste handoff
+block. The copy-paste block only exists to hand off to a next agent — when `next_agent`
+is `NONE`, there is no one to hand off to. Show only the banner, status block, and options.
 
 ### When it's CODEX's turn:
 
@@ -484,4 +793,8 @@ Also use emojis in these contexts:
 - `references/review-template.md` — Template for REVIEW mode (YAML + Markdown)
 - `references/fix-template.md` — Template for FIX mode (YAML + Markdown)
 - `references/audit-template.md` — Template for AUDIT mode (YAML + Markdown)
-- `scripts/validate.cjs` — Round file validator (copy to `.code-review-ping-pong/`)
+- `references/stages-template.yml` — Template for `stages.yml` (multi-stage config)
+- `references/progress-template.yml` — Template for `progress.yml` (auto-generated tracker)
+- `references/stage-summary-template.yml` — Template for archive `summary.yml`
+- `scripts/validate.cjs` — Validates round files, stages, progress, and stage-summary
+- `scripts/multi-stage.cjs` — Multi-stage orchestration (init, activate, archive, progress, status)
