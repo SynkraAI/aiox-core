@@ -53,8 +53,9 @@ function parseYamlSimple(str) {
     const lines = str.split('\n');
     const result = {};
     const stack = [{ obj: result, indent: -1 }];
-    let currentArray = null;
     let currentArrayKey = null;
+    let currentArrayObj = null;
+    let currentArrayItemIndent = -1;
 
     for (const rawLine of lines) {
       const line = rawLine.replace(/\r$/, '');
@@ -66,11 +67,23 @@ function parseYamlSimple(str) {
       // Pop stack to correct level
       while (stack.length > 1 && indent <= stack[stack.length - 1].indent) {
         stack.pop();
-        currentArray = null;
         currentArrayKey = null;
+        currentArrayObj = null;
+        currentArrayItemIndent = -1;
       }
 
       const parent = stack[stack.length - 1].obj;
+
+      // Continuation of array object: indented key-value after "- key: value"
+      if (currentArrayObj && indent > currentArrayItemIndent && !content.startsWith('- ')) {
+        const colonIdx = content.indexOf(':');
+        if (colonIdx > 0) {
+          const key = content.slice(0, colonIdx).trim();
+          const rawVal = content.slice(colonIdx + 1).trim();
+          currentArrayObj[key] = parseYamlValue(rawVal);
+        }
+        continue;
+      }
 
       // Array item
       if (content.startsWith('- ')) {
@@ -99,18 +112,36 @@ function parseYamlSimple(str) {
             if (lastKey && parent[lastKey] === null) {
               parent[lastKey] = [obj];
               currentArrayKey = lastKey;
+            } else if (keys.length === 0 && stack.length > 1) {
+              // Parent is an empty nested obj created for a key like "projects:"
+              // Find the key in grandparent that points to this empty obj and convert to array
+              const grandparent = stack[stack.length - 2].obj;
+              for (const k of Object.keys(grandparent)) {
+                if (grandparent[k] === parent) {
+                  grandparent[k] = [obj];
+                  currentArrayKey = k;
+                  stack.pop();
+                  break;
+                }
+              }
             }
           }
+          currentArrayObj = obj;
+          currentArrayItemIndent = indent;
         } else {
           // Simple array item: - value
           if (currentArrayKey && Array.isArray(parent[currentArrayKey])) {
             parent[currentArrayKey].push(parseYamlValue(itemContent));
           }
+          currentArrayObj = null;
+          currentArrayItemIndent = -1;
         }
         continue;
       }
 
       // Key-value pair
+      currentArrayObj = null;
+      currentArrayItemIndent = -1;
       const colonIdx = content.indexOf(':');
       if (colonIdx > 0) {
         const key = content.slice(0, colonIdx).trim();
@@ -118,7 +149,6 @@ function parseYamlSimple(str) {
 
         if (rawVal === '' || rawVal === '{}' || rawVal === '[]') {
           // Nested object or empty
-          const val = rawVal === '[]' ? [] : rawVal === '{}' ? {} : {};
           parent[key] = rawVal === '[]' ? [] : null; // null = pending nested
           if (rawVal === '') {
             parent[key] = null; // Will be filled by children

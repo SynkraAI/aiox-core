@@ -107,8 +107,7 @@ items:
 3. **Pack version check:** If `meta.pack_version != pack.version`, run Pack Version Migration (§3.5) before proceeding. This is part of the Read flow — not a separate step the orchestrator must remember to call.
 4. **Promote detected items (BEFORE stats):** For each phase that is currently UNLOCKED (using `is_phase_unlocked` from guide.md §2), find all items with `status: detected` in the quest-log. Promote each to `done` (set `status: done`, `completed_at: <now>`, remove `detected_at`). This ensures scan pre-detections are persisted as completed once the phase is legitimately unlocked via the Integration Gate. Promotions happen here — inside the Read flow — so they are saved to disk before any ceremony or guide rendering.
 5. **Always recalculate stats** via xp-system. Never trust saved `stats` values. Pass the current pack and the quest-log items to xp-system, write the returned stats to `quest_log.stats`. This runs AFTER promotion (step 4) so promoted items are counted.
-6. Update `meta.last_updated` to current datetime.
-7. **Save if changed:** If ANY of the above steps modified the quest-log (promotion in step 4, migration in step 3, pack switch in step 2, or stats differ from saved values), save the quest-log to disk via Save Rules (§8) BEFORE returning. This guarantees that ceremony.md and guide.md always render from persisted state, not volatile in-memory mutations.
+6. **Save if changed:** If ANY of the above steps modified the quest-log (promotion in step 4, migration in step 3, pack switch in step 2, or stats differ from saved values), save the quest-log to disk via Save Rules (§8) BEFORE returning. This guarantees that ceremony.md and guide.md always render from persisted state, not volatile in-memory mutations. Note: `meta.last_updated` is set by Save Rules (§8) during the write — do NOT update it here in the read flow, as that would turn every read into a write.
 
 ---
 
