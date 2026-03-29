@@ -31,8 +31,15 @@ The user has been here before. Show a quick status and the next mission. This sh
 
 **Steps:**
 1. Read `.aios/quest-log.yaml`
-2. Read the pack YAML at `packs/{meta.pack}.yaml` (relative to this skill's directory)
-3. Read `engine/checklist.md` §3 (Read Quest-log) — this recalculates stats via xp-system AND handles pack version migration automatically. The checklist module is self-contained.
+2. Determine the active pack:
+   - If the user passed `--pack <id>` (i.e., `args.pack` is set), use that pack ID.
+     Load `packs/{args.pack}.yaml`. If it differs from `meta.pack`, checklist.md §3
+     step 2 (pack mismatch flow) will handle the transition with user confirmation.
+     This is how expansion packs and pack switching work — the entrypoint must
+     forward the requested pack, not silently ignore it.
+   - Otherwise, use `meta.pack` from the quest-log as the active pack.
+     Load `packs/{meta.pack}.yaml`.
+3. Read `engine/checklist.md` §3 (Read Quest-log) — this recalculates stats via xp-system AND handles pack version migration automatically. The checklist module is self-contained. If a pack mismatch was detected in step 2, checklist handles the transition flow.
 4. Read `engine/ceremony.md` §7 — output the Resumption Banner. Ceremony owns all visual output.
 5. Find next mission via `engine/guide.md` §2 (Next Mission Selection). NEVER implement mission selection inline — guide.md owns phase unlock checks, conditions, Integration Gate, and skip logic.
 6. Show the next mission card via `engine/guide.md` §3.

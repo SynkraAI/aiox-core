@@ -378,9 +378,21 @@ if pack.type == "expansion":
        Rode: /quest --pack {pack.parent_pack}"
     BLOCK — abort.
 
-  // 2. Check if the required parent item was completed
-  //    Works whether the current quest-log is for the parent pack
-  //    or for any pack — we just need the item to exist and be done.
+  // 2. Validate parent pack identity
+  //    The current quest-log must belong to the parent pack.
+  //    This prevents false positives from unrelated packs that happen
+  //    to share the same item ID.
+  quest_log_pack = quest_log.meta.pack
+
+  if quest_log_pack != pack.parent_pack:
+    show:
+      "⛔ '{pack.name}' é uma expansão de '{pack.parent_pack}',
+       mas este projeto usa o pack '{quest_log_pack}'.
+
+       Rode: /quest --pack {pack.parent_pack} primeiro."
+    BLOCK — abort.
+
+  // 3. Check if the required parent item was completed
   parent_item_status = quest_log.items[pack.parent_item]
 
   if parent_item_status is undefined OR parent_item_status.status != "done":
@@ -390,7 +402,7 @@ if pack.type == "expansion":
        Complete essa missão primeiro e rode /quest --pack {pack.id}"
     BLOCK — abort.
 
-  // 3. Gate passed — expansion can proceed.
+  // 4. Gate passed — expansion can proceed.
   //    Activation happens via checklist.md "Read Quest-log" §3 step 2:
   //    the pack mismatch flow asks the user to switch packs.
   //    New expansion items are added as pending, parent items are kept.
