@@ -105,8 +105,9 @@ items:
      - If user chooses `log`: use the pack from `meta.pack`.
      - If user chooses `scanner`: update `meta.pack` and `meta.pack_version` to the scanner's pack, then rebuild items (add new items as pending, keep existing items with their status).
 3. **Pack version check:** If `meta.pack_version != pack.version`, run Pack Version Migration (§3.5) before proceeding. This is part of the Read flow — not a separate step the orchestrator must remember to call.
-4. **Always recalculate stats** via xp-system. Never trust saved `stats` values. Pass the current pack and the quest-log items to xp-system, write the returned stats to `quest_log.stats`.
-5. Update `meta.last_updated` to current datetime.
+4. **Promote detected items (BEFORE stats):** For each phase that is currently UNLOCKED (using `is_phase_unlocked` from guide.md §2), find all items with `status: detected` in the quest-log. Promote each to `done` (set `status: done`, `completed_at: <now>`, remove `detected_at`). This ensures scan pre-detections are persisted as completed once the phase is legitimately unlocked via the Integration Gate. Promotions happen here — inside the Read flow — so they are saved to disk before any ceremony or guide rendering.
+5. **Always recalculate stats** via xp-system. Never trust saved `stats` values. Pass the current pack and the quest-log items to xp-system, write the returned stats to `quest_log.stats`. This runs AFTER promotion (step 4) so promoted items are counted.
+6. Update `meta.last_updated` to current datetime.
 
 ---
 
@@ -261,7 +262,7 @@ Pré-detectados em fases trancadas ({detection_count} itens):
    - If `s` (yes):
      - For each **discovered** item (unlocked phases): set `status: done` and `completed_at: <now>`.
      - For each **detected** item (locked phases): set `status: detected` and `detected_at: <now>`.
-     - Recalculate stats via xp-system. Detect achievements. Save quest-log.
+     - Recalculate stats via xp-system, passing `scan_detected_count: discovery_count + detection_count` as scan context. This enables achievements with conditions like `scan_found >= N` (see xp-system.md §5 for input contract). Detect achievements. Save quest-log.
    - If `n` (no): abort without changes.
 
 ### Scanner Functions

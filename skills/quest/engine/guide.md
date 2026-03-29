@@ -42,12 +42,6 @@ Find the next mission for the player. All data comes from the **pack YAML** (pha
    - Phase 0 is always unlocked
    - Phase N (N > 0) is unlocked when ALL items marked `required: true`
      in phase N-1 have status `done` in the quest-log
-2b. **Promote detected items:** For each UNLOCKED phase, find all items
-    with status `detected` in the quest-log. Promote each to `done`
-    (set `status: done`, `completed_at: <now>`, remove `detected_at`).
-    Recalculate stats via xp-system AFTER all promotions in this phase.
-    This ensures scan pre-detections become actionable once the phase
-    is legitimately unlocked via the Integration Gate.
 3. In the first unlocked phase that has pending items:
    - Find the first item with status `pending` (in pack order)
    - If the item has a `condition` field:
