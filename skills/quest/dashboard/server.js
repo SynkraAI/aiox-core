@@ -416,13 +416,21 @@ function stopAllWatchers() {
 }
 
 // Also watch registry file itself for external changes
+let registryWatcher = null;
+
 function watchRegistry() {
   if (!fs.existsSync(REGISTRY_DIR)) {
     ensureRegistryDir();
   }
 
+  // Close previous watcher to prevent accumulation
+  if (registryWatcher) {
+    registryWatcher.close();
+    registryWatcher = null;
+  }
+
   try {
-    fs.watch(REGISTRY_DIR, { recursive: false }, (eventType, filename) => {
+    registryWatcher = fs.watch(REGISTRY_DIR, { recursive: false }, (eventType, filename) => {
       if (!filename || !filename.includes('quest-registry')) return;
 
       clearTimeout(watchDebounces.get('registry'));
@@ -471,7 +479,7 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       try {
         const { theme } = JSON.parse(body);
-        var validThemes = ['cyberpunk','fantasy','ember','gold','violet','crimson','phosphor','neon','vapor','cozy','paper','sakura','mint','sand'];
+        const validThemes = ['cyberpunk','fantasy','ember','gold','violet','crimson','phosphor','neon','vapor','cozy','paper','sakura','mint','sand'];
         if (!validThemes.includes(theme)) {
           res.writeHead(400, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify({ error: 'Invalid theme' }));

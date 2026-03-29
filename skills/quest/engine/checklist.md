@@ -180,22 +180,22 @@ items:
 
 **Steps:**
 
-1. Validate that `{id}` exists in the pack's items. If not found, show: `"Item '{id}' nao existe neste pack."` and abort.
-2. **Phase lock guard:** Determine which phase the item belongs to. If that phase is LOCKED (i.e., the previous phase still has `required: true` items with status `pending`), BLOCK the check and show:
+1. Validate that `{id}` exists in the pack's items. If not found, show: `"Item '{id}' não existe neste pack."` and abort.
+2. **Phase lock guard:** Determine which phase the item belongs to. Use `is_phase_unlocked(phase_index, pack, quest_log)` from `guide.md` §2 to check if the phase is accessible. This function checks BOTH required items in the previous phase AND the Integration Gate (`verify_phase_integration`). If the phase is LOCKED (function returns `false`), BLOCK the check and show:
    ```
-   ⛔ World {N} ({phase.name}) esta trancado.
-   Complete as missoes obrigatorias do World {current_world} primeiro.
-   Proxima missao: /quest check {next_pending.id}
+   ⛔ World {N} ({phase.name}) está trancado.
+   Complete as missões obrigatórias do World {current_world} primeiro.
+   Próxima missão: /quest check {next_pending.id}
    ```
    Do NOT modify the quest-log. Abort here.
    **Exception:** Items marked by `/quest scan` bypass this guard (scan uses its own flow in section 5).
 3. Set `items[{id}].status` to `done`.
-3. Set `items[{id}].completed_at` to current datetime (ISO 8601 UTC).
-4. Update `meta.last_updated`.
-5. Recalculate stats via xp-system (see `engine/xp-system.md`, section 9 — Execution Order).
-6. Detect newly unlocked achievements (returned by xp-system).
-7. Show celebration messages (from xp-system celebration templates).
-8. Save quest-log.
+4. Set `items[{id}].completed_at` to current datetime (ISO 8601 UTC).
+5. Update `meta.last_updated`.
+6. Recalculate stats via xp-system (see `engine/xp-system.md`, section 9 — Execution Order).
+7. Detect newly unlocked achievements (returned by xp-system).
+8. Show celebration messages (from xp-system celebration templates).
+9. Save quest-log.
 
 ### skip {id}
 
@@ -203,15 +203,15 @@ items:
 
 **Steps:**
 
-1. Validate that `{id}` exists in the pack's items. If not found, show: `"Item '{id}' nao existe neste pack."` and abort.
-2. **Phase lock guard:** Same rule as `check` — if the item's phase is LOCKED, BLOCK and show the same message. Abort.
+1. Validate that `{id}` exists in the pack's items. If not found, show: `"Item '{id}' não existe neste pack."` and abort.
+2. **Phase lock guard:** Same rule as `check` — use `is_phase_unlocked(phase_index, pack, quest_log)` from `guide.md` §2 (checks both required items AND Integration Gate). If LOCKED, BLOCK and show the same message. Abort.
 3. Ask for a reason: `"Motivo do skip (opcional):"`. If user provides text, use it. If empty, use `"Skipped by user"`.
-3. Set `items[{id}].status` to `skipped`.
-4. Set `items[{id}].note` to the reason.
-5. Update `meta.last_updated`.
-6. Recalculate stats via xp-system.
-7. Detect newly unlocked achievements.
-8. Save quest-log.
+4. Set `items[{id}].status` to `skipped`.
+5. Set `items[{id}].note` to the reason.
+6. Update `meta.last_updated`.
+7. Recalculate stats via xp-system.
+8. Detect newly unlocked achievements.
+9. Save quest-log.
 
 ---
 
@@ -296,7 +296,7 @@ Items with a `condition` field require special handling.
    - If `scan_rule` is `false` → proceed to step 2.
 2. Ask the user: `"Este item se aplica? {condition} (s/n/pular)"`
    - `s` (yes): item stays `pending` — it applies but is not yet done. The user must complete it normally.
-   - `n` (no): mark as `skipped` with `note: "Nao se aplica: {condition}"`.
+   - `n` (no): mark as `skipped` with `note: "Não se aplica: {condition}"`.
    - `pular` (skip for now): leave as `pending`, do not ask again in this session.
 3. Conditions are evaluated during scan and during first-time quest-log creation.
 
@@ -353,5 +353,5 @@ Every time the quest-log is written to disk:
 - **Scan rule references missing file:** rule evaluates to `false` (not an error).
 - **Multiple scans:** only affect items that are still `pending`. Already `done`, `skipped`, or `detected` items are never changed by scan.
 - **Phase unlock with `detected` items:** When a phase passes the Integration Gate and is unlocked, promote all `detected` items in that phase to `done` (set `completed_at` to current datetime). Recalculate stats after promotion.
-- **Re-check already done item:** no-op. Show: `"Item '{id}' ja esta completo."`.
-- **Re-skip already skipped item:** no-op. Show: `"Item '{id}' ja foi pulado."`.
+- **Re-check already done item:** no-op. Show: `"Item '{id}' já está completo."`.
+- **Re-skip already skipped item:** no-op. Show: `"Item '{id}' já foi pulado."`.

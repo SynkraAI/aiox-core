@@ -42,6 +42,12 @@ Find the next mission for the player. All data comes from the **pack YAML** (pha
    - Phase 0 is always unlocked
    - Phase N (N > 0) is unlocked when ALL items marked `required: true`
      in phase N-1 have status `done` in the quest-log
+2b. **Promote detected items:** For each UNLOCKED phase, find all items
+    with status `detected` in the quest-log. Promote each to `done`
+    (set `status: done`, `completed_at: <now>`, remove `detected_at`).
+    Recalculate stats via xp-system AFTER all promotions in this phase.
+    This ensures scan pre-detections become actionable once the phase
+    is legitimately unlocked via the Integration Gate.
 3. In the first unlocked phase that has pending items:
    - Find the first item with status `pending` (in pack order)
    - If the item has a `condition` field:
@@ -130,7 +136,19 @@ Supported types:
 |------|-------------|---------|---------|
 | `command` | Runs shell command, expects exit code 0 | `npm run build` | 120s default |
 | `file_exists` | Checks glob pattern matches files | `dist/**` | instant |
-| `endpoint` | Starts app, hits URL, checks response | `http://localhost:3000/api/health` | 30s default |
+| `endpoint` | Starts app, hits URL, checks response | `http://localhost:3000/api/health` | 30s default — **P1: not yet implemented** |
+
+### `endpoint` type — P1 (not yet implemented)
+
+If a pack defines an `endpoint` integration check, show this message and skip the check (treat as passed with a warning):
+
+```
+⚠️  Check '{check.name}' usa tipo 'endpoint' que ainda não é suportado.
+    Verifique manualmente: {check.command}
+    (Este tipo será implementado em versão futura.)
+```
+
+Do NOT block phase progression for unsupported check types — warn and continue.
 
 ### Timeout Rules
 
@@ -249,12 +267,12 @@ When showing the next mission, display this card. ALL fields come from the pack 
   OBRIGATÓRIO: {item.required ? "Sim" : "Não"}
   MUNDO: {phase_index} — {phase.name}
 
-  DICA: {item.tip || phase.tagline}
+  DICA: {item.tip || phase.description}
 
   QUANDO TERMINAR:
   /quest check {item.id}
 
-  SE NAO SE APLICA:
+  SE NÃO SE APLICA:
   /quest skip {item.id}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
@@ -267,11 +285,11 @@ When showing the next mission, display this card. ALL fields come from the pack 
 | `item.label` | Pack item label |
 | `item.xp` | Pack item xp value |
 | `item.command` | Pack item command — the instruction for the player |
-| `item.who` | Pack item who — "user", "@agent-name", or "skill-name" |
+| `item.who` | Pack item who — "user", "@agent-name" (e.g. "@dev"), "skill", "squad", or "agente" |
 | `item.required` | Pack item required boolean |
 | `item.tip` | Pack item tip (optional) — contextual hint |
 | `phase.name` | Pack phase name (world name) |
-| `phase.tagline` | Pack phase tagline — fallback when item has no tip |
+| `phase.description` | Pack phase description — fallback when item has no tip |
 
 ---
 

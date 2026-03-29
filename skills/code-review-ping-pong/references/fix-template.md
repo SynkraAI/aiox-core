@@ -49,7 +49,7 @@ fixes:
 
 ## 🔧 Fixes Applied
 
-### ✅ Fix for Issue {N}.1 — {short title}
+### Fix for Issue {N}.1 — {short title}
 - **Status:** ✅ FIXED
 - **File:** `{path/to/file}`
 - **What changed:** {brief description of the change}

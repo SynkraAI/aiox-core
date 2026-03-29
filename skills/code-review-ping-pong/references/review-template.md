@@ -47,7 +47,7 @@ issues:
 
 > Issues that cause crashes, data loss, or security vulnerabilities.
 
-#### 🔴 Issue {N}.1 — {short title}
+#### Issue {N}.1 — {short title}
 - **File:** `{path/to/file}`
 - **Line:** {line number or range}
 - **Code:**
@@ -64,7 +64,7 @@ issues:
 
 > Issues that cause incorrect behavior or significant quality problems.
 
-#### 🟠 Issue {N}.2 — {short title}
+#### Issue {N}.2 — {short title}
 ...same format as CRITICAL...
 
 ### 🟡 MEDIUM
