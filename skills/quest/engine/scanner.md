@@ -360,17 +360,17 @@ pack:
   parent_item: "2.5"              # item in parent pack that must be done
 ```
 
+**Model: single quest-log with pack transition.** The project has ONE `.aios/quest-log.yaml` at a time. Activating an expansion replaces the active pack (like switching game chapters), preserving the parent's completed items for gate validation.
+
 **Evaluation:**
 
 ```
 if pack.type == "expansion":
-  // 1. Find the parent project's quest-log
-  //    The parent quest-log is in the SAME project directory (.aios/quest-log.yaml)
-  //    but for a different pack. Check if it exists AND matches parent_pack.
-  parent_log_path = ".aios/quest-log.yaml"
-  parent_log = read(parent_log_path)
+  // 1. Check if a quest-log exists
+  quest_log_path = ".aios/quest-log.yaml"
+  quest_log = read(quest_log_path)
 
-  if parent_log does not exist:
+  if quest_log does not exist:
     show:
       "⛔ '{pack.name}' é uma expansão de '{pack.parent_pack}'.
        Você precisa iniciar a quest principal primeiro.
@@ -378,33 +378,34 @@ if pack.type == "expansion":
        Rode: /quest --pack {pack.parent_pack}"
     BLOCK — abort.
 
-  if parent_log.meta.pack != pack.parent_pack:
-    // Current quest-log is for a different pack — that's OK, the expansion
-    // can coexist. Check if parent quest-log exists in registry.
-    show:
-      "⛔ '{pack.name}' requer progresso em '{pack.parent_pack}'.
-       A quest ativa neste projeto é '{parent_log.meta.pack}'.
+  // 2. Check if the required parent item was completed
+  //    Works whether the current quest-log is for the parent pack
+  //    or for any pack — we just need the item to exist and be done.
+  parent_item_status = quest_log.items[pack.parent_item]
 
-       Complete a missão {pack.parent_item} em '{pack.parent_pack}' primeiro."
-    BLOCK — abort.
-
-  // 2. Check if the required parent item is done
-  if parent_log.items[pack.parent_item].status != "done":
+  if parent_item_status is undefined OR parent_item_status.status != "done":
     show:
-      "⛔ '{pack.name}' desbloqueia após a missão {pack.parent_item}
-       em '{pack.parent_pack}'.
+      "⛔ '{pack.name}' desbloqueia após a missão {pack.parent_item}.
 
        Complete essa missão primeiro e rode /quest --pack {pack.id}"
     BLOCK — abort.
 
-  // 3. All gates passed — expansion pack can proceed
-  // The expansion creates its OWN quest-log (different pack id),
-  // so it won't conflict with the parent.
+  // 3. Gate passed — expansion can proceed.
+  //    Activation happens via checklist.md "Read Quest-log" §3 step 2:
+  //    the pack mismatch flow asks the user to switch packs.
+  //    New expansion items are added as pending, parent items are kept.
 ```
 
 If `pack.type` is absent or not `"expansion"`, skip this gate.
 
-**Important:** Expansion packs create a SEPARATE quest-log. When the user runs `/quest` again, the scanner detects which quest-log exists and resumes the correct one. The SKILL.md resumption flow already handles this via `meta.pack` matching.
+**How it works end-to-end:**
+1. User completes parent_item in the parent pack quest
+2. User runs `/quest --pack {expansion_id}`
+3. Scanner gates pass (item is done)
+4. Checklist Read §3 detects pack mismatch (`meta.pack` = parent, scanner = expansion)
+5. User confirms switch → `meta.pack` updates, new expansion items added as `pending`, parent items kept with their status
+6. Resumption continues with the expansion pack
+7. `/quest --pack {parent_id}` can switch back (same mechanism)
 
 ---
 

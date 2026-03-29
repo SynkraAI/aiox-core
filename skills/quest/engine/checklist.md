@@ -104,8 +104,9 @@ items:
    - **Mismatch:** ask the user: `"Quest log usa pack '{meta.pack}', mas scanner detectou '{scanner_pack}'. Qual usar? (log/scanner)"`.
      - If user chooses `log`: use the pack from `meta.pack`.
      - If user chooses `scanner`: update `meta.pack` and `meta.pack_version` to the scanner's pack, then rebuild items (add new items as pending, keep existing items with their status).
-3. **Always recalculate stats** via xp-system. Never trust saved `stats` values. Pass the current pack and the quest-log items to xp-system, write the returned stats to `quest_log.stats`.
-4. Update `meta.last_updated` to current datetime.
+3. **Pack version check:** If `meta.pack_version != pack.version`, run Pack Version Migration (§3.5) before proceeding. This is part of the Read flow — not a separate step the orchestrator must remember to call.
+4. **Always recalculate stats** via xp-system. Never trust saved `stats` values. Pass the current pack and the quest-log items to xp-system, write the returned stats to `quest_log.stats`.
+5. Update `meta.last_updated` to current datetime.
 
 ---
 
@@ -167,7 +168,7 @@ items:
 **Edge cases:**
 - If the only change is removed items (no new items), still show the summary — the user should know items were removed from the pack.
 - If pack version is a non-semver string, compare as plain strings (any difference triggers migration).
-- Orphaned items with status `done` still count toward stats (their XP was earned). Items with status `pending` that no longer exist in the pack are harmless.
+- Orphaned items are **ignored during stats calculation** (consistent with Edge Cases §9: "item in quest-log but not in pack: ignore it during stats calculation"). They are kept in the quest-log for historical record but contribute zero to XP, counters, or progress percentage.
 
 ---
 
