@@ -446,10 +446,12 @@ When a quest-log already exists (Fortaleza Ativa), do NOT show the full ceremony
   Progresso: {items_done}/{items_total} ({percent}%)
   ▓▓▓▓▓▓▓▓▓▓▓▓░░░░░░░░  {percent}%
 
-  Próxima missão: {next_item.id} — {next_item.label}  (+{next_item.xp} XP)
+  Bem-vindo de volta, {hero_name}!
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
+
+**Note:** This banner does NOT show the next mission — that is guide.md's responsibility. The SKILL.md orchestrator calls ceremony §7 for the banner, then guide.md §2+§3 for the mission card. This separation prevents duplicating mission selection logic.
 
 ### Field Sources
 
@@ -458,6 +460,7 @@ When a quest-log already exists (Fortaleza Ativa), do NOT show the full ceremony
 | `pack.icon` | Pack YAML `pack.icon` |
 | `pack.name` | Pack YAML `pack.name` |
 | `project_name` | Directory name from `cwd` |
+| `hero_name` | `quest_log.meta.hero_name` (fallback: "Aventureiro") |
 | `level_number` | `quest_log.stats.level` |
 | `level_name` | `pack.levels[level_number].name` |
 | `total_xp` | `quest_log.stats.total_xp` |
@@ -465,7 +468,6 @@ When a quest-log already exists (Fortaleza Ativa), do NOT show the full ceremony
 | `items_done` | `quest_log.stats.items_done` |
 | `items_total` | `quest_log.stats.items_total` |
 | `percent` | `quest_log.stats.percent` |
-| `next_item` | First item in pack with status `pending` in quest-log |
 
 ### Progress Bar Generation
 

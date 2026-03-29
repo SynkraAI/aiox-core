@@ -109,6 +109,68 @@ items:
 
 ---
 
+## 3.5 Pack Version Migration
+
+**Trigger:** `meta.pack_version` in quest-log does NOT match `pack.version` in the pack YAML. This means the pack was updated since the quest was started.
+
+**Steps:**
+
+1. Compare `meta.pack_version` with `pack.version`.
+   - If they match → skip this section entirely.
+   - If they differ → proceed.
+
+2. Diff items between pack and quest-log:
+   ```
+   new_items = []      // in pack but not in quest-log
+   orphaned_items = [] // in quest-log but not in pack
+
+   for each item in pack.phases[*].items:
+     if item.id NOT in quest_log.items:
+       new_items.append(item)
+
+   for each id in quest_log.items:
+     if id NOT found in any pack phase:
+       orphaned_items.append({ id, status: quest_log.items[id].status })
+   ```
+
+3. Show the migration summary:
+   ```
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     ⚙️  PACK ATUALIZADO — {pack.name}
+     {meta.pack_version} → {pack.version}
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+     Novas missões (+{new_count}):
+     {for each new_item: "  + {id} — {label}  (+{xp} XP)"}
+
+     Missões removidas ({orphan_count}):
+     {for each orphan: "  - {id} ({status})"}
+
+     Atualizar quest log? (s/n)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ```
+
+   - If `new_items` is empty, omit the "Novas missões" block.
+   - If `orphaned_items` is empty, omit the "Missões removidas" block.
+
+4. Wait for user confirmation:
+   - If `s` (yes):
+     - Add each `new_item` to `quest_log.items` as `{ status: pending }`
+     - Do NOT delete orphaned items — keep them with their current status (they may have historical value: completed items from an older pack version)
+     - Update `meta.pack_version` to `pack.version`
+     - Recalculate stats via xp-system
+     - Save quest-log
+   - If `n` (no):
+     - Proceed with current quest-log as-is (no changes)
+     - Show: "Quest log mantido na versão {meta.pack_version}. Novas missões não aparecerão até atualizar."
+
+**Edge cases:**
+- If the only change is removed items (no new items), still show the summary — the user should know items were removed from the pack.
+- If pack version is a non-semver string, compare as plain strings (any difference triggers migration).
+- Orphaned items with status `done` still count toward stats (their XP was earned). Items with status `pending` that no longer exist in the pack are harmless.
+
+---
+
 ## 4. Check / Skip
 
 ### check {id}

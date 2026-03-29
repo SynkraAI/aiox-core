@@ -33,23 +33,11 @@ The user has been here before. Show a quick status and the next mission. This sh
 1. Read `.aios/quest-log.yaml`
 2. Read the pack YAML at `packs/{meta.pack}.yaml` (relative to this skill's directory)
 3. Recalculate stats via `engine/xp-system.md` (pass pack + quest-log items). NEVER count manually — the xp-system is the single source of truth for XP, level, streak, and counters.
-4. Find next mission via `engine/guide.md` §2 (Next Mission Selection). NEVER implement mission selection inline — guide.md owns phase unlock checks, conditions, Integration Gate, and skip logic.
-5. Output this banner:
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  QUEST — {pack.name}                              {project_name}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-  Level {N}: {level_name}    XP: {xp}/{next_level_xp}
-  Progresso: {done}/{total} ({percent}%)
-  {progress_bar_20_chars}
-
-  Bem-vindo de volta, {hero_name}!
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-6. Then read `engine/guide.md` and show the next mission card.
-7. Update `last_active` in `~/.aios/quest-registry.yaml`.
+4. Read `engine/checklist.md` §3.5 — check for pack version migration. If pack version changed, handle before proceeding.
+5. Read `engine/ceremony.md` §7 — output the Resumption Banner. Ceremony owns all visual output.
+6. Find next mission via `engine/guide.md` §2 (Next Mission Selection). NEVER implement mission selection inline — guide.md owns phase unlock checks, conditions, Integration Gate, and skip logic.
+7. Show the next mission card via `engine/guide.md` §3.
+8. Update `last_active` in `~/.aios/quest-registry.yaml`.
 
 **STOP HERE. Do not continue to the sections below.**
 

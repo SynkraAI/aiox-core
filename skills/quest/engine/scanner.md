@@ -316,6 +316,98 @@ If text matches → treat as `high` confidence for that pack (same as `--pack` o
 
 ---
 
+## 6.5 Post-selection Gates
+
+After a pack is selected (via auto-detection, user choice, or override), run these gates **before** returning the result. If any gate fails, the pack is blocked — do NOT proceed to ceremony or quest-log creation.
+
+### 6.5.1 Prerequisites Gate
+
+Some packs define `detection.prerequisites` — conditions that MUST be true for the pack to work.
+
+```yaml
+# Example from pack YAML:
+detection:
+  prerequisites:
+    - condition: "has_dir('.aios-core') OR has_dir('.aios')"
+      message: "AIOS obrigatório. Rode: npx ~/aios-core init ."
+```
+
+**Evaluation:**
+
+```
+for each prerequisite in pack.detection.prerequisites:
+  result = evaluate(prerequisite.condition)  // same scanner functions as detection rules
+  if NOT result:
+    show:
+      "⛔ Pack '{pack.name}' requer prerequisito não atendido:
+       {prerequisite.message}
+
+       Instale o prerequisito e rode /quest novamente."
+    BLOCK — do not return this pack. Abort.
+```
+
+If `prerequisites` is absent or empty, skip this gate (pass by default).
+
+### 6.5.2 Expansion Pack Gate
+
+Packs with `pack.type: "expansion"` are side quests that branch from a parent pack. They require the parent quest to have reached a specific point before activating.
+
+```yaml
+# Example from pack YAML:
+pack:
+  type: expansion
+  parent_pack: app-development    # id of the parent pack
+  parent_item: "2.5"              # item in parent pack that must be done
+```
+
+**Evaluation:**
+
+```
+if pack.type == "expansion":
+  // 1. Find the parent project's quest-log
+  //    The parent quest-log is in the SAME project directory (.aios/quest-log.yaml)
+  //    but for a different pack. Check if it exists AND matches parent_pack.
+  parent_log_path = ".aios/quest-log.yaml"
+  parent_log = read(parent_log_path)
+
+  if parent_log does not exist:
+    show:
+      "⛔ '{pack.name}' é uma expansão de '{pack.parent_pack}'.
+       Você precisa iniciar a quest principal primeiro.
+
+       Rode: /quest --pack {pack.parent_pack}"
+    BLOCK — abort.
+
+  if parent_log.meta.pack != pack.parent_pack:
+    // Current quest-log is for a different pack — that's OK, the expansion
+    // can coexist. Check if parent quest-log exists in registry.
+    show:
+      "⛔ '{pack.name}' requer progresso em '{pack.parent_pack}'.
+       A quest ativa neste projeto é '{parent_log.meta.pack}'.
+
+       Complete a missão {pack.parent_item} em '{pack.parent_pack}' primeiro."
+    BLOCK — abort.
+
+  // 2. Check if the required parent item is done
+  if parent_log.items[pack.parent_item].status != "done":
+    show:
+      "⛔ '{pack.name}' desbloqueia após a missão {pack.parent_item}
+       em '{pack.parent_pack}'.
+
+       Complete essa missão primeiro e rode /quest --pack {pack.id}"
+    BLOCK — abort.
+
+  // 3. All gates passed — expansion pack can proceed
+  // The expansion creates its OWN quest-log (different pack id),
+  // so it won't conflict with the parent.
+```
+
+If `pack.type` is absent or not `"expansion"`, skip this gate.
+
+**Important:** Expansion packs create a SEPARATE quest-log. When the user runs `/quest` again, the scanner detects which quest-log exists and resumes the correct one. The SKILL.md resumption flow already handles this via `meta.pack` matching.
+
+---
+
 ## 7. Error Handling
 
 ### Pack file not found
