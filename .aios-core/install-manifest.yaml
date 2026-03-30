@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 4.2.13
-generated_at: "2026-03-30T22:21:06.838Z"
+generated_at: "2026-03-30T22:36:23.500Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1569
+file_count: 1575
 files:
   - path: cli/commands/config/index.js
     hash: sha256:ebcad2ce3807eda29dcddff76d7a95ddc9b7fa160df21fd608f94b802237e862
@@ -893,13 +893,17 @@ files:
     type: core
     size: 2585
   - path: core/jarvis/consultation-engine.js
-    hash: sha256:3548a99b42467d4095752bdf7e1bca07d9e1fcdaed0b936f5406cb428212f942
+    hash: sha256:999b8da6f83d7acc201d84cec28fce2a1b618ff13db7f4ee96a6c1270e1022c1
     type: core
-    size: 16772
+    size: 17085
+  - path: core/jarvis/project-detector.js
+    hash: sha256:ec20dff73c091b51fd681176ffe16c115db219eae926db46a8721ff76d1c84ad
+    type: core
+    size: 5981
   - path: core/jarvis/self-consultation.js
-    hash: sha256:c5236b78c5cb8d888caf5bc8a536ecac5e6cc2915856efa71d0ed31102297213
+    hash: sha256:a3227f5441adcf75468d2ca1ba32e91813991e3f7c0c893b0eb8ba036a3ae154
     type: core
-    size: 16254
+    size: 16489
   - path: core/manifest/manifest-generator.js
     hash: sha256:94d25e22a261c09f719b52ad62979d0c013506866b07aca1b0e2623192b76428
     type: core
@@ -1369,9 +1373,9 @@ files:
     type: data
     size: 9575
   - path: data/entity-registry.yaml
-    hash: sha256:b080a50989c7e4d59815a216c1b662c4dc6186335db2848419067dee4d827ff8
+    hash: sha256:f54937e3f6b32b9e2e082f6b58b7e9956c0d5baf2fa224749bfdee8643213e73
     type: data
-    size: 609368
+    size: 611468
   - path: data/jarvis-mind-clone-index.json
     hash: sha256:ee87551608c8eacabf190cb9a54be33b1cf45c8ca5adcdf4b92f30b5befcfcd9
     type: data
@@ -5420,18 +5424,38 @@ files:
     hash: sha256:39678986089918893f309a2469fa0615beb82b5c6f1e16e2f9b40bcac6465195
     type: manifest
     size: 5291
+  - path: monitor/hooks/__pycache__/post_tool_use.cpython-314.pyc
+    hash: sha256:d0545f1e3afb7e04854df9977eef05c85506681c3782c4f71577622fc73c530e
+    type: monitor
+    size: 5804
+  - path: monitor/hooks/__pycache__/pre_tool_use.cpython-314.pyc
+    hash: sha256:e2bed093ac33d58d1d234ce81ec60fbb1bb40c370c541613b9b94dfa419bb915
+    type: monitor
+    size: 2012
   - path: monitor/hooks/lib/__init__.py
     hash: sha256:26147f29392400ed7bb87ca750af1c1bdd191193990463952282eaaffc1f35a2
     type: monitor
     size: 29
+  - path: monitor/hooks/lib/__pycache__/feedback_loop.cpython-314.pyc
+    hash: sha256:a859ae976b154e15f8f23be85231b32d0b620685413863fe7c1820116b0e22e3
+    type: monitor
+    size: 9820
   - path: monitor/hooks/lib/enrich.py
     hash: sha256:f796c327b54e5282027babe325f9629ad21440275c2a3fdb277840898bdf3653
     type: monitor
     size: 1644
+  - path: monitor/hooks/lib/feedback_loop.py
+    hash: sha256:41fed9e8e43bd5fd18562f124960195f5735e450d7dc5dc56772b675b9d391c4
+    type: monitor
+    size: 7589
   - path: monitor/hooks/lib/jarvis_bridge.py
     hash: sha256:77c89c94b2c2ef74204b4d4da738aed0617602aad68cb2a241d4bec689b206ff
     type: monitor
     size: 6189
+  - path: monitor/hooks/lib/jarvis_gate.py
+    hash: sha256:4c5e3e13592b83359a66850b020d3d5c622c502ecebae6d385172acf515fb8ec
+    type: monitor
+    size: 5168
   - path: monitor/hooks/lib/send_event.py
     hash: sha256:2ec9ec9abfded4c0b67a49429d192f171758c0fb4e8a1bf1e47f2c8e32aa47ea
     type: monitor
@@ -5441,17 +5465,17 @@ files:
     type: monitor
     size: 499
   - path: monitor/hooks/post_tool_use.py
-    hash: sha256:d4259282da8338c20bd9bf694c1419e1d0b6781acd871880ae78c697618907db
+    hash: sha256:3c32a4ed5851685a25ee13daee846ad345943ede0aaa5ee053d0fa85f3f93bd8
     type: monitor
-    size: 3065
+    size: 5094
   - path: monitor/hooks/pre_compact.py
     hash: sha256:df11373948b986814a7602a9dd61a384055de13392a7aa246063b4c4ea75fddd
     type: monitor
     size: 500
   - path: monitor/hooks/pre_tool_use.py
-    hash: sha256:e4a7bbd6cbb6e17b819f629ef88a24947612f4dffbe19fab897b9ff4a409efc2
+    hash: sha256:77e6339b2f45bc8a1b431d9db2c4a4669b2db5930910b3fd90e5704f3e282e73
     type: monitor
-    size: 981
+    size: 1503
   - path: monitor/hooks/stop.py
     hash: sha256:f5e5e5ffb19b6bc673030e785802af94bc7ccafbc600ff0e291ec5ff24053d7a
     type: monitor
@@ -5461,9 +5485,9 @@ files:
     type: monitor
     size: 512
   - path: monitor/hooks/user_prompt_submit.py
-    hash: sha256:f8f9a7550121832811c2d2d12b93d5d42fa7180ddec85c49ae3841c9d259ab76
+    hash: sha256:e9a65d12a6fdc25fefe62ae5a2915157073a6ccbcdb40fa0cf9a41d84cb0d37d
     type: monitor
-    size: 818
+    size: 1758
   - path: package.json
     hash: sha256:ac6d72a82cecd2a98a443dc195e87cf815c2df58fb743737177670999a816b5f
     type: other
