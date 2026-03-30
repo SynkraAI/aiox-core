@@ -110,6 +110,21 @@ EXAMPLES:
   # Search for workers
   aios workers search "json csv"
 
+CORPORATION:
+  aios corp status                       # Corporation overview
+  aios corp dashboard                    # Full dashboard
+  aios corp agents                       # Agent roster
+
+SCHEDULER:
+  aios scheduler status                  # Scheduler state overview
+  aios scheduler start                   # Start scheduler (foreground)
+  aios scheduler stop                    # Send stop signal
+  aios scheduler list                    # List all schedules
+  aios scheduler health                  # Check heartbeat
+  aios scheduler tick                    # Run one tick
+  aios scheduler add <name> [flags]      # Add a schedule
+  aios scheduler remove <name>           # Remove a schedule
+
 For more information, visit: https://github.com/SynkraAI/aios-core
 `);
 }
@@ -1000,6 +1015,171 @@ async function initProject() {
   });
 }
 
+// Helper: Show top-level scheduler help
+function showSchedulerHelp() {
+  console.log(`
+\x1b[1maios scheduler\x1b[0m -- Corporation Scheduler CLI
+
+\x1b[1mOPERATIONS:\x1b[0m
+  status        Show scheduler state, active schedules, health, next runs
+  start         Start the scheduler process (foreground, Ctrl+C to stop)
+  stop          Send stop signal to a running scheduler
+  health        Check scheduler heartbeat (dead man's switch)
+  stats         Show execution statistics
+  tick          Execute a single scheduler tick manually
+  next [N]      Show next N upcoming scheduled runs (default: 10)
+
+\x1b[1mSCHEDULE MANAGEMENT:\x1b[0m
+  list          List all registered schedules with status
+  add <name>    Add a new schedule (--cron, --event, --at, --task, --level)
+  remove <name> Remove a schedule by name
+  pause <name>  Pause a schedule
+  resume <name> Resume a paused schedule
+  trigger <evt> Trigger a named event manually
+
+\x1b[1mEXAMPLES:\x1b[0m
+  aios scheduler status                    # Overview of scheduler state
+  aios scheduler start                     # Start scheduler loop
+  aios scheduler stop                      # Stop running scheduler
+  aios scheduler list                      # List all schedules
+  aios scheduler health                    # Check heartbeat
+  aios scheduler tick                      # Run one tick manually
+  aios scheduler add backup --cron "0 2 * * *" --task backup --level L2
+  aios scheduler remove backup
+  aios scheduler trigger deploy_complete
+
+\x1b[1mNOTE:\x1b[0m
+  This is a shortcut for "aios corp scheduler" and "aios corp schedule".
+  Both paths work identically.
+`);
+}
+
+// Helper: Stop scheduler by writing a stop flag
+function runSchedulerStop() {
+  const stopDir = path.join(process.cwd(), '.aios', 'corporation');
+  const stopFile = path.join(stopDir, 'scheduler-stop');
+
+  try {
+    if (!fs.existsSync(stopDir)) {
+      fs.mkdirSync(stopDir, { recursive: true });
+    }
+
+    const stopData = JSON.stringify({
+      requestedAt: new Date().toISOString(),
+      pid: process.pid,
+      reason: 'CLI stop command',
+    }, null, 2);
+
+    fs.writeFileSync(stopFile, stopData, 'utf8');
+    console.log('\n  \x1b[32mStop signal sent.\x1b[0m');
+    console.log(`  Written to: ${stopFile}`);
+    console.log('  The scheduler will stop on its next tick cycle.\n');
+  } catch (error) {
+    console.error(`\n  \x1b[31mFailed to send stop signal:\x1b[0m ${error.message}\n`);
+    process.exit(1);
+  }
+}
+
+// Helper: Scheduler status (combined stats + health + next runs)
+function runSchedulerStatus() {
+  try {
+    const projectRoot = process.cwd();
+    const corpPath = path.join(projectRoot, '.aios-core', 'core', 'corporation');
+
+    const { OrgEngine } = require(path.join(corpPath, 'org-engine'));
+    const { PermissionEngine } = require(path.join(corpPath, 'permission-engine'));
+    const { ActivityLogger } = require(path.join(corpPath, 'activity-logger'));
+    const { TaskRouter } = require(path.join(corpPath, 'task-router'));
+    const { CorporationScheduler } = require(path.join(corpPath, 'scheduler'));
+
+    const orgEngine = new OrgEngine(projectRoot);
+    orgEngine.load();
+
+    if (!orgEngine.isLoaded()) {
+      console.error('Error: Corporation org-config not loaded. Run "aios corp org" to check.');
+      process.exit(1);
+    }
+
+    const logger = new ActivityLogger({ autoStart: false });
+    const permEngine = new PermissionEngine(orgEngine, { activityLogger: logger });
+    const router = new TaskRouter(orgEngine, permEngine, logger, { projectRoot });
+    const scheduler = new CorporationScheduler(orgEngine, router, logger, { projectRoot });
+
+    // Gather data
+    const stats = scheduler.getSchedulerStats();
+    const health = scheduler.checkHealth();
+    const nextRuns = scheduler.getNextRuns(5);
+    // Render
+    console.log('');
+    console.log('\x1b[1m  Corporation Scheduler Status\x1b[0m');
+    console.log('  ' + '='.repeat(55));
+
+    // State
+    const stateIcon = stats.running ? '\x1b[32m' : '\x1b[33m';
+    const stateText = stats.running ? 'RUNNING' : 'STOPPED';
+    console.log(`  State:            ${stateIcon}${stateText}\x1b[0m`);
+
+    // Health
+    const healthIcon = health.healthy ? '\x1b[32mHealthy\x1b[0m' : '\x1b[31mUnhealthy\x1b[0m';
+    console.log(`  Health:           ${healthIcon}`);
+    if (health.lastHeartbeat) {
+      const lastBeat = new Date(health.lastHeartbeat);
+      console.log(`  Last heartbeat:   ${lastBeat.toLocaleString()}`);
+    } else {
+      console.log('  Last heartbeat:   \x1b[90mnever\x1b[0m');
+    }
+
+    // Schedules summary
+    console.log('');
+    console.log(`  Total schedules:  ${stats.totalSchedules}`);
+    console.log(`    Active:         \x1b[32m${stats.activeSchedules}\x1b[0m`);
+    console.log(`    Paused:         \x1b[33m${stats.pausedSchedules}\x1b[0m`);
+    console.log(`    Cron:           ${stats.cronSchedules}`);
+    console.log(`    Event:          ${stats.eventSchedules}`);
+    console.log(`    One-time:       ${stats.onceSchedules}`);
+    console.log(`  Queue length:     ${stats.queueLength}`);
+
+    // Execution stats
+    console.log('');
+    console.log(`  Total ticks:      ${stats.totalTicks}`);
+    console.log(`  Total executed:   ${stats.totalExecuted}`);
+    console.log(`  Total queued:     ${stats.totalQueued}`);
+    console.log(`  Total events:     ${stats.totalEvents}`);
+    if (stats.lastTick) {
+      console.log(`  Last tick:        ${new Date(stats.lastTick).toLocaleString()}`);
+    }
+
+    // Next runs
+    if (nextRuns.length > 0) {
+      console.log('');
+      console.log('  \x1b[1mUpcoming runs:\x1b[0m');
+      for (const run of nextRuns) {
+        const nextDate = new Date(run.next_run);
+        console.log(`    ${nextDate.toLocaleString()}  \x1b[1m${run.name}\x1b[0m  [${run.cron}]`);
+      }
+    }
+
+    // Stop file check
+    const stopFile = path.join(projectRoot, '.aios', 'corporation', 'scheduler-stop');
+    if (fs.existsSync(stopFile)) {
+      console.log('');
+      console.log('  \x1b[33mPending stop signal detected.\x1b[0m');
+      try {
+        const stopData = JSON.parse(fs.readFileSync(stopFile, 'utf8'));
+        console.log(`  Requested at: ${stopData.requestedAt}`);
+      } catch { /* ignore */ }
+    }
+
+    console.log('');
+
+    // Cleanup
+    try { logger.close(); } catch { /* ignore */ }
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+    process.exit(1);
+  }
+}
+
 // Command routing (async main function)
 async function main() {
   switch (command) {
@@ -1032,6 +1212,54 @@ async function main() {
         await run(process.argv);
       } catch (error) {
         console.error(`❌ Pro command error: ${error.message}`);
+        process.exit(1);
+      }
+      break;
+
+    case 'corp':
+      // Corporation CLI - Story CORP-1
+      try {
+        const corpCmd = require('../.aios-core/cli/commands/corp/index.js');
+        corpCmd.execute(args.slice(1));
+      } catch (error) {
+        console.error(`Corporation command error: ${error.message}`);
+        process.exit(1);
+      }
+      break;
+
+    case 'scheduler':
+      // Scheduler shortcut -- delegates to corp scheduler/schedule
+      // aios scheduler status|start|stop|health|stats|next -> corp scheduler <sub>
+      // aios scheduler list|add|remove|pause|resume|trigger -> corp schedule <sub>
+      try {
+        const schedulerSub = args[1];
+        const schedulerArgs = args.slice(2);
+        const scheduleManagementCmds = ['list', 'add', 'remove', 'pause', 'resume', 'trigger'];
+
+        if (!schedulerSub || schedulerSub === '--help' || schedulerSub === '-h') {
+          showSchedulerHelp();
+          break;
+        }
+
+        if (scheduleManagementCmds.includes(schedulerSub)) {
+          // Route to "corp schedule <sub>"
+          const schedMod = require('../.aios-core/cli/commands/corp/schedule.js');
+          schedMod.execute([schedulerSub, ...schedulerArgs]);
+        } else if (schedulerSub === 'stop') {
+          // Stop command: write stop flag file
+          runSchedulerStop();
+        } else {
+          // Route to "corp scheduler <sub>" (tick, start, health, stats, next, status)
+          if (schedulerSub === 'status') {
+            // status = stats + health combined
+            runSchedulerStatus();
+          } else {
+            const schedulerMod = require('../.aios-core/cli/commands/corp/scheduler.js');
+            schedulerMod.execute([schedulerSub, ...schedulerArgs]);
+          }
+        }
+      } catch (error) {
+        console.error(`Scheduler command error: ${error.message}`);
         process.exit(1);
       }
       break;

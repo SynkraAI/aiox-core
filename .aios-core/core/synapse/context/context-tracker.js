@@ -43,6 +43,13 @@ const TOKEN_BUDGETS = {
 };
 
 /**
+ * Safety multiplier for XML-heavy output (SYNAPSE rules).
+ * chars/4 underestimates by 15-25% on XML; 1.2x corrects this.
+ * @see NOG-9 research C6-token-budget.md
+ */
+const XML_SAFETY_MULTIPLIER = 1.2;
+
+/**
  * Default configuration values.
  */
 const DEFAULTS = {
@@ -89,32 +96,66 @@ function calculateBracket(contextPercent) {
 }
 
 /**
- * Estimate the percentage of context remaining based on prompt count.
+ * Estimate token count from text using chars/4 heuristic.
+ * More accurate than flat per-prompt estimates since actual prompt sizes
+ * vary from 10 to 50,000+ tokens.
  *
- * Formula: 100 - ((promptCount * avgTokensPerPrompt) / maxContext * 100)
- * Result is clamped to 0-100 range.
+ * Heuristic: ~4 characters per token for English/code.
+ * XML-heavy content gets the safety multiplier on top.
+ *
+ * @param {string} text - The text to estimate tokens for
+ * @returns {number} Estimated token count
+ */
+function estimateTokens(text) {
+  if (!text || typeof text !== 'string') return 0;
+  // chars/4 is the standard approximation for Claude's tokenizer
+  return Math.ceil(text.length / 4);
+}
+
+/**
+ * Estimate the percentage of context remaining.
+ *
+ * Supports two modes:
+ * 1. **Text-based** (preferred): Pass options.conversationText for accurate chars/4 estimation
+ * 2. **Count-based** (fallback): Uses promptCount * avgTokensPerPrompt heuristic
  *
  * @param {number} promptCount - Number of prompts in current session
  * @param {Object} [options={}] - Configuration options
- * @param {number} [options.avgTokensPerPrompt=1500] - Average tokens per prompt
+ * @param {string} [options.conversationText] - Full conversation text for accurate estimation
+ * @param {number[]} [options.messageSizes] - Array of per-message char counts (middle ground)
+ * @param {number} [options.avgTokensPerPrompt=1500] - Average tokens per prompt (fallback)
  * @param {number} [options.maxContext=200000] - Maximum context window size in tokens
  * @returns {number} Percentage of context remaining (0.0 to 100.0)
  */
 function estimateContextPercent(promptCount, options = {}) {
   const {
+    conversationText,
+    messageSizes,
     avgTokensPerPrompt = DEFAULTS.avgTokensPerPrompt,
     maxContext = DEFAULTS.maxContext,
   } = options;
-
-  if (typeof promptCount !== 'number' || isNaN(promptCount) || promptCount < 0) {
-    return 100;
-  }
 
   if (maxContext <= 0) {
     return 0;
   }
 
-  const usedTokens = promptCount * avgTokensPerPrompt;
+  let usedTokens;
+
+  if (conversationText && typeof conversationText === 'string') {
+    // Mode 1: Text-based estimation (most accurate without a real tokenizer)
+    usedTokens = estimateTokens(conversationText) * XML_SAFETY_MULTIPLIER;
+  } else if (Array.isArray(messageSizes) && messageSizes.length > 0) {
+    // Mode 2: Per-message char counts (avoids flat average)
+    const totalChars = messageSizes.reduce((sum, size) => sum + (typeof size === 'number' ? size : 0), 0);
+    usedTokens = (totalChars / 4) * XML_SAFETY_MULTIPLIER;
+  } else {
+    // Mode 3: Flat heuristic (original, least accurate)
+    if (typeof promptCount !== 'number' || isNaN(promptCount) || promptCount < 0) {
+      return 100;
+    }
+    usedTokens = promptCount * avgTokensPerPrompt * XML_SAFETY_MULTIPLIER;
+  }
+
   const percent = 100 - (usedTokens / maxContext * 100);
   return Math.max(0, Math.min(100, percent));
 }
@@ -180,6 +221,7 @@ function needsMemoryHints(bracket) {
 module.exports = {
   calculateBracket,
   estimateContextPercent,
+  estimateTokens,
   getTokenBudget,
   getActiveLayers,
   needsHandoffWarning,
@@ -187,4 +229,5 @@ module.exports = {
   BRACKETS,
   TOKEN_BUDGETS,
   DEFAULTS,
+  XML_SAFETY_MULTIPLIER,
 };

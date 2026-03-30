@@ -831,34 +831,8 @@ function createTaskRouter(orgEngine, permissionEngine, activityLogger, options =
   return new TaskRouter(orgEngine, permissionEngine, activityLogger, options);
 }
 
-/**
- * Check if corporation feature is enabled in core-config.yaml.
- * @private
- */
-function _isCorporationEnabled() {
-  try {
-    const configPath = path.join(process.cwd(), '.aios-core', 'core-config.yaml');
-    if (!fs.existsSync(configPath)) return false;
-
-    const content = fs.readFileSync(configPath, 'utf-8');
-    const lines = content.split('\n');
-    let inCorporation = false;
-
-    for (const line of lines) {
-      const trimmed = line.trimStart();
-      if (/^corporation\s*:/.test(trimmed)) {
-        inCorporation = true;
-        continue;
-      }
-      if (inCorporation && /^\S/.test(trimmed)) break;
-      if (inCorporation && /^\s+enabled\s*:\s*true/i.test(line)) return true;
-    }
-
-    return false;
-  } catch {
-    return false;
-  }
-}
+// Shared utility — migrated from inline duplicate (2026-03-30)
+const { isCorporationEnabled: _isCorporationEnabled } = require('./utils');
 
 // =====================================================
 // EXPORTS
