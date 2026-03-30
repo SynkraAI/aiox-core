@@ -99,13 +99,14 @@ If the last resolved item is `skipped`, streak = 0.
 ## 5. Calculate Counters
 
 ```
-items_total   = count of ALL items across all phases in the pack
+items_unused  = count of items with status "unused" in quest-log
+items_total   = count of ALL items across all phases in the pack MINUS items_unused
 items_done    = count of items with status "done" in quest-log
 items_skipped = count of items with status "skipped" in quest-log
-percent       = round((items_done + items_skipped) / items_total * 100)
+percent       = items_total > 0 ? round((items_done + items_skipped) / items_total * 100) : 0
 ```
 
-Note: `percent` reflects overall progress (done + skipped), not just done.
+Note: `percent` reflects overall progress (done + skipped), not just done. Items with status `unused` are **excluded** from `items_total` — they don't exist in this project's context, so they don't count toward progress. This means a project with 67 pack items but 10 unused items has `items_total = 57`.
 
 ---
 
@@ -283,67 +284,9 @@ Parse N from the condition string (e.g., `"auto_detected >= 5"` or `"scan_found 
 
 ## 8. Celebration Templates
 
-When stats change, the engine checks if a celebration is warranted. Generate the celebration message using these templates.
+> **Note:** Celebration templates are defined in `guide.md` section 4. This module provides calculation data only — rendering is guide.md's responsibility. If there is any conflict, guide.md takes precedence.
 
-### Mission Complete
-
-Triggered when an item is marked `done`. Size depends on the item's XP value.
-
-**Small (xp < 20):**
-```
-✅ +{xp} XP — {item.label}
-```
-
-**Medium (20 <= xp < 30):**
-```
-⭐ +{xp} XP — {item.label}
-   Streak: {streak} 🔥
-```
-
-**Big (xp >= 30):**
-```
-🏆 +{xp} XP — {item.label}
-   Streak: {streak} 🔥
-   Total: {total_xp} XP | {level_name} (Lv.{level})
-```
-
-### World Complete
-
-Triggered when `all_items_done_in_phase:<N>` becomes true for any phase.
-
-```
-═══════════════════════════════════════
-  🌍 WORLD {N} COMPLETE — "{phase.name}"
-  {items_done_in_phase}/{items_total_in_phase} missions
-═══════════════════════════════════════
-```
-
-### Level Up
-
-Triggered when the calculated `level` is higher than the previously stored `level`.
-
-```
-═══════════════════════════════════════
-  ⬆️  LEVEL UP!  Lv.{old_level} → Lv.{new_level}
-  「{new_level_name}」
-  {levels[new_level].message}
-═══════════════════════════════════════
-```
-
-### Achievement Unlock
-
-Triggered for each newly unlocked achievement.
-
-```
-═══════════════════════════════════════
-  🏅 ACHIEVEMENT UNLOCKED
-  {achievement.icon} {achievement.name}
-  {achievement.message}
-  +{xp_bonus} XP bonus
-═══════════════════════════════════════
-```
-
-If `xp_bonus` is 0 or absent, omit the bonus line.
+When stats change, return the calculated data (stats, newly_unlocked, level changes) to the guide module for rendering. The guide module owns the visual output — see `guide.md` section 4 for all celebration templates (Mission Complete, World Complete, Level Up, Achievement Unlock, Final Victory, MVP Launch Guide).
 
 ---
 
@@ -372,3 +315,4 @@ When the engine calls the XP system (after any status change), execute in this e
 - **Pack has no achievements:** skip achievement evaluation, return empty list
 - **Pack has no levels:** default to level 1, level_name = pack.name
 - **Item exists in pack but not in quest-log:** treat as `pending`
+- **Item with status `unused`:** excluded from `items_total`, `percent`, XP calculations. Treated as if it doesn't exist. Does NOT break streaks (ignored in streak calculation).

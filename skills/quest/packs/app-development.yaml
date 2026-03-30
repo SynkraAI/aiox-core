@@ -6,7 +6,7 @@
 
 pack:
   id: app-development
-  version: "1.0.0"
+  version: "2.0.0"
   name: "App Development"
   icon: "⚒️"
   class_name: "Forja do Código"
@@ -166,7 +166,7 @@ achievements:
 
 # =============================================================================
 # Phases — 9 worlds com TODOS os items do pipeline-checklist original
-# Total: 54 items | 1040 XP
+# Total: 67 items | 1270 XP
 # =============================================================================
 
 phases:
@@ -332,8 +332,8 @@ phases:
 
       - id: "2.4"
         label: "Wireframes de UI"
-        command: "@ux → *wireframe"
-        who: "@ux"
+        command: "@ux-design-expert → *wireframe"
+        who: "@ux-design-expert"
         required: false
         xp: 15
         condition: "se tiver frontend"
@@ -505,11 +505,11 @@ phases:
         xp: 25
 
   # ---------------------------------------------------------------------------
-  # WORLD 5: O Tribunal da Qualidade (170 XP)
+  # WORLD 5: O Tribunal da Qualidade (280 XP)
   # ---------------------------------------------------------------------------
   5:
     name: "O Tribunal da Qualidade"
-    description: "Três inspetores. Nada passa sem julgamento."
+    description: "Doze inspetores. Nada passa sem julgamento."
     unlock_message: "Seu código será julgado. Segurança. Qualidade. Processo."
     complete_message: "O tribunal aprovou. Seu código é digno."
     items:
@@ -544,12 +544,75 @@ phases:
         xp: 15
         condition: "se tech debt"
 
+      - id: "5.5"
+        label: "Performance profiling"
+        command: "Lighthouse audit ou load test básico — medir tempos de resposta e gargalos"
+        who: "@dev"
+        required: false
+        xp: 20
+        condition: "se app tem frontend ou API"
+
+      - id: "5.6"
+        label: "Auditoria de acessibilidade"
+        command: "axe-core ou Lighthouse a11y — verificar WCAG 2.1 AA"
+        who: "skill"
+        required: false
+        xp: 15
+        condition: "se tem frontend"
+
+      - id: "5.7"
+        label: "Documentação de API"
+        command: "Gerar ou validar docs de API (OpenAPI/Swagger, JSDoc, README de endpoints)"
+        who: "@dev"
+        required: false
+        xp: 15
+        condition: "se tem API"
+
+      - id: "5.8"
+        label: "Review de error handling"
+        command: "Verificar try/catch, error boundaries, fallbacks — nenhum erro silencioso"
+        who: "@qa"
+        required: true
+        xp: 20
+
+      - id: "5.9"
+        label: "Auditoria de dependências"
+        command: "npm audit / verificar deps desatualizadas ou vulneráveis"
+        who: "@devops"
+        required: true
+        xp: 15
+        scan_rule: "has_file('package-lock.json') OR has_file('yarn.lock')"
+
+      - id: "5.10"
+        label: "Cobertura de testes"
+        command: "npm test -- --coverage — verificar cobertura mínima aceitável"
+        who: "@qa"
+        required: false
+        xp: 20
+        condition: "se tem testes configurados"
+        scan_rule: "has_file_matching('coverage/**') OR has_file_matching('**/lcov.info')"
+
+      - id: "5.11"
+        label: "Database review"
+        command: "@data-engineer → revisar queries N+1, índices, RLS policies"
+        who: "@data-engineer"
+        required: false
+        xp: 20
+        condition: "se usa banco de dados"
+
+      - id: "5.12"
+        label: "Tech debt assessment"
+        command: "Listar tech debt acumulado, priorizar, criar stories de cleanup"
+        who: "@architect"
+        required: false
+        xp: 15
+
   # ---------------------------------------------------------------------------
-  # WORLD 6: O Salão dos Selos — Crystal Caverns (130 XP)
+  # WORLD 6: O Salão dos Selos — Crystal Caverns (230 XP)
   # ---------------------------------------------------------------------------
   6:
     name: "O Salão dos Selos"
-    description: "Auditorias especializadas. Cada cristal é um selo de qualidade."
+    description: "Doze cristais. Cada um é um selo de qualidade."
     unlock_message: "Os cristais brilham com a verdade. Cada selo é uma garantia."
     complete_message: "Todos os selos brilham. Seu código é certificado."
     integration_checks:
@@ -598,20 +661,60 @@ phases:
         scan_rule: "has_dir('dist') OR has_dir('build') OR has_dir('.next')"
 
       - id: "6.6"
-        label: "Auditoria de segurança"
-        command: "/vulnerability-scanner"
+        label: "Certificação de segurança final"
+        command: "/vulnerability-scanner — scan pós-review, valida que fixes não introduziram vulnerabilidades"
         who: "skill"
         required: false
         xp: 25
-        condition: "recomendado para produção"
+        condition: "recomendado se 5.3 encontrou issues"
 
       - id: "6.7"
-        label: "Refactoring"
-        command: "/code-refactoring-refactor-clean"
+        label: "Refactoring de integração"
+        command: "/code-refactoring-refactor-clean — foco em interfaces entre módulos e contratos de API"
         who: "skill"
         required: false
         xp: 15
-        condition: "se tech debt"
+        condition: "se integração revelou acoplamento ou duplicação entre módulos"
+
+      - id: "6.8"
+        label: "Estratégia de backup"
+        command: "Verificar backups de DB, recovery plan, rollback strategy"
+        who: "@devops"
+        required: false
+        xp: 15
+        condition: "se usa banco de dados em produção"
+
+      - id: "6.9"
+        label: "Paridade de ambientes"
+        command: "Verificar que dev/staging/prod estão alinhados — env vars, versões, configs"
+        who: "@devops"
+        required: false
+        xp: 15
+        condition: "se tem múltiplos ambientes"
+
+      - id: "6.10"
+        label: "Teste de carga"
+        command: "Load test básico — verificar que o app aguenta tráfego esperado"
+        who: "@qa"
+        required: false
+        xp: 25
+        condition: "se app vai receber tráfego significativo"
+
+      - id: "6.11"
+        label: "Documentação completa"
+        command: "Verificar README, CONTRIBUTING, API docs, arquitetura — tudo documentado"
+        who: "@dev"
+        required: true
+        xp: 20
+        scan_rule: "has_file('README.md') AND has_file('CLAUDE.md')"
+
+      - id: "6.12"
+        label: "Compliance e licenças"
+        command: "Verificar licenças de dependências, GDPR/LGPD se aplicável, termos de uso"
+        who: "skill"
+        required: false
+        xp: 15
+        condition: "se app lida com dados de usuários"
 
   # ---------------------------------------------------------------------------
   # WORLD 7: O Portal do Deploy (150 XP)

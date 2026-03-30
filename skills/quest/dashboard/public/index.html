@@ -431,9 +431,12 @@
     .mission-icon.done { background: #22c55e; color: white; }
     .mission-icon.pending { background: var(--bg-secondary, #0d0d24); border: 2px solid var(--border-color, #334155); }
     .mission-icon.skipped { background: #64748b; color: white; }
+    .mission-icon.unused { background: transparent; border: 2px dashed #475569; color: #475569; }
     .mission-label { color: var(--text-primary, #e2e8f0); grid-row: 1; }
     .mission.done .mission-label { opacity: 0.6; text-decoration: line-through; }
     .mission.skipped .mission-label { opacity: 0.5; }
+    .mission.unused .mission-label { opacity: 0.3; font-style: italic; }
+    .mission.unused .mission-xp { opacity: 0.3; }
     .mission-xp {
       font-family: var(--font-mono, monospace);
       font-size: 0.7rem;
@@ -558,6 +561,68 @@
       margin: 1rem 0;
     }
 
+    /* --- Victory Banner (project 100%) --- */
+    .victory-banner {
+      position: relative;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-radius: var(--radius-card, 12px);
+      background: linear-gradient(135deg, rgba(255,215,0,0.12) 0%, rgba(255,165,0,0.08) 50%, rgba(255,215,0,0.12) 100%);
+      border: 2px solid rgba(255,215,0,0.5);
+      overflow: hidden;
+    }
+    .victory-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255,215,0,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .victory-trophy {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      animation: trophy-pulse 2s ease-in-out infinite;
+    }
+    @keyframes trophy-pulse {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(255,215,0,0.4)); }
+      50% { transform: scale(1.08); filter: drop-shadow(0 0 16px rgba(255,215,0,0.7)); }
+    }
+    .victory-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: #ffd700;
+      text-shadow: 0 0 20px rgba(255,215,0,0.4);
+      margin-bottom: 0.25rem;
+    }
+    .victory-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-secondary, #64748b);
+      font-style: italic;
+    }
+    .victory-stars {
+      font-size: 1.2rem;
+      letter-spacing: 0.3em;
+      color: #ffd700;
+      margin-top: 0.5rem;
+      animation: stars-twinkle 3s ease-in-out infinite;
+    }
+    @keyframes stars-twinkle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* --- Home: completed project row --- */
+    tr.project-complete {
+      background: linear-gradient(90deg, rgba(255,215,0,0.06) 0%, transparent 60%) !important;
+    }
+    tr.project-complete td:first-child .project-name::before {
+      content: '\uD83C\uDFC6 ';
+    }
+    .td-next-complete {
+      color: #ffd700 !important;
+      font-weight: 600;
+    }
+
     /* --- Error card --- */
     .error-card {
       padding: 1rem 1.25rem;
@@ -577,13 +642,58 @@
 
     /* --- Responsive --- */
     @media (max-width: 768px) {
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .dashboard { padding: 0.75rem; }
+      .header {
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto;
+        gap: 0.5rem;
+      }
+      .header-controls {
+        grid-column: 1 / -1;
+        justify-content: space-between;
+      }
+      .header-title { font-size: 1.1rem; letter-spacing: 1px; }
+      .header-subtitle { font-size: 0.75rem; }
       .home-stats { grid-template-columns: 1fr; }
-      .achievements-grid { grid-template-columns: repeat(3, 1fr); }
-      .dashboard { padding: 1rem; }
-      .projects-table { font-size: 0.85rem; }
-      .header { grid-template-columns: auto 1fr auto; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+      .stat-card { padding: 0.75rem; }
+      .stat-value { font-size: 1.4rem; }
+      .stat-label { font-size: 0.65rem; }
+      .level-section { padding: 1rem; }
+      .level-header { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+      .level-badge { font-size: 0.75rem; padding: 0.3rem 0.75rem; }
+      .level-quote { font-size: 0.7rem; }
+      .projects-table { font-size: 0.8rem; }
+      .projects-table th { font-size: 0.6rem; padding: 0 0.5rem 0.5rem; }
+      .projects-table td { padding: 0.75rem 0.5rem; }
       .td-next { display: none; }
+      .td-xp { font-size: 0.7rem; }
+      .project-name { font-size: 0.85rem; }
+      .progress-bar-mini { min-width: 80px; }
+      .achievements-grid { grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }
+      .achievement { padding: 0.5rem; }
+      .achievement-icon { font-size: 1.2rem; }
+      .achievement-name { font-size: 0.6rem; }
+      .world-card { padding: 0.75rem; }
+      .world-name { font-size: 0.9rem; }
+      .mission { font-size: 0.8rem; gap: 0.15rem 0.5rem; padding: 0.4rem 0.5rem; }
+      .mission-xp { font-size: 0.65rem; }
+      .mission-note { font-size: 0.6rem; }
+      .celebration-card { padding: 1.5rem; margin: 1rem; }
+      .celebration-title { font-size: 1.2rem; }
+      .celebration-xp { font-size: 1.5rem; }
+      .victory-banner { padding: 1.25rem 1rem; }
+      .victory-trophy { font-size: 2rem; }
+      .victory-title { font-size: 1.2rem; }
+      .no-data { padding: 2rem 1rem; }
+      .no-data h2 { font-size: 1.2rem; }
+      .connection-status { bottom: 0.5rem; right: 0.5rem; font-size: 0.6rem; }
+    }
+    @media (max-width: 400px) {
+      .stats-row { grid-template-columns: 1fr; }
+      .achievements-grid { grid-template-columns: repeat(2, 1fr); }
+      .zoom-controls { display: none; }
+      .theme-select { font-size: 0.6rem; padding: 0.25rem 1.5rem 0.25rem 0.4rem; }
     }
     @media (min-width: 2000px) {
       .dashboard { max-width: 1600px; }
@@ -930,12 +1040,14 @@
     if (data.items) {
       for (var itemId in data.items) {
         var parts = itemId.split('.');
+        if (parts.length >= 3) continue; // sub-items excluded from phase counts
         var phaseId = parts[0];
         if (!phases[phaseId]) {
-          phases[phaseId] = { done: 0, total: 0, skipped: 0, requiredDone: 0, requiredTotal: 0, items: {} };
+          phases[phaseId] = { done: 0, total: 0, skipped: 0, unused: 0, requiredDone: 0, requiredTotal: 0, items: {} };
         }
-        phases[phaseId].total++;
         phases[phaseId].items[itemId] = data.items[itemId];
+        if (data.items[itemId].status === 'unused') { phases[phaseId].unused++; continue; }
+        phases[phaseId].total++;
         if (data.items[itemId].status === 'done') { phases[phaseId].done++; phases[phaseId].requiredDone++; }
         if (data.items[itemId].status === 'skipped') { phases[phaseId].skipped++; phases[phaseId].requiredDone++; }
       }
@@ -1127,6 +1239,7 @@
     var totalXP = 0;
     var totalProjects = names.length;
     var activeProjects = 0;
+    var completedProjects = 0;
 
     var projectRows = [];
     for (var i = 0; i < names.length; i++) {
@@ -1135,13 +1248,14 @@
       if (!pd || !pd.parsed) continue;
 
       var stats = calculateStats(pd.parsed);
-      var percent = stats.total > 0 ? Math.round((stats.done / stats.total) * 100) : 0;
+      var percent = stats.total > 0 ? Math.round(((stats.done + (stats.skipped || 0)) / stats.total) * 100) : 0;
       var reg = registryProjects.find(function(p) { return p.project_name === name; });
       var pack = (reg && reg.pack) || (pd.parsed.meta && pd.parsed.meta.pack) || 'unknown';
       var nextMission = getNextMission(pd.parsed, stats);
 
       totalXP += stats.xp;
       if (percent < 100) activeProjects++;
+      if (percent >= 100) completedProjects++;
 
       projectRows.push({
         name: name,
@@ -1171,12 +1285,15 @@
       var row = projectRows[j];
       var rowTheme = getProjectTheme(row.name);
       var rowStyle = themeStyleString(rowTheme);
-      tableRows += '<tr onclick="navigateTo(\'project\', \'' + escapeHtml(row.name) + '\')" style="' + rowStyle + '">' +
+      var isComplete = row.percent >= 100;
+      var trClass = isComplete ? ' class="project-complete"' : '';
+      var nextClass = isComplete ? 'td-next td-next-complete' : 'td-next';
+      tableRows += '<tr' + trClass + ' onclick="navigateTo(\'project\', \'' + escapeHtml(row.name) + '\')" style="' + rowStyle + '">' +
         '<td><div class="project-name" style="color:var(--text-primary)">' + escapeHtml(row.name) + '</div><div class="project-pack" style="color:var(--text-secondary)">' + escapeHtml(row.pack) + '</div></td>' +
-        '<td><div class="progress-bar-mini" style="background:var(--bg-card)"><div class="progress-bar-mini-fill" style="width:' + row.percent + '%;background:var(--progress-gradient)"></div></div></td>' +
-        '<td class="td-percent" style="color:var(--text-accent);font-family:var(--font-mono)">' + row.percent + '%</td>' +
+        '<td><div class="progress-bar-mini" style="background:var(--bg-card)"><div class="progress-bar-mini-fill" style="width:' + row.percent + '%;background:' + (isComplete ? 'linear-gradient(90deg, #ffd700, #ffaa00)' : 'var(--progress-gradient)') + '"></div></div></td>' +
+        '<td class="td-percent" style="color:' + (isComplete ? '#ffd700' : 'var(--text-accent)') + ';font-family:var(--font-mono)">' + row.percent + '%</td>' +
         '<td class="td-xp" style="color:var(--accent-primary);font-family:var(--font-mono)">' + row.xp + ' XP</td>' +
-        '<td class="td-next" style="color:var(--text-secondary)">' + escapeHtml(row.nextMission) + '</td>' +
+        '<td class="' + nextClass + '" style="color:' + (isComplete ? '#ffd700' : 'var(--text-secondary)') + '">' + escapeHtml(row.nextMission) + '</td>' +
       '</tr>';
     }
 
@@ -1184,6 +1301,7 @@
       '<div class="home-stats view-enter">' +
         '<div class="home-stat"><div class="home-stat-value">' + totalProjects + '</div><div class="home-stat-label">Projetos</div></div>' +
         '<div class="home-stat"><div class="home-stat-value">' + activeProjects + '</div><div class="home-stat-label">Ativos</div></div>' +
+        '<div class="home-stat"><div class="home-stat-value" style="color:#ffd700">' + completedProjects + '</div><div class="home-stat-label">\uD83C\uDFC6 Completos</div></div>' +
         '<div class="home-stat"><div class="home-stat-value">' + totalXP + '</div><div class="home-stat-label">XP Total</div></div>' +
       '</div>' +
       '<div class="view-enter">' +
@@ -1215,7 +1333,7 @@
     var stats = calculateStats(data);
     var level = getLevel(stats.xp);
     var achievements = checkAchievements(data, stats);
-    var percent = stats.total > 0 ? Math.round((stats.done / stats.total) * 100) : 0;
+    var percent = stats.total > 0 ? Math.round(((stats.done + (stats.skipped || 0)) / stats.total) * 100) : 0;
     var xpPercent = level.nextMin > level.min
       ? Math.round(((stats.xp - level.min) / (level.nextMin - level.min)) * 100)
       : 100;
@@ -1248,7 +1366,7 @@
       var isComplete = phase.done >= phase.total - phase.skipped;
       var isActive = id === currentWorld;
       var isLocked = parseInt(id) > parseInt(currentWorld) && !isRequiredComplete && phase.done === 0;
-      var phPercent = phase.total > 0 ? Math.round((phase.done / phase.total) * 100) : 0;
+      var phPercent = phase.total > 0 ? Math.round(((phase.done + (phase.skipped || 0)) / phase.total) * 100) : 0;
       var statusClass = isComplete ? 'world-complete' : isActive ? 'world-active' : isLocked ? 'world-locked' : '';
       var statusIcon = isComplete ? '\u2705' : isActive ? '\uD83D\uDD04' : isLocked ? '\uD83D\uDD12' : '\u2B1C';
 
@@ -1260,9 +1378,10 @@
         var item = phase.items[itemId];
         var isDone = item.status === 'done';
         var isSkipped = item.status === 'skipped';
-        var statusCls = isDone ? 'done' : isSkipped ? 'skipped' : 'pending';
-        var iconCls = isDone ? 'done' : isSkipped ? 'skipped' : 'pending';
-        var iconText = isDone ? '\u2713' : isSkipped ? '\u2013' : '';
+        var isUnused = item.status === 'unused';
+        var statusCls = isDone ? 'done' : isSkipped ? 'skipped' : isUnused ? 'unused' : 'pending';
+        var iconCls = isDone ? 'done' : isSkipped ? 'skipped' : isUnused ? 'unused' : 'pending';
+        var iconText = isDone ? '\u2713' : isSkipped ? '\u2013' : isUnused ? '\u00B7' : '';
         var missionLabel = item.label || itemId;
 
         missionsHtml += '<div class="mission ' + statusCls + '">' +
@@ -1306,7 +1425,19 @@
     var reg = registryProjects.find(function(p) { return p.project_name === name; });
     var packName = (reg && reg.pack) || (data.meta && data.meta.pack) || '';
 
+    var victoryHtml = '';
+    if (percent >= 100) {
+      var heroName = displayName.replace(/-/g, ' ').replace(/\b\w/g, function(c) { return c.toUpperCase(); });
+      victoryHtml = '<div class="victory-banner view-enter">' +
+        '<div class="victory-trophy">\uD83C\uDFC6</div>' +
+        '<div class="victory-title">\u2605 Q U E S T \u00A0 C O M P L E T E \u2605</div>' +
+        '<div class="victory-subtitle">Voc\u00EA n\u00E3o \u00E9 mais um aventureiro qualquer. Voc\u00EA \u00E9 uma lenda.</div>' +
+        '<div class="victory-stars">\u2B50 \u2B50 \u2B50 \u2B50 \u2B50</div>' +
+      '</div>';
+    }
+
     app.innerHTML = renderHeader(displayName, packName ? 'Pack: ' + packName : 'Quest', true) +
+      victoryHtml +
       '<div class="stats-row view-enter">' +
         '<div class="stat-card"><div class="stat-value">' + stats.xp + '</div><div class="stat-label">XP Total</div></div>' +
         '<div class="stat-card"><div class="stat-value">' + stats.done + '/' + stats.total + '</div><div class="stat-label">Miss\u00F5es</div></div>' +
@@ -1345,7 +1476,12 @@
         var ph = stats.phases[id];
         if (ph.done >= ph.total - ph.skipped) projectCelebState[name].worldsDone.add(id);
       }
-      return; // First load, no celebrations
+      // First load: if project is already 100%, fire victory confetti
+      var totalPercent = stats.total > 0 ? Math.round(((stats.done + (stats.skipped || 0)) / stats.total) * 100) : 0;
+      if (totalPercent >= 100) {
+        setTimeout(function() { confettiLegendary(); }, 800);
+      }
+      return;
     }
 
     var prev = projectCelebState[name];

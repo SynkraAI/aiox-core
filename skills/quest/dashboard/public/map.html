@@ -201,6 +201,54 @@
 
     .loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--accent-primary); z-index: 100; background: var(--bg-body); }
     .loading.off { display: none; }
+
+    /* --- Mobile Responsive --- */
+    @media (max-width: 768px) {
+      .hud {
+        flex-wrap: wrap;
+        padding: 8px 12px;
+        gap: 6px;
+      }
+      .hud-l {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .hud-r {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 6px;
+      }
+      .h-title { font-size: calc(var(--font-size-title) - 2px); }
+      .xp-w { width: 100px; height: 8px; }
+      .h-xp { font-size: calc(var(--font-size-hud) - 3px); }
+      .h-lv { font-size: calc(var(--font-size-hud) - 1px); }
+      .toggle-btn { font-size: 7px; padding: 3px 6px; }
+      .hud-sep { display: none; }
+      select { font-size: calc(var(--font-size-hud) - 2px); padding: 3px 6px; max-width: 120px; }
+      .h-back { font-size: calc(var(--font-size-hud) - 2px); }
+      .legend {
+        bottom: 6px; right: 6px;
+        padding: 6px 10px;
+        font-size: 7px;
+        line-height: 1.8;
+      }
+      .ld { width: 7px; height: 7px; margin-right: 4px; }
+      .tip {
+        max-width: 280px;
+        padding: 8px 12px;
+        font-size: 8px;
+      }
+      .tip-t { font-size: 9px; }
+      .tip-w { font-size: 8px; }
+      .tip-c { font-size: 8px; }
+    }
+    @media (max-width: 400px) {
+      .hud-r .toggle-group:first-child { display: none; }
+      .xp-w { width: 60px; }
+      #h-prog { font-size: 8px; }
+      .legend { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -527,10 +575,12 @@ async function loadData() {
 function mergeNodes() {
   renderNodes = [];
 
-  // Get sorted item IDs grouped by phase
+  // Get sorted item IDs grouped by phase (exclude sub-items — 3+ dot parts)
   const byPhase = {};
   for (const [id, item] of Object.entries(questItems)) {
-    const pn = parseInt(id.split('.')[0], 10);
+    const parts = id.split('.');
+    if (parts.length >= 3) continue; // sub-item, skip — handled separately
+    const pn = parseInt(parts[0], 10);
     if (!byPhase[pn]) byPhase[pn] = [];
     byPhase[pn].push({ id, ...item });
   }
@@ -541,6 +591,17 @@ function mergeNodes() {
       const ai = parseFloat(a.id), bi = parseFloat(b.id);
       return ai - bi;
     });
+  }
+
+  // Collect sub-items: items with 3+ dot-parts (e.g., "4.2.M8")
+  const subItemsByParent = {};
+  for (const [id, item] of Object.entries(questItems)) {
+    const parts = id.split('.');
+    if (parts.length >= 3) {
+      const parentId = parts[0] + '.' + parts[1];
+      if (!subItemsByParent[parentId]) subItemsByParent[parentId] = [];
+      subItemsByParent[parentId].push({ id, ...item });
+    }
   }
 
   // Map each item to a position
@@ -562,6 +623,7 @@ function mergeNodes() {
       tip: item.tip || '',
       xp: item.xp || 0,
       required: item.required !== false,
+      subItems: subItemsByParent[item.id] || [],
     });
   }
 }
@@ -645,11 +707,11 @@ function renderOverlay() {
 
     const r = (hovered === node) ? dotR + 3 : dotR;
 
-    // Only draw overlay dots — the white dots in the image serve as "empty" slots
-    if (node.status === 'locked' && !node.id) continue; // leave original white dot
+    // Positions without items show as empty slots (dimmed dots)
+    const isEmptySlot = node.status === 'locked' && !node.id;
 
-    // Glow for current
-    if (isCur) {
+    // Glow for current (skip for empty slots)
+    if (isCur && !isEmptySlot) {
       const gs = r + 6 + Math.sin(frame * 0.08) * 4;
       ctx.beginPath();
       ctx.arc(px, py, gs, 0, Math.PI * 2);
@@ -659,38 +721,71 @@ function renderOverlay() {
       ctx.fill();
     }
 
-    // Shadow
+    // Shadow (dimmed for empty slots)
     ctx.beginPath();
     ctx.arc(px + 1, py + 1, r, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0,0,0,0.4)';
+    ctx.fillStyle = isEmptySlot ? 'rgba(0,0,0,0.15)' : 'rgba(0,0,0,0.4)';
     ctx.fill();
 
     // Main dot
     ctx.beginPath();
     ctx.arc(px, py, r, 0, Math.PI * 2);
+
     let col;
     switch (node.status) {
       case 'done': col = tc.done; break;
       case 'skipped': col = tc.danger; break;
+      case 'unused': col = tc.muted; break;
+      case 'locked': col = tc.muted; break;
       case 'pending': col = isCur ? tc.current : tc.pending; break;
       default: col = tc.pending;
     }
+    if (isEmptySlot) ctx.globalAlpha = 0.25;
     ctx.fillStyle = col;
     ctx.fill();
 
     // Border
     ctx.strokeStyle = hovered === node ? '#fff' : tc.dotBorder;
     ctx.lineWidth = hovered === node ? 3 : 2.5;
+    if (node.status === 'unused' || isEmptySlot) {
+      ctx.setLineDash([4, 4]);
+      if (!isEmptySlot) ctx.globalAlpha = 0.4;
+    }
     ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.globalAlpha = 1;
 
     // Icon
     ctx.fillStyle = '#fff';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.font = `bold ${Math.max(10, r * 0.8)}px "Press Start 2P"`;
-    if (node.status === 'done') ctx.fillText('✓', px, py);
+    if (isEmptySlot) { /* no icon for empty slots */ }
+    else if (node.status === 'done') ctx.fillText('✓', px, py);
     else if (node.status === 'skipped') ctx.fillText('—', px, py);
+    else if (node.status === 'unused') ctx.fillText('·', px, py);
     else if (isCur) ctx.fillText('!', px + 0.5, py);
+
+    // Sub-items badge
+    if (node.subItems && node.subItems.length > 0) {
+      const subDone = node.subItems.filter(s => s.status === 'done').length;
+      const subTotal = node.subItems.length;
+      const badgeText = `${subDone}/${subTotal}`;
+      const badgeFs = Math.max(7, 9 * scale);
+      ctx.font = `bold ${badgeFs}px "Press Start 2P"`;
+      const badgeW = ctx.measureText(badgeText).width + 6;
+      const badgeH = badgeFs + 4;
+      const bx = px + r * 0.7;
+      const by = py - r * 0.7;
+      ctx.fillStyle = subDone === subTotal ? tc.done : tc.current;
+      ctx.beginPath();
+      ctx.roundRect(bx - badgeW / 2, by - badgeH / 2, badgeW, badgeH, 3);
+      ctx.fill();
+      ctx.fillStyle = '#000';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(badgeText, bx, by);
+    }
 
     // ---------- DETAIL LABELS ----------
     if (detailLevel !== 'clean' && node.id) {
@@ -894,6 +989,63 @@ function setupInput() {
   });
 
   window.addEventListener('mouseup', () => { dragging = false; });
+
+  // Touch events for mobile
+  vp.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) {
+      dragging = true;
+      dragS = { x: e.touches[0].clientX, scrollX: vp.scrollLeft };
+    }
+  }, { passive: true });
+
+  vp.addEventListener('touchmove', e => {
+    if (dragging && e.touches.length === 1) {
+      vp.scrollLeft = dragS.scrollX - (e.touches[0].clientX - dragS.x);
+    }
+  }, { passive: true });
+
+  vp.addEventListener('touchend', () => { dragging = false; });
+
+  // Tap to show tooltip on mobile
+  canvas.addEventListener('click', e => {
+    const rect = canvas.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const w = canvas.width, h = canvas.height;
+
+    let tapped = null;
+    for (const node of renderNodes) {
+      if (!node.id) continue;
+      const px = (node.x / 100) * w;
+      const py = (node.y / 100) * h;
+      if (Math.hypot(mx - px, my - py) < 22 * scale) {
+        tapped = node;
+        break;
+      }
+    }
+
+    if (tapped) {
+      document.getElementById('tip-t').textContent = `${tapped.id} — ${tapped.label}`;
+      const whoText = [tapped.who, tapped.xp ? `+${tapped.xp} XP` : ''].filter(Boolean).join('  ·  ');
+      document.getElementById('tip-w').textContent = whoText;
+      document.getElementById('tip-w').style.display = whoText ? '' : 'none';
+      document.getElementById('tip-c').textContent = tapped.command || '';
+      document.getElementById('tip-c').style.display = tapped.command ? '' : 'none';
+      const tipP = document.getElementById('tip-p');
+      tipP.textContent = tapped.tip ? `💡 ${tapped.tip}` : '';
+      tipP.style.display = tapped.tip ? '' : 'none';
+      const se = document.getElementById('tip-s');
+      const m = { done: ['COMPLETO ✓','done'], pending: ['PENDENTE','pending'], skipped: ['PULADO','skipped'] };
+      const [t, c] = m[tapped.status] || ['—','pending'];
+      se.textContent = t; se.className = `tip-s ${c}`;
+      tipEl.style.left = Math.min(e.clientX + 10, window.innerWidth - 290) + 'px';
+      tipEl.style.top = Math.min(e.clientY - 10, window.innerHeight - 150) + 'px';
+      tipEl.classList.add('on');
+      setTimeout(() => tipEl.classList.remove('on'), 4000);
+    } else {
+      tipEl.classList.remove('on');
+    }
+  });
 
   // Center on current node
   const curNode = renderNodes.find(n => n.status === 'pending');

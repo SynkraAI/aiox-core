@@ -301,7 +301,7 @@ phases:
 # Sub-quests (P1)
 # ----------------------------------------------------------------------------
 
-sub_quests:  # P1
+sub_quests:  # P1 — not yet implemented, ignored by engine
   - pack: mind-cloning
     trigger: "agent precisa de mind clone"
     optional: true

@@ -12,7 +12,6 @@ pack:
   class_name: "Alquimia Visual"
   tagline: "Extraia o DNA. Eleve o design. Entregue arte."
   type: expansion
-  requires: aios
   parent_pack: app-development
   parent_item: "2.5"
 
@@ -243,8 +242,8 @@ phases:
     items:
       - id: "1.1"
         label: "Screenshots do site alvo (desktop + mobile)"
-        command: "@ux → Playwright captura full-page desktop (1440px) + mobile (390px)"
-        who: "@ux"
+        command: "@ux-design-expert → Playwright captura full-page desktop (1440px) + mobile (390px)"
+        who: "@ux-design-expert"
         required: true
         xp: 20
         scan_rule: "has_file_matching('design-system/screenshots/*') OR has_file_matching('docs/screenshots/*')"
@@ -294,8 +293,8 @@ phases:
 
       - id: "1.7"
         label: "Catalogar componentes visuais"
-        command: "@ux → Claude Vision analisa screenshots e identifica cada componente (Hero, Card, Nav, Footer, CTA, etc.)"
-        who: "@ux"
+        command: "@ux-design-expert → Claude Vision analisa screenshots e identifica cada componente (Hero, Card, Nav, Footer, CTA, etc.)"
+        who: "@ux-design-expert"
         required: true
         xp: 15
         scan_rule: "has_file_matching('design-system/components/*') OR has_file_matching('design-system/**/component-catalog*')"
@@ -353,8 +352,8 @@ phases:
 
       - id: "2.6"
         label: "Documentar anti-patterns"
-        command: "@ux → catalogar o que NÃO funciona — erros comuns, patterns datados, problemas de a11y"
-        who: "@ux"
+        command: "@ux-design-expert → catalogar o que NÃO funciona — erros comuns, patterns datados, problemas de a11y"
+        who: "@ux-design-expert"
         required: false
         xp: 10
         scan_rule: "has_file_matching('design-system/anti-patterns/*')"
@@ -493,8 +492,8 @@ phases:
 
       - id: "4.7"
         label: "Acessibilidade"
-        command: "@ux + /design squad (Dave Malouf) → aria-labels, focus-visible, contrast ratios, keyboard nav, WCAG 2.1 AA"
-        who: "@ux"
+        command: "@ux-design-expert + /design squad (Dave Malouf) → aria-labels, focus-visible, contrast ratios, keyboard nav, WCAG 2.1 AA"
+        who: "@ux-design-expert"
         required: true
         xp: 15
         scan_rule: "has_content_matching('**/components/**', 'aria-') OR has_content_matching('**/components/**', 'focus-visible')"
@@ -636,8 +635,8 @@ phases:
 
       - id: "7.2"
         label: "Conectar com Figma (Code Connect)"
-        command: "@ux → Figma MCP mapear componentes code ↔ design"
-        who: "@ux"
+        command: "@ux-design-expert → Figma MCP mapear componentes code ↔ design"
+        who: "@ux-design-expert"
         required: false
         xp: 15
         condition: "se usa Figma"

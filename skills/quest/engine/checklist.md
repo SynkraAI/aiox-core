@@ -54,8 +54,17 @@ items:
 | `done` | `{ status: done, completed_at: <ISO 8601 UTC> }` |
 | `skipped` | `{ status: skipped, note: <string> }` |
 | `detected` | `{ status: detected, detected_at: <ISO 8601 UTC> }` |
+| `unused` | `{ status: unused }` |
 
 **Note on `detected`:** Used by scan for items in LOCKED phases. When an item is auto-detected in a phase that hasn't been unlocked yet (via Integration Gate), it's marked `detected` instead of `done`. When the phase is finally unlocked (Integration Gate passes), all `detected` items in that phase are automatically promoted to `done`. This prevents scan from bypassing the Integration Gate.
+
+**Note on `unused`:** For items that do not apply to this project at all. Different from `skipped` (which is a conscious decision to bypass an applicable item). `unused` means the item has no meaning in this project's context — like a "database review" item in a project with no database. Unused items:
+- Do NOT count toward `items_total` (excluded from progress calculation)
+- Do NOT count toward `percent`
+- Do NOT block phase unlock (treated as if they don't exist)
+- Do NOT award XP
+- Are shown with a distinct visual indicator on the dashboard (not ✓ or -)
+- Can be set during first scan (when condition evaluates to "not applicable") or manually via `/quest unused {id}`
 
 ---
 
@@ -214,6 +223,21 @@ items:
 8. Detect newly unlocked achievements.
 9. Save quest-log.
 
+### unused {id}
+
+**Trigger:** User runs `/quest unused {id}` or engine determines item does not exist in this project.
+
+**Steps:**
+
+1. Validate that `{id}` exists in the pack's items. If not found, show: `"Item '{id}' não existe neste pack."` and abort.
+2. If `items[{id}].status` is `done`, show: `"Item '{id}' já está completo — não pode ser marcado como unused."` and abort.
+3. Set `items[{id}].status` to `unused`.
+4. Update `meta.last_updated`.
+5. Recalculate stats via xp-system.
+6. Save quest-log.
+
+**Note:** Unlike `skip`, `unused` does not ask for a reason — the item simply does not exist in this project's context. Unlike `skipped` items, `unused` items are excluded from `items_total` and `percent` calculations entirely.
+
 ---
 
 ## 5. Scan (Auto-detect)
@@ -322,6 +346,77 @@ Items with a `condition` field require special handling.
 6. Write `.aios/quest-log.yaml`.
 7. Rename `.aios/pipeline-checklist.yaml` to `.aios/pipeline-checklist.yaml.bak`.
 8. Show message: `"Quest log migrado com sucesso! Formato antigo salvo em pipeline-checklist.yaml.bak"`
+
+---
+
+## 7.5 Sub-items (Dynamic Expansion)
+
+Sub-items allow a single pack item to expand into multiple trackable tasks when a project needs more granularity. Think of them as "child missions" under a parent point on the map.
+
+### Format
+
+Sub-items use a three-part ID: `{parent_id}.{sub_id}`, where `parent_id` is the pack item ID and `sub_id` is a sequential identifier (1, 2, 3...) or a label (M8, M9...).
+
+```yaml
+# Quest-log example with sub-items:
+items:
+  "4.2": { status: done, completed_at: "2026-03-20T..." }
+  "4.2.M8": { status: done, completed_at: "2026-03-28T...", sub_of: "4.2", label: "Implementar stories M8" }
+  "4.2.M9": { status: pending, sub_of: "4.2", label: "Implementar stories M9" }
+  "4.3.M8": { status: done, completed_at: "2026-03-28T...", sub_of: "4.3", label: "Lint + typecheck M8" }
+```
+
+### Creating sub-items
+
+**Command:** `/quest sub {parent_id} {label}`
+
+**Steps:**
+
+1. Validate that `{parent_id}` exists in the pack's items.
+2. Generate the next sub-item ID:
+   - Find all existing items matching `{parent_id}.*` in quest-log
+   - Next ID = `{parent_id}.{count + 1}` (e.g., `4.2.1`, `4.2.2`)
+   - If user provides a suffix (e.g., `/quest sub 4.2 M8`), use `{parent_id}.{suffix}` instead
+3. Add to quest-log: `{ status: pending, sub_of: "{parent_id}", label: "{label}" }`
+4. Sub-items inherit `xp`, `who`, `required` from the parent item in the pack (but `required` defaults to `false` for sub-items)
+5. XP for sub-items = `round(parent.xp * 0.5)` (half the parent's XP, to avoid inflation)
+6. Save quest-log
+
+**Batch creation:** `/quest sub {parent_id} M8 M9 M10` creates multiple sub-items at once.
+
+### How sub-items affect calculations
+
+| Aspect | Behavior |
+|--------|----------|
+| `items_total` | Sub-items ARE counted (they are real work) |
+| `items_done` | Sub-items with `done` status ARE counted |
+| `percent` | Sub-items contribute to progress |
+| XP | Sub-items award `round(parent.xp * 0.5)` each |
+| Phase unlock | Sub-items do NOT block phase unlock (only pack items do) |
+| Streak | Sub-items ARE counted in streak |
+| Achievements | Sub-items contribute to conditions like `all_items_done` |
+
+### How sub-items appear on dashboard
+
+Sub-items are grouped under their parent point on the map. The parent point shows:
+- Its own status (done/pending/skipped)
+- A small badge with sub-item count: `3/5` (done/total)
+- Expanding the parent reveals the sub-items list
+
+In the CLI status view, sub-items are indented under the parent:
+```
+[x] 4.2  Implementar story .......................... +50 XP
+    [x] 4.2.M8  Implementar stories M8 .............. +25 XP
+    [ ] 4.2.M9  Implementar stories M9 .............. +25 XP
+```
+
+### Detecting sub-items
+
+An item ID is a sub-item if:
+- It has 3+ parts when split by `.` (e.g., `4.2.M8` → `["4", "2", "M8"]`)
+- OR it has a `sub_of` field in the quest-log
+
+The parent ID is reconstructed by taking the first two parts: `4.2.M8` → parent `4.2`.
 
 ---
 

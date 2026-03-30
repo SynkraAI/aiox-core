@@ -62,9 +62,11 @@ function is_phase_unlocked(phase_index, pack, quest_log):
   previous_phase = pack.phases[phase_index - 1]
   for item in previous_phase.items:
     if item.required == true:
-      if quest_log.items[item.id].status != "done":
+      item_status = quest_log.items[item.id].status
+      // "unused" items are excluded — they don't exist in this project
+      if item_status != "done" AND item_status != "unused":
         return false
-  // NEW: Integration gate — verify prior phase outputs actually work
+  // Integration gate — verify prior phase outputs actually work
   if NOT verify_phase_integration(phase_index, pack, quest_log):
     return false
   return true
@@ -560,6 +562,7 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
 | `done` | `[x]` |
 | `pending` | `[ ]` |
 | `skipped` | `[-]` |
+| `unused` | `[·]` |
 
 ### Progress Bar
 

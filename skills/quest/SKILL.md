@@ -2,7 +2,7 @@
 name: quest
 description: Quest Engine — orchestrates gamified development journeys via packs
 allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, Agent]
-argument-hint: "[start] | check <id> | skip <id> | scan | status"
+argument-hint: "check <id> | skip <id> | scan | status"
 version: "2.0.0"
 category: orchestration
 ---
@@ -85,10 +85,11 @@ Add project to `~/.aios/quest-registry.yaml`. Create dir/file if needed.
 
 ### Step 6 — Dashboard
 
-Start dashboard in background (optional, never block). The server auto-detects if port is already in use and exits gracefully — safe to call from multiple projects:
+Start dashboard + Cloudflare Tunnel in background (idempotent — skips what's already running):
 ```
-Bash("node ~/aios-core/skills/quest/dashboard/server.js", run_in_background=true)
+Bash("~/aios-core/skills/quest/dashboard/tunnel.sh start", run_in_background=true)
 ```
+Public URL: https://quest.fosc.me (requires local server + tunnel active)
 
 ### Step 7 — Create quest-log
 
@@ -108,6 +109,8 @@ If the user provides arguments after the skill name:
 |-------|--------|
 | `check <id>` | Read `.aios/quest-log.yaml` + pack YAML + `engine/checklist.md` → execute check |
 | `skip <id>` | Read `.aios/quest-log.yaml` + pack YAML + `engine/checklist.md` → execute skip |
+| `unused <id>` | Read `.aios/quest-log.yaml` + pack YAML + `engine/checklist.md` → mark as unused |
+| `sub <parent_id> <label>` | Read `.aios/quest-log.yaml` + pack YAML + `engine/checklist.md` → create sub-item |
 | `scan` | Read `.aios/quest-log.yaml` + pack YAML + `engine/checklist.md` → execute scan |
 | `status` | Read `.aios/quest-log.yaml` + pack YAML + `engine/guide.md` → show summary |
 

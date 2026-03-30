@@ -63,10 +63,17 @@ pack:
   id: string         # REQUIRED
   version: string    # REQUIRED
   name: string       # REQUIRED
+  type: string       # OPTIONAL — "expansion" for expansion packs (see §6.5.2)
+  parent_pack: string  # OPTIONAL — required if type is "expansion"
+  parent_item: string  # OPTIONAL — required if type is "expansion"
 detection:
   rules: []          # REQUIRED (array, can be empty)
+  prerequisites: []  # OPTIONAL — conditions that must be true for the pack to work (see §6.5.1)
+  fallback_question: string  # OPTIONAL — shown when no pack auto-detects
 levels: {}           # REQUIRED (map keyed by level number)
+achievements: []     # OPTIONAL (array of achievement objects)
 phases: {}           # REQUIRED (map keyed by phase index: 0, 1, 2, ...)
+sub_quests: []       # OPTIONAL — P1, not yet consumed by engine. Array of { pack, trigger, optional }
   # Each phase (keyed by index) supports:
   #   name: string (REQUIRED)
   #   description: string
@@ -80,6 +87,19 @@ phases: {}           # REQUIRED (map keyed by phase index: 0, 1, 2, ...)
   #     Types: "command" (runs shell, expects exit 0), "file_exists" (glob match)
   #     See guide.md section 2.5 for full spec.
   #   items: [] (REQUIRED — array of item objects within the phase)
+  #     Each item MUST have:
+  #       id: string        (REQUIRED — unique across all phases, e.g. "0.1", "3.2")
+  #       label: string     (REQUIRED — human-readable mission name)
+  #       command: string   (REQUIRED — instruction for the player)
+  #       who: string       (REQUIRED — "user", "@agent-name", "skill", "squad", or "agente")
+  #       required: boolean (REQUIRED — true if mandatory for phase progression)
+  #       xp: number        (REQUIRED — XP awarded on completion)
+  #     Optional item fields:
+  #       tip: string       (contextual hint shown in mission card)
+  #       condition: string (human-readable condition for applicability)
+  #       scan_rule: string (scanner function expression for auto-detection)
+  #       note: string      (internal note, not shown to player)
+  #       per_agent: boolean (P1 — repeat per agent, not yet implemented)
 ```
 
 **Validation procedure:**
@@ -89,6 +109,8 @@ phases: {}           # REQUIRED (map keyed by phase index: 0, 1, 2, ...)
 3. Check `detection` exists and has `rules` (array)
 4. Check `levels` exists and is a map
 5. Check `phases` exists and is a map (keyed by phase index: 0, 1, 2, ...)
+6. For each phase, check `items` is an array with at least one item
+7. For each item, check required fields exist: `id` (string), `label` (string), `command` (string), `who` (string), `required` (boolean), `xp` (number)
 
 If validation fails, **do NOT evaluate** that pack. Record the error:
 
@@ -146,15 +168,38 @@ Bash("git remote -v")  →  parse output for "{name}"
 
 Use the result already fetched in context detection (Section 2) when possible.
 
-#### `has_content('file', 'regex')`
+#### `has_content('file_or_glob', 'regex')`
 
-Check if a file contains content matching the regex.
+Check if a file (or files matching a glob) contains content matching the regex.
+
+If the path contains wildcards (`*`, `**`), use Grep with glob parameter.
+If the path is a literal file, use Grep with path parameter.
 
 ```
+// Literal file path:
 Grep(pattern="{regex}", path="{file}")  →  result.length > 0
+
+// Glob pattern (contains * or **):
+Grep(pattern="{regex}", glob="{glob}")  →  result.length > 0
 ```
 
-If the file does not exist, return `false` (do not error).
+If the file does not exist (or glob matches nothing), return `false` (do not error).
+
+#### `has_content_matching('glob', 'regex')`
+
+Check if any file matching the glob contains content matching the regex. Alias for `has_content` with a glob pattern — exists for clarity in pack scan_rules.
+
+```
+Grep(pattern="{regex}", glob="{glob}")  →  result.length > 0
+```
+
+#### `command_exists('name')`
+
+Check if a command is available in PATH.
+
+```
+Bash("command -v {name} && echo EXISTS || echo NO")  →  output contains "EXISTS"
+```
 
 #### `file_count('glob') > N`
 
