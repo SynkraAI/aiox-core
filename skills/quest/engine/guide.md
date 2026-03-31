@@ -324,9 +324,9 @@ Triggered when an item is marked `done`. Scale the celebration by the item's XP 
 
 ### 4.2 World Complete
 
-Triggered when ALL items in a phase have status `done`, `skipped`, or `unused` (no `pending` items remain). Uses the `complete_message` from the pack phase metadata. Items with status `unused` don't count as pending — they're excluded from the project.
+Triggered when ALL items in `resolved_items` for a phase (pack items + valid sub-items) have status `done`, `skipped`, or `unused` (no `pending` items remain). Uses the `complete_message` from the pack phase metadata. Items with status `unused` don't count as pending — they're excluded from the project.
 
-**CRITICAL GUARD:** Only show World Complete when the ENTIRE phase is finished — every single item must be `done`, `skipped`, or `unused`. Completing one item in a phase does NOT trigger this. Check the count: if `pending_count_in_phase > 0`, do NOT show World Complete. Items with status `unused` are excluded from pending count — they don't exist in this project. The "PRÓXIMO WORLD DESBLOQUEADO" block below is part of the World Complete celebration — it must NEVER appear independently or before the current world is fully complete.
+**CRITICAL GUARD:** Only show World Complete when the ENTIRE phase is finished — every single item AND valid sub-item in `resolved_items` for that phase must be `done`, `skipped`, or `unused`. Completing one item in a phase does NOT trigger this. Check the count: if `pending_count_in_resolved_items_for_phase > 0`, do NOT show World Complete. Items with status `unused` are excluded from pending count — they don't exist in this project. The "PRÓXIMO WORLD DESBLOQUEADO" block below is part of the World Complete celebration — it must NEVER appear independently or before the current world is fully complete.
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -386,7 +386,7 @@ If `xp_bonus` is 0 or absent, omit the bonus line.
 
 ### 4.5 Final Victory
 
-Triggered when ALL phases are complete (no pending items in any phase). Output this template EXACTLY (replacing placeholders):
+Triggered when ALL phases are complete (no pending items in `resolved_items` across any phase — including valid sub-items). Output this template EXACTLY (replacing placeholders):
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -556,9 +556,11 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
 
 | Phase state | Display |
 |-------------|---------|
-| All items done/skipped/unused | `COMPLETE` — collapsed, one line |
-| Has pending items AND is unlocked | `← VOCE ESTA AQUI` — expanded with all items |
-| Previous phase has pending required items | `LOCKED` — collapsed, one line |
+| All items in `resolved_items` done/skipped/unused | `COMPLETE` — collapsed, one line |
+| Has pending items AND `is_phase_unlocked()` returns true (§2) | `← VOCE ESTA AQUI` — expanded with all items |
+| `is_phase_unlocked()` returns false (required items pending OR Integration Gate not passed) | `LOCKED` — collapsed, one line |
+
+**CRITICAL:** Phase state MUST be derived from the same `is_phase_unlocked()` predicate used in §2 for next-mission selection. This includes BOTH conditions: (a) all required items in the previous phase are `done`/`unused`, AND (b) `verify_phase_integration()` passes for the prior phase. If either condition fails, the phase is `LOCKED`. For pure rendering (no interactive gate), check `quest_log.integration_results[phase_index]` — if the entry exists and `passed == true`, the gate is satisfied; otherwise, the phase remains locked.
 
 ### Item Status Icons
 

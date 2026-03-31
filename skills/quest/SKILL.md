@@ -2,7 +2,7 @@
 name: quest
 description: Quest Engine — orchestrates gamified development journeys via packs
 allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, Agent]
-argument-hint: "check <id> | skip <id> | scan | status"
+argument-hint: "check <id> | skip <id> | unused <id> | sub <parent_id> <label> | scan | status"
 version: "2.0.0"
 category: orchestration
 ---
