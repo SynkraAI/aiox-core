@@ -573,15 +573,17 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
 
 ```
 function progress_bar(done, skipped, total):
+  if total <= 0:
+    return "░" * 16          // world with all items unused → empty bar, 0%
   filled = round((done + skipped) / total * 16)
   return "█" * filled + "░" * (16 - filled)
 ```
 
 ---
 
-## 6. Summary View (`/quest summary`)
+## 6. Summary View (variant of `/quest status`)
 
-Compact one-line-per-phase view with overall stats.
+Compact one-line-per-phase view with overall stats. This is NOT a separate command — it is rendered as part of `/quest status` when the engine determines that a compact overview is more useful (e.g., many phases). The entrypoint routes `status` to guide.md; the guide decides whether to show the expanded view (§5) or this summary.
 
 **IMPORTANT:** This view MUST use the `progress_bar()` function from section 5 (16-char bar with `█` and `░`). Do NOT substitute with `[done/total]` or any other format — the progress bar is mandatory here.
 
@@ -686,5 +688,6 @@ If the same mission is shown 3+ times without progress ({hero_name} keeps saying
 - **All items done:** Trigger Final Victory (section 4.5).
 - **Pack has no phases:** Show: "Este pack não tem missões definidas."
 - **Phase has no items:** Skip the phase, treat as complete for unlock purposes.
+- **Phase with all items `unused` (total = 0):** Render progress bar as `░░░░░░░░░░░░░░░░` (empty), show `0/0` and `0%`. Never divide by zero — the `progress_bar()` guard in §5 handles this.
 - **Item exists in pack but not in quest-log:** Treat as `pending` (checklist module adds it on next save).
 - **Quest-log item not in pack:** Ignore it — do not display.

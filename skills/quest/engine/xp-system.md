@@ -17,10 +17,46 @@ You receive two data sources:
 
 First calculate the XP earned from completed items only. This value is used by achievement conditions that explicitly say "before achievement bonuses".
 
+### 2.0 Resolve item list (pack items + sub-items)
+
+Sub-items live only in the quest-log (see checklist.md §7.5). Before any XP, counter, or streak calculation, build a **resolved item list** that merges pack items with quest-log sub-items:
+
+```
+resolved_items = []
+
+// 1. Add all pack items (they define xp, required, phase, etc.)
+for each phase in pack.phases:
+  for each item in phase.items:
+    resolved_items.append({
+      id:       item.id,
+      xp:       item.xp,
+      required: item.required,
+      phase:    phase_index,
+      source:   "pack"
+    })
+
+// 2. Add sub-items from quest-log (detected by sub_of field or 3-part id)
+for each id, entry in quest_log.items:
+  if entry.sub_of is defined:
+    parent = find item in pack where id == entry.sub_of
+    if parent:
+      resolved_items.append({
+        id:       id,
+        xp:       round(parent.xp * 0.5),   // checklist.md §7.5 rule
+        required: false,                      // sub-items never block phase unlock
+        phase:    parent.phase_index,
+        source:   "sub-item"
+      })
+```
+
+**All sections below (§2, §4, §5) MUST iterate `resolved_items` instead of `pack.phases[*].items`.** Phase-scoped conditions (§7: `all_required_done_in_phase`, `all_items_done_in_phase`, `phase_done_same_day`) continue to use pack items only for the `required` gate but include sub-items for progress and XP within that phase.
+
+### 2.0.1 XP calculation
+
 ```
 base_item_xp = 0
 
-for each item in pack.phases[*].items:
+for each item in resolved_items:
   if quest_log.items[item.id].status == "done":
     base_item_xp += item.xp
 ```
@@ -73,20 +109,21 @@ for each level_num in levels (sorted by xp ascending):
 
 ## 4. Calculate `streak`
 
-Streak counts consecutive items completed without a skip, reading items in order from the most recent backward.
+Streak counts consecutive items completed without a skip, reading items in order from the most recent backward. Uses the `resolved_items` list from §2.0 (pack items + sub-items).
 
 Rules:
-1. Flatten all items from all phases in pack order (phase 0 items first, then phase 1, etc.)
+1. Use `resolved_items` (§2.0) sorted in pack order (phase 0 items first, then phase 1; sub-items appear after their parent within the same phase)
 2. Filter to items that have status `done` or `skipped` (ignore `pending`)
 3. Walk backward from the last completed/skipped item
 4. Count consecutive `done` items until you hit a `skipped` item or run out of items
 5. That count is the streak
 
 ```
-resolved_items = [items with status done or skipped, in pack order]
+active_items = [item for item in resolved_items
+                where quest_log.items[item.id].status in ("done", "skipped")]
 streak = 0
-for item in reversed(resolved_items):
-  if item.status == "done":
+for item in reversed(active_items):
+  if quest_log.items[item.id].status == "done":
     streak += 1
   else:  # skipped
     break
@@ -98,15 +135,17 @@ If the last resolved item is `skipped`, streak = 0.
 
 ## 5. Calculate Counters
 
+Counters use the `resolved_items` list from §2.0 (pack items + sub-items):
+
 ```
-items_unused  = count of items with status "unused" in quest-log
-items_total   = count of ALL items across all phases in the pack MINUS items_unused
-items_done    = count of items with status "done" in quest-log
-items_skipped = count of items with status "skipped" in quest-log
+items_unused  = count of items in resolved_items with status "unused" in quest-log
+items_total   = len(resolved_items) MINUS items_unused
+items_done    = count of items in resolved_items with status "done" in quest-log
+items_skipped = count of items in resolved_items with status "skipped" in quest-log
 percent       = items_total > 0 ? round((items_done + items_skipped) / items_total * 100) : 0
 ```
 
-Note: `percent` reflects overall progress (done + skipped), not just done. Items with status `unused` are **excluded** from `items_total` — they don't exist in this project's context, so they don't count toward progress. This means a project with 67 pack items but 10 unused items has `items_total = 57`.
+Note: `percent` reflects overall progress (done + skipped), not just done. Items with status `unused` are **excluded** from `items_total` — they don't exist in this project's context, so they don't count toward progress. Sub-items are included in all counters (they represent real work — see checklist.md §7.5).
 
 ---
 
@@ -244,14 +283,13 @@ Parse N from the condition string (e.g., `"item_xp >= 500"` → N = 500).
 
 #### `all_items_done`
 
-ALL items across ALL phases have status `done`, `skipped`, or `unused`. No item is `pending` in any phase. Items with status `unused` are excluded — they don't block this condition.
+ALL items across ALL phases — **including sub-items** — have status `done`, `skipped`, or `unused`. No item is `pending`. Uses `resolved_items` from §2.0 so sub-items are covered. Items with status `unused` are excluded — they don't block this condition.
 
 ```
-for each phase in pack.phases:
-  for each item in phase.items:
-    status = quest_log.items[item.id].status
-    if status == "unused": continue
-    status must be "done" or "skipped"
+for each item in resolved_items:
+  status = quest_log.items[item.id].status
+  if status == "unused": continue
+  status must be "done" or "skipped"
 ```
 
 #### `all_required_done`
