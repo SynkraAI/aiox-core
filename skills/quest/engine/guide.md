@@ -587,8 +587,11 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
   Progresso do mundo: [{progress_bar}]  {percent}%
 
   WORLD {N}: {phase.name}                      [{done}/{total}]  LOCKED
+  [~] {id}  {label} .......................... (pré-detectado, aguardando unlock)
   WORLD {N}: {phase.name}                      [{done}/{total}]  LOCKED
 ```
+
+> **Note on `detected` items in LOCKED phases:** When a LOCKED phase contains items with status `detected` (pre-detected by scan before the phase was unlocked), they are shown inline with the `[~]` icon so the user can see progress already discovered behind the lock. `detected` items do NOT count toward the phase's `{done}` counter — they are promoted to `done` only when the phase is unlocked (see checklist.md §7.5 / scan flow).
 
 ### Rules
 
@@ -608,10 +611,11 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
 | `pending` | `[ ]` |
 | `skipped` | `[-]` |
 | `unused` | `[·]` |
+| `detected` | `[~]` |
 
 ### Progress Bar
 
-16-character bar: filled = done+skipped, empty = pending.
+16-character bar: filled = done+skipped, empty = pending/detected.
 
 ```
 // NOTE: `total` MUST exclude items with status `unused` — they don't exist

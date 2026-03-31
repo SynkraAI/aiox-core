@@ -90,11 +90,11 @@ Read the selected pack YAML → load phases, items, levels.
 Glob(".aios/pipeline-checklist.yaml")
 ```
 
-If found → Read `engine/checklist.md` → follow migration procedure BEFORE proceeding.
+If found → Read `engine/checklist.md` → follow migration procedure BEFORE proceeding. **Important:** migration returns the migrated data in memory but does NOT write `.aios/quest-log.yaml` yet — hero identity is still missing (see checklist.md §7, step 6).
 
 ### Step 4 — Ceremony
 
-Read `engine/ceremony.md` → generate full ceremony (title screen, loading, project card, welcome, action plan). Wait for user confirmation before continuing.
+Read `engine/ceremony.md` → generate full ceremony (title screen, loading, project card, welcome, action plan). Wait for user confirmation before continuing. This step collects `hero_name` and `hero_title`.
 
 ### Step 5 — Registry
 
@@ -110,7 +110,7 @@ Public URL: https://quest.fosc.me (requires local server + tunnel active)
 
 ### Step 7 — Create quest-log
 
-Read `engine/checklist.md` → create `quest-log.yaml` + run initial scan.
+Read `engine/checklist.md` → create `quest-log.yaml` + run initial scan. If Step 3 produced migration data, merge `hero_name`/`hero_title` from the ceremony (Step 4) into the migrated payload and write `.aios/quest-log.yaml` now (see checklist.md §7, step 6). If no migration, create a fresh quest-log as normal (checklist.md §2).
 
 ### Step 8 — First mission
 
