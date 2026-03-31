@@ -40,8 +40,10 @@ Find the next mission for the player. All data comes from the **pack YAML** (pha
 1. Iterate phases in order (0, 1, 2, ...)
 2. For each phase, check if it is UNLOCKED:
    - Phase 0 is always unlocked
-   - Phase N (N > 0) is unlocked when ALL items marked `required: true`
-     in phase N-1 have status `done` in the quest-log
+   - Phase N (N > 0) is unlocked only when:
+     a. ALL items marked `required: true` in phase N-1 have status `done`
+        or `unused` in the quest-log
+     b. `verify_phase_integration()` passes for the prior phase (see §2.5)
 3. In the first unlocked phase that has pending items:
    - Find the first item with status `pending` (in pack order)
    - If the item has a `condition` field:
@@ -690,4 +692,9 @@ If the same mission is shown 3+ times without progress ({hero_name} keeps saying
 - **Phase has no items:** Skip the phase, treat as complete for unlock purposes.
 - **Phase with all items `unused` (total = 0):** Render progress bar as `░░░░░░░░░░░░░░░░` (empty), show `0/0` and `0%`. Never divide by zero — the `progress_bar()` guard in §5 handles this.
 - **Item exists in pack but not in quest-log:** Treat as `pending` (checklist module adds it on next save).
-- **Quest-log item not in pack:** Ignore it — do not display.
+- **Quest-log item not in pack:** Ignore orphaned legacy items, but DO display valid sub-items (detected via `sub_of` field or 3+ dot-separated ID parts). Render each valid sub-item indented under its parent in the status view:
+  ```
+  [x] 4.2  Implementar story .......................... +50 XP
+      [x] 4.2.M8  Implementar stories M8 .............. +25 XP
+      [ ] 4.2.M9  Implementar stories M9 .............. +25 XP
+  ```

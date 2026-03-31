@@ -207,8 +207,11 @@ items:
 
 **Steps:**
 
-1. Validate that `{id}` exists in the pack's items. If not found, show: `"Item '{id}' não existe neste pack."` and abort.
-2. **Phase lock guard:** Determine which phase the item belongs to. Use `is_phase_unlocked(phase_index, pack, quest_log)` from `guide.md` §2 to check if the phase is accessible. This function checks BOTH required items in the previous phase AND the Integration Gate (`verify_phase_integration`). If the phase is LOCKED (function returns `false`), BLOCK the check and show:
+1. Resolve `{id}` in this order:
+   - If it exists in the pack's items, use it directly.
+   - Else if it exists in `quest_log.items` and is a valid sub-item (has `sub_of` field or 3+ dot-separated parts), resolve its parent via `sub_of` or the first two ID segments. Use the parent's phase/lock context for subsequent checks.
+   - Else show: `"Item '{id}' não existe neste pack ou quest-log."` and abort.
+2. **Phase lock guard:** Determine which phase the item (or its resolved parent) belongs to. Use `is_phase_unlocked(phase_index, pack, quest_log)` from `guide.md` §2 to check if the phase is accessible. This function checks BOTH required items in the previous phase AND the Integration Gate (`verify_phase_integration`). If the phase is LOCKED (function returns `false`), BLOCK the check and show:
    ```
    ⛔ World {N} ({phase.name}) está trancado.
    Complete as missões obrigatórias do World {current_world} primeiro.
@@ -230,8 +233,8 @@ items:
 
 **Steps:**
 
-1. Validate that `{id}` exists in the pack's items. If not found, show: `"Item '{id}' não existe neste pack."` and abort.
-2. **Phase lock guard:** Same rule as `check` — use `is_phase_unlocked(phase_index, pack, quest_log)` from `guide.md` §2 (checks both required items AND Integration Gate). If LOCKED, BLOCK and show the same message. Abort.
+1. Resolve `{id}` using the same resolution order as `check` (step 1): pack items first, then quest-log sub-items, else abort with `"Item '{id}' não existe neste pack ou quest-log."`.
+2. **Phase lock guard:** Same rule as `check` — use `is_phase_unlocked(phase_index, pack, quest_log)` from `guide.md` §2 (checks both required items AND Integration Gate) against the resolved item's phase (or parent's phase for sub-items). If LOCKED, BLOCK and show the same message. Abort.
 3. Ask for a reason: `"Motivo do skip (opcional):"`. If user provides text, use it. If empty, use `"Skipped by user"`.
 4. Set `items[{id}].status` to `skipped`.
 5. Set `items[{id}].note` to the reason.
@@ -246,7 +249,7 @@ items:
 
 **Steps:**
 
-1. Validate that `{id}` exists in the pack's items. If not found, show: `"Item '{id}' não existe neste pack."` and abort.
+1. Resolve `{id}` using the same resolution order as `check` (step 1): pack items first, then quest-log sub-items, else abort with `"Item '{id}' não existe neste pack ou quest-log."`.
 2. If `items[{id}].status` is `done`, show: `"Item '{id}' já está completo — não pode ser marcado como unused."` and abort.
 3. Set `items[{id}].status` to `unused`.
 4. Update `meta.last_updated`.
