@@ -226,7 +226,7 @@ items:
 5. Update `meta.last_updated`.
 6. Recalculate stats via xp-system (see `engine/xp-system.md`, section 9 — Execution Order).
 7. Detect newly unlocked achievements (returned by xp-system).
-8. Show celebration messages (from xp-system celebration templates).
+8. Return celebration data (achievements, level changes, stats) to guide.md §4 for rendering.
 9. Save quest-log.
 
 ### skip {id}

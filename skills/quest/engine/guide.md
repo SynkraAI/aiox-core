@@ -95,8 +95,10 @@ function verify_phase_integration(phase_index, pack, quest_log):
   // 1. Check if phase has integration_checks defined
   checks = previous_phase.integration_checks
   if checks is empty or undefined:
-    // Fallback: ask the user explicitly
-    return ask_integration_question(previous_phase, pack, quest_log)
+    // Fallback: ask the user explicitly, but ALWAYS persist result
+    user_said_yes = ask_integration_question(previous_phase, pack, quest_log)
+    log_integration_result(phase_index, [], quest_log, user_said_yes)
+    return user_said_yes
 
   // 2. Run each integration check, collecting results
   checks_ran = []
@@ -426,7 +428,7 @@ Triggered when ALL phases are complete (no pending items in `resolved_items` acr
 
 ### 4.6 MVP Launch Guide
 
-Triggered when a phase with `milestone: "mvp"` has all items marked `done` or `skipped`. This runs **BEFORE** the World Complete celebration — it's a validation + walkthrough gate.
+Triggered when a phase with `milestone: "mvp"` has all items marked `done`, `skipped`, or `unused`. Items with status `unused` are excluded from the project and don't block this gate — consistent with World Complete (§4.2), Final Victory (§4.5), and xp-system achievement conditions. This runs **BEFORE** the World Complete celebration — it's a validation + walkthrough gate.
 
 **Purpose:** The user just built something. Now they need to experience it AND verify it works end-to-end. This is NOT just a celebration — it's a practical walkthrough that also serves as the final integration check. Think of it as handing over the car keys, showing the ignition, AND taking a test drive together.
 
