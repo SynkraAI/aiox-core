@@ -554,7 +554,7 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
 
 | Phase state | Display |
 |-------------|---------|
-| All items done/skipped | `COMPLETE` — collapsed, one line |
+| All items done/skipped/unused | `COMPLETE` — collapsed, one line |
 | Has pending items AND is unlocked | `← VOCE ESTA AQUI` — expanded with all items |
 | Previous phase has pending required items | `LOCKED` — collapsed, one line |
 

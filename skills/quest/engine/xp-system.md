@@ -37,8 +37,12 @@ for each phase in pack.phases:
 
 // 2. Add sub-items from quest-log (detected by sub_of field or 3-part id)
 for each id, entry in quest_log.items:
-  if entry.sub_of is defined:
-    parent = find item in pack where id == entry.sub_of
+  parent_id = entry.sub_of
+  if parent_id is undefined AND id has 3+ dot-separated parts:
+    parent_id = first_two_parts(id)   // e.g. "4.2.M8" → "4.2"
+
+  if parent_id is defined:
+    parent = find item in pack where id == parent_id
     if parent:
       resolved_items.append({
         id:       id,

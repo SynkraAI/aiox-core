@@ -112,7 +112,7 @@ If the user provides arguments after the skill name:
 | `unused <id>` | Read `.aios/quest-log.yaml` + pack YAML + `engine/checklist.md` → mark as unused |
 | `sub <parent_id> <label>` | Read `.aios/quest-log.yaml` + pack YAML + `engine/checklist.md` → create sub-item |
 | `scan` | Read `.aios/quest-log.yaml` + pack YAML + `engine/checklist.md` → execute scan |
-| `status` | Read `.aios/quest-log.yaml` + pack YAML + `engine/guide.md` → show summary |
+| `status` | Read `.aios/quest-log.yaml` + pack YAML + `engine/guide.md` → show status |
 
 ---
 
