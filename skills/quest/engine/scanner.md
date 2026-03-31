@@ -63,6 +63,7 @@ pack:
   id: string         # REQUIRED
   version: string    # REQUIRED
   name: string       # REQUIRED
+  tagline: string    # REQUIRED
   keywords: [string] # OPTIONAL — array of strings for text-match selection (§6, args.text flow)
   type: string       # OPTIONAL — "expansion" for expansion packs (see §6.5.2)
   parent_pack: string  # OPTIONAL — required if type is "expansion"
@@ -84,8 +85,11 @@ sub_quests: []       # OPTIONAL — P1, not yet consumed by engine. Array of { p
   #     When present, triggers special ceremonies on phase completion.
   #     "mvp" triggers the MVP Launch Guide (guide.md section 4.6).
   #   integration_checks: [] (OPTIONAL — list of checks run before unlocking next phase)
-  #     Each check: { name, type, command|glob }
-  #     Types: "command" (runs shell, expects exit 0), "file_exists" (glob match)
+  #     Each check: { name, type, command?|glob?|url? }
+  #     Types:
+  #       - "command"     -> command  (runs shell, expects exit 0)
+  #       - "file_exists" -> glob     (glob match)
+  #       - "endpoint"    -> url      (P1, warn-and-skip — see guide.md §2.5)
   #     See guide.md section 2.5 for full spec.
   #   items: [] (REQUIRED — array of item objects within the phase)
   #     Each item MUST have:
@@ -106,7 +110,7 @@ sub_quests: []       # OPTIONAL — P1, not yet consumed by engine. Array of { p
 **Validation procedure:**
 
 1. Check `pack` exists and is a map
-2. Check `pack.id`, `pack.version`, `pack.name` exist and are non-empty strings
+2. Check `pack.id`, `pack.version`, `pack.name`, `pack.tagline` exist and are non-empty strings
 2.5. If `pack.type == "expansion"`: require non-empty `pack.parent_pack` (string) and non-empty `pack.parent_item` (string). If either is missing, add them to the missing-fields list and fail validation for this pack — do NOT evaluate detection rules or post-selection gates.
 3. Check `detection` exists and has `rules` (array)
 4. Check `levels` exists and is a map

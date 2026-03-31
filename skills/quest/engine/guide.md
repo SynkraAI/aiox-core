@@ -155,7 +155,7 @@ If a pack defines an `endpoint` integration check, show this message and skip th
 
 ```
 ⚠️  Check '{check.name}' usa tipo 'endpoint' que ainda não é suportado.
-    Verifique manualmente: {check.command}
+    Verifique manualmente: {check.url}
     (Este tipo será implementado em versão futura.)
 ```
 
@@ -719,7 +719,7 @@ After showing a mission card, the engine waits for the player to act. This secti
        - If "n":
          - Fall through to step 2c
 
-   2c. Manual flow (who == "user", who == "squad", or fallback):
+   2c. Manual flow (who == "user", or fallback):
        - Engine waits — {hero_name} goes to execute the mission
        - When {hero_name} returns, ask:
          "Completou a missão {item.id}? (s/n)"
