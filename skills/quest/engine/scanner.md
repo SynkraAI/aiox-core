@@ -298,9 +298,11 @@ If `args.pack` is provided (`--pack <id>`):
 
 1. Search for `packs/{id}.yaml` in the skill root
 2. If found → Read and validate schema (Section 3.2)
-3. If valid → **return immediately** as selected pack (skip detection)
+3. If valid → **proceed to §6.5 Post-selection Gates** (skip detection, but NOT the gates)
 4. If not found → error: `Pack "{id}" not found. Available packs: {list}`
 5. If invalid schema → error with missing fields (Section 3.2)
+
+> **Important:** The override skips auto-detection (Section 4) and decision logic (Section 6), but the pack MUST still pass the post-selection gates (§6.5) before being returned. This ensures prerequisites and expansion-pack constraints are always enforced.
 
 ---
 

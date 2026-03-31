@@ -82,6 +82,8 @@ items:
    - `project_path`: absolute path of cwd
    - `pack`: value of `pack.id` from the pack YAML
    - `pack_version`: value of `pack.version` from the pack YAML
+   - `hero_name`: value collected by ceremony (REQUIRED — do not create quest-log without it)
+   - `hero_title`: value collected by ceremony (empty string `""` if user opted out)
    - `created`: current datetime (ISO 8601 UTC)
    - `last_updated`: same as `created`
 3. Build the `items` map: iterate ALL phases in the pack, for each item add an entry keyed by `item.id` with `{ status: pending }`.
@@ -352,7 +354,7 @@ Items with a `condition` field require special handling.
 |----------------------------|-------------------|
 | `project` | `meta.project` |
 | — | `meta.project_path` = cwd absolute path |
-| — | `meta.pack` = `"app-development"` |
+| — | `meta.pack` = pack.id from the currently loaded pack |
 | — | `meta.pack_version` = pack's current version |
 | `created` | `meta.created` |
 | `last_updated` | `meta.last_updated` |
