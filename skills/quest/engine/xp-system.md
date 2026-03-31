@@ -166,6 +166,7 @@ stats:
   items_done: <calculated>
   items_total: <calculated>
   items_skipped: <calculated>
+  items_unused: <calculated>
   percent: <calculated>
 ```
 
@@ -356,9 +357,8 @@ When the engine calls the XP system (after any status change), execute in this e
 5. Calculate final `total_xp` including all unlocked achievement bonuses (section 2.1)
 6. Determine `level` and `level_name` from final `total_xp` (section 3)
 7. Assemble stats object (section 6)
-8. Compare with previous stats to determine celebrations (section 8)
-9. Write updated stats and achievements to quest-log
-10. Return `{ stats, newly_unlocked, celebrations }`
+8. Write updated stats and achievements to quest-log
+9. Return `{ stats, newly_unlocked, level_changed, old_level, new_level }` to the calling module. The caller passes this data to guide.md §4, which determines and renders appropriate celebrations (including World Complete and Final Victory, which require per-phase resolved_items checks that xp-system does not perform). This is the ONLY return point — xp-system never returns `celebrations` (that is guide.md's responsibility)
 
 ---
 

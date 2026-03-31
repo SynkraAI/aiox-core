@@ -59,6 +59,8 @@ Find the next mission for the player. All data comes from the **pack YAML** (pha
    c. If NO pending items exist in ANY phase (unlocked or locked) → quest is complete
 ```
 
+**Note:** Sub-items (3-part IDs from checklist.md §7.5) are NOT candidates for next mission selection. They are tracked for progress but must be managed manually by the user via `/quest check {sub_id}`.
+
 ### Phase Unlock Check
 
 ```
@@ -256,7 +258,7 @@ function log_integration_result(phase_index, checks_ran, quest_log, passed):
 - **NEVER skip** integration gate — it's mandatory
 - If user says "tudo funciona" but the command check fails, **trust the command**, not the user
 - Integration checks run EVERY TIME a phase unlock is attempted (not cached), but results ARE logged for auditability
-- If a check fails, the user can fix and try again (`/quest scan` re-triggers)
+- If a check fails, the user can fix the issue and try again by advancing to the next mission (which re-runs `is_phase_unlocked()` → `verify_phase_integration()`). `/quest scan` is observational and does NOT re-execute the Integration Gate
 
 ---
 
@@ -276,6 +278,9 @@ When showing the next mission, display this card. ALL fields come from the pack 
   OBRIGATÓRIO: {item.required ? "Sim" : "Não"}
   MUNDO: {phase_index} — {phase.name}
 
+  EXECUÇÃO:
+  {resolve_execution_display(item, pack)}
+
   DICA: {item.tip || phase.description || "Sem dica adicional."}
 
   QUANDO TERMINAR:
@@ -287,6 +292,28 @@ When showing the next mission, display this card. ALL fields come from the pack 
   SE QUER PULAR MESMO ASSIM:
   /quest skip {item.id}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+### Execution Display Resolution
+
+The `EXECUÇÃO` field is resolved by reading `engine/forge-bridge.md` and calling `should_use_forge(item)`:
+
+```
+function resolve_execution_display(item, pack):
+  // Read forge-bridge.md (lazy-loaded — only when rendering a mission card)
+
+  if should_use_forge(item):
+    command = build_forge_command(item, pack, quest_log)
+    return "🔨 Forge: " + command.args
+
+  if item.command starts with "/":
+    return "⚡ Skill: " + item.command
+
+  if item.who == "squad":
+    return "🛡️ Squad: " + item.command
+
+  // Manual action
+  return "👤 Manual: " + item.command
 ```
 
 ### Field Resolution
@@ -374,7 +401,7 @@ Triggered when the calculated `level` (from xp-system) is higher than the previo
 
   {old_level_name}  →  {new_level_name}
 
-  "{levels[new_level].message}"
+  "{levels[new_level].message || "Novo nível alcançado!"}"
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
@@ -571,7 +598,7 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
 | Has pending items AND `is_phase_unlocked()` returns true (§2) | `← VOCE ESTA AQUI` — expanded with all items |
 | `is_phase_unlocked()` returns false (required items pending OR Integration Gate not passed) | `LOCKED` — collapsed, one line |
 
-**CRITICAL:** Phase state MUST be derived from the same `is_phase_unlocked()` predicate used in §2 for next-mission selection. This includes BOTH conditions: (a) all required items in the previous phase are `done`/`unused`, AND (b) `verify_phase_integration()` passes for the prior phase. If either condition fails, the phase is `LOCKED`. For pure rendering (no interactive gate), check `quest_log.integration_results[str(phase_index)]` — if the entry exists and `passed == true`, the gate is satisfied; otherwise, the phase remains locked.
+**CRITICAL:** Phase state MUST be derived from `is_phase_unlocked_persisted` (checklist.md §3) for rendering contexts, to avoid triggering the interactive Integration Gate. This includes BOTH conditions: (a) all required items in the previous phase are `done`/`unused`, AND (b) `verify_phase_integration()` passes for the prior phase. If either condition fails, the phase is `LOCKED`. For pure rendering (no interactive gate), check `quest_log.integration_results[str(phase_index)]` — if the entry exists and `passed == true`, the gate is satisfied; otherwise, the phase remains locked.
 
 ### Item Status Icons
 
@@ -587,6 +614,9 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
 16-character bar: filled = done+skipped, empty = pending.
 
 ```
+// NOTE: `total` MUST exclude items with status `unused` — they don't exist
+// in this project and must not inflate the bar denominator. Use `items_total`
+// from xp-system §5 (which already subtracts unused items).
 function progress_bar(done, skipped, total):
   if total <= 0:
     return "░" * 16          // world with all items unused → empty bar, 0%
@@ -651,27 +681,66 @@ After showing a mission card, the engine waits for the player to act. This secti
 ### After Mission Card
 
 ```
-1. Show mission card (section 3)
-2. Engine waits — {hero_name} goes to execute the mission
-3. When {hero_name} returns, ask:
+1. Show mission card (section 3) — includes EXECUÇÃO field from forge-bridge
 
-   "Completou a missão {item.id}? (s/n)"
+2. ROUTE by execution type:
 
-4a. If "s" (yes):
+   2a. If should_use_forge(item) == true (Forge execution):
+       - Ask: "Executar via Forge? (s/n)"
+       - If "s":
+         i.  Read engine/forge-bridge.md (lazy-load)
+         ii. command = build_forge_command(item, pack, quest_log)
+         iii. Invoke: Skill(skill: "forge", args: command.args)
+         iv. result = handle_forge_result(item, forge_output)
+         v.  If result.auto_check:
+             - Delegate to checklist: check {item.id} source=forge
+             - Receive celebration data from xp-system
+             - Show celebrations (section 4, in composition order)
+             - Select next mission (section 2)
+             - Show next mission card
+         vi. If result.auto_check == false (Forge failed):
+             - Show error: "{hero_name}, o Forge travou: {result.error}"
+             - Ask: "Tentar de novo? (s/n/manual)"
+               - s → retry from step 2a
+               - n → keep mission pending, select next mission
+               - manual → fall through to step 2c
+         vii. If result.paused:
+             - Forge handles interaction directly
+             - After Forge resumes → return to step v
+       - If "n":
+         - Fall through to step 2c (manual flow)
+
+   2b. If item.command starts with "/" (Skill execution):
+       - Ask: "Executar {item.command}? (s/n)"
+       - If "s":
+         i.  Invoke: Skill(skill: extracted_skill_name)
+         ii. On success → auto-check: check {item.id} source=forge
+         iii. On failure → keep pending, show error
+       - If "n":
+         - Fall through to step 2c
+
+   2c. Manual flow (who == "user", who == "squad", or fallback):
+       - Engine waits — {hero_name} goes to execute the mission
+       - When {hero_name} returns, ask:
+         "Completou a missão {item.id}? (s/n)"
+
+3a. If "s" (yes) — from manual flow:
    - Delegate to checklist: check {item.id}
    - Receive celebration data from xp-system
    - Show celebrations (section 4, in composition order)
    - Select next mission (section 2)
    - Show next mission card
-   - Return to step 2
+   - Return to step 1
 
-4b. If "n" (no):
+3b. If "n" (no) — from manual flow:
    - Keep current mission active
    - If item has `tip` field in pack: show the tip
    - If item is NOT required: suggest "/quest unused {item.id}" if it doesn't apply, or "/quest skip {item.id}" to bypass
    - If item IS required: encourage ("Sem pressa, {hero_name}. Essa missão é importante.")
-   - Return to step 2
+   - Return to step 2c
 ```
+
+**Backward compatibility:** `/quest check {id}` still works manually at any time, regardless of execution route. The interaction flow above is the RECOMMENDED path, not the only path.
 
 ### Skip Flow
 
