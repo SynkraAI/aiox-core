@@ -156,11 +156,13 @@ Generate progress bars using the pack's phase names. Each phase becomes a loadin
 1. Count the total number of phases: `N = len(pack.phases)`
 2. Calculate bar fill increment: each phase fills `floor(20 / (N + 1))` blocks (20 chars total)
 3. First line is always: `░░░░░░░░░░░░░░░░░░░░  Detectando ambiente`
-4. For each phase `i` (0-indexed), generate a line with `fill = floor(20 * (i + 1) / (N + 1))` filled blocks:
+4. For each phase `i` (0-indexed), generate a line with `fill = round(20 * (i + 1) / (N + 1))` filled blocks:
    - Filled portion: `█` repeated `fill` times
    - Empty portion: `░` repeated `20 - fill` times
    - Label: derive a scanning verb from the phase name. Use the pattern: `Analisando {phase.name}...`
 5. Last line is always: `████████████████████  Scan completo!`
+
+**Contract — progress bar visual consistency:** The loading sequence progress bar MUST use the same character set (`█` for filled, `░` for empty), bar width (20 characters), and rounding logic (`round()`) as the Resumption Banner (§7) and `progress_bar()` in guide.md §5. If any of these implementations change, ALL others MUST be updated in the same commit.
 
 ### Example (pack with 4 phases)
 

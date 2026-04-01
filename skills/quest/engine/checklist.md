@@ -81,11 +81,13 @@ Items with a `condition` field in the pack gain an additional `condition_state` 
 **Note on `detected`:** Used by scan for items in LOCKED phases. When an item is auto-detected in a phase that hasn't been unlocked yet (via Integration Gate), it's marked `detected` instead of `done`. When the phase is finally unlocked (Integration Gate passes), all `detected` items in that phase are automatically promoted to `done`. This prevents scan from bypassing the Integration Gate.
 
 **Note on `unused`:** For items that do not apply to this project at all. Different from `skipped` (which is a conscious decision to bypass an applicable item). `unused` means the item has no meaning in this project's context — like a "database review" item in a project with no database. An item becomes `unused` in two ways: (1) manually via `/quest unused {id}`, or (2) automatically when a conditioned item's `condition_state` is set to `not_applicable` (user answers "n" during condition evaluation — see §6). In both cases, the item's `status` field is set to `unused` and it is excluded from all progress calculations (xp-system §5: not counted in `items_total` or `percent`). Unused items:
-- Do NOT count toward `items_total` (excluded from progress calculation)
-- Do NOT count toward `percent`
-- Do NOT block phase unlock (treated as if they don't exist)
+- Do NOT count toward `items_total` (excluded from progress calculation — see **xp-system.md §5**)
+- Do NOT count toward `percent` (see **xp-system.md §5**)
+- Do NOT block phase unlock (treated as if they don't exist — see **guide.md §2** `is_phase_unlocked`)
 - Do NOT award XP
-- Are shown with a distinct visual indicator on the dashboard (not ✓ or -)
+- Do NOT break or contribute to streaks (filtered out — see **xp-system.md §4**)
+- Are excluded from ALL achievement conditions (see **xp-system.md §7** — every condition uses `if status == "unused": continue`)
+- Are shown with a distinct visual indicator on the dashboard (not ✓ or -) — see **guide.md §5** (`[·]` icon)
 - Can be set during first scan (when condition evaluates to "not applicable") or manually via `/quest unused {id}`
 
 **Lifecycle of an `unused` item:**
