@@ -113,6 +113,8 @@ Items with a `condition` field in the pack gain an additional `condition_state` 
    - **ceremony.md §7:** Resumption Banner shows `items_done/items_total` which already excludes unused via xp-system stats.
 4. **Irreversibility:** Once set to `unused`, the item cannot be reverted to `pending` through normal commands. It is effectively removed from the project's quest scope.
 
+**Contract — unused items exclusion:** Unused items are invisible to streaks (xp-system.md §4 filters them out of `active_items` before the streak walk) and to progress (xp-system.md §5 excludes them from `items_total` and `percent`). Guide.md §2 (`is_phase_unlocked`) treats unused as non-blocking — they do not prevent phase transitions. All modules that iterate items or calculate stats MUST skip `status == "unused"`. This contract is enforced at: xp-system.md §4 (streaks), §5 (counters), §7 (achievements), guide.md §2 (phase unlock), §4.2/4.5 (world/quest complete triggers). If a new module consumes item status, it MUST implement this exclusion.
+
 ---
 
 ## 2. Create Quest-log

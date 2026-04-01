@@ -113,7 +113,7 @@ Store the responses in the quest-log `meta` block:
 - `hero_name`: the name/nickname (REQUIRED — do not proceed without it)
 - `hero_title`: the epic title (OPTIONAL — empty string if skipped)
 
-**Contract — hero_name fallback:** If after all retries the user provides no valid name, the fallback is **"Aventureiro"**. This is the same fallback defined in SKILL.md (Contract — hero_name fallback) and guide.md §1 (Voice Rule 1). All three locations MUST use the same fallback string. If the fallback changes, update ALL locations in the same commit.
+**Contract — hero_name fallback:** If after all retries the user provides no valid name, the fallback is **"Aventureiro"**. This is the same fallback defined in SKILL.md (Contract — hero_name fallback), guide.md §1 (Voice Rule 1), and ceremony.md §7 (Resumption Banner). All four locations MUST use the same fallback string. If the fallback changes, update ALL locations in the same commit.
 
 ### Usage
 
@@ -454,6 +454,7 @@ When a quest-log already exists (Fortaleza Ativa), do NOT show the full ceremony
   Nível {level_number}: {level_name}    XP: {total_xp}/{next_level_xp}
   Progresso: {items_done + items_skipped}/{items_total} ({percent}%)
   ████████████░░░░░░░░  {percent}%
+  ↑ Uses unified progress bar contract — see §2, guide.md §5, guide.md §6
 
   Bem-vindo de volta, {hero_name}!
 

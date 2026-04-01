@@ -393,6 +393,8 @@ If a pack does not define `keywords`, it is not matchable by free text — fall 
 > | "squad", "upgrade" | `squad-upgrade` (if it exists and defines these keywords) |
 >
 > These are illustrative only. Do NOT hardcode pack IDs — always resolve from `packs/*.yaml`.
+>
+> **⚠️ Drift warning:** The IDs and keywords shown above are examples frozen in time. Actual pack IDs MUST be derived from validated pack schemas at runtime (§3.1 + §3.2). Hardcoding IDs risks silent drift when packs are added, renamed, or removed. For canonical item ID rules, see checklist.md §1.
 
 If text matches → treat as `high` confidence for that pack (same as `--pack` override but with confirmation). If no pack keywords match the user's text, fall through to detection rules or manual selection.
 
