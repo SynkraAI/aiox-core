@@ -2,16 +2,16 @@
 protocol: code-review-ping-pong
 type: fix
 round: 15
-date: "2026-03-31"
+date: "2026-04-01"
 fixer: "Claude Opus 4.6"
 review_file: round-15.md
-commit_sha_before: "b7516beca18b500c334d8282a92aaea527bb07ff"
-commit_sha_after: "ef42d17af840bd50f07aa95c73a3792bcfebeead"
+commit_sha_before: "331b9a740da2b0cd3a0590a000ac60943949952b"
+commit_sha_after: "48ebd89016ec1af6bb023f941753e3bfd6547099"
 branch: chore/devops-10-improvements
-issues_fixed: 3
+issues_fixed: 4
 issues_skipped: 0
-issues_total: 3
-git_diff_stat: "2 files changed, 85 insertions(+), 16 deletions(-)"
+issues_total: 4
+git_diff_stat: "3 files changed, 8 insertions(+), 2 deletions(-)"
 quality_checks:
   lint: skipped
   typecheck: skipped
@@ -19,88 +19,94 @@ quality_checks:
 fixes:
   - id: "15.1"
     status: FIXED
-    file: "engine/guide.md"
-    description: "Recovery path in §2.5 Rules no longer claims /quest scan re-triggers the Integration Gate. Updated to direct users to advance to next mission (which runs is_phase_unlocked → verify_phase_integration). Anti-whack-a-mole: grep for 'scan.*re-trigger' and 'quest scan.*fix' across all engine/*.md confirmed this was the ONLY occurrence. Propagation: checklist.md §5 already correctly states scan uses is_phase_unlocked_persisted (pure predicate, no gate execution)."
+    file: "engine/xp-system.md"
+    description: "Added prominent deprecation callout box at the very top of §7 Supported Conditions list, before any condition definition. The warning directs pack authors to use item_xp >= N only, with explicit cross-references to checklist.md §1 and SKILL.md Critical Rule 5."
     deviation: "none"
   - id: "15.2"
     status: FIXED
-    file: "engine/xp-system.md"
-    description: "Added items_unused to §6 Assemble Stats Object so recalculated stats match the canonical schema in checklist.md §1. Anti-whack-a-mole: grep for 'items_unused' confirmed it is calculated in §5 but was missing from §6 assembly. Propagation: checklist.md §1 schema already includes items_unused: 0 as initial value — no changes needed there. The §5 calculation (items_unused = count of unused) and §10 edge case (unused excluded from items_total) are both consistent."
+    file: "engine/guide.md"
+    description: "Added explicit inline cross-reference in §6 Summary View template, listing all four co-owner locations (ceremony.md §2, ceremony.md §7, guide.md §5, guide.md §6) that share the unified progress bar contract. Points to §5 for canonical implementation."
     deviation: "none"
   - id: "15.3"
     status: FIXED
     file: "engine/xp-system.md"
-    description: "Removed dual-return and celebrations leak from §9 Execution Order. Steps 8-10 collapsed to steps 8-9: persist first, then single return with { stats, newly_unlocked, level_changed, old_level, new_level }. Explicit note that celebrations are guide.md's responsibility. Anti-whack-a-mole: grep for 'celebrations' in engine/*.md confirmed guide.md §4 is the canonical owner and xp-system §8 already defers to it — no other files reference xp-system returning celebrations. Propagation: guide.md §4 header already states 'xp-system provides calculation logic only — guide.md owns the visual output' — fully consistent now."
+    description: "Added unused items contract cross-reference in §7 Achievement Evaluation (after intro paragraph) and §10 Edge Cases (unused bullet). Both reference checklist.md §1 (status lifecycle), guide.md §2 (next mission selection), and xp-system.md §4/§5/§7 (streak, counters, achievements)."
+    deviation: "none"
+  - id: "15.4"
+    status: FIXED
+    file: "engine/scanner.md"
+    description: "Clarified drift warning in §6 free-text table: IDs are explicitly labeled as 'illustrative only' and must always be derived from validated pack schemas at runtime. Cross-references checklist.md §1 and xp-system.md §2.0."
     deviation: "none"
 preserved:
-  - "engine/ceremony.md — not affected by any issue"
-  - "engine/checklist.md — schema already correct (items_unused present in §1)"
-  - "engine/scanner.md — not affected by any issue"
-  - "SKILL.md — not affected by any issue"
+  - "SKILL.md — already has Critical Rule 5 with deprecation cross-references"
+  - "engine/checklist.md — already has deprecation warning and unused items contract in §1"
+  - "engine/ceremony.md — not affected by these issues, progress bar contracts already complete"
 ---
 
 # Code Ping-Pong — Round 15 Fix Report
 
 ## Summary
 
-3 issues found in round-15 review, all FIXED. No skips.
+4 issues found in round 15, all fixed. Fixes strengthen cross-references and contract visibility across xp-system.md, guide.md, and scanner.md. No functional logic was changed — all fixes are documentation/contract hardening.
 
-- **15.1 (HIGH):** Recovery path regression from round-14's scan hardening
-- **15.2 (HIGH):** Stats schema drift — items_unused missing from assembly
-- **15.3 (MEDIUM):** Dual-return with celebrations ownership confusion
+## Anti-Whack-a-Mole Analysis
 
----
+- **15.1 (deprecation visibility):** Grep for `total_xp >= N` across all quest engine files. Found in 3 locations: xp-system.md §7 (conditions list + legacy alias), checklist.md §1 (achievements deprecation callout), SKILL.md (Critical Rule 5). All three already had the deprecation notice. Fix adds a prominent callout box at the TOP of the Supported Conditions list in xp-system.md §7 for maximum visibility to pack authors scanning the conditions reference.
+- **15.2 (progress bar contract in §6):** Checked all 4 progress bar locations: ceremony.md §2 (loading sequence) ✓, ceremony.md §7 (Resumption Banner) ✓, guide.md §5 (canonical function) ✓, guide.md §6 (Summary View) — already had contract block at line 696 but template comments only listed 2 locations. Fix adds all 4 co-owner locations inline in the template.
+- **15.3 (unused items in achievements):** Identified ALL modules that iterate items or calculate stats: xp-system.md §2 (XP calc), §4 (streak), §5 (counters), §7 (achievements), §10 (edge cases); guide.md §2 (next mission); checklist.md §1 (status lifecycle). §4 already had comprehensive cross-reference (lines 137-143). §7 and §10 were missing explicit cross-references. Both fixed.
+- **15.4 (hardcoded IDs in scanner):** Grep for hardcoded pack IDs (`app-development`, `squad-upgrade`) across all engine files. Only found in scanner.md §6 examples (illustrative) and §4.4 example output (illustrative). Both already have drift warnings. Fix strengthens §6 warning with "illustrative only" language.
 
-## Fixed Issues
+## Semantic Propagation Analysis
+
+- **Contract: deprecation total_xp >= N** — 3 participants: xp-system.md §7, checklist.md §1, SKILL.md rule 5. All verified consistent. xp-system.md §7 now has the deprecation at TWO locations: top of Supported Conditions (new) and inline at the legacy alias definition (existing).
+- **Contract: progress bar visual consistency** — 4 participants: ceremony.md §2, ceremony.md §7, guide.md §5, guide.md §6. All verified consistent. §6 template now explicitly lists all 4 co-owners.
+- **Contract: unused items exclusion** — 6 participants: checklist.md §1 (lifecycle definition), guide.md §2 (mission selection), xp-system.md §4 (streak), §5 (counters), §7 (achievements), §10 (edge cases). All verified consistent after fix. §7 and §10 now have explicit cross-references.
+- **Contract: runtime ID derivation** — scanner.md §6 (free-text table) and §4.4 (match results). Both already had drift warnings. §6 now has stronger "illustrative only" language.
+
+## Fixes Applied
 
 ### Fix for Issue 15.1
 
-**HIGH — Recovery path do Integration Gate aponta para `/quest scan`, mas scan não reexecuta o gate**
+**File:** `engine/xp-system.md` (§7 Supported Conditions)
 
-**Root cause:** Round-14 correctly made `/quest scan` observational (using `is_phase_unlocked_persisted` instead of `is_phase_unlocked`), but guide.md §2.5 Rules still claimed scan "re-triggers" the gate.
+**Problem:** The deprecation warning for `total_xp >= N` was present in the introductory blockquote and at the legacy alias definition, but not at the very top of the Supported Conditions list. Pack authors scanning the conditions reference could miss it.
 
-**Fix:** Updated the recovery instruction in guide.md line 261 to direct users to advance to the next mission (which naturally calls `is_phase_unlocked()` → `verify_phase_integration()`), and explicitly notes that `/quest scan` is observational and does NOT re-execute the gate.
+**Fix:** Added a prominent `> ⚠️ DEPRECATION` callout box immediately after the "Supported Conditions" heading and before the first condition definition (`first_item_done`). The callout directs pack authors to use `item_xp >= N` only and cross-references checklist.md §1 and SKILL.md Critical Rule 5.
 
-**Anti-whack-a-mole:** Grep for `scan.*re-trigger`, `re-trigger`, and `quest scan.*fix` across all `engine/*.md` and `SKILL.md` — this was the only occurrence. `checklist.md:282` already correctly documents that scan must NOT use `is_phase_unlocked` from guide.md §2.
-
-**Propagation semântica:** The contract being enforced is "scan = read-only, progression flow = write". Modules participating: checklist.md §5 (scan steps), guide.md §2.5 (Integration Gate rules), guide.md §2 (`is_phase_unlocked` interactive function). All three are now consistent: only the progression flow (advancing missions) triggers the Integration Gate.
+**Propagation:** Verified all 3 deprecation locations — xp-system.md §7 (now has callout + inline), checklist.md §1 (line ~35, already has deprecation callout), SKILL.md Critical Rule 5 (already has deprecation). All consistent.
 
 ### Fix for Issue 15.2
 
-**HIGH — Contrato de stats perde o campo obrigatório `items_unused` em toda recalculação**
+**File:** `engine/guide.md` (§6 Summary View template)
 
-**Root cause:** xp-system.md §5 calculates `items_unused` but §6 (Assemble Stats Object) omitted it from the YAML template. Since checklist.md §3 step 5 mandates "always recalculate stats via xp-system" and writes the returned stats to `quest_log.stats`, every recalculation would drop `items_unused` from the persisted data.
+**Problem:** The Summary View template had inline comments referencing the progress bar contract but only listed 2 of the 4 co-owner locations (ceremony.md §2, §7). The contract block at line 696 was complete, but the template itself could mislead implementors.
 
-**Fix:** Added `items_unused: <calculated>` to the stats assembly template in xp-system.md §6, between `items_skipped` and `percent`.
+**Fix:** Added two more comment lines in the template listing all 4 co-owner locations explicitly and pointing to §5 for the canonical implementation.
 
-**Anti-whack-a-mole:** Grep for `items_unused` across all files confirmed:
-- `checklist.md:30` — canonical schema has `items_unused: 0` ✓
-- `xp-system.md:145` — calculation exists ✓
-- `xp-system.md:146` — used to derive `items_total` ✓
-- `xp-system.md:§6` — was MISSING, now FIXED
-
-**Propagação semântica:** The contract is "stats schema in checklist.md §1 = stats assembled in xp-system.md §6". All 9 fields now match: total_xp, level, level_name, streak, items_done, items_total, items_skipped, items_unused, percent.
+**Propagation:** Verified all 4 progress bar locations. All use identical characters (`█`/`░`), width (20), and rounding (`round()`). No divergence found.
 
 ### Fix for Issue 15.3
 
-**MEDIUM — Execution Order do XP system tem retorno duplo e reintroduz ownership confuso de celebrations**
+**File:** `engine/xp-system.md` (§7 Achievement Evaluation + §10 Edge Cases)
 
-**Root cause:** Steps 8-10 in §9 had two return statements: step 8 returned `{ stats, newly_unlocked, level_changed, old_level, new_level }`, step 9 persisted, and step 10 returned `{ stats, newly_unlocked, celebrations }`. This created ambiguity about which return is canonical and leaked celebrations ownership into xp-system (contradicting §8 and guide.md §4).
+**Problem:** The achievement evaluation section individually noted that unused items are excluded in each condition, but lacked a centralized cross-reference to the unused items contract. §10 similarly described the behavior but didn't reference where the contract is defined.
 
-**Fix:** Collapsed to two steps:
-- Step 8: Write updated stats and achievements to quest-log (persist first)
-- Step 9: Single return `{ stats, newly_unlocked, level_changed, old_level, new_level }` with explicit note that celebrations are guide.md's responsibility
+**Fix:** Added a blockquote after the §7 intro paragraph establishing the unused items contract for ALL achievement conditions, with cross-references to checklist.md §1 (lifecycle), guide.md §2 (mission selection), and xp-system.md §4/§5/§10. Also added a comprehensive cross-reference in the §10 unused bullet, listing all 6 modules that participate in the unused items exclusion contract.
 
-**Anti-whack-a-mole:** Grep for `celebrations` in `engine/*.md` confirmed:
-- `guide.md:337-339` — canonical owner ("xp-system provides calculation logic only — guide.md owns the visual output") ✓
-- `guide.md:554,698,730` — rendering references ✓
-- `ceremony.md:115` — hero_title usage in celebrations ✓
-- `xp-system.md:359,361` — were the problematic dual-return, now FIXED
+**Propagation:** Semantic analysis of "where should unused be handled but isn't explicitly documented":
+1. checklist.md §1 — defines lifecycle ✓
+2. guide.md §2 — skips in mission selection ✓ (line ~53)
+3. xp-system.md §4 — excludes from streak ✓ (lines 132-143, comprehensive)
+4. xp-system.md §5 — excludes from counters ✓ (line 170)
+5. xp-system.md §7 — each condition excludes ✓, now has centralized contract ✓
+6. xp-system.md §10 — edge case documented ✓, now has cross-references ✓
 
-**Propagação semântica:** The contract is "xp-system = pure calculation + persistence, guide.md = rendering + celebrations". Modules involved: xp-system.md §8 (ownership declaration), xp-system.md §9 (execution order), guide.md §4 (celebrations rendering). All three now agree: xp-system returns data, guide.md renders celebrations.
+### Fix for Issue 15.4
 
----
+**File:** `engine/scanner.md` (§6 free-text table drift warning)
 
-## Skipped Issues
+**Problem:** The drift warning existed but didn't explicitly state that the IDs in the example table are "illustrative only". An implementor could read the examples as normative values.
 
-(none)
+**Fix:** Strengthened the drift warning to lead with "IDs are illustrative only" and clarified that actual pack IDs must always be derived from validated pack schemas at runtime (§3.1 + §3.2). Cross-references to checklist.md §1 and xp-system.md §2.0 retained.
+
+**Propagation:** Checked scanner.md §4.4 (match results example) — also has illustrative IDs but is clearly in a "match results" example block. The §6 drift warning now covers both tables. No other engine files reference hardcoded pack IDs.
