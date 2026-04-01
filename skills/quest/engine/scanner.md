@@ -394,7 +394,7 @@ If a pack does not define `keywords`, it is not matchable by free text — fall 
 >
 > These are illustrative only. Do NOT hardcode pack IDs — always resolve from `packs/*.yaml`.
 >
-> **⚠️ Drift warning:** The IDs and keywords shown above are examples frozen in time. Actual pack IDs MUST be derived from validated pack schemas at runtime (§3.1 + §3.2). Hardcoding IDs risks silent drift when packs are added, renamed, or removed. For canonical item ID rules, see checklist.md §1 (item ID format and status lifecycle) and xp-system.md §2.0 (resolved item list — the authoritative algorithm for deriving the full list of item IDs, including sub-items, from pack + quest-log). All IDs in examples must be schema-derived; hardcoded IDs risk silent drift.
+> **⚠️ Drift warning — IDs are illustrative only:** The IDs, keywords, and pack names shown in this section and in the table above are **examples frozen in time**. They are NOT hardcoded values — actual pack IDs MUST always be derived from validated pack schemas at runtime (§3.1 + §3.2). Hardcoding IDs risks silent drift when packs are added, renamed, or removed. **Cross-reference:** checklist.md §1 (canonical item ID format and status lifecycle) and xp-system.md §2.0 (resolved item list — the authoritative algorithm for deriving the full list of item IDs, including sub-items, from pack + quest-log). All IDs in examples must be schema-derived; hardcoded IDs risk silent drift.
 
 If text matches → treat as `high` confidence for that pack (same as `--pack` override but with confirmation). If no pack keywords match the user's text, fall through to detection rules or manual selection.
 

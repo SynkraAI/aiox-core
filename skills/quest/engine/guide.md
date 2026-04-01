@@ -707,6 +707,8 @@ Compact one-line-per-phase view with overall stats. This is NOT a separate comma
   ...
   ↑ progress_bar uses unified contract — see guide.md §5 canonical function
   ↑ Same chars (█/░), width (20), rounding as ceremony.md §2, §7
+  ↑ All four locations (ceremony.md §2, ceremony.md §7, guide.md §5, guide.md §6)
+  ↑ MUST use identical characters and logic. See §5 for canonical implementation.
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   XP: {total_xp}  |  Missões: {items_done + items_skipped}/{items_total} ({percent}%)
 

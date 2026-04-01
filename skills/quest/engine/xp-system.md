@@ -212,12 +212,16 @@ achievements:
 
 For each achievement in the pack, evaluate its `condition`. If the condition is met AND the achievement is NOT already in `quest_log.achievements[]`, it is **newly unlocked**.
 
+> **Unused items contract (applies to ALL conditions below):** Items with status `unused` are **always excluded** from achievement condition evaluation — they don't exist in this project's context. Every phase-scoped and global condition in this section skips unused items explicitly. **Cross-reference:** checklist.md §1 defines the `unused` status lifecycle (`condition_state: not_applicable` → `status: unused`); guide.md §2 skips unused items in next mission selection; xp-system.md §4 (streak), §5 (counters), and §10 (edge cases) all exclude unused consistently.
+
 When unlocking:
 1. Add `{ id, unlocked_at: <now> }` to `quest_log.achievements[]`
 2. Do NOT add `xp_bonus` directly here. Newly unlocked achievements are added to `quest_log.achievements[]`, and their bonus is included when final `total_xp` is recalculated in section 2.1.
 3. Return the achievement in the `newly_unlocked` list for celebration
 
 ### Supported Conditions
+
+> **⚠️ DEPRECATION — `total_xp >= N` (read FIRST):** The condition `total_xp >= N` is **deprecated**. Pack authors MUST use `item_xp >= N` for ALL new packs. Both evaluate `total_base_xp` (item-only XP, before bonuses), but `total_xp >= N` is misleading — it does NOT check the user-facing `total_xp`. The alias will be removed in a future version. **Cross-reference:** checklist.md §1 (achievements comment block + deprecation callout) and SKILL.md Critical Rule 5. All three locations MUST stay consistent.
 
 Achievements are an **array of objects** with fields: `id`, `name`, `icon`, `condition`, `xp_bonus`, `message`.
 
@@ -392,4 +396,4 @@ When the engine calls the XP system (after any status change), execute in this e
 - **Pack has no achievements:** skip achievement evaluation, return empty list
 - **Pack has no levels:** default to level 1, level_name = pack.name
 - **Item exists in pack but not in quest-log:** treat as `pending`
-- **Item with status `unused`:** excluded from `items_total`, `percent`, XP calculations. Treated as if it doesn't exist. Does NOT break streaks (ignored in streak calculation).
+- **Item with status `unused`:** excluded from `items_total`, `percent`, XP calculations. Treated as if it doesn't exist. Does NOT break streaks (ignored in streak calculation). **Cross-reference — unused items contract:** checklist.md §1 (status lifecycle: `condition_state: not_applicable` → `status: unused`), guide.md §2 (unused items skipped in next mission selection), xp-system.md §4 (streak excludes unused), §5 (counters exclude unused), §7 (achievement conditions exclude unused). All modules that iterate items or calculate stats MUST exclude unused items consistently.
