@@ -241,6 +241,7 @@ Claude Code responds to reviews. This mode reads findings and implements fixes.
    - Read the referenced file and line for each issue.
    - Apply the fix. If the suggested fix is wrong or incomplete, use better judgment but document the deviation.
    - After each fix, verify the file has no syntax errors.
+   - **ANTI-WHACK-A-MOLE (OBRIGATÓRIO):** For EACH issue, before fixing only the cited file, grep/search for the SAME bug pattern across ALL files in scope (session.md). If the same pattern exists in other files, fix ALL of them at once. If the pattern repeats in 5+ files, consider creating a shared abstraction (hook, utility) instead of copy-pasting the fix. Document extra files fixed in the fix description.
 8. **Run quality checks** — Execute available quality commands:
    - `npm run lint` (if package.json exists with lint script)
    - `npm run typecheck` (if available)

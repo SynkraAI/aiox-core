@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ping-Pong Dashboard</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #13131a;
+      --surface-2: #1a1a24;
+      --border: #2a2a3a;
+      --text: #e4e4ef;
+      --text-dim: #8888a0;
+      --accent: #7c6aff;
+      --green: #34d399;
+      --orange: #fb923c;
+      --red: #f87171;
+      --blue: #60a5fa;
+      --purple: #a78bfa;
+      --yellow: #fbbf24;
+      --sidebar-w: 260px;
+      --handoff-bg: #0d0d14;
+    }
+
+    :root.light {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --surface-2: #eeeef2;
+      --border: #d4d4dc;
+      --text: #1a1a2e;
+      --text-dim: #6b6b80;
+      --accent: #5b4cd4;
+      --green: #059669;
+      --orange: #d97706;
+      --red: #dc2626;
+      --blue: #2563eb;
+      --purple: #7c3aed;
+      --yellow: #b45309;
+      --handoff-bg: #f0f0f5;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* ── Sidebar ─────────────────────────────────────────────────────── */
+
+    .sidebar {
+      width: var(--sidebar-w);
+      min-width: var(--sidebar-w);
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+    }
+
+    .sidebar-header {
+      padding: 1.25rem 1rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-header h1 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-header .subtitle {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    .sidebar-actions {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn {
+      font-family: inherit;
+      font-size: 0.65rem;
+      padding: 0.35rem 0.65rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .btn:hover { border-color: var(--accent); color: var(--text); }
+    .btn.primary { background: var(--accent); color: white; border-color: var(--accent); }
+    .btn.primary:hover { opacity: 0.85; }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .project-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.5rem 0;
+    }
+
+    .project-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      transition: background 0.15s;
+      border-left: 3px solid transparent;
+      font-size: 0.75rem;
+    }
+
+    .project-item:hover { background: var(--surface-2); }
+    .project-item.active { background: var(--surface-2); border-left-color: var(--accent); }
+    .project-item.all-filter { color: var(--accent); font-weight: 600; margin-bottom: 0.25rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; }
+
+    .project-item .icon { font-size: 0.85rem; flex-shrink: 0; }
+
+    .project-item .info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .project-item .name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .project-item .meta {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      margin-top: 0.1rem;
+    }
+
+    .project-item .score-badge {
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    .score-badge.perfect { background: rgba(251, 191, 36, 0.15); color: var(--yellow); }
+    .score-badge.high { background: rgba(52, 211, 153, 0.15); color: var(--green); }
+    .score-badge.mid { background: rgba(251, 146, 60, 0.15); color: var(--orange); }
+    .score-badge.low { background: rgba(248, 113, 113, 0.15); color: var(--red); }
+    .score-badge.none { background: rgba(136, 136, 160, 0.1); color: var(--text-dim); }
+
+    .sidebar-footer {
+      border-top: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+    }
+
+    .sidebar-footer .conn {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    :root.light .badge-fix { background: rgba(124, 58, 237, 0.1); }
+    :root.light .badge-review { background: rgba(5, 150, 105, 0.1); }
+    :root.light .badge-audit { background: rgba(37, 99, 235, 0.1); }
+    :root.light .badge-complete { background: rgba(180, 83, 9, 0.12); }
+    :root.light .badge-inactive { background: rgba(107, 107, 128, 0.08); }
+    :root.light .score-badge.perfect { background: rgba(180, 83, 9, 0.1); }
+    :root.light .score-badge.high { background: rgba(5, 150, 105, 0.1); }
+    :root.light .score-badge.mid { background: rgba(217, 119, 6, 0.1); }
+    :root.light .score-badge.low { background: rgba(220, 38, 38, 0.1); }
+    :root.light .round-pip.review { background: rgba(5, 150, 105, 0.1); }
+    :root.light .round-pip.fix { background: rgba(124, 58, 237, 0.1); }
+    :root.light .round-pip.audit { background: rgba(37, 99, 235, 0.1); }
+    :root.light .project-card { box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 1rem;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      line-height: 1;
+    }
+
+    .theme-toggle:hover { border-color: var(--accent); color: var(--text); }
+
+    .conn-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red);
+      transition: background 0.3s;
+    }
+
+    .conn-dot.connected { background: var(--green); }
+
+    /* ── Add project modal ───────────────────────────────────────────── */
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.visible { display: flex; }
+
+    .modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      width: 420px;
+      max-width: 90vw;
+    }
+
+    .modal h2 {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .form-group {
+      margin-bottom: 0.85rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.5rem 0.65rem;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.8rem;
+    }
+
+    .form-group input:focus { outline: none; border-color: var(--accent); }
+
+    .modal-actions {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: flex-end;
+      margin-top: 1.25rem;
+    }
+
+    .modal .error-msg {
+      font-size: 0.7rem;
+      color: var(--red);
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    /* ── Main content ────────────────────────────────────────────────── */
+
+    .main {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      height: 100vh;
+    }
+
+    .main-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .main-header h2 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .main-header .count {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-dim);
+    }
+
+    .empty-state code {
+      display: block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--green);
+      font-size: 0.85rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      transition: border-color 0.2s;
+    }
+
+    .project-card:hover { border-color: var(--accent); }
+
+    .project-card.waiting-fix { border-left: 3px solid var(--purple); }
+    .project-card.waiting-review { border-left: 3px solid var(--green); }
+    .project-card.waiting-audit { border-left: 3px solid var(--blue); }
+    .project-card.complete { border-left: 3px solid var(--yellow); }
+    .project-card.inactive { border-left: 3px solid var(--border); opacity: 0.6; }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .card-header h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .session-theme {
+      font-size: 0.7rem;
+      color: var(--accent);
+      font-weight: 600;
+      padding: 0.3rem 0.6rem;
+      margin: -0.25rem 0 0.5rem;
+      background: rgba(124, 106, 255, 0.08);
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    :root.light .session-theme {
+      background: rgba(91, 76, 212, 0.08);
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      opacity: 0;
+      transition: all 0.15s;
+    }
+
+    .project-card:hover .remove-btn { opacity: 0.5; }
+    .remove-btn:hover { opacity: 1 !important; color: var(--red); background: rgba(248, 113, 113, 0.1); }
+
+    .badge {
+      font-size: 0.65rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-fix { background: rgba(167, 139, 250, 0.15); color: var(--purple); }
+    .badge-review { background: rgba(52, 211, 153, 0.15); color: var(--green); }
+    .badge-audit { background: rgba(96, 165, 250, 0.15); color: var(--blue); }
+    .badge-complete { background: rgba(251, 191, 36, 0.15); color: var(--yellow); }
+    .badge-inactive { background: rgba(136, 136, 160, 0.1); color: var(--text-dim); }
+
+    .stats-row {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .stat-label { color: var(--text-dim); font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .stat-value { font-weight: 600; font-size: 1.1rem; }
+
+    .score-bar {
+      height: 6px;
+      background: var(--surface-2);
+      border-radius: 3px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+
+    .score-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.5s ease;
+    }
+
+    .score-low { background: var(--red); }
+    .score-mid { background: var(--orange); }
+    .score-high { background: var(--green); }
+    .score-perfect { background: var(--yellow); }
+
+    /* Stage progress */
+    .stages-section { margin-bottom: 1rem; }
+
+    .stages-section h3 {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .stages-bar {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 0.35rem;
+    }
+
+    .stage-pip {
+      flex: 1;
+      height: 20px;
+      border-radius: 3px;
+      background: var(--surface-2);
+      position: relative;
+      cursor: default;
+      transition: background 0.3s;
+    }
+
+    .stage-pip.complete { background: var(--green); }
+    .stage-pip.active { background: var(--accent); animation: pulse 2s infinite; }
+    .stage-pip.pending { background: var(--surface-2); }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .stage-pip .tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.35rem 0.5rem;
+      font-size: 0.65rem;
+      white-space: nowrap;
+      z-index: 10;
+      color: var(--text);
+    }
+
+    .stage-pip:hover .tooltip { display: block; }
+
+    .stages-summary {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    /* Next action */
+    .next-action {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.85rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .next-action h3 {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .next-agent {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .next-file {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+    }
+
+    /* Handoff block */
+    .handoff { position: relative; }
+
+    .handoff-block {
+      background: var(--handoff-bg);
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      padding: 0.75rem;
+      font-size: 0.7rem;
+      line-height: 1.5;
+      color: var(--text-dim);
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .handoff-block.expanded {
+      max-height: 400px;
+      padding: 0.75rem;
+    }
+
+    .handoff-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      color: var(--accent);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      padding: 0.35rem 0;
+    }
+
+    .handoff-toggle:hover { text-decoration: underline; }
+
+    .copy-btn {
+      position: absolute;
+      top: 2rem;
+      right: 0.5rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.65rem;
+      font-family: inherit;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .handoff:hover .copy-btn { opacity: 1; }
+    .copy-btn:active { transform: scale(0.95); }
+    .copy-btn.copied { background: var(--green); }
+
+    /* Score trend chart */
+    .score-chart { margin: 0.5rem 0; }
+    .score-chart svg { width: 100%; height: 50px; display: block; }
+    .score-dot { cursor: default; }
+
+    /* Rounds timeline */
+    .rounds-timeline { margin-top: 0.75rem; }
+
+    .rounds-timeline h3 {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .round-pip {
+      width: 28px;
+      height: 28px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 600;
+      cursor: default;
+      position: relative;
+    }
+
+    .round-pip.review { background: rgba(52, 211, 153, 0.15); color: var(--green); }
+    .round-pip.fix { background: rgba(167, 139, 250, 0.15); color: var(--purple); }
+    .round-pip.audit { background: rgba(96, 165, 250, 0.15); color: var(--blue); }
+
+    .updated-at {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      text-align: right;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <h1>Ping-Pong</h1>
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Alternar tema">&#9790;</button>
+      </div>
+      <div class="subtitle">Code Review Dashboard</div>
+    </div>
+
+    <div class="sidebar-actions">
+      <button class="btn" onclick="doDiscover()" id="discoverBtn" title="Escanear projetos automaticamente">Descobrir</button>
+      <button class="btn" onclick="showAddModal()" title="Adicionar projeto manualmente">+ Projeto</button>
+    </div>
+
+    <div class="project-list" id="projectList">
+      <div class="project-item all-filter active" onclick="filterProject(null)">
+        <span class="icon">*</span>
+        <span class="info"><span class="name">Todos os projetos</span></span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="conn">
+        <div class="conn-dot" id="connDot"></div>
+        <span id="connLabel">Conectando...</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Add project modal -->
+  <div class="modal-overlay" id="addModal">
+    <div class="modal">
+      <h2>Adicionar Projeto</h2>
+      <div class="form-group">
+        <label>Caminho do projeto</label>
+        <input type="text" id="addPath" placeholder="/Users/you/CODE/Projects/my-app" />
+      </div>
+      <div class="form-group">
+        <label>Nome (opcional)</label>
+        <input type="text" id="addName" placeholder="my-app" />
+      </div>
+      <div class="error-msg" id="addError"></div>
+      <div class="modal-actions">
+        <button class="btn" onclick="hideAddModal()">Cancelar</button>
+        <button class="btn primary" onclick="doAddProject()" id="addBtn">Adicionar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <main class="main">
+    <div class="main-header">
+      <h2 id="mainTitle">Todos os projetos</h2>
+      <span class="count" id="mainCount"></span>
+    </div>
+    <div id="content">
+      <div class="empty-state"><p>Carregando projetos...</p></div>
+    </div>
+  </main>
+
+  <script>
+    // ── State ─────────────────────────────────────────────────────────
+
+    let allProjects = [];
+    let activeFilter = null; // null = show all
+
+    // ── SSE connection ───────────────────────────────────────────────
+
+    let evtSource = null;
+    let reconnectTimer = null;
+
+    function connect() {
+      if (evtSource) evtSource.close();
+      evtSource = new EventSource('/events');
+
+      evtSource.onopen = () => {
+        document.getElementById('connDot').classList.add('connected');
+        document.getElementById('connLabel').textContent = 'Ao vivo';
+      };
+
+      evtSource.onmessage = (e) => {
+        try {
+          allProjects = JSON.parse(e.data);
+          renderSidebar();
+          renderMain();
+        } catch (err) {
+          console.error('Parse error:', err);
+        }
+      };
+
+      evtSource.onerror = () => {
+        document.getElementById('connDot').classList.remove('connected');
+        document.getElementById('connLabel').textContent = 'Reconectando...';
+        evtSource.close();
+        if (reconnectTimer) clearTimeout(reconnectTimer);
+        reconnectTimer = setTimeout(connect, 3000);
+      };
+    }
+
+    // ── Sidebar rendering ────────────────────────────────────────────
+
+    function renderSidebar() {
+      const list = document.getElementById('projectList');
+      const allActive = activeFilter === null ? ' active' : '';
+
+      let html = `
+        <div class="project-item all-filter${allActive}" onclick="filterProject(null)">
+          <span class="icon">*</span>
+          <span class="info">
+            <span class="name">Todos os projetos</span>
+            <div class="meta">${allProjects.length} projeto(s)</div>
+          </span>
+        </div>`;
+
+      for (const p of allProjects) {
+        const isActive = activeFilter === p.name ? ' active' : '';
+        const icon = getStateIcon(p);
+        const score = p.latest_score !== null ? p.latest_score : null;
+        const scoreBadgeClass = score === null ? 'none' :
+          score >= 10 ? 'perfect' : score >= 7 ? 'high' : score >= 4 ? 'mid' : 'low';
+        const scoreText = score !== null ? `${score}` : '--';
+        const stateText = getStateShort(p);
+
+        html += `
+          <div class="project-item${isActive}" onclick="filterProject('${escapeAttr(p.name)}')">
+            <span class="icon">${icon}</span>
+            <span class="info">
+              <span class="name">${escapeHtml(p.name)}</span>
+              <div class="meta">${p.session_theme ? escapeHtml(p.session_theme) + ' · ' : ''}${stateText} | R${p.current_round || 0}</div>
+            </span>
+            <span class="score-badge ${scoreBadgeClass}">${scoreText}</span>
+          </div>`;
+      }
+
+      list.innerHTML = html;
+    }
+
+    function getStateIcon(p) {
+      if (!p.exists) return '\u26aa';
+      if (p.cycle_state === 'COMPLETE') return '\ud83c\udfc6';
+      if (p.cycle_state === 'WAITING_FOR_FIX' || p.cycle_state === 'FIX_COMPLETE') return '\ud83d\udfe3';
+      if (p.cycle_state === 'WAITING_FOR_REVIEW') return '\ud83d\udfe2';
+      if (p.cycle_state === 'WAITING_FOR_AUDIT') return '\ud83d\udfe0';
+      return '\u26aa';
+    }
+
+    function getStateShort(p) {
+      if (!p.exists) return 'sem ciclo';
+      if (p.cycle_state === 'COMPLETE') return 'completo';
+      if (p.cycle_state === 'WAITING_FOR_FIX' || p.cycle_state === 'FIX_COMPLETE') return 'fix';
+      if (p.cycle_state === 'WAITING_FOR_REVIEW') return 'review';
+      if (p.cycle_state === 'WAITING_FOR_AUDIT') return 'audit';
+      return p.cycle_state || '?';
+    }
+
+    // ── Filter ───────────────────────────────────────────────────────
+
+    function filterProject(name) {
+      activeFilter = name;
+      renderSidebar();
+      renderMain();
+    }
+
+    // ── Main content rendering ───────────────────────────────────────
+
+    function renderMain() {
+      const filtered = activeFilter
+        ? allProjects.filter(p => p.name === activeFilter)
+        : allProjects;
+
+      const title = document.getElementById('mainTitle');
+      const count = document.getElementById('mainCount');
+      const content = document.getElementById('content');
+
+      title.textContent = activeFilter || 'Todos os projetos';
+      count.textContent = `${filtered.length} de ${allProjects.length}`;
+
+      if (!filtered || filtered.length === 0) {
+        content.innerHTML = `
+          <div class="empty-state">
+            <p>Nenhum projeto ${activeFilter ? 'encontrado' : 'registrado'}.</p>
+            <code>node server.cjs add /caminho/do/projeto nome</code>
+          </div>`;
+        return;
+      }
+
+      content.innerHTML = `<div class="projects-grid">${filtered.map(renderCard).join('')}</div>`;
+    }
+
+    function renderCard(p) {
+      const stateClass = !p.exists ? 'inactive' :
+        p.cycle_state === 'COMPLETE' ? 'complete' :
+        (p.cycle_state === 'WAITING_FOR_FIX' || p.cycle_state === 'FIX_COMPLETE') ? 'waiting-fix' :
+        p.cycle_state === 'WAITING_FOR_REVIEW' ? 'waiting-review' :
+        p.cycle_state === 'WAITING_FOR_AUDIT' ? 'waiting-audit' : 'inactive';
+
+      const stateIcon = getStateIcon(p);
+
+      const badgeClass = !p.exists ? 'badge-inactive' :
+        p.cycle_state === 'COMPLETE' ? 'badge-complete' :
+        (p.cycle_state === 'WAITING_FOR_FIX' || p.cycle_state === 'FIX_COMPLETE') ? 'badge-fix' :
+        p.cycle_state === 'WAITING_FOR_REVIEW' ? 'badge-review' :
+        p.cycle_state === 'WAITING_FOR_AUDIT' ? 'badge-audit' : 'badge-inactive';
+
+      const badgeText = !p.exists ? 'sem ciclo' :
+        p.cycle_state === 'COMPLETE' ? 'completo' :
+        p.cycle_state === 'WAITING_FOR_FIX' ? 'aguardando fix' :
+        p.cycle_state === 'FIX_COMPLETE' ? 'fix completo' :
+        p.cycle_state === 'WAITING_FOR_REVIEW' ? 'aguardando review' :
+        p.cycle_state === 'WAITING_FOR_AUDIT' ? 'aguardando audit' : 'desconhecido';
+
+      const score = p.latest_score !== null ? p.latest_score : '\u2014';
+      const scorePercent = p.latest_score !== null ? p.latest_score * 10 : 0;
+      const scoreClass = score === '\u2014' ? '' :
+        score >= 10 ? 'score-perfect' :
+        score >= 7 ? 'score-high' :
+        score >= 4 ? 'score-mid' : 'score-low';
+
+      let stagesHtml = '';
+      if (p.multi_stage && p.progress && p.progress.summary) {
+        const s = p.progress.summary;
+        const stages = (p.progress.stages || []);
+        stagesHtml = `
+          <div class="stages-section">
+            <h3>Stages (${s.completed || 0}/${s.total_stages || 0})</h3>
+            <div class="stages-bar">
+              ${stages.map(st => `
+                <div class="stage-pip ${st.status}">
+                  <div class="tooltip">${st.slug || st.id}${st.final_score ? ' \u2014 ' + st.final_score + '/10' : st.latest_score ? ' \u2014 ' + st.latest_score + '/10' : ''}</div>
+                </div>
+              `).join('')}
+            </div>
+            <div class="stages-summary">${s.completion_pct || 0}% completo \u2014 ${s.total_issues_found || 0} issues encontradas, ${s.total_issues_fixed || 0} corrigidas</div>
+          </div>`;
+      }
+
+      let nextActionHtml = '';
+      if (p.exists && p.cycle_state !== 'COMPLETE' && p.next_agent) {
+        const agentIcon = p.next_agent === 'CODEX' ? '\ud83d\udfe2' :
+          p.next_agent === 'CLAUDE CODE' ? '\ud83d\udfe3' :
+          p.next_agent === 'GEMINI' ? '\ud83d\udfe0' : '\u26aa';
+
+        nextActionHtml = `
+          <div class="next-action">
+            <h3>Proximo passo</h3>
+            <div class="next-agent">${agentIcon} ${escapeHtml(p.next_agent)} \u2014 ${escapeHtml(p.next_mode || '?')}</div>
+            <div class="next-file">Artefato esperado: ${escapeHtml(p.next_step?.expected_artifact || '?')}</div>
+          </div>`;
+      }
+
+      const cardId = 'card-' + p.name.replace(/[^a-z0-9]/gi, '-');
+
+      let handoffHtml = '';
+      if (p.handoff_block && p.cycle_state !== 'COMPLETE') {
+        handoffHtml = `
+          <div class="handoff" id="handoff-${cardId}">
+            <button class="handoff-toggle" onclick="toggleHandoff('${cardId}')">
+              \ud83d\udccb next-step.md (fonte de verdade) \u25b8
+            </button>
+            <div class="handoff-block" id="block-${cardId}">${escapeHtml(p.handoff_block)}</div>
+            <button class="copy-btn" id="copy-${cardId}" onclick="copyHandoff('${cardId}')">Copiar</button>
+          </div>`;
+      }
+
+      let roundsHtml = '';
+      if (p.rounds && p.rounds.length > 0) {
+        roundsHtml = `
+          <div class="rounds-timeline">
+            <h3>Rounds</h3>
+            <div class="timeline">
+              ${p.rounds.map(r => {
+                const label = r.type === 'review' ? 'R' : r.type === 'fix' ? 'F' : 'A';
+                const scoreText = r.score !== undefined ? r.score : r.process_health !== undefined ? r.process_health : '';
+                return `<div class="round-pip ${r.type}" title="Round ${r.round} (${r.type})${scoreText ? ' \u2014 ' + scoreText + '/10' : ''}">${label}${r.round}</div>`;
+              }).join('')}
+            </div>
+          </div>`;
+      }
+
+      const themeHtml = p.session_theme
+        ? `<div class="session-theme">${escapeHtml(p.session_theme)}</div>`
+        : '';
+
+      return `
+        <div class="project-card ${stateClass}">
+          <div class="card-header">
+            <h2>${stateIcon} ${escapeHtml(p.name)}</h2>
+            <div class="card-actions">
+              <span class="badge ${badgeClass}">${badgeText}</span>
+              <button class="remove-btn" onclick="doRemoveProject('${escapeAttr(p.name)}')" title="Remover do dashboard">\u2715</button>
+            </div>
+          </div>
+          ${themeHtml}
+
+          <div class="stats-row">
+            <div class="stat">
+              <span class="stat-label">Round</span>
+              <span class="stat-value">${p.current_round || '\u2014'}</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Score</span>
+              <span class="stat-value">${score}/10</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Issues</span>
+              <span class="stat-value">${countIssues(p)}</span>
+            </div>
+          </div>
+
+          <div class="score-bar">
+            <div class="score-bar-fill ${scoreClass}" style="width: ${scorePercent}%"></div>
+          </div>
+
+          ${renderScoreChart(p)}
+
+          ${stagesHtml}
+          ${nextActionHtml}
+          ${handoffHtml}
+          ${roundsHtml}
+        </div>`;
+    }
+
+    function renderScoreChart(p) {
+      const reviewRounds = (p.rounds || []).filter(r => r.type === 'review' && r.score !== undefined);
+      if (reviewRounds.length < 2) return '';
+
+      const w = 300, h = 50, pad = 10;
+      const xStep = (w - 2 * pad) / (reviewRounds.length - 1);
+
+      const points = reviewRounds.map((r, i) => ({
+        x: pad + i * xStep,
+        y: h - pad - ((r.score / 10) * (h - 2 * pad)),
+        score: r.score,
+        round: r.round,
+      }));
+
+      const polyline = points.map(pt => `${pt.x},${pt.y}`).join(' ');
+      const dots = points.map(pt => {
+        const color = pt.score < 7 ? 'var(--red, #e74c3c)' : pt.score < 9 ? 'var(--yellow, #f39c12)' : 'var(--green, #27ae60)';
+        return `<circle cx="${pt.x}" cy="${pt.y}" r="4" fill="${color}" class="score-dot"><title>R${pt.round}: ${pt.score}/10</title></circle>`;
+      }).join('');
+
+      // Elapsed time from metrics
+      let timeLabel = '';
+      if (p.orchestrator_metrics && p.orchestrator_metrics.elapsed) {
+        const s = Math.floor(p.orchestrator_metrics.elapsed / 1000);
+        timeLabel = `<span style="float:right;color:var(--text-dim);font-size:0.65rem">${Math.floor(s/60)}m${s%60}s</span>`;
+      }
+
+      return `<div class="score-chart">
+        ${timeLabel}
+        <svg viewBox="0 0 ${w} ${h}" preserveAspectRatio="none">
+          <polyline points="${polyline}" fill="none" stroke="var(--accent, #7c3aed)" stroke-width="2" stroke-opacity="0.4"/>
+          ${dots}
+        </svg>
+      </div>`;
+    }
+
+    function countIssues(p) {
+      if (p.progress && p.progress.summary) {
+        return p.progress.summary.total_issues_found || 0;
+      }
+      let total = 0;
+      for (const r of (p.rounds || [])) {
+        if (r.issues_found) total += r.issues_found;
+      }
+      return total || '\u2014';
+    }
+
+    // ── Helpers ──────────────────────────────────────────────────────
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function escapeAttr(str) {
+      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    function toggleHandoff(cardId) {
+      const block = document.getElementById('block-' + cardId);
+      block.classList.toggle('expanded');
+    }
+
+    function copyHandoff(cardId) {
+      const block = document.getElementById('block-' + cardId);
+      navigator.clipboard.writeText(block.textContent).then(() => {
+        const btn = document.getElementById('copy-' + cardId);
+        btn.textContent = 'Copiado!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = 'Copiar';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+
+    // ── Actions ──────────────────────────────────────────────────────
+
+    async function doDiscover() {
+      const btn = document.getElementById('discoverBtn');
+      btn.disabled = true;
+      btn.textContent = 'Buscando...';
+      try {
+        const res = await fetch('/api/projects/discover', { method: 'POST' });
+        const data = await res.json();
+        btn.textContent = `+${data.added} encontrado(s)`;
+        setTimeout(() => { btn.textContent = 'Descobrir'; btn.disabled = false; }, 2000);
+      } catch {
+        btn.textContent = 'Erro';
+        setTimeout(() => { btn.textContent = 'Descobrir'; btn.disabled = false; }, 2000);
+      }
+    }
+
+    function showAddModal() {
+      document.getElementById('addModal').classList.add('visible');
+      document.getElementById('addPath').focus();
+    }
+
+    function hideAddModal() {
+      document.getElementById('addModal').classList.remove('visible');
+      document.getElementById('addPath').value = '';
+      document.getElementById('addName').value = '';
+      document.getElementById('addError').style.display = 'none';
+    }
+
+    async function doAddProject() {
+      const pathInput = document.getElementById('addPath');
+      const nameInput = document.getElementById('addName');
+      const errorEl = document.getElementById('addError');
+      const btn = document.getElementById('addBtn');
+
+      const projectPath = pathInput.value.trim();
+      if (!projectPath) {
+        errorEl.textContent = 'Caminho obrigatorio';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Adicionando...';
+      errorEl.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/projects/add', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ path: projectPath, name: nameInput.value.trim() || undefined }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          errorEl.textContent = data.error || 'Erro desconhecido';
+          errorEl.style.display = 'block';
+        } else {
+          hideAddModal();
+        }
+      } catch (err) {
+        errorEl.textContent = err.message;
+        errorEl.style.display = 'block';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Adicionar';
+    }
+
+    async function doRemoveProject(name) {
+      if (!confirm(`Remover "${name}" do dashboard?`)) return;
+      try {
+        await fetch('/api/projects/remove', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name }),
+        });
+      } catch (err) {
+        console.error('Remove error:', err);
+      }
+    }
+
+    // ── Keyboard shortcuts ───────────────────────────────────────────
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') hideAddModal();
+      if (e.key === 'Enter' && document.getElementById('addModal').classList.contains('visible')) {
+        doAddProject();
+      }
+    });
+
+    // ── Theme ────────────────────────────────────────────────────────
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const isLight = root.classList.toggle('light');
+      localStorage.setItem('pp-theme', isLight ? 'light' : 'dark');
+      document.getElementById('themeBtn').innerHTML = isLight ? '&#9728;' : '&#9790;';
+    }
+
+    function loadTheme() {
+      const saved = localStorage.getItem('pp-theme');
+      if (saved === 'light') {
+        document.documentElement.classList.add('light');
+        document.getElementById('themeBtn').innerHTML = '&#9728;';
+      }
+    }
+
+    // ── Init ─────────────────────────────────────────────────────────
+
+    loadTheme();
+    connect();
+  </script>
+</body>
+</html>
