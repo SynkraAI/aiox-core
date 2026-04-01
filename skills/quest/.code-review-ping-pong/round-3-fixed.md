@@ -2,16 +2,16 @@
 protocol: code-review-ping-pong
 type: fix
 round: 3
-date: "2026-03-31"
-fixer: "Claude Opus 4.6"
+date: "2026-04-01"
+fixer: "Claude Code (Opus)"
 review_file: round-3.md
-commit_sha_before: "854a8bcdf37e317af88e3d785e30841929ecb00b"
-commit_sha_after: "5f13fa7223b1b470077faf633dac1a534719a14b"
+commit_sha_before: "03ea8d84929e219a1e4ba639e24470876cf0f484"
+commit_sha_after: "2851833dff2c1b3ebbefdaec2da429a41aed22ef"
 branch: chore/devops-10-improvements
-issues_fixed: 3
+issues_fixed: 4
 issues_skipped: 0
-issues_total: 3
-git_diff_stat: "2 files changed, 60 insertions(+), 19 deletions(-)"
+issues_total: 4
+git_diff_stat: "4 files changed, 12 insertions(+), 6 deletions(-)"
 quality_checks:
   lint: skipped
   typecheck: skipped
@@ -19,76 +19,104 @@ quality_checks:
 fixes:
   - id: "3.1"
     status: FIXED
-    file: "engine/xp-system.md"
-    description: "Added resolved_items merge (pack items + quest-log sub-items) in new section 2.0. Updated base_item_xp (2.0.1), streak (4), counters (5), and all_items_done achievement condition (7) to iterate resolved_items instead of pack.phases[*].items only. Sub-items now contribute to XP, streak, counters, and completion checks."
+    file: "engine/ceremony.md"
+    description: "Changed floor() to round() in loading sequence §2 for consistency with §7 and guide.md §5; added contract note linking all three progress bar implementations"
     deviation: "none"
   - id: "3.2"
     status: FIXED
     file: "engine/guide.md"
-    description: "Renamed section 6 from '/quest summary' to 'variant of /quest status'. Added clarification that summary is not a separate command but a compact rendering mode chosen by the guide when showing /quest status. No change to SKILL.md routing needed — status already routes to guide.md."
+    description: "Strengthened hero_name fallback in Voice Rule 1 to cover empty/whitespace; added defensive note against literal {hero_name}/{hero_title} leaking to user output"
     deviation: "none"
   - id: "3.3"
     status: FIXED
-    file: "engine/guide.md"
-    description: "Added guard for total <= 0 in progress_bar() function (section 5) returning empty bar. Added edge case documentation in section 8 for phases with all items unused (0/0, 0%, empty bar). Anti-whack-a-mole: xp-system.md percent formula already had the guard."
+    file: "engine/xp-system.md"
+    description: "Added prominent boxed deprecation warning at top of §7 for total_xp >= N alias with explicit migration guidance for pack authors"
+    deviation: "none"
+  - id: "3.4"
+    status: FIXED
+    file: "engine/checklist.md"
+    description: "Added explicit cross-references to guide.md §2, xp-system.md §4/§5/§7 in unused item exclusion rules; each bullet now links to the enforcing module and section"
     deviation: "none"
 preserved:
-  - "engine/ceremony.md — no issues in this round"
-  - "engine/scanner.md — no issues in this round"
-  - "engine/checklist.md — no issues in this round; sub-item contract (7.5) was already correct"
-  - "SKILL.md — no routing change needed; summary is variant of status"
+  - "engine/scanner.md — no issues in this file"
+  - "SKILL.md — no issues in this file"
+  - "engine/forge-bridge.md — no issues in this file"
 ---
 
 # Code Ping-Pong — Round 3 Fix Report
 
 ## Summary
 
-All 3 issues from round 3 were fixed in a single commit. The main fix (3.1) was structural: the XP system now merges sub-items from the quest-log into a unified `resolved_items` list before any calculation, closing the contract gap between checklist.md and xp-system.md.
+All 4 issues from round-3.md were addressed in commit 2851833df. Fixes strengthen cross-module contracts for progress bar rendering, hero name resolution, XP deprecation visibility, and unused item exclusion consistency.
 
-## Fixes
+## Fixed Issues
 
 ### Fix for Issue 3.1
 
-**Sub-items contract alignment between checklist and XP system (xp-system.md)**
+**Problem:** The loading sequence in ceremony.md §2 used `floor()` for progress bar fill calculation, while the Resumption Banner (§7) and guide.md §5 `progress_bar()` use `round()`. This inconsistency could cause visual drift between the three progress bar implementations.
 
-The core problem: checklist.md §7.5 defines sub-items as real work that counts toward `items_total`, `items_done`, `percent`, XP, streak, and achievements. But xp-system.md only iterated `pack.phases[*].items`, making sub-items invisible to all calculations.
+**Fix applied:** Changed `floor(20 * (i + 1) / (N + 1))` to `round(20 * (i + 1) / (N + 1))` in ceremony.md §2 (Generation Rules, step 4). Added a **Contract — progress bar visual consistency** note directly below step 5 linking ceremony.md §2, ceremony.md §7, and guide.md §5, mandating same character set, width, and rounding.
 
-Changes:
-1. **New §2.0 — Resolve item list:** Builds a `resolved_items` list merging pack items with quest-log sub-items (detected via `sub_of` field). Sub-items inherit `round(parent.xp * 0.5)` and `required: false` per checklist.md §7.5
-2. **§2.0.1 — XP calculation:** `base_item_xp` now iterates `resolved_items`
-3. **§4 — Streak:** Uses `resolved_items` for streak counting (sub-items participate)
-4. **§5 — Counters:** `items_total`, `items_done`, `items_skipped`, `items_unused` all use `resolved_items`
-5. **§7 — `all_items_done`:** Uses `resolved_items` so sub-items must also be done/skipped/unused
+**Anti-whack-a-mole analysis:** Searched all engine files for `floor` and `round` in progress bar contexts:
+- `ceremony.md §2` — was `floor()`, now `round()` (FIXED)
+- `ceremony.md §7` — already `round()`, already has contract note
+- `guide.md §5` — canonical `progress_bar()` uses `round()`, no change needed
+- `guide.md §6` — references §5 function, no change needed
+- No other files render progress bars
 
-Anti-whack-a-mole sweep: checked all `pack.phases[*].items` iterations across all engine files. The occurrences in phase-scoped conditions (§7: `all_required_done_in_phase`, `all_items_done_in_phase`, `phase_done_same_day`) correctly use pack items only for the `required` gate since sub-items never block phase unlock. `checklist.md:155` is in the migration diff logic (not XP calculation) and is also correct.
+**Semantic propagation:** The contract is "all progress bar implementations across all modules MUST use identical rounding (`round()`), character set (`█`/`░`), and width (20 chars)." Three implementations participate: ceremony.md §2 (loading sequence), ceremony.md §7 (resumption banner), guide.md §5 (status/summary). All three now have contract notes pointing to each other.
 
 ### Fix for Issue 3.2
 
-**Summary view phantom command (guide.md)**
+**Problem:** Voice Rule 1 in guide.md described fallback to "Aventureiro" when quest-log is missing or field is empty, but did not explicitly cover the case where `meta.hero_name` exists but contains only whitespace. Also lacked a defensive note against the literal `{hero_name}` string leaking into user output if substitution fails.
 
-`/quest summary` was documented as a standalone command but had no routing in SKILL.md. Instead of adding a new route (which would expand the API surface unnecessarily), the section was reframed as a rendering variant of `/quest status`:
+**Fix applied:** Updated Voice Rule 1 (guide.md §1, rule 1) to explicitly list all fallback triggers: "no quest-log yet, field is missing, empty, or contains only whitespace". Added the same defense for `hero_title`. Added a defensive clause: "if substitution fails for any reason, use the fallback ('Aventureiro') instead of rendering the raw placeholder."
 
-1. **Renamed heading:** `## 6. Summary View (/quest summary)` → `## 6. Summary View (variant of /quest status)`
-2. **Added clarification paragraph:** Explicitly states this is not a separate command. The guide decides whether to render the expanded view (§5) or summary view (§6) when handling `/quest status`
+**Anti-whack-a-mole analysis:** Searched all engine files for `hero_name` fallback handling:
+- `guide.md §1` — Voice Rule 1 (FIXED: now covers whitespace + literal defense)
+- `ceremony.md §7` — Resumption Banner field sources already say `(fallback: "Aventureiro")`, consistent
+- `ceremony.md §1.5` — Hero Identity input validation already handles empty/whitespace with retries and defaults to "Aventureiro" after 3 retries. Consistent with the strengthened rule.
+- `checklist.md §1` — quest-log template defines `hero_name: string` as required field (ceremony ensures it's populated)
 
-No change to SKILL.md was needed — `status` already routes to guide.md, which now owns the decision of which view to render.
+**Semantic propagation:** The contract is "hero_name must NEVER be empty, whitespace, or a raw placeholder in user-facing output." Participating modules: ceremony.md §1.5 (collects with validation), checklist.md §1 (stores as required), guide.md §1 (renders with fallback), ceremony.md §7 (renders with fallback). All handle the empty case. The new fix makes whitespace handling explicit in guide.md, which is the primary rendering module.
 
 ### Fix for Issue 3.3
 
-**Progress bar division by zero for empty worlds (guide.md)**
+**Problem:** The deprecation of `total_xp >= N` in favor of `item_xp >= N` was documented inline in the condition description but lacked a prominent warning that pack authors would notice when scanning §7.
 
-After the introduction of `unused` status, a world can end up with `total = 0` (all items marked unused). The `progress_bar()` function divided by `total` unconditionally.
+**Fix applied:** Added a boxed `> ⚠️ DEPRECATION NOTICE` blockquote at the top of §7 (Achievement Evaluation), before the pack example. The notice explicitly states: use `item_xp >= N` for all new packs, `total_xp >= N` is deprecated and will be removed, and explains why the old name is misleading. The existing inline deprecation note was preserved for completeness.
 
-Changes:
-1. **§5 progress_bar():** Added `if total <= 0: return "░" * 16` guard before the division
-2. **§8 Edge Cases:** Added explicit documentation for "Phase with all items `unused`" — render empty bar, show 0/0 and 0%
+**Anti-whack-a-mole analysis:** Searched all engine files for `total_xp >= N` and `item_xp >= N`:
+- `xp-system.md §7` — condition definitions (FIXED: added top-of-section warning)
+- No other files reference this condition syntax — pack YAMLs are the consumers
 
-Anti-whack-a-mole sweep: checked all division-by-total patterns in engine files. `xp-system.md` §5 already had a ternary guard (`items_total > 0 ? ... : 0`). `ceremony.md` does not use progress bars. The only unguarded division was in guide.md §5.
+**Semantic propagation:** The contract is "pack achievement conditions should use `item_xp >= N`, not `total_xp >= N`." Only xp-system.md §7 defines these conditions — packs consume them. The fix ensures the deprecation is visible at the entry point of §7, not buried in individual condition docs.
 
-## Anti-Whack-a-Mole Report
+### Fix for Issue 3.4
 
-| Pattern | Files checked | Extra fixes needed |
-|---------|--------------|-------------------|
-| `pack.phases[*].items` without sub-items | xp-system.md, checklist.md | Only xp-system.md §2, §4, §5, §7 needed fixes |
-| Division by total without guard | guide.md, xp-system.md, ceremony.md | Only guide.md §5 was unguarded |
-| Undocumented commands | SKILL.md, guide.md | Only guide.md §6 had the phantom `/quest summary` |
+**Problem:** The unused item exclusion rules in checklist.md §1 listed what unused items do NOT count toward, but lacked explicit cross-references to the specific module sections that enforce these exclusions, risking future contract drift.
+
+**Fix applied:** Updated each bullet in the "Unused items" list (checklist.md §1, `**Note on `unused`:**` section) to include explicit cross-references:
+- `items_total` exclusion → **xp-system.md §5**
+- `percent` exclusion → **xp-system.md §5**
+- Phase unlock → **guide.md §2** `is_phase_unlocked`
+- Streak exclusion → **xp-system.md §4** (new bullet — was implicit)
+- Achievement exclusion → **xp-system.md §7** (new bullet — was only in lifecycle section)
+- Visual indicator → **guide.md §5** (`[·]` icon)
+
+**Anti-whack-a-mole analysis:** Searched all engine files for `unused` handling:
+- `checklist.md §1` — lifecycle documentation (FIXED: added cross-references)
+- `xp-system.md §4` — streak calc filters out unused. Already has comment explaining exclusion.
+- `xp-system.md §5` — counters exclude unused from items_total. Already documented.
+- `xp-system.md §7` — all achievement conditions use `if status == "unused": continue`. Already documented.
+- `guide.md §2` — phase unlock treats unused as non-blocking. Already documented.
+- `guide.md §5` — shows `[·]` icon. Already documented.
+- `ceremony.md §7` — uses xp-system stats which exclude unused. Already documented.
+
+All enforcement points were already correct. The fix adds navigation links from the central definition (checklist.md) to each enforcement point, making the contract discoverable without reading every module.
+
+**Semantic propagation:** The contract is "unused items are invisible to progress, XP, streaks, achievements, and phase unlocks." Seven enforcement points across three modules. The checklist.md lifecycle section already listed most of them in the "Impact across modules" sub-section — the fix elevates these references to the primary exclusion rules list (which is what developers read first) and adds the two that were missing (streaks, achievements).
+
+## Skipped Issues
+
+(none)
