@@ -113,6 +113,8 @@ Store the responses in the quest-log `meta` block:
 - `hero_name`: the name/nickname (REQUIRED — do not proceed without it)
 - `hero_title`: the epic title (OPTIONAL — empty string if skipped)
 
+**Contract — hero_name fallback:** If after all retries the user provides no valid name, the fallback is **"Aventureiro"**. This is the same fallback defined in SKILL.md (Contract — hero_name fallback) and guide.md §1 (Voice Rule 1). All three locations MUST use the same fallback string. If the fallback changes, update ALL locations in the same commit.
+
 ### Usage
 
 From this point forward, NEVER use "Builder" again. Always use `{hero_name}` to address the user. If they provided a `hero_title`, use it in special moments (celebrations, level ups, final victory) with the format: `{hero_name}, {hero_title}`.
@@ -467,7 +469,7 @@ When a quest-log already exists (Fortaleza Ativa), do NOT show the full ceremony
 | `pack.icon` | Pack YAML `pack.icon` (fallback: empty string `""` if not present) |
 | `pack.name` | Pack YAML `pack.name` |
 | `project_name` | Directory name from `cwd` |
-| `hero_name` | `quest_log.meta.hero_name` (fallback: "Aventureiro") |
+| `hero_name` | `quest_log.meta.hero_name` (fallback: "Aventureiro" — see **Contract — hero_name fallback** in SKILL.md and guide.md §1; all three locations share this fallback) |
 | `level_number` | `quest_log.stats.level` |
 | `level_name` | `pack.levels[level_number].name` |
 | `total_xp` | `quest_log.stats.total_xp` |

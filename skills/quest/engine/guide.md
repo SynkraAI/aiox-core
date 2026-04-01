@@ -47,7 +47,10 @@ Find the next mission for the player. All data comes from the **pack YAML** (pha
 3. In the first unlocked phase that has pending items:
    - Find the first item with status `pending` (in pack order)
    - If the item has a `condition` field in the pack, check its `condition_state`
-     in the quest-log (see checklist.md §1, "Condition state"):
+     in the quest-log (see checklist.md §1, "Condition state").
+     **Fallback:** If the `condition` field is missing, malformed, or empty,
+     the item is treated as unconditional (always `applicable`) per checklist.md §1.
+     Guide does NOT re-evaluate conditions — it trusts the persisted `condition_state`:
      - `condition_state: applicable` → item is a valid candidate (proceed normally)
      - `condition_state: unresolved` or `condition_state: deferred` → skip this
        item and move to the next pending item. These items need condition
@@ -81,7 +84,11 @@ function is_phase_unlocked(phase_index, pack, quest_log):
   for item in previous_phase.items:
     if item.required == true:
       item_status = quest_log.items[item.id].status
-      // "unused" items are excluded — they don't exist in this project
+      // "unused" items are excluded — they don't exist in this project,
+      // so they cannot block phase unlock. This is consistent with:
+      //   - checklist.md §1 (unused status definition)
+      //   - xp-system.md §5 (unused excluded from items_total/percent)
+      //   - xp-system.md §7 (unused excluded from achievement conditions)
       if item_status != "done" AND item_status != "unused":
         return false
   // Integration gate — verify prior phase outputs actually work
