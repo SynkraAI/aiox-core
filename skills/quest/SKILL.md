@@ -165,24 +165,46 @@ If the user provides arguments after the skill name:
 When the user runs `/quest help`, show this formatted output:
 
 ```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  ⚔️  QUEST — Comandos Disponíveis
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ⚔️  QUEST — Sua jornada gamificada
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ━━━ JORNADA ━━━
 
   /quest                    Iniciar ou retomar jornada
-  /quest help               Mostrar esta ajuda
-  /quest status             Ver progresso (XP, level, fase)
-  /quest check <id>         Marcar item como feito
-  /quest skip <id>          Pular item opcional
-  /quest unused <id>        Marcar como "não se aplica"
-  /quest sub <id> <label>   Criar sub-item
-  /quest scan               Auto-detectar itens completos
+  /quest status             Ver progresso (XP, level, fase, próxima missão)
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Pack ativo: {pack.name}
-  Progresso: {done + skipped}/{total} ({percent}%)
-  Level: {level_name} ({xp} XP)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ━━━ AÇÕES ━━━
+
+  /quest check <id>         Marcar item como feito (+XP)
+  /quest skip <id>          Pular item opcional
+  /quest unused <id>        Marcar como "não se aplica a este projeto"
+  /quest sub <id> <label>   Criar sub-item dentro de um item existente
+  /quest scan               Auto-detectar itens já completados
+
+  ━━━ AJUDA ━━━
+
+  /quest help               Mostrar esta ajuda
+
+  ━━━ COMO FUNCIONA ━━━
+
+  1. Quest detecta o projeto e escolhe um pack (jornada gamificada)
+  2. Cada pack tem worlds (fases) com missões
+  3. Completar missões dá XP e desbloqueia levels
+  4. Missões com agentes são executadas pelo Forge automaticamente
+  5. Missões manuais (instalações, configs) você faz e confirma
+
+  O Quest NUNCA executa trabalho. Ele gamifica.
+  Quem executa: o Forge (que delega para agentes/squads).
+
+  ━━━ STATUS ATUAL ━━━
+
+  Pack ativo: {pack.name} ({pack.version})
+  Progresso: {done}/{total} ({percent}%)
+  Level: {level_name} ({xp}/{next_level_xp} XP)
+  Próxima missão: {next_item.id} — {next_item.label}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
 
 ### Technical Routing for Commands

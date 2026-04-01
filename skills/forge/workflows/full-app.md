@@ -75,6 +75,19 @@ Read `{FORGE_HOME}/phases/phase-5-deploy.md`:
 
 ---
 
+## Agent Mapping
+
+| Phase | Primary Agent | Supporting |
+|-------|---------------|------------|
+| 0 - Discovery | (Forge core) | @analyst |
+| 1 - Spec | @pm | @architect, @analyst, @qa |
+| 2 - Stories | @sm | @po |
+| 3 - Build | @dev | @qa (SDC loop) |
+| 4 - Integration | @qa | @devops |
+| 5 - Deploy | @devops | — |
+
+---
+
 ## Progress Display
 
 ```

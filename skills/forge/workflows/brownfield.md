@@ -120,6 +120,15 @@ Quando o usuário escolhe, o Forge:
 
 ---
 
+## Agent Mapping
+
+| Phase | Primary Agent | Supporting |
+|-------|---------------|------------|
+| Scan + Diagnose | @architect | — |
+| Route to workflow | (Forge core) | — |
+
+---
+
 ## Outputs
 
 - Diagnostic report (stack, health, structure)

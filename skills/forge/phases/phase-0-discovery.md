@@ -209,6 +209,47 @@ Read `{FORGE_HOME}/ecosystem-scanner.md` and execute the full scan protocol:
 3. Build context-pack.json
 4. Show scan results to user
 
+#### Step 5b: Deep Scan Offer
+
+After showing the initial scan results, ALWAYS offer a deeper ecosystem sweep:
+
+```
+Encontrei {N} recursos relevantes no ecossistema. Quer que eu faça uma varredura mais profunda?
+
+> 1. **Sim, varredura completa**
+>    Escaneia TODOS os squads, skills, minds e workflows disponíveis — pode encontrar algo que eu não pensei
+> 2. **Não, já está bom**
+>    Sigo com o que já encontrei
+> 3. **Tenho uma sugestão**
+>    Eu sei de um squad/skill/mind específico que deveria ser usado
+> 4. Digitar outra coisa.
+```
+
+**Se opção 1 (Deep Scan):**
+
+Execute a FULL ecosystem sweep (slower but comprehensive):
+
+```
+# Scan EVERYTHING — not just routing matrix matches
+1. Glob "squads/*/README.md" → read first 20 lines of EVERY squad
+2. Glob "skills/*/SKILL.md" → read frontmatter of EVERY skill
+3. Glob "squads/mind-cloning/minds/*/metadata.yaml" → read EVERY mind
+4. Glob "skills/forge/workflows/*.md" → list ALL available workflows
+5. For each resource found:
+   - Score relevance (0-10) against project description
+   - Keep score >= 3
+6. Present full list to user:
+   "Encontrei {N} recursos adicionais que podem ajudar:"
+   - {resource_name} — {why_relevant} (score: {N}/10)
+7. Ask: "Quer incluir algum desses no plano?"
+```
+
+**Se opção 2 (Skip):** Proceed with initial scan results.
+
+**Se opção 3 (User suggestion):** User names specific resources. Add them to context-pack.json and proceed.
+
+**Why this matters:** The user may know about squads or skills that the routing matrix doesn't match automatically. A new squad created yesterday won't be in the static routing matrix. The deep scan catches everything.
+
 ### Step 6: Project Detection (FULL_APP only) (FULL_APP only)
 
 For full app mode, also run project detection:
@@ -217,26 +258,68 @@ For full app mode, also run project detection:
 3. Read `skills/app-builder/tech-stack.md`
 4. Suggest stack + template
 
-### Step 7: Scope Summary + CHECKPOINT
+### Step 7: Execution Plan + CHECKPOINT
 
-Show a summary of everything understood:
+**This is the most important step.** Forge MUST present a complete execution plan showing WHAT will be done, by WHOM, and in WHAT order — BEFORE executing anything.
+
+The plan is built from:
+1. The selected **workflow** (which defines phases)
+2. The **ecosystem scan** (which found relevant squads/skills/minds)
+3. The **project context** (from discovery questions)
+
+Show the plan:
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  🔴 CHECKPOINT — Discovery Complete
+  🔴 CHECKPOINT — Plano de Execução
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   📋 Projeto: {name}
   🎯 O que faz: {description}
   👥 Público: {audience}
-  🔧 Stack sugerida: {stack} (template: {template})
-  🧠 Consultores: {minds list}
-  ⚡ Skills: {skills list}
+  🔧 Stack: {stack}
 
-  1. Aprovar e continuar
+  ━━━ PLANO DE EXECUÇÃO ━━━
+
+  Fase 1: {phase_name}
+    👤 Agente: @{agent_name}
+    📦 Squad: /{squad_name} (se aplicável)
+    🔧 Skill: /{skill_name} (se aplicável)
+    📝 O que vai fazer: {description}
+
+  Fase 2: {phase_name}
+    👤 Agente: @{agent_name}
+    📝 O que vai fazer: {description}
+
+  ... (todas as fases do workflow)
+
+  ━━━ RECURSOS DISPONÍVEIS ━━━
+
+  🧠 Minds: {lista de minds relevantes do ecosystem scan}
+  🎯 Squads: {lista de squads que serão usados}
+  ⚡ Skills: {lista de skills que serão usadas}
+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  1. Aprovar e executar
   2. Ajustar algo
   3. Parar aqui
 ```
+
+**How to build the plan:**
+
+1. Read the workflow file (`workflows/{mode}.md`)
+2. Extract all phases from the `## Execution` section
+3. For each phase, extract the agents from the `## Agent Mapping` table
+4. Cross-reference with ecosystem scan results (context-pack.json)
+5. Present the complete plan with ALL phases, agents, squads, and skills
+
+**Rules:**
+- NEVER start execution without showing the plan first
+- The plan MUST list every phase and every agent/squad involved
+- The plan MUST show ecosystem resources (minds, squads, skills) that will enrich the context
+- If the user says "ajustar algo", modify the plan and re-present
+- Only proceed to Step 8 after user approves (option 1)
 
 Wait for user response before proceeding.
 

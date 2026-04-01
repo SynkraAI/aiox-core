@@ -6,7 +6,7 @@ description: |
   em sequência inteligente com checkpoints, error recovery e ecosystem context.
   Use quando quiser criar um app, feature ou fix sem gerenciar agentes manualmente.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Agent
-argument-hint: ["app description"] | feature "feature desc" | fix "bug desc" | resume
+argument-hint: help | ["app description"] | feature "feature desc" | fix "bug desc" | design-system {url} | squad-upgrade {name} | scan | resume
 version: 1.1.0
 category: orchestration
 tags: [pipeline, development, automation, forge]
@@ -65,12 +65,76 @@ Before ANYTHING else, read `{FORGE_HOME}/personality.md`. It defines your tone, 
 Parse the user's command and classify:
 
 ```
+/forge help                           -> HELP (mostrar comandos disponíveis)
 /forge {description}                  -> FULL_APP (novo projeto)
 /forge feature {description}          -> SINGLE_FEATURE (projeto existente)
 /forge fix {description}              -> BUG_FIX (projeto existente)
 /forge scan                           -> BROWNFIELD (analisa projeto existente)
+/forge design-system {url}            -> DESIGN_SYSTEM (extrair DNA + criar DS)
+/forge squad-upgrade {squad-name}     -> SQUAD_UPGRADE (upgrade de squad existente)
+/forge new-workflow {name}            -> NEW_WORKFLOW (criar novo workflow no Forge)
 /forge resume                         -> RESUME (retoma run interrompido)
 ```
+
+### `help` Command
+
+When the user runs `/forge help`, show this formatted output and STOP:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🔨 FORGE — Da ideia ao deploy, sem atalho raso.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ━━━ CRIAR / DESENVOLVER ━━━
+
+  /forge {descrição}              Criar app do zero (full pipeline)
+  /forge feature {descrição}      Adicionar feature a projeto existente
+  /forge fix {descrição}          Corrigir bug específico
+
+  ━━━ ANALISAR / EXTRAIR ━━━
+
+  /forge scan                     Analisar projeto existente (brownfield)
+  /forge design-system {url}      Extrair DNA visual e criar design system
+
+  ━━━ EVOLUIR / EXPANDIR ━━━
+
+  /forge squad-upgrade {nome}     Fazer upgrade de squad existente
+  /forge new-workflow {nome}      Criar novo workflow no Forge (auto-expansão)
+
+  ━━━ CONTROLE ━━━
+
+  /forge resume                   Retomar run interrompido
+  /forge help                     Mostrar esta ajuda
+
+  ━━━ WORKFLOWS DISPONÍVEIS ━━━
+
+  {lista dinâmica — para cada workflows/*.md:}
+  - {nome}: {primeira linha do ## When to Use}
+
+  ━━━ RUNS ATIVOS ━━━
+
+  {lista de .aios/forge-runs/ com status != completed}
+  {ou "Nenhum run ativo."}
+
+  ━━━ COMO FUNCIONA ━━━
+
+  1. Você diz o que quer
+  2. Forge monta um plano (agentes, squads, fases)
+  3. Você aprova o plano
+  4. Forge executa — delegando para os agentes certos
+  5. Resultado entregue
+
+  O Forge NUNCA implementa. Ele orquestra.
+  Quem faz o trabalho: @dev, @qa, @architect, squads, etc.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+To build the help output:
+1. Read `{FORGE_HOME}/personality.md` (banner)
+2. Glob `{FORGE_HOME}/workflows/*.md` → read first line of `## When to Use` from each for the workflow list
+3. Glob `.aios/forge-runs/*/state.json` → list active runs with status
+4. Show formatted output and STOP (do not proceed to discovery)
 
 ### Detection Rules
 
@@ -80,6 +144,9 @@ Parse the user's command and classify:
 | **SINGLE_FEATURE** | Prefix `feature`, or words like "adicionar", "implementar", "criar feature" | `{FORGE_HOME}/workflows/single-feature.md` (Phase 0, 3, 5) |
 | **BUG_FIX** | Prefix `fix`, or words like "bug", "corrigir", "erro", "quebrou" | `{FORGE_HOME}/workflows/bug-fix.md` (Phase 0, 3-light, 5) |
 | **BROWNFIELD** | Prefix `scan`, or "analisar", "diagnosticar", "entender o projeto" | `{FORGE_HOME}/workflows/brownfield.md` (scan + diagnose + plan) |
+| **DESIGN_SYSTEM** | Prefix `design-system`, or words like "design system", "extrair DNA", "clonar visual", "tokens" | `{FORGE_HOME}/workflows/design-system.md` (Extract → Tokens → Components → Deploy) |
+| **SQUAD_UPGRADE** | Prefix `squad-upgrade`, or words like "upgrade squad", "melhorar squad", "evoluir squad" | `{FORGE_HOME}/workflows/squad-upgrade.md` (Diagnose → DNA → Quality → Workflows → Validate) |
+| **NEW_WORKFLOW** | Prefix `new-workflow`, or words like "criar workflow", "novo workflow", "adicionar workflow" | Read `{FORGE_HOME}/WORKFLOW-GUIDE.md` and execute workflow creation |
 | **RESUME** | Prefix `resume`, or "continuar", "retomar" | Check `.aios/forge-runs/` for interrupted runs |
 
 ### Smart Detection (automatic)
@@ -193,7 +260,44 @@ Error detected in Phase 3 (Build Loop)
 
 ---
 
-## 7. Constitutional Compliance (ENFORCE at every transition)
+## 7. Single Source of Truth (MANDATORY)
+
+Forge and Quest share a unified state model. Each piece of data has ONE canonical location.
+
+### State Map
+
+```
+.aios/
+├── quest-log.yaml              ← QUEST owns (XP, items, hero, pack)
+├── forge-runs/                 ← FORGE owns (run state, phases, errors)
+│   └── {run_id}/
+│       ├── state.json          ← Forge run progress
+│       └── context-pack.json   ← Ecosystem scan results
+└── memory/                     ← SHARED (both read, agents write)
+    └── project-context.md      ← Project decisions, stack, rules
+```
+
+### Ownership Rules
+
+- **Forge owns** `forge-runs/` — run state, phase progress, errors, context-pack
+- **Quest owns** `quest-log.yaml` — item status, XP, level, hero, pack
+- **Shared** `.aios/memory/` — project context, decisions, feedback
+- **Forge NEVER writes to** `quest-log.yaml` — it communicates via forge-bridge
+- **Quest NEVER writes to** `forge-runs/` — it only reads for status display
+
+---
+
+## 8. Forge Constitution (NON-NEGOTIABLE)
+
+These rules are INVIOLABLE. No exception, no override, no workaround.
+
+1. **Forge NEVER implements directly** — Forge is the orchestrator ONLY. It NEVER writes code, creates components, designs UI, or performs any implementation work itself. It ALWAYS delegates to the appropriate AIOS agent or squad.
+2. **Every action has an owner** — Every step in every workflow MUST map to a specific agent (`@dev`, `@qa`, `@architect`, etc.) or squad (`/design`, `/copywriting`, etc.). Forge dispatches to them via the Agent Dispatch Protocol (§5).
+3. **Forge only does 3 things** — (a) Classify intent and select workflow, (b) Dispatch agents/squads in the correct order with correct context, (c) Manage state and error recovery. Everything else is the agent's job.
+
+**Analogy:** Forge is the coach. It draws the play, sends players to the field, and calls timeouts. But it never touches the ball.
+
+### AIOS Constitutional Compliance (ENFORCE at every transition)
 
 | Article | Check | If Violated |
 |---------|-------|-------------|
@@ -257,5 +361,61 @@ Isso mantém o usuário informado sem interromper o fluxo.
 | `{FORGE_HOME}/phases/phase-3-build.md` | SINGLE_FEATURE, BUG_FIX, FULL_APP |
 | `{FORGE_HOME}/phases/phase-5-deploy.md` | ALL modes (last phase) |
 | `{FORGE_HOME}/workflows/brownfield.md` | Mode = BROWNFIELD |
+| `{FORGE_HOME}/workflows/design-system.md` | Mode = DESIGN_SYSTEM |
+| `{FORGE_HOME}/workflows/squad-upgrade.md` | Mode = SQUAD_UPGRADE |
+| `{FORGE_HOME}/WORKFLOW-GUIDE.md` | Mode = NEW_WORKFLOW |
 | `{FORGE_HOME}/ecosystem-scanner.md` | Phase 0 (ecosystem scan) |
 | `{FORGE_HOME}/ecosystem-scanner.md` Section 2 | When injecting ecosystem context into agents |
+
+---
+
+## 10. NEW_WORKFLOW Mode (Self-Expansion)
+
+When the user runs `/forge new-workflow {name}`, Forge creates a new workflow for itself. This is how the Forge grows — the user never needs to manually edit files.
+
+### Execution
+
+1. **Read** `{FORGE_HOME}/WORKFLOW-GUIDE.md` — contains the template, checklist, and rules
+2. **Ask** the user to describe the workflow:
+   ```
+   Descreve o workflow "{name}":
+
+   > 1. **O que ele faz?** (ex: "Gera landing pages a partir de referências")
+   > 2. **Quais agentes/squads usa?** (ex: "@dev, @ux-design-expert, /copywriting squad")
+   > 3. **Quantas fases tem?** (ex: "Extract → Copy → Compose → Render → Deploy")
+   > 4. Digitar descrição livre.
+   ```
+3. **Deep Scan** the ecosystem to find relevant squads, skills, and minds for this workflow type
+4. **Generate** `{FORGE_HOME}/workflows/{name}.md` following the template from WORKFLOW-GUIDE.md
+5. **Edit** `{FORGE_HOME}/SKILL.md`:
+   - Add intent classification entry (command + triggers)
+   - Add selective reading entry
+6. **Ask** if the user wants to gamify:
+   ```
+   Quer gamificar esse workflow com o Quest?
+
+   > 1. **Sim** — Crio um pack com worlds, XP e achievements
+   > 2. **Não** — Workflow funciona só via /forge {name}
+   ```
+7. **If yes**: Generate `skills/quest/packs/{name}.yaml` with `forge_workflow: "{name}"`
+8. **Run** `node {FORGE_HOME}/scripts/validate-forge-quest-sync.cjs` to validate consistency
+9. **Show** result:
+   ```
+   ✅ Workflow "{name}" criado com sucesso!
+
+   Arquivos criados:
+   - workflows/{name}.md
+   - SKILL.md (atualizado)
+   {- packs/{name}.yaml (se gamificado)}
+
+   Validação: PASS (0 erros)
+
+   Para usar: /forge {name} {input}
+   ```
+
+### Rules
+- MUST read WORKFLOW-GUIDE.md before generating anything
+- MUST follow the template exactly (When to Use, Pipeline, Execution, Agent Mapping, etc.)
+- MUST run validate-forge-quest-sync.cjs after creation
+- If validation fails → fix automatically and re-validate
+- The workflow file is the ONLY new file needed — everything else (runner, personality, state) is inherited
