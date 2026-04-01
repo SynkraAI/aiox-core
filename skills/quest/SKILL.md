@@ -2,7 +2,7 @@
 name: quest
 description: Quest Engine — orchestrates gamified development journeys via packs
 allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, Agent]
-argument-hint: "check <id> | skip <id> | unused <id> | sub <parent_id> <label> | scan | status"
+argument-hint: "help | check <id> | skip <id> | unused <id> | sub <parent_id> <label> | scan | status"
 version: "2.0.0"
 category: orchestration
 ---
@@ -46,7 +46,35 @@ The user has been here before. Show a quick status and the next mission. This sh
 
 **Steps:**
 1. Read `.aios/quest-log.yaml`
-2. Determine the active pack:
+2. **Auto-Reconciliation (MANDATORY — runs EVERY resumption, silently)**
+   Reconcile Quest state with Forge state before showing anything to the user.
+   ```
+   1. Glob ".aios/forge-runs/*/state.json"
+   2. For each state.json found:
+      a. Read state.json
+      b. Check if run belongs to current pack (match pack id or workflow)
+      c. For each phase marked "completed" in state.json:
+         - Identify which quest-log items map to that phase
+           (use Quest Integration table from the workflow, or infer from phase number)
+         - For each mapped item:
+           - If quest-log already has item as "done" → skip (already synced)
+           - If quest-log has item as "pending" or "detected" → reconcile it directly:
+             set items[{id}].status = "done"
+             set items[{id}].completed_at = <current datetime ISO 8601 UTC>
+             set items[{id}].checked_by = "forge"
+             (remove detected_at if present)
+             Do NOT call `check` from checklist.md §4 — that path enforces
+             `is_phase_unlocked()` which triggers the interactive Integration Gate.
+             Reconciliation trusts Forge's persisted completion state directly.
+      d. Log reconciliation: "{N} items synced from Forge run {run_id}"
+   3. If any items were synced, recalculate stats (XP, level) before proceeding
+   ```
+   **Rules:**
+   - This runs SILENTLY — no output to user unless items were synced
+   - If items were synced, show ONE line: "Sincronizei {N} itens do último Forge run."
+   - NEVER ask for confirmation — auto-sync is NON-NEGOTIABLE
+   - If state.json is corrupted or unreadable → skip silently, log warning
+3. Determine the active pack:
    - If the user passed `--pack <id>` (i.e., `args.pack` is set), route through
      `engine/scanner.md` §5 (Pack Override) and §6.5 (Post-selection Gates) to
      validate schema, check `detection.prerequisites`, and enforce expansion pack
@@ -56,10 +84,10 @@ The user has been here before. Show a quick status and the next mission. This sh
      validation path as first invocation.
    - Otherwise, use `meta.pack` from the quest-log as the active pack.
      Load `packs/{meta.pack}.yaml`.
-3. Read `engine/checklist.md` §3 (Read Quest-log) — this recalculates stats via xp-system AND handles pack version migration automatically. The checklist module is self-contained. If a pack mismatch was detected in step 2, checklist handles the transition flow.
-4. Read `engine/ceremony.md` §7 — output the Resumption Banner. Ceremony owns all visual output.
-5. Find next mission via `engine/guide.md` §2 (Next Mission Selection). NEVER implement mission selection inline — guide.md owns phase unlock checks, conditions, Integration Gate, and skip logic.
-6. Show the next mission card via `engine/guide.md` §3.
+4. Read `engine/checklist.md` §3 (Read Quest-log) — this recalculates stats via xp-system AND handles pack version migration automatically. The checklist module is self-contained. If a pack mismatch was detected in step 3, checklist handles the transition flow.
+5. Read `engine/ceremony.md` §7 — output the Resumption Banner. Ceremony owns all visual output.
+6. Find next mission via `engine/guide.md` §2 (Next Mission Selection). NEVER implement mission selection inline — guide.md owns phase unlock checks, conditions, Integration Gate, and skip logic.
+7. Show the next mission card via `engine/guide.md` §3.
 7. Update `last_active` in `~/.aios/quest-registry.yaml`.
 
 **STOP HERE. Do not continue to the sections below.**
@@ -124,6 +152,44 @@ If the user provides arguments after the skill name:
 
 | Input | Action |
 |-------|--------|
+| `help` | Show all available commands (this table) with brief descriptions |
+| `check <id>` | Mark item as done. Calculates XP, triggers celebrations |
+| `skip <id>` | Skip an optional item (does not count against progress) |
+| `unused <id>` | Mark item as "not applicable" to this project |
+| `sub <parent_id> <label>` | Create a sub-item under an existing item |
+| `scan` | Auto-detect completed items via scan_rules |
+| `status` | Show current progress: XP, level, phase, next mission |
+
+### `help` Command Output
+
+When the user runs `/quest help`, show this formatted output:
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ⚔️  QUEST — Comandos Disponíveis
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  /quest                    Iniciar ou retomar jornada
+  /quest help               Mostrar esta ajuda
+  /quest status             Ver progresso (XP, level, fase)
+  /quest check <id>         Marcar item como feito
+  /quest skip <id>          Pular item opcional
+  /quest unused <id>        Marcar como "não se aplica"
+  /quest sub <id> <label>   Criar sub-item
+  /quest scan               Auto-detectar itens completos
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Pack ativo: {pack.name}
+  Progresso: {done + skipped}/{total} ({percent}%)
+  Level: {level_name} ({xp} XP)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+### Technical Routing for Commands
+
+| Input | Technical Action |
+|-------|--------|
+| `help` | Show formatted help (above) — no file reads needed beyond quest-log for stats |
 | `check <id>` | Read `.aios/quest-log.yaml` + pack YAML + `engine/checklist.md` → execute check |
 | `skip <id>` | Read `.aios/quest-log.yaml` + pack YAML + `engine/checklist.md` → execute skip |
 | `unused <id>` | Read `.aios/quest-log.yaml` + pack YAML + `engine/checklist.md` → mark as unused |
@@ -142,6 +208,61 @@ These rules are INVIOLABLE. No exception, no override, no workaround.
 3. **Quest only does 3 things** — (a) Show the next mission, (b) Track completion (XP, check, celebrations), (c) Manage quest-log state. Everything else is Forge's job.
 
 **Analogy:** Quest is the scoreboard. Forge is the coach. Agents are the players. The scoreboard never plays the game.
+
+---
+
+## Single Source of Truth (MANDATORY)
+
+Quest and Forge share a unified state model. Each piece of data has ONE canonical location. No duplication, no drift.
+
+### State Map
+
+```
+.aios/
+├── quest-log.yaml              ← QUEST owns (XP, items, hero, pack)
+├── forge-runs/                 ← FORGE owns (run state, phases, errors)
+│   └── {run_id}/
+│       ├── state.json          ← Forge run progress
+│       └── context-pack.json   ← Ecosystem scan results
+└── memory/                     ← SHARED (both read, agents write)
+    └── project-context.md      ← Project decisions, stack, rules
+```
+
+### Ownership Rules
+
+| Data | Owner | Canonical Location | Who Reads |
+|---|---|---|---|
+| Item completion status | **Quest** | `quest-log.yaml → items.{id}.status` | Quest, Forge (via bridge) |
+| XP, level, achievements | **Quest** | `quest-log.yaml → stats` | Quest only |
+| Hero name, pack | **Quest** | `quest-log.yaml → meta` | Quest only |
+| Run progress (phase, status) | **Forge** | `forge-runs/{id}/state.json` | Forge, Quest (read-only) |
+| Ecosystem context | **Forge** | `forge-runs/{id}/context-pack.json` | Forge, agents |
+| Project decisions | **Shared** | `.aios/memory/project-context.md` | All (read) | Agents (via Forge) + user manual. Quest NEVER writes. Forge NEVER writes directly. |
+
+### Sync Protocol
+
+When Forge completes an item successfully:
+1. Forge updates `state.json` (its own state)
+2. forge-bridge calls `check {item.id} source=forge` on Quest
+3. Quest updates `quest-log.yaml` (its own state)
+4. **Both states are now consistent**
+
+When Quest scans items:
+1. Quest reads `quest-log.yaml` + scan_rules
+2. Quest does NOT read or modify `state.json`
+3. Quest updates its own `quest-log.yaml` only
+
+**RULE:** Quest NEVER writes to `forge-runs/`. Forge NEVER writes to `quest-log.yaml`. They communicate ONLY through forge-bridge.
+
+### Auto-Reconciliation (Automatic Sync)
+
+The system has TWO automatic sync mechanisms — the user never needs to think about this:
+
+1. **Real-time sync (during execution):** When Forge completes an item, forge-bridge immediately calls `check {item.id} source=forge` on Quest. This is the primary sync mechanism.
+
+2. **Resumption sync (catch-all):** Every time `/quest` is invoked (resumption), Step 2 runs auto-reconciliation: it reads ALL forge state.json files, compares with quest-log, and syncs any items that Forge completed but Quest missed (e.g., due to context ending mid-execution). This is the safety net.
+
+**Together, these guarantee:** No matter what happens (context ends, error, crash), the NEXT time the user opens Quest, everything is synced automatically.
 
 ---
 

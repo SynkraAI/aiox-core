@@ -446,7 +446,7 @@ When a quest-log already exists (Fortaleza Ativa), do NOT show the full ceremony
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
   Nível {level_number}: {level_name}    XP: {total_xp}/{next_level_xp}
-  Progresso: {items_done}/{items_total} ({percent}%)
+  Progresso: {items_done + items_skipped}/{items_total} ({percent}%)
   ████████████░░░░░░░░  {percent}%
 
   Bem-vindo de volta, {hero_name}!

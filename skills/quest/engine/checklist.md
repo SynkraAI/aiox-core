@@ -87,10 +87,10 @@ items:
    - `hero_title`: value collected by ceremony (empty string `""` if user opted out)
    - `created`: current datetime (ISO 8601 UTC)
    - `last_updated`: same as `created`
-3. Build the `items` map: iterate ALL phases in the pack, for each item add an entry keyed by `item.id` with `{ status: pending }`.
+3. Build the `items` map: iterate ALL phases in the pack, for each item add an entry keyed by `item.id` with `{ status: pending }`. Then evaluate conditions: for each item with a `condition` field, invoke the condition evaluation rules from §6. Condition decisions (`unused`) are staged — apply them to the items map before calculating stats. This ensures that items which don't apply to this project are excluded from `items_total` from the start.
 4. Initialize `achievements` as an empty list `[]`.
 5. Initialize `integration_results` as an empty map `{}`.
-6. Calculate `stats` by calling the xp-system (see `engine/xp-system.md`). Pass the pack and the quest-log items. On a fresh quest-log all items are pending, so: `total_xp: 0`, `level: 1`, `level_name: <level 1 name from pack>`, `streak: 0`, `items_done: 0`, `items_total: <count of all items>`, `items_skipped: 0`, `percent: 0`.
+6. Calculate `stats` by calling the xp-system (see `engine/xp-system.md`). Pass the pack and the quest-log items (with any `unused` conditions already applied from step 3). On a fresh quest-log with no conditions: `total_xp: 0`, `level: 1`, `level_name: <level 1 name from pack>`, `streak: 0`, `items_done: 0`, `items_total: <count of all items minus unused>`, `items_skipped: 0`, `percent: 0`.
 7. Write the YAML file to `.aios/quest-log.yaml`.
 
 ---
@@ -283,16 +283,23 @@ items:
 
 **Steps:**
 
-1. Collect ALL pack items that have a `scan_rule` field — from ALL phases, including LOCKED ones. Scan detects pre-existing work regardless of phase progression. The phase lock guard (section 4) applies only to manual `check`, `skip`, and `unused` commands.
+1. Collect ALL pack items that have a `scan_rule` field OR a `condition` field — from ALL phases, including LOCKED ones. Scan detects pre-existing work regardless of phase progression. The phase lock guard (section 4) applies only to manual `check`, `skip`, and `unused` commands. Items with BOTH `scan_rule` and `condition` are included once (scan_rule takes priority per §6 step 1).
 2. Determine which phases are currently UNLOCKED (using `is_phase_unlocked_persisted` from §3 — the pure predicate with no side effects). Do NOT use `is_phase_unlocked` from guide.md §2 here: that function calls `verify_phase_integration()`, which persists integration results and may prompt the user. Scan is observational until the user confirms at step 5.
-3. For each item with `scan_rule`:
+3. For each collected item (scan_rule and/or condition):
    - If `quest_log.items[item.id].status` is NOT `pending`, skip (already resolved).
-   - Evaluate the `scan_rule` using scanner functions (see table below).
-   - If the rule evaluates to `true`:
-     - If item's phase is UNLOCKED → mark as `done` (add to discoveries list)
-     - If item's phase is LOCKED → mark as `detected` (add to detections list)
+   - **If item has `scan_rule`:** evaluate the scan_rule using scanner functions (see table below).
+     - If the rule evaluates to `true`:
+       - If item's phase is UNLOCKED → add to discoveries list (staged as `done`)
+       - If item's phase is LOCKED → add to detections list (staged as `detected`)
+     - If the rule evaluates to `false` AND item also has `condition` → fall through to condition evaluation below.
+     - If the rule evaluates to `false` and no `condition` → skip item.
+   - **If item has `condition` (and no scan_rule, or scan_rule was false):** evaluate per §6:
+     - Ask the user: `"Este item se aplica? {condition} (s/n/pular)"`
+     - `s` → leave as pending (applicable, not yet done). Do NOT add to any staged list.
+     - `n` → add to unused_decisions list (staged as `unused`). Do NOT mutate quest-log yet.
+     - `pular` → skip for this session.
    - **Why `detected` instead of `done` for locked phases:** The Integration Gate (guide.md §2.5) must verify that prior phases work together before unlocking the next. Marking items as `done` in locked phases would bypass this critical check. `detected` items are automatically promoted to `done` when the phase is unlocked.
-3. If discoveries list AND detections list are both empty, show: `"Scan completo. Nenhuma nova descoberta."` and stop.
+3. If discoveries list AND detections list AND unused_decisions list are ALL empty, show: `"Scan completo. Nenhuma nova descoberta."` and stop.
 4. Show discoveries (unlocked phases) and detections (locked phases) separately:
 
 ```
@@ -317,12 +324,24 @@ Pré-detectados em fases trancadas ({detection_count} itens):
   Estes itens serão promovidos automaticamente quando o world for desbloqueado.
 ```
 
+If unused_decisions list is non-empty, also show:
+
+```
+Não se aplicam a este projeto ({unused_count} itens):
+
+  [·] {id} — {label}  (condição: {condition})
+  ...
+
+  Serão excluídos do progresso.
+```
+
 5. Wait for user confirmation.
    - If `s` (yes):
      - For each **discovered** item (unlocked phases): set `status: done`, `completed_at: <now>`, and `checked_by: "scan"`.
      - For each **detected** item (locked phases): set `status: detected` and `detected_at: <now>`.
+     - For each **unused_decision** item: set `status: unused`. These are condition items the user said "n" to — they do not apply to this project.
      - Recalculate stats via xp-system, passing `scan_detected_count: discovery_count` as scan context (only unlocked-phase items marked `done` — NOT locked-phase `detected` items, which haven't become completed work yet). This enables achievements with conditions like `scan_found >= N` (see xp-system.md §7, `auto_detected >= N` / `scan_found >= N` conditions). Detect achievements. Save quest-log.
-   - If `n` (no): abort without changes.
+   - If `n` (no): abort without changes (discoveries, detections, AND unused decisions are all discarded).
 
 ### Scanner Functions
 
@@ -338,16 +357,16 @@ Parse the expression, evaluate each function call, apply boolean logic.
 
 ## 6. Conditions
 
-Items with a `condition` field require special handling.
+Items with a `condition` field require special handling. Condition evaluation is **always invoked through** the scan flow (§5) or the Create Quest-log flow (§2) — never as a standalone path.
 
-**Steps:**
+**Evaluation rules (invoked by §5 step 3 and §2 step 3):**
 
 1. If the item also has a `scan_rule`, evaluate the scan_rule first.
-   - If `scan_rule` is `true` → treat as auto-detected (mark as `done` in scan flow).
+   - If `scan_rule` is `true` → treat as auto-detected (mark as `done`/`detected` in scan flow).
    - If `scan_rule` is `false` → proceed to step 2.
 2. Ask the user: `"Este item se aplica? {condition} (s/n/pular)"`
    - `s` (yes): item stays `pending` — it applies but is not yet done. The user must complete it normally.
-   - `n` (no): mark as `unused` **directly** — set `items[{id}].status` to `unused` and recalculate stats via xp-system. Do NOT delegate to the manual `unused` flow in §4, because that flow enforces the phase lock guard which would block future-phase items. Since conditions are evaluated during scan or first-time creation (step 3 below), all phases are observable and the phase lock guard does not apply. The condition does not apply to this project, so the item is excluded from `items_total` and `percent`. Do NOT use `skipped` here — `skipped` is for applicable items the user chose to bypass.
+   - `n` (no): add to the scan's `unused_decisions` staging list. The actual mutation to `unused` happens ONLY when the user confirms the scan summary (§5 step 5, "s"). Do NOT mutate quest-log state here — this keeps condition decisions in the same transactional save path as scan discoveries and detections. The item does not apply to this project, so it will be excluded from `items_total` and `percent` once persisted. Do NOT use `skipped` here — `skipped` is for applicable items the user chose to bypass.
    - `pular` (skip for now): leave as `pending`, do not ask again in this session.
 3. Conditions are evaluated during scan and during first-time quest-log creation. Both contexts observe items from ALL phases (including locked ones), so the phase lock guard from §4 is intentionally bypassed — it applies only to explicit manual commands (`/quest check`, `/quest skip`, `/quest unused`).
 

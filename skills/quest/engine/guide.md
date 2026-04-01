@@ -54,9 +54,9 @@ Find the next mission for the player. All data comes from the **pack YAML** (pha
      e. If user says "s" → this is the next mission
    - Return this item as the next mission
 4. If no pending items exist in any unlocked phase:
-   a. Check ALL phases (including locked ones) for any `pending` items in `resolved_items`
-   b. If pending items exist in locked phases → show: "Todas as missões dos worlds desbloqueados estão completas, mas ainda há missões pendentes em worlds trancados. Verifique se o Integration Gate (§2.5) foi aprovado para desbloquear o próximo world."
-   c. If NO pending items exist in ANY phase (unlocked or locked) → quest is complete
+   a. Check ALL phases (including locked ones) for any **unresolved** items (`pending` OR `detected`) in `resolved_items`
+   b. If unresolved items exist in locked phases → show: "Todas as missões dos worlds desbloqueados estão completas, mas ainda há missões pendentes ou pré-detectadas em worlds trancados. Verifique se o Integration Gate (§2.5) foi aprovado para desbloquear o próximo world."
+   c. If NO unresolved items (`pending` or `detected`) exist in ANY phase (unlocked or locked) → quest is complete
 ```
 
 **Note:** Sub-items (3-part IDs from checklist.md §7.5) are NOT candidates for next mission selection. They are tracked for progress but must be managed manually by the user via `/quest check {sub_id}`.
@@ -375,7 +375,7 @@ Triggered when ALL items in `resolved_items` for a phase (pack items + valid sub
 
   "{phase.complete_message || "World concluído."}"
 
-  Missões: {done_in_phase}/{total_in_phase}
+  Missões: {done_in_phase + skipped_in_phase}/{total_in_phase}
   XP ganho neste world: +{phase_xp}
   XP total: {total_xp}
 
@@ -424,7 +424,7 @@ If `xp_bonus` is 0 or absent, omit the bonus line.
 
 ### 4.5 Final Victory
 
-Triggered when ALL phases are complete (no pending items in `resolved_items` across any phase — including valid sub-items). Output this template EXACTLY (replacing placeholders):
+Triggered when ALL phases are complete (no unresolved items — `pending` or `detected` — in `resolved_items` across any phase, including valid sub-items). `detected` items block victory because they represent work discovered in locked phases that hasn't passed the Integration Gate yet. Output this template EXACTLY (replacing placeholders):
 
 ```
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -438,7 +438,7 @@ Triggered when ALL phases are complete (no pending items in `resolved_items` acr
 
     Level {level}: {level_name}
     XP Total: {total_xp}
-    Missões: {items_done}/{items_total} (100%)
+    Missões: {items_done + items_skipped}/{items_total} (100%)
     Achievements: {achievements_count}/{achievements_total}
     Streak final: {streak} 🔥
 
@@ -571,10 +571,10 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
 ### Template
 
 ```
-  WORLD {N}: {phase.name}                      [{done}/{total}] COMPLETE
-  WORLD {N}: {phase.name}                      [{done}/{total}] COMPLETE
+  WORLD {N}: {phase.name}                      [{done + skipped}/{total}] COMPLETE
+  WORLD {N}: {phase.name}                      [{done + skipped}/{total}] COMPLETE
 
-  WORLD {N}: {phase.name}                      [{done}/{total}]  ← VOCE ESTA AQUI
+  WORLD {N}: {phase.name}                      [{done + skipped}/{total}]  ← VOCE ESTA AQUI
   ─────────────────────────────────────────────────────
   [x] {id}  {label} .......................... +{xp} XP
   [x] {id}  {label} .......................... +{xp} XP
@@ -586,22 +586,22 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
   ─────────────────────────────────────────────────────
   Progresso do mundo: [{progress_bar}]  {percent}%
 
-  WORLD {N}: {phase.name}                      [{done}/{total}]  LOCKED
+  WORLD {N}: {phase.name}                      [{done + skipped}/{total}]  LOCKED
   [~] {id}  {label} .......................... (pré-detectado, aguardando unlock)
-  WORLD {N}: {phase.name}                      [{done}/{total}]  LOCKED
+  WORLD {N}: {phase.name}                      [{done + skipped}/{total}]  LOCKED
 ```
 
-> **Note on `detected` items in LOCKED phases:** When a LOCKED phase contains items with status `detected` (pre-detected by scan before the phase was unlocked), they are shown inline with the `[~]` icon so the user can see progress already discovered behind the lock. `detected` items do NOT count toward the phase's `{done}` counter — they are promoted to `done` only when the phase is unlocked (see checklist.md §7.5 / scan flow).
+> **Note on `detected` items in LOCKED phases:** When a LOCKED phase contains items with status `detected` (pre-detected by scan before the phase was unlocked), they are shown inline with the `[~]` icon so the user can see progress already discovered behind the lock. `detected` items do NOT count toward the phase's `{done + skipped}` counter — they are promoted to `done` only when the phase is unlocked (see checklist.md §7.5 / scan flow).
 
 ### Rules
 
 | Phase state | Display |
 |-------------|---------|
 | All items in `resolved_items` done/skipped/unused | `COMPLETE` — collapsed, one line |
-| Has pending items AND `is_phase_unlocked()` returns true (§2) | `← VOCE ESTA AQUI` — expanded with all items |
-| `is_phase_unlocked()` returns false (required items pending OR Integration Gate not passed) | `LOCKED` — collapsed, one line |
+| Has pending items AND `is_phase_unlocked_persisted()` returns true (checklist.md §3) | `← VOCE ESTA AQUI` — expanded with all items |
+| `is_phase_unlocked_persisted()` returns false (required items pending OR Integration Gate not passed) | `LOCKED` — collapsed, one line |
 
-**CRITICAL:** Phase state MUST be derived from `is_phase_unlocked_persisted` (checklist.md §3) for rendering contexts, to avoid triggering the interactive Integration Gate. This includes BOTH conditions: (a) all required items in the previous phase are `done`/`unused`, AND (b) `verify_phase_integration()` passes for the prior phase. If either condition fails, the phase is `LOCKED`. For pure rendering (no interactive gate), check `quest_log.integration_results[str(phase_index)]` — if the entry exists and `passed == true`, the gate is satisfied; otherwise, the phase remains locked.
+**CRITICAL:** `/quest status` MUST use `is_phase_unlocked_persisted` (checklist.md §3) — NEVER `is_phase_unlocked` or `verify_phase_integration()`. The persisted predicate checks required-item status AND the persisted `integration_results` entry without side effects or user interaction. This includes BOTH conditions: (a) all required items in the previous phase are `done`/`unused`, AND (b) `quest_log.integration_results[str(phase_index)]` exists with `passed == true`. If either condition fails, the phase is `LOCKED`.
 
 ### Item Status Icons
 
@@ -623,7 +623,7 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
 - `phase_unused` = count of items in that phase with status `unused`
 - `phase_total` = count of resolved items in that phase MINUS `phase_unused`
 
-Pass `phase_done`, `phase_skipped`, and `phase_total` to `progress_bar()`. The global `items_total` from xp-system §5 is still used for the overall quest summary line (§6: `Missões: {items_done}/{items_total}`), but never for individual world bars.
+Pass `phase_done`, `phase_skipped`, and `phase_total` to `progress_bar()`. The global `items_total` from xp-system §5 is still used for the overall quest summary line (§6: `Missões: {items_done + items_skipped}/{items_total}`), but never for individual world bars.
 
 ```
 function progress_bar(done, skipped, total):
@@ -639,7 +639,7 @@ function progress_bar(done, skipped, total):
 
 Compact one-line-per-phase view with overall stats. This is NOT a separate command — it is rendered as part of `/quest status` when the engine determines that a compact overview is more useful (e.g., many phases). The entrypoint routes `status` to guide.md; the guide decides whether to show the expanded view (§5) or this summary.
 
-**IMPORTANT:** This view MUST use the `progress_bar()` function from section 5 (16-char bar with `█` and `░`). Do NOT substitute with `[done/total]` or any other format — the progress bar is mandatory here. Each per-phase row uses **phase-scoped counters** (`phase_done`, `phase_total` — see §5 progress bar rules), NOT global `items_total`. The global counters appear only in the bottom summary line (`Missões: {items_done}/{items_total}`).
+**IMPORTANT:** This view MUST use the `progress_bar()` function from section 5 (16-char bar with `█` and `░`). Do NOT substitute with `[done/total]` or any other format — the progress bar is mandatory here. Each per-phase row uses **phase-scoped counters** (`phase_done`, `phase_skipped`, `phase_total` — see §5 progress bar rules), NOT global `items_total`. The global counters appear only in the bottom summary line (`Missões: {items_done + items_skipped}/{items_total}`).
 
 ### Template
 
@@ -647,12 +647,12 @@ Compact one-line-per-phase view with overall stats. This is NOT a separate comma
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   {pack.icon} {pack.name} — {meta.project}       Level {level}: {level_name}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  W{N}  {phase.name}        {progress_bar}  {done}/{total}  {state}
-  W{N}  {phase.name}        {progress_bar}  {done}/{total}  {state}
-  W{N}  {phase.name}        {progress_bar}  {done}/{total}  {state}
+  W{N}  {phase.name}        {progress_bar}  {done + skipped}/{total}  {state}
+  W{N}  {phase.name}        {progress_bar}  {done + skipped}/{total}  {state}
+  W{N}  {phase.name}        {progress_bar}  {done + skipped}/{total}  {state}
   ...
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  XP: {total_xp}  |  Missões: {items_done}/{items_total} ({percent}%)
+  XP: {total_xp}  |  Missões: {items_done + items_skipped}/{items_total} ({percent}%)
 
   Próxima missão: {next_item.id} {next_item.label} (+{next_item.xp} XP)
   Proximo achievement: {next_achievement.name}
@@ -694,9 +694,9 @@ After showing a mission card, the engine waits for the player to act. This secti
 
 2. ROUTE by execution type:
 
-   2a. If should_use_forge(item) == true (Forge execution):
-       - Ask: "Executar via Forge? (s/n)"
-       - If "s":
+   2a. If should_use_forge(item) == true (Forge execution — AUTOMATIC, no question):
+       - Forge execution is NON-NEGOTIABLE. Do NOT ask "Executar via Forge? (s/n)".
+         Just execute. The user already confirmed by advancing to this mission.
          i.  Read engine/forge-bridge.md (lazy-load)
          ii. command = build_forge_command(item, pack, quest_log)
          iii. Invoke: Skill(skill: "forge", args: command.args)
@@ -709,7 +709,7 @@ After showing a mission card, the engine waits for the player to act. This secti
              - Show next mission card
          vi. If result.auto_check == false (Forge failed):
              - Show error: "{hero_name}, o Forge travou: {result.error}"
-             - Ask: "Tentar de novo? (s/n/manual)"
+             - Ask: "Tentar de novo? (s/n)"
                - s → retry from step 2a
                - n → keep mission pending, select next mission
                - manual → fall through to step 2c
@@ -778,7 +778,7 @@ If the same mission is shown 3+ times without progress ({hero_name} keeps saying
 ## 8. Edge Cases
 
 - **No pending items in any unlocked phase but locked phases remain:** Show: "Todas as missões do world atual estão completas, mas o próximo world ainda está trancado. Verifique se há itens obrigatórios pendentes ou se o Integration Gate (§2.5) ainda não foi aprovado."
-- **No pending items in `resolved_items` across all phases (including valid sub-items):** Trigger Final Victory (section 4.5). Items with status `skipped` or `unused` do NOT block victory — only `pending` does.
+- **No unresolved items in `resolved_items` across all phases (including valid sub-items):** Trigger Final Victory (section 4.5). Items with status `skipped` or `unused` do NOT block victory — only `pending` and `detected` do. `detected` items represent pre-scanned work in locked phases that hasn't been promoted through the Integration Gate.
 - **Pack has no phases:** Show: "Este pack não tem missões definidas."
 - **Phase has no items:** Skip the phase, treat as complete for unlock purposes.
 - **Phase with all items `unused` (total = 0):** Render progress bar as `░░░░░░░░░░░░░░░░` (empty), show `0/0` and `0%`. Never divide by zero — the `progress_bar()` guard in §5 handles this.
