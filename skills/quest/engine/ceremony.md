@@ -162,7 +162,7 @@ Generate progress bars using the pack's phase names. Each phase becomes a loadin
    - Label: derive a scanning verb from the phase name. Use the pattern: `Analisando {phase.name}...`
 5. Last line is always: `████████████████████  Scan completo!`
 
-**Contract — progress bar visual consistency:** The loading sequence progress bar MUST use the same character set (`█` for filled, `░` for empty), bar width (20 characters), and rounding logic (`round()`) as the Resumption Banner (§7) and `progress_bar()` in guide.md §5. If any of these implementations change, ALL others MUST be updated in the same commit.
+**Contract — progress bar visual consistency:** The loading sequence progress bar MUST use the same character set (`█` for filled, `░` for empty), bar width (20 characters), and rounding logic (`round()`) as the Resumption Banner (§7), `progress_bar()` in guide.md §5 (Quest Log View), and the summary view in guide.md §6. All four locations share one visual contract. If any of these implementations change, ALL others MUST be updated in the same commit.
 
 ### Example (pack with 4 phases)
 
@@ -488,10 +488,12 @@ bar = "█" * filled + "░" * (20 - filled)
 
 **Contract — progress bar visual consistency:** The Resumption Banner progress bar MUST use the exact same character set (`█` for filled, `░` for empty), bar width (20 characters), and rounding logic (`round()`) as:
 - The **loading sequence** in this file (Section 2)
-- The **`progress_bar()` function** in guide.md §5
-- The **summary view** in guide.md §6
+- The **`progress_bar()` function** in guide.md §5 (Quest Log View per-phase bars)
+- The **summary view** in guide.md §6 (compact one-line-per-phase bars)
 
-If any of these implementations change their character set, width, or rounding strategy, ALL others MUST be updated in the same commit. This contract prevents visual drift across modules.
+All four locations share one visual contract: same characters, same width (20), same rounding (`round()`). If any of these implementations change their character set, width, or rounding strategy, ALL others MUST be updated in the same commit. This contract prevents visual drift across modules.
+
+**Cross-reference:** See also ceremony.md §2 (loading sequence) which established this contract originally.
 
 ### Rules
 

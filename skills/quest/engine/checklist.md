@@ -31,6 +31,10 @@ stats:
   percent: number
 
 achievements: []             # list of { id: string, unlocked_at: datetime }
+  # Achievement conditions are evaluated by xp-system.md §7. Cross-reference:
+  # - `item_xp >= N` is the canonical condition for XP thresholds (checks total_base_xp).
+  # - `total_xp >= N` is DEPRECATED — alias for `item_xp >= N`. See xp-system.md §7 deprecation notice.
+  # - Pack authors MUST use `item_xp >= N` for all new packs.
 
 integration_results: {}      # optional — keyed by phase index
   # "1":

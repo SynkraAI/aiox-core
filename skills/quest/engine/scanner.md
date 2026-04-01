@@ -118,6 +118,26 @@ sub_quests: []       # OPTIONAL — P1, not yet consumed by engine. Array of { p
 6. For each phase, check `items` is an array with at least one item
 7. For each item, check required fields exist: `id` (string), `label` (string), `command` (string), `who` (string), `required` (boolean), `xp` (number)
 
+**Fallback behavior for optional fields:**
+
+| Optional Field | Default When Absent | Notes |
+|----------------|---------------------|-------|
+| `pack.keywords` | `[]` (empty array) | Pack is not matchable by free text (§6). Falls through to detection rules. |
+| `pack.type` | `null` (not an expansion) | Expansion Pack Gate (§6.5.2) is skipped entirely. |
+| `pack.parent_pack` | `null` | Only required when `type == "expansion"`. Absence with `type == "expansion"` fails validation (step 2.5). |
+| `pack.parent_item` | `null` | Same rule as `parent_pack`. |
+| `detection.prerequisites` | `[]` (empty array) | Prerequisites Gate (§6.5.1) passes by default — no conditions to check. |
+| `detection.fallback_question` | Generic prompt: `"Que tipo de quest você quer rodar?"` | Used only when no pack auto-detects (§6, no matches). |
+| `achievements` | `[]` (empty array) | Achievement evaluation in xp-system.md §7 is skipped. |
+| `sub_quests` | `[]` (empty array) | P1 — not yet consumed by engine. Absence must not cause errors. |
+| Item `tip` | `null` → falls back to `phase.description` in mission card (guide.md §3) | If both absent, shows "Sem dica adicional." |
+| Item `condition` | `null` (unconditional) | Item is immediately eligible for missions. No `condition_state` field created (checklist.md §1). |
+| Item `scan_rule` | `null` | Item is not auto-detectable by scan (checklist.md §5). |
+| Item `note` | `null` | Internal-only field, never shown to player. |
+| Item `per_agent` | `false` | P1 — not yet implemented. |
+
+**Contract:** Absence of any optional field MUST NOT cause errors, crashes, or validation failures. The engine treats missing optional fields as their documented defaults above. This ensures forward compatibility when new optional fields are added to the pack schema.
+
 If validation fails, **do NOT evaluate** that pack. Record the error:
 
 ```

@@ -596,6 +596,7 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
   [ ] {id}  {label} .......................... +{xp} XP
             {who} → {command}
   [-] {id}  {label} .......................... (pulado)
+  [·] {id}  {label} .......................... (não se aplica)
   ─────────────────────────────────────────────────────
   Progresso do mundo: [{progress_bar}]  {percent}%
 
@@ -625,6 +626,8 @@ Shows all phases as "worlds" with thematic names from the pack. The current worl
 | `skipped` | `[-]` |
 | `unused` | `[·]` |
 | `detected` | `[~]` |
+
+**Contract — unused icon visual consistency:** The `[·]` icon for `unused` items is shared across this view (§5), checklist.md §1 (status values), and ceremony.md §3 (inventory). If the icon changes, update ALL locations. See also checklist.md §1 for the full `unused` lifecycle and xp-system.md §5 for how `unused` items are excluded from counters.
 
 ### Progress Bar
 
