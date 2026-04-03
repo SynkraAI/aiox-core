@@ -45,6 +45,7 @@
   ],
   "scripts": {
     "format": "prettier --write \"**/*.md\"",
+    "build": "npm run typecheck",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",

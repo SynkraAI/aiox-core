@@ -241,12 +241,12 @@ describe('SynapseEngine', () => {
     });
 
     test('should instantiate available layers', () => {
-      // L0, L1, L2, L3 are mocked as available; L4-L7 throw
-      expect(engine.layers.length).toBeGreaterThanOrEqual(3);
+      // L0-L3 are mocked as available in this test environment
+      expect(engine.layers.length).toBe(4);
     });
 
-    test('should handle all layer modules failing gracefully', () => {
-      // This is tested implicitly — L4-L7 throw, engine still works
+    test('should handle missing layer modules gracefully', () => {
+      // L4-L7 are mocked to fail, engine should only have the 4 available layers
       expect(engine.layers.length).toBeLessThanOrEqual(4);
     });
   });

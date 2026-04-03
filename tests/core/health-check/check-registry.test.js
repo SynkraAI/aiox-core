@@ -16,6 +16,9 @@ jest.mock('../../../.aiox-core/core/health-check/checks/services', () => ({}), {
 
 const CheckRegistry = require('../../../.aiox-core/core/health-check/check-registry');
 
+// Stub out registerBuiltInChecks to ensure test isolation
+CheckRegistry.prototype.registerBuiltInChecks = jest.fn();
+
 // Test check subclasses
 class ProjectCheck extends BaseCheck {
   constructor(id, opts = {}) {
