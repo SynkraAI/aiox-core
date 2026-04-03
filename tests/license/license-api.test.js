@@ -70,7 +70,7 @@ describe('license-api', () => {
     it('should use default config', () => {
       const client = new LicenseApiClient();
 
-      expect(client.baseUrl).toBe(process.env.AIOX_LICENSE_API_URL || 'https://api.synkra.ai');
+      expect(client.baseUrl).toBe(process.env.AIOX_LICENSE_API_URL || 'https://aiox-license-server.vercel.app');
       expect(client.timeoutMs).toBe(10000);
     });
 
