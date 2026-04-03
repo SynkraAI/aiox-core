@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-04-03T18:02:53.075Z'
+  lastUpdated: '2026-04-03T18:05:20.751Z'
   entityCount: 746
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -15593,7 +15593,7 @@ entities:
         constraints: []
         extensionPoints: []
       checksum: sha256:4d6e8ce12f6119f7e02179e7a9a83ea258b4bb75ee0bd3985a4d6c36a50ba603
-      lastVerified: '2026-04-03T18:02:53.029Z'
+      lastVerified: '2026-04-03T18:05:20.749Z'
     project-status-loader:
       path: .aiox-core/infrastructure/scripts/project-status-loader.js
       layer: L2
