@@ -1,0 +1,45 @@
+{
+  "emails": [
+    "user@example.com",
+    "john.doe@company.co.uk",
+    "test+filter@gmail.com"
+  ],
+  "phones_br": [
+    "(11) 98765-4321",
+    "(21) 3456-7890",
+    "(61) 99872-0330"
+  ],
+  "phones_intl": [
+    "+1 (555) 123-4567",
+    "+55 11 98765-4321",
+    "+44 20 7946-0958"
+  ],
+  "cpf": [
+    "123.456.789-00",
+    "98765432100",
+    "111.222.333-44"
+  ],
+  "cnpj": [
+    "12.345.678/0001-90",
+    "11222333000144"
+  ],
+  "credit_cards": [
+    "4111 1111 1111 1111",
+    "5500-0000-0000-0004",
+    "4111111111111111"
+  ],
+  "ssn_us": [
+    "123-45-6789",
+    "987-65-4321"
+  ],
+  "ip_addresses": [
+    "192.168.1.100",
+    "10.0.0.1",
+    "203.0.113.50"
+  ],
+  "safe_content": [
+    "The author John Smith published this on Medium",
+    "Version 2.0.1 was released on January 15th",
+    "The company has 500 employees across 3 offices"
+  ]
+}

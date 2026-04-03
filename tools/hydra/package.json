@@ -1,0 +1,45 @@
+{
+  "name": "@aios/hydra",
+  "version": "1.0.0",
+  "description": "HYDRA - Autonomous Content Intelligence System for Jarvis/Mega Brain",
+  "type": "module",
+  "bin": {
+    "hydra": "./bin/hydra.js"
+  },
+  "main": "./src/index.js",
+  "scripts": {
+    "start": "node bin/hydra.js run",
+    "status": "node bin/hydra.js status",
+    "lint": "echo 'No linter configured yet'",
+    "test": "node bin/jest.js --passWithNoTests",
+    "jest": "node bin/jest.js"
+  },
+  "keywords": [
+    "content-intelligence",
+    "knowledge-base",
+    "rss",
+    "curation",
+    "anti-hallucination"
+  ],
+  "author": "Synkra AIOX",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "better-sqlite3": "^12.8.0",
+    "commander": "^13.1.0",
+    "js-yaml": "^4.1.0",
+    "node-cron": "^3.0.3",
+    "openai": "^6.33.0",
+    "pino": "^9.14.0",
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "jest": "^29.7.0",
+    "pino-pretty": "^11.3.0"
+  }
+}

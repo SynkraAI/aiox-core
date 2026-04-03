@@ -1,0 +1,26 @@
+{
+  "xss_payloads": [
+    "<script>alert('xss')</script>",
+    "<img src=x onerror=\"alert('xss')\">",
+    "<iframe src=\"javascript:alert('xss')\"></iframe>",
+    "<object data=\"data:text/html,<script>alert(1)</script>\"></object>",
+    "<embed src=\"javascript:alert(1)\">",
+    "<a href=\"javascript:void(0)\" onclick=\"steal()\">click</a>",
+    "<div onmouseover=\"alert(1)\">hover me</div>"
+  ],
+  "entity_encoding_attacks": [
+    "&#x3C;script&#x3E;alert('xss')&#x3C;/script&#x3E;",
+    "&lt;script&gt;alert('xss')&lt;/script&gt;",
+    "&#60;script&#62;alert(1)&#60;/script&#62;",
+    "&#x3C;img src=x onerror=&#x22;alert(1)&#x22;&#x3E;"
+  ],
+  "data_uri_attacks": [
+    "<a href=\"data:text/html,<script>alert(1)</script>\">click</a>",
+    "<img src=\"data:image/svg+xml,<svg onload=alert(1)>\">"
+  ],
+  "clean_html": [
+    "<p>This is a normal paragraph.</p>",
+    "<h1>Article Title</h1><p>Content here.</p>",
+    "<ul><li>Item 1</li><li>Item 2</li></ul>"
+  ]
+}

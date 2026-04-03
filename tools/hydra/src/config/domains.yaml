@@ -1,0 +1,36 @@
+domains:
+  ai-ml:
+    keywords: ["LLM", "transformer", "embedding", "RAG", "agent", "fine-tuning", "prompt", "GPT", "Claude", "diffusion", "neural", "deep learning", "machine learning"]
+    projects: ["aios", "serenity-ai"]
+
+  marketing:
+    keywords: ["funil", "conversao", "Google Ads", "Facebook Ads", "copywriting", "lead", "growth", "SEO", "CPC", "CPA", "ROAS", "meta ads"]
+    projects: ["tocks", "kr-interiores", "low-ticket-10k"]
+
+  saude-mental:
+    keywords: ["wellbeing", "CBT", "mental health", "therapy", "anxiety", "depression", "mindfulness", "emotional", "psicologia", "bem-estar"]
+    projects: ["serenity-ai"]
+
+  design-interiores:
+    keywords: ["interior design", "decoracao", "arquitetura", "reforma", "iluminacao", "residencial", "comercial"]
+    projects: ["kr-interiores"]
+
+  moveis-luxo:
+    keywords: ["luxury furniture", "high-end", "moveis", "sinuca", "bilhar", "pool table", "premium"]
+    projects: ["tocks", "bretda"]
+
+  negocios:
+    keywords: ["startup", "pricing", "revenue", "SaaS", "B2B", "empreendedorismo", "venture", "investimento", "estrategia"]
+    projects: ["low-ticket-10k", "tocks", "serenity-ai"]
+
+  engenharia:
+    keywords: ["Node.js", "TypeScript", "React", "Next.js", "Supabase", "DevOps", "Docker", "CI/CD", "testing", "architecture", "API", "microservices"]
+    projects: ["aios", "tocks", "serenity-ai"]
+
+  cybersecurity:
+    keywords: ["security", "vulnerability", "CVE", "exploit", "malware", "ransomware", "phishing", "zero-day", "supply chain attack", "prompt injection", "OWASP", "pentest", "threat", "breach", "encryption", "PQC", "deepfake", "identity", "zero trust", "CISA"]
+    projects: ["aios", "serenity-ai", "tocks"]
+
+  legal:
+    keywords: ["LGPD", "GDPR", "compliance", "IP", "trademark", "copyright", "regulacao", "privacidade"]
+    projects: ["serenity-ai", "aios"]

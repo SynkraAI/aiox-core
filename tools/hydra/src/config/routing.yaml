@@ -1,0 +1,41 @@
+routing:
+  min_relevance_score: 0.3
+  max_clones_per_item: 10
+  tier_priority_map:
+    S: urgent
+    A: normal
+    B: low
+  keyword_weight: 0.6
+  department_weight: 0.3
+  tier_weight: 0.1
+  feedback_floor: 0.2
+  retention_days: 30
+
+  # Forced routes: domain -> clones always included
+  forced_routes:
+    ai-ml:
+      - andrej-karpathy
+      - chip-huyen
+    marketing:
+      - alex-hormozi
+      - seth-godin
+    engenharia:
+      - martin-fowler
+      - simon-willison
+
+  # Bridge publisher config
+  bridge:
+    max_publishes_per_cycle: 10
+    pending_file: pending-bridge-publish.jsonl
+
+  # Digest config
+  digest:
+    output_dir: digests/distribution
+
+  # Feedback config
+  feedback:
+    reset_interval_days: 30
+    min_relevance_floor: 0.2
+    boost_increment: 0.05
+    penalty_increment: 0.05
+    irrelevant_threshold: 0.5

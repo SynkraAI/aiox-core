@@ -1,0 +1,72 @@
+scheduler:
+  enabled: true
+  timezone: "America/Sao_Paulo"
+
+  schedules:
+    # Full pipeline: 2x/day (6am and 6pm)
+    full_pipeline:
+      cron: "0 6,18 * * *"
+      enabled: true
+      options:
+        verbose: false
+        dryRun: false
+
+    # RSS-only (high frequency): every 4 hours
+    rss_only:
+      cron: "0 */4 * * *"
+      enabled: true
+      options:
+        sourceFilter: "rss"
+        verbose: false
+
+  lock:
+    file: "hydra-data/state/scheduler.lock"
+    ttlMs: 3600000            # 1h — auto-release if orphaned
+    staleCheckMs: 300000      # Check every 5min
+
+  heartbeat:
+    file: "hydra-data/state/heartbeat.json"
+    intervalMs: 60000         # Write every 1min
+
+  gracefulShutdown:
+    timeoutMs: 30000          # 30s for pipeline to finish
+
+  retry:
+    baseDelayMs: 1000
+    maxDelayMs: 60000
+    maxAttempts: 5
+    jitter: true
+
+  circuitBreaker:
+    failureThreshold: 3
+    cooldownMs: 300000
+    halfOpenMaxAttempts: 1
+    stateFile: "hydra-data/state/circuit-breakers.json"
+
+  rateLimits:
+    github:
+      requestsPerMinute: 30
+      burstSize: 5
+    youtube:
+      requestsPerHour: 100
+      burstSize: 10
+    twitter:
+      requestsPer15Min: 15
+      burstSize: 3
+    web:
+      requestsPerMinute: 10
+      burstSize: 2
+
+alerts:
+  enabled: true
+  transports:
+    file:
+      enabled: true
+      directory: "hydra-data/alerts"
+    telegram:
+      enabled: true            # Uses TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID from .env
+      minSeverity: "HIGH"      # Only HIGH and CRITICAL via Telegram
+    webhook:
+      enabled: false           # Generic webhook (Slack, etc.) — use telegram transport instead
+      url: ""
+      minSeverity: "HIGH"

@@ -1,0 +1,806 @@
+sources:
+  rss:
+    - name: "Hacker News - Best"
+      url: "https://hnrss.org/best"
+      frequency: "4h"
+      domains: ["engenharia", "ai-ml"]
+      authority: 4
+
+    - name: "TechCrunch AI"
+      url: "https://techcrunch.com/category/artificial-intelligence/feed/"
+      frequency: "6h"
+      domains: ["ai-ml", "negocios"]
+      authority: 3
+
+    - name: "Simon Willison Blog"
+      url: "https://simonwillison.net/atom/everything/"
+      frequency: "6h"
+      domains: ["ai-ml", "engenharia"]
+      authority: 5
+
+    # Anthropic Blog — RSS removido (sem feed publico desde 2026)
+    # Conteudo capturado via Web adapter em sources.web
+
+    - name: "OpenAI Blog"
+      url: "https://openai.com/blog/rss.xml"
+      frequency: "6h"
+      domains: ["ai-ml"]
+      authority: 5
+
+    - name: "The Verge - AI"
+      url: "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml"
+      frequency: "6h"
+      domains: ["ai-ml", "negocios"]
+      authority: 4
+
+    - name: "Ars Technica - AI"
+      url: "https://feeds.arstechnica.com/arstechnica/technology-lab"
+      frequency: "6h"
+      domains: ["ai-ml", "engenharia"]
+      authority: 4
+
+    - name: "MIT Technology Review"
+      url: "https://www.technologyreview.com/feed/"
+      frequency: "12h"
+      domains: ["ai-ml", "engenharia"]
+      authority: 5
+
+    - name: "CSS Tricks"
+      url: "https://css-tricks.com/feed/"
+      frequency: "12h"
+      domains: ["engenharia"]
+      authority: 3
+
+    - name: "Smashing Magazine"
+      url: "https://www.smashingmagazine.com/feed/"
+      frequency: "12h"
+      domains: ["engenharia", "design-interiores"]
+      authority: 4
+
+    - name: "Martin Fowler"
+      url: "https://martinfowler.com/feed.atom"
+      frequency: "daily"
+      domains: ["engenharia"]
+      authority: 5
+
+    - name: "Lenny's Newsletter"
+      url: "https://www.lennysnewsletter.com/feed"
+      frequency: "daily"
+      domains: ["negocios", "marketing"]
+      authority: 4
+
+    - name: "Seth Godin"
+      url: "https://seths.blog/feed/"
+      frequency: "daily"
+      domains: ["marketing", "negocios"]
+      authority: 5
+
+    - name: "Benedict Evans"
+      url: "https://www.ben-evans.com/benedictevans?format=rss"
+      frequency: "daily"
+      domains: ["negocios", "ai-ml"]
+      authority: 5
+
+    - name: "Stratechery"
+      url: "https://stratechery.com/feed/"
+      frequency: "daily"
+      domains: ["negocios", "ai-ml"]
+      authority: 5
+
+    # === NOVAS FONTES — Adicionadas 01/Abr/2026 ===
+
+    - name: "Hugging Face Blog"
+      url: "https://huggingface.co/blog/feed.xml"
+      frequency: "daily"
+      domains: ["ai-ml", "engenharia"]
+      authority: 5
+      max_items: 30
+
+    - name: "Google AI Blog"
+      url: "https://blog.google/technology/ai/rss/"
+      frequency: "daily"
+      domains: ["ai-ml"]
+      authority: 5
+
+    - name: "DeepMind Blog"
+      url: "https://deepmind.google/blog/rss.xml"
+      frequency: "daily"
+      domains: ["ai-ml"]
+      authority: 5
+      max_items: 30
+
+    - name: "ArXiv AI (cs.AI)"
+      url: "https://rss.arxiv.org/rss/cs.AI"
+      frequency: "12h"
+      domains: ["ai-ml"]
+      authority: 5
+      max_items: 20          # ArXiv returns 100+ papers/day — cap to prevent source dominance
+
+    - name: "ArXiv Machine Learning (cs.LG)"
+      url: "https://rss.arxiv.org/rss/cs.LG"
+      frequency: "12h"
+      domains: ["ai-ml"]
+      authority: 5
+      max_items: 20          # ArXiv returns 100+ papers/day — cap to prevent source dominance
+
+    - name: "The Gradient"
+      url: "https://thegradient.pub/rss/"
+      frequency: "weekly"
+      domains: ["ai-ml"]
+      authority: 4
+
+    - name: "Towards Data Science"
+      url: "https://towardsdatascience.com/feed"
+      frequency: "12h"
+      domains: ["ai-ml", "engenharia"]
+      authority: 3
+
+    - name: "Dev.to"
+      url: "https://dev.to/feed"
+      frequency: "6h"
+      domains: ["engenharia"]
+      authority: 3
+
+    - name: "Y Combinator Blog"
+      url: "https://www.ycombinator.com/blog/rss/"
+      frequency: "daily"
+      domains: ["negocios"]
+      authority: 5
+
+    # First Round Review — RSS removido (feed 404 desde 2026)
+
+    - name: "SaaStr Blog"
+      url: "https://www.saastr.com/feed/"
+      frequency: "daily"
+      domains: ["negocios"]
+      authority: 4
+
+    - name: "Neil Patel Blog"
+      url: "https://neilpatel.com/blog/feed/"
+      frequency: "daily"
+      domains: ["marketing"]
+      authority: 4
+
+    - name: "HubSpot Marketing Blog"
+      url: "https://blog.hubspot.com/marketing/rss.xml"
+      frequency: "daily"
+      domains: ["marketing"]
+      authority: 4
+
+    - name: "Copyblogger"
+      url: "https://copyblogger.com/feed/"
+      frequency: "weekly"
+      domains: ["marketing"]
+      authority: 4
+
+    - name: "A List Apart"
+      url: "https://alistapart.com/main/feed/"
+      frequency: "weekly"
+      domains: ["engenharia"]
+      authority: 4
+
+    - name: "Changelog"
+      url: "https://changelog.com/feed"
+      frequency: "daily"
+      domains: ["engenharia"]
+      authority: 4
+
+    - name: "InfoQ"
+      url: "https://feed.infoq.com/"
+      frequency: "daily"
+      domains: ["engenharia", "ai-ml"]
+      authority: 4
+
+    # Anthropic Research — RSS removido (sem feed publico)
+
+    # === CYBERSECURITY FEEDS — Adicionadas 02/Abr/2026 (Conclave) ===
+
+    # Tier 1: Threat Intelligence (diario)
+    - name: "Krebs on Security"
+      url: "https://krebsonsecurity.com/feed/"
+      frequency: "daily"
+      domains: ["cybersecurity"]
+      authority: 5
+
+    - name: "The Hacker News"
+      url: "https://feeds.feedburner.com/TheHackersNews"
+      frequency: "6h"
+      domains: ["cybersecurity"]
+      authority: 5
+      max_items: 25
+
+    - name: "Schneier on Security"
+      url: "https://www.schneier.com/feed/atom/"
+      frequency: "daily"
+      domains: ["cybersecurity"]
+      authority: 5
+
+    - name: "Dark Reading"
+      url: "https://www.darkreading.com/rss.xml"
+      frequency: "6h"
+      domains: ["cybersecurity"]
+      authority: 4
+      max_items: 25
+
+    - name: "BleepingComputer"
+      url: "https://www.bleepingcomputer.com/feed/"
+      frequency: "6h"
+      domains: ["cybersecurity"]
+      authority: 4
+
+    # Tier 2: Research & Analysis (semanal)
+    - name: "Google Project Zero"
+      url: "https://googleprojectzero.blogspot.com/feeds/posts/default"
+      frequency: "weekly"
+      domains: ["cybersecurity"]
+      authority: 5
+
+    - name: "CrowdStrike Blog"
+      url: "https://www.crowdstrike.com/blog/feed/"
+      frequency: "weekly"
+      domains: ["cybersecurity"]
+      authority: 4
+
+    # Sophos News — removido (timeout constante)
+
+    # REMOVED 2026-04-03: persistent timeout
+    # - name: "Sophos Naked Security"
+    #   url: "https://nakedsecurity.sophos.com/feed/"
+    #   frequency: "weekly"
+    #   domains: ["cybersecurity"]
+    #   authority: 4
+
+    - name: "Trail of Bits Blog"
+      url: "https://blog.trailofbits.com/feed/"
+      frequency: "weekly"
+      domains: ["cybersecurity", "engenharia"]
+      authority: 5
+
+    # Tier 3: Supply Chain & AppSec
+    - name: "Snyk Blog"
+      url: "https://snyk.io/blog/feed/"
+      frequency: "weekly"
+      domains: ["cybersecurity", "engenharia"]
+      authority: 4
+
+    # Socket.dev Blog — removido (403 forbidden)
+
+    - name: "GitHub Security Blog"
+      url: "https://github.blog/tag/security/feed/"
+      frequency: "weekly"
+      domains: ["cybersecurity", "engenharia"]
+      authority: 5
+
+    # Tier 4: AI Security & Policy
+    - name: "Daniel Miessler Blog"
+      url: "https://danielmiessler.com/feed/"
+      frequency: "daily"
+      domains: ["cybersecurity", "ai-ml"]
+      authority: 5
+
+    - name: "OWASP Blog"
+      url: "https://owasp.org/feed.xml"
+      frequency: "weekly"
+      domains: ["cybersecurity"]
+      authority: 5
+
+    # Tier 5: Government & Standards
+    - name: "CISA Alerts"
+      url: "https://www.cisa.gov/news.xml"
+      frequency: "daily"
+      domains: ["cybersecurity"]
+      authority: 5
+
+    - name: "NIST Cybersecurity"
+      url: "https://www.nist.gov/blogs/cybersecurity-insights/rss.xml"
+      frequency: "weekly"
+      domains: ["cybersecurity"]
+      authority: 5
+
+    # === WAVE 2 — High S-tier Sources (02/Abr/2026) ===
+
+    # AI/ML Research (S-tier machines)
+    - name: "Distill.pub"
+      url: "https://distill.pub/rss.xml"
+      frequency: "weekly"
+      domains: ["ai-ml"]
+      authority: 5
+
+    - name: "Jay Alammar Blog"
+      url: "https://jalammar.github.io/feed.xml"
+      frequency: "weekly"
+      domains: ["ai-ml"]
+      authority: 5
+
+    - name: "Lilian Weng Blog"
+      url: "https://lilianweng.github.io/index.xml"
+      frequency: "weekly"
+      domains: ["ai-ml"]
+      authority: 5
+
+    - name: "Chip Huyen Blog"
+      url: "https://huyenchip.com/feed.xml"
+      frequency: "weekly"
+      domains: ["ai-ml", "engenharia"]
+      authority: 5
+
+    - name: "Eugene Yan Blog"
+      url: "https://eugeneyan.com/rss/"
+      frequency: "weekly"
+      domains: ["ai-ml", "engenharia"]
+      authority: 5
+
+    - name: "Sebastian Raschka"
+      url: "https://sebastianraschka.com/rss_feed.xml"
+      frequency: "weekly"
+      domains: ["ai-ml"]
+      authority: 5
+
+    # REMOVED 2026-04-03: XML entity errors on rss.xml, no known working alternative
+    # - name: "Weights & Biases Blog"
+    #   url: "https://wandb.ai/fully-connected/rss.xml"
+    #   frequency: "weekly"
+    #   domains: ["ai-ml", "engenharia"]
+    #   authority: 4
+
+    # Engineering Excellence
+    # REMOVED 2026-04-03: SSL certificate error
+    # - name: "Netflix Tech Blog"
+    #   url: "https://netflixtechblog.com/feed"
+    #   frequency: "weekly"
+    #   domains: ["engenharia"]
+    #   authority: 5
+
+    # REMOVED 2026-04-03: 404 error
+    # - name: "Uber Engineering"
+    #   url: "https://www.uber.com/blog/engineering/rss/"
+    #   frequency: "weekly"
+    #   domains: ["engenharia"]
+    #   authority: 5
+
+    - name: "Stripe Engineering"
+      url: "https://stripe.com/blog/feed.rss"
+      frequency: "weekly"
+      domains: ["engenharia", "negocios"]
+      authority: 5
+
+    - name: "Cloudflare Blog"
+      url: "https://blog.cloudflare.com/rss/"
+      frequency: "weekly"
+      domains: ["engenharia", "cybersecurity"]
+      authority: 5
+
+    # REMOVED 2026-04-03: 404 error
+    # - name: "Vercel Blog"
+    #   url: "https://vercel.com/blog/rss.xml"
+    #   frequency: "weekly"
+    #   domains: ["engenharia"]
+    #   authority: 4
+
+    - name: "Supabase Blog"
+      # FIX 2026-04-03: changed from rss.xml (XML entity error) to rss
+      url: "https://supabase.com/blog/rss"
+      frequency: "weekly"
+      domains: ["engenharia"]
+      authority: 5
+
+    - name: "PlanetScale Blog"
+      url: "https://planetscale.com/blog/rss.xml"
+      frequency: "weekly"
+      domains: ["engenharia"]
+      authority: 4
+
+    # Business & Strategy
+    - name: "Paul Graham Essays"
+      # FIX 2026-04-03: changed from paulgraham.com/rss.html (malformed XML) to Aaron Swartz hosted feed
+      url: "http://www.aaronsw.com/2002/feeds/pgessays.rss"
+      frequency: "monthly"
+      domains: ["negocios"]
+      authority: 5
+
+    # REMOVED 2026-04-03: 404 error
+    # - name: "a16z Blog"
+    #   url: "https://a16z.com/feed/"
+    #   frequency: "weekly"
+    #   domains: ["negocios", "ai-ml"]
+    #   authority: 5
+
+    # REMOVED 2026-04-03: 404 error (confirmed dead)
+    # - name: "First Round Review"
+    #   url: "https://review.firstround.com/feed.xml"
+    #   frequency: "weekly"
+    #   domains: ["negocios"]
+    #   authority: 5
+
+    - name: "Sequoia Arc Blog"
+      url: "https://www.sequoiacap.com/feed/"
+      frequency: "weekly"
+      domains: ["negocios"]
+      authority: 5
+
+    # Frontier AI Safety & Policy
+    - name: "AI Alignment Forum"
+      url: "https://www.alignmentforum.org/feed.xml?view=curated-rss"
+      frequency: "daily"
+      domains: ["ai-ml", "cybersecurity"]
+      authority: 5
+      max_items: 15
+
+    - name: "LessWrong Curated"
+      url: "https://www.lesswrong.com/feed.xml?view=curated-rss"
+      frequency: "daily"
+      domains: ["ai-ml"]
+      authority: 4
+      max_items: 15
+
+    # Tier 6: Industrial/OT + Quantum
+    - name: "Industrial Cyber"
+      url: "https://industrialcyber.co/feed/"
+      frequency: "weekly"
+      domains: ["cybersecurity"]
+      authority: 4
+
+    - name: "The Quantum Insider"
+      url: "https://thequantuminsider.com/feed/"
+      frequency: "weekly"
+      domains: ["cybersecurity", "ai-ml"]
+      authority: 4
+
+  github:
+    - name: "Fabric Releases"
+      type: "releases"
+      repo: "danielmiessler/fabric"
+      frequency: "daily"
+      domains: ["ai-ml", "engenharia"]
+
+    - name: "Crawl4AI Releases"
+      type: "releases"
+      repo: "unclecode/crawl4ai"
+      frequency: "daily"
+      domains: ["ai-ml", "engenharia"]
+
+    - name: "Awesome LLM"
+      type: "awesome-list"
+      repo: "Hannibal046/Awesome-LLM"
+      frequency: "weekly"
+      domains: ["ai-ml"]
+
+    - name: "Awesome Claude"
+      type: "awesome-list"
+      repo: "anthropics/anthropic-cookbook"
+      frequency: "weekly"
+      domains: ["ai-ml", "engenharia"]
+
+    # === AWESOME LISTS — Curadoria por projeto ===
+
+    # AI/ML (Serenity, AIOS, HYDRA)
+    - name: "Awesome Machine Learning"
+      type: "awesome-list"
+      repo: "josephmisiti/awesome-machine-learning"
+      frequency: "weekly"
+      domains: ["ai-ml"]
+
+    - name: "Awesome AI Agents"
+      type: "awesome-list"
+      repo: "e2b-dev/awesome-ai-agents"
+      frequency: "weekly"
+      domains: ["ai-ml", "engenharia"]
+
+    - name: "Awesome LangChain"
+      type: "awesome-list"
+      repo: "kyrolabs/awesome-langchain"
+      frequency: "weekly"
+      domains: ["ai-ml", "engenharia"]
+
+    - name: "Awesome Generative AI"
+      type: "awesome-list"
+      repo: "steven2358/awesome-generative-ai"
+      frequency: "weekly"
+      domains: ["ai-ml"]
+
+    - name: "Awesome ChatGPT Prompts"
+      type: "awesome-list"
+      repo: "f/awesome-chatgpt-prompts"
+      frequency: "weekly"
+      domains: ["ai-ml", "marketing"]
+
+    - name: "Awesome Prompt Engineering"
+      type: "awesome-list"
+      repo: "promptslab/Awesome-Prompt-Engineering"
+      frequency: "weekly"
+      domains: ["ai-ml", "engenharia"]
+
+    # Node.js / JavaScript (Stack principal)
+    - name: "Awesome Node.js"
+      type: "awesome-list"
+      repo: "sindresorhus/awesome-nodejs"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    - name: "Awesome JavaScript"
+      type: "awesome-list"
+      repo: "sorrycc/awesome-javascript"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    - name: "Awesome TypeScript"
+      type: "awesome-list"
+      repo: "dzharii/awesome-typescript"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    - name: "Awesome Next.js"
+      type: "awesome-list"
+      repo: "unicodeveloper/awesome-nextjs"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    - name: "Awesome React"
+      type: "awesome-list"
+      repo: "enaqx/awesome-react"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    - name: "Awesome Tailwind CSS"
+      type: "awesome-list"
+      repo: "aniftyco/awesome-tailwindcss"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    # DevOps / Infrastructure
+    - name: "Awesome Docker"
+      type: "awesome-list"
+      repo: "veggiemonk/awesome-docker"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    - name: "Awesome Supabase"
+      type: "awesome-list"
+      repo: "lyqht/awesome-supabase"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    - name: "Awesome CI/CD"
+      type: "awesome-list"
+      repo: "ciandcd/awesome-ciandcd"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    - name: "Awesome GitHub Actions"
+      type: "awesome-list"
+      repo: "sdras/awesome-actions"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    # Marketing / Ads / Growth (Tocks, Bretda, Low Ticket)
+    - name: "Awesome Marketing"
+      type: "awesome-list"
+      repo: "marketingtoolslist/awesome-marketing"
+      frequency: "weekly"
+      domains: ["marketing", "negocios"]
+
+    - name: "Awesome Growth Hacking"
+      type: "awesome-list"
+      repo: "bekatom/awesome-growth-hacking"
+      frequency: "weekly"
+      domains: ["marketing", "negocios"]
+
+    - name: "Awesome SEO"
+      type: "awesome-list"
+      repo: "madawei2699/awesome-seo"
+      frequency: "weekly"
+      domains: ["marketing"]
+
+    - name: "Awesome Indie"
+      type: "awesome-list"
+      repo: "mezod/awesome-indie"
+      frequency: "weekly"
+      domains: ["negocios"]
+
+    # Awesome SaaS removido (repo 404)
+
+    # Saude Mental (Serenity/JACI)
+    - name: "Awesome Mental Health"
+      type: "awesome-list"
+      repo: "dreamingechoes/awesome-mental-health"
+      frequency: "weekly"
+      domains: ["saude-mental"]
+
+    - name: "Awesome Healthcare"
+      type: "awesome-list"
+      repo: "kakoni/awesome-healthcare"
+      frequency: "weekly"
+      domains: ["saude-mental", "negocios"]
+
+    # Security (AIOS, todos projetos)
+    - name: "Awesome Security"
+      type: "awesome-list"
+      repo: "qazbnm456/awesome-web-security"
+      frequency: "weekly"
+      domains: ["engenharia", "legal"]
+
+    - name: "Awesome Hacking"
+      type: "awesome-list"
+      repo: "Hack-with-Github/Awesome-Hacking"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    # Design / UX (KR Interiores, Bretda, todos front-ends)
+    - name: "Awesome Design Tools"
+      type: "awesome-list"
+      repo: "goabstract/Awesome-Design-Tools"
+      frequency: "weekly"
+      domains: ["design-interiores"]
+
+    - name: "Awesome Design Systems"
+      type: "awesome-list"
+      repo: "alexpate/awesome-design-systems"
+      frequency: "weekly"
+      domains: ["design-interiores", "engenharia"]
+
+    # CLI / Developer Tools (AIOS core)
+    - name: "Awesome CLI Apps"
+      type: "awesome-list"
+      repo: "agarrharr/awesome-cli-apps"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    - name: "Awesome Shell"
+      type: "awesome-list"
+      repo: "alebcay/awesome-shell"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    # Data / Analytics
+    - name: "Awesome Data Engineering"
+      type: "awesome-list"
+      repo: "igorbarinov/awesome-data-engineering"
+      frequency: "weekly"
+      domains: ["engenharia", "ai-ml"]
+
+    - name: "Awesome Public Datasets"
+      type: "awesome-list"
+      repo: "awesomedata/awesome-public-datasets"
+      frequency: "weekly"
+      domains: ["ai-ml", "negocios"]
+
+    # APIs / Integracoes
+    - name: "Awesome Public APIs"
+      type: "awesome-list"
+      repo: "public-apis/public-apis"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    - name: "Awesome REST"
+      type: "awesome-list"
+      repo: "marmelab/awesome-rest"
+      frequency: "weekly"
+      domains: ["engenharia"]
+
+    # Business / Startups (Low Ticket, todos)
+    - name: "Awesome OSS Alternatives"
+      type: "awesome-list"
+      repo: "RunaCapital/awesome-oss-alternatives"
+      frequency: "weekly"
+      domains: ["negocios", "engenharia"]
+
+    - name: "Awesome Free for Dev"
+      type: "awesome-list"
+      repo: "ripienaar/free-for-dev"
+      frequency: "weekly"
+      domains: ["engenharia", "negocios"]
+
+    # Meta — The Main List
+    - name: "Awesome Master Index"
+      type: "awesome-list"
+      repo: "sindresorhus/awesome"
+      frequency: "monthly"
+      domains: ["engenharia", "ai-ml", "negocios"]
+
+  # === YOUTUBE CHANNELS ===
+  youtube:
+    - name: "Andrej Karpathy"
+      url: "https://www.youtube.com/@AndrejKarpathy"
+      frequency: "daily"
+      domains: ["ai-ml"]
+      authority: 5
+      max_videos: 3
+
+    - name: "Fireship"
+      url: "https://www.youtube.com/@Fireship"
+      frequency: "daily"
+      domains: ["engenharia", "ai-ml"]
+      authority: 4
+      max_videos: 3
+
+    - name: "ThePrimeagen"
+      url: "https://www.youtube.com/@ThePrimeTimeagen"
+      frequency: "daily"
+      domains: ["engenharia"]
+      authority: 4
+      max_videos: 3
+
+    - name: "3Blue1Brown"
+      url: "https://www.youtube.com/@3blue1brown"
+      frequency: "weekly"
+      domains: ["ai-ml"]
+      authority: 5
+      max_videos: 2
+
+    - name: "Tiago Finch"
+      url: "https://www.youtube.com/@TiagoFinch"
+      frequency: "daily"
+      domains: ["marketing", "negocios"]
+      authority: 4
+      max_videos: 3
+
+    - name: "Alex Hormozi"
+      url: "https://www.youtube.com/@AlexHormozi"
+      frequency: "daily"
+      domains: ["negocios", "marketing"]
+      authority: 5
+      max_videos: 3
+
+  # === PODCASTS ===
+  podcast:
+    - name: "Lex Fridman Podcast"
+      url: "https://lexfridman.com/feed/podcast/"
+      frequency: "weekly"
+      domains: ["ai-ml", "engenharia"]
+      authority: 5
+      max_episodes: 1
+      whisper_model: "small"
+
+    - name: "Latent Space"
+      url: "https://api.substack.com/feed/podcast/1084089.rss"
+      frequency: "weekly"
+      domains: ["ai-ml", "engenharia"]
+      authority: 5
+      max_episodes: 2
+      whisper_model: "small"
+
+  # === TWITTER/X ACCOUNTS ===
+  twitter:
+    - name: "Andrej Karpathy"
+      username: "@karpathy"
+      domains: ["ai-ml"]
+      authority: 5
+      max_tweets: 5
+
+    - name: "Simon Willison"
+      username: "@simonw"
+      domains: ["ai-ml", "engenharia"]
+      authority: 5
+      max_tweets: 5
+
+    - name: "Anthropic"
+      username: "@AnthropicAI"
+      domains: ["ai-ml"]
+      authority: 5
+      max_tweets: 5
+
+    - name: "Guillermo Rauch"
+      username: "@rauchg"
+      domains: ["engenharia"]
+      authority: 4
+      max_tweets: 5
+
+  # === WEB PAGES (Direct scraping) ===
+  web:
+    - name: "Anthropic Research"
+      url: "https://www.anthropic.com/research"
+      domains: ["ai-ml"]
+      authority: 5
+
+    - name: "OpenAI Research"
+      url: "https://openai.com/research"
+      domains: ["ai-ml"]
+      authority: 5
+
+  # === NEWSLETTERS (requires IMAP config) ===
+  # newsletter:
+  #   - name: "TLDR AI"
+  #     domains: ["ai-ml", "engenharia"]
+  #     authority: 4
+  #     from_filter: ["dan@tldrnewsletter.com"]
+  #     max_emails: 3

@@ -1,0 +1,177 @@
+scoring:
+  tiers:
+    S:
+      min_score: 4.5
+      action: "ingest_full_alert"
+      hallucination_check: true
+      min_confidence: 4
+    A:
+      min_score: 3.5
+      action: "ingest_full"
+      hallucination_check: true
+      min_confidence: 3
+    B:
+      min_score: 2.5
+      action: "ingest_metadata_only"
+      hallucination_check: false
+      min_confidence: 2
+    C:
+      min_score: 1.5
+      action: "skip_store_reference"
+      hallucination_check: false
+    D:
+      min_score: 0
+      action: "discard"
+      hallucination_check: false
+
+  weights:
+    relevance: 0.30
+    novelty: 0.25
+    actionability: 0.20
+    authority: 0.15
+    depth: 0.10
+
+  # Story 3.5 — Tiered model scoring
+  models:
+    triage: "deepseek-chat"          # Cheap model for initial scoring
+    extraction: "deepseek-chat"       # Model for wisdom extraction
+    s_tier_recheck: false             # Set to model name to re-score S-tier candidates with stronger model
+
+heuristic_filter:
+  min_word_count: 30
+  min_word_count_full: 100
+  max_age_days: 90
+  allowed_languages: ["en", "pt"]
+  max_content_size_bytes: 5242880  # 5MB
+
+  # Story 3.2 — Per-source-type overrides
+  source_overrides:
+    youtube:
+      min_word_count: 100        # Transcripts should be substantial
+      max_age_days: 365          # Video content stays relevant longer
+    podcast:
+      min_word_count: 200        # Podcast transcripts are long
+      max_age_days: 365
+    twitter:
+      min_word_count: 10         # Tweets are short by nature
+      max_age_days: 30           # Tweets age fast
+    github:
+      min_word_count: 20         # READMEs vary
+      max_age_days: 180          # Code resources stay relevant
+    web:
+      min_word_count: 50
+      max_age_days: 90
+    newsletter:
+      min_word_count: 50
+      max_age_days: 60
+
+  # Story 3.7 — AI Slop Detection
+  ai_slop:
+    enabled: true
+    max_filler_ratio: 0.25           # Max ratio of filler phrases
+    min_lexical_diversity: 0.35      # Unique words / total words
+    max_avg_sentence_length: 40      # Words per sentence
+    filler_phrases:
+      - "in today's rapidly evolving"
+      - "it's important to note that"
+      - "in this comprehensive guide"
+      - "without further ado"
+      - "in conclusion"
+      - "as we delve deeper"
+      - "it goes without saying"
+      - "at the end of the day"
+      - "game-changer"
+      - "deep dive"
+      - "unlock the power"
+      - "take it to the next level"
+      - "leverage the potential"
+      - "revolutionize the way"
+      - "cutting-edge"
+      - "paradigm shift"
+      - "synergy"
+      - "holistic approach"
+      - "robust solution"
+      - "seamless integration"
+
+chunking:
+  max_tokens_per_chunk: 3000
+  overlap_tokens: 200
+  strategy: semantic    # fixed | semantic
+  max_chunks: 50        # safety limit
+  min_chunk_tokens: 100
+
+dedup:
+  url_match: true
+  content_hash: true
+  semantic:
+    enabled: true   # Story 3.1 — lightweight n-gram cosine similarity (pure Node.js)
+    threshold: 0.85
+
+  # Story 3.2 — Dedup thresholds per content type
+  hash_thresholds:
+    rss: 0.85
+    youtube: 0.75          # Transcripts vary more
+    podcast: 0.75
+    twitter: 0.90          # Reposts are very similar
+    github: 0.85
+    web: 0.80
+    newsletter: 0.85
+
+# Story 3.4 — Scoring cache to avoid redundant LLM calls
+scoring_cache:
+  enabled: true
+  maxEntries: 5000
+  ttlMs: 604800000                   # 7 days in ms
+  titleSimilarityThreshold: 0.7     # Dice coefficient threshold for cache hit
+
+# Story 3.6 — Vector store configuration
+vector_store:
+  mode: local                        # 'local' or 'qdrant'
+  maxEntries: 50000
+  # qdrant_url: http://localhost:6333  # Uncomment when Qdrant is available
+  # collection: hydra-content
+
+# Epic 6 -- Security settings
+security:
+  url_blocklist:
+    domains:
+      - "bit.ly"
+      - "t.co"
+      - "tinyurl.com"
+      - "is.gd"
+      - "goo.gl"
+      - "ow.ly"
+      - "buff.ly"
+    patterns:
+      - ".*\\.onion$"
+      - ".*\\.local$"
+      - "^file://"
+      - "^ftp://"
+      - "^data:"
+    allow_shorteners_from:
+      - "twitter"
+  size_limits:
+    maxContentBytes: 5242880     # 5MB
+    maxTitleLength: 500
+    minContentLength: 50
+    maxUrlLength: 2048
+  audit:
+    retention_days: 90
+
+quarantine:
+  min_confidence: 3
+  require_evidence: true
+
+anti_hallucination:
+  hallucination_rate_alert: 0.10
+  min_avg_confidence: 3.5
+  quote_match_threshold: 0.80
+  paraphrase_match_threshold: 0.60
+
+# Story 3.3 — Anti-Echo-Chamber
+anti_echo_chamber:
+  enabled: true
+  max_source_share: 0.30          # If >30% of daily ingest comes from 1 source, flag it
+  contrarian_bonus: 0.5           # Score bonus for content that contradicts KB
+  diversity_check_interval: 50    # Check diversity every N items processed
+  min_sources_per_day: 3          # Minimum distinct sources in daily ingest
