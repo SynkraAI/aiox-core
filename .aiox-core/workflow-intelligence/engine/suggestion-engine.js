@@ -137,7 +137,7 @@ class SuggestionEngine {
         context.storyPath = sessionContext.currentStory || null;
         context.workflowActive = sessionContext.workflowActive || null;
       } catch (error) {
-        ErrorRegistry.log(`[SuggestionEngine] Failed to load session context: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true }).catch(() => {});
+        await ErrorRegistry.log(`[SuggestionEngine] Failed to load session context: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
       }
     }
 

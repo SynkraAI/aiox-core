@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-04-04T23:31:59.889Z"
+generated_at: "2026-04-04T23:34:00.083Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1093
 files:
@@ -4333,9 +4333,9 @@ files:
     type: workflow-intelligence
     size: 8436
   - path: workflow-intelligence/engine/suggestion-engine.js
-    hash: sha256:37a835ea44609a419591ab434954c660611ecca86515a21ea74454af029d4034
+    hash: sha256:f791e1f78c045ff19731203eb0a5471146bf5c4ceb5f702017161c0b607741a3
     type: workflow-intelligence
-    size: 24110
+    size: 24100
   - path: workflow-intelligence/engine/wave-analyzer.js
     hash: sha256:0d017b70213584a11cad354d54d442be977b183353e6a5e31cc1de4291d0afb9
     type: workflow-intelligence
