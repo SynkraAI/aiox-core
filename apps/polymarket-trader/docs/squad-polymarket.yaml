@@ -1,0 +1,277 @@
+# Squad Polymarket — Autonomous Trading System
+# Covers ALL phases (0-3): Foundation → Strategies → Automation → Production
+# Created: 2026-04-04
+# Orchestrator: Orion (aios-master)
+
+name: squad-polymarket
+department: ai_strategy
+project: polymarket-trader
+head: aios-master
+status: active
+created: 2026-04-04
+
+# ============================================================
+# CORE AGENTS — Execution backbone
+# ============================================================
+core_agents:
+  - id: dev
+    role: Implementation Lead
+    focus: All coding — MCP bridge, strategies, execution engine, learning layer
+    phases: [0, 1, 2, 3]
+
+  - id: architect
+    role: System Design & Integration Patterns
+    focus: Module boundaries, event bus design, MCP bridge architecture, live trading safety
+    phases: [0, 1, 3]
+
+  - id: qa
+    role: Quality Gates & Testing
+    focus: Test coverage, paper trading validation, Go/No-Go gate, security audit
+    phases: [1, 2, 3]
+
+  - id: analyst
+    role: Market Analysis & Backtesting
+    focus: EV calculations, vertical analysis, paper trading review, strategy evaluation
+    phases: [1, 2, 3]
+
+  - id: devops
+    role: Infrastructure & Deployment
+    focus: Wallet security, CI/CD, monitoring, production deploy
+    phases: [0, 3]
+
+  - id: data-engineer
+    role: Data Pipeline & Storage
+    focus: Experience store optimization, market data pipeline, historical data ingestion
+    phases: [1, 2]
+
+# ============================================================
+# MIND CLONES — Trading & Finance
+# ============================================================
+mind_clones_finance:
+  - id: aswath-damodaran
+    role: Valuation & Risk-Adjusted Returns
+    focus: Kelly calibration, position sizing, EV methodology, bankroll management
+    phases: [1, 3]
+    consult_on:
+      - Position sizing decisions
+      - Kelly fraction adjustments
+      - Risk/reward analysis per vertical
+      - Go/No-Go financial review
+
+  - id: morgan-housel
+    role: Behavioral Finance & Risk Psychology
+    focus: Behavioral biases in trading, emotional circuit breakers, long-term thinking
+    phases: [2, 3]
+    consult_on:
+      - Tilt detection (overtrading after losses)
+      - Bankroll psychology (when to stop)
+      - Narrative risk (market stories vs data)
+
+  - id: ray-dalio
+    role: Macro Strategy & Risk Parity
+    focus: Portfolio diversification across verticals, correlation analysis, all-weather approach
+    phases: [2, 3]
+    consult_on:
+      - Multi-vertical allocation
+      - Correlation between weather/crypto/politics
+      - Drawdown management philosophy
+
+# ============================================================
+# MIND CLONES — AI/ML & Data Science
+# ============================================================
+mind_clones_ai_ml:
+  - id: chip-huyen
+    role: MLOps & Model Drift Detection
+    focus: Prediction model design, drift detection tuning, feature engineering, model monitoring
+    phases: [1, 2, 3]
+    consult_on:
+      - Drift monitor thresholds
+      - ACE evolution strategy
+      - Model selection for probability estimation
+      - Feature engineering for strategies
+
+  - id: andrew-ng
+    role: ML Strategy & Ensemble Methods
+    focus: Ensemble predictions, model stacking, calibration, uncertainty quantification
+    phases: [1, 2]
+    consult_on:
+      - Combining multiple strategy signals
+      - Confidence calibration
+      - When ML adds value vs simple heuristics
+
+  - id: cassie-kozyrkov
+    role: Decision Science & Statistical Rigor
+    focus: Statistical validation, A/B testing strategies, decision frameworks under uncertainty
+    phases: [2, 3]
+    consult_on:
+      - Paper trading statistical significance
+      - Go/No-Go criteria validation
+      - Edge decay detection methodology
+      - Sample size requirements
+
+# ============================================================
+# MIND CLONES — Engineering & Architecture
+# ============================================================
+mind_clones_engineering:
+  - id: martin-fowler
+    role: Integration Patterns & Architecture
+    focus: Event-driven architecture, module boundaries, refactoring for production
+    phases: [0, 2, 3]
+    consult_on:
+      - MCP bridge integration patterns
+      - Event bus scaling decisions
+      - Monolith → service extraction triggers
+
+  - id: simon-willison
+    role: API Integration & Data Pipelines
+    focus: External API resilience, data pipeline design, rate limiting, caching strategies
+    phases: [0, 1, 2]
+    consult_on:
+      - Polymarket/Kalshi API integration
+      - News feed pipeline robustness
+      - HYDRA adapter patterns
+
+  - id: gene-kim
+    role: Operational Excellence & Reliability
+    focus: Runbooks, incident response, observability, deployment safety
+    phases: [2, 3]
+    consult_on:
+      - Playbook design
+      - Health check coverage
+      - Paper→Live transition checklist
+      - Circuit breaker tuning
+
+# ============================================================
+# MIND CLONES — Security
+# ============================================================
+mind_clones_security:
+  - id: daniel-miessler
+    role: Security Architecture
+    focus: Wallet security, API key management, private key protection, attack surface
+    phases: [0, 3]
+    consult_on:
+      - Wallet/key management architecture
+      - API authentication security
+      - Threat modeling for live trading
+      - Incident response for compromised keys
+
+  - id: troy-hunt
+    role: Security Audit & Hardening
+    focus: Credential storage, secret rotation, dependency security, audit trails
+    phases: [3]
+    consult_on:
+      - Pre-production security audit
+      - Secret management review
+      - Dependency vulnerability scan
+
+# ============================================================
+# MIND CLONES — Strategy & Markets (Phase 3 expansion)
+# ============================================================
+mind_clones_strategy:
+  - id: nir-eyal
+    role: Behavioral Patterns & Market Psychology
+    focus: Market participant behavior, herd dynamics, contrarian signals
+    phases: [3]
+    consult_on:
+      - Politics vertical (crowd psychology)
+      - When consensus is wrong
+      - Whale behavior interpretation
+
+  - id: richard-thaler
+    role: Behavioral Economics & Market Inefficiency
+    focus: Prediction market inefficiencies, nudge theory applied to trading, anomaly detection
+    phases: [2, 3]
+    consult_on:
+      - Market mispricing patterns
+      - Behavioral anomalies to exploit
+      - Cross-market inefficiency analysis
+
+# ============================================================
+# PHASE ASSIGNMENTS — Who does what, when
+# ============================================================
+phase_plan:
+  phase_2:
+    name: "Intelligence & Automation"
+    status: in_progress
+    tasks:
+      - id: "2.2"
+        name: "HYDRA adapters — Twitter + on-chain"
+        agents: [dev]
+        clones: [chip-huyen, simon-willison]
+        status: pending
+
+      - id: "2.3"
+        name: "Mind Clone pipeline — MCP real"
+        agents: [dev]
+        clones: [martin-fowler]
+        status: pending
+
+      - id: "2.8"
+        name: "Cross-platform arb — Kalshi"
+        agents: [dev]
+        clones: [aswath-damodaran, simon-willison]
+        status: pending
+
+      - id: "2.9"
+        name: "Playbooks operacionais"
+        agents: [dev, devops]
+        clones: [gene-kim]
+        status: pending
+
+  phase_3:
+    name: "Production & Scale"
+    status: planned
+    tasks:
+      - id: "3.1"
+        name: "Paper trading review"
+        agents: [analyst, qa]
+        clones: [cassie-kozyrkov, aswath-damodaran]
+
+      - id: "3.2"
+        name: "Go/No-Go gate"
+        agents: [qa]
+        clones: [cassie-kozyrkov, ray-dalio]
+
+      - id: "3.3"
+        name: "Live trading mode"
+        agents: [dev, devops]
+        clones: [daniel-miessler, troy-hunt, gene-kim]
+
+      - id: "3.4"
+        name: "Dashboard CLI"
+        agents: [dev]
+        clones: []
+
+      - id: "3.5"
+        name: "Next.js Dashboard (optional)"
+        agents: [dev, ux-design-expert]
+        clones: []
+
+      - id: "3.6"
+        name: "Vertical expansion — Politics + Sports"
+        agents: [dev, analyst]
+        clones: [nir-eyal, richard-thaler, cassie-kozyrkov]
+
+      - id: "3.7"
+        name: "Whale following / copy trading"
+        agents: [dev]
+        clones: [ray-dalio]
+
+      - id: "3.8"
+        name: "POLY airdrop optimization"
+        agents: [analyst]
+        clones: [aswath-damodaran, morgan-housel]
+
+# ============================================================
+# SQUAD TOTALS
+# ============================================================
+summary:
+  core_agents: 6
+  mind_clones: 11
+  total_members: 17
+  verticals_covered:
+    - Trading/Finance (damodaran, housel, dalio)
+    - AI/ML (chip-huyen, andrew-ng, kozyrkov)
+    - Engineering (fowler, willison, gene-kim)
+    - Security (miessler, troy-hunt)
+    - Strategy (nir-eyal, thaler)

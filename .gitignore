@@ -29,6 +29,8 @@ web-bundles/
 .env.production
 .env.development
 .env.test
+.env.n8n
+docs/virtual-company/.env.n8n
 
 # System files
 .DS_Store
@@ -142,7 +144,8 @@ aios-core/index.esm.js
 aios-core/*.map
 
 # Applications (separate deployments, NOT part of npm package)
-apps/
+apps/*
+!apps/polymarket-trader/
 
 # External projects (separate repositories)
 aios-guide-app/
@@ -230,6 +233,7 @@ test-sample-*.md
 .aios/project-status.yaml
 .aios/notifications/
 .aios/sessions/
+.aios/corporation/
 
 # ESLint cache
 .eslintcache
@@ -366,3 +370,23 @@ docs/guides/glue-script-guide.md
 
 # Local Gemini project rules generated/managed per workspace
 .gemini/rules.md
+
+# Dependencies (AIOS)
+node_modules
+
+# Build & Logs (AIOS)
+dist/
+build/
+
+# IDE & OS (AIOS)
+.idea/
+*.swp
+
+# AIOS Local (AIOS)
+.aios-core/local/
+.claude/settings.local.json
+.aios/install-log.txt
+
+# AIOX Local (AIOX)
+.aiox-core/local/
+.aiox/install-log.txt

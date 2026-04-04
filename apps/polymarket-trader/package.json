@@ -1,0 +1,39 @@
+{
+  "name": "@polymarket/trader",
+  "version": "0.1.0",
+  "description": "Autonomous Polymarket prediction market trading system with auto-learning",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "pm-trader": "dist/cli/index.js"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "cli": "tsx src/cli/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint src/ tests/ --ext .ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@polymarket/clob-client": "^4.0.0",
+    "commander": "^12.1.0",
+    "ethers": "^6.13.0",
+    "pino": "^9.5.0",
+    "pino-pretty": "^13.0.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
