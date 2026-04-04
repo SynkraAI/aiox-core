@@ -154,7 +154,11 @@ class ErrorRegistry {
     if (error instanceof AIOXError) {
       // Clone to avoid mutating original instance (Principle VII integrity)
       const clone = Object.create(Object.getPrototypeOf(error));
-      return Object.assign(clone, error, options);
+      Object.assign(clone, error, options);
+      // Ensure non-enumerable Error properties are preserved
+      clone.message = error.message;
+      clone.stack = error.stack;
+      return clone;
     }
 
     if (error instanceof Error) {

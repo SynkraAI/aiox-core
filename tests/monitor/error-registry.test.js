@@ -56,6 +56,29 @@ describe('ErrorRegistry', () => {
     expect(recent[0].category).toBe('SYSTEM');
   });
 
+  test('should clone AIOXError without mutating original and preserve properties', async () => {
+    const originalMetadata = { original: true };
+    const original = new AIOXError('Original message', {
+      category: 'AGENT',
+      metadata: originalMetadata,
+    });
+    const originalStack = original.stack;
+
+    const options = { category: 'SYSTEM', metadata: { updated: true } };
+    const logged = await ErrorRegistry.log(original, options);
+
+    // 1. Verify log result has combined info
+    expect(logged.message).toBe('Original message');
+    expect(logged.category).toBe('SYSTEM');
+    expect(logged.metadata.updated).toBe(true);
+    expect(logged.stack).toBe(originalStack);
+
+    // 2. Verify original remains UNCHANGED (Principle VII integrity)
+    expect(original.category).toBe('AGENT');
+    expect(original.metadata).toEqual(originalMetadata);
+    expect(original.metadata.updated).toBeUndefined();
+  });
+
   test('should respect silent mode when logging', async () => {
     const spy = jest.spyOn(process.stderr, 'write').mockImplementation(() => {});
     
