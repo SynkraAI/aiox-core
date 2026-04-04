@@ -339,17 +339,11 @@ describe('PatternStore (Unit)', () => {
     });
 
     it('should fail for non-existent pattern', () => {
-      const result = store.updateStatus('non-existent-id', 'active');
-
-      expect(result.success).toBe(false);
-      expect(result.error).toContain('not found');
+      expect(() => store.updateStatus('non-existent-id', 'active')).toThrow('Pattern not found');
     });
 
     it('should fail for invalid status', () => {
-      const result = store.updateStatus(patternId, 'invalid-status');
-
-      expect(result.success).toBe(false);
-      expect(result.error).toContain('Invalid status');
+      expect(() => store.updateStatus(patternId, 'invalid-status')).toThrow('Invalid status');
     });
 
     it('should set lastUpdated timestamp', () => {
@@ -417,10 +411,7 @@ describe('PatternStore (Unit)', () => {
     });
 
     it('should fail for non-existent pattern', () => {
-      const result = store.delete('non-existent-id');
-
-      expect(result.success).toBe(false);
-      expect(result.error).toContain('not found');
+      expect(() => store.delete('non-existent-id')).toThrow('Pattern not found');
     });
   });
 

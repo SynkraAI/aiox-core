@@ -12,6 +12,7 @@ const path = require('path');
 const crypto = require('crypto');
 const yaml = require('js-yaml');
 const ErrorRegistry = require('../../monitor/error-registry');
+const AIOXError = require('../../utils/aiox-error');
 
 /**
  * Default storage path for learned patterns
@@ -258,12 +259,20 @@ class PatternStore {
     const pattern = data.patterns.find((p) => p.id === patternId);
 
     if (!pattern) {
-      return { success: false, error: 'Pattern not found' };
+      throw new AIOXError('Pattern not found', {
+        category: 'OPERATIONAL',
+        action: 'updateStatus',
+        metadata: { patternId },
+      });
     }
 
     const validStatuses = Object.values(PATTERN_STATUS);
     if (!validStatuses.includes(newStatus)) {
-      return { success: false, error: `Invalid status: ${newStatus}` };
+      throw new AIOXError(`Invalid status: ${newStatus}`, {
+        category: 'OPERATIONAL',
+        action: 'updateStatus',
+        metadata: { newStatus, validStatuses },
+      });
     }
 
     pattern.status = newStatus;
@@ -305,7 +314,11 @@ class PatternStore {
     const index = data.patterns.findIndex((p) => p.id === patternId);
 
     if (index < 0) {
-      return { success: false, error: 'Pattern not found' };
+      throw new AIOXError('Pattern not found', {
+        category: 'OPERATIONAL',
+        action: 'delete',
+        metadata: { patternId },
+      });
     }
 
     data.patterns.splice(index, 1);
@@ -335,7 +348,11 @@ class PatternStore {
         return data;
       }
     } catch (error) {
-      ErrorRegistry.log(`[PatternStore] Failed to load: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
+      ErrorRegistry.log(`[PatternStore] Failed to load: ${error.message}`, {
+        category: 'OPERATIONAL',
+        display: true,
+        raw: true,
+      }).catch((e) => console.error(`Failed to log load error to ErrorRegistry: ${e.message}`));
     }
 
     // Return empty structure
@@ -370,7 +387,11 @@ class PatternStore {
       this._cache = data;
       this._cacheTime = Date.now();
     } catch (error) {
-      ErrorRegistry.log(`[PatternStore] Failed to save: ${error.message}`, { category: 'SYSTEM', display: true, raw: true });
+      ErrorRegistry.log(`[PatternStore] Failed to save: ${error.message}`, {
+        category: 'SYSTEM',
+        display: true,
+        raw: true,
+      }).catch((e) => console.error(`Failed to log save error to ErrorRegistry: ${e.message}`));
       throw error;
     }
   }

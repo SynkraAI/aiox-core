@@ -87,7 +87,11 @@ class QAFeedbackProcessor {
       this._feedbackHistory = JSON.parse(content);
       return this._feedbackHistory;
     } catch (error) {
-      ErrorRegistry.log(`Failed to load feedback history: ${error.message}`, { category: 'SYSTEM', display: true, raw: true });
+      ErrorRegistry.log(`Failed to load feedback history: ${error.message}`, {
+        category: 'SYSTEM',
+        display: true,
+        raw: true,
+      }).catch((e) => console.error(`Failed to log load error to ErrorRegistry: ${e.message}`));
       this._feedbackHistory = {
         history: [],
         patternStats: {},
@@ -339,7 +343,11 @@ class QAFeedbackProcessor {
         status: newConfidence < this.config.minConfidenceThreshold ? 'deprecated' : pattern.status,
       });
     } catch (error) {
-      ErrorRegistry.log(`Failed to adjust pattern confidence: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
+      ErrorRegistry.log(`Failed to adjust pattern confidence: ${error.message}`, {
+        category: 'OPERATIONAL',
+        display: true,
+        raw: true,
+      }).catch((e) => console.error(`Failed to log confidence adjustment error to ErrorRegistry: ${e.message}`));
     }
   }
 
@@ -359,7 +367,11 @@ class QAFeedbackProcessor {
         deprecatedReason: 'Consecutive QA failures',
       });
     } catch (error) {
-      ErrorRegistry.log(`Failed to deprecate pattern: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
+      ErrorRegistry.log(`Failed to deprecate pattern: ${error.message}`, {
+        category: 'OPERATIONAL',
+        display: true,
+        raw: true,
+      }).catch((e) => console.error(`Failed to log deprecation error to ErrorRegistry: ${e.message}`));
     }
   }
 
@@ -382,7 +394,11 @@ class QAFeedbackProcessor {
         source: 'qa-feedback',
       });
     } catch (error) {
-      ErrorRegistry.log(`Failed to create gotcha: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
+      ErrorRegistry.log(`Failed to create gotcha: ${error.message}`, {
+        category: 'OPERATIONAL',
+        display: true,
+        raw: true,
+      }).catch((e) => console.error(`Failed to log gotcha creation error to ErrorRegistry: ${e.message}`));
       return null;
     }
   }

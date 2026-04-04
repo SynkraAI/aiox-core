@@ -11,6 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const ErrorRegistry = require('../../monitor/error-registry');
+const AIOXError = require('../../utils/aiox-error');
 const crypto = require('crypto');
 
 // ═══════════════════════════════════════════════════════════════════════════════════
@@ -97,7 +98,9 @@ class GotchaRegistry {
       this._buildIndex();
       return this._gotchas;
     } catch (error) {
-      ErrorRegistry.log(`Failed to load gotchas: ${error.message}`, { category: 'SYSTEM', display: true, raw: true });
+      ErrorRegistry.log(`Failed to load gotchas: ${error.message}`, { category: 'SYSTEM', display: true, raw: true }).catch(
+        (e) => console.error(`Failed to log error to ErrorRegistry: ${e.message}`),
+      );
       this._gotchas = { gotchas: [], metadata: { version: '1.0.0', lastUpdated: null } };
       return this._gotchas;
     }
@@ -188,7 +191,11 @@ class GotchaRegistry {
     // Validate required fields
     for (const field of GOTCHA_SCHEMA.required) {
       if (!gotcha[field]) {
-        throw new Error(`Missing required field: ${field}`);
+        throw new AIOXError(`Missing required field: ${field}`, {
+          category: 'OPERATIONAL',
+          action: 'recordGotcha',
+          metadata: { field },
+        });
       }
     }
 
