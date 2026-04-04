@@ -17,6 +17,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const ErrorRegistry = require('../../monitor/error-registry');
 
 // Lazy-loaded dependencies for performance
 let wis = null;
@@ -72,7 +73,7 @@ class SuggestionEngine {
       try {
         wis = require('../index');
       } catch (error) {
-        console.warn('[SuggestionEngine] Failed to load WIS module:', error.message);
+        ErrorRegistry.log(`[SuggestionEngine] Failed to load WIS module: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
         wis = null;
       }
     }
@@ -81,7 +82,7 @@ class SuggestionEngine {
       try {
         SessionContextLoader = require('../../core/session/context-loader');
       } catch (error) {
-        console.warn('[SuggestionEngine] Failed to load SessionContextLoader:', error.message);
+        ErrorRegistry.log(`[SuggestionEngine] Failed to load SessionContextLoader: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
         SessionContextLoader = null;
       }
     }
@@ -90,7 +91,7 @@ class SuggestionEngine {
       try {
         learning = require('../learning');
       } catch (error) {
-        console.warn('[SuggestionEngine] Failed to load learning module:', error.message);
+        ErrorRegistry.log(`[SuggestionEngine] Failed to load learning module: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
         learning = null;
       }
     }
@@ -99,7 +100,7 @@ class SuggestionEngine {
       try {
         ({ WorkflowStateManager } = require('../../development/scripts/workflow-state-manager'));
       } catch (error) {
-        console.warn('[SuggestionEngine] Failed to load WorkflowStateManager:', error.message);
+        ErrorRegistry.log(`[SuggestionEngine] Failed to load WorkflowStateManager: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
         WorkflowStateManager = null;
       }
     }
@@ -136,7 +137,7 @@ class SuggestionEngine {
         context.storyPath = sessionContext.currentStory || null;
         context.workflowActive = sessionContext.workflowActive || null;
       } catch (error) {
-        console.warn('[SuggestionEngine] Failed to load session context:', error.message);
+        ErrorRegistry.log(`[SuggestionEngine] Failed to load session context: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
       }
     }
 
@@ -249,7 +250,7 @@ class SuggestionEngine {
 
       return result;
     } catch (error) {
-      console.error('[SuggestionEngine] Error getting suggestions:', error.message);
+      await ErrorRegistry.log(`[SuggestionEngine] Error getting suggestions: ${error.message}`, { category: 'SYSTEM', display: true, raw: true });
       return {
         ...defaultResult,
         message: `Error: ${error.message}`,
@@ -391,7 +392,7 @@ class SuggestionEngine {
       // File doesn't exist
     }
 
-    console.warn(`[SuggestionEngine] Story path not found: ${storyPath}`);
+    ErrorRegistry.log(`[SuggestionEngine] Story path not found: ${storyPath}`, { category: 'OPERATIONAL', display: true, raw: true });
     return null;
   }
 
@@ -594,7 +595,7 @@ class SuggestionEngine {
         return suggestion;
       });
     } catch (error) {
-      console.warn('[SuggestionEngine] Failed to apply learned pattern boost:', error.message);
+      ErrorRegistry.log(`[SuggestionEngine] Failed to apply learned pattern boost: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
       return suggestions;
     }
   }

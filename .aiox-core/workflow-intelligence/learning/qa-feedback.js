@@ -12,6 +12,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const ErrorRegistry = require('../../monitor/error-registry');
 
 // ═══════════════════════════════════════════════════════════════════════════════════
 //                              CONFIGURATION
@@ -86,7 +87,7 @@ class QAFeedbackProcessor {
       this._feedbackHistory = JSON.parse(content);
       return this._feedbackHistory;
     } catch (error) {
-      console.error('Failed to load feedback history:', error.message);
+      ErrorRegistry.log(`Failed to load feedback history: ${error.message}`, { category: 'SYSTEM', display: true, raw: true });
       this._feedbackHistory = {
         history: [],
         patternStats: {},
@@ -338,7 +339,7 @@ class QAFeedbackProcessor {
         status: newConfidence < this.config.minConfidenceThreshold ? 'deprecated' : pattern.status,
       });
     } catch (error) {
-      console.error('Failed to adjust pattern confidence:', error.message);
+      ErrorRegistry.log(`Failed to adjust pattern confidence: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
     }
   }
 
@@ -358,7 +359,7 @@ class QAFeedbackProcessor {
         deprecatedReason: 'Consecutive QA failures',
       });
     } catch (error) {
-      console.error('Failed to deprecate pattern:', error.message);
+      ErrorRegistry.log(`Failed to deprecate pattern: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
     }
   }
 
@@ -381,7 +382,7 @@ class QAFeedbackProcessor {
         source: 'qa-feedback',
       });
     } catch (error) {
-      console.error('Failed to create gotcha:', error.message);
+      ErrorRegistry.log(`Failed to create gotcha: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
       return null;
     }
   }

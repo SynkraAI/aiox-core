@@ -69,10 +69,18 @@ class ErrorRegistry {
       });
     }
 
-    // Output to console unless silent
-    if (!aioxError.silent) {
-      const icon = aioxError.category === 'SYSTEM' ? '🔴' : '🟡';
-      console.error(`${icon} [${aioxError.category}] ${aioxError.message} (${aioxError.agentId})`);
+    // Output to console (stderr) for immediate feedback
+    // Defaults to true unless 'silent' is true or 'display' is explicitly false
+    const shouldDisplay = options.display !== false && !aioxError.silent;
+    
+    if (shouldDisplay) {
+      if (options.raw) {
+        console.error(aioxError.message);
+      } else {
+        const icon = aioxError.category === 'SYSTEM' ? '🔴' : '🟡';
+        const agentSuffix = aioxError.agentId ? ` (${aioxError.agentId})` : '';
+        console.error(`${icon} [${aioxError.category}] ${aioxError.message}${agentSuffix}`);
+      }
     }
 
     await this._persist(aioxError);

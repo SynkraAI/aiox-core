@@ -183,7 +183,7 @@ function getStagedFiles() {
   }
 }
 
-function main() {
+async function main() {
   // Step 1: Read config (single source of truth)
   const config = readBoundaryConfig();
 
@@ -213,22 +213,24 @@ function main() {
 
   // Step 5: Report
   if (blockedFiles.length > 0) {
-    console.error('');
-    console.error('Framework Guard: Commit blocked!');
-    console.error('');
-    console.error('The following framework files are protected (L1/L2):');
+    const ErrorRegistry = require('../../.aiox-core/monitor/error-registry');
+    
+    await ErrorRegistry.log('', { display: true, raw: true });
+    await ErrorRegistry.log('Framework Guard: Commit blocked!', { display: true, raw: true, category: 'SYSTEM' });
+    await ErrorRegistry.log('', { display: true, raw: true });
+    await ErrorRegistry.log('The following framework files are protected (L1/L2):', { display: true, raw: true });
     for (const file of blockedFiles) {
-      console.error(`  - ${file}`);
+      await ErrorRegistry.log(`  - ${file}`, { display: true, raw: true });
     }
-    console.error('');
-    console.error('These files are read-only in project mode (boundary.frameworkProtection: true).');
-    console.error('');
-    console.error('To bypass (framework contributors only):');
-    console.error('  git commit --no-verify');
-    console.error('');
-    console.error('To disable permanently (contributors):');
-    console.error('  Set boundary.frameworkProtection: false in core-config.yaml');
-    console.error('');
+    await ErrorRegistry.log('', { display: true, raw: true });
+    await ErrorRegistry.log('These files are read-only in project mode (boundary.frameworkProtection: true).', { display: true, raw: true });
+    await ErrorRegistry.log('', { display: true, raw: true });
+    await ErrorRegistry.log('To bypass (framework contributors only):', { display: true, raw: true });
+    await ErrorRegistry.log('  git commit --no-verify', { display: true, raw: true });
+    await ErrorRegistry.log('', { display: true, raw: true });
+    await ErrorRegistry.log('To disable permanently (contributors):', { display: true, raw: true });
+    await ErrorRegistry.log('  Set boundary.frameworkProtection: false in core-config.yaml', { display: true, raw: true });
+    await ErrorRegistry.log('', { display: true, raw: true });
     process.exit(1);
   }
 
@@ -240,5 +242,9 @@ module.exports = { readBoundaryConfig, globToRegex, matchesAny, getStagedFiles, 
 
 // Run when executed directly
 if (require.main === module) {
-  main();
+  main().catch(async (err) => {
+    const ErrorRegistry = require('../../.aiox-core/monitor/error-registry');
+    await ErrorRegistry.log(`Framework Guard Error: ${err.message}`, { category: 'SYSTEM', display: true, raw: true });
+    process.exit(1);
+  });
 }

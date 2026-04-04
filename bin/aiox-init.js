@@ -96,6 +96,7 @@ function resolveAioxCoreModule(modulePath) {
 const { detectRepositoryContext } = resolveAioxCoreModule(
   'infrastructure/scripts/repository-detector'
 );
+const ErrorRegistry = resolveAioxCoreModule('monitor/error-registry');
 // PM adapters imported but not used directly (loaded dynamically)
 // const { ClickUpAdapter } = resolveAioxCoreModule('utils/pm-adapters/clickup-adapter');
 // const { GitHubProjectsAdapter } = resolveAioxCoreModule('utils/pm-adapters/github-adapter');
@@ -295,9 +296,9 @@ async function main() {
           console.log(chalk.gray(`   To:   ${upgradeCheck.to}`));
           process.exit(0);
         } else {
-          console.error(chalk.red('✗') + ' Upgrade failed with errors:');
+          await ErrorRegistry.log(chalk.red('✗') + ' Upgrade failed with errors:', { display: true, raw: true });
           for (const err of result.errors) {
-            console.error(chalk.red(`   - ${err.path}: ${err.error}`));
+            await ErrorRegistry.log(chalk.red(`   - ${err.path}: ${err.error}`), { display: true, raw: true });
           }
           process.exit(1);
         }
@@ -545,7 +546,7 @@ async function main() {
       }
     }
   } else {
-    console.error(chalk.red('✗') + ' AIOX Core files not found');
+    await ErrorRegistry.log(chalk.red('✗') + ' AIOX Core files not found', { display: true, raw: true });
     process.exit(1);
   }
 
@@ -1222,9 +1223,9 @@ async function setupGlobalStatuslineLegacy(sourceCoreDir) {
 }
 
 // Run installer with error handling
-main().catch((error) => {
-  console.error('');
-  console.error(chalk.red('✗ Installation failed: ') + error.message);
-  console.error('');
+main().catch(async (error) => {
+  await ErrorRegistry.log('', { display: true, raw: true });
+  await ErrorRegistry.log(chalk.red('✗ Installation failed: ') + error.message, { display: true, raw: true, metadata: { stack: error.stack } });
+  await ErrorRegistry.log('', { display: true, raw: true });
   process.exit(1);
 });

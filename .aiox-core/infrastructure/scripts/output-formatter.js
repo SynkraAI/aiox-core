@@ -11,6 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
+const ErrorRegistry = require('../../monitor/error-registry');
 
 /**
  * Personalized Output Formatter
@@ -51,7 +52,7 @@ class PersonalizedOutputFormatter {
       const agentPath = path.join(process.cwd(), '.aiox-core', 'agents', `${this.agent.id}.md`);
       
       if (!fs.existsSync(agentPath)) {
-        console.warn(`[OutputFormatter] Agent file not found: ${agentPath}`);
+        ErrorRegistry.log(`[OutputFormatter] Agent file not found: ${agentPath}`, { category: 'OPERATIONAL', display: true, raw: true });
         this.personaProfile = this._getNeutralProfile();
         return;
       }
@@ -60,7 +61,7 @@ class PersonalizedOutputFormatter {
       const yamlMatch = content.match(/```ya?ml\r?\n([\s\S]*?)\r?\n```/);
       
       if (!yamlMatch) {
-        console.warn('[OutputFormatter] No YAML block found in agent file');
+        ErrorRegistry.log('[OutputFormatter] No YAML block found in agent file', { category: 'OPERATIONAL', display: true, raw: true });
         this.personaProfile = this._getNeutralProfile();
         return;
       }
@@ -73,7 +74,7 @@ class PersonalizedOutputFormatter {
         this.vocabularyCache.set(this.agent.id, this.personaProfile.communication.vocabulary);
       }
     } catch (error) {
-      console.warn(`[OutputFormatter] Error loading persona_profile: ${error.message}`);
+      ErrorRegistry.log(`[OutputFormatter] Error loading persona_profile: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
       this.personaProfile = this._getNeutralProfile();
     }
   }
@@ -104,7 +105,7 @@ class PersonalizedOutputFormatter {
    * Generate complete formatted output
    * @returns {string} Formatted markdown output
    */
-  format() {
+  async format() {
     const startTime = process.hrtime.bigint();
     
     try {
@@ -136,7 +137,7 @@ class PersonalizedOutputFormatter {
 
       return formatted;
     } catch (error) {
-      console.error(`[OutputFormatter] Format error: ${error.message}`);
+      await ErrorRegistry.log(`[OutputFormatter] Format error: ${error.message}`, { category: 'SYSTEM', display: true, raw: true });
       throw error;
     }
   }

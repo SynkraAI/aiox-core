@@ -28,6 +28,7 @@
 
 const fs = require('fs').promises;
 const path = require('path');
+const ErrorRegistry = require('../../monitor/error-registry');
 
 // Pattern categories
 const PATTERN_CATEGORIES = {
@@ -1472,7 +1473,7 @@ Examples:
   }
 
   if (projectRoot === '/') {
-    console.error('Error: Could not find project root. Run from within a project directory.');
+    await ErrorRegistry.log('Error: Could not find project root. Run from within a project directory.', { category: 'SYSTEM', display: true, raw: true });
     process.exit(1);
   }
 
@@ -1554,8 +1555,8 @@ module.exports = PatternExtractor;
 
 // Run CLI if called directly
 if (require.main === module) {
-  main().catch((error) => {
-    console.error('Error:', error.message);
+  main().catch(async (error) => {
+    await ErrorRegistry.log(`Error: ${error.message}`, { category: 'SYSTEM', display: true, raw: true });
     process.exit(1);
   });
 }

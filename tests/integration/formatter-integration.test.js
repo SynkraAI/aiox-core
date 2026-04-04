@@ -84,12 +84,12 @@ persona_profile:
     fs.readFileSync.mockReturnValue(mockDevAgentContent);
   });
 
-  test('develop-story task uses formatter successfully', () => {
+  test('develop-story task uses formatter successfully', async () => {
     // 1. Load dev agent (Dex - Builder)
     const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
 
     // 2. Execute formatter
-    const formattedOutput = formatter.format();
+    const formattedOutput = await formatter.format();
 
     // 3. Capture formatted output
     expect(formattedOutput).toBeDefined();
@@ -116,16 +116,16 @@ persona_profile:
     expect(signatureIndex).toBeGreaterThan(metricsIndex);
 
     // 7. Verify performance <50ms
-    const start = process.hrtime.bigint();
-    formatter.format();
-    const duration = Number(process.hrtime.bigint() - start) / 1000000;
+    const startNum = process.hrtime.bigint();
+    await formatter.format();
+    const duration = Number(process.hrtime.bigint() - startNum) / 1000000;
 
     expect(duration).toBeLessThan(50);
   });
 
-  test('formatter output passes validator for all sections', () => {
+  test('formatter output passes validator for all sections', async () => {
     const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
-    const output = formatter.format();
+    const output = await formatter.format();
     const validator = new OutputPatternValidator();
     const result = validator.validate(output);
 
@@ -133,9 +133,9 @@ persona_profile:
     expect(result.errors.length).toBe(0);
   });
 
-  test('formatter maintains fixed structure positions', () => {
+  test('formatter maintains fixed structure positions', async () => {
     const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
-    const output = formatter.format();
+    const output = await formatter.format();
     const lines = output.split('\n');
 
     // Find header start
@@ -149,9 +149,9 @@ persona_profile:
     expect(lines[headerIndex + 7]).toMatch(/^\*\*Tokens Used:\*\*/);
   });
 
-  test('formatter injects personality correctly', () => {
+  test('formatter injects personality correctly', async () => {
     const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
-    const output = formatter.format();
+    const output = await formatter.format();
 
     // Check agent name and archetype
     expect(output).toContain('**Agent:** Dex (Builder)');
@@ -163,18 +163,18 @@ persona_profile:
     expect(output).toContain('— Dex, sempre construindo 🔨');
   });
 
-  test('formatter handles task-specific output correctly', () => {
+  test('formatter handles task-specific output correctly', async () => {
     const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
-    const output = formatter.format();
+    const output = await formatter.format();
 
     expect(output).toContain('### Output');
     expect(output).toContain('Created files:');
     expect(output).toContain('output-formatter.js');
   });
 
-  test('formatter includes metrics correctly', () => {
+  test('formatter includes metrics correctly', async () => {
     const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
-    const output = formatter.format();
+    const output = await formatter.format();
 
     expect(output).toContain('### Metrics');
     expect(output).toContain('Tests: 50/50');
@@ -182,14 +182,14 @@ persona_profile:
     expect(output).toContain('Linting: ✅ Clean');
   });
 
-  test('formatter performance meets target', () => {
+  test('formatter performance meets target', async () => {
     const iterations = 10;
     const times = [];
 
     for (let i = 0; i < iterations; i++) {
       const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
       const start = process.hrtime.bigint();
-      formatter.format();
+      await formatter.format();
       const duration = Number(process.hrtime.bigint() - start) / 1000000;
       times.push(duration);
     }

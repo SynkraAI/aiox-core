@@ -27,6 +27,9 @@ const MIN_FILE_COUNT = 50;
 // CI environments may not have access to the private pro submodule
 const IS_CI = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
 
+const ErrorRegistry = require('../../.aiox-core/monitor/error-registry');
+
+(async () => {
 let passed = true;
 let fileCount = 0;
 
@@ -37,8 +40,8 @@ if (!fs.existsSync(PRO_DIR)) {
   if (IS_CI) {
     console.log('SKIP: pro/ directory not available (CI — private submodule requires separate access token)');
   } else {
-    console.error('FAIL: pro/ directory does not exist.');
-    console.error('  Fix: git submodule update --init pro');
+    await ErrorRegistry.log('FAIL: pro/ directory does not exist.', { display: true, raw: true });
+    await ErrorRegistry.log('  Fix: git submodule update --init pro', { display: true, raw: true });
     passed = false;
   }
 } else {
@@ -47,8 +50,8 @@ if (!fs.existsSync(PRO_DIR)) {
     if (IS_CI) {
       console.log('SKIP: pro/ submodule empty (CI — private submodule requires separate access token)');
     } else {
-      console.error('FAIL: pro/ submodule not initialized (directory is empty).');
-      console.error('  Fix: git submodule update --init pro');
+      await ErrorRegistry.log('FAIL: pro/ submodule not initialized (directory is empty).', { display: true, raw: true });
+      await ErrorRegistry.log('  Fix: git submodule update --init pro', { display: true, raw: true });
       passed = false;
     }
   } else {
@@ -61,9 +64,9 @@ if (!fs.existsSync(CRITICAL_FILE)) {
   if (IS_CI) {
     console.log('SKIP: pro/license/license-api.js not available (CI — private submodule)');
   } else {
-    console.error('FAIL: pro/license/license-api.js not found.');
-    console.error('  This is a critical file required for Pro license validation.');
-    console.error('  Fix: git submodule update --init --recursive pro');
+    await ErrorRegistry.log('FAIL: pro/license/license-api.js not found.', { display: true, raw: true });
+    await ErrorRegistry.log('  This is a critical file required for Pro license validation.', { display: true, raw: true });
+    await ErrorRegistry.log('  Fix: git submodule update --init --recursive pro', { display: true, raw: true });
     passed = false;
   }
 } else {
@@ -87,14 +90,14 @@ try {
   fileCount = fileLines.length;
 
   if (fileCount < MIN_FILE_COUNT) {
-    console.error(`FAIL: Package has only ${fileCount} files, expected >= ${MIN_FILE_COUNT}.`);
-    console.error('  Check that all directories in "files" array are populated.');
+    await ErrorRegistry.log(`FAIL: Package has only ${fileCount} files, expected >= ${MIN_FILE_COUNT}.`, { display: true, raw: true });
+    await ErrorRegistry.log('  Check that all directories in "files" array are populated.', { display: true, raw: true });
     passed = false;
   } else {
     console.log(`PASS: Package contains ${fileCount} files (minimum: ${MIN_FILE_COUNT})`);
   }
 } catch (err) {
-  console.error(`FAIL: npm pack --dry-run failed: ${err.message}`);
+  await ErrorRegistry.log(`FAIL: npm pack --dry-run failed: ${err.message}`, { display: true, raw: true });
   passed = false;
 }
 
@@ -115,8 +118,8 @@ try {
     console.log('SKIP: scripts/validate-aiox-core-deps.js not found');
   }
 } catch (_depErr) {
-  console.error('FAIL: .aiox-core dependency completeness check failed');
-  console.error('  Fix: Run "node scripts/validate-aiox-core-deps.js" to see details');
+  await ErrorRegistry.log('FAIL: .aiox-core dependency completeness check failed', { display: true, raw: true });
+  await ErrorRegistry.log('  Fix: Run "node scripts/validate-aiox-core-deps.js" to see details', { display: true, raw: true });
   passed = false;
 }
 
@@ -126,6 +129,7 @@ if (passed) {
   console.log(`PUBLISH SAFETY GATE: PASS (${fileCount} files in package)`);
   process.exit(0);
 } else {
-  console.error('PUBLISH SAFETY GATE: FAIL — publish blocked. Fix issues above before retrying.');
+  await ErrorRegistry.log('PUBLISH SAFETY GATE: FAIL — publish blocked. Fix issues above before retrying.', { display: true, raw: true });
   process.exit(1);
 }
+})();

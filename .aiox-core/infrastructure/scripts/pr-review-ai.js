@@ -17,6 +17,7 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const EventEmitter = require('events');
+const ErrorRegistry = require('../../monitor/error-registry');
 
 // ============================================================================
 // REVIEW CATEGORIES
@@ -879,7 +880,7 @@ class PRReviewAI extends EventEmitter {
 
       this.emit('review_posted', { prNumber });
     } catch (error) {
-      console.error('Failed to post review:', error.message);
+      await ErrorRegistry.log(`Failed to post review: ${error.message}`, { category: 'SYSTEM', display: true, raw: true });
     }
   }
 
@@ -1031,14 +1032,14 @@ Examples:
           }
         }
       })
-      .catch((err) => {
-        console.error('Error:', err.message);
+      .catch(async (err) => {
+        await ErrorRegistry.log(`Error: ${err.message}`, { category: 'SYSTEM', display: true, raw: true });
         process.exit(1);
       });
   } else {
     const prNumber = args.find((a) => !a.startsWith('--'));
     if (!prNumber) {
-      console.error('Error: PR number required');
+      await ErrorRegistry.log('Error: PR number required', { category: 'SYSTEM', display: true, raw: true });
       process.exit(1);
     }
 
@@ -1047,8 +1048,8 @@ Examples:
       .then((review) => {
         console.log('\n' + review.summary);
       })
-      .catch((err) => {
-        console.error('Error:', err.message);
+      .catch(async (err) => {
+        await ErrorRegistry.log(`Error: ${err.message}`, { category: 'SYSTEM', display: true, raw: true });
         process.exit(1);
       });
   }

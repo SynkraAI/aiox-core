@@ -10,6 +10,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const ErrorRegistry = require('../../monitor/error-registry');
 const crypto = require('crypto');
 
 // ═══════════════════════════════════════════════════════════════════════════════════
@@ -96,7 +97,7 @@ class GotchaRegistry {
       this._buildIndex();
       return this._gotchas;
     } catch (error) {
-      console.error('Failed to load gotchas:', error.message);
+      ErrorRegistry.log(`Failed to load gotchas: ${error.message}`, { category: 'SYSTEM', display: true, raw: true });
       this._gotchas = { gotchas: [], metadata: { version: '1.0.0', lastUpdated: null } };
       return this._gotchas;
     }

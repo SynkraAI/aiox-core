@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-04-03T23:54:09.005Z"
+generated_at: "2026-04-04T00:48:18.995Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1091
 files:
@@ -1197,9 +1197,9 @@ files:
     type: core
     size: 9675
   - path: core/utils/output-formatter.js
-    hash: sha256:6fdfee469b7c108ec24a045b9b2719d836a242052abd285957a9ac732c6fc594
+    hash: sha256:d2a07f73bff861a891c0732f08603b70634a51c1b7444bf73f76991a559d02f5
     type: core
-    size: 8991
+    size: 9300
   - path: core/utils/security-utils.js
     hash: sha256:00c938eda0e142b8c204b50afdd662864b5209b60a32a0e6e847e4e4cbceee09
     type: core
@@ -2989,13 +2989,13 @@ files:
     type: script
     size: 7697
   - path: infrastructure/scripts/config-loader.js
-    hash: sha256:8f9489f7c57e775bfbb750761d9714505d5df3938b664cbbdf6701f9e18e240b
+    hash: sha256:a1383ffbd6629c01a1ce74af0c358887eef8fff8d2e52aeb7793751d89ba111c
     type: script
-    size: 10640
+    size: 10866
   - path: infrastructure/scripts/conflict-resolver.js
-    hash: sha256:3d2794a66f16fcea95b096386dc9c2dcd31e5938d862030e7ac1f38c00a2c0bd
+    hash: sha256:9d1b81cdde679cf3a592f6e58846c6982cb7650d329535941803e66ebe613ee9
     type: script
-    size: 19200
+    size: 19450
   - path: infrastructure/scripts/coverage-analyzer.js
     hash: sha256:95e70563eadf720ce4c6aa6349ace311cf34c63bc5044f71565f328a2dc9a706
     type: script
@@ -3185,17 +3185,17 @@ files:
     type: script
     size: 16492
   - path: infrastructure/scripts/output-formatter.js
-    hash: sha256:6f28092d0dabf3b0b486ef06a1836d47c3247a3c331ed6cfbcd597d45496ddb6
+    hash: sha256:eae9669bd41fcdfbd42e1f737c2402b9324a50c83dfb45e824020abb1d654d9f
     type: script
-    size: 8968
+    size: 9277
   - path: infrastructure/scripts/path-analyzer.js
     hash: sha256:47250c416f8090278b4a81de7be4a3f2592f4a20b6afc9c9e30c9cafd292e166
     type: script
     size: 13092
   - path: infrastructure/scripts/pattern-extractor.js
-    hash: sha256:9edc6aabdb32431466c5c8db9da883bc0a5f4457cfc74ccc6c10ed687f8e1e52
+    hash: sha256:225c6b3314e9cb9acd01a3821307a826e5c67b52e21a9df16109dbc750fa49c3
     type: script
-    size: 45035
+    size: 45226
   - path: infrastructure/scripts/performance-analyzer.js
     hash: sha256:6d925acfbaf3cedae2b17ec262f8436c2d38d7eacd4513acfa0a6b3ebb600337
     type: script
@@ -3225,9 +3225,9 @@ files:
     type: script
     size: 4056
   - path: infrastructure/scripts/pr-review-ai.js
-    hash: sha256:4d6e8ce12f6119f7e02179e7a9a83ea258b4bb75ee0bd3985a4d6c36a50ba603
+    hash: sha256:f15ca50f27879efe5475df037d773904bd6f7ec7a03cf9ba6ff4afddb5149daf
     type: script
-    size: 31838
+    size: 32159
   - path: infrastructure/scripts/project-status-loader.js
     hash: sha256:33d753efad0658a702b08f9422406423a9aceac4c88479622fc660c8e0c8eccb
     type: script
@@ -3509,9 +3509,9 @@ files:
     type: manifest
     size: 5291
   - path: monitor/error-registry.js
-    hash: sha256:173e81157cee2a4e980c1aec677356ced895e36b3051e328c17eb7694ef2f07f
+    hash: sha256:4bb75ca4bcf8cb39c1666823b3507286efb337d4a2e19c5bac083e537f14ce33
     type: monitor
-    size: 4309
+    size: 4648
   - path: monitor/hooks/lib/__init__.py
     hash: sha256:bfab6ee249c52f412c02502479da649b69d044938acaa6ab0aa39dafe6dee9bf
     type: monitor
@@ -4325,9 +4325,9 @@ files:
     type: workflow-intelligence
     size: 8436
   - path: workflow-intelligence/engine/suggestion-engine.js
-    hash: sha256:31fd3336aca76d22efbda67280957639778ee73d2a2b6e2410f80b1ea36b0264
+    hash: sha256:e432b8b9ed31eea3fe9d139c0cd1fb81c9c169f40012c3f6b4002634b0712595
     type: workflow-intelligence
-    size: 23441
+    size: 23998
   - path: workflow-intelligence/engine/wave-analyzer.js
     hash: sha256:0d017b70213584a11cad354d54d442be977b183353e6a5e31cc1de4291d0afb9
     type: workflow-intelligence
@@ -4341,9 +4341,9 @@ files:
     type: workflow-intelligence
     size: 3266
   - path: workflow-intelligence/learning/gotcha-registry.js
-    hash: sha256:6e68aa29d68f3364fe39c288ffc30df8b0db227362d28830493bfb753285ac46
+    hash: sha256:d7b721d4e0607944780e373cc1bcd33d0187a75dd0942e3b8a76955d666dec28
     type: workflow-intelligence
-    size: 21117
+    size: 21236
   - path: workflow-intelligence/learning/index.js
     hash: sha256:fe37c68b0b718cb9fafbb80b32f2cdb31d43a76eef6d2d95c53c327215ead87d
     type: workflow-intelligence
@@ -4353,17 +4353,17 @@ files:
     type: workflow-intelligence
     size: 9359
   - path: workflow-intelligence/learning/pattern-store.js
-    hash: sha256:36fa074ebe287ae22d70c48c708cf3083efee4d966f5cfdf21ab5b408406ce98
+    hash: sha256:d3402565c9878ef48e4c40ec1fda55af21bd2af2586a18d2b317f436851c8102
     type: workflow-intelligence
-    size: 13682
+    size: 13863
   - path: workflow-intelligence/learning/pattern-validator.js
     hash: sha256:9f1e2ad890e1ae2d473e2cbc0b9dfe29b588e2cd542609f25be50917d6c5d70d
     type: workflow-intelligence
     size: 8549
   - path: workflow-intelligence/learning/qa-feedback.js
-    hash: sha256:943bcc8d9638b66d46bae1697d15dd79591a4e2dd4623a1dab602abc678ee7c2
+    hash: sha256:aa38df96cdd4e17d9a0da85ccb3a5ee29f397ccde12dff82c7cf33c42874d6cc
     type: workflow-intelligence
-    size: 18407
+    size: 18709
   - path: workflow-intelligence/learning/semantic-search.js
     hash: sha256:f9ba491acf310e479d467f1a5990e4d3656b0c06a6fc50f52d26853325071976
     type: workflow-intelligence

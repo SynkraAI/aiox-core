@@ -11,6 +11,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const yaml = require('js-yaml');
+const ErrorRegistry = require('../../monitor/error-registry');
 
 /**
  * Default storage path for learned patterns
@@ -334,7 +335,7 @@ class PatternStore {
         return data;
       }
     } catch (error) {
-      console.warn('[PatternStore] Failed to load:', error.message);
+      ErrorRegistry.log(`[PatternStore] Failed to load: ${error.message}`, { category: 'OPERATIONAL', display: true, raw: true });
     }
 
     // Return empty structure
@@ -369,7 +370,7 @@ class PatternStore {
       this._cache = data;
       this._cacheTime = Date.now();
     } catch (error) {
-      console.error('[PatternStore] Failed to save:', error.message);
+      ErrorRegistry.log(`[PatternStore] Failed to save: ${error.message}`, { category: 'SYSTEM', display: true, raw: true });
       throw error;
     }
   }

@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const diffLib = require('diff');
 const inquirer = require('inquirer');
 const GitWrapper = require('./git-wrapper');
+const ErrorRegistry = require('../monitor/error-registry');
 
 /**
  * Handles conflict detection and resolution for meta-agent modifications
@@ -58,7 +59,7 @@ class ConflictResolver {
         totalConflicts: conflictDetails.reduce((sum, f) => sum + f.conflictCount, 0),
       };
     } catch (error) {
-      console.error(chalk.red(`Error detecting conflicts: ${error.message}`));
+      await ErrorRegistry.log(chalk.red(`Error detecting conflicts: ${error.message}`), { category: 'SYSTEM', display: true, raw: true, metadata: { stack: error.stack } });
       return {
         hasConflicts: false,
         error: error.message,
@@ -560,7 +561,7 @@ class ConflictResolver {
         return JSON.stringify(merged, null, 2);
       }
     } catch (error) {
-      console.error(chalk.red('Failed to auto-resolve JSON:', error.message));
+      await ErrorRegistry.log(chalk.red(`Failed to auto-resolve JSON: ${error.message}`), { category: 'SYSTEM', display: true, raw: true, metadata: { stack: error.stack } });
     }
     
     // Fallback to manual resolution

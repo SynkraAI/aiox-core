@@ -68,6 +68,28 @@ describe('ErrorRegistry', () => {
     spy.mockRestore();
   });
 
+  test('should support explicit display option', async () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    
+    await ErrorRegistry.log('Display false', { display: false });
+    expect(spy).not.toHaveBeenCalled();
+
+    await ErrorRegistry.log('Display true', { display: true });
+    expect(spy).toHaveBeenCalled();
+
+    spy.mockRestore();
+  });
+
+  test('should support raw output when requested', async () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const rawMessage = 'Raw error message';
+    
+    await ErrorRegistry.log(rawMessage, { raw: true });
+    expect(spy).toHaveBeenCalledWith(rawMessage);
+
+    spy.mockRestore();
+  });
+
   test('should limit log size to 500 entries', async () => {
     // Force many logs - now with lock-queueing we need more time
     const promises = [];

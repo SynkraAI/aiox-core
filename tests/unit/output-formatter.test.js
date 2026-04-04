@@ -78,9 +78,9 @@ persona_profile:
   });
 
   describe('Core Formatting', () => {
-    test('generates valid output for Builder agent', () => {
+    test('generates valid output for Builder agent', async () => {
       const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
-      const output = formatter.format();
+      const output = await formatter.format();
 
       expect(output).toContain('## 📊 Task Execution Report');
       expect(output).toContain('**Agent:** Dex (Builder)');
@@ -89,9 +89,9 @@ persona_profile:
       expect(output).toContain('**Tokens Used:** 1,800 total');
     });
 
-    test('maintains fixed header structure', () => {
+    test('maintains fixed header structure', async () => {
       const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
-      const output = formatter.format();
+      const output = await formatter.format();
       const lines = output.split('\n');
 
       // Check header structure
@@ -121,9 +121,9 @@ persona_profile:
       expect(lines[7]).toMatch(/^\*\*Tokens Used:\*\*/);
     });
 
-    test('places Metrics section last', () => {
+    test('places Metrics section last', async () => {
       const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
-      const output = formatter.format();
+      const output = await formatter.format();
       const lines = output.split('\n');
 
       const metricsIndex = lines.findIndex(line => line === '### Metrics');
@@ -226,11 +226,10 @@ persona_profile:
       expect(verb).toBe('completar'); // Default fallback
     });
 
-    test('handles missing agent file gracefully', () => {
+    test('handles missing agent file gracefully', async () => {
       fs.existsSync.mockReturnValue(false);
-
       const formatter = new PersonalizedOutputFormatter(mockAgent, mockTask, mockResults);
-      const output = formatter.format();
+      const output = await formatter.format();
 
       expect(output).toContain('## 📊 Task Execution Report');
       expect(output).toContain('**Agent:** Dex (Agent)'); // Neutral fallback
@@ -263,7 +262,7 @@ persona_profile:
     ];
 
     agents.forEach(agent => {
-      test(`generates valid output for ${agent.name} (${agent.archetype})`, () => {
+      test(`generates valid output for ${agent.name} (${agent.archetype})`, async () => {
         const mockContent = `# ${agent.id}
 \`\`\`yaml
 agent:
@@ -286,7 +285,7 @@ persona_profile:
           mockTask,
           mockResults,
         );
-        const output = formatter.format();
+        const output = await formatter.format();
 
         expect(output).toContain(`**Agent:** ${agent.name} (${agent.archetype})`);
         expect(output).toContain(`— ${agent.name}`);
