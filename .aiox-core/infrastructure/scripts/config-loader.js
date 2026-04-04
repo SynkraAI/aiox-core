@@ -111,7 +111,10 @@ async function loadFullConfig() {
 
     return config;
   } catch (error) {
-    await ErrorRegistry.log(`Failed to load core-config.yaml: ${error.message}`, { category: 'SYSTEM', metadata: { stack: error.stack } });
+    ErrorRegistry.log(`Failed to load core-config.yaml: ${error.message}`, {
+      category: 'SYSTEM',
+      metadata: { stack: error.stack },
+    }).catch(() => {});
     throw new Error(`Config load failed: ${error.message}`);
   }
 }

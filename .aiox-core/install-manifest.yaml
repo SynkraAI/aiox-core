@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-04-04T23:45:23.140Z"
+generated_at: "2026-04-04T23:51:15.969Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1093
 files:
@@ -2997,9 +2997,9 @@ files:
     type: script
     size: 7697
   - path: infrastructure/scripts/config-loader.js
-    hash: sha256:a8f8dd15c744c695efaacb36e282d81a71e6a1ef87ad002ef39aa16a3b3f8482
+    hash: sha256:48bb85c1ec62888ddd64679afc94e8659352d98fd6acc7218226941e09d5f084
     type: script
-    size: 10869
+    size: 10896
   - path: infrastructure/scripts/conflict-resolver.js
     hash: sha256:006c34ab6673bc145d367afbb140f337f91fcfe0a66d8c4523af8925467aae35
     type: script
