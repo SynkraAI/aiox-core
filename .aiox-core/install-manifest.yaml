@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-04-05T01:14:55.083Z"
+generated_at: "2026-04-05T01:18:26.970Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1093
 files:
@@ -1229,7 +1229,7 @@ files:
     type: data
     size: 9575
   - path: data/entity-registry.yaml
-    hash: sha256:fb592c5ff0af0e842a034eab77ffbb7f031d94844fa9fae5be42df4f082b7c08
+    hash: sha256:7224dbdb3a1ceb0dae4ebca158888304fa969ee55a01c9dab79393491f514933
     type: data
     size: 524143
   - path: data/learned-patterns.yaml
@@ -4349,9 +4349,9 @@ files:
     type: workflow-intelligence
     size: 3266
   - path: workflow-intelligence/learning/gotcha-registry.js
-    hash: sha256:d935a9b91cf85e5cbc09c963d873bbf90c57c965401fe8913462896ccc3694d7
+    hash: sha256:4266f3c34edd12168c1f4354893dfbf4087a4c9072fd058ce61acf23f23237b7
     type: workflow-intelligence
-    size: 21505
+    size: 21462
   - path: workflow-intelligence/learning/index.js
     hash: sha256:60081748340417f093ced5f452ca2b7d9875513dacf6e421ad564ed0f18f57a7
     type: workflow-intelligence
@@ -4369,9 +4369,9 @@ files:
     type: workflow-intelligence
     size: 8549
   - path: workflow-intelligence/learning/qa-feedback.js
-    hash: sha256:33eda085acc5b7af5c382b039e83e716252e2d45fb217c3a2a6268114dbd668d
+    hash: sha256:0eec0d73a056fde78e9f9ebfcd8477fe00f42b9ac193fc1dbf6cac0801a57322
     type: workflow-intelligence
-    size: 19273
+    size: 19277
   - path: workflow-intelligence/learning/semantic-search.js
     hash: sha256:f9ba491acf310e479d467f1a5990e4d3656b0c06a6fc50f52d26853325071976
     type: workflow-intelligence

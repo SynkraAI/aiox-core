@@ -10,8 +10,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const ErrorRegistry = require('../../monitor/error-registry');
-const AIOXError = require('../../utils/aiox-error');
+const ErrorRegistry = require('aiox-core/monitor/error-registry');
+const AIOXError = require('aiox-core/utils/aiox-error');
 const crypto = require('crypto');
 
 // ═══════════════════════════════════════════════════════════════════════════════════
@@ -98,9 +98,11 @@ class GotchaRegistry {
       this._buildIndex();
       return this._gotchas;
     } catch (error) {
-      ErrorRegistry.log(`Failed to load gotchas: ${error.message}`, { category: 'SYSTEM', display: true, raw: true }).catch(
-        (e) => console.error(`Failed to log error to ErrorRegistry: ${e.message}`),
-      );
+      ErrorRegistry.log(`Failed to load gotchas: ${error.message}`, {
+        category: 'SYSTEM',
+        display: true,
+        raw: true,
+      }).catch(() => {});
       this._gotchas = { gotchas: [], metadata: { version: '1.0.0', lastUpdated: null } };
       return this._gotchas;
     }
@@ -621,7 +623,7 @@ class GotchaRegistry {
       lines.push(`## ${context}`);
       lines.push('');
 
-      for (const gotcha of gotchas.sort((a, b) => b.confidence - a.confidence)) {
+      for (const gotchas of gotchas.sort((a, b) => b.confidence - a.confidence)) {
         lines.push(`### ${gotcha.pattern}`);
         lines.push('');
         lines.push(`**Reason:** ${gotcha.reason}`);

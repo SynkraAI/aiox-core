@@ -91,7 +91,7 @@ class QAFeedbackProcessor {
         category: 'SYSTEM',
         display: true,
         raw: true,
-      }).catch((e) => console.error(`Failed to log load error to ErrorRegistry: ${e.message}`));
+      }).catch(() => {});
       this._feedbackHistory = {
         history: [],
         patternStats: {},
@@ -595,6 +595,12 @@ class QAFeedbackProcessor {
 // ═══════════════════════════════════════════════════════════════════════════════════
 //                              EXPORTS
 // ═══════════════════════════════════════════════════════════════════════════════════
+
+module.exports = {
+  QAFeedbackProcessor,
+  DEFAULT_CONFIG,
+};
+�═══
 
 module.exports = {
   QAFeedbackProcessor,
