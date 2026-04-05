@@ -8,39 +8,59 @@
  * Pure arithmetic module — zero I/O, zero external dependencies.
  *
  * @module core/synapse/context/context-tracker
- * @version 1.0.0
+ * @version 1.1.0
  * @created Story SYN-3 - Context Bracket Tracker
  */
 
 /**
- * Bracket definitions with thresholds and token budgets.
+ * Bracket definitions with thresholds, token budgets and layer configurations.
  *
- * Thresholds represent the percentage of context remaining:
- * - FRESH: 60-100% remaining (lean injection)
- * - MODERATE: 40-60% remaining (standard injection)
- * - DEPLETED: 25-40% remaining (reinforcement injection)
- * - CRITICAL: 0-25% remaining (warning + handoff prep)
- *
- * @type {Object.<string, {min: number, max: number, tokenBudget: number}>}
+ * Source of truth for all context-aware behaviors.
+ * Thresholds represent the percentage of context remaining.
  */
-const BRACKETS = {
-  FRESH:    { min: 60, max: 100, tokenBudget: 800 },
-  MODERATE: { min: 40, max: 60,  tokenBudget: 1500 },
-  DEPLETED: { min: 25, max: 40,  tokenBudget: 2000 },
-  CRITICAL: { min: 0,  max: 25,  tokenBudget: 2500 },
+const BRACKET_DEFINITIONS = {
+  FRESH: {
+    threshold: 60,
+    tokenBudget: 800,
+    layers: [0, 1, 2, 7],
+    memoryHints: false,
+    handoffWarning: false,
+  },
+  MODERATE: {
+    threshold: 40,
+    tokenBudget: 1500,
+    layers: [0, 1, 2, 3, 4, 5, 6, 7],
+    memoryHints: false,
+    handoffWarning: false,
+  },
+  DEPLETED: {
+    threshold: 25,
+    tokenBudget: 2000,
+    layers: [0, 1, 2, 3, 4, 5, 6, 7],
+    memoryHints: true,
+    handoffWarning: false,
+  },
+  CRITICAL: {
+    threshold: 0,
+    tokenBudget: 2500,
+    layers: [0, 1, 2, 3, 4, 5, 6, 7],
+    memoryHints: true,
+    handoffWarning: true,
+  },
 };
 
-/**
- * Token budget constants per bracket (shorthand access).
- *
- * @type {Object.<string, number>}
- */
-const TOKEN_BUDGETS = {
-  FRESH: 800,
-  MODERATE: 1500,
-  DEPLETED: 2000,
-  CRITICAL: 2500,
+/** Shorthand for exports and legacy compatibility */
+const BRACKETS = {
+  FRESH:    { min: BRACKET_DEFINITIONS.FRESH.threshold,    max: 100, tokenBudget: BRACKET_DEFINITIONS.FRESH.tokenBudget },
+  MODERATE: { min: BRACKET_DEFINITIONS.MODERATE.threshold, max: 60,  tokenBudget: BRACKET_DEFINITIONS.MODERATE.tokenBudget },
+  DEPLETED: { min: BRACKET_DEFINITIONS.DEPLETED.threshold, max: 40,  tokenBudget: BRACKET_DEFINITIONS.DEPLETED.tokenBudget },
+  CRITICAL: { min: BRACKET_DEFINITIONS.CRITICAL.threshold, max: 25,  tokenBudget: BRACKET_DEFINITIONS.CRITICAL.tokenBudget },
 };
+
+/** Shorthand access to token budgets */
+const TOKEN_BUDGETS = Object.fromEntries(
+  Object.entries(BRACKET_DEFINITIONS).map(([k, v]) => [k, v.tokenBudget])
+);
 
 /**
  * Safety multiplier for XML-heavy output (SYNAPSE rules).
@@ -58,19 +78,9 @@ const DEFAULTS = {
 };
 
 /**
- * Layer configurations per bracket.
- *
- * FRESH: L0 (Constitution), L1 (Global), L2 (Agent), L7 (Star-Command if explicit)
- * MODERATE: All 8 layers active
- * DEPLETED: All layers + memory hints enabled
- * CRITICAL: All layers + memory hints + handoff warning
+ * Layer configurations per bracket (derived from source of truth).
  */
-const LAYER_CONFIGS = {
-  FRESH:    { layers: [0, 1, 2, 7], memoryHints: false, handoffWarning: false },
-  MODERATE: { layers: [0, 1, 2, 3, 4, 5, 6, 7], memoryHints: false, handoffWarning: false },
-  DEPLETED: { layers: [0, 1, 2, 3, 4, 5, 6, 7], memoryHints: true, handoffWarning: false },
-  CRITICAL: { layers: [0, 1, 2, 3, 4, 5, 6, 7], memoryHints: true, handoffWarning: true },
-};
+const LAYER_CONFIGS = BRACKET_DEFINITIONS;
 
 /**
  * Calculate the context bracket based on remaining context percentage.
@@ -83,13 +93,13 @@ function calculateBracket(contextPercent) {
     return 'CRITICAL';
   }
 
-  if (contextPercent >= 60) {
+  if (contextPercent >= BRACKET_DEFINITIONS.FRESH.threshold) {
     return 'FRESH';
   }
-  if (contextPercent >= 40) {
+  if (contextPercent >= BRACKET_DEFINITIONS.MODERATE.threshold) {
     return 'MODERATE';
   }
-  if (contextPercent >= 25) {
+  if (contextPercent >= BRACKET_DEFINITIONS.DEPLETED.threshold) {
     return 'DEPLETED';
   }
   return 'CRITICAL';
@@ -195,4 +205,5 @@ module.exports = {
   TOKEN_BUDGETS,
   DEFAULTS,
   XML_SAFETY_MULTIPLIER,
+  BRACKET_DEFINITIONS,
 };

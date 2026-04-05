@@ -54,6 +54,7 @@ const SCHEMA_FILES = {
  * Get or create the shared Ajv instance (lazy-loaded).
  *
  * @returns {Object} Ajv instance
+ * @private
  */
 function getAjvInstance() {
   if (!_ajvInstance) {
@@ -70,6 +71,7 @@ function getAjvInstance() {
  *
  * @param {string} schemaFileName - Schema file name
  * @returns {Object|null} Parsed schema or null if not found
+ * @private
  */
 function loadSchema(schemaFileName) {
   if (_schemaCache[schemaFileName]) {
@@ -100,6 +102,7 @@ function loadSchema(schemaFileName) {
  * @param {Object} data - Config data to validate
  * @param {string} filePath - Source file path (for error messages)
  * @returns {string[]} Validation warnings (empty if valid)
+ * @private
  */
 function validateConfig(level, data, filePath) {
   const warnings = [];
@@ -134,6 +137,9 @@ function validateConfig(level, data, filePath) {
 
 /**
  * Clear the schema cache (useful for testing).
+ *
+ * @returns {void}
+ * @private
  */
 function clearSchemaCache() {
   _schemaCache = {};
@@ -175,6 +181,7 @@ const LEVELS = {
  * @param {string} projectRoot - Project root directory
  * @param {string} relativePath - Path relative to projectRoot
  * @returns {{ data: Object|null, path: string }} Parsed YAML or null
+ * @private
  */
 function loadYaml(projectRoot, relativePath) {
   const fullPath = path.join(projectRoot, relativePath);
@@ -201,6 +208,7 @@ function loadYaml(projectRoot, relativePath) {
  *
  * @param {string} absolutePath - Absolute file path
  * @returns {{ data: Object|null, path: string }} Parsed YAML or null
+ * @private
  */
 function loadYamlAbsolute(absolutePath) {
   try {
@@ -229,6 +237,7 @@ function loadYamlAbsolute(absolutePath) {
  *
  * @param {string} projectRoot - Project root directory
  * @returns {boolean} True if legacy mode
+ * @public
  */
 function isLegacyMode(projectRoot) {
   const hasLegacy = fs.existsSync(path.join(projectRoot, CONFIG_FILES.legacy));
@@ -250,10 +259,8 @@ function isLegacyMode(projectRoot) {
  * @param {Object} options - Load options
  * @param {string} [options.appDir] - App directory for L3 config
  * @param {boolean} [options.debug] - Collect source-tracking metadata
- * @returns {Object} result
- * @returns {Object} result.config - Merged configuration
- * @returns {Object} [result.sources] - Per-key source tracking (when debug=true)
- * @returns {string[]} result.warnings - Lint/interpolation warnings
+ * @returns {Object} Result object containing config, sources, and warnings
+ * @public
  */
 function loadLayeredConfig(projectRoot, options = {}) {
   const warnings = [];
@@ -355,9 +362,8 @@ function loadLayeredConfig(projectRoot, options = {}) {
  * Load configuration in legacy mode (monolithic core-config.yaml).
  *
  * @param {string} projectRoot - Project root directory
- * @returns {Object} result
- * @returns {Object} result.config - Parsed configuration
- * @returns {string[]} result.warnings - Deprecation warnings
+ * @returns {Object} Result object containing config, sources, and warnings
+ * @public
  */
 function loadLegacyConfig(projectRoot) {
   const warnings = [];
@@ -397,6 +403,8 @@ function loadLegacyConfig(projectRoot) {
  * @param {string} level - Level label (L1, L2, Pro, L3, L4)
  * @param {string} file - Source file path
  * @param {string} [prefix] - Key prefix for nested tracking
+ * @returns {void}
+ * @private
  */
 function trackSources(sources, data, level, file, prefix = '') {
   if (!sources || !data) return;
@@ -430,11 +438,8 @@ function trackSources(sources, data, level, file, prefix = '') {
  * @param {string} [options.appDir] - App directory for L3 (monorepo)
  * @param {boolean} [options.debug] - Enable source tracking
  * @param {boolean} [options.skipCache] - Bypass cache
- * @returns {Object} result
- * @returns {Object} result.config - Final resolved config
- * @returns {Object} [result.sources] - Source tracking (debug only)
- * @returns {string[]} result.warnings - All warnings
- * @returns {boolean} result.legacy - Whether legacy mode was used
+ * @returns {Object} Result object containing config, sources, warnings, and legacy flag
+ * @public
  */
 function resolveConfig(projectRoot, options = {}) {
   const cacheKey = `resolved:${projectRoot}:${options.appDir || 'root'}:${options.debug ? 'debug' : 'std'}`;
@@ -478,6 +483,7 @@ function resolveConfig(projectRoot, options = {}) {
  * @param {Object} [options] - Options
  * @param {string} [options.appDir] - App directory for level 'app'
  * @returns {Object|null} Raw config or null if file doesn't exist
+ * @public
  */
 function getConfigAtLevel(projectRoot, level, options = {}) {
   let relativePath;
@@ -530,6 +536,7 @@ const VALID_USER_PROFILES = ['bob', 'advanced'];
  * Ensure the ~/.aiox/ directory exists with secure permissions.
  *
  * @returns {string} Path to ~/.aiox/ directory
+ * @private
  */
 function ensureUserConfigDir() {
   const dir = path.dirname(CONFIG_FILES.user);
@@ -547,6 +554,7 @@ function ensureUserConfigDir() {
  * @param {string} key - Config key to set
  * @param {*} value - Value to set
  * @returns {Object} Updated user config
+ * @public
  */
 function setUserConfigValue(key, value) {
   ensureUserConfigDir();
@@ -584,6 +592,7 @@ function setUserConfigValue(key, value) {
  * Reads current value, flips it, writes back, and invalidates cache.
  *
  * @returns {{ previous: string, current: string }} Previous and new profile values
+ * @public
  */
 function toggleUserProfile() {
   let config = {};

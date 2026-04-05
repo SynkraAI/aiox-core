@@ -215,6 +215,15 @@ class SynapseEngine {
 
   /**
    * Internal layer execution loop.
+   * Executes active layers sequentially, respecting pipeline timeout.
+   *
+   * @param {string} prompt - The user prompt text.
+   * @param {Object} session - Session state.
+   * @param {Object} config - Merged configuration.
+   * @param {number[]} activeLayers - Array of layer indices to execute.
+   * @param {string} bracket - Context bracket name.
+   * @param {PipelineMetrics} metrics - Metrics collector instance.
+   * @returns {Promise<{ results: Object[], previousLayers: Object[] }>}
    * @private
    */
   async _executeLayers(prompt, session, config, activeLayers, bracket, metrics) {
@@ -269,9 +278,12 @@ class SynapseEngine {
   /**
    * Persist hook metrics to .synapse/metrics/hook-metrics.json (fire-and-forget).
    * SYN-14: Includes hookBootMs from _hookBootTime passed via processConfig.
-   * @param {object} summary - Pipeline metrics summary
-   * @param {string} bracket - Context bracket
-   * @param {object} [config] - Merged config (may contain _hookBootTime bigint)
+   *
+   * @param {Object} summary - Pipeline metrics summary.
+   * @param {string} bracket - Context bracket name.
+   * @param {Object} [config] - Merged config (may contain _hookBootTime bigint).
+   * @returns {void}
+   * @private
    */
   _persistHookMetrics(summary, bracket, config) {
     try {

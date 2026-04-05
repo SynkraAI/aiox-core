@@ -245,17 +245,21 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Get current state
-   * @returns {OrchestratorState}
+   * Get current orchestrator state.
+   *
+   * @returns {OrchestratorState} The current state.
+   * @public
    */
   get state() {
     return this._state;
   }
 
   /**
-   * Transition to a new state
-   * @param {OrchestratorState} newState - Target state
-   * @param {Object} [context] - Additional context for the transition
+   * Transition to a new state.
+   *
+   * @param {OrchestratorState} newState - Target state.
+   * @param {Object} [context={}] - Additional context for the transition.
+   * @returns {boolean} True if transition was successful.
    * @private
    */
   _transitionTo(newState, context = {}) {
@@ -300,7 +304,9 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Initialize epics state structure
+   * Initialize epics state structure.
+   *
+   * @returns {Object} Initial epics state.
    * @private
    */
   _initializeEpicsState() {
@@ -323,8 +329,11 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Initialize the orchestrator - run pre-flight checks (AC7)
+   * Initialize the orchestrator - run pre-flight checks (AC7).
+   * Loads existing state if available and detects tech stack.
+   *
    * @returns {Promise<void>}
+   * @public
    */
   async initialize() {
     this._log('Starting initialization...');
@@ -387,9 +396,10 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Detect tech stack using TechStackDetector (AC7)
+   * Detect tech stack using TechStackDetector (AC7).
+   *
+   * @returns {Promise<Object>} Tech stack profile.
    * @private
-   * @returns {Promise<Object>} Tech stack profile
    */
   async _detectTechStack() {
     return await this.techStackDetector.detect();
@@ -400,9 +410,10 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Execute the full ADE pipeline: Epics 3→4→5→6→7 (AC3)
+   * Execute the full ADE pipeline: Epics 3→4→5→6→7 (AC3).
    *
-   * @returns {Promise<Object>} Pipeline execution result
+   * @returns {Promise<Object>} Pipeline execution result.
+   * @public
    */
   async executeFullPipeline() {
     this._log('Starting full pipeline execution...');
@@ -532,7 +543,10 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Check if an epic is critical (failure should halt pipeline)
+   * Check if an epic is critical (failure should halt pipeline).
+   *
+   * @param {number} epicNum - Epic number to check.
+   * @returns {boolean} True if critical.
    * @private
    */
   _isEpicCritical(epicNum) {
@@ -545,11 +559,12 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Execute a single epic (AC4)
+   * Execute a single epic (AC4).
    *
-   * @param {number} epicNum - Epic number (3, 4, 5, 6, or 7)
-   * @param {Object} [options] - Epic-specific options
-   * @returns {Promise<Object>} Epic execution result
+   * @param {number} epicNum - Epic number (3, 4, 5, 6, or 7).
+   * @param {Object} [options={}] - Epic-specific options.
+   * @returns {Promise<Object>} Epic execution result.
+   * @public
    */
   async executeEpic(epicNum, options = {}) {
     const epicConfig = EPIC_CONFIG[epicNum];
@@ -664,7 +679,10 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Get or create an executor for the epic (Story 0.3)
+   * Get or create an executor for the epic (Story 0.3).
+   *
+   * @param {number} epicNum - Epic number.
+   * @returns {Promise<Object>} Epic executor instance.
    * @private
    */
   async _getExecutor(epicNum) {
@@ -685,10 +703,11 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Resume execution from a specific epic (AC5)
+   * Resume execution from a specific epic (AC5).
    *
-   * @param {number} fromEpic - Epic number to resume from
-   * @returns {Promise<Object>} Pipeline execution result
+   * @param {number} fromEpic - Epic number to resume from.
+   * @returns {Promise<Object>} Pipeline execution result.
+   * @public
    */
   async resumeFromEpic(fromEpic) {
     this._log(`Resuming from Epic ${fromEpic}...`);
@@ -729,8 +748,10 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Build context for a specific epic
-   * This will be expanded in Story 0.4 (Context Threading)
+   * Build context for a specific epic.
+   *
+   * @param {number} epicNum - Epic number.
+   * @returns {Object} Built context.
    * @private
    */
   _buildContextForEpic(epicNum) {
@@ -788,7 +809,9 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Get list of completed gates/epics
+   * Get list of completed gates/epics.
+   *
+   * @returns {number[]} Array of epic numbers.
    * @private
    */
   _getCompletedGates() {
@@ -798,7 +821,9 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Collect session insights for memory layer
+   * Collect session insights for memory layer.
+   *
+   * @returns {Object} Session insights.
    * @private
    */
   _collectSessionInsights() {
@@ -817,11 +842,12 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Evaluate quality gate after epic completion (AC1)
+   * Evaluate quality gate after epic completion (AC1).
+   *
+   * @param {number} epicNum - Completed epic number.
+   * @param {Object} result - Epic result.
+   * @returns {Promise<Object|null>} Gate result or null if no gate.
    * @private
-   * @param {number} epicNum - Completed epic number
-   * @param {Object} result - Epic result
-   * @returns {Promise<Object|null>} Gate result or null if no gate
    */
   async _evaluateGate(epicNum, result) {
     // Determine next epic for gate evaluation
@@ -861,16 +887,20 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Get gate evaluator for external access (AC6)
-   * @returns {GateEvaluator}
+   * Get gate evaluator for external access (AC6).
+   *
+   * @returns {GateEvaluator} Gate evaluator instance.
+   * @public
    */
   getGateEvaluator() {
     return this.gateEvaluator;
   }
 
   /**
-   * Get all gate results (AC6)
-   * @returns {Object[]}
+   * Get all gate results (AC6).
+   *
+   * @returns {Object[]} Array of gate results.
+   * @public
    */
   getGateResults() {
     return this.gateEvaluator.getResults();
@@ -881,20 +911,23 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Get the agent invoker instance (Story 0.7)
-   * @returns {AgentInvoker}
+   * Get the agent invoker instance (Story 0.7).
+   *
+   * @returns {AgentInvoker} Agent invoker instance.
+   * @public
    */
   getAgentInvoker() {
     return this.agentInvoker;
   }
 
   /**
-   * Invoke an agent to execute a task (Story 0.7 - AC1)
+   * Invoke an agent to execute a task (Story 0.7 - AC1).
    *
-   * @param {string} agentName - Agent name (e.g., 'dev', 'qa', 'architect')
-   * @param {string} taskPath - Path to task file or task name
-   * @param {Object} [inputs={}] - Inputs to pass to the task
-   * @returns {Promise<Object>} Invocation result
+   * @param {string} agentName - Agent name (e.g., 'dev', 'qa', 'architect').
+   * @param {string} taskPath - Path to task file or task name.
+   * @param {Object} [inputs={}] - Inputs to pass to the task.
+   * @returns {Promise<Object>} Invocation result.
+   * @public
    */
   async invokeAgentForTask(agentName, taskPath, inputs = {}) {
     // Add orchestration context to inputs
@@ -912,16 +945,20 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Get supported agents (Story 0.7 - AC2)
-   * @returns {Object} Map of supported agents
+   * Get supported agents (Story 0.7 - AC2).
+   *
+   * @returns {Object} Map of supported agents.
+   * @public
    */
   getSupportedAgents() {
     return this.agentInvoker.getSupportedAgents();
   }
 
   /**
-   * Get agent invocation history (Story 0.7 - AC7)
-   * @returns {Object[]} Invocation records
+   * Get agent invocation history (Story 0.7 - AC7).
+   *
+   * @returns {Object[]} Invocation records.
+   * @public
    */
   getAgentInvocations() {
     return this.agentInvoker.getInvocations();
@@ -932,55 +969,72 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Get the dashboard integration instance (Story 0.8)
-   * @returns {DashboardIntegration}
+   * Get the dashboard integration instance (Story 0.8).
+   *
+   * @returns {DashboardIntegration} Dashboard integration instance.
+   * @public
    */
   getDashboardIntegration() {
     return this.dashboardIntegration;
   }
 
   /**
-   * Start dashboard monitoring (Story 0.8 - AC1)
+   * Start dashboard monitoring (Story 0.8 - AC1).
+   *
+   * @returns {Promise<void>}
+   * @public
    */
   async startDashboard() {
     await this.dashboardIntegration.start();
   }
 
   /**
-   * Stop dashboard monitoring (Story 0.8)
+   * Stop dashboard monitoring (Story 0.8).
+   *
+   * @returns {void}
+   * @public
    */
   stopDashboard() {
     this.dashboardIntegration.stop();
   }
 
   /**
-   * Get dashboard status (Story 0.8 - AC1, AC2)
-   * @returns {Object} Dashboard status
+   * Get dashboard status (Story 0.8 - AC1, AC2).
+   *
+   * @returns {Object} Dashboard status.
+   * @public
    */
   getDashboardStatus() {
     return this.dashboardIntegration.buildStatus();
   }
 
   /**
-   * Get execution history (Story 0.8 - AC5)
-   * @returns {Object[]} History entries
+   * Get execution history (Story 0.8 - AC5).
+   *
+   * @returns {Object[]} History entries.
+   * @public
    */
   getExecutionHistory() {
     return this.dashboardIntegration.getHistory();
   }
 
   /**
-   * Get notifications (Story 0.8 - AC7)
-   * @param {boolean} [unreadOnly=false] - Only unread notifications
-   * @returns {Object[]} Notifications
+   * Get notifications (Story 0.8 - AC7).
+   *
+   * @param {boolean} [unreadOnly=false] - Only unread notifications.
+   * @returns {Object[]} Notifications.
+   * @public
    */
   getNotifications(unreadOnly = false) {
     return this.dashboardIntegration.getNotifications(unreadOnly);
   }
 
   /**
-   * Add notification (Story 0.8 - AC7)
-   * @param {Object} notification - Notification object
+   * Add notification (Story 0.8 - AC7).
+   *
+   * @param {Object} notification - Notification object.
+   * @returns {void}
+   * @public
    */
   addNotification(notification) {
     this.dashboardIntegration.addNotification(notification);
@@ -991,12 +1045,13 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Attempt recovery for a failed epic (AC1-AC7 of Story 0.5)
-   * Uses RecoveryHandler for intelligent recovery with stuck detection
+   * Attempt recovery for a failed epic (AC1-AC7 of Story 0.5).
+   * Uses RecoveryHandler for intelligent recovery with stuck detection.
+   *
+   * @param {number} epicNum - Failed epic number.
+   * @param {Error} error - Error that caused failure.
+   * @returns {Promise<boolean>} True if should retry.
    * @private
-   * @param {number} epicNum - Failed epic number
-   * @param {Error} error - Error that caused failure
-   * @returns {Promise<boolean>} True if should retry
    */
   async _attemptRecovery(epicNum, error) {
     this._log(`Attempting recovery for Epic ${epicNum}...`, { error: error.message });
@@ -1054,8 +1109,10 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Get recovery handler for external access
-   * @returns {RecoveryHandler}
+   * Get recovery handler for external access.
+   *
+   * @returns {RecoveryHandler} Recovery handler instance.
+   * @public
    */
   getRecoveryHandler() {
     return this.recoveryHandler;
@@ -1066,9 +1123,11 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Save current state to disk (AC1, AC3)
-   * Called after each epic completion and state transition
-   * @returns {Promise<boolean>} Success status
+   * Save current state to disk (AC1, AC3).
+   * Called after each epic completion and state transition.
+   *
+   * @returns {Promise<boolean>} Success status.
+   * @public
    */
   async saveState() {
     try {
@@ -1133,7 +1192,9 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Internal save state wrapper (calls public method)
+   * Internal save state wrapper (calls public method).
+   *
+   * @returns {Promise<boolean>} Success status.
    * @private
    */
   async _saveState() {
@@ -1141,9 +1202,11 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Load state for a specific story ID (AC4)
-   * @param {string} [storyId] - Story ID to load (defaults to this.storyId)
-   * @returns {Promise<Object|null>} Loaded state or null
+   * Load state for a specific story ID (AC4).
+   *
+   * @param {string} [storyId] - Story ID to load (defaults to this.storyId).
+   * @returns {Promise<Object|null>} Loaded state or null.
+   * @public
    */
   async loadState(storyId = null) {
     const targetStoryId = storyId || this.storyId;
@@ -1171,7 +1234,9 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Internal load state wrapper (calls public method)
+   * Internal load state wrapper (calls public method).
+   *
+   * @returns {Promise<Object|null>} Loaded state or null.
    * @private
    */
   async _loadState() {
@@ -1179,9 +1244,11 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Find and load the most recent valid state (AC5)
-   * Searches for any resumable state in the master-orchestrator directory
-   * @returns {Promise<Object|null>} Most recent valid state or null
+   * Find and load the most recent valid state (AC5).
+   * Searches for any resumable state in the master-orchestrator directory.
+   *
+   * @returns {Promise<Object|null>} Most recent valid state or null.
+   * @public
    */
   async findLatestValidState() {
     const stateDir = path.join(this.projectRoot, '.aiox', 'master-orchestrator');
@@ -1233,7 +1300,10 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Validate state object against expected schema
+   * Validate state object against expected schema.
+   *
+   * @param {Object} state - State object to validate.
+   * @returns {boolean} True if valid.
    * @private
    */
   _validateStateSchema(state) {
@@ -1254,7 +1324,10 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Check if state is resumable (not complete, not too old)
+   * Check if state is resumable (not complete, not too old).
+   *
+   * @param {Object} state - State object to check.
+   * @returns {boolean} True if resumable.
    * @private
    */
   _isResumable(state) {
@@ -1274,7 +1347,9 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Get list of failed epics
+   * Get list of failed epics.
+   *
+   * @returns {number[]} Array of epic numbers.
    * @private
    */
   _getFailedEpics() {
@@ -1284,7 +1359,9 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Get list of pending epics
+   * Get list of pending epics.
+   *
+   * @returns {number[]} Array of epic numbers.
    * @private
    */
   _getPendingEpics() {
@@ -1294,8 +1371,10 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Clear saved state for current story
-   * @returns {Promise<boolean>} Success status
+   * Clear saved state for current story.
+   *
+   * @returns {Promise<boolean>} Success status.
+   * @public
    */
   async clearState() {
     try {
@@ -1311,8 +1390,10 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * List all saved states
-   * @returns {Promise<Array>} List of state summaries
+   * List all saved states in the master-orchestrator directory.
+   *
+   * @returns {Promise<Object[]>} List of state summaries.
+   * @public
    */
   async listSavedStates() {
     const stateDir = path.join(this.projectRoot, '.aiox', 'master-orchestrator');
@@ -1355,7 +1436,10 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Calculate progress percentage from a state object
+   * Calculate progress percentage from a state object.
+   *
+   * @param {Object} state - State object.
+   * @returns {number} Progress 0-100.
    * @private
    */
   _calculateProgressFromState(state) {
@@ -1375,9 +1459,11 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Finalize pipeline execution and generate summary
-   * @param {Object} pipelineResult - Raw pipeline result
-   * @returns {Object} Finalized result
+   * Finalize pipeline execution and generate summary.
+   *
+   * @param {Object} [pipelineResult={}] - Raw pipeline result.
+   * @returns {Object} Finalized result.
+   * @public
    */
   finalize(pipelineResult = {}) {
     const duration =
@@ -1413,8 +1499,10 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Calculate overall progress percentage
-   * @returns {number} Progress 0-100
+   * Calculate overall progress percentage.
+   *
+   * @returns {number} Progress 0-100.
+   * @public
    */
   getProgressPercentage() {
     const totalEpics = Object.keys(EPIC_CONFIG).filter((num) => !EPIC_CONFIG[num].onDemand).length;
@@ -1427,8 +1515,10 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Get current execution status summary
-   * @returns {Object} Status summary
+   * Get current execution status summary.
+   *
+   * @returns {Object} Status summary.
+   * @public
    */
   getStatus() {
     return {
@@ -1451,7 +1541,13 @@ class MasterOrchestrator extends EventEmitter {
   // ═══════════════════════════════════════════════════════════════════════════════════
 
   /**
-   * Internal logging
+   * Internal logging helper.
+   *
+   * @param {string} message - Message to log.
+   * @param {Object} [options={}] - Log options.
+   * @param {string} [options.level='info'] - Log level.
+   * @param {string} [options.icon=''] - Icon to display.
+   * @returns {void}
    * @private
    */
   _log(message, options = {}) {
@@ -1493,7 +1589,11 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Default epic start callback
+   * Default epic start callback.
+   *
+   * @param {number} epicNum - Epic number.
+   * @param {Object} config - Epic configuration.
+   * @returns {void}
    * @private
    */
   _defaultEpicStart(epicNum, config) {
@@ -1502,7 +1602,11 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Default epic complete callback
+   * Default epic complete callback.
+   *
+   * @param {number} epicNum - Epic number.
+   * @param {Object} result - Epic result.
+   * @returns {void}
    * @private
    */
   _defaultEpicComplete(epicNum, result) {
@@ -1511,7 +1615,12 @@ class MasterOrchestrator extends EventEmitter {
   }
 
   /**
-   * Default state change callback
+   * Default state change callback.
+   *
+   * @param {OrchestratorState} from - Previous state.
+   * @param {OrchestratorState} to - New state.
+   * @param {Object} [_context] - Transition context.
+   * @returns {void}
    * @private
    */
   _defaultStateChange(from, to, _context) {

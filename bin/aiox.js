@@ -13,6 +13,11 @@ const { execSync } = require('child_process');
 /**
  * Safe error logger for installer/bootstrap phase.
  * Lazy-loads ErrorRegistry to maintain standalone compatibility.
+ *
+ * @param {Error|Object} error - The error to log.
+ * @param {Object} [context={}] - Additional context for the error.
+ * @returns {Promise<void>}
+ * @private
  */
 async function logInstallerError(error, context = {}) {
   try {
@@ -39,7 +44,16 @@ const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 const args = process.argv.slice(2);
 const command = args[0];
 
-// Helper: Run initialization wizard
+/**
+ * Run initialization wizard.
+ *
+ * @param {Object} [options={}] - Wizard configuration options.
+ * @param {boolean} [options.quiet] - Whether to suppress output.
+ * @param {boolean} [options.force] - Whether to force installation.
+ * @param {boolean} [options.dryRun] - Whether to perform a dry run.
+ * @returns {Promise<void>}
+ * @private
+ */
 async function runWizard(options = {}) {
   // Use the v4 wizard from packages/installer/src/wizard/index.js
   const wizardPath = path.join(__dirname, '..', 'packages', 'installer', 'src', 'wizard', 'index.js');
@@ -74,7 +88,12 @@ async function runWizard(options = {}) {
   }
 }
 
-// Helper: Show help
+/**
+ * Show help message with available commands and usage examples.
+ *
+ * @returns {void}
+ * @public
+ */
 function showHelp() {
   console.log(`
 AIOX-FullStack v${packageJson.version}
@@ -136,7 +155,13 @@ For more information, visit: https://github.com/SynkraAI/aiox-core
 `);
 }
 
-// Helper: Show version
+/**
+ * Show version information.
+ * Supports simple and detailed output modes.
+ *
+ * @returns {Promise<void>}
+ * @public
+ */
 async function showVersion() {
   const isDetailed = args.includes('--detailed') || args.includes('-d');
 
@@ -197,7 +222,13 @@ async function showVersion() {
   }
 }
 
-// Helper: Show system info
+/**
+ * Show system information and status.
+ * Displays platform, Node.js version, and AIOX component status.
+ *
+ * @returns {void}
+ * @public
+ */
 function showInfo() {
   console.log('📊 AIOX-FullStack System Information\n');
   console.log(`Version: ${packageJson.version}`);
@@ -262,7 +293,13 @@ function showInfo() {
   }
 }
 
-// Helper: Run installation validation
+/**
+ * Run installation validation command.
+ * Delegates to the modular validation command or falls back to quick validation.
+ *
+ * @returns {Promise<void>}
+ * @public
+ */
 async function runValidate() {
   const validateArgs = args.slice(1); // Remove 'validate' from args
 
@@ -312,7 +349,13 @@ async function runValidate() {
   }
 }
 
-// Helper: Run update command
+/**
+ * Run the update command to update AIOX to the latest version.
+ * Supports check-only, dry-run, and force modes.
+ *
+ * @returns {Promise<void>}
+ * @public
+ */
 async function runUpdate() {
   const updateArgs = args.slice(1);
   const isCheck = updateArgs.includes('--check');
@@ -374,7 +417,17 @@ async function runUpdate() {
   }
 }
 
-// Helper: Run doctor diagnostics (v2.0 — delegates to modular doctor)
+/**
+ * Run health checks using the modular doctor diagnostics.
+ *
+ * @param {Object} [options={}] - Doctor configuration options.
+ * @param {boolean} [options.fix] - Whether to automatically fix issues.
+ * @param {boolean} [options.json] - Whether to output as JSON.
+ * @param {boolean} [options.dryRun] - Whether to perform a dry run.
+ * @param {boolean} [options.quiet] - Whether to suppress output.
+ * @returns {Promise<void>}
+ * @public
+ */
 async function runDoctor(options = {}) {
   const { runDoctorChecks } = require(path.join(__dirname, '..', '.aiox-core', 'core', 'doctor'));
 
@@ -394,7 +447,13 @@ async function runDoctor(options = {}) {
   }
 }
 
-// Helper: Format bytes to human readable
+/**
+ * Helper: Format bytes to human readable string.
+ *
+ * @param {number} bytes - Number of bytes to format.
+ * @returns {string} Formatted string (e.g., "1.5 MB").
+ * @private
+ */
 function formatBytes(bytes) {
   if (bytes === 0) return '0 Bytes';
   const k = 1024;
@@ -403,7 +462,13 @@ function formatBytes(bytes) {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 
-// Helper: Remove AIOX sections from .gitignore
+/**
+ * Helper: Remove AIOX sections from .gitignore.
+ *
+ * @param {string} gitignorePath - Path to the .gitignore file.
+ * @returns {Object} Result object containing removed status and line count.
+ * @private
+ */
 function cleanGitignore(gitignorePath) {
   if (!fs.existsSync(gitignorePath)) return { removed: false };
 
@@ -437,7 +502,12 @@ function cleanGitignore(gitignorePath) {
   return { removed: false };
 }
 
-// Helper: Show uninstall help
+/**
+ * Show help message for the uninstall command.
+ *
+ * @returns {void}
+ * @public
+ */
 function showUninstallHelp() {
   console.log(`
 Usage: npx aiox-core uninstall [options]
@@ -478,7 +548,12 @@ Examples:
 `);
 }
 
-// Helper: Show doctor help
+/**
+ * Show help message for the doctor command.
+ *
+ * @returns {void}
+ * @public
+ */
 function showDoctorHelp() {
   console.log(`
 Usage: npx aiox-core doctor [options]
@@ -515,7 +590,18 @@ Examples:
 `);
 }
 
-// Uninstall AIOX from project
+/**
+ * Uninstall AIOX from the project.
+ * Removes core directories and cleans .gitignore.
+ *
+ * @param {Object} [options={}] - Uninstall configuration options.
+ * @param {boolean} [options.force] - Whether to skip confirmation.
+ * @param {boolean} [options.keepData] - Whether to preserve the .aiox/ directory.
+ * @param {boolean} [options.dryRun] - Whether to perform a dry run.
+ * @param {boolean} [options.quiet] - Whether to suppress output.
+ * @returns {Promise<void>}
+ * @public
+ */
 async function runUninstall(options = {}) {
   const { force = false, keepData = false, dryRun = false, quiet = false } = options;
   const cwd = process.cwd();
@@ -654,7 +740,12 @@ async function runUninstall(options = {}) {
   }
 }
 
-// Helper: Show install help
+/**
+ * Show help message for the install command.
+ *
+ * @returns {void}
+ * @public
+ */
 function showInstallHelp() {
   console.log(`
 Usage: npx aiox-core install [options]
@@ -698,8 +789,12 @@ Examples:
 `);
 }
 
-// Helper: Create new project
-// Helper: Show init help
+/**
+ * Show help message for the init command.
+ *
+ * @returns {void}
+ * @public
+ */
 function showInitHelp() {
   console.log(`
 Usage: npx aiox-core init <project-name> [options]
@@ -726,6 +821,13 @@ Examples:
 `);
 }
 
+/**
+ * Initialize a new AIOX project.
+ * Parses arguments and runs the initialization wizard.
+ *
+ * @returns {Promise<void>}
+ * @public
+ */
 async function initProject() {
   // 1. Parse ALL args after 'init'
   const initArgs = args.slice(1);
@@ -821,7 +923,12 @@ async function initProject() {
   });
 }
 
-// Command routing (async main function)
+/**
+ * Command routing and main execution loop.
+ *
+ * @returns {Promise<void>}
+ * @public
+ */
 async function main() {
   switch (command) {
     case 'workers':

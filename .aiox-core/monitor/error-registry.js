@@ -31,6 +31,13 @@ const MAX_LOG_ENTRIES = 500;
  * concurrent writes from O(N) disk operations to O(1).
  */
 class ErrorRegistry {
+  /**
+   * Create a new ErrorRegistry instance.
+   * Initializes log paths and lock manager.
+   *
+   * @constructor
+   * @public
+   */
   constructor() {
     this.logDir = path.join(process.cwd(), '.aiox', 'logs');
     this.logFile = path.join(this.logDir, 'errors.json');

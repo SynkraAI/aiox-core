@@ -59,11 +59,13 @@ const GOTCHA_SCHEMA = {
 
 class GotchaRegistry {
   /**
-   * Create a new GotchaRegistry
+   * Create a new GotchaRegistry.
    *
-   * @param {Object} options - Configuration options
-   * @param {string} [options.rootPath] - Project root path
-   * @param {Object} [options.config] - Config overrides
+   * @param {Object} [options={}] - Configuration options.
+   * @param {string} [options.rootPath] - Project root path.
+   * @param {Object} [options.config] - Config overrides.
+   * @constructor
+   * @public
    */
   constructor(options = {}) {
     this.rootPath = options.rootPath || process.cwd();
@@ -79,8 +81,10 @@ class GotchaRegistry {
   // ─────────────────────────────────────────────────────────────────────────────────
 
   /**
-   * Load gotchas from storage
-   * @returns {Object} Gotchas data
+   * Load gotchas from storage.
+   *
+   * @returns {Object} Gotchas data.
+   * @public
    */
   load() {
     if (this._gotchas) {
@@ -109,7 +113,10 @@ class GotchaRegistry {
   }
 
   /**
-   * Save gotchas to storage
+   * Save gotchas to storage.
+   *
+   * @returns {void}
+   * @public
    */
   save() {
     if (!this._gotchas) {
@@ -137,7 +144,9 @@ class GotchaRegistry {
   }
 
   /**
-   * Build search index
+   * Build search index for gotchas.
+   *
+   * @returns {void}
    * @private
    */
   _buildIndex() {
@@ -156,7 +165,10 @@ class GotchaRegistry {
   }
 
   /**
-   * Extract keywords from gotcha
+   * Extract keywords from a gotcha for indexing.
+   *
+   * @param {Object} gotcha - The gotcha to extract keywords from.
+   * @returns {string[]} Array of keywords.
    * @private
    */
   _extractKeywords(gotcha) {
@@ -184,10 +196,11 @@ class GotchaRegistry {
   // ─────────────────────────────────────────────────────────────────────────────────
 
   /**
-   * Record a new gotcha
+   * Record a new gotcha.
    *
-   * @param {Object} gotcha - Gotcha data
-   * @returns {Object} Created gotcha
+   * @param {Object} gotcha - Gotcha data.
+   * @returns {Object} Created or updated gotcha.
+   * @public
    */
   recordGotcha(gotcha) {
     // Validate required fields
@@ -232,7 +245,10 @@ class GotchaRegistry {
   }
 
   /**
-   * Find similar existing gotcha
+   * Find a similar existing gotcha based on keywords.
+   *
+   * @param {Object} gotcha - The gotcha data to match.
+   * @returns {Object|null} Similar gotcha or null.
    * @private
    */
   _findSimilar(gotcha) {
@@ -262,7 +278,11 @@ class GotchaRegistry {
   }
 
   /**
-   * Update existing gotcha with new occurrence
+   * Update an existing gotcha with new occurrence data.
+   *
+   * @param {Object} existing - The existing gotcha object.
+   * @param {Object} newData - The new occurrence data.
+   * @returns {Object} Updated gotcha.
    * @private
    */
   _updateExisting(existing, newData) {
@@ -285,7 +305,9 @@ class GotchaRegistry {
   }
 
   /**
-   * Generate unique ID
+   * Generate a unique ID for a gotcha.
+   *
+   * @returns {string} Unique ID.
    * @private
    */
   _generateId() {
@@ -299,14 +321,15 @@ class GotchaRegistry {
   // ─────────────────────────────────────────────────────────────────────────────────
 
   /**
-   * Query gotchas for a given context
+   * Query gotchas for a given context.
    *
-   * @param {Object} context - Query context
-   * @param {string} [context.pattern] - Pattern being executed
-   * @param {string} [context.action] - Action being performed
-   * @param {string[]} [context.files] - Files being modified
-   * @param {string} [context.agent] - Agent executing
-   * @returns {Object[]} Relevant gotchas
+   * @param {Object} context - Query context.
+   * @param {string} [context.pattern] - Pattern being executed.
+   * @param {string} [context.action] - Action being performed.
+   * @param {string[]} [context.files] - Files being modified.
+   * @param {string} [context.agent] - Agent executing.
+   * @returns {Object[]} Relevant gotchas.
+   * @public
    */
   queryGotchas(context) {
     this.load();
@@ -370,10 +393,11 @@ class GotchaRegistry {
   }
 
   /**
-   * Get gotchas for a specific pattern/sequence
+   * Get gotchas for a specific command sequence.
    *
-   * @param {string[]} sequence - Command sequence
-   * @returns {Object[]} Relevant gotchas
+   * @param {string[]} sequence - Command sequence.
+   * @returns {Object[]} Relevant gotchas.
+   * @public
    */
   getGotchasForSequence(sequence) {
     return this.queryGotchas({
@@ -383,10 +407,15 @@ class GotchaRegistry {
   }
 
   /**
-   * Get all gotchas
+   * Get all gotchas from the registry.
    *
-   * @param {Object} options - Filter options
-   * @returns {Object[]} Gotchas
+   * @param {Object} [options={}] - Filter options.
+   * @param {number} [options.minConfidence] - Minimum confidence score.
+   * @param {string} [options.context] - Context filter.
+   * @param {string} [options.sortBy] - Sort field ('occurrences', 'confidence', 'recent').
+   * @param {number} [options.limit] - Max number of results.
+   * @returns {Object[]} Array of gotchas.
+   * @public
    */
   getAllGotchas(options = {}) {
     this.load();
@@ -423,10 +452,11 @@ class GotchaRegistry {
   // ─────────────────────────────────────────────────────────────────────────────────
 
   /**
-   * Get gotcha by ID
+   * Get gotcha by ID.
    *
-   * @param {string} id - Gotcha ID
-   * @returns {Object|null} Gotcha or null
+   * @param {string} id - Gotcha ID.
+   * @returns {Object|null} Gotcha or null.
+   * @public
    */
   getGotcha(id) {
     this.load();
@@ -434,11 +464,12 @@ class GotchaRegistry {
   }
 
   /**
-   * Update gotcha
+   * Update fields of an existing gotcha.
    *
-   * @param {string} id - Gotcha ID
-   * @param {Object} updates - Fields to update
-   * @returns {Object|null} Updated gotcha or null
+   * @param {string} id - Gotcha ID.
+   * @param {Object} updates - Fields to update.
+   * @returns {Object|null} Updated gotcha or null.
+   * @public
    */
   updateGotcha(id, updates) {
     this.load();
@@ -471,10 +502,11 @@ class GotchaRegistry {
   }
 
   /**
-   * Delete gotcha
+   * Delete a gotcha from the registry.
    *
-   * @param {string} id - Gotcha ID
-   * @returns {boolean} Success
+   * @param {string} id - Gotcha ID.
+   * @returns {boolean} True if deleted successfully.
+   * @public
    */
   deleteGotcha(id) {
     this.load();
@@ -491,10 +523,11 @@ class GotchaRegistry {
   }
 
   /**
-   * Deprecate gotcha (reduce confidence instead of delete)
+   * Deprecate a gotcha by reducing its confidence score.
    *
-   * @param {string} id - Gotcha ID
-   * @returns {Object|null} Updated gotcha
+   * @param {string} id - Gotcha ID.
+   * @returns {Object|null} Updated gotcha.
+   * @public
    */
   deprecateGotcha(id) {
     return this.updateGotcha(id, { confidence: 0.1 });
@@ -505,9 +538,10 @@ class GotchaRegistry {
   // ─────────────────────────────────────────────────────────────────────────────────
 
   /**
-   * Get gotcha statistics
+   * Get registry statistics.
    *
-   * @returns {Object} Statistics
+   * @returns {Object} Statistics object.
+   * @public
    */
   getStatistics() {
     this.load();
@@ -541,7 +575,11 @@ class GotchaRegistry {
   }
 
   /**
-   * Get top contexts
+   * Get top contexts based on gotcha counts.
+   *
+   * @param {Object[]} gotchas - Array of gotchas.
+   * @param {number} limit - Max number of contexts to return.
+   * @returns {Object[]} Array of { context, count }.
    * @private
    */
   _getTopContexts(gotchas, limit) {
@@ -563,10 +601,11 @@ class GotchaRegistry {
   // ─────────────────────────────────────────────────────────────────────────────────
 
   /**
-   * Format gotcha for display
+   * Format a gotcha for console display.
    *
-   * @param {Object} gotcha - Gotcha to format
-   * @returns {string} Formatted string
+   * @param {Object} gotcha - The gotcha to format.
+   * @returns {string} Formatted string.
+   * @public
    */
   formatGotcha(gotcha) {
     const lines = [];
@@ -591,9 +630,10 @@ class GotchaRegistry {
   }
 
   /**
-   * Format gotchas as markdown
+   * Export all gotchas as Markdown content.
    *
-   * @returns {string} Markdown content
+   * @returns {string} Markdown string.
+   * @public
    */
   toMarkdown() {
     this.load();
@@ -619,11 +659,11 @@ class GotchaRegistry {
       byContext.get(context).push(gotcha);
     }
 
-    for (const [context, gotchas] of byContext) {
+    for (const [context, gotchaList] of byContext) {
       lines.push(`## ${context}`);
       lines.push('');
 
-      for (const gotchas of gotchas.sort((a, b) => b.confidence - a.confidence)) {
+      for (const gotcha of gotchaList.sort((a, b) => b.confidence - a.confidence)) {
         lines.push(`### ${gotcha.pattern}`);
         lines.push('');
         lines.push(`**Reason:** ${gotcha.reason}`);

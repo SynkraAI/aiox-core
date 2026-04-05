@@ -42,13 +42,15 @@ const DEFAULT_CONFIG = {
 
 class QAFeedbackProcessor {
   /**
-   * Create a new QAFeedbackProcessor
+   * Create a new QAFeedbackProcessor.
    *
-   * @param {Object} options - Configuration options
-   * @param {string} [options.rootPath] - Project root path
-   * @param {Object} [options.patternStore] - Pattern store instance
-   * @param {Object} [options.gotchaRegistry] - Gotcha registry instance
-   * @param {Object} [options.config] - Config overrides
+   * @param {Object} [options={}] - Configuration options.
+   * @param {string} [options.rootPath] - Project root path.
+   * @param {Object} [options.patternStore] - Pattern store instance.
+   * @param {Object} [options.gotchaRegistry] - Gotcha registry instance.
+   * @param {Object} [options.config] - Config overrides.
+   * @constructor
+   * @public
    */
   constructor(options = {}) {
     this.rootPath = options.rootPath || process.cwd();
@@ -66,7 +68,10 @@ class QAFeedbackProcessor {
   // ─────────────────────────────────────────────────────────────────────────────────
 
   /**
-   * Load feedback history
+   * Load feedback history from storage.
+   *
+   * @returns {Object} Feedback history data.
+   * @public
    */
   loadFeedback() {
     if (this._feedbackHistory) {
@@ -102,7 +107,10 @@ class QAFeedbackProcessor {
   }
 
   /**
-   * Save feedback history
+   * Save feedback history to storage.
+   *
+   * @returns {void}
+   * @public
    */
   saveFeedback() {
     if (!this._feedbackHistory) {
@@ -130,11 +138,12 @@ class QAFeedbackProcessor {
   // ─────────────────────────────────────────────────────────────────────────────────
 
   /**
-   * Process QA result and update pattern confidence
+   * Process QA result and update pattern confidence.
    *
-   * @param {Object} qaResult - QA result from qa-review-build
-   * @param {Object} context - Context information
-   * @returns {Promise<Object>} Feedback processing result
+   * @param {Object} qaResult - QA result from qa-review-build.
+   * @param {Object} [context={}] - Context information.
+   * @returns {Promise<Object>} Feedback processing result.
+   * @public
    */
   async processQAResult(qaResult, context = {}) {
     this.loadFeedback();
@@ -210,7 +219,10 @@ class QAFeedbackProcessor {
   }
 
   /**
-   * Determine outcome from QA result
+   * Determine outcome from QA result.
+   *
+   * @param {Object} qaResult - Raw QA result.
+   * @returns {Object} Processed outcome object.
    * @private
    */
   _determineOutcome(qaResult) {
@@ -256,7 +268,10 @@ class QAFeedbackProcessor {
   }
 
   /**
-   * Infer pattern from context
+   * Infer pattern from context.
+   *
+   * @param {Object} context - Execution context.
+   * @returns {string|null} Inferred pattern ID or null.
    * @private
    */
   _inferPattern(context) {
@@ -273,7 +288,11 @@ class QAFeedbackProcessor {
   }
 
   /**
-   * Update pattern statistics
+   * Update pattern statistics based on outcome.
+   *
+   * @param {string} patternId - ID of the pattern.
+   * @param {Object} outcome - Result outcome.
+   * @returns {Object} Updated stats for the pattern.
    * @private
    */
   _updatePatternStats(patternId, outcome) {
@@ -309,7 +328,11 @@ class QAFeedbackProcessor {
   }
 
   /**
-   * Adjust pattern confidence in pattern store
+   * Adjust pattern confidence in pattern store.
+   *
+   * @param {string} patternId - ID of the pattern.
+   * @param {Object} outcome - Result outcome.
+   * @returns {Promise<void>}
    * @private
    */
   async _adjustPatternConfidence(patternId, outcome) {
@@ -352,7 +375,10 @@ class QAFeedbackProcessor {
   }
 
   /**
-   * Deprecate pattern
+   * Deprecate pattern in the pattern store.
+   *
+   * @param {string} patternId - ID of the pattern.
+   * @returns {Promise<void>}
    * @private
    */
   async _deprecatePattern(patternId) {
@@ -376,7 +402,12 @@ class QAFeedbackProcessor {
   }
 
   /**
-   * Create gotcha from failure
+   * Create gotcha from failure.
+   *
+   * @param {string} patternId - ID of the pattern.
+   * @param {Object} outcome - Result outcome.
+   * @param {Object} context - Execution context.
+   * @returns {Object|null} Created gotcha or null.
    * @private
    */
   _createGotchaFromFailure(patternId, outcome, context) {
@@ -404,7 +435,11 @@ class QAFeedbackProcessor {
   }
 
   /**
-   * Suggest alternatives for failing pattern
+   * Suggest alternatives for failing pattern.
+   *
+   * @param {string} patternId - ID of the pattern.
+   * @param {Object} [context] - Execution context.
+   * @returns {Object[]} Array of suggestions.
    * @private
    */
   _suggestAlternatives(patternId, _context) {
@@ -448,7 +483,10 @@ class QAFeedbackProcessor {
   }
 
   /**
-   * Find successful alternative patterns
+   * Find successful alternative patterns.
+   *
+   * @param {string} patternId - ID of the pattern.
+   * @returns {Object[]} Array of alternative patterns.
    * @private
    */
   _findSuccessfulAlternatives(patternId) {
@@ -472,7 +510,9 @@ class QAFeedbackProcessor {
   }
 
   /**
-   * Generate unique ID
+   * Generate unique ID for feedback entry.
+   *
+   * @returns {string} Unique ID.
    * @private
    */
   _generateId() {
@@ -486,9 +526,10 @@ class QAFeedbackProcessor {
   // ─────────────────────────────────────────────────────────────────────────────────
 
   /**
-   * Get feedback statistics
+   * Get feedback statistics.
    *
-   * @returns {Object} Statistics
+   * @returns {Object} Statistics object.
+   * @public
    */
   getStatistics() {
     this.loadFeedback();
@@ -541,10 +582,11 @@ class QAFeedbackProcessor {
   }
 
   /**
-   * Get pattern performance report
+   * Get pattern performance report.
    *
-   * @param {string} patternId - Pattern ID
-   * @returns {Object} Performance report
+   * @param {string} patternId - Pattern ID.
+   * @returns {Object|null} Performance report or null if not found.
+   * @public
    */
   getPatternReport(patternId) {
     this.loadFeedback();
@@ -570,7 +612,10 @@ class QAFeedbackProcessor {
   }
 
   /**
-   * Get recommendation for pattern
+   * Get recommendation for pattern based on stats.
+   *
+   * @param {Object} stats - Pattern stats.
+   * @returns {Object} Recommendation object.
    * @private
    */
   _getRecommendation(stats) {
@@ -595,12 +640,6 @@ class QAFeedbackProcessor {
 // ═══════════════════════════════════════════════════════════════════════════════════
 //                              EXPORTS
 // ═══════════════════════════════════════════════════════════════════════════════════
-
-module.exports = {
-  QAFeedbackProcessor,
-  DEFAULT_CONFIG,
-};
-�═══
 
 module.exports = {
   QAFeedbackProcessor,
