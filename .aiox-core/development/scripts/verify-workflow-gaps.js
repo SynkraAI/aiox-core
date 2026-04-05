@@ -325,7 +325,7 @@ async function verifyGap2() {
   );
 
   // 2.11 framework-analyzer integration
-  const FrameworkAnalyzer = require('../../../.aiox-core/infrastructure/scripts/framework-analyzer');
+  const FrameworkAnalyzer = require('../../infrastructure/scripts/framework-analyzer');
   const fa = new FrameworkAnalyzer();
   const faResult = await fa.validateWorkflow({ id: 'test', name: 'Test', sequence: [] });
   assert(

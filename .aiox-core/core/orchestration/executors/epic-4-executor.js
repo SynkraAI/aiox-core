@@ -35,7 +35,7 @@ class Epic4Executor extends EpicExecutor {
   _getPlanTracker() {
     if (!this._planTracker) {
       try {
-        const PlanTracker = require('../../infrastructure/scripts/plan-tracker');
+        const { PlanTracker } = require('../../../infrastructure/scripts/plan-tracker');
         this._planTracker = PlanTracker;
       } catch (error) {
         this._log(`PlanTracker not available: ${error.message}`, 'warn');
@@ -51,7 +51,7 @@ class Epic4Executor extends EpicExecutor {
   _getSubtaskVerifier() {
     if (!this._subtaskVerifier) {
       try {
-        const SubtaskVerifier = require('../../infrastructure/scripts/subtask-verifier');
+        const { SubtaskVerifier } = require('../../../infrastructure/scripts/subtask-verifier');
         this._subtaskVerifier = SubtaskVerifier;
       } catch (error) {
         this._log(`SubtaskVerifier not available: ${error.message}`, 'warn');

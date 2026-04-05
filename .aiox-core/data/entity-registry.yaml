@@ -1,6 +1,6 @@
 metadata:
   version: 1.0.0
-  lastUpdated: '2026-04-05T01:26:12.689Z'
+  lastUpdated: '2026-04-05T02:11:31.063Z'
   entityCount: 748
   checksumAlgorithm: sha256
   resolutionRate: 100
@@ -8389,8 +8389,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:db605fb9b3513442247870993ebd957da11ffc0b3acd0cf642eec22c1c9fb83b
-      lastVerified: '2026-04-05T01:26:12.686Z'
+      checksum: sha256:06f7a67d5ce8eec000ea76e1b22f3f654231f354080056d7baa88adf1db59f0a
+      lastVerified: '2026-04-05T02:11:31.060Z'
     config-resolver:
       path: .aiox-core/core/config/config-resolver.js
       layer: L1
@@ -8416,8 +8416,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:c4af955c15e5d91520d53d600c79cd7fdbb7461de0de053e3464353ac2ecb34a
-      lastVerified: '2026-04-05T01:26:12.687Z'
+      checksum: sha256:343b3090ea08df6a65c4a1c640dac240b24eb58b192422436005bec12e3587be
+      lastVerified: '2026-04-05T02:11:31.060Z'
     env-interpolator:
       path: .aiox-core/core/config/env-interpolator.js
       layer: L1
@@ -9042,8 +9042,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:f7e8182f9d022e540ffa8e84e4c6a63bf3f198c8dd0bf3c30e3ccfd022f7d14c
-      lastVerified: '2026-04-05T01:26:12.687Z'
+      checksum: sha256:68aef839a4533bae91fcd352056f32afa70cc1ba83319b634b8c4d7c3569ac6b
+      lastVerified: '2026-04-05T02:11:31.061Z'
     ideation-engine:
       path: .aiox-core/core/ideation/ideation-engine.js
       layer: L1
@@ -9776,8 +9776,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:9919eb3694fb3641111a2d861379dedc93302213e45b6fb0c287c266c82a1639
-      lastVerified: '2026-04-05T01:26:12.687Z'
+      checksum: sha256:012b51327691fe11a0c252e1175faa893dfd16a7d47adce06ea7c69a4c1ecabf
+      lastVerified: '2026-04-05T02:11:31.061Z'
     message-formatter:
       path: .aiox-core/core/orchestration/message-formatter.js
       layer: L1
@@ -11518,8 +11518,8 @@ entities:
         score: 0.4
         constraints: []
         extensionPoints: []
-      checksum: sha256:48e94db7b1778dedecc8eae829139579ad7778ff47668597ebe766610696553f
-      lastVerified: '2026-04-03T21:15:01.822Z'
+      checksum: sha256:d7c55208b7597eb68612ea289d4ad1d8c2de95fbaa09322789d8b239e94e5266
+      lastVerified: '2026-04-05T02:11:31.061Z'
     report-formatter:
       path: .aiox-core/core/synapse/diagnostics/report-formatter.js
       layer: L1

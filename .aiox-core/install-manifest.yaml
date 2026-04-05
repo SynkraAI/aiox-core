@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-04-05T02:11:25.074Z"
+generated_at: "2026-04-05T04:43:43.263Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1093
 files:
@@ -861,17 +861,17 @@ files:
     type: core
     size: 6148
   - path: core/orchestration/executors/epic-4-executor.js
-    hash: sha256:b2f8944114839f9b02a0b46d037fa64e2d1584d3aab6ff74537e32a16b6a793d
+    hash: sha256:cf16d37f5158a9468f7779576972c671d2e8c79103c97f6666f9103bf715e69e
     type: core
-    size: 6852
+    size: 6866
   - path: core/orchestration/executors/epic-5-executor.js
-    hash: sha256:d334dc728dec74fdb744f14d83f9fd2b7dabc46bcaa0d2dfae482cc131e0107b
+    hash: sha256:437f48f77e5e99bf0f4a6a35118d4aadbc89d3c1d07b1eaa0c42319a782aa4cd
     type: core
-    size: 8539
+    size: 8647
   - path: core/orchestration/executors/epic-6-executor.js
-    hash: sha256:1bbc14e8236f87c074db46833345a724ee5056a28b97fbb2528d4eedd350ab12
+    hash: sha256:1884f1fa8704b3d7e5e797374a27141d56e42e25b33931032f5ceac6bc93630f
     type: core
-    size: 6780
+    size: 6834
   - path: core/orchestration/executors/epic-executor.js
     hash: sha256:f2b20cd8cc4f3473bfcc7afdc0bc20e21665bab92274433ede58eabc4691a6b9
     type: core
@@ -1229,7 +1229,7 @@ files:
     type: data
     size: 9575
   - path: data/entity-registry.yaml
-    hash: sha256:832a1e834d5a1edb6bb9e8ee71634dbc18ae541c132c1fbe99fdfb2ab9dfced7
+    hash: sha256:6e7257efd2191bb508d3d02234c997e51d42110ddf2a45190e9fdd86d5488a61
     type: data
     size: 524163
   - path: data/learned-patterns.yaml
@@ -1705,9 +1705,9 @@ files:
     type: script
     size: 9928
   - path: development/scripts/verify-workflow-gaps.js
-    hash: sha256:a06a3fac2c4fdf995f18d6108d48855a1156b763ef906a3943b94dc9a709c167
+    hash: sha256:a68d6140076f6b60f557fe84d8426bc025c7df603cf5b6b995847a41e351ff2c
     type: script
-    size: 33418
+    size: 33404
   - path: development/scripts/version-tracker.js
     hash: sha256:d11804b82497e2a9c6e83191095681f5d57ac956b69975294f3f9d2efd0a7bdd
     type: script

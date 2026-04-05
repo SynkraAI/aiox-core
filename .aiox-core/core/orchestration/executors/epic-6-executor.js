@@ -44,7 +44,8 @@ class Epic6Executor extends EpicExecutor {
   _getQAOrchestrator() {
     if (!this._qaOrchestrator) {
       try {
-        this._qaOrchestrator = require('../../infrastructure/scripts/qa-loop-orchestrator');
+        const { QAOrchestrator } = require('../../../infrastructure/scripts/qa-loop-orchestrator');
+        this._qaOrchestrator = QAOrchestrator;
       } catch (error) {
         this._log(`QA Loop Orchestrator not available: ${error.message}`, 'warn');
       }
