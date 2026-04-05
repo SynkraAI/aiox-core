@@ -171,8 +171,6 @@ async function loadAgentConfig(agentId) {
   // Get required sections for this agent
   const requiredSections = agentRequirements[agentId] || ALWAYS_LOADED;
 
-  console.log(`📦 Loading config for @${agentId} (${requiredSections.length} sections)...`);
-
   const config = await loadConfigSections(requiredSections);
 
   const loadTime = Date.now() - startTime;
@@ -268,6 +266,23 @@ module.exports = {
   loadAgentConfig,
   loadConfigSections,
   loadMinimalConfig,
+  loadFullConfig,
+  preloadConfig,
+  clearCache,
+  getPerformanceMetrics,
+  validateAgentConfig,
+  getConfigSection,
+  agentRequirements,
+  ALWAYS_LOADED,
+};
+ents,
+  ALWAYS_LOADED,
+};
+ getConfigSection,
+  agentRequirements,
+  ALWAYS_LOADED,
+};
+onfig,
   loadFullConfig,
   preloadConfig,
   clearCache,

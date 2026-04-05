@@ -30,6 +30,8 @@ const yaml = require('js-yaml');
 const { deepMerge } = require('./merge-utils');
 const { interpolateEnvVars, lintEnvPatterns } = require('./env-interpolator');
 const { globalConfigCache } = require('./config-cache');
+const AIOXError = require('aiox-core/utils/aiox-error');
+const ErrorRegistry = require('aiox-core/monitor/error-registry');
 
 // ---------------------------------------------------------------------------
 // JSON Schema validation (Story 12.2)
@@ -186,7 +188,10 @@ function loadYaml(projectRoot, relativePath) {
     const data = yaml.load(content) || {};
     return { data, path: fullPath };
   } catch (error) {
-    throw new Error(`Failed to parse YAML at ${fullPath}: ${error.message}`);
+    throw new AIOXError(`Failed to parse YAML at ${fullPath}: ${error.message}`, {
+      category: 'SYSTEM',
+      metadata: { path: fullPath, originalError: error.message },
+    });
   }
 }
 
@@ -359,7 +364,10 @@ function loadLegacyConfig(projectRoot) {
   const legacy = loadYaml(projectRoot, CONFIG_FILES.legacy);
 
   if (!legacy.data) {
-    throw new Error(`Legacy config file not found: ${CONFIG_FILES.legacy}`);
+    throw new AIOXError(`Legacy config file not found: ${CONFIG_FILES.legacy}`, {
+      category: 'SYSTEM',
+      metadata: { projectRoot, path: CONFIG_FILES.legacy },
+    });
   }
 
   const suppressDeprecation = process.env.AIOX_SUPPRESS_DEPRECATION === 'true'
@@ -499,7 +507,10 @@ function getConfigAtLevel(projectRoot, level, options = {}) {
       relativePath = CONFIG_FILES.legacy;
       break;
     default:
-      throw new Error(`Unknown config level: ${level}`);
+      throw new AIOXError(`Unknown config level: ${level}`, {
+        category: 'SYSTEM',
+        metadata: { level, projectRoot },
+      });
   }
 
   const { data } = loadYaml(projectRoot, relativePath);
@@ -552,12 +563,20 @@ function setUserConfigValue(key, value) {
 
   config[key] = value;
 
-  const yamlContent = yaml.dump(config, { lineWidth: -1 });
-  fs.writeFileSync(CONFIG_FILES.user, yamlContent, 'utf8');
+  try {
+    const yamlContent = yaml.dump(config, { lineWidth: -1 });
+    fs.writeFileSync(CONFIG_FILES.user, yamlContent, 'utf8');
 
-  globalConfigCache.clear();
+    globalConfigCache.clear();
 
-  return config;
+    return config;
+  } catch (error) {
+    ErrorRegistry.log(error, {
+      category: 'SYSTEM',
+      metadata: { key, value, path: CONFIG_FILES.user },
+    }).catch(() => {});
+    throw error;
+  }
 }
 
 /**
