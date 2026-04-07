@@ -54,6 +54,8 @@ The user has been here before. Show a quick status and the next mission. This sh
    Reconcile Quest state with Forge state before showing anything to the user.
    
    **Reference:** The canonical phase-to-items mapping is in `engine/forge-bridge.md §11`.
+   **Runtime:** `engine/forge-reconciler.cjs` implements this algorithm as executable code.
+   Can be invoked standalone: `node engine/forge-reconciler.cjs <project-path> [--dry-run]`
    
    ```
    1. Glob ".aios/forge-runs/*/state.json"
