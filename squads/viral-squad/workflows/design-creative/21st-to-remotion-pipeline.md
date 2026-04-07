@@ -83,7 +83,7 @@ hover:scale-105        --> REMOVER                      --> NAO EXISTE EM VIDEO
 A fonte de verdade dos tokens segue este caminho unidirecional:
 
 ```
-academia-lendaria-ds/src/tokens/remotion.ts    <-- FONTE DE VERDADE
+brand-ds/src/tokens/remotion.ts               <-- FONTE DE VERDADE (configurada em data/brand.yaml)
           |
           v
 viral-automacao-video/src/styles/tokens.ts     <-- re-export (import { colors, typography, ... })

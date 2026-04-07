@@ -366,7 +366,7 @@ Best For: Face content, product, single focus
 Layout:
   Left: 50% - Concept A
   Right: 50% - Concept B
-  Divider: 2-4px (optional, gold)
+  Divider: 2-4px (optional, primary accent)
 
 Grid:
   |  Before  |  After   |
@@ -546,7 +546,7 @@ P1 (Secondary): Face
 P2 (Tertiary): Supporting text
   Size: 36px
   Position: Below primary text
-  Treatment: Gold accent (#C9B298)
+  Treatment: Primary accent (colors.primary)
 
 P3 (Background): Solid black
   Treatment: Remove workout footage (too busy)
@@ -911,7 +911,7 @@ Incluir mini-report:
 DS Compliance: PASS/FAIL
 Token Import: YES/NO
 Hardcoded Values: 0
-Gold Usage: X.XX% (< 8%)
+Primary Usage: X.XX% (< 8%)
 ```
 
 ### 21st.dev Pipeline

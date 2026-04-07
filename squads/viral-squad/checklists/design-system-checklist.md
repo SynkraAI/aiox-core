@@ -32,14 +32,14 @@ Usar ANTES de cada merge/commit de componente visual.
 - [ ] **Primary text** - Usa `colors.foreground` (#FFFFFF branco puro)
 - [ ] **Secondary text** - Usa `colors.muted` (#A8A8A8 cinza)
 
-#### Gold Accent (MAX 8% - SACRED RULE)
+#### Primary Accent (MAX 8% - SACRED RULE)
 
-- [ ] **Gold via token** - Usa `colors.primary` (#C9B298) ou `colors.gradientGold`
-- [ ] **Area calculada** - Gold nao excede 8% de 1080x1920 = 165.888px
+- [ ] **Primary via token** - Usa `colors.primary` (#C9B298) ou `colors.gradientPrimary`
+- [ ] **Area calculada** - Primary nao excede 8% de 1080x1920 = 165.888px
 - [ ] **Uso permitido:** CTAs, highlights, numeros, borders, linhas de acento
 - [ ] **Uso PROIBIDO:** Backgrounds grandes, texto corrido, icones comuns
 
-#### Calculo de Area Gold
+#### Calculo de Area Primary
 
 ```
 Area total da tela: 1080 x 1920 = 2.073.600 px
@@ -52,7 +52,7 @@ Elementos comuns:
 - Botao CTA (400x80px):          32.000 px = 1.54%
 - Glow CTA (440x120 @ 0.3):      15.840 px = 0.76%
 
-Regra: somar TODOS os elementos gold visiveis simultaneamente.
+Regra: somar TODOS os elementos primary visiveis simultaneamente.
 ```
 
 ---
@@ -108,7 +108,7 @@ Regra: somar TODOS os elementos gold visiveis simultaneamente.
 
 - [ ] **Style** - Flaticon Regular Rounded
 - [ ] **Consistency** - Todos do mesmo pack
-- [ ] **Color:** Branco info, Gold acao, Muted secundario
+- [ ] **Color:** Branco info, Primary acao, Muted secundario
 
 ---
 
@@ -170,7 +170,7 @@ Regra: somar TODOS os elementos gold visiveis simultaneamente.
 
 - [ ] **Cores corretas** - Usa tokens, nao hardcoded
 - [ ] **Fontes corretas** - Inter (UI) e Source Serif 4 (body) via tokens
-- [ ] **8% rule validada** - Gold calculado e dentro do limite
+- [ ] **8% rule validada** - Primary calculado e dentro do limite
 - [ ] **Icons consistentes** - Flaticon Regular Rounded, mesmo pack
 - [ ] **Qualidade premium** - Visual limpo, minimalista, elegante
 - [ ] **Testado em preview** - Visualizado no Remotion Studio em 1080x1920
@@ -190,7 +190,7 @@ Colors:
   foreground: "colors.foreground"    # #FFFFFF (22%)
   primary:    "colors.primary"       # #C9B298 (MAX 8%)
   muted:      "colors.muted"         # #A8A8A8
-  gradient:   "colors.gradientGold"  # linear-gradient gold
+  gradient:   "colors.gradientPrimary"  # linear-gradient primary
 
 Typography:
   ui:   "typography.ui"    # Inter, system-ui, sans-serif
@@ -211,5 +211,5 @@ Video:
 Reference Docs:
   pipeline: "workflows/design-creative/21st-to-remotion-pipeline.md"
   template: "templates/remotion/ds-integrated-component.tsx"
-  tokens:   "academia-lendaria-ds/src/tokens/remotion.ts"
+  tokens:   "brand-ds/src/tokens/remotion.ts (ou data/remotion-tokens-reference.ts)"
 ```

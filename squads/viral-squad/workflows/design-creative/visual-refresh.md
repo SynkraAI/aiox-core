@@ -48,7 +48,7 @@ Color Palette:
 
 - Background: #000000 (70%)
 - Foreground: #FFFFFF (22%)
-- Primary Gold: #C9B298 (8%)
+- Primary: #C9B298 (8%)
 - In use: 18 meses
 
 Typography:
@@ -92,13 +92,13 @@ ISSUES IDENTIFIED:
 
 DEBATE:
 @visual-impact: "Need modernização mas manter Design System configurado DNA"
-@color-psychologist: "8% gold rule = SACRED, não tocar"
+@color-psychologist: "8% primary rule = SACRED, não tocar"
 @layout-architect: "Dynamic grids = +25% scroll-stop"
 @motion-master: "3D fake com 2D transforms (cost-effective)"
 @remotion-architect: "Can implement tudo sem performance hit"
 
 VOTAÇÃO:
-Consenso: Refresh mantendo gold rule, add modern elements
+Consenso: Refresh mantendo primary rule, add modern elements
 
 APPROVED CHANGES:
 ✅ Add gradient overlays (subtle)
@@ -106,7 +106,7 @@ APPROVED CHANGES:
 ✅ Liquid motion effects
 ✅ 3D fake (2D transforms)
 ✅ Update typography (modern sans)
-❌ NO change to gold rule
+❌ NO change to primary rule
 ❌ NO change to core black/white
 ```
 
@@ -152,12 +152,12 @@ Core (unchanged):
 
 - Background: #000000 (70%)
 - Foreground: #FFFFFF (22%)
-- Primary Gold: #C9B298 (8% - SACRED)
+- Primary: #C9B298 (8% - SACRED)
 
 NEW Additions:
 
 - Accent Gradient:
-  #C9B298 → #D4C4AB (gold to warm light)
+  #C9B298 → #D4C4AB (primary to warm light)
   Usage: Overlays, backgrounds (10% max)
 
 - Depth Shadows:
@@ -170,8 +170,8 @@ NEW Additions:
 
 RULES:
 
-- Gold still MAX 8% (unchanged)
-- Gradients count toward gold %
+- Primary still MAX 8% (unchanged)
+- Gradients count toward primary %
 - New colors support, não replace
 ```
 
@@ -241,7 +241,7 @@ Maintain:
 
 - Kinetic typography (core)
 - Fade transitions (classic)
-- Gold accent timing (sacred)
+- Primary accent timing (sacred)
 
 Remove:
 
@@ -323,7 +323,7 @@ CONSENSUS: Maximize first frame impact
 
 FIRST FRAME v5.0:
 - Bold statement (large text 100px+)
-- High contrast element (white + gold)
+- High contrast element (white + primary accent)
 - Motion blur entrance (speed feel)
 - Gradient overlay (depth)
 - Asymmetric layout (surprise)
@@ -481,7 +481,7 @@ A/B TEST PLAN:
 
 Version A (v4.1 - Current):
 
-- Color: Black/White/Gold (classic)
+- Color: Black/White/Primary (classic)
 - Typography: Inter + Source Serif
 - Motion: Kinetic (standard)
 - Layout: Center-aligned
@@ -489,7 +489,7 @@ Version A (v4.1 - Current):
 
 Version B (v5.0 - Refresh):
 
-- Color: Black/White/Gold + gradients
+- Color: Black/White/Primary + gradients
 - Typography: Space Grotesk + Inter
 - Motion: Liquid + 3D fake
 - Layout: Asymmetric
@@ -556,7 +556,7 @@ VERDICT: v5.0 APPROVED ✅
 ### Regras de Consenso
 
 - **Color changes:** Unanimidade (brand sacred)
-- **8% gold rule:** IMMUTABLE (never debate)
+- **8% primary rule:** IMMUTABLE (never debate)
 - **Typography:** @layout-architect veto power
 - **Motion:** @motion-master final say
 - **Rollout:** Gradual (no big-bang)
@@ -650,7 +650,7 @@ VERDICT: v5.0 APPROVED ✅
 
 ### Don'ts ❌
 
-- Não toque na 8% gold rule (SACRED)
+- Não toque na 8% primary rule (SACRED)
 - Não faça big-bang migration (risky)
 - Não ignore performance (mobile primeiro)
 - Não copie competitors literalmente (adapt)
@@ -666,7 +666,7 @@ VERDICT: v5.0 APPROVED ✅
 estética configurada v5.0:
 
 1. SACRED ELEMENTS (never change):
-   - 8% gold rule
+   - 8% primary rule
    - Black/white dominance
    - Clean composition
 

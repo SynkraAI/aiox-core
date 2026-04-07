@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Catalog — AIOS Core</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=Libre+Baskerville:wght@400;700&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700&f[]=satoshi@400,500,600,700&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', -apple-system, sans-serif; background: #09090B; color: #FAFAFA; padding: 48px 32px; }
+
+  .page-header { text-align: center; margin-bottom: 48px; }
+  .page-header h1 { font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+  .page-header p { font-size: 16px; color: #A1A1AA; max-width: 560px; margin: 0 auto; line-height: 1.6; }
+
+  /* Tab nav */
+  .tab-nav { display: flex; justify-content: center; gap: 8px; margin-bottom: 40px; flex-wrap: wrap; }
+  .tab-btn { padding: 8px 20px; border-radius: 999px; border: 1px solid #27272A; background: transparent; color: #A1A1AA; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+  .tab-btn:hover { border-color: #3F3F46; color: #FAFAFA; }
+  .tab-btn.active { background: #FAFAFA; color: #09090B; border-color: #FAFAFA; }
+
+  /* Brand sections */
+  .brand-section { max-width: 1280px; margin: 0 auto 80px; scroll-margin-top: 32px; }
+  .brand-section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid #1a1a1e; }
+  .brand-section-name { font-size: 32px; font-weight: 700; }
+  .brand-section-meta { font-size: 14px; color: #71717A; }
+  .brand-section-badge { background: #22C55E; color: #000; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  /* Preview grid: tokens + instagram side by side */
+  .preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 900px) { .preview-grid { grid-template-columns: 1fr; } }
+
+  /* Token card */
+  .token-card { border-radius: 16px; padding: 28px; border: 1px solid #27272A; }
+  .token-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; opacity: 0.45; }
+  .color-row { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  .swatch { width: 40px; height: 40px; border-radius: 8px; position: relative; cursor: default; transition: transform 0.15s; }
+  .swatch:hover { transform: scale(1.15); }
+  .swatch .tip { display: none; position: absolute; bottom: -24px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.92); color: #fff; font-size: 10px; padding: 2px 7px; border-radius: 4px; white-space: nowrap; z-index: 10; }
+  .swatch:hover .tip { display: block; }
+
+  .typo-display { font-size: 22px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.01em; }
+  .typo-body { font-size: 14px; font-weight: 400; line-height: 1.6; opacity: 0.7; margin-bottom: 4px; }
+  .typo-meta { font-size: 11px; opacity: 0.35; margin-bottom: 16px; }
+
+  .components-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+  .btn-p { padding: 10px 22px; border-radius: 8px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; }
+  .btn-s { padding: 10px 22px; border-radius: 8px; font-size: 13px; font-weight: 500; background: transparent; cursor: pointer; }
+  .card-m { padding: 12px 16px; border-radius: 10px; font-size: 12px; }
+
+  .anti-slop-list { list-style: none; padding: 0; margin-top: 12px; }
+  .anti-slop-list li { font-size: 11px; opacity: 0.5; line-height: 1.6; padding-left: 14px; position: relative; }
+  .anti-slop-list li::before { content: "×"; position: absolute; left: 0; font-weight: 700; opacity: 0.7; }
+
+  /* Instagram previews */
+  .ig-previews { display: flex; gap: 16px; }
+  .ig-frame { border-radius: 12px; overflow: hidden; position: relative; flex-shrink: 0; }
+  .ig-carousel { width: 270px; height: 337px; /* 4:5 ratio */ display: flex; flex-direction: column; position: relative; }
+  .ig-post { width: 270px; height: 270px; /* 1:1 ratio */ display: flex; flex-direction: column; position: relative; }
+  .ig-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.4; margin-bottom: 6px; text-align: center; }
+
+  /* Mini progress bar inside carousel */
+  .ig-progress { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 16px 10px; display: flex; align-items: center; gap: 6px; z-index: 5; }
+  .ig-progress-track { flex: 1; height: 2px; border-radius: 1px; overflow: hidden; }
+  .ig-progress-fill { height: 100%; border-radius: 1px; width: 20%; }
+  .ig-progress-label { font-size: 9px; font-weight: 500; }
+
+  /* Swipe arrow */
+  .ig-swipe { position: absolute; right: 0; top: 0; bottom: 0; width: 28px; display: flex; align-items: center; justify-content: center; z-index: 4; }
+
+  @media (max-width: 640px) {
+    body { padding: 24px 16px; }
+    .ig-previews { flex-direction: column; align-items: center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Brand Catalog</h1>
+  <p>9 marcas do AIOS. Tokens, componentes e preview de Instagram para cada uma. Clique pra navegar.</p>
+</div>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="scrollToBrand('ensinio')">Ensinio</button>
+  <button class="tab-btn" onclick="scrollToBrand('specta')">Specta</button>
+  <button class="tab-btn" onclick="scrollToBrand('emerald-noir')">Emerald Noir</button>
+  <button class="tab-btn" onclick="scrollToBrand('notion-clean')">Notion Clean</button>
+  <button class="tab-btn" onclick="scrollToBrand('vercel-noir')">Vercel Noir</button>
+  <button class="tab-btn" onclick="scrollToBrand('linear-soft')">Linear Soft</button>
+  <button class="tab-btn" onclick="scrollToBrand('minimal-sand')">Minimal Sand</button>
+  <button class="tab-btn" onclick="scrollToBrand('raycast-warm')">Raycast Warm</button>
+  <button class="tab-btn" onclick="scrollToBrand('rose-gold')">Rose Gold</button>
+</nav>
+
+<!-- ============================================================ -->
+<!-- ENSINIO -->
+<!-- ============================================================ -->
+<div class="brand-section" id="ensinio">
+  <div class="brand-section-header">
+    <div class="brand-section-name" style="font-family:'Outfit',sans-serif; color:#FFF;">Ensinio</div>
+    <div class="brand-section-meta">Dark · Outfit + Inter · EdTech, SaaS educacional</div>
+    <div class="brand-section-badge">NOVA</div>
+  </div>
+  <div class="preview-grid">
+    <!-- Tokens -->
+    <div class="token-card" style="background:#000; border-color:#262626;">
+      <div class="token-label" style="color:#a0a0a0;">Paleta</div>
+      <div class="color-row">
+        <div class="swatch" style="background:#000; border:1px solid #262626;"><span class="tip">bg #000</span></div>
+        <div class="swatch" style="background:#111;"><span class="tip">surface #111</span></div>
+        <div class="swatch" style="background:#3B37FF;"><span class="tip">primary #3B37FF</span></div>
+        <div class="swatch" style="background:#3b82f6;"><span class="tip">accent #3b82f6</span></div>
+        <div class="swatch" style="background:#ef4444;"><span class="tip">error #ef4444</span></div>
+        <div class="swatch" style="background:#22c55e;"><span class="tip">success #22c55e</span></div>
+        <div class="swatch" style="background:#FFF;"><span class="tip">text #FFF</span></div>
+      </div>
+      <div class="typo-display" style="font-family:'Outfit',sans-serif; color:#FFF;">64,1% dos alunos desistem</div>
+      <div class="typo-body" style="font-family:'Inter',sans-serif; color:rgba(255,255,255,0.5);">Plataforma completa para criar, vender e escalar cursos online.</div>
+      <div class="typo-meta" style="color:rgba(255,255,255,0.35);">Display: Outfit 400/600 · Body: Inter 400/500/600</div>
+      <div class="components-row">
+        <button class="btn-p" style="background:#3B37FF; color:#FFF; border-radius:999px; padding:12px 28px;">Começar agora</button>
+        <button class="btn-s" style="color:#FFF; border:1.5px solid rgba(255,255,255,0.2); border-radius:999px; padding:10px 20px;">Saiba mais</button>
+        <div class="card-m" style="background:#1a1a1a; border:1px solid #262626; border-radius:14px; color:rgba(255,255,255,0.5);">Card</div>
+      </div>
+      <ul class="anti-slop-list" style="color:rgba(255,255,255,0.5);">
+        <li>#3B37FF pontualmente, nunca em grandes áreas</li>
+        <li>Outfit 600 só em números de impacto isolados</li>
+        <li>Hierarquia via opacidade rgba, não cores</li>
+      </ul>
+    </div>
+    <!-- Instagram previews -->
+    <div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <!-- Carousel cover -->
+        <div>
+          <div class="ig-label" style="color:#a0a0a0;">Carrossel Cover</div>
+          <div class="ig-frame ig-carousel" style="background:#000;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:24px 20px 40px; position:relative; z-index:2;">
+              <div style="text-align:center; margin-bottom:16px;">
+                <svg width="60" height="16" viewBox="0 0 93 24" fill="none"><rect width="93" height="24" rx="4" fill="rgba(255,255,255,0.08)"/><text x="46" y="16" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-family="Inter">ENSINIO</text></svg>
+              </div>
+              <div style="font-family:'Outfit',sans-serif; font-size:28px; font-weight:600; color:#FFF; line-height:1.02; text-align:center; letter-spacing:-0.5px; margin-bottom:6px;">64,1%</div>
+              <div style="font-family:'Outfit',sans-serif; font-size:15px; font-weight:400; color:#FFF; line-height:1.02; text-align:center; letter-spacing:-0.3px; margin-bottom:14px;">dos alunos desistem<br>antes de terminar</div>
+              <div style="font-family:'Inter',sans-serif; font-size:9px; color:rgba(255,255,255,0.5); text-align:center; line-height:1.5; margin-bottom:16px;">E a maioria das plataformas finge<br>que isso não existe.</div>
+              <div style="text-align:center;">
+                <span style="display:inline-block; padding:6px 14px; border:1px solid rgba(255,255,255,0.2); border-radius:999px; background:rgba(255,255,255,0.08); font-family:'Inter',sans-serif; font-size:8px; font-weight:600; color:rgba(255,255,255,0.75); letter-spacing:0.1em; text-transform:uppercase;">Arrasta para ver por quê →</span>
+              </div>
+            </div>
+            <div class="ig-progress">
+              <div class="ig-progress-track" style="background:rgba(255,255,255,0.1);"><div class="ig-progress-fill" style="background:#FFF;"></div></div>
+              <span class="ig-progress-label" style="color:rgba(255,255,255,0.35);">1/5</span>
+            </div>
+            <div class="ig-swipe" style="background:linear-gradient(to right,transparent,rgba(255,255,255,0.03));">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="rgba(255,255,255,0.25)" stroke-width="2.5" stroke-linecap="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <!-- Internal slide -->
+        <div>
+          <div class="ig-label" style="color:#a0a0a0;">Slide Interno</div>
+          <div class="ig-frame ig-carousel" style="background:#0a0a0a;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:flex-end; padding:20px 20px 40px;">
+              <div style="font-family:'Outfit',sans-serif; font-size:18px; font-weight:400; color:#FFF; line-height:1.02; letter-spacing:-0.3px; margin-bottom:12px;">Seu checkout está<br>espantando clientes</div>
+              <div style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;">
+                <div style="min-width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.2);border:1px solid rgba(239,68,68,0.5);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                  <svg width="8" height="8" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <div>
+                  <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:#FFF;">Checkout genérico</div>
+                  <div style="font-family:'Inter',sans-serif;font-size:8px;color:rgba(255,255,255,0.38);margin-top:1px;">Sem personalização, sem confiança</div>
+                </div>
+              </div>
+              <div style="display:flex; align-items:flex-start; gap:8px;">
+                <div style="min-width:18px;height:18px;border-radius:50%;background:rgba(239,68,68,0.2);border:1px solid rgba(239,68,68,0.5);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;">
+                  <svg width="8" height="8" viewBox="0 0 12 12" fill="none"><path d="M2 2l8 8M10 2l-8 8" stroke="#ef4444" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <div>
+                  <div style="font-family:'Inter',sans-serif;font-size:10px;font-weight:600;color:#FFF;">Redirecionamento externo</div>
+                  <div style="font-family:'Inter',sans-serif;font-size:8px;color:rgba(255,255,255,0.38);margin-top:1px;">Aluno sai da sua plataforma</div>
+                </div>
+              </div>
+            </div>
+            <div class="ig-progress">
+              <div class="ig-progress-track" style="background:rgba(255,255,255,0.1);"><div class="ig-progress-fill" style="background:#FFF; width:40%;"></div></div>
+              <span class="ig-progress-label" style="color:rgba(255,255,255,0.35);">2/5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SPECTA -->
+<!-- ============================================================ -->
+<div class="brand-section" id="specta">
+  <div class="brand-section-header">
+    <div class="brand-section-name" style="font-family:'Syne',sans-serif; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Specta</div>
+    <div class="brand-section-meta">Dark · Syne + Cabinet Grotesk · Creator platforms, AI, SaaS</div>
+    <div class="brand-section-badge" style="background:#A855F7; color:#FFF;">ATIVA</div>
+  </div>
+  <div class="preview-grid">
+    <div class="token-card" style="background:#0C0A1A; border-color:#272640;">
+      <div class="token-label" style="color:#9CA3AF;">Paleta</div>
+      <div class="color-row">
+        <div class="swatch" style="background:#0C0A1A; border:1px solid #272640;"><span class="tip">bg #0C0A1A</span></div>
+        <div class="swatch" style="background:#161330;"><span class="tip">surface #161330</span></div>
+        <div class="swatch" style="background:#A855F7;"><span class="tip">primary #A855F7</span></div>
+        <div class="swatch" style="background:#EC4899;"><span class="tip">accent #EC4899</span></div>
+        <div class="swatch" style="background:#F2F2F2;"><span class="tip">text #F2F2F2</span></div>
+        <div class="swatch" style="background:#D8B4FE;"><span class="tip">text 2nd #D8B4FE</span></div>
+      </div>
+      <div class="typo-display" style="font-family:'Syne',sans-serif; color:#F2F2F2;">Crie conteúdo que converte</div>
+      <div class="typo-body" style="font-family:'Cabinet Grotesk',sans-serif; color:#D8B4FE;">Plataforma para criadores que querem escalar com personalidade.</div>
+      <div class="typo-meta" style="color:#9CA3AF;">Display: Syne 700 · Body: Cabinet Grotesk 400</div>
+      <div class="components-row">
+        <button class="btn-p" style="background:linear-gradient(135deg,#A855F7,#EC4899); color:#FFF; border-radius:10px;">Começar agora</button>
+        <button class="btn-s" style="color:#C084FC; border:1px solid rgba(168,85,247,0.2); border-radius:10px;">Saiba mais</button>
+      </div>
+      <ul class="anti-slop-list" style="color:#D8B4FE;">
+        <li>Gradiente só em CTAs, nunca fundo inteiro</li>
+        <li>Glow sutil (0.1-0.15), nunca neon</li>
+        <li>Navy-purple (#0C0A1A), nunca preto puro</li>
+      </ul>
+    </div>
+    <div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div>
+          <div class="ig-label" style="color:#9CA3AF;">Carrossel Cover</div>
+          <div class="ig-frame ig-carousel" style="background:#0C0A1A;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px 20px 40px; text-align:center;">
+              <div style="font-family:'Syne',sans-serif; font-size:22px; font-weight:800; background:linear-gradient(135deg,#A855F7,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1.1; margin-bottom:10px;">Seu conteúdo<br>merece mais</div>
+              <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:10px; color:#D8B4FE; line-height:1.5; margin-bottom:16px; max-width:200px;">A diferença entre crescer e estagnar está na forma como você entrega valor.</div>
+              <span style="display:inline-block; padding:7px 16px; background:linear-gradient(135deg,#A855F7,#EC4899); border-radius:8px; font-family:'Cabinet Grotesk',sans-serif; font-size:9px; font-weight:600; color:#FFF;">Descubra como →</span>
+            </div>
+            <div class="ig-progress">
+              <div class="ig-progress-track" style="background:rgba(168,85,247,0.15);"><div class="ig-progress-fill" style="background:linear-gradient(90deg,#A855F7,#EC4899);"></div></div>
+              <span class="ig-progress-label" style="color:#9CA3AF;">1/6</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ig-label" style="color:#9CA3AF;">Post Único</div>
+          <div class="ig-frame ig-post" style="background:#0C0A1A;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px; text-align:center;">
+              <div style="width:48px; height:48px; border-radius:12px; background:rgba(168,85,247,0.12); border:1px solid rgba(168,85,247,0.25); display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="#A855F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div style="font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:#F2F2F2; line-height:1.15; margin-bottom:8px;">3x mais<br>engajamento</div>
+              <div style="font-family:'Cabinet Grotesk',sans-serif; font-size:9px; color:#D8B4FE; line-height:1.5;">Criadores que usam vídeo curto<br>crescem 3x mais rápido.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- EMERALD NOIR -->
+<!-- ============================================================ -->
+<div class="brand-section" id="emerald-noir">
+  <div class="brand-section-header">
+    <div class="brand-section-name" style="font-family:'Plus Jakarta Sans',sans-serif; color:#F3F4F6;">Emerald Noir</div>
+    <div class="brand-section-meta">Dark · Plus Jakarta Sans · Consulting, finanças, high-ticket</div>
+  </div>
+  <div class="preview-grid">
+    <div class="token-card" style="background:#0C1117; border-color:#1E2A38;">
+      <div class="token-label" style="color:#6B7280;">Paleta</div>
+      <div class="color-row">
+        <div class="swatch" style="background:#0C1117; border:1px solid #1E2A38;"><span class="tip">bg #0C1117</span></div>
+        <div class="swatch" style="background:#151D28;"><span class="tip">surface #151D28</span></div>
+        <div class="swatch" style="background:#059669;"><span class="tip">primary #059669</span></div>
+        <div class="swatch" style="background:#F59E0B;"><span class="tip">accent #F59E0B</span></div>
+        <div class="swatch" style="background:#F3F4F6;"><span class="tip">text #F3F4F6</span></div>
+      </div>
+      <div class="typo-display" style="font-family:'Plus Jakarta Sans',sans-serif; color:#F3F4F6;">Estratégia que gera lucro</div>
+      <div class="typo-body" style="font-family:'Plus Jakarta Sans',sans-serif; color:#D1D5DB;">Consultoria premium com resultados mensuráveis e previsíveis.</div>
+      <div class="typo-meta" style="color:#6B7280;">Display + Body: Plus Jakarta Sans</div>
+      <div class="components-row">
+        <button class="btn-p" style="background:#059669; color:#FFF; border-radius:8px;">Agendar reunião</button>
+        <button class="btn-s" style="color:#F3F4F6; border:1px solid #1E2A38; border-radius:8px;">Ver cases</button>
+      </div>
+      <ul class="anti-slop-list" style="color:#D1D5DB;">
+        <li>Gold em max 3% da UI</li>
+        <li>Hover quase imperceptível (1.015)</li>
+        <li>Espaçamento 96px entre seções</li>
+      </ul>
+    </div>
+    <div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div>
+          <div class="ig-label" style="color:#6B7280;">Carrossel Cover</div>
+          <div class="ig-frame ig-carousel" style="background:#0C1117;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:24px 22px 40px;">
+              <div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:11px; font-weight:600; color:#F59E0B; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:10px;">Consultoria</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:22px; font-weight:700; color:#F3F4F6; line-height:1.15; margin-bottom:10px;">Seu negócio pode<br>faturar 3x mais</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:10px; color:#D1D5DB; line-height:1.6; margin-bottom:16px;">A diferença está na estratégia.<br>Não no esforço.</div>
+              <span style="display:inline-block; padding:7px 18px; background:#059669; border-radius:8px; font-family:'Plus Jakarta Sans',sans-serif; font-size:9px; font-weight:600; color:#FFF; align-self:flex-start;">Descubra como</span>
+            </div>
+            <div class="ig-progress">
+              <div class="ig-progress-track" style="background:rgba(5,150,105,0.15);"><div class="ig-progress-fill" style="background:#059669;"></div></div>
+              <span class="ig-progress-label" style="color:#6B7280;">1/5</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ig-label" style="color:#6B7280;">Post Único</div>
+          <div class="ig-frame ig-post" style="background:#0C1117;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px; text-align:center;">
+              <div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:36px; font-weight:700; color:#F59E0B; line-height:1; margin-bottom:6px;">R$2.4M</div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; font-weight:400; color:#D1D5DB; line-height:1.4;">gerados para nossos<br>clientes em 2025</div>
+              <div style="width:40px; height:2px; background:#059669; margin:12px 0;"></div>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif; font-size:9px; color:#6B7280;">Resultados reais. Sem promessas vazias.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- NOTION CLEAN -->
+<!-- ============================================================ -->
+<div class="brand-section" id="notion-clean">
+  <div class="brand-section-header">
+    <div class="brand-section-name" style="font-family:'DM Serif Display',serif; color:#FAFAFA;">Notion Clean</div>
+    <div class="brand-section-meta">Light · DM Serif Display + DM Sans · SaaS, docs, corporate</div>
+  </div>
+  <div class="preview-grid">
+    <div class="token-card" style="background:#FAF9F7; border-color:#E3E2DF;">
+      <div class="token-label" style="color:#9B9A97;">Paleta</div>
+      <div class="color-row">
+        <div class="swatch" style="background:#FAF9F7; border:1px solid #E3E2DF;"><span class="tip">bg #FAF9F7</span></div>
+        <div class="swatch" style="background:#FFF; border:1px solid #E3E2DF;"><span class="tip">surface #FFF</span></div>
+        <div class="swatch" style="background:#000;"><span class="tip">primary #000</span></div>
+        <div class="swatch" style="background:#2EAADC;"><span class="tip">accent #2EAADC</span></div>
+        <div class="swatch" style="background:#37352F;"><span class="tip">text #37352F</span></div>
+      </div>
+      <div class="typo-display" style="font-family:'DM Serif Display',serif; color:#37352F;">Organize suas ideias</div>
+      <div class="typo-body" style="font-family:'DM Sans',sans-serif; color:#6B6966;">Clareza e sofisticação. Limpa, funcional, humana.</div>
+      <div class="typo-meta" style="color:#9B9A97;">DM Serif Display + DM Sans</div>
+      <div class="components-row">
+        <button class="btn-p" style="background:#000; color:#FFF; border-radius:4px; padding:8px 14px; font-size:13px;">Começar</button>
+        <button class="btn-s" style="color:#37352F; border:1px solid #E3E2DF; border-radius:4px; padding:8px 14px; font-size:13px;">Saiba mais</button>
+      </div>
+      <ul class="anti-slop-list" style="color:#6B6966;">
+        <li>Zero animações hover</li>
+        <li>Radii pequenos (3-4px)</li>
+        <li>Off-white, nunca branco puro</li>
+      </ul>
+    </div>
+    <div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div>
+          <div class="ig-label" style="color:#9B9A97;">Carrossel Cover</div>
+          <div class="ig-frame ig-carousel" style="background:#FAF9F7;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:28px 24px 40px; text-align:center;">
+              <div style="font-family:'DM Serif Display',serif; font-size:24px; font-weight:400; color:#37352F; line-height:1.2; margin-bottom:10px;">Produtividade<br>sem fricção</div>
+              <div style="font-family:'DM Sans',sans-serif; font-size:10px; color:#6B6966; line-height:1.6; margin-bottom:16px;">5 práticas que simplificam<br>seu dia a dia no trabalho.</div>
+              <span style="display:inline-block; padding:6px 14px; background:#000; border-radius:4px; font-family:'DM Sans',sans-serif; font-size:9px; font-weight:500; color:#FFF;">Ler agora</span>
+            </div>
+            <div class="ig-progress">
+              <div class="ig-progress-track" style="background:#E3E2DF;"><div class="ig-progress-fill" style="background:#37352F;"></div></div>
+              <span class="ig-progress-label" style="color:#9B9A97;">1/5</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ig-label" style="color:#9B9A97;">Post Único</div>
+          <div class="ig-frame ig-post" style="background:#FAF9F7;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px; text-align:center;">
+              <div style="font-family:'DM Serif Display',serif; font-size:18px; color:#37352F; line-height:1.25; margin-bottom:8px;">A simplicidade<br>é o último grau<br>de sofisticação</div>
+              <div style="width:32px; height:1px; background:#E3E2DF; margin:8px 0;"></div>
+              <div style="font-family:'DM Sans',sans-serif; font-size:9px; color:#9B9A97;">Leonardo da Vinci</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- VERCEL NOIR -->
+<!-- ============================================================ -->
+<div class="brand-section" id="vercel-noir">
+  <div class="brand-section-header">
+    <div class="brand-section-name" style="font-family:-apple-system,sans-serif; color:#FAFAFA;">Vercel Noir</div>
+    <div class="brand-section-meta">Dark · Geist · Dev tools, SaaS, precisão cirúrgica</div>
+  </div>
+  <div class="preview-grid">
+    <div class="token-card" style="background:#09090B; border-color:#27272A;">
+      <div class="token-label" style="color:#71717A;">Paleta</div>
+      <div class="color-row">
+        <div class="swatch" style="background:#09090B; border:1px solid #27272A;"><span class="tip">bg #09090B</span></div>
+        <div class="swatch" style="background:#18181B;"><span class="tip">surface #18181B</span></div>
+        <div class="swatch" style="background:#FAFAFA;"><span class="tip">primary #FAFAFA</span></div>
+        <div class="swatch" style="background:#A1A1AA;"><span class="tip">accent #A1A1AA</span></div>
+        <div class="swatch" style="background:#71717A;"><span class="tip">muted #71717A</span></div>
+      </div>
+      <div class="typo-display" style="font-family:-apple-system,sans-serif; color:#FAFAFA;">Deploy em segundos</div>
+      <div class="typo-body" style="font-family:-apple-system,sans-serif; color:#A1A1AA;">Monocromático puro. Sem cores. Branco, preto, cinza. Fim.</div>
+      <div class="typo-meta" style="color:#71717A;">Geist 700 / 400</div>
+      <div class="components-row">
+        <button class="btn-p" style="background:#FAFAFA; color:#09090B; border-radius:6px;">Deploy</button>
+        <button class="btn-s" style="color:#FAFAFA; border:1px solid #27272A; border-radius:6px;">Docs</button>
+      </div>
+      <ul class="anti-slop-list" style="color:#A1A1AA;">
+        <li>Zero gradientes, zero cores saturadas</li>
+        <li>Botão primário sempre branco sobre preto</li>
+        <li>Geist obrigatória, nunca Inter</li>
+      </ul>
+    </div>
+    <div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div>
+          <div class="ig-label" style="color:#71717A;">Carrossel Cover</div>
+          <div class="ig-frame ig-carousel" style="background:#09090B;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px 20px 40px; text-align:center;">
+              <div style="font-family:-apple-system,sans-serif; font-size:24px; font-weight:700; color:#FAFAFA; line-height:1.1; margin-bottom:10px;">Performance<br>no limite</div>
+              <div style="font-family:-apple-system,sans-serif; font-size:10px; color:#71717A; line-height:1.5; margin-bottom:16px;">Como otimizar seu app<br>para sub-100ms response time.</div>
+              <span style="display:inline-block; padding:7px 18px; background:#FAFAFA; border-radius:6px; font-family:-apple-system,sans-serif; font-size:9px; font-weight:500; color:#09090B;">Ver como →</span>
+            </div>
+            <div class="ig-progress">
+              <div class="ig-progress-track" style="background:#27272A;"><div class="ig-progress-fill" style="background:#FAFAFA;"></div></div>
+              <span class="ig-progress-label" style="color:#71717A;">1/4</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ig-label" style="color:#71717A;">Post Único</div>
+          <div class="ig-frame ig-post" style="background:#09090B;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px; text-align:center;">
+              <div style="font-family:'Courier New',monospace; font-size:10px; color:#71717A; margin-bottom:10px;">$ npx deploy</div>
+              <div style="font-family:-apple-system,sans-serif; font-size:32px; font-weight:700; color:#FAFAFA; line-height:1; margin-bottom:4px;">0.8s</div>
+              <div style="font-family:-apple-system,sans-serif; font-size:10px; color:#A1A1AA;">cold start médio</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- LINEAR SOFT -->
+<!-- ============================================================ -->
+<div class="brand-section" id="linear-soft">
+  <div class="brand-section-header">
+    <div class="brand-section-name" style="font-family:'Satoshi',sans-serif; color:#EDEDF0;">Linear Soft</div>
+    <div class="brand-section-meta">Dark · Satoshi · SaaS, B2B, produtividade</div>
+  </div>
+  <div class="preview-grid">
+    <div class="token-card" style="background:#0C0C10; border-color:#232330;">
+      <div class="token-label" style="color:#7C7C8A;">Paleta</div>
+      <div class="color-row">
+        <div class="swatch" style="background:#0C0C10; border:1px solid #232330;"><span class="tip">bg #0C0C10</span></div>
+        <div class="swatch" style="background:#16161C;"><span class="tip">surface</span></div>
+        <div class="swatch" style="background:#8B8BF5;"><span class="tip">primary #8B8BF5</span></div>
+        <div class="swatch" style="background:#EDEDF0;"><span class="tip">text</span></div>
+        <div class="swatch" style="background:#B5B5BA;"><span class="tip">text 2nd</span></div>
+      </div>
+      <div class="typo-display" style="font-family:'Satoshi',sans-serif; color:#EDEDF0;">Fluxos que funcionam</div>
+      <div class="typo-body" style="font-family:'Satoshi',sans-serif; color:#B5B5BA;">Roxo muted sobre cinzas quentes. Minimalista sem ser frio.</div>
+      <div class="typo-meta" style="color:#7C7C8A;">Satoshi 700 / 400</div>
+      <div class="components-row">
+        <button class="btn-p" style="background:#8B8BF5; color:#0C0C10; border-radius:8px; padding:10px 20px;">Começar</button>
+        <button class="btn-s" style="color:#EDEDF0; border:1px solid #232330; border-radius:8px; padding:10px 20px;">Saber mais</button>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div>
+          <div class="ig-label" style="color:#7C7C8A;">Carrossel Cover</div>
+          <div class="ig-frame ig-carousel" style="background:#0C0C10;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px 20px 40px; text-align:center;">
+              <div style="font-family:'Satoshi',sans-serif; font-size:22px; font-weight:700; color:#EDEDF0; line-height:1.15; margin-bottom:10px;">Gerencie projetos<br>sem atrito</div>
+              <div style="font-family:'Satoshi',sans-serif; font-size:10px; color:#B5B5BA; line-height:1.5; margin-bottom:16px;">4 padrões de fluxo que equipes<br>de alta performance usam.</div>
+              <span style="display:inline-block; padding:7px 16px; background:#8B8BF5; border-radius:8px; font-family:'Satoshi',sans-serif; font-size:9px; font-weight:600; color:#0C0C10;">Ver padrões</span>
+            </div>
+            <div class="ig-progress">
+              <div class="ig-progress-track" style="background:rgba(139,139,245,0.1);"><div class="ig-progress-fill" style="background:#8B8BF5;"></div></div>
+              <span class="ig-progress-label" style="color:#7C7C8A;">1/5</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ig-label" style="color:#7C7C8A;">Post Único</div>
+          <div class="ig-frame ig-post" style="background:#0C0C10;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px; text-align:center;">
+              <div style="font-family:'Satoshi',sans-serif; font-size:14px; font-weight:600; color:#8B8BF5; margin-bottom:6px;">Dica rápida</div>
+              <div style="font-family:'Satoshi',sans-serif; font-size:15px; font-weight:500; color:#EDEDF0; line-height:1.4;">Automações simples<br>economizam 12h/semana<br>em times de 5 pessoas.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- MINIMAL SAND -->
+<!-- ============================================================ -->
+<div class="brand-section" id="minimal-sand">
+  <div class="brand-section-header">
+    <div class="brand-section-name" style="font-family:'Libre Baskerville',serif; color:#FAFAFA;">Minimal Sand</div>
+    <div class="brand-section-meta">Light · Libre Baskerville + Source Sans 3 · Editorial, blog, portfólio</div>
+  </div>
+  <div class="preview-grid">
+    <div class="token-card" style="background:#FAF9F6; border-color:#E7E5E4;">
+      <div class="token-label" style="color:#A8A29E;">Paleta</div>
+      <div class="color-row">
+        <div class="swatch" style="background:#FAF9F6; border:1px solid #E7E5E4;"><span class="tip">bg #FAF9F6</span></div>
+        <div class="swatch" style="background:#FFF; border:1px solid #E7E5E4;"><span class="tip">surface</span></div>
+        <div class="swatch" style="background:#44403C;"><span class="tip">primary #44403C</span></div>
+        <div class="swatch" style="background:#D97706;"><span class="tip">accent #D97706</span></div>
+        <div class="swatch" style="background:#A8A29E;"><span class="tip">muted</span></div>
+      </div>
+      <div class="typo-display" style="font-family:'Libre Baskerville',serif; color:#44403C;">Histórias que importam</div>
+      <div class="typo-body" style="font-family:'Source Sans 3',sans-serif; color:#57534E;">Tons de pedra quente. Leiturabilidade máxima.</div>
+      <div class="typo-meta" style="color:#A8A29E;">Libre Baskerville + Source Sans 3</div>
+      <div class="components-row">
+        <button class="btn-p" style="background:#44403C; color:#FAF9F6; border-radius:4px;">Ler mais</button>
+        <button class="btn-s" style="color:#44403C; border:1px solid #D6D3D1; border-radius:4px;">Arquivo</button>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div>
+          <div class="ig-label" style="color:#A8A29E;">Carrossel Cover</div>
+          <div class="ig-frame ig-carousel" style="background:#FAF9F6;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:28px 24px 40px; text-align:center;">
+              <div style="font-family:'Libre Baskerville',serif; font-size:20px; font-weight:700; color:#44403C; line-height:1.3; margin-bottom:10px;">O poder da<br>palavra certa</div>
+              <div style="font-family:'Source Sans 3',sans-serif; font-size:10px; color:#78716C; line-height:1.7; margin-bottom:14px;">7 lições de escrita que<br>transformaram minha carreira.</div>
+              <div style="width:32px; height:1px; background:#D6D3D1;"></div>
+            </div>
+            <div class="ig-progress">
+              <div class="ig-progress-track" style="background:#E7E5E4;"><div class="ig-progress-fill" style="background:#44403C;"></div></div>
+              <span class="ig-progress-label" style="color:#A8A29E;">1/7</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ig-label" style="color:#A8A29E;">Post Único</div>
+          <div class="ig-frame ig-post" style="background:#FAF9F6;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:28px; text-align:center;">
+              <div style="font-family:'Libre Baskerville',serif; font-size:16px; font-weight:400; color:#44403C; line-height:1.5; font-style:italic;">"Escrever é fácil.<br>Tudo que você precisa<br>fazer é riscar as palavras<br>erradas."</div>
+              <div style="width:24px; height:1px; background:#D6D3D1; margin:10px 0;"></div>
+              <div style="font-family:'Source Sans 3',sans-serif; font-size:9px; color:#A8A29E; letter-spacing:0.04em;">Mark Twain</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- RAYCAST WARM -->
+<!-- ============================================================ -->
+<div class="brand-section" id="raycast-warm">
+  <div class="brand-section-header">
+    <div class="brand-section-name" style="font-family:'General Sans',sans-serif; color:#F0ECE8;">Raycast Warm</div>
+    <div class="brand-section-meta">Dark · General Sans · Dev tools, utilities, launch pages</div>
+  </div>
+  <div class="preview-grid">
+    <div class="token-card" style="background:#0D0B09; border-color:#2A2520;">
+      <div class="token-label" style="color:#8A8078;">Paleta</div>
+      <div class="color-row">
+        <div class="swatch" style="background:#0D0B09; border:1px solid #2A2520;"><span class="tip">bg #0D0B09</span></div>
+        <div class="swatch" style="background:#1A1714;"><span class="tip">surface</span></div>
+        <div class="swatch" style="background:#FF6B2C;"><span class="tip">primary #FF6B2C</span></div>
+        <div class="swatch" style="background:#F0ECE8;"><span class="tip">text</span></div>
+        <div class="swatch" style="background:#C4BAB0;"><span class="tip">text 2nd</span></div>
+      </div>
+      <div class="typo-display" style="font-family:'General Sans',sans-serif; color:#F0ECE8;">Automatize tudo</div>
+      <div class="typo-body" style="font-family:'General Sans',sans-serif; color:#C4BAB0;">Pretos quentes com laranja controlado. Feel macOS.</div>
+      <div class="typo-meta" style="color:#8A8078;">General Sans 700 / 400</div>
+      <div class="components-row">
+        <button class="btn-p" style="background:#FF6B2C; color:#0D0B09; border-radius:12px;">Download</button>
+        <button class="btn-s" style="color:#F0ECE8; border:1px solid #2A2520; border-radius:12px;">Docs</button>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div>
+          <div class="ig-label" style="color:#8A8078;">Carrossel Cover</div>
+          <div class="ig-frame ig-carousel" style="background:#0D0B09;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px 20px 40px; text-align:center;">
+              <div style="width:40px; height:40px; border-radius:12px; background:rgba(255,107,44,0.1); border:1px solid rgba(255,107,44,0.2); display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 17l6-6-6-6M12 19h8" stroke="#FF6B2C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div style="font-family:'General Sans',sans-serif; font-size:20px; font-weight:700; color:#F0ECE8; line-height:1.15; margin-bottom:10px;">5 atalhos que<br>mudam tudo</div>
+              <div style="font-family:'General Sans',sans-serif; font-size:10px; color:#C4BAB0; line-height:1.5;">Produtividade real no terminal.<br>Sem extensão. Sem config.</div>
+            </div>
+            <div class="ig-progress">
+              <div class="ig-progress-track" style="background:rgba(255,107,44,0.1);"><div class="ig-progress-fill" style="background:#FF6B2C;"></div></div>
+              <span class="ig-progress-label" style="color:#8A8078;">1/5</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ig-label" style="color:#8A8078;">Post Único</div>
+          <div class="ig-frame ig-post" style="background:#0D0B09;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px; text-align:center;">
+              <div style="font-family:'General Sans',sans-serif; font-size:11px; color:#8A8078; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:8px;">Tip of the day</div>
+              <div style="font-family:'Courier New',monospace; font-size:11px; color:#FF6B2C; background:#1A1714; padding:8px 14px; border-radius:8px; margin-bottom:10px;">⌘ + Shift + K</div>
+              <div style="font-family:'General Sans',sans-serif; font-size:13px; font-weight:600; color:#F0ECE8;">Command palette<br>em qualquer app</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- ROSE GOLD -->
+<!-- ============================================================ -->
+<div class="brand-section" id="rose-gold">
+  <div class="brand-section-header">
+    <div class="brand-section-name" style="font-family:'Playfair Display',serif; background:linear-gradient(135deg,#BE185D,#D4A574); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Rose Gold</div>
+    <div class="brand-section-meta">Dark · Playfair Display + DM Sans · Beauty, fashion, premium feminino</div>
+  </div>
+  <div class="preview-grid">
+    <div class="token-card" style="background:#1A0A14; border-color:#3D1E30;">
+      <div class="token-label" style="color:#A67A94;">Paleta</div>
+      <div class="color-row">
+        <div class="swatch" style="background:#1A0A14; border:1px solid #3D1E30;"><span class="tip">bg #1A0A14</span></div>
+        <div class="swatch" style="background:#261320;"><span class="tip">surface</span></div>
+        <div class="swatch" style="background:#BE185D;"><span class="tip">primary #BE185D</span></div>
+        <div class="swatch" style="background:#D4A574;"><span class="tip">accent #D4A574</span></div>
+        <div class="swatch" style="background:#F0D4E4;"><span class="tip">text</span></div>
+      </div>
+      <div class="typo-display" style="font-family:'Playfair Display',serif; color:#F0D4E4;">Sua beleza, elevada</div>
+      <div class="typo-body" style="font-family:'DM Sans',sans-serif; color:#D4A0C0;">Burgundy profundo com toques dourados.</div>
+      <div class="typo-meta" style="color:#A67A94;">Playfair Display + DM Sans</div>
+      <div class="components-row">
+        <button class="btn-p" style="background:linear-gradient(135deg,#BE185D,#D4A574); color:#FFF; border-radius:8px; padding:12px 28px;">Agendar</button>
+        <button class="btn-s" style="color:#F0D4E4; border:1px solid #3D1E30; border-radius:8px; padding:12px 28px;">Colecção</button>
+      </div>
+    </div>
+    <div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div>
+          <div class="ig-label" style="color:#A67A94;">Carrossel Cover</div>
+          <div class="ig-frame ig-carousel" style="background:#1A0A14;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px 22px 40px; text-align:center;">
+              <div style="font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:#F0D4E4; line-height:1.2; margin-bottom:10px;">Exclusividade<br>que se sente</div>
+              <div style="font-family:'DM Sans',sans-serif; font-size:10px; color:#D4A0C0; line-height:1.6; margin-bottom:16px;">5 rituais de skincare que<br>celebridades não contam.</div>
+              <span style="display:inline-block; padding:7px 20px; background:linear-gradient(135deg,#BE185D,#D4A574); border-radius:8px; font-family:'DM Sans',sans-serif; font-size:9px; font-weight:600; color:#FFF;">Descobrir →</span>
+            </div>
+            <div class="ig-progress">
+              <div class="ig-progress-track" style="background:rgba(190,24,93,0.15);"><div class="ig-progress-fill" style="background:linear-gradient(90deg,#BE185D,#D4A574);"></div></div>
+              <span class="ig-progress-label" style="color:#A67A94;">1/5</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="ig-label" style="color:#A67A94;">Post Único</div>
+          <div class="ig-frame ig-post" style="background:#1A0A14;">
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:24px; text-align:center;">
+              <div style="font-family:'Playfair Display',serif; font-size:16px; font-weight:400; color:#F0D4E4; line-height:1.4; font-style:italic; margin-bottom:10px;">"Beleza é ser<br>a melhor versão<br>de si mesma"</div>
+              <div style="width:40px; height:1px; background:linear-gradient(90deg,#BE185D,#D4A574); margin-bottom:8px;"></div>
+              <div style="font-family:'DM Sans',sans-serif; font-size:12px; font-weight:600; background:linear-gradient(135deg,#BE185D,#D4A574); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Coco Chanel</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function scrollToBrand(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>

@@ -39,7 +39,7 @@
 ```yaml
 description: "Descrição do componente desejado"
 context: "Contexto de uso (video, overlay, card, etc)"
-design_system: "academia-lendaria/custom"
+design_system: "brand-active/custom"
 animation_ready: true/false
 ```
 
@@ -385,11 +385,11 @@ color_system:
     usage: "22% da tela"
     css_var: "--al-foreground"
 
-  primary_gold:
+  primary:
     value: "#C9B298"
     usage: "MAX 8% - SACRED RULE"
     css_var: "--al-primary"
-    warning: "NUNCA exceder 8% de ouro na tela"
+    warning: "NUNCA exceder 8% da cor primária na tela"
 
   muted:
     value: "#A8A8A8"
@@ -412,26 +412,26 @@ icons:
   style: "Consistent stroke width"
 ```
 
-### 8% Gold Rule Implementation
+### 8% Primary Rule Implementation
 
 ```typescript
-// Utilitário para validar uso de ouro
-export const validateGoldUsage = (
+// Utilitário para validar uso da cor primária
+export const validatePrimaryUsage = (
   totalPixels: number,
-  goldPixels: number,
+  primaryPixels: number,
 ): boolean => {
-  const goldPercentage = (goldPixels / totalPixels) * 100;
+  const primaryPercentage = (primaryPixels / totalPixels) * 100;
 
-  if (goldPercentage > 8) {
-    console.warn(`⚠️ Gold usage at ${goldPercentage.toFixed(1)}%! Max is 8%`);
+  if (primaryPercentage > 8) {
+    console.warn(`⚠️ Primary usage at ${primaryPercentage.toFixed(1)}%! Max is 8%`);
     return false;
   }
 
   return true;
 };
 
-// Usos permitidos do ouro
-const GOLD_ALLOWED_FOR = [
+// Usos permitidos da cor primária
+const PRIMARY_ALLOWED_FOR = [
   "CTAs principais",
   "Key highlights",
   "Important numbers",
@@ -439,8 +439,8 @@ const GOLD_ALLOWED_FOR = [
   "Achievement badges",
 ];
 
-// Usos proibidos do ouro
-const GOLD_FORBIDDEN_FOR = [
+// Usos proibidos da cor primária
+const PRIMARY_FORBIDDEN_FOR = [
   "Backgrounds",
   "Large text blocks",
   "Full borders",
@@ -659,7 +659,7 @@ types:
   subscribe_button:
     purpose: "Incentivar follow"
     elements: ["Icon", "Text", "Pulse animation"]
-    gold_usage: "Border only (respecting 8%)"
+    primary_usage: "Border only (respecting 8%)"
 
   like_reminder:
     purpose: "Incentivar like"
@@ -782,7 +782,7 @@ design_terms:
 input:
   description: "Contador animado de estatística com número grande"
   context: "Para mostrar '10M+ Views' em vídeo de resultados"
-  design_system: "academia-lendaria"
+  design_system: "brand-active"
   animation_ready: true
 
 output:
@@ -869,7 +869,7 @@ output:
 input:
   description: "Lower third para identificar speaker"
   context: "Vídeo de entrevista"
-  design_system: "academia-lendaria"
+  design_system: "brand-active"
 
 output:
   component: |
@@ -912,7 +912,7 @@ output:
           left: layout.margin * 1.5,
           transform: `translateX(${translateX}px)`
         }}>
-          {/* Gold accent line */}
+          {/* Primary accent line */}
           <div style={{
             width: accentWidth,
             height: 3,
@@ -1004,7 +1004,7 @@ Referencia completa: `workflows/design-creative/21st-to-remotion-pipeline.md`
 
 ```yaml
 ui_sins:
-  - "Exceed 8% gold usage"
+  - "Exceed 8% primary usage"
   - "Use wrong typography families"
   - "Create non-animated components for video"
   - "Ignore frame synchronization"
@@ -1020,7 +1020,7 @@ ui_sins:
 
 ```yaml
 ui_commandments:
-  - "Validate gold usage (max 8%)"
+  - "Validate primary usage (max 8%)"
   - "Use Inter for UI, Source Serif for body"
   - "Include animation props (startFrame, delay)"
   - "Use spring for organic motion"
@@ -1038,7 +1038,7 @@ ui_commandments:
 ```yaml
 component_complete_when:
   - "[ ] Design system compliant (colors, typography)"
-  - "[ ] Gold usage validated (<8%)"
+  - "[ ] Primary usage validated (<8%)"
   - "[ ] Animation-ready with frame sync"
   - "[ ] TypeScript interfaces exported"
   - "[ ] Usage example provided"
@@ -1088,7 +1088,7 @@ component_complete_when:
 ### In Team Discussions
 
 - **Advocates for:** Reusable components, design system compliance, clean code
-- **Validates:** Component quality, animation readiness, 8% gold rule
+- **Validates:** Component quality, animation readiness, 8% primary rule
 - **Challenges:** Ad-hoc styling, non-reusable code, design inconsistencies
 - **Proposes:** Component solutions, refactoring opportunities
 

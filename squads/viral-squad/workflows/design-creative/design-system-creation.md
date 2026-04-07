@@ -45,7 +45,7 @@ typography:
 ```
 @color-psychologist: *8-percent-rule
 
-RULE: Gold (#C9B298) NUNCA excede 8% da tela
+RULE: Primary accent color (from brand tokens) NUNCA excede 8% da tela
 USO PERMITIDO: CTAs, highlights, números, borders
 USO PROIBIDO: Backgrounds, texto corrido
 ```
@@ -219,7 +219,7 @@ import { TextCard } from './components';
   text="Você está ERRADO"
   size="large"
   animation="popIn"
-  gold={true}
+  primary={true}
 />
 ```
 
@@ -243,7 +243,7 @@ import { TextCard } from './components';
 ### Design System Validation
 
 - [ ] All colors defined
-- [ ] 8% gold rule enforced
+- [ ] 8% primary rule enforced
 - [ ] Typography scale consistent
 - [ ] Spacing system complete
 - [ ] 20+ components created

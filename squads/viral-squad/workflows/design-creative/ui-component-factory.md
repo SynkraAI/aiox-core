@@ -94,7 +94,7 @@ import {
 } from "@/styles/tokens";
 ```
 
-**Fonte de verdade:** `academia-lendaria-ds/src/tokens/remotion.ts`
+**Fonte de verdade:** `brand-ds/src/tokens/remotion.ts` (configurada em data/brand.yaml)
 **Re-export no projeto:** `viral-automacao-video/src/styles/tokens.ts`
 
 ```
@@ -239,24 +239,24 @@ export const ViralComponent: React.FC<ComponentProps> = (props) => {
 };
 ```
 
-#### Step 3.2: 8% Gold Rule Validation
+#### Step 3.2: 8% Primary Rule Validation
 
-**PASSO OBRIGATORIO** antes de prosseguir. Validar que o gold (#C9B298 / `colors.primary`) respeita o limite de 8% da area visivel.
+**PASSO OBRIGATORIO** antes de prosseguir. Validar que o primary (#C9B298 / `colors.primary`) respeita o limite de 8% da area visivel.
 
 ```
-VALIDACAO DA REGRA 8% GOLD:
+VALIDACAO DA REGRA 8% PRIMARY:
 
 Area total da tela: 1080 x 1920 = 2.073.600 px
-Limite gold (8%): 165.888 px
+Limite primary (8%): 165.888 px
 
 CALCULAR:
 [ ] Listar todos os elementos que usam colors.primary (fill, background, border)
-[ ] Para cada elemento: largura x altura = area gold
+[ ] Para cada elemento: largura x altura = area primary
     - Bordas: perimetro x espessura (ex: 200x2 + 200x2 = 800px)
     - Icones: largura x altura do path preenchido
-    - Textos: IGNORAR (texto gold conta muito pouco)
+    - Textos: IGNORAR (texto primary conta muito pouco)
     - Backgrounds: largura x altura total do elemento
-[ ] Somar area total de gold
+[ ] Somar area total de primary
 [ ] Dividir por 2.073.600 e multiplicar por 100 = percentual
 
 RESULTADO:
@@ -264,11 +264,11 @@ RESULTADO:
 [ ] Se > 8%: REPROVADO - aplicar correcoes abaixo
 
 CORRECOES (se reprovado):
-- Trocar backgroundColor gold por borderColor gold (2px)
-- Reduzir tamanho de elementos gold
+- Trocar backgroundColor primary por borderColor primary (2px)
+- Reduzir tamanho de elementos primary
 - Usar opacity baixa: rgba(201, 178, 152, 0.15)
 - Converter fill para outline/stroke
-- Limitar gold a um unico elemento focal por cena
+- Limitar primary a um unico elemento focal por cena
 ```
 
 > Para exemplos detalhados de calculo, consulte `workflows/design-creative/21st-to-remotion-pipeline.md` (Passo 6 do Exemplo Completo)
@@ -307,7 +307,7 @@ params:
 ```
 CHECKLIST DE QUALIDADE:
 
-[ ] Design System compliance (8% gold rule)
+[ ] Design System compliance (8% primary rule)
 [ ] Remotion compatible (no CSS animations conflicting)
 [ ] Performance optimized (memoization where needed)
 [ ] Responsive (works in 1080x1920)
@@ -352,12 +352,12 @@ src/components/ui/
 ```bash
 /viral:ui-component-factory
 
-Request: "Text card for bold statement with gold accent"
+Request: "Text card for bold statement with primary accent"
 
 Output: Card component with:
 - Black background
 - White bold text
-- 8% gold border/accent
+- 8% primary border/accent
 - Fade + scale entry animation
 ```
 
@@ -369,7 +369,7 @@ Output: Card component with:
 Request: "Subscribe button with pulse animation"
 
 Output: Button component with:
-- Gold background (#C9B298)
+- Primary background (#C9B298)
 - Black text
 - Pulse animation on loop
 - Click effect
@@ -385,7 +385,7 @@ Request: "Name tag lower third for speaker"
 Output: Lower third with:
 - Left-aligned layout
 - Name in white
-- Title in gold
+- Title in primary accent
 - Slide-in animation
 - Background blur
 ```

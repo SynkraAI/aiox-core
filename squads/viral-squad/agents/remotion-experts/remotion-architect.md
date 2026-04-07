@@ -318,7 +318,7 @@ const transformationTemplate: ViralVideoTemplate = {
     { id: "subtitle", type: "text", required: false },
   ],
 
-  theme: academiaLendariaTheme,
+  theme: brandTheme,
 };
 ```
 
@@ -433,8 +433,8 @@ Testing: ✅ Preview at 1x speed smooth
 ### Design System configurado Theme
 
 ```typescript
-// theme/academiaLendaria.ts
-export const academiaLendariaTheme = {
+// theme/brand-theme.ts
+export const brandTheme = {
   colors: {
     background: "#000000",
     foreground: "#FFFFFF",
@@ -489,7 +489,7 @@ export const academiaLendariaTheme = {
 ### Using Theme in Components
 
 ```typescript
-import { academiaLendariaTheme as theme } from '../theme';
+import { brandTheme as theme } from '../theme';
 
 const StyledTitle: React.FC<{ children: string }> = ({ children }) => {
   return (
@@ -631,7 +631,7 @@ src/
 │   ├── useTiming.ts
 │   └── useTheme.ts
 ├── theme/
-│   └── academiaLendaria.ts
+│   └── brand-theme.ts
 └── utils/
     └── index.ts
 
@@ -722,7 +722,7 @@ Results:
 
 import React from 'react';
 import { spring, useCurrentFrame, useVideoConfig } from 'remotion';
-import { academiaLendariaTheme as theme } from '../../theme';
+import { brandTheme as theme } from '../../theme';
 
 interface KineticTextProps {
   text: string;

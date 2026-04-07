@@ -334,7 +334,7 @@ dependencies:
           - "@ui-magic - Especialista técnico (executa criação via MCP)"
         delegation_rule: "Para criação técnica de componentes via MCP, agentes delegam para @ui-magic"
         pipeline_guide: "workflows/design-creative/21st-to-remotion-pipeline.md"
-        token_source: "academia-lendaria-ds/src/tokens/remotion.ts"
+        token_source: "data/remotion-tokens-reference.ts (ou brand-ds/src/tokens/remotion.ts do projeto ativo)"
 
 # Sistema de Debate Entre Agentes
 debate_system:
@@ -434,7 +434,7 @@ tags:
   - growth
   - marketing
   - social-media
-  - academia-lendaria
+  - brand-agnostic
   - design-system
   - debate-system
   - algorithm

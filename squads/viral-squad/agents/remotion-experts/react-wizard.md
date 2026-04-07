@@ -445,7 +445,7 @@ interface ThemeConfig {
   };
 }
 
-const academiaLendariaTheme: ThemeConfig = {
+const brandTheme: ThemeConfig = {
   colors: {
     background: "#000000",
     foreground: "#FFFFFF",
@@ -468,7 +468,7 @@ const academiaLendariaTheme: ThemeConfig = {
   },
 };
 
-const ThemeContext = createContext<ThemeConfig>(academiaLendariaTheme);
+const ThemeContext = createContext<ThemeConfig>(brandTheme);
 
 export const useTheme = () => useContext(ThemeContext);
 ```
@@ -872,7 +872,7 @@ interface ViralVideoProps {
   hook: HookContent;
   body: BodyContent;
   cta: CTAContent;
-  theme?: 'academia-lendaria' | 'default';
+  theme?: 'brand' | 'default';
 }
 
 // Type guard
@@ -892,7 +892,7 @@ export const ViralVideo: React.FC<ViralVideoProps> = ({
   hook,
   body,
   cta,
-  theme = 'academia-lendaria',
+  theme = 'brand',
 }) => {
   const { durationInFrames, fps } = useVideoConfig();
 

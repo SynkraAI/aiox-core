@@ -7,13 +7,13 @@
  * utilizando o Design System Design System configurado. Deve ser usado como
  * referencia definitiva por agentes de IA.
  *
- * REGRA SAGRADA: Gold (#C9B298) NUNCA excede 8% da area visivel da tela.
+ * REGRA SAGRADA: Primary accent color (from brand tokens) NUNCA excede 8% da area visivel da tela.
  * - Background preto: ~70%
  * - Texto branco: ~22%
- * - Gold (primary): MAX 8%
+ * - Primary: MAX 8%
  *
  * Tokens disponiveis:
- *   colors    - background, foreground, primary, muted, success, error, warning, gradientGold
+ *   colors    - background, foreground, primary, muted, success, error, warning, gradientPrimary
  *   typography - ui, body, weights.{regular,semibold,bold}, sizes.{headline..tiny}
  *   spacing   - base(8), xs(8), sm(16), md(24), lg(32), xl(48), xxl(64), xxxl(96)
  *   animation - fast(10), normal(15), slow(30), verySlow(60), easing.{smooth,snappy,bouncy,gentle}
@@ -38,17 +38,17 @@ import {
 } from "@/styles/tokens";
 
 // ============================================
-// 1. DSHeadline - Titulo Animado com Linha Gold
+// 1. DSHeadline - Titulo Animado com Linha Primary
 // ============================================
 
 /**
  * Titulo animado que entra com spring + fade, acompanhado de uma
- * linha de acento em gold que se expande horizontalmente.
+ * linha de acento em primary que se expande horizontalmente.
  *
  * Demonstra: typography tokens + animation.easing tokens + spring()
  *
- * A linha gold ocupa uma area minima da tela (~0.3%), respeitando
- * a regra de 8% maximo para o gold.
+ * A linha primary ocupa uma area minima da tela (~0.3%), respeitando
+ * a regra de 8% maximo para o primary.
  *
  * @usage
  * ```tsx
@@ -106,8 +106,8 @@ export const DSHeadline: React.FC<DSHeadlineProps> = ({
     },
   );
 
-  // Linha gold se expande apos o titulo aparecer
-  // REGRA 8% GOLD: a linha tem 4px de altura x ~200px de largura
+  // Linha primary se expande apos o titulo aparecer
+  // REGRA 8% PRIMARY: a linha tem 4px de altura x ~200px de largura
   // em uma tela 1080x1920 = 2.073.600px totais, isso e ~0.04% - bem dentro do limite
   const lineWidth = interpolate(
     adjustedFrame,
@@ -178,13 +178,13 @@ export const DSHeadline: React.FC<DSHeadlineProps> = ({
           {titulo}
         </h1>
 
-        {/* Linha de Acento Gold */}
-        {/* REGRA 8% GOLD: elemento decorativo pequeno, contribui minimamente para o total gold */}
+        {/* Linha de Acento Primary */}
+        {/* REGRA 8% PRIMARY: elemento decorativo pequeno, contribui minimamente para o total primary */}
         <div
           style={{
             height: 4,
             width: lineWidth,
-            background: colors.gradientGold,
+            background: colors.gradientPrimary,
             borderRadius: spacing.base / 4,
           }}
         />
@@ -222,7 +222,7 @@ export const DSHeadline: React.FC<DSHeadlineProps> = ({
  *
  * Demonstra: colors tokens, spacing tokens, layout tokens
  *
- * O gold aparece apenas no valor de trend e na borda sutil do card.
+ * O primary aparece apenas no valor de trend e na borda sutil do card.
  * Ambos somados representam menos de 1% da area da tela.
  *
  * @usage
@@ -278,8 +278,8 @@ export const DSStatCard: React.FC<DSStatCardProps> = ({
     },
   );
 
-  // Borda gold com glow sutil que pulsa
-  // REGRA 8% GOLD: borda de 1px em um card de ~400x200px contribui minimamente
+  // Borda primary com glow sutil que pulsa
+  // REGRA 8% PRIMARY: borda de 1px em um card de ~400x200px contribui minimamente
   const borderGlow = interpolate(
     adjustedFrame,
     [animation.normal, animation.slow, animation.verySlow],
@@ -351,7 +351,7 @@ export const DSStatCard: React.FC<DSStatCardProps> = ({
           {valor}
         </span>
 
-        {/* REGRA 8% GOLD: variacao em gold, area textual minima (~0.1% da tela) */}
+        {/* REGRA 8% PRIMARY: variacao em primary, area textual minima (~0.1% da tela) */}
         {variacao && (
           <span
             style={{
@@ -372,7 +372,7 @@ export const DSStatCard: React.FC<DSStatCardProps> = ({
         style={{
           height: spacing.base / 4,
           width: spacing.xxl,
-          background: colors.gradientGold,
+          background: colors.gradientPrimary,
           borderRadius: spacing.base / 4,
           marginTop: spacing.xs,
         }}
@@ -386,17 +386,17 @@ export const DSStatCard: React.FC<DSStatCardProps> = ({
 // ============================================
 
 /**
- * Botao de chamada para acao com glow pulsante em gold.
- * Projetado para ser o elemento de maior destaque gold na tela,
+ * Botao de chamada para acao com glow pulsante em primary.
+ * Projetado para ser o elemento de maior destaque primary na tela,
  * por isso o calculo de area e feito com cuidado.
  *
- * Demonstra: regra de 8% gold em elemento de destaque
+ * Demonstra: regra de 8% primary em elemento de destaque
  *
- * Calculo de area gold:
+ * Calculo de area primary:
  * - Botao: ~400x80px = 32.000px
  * - Glow (halo): ~440x120px com opacity 0.3 = contribuicao efetiva ~15.840px
  * - Total efetivo: ~47.840px de 2.073.600px totais = ~2.3%
- * - Somado com outros elementos gold na tela: deve ficar abaixo de 8%
+ * - Somado com outros elementos primary na tela: deve ficar abaixo de 8%
  *
  * @usage
  * ```tsx
@@ -442,8 +442,8 @@ export const DSCallToAction: React.FC<DSCallToActionProps> = ({
     extrapolateRight: "clamp",
   });
 
-  // REGRA 8% GOLD: glow pulsante com ciclo de 60 frames (~2s)
-  // A opacidade oscila entre 0.15 e 0.5 para manter a contribuicao gold controlada.
+  // REGRA 8% PRIMARY: glow pulsante com ciclo de 60 frames (~2s)
+  // A opacidade oscila entre 0.15 e 0.5 para manter a contribuicao primary controlada.
   // Em pico (0.5), o halo contribui com ~1.5% da tela.
   // No vale (0.15), apenas ~0.5%.
   const glowCycle = adjustedFrame % animation.verySlow;
@@ -502,12 +502,12 @@ export const DSCallToAction: React.FC<DSCallToActionProps> = ({
         }}
       >
         {/* Camada de Glow (atras do botao) */}
-        {/* REGRA 8% GOLD: glow pulsante tem opacity controlada para nao exceder contribuicao */}
+        {/* REGRA 8% PRIMARY: glow pulsante tem opacity controlada para nao exceder contribuicao */}
         <div
           style={{
             position: "absolute",
             inset: -spacing.sm,
-            background: colors.gradientGold,
+            background: colors.gradientPrimary,
             borderRadius: spacing.md + spacing.xs,
             opacity: glowOpacity,
             transform: `scale(${glowScale})`,
@@ -519,7 +519,7 @@ export const DSCallToAction: React.FC<DSCallToActionProps> = ({
         <div
           style={{
             position: "relative",
-            background: colors.gradientGold,
+            background: colors.gradientPrimary,
             borderRadius: spacing.md,
             paddingTop: spacing.md,
             paddingBottom: spacing.md,
@@ -707,13 +707,13 @@ export const DSPresets = {
  * ```
  *
  * ============================================================
- * NOTAS IMPORTANTES SOBRE A REGRA DE 8% GOLD:
+ * NOTAS IMPORTANTES SOBRE A REGRA DE 8% PRIMARY:
  * ============================================================
  *
  * Ao compor multiplos componentes em uma mesma cena, some a
- * contribuicao gold de cada um:
+ * contribuicao primary de cada um:
  *
- *   DSHeadline:   linha gold = ~0.04%
+ *   DSHeadline:   linha primary = ~0.04%
  *   DSStatCard:   borda + trend + linha = ~0.3% (por card)
  *   DSCallToAction: botao + glow = ~2.3% (pico)
  *
@@ -729,7 +729,7 @@ export const DSPresets = {
  * ============================================================
  *
  * [ ] ZERO valores hardcoded - tudo via tokens
- * [ ] Gold (colors.primary / gradientGold) abaixo de 8%
+ * [ ] Primary (colors.primary / gradientPrimary) abaixo de 8%
  * [ ] Fontes via typography.ui ou typography.body
  * [ ] Espacamento via spacing.* (grid de 8px)
  * [ ] Animacoes via animation.easing.* + animation.{fast,normal,slow}

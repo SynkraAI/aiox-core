@@ -7,16 +7,16 @@
  * Este arquivo serve como REFERENCIA para agentes do viral-squad.
  * NAO e codigo executavel - e material de consulta.
  *
- * FONTE DE VERDADE: academia-lendaria-ds/src/tokens/remotion.ts
+ * FONTE DE VERDADE: Configurada em data/brand.yaml do projeto Remotion
  * IMPORT NO REMOTION: import { colors, typography, spacing, animation } from '@/styles/tokens';
  *
- * REGRA SAGRADA: Gold (#C9B298) NUNCA excede 8% da tela
+ * REGRA SAGRADA: A cor PRIMARY nunca excede 8% da tela (regra 70-22-8)
  */
 
 // ============================================
 // COLORS - Paleta de cores
 // ============================================
-// REGRA: 70% background | 22% foreground | MAX 8% primary (gold)
+// REGRA: 70% background | 22% foreground | MAX 8% primary (accent)
 export const colors = {
   background: "#000000", // ~70% da tela - SEMPRE fundo principal
   foreground: "#FFFFFF", // ~22% da tela - textos, icones
@@ -28,8 +28,8 @@ export const colors = {
   error: "#EF4444", // Alertas, indicadores negativos
   warning: "#F59E0B", // Avisos, atencao
 
-  // Gradiente Gold - para elementos especiais
-  gradientGold: "linear-gradient(135deg, #C9B298 0%, #8B7355 100%)",
+  // Gradiente Primary - para elementos especiais (derivado da cor primary)
+  gradientPrimary: "linear-gradient(135deg, #C9B298 0%, #8B7355 100%)",
 } as const;
 
 // ============================================

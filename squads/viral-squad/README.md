@@ -243,13 +243,13 @@ CONSENSO: ✅ Hook 1 aprovado
 ```
 Background: #000000 (~70%)
 Foreground: #FFFFFF (~22%)
-Primary Gold: #C9B298 (MAX 8%) ⚠️
+Primary: #C9B298 (MAX 8%) ⚠️
 Muted: #A8A8A8
 ```
 
-### 8% Gold Rule (SACRED)
+### 8% Primary Rule (SACRED)
 
-**NUNCA exceder 8% de ouro na tela.**
+**NUNCA exceder 8% da cor primária na tela.**
 Usar APENAS para:
 
 - CTAs principais
@@ -276,7 +276,7 @@ Flaticon Regular Rounded
 
 - [ ] Hook retém >75% @3s
 - [ ] Visual para o scroll
-- [ ] 8% gold rule respeitado
+- [ ] 8% primary rule respeitado
 - [ ] Caption hook forte (<125 chars)
 - [ ] 3-5 hashtags relevantes
 - [ ] Thumbnail high-contrast
@@ -396,7 +396,7 @@ Flaticon Regular Rounded
 ### Do's ✅
 
 - Sempre testar múltiplos hooks
-- Seguir 8% gold rule (sagrado)
+- Seguir 8% primary rule (sagrado)
 - Otimizar para algoritmo 2025
 - Reply comments primeiros 30min
 - Usar dados para decisões
@@ -404,7 +404,7 @@ Flaticon Regular Rounded
 
 ### Don'ts ❌
 
-- Não exceder 8% de ouro
+- Não exceder 8% da cor primária
 - Não usar 30 hashtags (use 3-5)
 - Não ignorar retention @3s
 - Não postar sem caption hook

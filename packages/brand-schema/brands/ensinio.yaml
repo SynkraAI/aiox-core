@@ -1,0 +1,194 @@
+# Ensinio v1 — Dark indigo with editorial precision
+# Source: ensinio.com + brand guide (manual extraction)
+# Ideal for: EdTech, SaaS educacional, plataformas de cursos, conteúdo B2B
+# Theme: dark | Pure black base with indigo primary — high contrast, data-driven
+# Font: Outfit (display) + Inter (body) — modern editorial
+
+name: Ensinio
+version: 1
+theme: dark
+source: "ensinio.com + brand guide"
+
+typography:
+  family:
+    display: "Outfit"
+    body: "Inter"
+    mono: "JetBrains Mono"
+    fallback: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    cdn: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600&display=swap"
+  scale:
+    h1: { size: 56px, weight: 600, line_height: 1.02, letter_spacing: "-0.02em" }
+    h2: { size: 44px, weight: 400, line_height: 1.02, letter_spacing: "-0.01em" }
+    h3: { size: 28px, weight: 500, line_height: 1.3 }
+    h4: { size: 22px, weight: 500, line_height: 1.35 }
+    body: { size: 16px, weight: 400, line_height: 1.65 }
+    body_sm: { size: 14px, weight: 400, line_height: 1.6 }
+    caption: { size: 13px, weight: 400, line_height: 1.5 }
+    label: { size: 11px, weight: 600, line_height: 1.4, letter_spacing: "0.04em", text_transform: uppercase }
+
+colors:
+  primitives:
+    indigo:
+      50: "#EEEDFF"
+      100: "#D8D6FF"
+      200: "#B5B2FF"
+      300: "#8D89FF"
+      400: "#6560FF"
+      500: "#3B37FF"
+      600: "#2F2BCC"
+      700: "#232099"
+      800: "#181566"
+      900: "#0C0A33"
+      950: "#06051A"
+    neutral:
+      50: "#FAFAFA"
+      100: "#F5F5F5"
+      200: "#E5E5E5"
+      300: "#D4D4D4"
+      400: "#A0A0A0"
+      500: "#737373"
+      600: "#525252"
+      700: "#404040"
+      800: "#262626"
+      900: "#1A1A1A"
+      950: "#111111"
+  semantic:
+    background: "#000000"
+    surface: "#111111"
+    surface_elevated: "#1A1A1A"
+    border: "#262626"
+    border_hover: "#404040"
+    text: "#FFFFFF"
+    text_secondary: "rgba(255,255,255,0.50)"
+    text_muted: "rgba(255,255,255,0.35)"
+    primary: "#3B37FF"
+    primary_hover: "#6560FF"
+    accent: "#3b82f6"
+    accent_hover: "#60a5fa"
+    success: "#22c55e"
+    warning: "#f59e0b"
+    error: "#ef4444"
+    info: "#3b82f6"
+
+opacity_system:
+  primary: 1.0
+  highlight: 0.85
+  badge: 0.75
+  secondary: 0.50
+  tertiary: 0.375
+  ghost: 0.275
+
+spacing:
+  scale: [4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96]
+  section_padding: 80px
+  card_padding: 24px
+  button_padding_x: 32px
+  button_padding_y: 14px
+
+radii:
+  none: 0
+  sm: 4px
+  md: 8px
+  lg: 12px
+  xl: 16px
+  full: 9999px
+  default: 12px
+
+shadows:
+  none: "none"
+  xs: "0 1px 2px rgba(0,0,0,0.5)"
+  sm: "0 2px 6px rgba(0,0,0,0.4)"
+  md: "0 4px 16px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,55,255,0.05)"
+  lg: "0 8px 32px rgba(0,0,0,0.6), 0 0 32px rgba(59,55,255,0.08)"
+  xl: "0 16px 64px rgba(0,0,0,0.7), 0 0 48px rgba(59,55,255,0.1)"
+
+animation:
+  duration:
+    fast: 150ms
+    normal: 200ms
+    slow: 380ms
+  easing: "cubic-bezier(0.4, 0, 0.2, 1)"
+  hover_scale: 1.0
+
+components:
+  button:
+    primary:
+      bg: "#3B37FF"
+      text: "#FFFFFF"
+      radius: 999px
+      padding: "14px 32px"
+      font_weight: 600
+      font_size: 13px
+    secondary:
+      bg: "transparent"
+      text: "#FFFFFF"
+      border: "rgba(255,255,255,0.2)"
+      radius: 999px
+      padding: "14px 32px"
+      font_weight: 500
+  card:
+    bg: "#1A1A1A"
+    border: "#262626"
+    radius: 14px
+    padding: 24px
+  highlight_box:
+    brand:
+      bg: "rgba(59,55,255,0.08)"
+      border: "rgba(59,55,255,0.28)"
+    negative:
+      bg: "rgba(239,68,68,0.15)"
+      border: "rgba(239,68,68,0.40)"
+    positive:
+      bg: "rgba(34,197,94,0.07)"
+      border: "rgba(34,197,94,0.2)"
+  input:
+    bg: "#111111"
+    border: "#262626"
+    text: "#FFFFFF"
+    placeholder: "rgba(255,255,255,0.35)"
+    radius: 12px
+    padding: "12px 16px"
+
+carousel:
+  dimensions:
+    width: 1080
+    height: 1350
+  slides: "5-8"
+  safe_margin: 60px
+
+cover:
+  gradient_primary: "rgba(59,55,255,0.08)"
+  gradient_secondary: "rgba(0,0,0,0.03)"
+
+photography:
+  style: "cinematic, dramatic, high contrast, deep shadows, moody"
+  orientation: "portrait 4:5"
+  overlay_dark_image: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.32) 45%, rgba(0,0,0,0.60) 100%)"
+  overlay_light_image: "rgba(0,0,0,0.65)"
+  overlay_internal: "rgba(0,0,0,0.55)"
+  overlay_text_top: "linear-gradient(to bottom, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 32%, rgba(0,0,0,0.15) 55%, rgba(0,0,0,0.40) 100%)"
+
+logos:
+  main: "Assets/Logo_ensinio_whitemode.svg"
+
+voice:
+  tone: "direto, provocador, sem rodeios"
+  focus: "dor ou desejo do criador de cursos"
+  data_driven: true
+  restrictions:
+    - "Nunca travessão ( — ) ou hífen ( - ) no copy"
+    - "Nunca eyebrow label acima do headline"
+    - "Max 2 pesos tipográficos por slide de capa"
+    - "Frases curtas no headline, mais denso nos internos"
+
+anti_slop:
+  - "#3B37FF PONTUALMENTE — nunca em grandes áreas sobre fundo escuro"
+  - "Nunca usar brand primary como barra/linha decorativa"
+  - "Outfit 600 SOMENTE em números de impacto isolados — headlines são Outfit 400"
+  - "Outfit 700/800 PROIBIDO — pesado demais"
+  - "Line-height 1.02 em TODO headline Outfit — compacto e impactante"
+  - "Sempre <br> manual em headlines — nunca deixar browser quebrar"
+  - "Background #000000 puro, variações #0a0a0a/#0d0d0d entre slides para evitar monotonia"
+  - "Hierarquia via opacidade rgba, não via cores diferentes"
+  - "Max 2 elementos textuais no slide de capa com foto"
+  - "Número isolado sem contexto é ilegível — incorporar na frase"

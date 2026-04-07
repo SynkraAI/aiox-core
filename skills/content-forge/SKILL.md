@@ -15,8 +15,8 @@ Ativar quando o usuário pedir para:
 
 Content Forge é o **cérebro** do ecossistema de conteúdo. Ele:
 
-1. **Recebe** a demanda do usuário (texto livre)
-2. **Carrega** a marca ativa (`data/active-brand.yaml`)
+1. **Apresenta** as marcas disponíveis para o usuário escolher
+2. **Recebe** a demanda do usuário (texto livre)
 3. **Consulta** o capability map (`data/capability-map.yaml`)
 4. **Gera um plano** em plan mode com etapas numeradas, motivos e checkpoints
 5. **Executa** após aprovação, delegando para cada squad/skill correto
@@ -33,7 +33,67 @@ Ele NUNCA cria conteúdo diretamente — sempre delega para o squad/skill que fa
 
 ## Fluxo de Execução
 
-### Fase 1: Classificar Demanda
+### Fase 1: Escolher Marca (OBRIGATÓRIO — SEMPRE PRIMEIRO)
+
+**NUNCA** assumir uma marca padrão. SEMPRE apresentar as opções com preview visual.
+
+1. Listar todos os arquivos `.yaml` em `packages/brand-schema/brands/`
+2. Ler o cabeçalho de CADA brand YAML (primeiras ~10 linhas) para extrair: `name`, `theme`, fontes (`display` + `body`), e cor primária principal
+3. Ler `data/active-brand.yaml` para saber qual estava ativa por último (apenas para indicar com ★)
+4. Apresentar catálogo visual com AskUserQuestion, usando este formato:
+
+```
+🎨 Qual marca vamos usar nesta produção?
+
+┌─────────────────────────────────────────────────────────┐
+│  1. Notion Clean          ☀️ light                       │
+│     🔤 DM Serif Display + DM Sans                       │
+│     🎨 #37352F ██  #2EAADC ██  #FAF9F7 ██              │
+│     → SaaS, documentação, tools, corporate              │
+├─────────────────────────────────────────────────────────┤
+│  2. Emerald Noir          🌙 dark                       │
+│     🔤 Plus Jakarta Sans                                │
+│     🎨 #10B981 ██  #F59E0B ██  #0A0F1E ██              │
+│     → consulting, finance, premium, high-ticket         │
+├─────────────────────────────────────────────────────────┤
+│  3. Ensinio               ☀️ light                       │
+│     🔤 {display} + {body}                               │
+│     🎨 {primary} ██  {accent} ██  {bg} ██              │
+│     → {ideal_for do cabeçalho}                          │
+├─────────────────────────────────────────────────────────┤
+│  ... (todas as marcas)                                  │
+├─────────────────────────────────────────────────────────┤
+│  9. Vercel Noir        ★ última usada   🌙 dark         │
+│     🔤 Inter + Geist                                    │
+│     🎨 #000 ██  #0070F3 ██  #111 ██                    │
+│     → dev tools, SaaS, tech                             │
+└─────────────────────────────────────────────────────────┘
+
+👁️ Preview visual completo: packages/brand-schema/brand-catalog.html
+   (abrir no browser para ver mockups reais de cada tema)
+
+Digite o número ou nome da marca:
+```
+
+**Como montar o preview de cada brand:**
+- `name`: campo `name` do YAML
+- `theme`: campo `theme` → usar ☀️ para light, 🌙 para dark
+- `fontes`: `typography.family.display` + `typography.family.body` (se iguais, mostrar só uma)
+- `cores`: extrair 3 cores representativas:
+  - Cor primária (primeira cor `500` das primitives)
+  - Cor accent (segunda família de cores `500`, ou `accent` se existir)
+  - Cor de fundo (background do tema — `50` para light, `900/950` para dark)
+- `ideal_for`: extrair do comentário `# Ideal for:` no topo do YAML
+- `★ última usada`: marcar a que consta em `data/active-brand.yaml`
+
+5. Após escolha do usuário:
+   - Carregar brand completa via `packages/brand-schema/` → ter todos os tokens disponíveis
+   - Atualizar `data/active-brand.yaml` com a marca escolhida
+   - Confirmar: "Marca **{nome}** carregada ✓ — {theme}, {fonts}"
+
+**Regra:** O catálogo visual é a PRIMEIRA interação. Sem marca escolhida, sem plano.
+
+### Fase 2: Classificar Demanda
 
 Ler a mensagem do usuário e classificar:
 
@@ -55,15 +115,12 @@ Urgência: quick (produção direta) | quality (com debate/QA)
 - "marca", "brand", "identidade" → `brand`
 - "design system", "DS", "tokens" → `design-system`
 
-### Fase 2: Carregar Contexto
+### Fase 3: Carregar Contexto Complementar
 
-1. Ler `data/active-brand.yaml` → obter slug e path
-2. Carregar brand via `packages/brand-schema/` → ter todos os tokens disponíveis
-3. Se marca não configurada:
-   - Perguntar: "Qual marca usar? Disponíveis: {listar brands}"
-   - Ou: "Pode me dar uma cor hex e nome para criar uma marca rápida"
+1. Brand já carregada na Fase 1 — tokens disponíveis
+2. Se demanda requer contexto adicional (calendário existente, conteúdo fonte), carregar agora
 
-### Fase 3: Consultar Capability Map
+### Fase 4: Consultar Capability Map
 
 Para cada tipo de output necessário:
 
@@ -73,7 +130,7 @@ Para cada tipo de output necessário:
 4. Se urgência == quality: verificar `alternatives` com debate
 5. Coletar `why` para justificar cada escolha no plano
 
-### Fase 4: Montar Plano
+### Fase 5: Montar Plano
 
 Entrar em **plan mode** e gerar um plano com este formato:
 
@@ -102,7 +159,7 @@ Estimativa: {número de peças × tempo por peça}
 - Incluir checkpoints após: copy, render, e antes de publish
 - Justificar CADA escolha com o campo `why` do capability map
 
-### Fase 5: Executar (após aprovação)
+### Fase 6: Executar (após aprovação)
 
 Para cada etapa do plano aprovado:
 
@@ -139,8 +196,8 @@ Quando a demanda for ambígua, perguntar (máximo 3 perguntas):
 1. **Tipo de reel:** "Tipografia animada (viral-squad), talking head com avatar (ai-reels), ou animação de áudio (audio-reels)?"
 2. **Plataforma:** "Publicar só no Instagram ou multi-plataforma?"
 3. **Qualidade:** "Produção rápida ou com debate de qualidade (content-engine)?"
-4. **Marca:** "Brand ativo é {nome}. Quer mudar?"
 
+**Nota:** A marca já é escolhida na Fase 1 — NÃO perguntar sobre marca no Discovery Mode.
 NÃO perguntar coisas que o capability map já responde (qual squad é melhor).
 
 ## Publish Router

@@ -385,7 +385,7 @@ SAVE TRIGGERS (add to video):
 "📌 SAVE THIS VIDEO 📌
 Você vai querer rever quando precisar"
 
-Background: Gold accent (#C9B298)
+Background: Primary accent (colors.primary)
 Animation: Gentle pulse
 Duration: 5s
 

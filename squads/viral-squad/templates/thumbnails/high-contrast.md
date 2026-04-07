@@ -13,7 +13,7 @@
 BACKGROUND: Dark (#000000 or deep blue)
 SUBJECT: Bright/Saturated
 TEXT: White or Yellow
-ACCENT: Gold sparingly (#C9B298)
+ACCENT: Primary sparingly (#C9B298)
 ```
 
 ### Design System configurado Compliance
@@ -21,7 +21,7 @@ ACCENT: Gold sparingly (#C9B298)
 ```
 Background: 70% dark
 Foreground: 22% light
-Gold: MAX 8%
+Primary: MAX 8%
 ```
 
 ## Layout Structure
@@ -73,7 +73,7 @@ LIGHTING: High contrast, dramatic
 ### Number Style
 
 ```
-- Big number center (gold)
+- Big number center (primary accent)
 - Supporting text white
 - Minimal face or none
 - Pure black background
@@ -84,6 +84,6 @@ LIGHTING: High contrast, dramatic
 - [ ] Readable at 100px
 - [ ] Clear focal point
 - [ ] High contrast colors
-- [ ] 8% gold rule (if using gold)
+- [ ] 8% primary rule (if using primary accent)
 - [ ] Emotion visible (if face)
 - [ ] Brand consistent
