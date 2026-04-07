@@ -53,10 +53,20 @@ The user has been here before. Show a quick status and the next mission. This sh
 2. **Auto-Reconciliation (MANDATORY — runs EVERY resumption, silently)**
    Reconcile Quest state with Forge state before showing anything to the user.
    
+   **EXECUTE THIS:**
+   ```
+   Bash("node ~/aios-core/skills/quest/engine/forge-reconciler.cjs \"$(pwd)\"")
+   ```
+   
+   - If output contains "Synced N items" → re-read `.aios/quest-log.yaml` (it was updated)
+   - If output is "No items to reconcile." or "No quest-log.yaml found." → proceed normally
+   - NEVER skip this step. NEVER ask for confirmation. It runs silently and fast.
+   
    **Reference:** The canonical phase-to-items mapping is in `engine/forge-bridge.md §11`.
    **Runtime:** `engine/forge-reconciler.cjs` implements this algorithm as executable code.
-   Can be invoked standalone: `node engine/forge-reconciler.cjs <project-path> [--dry-run]`
+   Can also be invoked standalone: `node engine/forge-reconciler.cjs <project-path> [--dry-run]`
    
+   **Algorithm (for reference — the runtime above implements this):**
    ```
    1. Glob ".aios/forge-runs/*/state.json"
       If no files found → skip reconciliation entirely.
