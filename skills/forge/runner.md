@@ -24,7 +24,50 @@ INIT -> PHASE_0 -> PHASE_1 -> PHASE_2 -> PHASE_3 -> PHASE_4 -> PHASE_5 -> COMPLE
 
 ---
 
+## 1.1 State Validation (runs once before Phase 1)
+
+Antes de entrar na primeira fase de execução (Phase 1 para FULL_APP, Phase 3 para SINGLE_FEATURE/BUG_FIX), validar que o state.json tem os campos mínimos obrigatórios:
+
+**Campos obrigatórios (HALT se ausente):**
+- `run_id` — identificador do run
+- `mode` — modo de execução (FULL_APP, SINGLE_FEATURE, etc.)
+- `status` — deve ser "running"
+- `discovery` — respostas do Phase 0
+- `tech_decisions` — stack técnica (deve incluir `architecture` e `repo_structure`)
+
+**Validação de `tech_decisions.repo_structure`:**
+- Se `repo_structure` ausente mas `architecture` presente: derivar automaticamente usando regra do `tech-decisions-guide.md` (`separated_api` → `monorepo_workspaces`, `monorepo` → `monorepo_workspaces`, `fullstack_together` → `single_package`). Salvar no state.json e prosseguir (backwards compatible com runs antigos).
+- Se ambos ausentes: HALT normalmente (tech_decisions incompleto).
+
+**Campos obrigatórios se `mode` = FULL_APP:**
+- `mvp` — escopo MVP definido
+- `core_atom` — risco técnico avaliado
+
+**Campos opcionais com uso ativo:**
+- `source_dry_run` — se presente, significa que este run veio de um DRY_RUN convertido. Nesse caso:
+  1. Mostrar: `"🔄 Run convertido de dry-run {source_dry_run.run_id}"`
+  2. Na Phase 4 (Integration), comparar `source_dry_run.simulation_estimate.stories` com o total real de stories. Se divergência > 50%, registrar como learning para o forge-memory (calibra estimativas futuras).
+- `discovery.market_research` — se presente com `executed: true`:
+  1. Verificar que `research_folder` existe no filesystem
+  2. Se pasta não existe: log WARNING `"Pasta de pesquisa não encontrada: {path}"` mas NÃO bloquear (pesquisa pode ter sido movida/renomeada)
+  3. Carregar classificação de soluções (solutions, table_stakes, gaps, recommendation) para injeção no contexto do Phase 1 (@pm)
+
+Se algum campo obrigatório estiver ausente: **HALT** com mensagem `"State incompleto: campo '{field}' ausente. Run não pode prosseguir."` — não tentar adivinhar ou preencher com defaults.
+
+---
+
 ## 2. Execution Protocol (for EACH phase)
+
+### Step 0: State Validation Gate (ONCE — before first execution phase)
+
+**Quando executar:** Exatamente UMA vez, antes de entrar na primeira fase de execução real:
+- FULL_APP → antes de Phase 1
+- SINGLE_FEATURE / BUG_FIX → antes de Phase 3
+- RESUME → antes de retomar a fase interrompida
+
+**O que fazer:** Executar a validação descrita em Section 1.1. Se HALT: não prosseguir. Se PASS: marcar `state_validated: true` em state.json e nunca re-executar.
+
+**Referência cruzada:** Esta é a ÚNICA chamada de Section 1.1. Se Section 1.1 não for executada aqui, ela não será executada em lugar nenhum.
 
 ### Step 1: Enter Phase
 1. Read the phase file from `{FORGE_HOME}/phases/phase-{N}-{name}.md`
@@ -62,6 +105,20 @@ The Forge Plugin System loads and fires plugins automatically. Plugins are YAML 
 5. **Build registry:** Create a map from hook name → ordered list of subscribed plugins
 
 If `{FORGE_HOME}/plugins/` does not exist or is empty, skip the entire plugin system and use legacy behavior. This ensures backwards compatibility.
+
+### Boot Log (OBRIGATÓRIO — visível ao usuário)
+
+Após o boot, mostrar um resumo compacto dos plugins carregados:
+
+```
+  ⚡ Plugins: {N} ativos — {lista de nomes separados por vírgula}
+```
+
+Exemplo: `⚡ Plugins: 5 ativos — lifecycle, ecosystem-scanner, forge-memory, forge-feedback, quest-sync`
+
+Se nenhum plugin carregou: `⚡ Plugins: modo legado (nenhum plugin encontrado)`
+
+Isso dá visibilidade ao usuário de que o plugin system está funcionando e quais plugins estão influenciando o run.
 
 ### Firing Protocol (runs at each hook point)
 
@@ -285,17 +342,41 @@ Hard vetos NUNCA são ultrapassados automaticamente. Após 3 retries, CHECKPOINT
 
 ## 6. Resume Protocol
 
-When resuming an interrupted run:
+### 6.0 Run Status Model
+
+O campo `status` no state.json aceita estes valores:
+
+| Status | Significado | Resumable? | Aparece em listagens? |
+|--------|------------|------------|----------------------|
+| `running` | Run em execução ativa | SIM | SIM (run ativo) |
+| `completed` | Run finalizado com sucesso | NÃO | NÃO (histórico) |
+| `converted` | DRY_RUN que foi convertido em run real | NÃO | NÃO (referência via `source_dry_run` no run real) |
+| `saved` | DRY_RUN cujo relatório foi exportado | NÃO | SIM (como "simulação salva") |
+| `cancelled` | DRY_RUN cancelado pelo usuário | NÃO | NÃO |
+
+**Regra para listagens e filtros:**
+- "Runs ativos/interrompidos" = `status == "running"` (APENAS)
+- "Runs completos" = `status == "completed"`
+- Ignore `converted` e `cancelled` em qualquer listagem ao usuário
+- `saved` aparece em listagens como referência, mas NÃO é resumable
+
+**Regra para `status != "completed"` checks:**
+- Em `phase-0-discovery.md` Step 3 e `SKILL.md` §3 Step 4: ao listar runs interrompidos, filtrar APENAS `status == "running"`. Não mostrar `converted`/`saved`/`cancelled` como "interrompidos".
+
+### 6.1 Resume Execution
+
+When resuming an interrupted run (`status == "running"`):
 
 1. Read `.aios/forge-runs/{run_id}/state.json` **with validation:**
    - Parse JSON inside try/catch
    - If JSON is invalid/corrupted: show "State do run `{run_id}` está corrompido. Quer começar um novo run ou tentar recuperar?"
    - If recover: try to read last valid phase from build-log/ files
    - If start new: archive corrupted folder as `{run_id}-corrupted/` and proceed fresh
-2. Show: "Retomando run `{run_id}` — parado na Phase {N}"
-3. Show progress indicator with current state
-4. Jump to `current_phase` and continue from where it stopped
-5. If Phase 3: check `stories_completed` to know which story to continue from
+2. **Run State Validation Gate** (Section 2, Step 0) — valida campos obrigatórios antes de retomar
+3. Show: "Retomando run `{run_id}` — parado na Phase {N}"
+4. Show progress indicator with current state
+5. Jump to `current_phase` and continue from where it stopped
+6. If Phase 3: check `stories_completed` to know which story to continue from
 
 ### State Write Safety
 
@@ -314,7 +395,7 @@ After all phases complete:
 2. **Fire hook: `after:run`** — plugins perform final validations, sync status, and cleanup
 3. Update state.json: `status = "completed"`, `completed_at = now` (atomic write)
 4. **Remove lock file:** Delete `.aios/forge-runs/.lock`
-3. **Move stories:** If stories exist in `docs/stories/active/`, move completed ones to `docs/stories/completed/`
+3. **Move stories:** If stories exist in `docs/stories/active/`, move completed ones to `docs/stories/done/`
 4. Show completion banner (personality.md) with:
    - Run ID
    - Number of stories implemented (including SKIPPED count if any)

@@ -25,8 +25,9 @@ hooks:
         2. Filter entries where project matches current cwd (or project.path in state.json)
         3. Sort by timestamp descending (most recent first)
         4. Select top N entries (config.inject_top_n, default: 5)
-        5. Group by category: tech_decision, error_pattern, agent_performance, quality_gate
+        5. Group by category: tech_decision, error_pattern, agent_performance, quality_gate, estimation_accuracy
         6. Inject summary into runner context as "Forge Memory Briefing"
+        7. If estimation_accuracy entries exist: make them available to dry-run.md SIM-2 for calibrating story estimates
       If file does not exist: skip silently (first run, no learnings yet).
 
       NEVER block run start if learnings file is missing or corrupted.
@@ -60,6 +61,13 @@ hooks:
          - Which gates passed/failed/skipped
          - Severity of issues found
          → category: "quality_gate"
+
+      5. Estimation accuracy (if source_dry_run exists in state.json):
+         - Compare source_dry_run.simulation_estimate.stories with actual total stories completed
+         - Calculate accuracy_ratio = actual / estimated (1.0 = perfect)
+         - Content: "Dry-run estimated {N} stories, actual was {M} (ratio: {R})"
+         - Tags: ["estimation", "dry-run"]
+         → category: "estimation_accuracy"
 
       Append entries to .aios/memory/forge/learnings.yaml.
       Create directory .aios/memory/forge/ if it does not exist.

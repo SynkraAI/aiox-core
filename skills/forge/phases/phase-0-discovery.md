@@ -47,10 +47,11 @@ Save results to working memory. This context will be:
 
 Glob `.aios/forge-runs/*/state.json`. For each file:
 - Read and check `status` field
-- If any has `status != "completed"`:
+- Filtrar APENAS `status == "running"` — ignorar `completed`, `converted`, `saved`, `cancelled` (ver runner.md Section 6.0 para modelo completo de status)
+- If any has `status == "running"`:
   - Show: "Encontrei um run interrompido: `{run_id}` (Phase {N}). Continuar ou começar novo?"
   - If resume: load state and jump to last phase
-  - If new: proceed with Step 3
+  - If new: proceed with Step 4
 
 ### Step 4: Onboarding + Socratic Gate (FUNDIDOS — uma única interação)
 
@@ -123,11 +124,135 @@ Antes de montar o plano, quer que eu pesquise o que já existe no mercado?
 - Stack/tech choices (repos GitHub, stars, última atividade)
 
 O output do `/tech-search` é salvo em `docs/research/` e serve como base para o PRD.
+
+**Pós-processamento — Build vs Buy vs Integrate (OBRIGATÓRIO após tech-search):**
+
+Após o `/tech-search` completar, NÃO prossiga direto. Execute esta análise:
+
+1. **Ler os resultados:**
+   - `docs/research/{folder}/README.md` — TL;DR + metadata (coverage_score, sources)
+   - `docs/research/{folder}/02-research-report.md` — soluções encontradas com features
+   - `docs/research/{folder}/03-recommendations.md` — ranking de alternativas
+
+2. **Classificar cada solução em 3 categorias:**
+   - **🏗️ Usar como base** — projeto open-source maduro (>1k stars, ativo nos últimos 6 meses) que cobre >60% do problema. Candidato a fork, self-host ou customização. Muda completamente a abordagem: em vez de construir do zero, customiza o existente.
+   - **🔌 Integrar como componente** — lib, SDK ou API que resolve uma parte específica (ex: Stripe pra pagamento, Resend pra email, Cal.com embed pra agendamento). Não é a base do projeto, mas reduz escopo.
+   - **📎 Referência apenas** — inspiração de UX, features ou modelo de negócio. Não dá pra usar código/serviço diretamente.
+
+3. **Identificar table stakes e gaps:**
+   - **Table stakes:** features que TODAS (ou quase todas) as soluções têm. É o baseline — se o projeto não tiver, está abaixo do mercado.
+   - **Gaps:** o que nenhuma solução faz bem. Oportunidade de diferenciação — é aqui que o projeto pode se destacar.
+
+4. **Salvar em state.json** (campo `discovery.market_research`):
+
+```json
+{
+  "discovery": {
+    "market_research": {
+      "executed": true,
+      "option_chosen": "pesquisar",
+      "research_folder": "docs/research/{folder}/",
+      "solutions": [
+        {
+          "name": "Cal.com",
+          "category": "usar_como_base",
+          "coverage_pct": 75,
+          "license": "AGPL-3.0",
+          "stars": 40000,
+          "reason": "Open-source, cobre agendamento + calendário + integrações"
+        },
+        {
+          "name": "Stripe",
+          "category": "integrar_componente",
+          "coverage_pct": null,
+          "reason": "API de pagamentos — resolve billing sem construir do zero"
+        },
+        {
+          "name": "Calendly",
+          "category": "referencia",
+          "coverage_pct": null,
+          "reason": "UX de booking flow como inspiração"
+        }
+      ],
+      "table_stakes": ["autenticação", "agendamento", "notificações por email"],
+      "gaps": [
+        { "gap": "IA para sugestão de horários", "opportunity": "high" },
+        { "gap": "Integração com convênios brasileiros", "opportunity": "very_high" }
+      ],
+      "tech_patterns": { "frontend": "React", "backend": "Node.js", "db": "PostgreSQL" },
+      "recommendation": null
+    }
+  }
+}
+```
+
+> **Nota:** `recommendation` começa `null` e é preenchido no passo 6 abaixo.
+
+5. **Apresentar resumo ao usuário:**
+
+```
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📊 Análise de Mercado — Build vs Buy vs Integrate
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  🏗️ USAR COMO BASE (cobre >60%):
+    {nome} — {coverage}% do problema (~{stars} ⭐, {license})
+
+  🔌 INTEGRAR COMO COMPONENTE:
+    {nome} — {o que resolve}
+    {nome} — {o que resolve}
+
+  📎 REFERÊNCIA:
+    {nome} — {o que inspira}
+
+  ━━ Table Stakes (todos fazem) ━━
+  {lista de features obrigatórias}
+
+  ━━ Oportunidades de Diferenciação ━━
+  {gap} (oportunidade: {level})
+
+  ━━ Stack mais comum no mercado ━━
+  Frontend: {tech} | Backend: {tech} | DB: {tech}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+6. **Se houver solução classificada como "usar como base":** Forge DEVE perguntar:
+
+```
+Encontrei {nome} que cobre {X}% do que você precisa. É open-source ({license}), tem {stars} stars e está ativo.
+
+> 1. **Usar como base**
+>    Fork/self-host e customizar. A stack do projeto ({tech_patterns}) vira a nossa stack.
+> 2. **Só como referência**
+>    Prefiro construir do zero, mas vou me inspirar no que ele faz bem
+> 3. Digitar outra coisa.
+```
+
+Salvar a resposta em `market_research.recommendation` E `market_research.selected_base`:
+- Opção 1 → `recommendation: "build_on_existing"` + `selected_base: { name, category, coverage_pct, license, stars, reason, stack }` (copiar da solução escolhida em `solutions[]` e adicionar campo `stack` com as tecnologias do projeto base)
+- Opção 2 → `recommendation: "build_from_scratch"`, `selected_base: null` (referência anotada)
+- Opção 3 (digitar outra coisa) → interpretar a resposta do usuário. Se faz sentido como variação de 1 ou 2, mapear. Se ambíguo, perguntar: "Entendi {interpretação}. É isso?" — NUNCA deixar `recommendation` como `null`.
+
+**Se houver MÚLTIPLAS soluções "usar como base":** apresentar todas como opções numeradas para o usuário escolher UMA. Só a escolhida vai para `selected_base`.
+
+**Se NÃO houver solução "usar como base":** definir automaticamente:
+- Se há soluções "integrar componente" → `recommendation: "integrate_components"`, `selected_base: null`
+- Se só referências → `recommendation: "build_from_scratch"`, `selected_base: null`
+
+**Impacto na Pergunta 3 (stack) — OVERRIDE do fluxo padrão:**
+
+> **IMPORTANTE:** As regras abaixo têm PRECEDÊNCIA sobre a lógica padrão da Pergunta 3.
+> Quando `recommendation == "build_on_existing"`, a Pergunta 3 NÃO deve ler `tech-decisions-guide.md` nem executar a "Lógica de Decisão Automática". O fluxo abaixo substitui completamente a Pergunta 3 nesse caso.
+
+- Se `recommendation == "build_on_existing"`: a stack já está definida pela solução em `selected_base`. Forge apresenta: "A stack do {selected_base.name} é {selected_base.stack}. Quer manter ou mudar algo?" — Se o usuário aceitar, registrar em `tech_decisions` e pular para Pergunta 4. Se quiser mudar, abrir APENAS a decisão específica que ele quer alterar.
+- Se `recommendation == "integrate_components"`: Forge executa lógica normal da Pergunta 3 (`tech-decisions-guide.md`), mas já sabe quais integrações precisa. Adiciona dependências identificadas na lista de `tech_decisions`.
+- Se `recommendation == "build_from_scratch"`: fluxo normal da Pergunta 3, sem mudanças.
+
 Apresentar resumo ao usuário e DEPOIS prosseguir para Pergunta 2.
 
-**Se opção 2 escolhida:** Perguntar quais referências o usuário já conhece, anotar, e prosseguir.
+**Se opção 2 escolhida:** Perguntar quais referências o usuário já conhece, anotar, e prosseguir. Salvar em state.json: `discovery.market_research.executed = false`, `option_chosen = "conhecimento"`, com as referências do usuário em `solutions` (categoria `"referencia"`).
 
-**Se opção 3 escolhida:** Pular direto para Pergunta 2.
+**Se opção 3 escolhida:** Pular direto para Pergunta 2. Salvar em state.json: `discovery.market_research.executed = false`, `option_chosen = "pular"`.
 
 ---
 
@@ -147,6 +272,10 @@ Quem vai usar esse app e qual o principal problema que resolve?
 
 **FULL_APP mode — Pergunta 3 (stack — Smart Defaults):**
 
+> **GUARD — Build on Existing:** Se `market_research.recommendation == "build_on_existing"`, esta pergunta inteira é SUBSTITUÍDA pelo fluxo descrito na seção "Impacto na Pergunta 3" acima (pós-processamento da Pergunta 1). A stack vem da solução em `selected_base`. NÃO ler `tech-decisions-guide.md`, NÃO executar lógica de decisão automática, NÃO despachar forge-advisor. Apenas confirmar stack com o usuário e registrar em `tech_decisions`. Se o guard ativar, pular direto para Pergunta 4 após confirmação.
+
+**Se o guard NÃO ativou** (recommendation é `"integrate_components"`, `"build_from_scratch"`, ou market research não foi executado):
+
 **OBRIGATÓRIO:** Ler `{FORGE_HOME}/references/tech-decisions-guide.md` antes de apresentar.
 
 > **Plugin-Enhanced:** Quando o plugin `forge-advisor` (priority 8) está ativo, ele injeta
@@ -160,12 +289,14 @@ O usuário NÃO precisa responder 6 perguntas técnicas — ele só valida ou mu
 
 **Execução:**
 1. Analisar a descrição do projeto + respostas das Perguntas 1 e 2
-2. **Se forge-advisor plugin ativo:** usar recomendações do advisor (baseadas em learnings + dados de mercado)
-3. **Se advisor NÃO ativo (fallback):** Usar a "Lógica de Decisão Automática" do `tech-decisions-guide.md`
-4. Apresentar no formato do Passo 2 do guia (tabela com analogias e motivos)
-5. Se o usuário quer entender mais: usar a seção "Alternativas por Decisão" do guia (se advisor ativo, WebSearch valida)
-6. Se o usuário quer mudar: mostrar alternativas SÓ daquela decisão específica
-7. Registrar TODAS as decisões no `state.json` campo `tech_decisions`
+2. **Se `recommendation == "integrate_components"`:** incluir as integrações já identificadas (Stripe, Resend, etc.) como dependências pré-definidas na recomendação de stack
+3. **Se forge-advisor plugin ativo:** usar recomendações do advisor (baseadas em learnings + dados de mercado)
+4. **Se advisor NÃO ativo (fallback):** Usar a "Lógica de Decisão Automática" do `tech-decisions-guide.md`
+5. Apresentar no formato do Passo 2 do guia (tabela com analogias e motivos)
+6. Se o usuário quer entender mais: usar a seção "Alternativas por Decisão" do guia (se advisor ativo, WebSearch valida)
+7. Se o usuário quer mudar: mostrar alternativas SÓ daquela decisão específica
+8. Registrar TODAS as decisões no `state.json` campo `tech_decisions`
+9. **Derivar `repo_structure` automaticamente** a partir de `architecture` (ver `tech-decisions-guide.md` tabela de derivação). Salvar no `state.json → tech_decisions.repo_structure`. Se o usuário fizer override explícito, respeitar.
 
 **Regras:**
 - Se o usuário JÁ mencionou stack no comando (ex: "quero Postgres"), respeitar e incorporar na recomendação
@@ -295,7 +426,160 @@ Máximo 1 follow-up. Depois, prossiga com o melhor entendimento.
 Respeite. Pule perguntas, use o que tem, e prossiga.
 Registre no state.json: `discovery_mode: "minimal"`
 
-### Step 5: Ecosystem Scan (MANDATORY — Plugin-Driven)
+### Step 5: AIOS Setup (FULL_APP + SINGLE_FEATURE only)
+
+Detecta se o projeto tem estrutura AIOS e oferece setup. Pense nisso como a "matrícula" do projeto no ecossistema — sem ela, o projeto existe mas ninguém sabe dele.
+
+**Check:**
+1. Does `{PROJECT_DIR}/.aios/INDEX.md` exist?
+2. If YES → skip this step (project already registered)
+3. If NO → present options below
+
+**Present using `AskUserQuestion`:**
+
+```
+Esse projeto não tem estrutura AIOS. Como quer configurar?
+
+> 1. **Setup completo**
+>    .aios/ + docs/stories/ + .claude/CLAUDE.md + memory. Pra projetos que você vai manter e evoluir.
+> 2. **Setup mínimo**
+>    Só .claude/CLAUDE.md. Pra projetos rápidos — o Forge cria o mínimo necessário.
+> 3. **Sem setup**
+>    Eu cuido disso depois. Forge roda sem criar estrutura no projeto.
+> 4. Digitar outra coisa.
+```
+
+**Se opção 1 (completo):**
+
+```
+1. Create {PROJECT_DIR}/.aios/INDEX.md with:
+   - Project name (from state.json or user input)
+   - Status: Active
+   - Created: {today}
+   - Stack: {from tech_decisions, if available}
+
+2. Create {PROJECT_DIR}/.aios/memory/ directory
+3. Create {PROJECT_DIR}/.aios/memory/feedback/ directory
+
+4. Create memory files (same templates as /new-project Passo 2.6):
+   - `.aios/memory/project-context.md` — pre-fill with description, stack from tech_decisions
+   - `.aios/memory/agents-used.md` — empty template for tracking
+   - `.aios/memory/squads-config.md` — empty template for tracking
+
+5. Create {PROJECT_DIR}/docs/stories/active/ directory
+6. Create {PROJECT_DIR}/docs/stories/done/ directory
+
+7. The .claude/CLAUDE.md will be generated by forge-scaffold plugin (before:phase:3)
+   The plugin reads `{AIOS_HOME}/tools/templates/project-configs/base/.claude/CLAUDE.md` as base template.
+
+8. Update {AIOS_HOME}/docs/projects/ACTIVE.md:
+   - Add row: | {project_name} | Active | {path} | [INDEX]({path}/.aios/INDEX.md) |
+```
+
+**Se opção 2 (mínimo):**
+
+```
+1. The .claude/CLAUDE.md will be generated by forge-scaffold plugin (before:phase:3)
+2. Forge creates .aios/forge-runs/ automatically when the run starts (no extra setup)
+```
+
+**Se opção 3 (sem setup):**
+
+```
+1. Proceed without creating anything
+2. Forge creates .aios/forge-runs/ automatically when the run starts
+```
+
+**Save to state.json:**
+
+```json
+{
+  "aios_setup": {
+    "mode": "full|minimal|none",
+    "index_created": true|false,
+    "active_md_updated": true|false
+  }
+}
+```
+
+**Rules:**
+- In QUICK mode, skip this step entirely (speed over ceremony)
+- In BUG_FIX mode, skip this step (project already exists)
+- If user said "só faz" in Step 4, default to option 2 (mínimo) without asking
+- NEVER block the pipeline on this step — if anything fails, log and continue
+
+### Step 5.5: Quest Gamification Toggle (ALL modes except QUICK)
+
+Oferece ao usuário a opção de ativar o Quest Engine para gamificar o run. Pense nisso como escolher se quer jogar o modo campanha ou o modo livre — o resultado final é o mesmo, mas a experiência muda.
+
+**Present using `AskUserQuestion`:**
+
+```
+Quer gamificar esse run com o Quest?
+
+> 1. **Sim, com Quest!**
+>    XP por story completa, barra de progresso, achievements. Torna o build mais visual e divertido.
+> 2. **Não, só Forge**
+>    Pipeline direto, sem gamificação. Puro e funcional.
+> 3. Digitar outra coisa.
+```
+
+**Se opção 1 (Quest ativado):**
+
+```
+1. Set state.json:
+   "quest_enabled": true,
+   "quest_bootstrap": {
+     "hero_name": "{user_name from Step 4}",
+     "project_name": "{project_name}",
+     "workflow": "{mode}",
+     "requested_at": "{ISO 8601}"
+   }
+
+2. The quest-sync plugin will detect quest_enabled and start reporting
+   progress events to state.json (plugins.quest_sync.*).
+
+3. Quest's forge-bridge is responsible for reading quest_bootstrap from
+   state.json and creating quest-log.yaml. Forge NEVER writes quest-log.yaml.
+   See: skills/quest/engine/forge-bridge.md
+
+4. Show: "Quest ativado! O Quest vai inicializar automaticamente quando o build começar."
+```
+
+**OWNERSHIP BOUNDARY (NON-NEGOTIABLE):**
+- Forge writes: `state.json` → `quest_enabled`, `quest_bootstrap`, `plugins.quest_sync.*`
+- Quest writes: `quest-log.yaml` → hero, pack, items, XP
+- Forge NEVER creates or writes to `quest-log.yaml`
+- Quest reads `state.json` to detect `quest_enabled` and bootstrap data
+
+**Se opção 2 (sem Quest):**
+
+```
+1. Set state.json:
+   "quest_enabled": false
+
+2. quest-sync plugin stays silent (no overhead)
+3. No quest-log.yaml created
+```
+
+**Save to state.json:**
+
+```json
+{
+  "quest_enabled": true|false,
+  "quest_bootstrap": { ... }  // only if quest_enabled == true
+}
+```
+
+**Rules:**
+- In QUICK mode, skip this step entirely (quest_enabled = false by default)
+- If user said "só faz" in Step 4, skip (quest_enabled = false)
+- Quest adds ZERO overhead to execution — it only adds visual feedback and XP tracking
+- Quest NEVER blocks the pipeline — if Quest bootstrap fails, log and continue as Forge-only
+- The quest-sync plugin checks `quest_enabled` OR `quest_source` to decide whether to report to state.json
+- Forge NEVER creates quest-log.yaml — only Quest does (via forge-bridge bootstrap)
+
+### Step 6: Ecosystem Scan (MANDATORY — Plugin-Driven)
 
 > **PLUGIN-DRIVEN:** This step is executed automatically by the `ecosystem-scanner` plugin (priority 10).
 > The plugin fires on `after:phase:0` and reads `{FORGE_HOME}/ecosystem-scanner.md`.
@@ -312,7 +596,7 @@ Reference — Scan protocol (executed by plugin when active):
 3. Build context-pack.json
 4. Show scan results to user
 
-#### Step 5b: Deep Scan Offer
+#### Step 6b: Deep Scan Offer
 
 After showing the initial scan results, ALWAYS offer a deeper ecosystem sweep:
 
@@ -353,7 +637,7 @@ Execute a FULL ecosystem sweep (slower but comprehensive):
 
 **Why this matters:** The user may know about squads or skills that the routing matrix doesn't match automatically. A new squad created yesterday won't be in the static routing matrix. The deep scan catches everything.
 
-### Step 6: Project Detection (FULL_APP only) (FULL_APP only)
+### Step 7: Project Detection (FULL_APP only)
 
 For full app mode, also run project detection:
 1. Read `skills/app-builder/project-detection.md`
@@ -361,7 +645,7 @@ For full app mode, also run project detection:
 3. Read `skills/app-builder/tech-stack.md`
 4. Suggest stack + template
 
-### Step 7: Execution Plan + CHECKPOINT
+### Step 8: Execution Plan + CHECKPOINT
 
 **This is the most important step.** Forge MUST present a complete execution plan showing WHAT will be done, by WHOM, and in WHAT order — BEFORE executing anything.
 
@@ -422,11 +706,29 @@ Show the plan:
 - The plan MUST list every phase and every agent/squad involved
 - The plan MUST show ecosystem resources (minds, squads, skills) that will enrich the context
 - If the user says "ajustar algo", modify the plan and re-present
-- Only proceed to Step 8 after user approves (option 1)
+- Only proceed to Step 9 after user approves (option 1)
 
 Wait for user response before proceeding.
 
-### Step 8: Initialize Run
+### Step 9: Initialize Run
+
+**Bifurcação por mode — seguir EXATAMENTE um dos dois caminhos:**
+
+#### Caminho A: DRY_RUN mode
+
+DRY_RUN é simulação read-only. Cria o mínimo para manter estado da simulação, mas NUNCA bloqueia outros runs.
+
+1. Generate run_id: `forge-{slug}-{YYYYMMDD-HHmm}`
+2. Create run folder: `.aios/forge-runs/{run_id}/`
+3. Save state.json com `mode: "DRY_RUN"` (atomic write)
+4. Save context-pack.json do ecosystem scan
+5. **NÃO checar `.lock`** — irrelevante para simulação
+6. **NÃO criar `.lock`** — simulação não bloqueia nada
+7. Prosseguir para o workflow `dry-run.md` (SIM-2+)
+
+**Se o usuário escolher "Executar de verdade" (SIM-4 opção 1):** o workflow `dry-run.md` é responsável por criar um NOVO run via Caminho B abaixo, com novo run_id e novo timestamp. O dry-run original fica como registro da simulação.
+
+#### Caminho B: Todos os outros modes (FULL_APP, SINGLE_FEATURE, BUG_FIX, etc.)
 
 1. **Check for concurrent runs (LOCK):**
    - Check if `.aios/forge-runs/.lock` exists
@@ -438,7 +740,7 @@ Wait for user response before proceeding.
 2. Generate run_id: `forge-{slug}-{YYYYMMDD-HHmm}`
 3. **Create lock file:** Write run_id to `.aios/forge-runs/.lock`
 4. Create run folder: `.aios/forge-runs/{run_id}/`
-5. Save state.json with initial state (using atomic write: .tmp → rename)
+5. Save state.json with initial state (atomic write)
 6. Save context-pack.json from ecosystem scan
 
 **Lock cleanup:** The lock file is removed in runner.md Completion Protocol (Step 7).

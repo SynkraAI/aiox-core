@@ -68,9 +68,9 @@ Save to `.aios/forge-runs/{run_id}/context-pack.json`:
   "detected_domains": ["frontend", "database", "mobile"],
   "minds": [
     {
-      "slug": "alex-hormozi",
+      "slug": "hormozi",
       "relevance": "growth strategy for social platform",
-      "path": "squads/mind-cloning/minds/alex-hormozi/",
+      "path": "squads/mind-cloning/minds/hormozi/",
       "inject_in_phases": [1],
       "what_to_extract": "Value equation, growth levers"
     }

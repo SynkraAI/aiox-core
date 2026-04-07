@@ -12,6 +12,10 @@ Aqui é onde o código nasce. Pense nessa fase como a linha de montagem: cada st
 
 ## Execution Steps
 
+### Step 0: Enter Phase (MANDATORY)
+
+Execute runner.md Section 2, Step 1 ("Enter Phase") para N=3 antes de prosseguir.
+
 ### Step 1: Core Atom Proof of Life (FIRST — before any other story)
 
 **Check state.json for `core_atom` field:**

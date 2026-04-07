@@ -62,11 +62,17 @@ Para cada fase do workflow detectado, SIMULAR (sem executar):
 
 4. **Story Estimate:**
    - Baseado na descrição + modo:
-     - FULL_APP: 5-10 stories (MVP: 3-5)
+     - FULL_APP: 5-10 stories total
      - SINGLE_FEATURE: 1-3 stories
      - BUG_FIX: 1 story
-   - Se Forge Memory tem dados de runs anteriores neste projeto:
-     usar média histórica de stories por run
+   - **Se `mvp.mode` = "all":** total = MVP (não dividir). Mostrar "~5-10 stories (tudo MVP)"
+   - **Se `mvp.mode` = "defined" ou "assisted":** separar MVP (3-5) e post-MVP (2-5). Mostrar "~3-5 MVP + ~2-5 post-MVP"
+   - **NUNCA** mostrar o range de MVP como se fosse o total quando `mvp.mode = "all"`
+   - **Calibração via Forge Memory (se disponível):**
+     Checar `.aios/memory/forge/learnings.yaml` por entries com `category: "estimation_accuracy"` neste projeto.
+     Se existirem: usar `accuracy_ratio` médio para ajustar a estimativa genérica.
+     Exemplo: se o ratio médio é 1.8 (estimou 5, foram 9), multiplicar estimativa por 1.8.
+     Learnings de estimation_accuracy têm precedência sobre ranges genéricos.
 
 5. **Checkpoint Estimate:**
    - Calcular checkpoints obrigatórios (Discovery, MVP Gate, Deploy)
@@ -125,10 +131,34 @@ O que quer fazer?
 > 4. **Cancelar** — não fazer nada
 ```
 
-- **Opção 1:** Reclassificar o intent como o modo detectado e rodar normalmente
-- **Opção 2:** Salvar o relatório como `.aios/forge-runs/dry-run-{timestamp}.md`
+- **Opção 1 — Converter para run real:**
+  Executar o **Caminho B** de `phase-0-discovery.md` Step 9 com estas adições:
+  1. Gerar NOVO `run_id` = `forge-{slug}-{YYYYMMDD-HHmm}` (timestamp ATUAL)
+  2. Checar `.lock` (Caminho B passo 1)
+  3. Criar `.lock` (Caminho B passo 3)
+  4. Criar run folder (Caminho B passo 4)
+  5. Criar state.json com:
+     - `mode` = modo detectado (ex: FULL_APP)
+     - `status` = "running"
+     - Campos `discovery`, `tech_decisions`, `mvp`, `core_atom` copiados do dry-run state
+     - Campo `plugins.ecosystem_scan` copiado do dry-run state
+     - **Campo `source_dry_run` obrigatório:**
+       ```json
+       "source_dry_run": {
+         "run_id": "{dry-run-original-run-id}",
+         "detected_mode": "FULL_APP",
+         "simulation_estimate": { "stories": 8, "agents": 9, "plugins": 4 }
+       }
+       ```
+  6. Copiar `context-pack.json` do dry-run para o novo run folder
+  7. Marcar dry-run original como `status: "converted"` no seu state.json
+  8. Prosseguir para Phase 1 normalmente
+
+  **Validação:** Ao iniciar Phase 1, o runner DEVE verificar que o novo state.json tem todos os campos obrigatórios (`discovery`, `tech_decisions`, `mvp`, `core_atom`, `plugins.ecosystem_scan`). Se algum estiver faltando, HALT com mensagem de erro — não prosseguir com estado incompleto.
+
+- **Opção 2:** Salvar o relatório como `.aios/forge-runs/{run_id}/simulation-report.md`. Marcar dry-run como `status: "saved"`.
 - **Opção 3:** Voltar ao Phase SIM-1 com perguntas específicas
-- **Opção 4:** Encerrar
+- **Opção 4:** Marcar dry-run como `status: "cancelled"`. Encerrar.
 
 ---
 
@@ -178,10 +208,10 @@ Se o usuário escolher "Executar de verdade" (opção 1), o run real que se inic
 ## State Management
 
 - **Creates** `.aios/forge-runs/{run_id}/` with `state.json` (mode: "DRY_RUN")
-- **Does NOT create** .lock file (dry-run doesn't block other runs)
+- **NUNCA cria `.aios/forge-runs/.lock`** — dry-run é simulação, não bloqueia outros runs. Lock só é criado se o usuário escolher "Executar de verdade" (opção 1 do SIM-4), e nesse caso é o NOVO run real que cria o lock, não o dry-run.
 - `state.json` contains Discovery answers, ecosystem scan results, and simulation report
 - If user chooses option 2 (save plan): export simulation report as `.aios/forge-runs/{run_id}/simulation-report.md`
-- If user chooses option 1 (execute): the intent is reclassified, a NEW run is created with mode = detected mode, inheriting Discovery answers from the dry-run state
+- If user chooses option 1 (execute): um NOVO run é criado (ver detalhes na seção SIM-4 opção 1 acima)
 
 ---
 

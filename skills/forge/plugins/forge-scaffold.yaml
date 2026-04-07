@@ -1,0 +1,51 @@
+# Forge Scaffold Plugin
+# Generates .claude/CLAUDE.md and .gitignore before build starts
+
+plugin:
+  name: forge-scaffold
+  version: "1.0.0"
+  description: "Generates .claude/CLAUDE.md and .gitignore before build starts — gives @dev full project context"
+
+activation:
+  enabled: true
+  modes:
+    - FULL_APP
+    - SINGLE_FEATURE
+    - TEMPLATE
+    - REPLAY
+    # NOT in QUICK — speed over scaffold
+    # NOT in BUG_FIX — project already exists
+    # NOT in BROWNFIELD — analysis only
+    # NOT in DESIGN_SYSTEM/LANDING_PAGE/CLONE_SITE — handled by their workflows
+    # NOT in SQUAD_UPGRADE — no project to scaffold
+
+priority: 6  # Core band — runs before ecosystem scanner (10)
+
+hooks:
+  # --- Generate CLAUDE.md ---
+  - event: "before:phase:3"
+    action: inject
+    source: "{FORGE_HOME}/forge-scaffold.md"
+    section: "1. Generate CLAUDE.md"
+    description: |
+      Check if .claude/CLAUDE.md exists in the project directory.
+      If NOT: generate from tech_decisions + architecture + conventions.
+      If YES: read existing, merge missing sections without overwriting.
+      Uses state.json tech_decisions, Phase 1 architecture output, and AIOS conventions.
+
+  # --- Generate .gitignore ---
+  - event: "before:phase:3"
+    action: inject
+    source: "{FORGE_HOME}/forge-scaffold.md"
+    section: "2. Generate .gitignore"
+    description: |
+      Check if .gitignore exists in the project directory.
+      If NOT: generate with standard ignores based on tech stack.
+      If YES: check for missing critical entries (.env, credentials, node_modules).
+      Adds missing entries without removing existing ones.
+
+state_key: "forge_scaffold"
+
+config:
+  claude_md_template: "default"  # Template style for CLAUDE.md generation
+  merge_strategy: "additive"     # Never overwrite, only add missing sections

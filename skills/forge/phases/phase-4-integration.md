@@ -12,6 +12,12 @@ Todas as stories foram implementadas individualmente. Agora é hora de verificar
 
 ## Execution Steps
 
+### Step 0: Enter Phase (MANDATORY)
+
+Execute runner.md Section 2, Step 1 ("Enter Phase") para N=4 antes de prosseguir.
+
+**Adicional Phase 4:** Se `source_dry_run` existe no state.json, comparar `source_dry_run.simulation_estimate.stories` com total real de stories. Mostrar: `"📊 Estimativa dry-run: {N} stories → Real: {M} stories (ratio: {R})"`
+
 ### Step 1: Full Test Suite (@qa)
 
 Dispatch @qa via Agent tool:

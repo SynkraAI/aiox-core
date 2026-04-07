@@ -12,6 +12,10 @@ A spec diz O QUE construir. As stories dizem COMO, passo a passo. Pense nas stor
 
 ## Execution Steps
 
+### Step 0: Enter Phase (MANDATORY)
+
+Execute runner.md Section 2, Step 1 ("Enter Phase") para N=2 antes de prosseguir.
+
 ### Step 1: Story Creation (@sm)
 
 Dispatch @sm via Agent tool:

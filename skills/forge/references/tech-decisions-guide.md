@@ -263,6 +263,21 @@ Usado quando o usuário diz "quero mudar algo" ou "quero entender melhor".
 | **Fullstack junto** | Food truck: tudo junto, rápido pra começar | Projetos pequenos, MVP rápido |
 | **Monorepo** | Prédio comercial: mesma pasta, andares independentes | Times organizados, código compartilhado |
 
+> **⚠️ REGRA DE ESTRUTURA:** Quando `repo_structure` for `monorepo_workspaces` (default para "Separados" e "Monorepo"), frontend e backend DEVEM ficar em diretórios separados na raiz do projeto:
+>
+> ```
+> {project}/
+> ├── frontend/    # Next.js, React, etc.
+> ├── backend/     # FastAPI, Express, NestJS, etc.
+> ├── shared/      # Types, utils compartilhados (se aplicável)
+> ├── docker-compose.yml
+> └── README.md
+> ```
+>
+> É como restaurante: cozinha e salão têm seu próprio espaço. Food truck (fullstack junto) mistura — mas num restaurante de verdade, cada um tem seu canto.
+>
+> **Exceção:** Se `repo_structure` for `single_package` (fullstack junto), a estrutura flat é aceita. MAS se houver backend significativo (workers, queues, scraping, AI), Forge DEVE sugerir upgrade para `monorepo_workspaces`.
+
 ### Deploy — Alternativas
 
 | Opção | Analogia | Quando faz sentido |
@@ -294,6 +309,7 @@ Todas as decisões são salvas no `state.json`:
     "database": "postgresql",
     "orm": "prisma",
     "architecture": "separated_api",
+    "repo_structure": "monorepo_workspaces",
     "deploy": "docker",
     "design_library": "shadcn",
     "design_inherit_from": null,
@@ -301,11 +317,26 @@ Todas as decisões são salvas no `state.json`:
     "user_overrides": [],
     "reasoning": {
       "architecture": "Projeto menciona agente AI — separar é obrigatório",
+      "repo_structure": "frontend/ e backend/ como workspaces independentes",
       "database": "Dados relacionais (campanha→métricas) — Postgres é ideal"
     }
   }
 }
 ```
+
+**Campo `repo_structure`** — decisão de como o repositório é organizado (separado de `architecture`):
+
+| Valor | Significado | Estrutura de diretórios |
+|-------|------------|------------------------|
+| `monorepo_workspaces` | Frontend e backend como workspaces na raiz | `frontend/` + `backend/` + `shared/` |
+| `single_package` | Tudo num único package.json | Flat (Next.js com API routes, por exemplo) |
+| `multi_repo` | Repos separados (raro) | N/A — cada repo tem sua estrutura |
+
+**Regra de derivação automática:**
+- Se `architecture == "separated_api"` → default `repo_structure = "monorepo_workspaces"`
+- Se `architecture == "fullstack_together"` → default `repo_structure = "single_package"`
+- Se `architecture == "monorepo"` → default `repo_structure = "monorepo_workspaces"`
+- Usuário pode override qualquer combinação
 
 - `decided_by`: "forge" (automático) ou "user" (se mudou algo)
 - `user_overrides`: lista das decisões que o usuário alterou manualmente

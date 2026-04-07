@@ -91,6 +91,12 @@ Read the completed run's state.json and extract 4 categories:
 - Capture: which gates passed, which had CONCERNS, which were SKIPPED
 - Tag: gate name + result
 
+**Estimation Accuracy (se `source_dry_run` existir no state.json):**
+- Comparar `source_dry_run.simulation_estimate.stories` com o total real de stories completadas
+- Calcular `accuracy_ratio` = real / estimado (1.0 = perfeito, >1.5 = subestimou, <0.5 = superestimou)
+- Esse learning é consumido pelo dry-run.md SIM-2 em runs futuros para calibrar estimativas
+- Tag: "estimation", "dry-run"
+
 ### Step 2: Format as learnings
 
 Each extracted insight becomes one entry in the learnings file:
@@ -100,7 +106,7 @@ Each extracted insight becomes one entry in the learnings file:
   run_id: "{run_id from state.json}"
   project: "{absolute path to project}"
   timestamp: "{ISO 8601 of run completion}"
-  category: "tech_decision | error_pattern | agent_performance | quality_gate"
+  category: "tech_decision | error_pattern | agent_performance | quality_gate | estimation_accuracy"
   content: "{human-readable description of the learning}"
   resolution: "{how it was resolved, if applicable}"
   tags: ["tag1", "tag2"]

@@ -136,7 +136,8 @@ When the user runs `/forge help`, show this formatted output and STOP:
 
   ━━━ RUNS ATIVOS ━━━
 
-  {lista de .aios/forge-runs/ com status != completed}
+  {lista de .aios/forge-runs/ com status == "running" APENAS}
+  {ignorar status: completed, converted, saved, cancelled}
   {ou "Nenhum run ativo."}
 
   ━━━ COMO FUNCIONA ━━━
@@ -198,7 +199,7 @@ If running inside an existing project (package.json exists) and user runs `/forg
    - Sort by priority, build hook registry
    - Fire hook: `before:run`
    - If no plugins found: proceed with legacy behavior (backwards compatible)
-4. **Check for interrupted runs** — Glob `.aios/forge-runs/*/state.json`, look for `status != "completed"`:
+4. **Check for interrupted runs** — Glob `.aios/forge-runs/*/state.json`, filter ONLY `status == "running"` (ignore `completed`, `converted`, `saved`, `cancelled` — see runner.md Section 6.0):
    - If found: "Encontrei um run interrompido: `{slug}` (parado na Fase {N}). Continuar ou começar novo?"
    - If user wants to resume: load state.json + context-pack.json, jump to last phase
 5. **Read memory protocol** — Check for project-context.md (HYBRID or CENTRALIZED mode)
@@ -423,6 +424,7 @@ Isso mantém o usuário informado sem interromper o fluxo.
 | `{FORGE_HOME}/forge-advisor.md` | Phase 0 (tech decision enhancement, loaded by forge-advisor plugin) |
 | `{FORGE_HOME}/forge-parallel.md` | Phase 3 (parallel execution, if enabled in config) |
 | `{FORGE_HOME}/forge-feedback.md` | ALWAYS (loaded by forge-feedback plugin) |
+| `{FORGE_HOME}/forge-scaffold.md` | before:phase:3 (loaded by forge-scaffold plugin — generates CLAUDE.md + .gitignore) |
 
 ---
 

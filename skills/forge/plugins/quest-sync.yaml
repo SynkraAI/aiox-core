@@ -17,11 +17,12 @@ hooks:
   - event: "after:phase:*"
     action: log
     description: |
-      After each phase completes, check if this Forge run was invoked by Quest.
-      Detection: state.json has a 'quest_source' field (set by forge-bridge when
-      Quest invokes Forge).
+      After each phase completes, check if Quest is active for this run.
+      Detection: state.json has EITHER:
+        - 'quest_source' field (set by forge-bridge when Quest invokes Forge), OR
+        - 'quest_enabled': true (set by user in Phase 0 Step 5.5)
 
-      If Quest-invoked:
+      If Quest active (either condition):
         Write to state.json (atomic):
           plugins.quest_sync.last_event = {
             phase: {N},
@@ -29,7 +30,13 @@ hooks:
             timestamp: {ISO 8601}
           }
 
-      If NOT Quest-invoked: skip silently (no overhead).
+        Additionally, if quest_enabled == true AND quest-log.yaml does NOT exist:
+          Write to state.json (atomic):
+            plugins.quest_sync.needs_bootstrap = true
+          This signals the Quest Engine (via forge-bridge) to create quest-log.yaml.
+          See: skills/quest/engine/forge-bridge.md Section 9.
+
+      If Quest NOT active (neither condition): skip silently (no overhead).
 
       OWNERSHIP BOUNDARY: Forge NEVER writes to quest-log.yaml.
       Quest's forge-bridge reads plugins.quest_sync from state.json.
@@ -38,18 +45,23 @@ hooks:
   - event: "on:story-complete"
     action: log
     description: |
-      When a story completes QA, increment the story counter for Quest XP.
+      When a story completes QA, check if Quest is active (quest_source OR quest_enabled).
+      If active: increment the story counter for Quest XP.
       Write to state.json (atomic):
         plugins.quest_sync.stories_completed += 1
 
       Quest's forge-bridge reads this on next status check and
       awards XP accordingly.
+      If Quest NOT active: skip silently.
 
   # --- Run completion sync ---
   - event: "after:run"
     action: log
     description: |
-      When the entire Forge run completes successfully:
+      When the entire Forge run completes successfully, check if Quest is active
+      (quest_source OR quest_enabled).
+
+      If active:
       Write to state.json (atomic):
         plugins.quest_sync.run_completed = true
         plugins.quest_sync.completed_at = {ISO 8601}
@@ -65,5 +77,7 @@ hooks:
         - Auto-checks the mission item (checked_by: "forge")
         - Triggers completion ceremony
         - Awards final XP
+
+      If Quest NOT active: skip silently.
 
 state_key: "quest_sync"

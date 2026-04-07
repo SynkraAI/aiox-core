@@ -12,6 +12,10 @@ Dia da mudança — só leva o que funciona. Essa fase é EXCLUSIVA do @devops. 
 
 ## Execution Steps
 
+### Step 0: Enter Phase (MANDATORY)
+
+Execute runner.md Section 2, Step 1 ("Enter Phase") para N=5 antes de prosseguir.
+
 ### Step 1: Pre-Deploy CHECKPOINT
 
 ```
