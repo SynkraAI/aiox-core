@@ -102,7 +102,7 @@ The user has been here before. Show a quick status and the next mission. This sh
    5. Partial Phase 3 reconciliation (Build still running):
       IF state.phases.3.status != "completed"
          AND state.phases.3.stories_completed > 0:
-        - Reconcile "4.1" and "4.2" if pending/detected
+        - Reconcile "4.2" if pending/detected (implementation started)
         - If test files exist in project (Glob "**/*.test.*" OR "**/test_*.py"):
           also reconcile "4.3"
 

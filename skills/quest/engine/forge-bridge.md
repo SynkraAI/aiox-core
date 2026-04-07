@@ -442,7 +442,7 @@ Only `required: true` items (no `condition` field) are listed. Conditional/optio
 | 0 | Discovery | 1.1 | `state.phases.0.status == "completed"` |
 | 1 | Spec | 2.2, 2.7, 2.8 | `state.phases.1.status == "completed"` |
 | 2 | Stories | 3.1, 3.2, 3.3 | `state.phases.2.status == "completed"` |
-| 3 | Build | 4.1, 4.2, 4.3, 4.6 | `state.phases.3.status == "completed"` |
+| 3 | Build | 4.2, 4.3, 4.6 | `state.phases.3.status == "completed"` |
 | 4 | Integration | 5.1, 5.8 | `state.phases.4.status == "completed"` |
 | 5 | Deploy | 6.5, 7.1, 7.2, 7.3, 7.4 | `state.phases.5.status == "completed"` |
 
