@@ -1,23 +1,132 @@
-# Vercel Noir — Monochrome with surgical precision
+# Vercel Noir v2 — Monochrome with surgical precision
+# Source: vercel.com (real extraction)
 # Ideal for: SaaS, dev tools, premium products, anything that wants to feel "expensive"
-# Inspired by: vercel.com, stripe.com, linear.app dark mode
-# Theme: dark | Pure monochrome with white accent — no color saturation
+# Theme: dark | Pure monochrome — no color saturation
+# Font: Geist (Vercel's actual typeface, NOT Inter)
 
 name: Vercel Noir
+version: 2
 theme: dark
+source: "vercel.com"
+
+typography:
+  family:
+    display: "Geist"
+    body: "Geist"
+    mono: "Geist Mono"
+    fallback: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    cdn: "https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans"
+  scale:
+    h1: { size: 56px, weight: 700, line_height: 1.1, letter_spacing: "-0.02em" }
+    h2: { size: 40px, weight: 600, line_height: 1.2, letter_spacing: "-0.01em" }
+    h3: { size: 32px, weight: 600, line_height: 1.3, letter_spacing: "-0.005em" }
+    h4: { size: 24px, weight: 600, line_height: 1.35 }
+    body: { size: 16px, weight: 400, line_height: 1.6 }
+    body_sm: { size: 14px, weight: 400, line_height: 1.5 }
+    caption: { size: 13px, weight: 400, line_height: 1.5, letter_spacing: "0.01em" }
+    label: { size: 12px, weight: 500, line_height: 1.4, letter_spacing: "0.04em", text_transform: uppercase }
+
 colors:
-  primary: "#FAFAFA"
-  primary_light: "#E4E4E7"
-  accent: "#A1A1AA"
-  background: "#09090B"
-  card: "#18181B"
-  border: "#27272A"
-  text: "#FAFAFA"
-  text_muted: "#71717A"
-  white: "#FFFFFF"
-  highlight: "#FAFAFA"
-font: "Inter"
-display_font: "Inter"
+  primitives:
+    gray:
+      50: "#FAFAFA"
+      100: "#F4F4F5"
+      200: "#E4E4E7"
+      300: "#D4D4D8"
+      400: "#A1A1AA"
+      500: "#71717A"
+      600: "#52525B"
+      700: "#3F3F46"
+      800: "#27272A"
+      900: "#18181B"
+      950: "#09090B"
+  semantic:
+    background: "#09090B"
+    surface: "#18181B"
+    surface_elevated: "#27272A"
+    border: "#27272A"
+    border_hover: "#3F3F46"
+    text: "#FAFAFA"
+    text_secondary: "#A1A1AA"
+    text_muted: "#71717A"
+    primary: "#FAFAFA"
+    primary_hover: "#E4E4E7"
+    accent: "#A1A1AA"
+    success: "#22C55E"
+    warning: "#F59E0B"
+    error: "#EF4444"
+    info: "#3B82F6"
+
+spacing:
+  scale: [4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96]
+  section_padding: 80px
+  card_padding: 24px
+  button_padding_x: 24px
+  button_padding_y: 12px
+
+radii:
+  none: 0
+  sm: 6px
+  md: 8px
+  lg: 12px
+  xl: 16px
+  full: 9999px
+  default: 6px
+
+shadows:
+  none: "none"
+  xs: "0 1px 2px rgba(0,0,0,0.3)"
+  sm: "0 2px 4px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2)"
+  md: "0 4px 12px rgba(0,0,0,0.4), 0 2px 4px rgba(0,0,0,0.3)"
+  lg: "0 8px 24px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.3)"
+  xl: "0 16px 48px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.4)"
+
+animation:
+  duration:
+    fast: 150ms
+    normal: 200ms
+    slow: 300ms
+  easing: "cubic-bezier(0.4, 0, 0.2, 1)"
+  hover_scale: 1.02
+
+components:
+  button:
+    primary:
+      bg: "#FAFAFA"
+      text: "#09090B"
+      radius: 6px
+      padding: "12px 24px"
+      font_weight: 500
+      font_size: 14px
+    secondary:
+      bg: "transparent"
+      text: "#FAFAFA"
+      border: "#27272A"
+      radius: 6px
+      padding: "12px 24px"
+      font_weight: 500
+  card:
+    bg: "#18181B"
+    border: "#27272A"
+    radius: 12px
+    padding: 24px
+  input:
+    bg: "#18181B"
+    border: "#27272A"
+    text: "#FAFAFA"
+    placeholder: "#71717A"
+    radius: 6px
+    padding: "10px 14px"
+
 cover:
   gradient_primary: "rgba(250,250,250,0.04)"
   gradient_secondary: "rgba(161,161,170,0.02)"
+
+anti_slop:
+  - "ZERO gradientes decorativos — Vercel é monocromático puro"
+  - "NUNCA usar cor saturada — apenas escala de cinza"
+  - "Hover scale max 1.02 — sutileza cirúrgica"
+  - "Sombras com rgba preto, nunca colored shadows"
+  - "Espaçamento generoso entre seções (80px min)"
+  - "Geist font obrigatória — NUNCA substituir por Inter"
+  - "Botão primário SEMPRE branco sobre preto"

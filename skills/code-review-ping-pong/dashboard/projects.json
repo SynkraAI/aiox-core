@@ -1,0 +1,19 @@
+{
+  "projects": [
+    {
+      "name": "aios-core",
+      "path": "/Users/luizfosc/aios-core",
+      "pingpong_dir": ".code-review-ping-pong"
+    },
+    {
+      "name": "Instagram-Scraper",
+      "path": "/Users/luizfosc/CODE/Projects/Instagram-Scraper",
+      "pingpong_dir": ".code-review-ping-pong"
+    },
+    {
+      "name": "quest",
+      "path": "/Users/luizfosc/aios-core/skills/quest",
+      "pingpong_dir": ".code-review-ping-pong"
+    }
+  ]
+}

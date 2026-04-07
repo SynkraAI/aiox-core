@@ -1,0 +1,33 @@
+# Stage Summary Template — Archive Manifest
+#
+# This file is AUTO-GENERATED when a stage reaches 10/10 (PERFECT).
+# It is written to: .code-review-ping-pong/archive/stage-{id}-{slug}/summary.yml
+#
+# Contains the final stats for the completed stage and a manifest
+# of all round files in the archive directory.
+#
+# Usage: node validate.cjs archive/stage-1-foo/summary.yml
+
+protocol: code-review-ping-pong
+type: stage-summary
+stage_id: 1
+stage_slug: "{slug}"
+stage_name: "{Stage Display Name}"
+completed_at: "{YYYY-MM-DD}"
+total_rounds: 0
+final_score: 10
+total_issues_found: 0
+total_issues_fixed: 0
+total_issues_skipped: 0
+files_in_scope:
+  - "{path/to/file1.ts}"
+  - "{path/to/file2.ts}"
+rounds:
+  - file: round-1.md
+    type: review
+    score: 7
+    issues: 6
+  - file: round-1-fixed.md
+    type: fix
+    fixed: 6
+    skipped: 0

@@ -1,20 +1,134 @@
-# Minimal Sand — Ultra-clean light theme with warm neutrals
-# Ideal for: editorial, blog, portfolio, minimalist brands
+# Minimal Sand v2 — Ultra-clean editorial with warm neutrals
+# Source: premium editorial / magazine aesthetic
+# Ideal for: editorial, blog, portfolio, minimalist brands, writers
+# Theme: light | Warm sand tones with stone accents — intentionally quiet
+# Font: Libre Baskerville (display) + Source Sans 3 (body) — classic editorial
 
 name: Minimal Sand
+version: 2
 theme: light
+source: "editorial / magazine premium"
+
+typography:
+  family:
+    display: "Libre Baskerville"
+    body: "Source Sans 3"
+    mono: "Source Code Pro"
+    fallback: "Georgia, 'Times New Roman', serif"
+    cdn: "https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap"
+  scale:
+    h1: { size: 44px, weight: 700, line_height: 1.2, letter_spacing: "-0.01em" }
+    h2: { size: 32px, weight: 700, line_height: 1.3 }
+    h3: { size: 24px, weight: 700, line_height: 1.35 }
+    h4: { size: 20px, weight: 600, line_height: 1.4 }
+    body: { size: 17px, weight: 400, line_height: 1.8 }
+    body_sm: { size: 15px, weight: 400, line_height: 1.7 }
+    caption: { size: 13px, weight: 400, line_height: 1.5 }
+    label: { size: 11px, weight: 600, line_height: 1.4, letter_spacing: "0.08em", text_transform: uppercase }
+
 colors:
-  primary: "#78716C"
-  primary_light: "#A8A29E"
-  accent: "#D97706"
-  background: "#FAF9F6"
-  card: "#FFFFFF"
-  border: "#E7E5E4"
-  text: "#44403C"
-  text_muted: "#A8A29E"
-  white: "#1C1917"
-  highlight: "#78716C"
-font: "Libre Baskerville"
+  primitives:
+    stone:
+      50: "#FAF9F6"
+      100: "#F5F3EF"
+      200: "#E7E5E4"
+      300: "#D6D3D1"
+      400: "#A8A29E"
+      500: "#78716C"
+      600: "#57534E"
+      700: "#44403C"
+      800: "#292524"
+      900: "#1C1917"
+      950: "#0C0A09"
+  semantic:
+    background: "#FAF9F6"
+    surface: "#FFFFFF"
+    surface_elevated: "#FFFFFF"
+    border: "#E7E5E4"
+    border_hover: "#D6D3D1"
+    text: "#44403C"
+    text_secondary: "#57534E"
+    text_muted: "#A8A29E"
+    primary: "#44403C"
+    primary_hover: "#292524"
+    accent: "#D97706"
+    accent_hover: "#B45309"
+    success: "#0F7B6C"
+    warning: "#D97706"
+    error: "#DC2626"
+    info: "#2563EB"
+
+spacing:
+  scale: [4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96, 120]
+  section_padding: 96px
+  card_padding: 32px
+  button_padding_x: 24px
+  button_padding_y: 12px
+
+radii:
+  none: 0
+  sm: 2px
+  md: 4px
+  lg: 8px
+  xl: 12px
+  full: 9999px
+  default: 4px
+
+shadows:
+  none: "none"
+  xs: "0 1px 2px rgba(68,64,60,0.06)"
+  sm: "0 1px 4px rgba(68,64,60,0.08)"
+  md: "0 4px 12px rgba(68,64,60,0.1)"
+  lg: "0 8px 24px rgba(68,64,60,0.12)"
+  xl: "0 16px 48px rgba(68,64,60,0.14)"
+
+animation:
+  duration:
+    fast: 150ms
+    normal: 200ms
+    slow: 300ms
+  easing: "ease-in-out"
+  hover_scale: 1.0
+
+components:
+  button:
+    primary:
+      bg: "#44403C"
+      text: "#FAF9F6"
+      radius: 4px
+      padding: "12px 24px"
+      font_weight: 600
+      font_size: 15px
+    secondary:
+      bg: "transparent"
+      text: "#44403C"
+      border: "#D6D3D1"
+      radius: 4px
+      padding: "12px 24px"
+      font_weight: 500
+  card:
+    bg: "#FFFFFF"
+    border: "#E7E5E4"
+    radius: 8px
+    padding: 32px
+  input:
+    bg: "#FFFFFF"
+    border: "#E7E5E4"
+    text: "#44403C"
+    placeholder: "#A8A29E"
+    radius: 4px
+    padding: "12px 16px"
+
 cover:
-  gradient_primary: "rgba(120,113,108,0.06)"
-  gradient_secondary: "rgba(217,119,6,0.04)"
+  gradient_primary: "rgba(120,113,108,0.04)"
+  gradient_secondary: "rgba(217,119,6,0.03)"
+
+anti_slop:
+  - "ZERO hover scale — editorial é estático, sóbrio"
+  - "Body text 17px com line-height 1.8 — leiturabilidade máxima"
+  - "Libre Baskerville SOMENTE em headings — body SEMPRE Source Sans 3"
+  - "Accent amber/gold SOMENTE em links e destaques — nunca dominante"
+  - "Sombras quase invisíveis — opacity max 0.14"
+  - "Espaçamento LUXUOSO (96px seções, até 120px em hero)"
+  - "Radii MÍNIMOS (2-4px) — editorial é sharp, não cute"
+  - "Paleta warm-stone, NUNCA cinzas puros (blue-gray)"

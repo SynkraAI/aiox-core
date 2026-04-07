@@ -1,20 +1,135 @@
-# Arctic Frost — Clean light theme with icy blue accents
-# Ideal for: SaaS products, documentation, corporate reports
+# Notion Clean v2 — Clean light theme with warm sophistication
+# Source: notion.com (real extraction) — replaces Arctic Frost
+# Ideal for: SaaS products, documentation, tools, corporate with soul
+# Theme: light | Off-white base with black primary — high contrast, minimal
+# Font: DM Sans (body) + DM Serif Display (accents) — NOT Inter
 
-name: Arctic Frost
+name: Notion Clean
+version: 2
 theme: light
+source: "notion.com"
+replaces: "Arctic Frost"
+
+typography:
+  family:
+    display: "DM Serif Display"
+    body: "DM Sans"
+    mono: "DM Mono"
+    fallback: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    cdn: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Serif+Display&family=DM+Mono:wght@400;500&display=swap"
+  scale:
+    h1: { size: 48px, weight: 700, line_height: 1.15, letter_spacing: "-0.02em" }
+    h2: { size: 36px, weight: 600, line_height: 1.25, letter_spacing: "-0.01em" }
+    h3: { size: 24px, weight: 600, line_height: 1.3 }
+    h4: { size: 20px, weight: 500, line_height: 1.4 }
+    body: { size: 16px, weight: 400, line_height: 1.7 }
+    body_sm: { size: 14px, weight: 400, line_height: 1.6 }
+    caption: { size: 13px, weight: 400, line_height: 1.5 }
+    label: { size: 11px, weight: 500, line_height: 1.4, letter_spacing: "0.05em", text_transform: uppercase }
+
 colors:
-  primary: "#2563EB"
-  primary_light: "#3B82F6"
-  accent: "#06B6D4"
-  background: "#F8FAFC"
-  card: "#FFFFFF"
-  border: "#E2E8F0"
-  text: "#334155"
-  text_muted: "#94A3B8"
-  white: "#0F172A"
-  highlight: "#2563EB"
-font: "Inter"
+  primitives:
+    neutral:
+      50: "#FAF9F7"
+      100: "#F7F6F3"
+      200: "#EDECE9"
+      300: "#E3E2DF"
+      400: "#CFCCC4"
+      500: "#9B9A97"
+      600: "#6B6966"
+      700: "#37352F"
+      800: "#2B2926"
+      900: "#1F1E1C"
+      950: "#121110"
+  semantic:
+    background: "#FFFFFF"
+    surface: "#FAF9F7"
+    surface_elevated: "#FFFFFF"
+    border: "#E3E2DF"
+    border_hover: "#CFCCC4"
+    text: "#37352F"
+    text_secondary: "#6B6966"
+    text_muted: "#9B9A97"
+    primary: "#000000"
+    primary_hover: "#37352F"
+    accent: "#2EAADC"
+    accent_hover: "#3FC1F3"
+    success: "#0F7B6C"
+    warning: "#CB912F"
+    error: "#EB5757"
+    info: "#2EAADC"
+
+spacing:
+  scale: [2, 4, 8, 12, 16, 24, 32, 48, 64, 80, 96]
+  section_padding: 80px
+  card_padding: 24px
+  button_padding_x: 14px
+  button_padding_y: 8px
+
+radii:
+  none: 0
+  sm: 3px
+  md: 4px
+  lg: 8px
+  xl: 12px
+  full: 9999px
+  default: 4px
+
+shadows:
+  none: "none"
+  xs: "0 1px 0 rgba(55,53,47,0.09)"
+  sm: "0 1px 2px rgba(55,53,47,0.09), 0 0 0 1px rgba(55,53,47,0.04)"
+  md: "0 4px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(55,53,47,0.04)"
+  lg: "0 12px 32px rgba(0,0,0,0.12), 0 0 0 1px rgba(55,53,47,0.04)"
+  xl: "0 24px 64px rgba(0,0,0,0.15)"
+
+animation:
+  duration:
+    fast: 100ms
+    normal: 150ms
+    slow: 250ms
+  easing: "ease"
+  hover_scale: 1.0
+
+components:
+  button:
+    primary:
+      bg: "#000000"
+      text: "#FFFFFF"
+      radius: 4px
+      padding: "8px 14px"
+      font_weight: 500
+      font_size: 14px
+    secondary:
+      bg: "#FFFFFF"
+      text: "#37352F"
+      border: "#E3E2DF"
+      radius: 4px
+      padding: "8px 14px"
+      font_weight: 500
+  card:
+    bg: "#FFFFFF"
+    border: "#E3E2DF"
+    radius: 8px
+    padding: 24px
+  input:
+    bg: "#FAF9F7"
+    border: "#E3E2DF"
+    text: "#37352F"
+    placeholder: "#9B9A97"
+    radius: 4px
+    padding: "8px 12px"
+
 cover:
-  gradient_primary: "rgba(37,99,235,0.08)"
-  gradient_secondary: "rgba(6,182,212,0.05)"
+  gradient_primary: "rgba(46,170,220,0.06)"
+  gradient_secondary: "rgba(55,53,47,0.03)"
+
+anti_slop:
+  - "ZERO animações hover scale — Notion é estático por design"
+  - "Sombras ULTRA sutis — rgba com opacity < 0.12"
+  - "Radii PEQUENOS (3-4px) — sharp, não bubbly"
+  - "Cores warm-neutral (#37352F não #333), NUNCA azul Tailwind"
+  - "Botões compactos (8px 14px) — não inflados"
+  - "Off-white background (#FAF9F7), NUNCA branco puro como base"
+  - "DM Sans + DM Serif Display — família consistente"
+  - "Contraste altíssimo: preto real (#000) sobre off-white"

@@ -1,0 +1,124 @@
+# Tech Research Skill Configuration
+# Configuration for the deep research pipeline
+
+# Playwright Deep Research Phase Configuration
+playwright_deep_research:
+  enabled: true
+  description: |
+    Browser automation phase that queries multiple LLMs (Grok, Claude.ai, Gemini)
+    for deep research when traditional search doesn't achieve sufficient coverage.
+
+  # Trigger conditions
+  auto_trigger_threshold: 0.70  # coverage score below this triggers deep research
+  manual_trigger_keywords:
+    - "--deep"
+    - "*deep"
+    - "multiple perspectives"
+    - "compare LLM views"
+    - "cross-reference with LLMs"
+
+  # Timing configuration
+  timeout_per_llm: 60  # seconds to wait for each LLM response
+  retry_count: 2       # retries per LLM if first attempt fails
+  retry_delay: 5       # seconds between retries
+
+  # LLM configurations
+  llms:
+    - name: grok
+      url: https://grok.x.ai
+      enabled: true
+      priority: 1
+      selectors:
+        # Primary selectors (try first)
+        chat_input_primary: "textarea[placeholder*='Ask']"
+        chat_input_fallback_1: "textarea"
+        chat_input_fallback_2: "[contenteditable='true']"
+        submit_button_primary: "button[type='submit']"
+        submit_button_fallback_1: "button[aria-label*='Send']"
+        submit_button_fallback_2: "button:has-text('Send')"
+        response_container_primary: "[data-testid='message-content']"
+        response_container_fallback_1: ".message-content"
+        response_container_fallback_2: "[class*='response']"
+        login_indicator_primary: "[data-testid='user-menu']"
+        login_indicator_fallback_1: "img[alt*='avatar']"
+        login_indicator_fallback_2: "[class*='user-profile']"
+      notes: "Requires X/Twitter login. UI may change frequently."
+
+    - name: claude
+      url: https://claude.ai
+      enabled: true
+      priority: 2
+      selectors:
+        chat_input_primary: "div[contenteditable='true']"
+        chat_input_fallback_1: "[data-testid='chat-input']"
+        chat_input_fallback_2: "textarea"
+        submit_button_primary: "button[aria-label='Send message']"
+        submit_button_fallback_1: "button[type='submit']"
+        submit_button_fallback_2: "button:has-text('Send')"
+        response_container_primary: "[data-testid='assistant-message']"
+        response_container_fallback_1: ".assistant-message"
+        response_container_fallback_2: "[class*='response']"
+        login_indicator_primary: "button[data-testid='account-menu']"
+        login_indicator_fallback_1: "[class*='user-menu']"
+        login_indicator_fallback_2: "img[alt*='avatar']"
+      notes: "Requires Anthropic account. Most stable UI."
+
+    - name: gemini
+      url: https://gemini.google.com
+      enabled: true
+      priority: 3
+      selectors:
+        chat_input_primary: "rich-textarea"
+        chat_input_fallback_1: "textarea"
+        chat_input_fallback_2: "[contenteditable='true']"
+        submit_button_primary: "button[aria-label='Send message']"
+        submit_button_fallback_1: "button[type='submit']"
+        submit_button_fallback_2: "button:has-text('Submit')"
+        response_container_primary: ".model-response-text"
+        response_container_fallback_1: "[class*='response']"
+        response_container_fallback_2: "[class*='message-content']"
+        login_indicator_primary: "img[data-testid='user-avatar']"
+        login_indicator_fallback_1: "[class*='user-avatar']"
+        login_indicator_fallback_2: "img[alt*='Account']"
+      notes: "Requires Google account. May have rate limiting."
+
+  # Screenshot configuration
+  screenshots:
+    enabled: true
+    format: png
+    full_page: false
+    on_success: true
+    on_error: true
+    naming_pattern: "screenshot-{llm}.png"
+
+  # Output configuration
+  output:
+    file_pattern: "XX-llm-deep-research.md"
+    include_timestamps: true
+    include_screenshots: true
+    include_synthesis: true
+
+  # Error handling
+  graceful_degradation:
+    enabled: true
+    description: "If one LLM fails, continue with others. Partial output is better than no output."
+    min_successful_llms: 1  # minimum LLMs needed for valid output
+
+# Search wave configuration (existing)
+search_waves:
+  max_waves: 3
+  coverage_threshold: 85
+  min_coverage_to_proceed: 50
+
+# MCP tool dependencies
+mcp_dependencies:
+  playwright:
+    tools:
+      - mcp__playwright__browser_navigate
+      - mcp__playwright__browser_click
+      - mcp__playwright__browser_fill
+      - mcp__playwright__browser_snapshot
+      - mcp__playwright__browser_take_screenshot
+      - mcp__playwright__browser_type
+    required: true
+    fallback: "Manual research required if Playwright unavailable"

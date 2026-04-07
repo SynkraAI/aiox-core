@@ -1,0 +1,109 @@
+#!/bin/bash
+# pingpong — atalho para rodar o Code Review Ping-Pong
+#
+# Uso:
+#   pingpong                    → review completo (Claude reviewer + fixer)
+#   pingpong --session engine   → sessão específica
+#   pingpong --pipeline         → todas as sessões
+#   pingpong --api              → reviewer via OpenAI API (mais barato)
+#   pingpong --clean            → limpa rounds anteriores e roda do zero
+#   pingpong --help             → mostra todas as opções
+#
+# Instale com:
+#   ln -sf ~/aios-core/skills/code-review-ping-pong/scripts/pingpong /usr/local/bin/pingpong
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ORCHESTRATOR="$SCRIPT_DIR/orchestrate.cjs"
+PP_DIR=".code-review-ping-pong"
+
+# ─── Defaults (melhor configuração descoberta por experimentação) ─────────
+REVIEWER="claude"
+CLAUDE_MODEL="claude-sonnet-4-6"
+FIX_ESCALATION="claude-sonnet-4-6<9,claude-opus-4-6"
+TIMEOUT="15"
+EXTRA_ARGS=()
+CLEAN=false
+API_MODE=false
+
+# ─── Parse nossos args, passa o resto pro orchestrator ─────────
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --clean)
+      CLEAN=true
+      shift
+      ;;
+    --api)
+      API_MODE=true
+      REVIEWER="openai-api"
+      EXTRA_ARGS+=("--review-escalation" "gpt-4o-mini<8,gpt-4.1")
+      shift
+      ;;
+    --fast)
+      REVIEWER="openai-api"
+      EXTRA_ARGS+=("--codex-model" "gpt-4o-mini" "--no-stall-check")
+      shift
+      ;;
+    --help|-h)
+      echo ""
+      echo "  pingpong — Code Review Ping-Pong"
+      echo ""
+      echo "  Uso: cd <projeto> && pingpong [opções]"
+      echo ""
+      echo "  Modos:"
+      echo "    (default)         Claude Sonnet (reviewer + fixer), Opus só score ≥9"
+      echo "    --api             OpenAI API reviewer (gpt-4o-mini → gpt-4.1)"
+      echo "    --fast            OpenAI API gpt-4o-mini only (mais barato)"
+      echo ""
+      echo "  Opções:"
+      echo "    --clean           Limpa rounds anteriores antes de rodar"
+      echo "    --session <name>  Sessão específica (ex: engine, packs)"
+      echo "    --pipeline        Roda todas as sessões sequencialmente"
+      echo "    --no-archive      Não arquiva rounds ao atingir 10/10"
+      echo "    --no-stall-check  Não para ao detectar stall"
+      echo "    --max-rounds <N>  Limite de rounds (padrão: 15)"
+      echo "    --with-audit      Incluir audit Gemini"
+      echo "    --timeout <min>   Timeout por CLI em minutos (padrão: 15)"
+      echo "    --dry-run         Mostra comandos sem executar"
+      echo ""
+      echo "  Exemplos:"
+      echo "    pingpong                          # Review padrão"
+      echo "    pingpong --clean --session engine  # Limpa e roda sessão"
+      echo "    pingpong --pipeline               # Todas as sessões"
+      echo "    pingpong --api --clean             # Via OpenAI API"
+      echo "    pingpong --fast --no-stall-check   # Mais barato possível"
+      echo ""
+      exit 0
+      ;;
+    *)
+      EXTRA_ARGS+=("$1")
+      shift
+      ;;
+  esac
+done
+
+# ─── Verificar que estamos num projeto com ping-pong ─────────
+if [ ! -d "$PP_DIR" ]; then
+  echo "⚠  Nenhum $PP_DIR/ encontrado neste diretório."
+  echo ""
+  echo "   Para iniciar, crie o diretório e um session.md:"
+  echo "   mkdir -p $PP_DIR"
+  echo "   # Depois crie $PP_DIR/session.md com o escopo"
+  echo ""
+  exit 1
+fi
+
+# ─── Clean mode ─────────
+if [ "$CLEAN" = true ]; then
+  find "$PP_DIR" -name "round-*.md" -delete 2>/dev/null
+  rm -f "$PP_DIR/next-step.md" "$PP_DIR/tracker.json" "$PP_DIR/orchestrator-summary.json" "$PP_DIR/stall-report.md" 2>/dev/null
+  echo "🧹 Rounds anteriores limpos."
+fi
+
+# ─── Rodar ─────────
+exec node "$ORCHESTRATOR" \
+  --reviewer "$REVIEWER" \
+  --claude-model "$CLAUDE_MODEL" \
+  --fix-escalation "$FIX_ESCALATION" \
+  --timeout "$TIMEOUT" \
+  --no-archive \
+  "${EXTRA_ARGS[@]}"

@@ -30,6 +30,7 @@ import {
   getLPFAQComponent,
   getLPFooterComponent,
   getLPStickyCTAComponent,
+  getLPButtonComponent,
 } from './lp-nextjs-templates.mjs';
 
 /**
@@ -81,6 +82,9 @@ export function generateLPNextJSProject(parsed, brand, effectsConfig, outputPath
       writeFileSync(join(compsDir, 'animated-counter.tsx'), counterContent);
     }
   }
+
+  // UI components (shared, CVA-based)
+  writeFileSync(join(outputPath, 'components', 'ui', 'button.tsx'), getLPButtonComponent());
 
   // Lib
   writeFileSync(join(outputPath, 'lib', 'utils.ts'), getUtils());

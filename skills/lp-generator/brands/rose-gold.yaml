@@ -1,20 +1,145 @@
-# Rose Gold — Elegant luxury with soft pink and gold
-# Ideal for: beauty, fashion, wedding, premium branding
+# Rose Gold v2 — Elegant luxury with soft pink and gold
+# Source: premium luxury/beauty aesthetic
+# Ideal for: beauty, fashion, wedding, premium branding, high-ticket feminine
+# Theme: dark | Deep burgundy base with rose pink primary and warm gold accent
+# Font: Playfair Display (display) + DM Sans (body) — classic elegance meets modern
 
 name: Rose Gold
+version: 2
 theme: dark
+source: "luxury beauty + fashion premium"
+
+typography:
+  family:
+    display: "Playfair Display"
+    body: "DM Sans"
+    mono: "DM Mono"
+    fallback: "Georgia, 'Times New Roman', serif"
+    cdn: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
+  scale:
+    h1: { size: 52px, weight: 700, line_height: 1.1, letter_spacing: "-0.01em" }
+    h2: { size: 38px, weight: 600, line_height: 1.2 }
+    h3: { size: 28px, weight: 600, line_height: 1.3 }
+    h4: { size: 22px, weight: 500, line_height: 1.35 }
+    body: { size: 16px, weight: 400, line_height: 1.7 }
+    body_sm: { size: 14px, weight: 400, line_height: 1.6 }
+    caption: { size: 13px, weight: 400, line_height: 1.5 }
+    label: { size: 11px, weight: 500, line_height: 1.4, letter_spacing: "0.1em", text_transform: uppercase }
+
 colors:
-  primary: "#BE185D"
-  primary_light: "#F472B6"
-  accent: "#D4A574"
-  background: "#1A0A14"
-  card: "#261320"
-  border: "#3D1E30"
-  text: "#F0D4E4"
-  text_muted: "#A67A94"
-  white: "#FFF1F2"
-  highlight: "#EC4899"
-font: "Playfair Display"
+  primitives:
+    rose:
+      50: "#FFF1F2"
+      100: "#FFE4E6"
+      200: "#FECDD3"
+      300: "#FDA4AF"
+      400: "#FB7185"
+      500: "#F43F5E"
+      600: "#E11D48"
+      700: "#BE185D"
+      800: "#9F1239"
+      900: "#881337"
+      950: "#4C0519"
+    gold:
+      50: "#FFFBEB"
+      100: "#FEF3C7"
+      200: "#FDE68A"
+      300: "#FCD34D"
+      400: "#FBBF24"
+      500: "#D4A574"
+      600: "#B8860B"
+      700: "#92400E"
+      800: "#78350F"
+      900: "#451A03"
+      950: "#1C0A00"
+  semantic:
+    background: "#1A0A14"
+    surface: "#261320"
+    surface_elevated: "#33192D"
+    border: "#3D1E30"
+    border_hover: "#5C2E4A"
+    text: "#F0D4E4"
+    text_secondary: "#D4A0C0"
+    text_muted: "#A67A94"
+    primary: "#BE185D"
+    primary_hover: "#F472B6"
+    accent: "#D4A574"
+    accent_hover: "#FBBF24"
+    success: "#34D399"
+    warning: "#FBBF24"
+    error: "#F87171"
+    info: "#F9A8D4"
+
+spacing:
+  scale: [4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96]
+  section_padding: 96px
+  card_padding: 32px
+  button_padding_x: 32px
+  button_padding_y: 16px
+
+radii:
+  none: 0
+  sm: 4px
+  md: 8px
+  lg: 12px
+  xl: 16px
+  full: 9999px
+  default: 8px
+
+shadows:
+  none: "none"
+  xs: "0 1px 2px rgba(26,10,20,0.5)"
+  sm: "0 2px 8px rgba(26,10,20,0.4)"
+  md: "0 4px 20px rgba(26,10,20,0.5), 0 0 20px rgba(190,24,93,0.05)"
+  lg: "0 8px 40px rgba(26,10,20,0.6), 0 0 40px rgba(190,24,93,0.08)"
+  xl: "0 16px 64px rgba(26,10,20,0.7), 0 0 60px rgba(212,165,116,0.08)"
+
+animation:
+  duration:
+    fast: 200ms
+    normal: 300ms
+    slow: 400ms
+  easing: "cubic-bezier(0.25, 0.1, 0.25, 1)"
+  hover_scale: 1.02
+
+components:
+  button:
+    primary:
+      bg: "linear-gradient(135deg, #BE185D, #D4A574)"
+      text: "#FFFFFF"
+      radius: 8px
+      padding: "16px 32px"
+      font_weight: 600
+      font_size: 15px
+    secondary:
+      bg: "transparent"
+      text: "#F0D4E4"
+      border: "#3D1E30"
+      radius: 8px
+      padding: "16px 32px"
+      font_weight: 500
+  card:
+    bg: "#261320"
+    border: "#3D1E30"
+    radius: 12px
+    padding: 32px
+  input:
+    bg: "#261320"
+    border: "#3D1E30"
+    text: "#F0D4E4"
+    placeholder: "#A67A94"
+    radius: 8px
+    padding: "14px 18px"
+
 cover:
-  gradient_primary: "rgba(190,24,93,0.20)"
-  gradient_secondary: "rgba(212,165,116,0.10)"
+  gradient_primary: "rgba(190,24,93,0.15)"
+  gradient_secondary: "rgba(212,165,116,0.08)"
+
+anti_slop:
+  - "Playfair Display SOMENTE em headings — body SEMPRE DM Sans"
+  - "Gradiente rose→gold SOMENTE em CTAs — nunca em backgrounds"
+  - "Gold accent sparingly — max 5% da UI"
+  - "Padding GENEROSO (96px seções, 32px cards) — luxo respira"
+  - "Line-height 1.7 no body — arejado, elegante"
+  - "NUNCA pink neon — sempre tons rose/burgundy muted"
+  - "Serif + sans-serif contrast é a assinatura — nunca usar só um"

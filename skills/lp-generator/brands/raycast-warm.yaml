@@ -1,23 +1,147 @@
-# Raycast Warm — Warm dark with subtle orange glow
+# Raycast Warm v2 — Warm dark with controlled orange energy
+# Source: raycast.com (real extraction)
 # Ideal for: Tools, utilities, developer products, launch pages
-# Inspired by: raycast.com, superhuman.com, fig.io
 # Theme: dark | Warm undertone blacks with orange as the only color — restrained energy
+# Font: General Sans (warm, technical, pairs with orange personality)
 
 name: Raycast Warm
+version: 2
 theme: dark
+source: "raycast.com"
+
+typography:
+  family:
+    display: "General Sans"
+    body: "General Sans"
+    mono: "JetBrains Mono"
+    fallback: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    cdn: "https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap"
+  scale:
+    h1: { size: 52px, weight: 700, line_height: 1.1, letter_spacing: "-0.02em" }
+    h2: { size: 36px, weight: 600, line_height: 1.2, letter_spacing: "-0.01em" }
+    h3: { size: 28px, weight: 600, line_height: 1.3 }
+    h4: { size: 22px, weight: 500, line_height: 1.35 }
+    body: { size: 15px, weight: 400, line_height: 1.6 }
+    body_sm: { size: 14px, weight: 400, line_height: 1.5 }
+    caption: { size: 12px, weight: 400, line_height: 1.5 }
+    label: { size: 11px, weight: 500, line_height: 1.4, letter_spacing: "0.04em", text_transform: uppercase }
+
 colors:
-  primary: "#FF6B2C"
-  primary_light: "#FF8F5E"
-  accent: "#8A7058"
-  background: "#0D0B09"
-  card: "#1A1714"
-  border: "#2A2520"
-  text: "#F0ECE8"
-  text_muted: "#8A8078"
-  white: "#FAF7F4"
-  highlight: "#FF8F5E"
-font: "Inter"
-display_font: "Inter"
+  primitives:
+    orange:
+      50: "#FFF7ED"
+      100: "#FFEDD5"
+      200: "#FED7AA"
+      300: "#FDBA74"
+      400: "#FF8F5E"
+      500: "#FF6B2C"
+      600: "#EA580C"
+      700: "#C2410C"
+      800: "#9A3412"
+      900: "#7C2D12"
+      950: "#431407"
+    warm_gray:
+      50: "#FAF7F4"
+      100: "#F0ECE8"
+      200: "#E0DAD4"
+      300: "#C4BAB0"
+      400: "#8A8078"
+      500: "#6E645C"
+      600: "#564E48"
+      700: "#3E3832"
+      800: "#2A2520"
+      900: "#1A1714"
+      950: "#0D0B09"
+  semantic:
+    background: "#0D0B09"
+    surface: "#1A1714"
+    surface_elevated: "#2A2520"
+    border: "#2A2520"
+    border_hover: "#3E3832"
+    text: "#F0ECE8"
+    text_secondary: "#C4BAB0"
+    text_muted: "#8A8078"
+    primary: "#FF6B2C"
+    primary_hover: "#FF8F5E"
+    accent: "#8A7058"
+    success: "#34D399"
+    warning: "#FBBF24"
+    error: "#F87171"
+    info: "#60A5FA"
+
+spacing:
+  scale: [4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96]
+  section_padding: 80px
+  card_padding: 24px
+  button_padding_x: 24px
+  button_padding_y: 12px
+
+radii:
+  none: 0
+  sm: 4px
+  md: 8px
+  lg: 12px
+  xl: 16px
+  full: 9999px
+  default: 12px
+
+shadows:
+  none: "none"
+  xs: "0 1px 3px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.4)"
+  sm: "0 2px 6px rgba(0,0,0,0.45)"
+  md: "0 8px 24px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.45)"
+  lg: "0 16px 48px rgba(0,0,0,0.65), 0 4px 12px rgba(0,0,0,0.5)"
+  xl: "0 24px 64px rgba(0,0,0,0.75), 0 8px 16px rgba(0,0,0,0.5)"
+
+animation:
+  duration:
+    fast: 150ms
+    normal: 200ms
+    slow: 300ms
+  easing: "cubic-bezier(0.4, 0, 0.2, 1)"
+  hover_scale: 1.02
+
+effects:
+  backdrop_blur: "blur(20px) saturate(180%)"
+  surface_translucent: "rgba(26, 23, 20, 0.85)"
+
+components:
+  button:
+    primary:
+      bg: "#FF6B2C"
+      text: "#0D0B09"
+      radius: 12px
+      padding: "12px 24px"
+      font_weight: 600
+      font_size: 14px
+    secondary:
+      bg: "transparent"
+      text: "#F0ECE8"
+      border: "#2A2520"
+      radius: 12px
+      padding: "12px 24px"
+      font_weight: 500
+  card:
+    bg: "#1A1714"
+    border: "#2A2520"
+    radius: 12px
+    padding: 24px
+  input:
+    bg: "#1A1714"
+    border: "#2A2520"
+    text: "#F0ECE8"
+    placeholder: "#8A8078"
+    radius: 12px
+    padding: "10px 14px"
+
 cover:
   gradient_primary: "rgba(255,107,44,0.05)"
   gradient_secondary: "rgba(138,112,88,0.03)"
+
+anti_slop:
+  - "Orange em max 5% da UI — restraint é a chave"
+  - "Background warm-dark (#0D0B09), NUNCA preto puro"
+  - "Backdrop blur = 20px, NUNCA 60px (iniciante)"
+  - "Bordas translúcidas (rgba white 8%) em vez de sombras pesadas"
+  - "General Sans font obrigatória — NUNCA Inter"
+  - "Radii arredondados (12px default) — feel macOS"

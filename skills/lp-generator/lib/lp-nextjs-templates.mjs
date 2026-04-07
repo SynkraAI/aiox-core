@@ -41,7 +41,7 @@ const COVER = ${JSON.stringify(parsed.cover, null, 2)};
 const SECTIONS = ${sectionsData};
 
 function getSectionByType(type: string) {
-  return SECTIONS.find((s: any) => s.type === type);
+  return SECTIONS.find((s: { type: string }) => s.type === type);
 }
 
 export default function Home() {
@@ -127,7 +127,9 @@ export function getLPHeroComponent(effectsConfig) {
 
   return `'use client'
 
-${motionImport}
+${motionImport}import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+
 interface LPHeroProps {
   cover: { title: string; subtitle: string; badge: string; cta: string }
   hero?: { description?: string; cta?: string }
@@ -150,19 +152,19 @@ export function LPHero({ cover, hero, brandName }: LPHeroProps) {
             {cover.badge}
           </div>
         )}
-        <h1 className="${effectsConfig.gradientText ? 'text-5xl md:text-7xl font-extrabold leading-tight mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient' : 'text-5xl md:text-7xl font-extrabold leading-tight mb-6'}">
+        <h1 className={cn(
+          'text-5xl md:text-7xl font-extrabold leading-tight mb-6',
+          ${effectsConfig.gradientText ? "'bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient'" : "''"}
+        )}>
           {cover.title}
         </h1>
         {description && (
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">{description}</p>
         )}
         {ctaText && (
-          <a
-            href="#lp-cta-final"
-            className="inline-block px-8 py-4 text-lg font-bold rounded-xl bg-primary text-primary-foreground hover:shadow-lg hover:-translate-y-0.5 transition-all"
-          >
-            {ctaText}
-          </a>
+          <Button size="lg" asChild>
+            <a href="#lp-cta-final">{ctaText}</a>
+          </Button>
         )}
       </${useMotion ? 'motion.div' : 'div'}>
     </header>
@@ -326,6 +328,7 @@ export function getLPOfferComponent(effectsConfig) {
   return `'use client'
 
 ${effectsConfig.textReveal ? "import { motion } from 'framer-motion'" : ''}
+import { Button } from '@/components/ui/button'
 
 interface OfferItem { name: string; value: string }
 interface LPOfferProps {
@@ -365,12 +368,9 @@ export function LPOffer({ section }: LPOfferProps) {
           {section.price && (
             <div className="text-4xl font-extrabold text-primary mt-2">{section.price}</div>
           )}
-          <a
-            href="#lp-cta-final"
-            className="inline-block mt-6 px-8 py-4 text-lg font-bold rounded-xl bg-primary text-primary-foreground hover:shadow-lg hover:-translate-y-0.5 transition-all"
-          >
-            Quero Começar Agora →
-          </a>
+          <Button size="lg" className="mt-6" asChild>
+            <a href="#lp-cta-final">Quero Começar Agora →</a>
+          </Button>
         </div>
       </${effectsConfig.textReveal ? 'motion.div' : 'div'}>
 
@@ -395,6 +395,8 @@ export function LPOffer({ section }: LPOfferProps) {
 export function getLPCTAComponent() {
   return `'use client'
 
+import { Button } from '@/components/ui/button'
+
 interface LPCTAProps {
   section: { title?: string; description?: string; cta?: string; ps?: string }
 }
@@ -408,12 +410,9 @@ export function LPCTA({ section }: LPCTAProps) {
         {section.description && (
           <p className="text-xl text-muted-foreground mb-8">{section.description}</p>
         )}
-        <a
-          href="#"
-          className="inline-block px-10 py-4 text-lg font-bold rounded-xl bg-primary text-primary-foreground hover:shadow-lg hover:-translate-y-0.5 transition-all"
-        >
-          {ctaText}
-        </a>
+        <Button size="lg" asChild>
+          <a href="#lp-cta-final">{ctaText}</a>
+        </Button>
         {section.ps && (
           <p className="mt-6 text-sm text-muted-foreground italic">PS. {section.ps}</p>
         )}
@@ -467,6 +466,61 @@ export function LPFAQ({ section }: LPFAQProps) {
   )
 }
 `;
+}
+
+/**
+ * Generate components/ui/button.tsx — CVA-based, reusable across all LP components
+ */
+export function getLPButtonComponent() {
+  return `import * as React from 'react'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '@/lib/utils'
+
+const buttonVariants = cva(
+  'inline-flex items-center justify-center whitespace-nowrap font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        default: 'bg-primary text-primary-foreground hover:shadow-lg hover:-translate-y-0.5',
+        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        outline: 'border border-border bg-transparent hover:bg-accent hover:text-accent-foreground',
+        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        destructive: 'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+      },
+      size: {
+        sm: 'h-9 rounded-lg px-4 text-sm',
+        default: 'h-11 rounded-xl px-8 text-base',
+        lg: 'h-14 rounded-xl px-10 text-lg',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  }
+)
+
+interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+}
+
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, ...props }, ref) => {
+    return (
+      <button
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Button.displayName = 'Button'
+
+export { Button, buttonVariants }
+`
 }
 
 /**

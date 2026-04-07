@@ -384,10 +384,14 @@ function readScopeFiles(cwd, ppDir) {
     .filter(l => l && !l.startsWith('#'));
 
   let context = '';
+  const MAX_CHARS_PER_FILE = 12000; // ~3k tokens per file, keeps total under 25k tokens
   for (const file of files) {
     const filePath = path.join(cwd, file);
     if (fs.existsSync(filePath)) {
-      const content = fs.readFileSync(filePath, 'utf-8');
+      let content = fs.readFileSync(filePath, 'utf-8');
+      if (content.length > MAX_CHARS_PER_FILE) {
+        content = content.slice(0, MAX_CHARS_PER_FILE) + `\n\n[... TRUNCATED — file has ${Math.round(content.length / 1000)}k chars, showing first ${Math.round(MAX_CHARS_PER_FILE / 1000)}k ...]`;
+      }
       context += `\n--- FILE: ${file} ---\n${content}\n`;
     }
   }
@@ -421,45 +425,106 @@ function runOpenAIApi(prompt, opts) {
   const roundFiles = fs.readdirSync(ppDir)
     .filter(f => /^round-\d+(-fixed)?\.md$/.test(f))
     .sort();
-  for (const f of roundFiles.slice(-4)) { // Last 4 round files for context
-    const content = fs.readFileSync(path.join(ppDir, f), 'utf-8');
+  for (const f of roundFiles.slice(-2)) { // Last 2 round files for context (save tokens)
+    let content = fs.readFileSync(path.join(ppDir, f), 'utf-8');
+    if (content.length > 4000) content = content.slice(0, 4000) + '\n[...TRUNCATED...]';
     roundsContext += `\n--- ${f} ---\n${content}\n`;
   }
 
-  const systemPrompt = `You are a code reviewer for the code-review-ping-pong protocol. You review code/documentation quality and produce structured review files.
+  const today = new Date().toISOString().slice(0, 10);
+  const branch = getBranch(cwd);
+  const roundNum = prompt.match(/round-(\d+)\.md/)?.[1] || '1';
 
-IMPORTANT: Your output must be ONLY the content of the round file (YAML frontmatter + Markdown). Do not include any other text, explanation, or commentary. Start with --- and end with the markdown content.
+  // Extract file list from session for the template
+  const sessionRaw = fs.readFileSync(path.join(ppDir, 'session.md'), 'utf-8');
+  const filesSection = sessionRaw.match(/- files:\n([\s\S]*?)(?=\n##|\n*$)/);
+  const scopeFilesList = filesSection
+    ? filesSection[1].split('\n').map(l => l.replace(/^\s*-\s*/, '').trim()).filter(Boolean)
+    : ['SKILL.md'];
+  const filesInScopeYaml = scopeFilesList.map(f => `  - "${f}"`).join('\n');
 
-The round file MUST have this exact YAML frontmatter format:
+  const systemPrompt = `You are an expert code/documentation reviewer for the code-review-ping-pong protocol. You produce structured review files with YAML frontmatter and Markdown.
+
+CRITICAL FORMAT RULES — the output MUST pass a strict validator:
+
+1. Output ONLY the round file content. No preamble, no explanation. Start with \`---\` on line 1.
+2. Use this EXACT date: "${today}"
+3. Use this EXACT branch: "${branch}"
+4. The round number is: ${roundNum}
+5. Each issue in the YAML \`issues:\` array MUST have: id, severity, title, file, line, suggestion
+6. The Markdown body MUST use \`#### Issue {id} — {title}\` headers (four #, space, "Issue", space, id, space, em-dash, space, title)
+7. Each YAML issue MUST have a matching Markdown header. Count must match exactly.
+8. \`line\` field must be a real line range like "45-52", not "1-1"
+9. \`score\` must be a bare number (not quoted), 1-10
+10. \`verdict\` must be "CONTINUE" (score < 10) or "PERFECT" (score = 10)
+
+YAML FRONTMATTER TEMPLATE (copy exactly, fill values):
+\`\`\`
 ---
 protocol: code-review-ping-pong
 type: review
-round: N
-date: "YYYY-MM-DD"
+round: ${roundNum}
+date: "${today}"
 reviewer: "OpenAI ${model}"
 commit_sha: "unknown"
-branch: "unknown"
+branch: "${branch}"
 files_in_scope:
-  - "file1"
-  - "file2"
-score: N  (1-10, where 10 means perfect)
-verdict: "CONTINUE" or "PERFECT" (PERFECT only if score is 10)
+${filesInScopeYaml}
+score: 8
+verdict: "CONTINUE"
 issues:
-  - id: "N.1"
-    severity: "CRITICAL|HIGH|MEDIUM|LOW"
-    title: "short title"
-    file: "path/to/file"
-    line: "N-M"
-    suggestion: "what to fix"
+  - id: "${roundNum}.1"
+    severity: "HIGH"
+    title: "Short descriptive title"
+    file: "engine/guide.md"
+    line: "45-52"
+    suggestion: "What to fix"
 ---
-Followed by markdown with sections for each issue.
+\`\`\`
+
+MARKDOWN BODY TEMPLATE (after the closing ---):
+\`\`\`
+# Code Ping-Pong — Round ${roundNum} Review
+
+## 🎯 Score: N/10 — VERDICT
+
+## Issues
+
+### 🟠 HIGH
+
+#### Issue ${roundNum}.1 — Short descriptive title
+- **File:** \\\`engine/guide.md\\\`
+- **Line:** 45-52
+- **Problem:** Detailed description of what is wrong
+- **Suggestion:** How to fix it
+
+### 🟡 MEDIUM
+
+#### Issue ${roundNum}.2 — Another title
+...
+
+## ✅ What Is Good
+- List things that are well-implemented
+
+## 📊 Summary
+- **Total issues:** N
+- **By severity:** 🔴 0 CRITICAL, 🟠 N HIGH, 🟡 N MEDIUM, 🟢 N LOW
+\`\`\`
 
 SCORING GUIDE:
-- 1-3: Critical bugs, security issues, broken functionality
-- 4-6: Multiple medium issues, inconsistencies, missing edge cases
-- 7-8: Minor issues, style problems, small inconsistencies
-- 9: Very minor polish issues only
-- 10: PERFECT — no issues found at all`;
+- 4-6: Multiple real issues — broken logic, contract violations, missing edge cases that cause incorrect behavior
+- 7-8: Minor real issues — small logic gaps, missing fallbacks that could fail at runtime
+- 9: Only cosmetic or "nice to have" items — no functional impact
+- 10: PERFECT — no issues that affect correctness, completeness, or runtime behavior
+
+CRITICAL SCORING RULES:
+- ONLY report issues that affect CORRECTNESS or RUNTIME BEHAVIOR. A module that works correctly gets 10/10.
+- Do NOT report "could be clearer" or "cross-reference missing" or "documentation could mention X" as issues. These are SUGGESTIONS, not issues.
+- Do NOT report the same issue topic that appeared in previous rounds (check the PREVIOUS ROUNDS context). If a topic was already fixed, do not invent a variant.
+- If the only things you find are documentation polish, wording suggestions, or "add a comment here" — the score is 10/10 PERFECT.
+- Ask yourself: "If an LLM executes these instructions as-is, will it produce WRONG results?" If no → not an issue.
+
+Be thorough but precise. Reference specific line numbers. Focus on cross-module contract consistency.`;
 
   const userMessage = `${prompt}
 
@@ -482,36 +547,62 @@ ${roundsContext ? `--- PREVIOUS ROUNDS (for context) ---\n${roundsContext}` : ''
   });
 
   const roundStart = Date.now();
-  try {
-    const result = spawnSync('curl', [
-      '-s', '-S', '--fail-with-body',
-      '-X', 'POST',
-      'https://api.openai.com/v1/chat/completions',
-      '-H', 'Content-Type: application/json',
-      '-H', `Authorization: Bearer ${apiKey}`,
-      '-d', body,
-    ], {
-      timeout: timeout || 120000,
-      encoding: 'utf-8',
-      stdio: ['pipe', 'pipe', 'pipe'],
-    });
+  const maxRetries = 3;
 
-    const duration_ms = Date.now() - roundStart;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      const result = spawnSync('curl', [
+        '-s', '-S', '-w', '\n__HTTP_STATUS__%{http_code}',
+        '-X', 'POST',
+        'https://api.openai.com/v1/chat/completions',
+        '-H', 'Content-Type: application/json',
+        '-H', `Authorization: Bearer ${apiKey}`,
+        '-d', body,
+      ], {
+        timeout: timeout || 120000,
+        encoding: 'utf-8',
+        stdio: ['pipe', 'pipe', 'pipe'],
+      });
 
-    if (result.status !== 0) {
-      const stderr = (result.stderr || '').slice(-500);
-      log(c.red, '✗', `OpenAI API error (exit ${result.status})`);
-      if (stderr) console.log(`${c.dim}  ${stderr}${c.reset}`);
-      return { success: false, output: '', error: stderr, duration_ms };
-    }
+      const duration_ms = Date.now() - roundStart;
+      const rawOutput = result.stdout || '';
+      const statusMatch = rawOutput.match(/__HTTP_STATUS__(\d+)/);
+      const httpStatus = statusMatch ? Number(statusMatch[1]) : 0;
+      const jsonBody = rawOutput.replace(/__HTTP_STATUS__\d+/, '').trim();
 
-    const response = JSON.parse(result.stdout);
-    if (response.error) {
-      log(c.red, '✗', `OpenAI API: ${response.error.message}`);
-      return { success: false, output: '', error: response.error.message, duration_ms };
-    }
+      // Rate limit — retry with backoff
+      if (httpStatus === 429) {
+        const waitSec = attempt * 15;
+        log(c.yellow, '⏳', `Rate limit (429). Retry ${attempt}/${maxRetries} em ${waitSec}s...`);
+        if (attempt < maxRetries) {
+          spawnSync('sleep', [String(waitSec)]);
+          continue;
+        }
+        log(c.red, '✗', 'Rate limit persistente após 3 tentativas.');
+        return { success: false, output: '', error: 'Rate limit 429', duration_ms };
+      }
 
-    const content = response.choices?.[0]?.message?.content || '';
+      if (result.status !== 0 || httpStatus >= 400) {
+        const stderr = (result.stderr || '').slice(-500);
+        log(c.red, '✗', `OpenAI API error (HTTP ${httpStatus})`);
+        if (stderr) console.log(`${c.dim}  ${stderr}${c.reset}`);
+        return { success: false, output: '', error: stderr || `HTTP ${httpStatus}`, duration_ms };
+      }
+
+      let response;
+      try { response = JSON.parse(jsonBody); } catch {
+        log(c.red, '✗', 'OpenAI API: resposta não é JSON válido');
+        return { success: false, output: '', error: 'Invalid JSON response', duration_ms };
+      }
+
+      if (response.error) {
+        log(c.red, '✗', `OpenAI API: ${response.error.message}`);
+        return { success: false, output: '', error: response.error.message, duration_ms };
+      }
+
+    let content = response.choices?.[0]?.message?.content || '';
+    // Strip code fences if the model wrapped the output
+    content = content.replace(/^```[\w]*\n?/, '').replace(/\n?```\s*$/, '').trim();
     const usage = response.usage;
     if (usage) {
       const cost = estimateCost(model, usage.prompt_tokens, usage.completion_tokens);
@@ -528,11 +619,13 @@ ${roundsContext ? `--- PREVIOUS ROUNDS (for context) ---\n${roundsContext}` : ''
     }
 
     return { success: true, output: content, duration_ms };
-  } catch (err) {
-    const duration_ms = Date.now() - roundStart;
-    log(c.red, '✗', `OpenAI API error: ${err.message}`);
-    return { success: false, output: '', error: err.message, duration_ms };
-  }
+    } catch (err) {
+      const duration_ms = Date.now() - roundStart;
+      log(c.red, '✗', `OpenAI API error: ${err.message}`);
+      return { success: false, output: '', error: err.message, duration_ms };
+    }
+  } // end retry loop
+  return { success: false, output: '', error: 'Max retries exceeded', duration_ms: Date.now() - roundStart };
 }
 
 function estimateCost(model, inputTokens, outputTokens) {
@@ -994,7 +1087,7 @@ function runCycle(config, ppDir, metrics) {
       const escalatedReviewModel = resolveModel(reviewTiers, lastScore);
       const reviewConfig = { ...config };
       if (escalatedReviewModel) {
-        if (reviewAgent === 'codex') reviewConfig.codexModel = escalatedReviewModel;
+        if (reviewAgent === 'codex' || reviewAgent === 'openai-api') reviewConfig.codexModel = escalatedReviewModel;
         if (reviewAgent === 'claude') reviewConfig.claudeModel = escalatedReviewModel;
         log(c.dim, '🔀', `Modelo review: ${escalatedReviewModel} (score ${lastScore})`);
       }

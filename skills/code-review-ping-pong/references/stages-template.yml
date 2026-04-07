@@ -1,0 +1,46 @@
+# Stages Template — Multi-Stage Configuration
+#
+# Copy this to `.code-review-ping-pong/stages.yml` in your project.
+# Its existence activates multi-stage mode. Without it, the skill
+# behaves as a single-cycle review (backwards compatible).
+#
+# Rules:
+#   - Only ONE stage can have status: active at a time
+#   - id is an integer, sequential, immutable
+#   - slug is URL-safe, immutable (used in archive paths)
+#   - status flow: pending → active → complete
+#   - files must be non-empty for each stage
+#
+# Usage: node validate.cjs stages.yml
+
+protocol: code-review-ping-pong
+version: 1
+project: "{project name}"
+created: "{YYYY-MM-DD}"
+
+stages:
+  - id: 1
+    slug: "{url-safe-short-name}"
+    name: "{Stage Display Name}"
+    description: "{one-line description of what this stage covers}"
+    status: active
+    files:
+      - "{path/to/file1.ts}"
+      - "{path/to/file2.ts}"
+    goals:
+      - "{goal 1}"
+      - "{goal 2}"
+    constraints:
+      - "{constraint 1}"
+
+  - id: 2
+    slug: "{another-slug}"
+    name: "{Another Stage Name}"
+    description: "{one-line description}"
+    status: pending
+    files:
+      - "{path/to/file3.ts}"
+      - "{path/to/file4.ts}"
+    goals:
+      - "{goal 1}"
+    constraints: []

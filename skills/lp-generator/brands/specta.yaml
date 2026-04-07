@@ -1,24 +1,150 @@
-# Specta — Dark purple with pink gradient accents
-# Ideal for: creator platforms, video tools, premium SaaS
-# Inspired by: Page UI / Specta template (Fancy Purple + Pink accents)
-# Theme: dark | Base: warm dark #0a0806 + purple radial overlay
-# Visual result: deep navy-purple due to overlay
+# Specta v2 — Dark purple with pink gradient accents
+# Source: Page UI / Specta template (original, not extracted)
+# Ideal for: creator platforms, video tools, premium SaaS, AI products
+# Theme: dark | Deep navy-purple with vibrant purple + pink accents
+# Font: Syne (display) + Cabinet Grotesk (body) — bold personality
 
 name: Specta
+version: 2
 theme: dark
+source: "Page UI / Specta template"
+
+typography:
+  family:
+    display: "Syne"
+    body: "Cabinet Grotesk"
+    mono: "JetBrains Mono"
+    fallback: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    cdn_display: "https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&display=swap"
+    cdn_body: "https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700&display=swap"
+  scale:
+    h1: { size: 56px, weight: 800, line_height: 1.05, letter_spacing: "-0.03em" }
+    h2: { size: 40px, weight: 700, line_height: 1.15, letter_spacing: "-0.02em" }
+    h3: { size: 28px, weight: 700, line_height: 1.25, letter_spacing: "-0.01em" }
+    h4: { size: 22px, weight: 600, line_height: 1.3 }
+    body: { size: 16px, weight: 400, line_height: 1.6 }
+    body_sm: { size: 14px, weight: 400, line_height: 1.5 }
+    caption: { size: 13px, weight: 400, line_height: 1.5 }
+    label: { size: 11px, weight: 700, line_height: 1.4, letter_spacing: "0.08em", text_transform: uppercase }
+
 colors:
-  primary: "#A855F7"
-  primary_light: "#C084FC"
-  accent: "#EC4899"
-  background: "#0C0A1A"
-  card: "#161330"
-  border: "#272640"
-  text: "#F2F2F2"
-  text_muted: "#9CA3AF"
-  white: "#FAF5FF"
-  highlight: "#F472B6"
-font: "Inter"
-display_font: "Syne"
+  primitives:
+    purple:
+      50: "#FAF5FF"
+      100: "#F3E8FF"
+      200: "#E9D5FF"
+      300: "#D8B4FE"
+      400: "#C084FC"
+      500: "#A855F7"
+      600: "#9333EA"
+      700: "#7E22CE"
+      800: "#6B21A8"
+      900: "#581C87"
+      950: "#3B0764"
+    pink:
+      50: "#FDF2F8"
+      100: "#FCE7F3"
+      200: "#FBCFE8"
+      300: "#F9A8D4"
+      400: "#F472B6"
+      500: "#EC4899"
+      600: "#DB2777"
+      700: "#BE185D"
+      800: "#9D174D"
+      900: "#831843"
+      950: "#500724"
+  semantic:
+    background: "#0C0A1A"
+    surface: "#161330"
+    surface_elevated: "#1E1A40"
+    border: "#272640"
+    border_hover: "#3D3A5C"
+    text: "#F2F2F2"
+    text_secondary: "#D8B4FE"
+    text_muted: "#9CA3AF"
+    primary: "#A855F7"
+    primary_hover: "#C084FC"
+    accent: "#EC4899"
+    accent_hover: "#F472B6"
+    success: "#34D399"
+    warning: "#FBBF24"
+    error: "#F87171"
+    info: "#818CF8"
+
+spacing:
+  scale: [4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96]
+  section_padding: 80px
+  card_padding: 28px
+  button_padding_x: 28px
+  button_padding_y: 14px
+
+radii:
+  none: 0
+  sm: 6px
+  md: 10px
+  lg: 14px
+  xl: 20px
+  full: 9999px
+  default: 10px
+
+shadows:
+  none: "none"
+  xs: "0 1px 3px rgba(12,10,26,0.5)"
+  sm: "0 2px 8px rgba(12,10,26,0.4), 0 0 0 1px rgba(168,85,247,0.05)"
+  md: "0 4px 20px rgba(12,10,26,0.5), 0 0 0 1px rgba(168,85,247,0.08)"
+  lg: "0 8px 40px rgba(12,10,26,0.6), 0 0 40px rgba(168,85,247,0.1)"
+  xl: "0 16px 64px rgba(12,10,26,0.7), 0 0 60px rgba(236,72,153,0.1)"
+
+animation:
+  duration:
+    fast: 200ms
+    normal: 300ms
+    slow: 500ms
+  easing: "cubic-bezier(0.16, 1, 0.3, 1)"
+  hover_scale: 1.03
+
+effects:
+  glow_purple: "0 0 40px rgba(168,85,247,0.15)"
+  glow_pink: "0 0 40px rgba(236,72,153,0.12)"
+  gradient_text: "linear-gradient(135deg, #A855F7, #EC4899)"
+
+components:
+  button:
+    primary:
+      bg: "linear-gradient(135deg, #A855F7, #EC4899)"
+      text: "#FFFFFF"
+      radius: 10px
+      padding: "14px 28px"
+      font_weight: 600
+      font_size: 15px
+    secondary:
+      bg: "rgba(168,85,247,0.1)"
+      text: "#C084FC"
+      border: "rgba(168,85,247,0.2)"
+      radius: 10px
+      padding: "14px 28px"
+      font_weight: 500
+  card:
+    bg: "#161330"
+    border: "#272640"
+    radius: 14px
+    padding: 28px
+  input:
+    bg: "#161330"
+    border: "#272640"
+    text: "#F2F2F2"
+    placeholder: "#9CA3AF"
+    radius: 10px
+    padding: "12px 16px"
+
 cover:
   gradient_primary: "rgba(168,85,247,0.15)"
   gradient_secondary: "rgba(236,72,153,0.08)"
+
+anti_slop:
+  - "Gradiente purple→pink SOMENTE em CTAs e text highlights — nunca em backgrounds inteiros"
+  - "Glow effects SUTIS (opacity 0.1-0.15) — nunca neon/cyberpunk"
+  - "Syne SOMENTE em headings — body SEMPRE Cabinet Grotesk"
+  - "Background deep navy-purple (#0C0A1A), nunca preto puro"
+  - "Animações mais ousadas que outros brands (300ms, easing bouncy)"
+  - "Radii mais generosos (10px default) — feel moderno"

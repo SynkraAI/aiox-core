@@ -19,6 +19,9 @@ Gera componentes React + stories basicos rapidamente. Util como ponto de partida
 
 **Credito:** Diretrizes de qualidade visual adaptadas do [Design OS](https://github.com/buildermethods/design-os) (Brian Casel / Builder Methods).
 
+**Quality Standard:** Consultar `skills/design-system-quality-standard.md` antes de gerar componentes.
+Todo componente gerado DEVE usar `cn()`, `forwardRef`, CVA para variantes, e `focus-visible`.
+
 ---
 
 ## Design Quality Rules (Anti-AI Slop)

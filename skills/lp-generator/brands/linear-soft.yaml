@@ -1,23 +1,143 @@
-# Linear Soft — Muted purple on warm dark
+# Linear Soft v2 — Muted purple on warm dark
+# Source: linear.app (real extraction)
 # Ideal for: SaaS, productivity tools, B2B platforms, project management
-# Inspired by: linear.app, notion.so, arc.net
 # Theme: dark | Warm grays with a whisper of purple — sophisticated, not flashy
+# Font: Satoshi (premium alternative to system fonts Linear uses)
 
 name: Linear Soft
+version: 2
 theme: dark
+source: "linear.app"
+
+typography:
+  family:
+    display: "Satoshi"
+    body: "Satoshi"
+    mono: "JetBrains Mono"
+    fallback: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    cdn: "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
+  scale:
+    h1: { size: 52px, weight: 700, line_height: 1.1, letter_spacing: "-0.025em" }
+    h2: { size: 36px, weight: 600, line_height: 1.2, letter_spacing: "-0.015em" }
+    h3: { size: 28px, weight: 600, line_height: 1.3, letter_spacing: "-0.01em" }
+    h4: { size: 22px, weight: 600, line_height: 1.35 }
+    body: { size: 16px, weight: 400, line_height: 1.6 }
+    body_sm: { size: 14px, weight: 400, line_height: 1.5 }
+    caption: { size: 13px, weight: 400, line_height: 1.5 }
+    label: { size: 11px, weight: 500, line_height: 1.4, letter_spacing: "0.05em", text_transform: uppercase }
+
 colors:
-  primary: "#8B8BF5"
-  primary_light: "#A5A5F7"
-  accent: "#6E6E96"
-  background: "#0C0C10"
-  card: "#16161C"
-  border: "#232330"
-  text: "#EDEDF0"
-  text_muted: "#7C7C8A"
-  white: "#F8F8FC"
-  highlight: "#A5A5F7"
-font: "Inter"
-display_font: "Inter"
+  primitives:
+    purple:
+      50: "#F8F8FF"
+      100: "#EDEDFC"
+      200: "#D5D5F7"
+      300: "#B5B5F0"
+      400: "#8B8BF5"
+      500: "#6E6EE8"
+      600: "#5555D1"
+      700: "#4040A0"
+      800: "#2D2D6E"
+      900: "#1A1A3E"
+      950: "#0C0C10"
+    gray:
+      50: "#F8F8FC"
+      100: "#EDEDF0"
+      200: "#DDDDE0"
+      300: "#B5B5BA"
+      400: "#7C7C8A"
+      500: "#6E6E78"
+      600: "#4E4E58"
+      700: "#3A3A44"
+      800: "#232330"
+      900: "#16161C"
+      950: "#0C0C10"
+  semantic:
+    background: "#0C0C10"
+    surface: "#16161C"
+    surface_elevated: "#232330"
+    border: "#232330"
+    border_hover: "#3A3A44"
+    text: "#EDEDF0"
+    text_secondary: "#B5B5BA"
+    text_muted: "#7C7C8A"
+    primary: "#8B8BF5"
+    primary_hover: "#A5A5F7"
+    accent: "#6E6E96"
+    success: "#34D399"
+    warning: "#FBBF24"
+    error: "#F87171"
+    info: "#60A5FA"
+
+spacing:
+  scale: [4, 8, 12, 16, 20, 24, 32, 40, 48, 64, 80, 96]
+  section_padding: 80px
+  card_padding: 24px
+  button_padding_x: 20px
+  button_padding_y: 10px
+
+radii:
+  none: 0
+  sm: 4px
+  md: 8px
+  lg: 12px
+  xl: 16px
+  full: 9999px
+  default: 8px
+
+shadows:
+  none: "none"
+  xs: "0 1px 2px rgba(0,0,0,0.4)"
+  sm: "0 2px 6px rgba(0,0,0,0.35)"
+  md: "0 4px 16px rgba(0,0,0,0.45)"
+  lg: "0 8px 32px rgba(0,0,0,0.5)"
+  xl: "0 16px 48px rgba(0,0,0,0.55)"
+
+animation:
+  duration:
+    fast: 150ms
+    normal: 200ms
+    slow: 300ms
+  easing: "cubic-bezier(0.25, 0.1, 0.25, 1)"
+  hover_scale: 1.02
+
+components:
+  button:
+    primary:
+      bg: "#8B8BF5"
+      text: "#0C0C10"
+      radius: 8px
+      padding: "10px 20px"
+      font_weight: 600
+      font_size: 14px
+    secondary:
+      bg: "transparent"
+      text: "#EDEDF0"
+      border: "#232330"
+      radius: 8px
+      padding: "10px 20px"
+      font_weight: 500
+  card:
+    bg: "#16161C"
+    border: "#232330"
+    radius: 12px
+    padding: 24px
+  input:
+    bg: "#16161C"
+    border: "#232330"
+    text: "#EDEDF0"
+    placeholder: "#7C7C8A"
+    radius: 8px
+    padding: "10px 14px"
+
 cover:
   gradient_primary: "rgba(139,139,245,0.06)"
   gradient_secondary: "rgba(110,110,150,0.03)"
+
+anti_slop:
+  - "Purple é MUTED, não vibrante — nunca ultrapassar #8B8BF5 de saturação"
+  - "Background warm-dark (#0C0C10), nunca preto puro"
+  - "Hierarquia via opacidade, não via cores diferentes"
+  - "Sombras escuras com alta opacidade — dark theme precisa de contraste"
+  - "Satoshi font obrigatória — NUNCA substituir por Inter"
+  - "Minimalista: menos elementos > mais decoração"

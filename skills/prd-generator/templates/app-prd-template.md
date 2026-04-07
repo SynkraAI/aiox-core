@@ -62,9 +62,73 @@
 
 ---
 
-## 3. Target Audience
+## 3. Core Atom (Atomic MVP)
 
-### 3.1 Persona Primária: {{PERSONA_1_NAME}}
+> "Se isso não funcionar, nada mais importa."
+
+O Core Atom é a operação mais básica e arriscada do sistema. É o teste de realidade
+antes de construir qualquer outra coisa. Inspirado no Atomic Design do Brad Frost:
+Átomos → Moléculas → Organismos → Templates → Páginas.
+
+### 3.1 Identificação do Core Atom
+
+**Pergunta-chave:** Qual é a única coisa que, se não funcionar, invalida todo o projeto?
+
+| Item | Resposta |
+|------|----------|
+| **Core Atom** | {{CORE_ATOM_DESCRIPTION}} |
+| **Por que é crítico?** | {{WHY_CRITICAL}} |
+| **Risco técnico** | {{RISK_LEVEL}} (Alto/Médio/Baixo) |
+| **Dependência externa?** | {{EXTERNAL_DEPENDENCY}} (API, serviço, hardware, nenhuma) |
+| **Já foi validado?** | {{VALIDATED}} (Sim/Não/Parcialmente) |
+
+### 3.2 Atomic Layers (Camadas de Construção)
+
+| Camada | Elemento | Descrição | Depende de |
+|--------|----------|-----------|------------|
+| 🔴 **Átomo** | {{ATOM_NAME}} | {{ATOM_DESCRIPTION}} | — |
+| 🟠 **Molécula** | {{MOLECULE_NAME}} | {{MOLECULE_DESCRIPTION}} | Átomo |
+| 🟡 **Organismo** | {{ORGANISM_NAME}} | {{ORGANISM_DESCRIPTION}} | Moléculas |
+| 🟢 **Template** | {{TEMPLATE_NAME}} | {{TEMPLATE_DESCRIPTION}} | Organismos |
+| 🔵 **Página** | {{PAGE_NAME}} | {{PAGE_DESCRIPTION}} | Templates |
+
+### 3.3 Proof of Life (PoL)
+
+**Definição:** Um teste mínimo que prova que o Core Atom funciona.
+
+| Item | Especificação |
+|------|---------------|
+| **Comando CLI** | `{{POL_COMMAND}}` |
+| **Input de teste** | {{POL_INPUT}} |
+| **Output esperado** | {{POL_EXPECTED_OUTPUT}} |
+| **Critério de sucesso** | {{POL_SUCCESS_CRITERIA}} |
+| **Tempo máximo** | {{POL_MAX_TIME}} |
+
+### 3.4 Risk Assessment do Core Atom
+
+| Risco | Probabilidade | Impacto | Mitigação |
+|-------|---------------|---------|-----------|
+| {{ATOM_RISK_1}} | Alta/Média/Baixa | Crítico/Alto/Médio | {{ATOM_MITIGATION_1}} |
+| {{ATOM_RISK_2}} | Alta/Média/Baixa | Crítico/Alto/Médio | {{ATOM_MITIGATION_2}} |
+| {{ATOM_RISK_3}} | Alta/Média/Baixa | Crítico/Alto/Médio | {{ATOM_MITIGATION_3}} |
+
+### 3.5 Go/No-Go Checklist
+
+Antes de avançar para as próximas camadas:
+
+- [ ] Core Atom implementado
+- [ ] Proof of Life passou 3x consecutivas
+- [ ] Riscos críticos têm mitigação documentada
+- [ ] Tempo de execução do PoL < {{POL_MAX_TIME}}
+- [ ] Nenhuma dependência externa bloqueante
+
+**Se qualquer item falhar:** PARAR. Repensar abordagem antes de continuar.
+
+---
+
+## 4. Target Audience
+
+### 4.1 Persona Primária: {{PERSONA_1_NAME}}
 
 **Demografia:**
 - Idade: {{AGE_RANGE}}

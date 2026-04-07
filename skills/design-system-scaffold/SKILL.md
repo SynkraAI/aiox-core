@@ -15,6 +15,13 @@ Monta o projeto completo a partir dos tokens extraídos pelo `/design-system-for
 
 ---
 
+## Quality Standard
+
+**OBRIGATORIO:** Antes de gerar qualquer arquivo, consultar `skills/design-system-quality-standard.md`.
+Checklist de entrega no final desse documento. Todo output DEVE atender os criterios la definidos.
+
+---
+
 ## Entry Point
 
 ### Passo 1: Localizar dados extraídos

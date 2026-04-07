@@ -104,6 +104,54 @@ function parseSimpleYaml(content) {
 }
 
 // ---------------------------------------------------------------------------
+// Typography helpers
+// ---------------------------------------------------------------------------
+
+function inferLineHeight(fontSize) {
+  // Headings (>= 24px) get tighter line-height, body text gets looser
+  const px = parseFloat(fontSize);
+  if (isNaN(px)) return '1.5';
+  if (px >= 48) return '1.08';
+  if (px >= 32) return '1.15';
+  if (px >= 24) return '1.25';
+  if (px >= 18) return '1.5';
+  return '1.6'; // Body text / small text
+}
+
+// ---------------------------------------------------------------------------
+// Color analysis helpers
+// ---------------------------------------------------------------------------
+
+function hexToRGB(hex) {
+  const h = hex.replace('#', '');
+  const r = parseInt(h.substring(0, 2), 16) / 255;
+  const g = parseInt(h.substring(2, 4), 16) / 255;
+  const b = parseInt(h.substring(4, 6), 16) / 255;
+  return { r, g, b };
+}
+
+function hexToLuminosity(hex) {
+  try {
+    const { r, g, b } = hexToRGB(hex);
+    // Relative luminance (WCAG formula)
+    const lum = (c) => c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+    return 0.2126 * lum(r) + 0.7152 * lum(g) + 0.0722 * lum(b);
+  } catch { return 0.5; }
+}
+
+function hexToSaturation(hex) {
+  try {
+    const { r, g, b } = hexToRGB(hex);
+    const max = Math.max(r, g, b);
+    const min = Math.min(r, g, b);
+    const l = (max + min) / 2;
+    if (max === min) return 0;
+    const d = max - min;
+    return l > 0.5 ? d / (2 - max - min) : d / (max + min);
+  } catch { return 0; }
+}
+
+// ---------------------------------------------------------------------------
 // Generate Tailwind config
 // ---------------------------------------------------------------------------
 
@@ -117,10 +165,9 @@ function generateConfig(tokens, cssData) {
   const animation = {};
   const keyframes = {};
 
-  // --- Colors ---
-  let colorIndex = 0;
-  const colorNames = ['primary', 'secondary', 'accent', 'muted', 'background', 'foreground', 'surface', 'border'];
+  // --- Colors (semantic mapping by luminosity + frequency) ---
   const seenColors = new Set();
+  const colorEntries = [];
 
   for (const [key, data] of Object.entries(tokens.colors || {})) {
     const value = data.value || '';
@@ -128,13 +175,47 @@ function generateConfig(tokens, cssData) {
     seenColors.add(value);
 
     const occurrences = parseInt(data.occurrences) || 0;
-    if (occurrences < 2) continue; // Skip rare colors
+    if (occurrences < 2) continue;
 
-    const name = colorIndex < colorNames.length ? colorNames[colorIndex] : `color-${colorIndex}`;
-    colors[name] = value;
-    colorIndex++;
+    // Calculate relative luminosity from hex
+    const luminosity = hexToLuminosity(value);
+    const saturation = hexToSaturation(value);
 
-    if (colorIndex >= 20) break; // Cap at 20 colors
+    colorEntries.push({ value, occurrences, luminosity, saturation });
+    if (colorEntries.length >= 20) break;
+  }
+
+  // Sort and assign semantic names based on color properties
+  if (colorEntries.length > 0) {
+    // Find darkest (background candidate) and lightest (foreground candidate)
+    const sorted = [...colorEntries].sort((a, b) => a.luminosity - b.luminosity);
+    const darkest = sorted[0];
+    const lightest = sorted[sorted.length - 1];
+
+    // Most saturated = primary; second most = accent
+    const bySaturation = [...colorEntries].sort((a, b) => b.saturation - a.saturation);
+    const primary = bySaturation[0];
+    const accent = bySaturation.length > 1 ? bySaturation[1] : null;
+
+    // Assign semantic names
+    colors['background'] = darkest.value;
+    colors['foreground'] = lightest.value;
+    if (primary) colors['primary'] = primary.value;
+    if (accent && accent.value !== primary?.value) colors['accent'] = accent.value;
+
+    // Mid-luminosity colors as secondary/muted/surface/border
+    const midColors = colorEntries.filter(c =>
+      c.value !== darkest.value &&
+      c.value !== lightest.value &&
+      c.value !== primary?.value &&
+      c.value !== accent?.value
+    ).sort((a, b) => a.luminosity - b.luminosity);
+
+    const midNames = ['border', 'muted', 'secondary', 'surface'];
+    midColors.forEach((c, i) => {
+      if (i < midNames.length) colors[midNames[i]] = c.value;
+      else colors[`color-${i}`] = c.value;
+    });
   }
 
   // --- Typography ---
@@ -146,7 +227,8 @@ function generateConfig(tokens, cssData) {
 
     if (size && !fontSize[size]) {
       const name = size.replace(/[^a-zA-Z0-9]/g, '');
-      fontSize[name] = [size, { lineHeight: '1.2', fontWeight: weight || '400' }];
+      const lh = data['line-height'] || inferLineHeight(size);
+      fontSize[name] = [size, { lineHeight: lh, fontWeight: weight || '400' }];
     }
 
     if (family && !seenFonts.has(family)) {
@@ -174,11 +256,16 @@ function generateConfig(tokens, cssData) {
     shadowIndex++;
   }
 
-  // --- Animations from extracted CSS ---
+  // --- Animations from extracted CSS (preserve original timing) ---
   if (cssData) {
     for (const anim of (cssData.animations || [])) {
       if (!anim.name || !anim.cssText) continue;
-      animation[anim.name] = `${anim.name} 3s ease-in-out infinite`;
+
+      // Extract real duration, timing-function and iteration-count from CSS
+      const duration = anim.duration || '1s';
+      const timing = anim.timingFunction || anim.easing || 'ease-in-out';
+      const iteration = anim.iterationCount || 'infinite';
+      animation[anim.name] = `${anim.name} ${duration} ${timing} ${iteration}`;
 
       // Parse keyframes from cssText
       const kfMatch = anim.cssText.match(/@keyframes\s+\S+\s*\{([\s\S]*)\}$/);

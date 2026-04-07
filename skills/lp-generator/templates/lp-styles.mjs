@@ -15,21 +15,20 @@ export function getLPCSS(shadcnVars) {
 ${shadcnVars}
 }
 
-/* Light theme overrides */
+/* Light theme overrides — inherits brand primary from :root */
 [data-theme="light"] {
   --background: 0 0% 100%;
   --foreground: 240 10% 3.9%;
-  --card: 0 0% 100%;
+  --card: 210 20% 98%;
   --card-foreground: 240 10% 3.9%;
-  --primary: 259 69% 56%;
-  --primary-light: 259 69% 70%;
+  /* --primary is NOT overridden here — it inherits from :root (brand color) */
   --primary-foreground: 0 0% 98%;
   --accent: 240 4.8% 95.9%;
   --accent-foreground: 240 5.9% 10%;
   --muted: 240 4.8% 95.9%;
   --muted-foreground: 240 3.8% 46.1%;
   --border: 240 5.9% 90%;
-  --ring: 259 69% 56%;
+  /* --ring inherits from :root primary */
 }
 
 /* ---- Base ---- */
@@ -852,6 +851,16 @@ body::after {
 @media print {
   .lp-nav, .lp-sticky-cta { display: none !important; }
   body { background: white; color: black; }
+}
+
+/* ---- Focus ring (a11y) ---- */
+.lp-cta-btn:focus-visible,
+.lp-nav-cta:focus-visible,
+.lp-faq-question:focus-visible,
+.lp-carousel-dot:focus-visible,
+.lp-nav-toggle:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
 }
 
 /* ---- Reduced motion ---- */

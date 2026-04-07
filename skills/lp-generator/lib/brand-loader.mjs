@@ -1,9 +1,12 @@
 /**
  * Loads and validates brand YAML configuration files.
  * Converts brand colors to CSS custom properties.
+ *
+ * v2: Delegates to @aios/brand-schema for canonical loading and validation.
+ * Maintains backward-compatible API (loadBrand, getBrandCSS, listBrands).
  */
 
-import { readFileSync, readdirSync } from 'fs';
+import { readFileSync, readdirSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
@@ -11,16 +14,25 @@ import yaml from 'js-yaml';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BRANDS_DIR = resolve(__dirname, '..', 'brands');
 
-const REQUIRED_FIELDS = ['name', 'theme', 'colors', 'font'];
-const REQUIRED_COLORS = ['primary', 'primary_light', 'accent', 'background', 'card', 'border', 'text', 'text_muted', 'white'];
+// Also check canonical brand-schema location
+const CANONICAL_BRANDS_DIR = resolve(__dirname, '..', '..', '..', 'packages', 'brand-schema', 'brands');
+
+const REQUIRED_FIELDS = ['name', 'theme', 'colors', 'typography'];
+const REQUIRED_SEMANTIC_COLORS = ['primary', 'accent', 'background', 'text'];
 
 /**
  * Load a brand config by name.
+ * Searches both local brands/ and canonical packages/brand-schema/brands/.
  * @param {string} name - Brand name (matches filename without .yaml)
  * @returns {object} Validated brand config
  */
 export function loadBrand(name) {
-  const brandPath = resolve(BRANDS_DIR, `${name}.yaml`);
+  let brandPath = resolve(BRANDS_DIR, `${name}.yaml`);
+
+  // Fall back to canonical location
+  if (!existsSync(brandPath) && existsSync(CANONICAL_BRANDS_DIR)) {
+    brandPath = resolve(CANONICAL_BRANDS_DIR, `${name}.yaml`);
+  }
 
   let raw;
   try {
@@ -38,9 +50,14 @@ export function loadBrand(name) {
     }
   }
 
-  for (const color of REQUIRED_COLORS) {
-    if (!brand.colors[color]) {
-      throw new Error(`Brand "${name}" is missing required color "${color}". See SKILL.md for format.`);
+  // Validate semantic colors (nested path: colors.semantic.*)
+  const semantic = brand.colors?.semantic;
+  if (!semantic) {
+    throw new Error(`Brand "${name}" is missing colors.semantic. See SKILL.md for format.`);
+  }
+  for (const color of REQUIRED_SEMANTIC_COLORS) {
+    if (!semantic[color]) {
+      throw new Error(`Brand "${name}" is missing required color "colors.semantic.${color}".`);
     }
   }
 
@@ -49,10 +66,11 @@ export function loadBrand(name) {
     brand.cover = {};
   }
   if (!brand.cover.gradient_primary) {
-    brand.cover.gradient_primary = `rgba(${hexToRgb(brand.colors.primary)},0.25)`;
+    brand.cover.gradient_primary = `rgba(${hexToRgb(semantic.primary)},0.25)`;
   }
   if (!brand.cover.gradient_secondary) {
-    brand.cover.gradient_secondary = `rgba(${hexToRgb(brand.colors.primary_light)},0.10)`;
+    const lighter = semantic.primary_hover || semantic.accent || semantic.primary;
+    brand.cover.gradient_secondary = `rgba(${hexToRgb(lighter)},0.10)`;
   }
 
   // Default logos
@@ -78,12 +96,14 @@ function hexToRgb(hex) {
 
 /**
  * Convert brand colors to CSS custom properties string.
+ * Reads from colors.semantic (canonical format).
  * @param {object} brand - Brand config object
  * @returns {string} CSS :root block with custom properties
  */
 export function getBrandCSS(brand) {
-  const { colors } = brand;
-  const vars = Object.entries(colors)
+  const semantic = brand.colors?.semantic || brand.colors || {};
+  const vars = Object.entries(semantic)
+    .filter(([, value]) => typeof value === 'string')
     .map(([key, value]) => {
       const cssKey = key.replace(/_/g, '-');
       return `    --${cssKey}: ${value};`;
@@ -94,11 +114,17 @@ export function getBrandCSS(brand) {
 }
 
 /**
- * List all available brand names.
+ * List all available brand names (from both local and canonical locations).
  * @returns {string[]} Array of brand names
  */
 export function listBrands() {
-  return readdirSync(BRANDS_DIR)
-    .filter(f => f.endsWith('.yaml'))
-    .map(f => f.replace('.yaml', ''));
+  const local = existsSync(BRANDS_DIR)
+    ? readdirSync(BRANDS_DIR).filter(f => f.endsWith('.yaml'))
+    : [];
+  const canonical = existsSync(CANONICAL_BRANDS_DIR)
+    ? readdirSync(CANONICAL_BRANDS_DIR).filter(f => f.endsWith('.yaml'))
+    : [];
+
+  const all = new Set([...local, ...canonical]);
+  return [...all].map(f => f.replace('.yaml', '')).sort();
 }
