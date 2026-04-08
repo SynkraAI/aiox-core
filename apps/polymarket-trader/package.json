@@ -20,6 +20,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.85.0",
     "@polymarket/clob-client": "^4.0.0",
     "commander": "^12.1.0",
     "ethers": "^6.13.0",

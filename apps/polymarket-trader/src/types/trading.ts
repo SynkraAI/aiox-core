@@ -166,7 +166,9 @@ export interface GateCriteria {
   minSharpe: number;
   maxDrawdown: number;
   minEdgePersistenceWR: number;
-  minProfitFactor: number;
+  minProfitFactor: number;         // PRIMARY metric (Conclave: Domer)
+  minEvPerTrade: number;           // PRIMARY metric (Conclave: Tetlock)
+  maxBrierScore: number;           // Calibration gate (Conclave: Tetlock)
 }
 
 // ---------------------------------------------------------------------------

@@ -26,8 +26,9 @@ export class PolymarketClient {
 
   async getMarkets(params?: { active?: boolean; closed?: boolean; limit?: number }): Promise<Market[]> {
     const searchParams = new URLSearchParams();
-    if (params?.active !== undefined) searchParams.set('active', String(params.active));
-    if (params?.closed !== undefined) searchParams.set('closed', String(params.closed));
+    // Default: only open markets (active=true, closed=false)
+    searchParams.set('active', String(params?.active ?? true));
+    searchParams.set('closed', String(params?.closed ?? false));
     if (params?.limit) searchParams.set('limit', String(params.limit));
 
     const url = `${POLYMARKET_API.gamma}/markets?${searchParams}`;
@@ -35,13 +36,44 @@ export class PolymarketClient {
     if (!response.ok) throw new Error(`Gamma API error: ${response.status}`);
 
     const data = await response.json() as Array<Record<string, unknown>>;
-    return data.map((d) => this.parseMarket(d));
+    const now = Date.now();
+    return data
+      .map((d) => this.parseMarket(d))
+      .filter(m => m.tokens.yes.tokenId !== '')
+      // Reject markets whose event end date has already passed
+      .filter(m => !m.endDate || new Date(m.endDate).getTime() > now);
   }
 
   async getMarket(marketId: string): Promise<Market> {
     const response = await fetch(`${POLYMARKET_API.gamma}/markets/${marketId}`);
     if (!response.ok) throw new Error(`Market ${marketId} not found`);
     return this.parseMarket(await response.json() as Record<string, unknown>);
+  }
+
+  /**
+   * Fetch recently resolved markets to settle open paper positions.
+   * Resolved markets have closed=true and outcomePrices at 0 or 1.
+   */
+  async getResolvedMarkets(marketIds: string[]): Promise<Market[]> {
+    if (marketIds.length === 0) return [];
+
+    const resolved: Market[] = [];
+    // Batch in groups of 10 to avoid URL length issues
+    for (let i = 0; i < marketIds.length; i += 10) {
+      const batch = marketIds.slice(i, i + 10);
+      for (const id of batch) {
+        try {
+          const response = await fetch(`${POLYMARKET_API.gamma}/markets/${id}`);
+          if (!response.ok) continue;
+          const raw = await response.json() as Record<string, unknown>;
+          const market = this.parseMarket(raw);
+          if (market.closed) {
+            resolved.push(market);
+          }
+        } catch { /* skip unreachable markets */ }
+      }
+    }
+    return resolved;
   }
 
   async searchMarkets(query: string): Promise<Market[]> {
@@ -145,31 +177,40 @@ export class PolymarketClient {
   // ─── Helpers ─────────────────────────────────────────
 
   private parseMarket(raw: Record<string, unknown>): Market {
-    const tokens = raw.tokens as Array<{ token_id: string; outcome: string; price: number }> | undefined;
+    // Gamma API returns outcomePrices as JSON string: '["0.525", "0.475"]'
+    // and clobTokenIds as JSON string with two token IDs
+    let yesPriceNum = 0.5;
+    let noPriceNum = 0.5;
+    let yesTokenId = '';
+    let noTokenId = '';
+
+    try {
+      const prices = JSON.parse(raw.outcomePrices as string || '[]') as string[];
+      yesPriceNum = parseFloat(prices[0] || '0.5');
+      noPriceNum = parseFloat(prices[1] || '0.5');
+    } catch { /* use defaults */ }
+
+    try {
+      const tokenIds = JSON.parse(raw.clobTokenIds as string || '[]') as string[];
+      yesTokenId = tokenIds[0] || '';
+      noTokenId = tokenIds[1] || '';
+    } catch { /* use defaults */ }
 
     return {
       id: raw.id as string || raw.condition_id as string || '',
       question: raw.question as string || '',
       slug: raw.slug as string || '',
       vertical: detectVertical(raw.question as string || ''),
-      endDate: raw.end_date_iso as string || '',
+      endDate: raw.endDateIso as string || raw.end_date_iso as string || '',
       active: raw.active as boolean ?? true,
       closed: raw.closed as boolean ?? false,
       tokens: {
-        yes: {
-          tokenId: tokens?.[0]?.token_id ?? '',
-          price: tokens?.[0]?.price ?? 0.5,
-          outcome: 'Yes',
-        },
-        no: {
-          tokenId: tokens?.[1]?.token_id ?? '',
-          price: tokens?.[1]?.price ?? 0.5,
-          outcome: 'No',
-        },
+        yes: { tokenId: yesTokenId, price: yesPriceNum, outcome: 'Yes' },
+        no: { tokenId: noTokenId, price: noPriceNum, outcome: 'No' },
       },
       volume: parseFloat(raw.volume as string || '0'),
       liquidity: parseFloat(raw.liquidity as string || '0'),
-      lastPrice: tokens?.[0]?.price ?? 0.5,
+      lastPrice: yesPriceNum,
     };
   }
 
@@ -180,9 +221,67 @@ export class PolymarketClient {
 
 function detectVertical(question: string): Vertical {
   const q = question.toLowerCase();
-  if (q.includes('temperature') || q.includes('weather') || q.includes('°f') || q.includes('°c')) return 'weather';
-  if (q.includes('bitcoin') || q.includes('ethereum') || q.includes('crypto') || q.includes('btc') || q.includes('eth')) return 'crypto';
-  if (q.includes('election') || q.includes('president') || q.includes('congress') || q.includes('vote')) return 'politics';
-  if (q.includes('nba') || q.includes('nfl') || q.includes('mlb') || q.includes('win') || q.includes('game')) return 'sports';
-  return 'crypto'; // default
+
+  // Weather
+  if (q.includes('temperature') || q.includes('weather') || q.includes('°f') || q.includes('°c')
+    || q.includes('hurricane') || q.includes('tornado') || q.includes('rainfall') || q.includes('snowfall')
+    || q.includes('heat wave') || q.includes('drought') || q.includes('flood')) return 'weather';
+
+  // Legal / Crime → politics (BEFORE crypto to avoid "token"/"market cap" false positives)
+  if (q.includes('sentenced') || q.includes('trial') || q.includes('verdict') || q.includes('guilty')
+    || q.includes('prison') || q.includes('weinstein') || q.includes('indicted')
+    || q.includes('convicted') || q.includes('court') || q.includes('lawsuit')
+    || q.includes('arrest') || q.includes('pardon') || q.includes('impeach')) return 'politics';
+
+  // Politics (before crypto — "war", "invasion" etc. should not fall through)
+  if (q.includes('election') || q.includes('president') || q.includes('congress') || q.includes('vote')
+    || q.includes('senate') || q.includes('governor') || q.includes('trump') || q.includes('biden')
+    || q.includes('democrat') || q.includes('republican') || q.includes('parliament')
+    || q.includes('prime minister') || q.includes('legislation') || q.includes('poll')
+    || q.includes('ceasefire') || q.includes('war') || q.includes('invade') || q.includes('invasion')
+    || q.includes('russia') || q.includes('ukraine') || q.includes('china') || q.includes('taiwan')
+    || q.includes('tariff') || q.includes('sanction') || q.includes('pope')
+    || q.includes('government') || q.includes('minister') || q.includes('nato')) return 'politics';
+
+  // Sports
+  if (q.includes('nba') || q.includes('nfl') || q.includes('mlb') || q.includes('nhl')
+    || q.includes('champions league') || q.includes('world cup') || q.includes('super bowl')
+    || q.includes('playoff') || q.includes('championship') || q.includes('mvp')
+    || q.includes('ufc') || q.includes('tennis') || q.includes('formula 1') || q.includes('f1 ')
+    || q.includes('stanley cup') || q.includes(' win the 20') || q.includes('serie a')
+    || q.includes('premier league') || q.includes('la liga')) return 'sports';
+
+  // Pop Culture
+  if (q.includes('oscar') || q.includes('grammy') || q.includes('emmy') || q.includes('movie')
+    || q.includes('box office') || q.includes('album') || q.includes('spotify')
+    || q.includes('netflix') || q.includes('celebrity') || q.includes('twitter')
+    || q.includes('tiktok') || q.includes('viral') || q.includes('streaming')
+    || q.includes('rihanna') || q.includes('carti') || q.includes('gta')
+    || q.includes('youtube') || q.includes('subscriber')) return 'pop_culture';
+
+  // Crypto (after politics/legal to avoid misclassification)
+  if (q.includes('bitcoin') || q.includes('ethereum') || q.includes('crypto') || q.includes('btc')
+    || q.includes('eth ') || q.includes('solana') || q.includes('sol ') || q.includes('defi')
+    || q.includes('blockchain') || q.includes('nft') || q.includes('stablecoin')
+    || q.includes('usdc') || q.includes('usdt') || q.includes('binance')
+    || q.includes('coinbase') || q.includes('altcoin')) return 'crypto';
+
+  // Finance / Macro
+  if (q.includes('fed ') || q.includes('federal reserve') || q.includes('interest rate')
+    || q.includes('inflation') || q.includes('gdp') || q.includes('unemployment')
+    || q.includes('s&p') || q.includes('nasdaq') || q.includes('stock')
+    || q.includes('recession') || q.includes('treasury') || q.includes('oil price')
+    || q.includes('gold price') || q.includes('cpi') || q.includes('market cap')
+    || q.includes('dow jones') || q.includes('bond') || q.includes('yield')) return 'finance';
+
+  // Science / Tech
+  if (q.includes('spacex') || q.includes('nasa') || q.includes('launch')
+    || q.includes('ai ') || q.includes('artificial intelligence') || q.includes('openai')
+    || q.includes('fda') || q.includes('drug approval') || q.includes('clinical trial')
+    || q.includes('vaccine') || q.includes('asteroid') || q.includes('quantum')
+    || q.includes('mars') || q.includes('starship') || q.includes('google')
+    || q.includes('apple ') || q.includes('microsoft')) return 'science';
+
+  // Default: pop_culture (safest fallback — misclassification less harmful than crypto)
+  return 'pop_culture';
 }

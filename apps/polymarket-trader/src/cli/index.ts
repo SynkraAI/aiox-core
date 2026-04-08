@@ -6,6 +6,23 @@
  * Hand-rolled process.argv parsing (no commander/yargs).
  */
 
+// Load .env file (zero dependencies — native Node.js)
+import { readFileSync } from 'fs';
+import { join } from 'path';
+try {
+  const envPath = join(process.cwd(), '.env');
+  const envContent = readFileSync(envPath, 'utf-8');
+  for (const line of envContent.split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const eqIdx = trimmed.indexOf('=');
+    if (eqIdx === -1) continue;
+    const key = trimmed.slice(0, eqIdx).trim();
+    const val = trimmed.slice(eqIdx + 1).trim();
+    if (!process.env[key]) process.env[key] = val;
+  }
+} catch { /* no .env file, use system env */ }
+
 import type { TradingSystem } from '../index.js';
 import type { TradeExperience } from '../types/index.js';
 import {
@@ -656,9 +673,82 @@ async function cmdDashboard(flags: Record<string, string | boolean>): Promise<vo
   await new Promise(() => {});
 }
 
+async function cmdLiquidity(): Promise<void> {
+  const system = await getSystem();
+
+  console.log(sectionHeader('LIQUIDITY MAXIMIZER'));
+
+  // Depth Filter stats
+  const depthStats = system.depthFilter.getStats();
+  console.log(keyValue('Depth Checks', `${depthStats.checked}`));
+  console.log(keyValue('Passed (full size)', `${depthStats.passed}`));
+  console.log(keyValue('Reduced (partial)', `${depthStats.reduced}`));
+  console.log(keyValue('Skipped (too thin)', `${depthStats.skipped}`));
+  console.log('');
+
+  // Gas Optimizer stats
+  const gasStats = system.gasOptimizer.getStats();
+  console.log(keyValue('Gas (Polygon)', `${gasStats.currentGwei.toFixed(1)} gwei`));
+  console.log(keyValue('Gas Tier', statusColor(gasStats.gasTier.toUpperCase())));
+  console.log(keyValue('Queue Size', `${gasStats.queueSize}`));
+  console.log('');
+
+  // Splitter stats
+  const splitStats = system.splitter.getStats();
+  console.log(keyValue('Orders Split', `${splitStats.totalSplits}`));
+  console.log(keyValue('Chunks Executed', `${splitStats.chunksExecuted}`));
+  console.log(keyValue('Chunks Cancelled', `${splitStats.chunksCancelled}`));
+  console.log(keyValue('Avg Chunks/Order', splitStats.avgChunksPerOrder.toFixed(1)));
+  console.log(keyValue('Total Fee Savings', pnlColor(splitStats.totalSaved, formatCurrency(splitStats.totalSaved))));
+  console.log('');
+
+  // Fee savings projection
+  const savings = system.gasOptimizer.estimateSavings(70, 30);
+  console.log(sectionHeader('FEE SAVINGS PROJECTION (70 trades/day)'));
+  console.log(keyValue('Naive Cost (all taker)', formatCurrency(savings.naiveCost) + '/day'));
+  console.log(keyValue('Optimized Cost', formatCurrency(savings.optimizedCost) + '/day'));
+  console.log(keyValue('Daily Savings', pnlColor(savings.savings, formatCurrency(savings.savings))));
+  console.log(keyValue('Monthly Savings', pnlColor(savings.savings * 30, formatCurrency(savings.savings * 30))));
+
+  // Optimal gas windows
+  console.log(sectionHeader('OPTIMAL GAS WINDOWS (UTC)'));
+  const windows = system.gasOptimizer.getOptimalWindows();
+  const windowStr = windows.map(w => `${String(w.hour).padStart(2, '0')}:00`).join(', ');
+  console.log(keyValue('Low Gas Hours', colorize(windowStr, 'green')));
+}
+
+async function cmdGas(): Promise<void> {
+  const system = await getSystem();
+  const rec = system.gasOptimizer.getRecommendation();
+  const stats = system.gasOptimizer.getStats();
+
+  console.log(sectionHeader('GAS OPTIMIZER'));
+  console.log(keyValue('Current Gas', `${rec.gwei.toFixed(1)} gwei`));
+  console.log(keyValue('Tier', statusColor(rec.tier.toUpperCase())));
+  console.log(keyValue('Action', rec.action));
+  console.log(keyValue('Queue Size', `${stats.queueSize}`));
+  console.log(keyValue('Executed', `${stats.executed}`));
+  console.log(keyValue('Delayed', `${stats.delayed}`));
+  console.log('');
+
+  console.log(sectionHeader('24H GAS PATTERN'));
+  const windows = system.gasOptimizer.getOptimalWindows();
+  const allHours = Array.from({ length: 24 }, (_, i) => {
+    const isOptimal = windows.some(w => w.hour === i);
+    const hour = String(i).padStart(2, '0');
+    return isOptimal ? colorize(`${hour}:00 LOW`, 'green') : `${hour}:00`;
+  });
+  // Print in 2 columns
+  for (let i = 0; i < 12; i++) {
+    console.log(`  ${allHours[i].padEnd(25)} ${allHours[i + 12]}`);
+  }
+}
+
 function cmdHelp(): void {
+  const unlimited = process.env.PAPER_UNLIMITED === 'true' || process.env.PAPER_UNLIMITED === '1';
   console.log(`
 ${colorize('pm-trader', 'bold')} — Autonomous Polymarket prediction market trading CLI
+${unlimited ? colorize('  🔓 PAPER UNLIMITED MODE ACTIVE', 'green') : ''}
 
 ${colorize('USAGE', 'cyan')}
   pm-trader <command> [options]
@@ -679,12 +769,22 @@ ${colorize('COMMANDS', 'cyan')}
   ${colorize('gate', 'bold')}                             Go/No-Go gate evaluation
   ${colorize('markets', 'bold')}  [--search Q] [--vertical V] [--limit N]
                                    Browse active markets
+  ${colorize('liquidity', 'bold')}                        Liquidity Maximizer dashboard
+  ${colorize('gas', 'bold')}                              Gas optimizer status & windows
   ${colorize('bot', 'bold')}      [--start|--stop|--status]
                                    Telegram bot control
   ${colorize('dashboard', 'bold')}  [--port 3737]             Web dashboard (observability)
   ${colorize('config', 'bold')}                           Show configuration
   ${colorize('version', 'bold')}                          Version info
   ${colorize('help', 'bold')}                             This help text
+
+${colorize('PAPER UNLIMITED MODE', 'cyan')}
+  Set PAPER_UNLIMITED=true in .env to enable:
+  - All 7 verticals (weather, crypto, politics, sports, pop_culture, finance, science)
+  - No trade limits, no position caps
+  - 1% min edge (captures everything for learning)
+  - 15s poll interval (4x faster)
+  - ACE evolves 7x faster (~150 cycles/month)
 `);
 }
 
@@ -705,6 +805,8 @@ const COMMANDS: Record<string, (args: ParsedArgs) => Promise<void> | void> = {
   review:     () => cmdReview(),
   gate:       () => cmdGate(),
   markets:    (a) => cmdMarkets(a.flags),
+  liquidity:  () => cmdLiquidity(),
+  gas:        () => cmdGas(),
   bot:        (a) => cmdBot(a.flags),
   dashboard:  (a) => cmdDashboard(a.flags),
   config:     () => cmdConfig(),

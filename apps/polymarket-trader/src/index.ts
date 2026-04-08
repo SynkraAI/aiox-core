@@ -22,7 +22,16 @@ import { ExperienceStore } from './learning/experience-store.js';
 import { DriftMonitor } from './learning/drift-monitor.js';
 import { PolymarketClient } from './integrations/polymarket-client.js';
 import { PaperTrader } from './execution/paper-trader.js';
-import { DEFAULT_CONFIG } from './config/defaults.js';
+import { DepthFilter } from './engine/depth-filter.js';
+import { GasOptimizer } from './engine/gas-optimizer.js';
+import { AdaptiveVolume } from './engine/adaptive-volume.js';
+import { AutoTrader } from './engine/auto-trader.js';
+import { SmartOrderSplitter } from './execution/smart-order-splitter.js';
+import { BrierTracker } from './learning/brier-tracker.js';
+import { CrowdBiasDetector } from './strategies/crowd-bias-detector.js';
+import { StrategyScorer } from './engine/strategy-scorer.js';
+import { MarketAnalyzer } from './intelligence/market-analyzer.js';
+import { DEFAULT_CONFIG, PAPER_UNLIMITED_CONFIG } from './config/defaults.js';
 import type { TradingConfig } from './types/index.js';
 
 export const logger = pino({
@@ -39,13 +48,26 @@ export interface TradingSystem {
   store: ExperienceStore;
   drift: DriftMonitor;
   paper: PaperTrader;
+  depthFilter: DepthFilter;
+  gasOptimizer: GasOptimizer;
+  splitter: SmartOrderSplitter;
+  brier: BrierTracker;
+  crowdBias: CrowdBiasDetector;
+  adaptiveVolume: AdaptiveVolume;
   config: TradingConfig;
   start: () => void;
   stop: () => void;
 }
 
 export function createTradingSystem(config: Partial<TradingConfig> = {}): TradingSystem {
-  const finalConfig: TradingConfig = { ...DEFAULT_CONFIG, ...config };
+  // Detect paper unlimited mode via env or explicit config
+  const unlimitedMode = process.env.PAPER_UNLIMITED === 'true' || process.env.PAPER_UNLIMITED === '1';
+  const baseConfig = unlimitedMode ? PAPER_UNLIMITED_CONFIG : DEFAULT_CONFIG;
+  const finalConfig: TradingConfig = { ...baseConfig, ...config };
+
+  if (unlimitedMode) {
+    logger.info('🔓 PAPER UNLIMITED MODE — no limits, all verticals, max learning speed');
+  }
 
   // Ensure data directory exists
   const dataDir = join(process.cwd(), 'data');
@@ -65,6 +87,49 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
   const drift = new DriftMonitor();
   const paper = new PaperTrader(client, store, risk);
 
+  // Liquidity Maximizer modules
+  const depthFilter = new DepthFilter(client);
+  const gasOptimizer = new GasOptimizer();
+  const splitter = new SmartOrderSplitter(gasOptimizer, depthFilter);
+
+  // Conclave modules (2026-04-04 recommendations)
+  const brier = new BrierTracker(finalConfig.riskLimits.maxOpenPositions > 100 ? 0.30 : 0.25);
+  const crowdBias = new CrowdBiasDetector();
+  const adaptiveVolume = new AdaptiveVolume();
+
+  // Strategy Scorer: bridge between signal:detected → signal:approved
+  // Without this, signals are detected but never approved for paper trading
+  const scorer = new StrategyScorer(risk);
+
+  // Auto-Trader: the brain that makes it all trade autonomously
+  const autoTrader = new AutoTrader(client, risk, brier, crowdBias, adaptiveVolume, {
+    pollIntervalMs: finalConfig.pollIntervalMs,
+    enabledVerticals: finalConfig.enabledVerticals,
+    marketsPerScan: unlimitedMode ? 100 : 50,
+    minEdge: finalConfig.riskLimits.minEdge,
+  });
+
+  // Connect paper trader to auto-trader for position resolution
+  autoTrader.setPaperTrader(paper);
+
+  // Fase 1.1: Connect experience store for learning-informed trading
+  autoTrader.setExperienceStore(store);
+
+  // Fase 2: LLM-in-the-Loop — Claude analyzes markets with real reasoning
+  const anthropicKey = process.env.ANTHROPIC_API_KEY;
+  if (anthropicKey) {
+    const analyzer = new MarketAnalyzer(client, store, {
+      apiKey: anthropicKey,
+      model: process.env.LLM_MODEL || 'claude-haiku-4-5-20251001',
+      maxMarketsPerScan: unlimitedMode ? 20 : 10,
+      dailyBudgetUsd: parseFloat(process.env.LLM_DAILY_BUDGET || '5'),
+    });
+    autoTrader.setMarketAnalyzer(analyzer);
+    logger.info('🧠 LLM-in-the-Loop ENABLED — Claude will analyze markets before trading');
+  } else {
+    logger.warn('⚠️ ANTHROPIC_API_KEY not set — running in heuristic-only mode (no LLM intelligence)');
+  }
+
   // Wire system-level event logging
   eventBus.on('risk:circuit-breaker', ({ reason }) => {
     logger.error({ reason }, 'CIRCUIT BREAKER TRIPPED');
@@ -83,17 +148,27 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
   });
 
   function start(): void {
-    logger.info({ mode: finalConfig.mode, verticals: finalConfig.enabledVerticals }, 'Polymarket Trader starting');
+    logger.info({
+      mode: finalConfig.mode,
+      unlimited: unlimitedMode,
+      verticals: finalConfig.enabledVerticals,
+      pollMs: finalConfig.pollIntervalMs,
+      maxPositions: finalConfig.riskLimits.maxOpenPositions,
+    }, 'Polymarket Trader starting');
+    gasOptimizer.start();
+    autoTrader.start();
     eventBus.emit('system:started');
   }
 
   function stop(): void {
+    autoTrader.stop();
+    gasOptimizer.stop();
     store.close();
     logger.info('Polymarket Trader stopped');
     eventBus.emit('system:stopped');
   }
 
-  return { client, risk, store, drift, paper, config: finalConfig, start, stop };
+  return { client, risk, store, drift, paper, depthFilter, gasOptimizer, splitter, brier, crowdBias, adaptiveVolume, config: finalConfig, start, stop };
 }
 
 // Re-exports
@@ -104,6 +179,12 @@ export { DriftMonitor } from './learning/drift-monitor.js';
 export { PolymarketClient } from './integrations/polymarket-client.js';
 export { KalshiClient } from './integrations/kalshi-client.js';
 export { PaperTrader } from './execution/paper-trader.js';
+export { DepthFilter } from './engine/depth-filter.js';
+export { GasOptimizer } from './engine/gas-optimizer.js';
+export { SmartOrderSplitter } from './execution/smart-order-splitter.js';
+export { BrierTracker } from './learning/brier-tracker.js';
+export { CrowdBiasDetector } from './strategies/crowd-bias-detector.js';
+export { AdaptiveVolume } from './engine/adaptive-volume.js';
 export { CrossPlatformArbStrategy } from './strategies/cross-platform-arb.js';
 export { TwitterSentimentAdapter } from './integrations/twitter-sentiment.js';
 export { OnChainMonitor } from './integrations/onchain-monitor.js';
@@ -119,3 +200,4 @@ export { NotificationManager } from './telegram/notifications.js';
 export { DashboardServer, DEFAULT_DASHBOARD_CONFIG } from './dashboard/server.js';
 export { DashboardAPI } from './dashboard/api.js';
 export { getDashboardHTML } from './dashboard/html.js';
+export { PAPER_UNLIMITED_CONFIG, PAPER_UNLIMITED_RISK_LIMITS } from './config/defaults.js';

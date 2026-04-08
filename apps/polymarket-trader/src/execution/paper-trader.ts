@@ -48,22 +48,55 @@ export class PaperTrader {
 
     // Get real market data for realistic simulation
     let currentPrice: number;
+    let orderBook: { spread: number; midpoint: number } | null = null;
     try {
-      const tokenId = signal.side === 'YES' ? signal.marketId : signal.marketId; // simplified
+      const tokenId = signal.side === 'YES' ? signal.marketId : signal.marketId;
       currentPrice = await this.client.getMidpoint(tokenId);
+      // Fase 3.1: Try to get orderbook for realistic slippage estimation
+      try {
+        orderBook = await this.client.getOrderBook(tokenId);
+      } catch { /* orderbook unavailable, use estimate */ }
     } catch {
       currentPrice = signal.marketProbability;
     }
 
-    // Simulate slippage (0.5-2% based on size)
-    const slippagePercent = 0.005 + (signal.suggestedSize / 1000) * 0.015;
-    const slippage = currentPrice * slippagePercent;
-    const fillPrice = signal.side === 'YES'
-      ? currentPrice + slippage
-      : currentPrice - slippage;
+    // Fase 3.1: Orderbook-based slippage estimation (real data when available)
+    let slippage: number;
+    let fillPrice: number;
+    let executionMode: 'maker' | 'taker';
 
-    // Simulate fees
-    const takerFee = signal.suggestedSize * 0.01; // ~1% taker fee estimate
+    if (orderBook && orderBook.spread < 0.03) {
+      // Fase 3.2: Maker-first execution simulation
+      // If spread is tight (<3%), simulate maker order (limit at midpoint)
+      // Maker fee = 0% + potential rebate
+      executionMode = 'maker';
+      slippage = orderBook.spread * 0.25; // Maker gets better fill (25% of spread)
+      fillPrice = signal.side === 'YES'
+        ? orderBook.midpoint + slippage
+        : orderBook.midpoint - slippage;
+    } else if (signal.suggestedSize > 20) {
+      // Fase 3.3: Large orders use orderbook depth for slippage
+      // Walk the book: larger orders eat more liquidity
+      executionMode = 'taker';
+      const sizeImpact = Math.min(signal.suggestedSize / 500, 0.03); // 0-3% impact
+      const baseSlippage = orderBook ? orderBook.spread * 0.5 : 0.005;
+      slippage = baseSlippage + sizeImpact;
+      fillPrice = signal.side === 'YES'
+        ? currentPrice + slippage
+        : currentPrice - slippage;
+    } else {
+      // Small taker order — standard slippage
+      executionMode = 'taker';
+      slippage = 0.005 + (signal.suggestedSize / 1000) * 0.015;
+      fillPrice = signal.side === 'YES'
+        ? currentPrice + slippage
+        : currentPrice - slippage;
+    }
+
+    // Fase 3.2: Fee calculation based on execution mode
+    const takerFee = executionMode === 'maker'
+      ? 0 // Maker = 0% fee (+ potential rebate)
+      : signal.suggestedSize * 0.01; // Taker ~1%
     const gasFee = 0.01; // Negligible on Polygon
 
     const fillTimeMs = Date.now() - startTime;
@@ -93,14 +126,18 @@ export class PaperTrader {
       exitPrice: 0,
       pnl: 0,
       lesson: '',
-      tags: ['paper-trade'],
+      tags: ['paper-trade', `exec-${executionMode}`],
       similarPastTrades: [],
-      metadata: { paperTrade: true, realMarketPrice: currentPrice },
+      metadata: {
+        paperTrade: true,
+        realMarketPrice: currentPrice,
+        executionMode,
+        orderbookSpread: orderBook?.spread ?? null,
+        orderbookMidpoint: orderBook?.midpoint ?? null,
+      },
     };
 
-    this.store.record(experience);
-
-    // Track position
+    // Track position FIRST (before store.record) to avoid race condition
     this.positions.set(signal.marketId, {
       marketId: signal.marketId,
       tokenId: signal.marketId,
@@ -111,6 +148,8 @@ export class PaperTrader {
       signal,
     });
 
+    // Record to Procedural Memory (after position tracked)
+    this.store.record(experience);
     this.tradeCount++;
 
     // Emit position opened
@@ -187,5 +226,38 @@ export class PaperTrader {
 
   getOpenPositions(): PaperPosition[] {
     return [...this.positions.values()];
+  }
+
+  /**
+   * Check open positions against Gamma API for resolved markets.
+   * Called periodically by the auto-trader to settle paper positions.
+   */
+  async resolveOpenPositions(): Promise<number> {
+    if (this.positions.size === 0) return 0;
+
+    const marketIds = [...this.positions.keys()];
+    let resolved = 0;
+
+    try {
+      const resolvedMarkets = await this.client.getResolvedMarkets(marketIds);
+
+      for (const market of resolvedMarkets) {
+        // outcomePrices: YES=1.0 means YES won, NO=1.0 means NO won
+        const yesWon = market.tokens.yes.price >= 0.99;
+        const noWon = market.tokens.no.price >= 0.99;
+
+        if (!yesWon && !noWon) continue; // Not fully resolved yet
+
+        const outcome: 'YES' | 'NO' = yesWon ? 'YES' : 'NO';
+        this.resolvePosition(market.id, outcome);
+        resolved++;
+        console.log(`[PaperTrader] Resolved ${market.id}: ${outcome} won — "${market.question.slice(0, 60)}"`);
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error(`[PaperTrader] Resolution check error: ${msg}`);
+    }
+
+    return resolved;
   }
 }

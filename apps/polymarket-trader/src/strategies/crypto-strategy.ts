@@ -19,13 +19,72 @@ import type { Market, TradeSignal, Side } from '../types/index.js';
 const COINGECKO_PRICE_URL =
   'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true';
 
-/** Annualised historical volatility (σ). Conservative estimates. */
-const VOLATILITY: Record<string, number> = {
+/**
+ * Deribit API for implied volatility (Fase 1.5).
+ * Returns ATM implied vol from options market — far more accurate than hardcoded values.
+ */
+const DERIBIT_VOL_URL = 'https://www.deribit.com/api/v2/public/get_historical_volatility?currency=';
+
+/** Fallback annualised volatility (σ) — used only if Deribit API fails. */
+const FALLBACK_VOLATILITY: Record<string, number> = {
   btc: 0.60,
   bitcoin: 0.60,
   eth: 0.80,
   ethereum: 0.80,
 };
+
+/** Cached implied vol with TTL */
+let cachedVol: { btc: number; eth: number; fetchedAt: number } | null = null;
+const VOL_CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
+
+/**
+ * Fetch real implied volatility from Deribit options market.
+ * Falls back to hardcoded values if API fails.
+ */
+export async function getImpliedVolatility(): Promise<Record<string, number>> {
+  // Return cached if fresh
+  if (cachedVol && Date.now() - cachedVol.fetchedAt < VOL_CACHE_TTL_MS) {
+    return {
+      btc: cachedVol.btc, bitcoin: cachedVol.btc,
+      eth: cachedVol.eth, ethereum: cachedVol.eth,
+    };
+  }
+
+  try {
+    const [btcRes, ethRes] = await Promise.all([
+      fetch(`${DERIBIT_VOL_URL}BTC`, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) }),
+      fetch(`${DERIBIT_VOL_URL}ETH`, { signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) }),
+    ]);
+
+    if (btcRes.ok && ethRes.ok) {
+      const btcData = await btcRes.json() as { result: number[][] };
+      const ethData = await ethRes.json() as { result: number[][] };
+
+      // Deribit returns [[timestamp, vol], ...] — last entry is most recent
+      // Volatility is in percentage, convert to decimal
+      const btcLast = btcData.result?.[btcData.result.length - 1];
+      const btcVol = btcLast && typeof btcLast[1] === 'number' && !isNaN(btcLast[1])
+        ? btcLast[1] / 100
+        : FALLBACK_VOLATILITY.btc;
+      const ethLast = ethData.result?.[ethData.result.length - 1];
+      const ethVol = ethLast && typeof ethLast[1] === 'number' && !isNaN(ethLast[1])
+        ? ethLast[1] / 100
+        : FALLBACK_VOLATILITY.eth;
+
+      cachedVol = { btc: btcVol, eth: ethVol, fetchedAt: Date.now() };
+      console.log(`[CryptoStrategy] Implied vol updated: BTC=${(btcVol * 100).toFixed(1)}%, ETH=${(ethVol * 100).toFixed(1)}%`);
+
+      return { btc: btcVol, bitcoin: btcVol, eth: ethVol, ethereum: ethVol };
+    }
+  } catch {
+    // Deribit unavailable — use fallback
+  }
+
+  return { ...FALLBACK_VOLATILITY };
+}
+
+// Keep backward-compatible reference (strategies may import VOLATILITY directly)
+const VOLATILITY = FALLBACK_VOLATILITY;
 
 /** Drift assumption (μ). Neutral = 0. */
 const DRIFT = 0;

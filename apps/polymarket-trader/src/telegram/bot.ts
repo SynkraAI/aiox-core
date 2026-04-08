@@ -6,6 +6,8 @@
  * Telegram Bot API: https://api.telegram.org/bot{token}/{method}
  */
 
+import { existsSync, readFileSync, writeFileSync, unlinkSync } from 'fs';
+import { join } from 'path';
 import type { TradingSystem } from '../index.js';
 import { routeCommand, routeCallback, type CommandContext } from './commands.js';
 import { NotificationManager, type NotificationConfig } from './notifications.js';
@@ -127,6 +129,29 @@ export class TradingBot {
     if (!this.config.token) throw new Error('TELEGRAM_BOT_TOKEN not configured');
     if (!this.config.chatId) throw new Error('TELEGRAM_CHAT_ID not configured');
 
+    // PID lock — prevent duplicate bot instances (409 Conflict)
+    const pidFile = join(process.cwd(), 'data', 'bot.pid');
+    if (existsSync(pidFile)) {
+      const oldPid = parseInt(readFileSync(pidFile, 'utf-8').trim(), 10);
+      let alive = false;
+      try { process.kill(oldPid, 0); alive = true; } catch { /* process dead */ }
+      if (alive) {
+        throw new Error(`Another bot instance is running (PID ${oldPid}). Kill it first or delete data/bot.pid`);
+      }
+      console.log(`[TelegramBot] Stale PID file (${oldPid} dead) — taking over`);
+    }
+    writeFileSync(pidFile, String(process.pid), 'utf-8');
+
+    // Drop pending updates to avoid 409 on restart
+    try {
+      await fetch(`${this.apiBase()}/getUpdates`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ offset: -1, timeout: 0 }),
+        signal: AbortSignal.timeout(5_000),
+      });
+    } catch { /* best effort */ }
+
     this.running = true;
     this.retryCount = 0;
 
@@ -165,6 +190,10 @@ export class TradingBot {
 
     // Unwire notifications
     this.notifications.unwire();
+
+    // Clean up PID file
+    const pidFile = join(process.cwd(), 'data', 'bot.pid');
+    try { unlinkSync(pidFile); } catch { /* ignore */ }
 
     // Send shutdown message (best effort)
     try {

@@ -2,11 +2,12 @@
  * Core market types for Polymarket trading system.
  */
 
-export type Vertical = 'weather' | 'crypto' | 'politics' | 'sports';
+export type Vertical = 'weather' | 'crypto' | 'politics' | 'sports' | 'pop_culture' | 'finance' | 'science';
 export type Side = 'YES' | 'NO';
 export type OrderType = 'GTC' | 'GTD' | 'FOK' | 'FAK';
 export type OrderStatus = 'pending' | 'filled' | 'partial' | 'cancelled' | 'expired';
 export type TradeOutcome = 'WIN' | 'LOSS' | 'PENDING';
+export type OrderMode = 'taker' | 'maker';
 export type StrategyId = 'info_arb' | 'market_making' | 'cross_platform' | 'weather_model' | 'crypto_sentiment' | 'whale_follow' | 'airdrop_volume' | 'politics_model' | 'sports_model';
 
 export interface Market {
@@ -85,4 +86,45 @@ export interface TradeSignal {
   suggestedSize: number;
   reasoning: string;
   timestamp: Date;
+}
+
+// ---------------------------------------------------------------------------
+// Liquidity Maximizer types
+// ---------------------------------------------------------------------------
+
+export interface DepthCheckResult {
+  marketId: string;
+  bidDepth: number;
+  askDepth: number;
+  totalDepth: number;
+  tier: 'deep' | 'moderate' | 'shallow' | 'skip';
+  maxSafeSize: number;
+  spread: number;
+}
+
+export interface SplitOrderConfig {
+  chunks: number;
+  intervalMs: number;
+  maxSlippage: number;
+  preferMaker: boolean;
+  gasOptimize: boolean;
+}
+
+export interface GasWindow {
+  hour: number;
+  avgGwei: number;
+  tier: 'low' | 'medium' | 'high';
+}
+
+export interface LiquidityReport {
+  timestamp: Date;
+  totalMarketsScanned: number;
+  marketsWithDepth: number;
+  avgSpread: number;
+  avgBidDepth: number;
+  avgAskDepth: number;
+  gasCurrentGwei: number;
+  gasTier: 'low' | 'medium' | 'high';
+  makerSavingsEstimate: number;
+  byVertical: Record<string, { markets: number; avgDepth: number; avgSpread: number }>;
 }

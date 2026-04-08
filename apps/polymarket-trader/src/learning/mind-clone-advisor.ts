@@ -109,6 +109,17 @@ const VERTICAL_EXPERTS: Record<Vertical, ExpertRecommendation[]> = {
   sports: [
     { id: 'cassie-kozyrkov', name: 'Cassie Kozyrkov', relevance: 'Decision science & probability calibration' },
   ],
+  pop_culture: [
+    { id: 'nir-eyal', name: 'Nir Eyal', relevance: 'Viral trends & behavioral hooks' },
+  ],
+  finance: [
+    { id: 'aswath-damodaran', name: 'Aswath Damodaran', relevance: 'Macro valuation & risk-adjusted returns' },
+    { id: 'morgan-housel', name: 'Morgan Housel', relevance: 'Behavioral finance & market psychology' },
+  ],
+  science: [
+    { id: 'andrew-ng', name: 'Andrew Ng', relevance: 'AI/ML developments & technical feasibility' },
+    { id: 'chip-huyen', name: 'Chip Huyen', relevance: 'ML systems & research trends' },
+  ],
 };
 
 // ---------------------------------------------------------------------------

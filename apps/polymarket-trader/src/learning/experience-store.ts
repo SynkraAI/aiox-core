@@ -32,7 +32,39 @@ export class ExperienceStore {
       const pnl = position.unrealizedPnl + position.realizedPnl;
       const outcome: TradeOutcome = pnl > 0 ? 'WIN' : 'LOSS';
       this.updateOutcome(position.marketId, outcome, position.currentPrice, pnl);
+
+      // Fase 1.2: Auto-extract lesson from resolved trade
+      const trade = this.trades.find(t => t.marketId === position.marketId && t.outcome === outcome);
+      if (trade && !trade.lesson) {
+        trade.lesson = this.extractLesson(trade);
+        this.dirty = true;
+        eventBus.emit('learning:lesson-extracted', { tradeId: trade.id, lesson: trade.lesson });
+      }
     });
+  }
+
+  /**
+   * Fase 1.2: Pattern-based lesson extraction (no LLM yet).
+   * Analyzes trade context to generate actionable lesson string.
+   */
+  private extractLesson(trade: TradeExperience): string {
+    const parts: string[] = [];
+
+    if (trade.outcome === 'WIN') {
+      parts.push(`WIN on ${trade.vertical}/${trade.strategy}`);
+      if (trade.edgeDetected > 0.10) parts.push('high-edge-correct');
+      if (trade.signalConfidence > 0.7) parts.push('high-confidence-validated');
+    } else {
+      parts.push(`LOSS on ${trade.vertical}/${trade.strategy}`);
+      if (trade.edgeDetected > 0.10) parts.push('high-edge-WRONG — model overconfident');
+      if (trade.signalConfidence > 0.7) parts.push('high-confidence-WRONG — signals misleading');
+      if (trade.edgeDetected < 0.05) parts.push('low-edge-loss — should have skipped');
+    }
+
+    if (Math.abs(trade.pnl) > 10) parts.push(`large-impact: $${trade.pnl.toFixed(2)}`);
+    if (trade.slippage > 0.02) parts.push('high-slippage — consider maker orders');
+
+    return parts.join('; ');
   }
 
   private load(): void {

@@ -3,30 +3,58 @@
  * UltraPlan decisions encoded here.
  */
 
-import type { TradingConfig, RiskLimits, GateCriteria, LiveTraderConfig } from '../types/index.js';
+import type { TradingConfig, RiskLimits, GateCriteria, LiveTraderConfig, SplitOrderConfig } from '../types/index.js';
 
-/** D6: Fractional Kelly 15%, max $50/trade, circuit breaker -10%/day */
+/** UltraPlan v2: Kelly 5% (startup), max $25/trade, circuit breaker -10%/day */
 export const DEFAULT_RISK_LIMITS: RiskLimits = {
-  maxPositionSize: 50,          // USD per trade
-  maxBankrollPercent: 0.05,     // 5% of bankroll per position
-  kellyFraction: 0.15,          // 15% of optimal Kelly
+  maxPositionSize: 25,          // USD per trade (conservative startup sizing)
+  maxBankrollPercent: 0.03,     // 3% of bankroll per position
+  kellyFraction: 0.05,          // 5% of optimal Kelly (Damodaran: "bot is startup")
   dailyLossLimit: 0.10,         // -10% daily circuit breaker
   weeklyLossLimit: 0.20,        // -20% weekly circuit breaker
-  minEdge: 0.08,                // Minimum 8% edge to trade
+  minEdge: 0.05,                // Minimum 5% edge to trade (up from 1% paper unlimited)
   minLiquidity: 5000,           // Skip markets < $5K volume
   maxOpenPositions: 10,         // Max simultaneous positions
+};
+
+/**
+ * PAPER UNLIMITED: No limits on trades — paper has zero cost.
+ * Maximizes ACE evolution speed (150+ cycles/month vs 21).
+ * All 7 verticals active, no position cap, no edge floor.
+ */
+export const PAPER_UNLIMITED_RISK_LIMITS: RiskLimits = {
+  maxPositionSize: 10_000,        // No practical limit (simulated)
+  maxBankrollPercent: 1.0,        // 100% — no constraint in paper
+  kellyFraction: 1.0,             // Full Kelly for data collection
+  dailyLossLimit: 1.0,            // No circuit breaker in paper
+  weeklyLossLimit: 1.0,           // No circuit breaker in paper
+  minEdge: 0.01,                  // 1% — capture everything for learning
+  minLiquidity: 500,              // Include thin markets for data
+  maxOpenPositions: 500,          // Effectively unlimited
 };
 
 /** D4: Paper trading mode by default */
 export const DEFAULT_CONFIG: TradingConfig = {
   mode: 'paper',
   riskLimits: DEFAULT_RISK_LIMITS,
-  enabledVerticals: ['weather', 'crypto', 'politics', 'sports'],   // D1 + Phase 3.6 vertical expansion
-  enabledStrategies: ['info_arb', 'weather_model', 'crypto_sentiment', 'cross_platform', 'whale_follow', 'airdrop_volume', 'politics_model', 'sports_model'],  // D5 + Phase 3.6/3.7/3.8
+  enabledVerticals: ['weather', 'crypto'],   // UltraPlan v2 D16: 2 verticals max until proven profitable
+  enabledStrategies: ['weather_model', 'crypto_sentiment'],  // UltraPlan v2: disabled 6 unproven strategies
   driftMonitorEnabled: true,     // D9: Auto-learning Layer 0
   aceEvolutionEnabled: true,
   telegramAlerts: false,
   pollIntervalMs: 60_000,       // 1 minute market poll
+};
+
+/** Paper Unlimited: all verticals, no limits, fast polling for maximum learning */
+export const PAPER_UNLIMITED_CONFIG: TradingConfig = {
+  mode: 'paper',
+  riskLimits: PAPER_UNLIMITED_RISK_LIMITS,
+  enabledVerticals: ['weather', 'crypto', 'politics', 'sports', 'pop_culture', 'finance', 'science'],
+  enabledStrategies: ['info_arb', 'weather_model', 'crypto_sentiment', 'cross_platform', 'whale_follow', 'airdrop_volume', 'politics_model', 'sports_model'],
+  driftMonitorEnabled: true,
+  aceEvolutionEnabled: true,
+  telegramAlerts: false,
+  pollIntervalMs: 15_000,       // 15s — 4x faster scanning for max trade volume
 };
 
 export const KALSHI_API = {
@@ -52,16 +80,24 @@ export const DRIFT_THRESHOLDS = {
   windowSize: 50,  // Rolling 50-trade window
 };
 
-/** Phase 3.2: Go/No-Go Gate criteria */
+/**
+ * Phase 3.2: Go/No-Go Gate criteria
+ * UPDATED per Conclave 2026-04-04:
+ * - Profit factor + EV/trade are PRIMARY metrics (Domer + Tetlock)
+ * - Win rate demoted to 55% (secondary, informational)
+ * - Added minEvPerTrade and maxBrierScore
+ */
 export const DEFAULT_GATE_CRITERIA: GateCriteria = {
   minDays: 30,
   minTrades: 500,
-  minWinRate: 0.60,
+  minWinRate: 0.55,             // DEMOTED from 0.60 — Domer: "wrong metric"
   minPnl: 0,
   minSharpe: 1.0,
   maxDrawdown: 0.20,
   minEdgePersistenceWR: 0.50,
-  minProfitFactor: 1.5,
+  minProfitFactor: 1.5,         // PRIMARY — Domer: "profit factor > win rate"
+  minEvPerTrade: 0.50,          // PRIMARY — Tetlock: "EV/trade matters more"
+  maxBrierScore: 0.25,          // Tetlock: "halt if calibration degrades"
 };
 
 /** Phase 3.3: Live Trader defaults */
@@ -168,4 +204,65 @@ export const AIRDROP_OPTIMIZER_CONFIG = {
   dailyBudgetPercent: 0.10,          // 10% of bankroll daily budget
   minVolume24h: 10_000,              // $10K min market volume
   minLiquidity: 5_000,              // $5K min liquidity
+};
+
+// ===========================================================================
+// LIQUIDITY MAXIMIZER CONFIGS
+// ===========================================================================
+
+/** Orderbook Depth Filter: skip illiquid markets */
+export const DEPTH_FILTER_CONFIG = {
+  tiers: {
+    deep:     { minDepth: 10_000, maxSizePercent: 1.0,  label: 'Full size' },
+    moderate: { minDepth: 5_000,  maxSizePercent: 0.5,  label: 'Half size' },
+    shallow:  { minDepth: 1_000,  maxSizePercent: 0.25, label: 'Quarter size' },
+    skip:     { minDepth: 0,      maxSizePercent: 0,    label: 'Skip — too thin' },
+  },
+  /** Check depth before every trade */
+  enabled: true,
+  /** Cache orderbook for this long (ms) */
+  cacheTtlMs: 30_000,
+};
+
+/** Maker Mode: earn rebates instead of paying fees */
+export const MAKER_MODE_CONFIG = {
+  enabled: true,
+  /** Place limit orders this far below best ask (maker offset) */
+  makerOffsetPercent: 0.005,     // 0.5% below best ask
+  /** Max time to wait for maker fill before fallback to taker (ms) */
+  makerTimeoutMs: 60_000,        // 60s
+  /** Fallback to taker if maker doesn't fill */
+  fallbackToTaker: true,
+  /** Estimated maker rebate (Polymarket: ~0.5-1%) */
+  estimatedRebatePercent: 0.005,
+  /** Estimated taker fee */
+  estimatedTakerFeePercent: 0.01,
+};
+
+/** Smart Order Splitting: reduce slippage on large orders */
+export const SPLIT_ORDER_CONFIG: SplitOrderConfig = {
+  chunks: 5,                      // Split into 5 pieces
+  intervalMs: 30_000,             // 30s between chunks
+  maxSlippage: 0.005,             // 0.5% max slippage per chunk
+  preferMaker: true,              // Use limit orders
+  gasOptimize: true,              // Wait for low gas windows
+};
+
+/** Polygon Gas Optimizer: batch trades in cheap windows */
+export const GAS_OPTIMIZER_CONFIG = {
+  enabled: true,
+  /** Gas price tiers (gwei) */
+  tiers: {
+    low:    { maxGwei: 40,  action: 'execute' as const },
+    medium: { maxGwei: 80,  action: 'queue' as const },
+    high:   { maxGwei: 150, action: 'delay' as const },
+  },
+  /** Poll gas price interval (ms) */
+  pollIntervalMs: 15_000,
+  /** Max time to hold queued trades waiting for low gas (ms) */
+  maxQueueTimeMs: 300_000,       // 5 min max wait
+  /** Optimal trading hours (UTC) — Polygon gas is cheapest */
+  optimalHoursUTC: [2, 3, 4, 5, 6, 7],   // 02:00-07:59 UTC
+  /** RPC endpoint for gas price */
+  rpcUrl: 'https://polygon-rpc.com',
 };

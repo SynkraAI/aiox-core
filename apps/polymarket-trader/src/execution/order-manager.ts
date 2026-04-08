@@ -8,7 +8,8 @@
 
 import { randomUUID } from 'crypto';
 import { eventBus } from '../engine/event-bus.js';
-import type { Order, OrderStatus, TradeSignal } from '../types/index.js';
+import { MAKER_MODE_CONFIG } from '../config/defaults.js';
+import type { Order, OrderStatus, OrderMode, TradeSignal } from '../types/index.js';
 
 /** Approved signal payload emitted by StrategyScorer. */
 interface ApprovedSignal extends TradeSignal {
@@ -26,6 +27,8 @@ export interface OrderManagerConfig {
   maxSlippage: number;
   /** Simulated execution time in ms (default 500). Set 0 for instant. */
   simulatedExecMs: number;
+  /** Prefer maker (limit) orders for fee savings. */
+  preferMaker: boolean;
 }
 
 const DEFAULT_CONFIG: OrderManagerConfig = {
@@ -34,6 +37,7 @@ const DEFAULT_CONFIG: OrderManagerConfig = {
   retryBaseDelayMs: 1000,
   maxSlippage: 0.02,
   simulatedExecMs: 500,
+  preferMaker: MAKER_MODE_CONFIG.enabled,
 };
 
 interface PendingOrder {
@@ -56,6 +60,9 @@ export class OrderManager {
 
   /** Current simulated market prices per market (for slippage check). */
   private marketPrices: Map<string, number> = new Map();
+
+  /** Maker/taker tracking for fee optimization. */
+  private makerStats = { makerFills: 0, takerFills: 0, totalRebates: 0, totalFees: 0 };
 
   constructor(config: Partial<OrderManagerConfig> = {}) {
     this.config = { ...DEFAULT_CONFIG, ...config };
@@ -232,17 +239,58 @@ export class OrderManager {
   }
 
   /**
-   * Simulate whether an order fills.
-   * In paper mode this always returns true.
-   * Override / extend for live trading integration.
+   * Determine order mode: maker (limit) or taker (market).
+   * Maker = limit order below best ask → earns rebate.
+   * Taker = market order → pays fee.
    */
-  private simulateFill(_order: Order): boolean {
+  private determineOrderMode(_order: Order): OrderMode {
+    if (!this.config.preferMaker) return 'taker';
+
+    // 70% of orders attempt maker (limit below best ask)
+    // In live mode this would check orderbook spread
+    const attemptMaker = Math.random() < 0.7;
+    return attemptMaker ? 'maker' : 'taker';
+  }
+
+  /**
+   * Simulate whether an order fills.
+   * Tracks maker/taker fees and rebates.
+   */
+  private simulateFill(order: Order): boolean {
+    const mode = this.determineOrderMode(order);
+
+    if (mode === 'maker') {
+      // Maker: limit order — 85% fill rate (may not fill if price moves)
+      const filled = Math.random() < 0.85;
+      if (filled) {
+        const rebate = order.size * MAKER_MODE_CONFIG.estimatedRebatePercent;
+        this.makerStats.makerFills++;
+        this.makerStats.totalRebates += rebate;
+        eventBus.emit('order:maker-fill', { orderId: order.id, rebate, mode: 'maker' });
+      }
+      return filled;
+    }
+
+    // Taker: market order — always fills
+    const fee = order.size * MAKER_MODE_CONFIG.estimatedTakerFeePercent;
+    this.makerStats.takerFills++;
+    this.makerStats.totalFees += fee;
+    eventBus.emit('order:taker-fill', { orderId: order.id, fee, mode: 'taker' });
     return true;
   }
 
   private updateOrderStatus(order: Order, status: OrderStatus): void {
     order.status = status;
     order.updatedAt = new Date();
+  }
+
+  getMakerStats() {
+    const total = this.makerStats.makerFills + this.makerStats.takerFills;
+    return {
+      ...this.makerStats,
+      makerRatio: total > 0 ? this.makerStats.makerFills / total : 0,
+      netFeeSavings: this.makerStats.totalRebates - this.makerStats.totalFees,
+    };
   }
 
   private delay(ms: number): Promise<void> {

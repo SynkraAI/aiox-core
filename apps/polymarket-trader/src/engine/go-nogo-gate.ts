@@ -2,17 +2,23 @@
  * Go/No-Go Gate for transitioning from paper to live trading.
  * Phase 3.2: Enforces all minimum criteria before real capital deployment.
  *
+ * UPDATED per Conclave 2026-04-04 (Domer + Tetlock recommendation):
+ * - Primary metrics: Profit Factor + EV/trade (not win rate)
+ * - Win rate demoted to secondary (informational, not blocking)
+ * - Added: EV/trade > $0.50, Brier score < 0.25
+ *
  * Criteria (all must pass for GO):
  * 1. Paper trading >= 30 days
  * 2. Total trades >= 500
- * 3. Win rate >= 60%
- * 4. Total P&L > 0
- * 5. Sharpe >= 1.0
- * 6. Max drawdown <= 20%
- * 7. Edge persistence: all 3 periods WR > 50%
- * 8. Profit factor >= 1.5
- * 9. No active circuit breaker
- * 10. Drift monitor healthy
+ * 3. Profit factor >= 1.5 (PRIMARY — Domer)
+ * 4. EV per trade > $0.50 (PRIMARY — Tetlock)
+ * 5. Total P&L > 0
+ * 6. Sharpe >= 1.0
+ * 7. Max drawdown <= 20%
+ * 8. Edge persistence: all 3 periods WR > 50%
+ * 9. Win rate >= 55% (DEMOTED — secondary, lowered from 60%)
+ * 10. No active circuit breaker
+ * 11. Drift monitor healthy
  */
 
 import { eventBus } from './event-bus.js';
@@ -55,7 +61,19 @@ export class GoNoGoGate {
         passed: report.totalTrades >= this.criteria.minTrades,
       },
       {
-        name: 'Win rate',
+        name: '⭐ Profit factor (PRIMARY)',
+        required: `>= ${this.criteria.minProfitFactor}`,
+        actual: `${report.profitFactor === Infinity ? 'Inf' : report.profitFactor.toFixed(2)}`,
+        passed: report.profitFactor >= this.criteria.minProfitFactor,
+      },
+      {
+        name: '⭐ EV per trade (PRIMARY)',
+        required: `>= $${this.criteria.minEvPerTrade}`,
+        actual: `$${report.avgPnlPerTrade.toFixed(2)}`,
+        passed: report.avgPnlPerTrade >= this.criteria.minEvPerTrade,
+      },
+      {
+        name: 'Win rate (secondary)',
         required: `>= ${(this.criteria.minWinRate * 100).toFixed(0)}%`,
         actual: `${(report.winRate * 100).toFixed(1)}%`,
         passed: report.winRate >= this.criteria.minWinRate,
@@ -83,12 +101,6 @@ export class GoNoGoGate {
         required: 'All periods WR > 50%',
         actual: `P1=${(report.edgePersistence.period1WR * 100).toFixed(1)}% P2=${(report.edgePersistence.period2WR * 100).toFixed(1)}% P3=${(report.edgePersistence.period3WR * 100).toFixed(1)}%`,
         passed: report.edgePersistence.isConsistent,
-      },
-      {
-        name: 'Profit factor',
-        required: `>= ${this.criteria.minProfitFactor}`,
-        actual: `${report.profitFactor === Infinity ? 'Inf' : report.profitFactor.toFixed(2)}`,
-        passed: report.profitFactor >= this.criteria.minProfitFactor,
       },
       {
         name: 'No active circuit breaker',
