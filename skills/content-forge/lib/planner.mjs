@@ -5,7 +5,13 @@
  * Output is a structured plan object that can be rendered as text.
  */
 
-import { findBest, findAlternatives } from '../../packages/capability-map/index.mjs';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const { findBest, findAlternatives } = await import(resolve(__dirname, '..', '..', '..', 'packages', 'capability-map', 'index.mjs'));
 
 /**
  * Build an execution plan for a content production demand.

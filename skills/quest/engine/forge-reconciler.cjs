@@ -11,7 +11,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const yaml = require('js-yaml');
+const yaml = require(path.join(__dirname, '..', 'dashboard', 'node_modules', 'js-yaml'));
 
 // ---------------------------------------------------------------------------
 // Mode-to-pack mapping (from SKILL.md Step 2.2b)

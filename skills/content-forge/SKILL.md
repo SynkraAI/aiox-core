@@ -115,6 +115,13 @@ Urgência: quick (produção direta) | quality (com debate/QA)
 - "marca", "brand", "identidade" → `brand`
 - "design system", "DS", "tokens" → `design-system`
 
+**Se nenhum padrão casar (`type: unknown`):** Ativar Discovery Mode imediatamente. Perguntar ao usuário com AskUserQuestion (máx 3 perguntas):
+1. "Que tipo de conteúdo você quer criar?" — listar opções (carrossel, reel, story, vídeo, LP, calendário)
+2. "Para qual plataforma?" — Instagram, YouTube, TikTok, LinkedIn, site
+3. "Tem referência ou exemplo do que imagina?" — texto livre
+
+Re-classificar com as respostas. Se ainda `unknown` após discovery: avisar "Não consegui identificar o tipo. Tenta descrever de outro jeito?" e PARAR (não gerar plano vazio).
+
 ### Fase 3: Carregar Contexto Complementar
 
 1. Brand já carregada na Fase 1 — tokens disponíveis
@@ -166,7 +173,8 @@ Para cada etapa do plano aprovado:
 1. Invocar o squad/skill correto via slash command ou Agent tool
 2. Passar brand tokens como contexto
 3. Pausar em checkpoints para revisão do usuário
-4. Após conclusão, registrar em `data/content-log.jsonl`:
+4. **Verificar artefatos** antes de prosseguir para publicação: confirmar que os arquivos esperados (PNGs, vídeos, HTML) existem e têm tamanho > 0. Se ausentes, abortar publicação e avisar o usuário.
+5. Após conclusão, registrar em `data/content-log.jsonl` (se o arquivo não existir, criar vazio antes do append):
 
 ```jsonl
 {"ts":"ISO8601","type":"carousel","brand":"specta","topic":"hooks","pieces":3,"published":false,"executor":"squads/conteudo","skill":"content-forge"}

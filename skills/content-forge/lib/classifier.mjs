@@ -66,7 +66,7 @@ function classifyDemand(demand) {
     }
   }
 
-  return { type, volume, urgency, raw: demand };
+  return { type, volume, urgency, raw: demand, needsDiscovery: type === 'unknown' };
 }
 
 /**

@@ -50,6 +50,7 @@ The user has been here before. Show a quick status and the next mission. This sh
 
 **Steps:**
 1. Read `.aios/quest-log.yaml`
+   - **Parse guard:** Se o YAML estiver corrompido (parse error), ir DIRETAMENTE para o módulo `checklist.md §3` (recuperação de corrupção). NÃO tentar usar `meta.pack` ou qualquer campo antes de confirmar que o parse foi bem-sucedido.
 2. **Auto-Reconciliation (MANDATORY — runs EVERY resumption, silently)**
    Reconcile Quest state with Forge state before showing anything to the user.
    
@@ -57,6 +58,7 @@ The user has been here before. Show a quick status and the next mission. This sh
    ```
    Bash("node ~/aios-core/skills/quest/engine/forge-reconciler.cjs \"$(pwd)\"")
    ```
+   **Nota de portabilidade:** O path `~/aios-core` é o local canônico. Em ambientes alternativos, usar `$AIOS_HOME` se definido: `node ${AIOS_HOME:-~/aios-core}/skills/quest/engine/forge-reconciler.cjs "$(pwd)"`
    
    - If output contains "Synced N items" → re-read `.aios/quest-log.yaml` (it was updated)
    - If output is "No items to reconcile." or "No quest-log.yaml found." → proceed normally
