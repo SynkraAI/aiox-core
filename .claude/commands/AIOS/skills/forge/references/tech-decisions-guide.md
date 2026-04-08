@@ -1,1 +1,1 @@
-../../../../../skills/forge/references/tech-decisions-guide.md
+../../../../../../skills/forge/references/tech-decisions-guide.md

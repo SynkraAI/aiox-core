@@ -1,1 +1,1 @@
-../../../../../skills/quest/engine/xp-system.md
+../../../../../../skills/quest/engine/xp-system.md

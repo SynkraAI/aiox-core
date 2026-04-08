@@ -17,7 +17,24 @@ const path = require('path');
 // Simple YAML key extractor (avoids js-yaml dependency)
 function simpleYamlValue(content, key) {
   const match = content.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'));
-  return match ? match[1].trim().replace(/^['"]|['"]$/g, '') : null;
+  if (!match) return null;
+  const raw = match[1].trim();
+
+  // Block scalar indicators (|, >, >-, |-) — read indented lines below
+  if (/^[|>][+-]?$/.test(raw)) {
+    const lines = content.split('\n');
+    const keyIndex = lines.findIndex(l => l.match(new RegExp(`^${key}:\\s*[|>]`)));
+    if (keyIndex === -1) return null;
+    const blockLines = [];
+    for (let i = keyIndex + 1; i < lines.length; i++) {
+      const line = lines[i];
+      if (/^\S/.test(line) || line.trim() === '' && blockLines.length > 0 && /^\S/.test(lines[i + 1] || '')) break;
+      if (line.trim() !== '') blockLines.push(line.replace(/^\s+/, ''));
+    }
+    return blockLines.join(' ').trim() || null;
+  }
+
+  return raw.replace(/^['"]|['"]$/g, '');
 }
 
 const ROOT = process.cwd();
@@ -25,6 +42,110 @@ const SQUADS_DIR = path.join(ROOT, 'squads');
 const SKILLS_DIR = path.join(ROOT, 'skills');
 const TOOLS_DIR = path.join(ROOT, 'tools');
 const AGENTS_DIR = path.join(ROOT, '.claude', 'commands', 'AIOS', 'agents');
+const TAXONOMY_PATH = path.join(ROOT, '.aios-core', 'data', 'domain-taxonomy.json');
+
+/**
+ * Load domain taxonomy for tag inference
+ */
+function loadTaxonomy() {
+  try {
+    const content = fs.readFileSync(TAXONOMY_PATH, 'utf8');
+    return JSON.parse(content).domains;
+  } catch (e) {
+    log('⚠️  domain-taxonomy.json not found, tag inference disabled', 'yellow');
+    return {};
+  }
+}
+
+/**
+ * Extract tags from YAML content (looks for `tags:` field)
+ * Supports both inline array `tags: [a, b]` and multiline `tags:\n  - a\n  - b`
+ */
+function extractYamlTags(content) {
+  // Inline: tags: [content, marketing]
+  const inlineMatch = content.match(/^tags:\s*\[([^\]]+)\]/m);
+  if (inlineMatch) {
+    return inlineMatch[1].split(',').map(t => t.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
+  }
+
+  // Multiline: tags:\n  - content\n  - marketing
+  const multiMatch = content.match(/^tags:\s*\n((?:\s+-\s+.+\n?)+)/m);
+  if (multiMatch) {
+    return multiMatch[1].split('\n')
+      .map(line => line.replace(/^\s+-\s+/, '').trim().replace(/^['"]|['"]$/g, ''))
+      .filter(Boolean);
+  }
+
+  return [];
+}
+
+/**
+ * Extract tags from markdown frontmatter (--- delimited)
+ */
+function extractFrontmatterTags(content) {
+  const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!fmMatch) return [];
+  return extractYamlTags(fmMatch[1]);
+}
+
+/**
+ * Infer tags from name + description using taxonomy keywords
+ * Name matches get 2x weight to prioritize direct relevance
+ */
+function inferTags(name, description, taxonomy) {
+  const nameLower = name.toLowerCase();
+  const descLower = description.toLowerCase();
+  const matched = [];
+
+  for (const [domain, config] of Object.entries(taxonomy)) {
+    let score = 0;
+    for (const kw of config.keywords) {
+      const kwLower = kw.toLowerCase();
+      // Name match = 2 points (strong signal)
+      if (nameLower.includes(kwLower)) score += 2;
+      // Description match = 1 point
+      else if (descLower.includes(kwLower)) score += 1;
+    }
+    // Require score >= 2 to avoid false positives from single generic keyword matches
+    if (score >= 2) {
+      matched.push({ domain, score });
+    }
+  }
+
+  // Sort by score descending, take top 3
+  matched.sort((a, b) => b.score - a.score);
+  const result = matched.slice(0, 3).map(m => m.domain);
+
+  // If nothing matched at threshold 2, try threshold 1 (better than uncategorized)
+  if (result.length === 0) {
+    for (const [domain, config] of Object.entries(taxonomy)) {
+      for (const kw of config.keywords) {
+        if (nameLower.includes(kw.toLowerCase()) || descLower.includes(kw.toLowerCase())) {
+          return [domain];
+        }
+      }
+    }
+  }
+
+  return result;
+}
+
+/**
+ * Resolve tags for an item: explicit > inferred > fallback
+ */
+function resolveTags(explicitTags, name, description, taxonomy) {
+  if (explicitTags.length > 0) {
+    // Validate explicit tags against taxonomy
+    const valid = explicitTags.filter(t => taxonomy[t]);
+    if (valid.length > 0) return valid;
+  }
+
+  const inferred = inferTags(name, description, taxonomy);
+  if (inferred.length > 0) return inferred;
+
+  // Last resort: 'uncategorized' — should trigger review
+  return ['uncategorized'];
+}
 
 // Remove a broken symlink if it exists (existsSync returns false but lstatSync succeeds)
 function removeBrokenSymlink(filePath) {
@@ -52,7 +173,7 @@ function log(message, color = 'reset') {
 /**
  * Extract squad metadata
  */
-function extractSquads() {
+function extractSquads(taxonomy) {
   log('📦 Scanning squads...', 'cyan');
 
   const squads = [];
@@ -76,6 +197,7 @@ function extractSquads() {
 
     let name = squadDir;
     let description = 'Sem descrição';
+    let explicitTags = [];
 
     // Try YAML first
     if (fs.existsSync(yamlPath)) {
@@ -86,6 +208,7 @@ function extractSquads() {
         if (desc) {
           description = desc.substring(0, 200);
         }
+        explicitTags = extractYamlTags(content);
       } catch (e) {
         // Ignore YAML errors
       }
@@ -95,6 +218,9 @@ function extractSquads() {
     if (description === 'Sem descrição' && fs.existsSync(readmePath)) {
       try {
         const content = fs.readFileSync(readmePath, 'utf8');
+        if (explicitTags.length === 0) {
+          explicitTags = extractFrontmatterTags(content);
+        }
         const lines = content.split('\n');
         for (const line of lines) {
           if (line.startsWith('# ') && !line.startsWith('## ')) {
@@ -111,10 +237,13 @@ function extractSquads() {
       }
     }
 
+    const tags = resolveTags(explicitTags, squadDir, description, taxonomy);
+
     squads.push({
       name,
       slug: squadDir,
       description,
+      tags,
     });
   });
 
@@ -125,7 +254,7 @@ function extractSquads() {
 /**
  * Extract skills metadata
  */
-function extractSkills() {
+function extractSkills(taxonomy) {
   log('⚡ Scanning skills...', 'cyan');
 
   const skills = [];
@@ -148,23 +277,15 @@ function extractSkills() {
     const readmePath = path.join(skillPath, 'README.md');
 
     let description = 'Sem descrição';
+    let explicitTags = [];
 
-    if (fs.existsSync(skillMdPath)) {
+    // Try SKILL.md first, then README.md
+    const docPath = fs.existsSync(skillMdPath) ? skillMdPath : (fs.existsSync(readmePath) ? readmePath : null);
+
+    if (docPath) {
       try {
-        const content = fs.readFileSync(skillMdPath, 'utf8');
-        const lines = content.split('\n');
-        for (const line of lines) {
-          if (line.startsWith('# ')) {
-            description = line.replace('# ', '').trim().substring(0, 200);
-            break;
-          }
-        }
-      } catch (e) {
-        // Ignore
-      }
-    } else if (fs.existsSync(readmePath)) {
-      try {
-        const content = fs.readFileSync(readmePath, 'utf8');
+        const content = fs.readFileSync(docPath, 'utf8');
+        explicitTags = extractFrontmatterTags(content);
         const lines = content.split('\n');
         for (const line of lines) {
           if (line.startsWith('# ')) {
@@ -177,9 +298,12 @@ function extractSkills() {
       }
     }
 
+    const tags = resolveTags(explicitTags, skillName, description, taxonomy);
+
     skills.push({
       name: skillName,
       description,
+      tags,
     });
   });
 
@@ -190,7 +314,7 @@ function extractSkills() {
 /**
  * Extract tools metadata
  */
-function extractTools() {
+function extractTools(taxonomy) {
   log('🔧 Scanning tools...', 'cyan');
 
   const tools = [];
@@ -214,10 +338,12 @@ function extractTools() {
     const readmePath = path.join(toolPath, 'README.md');
 
     let description = 'Sem descrição';
+    let explicitTags = [];
 
     if (fs.existsSync(readmePath)) {
       try {
         const content = fs.readFileSync(readmePath, 'utf8');
+        explicitTags = extractFrontmatterTags(content);
         const lines = content.split('\n');
         for (const line of lines) {
           if (line.startsWith('# ')) {
@@ -230,14 +356,58 @@ function extractTools() {
       }
     }
 
+    const tags = resolveTags(explicitTags, toolName, description, taxonomy);
+
     tools.push({
       name: toolName,
       description,
+      tags,
     });
   });
 
   log(`✓ Found ${tools.length} tools`, 'green');
   return tools;
+}
+
+/**
+ * Extract minds metadata from squads/mind-cloning/minds/INDEX.md
+ */
+function extractMinds() {
+  log('🧠 Scanning minds...', 'cyan');
+
+  const minds = [];
+  const mindsDir = path.join(SQUADS_DIR, 'mind-cloning', 'minds');
+  const indexPath = path.join(mindsDir, 'INDEX.md');
+
+  if (!fs.existsSync(indexPath)) {
+    log('⚠️  Minds INDEX.md not found', 'yellow');
+    return minds;
+  }
+
+  try {
+    const content = fs.readFileSync(indexPath, 'utf8');
+    const lines = content.split('\n');
+
+    for (const line of lines) {
+      // Parse table rows: | # | Name | `slug` | Status | Fidelity | Domain |
+      const match = line.match(/^\|\s*\d+\s*\|\s*(.+?)\s*\|\s*`(.+?)`\s*\|\s*(\w+)\s*\|\s*(\w+)\s*\|\s*(.+?)\s*\|$/);
+      if (match) {
+        const [, name, slug, status, fidelity, domain] = match;
+        minds.push({
+          name: name.trim(),
+          slug: slug.trim(),
+          status: status.trim(),
+          fidelity: fidelity.trim(),
+          domain: domain.trim(),
+        });
+      }
+    }
+  } catch (e) {
+    log(`⚠️  Error reading minds INDEX: ${e.message}`, 'yellow');
+  }
+
+  log(`✓ Found ${minds.length} minds`, 'green');
+  return minds;
 }
 
 /**
@@ -247,66 +417,18 @@ function extractAgents() {
   log('👥 Loading agents...', 'cyan');
 
   const agents = [
-    {
-      id: '@dev',
-      persona: 'Dex',
-      scope: 'Implementação de código, git add/commit, branch management',
-    },
-    {
-      id: '@qa',
-      persona: 'Quinn',
-      scope: 'Testes e qualidade, QA gates, code review',
-    },
-    {
-      id: '@architect',
-      persona: 'Aria',
-      scope: 'Arquitetura e design técnico, technology selection',
-    },
-    {
-      id: '@pm',
-      persona: 'Morgan',
-      scope: 'Product Management, epic orchestration, requirements',
-    },
-    {
-      id: '@po',
-      persona: 'Pax',
-      scope: 'Product Owner, story validation, backlog prioritization',
-    },
-    {
-      id: '@sm',
-      persona: 'River',
-      scope: 'Scrum Master, story creation, sprint management',
-    },
-    {
-      id: '@analyst',
-      persona: 'Alex',
-      scope: 'Pesquisa e análise de dados',
-    },
-    {
-      id: '@data-engineer',
-      persona: 'Dara',
-      scope: 'Database design, schema DDL, query optimization',
-    },
-    {
-      id: '@ux-design-expert',
-      persona: 'Uma',
-      scope: 'UX/UI design, design systems, user research',
-    },
-    {
-      id: '@devops',
-      persona: 'Gage',
-      scope: 'CI/CD, git push (EXCLUSIVO), MCP management, infrastructure',
-    },
-    {
-      id: '@aios-master',
-      persona: 'Master',
-      scope: 'Framework governance, constitutional enforcement',
-    },
-    {
-      id: '@squad-creator-pro',
-      persona: 'Scout',
-      scope: 'Squad creation, workspace setup, onboarding',
-    },
+    { id: '@dev', persona: 'Dex', scope: 'Implementação de código, git add/commit, branch management', tags: ['dev'] },
+    { id: '@qa', persona: 'Quinn', scope: 'Testes e qualidade, QA gates, code review', tags: ['dev'] },
+    { id: '@architect', persona: 'Aria', scope: 'Arquitetura e design técnico, technology selection', tags: ['dev'] },
+    { id: '@pm', persona: 'Morgan', scope: 'Product Management, epic orchestration, requirements', tags: ['productivity'] },
+    { id: '@po', persona: 'Pax', scope: 'Product Owner, story validation, backlog prioritization', tags: ['productivity'] },
+    { id: '@sm', persona: 'River', scope: 'Scrum Master, story creation, sprint management', tags: ['productivity'] },
+    { id: '@analyst', persona: 'Alex', scope: 'Pesquisa e análise de dados', tags: ['research', 'data'] },
+    { id: '@data-engineer', persona: 'Dara', scope: 'Database design, schema DDL, query optimization', tags: ['data', 'dev'] },
+    { id: '@ux-design-expert', persona: 'Uma', scope: 'UX/UI design, design systems, user research', tags: ['design'] },
+    { id: '@devops', persona: 'Gage', scope: 'CI/CD, git push (EXCLUSIVO), MCP management, infrastructure', tags: ['devops'] },
+    { id: '@aiox-master', persona: 'Master', scope: 'Framework governance, constitutional enforcement', tags: ['ai-ops'] },
+    { id: '@squad-creator', persona: 'Scout', scope: 'Squad creation, workspace setup, onboarding', tags: ['ai-ops'] },
   ];
 
   log(`✓ Loaded ${agents.length} agents`, 'green');
@@ -316,8 +438,9 @@ function extractAgents() {
 /**
  * Generate markdown catalog
  */
-function generateMarkdown(squads, skills, tools, agents) {
+function generateMarkdown(squads, skills, tools, agents, minds) {
   const date = new Date().toLocaleDateString('pt-BR');
+  const tagFmt = (tags) => tags.map(t => `\`${t}\``).join(', ');
 
   let markdown = `# AIOX Catalog
 
@@ -327,42 +450,52 @@ function generateMarkdown(squads, skills, tools, agents) {
 
 ## Squads (${squads.length})
 
-| Squad | Descrição | Ativação |
-|-------|-----------|----------|
+| Squad | Tags | Descrição | Ativação |
+|-------|------|-----------|----------|
 `;
 
   squads.forEach(squad => {
-    markdown += `| ${squad.name} | ${squad.description} | \`/${squad.slug}\` |\n`;
+    markdown += `| ${squad.name} | ${tagFmt(squad.tags)} | ${squad.description} | \`/${squad.slug}\` |\n`;
   });
 
   markdown += `\n---\n\n## Skills (${skills.length})
 
-| Skill | Descrição | Ativação |
-|-------|-----------|----------|
+| Skill | Tags | Descrição | Ativação |
+|-------|------|-----------|----------|
 `;
 
   skills.forEach(skill => {
-    markdown += `| ${skill.name} | ${skill.description} | \`/AIOS:skills:${skill.name}\` |\n`;
+    markdown += `| ${skill.name} | ${tagFmt(skill.tags)} | ${skill.description} | \`/AIOS:skills:${skill.name}\` |\n`;
   });
 
   markdown += `\n---\n\n## Tools (${tools.length})
 
-| Tool | Descrição |
-|------|-----------|
+| Tool | Tags | Descrição |
+|------|------|-----------|
 `;
 
   tools.forEach(tool => {
-    markdown += `| ${tool.name} | ${tool.description} |\n`;
+    markdown += `| ${tool.name} | ${tagFmt(tool.tags)} | ${tool.description} |\n`;
+  });
+
+  markdown += `\n---\n\n## Minds (${minds.length})
+
+| Mente | Slug | Status | Fidelidade | Domínio |
+|-------|------|--------|------------|---------|
+`;
+
+  minds.forEach(mind => {
+    markdown += `| ${mind.name} | \`${mind.slug}\` | ${mind.status} | ${mind.fidelity} | ${mind.domain} |\n`;
   });
 
   markdown += `\n---\n\n## Agents (${agents.length})
 
-| Agent | Persona | Escopo |
-|-------|---------|--------|
+| Agent | Tags | Persona | Escopo |
+|-------|------|---------|--------|
 `;
 
   agents.forEach(agent => {
-    markdown += `| ${agent.id} | ${agent.persona} | ${agent.scope} |\n`;
+    markdown += `| ${agent.id} | ${tagFmt(agent.tags)} | ${agent.persona} | ${agent.scope} |\n`;
   });
 
   markdown += `\n---\n\n## Quick Reference
@@ -371,6 +504,7 @@ function generateMarkdown(squads, skills, tools, agents) {
 - **Squads:** \`/squad-name\` (ex: \`/agent-autonomy\`, \`/kaizen\`)
 - **Skills:** \`/AIOS:skills:skill-name\` (ex: \`/AIOS:skills:book-to-markdown\`)
 - **Agents:** \`@agent-id\` (ex: \`@dev\`, \`@architect\`)
+- **Minds:** Referenciadas por slug em \`squads/mind-cloning/minds/{slug}/\`
 
 ### Common Workflows
 
@@ -391,6 +525,34 @@ function generateMarkdown(squads, skills, tools, agents) {
 
 ---
 
+## Domain Taxonomy
+
+| Domínio | Squads | Skills | Tools | Agents |
+|---------|--------|--------|-------|--------|
+`;
+
+  // Count items per domain
+  const taxonomy = loadTaxonomy();
+  const domainCounts = {};
+  for (const domain of Object.keys(taxonomy)) {
+    domainCounts[domain] = { squads: 0, skills: 0, tools: 0, agents: 0 };
+  }
+  domainCounts['uncategorized'] = { squads: 0, skills: 0, tools: 0, agents: 0 };
+
+  squads.forEach(s => s.tags.forEach(t => { if (domainCounts[t]) domainCounts[t].squads++; }));
+  skills.forEach(s => s.tags.forEach(t => { if (domainCounts[t]) domainCounts[t].skills++; }));
+  tools.forEach(s => s.tags.forEach(t => { if (domainCounts[t]) domainCounts[t].tools++; }));
+  agents.forEach(s => s.tags.forEach(t => { if (domainCounts[t]) domainCounts[t].agents++; }));
+
+  for (const [domain, counts] of Object.entries(domainCounts)) {
+    const total = counts.squads + counts.skills + counts.tools + counts.agents;
+    if (total === 0) continue;
+    const label = taxonomy[domain] ? taxonomy[domain].label : domain;
+    markdown += `| ${label} | ${counts.squads} | ${counts.skills} | ${counts.tools} | ${counts.agents} |\n`;
+  }
+
+  markdown += `\n---
+
 ## Data Completeness
 
 | Categoria | Total | Coverage |
@@ -398,6 +560,7 @@ function generateMarkdown(squads, skills, tools, agents) {
 | Squads | ${squads.length} | 100% |
 | Skills | ${skills.length} | 100% |
 | Tools | ${tools.length} | 100% |
+| Minds | ${minds.length} | 100% |
 | Agents | ${agents.length} | 100% |
 
 ---
@@ -545,11 +708,15 @@ function syncSkillCommands(skills) {
       const isComplex = subdirs.length > 0;
 
       // Clean conflicting entry type (dir exists but should be symlink, or vice-versa)
+      // Use removeBrokenSymlink + lstatSync to also detect broken symlinks
       const simpleSymlink = path.join(skillsCmdDir, `${skill.name}.md`);
       const complexDir = path.join(skillsCmdDir, skill.name);
-      if (isComplex && fs.existsSync(simpleSymlink)) {
-        fs.unlinkSync(simpleSymlink);
-        log(`🔄 ${model}: ${skill.name} changed simple→complex, cleaned old symlink`, 'cyan');
+      if (isComplex) {
+        removeBrokenSymlink(simpleSymlink);
+        if (fs.existsSync(simpleSymlink)) {
+          fs.unlinkSync(simpleSymlink);
+          log(`🔄 ${model}: ${skill.name} changed simple→complex, cleaned old symlink`, 'cyan');
+        }
       } else if (!isComplex && fs.existsSync(complexDir)) {
         try {
           const stat = fs.lstatSync(complexDir);
@@ -571,8 +738,8 @@ function syncSkillCommands(skills) {
         const cmdReadme = path.join(cmdDir, 'README.md');
         removeBrokenSymlink(cmdReadme);
         if (!fs.existsSync(cmdReadme)) {
-          // ../../../../skills/{name}/README.md
-          const relTarget = path.join('..', '..', '..', '..', 'skills', skill.name, mainDoc);
+          // ../../../../../skills/{name}/README.md (5 levels: README → {skill}/ → skills/ → AIOS/ → commands/ → .claude/ → root)
+          const relTarget = path.join('..', '..', '..', '..', '..', 'skills', skill.name, mainDoc);
           fs.symlinkSync(relTarget, cmdReadme);
           modelCreated++;
         }
@@ -591,8 +758,8 @@ function syncSkillCommands(skills) {
             const cmdFile = path.join(cmdSubdir, mdFile);
             removeBrokenSymlink(cmdFile);
             if (!fs.existsSync(cmdFile)) {
-              // ../../../../../skills/{name}/{subdir}/{file}.md
-              const relTarget = path.join('..', '..', '..', '..', '..', 'skills', skill.name, subdir, mdFile);
+              // ../../../../../../skills/{name}/{subdir}/{file}.md (6 levels: file → {subdir}/ → {skill}/ → skills/ → AIOS/ → commands/ → .claude/ → root)
+              const relTarget = path.join('..', '..', '..', '..', '..', '..', 'skills', skill.name, subdir, mdFile);
               fs.symlinkSync(relTarget, cmdFile);
               modelCreated++;
             }
@@ -603,8 +770,8 @@ function syncSkillCommands(skills) {
         const cmdFile = path.join(skillsCmdDir, `${skill.name}.md`);
         removeBrokenSymlink(cmdFile);
         if (!fs.existsSync(cmdFile)) {
-          // ../../../skills/{name}/README.md
-          const relTarget = path.join('..', '..', '..', 'skills', skill.name, mainDoc);
+          // ../../../../skills/{name}/README.md (4 levels: skills/ → AIOS/ → commands/ → .claude/ → root)
+          const relTarget = path.join('..', '..', '..', '..', 'skills', skill.name, mainDoc);
           fs.symlinkSync(relTarget, cmdFile);
           modelCreated++;
         }
@@ -696,11 +863,14 @@ function syncGlobalSkillCommands(skills) {
     const isComplex = subdirs.length > 0;
     const absSkillDir = path.join(SKILLS_DIR, skill.name);
 
-    // Clean conflicting types
+    // Clean conflicting types (use removeBrokenSymlink to also catch broken links)
     const simpleSymlink = path.join(globalSkillsDir, `${skill.name}.md`);
     const complexDir = path.join(globalSkillsDir, skill.name);
-    if (isComplex && fs.existsSync(simpleSymlink)) {
-      fs.unlinkSync(simpleSymlink);
+    if (isComplex) {
+      removeBrokenSymlink(simpleSymlink);
+      if (fs.existsSync(simpleSymlink)) {
+        fs.unlinkSync(simpleSymlink);
+      }
     } else if (!isComplex && fs.existsSync(complexDir)) {
       try {
         if (fs.lstatSync(complexDir).isDirectory()) {
@@ -827,6 +997,72 @@ function syncTopLevelShortcuts() {
 }
 
 /**
+ * Generate catalog-tags.json for programmatic matching
+ */
+function generateTagsJson(squads, skills, tools, agents, minds) {
+  const index = {
+    $schema: 'AIOX Catalog Tags — programmatic matching index',
+    generated: new Date().toISOString(),
+    squads: {},
+    skills: {},
+    tools: {},
+    agents: {},
+    minds: {},
+  };
+
+  squads.forEach(s => {
+    index.squads[s.slug] = { description: s.description, tags: s.tags, activation: `/${s.slug}` };
+  });
+  skills.forEach(s => {
+    index.skills[s.name] = { description: s.description, tags: s.tags, activation: `/AIOS:skills:${s.name}` };
+  });
+  tools.forEach(s => {
+    index.tools[s.name] = { description: s.description, tags: s.tags };
+  });
+  agents.forEach(s => {
+    index.agents[s.id] = { persona: s.persona, scope: s.scope, tags: s.tags };
+  });
+  minds.forEach(s => {
+    index.minds[s.slug] = { name: s.name, status: s.status, fidelity: s.fidelity, domain: s.domain };
+  });
+
+  // Domain reverse index: domain → [items]
+  index.byDomain = {};
+  const addToDomain = (type, slug, tags) => {
+    for (const tag of tags) {
+      if (!index.byDomain[tag]) index.byDomain[tag] = [];
+      index.byDomain[tag].push({ type, slug });
+    }
+  };
+  squads.forEach(s => addToDomain('squad', s.slug, s.tags));
+  skills.forEach(s => addToDomain('skill', s.name, s.tags));
+  tools.forEach(s => addToDomain('tool', s.name, s.tags));
+  agents.forEach(s => addToDomain('agent', s.id, s.tags));
+
+  return index;
+}
+
+/**
+ * Validate no items left untagged
+ */
+function validateTags(squads, skills, tools, agents) {
+  const untagged = [];
+
+  squads.forEach(s => { if (s.tags.includes('uncategorized')) untagged.push(`squad:${s.slug}`); });
+  skills.forEach(s => { if (s.tags.includes('uncategorized')) untagged.push(`skill:${s.name}`); });
+  tools.forEach(s => { if (s.tags.includes('uncategorized')) untagged.push(`tool:${s.name}`); });
+
+  if (untagged.length > 0) {
+    log(`\n⚠️  ${untagged.length} item(s) tagged as 'uncategorized' (needs review):`, 'yellow');
+    untagged.forEach(item => log(`  - ${item}`, 'yellow'));
+  } else {
+    log('✓ All items have domain tags', 'green');
+  }
+
+  return untagged;
+}
+
+/**
  * Main execution
  */
 function main() {
@@ -834,11 +1070,21 @@ function main() {
     log('\n🚀 AIOX Catalog Generator', 'blue');
     log('========================\n', 'blue');
 
+    // Load taxonomy
+    const taxonomy = loadTaxonomy();
+    const domainCount = Object.keys(taxonomy).length;
+    log(`✓ Loaded taxonomy with ${domainCount} domains`, 'green');
+
     // Extract data
-    const squads = extractSquads();
-    const skills = extractSkills();
-    const tools = extractTools();
+    const squads = extractSquads(taxonomy);
+    const skills = extractSkills(taxonomy);
+    const tools = extractTools(taxonomy);
     const agents = extractAgents();
+    const minds = extractMinds();
+
+    // Validate tags
+    log('\n🏷️  Validating tags...', 'cyan');
+    const untagged = validateTags(squads, skills, tools, agents);
 
     // Sync slash commands (project-level)
     syncCommands(squads);
@@ -852,20 +1098,30 @@ function main() {
 
     // Generate markdown
     log('\n📝 Generating markdown...', 'cyan');
-    const markdown = generateMarkdown(squads, skills, tools, agents);
+    const markdown = generateMarkdown(squads, skills, tools, agents, minds);
 
-    // Write file
+    // Write catalog.md
     const outputPath = path.join(ROOT, '.aios-core', 'data', 'catalog.md');
     fs.writeFileSync(outputPath, markdown, 'utf8');
-
     log(`✓ Catalog written to ${outputPath}`, 'green');
+
+    // Write catalog-tags.json
+    log('📝 Generating tags JSON...', 'cyan');
+    const tagsJson = generateTagsJson(squads, skills, tools, agents, minds);
+    const jsonPath = path.join(ROOT, '.aios-core', 'data', 'catalog-tags.json');
+    fs.writeFileSync(jsonPath, JSON.stringify(tagsJson, null, 2), 'utf8');
+    log(`✓ Tags JSON written to ${jsonPath}`, 'green');
 
     // Summary
     log('\n📊 Summary', 'blue');
     log(`  Squads:  ${squads.length}`, 'green');
     log(`  Skills:  ${skills.length}`, 'green');
     log(`  Tools:   ${tools.length}`, 'green');
+    log(`  Minds:   ${minds.length}`, 'green');
     log(`  Agents:  ${agents.length}`, 'green');
+    if (untagged.length > 0) {
+      log(`  ⚠️  Uncategorized: ${untagged.length}`, 'yellow');
+    }
     log('\n✨ Done!\n', 'green');
 
     process.exit(0);

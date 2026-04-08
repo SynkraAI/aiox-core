@@ -1,0 +1,1 @@
+../../../../skills/critica/SKILL.md

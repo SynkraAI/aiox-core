@@ -1,1 +1,1 @@
-../../../../../skills/code-review-ping-pong/docs/product-overview.md
+../../../../../../skills/code-review-ping-pong/docs/product-overview.md

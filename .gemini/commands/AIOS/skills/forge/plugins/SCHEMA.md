@@ -1,1 +1,1 @@
-../../../../../skills/forge/plugins/SCHEMA.md
+../../../../../../skills/forge/plugins/SCHEMA.md

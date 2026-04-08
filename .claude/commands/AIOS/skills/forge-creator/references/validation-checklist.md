@@ -1,0 +1,1 @@
+../../../../../../skills/forge-creator/references/validation-checklist.md

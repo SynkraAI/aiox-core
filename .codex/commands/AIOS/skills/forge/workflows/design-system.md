@@ -1,1 +1,1 @@
-../../../../../skills/forge/workflows/design-system.md
+../../../../../../skills/forge/workflows/design-system.md

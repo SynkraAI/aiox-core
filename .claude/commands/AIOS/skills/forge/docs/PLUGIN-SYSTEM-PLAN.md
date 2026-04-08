@@ -1,1 +1,1 @@
-../../../../../skills/forge/docs/PLUGIN-SYSTEM-PLAN.md
+../../../../../../skills/forge/docs/PLUGIN-SYSTEM-PLAN.md

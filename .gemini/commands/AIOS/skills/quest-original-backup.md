@@ -1,1 +1,1 @@
-../../../skills/quest-original-backup/SKILL.md
+../../../../skills/quest-original-backup/SKILL.md

@@ -1,0 +1,1 @@
+../../../../../../skills/forge-creator/references/tier-1-template.md

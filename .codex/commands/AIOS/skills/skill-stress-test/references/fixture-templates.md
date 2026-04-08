@@ -1,1 +1,1 @@
-../../../../../skills/skill-stress-test/references/fixture-templates.md
+../../../../../../skills/skill-stress-test/references/fixture-templates.md

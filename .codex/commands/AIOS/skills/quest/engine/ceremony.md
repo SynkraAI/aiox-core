@@ -1,1 +1,1 @@
-../../../../../skills/quest/engine/ceremony.md
+../../../../../../skills/quest/engine/ceremony.md

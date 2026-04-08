@@ -1,1 +1,1 @@
-../../../../../skills/forge/workflows/dry-run.md
+../../../../../../skills/forge/workflows/dry-run.md

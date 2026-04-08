@@ -1,25 +1,24 @@
-# Ping-Pong Session
+# Ping-Pong Session — Catalog
 
 ## Scope
 - files:
-  - skills/forge/phases/phase-0-discovery.md
-  - skills/forge/phases/phase-2-stories.md
-  - skills/forge/phases/phase-3-build.md
-  - skills/forge/runner.md
-  - skills/forge/workflows/quick.md
-  - skills/forge/workflows/bug-fix.md
+  - scripts/generate-catalog.js
+  - .claude/commands/catalog.md
 
 ## Goals
-- Verificar que TODAS as referências a `docs/stories/active/` nos arquivos de execução do Forge agora usam `{run_id}/`
-- Confirmar que não ficou nenhuma referência hardcoded sem o `{run_id}` que deveria ter sido alterada
-- Verificar consistência entre os 6 arquivos (mesmo padrão em todos)
-- Checar que referências legítimas sem `{run_id}` (brownfield scan, scaffold placeholder) foram corretamente preservadas
-- Verificar que o completion protocol (runner.md) move subpasta inteira e não arquivos individuais
-- Verificar pt-BR quality (acentuação) nos trechos modificados
-- Checar que os exemplos de state.json em phase-2 usam o novo path pattern
+- Verificar qualidade geral do código do generate-catalog.js
+- Bugs, edge cases, error handling
+- Performance (leitura de filesystem, loops)
+- Segurança (path traversal, symlink attacks)
+- Duplicação de código (DRY violations)
+- Consistência entre as funções de scan (squads, skills, tools, minds, agents)
+- Lógica de symlink e cleanup de entradas stale
+- Qualidade do markdown gerado
+- Robustez do simpleYamlValue (edge cases de YAML parsing)
+- Verificar se o slash command catalog.md está correto e completo
 
 ## Constraints
-- Foco nas mudanças de isolamento de stories por run_id
-- Não modificar a arquitetura geral do Forge
-- Referências em docs históricos (FORGE-SCAFFOLD-PLAN.md etc.) NÃO devem ser alteradas
-- brownfield.md scan e forge-scaffold.md placeholder devem permanecer sem {run_id}
+- Script usa CommonJS (require/module.exports) — manter
+- Zero dependências externas — manter (sem js-yaml etc.)
+- Não alterar a arquitetura geral do catálogo
+- Foco em bugs reais e melhorias concretas, não nitpicks cosméticos

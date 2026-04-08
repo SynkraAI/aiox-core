@@ -1,1 +1,1 @@
-../../../../../skills/forge/workflows/squad-upgrade.md
+../../../../../../skills/forge/workflows/squad-upgrade.md

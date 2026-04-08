@@ -1,1 +1,1 @@
-../../../skills/design-system-scaffold/SKILL.md
+../../../../skills/design-system-scaffold/SKILL.md

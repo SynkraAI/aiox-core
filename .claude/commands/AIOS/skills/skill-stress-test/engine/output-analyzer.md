@@ -1,1 +1,1 @@
-../../../../../skills/skill-stress-test/engine/output-analyzer.md
+../../../../../../skills/skill-stress-test/engine/output-analyzer.md

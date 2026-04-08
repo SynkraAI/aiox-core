@@ -1,0 +1,2494 @@
+{
+  "$schema": "AIOX Catalog Tags — programmatic matching index",
+  "generated": "2026-04-08T15:54:13.037Z",
+  "squads": {
+    "advisor-board": {
+      "description": "Advisory Board Squad",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/advisor-board"
+    },
+    "affiliates": {
+      "description": "Affiliates Squad — MultiPlatform Affiliate Business System",
+      "tags": [
+        "marketing"
+      ],
+      "activation": "/affiliates"
+    },
+    "agent-autonomy": {
+      "description": "Squad para auditar, criar, diagnosticar e otimizar agentes autônomos. Aplica frameworks como Weng's 3 Pillars, ACI, ReAct/Reflexion, e IMPACT para garantir autonomia real dos agentes.",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/agent-autonomy"
+    },
+    "ai-reels": {
+      "description": "AI Reels Squad v3.0",
+      "tags": [
+        "content"
+      ],
+      "activation": "/ai-reels"
+    },
+    "audio-reels": {
+      "description": "Audio Reels — AI Cinema Pipeline",
+      "tags": [
+        "content",
+        "media"
+      ],
+      "activation": "/audio-reels"
+    },
+    "brandcraft": {
+      "description": "BrandCraft — Visual Content Production Squad",
+      "tags": [
+        "branding"
+      ],
+      "activation": "/brandcraft"
+    },
+    "branding": {
+      "description": "Brand Squad",
+      "tags": [
+        "branding"
+      ],
+      "activation": "/branding"
+    },
+    "business-rules-extraction": {
+      "description": "Business Rules Extraction Squad",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/business-rules-extraction"
+    },
+    "claude-code-mastery": {
+      "description": "Claude Code Mastery Squad",
+      "tags": [
+        "ai-ops",
+        "dev"
+      ],
+      "activation": "/claude-code-mastery"
+    },
+    "content-creator": {
+      "description": "Content Creator Squad",
+      "tags": [
+        "content",
+        "ai-ops"
+      ],
+      "activation": "/content-creator"
+    },
+    "content-engine": {
+      "description": "Content Engine v2 — START HERE",
+      "tags": [
+        "content"
+      ],
+      "activation": "/content-engine"
+    },
+    "conteudo": {
+      "description": "Squad Conteudo v2.2",
+      "tags": [
+        "content"
+      ],
+      "activation": "/conteudo"
+    },
+    "conversao-extrema": {
+      "description": "Conversão Extrema Squad",
+      "tags": [
+        "marketing"
+      ],
+      "activation": "/conversao-extrema"
+    },
+    "copywriting-squad": {
+      "description": "Copywriting Masters Squad",
+      "tags": [
+        "content",
+        "ai-ops"
+      ],
+      "activation": "/copywriting-squad"
+    },
+    "curator": {
+      "description": "🎬 Curator Squad",
+      "tags": [
+        "media"
+      ],
+      "activation": "/curator"
+    },
+    "dan-koe": {
+      "description": "Koe Squad — The OnePerson Business System",
+      "tags": [
+        "mind-clone"
+      ],
+      "activation": "/dan-koe"
+    },
+    "db-sage": {
+      "description": "🗄️ DB Sage  Database Architect & Operations Engineer",
+      "tags": [
+        "data"
+      ],
+      "activation": "/db-sage"
+    },
+    "design": {
+      "description": "Squad focado exclusivamente em Design System. Especializado em tokens, componentes, acessibilidade, registry, metadata machine-readable e DesignOps.",
+      "tags": [
+        "design"
+      ],
+      "activation": "/design"
+    },
+    "dopamine-learning": {
+      "description": "Dopamine Learning Squad: Complete Documentation",
+      "tags": [
+        "education"
+      ],
+      "activation": "/dopamine-learning"
+    },
+    "ensinio-mind": {
+      "description": "Ensinio Mind — Knowledge Hub",
+      "tags": [
+        "education",
+        "mind-clone"
+      ],
+      "activation": "/ensinio-mind"
+    },
+    "etl-squad": {
+      "description": "Squad autônoma universal para ingerir qualquer fonte (URLs, arquivos, APIs) e transformar em estruturas limpas, semânticas e prontas para consumo. Inclui quality verification (0-10), human review e pu",
+      "tags": [
+        "data",
+        "ai-ops"
+      ],
+      "activation": "/etl-squad"
+    },
+    "file-research": {
+      "description": "File Research Squad",
+      "tags": [
+        "research"
+      ],
+      "activation": "/file-research"
+    },
+    "gui-avila": {
+      "description": "Squad Gui Ávila",
+      "tags": [
+        "design"
+      ],
+      "activation": "/gui-avila"
+    },
+    "high-ticket-mastery": {
+      "description": "HighTicket Mastery Squad",
+      "tags": [
+        "ai-ops",
+        "sales"
+      ],
+      "activation": "/high-ticket-mastery"
+    },
+    "high-ticket-sales": {
+      "description": "HighTicket Sales Squad",
+      "tags": [
+        "sales"
+      ],
+      "activation": "/high-ticket-sales"
+    },
+    "hormozi": {
+      "description": "Hormozi Squad — The $100M Mind System",
+      "tags": [
+        "mind-clone"
+      ],
+      "activation": "/hormozi"
+    },
+    "icaro-de-carvalho": {
+      "description": "🎯 Ícaro de Carvalho — Marketing Digital Elite (MultiMind Squad)",
+      "tags": [
+        "mind-clone",
+        "marketing"
+      ],
+      "activation": "/icaro-de-carvalho"
+    },
+    "icp-cloning": {
+      "description": "🧬 ICP Cognitive Cloning Squad",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/icp-cloning"
+    },
+    "insight": {
+      "description": "🔍 Insight Squad — Research, Diagnosis & Reporting",
+      "tags": [
+        "research"
+      ],
+      "activation": "/insight"
+    },
+    "italo-marsili": {
+      "description": "Squad: Italo Marsili",
+      "tags": [
+        "mind-clone"
+      ],
+      "activation": "/italo-marsili"
+    },
+    "jose-amorim": {
+      "description": "Squad José Amorim — O Tradutor Nexialista",
+      "tags": [
+        "mind-clone"
+      ],
+      "activation": "/jose-amorim"
+    },
+    "kaizen": {
+      "description": "Meta-squad de RH + Ferramentas. Analisa continuamente o ecossistema de agentes, squads, ferramentas e competencias. Detecta gaps, monitora performance, recomenda novos recursos. O sistema nervoso do A",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/kaizen"
+    },
+    "kaizen-v2": {
+      "description": "Evolução do kaizen v1: sistema nervoso do projeto com sensoriamento diário (Tier 0). Captura contínua de learnings, padrão de esquecimento (forgetting curve), relatórios inteligentes com padrões reinf",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/kaizen-v2"
+    },
+    "knowledge-base-builder": {
+      "description": "Knowledge Base Builder Squad",
+      "tags": [
+        "dev",
+        "design",
+        "education"
+      ],
+      "activation": "/knowledge-base-builder"
+    },
+    "leandro-ladeira": {
+      "description": "Squad: Leandro Ladeira",
+      "tags": [
+        "mind-clone"
+      ],
+      "activation": "/leandro-ladeira"
+    },
+    "legacy-rule-extractor": {
+      "description": "Legacy Rule Extractor",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/legacy-rule-extractor"
+    },
+    "luiz-fosc": {
+      "description": "Luiz Fosc — Mind Clone Squad",
+      "tags": [
+        "mind-clone",
+        "design"
+      ],
+      "activation": "/luiz-fosc"
+    },
+    "magic-bob": {
+      "description": "Magic BOB - Autonomous orchestration system for AIOS projects. Detects project state, spawns agents in separate terminals, manages development cycles, and maintains persistent sessions with human chec",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/magic-bob"
+    },
+    "marketing-board": {
+      "description": "Marketing OPES — Board Estratégico + Marketing Arm",
+      "tags": [
+        "marketing"
+      ],
+      "activation": "/marketing-board"
+    },
+    "media-processor": {
+      "description": "Media Processor",
+      "tags": [
+        "productivity",
+        "media"
+      ],
+      "activation": "/media-processor"
+    },
+    "mind-cloning": {
+      "description": "🧬 Mind Cloning Squad",
+      "tags": [
+        "mind-clone"
+      ],
+      "activation": "/mind-cloning"
+    },
+    "mind-content-updater": {
+      "description": "Mind Content Updater - Automated Source Discovery, Collection & Analysis. Discovers, collects, and analyzes source materials for MMOS mind cloning using MCP tools (Exa, WebSearch, WebFetch) and local ",
+      "tags": [
+        "content",
+        "mind-clone"
+      ],
+      "activation": "/mind-content-updater"
+    },
+    "mmos-squad": {
+      "description": "MMOS Squad",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/mmos-squad"
+    },
+    "money-makers-vtd": {
+      "description": "Vendas Todos os Dias",
+      "tags": [
+        "sales"
+      ],
+      "activation": "/money-makers-vtd"
+    },
+    "navigator": {
+      "description": "Autonomous project navigator and orchestration specialist. Maps roadmaps, detects current phase, prevents context loss, and orchestrates multi-agent workflows for complex AIOS projects.",
+      "tags": [
+        "ai-ops",
+        "productivity"
+      ],
+      "activation": "/navigator"
+    },
+    "negotiation": {
+      "description": "Negotiation Squad",
+      "tags": [
+        "sales"
+      ],
+      "activation": "/negotiation"
+    },
+    "openclaw-manager": {
+      "description": "OpenClaw Manager — Fleet Orchestrator",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/openclaw-manager"
+    },
+    "palestras-master": {
+      "description": "Palestras Master Federator",
+      "tags": [
+        "education",
+        "ai-ops"
+      ],
+      "activation": "/palestras-master"
+    },
+    "paulo-vieira": {
+      "description": "Squad Paulo Vieira",
+      "tags": [
+        "mind-clone"
+      ],
+      "activation": "/paulo-vieira"
+    },
+    "playwright-architect": {
+      "description": "Playwright Architect Squad",
+      "tags": [
+        "dev"
+      ],
+      "activation": "/playwright-architect"
+    },
+    "presenca-digital": {
+      "description": "📱 Presença Digital Squad",
+      "tags": [
+        "marketing"
+      ],
+      "activation": "/presenca-digital"
+    },
+    "relationship-therapy-squad": {
+      "description": "Squad de 11 terapeutas especializados em relacionamentos. Cada agente é um clone fiel de um especialista real - com Voice DNA, Thinking DNA e frameworks terapêuticos completos. Inclui orquestrador com",
+      "tags": [
+        "ai-ops",
+        "productivity"
+      ],
+      "activation": "/relationship-therapy-squad"
+    },
+    "renner-silva": {
+      "description": "Renner Silva — Squad Deployável",
+      "tags": [
+        "mind-clone"
+      ],
+      "activation": "/renner-silva"
+    },
+    "repertoire-mapper": {
+      "description": "Repertoire Mapper",
+      "tags": [
+        "mind-clone"
+      ],
+      "activation": "/repertoire-mapper"
+    },
+    "root-diagnosis": {
+      "description": "Root Diagnosis Squad",
+      "tags": [
+        "research"
+      ],
+      "activation": "/root-diagnosis"
+    },
+    "seo": {
+      "description": "SEO Expert Squad",
+      "tags": [
+        "seo"
+      ],
+      "activation": "/seo"
+    },
+    "site-performance-audit": {
+      "description": "siteperformanceaudit — External Web Performance Audit Squad",
+      "tags": [
+        "security",
+        "seo"
+      ],
+      "activation": "/site-performance-audit"
+    },
+    "sop-factory": {
+      "description": "SOP Factory",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/sop-factory"
+    },
+    "squad-creator-pro": {
+      "description": "Squad Creator",
+      "tags": [
+        "ai-ops",
+        "content"
+      ],
+      "activation": "/squad-creator-pro"
+    },
+    "squads": {
+      "description": "Sem descrição",
+      "tags": [
+        "marketing",
+        "ai-ops"
+      ],
+      "activation": "/squads"
+    },
+    "storytelling-masters-fosc": {
+      "description": "Storytelling Masters Fosc",
+      "tags": [
+        "content",
+        "mind-clone",
+        "ai-ops"
+      ],
+      "activation": "/storytelling-masters-fosc"
+    },
+    "synapse": {
+      "description": "Synapse Squad",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/synapse"
+    },
+    "tathi-deandhela": {
+      "description": "Tathi Deandhela Method Squad",
+      "tags": [
+        "mind-clone"
+      ],
+      "activation": "/tathi-deandhela"
+    },
+    "transcript-sculptor": {
+      "description": "Transcript Sculptor",
+      "tags": [
+        "content"
+      ],
+      "activation": "/transcript-sculptor"
+    },
+    "video-content-distillery": {
+      "description": "Content Distillery Squad",
+      "tags": [
+        "content",
+        "media"
+      ],
+      "activation": "/video-content-distillery"
+    },
+    "viral-squad": {
+      "description": "Squad de 30 agentes especializados em criar vídeos virais para Instagram usando Remotion. Focado em viralização, engajamento e crescimento através de estratégia baseada em dados e psicologia. Design s",
+      "tags": [
+        "marketing"
+      ],
+      "activation": "/viral-squad"
+    },
+    "whatsapp-prospector": {
+      "description": "WhatsApp Prospector",
+      "tags": [
+        "marketing"
+      ],
+      "activation": "/whatsapp-prospector"
+    },
+    "zona-genialidade": {
+      "description": "Zona Genialidade Squad",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/zona-genialidade"
+    }
+  },
+  "skills": {
+    "angular": {
+      "description": "Angular Expert",
+      "tags": [
+        "dev"
+      ],
+      "activation": "/AIOS:skills:angular"
+    },
+    "angular-state-management": {
+      "description": "Angular State Management",
+      "tags": [
+        "dev"
+      ],
+      "activation": "/AIOS:skills:angular-state-management"
+    },
+    "apify": {
+      "description": "Apify Web Scraper",
+      "tags": [
+        "dev"
+      ],
+      "activation": "/AIOS:skills:apify"
+    },
+    "app-builder": {
+      "description": "App Builder - Application Building Orchestrator",
+      "tags": [
+        "dev",
+        "design"
+      ],
+      "activation": "/AIOS:skills:app-builder"
+    },
+    "audit-project-config": {
+      "description": "Audit Project Config",
+      "tags": [
+        "security"
+      ],
+      "activation": "/AIOS:skills:audit-project-config"
+    },
+    "auto-deploy": {
+      "description": "Auto-Deploy — Seu concierge de deploy.",
+      "tags": [
+        "devops"
+      ],
+      "activation": "/AIOS:skills:auto-deploy"
+    },
+    "avalonia-viewmodels-zafiro": {
+      "description": "Avalonia ViewModels com Zafiro & ReactiveUI",
+      "tags": [
+        "dev"
+      ],
+      "activation": "/AIOS:skills:avalonia-viewmodels-zafiro"
+    },
+    "blotato": {
+      "description": "Blotato Publisher",
+      "tags": [
+        "marketing"
+      ],
+      "activation": "/AIOS:skills:blotato"
+    },
+    "book-to-markdown": {
+      "description": "Book to Markdown",
+      "tags": [
+        "media"
+      ],
+      "activation": "/AIOS:skills:book-to-markdown"
+    },
+    "bulletproof-test": {
+      "description": "Bulletproof Test v2.1",
+      "tags": [
+        "dev"
+      ],
+      "activation": "/AIOS:skills:bulletproof-test"
+    },
+    "canva": {
+      "description": "Canva Connect",
+      "tags": [
+        "design"
+      ],
+      "activation": "/AIOS:skills:canva"
+    },
+    "carrossel-instagram": {
+      "description": "Carrossel Instagram",
+      "tags": [
+        "design"
+      ],
+      "activation": "/AIOS:skills:carrossel-instagram"
+    },
+    "celf-context": {
+      "description": "CELF — Context Engineering Layered Framework",
+      "tags": [
+        "productivity",
+        "ai-ops"
+      ],
+      "activation": "/AIOS:skills:celf-context"
+    },
+    "cloud-penetration-testing": {
+      "description": "Cloud Penetration Testing",
+      "tags": [
+        "security",
+        "dev"
+      ],
+      "activation": "/AIOS:skills:cloud-penetration-testing"
+    },
+    "code-refactoring-refactor-clean": {
+      "description": "Refactor & Clean Code v2.0",
+      "tags": [
+        "dev"
+      ],
+      "activation": "/AIOS:skills:code-refactoring-refactor-clean"
+    },
+    "code-review-ping-pong": {
+      "description": "Code Review Ping-Pong v3.1 — Cross-AI Review Protocol",
+      "tags": [
+        "dev"
+      ],
+      "activation": "/AIOS:skills:code-review-ping-pong"
+    },
+    "content-forge": {
+      "description": "Content Forge — Orquestrador Inteligente de Conteúdo",
+      "tags": [
+        "content"
+      ],
+      "activation": "/AIOS:skills:content-forge"
+    },
+    "context-surgeon": {
+      "description": "Context Surgeon v1.1.0",
+      "tags": [
+        "productivity",
+        "ai-ops"
+      ],
+      "activation": "/AIOS:skills:context-surgeon"
+    },
+    "critica": {
+      "description": "Critica — Revisao + Execucao Disciplinada",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:critica"
+    },
+    "dashboard-generator": {
+      "description": "Dashboard Generator - Interactive Web Dashboards",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:dashboard-generator"
+    },
+    "decision-tree-generator": {
+      "description": "Decision Tree Documentation Generator",
+      "tags": [
+        "media"
+      ],
+      "activation": "/AIOS:skills:decision-tree-generator"
+    },
+    "deep-research": {
+      "description": "Deep Research",
+      "tags": [
+        "research"
+      ],
+      "activation": "/AIOS:skills:deep-research"
+    },
+    "deep-search": {
+      "description": "Deep Search",
+      "tags": [
+        "research"
+      ],
+      "activation": "/AIOS:skills:deep-search"
+    },
+    "deepgram-transcriber": {
+      "description": "Deepgram Transcriber",
+      "tags": [
+        "productivity",
+        "media"
+      ],
+      "activation": "/AIOS:skills:deepgram-transcriber"
+    },
+    "design-system-catalog": {
+      "description": "Design System Catalog",
+      "tags": [
+        "design"
+      ],
+      "activation": "/AIOS:skills:design-system-catalog"
+    },
+    "design-system-extractor": {
+      "description": "Design System Extractor",
+      "tags": [
+        "design",
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:design-system-extractor"
+    },
+    "design-system-forge": {
+      "description": "Design System Forge",
+      "tags": [
+        "design",
+        "content"
+      ],
+      "activation": "/AIOS:skills:design-system-forge"
+    },
+    "design-system-scaffold": {
+      "description": "🏗️ Design System Scaffold",
+      "tags": [
+        "design",
+        "dev"
+      ],
+      "activation": "/AIOS:skills:design-system-scaffold"
+    },
+    "design-system-storybook": {
+      "description": "Component Factory (Bootstrap Mode)",
+      "tags": [
+        "design",
+        "dev",
+        "media"
+      ],
+      "activation": "/AIOS:skills:design-system-storybook"
+    },
+    "ecosystem-audit": {
+      "description": "Ecosystem Audit Skill",
+      "tags": [
+        "security"
+      ],
+      "activation": "/AIOS:skills:ecosystem-audit"
+    },
+    "forge": {
+      "description": "Forge — Da ideia ao deploy, sem atalho raso.",
+      "tags": [
+        "content"
+      ],
+      "activation": "/AIOS:skills:forge"
+    },
+    "forge-creator": {
+      "description": "Forge Creator — Gera orquestradores que orquestram.",
+      "tags": [
+        "content",
+        "productivity",
+        "ai-ops"
+      ],
+      "activation": "/AIOS:skills:forge-creator"
+    },
+    "forge-quick": {
+      "description": "Forge Quick — Atalho direto",
+      "tags": [
+        "content",
+        "design"
+      ],
+      "activation": "/AIOS:skills:forge-quick"
+    },
+    "game-development": {
+      "description": "Game Development",
+      "tags": [
+        "dev",
+        "gaming"
+      ],
+      "activation": "/AIOS:skills:game-development"
+    },
+    "god-mode": {
+      "description": "God Mode v3.1 — Supreme Operator AIOX",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/AIOS:skills:god-mode"
+    },
+    "godot-gdscript-patterns": {
+      "description": "Godot GDScript Patterns",
+      "tags": [
+        "gaming",
+        "content"
+      ],
+      "activation": "/AIOS:skills:godot-gdscript-patterns"
+    },
+    "groq-transcriber": {
+      "description": "Groq Transcriber",
+      "tags": [
+        "media"
+      ],
+      "activation": "/AIOS:skills:groq-transcriber"
+    },
+    "image-creator": {
+      "description": "Image Creator",
+      "tags": [
+        "content",
+        "design",
+        "ai-ops"
+      ],
+      "activation": "/AIOS:skills:image-creator"
+    },
+    "image-fetcher": {
+      "description": "Image Fetcher",
+      "tags": [
+        "design"
+      ],
+      "activation": "/AIOS:skills:image-fetcher"
+    },
+    "imagemagick": {
+      "description": "ImageMagick — Processamento de Imagens via CLI",
+      "tags": [
+        "design"
+      ],
+      "activation": "/AIOS:skills:imagemagick"
+    },
+    "instagram-publisher": {
+      "description": "Instagram Publisher",
+      "tags": [
+        "marketing",
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:instagram-publisher"
+    },
+    "learning-extractor": {
+      "description": "Learning Extractor — Session Kaizen",
+      "tags": [
+        "productivity",
+        "education"
+      ],
+      "activation": "/AIOS:skills:learning-extractor"
+    },
+    "lp-generator": {
+      "description": "LP Generator v3 — Landing pages de agencia, em minutos.",
+      "tags": [
+        "marketing"
+      ],
+      "activation": "/AIOS:skills:lp-generator"
+    },
+    "mcp-builder": {
+      "description": "MCP Server Development Guide",
+      "tags": [
+        "dev",
+        "design",
+        "ai-ops"
+      ],
+      "activation": "/AIOS:skills:mcp-builder"
+    },
+    "memory-audit": {
+      "description": "Memory Audit Skill",
+      "tags": [
+        "security",
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:memory-audit"
+    },
+    "nextjs-react-expert": {
+      "description": "Next.js & React Performance Expert",
+      "tags": [
+        "dev"
+      ],
+      "activation": "/AIOS:skills:nextjs-react-expert"
+    },
+    "obsidian-app-filler": {
+      "description": "Obsidian App Filler — Preenchimento Automático de Notas de Apps",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:obsidian-app-filler"
+    },
+    "obsidian-tag-manager": {
+      "description": "Obsidian Tag Manager",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:obsidian-tag-manager"
+    },
+    "pipeline-checklist": {
+      "description": "Pipeline Quest — Sua Jornada do Zero ao Deploy",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:pipeline-checklist"
+    },
+    "politica-simulation-mirofish": {
+      "description": "politica-simulation-mirofish -- Motor de Predicao por Inteligencia de Enxame",
+      "tags": [
+        "research"
+      ],
+      "activation": "/AIOS:skills:politica-simulation-mirofish"
+    },
+    "pptx-generator": {
+      "description": "PPTX Generator",
+      "tags": [
+        "media"
+      ],
+      "activation": "/AIOS:skills:pptx-generator"
+    },
+    "prd-generator": {
+      "description": "PRD Generator — Da ideia ao documento profissional.",
+      "tags": [
+        "media"
+      ],
+      "activation": "/AIOS:skills:prd-generator"
+    },
+    "pre-deploy-telegram-bot": {
+      "description": "Pre-Deploy — Telegram Agenda Bot",
+      "tags": [
+        "devops",
+        "marketing",
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:pre-deploy-telegram-bot"
+    },
+    "pt-br-accentuation": {
+      "description": "Skill: Acentuação e Pontuação em Português Brasileiro",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:pt-br-accentuation"
+    },
+    "quality-dashboard": {
+      "description": "Quality Dashboard",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:quality-dashboard"
+    },
+    "quest": {
+      "description": "Quest Engine",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:quest"
+    },
+    "quest-original-backup": {
+      "description": "Quest — Um comando. Tudo comeca.",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:quest-original-backup"
+    },
+    "quest.bak": {
+      "description": "Quest Engine",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:quest.bak"
+    },
+    "ram-doctor": {
+      "description": "RAM Doctor — Diagnóstico e Limpeza de Memória no macOS",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:ram-doctor"
+    },
+    "sherlock-investigator": {
+      "description": "Sherlock Investigator",
+      "tags": [
+        "research"
+      ],
+      "activation": "/AIOS:skills:sherlock-investigator"
+    },
+    "skill-creator": {
+      "description": "Skill Creator",
+      "tags": [
+        "ai-ops",
+        "content"
+      ],
+      "activation": "/AIOS:skills:skill-creator"
+    },
+    "skill-stress-test": {
+      "description": "Skill Stress Test v1.0",
+      "tags": [
+        "dev"
+      ],
+      "activation": "/AIOS:skills:skill-stress-test"
+    },
+    "smart-browser-playwright": {
+      "description": "Smart Browser Playwright",
+      "tags": [
+        "dev"
+      ],
+      "activation": "/AIOS:skills:smart-browser-playwright"
+    },
+    "superpowers": {
+      "description": "Superpowers",
+      "tags": [
+        "dev"
+      ],
+      "activation": "/AIOS:skills:superpowers"
+    },
+    "synapse": {
+      "description": "SYNAPSE Context Engine",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/AIOS:skills:synapse"
+    },
+    "sync-projects": {
+      "description": "Sync Projects — Project Pulse",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:sync-projects"
+    },
+    "system-prompt-architect": {
+      "description": "System Prompt Architect",
+      "tags": [
+        "ai-ops"
+      ],
+      "activation": "/AIOS:skills:system-prompt-architect"
+    },
+    "tech-research": {
+      "description": "Tech Research",
+      "tags": [
+        "research"
+      ],
+      "activation": "/AIOS:skills:tech-research"
+    },
+    "telegram": {
+      "description": "Telegram Gateway",
+      "tags": [
+        "marketing",
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:telegram"
+    },
+    "tier-s-checklist": {
+      "description": "Tier-S Checklist",
+      "tags": [
+        "productivity"
+      ],
+      "activation": "/AIOS:skills:tier-s-checklist"
+    },
+    "tokenizacao": {
+      "description": "Tokenização - Frontend Quality Audit 2025",
+      "tags": [
+        "design"
+      ],
+      "activation": "/AIOS:skills:tokenizacao"
+    },
+    "tutorial-generator": {
+      "description": "Tutorial Generator",
+      "tags": [
+        "education"
+      ],
+      "activation": "/AIOS:skills:tutorial-generator"
+    },
+    "unreal-engine-cpp-pro": {
+      "description": "Unreal Engine C++ Pro",
+      "tags": [
+        "gaming"
+      ],
+      "activation": "/AIOS:skills:unreal-engine-cpp-pro"
+    },
+    "video-generator": {
+      "description": "Video Generator",
+      "tags": [
+        "content",
+        "media"
+      ],
+      "activation": "/AIOS:skills:video-generator"
+    },
+    "vulnerability-scanner": {
+      "description": "Vulnerability Scanner",
+      "tags": [
+        "security"
+      ],
+      "activation": "/AIOS:skills:vulnerability-scanner"
+    },
+    "yt-forge": {
+      "description": "YT Forge — Um vídeo entra, conhecimento sai.",
+      "tags": [
+        "content"
+      ],
+      "activation": "/AIOS:skills:yt-forge"
+    }
+  },
+  "tools": {
+    "_deprecated": {
+      "description": "Sem descrição",
+      "tags": [
+        "productivity"
+      ]
+    },
+    "aios-transcriber": {
+      "description": "AIOS Transcriber",
+      "tags": [
+        "media",
+        "ai-ops"
+      ]
+    },
+    "aiox-dashboard": {
+      "description": "React + TypeScript + Vite",
+      "tags": [
+        "dev",
+        "productivity",
+        "ai-ops"
+      ]
+    },
+    "cademi-downloader": {
+      "description": "Cademi Downloader",
+      "tags": [
+        "media"
+      ]
+    },
+    "document-processing": {
+      "description": "Sem descrição",
+      "tags": [
+        "productivity",
+        "media"
+      ]
+    },
+    "evolution-whatsapp-api": {
+      "description": "Evolution WhatsApp API Tool",
+      "tags": [
+        "marketing",
+        "dev"
+      ]
+    },
+    "hotmart-downloader": {
+      "description": "Sem descrição",
+      "tags": [
+        "media"
+      ]
+    },
+    "instagram-publisher": {
+      "description": "Instagram Publisher",
+      "tags": [
+        "marketing",
+        "productivity"
+      ]
+    },
+    "pipeline-dashboard": {
+      "description": "Pipeline Quest Dashboard",
+      "tags": [
+        "productivity"
+      ]
+    },
+    "quality-dashboard": {
+      "description": "Quality Dashboard",
+      "tags": [
+        "productivity"
+      ]
+    },
+    "smart-browser-playwright": {
+      "description": "Sem descrição",
+      "tags": [
+        "dev"
+      ]
+    },
+    "templates": {
+      "description": "Sem descrição",
+      "tags": [
+        "dev"
+      ]
+    },
+    "tldv-scraper": {
+      "description": "Sem descrição",
+      "tags": [
+        "media"
+      ]
+    },
+    "transcription-dashboard": {
+      "description": "Sem descrição",
+      "tags": [
+        "content",
+        "productivity",
+        "media"
+      ]
+    },
+    "xtts-voice-cloner": {
+      "description": "Sem descrição",
+      "tags": [
+        "mind-clone",
+        "media"
+      ]
+    },
+    "youtube-captions": {
+      "description": "YouTube Captions",
+      "tags": [
+        "media"
+      ]
+    },
+    "zlib-downloader": {
+      "description": "Sem descrição",
+      "tags": [
+        "media"
+      ]
+    }
+  },
+  "agents": {
+    "@dev": {
+      "persona": "Dex",
+      "scope": "Implementação de código, git add/commit, branch management",
+      "tags": [
+        "dev"
+      ]
+    },
+    "@qa": {
+      "persona": "Quinn",
+      "scope": "Testes e qualidade, QA gates, code review",
+      "tags": [
+        "dev"
+      ]
+    },
+    "@architect": {
+      "persona": "Aria",
+      "scope": "Arquitetura e design técnico, technology selection",
+      "tags": [
+        "dev"
+      ]
+    },
+    "@pm": {
+      "persona": "Morgan",
+      "scope": "Product Management, epic orchestration, requirements",
+      "tags": [
+        "productivity"
+      ]
+    },
+    "@po": {
+      "persona": "Pax",
+      "scope": "Product Owner, story validation, backlog prioritization",
+      "tags": [
+        "productivity"
+      ]
+    },
+    "@sm": {
+      "persona": "River",
+      "scope": "Scrum Master, story creation, sprint management",
+      "tags": [
+        "productivity"
+      ]
+    },
+    "@analyst": {
+      "persona": "Alex",
+      "scope": "Pesquisa e análise de dados",
+      "tags": [
+        "research",
+        "data"
+      ]
+    },
+    "@data-engineer": {
+      "persona": "Dara",
+      "scope": "Database design, schema DDL, query optimization",
+      "tags": [
+        "data",
+        "dev"
+      ]
+    },
+    "@ux-design-expert": {
+      "persona": "Uma",
+      "scope": "UX/UI design, design systems, user research",
+      "tags": [
+        "design"
+      ]
+    },
+    "@devops": {
+      "persona": "Gage",
+      "scope": "CI/CD, git push (EXCLUSIVO), MCP management, infrastructure",
+      "tags": [
+        "devops"
+      ]
+    },
+    "@aiox-master": {
+      "persona": "Master",
+      "scope": "Framework governance, constitutional enforcement",
+      "tags": [
+        "ai-ops"
+      ]
+    },
+    "@squad-creator": {
+      "persona": "Scout",
+      "scope": "Squad creation, workspace setup, onboarding",
+      "tags": [
+        "ai-ops"
+      ]
+    }
+  },
+  "minds": {
+    "naval-ravikant": {
+      "name": "Naval Ravikant",
+      "status": "Complete",
+      "fidelity": "Premium",
+      "domain": "Filosofia, Investimentos"
+    },
+    "tim-ferriss": {
+      "name": "Tim Ferriss",
+      "status": "Complete",
+      "fidelity": "Premium",
+      "domain": "Produtividade, Lifestyle Design"
+    },
+    "italo-marsili": {
+      "name": "Ítalo Marsili",
+      "status": "Complete",
+      "fidelity": "Premium",
+      "domain": "Psicologia, Filosofia"
+    },
+    "tathi-deandhela": {
+      "name": "Tathi Deandhela",
+      "status": "Complete",
+      "fidelity": "Premium",
+      "domain": "Comunicação, Influência"
+    },
+    "luiz-fosc": {
+      "name": "Luiz Fosc",
+      "status": "Complete",
+      "fidelity": "Premium",
+      "domain": "Tecnologia, AI, Negócios"
+    },
+    "gui-avila": {
+      "name": "Gui Ávila",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Automação, Negócios"
+    },
+    "thiago-tessman": {
+      "name": "Thiago Tessman",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Conversão, Tráfego Pago, Google/Meta Ads"
+    },
+    "merlin-mann": {
+      "name": "Merlin Mann",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Produtividade, Criatividade"
+    },
+    "tiago-forte": {
+      "name": "Tiago Forte",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Second Brain, PKM"
+    },
+    "charlie-munger": {
+      "name": "Charlie Munger",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Mental Models, Investimentos"
+    },
+    "paulo-vieira": {
+      "name": "Paulo Vieira",
+      "status": "Complete",
+      "fidelity": "Premium",
+      "domain": "Coaching, Inteligência Emocional"
+    },
+    "hormozi": {
+      "name": "Alex Hormozi",
+      "status": "Complete",
+      "fidelity": "Premium",
+      "domain": "Ofertas, Escala, Ads, Copy"
+    },
+    "renner-silva": {
+      "name": "Renner Silva",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Marketing, Vendas, Roteiros"
+    },
+    "renan-vieira": {
+      "name": "Renan Vieira",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Funis, Vendas, Mentoria"
+    },
+    "alistair-croll": {
+      "name": "Alistair Croll",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Lean Analytics"
+    },
+    "eliyahu-goldratt": {
+      "name": "Eliyahu Goldratt",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Theory of Constraints"
+    },
+    "john-doerr": {
+      "name": "John Doerr",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "OKRs"
+    },
+    "josh-bersin": {
+      "name": "Josh Bersin",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "HR, People Analytics"
+    },
+    "kaplan-norton": {
+      "name": "Kaplan & Norton",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Balanced Scorecard"
+    },
+    "martin-fowler": {
+      "name": "Martin Fowler",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Software Architecture"
+    },
+    "neal-ford": {
+      "name": "Neal Ford",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Evolutionary Architecture"
+    },
+    "nicole-forsgren": {
+      "name": "Nicole Forsgren",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "DevOps, DORA Metrics"
+    },
+    "simon-wardley": {
+      "name": "Simon Wardley",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Wardley Mapping"
+    },
+    "skelton-pais": {
+      "name": "Skelton & Pais",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Team Topologies"
+    },
+    "annie-duke": {
+      "name": "Annie Duke",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Decision Making"
+    },
+    "chris-voss": {
+      "name": "Chris Voss",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Negociação"
+    },
+    "clayton-christensen": {
+      "name": "Clayton Christensen",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Disruptive Innovation"
+    },
+    "elon-musk": {
+      "name": "Elon Musk",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Engenharia, Space, AI"
+    },
+    "hamilton-helmer": {
+      "name": "Hamilton Helmer",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "7 Powers, Strategy"
+    },
+    "keith-cunningham": {
+      "name": "Keith Cunningham",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Business, Thinking"
+    },
+    "nassim-taleb": {
+      "name": "Nassim Taleb",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Antifragilidade, Risco"
+    },
+    "robert-cialdini": {
+      "name": "Robert Cialdini",
+      "status": "Complete",
+      "fidelity": "Premium",
+      "domain": "Persuasão, Influência, Pre-Suasion"
+    },
+    "shane-parrish": {
+      "name": "Shane Parrish",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Mental Models"
+    },
+    "steve-jobs": {
+      "name": "Steve Jobs",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Design, Produto"
+    },
+    "verne-harnish": {
+      "name": "Verne Harnish",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Scaling Up"
+    },
+    "walt-disney": {
+      "name": "Walt Disney",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Criatividade, Storytelling"
+    },
+    "leandro-ladeira": {
+      "name": "Leandro Ladeira",
+      "status": "Complete",
+      "fidelity": "Premium",
+      "domain": "Copy, Marketing Digital, Infoprodutos"
+    },
+    "dan-koe": {
+      "name": "Dan Koe",
+      "status": "Complete",
+      "fidelity": "Premium",
+      "domain": "One-Person Business, Conteúdo"
+    },
+    "jose-amorim": {
+      "name": "José Amorim",
+      "status": "Partial",
+      "fidelity": "Intermediate",
+      "domain": "Nexialismo, IA, Conteúdo"
+    },
+    "marcos-hiller": {
+      "name": "Marcos Hiller",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Branding, Marketing"
+    },
+    "pedro-sobral": {
+      "name": "Pedro Sobral",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Tráfego Pago, Gestão"
+    },
+    "juliana-gomes": {
+      "name": "Juliana Gomes",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Conteúdo, Digital"
+    },
+    "icaro-de-carvalho": {
+      "name": "Ícaro de Carvalho",
+      "status": "Complete",
+      "fidelity": "Intermediate",
+      "domain": "Marketing, Copywriting, Negócios"
+    }
+  },
+  "byDomain": {
+    "ai-ops": [
+      {
+        "type": "squad",
+        "slug": "advisor-board"
+      },
+      {
+        "type": "squad",
+        "slug": "agent-autonomy"
+      },
+      {
+        "type": "squad",
+        "slug": "business-rules-extraction"
+      },
+      {
+        "type": "squad",
+        "slug": "claude-code-mastery"
+      },
+      {
+        "type": "squad",
+        "slug": "content-creator"
+      },
+      {
+        "type": "squad",
+        "slug": "copywriting-squad"
+      },
+      {
+        "type": "squad",
+        "slug": "etl-squad"
+      },
+      {
+        "type": "squad",
+        "slug": "high-ticket-mastery"
+      },
+      {
+        "type": "squad",
+        "slug": "icp-cloning"
+      },
+      {
+        "type": "squad",
+        "slug": "kaizen"
+      },
+      {
+        "type": "squad",
+        "slug": "kaizen-v2"
+      },
+      {
+        "type": "squad",
+        "slug": "magic-bob"
+      },
+      {
+        "type": "squad",
+        "slug": "mmos-squad"
+      },
+      {
+        "type": "squad",
+        "slug": "navigator"
+      },
+      {
+        "type": "squad",
+        "slug": "openclaw-manager"
+      },
+      {
+        "type": "squad",
+        "slug": "palestras-master"
+      },
+      {
+        "type": "squad",
+        "slug": "relationship-therapy-squad"
+      },
+      {
+        "type": "squad",
+        "slug": "squad-creator-pro"
+      },
+      {
+        "type": "squad",
+        "slug": "squads"
+      },
+      {
+        "type": "squad",
+        "slug": "storytelling-masters-fosc"
+      },
+      {
+        "type": "squad",
+        "slug": "synapse"
+      },
+      {
+        "type": "squad",
+        "slug": "zona-genialidade"
+      },
+      {
+        "type": "skill",
+        "slug": "celf-context"
+      },
+      {
+        "type": "skill",
+        "slug": "context-surgeon"
+      },
+      {
+        "type": "skill",
+        "slug": "forge-creator"
+      },
+      {
+        "type": "skill",
+        "slug": "god-mode"
+      },
+      {
+        "type": "skill",
+        "slug": "image-creator"
+      },
+      {
+        "type": "skill",
+        "slug": "mcp-builder"
+      },
+      {
+        "type": "skill",
+        "slug": "skill-creator"
+      },
+      {
+        "type": "skill",
+        "slug": "synapse"
+      },
+      {
+        "type": "skill",
+        "slug": "system-prompt-architect"
+      },
+      {
+        "type": "tool",
+        "slug": "aios-transcriber"
+      },
+      {
+        "type": "tool",
+        "slug": "aiox-dashboard"
+      },
+      {
+        "type": "agent",
+        "slug": "@aiox-master"
+      },
+      {
+        "type": "agent",
+        "slug": "@squad-creator"
+      }
+    ],
+    "marketing": [
+      {
+        "type": "squad",
+        "slug": "affiliates"
+      },
+      {
+        "type": "squad",
+        "slug": "conversao-extrema"
+      },
+      {
+        "type": "squad",
+        "slug": "icaro-de-carvalho"
+      },
+      {
+        "type": "squad",
+        "slug": "marketing-board"
+      },
+      {
+        "type": "squad",
+        "slug": "presenca-digital"
+      },
+      {
+        "type": "squad",
+        "slug": "squads"
+      },
+      {
+        "type": "squad",
+        "slug": "viral-squad"
+      },
+      {
+        "type": "squad",
+        "slug": "whatsapp-prospector"
+      },
+      {
+        "type": "skill",
+        "slug": "blotato"
+      },
+      {
+        "type": "skill",
+        "slug": "instagram-publisher"
+      },
+      {
+        "type": "skill",
+        "slug": "lp-generator"
+      },
+      {
+        "type": "skill",
+        "slug": "pre-deploy-telegram-bot"
+      },
+      {
+        "type": "skill",
+        "slug": "telegram"
+      },
+      {
+        "type": "tool",
+        "slug": "evolution-whatsapp-api"
+      },
+      {
+        "type": "tool",
+        "slug": "instagram-publisher"
+      }
+    ],
+    "content": [
+      {
+        "type": "squad",
+        "slug": "ai-reels"
+      },
+      {
+        "type": "squad",
+        "slug": "audio-reels"
+      },
+      {
+        "type": "squad",
+        "slug": "content-creator"
+      },
+      {
+        "type": "squad",
+        "slug": "content-engine"
+      },
+      {
+        "type": "squad",
+        "slug": "conteudo"
+      },
+      {
+        "type": "squad",
+        "slug": "copywriting-squad"
+      },
+      {
+        "type": "squad",
+        "slug": "mind-content-updater"
+      },
+      {
+        "type": "squad",
+        "slug": "squad-creator-pro"
+      },
+      {
+        "type": "squad",
+        "slug": "storytelling-masters-fosc"
+      },
+      {
+        "type": "squad",
+        "slug": "transcript-sculptor"
+      },
+      {
+        "type": "squad",
+        "slug": "video-content-distillery"
+      },
+      {
+        "type": "skill",
+        "slug": "content-forge"
+      },
+      {
+        "type": "skill",
+        "slug": "design-system-forge"
+      },
+      {
+        "type": "skill",
+        "slug": "forge"
+      },
+      {
+        "type": "skill",
+        "slug": "forge-creator"
+      },
+      {
+        "type": "skill",
+        "slug": "forge-quick"
+      },
+      {
+        "type": "skill",
+        "slug": "godot-gdscript-patterns"
+      },
+      {
+        "type": "skill",
+        "slug": "image-creator"
+      },
+      {
+        "type": "skill",
+        "slug": "skill-creator"
+      },
+      {
+        "type": "skill",
+        "slug": "video-generator"
+      },
+      {
+        "type": "skill",
+        "slug": "yt-forge"
+      },
+      {
+        "type": "tool",
+        "slug": "transcription-dashboard"
+      }
+    ],
+    "media": [
+      {
+        "type": "squad",
+        "slug": "audio-reels"
+      },
+      {
+        "type": "squad",
+        "slug": "curator"
+      },
+      {
+        "type": "squad",
+        "slug": "media-processor"
+      },
+      {
+        "type": "squad",
+        "slug": "video-content-distillery"
+      },
+      {
+        "type": "skill",
+        "slug": "book-to-markdown"
+      },
+      {
+        "type": "skill",
+        "slug": "decision-tree-generator"
+      },
+      {
+        "type": "skill",
+        "slug": "deepgram-transcriber"
+      },
+      {
+        "type": "skill",
+        "slug": "design-system-storybook"
+      },
+      {
+        "type": "skill",
+        "slug": "groq-transcriber"
+      },
+      {
+        "type": "skill",
+        "slug": "pptx-generator"
+      },
+      {
+        "type": "skill",
+        "slug": "prd-generator"
+      },
+      {
+        "type": "skill",
+        "slug": "video-generator"
+      },
+      {
+        "type": "tool",
+        "slug": "aios-transcriber"
+      },
+      {
+        "type": "tool",
+        "slug": "cademi-downloader"
+      },
+      {
+        "type": "tool",
+        "slug": "document-processing"
+      },
+      {
+        "type": "tool",
+        "slug": "hotmart-downloader"
+      },
+      {
+        "type": "tool",
+        "slug": "tldv-scraper"
+      },
+      {
+        "type": "tool",
+        "slug": "transcription-dashboard"
+      },
+      {
+        "type": "tool",
+        "slug": "xtts-voice-cloner"
+      },
+      {
+        "type": "tool",
+        "slug": "youtube-captions"
+      },
+      {
+        "type": "tool",
+        "slug": "zlib-downloader"
+      }
+    ],
+    "branding": [
+      {
+        "type": "squad",
+        "slug": "brandcraft"
+      },
+      {
+        "type": "squad",
+        "slug": "branding"
+      }
+    ],
+    "dev": [
+      {
+        "type": "squad",
+        "slug": "claude-code-mastery"
+      },
+      {
+        "type": "squad",
+        "slug": "knowledge-base-builder"
+      },
+      {
+        "type": "squad",
+        "slug": "playwright-architect"
+      },
+      {
+        "type": "skill",
+        "slug": "angular"
+      },
+      {
+        "type": "skill",
+        "slug": "angular-state-management"
+      },
+      {
+        "type": "skill",
+        "slug": "apify"
+      },
+      {
+        "type": "skill",
+        "slug": "app-builder"
+      },
+      {
+        "type": "skill",
+        "slug": "avalonia-viewmodels-zafiro"
+      },
+      {
+        "type": "skill",
+        "slug": "bulletproof-test"
+      },
+      {
+        "type": "skill",
+        "slug": "cloud-penetration-testing"
+      },
+      {
+        "type": "skill",
+        "slug": "code-refactoring-refactor-clean"
+      },
+      {
+        "type": "skill",
+        "slug": "code-review-ping-pong"
+      },
+      {
+        "type": "skill",
+        "slug": "design-system-scaffold"
+      },
+      {
+        "type": "skill",
+        "slug": "design-system-storybook"
+      },
+      {
+        "type": "skill",
+        "slug": "game-development"
+      },
+      {
+        "type": "skill",
+        "slug": "mcp-builder"
+      },
+      {
+        "type": "skill",
+        "slug": "nextjs-react-expert"
+      },
+      {
+        "type": "skill",
+        "slug": "skill-stress-test"
+      },
+      {
+        "type": "skill",
+        "slug": "smart-browser-playwright"
+      },
+      {
+        "type": "skill",
+        "slug": "superpowers"
+      },
+      {
+        "type": "tool",
+        "slug": "aiox-dashboard"
+      },
+      {
+        "type": "tool",
+        "slug": "evolution-whatsapp-api"
+      },
+      {
+        "type": "tool",
+        "slug": "smart-browser-playwright"
+      },
+      {
+        "type": "tool",
+        "slug": "templates"
+      },
+      {
+        "type": "agent",
+        "slug": "@dev"
+      },
+      {
+        "type": "agent",
+        "slug": "@qa"
+      },
+      {
+        "type": "agent",
+        "slug": "@architect"
+      },
+      {
+        "type": "agent",
+        "slug": "@data-engineer"
+      }
+    ],
+    "mind-clone": [
+      {
+        "type": "squad",
+        "slug": "dan-koe"
+      },
+      {
+        "type": "squad",
+        "slug": "ensinio-mind"
+      },
+      {
+        "type": "squad",
+        "slug": "hormozi"
+      },
+      {
+        "type": "squad",
+        "slug": "icaro-de-carvalho"
+      },
+      {
+        "type": "squad",
+        "slug": "italo-marsili"
+      },
+      {
+        "type": "squad",
+        "slug": "jose-amorim"
+      },
+      {
+        "type": "squad",
+        "slug": "leandro-ladeira"
+      },
+      {
+        "type": "squad",
+        "slug": "luiz-fosc"
+      },
+      {
+        "type": "squad",
+        "slug": "mind-cloning"
+      },
+      {
+        "type": "squad",
+        "slug": "mind-content-updater"
+      },
+      {
+        "type": "squad",
+        "slug": "paulo-vieira"
+      },
+      {
+        "type": "squad",
+        "slug": "renner-silva"
+      },
+      {
+        "type": "squad",
+        "slug": "repertoire-mapper"
+      },
+      {
+        "type": "squad",
+        "slug": "storytelling-masters-fosc"
+      },
+      {
+        "type": "squad",
+        "slug": "tathi-deandhela"
+      },
+      {
+        "type": "tool",
+        "slug": "xtts-voice-cloner"
+      }
+    ],
+    "data": [
+      {
+        "type": "squad",
+        "slug": "db-sage"
+      },
+      {
+        "type": "squad",
+        "slug": "etl-squad"
+      },
+      {
+        "type": "agent",
+        "slug": "@analyst"
+      },
+      {
+        "type": "agent",
+        "slug": "@data-engineer"
+      }
+    ],
+    "design": [
+      {
+        "type": "squad",
+        "slug": "design"
+      },
+      {
+        "type": "squad",
+        "slug": "gui-avila"
+      },
+      {
+        "type": "squad",
+        "slug": "knowledge-base-builder"
+      },
+      {
+        "type": "squad",
+        "slug": "luiz-fosc"
+      },
+      {
+        "type": "skill",
+        "slug": "app-builder"
+      },
+      {
+        "type": "skill",
+        "slug": "canva"
+      },
+      {
+        "type": "skill",
+        "slug": "carrossel-instagram"
+      },
+      {
+        "type": "skill",
+        "slug": "design-system-catalog"
+      },
+      {
+        "type": "skill",
+        "slug": "design-system-extractor"
+      },
+      {
+        "type": "skill",
+        "slug": "design-system-forge"
+      },
+      {
+        "type": "skill",
+        "slug": "design-system-scaffold"
+      },
+      {
+        "type": "skill",
+        "slug": "design-system-storybook"
+      },
+      {
+        "type": "skill",
+        "slug": "forge-quick"
+      },
+      {
+        "type": "skill",
+        "slug": "image-creator"
+      },
+      {
+        "type": "skill",
+        "slug": "image-fetcher"
+      },
+      {
+        "type": "skill",
+        "slug": "imagemagick"
+      },
+      {
+        "type": "skill",
+        "slug": "mcp-builder"
+      },
+      {
+        "type": "skill",
+        "slug": "tokenizacao"
+      },
+      {
+        "type": "agent",
+        "slug": "@ux-design-expert"
+      }
+    ],
+    "education": [
+      {
+        "type": "squad",
+        "slug": "dopamine-learning"
+      },
+      {
+        "type": "squad",
+        "slug": "ensinio-mind"
+      },
+      {
+        "type": "squad",
+        "slug": "knowledge-base-builder"
+      },
+      {
+        "type": "squad",
+        "slug": "palestras-master"
+      },
+      {
+        "type": "skill",
+        "slug": "learning-extractor"
+      },
+      {
+        "type": "skill",
+        "slug": "tutorial-generator"
+      }
+    ],
+    "research": [
+      {
+        "type": "squad",
+        "slug": "file-research"
+      },
+      {
+        "type": "squad",
+        "slug": "insight"
+      },
+      {
+        "type": "squad",
+        "slug": "root-diagnosis"
+      },
+      {
+        "type": "skill",
+        "slug": "deep-research"
+      },
+      {
+        "type": "skill",
+        "slug": "deep-search"
+      },
+      {
+        "type": "skill",
+        "slug": "politica-simulation-mirofish"
+      },
+      {
+        "type": "skill",
+        "slug": "sherlock-investigator"
+      },
+      {
+        "type": "skill",
+        "slug": "tech-research"
+      },
+      {
+        "type": "agent",
+        "slug": "@analyst"
+      }
+    ],
+    "sales": [
+      {
+        "type": "squad",
+        "slug": "high-ticket-mastery"
+      },
+      {
+        "type": "squad",
+        "slug": "high-ticket-sales"
+      },
+      {
+        "type": "squad",
+        "slug": "money-makers-vtd"
+      },
+      {
+        "type": "squad",
+        "slug": "negotiation"
+      }
+    ],
+    "productivity": [
+      {
+        "type": "squad",
+        "slug": "legacy-rule-extractor"
+      },
+      {
+        "type": "squad",
+        "slug": "media-processor"
+      },
+      {
+        "type": "squad",
+        "slug": "navigator"
+      },
+      {
+        "type": "squad",
+        "slug": "relationship-therapy-squad"
+      },
+      {
+        "type": "squad",
+        "slug": "sop-factory"
+      },
+      {
+        "type": "skill",
+        "slug": "celf-context"
+      },
+      {
+        "type": "skill",
+        "slug": "context-surgeon"
+      },
+      {
+        "type": "skill",
+        "slug": "critica"
+      },
+      {
+        "type": "skill",
+        "slug": "dashboard-generator"
+      },
+      {
+        "type": "skill",
+        "slug": "deepgram-transcriber"
+      },
+      {
+        "type": "skill",
+        "slug": "design-system-extractor"
+      },
+      {
+        "type": "skill",
+        "slug": "forge-creator"
+      },
+      {
+        "type": "skill",
+        "slug": "instagram-publisher"
+      },
+      {
+        "type": "skill",
+        "slug": "learning-extractor"
+      },
+      {
+        "type": "skill",
+        "slug": "memory-audit"
+      },
+      {
+        "type": "skill",
+        "slug": "obsidian-app-filler"
+      },
+      {
+        "type": "skill",
+        "slug": "obsidian-tag-manager"
+      },
+      {
+        "type": "skill",
+        "slug": "pipeline-checklist"
+      },
+      {
+        "type": "skill",
+        "slug": "pre-deploy-telegram-bot"
+      },
+      {
+        "type": "skill",
+        "slug": "pt-br-accentuation"
+      },
+      {
+        "type": "skill",
+        "slug": "quality-dashboard"
+      },
+      {
+        "type": "skill",
+        "slug": "quest"
+      },
+      {
+        "type": "skill",
+        "slug": "quest-original-backup"
+      },
+      {
+        "type": "skill",
+        "slug": "quest.bak"
+      },
+      {
+        "type": "skill",
+        "slug": "ram-doctor"
+      },
+      {
+        "type": "skill",
+        "slug": "sync-projects"
+      },
+      {
+        "type": "skill",
+        "slug": "telegram"
+      },
+      {
+        "type": "skill",
+        "slug": "tier-s-checklist"
+      },
+      {
+        "type": "tool",
+        "slug": "_deprecated"
+      },
+      {
+        "type": "tool",
+        "slug": "aiox-dashboard"
+      },
+      {
+        "type": "tool",
+        "slug": "document-processing"
+      },
+      {
+        "type": "tool",
+        "slug": "instagram-publisher"
+      },
+      {
+        "type": "tool",
+        "slug": "pipeline-dashboard"
+      },
+      {
+        "type": "tool",
+        "slug": "quality-dashboard"
+      },
+      {
+        "type": "tool",
+        "slug": "transcription-dashboard"
+      },
+      {
+        "type": "agent",
+        "slug": "@pm"
+      },
+      {
+        "type": "agent",
+        "slug": "@po"
+      },
+      {
+        "type": "agent",
+        "slug": "@sm"
+      }
+    ],
+    "seo": [
+      {
+        "type": "squad",
+        "slug": "seo"
+      },
+      {
+        "type": "squad",
+        "slug": "site-performance-audit"
+      }
+    ],
+    "security": [
+      {
+        "type": "squad",
+        "slug": "site-performance-audit"
+      },
+      {
+        "type": "skill",
+        "slug": "audit-project-config"
+      },
+      {
+        "type": "skill",
+        "slug": "cloud-penetration-testing"
+      },
+      {
+        "type": "skill",
+        "slug": "ecosystem-audit"
+      },
+      {
+        "type": "skill",
+        "slug": "memory-audit"
+      },
+      {
+        "type": "skill",
+        "slug": "vulnerability-scanner"
+      }
+    ],
+    "devops": [
+      {
+        "type": "skill",
+        "slug": "auto-deploy"
+      },
+      {
+        "type": "skill",
+        "slug": "pre-deploy-telegram-bot"
+      },
+      {
+        "type": "agent",
+        "slug": "@devops"
+      }
+    ],
+    "gaming": [
+      {
+        "type": "skill",
+        "slug": "game-development"
+      },
+      {
+        "type": "skill",
+        "slug": "godot-gdscript-patterns"
+      },
+      {
+        "type": "skill",
+        "slug": "unreal-engine-cpp-pro"
+      }
+    ]
+  }
+}

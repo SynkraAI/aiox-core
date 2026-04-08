@@ -1,1 +1,1 @@
-../../../../../skills/quest/engine/scanner.md
+../../../../../../skills/quest/engine/scanner.md

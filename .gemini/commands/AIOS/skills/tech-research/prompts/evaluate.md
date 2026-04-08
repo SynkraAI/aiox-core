@@ -1,1 +1,1 @@
-../../../../../skills/tech-research/prompts/evaluate.md
+../../../../../../skills/tech-research/prompts/evaluate.md

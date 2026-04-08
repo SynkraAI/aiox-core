@@ -1,1 +1,1 @@
-../../../../../skills/carrossel-instagram/references/design-system.md
+../../../../../../skills/carrossel-instagram/references/design-system.md

@@ -1,1 +1,1 @@
-../../../../../skills/skill-stress-test/engine/recon.md
+../../../../../../skills/skill-stress-test/engine/recon.md

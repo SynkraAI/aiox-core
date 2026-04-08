@@ -1,1 +1,1 @@
-../../../../../skills/tech-research/prompts/executor-matrix.md
+../../../../../../skills/tech-research/prompts/executor-matrix.md

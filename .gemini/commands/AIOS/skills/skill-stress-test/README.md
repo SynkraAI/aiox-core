@@ -1,1 +1,1 @@
-../../../../skills/skill-stress-test/SKILL.md
+../../../../../skills/skill-stress-test/SKILL.md

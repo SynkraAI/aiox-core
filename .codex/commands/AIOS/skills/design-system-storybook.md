@@ -1,1 +1,1 @@
-../../../skills/design-system-storybook/SKILL.md
+../../../../skills/design-system-storybook/SKILL.md

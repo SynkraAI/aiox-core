@@ -1,1 +1,1 @@
-../../../skills/tier-s-checklist/SKILL.md
+../../../../skills/tier-s-checklist/SKILL.md

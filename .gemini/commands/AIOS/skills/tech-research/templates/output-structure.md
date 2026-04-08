@@ -1,1 +1,1 @@
-../../../../../skills/tech-research/templates/output-structure.md
+../../../../../../skills/tech-research/templates/output-structure.md

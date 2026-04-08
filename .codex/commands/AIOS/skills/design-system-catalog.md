@@ -1,1 +1,1 @@
-../../../skills/design-system-catalog/SKILL.md
+../../../../skills/design-system-catalog/SKILL.md

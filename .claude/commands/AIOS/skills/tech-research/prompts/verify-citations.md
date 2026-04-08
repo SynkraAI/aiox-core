@@ -1,1 +1,1 @@
-../../../../../skills/tech-research/prompts/verify-citations.md
+../../../../../../skills/tech-research/prompts/verify-citations.md

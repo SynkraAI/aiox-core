@@ -1,1 +1,1 @@
-../../../../../skills/skill-stress-test/references/chaos-catalog.md
+../../../../../../skills/skill-stress-test/references/chaos-catalog.md

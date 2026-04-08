@@ -1,1 +1,1 @@
-../../../../../skills/code-review-ping-pong/references/fix-template.md
+../../../../../../skills/code-review-ping-pong/references/fix-template.md

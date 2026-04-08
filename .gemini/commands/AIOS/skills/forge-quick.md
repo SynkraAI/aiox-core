@@ -1,1 +1,1 @@
-../../../skills/forge-quick/SKILL.md
+../../../../skills/forge-quick/SKILL.md

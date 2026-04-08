@@ -1,1 +1,1 @@
-../../../../skills/carrossel-instagram/SKILL.md
+../../../../../skills/carrossel-instagram/SKILL.md

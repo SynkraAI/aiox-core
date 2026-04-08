@@ -1,1 +1,1 @@
-../../../../../skills/forge/workflows/template.md
+../../../../../../skills/forge/workflows/template.md

@@ -1,1 +1,1 @@
-../../../../../skills/forge/docs/prd-forge-quest-ecosystem.md
+../../../../../../skills/forge/docs/prd-forge-quest-ecosystem.md

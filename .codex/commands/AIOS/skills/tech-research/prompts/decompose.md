@@ -1,1 +1,1 @@
-../../../../../skills/tech-research/prompts/decompose.md
+../../../../../../skills/tech-research/prompts/decompose.md

@@ -1,1 +1,1 @@
-../../../../skills/quest/SKILL.md
+../../../../../skills/quest/SKILL.md

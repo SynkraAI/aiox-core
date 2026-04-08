@@ -1,1 +1,1 @@
-../../../../../skills/forge/workflows/quick.md
+../../../../../../skills/forge/workflows/quick.md

@@ -1,1 +1,1 @@
-../../../skills/design-system-forge/SKILL.md
+../../../../skills/design-system-forge/SKILL.md

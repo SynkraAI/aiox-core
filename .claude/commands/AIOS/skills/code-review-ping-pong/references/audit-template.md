@@ -1,1 +1,1 @@
-../../../../../skills/code-review-ping-pong/references/audit-template.md
+../../../../../../skills/code-review-ping-pong/references/audit-template.md

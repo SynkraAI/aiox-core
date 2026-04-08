@@ -1,1 +1,1 @@
-../../../../../skills/quest/engine/forge-bridge.md
+../../../../../../skills/quest/engine/forge-bridge.md

@@ -1,1 +1,1 @@
-../../../../../skills/content-forge/references/examples.md
+../../../../../../skills/content-forge/references/examples.md

@@ -1,1 +1,1 @@
-../../../../skills/content-forge/SKILL.md
+../../../../../skills/content-forge/SKILL.md

@@ -1,1 +1,1 @@
-../../../../skills/tech-research/README.md
+../../../../../skills/tech-research/README.md

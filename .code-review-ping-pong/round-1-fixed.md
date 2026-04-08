@@ -5,15 +5,16 @@ round: 1
 date: "2026-04-08"
 fixer: "Claude Code"
 review_file: "round-1.md"
-commit_sha_before: "50720d094"
+commit_sha_before: "f00fba9f0"
 branch: "chore/devops-10-improvements"
-git_diff_stat: "1 file changed, 1 insertion(+), 1 deletion(-)"
+git_diff_stat: "2 files changed, 349 insertions(+), 100 deletions(-)"
 files_changed:
-  - "skills/forge/phases/phase-0-discovery.md"
-original_score: 8
-issues_fixed: 1
+  - "scripts/generate-catalog.js"
+  - ".claude/commands/catalog.md"
+original_score: 6
+issues_fixed: 4
 issues_skipped: 0
-issues_total: 1
+issues_total: 4
 quality_checks:
   lint: "N/A"
   typecheck: "N/A"
@@ -22,38 +23,69 @@ fixes:
   - id: "1.1"
     status: "FIXED"
     deviation: "none"
+  - id: "1.2"
+    status: "FIXED"
+    deviation: "Implementado parser de block scalars inline no simpleYamlValue em vez de importar lib externa"
+  - id: "1.3"
+    status: "FIXED"
+    deviation: "Removido @squad-creator-pro (não existe na fonte canônica) e corrigido @aios-master → @aiox-master"
+  - id: "1.4"
+    status: "FIXED"
+    deviation: "none"
 ---
 
 # Code Ping-Pong — Round 1 Fix Report
 
-**Review:** `round-1.md` (score: 8/10)
-**Git base:** `50720d094` on `chore/devops-10-improvements`
+**Review:** `round-1.md` (score: 6/10)
+**Git base:** `f00fba9f0` on `chore/devops-10-improvements`
 **Changes:**
 ```
-1 file changed, 1 insertion(+), 1 deletion(-)
+ .claude/commands/catalog.md |   1 +
+ scripts/generate-catalog.js | 448 ++++++++++++++++++++++++++++++++++----------
+ 2 files changed, 349 insertions(+), 100 deletions(-)
 ```
 
 ---
 
 ## 🔧 Fixes Applied
 
-### Fix for Issue 1.1 — Scaffold do projeto passou a exigir `{run_id}` antes de o run existir
+### Fix for Issue 1.1 — Symlinks simples de skills com caminho relativo incorreto
 - **Status:** ✅ FIXED
-- **File:** `skills/forge/phases/phase-0-discovery.md`
-- **What changed:** Revertido L469 de `Create {PROJECT_DIR}/docs/stories/active/{run_id}/ directory (stories isoladas por run — evita colisão entre runs)` para `Create {PROJECT_DIR}/docs/stories/active/ directory`. O scaffold base cria apenas a pasta raiz; a subpasta `{run_id}/` é criada pelas fases de execução (phase-2, phase-3, quick, bug-fix) quando o run já foi inicializado.
+- **File:** `scripts/generate-catalog.js:753`
+- **What changed:** Corrigido o path relativo de `path.join('..', '..', '..', 'skills', ...)` para `path.join('..', '..', '..', '..', 'skills', ...)`. De dentro de `.claude/commands/AIOS/skills/`, são 4 níveis até a raiz do repo, não 3.
+- **Deviation from suggestion:** None
+- **Verificação:** Rodei o script e confirmei que `critica.md` agora resolve corretamente (`test -f` retorna EXISTS).
+
+### Fix for Issue 1.2 — Leitura YAML reduz blocos `|` e `>-` a literais
+- **Status:** ✅ FIXED
+- **File:** `scripts/generate-catalog.js:19`
+- **What changed:** `simpleYamlValue` agora detecta block scalar indicators (`|`, `>`, `>-`, `|-`) via regex `/^[|>][+-]?$/`. Quando detecta, lê as linhas indentadas subsequentes, junta com espaço, e retorna como string. Testado com `skills/audit-project-config/SKILL.md` (que usa `description: |`) — resultado correto.
+- **Deviation from suggestion:** Implementado inline no parser simples em vez de criar fallback separado. Mantém zero dependências externas.
+- **Anti-whack-a-mole:** Verifiquei todos os locais que chamam `simpleYamlValue` — é usado apenas em `extractSquads()` para ler `squad.yaml`. Os skills usam `extractFrontmatterTags` + leitura de linhas `# ` para descrição, que já funciona. O fix beneficia qualquer futuro uso de `simpleYamlValue` com block scalars.
+
+### Fix for Issue 1.3 — Agents hardcoded com IDs divergentes
+- **Status:** ✅ FIXED
+- **File:** `scripts/generate-catalog.js:399`
+- **What changed:** Corrigido `@aios-master` → `@aiox-master` (fonte canônica: `.claude/rules/agent-authority.md`). Removido `@squad-creator-pro` que não existe no contrato do framework — `agent-authority.md` lista apenas 11 agents core. Total passou de 12 para 11.
+- **Deviation from suggestion:** Não implementei leitura dinâmica de diretório (agents não têm diretório canônico populado), mas alinhei os IDs com a fonte de verdade documentada.
+
+### Fix for Issue 1.4 — Slash command não instrui ativação de tools
+- **Status:** ✅ FIXED
+- **File:** `.claude/commands/catalog.md:7`
+- **What changed:** Adicionada linha `- **Tool:** Leia o arquivo \`tools/{nome}/README.md\` e siga as instruções` na lista de fluxos de ativação.
 - **Deviation from suggestion:** None
 
 ---
 
 ## ⚠️ Skipped Issues
 
-None.
+Nenhuma issue foi pulada.
 
 ---
 
 ## Additional Improvements
 
-None.
+- Nenhuma melhoria adicional além do escopo solicitado.
 
 ---
 
@@ -61,15 +93,18 @@ None.
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| `npm run lint` | N/A | No JavaScript/TypeScript code changed |
-| `npm run typecheck` | N/A | No TypeScript files changed |
-| `npm test` | N/A | No testable code changed |
+| `npm run lint` | N/A | Projeto não tem lint configurado para scripts/ |
+| `npm run typecheck` | N/A | Script é JavaScript puro (CommonJS) |
+| `npm test` | N/A | Sem testes automatizados para generate-catalog.js |
+| Script execution | ✅ PASS | `node scripts/generate-catalog.js` rodou sem erros, gerou catálogo com 68 squads, 76 skills, 17 tools, 43 minds, 11 agents |
+| Symlink validation | ✅ PASS | `test -f .claude/commands/AIOS/skills/critica.md` confirma resolução correta |
+| Block scalar test | ✅ PASS | `simpleYamlValue` extrai corretamente descrição de `description: |` |
 
 ---
 
 ## 📊 Summary
 
-- **Issues fixed:** ✅ 1 of 1
+- **Issues fixed:** ✅ 4 of 4
 - **Issues skipped:** ⚠️ 0
-- **Quality checks:** N/A (markdown only)
+- **Quality checks:** All passing (script execution + manual validation)
 - **Next action:** Request reviewer to run REVIEW for round 2
