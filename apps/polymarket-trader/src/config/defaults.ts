@@ -45,16 +45,23 @@ export const DEFAULT_CONFIG: TradingConfig = {
   pollIntervalMs: 60_000,       // 1 minute market poll
 };
 
-/** Paper Unlimited: all verticals, no limits, fast polling for maximum learning */
+/**
+ * UltraPlan v2: Paper mode now respects intelligence overhaul settings.
+ * Only 2 verticals, only proven strategies, conservative but fast polling.
+ */
 export const PAPER_UNLIMITED_CONFIG: TradingConfig = {
   mode: 'paper',
-  riskLimits: PAPER_UNLIMITED_RISK_LIMITS,
-  enabledVerticals: ['weather', 'crypto', 'politics', 'sports', 'pop_culture', 'finance', 'science'],
-  enabledStrategies: ['info_arb', 'weather_model', 'crypto_sentiment', 'cross_platform', 'whale_follow', 'airdrop_volume', 'politics_model', 'sports_model'],
+  riskLimits: {
+    ...PAPER_UNLIMITED_RISK_LIMITS,
+    minEdge: 0.05,                  // 5% min edge (not 1% noise)
+    kellyFraction: 0.05,            // Kelly 5% (Damodaran: startup sizing)
+  },
+  enabledVerticals: ['weather', 'crypto'],   // UltraPlan v2 D16: 2 verticals max
+  enabledStrategies: ['weather_model', 'crypto_sentiment'],  // Only proven strategies
   driftMonitorEnabled: true,
   aceEvolutionEnabled: true,
   telegramAlerts: false,
-  pollIntervalMs: 15_000,       // 15s — 4x faster scanning for max trade volume
+  pollIntervalMs: 60_000,       // 1 min — balanced scanning (not 15s noise)
 };
 
 export const KALSHI_API = {
