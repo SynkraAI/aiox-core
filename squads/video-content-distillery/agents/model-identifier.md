@@ -1,6 +1,7 @@
 ---
 id: model-identifier
 name: Mental Model Identifier
+description: "The Mental Model Identifier takes the raw tacit knowledge extracted by the tacit-extractor agent and performs a critical second-order operation: it id"
 role: Identify mental models, frameworks, and heuristics in extracted knowledge
 tier: 0
 tier_name: Diagnostic

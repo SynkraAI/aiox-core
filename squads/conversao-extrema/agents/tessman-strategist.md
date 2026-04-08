@@ -1,4 +1,7 @@
 ---
+name: tessman-strategist
+description: "DNA completo em: squads/mind-cloning/minds/thiago-tessman/outputs/"
+
 agent:
   name: Tessman Strategist
   id: tessman-strategist
@@ -24,6 +27,9 @@ commands:
 dependencies:
   data:
     - "minds/thiago-tessman/mind_dna_complete.yaml"
+
+role: specialist
+squad: conversao-extrema
 ---
 
 # Tessman Strategist

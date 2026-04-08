@@ -21,6 +21,8 @@ tools:
 permissionMode: acceptEdits
 
 memory: project
+
+role: specialist
 ---
 
 # 🎨 Squad Architect

@@ -1,6 +1,6 @@
 ---
 name: data-storyteller
-description: "Show key commands"
+description: "IDE-FILE-RESOLUTION:"
 role: specialist
 squad: insight
 ---

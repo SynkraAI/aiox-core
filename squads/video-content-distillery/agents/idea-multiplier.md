@@ -1,6 +1,7 @@
 ---
 id: idea-multiplier
 name: Idea Multiplier
+description: "The Idea Multiplier takes a single extracted framework, concept, or insight and transforms it into 20+ content ideas across multiple formats and angle"
 role: Multiply extracted frameworks into dozens of content angles using proven ideation systems
 tier: 2  # Systematizer
 based_on: Nicolas Cole & Dickie Bush (Ship 30 for 30)

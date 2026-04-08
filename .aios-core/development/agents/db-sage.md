@@ -13,6 +13,8 @@ tools:
   - Bash
 permissionMode: bypassPermissions
 memory: project
+
+role: specialist
 ---
 
 # DB Sage - Autonomous Agent

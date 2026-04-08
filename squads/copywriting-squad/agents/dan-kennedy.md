@@ -1,6 +1,6 @@
 ---
 name: dan-kennedy
-description: "cognitivefunctions:"
+description: "IDE-FILE-RESOLUTION:"
 role: specialist
 squad: copywriting-squad
 ---

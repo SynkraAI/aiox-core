@@ -1,12 +1,15 @@
 ---
 name: sync-projects
-description: >-
+description: "Um raio-X de todos os seus projetos em um comando. Contexto atualizado, sem esforço manual."
   Escaneia projetos locais, coleta atividade recente do git, e gera um relatório
   consolidado (Project Pulse) para manter contexto atualizado sobre todos os projetos.
   Suporta export em JSON, YAML ou envio para APIs externas.
 version: "2.0.0"
 categories: [utility, devops, automation]
 allowed-tools: Read, Bash, Glob, Grep, Write
+
+category: general
+tags: [SKILL]
 ---
 
 # Sync Projects — Project Pulse

@@ -1,6 +1,6 @@
 ---
 name: harry-sneed
-description: "name: Harry Sneed"
+description: "COBOL Business Logic Extraction — extrai regras de negócio de código legado."
 role: specialist
 squad: business-rules-extraction
 ---

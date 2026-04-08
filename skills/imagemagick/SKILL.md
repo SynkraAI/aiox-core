@@ -1,6 +1,6 @@
 ---
 name: imagemagick
-description: >-
+description: "A faca suíça do processamento de imagens. Se envolve pixel, o ImageMagick resolve."
   Processamento de imagens via CLI usando ImageMagick. Splitting de screenshots
   longas, resize, conversão de formatos, composição, watermark, batch processing,
   otimização e extração de metadados.
@@ -11,6 +11,9 @@ description_pt-BR: >-
 version: "2.0.0"
 categories: [utility, image-processing, ocr-support]
 allowed-tools: Read, Bash, Glob
+
+category: design
+tags: [SKILL]
 ---
 
 # ImageMagick — Processamento de Imagens via CLI

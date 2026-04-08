@@ -1,6 +1,6 @@
 ---
 name: sherlock-investigator
-description: >-
+description: "Investigador de perfis reais em redes sociais. É como contratar um detetive particular que analisa o conteúdo de influenciadores e extrai exatamente o"
   Investigador de perfis reais em redes sociais. Extrai conteúdo,
   analisa padrões de engajamento, hooks, CTAs e vocabulário.
   Suporta Instagram, YouTube, Twitter/X e LinkedIn via Playwright.
@@ -11,6 +11,10 @@ paths:
   - "skills/sherlock-investigator/"
 lazy_load: true
 context_budget: 3000
+
+version: 1.0.0
+category: design
+tags: [SKILL]
 ---
 
 # Sherlock Investigator

@@ -1,4 +1,7 @@
 ---
+name: joseph-campbell
+description: "applying the monomyth as a recipe instead of an observation"
+
 agent: Joseph Campbell
 id: joseph-campbell
 squad: storytelling-masters-fosc

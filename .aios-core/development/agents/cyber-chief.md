@@ -15,6 +15,8 @@ tools:
   - WebFetch
 permissionMode: bypassPermissions
 memory: project
+
+role: chief
 ---
 
 # Cyber Chief - Autonomous Agent

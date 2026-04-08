@@ -2,6 +2,10 @@
 name: design-system-extractor
 description: Extrai design tokens, componentes e padrões visuais de sites/apps existentes. Captura screenshots via Playwright, analisa CSS computado, mapeia paleta de cores, tipografia, espaçamento e hierarquia de componentes. Gera output estruturado (JSON/YAML) pronto para consumo em projetos frontend.
 license: MIT
+
+version: 1.0.0
+category: development
+tags: [SKILL]
 ---
 
 # Design System Extractor

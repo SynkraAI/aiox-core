@@ -11,6 +11,8 @@ delegates-to:
   - skills/design-system-scaffold
   - skills/design-system-storybook (fallback bootstrap)
   - skills/design-system-catalog
+
+tags: [SKILL]
 ---
 
 # Design System Forge

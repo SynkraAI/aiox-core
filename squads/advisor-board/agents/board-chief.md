@@ -1,5 +1,6 @@
 ---
 name: board-chief
+description: "Role: Chief Orchestrator of the 13-Member Advisory Board"
 id: advisory-board-chief
 title: Advisory Board Chief
 icon: 🎯
@@ -29,6 +30,9 @@ tags:
   - decision-support
   - advisory
   - tier-0
+
+role: chief
+squad: advisor-board
 ---
 
 # Advisory Board Chief

@@ -1,4 +1,7 @@
 ---
+name: robert-cialdini
+description: "activating the reciprocation rule by giving an uninvited gift"
+
 agent: Robert Cialdini
 id: robert-cialdini
 squad: storytelling-masters-fosc

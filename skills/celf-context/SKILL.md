@@ -10,6 +10,10 @@ description: >
   multi-agent architecture, (6) running a context health check.
   Domains: context engineering, CLAUDE.md, memory, state, layers, scaffolding, audit,
   project setup, context optimization, configuration.
+
+version: 1.0.0
+category: development
+tags: [SKILL]
 ---
 
 # CELF — Context Engineering Layered Framework

@@ -1,6 +1,6 @@
 ---
 name: blotato
-description: >-
+description: "Publicação e agendamento multi-plataforma. É como ter um assistente que posta em todas as redes de uma vez."
   Publicação e agendamento multi-plataforma em redes sociais.
   Publica e agenda posts no Instagram, LinkedIn, Twitter/X, TikTok,
   YouTube e mais via MCP HTTP. Upload de mídia e monitoramento de status.
@@ -18,6 +18,10 @@ mcp:
   url: "https://mcp.blotato.com/mcp"
   headers:
     blotato-api-key: BLOTATO_API_KEY
+
+version: 1.0.0
+category: general
+tags: [SKILL]
 ---
 
 # Blotato Publisher

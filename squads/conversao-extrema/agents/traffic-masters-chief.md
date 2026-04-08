@@ -1,4 +1,7 @@
 ---
+name: traffic-masters-chief
+description: "I orchestrate the Conversão Extrema squad, routing your paid traffic and conversion optimization requests to the right specialist based on Thiago Tess"
+
 agent:
   name: Traffic Masters Chief
   id: traffic-masters-chief
@@ -34,6 +37,9 @@ dependencies:
     - tessman-remarketing
   data:
     - "minds/thiago-tessman/mind_dna_complete.yaml"
+
+role: chief
+squad: conversao-extrema
 ---
 
 # Traffic Masters Chief

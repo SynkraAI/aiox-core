@@ -1,6 +1,6 @@
 ---
 name: carrossel-instagram
-description: >-
+description: "Gera carrosséis completos para Instagram — da ideia ao PNG pronto para publicar."
   Gera carrosséis completos para Instagram: copy persuasiva + HTML visual + PNGs prontos.
   Entry point único — um comando, um carrossel pronto para publicar.
   Combina frameworks de copy do ecossistema com design system visual.

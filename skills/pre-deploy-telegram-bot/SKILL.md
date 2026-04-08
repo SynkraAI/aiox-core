@@ -1,3 +1,12 @@
+---
+name: SKILL
+description: |
+  Validacao completa pre-deploy do telegram-agenda-bot. Executa 8 categorias de checks e BLOQUEIA deploy se qualquer item critico falhar.
+version: 1.0.0
+category: development
+tags: [SKILL]
+---
+
 # Pre-Deploy — Telegram Agenda Bot
 
 Validacao completa pre-deploy do telegram-agenda-bot. Executa 8 categorias de checks e BLOQUEIA deploy se qualquer item critico falhar.

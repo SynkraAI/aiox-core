@@ -1,8 +1,15 @@
 ---
+name: obsidian-app-filler
+description: "Preenche automaticamente notas de apps do Obsidian baseado em dados estruturados e templates."
+
 paths:
   - "skills/obsidian-app-filler/"
 lazy_load: true
 context_budget: 1800
+
+version: 1.0.0
+category: development
+tags: [SKILL]
 ---
 
 # Obsidian App Filler — Preenchimento Automático de Notas de Apps

@@ -1,6 +1,6 @@
 ---
 name: john-carlton
-description: "cognitivestyle:"
+description: "always selling benefits"
 role: chief
 squad: copywriting-squad
 ---

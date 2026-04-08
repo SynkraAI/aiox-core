@@ -1,6 +1,6 @@
 ---
 name: code-refactoring-refactor-clean
-description: >-
+description: "Expert em refactoring de código seguindo Clean Code, SOLID e design patterns modernos. Analisa code smells, propõe planos de refactoring incrementais "
   Expert em refactoring de código seguindo Clean Code, SOLID e best practices
   modernas. Analisa code smells, propõe refactorings incrementais e executa
   transformações seguras preservando o comportamento externo.
@@ -11,6 +11,9 @@ paths:
 lazy_load: true
 context_budget: 2500
 version: 2.0.0
+
+category: development
+tags: [SKILL]
 ---
 
 # Refactor & Clean Code v2.0

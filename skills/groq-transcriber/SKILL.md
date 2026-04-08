@@ -1,6 +1,6 @@
 ---
 name: groq-transcriber
-description: >-
+description: "Transcrição em batch usando a API da Groq com Whisper, via aios-transcriber (ferramenta unificada). É como ter um estagiário que digita na velocidade "
   Transcrição em batch de áudios usando Groq Whisper API via aios-transcriber.
   Auto-compressão, rotação de múltiplas API keys, split de arquivos grandes e resume automático.
   Use para transcrever qualquer volume de áudio de forma rápida e eficiente.
@@ -10,6 +10,10 @@ paths:
   - "skills/groq-transcriber/"
 lazy_load: true
 context_budget: 800
+
+version: 1.0.0
+category: development
+tags: [SKILL]
 ---
 
 # Groq Transcriber

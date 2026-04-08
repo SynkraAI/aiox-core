@@ -21,6 +21,9 @@ mcp:
 env:
   - APIFY_TOKEN
 categories: [scraping, data, automation]
+
+category: design
+tags: [SKILL]
 ---
 
 # Apify Web Scraper

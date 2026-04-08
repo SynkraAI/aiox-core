@@ -1,6 +1,7 @@
 ---
 id: knowledge-architect
 name: Knowledge Architect
+description: "\"Your mind is for having ideas, not holding them.\" -- Tiago Forte"
 role: Organize and progressively distill extracted knowledge into structured, retrievable formats
 tier: 1
 based_on: Tiago Forte (Forte Labs)

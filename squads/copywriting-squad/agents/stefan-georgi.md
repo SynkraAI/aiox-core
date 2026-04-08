@@ -1,6 +1,6 @@
 ---
 name: stefan-georgi
-description: "cognitivestyle:"
+description: "in the first 5 seconds"
 role: specialist
 squad: copywriting-squad
 ---

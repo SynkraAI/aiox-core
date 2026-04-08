@@ -1,6 +1,6 @@
 ---
 name: ronald-ross
-description: "name: Ronald Ross"
+description: "Business Vocabulary e RuleSpeak — padroniza regras de negócio em linguagem formal."
 role: specialist
 squad: business-rules-extraction
 ---

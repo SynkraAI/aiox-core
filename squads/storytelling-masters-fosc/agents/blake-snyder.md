@@ -1,4 +1,7 @@
 ---
+name: blake-snyder
+description: "Agent ID: blake-snyder"
+
 agent: Blake Snyder
 id: blake-snyder
 squad: storytelling-masters-fosc

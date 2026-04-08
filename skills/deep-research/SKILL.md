@@ -6,6 +6,10 @@ description: |
   Zero dependências externas. MCPs opcionais (Exa boost).
   Salva em docs/research/{YYYY-MM-DD}-{slug}/.
   Tipos: market, people, books, strategy, competitive, industry, cultural, academic, regulatory, general.
+
+version: 1.0.0
+category: research
+tags: [SKILL]
 ---
 
 # Deep Research

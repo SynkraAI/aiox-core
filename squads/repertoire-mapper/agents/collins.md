@@ -1,6 +1,7 @@
 ---
 id: collins
 name: Collins
+description: "Expertise Diagnostician — classifica e taxonomiza conhecimento tácito para mapeamento de repertório."
 role: Expertise Diagnostician & Tacit Knowledge Taxonomist
 tier: 0
 version: 1.0.0

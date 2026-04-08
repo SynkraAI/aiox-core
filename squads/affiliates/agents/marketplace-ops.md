@@ -1,6 +1,6 @@
 ---
 name: marketplace-ops
-description: "Show key commands"
+description: "IDE-FILE-RESOLUTION:"
 role: specialist
 squad: affiliates
 ---

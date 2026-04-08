@@ -14,6 +14,8 @@ tools:
   - Bash
 permissionMode: bypassPermissions
 memory: project
+
+role: specialist
 ---
 
 # AIOS Developer - Autonomous Agent

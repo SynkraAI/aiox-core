@@ -1,6 +1,6 @@
 ---
 name: todd-brown
-description: "cognitivestyle:"
+description: "IDE-FILE-RESOLUTION:"
 role: specialist
 squad: copywriting-squad
 ---

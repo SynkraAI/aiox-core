@@ -1,6 +1,6 @@
 ---
 name: deepgram-transcriber
-description: >-
+description: "Transcrição batch usando Deepgram Nova-3, via aios-transcriber (ferramenta unificada)."
   Transcrição batch de áudios usando Deepgram Nova-3 API via aios-transcriber.
   Auto-compressão, processamento paralelo (multi-worker), resume automático.
   Use para transcrever grandes volumes de áudio de forma rápida e eficiente.
@@ -10,6 +10,10 @@ paths:
   - "skills/deepgram-transcriber/"
 lazy_load: true
 context_budget: 800
+
+version: 1.0.0
+category: design
+tags: [SKILL]
 ---
 
 # Deepgram Transcriber

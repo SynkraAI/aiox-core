@@ -1,6 +1,6 @@
 ---
 name: recon-mapper
-description: "olheiro do squad"
+description: "name: Recon Mapper"
 role: specialist
 squad: playwright-architect
 ---

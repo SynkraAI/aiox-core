@@ -1,4 +1,7 @@
 ---
+name: tessman-meta-ads
+description: "DNA completo em: squads/mind-cloning/minds/thiago-tessman/outputs/"
+
 agent:
   name: Tessman Meta Ads
   id: tessman-meta-ads
@@ -25,6 +28,9 @@ commands:
 dependencies:
   data:
     - "minds/thiago-tessman/mind_dna_complete.yaml"
+
+role: specialist
+squad: conversao-extrema
 ---
 
 # Tessman Meta Ads

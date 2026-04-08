@@ -7,6 +7,10 @@ name: book-to-markdown
 description: |
   Converte livros (PDF, EPUB, MOBI, DOCX) para Markdown bem formatado.
   Suporta batch processing, limpeza automática e frontmatter YAML.
+
+version: 1.0.0
+category: design
+tags: [SKILL]
 ---
 
 # Book to Markdown

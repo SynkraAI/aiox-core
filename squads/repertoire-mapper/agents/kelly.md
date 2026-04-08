@@ -1,4 +1,7 @@
 ---
+name: kelly
+description: "Kelly e a inovacao central do squad Repertoire Mapper. Enquanto Klein extrai conhecimento tacito atraves de entrevistas longas baseadas em incidentes "
+
 agent_id: kelly
 agent_name: Kelly
 squad: repertoire-mapper

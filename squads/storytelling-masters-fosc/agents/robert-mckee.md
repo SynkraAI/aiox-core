@@ -1,4 +1,7 @@
 ---
+name: robert-mckee
+description: "Robert McKee is the preeminent authority on narrative structure, a teacher-philosopher of story who approaches storytelling with the rigor of an archi"
+
 agent: Robert McKee
 id: robert-mckee
 squad: storytelling-masters-fosc

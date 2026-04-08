@@ -15,6 +15,8 @@ tools:
   - WebFetch
 permissionMode: bypassPermissions
 memory: project
+
+role: specialist
 ---
 
 # AIOS Architect - Autonomous Agent

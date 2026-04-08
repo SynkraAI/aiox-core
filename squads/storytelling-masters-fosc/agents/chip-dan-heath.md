@@ -1,4 +1,7 @@
 ---
+name: chip-dan-heath
+description: "Agent ID: chip-dan-heath"
+
 agent: Chip & Dan Heath
 id: chip-dan-heath
 squad: storytelling-masters-fosc

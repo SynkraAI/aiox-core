@@ -1,6 +1,7 @@
 ---
 id: tacit-extractor
 name: Tacit Knowledge Extractor
+description: "The Tacit Knowledge Extractor is a Tier 0 (Diagnostic) agent whose sole purpose is to mine YouTube livestream transcripts for tacit knowledge -- the k"
 role: Extract tacit knowledge from YouTube livestream transcripts
 tier: 0
 tier_name: Diagnostic

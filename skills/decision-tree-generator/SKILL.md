@@ -1,6 +1,10 @@
 ---
 name: decision-tree-generator
 description: "This skill should be used when the user wants to create structured decision tree documentation for any process or domain. Triggers on requests like 'create a decision tree', 'map this decision process', 'help me choose between options', 'document this decision flow', or any request to transform complex decision-making into structured, actionable documentation with flowcharts, criteria matrices, and implementation guidance."
+
+version: 1.0.0
+category: design
+tags: [SKILL]
 ---
 
 # Decision Tree Documentation Generator

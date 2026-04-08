@@ -1,6 +1,10 @@
 ---
 name: code-review-ping-pong
 description: "Cross-AI code review protocol between Codex (reviewer), Claude Code (fixer), and Gemini (auditor). Ping-pong cycle with optional audit: Codex reviews, Claude fixes, Gemini audits both. Repeat until 10/10. Triggers: pingpong, code-review-ping-pong, bate-bola, cross-review."
+
+version: 1.0.0
+category: development
+tags: [SKILL]
 ---
 
 # Code Review Ping-Pong v3.1 — Cross-AI Review Protocol

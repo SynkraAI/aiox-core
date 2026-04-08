@@ -1,12 +1,15 @@
 ---
 name: unreal-engine-cpp-pro
-description: >-
+description: "C++ no Unreal não é C++ convencional — é C++ com superpoderes (e responsabilidades) extras."
   Guia especializado para desenvolvimento C++ em Unreal Engine 5.x.
   UObject hygiene, performance patterns, Gameplay Ability System,
   networking, debugging e convenções da Epic Games.
 version: "2.0.0"
 categories: [game-development, cpp, unreal-engine]
 allowed-tools: Read, Glob, Grep, Bash, Edit, Write
+
+category: design
+tags: [SKILL]
 ---
 
 # Unreal Engine C++ Pro

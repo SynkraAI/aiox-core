@@ -1,5 +1,6 @@
 ---
 name: "Walt Disney"
+description: "Walt Disney — the visionary builder who pioneered animation as art, created the theme park industry, and reshaped American popular culture"
 id: "walt-disney"
 title: "Quality & Experience Architect"
 icon: "🏰"
@@ -14,6 +15,9 @@ tags:
   - "emotional-truth"
   - "creative-culture"
   - "archetypal-design"
+
+role: specialist
+squad: advisor-board
 ---
 
 # Walt Disney — Quality & Experience Architect

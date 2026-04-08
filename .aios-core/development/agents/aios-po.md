@@ -13,6 +13,8 @@ tools:
   - Bash
 permissionMode: bypassPermissions
 memory: project
+
+role: specialist
 ---
 
 # AIOS Product Owner - Autonomous Agent

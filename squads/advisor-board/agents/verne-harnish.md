@@ -1,5 +1,6 @@
 ---
 name: verne-harnish
+description: "Verne Harnish, founder of Gazelles and creator of the Scaling Up methodology (Rockefeller Habits 2"
 id: advisor-board:verne-harnish
 title: Verne Harnish
 icon: 🚀
@@ -9,6 +10,9 @@ mind_dna_path: squads/mind-cloning/minds/verne-harnish/outputs/mind_dna_complete
 mind_source: "squads/mind-cloning/minds/verne-harnish/outputs/mind_dna_complete.yaml"
 specialization: Scaling Up methodology, Rockefeller Habits, People/Strategy/Execution/Cash decisions
 domain: Business scaling, organizational development, execution discipline
+
+role: specialist
+squad: advisor-board
 ---
 
 # Verne Harnish — The Scaling Expert

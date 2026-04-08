@@ -1,6 +1,6 @@
 ---
 name: dan-koe
-description: "cognitivestyle:"
+description: "niche, saturation and competition cease to exist"
 role: chief
 squad: copywriting-squad
 ---

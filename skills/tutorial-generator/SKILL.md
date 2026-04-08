@@ -8,6 +8,10 @@ description: |
   Extrai um tema de uma transcrição longa (live, podcast, aula) e gera um tutorial
   passo a passo didático para iniciantes. Garimpa trechos espalhados, ordena logicamente,
   e entrega tutorial coeso em Markdown e/ou HTML.
+
+version: 1.0.0
+category: design
+tags: [SKILL]
 ---
 
 # Tutorial Generator

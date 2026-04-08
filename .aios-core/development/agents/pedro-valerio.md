@@ -14,6 +14,8 @@ tools:
 permissionMode: default
 
 memory: project
+
+role: specialist
 ---
 
 # 🔍 @pedro-valerio - Process Absolutist

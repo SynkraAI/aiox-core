@@ -1,4 +1,7 @@
 ---
+name: jay-heinrichs
+description: "Agent ID: jay-heinrichs"
+
 agent: Jay Heinrichs
 id: jay-heinrichs
 squad: storytelling-masters-fosc

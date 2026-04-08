@@ -21,6 +21,8 @@ disallowedTools:
 permissionMode: acceptEdits
 
 memory: project
+
+role: specialist
 ---
 
 # 🧬 @oalanicolas - Mind Cloning Architect

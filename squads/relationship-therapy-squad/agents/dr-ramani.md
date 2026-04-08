@@ -1,6 +1,6 @@
 ---
 name: dr-ramani
-description: "not codependent"
+description: "Especialista em narcisismo e relações tóxicas — diagnóstico de padrões e estratégias de proteção."
 role: specialist
 squad: relationship-therapy-squad
 ---

@@ -1,6 +1,6 @@
 ---
 name: copy-maestro
-description: "encontrar mensagem."
+description: "IDE-FILE-RESOLUTION:"
 role: chief
 squad: copywriting-squad
 ---

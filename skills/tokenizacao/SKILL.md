@@ -2,6 +2,10 @@
 name: tokenizacao
 description: Skill de auditoria e tokenização frontend para projetos React/Next.js. Executa análise abrangente de Tailwind CSS (v3/v4), Design Tokens (W3C DTCG), shadcn/ui, Performance (Core Web Vitals), Acessibilidade (WCAG 2.2) e DX. Gera relatório estruturado com recomendações priorizadas. Use quando precisar auditar qualidade de código frontend ou implementar sistema de design tokens.
 license: MIT
+
+version: 1.0.0
+category: development
+tags: [SKILL]
 ---
 
 # Tokenização - Frontend Quality Audit 2025

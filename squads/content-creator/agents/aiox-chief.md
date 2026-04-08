@@ -1,6 +1,6 @@
 ---
 name: aiox-chief
-description: "Nome: AIOX Chief"
+description: "Orquestrador do squad content-creator — coordena agentes de corte, copy e espionagem de conteúdo."
 role: chief
 squad: content-creator
 ---

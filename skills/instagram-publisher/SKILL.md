@@ -30,6 +30,9 @@ paths:
   - "skills/instagram-publisher/"
 lazy_load: true
 context_budget: 1000
+
+category: development
+tags: [SKILL]
 ---
 
 # Instagram Publisher

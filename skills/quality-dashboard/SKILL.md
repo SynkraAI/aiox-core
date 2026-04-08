@@ -1,6 +1,6 @@
 ---
 name: quality-dashboard
-description: >-
+description: "Dashboard unificado de qualidade que escaneia todo o ecossistema AIOS e gera um relatório com scores. É como um check-up médico do seu repositório — m"
   Dashboard unificado de qualidade para o ecossistema AIOS. Escaneia squads, tools, skills e minds,
   gerando relatório com scores de 0 a 10. Identifica componentes incompletos, duplicados e oportunidades
   de melhoria. Output em CLI, Markdown ou JSON.
@@ -11,6 +11,9 @@ paths:
   - "tools/quality-dashboard/"
 lazy_load: true
 context_budget: 600
+
+category: general
+tags: [SKILL]
 ---
 
 # Quality Dashboard

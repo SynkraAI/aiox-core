@@ -14,6 +14,8 @@ tools:
   - Task
 permissionMode: bypassPermissions
 memory: project
+
+role: specialist
 ---
 
 # Design System (Brad Frost) - Autonomous Agent

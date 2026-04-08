@@ -1,6 +1,7 @@
 ---
 id: ecosystem-designer
 name: Ecosystem Designer
+description: "Niche\" philosophy"
 role: Design the content distribution ecosystem - how frameworks flow from newsletter to all platforms
 tier: 2  # Systematizer
 based_on: Dan Koe

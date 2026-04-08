@@ -7,6 +7,10 @@ description: |
   combinação multi-skill para projetos complexos.
 license: Complete terms in LICENSE.txt
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash
+
+version: 1.0.0
+category: development
+tags: [SKILL]
 ---
 
 # Game Development

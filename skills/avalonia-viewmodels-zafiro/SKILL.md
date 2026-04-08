@@ -1,11 +1,15 @@
 ---
 name: avalonia-viewmodels-zafiro
-description: >-
+description: "Padrões de referência para criar ViewModels robustos, Wizards multi-step e navegação modular em aplicações Avalonia, usando o toolkit Zafiro e o frame"
   Optimal ViewModel and Wizard creation patterns for Avalonia using Zafiro and
   ReactiveUI. Covers reactive properties, enhanced commands, multi-step wizards,
   section-based navigation, and dependency injection via CompositionRoot.
 risk: safe
 source: self
+
+version: 1.0.0
+category: design
+tags: [SKILL]
 ---
 
 # Avalonia ViewModels com Zafiro & ReactiveUI

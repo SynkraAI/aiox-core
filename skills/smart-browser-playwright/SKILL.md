@@ -1,6 +1,6 @@
 ---
 name: smart-browser-playwright
-description: >-
+description: "Automação inteligente de browser via Stagehand + OpenAI. É como ter um assistente que sabe navegar qualquer site — você descreve o que quer em linguag"
   Automação inteligente de browser via Stagehand + OpenAI. Navega sites de forma autônoma,
   extrai dados estruturados, contorna erros, e pede ajuda quando trava.
   Dois modos: agente autônomo (--task) ou interativo step-by-step (--interactive).
@@ -10,6 +10,10 @@ paths:
   - "tools/smart-browser-playwright/"
 lazy_load: true
 context_budget: 800
+
+version: 1.0.0
+category: general
+tags: [SKILL]
 ---
 
 # Smart Browser Playwright

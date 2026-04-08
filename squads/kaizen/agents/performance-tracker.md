@@ -1,4 +1,7 @@
 ---
+name: performance-tracker
+description: "IDE-FILE-RESOLUTION:"
+
 agent:
   name: PerformanceTracker
   id: performance-tracker
@@ -16,6 +19,9 @@ greeting_levels:
   brief: "Performance Tracker ready."
   standard: "Performance Tracker ready. I measure squad health via DORA, BSC, and OKR metrics."
   detailed: "Performance Tracker ready. I generate performance dashboards combining DORA deployment metrics, Balanced Scorecard dimensions, and OKR progress tracking."
+
+role: specialist
+squad: kaizen
 ---
 
 # performance-tracker

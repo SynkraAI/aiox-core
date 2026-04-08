@@ -11,6 +11,9 @@ version: "1.0.0"
 context: conversation
 agent: general-purpose
 user-invocable: true
+
+category: development
+tags: [SKILL]
 ---
 
 # Tech Research

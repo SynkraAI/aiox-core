@@ -1,11 +1,11 @@
 ---
 name: skill-stress-test
 description: >-
-  Live stress tester for skills using ping-pong file protocol. Guides the user
-  through progressively harder real-world scenarios via structured handoffs to a
-  second terminal (Claude Code or Codex), analyzes results, and reports what
-  breaks. This skill should be used when the user wants to test, validate, or
-  find edge cases in any skill from the ecosystem.
+  Break your skills before your users do. Live stress tester that guides you through
+  progressively harder real-world scenarios via structured handoffs to a second terminal
+  (Claude Code or Codex), analyzes results, and reports what breaks. This skill should
+  be used when the user wants to test, validate, or find edge cases in any skill from
+  the ecosystem.
 allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, Agent]
 argument-hint: "[skill-name] | resume | report"
 version: 1.0.0
@@ -44,13 +44,13 @@ Questions to ask before executing. Use AskUserQuestion tool. Skip if the user al
    - bulletproof-test
    - Outra (digitar nome)
 
-2. **Criar projeto ficticio ou usar um existente?** — (fixture descartavel vs. projeto real)
+2. **Criar projeto fictício ou usar um existente?** — (fixture descartável vs. projeto real)
    - Criar fixture em /tmp/ (recomendado para testes destrutivos)
    - Usar projeto existente (informar path)
 
-3. **Qual profundidade?** — (calibra tempo e numero de cenarios)
-   - Rapido: 5 cenarios, Tiers 1-2 (happy path + variacoes)
-   - Completo: 20+ cenarios, Tiers 1-5 (ate caos total)
+3. **Qual profundidade?** — (calibra tempo e número de cenários)
+   - Rápido: 5 cenários, Tiers 1-2 (happy path + variações)
+   - Completo: 20+ cenários, Tiers 1-5 (até caos total)
 
 ---
 
@@ -70,7 +70,7 @@ COMM_DIR: .stress-test  # relative to fixture path
 | `[skill-name]` | Start new stress test session |
 | `resume` | Resume interrupted session from last fixture |
 | `report` | Show last generated report |
-| `analisa` / `next` / `proximo` | Analyze latest result and advance |
+| `analisa` / `next` / `próximo` | Analyze latest result and advance |
 
 ---
 
@@ -96,7 +96,7 @@ Load and execute `engine/recon.md` against the target skill.
    === RECON COMPLETO ===
    Skill: {name} ({type})
    Entry points: {count}
-   Dependencias: {list}
+   Dependências: {list}
    Risk areas: {list}
    ```
 
@@ -134,11 +134,11 @@ For each scenario (ordered by tier, ascending difficulty):
 ┃  COPIE O BLOCO ABAIXO → COLE NO {RUNTIME}        ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-Voce e um executor de stress test para a skill "{skill_name}".
+Você é um executor de stress test para a skill "{skill_name}".
 
-1. Leia o cenario em {fixture_path}/.stress-test/scenario-{N}.md
-2. Execute EXATAMENTE o que esta descrito na secao "Acao"
-3. Capture o output completo da execucao
+1. Leia o cenário em {fixture_path}/.stress-test/scenario-{N}.md
+2. Execute EXATAMENTE o que está descrito na seção "Ação"
+3. Capture o output completo da execução
 4. Liste todos os arquivos criados/modificados pela skill
 5. Anote qualquer comportamento inesperado
 6. Escreva tudo em {fixture_path}/.stress-test/result-{N}.md
@@ -157,21 +157,21 @@ status: completed  # ou crashed | hung | partial
 ## Artefatos Criados
 (lista de arquivos)
 
-## Observacoes
+## Observações
 (notas sobre comportamento)
 
 7. Atualize {fixture_path}/.stress-test/next-step.md:
    current_state → WAITING_FOR_ANALYSIS
 
-NAO invente resultados. Se a skill crashar, documente o erro exato.
+NÃO invente resultados. Se a skill crashar, documente o erro exato.
 ```
 
-5. Wait for user to say "analisa" / "next" / "proximo"
+5. Wait for user to say "analisa" / "next" / "próximo"
 
 #### 3b. Analyze Result
 
 1. Read `result-{N}.md` from `.stress-test/`
-2. If file doesn't exist: warn user — "Terminal 2 ainda nao executou. result-{N}.md nao encontrado."
+2. If file doesn't exist: warn user — "Terminal 2 ainda não executou. result-{N}.md não encontrado."
 3. Load `engine/output-analyzer.md` analysis rules
 4. Evaluate against scenario pass criteria
 5. Determine verdict: PASS | WARN | FAIL | CRITICAL
@@ -187,7 +187,7 @@ NAO invente resultados. Se a skill crashar, documente o erro exato.
 
 After analyzing for one runtime, check if the other runtime needs testing:
 - If depth is "completo" and only one runtime tested: generate same scenario for other runtime
-- If depth is "rapido": test only Claude Code (skip Codex unless user requests)
+- If depth is "rápido": test only Claude Code (skip Codex unless user requests)
 
 #### 3d. Advance
 
@@ -202,7 +202,7 @@ Load and execute `engine/report.md`.
 
 1. Read all `analysis-{N}.md` files
 2. Generate consolidated report in `.stress-test/report.md`
-3. Copy report to `.aios/stress-test/reports/{skill}-{date}.md`
+3. Copy report to `skills/skill-stress-test/reports/{skill}-{date}.md`
 4. Show summary:
    ```
    === STRESS TEST REPORT ===
@@ -238,11 +238,11 @@ When invoked with `resume`:
 
 ## Personality
 
-- Tom: tecnico mas acessivel. Como um pentester explicando achados.
+- Tom: técnico mas acessível. Como um pentester explicando achados.
 - Usar emojis de status: PASS, WARN, FAIL, CRITICAL
 - Celebrar quando skill passa em tier alto: "Essa skill aguenta pancada!"
 - Ser direto em falhas: "Quebrou aqui. Causa: X. Fix: Y."
-- NUNCA inventar resultados — so analisar o que o Terminal 2 reportou
+- NUNCA inventar resultados — só analisar o que o Terminal 2 reportou
 
 ---
 

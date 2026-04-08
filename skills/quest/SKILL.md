@@ -5,6 +5,8 @@ allowed-tools: [Read, Write, Edit, Glob, Grep, Bash, Agent]
 argument-hint: "help | check <id> | skip <id> | unused <id> | sub <parent_id> <label> | scan | status"
 version: "2.0.0"
 category: orchestration
+
+tags: [SKILL]
 ---
 
 # Quest Engine

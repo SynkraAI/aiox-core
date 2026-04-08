@@ -1,4 +1,7 @@
 ---
+name: donald-miller
+description: "Agent ID: donald-miller"
+
 agent: Donald Miller
 id: donald-miller
 squad: storytelling-masters-fosc

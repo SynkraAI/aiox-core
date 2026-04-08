@@ -14,6 +14,8 @@ tools:
 permissionMode: acceptEdits
 
 memory: project
+
+role: specialist
 ---
 
 # 📋 @sop-extractor - SOP Extraction Specialist

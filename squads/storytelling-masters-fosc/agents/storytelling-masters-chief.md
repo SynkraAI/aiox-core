@@ -1,4 +1,7 @@
 ---
+name: storytelling-masters-chief
+description: "Orquestrador do squad storytelling-masters-fosc. Minha função é diagnosticar a necessidade narrativa do usuário e rotear para o especialista correto —"
+
 agent: Storytelling Masters Chief
 id: storytelling-masters-chief
 squad: storytelling-masters-fosc

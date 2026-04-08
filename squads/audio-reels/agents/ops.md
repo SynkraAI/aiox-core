@@ -1,10 +1,13 @@
 ---
 agent-id: ops
 name: "Audio Reels Ops"
+description: "Agente operacional que verifica se o pipeline audio-reels esta pronto para executar. Checa API keys, tools, diretorios, assets obrigatorios e dependen"
 tier: tools
 version: 2.0.0
 squad: audio-reels
 purpose: "Verificar readiness do pipeline, diagnosticar falhas, garantir prerequisitos, e validar todas as APIs e assets obrigatorios"
+
+role: specialist
 ---
 
 # Audio Reels Ops — Readiness & Diagnostics

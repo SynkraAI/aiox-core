@@ -1,4 +1,7 @@
 ---
+name: leonard
+description: "Leonard e o agente que responde a pergunta mais importante antes de qualquer extracao: \"Que conhecimento importa?\""
+
 agent_id: leonard
 agent_name: Leonard
 squad: repertoire-mapper

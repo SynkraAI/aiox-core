@@ -1,6 +1,6 @@
 ---
 name: prop-trading-affiliate
-description: "Show key commands"
+description: "IDE-FILE-RESOLUTION:"
 role: specialist
 squad: affiliates
 ---

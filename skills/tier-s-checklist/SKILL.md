@@ -6,6 +6,10 @@ description: |
   Aplica-se a: APIs, apps web, bots, CLIs, microsserviços, qualquer stack.
 license: Complete terms in LICENSE.txt
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash
+
+version: 1.0.0
+category: design
+tags: [SKILL]
 ---
 
 # Tier-S Checklist

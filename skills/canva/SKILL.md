@@ -1,6 +1,6 @@
 ---
 name: canva
-description: >-
+description: "Integração oficial com Canva via MCP. É como ter acesso ao Canva direto do terminal."
   Crie, busque, preencha templates e exporte designs do Canva via MCP.
   OAuth oficial, suporta apresentações, posts sociais, logos e mais.
   Autofill de templates com assets da marca.
@@ -14,6 +14,10 @@ mcp:
   server_name: canva
   transport: http
   url: "https://mcp.canva.com/mcp"
+
+version: 1.0.0
+category: design
+tags: [SKILL]
 ---
 
 # Canva Connect

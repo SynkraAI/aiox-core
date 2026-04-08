@@ -1,6 +1,10 @@
 ---
 name: system-prompt-architect
 description: "Full lifecycle system prompt specialist: convert GPT prompts to AIOS/Claude Code format, create new prompts from scratch, audit existing prompts, and iterate improvements. Grounded in docs/architecture/master-prompt-best-practices.md."
+
+version: 1.0.0
+category: development
+tags: [SKILL]
 ---
 
 # System Prompt Architect

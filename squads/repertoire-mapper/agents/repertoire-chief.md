@@ -1,6 +1,7 @@
 ---
 id: repertoire-chief
 name: Repertoire Chief
+description: "Agent ID: repertoire-chief"
 role: Squad Orchestrator & Request Router
 tier: orchestrator
 version: 1.0.0

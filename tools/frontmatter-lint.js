@@ -89,7 +89,7 @@ function parseYamlSimple(yamlStr) {
       currentKey = kvMatch[1];
       const val = kvMatch[2].trim();
 
-      if (val === '|' || val === '>') {
+      if (val === '|' || val === '>' || val === '|-' || val === '>-') {
         multiline = true;
         fields[currentKey] = '';
       } else if (val.startsWith('[') && val.endsWith(']')) {
@@ -399,8 +399,11 @@ function printReport(results) {
   console.log(`  Grades: ${gradeLine}`);
 
   // Health score (0-100)
-  const maxPossibleIssues = totalFiles * 5; // rough max
-  const healthScore = Math.max(0, Math.round(100 - (totalIssues / Math.max(maxPossibleIssues, 1)) * 100));
+  // Weighted scoring: HIGH=10, MEDIUM=3, LOW=1
+  const totalLow = totalIssues - totalHigh - totalMedium;
+  const weightedIssues = (totalHigh * 10) + (totalMedium * 3) + (totalLow * 1);
+  const maxPossibleIssues = totalFiles * 15; // rough max (3 HIGH per file)
+  const healthScore = Math.max(0, Math.round(100 - (weightedIssues / Math.max(maxPossibleIssues, 1)) * 100));
   const healthColor = healthScore >= 80 ? COLORS.green : healthScore >= 50 ? COLORS.yellow : COLORS.red;
   console.log(`  Health score:   ${healthColor}${healthScore}/100${COLORS.reset}`);
   console.log('');

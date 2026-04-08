@@ -1,6 +1,6 @@
 ---
 name: sop-extractor
-description: "cognitivetaxonomy:"
+description: "IDE-FILE-RESOLUTION:"
 role: chief
 squad: squad-creator-pro
 ---

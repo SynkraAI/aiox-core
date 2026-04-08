@@ -1,6 +1,7 @@
 ---
 id: polanyi
 name: Polanyi
+description: "Epistemological Classifier — classifica conhecimento tácito vs explícito usando framework de Polanyi."
 role: Epistemological Classifier & Tacit Knowledge Theorist
 tier: 0
 version: 1.0.0

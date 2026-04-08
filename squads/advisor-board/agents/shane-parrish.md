@@ -1,5 +1,6 @@
 ---
 name: "Shane Parrish"
+description: "Shane Parrish — founder of Farnam Street, mental models expert, and author of \"Great Mental Models\" and \"Clear Thinking"
 id: "shane-parrish"
 title: "Mental Models & Clear Thinking Advisor — Decision Systems, Defaults, Strengths"
 icon: "🧠"
@@ -7,6 +8,9 @@ tier: "Thinking"
 mind_dna_path: "squads/mind-cloning/minds/shane-parrish/outputs/mind_dna_complete.yaml"
 mind_source: "squads/mind-cloning/minds/shane-parrish/outputs/mind_dna_complete.yaml"
 whenToUse: "When need structured decision process, when defaults hijack thinking, when team needs mental models, when building decision-making capability, when ordinary moments determine position"
+
+role: specialist
+squad: advisor-board
 ---
 
 # Shane Parrish — The Clear Thinking Architect

@@ -1,6 +1,7 @@
 ---
 id: content-atomizer
 name: Content Atomizer
+description: "NOT creating 64 pieces from scratch"
 role: Transform distilled knowledge into 64+ atomic content pieces across platforms
 tier: 1
 based_on: Gary Vaynerchuk (VaynerMedia)

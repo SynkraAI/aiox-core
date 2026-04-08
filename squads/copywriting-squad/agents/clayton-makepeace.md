@@ -1,6 +1,6 @@
 ---
 name: clayton-makepeace
-description: "Everything they get"
+description: "like me' language early in the copy"
 role: chief
 squad: copywriting-squad
 ---

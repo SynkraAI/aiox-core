@@ -1,4 +1,7 @@
 ---
+name: matthew-dicks
+description: "protagonist in these tales"
+
 agent: Matthew Dicks
 id: matthew-dicks
 squad: storytelling-masters-fosc

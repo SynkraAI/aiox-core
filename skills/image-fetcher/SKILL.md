@@ -1,6 +1,6 @@
 ---
 name: image-fetcher
-description: >-
+description: "Busca, captura e organiza assets visuais de qualquer fonte. É como um assistente de pesquisa visual: você diz o que precisa, ele vai atrás, traz e org"
   Adquire assets visuais de múltiplas fontes: busca de imagens na web,
   screenshots de sites via Playwright e arquivos fornecidos pelo usuário.
   Organiza tudo numa pasta de referência com nomes descritivos e metadados.
@@ -13,6 +13,10 @@ context_budget: 1200
 mcp:
   server_name: playwright
 categories: [assets, scraping, automation, images]
+
+version: 1.0.0
+category: design
+tags: [SKILL]
 ---
 
 # Image Fetcher

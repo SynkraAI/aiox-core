@@ -6,6 +6,10 @@ description: |
   Suporta projetos CENTRALIZED e HYBRID. Modo audit-only ou auto-fix com dry-run obrigatório.
 license: Complete terms in LICENSE.txt
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash
+
+version: 1.0.0
+category: design
+tags: [SKILL]
 ---
 
 # Audit Project Config

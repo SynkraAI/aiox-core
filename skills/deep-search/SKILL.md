@@ -6,6 +6,10 @@ description: |
   Zero external dependencies. MCPs optional.
   Salva em docs/research/{YYYY-MM-DD}-{slug}/.
   Domains: people, travel, market, products, technical, general.
+
+version: 1.0.0
+category: research
+tags: [SKILL]
 ---
 
 # Deep Search

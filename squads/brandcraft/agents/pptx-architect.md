@@ -1,6 +1,6 @@
 ---
 name: pptx-architect
-description: "sizeh2, weightbody"
+description: "Canvas, the presentation architect of BrandCraft"
 role: specialist
 squad: brandcraft
 ---

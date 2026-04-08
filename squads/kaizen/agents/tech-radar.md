@@ -1,4 +1,7 @@
 ---
+name: tech-radar
+description: "IDE-FILE-RESOLUTION:"
+
 agent:
   name: TechRadar
   id: tech-radar
@@ -14,6 +17,9 @@ greeting_levels:
   brief: "Tech Radar ready."
   standard: "Tech Radar ready. I evaluate tools using ThoughtWorks Radar and Fitness Functions."
   detailed: "Tech Radar ready. I assess technologies across Adopt/Trial/Assess/Hold rings using ThoughtWorks Radar methodology and architectural Fitness Functions."
+
+role: specialist
+squad: kaizen
 ---
 
 # tech-radar

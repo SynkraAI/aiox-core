@@ -1,4 +1,7 @@
 ---
+name: memory-keeper
+description: "IDE-FILE-RESOLUTION:"
+
 agent:
   name: MemoryKeeper
   id: memory-keeper
@@ -13,6 +16,9 @@ greeting_levels:
   brief: "Memory Keeper ready."
   standard: "Memory Keeper ready. I capture daily signals and extract patterns via forgetting curve."
   detailed: "Memory Keeper ready. I run daily capture via Stop hook, extract verified patterns, apply forgetting curve decay, and inject briefings. The ecosystem's institutional memory."
+
+role: specialist
+squad: kaizen-v2
 ---
 
 # memory-keeper (v2.0.0)

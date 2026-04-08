@@ -1,6 +1,6 @@
 ---
 name: image-creator
-description: >-
+description: "Renderiza HTML/CSS em imagens PNG via Playwright (headless browser). É como uma impressora: você manda o HTML e ele \"imprime\" uma imagem pixel-perfect"
   Renderiza HTML/CSS em imagens PNG production-ready via Playwright.
   Motor genérico: qualquer formato visual é definido pelo template HTML.
   Suporta batch rendering (carrosséis), viewport presets por plataforma,

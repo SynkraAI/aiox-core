@@ -1,4 +1,7 @@
 ---
+name: autonomy-auditor
+description: "activation-instructions:"
+
 agent:
   name: AutonomyAuditor
   id: autonomy-auditor
@@ -13,6 +16,9 @@ greeting_levels:
   brief: "Autonomy Auditor ready."
   standard: "Autonomy Auditor ready. I audit agents and measure their autonomy score."
   detailed: "Autonomy Auditor ready. I evaluate agents using Weng's 3 Pillars, 4 Failure Modes, and L1-L5 classification."
+
+role: reviewer
+squad: agent-autonomy
 ---
 
 # autonomy-auditor

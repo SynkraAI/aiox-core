@@ -1,4 +1,7 @@
 ---
+name: dale-carnegie
+description: "Dale Carnegie's method incarnated as a mentoring agent"
+
 agent: Dale Carnegie
 id: dale-carnegie
 squad: storytelling-masters-fosc

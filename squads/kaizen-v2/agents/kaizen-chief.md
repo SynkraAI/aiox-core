@@ -1,4 +1,7 @@
 ---
+name: kaizen-chief
+description: "IDE-FILE-RESOLUTION:"
+
 agent:
   name: KaizenChief
   id: kaizen-chief
@@ -13,6 +16,9 @@ greeting_levels:
   brief: "Kaizen Chief v2 ready."
   standard: "Kaizen Chief v2 ready. I coordinate 8 specialized agents including memory-keeper for daily intelligence."
   detailed: "Kaizen Chief v2 ready. I orchestrate memory capture, learning extraction, and ecosystem analysis across 8 agents for daily + weekly intelligence."
+
+role: chief
+squad: kaizen-v2
 ---
 
 # kaizen-chief (v2.0.0)

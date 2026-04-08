@@ -1,4 +1,7 @@
 ---
+name: klein
+description: "Klein e o gold standard para extracao de conhecimento tacito. Enquanto outros agentes identificam, priorizam ou sistematizam conhecimento, Klein extra"
+
 agent_id: klein
 agent_name: Klein
 squad: repertoire-mapper

@@ -1,6 +1,6 @@
 ---
 name: ram-doctor
-description: >-
+description: "Seu Mac está lento? Eu descubro por quê e limpo o que puder — sem derrubar nada importante."
   Diagnóstico e limpeza de memória RAM no macOS. Analisa uso de memória, categoriza
   processos (sistema vs usuário vs dev), recomenda o que fechar e executa cleanup
   com confirmação. Zero dependências — usa apenas comandos nativos do macOS.
@@ -15,6 +15,9 @@ risk: moderate
 source: self
 lazy_load: true
 context_budget: 400
+
+category: general
+tags: [SKILL]
 ---
 
 # RAM Doctor — Diagnóstico e Limpeza de Memória no macOS

@@ -5,6 +5,8 @@ allowed-tools: [Read, Write, Edit, Glob, Grep, Bash]
 version: "1.0.0"
 category: design
 requires: aios
+
+tags: [SKILL]
 ---
 
 # Design System Catalog

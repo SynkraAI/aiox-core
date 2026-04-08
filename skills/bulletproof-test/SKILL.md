@@ -1,6 +1,6 @@
 ---
 name: bulletproof-test
-description: >-
+description: "NOT done with exploration"
   Generate exhaustive real-world usage scenarios for any app, then orchestrate
   a multi-agent pipeline to implement full test coverage.
   Works with or without AIOS — auto-detects agents from ~/aios-core.
@@ -11,6 +11,9 @@ paths:
 lazy_load: true
 context_budget: 3000
 version: 2.1.0
+
+category: development
+tags: [SKILL]
 ---
 
 # Bulletproof Test v2.1

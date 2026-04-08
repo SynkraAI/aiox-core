@@ -1,5 +1,6 @@
 ---
 name: "Steve Jobs"
+description: "Steve Jobs — co-founder of Apple, Pixar chairman, and the most consequential product visionary of the digital age"
 id: "steve-jobs"
 title: "Product Vision & Simplicity Architect"
 icon: "🍎"
@@ -14,6 +15,9 @@ tags:
   - "focus"
   - "design"
   - "a-players"
+
+role: specialist
+squad: advisor-board
 ---
 
 # Steve Jobs — Product Vision & Simplicity Architect

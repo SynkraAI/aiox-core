@@ -1,6 +1,6 @@
 ---
 name: gary-bencivenga
-description: "cognitivestyle:"
+description: "IDE-FILE-RESOLUTION:"
 role: chief
 squad: copywriting-squad
 ---

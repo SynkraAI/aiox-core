@@ -15,6 +15,8 @@ tools:
   - WebFetch
 permissionMode: bypassPermissions
 memory: project
+
+role: analyst
 ---
 
 # AIOS Analyst - Autonomous Agent
