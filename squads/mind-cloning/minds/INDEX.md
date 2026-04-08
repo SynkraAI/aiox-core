@@ -49,11 +49,12 @@
 | 41 | Pedro Sobral | `pedro-sobral` | Complete | Intermediate | Tráfego Pago, Gestão |
 | 42 | Juliana Gomes | `juliana-gomes` | Complete | Intermediate | Conteúdo, Digital |
 | 43 | Ícaro de Carvalho | `icaro-de-carvalho` | Complete | Intermediate | Marketing, Copywriting, Negócios |
+| 44 | Luiz Fernando Garcia | `luiz-fernando-garcia` | Complete | Premium | Alta Performance, Neurociência Comportamental |
 
 ## Estatísticas
 
-- **Total:** 43 mentes
-- **Complete:** 42 (DNA extraído)
+- **Total:** 44 mentes
+- **Complete:** 43 (DNA extraído)
 - **Partial:** 1 (jose-amorim — caso especial, indivíduo privado)
 - **Sources Only:** 0 🎉
 

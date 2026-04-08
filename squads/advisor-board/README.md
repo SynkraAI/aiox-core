@@ -61,7 +61,7 @@ Personal advisory board with 15 elite minds spanning strategy, execution, thinki
 | Advisor | Framework | Fidelity | When to Consult |
 |---------|-----------|----------|-----------------|
 | Paulo Vieira | CIS + Inteligência Emocional | 9.0/10 | Emotional intelligence, self-leadership, limiting beliefs |
-| Luiz Fernando Garcia | 7 Pontos-Chave + Neurociência | 8.8/10 | Entrepreneurial behavior, neuroscience, performance diagnosis |
+| Luiz Fernando Garcia | 7 Pontos-Chave + Neurociência | 8.7/10 | Entrepreneurial behavior, neuroscience, performance diagnosis |
 
 ## How It Works
 
