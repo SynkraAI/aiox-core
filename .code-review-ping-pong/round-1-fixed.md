@@ -2,190 +2,132 @@
 protocol: code-review-ping-pong
 type: fix
 round: 1
-date: "2026-03-28"
-fixer: "Claude Code"
+date: "2026-04-08"
+fixer: "Claude Code (Opus 4.6)"
 review_file: "round-1.md"
-commit_sha_before: "d4ee0facb"
+commit_sha_before: "40b63abc8"
 branch: "chore/devops-10-improvements"
-git_diff_stat: "9 files changed, 69 insertions(+), 93 deletions(-)"
+git_diff_stat: "7 files changed, 142 insertions(+), 87 deletions(-)"
 files_changed:
-  - "skills/quest/SKILL.md"
-  - "skills/quest/dashboard/server.js"
-  - "skills/quest/engine/checklist.md"
-  - "skills/quest/engine/guide.md"
-  - "skills/quest/engine/scanner.md"
-  - "skills/quest/engine/xp-system.md"
-  - "skills/quest/packs/app-development.yaml"
-  - "skills/quest/packs/design-system-forge.yaml"
-  - "skills/quest/packs/squad-upgrade.yaml"
-original_score: 7
-issues_fixed: 12
+  - "skills/skill-stress-test/SKILL.md"
+  - "skills/skill-stress-test/engine/fixture-factory.md"
+  - "skills/skill-stress-test/engine/output-analyzer.md"
+  - "skills/skill-stress-test/engine/recon.md"
+  - "skills/skill-stress-test/engine/report.md"
+  - "skills/skill-stress-test/engine/scenario-engine.md"
+  - "skills/skill-stress-test/references/chaos-catalog.md"
+original_score: 4
+issues_fixed: 6
 issues_skipped: 0
-issues_total: 12
+issues_total: 6
 quality_checks:
   lint: "N/A"
   typecheck: "N/A"
   test: "N/A"
 fixes:
   - id: "1.1"
-    status: FIXED
+    status: "FIXED"
     deviation: "none"
   - id: "1.2"
-    status: FIXED
-    deviation: "none"
+    status: "FIXED"
+    deviation: "Adicionado fallback para npm install falhar (override test script)"
   - id: "1.3"
-    status: FIXED
-    deviation: "Merged with 1.2 — updated has_content to support globs natively and added has_content_matching as alias"
+    status: "FIXED"
+    deviation: "Expandido para 3 comportamentos: CC com Skill tool, Codex com prompt, e INCOMPATIBLE para skills que dependem de Agent tool"
   - id: "1.4"
-    status: FIXED
-    deviation: "none"
+    status: "FIXED"
+    deviation: "Convenção definida como S-001 (ID) + scenario-001.md (arquivo). Documentada no fixture-factory."
   - id: "1.5"
-    status: FIXED
-    deviation: "none"
+    status: "FIXED"
+    deviation: "none — corrigido em todos os 8 arquivos via 3 subagentes paralelos + verificação final"
   - id: "1.6"
-    status: FIXED
-    deviation: "none"
-  - id: "1.7"
-    status: FIXED
-    deviation: "Marked as P1 with graceful fallback instead of full implementation, since endpoint type has no existing usage"
-  - id: "1.8"
-    status: FIXED
-    deviation: "Differentiated purpose instead of removing — 6.6 is post-review security certification, 6.7 is integration-focused refactoring"
-  - id: "1.9"
-    status: FIXED
-    deviation: "Added explicit P1 comment instead of removing, since it represents planned functionality"
-  - id: "1.10"
-    status: FIXED
-    deviation: "Also fixed pt-BR in check/skip error messages (phase lock guard) and edge cases section"
-  - id: "1.11"
-    status: FIXED
-    deviation: "none"
-  - id: "1.12"
-    status: FIXED
-    deviation: "none"
+    status: "FIXED"
+    deviation: "Usado git rev-parse --show-toplevel no recon e report. Codex handoff usa path relativo ao repo root."
 ---
 
 # Code Ping-Pong — Round 1 Fix Report
 
-**Review:** `round-1.md` (score: 7/10)
-**Git base:** `d4ee0facb` on `chore/devops-10-improvements`
+**Review:** `round-1.md` (score: 4/10)
+**Git base:** `40b63abc8` on `chore/devops-10-improvements`
 **Changes:**
 ```
- skills/quest/SKILL.md                       |  2 +-
- skills/quest/dashboard/server.js            |  2 +-
- skills/quest/engine/checklist.md            | 38 +++++++++---------
- skills/quest/engine/guide.md                | 14 ++++++-
- skills/quest/engine/scanner.md              | 29 ++++++++++++--
- skills/quest/engine/xp-system.md            | 62 +----------------------------
- skills/quest/packs/app-development.yaml     | 12 +++---
- skills/quest/packs/design-system-forge.yaml |  1 -
- skills/quest/packs/squad-upgrade.yaml       |  2 +-
- 9 files changed, 69 insertions(+), 93 deletions(-)
+ skills/skill-stress-test/SKILL.md                  | 34 ++++++------
+ skills/skill-stress-test/engine/fixture-factory.md | 49 ++++++++++++++---
+ skills/skill-stress-test/engine/output-analyzer.md | 20 +++----
+ skills/skill-stress-test/engine/recon.md           | 17 +++---
+ skills/skill-stress-test/engine/report.md          | 44 +++++++--------
+ skills/skill-stress-test/engine/scenario-engine.md | 63 +++++++++++++---------
+ skills/skill-stress-test/references/chaos-catalog.md |  2 +-
+ 7 files changed, 142 insertions(+), 87 deletions(-)
 ```
 
 ---
 
-## Fixes Applied
+## 🔧 Fixes Applied
 
-### Fix for Issue 1.1 — Scanner function `command_exists` not defined
-- **Status:** FIXED
-- **File:** `skills/quest/engine/scanner.md`
-- **What changed:** Added `command_exists('name')` function to the Scanner Functions table (section 4.1). Uses `Bash("command -v {name}")` to check PATH.
+### Fix for Issue 1.1 — Schema de runtime diverge entre session.yaml, analyzer e report
+- **Status:** ✅ FIXED
+- **Files:** `engine/fixture-factory.md`, `engine/report.md`
+- **What changed:** Substituído `claude_code` por `claude-code` no template de session.yaml (fixture-factory.md:87) e nos campos de métricas e texto do report.md (linhas 34 e 64). Agora todos os módulos usam `claude-code` consistentemente.
 - **Deviation from suggestion:** None
 
-### Fix for Issue 1.2 — Scanner function `has_content_matching` not defined
-- **Status:** FIXED
-- **File:** `skills/quest/engine/scanner.md`
-- **What changed:** Added `has_content_matching('glob', 'regex')` function to the Scanner Functions table. Uses `Grep(pattern, glob)`.
-- **Deviation from suggestion:** None
+### Fix for Issue 1.2 — Factory não materializa o fixture brownfield
+- **Status:** ✅ FIXED
+- **File:** `engine/fixture-factory.md`
+- **What changed:** Substituído o bloco genérico "create files and commits" por uma sequência completa de materialização: merge de overrides do package.json, criação de arquivos adicionais (tests, utils, .gitignore), `npm install`, e os 5 commits na ordem documentada. Adicionado fallback para quando npm install falhar (override do test script).
+- **Deviation from suggestion:** Adicionado fallback para cenários offline (sem rede) onde npm install falha.
 
-### Fix for Issue 1.3 — `has_content` takes single file but packs use globs
-- **Status:** FIXED
-- **File:** `skills/quest/engine/scanner.md`
-- **What changed:** Updated `has_content` to accept both literal file paths and glob patterns. If the path contains wildcards, it uses Grep with `glob` parameter instead of `path`. `has_content_matching` is now documented as an alias for clarity.
-- **Deviation from suggestion:** Merged fix with 1.2 — both glob-based functions documented together.
+### Fix for Issue 1.3 — Self-test mode depende de Skill(...), incompatível com cross-runtime
+- **Status:** ✅ FIXED
+- **File:** `engine/scenario-engine.md`
+- **What changed:** Expandido o Self-Test Mode para 3 comportamentos por runtime: (1) Claude Code usa Skill tool normalmente, (2) Codex recebe prompt autocontido que lê o SKILL.md, (3) Skills que dependem fundamentalmente de Agent/Skill tool são marcadas como INCOMPATIBLE com documentação da gap estrutural. Adicionadas regras claras de quando marcar INCOMPATIBLE vs tentar execução.
+- **Deviation from suggestion:** Mais granular que a sugestão — 3 caminhos em vez de 2.
 
-### Fix for Issue 1.4 — Duplicate step numbers in checklist check/skip
-- **Status:** FIXED
-- **File:** `skills/quest/engine/checklist.md`
-- **What changed:** Renumbered `check` steps sequentially 1-9 and `skip` steps sequentially 1-9. No more duplicate step 3.
-- **Deviation from suggestion:** None
+### Fix for Issue 1.4 — Convenção de nomes inconsistente
+- **Status:** ✅ FIXED
+- **File:** `engine/fixture-factory.md`
+- **What changed:** Corrigido o template de next-step.md inicial para usar `scenario-001.md` (consistente com o padrão {N}). Adicionada seção "Naming convention" documentando o padrão completo: IDs `S-001`, arquivos `scenario-001.md`, `result-001.md`, `analysis-001.md`, com nota de que `{N}` em templates = número zero-padded.
+- **Deviation from suggestion:** Documentação da convenção adicionada diretamente no fixture-factory como referência canônica.
 
-### Fix for Issue 1.5 — `var` instead of `const` for validThemes
-- **Status:** FIXED
-- **File:** `skills/quest/dashboard/server.js`
-- **What changed:** Changed `var validThemes` to `const validThemes` on line 474.
-- **Deviation from suggestion:** None
+### Fix for Issue 1.5 — Violação do Artigo VII (pt-BR sem acentuação)
+- **Status:** ✅ FIXED
+- **Files:** Todos os 7 arquivos com texto pt-BR (fixture-templates.md não tinha texto pt-BR)
+- **What changed:** Corrigidas 50+ ocorrências de palavras sem acento em todos os arquivos. Principais: não, cenário, seção, Ação, próximo, você, está, rápido, número, variações, observações, recomendações, critérios, módulo, descrição, execução, preparação, técnico, acessível, relatório, opções, histórico, contingência, padrões, funções, ações, fictício, comunicação. Verificação final com grep confirmou 0 ocorrências restantes.
+- **Deviation from suggestion:** None — fix sistemático com verificação exaustiva.
 
-### Fix for Issue 1.6 — Celebration templates duplicated between modules
-- **Status:** FIXED
-- **File:** `skills/quest/engine/xp-system.md`
-- **What changed:** Replaced the entire section 8 (4 template blocks) with a short pointer to `guide.md` section 4. Now xp-system.md provides calculation data only; guide.md owns all visual rendering.
-- **Deviation from suggestion:** None
-
-### Fix for Issue 1.7 — `endpoint` integration check type not implemented
-- **Status:** FIXED
-- **File:** `skills/quest/engine/guide.md`
-- **What changed:** Marked the `endpoint` type as P1 in the supported types table. Added a new subsection with a graceful fallback: if a pack uses `endpoint` type, show a warning and skip the check (treat as passed) instead of failing silently.
-- **Deviation from suggestion:** Used graceful fallback instead of full implementation, since no pack currently uses this type.
-
-### Fix for Issue 1.8 — Duplicate items between phases 5 and 6
-- **Status:** FIXED
-- **File:** `skills/quest/packs/app-development.yaml`
-- **What changed:** Differentiated 6.6 from 5.3: 6.6 is now "Certificacao de seguranca final" (post-review validation that fixes didn't introduce new vulnerabilities). Differentiated 6.7 from 5.4: 6.7 is now "Refactoring de integracao" (focuses on interfaces between modules).
-- **Deviation from suggestion:** Differentiated rather than removed — both serve a distinct purpose in the review flow.
-
-### Fix for Issue 1.9 — `sub_quests` key not in pack schema
-- **Status:** FIXED
-- **File:** `skills/quest/packs/squad-upgrade.yaml`
-- **What changed:** Updated the comment from `# P1` to `# P1 — not yet implemented, ignored by engine` to make it explicit that this key is planned but currently inactive.
-- **Deviation from suggestion:** Kept the key (it represents planned functionality) with explicit documentation.
-
-### Fix for Issue 1.10 — pt-BR quality violations in checklist.md
-- **Status:** FIXED
-- **File:** `skills/quest/engine/checklist.md`
-- **What changed:** Fixed all pt-BR accent violations: "nao" → "nao", "ja esta" → "ja esta" in check/skip error messages, phase lock guard messages ("esta trancado" → "esta trancado", "missoes obrigatorias" → "missoes obrigatorias", "Proxima missao" → "Proxima missao"), and edge case messages.
-- **Deviation from suggestion:** Fixed additional pt-BR issues beyond what was listed (phase lock guard messages).
-
-### Fix for Issue 1.11 — `argument-hint` lists `start` but no routing
-- **Status:** FIXED
-- **File:** `skills/quest/SKILL.md`
-- **What changed:** Removed `[start]` from argument-hint. Now reads: `"check <id> | skip <id> | scan | status"`.
-- **Deviation from suggestion:** None
-
-### Fix for Issue 1.12 — `requires` field in design-system-forge not in schema
-- **Status:** FIXED
-- **File:** `skills/quest/packs/design-system-forge.yaml`
-- **What changed:** Removed the `requires: aios` line. The prerequisites gate already handles this check via `detection.prerequisites`.
-- **Deviation from suggestion:** None
+### Fix for Issue 1.6 — Paths hardcoded ~/aios-core
+- **Status:** ✅ FIXED
+- **Files:** `engine/recon.md`, `engine/report.md`, `engine/scenario-engine.md`, `SKILL.md`
+- **What changed:** (1) recon.md: adicionado `REPO_ROOT=$(git rev-parse --show-toplevel)` e substituídos os 3 paths de busca. (2) report.md: substituído `~/aios-core/.aios/stress-test/reports/` por `${REPO_ROOT}/skills/skill-stress-test/reports/`. (3) scenario-engine.md Codex handoff: substituído path absoluto por relativo ao repo root. (4) SKILL.md: atualizada referência ao report path.
+- **Deviation from suggestion:** Usado `skills/skill-stress-test/reports/` em vez de `.aios/` como destino dos reports (mais consistente com a estrutura do repo).
 
 ---
 
-## Skipped Issues
+## ⚠️ Skipped Issues
 
-> No issues were skipped.
+Nenhuma issue foi ignorada. Todas as 6 foram corrigidas.
 
 ---
 
 ## Additional Improvements
 
-- None — kept changes strictly to the 12 reported issues.
+- Corrigido path hardcoded no Codex handoff do scenario-engine.md (não listado na review original mas mesmo tipo do issue 1.6)
 
 ---
 
-## Quality Checks
+## 🧪 Quality Checks
 
 | Check | Result | Notes |
 |-------|--------|-------|
-| `npm run lint` | N/A | Quest skill is markdown + YAML + standalone server.js (no project-wide lint) |
-| `npm run typecheck` | N/A | No TypeScript in quest skill |
-| `npm test` | N/A | Quest skill contract tests are in aios-core root; changes are documentation/config only |
+| `npm run lint` | N/A | Skill é markdown puro, sem código executável |
+| `npm run typecheck` | N/A | Skill é markdown puro |
+| `npm test` | N/A | Skill é markdown puro |
 
 ---
 
-## Summary
+## 📊 Summary
 
-- **Issues fixed:** 12 of 12
-- **Issues skipped:** 0
-- **Quality checks:** N/A (changes are markdown docs, YAML configs, and one `var→const` in JS)
+- **Issues fixed:** ✅ 6 of 6
+- **Issues skipped:** ⚠️ 0
+- **Quality checks:** N/A (markdown-only skill)
 - **Next action:** Request reviewer to run REVIEW for round 2

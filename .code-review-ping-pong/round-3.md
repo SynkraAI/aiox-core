@@ -2,98 +2,87 @@
 protocol: code-review-ping-pong
 type: review
 round: 3
-date: "2026-03-28"
+date: "2026-04-08"
 reviewer: "Codex"
-commit_sha: "a2de26ad3"
+commit_sha: "3a7eac1ab"
 branch: "chore/devops-10-improvements"
-based_on_fix: null
+based_on_fix: "round-2-fixed.md"
 files_in_scope:
-  - "skills/quest/SKILL.md"
-  - "skills/quest/engine/guide.md"
-  - "skills/quest/engine/xp-system.md"
-  - "skills/quest/engine/ceremony.md"
-  - "skills/quest/engine/checklist.md"
-  - "skills/quest/engine/scanner.md"
-  - "skills/quest/dashboard/server.js"
-  - "skills/quest/packs/app-development.yaml"
-  - "skills/quest/packs/squad-upgrade.yaml"
-  - "skills/quest/packs/design-system-forge.yaml"
-score: 9
+  - "skills/skill-stress-test/SKILL.md"
+  - "skills/skill-stress-test/engine/recon.md"
+  - "skills/skill-stress-test/engine/scenario-engine.md"
+  - "skills/skill-stress-test/engine/output-analyzer.md"
+  - "skills/skill-stress-test/engine/fixture-factory.md"
+  - "skills/skill-stress-test/engine/report.md"
+  - "skills/skill-stress-test/references/chaos-catalog.md"
+  - "skills/skill-stress-test/references/fixture-templates.md"
+score: 8
 verdict: "CONTINUE"
 issues:
   - id: "3.1"
-    severity: "HIGH"
-    title: "Mission card fallback points to phase.tagline that no pack defines"
-    file: "skills/quest/engine/guide.md"
-    line: 264
-    suggestion: "Change the fallback to a field that exists (`phase.description` or `pack.tagline`), or add `phase.tagline` to every pack and schema."
-  - id: "3.2"
     severity: "MEDIUM"
-    title: "Scanner schema still does not validate required fields for phase items"
-    file: "skills/quest/engine/scanner.md"
-    line: 61
-    suggestion: "Document and validate required item fields such as `id`, `label`, `command`, `who`, `required`, and `xp` before evaluating packs."
-  - id: "3.3"
+    title: "SKILL.md ficou defasado em relação ao contrato novo de `incompatible` e `SKIP`"
+    file: "skills/skill-stress-test/SKILL.md"
+    line: "151"
+    suggestion: "Atualizar o fluxo principal da skill para refletir `status: incompatible`, o veredito `SKIP` e a convenção zero-padded já adotada nos módulos."
+  - id: "3.2"
     severity: "LOW"
-    title: "Guide documentation for item.who does not match values used by packs"
-    file: "skills/quest/engine/guide.md"
-    line: 282
-    suggestion: "Update the contract to include `skill`, `squad`, and `agente`, or normalize `who` before rendering the mission card."
+    title: "Há inconsistência residual entre `SKIP` e `SKIPPED` no vocabulário do protocolo"
+    file: "skills/skill-stress-test/engine/report.md"
+    line: "272"
+    suggestion: "Escolher uma forma única para o veredito e para o rótulo exibido no relatório, usando o mesmo termo em analyzer, skill e report."
 ---
 
 # Code Ping-Pong — Round 3 Review
 
-## Score: 9/10 — CONTINUE
+## 🎯 Score: 8/10 — CONTINUE
 
 ## Issues
 
-### HIGH
+### 🟡 MEDIUM
 
-#### Issue 3.1 — Mission card fallback points to `phase.tagline` that no pack defines
-- **File:** `skills/quest/engine/guide.md`
-- **Line:** 264
+#### Issue 3.1 — SKILL.md ficou defasado em relação ao contrato novo de `incompatible` e `SKIP`
+- **File:** `skills/skill-stress-test/SKILL.md`
+- **Line:** 151
 - **Code:**
-  ```markdown
-  DICA: {item.tip || phase.tagline}
-  ```
-- **Problem:** The mission card relies on `phase.tagline` whenever an item has no `tip`, but none of the quest packs define `tagline` at phase level. All three packs only define `pack.tagline`. A quick scan of the current YAMLs shows zero `tip:` entries and zero `phase.tagline` fields, so this fallback path is broken for effectively every mission card and can render `undefined` or an empty hint right in the main UX.
-- **Suggestion:** Use an existing field as the fallback, such as `phase.description` or `pack.tagline`, or add `phase.tagline` to every phase and document it in the pack schema.
+```yaml
+status: completed  # ou crashed | hung | partial
+```
+- **Problem:** Os fixes do round 2 corrigiram bem o pipeline interno: [output-analyzer.md](/Users/luizfosc/aios-core/skills/skill-stress-test/engine/output-analyzer.md#L32) agora aceita `incompatible`, converte esse caso para `SKIP`, e [report.md](/Users/luizfosc/aios-core/skills/skill-stress-test/engine/report.md#L67) documenta como ele entra no relatório. O problema é que o `SKILL.md`, que é a instrução principal da skill, ainda descreve o contrato antigo. Em [SKILL.md](/Users/luizfosc/aios-core/skills/skill-stress-test/SKILL.md#L151) o status permitido continua sem `incompatible`, em [SKILL.md](/Users/luizfosc/aios-core/skills/skill-stress-test/SKILL.md#L177) o veredito continua `PASS | WARN | FAIL | CRITICAL`, e a skill também não recebeu a note de convenção zero-padded que os módulos internos já usam. Isso não quebra o engine em si, mas mantém a documentação operacional inconsistente com o comportamento real.
+- **Suggestion:**
+```md
+No `SKILL.md`, alinhar o fluxo com os módulos:
+- adicionar `incompatible` ao exemplo de `result-{N}.md`
+- incluir `SKIP` entre os vereditos possíveis
+- explicar que `{N}` em nomes de arquivo significa número zero-padded de 3 dígitos
+```
 
-### MEDIUM
+### 🟢 LOW
 
-#### Issue 3.2 — Scanner schema still does not validate required fields for phase items
-- **File:** `skills/quest/engine/scanner.md`
-- **Line:** 61
+#### Issue 3.2 — Há inconsistência residual entre `SKIP` e `SKIPPED` no vocabulário do protocolo
+- **File:** `skills/skill-stress-test/engine/report.md`
+- **Line:** 272
 - **Code:**
-  ```yaml
-  phases: {}           # REQUIRED (map keyed by phase index: 0, 1, 2, ...)
-    # Each phase (keyed by index) supports:
-    #   ...
-    #   items: [] (REQUIRED — array of item objects within the phase)
-  ```
-- **Problem:** The schema validation stops at “items is an array” and never defines what each item must contain. That leaves the engine open to accepting a pack where an item is missing `command`, `who`, `xp`, or even `id`, even though `guide.md`, `checklist.md`, and `xp-system.md` all assume those fields exist. The current packs happen to be well-formed, but the validator contract is still underspecified at the exact boundary that protects the modular engine from bad pack data.
-- **Suggestion:** Extend section 3.2 so item objects explicitly require `id`, `label`, `command`, `who`, `required`, and `xp`, with optional fields like `tip`, `condition`, and `scan_rule`.
+```md
+- If a scenario was skipped, mark as SKIPPED (not PASS)
+```
+- **Problem:** O `output-analyzer` passou a usar `SKIP` como veredito formal em [output-analyzer.md](/Users/luizfosc/aios-core/skills/skill-stress-test/engine/output-analyzer.md#L159), mas o `report.md` ainda fala em `SKIPPED` na regra de qualidade, enquanto o `session.yaml` contabiliza `skipped`. Isso é pequeno, mas ainda deixa três rótulos diferentes para o mesmo conceito. Em ciclos longos, esse tipo de drift reaparece em templates e automações.
+- **Suggestion:**
+```md
+Padronizar o termo final entre módulos, por exemplo:
+- verdict: `SKIP`
+- contador: `skipped`
+- texto descritivo: "skipped"
+```
 
-### LOW
+## ⚠️ Regressions
+- None
 
-#### Issue 3.3 — Guide documentation for `item.who` does not match values used by packs
-- **File:** `skills/quest/engine/guide.md`
-- **Line:** 282
-- **Code:**
-  ```markdown
-  | `item.who` | Pack item who — "user", "@agent-name", or "skill-name" |
-  ```
-- **Problem:** The guide says `item.who` is either `"user"`, `"@agent-name"`, or `"skill-name"`, but the actual packs also use raw values like `"skill"`, `"squad"`, and `"agente"`. The mission card prints `{item.who}` directly, so this is not just internal metadata drift; it is a user-facing contract that no longer matches the data being rendered.
-- **Suggestion:** Update the documented allowed values to match the current packs, or introduce a normalization layer so the UI shows consistent labels instead of raw internal categories.
+## ✅ What Is Good
+- O fluxo novo de `incompatible` agora fecha entre `scenario-engine`, `output-analyzer`, `session.yaml` e `report.md`, o que resolve o bug estrutural mais sério do round anterior.
+- A correção de pt-BR e do frontmatter em [SKILL.md](/Users/luizfosc/aios-core/skills/skill-stress-test/SKILL.md#L1) está ok; o arquivo voltou a estar válido e com os resíduos principais corrigidos.
+- A convenção zero-padded foi explicitada onde importa operacionalmente nos módulos de geração, análise e relatório, o que reduz bastante a ambiguidade do round 2.
 
-## Regressions
-- None. The round-2 findings were addressed in the current tree: `@ux-design-expert` is now used consistently, `sub_quests` is documented in the schema, the pt-BR copy fixes are in place, and the differentiated world-6 audit/refactor missions remain intact.
-
-## What Is Good
-- The quest contract suite is still passing end to end. `tests/quest/quest-contracts.test.js` remains a useful regression net and passed cleanly on the current tree.
-- The scanner, checklist, and XP modules are much more coherent than in round 1. The earlier fixes for glob-aware scanning, pack switching, migration flow, and XP ordering held up.
-- The `design-system-forge` and `app-development` packs are in better shape after the last fixes. The previous shortcut mismatch and duplicated missions are no longer present.
-
-## Summary
-- Total: 3, CRITICAL: 0, HIGH: 1, MEDIUM: 1, LOW: 1
+## 📊 Summary
+- Total: 2, 🔴 CRITICAL: 0, 🟠 HIGH: 0, 🟡 MEDIUM: 1, 🟢 LOW: 1
 - Regressions: none

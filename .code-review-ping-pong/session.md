@@ -2,23 +2,22 @@
 
 ## Scope
 - files:
-  - skills/quest/SKILL.md
-  - skills/quest/engine/guide.md
-  - skills/quest/engine/xp-system.md
-  - skills/quest/engine/ceremony.md
-  - skills/quest/engine/checklist.md
-  - skills/quest/engine/scanner.md
-  - skills/quest/dashboard/server.js
-  - skills/quest/packs/app-development.yaml
-  - skills/quest/packs/squad-upgrade.yaml
-  - skills/quest/packs/design-system-forge.yaml
+  - skills/skill-stress-test/SKILL.md
+  - skills/skill-stress-test/engine/recon.md
+  - skills/skill-stress-test/engine/scenario-engine.md
+  - skills/skill-stress-test/engine/output-analyzer.md
+  - skills/skill-stress-test/engine/fixture-factory.md
+  - skills/skill-stress-test/engine/report.md
+  - skills/skill-stress-test/references/chaos-catalog.md
+  - skills/skill-stress-test/references/fixture-templates.md
 
 ## Goals
-- Auditoria completa da skill Quest
-- Encontrar bugs, inconsistências entre módulos, e gaps no schema
-- Verificar qualidade do código do dashboard server
-- Validar consistência entre packs e engine modules
+- Auditoria completa da skill stress-test
+- Encontrar bugs, inconsistencias entre modulos, e gaps no schema
+- Verificar consistencia entre engine modules e SKILL.md
+- Validar qualidade das instrucoes para Terminal 2 (handoff blocks)
+- Verificar pt-BR quality (acentuacao)
 
 ## Constraints
-- Não modificar dashboard/public/ (HTML/CSS/assets)
-- Foco em lógica, consistência e correctness
+- Foco em logica, consistencia e correctness
+- Nao modificar a arquitetura geral da skill

@@ -2,22 +2,15 @@
 protocol: code-review-ping-pong
 type: review
 round: 5
-date: "2026-03-28"
+date: "2026-04-08"
 reviewer: "Codex"
-commit_sha: "a2de26ad3"
+commit_sha: "40b63abc8"
 branch: "chore/devops-10-improvements"
 based_on_fix: null
 files_in_scope:
-  - "skills/quest/SKILL.md"
-  - "skills/quest/engine/guide.md"
+  - ".code-review-ping-pong/session.md"
+  - ".code-review-ping-pong/round-4.md"
   - "skills/quest/engine/xp-system.md"
-  - "skills/quest/engine/ceremony.md"
-  - "skills/quest/engine/checklist.md"
-  - "skills/quest/engine/scanner.md"
-  - "skills/quest/dashboard/server.js"
-  - "skills/quest/packs/app-development.yaml"
-  - "skills/quest/packs/squad-upgrade.yaml"
-  - "skills/quest/packs/design-system-forge.yaml"
   - "tests/quest/quest-contracts.test.js"
   - "docs/stories/active/quest-contract-tests.story.md"
 score: 8
@@ -25,64 +18,51 @@ verdict: "CONTINUE"
 issues:
   - id: "5.1"
     severity: "HIGH"
-    title: "Manual check/skip flow bypasses the Integration Gate"
-    file: "skills/quest/engine/checklist.md"
-    line: 184
-    suggestion: "Make the phase lock guard delegate to the same unlock predicate as guide.md, including Integration Gate failure."
+    title: "XP contract drift broke the quest regression suite"
+    file: "skills/quest/engine/xp-system.md"
+    line: 16
+    suggestion: "Restore the canonical `base_item_xp` contract name or update every dependent test/story/document in the same change."
   - id: "5.2"
-    severity: "HIGH"
-    title: "Detected items have no executable promotion path after a phase unlocks"
-    file: "skills/quest/engine/guide.md"
-    line: 45
-    suggestion: "Promote unlocked `detected` items to `done` before next-mission selection and stats recomputation, or treat them as actionable until promotion happens."
-  - id: "5.3"
     severity: "MEDIUM"
-    title: "Registry watcher is re-registered on every change without closing the previous one"
-    file: "skills/quest/dashboard/server.js"
-    line: 425
-    suggestion: "Keep a single registry watcher handle and close or reuse it before calling `watchRegistry()` again."
+    title: "Round 4's PERFECT verdict is not valid for the current declared review scope"
+    file: ".code-review-ping-pong/session.md"
+    line: 4
+    suggestion: "Align `session.md` with the files actually under review and rerun validation before declaring a PERFECT round."
 ---
 
 # Code Ping-Pong — Round 5 Review
 
-## Score: 8/10 — CONTINUE
+## 🎯 Score: 8/10 — CONTINUE
 
 ## Issues
 
-### HIGH
+### 🟠 HIGH
 
-#### Issue 5.1 — Manual check/skip flow bypasses the Integration Gate
-- **File:** `skills/quest/engine/checklist.md`
-- **Line:** 184
-- **Code:** `If that phase is LOCKED (i.e., the previous phase still has required: true items with status pending)`
-- **Problem:** The contract in `guide.md` says a phase unlock requires both completed required items and a successful Integration Gate check. The `check` and `skip` flows redefine "locked" as only "previous required items still pending", which means a user can manually mark items in the next phase as `done` or `skipped` even when `verify_phase_integration()` would still return `false`. That undermines the whole anti-bypass purpose of section 2.5.
-- **Suggestion:** Reuse `guide.md`'s `is_phase_unlocked()` logic for `check` and `skip`, or inline the Integration Gate requirement so later-phase manual actions stay blocked until integration actually passes.
+#### Issue 5.1 — XP contract drift broke the quest regression suite
+- **File:** `skills/quest/engine/xp-system.md`
+- **Line:** 16
+- **Code:** `## 2. Calculate \`total_base_xp\`` and `1. Calculate \`total_base_xp\` from completed items only`
+- **Problem:** Round 4 says the Quest XP ordering and regression net were still coherent, but the current tree no longer satisfies the active contract suite. `tests/quest/quest-contracts.test.js` still expects the canonical name `base_item_xp` from the active story, while `xp-system.md` was renamed to `total_base_xp` in both the main section and the execution-order section. The result is a hard regression: `npm test -- --runTestsByPath tests/quest/quest-contracts.test.js` now fails 3 assertions, so the "30/30 green" claim in round 4 is no longer defensible on `40b63abc8`.
+- **Suggestion:** Restore the canonical `base_item_xp` term everywhere, or intentionally migrate the contract by updating `xp-system.md`, `tests/quest/quest-contracts.test.js`, and `docs/stories/active/quest-contract-tests.story.md` together in one change.
 
-#### Issue 5.2 — Detected items have no executable promotion path after a phase unlocks
-- **File:** `skills/quest/engine/guide.md`
-- **Line:** 45
-- **Code:** `In the first unlocked phase that has pending items:`
-- **Problem:** `checklist.md` introduces a third state, `detected`, and promises those items are "automatically promoted" to `done` once the phase unlocks. But the live flow never says where that promotion actually happens, and the next-mission algorithm only looks for `pending` items. After a scan pre-detects work in a locked phase, those missions can fall out of the mission picker, remain excluded from XP/progress, and leave the quest in a contradictory state where work exists but is neither actionable nor counted.
-- **Suggestion:** Add an explicit promotion step in the unlock/resumption flow before mission selection and stat recomputation, or update the selection/stat contracts so `detected` is handled consistently until promotion occurs.
+### 🟡 MEDIUM
 
-### MEDIUM
+#### Issue 5.2 — Round 4's PERFECT verdict is not valid for the current declared review scope
+- **File:** `.code-review-ping-pong/session.md`
+- **Line:** 4
+- **Code:** `- files:` followed by `skills/skill-stress-test/...`
+- **Problem:** The current ping-pong session declares `skills/skill-stress-test/...` as the review scope, while the round-4 artifact marked `skills/quest/...` as `PERFECT`. That mismatch means the artifact the user asked me to validate is no longer traceable to the active session scope. Even if the Quest review had remained green, the process state is inconsistent: a "perfect" review for one module cannot be treated as evidence for a different declared scope.
+- **Suggestion:** Either update `.code-review-ping-pong/session.md` to the Quest scope before continuing this review chain, or treat the current session as a separate cycle and restart numbering from the stress-test scope.
 
-#### Issue 5.3 — Registry watcher is re-registered on every change without closing the previous one
-- **File:** `skills/quest/dashboard/server.js`
-- **Line:** 425
-- **Code:** `fs.watch(REGISTRY_DIR, { recursive: false }, ... watchRegistry(); )`
-- **Problem:** `watchRegistry()` installs an `fs.watch()` listener, and inside that listener it calls `watchRegistry()` again after reloading the registry. The previous registry watcher is never stored or closed, so every registry update adds another listener. Over time this causes duplicate reload/broadcast work and can exhaust file-watcher resources.
-- **Suggestion:** Store the registry watcher in a module-level variable and close or reuse it during reloads instead of recursively creating a new watcher each time.
+## ⚠️ Regressions
+- Yes. Relative to round 4's claim of `30/30` green tests, the current tree at `40b63abc8` fails `tests/quest/quest-contracts.test.js` with 3 red assertions tied to the XP naming contract.
+- The process scope also regressed: `.code-review-ping-pong/session.md` now points to `skill-stress-test`, so the old Quest-perfect verdict is not anchored to the active review declaration anymore.
 
-## Regressions
-- None from `round-3-fixed.md`. The prior documentation fixes are still present and the contract test suite still passes. The issues above are residual gaps that the current tests do not cover.
+## ✅ What Is Good
+- The underlying Quest design is still mostly coherent; the failing assertions are concentrated in naming/contract drift inside `xp-system.md`, not a broad cross-module collapse.
+- The regression net did its job: `tests/quest/quest-contracts.test.js` surfaced the drift immediately instead of letting the XP contract silently diverge.
+- The active story still provides a clear source of truth for what the Quest contract suite is supposed to guarantee.
 
-## What Is Good
-- The quest resumption contract is still coherent across `SKILL.md`, `checklist.md`, `ceremony.md`, and `guide.md`.
-- The pack boundary is materially stronger than in earlier rounds: prerequisites, expansion gating, and item schema expectations now line up with the YAML packs.
-- `xp-system.md` still documents the correct ordering for `base_item_xp`, `streak`, achievement evaluation, and final `total_xp`.
-- `tests/quest/quest-contracts.test.js` is still a useful regression net and passes cleanly on the reviewed tree.
-
-## Summary
-- Total: 3, CRITICAL: 0, HIGH: 2, MEDIUM: 1, LOW: 0
-- Regressions: none
+## 📊 Summary
+- Total: 2, 🔴 CRITICAL: 0, 🟠 HIGH: 1, 🟡 MEDIUM: 1, 🟢 LOW: 0
+- Regressions: 2
