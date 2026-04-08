@@ -13,6 +13,8 @@ simple to skill-breaking, then presents them as structured ping-pong files.
 
 ## Output
 
+> **Convention:** `{N}` in all file names means a zero-padded 3-digit number: `001`, `002`, etc.
+
 - `scenario-{N}.md` written to `.stress-test/`
 - `next-step.md` updated
 - Handoff block displayed to user
@@ -79,7 +81,7 @@ Test boundary conditions that real users encounter.
 - **Pass:** Skill asks for input or uses sensible default
 
 #### S-T3-002: Unicode Input
-- **Action:** Invoke skill with accented text: `/skill "aplicacao com funcoes avancadas"`
+- **Action:** Invoke skill with accented text: `/skill "aplicação com funções avançadas"`
 - **Pass:** Unicode handled correctly in files and output
 
 #### S-T3-003: Idempotency
@@ -219,9 +221,9 @@ Then markdown body with sections:
 ### Setup
 Step-by-step instructions to prepare the fixture for this scenario.
 Include exact bash commands for mutations (file deletion, corruption, etc.).
-If no setup needed: "Nenhuma preparacao necessaria."
+If no setup needed: "Nenhuma preparação necessária."
 
-### Acao
+### Ação
 Exact command or prompt to execute. Be specific:
 - For Claude Code: `/skill-name "argument"` or the full slash command
 - For Codex: Full prompt text to paste, including instruction to read SKILL.md
@@ -232,10 +234,10 @@ Numbered checklist of things to look for in the output:
 2. Was Y created?
 3. Did Z appear in the output?
 
-### Criterios de PASS
+### Critérios de PASS
 Clear pass/fail criteria. One paragraph describing what constitutes success.
 
-### Criterios de FAIL
+### Critérios de FAIL
 What would constitute a failure. Include common failure modes from chaos-catalog.
 
 ---
@@ -250,25 +252,40 @@ Adapt the block based on runtime AND skill type:
 
 ### Self-Test Mode (for orchestrator/Skill-tool-based skills)
 
-If the skill profile has `skill_type: orchestrator` or `category: orchestration`, the skill depends on the Skill tool and CANNOT be executed via bash in Terminal 2. In this case:
+If the skill profile has `skill_type: orchestrator` or `category: orchestration`, the skill
+depends on the Skill tool and cannot be executed via a simple bash command in Terminal 2.
 
-1. **Do NOT emit a ping-pong handoff block**
-2. Execute the scenario in the SAME terminal using the Skill tool: `Skill(skill="{skill_name}", args="{args}")`
-3. Capture the output directly
-4. Write `result-{N}.md` yourself
-5. Proceed to analysis immediately (no waiting for Terminal 2)
+#### Runtime-specific behavior:
 
-This mode is required for skills like: forge, quest, content-forge, god-mode, and any skill that dispatches agents via Agent tool or uses Skill tool internally.
+**Claude Code (has Skill tool):**
+1. Execute the scenario in the SAME terminal using the Skill tool: `Skill(skill="{skill_name}", args="{args}")`
+2. Capture the output directly
+3. Write `result-{N}.md` yourself
+4. Proceed to analysis immediately (no waiting for Terminal 2)
+
+**Codex (no Skill tool):**
+1. Emit a handoff block with a self-contained prompt that reads the skill's SKILL.md
+2. The prompt must instruct Codex to follow the skill instructions as if the user typed the command
+3. If the skill fundamentally requires the Skill tool (e.g., it calls `Agent(...)` internally), mark the scenario as `INCOMPATIBLE` with reason: "Skill requires Skill/Agent tool unavailable in Codex"
+4. Write `result-{N}.md` with `status: incompatible` and document the structural gap
+
+**When to mark INCOMPATIBLE vs attempt execution:**
+- Skills that only READ files and WRITE output → attempt in Codex via prompt
+- Skills that call `Agent(...)` or `Skill(...)` internally → mark INCOMPATIBLE
+- Skills that use MCP servers → mark INCOMPATIBLE with specific MCP listed
+
+This mode applies to skills like: forge, quest, content-forge, god-mode, and any skill
+that dispatches agents via Agent tool or uses Skill tool internally.
 
 ### Claude Code handoff (for non-orchestrator skills)
 ```
-Voce e um executor de stress test para a skill "{skill_name}".
+Você é um executor de stress test para a skill "{skill_name}".
 
-1. Leia o cenario em {fixture_path}/.stress-test/scenario-{N}.md
-2. Execute a secao "Setup" (comandos bash se houver)
-3. Execute EXATAMENTE o comando da secao "Acao"
-   IMPORTANTE: Se o comando comecar com "/" (slash command), use a Skill tool
-   do Claude Code ao inves de rodar como bash. Exemplo:
+1. Leia o cenário em {fixture_path}/.stress-test/scenario-{N}.md
+2. Execute a seção "Setup" (comandos bash se houver)
+3. Execute EXATAMENTE o comando da seção "Ação"
+   IMPORTANTE: Se o comando começar com "/" (slash command), use a Skill tool
+   do Claude Code ao invés de rodar como bash. Exemplo:
    /forge help → Skill(skill="forge", args="help")
 4. Capture o output completo
 5. Liste arquivos criados/modificados
@@ -277,15 +294,15 @@ Voce e um executor de stress test para a skill "{skill_name}".
 
 ### Codex handoff
 ```
-Voce e um executor de stress test. Contexto:
-- Diretorio de trabalho: {fixture_path}
+Você é um executor de stress test. Contexto:
+- Diretório de trabalho: {fixture_path}
 - Skill sendo testada: {skill_name}
-- Skill file: ~/aios-core/skills/{skill_name}/SKILL.md
+- Skill file: skills/{skill_name}/SKILL.md (relativo ao repo root)
 
 1. Leia {fixture_path}/.stress-test/scenario-{N}.md
-2. Execute a secao "Setup"
+2. Execute a seção "Setup"
 3. Leia o SKILL.md da skill alvo
-4. Siga as instrucoes da skill como se o usuario tivesse digitado
-   o comando da secao "Acao"
+4. Siga as instruções da skill como se o usuário tivesse digitado
+   o comando da seção "Ação"
 5. Documente TUDO em {fixture_path}/.stress-test/result-{N}.md
 ```

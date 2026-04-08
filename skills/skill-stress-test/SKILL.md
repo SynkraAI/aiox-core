@@ -63,6 +63,9 @@ REFS_DIR: ${SKILL_DIR}/references
 COMM_DIR: .stress-test  # relative to fixture path
 ```
 
+> **Convention:** `{N}` in all file names (scenario, result, analysis) means a zero-padded
+> 3-digit number: `001`, `002`, etc. Example: `scenario-001.md`, `result-003.md`.
+
 ## Command Routing
 
 | Input | Action |
@@ -148,7 +151,7 @@ Você é um executor de stress test para a skill "{skill_name}".
 scenario_id: S-{N}
 runtime: {runtime}
 executed_at: "{timestamp}"
-status: completed  # ou crashed | hung | partial
+status: completed  # ou crashed | hung | partial | incompatible
 ---
 
 ## Output
@@ -174,7 +177,7 @@ NÃO invente resultados. Se a skill crashar, documente o erro exato.
 2. If file doesn't exist: warn user — "Terminal 2 ainda não executou. result-{N}.md não encontrado."
 3. Load `engine/output-analyzer.md` analysis rules
 4. Evaluate against scenario pass criteria
-5. Determine verdict: PASS | WARN | FAIL | CRITICAL
+5. Determine verdict: PASS | WARN | FAIL | CRITICAL | SKIP
 6. Write `analysis-{N}.md` with verdict, root cause, fix, contingency
 7. Update `session.yaml` totals
 8. Show verdict to user with emoji indicator:
@@ -182,6 +185,7 @@ NÃO invente resultados. Se a skill crashar, documente o erro exato.
    - WARN: "WARN — {brief reason}"
    - FAIL: "FAIL — {root cause}. Fix: {suggestion}"
    - CRITICAL: "CRITICAL — {root cause}. BLOCKER: {impact}"
+   - SKIP: "SKIP — incompatibilidade estrutural de runtime. {reason}"
 
 #### 3c. Runtime Rotation
 
@@ -192,7 +196,7 @@ After analyzing for one runtime, check if the other runtime needs testing:
 #### 3d. Advance
 
 1. If more scenarios remain: go to 3a with next scenario
-2. If user says "pular" / "skip": mark as SKIPPED, advance
+2. If user says "pular" / "skip": mark verdict as SKIP, advance
 3. If user says "parar" / "stop" / "report": go to Phase 4
 4. If all scenarios done: go to Phase 4
 

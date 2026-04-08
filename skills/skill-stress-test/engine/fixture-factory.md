@@ -47,16 +47,42 @@ Load `references/fixture-templates.md` and create files based on archetype.
 For each file in the template:
 1. Create parent directories if needed
 2. Write file contents exactly as specified in template
-3. For `brownfield`: also initialize git and create commit history
+3. For `brownfield`: apply the full materialization sequence below
+
+#### Brownfield Materialization (MANDATORY for `brownfield` archetype)
 
 ```bash
-# Example for brownfield
 cd "$FIXTURE_PATH"
+
+# 1. Start from node-minimal base
+# (files already created in step 2)
+
+# 2. Apply brownfield overrides to package.json
+# Merge the "scripts" and "devDependencies" overrides from fixture-templates.md
+# into the existing node-minimal package.json
+
+# 3. Create additional brownfield files
+# - tests/index.test.js
+# - src/utils.js
+# - .gitignore
+
+# 4. Install dependencies so npm test actually works
+npm install
+
+# 5. Initialize git with the 5-commit history
 git init
 git config user.email "stress-test@fixture.local"
 git config user.name "Stress Test"
-# Create files and commits as specified in fixture-templates.md
+git add README.md && git commit -m "docs: initial readme"
+git add package.json && git commit -m "chore: add package.json"
+git add src/index.js && git commit -m "feat: add entry point with greet function"
+git add src/utils.js && git commit -m "feat: add utility functions"
+git add tests/ .gitignore && git commit -m "test: add initial test suite"
 ```
+
+**Important:** The brownfield fixture MUST have `jest` installed and `npm test` working.
+If `npm install` fails (e.g., no network), fall back to overriding the test script with
+`"test": "echo 'no tests yet' && exit 0"` and log a warning.
 
 ### Step 4: Create Communication Directory
 
@@ -84,18 +110,20 @@ scenarios_generated: 0
 results: {}
 
 totals:
-  claude_code:
+  claude-code:
     pass: 0
     warn: 0
     fail: 0
     critical: 0
     skipped: 0
+    incompatible: 0
   codex:
     pass: 0
     warn: 0
     fail: 0
     critical: 0
     skipped: 0
+    incompatible: 0
 ```
 
 ### Step 6: Initialize next-step.md
@@ -110,9 +138,16 @@ scenario: S-001
 expected_artifact: scenario-001.md
 ---
 
-## Proxima Acao
-Stress test pronto. Gerando primeiro cenario...
+## Próxima Ação
+Stress test pronto. Gerando primeiro cenário...
 ```
+
+**Naming convention (MUST follow in ALL modules):**
+- Logical IDs: `S-001`, `S-002`, ... `S-NNN` (zero-padded to 3 digits)
+- Scenario files: `scenario-001.md`, `scenario-002.md`
+- Result files: `result-001.md`, `result-002.md`
+- Analysis files: `analysis-001.md`, `analysis-002.md`
+- In templates, `{N}` means the zero-padded number: `001`, `002`, etc.
 
 ### Step 7: Copy Skill Profile
 
@@ -125,9 +160,9 @@ Copy `skill-profile.yaml` into `.stress-test/` for reference by scenario engine.
 Path: {fixture_path}
 Tipo: {archetype}
 Arquivos: {file count}
-Comunicacao: {fixture_path}/.stress-test/
+Comunicação: {fixture_path}/.stress-test/
 
-Proximo passo: gerando cenarios...
+Próximo passo: gerando cenários...
 ```
 
 ## Chaos Fixture Variants

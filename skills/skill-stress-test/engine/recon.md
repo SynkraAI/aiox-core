@@ -14,11 +14,16 @@ Analyze any skill to build a complete profile for stress testing.
 
 ### Step 1: Locate the Skill
 
+Resolve the repository root first:
+```bash
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+```
+
 Search in this order:
-1. `~/aios-core/skills/{skill_name}/SKILL.md`
-2. `~/aios-core/squads/{skill_name}/README.md`
-3. Glob `~/aios-core/skills/*/SKILL.md` and grep for skill_name in description
-4. If not found: ABORT with error "Skill '{skill_name}' nao encontrada no ecossistema."
+1. `${REPO_ROOT}/skills/{skill_name}/SKILL.md`
+2. `${REPO_ROOT}/squads/{skill_name}/README.md`
+3. Glob `${REPO_ROOT}/skills/*/SKILL.md` and grep for skill_name in description
+4. If not found: ABORT with error "Skill '{skill_name}' não encontrada no ecossistema."
 
 ### Step 2: Parse SKILL.md
 
@@ -173,12 +178,12 @@ Path: {skill_path}
 Entry points: {count}
   {list first 5, "... e mais {N}" if > 5}
 
-Dependencias: {agents + skills + mcp count}
+Dependências: {agents + skills + mcp count}
   {list all}
 
 Riscos identificados: {count}
   {emoji per severity} {description} ({affected_module})
 
 Fixture recomendado: {archetype}
-Cenarios estimados: {quick} (rapido) / {full} (completo)
+Cenários estimados: {quick} (rápido) / {full} (completo)
 ```

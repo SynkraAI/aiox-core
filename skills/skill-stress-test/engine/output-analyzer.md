@@ -5,6 +5,8 @@ and produces `analysis-{N}.md` with verdict, root cause, and fix suggestions.
 
 ## Input
 
+> **Convention:** `{N}` in all file names means a zero-padded 3-digit number: `001`, `002`, etc.
+
 - `result-{N}.md` from `.stress-test/` (written by Terminal 2)
 - `scenario-{N}.md` from `.stress-test/` (reference for expected behavior)
 - `skill-profile.yaml` for context about the target skill
@@ -27,11 +29,11 @@ Read `result-{N}.md` and parse YAML frontmatter:
 scenario_id: S-{N}
 runtime: {claude-code|codex}
 executed_at: "{timestamp}"
-status: {completed|crashed|hung|partial}
+status: {completed|crashed|hung|partial|incompatible}
 ```
 
 If `result-{N}.md` doesn't exist:
-- Display: "result-{N}.md nao encontrado. Terminal 2 ja executou?"
+- Display: "result-{N}.md não encontrado. Terminal 2 já executou?"
 - ABORT analysis for this scenario
 
 If frontmatter is missing or malformed:
@@ -49,6 +51,7 @@ Based on `status` field:
 | `crashed` | Likely FAIL or CRITICAL — analyze error output |
 | `hung` | FAIL — skill didn't terminate |
 | `partial` | WARN or FAIL — skill stopped mid-execution |
+| `incompatible` | SKIP — structural gap documented, no code fix possible |
 
 ### Step 3: Output Pattern Analysis
 
@@ -92,7 +95,7 @@ Scan the "Output" section for known failure patterns:
 
 ### Step 4: Criteria Evaluation
 
-Read the scenario's "Criterios de PASS" and "O que observar" sections.
+Read the scenario's "Critérios de PASS" and "O que observar" sections.
 For each observation point:
 
 1. Search the result output for evidence of the expected behavior
@@ -143,8 +146,8 @@ When verdict is FAIL or CRITICAL:
 
 4. **Suggest contingency:** What can the user do RIGHT NOW to work around the issue
    ```
-   Contingencia: Garanta que package.json existe antes de rodar a skill.
-   Ou crie um package.json minimo com: echo '{"name":"fix"}' > package.json
+   Contingência: Garanta que package.json existe antes de rodar a skill.
+   Ou crie um package.json mínimo com: echo '{"name":"fix"}' > package.json
    ```
 
 ### Step 7: Write analysis-{N}.md
@@ -153,7 +156,7 @@ When verdict is FAIL or CRITICAL:
 ---
 scenario_id: S-{N}
 runtime: {runtime}
-verdict: {PASS|WARN|FAIL|CRITICAL}
+verdict: {PASS|WARN|FAIL|CRITICAL|SKIP}
 analyzed_at: "{ISO timestamp}"
 red_flags: {count}
 yellow_flags: {count}
@@ -164,23 +167,23 @@ criteria_met: {X}/{Y}
 
 {1-2 sentence summary of what happened}
 
-## Observacoes
+## Observações
 {numbered list matching scenario's "O que observar"}
 1. {observation}: {confirmed|not found|contradicted}
 2. ...
 
-## Padroes Detectados
+## Padrões Detectados
 {list of red/yellow flags found, if any}
 
 ## Root Cause (only if FAIL/CRITICAL)
-**Modulo:** {file path}
+**Módulo:** {file path}
 **Tipo:** {root cause classification}
-**Descricao:** {what went wrong and why}
+**Descrição:** {what went wrong and why}
 
 ## Fix Sugerido (only if FAIL/CRITICAL)
 {specific change with file path and description}
 
-## Contingencia (only if FAIL/CRITICAL)
+## Contingência (only if FAIL/CRITICAL)
 {workaround the user can apply immediately}
 ```
 
@@ -219,7 +222,7 @@ S-019 [codex] — CRITICAL — Input com metacaracteres executou comando shell.
 
 ### Result file is empty
 - Verdict: FAIL
-- Root cause: "Terminal 2 nao capturou output. Possivel crash silencioso."
+- Root cause: "Terminal 2 não capturou output. Possível crash silencioso."
 
 ### Result file describes an error but marks status as "completed"
 - Override status based on content analysis

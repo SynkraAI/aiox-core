@@ -5,6 +5,8 @@ compatibility matrix, prioritized fixes, and overall verdict.
 
 ## Input
 
+> **Convention:** `{N}` in all file names means a zero-padded 3-digit number: `001`, `002`, etc.
+
 - All `analysis-{N}.md` files from `.stress-test/`
 - `session.yaml` with totals
 - `skill-profile.yaml` for context
@@ -12,7 +14,7 @@ compatibility matrix, prioritized fixes, and overall verdict.
 ## Output
 
 - `.stress-test/report.md` — full report in the fixture
-- `.aios/stress-test/reports/{skill}-{date}.md` — historical copy in aios-core
+- `skills/skill-stress-test/reports/{skill}-{date}.md` — historical copy in repo
 
 ---
 
@@ -31,12 +33,13 @@ compatibility matrix, prioritized fixes, and overall verdict.
 total_scenarios: {count of unique scenario IDs}
 total_executions: {count of analysis files, including both runtimes}
 
-claude_code:
+claude-code:
   pass: {count}
   warn: {count}
   fail: {count}
   critical: {count}
   skipped: {count}
+  incompatible: {count}
   total: {sum}
 
 codex:
@@ -45,6 +48,7 @@ codex:
   fail: {count}
   critical: {count}
   skipped: {count}
+  incompatible: {count}
   total: {sum}
 
 highest_tier_reached: {1-5}
@@ -60,15 +64,18 @@ highest_tier_passed: {highest tier where all scenarios PASS or WARN}
 | Any CRITICAL, or > 3 FAIL | FRAGILE |
 | > 50% scenarios FAIL/CRITICAL | BROKEN |
 
+**Note:** `incompatible` scenarios are excluded from verdict calculation — they represent
+structural runtime gaps, not code quality issues. They ARE reported in the compatibility matrix.
+
 Apply verdict per runtime AND overall:
-- Overall = worst of (claude_code verdict, codex verdict)
+- Overall = worst of (claude-code verdict, codex verdict)
 
 ### Step 4: Build Compatibility Matrix
 
 For each scenario tested in both runtimes:
 
 ```
-| Cenario | Tier | Claude Code | Codex | Delta |
+| Cenário | Tier | Claude Code | Codex | Delta |
 |---------|------|-------------|-------|-------|
 ```
 
@@ -92,10 +99,10 @@ For each FAIL and CRITICAL analysis:
 
 Based on failure patterns, generate actionable recommendations:
 
-1. If many `missing-guard` failures: "Adicionar verificacao de existencia antes de ler arquivos"
-2. If `state-corruption` failures: "Implementar validacao de state + recovery automático"
+1. If many `missing-guard` failures: "Adicionar verificação de existência antes de ler arquivos"
+2. If `state-corruption` failures: "Implementar validação de state + recovery automático"
 3. If `runtime-dependency` failures: "Adicionar fallbacks para Codex (sem Agent tool)"
-4. If `no-error-handling`: "Wrap operacoes criticas em try/catch com mensagens claras"
+4. If `no-error-handling`: "Wrap operações críticas em try/catch com mensagens claras"
 5. If `context-overflow`: "Implementar lazy loading e limitar profundidade de scan"
 
 ### Step 7: Write Report
@@ -119,18 +126,18 @@ Write `.stress-test/report.md`:
 
 ### Resumo por Runtime
 
-| Runtime | PASS | WARN | FAIL | CRITICAL | Veredito |
-|---------|------|------|------|----------|----------|
-| Claude Code | {n} | {n} | {n} | {n} | {verdict} |
-| Codex | {n} | {n} | {n} | {n} | {verdict} |
-| **Total** | **{n}** | **{n}** | **{n}** | **{n}** | **{overall}** |
+| Runtime | PASS | WARN | FAIL | CRITICAL | INCOMPAT | Veredito |
+|---------|------|------|------|----------|----------|----------|
+| Claude Code | {n} | {n} | {n} | {n} | {n} | {verdict} |
+| Codex | {n} | {n} | {n} | {n} | {n} | {verdict} |
+| **Total** | **{n}** | **{n}** | **{n}** | **{n}** | **{n}** | **{overall}** |
 
 ### Progresso por Tier
 
-| Tier | Nome | Cenarios | PASS | WARN | FAIL | CRIT |
+| Tier | Nome | Cenários | PASS | WARN | FAIL | CRIT |
 |------|------|----------|------|------|------|------|
 | 1 | Happy Path | {n} | {n} | {n} | {n} | {n} |
-| 2 | Variacoes | {n} | {n} | {n} | {n} | {n} |
+| 2 | Variações | {n} | {n} | {n} | {n} | {n} |
 | 3 | Edge Cases | {n} | {n} | {n} | {n} | {n} |
 | 4 | Input Hostil | {n} | {n} | {n} | {n} | {n} |
 | 5 | Caos | {n} | {n} | {n} | {n} | {n} |
@@ -139,7 +146,7 @@ Write `.stress-test/report.md`:
 
 ## Matriz de Compatibilidade
 
-| Cenario | Tier | Titulo | Claude Code | Codex | Delta |
+| Cenário | Tier | Título | Claude Code | Codex | Delta |
 |---------|------|--------|-------------|-------|-------|
 | S-001 | 1 | {title} | {verdict} | {verdict} | {delta} |
 | S-002 | 1 | {title} | {verdict} | {verdict} | {delta} |
@@ -149,17 +156,17 @@ Write `.stress-test/report.md`:
 
 ## Falhas Detalhadas
 
-### P0 — Criticas
+### P0 — Críticas
 
 #### F-{N}: {title}
-- **Cenario:** S-{id} (Tier {tier})
+- **Cenário:** S-{id} (Tier {tier})
 - **Runtime(s):** {runtimes affected}
 - **O que aconteceu:** {description}
 - **Root cause:** {module} — {classification}
 - **Fix:** {specific suggestion}
-- **Contingencia:** {workaround}
+- **Contingência:** {workaround}
 
-### P1 — Funcionalidade Basica
+### P1 — Funcionalidade Básica
 
 #### F-{N}: {title}
 ...
@@ -176,9 +183,9 @@ Write `.stress-test/report.md`:
 
 ---
 
-## Recomendacoes
+## Recomendações
 
-Acoes priorizadas para melhorar a resiliencia da skill:
+Ações priorizadas para melhorar a resiliência da skill:
 
 1. **[P0]** {recommendation}
 2. **[P1]** {recommendation}
@@ -187,7 +194,7 @@ Acoes priorizadas para melhorar a resiliencia da skill:
 
 ---
 
-## Observacoes sobre Runtimes
+## Observações sobre Runtimes
 
 ### Claude Code
 {summary of CC-specific findings}
@@ -215,9 +222,11 @@ rm -rf {fixture_path}
 ### Step 8: Copy to History
 
 ```bash
-mkdir -p ~/aios-core/.aios/stress-test/reports/
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+REPORT_DIR="${REPO_ROOT}/skills/skill-stress-test/reports"
+mkdir -p "$REPORT_DIR"
 cp {fixture_path}/.stress-test/report.md \
-   ~/aios-core/.aios/stress-test/reports/{skill_name}-{YYYY-MM-DD}.md
+   "${REPORT_DIR}/{skill_name}-{YYYY-MM-DD}.md"
 ```
 
 ### Step 9: Display Summary
@@ -238,13 +247,13 @@ Top Issues:
 3. [P2] {third finding}
 
 Full report: {fixture_path}/.stress-test/report.md
-Historico:   .aios/stress-test/reports/{skill}-{date}.md
+Histórico:   skills/skill-stress-test/reports/{skill}-{date}.md
 ```
 
 Then ask:
 ```
-Opcoes:
-1. Ver relatorio completo
+Opções:
+1. Ver relatório completo
 2. Aplicar fixes sugeridos (se houver FAIL/CRITICAL)
 3. Testar outra skill
 4. Encerrar
@@ -260,4 +269,4 @@ Opcoes:
 - ALWAYS provide actionable fixes, not vague suggestions
 - Recommendations should reference specific files and line numbers when possible
 - The compatibility matrix should only include scenarios tested in both runtimes
-- If a scenario was skipped, mark as SKIPPED (not PASS)
+- If a scenario was skipped, mark verdict as SKIP (not PASS)

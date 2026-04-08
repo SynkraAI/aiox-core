@@ -151,7 +151,7 @@ and what USUALLY happens (crash). Sorted by frequency of occurrence.
 - **Severity:** MEDIUM
 
 ### C6-002: Unicode / special characters
-- **Trigger:** Invoke skill with unicode: `/skill-name "app com acoes e funcoes"`
+- **Trigger:** Invoke skill with unicode: `/skill-name "app com ações e funções"`
 - **Expected:** Skill handles unicode correctly in file names and content
 - **Common failure:** Encoding errors, garbled file names
 - **Severity:** MEDIUM
