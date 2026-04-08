@@ -1,15 +1,16 @@
 /**
  * Fase 2: LLM-in-the-Loop Market Analyzer
  *
- * Uses Claude Haiku to analyze prediction markets with real reasoning.
- * Replaces the broken heuristic (price math) with actual intelligence.
+ * Supports THREE providers (auto-detected):
+ * 1. Ollama (local)  — free, qwen2.5:7b on GTX 1660 SUPER
+ * 2. vLLM (local)    — free, PolarQuant models (needs 8GB+ VRAM)
+ * 3. Claude API       — best quality, costs ~$3-8/day
  *
- * Architecture (UltraPlan v2):
- * - Pre-filter top 20 markets by volume + liquidity
- * - Claude analyzes each with structured output
- * - Tools: getOrderBook, getSimilarTrades, getMarketContext
- * - Calibration tracking: log every (LLM prob, actual outcome)
- * - Budget controller: hard cap on daily LLM spend
+ * Detection order:
+ * - LLM_PROVIDER=ollama|vllm|claude in env → forced
+ * - ANTHROPIC_API_KEY set → Claude
+ * - OLLAMA_HOST or localhost:11434 responds → Ollama
+ * - VLLM_HOST responds → vLLM
  */
 
 import Anthropic from '@anthropic-ai/sdk';
@@ -17,6 +18,8 @@ import { eventBus } from '../engine/event-bus.js';
 import type { PolymarketClient } from '../integrations/polymarket-client.js';
 import type { ExperienceStore } from '../learning/experience-store.js';
 import type { Market, TradeSignal, StrategyId } from '../types/index.js';
+
+type LLMProvider = 'claude' | 'ollama' | 'vllm' | 'none';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -34,35 +37,50 @@ export interface LLMAnalysis {
 }
 
 export interface AnalyzerConfig {
-  /** Anthropic API key */
+  /** Force a specific provider (auto-detect if empty) */
+  provider: LLMProvider | '';
+  /** Anthropic API key (for Claude) */
   apiKey: string;
-  /** Model to use (default: claude-haiku-4-5-20251001) */
-  model: string;
+  /** Claude model */
+  claudeModel: string;
+  /** Ollama host (default: http://localhost:11434) */
+  ollamaHost: string;
+  /** Ollama model (default: qwen2.5:7b) */
+  ollamaModel: string;
+  /** vLLM host (default: http://localhost:8000) */
+  vllmHost: string;
+  /** vLLM model (auto-detect from server) */
+  vllmModel: string;
   /** Max markets to analyze per scan */
   maxMarketsPerScan: number;
-  /** Daily budget in USD (hard cap) */
+  /** Daily budget in USD (only for Claude, local = unlimited) */
   dailyBudgetUsd: number;
-  /** Minimum volume to consider for LLM analysis */
+  /** Minimum volume for LLM analysis */
   minVolumeForAnalysis: number;
   /** Minimum liquidity */
   minLiquidityForAnalysis: number;
 }
 
 const DEFAULT_CONFIG: AnalyzerConfig = {
+  provider: '',
   apiKey: '',
-  model: 'claude-haiku-4-5-20251001',
+  claudeModel: 'claude-haiku-4-5-20251001',
+  ollamaHost: 'http://localhost:11434',
+  ollamaModel: 'qwen2.5:7b',
+  vllmHost: 'http://localhost:8000',
+  vllmModel: '',
   maxMarketsPerScan: 15,
   dailyBudgetUsd: 5.0,
   minVolumeForAnalysis: 5000,
   minLiquidityForAnalysis: 2000,
 };
 
-// Haiku pricing: $0.80/M input, $4/M output (approximate)
+// Haiku pricing (Claude only)
 const COST_PER_INPUT_TOKEN = 0.80 / 1_000_000;
 const COST_PER_OUTPUT_TOKEN = 4.0 / 1_000_000;
 
 // ---------------------------------------------------------------------------
-// Calibration Tracker (Fase 2.6)
+// Calibration Tracker
 // ---------------------------------------------------------------------------
 
 interface CalibrationEntry {
@@ -91,15 +109,11 @@ class CalibrationTracker {
 
     let totalPredicted = 0;
     let totalActual = 0;
-
     for (const entry of resolved) {
       totalPredicted += entry.llmProbability;
       totalActual += entry.side === entry.outcome ? 1 : 0;
     }
-
-    const avgPredicted = totalPredicted / resolved.length;
-    const avgActual = totalActual / resolved.length;
-    return Math.abs(avgPredicted - avgActual);
+    return Math.abs(totalPredicted / resolved.length - totalActual / resolved.length);
   }
 
   getStats() {
@@ -115,7 +129,7 @@ class CalibrationTracker {
 }
 
 // ---------------------------------------------------------------------------
-// Budget Controller (Fase 2.7)
+// Budget Controller (Claude only — local is free)
 // ---------------------------------------------------------------------------
 
 class BudgetController {
@@ -128,7 +142,8 @@ class BudgetController {
     this.dailyLimit = dailyLimitUsd;
   }
 
-  canSpend(): boolean {
+  canSpend(isLocal: boolean): boolean {
+    if (isLocal) return true; // Local models are free
     this.resetIfNewDay();
     return this.dailySpend < this.dailyLimit;
   }
@@ -164,11 +179,11 @@ class BudgetController {
 // ---------------------------------------------------------------------------
 
 export class MarketAnalyzer {
-  // Reserved for Fase 2.3 agentic tools (getOrderBook, etc.)
   private _client: PolymarketClient;
   private store: ExperienceStore | null;
-  private anthropic: Anthropic;
+  private anthropic: Anthropic | null = null;
   private config: AnalyzerConfig;
+  private provider: LLMProvider = 'none';
   private calibration: CalibrationTracker;
   private budget: BudgetController;
   private analysisCount = 0;
@@ -181,11 +196,9 @@ export class MarketAnalyzer {
     this._client = client;
     this.store = store;
     this.config = { ...DEFAULT_CONFIG, ...config };
-    this.anthropic = new Anthropic({ apiKey: this.config.apiKey || process.env.ANTHROPIC_API_KEY });
     this.calibration = new CalibrationTracker();
     this.budget = new BudgetController(this.config.dailyBudgetUsd);
 
-    // Wire calibration to position outcomes
     eventBus.on('position:closed', (position) => {
       const pnl = position.unrealizedPnl + position.realizedPnl;
       this.calibration.recordOutcome(position.marketId, pnl > 0 ? 'YES' : 'NO');
@@ -193,9 +206,72 @@ export class MarketAnalyzer {
   }
 
   /**
-   * Pre-filter markets to top candidates for LLM analysis.
-   * Sorts by volume * liquidity (proxy for market importance).
+   * Detect and initialize the best available LLM provider.
+   * Must be called before analyzeMarket().
    */
+  async initialize(): Promise<LLMProvider> {
+    // Forced provider via config or env
+    const forced = (this.config.provider || process.env.LLM_PROVIDER || '') as LLMProvider;
+    if (forced && forced !== 'none') {
+      this.provider = forced;
+      if (forced === 'claude') {
+        this.anthropic = new Anthropic({ apiKey: this.config.apiKey || process.env.ANTHROPIC_API_KEY });
+      }
+      console.log(`[MarketAnalyzer] Provider forced: ${forced}`);
+      return this.provider;
+    }
+
+    // Auto-detect: Ollama first (free + local)
+    const ollamaHost = this.config.ollamaHost || process.env.OLLAMA_HOST || 'http://localhost:11434';
+    try {
+      const res = await fetch(`${ollamaHost}/api/tags`, { signal: AbortSignal.timeout(3000) });
+      if (res.ok) {
+        const data = await res.json() as { models?: Array<{ name: string }> };
+        const models = data.models?.map(m => m.name) ?? [];
+        const targetModel = this.config.ollamaModel || process.env.OLLAMA_MODEL || 'qwen2.5:7b';
+
+        if (models.some(m => m.startsWith(targetModel.split(':')[0]))) {
+          this.provider = 'ollama';
+          this.config.ollamaHost = ollamaHost;
+          console.log(`[MarketAnalyzer] Provider: Ollama (${ollamaHost}) — model: ${targetModel} — FREE`);
+          return this.provider;
+        }
+        console.log(`[MarketAnalyzer] Ollama running but model "${targetModel}" not found. Available: ${models.join(', ')}`);
+      }
+    } catch { /* Ollama not available */ }
+
+    // Auto-detect: vLLM
+    const vllmHost = this.config.vllmHost || process.env.VLLM_HOST || 'http://localhost:8000';
+    try {
+      const res = await fetch(`${vllmHost}/v1/models`, { signal: AbortSignal.timeout(3000) });
+      if (res.ok) {
+        const data = await res.json() as { data?: Array<{ id: string }> };
+        const modelId = data.data?.[0]?.id ?? '';
+        if (modelId) {
+          this.provider = 'vllm';
+          this.config.vllmHost = vllmHost;
+          this.config.vllmModel = modelId;
+          console.log(`[MarketAnalyzer] Provider: vLLM (${vllmHost}) — model: ${modelId} — FREE`);
+          return this.provider;
+        }
+      }
+    } catch { /* vLLM not available */ }
+
+    // Auto-detect: Claude API
+    const apiKey = this.config.apiKey || process.env.ANTHROPIC_API_KEY;
+    if (apiKey) {
+      this.anthropic = new Anthropic({ apiKey });
+      this.provider = 'claude';
+      console.log(`[MarketAnalyzer] Provider: Claude API — model: ${this.config.claudeModel} — ~$3-8/day`);
+      return this.provider;
+    }
+
+    this.provider = 'none';
+    console.log('[MarketAnalyzer] No LLM provider available. Set OLLAMA_MODEL, VLLM_HOST, or ANTHROPIC_API_KEY.');
+    return this.provider;
+  }
+
+  /** Pre-filter markets to top candidates. */
   preFilter(markets: Market[]): Market[] {
     return markets
       .filter(m => m.volume >= this.config.minVolumeForAnalysis)
@@ -206,16 +282,101 @@ export class MarketAnalyzer {
   }
 
   /**
-   * Analyze a single market using Claude.
-   * Returns structured analysis with probability, confidence, and reasoning.
+   * Send prompt to the active LLM provider and get text response.
    */
-  async analyzeMarket(market: Market): Promise<LLMAnalysis | null> {
-    if (!this.budget.canSpend()) {
-      console.log('[MarketAnalyzer] Daily budget exhausted — skipping LLM analysis');
+  private async callLLM(prompt: string): Promise<string | null> {
+    const isLocal = this.provider === 'ollama' || this.provider === 'vllm';
+
+    if (!this.budget.canSpend(isLocal)) {
+      console.log('[MarketAnalyzer] Daily budget exhausted — skipping');
       return null;
     }
 
-    // Gather context for the LLM
+    try {
+      switch (this.provider) {
+        case 'ollama':
+          return await this.callOllama(prompt);
+        case 'vllm':
+          return await this.callVLLM(prompt);
+        case 'claude':
+          return await this.callClaude(prompt);
+        default:
+          return null;
+      }
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error(`[MarketAnalyzer] ${this.provider} error: ${msg}`);
+      return null;
+    }
+  }
+
+  /** Call Ollama REST API (OpenAI-compatible /api/chat) */
+  private async callOllama(prompt: string): Promise<string> {
+    const res = await fetch(`${this.config.ollamaHost}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: this.config.ollamaModel,
+        messages: [{ role: 'user', content: prompt }],
+        stream: false,
+        options: {
+          temperature: 0.3,
+          num_predict: 512,
+        },
+      }),
+      signal: AbortSignal.timeout(60_000), // 60s timeout for local inference
+    });
+
+    if (!res.ok) throw new Error(`Ollama ${res.status}: ${res.statusText}`);
+    const data = await res.json() as { message?: { content: string } };
+    return data.message?.content ?? '';
+  }
+
+  /** Call vLLM via OpenAI-compatible /v1/chat/completions */
+  private async callVLLM(prompt: string): Promise<string> {
+    const model = this.config.vllmModel || 'default';
+    const res = await fetch(`${this.config.vllmHost}/v1/chat/completions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model,
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 512,
+        temperature: 0.3,
+      }),
+      signal: AbortSignal.timeout(60_000),
+    });
+
+    if (!res.ok) throw new Error(`vLLM ${res.status}: ${res.statusText}`);
+    const data = await res.json() as { choices?: Array<{ message: { content: string } }> };
+    return data.choices?.[0]?.message?.content ?? '';
+  }
+
+  /** Call Claude via Anthropic SDK */
+  private async callClaude(prompt: string): Promise<string> {
+    if (!this.anthropic) throw new Error('Anthropic client not initialized');
+
+    const response = await this.anthropic.messages.create({
+      model: this.config.claudeModel,
+      max_tokens: 500,
+      messages: [{ role: 'user', content: prompt }],
+    });
+
+    this.budget.recordSpend(
+      response.usage?.input_tokens ?? 0,
+      response.usage?.output_tokens ?? 0,
+    );
+
+    const firstBlock = response.content?.[0];
+    return firstBlock && firstBlock.type === 'text' ? firstBlock.text : '';
+  }
+
+  /**
+   * Analyze a single market using the active LLM provider.
+   */
+  async analyzeMarket(market: Market): Promise<LLMAnalysis | null> {
+    if (this.provider === 'none') return null;
+
     const similarTrades = this.store
       ? this.store.findSimilar(market.question, market.vertical, 5)
       : [];
@@ -226,54 +387,40 @@ export class MarketAnalyzer {
       .join('\n');
 
     const prompt = this.buildPrompt(market, settledSimilar);
+    const text = await this.callLLM(prompt);
+    if (!text) return null;
 
-    try {
-      const response = await this.anthropic.messages.create({
-        model: this.config.model,
-        max_tokens: 500,
-        messages: [{ role: 'user', content: prompt }],
-      });
+    const analysis = this.parseAnalysis(text, market);
 
-      // Track spend
-      this.budget.recordSpend(
-        response.usage?.input_tokens ?? 0,
-        response.usage?.output_tokens ?? 0,
-      );
-
-      // Parse response (safe access — content may be empty)
-      const firstBlock = response.content?.[0];
-      const text = firstBlock && firstBlock.type === 'text' ? firstBlock.text : '';
-      if (!text) return null;
-      const analysis = this.parseAnalysis(text, market);
-
-      if (analysis) {
-        this.analysisCount++;
-        this.calibration.record(market.id, analysis.probability, analysis.side);
-        console.log(`[MarketAnalyzer] #${this.analysisCount} "${market.question.substring(0, 50)}..." → ${analysis.side} ${(analysis.probability * 100).toFixed(0)}% (${analysis.confidence}) trade=${analysis.shouldTrade}`);
-      }
-
-      return analysis;
-    } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      console.error(`[MarketAnalyzer] Claude error: ${msg}`);
-      return null;
+    if (analysis) {
+      this.analysisCount++;
+      this.calibration.record(market.id, analysis.probability, analysis.side);
+      console.log(`[MarketAnalyzer] #${this.analysisCount} [${this.provider}] "${market.question.substring(0, 50)}..." → ${analysis.side} ${(analysis.probability * 100).toFixed(0)}% (${analysis.confidence}) trade=${analysis.shouldTrade}`);
     }
+
+    return analysis;
   }
 
   /**
-   * Analyze multiple markets and return trade signals for approved ones.
+   * Analyze multiple markets and return trade signals.
    */
   async analyzeMarkets(markets: Market[], bankroll: number): Promise<TradeSignal[]> {
+    if (this.provider === 'none') return [];
+
     const candidates = this.preFilter(markets);
     if (candidates.length === 0) return [];
 
-    console.log(`[MarketAnalyzer] Analyzing ${candidates.length} markets via Claude ${this.config.model}`);
+    const providerLabel = this.provider === 'ollama' ? `Ollama/${this.config.ollamaModel}`
+      : this.provider === 'vllm' ? `vLLM/${this.config.vllmModel}`
+      : `Claude/${this.config.claudeModel}`;
+    console.log(`[MarketAnalyzer] Analyzing ${candidates.length} markets via ${providerLabel}`);
 
     const signals: TradeSignal[] = [];
 
-    // Batch LLM calls in groups of 5 for concurrency (not sequential)
-    const BATCH_SIZE = 5;
+    // Batch size: local models = 1 (sequential, shared GPU), Claude = 5 (parallel API)
+    const BATCH_SIZE = this.provider === 'claude' ? 5 : 1;
     const analyses: Array<{ market: Market; analysis: LLMAnalysis | null }> = [];
+
     for (let i = 0; i < candidates.length; i += BATCH_SIZE) {
       const batch = candidates.slice(i, i + BATCH_SIZE);
       const results = await Promise.all(
@@ -284,15 +431,11 @@ export class MarketAnalyzer {
 
     for (const { market, analysis } of analyses) {
       if (!analysis || !analysis.shouldTrade) continue;
-      if (analysis.edge < 0.03) continue; // Minimum 3% edge from LLM
+      if (analysis.edge < 0.03) continue;
 
-      // Convert to TradeSignal
       const marketProb = analysis.side === 'YES' ? market.tokens.yes.price : market.tokens.no.price;
-
-      // Kelly sizing with confidence weight (Damodaran: confidence-weighted Kelly)
       const confidenceMultiplier = analysis.confidence === 'high' ? 1.0
-        : analysis.confidence === 'medium' ? 0.6
-        : 0.3;
+        : analysis.confidence === 'medium' ? 0.6 : 0.3;
       const kellyFraction = (analysis.edge / (1 - marketProb)) * 0.05 * confidenceMultiplier;
       const suggestedSize = Math.min(bankroll * kellyFraction, 25);
 
@@ -308,7 +451,7 @@ export class MarketAnalyzer {
         edge: analysis.edge,
         confidence: confidenceMultiplier,
         suggestedSize: Math.round(suggestedSize * 100) / 100,
-        reasoning: `[LLM] ${analysis.reasoning} | Factors: ${analysis.keyFactors.join(', ')}`,
+        reasoning: `[${this.provider.toUpperCase()}] ${analysis.reasoning} | Factors: ${analysis.keyFactors.join(', ')}`,
         timestamp: new Date(),
       });
     }
@@ -316,9 +459,7 @@ export class MarketAnalyzer {
     return signals;
   }
 
-  /**
-   * Build the analysis prompt with calibration anchors and context.
-   */
+  /** Build the analysis prompt. */
   private buildPrompt(market: Market, similarTrades: string): string {
     const yesPrice = market.tokens.yes.price;
     const noPrice = market.tokens.no.price;
@@ -354,17 +495,13 @@ Respond with ONLY a JSON object (no markdown, no explanation outside JSON):
 }`;
   }
 
-  /**
-   * Parse Claude's response into structured analysis.
-   */
+  /** Parse LLM response into structured analysis. */
   private parseAnalysis(text: string, market: Market): LLMAnalysis | null {
     try {
-      // Extract JSON from response (handle potential markdown wrapping)
       const jsonMatch = text.match(/\{[\s\S]*\}/);
       if (!jsonMatch) return null;
 
       const parsed = JSON.parse(jsonMatch[0]);
-
       const probability = Number(parsed.probability);
       if (isNaN(probability) || probability < 0 || probability > 1) return null;
 
@@ -383,13 +520,19 @@ Respond with ONLY a JSON object (no markdown, no explanation outside JSON):
         riskFlags: Array.isArray(parsed.riskFlags) ? parsed.riskFlags.map(String) : [],
       };
     } catch {
-      console.error('[MarketAnalyzer] Failed to parse Claude response');
+      console.error('[MarketAnalyzer] Failed to parse LLM response');
       return null;
     }
   }
 
+  getProvider(): LLMProvider { return this.provider; }
+
   getStats() {
     return {
+      provider: this.provider,
+      model: this.provider === 'ollama' ? this.config.ollamaModel
+        : this.provider === 'vllm' ? this.config.vllmModel
+        : this.config.claudeModel,
       analysisCount: this.analysisCount,
       budget: this.budget.getStats(),
       calibration: this.calibration.getStats(),

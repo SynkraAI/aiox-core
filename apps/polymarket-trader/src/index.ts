@@ -115,20 +115,29 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
   // Fase 1.1: Connect experience store for learning-informed trading
   autoTrader.setExperienceStore(store);
 
-  // Fase 2: LLM-in-the-Loop — Claude analyzes markets with real reasoning
-  const anthropicKey = process.env.ANTHROPIC_API_KEY;
-  if (anthropicKey) {
-    const analyzer = new MarketAnalyzer(client, store, {
-      apiKey: anthropicKey,
-      model: process.env.LLM_MODEL || 'claude-haiku-4-5-20251001',
-      maxMarketsPerScan: unlimitedMode ? 20 : 10,
-      dailyBudgetUsd: parseFloat(process.env.LLM_DAILY_BUDGET || '5'),
-    });
-    autoTrader.setMarketAnalyzer(analyzer);
-    logger.info('🧠 LLM-in-the-Loop ENABLED — Claude will analyze markets before trading');
-  } else {
-    logger.warn('⚠️ ANTHROPIC_API_KEY not set — running in heuristic-only mode (no LLM intelligence)');
-  }
+  // Fase 2: LLM-in-the-Loop — auto-detect best available provider
+  const analyzer = new MarketAnalyzer(client, store, {
+    apiKey: process.env.ANTHROPIC_API_KEY || '',
+    claudeModel: process.env.LLM_CLAUDE_MODEL || 'claude-haiku-4-5-20251001',
+    ollamaHost: process.env.OLLAMA_HOST || 'http://localhost:11434',
+    ollamaModel: process.env.OLLAMA_MODEL || 'qwen2.5:7b',
+    vllmHost: process.env.VLLM_HOST || 'http://localhost:8000',
+    vllmModel: process.env.VLLM_MODEL || '',
+    maxMarketsPerScan: unlimitedMode ? 20 : 10,
+    dailyBudgetUsd: parseFloat(process.env.LLM_DAILY_BUDGET || '5'),
+  });
+
+  // Initialize is async — detect provider at startup
+  const initLLM = async () => {
+    const provider = await analyzer.initialize();
+    if (provider !== 'none') {
+      autoTrader.setMarketAnalyzer(analyzer);
+      logger.info(`🧠 LLM-in-the-Loop ENABLED — provider: ${provider}`);
+    } else {
+      logger.warn('⚠️ No LLM provider available — running heuristic-only mode');
+      logger.warn('   Set OLLAMA_MODEL, VLLM_HOST, or ANTHROPIC_API_KEY to enable intelligence');
+    }
+  };
 
   // Wire system-level event logging
   eventBus.on('risk:circuit-breaker', ({ reason }) => {
@@ -155,6 +164,10 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
       pollMs: finalConfig.pollIntervalMs,
       maxPositions: finalConfig.riskLimits.maxOpenPositions,
     }, 'Polymarket Trader starting');
+    // Detect LLM provider before starting trading loop
+    initLLM().catch(err => {
+      logger.error(`LLM init failed: ${err instanceof Error ? err.message : err}`);
+    });
     gasOptimizer.start();
     autoTrader.start();
     eventBus.emit('system:started');
