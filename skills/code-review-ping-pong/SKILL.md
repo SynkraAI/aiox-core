@@ -81,9 +81,10 @@ ative a skill code-review-ping-pong em modo {REVIEW | FIX | AUDIT}.
 
 Contexto:
 - Projeto: {project_name}
-- Diretório de rounds: .code-review-ping-pong/
+- Diretório de rounds: {.code-review-ping-pong/ | .code-review-ping-pong/scopes/{name}/}
 - Artefato anterior: {latest_relevant_artifact}
 - Escopo: {story ativa | session.md | escopo explícito}
+- Scope: {scope_name | root}
 - Branch: {branch}
 
 {instruction sentence telling the next agent what to read first and what artifact to create next}
@@ -106,11 +107,13 @@ Every mode MUST leave `.code-review-ping-pong/next-step.md` in this exact struct
 # Next Step
 
 - current_round: {N}
-- current_mode: {REVIEW | FIX | AUDIT}
-- cycle_state: {WAITING_FOR_FIX | WAITING_FOR_REVIEW | WAITING_FOR_AUDIT | COMPLETE}
+- current_mode: {REVIEW | FIX | AUDIT | CRITICA}
+- cycle_state: {WAITING_FOR_FIX | WAITING_FOR_REVIEW | WAITING_FOR_AUDIT | WAITING_FOR_CRITICA | COMPLETE}
 - next_agent: {CLAUDE CODE | CODEX | GEMINI | NONE}
-- next_mode: {fix mode | review mode | audit mode | none}
-- expected_artifact: {.code-review-ping-pong/round-{N}-fixed.md | .code-review-ping-pong/round-{N+1}.md | .code-review-ping-pong/round-{N}-audit.md | none}
+- next_mode: {fix mode | review mode | audit mode | critica | none}
+- expected_artifact: {.code-review-ping-pong/round-{N}-fixed.md | .code-review-ping-pong/round-{N+1}.md | .code-review-ping-pong/round-{N}-audit.md | critica.md | none}
+- scope: {scope_name | root}
+- critica_status: {pending | approved | skipped}
 - blocking_reason: {short reason}
 
 ## Operator Prompt
@@ -371,6 +374,9 @@ All files live in `.code-review-ping-pong/` at the project root.
 | `multi-stage.cjs` | Auto-generated | Multi-stage orchestration script |
 | `stages.yml` | User | Multi-stage config (optional — activates multi-stage mode) |
 | `progress.yml` | Agent (auto-generated) | Cross-stage progress tracker |
+| `critica.md` | Fixer (Claude Code) | Mandatory critica after PERFECT (5 focused checks) |
+| `scopes/{name}/` | Orchestrator | Isolated scope directory (via --scope) |
+| `archive/{name}-{date}/` | Orchestrator | Auto-archived completed scopes |
 | `archive/stage-{id}-{slug}/` | Agent | Archived rounds from completed stages |
 | `archive/stage-{id}-{slug}/summary.yml` | Agent | Final stats for completed stage |
 
@@ -399,6 +405,60 @@ To start a new ping-pong cycle:
 5. Run REVIEW mode from Codex.
 
 To reset a cycle: delete all `round-*.md` files in `.code-review-ping-pong/`.
+
+### Scoped Sessions
+
+When reviewing multiple modules from the same project root (e.g., different skills
+inside `aios-core`), use `--scope` to isolate rounds in separate subdirectories.
+
+**Usage (orchestrator):**
+```bash
+node orchestrate.cjs --scope forge    # rounds in scopes/forge/
+node orchestrate.cjs --scope quest    # rounds in scopes/quest/ (parallel)
+```
+
+**Usage (manual):**
+```
+pingpong --scope forge
+```
+
+**Directory structure:**
+```
+.code-review-ping-pong/
+├── scopes/
+│   ├── forge/
+│   │   ├── session.md
+│   │   ├── next-step.md
+│   │   ├── round-1.md
+│   │   ├── round-1-fixed.md
+│   │   └── critica.md
+│   └── quest/
+│       ├── session.md
+│       └── next-step.md
+├── archive/
+│   └── forge-2026-04-08/
+├── session.md              ← legacy mode (no --scope)
+└── validate.cjs            ← shared
+```
+
+**Rules:**
+- Without `--scope`, everything works exactly as before (backward compatible).
+- Each scope has its own `session.md`, `next-step.md`, and round files.
+- `validate.cjs` is shared — looked up in the root `.code-review-ping-pong/`.
+- Archives go to `.code-review-ping-pong/archive/{scope}-{date}/`.
+- If `scopes/` exists and no `--scope` is passed, the orchestrator warns about active scopes.
+
+**Step 0 — Detect Scoped Mode (ALL modes, manual execution):**
+
+When running in manual mode (not via orchestrator), agents MUST check for scopes:
+
+```
+0b. Detect scoped mode — Check if `.code-review-ping-pong/scopes/` exists.
+    - If YES: list subdirectories (active scopes).
+      - If user specified scope → use that scope's directory for all round operations.
+      - If user did NOT specify → ask: "Qual scope? Ativos: forge, quest"
+    - If NO: proceed with root directory (legacy mode).
+```
 
 ### Multi-Stage Bootstrapping
 
@@ -429,6 +489,66 @@ node multi-stage.cjs progress          # Regenerate progress.yml
 - **Git anchoring prevents drift.** Both sides record commit_sha to ensure they review/fix the same code.
 - **YAML is the contract, Markdown is the explanation.** Parse YAML for automation, read Markdown for context.
 - **Add `.code-review-ping-pong/` to `.gitignore`** if review files should not be committed.
+
+---
+
+## Critica Phase (Mandatory Post-PERFECT)
+
+After reaching PERFECT (10/10), the cycle does **NOT** archive immediately.
+A mandatory critica phase runs first — a focused subset of `/critica` tailored for code review.
+
+### Flow
+
+```
+REVIEW → FIX → [AUDIT] → ... → PERFECT (10/10)
+                                    ↓
+                              CRITICA (mandatory)
+                                    ↓
+                           ┌─ APPROVED → ARCHIVE
+                           └─ NEEDS_WORK → new REVIEW round
+```
+
+### What the critica checks (5 sections)
+
+**Phase 1 — Question:**
+1. **Blind spots** — what did the review NOT consider?
+2. **Citation verification** — each fix must trace to a real code change. No source = retract claim.
+3. **Red team (3 attacks)** — adversarial vectors against the reviewed code.
+
+**Phase 2 — Discipline:**
+4. **Minimum scope** — did fixes touch only what was necessary?
+5. **Ripple effect** — did any fix alter an interface/type/contract without listing impact?
+
+### Output: `critica.md`
+
+```yaml
+---
+protocol: code-review-ping-pong
+type: critica
+round: {N}
+date: "YYYY-MM-DD"
+critica_verdict: APPROVED|NEEDS_WORK
+issues_found: N
+---
+```
+
+### Verdicts
+
+- **APPROVED** — no critical problems found. Proceed to archive.
+- **NEEDS_WORK** — problems found. A new REVIEW round starts with the specific issues listed.
+
+### Escape hatch
+
+```bash
+node orchestrate.cjs --no-critica    # skip critica, archive immediately on PERFECT
+pingpong --no-critica                # same via shell wrapper
+```
+
+### Integration with /critica skill
+
+The ping-pong critica is a **focused subset** of the full `/critica` skill.
+You do NOT need to run `/critica` manually after ping-pong — it runs automatically.
+The full `/critica` skill has 10+ sections; ping-pong uses only the 5 most relevant for code review.
 
 ---
 

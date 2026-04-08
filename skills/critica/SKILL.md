@@ -20,6 +20,17 @@ Duas fases obrigatorias: primeiro questionar, depois disciplinar.
 
 **Nunca usar como revisao pos-commit** se o objetivo e manter historico limpo. /critica pre-commit = 1 commit correto. /critica pos-commit = 2 commits (fix + correcao do fix).
 
+### Integração com Ping-Pong
+
+A skill `code-review-ping-pong` executa automaticamente uma **versão focada** da critica
+(Fase 1: pontos cegos + citações + red team | Fase 2: escopo mínimo + ripple effect)
+após atingir PERFECT (10/10). Não é necessário rodar `/critica` manualmente após ping-pong.
+
+Se a critica encontrar problemas (`NEEDS_WORK`), o ping-pong abre automaticamente uma nova
+round de review. O resultado é salvo em `critica.md` no diretório de rounds.
+
+Para pular: `--no-critica` no orchestrator ou `pingpong --no-critica`.
+
 ---
 
 ## FASE 1: Questionar (antes de decidir)

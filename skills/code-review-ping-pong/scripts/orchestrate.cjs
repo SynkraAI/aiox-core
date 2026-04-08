@@ -48,6 +48,8 @@ const DEFAULTS = {
   pipeline: false,
   noStallCheck: false,
   noArchive: false,
+  noCritica: false,
+  scope: null,
   cwd: process.cwd(),
   timeout: 10 * 60 * 1000,
 };
@@ -151,6 +153,17 @@ function getPingPongDir(cwd) {
   return path.join(cwd, '.code-review-ping-pong');
 }
 
+function getScopedDir(ppDir, scope) {
+  if (!scope) return ppDir;
+  if (!/^[a-z0-9][a-z0-9-]*$/.test(scope)) {
+    log(c.red, '✗', `Scope inválido: "${scope}". Use apenas letras minúsculas, números e hífens.`);
+    process.exit(1);
+  }
+  const scopeDir = path.join(ppDir, 'scopes', scope);
+  fs.mkdirSync(scopeDir, { recursive: true });
+  return scopeDir;
+}
+
 function getLatestRound(ppDir) {
   if (!fs.existsSync(ppDir)) return 0;
   const files = fs.readdirSync(ppDir).filter(f => /^round-\d+\.md$/.test(f));
@@ -192,7 +205,7 @@ function buildReviewPrompt(ppDir, round, cwd, recurringTopics) {
 
 Contexto:
 - Projeto: ${path.basename(cwd)}
-- Diretório de rounds: .code-review-ping-pong/
+- Diretório de rounds: ${path.relative(cwd, ppDir) || '.code-review-ping-pong/'}
 - Escopo: session.md
 - Branch: ${getBranch(cwd)}`;
 
@@ -223,7 +236,7 @@ function buildFixPrompt(ppDir, round, cwd) {
 
 Contexto:
 - Projeto: ${path.basename(cwd)}
-- Diretório de rounds: .code-review-ping-pong/
+- Diretório de rounds: ${path.relative(cwd, ppDir) || '.code-review-ping-pong/'}
 - Artefato anterior: round-${round}.md
 - Escopo: session.md
 - Branch: ${branch}
@@ -298,7 +311,7 @@ function buildAuditPrompt(ppDir, round, cwd) {
 
 Contexto:
 - Projeto: ${path.basename(cwd)}
-- Diretório de rounds: .code-review-ping-pong/
+- Diretório de rounds: ${path.relative(cwd, ppDir) || '.code-review-ping-pong/'}
 - Artefato anterior: round-${round}-fixed.md
 - Escopo: session.md
 - Branch: ${branch}
@@ -727,13 +740,13 @@ function shellQuote(argv) {
 
 // ─── Validation ──────────────────────────────────────────────────────────────
 
-function validateRound(ppDir, fileName) {
-  const validateScript = path.join(ppDir, 'validate.cjs');
+function validateRound(workDir, fileName, rootPpDir) {
+  const validateScript = path.join(rootPpDir || workDir, 'validate.cjs');
   if (!fs.existsSync(validateScript)) return true;
 
   try {
-    execFileSync('node', [validateScript, fileName], {
-      cwd: path.dirname(ppDir),
+    execFileSync('node', [validateScript, path.join(workDir, fileName)], {
+      cwd: path.dirname(rootPpDir || workDir),
       encoding: 'utf-8',
       stdio: 'pipe',
     });
@@ -891,9 +904,11 @@ function writeTrackerJson(ppDir, metrics) {
 
 // ─── [Improvement 6] Archive Auto-Cleanup ────────────────────────────────────
 
-function archiveRounds(ppDir, sessionName) {
+function archiveRounds(workDir, sessionName, rootPpDir) {
   const date = new Date().toISOString().slice(0, 10);
-  const archiveDir = path.join(ppDir, `archive-${sessionName || 'default'}-${date}`);
+  const archiveBase = rootPpDir ? path.join(rootPpDir, 'archive') : workDir;
+  if (rootPpDir) fs.mkdirSync(archiveBase, { recursive: true });
+  const archiveDir = path.join(archiveBase, `${sessionName || 'default'}-${date}`);
 
   // Avoid collision: append counter if dir exists
   let finalDir = archiveDir;
@@ -903,19 +918,19 @@ function archiveRounds(ppDir, sessionName) {
   }
   fs.mkdirSync(finalDir, { recursive: true });
 
-  const roundFiles = fs.readdirSync(ppDir).filter(f => /^round-\d+/.test(f));
+  const roundFiles = fs.readdirSync(workDir).filter(f => /^round-\d+/.test(f));
   for (const f of roundFiles) {
-    fs.renameSync(path.join(ppDir, f), path.join(finalDir, f));
+    fs.renameSync(path.join(workDir, f), path.join(finalDir, f));
   }
 
   // Also archive auxiliary files
-  for (const f of ['stall-report.md', 'tracker.json', 'orchestrator-summary.json']) {
-    const src = path.join(ppDir, f);
+  for (const f of ['stall-report.md', 'tracker.json', 'orchestrator-summary.json', 'critica.md']) {
+    const src = path.join(workDir, f);
     if (fs.existsSync(src)) fs.renameSync(src, path.join(finalDir, f));
   }
 
   // Reset next-step.md
-  const nsPath = path.join(ppDir, 'next-step.md');
+  const nsPath = path.join(workDir, 'next-step.md');
   if (fs.existsSync(nsPath)) fs.unlinkSync(nsPath);
 
   return finalDir;
@@ -972,6 +987,80 @@ function writeSummary(ppDir, lastRound, outcome, startTime, reviews, fixes, audi
   }
 }
 
+// ─── Critica Phase ──────────────────────────────────────────────────────────
+
+function buildCriticaPrompt(workDir, lastRound, cwd) {
+  const roundFiles = fs.readdirSync(workDir)
+    .filter(f => /^round-\d+/.test(f))
+    .sort();
+
+  const branch = getBranch(cwd);
+
+  return `Execute uma CRITICA FOCADA sobre o resultado final do code review ping-pong.
+
+Contexto:
+- Projeto: ${path.basename(cwd)}
+- Branch: ${branch}
+- Rounds completados: ${lastRound}
+- Diretório: ${path.relative(cwd, workDir) || '.code-review-ping-pong/'}
+- Arquivos de round: ${roundFiles.join(', ')}
+
+Leia TODOS os round files e round-fixed files no diretório acima.
+
+Execute APENAS estas 5 seções da critica (versão focada para code review):
+
+## Fase 1: Questionar
+
+### 1. Pontos Cegos
+O que esta review NÃO considerou? Quais premissas estão implícitas?
+
+### 2. Verificação com Citações
+Para CADA fix aplicado, encontre uma quote direta do código que sustenta a correção.
+Se não encontrar: [SEM FONTE] — o fix pode estar errado.
+
+### 3. Red Team (3 ataques)
+Assuma o papel de um atacante. Liste 3 vetores de ataque contra o código revisado.
+Formato: Ataque → Mecanismo → Resultado → Defesa mínima.
+
+## Fase 2: Disciplinar
+
+### 4. Escopo Mínimo
+Os fixes tocaram APENAS o necessário? Algo foi adicionado sem necessidade?
+
+### 5. Ripple Effect
+Algum fix alterou interface/tipo/contrato sem listar impacto em outros arquivos?
+
+## Veredicto
+
+Baseado na análise acima, emita o veredicto:
+- **APPROVED** — nenhum problema crítico encontrado, pode arquivar
+- **NEEDS_WORK** — problemas encontrados, listar issues específicas para nova round
+
+Salve o resultado em ${path.relative(cwd, workDir) || '.code-review-ping-pong/'}/critica.md com este frontmatter YAML:
+
+\`\`\`yaml
+---
+protocol: code-review-ping-pong
+type: critica
+round: ${lastRound}
+date: "${new Date().toISOString().slice(0, 10)}"
+critica_verdict: APPROVED|NEEDS_WORK
+issues_found: N
+---
+\`\`\``;
+}
+
+function checkCriticaVerdict(workDir) {
+  const criticaFile = path.join(workDir, 'critica.md');
+  if (!fs.existsSync(criticaFile)) return { verdict: 'MISSING', issues: 0 };
+  const yaml = parseFrontmatter(criticaFile);
+  if (!yaml) return { verdict: 'UNKNOWN', issues: 0 };
+  return {
+    verdict: yaml.critica_verdict || 'UNKNOWN',
+    issues: yaml.issues_found || 0,
+  };
+}
+
 // ─── [Improvement 7] runCycle — extracted main loop ──────────────────────────
 
 function resolveSession(ppDir, config) {
@@ -1022,11 +1111,11 @@ function resolveSession(ppDir, config) {
   return { sessionFile, sessionPath };
 }
 
-function runCycle(config, ppDir, metrics) {
-  let currentRound = getLatestRound(ppDir);
+function runCycle(config, ppDir, workDir, metrics) {
+  let currentRound = getLatestRound(workDir);
   let mode = config.startFrom;
 
-  const nextStep = getNextStep(ppDir);
+  const nextStep = getNextStep(workDir);
   if (nextStep && nextStep.cycle_state === 'COMPLETE') {
     if (!config.dryRun) {
       log(c.green, '🏆', `Ciclo já completo! (round ${nextStep.current_round})`);
@@ -1063,6 +1152,7 @@ function runCycle(config, ppDir, metrics) {
   log(c.cyan, '📋', `Projeto: ${path.basename(config.cwd)}`);
   log(c.cyan, '🌿', `Branch: ${getBranch(config.cwd)}`);
   if (config.session) log(c.cyan, '📄', `Sessão: session-${config.session}.md`);
+  if (config.scope) log(c.cyan, '🎯', `Scope: ${config.scope}`);
   log(c.cyan, '🔄', `Max rounds: ${config.maxRounds}`);
   log(c.cyan, '🔍', `Audit: ${config.withAudit ? `sim (a cada ${config.auditEvery} fix${config.auditEvery > 1 ? 'es' : ''})` : 'não'}`);
   log(c.cyan, '▶', `Iniciando no round ${currentRound}, modo ${mode.toUpperCase()}`);
@@ -1079,7 +1169,7 @@ function runCycle(config, ppDir, metrics) {
 
       // [Improvement 4] Inject recurring topics
       const recurring = getRecurringTopics(metrics);
-      const prompt = buildReviewPrompt(ppDir, currentRound, config.cwd, recurring);
+      const prompt = buildReviewPrompt(workDir, currentRound, config.cwd, recurring);
 
       // Model escalation: pick review model based on latest score
       const lastScore = metrics.scoreHistory.length > 0 ? metrics.scoreHistory[metrics.scoreHistory.length - 1].score : 0;
@@ -1098,50 +1188,70 @@ function runCycle(config, ppDir, metrics) {
 
       if (!result.success) {
         log(c.red, '✗', `Review falhou no round ${currentRound}. Abortando.`);
-        writeSummary(ppDir, currentRound, 'REVIEW_FAILED', startTime, totalReviews, totalFixes, totalAudits, metrics);
+        writeSummary(workDir, currentRound, 'REVIEW_FAILED', startTime, totalReviews, totalFixes, totalAudits, metrics);
         return 1;
       }
 
-      if (!config.dryRun && !roundFileExists(ppDir, currentRound, 'review')) {
+      if (!config.dryRun && !roundFileExists(workDir, currentRound, 'review')) {
         log(c.red, '✗', `round-${currentRound}.md não foi criado pelo Codex. Abortando.`);
         return 1;
       }
 
-      if (!config.dryRun && !validateRound(ppDir, `round-${currentRound}.md`)) {
+      if (!config.dryRun && !validateRound(workDir, `round-${currentRound}.md`, ppDir)) {
         log(c.red, '✗', `round-${currentRound}.md falhou na validação. Abortando.`);
         return 1;
       }
 
       if (!config.dryRun) {
-        const { verdict, score } = checkVerdict(ppDir, currentRound);
+        const { verdict, score } = checkVerdict(workDir, currentRound);
         log(c.blue, '📊', `Score: ${score}/10 — Verdict: ${verdict}`);
 
         // [Improvement 1] Track score
         metrics.scoreHistory.push({ round: currentRound, score });
 
         // [Improvement 4] Track topics
-        const topics = extractTopics(ppDir, currentRound);
+        const topics = extractTopics(workDir, currentRound);
         updateTopicHistory(metrics, currentRound, topics);
-        writeTrackerJson(ppDir, metrics);
+        writeTrackerJson(workDir, metrics);
 
         // [Improvement 2] Stall detection
         if (!config.noStallCheck) {
           const stall = checkStall(metrics);
           if (stall.stalled) {
-            writeStallReport(ppDir, metrics, stall.reason);
+            writeStallReport(workDir, metrics, stall.reason);
             log(c.yellow, '⚠', `Stall detectado: ${stall.reason}. Veja stall-report.md`);
-            writeSummary(ppDir, currentRound, 'STALLED', startTime, totalReviews, totalFixes, totalAudits, metrics);
+            writeSummary(workDir, currentRound, 'STALLED', startTime, totalReviews, totalFixes, totalAudits, metrics);
             return 3;
           }
         }
 
         if (verdict === 'PERFECT') {
           banner(`🏆 PERFECT! Score 10/10 em ${currentRound} rounds`);
-          writeSummary(ppDir, currentRound, 'PERFECT', startTime, totalReviews, totalFixes, totalAudits, metrics);
+          writeSummary(workDir, currentRound, 'PERFECT', startTime, totalReviews, totalFixes, totalAudits, metrics);
+
+          // [Improvement 10] Critica phase — mandatory before archive
+          if (!config.noCritica) {
+            banner('🔍 CRITICA — Revisão crítica obrigatória');
+            const criticaPrompt = buildCriticaPrompt(workDir, currentRound, config.cwd);
+            const criticaResult = runCli(config.fixer, criticaPrompt, config);
+
+            if (criticaResult.success) {
+              const critica = checkCriticaVerdict(workDir);
+              if (critica.verdict === 'NEEDS_WORK') {
+                log(c.yellow, '⚠', `Critica encontrou ${critica.issues} problema(s). Continuando review...`);
+                mode = 'review';
+                currentRound++;
+                continue;
+              }
+              log(c.green, '✓', 'Critica APPROVED — código validado');
+            } else {
+              log(c.yellow, '⚠', 'Critica falhou — prosseguindo com archive');
+            }
+          }
 
           // [Improvement 6] Archive rounds
           if (!config.noArchive) {
-            const archiveDir = archiveRounds(ppDir, config.session);
+            const archiveDir = archiveRounds(workDir, config.session || config.scope, ppDir);
             log(c.green, '📦', `Rounds arquivados em ${path.basename(archiveDir)}/`);
           }
 
@@ -1160,7 +1270,7 @@ function runCycle(config, ppDir, metrics) {
       banner(`Round ${currentRound} — FIX (${fixLabel})`);
       totalFixes++;
 
-      const prompt = buildFixPrompt(ppDir, currentRound, config.cwd);
+      const prompt = buildFixPrompt(workDir, currentRound, config.cwd);
 
       // Model escalation: pick fix model based on latest score
       const fixLastScore = metrics.scoreHistory.length > 0 ? metrics.scoreHistory[metrics.scoreHistory.length - 1].score : 0;
@@ -1179,23 +1289,23 @@ function runCycle(config, ppDir, metrics) {
 
       if (!result.success) {
         log(c.red, '✗', `Fix falhou no round ${currentRound}. Abortando.`);
-        writeSummary(ppDir, currentRound, 'FIX_FAILED', startTime, totalReviews, totalFixes, totalAudits, metrics);
+        writeSummary(workDir, currentRound, 'FIX_FAILED', startTime, totalReviews, totalFixes, totalAudits, metrics);
         return 1;
       }
 
-      if (!config.dryRun && !roundFileExists(ppDir, currentRound, 'fixed')) {
+      if (!config.dryRun && !roundFileExists(workDir, currentRound, 'fixed')) {
         log(c.red, '✗', `round-${currentRound}-fixed.md não foi criado pelo Claude Code. Abortando.`);
         return 1;
       }
 
-      if (!config.dryRun && !validateRound(ppDir, `round-${currentRound}-fixed.md`)) {
+      if (!config.dryRun && !validateRound(workDir, `round-${currentRound}-fixed.md`, ppDir)) {
         log(c.red, '✗', `round-${currentRound}-fixed.md falhou na validação. Abortando.`);
         return 1;
       }
 
       // [Improvement 3] Fix quality gate
       if (!config.dryRun) {
-        const quality = checkFixQuality(ppDir, currentRound);
+        const quality = checkFixQuality(workDir, currentRound);
         for (const w of quality.warnings) log(c.yellow, '⚠', `Fix quality: ${w}`);
         for (const e of quality.errors) log(c.red, '⚠', `Fix quality: ${e}`);
       }
@@ -1215,7 +1325,7 @@ function runCycle(config, ppDir, metrics) {
       banner(`Round ${currentRound} — AUDIT (Gemini)`);
       totalAudits++;
 
-      const prompt = buildAuditPrompt(ppDir, currentRound, config.cwd);
+      const prompt = buildAuditPrompt(workDir, currentRound, config.cwd);
       const result = runCli('gemini', prompt, config);
 
       metrics.rounds.push({ round: currentRound, mode: 'audit', agent: 'gemini', duration_ms: result.duration_ms || 0, success: result.success });
@@ -1225,11 +1335,11 @@ function runCycle(config, ppDir, metrics) {
       }
 
       if (!config.dryRun && result.success) {
-        if (!roundFileExists(ppDir, currentRound, 'audit')) {
+        if (!roundFileExists(workDir, currentRound, 'audit')) {
           log(c.red, '✗', `round-${currentRound}-audit.md não foi criado pelo Gemini. Abortando.`);
           return 1;
         }
-        if (!validateRound(ppDir, `round-${currentRound}-audit.md`)) {
+        if (!validateRound(workDir, `round-${currentRound}-audit.md`, ppDir)) {
           log(c.red, '✗', `round-${currentRound}-audit.md falhou na validação. Abortando.`);
           return 1;
         }
@@ -1242,7 +1352,7 @@ function runCycle(config, ppDir, metrics) {
   }
 
   log(c.yellow, '⚠', `Limite de ${config.maxRounds} rounds atingido sem PERFECT.`);
-  writeSummary(ppDir, currentRound - 1, 'MAX_ROUNDS', startTime, totalReviews, totalFixes, totalAudits, metrics);
+  writeSummary(workDir, currentRound - 1, 'MAX_ROUNDS', startTime, totalReviews, totalFixes, totalAudits, metrics);
   return 2;
 }
 
@@ -1250,7 +1360,8 @@ function runCycle(config, ppDir, metrics) {
 
 function runPipeline(config) {
   const ppDir = getPingPongDir(config.cwd);
-  const sessions = fs.readdirSync(ppDir)
+  const workDir = getScopedDir(ppDir, config.scope);
+  const sessions = fs.readdirSync(workDir)
     .filter(f => /^session-[\w-]+\.md$/.test(f))
     .map(f => f.replace(/^session-/, '').replace(/\.md$/, ''))
     .sort();
@@ -1271,21 +1382,21 @@ function runPipeline(config) {
 
     // Archive existing rounds before starting fresh
     if (!config.dryRun) {
-      const existingRounds = fs.readdirSync(ppDir).filter(f => /^round-\d+/.test(f));
+      const existingRounds = fs.readdirSync(workDir).filter(f => /^round-\d+/.test(f));
       if (existingRounds.length > 0) {
-        const archiveDir = archiveRounds(ppDir, `pre-${session}`);
+        const archiveDir = archiveRounds(workDir, `pre-${session}`, ppDir);
         log(c.dim, '📦', `Rounds anteriores arquivados em ${path.basename(archiveDir)}/`);
       }
     }
 
     // Resolve session
-    const resolved = resolveSession(ppDir, sessionConfig);
+    const resolved = resolveSession(workDir, sessionConfig);
     if (!resolved) {
       results.push({ session, outcome: 'SESSION_NOT_FOUND', rounds: 0, startScore: null, endScore: null, elapsed: 0 });
       continue;
     }
 
-    const exitCode = runCycle(sessionConfig, ppDir, metrics);
+    const exitCode = runCycle(sessionConfig, ppDir, workDir, metrics);
 
     const startScore = metrics.scoreHistory.length > 0 ? metrics.scoreHistory[0].score : null;
     const endScore = metrics.scoreHistory.length > 0 ? metrics.scoreHistory[metrics.scoreHistory.length - 1].score : null;
@@ -1312,7 +1423,7 @@ function runPipeline(config) {
   }
 
   // [Improvement 9] Write pipeline report
-  writePipelineReport(ppDir, results, pipelineStart);
+  writePipelineReport(workDir, results, pipelineStart);
 
   // Print pipeline summary
   const totalElapsed = Math.floor((Date.now() - pipelineStart) / 1000);
@@ -1381,19 +1492,35 @@ function main() {
     process.exit(1);
   }
 
+  // Scope warning: if scopes/ exists and no --scope was given
+  const scopesDir = path.join(ppDir, 'scopes');
+  if (!config.scope && fs.existsSync(scopesDir)) {
+    try {
+      const scopes = fs.readdirSync(scopesDir).filter(d =>
+        fs.statSync(path.join(scopesDir, d)).isDirectory(),
+      );
+      if (scopes.length > 0) {
+        log(c.yellow, '⚠', `Scopes ativos: ${scopes.join(', ')}. Use --scope <name> para continuar um deles.`);
+      }
+    } catch { /* ignore */ }
+  }
+
+  // Resolve work directory (scoped or root)
+  const workDir = getScopedDir(ppDir, config.scope);
+
   // [Improvement 7] Pipeline mode
   if (config.pipeline) {
     runPipeline(config);
     return;
   }
 
-  // Resolve session
-  const resolved = resolveSession(ppDir, config);
+  // Resolve session (in workDir, not ppDir)
+  const resolved = resolveSession(workDir, config);
   if (!resolved) process.exit(1);
 
   // Run single cycle
   const metrics = { rounds: [], scoreHistory: [], topicHistory: {} };
-  const exitCode = runCycle(config, ppDir, metrics);
+  const exitCode = runCycle(config, ppDir, workDir, metrics);
   process.exit(exitCode);
 }
 
@@ -1436,6 +1563,12 @@ function parseArgs(argv) {
         break;
       case '--session':
         result.session = argv[++i] || null;
+        break;
+      case '--scope':
+        result.scope = argv[++i] || null;
+        break;
+      case '--no-critica':
+        result.noCritica = true;
         break;
       case '--pipeline':
         result.pipeline = true;
@@ -1491,6 +1624,8 @@ ${c.bold}Opções:${c.reset}
   --review-escalation Escalar modelo do review por score (ex: "gpt-4o-mini<8,gpt-4o")
   --fix-escalation    Escalar modelo do fix por score (ex: "sonnet<9,opus")
   --session <name>    Sessão a usar (ex: engine → session-engine.md)
+  --scope <name>      Escopo isolado (cria scopes/<name>/ com rounds separados)
+  --no-critica        Pula fase critica obrigatória após PERFECT
   --pipeline          Rodar TODAS as sessões sequencialmente
   --no-stall-check    Desabilitar detecção de stall
   --no-archive        Não arquivar rounds ao atingir PERFECT
@@ -1507,6 +1642,8 @@ ${c.bold}Pré-requisitos:${c.reset}
 ${c.bold}Exemplos:${c.reset}
   node orchestrate.cjs                          # Roda com defaults
   node orchestrate.cjs --session engine          # Sessão específica
+  node orchestrate.cjs --scope forge             # Escopo isolado em scopes/forge/
+  node orchestrate.cjs --scope forge --no-critica  # Sem critica após PERFECT
   node orchestrate.cjs --pipeline                # Todas as sessões
   node orchestrate.cjs --with-audit             # Com audit Gemini
   node orchestrate.cjs --max-rounds 5 --dry-run # Dry-run, max 5 rounds
@@ -1528,14 +1665,17 @@ module.exports = {
   archiveRounds,
   buildAuditPrompt,
   buildCliCommand,
+  buildCriticaPrompt,
   buildFixPrompt,
   buildReviewPrompt,
+  checkCriticaVerdict,
   checkFixQuality,
   checkStall,
   extractTopics,
   getLatestRound,
   getNextStep,
   getRecurringTopics,
+  getScopedDir,
   parseArgs,
   parseFrontmatter,
   roundFileExists,

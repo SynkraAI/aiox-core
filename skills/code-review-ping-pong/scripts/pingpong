@@ -4,9 +4,11 @@
 # Uso:
 #   pingpong                    → review completo (Claude reviewer + fixer)
 #   pingpong --session engine   → sessão específica
+#   pingpong --scope forge      → escopo isolado em scopes/forge/
 #   pingpong --pipeline         → todas as sessões
 #   pingpong --api              → reviewer via OpenAI API (mais barato)
 #   pingpong --clean            → limpa rounds anteriores e roda do zero
+#   pingpong --no-critica       → pula critica obrigatória após PERFECT
 #   pingpong --help             → mostra todas as opções
 #
 # Instale com:
@@ -24,12 +26,22 @@ TIMEOUT="15"
 EXTRA_ARGS=()
 CLEAN=false
 API_MODE=false
+SCOPE=""
 
 # ─── Parse nossos args, passa o resto pro orchestrator ─────────
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --clean)
       CLEAN=true
+      shift
+      ;;
+    --scope)
+      SCOPE="$2"
+      EXTRA_ARGS+=("--scope" "$2")
+      shift 2
+      ;;
+    --no-critica)
+      EXTRA_ARGS+=("--no-critica")
       shift
       ;;
     --api)
@@ -56,9 +68,11 @@ while [[ $# -gt 0 ]]; do
       echo ""
       echo "  Opções:"
       echo "    --clean           Limpa rounds anteriores antes de rodar"
+      echo "    --scope <name>    Escopo isolado (cria scopes/<name>/)"
       echo "    --session <name>  Sessão específica (ex: engine, packs)"
       echo "    --pipeline        Roda todas as sessões sequencialmente"
       echo "    --no-archive      Não arquiva rounds ao atingir 10/10"
+      echo "    --no-critica      Pula critica obrigatória após PERFECT"
       echo "    --no-stall-check  Não para ao detectar stall"
       echo "    --max-rounds <N>  Limite de rounds (padrão: 15)"
       echo "    --with-audit      Incluir audit Gemini"
@@ -66,11 +80,13 @@ while [[ $# -gt 0 ]]; do
       echo "    --dry-run         Mostra comandos sem executar"
       echo ""
       echo "  Exemplos:"
-      echo "    pingpong                          # Review padrão"
-      echo "    pingpong --clean --session engine  # Limpa e roda sessão"
-      echo "    pingpong --pipeline               # Todas as sessões"
-      echo "    pingpong --api --clean             # Via OpenAI API"
-      echo "    pingpong --fast --no-stall-check   # Mais barato possível"
+      echo "    pingpong                              # Review padrão"
+      echo "    pingpong --scope forge                # Escopo isolado"
+      echo "    pingpong --clean --session engine      # Limpa e roda sessão"
+      echo "    pingpong --scope forge --no-critica    # Sem critica"
+      echo "    pingpong --pipeline                   # Todas as sessões"
+      echo "    pingpong --api --clean                 # Via OpenAI API"
+      echo "    pingpong --fast --no-stall-check       # Mais barato possível"
       echo ""
       exit 0
       ;;
@@ -94,9 +110,17 @@ fi
 
 # ─── Clean mode ─────────
 if [ "$CLEAN" = true ]; then
-  find "$PP_DIR" -name "round-*.md" -delete 2>/dev/null
-  rm -f "$PP_DIR/next-step.md" "$PP_DIR/tracker.json" "$PP_DIR/orchestrator-summary.json" "$PP_DIR/stall-report.md" 2>/dev/null
-  echo "🧹 Rounds anteriores limpos."
+  CLEAN_DIR="$PP_DIR"
+  if [ -n "$SCOPE" ]; then
+    CLEAN_DIR="$PP_DIR/scopes/$SCOPE"
+  fi
+  if [ -d "$CLEAN_DIR" ]; then
+    find "$CLEAN_DIR" -maxdepth 1 -name "round-*.md" -delete 2>/dev/null
+    rm -f "$CLEAN_DIR/next-step.md" "$CLEAN_DIR/tracker.json" "$CLEAN_DIR/orchestrator-summary.json" "$CLEAN_DIR/stall-report.md" "$CLEAN_DIR/critica.md" 2>/dev/null
+    echo "🧹 Rounds limpos em $CLEAN_DIR/"
+  else
+    echo "⚠  Diretório $CLEAN_DIR não existe."
+  fi
 fi
 
 # ─── Rodar ─────────
