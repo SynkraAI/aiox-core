@@ -26,7 +26,7 @@ const { findBest, findAlternatives } = await import(resolve(__dirname, '..', '..
 const MAX_PLAN_STEPS = 15;
 
 function buildPlan(params = {}) {
-  const { classification = {}, brand, capabilities = [], options = {} } = params;
+  const { classification = {}, brand, capabilities = [], options = {} } = params ?? {};
   const steps = [];
   const decisions = [];
   let stepNum = 1;
