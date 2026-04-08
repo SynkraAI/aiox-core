@@ -6,7 +6,7 @@ description: |
   em sequência inteligente com checkpoints, error recovery e ecosystem context.
   Use quando quiser criar um app, feature ou fix sem gerenciar agentes manualmente.
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Agent
-argument-hint: help | ["app description"] | feature "feature desc" | fix "bug desc" | quick "fast desc" | q "fast desc" | design-system {url} | lp "LP description" | clone {url} | squad-upgrade {name} | scan | resume
+argument-hint: help | ["app description"] | feature "feature desc" | fix "bug desc" | quick "fast desc" | q "fast desc" | design-system {url} | lp "LP description" | clone {url} | squad-upgrade {name} | stress-test {skill|all} | scan | resume
 version: 1.1.0
 category: orchestration
 tags: [pipeline, development, automation, forge]
@@ -177,6 +177,7 @@ To build the help output:
 | **DRY_RUN** | Prefix `dry-run`, or words like "simular", "preview", "o que faria", "simulação" | `{FORGE_HOME}/workflows/dry-run.md` (simulate only, zero agent dispatch) |
 | **REPLAY** | Prefix `replay`, or words like "refazer", "replay", "de novo", "from phase" | `{FORGE_HOME}/workflows/replay.md` (load previous run, apply changes, re-execute) |
 | **TEMPLATE** | Prefix `template`, or words like "template", "scaffold", "boilerplate", "starter" | `{FORGE_HOME}/workflows/template.md` (pre-configured project, skip Phase 0+1) |
+| **STRESS_TEST** | Prefix `stress-test`, or words like "stress test", "health check", "audit skill", "testar resiliência" | `{FORGE_HOME}/workflows/stress-test.md` (Recon → Tiers 1-2 → Tiers 3-5 → Fix → Validate) |
 
 ### Intent Resolution Order (MANDATORY)
 
@@ -431,6 +432,7 @@ Isso mantém o usuário informado sem interromper o fluxo.
 | `{FORGE_HOME}/workflows/dry-run.md` | Mode = DRY_RUN |
 | `{FORGE_HOME}/workflows/replay.md` | Mode = REPLAY |
 | `{FORGE_HOME}/workflows/template.md` | Mode = TEMPLATE |
+| `{FORGE_HOME}/workflows/stress-test.md` | Mode = STRESS_TEST |
 | `{FORGE_HOME}/forge-memory.md` | ALWAYS (loaded by forge-memory plugin at init) |
 | `{FORGE_HOME}/forge-watch.md` | Phase 5 (post-deploy monitoring, loaded by forge-watch plugin) |
 | `{FORGE_HOME}/forge-advisor.md` | Phase 0 (tech decision enhancement, loaded by forge-advisor plugin) |

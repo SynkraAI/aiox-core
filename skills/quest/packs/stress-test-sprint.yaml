@@ -1,0 +1,291 @@
+# ============================================================================
+# Pack: Stress Test Sprint
+# Health check trimestral das skills core do ecossistema.
+# ============================================================================
+
+pack:
+  id: stress-test-sprint
+  version: "1.0.0"
+  name: "Stress Test Sprint"
+  icon: "🛡️"
+  class_name: "Guardião do Ecossistema"
+  tagline: "Quebre suas skills antes que seus usuários quebrem."
+  keywords: ["stress-test", "quality", "audit", "resilience", "health-check"]
+  forge_workflow: "stress-test"
+
+# ----------------------------------------------------------------------------
+# Detection — como o scanner identifica que este pack se aplica
+# ----------------------------------------------------------------------------
+
+detection:
+  rules:
+    - condition: "inside_path('aios-core') AND has_dir('skills')"
+      confidence: high
+    - condition: "has_dir('skills') AND has_file('skills/forge/SKILL.md')"
+      confidence: medium
+  fallback_question: "Quer rodar um health check nas skills do ecossistema?"
+
+# ----------------------------------------------------------------------------
+# Levels — progressão temática do Guardião
+# ----------------------------------------------------------------------------
+
+levels:
+  1: { name: "Sentinela", xp: 0, message: "Olhos abertos. Vamos caçar bugs." }
+  2: { name: "Investigador", xp: 150, message: "Nada escapa do seu radar." }
+  3: { name: "Auditor de Elite", xp: 400, message: "Suas skills tremem quando você chega." }
+  4: { name: "Guardião Lendário", xp: 700, message: "Zero falhas. Zero desculpas." }
+
+# ----------------------------------------------------------------------------
+# Achievements
+# ----------------------------------------------------------------------------
+
+achievements:
+  - id: "first_blood"
+    name: "Primeiro Bug"
+    icon: "target"
+    condition: "item_xp >= 30"
+    xp_bonus: 10
+    message: "Encontrou seu primeiro bug via stress test"
+
+  - id: "recon_master"
+    name: "Mestre do Recon"
+    icon: "magnifier"
+    condition: "all_items_done_in_phase:0"
+    xp_bonus: 25
+    message: "Todas as skills mapeadas e perfiladas"
+
+  - id: "tier_2_survivor"
+    name: "Sobrevivente Tier 2"
+    icon: "shield"
+    condition: "all_items_done_in_phase:1"
+    xp_bonus: 30
+    message: "Happy path e variações testados em todas as skills"
+
+  - id: "chaos_engineer"
+    name: "Engenheiro do Caos"
+    icon: "fire"
+    condition: "all_items_done_in_phase:2"
+    xp_bonus: 50
+    message: "Tiers 3-5 concluídos. Nada mais quebra."
+
+  - id: "fix_machine"
+    name: "Máquina de Fixes"
+    icon: "wrench"
+    condition: "all_items_done_in_phase:3"
+    xp_bonus: 40
+    message: "Todos os fixes aplicados e commitados"
+
+  - id: "ecosystem_guardian"
+    name: "Guardião do Ecossistema"
+    icon: "crown"
+    condition: "all_items_done"
+    xp_bonus: 100
+    message: "Ecossistema blindado. Nenhuma skill ficou de fora."
+
+# ============================================================================
+# Phase 0 — Recon / Torre de Vigilância
+# ============================================================================
+
+phases:
+  0:
+    name: "Torre de Vigilância"
+    description: "Mapear todas as skills orchestrator e gerar perfis de risco."
+    items:
+      - id: "0.1"
+        label: "Listar skills com category: orchestration"
+        command: "Grep category.*orchestration em skills/*/SKILL.md — montar lista de alvos"
+        who: "user"
+        required: true
+        xp: 15
+        scan_rule: "has_dir('skills/forge') AND has_dir('skills/quest')"
+
+      - id: "0.2"
+        label: "Gerar perfil de risco do Forge"
+        command: "/skill-stress-test forge — Phase 1 (Recon) — gerar skill-profile.yaml"
+        who: "skill"
+        required: true
+        xp: 20
+
+      - id: "0.3"
+        label: "Gerar perfil de risco do Quest"
+        command: "/skill-stress-test quest — Phase 1 (Recon)"
+        who: "skill"
+        required: true
+        xp: 20
+
+      - id: "0.4"
+        label: "Gerar perfil de risco do Content-Forge"
+        command: "/skill-stress-test content-forge — Phase 1 (Recon)"
+        who: "skill"
+        required: true
+        xp: 20
+
+      - id: "0.5"
+        label: "Gerar perfis de outras orchestrators"
+        command: "Repetir recon para god-mode, lp-generator e qualquer nova orchestrator"
+        who: "skill"
+        required: false
+        xp: 25
+
+  # --------------------------------------------------------------------------
+  # Phase 1 — Tiers 1-2 / Pista de Treino
+  # --------------------------------------------------------------------------
+
+  1:
+    name: "Pista de Treino"
+    description: "Happy path e variações básicas. 5 cenários por skill."
+    items:
+      - id: "1.1"
+        label: "Stress test Forge — Tiers 1-2"
+        command: "/skill-stress-test forge — 5 cenários, modo rápido"
+        who: "skill"
+        required: true
+        xp: 30
+
+      - id: "1.2"
+        label: "Stress test Quest — Tiers 1-2"
+        command: "/skill-stress-test quest — 5 cenários, modo rápido"
+        who: "skill"
+        required: true
+        xp: 30
+
+      - id: "1.3"
+        label: "Stress test Content-Forge — Tiers 1-2"
+        command: "/skill-stress-test content-forge — 5 cenários, modo rápido"
+        who: "skill"
+        required: true
+        xp: 30
+
+      - id: "1.4"
+        label: "Stress test de outras orchestrators"
+        command: "Repetir Tiers 1-2 para skills adicionais identificadas em 0.5"
+        who: "skill"
+        required: false
+        xp: 25
+
+  # --------------------------------------------------------------------------
+  # Phase 2 — Tiers 3-5 / Arena do Caos
+  # --------------------------------------------------------------------------
+
+  2:
+    name: "Arena do Caos"
+    description: "Edge cases, inputs hostis e chaos engineering. 11 cenários por skill."
+    items:
+      - id: "2.1"
+        label: "Forge — Tiers 3-5 (chaos completo)"
+        command: "Análise estática de 11 cenários: empty input, unicode, idempotência, state corrompido, plugin YAML, injection"
+        who: "skill"
+        required: true
+        xp: 40
+
+      - id: "2.2"
+        label: "Quest — Tiers 3-5 (chaos completo)"
+        command: "Análise estática de 11 cenários: ID inexistente, YAML vazio, XP overflow, YAML injection, sub-items"
+        who: "skill"
+        required: true
+        xp: 40
+
+      - id: "2.3"
+        label: "Content-Forge — Tiers 3-5 (chaos completo)"
+        command: "Análise estática de 11 cenários: brands vazio, multi-type, brand corrompido, squads ausentes"
+        who: "skill"
+        required: true
+        xp: 40
+
+      - id: "2.4"
+        label: "Outras orchestrators — Tiers 3-5"
+        command: "Repetir chaos para skills adicionais"
+        who: "skill"
+        required: false
+        xp: 35
+
+  # --------------------------------------------------------------------------
+  # Phase 3 — Fix & Ship / Oficina de Reparos
+  # --------------------------------------------------------------------------
+
+  3:
+    name: "Oficina de Reparos"
+    description: "Aplicar todos os fixes, commitar e validar."
+    items:
+      - id: "3.1"
+        label: "Aplicar fixes P0 (CRITICAL + FAIL)"
+        command: "Editar arquivos com guards, error handling e validações para todos os P0"
+        who: "user"
+        required: true
+        xp: 40
+
+      - id: "3.2"
+        label: "Aplicar fixes P1 (WARN importantes)"
+        command: "Editar arquivos com guards para WARNs de impacto médio-alto"
+        who: "user"
+        required: true
+        xp: 30
+
+      - id: "3.3"
+        label: "Aplicar fixes P2 (WARN menores)"
+        command: "Editar arquivos com guards para WARNs de baixo impacto"
+        who: "user"
+        required: false
+        xp: 20
+
+      - id: "3.4"
+        label: "Commitar todos os fixes"
+        command: "git add + git commit com mensagem descritiva referenciando cenários"
+        who: "user"
+        required: true
+        xp: 15
+
+      - id: "3.5"
+        label: "Gerar relatório consolidado"
+        command: "Criar report final com tabela de cenários, fixes aplicados e score antes/depois"
+        who: "skill"
+        required: true
+        xp: 25
+        checkpoint: true
+
+  # --------------------------------------------------------------------------
+  # Phase 4 — Validação / Sala do Tribunal
+  # --------------------------------------------------------------------------
+
+  4:
+    name: "Sala do Tribunal"
+    description: "Verificar que os fixes não quebraram nada e documentar."
+    items:
+      - id: "4.1"
+        label: "Re-run smoke test (Tier 1) pós-fix"
+        command: "Re-executar cenário S-001 de cada skill para confirmar que help/invocação básica funciona"
+        who: "skill"
+        required: true
+        xp: 20
+
+      - id: "4.2"
+        label: "Atualizar issue no GitHub"
+        command: "Atualizar issue #622 (ou criar nova) com resultados finais"
+        who: "user"
+        required: true
+        xp: 15
+
+      - id: "4.3"
+        label: "Atualizar stress-test protocol com learnings"
+        command: "Incorporar descobertas (self-test mode, etc.) no scenario-engine.md"
+        who: "user"
+        required: false
+        xp: 20
+
+      - id: "4.4"
+        label: "Push para remote via @devops"
+        command: "Delegar push para @devops — branch chore/devops-10-improvements"
+        who: "agente"
+        required: true
+        xp: 15
+
+# ----------------------------------------------------------------------------
+# Forge Phase Map — para auto-reconciliação
+# ----------------------------------------------------------------------------
+
+forge_phase_map:
+  0: ["0.1", "0.2", "0.3", "0.4"]
+  1: ["1.1", "1.2", "1.3"]
+  2: ["2.1", "2.2", "2.3"]
+  3: ["3.1", "3.2", "3.4"]
+  4: ["4.1", "4.2", "4.4"]
