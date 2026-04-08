@@ -1,6 +1,6 @@
 ---
 name: amir-levine
-description: "Agente amir-levine do ecossistema AIOS."
+description: "Avaliar o estilo de apego e padroes do paciente"
 role: specialist
 squad: relationship-therapy-squad
 ---

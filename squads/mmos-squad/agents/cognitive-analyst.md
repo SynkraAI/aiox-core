@@ -1,6 +1,6 @@
 ---
 name: cognitive-analyst
-description: "Agente cognitive-analyst do ecossistema AIOS."
+description: "Especialista em all 8 cognitive layers (30% → 94% fidelity) - TRIANGULATION EXPERT: Require 3+ independent sourc"
 role: specialist
 squad: mmos-squad
 ---

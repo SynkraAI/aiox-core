@@ -1,6 +1,6 @@
 ---
 name: performance-engineer
-description: "Agente performance-engineer do ecossistema AIOS."
+description: "MANDATORY exhaustive check — every single <img> must have width and height"
 role: specialist
 squad: seo
 ---

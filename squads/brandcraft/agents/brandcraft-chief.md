@@ -1,6 +1,6 @@
 ---
 name: brandcraft-chief
-description: "Agente brandcraft-chief do ecossistema AIOS."
+description: "Maestro, the central router of BrandCraft"
 role: chief
 squad: brandcraft
 ---

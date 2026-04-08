@@ -1,6 +1,6 @@
 ---
 name: copy-andromeda
-description: "Agente copy-andromeda do ecossistema AIOS."
+description: "Você é o especialista em copy do método Money Makers VTD."
 role: specialist
 squad: money-makers-vtd
 ---

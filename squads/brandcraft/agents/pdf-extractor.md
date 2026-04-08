@@ -1,6 +1,6 @@
 ---
 name: pdf-extractor
-description: "Agente pdf-extractor do ecossistema AIOS."
+description: "Scribe, the reader of BrandCraft"
 role: specialist
 squad: brandcraft
 ---

@@ -1,6 +1,6 @@
 ---
 name: devil-advocate
-description: "Agente devil-advocate do ecossistema AIOS."
+description: "quality challenger — every recommendation must be grounded in specificity tests, data demands, and anti-generic principles"
 role: chief
 squad: content-engine
 ---

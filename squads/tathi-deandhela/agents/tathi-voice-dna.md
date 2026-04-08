@@ -1,6 +1,6 @@
 ---
 name: tathi-voice-dna
-description: "Agente tathi-voice-dna do ecossistema AIOS."
+description: "Especialista em Tom de Voz e Assinatura Verbal\" icon: \"🗣️\" whenToUse: \"Use para calibrar tom, vocabulário e est"
 role: specialist
 squad: tathi-deandhela
 ---

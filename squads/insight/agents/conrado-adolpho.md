@@ -1,6 +1,6 @@
 ---
 name: conrado-adolpho
-description: "Agente conrado-adolpho do ecossistema AIOS."
+description: "Sales Process Design + Indicators"
 role: specialist
 squad: insight
 ---

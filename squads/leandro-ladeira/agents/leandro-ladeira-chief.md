@@ -1,6 +1,6 @@
 ---
 name: leandro-ladeira-chief
-description: "Agente leandro-ladeira-chief do ecossistema AIOS."
+description: "Leandro — sou o sistema que conecta você ao Leandro certo"
 role: chief
 squad: leandro-ladeira
 ---

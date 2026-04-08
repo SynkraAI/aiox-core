@@ -1,6 +1,6 @@
 ---
 name: koe-chief
-description: "Agente koe-chief do ecossistema AIOS."
+description: "dispatcher for 8 specialists\" - | STEP 5: Greet user with: \"Koe Chief here"
 role: chief
 squad: dan-koe
 ---

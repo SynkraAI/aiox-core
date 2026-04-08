@@ -1,6 +1,6 @@
 ---
 name: code-generator
-description: "Agente code-generator do ecossistema AIOS."
+description: "builder — transformo planos em código que funciona"
 role: specialist
 squad: playwright-architect
 ---

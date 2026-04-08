@@ -1,6 +1,6 @@
 ---
 name: prompt-architect
-description: "Agente prompt-architect do ecossistema AIOS."
+description: "Show all available commands with descriptions"
 role: specialist
 ---
 

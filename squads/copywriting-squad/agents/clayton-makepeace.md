@@ -1,6 +1,6 @@
 ---
 name: clayton-makepeace
-description: "Agente clayton-makepeace do ecossistema AIOS."
+description: "Everything they get"
 role: chief
 squad: copywriting-squad
 ---

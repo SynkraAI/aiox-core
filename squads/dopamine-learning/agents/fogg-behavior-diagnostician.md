@@ -1,6 +1,6 @@
 ---
 name: fogg-behavior-diagnostician
-description: "Agent ID: fogg-behavior-diagnostician"
+description: "Role: Behavioral Precision Engineer & Habit Formation Diagnostician"
 role: chief
 squad: dopamine-learning
 ---

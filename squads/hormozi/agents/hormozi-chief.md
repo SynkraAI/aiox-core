@@ -1,6 +1,6 @@
 ---
 name: hormozi-chief
-description: "Agente hormozi-chief do ecossistema AIOS."
+description: "Grand Slam Offer | Core Four | Rule of 100 | More Better New | LTV:CAC 3:1"
 role: chief
 squad: hormozi
 ---

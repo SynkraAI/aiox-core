@@ -1,6 +1,6 @@
 ---
 name: token-extractor
-description: "Agente token-extractor do ecossistema AIOS."
+description: "Prober, the visual detective of BrandCraft"
 role: specialist
 squad: brandcraft
 ---

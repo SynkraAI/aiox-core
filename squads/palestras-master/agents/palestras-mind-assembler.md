@@ -1,6 +1,6 @@
 ---
 name: palestras-mind-assembler
-description: "Agente palestras-mind-assembler do ecossistema AIOS."
+description: "Agente especializado do squad palestras-master."
 role: specialist
 squad: palestras-master
 ---

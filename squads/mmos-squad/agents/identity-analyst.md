@@ -1,6 +1,6 @@
 ---
 name: identity-analyst
-description: "Agente identity-analyst do ecossistema AIOS."
+description: "- Values hierarchy extraction and ranking"
 role: specialist
 squad: mmos-squad
 ---

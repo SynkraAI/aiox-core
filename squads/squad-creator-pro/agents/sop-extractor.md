@@ -1,6 +1,6 @@
 ---
 name: sop-extractor
-description: "Agente sop-extractor do ecossistema AIOS."
+description: "cognitivetaxonomy:"
 role: chief
 squad: squad-creator-pro
 ---

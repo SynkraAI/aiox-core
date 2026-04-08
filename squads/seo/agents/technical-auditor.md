@@ -1,6 +1,6 @@
 ---
 name: technical-auditor
-description: "Agente technical-auditor do ecossistema AIOS."
+description: "Agente especializado do squad seo."
 role: reviewer
 squad: seo
 ---

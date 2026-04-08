@@ -1,6 +1,6 @@
 ---
 name: ai-visibility-optimizer
-description: "Agente ai-visibility-optimizer do ecossistema AIOS."
+description: "Agente especializado do squad seo."
 role: specialist
 squad: seo
 ---

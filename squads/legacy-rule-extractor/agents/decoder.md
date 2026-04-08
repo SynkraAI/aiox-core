@@ -1,6 +1,6 @@
 ---
 name: decoder
-description: "Agente decoder do ecossistema AIOS."
+description: "Multi-branch business decision"
 role: specialist
 squad: legacy-rule-extractor
 ---

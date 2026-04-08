@@ -1,6 +1,6 @@
 ---
 name: content-analyzer
-description: "Agent ID: content-analyzer"
+description: "totaldocuments: 25"
 role: specialist
 squad: knowledge-base-builder
 ---

@@ -1,6 +1,6 @@
 ---
 name: doc-generator
-description: "Agente doc-generator do ecossistema AIOS."
+description: "Forge-Renderer, the print master of BrandCraft"
 role: specialist
 squad: brandcraft
 ---

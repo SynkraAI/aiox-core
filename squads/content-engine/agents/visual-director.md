@@ -1,6 +1,6 @@
 ---
 name: visual-director
-description: "Agente visual-director do ecossistema AIOS."
+description: "sharp no sujeito, fundo em soft focus"
 role: specialist
 squad: content-engine
 ---

@@ -1,6 +1,6 @@
 ---
 name: tathi-thinking-dna
-description: "Agente tathi-thinking-dna do ecossistema AIOS."
+description: "3 frameworks proprietários integrados"
 role: specialist
 squad: tathi-deandhela
 ---

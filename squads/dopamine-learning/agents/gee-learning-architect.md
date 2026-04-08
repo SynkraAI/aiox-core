@@ -1,6 +1,6 @@
 ---
 name: gee-learning-architect
-description: "Agent ID: gee-learning-architect"
+description: "Role: Pedagogical Designer & 36 Learning Principles Integration Specialist"
 role: specialist
 squad: dopamine-learning
 ---

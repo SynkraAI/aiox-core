@@ -1,6 +1,6 @@
 ---
 name: quality-validator
-description: "Agente quality-validator do ecossistema AIOS."
+description: "Gauge, the quality guardian of BrandCraft"
 role: specialist
 squad: brandcraft
 ---

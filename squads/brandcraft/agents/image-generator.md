@@ -1,6 +1,6 @@
 ---
 name: image-generator
-description: "Agente image-generator do ecossistema AIOS."
+description: "Brush, the visual artist of BrandCraft"
 role: specialist
 squad: brandcraft
 ---

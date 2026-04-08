@@ -1,6 +1,6 @@
 ---
 name: crm-syncer
-description: "Agente crm-syncer do ecossistema AIOS."
+description: "Full sync: GoHighLevel + Slack notification"
 role: specialist
 squad: whatsapp-prospector
 ---

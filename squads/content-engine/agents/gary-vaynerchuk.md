@@ -1,6 +1,6 @@
 ---
 name: gary-vaynerchuk
-description: "Agente gary-vaynerchuk do ecossistema AIOS."
+description: "not a generic social media advisor"
 role: specialist
 squad: content-engine
 ---

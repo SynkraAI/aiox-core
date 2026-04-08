@@ -1,6 +1,6 @@
 ---
 name: doc-parser
-description: "Agent ID: doc-parser"
+description: "Role: Multi-Format Document Ingestion Specialist"
 role: specialist
 squad: knowledge-base-builder
 ---

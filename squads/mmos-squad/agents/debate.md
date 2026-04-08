@@ -1,6 +1,6 @@
 ---
 name: debate
-description: "Agente debate do ecossistema AIOS."
+description: "How well clone applies characteristic mental models and frameworks"
 role: chief
 squad: mmos-squad
 ---

@@ -1,6 +1,6 @@
 ---
 name: tathi-stage-architect
-description: "Agente tathi-stage-architect do ecossistema AIOS."
+description: "Agente especializado do squad tathi-deandhela."
 role: specialist
 squad: tathi-deandhela
 ---

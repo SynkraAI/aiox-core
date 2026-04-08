@@ -1,6 +1,6 @@
 ---
 name: stefan-georgi
-description: "Agente stefan-georgi do ecossistema AIOS."
+description: "cognitivestyle:"
 role: specialist
 squad: copywriting-squad
 ---

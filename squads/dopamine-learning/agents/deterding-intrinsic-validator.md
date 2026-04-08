@@ -1,6 +1,6 @@
 ---
 name: deterding-intrinsic-validator
-description: "Agent ID: deterding-intrinsic-validator"
+description: "Role: Ethical Game Design Auditor & Intrinsic Motivation Guardian"
 role: specialist
 squad: dopamine-learning
 ---

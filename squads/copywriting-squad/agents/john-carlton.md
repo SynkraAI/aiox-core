@@ -1,6 +1,6 @@
 ---
 name: john-carlton
-description: "Agente john-carlton do ecossistema AIOS."
+description: "cognitivestyle:"
 role: chief
 squad: copywriting-squad
 ---

@@ -1,6 +1,6 @@
 ---
 name: icp-marcos
-description: "Agente icp-marcos do ecossistema AIOS."
+description: "5 passos + indicador \"1/7\" ou \"5 min\". julga UTILIDADE.. voce tambem nao."
 role: specialist
 squad: content-engine
 ---

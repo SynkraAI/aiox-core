@@ -1,6 +1,6 @@
 ---
 name: hormozi-closer
-description: "Agente hormozi-closer do ecossistema AIOS."
+description: "The Hero's Journey for Closers:"
 role: specialist
 squad: hormozi
 ---

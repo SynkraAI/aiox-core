@@ -1,6 +1,6 @@
 ---
 name: instagram-researcher
-description: "Agente instagram-researcher do ecossistema AIOS."
+description: "Full enrichment: Instagram + site + checkout detection"
 role: analyst
 squad: whatsapp-prospector
 ---

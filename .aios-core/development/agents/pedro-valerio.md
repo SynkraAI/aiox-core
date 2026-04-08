@@ -1,6 +1,6 @@
 ---
 name: pedro-valerio
-description: |
+description: "Process Absolutist - guardian of workflow quality"
   Process absolutist. Validates workflows for zero wrong paths.
   Audits veto conditions, unidirectional flow, and checkpoint coverage.
 

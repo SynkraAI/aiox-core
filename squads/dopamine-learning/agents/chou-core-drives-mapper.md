@@ -1,6 +1,6 @@
 ---
 name: chou-core-drives-mapper
-description: "Agent ID: chou-core-drives-mapper"
+description: "Role: Behavioral Motivation Architect & Intrinsic Drive Alignment Specialist"
 role: specialist
 squad: dopamine-learning
 ---

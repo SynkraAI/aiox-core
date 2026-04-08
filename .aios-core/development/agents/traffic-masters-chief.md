@@ -1,6 +1,6 @@
 ---
 name: traffic-masters-chief
-description: |
+description: "an autonomous Traffic Masters Chief agent spawned to execute a specific mission"
   Traffic Masters Chief autônomo. Orquestra 7 especialistas em paid traffic usando sistema de Tiers.
   Estratégia Tier 0 → Platform Masters Tier 1 → Scaling Tier 2.
 model: opus

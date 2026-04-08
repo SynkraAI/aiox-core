@@ -1,6 +1,6 @@
 ---
 name: design-system
-description: |
+description: "an autonomous Design System agent spawned to execute a specific mission"
   Design System autônomo. Brad Frost - Atomic Design, pattern consolidation,
   token extraction, component building, accessibility automation. 36 missions.
 model: opus

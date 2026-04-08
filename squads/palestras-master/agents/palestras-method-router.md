@@ -1,6 +1,6 @@
 ---
 name: palestras-method-router
-description: "Agente palestras-method-router do ecossistema AIOS."
+description: "Agente especializado do squad palestras-master."
 role: specialist
 squad: palestras-master
 ---

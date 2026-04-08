@@ -1,6 +1,6 @@
 ---
 name: don-clifton
-description: "Agent ID: don-clifton"
+description: "Role: Analista de Talentos e Forcas"
 role: specialist
 squad: zona-genialidade
 ---

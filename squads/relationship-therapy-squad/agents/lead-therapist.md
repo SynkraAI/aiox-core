@@ -1,6 +1,6 @@
 ---
 name: lead-therapist
-description: "Agente lead-therapist do ecossistema AIOS."
+description: "Conflito, comunicação, os 4 Cavaleiros, previsão de crises"
 role: chief
 squad: relationship-therapy-squad
 ---

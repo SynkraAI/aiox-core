@@ -1,6 +1,6 @@
 ---
 name: hormozi-pricing
-description: "Agente hormozi-pricing do ecossistema AIOS."
+description: "copying businesses that are mostly broke"
 role: specialist
 squad: hormozi
 ---

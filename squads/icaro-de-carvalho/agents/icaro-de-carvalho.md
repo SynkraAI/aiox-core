@@ -1,6 +1,6 @@
 ---
 name: icaro-de-carvalho
-description: "Agente icaro-de-carvalho do ecossistema AIOS."
+description: "Entender Produto (o que é), Proposta (estímulo emocional) e Personalidade (voz única)"
 role: specialist
 squad: icaro-de-carvalho
 ---

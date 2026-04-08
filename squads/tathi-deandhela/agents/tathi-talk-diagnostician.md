@@ -1,6 +1,6 @@
 ---
 name: tathi-talk-diagnostician
-description: "Agente tathi-talk-diagnostician do ecossistema AIOS."
+description: "Agente especializado do squad tathi-deandhela."
 role: specialist
 squad: tathi-deandhela
 ---

@@ -1,6 +1,6 @@
 ---
 name: script-architect
-description: "Agente script-architect do ecossistema AIOS."
+description: "arquiteto de scripts"
 role: specialist
 squad: playwright-architect
 ---

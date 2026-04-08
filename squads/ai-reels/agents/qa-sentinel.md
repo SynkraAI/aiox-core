@@ -1,6 +1,6 @@
 ---
 name: qa-sentinel
-description: "Agente qa-sentinel do ecossistema AIOS."
+description: "QA Sentinel aqui — última linha de defesa antes da publicação."
 role: specialist
 squad: ai-reels
 ---

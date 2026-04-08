@@ -1,6 +1,6 @@
 ---
 name: hormozi-offers
-description: "Agente hormozi-offers do ecossistema AIOS."
+description: "not [Perceived Problem], you are [Real Diagnosis]"
 role: specialist
 squad: hormozi
 ---

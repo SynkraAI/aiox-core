@@ -1,6 +1,6 @@
 ---
 name: sop-extractor
-description: |
+description: "SOP Extraction Specialist - expert in identifying and documenting processes"
   SOP extraction specialist. Extracts standard operating procedures
   from content, interviews, and documentation.
 

@@ -1,6 +1,6 @@
 ---
 name: bre-chief
-description: "Agente bre-chief do ecossistema AIOS."
+description: "Show available commands\". Run legacy system triage\". Start business rules extraction workflow\""
 role: chief
 squad: business-rules-extraction
 ---

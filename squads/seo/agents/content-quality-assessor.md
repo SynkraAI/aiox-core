@@ -1,6 +1,6 @@
 ---
 name: content-quality-assessor
-description: "Agente content-quality-assessor do ecossistema AIOS."
+description: "No credentials shown"
 role: specialist
 squad: seo
 ---

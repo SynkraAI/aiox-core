@@ -1,6 +1,6 @@
 ---
 name: visual-typographer
-description: "Agente visual-typographer do ecossistema AIOS."
+description: "Typography Specialist — every letter placement is a decision"
 role: specialist
 squad: content-engine
 ---

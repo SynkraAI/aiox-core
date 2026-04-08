@@ -1,6 +1,6 @@
 ---
 name: concept-extractor
-description: "Agent ID: concept-extractor"
+description: "Role: Knowledge Mining & Concept Graph Builder"
 role: specialist
 squad: knowledge-base-builder
 ---

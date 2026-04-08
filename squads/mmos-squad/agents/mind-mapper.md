@@ -1,6 +1,6 @@
 ---
 name: mind-mapper
-description: "Agente mind-mapper do ecossistema AIOS."
+description: "mind task, \"clone daniel kahneman\"→*map daniel_kahneman, \"check viability\"→*viability→viability-asse. detection to choose the right workflow automatic"
 role: chief
 squad: mmos-squad
 ---

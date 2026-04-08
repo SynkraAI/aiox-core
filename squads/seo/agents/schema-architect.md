@@ -1,6 +1,6 @@
 ---
 name: schema-architect
-description: "Agente schema-architect do ecossistema AIOS."
+description: "Agente especializado do squad seo."
 role: specialist
 squad: seo
 ---

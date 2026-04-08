@@ -1,6 +1,6 @@
 ---
 name: csikszentmihalyi-flow-calibrator
-description: "Agent ID: csikszentmihalyi-flow-calibrator"
+description: "Role: Optimal Experience Architect & Engagement State Calibrator"
 role: specialist
 squad: dopamine-learning
 ---

@@ -1,6 +1,6 @@
 ---
 name: transcript-editor
-description: "Agent ID: transcript-editor"
+description: "Role: Editorial Structuring & Linguistic DNA Guardian"
 role: specialist
 squad: transcript-sculptor
 ---

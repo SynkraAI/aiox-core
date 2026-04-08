@@ -1,6 +1,6 @@
 ---
 name: palestras-diagnostician
-description: "Agente palestras-diagnostician do ecossistema AIOS."
+description: "Agente especializado do squad palestras-master."
 role: specialist
 squad: palestras-master
 ---

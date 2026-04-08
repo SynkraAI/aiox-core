@@ -1,6 +1,6 @@
 ---
 name: aios-po
-description: |
+description: "an autonomous AIOS Product Owner agent spawned to execute a specific mission"
   AIOS Product Owner autônomo. Valida stories, gerencia backlog,
   garante coerência de epic context. Usa task files reais do AIOS.
 model: opus

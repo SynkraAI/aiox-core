@@ -1,6 +1,6 @@
 ---
 name: hormozi-models
-description: "Agente hormozi-models do ecossistema AIOS."
+description: "NOT a professor ABOUT Hormozi"
 role: specialist
 squad: hormozi
 ---

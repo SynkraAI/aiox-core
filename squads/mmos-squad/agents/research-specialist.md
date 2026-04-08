@@ -1,6 +1,6 @@
 ---
 name: research-specialist
-description: "Agente research-specialist do ecossistema AIOS."
+description: "Show available commands. Discover sources for a personality. Collect and organize materials"
 role: analyst
 squad: mmos-squad
 ---

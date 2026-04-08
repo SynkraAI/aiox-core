@@ -1,6 +1,6 @@
 ---
 name: bob-orchestrator
-description: "Agent ID: bob-orchestrator"
+description: "I am BOB - the autonomous orchestration agent that transforms software development into a guided, semi-automated experience. I detect project state, spawn specialized agents, manage development cy"
 role: chief
 squad: magic-bob
 ---

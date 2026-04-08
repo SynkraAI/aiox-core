@@ -1,6 +1,6 @@
 ---
 name: video-composer
-description: "Agente video-composer do ecossistema AIOS."
+description: "Video Composer aqui — editor e compositor de Reels."
 role: specialist
 squad: ai-reels
 ---

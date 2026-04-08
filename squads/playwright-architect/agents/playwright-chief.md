@@ -1,6 +1,6 @@
 ---
 name: playwright-chief
-description: "Agente playwright-chief do ecossistema AIOS."
+description: "maestro que transforma \"quero automatizar X\" em scripts funcionais"
 role: chief
 squad: playwright-architect
 ---

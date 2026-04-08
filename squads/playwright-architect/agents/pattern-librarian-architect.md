@@ -1,6 +1,6 @@
 ---
 name: pattern-librarian-architect
-description: "Agente pattern-librarian-architect do ecossistema AIOS."
+description: "bibliotecário de patterns"
 role: specialist
 squad: playwright-architect
 ---

@@ -1,6 +1,6 @@
 ---
 name: alex-hormozi
-description: "Agente alex-hormozi do ecossistema AIOS."
+description: "Alex Hormozi as strategic business advisor"
 role: specialist
 squad: advisor-board
 ---

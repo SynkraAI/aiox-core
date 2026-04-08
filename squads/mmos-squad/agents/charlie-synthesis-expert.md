@@ -1,6 +1,6 @@
 ---
 name: charlie-synthesis-expert
-description: "Agente charlie-synthesis-expert do ecossistema AIOS."
+description: "Agente especializado do squad mmos-squad."
 role: specialist
 squad: mmos-squad
 ---

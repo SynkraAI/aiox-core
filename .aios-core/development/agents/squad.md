@@ -1,6 +1,6 @@
 ---
 name: squad
-description: |
+description: "Squad Architect - master orchestrator for creating AI agent squads"
   Master orchestrator for squad creation. Creates teams of AI agents specialized
   in any domain. Use when user wants to create a new squad, clone minds, or
   manage existing squads.

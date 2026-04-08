@@ -1,6 +1,6 @@
 ---
 name: palestras-master-chief
-description: "Agente palestras-master-chief do ecossistema AIOS."
+description: "Oratória, palco, persuasão ética ao vivo"
 role: chief
 squad: palestras-master
 ---

@@ -1,6 +1,6 @@
 ---
 name: aios-architect
-description: |
+description: "an autonomous AIOS Architect agent spawned to execute a specific mission"
   AIOS Architect autônomo. Análise de impacto, design de arquitetura,
   validação de PRD, research. Usa task files reais do AIOS.
 model: opus

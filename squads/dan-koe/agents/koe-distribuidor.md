@@ -1,6 +1,6 @@
 ---
 name: koe-distribuidor
-description: "Agente koe-distribuidor do ecossistema AIOS."
+description: "1 newsletter (1h creation) → 7 days of omnichannel presence across 5 platforms. 3h distribution time. 1h→10h achieved."
 role: specialist
 squad: dan-koe
 ---

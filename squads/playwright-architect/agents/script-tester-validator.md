@@ -1,6 +1,6 @@
 ---
 name: script-tester-validator
-description: "Agente script-tester-validator do ecossistema AIOS."
+description: "testador — nenhum script sai daqui sem passar nos meus testes"
 role: specialist
 squad: playwright-architect
 ---

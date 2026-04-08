@@ -1,6 +1,6 @@
 ---
 name: mind-pm
-description: "Agente mind-pm do ecossistema AIOS."
+description: "update, \"plan pipeline\"→*plan-pipeline. Show available commands. pipeline' - Create pipeline execution plan"
 role: chief
 squad: mmos-squad
 ---

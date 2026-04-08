@@ -1,6 +1,6 @@
 ---
 name: leandro-ladeira
-description: "Agente leandro-ladeira do ecossistema AIOS."
+description: "Vendas, não métricas de vaidade."
 role: specialist
 squad: leandro-ladeira
 ---

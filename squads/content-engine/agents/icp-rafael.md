@@ -1,6 +1,6 @@
 ---
 name: icp-rafael
-description: "Agente icp-rafael do ecossistema AIOS."
+description: "serif + frase motivacional → rejeicao 80%. mas o conteudo nao passou no filtro emocional de 2s.. Y-Z\" ou \"N passos pra...\""
 role: specialist
 squad: content-engine
 ---

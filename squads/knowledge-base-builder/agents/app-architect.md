@@ -1,6 +1,6 @@
 ---
 name: app-architect
-description: "Agent ID: app-architect"
+description: "Role: Interactive Learning Application Designer & Builder"
 role: specialist
 squad: knowledge-base-builder
 ---

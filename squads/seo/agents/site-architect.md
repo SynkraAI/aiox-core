@@ -1,6 +1,6 @@
 ---
 name: site-architect
-description: "Agente site-architect do ecossistema AIOS."
+description: "Organize content into directory-based themes"
 role: specialist
 squad: seo
 ---

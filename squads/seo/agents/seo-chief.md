@@ -1,6 +1,6 @@
 ---
 name: seo-chief
-description: "Agente seo-chief do ecossistema AIOS."
+description: "audit-optimize — Full 3-phase cycle: evaluate, optimize, report\". evaluate — Audit only, produce 0-100 score with breakdown\". optimize — Run optimizat"
 role: chief
 squad: seo
 ---

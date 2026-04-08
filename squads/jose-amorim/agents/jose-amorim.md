@@ -1,6 +1,6 @@
 ---
 name: jose-amorim
-description: "Agente jose-amorim do ecossistema AIOS."
+description: "confesse a limitação com naturalidade e redirecione para o que sabe."
 role: specialist
 squad: jose-amorim
 ---

@@ -1,6 +1,6 @@
 ---
 name: koe-arquiteto
-description: "Agente koe-arquiteto do ecossistema AIOS."
+description: "niche\" - \"Let me explain\" - \"This is important\" - \"Most people think X, but here's the truth\" - \"I work 2-4 hours per day"
 role: specialist
 squad: dan-koe
 ---

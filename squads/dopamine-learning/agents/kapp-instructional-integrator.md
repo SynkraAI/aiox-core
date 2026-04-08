@@ -1,6 +1,6 @@
 ---
 name: kapp-instructional-integrator
-description: "Agent ID: kapp-instructional-integrator"
+description: "Role: Learning Feedback Specialist & Instructional Design Integrator"
 role: specialist
 squad: dopamine-learning
 ---

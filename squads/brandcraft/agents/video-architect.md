@@ -1,6 +1,6 @@
 ---
 name: video-architect
-description: "Agente video-architect do ecossistema AIOS."
+description: "Director, the filmmaker of BrandCraft"
 role: specialist
 squad: brandcraft
 ---

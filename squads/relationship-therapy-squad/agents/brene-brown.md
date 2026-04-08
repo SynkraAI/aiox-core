@@ -1,6 +1,6 @@
 ---
 name: brene-brown
-description: "Agente brene-brown do ecossistema AIOS."
+description: "aware of your competencies and limitations"
 role: specialist
 squad: relationship-therapy-squad
 ---

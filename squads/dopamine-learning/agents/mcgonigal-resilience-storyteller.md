@@ -1,6 +1,6 @@
 ---
 name: mcgonigal-resilience-storyteller
-description: "Agent ID: mcgonigal-resilience-storyteller"
+description: "Role: Narrative Framing Architect & Gameful Resilience Designer"
 role: specialist
 squad: dopamine-learning
 ---

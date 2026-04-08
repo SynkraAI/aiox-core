@@ -1,6 +1,6 @@
 ---
 name: schultz-dopamine-analyst
-description: "Agent ID: schultz-dopamine-analyst"
+description: "Role: Neuroscientific Diagnostician of Dopamine Signals"
 role: specialist
 squad: dopamine-learning
 ---

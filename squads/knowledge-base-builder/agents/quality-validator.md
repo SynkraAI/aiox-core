@@ -1,6 +1,6 @@
 ---
 name: quality-validator
-description: "Agent ID: quality-validator"
+description: "overallscore: 8.7 # 0-10 scale"
 role: specialist
 squad: knowledge-base-builder
 ---

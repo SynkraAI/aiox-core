@@ -1,6 +1,6 @@
 ---
 name: taxonomy-architect
-description: "Agent ID: taxonomy-architect"
+description: "Machine Learning Fundamentals"
 role: specialist
 squad: knowledge-base-builder
 ---

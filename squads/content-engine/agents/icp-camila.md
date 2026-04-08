@@ -1,6 +1,6 @@
 ---
 name: icp-camila
-description: "Agente icp-camila do ecossistema AIOS."
+description: "exigente com conteudo\" → Realidade: tem 400+ saves que nunca revisitou"
 role: specialist
 squad: content-engine
 ---

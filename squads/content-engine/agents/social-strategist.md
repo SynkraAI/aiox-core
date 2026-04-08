@@ -1,6 +1,6 @@
 ---
 name: social-strategist
-description: "Agente social-strategist do ecossistema AIOS."
+description: "Brand Journey, Accordion Method, Waterfall, 7-Day Sprint"
 role: chief
 squad: content-engine
 ---

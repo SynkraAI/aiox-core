@@ -1,6 +1,6 @@
 ---
 name: marcos-hiller
-description: "Agente marcos-hiller do ecossistema AIOS."
+description: "frase-âncora que empacota a verdade humana"
 role: specialist
 squad: icaro-de-carvalho
 ---

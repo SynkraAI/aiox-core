@@ -1,6 +1,6 @@
 ---
 name: recon-mapper
-description: "Agente recon-mapper do ecossistema AIOS."
+description: "olheiro do squad"
 role: specialist
 squad: playwright-architect
 ---

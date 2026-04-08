@@ -1,6 +1,6 @@
 ---
 name: dr-ramani
-description: "Agente dr-ramani do ecossistema AIOS."
+description: "not codependent"
 role: specialist
 squad: relationship-therapy-squad
 ---

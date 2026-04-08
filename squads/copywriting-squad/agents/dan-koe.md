@@ -1,6 +1,6 @@
 ---
 name: dan-koe
-description: "Agente dan-koe do ecossistema AIOS."
+description: "cognitivestyle:"
 role: chief
 squad: copywriting-squad
 ---

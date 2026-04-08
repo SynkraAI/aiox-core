@@ -1,6 +1,6 @@
 ---
 name: distillery-chief
-description: "Agent ID: distillery-chief"
+description: "[2-3 sentence description]"
 role: chief
 squad: video-content-distillery
 ---

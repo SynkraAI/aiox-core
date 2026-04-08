@@ -1,6 +1,6 @@
 ---
 name: quality-guardian
-description: "Agent ID: quality-guardian"
+description: "Role: Quality Validation & DNA Preservation Auditor"
 role: specialist
 squad: transcript-sculptor
 ---

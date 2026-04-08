@@ -1,6 +1,6 @@
 ---
 name: outreach-writer
-description: "Agente outreach-writer do ecossistema AIOS."
+description: "Plataforma de treinos online com videos e PDFs"
 role: creator
 squad: whatsapp-prospector
 ---

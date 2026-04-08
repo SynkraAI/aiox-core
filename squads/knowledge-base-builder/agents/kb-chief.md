@@ -1,6 +1,6 @@
 ---
 name: kb-chief
-description: "Agent ID: kb-chief"
+description: "Role: Knowledge Base Pipeline Commander & Phase Gate Manager"
 role: chief
 squad: knowledge-base-builder
 ---

@@ -1,6 +1,6 @@
 ---
 name: roger-hamilton
-description: "Agent ID: roger-hamilton"
+description: "Role: Arquiteto de Perfil de Riqueza (Wealth Dynamics Profile Matching)"
 role: specialist
 squad: zona-genialidade
 ---

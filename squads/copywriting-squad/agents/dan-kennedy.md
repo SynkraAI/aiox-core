@@ -1,6 +1,6 @@
 ---
 name: dan-kennedy
-description: "Agente dan-kennedy do ecossistema AIOS."
+description: "cognitivefunctions:"
 role: specialist
 squad: copywriting-squad
 ---

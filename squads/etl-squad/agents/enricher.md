@@ -1,6 +1,6 @@
 ---
 name: enricher
-description: "Agente enricher do ecossistema AIOS."
+description: "Artigo explora os 3 pilares de construcao de marca (posicionamento, diferenciacao, consistencia) com exemplos de Nike e Natura. Defende que marca e pe"
 role: chief
 squad: etl-squad
 ---

@@ -1,6 +1,6 @@
 ---
 name: prospect-analyst
-description: "Agente prospect-analyst do ecossistema AIOS."
+description: "Analyze enriched lead against Ensinio KB and score"
 role: specialist
 squad: whatsapp-prospector
 ---

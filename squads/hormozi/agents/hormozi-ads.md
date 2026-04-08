@@ -1,6 +1,6 @@
 ---
 name: hormozi-ads
-description: "Agente hormozi-ads do ecossistema AIOS."
+description: "Create complete ad (hook + meat + CTA)"
 role: specialist
 squad: hormozi
 ---

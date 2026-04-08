@@ -1,6 +1,6 @@
 ---
 name: aios-devops
-description: |
+description: "an autonomous AIOS DevOps agent spawned to execute a specific mission"
   AIOS DevOps autônomo. Git operations, CI/CD, PR automation,
   pre-push quality gates, version management, MCP management. Usa task files reais do AIOS.
 model: opus

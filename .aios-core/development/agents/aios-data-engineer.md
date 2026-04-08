@@ -1,6 +1,6 @@
 ---
 name: aios-data-engineer
-description: |
+description: "an autonomous AIOS Data Engineer agent spawned to execute a specific mission"
   AIOS Data Engineer autônomo. Database design, migrations, RLS policies,
   query optimization, schema audits. Usa task files reais do AIOS.
 model: opus

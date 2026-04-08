@@ -1,6 +1,6 @@
 ---
 name: hormozi-workshop
-description: "Agente hormozi-workshop do ecossistema AIOS."
+description: "not willing to go live, you are leaving money on the table"
 role: chief
 squad: hormozi
 ---

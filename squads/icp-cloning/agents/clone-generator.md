@@ -1,6 +1,6 @@
 ---
 name: clone-generator
-description: "Agente clone-generator do ecossistema AIOS."
+description: "- System prompt architecture (1000+ lines)"
 role: specialist
 squad: icp-cloning
 ---

@@ -1,6 +1,6 @@
 ---
 name: system-prompt-architect
-description: "Agente system-prompt-architect do ecossistema AIOS."
+description: "generalista, \"create specialist\"→*create-specialist. Show available commands. generalista' - Compile general-purpose system prompt"
 role: specialist
 squad: mmos-squad
 ---

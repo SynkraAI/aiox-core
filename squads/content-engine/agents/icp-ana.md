@@ -1,6 +1,6 @@
 ---
 name: icp-ana
-description: "Agente icp-ana do ecossistema AIOS."
+description: "familia, delegar, dizer nao. sua rejeicao pode ser defesa, nao critica valida."
 role: specialist
 squad: content-engine
 ---

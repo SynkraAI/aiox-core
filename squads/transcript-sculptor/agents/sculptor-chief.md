@@ -1,6 +1,6 @@
 ---
 name: sculptor-chief
-description: "Agent ID: sculptor-chief"
+description: "Role: Pipeline Commander & Editorial Quality Guardian"
 role: chief
 squad: transcript-sculptor
 ---

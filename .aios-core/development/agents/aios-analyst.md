@@ -1,6 +1,6 @@
 ---
 name: aios-analyst
-description: |
+description: "an autonomous AIOS Analyst agent spawned to execute a specific mission"
   AIOS Analyst autônomo. Market research, competitive analysis,
   brainstorming facilitation, ROI calculations, deep research. Usa task files reais do AIOS.
 model: opus

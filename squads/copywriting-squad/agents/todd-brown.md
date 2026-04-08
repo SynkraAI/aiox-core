@@ -1,6 +1,6 @@
 ---
 name: todd-brown
-description: "Agente todd-brown do ecossistema AIOS."
+description: "cognitivestyle:"
 role: specialist
 squad: copywriting-squad
 ---

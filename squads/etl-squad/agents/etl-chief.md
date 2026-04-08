@@ -1,6 +1,6 @@
 ---
 name: etl-chief
-description: "Agente etl-chief do ecossistema AIOS."
+description: "Executa pipeline ETL completo (extract + transform). Ponto de entrada unico\". -pipeline {name} {source} — Process com pipeline especifico\". Processa m"
 role: chief
 squad: etl-squad
 ---

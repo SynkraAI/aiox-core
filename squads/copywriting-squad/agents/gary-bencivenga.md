@@ -1,6 +1,6 @@
 ---
 name: gary-bencivenga
-description: "Agente gary-bencivenga do ecossistema AIOS."
+description: "cognitivestyle:"
 role: chief
 squad: copywriting-squad
 ---

@@ -1,6 +1,6 @@
 ---
 name: alex-hormozi
-description: "Agent ID: alex-hormozi"
+description: "Role: Arquiteto de Monetizacao (Monetization Strategy Architect)"
 role: specialist
 squad: zona-genialidade
 ---

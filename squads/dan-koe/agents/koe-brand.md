@@ -1,6 +1,6 @@
 ---
 name: koe-brand
-description: "Agente koe-brand do ecossistema AIOS."
+description: "- Personal brand strategy and architecture"
 role: specialist
 squad: dan-koe
 ---

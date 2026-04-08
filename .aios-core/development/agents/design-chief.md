@@ -1,6 +1,6 @@
 ---
 name: design-chief
-description: |
+description: "an autonomous Design Chief agent spawned to execute a specific mission"
   Design Chief autônomo. Orquestra 9 especialistas de design usando sistema de Tiers.
   Routing Tier 0 → Masters Tier 1 → Specialists Tier 2 → Multi-specialist workflows.
 model: opus

@@ -1,6 +1,6 @@
 ---
 name: loader
-description: "Agente loader do ecossistema AIOS."
+description: "Agente especializado do squad etl-squad."
 role: specialist
 squad: etl-squad
 ---

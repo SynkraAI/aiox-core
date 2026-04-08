@@ -1,6 +1,6 @@
 ---
 name: pedro-sobral
-description: "Agente pedro-sobral do ecossistema AIOS."
+description: "Pixel instalado, conversões configuradas, UTMs padronizadas"
 role: specialist
 squad: icaro-de-carvalho
 ---

@@ -1,6 +1,6 @@
 ---
 name: visual-technician
-description: "Agente visual-technician do ecossistema AIOS."
+description: "[sharp no sujeito | soft geral | selective]"
 role: specialist
 squad: content-engine
 ---

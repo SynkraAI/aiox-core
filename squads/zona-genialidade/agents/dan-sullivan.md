@@ -1,6 +1,6 @@
 ---
 name: dan-sullivan
-description: "Agent ID: dan-sullivan"
+description: "Role: Estrategista de Habilidade Unica"
 role: specialist
 squad: zona-genialidade
 ---

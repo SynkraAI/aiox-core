@@ -1,6 +1,6 @@
 ---
 name: extractor
-description: "Agente extractor do ecossistema AIOS."
+description: "Agente especializado do squad etl-squad."
 role: specialist
 squad: etl-squad
 ---

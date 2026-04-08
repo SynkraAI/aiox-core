@@ -1,6 +1,6 @@
 ---
 name: hormozi-scale
-description: "Agente hormozi-scale do ecossistema AIOS."
+description: "available for questions EXAMPLE: \"Dear [Name], Over the past [X] months, we have helped you achieve [specific results]"
 role: specialist
 squad: hormozi
 ---

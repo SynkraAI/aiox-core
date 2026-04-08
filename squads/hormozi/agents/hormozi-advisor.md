@@ -1,6 +1,6 @@
 ---
 name: hormozi-advisor
-description: "Agente hormozi-advisor do ecossistema AIOS."
+description: "not overworked, you are under-prioritized"
 role: chief
 squad: hormozi
 ---

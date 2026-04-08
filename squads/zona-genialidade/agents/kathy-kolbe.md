@@ -1,6 +1,6 @@
 ---
 name: kathy-kolbe
-description: "Agent ID: kathy-kolbe"
+description: "Role: Analista de Forca Conativa"
 role: specialist
 squad: zona-genialidade
 ---

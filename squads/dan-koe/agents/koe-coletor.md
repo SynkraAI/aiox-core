@@ -1,6 +1,6 @@
 ---
 name: koe-coletor
-description: "Agente koe-coletor do ecossistema AIOS."
+description: "- Philosophy (stoicism, consciousness, meaning)"
 role: specialist
 squad: dan-koe
 ---

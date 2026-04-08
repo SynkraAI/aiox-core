@@ -1,6 +1,6 @@
 ---
 name: sally-hogshead
-description: "Agent ID: sally-hogshead"
+description: "Role: Estrategista de Posicionamento e Marca Pessoal"
 role: specialist
 squad: zona-genialidade
 ---

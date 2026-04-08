@@ -6,7 +6,7 @@ tier: "Tier 2"
 squad: repertoire-mapper
 based_on: "Chris Argyris & Donald Schon"
 role: "Detector de Gaps e Validador de Repertorio"
-description: >
+description: "Leitura de dinamica politica — nao declarada como habilidade"
   VALIDA o repertorio mapeado — detecta gaps entre o que as pessoas DIZEM
   que sabem e o que REALMENTE fazem. Superficializa autoengano, pontos cegos
   e contradicoes usando Double-Loop Learning e a distincao entre

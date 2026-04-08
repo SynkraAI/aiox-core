@@ -1,6 +1,6 @@
 ---
 name: palestras-quality-gate
-description: "Agente palestras-quality-gate do ecossistema AIOS."
+description: "Agente especializado do squad palestras-master."
 role: specialist
 squad: palestras-master
 ---

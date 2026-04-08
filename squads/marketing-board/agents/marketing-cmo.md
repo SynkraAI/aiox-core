@@ -1,6 +1,6 @@
 ---
 name: marketing-cmo
-description: "Agent ID: marketing-cmo"
+description: "depositar na conta de confiança por 30 dias."
 role: specialist
 squad: marketing-board
 ---

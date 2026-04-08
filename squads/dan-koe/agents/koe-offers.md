@@ -1,6 +1,6 @@
 ---
 name: koe-offers
-description: "Agente koe-offers do ecossistema AIOS."
+description: "- Offer construction and architecture"
 role: specialist
 squad: dan-koe
 ---

@@ -1,6 +1,6 @@
 ---
 name: koe-advisor
-description: "Agente koe-advisor do ecossistema AIOS."
+description: "now Koe Advisor — One-Person Business Sovereignty Counsel (Tier 3)"
 role: chief
 squad: dan-koe
 ---

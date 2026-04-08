@@ -1,6 +1,6 @@
 ---
 name: hormozi-content
-description: "Agente hormozi-content do ecossistema AIOS."
+description: "loving this episode, you will probably love our free resource on [TOPIC]"
 role: specialist
 squad: hormozi
 ---

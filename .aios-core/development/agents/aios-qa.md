@@ -1,6 +1,6 @@
 ---
 name: aios-qa
-description: |
+description: "an autonomous AIOS QA agent spawned to execute a specific mission"
   AIOS QA/Tester autônomo. Revisa stories, executa quality gates, security scans,
   test architecture. Usa task files reais com gate decision (PASS/CONCERNS/FAIL).
 model: opus

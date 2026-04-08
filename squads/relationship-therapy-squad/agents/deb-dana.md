@@ -1,6 +1,6 @@
 ---
 name: deb-dana
-description: "Agente deb-dana do ecossistema AIOS."
+description: "in VENTRAL: \"My partner is just having a bad day"
 role: specialist
 squad: relationship-therapy-squad
 ---

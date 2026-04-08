@@ -1,6 +1,6 @@
 ---
 name: copy-maestro
-description: "Agente copy-maestro do ecossistema AIOS."
+description: "encontrar mensagem."
 role: chief
 squad: copywriting-squad
 ---

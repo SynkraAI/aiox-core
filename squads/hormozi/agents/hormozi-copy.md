@@ -1,6 +1,6 @@
 ---
 name: hormozi-copy
-description: "Agente hormozi-copy do ecossistema AIOS."
+description: "Create complete sales page copy using 17-element blueprint"
 role: chief
 squad: hormozi
 ---

@@ -1,6 +1,6 @@
 ---
 name: transcript-analyst
-description: "Agent ID: transcript-analyst"
+description: "Role: Semantic Analysis & Content Mapping Expert"
 role: chief
 squad: transcript-sculptor
 ---

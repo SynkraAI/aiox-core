@@ -1,6 +1,6 @@
 ---
 name: pptx-architect
-description: "Agente pptx-architect do ecossistema AIOS."
+description: "sizeh2, weightbody"
 role: specialist
 squad: brandcraft
 ---

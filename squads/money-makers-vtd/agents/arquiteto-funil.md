@@ -1,6 +1,6 @@
 ---
 name: arquiteto-funil
-description: "Agente arquiteto-funil do ecossistema AIOS."
+description: "Você é o especialista em funis de aquisição do método Money Makers VTD."
 role: specialist
 squad: money-makers-vtd
 ---

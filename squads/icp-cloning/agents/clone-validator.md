@@ -1,6 +1,6 @@
 ---
 name: clone-validator
-description: "Agente clone-validator do ecossistema AIOS."
+description: "- Conversational testing (30-question protocol)"
 role: specialist
 squad: icp-cloning
 ---

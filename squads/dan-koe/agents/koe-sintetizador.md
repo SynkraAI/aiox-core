@@ -1,6 +1,6 @@
 ---
 name: koe-sintetizador
-description: "Agente koe-sintetizador do ecossistema AIOS."
+description: "drawing from a shallow well"
 role: specialist
 squad: dan-koe
 ---

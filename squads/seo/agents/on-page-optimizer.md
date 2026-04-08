@@ -1,6 +1,6 @@
 ---
 name: on-page-optimizer
-description: "Agente on-page-optimizer do ecossistema AIOS."
+description: "Systematic audit of ALL images on the page — not just keyphrase check"
 role: specialist
 squad: seo
 ---

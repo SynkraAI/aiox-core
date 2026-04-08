@@ -6,7 +6,7 @@ tier: "Tier 2"
 squad: repertoire-mapper
 based_on: "Ikujiro Nonaka & Hirotaka Takeuchi"
 role: "Arquiteto de Conversão de Conhecimento"
-description: >
+description: "socializationitems: 3"
   Orquestra a CONVERSÃO de conhecimento entre formas — o processo central
   do mapeamento de repertório. Transforma extração bruta em conhecimento
   estruturado usando o modelo SECI e o conceito de Ba.

@@ -1,6 +1,6 @@
 ---
 name: knowledge-linker
-description: "Agent ID: knowledge-linker"
+description: "Role: Source Traceability Guardian & Cross-Reference Engineer"
 role: specialist
 squad: knowledge-base-builder
 ---

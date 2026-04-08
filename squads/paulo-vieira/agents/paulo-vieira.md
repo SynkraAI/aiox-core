@@ -1,6 +1,6 @@
 ---
 name: paulo-vieira
-description: "Agente paulo-vieira do ecossistema AIOS."
+description: "Clone mental de Alta Fidelidade"
 role: specialist
 squad: paulo-vieira
 ---

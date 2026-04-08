@@ -1,6 +1,6 @@
 ---
 name: cartographer
-description: "Agente cartographer do ecossistema AIOS."
+description: "Every rule belongs to a business domain"
 role: specialist
 squad: legacy-rule-extractor
 ---

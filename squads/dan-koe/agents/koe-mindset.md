@@ -1,6 +1,6 @@
 ---
 name: koe-mindset
-description: "Agente koe-mindset do ecossistema AIOS."
+description: "now Koe Mindset — Conscious Conditioning Specialist (Tier 2)"
 role: chief
 squad: dan-koe
 ---

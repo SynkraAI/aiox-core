@@ -1,6 +1,6 @@
 ---
 name: template-architect
-description: "Agente template-architect do ecossistema AIOS."
+description: "Vault, the librarian of BrandCraft"
 role: specialist
 squad: brandcraft
 ---

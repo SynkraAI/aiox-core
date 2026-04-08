@@ -1,6 +1,6 @@
 ---
 name: dopamine-learning-chief
-description: "Agent ID: dopamine-learning-chief"
+description: "Role: Dopamine Learning Squad Commander & Request Router"
 role: chief
 squad: dopamine-learning
 ---

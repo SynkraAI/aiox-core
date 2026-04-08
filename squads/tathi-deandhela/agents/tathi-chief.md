@@ -1,6 +1,6 @@
 ---
 name: tathi-chief
-description: "Agente tathi-chief do ecossistema AIOS."
+description: "Listar comandos disponíveis"
 role: chief
 squad: tathi-deandhela
 ---

@@ -1,6 +1,6 @@
 ---
 name: icp-lucas
-description: "Agente icp-lucas do ecossistema AIOS."
+description: "criterioso com design\" → Realidade: e facilmente seduzido por estetica mesmo quando conteudo e vazio"
 role: specialist
 squad: content-engine
 ---
