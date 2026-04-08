@@ -75,19 +75,57 @@ Dispatch in PARALLEL (two Agent tool calls in one message):
 - Task: spec-assess-complexity
 - Input: PRD from Step 1
 - **Constraint — repo structure:** Read `state.json → tech_decisions.repo_structure`. When value is `monorepo_workspaces`, the architecture document MUST define `frontend/` and `backend/` as separate top-level directories. When `single_package`, use flat layout. The @architect owns the definitive directory tree — the scaffold plugin will use this output as source of truth for the CLAUDE.md `## Project Structure` section.
+- Stamp report (se `state.json.stamp` disponível): usar folder structure e design patterns como referência para decisões de arquitetura
 - Output: Complexity score + architecture document (including directory structure)
 - Save to: `.aios/forge-runs/{run_id}/spec/architecture.md`
 
-**@analyst (conditional — smart skip):**
+**@analyst (MANDATORY quando Phase 1 executa — dois modos):**
+
+O @analyst SEMPRE despacha em paralelo com @architect quando Phase 1 é executada (FULL_APP, DESIGN_SYSTEM, LANDING_PAGE, CLONE_SITE). Modos que pulam Phase 1 (SINGLE_FEATURE, BUG_FIX, QUICK) não são afetados por esta regra. Dois modos:
+
+**Mode A: Doc Validation (SEMPRE roda, ~30 segundos)**
+- Para CADA tecnologia em `state.json.tech_decisions` (framework, database, ORM, auth, deploy target):
+  - Buscar documentação oficial via WebSearch
+  - Verificar assinaturas de API vs versão estável atual
+  - Checar breaking changes desde knowledge cutoff
+  - Checar deprecation notices
+- Agent: `{AIOS_HOME}/.aios-core/development/agents/aios-analyst.md`
+- Task: docs-validation (lightweight, focused on API compatibility)
+- Input: Lista de tecnologias de `state.json.tech_decisions` + PRD
+- Output: `.aios/forge-runs/{run_id}/spec/docs-validation.md`
+- Formato do output:
+  ```markdown
+  # Docs Validation Report
+  ## {Tecnologia}
+  - Versão verificada: {version}
+  - Status: OK | WARNING | BREAKING | UNKNOWN
+  - Notas: {breaking changes ou deprecações encontradas}
+  ```
+- Se qualquer tecnologia retorna BREAKING: marcar `state.json.phases.1.docs_validation_status = "BREAKING"`
+- Se todas OK: marcar `state.json.phases.1.docs_validation_status = "OK"`
+
+**Error Handling (falhas de WebSearch):**
+- Se WebSearch falha para uma tecnologia: marcar status como `UNKNOWN`
+- Log warning: "Não foi possível verificar {tech} — prosseguindo com cautela"
+- NÃO bloquear Phase 1 (UNKNOWN não é veto)
+- Se count de UNKNOWN > 2: sugerir verificação manual ao usuário
+- Marcar `state.json.phases.1.docs_validation_status = "PARTIAL"` se houver UNKNOWNs
+
+**Mode B: Tech Research (condicional — mesmos critérios anteriores)**
 - **SKIP para pesquisa de mercado** se `state.json.discovery.market_research.executed == true` — Phase 0 já fez via `/tech-search`. Pesquisar de novo seria redundante.
 - **Ainda despachar** se o projeto precisa de pesquisa TÉCNICA específica (ex: "como funciona FHIR para prontuários", "qual a melhor lib de real-time para Node.js"). A distinção: mercado (já feito) vs técnico (pode ser necessário).
 - Only dispatch if project involves unfamiliar technical domain OR needs deep technical research not covered by market analysis
-- Agent: `{AIOS_HOME}/.aios-core/development/agents/aios-analyst.md`
 - Task: research (technical focus, not market)
 - Input: PRD + specific technical questions
 - Inject: relevant minds from context-pack (ex: @hormozi for growth, @munger for strategy)
 - Output: Research brief
 - Save to: `.aios/forge-runs/{run_id}/spec/research.md`
+
+**Lógica de dispatch:**
+- SEMPRE despachar Mode A (Doc Validation) — é obrigatório, nunca pular
+- ADICIONALMENTE despachar Mode B se critérios condicionais forem atendidos
+- Ambos podem rodar num único dispatch de @analyst com instruções combinadas
+- Se Mode B não for necessário: dispatch contém apenas instruções de Mode A
 
 Show parallel progress:
 ```
@@ -101,7 +139,12 @@ Show parallel progress:
 ### Step 3: Spec Finalization (@pm)
 
 Dispatch @pm again:
-- Input: PRD + architecture + research (if available)
+- Input: PRD + architecture + research (if available) + docs-validation.md
+  - @pm DEVE referenciar docs-validation no PRD: marcar tecnologias com WARNING/BREAKING se aplicável
+  - Se alguma tecnologia tem status BREAKING: incluir seção "Alertas de Compatibilidade" no spec
+- Stamp report (se `state.json.stamp` existe): `.aios/forge-runs/{run_id}/spec/stamp-report.md`
+  - @pm deve referenciar padrões do stamp no PRD
+  - Se stamp define stack: usar como strong suggestion (usuário pode override)
 - Task: Finalize spec with implementation plan
 - Output: Final spec with:
   - Epic definition
@@ -203,6 +246,8 @@ Save to state.json:
       "status": "completed",
       "spec_path": ".aios/forge-runs/{run_id}/spec/spec-final.md",
       "architecture_path": ".aios/forge-runs/{run_id}/spec/architecture.md",
+      "docs_validation_path": ".aios/forge-runs/{run_id}/spec/docs-validation.md",
+      "docs_validation_status": "OK|WARNING|BREAKING|PARTIAL",
       "complexity": "STANDARD",
       "qa_score": 4.2,
       "estimated_stories": 8
@@ -217,7 +262,9 @@ Save to state.json:
 
 - `spec/prd.md` — Product Requirements Document
 - `spec/architecture.md` — Architecture decisions + complexity assessment
-- `spec/research.md` — Research brief (if applicable)
+- `spec/docs-validation.md` — External documentation validation report (ALWAYS generated)
+- `spec/research.md` — Research brief (if applicable — Mode B)
+- `spec/stamp-report.md` — Reference patterns from stamp (if available)
 - `spec/spec-final.md` — Consolidated spec with implementation plan
 - User approval to proceed to Phase 2
 

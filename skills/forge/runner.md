@@ -32,7 +32,7 @@ Antes de entrar na primeira fase de execução (Phase 1 para FULL_APP, Phase 3 p
 
 **Campos obrigatórios para modos não-QUICK (HALT se ausente):**
 - `run_id` — identificador do run
-- `mode` — modo de execução. **Valores válidos:** FULL_APP, SINGLE_FEATURE, BUG_FIX, QUICK, BROWNFIELD, DESIGN_SYSTEM, LANDING_PAGE, CLONE_SITE, SQUAD_UPGRADE, DRY_RUN, REPLAY, TEMPLATE, STRESS_TEST. Se o valor não estiver nesta lista: HALT com `"Mode inválido: '{mode}'. Valores válidos: {lista}."`.
+- `mode` — modo de execução. **Valores válidos:** FULL_APP, SINGLE_FEATURE, BUG_FIX, QUICK, BROWNFIELD, DESIGN_SYSTEM, LANDING_PAGE, CLONE_SITE, SQUAD_UPGRADE, DRY_RUN, REPLAY, TEMPLATE, STRESS_TEST, STAMP. Se o valor não estiver nesta lista: HALT com `"Mode inválido: '{mode}'. Valores válidos: {lista}."`.
 - `status` — deve ser "running". **Valores válidos:** running, completed, converted, saved, cancelled. Se o valor não estiver nesta lista: HALT.
 - `discovery` — respostas do Phase 0
 - `tech_decisions` — stack técnica (deve incluir `architecture` e `repo_structure`)

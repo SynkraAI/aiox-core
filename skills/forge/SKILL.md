@@ -86,6 +86,7 @@ Parse the user's command and classify:
 /forge template {name}                -> TEMPLATE (projeto pré-configurado)
 /forge template list                  -> TEMPLATE (listar templates disponíveis)
 /forge stress-test {skill|all}        -> STRESS_TEST (auditar resiliência de skills)
+/forge stamp {github-url}            -> STAMP (importar padrão de referência)
 ```
 
 ### `help` Command
@@ -112,6 +113,7 @@ When the user runs `/forge help`, show this formatted output and STOP:
   /forge lp {descrição}           Criar landing page premium (pattern library)
   /forge clone {url}              Redesign premium de site existente (10/10)
   /forge redesign {url}           Alias para clone
+  /forge stamp {github-url}       Importar padrão de projeto referência
 
   ━━━ EVOLUIR / EXPANDIR ━━━
 
@@ -179,6 +181,7 @@ To build the help output:
 | **REPLAY** | Prefix `replay`, or words like "refazer", "replay", "de novo", "from phase" | `{FORGE_HOME}/workflows/replay.md` (load previous run, apply changes, re-execute) |
 | **TEMPLATE** | Prefix `template`, or words like "template", "scaffold", "boilerplate", "starter" | `{FORGE_HOME}/workflows/template.md` (pre-configured project, skip Phase 0+1) |
 | **STRESS_TEST** | Prefix `stress-test`, or words like "stress test", "health check", "audit skill", "testar resiliência" | `{FORGE_HOME}/workflows/stress-test.md` (Recon → Tiers 1-2 → Tiers 3-5 → Fix → Validate) |
+| **STAMP** | Prefix `stamp`, or words like "padrão de", "referência", "seguir o estilo de", "importar padrão", "usar como base" | `{FORGE_HOME}/workflows/stamp.md` (Clone → Analyze → Report → Cleanup) |
 
 ### Intent Resolution Order (MANDATORY)
 
@@ -435,8 +438,10 @@ Isso mantém o usuário informado sem interromper o fluxo.
 | `{FORGE_HOME}/workflows/template.md` | Mode = TEMPLATE |
 | `{FORGE_HOME}/workflows/stress-test.md` | Mode = STRESS_TEST |
 | `{FORGE_HOME}/forge-memory.md` | ALWAYS (loaded by forge-memory plugin at init) |
+| `{FORGE_HOME}/context-hygiene.md` | ALWAYS (loaded by context-hygiene plugin) |
 | `{FORGE_HOME}/forge-watch.md` | Phase 5 (post-deploy monitoring, loaded by forge-watch plugin) |
 | `{FORGE_HOME}/forge-advisor.md` | Phase 0 (tech decision enhancement, loaded by forge-advisor plugin) |
+| `{FORGE_HOME}/workflows/stamp.md` | Mode = STAMP |
 | `{FORGE_HOME}/forge-parallel.md` | Phase 3 (parallel execution, if enabled in config) |
 | `{FORGE_HOME}/forge-feedback.md` | ALWAYS (loaded by forge-feedback plugin) |
 | `{FORGE_HOME}/forge-scaffold.md` | before:phase:3 (loaded by forge-scaffold plugin — generates CLAUDE.md + .gitignore) |

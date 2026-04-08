@@ -1,0 +1,77 @@
+# Context Hygiene Plugin (SDD-inspired)
+# Generates phase summaries after each phase and suggests /clear for heavy phases.
+# Injects previous phase summaries into new phases for context continuity after /clear.
+
+plugin:
+  name: context-hygiene
+  version: "1.0.0"
+  description: "Generates phase summaries and suggests /clear for heavy phases"
+
+activation:
+  enabled: true
+  modes:
+    - FULL_APP
+    - SINGLE_FEATURE
+    - LANDING_PAGE
+    - CLONE_SITE
+    - DESIGN_SYSTEM
+    - REPLAY
+    # Excluded: QUICK (speed over hygiene), BUG_FIX (too short), DRY_RUN (simulation)
+
+priority: 46  # After forge-memory (5), after lifecycle — state.json already updated
+
+hooks:
+  # Generate summary after each phase completes
+  - event: "after:phase:*"
+    action: log
+    source: "{FORGE_HOME}/context-hygiene.md"
+    section: "1. Summary Generation"
+    description: |
+      Generate compressed summary of the completed phase:
+      1. Read phase outputs from state.json + filesystem (spec/, stories/, build-log/)
+      2. Compress into standard format (max 10 lines):
+         - Decisões: key decisions (max 3 bullets)
+         - Artefatos: files created with paths (max 5)
+         - Riscos: identified risks (max 2)
+         - Próximo precisa saber: critical context for next phase (max 3 bullets)
+      3. Save to state.json -> phases.{N}.summary (string, for programmatic access)
+      4. Save to .aios/forge-runs/{run_id}/phase-{N}-summary.md (file, for injection)
+      5. If heavy phase (config.heavy_phases — default [1, 3]):
+         Show suggestion to /clear + /forge resume
+
+  # Inject previous phase summaries at the start of each new phase
+  - event: "before:phase:*"
+    action: inject
+    source: "{FORGE_HOME}/context-hygiene.md"
+    section: "2. Summary Injection"
+    description: |
+      Inject summaries from all previous phases into the new phase context:
+      1. Glob .aios/forge-runs/{run_id}/phase-*-summary.md where phase < current
+      2. Build compact "Phase Memory Briefing" block (max 30 lines total)
+      3. Inject into phase context so agents have decisions from previous phases
+      This ensures /clear + /forge resume loses ZERO critical context.
+
+  # Inject relevant summaries into agent context
+  - event: "on:agent-dispatch"
+    action: inject
+    source: "{FORGE_HOME}/context-hygiene.md"
+    section: "3. Agent Context Injection"
+    filter:
+      phases: [1, 2, 3, 4, 5]
+    description: |
+      Inject relevant phase summaries per agent role:
+      - @pm: Phase 0 summary (discovery decisions)
+      - @architect: Phase 0 summary (scope, constraints)
+      - @sm: Phase 1 summary (spec decisions, architecture)
+      - @dev: Phase 1 (architecture) + Phase 2 (story context) summaries
+      - @qa: Phase 3 summary (what was built, known issues)
+      - @devops: Phase 4 summary (quality gate results)
+      Max 10 lines per summary injected per agent.
+
+state_key: "context_hygiene"
+
+config:
+  heavy_phases: [1, 3]
+  summary_max_lines: 10
+  inject_previous: true
+  briefing_max_lines: 30

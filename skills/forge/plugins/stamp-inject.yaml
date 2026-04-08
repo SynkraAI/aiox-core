@@ -1,0 +1,87 @@
+# Stamp Inject Plugin
+# Automatically injects stamp reports into Phase 1 agent context.
+# Works with both in-run stamps and standalone stamps from .aios/stamps/.
+
+plugin:
+  name: stamp-inject
+  version: "1.1.0"
+  description: "Injects stamp reports into Phase 1 agent context"
+
+activation:
+  enabled: true
+  modes:
+    - FULL_APP
+    - SINGLE_FEATURE
+    - LANDING_PAGE
+    - CLONE_SITE
+    - DESIGN_SYSTEM
+    # NOTE: QUICK mode excluded — stamps don't inject into QUICK runs (speed over context)
+
+priority: 15  # After ecosystem-scanner (10), before quality gates
+
+hooks:
+  # Inject stamp report at the start of Phase 1
+  - event: "before:phase:1"
+    action: inject
+    source: "{FORGE_HOME}/workflows/stamp.md"
+    section: "Step 5: Integration"
+    description: |
+      Check for available stamp reports and inject into Phase 1 context:
+
+      1. If state.json has `stamp.report_path`:
+         - Read the stamp report file
+         - Inject as "REFERENCE PATTERNS" block at the start of Phase 1
+
+      2. Else if `.aios/stamps/*.md` exists:
+         - List available stamps (sorted by modification date, newest first)
+         - Read the most recent stamp
+         - Inject as "REFERENCE PATTERNS (from previous stamp)" block
+         - Note to agents: "Stamp de run anterior. Confirmar relevância com usuário."
+
+      3. If no stamps found: skip silently (no output, no error)
+
+      Injection format:
+      ```
+      --- REFERENCE PATTERNS (stamp: {slug}) ---
+      Source: {url}
+      Stack: {tech stack summary, 1 line}
+      Key patterns: {top 3 patterns to adopt, 1 line each}
+      Naming: {file/component/function conventions, 1 line}
+      --- END STAMP ---
+      ```
+
+      Max 10 lines injected. Full report available at {report_path} if agents need details.
+
+  # Inject relevant stamp sections into Phase 1 agent dispatches ONLY
+  - event: "on:agent-dispatch"
+    action: inject
+    source: "{FORGE_HOME}/workflows/stamp.md"
+    section: "Step 2: Analyze"
+    filter:
+      phases: [1]
+    description: |
+      When dispatching agents in Phase 1, inject stamp sections by role.
+      Phase 1 only — stamps inform DESIGN decisions, not BUILD execution.
+
+      Check: state.json has `stamp.report_path` OR `.aios/stamps/*.md` exists.
+      If no stamp: skip silently.
+
+      Per agent:
+      - @architect: inject "Folder Structure" + "Design Patterns" + "Code Organization"
+      - @pm: inject "Tech Stack" + "Recommended Adoption"
+      - @sm: inject "Recommended Adoption" (for story scoping)
+      - @analyst: skip (stamps are architecture-focused, not research)
+
+      Read sections from the stamp report file. Trim each section to max 15 lines.
+      If a section doesn't exist in the report: skip it.
+
+  # Clean up stale .stamp/ directories at run start
+  - event: "before:run"
+    action: log
+    source: "{FORGE_HOME}/workflows/stamp.md"
+    section: "Stale Stamp Cleanup"
+    description: |
+      Check for stale .stamp/ directory from a previous interrupted stamp:
+      If .stamp/ exists, delete it silently to prevent disk waste.
+
+state_key: "stamp_inject"
