@@ -541,34 +541,97 @@ REVIEW → FIX → [AUDIT] → ... → PERFECT (10/10)
                            └─ NEEDS_WORK → new REVIEW round
 ```
 
-### What the critica checks (5 sections)
+### Mode: CRITICA (Claude Code runs this — MANDATORY after PERFECT)
 
-**Phase 1 — Question:**
-1. **Blind spots** — what did the review NOT consider?
-2. **Citation verification** — each fix must trace to a real code change. No source = retract claim.
-3. **Red team (3 attacks)** — adversarial vectors against the reviewed code.
+Claude Code executes the critica after PERFECT is reached. This mode reads ALL rounds and validates the review quality.
 
-**Phase 2 — Discipline:**
-4. **Minimum scope** — did fixes touch only what was necessary?
-5. **Ripple effect** — did any fix alter an interface/type/contract without listing impact?
+#### Steps
 
-### Output: `critica.md`
+1. **Detect scope** — Same as REVIEW/FIX: check for scoped directory (`scopes/{name}/`) or root.
+2. **Read all rounds** — Read every `round-*.md` and `round-*-fixed.md` in the rounds directory, ordered by round number. Also read `session.md` if exists.
+3. **Read current code** — Read all files listed in `files_in_scope` from the PERFECT round.
+4. **Execute 5-section analysis:**
 
-```yaml
----
-protocol: code-review-ping-pong
-type: critica
-round: {N}
-date: "YYYY-MM-DD"
-critica_verdict: APPROVED|NEEDS_WORK
-issues_found: N
----
-```
+   **Phase 1 — Question:**
+   1. **Blind spots** — what did the review NOT consider?
+   2. **Citation verification** — each fix must trace to a real code change. No source = retract claim.
+   3. **Red team (3 attacks)** — adversarial vectors against the reviewed code.
 
-### Verdicts
+   **Phase 2 — Discipline:**
+   4. **Minimum scope** — did fixes touch only what was necessary?
+   5. **Ripple effect** — did any fix alter an interface/type/contract without listing impact?
 
-- **APPROVED** — no critical problems found. Proceed to archive.
-- **NEEDS_WORK** — problems found. A new REVIEW round starts with the specific issues listed.
+5. **Assign verdict:**
+   - **APPROVED** — no critical problems found.
+   - **NEEDS_WORK** — problems found. List specific issues.
+6. **Write critica file** — Create `critica.md` (or `scopes/{name}/critica.md` if scoped) with YAML frontmatter:
+   ```yaml
+   ---
+   protocol: code-review-ping-pong
+   type: critica
+   round: {N}
+   date: "YYYY-MM-DD"
+   critica_verdict: APPROVED|NEEDS_WORK
+   issues_found: N
+   ---
+   ```
+7. **Write next-step.md:**
+   - If **APPROVED**: `cycle_state: COMPLETE`, `next_agent: NONE`, `critica_status: approved`
+   - If **NEEDS_WORK**: `cycle_state: WAITING_FOR_REVIEW`, `next_agent: CODEX`, `critica_status: pending`, list critica issues for next review
+8. **Prompt next action:**
+   - If **APPROVED**: show 🏆 COMPLETE banner. Do NOT show copy-paste handoff block (cycle is done).
+     ```
+     🏆 Código 10/10 + Crítica aprovada! Ciclo completo em {N} rounds.
+
+     📍 Estado atual: COMPLETE
+     👤 Próximo agente: NONE
+     ⚡ Próximo comando: none
+     📄 Próximo arquivo esperado: none
+
+     1. Encerrar (nada mais a fazer)
+     2. Ver histórico completo dos rounds
+     3. Iniciar novo ciclo com escopo diferente
+     ```
+   - If **NEEDS_WORK**: show CODEX banner with copy-paste handoff block.
+     ```
+     ⚠️ Crítica encontrou problemas. Novo round necessário.
+
+     📍 Estado atual: WAITING_FOR_REVIEW
+     👤 Próximo agente: CODEX
+     ⚡ Próximo comando: review mode
+     📄 Próximo arquivo esperado: round-{N+1}.md
+
+     ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+     ┃ 📋 COPIE O BLOCO ABAIXO → COLE NO CODEX          ┃
+     ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+
+     ative a skill code-review-ping-pong em modo REVIEW.
+
+     Contexto:
+     - Projeto: {project_name}
+     - Diretório de rounds: {rounds_dir}
+     - Artefato anterior: critica.md (NEEDS_WORK, {N} issues)
+     - Escopo: {story ativa | session.md | escopo explícito}
+     - Scope: {scope_name | root}
+     - Branch: {branch}
+
+     Leia critica.md para entender os problemas encontrados, depois revise
+     o código atual focando nos issues da crítica e gere round-{N+1}.md.
+
+     ━━━━━━━━━━━━━━━━ FIM DO BLOCO ━━━━━━━━━━━━━━━━━━━
+
+     1. Mandar pro Codex revisar com findings da crítica
+     2. Ver detalhes da crítica (critica.md)
+     3. Ignorar crítica e encerrar (--no-critica)
+     ```
+
+#### Rules for CRITICA mode
+
+- Read ALL rounds, not just the PERFECT one. Context matters.
+- The 5 sections are focused — do NOT expand to the full `/critica` skill (10+ sections).
+- Citation verification is strict: if a fix report claims "fixed X" but no code change matches, retract.
+- Red team attacks should be realistic, not theoretical.
+- If verdict is APPROVED, explicitly confirm: "Nenhum problema crítico encontrado. Ciclo encerrado."
 
 ### Escape hatch
 
@@ -685,8 +748,9 @@ stages:
 
 ### Archiving
 
-When a stage reaches **10/10** (verdict `PERFECT`), the completing agent archives it.
-This can be done manually or via the helper script: `node multi-stage.cjs archive`
+When a stage reaches **10/10** (verdict `PERFECT`), the mandatory CRITICA phase runs first (see "Critica Phase" section). Archive happens ONLY after CRITICA returns APPROVED (or user explicitly passes `--no-critica`). **NEVER archive on PERFECT directly — CRITICA is NON-NEGOTIABLE, including in multi-stage mode.**
+
+After CRITICA APPROVED, archive via the helper script: `node multi-stage.cjs archive`
 
 **Steps:**
 

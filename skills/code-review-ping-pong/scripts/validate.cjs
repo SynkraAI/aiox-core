@@ -305,6 +305,9 @@ if (type === 'review') {
   if (verdict === 'PERFECT' && score !== 10) {
     errors.push(`verdict is PERFECT but score is ${score} (must be 10)`);
   }
+  if (score === 10 && verdict !== 'PERFECT') {
+    errors.push(`score is 10 but verdict is ${verdict} (must be PERFECT when score is 10)`);
+  }
 
   // files_in_scope
   if (!Array.isArray(yaml.files_in_scope) || yaml.files_in_scope.length === 0) {
