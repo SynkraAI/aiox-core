@@ -124,6 +124,13 @@ Urgência: quick (produção direta) | quality (com debate/QA)
 
 Re-classificar com as respostas. Se ainda `unknown` após discovery: avisar "Não consegui identificar o tipo. Tenta descrever de outro jeito?" e PARAR (não gerar plano vazio).
 
+**Se múltiplos tipos casarem (`type: multi`):** Perguntar ao usuário com AskUserQuestion:
+- "Detectei vários tipos na sua demanda: {lista de matchedTypes}. Quer que eu:"
+  1. "Crie um plano composto com TODOS esses tipos (mais demorado)"
+  2. "Foque em apenas um — qual?" (listar opções)
+  3. "Divida em produções separadas (uma por tipo)"
+Se opção 1: gerar plano composto consultando capabilities de cada tipo. Se opção 2: re-classificar com tipo escolhido. Se opção 3: criar N planos separados (um por tipo).
+
 ### Fase 3: Carregar Contexto Complementar
 
 1. Brand já carregada na Fase 1 — tokens disponíveis

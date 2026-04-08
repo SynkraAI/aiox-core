@@ -37,12 +37,20 @@ const URGENCY_PATTERNS = {
  * @returns {{ type: string, volume: string, urgency: string, raw: string }}
  */
 function classifyDemand(demand) {
-  let type = 'unknown';
+  const matchedTypes = [];
   for (const [key, pattern] of Object.entries(TYPE_PATTERNS)) {
     if (pattern.test(demand)) {
-      type = key;
-      break;
+      matchedTypes.push(key);
     }
+  }
+
+  let type;
+  if (matchedTypes.length === 0) {
+    type = 'unknown';
+  } else if (matchedTypes.length === 1) {
+    type = matchedTypes[0];
+  } else {
+    type = 'multi';
   }
 
   let volume = 'single';
@@ -66,7 +74,15 @@ function classifyDemand(demand) {
     }
   }
 
-  return { type, volume, urgency, raw: demand, needsDiscovery: type === 'unknown' };
+  return {
+    type,
+    volume,
+    urgency,
+    raw: demand,
+    matchedTypes,
+    needsDiscovery: type === 'unknown',
+    needsPrioritization: type === 'multi',
+  };
 }
 
 /**

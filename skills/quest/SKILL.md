@@ -242,7 +242,7 @@ Read `engine/scanner.md` → follow its instructions to detect pack, validate sc
 
 ### Step 2 — Load pack
 
-Read the selected pack YAML → load phases, items, levels.
+Read the selected pack YAML → load phases, items, levels. **Guard:** Se o Read falhar (arquivo não encontrado ou YAML inválido): mostrar `"Pack '{pack_id}' não encontrado ou corrompido. Verifique skills/quest/packs/"` e HALT.
 
 ### Step 3 — Check for legacy format
 
@@ -285,10 +285,10 @@ If the user provides arguments after the skill name:
 | Input | Action |
 |-------|--------|
 | `help` | Show all available commands (this table) with brief descriptions |
-| `check <id>` | Mark item as done. Calculates XP, triggers celebrations |
-| `skip <id>` | Skip an optional item (does not count against progress) |
-| `unused <id>` | Mark item as "not applicable" to this project |
-| `sub <parent_id> <label>` | Create a sub-item under an existing item |
+| `check <id>` | Mark item as done. Calculates XP, triggers celebrations. **Guard:** Se `<id>` ausente, mostrar: `"Uso: /quest check <id>. Use /quest status para ver IDs disponíveis."` e PARAR. |
+| `skip <id>` | Skip an optional item (does not count against progress). **Guard:** Se `<id>` ausente, mostrar uso correto e PARAR. |
+| `unused <id>` | Mark item as "not applicable" to this project. **Guard:** Se `<id>` ausente, mostrar uso correto e PARAR. |
+| `sub <parent_id> <label>` | Create a sub-item under an existing item. **Limite:** Máximo 10 sub-items por parent. Se atingido: `"Item '{parent_id}' já atingiu o limite de 10 sub-items."` e PARAR. |
 | `scan` | Auto-detect completed items via scan_rules |
 | `status` | Show current progress: XP, level, phase, next mission |
 | *(unknown)* | Unrecognized argument: show `"Comando desconhecido: '{arg}'. Use /quest help para ver os comandos disponíveis."` then stop |

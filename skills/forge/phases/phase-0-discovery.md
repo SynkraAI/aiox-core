@@ -27,7 +27,7 @@ Run a quick scan (~10 seconds):
 1. **Read `package.json`** (or equivalent) → stack, dependencies, scripts
 2. **Run `ls` top-level** → folder structure
 3. **Read `README.md`** or `.aios/INDEX.md` (first 50 lines) → project context
-4. **Run `git log -5 --oneline`** → recent activity
+4. **Run `git log -5 --oneline`** → recent activity (se `.git/` existir; senão skip com nota "sem histórico git disponível")
 
 Save results to working memory. This context will be:
 - Injected into ALL agent dispatches (so @dev knows the stack, patterns, conventions)

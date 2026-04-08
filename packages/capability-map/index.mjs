@@ -34,6 +34,9 @@ function loadMap(mapPath) {
 
   const raw = readFileSync(p, 'utf-8');
   _cache = yaml.load(raw);
+  if (!_cache?.capabilities || Object.keys(_cache.capabilities).length === 0) {
+    throw new Error(`Capability map at ${p} is empty or missing 'capabilities' key`);
+  }
   _cachePath = p;
   return _cache;
 }

@@ -23,13 +23,22 @@ const { findBest, findAlternatives } = await import(resolve(__dirname, '..', '..
  * @param {object} [params.options] - User preferences (reelType, platform, etc.)
  * @returns {object} Structured plan
  */
+const MAX_PLAN_STEPS = 15;
+
 function buildPlan(params) {
   const { classification, brand, capabilities, options = {} } = params;
   const steps = [];
   const decisions = [];
   let stepNum = 1;
 
-  for (const cap of capabilities) {
+  if (capabilities.length > MAX_PLAN_STEPS) {
+    decisions.push({
+      type: 'limit',
+      message: `Demanda gerou ${capabilities.length} etapas (limite: ${MAX_PLAN_STEPS}). Considere dividir em produções menores.`,
+    });
+  }
+
+  for (const cap of capabilities.slice(0, MAX_PLAN_STEPS)) {
     const best = findBest(cap);
     if (!best) continue;
 
