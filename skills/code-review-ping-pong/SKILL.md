@@ -66,7 +66,7 @@ If the expected next artifact does not exist, the current agent MUST say so plai
 After the banner and status block, every mode MUST include a copy-pasteable handoff message
 for the next agent. This block is mandatory and must be self-contained.
 
-**Exception:** When the cycle is COMPLETE (`next_agent: NONE`, verdict `PERFECT`), do NOT
+**Exception:** When the cycle is COMPLETE (`cycle_state: COMPLETE`, `next_agent: NONE`), do NOT
 emit the copy-paste block. There is no next agent to paste to. Show only the 🏆 banner,
 the status block, and the numbered options.
 
@@ -77,7 +77,7 @@ Use this exact structure (the box banner + "FIM DO BLOCO" delimiter are MANDATOR
 ┃ 📋 COPIE O BLOCO ABAIXO → COLE NO {NEXT_AGENT}   ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
-ative a skill code-review-ping-pong em modo {REVIEW | FIX | AUDIT}.
+ative a skill code-review-ping-pong em modo {REVIEW | FIX | AUDIT | CRITICA}.
 
 Contexto:
 - Projeto: {project_name}
@@ -132,7 +132,7 @@ This block is the machine-readable contract. The Markdown body below it is for h
 The YAML frontmatter is the **source of truth** for parsing. When reading a round file,
 extract data from the YAML block first, then use the Markdown body for context.
 
-Templates with the exact format: `references/review-template.md`, `references/fix-template.md`, and `references/audit-template.md`.
+Templates with the exact format: `references/review-template.md`, `references/fix-template.md`, `references/audit-template.md`, and `references/critica-template.md`.
 
 ## Modes
 
@@ -152,6 +152,9 @@ Codex always initiates the cycle. This mode analyzes code and writes findings.
    3. **Explicit user input** — If user specified files/features, use those.
    4. **None of the above** — **Ask the user** for scope before proceeding. Never default to arbitrary `git diff` or full project scan.
 2. **Detect round number** — Glob `.code-review-ping-pong/round-*.md` (excluding `*-fixed.md`) to find the highest N. New round = N+1. If no files exist, start at round 1.
+   - **Round limit (soft 10, hard 15):**
+     - If N >= 10: warn "Round {N} — o escopo pode estar muito amplo. Considere dividir." Proceed.
+     - If N >= 15: **HALT** — "Limite de rounds atingido (15). Divida o escopo ou use `--force` para continuar." Do NOT proceed without explicit user confirmation.
 3. **Anchor to git state** — Run `git rev-parse --short HEAD` and `git branch --show-current` to capture the exact code state being reviewed.
 4. **If previous round exists** — Read `round-{prev}-fixed.md` to understand what was fixed. Check for regressions introduced by the fixes.
 5. **Analyze code** — Review all files in scope for:
@@ -251,6 +254,7 @@ Codex always initiates the cycle. This mode analyzes code and writes findings.
 - Acknowledge what is good — the fixer must know what NOT to change.
 - Do not invent issues to lower the score. If the code is genuinely good, score it high.
 - Report ALL issues found, including regressions from previous fixes. Honesty over narrative.
+- **Issue cap (15 per round):** If more than 15 issues are found, focus on CRITICAL and HIGH first. Report remaining MEDIUM/LOW as "deferred to next round" in a summary line. This prevents context overflow during FIX mode.
 - When scoring 10/10, explicitly confirm: "No remaining issues. Code is production-ready."
 - Always read the previous fix report before starting a new review.
 - The YAML `issues` array is the source of truth. The Markdown body elaborates but must match.
@@ -268,13 +272,15 @@ Claude Code responds to reviews. This mode reads findings and implements fixes.
    - Output: "Nenhuma review encontrada em `.code-review-ping-pong/`. Peça ao Codex para iniciar com mode REVIEW primeiro."
    - Stop execution.
 3. **Guard: already perfect** — Read the YAML frontmatter. If `verdict: PERFECT`:
-   - Output: "Código já está 10/10! Nada a corrigir. O ciclo está completo."
-   - Stop execution.
+   - Check `next-step.md`: if `cycle_state: COMPLETE` (critica was approved or `--no-critica` was passed), output: "Ciclo já encerrado. Nada a corrigir." and stop.
+   - Otherwise, output: "Código atingiu 10/10! A fase de CRITICA obrigatória ainda não foi executada." and instruct the operator to run CRITICA mode instead.
+   - Do NOT claim the cycle is complete — only `cycle_state: COMPLETE` in `next-step.md` indicates that.
 4. **Guard: already fixed** — If `round-{N}-fixed.md` already exists for the latest round:
-   - Output: "Round {N} já foi corrigido. Peça ao Codex para rodar REVIEW novamente."
-   - Stop execution.
+   - **Integrity check:** If the file exists but is empty (0 bytes) or has no YAML frontmatter, treat as corrupted: warn "round-{N}-fixed.md está corrompido (vazio ou sem YAML). Deletando para permitir retry." Delete the file and proceed with FIX normally.
+   - If the file exists and is valid: Output "Round {N} já foi corrigido. Peça ao Codex para rodar REVIEW novamente." Stop execution.
 5. **Verify git state** — Compare current `git rev-parse --short HEAD` with the review's `commit_sha`. If they differ, warn: "Cuidado: o código mudou desde a review (review: {sha}, atual: {sha}). Verifique se as issues ainda se aplicam." Proceed with caution but do not block.
 6. **Parse issues from YAML** — Extract the `issues` array from the YAML frontmatter. Sort by severity: CRITICAL > HIGH > MEDIUM > LOW.
+   - **Guard: missing YAML** — If the round file has no YAML frontmatter (`---` block): Output "round-{N}.md não tem frontmatter YAML válido. Não é possível extrair issues. Peça ao reviewer para corrigir o formato." Stop execution.
 7. **Fix issues** — Implement fixes one by one:
    - Read the referenced file and line for each issue.
    - Apply the fix. If the suggested fix is wrong or incomplete, use better judgment but document the deviation.
@@ -321,7 +327,14 @@ Claude Code responds to reviews. This mode reads findings and implements fixes.
     3. Ver detalhes do fix report (round-{N}-fixed.md)
     4. Resetar ciclo (apagar rounds e recomeçar)
     ```
-    Note: if user picks option 2, show the GEMINI banner instead.
+    Note: if user picks option 2 (AUDIT), update `next-step.md` with these exact values before showing the GEMINI banner:
+    ```yaml
+    cycle_state: WAITING_FOR_AUDIT
+    next_agent: GEMINI
+    next_mode: audit mode
+    expected_artifact: .code-review-ping-pong/round-{N}-audit.md
+    ```
+    Then show the GEMINI banner and the AUDIT handoff block.
 
 ---
 
@@ -564,17 +577,7 @@ Claude Code executes the critica after PERFECT is reached. This mode reads ALL r
 5. **Assign verdict:**
    - **APPROVED** — no critical problems found.
    - **NEEDS_WORK** — problems found. List specific issues.
-6. **Write critica file** — Create `critica.md` (or `scopes/{name}/critica.md` if scoped) with YAML frontmatter:
-   ```yaml
-   ---
-   protocol: code-review-ping-pong
-   type: critica
-   round: {N}
-   date: "YYYY-MM-DD"
-   critica_verdict: APPROVED|NEEDS_WORK
-   issues_found: N
-   ---
-   ```
+6. **Write critica file** — Create `critica.md` (or `scopes/{name}/critica.md` if scoped) using the template from `references/critica-template.md`. The YAML frontmatter is mandatory.
 7. **Write next-step.md:**
    - If **APPROVED**: `cycle_state: COMPLETE`, `next_agent: NONE`, `critica_status: approved`
    - If **NEEDS_WORK**: `cycle_state: WAITING_FOR_REVIEW`, `next_agent: CODEX`, `critica_status: pending`, list critica issues for next review

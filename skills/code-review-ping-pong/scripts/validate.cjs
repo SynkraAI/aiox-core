@@ -58,6 +58,17 @@ if (isYamlFile) {
   // Pure YAML file (stages.yml, progress.yml, summary.yml)
   // Strip leading comment lines for parsing
   yamlRaw = content.replace(/^#[^\n]*\n/gm, '');
+} else if (path.basename(resolvedPath) === 'next-step.md') {
+  // next-step.md uses "- key: value" list format without frontmatter
+  // Extract key-value pairs from lines matching "- key: value"
+  const lines = content.split('\n');
+  const pairs = [];
+  for (const line of lines) {
+    const m = line.match(/^-\s+([\w_]+):\s*(.+)$/);
+    if (m) pairs.push(`${m[1]}: ${m[2]}`);
+  }
+  yamlRaw = pairs.join('\n');
+  markdownBody = content;
 } else {
   // Markdown with YAML frontmatter (round files)
   const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
@@ -232,7 +243,8 @@ const yaml = parseYaml(yamlRaw);
 
 // --- Common validations ---
 
-if (yaml.protocol !== 'code-review-ping-pong') {
+// next-step.md doesn't have protocol field — skip this check for it
+if (path.basename(resolvedPath) !== 'next-step.md' && yaml.protocol !== 'code-review-ping-pong') {
   errors.push(`protocol must be "code-review-ping-pong", got "${yaml.protocol}"`);
 }
 
@@ -245,7 +257,10 @@ if (yaml.protocol !== 'code-review-ping-pong') {
 const basename = path.basename(resolvedPath);
 let type;
 
-if (yaml.type === 'stage-summary') {
+if (basename === 'next-step.md') {
+  // next-step.md — handoff state file
+  type = 'next-step';
+} else if (yaml.type === 'stage-summary') {
   // Explicit type field — highest priority
   type = 'stage-summary';
 } else if (basename === 'stages.yml' || basename === 'stages.yaml') {
@@ -532,6 +547,44 @@ if (type === 'audit') {
         errors.push(`finding has invalid type: ${finding.type}. Valid: ${validTypes.join(', ')}`);
       }
     }
+  }
+}
+
+// --- Next-step-specific ---
+
+if (type === 'next-step') {
+  // next-step.md uses a list format "- key: value" which our parser reads as top-level keys
+  const validStates = ['WAITING_FOR_FIX', 'WAITING_FOR_REVIEW', 'WAITING_FOR_AUDIT', 'WAITING_FOR_CRITICA', 'COMPLETE'];
+  const validAgents = ['CLAUDE CODE', 'CODEX', 'GEMINI', 'NONE'];
+  const validModes = ['fix mode', 'review mode', 'audit mode', 'critica', 'none'];
+
+  const cycleState = yaml.cycle_state;
+  const nextAgent = yaml.next_agent;
+  const nextMode = yaml.next_mode;
+  const criticaStatus = yaml.critica_status;
+
+  if (cycleState && !validStates.includes(cycleState)) {
+    errors.push(`Invalid cycle_state: "${cycleState}". Valid: ${validStates.join(', ')}`);
+  }
+  if (nextAgent && !validAgents.includes(nextAgent)) {
+    errors.push(`Invalid next_agent: "${nextAgent}". Valid: ${validAgents.join(', ')}`);
+  }
+  if (nextMode && !validModes.includes(nextMode)) {
+    warnings.push(`Unexpected next_mode: "${nextMode}". Expected: ${validModes.join(', ')}`);
+  }
+  if (criticaStatus && !['pending', 'approved', 'skipped'].includes(criticaStatus)) {
+    errors.push(`Invalid critica_status: "${criticaStatus}". Valid: pending, approved, skipped`);
+  }
+
+  // Cross-field consistency
+  if (cycleState === 'COMPLETE' && nextAgent && nextAgent !== 'NONE') {
+    errors.push(`cycle_state is COMPLETE but next_agent is "${nextAgent}" (must be NONE)`);
+  }
+  if (cycleState === 'WAITING_FOR_CRITICA' && nextAgent && nextAgent !== 'CLAUDE CODE') {
+    errors.push(`cycle_state is WAITING_FOR_CRITICA but next_agent is "${nextAgent}" (must be CLAUDE CODE)`);
+  }
+  if (cycleState === 'COMPLETE' && criticaStatus === 'pending') {
+    errors.push('cycle_state is COMPLETE but critica_status is still pending (critica must run or be skipped before COMPLETE)');
   }
 }
 

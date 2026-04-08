@@ -6,12 +6,17 @@
  *
  * Subset YAML parser (single-line scalars, flat arrays, arrays of flat objects).
  * Does NOT support: block scalars (|, >), nested arrays, multiline strings.
- * Validates structure, required fields, and YAML↔Markdown consistency for both review AND fix files.
+ * Validates structure, required fields, and YAML↔Markdown consistency for
+ * review, fix, audit, stages, progress, and stage-summary files.
  *
  * Copy this to .code-review-ping-pong/validate.cjs in any project using the protocol.
  *
- * Usage: node validate.cjs <round-file.md>
- * Example: node validate.cjs round-1.md
+ * Usage: node validate.cjs <file>
+ * Examples:
+ *   node validate.cjs round-1.md
+ *   node validate.cjs stages.yml
+ *   node validate.cjs progress.yml
+ *   node validate.cjs archive/stage-1-foo/summary.yml
  */
 
 const fs = require('fs');
@@ -43,59 +48,90 @@ const content = fs.readFileSync(resolvedPath, 'utf-8');
 const errors = [];
 const warnings = [];
 
-// --- Extract frontmatter ---
+// --- Detect file format (Markdown with frontmatter vs pure YAML) ---
 
-const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
-if (!fmMatch) {
-  console.error('FAIL: No YAML frontmatter found. File must start with --- block.');
-  process.exit(1);
+const isYamlFile = resolvedPath.endsWith('.yml') || resolvedPath.endsWith('.yaml');
+let yamlRaw;
+let markdownBody = '';
+
+if (isYamlFile) {
+  // Pure YAML file (stages.yml, progress.yml, summary.yml)
+  // Strip leading comment lines for parsing
+  yamlRaw = content.replace(/^#[^\n]*\n/gm, '');
+} else if (path.basename(resolvedPath) === 'next-step.md') {
+  // next-step.md uses "- key: value" list format without frontmatter
+  // Extract key-value pairs from lines matching "- key: value"
+  const lines = content.split('\n');
+  const pairs = [];
+  for (const line of lines) {
+    const m = line.match(/^-\s+([\w_]+):\s*(.+)$/);
+    if (m) pairs.push(`${m[1]}: ${m[2]}`);
+  }
+  yamlRaw = pairs.join('\n');
+  markdownBody = content;
+} else {
+  // Markdown with YAML frontmatter (round files)
+  const fmMatch = content.match(/^---\n([\s\S]*?)\n---/);
+  if (!fmMatch) {
+    console.error('FAIL: No YAML frontmatter found. File must start with --- block.');
+    process.exit(1);
+  }
+  yamlRaw = fmMatch[1];
+  markdownBody = content.slice(fmMatch[0].length);
 }
 
-const yamlRaw = fmMatch[1];
-const markdownBody = content.slice(fmMatch[0].length);
-
 // --- Subset YAML parser ---
-// Supports: top-level single-line scalars, arrays of strings, arrays of flat objects, nested scalar objects.
-// Does NOT support: block scalars (| or >), multiline strings, nested arrays/objects within arrays.
-// This is intentional — the protocol constrains all YAML values to single-line to stay within this subset.
+// Supports: top-level single-line scalars, arrays of strings, arrays of flat objects,
+// nested scalar objects, and arrays nested within array objects (e.g., stages[].files[]).
+// Does NOT support: block scalars (| or >), multiline strings, deeply nested objects.
 
 function parseYaml(raw) {
   const result = {};
   const lines = raw.split('\n');
-  let currentKey = null;
-  let currentArray = null;
-  let currentObj = null;
-
-  function flushArray() {
-    if (currentArray !== null) {
-      if (currentObj) { currentArray.push(currentObj); currentObj = null; }
-      result[currentKey] = currentArray;
-      currentArray = null;
-    }
-  }
+  let currentKey = null;       // top-level key name
+  let currentArray = null;     // top-level array being built
+  let currentObj = null;       // current object within top-level array
+  let subArrayKey = null;      // key within currentObj that holds a nested array
+  let subArray = null;         // nested array being built (e.g., stage.files)
 
   function cleanVal(v) {
     return (v || '').replace(/^["']|["']$/g, '').trim();
+  }
+
+  function flushSubArray() {
+    if (subArray !== null && currentObj && subArrayKey) {
+      currentObj[subArrayKey] = subArray;
+    }
+    subArray = null;
+    subArrayKey = null;
+  }
+
+  function flushObj() {
+    flushSubArray();
+    if (currentObj) {
+      if (currentArray !== null) currentArray.push(currentObj);
+      currentObj = null;
+    }
+  }
+
+  function flushArray() {
+    flushObj();
+    if (currentArray !== null) {
+      result[currentKey] = currentArray;
+      currentArray = null;
+    }
   }
 
   for (const line of lines) {
     // Skip empty lines and comments
     if (line.trim() === '' || line.trim().startsWith('#')) continue;
 
+    const indent = line.search(/\S/);
+
     // Top-level key (no leading whitespace): "key: value" or "key:"
     const topLevel = line.match(/^(\w[\w_]*):\s*(.*)$/);
 
-    // Array item start: "  - key: val" or "  - val" (2+ spaces before dash)
-    const arrayItemKV = line.match(/^\s+- (\w[\w_]*):\s*(.*)$/);
-    const arrayItemSimple = line.match(/^\s+- ["']?(.+?)["']?\s*$/);
-
-    // Continuation of array object: "    key: val" (4+ spaces, no dash)
-    const objContinuation = line.match(/^\s{4,}(\w[\w_]*):\s*["']?(.+?)["']?\s*$/);
-
-    // Nested scalar under top-level object: "  key: val" (2 spaces, no dash)
-    const nestedScalar = line.match(/^\s{2,3}(\w[\w_]*):\s*["']?(.+?)["']?\s*$/);
-
-    if (topLevel && !line.match(/^\s/)) {
+    if (topLevel && indent === 0) {
       // New top-level key
       flushArray();
       currentKey = topLevel[1];
@@ -110,24 +146,92 @@ function parseYaml(raw) {
       } else {
         result[currentKey] = val;
       }
-    } else if (currentArray !== null && arrayItemKV) {
-      // New object in array: "  - id: 1.1"
-      if (currentObj) currentArray.push(currentObj);
-      currentObj = {};
-      currentObj[arrayItemKV[1]] = cleanVal(arrayItemKV[2]);
-    } else if (currentArray !== null && currentObj && objContinuation) {
-      // Continue object: "    severity: HIGH"
-      currentObj[objContinuation[1]] = cleanVal(objContinuation[2]);
-    } else if (currentArray !== null && arrayItemSimple && !arrayItemKV) {
-      // Simple array item: "  - some/path"
-      if (currentObj) { currentArray.push(currentObj); currentObj = null; }
-      currentArray.push(cleanVal(arrayItemSimple[1]));
-    } else if (currentArray === null && currentKey && nestedScalar) {
-      // Nested object scalar (e.g., quality_checks.lint)
-      if (typeof result[currentKey] !== 'object' || Array.isArray(result[currentKey])) {
+      continue;
+    }
+
+    // Inside a top-level array (or what we think is one)
+    if (currentArray !== null) {
+      // "  - key: val" — new object item in array (indent 2-3, dash)
+      const arrayItemKV = line.match(/^\s{2,3}-\s+(\w[\w_]*):\s*(.*)$/);
+      // "  - simple-val" — simple string item in array (indent 2-3, dash)
+      const arrayItemSimple = line.match(/^\s{2,3}-\s+["']?(.+?)["']?\s*$/);
+      // "  key: val" — nested scalar, NOT an array item (indent 2-3, no dash)
+      // This means the parent key is actually a nested object, not an array
+      const nestedNoDash = line.match(/^\s{2,3}(\w[\w_]*):\s*["']?(.+?)["']?\s*$/);
+
+      if (!arrayItemKV && !arrayItemSimple && nestedNoDash && currentArray.length === 0 && !currentObj) {
+        // Revert: this was not an array, it's a nested object
+        // e.g., summary:\n  total_stages: 3
         result[currentKey] = {};
+        result[currentKey][nestedNoDash[1]] = cleanVal(nestedNoDash[2]);
+        currentArray = null;
+        // Stay in nested object mode — handled by the fallback at the end
+        continue;
       }
-      result[currentKey][nestedScalar[1]] = cleanVal(nestedScalar[2]);
+
+      if (arrayItemKV) {
+        // New object in array: "  - id: 1"
+        flushObj();
+        currentObj = {};
+        currentObj[arrayItemKV[1]] = cleanVal(arrayItemKV[2]);
+        continue;
+      }
+
+      if (arrayItemSimple && !arrayItemKV) {
+        // Simple array item: "  - some/path" (only when NOT inside an object)
+        if (subArray !== null) {
+          // Actually a sub-array item at indent 2 — unlikely but handle
+        }
+        if (!currentObj) {
+          currentArray.push(cleanVal(arrayItemSimple[1]));
+          continue;
+        }
+      }
+
+      // Inside an array object (currentObj exists)
+      if (currentObj) {
+        // "      - val" — nested sub-array item (indent 6+, dash)
+        const subArrayItem = line.match(/^\s{6,}-\s+["']?(.+?)["']?\s*$/);
+        // "    key: val" — object field continuation (indent 4-5, no dash)
+        const objField = line.match(/^\s{4,5}(\w[\w_]*):\s*(.*)$/);
+
+        if (subArray !== null && subArrayItem) {
+          // Add to sub-array: "      - src/foo.ts"
+          subArray.push(cleanVal(subArrayItem[1]));
+          continue;
+        }
+
+        if (objField) {
+          // Object field: "    slug: foo" or "    files:" (start sub-array)
+          flushSubArray();
+          const fieldVal = cleanVal(objField[2]);
+
+          if (fieldVal === '' || fieldVal === '[]') {
+            if (fieldVal === '[]') {
+              currentObj[objField[1]] = [];
+            } else {
+              // Empty value means sub-array follows
+              subArrayKey = objField[1];
+              subArray = [];
+            }
+          } else {
+            currentObj[objField[1]] = fieldVal;
+          }
+          continue;
+        }
+      }
+    }
+
+    // Nested scalar under top-level object (not inside an array): "  key: val"
+    if (currentArray === null && currentKey) {
+      const nestedScalar = line.match(/^\s{2,3}(\w[\w_]*):\s*["']?(.+?)["']?\s*$/);
+      if (nestedScalar) {
+        if (typeof result[currentKey] !== 'object' || Array.isArray(result[currentKey])) {
+          result[currentKey] = {};
+        }
+        result[currentKey][nestedScalar[1]] = cleanVal(nestedScalar[2]);
+        continue;
+      }
     }
   }
 
@@ -139,22 +243,61 @@ const yaml = parseYaml(yamlRaw);
 
 // --- Common validations ---
 
-if (yaml.protocol !== 'code-review-ping-pong') {
+// next-step.md doesn't have protocol field — skip this check for it
+if (path.basename(resolvedPath) !== 'next-step.md' && yaml.protocol !== 'code-review-ping-pong') {
   errors.push(`protocol must be "code-review-ping-pong", got "${yaml.protocol}"`);
 }
 
-const type = yaml.type;
-if (!type || !['review', 'fix', 'audit'].includes(type)) {
-  errors.push(`type must be "review", "fix", or "audit", got "${type}"`);
+// --- Detect validation mode ---
+// Priority: explicit type field → filename match → YAML content heuristics → error
+//
+// This detects stages/progress files even when they have different filenames
+// (e.g., stages-template.yml, my-stages.yml) by inspecting YAML content.
+
+const basename = path.basename(resolvedPath);
+let type;
+
+if (basename === 'next-step.md') {
+  // next-step.md — handoff state file
+  type = 'next-step';
+} else if (yaml.type === 'stage-summary') {
+  // Explicit type field — highest priority
+  type = 'stage-summary';
+} else if (basename === 'stages.yml' || basename === 'stages.yaml') {
+  type = 'stages';
+} else if (basename === 'progress.yml' || basename === 'progress.yaml') {
+  type = 'progress';
+} else if (isYamlFile && yaml.version && Array.isArray(yaml.stages) && !yaml.summary) {
+  // Heuristic: has version + stages array + no summary → stages config
+  type = 'stages';
+} else if (isYamlFile && yaml.summary && yaml.updated) {
+  // Heuristic: has summary + updated → progress tracker
+  type = 'progress';
+} else if (isYamlFile && !yaml.type && !yaml.round) {
+  // YAML file without type or round — cannot determine type
+  errors.push('Cannot detect file type. YAML files must be named stages.yml/progress.yml, or have a "type" field (e.g., type: stage-summary).');
+  type = 'unknown';
+} else {
+  type = yaml.type;
+  if (!type || !['review', 'fix', 'audit'].includes(type)) {
+    errors.push(`type must be "review", "fix", or "audit", got "${type}"`);
+  }
 }
 
+// --- Common validations for round files (review/fix/audit) ---
+
+if (['review', 'fix', 'audit'].includes(type)) {
+  const round = Number(yaml.round);
+  if (!yaml.round || isNaN(round) || round < 1) {
+    errors.push(`round must be a positive number, got "${yaml.round}"`);
+  }
+
+  if (!yaml.date) errors.push('date is required');
+  if (!yaml.branch) errors.push('branch is required');
+}
+
+// Use round as variable for round-file validations below
 const round = Number(yaml.round);
-if (!yaml.round || isNaN(round) || round < 1) {
-  errors.push(`round must be a positive number, got "${yaml.round}"`);
-}
-
-if (!yaml.date) errors.push('date is required');
-if (!yaml.branch) errors.push('branch is required');
 
 // --- Review-specific ---
 
@@ -407,12 +550,207 @@ if (type === 'audit') {
   }
 }
 
+// --- Next-step-specific ---
+
+if (type === 'next-step') {
+  // next-step.md uses a list format "- key: value" which our parser reads as top-level keys
+  const validStates = ['WAITING_FOR_FIX', 'WAITING_FOR_REVIEW', 'WAITING_FOR_AUDIT', 'WAITING_FOR_CRITICA', 'COMPLETE'];
+  const validAgents = ['CLAUDE CODE', 'CODEX', 'GEMINI', 'NONE'];
+  const validModes = ['fix mode', 'review mode', 'audit mode', 'critica', 'none'];
+
+  const cycleState = yaml.cycle_state;
+  const nextAgent = yaml.next_agent;
+  const nextMode = yaml.next_mode;
+  const criticaStatus = yaml.critica_status;
+
+  if (cycleState && !validStates.includes(cycleState)) {
+    errors.push(`Invalid cycle_state: "${cycleState}". Valid: ${validStates.join(', ')}`);
+  }
+  if (nextAgent && !validAgents.includes(nextAgent)) {
+    errors.push(`Invalid next_agent: "${nextAgent}". Valid: ${validAgents.join(', ')}`);
+  }
+  if (nextMode && !validModes.includes(nextMode)) {
+    warnings.push(`Unexpected next_mode: "${nextMode}". Expected: ${validModes.join(', ')}`);
+  }
+  if (criticaStatus && !['pending', 'approved', 'skipped'].includes(criticaStatus)) {
+    errors.push(`Invalid critica_status: "${criticaStatus}". Valid: pending, approved, skipped`);
+  }
+
+  // Cross-field consistency
+  if (cycleState === 'COMPLETE' && nextAgent && nextAgent !== 'NONE') {
+    errors.push(`cycle_state is COMPLETE but next_agent is "${nextAgent}" (must be NONE)`);
+  }
+  if (cycleState === 'WAITING_FOR_CRITICA' && nextAgent && nextAgent !== 'CLAUDE CODE') {
+    errors.push(`cycle_state is WAITING_FOR_CRITICA but next_agent is "${nextAgent}" (must be CLAUDE CODE)`);
+  }
+  if (cycleState === 'COMPLETE' && criticaStatus === 'pending') {
+    errors.push('cycle_state is COMPLETE but critica_status is still pending (critica must run or be skipped before COMPLETE)');
+  }
+}
+
+// --- Stages-specific ---
+
+if (type === 'stages') {
+  if (!yaml.version) warnings.push('version field recommended');
+  if (!yaml.project) warnings.push('project field recommended');
+  if (!yaml.created) warnings.push('created date recommended');
+
+  const stages = yaml.stages;
+  if (!Array.isArray(stages) || stages.length === 0) {
+    errors.push('stages must be a non-empty array');
+  } else {
+    const ids = new Set();
+    const slugs = new Set();
+    let activeCount = 0;
+
+    for (const stage of stages) {
+      if (typeof stage !== 'object') {
+        errors.push(`stages array contains non-object item: ${JSON.stringify(stage)}`);
+        continue;
+      }
+
+      // Required fields
+      const stageRequired = ['id', 'slug', 'name', 'status', 'files'];
+      for (const field of stageRequired) {
+        if (!stage[field]) {
+          errors.push(`stage ${stage.id || '?'} missing required field: ${field}`);
+        }
+      }
+
+      // Status validation
+      if (stage.status && !['pending', 'active', 'complete'].includes(stage.status)) {
+        errors.push(`stage ${stage.id} has invalid status: "${stage.status}" (must be pending, active, or complete)`);
+      }
+
+      if (stage.status === 'active') activeCount++;
+
+      // Unique id
+      if (stage.id) {
+        if (ids.has(stage.id)) {
+          errors.push(`duplicate stage id: ${stage.id}`);
+        }
+        ids.add(stage.id);
+      }
+
+      // Unique slug
+      if (stage.slug) {
+        if (slugs.has(stage.slug)) {
+          errors.push(`duplicate stage slug: "${stage.slug}"`);
+        }
+        slugs.add(stage.slug);
+      }
+
+      // Files must be array (can be string list from parser)
+      if (stage.files && !Array.isArray(stage.files)) {
+        errors.push(`stage ${stage.id} files must be an array`);
+      } else if (stage.files && stage.files.length === 0) {
+        errors.push(`stage ${stage.id} files must be non-empty`);
+      }
+    }
+
+    if (activeCount > 1) {
+      errors.push(`only 1 stage can be active at a time, found ${activeCount}`);
+    }
+  }
+}
+
+// --- Progress-specific ---
+
+if (type === 'progress') {
+  if (!yaml.updated) warnings.push('updated date recommended');
+
+  const summary = yaml.summary;
+  if (!summary || typeof summary !== 'object') {
+    errors.push('summary section is required');
+  } else {
+    const summaryFields = ['total_stages', 'completed', 'active', 'pending', 'completion_pct', 'total_issues_found', 'total_issues_fixed', 'total_rounds'];
+    for (const field of summaryFields) {
+      if (summary[field] === undefined || summary[field] === null || summary[field] === '') {
+        errors.push(`summary missing field: ${field}`);
+      }
+    }
+
+    // Math consistency: completed + active + pending = total_stages
+    const total = Number(summary.total_stages) || 0;
+    const completed = Number(summary.completed) || 0;
+    const active = Number(summary.active) || 0;
+    const pending = Number(summary.pending) || 0;
+    if (completed + active + pending !== total) {
+      errors.push(`summary math: completed(${completed}) + active(${active}) + pending(${pending}) = ${completed + active + pending}, but total_stages = ${total}`);
+    }
+
+    // completion_pct check
+    const pct = Number(summary.completion_pct) || 0;
+    const expectedPct = total > 0 ? Math.floor((completed / total) * 100) : 0;
+    if (pct !== expectedPct) {
+      warnings.push(`completion_pct is ${pct} but expected ${expectedPct} (floor(${completed}/${total} * 100))`);
+    }
+  }
+
+  const stages = yaml.stages;
+  if (!Array.isArray(stages)) {
+    errors.push('stages array is required in progress file');
+  } else {
+    for (const stage of stages) {
+      if (typeof stage !== 'object') continue;
+      if (!stage.id) errors.push('progress stage entry missing id');
+      if (!stage.slug) errors.push(`progress stage ${stage.id || '?'} missing slug`);
+      if (!stage.status) errors.push(`progress stage ${stage.id || '?'} missing status`);
+    }
+  }
+}
+
+// --- Stage-summary-specific ---
+
+if (type === 'stage-summary') {
+  const required = ['stage_id', 'stage_slug', 'stage_name', 'completed_at', 'total_rounds', 'final_score', 'total_issues_found', 'total_issues_fixed'];
+  for (const key of required) {
+    if (!yaml[key] && yaml[key] !== 0) {
+      errors.push(`stage-summary missing required field: ${key}`);
+    }
+  }
+
+  const finalScore = Number(yaml.final_score);
+  if (isNaN(finalScore) || finalScore !== 10) {
+    errors.push(`final_score must be 10 (stage was PERFECT), got "${yaml.final_score}"`);
+  }
+
+  if (!Array.isArray(yaml.files_in_scope) || yaml.files_in_scope.length === 0) {
+    errors.push('files_in_scope must be a non-empty array');
+  }
+
+  const rounds = yaml.rounds;
+  if (!Array.isArray(rounds) || rounds.length === 0) {
+    errors.push('rounds must be a non-empty array');
+  } else {
+    for (const r of rounds) {
+      if (typeof r !== 'object') continue;
+      if (!r.file) errors.push('round entry missing file');
+      if (!r.type || !['review', 'fix', 'audit'].includes(r.type)) {
+        errors.push(`round entry ${r.file || '?'} has invalid type: "${r.type}"`);
+      }
+    }
+  }
+
+  // Consistency: total_issues_fixed + total_issues_skipped <= total_issues_found
+  const found = Number(yaml.total_issues_found) || 0;
+  const fixed = Number(yaml.total_issues_fixed) || 0;
+  const skipped = Number(yaml.total_issues_skipped) || 0;
+  if (fixed + skipped > found) {
+    errors.push(`fixed(${fixed}) + skipped(${skipped}) = ${fixed + skipped} exceeds total_issues_found(${found})`);
+  }
+}
+
 // --- Output ---
 
-const basename = path.basename(resolvedPath);
-
 if (errors.length === 0) {
-  let msg = `PASS: ${basename} is valid (type: ${type}, round: ${round})`;
+  let label;
+  if (type === 'stages') label = `stages config, ${(yaml.stages || []).length} stage(s)`;
+  else if (type === 'progress') label = `progress tracker`;
+  else if (type === 'stage-summary') label = `stage-summary for stage ${yaml.stage_id}`;
+  else label = `type: ${type}, round: ${round}`;
+
+  let msg = `PASS: ${basename} is valid (${label})`;
   if (warnings.length > 0) {
     msg += `\n  Warnings:`;
     for (const w of warnings) msg += `\n    - ${w}`;
