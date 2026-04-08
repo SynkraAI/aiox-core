@@ -41,7 +41,7 @@ Read `{FORGE_HOME}/phases/phase-3-build.md` with BUG_FIX mode:
    - Title: `fix: {bug description}`
    - AC: "Bug resolvido. Teste de regressão passa. Comportamento esperado restaurado."
    - Status: Ready (skip @po validation — it's a fix, not a feature)
-   - Save to `docs/stories/active/` with next available ID
+   - Save to `docs/stories/active/{run_id}/` with next available ID
 2. @dev implements the fix:
    - Input: bug description + user's answers from Phase 0
    - Mode: YOLO

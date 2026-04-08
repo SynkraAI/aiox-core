@@ -31,7 +31,7 @@ Dispatch @sm via Agent tool:
   - **Each story MUST be tagged as `mvp: true` or `mvp: false`** based on the MVP Scope from the PRD
   - **Each story MUST declare `depends_on: []`** — list of story IDs that must be completed before this story can start. Base stories (no dependencies) get `depends_on: []`.
   - Follow the story template at `.aios-core/product/templates/story-tmpl.yaml`
-  - Save each story to `docs/stories/active/`
+  - Save each story to `docs/stories/active/{run_id}/` (subpasta por run para isolamento)
   - **MVP stories FIRST**, then post-MVP stories
   - Suggest priority order: MVP stories ordered by dependency → post-MVP stories ordered by value
   - Dependency ordering: DB schema → API/backend → frontend/UI (natural technical flow)
@@ -131,10 +131,10 @@ Save to state.json:
     "2": {
       "status": "completed",
       "stories": [
-        { "id": "1.1", "title": "Autenticação", "priority": 1, "po_score": 9, "mvp": true, "depends_on": [], "path": "docs/stories/active/1.1.story.md" },
-        { "id": "1.2", "title": "Feed de posts", "priority": 2, "po_score": 8, "mvp": true, "depends_on": ["1.1"], "path": "docs/stories/active/1.2.story.md" },
-        { "id": "1.4", "title": "Landing page", "priority": 4, "po_score": 8, "mvp": false, "depends_on": [], "path": "docs/stories/active/1.4.story.md" },
-        { "id": "2.1", "title": "Sistema de likes", "priority": 3, "po_score": 8, "mvp": false, "depends_on": ["1.1", "1.2"], "path": "docs/stories/active/2.1.story.md" }
+        { "id": "1.1", "title": "Autenticação", "priority": 1, "po_score": 9, "mvp": true, "depends_on": [], "path": "docs/stories/active/{run_id}/1.1.story.md" },
+        { "id": "1.2", "title": "Feed de posts", "priority": 2, "po_score": 8, "mvp": true, "depends_on": ["1.1"], "path": "docs/stories/active/{run_id}/1.2.story.md" },
+        { "id": "1.4", "title": "Landing page", "priority": 4, "po_score": 8, "mvp": false, "depends_on": [], "path": "docs/stories/active/{run_id}/1.4.story.md" },
+        { "id": "2.1", "title": "Sistema de likes", "priority": 3, "po_score": 8, "mvp": false, "depends_on": ["1.1", "1.2"], "path": "docs/stories/active/{run_id}/2.1.story.md" }
       ],
       "dependency_graph": {
         "levels": [["1.1", "1.4"], ["1.2"], ["2.1"]],
@@ -153,7 +153,7 @@ Save to state.json:
 
 ## Outputs
 
-- Story files at `docs/stories/active/{epicNum}.{storyNum}.story.md`
+- Story files at `docs/stories/active/{run_id}/{epicNum}.{storyNum}.story.md`
 - Priority order confirmed by user
 - All stories validated by @po (>= 7/10)
 - State updated with story list and order

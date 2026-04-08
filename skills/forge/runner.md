@@ -183,7 +183,7 @@ Dispatch @sm via Agent tool with:
 - Agent: `{AIOS_HOME}/.aios-core/development/agents/aios-sm.md`
 - Task: `{AIOS_HOME}/.aios-core/development/tasks/create-next-story.md`
 - Input: Epic/PRD from Phase 1 (or user description for SINGLE_FEATURE)
-- Output: Story file at `docs/stories/active/{id}.story.md`
+- Output: Story file at `docs/stories/active/{run_id}/{id}.story.md`
 
 ### 3.2 Story Validation (@po)
 
@@ -398,7 +398,7 @@ After all phases complete:
 2. **Fire hook: `after:run`** — plugins perform final validations, sync status, and cleanup
 3. Update state.json: `status = "completed"`, `completed_at = now` (atomic write)
 4. **Remove lock file:** Delete `.aios/forge-runs/.lock`
-3. **Move stories:** If stories exist in `docs/stories/active/`, move completed ones to `docs/stories/done/`
+3. **Move stories:** Move `docs/stories/active/{run_id}/` to `docs/stories/done/{run_id}/` (subpasta inteira, não arquivos individuais)
 4. Show completion banner (personality.md) with:
    - Run ID
    - Number of stories implemented (including SKIPPED count if any)

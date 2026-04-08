@@ -63,7 +63,7 @@ DO NOT dispatch @sm or @po. Story is auto-generated inline by Forge.
 
 #### Step 1: Auto-Generate Story (Article III compliance)
 
-Create a minimal story file at `docs/stories/active/` using next available `Q.{N}` ID:
+Create a minimal story file at `docs/stories/active/{run_id}/` using next available `Q.{N}` ID:
 
 ```markdown
 # Story Q.{N}: quick: {user description}

@@ -127,7 +127,7 @@ Dispatch @sm:
 - Read `{AIOS_HOME}/.aios-core/development/tasks/create-next-story.md`
 - Input: feature description + project context
 - Inject ecosystem context: relevant skills for this domain
-- Output: Story file created at `docs/stories/active/`
+- Output: Story file created at `docs/stories/active/{run_id}/`
 
 Show handoff:
 ```
