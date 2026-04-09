@@ -40,17 +40,31 @@ Before ANY action, detect the environment automatically. NEVER ask the user for 
 
 ```yaml
 discovery:
-  repo_path: ~/claude-remote-manager
   state_path: ~/.claude-remote/default
   
   steps:
-    - Check repo exists: test -d ~/claude-remote-manager
-    - Find configured agents: ls ~/claude-remote-manager/agents/ (exclude agent-template)
+    - Resolve CRM_HOME (first match wins):
+        1. $CRM_HOME env var (if set)
+        2. ~/CODE/tools/claude-remote-manager
+        3. ~/claude-remote-manager
+        4. None found → error with install instructions
+    - Find configured agents: ls $CRM_HOME/agents/ (exclude agent-template)
     - For each agent, check .env for BOT_TOKEN + CHAT_ID
     - Check enabled-agents.json: ~/.claude-remote/default/config/enabled-agents.json
     - Pick the primary agent: first agent with enabled: true, or first with valid .env
-    - Store: AGENT_NAME, BOT_TOKEN, CHAT_ID, ALLOWED_USER
+    - Store: CRM_HOME, AGENT_NAME, BOT_TOKEN, CHAT_ID, ALLOWED_USER
 ```
+
+#### Path Resolution (bash)
+```bash
+CRM_HOME="${CRM_HOME:-}"
+for candidate in ~/CODE/tools/claude-remote-manager ~/claude-remote-manager; do
+  [ -z "$CRM_HOME" ] && [ -d "$candidate" ] && CRM_HOME="$candidate"
+done
+[ -z "$CRM_HOME" ] && echo "ERROR: claude-remote-manager not found" && exit 1
+```
+
+All subsequent commands use `$CRM_HOME` instead of a hardcoded path.
 
 ### Agent Resolution Priority
 
@@ -82,13 +96,13 @@ steps:
 
   auto_fix:
     - If DEAD_SESSION (tmux exists but Claude died inside):
-      - Auto-restart: cd ~/claude-remote-manager && bash enable-agent.sh $AGENT_NAME --restart
+      - Auto-restart: cd $CRM_HOME && bash enable-agent.sh $AGENT_NAME --restart
       - Report: "Sessao morta detectada. Reiniciando automaticamente..."
     - If tmux missing but config valid:
-      - Auto-start: cd ~/claude-remote-manager && bash enable-agent.sh $AGENT_NAME
+      - Auto-start: cd $CRM_HOME && bash enable-agent.sh $AGENT_NAME
       - Report: "Agent parado. Iniciando automaticamente..."
     - If fast-checker missing but tmux running:
-      - Auto-restart: cd ~/claude-remote-manager && bash enable-agent.sh $AGENT_NAME --restart
+      - Auto-restart: cd $CRM_HOME && bash enable-agent.sh $AGENT_NAME --restart
       - Report: "fast-checker ausente. Reiniciando automaticamente..."
 ```
 
@@ -98,7 +112,7 @@ steps:
 steps:
   - Run discovery (Step 0)
   - If no agent found: error, suggest /telegram setup
-  - Run: cd ~/claude-remote-manager && bash enable-agent.sh $AGENT_NAME
+  - Run: cd $CRM_HOME && bash enable-agent.sh $AGENT_NAME
   - If "already enabled": run with --restart
   - Verify: tmux has-session + ps aux fast-checker
   - Report status
@@ -109,7 +123,7 @@ steps:
 ```yaml
 steps:
   - Run discovery (Step 0)
-  - Run: cd ~/claude-remote-manager && bash disable-agent.sh $AGENT_NAME
+  - Run: cd $CRM_HOME && bash disable-agent.sh $AGENT_NAME
   - Verify stopped
   - Report
 ```
@@ -119,7 +133,7 @@ steps:
 ```yaml
 steps:
   - Run discovery (Step 0)
-  - Run: cd ~/claude-remote-manager && bash enable-agent.sh $AGENT_NAME --restart
+  - Run: cd $CRM_HOME && bash enable-agent.sh $AGENT_NAME --restart
   - Wait 3 seconds
   - Verify: tmux + fast-checker + capture-pane
   - Report
@@ -151,7 +165,7 @@ steps:
   - Validate token: curl -s https://api.telegram.org/bot$BOT_TOKEN/getMe
     - If curl fails (exit code != 0): report "Falha de rede. Verifique sua conexao."
     - If .ok == false: report "Token invalido. Crie novo bot no @BotFather e atualize .env"
-  - Send test: CRM_TEMPLATE_ROOT=~/claude-remote-manager CRM_AGENT_NAME=$AGENT_NAME bash ~/claude-remote-manager/core/bus/send-telegram.sh $CHAT_ID "Teste do /telegram skill — $(date '+%H:%M:%S')"
+  - Send test: CRM_TEMPLATE_ROOT=$CRM_HOME CRM_AGENT_NAME=$AGENT_NAME bash $CRM_HOME/core/bus/send-telegram.sh $CHAT_ID "Teste do /telegram skill — $(date '+%H:%M:%S')"
     - If send fails (exit code != 0): report "Envio falhou (exit $?). Tente /telegram restart ou /telegram setup"
   - Report success/failure
 ```
@@ -165,7 +179,7 @@ steps:
     - Show: "Agent ja configurado: @{bot_username}. Usar /telegram restart para reiniciar."
     - Do NOT re-run setup
   - If no valid config:
-    - Instruct user: ! cd ~/claude-remote-manager && ./setup.sh
+    - Instruct user: ! cd $CRM_HOME && ./setup.sh
     - This is interactive — CANNOT be automated
 ```
 
@@ -222,14 +236,14 @@ steps:
     - Store as LOCAL_SENDER (default: $AGENT_NAME)
   
   - Send via agent-to-agent bus:
-    CRM_TEMPLATE_ROOT=~/claude-remote-manager \
+    CRM_TEMPLATE_ROOT=$CRM_HOME \
     CRM_AGENT_NAME="${LOCAL_SENDER:-$AGENT_NAME}" \
-    bash ~/claude-remote-manager/core/bus/send-message.sh "$AGENT_NAME" high "$message"
+    bash $CRM_HOME/core/bus/send-message.sh "$AGENT_NAME" high "$message"
   
   - Also notify on Telegram:
-    CRM_TEMPLATE_ROOT=~/claude-remote-manager \
+    CRM_TEMPLATE_ROOT=$CRM_HOME \
     CRM_AGENT_NAME="${LOCAL_SENDER:-$AGENT_NAME}" \
-    bash ~/claude-remote-manager/core/bus/send-telegram.sh "$CHAT_ID" "Ping-pong review iniciado. Cheque seu inbox."
+    bash $CRM_HOME/core/bus/send-telegram.sh "$CHAT_ID" "Ping-pong review iniciado. Cheque seu inbox."
   
   - Report to user:
     "Review request enviado para @{bot_username}. O agente remoto vai analisar e escrever round-{NEXT_ROUND}.md.
@@ -241,16 +255,16 @@ steps:
 
 | Error | Auto-Fix |
 |-------|----------|
-| Repo not found | "Clone: git clone https://github.com/grandamenium/claude-remote-manager ~/claude-remote-manager" |
+| Repo not found | "Clone: git clone https://github.com/grandamenium/claude-remote-manager ~/CODE/tools/claude-remote-manager" |
 | No .env found | Guide to /telegram setup |
-| Token invalid (getMe fails) | "Token expirado. Crie novo bot no @BotFather e atualize ~/claude-remote-manager/agents/{name}/.env" |
+| Token invalid (getMe fails) | "Token expirado. Crie novo bot no @BotFather e atualize $CRM_HOME/agents/{name}/.env" |
 | tmux exists but Claude dead | Auto-restart with --restart flag |
 | fast-checker not running | Auto-restart |
 | Agent already enabled | Use --restart flag automatically |
 
 ## Prerequisites
 
-- `~/claude-remote-manager/` cloned and `install.sh` executed
+- `claude-remote-manager` cloned (auto-detected in `~/CODE/tools/` or `~/`) and `install.sh` executed
 - At least one agent configured with `.env` (BOT_TOKEN + CHAT_ID)
 - `tmux`, `jq`, `curl` installed
 - macOS (uses launchd for persistence)
@@ -258,4 +272,4 @@ steps:
 ---
 
 *Skill: telegram v2.0 — Smart auto-detection, zero unnecessary questions*
-*Backend: ~/claude-remote-manager (grandamenium/claude-remote-manager)*
+*Backend: $CRM_HOME (grandamenium/claude-remote-manager)*
