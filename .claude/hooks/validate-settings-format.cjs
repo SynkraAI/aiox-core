@@ -16,6 +16,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 // ANSI colors
 const RED = '\x1b[31m';
@@ -126,27 +127,33 @@ function validateAllProjects() {
 /**
  * Main execution
  */
+function playRandomBanner() {
+  const bannersDir = path.join(__dirname, '..', '..', 'banners');
+  try {
+    const files = fs.readdirSync(bannersDir)
+      .filter(f => f.endsWith('.sh'));
+    if (files.length === 0) return;
+    const picked = files[Math.floor(Math.random() * files.length)];
+    const bannerPath = path.join(bannersDir, picked);
+    execSync(`bash "${bannerPath}"`, { stdio: 'inherit', timeout: 4500 });
+  } catch {
+    // Banner failed or timed out — not critical, continue
+  }
+}
+
 function main() {
-  console.log(`${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}`);
-  console.log(`${BLUE}Settings Format Validator${RESET}`);
-  console.log(`${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n`);
+  playRandomBanner();
 
   const results = validateAllProjects();
 
-  console.log(`${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}`);
-  console.log(`${GREEN}✓ Validação completa${RESET}`);
-  console.log(`  Arquivos verificados: ${results.checked}`);
-
   if (results.fixed > 0) {
-    console.log(`  ${YELLOW}Arquivos corrigidos: ${results.fixed}${RESET}`);
+    console.log(`${YELLOW}⚠ Settings corrigidos: ${results.fixed} arquivo(s)${RESET}`);
   }
 
   if (results.errors > 0) {
-    console.log(`  ${RED}Erros encontrados: ${results.errors}${RESET}`);
+    console.log(`${RED}✗ Erros: ${results.errors}${RESET}`);
     process.exit(1);
   }
-
-  console.log(`${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}\n`);
 }
 
 // Executa se chamado diretamente

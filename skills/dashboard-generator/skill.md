@@ -1,8 +1,15 @@
 ---
+name: dashboard-generator
+description: "Gera dashboards web interativos a partir de dados. HTML/CSS/JS standalone, pronto para deploy."
+
 paths:
   - "skills/dashboard-generator/"
 lazy_load: true
 context_budget: 2123
+
+version: 1.0.0
+category: development
+tags: [SKILL]
 ---
 
 # Dashboard Generator - Interactive Web Dashboards

@@ -1,11 +1,14 @@
-# Task: Atomize Content
+---
+name: atomize-content
+description: "Break pillar content into 30-64+ atomic pieces for multi-platform distribution"
+task_id: content-distillery/atomize-content
+version: "1.0.0"
+status: production-ready
+created: "2026-02-12"
+category: content-derivation-workflow
+---
 
-**Task ID:** content-distillery/atomize-content
-**Version:** 1.0.0
-**Status:** Production Ready
-**Created:** 2026-02-12
-**Category:** Content Derivation Workflow
-**Total Lines:** 450+
+# Task: Atomize Content
 
 ---
 
@@ -82,10 +85,14 @@ source_metadata:
       title: "Alex Hormozi on Content Leverage"
       speaker: "Alex Hormozi"
       date: "2024-03-15"
-      platform: "YouTube Live"
+      source_type: "live"           # controlled enum: video | live | podcast | article
+      platform: "YouTube Live"      # descriptive label (free text, e.g. "YouTube Live", "Spotify")
       duration: "2h15m"
       url: "https://youtube.com/watch?v=..."
-  validation: "Must include speaker, date, and original platform"
+  validation: "Must include speaker, date, source_type (enum), and platform label"
+  source_type:
+    allowed: ["video", "live", "podcast", "article"]
+    note: "Use source_type (not platform) for conditional logic. platform is a free-text label."
 
 target_platforms:
   field: "Which platforms to create content for"
@@ -370,9 +377,41 @@ Before starting this task:
   ├── newsletter/
   │   ├── piece-001-teaser-leverage-principles.md
   │   └── ...
+  ├── video-cut-candidates.yaml   # generated when source is video/live/podcast
   ├── manifest.yaml
   └── quality-report.yaml
   ```
+
+- **When `source_metadata.source_type` is `video`, `live`, or `podcast`:** generate `video-cut-candidates.yaml` as a secondary output alongside the platform content pieces. This file is a **pre-curation candidate map** — see "Video Cut Handoff Boundary" section below for the required downstream flow before it reaches `format-cut` or `ffmpeg-cutter`. Structure:
+  ```yaml
+  video_cut_candidates:
+    source: "{slug}"
+    source_url: "https://..."
+    generated_at: "YYYY-MM-DD"
+    items:
+      - candidate_id: "vc_001"
+        source_element: "key_insight_03"      # links back to inventory element
+        timestamp_inicio: "00:18:42"          # HH:MM:SS
+        timestamp_fim: "00:19:17"
+        duracao_s: 35
+        transcript_excerpt: "..."             # exact transcript excerpt as evidence
+        intended_formats: ["youtube_shorts", "reels", "tiktok"]
+        rationale: "Hook forte + payoff completo em menos de 60s"
+        handoff_target: "squads/curator/tasks/curate-data.md"  # PRE-CURATION — NOT format-cut
+  ```
+  If source is NOT video/live/podcast (per `source_type`), skip this file and log: "video-cut-candidates.yaml skipped — source_type is not video/live/podcast."
+
+### Video Cut Handoff Boundary
+
+`video-cut-candidates.yaml` is a **pre-curation candidate map**. It MUST NOT be sent directly to `format-cut` or `ffmpeg-cutter`.
+
+Required downstream flow:
+1. **Curator ingests** cut candidates (`squads/curator/tasks/curate-data.md`) and selects/normalizes moments.
+2. **Curator generates** `narrative_structure.yaml` or the appropriate intermediate artifact.
+3. **`format-cut`** (`squads/curator/tasks/format-cut.md`) converts that structured input into QG-004 validated cut YAML.
+4. **`ffmpeg-cutter`** (`curator/agents/ffmpeg-cutter`) executes only the validated cut YAML.
+
+> Skipping step 1-2 and routing `video-cut-candidates.yaml` directly to `format-cut` will break the pipeline — `format-cut` expects `narrative_structure.yaml`, not raw candidates.
 
 - Generate manifest:
   ```yaml
@@ -431,6 +470,27 @@ Location: `{slug}/content-pieces/`
 3. **Distribution Matrix**
    - Format: Markdown table (embedded in manifest)
    - Content: Piece count by platform x pyramid level
+
+4. **Video Cut Candidates** *(conditional — video/live/podcast sources only)*
+   - Format: YAML
+   - Location: `{slug}/content-pieces/video-cut-candidates.yaml`
+   - Content: Timestamped cut candidates with transcript excerpts. Pre-curation input — must pass through curator before reaching format-cut/ffmpeg-cutter. See "Video Cut Handoff Boundary" section.
+   - Required fields per item: `candidate_id`, `source_element`, `timestamp_inicio`, `timestamp_fim`, `duracao_s`, `transcript_excerpt`, `intended_formats`, `handoff_target`
+
+---
+
+## Relationship to Other Atomize Specs
+
+This spec is the **publish-ready atomization** variant. It produces platform-adapted content pieces intended for direct distribution — no intermediate approval gate is required.
+
+| Use this spec (`video-content-distillery/atomize-content.md`) when: | Use `squads/conteudo/tasks/atomize-content.md` when: |
+|---|---|
+| The workflow requires ready-to-publish platform assets | The workflow is approval-driven |
+| No intermediate human approval gate is needed | Outputs are briefs, maps, and handoffs |
+| Source is distilled Layer 4-5 content from third-party material | Source is owned brand content requiring user sign-off |
+| High-volume derivative content production | Owned content pipeline with controlled cadence |
+
+**Anti-duplication rule:** This spec MUST NOT run for the same source/atom when `squads/conteudo/tasks/atomize-content.md` is the active workflow owner. Running both produces duplicate content pieces for the same source. When in doubt, check which spec owns the active workflow before executing.
 
 ---
 

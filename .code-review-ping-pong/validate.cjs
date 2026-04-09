@@ -279,8 +279,8 @@ if (basename === 'next-step.md') {
   type = 'unknown';
 } else {
   type = yaml.type;
-  if (!type || !['review', 'fix', 'audit'].includes(type)) {
-    errors.push(`type must be "review", "fix", or "audit", got "${type}"`);
+  if (!type || !['review', 'fix', 'audit', 'critica'].includes(type)) {
+    errors.push(`type must be "review", "fix", "audit", or "critica", got "${type}"`);
   }
 }
 
@@ -726,7 +726,7 @@ if (type === 'stage-summary') {
     for (const r of rounds) {
       if (typeof r !== 'object') continue;
       if (!r.file) errors.push('round entry missing file');
-      if (!r.type || !['review', 'fix', 'audit'].includes(r.type)) {
+      if (!r.type || !['review', 'fix', 'audit', 'critica'].includes(r.type)) {
         errors.push(`round entry ${r.file || '?'} has invalid type: "${r.type}"`);
       }
     }

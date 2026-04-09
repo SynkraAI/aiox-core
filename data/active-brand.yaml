@@ -1,5 +1,5 @@
 # Active brand — pointer to the currently active brand.
 # Set via: node packages/brand-schema/index.mjs set <slug>
 # Read by: Content Forge, carrossel-instagram, video-generator, etc.
-slug: specta
-path: packages/brand-schema/brands/specta.yaml
+slug: ensinio
+path: packages/brand-schema/brands/ensinio.yaml

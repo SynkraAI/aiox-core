@@ -13,23 +13,28 @@
 
 ## 1. Scan Protocol (Phase 0 — MANDATORY)
 
+### Step 0: Refresh the Catalog (ALWAYS)
+
+**Run `/catalog`** before any matching. This regenerates `.aios-core/data/catalog.md` with fresh data — all squads, skills, tools, and agents with descriptions and activation commands.
+
+Without this step, the scan works with stale data. The catalog is the single source of truth.
+
 ### Step 1: Read the Indexes
 
-1. **Minds:** Read `squads/mind-cloning/minds/INDEX.md`
+1. **Catalog:** Read `.aios-core/data/catalog.md` (freshly generated in Step 0)
+   - Extract: all squads (name, description, activation), all skills (name, description, activation), all tools (name, description), all agents (name, persona, scope)
+
+2. **Minds:** Read `docs/ECOSYSTEM-INDEX.md` — seção "Minds" only (catalog does not include minds)
    - Extract: slug, fidelity level, expertise domain
    - Only consider minds with fidelity >= "partial" (skip "sources-only")
 
-2. **Skills:** Glob `skills/*/SKILL.md` and read ONLY the frontmatter (name + description)
-   - Extract: name, description, category
-
-3. **Squads:** Glob `squads/*/config.yaml` or `squads/*/README.md` (first 20 lines)
-   - Extract: name, purpose
-
 ### Step 2: Match Against Project
 
-Analyze the user's project description + detected tech stack and match:
+Analyze the user's project description + detected tech stack and match.
 
-#### Routing Matrix
+**Priority:** Use the Routing Matrix below as fast-path for known domains. For terms NOT in the matrix, search the full catalog by keyword matching against names and descriptions. This ensures new squads/skills are discoverable without editing this file.
+
+#### Routing Matrix (Fast-Path for Known Domains)
 
 | Domain Keywords | Minds to Consult | Skills to Inject | Squads to Reference |
 |----------------|------------------|-------------------|---------------------|
@@ -53,9 +58,10 @@ Analyze the user's project description + detected tech stack and match:
 #### Dynamic Detection (beyond the matrix)
 
 If the project description contains terms NOT in the matrix:
-1. Grep the term across `squads/*/README.md` and `skills/*/SKILL.md`
-2. If matches found, include them in the context pack
-3. If no matches, proceed without — the matrix covers 90% of cases
+1. **Search the catalog first:** match the term against squad/skill names and descriptions in `.aios-core/data/catalog.md`
+2. **If no catalog match:** Grep the term across `squads/*/README.md` and `skills/*/SKILL.md`
+3. If matches found, include them in the context pack
+4. If no matches, proceed without — the matrix + catalog cover 95%+ of cases
 
 ### Step 3: Build Context Pack
 
@@ -139,9 +145,10 @@ Phase 0 does the main scan. But during execution, the runner can trigger micro-s
 
 ### How to micro-scan
 
-1. Grep for the specific term in `skills/*/SKILL.md` and `squads/*/README.md`
-2. If found, add to context-pack.json (append, don't overwrite)
-3. Inject in the next agent dispatch
+1. **Search catalog first:** match the term against `.aios-core/data/catalog.md` (already loaded in Phase 0 — no need to re-run `/catalog`)
+2. **If no catalog match:** Grep for the specific term in `skills/*/SKILL.md` and `squads/*/README.md`
+3. If found, add to context-pack.json (append, don't overwrite)
+4. Inject in the next agent dispatch
 
 ---
 

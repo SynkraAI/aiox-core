@@ -69,9 +69,10 @@ command_loader:
 
   "*preview":
     description: "Dry-run: show ffmpeg commands without executing"
-    requires: []
+    requires:
+      - "scripts/execute_ffmpeg_cuts.py"
     optional: []
-    output_format: "ffmpeg command list (no execution)"
+    output_format: "ffmpeg command list (no execution) — uses --dry-run flag of execute_ffmpeg_cuts.py"
 
   "*help":
     description: "Show available commands"
@@ -162,11 +163,11 @@ persona:
 core_principles:
   - "Execution only — never decide what to cut, only how to render it"
   - "QG-004 is the gate — no YAML without QG-004 pass gets rendered"
-  - "Validate before render — check video exists, ffmpeg installed, disk space"
+  - "Validate before render — check video exists and ffmpeg is installed"
   - "Platform specs are law — resolution, codec, duration per platform"
   - "Report everything — every render gets a line in render_report.md"
-  - "Fail fast, fail loud — any error stops the batch, reports clearly"
-  - "Idempotent renders — re-running same YAML produces same output"
+  - "Fail per segment — errors are recorded per-segment, batch continues, report is always generated"
+  - "Deterministic renders — re-running same YAML always overwrites and re-renders all segments"
 
 operational_frameworks:
   total_frameworks: 2
@@ -215,8 +216,9 @@ operational_frameworks:
     command: "*render-all"
 
     philosophy: |
-      Process all cuts in YAML sequentially. Stop on first error unless
-      --continue-on-error flag is set. Generate consolidated report.
+      Process all cuts in YAML sequentially. Errors are recorded per-segment
+      and do not abort the batch — all segments are attempted and results
+      are consolidated in render_report.md.
 
     steps:
       step_1:
@@ -252,8 +254,8 @@ commands:
 
   - name: preview
     visibility: [full, quick]
-    description: "Dry-run: show ffmpeg commands without executing"
-    loader: null
+    description: "Dry-run: show ffmpeg commands without executing (uses --dry-run flag)"
+    loader: "scripts/execute_ffmpeg_cuts.py"
 
   - name: help
     visibility: [full, quick, key]
@@ -355,8 +357,8 @@ heuristics:
 
   - id: H-004
     when: "Output file already exists at target path"
-    then: "Skip render (idempotent). Report: 'Already rendered: {path}'. Use --force to re-render."
-    severity: WARN
+    then: "Overwrite (ffmpeg -y flag). Re-running the same YAML always re-renders all segments."
+    severity: INFO
 
   - id: H-005
     when: "YAML specifies platform but no matching platform_spec exists"
@@ -380,13 +382,15 @@ heuristics:
 
   - id: H-009
     when: "Disk space < 500MB available"
-    then: "BLOCK. Report: 'Insufficient disk space for rendering.'"
-    severity: BLOCK
+    then: "WARN only — disk space is NOT checked by execute_ffmpeg_cuts.py. Operator must verify before large batch renders."
+    severity: WARN
+    note: "Not implemented in script. Check manually before large batches."
 
   - id: H-010
-    when: "Batch render has 1+ failures but --continue-on-error is set"
-    then: "Continue remaining cuts. Report all failures in render_report.md."
+    when: "Batch render has 1+ failures"
+    then: "Continue remaining cuts regardless. All failures are recorded in render_report.md. Exit code is non-zero when any segment fails."
     severity: WARN
+    note: "Script always continues on error (no --continue-on-error flag needed or supported)."
 ```
 
 ---
@@ -651,7 +655,7 @@ anti_patterns:
     - "Render a YAML that has not passed QG-004 validation"
     - "Modify timestamps, crop values, or platform assignments from the YAML"
     - "Skip preflight validation to save time"
-    - "Continue batch render on error without --continue-on-error flag"
+    - "Treat a segment error as a full batch abort — errors are per-segment, batch always completes"
     - "Output files outside the canonical path structure (output/curated/{source-slug}/cortes/)"
     - "Re-encode when a simple stream copy would suffice (unless crop/scale needed)"
     - "Ignore ffmpeg stderr warnings — always capture and report"
@@ -722,8 +726,8 @@ veto_conditions:
     message: "ffmpeg not found. Install: https://ffmpeg.org/download.html"
 
   - trigger: "Insufficient disk space (<500MB)"
-    action: "BLOCK render"
-    message: "Disk space below 500MB. Free space before rendering."
+    action: "WARN only — disk space is not checked automatically"
+    message: "Disk space not verified by script. Check manually before large batches."
 
   - trigger: "Agent asked to make creative decisions (what to cut, which moments)"
     action: "REFUSE and redirect"

@@ -63,11 +63,25 @@ CODEC_DEFAULTS = {
 # HELPERS
 # ═══════════════════════════════════════════════════════════════════════════════
 
+# Accepts: HH:MM:SS[.frac], MM:SS[.frac], or plain seconds (non-negative integer/float).
+# MM and SS must be in [0, 59]; HH is unbounded (long-form videos can exceed 99 hours).
+_TIMESTAMP_RE = re.compile(
+    r"^(?:(\d+):)?([0-5]?\d):([0-5]?\d(?:\.\d+)?)$"   # [[H:]M:]S form
+    r"|^\d+(?:\.\d+)?$"                                   # plain seconds
+)
+
+
 def parse_timestamp(ts: str) -> float:
-    """Convert HH:MM:SS or MM:SS or seconds string to float seconds."""
+    """Convert HH:MM:SS, MM:SS, or plain seconds string to float seconds.
+
+    Raises ValueError for any input that does not match the expected format,
+    contains negative components, or has out-of-range MM/SS values.
+    """
     ts = ts.strip()
-    # Already a number
-    if re.match(r'^\d+(\.\d+)?$', ts):
+    if not _TIMESTAMP_RE.match(ts):
+        raise ValueError(f"Invalid timestamp format: '{ts}'")
+    # Plain seconds path
+    if re.match(r'^\d+(?:\.\d+)?$', ts):
         return float(ts)
     parts = ts.split(":")
     if len(parts) == 3:
@@ -76,7 +90,7 @@ def parse_timestamp(ts: str) -> float:
     elif len(parts) == 2:
         m, s = parts
         return int(m) * 60 + float(s)
-    raise ValueError(f"Invalid timestamp format: {ts}")
+    raise ValueError(f"Invalid timestamp format: '{ts}'")
 
 
 def format_duration(seconds: float) -> str:
@@ -117,10 +131,21 @@ def validate_cut_yaml(data: dict) -> list:
 
     segments = data.get("segments") or data.get("cortes") or data.get("clips") or []
     for i, seg in enumerate(segments):
-        if "inicio" not in seg and "start" not in seg:
+        start = seg.get("inicio") or seg.get("start")
+        end = seg.get("fim") or seg.get("end")
+        if start is None:
             errors.append(f"Segment {i+1}: missing start timestamp (inicio/start)")
-        if "fim" not in seg and "end" not in seg:
+        if end is None:
             errors.append(f"Segment {i+1}: missing end timestamp (fim/end)")
+        if start is not None and end is not None:
+            try:
+                start_s = parse_timestamp(str(start))
+                end_s = parse_timestamp(str(end))
+            except (TypeError, ValueError) as exc:
+                errors.append(f"BLOCK: Segment {i+1}: invalid timestamp: {exc}")
+                continue
+            if start_s >= end_s:
+                errors.append(f"BLOCK: Segment {i+1}: start must be < end ({start} >= {end})")
 
     # Check QG-004 marker
     meta = data.get("metadata", {})
@@ -144,8 +169,14 @@ def build_ffmpeg_cmd(video_input: str, segment: dict, output_path: str,
     start_s = parse_timestamp(str(start))
     end_s = parse_timestamp(str(end))
 
-    # Get platform spec
-    specs = PLATFORM_SPECS.get(format_type, {}).get(platform, {})
+    # Get platform spec — unknown platform/format is a hard block (H-005)
+    if format_type not in PLATFORM_SPECS or platform not in PLATFORM_SPECS[format_type]:
+        supported = sorted(PLATFORM_SPECS.get(format_type, {}).keys())
+        raise ValueError(
+            f"Unknown platform '{platform}' for format '{format_type}'. "
+            f"Supported platforms: {supported or list(PLATFORM_SPECS.keys())}"
+        )
+    specs = PLATFORM_SPECS[format_type][platform]
     needs_crop = specs.get("crop", False)
     width = specs.get("width", 1920)
     height = specs.get("height", 1080)
@@ -199,8 +230,20 @@ def render_segment(video_input: str, segment: dict, output_path: str,
     end = segment.get("fim") or segment.get("end")
     name = segment.get("nome") or segment.get("name") or segment.get("titulo", "unnamed")
 
-    start_s = parse_timestamp(str(start))
-    end_s = parse_timestamp(str(end))
+    try:
+        start_s = parse_timestamp(str(start))
+        end_s = parse_timestamp(str(end))
+    except (TypeError, ValueError) as exc:
+        return {
+            "name": name,
+            "start": str(start),
+            "end": str(end),
+            "output": output_path,
+            "mode": "unknown",
+            "status": "error",
+            "error": f"Invalid timestamp: {exc}",
+        }
+
     expected_duration = end_s - start_s
 
     result = {
@@ -218,8 +261,18 @@ def render_segment(video_input: str, segment: dict, output_path: str,
         result["error"] = f"Invalid duration: {expected_duration}s"
         return result
 
+    # Validate platform/format before building commands (H-005: unknown platform = BLOCK)
+    if format_type not in PLATFORM_SPECS or platform not in PLATFORM_SPECS[format_type]:
+        supported = sorted(PLATFORM_SPECS.get(format_type, {}).keys())
+        result["status"] = "error"
+        result["error"] = (
+            f"Unknown platform '{platform}' for format '{format_type}'. "
+            f"Supported: {supported or list(PLATFORM_SPECS.keys())}"
+        )
+        return result
+
     # Determine if we need re-encode (crop) or can use copy mode
-    specs = PLATFORM_SPECS.get(format_type, {}).get(platform, {})
+    specs = PLATFORM_SPECS[format_type][platform]
     needs_crop = specs.get("crop", False)
 
     if needs_crop:
@@ -257,11 +310,18 @@ def render_segment(video_input: str, segment: dict, output_path: str,
                 result["error"] = proc.stderr[-500:] if proc.stderr else "Unknown error"
                 return result
 
-        # Verify output
+        # Verify output — existence and non-zero size (H-006)
         if not os.path.exists(output_path):
             result["status"] = "error"
             result["error"] = "Output file not created"
             return result
+
+        size_bytes = os.path.getsize(output_path)
+        if size_bytes == 0:
+            result["status"] = "error"
+            result["error"] = "Output file is empty (0 bytes). Check ffmpeg stderr."
+            return result
+        result["size_bytes"] = size_bytes
 
         actual_duration = get_video_duration(output_path)
         result["actual_duration_s"] = round(actual_duration, 2)
@@ -311,14 +371,19 @@ def generate_report(results: list, metadata: dict, output_dir: str) -> str:
         "",
         "## Segments",
         "",
-        "| # | Name | Start | End | Duration | Mode | Status |",
-        "|---|------|-------|-----|----------|------|--------|",
+        "| # | Name | Start | End | Duration | Size | Mode | Status | Output |",
+        "|---|------|-------|-----|----------|------|------|--------|--------|",
     ]
 
     for i, r in enumerate(results, 1):
         status_icon = {"success": "✅", "warning": "⚠️", "error": "❌", "dry-run": "🔍"}.get(r["status"], "❓")
-        dur = f"{r['expected_duration_s']}s"
-        lines.append(f"| {i} | {r['name']} | {r['start']} | {r['end']} | {dur} | {r['mode']} | {status_icon} {r['status']} |")
+        dur = f"{r.get('expected_duration_s', '?')}s"
+        size_kb = f"{r['size_bytes'] // 1024}KB" if r.get("size_bytes") else "—"
+        safe_name = r["name"].replace("|", "\\|")
+        safe_output = r.get("output", "—").replace("|", "\\|")
+        lines.append(
+            f"| {i} | {safe_name} | {r['start']} | {r['end']} | {dur} | {size_kb} | {r['mode']} | {status_icon} {r['status']} | {safe_output} |"
+        )
 
     # Errors detail
     error_results = [r for r in results if r.get("error")]

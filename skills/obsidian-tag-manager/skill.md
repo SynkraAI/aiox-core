@@ -1,8 +1,15 @@
 ---
+name: SKILL
+description: "Expert em gerenciamento inteligente de tags para Obsidian vaults. Analisa tags existentes, mantém consistência de capitalização e evita duplicatas."
+
 paths:
   - "skills/obsidian-tag-manager/"
 lazy_load: true
 context_budget: 3142
+
+version: 1.0.0
+category: design
+tags: [SKILL]
 ---
 
 # Obsidian Tag Manager

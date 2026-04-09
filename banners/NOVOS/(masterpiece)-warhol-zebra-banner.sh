@@ -1,0 +1,44 @@
+#!/bin/bash
+# RGB True-Color ASCII Masterpiece — LUIZ FOSC version
+# Art source: Asciiville (github.com/doctorfree/Asciiville)
+
+NC='\033[0m'
+GREEN='\033[0;32m'
+WHITE='\033[1;37m'
+
+luizfosc_logo() {
+echo ""
+echo -e "\033[38;5;196m ██╗     ██╗   ██╗██╗███████╗    ███████╗ ██████╗ ███████╗ ██████╗\033[0m"
+echo -e "\033[38;5;208m ██║     ██║   ██║██║╚══███╔╝    ██╔════╝██╔═══██╗██╔════╝██╔════╝\033[0m"
+echo -e "\033[38;5;220m ██║     ██║   ██║██║  ███╔╝     █████╗  ██║   ██║███████╗██║     \033[0m"
+echo -e "\033[38;5;46m ██║     ██║   ██║██║ ███╔╝      ██╔══╝  ██║   ██║╚════██║██║     \033[0m"
+echo -e "\033[38;5;51m ███████╗╚██████╔╝██║███████╗    ██║     ╚██████╔╝███████║╚██████╗\033[0m"
+echo -e "\033[38;5;201m ╚══════╝ ╚═════╝ ╚═╝╚══════╝    ╚═╝      ╚═════╝ ╚══════╝ ╚═════╝\033[0m"
+echo ""
+echo -e "\033[38;5;220m 🎨 warhol-zebra 🎨\033[0m  \033[1;37mAIOS Core \033[0;32mv2.1\033[0m"
+echo -e "\033[38;5;240m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo ""
+}
+
+ASSET="$(dirname "$0")/assets/warhol-zebra.asc"
+
+if [ ! -f "$ASSET" ]; then
+  echo "Asset not found: $ASSET"
+  exit 1
+fi
+
+printf "\033[?25l"
+printf "\033[H\033[2J"
+
+# Scroll line by line from top to bottom
+while IFS= read -r line; do
+  printf '%s\n' "$line"
+  sleep 0.06
+done < "$ASSET"
+
+sleep 1.5
+
+printf "\033[H\033[2J"
+luizfosc_logo
+printf "\033[?25h"
+sleep 0.8

@@ -1,109 +1,178 @@
-# Atomizar Conteudo Pilar
+# Atomizar Conteúdo Pilar
 
 name: atomize-content
-description: Extrair atomos de conteudo de 1 peca pilar (video, live, artigo, podcast) e gerar 10-30 briefs de micro-conteudo para diferentes formatos
+description: Extrair átomos de conteúdo de 1 peça pilar (vídeo, live, artigo, podcast) e gerar 10-30 briefs de micro-conteúdo para diferentes formatos
 elicit: true
 
 ## INPUTS
 
-- **Conteudo pilar:** video, live, artigo, podcast ou post longo (obrigatorio)
-- **Transcricao:** texto completo se o pilar for video/audio (obrigatorio se video/audio)
-- **Tema central:** assunto principal do conteudo pilar (obrigatorio)
-- **Publico:** avatar especifico que consome o conteudo (obrigatorio)
-- **Formatos desejados:** carrossel, reels, stories, post unico, frase de impacto, email (opcional — default: todos)
-- **Quantidade alvo:** numero de micro-pecas desejadas (opcional — default: 15-20)
-- **Intencao dominante:** atracao, consciencia, aquecimento, venda (opcional — distribui automaticamente)
+- **Conteúdo pilar:** vídeo, live, artigo, podcast ou post longo (obrigatório)
+- **Transcrição:** texto completo se o pilar for vídeo/áudio (obrigatório se vídeo/áudio)
+- **Tema central:** assunto principal do conteúdo pilar (obrigatório)
+- **Público:** avatar específico que consome o conteúdo (obrigatório)
+- **Formatos desejados:** carrossel, reels, stories, post único, frase de impacto, email (opcional — default: todos)
+- **Quantidade alvo:** número de micro-peças desejadas (opcional — default: 15-20)
+- **Intenção dominante:** atração, consciência, aquecimento, venda (opcional — distribui automaticamente)
 - **Fonte original:** URL YouTube, live, podcast, artigo (opcional — para rastreabilidade)
+- **source_type:** tipo controlado da fonte — enum: `video | live | podcast | article` (obrigatório para gate da Etapa 2B)
+  - Use `source_type` para lógica condicional, não o campo `platform` (que é rótulo livre, ex.: "YouTube Live", "Spotify")
 
 ## STEPS
 
-### Etapa 1: Analise do Pilar
-1. Ler/analisar o conteudo pilar completo
+### Etapa 1: Análise do Pilar
+1. Ler/analisar o conteúdo pilar completo
 2. Identificar o tema central e subtemas abordados
-3. Mapear a estrutura do conteudo (introducao, desenvolvimento, conclusao)
-4. Avaliar se o pilar tem substancia suficiente (minimo 3 insights acionaveis)
-5. Se nao tem substancia → VETO, explicar e pedir conteudo mais robusto
+3. Mapear a estrutura do conteúdo (introdução, desenvolvimento, conclusão)
+4. Avaliar se o pilar tem substância suficiente (mínimo 3 insights acionáveis)
+5. Se não tem substância → VETO, explicar e pedir conteúdo mais robusto
 
-### Etapa 2: Extracao de Atomos
-6. Extrair **insights acionaveis** — ideias que o publico pode aplicar imediatamente
-7. Extrair **quotes de impacto** — frases memoraveis, provocativas ou contraintuitivas. EXTRAIR TODAS — nao limitar a 5. Um video de 1h tem 15-25 frases quotable.
-8. Extrair **dados e provas** — estatisticas, resultados, cases mencionados
-9. Extrair **historias** — narrativas, exemplos, analogias usadas
-10. Extrair **provocacoes** — crencas quebradas, mitos derrubados, verdades incomodas
+### Etapa 2: Extração de Átomos
+6. Extrair **insights acionáveis** — ideias que o público pode aplicar imediatamente
+7. Extrair **quotes de impacto** — frases memoráveis, provocativas ou contraintuitivas. EXTRAIR TODAS — não limitar a 5. Um vídeo de 1h tem 15-25 frases quotable.
+8. Extrair **dados e provas** — estatísticas, resultados, cases mencionados
+9. Extrair **histórias** — narrativas, exemplos, analogias usadas
+10. Extrair **provocações** — crenças quebradas, mitos derrubados, verdades incômodas
 11. Extrair **frameworks** — modelos, passos, processos explicados
-12. Classificar cada atomo: [insight | quote | dado | historia | provocacao | framework]
+12. Classificar cada átomo: [insight | quote | dado | história | provocação | framework]
+13. **Registrar cada átomo no `atom_registry`** — obrigatório antes de avançar para Etapa 2B:
+    ```yaml
+    atom_registry:
+      # Padrão de ID: atom_{NN} (ex: atom_01, atom_07, atom_23)
+      # Gerado sequencialmente na ordem de extração.
+      # Este ID é referenciado em briefs, cortes e resumos — não inventar outros padrões.
+      items:
+        - atom_id: "atom_01"
+          atom_type: "insight"          # insight | quote | dado | história | provocação | framework
+          source_excerpt: "..."         # trecho exato do pilar onde o átomo foi extraído
+          source_position: "00:03:15"   # timestamp HH:MM:SS (vídeo) ou parágrafo (texto)
+        - atom_id: "atom_02"
+          atom_type: "quote"
+          source_excerpt: "..."
+          source_position: "00:07:42"
+    ```
+    - IDs são estáveis: uma vez gerado `atom_07`, esse ID não muda nem é reutilizado
+    - Cortes de vídeo (Etapa 2B) DEVEM referenciar `atom_id` deste registry
 
-### Etapa 2B: Extracao de Cortes de Video (se fonte for video)
-13. Mapear **timestamps de cortes** — trechos do video que funcionam ISOLADOS como conteudo
-14. Para cada corte, registrar:
-    - Timestamp inicio (min:seg)
-    - Timestamp fim (min:seg)
-    - Duracao estimada
-    - Tema/ideia central do corte
-    - Por que funciona isolado (gancho forte, historia completa, framework explicado)
-15. Objetivo: 10-15 cortes por hora de video
-16. Cortes sao complementares aos roteiros de Reels — Reels sao criados do zero, cortes sao trechos originais
+### Etapa 2B: Extração de Cortes de Vídeo (se `source_type` for `video`, `live` ou `podcast`)
+13. Mapear **timestamps de cortes** — trechos do vídeo que funcionam ISOLADOS como conteúdo
+14. Para cada corte, registrar e salvar em `cortes-video.yaml`:
+    ```yaml
+    cortes_video_mapeados:
+      output_file: "cortes-video.yaml"
+      items:
+        - cut_id: "cut_001"
+          atom_id: "atom_07"         # vínculo com átomo correspondente
+          source_url: "https://..."
+          timestamp_inicio: "00:12:14"  # formato HH:MM:SS
+          timestamp_fim: "00:12:49"
+          duracao_s: 35
+          tema: "Posicionamento como arma de conversão"
+          rationale: "Hook forte + payoff completo"
+          transcript_excerpt: "..."    # trecho textual do corte (evidência)
+          next_step: "curate-data"   # PRÉ-CURADORIA — nunca format-cut ou ffmpeg-cutter diretamente
+    ```
+15. Objetivo: 10-15 cortes por hora de vídeo
+16. Cortes são complementares aos roteiros de Reels — Reels são criados do zero, cortes são trechos originais
+17. O arquivo `cortes-video.yaml` é um **mapa de candidatos pré-curadoria** — o curator precisa processar antes que `format-cut` ou `ffmpeg-cutter` sejam acionados
 
-### Etapa 2C: Resumo Pre-Criacao
-17. Para CADA atomo extraido, gerar resumo pre-criacao:
-    - 2-3 opcoes de titulo
+    **Fronteira de handoff de cortes de vídeo:**
+    `cortes-video.yaml` NÃO deve ir direto para `format-cut` ou `ffmpeg-cutter`.
+    Fluxo obrigatório downstream:
+    1. Curator ingere os candidatos (`squads/curator/tasks/curate-data.md`) e seleciona/normaliza os momentos.
+    2. Curator gera `narrative_structure.yaml` ou artefato intermediário validado.
+    3. `format-cut` (`squads/curator/tasks/format-cut.md`) converte em cut YAML validado pelo QG-004.
+    4. `ffmpeg-cutter` executa apenas o cut YAML validado.
+
+### Etapa 2C: Resumo Pré-Criação
+18. Para CADA átomo extraído, gerar resumo pré-criação:
+    - 2-3 opções de título
     - Preview dos primeiros 2-3 slides (carrossel) ou primeiros 3-6 segundos (reels)
-    - Angulo de abordagem em 1 linha
-18. Este resumo e OBRIGATORIO e sera apresentado ao usuario ANTES de criar qualquer peca
-19. Apresentar lista completa ao usuario: "1. Confirmar, 2. Ajustar, 3. Adicionar mais"
+    - Ângulo de abordagem em 1 linha
+19. Este resumo é OBRIGATÓRIO e será apresentado ao usuário ANTES de criar qualquer peça
+20. Apresentar lista completa ao usuário: "1. Confirmar, 2. Ajustar, 3. Adicionar mais"
 
-### Etapa 3: Mapeamento Atomo → Formato
-20. Para cada atomo, definir o formato mais adequado:
-    - **Insight acionavel** → Carrossel (estrutura passo a passo) ou Reels (explicacao rapida)
-    - **Quote de impacto** → Frase de impacto (quote card feed + stories) ou Post unico
-    - **Dado/prova** → Carrossel (antes/depois, comparacao) ou Reels (revelacao)
-    - **Historia** → Reels (narrativa curta) ou Carrossel (arco narrativo) ou Email (narrativa longa)
-    - **Provocacao** → Post unico (afirmacao chocante) ou Reels (hot take) ou Frase de impacto
-    - **Framework** → Carrossel (passo a passo visual) ou Reels (tutorial rapido)
-    - **Insight profundo** → Email (handoff Squad Copywriters — gerar brief, nao criar email)
-15. Definir tipo de post para cada peca (imperial, polemico, crenca, problema, curiosidade, historia, oferta)
-16. Definir intencao de cada peca (atracao, consciencia, aquecimento, venda)
+### Etapa 3: Mapeamento Átomo → Formato
+21. Para cada átomo, definir o formato mais adequado aplicando as regras de alocação abaixo:
 
-### Etapa 4: Geracao de Briefs
-17. Para cada atomo mapeado, gerar um brief contendo:
-    - Titulo/tema do micro-conteudo
-    - Formato definido (carrossel, reels, stories, post unico)
+    **Mapeamento por tipo:**
+    - **Insight acionável** → Carrossel (estrutura passo a passo) ou Reels (explicação rápida)
+    - **Quote de impacto** → Frase de impacto (quote card feed + stories) ou Post único
+    - **Dado/prova** → Carrossel (antes/depois, comparação) ou Reels (revelação)
+    - **História** → Reels (narrativa curta) ou Carrossel (arco narrativo) ou Email (narrativa longa)
+    - **Provocação** → Post único (afirmação chocante) ou Reels (hot take) ou Frase de impacto
+    - **Framework** → Carrossel (passo a passo visual) ou Reels (tutorial rápido)
+    - **Insight profundo** → Email (handoff Squad Copywriters — gerar brief, não criar email)
+
+    **Regras de alocação de formatos (`format_allocation`):**
+    ```yaml
+    format_allocation:
+      default_formats_per_atom: 1
+      max_formats_per_atom: 2
+      allow_second_format_when:
+        - "atom_type in [framework, historia, dado]"
+        - "second format changes consumption mode (e.g. visual → audio)"
+      hard_caps:
+        same_format_ratio_max: 0.40   # nunca mais de 40% dos briefs no mesmo formato
+        duplicate_angle_similarity_max: 0.70  # briefs com ângulo > 70% similar → descartar um
+      exception_rule:
+        email: "apenas para insights profundos com handoff explícito para copywriters"
+    ```
+
+22. Definir tipo de post para cada peça (imperial, polêmico, crença, problema, curiosidade, história, oferta)
+23. Definir intenção de cada peça (atração, consciência, aquecimento, venda)
+
+### Etapa 4: Geração de Briefs
+24. Para cada átomo mapeado, gerar um brief contendo:
+    - Título/tema do micro-conteúdo
+    - Formato definido (carrossel, reels, stories, post único)
     - Tipo de post e framework de copy recomendados
-    - Intencao (atracao, consciencia, aquecimento, venda)
-    - Angulo de abordagem (como esse atomo sera apresentado)
+    - Intenção (atração, consciência, aquecimento, venda)
+    - Ângulo de abordagem (como esse átomo será apresentado)
     - Hook sugerido (1 linha de abertura)
     - CTA sugerido
-    - Notas de execucao (duracao se reels, num slides se carrossel)
-18. Ordenar briefs por prioridade (alto impacto primeiro)
-19. Garantir variedade de formatos (nao mais que 40% no mesmo formato)
-19b. **PROPORCIONALIDADE:** se tem X carrosseis, deve ter proporcionalmente X briefs de email, stories e frases. Nao faz sentido ter 24 carrosseis e 1 email.
-19c. **CADA atomo pode gerar MULTIPLOS formatos** — um insight pode virar carrossel + reel + email
+    - Notas de execução (duração se reels, nº slides se carrossel)
+25. Ordenar briefs por prioridade (alto impacto primeiro)
+26. Garantir variedade de formatos (não mais que 40% no mesmo formato — ver `format_allocation`)
 
 ### Etapa 5: Entrega
-20. Entregar lista completa de briefs organizados por formato
-21. Incluir resumo quantitativo (total por formato, por intencao, por tipo)
-22. Sugerir ordem de criacao (prioridade)
-23. Indicar quais briefs podem virar serie de conteudo conectada
+27. Entregar lista completa de briefs organizados por formato
+28. Incluir resumo quantitativo (total por formato, por intenção, por tipo)
+29. Sugerir ordem de criação (prioridade)
+30. Indicar quais briefs podem virar série de conteúdo conectada
+
+## RELATIONSHIP TO OTHER ATOMIZE SPECS
+
+Esta spec é a versão **approval-driven** de atomização — orientada a briefs e handoffs com gate de aprovação do usuário antes de qualquer criação.
+
+| Usar esta spec (`conteudo/atomize-content.md`) quando: | Usar `video-content-distillery/atomize-content.md` quando: |
+|---|---|
+| O workflow exige aprovação humana antes da criação | O workflow requer ativos prontos para publicação |
+| Outputs são briefs, mapas e handoffs | Não há gate de aprovação intermediário |
+| Pipeline é orientado a conteúdo de marca própria | Pipeline é orientado a derivação em volume de conteúdo de terceiros |
+| Fonte é vídeo/audio com cortes para curator | Fontes são conteúdo já destilado em Layer 4-5 |
+
+**Regra de precedência:** quando as duas specs estiverem ativas no mesmo projeto, esta (`conteudo`) tem prioridade se houver aprovação pendente do usuário. Nunca executar ambas para o mesmo átomo — isso gera duplicação.
 
 ## VETO CONDITIONS
 
-- Se conteudo pilar tem menos de 3 insights acionaveis → NAO executar, pedir conteudo mais robusto
-- Se nao tem as 3 informacoes obrigatorias (pilar, tema, publico) → NAO executar, perguntar
-- Se mais de 40% dos atomos caem no mesmo formato → Redistribuir antes de entregar
-- Se algum brief nao tem hook sugerido → Completar antes de entregar
-- Se algum brief parece copia direta do pilar (sem adaptacao) → Reescrever com angulo proprio
-- Se tom nao e imperial → Reescrever no tom correto
-- Se usa palavras proibidas (segredo, dica, truque, hack, simples, facil) → Substituir
-- Se brief nao funciona isoladamente (depende de contexto do pilar) → Ajustar para independencia
+- Se conteúdo pilar tem menos de 3 insights acionáveis → NÃO executar, pedir conteúdo mais robusto
+- Se não tem as 3 informações obrigatórias (pilar, tema, público) → NÃO executar, perguntar
+- Se mais de 40% dos átomos caem no mesmo formato → Redistribuir antes de entregar
+- Se algum brief não tem hook sugerido → Completar antes de entregar
+- Se algum brief parece cópia direta do pilar (sem adaptação) → Reescrever com ângulo próprio
+- Se tom não é imperial → Reescrever no tom correto
+- Se usa palavras proibidas (segredo, dica, truque, hack, simples, fácil) → Substituir
+- Se brief não funciona isoladamente (depende de contexto do pilar) → Ajustar para independência
+- Se dois briefs têm ângulo de similaridade > 70% → Descartar o de menor impacto
 
 ## OUTPUT EXAMPLE
 
 ```
-ATOMIZACAO: Conteudo Pilar → Micro-Conteudos
+ATOMIZAÇÃO: Conteúdo Pilar → Micro-Conteúdos
 PILAR: Live sobre posicionamento de marca (47 min)
-TEMA: Posicionamento como arma de conversao
-PUBLICO: Empreendedores digitais 5-15k/mes
-TOTAL ATOMOS: 18
+TEMA: Posicionamento como arma de conversão
+PÚBLICO: Empreendedores digitais 5-15k/mês
+TOTAL ÁTOMOS: 18
 
 RESUMO:
 - Carrosseis: 6
@@ -111,82 +180,85 @@ RESUMO:
 - Stories: 4
 - Frases de impacto: 3
 - Briefs de email (handoff copywriters): 2
-- Posts unicos: 1
+- Posts únicos: 1
 
 ---
 
 BRIEF #1 [PRIORIDADE ALTA]
-Atomo: "95% dos empreendedores sao invisiveis pro comprador certo"
-Tipo: Provocacao
+Átomo: "95% dos empreendedores são invisíveis pro comprador certo"
+Tipo: Provocação
 Formato: Carrossel (10 slides)
 Tipo de post: Imperial
 Framework: Abertura Curiosa
-Intencao: Consciencia
-Angulo: Atacar a crenca de que "postar mais = vender mais"
-Hook: "Voce posta todo dia e ninguem compra. O problema nao e o conteudo."
-CTA: "Comenta POSICIONAMENTO se voce quer sair da invisibilidade"
-Notas: 10 slides, progressao reptiliano → limbico → neocortex
+Intenção: Consciência
+Ângulo: Atacar a crença de que "postar mais = vender mais"
+Hook: "Você posta todo dia e ninguém compra. O problema não é o conteúdo."
+CTA: "Comenta POSICIONAMENTO se você quer sair da invisibilidade"
+Notas: 10 slides, progressão reptiliano → límbico → neocórtex
 
 BRIEF #2 [PRIORIDADE ALTA]
-Atomo: "Cliente saiu de 3k pra 47k em 60 dias com reposicionamento"
+Átomo: "Cliente saiu de 3k pra 47k em 60 dias com reposicionamento"
 Tipo: Dado/Prova
 Formato: Reels (45s)
-Tipo de post: Historia
+Tipo de post: História
 Framework: Testemunho Real
-Intencao: Aquecimento
-Angulo: Case real com numeros concretos
-Hook: "3 mil por mes. Mesmo publico. 60 dias depois: 47 mil."
+Intenção: Aquecimento
+Ângulo: Case real com números concretos
+Hook: "3 mil por mês. Mesmo público. 60 dias depois: 47 mil."
 CTA: "Link na bio pra entender como"
-Notas: Roteiro 45s, talking head com cortes dinamicos
+Notas: Roteiro 45s, talking head com cortes dinâmicos
 
-BRIEF #3 [PRIORIDADE MEDIA]
-Atomo: "Consistencia sem posicionamento e barulho"
+BRIEF #3 [PRIORIDADE MÉDIA]
+Átomo: "Consistência sem posicionamento é barulho"
 Tipo: Quote de impacto
-Formato: Post unico
-Tipo de post: Polemico
+Formato: Post único
+Tipo de post: Polêmico
 Framework: Pergunta Impactante
-Intencao: Atracao
-Angulo: Provocar quem posta muito e vende pouco
-Hook: "Consistencia sem posicionamento e trabalho escravo digital."
+Intenção: Atração
+Ângulo: Provocar quem posta muito e vende pouco
+Hook: "Consistência sem posicionamento é trabalho escravo digital."
 CTA: "Salva e manda pra quem precisa ouvir isso"
 Notas: Imagem com fundo escuro + quote centralizada
 
 [... briefs 4-18 ...]
 
-SERIES SUGERIDAS:
-- Briefs #1, #4, #9 formam serie "Posicionamento em 3 atos"
-- Briefs #2, #7 formam serie "Cases de transformacao"
+SÉRIES SUGERIDAS:
+- Briefs #1, #4, #9 formam série "Posicionamento em 3 atos"
+- Briefs #2, #7 formam série "Cases de transformação"
 
-ORDEM DE CRIACAO RECOMENDADA:
-1. Brief #1 (carrossel — ancora da atomizacao)
+ORDEM DE CRIAÇÃO RECOMENDADA:
+1. Brief #1 (carrossel — âncora da atomização)
 2. Brief #2 (reels — prova social)
-3. Brief #3 (post unico — rapido de produzir)
+3. Brief #3 (post único — rápido de produzir)
 [...]
 ```
 
 ## COMPLETION CRITERIA
 
-- Todas as etapas executadas na ordem (analise → extracao → mapeamento → briefs → entrega)
-- Minimo 10 atomos extraidos e classificados (video de 1h+ deve ter 30-50 atomos)
-- Cortes de video mapeados com timestamps (se fonte for video)
-- Resumo pre-criacao gerado para CADA atomo (titulo + preview)
-- Cada atomo classificado por tipo (insight, quote, dado, historia, provocacao, framework)
-- Cada brief com formato, tipo de post, framework, intencao, hook e CTA definidos
+- Todas as etapas executadas na ordem (análise → extração → mapeamento → briefs → entrega)
+- Mínimo 10 átomos extraídos e classificados (vídeo de 1h+ deve ter 30-50 átomos)
+- Cortes de vídeo mapeados com timestamps em `cortes-video.yaml` (se `source_type` for `video`, `live` ou `podcast`)
+- `atom_registry` criado na Etapa 2 com `atom_id` estável para cada átomo extraído
+- Resumo pré-criação gerado para CADA átomo (título + preview)
+- Cada átomo classificado por tipo (insight, quote, dado, história, provocação, framework)
+- Cada brief com formato, tipo de post, framework, intenção, hook e CTA definidos
 - Variedade de formatos (max 40% no mesmo formato)
 - Briefs ordenados por prioridade
-- Resumo quantitativo incluido
-- Series de conteudo identificadas quando aplicavel
+- Resumo quantitativo incluído
+- Séries de conteúdo identificadas quando aplicável
 - Tom imperial consistente em todos os hooks e CTAs
-- Nenhum brief depende do pilar para fazer sentido (independencia)
+- Nenhum brief depende do pilar para fazer sentido (independência)
+- Regras de `format_allocation` respeitadas (max 2 formatos por átomo, sem duplicação de ângulo)
 
 ## REFERENCES
 
 - data/tipos-de-post.md — 7 tipos de post com estrutura completa por slides
 - data/frameworks-copy.md — 9 frameworks de copy + matriz tipo x framework
-- data/oraculo-posts.md — 9 etapas de validacao + 12 testes
-- data/oraculo-reels.md — framework de validacao de reels
-- data/hooks-bank.md — banco de hooks para referencia
-- data/posts-intencionais.md — 6 principios de posts intencionais
-- data/estrategias.md — 8 estrategias de campanha com cronograma
+- data/oraculo-posts.md — 9 etapas de validação + 12 testes
+- data/oraculo-reels.md — framework de validação de reels
+- data/hooks-bank.md — banco de hooks para referência
+- data/posts-intencionais.md — 6 princípios de posts intencionais
+- data/estrategias.md — 8 estratégias de campanha com cronograma
 - data/regras-inviolaveis.md — regras de tom e linguagem
-- data/cliches-proibidos.md — palavras e expressoes proibidas
+- data/cliches-proibidos.md — palavras e expressões proibidas
+- squads/curator/tasks/format-cut.md — handoff de cortes de vídeo para o curator

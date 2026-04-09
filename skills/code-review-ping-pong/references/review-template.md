@@ -99,7 +99,7 @@ issues:
 - **Total issues:** {count}
 - **By severity:** 🔴 {X} CRITICAL, 🟠 {X} HIGH, 🟡 {X} MEDIUM, 🟢 {X} LOW
 - **Regressions from previous round:** {count or "none"}
-- **Next action:** {Fix issues and request new review | Code is perfect, no action needed}
+- **Next action:** {Fix issues and request new review | Trigger CRITICA and update next-step.md}
 ````
 
 ---
@@ -111,6 +111,6 @@ issues:
 3. Omit empty severity sections in Markdown (if no CRITICAL issues, skip that heading).
 4. The "What Is Good" section is mandatory — never skip it.
 5. Score must be honest. Do not inflate or deflate. Do not omit issues to maintain a "fewer issues" narrative.
-6. If verdict is PERFECT, the `issues` array must be empty and the Issues section should contain only praise.
+6. If verdict is PERFECT, the `issues` array must be empty and the Summary must route the operator to CRITICA (update `next-step.md` with `cycle_state: WAITING_FOR_CRITICA`). Never indicate "no action needed" on a PERFECT verdict.
 7. `commit_sha` and `branch` are mandatory — run the git commands to get them.
 8. `files_in_scope` must list every file that was actually reviewed.

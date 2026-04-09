@@ -1,0 +1,91 @@
+{
+  "$schema": "Domain taxonomy for AIOX catalog tag system",
+  "version": "1.0.0",
+  "domains": {
+    "content": {
+      "label": "Content",
+      "description": "Content creation, copywriting, storytelling, editorial",
+      "keywords": ["content", "copy", "storytelling", "editorial", "writing", "post", "carrossel", "carousel", "reels", "video", "audio", "transcript", "blog", "newsletter", "script", "narrative", "texto", "conteudo", "conteúdo", "creator", "distillery", "forge", "viral"]
+    },
+    "marketing": {
+      "label": "Marketing",
+      "description": "Marketing strategy, campaigns, funnels, growth",
+      "keywords": ["marketing", "funnel", "campaign", "growth", "lead", "conversion", "conversao", "conversão", "trafego", "tráfego", "traffic", "ads", "launch", "presenca", "presença", "digital", "affiliate", "outreach", "instagram", "whatsapp", "telegram", "social", "blotato", "publisher"]
+    },
+    "sales": {
+      "label": "Sales",
+      "description": "Sales strategy, high-ticket, negotiation, prospecting",
+      "keywords": ["sales", "vendas", "high-ticket", "negotiation", "negociacao", "negociação", "prospecting", "deal", "revenue", "pricing", "offer", "oferta", "closer", "pitch"]
+    },
+    "branding": {
+      "label": "Branding",
+      "description": "Brand identity, positioning, visual identity",
+      "keywords": ["brand", "branding", "identity", "positioning", "logo", "visual", "marca", "posicionamento"]
+    },
+    "dev": {
+      "label": "Dev",
+      "description": "Software development, coding, architecture, testing",
+      "keywords": ["dev", "code", "coding", "typescript", "javascript", "react", "nextjs", "angular", "node", "api", "backend", "frontend", "fullstack", "refactor", "test", "lint", "build", "app-builder", "scaffold", "component", "storybook", "superpowers", "template", "playwright", "browser"]
+    },
+    "design": {
+      "label": "Design",
+      "description": "UI/UX design, design systems, visual design",
+      "keywords": ["design", "ui", "ux", "figma", "wireframe", "prototype", "token", "component", "design-system", "accessibility", "responsive", "layout", "thumbnail", "image", "canva"]
+    },
+    "data": {
+      "label": "Data",
+      "description": "Data engineering, databases, ETL, analytics",
+      "keywords": ["data", "database", "db", "schema", "migration", "etl", "analytics", "query", "sql", "rls", "supabase", "postgres"]
+    },
+    "devops": {
+      "label": "DevOps",
+      "description": "CI/CD, deployment, infrastructure, monitoring",
+      "keywords": ["devops", "deploy", "ci-cd", "docker", "infrastructure", "monitoring", "release", "pre-deploy", "auto-deploy"]
+    },
+    "security": {
+      "label": "Security",
+      "description": "Security testing, vulnerability scanning, penetration testing",
+      "keywords": ["security", "vulnerability", "penetration", "pentest", "scan", "audit", "cloud-penetration"]
+    },
+    "research": {
+      "label": "Research",
+      "description": "Deep research, analysis, investigation, competitive intelligence",
+      "keywords": ["research", "analysis", "investigate", "insight", "deep-research", "deep-search", "competitive", "diagnosis", "diagnostic", "sherlock", "simulation", "predicao", "politica"]
+    },
+    "productivity": {
+      "label": "Productivity",
+      "description": "Automation, workflows, tools, process optimization",
+      "keywords": ["productivity", "automation", "workflow", "tool", "process", "sop", "obsidian", "pipeline", "quest", "checklist", "dashboard", "sync", "context", "memory", "ram", "doctor", "legacy-rule", "extractor", "accentuation", "acentuacao", "pt-br", "critica", "deprecated"]
+    },
+    "mind-clone": {
+      "label": "Mind Clone",
+      "description": "Mental models, persona cloning, mind DNA extraction",
+      "keywords": ["mind", "clone", "persona", "voice-dna", "thinking-dna", "mental-model", "hormozi", "ladeira", "marsili", "vieira", "koe", "icaro", "carvalho", "amorim", "deandhela", "renner", "fosc", "repertoire"]
+    },
+    "media": {
+      "label": "Media",
+      "description": "Media processing, video editing, audio, transcription",
+      "keywords": ["media", "video", "audio", "transcription", "transcriber", "ffmpeg", "remotion", "curator", "editor", "render", "voice", "pptx", "pdf", "document", "book", "epub", "downloader", "captions", "youtube", "tldv", "scraper", "zlib", "cademi"]
+    },
+    "gaming": {
+      "label": "Gaming",
+      "description": "Game development, engines, game design",
+      "keywords": ["game-development", "gaming", "godot", "unreal", "unity", "gdscript", "game-design", "game-art", "game-audio", "multiplayer-game"]
+    },
+    "education": {
+      "label": "Education",
+      "description": "Learning, tutorials, courses, knowledge management",
+      "keywords": ["education", "learning", "tutorial", "course", "knowledge", "dopamine", "teach", "ensinio", "cohort", "palestra"]
+    },
+    "ai-ops": {
+      "label": "AI Ops",
+      "description": "AI agent orchestration, squad management, framework governance",
+      "keywords": ["agent", "squad", "orchestration", "aios", "aiox", "synapse", "kaizen", "god-mode", "navigator", "autonomy", "master", "creator", "skill-creator", "mcp-builder", "system-prompt", "celf", "context-surgeon", "openclaw", "fleet"]
+    },
+    "seo": {
+      "label": "SEO",
+      "description": "Search engine optimization, site performance, schema markup",
+      "keywords": ["seo", "search-engine", "schema", "sitemap", "lighthouse", "performance", "crawl", "indexing", "ranking"]
+    }
+  }
+}
