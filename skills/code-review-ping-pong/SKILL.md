@@ -109,11 +109,13 @@ Every mode MUST leave `.code-review-ping-pong/next-step.md` in this exact struct
 - current_round: {N}
 - current_mode: {REVIEW | FIX | AUDIT | CRITICA}
 - cycle_state: {WAITING_FOR_FIX | WAITING_FOR_REVIEW | WAITING_FOR_AUDIT | WAITING_FOR_CRITICA | COMPLETE}
-- next_agent: {CLAUDE CODE | CODEX | GEMINI | NONE}
+- next_agent: {🟠 CLAUDE CODE | 🟢 CODEX | 🔵 GEMINI | NONE}
 - next_mode: {fix mode | review mode | audit mode | critica | none}
 - expected_artifact: {.code-review-ping-pong/round-{N}-fixed.md | .code-review-ping-pong/round-{N+1}.md | .code-review-ping-pong/round-{N}-audit.md | critica.md | none}
 - scope: {scope_name | root}
 - critica_status: {pending | approved | skipped}
+- critica_skipped_by: {user | orchestrator | none}  # only when critica_status: skipped
+- critica_skip_reason: {"--no-critica flag" | "user override" | none}  # only when critica_status: skipped
 - blocking_reason: {short reason}
 
 ## Operator Prompt
@@ -177,12 +179,12 @@ Codex always initiates the cycle. This mode analyzes code and writes findings.
       🎯 Round {N} review completa. Score: {X}/10. {Y} issues encontradas.
 
       📍 Estado atual: WAITING_FOR_FIX
-      👤 Próximo agente: CLAUDE CODE
+      👤 Próximo agente: 🟠 CLAUDE CODE
       ⚡ Próximo comando: fix mode
       📄 Próximo arquivo esperado: .code-review-ping-pong/round-{N}-fixed.md
 
       ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-      ┃ 📋 COPIE O BLOCO ABAIXO → COLE NO CLAUDE CODE   ┃
+      ┃ 📋 COPIE O BLOCO ABAIXO → COLE NO 🟠 CLAUDE CODE ┃
       ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
       ative a skill code-review-ping-pong em modo FIX.
@@ -208,12 +210,12 @@ Codex always initiates the cycle. This mode analyzes code and writes findings.
       🏆 Código 10/10! Agora a crítica obrigatória antes de encerrar.
 
       📍 Estado atual: WAITING_FOR_CRITICA
-      👤 Próximo agente: CLAUDE CODE
+      👤 Próximo agente: 🟠 CLAUDE CODE
       ⚡ Próximo comando: critica
       📄 Próximo arquivo esperado: critica.md
 
       ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-      ┃ 📋 COPIE O BLOCO ABAIXO → COLE NO CLAUDE CODE    ┃
+      ┃ 📋 COPIE O BLOCO ABAIXO → COLE NO 🟠 CLAUDE CODE ┃
       ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
       ative a skill code-review-ping-pong em modo CRITICA.
@@ -300,12 +302,12 @@ Claude Code responds to reviews. This mode reads findings and implements fixes.
     🔧 Round {N} corrigido. ✅ {X} fixed, ⚠️ {Y} skipped. Quality checks: {status}.
 
     📍 Estado atual: WAITING_FOR_REVIEW
-    👤 Próximo agente: CODEX
+    👤 Próximo agente: 🟢 CODEX
     ⚡ Próximo comando: review mode
     📄 Próximo arquivo esperado: .code-review-ping-pong/round-{N+1}.md
 
     ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-    ┃ 📋 COPIE O BLOCO ABAIXO → COLE NO CODEX          ┃
+    ┃ 📋 COPIE O BLOCO ABAIXO → COLE NO 🟢 CODEX       ┃
     ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
     ative a skill code-review-ping-pong em modo REVIEW.
@@ -366,12 +368,12 @@ Gemini's large context window makes it ideal for reading the full round history 
    🔍 Audit do round {N} completo. 📊 Process health: {X}/10. {Y} findings.
 
    📍 Estado atual: WAITING_FOR_REVIEW
-   👤 Próximo agente: CODEX
+   👤 Próximo agente: 🟢 CODEX
    ⚡ Próximo comando: review mode
    📄 Próximo arquivo esperado: .code-review-ping-pong/round-{N+1}.md
 
    ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-   ┃ 📋 COPIE O BLOCO ABAIXO → COLE NO CODEX          ┃
+   ┃ 📋 COPIE O BLOCO ABAIXO → COLE NO 🟢 CODEX       ┃
    ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
    ative a skill code-review-ping-pong em modo REVIEW.
@@ -600,12 +602,12 @@ Claude Code executes the critica after PERFECT is reached. This mode reads ALL r
      ⚠️ Crítica encontrou problemas. Novo round necessário.
 
      📍 Estado atual: WAITING_FOR_REVIEW
-     👤 Próximo agente: CODEX
+     👤 Próximo agente: 🟢 CODEX
      ⚡ Próximo comando: review mode
      📄 Próximo arquivo esperado: round-{N+1}.md
 
      ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-     ┃ 📋 COPIE O BLOCO ABAIXO → COLE NO CODEX          ┃
+     ┃ 📋 COPIE O BLOCO ABAIXO → COLE NO 🟢 CODEX       ┃
      ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 
      ative a skill code-review-ping-pong em modo REVIEW.
@@ -934,7 +936,7 @@ Every mode MUST end with a prompt presenting numbered options.
 - Before the numbered options, every response MUST print a 4-line status block exactly in this shape:
   ```
   📍 Estado atual: {WAITING_FOR_FIX | WAITING_FOR_REVIEW | WAITING_FOR_AUDIT | WAITING_FOR_CRITICA | COMPLETE}
-  👤 Próximo agente: {CLAUDE CODE | CODEX | GEMINI | NONE}
+  👤 Próximo agente: {🟠 CLAUDE CODE | 🟢 CODEX | 🔵 GEMINI | NONE}
   ⚡ Próximo comando: {fix mode | review mode | audit mode | critica | none}
   📄 Próximo arquivo esperado: {path | critica.md | none}
   ```
@@ -965,7 +967,7 @@ is `NONE`, there is no one to hand off to. Show only the banner, status block, a
 
 ```
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ 🟣 PRÓXIMO: CLAUDE CODE (FIX)        ┃
+┃ 🟠 PRÓXIMO: CLAUDE CODE (FIX)        ┃
 ┃ 👉 Abra o Claude e rode: fix mode    ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ```
@@ -974,7 +976,7 @@ is `NONE`, there is no one to hand off to. Show only the banner, status block, a
 
 ```
 ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ 🟣 PRÓXIMO: CLAUDE CODE (CRITICA)    ┃
+┃ 🟠 PRÓXIMO: CLAUDE CODE (CRITICA)    ┃
 ┃ 👉 Abra o Claude e rode: critica     ┃
 ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
 ```
@@ -1003,6 +1005,19 @@ is `NONE`, there is no one to hand off to. Show only the banner, status block, a
 - 🔵 = Gemini (AUDIT)
 - 🟣 = Claude Code (CRITICA)
 - 🏆 = COMPLETE (após crítica aprovada)
+
+---
+
+## Meta-Teste Recomendado
+
+Para validar este skill, rode um ciclo ping-pong no próprio SKILL.md + templates (scope: ping-pong-meta).
+O meta-teste é especialmente valioso porque corrige inconsistências internas durante a execução,
+garantindo que o skill esteja auto-consistente antes de revisar código de terceiros.
+
+Ao criar o session.md para o meta-teste, inclua sempre:
+- Contratos de handoff: nomenclaturas, schemas e targets downstream são consistentes e verificáveis?
+
+---
 
 ### Severity emojis (MANDATORY in all output)
 
