@@ -59,16 +59,16 @@ export default async function ProductPage({
   return (
     <>
       {/* Hero Image */}
-      <section className="relative w-full h-[60vh] md:h-[75vh] bg-bg-secondary">
+      <section className="relative w-full h-[70vh] md:h-[85vh]">
         <Image
           src={product.image}
           alt={`Mesa de sinuca ${product.name} - Tocks Custom`}
           fill
           priority
           sizes="100vw"
-          className="object-contain"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-primary)] via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-bg-primary/30 to-transparent" />
 
         {/* Breadcrumbs */}
         <div className="absolute top-28 left-6 md:left-12">
@@ -207,13 +207,13 @@ export default async function ProductPage({
                   href={`/colecao/${item.slug}`}
                   className="group block"
                 >
-                  <div className="relative aspect-square overflow-hidden rounded-lg bg-bg-secondary border border-border flex items-center justify-center">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-bg-secondary border border-border">
                     <Image
                       src={item.image}
                       alt={`Mesa de sinuca ${item.name} - Tocks Custom`}
                       fill
                       sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-contain p-2 transition-transform duration-700 ease-[var(--ease-luxury)] group-hover:scale-105"
+                      className="object-cover transition-transform duration-700 ease-[var(--ease-luxury)] group-hover:scale-105"
                     />
                   </div>
                   <div className="mt-4">

@@ -86,13 +86,13 @@ export default function ColecaoPage() {
               className="group block"
             >
               {/* Image Container */}
-              <div className="relative aspect-square overflow-hidden rounded-lg bg-bg-secondary border border-border flex items-center justify-center">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-bg-secondary border border-border">
                 <Image
                   src={product.image}
                   alt={`Mesa de sinuca ${product.name} - Tocks Custom`}
                   fill
                   sizes="(max-width: 768px) 50vw, 33vw"
-                  className="object-contain p-2 transition-transform duration-700 ease-[var(--ease-luxury)] group-hover:scale-105"
+                  className="object-cover transition-transform duration-700 ease-[var(--ease-luxury)] group-hover:scale-105"
                 />
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500 flex items-center justify-center">

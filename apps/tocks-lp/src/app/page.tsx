@@ -66,7 +66,7 @@ export default function Home() {
               width={220}
               height={49}
               priority
-              className="h-10 md:h-12 w-auto mx-auto brightness-0 invert"
+              className="h-10 md:h-12 w-auto mx-auto"
             />
           </div>
 
@@ -179,13 +179,13 @@ export default function Home() {
                 href={`/colecao/${product.slug}`}
                 className="group block"
               >
-                <div className="relative aspect-square overflow-hidden rounded-lg bg-bg-secondary border border-border flex items-center justify-center">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-lg bg-bg-secondary border border-border">
                   <Image
                     src={product.image}
                     alt={`Mesa de sinuca ${product.name} - Tocks Custom`}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-contain p-2 transition-transform duration-700 ease-[var(--ease-luxury)] group-hover:scale-105"
+                    className="object-cover transition-transform duration-700 ease-[var(--ease-luxury)] group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
