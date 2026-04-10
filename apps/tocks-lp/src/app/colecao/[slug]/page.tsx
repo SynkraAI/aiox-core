@@ -82,28 +82,28 @@ export default async function ProductPage({
       {/* Product Info */}
       <section className="max-w-5xl mx-auto px-6 -mt-32 relative z-10 pb-24">
         {/* Line Badge */}
-        <span className="inline-block text-xs uppercase tracking-[0.25em] text-[var(--color-accent)] border border-[var(--color-accent)]/30 px-4 py-1.5 rounded-full mb-6">
+        <span className="inline-block text-xs uppercase tracking-[0.25em] text-accent border border-accent/30 px-4 py-1.5 rounded-full mb-6">
           {lineLabel}
         </span>
 
-        <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl lg:text-8xl font-semibold text-[var(--color-text-primary)] mb-4">
+        <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-semibold text-text-primary mb-4">
           {product.name}
         </h1>
 
-        <p className="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-2xl mb-4">
+        <p className="text-lg md:text-xl text-text-secondary max-w-2xl mb-4">
           {product.tagline}
         </p>
 
-        <p className="text-base text-[var(--color-text-secondary)]/80 max-w-2xl mb-10 leading-relaxed">
+        <p className="text-base text-text-secondary/80 max-w-2xl mb-10 leading-relaxed">
           {product.description}
         </p>
 
         {/* Price */}
         <div className="mb-16">
-          <p className="text-3xl md:text-4xl font-[family-name:var(--font-heading)] text-[var(--color-text-primary)]">
+          <p className="text-3xl md:text-4xl font-heading text-text-primary">
             A partir de R$ {formatPrice(product.price)}
           </p>
-          <p className="text-[var(--color-text-secondary)] mt-2">
+          <p className="text-text-secondary mt-2">
             ou 6x de R$ {formatInstallment(product.price)} sem juros
           </p>
         </div>
@@ -113,15 +113,15 @@ export default async function ProductPage({
           {getProductSpecs(product).map((spec) => (
             <div
               key={spec.label}
-              className="border border-[var(--color-border)] rounded-sm p-6 text-center"
+              className="border border-border rounded-sm p-6 text-center"
             >
-              <span className="text-2xl mb-3 block text-[var(--color-accent)]">
+              <span className="text-2xl mb-3 block text-accent">
                 {spec.icon}
               </span>
-              <p className="text-sm text-[var(--color-text-secondary)] uppercase tracking-wide mb-1">
+              <p className="text-sm text-text-secondary uppercase tracking-wide mb-1">
                 {spec.label}
               </p>
-              <p className="font-[family-name:var(--font-heading)] text-lg text-[var(--color-text-primary)]">
+              <p className="font-heading text-lg text-text-primary">
                 {spec.value}
               </p>
             </div>
@@ -130,16 +130,16 @@ export default async function ProductPage({
 
         {/* Finishes: Wood */}
         <div className="mb-16">
-          <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl text-[var(--color-text-primary)] mb-2">
+          <h2 className="font-heading text-3xl md:text-4xl text-text-primary mb-2">
             Acabamentos em Madeira
           </h2>
-          <p className="text-[var(--color-text-secondary)] mb-8">
+          <p className="text-text-secondary mb-8">
             10 opcoes de acabamento em madeira macica
           </p>
           <div className="flex flex-wrap gap-4">
             {WOOD_FINISHES.map((finish) => (
               <div key={finish.name} className="group text-center">
-                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-transparent group-hover:border-[var(--color-accent)] transition-colors duration-300 mx-auto">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-transparent group-hover:border-accent transition-colors duration-300 mx-auto">
                   <Image
                     src={finish.image}
                     alt={finish.name}
@@ -148,7 +148,7 @@ export default async function ProductPage({
                     className="object-cover w-full h-full"
                   />
                 </div>
-                <p className="text-xs text-[var(--color-text-secondary)] mt-2 max-w-[80px] mx-auto">
+                <p className="text-xs text-text-secondary mt-2 max-w-[80px] mx-auto">
                   {finish.name}
                 </p>
               </div>
@@ -158,16 +158,16 @@ export default async function ProductPage({
 
         {/* Finishes: Fabric */}
         <div className="mb-24">
-          <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl text-[var(--color-text-primary)] mb-2">
+          <h2 className="font-heading text-3xl md:text-4xl text-text-primary mb-2">
             Tecidos do Pano
           </h2>
-          <p className="text-[var(--color-text-secondary)] mb-8">
+          <p className="text-text-secondary mb-8">
             16 cores de tecido profissional
           </p>
           <div className="flex flex-wrap gap-4">
             {FABRIC_FINISHES.map((finish) => (
               <div key={finish.name} className="group text-center">
-                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-transparent group-hover:border-[var(--color-accent)] transition-colors duration-300 mx-auto">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-full overflow-hidden border-2 border-transparent group-hover:border-accent transition-colors duration-300 mx-auto">
                   <Image
                     src={finish.image}
                     alt={finish.name}
@@ -176,7 +176,7 @@ export default async function ProductPage({
                     className="object-cover w-full h-full"
                   />
                 </div>
-                <p className="text-xs text-[var(--color-text-secondary)] mt-2 max-w-[64px] mx-auto">
+                <p className="text-xs text-text-secondary mt-2 max-w-[64px] mx-auto">
                   {finish.name}
                 </p>
               </div>
@@ -195,9 +195,9 @@ export default async function ProductPage({
 
       {/* Related Products */}
       {related.length > 0 && (
-        <section className="border-t border-[var(--color-border)] py-24 px-6">
+        <section className="border-t border-border py-24 px-6">
           <div className="max-w-7xl mx-auto">
-            <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl text-[var(--color-text-primary)] mb-12 text-center">
+            <h2 className="font-heading text-3xl md:text-4xl text-text-primary mb-12 text-center">
               Outros modelos da {lineLabel}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -217,10 +217,10 @@ export default async function ProductPage({
                     />
                   </div>
                   <div className="mt-4">
-                    <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-[var(--color-text-primary)]">
+                    <h3 className="font-heading text-xl font-semibold text-text-primary">
                       {item.name}
                     </h3>
-                    <p className="text-sm text-[var(--color-accent)]">
+                    <p className="text-sm text-accent">
                       A partir de R$ {formatPrice(item.price)}
                     </p>
                   </div>

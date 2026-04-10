@@ -36,13 +36,13 @@ export default function ColecaoPage() {
       {/* Hero */}
       <section className="relative pt-8 pb-20 px-6 text-center">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--color-accent-glow)_0%,transparent_70%)] pointer-events-none" />
-        <span className="text-[var(--color-accent)] text-sm uppercase tracking-[0.3em] mb-6 block relative">
+        <span className="text-accent text-sm uppercase tracking-[0.3em] mb-6 block relative">
           Mesas de sinuca e bilhar artesanais
         </span>
-        <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl font-semibold text-[var(--color-text-primary)] mb-4 relative">
+        <h1 className="font-heading text-5xl md:text-7xl font-semibold text-text-primary mb-4 relative">
           Nossa Coleção
         </h1>
-        <p className="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-xl mx-auto relative">
+        <p className="text-lg md:text-xl text-text-secondary max-w-xl mx-auto relative">
           14 modelos exclusivos em madeira maciça. Fabricação artesanal em Itajaí-SC.
         </p>
       </section>
@@ -57,15 +57,15 @@ export default function ColecaoPage() {
               relative pb-2 text-sm md:text-base tracking-wide uppercase transition-colors duration-300
               ${
                 activeFilter === f.value
-                  ? 'text-[var(--color-accent)]'
-                  : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]'
+                  ? 'text-accent'
+                  : 'text-text-secondary hover:text-text-primary'
               }
             `}
           >
             {f.label}
             <span
               className={`
-                absolute bottom-0 left-0 h-px bg-[var(--color-accent)] transition-all duration-500
+                absolute bottom-0 left-0 h-px bg-accent transition-all duration-500
                 ${activeFilter === f.value ? 'w-full' : 'w-0'}
               `}
             />
@@ -96,7 +96,7 @@ export default function ColecaoPage() {
                 />
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-500 flex items-center justify-center">
-                  <span className="text-[var(--color-text-primary)] text-sm uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500">
+                  <span className="text-text-primary text-sm uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500">
                     Conhecer
                   </span>
                 </div>
@@ -104,13 +104,13 @@ export default function ColecaoPage() {
 
               {/* Info */}
               <div className="mt-4 space-y-1">
-                <h2 className="font-[family-name:var(--font-heading)] text-xl md:text-2xl font-semibold text-[var(--color-text-primary)]">
+                <h2 className="font-heading text-xl md:text-2xl font-semibold text-text-primary">
                   {product.name}
                 </h2>
-                <p className="text-sm text-[var(--color-accent)]">
+                <p className="text-sm text-accent">
                   A partir de R$ {formatPrice(product.price)}
                 </p>
-                <p className="text-sm text-[var(--color-text-secondary)] hidden md:block">
+                <p className="text-sm text-text-secondary hidden md:block">
                   {product.tagline}
                 </p>
               </div>
@@ -122,14 +122,14 @@ export default function ColecaoPage() {
       {/* CTA */}
       <section className="pb-32 px-6 text-center">
         <ScrollReveal>
-          <p className="text-[var(--color-text-secondary)] text-lg mb-6">
+          <p className="text-text-secondary text-lg mb-6">
             Não encontrou o modelo ideal? Criamos mesas sob medida.
           </p>
           <a
             href={getWhatsAppUrlCustom('Olá! Vi a coleção no site e gostaria de saber mais sobre personalização.')}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[var(--color-whatsapp)] hover:bg-[var(--color-whatsapp-hover)] text-white font-medium px-8 py-4 rounded-lg transition-colors duration-300"
+            className="inline-flex items-center gap-2 bg-whatsapp hover:bg-whatsapp-hover text-white font-medium px-8 py-4 rounded-lg transition-colors duration-300"
           >
             Falar com especialista
           </a>

@@ -89,7 +89,7 @@ function StarRating({ rating }: { rating: number }) {
       {Array.from({ length: 5 }, (_, i) => (
         <svg
           key={i}
-          className={`w-4 h-4 ${i < rating ? 'text-[var(--color-accent)]' : 'text-[var(--color-border)]'}`}
+          className={`w-4 h-4 ${i < rating ? 'text-accent' : 'text-[var(--color-border)]'}`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -131,10 +131,10 @@ export default function ProjetosPage() {
 
       {/* Hero */}
       <section className="pt-8 pb-20 px-6 text-center">
-        <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl font-semibold text-[var(--color-text-primary)] mb-4">
+        <h1 className="font-heading text-5xl md:text-7xl font-semibold text-text-primary mb-4">
           Projetos
         </h1>
-        <p className="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto">
           Mesas de sinuca instaladas em residências por todo o Brasil
         </p>
       </section>
@@ -150,7 +150,7 @@ export default function ProjetosPage() {
               key={project.id}
               onClick={() => setLightbox({ src: project.image, alt: `Mesa ${project.model} — ${project.location}` })}
               className={`
-                group relative overflow-hidden rounded-sm bg-[var(--color-bg-secondary)] cursor-zoom-in
+                group relative overflow-hidden rounded-sm bg-bg-secondary cursor-zoom-in
                 ${getGridSpanClass(project.span)}
               `}
             >
@@ -163,10 +163,10 @@ export default function ProjetosPage() {
               />
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                <p className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-[var(--color-text-primary)]">
+                <p className="font-heading text-2xl font-semibold text-text-primary">
                   {project.model}
                 </p>
-                <p className="text-sm text-[var(--color-text-secondary)] mt-1">
+                <p className="text-sm text-text-secondary mt-1">
                   {project.location}
                 </p>
               </div>
@@ -180,7 +180,7 @@ export default function ProjetosPage() {
 
       {/* Testimonials */}
       <section className="py-24 px-6">
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-5xl font-semibold text-center text-[var(--color-text-primary)] mb-16">
+        <h2 className="font-heading text-3xl md:text-5xl font-semibold text-center text-text-primary mb-16">
           O que nossos clientes dizem
         </h2>
         <ScrollReveal
@@ -190,17 +190,17 @@ export default function ProjetosPage() {
           {SELECTED_TESTIMONIALS.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-sm p-8 space-y-4"
+              className="bg-bg-card border border-border rounded-sm p-8 space-y-4"
             >
               <StarRating rating={testimonial.rating} />
-              <blockquote className="text-[var(--color-text-secondary)] text-sm leading-relaxed italic">
+              <blockquote className="text-text-secondary text-sm leading-relaxed italic">
                 &ldquo;{testimonial.text}&rdquo;
               </blockquote>
-              <div className="pt-2 border-t border-[var(--color-border)]">
-                <p className="text-[var(--color-text-primary)] font-medium text-sm">
+              <div className="pt-2 border-t border-border">
+                <p className="text-text-primary font-medium text-sm">
                   {testimonial.name}
                 </p>
-                <p className="text-[var(--color-accent)] text-xs">
+                <p className="text-accent text-xs">
                   {testimonial.model} &mdash; {testimonial.city}
                 </p>
               </div>
@@ -215,10 +215,10 @@ export default function ProjetosPage() {
       {/* CTA */}
       <section className="py-24 px-6 text-center">
         <ScrollReveal className="space-y-8" stagger={0.2}>
-          <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-5xl font-semibold text-[var(--color-text-primary)]">
+          <h2 className="font-heading text-3xl md:text-5xl font-semibold text-text-primary">
             Quer ver sua mesa nesta galeria?
           </h2>
-          <p className="text-[var(--color-text-secondary)] max-w-lg mx-auto">
+          <p className="text-text-secondary max-w-lg mx-auto">
             Cada projeto é único. Conte-nos sua visão e transformamos em realidade.
           </p>
           <div>

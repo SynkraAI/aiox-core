@@ -59,7 +59,7 @@ const CONTACT_INFO: ContactItem[] = [
 ]
 
 const INPUT_CLS =
-  'w-full bg-[var(--color-bg-card)] border border-[var(--color-border)] rounded-lg px-5 py-4 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)]/50 focus:outline-none focus:border-[var(--color-accent)] transition-colors duration-300'
+  'w-full bg-bg-card border border-border rounded-lg px-5 py-4 text-sm text-text-primary placeholder:text-text-secondary/50 focus:outline-none focus:border-accent transition-colors duration-300'
 
 export default function ContatoPage() {
   const [form, setForm] = useState<FormData>(INITIAL_FORM)
@@ -103,13 +103,13 @@ export default function ContatoPage() {
       {/* Hero */}
       <section className="relative pt-8 pb-20 px-6 text-center">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--color-accent-glow)_0%,transparent_70%)] pointer-events-none" />
-        <span className="text-[var(--color-accent)] text-sm uppercase tracking-[0.3em] mb-6 block relative">
+        <span className="text-accent text-sm uppercase tracking-[0.3em] mb-6 block relative">
           Estamos aqui para você
         </span>
-        <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl lg:text-[5.5rem] font-semibold text-[var(--color-text-primary)] leading-[0.95] relative">
+        <h1 className="font-heading text-5xl md:text-7xl lg:text-[5.5rem] font-semibold text-text-primary leading-[0.95] relative">
           Fale Conosco
         </h1>
-        <p className="mt-6 text-lg md:text-xl text-[var(--color-text-secondary)] max-w-lg mx-auto relative">
+        <p className="mt-6 text-lg md:text-xl text-text-secondary max-w-lg mx-auto relative">
           Nossos especialistas estão prontos para ajudar
         </p>
       </section>
@@ -120,24 +120,24 @@ export default function ContatoPage() {
           {/* Form */}
           <ScrollReveal>
             <div>
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] mb-8">
+              <h2 className="font-heading text-2xl md:text-3xl font-semibold text-text-primary mb-8">
                 Envie sua mensagem
               </h2>
 
               {sent ? (
-                <div className="bg-[var(--color-bg-card)] border border-[var(--color-accent)]/30 rounded-lg p-10 text-center">
-                  <div className="w-14 h-14 rounded-full bg-[var(--color-accent)]/10 flex items-center justify-center mx-auto mb-4 text-[var(--color-accent)]">
+                <div className="bg-bg-card border border-accent/30 rounded-lg p-10 text-center">
+                  <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4 text-accent">
                     <Icon name="check" size={28} />
                   </div>
-                  <p className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-[var(--color-accent)]">
+                  <p className="font-heading text-2xl font-semibold text-accent">
                     Mensagem enviada!
                   </p>
-                  <p className="text-[var(--color-text-secondary)] text-sm mt-3">
+                  <p className="text-text-secondary text-sm mt-3">
                     O WhatsApp foi aberto com sua mensagem. Responderemos em breve.
                   </p>
                   <button
                     onClick={() => { setSent(false); setForm(INITIAL_FORM) }}
-                    className="mt-6 text-[var(--color-accent)] text-sm underline underline-offset-4 hover:text-[var(--color-accent-hover)] transition-colors cursor-pointer"
+                    className="mt-6 text-accent text-sm underline underline-offset-4 hover:text-accent-hover transition-colors cursor-pointer"
                   >
                     Enviar outra mensagem
                   </button>
@@ -216,34 +216,34 @@ export default function ContatoPage() {
           {/* Contact Info Cards */}
           <ScrollReveal delay={0.2}>
             <div className="space-y-6">
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)] mb-8">
+              <h2 className="font-heading text-2xl md:text-3xl font-semibold text-text-primary mb-8">
                 Outros canais
               </h2>
 
               {CONTACT_INFO.map((info) => (
                 <div
                   key={info.label}
-                  className={`bg-[var(--color-bg-card)] border rounded-lg p-6 ${
+                  className={`bg-bg-card border rounded-lg p-6 ${
                     info.highlight
-                      ? 'border-[var(--color-whatsapp)]/30'
-                      : 'border-[var(--color-border)]'
+                      ? 'border-whatsapp/30'
+                      : 'border-border'
                   }`}
                 >
                   <div className="flex items-start gap-4">
                     <div
                       className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${
                         info.highlight
-                          ? 'bg-[var(--color-whatsapp)]/10 text-[var(--color-whatsapp)]'
-                          : 'bg-[var(--color-accent)]/10 text-[var(--color-accent)]'
+                          ? 'bg-whatsapp/10 text-whatsapp'
+                          : 'bg-accent/10 text-accent'
                       }`}
                     >
                       <Icon name={info.icon} size={20} />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-[var(--color-text-secondary)] text-xs uppercase tracking-wider">
+                      <p className="text-text-secondary text-xs uppercase tracking-wider">
                         {info.label}
                       </p>
-                      <p className="text-[var(--color-text-primary)] text-sm mt-1 break-words">
+                      <p className="text-text-primary text-sm mt-1 break-words">
                         {info.value}
                       </p>
                       {'cta' in info && info.cta && info.href && (
@@ -268,20 +268,20 @@ export default function ContatoPage() {
       </section>
 
       {/* Map placeholder */}
-      <section className="py-20 md:py-32 px-6 bg-[var(--color-bg-secondary)] border-t border-[var(--color-border)]">
+      <section className="py-20 md:py-32 px-6 bg-bg-secondary border-t border-border">
         <div className="max-w-4xl mx-auto text-center">
           <ScrollReveal>
             <div>
-              <div className="w-14 h-14 rounded-full border border-[var(--color-accent)]/30 flex items-center justify-center mx-auto mb-8 text-[var(--color-accent)]">
+              <div className="w-14 h-14 rounded-full border border-accent/30 flex items-center justify-center mx-auto mb-8 text-accent">
                 <Icon name="map" size={24} />
               </div>
-              <h2 className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)]">
+              <h2 className="font-heading text-2xl md:text-3xl font-semibold text-text-primary">
                 Nosso Atelier
               </h2>
-              <p className="mt-4 text-[var(--color-text-secondary)] text-lg">
+              <p className="mt-4 text-text-secondary text-lg">
                 {COMPANY.address.street} — {COMPANY.address.city}, {COMPANY.address.state}
               </p>
-              <p className="mt-1 text-[var(--color-text-secondary)] text-sm">
+              <p className="mt-1 text-text-secondary text-sm">
                 CEP {COMPANY.address.postalCode}
               </p>
               <div className="mt-8">
