@@ -1,19 +1,19 @@
-# Port Management — MANDATORY for Dev Servers
+# Gerenciamento de Portas — OBRIGATÓRIO para Dev Servers
 
-## Rule (ALL AGENTS, ALL PROJECTS)
+## Regra (TODOS OS AGENTES, TODOS OS PROJETOS)
 
-Before starting ANY dev server (`npm run dev`, `next dev`, `vite`, `npm start`, etc.), you MUST allocate a port using the Port Manager.
+Antes de iniciar QUALQUER dev server (`npm run dev`, `next dev`, `vite`, `npm start`, etc.), você DEVE alocar uma porta usando o Port Manager.
 
-**NEVER hardcode port 3000** (or any port) when starting a dev server. The user frequently has multiple apps running simultaneously and port conflicts cause crashes.
+**NUNCA fixe a porta 3000** (ou qualquer outra) ao iniciar um dev server. O usuário frequentemente tem múltiplos apps rodando simultaneamente e conflitos de porta causam crashes.
 
-## How to Use
+## Como Usar
 
-### Step 1: Allocate port
+### Passo 1: Alocar porta
 ```bash
 eval $(node ~/aios-core/tools/port-manager.js auto <project-name>)
 ```
 
-### Step 2: Start with allocated port
+### Passo 2: Iniciar com a porta alocada
 ```bash
 PORT=$PORT npm run dev
 ```
@@ -23,30 +23,30 @@ PORT=$PORT npm run dev
 eval $(node ~/aios-core/tools/port-manager.js auto <project-name>) && PORT=$PORT npm run dev
 ```
 
-### Check what's occupied
+### Verificar portas ocupadas
 ```bash
 node ~/aios-core/tools/port-manager.js scan
 ```
 
-## Port Ranges
+## Faixas de Portas
 
-| Type | Range | Examples |
-|------|-------|---------|
-| app | 3000-3099 | Next.js, Vite, React apps |
+| Tipo | Faixa | Exemplos |
+|------|-------|----------|
+| app | 3000-3099 | Next.js, Vite, apps React |
 | api | 4000-4099 | Express, Fastify, NestJS |
 | pipeline | 5000-5099 | Build tools, pipelines |
-| squad | 8000-8099 | Squad dashboards |
+| squad | 8000-8099 | Dashboards de squads |
 
-## What This Means in Practice
+## O Que Isto Significa na Prática
 
-- When creating a new app: use port-manager to allocate, save port in `.env` or `package.json`
-- When running `npm run dev`: always prefix with `eval $(node ~/aios-core/tools/port-manager.js auto <name>) &&`
-- When telling the user to open a URL: use the allocated port, NOT assumed 3000
-- When writing `package.json` scripts: use `$PORT` or the allocated port, not hardcoded values
+- Ao criar um novo app: use o port-manager para alocar e salve a porta em `.env` ou `package.json`
+- Ao rodar `npm run dev`: sempre prefixe com `eval $(node ~/aios-core/tools/port-manager.js auto <nome>) &&`
+- Ao informar uma URL ao usuário: use a porta alocada, NÃO assuma 3000
+- Ao escrever scripts em `package.json`: use `$PORT` ou a porta alocada, nunca valores fixos
 
-## Anti-patterns
+## Anti-padrões
 
-- `npm run dev` without PORT allocation
-- `# Open http://localhost:3000` without checking
-- Hardcoding `PORT=3000` in .env files
-- Assuming any specific port is free
+- `npm run dev` sem alocação de PORT
+- `# Abra http://localhost:3000` sem verificar
+- Fixar `PORT=3000` em arquivos `.env`
+- Assumir que qualquer porta específica está livre

@@ -19,7 +19,7 @@
           },
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PROJECT_DIR:-.}/squads/kaizen-v2/scripts/session-briefing.cjs\"",
+            "command": "test -f \"${CLAUDE_PROJECT_DIR:-.}/squads/kaizen-v2/scripts/session-briefing.cjs\" && node \"${CLAUDE_PROJECT_DIR:-.}/squads/kaizen-v2/scripts/session-briefing.cjs\" || true",
             "timeout": 3
           }
         ]
@@ -30,7 +30,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PROJECT_DIR:-.}/squads/kaizen-v2/scripts/stop-capture.cjs\"",
+            "command": "test -f \"${CLAUDE_PROJECT_DIR:-.}/squads/kaizen-v2/scripts/stop-capture.cjs\" && node \"${CLAUDE_PROJECT_DIR:-.}/squads/kaizen-v2/scripts/stop-capture.cjs\" || true",
             "timeout": 5
           }
         ]
