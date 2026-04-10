@@ -1,4 +1,4 @@
-# GitHub Actions workflow for publishing @aiox-fullstack/pro to npm
+# GitHub Actions workflow for publishing @aios-fullstack/pro to npm
 #
 # This workflow publishes the AIOX Pro package to the public npm registry.
 # Features are license-gated (activation required), not install-gated.
@@ -117,7 +117,7 @@ jobs:
             ### Installation
 
             \`\`\`bash
-            npm install @aiox-fullstack/pro
+            npm install @aios-fullstack/pro
             aiox pro activate --key PRO-XXXX-XXXX-XXXX-XXXX
             \`\`\`
 
@@ -153,11 +153,11 @@ jobs:
           node-version: '20'
 
       - name: Verify package is accessible
-        run: npm view @aiox-fullstack/pro
+        run: npm view @aios-fullstack/pro
 
       - name: Test installation
         run: |
           mkdir test-install && cd test-install
           npm init -y
-          npm install @aiox-fullstack/pro
+          npm install @aios-fullstack/pro
           echo "✅ Package installed successfully"

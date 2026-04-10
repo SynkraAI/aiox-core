@@ -337,10 +337,13 @@ function loadProModule(moduleName) {
     return require(`../../../../pro/license/${moduleName}`);
   } catch { /* not available */ }
 
-  // 2. @aiox-fullstack/pro package (works when aiox-core is a local dependency)
-  try {
-    return require(`@aiox-fullstack/pro/license/${moduleName}`);
-  } catch { /* not available */ }
+  // 2. npm packages — try canonical then fallback
+  const npmScopes = ['@aiox-fullstack/pro', '@aios-fullstack/pro'];
+  for (const scope of npmScopes) {
+    try {
+      return require(`${scope}/license/${moduleName}`);
+    } catch { /* not available */ }
+  }
 
   // 3. aiox-core in node_modules (brownfield upgrade from >= v4.2.15)
   try {
@@ -348,12 +351,15 @@ function loadProModule(moduleName) {
     return require(absPath);
   } catch { /* not available */ }
 
-  // 4. @aiox-fullstack/pro in user project (npx context — require resolves from
+  // 4. npm package in user project via absolute path (npx context — require resolves from
   //    temp dir, so we need absolute path to where bootstrap installed the package)
-  try {
-    const absPath = path.join(process.cwd(), 'node_modules', '@aiox-fullstack', 'pro', 'license', moduleName);
-    return require(absPath);
-  } catch { /* not available */ }
+  const absScopeDirs = ['@aiox-fullstack', '@aios-fullstack'];
+  for (const scopeDir of absScopeDirs) {
+    try {
+      const absPath = path.join(process.cwd(), 'node_modules', scopeDir, 'pro', 'license', moduleName);
+      return require(absPath);
+    } catch { /* not available */ }
+  }
 
   return null;
 }
@@ -1193,16 +1199,21 @@ async function stepInstallScaffold(targetDir, options = {}) {
 
   // Resolve pro source directory from multiple locations:
   // 1. Bundled in aiox-core package (pro/ submodule — npx and local dev)
-  // 2. @aiox-fullstack/pro in node_modules (legacy brownfield)
+  // 2. npm package — canonical @aiox-fullstack/pro or fallback @aios-fullstack/pro
   const bundledProDir = path.resolve(__dirname, '..', '..', '..', '..', 'pro');
-  const npmProDir = path.join(targetDir, 'node_modules', '@aiox-fullstack', 'pro');
+  const npmProCandidates = [
+    path.join(targetDir, 'node_modules', '@aiox-fullstack', 'pro'),
+    path.join(targetDir, 'node_modules', '@aios-fullstack', 'pro'),
+  ];
 
   let proSourceDir;
   if (fs.existsSync(bundledProDir) && fs.existsSync(path.join(bundledProDir, 'squads'))) {
     proSourceDir = bundledProDir;
-  } else if (fs.existsSync(npmProDir)) {
-    proSourceDir = npmProDir;
   } else {
+    proSourceDir = npmProCandidates.find(p => fs.existsSync(p));
+  }
+
+  if (!proSourceDir) {
     return {
       success: false,
       error: t('proPackageNotFound'),

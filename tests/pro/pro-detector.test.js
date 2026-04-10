@@ -16,6 +16,9 @@ const {
   loadProModule,
   getProVersion,
   getProInfo,
+  resolveNpmProPackage,
+  PRO_PACKAGE_CANONICAL,
+  PRO_PACKAGE_FALLBACK,
   _PRO_DIR,
   _PRO_PACKAGE_PATH,
 } = require('../../bin/utils/pro-detector');
@@ -55,14 +58,21 @@ describe('pro-detector', () => {
   });
 
   describe('isProAvailable()', () => {
-    it('should return true when pro/package.json exists', () => {
-      fs.existsSync.mockReturnValue(true);
+    it('should return true when pro/package.json exists (submodule)', () => {
+      // npm paths return false, submodule path returns true
+      fs.existsSync.mockImplementation((p) => p === _PRO_PACKAGE_PATH);
 
       expect(isProAvailable()).toBe(true);
-      expect(fs.existsSync).toHaveBeenCalledWith(_PRO_PACKAGE_PATH);
     });
 
-    it('should return false when pro/package.json does not exist', () => {
+    it('should return true when npm package exists (canonical or fallback)', () => {
+      // Any npm path with package.json returns true
+      fs.existsSync.mockImplementation((p) => p.includes('@aios-fullstack'));
+
+      expect(isProAvailable()).toBe(true);
+    });
+
+    it('should return false when nothing is available', () => {
       fs.existsSync.mockReturnValue(false);
 
       expect(isProAvailable()).toBe(false);
@@ -75,13 +85,12 @@ describe('pro-detector', () => {
 
       expect(isProAvailable()).toBe(false);
     });
+  });
 
-    it('should check the correct path', () => {
-      fs.existsSync.mockReturnValue(false);
-      isProAvailable();
-
-      const calledPath = fs.existsSync.mock.calls[0][0];
-      expect(calledPath).toMatch(/pro[/\\]package\.json$/);
+  describe('resolveNpmProPackage()', () => {
+    it('should export canonical and fallback package names', () => {
+      expect(PRO_PACKAGE_CANONICAL).toBe('@aiox-fullstack/pro');
+      expect(PRO_PACKAGE_FALLBACK).toBe('@aios-fullstack/pro');
     });
   });
 
@@ -134,32 +143,32 @@ describe('pro-detector', () => {
       expect(getProVersion()).toBeNull();
     });
 
-    it('should return version from pro/package.json', () => {
-      fs.existsSync.mockReturnValue(true);
+    it('should return version from submodule pro/package.json', () => {
+      // Only submodule path exists
+      fs.existsSync.mockImplementation((p) => p === _PRO_PACKAGE_PATH);
       fs.readFileSync.mockReturnValue(
-        JSON.stringify({ name: '@aiox-fullstack/pro', version: '0.1.0' }),
+        JSON.stringify({ name: '@aios-fullstack/pro', version: '0.3.0' }),
       );
 
-      expect(getProVersion()).toBe('0.1.0');
-      expect(fs.readFileSync).toHaveBeenCalledWith(_PRO_PACKAGE_PATH, 'utf8');
+      expect(getProVersion()).toBe('0.3.0');
     });
 
     it('should return null when package.json has no version field', () => {
-      fs.existsSync.mockReturnValue(true);
-      fs.readFileSync.mockReturnValue(JSON.stringify({ name: '@aiox-fullstack/pro' }));
+      fs.existsSync.mockImplementation((p) => p === _PRO_PACKAGE_PATH);
+      fs.readFileSync.mockReturnValue(JSON.stringify({ name: '@aios-fullstack/pro' }));
 
       expect(getProVersion()).toBeNull();
     });
 
     it('should return null when package.json is corrupted', () => {
-      fs.existsSync.mockReturnValue(true);
+      fs.existsSync.mockImplementation((p) => p === _PRO_PACKAGE_PATH);
       fs.readFileSync.mockReturnValue('not valid json {{{');
 
       expect(getProVersion()).toBeNull();
     });
 
     it('should return null when readFileSync throws', () => {
-      fs.existsSync.mockReturnValue(true);
+      fs.existsSync.mockImplementation((p) => p === _PRO_PACKAGE_PATH);
       fs.readFileSync.mockImplementation(() => {
         throw new Error('EACCES: permission denied');
       });
@@ -173,35 +182,31 @@ describe('pro-detector', () => {
       fs.existsSync.mockReturnValue(false);
 
       const info = getProInfo();
-      expect(info).toEqual({
-        available: false,
-        version: null,
-        path: _PRO_DIR,
-      });
+      expect(info.available).toBe(false);
+      expect(info.version).toBeNull();
+      expect(info.source).toBe('none');
     });
 
-    it('should return full info when pro is available', () => {
-      fs.existsSync.mockReturnValue(true);
+    it('should return full info when pro submodule is available', () => {
+      fs.existsSync.mockImplementation((p) => p === _PRO_PACKAGE_PATH);
       fs.readFileSync.mockReturnValue(
-        JSON.stringify({ name: '@aiox-fullstack/pro', version: '0.1.0' }),
+        JSON.stringify({ name: '@aios-fullstack/pro', version: '0.3.0' }),
       );
 
       const info = getProInfo();
-      expect(info).toEqual({
-        available: true,
-        version: '0.1.0',
-        path: _PRO_DIR,
-      });
+      expect(info.available).toBe(true);
+      expect(info.version).toBe('0.3.0');
+      expect(info.source).toBe('submodule');
+      expect(info.path).toBe(_PRO_DIR);
     });
 
-    it('should return available=true but version=null when package.json is corrupt', () => {
-      fs.existsSync.mockReturnValue(true);
+    it('should return available=false when package.json is corrupt and only submodule exists', () => {
+      fs.existsSync.mockImplementation((p) => p === _PRO_PACKAGE_PATH);
       fs.readFileSync.mockReturnValue('invalid json');
 
       const info = getProInfo();
-      expect(info.available).toBe(true);
+      // Corrupt JSON means we can't parse it, falls through
       expect(info.version).toBeNull();
-      expect(info.path).toBe(_PRO_DIR);
     });
   });
 

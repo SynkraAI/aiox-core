@@ -25,7 +25,7 @@ const readline = require('readline');
 
 // BUG-6 fix (INS-1): Dynamic licensePath resolution
 // In framework-dev: __dirname = aiox-core/.aiox-core/cli/commands/pro → ../../../../pro/license
-// In project-dev: pro is installed via npm as @aiox-fullstack/pro
+// In project-dev: pro is installed via npm as @aiox-fullstack/pro or @aios-fullstack/pro
 function resolveLicensePath() {
   // 1. Try relative path (framework-dev mode)
   const relativePath = path.resolve(__dirname, '..', '..', '..', '..', 'pro', 'license');
@@ -33,23 +33,36 @@ function resolveLicensePath() {
     return relativePath;
   }
 
-  // 2. Try node_modules/@aiox-fullstack/pro/license (project-dev mode)
-  try {
-    const proPkg = require.resolve('@aiox-fullstack/pro/package.json');
-    const proDir = path.dirname(proPkg);
-    const npmPath = path.join(proDir, 'license');
-    if (fs.existsSync(npmPath)) {
-      return npmPath;
+  // 2. Try npm packages — canonical then fallback
+  const npmCandidates = [
+    '@aiox-fullstack/pro',
+    '@aios-fullstack/pro',
+  ];
+
+  for (const pkgName of npmCandidates) {
+    try {
+      const proPkg = require.resolve(`${pkgName}/package.json`);
+      const proDir = path.dirname(proPkg);
+      const npmPath = path.join(proDir, 'license');
+      if (fs.existsSync(npmPath)) {
+        return npmPath;
+      }
+    } catch {
+      // package not installed
     }
-  } catch {
-    // @aiox-fullstack/pro not installed via npm
   }
 
-  // 3. Try project root node_modules (fallback)
+  // 3. Try project root node_modules (both scopes)
   const projectRoot = process.cwd();
-  const cwdPath = path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro', 'license');
-  if (fs.existsSync(cwdPath)) {
-    return cwdPath;
+  const scopePaths = [
+    path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro', 'license'),
+    path.join(projectRoot, 'node_modules', '@aios-fullstack', 'pro', 'license'),
+  ];
+
+  for (const cwdPath of scopePaths) {
+    if (fs.existsSync(cwdPath)) {
+      return cwdPath;
+    }
   }
 
   // Return relative path as default (will fail gracefully in loadLicenseModules)
@@ -97,7 +110,7 @@ function loadLicenseModules() {
     };
   } catch (error) {
     console.error('AIOX Pro license module not available.');
-    console.error('Install AIOX Pro: npm install @aiox-fullstack/pro');
+    console.error('Install AIOX Pro: npm install @aios-fullstack/pro');
     process.exit(1);
   }
 }
@@ -217,9 +230,13 @@ async function activateAction(options) {
     // Scaffold pro content into project (Story INS-3.1)
     // Lazy-load to avoid crashing if pro-scaffolder or js-yaml is unavailable
     const projectRoot = path.resolve(__dirname, '..', '..', '..', '..');
-    const proSourceDir = path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro');
+    // Try canonical then fallback package path
+    const proSourceDir = [
+      path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro'),
+      path.join(projectRoot, 'node_modules', '@aios-fullstack', 'pro'),
+    ].find(p => fs.existsSync(p));
 
-    if (fs.existsSync(proSourceDir)) {
+    if (proSourceDir) {
       let scaffoldProContent;
       try {
         ({ scaffoldProContent } = require('../../../../packages/installer/src/pro/pro-scaffolder'));
@@ -261,7 +278,7 @@ async function activateAction(options) {
         console.log('');
       }
     } else {
-      console.log('Note: @aiox-fullstack/pro package not found in node_modules.');
+      console.log('Note: AIOX Pro package not found in node_modules.');
       console.log('Pro content will be scaffolded when the package is installed.');
       console.log('');
     }
@@ -571,64 +588,74 @@ async function validateAction() {
 // ---------------------------------------------------------------------------
 
 /**
- * Setup and verify @aiox-fullstack/pro installation.
+ * Setup and verify AIOX Pro installation.
  *
- * Since @aiox-fullstack/pro is published on the public npm registry,
- * no special token or .npmrc configuration is needed. This command
- * installs the package and verifies it's working.
+ * Tries canonical @aiox-fullstack/pro first, falls back to @aios-fullstack/pro.
  *
  * @param {object} options - Command options
  * @param {boolean} options.verify - Only verify without installing
  */
 async function setupAction(options) {
+  const PRO_PACKAGES = ['@aiox-fullstack/pro', '@aios-fullstack/pro'];
+
   console.log('\nAIOX Pro - Setup\n');
 
   if (options.verify) {
-    // Verify-only mode
-    console.log('Verifying @aiox-fullstack/pro installation...\n');
+    console.log('Verifying AIOX Pro installation...\n');
 
     try {
       const { execSync } = require('child_process');
-      const result = execSync('npm ls @aiox-fullstack/pro --json', {
-        stdio: 'pipe',
-        timeout: 15000,
-      });
-      const parsed = JSON.parse(result.toString());
-      const deps = parsed.dependencies || {};
-      if (deps['@aiox-fullstack/pro']) {
-        console.log(`✅ @aiox-fullstack/pro@${deps['@aiox-fullstack/pro'].version} is installed`);
-      } else {
-        console.log('❌ @aiox-fullstack/pro is not installed');
+      let found = false;
+      for (const pkg of PRO_PACKAGES) {
+        try {
+          const result = execSync(`npm ls ${pkg} --json`, { stdio: 'pipe', timeout: 15000 });
+          const parsed = JSON.parse(result.toString());
+          const deps = parsed.dependencies || {};
+          if (deps[pkg]) {
+            console.log(`✅ ${pkg}@${deps[pkg].version} is installed`);
+            found = true;
+            break;
+          }
+        } catch { /* try next */ }
+      }
+      if (!found) {
+        console.log('❌ AIOX Pro is not installed');
         console.log('');
         console.log('Install with:');
-        console.log('  npm install @aiox-fullstack/pro');
+        console.log('  npm install @aios-fullstack/pro');
       }
     } catch {
-      console.log('❌ @aiox-fullstack/pro is not installed');
+      console.log('❌ AIOX Pro is not installed');
       console.log('');
       console.log('Install with:');
-      console.log('  npm install @aiox-fullstack/pro');
+      console.log('  npm install @aios-fullstack/pro');
     }
     return;
   }
 
-  // Install mode
-  console.log('@aiox-fullstack/pro is available on the public npm registry.');
+  // Install mode — try canonical first, fallback second
+  console.log('AIOX Pro is available on the public npm registry.');
   console.log('No special tokens or configuration needed.\n');
 
-  console.log('Installing @aiox-fullstack/pro...\n');
+  const { execSync } = require('child_process');
+  let installed = false;
 
-  try {
-    const { execSync } = require('child_process');
-    execSync('npm install @aiox-fullstack/pro', {
-      stdio: 'inherit',
-      timeout: 120000,
-    });
-    console.log('\n✅ @aiox-fullstack/pro installed successfully!');
-  } catch (error) {
-    console.error(`\n❌ Installation failed: ${error.message}`);
+  for (const pkg of PRO_PACKAGES) {
+    try {
+      console.log(`Installing ${pkg}...\n`);
+      execSync(`npm install ${pkg}`, { stdio: 'inherit', timeout: 120000 });
+      console.log(`\n✅ ${pkg} installed successfully!`);
+      installed = true;
+      break;
+    } catch {
+      // try next package
+    }
+  }
+
+  if (!installed) {
+    console.error('\n❌ Installation failed.');
     console.log('\nTry manually:');
-    console.log('  npm install @aiox-fullstack/pro');
+    console.log('  npm install @aios-fullstack/pro');
     process.exit(1);
   }
 
@@ -691,7 +718,7 @@ function createProCommand() {
   // aiox pro setup (AC-12: Install-gate)
   proCmd
     .command('setup')
-    .description('Install and verify @aiox-fullstack/pro')
+    .description('Install and verify AIOX Pro')
     .option('--verify', 'Only verify installation without installing')
     .action(setupAction);
 

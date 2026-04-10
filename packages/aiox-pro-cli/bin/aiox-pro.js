@@ -22,7 +22,8 @@ const path = require('path');
 const fs = require('fs');
 const { recoverLicense } = require('../src/recover');
 
-const PRO_PACKAGE = '@aiox-fullstack/pro';
+const PRO_PACKAGE_CANONICAL = '@aiox-fullstack/pro';
+const PRO_PACKAGE_FALLBACK = '@aios-fullstack/pro';
 const VERSION = require('../package.json').version;
 
 const args = process.argv.slice(2);
@@ -42,8 +43,11 @@ function run(cmd, options = {}) {
 
 function isProInstalled() {
   try {
-    const pkgPath = path.join(process.cwd(), 'node_modules', '@aiox-fullstack', 'pro', 'package.json');
-    return fs.existsSync(pkgPath);
+    const candidates = [
+      path.join(process.cwd(), 'node_modules', '@aiox-fullstack', 'pro', 'package.json'),
+      path.join(process.cwd(), 'node_modules', '@aios-fullstack', 'pro', 'package.json'),
+    ];
+    return candidates.some(p => fs.existsSync(p));
   } catch {
     return false;
   }

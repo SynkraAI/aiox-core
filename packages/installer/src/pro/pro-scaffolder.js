@@ -2,7 +2,7 @@
  * Pro Content Scaffolder
  *
  * Copies premium content (squads, configs, feature registry) from
- * node_modules/@aiox-fullstack/pro/ into the user's project after
+ * node_modules/@aiox-fullstack/pro/ (or @aios-fullstack/pro/) into the user's project after
  * license activation.
  *
  * @module packages/installer/src/pro/pro-scaffolder
@@ -55,7 +55,7 @@ const SCAFFOLD_ITEMS = [
  * Scaffold pro content into user project.
  *
  * @param {string} targetDir - Project root directory
- * @param {string} proSourceDir - Path to pro package content (node_modules/@aiox-fullstack/pro)
+ * @param {string} proSourceDir - Path to pro package content (node_modules/@aiox-fullstack/pro or @aios-fullstack/pro)
  * @param {Object} [options={}] - Scaffold options
  * @param {Function} [options.onProgress] - Progress callback ({item, status, message})
  * @param {boolean} [options.force=false] - Force overwrite even if content exists
@@ -80,7 +80,7 @@ async function scaffoldProContent(targetDir, proSourceDir, options = {}) {
   // Validate pro source exists
   if (!await fs.pathExists(proSourceDir)) {
     result.errors.push(
-      `Pro package not found at ${proSourceDir}. Run "npm install @aiox-fullstack/pro" first.`
+      `Pro package not found at ${proSourceDir}. Run "npm install @aios-fullstack/pro" first.`
     );
     return result;
   }
