@@ -11,6 +11,7 @@ export default function Preloader() {
   const taglineRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
   const [show, setShow] = useState(true)
+  const tlRef = useRef<gsap.core.Timeline | null>(null)
   const reduced = useReducedMotion()
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function Preloader() {
     }, 4000)
 
     try {
-      const tl = gsap.timeline({
+      tlRef.current = gsap.timeline({
         onComplete: () => {
           clearTimeout(safety)
           sessionStorage.setItem('tocks-loaded', 'true')
@@ -39,21 +40,21 @@ export default function Preloader() {
         },
       })
 
-      tl.fromTo(logoRef.current,
+      tlRef.current.fromTo(logoRef.current,
         { scale: 0.6, opacity: 0 },
         { scale: 1, opacity: 1, duration: 1, ease: 'power3.out' }
       )
-      .fromTo(lineRef.current,
+      tlRef.current.fromTo(lineRef.current,
         { scaleX: 0 },
         { scaleX: 1, duration: 0.8, ease: 'power2.inOut' },
         '-=0.3'
       )
-      .fromTo(taglineRef.current,
+      tlRef.current.fromTo(taglineRef.current,
         { y: 20, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' },
         '-=0.3'
       )
-      .to(containerRef.current,
+      tlRef.current.to(containerRef.current,
         { yPercent: -100, duration: 0.9, ease: 'power3.inOut', delay: 0.4 }
       )
     } catch {
@@ -62,7 +63,10 @@ export default function Preloader() {
       setShow(false)
     }
 
-    return () => clearTimeout(safety)
+    return () => {
+      clearTimeout(safety)
+      tlRef.current?.kill()
+    }
   }, [reduced])
 
   if (!show) return null

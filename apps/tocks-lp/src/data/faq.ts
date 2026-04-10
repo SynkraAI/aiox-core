@@ -8,6 +8,12 @@ export const FAQ_ITEMS: FAQ[] = [
       'Uma mesa de MDF é industrializada, feita com materiais prensados que deformam com umidade e uso. Uma Tocks é construída inteiramente em madeira maciça — cada peça é selecionada, cortada e montada à mão. A diferença está na durabilidade (décadas vs poucos anos), na jogabilidade (ardósia italiana vs base compensada) e no acabamento (verniz artesanal vs adesivo industrial).',
   },
   {
+    id: 'faq-price',
+    question: 'Por que uma mesa Tocks custa mais que uma mesa comum?',
+    answer:
+      'Porque você não está comprando uma mesa — está investindo em uma peça que dura décadas. Usamos apenas madeira maciça selecionada, ardósia italiana importada, pano profissional e acabamento artesanal com 12 camadas de verniz. Cada mesa leva semanas para ficar pronta. Uma mesa industrializada de MDF custa menos porque é feita em minutos com materiais que degradam em poucos anos. A Tocks é construída para ser passada de geração em geração.',
+  },
+  {
     id: 'faq-1',
     question: 'Quanto tempo leva para receber minha mesa?',
     answer:

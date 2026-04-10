@@ -9,11 +9,19 @@ import SectionTracker from '@/components/sections/section-tracker'
 import HeroCta from '@/components/sections/hero-cta'
 import HeroVideo from '@/components/sections/hero-video'
 import FinalCtaButton from '@/components/sections/final-cta-button'
+import Button from '@/components/ui/button'
 import Icon from '@/components/ui/icon'
+import SectionHeader from '@/components/shared/section-header'
 
+import FaqAccordion from '@/components/sections/faq-accordion'
 import { PRODUCTS } from '@/data/products'
+import { TESTIMONIALS } from '@/data/testimonials'
+import { FAQ_ITEMS } from '@/data/faq'
 import { getWhatsAppDefault } from '@/data/whatsapp'
 import { formatPrice } from '@/lib/utils'
+
+/* ---------- Testimonials: first 3 ---------- */
+const HOME_TESTIMONIALS = TESTIMONIALS.slice(0, 3)
 
 /* ---------- Featured products: 3 most expensive ---------- */
 const FEATURED = [...PRODUCTS]
@@ -33,7 +41,7 @@ const TRUST_BAR = [
   { icon: 'shield', label: 'Madeira Maciça' },
   { icon: 'star', label: 'Feita à Mão' },
   { icon: 'settings', label: 'Personalização Total' },
-  { icon: 'check', label: '6x Sem Juros' },
+  { icon: 'check', label: 'Garantia de 5 Anos' },
 ] as const
 
 export default function Home() {
@@ -85,14 +93,11 @@ export default function Home() {
           </p>
 
           <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-[fadeIn_1s_ease_2.2s_forwards]">
-            <Link
-              href="/colecao"
-              className="inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-300 bg-accent text-bg-primary hover:bg-accent-hover px-8 py-4 text-lg"
-            >
-              Explorar Coleção
-            </Link>
-
             <HeroCta whatsappUrl={whatsappUrl} />
+
+            <Button variant="secondary" size="lg" href="/colecao">
+              Explorar Coleção
+            </Button>
           </div>
         </div>
 
@@ -160,13 +165,8 @@ export default function Home() {
       ============================================================ */}
       <section data-section="featured" className="py-24 md:py-32">
         <div className="max-w-6xl mx-auto px-6">
-          <ScrollReveal className="text-center mb-20">
-            <p className="text-accent text-sm tracking-[0.3em] uppercase font-medium">
-              Destaques
-            </p>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-semibold mt-4">
-              Peças que definem espaços
-            </h2>
+          <ScrollReveal>
+            <SectionHeader badge="Destaques" title="Peças que definem espaços" />
           </ScrollReveal>
 
           <ScrollReveal
@@ -266,6 +266,70 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Divider */}
+      <div className="section-divider max-w-4xl mx-auto" />
+
+      {/* ============================================================
+          TESTIMONIALS — Social proof
+      ============================================================ */}
+      <section data-section="testimonials" className="py-24 md:py-32">
+        <div className="max-w-5xl mx-auto px-6">
+          <ScrollReveal>
+            <SectionHeader badge="Depoimentos" title="Quem tem uma Tocks, recomenda" />
+          </ScrollReveal>
+
+          <ScrollReveal
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            stagger={0.15}
+          >
+            {HOME_TESTIMONIALS.map((t) => (
+              <div
+                key={t.id}
+                className="bg-bg-card border border-border rounded-lg p-8 space-y-4"
+              >
+                <div className="flex gap-1">
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <svg
+                      key={i}
+                      className={`w-4 h-4 ${i < t.rating ? 'text-accent' : 'text-border'}`}
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <blockquote className="text-text-secondary text-sm leading-relaxed italic">
+                  &ldquo;{t.text}&rdquo;
+                </blockquote>
+                <div className="pt-2 border-t border-border">
+                  <p className="text-text-primary font-medium text-sm">{t.name}</p>
+                  <p className="text-accent text-xs">{t.model} — {t.city}</p>
+                </div>
+              </div>
+            ))}
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="section-divider max-w-4xl mx-auto" />
+
+      {/* ============================================================
+          FAQ — Objections handled
+      ============================================================ */}
+      <section data-section="faq" className="py-24 md:py-32">
+        <div className="max-w-3xl mx-auto px-6">
+          <ScrollReveal>
+            <SectionHeader badge="Duvidas" title="Perguntas frequentes" />
+          </ScrollReveal>
+
+          <ScrollReveal>
+            <FaqAccordion items={FAQ_ITEMS.slice(0, 6)} />
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* ============================================================
           CTA FINAL — Dark cinematic close
       ============================================================ */}
@@ -281,7 +345,7 @@ export default function Home() {
               Nossos especialistas estão prontos para criar a mesa perfeita para o seu espaço.
             </p>
 
-            <p className="text-accent/80 text-sm mt-4 tracking-wide">
+            <p className="text-accent text-sm mt-4 tracking-wide">
               Produção limitada — tempo de fabricação atual: 45 a 60 dias
             </p>
 

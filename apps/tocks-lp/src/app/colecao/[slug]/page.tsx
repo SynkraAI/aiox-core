@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Breadcrumbs from '@/components/shared/breadcrumbs'
 import { PRODUCTS } from '@/data/products'
 import { WOOD_FINISHES, FABRIC_FINISHES } from '@/data/finishes'
+import { formatPrice } from '@/lib/utils'
 import ProductCta from './product-cta'
 
 export function generateStaticParams() {
@@ -16,13 +17,9 @@ export function generateMetadata({ params }: { params: Promise<{ slug: string }>
     if (!product) return {}
     return {
       title: `Mesa ${product.name} | Tocks Custom`,
-      description: `${product.tagline}. Mesa de bilhar artesanal em madeira macica a partir de R$ ${product.price.toLocaleString('pt-BR')}.`,
+      description: `${product.tagline}. Mesa de bilhar artesanal em madeira maciça a partir de ${formatPrice(product.price)}.`,
     }
   })
-}
-
-function formatPrice(price: number): string {
-  return price.toLocaleString('pt-BR')
 }
 
 function formatInstallment(price: number): string {
@@ -101,7 +98,7 @@ export default async function ProductPage({
         {/* Price */}
         <div className="mb-16">
           <p className="text-3xl md:text-4xl font-heading text-text-primary">
-            A partir de R$ {formatPrice(product.price)}
+            A partir de {formatPrice(product.price)}
           </p>
           <p className="text-text-secondary mt-2">
             ou 6x de R$ {formatInstallment(product.price)} sem juros
@@ -134,7 +131,7 @@ export default async function ProductPage({
             Acabamentos em Madeira
           </h2>
           <p className="text-text-secondary mb-8">
-            10 opcoes de acabamento em madeira macica
+            10 opções de acabamento em madeira maciça
           </p>
           <div className="flex flex-wrap gap-4">
             {WOOD_FINISHES.map((finish) => (
@@ -185,7 +182,7 @@ export default async function ProductPage({
         </div>
 
         {/* Scarcity */}
-        <p className="text-center text-accent/70 text-sm tracking-wide mb-16">
+        <p className="text-center text-accent text-sm tracking-wide mb-16">
           Produção artesanal limitada — tempo de fabricação atual: 45 a 60 dias
         </p>
 
@@ -221,7 +218,7 @@ export default async function ProductPage({
                       {item.name}
                     </h3>
                     <p className="text-sm text-accent">
-                      A partir de R$ {formatPrice(item.price)}
+                      A partir de {formatPrice(item.price)}
                     </p>
                   </div>
                 </Link>

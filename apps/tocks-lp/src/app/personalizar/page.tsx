@@ -115,7 +115,7 @@ function ConfigPreview({
   return (
     <div className="mt-6 rounded-sm border border-[var(--color-border)] bg-[var(--color-bg-secondary)] p-5">
       <p className="text-xs uppercase tracking-widest text-[var(--color-accent)] mb-4 font-medium">
-        Preview da sua configuracao
+        Preview da sua configuração
       </p>
 
       {/* Visual strip: wood swatch + product thumbnail + fabric swatch */}
@@ -179,7 +179,7 @@ function ConfigPreview({
       {/* Price */}
       <p className="mt-2 text-center">
         <span className="text-xs text-[var(--color-text-secondary)]">A partir de </span>
-        <span className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-[var(--color-accent)]">
+        <span className="font-heading text-2xl font-semibold text-[var(--color-accent)]">
           {formatPrice(product.price)}
         </span>
       </p>
@@ -202,11 +202,11 @@ function StepCard({
   return (
     <div className="text-center space-y-3">
       <div className="w-12 h-12 rounded-full border border-[var(--color-accent)] flex items-center justify-center mx-auto">
-        <span className="font-[family-name:var(--font-heading)] text-lg text-[var(--color-accent)]">
+        <span className="font-heading text-lg text-[var(--color-accent)]">
           {number}
         </span>
       </div>
-      <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-[var(--color-text-primary)]">
+      <h3 className="font-heading text-xl font-semibold text-[var(--color-text-primary)]">
         {title}
       </h3>
       <p className="text-sm text-[var(--color-text-secondary)] max-w-xs mx-auto">
@@ -222,7 +222,7 @@ export default function PersonalizarPage() {
   const [selectedFabric, setSelectedFabric] = useState<Finish>(FABRIC_FINISHES[0])
   const whatsappUrl = useMemo(() => {
     return getWhatsAppUrlCustom(
-      `Ola! Quero um orcamento para a mesa ${selectedProduct.name} com acabamento ${selectedWood.name} e tecido ${selectedFabric.name}.`
+      `Olá! Quero um orçamento para a mesa ${selectedProduct.name} com acabamento ${selectedWood.name} e tecido ${selectedFabric.name}.`
     )
   }, [selectedProduct.name, selectedWood.name, selectedFabric.name])
 
@@ -234,7 +234,7 @@ export default function PersonalizarPage() {
     <>
       {/* Hero */}
       <section className="pt-40 pb-16 px-6 text-center">
-        <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl font-semibold text-[var(--color-text-primary)] mb-4">
+        <h1 className="font-heading text-5xl md:text-7xl font-semibold text-[var(--color-text-primary)] mb-4">
           Personalize Sua Mesa
         </h1>
         <p className="text-lg md:text-xl text-[var(--color-text-secondary)] max-w-2xl mx-auto">
@@ -270,7 +270,7 @@ export default function PersonalizarPage() {
                 </div>
                 {/* Model label + price */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
-                  <p className="font-[family-name:var(--font-heading)] text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)]">
+                  <p className="font-heading text-2xl md:text-3xl font-semibold text-[var(--color-text-primary)]">
                     {selectedProduct.name}
                   </p>
                   <div className="flex items-baseline gap-3">
@@ -294,11 +294,11 @@ export default function PersonalizarPage() {
 
             {/* Panel: Modelo */}
             <div>
-              <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-[var(--color-text-primary)] mb-1">
+              <h2 className="font-heading text-xl font-semibold text-[var(--color-text-primary)] mb-1">
                 Escolha o modelo
               </h2>
               <p className="text-xs text-[var(--color-text-secondary)] mb-4">
-                {BILHAR_PRODUCTS.length} modelos disponiveis
+                {BILHAR_PRODUCTS.length} modelos disponíveis
               </p>
               <div className="grid grid-cols-3 gap-3">
                 {BILHAR_PRODUCTS.map((product) => (
@@ -317,11 +317,11 @@ export default function PersonalizarPage() {
 
             {/* Panel: Acabamento em Madeira */}
             <div>
-              <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-[var(--color-text-primary)] mb-1">
+              <h2 className="font-heading text-xl font-semibold text-[var(--color-text-primary)] mb-1">
                 Acabamento em madeira
               </h2>
               <p className="text-xs text-[var(--color-text-secondary)] mb-4">
-                {WOOD_FINISHES.length} acabamentos em madeira macica
+                {WOOD_FINISHES.length} acabamentos em madeira maciça
               </p>
               <div className="flex flex-wrap gap-4">
                 {WOOD_FINISHES.map((finish) => (
@@ -340,7 +340,7 @@ export default function PersonalizarPage() {
 
             {/* Panel: Cor do Tecido */}
             <div>
-              <h2 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-[var(--color-text-primary)] mb-1">
+              <h2 className="font-heading text-xl font-semibold text-[var(--color-text-primary)] mb-1">
                 Cor do tecido
               </h2>
               <p className="text-xs text-[var(--color-text-secondary)] mb-4">
@@ -379,14 +379,14 @@ export default function PersonalizarPage() {
             </span>
           </div>
           <Button variant="whatsapp" size="md" href={whatsappUrl}>
-            Solicitar Orcamento Personalizado
+            Solicitar Orçamento Personalizado
           </Button>
         </div>
       </div>
 
       {/* How It Works */}
       <section className="py-24 px-6">
-        <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-5xl font-semibold text-center text-[var(--color-text-primary)] mb-16">
+        <h2 className="font-heading text-3xl md:text-5xl font-semibold text-center text-[var(--color-text-primary)] mb-16">
           Como funciona
         </h2>
         <ScrollReveal
@@ -400,13 +400,13 @@ export default function PersonalizarPage() {
           />
           <StepCard
             number="2"
-            title="Orcamento"
+            title="Orçamento"
             description="Receba uma proposta personalizada"
           />
           <StepCard
             number="3"
-            title="Aprovacao"
-            description="Aprove e acompanhe a fabricacao"
+            title="Aprovação"
+            description="Aprove e acompanhe a fabricação"
           />
         </ScrollReveal>
       </section>

@@ -15,12 +15,36 @@
   --color-accent-glow: rgba(201, 169, 110, 0.15);
   --color-accent-glow-soft: rgba(201, 169, 110, 0.10);
 
+  /* Semantic colors */
+  --color-error: #EF4444;
+  --color-text-on-accent: #FFFFFF;
+
+  /* RGB variants for opacity usage in navigation */
+  --color-bg-primary-rgb: 28, 28, 26;
+  --color-accent-rgb: 201, 169, 110;
+
   --font-heading: 'Cormorant Garamond', serif;
   --font-body: 'Inter', sans-serif;
 
   /* Luxury motion system */
   --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Spacing tokens */
+  --spacing-section: 6rem;
+  --spacing-section-lg: 8rem;
+  --spacing-content: 1.5rem;
+
+  /* Border radius tokens */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-full: 9999px;
+
+  /* Shadow tokens */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 20px var(--color-accent-glow);
 }
 
 /* Base styles */

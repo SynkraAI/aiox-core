@@ -51,6 +51,13 @@ function getProductSchemas() {
         name: COMPANY.name,
       },
     },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '5.0',
+      reviewCount: '7',
+      bestRating: '5',
+      worstRating: '5',
+    },
     category: 'Mesas de Sinuca',
     material: 'Madeira Maciça',
     weight: {

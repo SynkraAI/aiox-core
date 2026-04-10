@@ -12,6 +12,11 @@ export default function HeroVideo({ videoSrc, fallbackImage }: HeroVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [videoLoaded, setVideoLoaded] = useState(false)
   const [videoError, setVideoError] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+  }, [])
 
   useEffect(() => {
     if (!videoRef.current || !videoSrc) return
@@ -40,7 +45,7 @@ export default function HeroVideo({ videoSrc, fallbackImage }: HeroVideoProps) {
           muted
           loop
           playsInline
-          preload="auto"
+          preload={isMobile ? 'metadata' : 'auto'}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
             videoLoaded ? 'opacity-100' : 'opacity-0'
           }`}

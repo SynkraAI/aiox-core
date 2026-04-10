@@ -2,18 +2,20 @@
 
 import { useRef, useEffect, useState } from 'react'
 import { gsap } from '@/lib/gsap-config'
+import { useReducedMotion } from '@/hooks/use-reduced-motion'
 
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
+  const reducedMotion = useReducedMotion()
 
   useEffect(() => {
     setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0)
   }, [])
 
   useEffect(() => {
-    if (isMobile) return
+    if (isMobile || reducedMotion) return
     const dot = dotRef.current
     const ring = ringRef.current
     if (!dot || !ring) return
@@ -53,9 +55,9 @@ export default function CustomCursor() {
       document.removeEventListener('mousemove', onMove)
       observer.disconnect()
     }
-  }, [isMobile])
+  }, [isMobile, reducedMotion])
 
-  if (isMobile) return null
+  if (isMobile || reducedMotion) return null
 
   return (
     <>
