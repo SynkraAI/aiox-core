@@ -16,9 +16,8 @@ echo -e "\033[38;5;240m ━━━━━━━━━━━━━━━━━━�
 echo ""
 }
 ASSET="$(dirname "$0")/assets/Night-Sky-Stars.asc"
-if [ ! -f "$ASSET" ]; then echo "Asset not found: $ASSET"; exit 1; fi
-printf "\033[?25l"
-printf "\033[H\033[2J"
+[ ! -f "$ASSET" ] && echo "Asset not found" && exit 1
+printf "\033[?25l\033[H\033[2J"
 while IFS= read -r line; do
   printf '%s\n' "$line"
   sleep 0.06

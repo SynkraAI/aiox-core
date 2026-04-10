@@ -1,11 +1,7 @@
 #!/bin/bash
-# RGB True-Color ASCII Masterpiece — LUIZ FOSC version
-# Art source: Asciiville (github.com/doctorfree/Asciiville)
-
 NC='\033[0m'
 GREEN='\033[0;32m'
 WHITE='\033[1;37m'
-
 luizfosc_logo() {
 echo ""
 echo -e "\033[38;5;196m ██╗     ██╗   ██╗██╗███████╗    ███████╗ ██████╗ ███████╗ ██████╗\033[0m"
@@ -19,25 +15,14 @@ echo -e "\033[38;5;220m 🎨 guernica 🎨\033[0m  \033[1;37mAIOS Core \033[0;32
 echo -e "\033[38;5;240m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo ""
 }
-
 ASSET="$(dirname "$0")/assets/guernica.asc"
-
-if [ ! -f "$ASSET" ]; then
-  echo "Asset not found: $ASSET"
-  exit 1
-fi
-
-printf "\033[?25l"
-printf "\033[H\033[2J"
-
-# Scroll line by line from top to bottom
+[ ! -f "$ASSET" ] && echo "Asset not found" && exit 1
+printf "\033[?25l\033[H\033[2J"
 while IFS= read -r line; do
   printf '%s\n' "$line"
   sleep 0.06
 done < "$ASSET"
-
 sleep 1.5
-
 printf "\033[H\033[2J"
 luizfosc_logo
 printf "\033[?25h"

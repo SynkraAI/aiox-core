@@ -11,11 +11,11 @@ echo -e "\033[38;5;46m ██║     ██║   ██║██║ ███╔
 echo -e "\033[38;5;51m ███████╗╚██████╔╝██║███████╗    ██║     ╚██████╔╝███████║╚██████╗\033[0m"
 echo -e "\033[38;5;201m ╚══════╝ ╚═════╝ ╚═╝╚══════╝    ╚═╝      ╚═════╝ ╚══════╝ ╚═════╝\033[0m"
 echo ""
-echo -e "\033[38;5;220m 🎨 Julia-Set 🎨\033[0m  \033[1;37mAIOS Core \033[0;32mv2.1\033[0m"
+echo -e "\033[38;5;220m 📸 Família Fosc 📸\033[0m  \033[1;37mAIOS Core \033[0;32mv2.1\033[0m"
 echo -e "\033[38;5;240m ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo ""
 }
-ASSET="$(dirname "$0")/assets/Julia-Set.asc"
+ASSET="$(dirname "$0")/assets/foto-familia.asc"
 [ ! -f "$ASSET" ] && echo "Asset not found" && exit 1
 printf "\033[?25l\033[H\033[2J"
 while IFS= read -r line; do
