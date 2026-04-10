@@ -4,7 +4,7 @@
 # aiox-core CI runs standalone (ADR-PRO-001). This workflow validates
 # the integration boundary between core and pro.
 #
-# Requires PRO_SUBMODULE_TOKEN secret (PAT with repo scope for SynkraAI/aiox-pro).
+# Requires PRO_SUBMODULE_TOKEN secret (PAT with repo scope for SynkraAI/aios-pro).
 #
 # Tests covered:
 #   - tests/pro/**          (integration tests in aiox-core)
