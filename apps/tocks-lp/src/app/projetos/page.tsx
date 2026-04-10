@@ -219,7 +219,7 @@ export default function ProjetosPage() {
             Quer ver sua mesa nesta galeria?
           </h2>
           <p className="text-[var(--color-text-secondary)] max-w-lg mx-auto">
-            Cada projeto e unico. Conte-nos sua visao e transformamos em realidade.
+            Cada projeto é único. Conte-nos sua visão e transformamos em realidade.
           </p>
           <div>
             <Button variant="whatsapp" size="lg" href={ctaWhatsApp}>

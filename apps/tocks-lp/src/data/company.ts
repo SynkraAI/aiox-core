@@ -1,6 +1,6 @@
 export const COMPANY = {
   name: 'Tocks Custom',
-  legalName: 'Tocks Industria e Comercio Ltda',
+  legalName: 'Tocks Indústria e Comércio Ltda',
   cnpj: '60.996.216/0001-80',
   url: 'https://tockscustom.com.br',
   phone: '+554730419811',
@@ -9,13 +9,13 @@ export const COMPANY = {
   email: 'contato@tockscustom.com.br',
   address: {
     street: 'Rua Augusto Dalago, 1743',
-    city: 'Itajai',
+    city: 'Itajaí',
     state: 'SC',
     postalCode: '88318-144',
     country: 'BR',
   },
   description:
-    'Mesas de bilhar artesanais em madeira macica. Desde 1988, fabricacao propria em Itajai-SC. Design exclusivo e personalizacao completa.',
+    'Mesas de sinuca artesanais em madeira maciça. Desde 1988, fabricação própria em Itajaí-SC. Design exclusivo e personalização completa.',
   priceRange: 'R$10.990 - R$26.900',
   foundingYear: 1988,
   socialMedia: {

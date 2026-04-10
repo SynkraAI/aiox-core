@@ -43,7 +43,7 @@ export default function Footer() {
 
         {/* Location + map link */}
         <div className="text-center">
-          <p className="text-text-secondary text-sm font-medium">Localizacao</p>
+          <p className="text-text-secondary text-sm font-medium">Localização</p>
           <p className="text-text-secondary text-xs mt-2">Rua Augusto Dalago, 1743 - Itajai, SC</p>
           <a
             href={MAPS_URL}

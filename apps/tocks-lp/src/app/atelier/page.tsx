@@ -16,11 +16,11 @@ const MILESTONES = [
   },
   {
     year: '1999',
-    title: 'Transicao para venda direta de mesas',
+    title: 'Transição para venda direta de mesas',
   },
   {
     year: '2015',
-    title: 'Nova geracao moderniza as operacoes',
+    title: 'Nova geração moderniza as operações',
   },
   {
     year: '2026',
@@ -30,18 +30,18 @@ const MILESTONES = [
 
 const VALUES = [
   {
-    title: 'Tradicao',
-    description: '38 anos de marcenaria transmitidos de pai para filho. Cada tecnica carrega a historia da nossa familia.',
+    title: 'Tradição',
+    description: '38 anos de marcenaria transmitidos de pai para filho. Cada técnica carrega a história da nossa família.',
     icon: 'tree',
   },
   {
     title: 'Artesanato',
-    description: 'Cada mesa e unica. Trabalhamos a madeira macica com as maos, respeitando cada veio e cada no.',
+    description: 'Cada mesa é única. Trabalhamos a madeira maciça com as mãos, respeitando cada veio e cada nó.',
     icon: 'hand',
   },
   {
-    title: 'Personalizacao',
-    description: 'Voce escolhe cada detalhe: madeira, acabamento, cor do pano, dimensoes. Sua mesa, do seu jeito.',
+    title: 'Personalização',
+    description: 'Você escolhe cada detalhe: madeira, acabamento, cor do pano, dimensões. Sua mesa, do seu jeito.',
     icon: 'palette',
   },
 ] as const
@@ -61,7 +61,7 @@ export default function AtelierPage() {
           Nosso Atelier
         </h1>
         <p className="mt-6 text-lg md:text-xl text-[var(--color-text-secondary)] max-w-md relative">
-          Desde 1988, Itajai — Santa Catarina
+          Desde 1988, Itajaí — Santa Catarina
         </p>
 
         {/* Scroll indicator */}
@@ -80,23 +80,23 @@ export default function AtelierPage() {
                 A Origem
               </span>
               <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--color-text-primary)] mt-4 leading-tight">
-                Uma historia escrita em madeira
+                Uma história escrita em madeira
               </h2>
               <div className="mt-8 space-y-6 text-[var(--color-text-secondary)] text-base md:text-lg leading-relaxed">
                 <p>
-                  Em 1988, Milton de Cerqueira fundou a Tocks em Itajai, Santa Catarina.
-                  O oficio veio do pai, Martinho — um marceneiro respeitado na regiao, que
-                  ensinou Milton a ouvir a madeira antes de trabalha-la.
+                  Em 1988, Milton de Cerqueira fundou a Tocks em Itajaí, Santa Catarina.
+                  O ofício veio do pai, Martinho — um marceneiro respeitado na região, que
+                  ensinou Milton a ouvir a madeira antes de trabalhá-la.
                 </p>
                 <p>
-                  O que comecou como um pequeno negocio de aluguel de mesas para bares e
-                  saloes, evoluiu para uma fabrica artesanal que hoje entrega mesas de
-                  bilhar sob medida para todo o Brasil.
+                  O que começou como um pequeno negócio de aluguel de mesas para bares e
+                  salões, evoluiu para uma fábrica artesanal que hoje entrega mesas de
+                  sinuca sob medida para todo o Brasil.
                 </p>
                 <p>
-                  Cada mesa que sai do nosso atelier carrega a heranca de Martinho, a visao
-                  de Milton, e o compromisso de uma familia que ha quase quatro decadas
-                  transforma troncos em obras que duram geracoes.
+                  Cada mesa que sai do nosso atelier carrega a herança de Martinho, a visão
+                  de Milton, e o compromisso de uma família que há quase quatro décadas
+                  transforma troncos em obras que duram gerações.
                 </p>
               </div>
             </div>
@@ -123,7 +123,7 @@ export default function AtelierPage() {
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           <div>
             <Counter end={38} suffix=" anos" className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-semibold text-[var(--color-accent)]" />
-            <p className="text-[var(--color-text-secondary)] text-sm mt-2">de tradicao</p>
+            <p className="text-[var(--color-text-secondary)] text-sm mt-2">de tradição</p>
           </div>
           <div>
             <Counter end={250} prefix="+" className="font-[family-name:var(--font-heading)] text-4xl md:text-5xl font-semibold text-[var(--color-accent)]" />
@@ -145,7 +145,7 @@ export default function AtelierPage() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-20">
             <span className="text-[var(--color-accent)] text-sm uppercase tracking-[0.2em]">
-              Nossa Trajetoria
+              Nossa Trajetória
             </span>
             <h2 className="font-[family-name:var(--font-heading)] text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--color-text-primary)] mt-4">
               Marcos que nos definem
@@ -215,14 +215,14 @@ export default function AtelierPage() {
               {COMPANY.address.street} — {COMPANY.address.city}, {COMPANY.address.state}
             </p>
             <p className="mt-2 text-[var(--color-text-secondary)] text-sm">
-              Segunda a Sexta, 8h as 18h
+              Segunda a Sexta, 8h às 18h
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 variant="whatsapp"
                 size="lg"
-                href={getWhatsAppUrlCustom('Ola! Gostaria de agendar uma visita ao atelier da Tocks.')}
+                href={getWhatsAppUrlCustom('Olá! Gostaria de agendar uma visita ao atelier da Tocks.')}
                 onClick={() => trackWhatsAppClick('atelier-cta')}
               >
                 <Icon name="whatsapp" size={20} />

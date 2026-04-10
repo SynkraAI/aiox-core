@@ -10,7 +10,7 @@ import { getWhatsAppDefault } from '@/data/whatsapp'
 import { trackWhatsAppClick } from '@/lib/analytics'
 
 const NAV_LINKS = [
-  { label: 'Colecao', href: '/colecao' },
+  { label: 'Coleção', href: '/colecao' },
   { label: 'Atelier', href: '/atelier' },
   { label: 'Personalizar', href: '/personalizar' },
   { label: 'Contato', href: '/contato' },

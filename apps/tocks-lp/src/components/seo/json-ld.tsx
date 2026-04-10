@@ -31,10 +31,11 @@ function getProductSchemas() {
   return PRODUCTS.map((product) => ({
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: `Mesa de Bilhar ${product.name}`,
-    description: product.tagline,
+    name: `Mesa de Sinuca ${product.name}`,
+    description: product.description,
     image: `${COMPANY.url}${product.image}`,
-    url: COMPANY.url,
+    url: `${COMPANY.url}/colecao/${product.slug}`,
+    sku: product.id,
     brand: {
       '@type': 'Brand',
       name: COMPANY.name,
@@ -44,13 +45,19 @@ function getProductSchemas() {
       price: product.price,
       priceCurrency: 'BRL',
       availability: 'https://schema.org/InStock',
+      url: `${COMPANY.url}/colecao/${product.slug}`,
       seller: {
         '@type': 'Organization',
         name: COMPANY.name,
       },
     },
-    category: 'Mesas de Bilhar',
-    material: 'Madeira Macica',
+    category: 'Mesas de Sinuca',
+    material: 'Madeira Maciça',
+    weight: {
+      '@type': 'QuantitativeValue',
+      value: parseInt(product.specs.weight),
+      unitCode: 'KGM',
+    },
   }))
 }
 

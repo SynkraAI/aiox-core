@@ -10,7 +10,7 @@ function getUtmParams(): string {
 
   const parts: string[] = []
   if (utmSource) parts.push(`Origem: ${utmSource}`)
-  if (utmMedium) parts.push(`Midia: ${utmMedium}`)
+  if (utmMedium) parts.push(`Mídia: ${utmMedium}`)
   if (utmCampaign) parts.push(`Campanha: ${utmCampaign}`)
 
   return parts.length > 0 ? `\n\n[${parts.join(' | ')}]` : ''
@@ -24,16 +24,13 @@ function buildWhatsAppUrl(message: string): string {
 
 export function getWhatsAppDefault(): string {
   return buildWhatsAppUrl(
-    'Ola! Vi as mesas no site e gostaria de saber mais sobre personalizacao e orcamento.'
+    'Olá! Vi as mesas no site e gostaria de saber mais sobre personalização e orçamento.'
   )
 }
 
-/** @deprecated Use getWhatsAppDefault() for UTM support */
-export const WHATSAPP_DEFAULT = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Ola! Vi as mesas no site e gostaria de saber mais sobre personalizacao e orcamento.')}`
-
 export function getWhatsAppUrlForModel(modelName: string): string {
   return buildWhatsAppUrl(
-    `Ola! Tenho interesse na Mesa ${modelName}. Gostaria de saber mais sobre personalizacao.`
+    `Olá! Tenho interesse na Mesa ${modelName}. Gostaria de receber o projeto 3D personalizado gratuito.`
   )
 }
 

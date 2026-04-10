@@ -4,9 +4,9 @@ export const PROCESS_STEPS: ProcessStep[] = [
   {
     id: 'step-1',
     step: 1,
-    title: 'Selecao da madeira',
+    title: 'Seleção da madeira',
     description:
-      'Cada lote e inspecionado manualmente. Verificamos veio, umidade e resistencia antes de aprovar uma tabua.',
+      'Cada lote é inspecionado manualmente. Verificamos veio, umidade e resistência antes de aprovar uma tábua.',
     icon: 'tree',
   },
   {
@@ -14,7 +14,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     step: 2,
     title: 'Corte e montagem',
     description:
-      'Pecas cortadas com precisao milimetrica e montadas com encaixes estruturais reais. Sem grampos cosmeticos.',
+      'Peças cortadas com precisão milimétrica e montadas com encaixes estruturais reais. Sem grampos cosméticos.',
     icon: 'hammer',
   },
   {
@@ -22,15 +22,15 @@ export const PROCESS_STEPS: ProcessStep[] = [
     step: 3,
     title: 'Acabamento manual',
     description:
-      'Lixamento progressivo, selador, tingimento e verniz aplicados a mao. O processo leva dias, nao horas.',
+      'Lixamento progressivo, selador, tingimento e verniz aplicados à mão. O processo leva dias, não horas.',
     icon: 'hand',
   },
   {
     id: 'step-4',
     step: 4,
-    title: 'Entrega e instalacao',
+    title: 'Entrega e instalação',
     description:
-      'Embalagem reforcada, transporte especializado e instalacao profissional. A mesa chega pronta para jogar.',
+      'Embalagem reforçada, transporte especializado e instalação profissional. A mesa chega pronta para jogar.',
     icon: 'truck',
   },
-] as const
+]

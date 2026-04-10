@@ -35,7 +35,7 @@ const CONTACT_INFO: ContactItem[] = [
     label: 'WhatsApp',
     value: COMPANY.phoneDisplay,
     icon: 'whatsapp',
-    href: getWhatsAppUrlCustom('Ola! Gostaria de mais informacoes sobre as mesas Tocks.'),
+    href: getWhatsAppUrlCustom('Olá! Gostaria de mais informações sobre as mesas Tocks.'),
     cta: 'Conversar no WhatsApp',
     highlight: true,
   },
@@ -82,7 +82,7 @@ export default function ContatoPage() {
     trackEvent('contact_form_submit', { method: 'whatsapp', page: 'contato' })
 
     const modelText = form.modelo ? `\nModelo: ${form.modelo}` : ''
-    const message = `Ola! Sou ${form.nome}.\nTelefone: ${form.telefone}${modelText}\n\n${form.mensagem}`
+    const message = `Olá! Sou ${form.nome}.\nTelefone: ${form.telefone}${modelText}\n\n${form.mensagem}`
     const url = getWhatsAppUrlCustom(message)
     window.open(url, '_blank')
     setSent(true)
@@ -104,13 +104,13 @@ export default function ContatoPage() {
       <section className="relative pt-8 pb-20 px-6 text-center">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--color-accent-glow)_0%,transparent_70%)] pointer-events-none" />
         <span className="text-[var(--color-accent)] text-sm uppercase tracking-[0.3em] mb-6 block relative">
-          Estamos aqui para voce
+          Estamos aqui para você
         </span>
         <h1 className="font-[family-name:var(--font-heading)] text-5xl md:text-7xl lg:text-[5.5rem] font-semibold text-[var(--color-text-primary)] leading-[0.95] relative">
           Fale Conosco
         </h1>
         <p className="mt-6 text-lg md:text-xl text-[var(--color-text-secondary)] max-w-lg mx-auto relative">
-          Nossos especialistas estao prontos para ajudar
+          Nossos especialistas estão prontos para ajudar
         </p>
       </section>
 
