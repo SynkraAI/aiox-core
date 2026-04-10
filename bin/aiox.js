@@ -342,6 +342,33 @@ async function runUpdate() {
         process.exit(1);
       }
     }
+
+    // --include-pro: also update Pro after core (Story 122.5)
+    if (updateArgs.includes('--include-pro')) {
+      try {
+        const proUpdaterPath = path.join(__dirname, '..', '.aiox-core', 'core', 'pro', 'pro-updater');
+        const { updatePro, formatUpdateResult: formatProResult } = require(proUpdaterPath);
+
+        console.log('\n🔄 Updating AIOX Pro...\n');
+
+        const proResult = await updatePro(process.cwd(), {
+          check: isCheck,
+          dryRun: isDryRun,
+          force: isForce,
+          onProgress: (phase, message) => {
+            if (isVerbose) console.log(`[pro:${phase}] ${message}`);
+          },
+        });
+
+        console.log(formatProResult(proResult));
+
+        if (!proResult.success) {
+          process.exit(1);
+        }
+      } catch (proError) {
+        console.error(`⚠️  Pro update skipped: ${proError.message}`);
+      }
+    }
   } catch (error) {
     console.error(`❌ Update error: ${error.message}`);
     if (args.includes('--verbose') || args.includes('-v')) {

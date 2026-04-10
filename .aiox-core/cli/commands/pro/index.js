@@ -672,6 +672,61 @@ async function setupAction(options) {
 }
 
 // ---------------------------------------------------------------------------
+// aiox pro update (Story 122.3)
+// ---------------------------------------------------------------------------
+
+async function updateAction(options) {
+  const proUpdaterPath = path.resolve(__dirname, '..', '..', '..', 'core', 'pro', 'pro-updater');
+  let updatePro, formatUpdateResult;
+
+  try {
+    ({ updatePro, formatUpdateResult } = require(proUpdaterPath));
+  } catch {
+    console.error('❌ Pro updater module not found.');
+    console.error('Please ensure aiox-core is installed correctly.');
+    process.exit(1);
+  }
+
+  const projectRoot = process.cwd();
+
+  // Validate license before updating (unless --check)
+  if (!options.check && !options.dryRun) {
+    try {
+      const { featureGate } = loadLicenseModules();
+      const state = featureGate.getLicenseState();
+      if (state !== 'Active' && state !== 'Grace') {
+        console.error('\n❌ AIOX Pro license is not active.');
+        console.error('Activate your license first: aiox pro activate --key PRO-XXXX-XXXX-XXXX-XXXX');
+        process.exit(1);
+      }
+    } catch {
+      // License modules not available — proceed anyway (first update scenario)
+    }
+  }
+
+  const result = await updatePro(projectRoot, {
+    check: options.check || false,
+    dryRun: options.dryRun || false,
+    force: options.force || false,
+    includeCoreUpdate: options.includeCore || false,
+    skipScaffold: options.skipScaffold || false,
+    onProgress: (phase, message) => {
+      if (phase === 'detect') console.log(`  🔍 ${message}`);
+      else if (phase === 'check') console.log(`  📡 ${message}`);
+      else if (phase === 'core') console.log(`  📦 ${message}`);
+      else if (phase === 'update') console.log(`  ⬆️  ${message}`);
+      else if (phase === 'scaffold') console.log(`  🔧 ${message}`);
+    },
+  });
+
+  console.log(formatUpdateResult(result));
+
+  if (!result.success) {
+    process.exit(1);
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Command builder
 // ---------------------------------------------------------------------------
 
@@ -721,6 +776,18 @@ function createProCommand() {
     .description('Install and verify AIOX Pro')
     .option('--verify', 'Only verify installation without installing')
     .action(setupAction);
+
+  // aiox pro update (Story 122.3)
+  proCmd
+    .command('update')
+    .description('Update AIOX Pro to latest version and sync assets')
+    .option('--check', 'Check for updates without applying')
+    .option('--dry-run', 'Show update plan without executing')
+    .option('-f, --force', 'Force reinstall even if up-to-date')
+    .option('--include-core', 'Also update aiox-core')
+    .option('--no-core', 'Never update aiox-core (default)')
+    .option('--skip-scaffold', 'Skip re-scaffolding assets after update')
+    .action(updateAction);
 
   return proCmd;
 }
