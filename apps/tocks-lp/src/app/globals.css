@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg-primary: #1C1C1A;
+  --color-bg-secondary: #262624;
+  --color-bg-card: #2E2E2A;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #D4D0CA;
+  --color-accent: #C9A96E;
+  --color-accent-hover: #D4B87A;
+  --color-whatsapp: #25D366;
+  --color-whatsapp-hover: #20BD5A;
+  --color-border: #4A4A44;
+
+  --color-accent-glow: rgba(201, 169, 110, 0.15);
+  --color-accent-glow-soft: rgba(201, 169, 110, 0.10);
+
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Luxury motion system */
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Noise texture disabled — was causing rendering issues with z-index 9999 */
+
+/* Typography tracking for luxury feel */
+h1 { letter-spacing: -0.03em; }
+h2 { letter-spacing: -0.02em; }
+
+/* Scroll animation with luxury easing */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s var(--ease-luxury),
+    transform 0.7s var(--ease-luxury);
+  transition-delay: var(--delay, 0ms);
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Simple fade-in for delayed hero elements */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ken Burns effect for hero background */
+@keyframes ken-burns {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.08); }
+}
+
+/* Scroll pulse indicator */
+@keyframes scroll-pulse {
+  0% { transform: translateY(-100%); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+/* WhatsApp FAB pulse ring */
+@keyframes fab-pulse {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Section divider gradient */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-glow-soft), transparent);
+}
+
+/* Focus states — WCAG 2.1 AA compliance */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-bg-primary), 0 0 0 4px var(--color-accent);
+  border-radius: 4px;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-bg-primary);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

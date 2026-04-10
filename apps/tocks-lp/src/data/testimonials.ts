@@ -1,0 +1,60 @@
+import type { Testimonial } from '@/types'
+
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    id: 'test-1',
+    name: 'Ricardo M.',
+    city: 'São Paulo, SP',
+    text: 'A Mônaco transformou nossa sala de jantar. De dia é mesa de refeição para 8 pessoas, de noite vira sinuca. Meus amigos não acreditam que é a mesma mesa. O acabamento em Cerejeira combinou perfeito com o piso de carvalho.',
+    rating: 5,
+    model: 'Mônaco',
+  },
+  {
+    id: 'test-2',
+    name: 'Fernanda L.',
+    city: 'Curitiba, PR',
+    text: 'A equipe me ajudou a escolher o acabamento em Freijó pra combinar com a estante. A Gabe chegou em 38 dias, montaram e nivelaram tudo em 2 horas. Meu marido não para de chamar os amigos pra jogar.',
+    rating: 5,
+    model: 'Gabe',
+  },
+  {
+    id: 'test-3',
+    name: 'Carlos A.',
+    city: 'Florianópolis, SC',
+    text: 'Pesquisei muito antes de comprar. Tive orçamento de importadas e nacionais. A Harley ganhou no acabamento e no preço. Meus filhos jogam todo fim de semana há 2 anos e nenhum arranhão na estrutura.',
+    rating: 5,
+    model: 'Harley',
+  },
+  {
+    id: 'test-4',
+    name: 'André P.',
+    city: 'Brasília, DF',
+    text: 'Encomendei a Aparato com acabamento personalizado. Levou 52 dias, mas o resultado é absurdo. Meu arquiteto disse que é a peça mais bonita da casa. Valeu cada centavo dos R$27k investidos.',
+    rating: 5,
+    model: 'Aparato',
+  },
+  {
+    id: 'test-5',
+    name: 'Luciana R.',
+    city: 'Belo Horizonte, MG',
+    text: 'Queria uma mesa de sinuca que não parecesse mesa de sinuca. A Elipse resolveu isso. Ela é uma escultura. Minhas visitas sempre perguntam onde comprei. Acabamento impecável, sem uma falha.',
+    rating: 5,
+    model: 'Elipse',
+  },
+  {
+    id: 'test-6',
+    name: 'Marcos T.',
+    city: 'Goiânia, GO',
+    text: 'Terceira mesa que compro da Tocks. A primeira foi a Master em 2019, depois a Rustic em 2022, e agora a Curve pro escritório. Confio de olhos fechados. Qualidade que não existe em mesa industrializada.',
+    rating: 5,
+    model: 'Curve',
+  },
+  {
+    id: 'test-7',
+    name: 'Patrícia S.',
+    city: 'Joinville, SC',
+    text: 'Visitei o atelier em Itajaí antes de comprar. Ver as mesas sendo feitas à mão me convenceu na hora. A Design ficou perfeita na nossa varanda gourmet. Entrega em 40 dias, tudo certinho.',
+    rating: 5,
+    model: 'Design',
+  },
+]

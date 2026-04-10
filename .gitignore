@@ -146,6 +146,7 @@ aios-core/*.map
 # Applications (separate deployments, NOT part of npm package)
 apps/*
 !apps/polymarket-trader/
+!apps/tocks-lp/
 
 # External projects (separate repositories)
 aios-guide-app/
