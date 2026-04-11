@@ -14,13 +14,16 @@ jest.mock('child_process', () => ({
 
 const {
   updatePro,
+  fetchLatestFromNpm,
   getCoreVersion,
   satisfiesPeer,
 } = require('../../.aiox-core/core/pro/pro-updater');
 
-function mockRegistryResponse(payload) {
+function mockRegistryResponse(payload, statusCode = 200) {
   https.get.mockImplementation((url, options, callback) => {
     const response = new EventEmitter();
+    response.statusCode = statusCode;
+    response.resume = jest.fn();
     const request = {
       on: jest.fn().mockReturnThis(),
       destroy: jest.fn(),
@@ -28,8 +31,10 @@ function mockRegistryResponse(payload) {
 
     process.nextTick(() => {
       callback(response);
-      response.emit('data', JSON.stringify(payload));
-      response.emit('end');
+      if (statusCode >= 200 && statusCode < 300) {
+        response.emit('data', JSON.stringify(payload));
+        response.emit('end');
+      }
     });
 
     return request;
@@ -84,6 +89,14 @@ describe('pro-updater', () => {
       expect(satisfiesPeer('6.1.0', '^5 || ^6')).toBe(true);
       expect(satisfiesPeer('5.9.1', '5.x')).toBe(true);
       expect(satisfiesPeer('7.0.0', '5.x')).toBe(false);
+    });
+  });
+
+  describe('fetchLatestFromNpm()', () => {
+    it('should return null when the registry responds with a non-2xx status', async () => {
+      mockRegistryResponse({ error: 'not found' }, 404);
+
+      await expect(fetchLatestFromNpm('@aiox-fullstack/pro')).resolves.toBeNull();
     });
   });
 

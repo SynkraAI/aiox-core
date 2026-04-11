@@ -21,6 +21,8 @@ const semver = require('semver');
 const { execSync } = require('child_process');
 
 const PRO_PACKAGES = ['@aiox-fullstack/pro', '@aios-fullstack/pro'];
+const CORE_PACKAGE_ROOT = path.resolve(__dirname, '..', '..', '..');
+const INSTALLER_PACKAGE_ROOT = path.join(CORE_PACKAGE_ROOT, 'packages', 'installer');
 
 /**
  * Detect which package manager the project uses.
@@ -46,6 +48,12 @@ function fetchLatestFromNpm(packageName, timeout = 15000) {
     const url = `https://registry.npmjs.org/${encoded}/latest`;
 
     const req = https.get(url, { timeout }, (res) => {
+      if (res.statusCode < 200 || res.statusCode >= 300) {
+        res.resume();
+        resolve(null);
+        return;
+      }
+
       let data = '';
       res.on('data', (c) => { data += c; });
       res.on('end', () => {
@@ -153,6 +161,16 @@ function satisfiesPeer(installed, range) {
   } catch {
     return true;
   }
+}
+
+function loadInstallerScaffolder() {
+  const installerPackageJson = path.join(INSTALLER_PACKAGE_ROOT, 'package.json');
+  if (!fs.existsSync(installerPackageJson)) {
+    throw new Error(`AIOX installer package not found at ${installerPackageJson}`);
+  }
+
+  const scaffolderPath = path.join(INSTALLER_PACKAGE_ROOT, 'src', 'pro', 'pro-scaffolder');
+  return require(scaffolderPath);
 }
 
 async function applyScaffoldStep(projectRoot, proPath, result, onProgress, errorMessage) {
@@ -390,8 +408,7 @@ async function runScaffold(projectRoot, proSourceDir, onProgress) {
   onProgress('scaffold', 'Scaffolding Pro content...');
 
   try {
-    const scaffolderPath = path.join(__dirname, '..', '..', '..', 'packages', 'installer', 'src', 'pro', 'pro-scaffolder');
-    const { scaffoldProContent } = require(scaffolderPath);
+    const { scaffoldProContent } = loadInstallerScaffolder();
 
     return await scaffoldProContent(projectRoot, proSourceDir, {
       onProgress: (progress) => {
