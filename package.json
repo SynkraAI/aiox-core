@@ -43,6 +43,10 @@
     "README.md",
     "LICENSE"
   ],
+  "exports": {
+    "./installer/pro-scaffolder": "./packages/installer/src/pro/pro-scaffolder.js",
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "format": "prettier --write \"**/*.md\"",
     "test": "jest",

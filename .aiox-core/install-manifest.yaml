@@ -8,7 +8,7 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-04-11T00:43:45.131Z"
+generated_at: "2026-04-11T00:48:43.533Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1091
 files:
@@ -969,9 +969,9 @@ files:
     type: core
     size: 7193
   - path: core/pro/pro-updater.js
-    hash: sha256:feddcf498a0299a14af91f98d4db8946bed5650cdc4356963a29a222b56de22e
+    hash: sha256:dd6add27c415a7a869267a06b5ca9de0fe632f2855385f6552a0ebba784b13f7
     type: core
-    size: 17565
+    size: 17405
   - path: core/quality-gates/base-layer.js
     hash: sha256:9a9a3921da08176b0bd44f338a59abc1f5107f3b1ee56571e840bf4e8ed233f4
     type: core

@@ -17,6 +17,7 @@
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
+const { createRequire } = require('module');
 const semver = require('semver');
 const { execSync } = require('child_process');
 
@@ -24,7 +25,8 @@ const PRO_PACKAGES = ['@aiox-fullstack/pro', '@aios-fullstack/pro'];
 const CORE_PACKAGES = ['@synkra/aiox-core', 'aiox-core'];
 const DEPENDENCY_FIELDS = ['dependencies', 'devDependencies', 'optionalDependencies', 'peerDependencies'];
 const CORE_PACKAGE_ROOT = path.resolve(__dirname, '..', '..', '..');
-const INSTALLER_PACKAGE_ROOT = path.join(CORE_PACKAGE_ROOT, 'packages', 'installer');
+const CORE_PACKAGE_REQUIRE = createRequire(path.join(CORE_PACKAGE_ROOT, 'package.json'));
+const INSTALLER_SCAFFOLDER_EXPORT = 'aiox-core/installer/pro-scaffolder';
 
 /**
  * Detect which package manager the project uses.
@@ -233,13 +235,7 @@ function satisfiesPeer(installed, range) {
 }
 
 function loadInstallerScaffolder() {
-  const installerPackageJson = path.join(INSTALLER_PACKAGE_ROOT, 'package.json');
-  if (!fs.existsSync(installerPackageJson)) {
-    throw new Error(`AIOX installer package not found at ${installerPackageJson}`);
-  }
-
-  const scaffolderPath = path.join(INSTALLER_PACKAGE_ROOT, 'src', 'pro', 'pro-scaffolder');
-  return require(scaffolderPath);
+  return CORE_PACKAGE_REQUIRE(INSTALLER_SCAFFOLDER_EXPORT);
 }
 
 async function applyScaffoldStep(projectRoot, proPath, result, onProgress, errorMessage) {

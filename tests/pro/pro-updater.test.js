@@ -205,7 +205,7 @@ describe('pro-updater', () => {
       const projectRoot = '/tmp/aiox-project';
       const installedPackageJson = path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro', 'package.json');
       const versionJsonPath = path.join(projectRoot, '.aiox-core', 'version.json');
-      const scaffolderPath = require.resolve('../../packages/installer/src/pro/pro-scaffolder');
+      const scaffolderPath = 'aiox-core/installer/pro-scaffolder';
 
       fs.statSync.mockReturnValue({ isDirectory: () => true });
       fs.existsSync.mockImplementation((targetPath) => (
