@@ -201,6 +201,47 @@ describe('pro-updater', () => {
       ]));
     });
 
+    it('should honor scoped aiox-core peer dependencies when checking compatibility', async () => {
+      const projectRoot = '/tmp/aiox-project';
+      const installedPackageJson = path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro', 'package.json');
+      const versionJsonPath = path.join(projectRoot, '.aiox-core', 'version.json');
+
+      fs.statSync.mockReturnValue({ isDirectory: () => true });
+      fs.existsSync.mockImplementation((targetPath) => (
+        targetPath === installedPackageJson
+        || targetPath === versionJsonPath
+      ));
+      fs.readFileSync.mockImplementation((targetPath) => {
+        if (targetPath === installedPackageJson) {
+          return JSON.stringify({ version: '0.3.0' });
+        }
+        if (targetPath === versionJsonPath) {
+          return JSON.stringify({ version: '5.0.4' });
+        }
+        throw new Error(`Unexpected read: ${targetPath}`);
+      });
+
+      mockRegistryResponse({
+        version: '0.4.0',
+        peerDependencies: {
+          '@synkra/aiox-core': '>=6.0.0',
+        },
+      });
+
+      const result = await updatePro(projectRoot, {});
+
+      expect(result.success).toBe(false);
+      expect(result.error).toContain('requires aiox-core >=6.0.0');
+      expect(result.actions).toEqual(expect.arrayContaining([
+        expect.objectContaining({
+          action: 'compat',
+          status: 'incompatible',
+          required: '>=6.0.0',
+          installed: '5.0.4',
+        }),
+      ]));
+    });
+
     it('should fail when the package update succeeds but re-scaffolding fails', async () => {
       const projectRoot = '/tmp/aiox-project';
       const installedPackageJson = path.join(projectRoot, 'node_modules', '@aiox-fullstack', 'pro', 'package.json');

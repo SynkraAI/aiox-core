@@ -41,18 +41,20 @@ Padronizar a superfície do Pro em torno de `aiox-pro`, manter compatibilidade t
 - Pacote canônico desejado: `@aiox-fullstack/pro`
 - Pacote legado ainda publicado: `@aios-fullstack/pro`
 - Estratégia de migração: canônico + fallback, sem quebrar installs existentes
-- Estado do npm em 2026-04-11: a conta local `rafaelscosta` tem administração no org `@aios-fullstack`, mas não possui acesso ao org `@aiox-fullstack`. O código já aceita o nome canônico; a publicação do pacote canônico depende da permissão correta no npm.
+- Publicação npm: o código já aceita o nome canônico; a publicação de `@aiox-fullstack/pro` depende da permissão correta no org mantenedor do npm.
 
 ## File List
 
 - [.aiox-core/cli/commands/pro/index.js](../../../.aiox-core/cli/commands/pro/index.js)
 - [.aiox-core/core/pro/pro-updater.js](../../../.aiox-core/core/pro/pro-updater.js)
+- [.aiox-core/install-manifest.yaml](../../../.aiox-core/install-manifest.yaml)
 - [.github/workflows/pro-integration.yml](../../../.github/workflows/pro-integration.yml)
 - [.github/workflows/publish-pro.yml](../../../.github/workflows/publish-pro.yml)
 - [.github/workflows/sync-pro-submodule.yml](../../../.github/workflows/sync-pro-submodule.yml)
 - [.gitmodules](../../../.gitmodules)
 - [README.md](../../../README.md)
 - [README.en.md](../../../README.en.md)
+- [bin/aiox.js](../../../bin/aiox.js)
 - [bin/utils/pro-detector.js](../../../bin/utils/pro-detector.js)
 - [docs/guides/pro/install-gate-setup.md](../../../docs/guides/pro/install-gate-setup.md)
 - [docs/stories/epic-123/STORY-123.1-pro-sync-automation.md](./STORY-123.1-pro-sync-automation.md)

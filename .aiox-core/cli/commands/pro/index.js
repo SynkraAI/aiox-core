@@ -739,24 +739,29 @@ async function updateAction(options) {
     }
   }
 
-  const result = await updatePro(projectRoot, {
-    check: options.check || false,
-    dryRun: options.dryRun || false,
-    force: options.force || false,
-    includeCoreUpdate: options.includeCore || false,
-    skipScaffold: options.skipScaffold || false,
-    onProgress: (phase, message) => {
-      if (phase === 'detect') console.log(`  🔍 ${message}`);
-      else if (phase === 'check') console.log(`  📡 ${message}`);
-      else if (phase === 'core') console.log(`  📦 ${message}`);
-      else if (phase === 'update') console.log(`  ⬆️  ${message}`);
-      else if (phase === 'scaffold') console.log(`  🔧 ${message}`);
-    },
-  });
+  try {
+    const result = await updatePro(projectRoot, {
+      check: options.check || false,
+      dryRun: options.dryRun || false,
+      force: options.force || false,
+      includeCoreUpdate: options.includeCore || false,
+      skipScaffold: options.skipScaffold || false,
+      onProgress: (phase, message) => {
+        if (phase === 'detect') console.log(`  🔍 ${message}`);
+        else if (phase === 'check') console.log(`  📡 ${message}`);
+        else if (phase === 'core') console.log(`  📦 ${message}`);
+        else if (phase === 'update') console.log(`  ⬆️  ${message}`);
+        else if (phase === 'scaffold') console.log(`  🔧 ${message}`);
+      },
+    });
 
-  console.log(formatUpdateResult(result));
+    console.log(formatUpdateResult(result));
 
-  if (!result.success) {
+    if (!result.success) {
+      process.exit(1);
+    }
+  } catch (error) {
+    console.error(`\n❌ ${error.message}`);
     process.exit(1);
   }
 }

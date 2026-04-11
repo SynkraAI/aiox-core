@@ -366,7 +366,11 @@ async function runUpdate() {
           process.exit(1);
         }
       } catch (proError) {
-        console.error(`⚠️  Pro update skipped: ${proError.message}`);
+        console.error(`❌ Pro update failed: ${proError.message}`);
+        if (proError.stack) {
+          console.error(proError.stack);
+        }
+        process.exit(1);
       }
     }
   } catch (error) {

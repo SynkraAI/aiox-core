@@ -361,7 +361,7 @@ async function updatePro(projectRoot, options = {}) {
     // Even if up to date, re-scaffold if not skipped (new assets might exist)
     if (!skipScaffold && !dryRun) {
       const scaffolded = await applyScaffoldStep(
-        projectRoot,
+        resolvedProjectRoot,
         installed.packagePath,
         result,
         onProgress,
@@ -384,7 +384,9 @@ async function updatePro(projectRoot, options = {}) {
 
   // 5. Check compatibility with aiox-core
   const coreVersion = getCoreVersion(resolvedProjectRoot);
-  const requiredCore = latest.peerDependencies?.['aiox-core'];
+  const requiredCore = CORE_PACKAGES
+    .map((packageName) => latest.peerDependencies?.[packageName])
+    .find(Boolean);
 
   if (requiredCore && coreVersion && !satisfiesPeer(coreVersion, requiredCore)) {
     if (!includeCoreUpdate) {

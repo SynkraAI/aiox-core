@@ -1230,7 +1230,10 @@ async function stepInstallScaffold(targetDir, options = {}) {
   if (fs.existsSync(bundledProDir) && fs.existsSync(path.join(bundledProDir, 'squads'))) {
     proSourceDir = bundledProDir;
   } else {
-    proSourceDir = npmProCandidates.find(p => fs.existsSync(p));
+    proSourceDir = npmProCandidates.find((candidate) => (
+      fs.existsSync(path.join(candidate, 'package.json'))
+      && fs.existsSync(path.join(candidate, 'squads'))
+    ));
   }
 
   if (!proSourceDir) {

@@ -53,7 +53,13 @@ npx aiox-pro install
 
 Isso instala o pacote Pro compatível no seu projeto, priorizando o nome canônico e caindo para o legado quando necessário.
 
-**Alternativa** (instalacao manual):
+**Alternativa** (instalação manual):
+
+```bash
+npm install @aiox-fullstack/pro@latest
+```
+
+Depois da instalação manual, rode o bootstrap do conteúdo Pro no projeto:
 
 ```bash
 npx aiox-pro install
