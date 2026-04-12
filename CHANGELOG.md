@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Update `pro` submodule pointer to latest aiox-pro HEAD (previously orphaned on commit c90d421).
+- Update `pro` submodule pointer from `c90d421` to `8f16e8e` (aiox-pro main at release time).
 - Submodule now includes 12 squads total — adds db-sage, spy, storytelling, claude-code-mastery, aiox-sop.
 - Fixes installation issue where 5 squads were missing after `npx aiox-core install`.
 
