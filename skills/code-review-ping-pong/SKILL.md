@@ -322,6 +322,16 @@ Claude Code responds to reviews. This mode reads findings and implements fixes.
 
     Leia round-{N}-fixed.md para entender o que foi corrigido, depois revise o código atual e gere .code-review-ping-pong/round-{N+1}.md.
 
+    IMPORTANTE — Apresentação do resultado:
+    Ao finalizar, NÃO responda apenas "Escrevi o round em...". Apresente com cerimônia:
+    1. Banner: 🎯 Round {N+1} review completa. Score: X/10. Y issues encontradas.
+    2. Status block: 📍 Estado atual | 👤 Próximo agente | ⚡ Próximo comando | 📄 Próximo arquivo
+    3. Bloco copy-paste para o Claude Code com banner ┏━━━┓ "COPIE → COLE NO 🟠 CLAUDE CODE",
+       incluindo: modo FIX, contexto completo (projeto, rounds dir, artefato, score, escopo,
+       scope, branch), instrução específica, e ━━━ FIM DO BLOCO ━━━
+    4. Opções numeradas (1. Fix, 2. Ver review, 3. Ajustar escopo)
+    Se score = 10, verdict é PERFECT e próximo passo é CRITICA (não FIX).
+
     ━━━━━━━━━━━━━━━━ FIM DO BLOCO ━━━━━━━━━━━━━━━━━━━
 
     1. Mandar pro Codex revisar (rodar REVIEW round {N+1})
@@ -387,6 +397,16 @@ Gemini's large context window makes it ideal for reading the full round history 
    - Branch: {branch}
 
    Leia round-{N}-audit.md e os artefatos anteriores necessários, depois revise o código atual e gere .code-review-ping-pong/round-{N+1}.md.
+
+   IMPORTANTE — Apresentação do resultado:
+   Ao finalizar, NÃO responda apenas "Escrevi o round em...". Apresente com cerimônia:
+   1. Banner: 🎯 Round {N+1} review completa. Score: X/10. Y issues encontradas.
+   2. Status block: 📍 Estado atual | 👤 Próximo agente | ⚡ Próximo comando | 📄 Próximo arquivo
+   3. Bloco copy-paste para o Claude Code com banner ┏━━━┓ "COPIE → COLE NO 🟠 CLAUDE CODE",
+      incluindo: modo FIX, contexto completo (projeto, rounds dir, artefato, score, escopo,
+      scope, branch), instrução específica, e ━━━ FIM DO BLOCO ━━━
+   4. Opções numeradas (1. Fix, 2. Ver review, 3. Ajustar escopo)
+   Se score = 10, verdict é PERFECT e próximo passo é CRITICA (não FIX).
 
    ━━━━━━━━━━━━━━━━ FIM DO BLOCO ━━━━━━━━━━━━━━━━━━━
 
@@ -622,6 +642,16 @@ Claude Code executes the critica after PERFECT is reached. This mode reads ALL r
 
      Leia critica.md para entender os problemas encontrados, depois revise
      o código atual focando nos issues da crítica e gere round-{N+1}.md.
+
+     IMPORTANTE — Apresentação do resultado:
+     Ao finalizar, NÃO responda apenas "Escrevi o round em...". Apresente com cerimônia:
+     1. Banner: 🎯 Round {N+1} review completa. Score: X/10. Y issues encontradas.
+     2. Status block: 📍 Estado atual | 👤 Próximo agente | ⚡ Próximo comando | 📄 Próximo arquivo
+     3. Bloco copy-paste para o Claude Code com banner ┏━━━┓ "COPIE → COLE NO 🟠 CLAUDE CODE",
+        incluindo: modo FIX, contexto completo (projeto, rounds dir, artefato, score, escopo,
+        scope, branch), instrução específica, e ━━━ FIM DO BLOCO ━━━
+     4. Opções numeradas (1. Fix, 2. Ver review, 3. Ajustar escopo)
+     Se score = 10, verdict é PERFECT e próximo passo é CRITICA (não FIX).
 
      ━━━━━━━━━━━━━━━━ FIM DO BLOCO ━━━━━━━━━━━━━━━━━━━
 
