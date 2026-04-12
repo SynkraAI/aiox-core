@@ -5,6 +5,14 @@ All notable changes to Synkra AIOX will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.5] - 2026-04-12
+
+### Fixed
+
+- Update `pro` submodule pointer to latest aiox-pro HEAD (previously orphaned on commit c90d421).
+- Submodule now includes 12 squads total — adds db-sage, spy, storytelling, claude-code-mastery, aiox-sop.
+- Fixes installation issue where 5 squads were missing after `npx aiox-core install`.
+
 ## [4.2.11] - 2026-02-16
 
 ### Added
