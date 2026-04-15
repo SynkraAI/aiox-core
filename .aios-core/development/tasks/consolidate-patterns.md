@@ -2,7 +2,7 @@
 
 > Task ID: brad-consolidate-patterns
 > Agent: Brad (Design System Architect)
-> Version: 1.0.0
+> Version: 2.0.0
 
 ## Execution Modes
 
@@ -31,43 +31,43 @@
 
 ```yaml
 task: consolidatePatterns()
-responsável: Aria (Visionary)
+responsavel: Brad (Design System Architect)
 responsavel_type: Agente
 atomic_layer: Strategy
 
 **Entrada:**
-- campo: task
+- campo: audit_report
   tipo: string
-  origem: User Input
-  obrigatório: true
-  validação: Must be registered task
+  origem: File (pattern-inventory.json)
+  obrigatorio: true
+  validacao: Valid JSON audit report from *audit command
 
-- campo: parameters
-  tipo: object
+- campo: similarity_threshold
+  tipo: number
   origem: User Input
-  obrigatório: false
-  validação: Valid task parameters
+  obrigatorio: false
+  validacao: Default 0.80 (80% visual match). Range 0.50-0.99
 
-- campo: mode
+- campo: output_dir
   tipo: string
-  origem: User Input
-  obrigatório: false
-  validação: yolo|interactive|pre-flight
+  origem: config
+  obrigatorio: false
+  validacao: Default outputs/design-system/{project}/consolidation/
 
-**Saída:**
-- campo: execution_result
+**Saida:**
+- campo: consolidation_report
   tipo: object
-  destino: Memory
-  persistido: false
-
-- campo: logs
-  tipo: array
-  destino: File (.ai/logs/*)
+  destino: File (consolidation-report.md)
   persistido: true
 
-- campo: state
+- campo: pattern_mapping
   tipo: object
-  destino: State management
+  destino: File (pattern-mapping.json)
+  persistido: true
+
+- campo: cluster_files
+  tipo: array
+  destino: File (color-clusters.txt, button-consolidation.txt, etc.)
   persistido: true
 ```
 
@@ -81,12 +81,26 @@ atomic_layer: Strategy
 
 ```yaml
 pre-conditions:
-  - [ ] Task is registered; required parameters provided; dependencies met
+  - [ ] Audit report (pattern-inventory.json) exists with valid pattern data
     tipo: pre-condition
     blocker: true
-    validação: |
-      Check task is registered; required parameters provided; dependencies met
-    error_message: "Pre-condition failed: Task is registered; required parameters provided; dependencies met"
+    validacao: |
+      Check pattern-inventory.json exists in output directory and contains patterns object with at least one category (buttons, colors, spacing, typography, or forms)
+    error_message: "Pre-condition failed: Run *audit first to generate pattern-inventory.json"
+
+  - [ ] State file (.state.yaml) shows audit_complete phase
+    tipo: pre-condition
+    blocker: true
+    validacao: |
+      Read .state.yaml and verify phase is 'audit_complete' or later
+    error_message: "Pre-condition failed: Audit phase not completed. Run *audit first"
+
+  - [ ] At least one pattern type has redundancy factor > 1.5
+    tipo: pre-condition
+    blocker: false
+    validacao: |
+      Check redundancy factors in audit data; warn if all are below 1.5 (codebase may already be clean)
+    error_message: "Warning: Low redundancy detected. Consolidation may yield minimal improvement"
 ```
 
 ---
@@ -99,12 +113,26 @@ pre-conditions:
 
 ```yaml
 post-conditions:
-  - [ ] Task completed; exit code 0; expected outputs created
+  - [ ] Consolidation report generated with before/after counts per category
     tipo: post-condition
     blocker: true
-    validação: |
-      Verify task completed; exit code 0; expected outputs created
-    error_message: "Post-condition failed: Task completed; exit code 0; expected outputs created"
+    validacao: |
+      Verify consolidation-report.md exists and contains reduction metrics for each pattern category analyzed
+    error_message: "Post-condition failed: Consolidation report missing or incomplete"
+
+  - [ ] Pattern mapping file created with old-to-new mappings
+    tipo: post-condition
+    blocker: true
+    validacao: |
+      Verify pattern-mapping.json exists with entries for each consolidated pattern
+    error_message: "Post-condition failed: Pattern mapping file not generated"
+
+  - [ ] State file updated to consolidation_complete phase
+    tipo: post-condition
+    blocker: true
+    validacao: |
+      Verify .state.yaml phase is 'consolidation_complete' with consolidation metrics recorded
+    error_message: "Post-condition failed: State file not updated after consolidation"
 ```
 
 ---
@@ -117,12 +145,26 @@ post-conditions:
 
 ```yaml
 acceptance-criteria:
-  - [ ] Task completed as expected; side effects documented
+  - [ ] All duplicate groups identified with similarity >= configured threshold
     tipo: acceptance-criterion
     blocker: true
-    validação: |
-      Assert task completed as expected; side effects documented
-    error_message: "Acceptance criterion not met: Task completed as expected; side effects documented"
+    validacao: |
+      Assert each group has similarity score >= threshold and one canonical pattern selected
+    error_message: "Acceptance criterion not met: Duplicate groups not properly identified"
+
+  - [ ] Canonical pattern selected for every duplicate group with rationale
+    tipo: acceptance-criterion
+    blocker: true
+    validacao: |
+      Assert every group has exactly one canonical pattern and a documented reason for selection
+    error_message: "Acceptance criterion not met: Missing canonical pattern or rationale"
+
+  - [ ] Overall reduction percentage calculated and documented
+    tipo: acceptance-criterion
+    blocker: true
+    validacao: |
+      Assert overall_reduction is a valid percentage. Target >80% reduction
+    error_message: "Acceptance criterion not met: Reduction percentage not calculated"
 ```
 
 ---
@@ -131,13 +173,13 @@ acceptance-criteria:
 
 **External/shared resources used by this task:**
 
-- **Tool:** task-runner
-  - **Purpose:** Task execution and orchestration
-  - **Source:** .aios-core/core/task-runner.js
+- **Tool:** code-analyzer
+  - **Purpose:** Compare pattern similarity using HSL distance and semantic analysis
+  - **Source:** .aios-core/utils/code-analyzer.js
 
-- **Tool:** logger
-  - **Purpose:** Execution logging and error tracking
-  - **Source:** .aios-core/utils/logger.js
+- **Tool:** file-system
+  - **Purpose:** Read audit data, write consolidation outputs and cluster files
+  - **Source:** Node.js fs module
 
 ---
 
@@ -145,33 +187,33 @@ acceptance-criteria:
 
 **Agent-specific code for this task:**
 
-- **Script:** execute-task.js
-  - **Purpose:** Generic task execution wrapper
+- **Script:** consolidate-patterns.js
+  - **Purpose:** HSL clustering, semantic grouping, and canonical selection
   - **Language:** JavaScript
-  - **Location:** .aios-core/scripts/execute-task.js
+  - **Location:** .aios-core/scripts/consolidate-patterns.js
 
 ---
 
 ## Error Handling
 
-**Strategy:** retry
+**Strategy:** fallback
 
 **Common Errors:**
 
-1. **Error:** Task Not Found
-   - **Cause:** Specified task not registered in system
-   - **Resolution:** Verify task name and registration
-   - **Recovery:** List available tasks, suggest similar
+1. **Error:** Audit Report Not Found
+   - **Cause:** *audit command was not run or output was deleted
+   - **Resolution:** Run *audit first to generate pattern-inventory.json
+   - **Recovery:** Exit with clear instruction to run audit
 
-2. **Error:** Invalid Parameters
-   - **Cause:** Task parameters do not match expected schema
-   - **Resolution:** Validate parameters against task definition
-   - **Recovery:** Provide parameter template, reject execution
+2. **Error:** No Duplicates Detected
+   - **Cause:** Codebase already has minimal redundancy or threshold too high
+   - **Resolution:** Lower similarity threshold or expand scan scope
+   - **Recovery:** Report clean state, skip consolidation
 
-3. **Error:** Execution Timeout
-   - **Cause:** Task exceeds maximum execution time
-   - **Resolution:** Optimize task or increase timeout
-   - **Recovery:** Kill task, cleanup resources, log state
+3. **Error:** Ambiguous Canonical Selection
+   - **Cause:** Multiple patterns in a group have equal usage frequency
+   - **Resolution:** In interactive mode, ask user; in YOLO mode, pick most-used
+   - **Recovery:** Log decision rationale in consolidation report
 
 ---
 
@@ -186,7 +228,7 @@ token_usage: ~2,000-8,000 tokens
 ```
 
 **Optimization Notes:**
-- Iterative analysis with depth limits; cache intermediate results; batch similar operations
+- Group by pattern type first then compare within groups; skip identical matches early; cache HSL conversions
 
 ---
 
@@ -194,13 +236,14 @@ token_usage: ~2,000-8,000 tokens
 
 ```yaml
 story: N/A
-version: 1.0.0
+version: 2.0.0
 dependencies:
-  - N/A
+  - audit-codebase
 tags:
-  - automation
-  - workflow
-updated_at: 2025-11-17
+  - design-system
+  - consolidation
+  - pattern-analysis
+updated_at: 2026-04-10
 ```
 
 ---
@@ -301,7 +344,7 @@ This task uses interactive elicitation to review consolidation decisions.
 - **button-consolidation.txt**: Button semantic analysis and recommendations
 - **spacing-consolidation.txt**: Spacing scale proposal
 - **typography-consolidation.txt**: Typography scale proposal
-- **pattern-mapping.json**: Old pattern → new token mappings
+- **pattern-mapping.json**: Old pattern to new token mappings
 - **.state.yaml**: Updated with consolidation decisions
 
 ### Output Format
@@ -368,19 +411,19 @@ consolidation:
 
 Output:
 ```
-🎨 CONSOLIDATING COLORS...
+CONSOLIDATING COLORS...
 Found 89 unique colors
 Clustering with 5% HSL threshold...
 
-CLUSTER 1 - Primary Blues (4 → 1):
+CLUSTER 1 - Primary Blues (4 -> 1):
   #0066CC (234 uses) <- KEEP
   #0065CB, #0067CD, #0064CA (merge)
 
-CLUSTER 2 - Error Reds (3 → 1):
+CLUSTER 2 - Error Reds (3 -> 1):
   #DC2626 (89 uses) <- KEEP
   #DB2525, #DD2727 (merge)
 
-📊 CONSOLIDATION SUMMARY:
+CONSOLIDATION SUMMARY:
 | Pattern    | Before | After | Reduction |
 |------------|--------|-------|-----------|
 | Colors     | 89     | 12    | 86.5%     |
@@ -389,8 +432,8 @@ CLUSTER 2 - Error Reds (3 → 1):
 | Typography | 21     | 10    | 52.4%     |
 | TOTAL      | 176    | 32    | 81.8%     |
 
-✅ TARGET MET: >80% reduction achieved
-✅ Report saved: outputs/design-system/my-app/consolidation/consolidation-report.md
+TARGET MET: >80% reduction achieved
+Report saved: outputs/design-system/my-app/consolidation/consolidation-report.md
 ```
 
 ### Example 2: User Override

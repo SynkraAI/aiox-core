@@ -44,25 +44,48 @@ export class ExperienceStore {
   }
 
   /**
-   * Fase 1.2: Pattern-based lesson extraction (no LLM yet).
-   * Analyzes trade context to generate actionable lesson string.
+   * Fase 1.2 v2: Enhanced lesson extraction with coin, timeframe, direction.
+   * Produces structured, actionable lessons for pattern matching.
    */
   private extractLesson(trade: TradeExperience): string {
     const parts: string[] = [];
+    const question = trade.marketQuestion || '';
+
+    // Extract coin from question (e.g., "Will Bitcoin be above $74k in 12h?")
+    const coinMatch = question.match(/\b(Bitcoin|Ethereum|Solana|BTC|ETH|SOL)\b/i);
+    const coin = coinMatch ? coinMatch[1].toUpperCase().replace('BITCOIN', 'BTC').replace('ETHEREUM', 'ETH').replace('SOLANA', 'SOL') : '';
+
+    // Extract timeframe
+    const tfMatch = question.match(/in (\d+)h\b/);
+    const timeframe = tfMatch ? `${tfMatch[1]}h` : '';
+
+    // Extract direction
+    const dirMatch = question.match(/\b(above|below)\b/i);
+    const direction = dirMatch ? dirMatch[1].toLowerCase() : '';
+
+    // Build structured prefix
+    const context = [trade.vertical, trade.strategy, coin, timeframe, direction].filter(Boolean).join('/');
 
     if (trade.outcome === 'WIN') {
-      parts.push(`WIN on ${trade.vertical}/${trade.strategy}`);
+      parts.push(`WIN [${context}]`);
       if (trade.edgeDetected > 0.10) parts.push('high-edge-correct');
+      else if (trade.edgeDetected > 0.05) parts.push('mid-edge-correct');
       if (trade.signalConfidence > 0.7) parts.push('high-confidence-validated');
     } else {
-      parts.push(`LOSS on ${trade.vertical}/${trade.strategy}`);
-      if (trade.edgeDetected > 0.10) parts.push('high-edge-WRONG — model overconfident');
+      parts.push(`LOSS [${context}]`);
+      if (trade.edgeDetected > 0.10) parts.push('high-edge-WRONG — overconfident');
+      else if (trade.edgeDetected > 0.05) parts.push('mid-edge-WRONG');
       if (trade.signalConfidence > 0.7) parts.push('high-confidence-WRONG — signals misleading');
-      if (trade.edgeDetected < 0.05) parts.push('low-edge-loss — should have skipped');
+      if (trade.edgeDetected < 0.03) parts.push('tiny-edge — should have skipped');
+
+      // Direction-specific insights for crypto
+      if (coin && direction) {
+        parts.push(`${coin}-${direction}-miss`);
+      }
     }
 
-    if (Math.abs(trade.pnl) > 10) parts.push(`large-impact: $${trade.pnl.toFixed(2)}`);
-    if (trade.slippage > 0.02) parts.push('high-slippage — consider maker orders');
+    if (Math.abs(trade.pnl) > 10) parts.push(`impact:$${trade.pnl.toFixed(2)}`);
+    if (trade.slippage > 0.02) parts.push('high-slippage');
 
     return parts.join('; ');
   }
@@ -103,6 +126,8 @@ export class ExperienceStore {
         trade.exitPrice = exitPrice;
         trade.pnl = pnl;
         this.dirty = true;
+        // Re-emit with real outcome so DriftMonitor and other listeners get settled data
+        eventBus.emit('learning:trade-recorded', trade);
       }
     }
   }

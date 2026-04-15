@@ -8,7 +8,7 @@ tools:
 
 # Task: Create Component Suite
 
-**Agent:** aios-developer  
+**Agent:** aios-master  
 **Version:** 1.0  
 **Command:** *create-suite
 
@@ -223,7 +223,7 @@ Creates multiple related components in a single batch operation with dependency 
 - Existing components for dependency resolution
 
 ## Prerequisites
-- aios-developer agent is active
+- aios-master agent is active
 - Template system is configured
 - team-manifest.yaml exists
 
@@ -281,4 +281,11 @@ Creates multiple related components in a single batch operation with dependency 
 - Supports atomic creation (all or nothing)
 - Transaction log enables rollback functionality
 - Dependency resolution ensures correct creation order
+
+## Handoff
+next_agent: @dev
+next_command: *run-tests
+condition: Test suite created, ready for execution
+alternatives:
+  - agent: @qa, command: *review {story-id}, condition: Tests written as part of review
 - Preview functionality helps prevent mistakes 

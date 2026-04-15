@@ -27,7 +27,7 @@ describe('RiskEngine', () => {
       // f* = (0.70 - 0.60) / (1 - 0.60) = 0.25
       const result = engine.calculateKelly(0.70, 0.60);
       expect(result.optimalFraction).toBeCloseTo(0.25, 2);
-      expect(result.adjustedFraction).toBeCloseTo(0.25 * 0.15, 2); // 15% Kelly
+      expect(result.adjustedFraction).toBeCloseTo(0.25 * 0.05, 2); // 5% Kelly (Damodaran)
       expect(result.edge).toBeCloseTo(0.10, 2);
     });
 
@@ -67,7 +67,7 @@ describe('RiskEngine', () => {
     });
 
     it('should reject signal with edge below minimum', () => {
-      const result = engine.evaluateSignal({ ...baseSignal, edge: 0.05 });
+      const result = engine.evaluateSignal({ ...baseSignal, edge: 0.03 });
       expect(result.approved).toBe(false);
       expect(result.reason).toContain('below minimum');
     });

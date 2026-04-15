@@ -106,7 +106,7 @@ describe('GoNoGoGate', () => {
       report.profitFactor = 1.2; // just one failure
       const riskState = makeHealthyRiskState();
       const result = gate.evaluate(report, riskState, true);
-      // 9/10 pass = 90 score, but not all pass
+      // 10/11 pass = 91 score, but not all pass
       expect(result.recommendation).toBe('CONDITIONAL');
       expect(result.passed).toBe(false);
     });
@@ -133,7 +133,7 @@ describe('GoNoGoGate', () => {
       const report = makePassingReport();
       report.winRate = 0.50;
       const result = gate.evaluate(report, makeHealthyRiskState(), true);
-      const criterion = result.criteria.find(c => c.name === 'Win rate');
+      const criterion = result.criteria.find(c => c.name === 'Win rate (secondary)');
       expect(criterion?.passed).toBe(false);
     });
 
@@ -173,7 +173,7 @@ describe('GoNoGoGate', () => {
       const report = makePassingReport();
       report.profitFactor = 1.1;
       const result = gate.evaluate(report, makeHealthyRiskState(), true);
-      const criterion = result.criteria.find(c => c.name === 'Profit factor');
+      const criterion = result.criteria.find(c => c.name.includes('Profit factor'));
       expect(criterion?.passed).toBe(false);
     });
 
@@ -194,7 +194,7 @@ describe('GoNoGoGate', () => {
   });
 
   describe('score calculation', () => {
-    it('should return 100 when all 10 criteria pass', () => {
+    it('should return 100 when all 11 criteria pass', () => {
       const result = gate.evaluate(makePassingReport(), makeHealthyRiskState(), true);
       expect(result.score).toBe(100);
     });
@@ -209,6 +209,7 @@ describe('GoNoGoGate', () => {
       report.maxDrawdown = 0.90;
       report.edgePersistence.isConsistent = false;
       report.profitFactor = 0.1;
+      report.avgPnlPerTrade = -5;   // fail EV/trade criterion
       const riskState = makeHealthyRiskState();
       riskState.circuitBreakerTripped = true;
       const result = gate.evaluate(report, riskState, false);
@@ -220,7 +221,7 @@ describe('GoNoGoGate', () => {
       const report = makePassingReport();
       report.period.days = 10; // 1 failure
       const result = gate.evaluate(report, makeHealthyRiskState(), true);
-      expect(result.score).toBe(90); // 9/10
+      expect(result.score).toBe(91); // 10/11 = 90.9 → rounds to 91
     });
   });
 
@@ -235,6 +236,8 @@ describe('GoNoGoGate', () => {
         maxDrawdown: 0.30,
         minEdgePersistenceWR: 0.45,
         minProfitFactor: 1.0,
+        minEvPerTrade: 0.50,
+        maxBrierScore: 0.25,
       };
       const customGate = new GoNoGoGate(customCriteria);
       const report = makePassingReport();
@@ -248,9 +251,9 @@ describe('GoNoGoGate', () => {
   });
 
   describe('result structure', () => {
-    it('should include all 10 criteria in result', () => {
+    it('should include all 11 criteria in result', () => {
       const result = gate.evaluate(makePassingReport(), makeHealthyRiskState(), true);
-      expect(result.criteria).toHaveLength(10);
+      expect(result.criteria).toHaveLength(11);
     });
 
     it('should include name, required, actual, and passed for each criterion', () => {

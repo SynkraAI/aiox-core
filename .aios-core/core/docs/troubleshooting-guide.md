@@ -103,7 +103,7 @@ This guide helps diagnose and resolve common issues when using the Synkra AIOS m
 3. Check working directory:
    ```bash
    pwd
-   # Should be in @synkra/aios-core root
+   # Should be in aios-core root
    ```
 
 ## Template Processing Problems
@@ -548,7 +548,7 @@ DEBUG=perf:* *create-agent
 
 ```bash
 # Application logs
-tail -f aios-core/logs/aios-developer.log
+tail -f aios-core/logs/aios-master.log
 
 # Transaction logs
 ls -la aios-core/logs/transactions/

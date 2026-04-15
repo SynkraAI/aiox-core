@@ -2,7 +2,7 @@
 
 > Task ID: brad-generate-shock-report
 > Agent: Brad (Design System Architect)
-> Version: 1.0.0
+> Version: 2.0.0
 
 ## Execution Modes
 
@@ -31,43 +31,44 @@
 
 ```yaml
 task: generateShockReport()
-responsável: Atlas (Decoder)
+responsavel: Brad (Design System Architect)
 responsavel_type: Agente
-atomic_layer: Template
+atomic_layer: Strategy
 
 **Entrada:**
-- campo: name
-  tipo: string
-  origem: User Input
-  obrigatório: true
-  validação: Must be non-empty, lowercase, kebab-case
-
-- campo: options
+- campo: audit_data
   tipo: object
-  origem: User Input
-  obrigatório: false
-  validação: Valid JSON object with allowed keys
+  origem: File (pattern-inventory.json)
+  obrigatorio: true
+  validacao: Valid JSON with pattern counts and redundancy factors
 
-- campo: force
-  tipo: boolean
-  origem: User Input
-  obrigatório: false
-  validação: Default: false
+- campo: consolidation_data
+  tipo: object
+  origem: File (consolidation-report.md)
+  obrigatorio: false
+  validacao: Consolidation metrics (optional, enriches report with before/after)
 
-**Saída:**
-- campo: created_file
+- campo: roi_data
+  tipo: object
+  origem: File (roi-analysis.md)
+  obrigatorio: false
+  validacao: ROI metrics (optional, adds cost analysis section)
+
+- campo: template
   tipo: string
-  destino: File system
+  origem: File (shock-report-tmpl.html)
+  obrigatorio: false
+  validacao: HTML template file. Falls back to built-in template if missing
+
+**Saida:**
+- campo: shock_report
+  tipo: string
+  destino: File (shock-report.html)
   persistido: true
 
-- campo: validation_report
+- campo: metrics_summary
   tipo: object
-  destino: Memory
-  persistido: false
-
-- campo: success
-  tipo: boolean
-  destino: Return value
+  destino: Console output
   persistido: false
 ```
 
@@ -81,12 +82,19 @@ atomic_layer: Template
 
 ```yaml
 pre-conditions:
-  - [ ] Target does not already exist; required inputs provided; permissions granted
+  - [ ] Audit data (pattern-inventory.json) exists with valid pattern counts
     tipo: pre-condition
     blocker: true
-    validação: |
-      Check target does not already exist; required inputs provided; permissions granted
-    error_message: "Pre-condition failed: Target does not already exist; required inputs provided; permissions granted"
+    validacao: |
+      Check pattern-inventory.json exists and contains patterns object with at least buttons or colors category
+    error_message: "Pre-condition failed: Run *audit first to generate pattern data"
+
+  - [ ] Output directory exists or is creatable
+    tipo: pre-condition
+    blocker: true
+    validacao: |
+      Check output directory exists or can be created with write permissions
+    error_message: "Pre-condition failed: Cannot write to output directory"
 ```
 
 ---
@@ -99,12 +107,26 @@ pre-conditions:
 
 ```yaml
 post-conditions:
-  - [ ] Resource created successfully; validation passed; no errors logged
+  - [ ] Self-contained HTML report generated with all metric sections
     tipo: post-condition
     blocker: true
-    validação: |
-      Verify resource created successfully; validation passed; no errors logged
-    error_message: "Post-condition failed: Resource created successfully; validation passed; no errors logged"
+    validacao: |
+      Verify shock-report.html exists, is valid HTML5, and contains no external resource links (self-contained)
+    error_message: "Post-condition failed: Shock report not generated or has external dependencies"
+
+  - [ ] Report contains pattern metrics with severity indicators
+    tipo: post-condition
+    blocker: true
+    validacao: |
+      Verify report contains metric cards with red/yellow/green severity for each pattern category
+    error_message: "Post-condition failed: Report missing severity-coded metrics"
+
+  - [ ] Top offenders section present with file-level data
+    tipo: post-condition
+    blocker: true
+    validacao: |
+      Verify report contains worst offenders table with file paths and duplicate counts
+    error_message: "Post-condition failed: Worst offenders section missing"
 ```
 
 ---
@@ -117,12 +139,33 @@ post-conditions:
 
 ```yaml
 acceptance-criteria:
-  - [ ] Resource exists and is valid; no duplicate resources created
+  - [ ] Report is viewable in any modern browser without network access
     tipo: acceptance-criterion
     blocker: true
-    validação: |
-      Assert resource exists and is valid; no duplicate resources created
-    error_message: "Acceptance criterion not met: Resource exists and is valid; no duplicate resources created"
+    validacao: |
+      Assert HTML file has inline CSS/JS, no CDN links, no external font imports
+    error_message: "Acceptance criterion not met: Report requires network access"
+
+  - [ ] Consolidation potential percentage displayed prominently
+    tipo: acceptance-criterion
+    blocker: true
+    validacao: |
+      Assert consolidation potential metric exists as a percentage value in the executive summary
+    error_message: "Acceptance criterion not met: Consolidation potential not displayed"
+
+  - [ ] Visual horror show section renders pattern explosion
+    tipo: acceptance-criterion
+    blocker: true
+    validacao: |
+      Assert report contains a grid visualization showing actual pattern duplicates side-by-side
+    error_message: "Acceptance criterion not met: Horror show section missing or empty"
+
+  - [ ] File size under 1MB for easy sharing
+    tipo: acceptance-criterion
+    blocker: false
+    validacao: |
+      Assert generated HTML file is under 1MB
+    error_message: "Warning: Report exceeds 1MB, may be difficult to share via email"
 ```
 
 ---
@@ -131,13 +174,13 @@ acceptance-criteria:
 
 **External/shared resources used by this task:**
 
-- **Tool:** component-generator
-  - **Purpose:** Generate new components from templates
-  - **Source:** .aios-core/scripts/component-generator.js
-
 - **Tool:** file-system
-  - **Purpose:** File creation and validation
+  - **Purpose:** Read audit/consolidation/ROI data and write HTML report
   - **Source:** Node.js fs module
+
+- **Tool:** code-analyzer
+  - **Purpose:** Extract actual CSS examples from codebase for visual rendering
+  - **Source:** .aios-core/utils/code-analyzer.js
 
 ---
 
@@ -145,33 +188,33 @@ acceptance-criteria:
 
 **Agent-specific code for this task:**
 
-- **Script:** create-component.js
-  - **Purpose:** Component creation workflow
+- **Script:** generate-shock-report.js
+  - **Purpose:** Metric calculation, severity assessment, and HTML report generation
   - **Language:** JavaScript
-  - **Location:** .aios-core/scripts/create-component.js
+  - **Location:** .aios-core/scripts/generate-shock-report.js
 
 ---
 
 ## Error Handling
 
-**Strategy:** retry
+**Strategy:** fallback
 
 **Common Errors:**
 
-1. **Error:** Resource Already Exists
-   - **Cause:** Target file/resource already exists in system
-   - **Resolution:** Use force flag or choose different name
-   - **Recovery:** Prompt user for alternative name or force overwrite
+1. **Error:** Missing Audit Data
+   - **Cause:** *audit was not run or output was deleted
+   - **Resolution:** Run *audit to generate pattern-inventory.json
+   - **Recovery:** Exit with instruction to run audit first
 
-2. **Error:** Invalid Input
-   - **Cause:** Input name contains invalid characters or format
-   - **Resolution:** Validate input against naming rules (kebab-case, lowercase, no special chars)
-   - **Recovery:** Sanitize input or reject with clear error message
+2. **Error:** Template Not Found
+   - **Cause:** shock-report-tmpl.html missing from templates directory
+   - **Resolution:** Use built-in default template (inline HTML generation)
+   - **Recovery:** Generate report with fallback template, log warning
 
-3. **Error:** Permission Denied
-   - **Cause:** Insufficient permissions to create resource
-   - **Resolution:** Check file system permissions, run with elevated privileges if needed
-   - **Recovery:** Log error, notify user, suggest permission fix
+3. **Error:** No Visual Examples Extractable
+   - **Cause:** Codebase uses non-standard patterns that cannot be rendered in HTML
+   - **Resolution:** Use text descriptions and metric cards instead of visual previews
+   - **Recovery:** Degrade gracefully to metrics-only report
 
 ---
 
@@ -186,7 +229,7 @@ token_usage: ~1,500-5,000 tokens
 ```
 
 **Optimization Notes:**
-- Cache template compilation; minimize data transformations; lazy load resources
+- Cache template compilation; single-pass metric calculation; lazy load visual examples
 
 ---
 
@@ -194,13 +237,15 @@ token_usage: ~1,500-5,000 tokens
 
 ```yaml
 story: N/A
-version: 1.0.0
+version: 2.0.0
 dependencies:
-  - N/A
+  - audit-codebase
 tags:
-  - automation
-  - workflow
-updated_at: 2025-11-17
+  - design-system
+  - reporting
+  - visualization
+  - stakeholder-communication
+updated_at: 2026-04-10
 ```
 
 ---
@@ -281,7 +326,7 @@ This task uses interactive elicitation to customize shock report.
 
 7. **Create Before/After Preview**
    - Show consolidated future state
-   - Side-by-side comparison (47 buttons → 3)
+   - Side-by-side comparison (47 buttons -> 3)
    - Highlight simplicity and consistency
    - Validation: Future state looks clean
 
@@ -333,11 +378,14 @@ This task uses interactive elicitation to customize shock report.
     .horror-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
     .metric-card { background: #f0f0f0; padding: 20px; border-radius: 8px; }
     .metric-value { font-size: 3rem; font-weight: bold; color: #dc2626; }
+    .severity-red { border-left: 4px solid #dc2626; background: #fef2f2; }
+    .severity-yellow { border-left: 4px solid #f59e0b; background: #fffbeb; }
+    .severity-green { border-left: 4px solid #10b981; background: #ecfdf5; }
   </style>
 </head>
 <body>
   <header>
-    <h1>🚨 UI Pattern Chaos Report</h1>
+    <h1>UI Pattern Chaos Report</h1>
     <p class="subtitle">Generated by Brad | 2025-10-27</p>
   </header>
 
@@ -345,7 +393,7 @@ This task uses interactive elicitation to customize shock report.
     <h2>Executive Summary</h2>
     <p><strong>Problem:</strong> 176 redundant UI patterns cost $457,200/year in maintenance.</p>
     <ul>
-      <li>81.8% pattern reduction possible (176 → 32)</li>
+      <li>81.8% pattern reduction possible (176 -> 32)</li>
       <li>$374,400/year savings potential</li>
       <li>ROI breakeven in 10 days</li>
     </ul>
@@ -355,61 +403,27 @@ This task uses interactive elicitation to customize shock report.
   <section class="metrics">
     <h2>The Damage</h2>
     <div class="metric-cards">
-      <div class="metric-card">
+      <div class="metric-card severity-red">
         <div class="metric-value">47</div>
         <div class="metric-label">Button Variations</div>
         <div class="metric-target">Target: 3</div>
       </div>
-      <!-- More metric cards -->
     </div>
   </section>
 
   <section class="horror-show">
     <h2>The Horror Show</h2>
-    <h3>All 47 Button Variations</h3>
     <div class="horror-grid">
-      <!-- Actual button examples rendered -->
-      <button class="btn-primary">Primary</button>
-      <button class="button-primary">Primary Alt</button>
-      <button class="btn-main">Main</button>
-      <!-- ...44 more variations... -->
+      <!-- Actual pattern examples rendered inline -->
     </div>
-    <p class="caption">This is madness. It should be 3 variants, not 47.</p>
-  </section>
-
-  <section class="cost-analysis">
-    <h2>The Cost</h2>
-    <table>
-      <tr>
-        <th>Before</th>
-        <td>$457,200/year</td>
-      </tr>
-      <tr>
-        <th>After</th>
-        <td>$82,800/year</td>
-      </tr>
-      <tr>
-        <th>Savings</th>
-        <td class="highlight">$374,400/year</td>
-      </tr>
-    </table>
   </section>
 
   <section class="future-state">
     <h2>The Solution</h2>
-    <h3>Consolidated: 3 Button Variants</h3>
     <div class="clean-grid">
-      <button class="btn-primary-new">Primary</button>
-      <button class="btn-secondary-new">Secondary</button>
-      <button class="btn-destructive-new">Destructive</button>
+      <!-- Consolidated patterns shown clean -->
     </div>
-    <p class="caption">Clean. Consistent. Maintainable.</p>
   </section>
-
-  <footer>
-    <p>Generated by Brad (Design System Architect)</p>
-    <p>Powered by SuperAgentes</p>
-  </footer>
 </body>
 </html>
 ```
@@ -449,27 +463,27 @@ This task uses interactive elicitation to customize shock report.
 
 Output:
 ```
-🔍 Brad: Generating visual shock report...
+Brad: Generating visual shock report...
 
-📸 Extracting pattern examples...
+Extracting pattern examples...
   - Captured 47 button variations
   - Captured 89 color swatches
   - Captured spacing inconsistencies
 
-📊 Building metrics dashboard...
-  - Pattern counts: ✓
-  - Reduction percentages: ✓
-  - ROI analysis: ✓ ($374,400/year savings)
+Building metrics dashboard...
+  - Pattern counts: done
+  - Reduction percentages: done
+  - ROI analysis: done ($374,400/year savings)
 
-🎨 Creating horror show visualization...
+Creating horror show visualization...
   - Button grid: 47 variations displayed
   - Color explosion: 89 colors in grid
   - Spacing chaos: Visualized
 
-✅ Shock report generated: outputs/design-system/my-app/audit/shock-report.html
+Shock report generated: outputs/design-system/my-app/audit/shock-report.html
 
-👀 Open in browser to see the horror show.
-📧 Share with stakeholders to drive action.
+Open in browser to see the horror show.
+Share with stakeholders to drive action.
 
 Brad says: "Show them the numbers. They can't argue with this."
 ```
@@ -484,7 +498,7 @@ Browser displays:
 - Executive summary at top
 - Metric cards showing 47, 89, 176 (in red)
 - Grid of 47 actual button variations (overwhelming)
-- Cost table: $457k → $83k = $374k savings
+- Cost table: $457k -> $83k = $374k savings
 - Clean future state: 3 buttons
 
 ## Notes

@@ -14,7 +14,22 @@
  */
 
 import { join } from 'path';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync } from 'fs';
+
+// Load .env file early — ensures all entrypoints (CLI, Telegram, Dashboard) get env vars
+try {
+  const envPath = join(process.cwd(), '.env');
+  const envContent = readFileSync(envPath, 'utf-8');
+  for (const line of envContent.split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) continue;
+    const eqIdx = trimmed.indexOf('=');
+    if (eqIdx === -1) continue;
+    const key = trimmed.slice(0, eqIdx).trim();
+    const val = trimmed.slice(eqIdx + 1).trim();
+    if (!process.env[key]) process.env[key] = val;
+  }
+} catch { /* no .env file, use system env */ }
 import pino from 'pino';
 import { eventBus } from './engine/event-bus.js';
 import { RiskEngine } from './engine/risk-engine.js';
@@ -31,6 +46,10 @@ import { BrierTracker } from './learning/brier-tracker.js';
 import { CrowdBiasDetector } from './strategies/crowd-bias-detector.js';
 import { StrategyScorer } from './engine/strategy-scorer.js';
 import { MarketAnalyzer } from './intelligence/market-analyzer.js';
+import { KnowledgeStore } from './intelligence/knowledge-store.js';
+import { KalshiClient } from './integrations/kalshi-client.js';
+import { CryptoPriceClient } from './integrations/crypto-price-client.js';
+import { AceEvolver } from './learning/ace-evolver.js';
 import { DEFAULT_CONFIG, PAPER_UNLIMITED_CONFIG } from './config/defaults.js';
 import type { TradingConfig } from './types/index.js';
 
@@ -48,6 +67,7 @@ export interface TradingSystem {
   store: ExperienceStore;
   drift: DriftMonitor;
   paper: PaperTrader;
+  ace: AceEvolver;
   depthFilter: DepthFilter;
   gasOptimizer: GasOptimizer;
   splitter: SmartOrderSplitter;
@@ -55,7 +75,7 @@ export interface TradingSystem {
   crowdBias: CrowdBiasDetector;
   adaptiveVolume: AdaptiveVolume;
   config: TradingConfig;
-  start: () => void;
+  start: () => Promise<void>;
   stop: () => void;
 }
 
@@ -87,6 +107,21 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
   const drift = new DriftMonitor();
   const paper = new PaperTrader(client, store, risk);
 
+  // ACE Evolver: adaptive parameter evolution based on trade results
+  const ace = new AceEvolver();
+
+  // Wire ACE to trade results — feed every settled trade for evolution tracking
+  eventBus.on('position:closed', () => {
+    const trade = store.getRecent(1)[0];
+    if (trade && trade.outcome !== 'PENDING') {
+      ace.recordResult(trade);
+      const evolution = ace.checkAndEvolve();
+      if (evolution) {
+        logger.info({ strategy: evolution.strategy, from: evolution.fromVersion, to: evolution.toVersion, changes: evolution.changes, reason: evolution.reason }, '🧬 ACE EVOLUTION — strategy parameters adapted');
+      }
+    }
+  });
+
   // Liquidity Maximizer modules
   const depthFilter = new DepthFilter(client);
   const gasOptimizer = new GasOptimizer();
@@ -98,8 +133,18 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
   const adaptiveVolume = new AdaptiveVolume();
 
   // Strategy Scorer: bridge between signal:detected → signal:approved
-  // Without this, signals are detected but never approved for paper trading
-  const scorer = new StrategyScorer(risk);
+  // Listens for signal:detected events, scores them, runs through risk engine,
+  // and emits signal:approved (consumed by paper trader)
+  // StrategyScorer wires itself to eventBus in constructor (signal:detected → signal:approved)
+  new StrategyScorer(risk);
+
+  // Load knowledge base for context-augmented analysis
+  const knowledgePath = process.env.KNOWLEDGE_BASE_PATH || 'D:/jarvis/mega brain/knowledge/prediction-markets';
+  const knowledge = new KnowledgeStore();
+  const kbLoaded = knowledge.loadFromDirectory(knowledgePath);
+  if (kbLoaded > 0) {
+    logger.info(`📚 Knowledge base loaded: ${kbLoaded} documents`);
+  }
 
   // Auto-Trader: the brain that makes it all trade autonomously
   const autoTrader = new AutoTrader(client, risk, brier, crowdBias, adaptiveVolume, {
@@ -107,6 +152,7 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
     enabledVerticals: finalConfig.enabledVerticals,
     marketsPerScan: unlimitedMode ? 100 : 50,
     minEdge: finalConfig.riskLimits.minEdge,
+    maxResolutionHours: Number(process.env.MAX_RESOLUTION_HOURS) || 0,
   });
 
   // Connect paper trader to auto-trader for position resolution
@@ -114,6 +160,21 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
 
   // Fase 1.1: Connect experience store for learning-informed trading
   autoTrader.setExperienceStore(store);
+
+  // Connect ACE evolver for adaptive parameter evolution
+  autoTrader.setAceEvolver(ace);
+
+  // Connect knowledge store to auto-trader for heuristic enhancement
+  if (kbLoaded > 0) {
+    autoTrader.setKnowledgeStore(knowledge);
+  }
+
+  // Multi-platform: connect Kalshi + Crypto for expanded market discovery
+  const kalshi = new KalshiClient();
+  autoTrader.setKalshiClient(kalshi);
+  const crypto = new CryptoPriceClient();
+  autoTrader.setCryptoClient(crypto);
+  logger.info('🌐 Multi-platform enabled: Polymarket + Kalshi + Crypto (BTC/ETH/SOL)');
 
   // Fase 2: LLM-in-the-Loop — auto-detect best available provider
   const analyzer = new MarketAnalyzer(client, store, {
@@ -123,9 +184,18 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
     ollamaModel: process.env.OLLAMA_MODEL || 'qwen2.5:7b',
     vllmHost: process.env.VLLM_HOST || 'http://localhost:8000',
     vllmModel: process.env.VLLM_MODEL || '',
-    maxMarketsPerScan: unlimitedMode ? 20 : 10,
+    openaiApiKey: process.env.OPENAI_API_KEY || '',
+    openaiModel: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+    maxMarketsPerScan: unlimitedMode ? 30 : 10,
+    minVolumeForAnalysis: unlimitedMode ? 1000 : 5000,
+    minLiquidityForAnalysis: unlimitedMode ? 500 : 2000,
     dailyBudgetUsd: parseFloat(process.env.LLM_DAILY_BUDGET || '5'),
   });
+
+  // Connect knowledge to analyzer
+  if (kbLoaded > 0) {
+    analyzer.setKnowledgeStore(knowledge);
+  }
 
   // Initialize is async — detect provider at startup
   const initLLM = async () => {
@@ -156,7 +226,28 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
     logger.info({ market: exp.marketId, vertical: exp.vertical, strategy: exp.strategy }, 'Trade recorded');
   });
 
-  function start(): void {
+  // Wire Brier Tracker: record forecast vs outcome on position close
+  eventBus.on('position:closed', (position) => {
+    const vertical = position.market?.vertical;
+    if (!vertical) return;
+    // Find the trade in experience store to get modelProbability
+    const recentTrades = store.getRecent(5);
+    const trade = recentTrades.find(t => t.marketId === position.marketId);
+    if (!trade || trade.outcome === 'PENDING') return;
+    const forecast = trade.modelProbability;
+    const outcome: 0 | 1 = trade.outcome === 'WIN' ? 1 : 0;
+    brier.record(position.marketId, vertical, forecast, outcome);
+  });
+
+  eventBus.on('learning:lesson-extracted', ({ tradeId, lesson }) => {
+    logger.info({ tradeId, lesson }, '📝 Lesson extracted from trade');
+  });
+
+  eventBus.on('learning:prompt-evolved', (result) => {
+    logger.info({ strategy: result.strategy, version: result.toVersion, changes: result.changes }, '🧬 Prompt evolved');
+  });
+
+  async function start(): Promise<void> {
     logger.info({
       mode: finalConfig.mode,
       unlimited: unlimitedMode,
@@ -164,10 +255,12 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
       pollMs: finalConfig.pollIntervalMs,
       maxPositions: finalConfig.riskLimits.maxOpenPositions,
     }, 'Polymarket Trader starting');
-    // Detect LLM provider before starting trading loop
-    initLLM().catch(err => {
+    // Detect LLM provider BEFORE starting trading loop — ensures first scan has LLM
+    try {
+      await initLLM();
+    } catch (err) {
       logger.error(`LLM init failed: ${err instanceof Error ? err.message : err}`);
-    });
+    }
     gasOptimizer.start();
     autoTrader.start();
     eventBus.emit('system:started');
@@ -181,13 +274,14 @@ export function createTradingSystem(config: Partial<TradingConfig> = {}): Tradin
     eventBus.emit('system:stopped');
   }
 
-  return { client, risk, store, drift, paper, depthFilter, gasOptimizer, splitter, brier, crowdBias, adaptiveVolume, config: finalConfig, start, stop };
+  return { client, risk, store, drift, paper, ace, depthFilter, gasOptimizer, splitter, brier, crowdBias, adaptiveVolume, config: finalConfig, start, stop };
 }
 
 // Re-exports
 export { eventBus } from './engine/event-bus.js';
 export { RiskEngine } from './engine/risk-engine.js';
 export { ExperienceStore } from './learning/experience-store.js';
+export { KnowledgeStore } from './intelligence/knowledge-store.js';
 export { DriftMonitor } from './learning/drift-monitor.js';
 export { PolymarketClient } from './integrations/polymarket-client.js';
 export { KalshiClient } from './integrations/kalshi-client.js';

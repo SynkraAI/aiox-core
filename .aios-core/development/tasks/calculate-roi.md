@@ -2,7 +2,7 @@
 
 > Task ID: brad-calculate-roi
 > Agent: Brad (Design System Architect)
-> Version: 1.0.0
+> Version: 2.0.0
 
 ## Execution Modes
 
@@ -31,43 +31,55 @@
 
 ```yaml
 task: calculateRoi()
-responsável: Morgan (Strategist)
+responsavel: Brad (Design System Architect)
 responsavel_type: Agente
 atomic_layer: Strategy
 
 **Entrada:**
-- campo: task
-  tipo: string
-  origem: User Input
-  obrigatório: true
-  validação: Must be registered task
-
-- campo: parameters
+- campo: audit_data
   tipo: object
-  origem: User Input
-  obrigatório: false
-  validação: Valid task parameters
+  origem: File (pattern-inventory.json)
+  obrigatorio: true
+  validacao: Valid JSON with pattern counts and redundancy factors
 
-- campo: mode
-  tipo: string
-  origem: User Input
-  obrigatório: false
-  validação: yolo|interactive|pre-flight
-
-**Saída:**
-- campo: execution_result
+- campo: consolidation_data
   tipo: object
-  destino: Memory
-  persistido: false
+  origem: File (consolidation-report.md / .state.yaml)
+  obrigatorio: false
+  validacao: Before/after pattern counts. Optional but enriches accuracy
 
-- campo: logs
-  tipo: array
-  destino: File (.ai/logs/*)
+- campo: hourly_rate
+  tipo: number
+  origem: User Input
+  obrigatorio: false
+  validacao: Default $150/hr. Must be positive number
+
+- campo: team_size
+  tipo: number
+  origem: User Input
+  obrigatorio: false
+  validacao: Default 3. Number of developers maintaining UI
+
+- campo: hours_per_pattern
+  tipo: number
+  origem: User Input
+  obrigatorio: false
+  validacao: Default 2 hours/month per pattern for maintenance
+
+**Saida:**
+- campo: roi_report
+  tipo: object
+  destino: File (roi-analysis.md)
   persistido: true
 
-- campo: state
+- campo: executive_summary
+  tipo: string
+  destino: File (executive-summary.md)
+  persistido: true
+
+- campo: cost_breakdown
   tipo: object
-  destino: State management
+  destino: File (cost-breakdown.yaml)
   persistido: true
 ```
 
@@ -81,12 +93,19 @@ atomic_layer: Strategy
 
 ```yaml
 pre-conditions:
-  - [ ] Task is registered; required parameters provided; dependencies met
+  - [ ] Audit data (pattern-inventory.json) or consolidation data exists
     tipo: pre-condition
     blocker: true
-    validação: |
-      Check task is registered; required parameters provided; dependencies met
-    error_message: "Pre-condition failed: Task is registered; required parameters provided; dependencies met"
+    validacao: |
+      Check pattern-inventory.json exists with pattern counts, or .state.yaml has consolidation metrics
+    error_message: "Pre-condition failed: Run *audit first to generate pattern data for ROI calculation"
+
+  - [ ] At least one pattern category has measurable redundancy
+    tipo: pre-condition
+    blocker: false
+    validacao: |
+      Check at least one category has redundancy factor > 1. Warn if all are 1 (no waste to calculate)
+    error_message: "Warning: No measurable redundancy found. ROI will show zero savings"
 ```
 
 ---
@@ -99,12 +118,26 @@ pre-conditions:
 
 ```yaml
 post-conditions:
-  - [ ] Task completed; exit code 0; expected outputs created
+  - [ ] ROI report generated with all five metric categories
     tipo: post-condition
     blocker: true
-    validação: |
-      Verify task completed; exit code 0; expected outputs created
-    error_message: "Post-condition failed: Task completed; exit code 0; expected outputs created"
+    validacao: |
+      Verify roi-analysis.md exists and contains: component reduction, bundle impact, hardcoded elimination, time savings, maintenance reduction
+    error_message: "Post-condition failed: ROI report missing one or more required metric categories"
+
+  - [ ] Executive summary generated with key financial metrics
+    tipo: post-condition
+    blocker: true
+    validacao: |
+      Verify executive-summary.md exists with investment cost, annual savings, breakeven period, and ROI ratio
+    error_message: "Post-condition failed: Executive summary incomplete"
+
+  - [ ] All calculated values are valid positive numbers (no NaN)
+    tipo: post-condition
+    blocker: true
+    validacao: |
+      Parse all numeric outputs and verify they are finite, non-negative numbers
+    error_message: "Post-condition failed: ROI report contains invalid numeric values"
 ```
 
 ---
@@ -117,12 +150,33 @@ post-conditions:
 
 ```yaml
 acceptance-criteria:
-  - [ ] Task completed as expected; side effects documented
+  - [ ] Component count before/after documented with reduction percentage
     tipo: acceptance-criterion
     blocker: true
-    validação: |
-      Assert task completed as expected; side effects documented
-    error_message: "Acceptance criterion not met: Task completed as expected; side effects documented"
+    validacao: |
+      Assert components_before, components_after, and reduction_percentage fields exist and are valid
+    error_message: "Acceptance criterion not met: Component count reduction not documented"
+
+  - [ ] Developer time savings calculated in hours AND dollar value
+    tipo: acceptance-criterion
+    blocker: true
+    validacao: |
+      Assert hours_saved_annually and dollar_savings_annually fields exist as positive numbers
+    error_message: "Acceptance criterion not met: Time savings not calculated"
+
+  - [ ] Breakeven period calculated in months
+    tipo: acceptance-criterion
+    blocker: true
+    validacao: |
+      Assert breakeven_months field exists as a positive number
+    error_message: "Acceptance criterion not met: Breakeven period not calculated"
+
+  - [ ] Calculation methodology and assumptions documented
+    tipo: acceptance-criterion
+    blocker: true
+    validacao: |
+      Assert report includes formulas used and assumptions made (hourly rate, hours per pattern, etc.)
+    error_message: "Acceptance criterion not met: Methodology not documented"
 ```
 
 ---
@@ -131,13 +185,13 @@ acceptance-criteria:
 
 **External/shared resources used by this task:**
 
-- **Tool:** task-runner
-  - **Purpose:** Task execution and orchestration
-  - **Source:** .aios-core/core/task-runner.js
+- **Tool:** file-system
+  - **Purpose:** Read audit/consolidation data, write ROI reports
+  - **Source:** Node.js fs module
 
-- **Tool:** logger
-  - **Purpose:** Execution logging and error tracking
-  - **Source:** .aios-core/utils/logger.js
+- **Tool:** code-analyzer
+  - **Purpose:** Measure bundle size impact (optional, for precise measurements)
+  - **Source:** .aios-core/utils/code-analyzer.js
 
 ---
 
@@ -145,10 +199,10 @@ acceptance-criteria:
 
 **Agent-specific code for this task:**
 
-- **Script:** execute-task.js
-  - **Purpose:** Generic task execution wrapper
+- **Script:** calculate-roi.js
+  - **Purpose:** Cost calculation, ROI projection, and report generation
   - **Language:** JavaScript
-  - **Location:** .aios-core/scripts/execute-task.js
+  - **Location:** .aios-core/scripts/calculate-roi.js
 
 ---
 
@@ -158,20 +212,25 @@ acceptance-criteria:
 
 **Common Errors:**
 
-1. **Error:** Task Not Found
-   - **Cause:** Specified task not registered in system
-   - **Resolution:** Verify task name and registration
-   - **Recovery:** List available tasks, suggest similar
+1. **Error:** Missing Audit Data
+   - **Cause:** *audit was not run or data was deleted
+   - **Resolution:** Run *audit first to generate pattern-inventory.json
+   - **Recovery:** Exit with instruction to run audit
 
-2. **Error:** Invalid Parameters
-   - **Cause:** Task parameters do not match expected schema
-   - **Resolution:** Validate parameters against task definition
-   - **Recovery:** Provide parameter template, reject execution
+2. **Error:** Bundle Size Measurement Failed
+   - **Cause:** Build tools not configured or project does not build
+   - **Resolution:** Use heuristic estimate (0.5KB per duplicate pattern)
+   - **Recovery:** Continue with estimated values, flag as approximate
 
-3. **Error:** Execution Timeout
-   - **Cause:** Task exceeds maximum execution time
-   - **Resolution:** Optimize task or increase timeout
-   - **Recovery:** Kill task, cleanup resources, log state
+3. **Error:** Division by Zero
+   - **Cause:** patterns_before is 0 (pristine codebase) or monthly_savings is 0
+   - **Resolution:** Default reduction to 0%, breakeven to N/A
+   - **Recovery:** Report clean state with no ROI opportunity
+
+4. **Error:** Unrealistic Cost Estimates
+   - **Cause:** Input parameters produce implausible results
+   - **Resolution:** Validate against reasonable bounds, warn user
+   - **Recovery:** Use industry defaults with warning logged
 
 ---
 
@@ -186,7 +245,7 @@ token_usage: ~2,000-8,000 tokens
 ```
 
 **Optimization Notes:**
-- Iterative analysis with depth limits; cache intermediate results; batch similar operations
+- Pure calculation from existing data; no filesystem scanning needed; fast execution
 
 ---
 
@@ -194,13 +253,15 @@ token_usage: ~2,000-8,000 tokens
 
 ```yaml
 story: N/A
-version: 1.0.0
+version: 2.0.0
 dependencies:
-  - N/A
+  - audit-codebase
 tags:
-  - automation
-  - workflow
-updated_at: 2025-11-17
+  - design-system
+  - roi
+  - cost-analysis
+  - stakeholder-communication
+updated_at: 2026-04-10
 ```
 
 ---
@@ -247,7 +308,7 @@ This task uses interactive elicitation to gather cost parameters.
    - Validation: Consolidation data exists
 
 2. **Calculate Maintenance Cost (Before)**
-   - Formula: patterns × hours_per_pattern_monthly × hourly_rate × 12
+   - Formula: patterns x hours_per_pattern_monthly x hourly_rate x 12
    - Default: 2 hours/month per pattern for maintenance
    - Include debugging, updates, consistency fixes
    - Validation: Reasonable cost estimate generated
@@ -259,7 +320,7 @@ This task uses interactive elicitation to gather cost parameters.
 
 4. **Calculate Monthly and Annual Savings**
    - Monthly savings = cost_before - cost_after
-   - Annual savings = monthly_savings × 12
+   - Annual savings = monthly_savings x 12
    - Validation: Positive savings or explain why not
 
 5. **Estimate Implementation Cost**
@@ -272,7 +333,7 @@ This task uses interactive elicitation to gather cost parameters.
 6. **Calculate ROI Metrics**
    - ROI ratio = annual_savings / implementation_cost
    - Breakeven point = implementation_cost / monthly_savings (in months)
-   - 3-year projection = (annual_savings × 3) - implementation_cost
+   - 3-year projection = (annual_savings x 3) - implementation_cost
    - Validation: ROI calculations complete
 
 7. **Calculate Velocity Impact**
@@ -281,20 +342,32 @@ This task uses interactive elicitation to gather cost parameters.
    - Convert to dollar value (time = money)
    - Validation: Velocity impact quantified
 
-8. **Generate ROI Report**
-   - Create roi-analysis.md with executive summary
-   - Include detailed calculations with formulas
-   - Generate charts (text-based or recommend tools)
-   - Show sensitivity analysis (best/worst case)
-   - Validation: Comprehensive ROI document created
+8. **Count Hardcoded Values Eliminated**
+   - Count hardcoded color hex values from audit
+   - Count hardcoded spacing values (px without variable)
+   - Count hardcoded font declarations
+   - Sum total to be replaced by tokens
+   - Validation: Elimination count is non-negative
 
-9. **Create Stakeholder Summary**
-   - One-page executive summary
-   - Key numbers only (investment, savings, breakeven)
-   - Visual comparison (before/after costs)
-   - Validation: Stakeholder-ready summary
+9. **Estimate Bundle Size Impact**
+   - If build tools available: measure actual bundle difference
+   - If not: estimate 0.5KB per duplicate CSS pattern, 1KB per duplicate component
+   - Calculate total duplicate KB and percentage of bundle
+   - Validation: Size values are positive numbers
 
-10. **Update State File**
+10. **Generate ROI Report**
+    - Create roi-analysis.md with executive summary
+    - Include detailed calculations with formulas
+    - Show sensitivity analysis (best/worst case)
+    - Validation: Comprehensive ROI document created
+
+11. **Create Stakeholder Summary**
+    - One-page executive summary
+    - Key numbers only (investment, savings, breakeven)
+    - Visual comparison (before/after costs)
+    - Validation: Stakeholder-ready summary
+
+12. **Update State File**
     - Add ROI section to .state.yaml
     - Record all cost calculations
     - Update phase to "roi_calculated"
@@ -352,6 +425,8 @@ roi:
 - [ ] Both pre and post-consolidation costs calculated
 - [ ] ROI ratio shows positive return (>2x minimum)
 - [ ] Breakeven point calculated (typically <1 year)
+- [ ] Hardcoded values elimination counted by category
+- [ ] Bundle size impact estimated
 - [ ] Velocity impact quantified
 - [ ] Executive summary is stakeholder-ready
 - [ ] All calculations show formulas used
@@ -380,40 +455,40 @@ roi:
 
 Output:
 ```
-💰 Brad: Calculating ROI from pattern consolidation...
+Brad: Calculating ROI from pattern consolidation...
 
 Team Context:
   - Developers: 8
   - Hourly rate: $150/hr
-  - Patterns maintained: 176 → 32
+  - Patterns maintained: 176 -> 32
 
-📊 COST ANALYSIS:
+COST ANALYSIS:
 
 BEFORE consolidation:
-  176 patterns × 2 hrs/month × $150/hr = $52,800/month
+  176 patterns x 2 hrs/month x $150/hr = $52,800/month
   Annual cost: $633,600
 
 AFTER consolidation:
-  32 patterns × 2 hrs/month × $150/hr = $9,600/month
+  32 patterns x 2 hrs/month x $150/hr = $9,600/month
   Annual cost: $115,200
 
-💵 SAVINGS:
+SAVINGS:
   Monthly: $43,200
   Annual: $518,400
   3-year total: $1,555,200
 
-🎯 ROI METRICS:
+ROI METRICS:
   Implementation cost: $15,000
   ROI ratio: 34.6x
   Breakeven: 0.35 months (10 days!)
   Year 1 net profit: $503,400
 
-⚡ VELOCITY IMPACT:
+VELOCITY IMPACT:
   Estimated 5x faster feature development
   288 hours/month saved = 1.8 FTE equivalent
 
-✅ Report saved: outputs/design-system/my-app/roi/roi-analysis.md
-✅ Executive summary: outputs/design-system/my-app/roi/executive-summary.md
+Report saved: outputs/design-system/my-app/roi/roi-analysis.md
+Executive summary: outputs/design-system/my-app/roi/executive-summary.md
 
 Brad says: Numbers don't lie. Show this to your boss.
 ```
@@ -436,7 +511,7 @@ Brad says: Numbers don't lie. Show this to your boss.
 **10 days**
 
 ## Impact
-- 81.8% pattern reduction (176 → 32)
+- 81.8% pattern reduction (176 -> 32)
 - 5x velocity improvement
 - 1.8 FTE equivalent time savings
 

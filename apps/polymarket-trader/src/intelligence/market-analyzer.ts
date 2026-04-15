@@ -17,9 +17,10 @@ import Anthropic from '@anthropic-ai/sdk';
 import { eventBus } from '../engine/event-bus.js';
 import type { PolymarketClient } from '../integrations/polymarket-client.js';
 import type { ExperienceStore } from '../learning/experience-store.js';
+import type { KnowledgeStore } from './knowledge-store.js';
 import type { Market, TradeSignal, StrategyId } from '../types/index.js';
 
-type LLMProvider = 'claude' | 'ollama' | 'vllm' | 'none';
+type LLMProvider = 'claude' | 'openai' | 'ollama' | 'vllm' | 'none';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -51,6 +52,10 @@ export interface AnalyzerConfig {
   vllmHost: string;
   /** vLLM model (auto-detect from server) */
   vllmModel: string;
+  /** OpenAI API key */
+  openaiApiKey: string;
+  /** OpenAI model (default: gpt-4o-mini) */
+  openaiModel: string;
   /** Max markets to analyze per scan */
   maxMarketsPerScan: number;
   /** Daily budget in USD (only for Claude, local = unlimited) */
@@ -69,6 +74,8 @@ const DEFAULT_CONFIG: AnalyzerConfig = {
   ollamaModel: 'qwen2.5:7b',
   vllmHost: 'http://localhost:8000',
   vllmModel: '',
+  openaiApiKey: '',
+  openaiModel: 'gpt-4o-mini',
   maxMarketsPerScan: 15,
   dailyBudgetUsd: 5.0,
   minVolumeForAnalysis: 5000,
@@ -179,8 +186,8 @@ class BudgetController {
 // ---------------------------------------------------------------------------
 
 export class MarketAnalyzer {
-  private _client: PolymarketClient;
   private store: ExperienceStore | null;
+  private knowledgeStore: KnowledgeStore | null = null;
   private anthropic: Anthropic | null = null;
   private config: AnalyzerConfig;
   private provider: LLMProvider = 'none';
@@ -193,16 +200,23 @@ export class MarketAnalyzer {
     store: ExperienceStore | null,
     config: Partial<AnalyzerConfig> = {},
   ) {
-    this._client = client;
+    void client; // retained in constructor scope for future Phase 4 use
     this.store = store;
     this.config = { ...DEFAULT_CONFIG, ...config };
     this.calibration = new CalibrationTracker();
     this.budget = new BudgetController(this.config.dailyBudgetUsd);
 
     eventBus.on('position:closed', (position) => {
-      const pnl = position.unrealizedPnl + position.realizedPnl;
-      this.calibration.recordOutcome(position.marketId, pnl > 0 ? 'YES' : 'NO');
+      // Use actual market resolution (price-based), not PnL direction
+      const yesPrice = position.market?.tokens?.yes?.price ?? 0;
+      const outcome: 'YES' | 'NO' = yesPrice >= 0.99 ? 'YES' : 'NO';
+      this.calibration.recordOutcome(position.marketId, outcome);
     });
+  }
+
+  /** Connect the knowledge store for context-augmented analysis. */
+  setKnowledgeStore(knowledge: KnowledgeStore): void {
+    this.knowledgeStore = knowledge;
   }
 
   /**
@@ -216,6 +230,14 @@ export class MarketAnalyzer {
       this.provider = forced;
       if (forced === 'claude') {
         this.anthropic = new Anthropic({ apiKey: this.config.apiKey || process.env.ANTHROPIC_API_KEY });
+      }
+      if (forced === 'openai') {
+        const oaiKey = this.config.openaiApiKey || process.env.OPENAI_API_KEY;
+        if (!oaiKey) {
+          console.log('[MarketAnalyzer] OpenAI forced but no OPENAI_API_KEY set');
+          this.provider = 'none';
+          return this.provider;
+        }
       }
       console.log(`[MarketAnalyzer] Provider forced: ${forced}`);
       return this.provider;
@@ -266,18 +288,38 @@ export class MarketAnalyzer {
       return this.provider;
     }
 
+    // Auto-detect: OpenAI API
+    const openaiKey = this.config.openaiApiKey || process.env.OPENAI_API_KEY;
+    if (openaiKey) {
+      this.provider = 'openai';
+      console.log(`[MarketAnalyzer] Provider: OpenAI — model: ${this.config.openaiModel} — ~$1-3/day`);
+      return this.provider;
+    }
+
     this.provider = 'none';
-    console.log('[MarketAnalyzer] No LLM provider available. Set OLLAMA_MODEL, VLLM_HOST, or ANTHROPIC_API_KEY.');
+    console.log('[MarketAnalyzer] No LLM provider available. Set OLLAMA_MODEL, VLLM_HOST, ANTHROPIC_API_KEY, or OPENAI_API_KEY.');
     return this.provider;
   }
 
-  /** Pre-filter markets to top candidates. */
+  /** Pre-filter markets to top candidates. Prioritizes short-term markets for faster feedback. */
   preFilter(markets: Market[]): Market[] {
+    const minVol = this.config.minVolumeForAnalysis;
+    const minLiq = this.config.minLiquidityForAnalysis;
+    const now = Date.now();
+    const SHORT_TERM_DAYS = 14;
     return markets
-      .filter(m => m.volume >= this.config.minVolumeForAnalysis)
-      .filter(m => m.liquidity >= this.config.minLiquidityForAnalysis)
+      .filter(m => m.volume >= minVol)
+      .filter(m => m.liquidity >= minLiq)
       .filter(m => m.tokens.yes.price > 0.05 && m.tokens.yes.price < 0.95)
-      .sort((a, b) => (b.volume * b.liquidity) - (a.volume * a.liquidity))
+      .sort((a, b) => {
+        // Short-term markets first (resolve within 14 days)
+        const aDays = a.endDate ? (new Date(a.endDate).getTime() - now) / (1000 * 60 * 60 * 24) : 9999;
+        const bDays = b.endDate ? (new Date(b.endDate).getTime() - now) / (1000 * 60 * 60 * 24) : 9999;
+        const aShort = aDays <= SHORT_TERM_DAYS ? 0 : 1;
+        const bShort = bDays <= SHORT_TERM_DAYS ? 0 : 1;
+        if (aShort !== bShort) return aShort - bShort;
+        return (b.volume * b.liquidity) - (a.volume * a.liquidity);
+      })
       .slice(0, this.config.maxMarketsPerScan);
   }
 
@@ -286,6 +328,7 @@ export class MarketAnalyzer {
    */
   private async callLLM(prompt: string): Promise<string | null> {
     const isLocal = this.provider === 'ollama' || this.provider === 'vllm';
+    // OpenAI is also a paid provider
 
     if (!this.budget.canSpend(isLocal)) {
       console.log('[MarketAnalyzer] Daily budget exhausted — skipping');
@@ -300,6 +343,8 @@ export class MarketAnalyzer {
           return await this.callVLLM(prompt);
         case 'claude':
           return await this.callClaude(prompt);
+        case 'openai':
+          return await this.callOpenAI(prompt);
         default:
           return null;
       }
@@ -371,6 +416,44 @@ export class MarketAnalyzer {
     return firstBlock && firstBlock.type === 'text' ? firstBlock.text : '';
   }
 
+  /** Call OpenAI via REST (no SDK dependency) */
+  private async callOpenAI(prompt: string): Promise<string> {
+    const apiKey = this.config.openaiApiKey || process.env.OPENAI_API_KEY;
+    if (!apiKey) throw new Error('OpenAI API key not set');
+
+    const model = this.config.openaiModel || process.env.OPENAI_MODEL || 'gpt-4o-mini';
+    const res = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model,
+        messages: [{ role: 'user', content: prompt }],
+        max_tokens: 512,
+        temperature: 0.3,
+      }),
+      signal: AbortSignal.timeout(30_000),
+    });
+
+    if (!res.ok) {
+      const body = await res.text();
+      throw new Error(`OpenAI ${res.status}: ${body}`);
+    }
+
+    const data = await res.json() as {
+      choices?: Array<{ message: { content: string } }>;
+      usage?: { prompt_tokens: number; completion_tokens: number };
+    };
+
+    if (data.usage) {
+      this.budget.recordSpend(data.usage.prompt_tokens, data.usage.completion_tokens);
+    }
+
+    return data.choices?.[0]?.message?.content ?? '';
+  }
+
   /**
    * Analyze a single market using the active LLM provider.
    */
@@ -386,7 +469,19 @@ export class MarketAnalyzer {
       .map(t => `- "${t.marketQuestion.substring(0, 80)}": ${t.outcome} (edge=${(t.edgeDetected * 100).toFixed(1)}%, P&L=$${t.pnl.toFixed(2)})`)
       .join('\n');
 
-    const prompt = this.buildPrompt(market, settledSimilar);
+    // Retrieve relevant knowledge for this market
+    let knowledgeContext = '';
+    if (this.knowledgeStore) {
+      const relevant = this.knowledgeStore.findRelevant(market.question, market.vertical, 5);
+      if (relevant.length > 0) {
+        knowledgeContext = this.knowledgeStore.formatForPrompt(relevant, 1500);
+      }
+    }
+
+    // Build performance feedback: calibration stats + per-vertical track record
+    const performanceContext = this.buildPerformanceContext(market.vertical);
+
+    const prompt = this.buildPrompt(market, settledSimilar, knowledgeContext, performanceContext);
     const text = await this.callLLM(prompt);
     if (!text) return null;
 
@@ -412,13 +507,15 @@ export class MarketAnalyzer {
 
     const providerLabel = this.provider === 'ollama' ? `Ollama/${this.config.ollamaModel}`
       : this.provider === 'vllm' ? `vLLM/${this.config.vllmModel}`
+      : this.provider === 'openai' ? `OpenAI/${this.config.openaiModel}`
       : `Claude/${this.config.claudeModel}`;
     console.log(`[MarketAnalyzer] Analyzing ${candidates.length} markets via ${providerLabel}`);
 
     const signals: TradeSignal[] = [];
 
-    // Batch size: local models = 1 (sequential, shared GPU), Claude = 5 (parallel API)
-    const BATCH_SIZE = this.provider === 'claude' ? 5 : 1;
+    // Batch size: local models = 1 (sequential, shared GPU), cloud APIs = 5 (parallel)
+    const isCloud = this.provider === 'claude' || this.provider === 'openai';
+    const BATCH_SIZE = isCloud ? 5 : 1;
     const analyses: Array<{ market: Market; analysis: LLMAnalysis | null }> = [];
 
     for (let i = 0; i < candidates.length; i += BATCH_SIZE) {
@@ -436,13 +533,19 @@ export class MarketAnalyzer {
       const marketProb = analysis.side === 'YES' ? market.tokens.yes.price : market.tokens.no.price;
       const confidenceMultiplier = analysis.confidence === 'high' ? 1.0
         : analysis.confidence === 'medium' ? 0.6 : 0.3;
-      const kellyFraction = (analysis.edge / (1 - marketProb)) * 0.05 * confidenceMultiplier;
+      // Short-term markets get 1.5x Kelly boost — faster feedback, higher conviction
+      const daysLeft = market.endDate
+        ? Math.max(0, (new Date(market.endDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
+        : 9999;
+      const horizonBoost = daysLeft <= 14 ? 1.5 : 1.0;
+      const kellyFraction = (analysis.edge / (1 - marketProb)) * 0.05 * confidenceMultiplier * horizonBoost;
       const suggestedSize = Math.min(bankroll * kellyFraction, 25);
 
       if (suggestedSize < 1) continue;
 
       signals.push({
         marketId: market.id,
+        marketQuestion: market.question,
         vertical: market.vertical,
         strategy: 'info_arb' as StrategyId,
         side: analysis.side,
@@ -459,15 +562,59 @@ export class MarketAnalyzer {
     return signals;
   }
 
-  /** Build the analysis prompt. */
-  private buildPrompt(market: Market, similarTrades: string): string {
+  /** Build performance feedback for the LLM — self-awareness of its own track record. */
+  private buildPerformanceContext(vertical: string): string {
+    const parts: string[] = [];
+
+    // Calibration stats
+    const calStats = this.calibration.getStats();
+    if (calStats.resolved >= 10) {
+      parts.push(`YOUR TRACK RECORD (${calStats.resolved} resolved predictions):`);
+      parts.push(`- Overall accuracy: ${(calStats.accuracy * 100).toFixed(0)}%`);
+      if (calStats.calibrationGap > 0.05) {
+        parts.push(`- ⚠️ Calibration gap: ${(calStats.calibrationGap * 100).toFixed(1)}% — your probability estimates are systematically off. Be more conservative.`);
+      } else {
+        parts.push(`- Calibration gap: ${(calStats.calibrationGap * 100).toFixed(1)}% (well-calibrated)`);
+      }
+    }
+
+    // Per-vertical performance from experience store
+    if (this.store) {
+      const verticalTrades = this.store.getByVertical(vertical as any, 100);
+      const settled = verticalTrades.filter(t => t.outcome !== 'PENDING');
+      if (settled.length >= 5) {
+        const wins = settled.filter(t => t.outcome === 'WIN').length;
+        const wr = wins / settled.length;
+        const totalPnl = settled.reduce((s, t) => s + t.pnl, 0);
+        const overconfidentLosses = settled.filter(t => t.outcome === 'LOSS' && t.edgeDetected > 0.10).length;
+        const totalLosses = settled.filter(t => t.outcome === 'LOSS').length;
+
+        parts.push(`YOUR ${vertical.toUpperCase()} PERFORMANCE (${settled.length} trades):`);
+        parts.push(`- Win rate: ${(wr * 100).toFixed(0)}%, PnL: $${totalPnl.toFixed(2)}`);
+
+        if (overconfidentLosses > 0 && totalLosses > 0) {
+          const overconfPct = (overconfidentLosses / totalLosses * 100).toFixed(0);
+          parts.push(`- ⚠️ ${overconfPct}% of your losses were HIGH-EDGE calls that were WRONG — you tend to be overconfident when you think the edge is large. Reduce confidence on high-edge calls.`);
+        }
+
+        if (wr < 0.5) {
+          parts.push(`- ⚠️ Below 50% win rate — set shouldTrade=false unless you have VERY strong evidence.`);
+        }
+      }
+    }
+
+    return parts.length > 0 ? parts.join('\n') : '';
+  }
+
+  /** Build the analysis prompt with knowledge augmentation. */
+  private buildPrompt(market: Market, similarTrades: string, knowledgeContext = '', performanceContext = ''): string {
     const yesPrice = market.tokens.yes.price;
     const noPrice = market.tokens.no.price;
     const daysLeft = market.endDate
       ? Math.max(0, (new Date(market.endDate).getTime() - Date.now()) / (1000 * 60 * 60 * 24))
       : 0;
 
-    return `You are a prediction market analyst. Analyze this market and estimate the TRUE probability of the YES outcome.
+    return `You are an expert prediction market analyst. Estimate the FAIR probability of this event occurring, then determine which side (YES or NO) offers better value.
 
 MARKET: ${market.question}
 Current YES price: ${(yesPrice * 100).toFixed(1)}% | NO price: ${(noPrice * 100).toFixed(1)}%
@@ -475,12 +622,19 @@ Volume: $${market.volume.toFixed(0)} | Liquidity: $${market.liquidity.toFixed(0)
 End date: ${market.endDate || 'unknown'} (${daysLeft.toFixed(0)} days left)
 Vertical: ${market.vertical}
 
-${similarTrades ? `SIMILAR PAST TRADES FROM OUR EXPERIENCE:\n${similarTrades}\n` : ''}
+${similarTrades ? `SIMILAR PAST TRADES FROM OUR EXPERIENCE:\n${similarTrades}\n` : ''}\
+${knowledgeContext ? `DOMAIN KNOWLEDGE (use these insights to inform your analysis):\n${knowledgeContext}\n` : ''}\
+${performanceContext ? `${performanceContext}\n` : ''}\
 CALIBRATION INSTRUCTIONS:
-- When you say 70%, you should be correct ~70% of the time
-- The market price already reflects the consensus. Your edge comes ONLY from information or reasoning the market hasn't priced in
-- If you don't have a clear information advantage, set shouldTrade to false
-- Be skeptical of your own estimates. Markets are semi-efficient.
+- Estimate the fair probability INDEPENDENTLY, then compare to both YES and NO prices
+- YES and NO are equally valid sides. Betting NO is just as good as betting YES when NO is underpriced
+- The market price already reflects consensus. Your edge comes ONLY from information or reasoning the market hasn't priced in
+- Use the domain knowledge above to identify specific biases, patterns, or inefficiencies the market may exhibit
+- If you don't have a clear information advantage on EITHER side, set shouldTrade to false
+- Be skeptical of your own estimates. Markets are semi-efficient
+- Consider: is the NO side underpriced? Many events are LESS likely than markets suggest
+- For short-term markets (< 14 days): focus on imminent catalysts, scheduled events, and near-term momentum
+- For long-term markets (> 30 days): be extra skeptical — more time = more uncertainty = harder to have edge
 
 Respond with ONLY a JSON object (no markdown, no explanation outside JSON):
 {
@@ -489,7 +643,7 @@ Respond with ONLY a JSON object (no markdown, no explanation outside JSON):
   "shouldTrade": true | false,
   "edge": 0.XX,
   "side": "YES" | "NO",
-  "reasoning": "2-3 sentence reasoning",
+  "reasoning": "2-3 sentence reasoning citing specific knowledge or patterns. Explain why you chose YES or NO specifically.",
   "keyFactors": ["factor1", "factor2"],
   "riskFlags": ["flag1"]
 }`;
@@ -532,6 +686,7 @@ Respond with ONLY a JSON object (no markdown, no explanation outside JSON):
       provider: this.provider,
       model: this.provider === 'ollama' ? this.config.ollamaModel
         : this.provider === 'vllm' ? this.config.vllmModel
+        : this.provider === 'openai' ? this.config.openaiModel
         : this.config.claudeModel,
       analysisCount: this.analysisCount,
       budget: this.budget.getStats(),

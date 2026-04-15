@@ -1,10 +1,10 @@
 workflow:
   id: design-system-build-quality
   name: Design System Build Quality Pipeline
-  version: "1.0"
+  version: "2.0"
   description: >-
-    Pipeline pós-migração para Design System. Encadeia sequencialmente as etapas de
-    build, documentação, auditoria de acessibilidade e cálculo de ROI para garantir
+    Pipeline pos-migracao para Design System. Encadeia sequencialmente as etapas de
+    build, documentacao, auditoria de acessibilidade e calculo de ROI para garantir
     qualidade e mensurar valor entregue.
   type: brownfield
   project_types:
@@ -19,14 +19,14 @@ workflow:
 
   execution_modes:
     - mode: yolo
-      description: Execução autônoma com mínima interação
+      description: Execucao autonoma com minima interacao
       prompts: 0-1
     - mode: interactive
-      description: Checkpoints de decisão e feedback educacional
+      description: Checkpoints de decisao e feedback educacional
       prompts: 5-10
       default: true
     - mode: preflight
-      description: Planejamento completo antes da execução - análise upfront de todos os componentes e dependências
+      description: Planejamento completo antes da execucao - analise upfront de todos os componentes e dependencias
       prompts: "10-15"
 
   phases:
@@ -40,15 +40,22 @@ workflow:
       id: build
       phase: 1
       agent: ux-design-expert
-      action: Build de componentes atômicos
+      action: Build de componentes atomicos
+      artifacts:
+        - build_report
+        - compiled_tokens
+        - component_bundle
+      gate:
+        condition: "TypeScript 0 errors AND all components render AND all tokens compiled"
+        on_fail: "HALT and fix build errors before proceeding to documentation"
       notes: |
         Executa build dos componentes do Design System:
-        - Compila tokens de design (cores, tipografia, espaçamentos)
-        - Gera componentes atômicos (buttons, inputs, cards, etc.)
+        - Compila tokens de design (cores, tipografia, espacamentos)
+        - Gera componentes atomicos (buttons, inputs, cards, etc.)
         - Valida estrutura de arquivos e nomenclatura
-        - Verifica dependências e imports
+        - Verifica dependencias e imports
 
-        Critérios de sucesso:
+        Criterios de sucesso:
         - [ ] Build completo sem erros
         - [ ] Todos os tokens compilados
         - [ ] Componentes exportados corretamente
@@ -61,18 +68,25 @@ workflow:
       id: document
       phase: 2
       agent: ux-design-expert
-      action: Gerar documentação do Pattern Library
+      action: Gerar documentacao do Pattern Library
       requires: build
+      artifacts:
+        - pattern_library_docs
+        - component_api_reference
+        - style_guide
+      gate:
+        condition: "All components documented with props, variants, and working code examples"
+        on_fail: "HALT and complete missing documentation before accessibility audit"
       notes: |
-        Gera documentação completa do Pattern Library:
+        Gera documentacao completa do Pattern Library:
         - Documenta cada componente com props e variantes
         - Cria exemplos de uso e code snippets
         - Gera guia de estilo visual
         - Atualiza changelog de componentes
 
-        Critérios de sucesso:
+        Criterios de sucesso:
         - [ ] Todos os componentes documentados
-        - [ ] Exemplos de código funcionais
+        - [ ] Exemplos de codigo funcionais
         - [ ] Guia de estilo atualizado
       outputs:
         - pattern_library_docs
@@ -85,19 +99,26 @@ workflow:
       agent: ux-design-expert
       action: Auditoria de acessibilidade (WCAG AA)
       requires: document
+      artifacts:
+        - a11y_audit_report
+        - violations_list
+        - remediation_plan
+      gate:
+        condition: "Zero critical WCAG AA violations AND color contrast ratios meet 4.5:1 (text) / 3:1 (UI)"
+        on_fail: "HALT — remediate critical a11y violations before ROI calculation"
       notes: |
         Executa auditoria de acessibilidade WCAG 2.1 AA:
         - Verifica contraste de cores (4.5:1 texto, 3:1 UI)
-        - Valida navegação por teclado
+        - Valida navegacao por teclado
         - Checa atributos ARIA e roles
         - Testa com screen readers
         - Verifica focus states e indicadores visuais
 
-        Critérios de sucesso:
+        Criterios de sucesso:
         - [ ] Contraste de cores aprovado
-        - [ ] Navegação por teclado funcional
+        - [ ] Navegacao por teclado funcional
         - [ ] ARIA labels corretos
-        - [ ] Zero violações críticas WCAG AA
+        - [ ] Zero violacoes criticas WCAG AA
       outputs:
         - a11y_audit_report
         - violations_list
@@ -107,21 +128,28 @@ workflow:
       id: calculate-roi
       phase: 4
       agent: ux-design-expert
-      action: Cálculo de ROI e savings
+      action: Calculo de ROI e savings
       requires: a11y-check
+      artifacts:
+        - roi_report
+        - savings_metrics
+        - adoption_dashboard
+      gate:
+        condition: "ROI report complete with all 4 metrics calculated (hours saved, reuse %, feature time, bug reduction)"
+        on_fail: "HALT — complete all ROI metrics before finalizing pipeline"
       notes: |
         Calcula retorno sobre investimento do Design System:
         - Tempo economizado em desenvolvimento
-        - Redução de inconsistências visuais
+        - Reducao de inconsistencias visuais
         - Velocidade de entrega de features
-        - Custo de manutenção reduzido
-        - Métricas de reuso de componentes
+        - Custo de manutencao reduzido
+        - Metricas de reuso de componentes
 
-        Métricas a calcular:
-        - [ ] Horas dev economizadas/mês
+        Metricas a calcular:
+        - [ ] Horas dev economizadas/mes
         - [ ] % de reuso de componentes
-        - [ ] Tempo médio para nova feature
-        - [ ] Redução de bugs visuais
+        - [ ] Tempo medio para nova feature
+        - [ ] Reducao de bugs visuais
       outputs:
         - roi_report
         - savings_metrics
@@ -134,32 +162,32 @@ workflow:
 
         Artefatos gerados:
         - Build report e bundle de componentes
-        - Documentação do Pattern Library
-        - Relatório de acessibilidade WCAG AA
-        - Dashboard de ROI e métricas
+        - Documentacao do Pattern Library
+        - Relatorio de acessibilidade WCAG AA
+        - Dashboard de ROI e metricas
 
-        Próximos passos sugeridos:
-        - Revisar violações de a11y identificadas
-        - Publicar nova versão do Design System
-        - Compartilhar métricas de ROI com stakeholders
+        Proximos passos sugeridos:
+        - Revisar violacoes de a11y identificadas
+        - Publicar nova versao do Design System
+        - Compartilhar metricas de ROI com stakeholders
 
   flow_diagram: |
     ```mermaid
     graph TD
-        A[Start: Design System Quality Pipeline] --> B[ux-design-expert: Build componentes atômicos]
+        A[Start: Design System Quality Pipeline] --> B[ux-design-expert: Build componentes atomicos]
         B --> C{Build OK?}
-        C -->|Sim| D[ux-design-expert: Gerar documentação Pattern Library]
-        C -->|Não| E[Corrigir erros de build]
+        C -->|Sim| D[ux-design-expert: Gerar documentacao Pattern Library]
+        C -->|Nao| E[Corrigir erros de build]
         E --> B
 
         D --> F{Docs completas?}
         F -->|Sim| G[ux-design-expert: Auditoria a11y WCAG AA]
-        F -->|Não| H[Completar documentação]
+        F -->|Nao| H[Completar documentacao]
         H --> D
 
         G --> I{a11y aprovado?}
         I -->|Sim| J[ux-design-expert: Calcular ROI e savings]
-        I -->|Não| K[Remediar violações]
+        I -->|Nao| K[Remediar violacoes]
         K --> G
 
         J --> L[Pipeline Completo]
@@ -176,31 +204,31 @@ workflow:
 
   decision_guidance:
     when_to_use:
-      - Após migração de Design System
-      - Release de nova versão do Pattern Library
-      - Auditoria periódica de qualidade
-      - Validação pré-produção de componentes
-      - Geração de métricas para stakeholders
+      - Apos migracao de Design System
+      - Release de nova versao do Pattern Library
+      - Auditoria periodica de qualidade
+      - Validacao pre-producao de componentes
+      - Geracao de metricas para stakeholders
 
   handoff_prompts:
     build_complete: |
-      Build de componentes concluído com sucesso.
+      Build de componentes concluido com sucesso.
       Tokens compilados: {{token_count}}
       Componentes gerados: {{component_count}}
-      Prosseguindo para documentação...
+      Prosseguindo para documentacao...
 
     docs_complete: |
-      Documentação do Pattern Library gerada.
+      Documentacao do Pattern Library gerada.
       Componentes documentados: {{documented_count}}
       Exemplos criados: {{example_count}}
       Iniciando auditoria de acessibilidade...
 
     a11y_complete: |
-      Auditoria de acessibilidade WCAG AA concluída.
+      Auditoria de acessibilidade WCAG AA concluida.
       Status: {{pass/fail}}
-      Violações críticas: {{critical_count}}
-      Violações menores: {{minor_count}}
-      {{if pass}}: Prosseguindo para cálculo de ROI.
+      Violacoes criticas: {{critical_count}}
+      Violacoes menores: {{minor_count}}
+      {{if pass}}: Prosseguindo para calculo de ROI.
       {{if fail}}: Revisar remediation_plan antes de continuar.
 
     pipeline_complete: |
@@ -208,16 +236,16 @@ workflow:
 
       Resumo:
       - Build: {{build_status}}
-      - Documentação: {{docs_status}}
+      - Documentacao: {{docs_status}}
       - Acessibilidade: {{a11y_status}}
       - ROI calculado: {{roi_value}}
 
-      Artefatos disponíveis em outputs/design-system/
+      Artefatos disponiveis em outputs/design-system/
 
 metadata:
   author: Orion (AIOS Master)
   created_date: 2025-01-30
-  version: 1.0.0
+  version: 2.0.0
   tags:
     - design-system
     - quality-assurance

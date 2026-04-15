@@ -423,7 +423,7 @@ workflow:
 8. Update ux-design-expert.md → Uma (Empathizer)
 9. Rename db-sage.md → data-engineer.md → Dara (Engineer)
 10. Rename github-devops.md → devops.md → Gage (Operator)
-11. Merge aios-developer + aios-orchestrator → aios-master.md → Orion (Orchestrator)
+11. aios-developer + aios-orchestrator merged into aios-master.md → Orion (Orchestrator) (Story 6.1.2.1 - DONE)
 
 **Deliverable:** 11 updated agent files with persona_profile section
 

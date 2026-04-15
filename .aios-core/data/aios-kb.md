@@ -86,7 +86,7 @@ AIOS transforms you into a "Vibe CEO" - directing a team of specialized AI agent
 
 ```bash
 # Interactive installation (recommended)
-npx @synkra/aios-core install
+npx aios-core install
 ```
 
 **Installation Steps**:
@@ -149,17 +149,17 @@ npx @synkra/aios-core install
 - **Why it matters**: Dev agents are kept lean to maximize coding context
 - **The principle**: "Dev agents code, planning agents plan" - mixing breaks this optimization
 
-**About aios-master and aios-orchestrator**:
+**About aios-master**:
 
 - **aios-master**: CAN do any task without switching agents, BUT...
 - **Still use specialized agents for planning**: PM, Architect, and UX Expert have tuned personas that produce better results
 - **Why specialization matters**: Each agent's personality and focus creates higher quality outputs
-- **If using aios-master/orchestrator**: Fine for planning phases, but...
+- **If using aios-master**: Fine for planning phases, but...
 
 **CRITICAL RULE for Development**:
 
-- **ALWAYS use SM agent for story creation** - Never use aios-master or aios-orchestrator
-- **ALWAYS use Dev agent for implementation** - Never use aios-master or aios-orchestrator
+- **ALWAYS use SM agent for story creation** - Never use aios-master
+- **ALWAYS use Dev agent for implementation** - Never use aios-master
 - **Why this matters**: SM and Dev agents are specifically optimized for the development workflow
 - **No exceptions**: Even if using aios-master for everything else, switch to SM → Dev for implementation
 
@@ -283,8 +283,7 @@ You are the "Vibe CEO" - thinking like a CEO with unlimited resources and a sing
 
 | Agent               | Role             | Primary Functions                     | When to Use                       |
 | ------------------- | ---------------- | ------------------------------------- | --------------------------------- |
-| `aios-orchestrator` | Team Coordinator | Multi-agent workflows, role switching | Complex multi-role tasks          |
-| `aios-master`       | Universal Expert | All capabilities without switching    | Single-session comprehensive work |
+| `aios-master`       | Universal Expert | All capabilities, multi-agent workflows, role switching | Single-session comprehensive work, complex multi-role tasks |
 
 ### Agent Interaction Commands
 
@@ -889,7 +888,7 @@ Squads extend AIOS-Method beyond traditional software development into ANY domai
 3. **Install via CLI**:
 
    ```bash
-   npx @synkra/aios-core install
+   npx aios-core install
    # Select "Install squad" option
    ```
 

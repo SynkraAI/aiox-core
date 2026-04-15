@@ -438,6 +438,61 @@ build_plan:
             notes: "{optional context for coder}"
 ```
 
+### Step 6.5: Code Intelligence: Impact Analysis (Optional — Auto-skip if unavailable)
+
+> **Condition:** Only execute if `isCodeIntelAvailable()` returns true.
+> If no code intelligence provider is available, skip this step silently and proceed to Step 7.
+
+When code intelligence is available, enrich each subtask with blast radius and risk assessment:
+
+```javascript
+const { isCodeIntelAvailable } = require('.aios-core/core/code-intel');
+const { getImplementationImpact } = require('.aios-core/core/code-intel/helpers/planning-helper');
+
+if (isCodeIntelAvailable()) {
+  // For each subtask, analyze the files it modifies
+  for (const subtask of allSubtasks) {
+    const impact = await getImplementationImpact(subtask.files);
+    if (impact) {
+      subtask.codeIntelligence = {
+        blastRadius: impact.blastRadius,
+        riskLevel: impact.riskLevel, // 'LOW' | 'MEDIUM' | 'HIGH'
+        references: impact.references,
+      };
+
+      // If HIGH risk, add warning note to subtask
+      if (impact.riskLevel === 'HIGH') {
+        subtask.notes = (subtask.notes || '') +
+          ` ⚠️ HIGH blast radius (${impact.blastRadius} refs) — consider additional review.`;
+      }
+    }
+  }
+}
+```
+
+**If data is available, add to each subtask in implementation.yaml:**
+
+```yaml
+subtasks:
+  - id: '1.1'
+    description: '...'
+    codeIntelligence:
+      blastRadius: 12
+      riskLevel: 'MEDIUM'
+      references:
+        - file: 'src/module-a.js'
+        - file: 'tests/module-a.test.js'
+```
+
+**Risk Level Thresholds:**
+- **LOW:** 0-4 references affected
+- **MEDIUM:** 5-15 references affected
+- **HIGH:** >15 references affected — add risk note to subtask
+
+> **Note:** Risk data is advisory. It enriches the plan but does not block execution.
+
+---
+
 ### Step 7: Validate Plan
 
 ```yaml

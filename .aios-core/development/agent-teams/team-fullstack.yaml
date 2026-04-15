@@ -3,7 +3,7 @@ bundle:
   icon: 🚀
   description: Team capable of full stack, front end only, or service development.
 agents:
-  - aios-orchestrator
+  - aios-master
   - analyst
   - pm
   - ux-expert

@@ -2,7 +2,7 @@
 
 > Task ID: atlas-generate-documentation
 > Agent: Atlas (Design System Builder)
-> Version: 1.0.0
+> Version: 2.0.0
 
 ## Execution Modes
 
@@ -31,43 +31,49 @@
 
 ```yaml
 task: generateDocumentation()
-responsável: Morgan (Strategist)
+responsavel: Atlas (Design System Builder)
 responsavel_type: Agente
-atomic_layer: Template
+atomic_layer: Strategy
 
 **Entrada:**
-- campo: name
+- campo: component_path
   tipo: string
   origem: User Input
-  obrigatório: true
-  validação: Must be non-empty, lowercase, kebab-case
+  obrigatorio: true
+  validacao: Valid path to a React TypeScript component file (.tsx) or directory of components
 
-- campo: options
-  tipo: object
+- campo: output_dir
+  tipo: string
   origem: User Input
-  obrigatório: false
-  validação: Valid JSON object with allowed keys
+  obrigatorio: false
+  validacao: Default docs/components/
 
-- campo: force
+- campo: include_examples
   tipo: boolean
   origem: User Input
-  obrigatório: false
-  validação: Default: false
+  obrigatorio: false
+  validacao: Default true. Generate usage examples for each component
 
-**Saída:**
-- campo: created_file
-  tipo: string
-  destino: File system
+- campo: all
+  tipo: boolean
+  origem: User Input
+  obrigatorio: false
+  validacao: Default false. When true, scan entire components directory
+
+**Saida:**
+- campo: documentation_files
+  tipo: array
+  destino: File system (docs/components/{component}.md per component)
   persistido: true
 
-- campo: validation_report
-  tipo: object
-  destino: Memory
-  persistido: false
+- campo: index_file
+  tipo: string
+  destino: File system (docs/components/index.md)
+  persistido: true
 
-- campo: success
-  tipo: boolean
-  destino: Return value
+- campo: generation_summary
+  tipo: object
+  destino: Console
   persistido: false
 ```
 
@@ -81,12 +87,26 @@ atomic_layer: Template
 
 ```yaml
 pre-conditions:
-  - [ ] Target does not already exist; required inputs provided; permissions granted
+  - [ ] Component source file(s) exist and are valid TypeScript/TSX
     tipo: pre-condition
     blocker: true
-    validação: |
-      Check target does not already exist; required inputs provided; permissions granted
-    error_message: "Pre-condition failed: Target does not already exist; required inputs provided; permissions granted"
+    validacao: |
+      Check specified path exists and contains .tsx files with React component exports
+    error_message: "Pre-condition failed: No valid React TypeScript components found at specified path"
+
+  - [ ] At least one component exports a typed props interface or type
+    tipo: pre-condition
+    blocker: true
+    validacao: |
+      Parse component files and verify at least one exports an interface or type for props
+    error_message: "Pre-condition failed: Components must export typed props for documentation generation"
+
+  - [ ] Output directory writable
+    tipo: pre-condition
+    blocker: true
+    validacao: |
+      Check docs/components/ exists or can be created with write permissions
+    error_message: "Pre-condition failed: Cannot write to output directory"
 ```
 
 ---
@@ -99,12 +119,26 @@ pre-conditions:
 
 ```yaml
 post-conditions:
-  - [ ] Resource created successfully; validation passed; no errors logged
+  - [ ] Documentation markdown file generated for each component
     tipo: post-condition
     blocker: true
-    validação: |
-      Verify resource created successfully; validation passed; no errors logged
-    error_message: "Post-condition failed: Resource created successfully; validation passed; no errors logged"
+    validacao: |
+      Verify a .md file exists in output directory for each processed component
+    error_message: "Post-condition failed: Missing documentation files for one or more components"
+
+  - [ ] Each doc file contains props table matching actual component interface
+    tipo: post-condition
+    blocker: true
+    validacao: |
+      Cross-reference props table entries with exported interface fields for each component
+    error_message: "Post-condition failed: Props table does not match component interfaces"
+
+  - [ ] Pattern library index file generated
+    tipo: post-condition
+    blocker: true
+    validacao: |
+      Verify docs/components/index.md exists with links to all component docs
+    error_message: "Post-condition failed: Index file not generated"
 ```
 
 ---
@@ -117,12 +151,33 @@ post-conditions:
 
 ```yaml
 acceptance-criteria:
-  - [ ] Resource exists and is valid; no duplicate resources created
+  - [ ] Every prop documented with name, type, default value, and description
     tipo: acceptance-criterion
     blocker: true
-    validação: |
-      Assert resource exists and is valid; no duplicate resources created
-    error_message: "Acceptance criterion not met: Resource exists and is valid; no duplicate resources created"
+    validacao: |
+      Assert props table has a row for every field in each component's props interface
+    error_message: "Acceptance criterion not met: Missing prop documentation"
+
+  - [ ] At least 3 usage examples per component (basic, variants, responsive)
+    tipo: acceptance-criterion
+    blocker: true
+    validacao: |
+      Assert each component doc contains at least 3 distinct JSX code examples
+    error_message: "Acceptance criterion not met: Fewer than 3 usage examples"
+
+  - [ ] Accessibility notes section present for each component
+    tipo: acceptance-criterion
+    blocker: true
+    validacao: |
+      Assert each doc has an accessibility section documenting ARIA attributes and keyboard interactions
+    error_message: "Acceptance criterion not met: Missing accessibility notes"
+
+  - [ ] Import statement uses absolute path (@/ prefix)
+    tipo: acceptance-criterion
+    blocker: true
+    validacao: |
+      Assert documented import paths use @/ prefix (Art. VI compliance)
+    error_message: "Acceptance criterion not met: Import examples must use absolute @/ paths"
 ```
 
 ---
@@ -131,13 +186,13 @@ acceptance-criteria:
 
 **External/shared resources used by this task:**
 
-- **Tool:** component-generator
-  - **Purpose:** Generate new components from templates
-  - **Source:** .aios-core/scripts/component-generator.js
-
 - **Tool:** file-system
-  - **Purpose:** File creation and validation
+  - **Purpose:** Read component source files, write documentation output
   - **Source:** Node.js fs module
+
+- **Tool:** typescript-parser
+  - **Purpose:** Extract props interface, type definitions, and TSDoc comments
+  - **Source:** TypeScript compiler API or regex extraction
 
 ---
 
@@ -145,10 +200,10 @@ acceptance-criteria:
 
 **Agent-specific code for this task:**
 
-- **Script:** create-component.js
-  - **Purpose:** Component creation workflow
+- **Script:** generate-docs.js
+  - **Purpose:** Component parsing, props extraction, and markdown generation
   - **Language:** JavaScript
-  - **Location:** .aios-core/scripts/create-component.js
+  - **Location:** .aios-core/scripts/generate-docs.js
 
 ---
 
@@ -158,20 +213,25 @@ acceptance-criteria:
 
 **Common Errors:**
 
-1. **Error:** Resource Already Exists
-   - **Cause:** Target file/resource already exists in system
-   - **Resolution:** Use force flag or choose different name
-   - **Recovery:** Prompt user for alternative name or force overwrite
+1. **Error:** Component File Not Found
+   - **Cause:** Invalid path or file was moved/deleted
+   - **Resolution:** Verify component path and try again
+   - **Recovery:** Search for component by name in project
 
-2. **Error:** Invalid Input
-   - **Cause:** Input name contains invalid characters or format
-   - **Resolution:** Validate input against naming rules (kebab-case, lowercase, no special chars)
-   - **Recovery:** Sanitize input or reject with clear error message
+2. **Error:** No Props Interface Found
+   - **Cause:** Component uses inline types or destructured props without export
+   - **Resolution:** Extract props from function signature
+   - **Recovery:** Generate partial docs with warning about missing types
 
-3. **Error:** Permission Denied
-   - **Cause:** Insufficient permissions to create resource
-   - **Resolution:** Check file system permissions, run with elevated privileges if needed
-   - **Recovery:** Log error, notify user, suggest permission fix
+3. **Error:** Complex Type Resolution
+   - **Cause:** Props use generics, unions, or deeply imported types
+   - **Resolution:** Resolve imported types recursively up to 2 levels
+   - **Recovery:** Document the type reference with link to source file
+
+4. **Error:** TSDoc Comments Missing
+   - **Cause:** Component props have no JSDoc/TSDoc descriptions
+   - **Resolution:** Infer descriptions from prop names and types
+   - **Recovery:** Generate inferred descriptions, flag for manual review
 
 ---
 
@@ -186,7 +246,7 @@ token_usage: ~1,500-5,000 tokens
 ```
 
 **Optimization Notes:**
-- Cache template compilation; minimize data transformations; lazy load resources
+- Single-pass AST parsing per file; template-based markdown output; batch file writes
 
 ---
 
@@ -194,13 +254,14 @@ token_usage: ~1,500-5,000 tokens
 
 ```yaml
 story: N/A
-version: 1.0.0
+version: 2.0.0
 dependencies:
-  - N/A
+  - build-component
 tags:
-  - automation
-  - workflow
-updated_at: 2025-11-17
+  - design-system
+  - documentation
+  - developer-experience
+updated_at: 2026-04-10
 ```
 
 ---
@@ -214,37 +275,101 @@ Generate comprehensive pattern library documentation from built components. Crea
 
 - At least 1 component built
 - Design system setup complete
-- Component .md files exist
+- Component .tsx files exist with exported props interfaces
 
 ## Workflow
 
+### Interactive Elicitation
+
+This task uses interactive elicitation to configure documentation generation.
+
+1. **Select Components**
+   - Single component path or --all for entire directory
+   - Auto-detect component names and atomic levels
+   - Confirm components to document
+
+2. **Configure Output**
+   - Output directory (default: docs/components/)
+   - Include usage examples (default: yes)
+   - Include Storybook links (if Storybook configured)
+
+3. **Review Generated Docs**
+   - Preview props table accuracy
+   - Confirm examples are syntactically valid
+   - Ask for additional notes or caveats
+
 ### Steps
 
-1. **Scan Built Components** - Find all atoms, molecules, organisms
-2. **Parse Component Metadata** - Extract props, types, variants
-3. **Generate Pattern Library Index** - Main navigation page
-4. **Generate Component Pages** - Detailed pages per component
-5. **Generate Usage Examples** - Code snippets and live previews
-6. **Generate Accessibility Guide** - WCAG compliance notes
-7. **Generate Token Reference** - Token usage documentation
-8. **Create Search Index** - Searchable component library
+1. **Scan Built Components**
+   - Find all atoms, molecules, organisms in target path
+   - Parse component names and atomic levels
+   - Sort by atomic level (atoms first, then molecules, then organisms)
+   - Validation: At least 1 component found
+
+2. **Parse Component Metadata**
+   - For each component, extract:
+     - Component name (PascalCase export)
+     - Props interface (all fields with types)
+     - Default values from defaultProps or destructuring defaults
+     - TSDoc comments (if present)
+     - VariantProps from cva (if present)
+   - Validation: Props extracted for each component
+
+3. **Generate Props Table**
+   - Format as markdown table: Prop | Type | Default | Required | Description
+   - Infer descriptions from prop names when TSDoc missing
+   - Mark required props (no ? or default)
+   - Include variant props separately if using cva
+   - Validation: Table covers every exported prop
+
+4. **Generate Usage Examples**
+   - Basic: minimal example with required props only
+   - With Variants: show each variant/size if applicable
+   - Responsive: show in responsive layout context
+   - Use absolute import paths (@/)
+   - Validation: Examples are syntactically valid JSX
+
+5. **Generate Accessibility Guide**
+   - Document ARIA attributes the component sets
+   - List keyboard interactions (Tab, Enter, Space, Escape)
+   - Note screen reader behavior
+   - Reference WCAG criteria met
+   - Validation: Accessibility section complete
+
+6. **Generate Token Reference**
+   - List design tokens used by this component
+   - Show CSS custom property names
+   - Link to token source
+   - Validation: Token usage documented
+
+7. **Generate Pattern Library Index**
+   - Create index.md with navigation links to all component docs
+   - Group by atomic level (Atoms, Molecules, Organisms)
+   - Include component count summary
+   - Validation: Index links all documented components
+
+8. **Create Search-Friendly Metadata**
+   - Add frontmatter to each doc (component name, atomic level, tags)
+   - Enable searchable by component name, prop, or token
+   - Validation: Frontmatter present on all doc files
 
 ## Output
 
-- **index.md**: Pattern library homepage
-- **components/{Component}.md**: Per-component pages
-- **tokens.md**: Token reference guide
-- **accessibility.md**: Accessibility guidelines
-- **getting-started.md**: Setup and usage guide
+- **docs/components/index.md**: Pattern library homepage with navigation
+- **docs/components/{component}.md**: Per-component documentation
+- **docs/components/tokens.md**: Token reference guide (if tokens exist)
+- **docs/components/accessibility.md**: Accessibility guidelines summary
 
 ## Success Criteria
 
-- [ ] All components documented
-- [ ] Props documented with types
-- [ ] Usage examples for each variant
-- [ ] Accessibility notes included
-- [ ] Searchable and navigable
-- [ ] Up-to-date with latest components
+- [ ] All components documented with props tables
+- [ ] Props documented with types, defaults, and descriptions
+- [ ] At least 3 usage examples per component
+- [ ] Accessibility notes included per component
+- [ ] Import paths use absolute @/ prefix
+- [ ] Pattern library index links all components
+- [ ] Searchable and navigable documentation
+- [ ] Up-to-date with latest component source
 
 ## Example
 
@@ -254,31 +379,31 @@ Generate comprehensive pattern library documentation from built components. Crea
 
 Output:
 ```
-📚 Atlas: Generating pattern library documentation...
+Atlas: Generating pattern library documentation...
 
 Scanning components:
-  ✓ 8 atoms found
-  ✓ 5 molecules found
-  ✓ 2 organisms found
+  8 atoms found
+  5 molecules found
+  2 organisms found
 
 Generating documentation:
-  ✓ index.md (pattern library home)
-  ✓ components/Button.md
-  ✓ components/Input.md
-  ✓ components/FormField.md
+  index.md (pattern library home)
+  components/Button.md (5 props, 3 variants)
+  components/Input.md (8 props)
+  components/FormField.md (4 props, composed from Label + Input)
   ...
-  ✓ tokens.md (token reference)
-  ✓ accessibility.md (WCAG guide)
-  ✓ getting-started.md
+  tokens.md (token reference)
+  accessibility.md (WCAG guide)
 
-✅ Pattern library: design-system/docs/
+Documentation generated: docs/components/ (15 files)
 
 Atlas says: "Documentation is code. Keep it fresh."
 ```
 
 ## Notes
 
-- Auto-generates from TypeScript types
-- Updates when components change
+- Auto-generates from TypeScript types and TSDoc comments
+- Re-run when components change to keep docs in sync
 - Includes live Storybook links (if enabled)
 - Searchable by component name, prop, or token
+- Atlas recommends: Run *generate-docs after every *build or *compose-molecule

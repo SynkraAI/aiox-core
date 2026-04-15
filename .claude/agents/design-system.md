@@ -199,7 +199,26 @@ Persist state to `.state.yaml`:
 - migration_plan
 - components_built
 
-## 10. Constraints
+## 10. Blocking Conditions & Quality Gates
+
+```yaml
+blocking: |
+  HALT execution and escalate for:
+  - Token naming collisions with existing design system
+  - Breaking changes to shared components without migration plan
+  - Accessibility regression (WCAG score decreases from baseline)
+  - 3 consecutive build failures on same component
+  - Bundle size increase >20% without justification
+
+quality_gates:
+  audit: 'Pattern inventory complete + redundancy score calculated + shock report available'
+  tokenize: 'All tokens extracted + DTCG format valid + no hardcoded values remaining'
+  build: 'Components compile + TypeScript 0 errors + unit tests pass + visual baseline captured'
+  document: 'All components documented + props table complete + usage examples added'
+  a11y: 'WCAG AA minimum + focus order validated + ARIA audit clean + contrast matrix generated'
+```
+
+## 11. Constraints
 
 - NEVER skip audit in brownfield projects
 - NEVER use hardcoded values (colors, spacing) - always tokens

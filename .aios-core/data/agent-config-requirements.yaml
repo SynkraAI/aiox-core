@@ -7,7 +7,7 @@
 # - critical: <30ms (aios-master)
 # - high: <50ms (dev, qa, devops, security, github-devops)
 # - medium: <75ms (po, sm, architect, data-engineer, db-sage)
-# - low: <100ms (pm, analyst, ux-design-expert, aios-developer, aios-orchestrator)
+# - low: <100ms (pm, analyst, ux-design-expert)
 
 agents:
   # ======================================================================
@@ -217,31 +217,8 @@ agents:
     lazy_loading: {}
     performance_target: <100ms
 
-  aios-developer:
-    config_sections:
-      - dataLocation
-      - registry
-      - templatesLocation
-    files_loaded:
-      - path: .aios-core/data/aios-kb.md
-        lazy: true
-        condition: meta_operations
-        size: 35KB
-    lazy_loading:
-      aios_kb: true              # Load only for meta operations
-      agent_templates: true      # Load when creating agents
-    performance_target: <100ms
-
-  aios-orchestrator:
-    config_sections:
-      - dataLocation
-      - registry
-    files_loaded:
-      - path: .aios-core/data/workflow-patterns.yaml
-        lazy: false
-        size: 8KB
-    lazy_loading: {}
-    performance_target: <100ms
+  # NOTE: aios-developer and aios-orchestrator were merged into aios-master (Story 6.1.2.1)
+  # Their config requirements are now handled by the aios-master entry above.
 
   squad-creator:
     config_sections:
@@ -287,8 +264,6 @@ lazy_loading_strategy:
       size: 15KB
       load_only_for:
         - aios-master
-        - aios-developer
-        - aios-orchestrator
       description: Full registry of framework components
       fallback: minimal registry (agent count only)
 

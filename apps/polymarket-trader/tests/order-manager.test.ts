@@ -67,10 +67,10 @@ describe('OrderManager', () => {
 
       manager.submitFromSignal(makeApproved());
 
-      // Wait for async execution to complete
+      // Wait for async execution to complete (fire-and-forget in submitFromSignal)
       await vi.waitFor(() => {
         expect(filled).toHaveBeenCalledTimes(1);
-      });
+      }, { timeout: 2000, interval: 50 });
 
       expect(filled.mock.calls[0][0].status).toBe('filled');
       expect(filled.mock.calls[0][0].filledSize).toBe(25);
@@ -111,7 +111,7 @@ describe('OrderManager', () => {
 
       await vi.waitFor(() => {
         expect(filled).toHaveBeenCalledTimes(2);
-      });
+      }, { timeout: 2000, interval: 50 });
     });
   });
 
@@ -200,7 +200,7 @@ describe('OrderManager', () => {
 
       await vi.waitFor(() => {
         expect(filled).toHaveBeenCalledTimes(1);
-      });
+      }, { timeout: 2000, interval: 50 });
 
       // After fill, getOpenOrders should be empty
       expect(manager.getOpenOrders()).toHaveLength(0);

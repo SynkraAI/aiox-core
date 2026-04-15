@@ -1,0 +1,244 @@
+# Jarvis Mind Clone Mapping
+# Maps AIOS agents to their designated Mind Clone advisors
+# Used by: jarvis-integration.md rule, agent workflows, consultation routing
+#
+# Structure:
+#   agent_id:
+#     primary: [always consult these]
+#     secondary: [consult for complex decisions]
+#
+# Project overrides add to (not replace) agent defaults
+
+version: "2.1.0"
+updated: "2026-04-02"
+
+# ─── Agent Default Advisors ─────────────────────────
+agents:
+  architect:
+    primary:
+      - martin-fowler       # Software architecture, patterns
+      - werner-vogels        # Distributed systems, cloud
+      - martin-kleppmann     # Data architecture, event-driven, CRDTs (promoted)
+      - sam-newman           # Microservices, API design, service decomposition (promoted)
+      - kelsey-hightower     # Cloud-native architecture, K8s (promoted)
+    secondary:
+      - mitchell-hashimoto   # Infrastructure-as-code
+    dedicated_members:        # Squad expansion 02/Abr/2026
+      - will-larson          # Engineering strategy, scaling, migrations
+      - mitchell-hashimoto   # Infrastructure architecture, IaC, secrets
+      - harrison-chase       # AI/agent architecture, LangChain, multi-agent
+      - eliyahu-goldratt     # System constraints, flow, bottleneck analysis
+
+  dev:
+    primary:
+      - sarah-drasner        # DX, frontend, engineering
+      - simon-willison       # AI tooling, pragmatic dev
+    secondary:
+      - andrej-karpathy      # AI/ML implementation
+      - martin-fowler        # Refactoring patterns
+      - guillermo-rauch      # Next.js architecture, edge, DX
+      - ryan-dahl            # Node.js runtime, event-driven
+      - matt-pocock          # Advanced TypeScript, generics
+      - kent-c-dodds         # React testing, component design
+
+  pm:
+    primary:
+      - eric-ries            # Lean startup, validation
+      - april-dunford        # Positioning, GTM
+    secondary:
+      - clayton-christensen  # Innovation, disruption
+      - mariana-mazzucato    # Mission-driven economics
+      - nicole-forsgren      # DORA metrics, eng productivity
+
+  analyst:
+    primary:
+      - cassie-kozyrkov      # Decision science, analytics
+      - aswath-damodaran     # Valuation, financial modeling
+    secondary:
+      - scott-galloway       # Market dynamics, tech trends
+      - rand-fishkin         # Marketing analytics
+
+  po:
+    primary:
+      - nir-eyal             # Engagement, habit formation
+      - julie-zhuo           # Product design, UX
+    secondary:
+      - don-norman           # Human-centered design
+      - bj-fogg              # Behavior design
+
+  devops:
+    primary:
+      - gene-kim             # DevOps, flow, reliability
+      - kelsey-hightower     # Infrastructure, cloud-native
+    secondary:
+      - mikko-hypponen       # Security
+      - bruce-schneier       # Crypto, security architecture
+      - mitchell-hashimoto   # Terraform, IaC, secrets mgmt
+      - nicole-forsgren      # DORA metrics, delivery performance
+      - liran-tal            # Node.js security, supply chain
+
+  data-engineer:
+    primary:
+      - paul-copplestone     # Supabase platform, RLS, Auth
+      - craig-kerstiens      # PostgreSQL at scale, extensions
+    secondary:
+      - martin-kleppmann     # Data-intensive apps, distributed data
+      - markus-winand        # SQL performance, indexing
+      - chip-huyen           # ML systems, data pipelines
+      - martin-fowler        # Data modeling patterns
+
+  qa:
+    primary:
+      - gene-kim             # Quality, flow, reliability
+      - kent-c-dodds         # React testing, testing philosophy
+      - nicole-forsgren      # DORA/SPACE metrics, quality culture (promoted)
+      - liran-tal            # Node.js security, supply chain, OWASP (promoted)
+    secondary:
+      - martin-fowler        # Testing patterns
+      - bruce-schneier       # Security testing
+    dedicated_members:        # Squad expansion 02/Abr/2026
+      - troy-hunt            # Security testing lead, web security, HIBP
+      - daniel-miessler      # AI security, prompt injection, automation
+      - charity-majors       # Observability, testing in production
+      - vitaly-friedman      # Accessibility testing, WCAG, cross-browser
+
+  sm:
+    primary:
+      - will-larson          # Engineering management
+      - patty-mccord         # Culture, team dynamics
+    secondary:
+      - laszlo-bock          # People operations
+      - josh-bersin          # Workforce strategy
+      - nicole-forsgren      # Team performance metrics
+
+  ux-design-expert:
+    primary:
+      - don-norman           # Human-centered design
+      - dieter-rams          # Simplicity, functionalism
+    secondary:
+      - john-maeda           # Design + technology
+      - vitaly-friedman      # Web UX patterns
+      - guillermo-rauch      # DX-first, frontend infrastructure
+
+  squad-creator:
+    primary:
+      - will-larson          # Engineering organization design
+      - patty-mccord         # Team building and culture
+    secondary: []
+
+  sop-extractor:
+    primary:
+      - gene-kim             # Process optimization, DevOps practices
+      - eric-ries            # Lean methodology, process innovation
+    secondary: []
+
+  design-lead:
+    primary:
+      - don-norman           # Human-centered design
+      - john-maeda           # Design in technology
+      - dieter-rams          # Design principles, minimalism
+    secondary: []
+
+  design-systems-engineer:
+    primary:
+      - sarah-drasner        # Frontend architecture, design systems
+      - dieter-rams          # Systematic design principles
+    secondary: []
+
+# ─── Project-Specific Overrides ─────────────────────
+# These experts are ADDED to agent defaults when working on these projects
+
+projects:
+  tocks:
+    description: "High-ticket luxury furniture (R$33k avg)"
+    additional_experts:
+      - alex-hormozi         # Offer creation, high-ticket
+      - jeb-blount           # Sales methodology
+      - morgan-housel        # Pricing psychology
+      - nick-mehta           # Customer success
+    priority_topics:
+      - pricing strategy
+      - sales funnel
+      - customer experience
+      - luxury positioning
+
+  serenity:
+    description: "Mental health AI platform (JACI)"
+    additional_experts:
+      - alison-darcy         # Digital therapy, CBT
+      - bj-fogg              # Behavior change
+      - rafael-calvo         # Wellbeing technology
+      - eduardo-bunge        # Clinical psychology
+      - acacia-parks         # Positive psychology
+    priority_topics:
+      - therapeutic efficacy
+      - clinical safety
+      - user engagement
+      - regulatory compliance
+
+  low-ticket-10k:
+    description: "Low ticket R$37 funnel for 10k+/month"
+    additional_experts:
+      - alex-hormozi         # Offer creation
+      - guillaume-moubeche   # Growth, outbound
+      - patrick-campbell      # SaaS pricing
+      - peep-laja            # Conversion optimization
+      - oli-gardner          # Landing pages
+    priority_topics:
+      - funnel optimization
+      - conversion rates
+      - offer design
+      - traffic strategy
+
+  bretda:
+    description: "Luxury billiard tables (dark luxury brand)"
+    additional_experts:
+      - alex-hormozi         # Offer, high-ticket
+      - dieter-rams          # Product design aesthetic
+      - rand-fishkin         # SEO, brand marketing
+      - donald-miller        # Brand storytelling
+    priority_topics:
+      - luxury branding
+      - visual identity
+      - high-ticket sales
+      - content strategy
+
+  aiox-corporation:
+    description: "Autonomous AI agent corporation"
+    additional_experts:
+      - will-larson          # Org design, engineering
+      - patty-mccord         # Culture at scale
+      - eliyahu-goldratt     # Constraints, flow
+      - peter-diamandis      # Exponential organizations
+    priority_topics:
+      - agent governance
+      - workflow optimization
+      - scaling architecture
+      - autonomous operations
+
+  polymarket-trader:
+    description: "Autonomous prediction market trading system"
+    additional_experts:
+      # Tier 1 — Forecasting & market design
+      - philip-tetlock       # Superforecasting, calibration, Brier scores
+      - nate-silver          # Statistical modeling, signal vs noise, market efficiency
+      - robin-hanson         # Market design, futarchy, contrarian economics
+      # Tier 2 — Trading operations
+      - domer-polymarket     # #1 Polymarket trader, volume strategy
+      - scott-alexander      # Bayesian reasoning, calibration, rationality
+      - luana-lopes-lara     # Kalshi co-founder, regulated markets, CFTC
+      # Tier 3 — Specialized intelligence
+      - theo-polymarket      # Information arbitrage, private research, $85M whale
+      - gcr-crypto           # Crypto contrarian, on-chain analysis, whale tracking
+      - danijel-overtime     # DeFi sports betting, AMM design, on-chain settlement
+      # Supporting from existing clones
+      - aswath-damodaran     # Risk-adjusted returns, valuation
+      - morgan-housel        # Behavioral finance, market psychology
+      - cassie-kozyrkov      # Decision science, probability calibration
+    priority_topics:
+      - prediction accuracy
+      - information arbitrage
+      - market efficiency
+      - risk management
+      - multi-platform strategy
+      - edge detection

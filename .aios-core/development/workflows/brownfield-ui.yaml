@@ -2,10 +2,10 @@ workflow:
   id: brownfield-ui
   name: Brownfield UI/Frontend Enhancement
   description: >-
-    Agent workflow for enhancing existing frontend applications with new features,
-    modernization, or design improvements. Handles existing UI analysis and safe integration.
+    Linear agent workflow for enhancing existing frontend applications with new features,
+    modernization, or design improvements. Each agent appears once in a strictly sequential pipeline.
   type: brownfield
-  version: "1.0"
+  version: "2.0"
   project_types:
     - ui-modernization
     - framework-migration
@@ -17,120 +17,126 @@ workflow:
     confirmation_required: true
 
   phases:
-    - phase_1: UI Analysis & Planning
-    - phase_2: Document Sharding
-    - phase_3: Development Cycle
+    - phase_1: Discovery
+    - phase_2: Planning
+    - phase_3: Validation
+    - phase_4: Execution
+    - phase_5: Retrospective
 
   sequence:
+    # ─── Phase 1: Discovery ───────────────────────────────────────────────
     - phase: 1
-      name: UI Analysis & Planning
-      description: "Analyze existing UI and create planning artifacts"
+      name: Discovery
+      description: "Analyze existing UI architecture and identify improvement areas"
+      gate:
+        condition: "Architecture analysis document exists with component inventory and improvement recommendations"
+        on_fail: "HALT — architect must complete analysis before planning can begin"
 
     - id: architect-ui-analysis
       step: ui_analysis
       agent: architect
       action: analyze existing project and use task document-project
       creates: multiple documents per the document-project template
+      artifacts:
+        - existing-ui-analysis.md
+        - component-inventory.md
+        - improvement-recommendations.md
       duration_estimate: "30-60 min"
-      notes: "Review existing frontend application, user feedback, analytics data, and identify improvement areas."
+      notes: "Review existing frontend application, user feedback, analytics data. Identify improvement areas, component patterns, and technical debt. This is the ONLY architect step in the workflow."
+
+    # ─── Phase 2: Planning ────────────────────────────────────────────────
+    - phase: 2
+      name: Planning
+      description: "Create PRD and frontend specification based on architecture analysis"
+      gate:
+        condition: "prd.md and front-end-spec.md exist with complete acceptance criteria and component specs"
+        on_fail: "HALT — both documents must be finalized before validation"
 
     - id: pm-create-prd
       agent: pm
       creates: prd.md
       uses: brownfield-prd-tmpl
+      artifacts:
+        - prd.md
       duration_estimate: "30-60 min"
-      requires: existing_ui_analysis
+      requires: existing-ui-analysis.md
       notes: "Creates comprehensive PRD focused on UI enhancement with existing system analysis. SAVE OUTPUT: Copy final prd.md to your project's docs/ folder."
 
     - id: ux-create-frontend-spec
       agent: ux-design-expert
       creates: front-end-spec.md
       uses: front-end-spec-tmpl
+      artifacts:
+        - front-end-spec.md
+        - existing-pattern-audit.md
       duration_estimate: "30-45 min"
       requires: prd.md
-      notes: "Creates UI/UX specification that integrates with existing design patterns. SAVE OUTPUT: Copy final front-end-spec.md to your project's docs/ folder."
+      notes: "Creates UI/UX specification AND audits existing design patterns for reuse. Integrates with existing patterns identified by architect. SAVE OUTPUT: Copy final front-end-spec.md to your project's docs/ folder."
 
-    - id: architect-create-architecture
-      agent: architect
-      creates: architecture.md
-      uses: brownfield-architecture-tmpl
-      duration_estimate: "30-60 min"
-      requires:
-        - prd.md
-        - front-end-spec.md
-      notes: "Creates frontend architecture with component integration strategy and migration planning. SAVE OUTPUT: Copy final architecture.md to your project's docs/ folder."
+    # ─── Phase 3: Validation ──────────────────────────────────────────────
+    - phase: 3
+      name: Validation
+      description: "PO validates all artifacts, shards into development-ready stories"
+      gate:
+        condition: "All artifacts pass PO master checklist AND sharded docs created"
+        on_fail: "HALT — PO must resolve all issues before execution begins"
 
     - id: po-validate-artifacts
       agent: po
       validates: all_artifacts
       uses: po-master-checklist
+      artifacts:
+        - validation-report.md
       duration_estimate: "15-30 min"
-      notes: "Validates all documents for UI integration safety and design consistency. May require updates to any document."
-
-    - id: po-delegate-fixes
-      agent: po
-      action: delegate_fixes
-      delegates_to: [analyst, pm, architect, ux-design-expert]
-      updates: any_flagged_documents
-      duration_estimate: "15-30 min"
-      condition: po_checklist_issues
-      notes: "If PO finds issues, PO delegates fixes to the relevant agent and re-validates updated documents in docs/ folder."
-
-    - phase: 2
-      name: Document Sharding
-      description: "Break down PRD and architecture into development-ready chunks"
+      notes: "Validates all documents for UI integration safety and design consistency. Delegates fixes to relevant agent if issues found, then re-validates."
 
     - id: po-shard-documents
       agent: po
       action: shard_documents
       creates: sharded_docs
+      artifacts:
+        - docs/prd/ (sharded content)
+        - docs/architecture/ (sharded content)
       duration_estimate: "15-30 min"
-      requires:  # all validated artifacts must be saved in project docs/ folder
+      requires:
         - prd.md
         - front-end-spec.md
-        - architecture.md
       notes: |
         Shard documents for IDE development:
         - Option A: Use PO agent to shard: @po then ask to shard docs/prd.md
         - Option B: Manual: Drag shard-doc task + docs/prd.md into chat
         - Creates docs/prd/ and docs/architecture/ folders with sharded content
 
-    - phase: 3
-      name: Development Cycle
+    # ─── Phase 4: Execution ───────────────────────────────────────────────
+    - phase: 4
+      name: Execution
       description: "Iterative story implementation with QA review"
+      gate:
+        condition: "All stories implemented, QA reviewed, zero critical issues open"
+        on_fail: "Continue story cycle until all stories complete"
 
     - id: sm-create-story
       agent: sm
       action: create_story
       creates: story.md
+      artifacts:
+        - story.md
       duration_estimate: "15-30 min"
       requires: sharded_docs
       repeats: for_each_epic
       notes: |
         Story creation cycle:
-        - SM Agent (New Chat): @sm → *create
+        - SM Agent (New Chat): @sm -> *create
         - Creates next story from sharded docs
         - Story starts in "Draft" status
-
-    - id: pm-review-draft-story
-      agent: pm
-      alternative_agent: analyst
-      action: review_draft_story
-      updates: story.md
-      duration_estimate: "10-20 min"
-      requires: story.md
-      optional: true
-      condition: user_wants_story_review
-      notes: |
-        OPTIONAL: Review and approve draft story
-        - NOTE: story-review task coming soon
-        - Review story completeness and alignment
-        - Update story status: Draft → Approved
 
     - id: dev-implement-story
       agent: dev
       action: implement_story
       creates: implementation_files
+      artifacts:
+        - implementation source files
+        - updated story file list
       duration_estimate: "1-4 hours"
       requires: story.md
       notes: |
@@ -143,47 +149,44 @@ workflow:
       agent: qa
       action: review_implementation
       updates: implementation_files
+      artifacts:
+        - qa-review-checklist.md
       duration_estimate: "20-40 min"
       requires: implementation_files
-      optional: true
       notes: |
-        OPTIONAL: QA Agent (New Chat): @qa → review-story
+        QA Agent (New Chat): @qa -> review-story
         - Senior dev review with refactoring ability
         - Fixes small issues directly
         - Leaves checklist for remaining items
-        - Updates story status (Review → Done or stays Review)
-
-    - id: dev-address-qa-feedback
-      agent: dev
-      action: address_qa_feedback
-      updates: implementation_files
-      requires: implementation_files
-      duration_estimate: "30-60 min"
-      condition: qa_left_unchecked_items
-      notes: |
-        If QA left unchecked items:
-        - Dev Agent (New Chat): Address remaining items
-        - Return to QA for final approval
+        - Updates story status (Review -> Done or stays Review)
 
     - meta: repeat
-      target_steps: [sm-create-story, pm-review-draft-story, dev-implement-story, qa-review-implementation, dev-address-qa-feedback]
+      target_steps: [sm-create-story, dev-implement-story, qa-review-implementation]
       condition: stories_remaining
       notes: |
-        Repeat story cycle (SM → Dev → QA) for all epic stories
+        Repeat story cycle (SM -> Dev -> QA) for all epic stories
         Continue until all stories in PRD are complete
+
+    # ─── Phase 5: Retrospective ──────────────────────────────────────────
+    - phase: 5
+      name: Retrospective
+      description: "Sprint retrospective after epic completion"
+      gate:
+        condition: "Retrospective document created with learnings and improvement actions"
+        on_fail: "Document learnings before closing the epic"
 
     - id: po-epic-retrospective
       agent: po
       action: epic_retrospective
       creates: epic-retrospective.md
+      artifacts:
+        - epic-retrospective.md
       duration_estimate: "15-30 min"
-      condition: epic_complete
-      optional: true
       notes: |
-        OPTIONAL: After epic completion
-        - NOTE: epic-retrospective task coming soon
+        After epic completion:
         - Validate epic was completed correctly
         - Document learnings and improvements
+        - Capture metrics for future estimation
 
     - meta: end
       action: project_complete
@@ -196,44 +199,30 @@ workflow:
   flow_diagram: |
     ```mermaid
     graph TD
-        A[Start: UI Enhancement] --> B[architect: analyze existing UI]
-        B --> C[pm: prd.md]
-        C --> D[ux-design-expert: front-end-spec.md]
-        D --> E[architect: architecture.md]
-        E --> F[po: validate with po-master-checklist]
-        F --> G{PO finds issues?}
-        G -->|Yes| H[po: delegate fixes to relevant agent]
-        G -->|No| I[po: shard documents]
-        H --> F
+        A[Start: UI Enhancement] --> B[Phase 1: Discovery]
+        B --> B1[architect: analyze existing UI]
+        B1 --> C[Phase 2: Planning]
+        C --> C1[pm: prd.md]
+        C1 --> C2[ux-design-expert: front-end-spec.md + pattern audit]
+        C2 --> D[Phase 3: Validation]
+        D --> D1[po: validate with po-master-checklist]
+        D1 --> D2[po: shard documents]
+        D2 --> E[Phase 4: Execution]
+        E --> E1[sm: create story]
+        E1 --> E2[dev: implement story]
+        E2 --> E3[qa: review implementation]
+        E3 --> F{More stories?}
+        F -->|Yes| E1
+        F -->|No| G[Phase 5: Retrospective]
+        G --> G1[po: epic retrospective]
+        G1 --> H[Project Complete]
 
-        I --> J[sm: create story]
-        J --> K{Review draft story?}
-        K -->|Yes| L[pm/analyst: review & approve story]
-        K -->|No| M[dev: implement story]
-        L --> M
-        M --> N{QA review?}
-        N -->|Yes| O[qa: review implementation]
-        N -->|No| P{More stories?}
-        O --> Q{QA found issues?}
-        Q -->|Yes| R[dev: address QA feedback]
-        Q -->|No| P
-        R --> O
-        P -->|Yes| J
-        P -->|No| S{Epic retrospective?}
-        S -->|Yes| T[po: epic retrospective]
-        S -->|No| U[Project Complete]
-        T --> U
-
-        style U fill:#90EE90
-        style I fill:#ADD8E6
-        style J fill:#ADD8E6
-        style M fill:#ADD8E6
+        style H fill:#90EE90
+        style B fill:#E6E6FA
         style C fill:#FFE4B5
-        style D fill:#FFE4B5
-        style E fill:#FFE4B5
-        style L fill:#F0E68C
-        style O fill:#F0E68C
-        style T fill:#F0E68C
+        style D fill:#ADD8E6
+        style E fill:#ADD8E6
+        style G fill:#F0E68C
     ```
 
   decision_guidance:
@@ -251,8 +240,7 @@ workflow:
 
   handoff_prompts:
     architect_to_pm: "UI analysis complete. Create comprehensive PRD with UI integration strategy."
-    pm_to_ux: "PRD ready. Save it as docs/prd.md, then create the UI/UX specification."
-    ux_to_architect: "UI/UX spec complete. Save it as docs/front-end-spec.md, then create the frontend architecture."
-    architect_to_po: "Architecture complete. Save it as docs/architecture.md. Please validate all artifacts for UI integration safety."
-    po_issues: "PO found issues with [document]. Please return to [agent] to fix and re-save the updated document."
+    pm_to_ux: "PRD ready. Save it as docs/prd.md, then create the UI/UX specification and audit existing patterns."
+    ux_to_po: "Front-end spec and pattern audit complete. Save as docs/front-end-spec.md. Please validate all artifacts."
+    po_to_sm: "All artifacts validated and sharded. Begin story creation from sharded docs."
     complete: "All planning artifacts validated and saved in docs/ folder. Move to IDE environment to begin development."

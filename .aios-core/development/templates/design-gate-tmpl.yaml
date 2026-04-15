@@ -1,0 +1,69 @@
+# Design Gate Template
+# Used by quality reviewers to evaluate design deliverables
+# Reference: design-dod-checklist.md
+#
+# Usage: On design review, the reviewer populates this template.
+#        Gate decision determines whether deliverable proceeds to next phase.
+#
+# Applies to: @ux-design-expert, @design-system (Brad Frost)
+
+gate_id: ''                   # Unique gate ID (e.g., DG-001)
+reviewed_by: ''               # Agent or reviewer ID (e.g., qa, ux-design-expert)
+reviewed_at: ''               # ISO 8601 (e.g., 2026-04-10T14:00:00Z)
+story_id: ''                  # Story ID (e.g., TOK-5)
+deliverable_type: ''          # wireframe | spec | tokens | component | full-design
+
+sections:
+  research:
+    status: ''                # PASS | NEEDS_WORK | SKIP
+    notes: ''
+    user_needs_documented: false
+    competitive_audit_done: false
+    constraints_identified: false
+
+  design_specs:
+    status: ''                # PASS | NEEDS_WORK | SKIP
+    notes: ''
+    specs_saved: false
+    responsive_breakpoints_covered: false
+    interaction_states_documented: false
+    dark_light_addressed: false
+
+  design_system:
+    status: ''                # PASS | NEEDS_WORK | SKIP
+    notes: ''
+    tokens_used: false
+    atomic_hierarchy_correct: false
+    props_interface_defined: false
+    max_100_lines: false
+
+  accessibility:
+    status: ''                # PASS | NEEDS_WORK (blocking)
+    notes: ''
+    contrast_verified: false
+    keyboard_accessible: false
+    focus_visible: false
+    aria_labels: false
+    reduced_motion: false
+    heading_hierarchy: false
+
+  quality:
+    status: ''                # PASS | NEEDS_WORK | SKIP
+    notes: ''
+    typescript_clean: false
+    no_dead_code: false
+    pattern_consolidation: ''  # Percentage (e.g., "85%") or "N/A" for greenfield
+    bundle_impact: ''          # e.g., "+2.3kB gzipped" or "no impact"
+    cross_browser_checked: false
+
+  handoff:
+    status: ''                # PASS | NEEDS_WORK | SKIP
+    notes: ''
+    state_yaml_updated: false
+    file_list_maintained: false
+    handoff_artifact_created: false
+    next_step_identified: false
+
+gate_decision: ''             # APPROVED | NEEDS_WORK | REJECTED
+blocking_issues: []           # List of issues preventing approval
+recommendations: []           # Non-blocking suggestions for improvement

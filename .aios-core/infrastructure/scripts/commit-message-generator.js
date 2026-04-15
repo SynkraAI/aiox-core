@@ -598,7 +598,7 @@ class CommitMessageGenerator {
       footer.push(`Reviewed-by: ${metadata.reviewedBy}`);
     }
     
-    footer.push('Generated-by: aios-developer meta-agent');
+    footer.push('Generated-by: aios-master meta-agent');
     
     if (footer.length > 0) {
       message += '\n\n' + footer.join('\n');
@@ -654,7 +654,7 @@ class CommitMessageGenerator {
       }
     }
     
-    message += '\n\nGenerated-by: aios-developer meta-agent';
+    message += '\n\nGenerated-by: aios-master meta-agent';
     
     return {
       message,

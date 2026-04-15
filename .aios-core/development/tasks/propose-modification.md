@@ -447,7 +447,7 @@ class ProposeModificationTask {
       assignees: config.assignees,
       linkedIssues: config.linkedIssues,
       metadata: {
-        createdBy: process.env.USER || 'aios-developer',
+        createdBy: process.env.USER || 'aios-master',
         createdAt: new Date().toISOString(),
         lastModified: new Date().toISOString(),
         version: 1
