@@ -311,6 +311,18 @@ dependencies:
   tools:
     - 21st-dev-magic # UI component generation and design system
     - browser # Test web applications and debug UI
+    # Google Stitch MCP — AI UI Prototyping
+    - stitch # Generate interactive HTML/CSS/JS prototypes from prompts — use during wireframe/prototype phases
+    # Nano Banana 2 MCP — AI Image Generation (Gemini 3.1 Flash)
+    - generate_image # Create hero images, mockups, visual concepts as design references
+    - edit_image # Modify/iterate on generated visuals
+    - continue_editing # Refine last generated image
+    - get_last_image_info # Retrieve path/size of last generated image
+    # UI/UX Pro Max Skill — Design Intelligence (67 styles, 161 palettes, 57 fonts, 99 UX guidelines)
+    # Search: python3 .claude/skills/ui-ux-pro-max/src/ui-ux-pro-max/scripts/search.py "{query}" --domain {domain}
+    # Domains: product, style, typography, color, landing, chart, ux | Stacks: --stack nextjs | shadcn
+    # Design System: add --design-system -p "{Project}" for full auto-generation
+    - ui-ux-pro-max # Data-backed design decisions — use before any style/palette/font choice
 
 workflow:
   complete_ux_to_build:
