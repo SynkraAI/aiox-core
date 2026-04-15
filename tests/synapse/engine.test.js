@@ -109,9 +109,21 @@ jest.mock('../../.aiox-core/core/synapse/memory/memory-bridge', () => ({
 // Imports (after mocks)
 // ---------------------------------------------------------------------------
 
-const { SynapseEngine, PipelineMetrics, PIPELINE_TIMEOUT_MS } = require('../../.aiox-core/core/synapse/engine');
-const contextTracker = require('../../.aiox-core/core/synapse/context/context-tracker');
-const formatter = require('../../.aiox-core/core/synapse/output/formatter');
+let SynapseEngine;
+let PipelineMetrics;
+let PIPELINE_TIMEOUT_MS;
+let contextTracker;
+let formatter;
+
+function loadEngineModules() {
+  jest.resetModules();
+
+  jest.isolateModules(() => {
+    ({ SynapseEngine, PipelineMetrics, PIPELINE_TIMEOUT_MS } = require('../../.aiox-core/core/synapse/engine'));
+    contextTracker = require('../../.aiox-core/core/synapse/context/context-tracker');
+    formatter = require('../../.aiox-core/core/synapse/output/formatter');
+  });
+}
 
 // =============================================================================
 // PipelineMetrics
@@ -121,6 +133,7 @@ describe('PipelineMetrics', () => {
   let metrics;
 
   beforeEach(() => {
+    loadEngineModules();
     metrics = new PipelineMetrics();
   });
 
@@ -212,6 +225,7 @@ describe('SynapseEngine', () => {
   let engine;
 
   beforeEach(() => {
+    loadEngineModules();
     jest.clearAllMocks();
 
     // Default mocks: FRESH bracket with L0, L1, L2, L7
@@ -352,11 +366,34 @@ describe('SynapseEngine', () => {
       expect(result.xml).toBe('');
     });
 
-    test('should return empty when getActiveLayers returns null', async () => {
-      contextTracker.getActiveLayers.mockReturnValue(null);
-      const result = await engine.process('test', {});
-      expect(result.xml).toBe('');
-      expect(result.metrics.total_ms).toBeGreaterThanOrEqual(0);
+    test('should return empty when getActiveLayers returns null in legacy mode', async () => {
+      const originalLegacyMode = process.env.SYNAPSE_LEGACY_MODE;
+
+      try {
+        process.env.SYNAPSE_LEGACY_MODE = 'true';
+        loadEngineModules();
+
+        contextTracker.estimateContextPercent.mockReturnValue(85);
+        contextTracker.calculateBracket.mockReturnValue('FRESH');
+        contextTracker.getActiveLayers.mockReturnValue(null);
+        contextTracker.getTokenBudget.mockReturnValue(800);
+        contextTracker.needsMemoryHints.mockReturnValue(false);
+        contextTracker.needsHandoffWarning.mockReturnValue(false);
+
+        const warnSpy = jest.spyOn(console, 'warn').mockImplementation();
+        const legacyEngine = new SynapseEngine('/fake/.synapse', { manifest: {} });
+        warnSpy.mockRestore();
+
+        const result = await legacyEngine.process('test', {});
+        expect(result.xml).toBe('');
+        expect(result.metrics.total_ms).toBeGreaterThanOrEqual(0);
+      } finally {
+        if (originalLegacyMode === undefined) {
+          delete process.env.SYNAPSE_LEGACY_MODE;
+        } else {
+          process.env.SYNAPSE_LEGACY_MODE = originalLegacyMode;
+        }
+      }
     });
 
     test('should handle session without prompt_count', async () => {

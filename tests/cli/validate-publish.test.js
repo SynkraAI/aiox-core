@@ -40,6 +40,11 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
       expect(scriptSource).toContain('git submodule update --init pro');
     });
 
+    test('script supports enforcing submodule presence in CI publish jobs', () => {
+      expect(scriptSource).toContain("AIOX_ENFORCE_PUBLISH_SUBMODULES");
+      expect(scriptSource).toContain("IS_CI && !ENFORCE_SUBMODULES");
+    });
+
     test('script exits with code 1 on failure', () => {
       expect(scriptSource).toContain('process.exit(1)');
     });
@@ -89,6 +94,13 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
       const workflow = fs.readFileSync(workflowPath, 'utf8');
       expect(workflow).toContain('Publish safety gate (INS-4.10)');
       expect(workflow).toContain('node bin/utils/validate-publish.js');
+    });
+
+    test('npm-publish.yml checks out submodules for publish jobs', () => {
+      const workflowPath = path.join(__dirname, '..', '..', '.github', 'workflows', 'npm-publish.yml');
+      const workflow = fs.readFileSync(workflowPath, 'utf8');
+      expect(workflow).toContain('submodules: recursive');
+      expect(workflow).toContain("AIOX_ENFORCE_PUBLISH_SUBMODULES: 'true'");
     });
   });
 

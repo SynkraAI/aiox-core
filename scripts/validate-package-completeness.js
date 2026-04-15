@@ -44,13 +44,16 @@ const REQUIRED_PATHS = [
   '.aiox-core/constitution.md',
   '.aiox-core/development/agents/',
   '.aiox-core/development/tasks/',
+  // Bundled Pro runtime/content required for guided Pro installs
+  'pro/license/license-api.js',
+  'pro/squads/',
+  'pro/pro-config.yaml',
 ];
 
 /**
  * Paths that MUST NOT appear in the tarball (leak prevention).
  */
 const EXCLUDED_PATHS = [
-  'pro/',
   '.env',
   '.git/',
   'node_modules/',

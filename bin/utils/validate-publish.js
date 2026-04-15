@@ -24,8 +24,9 @@ const PRO_DIR = path.join(PROJECT_ROOT, 'pro');
 const CRITICAL_FILE = path.join(PRO_DIR, 'license', 'license-api.js');
 const MIN_FILE_COUNT = 50;
 
-// CI environments may not have access to the private pro submodule
+// CI environments may not have access to the private pro submodule unless explicitly enforced.
 const IS_CI = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
+const ENFORCE_SUBMODULES = process.env.AIOX_ENFORCE_PUBLISH_SUBMODULES === 'true';
 
 let passed = true;
 let fileCount = 0;
@@ -34,7 +35,7 @@ let fileCount = 0;
 console.log('--- Publish Safety Gate (INS-4.10) ---\n');
 
 if (!fs.existsSync(PRO_DIR)) {
-  if (IS_CI) {
+  if (IS_CI && !ENFORCE_SUBMODULES) {
     console.log('SKIP: pro/ directory not available (CI — private submodule requires separate access token)');
   } else {
     console.error('FAIL: pro/ directory does not exist.');
@@ -44,7 +45,7 @@ if (!fs.existsSync(PRO_DIR)) {
 } else {
   const entries = fs.readdirSync(PRO_DIR).filter(e => e !== '.git');
   if (entries.length === 0) {
-    if (IS_CI) {
+    if (IS_CI && !ENFORCE_SUBMODULES) {
       console.log('SKIP: pro/ submodule empty (CI — private submodule requires separate access token)');
     } else {
       console.error('FAIL: pro/ submodule not initialized (directory is empty).');
@@ -58,7 +59,7 @@ if (!fs.existsSync(PRO_DIR)) {
 
 // Check 2: Critical file exists
 if (!fs.existsSync(CRITICAL_FILE)) {
-  if (IS_CI) {
+  if (IS_CI && !ENFORCE_SUBMODULES) {
     console.log('SKIP: pro/license/license-api.js not available (CI — private submodule)');
   } else {
     console.error('FAIL: pro/license/license-api.js not found.');
