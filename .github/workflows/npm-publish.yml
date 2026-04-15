@@ -47,6 +47,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.PRO_SUBMODULE_TOKEN }}
           submodules: recursive
 
       - name: Setup Node.js
@@ -78,6 +79,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.PRO_SUBMODULE_TOKEN }}
           submodules: recursive
 
       - name: Setup Node.js
@@ -166,6 +168,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.PRO_SUBMODULE_TOKEN }}
           submodules: recursive
 
       - name: Setup Node.js
@@ -255,6 +258,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.PRO_SUBMODULE_TOKEN }}
           submodules: recursive
 
       - name: Setup Node.js
@@ -367,6 +371,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.PRO_SUBMODULE_TOKEN }}
           submodules: recursive
 
       - name: Generate release notes

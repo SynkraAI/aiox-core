@@ -259,9 +259,14 @@ describe('SynapseEngine', () => {
       expect(engine.layers.length).toBeGreaterThanOrEqual(3);
     });
 
-    test('should handle all layer modules failing gracefully', () => {
-      // This is tested implicitly — L4-L7 throw, engine still works
-      expect(engine.layers.length).toBeLessThanOrEqual(4);
+    test('should keep constructor stable regardless of optional layer availability', () => {
+      // Optional layer availability varies by repo state, so assert constructor
+      // invariants instead of a hard upper bound on loaded modules.
+      expect(engine.layers.length).toBeGreaterThan(0);
+      expect(new Set(engine.layers.map(layer => layer.layer)).size).toBe(engine.layers.length);
+      engine.layers.forEach(layer => {
+        expect(typeof layer._safeProcess).toBe('function');
+      });
     });
   });
 

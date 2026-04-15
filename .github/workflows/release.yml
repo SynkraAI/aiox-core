@@ -34,6 +34,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.PRO_SUBMODULE_TOKEN }}
           submodules: recursive
 
       - name: Extract version from tag
@@ -110,6 +111,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.PRO_SUBMODULE_TOKEN }}
           submodules: recursive
 
       - name: Setup Node.js
@@ -213,7 +215,7 @@ jobs:
                 owner,
                 repo,
                 workflow_id: 'npm-publish.yml',
-                ref: 'main',
+                ref: '${{ needs.create-release.outputs.tag }}',
                 inputs: {
                   publish_mode: 'stable',
                   packages: 'all'

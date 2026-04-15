@@ -100,7 +100,22 @@ describe('Publish Safety Gate (Story INS-4.10)', () => {
       const workflowPath = path.join(__dirname, '..', '..', '.github', 'workflows', 'npm-publish.yml');
       const workflow = fs.readFileSync(workflowPath, 'utf8');
       expect(workflow).toContain('submodules: recursive');
+      expect(workflow).toContain('token: ${{ secrets.PRO_SUBMODULE_TOKEN }}');
       expect(workflow).toContain("AIOX_ENFORCE_PUBLISH_SUBMODULES: 'true'");
+    });
+
+    test('release.yml checks out private pro submodules with PRO_SUBMODULE_TOKEN', () => {
+      const workflowPath = path.join(__dirname, '..', '..', '.github', 'workflows', 'release.yml');
+      const workflow = fs.readFileSync(workflowPath, 'utf8');
+      expect(workflow).toContain('submodules: recursive');
+      expect(workflow).toContain('token: ${{ secrets.PRO_SUBMODULE_TOKEN }}');
+    });
+
+    test('release.yml dispatch fallback publishes from the release tag ref', () => {
+      const workflowPath = path.join(__dirname, '..', '..', '.github', 'workflows', 'release.yml');
+      const workflow = fs.readFileSync(workflowPath, 'utf8');
+      expect(workflow).toContain("ref: '${{ needs.create-release.outputs.tag }}'");
+      expect(workflow).not.toContain("ref: 'main'");
     });
   });
 
