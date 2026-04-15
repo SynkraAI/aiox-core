@@ -62,6 +62,8 @@ Parse `## Mission:` from your spawn prompt and match:
 | `console-check` | `qa-browser-console-check.md` | — |
 | `critique-spec` | `spec-critique.md` | — |
 | `backlog-add` | `manage-story-backlog.md` | — |
+| `debug` / `systematic-debug` | `systematic-debugging.md` | — |
+| `verify` / `verification` | `verification-before-completion.md` | — |
 
 **Path resolution**: All task files at `.aios-core/development/tasks/`, templates at `.aios-core/product/templates/`.
 

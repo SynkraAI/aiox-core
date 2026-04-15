@@ -73,6 +73,8 @@ Parse `## Mission:` from your spawn prompt and match:
 | `execute-checklist` | `execute-checklist.md` | Target checklist passed in prompt |
 | `create-migration-plan` | `create-doc.md` | `migration-plan-tmpl.yaml` (template) |
 | `design-indexes` | `create-doc.md` | `index-strategy-tmpl.yaml` (template) |
+| `debug` / `systematic-debug` | `systematic-debugging.md` | — |
+| `verify` / `verification` | `verification-before-completion.md` | — |
 
 **Path resolution**: Tasks at `.aios-core/development/tasks/`, checklists at `.aios-core/product/checklists/` or `.aios-core/development/checklists/`, templates at `.aios-core/product/templates/`, data at `.aios-core/data/`.
 

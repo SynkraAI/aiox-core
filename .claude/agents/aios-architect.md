@@ -56,6 +56,8 @@ Parse `## Mission:` from your spawn prompt and match:
 | `research` | `create-deep-research-prompt.md` | — |
 | `execute-checklist` | `execute-checklist.md` | Target checklist passed in prompt |
 | `shard-doc` | `shard-doc.md` | — |
+| `debug` / `systematic-debug` | `systematic-debugging.md` | — |
+| `verify` / `verification` | `verification-before-completion.md` | — |
 
 **Path resolution**: All task files at `.aios-core/development/tasks/`, checklists at `.aios-core/product/checklists/`, templates at `.aios-core/product/templates/`.
 

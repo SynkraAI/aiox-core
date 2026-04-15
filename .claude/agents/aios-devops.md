@@ -59,6 +59,8 @@ Parse `## Mission:` from your spawn prompt and match:
 | `search-mcp` | `search-mcp.md` | — |
 | `add-mcp` | `add-mcp.md` | — |
 | `setup-mcp-docker` | `setup-mcp-docker.md` | — |
+| `debug` / `systematic-debug` | `systematic-debugging.md` | — |
+| `verify` / `verification` | `verification-before-completion.md` | — |
 
 **Path resolution**: Tasks at `.aios-core/development/tasks/`, checklists at `.aios-core/product/checklists/`, templates at `.aios-core/product/templates/`.
 

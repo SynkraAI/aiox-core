@@ -60,6 +60,8 @@ Parse `## Mission:` from your spawn prompt and match:
 | `gotchas` | `gotchas.md` | — |
 | `execute-checklist` | `execute-checklist.md` | Target checklist passed in prompt |
 | `correct-course` | `correct-course.md` | — |
+| `debug` / `systematic-debug` | `systematic-debugging.md` | — |
+| `verify` / `verification` | `verification-before-completion.md` | — |
 
 **Path resolution**: All task files at `.aios-core/development/tasks/`, checklists at `.aios-core/development/checklists/` or `.aios-core/product/checklists/`.
 
