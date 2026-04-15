@@ -371,6 +371,58 @@ describe('Lazy Import', () => {
   });
 });
 
+describe('InlineLicenseClient', () => {
+  test('uses the runtime-compatible key activation endpoint', async () => {
+    const https = require('https');
+    const { EventEmitter } = require('events');
+
+    let capturedPath;
+    let capturedBody;
+
+    const requestSpy = jest.spyOn(https, 'request').mockImplementation((options, callback) => {
+      capturedPath = options.path;
+
+      const response = new EventEmitter();
+      response.statusCode = 200;
+
+      process.nextTick(() => {
+        callback(response);
+        response.emit('data', JSON.stringify({
+          key: 'PRO-AAAA-BBBB-CCCC-DDDD',
+          features: ['pro.*'],
+          seats: { used: 1, max: 3 },
+          expiresAt: '2027-01-01T00:00:00Z',
+        }));
+        response.emit('end');
+      });
+
+      return {
+        on: jest.fn().mockReturnThis(),
+        write: jest.fn((body) => {
+          capturedBody = body;
+        }),
+        end: jest.fn(),
+        destroy: jest.fn(),
+      };
+    });
+
+    try {
+      const client = new proSetup._testing.InlineLicenseClient('https://license.example');
+      const result = await client.activate('PRO-AAAA-BBBB-CCCC-DDDD', 'machine-123', '5.0.5');
+
+      expect(capturedPath).toBe('/v1/license/activate');
+      expect(JSON.parse(capturedBody)).toEqual({
+        key: 'PRO-AAAA-BBBB-CCCC-DDDD',
+        machineId: 'machine-123',
+        version: '5.0.5',
+      });
+      expect(result.features).toContain('pro.*');
+    } finally {
+      requestSpy.mockRestore();
+    }
+  });
+});
+
 // ─── API Offline / Error Handling ────────────────────────────────────────────
 
 describe('API Error Handling', () => {

@@ -175,7 +175,8 @@ class InlineLicenseClient {
    * @returns {Promise<Object>} Activation result
    */
   async activate(licenseKey, machineId, version) {
-    return this._request('POST', '/api/v1/licenses/activate', {
+    // Keep the inline fallback aligned with the runtime license client contract.
+    return this._request('POST', '/v1/license/activate', {
       key: licenseKey,
       machineId,
       version,

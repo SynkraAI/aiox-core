@@ -20,12 +20,6 @@ function loadProviderModule() {
   jest.resetModules();
   mockQueryMemories = jest.fn(() => Promise.resolve([]));
 
-  jest.doMock('../../pro/memory/memory-loader', () => ({
-    MemoryLoader: jest.fn().mockImplementation(() => ({
-      queryMemories: mockQueryMemories,
-    })),
-  }), { virtual: true });
-
   let loadedModule;
   jest.isolateModules(() => {
     loadedModule = require('../../.aiox-core/core/synapse/memory/synapse-memory-provider');
@@ -49,6 +43,10 @@ describe('SynapseMemoryProvider', () => {
       DEFAULT_SECTORS,
     } = loadProviderModule());
     provider = new SynapseMemoryProvider();
+    // Inject a per-test loader stub instead of relying on cross-file module mocks.
+    provider._loader = {
+      queryMemories: mockQueryMemories,
+    };
   });
 
   // -------------------------------------------------------------------------
