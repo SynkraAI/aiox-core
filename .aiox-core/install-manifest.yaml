@@ -7,8 +7,8 @@
 # - SHA256 hashes for change detection
 # - File types for categorization
 #
-version: 5.0.3
-generated_at: "2026-03-11T15:04:09.395Z"
+version: 5.0.5
+generated_at: "2026-04-15T20:47:58.327Z"
 generator: scripts/generate-install-manifest.js
 file_count: 1090
 files:

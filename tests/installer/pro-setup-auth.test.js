@@ -8,6 +8,12 @@
 'use strict';
 
 const proSetup = require('../../packages/installer/src/wizard/pro-setup');
+let generateRuntimeMachineId;
+try {
+  ({ generateMachineId: generateRuntimeMachineId } = require('../../pro/license/license-crypto'));
+} catch {
+  generateRuntimeMachineId = null;
+}
 
 describe('pro-setup auth constants', () => {
   it('should export EMAIL_PATTERN', () => {
@@ -144,5 +150,226 @@ describe('pro-setup backward compatibility (AC-7)', () => {
     expect(typeof proSetup._testing.waitForEmailVerification).toBe('function');
     expect(typeof proSetup._testing.activateProByAuth).toBe('function');
     expect(typeof proSetup._testing.stepLicenseGateCI).toBe('function');
+    expect(typeof proSetup._testing.fallbackAuthWithoutBuyerCheck).toBe('function');
+    expect(typeof proSetup._testing.generateMachineId).toBe('function');
+    expect(typeof proSetup._testing.persistLicenseCache).toBe('function');
+  });
+});
+
+describe('pro-setup interactive email fallback', () => {
+  afterEach(() => {
+    proSetup._testing.loadLicenseApi = undefined;
+  });
+
+  it('should continue with direct auth when buyer pre-check is unavailable', async () => {
+    const inquirer = require('inquirer');
+    const originalPrompt = inquirer.prompt;
+    const mockClient = {
+      isOnline: jest.fn().mockResolvedValue(true),
+      checkEmail: jest.fn().mockRejectedValue(new Error('Buyer validation service unavailable')),
+      login: jest.fn().mockResolvedValue({
+        sessionToken: 'session-token',
+        emailVerified: true,
+      }),
+      validate: jest.fn().mockResolvedValue({
+        valid: true,
+        features: ['pro'],
+        seats: { used: 1, max: 3 },
+        cacheValidDays: 30,
+        gracePeriodDays: 7,
+      }),
+      activate: jest.fn(),
+      activateByAuth: jest.fn().mockResolvedValue({
+        key: 'PRO-ABCD-1234-5678-WXYZ',
+        features: ['pro'],
+        seats: { used: 1, max: 3 },
+        cacheValidDays: 30,
+        gracePeriodDays: 7,
+      }),
+    };
+
+    proSetup._testing.loadLicenseApi = () => ({
+      LicenseApiClient: jest.fn().mockReturnValue(mockClient),
+    });
+
+    inquirer.prompt = jest.fn()
+      .mockResolvedValueOnce({ email: 'buyer@example.com' })
+      .mockResolvedValueOnce({ password: 'Password123' });
+
+    try {
+      const result = await proSetup._testing.stepLicenseGateWithEmail();
+
+      expect(result.success).toBe(true);
+      expect(mockClient.checkEmail).toHaveBeenCalledWith('buyer@example.com');
+      expect(mockClient.login).toHaveBeenCalledWith('buyer@example.com', 'Password123');
+      expect(mockClient.activateByAuth).toHaveBeenCalled();
+    } finally {
+      inquirer.prompt = originalPrompt;
+    }
+  });
+});
+
+describe('pro-setup machine id compatibility', () => {
+  it('should generate a 64-char machine id for backend requests', () => {
+    const machineId = proSetup._testing.generateMachineId();
+
+    expect(machineId).toMatch(/^[a-f0-9]{64}$/i);
+  });
+
+  it('should match the Pro runtime machine id derivation', () => {
+    if (!generateRuntimeMachineId) {
+      expect(generateRuntimeMachineId).toBeNull();
+      return;
+    }
+
+    const wizardMachineId = proSetup._testing.generateMachineId();
+    const runtimeMachineId = generateRuntimeMachineId();
+
+    expect(wizardMachineId).toBe(runtimeMachineId);
+  });
+
+  it('should pass a 64-char machine id when activating via auth', async () => {
+    const client = {
+      activateByAuth: jest.fn().mockResolvedValue({
+        key: 'PRO-ABCD-1234-5678-WXYZ',
+        features: ['pro.squads.*'],
+        seats: { used: 1, max: 3 },
+        cacheValidDays: 30,
+        gracePeriodDays: 7,
+      }),
+      validate: jest.fn().mockResolvedValue({
+        valid: true,
+        features: ['pro.squads.*'],
+        seats: { used: 1, max: 3 },
+        cacheValidDays: 30,
+        gracePeriodDays: 7,
+      }),
+      activate: jest.fn(),
+    };
+
+    const result = await proSetup._testing.activateProByAuth(client, 'session-token');
+    const [, machineId] = client.activateByAuth.mock.calls[0];
+
+    expect(result.success).toBe(true);
+    expect(machineId).toMatch(/^[a-f0-9]{64}$/i);
+    expect(client.validate).toHaveBeenCalledWith('PRO-ABCD-1234-5678-WXYZ', machineId);
+    expect(client.activate).not.toHaveBeenCalled();
+  });
+
+  it('should backfill key activation when auth activation is not yet validatable', async () => {
+    let observedMachineId;
+    const client = {
+      activateByAuth: jest.fn().mockResolvedValue({
+        key: 'PRO-ABCD-1234-5678-WXYZ',
+        features: ['pro.squads.*'],
+        seats: { used: 1, max: 3 },
+        cacheValidDays: 30,
+        gracePeriodDays: 7,
+      }),
+      validate: jest.fn().mockRejectedValue({
+        code: 'MACHINE_NOT_ACTIVATED',
+        message: 'This machine is not activated for this license',
+      }),
+      activate: jest.fn().mockImplementation((key, machineId) => {
+        observedMachineId = machineId;
+        return Promise.resolve({
+          key,
+          features: ['pro.squads.*', 'pro.memory.*'],
+          seats: { used: 1, max: 3 },
+          cacheValidDays: 30,
+          gracePeriodDays: 7,
+        });
+      }),
+    };
+
+    const result = await proSetup._testing.activateProByAuth(client, 'session-token');
+
+    expect(result.success).toBe(true);
+    expect(observedMachineId).toMatch(/^[a-f0-9]{64}$/i);
+    expect(client.activate).toHaveBeenCalledWith(
+      'PRO-ABCD-1234-5678-WXYZ',
+      observedMachineId,
+      expect.any(String),
+    );
+    expect(result.activationResult.features).toEqual(['pro.squads.*', 'pro.memory.*']);
+  });
+
+  it('should pass a 64-char machine id in license-key activation flow', async () => {
+    let observedMachineId;
+    const mockLicenseApi = {
+      LicenseApiClient: jest.fn().mockReturnValue({
+        isOnline: jest.fn().mockResolvedValue(true),
+        activate: jest.fn().mockImplementation((key, machineId) => {
+          observedMachineId = machineId;
+          return Promise.resolve({
+            key,
+            features: ['pro.squads.*'],
+            seats: { used: 1, max: 3 },
+            cacheValidDays: 30,
+            gracePeriodDays: 7,
+          });
+        }),
+        syncPendingDeactivation: jest.fn().mockResolvedValue(false),
+      }),
+    };
+
+    proSetup._testing.loadLicenseApi = () => mockLicenseApi;
+
+    const result = await proSetup._testing.validateKeyWithApi('PRO-ABCD-1234-5678-WXYZ');
+
+    expect(result.success).toBe(true);
+    expect(observedMachineId).toMatch(/^[a-f0-9]{64}$/i);
+
+    proSetup._testing.loadLicenseApi = undefined;
+  });
+});
+
+describe('pro-setup license cache persistence', () => {
+  afterEach(() => {
+    proSetup._testing.loadLicenseCache = undefined;
+  });
+
+  it('should persist the activated license into the target project cache', () => {
+    const writeLicenseCache = jest.fn().mockReturnValue({ success: true });
+    proSetup._testing.loadLicenseCache = () => ({ writeLicenseCache });
+
+    const result = proSetup._testing.persistLicenseCache('/tmp/aiox-pro-target', {
+      success: true,
+      key: 'PRO-ABCD-1234-5678-WXYZ',
+      activationResult: {
+        activatedAt: '2026-04-15T12:00:00.000Z',
+        expiresAt: '2027-04-15T12:00:00.000Z',
+        features: ['pro.squads.*'],
+        seats: { used: 1, max: 3 },
+        cacheValidDays: 30,
+        gracePeriodDays: 7,
+      },
+    });
+
+    expect(result).toEqual({ success: true });
+    expect(writeLicenseCache).toHaveBeenCalledWith({
+      key: 'PRO-ABCD-1234-5678-WXYZ',
+      activatedAt: '2026-04-15T12:00:00.000Z',
+      expiresAt: '2027-04-15T12:00:00.000Z',
+      features: ['pro.squads.*'],
+      seats: { used: 1, max: 3 },
+      cacheValidDays: 30,
+      gracePeriodDays: 7,
+    }, '/tmp/aiox-pro-target');
+  });
+
+  it('should fail when no concrete license key is available to persist', () => {
+    const writeLicenseCache = jest.fn();
+    proSetup._testing.loadLicenseCache = () => ({ writeLicenseCache });
+
+    const result = proSetup._testing.persistLicenseCache('/tmp/aiox-pro-target', {
+      success: true,
+      key: 'existing',
+      activationResult: { reactivation: true },
+    });
+
+    expect(result.success).toBe(false);
+    expect(result.error).toContain('Activated license key not available');
+    expect(writeLicenseCache).not.toHaveBeenCalled();
   });
 });
