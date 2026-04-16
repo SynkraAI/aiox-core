@@ -554,7 +554,7 @@ async function runWizard(options = {}) {
       try {
         await commandValidate({ quiet: true });
         answers.ideSyncValidation = 'pass';
-      } catch (validateError) {
+      } catch (_validateError) {
         answers.ideSyncValidation = 'drift';
       } finally {
         console.log = _origLog;

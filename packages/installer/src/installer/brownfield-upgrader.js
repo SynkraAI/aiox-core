@@ -287,7 +287,7 @@ async function applyUpgrade(report, sourceDir, targetDir, options = {}) {
             result.mergeWarnings = result.mergeWarnings || [];
             for (const conflict of conflicts) {
               result.mergeWarnings.push(
-                `core-config.yaml: ${conflict.identifier} — ${conflict.reason}`
+                `core-config.yaml: ${conflict.identifier} — ${conflict.reason}`,
               );
             }
           }

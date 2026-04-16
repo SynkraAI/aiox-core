@@ -49,7 +49,7 @@ function createTempProject(boundary, existingSettings) {
     fs.writeFileSync(
       path.join(claudeDir, 'settings.json'),
       JSON.stringify(existingSettings, null, 2) + '\n',
-      'utf8'
+      'utf8',
     );
   }
 
@@ -256,7 +256,7 @@ describe('generate-settings-json', () => {
           protected: ['bin/aiox.js'],
           exceptions: [],
         },
-        { language: 'pt', customSetting: true }
+        { language: 'pt', customSetting: true },
       );
 
       try {
@@ -280,7 +280,7 @@ describe('generate-settings-json', () => {
           protected: ['bin/aiox.js'],
           exceptions: [],
         },
-        { language: 'pt', permissions: { deny: ['old-rule'], allow: [] } }
+        { language: 'pt', permissions: { deny: ['old-rule'], allow: [] } },
       );
 
       try {

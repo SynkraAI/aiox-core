@@ -223,7 +223,7 @@ Add to \`.claude/settings.local.json\`:
     "UserPromptSubmit": [
       {
         "type": "command",
-        "command": "node \"$CLAUDE_PROJECT_DIR/.claude/hooks/synapse-engine.cjs\"",
+        "command": "node \\"$\\{CLAUDE_PROJECT_DIR:-.}/.claude/hooks/synapse-engine.cjs\\"",
         "timeout": 10
       }
     ]

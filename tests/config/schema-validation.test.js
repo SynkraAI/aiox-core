@@ -74,7 +74,7 @@ describe('schema-validation — enriched schemas', () => {
       const validate = ajv.compile(schema);
       const isValid = validate(data);
       if (!isValid) {
-        // eslint-disable-next-line no-console
+         
         console.log('Validation errors:', validate.errors);
       }
       expect(isValid).toBe(true);
@@ -141,7 +141,7 @@ describe('schema-validation — enriched schemas', () => {
       const validate = ajv.compile(schema);
       const isValid = validate(data);
       if (!isValid) {
-        // eslint-disable-next-line no-console
+         
         console.log('Validation errors:', validate.errors);
       }
       expect(isValid).toBe(true);
@@ -191,7 +191,7 @@ describe('schema-validation — enriched schemas', () => {
       const isValid = validate(data);
       expect(isValid).toBe(false);
       const fieldError = validate.errors.find(
-        (e) => e.instancePath === '/boundary/frameworkProtection'
+        (e) => e.instancePath === '/boundary/frameworkProtection',
       );
       expect(fieldError).toBeDefined();
       expect(fieldError.message).toContain('boolean');
@@ -207,7 +207,7 @@ describe('schema-validation — enriched schemas', () => {
       const isValid = validate(data);
       expect(isValid).toBe(false);
       expect(
-        validate.errors.some((e) => e.params?.missingProperty === 'frameworkProtection')
+        validate.errors.some((e) => e.params?.missingProperty === 'frameworkProtection'),
       ).toBe(true);
     });
   });

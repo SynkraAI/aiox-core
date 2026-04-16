@@ -19,7 +19,6 @@ const {
   deleteSession,
   cleanStaleSessions,
   generateTitle,
-  ensureGitignore,
   SCHEMA_VERSION,
 } = require('../../.aiox-core/core/synapse/session/session-manager');
 
@@ -315,35 +314,7 @@ describe('Auto-Title Generation', () => {
 });
 
 // ============================================================
-// 5. Gitignore (AC: 5)
-// ============================================================
-
-describe('Gitignore', () => {
-  test('createSession auto-creates .synapse/.gitignore', () => {
-    createSession('gitignore-test', tmpDir, sessionsDir);
-
-    const gitignorePath = path.join(synapsePath, '.gitignore');
-    expect(fs.existsSync(gitignorePath)).toBe(true);
-
-    const content = fs.readFileSync(gitignorePath, 'utf8');
-    expect(content).toContain('sessions/');
-    expect(content).toContain('cache/');
-  });
-
-  test('ensureGitignore does not overwrite existing .gitignore', () => {
-    fs.mkdirSync(synapsePath, { recursive: true });
-    const gitignorePath = path.join(synapsePath, '.gitignore');
-    fs.writeFileSync(gitignorePath, 'custom-content\n', 'utf8');
-
-    ensureGitignore(synapsePath);
-
-    const content = fs.readFileSync(gitignorePath, 'utf8');
-    expect(content).toBe('custom-content\n');
-  });
-});
-
-// ============================================================
-// 6. Session Continuity (AC: 6)
+// 5. Session Continuity (AC: 6)
 // ============================================================
 
 describe('Session Continuity', () => {

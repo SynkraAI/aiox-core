@@ -185,20 +185,20 @@ function validateTarballContents(tarballFiles) {
     check(
       `Required: ${required}`,
       found,
-      found ? undefined : `Not found in tarball (${tarballFiles.length} files scanned)`
+      found ? undefined : `Not found in tarball (${tarballFiles.length} files scanned)`,
     );
   }
 
   // Check excluded paths do NOT exist
   for (const excluded of EXCLUDED_PATHS) {
     const leaked = tarballFiles.filter(
-      (f) => f.startsWith(excluded) || f.startsWith(`package/${excluded}`)
+      (f) => f.startsWith(excluded) || f.startsWith(`package/${excluded}`),
     );
 
     check(
       `Excluded: ${excluded} not in tarball`,
       leaked.length === 0,
-      leaked.length > 0 ? `LEAK DETECTED: ${leaked.slice(0, 3).join(', ')}` : undefined
+      leaked.length > 0 ? `LEAK DETECTED: ${leaked.slice(0, 3).join(', ')}` : undefined,
     );
   }
 }
@@ -214,7 +214,7 @@ function validatePackageJson(pkg) {
     check(
       `files[] includes "${entry}"`,
       found,
-      found ? undefined : `Add "${entry}" to package.json "files" array`
+      found ? undefined : `Add "${entry}" to package.json "files" array`,
     );
   }
 
@@ -232,7 +232,7 @@ function validatePackageJson(pkg) {
     check(
       `bin.${name} -> ${binPath} exists`,
       exists,
-      exists ? undefined : `File not found: ${fullPath}`
+      exists ? undefined : `File not found: ${fullPath}`,
     );
   }
 
@@ -242,7 +242,7 @@ function validatePackageJson(pkg) {
     check(
       `dependency: ${dep}`,
       dep in deps,
-      dep in deps ? undefined : `Missing runtime dependency "${dep}"`
+      dep in deps ? undefined : `Missing runtime dependency "${dep}"`,
     );
   }
 }
@@ -267,7 +267,7 @@ function validateBinScripts() {
     check(
       `${name} (${binPath}) has correct shebang`,
       hasShebang,
-      hasShebang ? undefined : `Expected "#!/usr/bin/env node", got "${firstLine.substring(0, 40)}"`
+      hasShebang ? undefined : `Expected "#!/usr/bin/env node", got "${firstLine.substring(0, 40)}"`,
     );
   }
 }

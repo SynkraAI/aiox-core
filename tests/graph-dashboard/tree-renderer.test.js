@@ -45,7 +45,7 @@ describe('tree-renderer', () => {
           { id: 'task-a', label: 'task-a', type: 'task', path: 'a.md', category: 'tasks' },
           { id: 'task-b', label: 'task-b', type: 'task', path: 'b.md', category: 'tasks' },
         ],
-        [{ from: 'task-a', to: 'task-b', type: 'depends' }]
+        [{ from: 'task-a', to: 'task-b', type: 'depends' }],
       );
 
       const output = renderTree(data);
@@ -111,7 +111,7 @@ describe('tree-renderer', () => {
       const data = makeGraphData(
         [{ id: 'x', label: 'x', type: 'task', path: 'x.md', category: 'tasks' }],
         [],
-        { isFallback: false }
+        { isFallback: false },
       );
       const output = renderTree(data);
 
@@ -129,7 +129,7 @@ describe('tree-renderer', () => {
       const data = makeGraphData(nodes);
       const output = renderTree(data);
 
-      expect(output).toContain(`... (5 more)`);
+      expect(output).toContain('... (5 more)');
     });
 
     it('should not truncate branches within limit', () => {

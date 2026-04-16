@@ -94,7 +94,7 @@ describe('artifact-copy-pipeline (Story INS-4.3)', () => {
         expect(result.count).toBe(1);
         const content = fs.readFileSync(
           path.join(targetRoot, '.claude', 'skills', 'test-skill', 'SKILL.md'),
-          'utf8'
+          'utf8',
         );
         expect(content).toBe('# v2');
       } finally {
