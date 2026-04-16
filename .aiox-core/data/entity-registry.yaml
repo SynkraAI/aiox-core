@@ -14098,10 +14098,13 @@ entities:
         - tech
         - preset
       usedBy: []
-      dependencies:
+      dependencies: []
+      externalDeps: []
+      plannedDeps:
         - auth
         - user
         - jwt
+      lifecycle: stable
       adaptability:
         score: 0.5
         constraints: []

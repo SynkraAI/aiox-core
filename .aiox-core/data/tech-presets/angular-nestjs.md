@@ -47,7 +47,9 @@ preset:
 
 ```typescript
 // shared/contracts/auth.contract.ts
-// Este arquivo é compartilhado entre frontend e backend via monorepo ou package
+// Interfaces TypeScript para uso no Angular frontend (type-checking apenas)
+// ⚠️ NOTE: TypeScript interfaces are erased at runtime — they cannot be used
+// with NestJS ValidationPipe. Use the DTO classes below on the NestJS side.
 
 export interface LoginRequestDto {
   email: string;
@@ -55,9 +57,7 @@ export interface LoginRequestDto {
 }
 
 export interface LoginResponseDto {
-  accessToken: string;
-  refreshToken: string;
-  expiresIn: number;
+  // No accessToken in cookie-based auth — backend sets HttpOnly cookie
   user: UserDto;
 }
 
@@ -67,9 +67,45 @@ export interface UserDto {
   name: string;
   role: 'admin' | 'user';
 }
+```
 
-// NestJS backend usa class-validator com o mesmo shape
-// Angular frontend usa os mesmos tipos sem duplicação
+```typescript
+// backend/src/features/auth/dto/login.dto.ts
+// NestJS DTO — class-based so ValidationPipe can enforce rules at runtime
+import { IsEmail, IsString, MinLength } from 'class-validator';
+
+export class LoginDto {
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  @MinLength(8)
+  password: string;
+}
+```
+
+```typescript
+// backend/src/features/auth/dto/user-response.dto.ts
+import { IsString, IsUUID, IsIn } from 'class-validator';
+import { Expose } from 'class-transformer';
+
+export class UserResponseDto {
+  @Expose()
+  @IsUUID()
+  id: string;
+
+  @Expose()
+  @IsEmail()
+  email: string;
+
+  @Expose()
+  @IsString()
+  name: string;
+
+  @Expose()
+  @IsIn(['admin', 'user'])
+  role: 'admin' | 'user';
+}
 ```
 
 **Bugs Eliminated:**
@@ -91,6 +127,7 @@ export interface UserDto {
 // backend/src/features/auth/auth.module.ts
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { UserRepository } from './repositories/user.repository';
@@ -98,9 +135,10 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
+    ConfigModule, // Required: provides ConfigService to JwtModule.registerAsync factory
     JwtModule.registerAsync({
       useFactory: (config: ConfigService) => ({
-        secret: config.get('JWT_SECRET'),
+        secret: config.get<string>('JWT_SECRET'),
         signOptions: { expiresIn: '1h' },
       }),
       inject: [ConfigService],
@@ -186,9 +224,11 @@ export class AuthService {
     this._loading.set(true);
     try {
       const response = await firstValueFrom(
-        this.http.post<LoginResponseDto>('/api/auth/login', dto)
+        // credentials: 'include' ensures the HttpOnly cookie set by NestJS is sent/received
+        this.http.post<LoginResponseDto>('/api/auth/login', dto, { withCredentials: true })
       );
-      localStorage.setItem('access_token', response.accessToken);
+      // ⚠️ SECURITY: Do NOT store JWT in localStorage (XSS vulnerable).
+      // The NestJS backend sets an HttpOnly cookie — Angular just tracks the user state.
       this._user.set(response.user);
       await this.router.navigate(['/dashboard']);
     } finally {
@@ -197,7 +237,8 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('access_token');
+    // Call backend to clear the HttpOnly cookie
+    this.http.post('/api/auth/logout', {}, { withCredentials: true }).subscribe();
     this._user.set(null);
     this.router.navigate(['/login']);
   }
@@ -235,7 +276,7 @@ export class LoginComponent {
 
   async onSubmit(): Promise<void> {
     if (this.form.invalid) return;
-    await this.auth.login(this.form.getRawValue() as any);
+    await this.auth.login(this.form.getRawValue() as LoginRequestDto);
   }
 }
 ```
@@ -275,7 +316,8 @@ export class RolesGuard implements CanActivate {
     ]);
     if (!requiredRoles) return true;
 
-    const { user } = context.switchToHttp().getRequest();
+    const { user } = context.switchToHttp().getRequest<{ user?: { role: string } }>();
+    if (!user) return false; // Guard against unauthenticated requests reaching this guard
     return requiredRoles.includes(user.role);
   }
 }
@@ -511,11 +553,14 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const status = exception.getStatus();
     const exceptionResponse = exception.getResponse();
 
+    const message =
+      typeof exceptionResponse === 'object' && exceptionResponse !== null && 'message' in exceptionResponse
+        ? (exceptionResponse as { message: unknown }).message
+        : exceptionResponse;
+
     response.status(status).json({
       statusCode: status,
-      message: typeof exceptionResponse === 'object'
-        ? (exceptionResponse as any).message
-        : exceptionResponse,
+      message,
       timestamp: new Date().toISOString(),
     });
   }
@@ -612,12 +657,8 @@ describe('AuthService', () => {
     const user = new UserBuilder().withEmail('test@test.com').build();
     const loginPromise = service.login({ email: 'test@test.com', password: 'Pass123!' });
 
-    http.expectOne('/api/auth/login').flush({
-      accessToken: 'token',
-      refreshToken: 'refresh',
-      expiresIn: 3600,
-      user,
-    });
+    // Cookie-based auth: backend sets HttpOnly cookie, response only carries user data
+    http.expectOne('/api/auth/login').flush({ user });
 
     await loginPromise;
     expect(service.user()).toEqual(user);
@@ -670,6 +711,25 @@ it('should require admin role')"
 | Angular Reactive Forms | 10% | Validators built-in + Validators customizados |
 | Zod (shared) | 10% | Schemas em `/shared/contracts/` |
 | Jest + Angular Testing | 5% | Edge cases e regressões |
+
+> **Zod vs class-validator:** Use **Zod** for runtime-parsed shared schemas (e.g. API response shapes, env validation). Use **class-validator** for NestJS request body DTOs (required by `ValidationPipe`). They serve different layers.
+
+```typescript
+// shared/contracts/env.schema.ts — Zod for environment/config validation
+import { z } from 'zod';
+
+export const envSchema = z.object({
+  NODE_ENV: z.enum(['development', 'test', 'production']),
+  DATABASE_URL: z.string().url(),
+  JWT_SECRET: z.string().min(32),
+  PORT: z.coerce.number().default(3000),
+});
+
+export type Env = z.infer<typeof envSchema>;
+
+// backend/src/app.module.ts — use envSchema in ConfigModule
+// ConfigModule.forRoot({ validate: (config) => envSchema.parse(config) })
+```
 
 ---
 
