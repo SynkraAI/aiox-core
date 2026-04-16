@@ -14,7 +14,7 @@ tool:
     - claude-free: Uses DeepSeek API (~$0.14/M tokens)
 
 capabilities:
-  - Install claude-max and claude-free commands
+  - Install claude-max, claude-free and aiox-qwen commands
   - Cross-platform support (Windows CMD, Unix bash)
   - Automatic .env file detection for API keys
   - Cost optimization for development workflows
@@ -30,6 +30,8 @@ installation:
       target: "%APPDATA%/npm/claude-free.cmd"
     - name: claude-max.cmd
       target: "%APPDATA%/npm/claude-max.cmd"
+    - name: qwen-router.cmd
+      target: "%APPDATA%/npm/aiox-qwen.cmd"
 
   unix:
     - name: claude-free.sh
@@ -37,6 +39,9 @@ installation:
       permissions: "755"
     - name: claude-max.sh
       target: "/usr/local/bin/claude-max"
+      permissions: "755"
+    - name: qwen-router.sh
+      target: "/usr/local/bin/aiox-qwen"
       permissions: "755"
 
 usage:
@@ -63,6 +68,20 @@ usage:
       - "Get API key at: https://platform.deepseek.com/api_keys"
       - "Add to .env: DEEPSEEK_API_KEY=sk-your-key"
       - "Or export: export DEEPSEEK_API_KEY=sk-your-key"
+
+  aiox-qwen:
+    description: "Support for Qwen 3 14B model"
+    command: "aiox-qwen"
+    authentication: API Key (QWEN_API_KEY or OPENROUTER_API_KEY)
+    cost: "Varies by provider"
+    features:
+      - Qwen 3 14B model support
+      - Anthropic-compatible routing
+      - Configurable base URL
+    setup:
+      - "Add to .env: QWEN_API_KEY=your-key"
+      - "Optional: AIOX_QWEN_MODEL=qwen/qwen-3-14b"
+      - "Optional: QWEN_BASE_URL=https://openrouter.ai/api/v1/anthropic"
 
 configuration:
   env_file: ".env"

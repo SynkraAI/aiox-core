@@ -13,6 +13,8 @@ Guide for integrating AIOX with supported IDEs and AI development platforms.
 
 ## Compatibility Contract (AIOX 4.2.11)
 
+*Note: The compatibility contract file version (4.0.4) is intentionally different from the document release version (4.2.11) as the contract file is only bumped when the matrix schema itself changes.*
+
 The IDE matrix is enforced by a versioned contract:
 
 - Contract file: `.aiox-core/infrastructure/contracts/compatibility/aiox-4.2.11.yaml`
@@ -35,11 +37,11 @@ AIOX supports multiple AI-powered development platforms. Choose the one that bes
 | Codex CLI | Limited | `/skills` then `aiox-<agent-id>` | Limited (some checks need manual sync) | Run `npm run sync:ide:codex` and follow `/skills` flow |
 | Cursor | Limited | `@agent` + synced rules | Not available | Follow synced rules and run validators manually (`npm run validate:parity`) |
 | GitHub Copilot | Limited | chat modes + repo instructions | Not available | Use repo instructions and VS Code MCP config for context |
-| AntiGravity | Limited | workflow-driven activation | Not available | Use generated workflows and run validators manually |
+| AntiGravity | Works | workflow-driven activation (`aios-execute-story`) (uses native workflows for deep execution) | Not available | -- |
 
 Legend:
-- `Works`: fully recommended for new users in AIOX 4.2.11.
-- `Limited`: usable with the documented workaround.
+- `Works`: integration is functional and fully deployable in AIOX (automation level varies — see the Auto-Checks column and the Beginner Decision Guide for effort required).
+- `Limited`: usable with the documented workaround/extra manual steps.
 - `Not available`: this IDE does not offer this capability; use the workaround instead.
 
 ### What You Lose Without Full Auto-Checks
@@ -258,6 +260,7 @@ special_features:
   - Google Cloud integration
   - Workflow system
   - Native Firebase tools
+  - Deep Execution Engine (Native workflows for Dev and QA)
 ```
 
 **Setup:**
@@ -265,6 +268,16 @@ special_features:
 1. AIOX creates `.antigravity/` directory
 2. Configure Google Cloud credentials
 3. Agents synchronized as workflows
+
+**Configuration:**
+
+```bash
+# Sync AntiGravity workflows
+npm run sync:ide:antigravity
+
+# Verify setup
+ls -la .agent/workflows/
+```
 
 ---
 

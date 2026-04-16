@@ -16,6 +16,7 @@ const { spawnSync } = require('child_process');
 const { getIDEConfig } = require('../config/ide-configs');
 const { validateProjectName } = require('./validators');
 const { getMergeStrategy, hasMergeStrategy } = require('../merger/index.js');
+const { syncAntigravityWorkflows } = require('../../../../.aiox-core/infrastructure/scripts/ide-sync/utils/antigravity-workflows');
 
 /**
  * Render template with variables
@@ -144,7 +145,7 @@ function sanitizeProjectName(candidate) {
 
   // Step 2: Ensure it starts with alphanumeric
   sanitized = sanitized.replace(/^[^a-zA-Z0-9]+/, '');
-  
+
   // Step 3: Limit length (validateProjectName allows up to 100)
   if (sanitized.length > 100) {
     sanitized = sanitized.substring(0, 100);
@@ -154,7 +155,7 @@ function sanitizeProjectName(candidate) {
 
   // Step 4: Validate the sanitized name
   const validation = validateProjectName(sanitized);
-  
+
   if (validation === true && sanitized.length > 0) {
     return sanitized;
   }
@@ -384,9 +385,20 @@ async function createAntiGravityConfigJson(projectRoot, ideConfig) {
   };
 
   await fs.ensureDir(path.dirname(configPath));
-  await fs.writeFile(configPath, JSON.stringify(config, null, 4), 'utf8');
-
+  await fs.writeFile(configPath, JSON.stringify(config, null, 2), 'utf8');
   return configPath;
+}
+
+/**
+ * Copy static AntiGravity workflows from templates
+ * @param {string} projectRoot - Project root directory
+ * @returns {Promise<string[]>} List of copied files
+ */
+async function copyAntigravityStaticWorkflows(projectRoot) {
+  const resultFiles = [];
+  // Use the shared utility
+  syncAntigravityWorkflows(projectRoot, false, resultFiles, false);
+  return resultFiles.map(f => f.path).filter(Boolean);
 }
 
 /**
@@ -518,7 +530,12 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
           if (ide.specialConfig && ide.specialConfig.type === 'antigravity') {
             const configJsonPath = await createAntiGravityConfigJson(projectRoot, ide);
             createdFiles.push(configJsonPath);
-            spinner.succeed(`Created AntiGravity config and ${agentFiles.length} workflow files`);
+
+            spinner.start('Copying Antigravity native workflows...');
+            const staticWorkflows = await copyAntigravityStaticWorkflows(projectRoot);
+            createdFiles.push(...staticWorkflows);
+
+            spinner.succeed(`Created AntiGravity config, ${agentFiles.length} agent workflows, and ${staticWorkflows.length} static workflows`);
           } else {
             spinner.succeed(`Copied ${agentFiles.length} agent files to ${ide.agentFolder}`);
           }
@@ -596,18 +613,18 @@ async function generateIDEConfigs(selectedIDEs, wizardState, options = {}) {
 
         // Rollback: Delete all created files
         for (const file of createdFiles) {
-          await fs.remove(file).catch(() => {});
+          await fs.remove(file).catch(() => { });
         }
 
         // Rollback: Delete created folders
         for (const folder of createdFolders) {
-          await fs.remove(folder).catch(() => {});
+          await fs.remove(folder).catch(() => { });
         }
 
         // Restore backups
         for (const backup of backupFiles) {
           const original = backup.replace(/\.backup\.\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2}-\d{3}Z$/, '');
-          await fs.move(backup, original, { overwrite: true }).catch(() => {});
+          await fs.move(backup, original, { overwrite: true }).catch(() => { });
         }
 
         throw new Error(`IDE config generation failed for ${ide.name}: ${error.message}`);
