@@ -8,9 +8,9 @@
 # - File types for categorization
 #
 version: 5.0.3
-generated_at: "2026-03-11T15:04:09.395Z"
+generated_at: "2026-03-18T02:02:39.902Z"
 generator: scripts/generate-install-manifest.js
-file_count: 1090
+file_count: 1091
 files:
   - path: cli/commands/config/index.js
     hash: sha256:25c4b9bf4e0241abf7754b55153f49f1a214f1fb5fe904a576675634cb7b3da9
@@ -672,6 +672,10 @@ files:
     hash: sha256:738bec37c11cfb02e9df96e3631f74fa0652f5a531c7b0f1d8887e0141b1f72e
     type: core
     size: 10726
+  - path: core/health-check/proactive-sentinel.js
+    hash: sha256:cbaa0425e705075d4e92fd77e7e243c5662b4096b70f7760a59aab85681881ff
+    type: core
+    size: 22434
   - path: core/health-check/reporters/console.js
     hash: sha256:573f28a6c9c2a4087ccd349398f47351aa9a752c92a1f2e4a3c3f396682d5516
     type: core
