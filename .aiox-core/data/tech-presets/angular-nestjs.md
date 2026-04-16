@@ -466,8 +466,8 @@ it('should show admin menu', () => {
 | State Management | Angular Signals | built-in | Estado reativo granular |
 | HTTP Client | Angular HttpClient | built-in | Comunicação com backend |
 | Forms | Angular Reactive Forms | built-in | Formulários type-safe |
-| Validation (Backend) | class-validator | ^0.14.0 | Validação de DTOs |
-| Validation (Shared) | Zod | ^3.22.0 | Schemas compartilhados |
+| Validation (Backend) | class-validator | ^0.14.0 | NestJS request body DTOs — required by `ValidationPipe` (class-based, survives runtime) |
+| Validation (Shared) | Zod | ^3.22.0 | Shared schema parsing (env vars, API response shapes) — NOT for NestJS `ValidationPipe` (interfaces/Zod types are erased at runtime) |
 | ORM | Prisma | ^5.9.0 | Database type-safe |
 | Auth | @nestjs/jwt + Passport | latest | JWT com Guards |
 | Testing (Unit) | Jest | ^29.0.0 | Backend + Angular |
